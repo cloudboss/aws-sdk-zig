@@ -7,10 +7,10 @@ pub const ObjectAttribute = struct {
     comparison_operator: ComparisonOperator,
 
     /// A field defined within an object type.
-    field_name: ?[]const u8,
+    field_name: ?[]const u8 = null,
 
     /// An attribute contained within a source object.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     /// A list of attribute values used for comparison.
     values: []const []const u8,

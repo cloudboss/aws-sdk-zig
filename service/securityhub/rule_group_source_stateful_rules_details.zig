@@ -5,13 +5,13 @@ const RuleGroupSourceStatefulRulesOptionsDetails = @import("rule_group_source_st
 pub const RuleGroupSourceStatefulRulesDetails = struct {
     /// Defines what Network Firewall should do with the packets in a traffic flow
     /// when the flow matches the stateful rule criteria.
-    action: ?[]const u8,
+    action: ?[]const u8 = null,
 
     /// The stateful inspection criteria for the rule.
-    header: ?RuleGroupSourceStatefulRulesHeaderDetails,
+    header: ?RuleGroupSourceStatefulRulesHeaderDetails = null,
 
     /// Additional options for the rule.
-    rule_options: ?[]const RuleGroupSourceStatefulRulesOptionsDetails,
+    rule_options: ?[]const RuleGroupSourceStatefulRulesOptionsDetails = null,
 
     pub const json_field_names = .{
         .action = "Action",

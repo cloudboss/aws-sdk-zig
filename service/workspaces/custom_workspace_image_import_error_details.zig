@@ -2,10 +2,10 @@
 /// possible causes of the error and troubleshooting information.
 pub const CustomWorkspaceImageImportErrorDetails = struct {
     /// The error code that is returned for the image import.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The text of the error message that is returned for the image import.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

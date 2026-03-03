@@ -11,13 +11,13 @@ const HTTPHeader = @import("http_header.zig").HTTPHeader;
 /// objects.
 pub const SampledHTTPRequest = struct {
     /// The action that WAF applied to the request.
-    action: ?[]const u8,
+    action: ?[]const u8 = null,
 
     /// The `CAPTCHA` response for the request.
-    captcha_response: ?CaptchaResponse,
+    captcha_response: ?CaptchaResponse = null,
 
     /// The `Challenge` response for the request.
-    challenge_response: ?ChallengeResponse,
+    challenge_response: ?ChallengeResponse = null,
 
     /// Labels applied to the web request by matching rules. WAF applies fully
     /// qualified
@@ -29,13 +29,13 @@ pub const SampledHTTPRequest = struct {
     /// For example,
     /// `awswaf:111122223333:myRuleGroup:testRules:testNS1:testNS2:labelNameA` or
     /// `awswaf:managed:aws:managed-rule-set:header:encoding:utf8`.
-    labels: ?[]const Label,
+    labels: ?[]const Label = null,
 
     /// Used only for rule group rules that have a rule action override in place in
     /// the web ACL. This is the action that the rule group rule is configured for,
     /// and not the action that was applied to the request. The action that WAF
     /// applied is the `Action` value.
-    overridden_action: ?[]const u8,
+    overridden_action: ?[]const u8 = null,
 
     /// A complex type that contains detailed information about the request.
     request: HTTPRequest,
@@ -43,22 +43,22 @@ pub const SampledHTTPRequest = struct {
     /// Custom request headers inserted by WAF into the request, according to the
     /// custom
     /// request configuration for the matching rule action.
-    request_headers_inserted: ?[]const HTTPHeader,
+    request_headers_inserted: ?[]const HTTPHeader = null,
 
     /// The response code that was sent for the request.
-    response_code_sent: ?i32,
+    response_code_sent: ?i32 = null,
 
     /// The name of the `Rule` that the request matched. For managed rule groups,
     /// the
     /// format for this name is `##`. For your own rule groups, the format for this
     /// name is `#`. If the rule is not in a rule group, this field
     /// is absent.
-    rule_name_within_rule_group: ?[]const u8,
+    rule_name_within_rule_group: ?[]const u8 = null,
 
     /// The time at which WAF received the request from your Amazon Web Services
     /// resource, in Unix time
     /// format (in seconds).
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     /// A value that indicates how one result in the response relates proportionally
     /// to other

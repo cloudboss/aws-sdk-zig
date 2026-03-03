@@ -4,13 +4,13 @@ const IpAddressFamily = @import("ip_address_family.zig").IpAddressFamily;
 pub const IpSet = struct {
     /// The array of IP addresses in the IP address set. An IP address set can have
     /// a maximum of two IP addresses.
-    ip_addresses: ?[]const []const u8,
+    ip_addresses: ?[]const []const u8 = null,
 
     /// The types of IP addresses included in this IP set.
-    ip_address_family: ?IpAddressFamily,
+    ip_address_family: ?IpAddressFamily = null,
 
     /// IpFamily is deprecated and has been replaced by IpAddressFamily.
-    ip_family: ?[]const u8,
+    ip_family: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ip_addresses = "IpAddresses",

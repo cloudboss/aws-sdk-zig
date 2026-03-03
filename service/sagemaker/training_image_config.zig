@@ -11,7 +11,7 @@ pub const TrainingImageConfig = struct {
 
     /// An object containing authentication information for a private Docker
     /// registry containing your training images.
-    training_repository_auth_config: ?TrainingRepositoryAuthConfig,
+    training_repository_auth_config: ?TrainingRepositoryAuthConfig = null,
 
     pub const json_field_names = .{
         .training_repository_access_mode = "TrainingRepositoryAccessMode",

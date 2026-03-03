@@ -4,28 +4,28 @@ const Tag = @import("tag.zig").Tag;
 /// Summary description of a Connect peer.
 pub const ConnectPeerSummary = struct {
     /// The ID of a Connect peer attachment.
-    connect_attachment_id: ?[]const u8,
+    connect_attachment_id: ?[]const u8 = null,
 
     /// The ID of a Connect peer.
-    connect_peer_id: ?[]const u8,
+    connect_peer_id: ?[]const u8 = null,
 
     /// The state of a Connect peer.
-    connect_peer_state: ?ConnectPeerState,
+    connect_peer_state: ?ConnectPeerState = null,
 
     /// The ID of a core network.
-    core_network_id: ?[]const u8,
+    core_network_id: ?[]const u8 = null,
 
     /// The timestamp when a Connect peer was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Region where the edge is located.
-    edge_location: ?[]const u8,
+    edge_location: ?[]const u8 = null,
 
     /// The subnet ARN for the Connect peer summary.
-    subnet_arn: ?[]const u8,
+    subnet_arn: ?[]const u8 = null,
 
     /// The list of key-value tags associated with the Connect peer summary.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .connect_attachment_id = "ConnectAttachmentId",

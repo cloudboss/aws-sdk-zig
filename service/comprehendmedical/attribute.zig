@@ -14,45 +14,45 @@ pub const Attribute = struct {
     /// The 0-based character offset in the input text that shows where the
     /// attribute begins. The
     /// offset returns the UTF-8 code point in the string.
-    begin_offset: ?i32,
+    begin_offset: ?i32 = null,
 
     /// The category of attribute.
-    category: ?EntityType,
+    category: ?EntityType = null,
 
     /// The 0-based character offset in the input text that shows where the
     /// attribute ends. The
     /// offset returns the UTF-8 code point in the string.
-    end_offset: ?i32,
+    end_offset: ?i32 = null,
 
     /// The numeric identifier for this attribute. This is a monotonically
     /// increasing id unique
     /// within this response rather than a global unique identifier.
-    id: ?i32,
+    id: ?i32 = null,
 
     /// The level of confidence that Amazon Comprehend Medical has that this
     /// attribute is correctly related to this
     /// entity.
-    relationship_score: ?f32,
+    relationship_score: ?f32 = null,
 
     /// The type of relationship between the entity and attribute. Type for the
     /// relationship is
     /// `OVERLAP`, indicating that the entity occurred at the same time as the
     /// `Date_Expression`.
-    relationship_type: ?RelationshipType,
+    relationship_type: ?RelationshipType = null,
 
     /// The level of confidence that Amazon Comprehend Medical has that the segment
     /// of text is correctly recognized
     /// as an attribute.
-    score: ?f32,
+    score: ?f32 = null,
 
     /// The segment of input text extracted as this attribute.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// Contextual information for this attribute.
-    traits: ?[]const Trait,
+    traits: ?[]const Trait = null,
 
     /// The type of attribute.
-    @"type": ?EntitySubType,
+    @"type": ?EntitySubType = null,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",

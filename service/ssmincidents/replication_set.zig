@@ -8,7 +8,7 @@ const ReplicationSetStatus = @import("replication_set_status.zig").ReplicationSe
 /// the KMS key used to encrypt the data.
 pub const ReplicationSet = struct {
     /// The Amazon Resource Name (ARN) of the replication set.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Details about who created the replication set.
     created_by: []const u8,

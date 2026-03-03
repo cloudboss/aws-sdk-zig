@@ -5,12 +5,12 @@ pub const StackConfigInput = struct {
     /// The structure representing output
     /// resolution (in target georeferenced units) of the
     /// result of stacking operation.
-    output_resolution: ?OutputResolutionStackInput,
+    output_resolution: ?OutputResolutionStackInput = null,
 
     /// A list of bands to be stacked in the specified order. When the parameter is
     /// not provided, all the available bands in the data collection are stacked in
     /// the alphabetical order of their asset names.
-    target_bands: ?[]const []const u8,
+    target_bands: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .output_resolution = "OutputResolution",

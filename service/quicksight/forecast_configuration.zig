@@ -6,10 +6,10 @@ const ForecastScenario = @import("forecast_scenario.zig").ForecastScenario;
 pub const ForecastConfiguration = struct {
     /// The forecast properties setup of a forecast in the line
     /// chart.
-    forecast_properties: ?TimeBasedForecastProperties,
+    forecast_properties: ?TimeBasedForecastProperties = null,
 
     /// The forecast scenario of a forecast in the line chart.
-    scenario: ?ForecastScenario,
+    scenario: ?ForecastScenario = null,
 
     pub const json_field_names = .{
         .forecast_properties = "ForecastProperties",

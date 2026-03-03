@@ -9,7 +9,7 @@ const ScanSetting = @import("scan_setting.zig").ScanSetting;
 pub const BackupPlanInput = struct {
     /// Specifies a list of `BackupOptions` for each resource type. These settings
     /// are only available for Windows Volume Shadow Copy Service (VSS) backup jobs.
-    advanced_backup_settings: ?[]const AdvancedBackupSetting,
+    advanced_backup_settings: ?[]const AdvancedBackupSetting = null,
 
     /// The display name of a backup plan. Must contain 1 to 50 alphanumeric or
     /// '-_.'
@@ -22,7 +22,7 @@ pub const BackupPlanInput = struct {
 
     /// Contains your scanning configuration for the backup rule and includes the
     /// malware scanner, and scan mode of either full or incremental.
-    scan_settings: ?[]const ScanSetting,
+    scan_settings: ?[]const ScanSetting = null,
 
     pub const json_field_names = .{
         .advanced_backup_settings = "AdvancedBackupSettings",

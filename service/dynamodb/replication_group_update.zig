@@ -22,13 +22,13 @@ const UpdateReplicationGroupMemberAction = @import("update_replication_group_mem
 /// alarms.
 pub const ReplicationGroupUpdate = struct {
     /// The parameters required for creating a replica for the table.
-    create: ?CreateReplicationGroupMemberAction,
+    create: ?CreateReplicationGroupMemberAction = null,
 
     /// The parameters required for deleting a replica for the table.
-    delete: ?DeleteReplicationGroupMemberAction,
+    delete: ?DeleteReplicationGroupMemberAction = null,
 
     /// The parameters required for updating a replica for the table.
-    update: ?UpdateReplicationGroupMemberAction,
+    update: ?UpdateReplicationGroupMemberAction = null,
 
     pub const json_field_names = .{
         .create = "Create",

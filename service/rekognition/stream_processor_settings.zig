@@ -6,10 +6,10 @@ const FaceSearchSettings = @import("face_search_settings.zig").FaceSearchSetting
 /// You can use `FaceSearch` to recognize faces in a streaming video, or you can
 /// use `ConnectedHome` to detect labels.
 pub const StreamProcessorSettings = struct {
-    connected_home: ?ConnectedHomeSettings,
+    connected_home: ?ConnectedHomeSettings = null,
 
     /// Face search settings to use on a streaming video.
-    face_search: ?FaceSearchSettings,
+    face_search: ?FaceSearchSettings = null,
 
     pub const json_field_names = .{
         .connected_home = "ConnectedHome",

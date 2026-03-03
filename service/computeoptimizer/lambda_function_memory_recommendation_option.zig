@@ -10,7 +10,7 @@ pub const LambdaFunctionMemoryRecommendationOption = struct {
     /// An array of objects that describe the projected utilization metrics of the
     /// function
     /// recommendation option.
-    projected_utilization_metrics: ?[]const LambdaFunctionMemoryProjectedMetric,
+    projected_utilization_metrics: ?[]const LambdaFunctionMemoryProjectedMetric = null,
 
     /// The rank of the function recommendation option.
     ///
@@ -21,13 +21,13 @@ pub const LambdaFunctionMemoryRecommendationOption = struct {
     /// recommendation option. Savings opportunity includes the estimated monthly
     /// savings amount
     /// and percentage.
-    savings_opportunity: ?SavingsOpportunity,
+    savings_opportunity: ?SavingsOpportunity = null,
 
     /// An object that describes the savings opportunity for the Lambda
     /// recommendation option which includes Saving Plans
     /// discounts. Savings opportunity includes the estimated monthly savings and
     /// percentage.
-    savings_opportunity_after_discounts: ?LambdaSavingsOpportunityAfterDiscounts,
+    savings_opportunity_after_discounts: ?LambdaSavingsOpportunityAfterDiscounts = null,
 
     pub const json_field_names = .{
         .memory_size = "memorySize",

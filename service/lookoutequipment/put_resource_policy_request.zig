@@ -5,7 +5,7 @@ pub const PutResourcePolicyRequest = struct {
     client_token: []const u8,
 
     /// A unique identifier for a revision of the resource policy.
-    policy_revision_id: ?[]const u8,
+    policy_revision_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the resource for which the policy is being
     /// created.

@@ -1,10 +1,10 @@
 /// The Identity and Access Management (IAM) configuration.
 pub const AwsIamConfig = struct {
     /// The signing Amazon Web Services Region for IAM authorization.
-    signing_region: ?[]const u8,
+    signing_region: ?[]const u8 = null,
 
     /// The signing service name for IAM authorization.
-    signing_service_name: ?[]const u8,
+    signing_service_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .signing_region = "signingRegion",

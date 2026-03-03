@@ -11,13 +11,13 @@ pub const FleetLaunchTemplateSpecification = struct {
     ///
     /// You must specify the `LaunchTemplateId` or the `LaunchTemplateName`, but not
     /// both.
-    launch_template_id: ?[]const u8,
+    launch_template_id: ?[]const u8 = null,
 
     /// The name of the launch template.
     ///
     /// You must specify the `LaunchTemplateName` or the `LaunchTemplateId`, but not
     /// both.
-    launch_template_name: ?[]const u8,
+    launch_template_name: ?[]const u8 = null,
 
     /// The launch template version number, `$Latest`, or `$Default`.
     /// You must specify a value, otherwise the request fails.
@@ -28,5 +28,5 @@ pub const FleetLaunchTemplateSpecification = struct {
     /// If the value is `$Default`, Amazon EC2 uses the default version of the
     /// launch
     /// template.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 };

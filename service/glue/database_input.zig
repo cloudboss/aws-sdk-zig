@@ -8,17 +8,17 @@ const DatabaseIdentifier = @import("database_identifier.zig").DatabaseIdentifier
 pub const DatabaseInput = struct {
     /// Creates a set of default permissions on the table for principals. Used by
     /// Lake Formation. Not used in the normal course of Glue operations.
-    create_table_default_permissions: ?[]const PrincipalPermissions,
+    create_table_default_permissions: ?[]const PrincipalPermissions = null,
 
     /// A description of the database.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A `FederatedDatabase` structure that references an entity outside the Glue
     /// Data Catalog.
-    federated_database: ?FederatedDatabase,
+    federated_database: ?FederatedDatabase = null,
 
     /// The location of the database (for example, an HDFS path).
-    location_uri: ?[]const u8,
+    location_uri: ?[]const u8 = null,
 
     /// The name of the database. For Hive compatibility, this is folded to
     /// lowercase when it is
@@ -29,11 +29,11 @@ pub const DatabaseInput = struct {
     /// of the database.
     ///
     /// These key-value pairs define parameters and properties of the database.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// A `DatabaseIdentifier` structure that describes a target database for
     /// resource linking.
-    target_database: ?DatabaseIdentifier,
+    target_database: ?DatabaseIdentifier = null,
 
     pub const json_field_names = .{
         .create_table_default_permissions = "CreateTableDefaultPermissions",

@@ -14,7 +14,7 @@ pub const SharePointConfiguration = struct {
     /// name and password, or OAuth authentication of user name, password, client
     /// ID, and client
     /// secret, or AD App-only authentication of client secret.
-    authentication_type: ?SharePointOnlineAuthenticationType,
+    authentication_type: ?SharePointOnlineAuthenticationType = null,
 
     /// `TRUE` to index document attachments.
     crawl_attachments: bool = false,
@@ -24,7 +24,7 @@ pub const SharePointConfiguration = struct {
 
     /// The Microsoft SharePoint attribute field that contains the title of the
     /// document.
-    document_title_field_name: ?[]const u8,
+    document_title_field_name: ?[]const u8 = null,
 
     /// A list of regular expression patterns to exclude certain documents in your
     /// SharePoint.
@@ -37,7 +37,7 @@ pub const SharePointConfiguration = struct {
     /// included in the index.
     ///
     /// The regex applies to the display URL of the SharePoint document.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map SharePoint data
     /// source attributes or field names to Amazon Kendra index field names. To
@@ -49,7 +49,7 @@ pub const SharePointConfiguration = struct {
     /// The
     /// SharePoint data source field names must exist in your SharePoint custom
     /// metadata.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of regular expression patterns to include certain documents in your
     /// SharePoint.
@@ -62,7 +62,7 @@ pub const SharePointConfiguration = struct {
     /// included in the index.
     ///
     /// The regex applies to the display URL of the SharePoint document.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// Configuration information to connect to your Microsoft SharePoint site URLs
     /// via
@@ -90,7 +90,7 @@ pub const SharePointConfiguration = struct {
     /// It is recommended you prepare your proxy beforehand for any security and
     /// load
     /// requirements.
-    proxy_configuration: ?ProxyConfiguration,
+    proxy_configuration: ?ProxyConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains
     /// the
@@ -112,7 +112,7 @@ pub const SharePointConfiguration = struct {
     /// example of using OpenSSL to create an X509 certificate, see [Create and sign
     /// an X509
     /// certificate](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html).
-    ssl_certificate_s3_path: ?S3Path,
+    ssl_certificate_s3_path: ?S3Path = null,
 
     /// The Microsoft SharePoint site URLs for the documents you want to index.
     urls: []const []const u8,
@@ -129,7 +129,7 @@ pub const SharePointConfiguration = struct {
     /// your Microsoft
     /// SharePoint. For more information, see [Configuring a
     /// VPC](https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
-    vpc_configuration: ?DataSourceVpcConfiguration,
+    vpc_configuration: ?DataSourceVpcConfiguration = null,
 
     pub const json_field_names = .{
         .authentication_type = "AuthenticationType",

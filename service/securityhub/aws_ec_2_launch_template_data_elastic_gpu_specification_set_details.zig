@@ -2,7 +2,7 @@
 /// launch template.
 pub const AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails = struct {
     /// The type of Elastic Graphics accelerator.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

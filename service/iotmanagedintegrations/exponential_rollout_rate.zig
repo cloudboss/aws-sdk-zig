@@ -4,14 +4,14 @@ const RolloutRateIncreaseCriteria = @import("rollout_rate_increase_criteria.zig"
 /// task.
 pub const ExponentialRolloutRate = struct {
     /// The base rate per minute for the rollout of an over-the-air (OTA) task.
-    base_rate_per_minute: ?i32,
+    base_rate_per_minute: ?i32 = null,
 
     /// The incremental factor for increasing the rollout rate of an over-the-air
     /// (OTA) task.
-    increment_factor: ?f64,
+    increment_factor: ?f64 = null,
 
     /// The criteria for increasing the rollout rate of an over-the-air (OTA) task.
-    rate_increase_criteria: ?RolloutRateIncreaseCriteria,
+    rate_increase_criteria: ?RolloutRateIncreaseCriteria = null,
 
     pub const json_field_names = .{
         .base_rate_per_minute = "BaseRatePerMinute",

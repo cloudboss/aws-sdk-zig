@@ -13,7 +13,7 @@ pub const DockerVolumeConfiguration = struct {
     /// exist.
     ///
     /// This field is only used if the `scope` is `shared`.
-    autoprovision: ?bool,
+    autoprovision: ?bool = null,
 
     /// The Docker volume driver to use. The driver value must match the driver name
     /// provided
@@ -26,25 +26,25 @@ pub const DockerVolumeConfiguration = struct {
     /// `Driver`
     /// in the docker container create command and the `xxdriver` option to docker
     /// volume create.
-    driver: ?[]const u8,
+    driver: ?[]const u8 = null,
 
     /// A map of Docker driver-specific options passed through. This parameter maps
     /// to
     /// `DriverOpts` in the docker create-volume command and the
     /// `xxopt` option to docker volume create.
-    driver_opts: ?[]const aws.map.StringMapEntry,
+    driver_opts: ?[]const aws.map.StringMapEntry = null,
 
     /// Custom metadata to add to your Docker volume. This parameter maps to
     /// `Labels` in the docker container create command and the
     /// `xxlabel` option to docker volume create.
-    labels: ?[]const aws.map.StringMapEntry,
+    labels: ?[]const aws.map.StringMapEntry = null,
 
     /// The scope for the Docker volume that determines its lifecycle. Docker
     /// volumes that are
     /// scoped to a `task` are automatically provisioned when the task starts and
     /// destroyed when the task stops. Docker volumes that are scoped as `shared`
     /// persist after the task stops.
-    scope: ?Scope,
+    scope: ?Scope = null,
 
     pub const json_field_names = .{
         .autoprovision = "autoprovision",

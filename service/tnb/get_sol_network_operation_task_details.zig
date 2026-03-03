@@ -9,22 +9,22 @@ const TaskStatus = @import("task_status.zig").TaskStatus;
 /// network instance instantiation or termination.
 pub const GetSolNetworkOperationTaskDetails = struct {
     /// Context for the network operation task.
-    task_context: ?[]const aws.map.StringMapEntry,
+    task_context: ?[]const aws.map.StringMapEntry = null,
 
     /// Task end time.
-    task_end_time: ?i64,
+    task_end_time: ?i64 = null,
 
     /// Task error details.
-    task_error_details: ?ErrorInfo,
+    task_error_details: ?ErrorInfo = null,
 
     /// Task name.
-    task_name: ?[]const u8,
+    task_name: ?[]const u8 = null,
 
     /// Task start time.
-    task_start_time: ?i64,
+    task_start_time: ?i64 = null,
 
     /// Task status.
-    task_status: ?TaskStatus,
+    task_status: ?TaskStatus = null,
 
     pub const json_field_names = .{
         .task_context = "taskContext",

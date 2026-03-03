@@ -3,7 +3,7 @@
 /// top level form to propagate data to the form's property values.
 pub const FormInputValuePropertyBindingProperties = struct {
     /// The data field to bind the property to.
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// The form property to bind to the data field.
     property: []const u8,

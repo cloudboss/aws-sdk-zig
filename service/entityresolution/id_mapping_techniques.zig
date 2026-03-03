@@ -10,11 +10,11 @@ pub const IdMappingTechniques = struct {
 
     /// An object which defines any additional configurations required by the
     /// provider service.
-    provider_properties: ?ProviderProperties,
+    provider_properties: ?ProviderProperties = null,
 
     /// An object which defines any additional configurations required by rule-based
     /// matching.
-    rule_based_properties: ?IdMappingRuleBasedProperties,
+    rule_based_properties: ?IdMappingRuleBasedProperties = null,
 
     pub const json_field_names = .{
         .id_mapping_type = "idMappingType",

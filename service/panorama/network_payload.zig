@@ -4,13 +4,13 @@ const NtpPayload = @import("ntp_payload.zig").NtpPayload;
 /// The network configuration for a device.
 pub const NetworkPayload = struct {
     /// Settings for Ethernet port 0.
-    ethernet_0: ?EthernetPayload,
+    ethernet_0: ?EthernetPayload = null,
 
     /// Settings for Ethernet port 1.
-    ethernet_1: ?EthernetPayload,
+    ethernet_1: ?EthernetPayload = null,
 
     /// Network time protocol (NTP) server settings.
-    ntp: ?NtpPayload,
+    ntp: ?NtpPayload = null,
 
     pub const json_field_names = .{
         .ethernet_0 = "Ethernet0",

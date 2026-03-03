@@ -7,10 +7,10 @@ pub const EcsCluster = struct {
     /// A list of unique identifiers for the Amazon EC2 instances that serve as
     /// container instances in
     /// the Amazon ECS cluster.
-    ec_2_instance_uids: ?[]const []const u8,
+    ec_2_instance_uids: ?[]const []const u8 = null,
 
     /// The current status of the Amazon ECS cluster.
-    status: ?EcsClusterStatus,
+    status: ?EcsClusterStatus = null,
 
     pub const json_field_names = .{
         .ec_2_instance_uids = "Ec2InstanceUids",

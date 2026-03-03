@@ -3,7 +3,7 @@ const OfferTargetingString = @import("offer_targeting_string.zig").OfferTargetin
 /// Allows filtering on the `Targeting` of an offer.
 pub const OfferTargetingFilter = struct {
     /// Allows filtering on the `Targeting` of an offer with list input.
-    value_list: ?[]const OfferTargetingString,
+    value_list: ?[]const OfferTargetingString = null,
 
     pub const json_field_names = .{
         .value_list = "ValueList",

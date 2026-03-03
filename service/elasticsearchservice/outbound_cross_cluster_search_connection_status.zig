@@ -4,7 +4,7 @@ const OutboundCrossClusterSearchConnectionStatusCode = @import("outbound_cross_c
 /// connection.
 pub const OutboundCrossClusterSearchConnectionStatus = struct {
     /// Specifies verbose information for the outbound connection status.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The state code for outbound connection. This can be one of the following:
     ///
@@ -25,7 +25,7 @@ pub const OutboundCrossClusterSearchConnectionStatus = struct {
     /// * DELETING: Outbound connection deletion is in progress.
     ///
     /// * DELETED: Outbound connection is deleted and cannot be used further.
-    status_code: ?OutboundCrossClusterSearchConnectionStatusCode,
+    status_code: ?OutboundCrossClusterSearchConnectionStatusCode = null,
 
     pub const json_field_names = .{
         .message = "Message",

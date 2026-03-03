@@ -28,28 +28,28 @@ pub const DynamicAudioSelector = struct {
     /// Frame depending on your input, regardless of the accuracy of your input's
     /// STTS table. Your output audio and video may not be aligned or it may contain
     /// audio artifacts.
-    audio_duration_correction: ?AudioDurationCorrection,
+    audio_duration_correction: ?AudioDurationCorrection = null,
 
     /// Specify the S3, HTTP, or HTTPS URL for your external audio file input.
-    external_audio_file_input: ?[]const u8,
+    external_audio_file_input: ?[]const u8 = null,
 
     /// Specify the language, using an ISO 639-2 three-letter code in all capital
     /// letters. You can find a list of codes at:
     /// https://www.loc.gov/standards/iso639-2/php/code_list.php
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// Specify a time delta, in milliseconds, to offset the audio from the input
     /// video.
     /// To specify no offset: Keep the default value, 0.
     /// To specify an offset: Enter an integer from -2147483648 to 2147483647
-    offset: ?i32,
+    offset: ?i32 = null,
 
     /// Specify which audio tracks to dynamically select from your source. To select
     /// all audio tracks: Keep the default value, All tracks. To select all audio
     /// tracks with a specific language code: Choose Language code. When you do, you
     /// must also specify a language code under the Language code setting. If there
     /// is no matching Language code in your source, then no track will be selected.
-    selector_type: ?DynamicAudioSelectorType,
+    selector_type: ?DynamicAudioSelectorType = null,
 
     pub const json_field_names = .{
         .audio_duration_correction = "AudioDurationCorrection",

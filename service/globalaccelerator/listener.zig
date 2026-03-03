@@ -28,16 +28,16 @@ pub const Listener = struct {
     /// value.
     ///
     /// The default value is `NONE`.
-    client_affinity: ?ClientAffinity,
+    client_affinity: ?ClientAffinity = null,
 
     /// The Amazon Resource Name (ARN) of the listener.
-    listener_arn: ?[]const u8,
+    listener_arn: ?[]const u8 = null,
 
     /// The list of port ranges for the connections from clients to the accelerator.
-    port_ranges: ?[]const PortRange,
+    port_ranges: ?[]const PortRange = null,
 
     /// The protocol for the connections from clients to the accelerator.
-    protocol: ?Protocol,
+    protocol: ?Protocol = null,
 
     pub const json_field_names = .{
         .client_affinity = "ClientAffinity",

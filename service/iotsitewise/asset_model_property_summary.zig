@@ -8,7 +8,7 @@ const PropertyType = @import("property_type.zig").PropertyType;
 /// which interfaces the property belongs to, if any.
 pub const AssetModelPropertySummary = struct {
     /// The ID of the composite model that contains the asset model property.
-    asset_model_composite_model_id: ?[]const u8,
+    asset_model_composite_model_id: ?[]const u8 = null,
 
     /// The data type of the property.
     data_type: PropertyDataType,
@@ -16,32 +16,32 @@ pub const AssetModelPropertySummary = struct {
     /// The data type of the structure for this property. This parameter exists on
     /// properties that
     /// have the `STRUCT` data type.
-    data_type_spec: ?[]const u8,
+    data_type_spec: ?[]const u8 = null,
 
     /// The external ID of the property. For more information, see [Using external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ID of the property.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A list of interface summaries that describe which interfaces this property
     /// belongs to,
     /// including the interface asset model ID and the corresponding property ID in
     /// the
     /// interface.
-    interface_summaries: ?[]const InterfaceSummary,
+    interface_summaries: ?[]const InterfaceSummary = null,
 
     /// The name of the property.
     name: []const u8,
 
     /// The structured path to the property from the root of the asset model.
-    path: ?[]const AssetModelPropertyPathSegment,
+    path: ?[]const AssetModelPropertyPathSegment = null,
 
     @"type": PropertyType,
 
     /// The unit (such as `Newtons` or `RPM`) of the property.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .asset_model_composite_model_id = "assetModelCompositeModelId",

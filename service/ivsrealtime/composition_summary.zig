@@ -14,14 +14,14 @@ pub const CompositionSummary = struct {
     /// UTC time of the Composition end. This is an ISO 8601 timestamp; *note that
     /// this
     /// is returned as a string*.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// ARN of the attached stage.
     stage_arn: []const u8,
 
     /// UTC time of the Composition start. This is an ISO 8601 timestamp; *note that
     /// this is returned as a string*.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// State of the Composition resource.
     state: CompositionState,
@@ -35,7 +35,7 @@ pub const CompositionSummary = struct {
     /// limits and requirements"; Amazon IVS has no constraints on tags beyond what
     /// is documented
     /// there.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

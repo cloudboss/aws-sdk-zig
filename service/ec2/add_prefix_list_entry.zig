@@ -6,5 +6,5 @@ pub const AddPrefixListEntry = struct {
     /// A description for the entry.
     ///
     /// Constraints: Up to 255 characters in length.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 };

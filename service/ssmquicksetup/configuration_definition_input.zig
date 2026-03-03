@@ -4,11 +4,11 @@ const aws = @import("aws");
 pub const ConfigurationDefinitionInput = struct {
     /// The ARN of the IAM role used to administrate local configuration
     /// deployments.
-    local_deployment_administration_role_arn: ?[]const u8,
+    local_deployment_administration_role_arn: ?[]const u8 = null,
 
     /// The name of the IAM role used to deploy local
     /// configurations.
-    local_deployment_execution_role_name: ?[]const u8,
+    local_deployment_execution_role_name: ?[]const u8 = null,
 
     /// The parameters for the configuration definition type. Parameters for
     /// configuration
@@ -772,7 +772,7 @@ pub const ConfigurationDefinitionInput = struct {
     @"type": []const u8,
 
     /// The version of the Quick Setup type to use.
-    type_version: ?[]const u8,
+    type_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .local_deployment_administration_role_arn = "LocalDeploymentAdministrationRoleArn",

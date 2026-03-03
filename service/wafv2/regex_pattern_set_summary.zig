@@ -4,15 +4,15 @@
 /// the RegexPatternSetReferenceStatement to use the pattern set in a Rule.
 pub const RegexPatternSetSummary = struct {
     /// The Amazon Resource Name (ARN) of the entity.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A description of the set that helps with identification.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier for the set. This ID is returned in the responses to
     /// create and list commands. You provide it to operations like update and
     /// delete.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A token used for optimistic locking. WAF returns a token to your `get` and
     /// `list` requests, to mark the state of the entity at the time of the request.
@@ -22,11 +22,11 @@ pub const RegexPatternSetSummary = struct {
     /// a change has been made, the update fails with a
     /// `WAFOptimisticLockException`. If this happens, perform another `get`, and
     /// use the new token returned by that operation.
-    lock_token: ?[]const u8,
+    lock_token: ?[]const u8 = null,
 
     /// The name of the data type instance. You cannot change the name after you
     /// create the instance.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "ARN",

@@ -28,7 +28,7 @@ pub const PredictiveScalingPredefinedMetricPairSpecification = struct {
     /// A label that uniquely identifies a specific target group from which to
     /// determine
     /// the total and average request count.
-    resource_label: ?[]const u8,
+    resource_label: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .predefined_metric_type = "PredefinedMetricType",

@@ -5,10 +5,10 @@ const DownlinkDataflowDetails = @import("downlink_dataflow_details.zig").Downlin
 /// Details for a downlink agent endpoint
 pub const DownlinkAwsGroundStationAgentEndpointDetails = struct {
     /// Status of the agent associated with the downlink dataflow endpoint
-    agent_status: ?AgentStatus,
+    agent_status: ?AgentStatus = null,
 
     /// Health audit results for the downlink dataflow endpoint
-    audit_results: ?AuditResults,
+    audit_results: ?AuditResults = null,
 
     /// Dataflow details for the downlink endpoint
     dataflow_details: DownlinkDataflowDetails,

@@ -48,5 +48,5 @@ pub const InstanceProfile = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

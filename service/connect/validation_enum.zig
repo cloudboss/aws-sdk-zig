@@ -10,7 +10,7 @@ pub const ValidationEnum = struct {
     /// A list of predefined values that are allowed for this attribute. These
     /// values are always permitted regardless of
     /// the Strict setting.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .strict = "Strict",

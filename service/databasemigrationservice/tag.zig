@@ -15,12 +15,12 @@ pub const Tag = struct {
     /// only the set of Unicode letters, digits, white-space, '_', '.', '/', '=',
     /// '+', '-' (Java
     /// regular expressions: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) string that uniquely identifies the resource
     /// for which
     /// the tag is created.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// A value is the optional value of the tag. The string value can be 1-256
     /// Unicode
@@ -29,7 +29,7 @@ pub const Tag = struct {
     /// contain only the set of Unicode letters, digits, white-space, '_', '.', '/',
     /// '=', '+', '-'
     /// (Java regular expressions: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

@@ -5,10 +5,10 @@ pub const UnprocessedAccount = struct {
     /// The Amazon Web Services account identifier of the member account that was
     /// not
     /// processed.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The reason that the member account request could not be processed.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

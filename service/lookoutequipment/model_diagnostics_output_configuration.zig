@@ -5,7 +5,7 @@ const ModelDiagnosticsS3OutputConfiguration = @import("model_diagnostics_s3_outp
 pub const ModelDiagnosticsOutputConfiguration = struct {
     /// The Amazon Web Services Key Management Service (KMS) key identifier to
     /// encrypt the pointwise model diagnostics files.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The Amazon S3 location for the pointwise model diagnostics.
     s3_output_configuration: ModelDiagnosticsS3OutputConfiguration,

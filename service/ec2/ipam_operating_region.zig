@@ -8,5 +8,5 @@
 /// *Amazon VPC IPAM User Guide*.
 pub const IpamOperatingRegion = struct {
     /// The name of the operating Region.
-    region_name: ?[]const u8,
+    region_name: ?[]const u8 = null,
 };

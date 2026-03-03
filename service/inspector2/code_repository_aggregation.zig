@@ -5,21 +5,21 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// The details that define an aggregation based on code repositories.
 pub const CodeRepositoryAggregation = struct {
     /// The project names to include in the aggregation results.
-    project_names: ?[]const StringFilter,
+    project_names: ?[]const StringFilter = null,
 
     /// The repository provider types to include in the aggregation results.
-    provider_types: ?[]const StringFilter,
+    provider_types: ?[]const StringFilter = null,
 
     /// The resource IDs to include in the aggregation results.
-    resource_ids: ?[]const StringFilter,
+    resource_ids: ?[]const StringFilter = null,
 
     /// The value to sort results by in the code repository aggregation.
-    sort_by: ?CodeRepositorySortBy,
+    sort_by: ?CodeRepositorySortBy = null,
 
     /// The order to sort results by (ascending or descending) in the code
     /// repository
     /// aggregation.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .project_names = "projectNames",

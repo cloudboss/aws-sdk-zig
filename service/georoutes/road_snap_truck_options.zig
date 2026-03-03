@@ -9,7 +9,7 @@ pub const RoadSnapTruckOptions = struct {
     gross_weight: i64 = 0,
 
     /// List of Hazardous cargos contained in the vehicle.
-    hazardous_cargos: ?[]const RoadSnapHazardousCargoType,
+    hazardous_cargos: ?[]const RoadSnapHazardousCargoType = null,
 
     /// Height of the vehicle.
     ///
@@ -22,7 +22,7 @@ pub const RoadSnapTruckOptions = struct {
     length: i64 = 0,
 
     /// Trailer options corresponding to the vehicle.
-    trailer: ?RoadSnapTrailerOptions,
+    trailer: ?RoadSnapTrailerOptions = null,
 
     /// The tunnel restriction code.
     ///
@@ -49,7 +49,7 @@ pub const RoadSnapTruckOptions = struct {
     ///
     /// * *Risk Level*: Very high risk
     /// * *Restrictions*: Restricted tunnel
-    tunnel_restriction_code: ?[]const u8,
+    tunnel_restriction_code: ?[]const u8 = null,
 
     /// Width of the vehicle in centimenters.
     width: i64 = 0,

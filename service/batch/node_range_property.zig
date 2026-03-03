@@ -8,19 +8,19 @@ const EksProperties = @import("eks_properties.zig").EksProperties;
 /// job.
 pub const NodeRangeProperty = struct {
     /// Contains a list of consumable resources required by a job.
-    consumable_resource_properties: ?ConsumableResourceProperties,
+    consumable_resource_properties: ?ConsumableResourceProperties = null,
 
     /// The container details for the node range.
-    container: ?ContainerProperties,
+    container: ?ContainerProperties = null,
 
     /// This is an object that represents the properties of the node range for a
     /// multi-node parallel
     /// job.
-    ecs_properties: ?EcsProperties,
+    ecs_properties: ?EcsProperties = null,
 
     /// This is an object that represents the properties of the node range for a
     /// multi-node parallel job.
-    eks_properties: ?EksProperties,
+    eks_properties: ?EksProperties = null,
 
     /// The instance types of the underlying host infrastructure of a multi-node
     /// parallel
@@ -30,7 +30,7 @@ pub const NodeRangeProperty = struct {
     /// resources.
     ///
     /// In addition, this list object is currently limited to one element.
-    instance_types: ?[]const []const u8,
+    instance_types: ?[]const []const u8 = null,
 
     /// The range of nodes, using node index values. A range of `0:3` indicates
     /// nodes

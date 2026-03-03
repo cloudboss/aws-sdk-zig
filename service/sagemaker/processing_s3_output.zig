@@ -7,7 +7,7 @@ pub const ProcessingS3Output = struct {
     /// contents to Amazon S3. `LocalPath` is an absolute path to a directory
     /// containing output files. This directory will be created by the platform and
     /// exist when your container's entrypoint is invoked.
-    local_path: ?[]const u8,
+    local_path: ?[]const u8 = null,
 
     /// Whether to upload the results of the processing job continuously or after
     /// the job completes.

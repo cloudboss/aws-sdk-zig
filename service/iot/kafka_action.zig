@@ -12,13 +12,13 @@ pub const KafkaAction = struct {
     destination_arn: []const u8,
 
     /// The list of Kafka headers that you specify.
-    headers: ?[]const KafkaActionHeader,
+    headers: ?[]const KafkaActionHeader = null,
 
     /// The Kafka message key.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The Kafka message partition.
-    partition: ?[]const u8,
+    partition: ?[]const u8 = null,
 
     /// The Kafka topic for messages to be sent to the Kafka broker.
     topic: []const u8,

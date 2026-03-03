@@ -9,16 +9,16 @@ pub const AnalysisReport = struct {
     analysis_report_id: []const u8,
 
     /// The time you created the analysis report.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The analysis end time in the report.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The unique identifier of the analysis report.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// The list of identified insights in the analysis report.
-    insights: ?[]const Insight,
+    insights: ?[]const Insight = null,
 
     /// List the tags for the Amazon Web Services service for which Performance
     /// Insights returns metrics. Valid values are as follows:
@@ -26,13 +26,13 @@ pub const AnalysisReport = struct {
     /// * `RDS`
     ///
     /// * `DOCDB`
-    service_type: ?ServiceType,
+    service_type: ?ServiceType = null,
 
     /// The analysis start time in the report.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of the created analysis report.
-    status: ?AnalysisStatus,
+    status: ?AnalysisStatus = null,
 
     pub const json_field_names = .{
         .analysis_report_id = "AnalysisReportId",

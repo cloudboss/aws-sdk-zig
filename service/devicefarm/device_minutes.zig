@@ -5,16 +5,16 @@ pub const DeviceMinutes = struct {
     /// When specified, represents only the sum of metered minutes used by the
     /// resource to
     /// run tests.
-    metered: ?f64,
+    metered: ?f64 = null,
 
     /// When specified, represents the total minutes used by the resource to run
     /// tests.
-    total: ?f64,
+    total: ?f64 = null,
 
     /// When specified, represents only the sum of unmetered minutes used by the
     /// resource
     /// to run tests.
-    unmetered: ?f64,
+    unmetered: ?f64 = null,
 
     pub const json_field_names = .{
         .metered = "metered",

@@ -3,25 +3,25 @@ const LifecyclePolicyType = @import("lifecycle_policy_type.zig").LifecyclePolicy
 /// Details about an OpenSearch Serverless lifecycle policy.
 pub const LifecyclePolicyDetail = struct {
     /// The date the lifecycle policy was created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// The description of the lifecycle policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The timestamp of when the lifecycle policy was last modified.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The name of the lifecycle policy.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The JSON policy document without any whitespaces.
-    policy: ?[]const u8,
+    policy: ?[]const u8 = null,
 
     /// The version of the lifecycle policy.
-    policy_version: ?[]const u8,
+    policy_version: ?[]const u8 = null,
 
     /// The type of lifecycle policy.
-    @"type": ?LifecyclePolicyType,
+    @"type": ?LifecyclePolicyType = null,
 
     pub const json_field_names = .{
         .created_date = "createdDate",

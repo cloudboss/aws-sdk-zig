@@ -4,10 +4,10 @@ const VpcConnectivityTls = @import("vpc_connectivity_tls.zig").VpcConnectivityTl
 /// Includes all client authentication information for VPC connectivity.
 pub const VpcConnectivityClientAuthentication = struct {
     /// SASL authentication type details for VPC connectivity.
-    sasl: ?VpcConnectivitySasl,
+    sasl: ?VpcConnectivitySasl = null,
 
     /// TLS authentication type details for VPC connectivity.
-    tls: ?VpcConnectivityTls,
+    tls: ?VpcConnectivityTls = null,
 
     pub const json_field_names = .{
         .sasl = "Sasl",

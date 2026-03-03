@@ -10,7 +10,7 @@ pub const RedshiftConfiguration = struct {
     query_engine_configuration: RedshiftQueryEngineConfiguration,
 
     /// Specifies configurations for generating queries.
-    query_generation_configuration: ?QueryGenerationConfiguration,
+    query_generation_configuration: ?QueryGenerationConfiguration = null,
 
     /// Specifies configurations for Amazon Redshift database storage.
     storage_configurations: []const RedshiftQueryEngineStorageConfiguration,

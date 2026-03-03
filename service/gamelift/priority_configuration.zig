@@ -35,7 +35,7 @@ pub const PriorityConfiguration = struct {
     /// details, see
     /// [Amazon GameLift Servers service
     /// locations.](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html)
-    location_order: ?[]const []const u8,
+    location_order: ?[]const []const u8 = null,
 
     /// A custom sequence to use when prioritizing where to place new game sessions.
     /// Each
@@ -59,7 +59,7 @@ pub const PriorityConfiguration = struct {
     /// * `LOCATION` -- Amazon GameLift Servers prioritizes based on the provided
     ///   order of
     /// locations, as defined in `LocationOrder`.
-    priority_order: ?[]const PriorityType,
+    priority_order: ?[]const PriorityType = null,
 
     pub const json_field_names = .{
         .location_order = "LocationOrder",

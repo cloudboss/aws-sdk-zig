@@ -5,7 +5,7 @@ const InstanceSavingsEstimationModeSource = @import("instance_savings_estimation
 pub const InstanceSavingsEstimationMode = struct {
     /// Describes the source for calculating the savings opportunity for Amazon EC2
     /// instances.
-    source: ?InstanceSavingsEstimationModeSource,
+    source: ?InstanceSavingsEstimationModeSource = null,
 
     pub const json_field_names = .{
         .source = "source",

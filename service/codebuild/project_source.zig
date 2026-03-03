@@ -8,7 +8,7 @@ pub const ProjectSource = struct {
     /// Information about the authorization settings for CodeBuild to access the
     /// source code to be
     /// built.
-    auth: ?SourceAuth,
+    auth: ?SourceAuth = null,
 
     /// The buildspec file declaration to use for the builds in this build project.
     ///
@@ -25,25 +25,25 @@ pub const ProjectSource = struct {
     /// its root directory. For more information, see [Buildspec File Name and
     /// Storage
     /// Location](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage).
-    buildspec: ?[]const u8,
+    buildspec: ?[]const u8 = null,
 
     /// Contains information that defines how the build project reports the build
     /// status to
     /// the source provider. This option is only used when the source provider is
     /// `GITHUB`, `GITHUB_ENTERPRISE`, or
     /// `BITBUCKET`.
-    build_status_config: ?BuildStatusConfig,
+    build_status_config: ?BuildStatusConfig = null,
 
     /// Information about the Git clone depth for the build project.
-    git_clone_depth: ?i32,
+    git_clone_depth: ?i32 = null,
 
     /// Information about the Git submodules configuration for the build project.
-    git_submodules_config: ?GitSubmodulesConfig,
+    git_submodules_config: ?GitSubmodulesConfig = null,
 
     /// Enable this flag to ignore SSL warnings while connecting to the project
     /// source
     /// code.
-    insecure_ssl: ?bool,
+    insecure_ssl: ?bool = null,
 
     /// Information about the location of the source code to be built. Valid values
     /// include:
@@ -120,7 +120,7 @@ pub const ProjectSource = struct {
     ///
     /// If you specify `CODEPIPELINE` for the `Type` property, don't specify this
     /// property. For all of the other types, you must specify `Location`.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// Set to true to report the status of a build's start and finish to your
     /// source
@@ -143,12 +143,12 @@ pub const ProjectSource = struct {
     /// If your project's builds are triggered by a webhook, you must push a
     /// new commit to the repo for a change to this property to take
     /// effect.
-    report_build_status: ?bool,
+    report_build_status: ?bool = null,
 
     /// An identifier for this project source. The identifier can only contain
     /// alphanumeric characters and underscores, and must be less than 128
     /// characters in length.
-    source_identifier: ?[]const u8,
+    source_identifier: ?[]const u8 = null,
 
     /// The type of repository that contains the source code to be built. Valid
     /// values

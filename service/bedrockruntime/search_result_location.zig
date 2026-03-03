@@ -3,14 +3,14 @@
 /// block positions.
 pub const SearchResultLocation = struct {
     /// The ending position in the content array where the cited content ends.
-    end: ?i32,
+    end: ?i32 = null,
 
     /// The index of the search result content block where the cited content is
     /// found.
-    search_result_index: ?i32,
+    search_result_index: ?i32 = null,
 
     /// The starting position in the content array where the cited content begins.
-    start: ?i32,
+    start: ?i32 = null,
 
     pub const json_field_names = .{
         .end = "end",

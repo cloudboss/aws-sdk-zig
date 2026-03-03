@@ -9,24 +9,24 @@ const EksPropertiesOverride = @import("eks_properties_override.zig").EksProperti
 /// operation.
 pub const NodePropertyOverride = struct {
     /// An object that contains overrides for the consumable resources of a job.
-    consumable_resource_properties_override: ?ConsumableResourceProperties,
+    consumable_resource_properties_override: ?ConsumableResourceProperties = null,
 
     /// The overrides that are sent to a node range.
-    container_overrides: ?ContainerOverrides,
+    container_overrides: ?ContainerOverrides = null,
 
     /// An object that contains the properties that you want to replace for the
     /// existing Amazon ECS
     /// resources of a job.
-    ecs_properties_override: ?EcsPropertiesOverride,
+    ecs_properties_override: ?EcsPropertiesOverride = null,
 
     /// An object that contains the properties that you want to replace for the
     /// existing Amazon EKS resources of a job.
-    eks_properties_override: ?EksPropertiesOverride,
+    eks_properties_override: ?EksPropertiesOverride = null,
 
     /// An object that contains the instance types that you want to replace for the
     /// existing
     /// resources of a job.
-    instance_types: ?[]const []const u8,
+    instance_types: ?[]const []const u8 = null,
 
     /// The range of nodes, using node index values, that's used to override. A
     /// range of

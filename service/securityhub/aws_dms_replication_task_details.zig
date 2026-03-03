@@ -7,52 +7,52 @@ pub const AwsDmsReplicationTaskDetails = struct {
     /// `CCdcStartTime` specifies when you want a CDC operation to start. Only a
     /// value for one of these fields
     /// is included.
-    cdc_start_position: ?[]const u8,
+    cdc_start_position: ?[]const u8 = null,
 
     /// Indicates the start time for a CDC operation. `CdcStartPosition` or
     /// `CCdcStartTime` specifies
     /// when you want a CDC operation to start. Only a value for one of these fields
     /// is included.
-    cdc_start_time: ?[]const u8,
+    cdc_start_time: ?[]const u8 = null,
 
     /// Indicates when you want a CDC operation to stop. The value can be either
     /// server time or commit time.
-    cdc_stop_position: ?[]const u8,
+    cdc_stop_position: ?[]const u8 = null,
 
     /// The identifier of the replication task.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The migration type.
-    migration_type: ?[]const u8,
+    migration_type: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of a replication instance.
-    replication_instance_arn: ?[]const u8,
+    replication_instance_arn: ?[]const u8 = null,
 
     /// The user-defined replication task identifier or name.
-    replication_task_identifier: ?[]const u8,
+    replication_task_identifier: ?[]const u8 = null,
 
     /// The settings for the replication task.
-    replication_task_settings: ?[]const u8,
+    replication_task_settings: ?[]const u8 = null,
 
     /// A display name for the resource identifier at the end of the `EndpointArn`
     /// response parameter.
     /// If you don't specify a `ResourceIdentifier` value, DMS generates a default
     /// identifier value for
     /// the end of `EndpointArn`.
-    resource_identifier: ?[]const u8,
+    resource_identifier: ?[]const u8 = null,
 
     /// The ARN of the source endpoint.
-    source_endpoint_arn: ?[]const u8,
+    source_endpoint_arn: ?[]const u8 = null,
 
     /// The table mappings for the replication task, in JSON format.
-    table_mappings: ?[]const u8,
+    table_mappings: ?[]const u8 = null,
 
     /// The ARN of the target endpoint.
-    target_endpoint_arn: ?[]const u8,
+    target_endpoint_arn: ?[]const u8 = null,
 
     /// Supplemental information that the task requires to migrate the data for
     /// certain source and target endpoints.
-    task_data: ?[]const u8,
+    task_data: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cdc_start_position = "CdcStartPosition",

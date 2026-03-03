@@ -6,15 +6,15 @@ const DataDestination = @import("data_destination.zig").DataDestination;
 /// provide the `ExplainabilityExportArn`.
 pub const ExplainabilityExportSummary = struct {
     /// When the Explainability was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
-    destination: ?DataDestination,
+    destination: ?DataDestination = null,
 
     /// The Amazon Resource Name (ARN) of the Explainability export.
-    explainability_export_arn: ?[]const u8,
+    explainability_export_arn: ?[]const u8 = null,
 
     /// The name of the Explainability export
-    explainability_export_name: ?[]const u8,
+    explainability_export_name: ?[]const u8 = null,
 
     /// The last time the resource was modified. The timestamp depends on the status
     /// of the
@@ -30,12 +30,12 @@ pub const ExplainabilityExportSummary = struct {
     ///
     /// * `ACTIVE` or `CREATE_FAILED` - When the job finished or
     /// failed.
-    last_modification_time: ?i64,
+    last_modification_time: ?i64 = null,
 
     /// Information about any errors that may have occurred during the
     /// Explainability
     /// export.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status of the Explainability export. States include:
     ///
@@ -48,7 +48,7 @@ pub const ExplainabilityExportSummary = struct {
     ///
     /// * `DELETE_PENDING`, `DELETE_IN_PROGRESS`,
     /// `DELETE_FAILED`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

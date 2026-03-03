@@ -8,7 +8,7 @@ pub const UpdateLeadContext = struct {
     customer: LeadCustomer,
 
     /// Updated interaction details for the lead context.
-    interaction: ?LeadInteraction,
+    interaction: ?LeadInteraction = null,
 
     /// The updated qualification status of the lead.
     qualification_status: []const u8 = "Unqualified",

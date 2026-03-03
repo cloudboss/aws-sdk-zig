@@ -3,19 +3,19 @@ const TransitGatewayConnectPeerAssociationState = @import("transit_gateway_conne
 /// Describes a transit gateway Connect peer association.
 pub const TransitGatewayConnectPeerAssociation = struct {
     /// The ID of the device.
-    device_id: ?[]const u8,
+    device_id: ?[]const u8 = null,
 
     /// The ID of the global network.
-    global_network_id: ?[]const u8,
+    global_network_id: ?[]const u8 = null,
 
     /// The ID of the link.
-    link_id: ?[]const u8,
+    link_id: ?[]const u8 = null,
 
     /// The state of the association.
-    state: ?TransitGatewayConnectPeerAssociationState,
+    state: ?TransitGatewayConnectPeerAssociationState = null,
 
     /// The Amazon Resource Name (ARN) of the transit gateway Connect peer.
-    transit_gateway_connect_peer_arn: ?[]const u8,
+    transit_gateway_connect_peer_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .device_id = "DeviceId",

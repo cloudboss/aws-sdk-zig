@@ -4,13 +4,13 @@ const EntityState = @import("entity_state.zig").EntityState;
 /// Operation.
 pub const ListGroupsFilters = struct {
     /// Filters only groups with the provided name prefix.
-    name_prefix: ?[]const u8,
+    name_prefix: ?[]const u8 = null,
 
     /// Filters only groups with the provided primary email prefix.
-    primary_email_prefix: ?[]const u8,
+    primary_email_prefix: ?[]const u8 = null,
 
     /// Filters only groups with the provided state.
-    state: ?EntityState,
+    state: ?EntityState = null,
 
     pub const json_field_names = .{
         .name_prefix = "NamePrefix",

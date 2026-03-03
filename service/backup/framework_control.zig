@@ -6,7 +6,7 @@ const ControlScope = @import("control_scope.zig").ControlScope;
 /// must contain at least one control.
 pub const FrameworkControl = struct {
     /// The name/value pairs.
-    control_input_parameters: ?[]const ControlInputParameter,
+    control_input_parameters: ?[]const ControlInputParameter = null,
 
     /// The name of a control. This name is between 1 and 256 characters.
     control_name: []const u8,
@@ -19,7 +19,7 @@ pub const FrameworkControl = struct {
     ///
     /// For more information, see [
     /// `ControlScope`.](https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ControlScope.html)
-    control_scope: ?ControlScope,
+    control_scope: ?ControlScope = null,
 
     pub const json_field_names = .{
         .control_input_parameters = "ControlInputParameters",

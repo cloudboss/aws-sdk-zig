@@ -9,15 +9,15 @@ const Unit = @import("unit.zig").Unit;
 pub const CurrentMetric = struct {
     /// Out of the box current metrics or custom metrics can be referenced via this
     /// field. This field is a valid AWS Connect Arn or a UUID.
-    metric_id: ?[]const u8,
+    metric_id: ?[]const u8 = null,
 
     /// The name of the metric.
-    name: ?CurrentMetricName,
+    name: ?CurrentMetricName = null,
 
     /// The Unit parameter is not supported for custom metrics.
     ///
     /// The unit for the metric.
-    unit: ?Unit,
+    unit: ?Unit = null,
 
     pub const json_field_names = .{
         .metric_id = "MetricId",

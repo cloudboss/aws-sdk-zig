@@ -3,7 +3,7 @@
 /// and is delivered to your premises.
 pub const EgressGatewayBridge = struct {
     /// The ID of the instance running this bridge.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The maximum expected bitrate (in bps) of the egress bridge.
     max_bitrate: i32,

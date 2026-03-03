@@ -5,11 +5,11 @@ const IgnoreNearExpected = @import("ignore_near_expected.zig").IgnoreNearExpecte
 pub const RandomCutForestConfiguration = struct {
     /// Configuration for ignoring values that are near expected values from above
     /// during anomaly detection.
-    ignore_near_expected_from_above: ?IgnoreNearExpected,
+    ignore_near_expected_from_above: ?IgnoreNearExpected = null,
 
     /// Configuration for ignoring values that are near expected values from below
     /// during anomaly detection.
-    ignore_near_expected_from_below: ?IgnoreNearExpected,
+    ignore_near_expected_from_below: ?IgnoreNearExpected = null,
 
     /// The Prometheus query used to retrieve the time-series data for anomaly
     /// detection.

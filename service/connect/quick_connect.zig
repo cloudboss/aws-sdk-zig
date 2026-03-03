@@ -5,29 +5,29 @@ const QuickConnectConfig = @import("quick_connect_config.zig").QuickConnectConfi
 /// Contains information about a quick connect.
 pub const QuickConnect = struct {
     /// The description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where this resource was last modified.
-    last_modified_region: ?[]const u8,
+    last_modified_region: ?[]const u8 = null,
 
     /// The timestamp when this resource was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the quick connect.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the quick connect.
-    quick_connect_arn: ?[]const u8,
+    quick_connect_arn: ?[]const u8 = null,
 
     /// Contains information about the quick connect.
-    quick_connect_config: ?QuickConnectConfig,
+    quick_connect_config: ?QuickConnectConfig = null,
 
     /// The identifier for the quick connect.
-    quick_connect_id: ?[]const u8,
+    quick_connect_id: ?[]const u8 = null,
 
     /// The tags used to organize, track, or control access for this resource. For
     /// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .description = "Description",

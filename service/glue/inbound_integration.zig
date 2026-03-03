@@ -8,13 +8,13 @@ pub const InboundIntegration = struct {
     create_time: i64,
 
     /// A list of errors associated with the integration.
-    errors: ?[]const IntegrationError,
+    errors: ?[]const IntegrationError = null,
 
     /// The ARN of the zero-ETL integration.
     integration_arn: []const u8,
 
     /// Properties associated with the integration.
-    integration_config: ?IntegrationConfig,
+    integration_config: ?IntegrationConfig = null,
 
     /// The ARN of the source resource for the integration.
     source_arn: []const u8,

@@ -6,10 +6,10 @@ const RangedConnectionDetails = @import("ranged_connection_details.zig").RangedC
 /// Information about AwsGroundStationAgentEndpoint.
 pub const AwsGroundStationAgentEndpoint = struct {
     /// The status of AgentEndpoint.
-    agent_status: ?AgentStatus,
+    agent_status: ?AgentStatus = null,
 
     /// The results of the audit.
-    audit_results: ?AuditResults,
+    audit_results: ?AuditResults = null,
 
     /// The egress address of AgentEndpoint.
     egress_address: ConnectionDetails,

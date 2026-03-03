@@ -5,13 +5,13 @@ const EntityType = @import("entity_type.zig").EntityType;
 /// relate to an entity.
 pub const UnmappedAttribute = struct {
     /// The specific attribute that has been extracted but not mapped to an entity.
-    attribute: ?Attribute,
+    attribute: ?Attribute = null,
 
     /// The type of the unmapped attribute, could be one of the following values:
     /// "MEDICATION",
     /// "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or
     /// "PROTECTED_HEALTH_INFORMATION".
-    @"type": ?EntityType,
+    @"type": ?EntityType = null,
 
     pub const json_field_names = .{
         .attribute = "Attribute",

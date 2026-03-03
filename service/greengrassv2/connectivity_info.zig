@@ -5,14 +5,14 @@ pub const ConnectivityInfo = struct {
     /// The IP address or DNS address where client devices can connect to an MQTT
     /// broker on the
     /// Greengrass core device.
-    host_address: ?[]const u8,
+    host_address: ?[]const u8 = null,
 
     /// An ID for the connectivity information.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Additional metadata to provide to client devices that connect to this core
     /// device.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     /// The port where the MQTT broker operates on the core device. This port is
     /// typically 8883,

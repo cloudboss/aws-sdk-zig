@@ -6,27 +6,27 @@ const SourceDetails = @import("source_details.zig").SourceDetails;
 pub const TextSegment = struct {
     /// The zero-based location in the response string where the source attribution
     /// starts.
-    begin_offset: ?i32,
+    begin_offset: ?i32 = null,
 
     /// The zero-based location in the response string where the source attribution
     /// ends.
-    end_offset: ?i32,
+    end_offset: ?i32 = null,
 
     /// The identifier of the media object associated with the text segment in the
     /// source attribution.
-    media_id: ?[]const u8,
+    media_id: ?[]const u8 = null,
 
     /// The MIME type (image/png) of the media object associated with the text
     /// segment in the source attribution.
-    media_mime_type: ?[]const u8,
+    media_mime_type: ?[]const u8 = null,
 
     /// The relevant text excerpt from a source that was used to generate a citation
     /// text segment in an Amazon Q Business chat response.
-    snippet_excerpt: ?SnippetExcerpt,
+    snippet_excerpt: ?SnippetExcerpt = null,
 
     /// Source information for a segment of extracted text, including its media
     /// type.
-    source_details: ?SourceDetails,
+    source_details: ?SourceDetails = null,
 
     pub const json_field_names = .{
         .begin_offset = "beginOffset",

@@ -12,24 +12,24 @@ const VpcConfiguration = @import("vpc_configuration.zig").VpcConfiguration;
 pub const AmazonopensearchserviceDestinationConfiguration = struct {
     /// The buffering options. If no value is specified, the default values for
     /// AmazonopensearchserviceBufferingHints are used.
-    buffering_hints: ?AmazonopensearchserviceBufferingHints,
+    buffering_hints: ?AmazonopensearchserviceBufferingHints = null,
 
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The endpoint to use when communicating with the cluster. Specify either this
     /// ClusterEndpoint or the DomainARN field.
-    cluster_endpoint: ?[]const u8,
+    cluster_endpoint: ?[]const u8 = null,
 
     /// Indicates the method for setting up document ID. The supported methods are
     /// Firehose generated document ID and OpenSearch Service generated document ID.
-    document_id_options: ?DocumentIdOptions,
+    document_id_options: ?DocumentIdOptions = null,
 
     /// The ARN of the Amazon OpenSearch Service domain. The IAM role must have
     /// permissions for
     /// DescribeElasticsearchDomain, DescribeElasticsearchDomains, and
     /// DescribeElasticsearchDomainConfig after assuming the role specified in
     /// RoleARN.
-    domain_arn: ?[]const u8,
+    domain_arn: ?[]const u8 = null,
 
     /// The ElasticsearAmazon OpenSearch Service index name.
     index_name: []const u8,
@@ -37,13 +37,13 @@ pub const AmazonopensearchserviceDestinationConfiguration = struct {
     /// The Amazon OpenSearch Service index rotation period. Index rotation appends
     /// a timestamp
     /// to the IndexName to facilitate the expiration of old data.
-    index_rotation_period: ?AmazonopensearchserviceIndexRotationPeriod,
+    index_rotation_period: ?AmazonopensearchserviceIndexRotationPeriod = null,
 
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The retry behavior in case Firehose is unable to deliver documents to
     /// Amazon OpenSearch Service. The default value is 300 (5 minutes).
-    retry_options: ?AmazonopensearchserviceRetryOptions,
+    retry_options: ?AmazonopensearchserviceRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose
     /// for calling the Amazon OpenSearch Service Configuration API and for indexing
@@ -58,7 +58,7 @@ pub const AmazonopensearchserviceDestinationConfiguration = struct {
     /// records to Amazon S3, and also writes failed documents with
     /// AmazonOpenSearchService-failed/
     /// appended to the prefix.
-    s3_backup_mode: ?AmazonopensearchserviceS3BackupMode,
+    s3_backup_mode: ?AmazonopensearchserviceS3BackupMode = null,
 
     s3_configuration: S3DestinationConfiguration,
 
@@ -67,9 +67,9 @@ pub const AmazonopensearchserviceDestinationConfiguration = struct {
     /// type per index. If you try to specify a new type for an existing index that
     /// already has
     /// another type, Firehose returns an error during run time.
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 
-    vpc_configuration: ?VpcConfiguration,
+    vpc_configuration: ?VpcConfiguration = null,
 
     pub const json_field_names = .{
         .buffering_hints = "BufferingHints",

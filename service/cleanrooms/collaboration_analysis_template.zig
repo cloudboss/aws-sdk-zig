@@ -10,7 +10,7 @@ const AnalysisTemplateValidationStatusDetail = @import("analysis_template_valida
 /// The analysis template within a collaboration.
 pub const CollaborationAnalysisTemplate = struct {
     /// The analysis parameters that have been specified in the analysis template.
-    analysis_parameters: ?[]const AnalysisParameter,
+    analysis_parameters: ?[]const AnalysisParameter = null,
 
     /// The Amazon Resource Name (ARN) of the analysis template.
     arn: []const u8,
@@ -30,7 +30,7 @@ pub const CollaborationAnalysisTemplate = struct {
     creator_account_id: []const u8,
 
     /// The description of the analysis template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The configuration that specifies the level of detail in error messages
     /// returned by analyses using this template. When set to `DETAILED`, error
@@ -38,7 +38,7 @@ pub const CollaborationAnalysisTemplate = struct {
     /// jobs. Detailed error messages may expose underlying data, including
     /// sensitive information. Recommended for faster troubleshooting in development
     /// and testing environments.
-    error_message_configuration: ?ErrorMessageConfiguration,
+    error_message_configuration: ?ErrorMessageConfiguration = null,
 
     /// The format of the analysis template in the collaboration.
     format: AnalysisFormat,
@@ -53,20 +53,20 @@ pub const CollaborationAnalysisTemplate = struct {
     schema: AnalysisSchema,
 
     /// The source of the analysis template within a collaboration.
-    source: ?AnalysisSource,
+    source: ?AnalysisSource = null,
 
     /// The source metadata for the collaboration analysis template.
-    source_metadata: ?AnalysisSourceMetadata,
+    source_metadata: ?AnalysisSourceMetadata = null,
 
     /// The synthetic data generation parameters configured for this collaboration
     /// analysis template.
-    synthetic_data_parameters: ?SyntheticDataParameters,
+    synthetic_data_parameters: ?SyntheticDataParameters = null,
 
     /// The time that the analysis template in the collaboration was last updated.
     update_time: i64,
 
     /// The validations that were performed.
-    validations: ?[]const AnalysisTemplateValidationStatusDetail,
+    validations: ?[]const AnalysisTemplateValidationStatusDetail = null,
 
     pub const json_field_names = .{
         .analysis_parameters = "analysisParameters",

@@ -12,7 +12,7 @@ pub const ApplicationVersionSummary = struct {
     status: ApplicationVersionLifecycle,
 
     /// The reason for the reported status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_version = "applicationVersion",

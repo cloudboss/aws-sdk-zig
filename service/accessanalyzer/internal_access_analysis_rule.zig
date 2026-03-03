@@ -7,7 +7,7 @@ pub const InternalAccessAnalysisRule = struct {
     /// A list of rules for the internal access analyzer containing criteria to
     /// include in analysis. Only resources that meet the rule criteria will
     /// generate findings.
-    inclusions: ?[]const InternalAccessAnalysisRuleCriteria,
+    inclusions: ?[]const InternalAccessAnalysisRuleCriteria = null,
 
     pub const json_field_names = .{
         .inclusions = "inclusions",

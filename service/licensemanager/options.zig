@@ -34,7 +34,7 @@ pub const Options = struct {
     /// Use this value to activate a grant and disable other active grants in any
     /// member accounts for the same product. This action will also replace their
     /// previously activated grants with this activated grant.
-    activation_override_behavior: ?ActivationOverrideBehavior,
+    activation_override_behavior: ?ActivationOverrideBehavior = null,
 
     pub const json_field_names = .{
         .activation_override_behavior = "ActivationOverrideBehavior",

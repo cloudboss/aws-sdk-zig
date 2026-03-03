@@ -10,10 +10,10 @@ const PipelineContext = @import("pipeline_context.zig").PipelineContext;
 /// job.
 pub const JobData = struct {
     /// Represents information about an action configuration.
-    action_configuration: ?ActionConfiguration,
+    action_configuration: ?ActionConfiguration = null,
 
     /// Represents information about an action type.
-    action_type_id: ?ActionTypeId,
+    action_type_id: ?ActionTypeId = null,
 
     /// Represents an Amazon Web Services session credentials object. These
     /// credentials are
@@ -22,29 +22,29 @@ pub const JobData = struct {
     /// They can be used to access input and output artifacts in the S3 bucket used
     /// to store
     /// artifacts for the pipeline in CodePipeline.
-    artifact_credentials: ?AWSSessionCredentials,
+    artifact_credentials: ?AWSSessionCredentials = null,
 
     /// A system-generated token, such as a deployment ID, required by a job to
     /// continue
     /// the job asynchronously.
-    continuation_token: ?[]const u8,
+    continuation_token: ?[]const u8 = null,
 
     /// Represents information about the key used to encrypt data in the artifact
     /// store,
     /// such as an KMS key.
-    encryption_key: ?EncryptionKey,
+    encryption_key: ?EncryptionKey = null,
 
     /// The artifact supplied to the job.
-    input_artifacts: ?[]const Artifact,
+    input_artifacts: ?[]const Artifact = null,
 
     /// The output of the job.
-    output_artifacts: ?[]const Artifact,
+    output_artifacts: ?[]const Artifact = null,
 
     /// Represents information about a pipeline to a job worker.
     ///
     /// Includes `pipelineArn` and `pipelineExecutionId` for
     /// custom jobs.
-    pipeline_context: ?PipelineContext,
+    pipeline_context: ?PipelineContext = null,
 
     pub const json_field_names = .{
         .action_configuration = "actionConfiguration",

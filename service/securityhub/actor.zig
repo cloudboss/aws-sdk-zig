@@ -10,13 +10,13 @@ const ActorUser = @import("actor_user.zig").ActorUser;
 /// ](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html) in the *Amazon GuardDuty User Guide*.
 pub const Actor = struct {
     /// The ID of the threat actor.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Contains information about the user session where the activity initiated.
-    session: ?ActorSession,
+    session: ?ActorSession = null,
 
     /// Contains information about the user credentials used by the threat actor.
-    user: ?ActorUser,
+    user: ?ActorUser = null,
 
     pub const json_field_names = .{
         .id = "Id",

@@ -9,7 +9,7 @@ pub const MetricTransformation = struct {
     /// (Optional) The value to emit when a filter pattern does not match a log
     /// event. This
     /// value can be null.
-    default_value: ?f64,
+    default_value: ?f64 = null,
 
     /// The fields to use as dimensions for the metric. One metric filter can
     /// include as many as
@@ -33,7 +33,7 @@ pub const MetricTransformation = struct {
     /// expected. For more information, see [
     /// Creating a Billing Alarm to Monitor Your Estimated Amazon Web Services
     /// Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).
-    dimensions: ?[]const aws.map.StringMapEntry,
+    dimensions: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the CloudWatch metric.
     metric_name: []const u8,
@@ -51,7 +51,7 @@ pub const MetricTransformation = struct {
 
     /// The unit to assign to the metric. If you omit this, the unit is set as
     /// `None`.
-    unit: ?StandardUnit,
+    unit: ?StandardUnit = null,
 
     pub const json_field_names = .{
         .default_value = "defaultValue",

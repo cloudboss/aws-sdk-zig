@@ -1,10 +1,10 @@
 /// A port range to specify the destination ports to inspect for.
 pub const RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts = struct {
     /// The starting port value for the port range.
-    from_port: ?i32,
+    from_port: ?i32 = null,
 
     /// The ending port value for the port range.
-    to_port: ?i32,
+    to_port: ?i32 = null,
 
     pub const json_field_names = .{
         .from_port = "FromPort",

@@ -3,7 +3,7 @@ const GuardrailContentFilter = @import("guardrail_content_filter.zig").Guardrail
 /// The details of the policy assessment in the Guardrails filter.
 pub const GuardrailContentPolicyAssessment = struct {
     /// The filter details of the policy assessment used in the Guardrails filter.
-    filters: ?[]const GuardrailContentFilter,
+    filters: ?[]const GuardrailContentFilter = null,
 
     pub const json_field_names = .{
         .filters = "filters",

@@ -14,7 +14,7 @@ pub const RouteRoad = struct {
     towards: []const LocalizedString,
 
     /// The type of road.
-    @"type": ?RouteRoadType,
+    @"type": ?RouteRoadType = null,
 
     pub const json_field_names = .{
         .road_name = "RoadName",

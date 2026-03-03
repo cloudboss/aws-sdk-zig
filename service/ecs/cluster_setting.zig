@@ -28,7 +28,7 @@ const ClusterSettingName = @import("cluster_setting_name.zig").ClusterSettingNam
 /// in the *Amazon Elastic Container Service Developer Guide*.
 pub const ClusterSetting = struct {
     /// The name of the cluster setting. The value is `containerInsights`.
-    name: ?ClusterSettingName,
+    name: ?ClusterSettingName = null,
 
     /// The value to set for the cluster setting. The supported values are
     /// `enhanced`, `enabled`, and `disabled`.
@@ -42,7 +42,7 @@ pub const ClusterSetting = struct {
     /// If a cluster value is specified, it will override the `containerInsights`
     /// value set with
     /// [PutAccountSetting](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html) or [PutAccountSettingDefault](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html).
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

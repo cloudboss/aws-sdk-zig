@@ -9,10 +9,10 @@ const SegmentAttributeValue = @import("segment_attribute_value.zig").SegmentAttr
 /// of the segment attribute.
 pub const ContactSearchSummarySegmentAttributeValue = struct {
     /// The key and value of a segment attribute.
-    value_map: ?[]const aws.map.MapEntry(SegmentAttributeValue),
+    value_map: ?[]const aws.map.MapEntry(SegmentAttributeValue) = null,
 
     /// The value of a segment attribute represented as a string.
-    value_string: ?[]const u8,
+    value_string: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .value_map = "ValueMap",

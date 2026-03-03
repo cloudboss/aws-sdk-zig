@@ -10,7 +10,7 @@ const ActionTypeUrls = @import("action_type_urls.zig").ActionTypeUrls;
 /// is created or updated.
 pub const ActionTypeDeclaration = struct {
     /// The description for the action type to be updated.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about the executor for an action type that was created with any
     /// supported
@@ -33,13 +33,13 @@ pub const ActionTypeDeclaration = struct {
     output_artifact_details: ActionTypeArtifactDetails,
 
     /// Details identifying the accounts with permissions to use the action type.
-    permissions: ?ActionTypePermissions,
+    permissions: ?ActionTypePermissions = null,
 
     /// The properties of the action type to be updated.
-    properties: ?[]const ActionTypeProperty,
+    properties: ?[]const ActionTypeProperty = null,
 
     /// The links associated with the action type to be updated.
-    urls: ?ActionTypeUrls,
+    urls: ?ActionTypeUrls = null,
 
     pub const json_field_names = .{
         .description = "description",

@@ -8,10 +8,10 @@ pub const TcpRoute = struct {
     action: TcpRouteAction,
 
     /// An object that represents the criteria for determining a request match.
-    match: ?TcpRouteMatch,
+    match: ?TcpRouteMatch = null,
 
     /// An object that represents types of timeouts.
-    timeout: ?TcpTimeout,
+    timeout: ?TcpTimeout = null,
 
     pub const json_field_names = .{
         .action = "action",

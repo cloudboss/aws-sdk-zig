@@ -4,7 +4,7 @@ const RegistrationStatus = @import("registration_status.zig").RegistrationStatus
 /// any.
 pub const TimestreamRegistrationResponse = struct {
     /// A message associated with a registration error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The status of registering your Amazon Timestream resources. The status can
     /// be one of
@@ -13,13 +13,13 @@ pub const TimestreamRegistrationResponse = struct {
     registration_status: RegistrationStatus,
 
     /// The Amazon Resource Name (ARN) of the Timestream database.
-    timestream_database_arn: ?[]const u8,
+    timestream_database_arn: ?[]const u8 = null,
 
     /// The name of the Timestream database.
     timestream_database_name: []const u8,
 
     /// The ARN of the Timestream database table.
-    timestream_table_arn: ?[]const u8,
+    timestream_table_arn: ?[]const u8 = null,
 
     /// The name of the Timestream database table.
     timestream_table_name: []const u8,

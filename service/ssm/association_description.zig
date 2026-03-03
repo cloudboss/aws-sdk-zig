@@ -12,7 +12,7 @@ const AlarmStateInformation = @import("alarm_state_information.zig").AlarmStateI
 
 /// Describes the parameters for a document.
 pub const AssociationDescription = struct {
-    alarm_configuration: ?AlarmConfiguration,
+    alarm_configuration: ?AlarmConfiguration = null,
 
     /// By default, when you create a new associations, the system runs it
     /// immediately after it is
@@ -24,20 +24,20 @@ pub const AssociationDescription = struct {
     apply_only_at_cron_interval: bool = false,
 
     /// The association ID.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The association name.
-    association_name: ?[]const u8,
+    association_name: ?[]const u8 = null,
 
     /// The association version.
-    association_version: ?[]const u8,
+    association_version: ?[]const u8 = null,
 
     /// Choose the parameter that will define how your automation will branch out.
     /// This target is
     /// required for associations that use an Automation runbook and target
     /// resources by using rate
     /// controls. Automation is a tool in Amazon Web Services Systems Manager.
-    automation_target_parameter_name: ?[]const u8,
+    automation_target_parameter_name: ?[]const u8 = null,
 
     /// The names or Amazon Resource Names (ARNs) of the Change Calendar type
     /// documents your
@@ -45,35 +45,35 @@ pub const AssociationDescription = struct {
     /// calendar is open. For
     /// more information, see [Amazon Web Services Systems Manager Change
     /// Calendar](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar) in the *Amazon Web Services Systems Manager User Guide*.
-    calendar_names: ?[]const []const u8,
+    calendar_names: ?[]const []const u8 = null,
 
     /// The severity level that is assigned to the association.
-    compliance_severity: ?AssociationComplianceSeverity,
+    compliance_severity: ?AssociationComplianceSeverity = null,
 
     /// The date when the association was made.
-    date: ?i64,
+    date: ?i64 = null,
 
     /// The document version.
-    document_version: ?[]const u8,
+    document_version: ?[]const u8 = null,
 
     /// The number of hours that an association can run on specified targets. After
     /// the resulting
     /// cutoff time passes, associations that are currently running are cancelled,
     /// and no pending
     /// executions are started on remaining targets.
-    duration: ?i32,
+    duration: ?i32 = null,
 
     /// The managed node ID.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The date on which the association was last run.
-    last_execution_date: ?i64,
+    last_execution_date: ?i64 = null,
 
     /// The last date on which the association was successfully run.
-    last_successful_execution_date: ?i64,
+    last_successful_execution_date: ?i64 = null,
 
     /// The date when the association was last updated.
-    last_update_association_date: ?i64,
+    last_update_association_date: ?i64 = null,
 
     /// The maximum number of targets allowed to run the association at the same
     /// time. You can
@@ -88,7 +88,7 @@ pub const AssociationDescription = struct {
     /// association interval, the new managed node will process its association
     /// within the limit
     /// specified for `MaxConcurrency`.
-    max_concurrency: ?[]const u8,
+    max_concurrency: ?[]const u8 = null,
 
     /// The number of errors that are allowed before the system stops sending
     /// requests to run the
@@ -111,28 +111,28 @@ pub const AssociationDescription = struct {
     /// that there won't be more than max-errors failed executions, set
     /// `MaxConcurrency` to 1
     /// so that executions proceed one at a time.
-    max_errors: ?[]const u8,
+    max_errors: ?[]const u8 = null,
 
     /// The name of the SSM document.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// An S3 bucket where you want to store the output details of the request.
-    output_location: ?InstanceAssociationOutputLocation,
+    output_location: ?InstanceAssociationOutputLocation = null,
 
     /// Information about the association.
-    overview: ?AssociationOverview,
+    overview: ?AssociationOverview = null,
 
     /// A description of the parameters for a document.
-    parameters: ?[]const aws.map.MapEntry([]const []const u8),
+    parameters: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// A cron expression that specifies a schedule when the association runs.
-    schedule_expression: ?[]const u8,
+    schedule_expression: ?[]const u8 = null,
 
     /// Number of days to wait after the scheduled day to run an association.
-    schedule_offset: ?i32,
+    schedule_offset: ?i32 = null,
 
     /// The association status.
-    status: ?AssociationStatus,
+    status: ?AssociationStatus = null,
 
     /// The mode for generating association compliance. You can specify `AUTO` or
     /// `MANUAL`. In `AUTO` mode, the system uses the status of the association
@@ -149,23 +149,23 @@ pub const AssociationDescription = struct {
     /// is managed by your direct call to the PutComplianceItems API operation.
     ///
     /// By default, all associations use `AUTO` mode.
-    sync_compliance: ?AssociationSyncCompliance,
+    sync_compliance: ?AssociationSyncCompliance = null,
 
     /// The combination of Amazon Web Services Regions and Amazon Web Services
     /// accounts where you want to run the
     /// association.
-    target_locations: ?[]const TargetLocation,
+    target_locations: ?[]const TargetLocation = null,
 
     /// A key-value mapping of document parameters to target resources. Both Targets
     /// and TargetMaps
     /// can't be specified together.
-    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8),
+    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8) = null,
 
     /// The managed nodes targeted by the request.
-    targets: ?[]const Target,
+    targets: ?[]const Target = null,
 
     /// The CloudWatch alarm that was invoked during the association.
-    triggered_alarms: ?[]const AlarmStateInformation,
+    triggered_alarms: ?[]const AlarmStateInformation = null,
 
     pub const json_field_names = .{
         .alarm_configuration = "AlarmConfiguration",

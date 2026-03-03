@@ -4,19 +4,19 @@ const AttachmentStatus = @import("attachment_status.zig").AttachmentStatus;
 /// The details of a file uploaded during chat.
 pub const AttachmentOutput = struct {
     /// The unique identifier of the Amazon Q Business attachment.
-    attachment_id: ?[]const u8,
+    attachment_id: ?[]const u8 = null,
 
     /// The unique identifier of the Amazon Q Business conversation.
-    conversation_id: ?[]const u8,
+    conversation_id: ?[]const u8 = null,
 
     /// An error associated with a file uploaded during chat.
-    @"error": ?ErrorDetail,
+    @"error": ?ErrorDetail = null,
 
     /// The name of a file uploaded during chat.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The status of a file uploaded during chat.
-    status: ?AttachmentStatus,
+    status: ?AttachmentStatus = null,
 
     pub const json_field_names = .{
         .attachment_id = "attachmentId",

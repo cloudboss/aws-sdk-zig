@@ -3,10 +3,10 @@ const OrganizationNodeType = @import("organization_node_type.zig").OrganizationN
 /// Information about the organization node.
 pub const OrganizationNode = struct {
     /// The organization node type.
-    @"type": ?OrganizationNodeType,
+    @"type": ?OrganizationNodeType = null,
 
     /// The identifier of the organization node.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

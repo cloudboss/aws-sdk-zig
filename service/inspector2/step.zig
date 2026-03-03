@@ -3,7 +3,7 @@ pub const Step = struct {
     /// The component ARN. The ARN can be null and is not displayed in the Amazon
     /// Web Services
     /// console.
-    component_arn: ?[]const u8,
+    component_arn: ?[]const u8 = null,
 
     /// The component ID.
     component_id: []const u8,

@@ -45,7 +45,7 @@ pub const SourceKeyword = struct {
     ///
     /// * When `keywordInputType` is `INPUT_TEXT`, text must be
     /// entered as manual evidence.
-    keyword_input_type: ?KeywordInputType,
+    keyword_input_type: ?KeywordInputType = null,
 
     /// The value of the keyword that's used when mapping a control data source. For
     /// example,
@@ -146,7 +146,7 @@ pub const SourceKeyword = struct {
     /// review the Amazon Web Services service prefix and action names in the
     /// [Service Authorization
     /// Reference](https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html).
-    keyword_value: ?[]const u8,
+    keyword_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .keyword_input_type = "keywordInputType",

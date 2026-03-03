@@ -5,10 +5,10 @@ const PromptRouterTrace = @import("prompt_router_trace.zig").PromptRouterTrace;
 /// [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).
 pub const ConverseTrace = struct {
     /// The guardrail trace object.
-    guardrail: ?GuardrailTraceAssessment,
+    guardrail: ?GuardrailTraceAssessment = null,
 
     /// The request's prompt router.
-    prompt_router: ?PromptRouterTrace,
+    prompt_router: ?PromptRouterTrace = null,
 
     pub const json_field_names = .{
         .guardrail = "guardrail",

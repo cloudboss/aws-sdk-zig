@@ -5,7 +5,7 @@ const FeedbackValueType = @import("feedback_value_type.zig").FeedbackValueType;
 /// displayed in an `AdminListUserAuthEvents` response.
 pub const EventFeedbackType = struct {
     /// The date that you or your user submitted the feedback.
-    feedback_date: ?i64,
+    feedback_date: ?i64 = null,
 
     /// Your feedback to the authentication event. When you provide a
     /// `FeedbackValue`

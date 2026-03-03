@@ -17,7 +17,7 @@ pub const ObjectReference = struct {
     /// * */some/path* - Identifies the object based on path
     ///
     /// * *#SomeBatchReference* - Identifies the object in a batch call
-    selector: ?[]const u8,
+    selector: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .selector = "Selector",

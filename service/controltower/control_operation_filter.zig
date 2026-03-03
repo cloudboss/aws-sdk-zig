@@ -5,19 +5,19 @@ const ControlOperationStatus = @import("control_operation_status.zig").ControlOp
 /// filter.
 pub const ControlOperationFilter = struct {
     /// The set of `controlIdentifier` returned by the filter.
-    control_identifiers: ?[]const []const u8,
+    control_identifiers: ?[]const []const u8 = null,
 
     /// The set of `ControlOperation` objects returned by the filter.
-    control_operation_types: ?[]const ControlOperationType,
+    control_operation_types: ?[]const ControlOperationType = null,
 
     /// The set `controlIdentifier` of enabled controls selected by the filter.
-    enabled_control_identifiers: ?[]const []const u8,
+    enabled_control_identifiers: ?[]const []const u8 = null,
 
     /// Lists the status of control operations.
-    statuses: ?[]const ControlOperationStatus,
+    statuses: ?[]const ControlOperationStatus = null,
 
     /// The set of `targetIdentifier` objects returned by the filter.
-    target_identifiers: ?[]const []const u8,
+    target_identifiers: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .control_identifiers = "controlIdentifiers",

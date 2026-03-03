@@ -30,7 +30,7 @@ pub const ConfiguredTableSummary = struct {
     name: []const u8,
 
     /// The selected analysis methods for the configured table summary.
-    selected_analysis_methods: ?[]const SelectedAnalysisMethod,
+    selected_analysis_methods: ?[]const SelectedAnalysisMethod = null,
 
     /// The time the configured table was last updated.
     update_time: i64,

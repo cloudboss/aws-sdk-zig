@@ -4,7 +4,7 @@ const DataIntegrationFlowTransformationType = @import("data_integration_flow_tra
 /// The DataIntegrationFlow transformation parameters.
 pub const DataIntegrationFlowTransformation = struct {
     /// The SQL DataIntegrationFlow transformation configuration.
-    sql_transformation: ?DataIntegrationFlowSQLTransformationConfiguration,
+    sql_transformation: ?DataIntegrationFlowSQLTransformationConfiguration = null,
 
     /// The DataIntegrationFlow transformation type.
     transformation_type: DataIntegrationFlowTransformationType,

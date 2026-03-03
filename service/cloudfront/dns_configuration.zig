@@ -6,7 +6,7 @@ pub const DnsConfiguration = struct {
     domain: []const u8,
 
     /// Explains the status of the DNS configuration.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The status of your domain name.
     ///

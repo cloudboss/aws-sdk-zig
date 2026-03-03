@@ -6,12 +6,12 @@ pub const AthenaTableReference = struct {
     database_name: []const u8,
 
     /// The output location for the Athena table.
-    output_location: ?[]const u8,
+    output_location: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the Athena table is located. This
     /// parameter is required to uniquely identify and access tables across
     /// different Regions.
-    region: ?CommercialRegion,
+    region: ?CommercialRegion = null,
 
     /// The table reference.
     table_name: []const u8,

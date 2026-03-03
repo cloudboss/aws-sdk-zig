@@ -6,23 +6,23 @@ const Output = @import("output.zig").Output;
 pub const OutputGroup = struct {
     /// Use automated encoding to have MediaConvert choose your encoding settings
     /// for you, based on characteristics of your input video.
-    automated_encoding_settings: ?AutomatedEncodingSettings,
+    automated_encoding_settings: ?AutomatedEncodingSettings = null,
 
     /// Use Custom Group Name to specify a name for the output group. This value is
     /// displayed on the console and can make your job settings JSON more
     /// human-readable. It does not affect your outputs. Use up to twelve characters
     /// that are either letters, numbers, spaces, or underscores.
-    custom_name: ?[]const u8,
+    custom_name: ?[]const u8 = null,
 
     /// Name of the output group
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Output Group settings, including type
-    output_group_settings: ?OutputGroupSettings,
+    output_group_settings: ?OutputGroupSettings = null,
 
     /// This object holds groups of encoding settings, one group of settings per
     /// output.
-    outputs: ?[]const Output,
+    outputs: ?[]const Output = null,
 
     pub const json_field_names = .{
         .automated_encoding_settings = "AutomatedEncodingSettings",

@@ -5,10 +5,10 @@ pub const HttpEndpointConfiguration = struct {
     /// The access key required for Kinesis Firehose to authenticate with the HTTP
     /// endpoint
     /// selected as the destination.
-    access_key: ?[]const u8,
+    access_key: ?[]const u8 = null,
 
     /// The name of the HTTP endpoint selected as the destination.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The URL of the HTTP endpoint selected as the destination.
     ///

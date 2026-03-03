@@ -7,7 +7,7 @@ pub const BatchGetAttributeOutput = struct {
 
     /// The metadata forms that are part of the results of the BatchGetAttribute
     /// action.
-    forms: ?[]const FormOutput,
+    forms: ?[]const FormOutput = null,
 
     pub const json_field_names = .{
         .attribute_identifier = "attributeIdentifier",

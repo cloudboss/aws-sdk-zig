@@ -6,9 +6,9 @@ const DataDestination = @import("data_destination.zig").DataDestination;
 /// provide the listed `PredictorBacktestExportJobArn`.
 pub const PredictorBacktestExportJobSummary = struct {
     /// When the predictor backtest export job was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
-    destination: ?DataDestination,
+    destination: ?DataDestination = null,
 
     /// The last time the resource was modified. The timestamp depends on the status
     /// of the
@@ -24,17 +24,17 @@ pub const PredictorBacktestExportJobSummary = struct {
     ///
     /// * `ACTIVE` or `CREATE_FAILED` - When the job finished or
     /// failed.
-    last_modification_time: ?i64,
+    last_modification_time: ?i64 = null,
 
     /// Information about any errors that may have occurred during the backtest
     /// export.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the predictor backtest export job.
-    predictor_backtest_export_job_arn: ?[]const u8,
+    predictor_backtest_export_job_arn: ?[]const u8 = null,
 
     /// The name of the predictor backtest export job.
-    predictor_backtest_export_job_name: ?[]const u8,
+    predictor_backtest_export_job_name: ?[]const u8 = null,
 
     /// The status of the predictor backtest export job. States include:
     ///
@@ -47,7 +47,7 @@ pub const PredictorBacktestExportJobSummary = struct {
     ///
     /// * `DELETE_PENDING`, `DELETE_IN_PROGRESS`,
     /// `DELETE_FAILED`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

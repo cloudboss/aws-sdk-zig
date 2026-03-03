@@ -10,7 +10,7 @@ pub const Alert = struct {
     alert_message: []const u8,
 
     /// The category that MediaTailor assigns to the alert.
-    category: ?AlertCategory,
+    category: ?AlertCategory = null,
 
     /// The timestamp when the alert was last modified.
     last_modified_time: i64,

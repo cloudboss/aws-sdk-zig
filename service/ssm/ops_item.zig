@@ -35,37 +35,37 @@ pub const OpsItem = struct {
     /// The time a runbook workflow ended. Currently reported only for the OpsItem
     /// type
     /// `/aws/changerequest`.
-    actual_end_time: ?i64,
+    actual_end_time: ?i64 = null,
 
     /// The time a runbook workflow started. Currently reported only for the OpsItem
     /// type
     /// `/aws/changerequest`.
-    actual_start_time: ?i64,
+    actual_start_time: ?i64 = null,
 
     /// An OpsItem category. Category options include: Availability, Cost,
     /// Performance, Recovery,
     /// Security.
-    category: ?[]const u8,
+    category: ?[]const u8 = null,
 
     /// The ARN of the Amazon Web Services account that created the OpsItem.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The date and time the OpsItem was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The OpsItem description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ARN of the Amazon Web Services account that last updated the OpsItem.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The date and time the OpsItem was last updated.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of an Amazon Simple Notification Service
     /// (Amazon SNS) topic where
     /// notifications are sent when this OpsItem is edited or changed.
-    notifications: ?[]const OpsItemNotification,
+    notifications: ?[]const OpsItemNotification = null,
 
     /// Operational data is custom data that provides useful reference details about
     /// the OpsItem.
@@ -96,13 +96,13 @@ pub const OpsItem = struct {
     /// commands that use these keys, see
     /// [Creating OpsItems
     /// manually](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html) in the *Amazon Web Services Systems Manager User Guide*.
-    operational_data: ?[]const aws.map.MapEntry(OpsItemDataValue),
+    operational_data: ?[]const aws.map.MapEntry(OpsItemDataValue) = null,
 
     /// The OpsItem Amazon Resource Name (ARN).
-    ops_item_arn: ?[]const u8,
+    ops_item_arn: ?[]const u8 = null,
 
     /// The ID of the OpsItem.
-    ops_item_id: ?[]const u8,
+    ops_item_id: ?[]const u8 = null,
 
     /// The type of OpsItem. Systems Manager supports the following types of
     /// OpsItems:
@@ -122,48 +122,48 @@ pub const OpsItem = struct {
     /// This type of OpsItem is used by OpsCenter for aggregating and reporting on
     /// duplicate
     /// OpsItems.
-    ops_item_type: ?[]const u8,
+    ops_item_type: ?[]const u8 = null,
 
     /// The time specified in a change request for a runbook workflow to end.
     /// Currently supported
     /// only for the OpsItem type `/aws/changerequest`.
-    planned_end_time: ?i64,
+    planned_end_time: ?i64 = null,
 
     /// The time specified in a change request for a runbook workflow to start.
     /// Currently supported
     /// only for the OpsItem type `/aws/changerequest`.
-    planned_start_time: ?i64,
+    planned_start_time: ?i64 = null,
 
     /// The importance of this OpsItem in relation to other OpsItems in the system.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// One or more OpsItems that share something in common with the current
     /// OpsItem. For example,
     /// related OpsItems can include OpsItems with similar error messages, impacted
     /// resources, or
     /// statuses for the impacted resource.
-    related_ops_items: ?[]const RelatedOpsItem,
+    related_ops_items: ?[]const RelatedOpsItem = null,
 
     /// The severity of the OpsItem. Severity options range from 1 to 4.
-    severity: ?[]const u8,
+    severity: ?[]const u8 = null,
 
     /// The origin of the OpsItem, such as Amazon EC2 or Systems Manager. The
     /// impacted resource is a subset of
     /// source.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     /// The OpsItem status. For more information, see [Editing OpsItem
     /// details](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html) in the *Amazon Web Services Systems Manager User Guide*.
-    status: ?OpsItemStatus,
+    status: ?OpsItemStatus = null,
 
     /// A short heading that describes the nature of the OpsItem and the impacted
     /// resource.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The version of this OpsItem. Each time the OpsItem is edited the version
     /// number increments
     /// by one.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .actual_end_time = "ActualEndTime",

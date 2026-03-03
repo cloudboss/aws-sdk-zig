@@ -7,12 +7,12 @@
 pub const WarmThroughput = struct {
     /// Represents the number of read operations your base table can instantaneously
     /// support.
-    read_units_per_second: ?i64,
+    read_units_per_second: ?i64 = null,
 
     /// Represents the number of write operations your base table can
     /// instantaneously
     /// support.
-    write_units_per_second: ?i64,
+    write_units_per_second: ?i64 = null,
 
     pub const json_field_names = .{
         .read_units_per_second = "ReadUnitsPerSecond",

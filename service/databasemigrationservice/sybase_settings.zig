@@ -1,13 +1,13 @@
 /// Provides information that defines a SAP ASE endpoint.
 pub const SybaseSettings = struct {
     /// Database name for the endpoint.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// Endpoint connection password.
-    password: ?[]const u8,
+    password: ?[]const u8 = null,
 
     /// Endpoint TCP port. The default is 5000.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as
     /// the trusted
@@ -28,17 +28,17 @@ pub const SybaseSettings = struct {
     /// Service
     /// resources](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager) in the
     /// *Database Migration Service User Guide*.
-    secrets_manager_access_role_arn: ?[]const u8,
+    secrets_manager_access_role_arn: ?[]const u8 = null,
 
     /// The full ARN, partial ARN, or friendly name of the `SecretsManagerSecret`
     /// that contains the SAP SAE endpoint connection details.
-    secrets_manager_secret_id: ?[]const u8,
+    secrets_manager_secret_id: ?[]const u8 = null,
 
     /// Fully qualified domain name of the endpoint.
-    server_name: ?[]const u8,
+    server_name: ?[]const u8 = null,
 
     /// Endpoint connection user name.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .database_name = "DatabaseName",

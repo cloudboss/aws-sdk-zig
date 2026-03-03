@@ -6,22 +6,22 @@ const SessionContext = @import("session_context.zig").SessionContext;
 /// (STS) API.
 pub const AssumedRole = struct {
     /// The Amazon Web Services access key ID that identifies the credentials.
-    access_key_id: ?[]const u8,
+    access_key_id: ?[]const u8 = null,
 
     /// The unique identifier for the Amazon Web Services account that owns the
     /// entity that was used to get the credentials.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the entity that was used to get the
     /// credentials.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The unique identifier for the entity that was used to get the credentials.
-    principal_id: ?[]const u8,
+    principal_id: ?[]const u8 = null,
 
     /// The details of the session that was created for the credentials, including
     /// the entity that issued the session.
-    session_context: ?SessionContext,
+    session_context: ?SessionContext = null,
 
     pub const json_field_names = .{
         .access_key_id = "accessKeyId",

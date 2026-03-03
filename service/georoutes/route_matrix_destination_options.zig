@@ -12,10 +12,10 @@ pub const RouteMatrixDestinationOptions = struct {
     heading: f64 = 0,
 
     /// Options to configure matching the provided position to the road network.
-    matching: ?RouteMatrixMatchingOptions,
+    matching: ?RouteMatrixMatchingOptions = null,
 
     /// Options to configure matching the provided position to a side of the street.
-    side_of_street: ?RouteMatrixSideOfStreetOptions,
+    side_of_street: ?RouteMatrixSideOfStreetOptions = null,
 
     pub const json_field_names = .{
         .avoid_actions_for_distance = "AvoidActionsForDistance",

@@ -26,7 +26,7 @@ pub const AutoMLCandidateGenerationConfig = struct {
     ///
     /// For more information on each algorithm, see the [Algorithm
     /// support](https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support) section in Autopilot developer guide.
-    algorithms_config: ?[]const AutoMLAlgorithmConfig,
+    algorithms_config: ?[]const AutoMLAlgorithmConfig = null,
 
     /// A URL to the Amazon S3 data source containing selected features from the
     /// input data source to run an Autopilot job. You can input
@@ -56,7 +56,7 @@ pub const AutoMLCandidateGenerationConfig = struct {
     /// `["col1", "col2", ...]` are case sensitive and should be a list of strings
     /// containing unique values that are a subset of the column names in the input
     /// data. The list of columns provided must not include the target column.
-    feature_specification_s3_uri: ?[]const u8,
+    feature_specification_s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .algorithms_config = "AlgorithmsConfig",

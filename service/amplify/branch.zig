@@ -10,9 +10,9 @@ pub const Branch = struct {
     active_job_id: []const u8,
 
     /// A list of custom resources that are linked to this branch.
-    associated_resources: ?[]const []const u8,
+    associated_resources: ?[]const []const u8 = null,
 
-    backend: ?Backend,
+    backend: ?Backend = null,
 
     /// The Amazon Resource Name (ARN) for a backend environment that is part of an
     /// Amplify app.
@@ -21,12 +21,12 @@ pub const Branch = struct {
     /// an application with Amplify Gen 2, you provision the app's backend
     /// infrastructure using
     /// Typescript code.
-    backend_environment_arn: ?[]const u8,
+    backend_environment_arn: ?[]const u8 = null,
 
     /// The basic authorization credentials for a branch of an Amplify app. You must
     /// base64-encode the authorization credentials and provide them in the format
     /// `user:password`.
-    basic_auth_credentials: ?[]const u8,
+    basic_auth_credentials: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for a branch that is part of an Amplify app.
     branch_arn: []const u8,
@@ -36,7 +36,7 @@ pub const Branch = struct {
 
     /// The build specification (build spec) content for the branch of an Amplify
     /// app.
-    build_spec: ?[]const u8,
+    build_spec: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role for a branch of an SSR
     /// app. The Compute role allows the Amplify Hosting compute service to
@@ -44,7 +44,7 @@ pub const Branch = struct {
     /// permissions.
     /// For more information about the SSR Compute role, see [Adding an SSR Compute
     /// role](https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html) in the *Amplify User Guide*.
-    compute_role_arn: ?[]const u8,
+    compute_role_arn: ?[]const u8 = null,
 
     /// A timestamp of when Amplify created the branch.
     create_time: i64,
@@ -56,7 +56,7 @@ pub const Branch = struct {
     description: []const u8,
 
     /// The destination branch if the branch is a pull request branch.
-    destination_branch: ?[]const u8,
+    destination_branch: ?[]const u8 = null,
 
     /// The display name for the branch. This is used as the default domain prefix.
     display_name: []const u8,
@@ -77,7 +77,7 @@ pub const Branch = struct {
     /// the edge for a longer interval. When performance mode is enabled, hosting
     /// configuration
     /// or code changes can take up to 10 minutes to roll out.
-    enable_performance_mode: ?bool,
+    enable_performance_mode: ?bool = null,
 
     /// Enables pull request previews for the branch.
     enable_pull_request_preview: bool,
@@ -94,7 +94,7 @@ pub const Branch = struct {
     /// more information about skew protection, see [Skew protection for Amplify
     /// deployments](https://docs.aws.amazon.com/amplify/latest/userguide/skew-protection.html) in the *Amplify User
     /// Guide*.
-    enable_skew_protection: ?bool,
+    enable_skew_protection: ?bool = null,
 
     /// The environment variables specific to a branch of an Amplify app.
     environment_variables: []const aws.map.StringMapEntry,
@@ -103,19 +103,19 @@ pub const Branch = struct {
     framework: []const u8,
 
     /// The Amplify environment name for the pull request.
-    pull_request_environment_name: ?[]const u8,
+    pull_request_environment_name: ?[]const u8 = null,
 
     /// The source branch if the branch is a pull request branch.
-    source_branch: ?[]const u8,
+    source_branch: ?[]const u8 = null,
 
     /// The current stage for the branch that is part of an Amplify app.
     stage: Stage,
 
     /// The tag for the branch of an Amplify app.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The thumbnail URL for the branch of an Amplify app.
-    thumbnail_url: ?[]const u8,
+    thumbnail_url: ?[]const u8 = null,
 
     /// The total number of jobs that are part of an Amplify app.
     total_number_of_jobs: []const u8,

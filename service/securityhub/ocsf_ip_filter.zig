@@ -4,9 +4,9 @@ const IpFilter = @import("ip_filter.zig").IpFilter;
 /// The structure for filtering findings based on IP address attributes.
 pub const OcsfIpFilter = struct {
     /// The name of the IP address field to filter on.
-    field_name: ?OcsfIpField,
+    field_name: ?OcsfIpField = null,
 
-    filter: ?IpFilter,
+    filter: ?IpFilter = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

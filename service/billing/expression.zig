@@ -7,16 +7,16 @@ const TimeRange = @import("time_range.zig").TimeRange;
 /// [Expression](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html). Billing view only supports `LINKED_ACCOUNT`, `Tags`, and `CostCategories`.
 pub const Expression = struct {
     /// The filter that's based on `CostCategory` values.
-    cost_categories: ?CostCategoryValues,
+    cost_categories: ?CostCategoryValues = null,
 
     /// The specific `Dimension` to use for `Expression`.
-    dimensions: ?DimensionValues,
+    dimensions: ?DimensionValues = null,
 
     /// The specific `Tag` to use for `Expression`.
-    tags: ?TagValues,
+    tags: ?TagValues = null,
 
     /// Specifies a time range filter for the billing view data.
-    time_range: ?TimeRange,
+    time_range: ?TimeRange = null,
 
     pub const json_field_names = .{
         .cost_categories = "costCategories",

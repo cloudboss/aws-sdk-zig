@@ -4,12 +4,12 @@ const CertificateAssociation = @import("certificate_association.zig").Certificat
 pub const Association = struct {
     /// A list of all associated clusters and domain names tied to a specific
     /// certificate.
-    certificate_associations: ?[]const CertificateAssociation,
+    certificate_associations: ?[]const CertificateAssociation = null,
 
     /// The Amazon Resource Name (ARN) for the certificate associated with the
     /// custom domain.
-    custom_domain_certificate_arn: ?[]const u8,
+    custom_domain_certificate_arn: ?[]const u8 = null,
 
     /// The expiration date for the certificate.
-    custom_domain_certificate_expiry_date: ?i64,
+    custom_domain_certificate_expiry_date: ?i64 = null,
 };

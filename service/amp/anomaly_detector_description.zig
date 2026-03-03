@@ -16,20 +16,20 @@ pub const AnomalyDetectorDescription = struct {
     arn: []const u8,
 
     /// The algorithm configuration of the anomaly detector.
-    configuration: ?AnomalyDetectorConfiguration,
+    configuration: ?AnomalyDetectorConfiguration = null,
 
     /// The timestamp when the anomaly detector was created.
     created_at: i64,
 
     /// The frequency, in seconds, at which the anomaly detector evaluates metrics.
-    evaluation_interval_in_seconds: ?i32,
+    evaluation_interval_in_seconds: ?i32 = null,
 
     /// The Amazon Managed Service for Prometheus metric labels associated with the
     /// anomaly detector.
-    labels: ?[]const aws.map.StringMapEntry,
+    labels: ?[]const aws.map.StringMapEntry = null,
 
     /// The action taken when data is missing during evaluation.
-    missing_data_action: ?AnomalyDetectorMissingDataAction,
+    missing_data_action: ?AnomalyDetectorMissingDataAction = null,
 
     /// The timestamp when the anomaly detector was last modified.
     modified_at: i64,
@@ -38,7 +38,7 @@ pub const AnomalyDetectorDescription = struct {
     status: AnomalyDetectorStatus,
 
     /// The tags applied to the anomaly detector.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .alias = "alias",

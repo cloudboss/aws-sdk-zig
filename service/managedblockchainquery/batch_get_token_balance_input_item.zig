@@ -4,7 +4,7 @@ const TokenIdentifier = @import("token_identifier.zig").TokenIdentifier;
 
 /// The container for the input for getting a token balance.
 pub const BatchGetTokenBalanceInputItem = struct {
-    at_blockchain_instant: ?BlockchainInstant,
+    at_blockchain_instant: ?BlockchainInstant = null,
 
     owner_identifier: OwnerIdentifier,
 

@@ -9,11 +9,11 @@ pub const QueryRuntimeStatistics = struct {
     /// Stage statistics such as input and output rows and bytes, execution time,
     /// and stage
     /// state. This information also includes substages and the query stage plan.
-    output_stage: ?QueryStage,
+    output_stage: ?QueryStage = null,
 
-    rows: ?QueryRuntimeStatisticsRows,
+    rows: ?QueryRuntimeStatisticsRows = null,
 
-    timeline: ?QueryRuntimeStatisticsTimeline,
+    timeline: ?QueryRuntimeStatisticsTimeline = null,
 
     pub const json_field_names = .{
         .output_stage = "OutputStage",

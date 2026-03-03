@@ -4,11 +4,11 @@ const CapacityReservationType = @import("capacity_reservation_type.zig").Capacit
 /// group.
 pub const CapacityReservation = struct {
     /// The Amazon Resource Name (ARN) of the Capacity Reservation.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The type of Capacity Reservation. Valid values are `ODCR` (On-Demand
     /// Capacity Reservation) or `CRG` (Capacity Reservation Group).
-    @"type": ?CapacityReservationType,
+    @"type": ?CapacityReservationType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

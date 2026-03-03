@@ -4,10 +4,10 @@ const QDataKeyType = @import("q_data_key_type.zig").QDataKeyType;
 pub const QDataKey = struct {
     /// The ARN of the KMS key that is registered to a Quick Sight account for
     /// encryption and decryption use as a `QDataKey`.
-    q_data_key_arn: ?[]const u8,
+    q_data_key_arn: ?[]const u8 = null,
 
     /// The type of `QDataKey`.
-    q_data_key_type: ?QDataKeyType,
+    q_data_key_type: ?QDataKeyType = null,
 
     pub const json_field_names = .{
         .q_data_key_arn = "QDataKeyArn",

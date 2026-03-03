@@ -5,13 +5,13 @@ const Tag = @import("tag.zig").Tag;
 /// virtual interfaces and virtual private gateway or transit gateways.
 pub const DirectConnectGateway = struct {
     /// The autonomous system number (AS) for the Amazon side of the connection.
-    amazon_side_asn: ?i64,
+    amazon_side_asn: ?i64 = null,
 
     /// The ID of the Direct Connect gateway.
-    direct_connect_gateway_id: ?[]const u8,
+    direct_connect_gateway_id: ?[]const u8 = null,
 
     /// The name of the Direct Connect gateway.
-    direct_connect_gateway_name: ?[]const u8,
+    direct_connect_gateway_name: ?[]const u8 = null,
 
     /// The state of the Direct Connect gateway. The following are the possible
     /// values:
@@ -23,17 +23,17 @@ pub const DirectConnectGateway = struct {
     /// * `deleting`: The initial state after calling DeleteDirectConnectGateway.
     ///
     /// * `deleted`: The Direct Connect gateway is deleted and cannot pass traffic.
-    direct_connect_gateway_state: ?DirectConnectGatewayState,
+    direct_connect_gateway_state: ?DirectConnectGatewayState = null,
 
     /// The ID of the Amazon Web Services account that owns the Direct Connect
     /// gateway.
-    owner_account: ?[]const u8,
+    owner_account: ?[]const u8 = null,
 
     /// The error message if the state of an object failed to advance.
-    state_change_error: ?[]const u8,
+    state_change_error: ?[]const u8 = null,
 
     /// Information about a tag.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .amazon_side_asn = "amazonSideAsn",

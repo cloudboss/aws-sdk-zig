@@ -1,13 +1,13 @@
 /// Summary of the details of an `AppInstanceUser`.
 pub const AppInstanceUserSummary = struct {
     /// The ARN of the `AppInstanceUser`.
-    app_instance_user_arn: ?[]const u8,
+    app_instance_user_arn: ?[]const u8 = null,
 
     /// The metadata of the `AppInstanceUser`.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     /// The name of an `AppInstanceUser`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .app_instance_user_arn = "AppInstanceUserArn",

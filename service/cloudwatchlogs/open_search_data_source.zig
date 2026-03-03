@@ -12,12 +12,12 @@ const OpenSearchResourceStatus = @import("open_search_resource_status.zig").Open
 /// S3.](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html)
 pub const OpenSearchDataSource = struct {
     /// The name of the OpenSearch Service data source.
-    data_source_name: ?[]const u8,
+    data_source_name: ?[]const u8 = null,
 
     /// This structure contains information about the status of this OpenSearch
     /// Service
     /// resource.
-    status: ?OpenSearchResourceStatus,
+    status: ?OpenSearchResourceStatus = null,
 
     pub const json_field_names = .{
         .data_source_name = "dataSourceName",

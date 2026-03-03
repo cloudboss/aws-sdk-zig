@@ -13,14 +13,14 @@ pub const RecipientInfo = struct {
     /// The attestation document for an Amazon Web Services Nitro Enclave or a
     /// NitroTPM. This document includes
     /// the enclave's public key.
-    attestation_document: ?[]const u8,
+    attestation_document: ?[]const u8 = null,
 
     /// The encryption algorithm that KMS should use with the public key for an
     /// Amazon Web Services Nitro
     /// Enclave or NitroTPM to encrypt plaintext values for the response. The only
     /// valid value is
     /// `RSAES_OAEP_SHA_256`.
-    key_encryption_algorithm: ?KeyEncryptionMechanism,
+    key_encryption_algorithm: ?KeyEncryptionMechanism = null,
 
     pub const json_field_names = .{
         .attestation_document = "AttestationDocument",

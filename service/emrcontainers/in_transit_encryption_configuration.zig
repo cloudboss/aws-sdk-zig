@@ -4,7 +4,7 @@ const TLSCertificateConfiguration = @import("tls_certificate_configuration.zig")
 /// configuration.
 pub const InTransitEncryptionConfiguration = struct {
     /// TLS certificate-related configuration input for the security configuration.
-    tls_certificate_configuration: ?TLSCertificateConfiguration,
+    tls_certificate_configuration: ?TLSCertificateConfiguration = null,
 
     pub const json_field_names = .{
         .tls_certificate_configuration = "tlsCertificateConfiguration",

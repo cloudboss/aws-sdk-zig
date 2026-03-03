@@ -7,10 +7,10 @@
 /// device.
 pub const CompatibleImage = struct {
     /// The unique identifier for an individual Snow device AMI.
-    ami_id: ?[]const u8,
+    ami_id: ?[]const u8 = null,
 
     /// The optional name of a compatible image.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ami_id = "AmiId",

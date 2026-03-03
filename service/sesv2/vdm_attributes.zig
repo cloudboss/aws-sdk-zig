@@ -7,12 +7,12 @@ pub const VdmAttributes = struct {
     /// Specifies additional settings for your VDM configuration as applicable to
     /// the
     /// Dashboard.
-    dashboard_attributes: ?DashboardAttributes,
+    dashboard_attributes: ?DashboardAttributes = null,
 
     /// Specifies additional settings for your VDM configuration as applicable to
     /// the
     /// Guardian.
-    guardian_attributes: ?GuardianAttributes,
+    guardian_attributes: ?GuardianAttributes = null,
 
     /// Specifies the status of your VDM configuration. Can be one of the following:
     ///

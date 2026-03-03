@@ -11,7 +11,7 @@ pub const RetainedMessageSummary = struct {
     qos: i32 = 0,
 
     /// The topic name to which the retained message was published.
-    topic: ?[]const u8,
+    topic: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .last_modified_time = "lastModifiedTime",

@@ -3,38 +3,38 @@ const MatterCapabilityReportAttribute = @import("matter_capability_report_attrib
 /// Capability used in Matter capability report.
 pub const MatterCapabilityReportCluster = struct {
     /// The attributes of the Amazon Web Services Matter capability report.
-    attributes: ?[]const MatterCapabilityReportAttribute,
+    attributes: ?[]const MatterCapabilityReportAttribute = null,
 
     /// The commands used with the Amazon Web Services Matter capability report.
-    commands: ?[]const []const u8,
+    commands: ?[]const []const u8 = null,
 
     /// The events used with the Amazon Web Services Matter capability report.
-    events: ?[]const []const u8,
+    events: ?[]const []const u8 = null,
 
     /// The fabric index for the Amazon Web Services Matter capability report.
-    fabric_index: ?i32,
+    fabric_index: ?i32 = null,
 
     /// 32 bit-map used to indicate which features a cluster supports.
-    feature_map: ?i64,
+    feature_map: ?i64 = null,
 
     /// Matter clusters used in capability report.
-    generated_commands: ?[]const []const u8,
+    generated_commands: ?[]const []const u8 = null,
 
     /// The id of the Amazon Web Services Matter capability report cluster.
     id: []const u8,
 
     /// The capability name used in the Amazon Web Services Matter capability
     /// report.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The id of the schema version.
-    public_id: ?[]const u8,
+    public_id: ?[]const u8 = null,
 
     /// The id of the revision for the Amazon Web Services Matter capability report.
     revision: i32,
 
     /// The spec version used in the Amazon Web Services Matter capability report.
-    spec_version: ?[]const u8,
+    spec_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "attributes",

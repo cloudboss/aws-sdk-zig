@@ -17,7 +17,7 @@ pub const PromptCreationConfigurations = struct {
     /// invocation. This gives you more granular control over the context that the
     /// model is made aware of, and helps the model remove older context which is no
     /// longer useful during the ongoing agent session.
-    previous_conversation_turns_to_include: ?i32,
+    previous_conversation_turns_to_include: ?i32 = null,
 
     pub const json_field_names = .{
         .exclude_previous_thinking_steps = "excludePreviousThinkingSteps",

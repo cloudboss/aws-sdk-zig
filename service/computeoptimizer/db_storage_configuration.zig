@@ -4,17 +4,17 @@ pub const DBStorageConfiguration = struct {
     allocated_storage: i32 = 0,
 
     /// The provisioned IOPs of the DB storage.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// The maximum limit in gibibytes (GiB) to which Amazon RDS can automatically
     /// scale the storage of the DB instance.
-    max_allocated_storage: ?i32,
+    max_allocated_storage: ?i32 = null,
 
     /// The storage throughput of the DB storage.
-    storage_throughput: ?i32,
+    storage_throughput: ?i32 = null,
 
     /// The type of DB storage.
-    storage_type: ?[]const u8,
+    storage_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allocated_storage = "allocatedStorage",

@@ -32,42 +32,42 @@ const TimestreamSettings = @import("timestream_settings.zig").TimestreamSettings
 /// * `ModifyEndpoint`
 pub const Endpoint = struct {
     /// The Amazon Resource Name (ARN) used for SSL connection to the endpoint.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The name of the database at the endpoint.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The settings for the DMS Transfer type source. For more information, see
     /// the DmsTransferSettings structure.
-    dms_transfer_settings: ?DmsTransferSettings,
+    dms_transfer_settings: ?DmsTransferSettings = null,
 
-    doc_db_settings: ?DocDbSettings,
+    doc_db_settings: ?DocDbSettings = null,
 
     /// The settings for the DynamoDB target endpoint. For more information, see the
     /// `DynamoDBSettings` structure.
-    dynamo_db_settings: ?DynamoDbSettings,
+    dynamo_db_settings: ?DynamoDbSettings = null,
 
     /// The settings for the OpenSearch source endpoint. For more information, see
     /// the `ElasticsearchSettings` structure.
-    elasticsearch_settings: ?ElasticsearchSettings,
+    elasticsearch_settings: ?ElasticsearchSettings = null,
 
     /// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-    endpoint_arn: ?[]const u8,
+    endpoint_arn: ?[]const u8 = null,
 
     /// The database endpoint identifier. Identifiers must begin with a letter and
     /// must contain
     /// only ASCII letters, digits, and hyphens. They can't end with a hyphen or
     /// contain two
     /// consecutive hyphens.
-    endpoint_identifier: ?[]const u8,
+    endpoint_identifier: ?[]const u8 = null,
 
     /// The type of endpoint. Valid values are `source` and
     /// `target`.
-    endpoint_type: ?ReplicationEndpointTypeValue,
+    endpoint_type: ?ReplicationEndpointTypeValue = null,
 
     /// The expanded name for the engine name. For example, if the `EngineName`
     /// parameter is "aurora", this value would be "Amazon Aurora MySQL".
-    engine_display_name: ?[]const u8,
+    engine_display_name: ?[]const u8 = null,
 
     /// The database engine name. Valid values, depending on the EndpointType,
     /// include
@@ -79,28 +79,28 @@ pub const Endpoint = struct {
     /// `"kinesis"`, `"kafka"`, `"elasticsearch"`,
     /// `"documentdb"`, `"sqlserver"`, `"neptune"`, and
     /// `"babelfish"`.
-    engine_name: ?[]const u8,
+    engine_name: ?[]const u8 = null,
 
     /// Value returned by a call to CreateEndpoint that can be used for
     /// cross-account
     /// validation. Use it on a subsequent call to CreateEndpoint to create the
     /// endpoint with a
     /// cross-account.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The external table definition.
-    external_table_definition: ?[]const u8,
+    external_table_definition: ?[]const u8 = null,
 
     /// Additional connection attributes used to connect to the endpoint.
-    extra_connection_attributes: ?[]const u8,
+    extra_connection_attributes: ?[]const u8 = null,
 
     /// Settings in JSON format for the source GCP MySQL endpoint.
-    gcp_my_sql_settings: ?GcpMySQLSettings,
+    gcp_my_sql_settings: ?GcpMySQLSettings = null,
 
     /// The settings for the IBM Db2 LUW source endpoint. For more information, see
     /// the
     /// `IBMDb2Settings` structure.
-    ibm_db_2_settings: ?IBMDb2Settings,
+    ibm_db_2_settings: ?IBMDb2Settings = null,
 
     /// Indicates whether the endpoint is read-only. When set to `true`, this
     /// endpoint
@@ -108,17 +108,17 @@ pub const Endpoint = struct {
     /// or deleted directly.
     /// You can only modify or delete read-only endpoints through their associated
     /// zero-ETL integration.
-    is_read_only: ?bool,
+    is_read_only: ?bool = null,
 
     /// The settings for the Apache Kafka target endpoint. For more information, see
     /// the
     /// `KafkaSettings` structure.
-    kafka_settings: ?KafkaSettings,
+    kafka_settings: ?KafkaSettings = null,
 
     /// The settings for the Amazon Kinesis target endpoint. For more information,
     /// see the
     /// `KinesisSettings` structure.
-    kinesis_settings: ?KinesisSettings,
+    kinesis_settings: ?KinesisSettings = null,
 
     /// An KMS key identifier that is used to encrypt the connection parameters for
     /// the
@@ -130,84 +130,84 @@ pub const Endpoint = struct {
     /// KMS creates the default encryption key for your Amazon Web Services account.
     /// Your Amazon Web Services account has
     /// a different default encryption key for each Amazon Web Services Region.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Settings in JSON format for the target Lakehouse endpoint. This parameter
     /// applies to endpoints
     /// that are automatically created by DMS for a Lakehouse data warehouse as part
     /// of a zero-ETL integration.
-    lakehouse_settings: ?LakehouseSettings,
+    lakehouse_settings: ?LakehouseSettings = null,
 
     /// The settings for the Microsoft SQL Server source and target endpoint. For
     /// more
     /// information, see the `MicrosoftSQLServerSettings` structure.
-    microsoft_sql_server_settings: ?MicrosoftSQLServerSettings,
+    microsoft_sql_server_settings: ?MicrosoftSQLServerSettings = null,
 
     /// The settings for the MongoDB source endpoint. For more information, see the
     /// `MongoDbSettings` structure.
-    mongo_db_settings: ?MongoDbSettings,
+    mongo_db_settings: ?MongoDbSettings = null,
 
     /// The settings for the MySQL source and target endpoint. For more information,
     /// see the
     /// `MySQLSettings` structure.
-    my_sql_settings: ?MySQLSettings,
+    my_sql_settings: ?MySQLSettings = null,
 
     /// The settings for the Amazon Neptune target endpoint. For more information,
     /// see the
     /// `NeptuneSettings` structure.
-    neptune_settings: ?NeptuneSettings,
+    neptune_settings: ?NeptuneSettings = null,
 
     /// The settings for the Oracle source and target endpoint. For more
     /// information, see the
     /// `OracleSettings` structure.
-    oracle_settings: ?OracleSettings,
+    oracle_settings: ?OracleSettings = null,
 
     /// The port value used to access the endpoint.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The settings for the PostgreSQL source and target endpoint. For more
     /// information, see
     /// the `PostgreSQLSettings` structure.
-    postgre_sql_settings: ?PostgreSQLSettings,
+    postgre_sql_settings: ?PostgreSQLSettings = null,
 
     /// The settings for the Redis target endpoint. For more information, see the
     /// `RedisSettings` structure.
-    redis_settings: ?RedisSettings,
+    redis_settings: ?RedisSettings = null,
 
     /// Settings for the Amazon Redshift endpoint.
-    redshift_settings: ?RedshiftSettings,
+    redshift_settings: ?RedshiftSettings = null,
 
     /// The settings for the S3 target endpoint. For more information, see the
     /// `S3Settings` structure.
-    s3_settings: ?S3Settings,
+    s3_settings: ?S3Settings = null,
 
     /// The name of the server at the endpoint.
-    server_name: ?[]const u8,
+    server_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) used by the service to access the IAM role.
     /// The role must
     /// allow the `iam:PassRole` action.
-    service_access_role_arn: ?[]const u8,
+    service_access_role_arn: ?[]const u8 = null,
 
     /// The SSL mode used to connect to the endpoint. The default value is
     /// `none`.
-    ssl_mode: ?DmsSslModeValue,
+    ssl_mode: ?DmsSslModeValue = null,
 
     /// The status of the endpoint.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The settings for the SAP ASE source and target endpoint. For more
     /// information, see the
     /// `SybaseSettings` structure.
-    sybase_settings: ?SybaseSettings,
+    sybase_settings: ?SybaseSettings = null,
 
     /// The settings for the Amazon Timestream target endpoint. For more
     /// information, see the
     /// `TimestreamSettings` structure.
-    timestream_settings: ?TimestreamSettings,
+    timestream_settings: ?TimestreamSettings = null,
 
     /// The user name used to connect to the endpoint.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .certificate_arn = "CertificateArn",

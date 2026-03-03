@@ -12,7 +12,7 @@ pub const SourceSchema = struct {
 
     /// Specifies the encoding of the records in the streaming source. For example,
     /// UTF-8.
-    record_encoding: ?[]const u8,
+    record_encoding: ?[]const u8 = null,
 
     /// Specifies the format of the records on the streaming source.
     record_format: RecordFormat,

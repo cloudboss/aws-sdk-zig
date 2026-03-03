@@ -47,10 +47,10 @@ pub const ProxyConfiguration = struct {
     /// * `EgressIgnoredIPs` - (Required) The egress traffic going to the
     /// specified IP addresses is ignored and not redirected to the
     /// `ProxyEgressPort`. It can be an empty list.
-    properties: ?[]const KeyValuePair,
+    properties: ?[]const KeyValuePair = null,
 
     /// The proxy type. The only supported value is `APPMESH`.
-    @"type": ?ProxyConfigurationType,
+    @"type": ?ProxyConfigurationType = null,
 
     pub const json_field_names = .{
         .container_name = "containerName",

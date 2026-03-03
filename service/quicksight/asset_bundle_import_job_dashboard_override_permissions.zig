@@ -12,11 +12,11 @@ pub const AssetBundleImportJobDashboardOverridePermissions = struct {
     /// A structure that contains the link sharing configurations that you want to
     /// apply
     /// overrides to.
-    link_sharing_configuration: ?AssetBundleResourceLinkSharingConfiguration,
+    link_sharing_configuration: ?AssetBundleResourceLinkSharingConfiguration = null,
 
     /// A list of permissions for the dashboards that you want to apply overrides
     /// to.
-    permissions: ?AssetBundleResourcePermissions,
+    permissions: ?AssetBundleResourcePermissions = null,
 
     pub const json_field_names = .{
         .dashboard_ids = "DashboardIds",

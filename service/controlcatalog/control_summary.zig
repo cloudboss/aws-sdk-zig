@@ -8,17 +8,17 @@ pub const ControlSummary = struct {
     /// designators, such as `SH.S3.1`. Several aliases can refer to the same
     /// control across different Amazon Web Services services or compliance
     /// frameworks.
-    aliases: ?[]const []const u8,
+    aliases: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the control.
     arn: []const u8,
 
     /// An enumerated type, with the following possible values:
-    behavior: ?ControlBehavior,
+    behavior: ?ControlBehavior = null,
 
     /// A timestamp that notes the time when the control was released (start of its
     /// life) as a governance capability in Amazon Web Services.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// A description of the control, as it may appear in the console. Describes the
     /// functionality of the control.
@@ -31,17 +31,17 @@ pub const ControlSummary = struct {
     /// Services CloudFormation resource types. If `GovernedResources` cannot be
     /// represented by available CloudFormation resource types, it’s returned as an
     /// empty list.
-    governed_resources: ?[]const []const u8,
+    governed_resources: ?[]const []const u8 = null,
 
     /// An object of type `ImplementationSummary` that describes how the control is
     /// implemented.
-    implementation: ?ImplementationSummary,
+    implementation: ?ImplementationSummary = null,
 
     /// The display name of the control.
     name: []const u8,
 
     /// An enumerated type, with the following possible values:
-    severity: ?ControlSeverity,
+    severity: ?ControlSeverity = null,
 
     pub const json_field_names = .{
         .aliases = "Aliases",

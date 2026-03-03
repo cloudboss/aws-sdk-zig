@@ -12,13 +12,13 @@ pub const CreateAccountStatus = struct {
     /// The [regex pattern](http://wikipedia.org/wiki/regex) for an account ID
     /// string requires exactly 12
     /// digits.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The account name given to the account when it was created.
-    account_name: ?[]const u8,
+    account_name: ?[]const u8 = null,
 
     /// The date and time that the account was created and the request completed.
-    completed_timestamp: ?i64,
+    completed_timestamp: ?i64 = null,
 
     /// If the request failed, a description of the reason for the failure.
     ///
@@ -87,12 +87,12 @@ pub const CreateAccountStatus = struct {
     /// * UNKNOWN_BUSINESS_VALIDATION: The Amazon Web Services account that owns
     ///   your organization has
     /// an unknown issue with business license validation.
-    failure_reason: ?CreateAccountFailureReason,
+    failure_reason: ?CreateAccountFailureReason = null,
 
     /// If the account was created successfully, the ID for the new account in the
     /// Amazon Web Services
     /// GovCloud (US) Region.
-    gov_cloud_account_id: ?[]const u8,
+    gov_cloud_account_id: ?[]const u8 = null,
 
     /// The unique identifier (ID) that references this request. You get this value
     /// from the
@@ -102,14 +102,14 @@ pub const CreateAccountStatus = struct {
     /// The [regex pattern](http://wikipedia.org/wiki/regex) for a create account
     /// request ID string
     /// requires "car-" followed by from 8 to 32 lowercase letters or digits.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The date and time that the request was made for the account creation.
-    requested_timestamp: ?i64,
+    requested_timestamp: ?i64 = null,
 
     /// The status of the asynchronous request to create an Amazon Web Services
     /// account.
-    state: ?CreateAccountState,
+    state: ?CreateAccountState = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

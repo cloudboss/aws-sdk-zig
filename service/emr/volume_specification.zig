@@ -5,7 +5,7 @@
 /// cluster.
 pub const VolumeSpecification = struct {
     /// The number of I/O operations per second (IOPS) that the volume supports.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// The volume size, in gibibytes (GiB). This can be a number from 1 - 1024. If
     /// the volume
@@ -15,7 +15,7 @@ pub const VolumeSpecification = struct {
     /// The throughput, in mebibyte per second (MiB/s). This optional parameter can
     /// be a number
     /// from 125 - 1000 and is valid only for gp3 volumes.
-    throughput: ?i32,
+    throughput: ?i32 = null,
 
     /// The volume type. Volume types supported are gp3, gp2, io1, st1, sc1, and
     /// standard.

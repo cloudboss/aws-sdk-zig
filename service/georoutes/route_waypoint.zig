@@ -9,23 +9,23 @@ pub const RouteWaypoint = struct {
     avoid_actions_for_distance: i64 = 0,
 
     /// Avoid U-turns for calculation on highways and motorways.
-    avoid_u_turns: ?bool,
+    avoid_u_turns: ?bool = null,
 
     /// GPS Heading at the position.
     heading: f64 = 0,
 
     /// Options to configure matching the provided position to the road network.
-    matching: ?RouteMatchingOptions,
+    matching: ?RouteMatchingOptions = null,
 
     /// If the waypoint should not be treated as a stop. If yes, the waypoint is
     /// passed through and doesn't split the route into different legs.
-    pass_through: ?bool,
+    pass_through: ?bool = null,
 
     /// Position defined as `[longitude, latitude]`.
     position: []const f64,
 
     /// Options to configure matching the provided position to a side of the street.
-    side_of_street: ?RouteSideOfStreetOptions,
+    side_of_street: ?RouteSideOfStreetOptions = null,
 
     /// Duration of the stop.
     ///

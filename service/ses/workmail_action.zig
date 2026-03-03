@@ -36,5 +36,5 @@ pub const WorkmailAction = struct {
     ///
     /// For more information about Amazon SNS topics, see the [Amazon SNS Developer
     /// Guide](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
-    topic_arn: ?[]const u8,
+    topic_arn: ?[]const u8 = null,
 };

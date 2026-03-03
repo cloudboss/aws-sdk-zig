@@ -6,16 +6,16 @@ const VideoMonitoringSetting = @import("video_monitoring_setting.zig").VideoMoni
 /// The settings for source monitoring.
 pub const MonitoringConfig = struct {
     /// Contains the settings for audio stream metrics monitoring.
-    audio_monitoring_settings: ?[]const AudioMonitoringSetting,
+    audio_monitoring_settings: ?[]const AudioMonitoringSetting = null,
 
     /// Indicates whether content quality analysis is enabled or disabled.
-    content_quality_analysis_state: ?ContentQualityAnalysisState,
+    content_quality_analysis_state: ?ContentQualityAnalysisState = null,
 
     /// Indicates whether thumbnails are enabled or disabled.
-    thumbnail_state: ?ThumbnailState,
+    thumbnail_state: ?ThumbnailState = null,
 
     /// Contains the settings for video stream metrics monitoring.
-    video_monitoring_settings: ?[]const VideoMonitoringSetting,
+    video_monitoring_settings: ?[]const VideoMonitoringSetting = null,
 
     pub const json_field_names = .{
         .audio_monitoring_settings = "AudioMonitoringSettings",

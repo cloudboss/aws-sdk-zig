@@ -4,19 +4,19 @@
 /// response.
 pub const EventContextDataType = struct {
     /// The user's city.
-    city: ?[]const u8,
+    city: ?[]const u8 = null,
 
     /// The user's country.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// The user's device name.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// The source IP address of your user's device.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The user's time zone.
-    timezone: ?[]const u8,
+    timezone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .city = "City",

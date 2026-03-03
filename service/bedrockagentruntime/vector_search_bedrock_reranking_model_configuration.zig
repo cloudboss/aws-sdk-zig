@@ -4,7 +4,7 @@ const aws = @import("aws");
 pub const VectorSearchBedrockRerankingModelConfiguration = struct {
     /// A JSON object whose keys are request fields for the model and whose values
     /// are values for those fields.
-    additional_model_request_fields: ?[]const aws.map.StringMapEntry,
+    additional_model_request_fields: ?[]const aws.map.StringMapEntry = null,
 
     /// The ARN of the reranker model to use.
     model_arn: []const u8,

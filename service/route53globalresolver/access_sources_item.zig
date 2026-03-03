@@ -23,7 +23,7 @@ pub const AccessSourcesItem = struct {
     ip_address_type: IpAddressType,
 
     /// The name of the access source.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The protocol used by the access source.
     protocol: DnsProtocol,

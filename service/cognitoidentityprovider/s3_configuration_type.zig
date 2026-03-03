@@ -5,7 +5,7 @@ pub const S3ConfigurationType = struct {
     /// The ARN of an Amazon S3 bucket that's the destination for threat protection
     /// log
     /// export.
-    bucket_arn: ?[]const u8,
+    bucket_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_arn = "BucketArn",

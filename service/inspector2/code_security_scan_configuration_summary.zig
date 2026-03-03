@@ -8,10 +8,10 @@ const ScopeSettings = @import("scope_settings.zig").ScopeSettings;
 /// A summary of information about a code security scan configuration.
 pub const CodeSecurityScanConfigurationSummary = struct {
     /// The repository events that trigger continuous integration scans.
-    continuous_integration_scan_supported_events: ?[]const ContinuousIntegrationScanEvent,
+    continuous_integration_scan_supported_events: ?[]const ContinuousIntegrationScanEvent = null,
 
     /// The schedule expression for periodic scans, in cron format.
-    frequency_expression: ?[]const u8,
+    frequency_expression: ?[]const u8 = null,
 
     /// The name of the scan configuration.
     name: []const u8,
@@ -20,7 +20,7 @@ pub const CodeSecurityScanConfigurationSummary = struct {
     owner_account_id: []const u8,
 
     /// The frequency at which periodic scans are performed.
-    periodic_scan_frequency: ?PeriodicScanFrequency,
+    periodic_scan_frequency: ?PeriodicScanFrequency = null,
 
     /// The categories of security rules applied during the scan.
     rule_set_categories: []const RuleSetCategory,
@@ -31,10 +31,10 @@ pub const CodeSecurityScanConfigurationSummary = struct {
     /// The scope settings that define which repositories will be scanned. If the
     /// `ScopeSetting` parameter is `ALL` the scan configuration applies
     /// to all existing and future projects imported into Amazon Inspector.
-    scope_settings: ?ScopeSettings,
+    scope_settings: ?ScopeSettings = null,
 
     /// The tags associated with the scan configuration.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .continuous_integration_scan_supported_events = "continuousIntegrationScanSupportedEvents",

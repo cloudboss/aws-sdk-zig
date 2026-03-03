@@ -6,41 +6,41 @@ const VectorOptions = @import("vector_options.zig").VectorOptions;
 /// Details about the created OpenSearch Serverless collection.
 pub const CreateCollectionDetail = struct {
     /// The Amazon Resource Name (ARN) of the collection.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the collection group that contains this collection.
-    collection_group_name: ?[]const u8,
+    collection_group_name: ?[]const u8 = null,
 
     /// The Epoch time when the collection was created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// A description of the collection.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the collection.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the KMS key with which to encrypt the
     /// collection.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The date and time when the collection was last modified.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The name of the collection.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Creates details about an OpenSearch Serverless collection.
-    standby_replicas: ?StandbyReplicas,
+    standby_replicas: ?StandbyReplicas = null,
 
     /// The current status of the collection.
-    status: ?CollectionStatus,
+    status: ?CollectionStatus = null,
 
     /// The type of collection.
-    @"type": ?CollectionType,
+    @"type": ?CollectionType = null,
 
     /// Configuration options for vector search capabilities in the collection.
-    vector_options: ?VectorOptions,
+    vector_options: ?VectorOptions = null,
 
     pub const json_field_names = .{
         .arn = "arn",

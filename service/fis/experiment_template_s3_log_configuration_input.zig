@@ -4,7 +4,7 @@ pub const ExperimentTemplateS3LogConfigurationInput = struct {
     bucket_name: []const u8,
 
     /// The bucket prefix.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_name = "bucketName",

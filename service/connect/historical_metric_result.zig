@@ -4,10 +4,10 @@ const Dimensions = @import("dimensions.zig").Dimensions;
 /// Contains information about the historical metrics retrieved.
 pub const HistoricalMetricResult = struct {
     /// The set of metrics.
-    collections: ?[]const HistoricalMetricData,
+    collections: ?[]const HistoricalMetricData = null,
 
     /// The dimension for the metrics.
-    dimensions: ?Dimensions,
+    dimensions: ?Dimensions = null,
 
     pub const json_field_names = .{
         .collections = "Collections",

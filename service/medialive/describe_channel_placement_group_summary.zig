@@ -4,27 +4,27 @@ const ChannelPlacementGroupState = @import("channel_placement_group_state.zig").
 pub const DescribeChannelPlacementGroupSummary = struct {
     /// The ARN of this ChannelPlacementGroup. It is automatically assigned when the
     /// ChannelPlacementGroup is created.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Used in ListChannelPlacementGroupsResult
-    channels: ?[]const []const u8,
+    channels: ?[]const []const u8 = null,
 
     /// The ID of the Cluster that the Node belongs to.
-    cluster_id: ?[]const u8,
+    cluster_id: ?[]const u8 = null,
 
     /// The ID of the ChannelPlacementGroup. Unique in the AWS account. The ID is
     /// the resource-id portion of the ARN.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name that you specified for the ChannelPlacementGroup.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// An array with one item, which is the single Node that is associated with the
     /// ChannelPlacementGroup.
-    nodes: ?[]const []const u8,
+    nodes: ?[]const []const u8 = null,
 
     /// The current state of the ChannelPlacementGroup.
-    state: ?ChannelPlacementGroupState,
+    state: ?ChannelPlacementGroupState = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

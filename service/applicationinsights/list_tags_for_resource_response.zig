@@ -5,7 +5,7 @@ pub const ListTagsForResourceResponse = struct {
     /// Each tag
     /// consists of a required tag key (`Key`) and an associated tag value
     /// (`Value`).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .tags = "Tags",

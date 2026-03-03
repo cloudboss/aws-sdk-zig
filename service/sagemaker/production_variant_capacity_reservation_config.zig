@@ -10,11 +10,11 @@ pub const ProductionVariantCapacityReservationConfig = struct {
     ///
     /// SageMaker AI launches instances only into an ML capacity reservation. If no
     /// capacity is available, the instances fail to launch.
-    capacity_reservation_preference: ?CapacityReservationPreference,
+    capacity_reservation_preference: ?CapacityReservationPreference = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity
     /// reservation that SageMaker AI applies when it deploys the endpoint.
-    ml_reservation_arn: ?[]const u8,
+    ml_reservation_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .capacity_reservation_preference = "CapacityReservationPreference",

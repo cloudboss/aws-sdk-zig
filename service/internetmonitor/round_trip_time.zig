@@ -4,13 +4,13 @@
 /// percentiles: p50, p90, and p95.
 pub const RoundTripTime = struct {
     /// RTT at the 50th percentile (p50).
-    p50: ?f64,
+    p50: ?f64 = null,
 
     /// RTT at the 90th percentile (p90).
-    p90: ?f64,
+    p90: ?f64 = null,
 
     /// RTT at the 95th percentile (p95).
-    p95: ?f64,
+    p95: ?f64 = null,
 
     pub const json_field_names = .{
         .p50 = "P50",

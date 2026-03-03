@@ -12,11 +12,11 @@ pub const Destination = struct {
     /// successfully replicated to the destination file system. Any changes that
     /// occurred after this
     /// time might not be fully replicated.
-    last_replicated_timestamp: ?i64,
+    last_replicated_timestamp: ?i64 = null,
 
     /// ID of the Amazon Web Services account in which the destination file system
     /// resides.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region in which the destination file system is
     /// located.
@@ -26,7 +26,7 @@ pub const Destination = struct {
     /// Amazon EFS to perform replication on its behalf. This is optional for
     /// same-account
     /// replication and required for cross-account replication.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Describes the status of the replication configuration. For more information
     /// about replication status, see [Viewing
@@ -39,7 +39,7 @@ pub const Destination = struct {
     /// about replication status messages, see [Viewing
     /// replication
     /// details](https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html) in the *Amazon EFS User Guide*.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .file_system_id = "FileSystemId",

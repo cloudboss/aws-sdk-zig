@@ -12,7 +12,7 @@ const TextResponsePart = @import("text_response_part.zig").TextResponsePart;
 pub const GeneratedResponsePart = struct {
     /// Contains metadata about a textual part of the generated response that is
     /// accompanied by a citation.
-    text_response_part: ?TextResponsePart,
+    text_response_part: ?TextResponsePart = null,
 
     pub const json_field_names = .{
         .text_response_part = "textResponsePart",

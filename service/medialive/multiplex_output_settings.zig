@@ -3,7 +3,7 @@ const OutputLocationRef = @import("output_location_ref.zig").OutputLocationRef;
 
 /// Multiplex Output Settings
 pub const MultiplexOutputSettings = struct {
-    container_settings: ?MultiplexContainerSettings,
+    container_settings: ?MultiplexContainerSettings = null,
 
     /// Destination is a Multiplex.
     destination: OutputLocationRef,

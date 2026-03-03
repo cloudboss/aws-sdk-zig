@@ -5,7 +5,7 @@ const RDSSavingsEstimationModeSource = @import("rds_savings_estimation_mode_sour
 pub const RDSSavingsEstimationMode = struct {
     /// Describes the source for calculating the savings opportunity for DB
     /// instances.
-    source: ?RDSSavingsEstimationModeSource,
+    source: ?RDSSavingsEstimationModeSource = null,
 
     pub const json_field_names = .{
         .source = "source",

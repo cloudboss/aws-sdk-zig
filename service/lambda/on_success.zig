@@ -13,7 +13,7 @@ pub const OnSuccess = struct {
     /// will drop the payload when sending `OnFailure` event to the destination. For
     /// details on this behavior, refer to [Retaining records of asynchronous
     /// invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html).
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

@@ -31,7 +31,7 @@ pub const DkimAttributes = struct {
     ///
     /// * `NOT_STARTED` – Amazon Pinpoint hasn't yet started searching for the
     /// DKIM records in the DKIM records for the domain.
-    status: ?DkimStatus,
+    status: ?DkimStatus = null,
 
     /// A set of unique strings that you use to create a set of CNAME records that
     /// you add to
@@ -42,7 +42,7 @@ pub const DkimAttributes = struct {
     /// usually detects these records within about 72 hours of adding them to the
     /// DNS
     /// configuration for your domain.
-    tokens: ?[]const []const u8,
+    tokens: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .signing_enabled = "SigningEnabled",

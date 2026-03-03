@@ -7,15 +7,15 @@ const ReferenceDataSourceDescription = @import("reference_data_source_descriptio
 pub const SqlApplicationConfigurationDescription = struct {
     /// The array of InputDescription objects describing the input streams used
     /// by the application.
-    input_descriptions: ?[]const InputDescription,
+    input_descriptions: ?[]const InputDescription = null,
 
     /// The array of OutputDescription objects describing the destination
     /// streams used by the application.
-    output_descriptions: ?[]const OutputDescription,
+    output_descriptions: ?[]const OutputDescription = null,
 
     /// The array of ReferenceDataSourceDescription objects describing the
     /// reference data sources used by the application.
-    reference_data_source_descriptions: ?[]const ReferenceDataSourceDescription,
+    reference_data_source_descriptions: ?[]const ReferenceDataSourceDescription = null,
 
     pub const json_field_names = .{
         .input_descriptions = "InputDescriptions",

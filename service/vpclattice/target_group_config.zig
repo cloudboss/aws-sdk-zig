@@ -11,32 +11,32 @@ const TargetGroupProtocolVersion = @import("target_group_protocol_version.zig").
 pub const TargetGroupConfig = struct {
     /// The health check configuration. Not supported if the target group type is
     /// `LAMBDA` or `ALB`.
-    health_check: ?HealthCheckConfig,
+    health_check: ?HealthCheckConfig = null,
 
     /// The type of IP address used for the target group. Supported only if the
     /// target group type is `IP`. The default is `IPV4`.
-    ip_address_type: ?IpAddressType,
+    ip_address_type: ?IpAddressType = null,
 
     /// The version of the event structure that your Lambda function receives.
     /// Supported only if the target group type is `LAMBDA`. The default is `V1`.
-    lambda_event_structure_version: ?LambdaEventStructureVersion,
+    lambda_event_structure_version: ?LambdaEventStructureVersion = null,
 
     /// The port on which the targets are listening. For HTTP, the default is 80.
     /// For HTTPS, the default is 443. Not supported if the target group type is
     /// `LAMBDA`.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The protocol to use for routing traffic to the targets. The default is the
     /// protocol of the target group. Not supported if the target group type is
     /// `LAMBDA`.
-    protocol: ?TargetGroupProtocol,
+    protocol: ?TargetGroupProtocol = null,
 
     /// The protocol version. The default is `HTTP1`. Not supported if the target
     /// group type is `LAMBDA`.
-    protocol_version: ?TargetGroupProtocolVersion,
+    protocol_version: ?TargetGroupProtocolVersion = null,
 
     /// The ID of the VPC. Not supported if the target group type is `LAMBDA`.
-    vpc_identifier: ?[]const u8,
+    vpc_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .health_check = "healthCheck",

@@ -6,14 +6,14 @@ const CertificateType = @import("certificate_type.zig").CertificateType;
 /// `Certificate` describes the new certificate that you are creating.
 pub const Certificate = struct {
     /// The DNS record for certificate verification.
-    certificate_verification_dns_record: ?[]const u8,
+    certificate_verification_dns_record: ?[]const u8 = null,
 
     /// The Amazon resource name (ARN) for a custom certificate that you have
     /// already added to
     /// Certificate Manager in your Amazon Web Services account.
     ///
     /// This field is required only when the certificate type is `CUSTOM`.
-    custom_certificate_arn: ?[]const u8,
+    custom_certificate_arn: ?[]const u8 = null,
 
     /// The type of SSL/TLS certificate that you want to use.
     ///

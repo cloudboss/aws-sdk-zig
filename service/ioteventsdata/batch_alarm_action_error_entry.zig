@@ -18,13 +18,13 @@ const ErrorCode = @import("error_code.zig").ErrorCode;
 ///   [BatchSnoozeAlarm](https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchSnoozeAlarm.html)
 pub const BatchAlarmActionErrorEntry = struct {
     /// The error code.
-    error_code: ?ErrorCode,
+    error_code: ?ErrorCode = null,
 
     /// A message that describes the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The request ID. Each ID must be unique within each batch.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

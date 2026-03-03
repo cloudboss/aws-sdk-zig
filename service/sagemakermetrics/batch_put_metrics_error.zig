@@ -13,10 +13,10 @@ pub const BatchPutMetricsError = struct {
     ///
     /// * `CONFLICT_ERROR`: Multiple requests attempted to modify the same data
     /// simultaneously.
-    code: ?PutMetricsErrorCode,
+    code: ?PutMetricsErrorCode = null,
 
     /// An index that corresponds to the metric in the request.
-    metric_index: ?i32,
+    metric_index: ?i32 = null,
 
     pub const json_field_names = .{
         .code = "Code",

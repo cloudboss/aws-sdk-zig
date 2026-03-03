@@ -7,7 +7,7 @@ pub const MapConfigurationUpdate = struct {
     ///
     /// Not all map resources or styles support custom layers. See Custom Layers for
     /// more information.
-    custom_layers: ?[]const []const u8,
+    custom_layers: ?[]const []const u8 = null,
 
     /// Specifies the political view for the style. Set to an empty string to not
     /// use a political view, or, for styles that support specific political views,
@@ -16,7 +16,7 @@ pub const MapConfigurationUpdate = struct {
     /// Not all map resources or styles support political view styles. See
     /// [Political
     /// views](https://docs.aws.amazon.com/location/previous/developerguide/map-concepts.html#political-views) for more information.
-    political_view: ?[]const u8,
+    political_view: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .custom_layers = "CustomLayers",

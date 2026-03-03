@@ -9,17 +9,17 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms).
 pub const MonitoredResourceInfo = struct {
     /// The Amazon Resource Name (ARN) of the resource being monitored.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the Lightsail resource being monitored.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Lightsail resource type of the resource being monitored.
     ///
     /// Instances, load balancers, and relational databases are the only Lightsail
     /// resources
     /// that can currently be monitored by alarms.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -6,11 +6,11 @@ const FileSystemEndpoint = @import("file_system_endpoint.zig").FileSystemEndpoin
 pub const FileSystemEndpoints = struct {
     /// An endpoint for managing your file system by setting up NetApp SnapMirror
     /// with other ONTAP systems.
-    intercluster: ?FileSystemEndpoint,
+    intercluster: ?FileSystemEndpoint = null,
 
     /// An endpoint for managing your file system using the NetApp ONTAP CLI
     /// and NetApp ONTAP API.
-    management: ?FileSystemEndpoint,
+    management: ?FileSystemEndpoint = null,
 
     pub const json_field_names = .{
         .intercluster = "Intercluster",

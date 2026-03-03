@@ -10,7 +10,7 @@ pub const Condition = struct {
     operator: ConditionOperatorType,
 
     /// Indicates the value or data against which a condition is evaluated.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .field = "field",

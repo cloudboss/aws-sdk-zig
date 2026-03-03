@@ -8,7 +8,7 @@ pub const VsamAttributes = struct {
     /// defined, but if those alternate keys definitions exist, provide them as some
     /// applications
     /// will make use of them.
-    alternate_keys: ?[]const AlternateKey,
+    alternate_keys: ?[]const AlternateKey = null,
 
     /// Indicates whether indexes for this dataset are stored as compressed values.
     /// If you have
@@ -16,13 +16,13 @@ pub const VsamAttributes = struct {
     compressed: bool = false,
 
     /// The character set used by the data set. Can be ASCII, EBCDIC, or unknown.
-    encoding: ?[]const u8,
+    encoding: ?[]const u8 = null,
 
     /// The record format of the data set.
     format: []const u8,
 
     /// The primary key of the data set.
-    primary_key: ?PrimaryKey,
+    primary_key: ?PrimaryKey = null,
 
     pub const json_field_names = .{
         .alternate_keys = "alternateKeys",

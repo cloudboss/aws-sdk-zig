@@ -16,14 +16,14 @@ pub const ExportFilesMetadata = struct {
     /// `s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/`, then
     /// Amazon GameLift Streams will save the files at
     /// `s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/YYYYMMDD-HHMMSS-appId-sg-Id-sessionId.zip` or another similar name.
-    output_uri: ?[]const u8,
+    output_uri: ?[]const u8 = null,
 
     /// The result of the
     /// [ExportStreamSessionFiles](https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_ExportStreamSessionFiles.html) operation.
-    status: ?ExportFilesStatus,
+    status: ?ExportFilesStatus = null,
 
     /// A short description of the reason the export is in `FAILED` status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .output_uri = "OutputUri",

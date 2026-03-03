@@ -2,12 +2,12 @@ const MediaResourceNeighbor = @import("media_resource_neighbor.zig").MediaResour
 
 /// An AWS resource used in media workflows.
 pub const MediaResource = struct {
-    destinations: ?[]const MediaResourceNeighbor,
+    destinations: ?[]const MediaResourceNeighbor = null,
 
     /// The logical name of an AWS media resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    sources: ?[]const MediaResourceNeighbor,
+    sources: ?[]const MediaResourceNeighbor = null,
 
     pub const json_field_names = .{
         .destinations = "Destinations",

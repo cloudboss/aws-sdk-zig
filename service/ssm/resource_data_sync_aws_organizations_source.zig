@@ -7,7 +7,7 @@ const ResourceDataSyncOrganizationalUnit = @import("resource_data_sync_organizat
 /// present, from multiple Amazon Web Services Regions.
 pub const ResourceDataSyncAwsOrganizationsSource = struct {
     /// The Organizations organization units included in the sync.
-    organizational_units: ?[]const ResourceDataSyncOrganizationalUnit,
+    organizational_units: ?[]const ResourceDataSyncOrganizationalUnit = null,
 
     /// If an Amazon Web Services organization is present, this is either
     /// `OrganizationalUnits` or

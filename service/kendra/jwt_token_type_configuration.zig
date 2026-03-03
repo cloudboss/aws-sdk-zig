@@ -3,25 +3,25 @@ const KeyLocation = @import("key_location.zig").KeyLocation;
 /// Provides the configuration information for the JWT token type.
 pub const JwtTokenTypeConfiguration = struct {
     /// The regular expression that identifies the claim.
-    claim_regex: ?[]const u8,
+    claim_regex: ?[]const u8 = null,
 
     /// The group attribute field.
-    group_attribute_field: ?[]const u8,
+    group_attribute_field: ?[]const u8 = null,
 
     /// The issuer of the token.
-    issuer: ?[]const u8,
+    issuer: ?[]const u8 = null,
 
     /// The location of the key.
     key_location: KeyLocation,
 
     /// The Amazon Resource Name (arn) of the secret.
-    secret_manager_arn: ?[]const u8,
+    secret_manager_arn: ?[]const u8 = null,
 
     /// The signing key URL.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     /// The user name attribute field.
-    user_name_attribute_field: ?[]const u8,
+    user_name_attribute_field: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .claim_regex = "ClaimRegex",

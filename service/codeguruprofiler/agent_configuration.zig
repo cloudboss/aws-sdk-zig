@@ -29,7 +29,7 @@ pub const AgentConfiguration = struct {
     /// * `SamplingIntervalInMilliseconds` - The sampling interval in milliseconds
     ///   that is used to
     /// profile samples.
-    agent_parameters: ?[]const aws.map.StringMapEntry,
+    agent_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// How long a profiling agent should send profiling data using
     /// [

@@ -4,32 +4,32 @@ const BotType = @import("bot_type.zig").BotType;
 /// interface to receive events from Amazon Chime.
 pub const Bot = struct {
     /// The bot email address.
-    bot_email: ?[]const u8,
+    bot_email: ?[]const u8 = null,
 
     /// The bot ID.
-    bot_id: ?[]const u8,
+    bot_id: ?[]const u8 = null,
 
     /// The bot type.
-    bot_type: ?BotType,
+    bot_type: ?BotType = null,
 
     /// The bot creation timestamp, in ISO 8601 format.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// When true, the bot is stopped from running in your account.
-    disabled: ?bool,
+    disabled: ?bool = null,
 
     /// The bot display name.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The security token used to authenticate Amazon Chime with the outgoing event
     /// endpoint.
-    security_token: ?[]const u8,
+    security_token: ?[]const u8 = null,
 
     /// The updated bot timestamp, in ISO 8601 format.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     /// The unique ID for the bot user.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bot_email = "BotEmail",

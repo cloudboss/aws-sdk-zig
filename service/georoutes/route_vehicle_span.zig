@@ -17,10 +17,10 @@ pub const RouteVehicleSpan = struct {
     best_case_duration: i64 = 0,
 
     /// Access attributes for a car corresponding to the span.
-    car_access: ?[]const RouteSpanCarAccessAttribute,
+    car_access: ?[]const RouteSpanCarAccessAttribute = null,
 
     /// 3 letter Country code corresponding to the Span.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// Distance of the computed span. This feature doesn't split a span, but is
     /// always computed on a span split by other properties.
@@ -35,62 +35,62 @@ pub const RouteVehicleSpan = struct {
     /// Dynamic speed details corresponding to the span.
     ///
     /// **Unit**: `KilometersPerHour`
-    dynamic_speed: ?RouteSpanDynamicSpeedDetails,
+    dynamic_speed: ?RouteSpanDynamicSpeedDetails = null,
 
     /// Functional classification of the road segment corresponding to the span.
-    functional_classification: ?i32,
+    functional_classification: ?i32 = null,
 
     /// Attributes corresponding to a gate. The gate is present at the end of the
     /// returned span.
-    gate: ?RouteSpanGateAttribute,
+    gate: ?RouteSpanGateAttribute = null,
 
     /// Offset in the leg geometry corresponding to the start of this span.
-    geometry_offset: ?i32,
+    geometry_offset: ?i32 = null,
 
     /// Incidents corresponding to the span. These index into the Incidents in the
     /// parent Leg.
-    incidents: ?[]const i32,
+    incidents: ?[]const i32 = null,
 
     /// Provides an array of names of the vehicle span in available languages.
-    names: ?[]const LocalizedString,
+    names: ?[]const LocalizedString = null,
 
     /// Notices are additional information returned that indicate issues that
     /// occurred during route calculation.
-    notices: ?[]const i32,
+    notices: ?[]const i32 = null,
 
     /// Attributes corresponding to a railway crossing. The gate is present at the
     /// end of the returned span.
-    railway_crossing: ?RouteSpanRailwayCrossingAttribute,
+    railway_crossing: ?RouteSpanRailwayCrossingAttribute = null,
 
     /// 2-3 letter Region code corresponding to the Span. This is either a province
     /// or a state.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// Attributes for the road segment corresponding to the span.
-    road_attributes: ?[]const RouteSpanRoadAttribute,
+    road_attributes: ?[]const RouteSpanRoadAttribute = null,
 
     /// Designated route name or number corresponding to the span.
-    route_numbers: ?[]const RouteNumber,
+    route_numbers: ?[]const RouteNumber = null,
 
     /// Access attributes for a scooter corresponding to the span.
-    scooter_access: ?[]const RouteSpanScooterAccessAttribute,
+    scooter_access: ?[]const RouteSpanScooterAccessAttribute = null,
 
     /// Speed limit details corresponding to the span.
     ///
     /// **Unit**: `KilometersPerHour`
-    speed_limit: ?RouteSpanSpeedLimitDetails,
+    speed_limit: ?RouteSpanSpeedLimitDetails = null,
 
     /// Toll systems are authorities that collect payments for the toll.
-    toll_systems: ?[]const i32,
+    toll_systems: ?[]const i32 = null,
 
     /// Access attributes for a truck corresponding to the span.
-    truck_access: ?[]const RouteSpanTruckAccessAttribute,
+    truck_access: ?[]const RouteSpanTruckAccessAttribute = null,
 
     /// Truck road type identifiers. `BK1` through `BK4` apply only to Sweden.
     /// `A2,A4,B2,B4,C,D,ET2,ET4` apply only to Mexico.
     ///
     /// There are currently no other supported values as of 26th April 2024.
-    truck_road_types: ?[]const i32,
+    truck_road_types: ?[]const i32 = null,
 
     /// Duration of the computed span under typical traffic congestion.
     ///
@@ -98,7 +98,7 @@ pub const RouteVehicleSpan = struct {
     typical_duration: i64 = 0,
 
     /// Zones corresponding to this leg of the route.
-    zones: ?[]const i32,
+    zones: ?[]const i32 = null,
 
     pub const json_field_names = .{
         .best_case_duration = "BestCaseDuration",

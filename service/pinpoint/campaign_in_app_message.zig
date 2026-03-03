@@ -6,16 +6,16 @@ const Layout = @import("layout.zig").Layout;
 /// In-app message configuration.
 pub const CampaignInAppMessage = struct {
     /// The message body of the notification, the email body or the text message.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// In-app message content.
-    content: ?[]const InAppMessageContent,
+    content: ?[]const InAppMessageContent = null,
 
     /// Custom config to be sent to client.
-    custom_config: ?[]const aws.map.StringMapEntry,
+    custom_config: ?[]const aws.map.StringMapEntry = null,
 
     /// In-app message layout.
-    layout: ?Layout,
+    layout: ?Layout = null,
 
     pub const json_field_names = .{
         .body = "Body",

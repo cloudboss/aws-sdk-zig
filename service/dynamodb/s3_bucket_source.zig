@@ -6,10 +6,10 @@ pub const S3BucketSource = struct {
     /// The account number of the S3 bucket that is being imported from. If the
     /// bucket is
     /// owned by the requester this is optional.
-    s3_bucket_owner: ?[]const u8,
+    s3_bucket_owner: ?[]const u8 = null,
 
     /// The key prefix shared by all S3 Objects that are being imported.
-    s3_key_prefix: ?[]const u8,
+    s3_key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s3_bucket = "S3Bucket",

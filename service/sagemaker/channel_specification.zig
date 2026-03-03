@@ -4,16 +4,16 @@ const TrainingInputMode = @import("training_input_mode.zig").TrainingInputMode;
 /// Defines a named input source, called a channel, to be used by an algorithm.
 pub const ChannelSpecification = struct {
     /// A brief description of the channel.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether the channel is required by the algorithm.
-    is_required: ?bool,
+    is_required: ?bool = null,
 
     /// The name of the channel.
     name: []const u8,
 
     /// The allowed compression types, if data compression is used.
-    supported_compression_types: ?[]const CompressionType,
+    supported_compression_types: ?[]const CompressionType = null,
 
     /// The supported MIME types for the data.
     supported_content_types: []const []const u8,

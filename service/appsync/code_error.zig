@@ -6,16 +6,16 @@ pub const CodeError = struct {
     ///
     /// Examples include, but aren't limited to: `LINT_ERROR`,
     /// `PARSER_ERROR`.
-    error_type: ?[]const u8,
+    error_type: ?[]const u8 = null,
 
     /// The line, column, and span location of the error in the code.
-    location: ?CodeErrorLocation,
+    location: ?CodeErrorLocation = null,
 
     /// A user presentable error.
     ///
     /// Examples include, but aren't limited to: `Parsing error: Unterminated string
     /// literal`.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_type = "errorType",

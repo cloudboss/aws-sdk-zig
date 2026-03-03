@@ -3,13 +3,13 @@ const ServicePeriodType = @import("service_period_type.zig").ServicePeriodType;
 /// Payload for start service period handshake requests.
 pub const StartServicePeriodPayload = struct {
     /// The end date of the service period.
-    end_date: ?i64,
+    end_date: ?i64 = null,
 
     /// The minimum number of days notice required for changes.
-    minimum_notice_days: ?[]const u8,
+    minimum_notice_days: ?[]const u8 = null,
 
     /// A note providing additional information about the service period.
-    note: ?[]const u8,
+    note: ?[]const u8 = null,
 
     /// The identifier of the program management account.
     program_management_account_identifier: []const u8,

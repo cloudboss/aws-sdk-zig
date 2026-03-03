@@ -8,53 +8,53 @@ pub const SettingEntry = struct {
     /// The valid range of values for the directory setting. These values depend on
     /// the
     /// `DataType` of your directory.
-    allowed_values: ?[]const u8,
+    allowed_values: ?[]const u8 = null,
 
     /// The value of the directory setting that is applied to the directory.
-    applied_value: ?[]const u8,
+    applied_value: ?[]const u8 = null,
 
     /// The data type of a directory setting. This is used to define the
     /// `AllowedValues` of a setting. For example a data type can be
     /// `Boolean`, `DurationInSeconds`, or `Enum`.
-    data_type: ?[]const u8,
+    data_type: ?[]const u8 = null,
 
     /// The date and time when the request to update a directory setting was last
     /// submitted.
-    last_requested_date_time: ?i64,
+    last_requested_date_time: ?i64 = null,
 
     /// The date and time when the directory setting was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The name of the directory setting. For example:
     ///
     /// `TLS_1_0`
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Details about the status of the request to update the directory setting. If
     /// the directory
     /// setting is deployed in more than one region, status is returned for the
     /// request in each region
     /// where the setting is deployed.
-    request_detailed_status: ?[]const aws.map.MapEntry(DirectoryConfigurationStatus),
+    request_detailed_status: ?[]const aws.map.MapEntry(DirectoryConfigurationStatus) = null,
 
     /// The value that was last requested for the directory setting.
-    requested_value: ?[]const u8,
+    requested_value: ?[]const u8 = null,
 
     /// The overall status of the request to update the directory setting request.
     /// If the
     /// directory setting is deployed in more than one region, and the request fails
     /// in any region,
     /// the overall status is `Failed`.
-    request_status: ?DirectoryConfigurationStatus,
+    request_status: ?DirectoryConfigurationStatus = null,
 
     /// The last status message for the directory status request.
-    request_status_message: ?[]const u8,
+    request_status_message: ?[]const u8 = null,
 
     /// The type, or category, of a directory setting. Similar settings have the
     /// same type. For
     /// example, `Protocol`, `Cipher`, or `Certificate-Based
     /// Authentication`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allowed_values = "AllowedValues",

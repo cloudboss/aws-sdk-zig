@@ -18,21 +18,21 @@ const PipeTargetTimestreamParameters = @import("pipe_target_timestream_parameter
 /// parameters](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html) in the *Amazon EventBridge User Guide*.
 pub const PipeTargetParameters = struct {
     /// The parameters for using an Batch job as a target.
-    batch_job_parameters: ?PipeTargetBatchJobParameters,
+    batch_job_parameters: ?PipeTargetBatchJobParameters = null,
 
     /// The parameters for using an CloudWatch Logs log stream as a target.
-    cloud_watch_logs_parameters: ?PipeTargetCloudWatchLogsParameters,
+    cloud_watch_logs_parameters: ?PipeTargetCloudWatchLogsParameters = null,
 
     /// The parameters for using an Amazon ECS task as a target.
-    ecs_task_parameters: ?PipeTargetEcsTaskParameters,
+    ecs_task_parameters: ?PipeTargetEcsTaskParameters = null,
 
     /// The parameters for using an EventBridge event bus as a target.
-    event_bridge_event_bus_parameters: ?PipeTargetEventBridgeEventBusParameters,
+    event_bridge_event_bus_parameters: ?PipeTargetEventBridgeEventBusParameters = null,
 
     /// These are custom parameter to be used when the target is an API Gateway REST
     /// APIs or
     /// EventBridge ApiDestinations.
-    http_parameters: ?PipeTargetHttpParameters,
+    http_parameters: ?PipeTargetHttpParameters = null,
 
     /// Valid JSON text passed to the target. In this case, nothing from the event
     /// itself is
@@ -41,31 +41,31 @@ pub const PipeTargetParameters = struct {
     /// Data Interchange Format](http://www.rfc-editor.org/rfc/rfc7159.txt).
     ///
     /// To remove an input template, specify an empty string.
-    input_template: ?[]const u8,
+    input_template: ?[]const u8 = null,
 
     /// The parameters for using a Kinesis stream as a target.
-    kinesis_stream_parameters: ?PipeTargetKinesisStreamParameters,
+    kinesis_stream_parameters: ?PipeTargetKinesisStreamParameters = null,
 
     /// The parameters for using a Lambda function as a target.
-    lambda_function_parameters: ?PipeTargetLambdaFunctionParameters,
+    lambda_function_parameters: ?PipeTargetLambdaFunctionParameters = null,
 
     /// These are custom parameters to be used when the target is a Amazon Redshift
     /// cluster to invoke the
     /// Amazon Redshift Data API BatchExecuteStatement.
-    redshift_data_parameters: ?PipeTargetRedshiftDataParameters,
+    redshift_data_parameters: ?PipeTargetRedshiftDataParameters = null,
 
     /// The parameters for using a SageMaker pipeline as a target.
-    sage_maker_pipeline_parameters: ?PipeTargetSageMakerPipelineParameters,
+    sage_maker_pipeline_parameters: ?PipeTargetSageMakerPipelineParameters = null,
 
     /// The parameters for using a Amazon SQS stream as a target.
-    sqs_queue_parameters: ?PipeTargetSqsQueueParameters,
+    sqs_queue_parameters: ?PipeTargetSqsQueueParameters = null,
 
     /// The parameters for using a Step Functions state machine as a target.
-    step_function_state_machine_parameters: ?PipeTargetStateMachineParameters,
+    step_function_state_machine_parameters: ?PipeTargetStateMachineParameters = null,
 
     /// The parameters for using a Timestream for LiveAnalytics table as a
     /// target.
-    timestream_parameters: ?PipeTargetTimestreamParameters,
+    timestream_parameters: ?PipeTargetTimestreamParameters = null,
 
     pub const json_field_names = .{
         .batch_job_parameters = "BatchJobParameters",

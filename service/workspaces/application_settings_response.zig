@@ -8,11 +8,11 @@ pub const ApplicationSettingsResponse = struct {
     /// Amazon Web Services Region,
     /// an S3 bucket is created. The bucket is unique to the Amazon Web Services
     /// account and the Region.
-    s3_bucket_name: ?[]const u8,
+    s3_bucket_name: ?[]const u8 = null,
 
     /// The path prefix for the S3 bucket where users’ persistent application
     /// settings are stored.
-    settings_group: ?[]const u8,
+    settings_group: ?[]const u8 = null,
 
     /// Specifies whether persistent application settings are enabled for users
     /// during their pool sessions.

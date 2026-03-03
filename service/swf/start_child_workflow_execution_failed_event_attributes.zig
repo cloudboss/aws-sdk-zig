@@ -16,7 +16,7 @@ pub const StartChildWorkflowExecutionFailedEventAttributes = struct {
     /// The data attached to the event that the decider can use in subsequent
     /// workflow tasks.
     /// This data isn't sent to the child workflow execution.
-    control: ?[]const u8,
+    control: ?[]const u8 = null,
 
     /// The ID of the `DecisionTaskCompleted` event corresponding to the decision
     /// task that resulted in the `StartChildWorkflowExecution`

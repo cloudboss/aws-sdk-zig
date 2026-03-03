@@ -13,50 +13,50 @@ const StorageMode = @import("storage_mode.zig").StorageMode;
 /// Information about cluster attributes that can be updated via update APIs.
 pub const MutableClusterInfo = struct {
     /// Describes brokers being changed during a broker count update.
-    broker_count_update_info: ?BrokerCountUpdateInfo,
+    broker_count_update_info: ?BrokerCountUpdateInfo = null,
 
     /// Specifies the size of the EBS volume and the ID of the associated broker.
-    broker_ebs_volume_info: ?[]const BrokerEBSVolumeInfo,
+    broker_ebs_volume_info: ?[]const BrokerEBSVolumeInfo = null,
 
     /// Includes all client authentication information.
-    client_authentication: ?ClientAuthentication,
+    client_authentication: ?ClientAuthentication = null,
 
     /// Information about the changes in the configuration of the brokers.
-    configuration_info: ?ConfigurationInfo,
+    configuration_info: ?ConfigurationInfo = null,
 
     /// Information about the broker access configuration.
-    connectivity_info: ?ConnectivityInfo,
+    connectivity_info: ?ConnectivityInfo = null,
 
     /// Includes all encryption-related information.
-    encryption_info: ?EncryptionInfo,
+    encryption_info: ?EncryptionInfo = null,
 
     /// Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon
     /// CloudWatch for this cluster.
-    enhanced_monitoring: ?EnhancedMonitoring,
+    enhanced_monitoring: ?EnhancedMonitoring = null,
 
     /// Information about the Amazon MSK broker type.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// The Apache Kafka version.
-    kafka_version: ?[]const u8,
+    kafka_version: ?[]const u8 = null,
 
     /// You can configure your MSK cluster to send broker logs to different
     /// destination types. This is a container for the configuration details related
     /// to broker logs.
-    logging_info: ?LoggingInfo,
+    logging_info: ?LoggingInfo = null,
 
     /// The number of broker nodes in the cluster.
-    number_of_broker_nodes: ?i32,
+    number_of_broker_nodes: ?i32 = null,
 
     /// The settings for open monitoring.
-    open_monitoring: ?OpenMonitoring,
+    open_monitoring: ?OpenMonitoring = null,
 
     /// Describes the intelligent rebalancing configuration of an MSK Provisioned
     /// cluster with Express brokers.
-    rebalancing: ?Rebalancing,
+    rebalancing: ?Rebalancing = null,
 
     /// This controls storage mode for supported storage tiers.
-    storage_mode: ?StorageMode,
+    storage_mode: ?StorageMode = null,
 
     pub const json_field_names = .{
         .broker_count_update_info = "BrokerCountUpdateInfo",

@@ -17,19 +17,19 @@ pub const WorkerSummary = struct {
     fleet_id: []const u8,
 
     /// The host properties of the worker.
-    host_properties: ?HostPropertiesResponse,
+    host_properties: ?HostPropertiesResponse = null,
 
     /// The log configuration for the worker.
-    log: ?LogConfiguration,
+    log: ?LogConfiguration = null,
 
     /// The status of the worker.
     status: WorkerStatus,
 
     /// The date and time the resource was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user or system that updated this resource.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     /// The worker ID.
     worker_id: []const u8,

@@ -3,7 +3,7 @@ const ApproximateCreationDateTimePrecision = @import("approximate_creation_date_
 /// Enables updating the configuration for Kinesis Streaming.
 pub const UpdateKinesisStreamingConfiguration = struct {
     /// Enables updating the precision of Kinesis data stream timestamp.
-    approximate_creation_date_time_precision: ?ApproximateCreationDateTimePrecision,
+    approximate_creation_date_time_precision: ?ApproximateCreationDateTimePrecision = null,
 
     pub const json_field_names = .{
         .approximate_creation_date_time_precision = "ApproximateCreationDateTimePrecision",

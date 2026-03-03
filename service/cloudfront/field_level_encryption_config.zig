@@ -9,15 +9,15 @@ pub const FieldLevelEncryptionConfig = struct {
 
     /// An optional comment about the configuration. The comment cannot be longer
     /// than 128 characters.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// A complex data type that specifies when to forward content if a content type
     /// isn't recognized and profiles to use as by default in a request if a query
     /// argument doesn't specify a profile to use.
-    content_type_profile_config: ?ContentTypeProfileConfig,
+    content_type_profile_config: ?ContentTypeProfileConfig = null,
 
     /// A complex data type that specifies when to forward content if a profile
     /// isn't found and the profile that can be provided as a query argument in a
     /// request.
-    query_arg_profile_config: ?QueryArgProfileConfig,
+    query_arg_profile_config: ?QueryArgProfileConfig = null,
 };

@@ -9,12 +9,12 @@ pub const CreateVehicleRequestItem = struct {
     /// An option to create a new Amazon Web Services IoT thing when creating a
     /// vehicle, or to validate an
     /// existing thing as a vehicle.
-    association_behavior: ?VehicleAssociationBehavior,
+    association_behavior: ?VehicleAssociationBehavior = null,
 
     /// Static information about a vehicle in a key-value pair. For example:
     /// `"engine
     /// Type"` : `"v6"`
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Resource Name (ARN) of a decoder manifest associated with the
     /// vehicle to create.
@@ -25,10 +25,10 @@ pub const CreateVehicleRequestItem = struct {
 
     /// Associate state templates to track the state of the vehicle. State templates
     /// determine which signal updates the vehicle sends to the cloud.
-    state_templates: ?[]const StateTemplateAssociation,
+    state_templates: ?[]const StateTemplateAssociation = null,
 
     /// Metadata which can be used to manage the vehicle.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The unique ID of the vehicle to create.
     vehicle_name: []const u8,

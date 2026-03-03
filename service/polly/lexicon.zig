@@ -5,10 +5,10 @@
 pub const Lexicon = struct {
     /// Lexicon content in string format. The content of a lexicon must be
     /// in PLS format.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// Name of the lexicon.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content = "Content",

@@ -15,8 +15,8 @@ pub const LocationInfo = struct {
     /// For directory buckets, the name of the location is the Zone ID of the
     /// Availability Zone (AZ) or Local Zone (LZ) where
     /// the bucket will be created. An example AZ ID value is `usw2-az1`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of location where the bucket will be created.
-    @"type": ?LocationType,
+    @"type": ?LocationType = null,
 };

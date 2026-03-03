@@ -3,7 +3,7 @@ const TaskContainerOverrides = @import("task_container_overrides.zig").TaskConta
 /// An object that contains overrides for the task definition of a job.
 pub const TaskPropertiesOverride = struct {
     /// The overrides for the container definition of a job.
-    containers: ?[]const TaskContainerOverrides,
+    containers: ?[]const TaskContainerOverrides = null,
 
     pub const json_field_names = .{
         .containers = "containers",

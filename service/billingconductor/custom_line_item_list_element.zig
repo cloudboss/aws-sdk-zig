@@ -7,49 +7,49 @@ const PresentationObject = @import("presentation_object.zig").PresentationObject
 pub const CustomLineItemListElement = struct {
     /// The Amazon Web Services account in which this custom line item will be
     /// applied to.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Resource Names (ARNs) for custom line items.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The number of resources that are associated to the custom line item.
     association_size: i64 = 0,
 
     /// The Amazon Resource Name (ARN) that references the billing group where the
     /// custom line item applies to.
-    billing_group_arn: ?[]const u8,
+    billing_group_arn: ?[]const u8 = null,
 
     /// A `ListCustomLineItemChargeDetails` that describes the charge details of a
     /// custom line item.
-    charge_details: ?ListCustomLineItemChargeDetails,
+    charge_details: ?ListCustomLineItemChargeDetails = null,
 
     /// The computation rule that determines how the custom line item charges are
     /// computed and reflected in the bill.
-    computation_rule: ?ComputationRuleEnum,
+    computation_rule: ?ComputationRuleEnum = null,
 
     /// The time created.
     creation_time: i64 = 0,
 
     /// The custom line item's charge value currency. Only one of the valid values
     /// can be used.
-    currency_code: ?CurrencyCode,
+    currency_code: ?CurrencyCode = null,
 
     /// The custom line item's description. This is shown on the Bills page in
     /// association with the charge value.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The most recent time when the custom line item was modified.
     last_modified_time: i64 = 0,
 
     /// The custom line item's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Configuration details specifying how the custom line item charges are
     /// presented, including which service the charges are shown under.
-    presentation_details: ?PresentationObject,
+    presentation_details: ?PresentationObject = null,
 
     /// The product code that's associated with the custom line item.
-    product_code: ?[]const u8,
+    product_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

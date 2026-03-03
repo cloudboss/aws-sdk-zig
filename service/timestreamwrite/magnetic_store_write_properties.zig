@@ -8,7 +8,7 @@ pub const MagneticStoreWriteProperties = struct {
     /// The location to write error reports for records rejected asynchronously
     /// during magnetic
     /// store writes.
-    magnetic_store_rejected_data_location: ?MagneticStoreRejectedDataLocation,
+    magnetic_store_rejected_data_location: ?MagneticStoreRejectedDataLocation = null,
 
     pub const json_field_names = .{
         .enable_magnetic_store_writes = "EnableMagneticStoreWrites",

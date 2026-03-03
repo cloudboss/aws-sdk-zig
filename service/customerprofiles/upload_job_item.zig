@@ -4,25 +4,25 @@ const StatusReason = @import("status_reason.zig").StatusReason;
 /// The summary information for an individual upload job.
 pub const UploadJobItem = struct {
     /// The timestamp when the upload job was completed.
-    completed_at: ?i64,
+    completed_at: ?i64 = null,
 
     /// The timestamp when the upload job was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The expiry duration for the profiles ingested with the upload job.
-    data_expiry: ?i32,
+    data_expiry: ?i32 = null,
 
     /// The name of the upload job.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The unique identifier of the upload job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The current status of the upload job.
-    status: ?UploadJobStatus,
+    status: ?UploadJobStatus = null,
 
     /// The reason for the current status of the upload job.
-    status_reason: ?StatusReason,
+    status_reason: ?StatusReason = null,
 
     pub const json_field_names = .{
         .completed_at = "CompletedAt",

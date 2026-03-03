@@ -3,7 +3,7 @@
 pub const TensorBoardOutputConfig = struct {
     /// Path to local storage location for tensorBoard output. Defaults to
     /// `/opt/ml/output/tensorboard`.
-    local_path: ?[]const u8,
+    local_path: ?[]const u8 = null,
 
     /// Path to Amazon S3 storage location for TensorBoard output.
     s3_output_path: []const u8,

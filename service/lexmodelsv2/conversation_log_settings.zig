@@ -5,10 +5,10 @@ const TextLogSetting = @import("text_log_setting.zig").TextLogSetting;
 /// for the conversations with your users.
 pub const ConversationLogSettings = struct {
     /// The Amazon S3 settings for logging audio to an S3 bucket.
-    audio_log_settings: ?[]const AudioLogSetting,
+    audio_log_settings: ?[]const AudioLogSetting = null,
 
     /// The Amazon CloudWatch Logs settings for logging text and metadata.
-    text_log_settings: ?[]const TextLogSetting,
+    text_log_settings: ?[]const TextLogSetting = null,
 
     pub const json_field_names = .{
         .audio_log_settings = "audioLogSettings",

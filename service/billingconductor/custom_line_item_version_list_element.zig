@@ -7,52 +7,52 @@ const PresentationObject = @import("presentation_object.zig").PresentationObject
 pub const CustomLineItemVersionListElement = struct {
     /// The Amazon Web Services account in which this custom line item will be
     /// applied to.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// A list of custom line item Amazon Resource Names (ARNs) to retrieve
     /// information.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The number of resources that are associated with the custom line item.
     association_size: i64 = 0,
 
     /// The Amazon Resource Name (ARN) of the billing group that the custom line
     /// item applies to.
-    billing_group_arn: ?[]const u8,
+    billing_group_arn: ?[]const u8 = null,
 
-    charge_details: ?ListCustomLineItemChargeDetails,
+    charge_details: ?ListCustomLineItemChargeDetails = null,
 
     /// The computation rule for a specific version of a custom line item,
     /// determining how charges are computed and reflected in the bill.
-    computation_rule: ?ComputationRuleEnum,
+    computation_rule: ?ComputationRuleEnum = null,
 
     /// The time when the custom line item version was created.
     creation_time: i64 = 0,
 
     /// The charge value currency of the custom line item.
-    currency_code: ?CurrencyCode,
+    currency_code: ?CurrencyCode = null,
 
     /// The description of the custom line item.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The end billing period of the custom line item version.
-    end_billing_period: ?[]const u8,
+    end_billing_period: ?[]const u8 = null,
 
     /// The most recent time that the custom line item version was modified.
     last_modified_time: i64 = 0,
 
     /// The name of the custom line item.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Presentation configuration for a specific version of a custom line item,
     /// specifying how charges are displayed in the bill.
-    presentation_details: ?PresentationObject,
+    presentation_details: ?PresentationObject = null,
 
     /// The product code that’s associated with the custom line item.
-    product_code: ?[]const u8,
+    product_code: ?[]const u8 = null,
 
     /// The start billing period of the custom line item version.
-    start_billing_period: ?[]const u8,
+    start_billing_period: ?[]const u8 = null,
 
     /// The inclusive start time.
     start_time: i64 = 0,

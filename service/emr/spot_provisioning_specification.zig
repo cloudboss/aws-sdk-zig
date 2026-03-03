@@ -27,7 +27,7 @@ pub const SpotProvisioningSpecification = struct {
     /// When you launch a Spot Instance fleet with the old console, it automatically
     /// launches with the `capacity-optimized` strategy. You can't change the
     /// allocation strategy from the old console.
-    allocation_strategy: ?SpotProvisioningAllocationStrategy,
+    allocation_strategy: ?SpotProvisioningAllocationStrategy = null,
 
     /// The defined duration for Spot Instances (also known as Spot blocks) in
     /// minutes. When
@@ -50,7 +50,7 @@ pub const SpotProvisioningSpecification = struct {
     /// feature, we will continue to support Spot Instances with a defined duration
     /// until
     /// December 31, 2022.
-    block_duration_minutes: ?i32,
+    block_duration_minutes: ?i32 = null,
 
     /// The action to take when `TargetSpotCapacity` has not been fulfilled when the
     /// `TimeoutDurationMinutes` has expired; that is, when all Spot Instances could

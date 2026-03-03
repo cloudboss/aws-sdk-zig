@@ -2,7 +2,7 @@
 /// buyer for `PurchaseAgreement`.
 pub const Acceptor = struct {
     /// The AWS account ID of the acceptor.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

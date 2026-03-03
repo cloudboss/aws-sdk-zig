@@ -5,7 +5,7 @@ const ScaleUnit = @import("scale_unit.zig").ScaleUnit;
 /// in the task set.
 pub const Scale = struct {
     /// The unit of measure for the scale value.
-    unit: ?ScaleUnit,
+    unit: ?ScaleUnit = null,
 
     /// The value, specified as a percent total of a service's `desiredCount`, to
     /// scale the task set. Accepted values are numbers between 0 and 100.

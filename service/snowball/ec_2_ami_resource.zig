@@ -9,7 +9,7 @@ pub const Ec2AmiResource = struct {
     ami_id: []const u8,
 
     /// The ID of the AMI on the Snow device.
-    snowball_ami_id: ?[]const u8,
+    snowball_ami_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ami_id = "AmiId",

@@ -51,7 +51,7 @@ pub const CustomizedLoadMetricSpecification = struct {
     /// Conditional: If you published your metric with dimensions, you must specify
     /// the same
     /// dimensions in your customized load metric specification.
-    dimensions: ?[]const MetricDimension,
+    dimensions: ?[]const MetricDimension = null,
 
     /// The name of the metric.
     metric_name: []const u8,
@@ -63,7 +63,7 @@ pub const CustomizedLoadMetricSpecification = struct {
     statistic: MetricStatistic,
 
     /// The unit of the metric.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",

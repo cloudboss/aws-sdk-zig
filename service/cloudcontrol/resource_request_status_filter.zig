@@ -4,7 +4,7 @@ const OperationStatus = @import("operation_status.zig").OperationStatus;
 /// The filter criteria to use in determining the requests returned.
 pub const ResourceRequestStatusFilter = struct {
     /// The operation types to include in the filter.
-    operations: ?[]const Operation,
+    operations: ?[]const Operation = null,
 
     /// The operation statuses to include in the filter.
     ///
@@ -20,7 +20,7 @@ pub const ResourceRequestStatusFilter = struct {
     /// canceled.
     ///
     /// * `CANCEL_COMPLETE`: The operation has been canceled.
-    operation_statuses: ?[]const OperationStatus,
+    operation_statuses: ?[]const OperationStatus = null,
 
     pub const json_field_names = .{
         .operations = "Operations",

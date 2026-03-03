@@ -4,10 +4,10 @@ const InputAuthenticationType = @import("input_authentication_type.zig").InputAu
 pub const AuthenticationMode = struct {
     /// Specifies the passwords to use for authentication if `Type` is set to
     /// `password`.
-    passwords: ?[]const []const u8,
+    passwords: ?[]const []const u8 = null,
 
     /// Specifies the authentication type. Possible options are IAM authentication,
     /// password
     /// and no password.
-    @"type": ?InputAuthenticationType,
+    @"type": ?InputAuthenticationType = null,
 };

@@ -13,7 +13,7 @@ pub const TimePeriod = struct {
     /// associated
     /// notifications and subscribers. You can change your end date with the
     /// `UpdateBudget` operation.
-    end: ?i64,
+    end: ?i64 = null,
 
     /// The start date for a budget. If you created your budget and didn't specify a
     /// start
@@ -29,7 +29,7 @@ pub const TimePeriod = struct {
     /// API.
     ///
     /// You can change your start date with the `UpdateBudget` operation.
-    start: ?i64,
+    start: ?i64 = null,
 
     pub const json_field_names = .{
         .end = "End",

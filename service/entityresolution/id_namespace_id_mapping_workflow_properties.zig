@@ -10,11 +10,11 @@ pub const IdNamespaceIdMappingWorkflowProperties = struct {
 
     /// An object which defines any additional configurations required by the
     /// provider service.
-    provider_properties: ?NamespaceProviderProperties,
+    provider_properties: ?NamespaceProviderProperties = null,
 
     /// An object which defines any additional configurations required by rule-based
     /// matching.
-    rule_based_properties: ?NamespaceRuleBasedProperties,
+    rule_based_properties: ?NamespaceRuleBasedProperties = null,
 
     pub const json_field_names = .{
         .id_mapping_type = "idMappingType",

@@ -10,7 +10,7 @@ pub const RemixSettings = struct {
     /// When you specify an audio description audio channel, you must also specify
     /// an audio description data channel. For more information about audio
     /// description signals, see the BBC WHP 198 and 051 white papers.
-    audio_description_audio_channel: ?i32,
+    audio_description_audio_channel: ?i32 = null,
 
     /// Optionally specify the channel in your input that contains your audio
     /// description data stream. MediaConvert mixes your audio signal across all
@@ -18,7 +18,7 @@ pub const RemixSettings = struct {
     /// When you specify an audio description data channel, you must also specify an
     /// audio description audio channel. For more information about audio
     /// description signals, see the BBC WHP 198 and 051 white papers.
-    audio_description_data_channel: ?i32,
+    audio_description_data_channel: ?i32 = null,
 
     /// Channel mapping contains the group of fields that hold the remixing value
     /// for each channel, in dB. Specify remix values to indicate how much of the
@@ -32,7 +32,7 @@ pub const RemixSettings = struct {
     /// unchanged to the output channel (no attenuation or amplification). Use
     /// InputChannels or InputChannelsFineTune to specify your remix values. Don't
     /// use both.
-    channel_mapping: ?ChannelMapping,
+    channel_mapping: ?ChannelMapping = null,
 
     /// Specify the number of audio channels from your input that you want to use in
     /// your output. With remixing, you might combine or split the data in these
@@ -40,14 +40,14 @@ pub const RemixSettings = struct {
     /// If you are doing both input channel mapping and output channel mapping, the
     /// number of output channels in your input mapping must be the same as the
     /// number of input channels in your output mapping.
-    channels_in: ?i32,
+    channels_in: ?i32 = null,
 
     /// Specify the number of channels in this output after remixing. Valid values:
     /// 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.) If you are doing both input
     /// channel mapping and output channel mapping, the number of output channels in
     /// your input mapping must be the same as the number of input channels in your
     /// output mapping.
-    channels_out: ?i32,
+    channels_out: ?i32 = null,
 
     pub const json_field_names = .{
         .audio_description_audio_channel = "AudioDescriptionAudioChannel",

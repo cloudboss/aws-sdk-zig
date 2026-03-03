@@ -7,13 +7,13 @@
 /// associated with a hosted zone; it cannot exist by itself.
 pub const KeySigningKey = struct {
     /// The date when the key-signing key (KSK) was created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// A string used to represent the delegation signer digest algorithm. This
     /// value must
     /// follow the guidelines provided by [RFC-8624 Section
     /// 3.3](https://tools.ietf.org/html/rfc8624#section-3.3).
-    digest_algorithm_mnemonic: ?[]const u8,
+    digest_algorithm_mnemonic: ?[]const u8 = null,
 
     /// An integer used to represent the delegation signer digest algorithm. This
     /// value must
@@ -26,13 +26,13 @@ pub const KeySigningKey = struct {
     /// publish the public key that resolvers can use to verify DNSSEC signatures
     /// that are used
     /// to secure certain kinds of information provided by the DNS system.
-    digest_value: ?[]const u8,
+    digest_value: ?[]const u8 = null,
 
     /// A string that represents a DNSKEY record.
-    dnskey_record: ?[]const u8,
+    dnskey_record: ?[]const u8 = null,
 
     /// A string that represents a delegation signer (DS) record.
-    ds_record: ?[]const u8,
+    ds_record: ?[]const u8 = null,
 
     /// An integer that specifies how the key is used. For key-signing key (KSK),
     /// this value
@@ -81,24 +81,24 @@ pub const KeySigningKey = struct {
     /// For more information about working with the customer managed key in KMS, see
     /// [Key Management Service
     /// concepts](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html).
-    kms_arn: ?[]const u8,
+    kms_arn: ?[]const u8 = null,
 
     /// The last time that the key-signing key (KSK) was changed.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// A string used to identify a key-signing key (KSK). `Name` can include
     /// numbers, letters, and underscores (_). `Name` must be unique for each
     /// key-signing key in the same hosted zone.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The public key, represented as a Base64 encoding, as required by [ RFC-4034
     /// Page 5](https://tools.ietf.org/rfc/rfc4034.txt).
-    public_key: ?[]const u8,
+    public_key: ?[]const u8 = null,
 
     /// A string used to represent the signing algorithm. This value must follow the
     /// guidelines provided by [RFC-8624 Section
     /// 3.1](https://tools.ietf.org/html/rfc8624#section-3.1).
-    signing_algorithm_mnemonic: ?[]const u8,
+    signing_algorithm_mnemonic: ?[]const u8 = null,
 
     /// An integer used to represent the signing algorithm. This value must follow
     /// the
@@ -135,7 +135,7 @@ pub const KeySigningKey = struct {
     /// DNSSEC signing, including actions that involve this KSK, you must correct
     /// the problem. For example, you may need to activate or deactivate the
     /// KSK.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The status message provided for the following key-signing key (KSK)
     /// statuses:
@@ -143,5 +143,5 @@ pub const KeySigningKey = struct {
     /// includes information about what the problem might be and steps that you can
     /// take to
     /// correct the issue.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 };

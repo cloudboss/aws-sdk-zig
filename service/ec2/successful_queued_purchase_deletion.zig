@@ -2,5 +2,5 @@
 /// deleted.
 pub const SuccessfulQueuedPurchaseDeletion = struct {
     /// The ID of the Reserved Instance.
-    reserved_instances_id: ?[]const u8,
+    reserved_instances_id: ?[]const u8 = null,
 };

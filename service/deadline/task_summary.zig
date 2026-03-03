@@ -13,34 +13,34 @@ pub const TaskSummary = struct {
     created_by: []const u8,
 
     /// The date and time the resource ended running.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The number of times that the task failed and was retried.
-    failure_retry_count: ?i32,
+    failure_retry_count: ?i32 = null,
 
     /// The latest session action ID for the task.
-    latest_session_action_id: ?[]const u8,
+    latest_session_action_id: ?[]const u8 = null,
 
     /// The task parameters.
-    parameters: ?[]const aws.map.MapEntry(TaskParameterValue),
+    parameters: ?[]const aws.map.MapEntry(TaskParameterValue) = null,
 
     /// The run status of the task.
     run_status: TaskRunStatus,
 
     /// The date and time the resource started running.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The run status on which the started.
-    target_run_status: ?TaskTargetRunStatus,
+    target_run_status: ?TaskTargetRunStatus = null,
 
     /// The task ID.
     task_id: []const u8,
 
     /// The date and time the resource was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user or system that updated this resource.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

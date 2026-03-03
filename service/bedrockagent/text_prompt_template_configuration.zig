@@ -5,10 +5,10 @@ const PromptInputVariable = @import("prompt_input_variable.zig").PromptInputVari
 /// enclose a word in double curly braces as in `{{variable}}`.
 pub const TextPromptTemplateConfiguration = struct {
     /// A cache checkpoint within a template configuration.
-    cache_point: ?CachePointBlock,
+    cache_point: ?CachePointBlock = null,
 
     /// An array of the variables in the prompt template.
-    input_variables: ?[]const PromptInputVariable,
+    input_variables: ?[]const PromptInputVariable = null,
 
     /// The message for the prompt.
     text: []const u8,

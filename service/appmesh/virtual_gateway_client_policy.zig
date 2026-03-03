@@ -4,7 +4,7 @@ const VirtualGatewayClientPolicyTls = @import("virtual_gateway_client_policy_tls
 pub const VirtualGatewayClientPolicy = struct {
     /// A reference to an object that represents a Transport Layer Security (TLS)
     /// client policy.
-    tls: ?VirtualGatewayClientPolicyTls,
+    tls: ?VirtualGatewayClientPolicyTls = null,
 
     pub const json_field_names = .{
         .tls = "tls",

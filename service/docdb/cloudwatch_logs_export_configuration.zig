@@ -8,8 +8,8 @@
 /// arrays depend on the engine that is being used.
 pub const CloudwatchLogsExportConfiguration = struct {
     /// The list of log types to disable.
-    disable_log_types: ?[]const []const u8,
+    disable_log_types: ?[]const []const u8 = null,
 
     /// The list of log types to enable.
-    enable_log_types: ?[]const []const u8,
+    enable_log_types: ?[]const []const u8 = null,
 };

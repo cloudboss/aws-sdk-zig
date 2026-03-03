@@ -7,15 +7,15 @@ const ReferenceDataSource = @import("reference_data_source.zig").ReferenceDataSo
 pub const SqlApplicationConfiguration = struct {
     /// The array of Input objects describing the input streams used by the
     /// application.
-    inputs: ?[]const Input,
+    inputs: ?[]const Input = null,
 
     /// The array of Output objects describing the destination streams used by
     /// the application.
-    outputs: ?[]const Output,
+    outputs: ?[]const Output = null,
 
     /// The array of ReferenceDataSource objects describing the reference data
     /// sources used by the application.
-    reference_data_sources: ?[]const ReferenceDataSource,
+    reference_data_sources: ?[]const ReferenceDataSource = null,
 
     pub const json_field_names = .{
         .inputs = "Inputs",

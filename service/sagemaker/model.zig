@@ -8,39 +8,39 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 /// [Search](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html) API.
 pub const Model = struct {
     /// The containers in the inference pipeline.
-    containers: ?[]const ContainerDefinition,
+    containers: ?[]const ContainerDefinition = null,
 
     /// A timestamp that indicates when the model was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A set of recommended deployment configurations for the model.
-    deployment_recommendation: ?DeploymentRecommendation,
+    deployment_recommendation: ?DeploymentRecommendation = null,
 
     /// Isolates the model container. No inbound or outbound network calls can be
     /// made to or from the model container.
-    enable_network_isolation: ?bool,
+    enable_network_isolation: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that you specified for the
     /// model.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
-    inference_execution_config: ?InferenceExecutionConfig,
+    inference_execution_config: ?InferenceExecutionConfig = null,
 
     /// The Amazon Resource Name (ARN) of the model.
-    model_arn: ?[]const u8,
+    model_arn: ?[]const u8 = null,
 
     /// The name of the model.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
-    primary_container: ?ContainerDefinition,
+    primary_container: ?ContainerDefinition = null,
 
     /// A list of key-value pairs associated with the model. For more information,
     /// see [Tagging Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
     /// in the *Amazon Web Services General Reference Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .containers = "Containers",

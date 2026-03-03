@@ -4,7 +4,7 @@
 pub const ProgressUpdateStreamSummary = struct {
     /// The name of the ProgressUpdateStream. *Do not store personal data in this
     /// field.*
-    progress_update_stream_name: ?[]const u8,
+    progress_update_stream_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .progress_update_stream_name = "ProgressUpdateStreamName",

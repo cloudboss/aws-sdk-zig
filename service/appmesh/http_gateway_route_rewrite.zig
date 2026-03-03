@@ -5,13 +5,13 @@ const HttpGatewayRoutePrefixRewrite = @import("http_gateway_route_prefix_rewrite
 /// An object representing the gateway route to rewrite.
 pub const HttpGatewayRouteRewrite = struct {
     /// The host name to rewrite.
-    hostname: ?GatewayRouteHostnameRewrite,
+    hostname: ?GatewayRouteHostnameRewrite = null,
 
     /// The path to rewrite.
-    path: ?HttpGatewayRoutePathRewrite,
+    path: ?HttpGatewayRoutePathRewrite = null,
 
     /// The specified beginning characters to rewrite.
-    prefix: ?HttpGatewayRoutePrefixRewrite,
+    prefix: ?HttpGatewayRoutePrefixRewrite = null,
 
     pub const json_field_names = .{
         .hostname = "hostname",

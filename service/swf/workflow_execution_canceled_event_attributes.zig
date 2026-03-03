@@ -9,7 +9,7 @@ pub const WorkflowExecutionCanceledEventAttributes = struct {
     decision_task_completed_event_id: i64 = 0,
 
     /// The details of the cancellation.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .decision_task_completed_event_id = "decisionTaskCompletedEventId",

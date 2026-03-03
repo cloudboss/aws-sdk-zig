@@ -3,10 +3,10 @@ const CustomOrchestrationTraceEvent = @import("custom_orchestration_trace_event.
 /// The trace behavior for the custom orchestration.
 pub const CustomOrchestrationTrace = struct {
     /// The event details used with the custom orchestration.
-    event: ?CustomOrchestrationTraceEvent,
+    event: ?CustomOrchestrationTraceEvent = null,
 
     /// The unique identifier of the trace.
-    trace_id: ?[]const u8,
+    trace_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .event = "event",

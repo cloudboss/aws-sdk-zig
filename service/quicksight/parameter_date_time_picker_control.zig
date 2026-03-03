@@ -3,7 +3,7 @@ const DateTimePickerControlDisplayOptions = @import("date_time_picker_control_di
 /// A control from a date parameter that specifies date and time.
 pub const ParameterDateTimePickerControl = struct {
     /// The display options of a control.
-    display_options: ?DateTimePickerControlDisplayOptions,
+    display_options: ?DateTimePickerControlDisplayOptions = null,
 
     /// The ID of the `ParameterDateTimePickerControl`.
     parameter_control_id: []const u8,

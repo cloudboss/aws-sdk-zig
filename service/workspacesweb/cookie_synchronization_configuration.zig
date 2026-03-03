@@ -9,7 +9,7 @@ pub const CookieSynchronizationConfiguration = struct {
 
     /// The list of cookie specifications that are blocked from being synchronized
     /// to the remote browser.
-    blocklist: ?[]const CookieSpecification,
+    blocklist: ?[]const CookieSpecification = null,
 
     pub const json_field_names = .{
         .allowlist = "allowlist",

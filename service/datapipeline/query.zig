@@ -4,7 +4,7 @@ const Selector = @import("selector.zig").Selector;
 pub const Query = struct {
     /// List of selectors that define the query. An object must satisfy all of the
     /// selectors to match the query.
-    selectors: ?[]const Selector,
+    selectors: ?[]const Selector = null,
 
     pub const json_field_names = .{
         .selectors = "selectors",

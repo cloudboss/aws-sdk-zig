@@ -43,7 +43,7 @@ pub const RemotePodNetwork = struct {
     /// * Each block cannot overlap with the range of the VPC CIDR blocks for your
     ///   EKS
     /// resources, or the block of the Kubernetes service IP range.
-    cidrs: ?[]const []const u8,
+    cidrs: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .cidrs = "cidrs",

@@ -12,7 +12,7 @@ pub const BasicCatalogTarget = struct {
 
     /// The partition keys used to distribute data across multiple partitions or
     /// shards based on a specific key or set of key.
-    partition_keys: ?[]const []const []const u8,
+    partition_keys: ?[]const []const []const u8 = null,
 
     /// The table that defines the schema of your output data. This table must
     /// already exist in the Data Catalog.

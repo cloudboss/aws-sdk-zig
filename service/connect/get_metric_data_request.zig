@@ -38,7 +38,7 @@ pub const GetMetricDataRequest = struct {
     /// RoutingStepExpression is not a valid filter for GetMetricData and we
     /// recommend switching to GetMetricDataV2 for
     /// more up-to-date features.
-    groupings: ?[]const Grouping,
+    groupings: ?[]const Grouping = null,
 
     /// The metrics to retrieve. Specify the name, unit, and statistic for each
     /// metric. The following historical metrics
@@ -287,12 +287,12 @@ pub const GetMetricDataRequest = struct {
     instance_id: []const u8,
 
     /// The maximum number of results to return per page.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The token for the next set of results. Use the value returned in the
     /// previous
     /// response in the next request to retrieve the next set of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The timestamp, in UNIX Epoch time format, at which to start the reporting
     /// interval for the retrieval of

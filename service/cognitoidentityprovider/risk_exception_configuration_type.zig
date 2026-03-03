@@ -5,12 +5,12 @@ pub const RiskExceptionConfigurationType = struct {
     /// blocks
     /// authentication requests. This parameter is displayed and set in CIDR
     /// notation.
-    blocked_ip_range_list: ?[]const []const u8,
+    blocked_ip_range_list: ?[]const []const u8 = null,
 
     /// An always-allow IP address list. Risk detection isn't performed on the IP
     /// addresses in
     /// this range list. This parameter is displayed and set in CIDR notation.
-    skipped_ip_range_list: ?[]const []const u8,
+    skipped_ip_range_list: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .blocked_ip_range_list = "BlockedIPRangeList",

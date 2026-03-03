@@ -5,7 +5,7 @@ const ApplicationVisibility = @import("application_visibility.zig").ApplicationV
 /// an application.
 pub const PortalOptions = struct {
     /// A structure that describes the sign-in options for the access portal.
-    sign_in_options: ?SignInOptions,
+    sign_in_options: ?SignInOptions = null,
 
     /// Indicates whether this application is visible in the access portal.
     visibility: ApplicationVisibility = "ENABLED",

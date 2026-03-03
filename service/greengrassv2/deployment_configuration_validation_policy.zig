@@ -13,7 +13,7 @@ pub const DeploymentConfigurationValidationPolicy = struct {
     /// the device.
     ///
     /// Default: `30`
-    timeout_in_seconds: ?i32,
+    timeout_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .timeout_in_seconds = "timeoutInSeconds",

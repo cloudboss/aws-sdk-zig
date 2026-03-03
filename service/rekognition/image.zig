@@ -38,10 +38,10 @@ const S3Object = @import("s3_object.zig").S3Object;
 pub const Image = struct {
     /// Blob of image bytes up to 5 MBs. Note that the maximum image size you can
     /// pass to `DetectCustomLabels` is 4MB.
-    bytes: ?[]const u8,
+    bytes: ?[]const u8 = null,
 
     /// Identifies an S3 object as the image source.
-    s3_object: ?S3Object,
+    s3_object: ?S3Object = null,
 
     pub const json_field_names = .{
         .bytes = "Bytes",

@@ -15,30 +15,30 @@ pub const StreamGroupSummary = struct {
     /// A timestamp that indicates when this resource was created. Timestamps are
     /// expressed using in ISO8601 format, such as: `2022-12-27T22:29:40+00:00`
     /// (UTC).
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Object that identifies the Amazon GameLift Streams application to stream
     /// with this stream group.
-    default_application: ?DefaultApplication,
+    default_application: ?DefaultApplication = null,
 
     /// A descriptive label for the stream group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time at which this stream group expires. Timestamps are expressed using
     /// in ISO8601 format, such as: `2022-12-27T22:29:40+00:00` (UTC). After this
     /// time, you will no longer be able to update this stream group or use it to
     /// start stream sessions. Only Get and Delete operations will work on an
     /// expired stream group.
-    expires_at: ?i64,
+    expires_at: ?i64 = null,
 
     /// An ID that uniquely identifies the stream group resource. Example ID:
     /// `sg-1AB2C3De4`.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A timestamp that indicates when this resource was last updated. Timestamps
     /// are expressed using in ISO8601 format, such as: `2022-12-27T22:29:40+00:00`
     /// (UTC).
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The current status of the stream group resource. Possible statuses include
     /// the following:
@@ -60,7 +60,7 @@ pub const StreamGroupSummary = struct {
     ///   capabilities.
     /// * `UPDATING_LOCATIONS`: One or more locations in the stream group are in the
     ///   process of updating (either activating or deleting).
-    status: ?StreamGroupStatus,
+    status: ?StreamGroupStatus = null,
 
     /// The target stream quality for the stream group.
     ///
@@ -182,7 +182,7 @@ pub const StreamGroupSummary = struct {
     /// * Reference frame rate: 60 fps
     /// * Workload specifications: 8 vCPUs, 32 GB RAM, 16 GB VRAM
     /// * Tenancy: Supports 1 concurrent stream session
-    stream_class: ?StreamClass,
+    stream_class: ?StreamClass = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

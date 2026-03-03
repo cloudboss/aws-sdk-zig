@@ -9,20 +9,20 @@ const AccessAssociationSourceType = @import("access_association_source_type.zig"
 pub const DomainNameAccessAssociation = struct {
     /// The ARN of the domain name access association source. For a VPCE, the ARN
     /// must be a VPC endpoint.
-    access_association_source: ?[]const u8,
+    access_association_source: ?[]const u8 = null,
 
     /// The type of the domain name access association source.
-    access_association_source_type: ?AccessAssociationSourceType,
+    access_association_source_type: ?AccessAssociationSourceType = null,
 
     /// The ARN of the domain name access association resource.
-    domain_name_access_association_arn: ?[]const u8,
+    domain_name_access_association_arn: ?[]const u8 = null,
 
     /// The ARN of the domain name.
-    domain_name_arn: ?[]const u8,
+    domain_name_arn: ?[]const u8 = null,
 
     /// The collection of tags. Each tag element is associated with a given
     /// resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .access_association_source = "accessAssociationSource",

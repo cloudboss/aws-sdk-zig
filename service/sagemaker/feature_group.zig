@@ -13,10 +13,10 @@ const Tag = @import("tag.zig").Tag;
 /// per features.
 pub const FeatureGroup = struct {
     /// The time a `FeatureGroup` was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A free form description of a `FeatureGroup`.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the feature that stores the `EventTime` of a Record in a
     /// `FeatureGroup`.
@@ -24,12 +24,12 @@ pub const FeatureGroup = struct {
     /// A `EventTime` is point in time when a new event occurs that corresponds to
     /// the creation or update of a `Record` in `FeatureGroup`. All `Records` in the
     /// `FeatureGroup` must have a corresponding `EventTime`.
-    event_time_feature_name: ?[]const u8,
+    event_time_feature_name: ?[]const u8 = null,
 
     /// The reason that the `FeatureGroup` failed to be replicated in the
     /// `OfflineStore`. This is failure may be due to a failure to create a
     /// `FeatureGroup` in or delete a `FeatureGroup` from the `OfflineStore`.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// A list of `Feature`s. Each `Feature` must include a `FeatureName` and a
     /// `FeatureType`.
@@ -40,39 +40,39 @@ pub const FeatureGroup = struct {
     /// `api_invocation_time`.
     ///
     /// You can create up to 2,500 `FeatureDefinition`s per `FeatureGroup`.
-    feature_definitions: ?[]const FeatureDefinition,
+    feature_definitions: ?[]const FeatureDefinition = null,
 
     /// The Amazon Resource Name (ARN) of a `FeatureGroup`.
-    feature_group_arn: ?[]const u8,
+    feature_group_arn: ?[]const u8 = null,
 
     /// The name of the `FeatureGroup`.
-    feature_group_name: ?[]const u8,
+    feature_group_name: ?[]const u8 = null,
 
     /// A `FeatureGroup` status.
-    feature_group_status: ?FeatureGroupStatus,
+    feature_group_status: ?FeatureGroupStatus = null,
 
     /// A timestamp indicating the last time you updated the feature group.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// A value that indicates whether the feature group was updated successfully.
-    last_update_status: ?LastUpdateStatus,
+    last_update_status: ?LastUpdateStatus = null,
 
-    offline_store_config: ?OfflineStoreConfig,
+    offline_store_config: ?OfflineStoreConfig = null,
 
-    offline_store_status: ?OfflineStoreStatus,
+    offline_store_status: ?OfflineStoreStatus = null,
 
-    online_store_config: ?OnlineStoreConfig,
+    online_store_config: ?OnlineStoreConfig = null,
 
     /// The name of the `Feature` whose value uniquely identifies a `Record` defined
     /// in the `FeatureGroup` `FeatureDefinitions`.
-    record_identifier_feature_name: ?[]const u8,
+    record_identifier_feature_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM execution role used to create the
     /// feature group.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Tags used to define a `FeatureGroup`.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

@@ -8,37 +8,37 @@ const ResponsibilityTransferType = @import("responsibility_transfer_type.zig").R
 /// responsibilities for their organization.
 pub const ResponsibilityTransfer = struct {
     /// ID for the handshake of the transfer.
-    active_handshake_id: ?[]const u8,
+    active_handshake_id: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) for the transfer.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Timestamp when the transfer ends.
-    end_timestamp: ?i64,
+    end_timestamp: ?i64 = null,
 
     /// ID for the transfer.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Name assigned to the transfer.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Account that allows another account external to its organization to manage
     /// the
     /// specified responsibilities for the organization.
-    source: ?TransferParticipant,
+    source: ?TransferParticipant = null,
 
     /// Timestamp when the transfer starts.
-    start_timestamp: ?i64,
+    start_timestamp: ?i64 = null,
 
     /// Status for the transfer.
-    status: ?ResponsibilityTransferStatus,
+    status: ?ResponsibilityTransferStatus = null,
 
     /// Account that manages the specified responsibilities for another
     /// organization.
-    target: ?TransferParticipant,
+    target: ?TransferParticipant = null,
 
     /// The type of transfer. Currently, only `BILLING` is supported.
-    @"type": ?ResponsibilityTransferType,
+    @"type": ?ResponsibilityTransferType = null,
 
     pub const json_field_names = .{
         .active_handshake_id = "ActiveHandshakeId",

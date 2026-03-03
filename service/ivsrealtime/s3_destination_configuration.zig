@@ -12,7 +12,7 @@ pub const S3DestinationConfiguration = struct {
     /// optional customer specification, currently used only to specify the
     /// recording format for
     /// storing a recording in Amazon S3.
-    recording_configuration: ?RecordingConfiguration,
+    recording_configuration: ?RecordingConfiguration = null,
 
     /// ARN of the StorageConfiguration where recorded videos will be
     /// stored.
@@ -22,7 +22,7 @@ pub const S3DestinationConfiguration = struct {
     /// for a Composition and modify the interval at which thumbnails are generated
     /// for
     /// the live session.
-    thumbnail_configurations: ?[]const CompositionThumbnailConfiguration,
+    thumbnail_configurations: ?[]const CompositionThumbnailConfiguration = null,
 
     pub const json_field_names = .{
         .encoder_configuration_arns = "encoderConfigurationArns",

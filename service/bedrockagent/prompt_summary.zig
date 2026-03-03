@@ -13,7 +13,7 @@ pub const PromptSummary = struct {
     created_at: i64,
 
     /// The description of the prompt.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the prompt.
     id: []const u8,

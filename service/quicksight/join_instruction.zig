@@ -4,7 +4,7 @@ const JoinType = @import("join_type.zig").JoinType;
 /// The instructions associated with a join.
 pub const JoinInstruction = struct {
     /// Join key properties of the left operand.
-    left_join_key_properties: ?JoinKeyProperties,
+    left_join_key_properties: ?JoinKeyProperties = null,
 
     /// The operand on the left side of a join.
     left_operand: []const u8,
@@ -13,7 +13,7 @@ pub const JoinInstruction = struct {
     on_clause: []const u8,
 
     /// Join key properties of the right operand.
-    right_join_key_properties: ?JoinKeyProperties,
+    right_join_key_properties: ?JoinKeyProperties = null,
 
     /// The operand on the right side of a join.
     right_operand: []const u8,

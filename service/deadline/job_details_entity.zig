@@ -8,25 +8,25 @@ const PathMappingRule = @import("path_mapping_rule.zig").PathMappingRule;
 /// The job details for a specific job.
 pub const JobDetailsEntity = struct {
     /// The job attachment settings.
-    job_attachment_settings: ?JobAttachmentSettings,
+    job_attachment_settings: ?JobAttachmentSettings = null,
 
     /// The job ID.
     job_id: []const u8,
 
     /// The user name and group that the job uses when run.
-    job_run_as_user: ?JobRunAsUser,
+    job_run_as_user: ?JobRunAsUser = null,
 
     /// The log group name.
     log_group_name: []const u8,
 
     /// The parameters.
-    parameters: ?[]const aws.map.MapEntry(JobParameter),
+    parameters: ?[]const aws.map.MapEntry(JobParameter) = null,
 
     /// The path mapping rules.
-    path_mapping_rules: ?[]const PathMappingRule,
+    path_mapping_rules: ?[]const PathMappingRule = null,
 
     /// The queue role ARN.
-    queue_role_arn: ?[]const u8,
+    queue_role_arn: ?[]const u8 = null,
 
     /// The schema version.
     schema_version: []const u8,

@@ -6,7 +6,7 @@ pub const ObjectLambdaConfiguration = struct {
     /// A container for allowed features. Valid inputs are `GetObject-Range`,
     /// `GetObject-PartNumber`, `HeadObject-Range`, and
     /// `HeadObject-PartNumber`.
-    allowed_features: ?[]const ObjectLambdaAllowedFeature,
+    allowed_features: ?[]const ObjectLambdaAllowedFeature = null,
 
     /// A container for whether the CloudWatch metrics configuration is enabled.
     cloud_watch_metrics_enabled: bool = false,

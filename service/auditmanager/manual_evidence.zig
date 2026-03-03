@@ -7,13 +7,13 @@ pub const ManualEvidence = struct {
     /// the `evidenceFileName` value from the [
     /// `GetEvidenceFileUploadUrl`
     /// ](https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetEvidenceFileUploadUrl.html) API response.
-    evidence_file_name: ?[]const u8,
+    evidence_file_name: ?[]const u8 = null,
 
     /// The S3 URL of the object that's imported as manual evidence.
-    s_3_resource_path: ?[]const u8,
+    s_3_resource_path: ?[]const u8 = null,
 
     /// The plain text response that's entered and saved as manual evidence.
-    text_response: ?[]const u8,
+    text_response: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .evidence_file_name = "evidenceFileName",

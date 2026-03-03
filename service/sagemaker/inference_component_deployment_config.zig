@@ -5,7 +5,7 @@ const InferenceComponentRollingUpdatePolicy = @import("inference_component_rolli
 /// components. The configuration includes the desired deployment strategy and
 /// rollback settings.
 pub const InferenceComponentDeploymentConfig = struct {
-    auto_rollback_configuration: ?AutoRollbackConfig,
+    auto_rollback_configuration: ?AutoRollbackConfig = null,
 
     /// Specifies a rolling deployment strategy for updating a SageMaker AI
     /// endpoint.

@@ -21,11 +21,11 @@ pub const KeyMetadata = struct {
     /// Management Service
     /// (KMS)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms) in the Example ARNs section of the *Amazon Web Services General
     /// Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The twelve-digit account ID of the Amazon Web Services account that owns the
     /// KMS key.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
     /// The cluster ID of the CloudHSM cluster that contains the key material for
     /// the KMS key. When
@@ -34,10 +34,10 @@ pub const KeyMetadata = struct {
     /// key in the associated CloudHSM cluster. This field is present only when the
     /// KMS key is created in
     /// an CloudHSM key store.
-    cloud_hsm_cluster_id: ?[]const u8,
+    cloud_hsm_cluster_id: ?[]const u8 = null,
 
     /// The date and time when the KMS key was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// Identifies the current key material. This value is present for symmetric
     /// encryption keys
@@ -47,7 +47,7 @@ pub const KeyMetadata = struct {
     /// the current key material for both encryption and decryption, and the
     /// non-current key material
     /// for decryption operations only.
-    current_key_material_id: ?[]const u8,
+    current_key_material_id: ?[]const u8 = null,
 
     /// Instead, use the `KeySpec` field.
     ///
@@ -55,12 +55,12 @@ pub const KeyMetadata = struct {
     /// value. We recommend that you use the `KeySpec` field in your code. However,
     /// to
     /// avoid breaking changes, KMS supports both fields.
-    customer_master_key_spec: ?CustomerMasterKeySpec,
+    customer_master_key_spec: ?CustomerMasterKeySpec = null,
 
     /// A unique identifier for the [custom key
     /// store](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html) that contains the KMS key. This field is
     /// present only when the KMS key is created in a custom key store.
-    custom_key_store_id: ?[]const u8,
+    custom_key_store_id: ?[]const u8 = null,
 
     /// The date and time after which KMS deletes this KMS key. This value is
     /// present only when
@@ -72,10 +72,10 @@ pub const KeyMetadata = struct {
     /// keys, its key state is `PendingReplicaDeletion` and the length of its
     /// waiting
     /// period is displayed in the `PendingDeletionWindowInDays` field.
-    deletion_date: ?i64,
+    deletion_date: ?i64 = null,
 
     /// The description of the KMS key.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Specifies whether the KMS key is enabled. When `KeyState` is
     /// `Enabled` this value is true, otherwise it is false.
@@ -87,15 +87,15 @@ pub const KeyMetadata = struct {
     ///
     /// This value is present only when the `KeyUsage` of the KMS key is
     /// `ENCRYPT_DECRYPT`.
-    encryption_algorithms: ?[]const EncryptionAlgorithmSpec,
+    encryption_algorithms: ?[]const EncryptionAlgorithmSpec = null,
 
     /// Specifies whether the KMS key's key material expires. This value is present
     /// only when
     /// `Origin` is `EXTERNAL`, otherwise this value is omitted.
-    expiration_model: ?ExpirationModelType,
+    expiration_model: ?ExpirationModelType = null,
 
     /// The key agreement algorithm used to derive a shared secret.
-    key_agreement_algorithms: ?[]const KeyAgreementAlgorithmSpec,
+    key_agreement_algorithms: ?[]const KeyAgreementAlgorithmSpec = null,
 
     /// The globally unique identifier for the KMS key.
     key_id: []const u8,
@@ -105,10 +105,10 @@ pub const KeyMetadata = struct {
     /// Amazon Web Services managed. For more information about the difference, see
     /// [KMS
     /// keys](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms_keys) in the *Key Management Service Developer Guide*.
-    key_manager: ?KeyManagerType,
+    key_manager: ?KeyManagerType = null,
 
     /// Describes the type of key material in the KMS key.
-    key_spec: ?KeySpec,
+    key_spec: ?KeySpec = null,
 
     /// The current status of the KMS key.
     ///
@@ -117,18 +117,18 @@ pub const KeyMetadata = struct {
     /// keys](https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
     /// in
     /// the *Key Management Service Developer Guide*.
-    key_state: ?KeyState,
+    key_state: ?KeyState = null,
 
     /// The [cryptographic
     /// operations](https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations) for which you can use the KMS key.
-    key_usage: ?KeyUsageType,
+    key_usage: ?KeyUsageType = null,
 
     /// The message authentication code (MAC) algorithm that the HMAC KMS key
     /// supports.
     ///
     /// This value is present only when the `KeyUsage` of the KMS key is
     /// `GENERATE_VERIFY_MAC`.
-    mac_algorithms: ?[]const MacAlgorithmSpec,
+    mac_algorithms: ?[]const MacAlgorithmSpec = null,
 
     /// Indicates whether the KMS key is a multi-Region (`True`) or regional
     /// (`False`) key. This value is `True` for multi-Region primary and
@@ -136,7 +136,7 @@ pub const KeyMetadata = struct {
     ///
     /// For more information about multi-Region keys, see [Multi-Region keys in
     /// KMS](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html) in the *Key Management Service Developer Guide*.
-    multi_region: ?bool,
+    multi_region: ?bool = null,
 
     /// Lists the primary and replica keys in same multi-Region key. This field is
     /// present only
@@ -154,7 +154,7 @@ pub const KeyMetadata = struct {
     ///
     /// * `ReplicaKeys` displays the key ARNs and Regions of all replica keys. This
     /// field includes the current KMS key if it is a replica key.
-    multi_region_configuration: ?MultiRegionConfiguration,
+    multi_region_configuration: ?MultiRegionConfiguration = null,
 
     /// The source of the key material for the KMS key. When this value is
     /// `AWS_KMS`,
@@ -164,7 +164,7 @@ pub const KeyMetadata = struct {
     /// `AWS_CLOUDHSM`, the key material was created in the CloudHSM cluster
     /// associated with
     /// a custom key store.
-    origin: ?OriginType,
+    origin: ?OriginType = null,
 
     /// The waiting period before the primary key in a multi-Region key is deleted.
     /// This waiting
@@ -187,7 +187,7 @@ pub const KeyMetadata = struct {
     /// scheduled
     /// primary key changes from `PendingReplicaDeletion` to `PendingDeletion`
     /// and the deletion date appears in the `DeletionDate` field.
-    pending_deletion_window_in_days: ?i32,
+    pending_deletion_window_in_days: ?i32 = null,
 
     /// The signing algorithms that the KMS key supports. You cannot use the KMS key
     /// with other
@@ -195,7 +195,7 @@ pub const KeyMetadata = struct {
     ///
     /// This field appears only when the `KeyUsage` of the KMS key is
     /// `SIGN_VERIFY`.
-    signing_algorithms: ?[]const SigningAlgorithmSpec,
+    signing_algorithms: ?[]const SigningAlgorithmSpec = null,
 
     /// The earliest time at which any imported key material permanently associated
     /// with this KMS
@@ -204,7 +204,7 @@ pub const KeyMetadata = struct {
     /// becomes unusable. This value is present only for KMS keys whose `Origin` is
     /// `EXTERNAL` and the `ExpirationModel` is
     /// `KEY_MATERIAL_EXPIRES`, otherwise this value is omitted.
-    valid_to: ?i64,
+    valid_to: ?i64 = null,
 
     /// Information about the external key that is associated with a KMS key in an
     /// external key
@@ -213,7 +213,7 @@ pub const KeyMetadata = struct {
     /// For more information, see [External
     /// key](https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key) in the
     /// *Key Management Service Developer Guide*.
-    xks_key_configuration: ?XksKeyConfigurationType,
+    xks_key_configuration: ?XksKeyConfigurationType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

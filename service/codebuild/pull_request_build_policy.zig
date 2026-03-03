@@ -11,7 +11,7 @@ pub const PullRequestBuildPolicy = struct {
     /// provide valid comment approvals. If a pull request contributor is one of
     /// these roles, their pull request builds will trigger automatically. This
     /// field is only applicable when `requiresCommentApproval` is not *DISABLED*.
-    approver_roles: ?[]const PullRequestBuildApproverRole,
+    approver_roles: ?[]const PullRequestBuildApproverRole = null,
 
     /// Specifies when comment-based approval is required before triggering a build
     /// on pull requests. This setting determines whether builds run automatically

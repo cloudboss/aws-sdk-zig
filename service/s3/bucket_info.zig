@@ -11,8 +11,8 @@ const BucketType = @import("bucket_type.zig").BucketType;
 pub const BucketInfo = struct {
     /// The number of Zone (Availability Zone or Local Zone) that's used for
     /// redundancy for the bucket.
-    data_redundancy: ?DataRedundancy,
+    data_redundancy: ?DataRedundancy = null,
 
     /// The type of bucket.
-    @"type": ?BucketType,
+    @"type": ?BucketType = null,
 };

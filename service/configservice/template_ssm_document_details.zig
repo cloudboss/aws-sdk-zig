@@ -18,7 +18,7 @@ pub const TemplateSSMDocumentDetails = struct {
     /// default, Config uses the latest version.
     ///
     /// This field is optional.
-    document_version: ?[]const u8,
+    document_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .document_name = "DocumentName",

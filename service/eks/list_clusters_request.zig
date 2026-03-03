@@ -5,7 +5,7 @@ pub const ListClustersRequest = struct {
     /// return only Amazon EKS clusters. '`all`' must be in lowercase otherwise an
     /// error
     /// occurs.
-    include: ?[]const []const u8,
+    include: ?[]const []const u8 = null,
 
     /// The maximum number of results, returned in paginated output. You receive
     /// `maxResults` in a single page, along with a `nextToken`
@@ -15,7 +15,7 @@ pub const ListClustersRequest = struct {
     /// between 1 and 100. If you don't use this parameter,
     /// 100 results and a `nextToken` value, if applicable, are
     /// returned.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The `nextToken` value returned from a previous paginated request, where
     /// `maxResults` was used and
@@ -26,7 +26,7 @@ pub const ListClustersRequest = struct {
     ///
     /// This token should be treated as an opaque identifier that is used only to
     /// retrieve the next items in a list and not for other programmatic purposes.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .include = "include",

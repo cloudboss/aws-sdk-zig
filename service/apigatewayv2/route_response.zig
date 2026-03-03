@@ -6,16 +6,16 @@ const ParameterConstraints = @import("parameter_constraints.zig").ParameterConst
 pub const RouteResponse = struct {
     /// Represents the model selection expression of a route response. Supported
     /// only for WebSocket APIs.
-    model_selection_expression: ?[]const u8,
+    model_selection_expression: ?[]const u8 = null,
 
     /// Represents the response models of a route response.
-    response_models: ?[]const aws.map.StringMapEntry,
+    response_models: ?[]const aws.map.StringMapEntry = null,
 
     /// Represents the response parameters of a route response.
-    response_parameters: ?[]const aws.map.MapEntry(ParameterConstraints),
+    response_parameters: ?[]const aws.map.MapEntry(ParameterConstraints) = null,
 
     /// Represents the identifier of a route response.
-    route_response_id: ?[]const u8,
+    route_response_id: ?[]const u8 = null,
 
     /// Represents the route response key of a route response.
     route_response_key: []const u8,

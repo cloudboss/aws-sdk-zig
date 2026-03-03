@@ -5,13 +5,13 @@ const MetricsSource = @import("metrics_source.zig").MetricsSource;
 /// monitor is set using the model package.
 pub const DriftCheckBias = struct {
     /// The bias config file for a model.
-    config_file: ?FileSource,
+    config_file: ?FileSource = null,
 
     /// The post-training constraints.
-    post_training_constraints: ?MetricsSource,
+    post_training_constraints: ?MetricsSource = null,
 
     /// The pre-training constraints.
-    pre_training_constraints: ?MetricsSource,
+    pre_training_constraints: ?MetricsSource = null,
 
     pub const json_field_names = .{
         .config_file = "ConfigFile",

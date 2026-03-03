@@ -6,7 +6,7 @@ pub const AlertManagerDefinitionStatus = struct {
     status_code: AlertManagerDefinitionStatusCode,
 
     /// If there is a failure, the reason for the failure.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status_code = "statusCode",

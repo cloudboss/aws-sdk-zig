@@ -8,24 +8,24 @@ pub const CSV = struct {
     ///
     /// If you omit this, default column names (`[column_1, column_2 ...]`) are
     /// used.
-    columns: ?[]const []const u8,
+    columns: ?[]const []const u8 = null,
 
     /// The character used to separate each column in the original comma-separated
     /// value log
     /// event. If you omit this, the processor looks for the comma `,` character as
     /// the
     /// delimiter.
-    delimiter: ?[]const u8,
+    delimiter: ?[]const u8 = null,
 
     /// The character used used as a text qualifier for a single column of data. If
     /// you omit this,
     /// the double quotation mark `"` character is used.
-    quote_character: ?[]const u8,
+    quote_character: ?[]const u8 = null,
 
     /// The path to the field in the log event that has the comma separated values
     /// to be parsed.
     /// If you omit this value, the whole log message is processed.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .columns = "columns",

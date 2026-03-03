@@ -5,7 +5,7 @@ pub const WorkflowTypeFilter = struct {
     name: []const u8,
 
     /// Version of the workflow type.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

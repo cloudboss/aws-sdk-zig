@@ -21,22 +21,22 @@ pub const JobRun = struct {
     arn: []const u8,
 
     /// The attempt of the job run.
-    attempt: ?i32,
+    attempt: ?i32 = null,
 
     /// The date and time of when the job run attempt was created.
-    attempt_created_at: ?i64,
+    attempt_created_at: ?i64 = null,
 
     /// The date and time of when the job run attempt was last updated.
-    attempt_updated_at: ?i64,
+    attempt_updated_at: ?i64 = null,
 
     /// The aggregate vCPU, memory, and storage that Amazon Web Services has billed
     /// for the job run. The billed resources include a 1-minute minimum usage for
     /// workers, plus additional storage over 20 GB per worker. Note that billed
     /// resources do not include usage for idle pre-initialized workers.
-    billed_resource_utilization: ?ResourceUtilization,
+    billed_resource_utilization: ?ResourceUtilization = null,
 
     /// The configuration settings that are used to override default configuration.
-    configuration_overrides: ?ConfigurationOverrides,
+    configuration_overrides: ?ConfigurationOverrides = null,
 
     /// The date and time when the job run was created.
     created_at: i64,
@@ -45,16 +45,16 @@ pub const JobRun = struct {
     created_by: []const u8,
 
     /// The date and time when the job was terminated.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
-    execution_iam_policy: ?JobRunExecutionIamPolicy,
+    execution_iam_policy: ?JobRunExecutionIamPolicy = null,
 
     /// The execution role ARN of the job run.
     execution_role: []const u8,
 
     /// Returns the job run timeout value from the `StartJobRun` call. If no timeout
     /// was specified, then it returns the default timeout of 720 minutes.
-    execution_timeout_minutes: ?i64,
+    execution_timeout_minutes: ?i64 = null,
 
     /// The job driver for the job run.
     job_driver: JobDriver,
@@ -63,25 +63,25 @@ pub const JobRun = struct {
     job_run_id: []const u8,
 
     /// The mode of the job run.
-    mode: ?JobRunMode,
+    mode: ?JobRunMode = null,
 
     /// The optional job run name. This doesn't have to be unique.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    network_configuration: ?NetworkConfiguration,
+    network_configuration: ?NetworkConfiguration = null,
 
     /// The total time for a job in the QUEUED state in milliseconds.
-    queued_duration_milliseconds: ?i64,
+    queued_duration_milliseconds: ?i64 = null,
 
     /// The Amazon EMR release associated with the application your job is running
     /// on.
     release_label: []const u8,
 
     /// The retry policy of the job run.
-    retry_policy: ?RetryPolicy,
+    retry_policy: ?RetryPolicy = null,
 
     /// The date and time when the job moved to the RUNNING state.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The state of the job run.
     state: JobRunState,
@@ -90,16 +90,16 @@ pub const JobRun = struct {
     state_details: []const u8,
 
     /// The tags assigned to the job run.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The job run total execution duration in seconds. This field is only
     /// available for job runs in a `COMPLETED`, `FAILED`, or `CANCELLED` state.
-    total_execution_duration_seconds: ?i32,
+    total_execution_duration_seconds: ?i32 = null,
 
     /// The aggregate vCPU, memory, and storage resources used from the time the job
     /// starts to execute, until the time the job terminates, rounded up to the
     /// nearest second.
-    total_resource_utilization: ?TotalResourceUtilization,
+    total_resource_utilization: ?TotalResourceUtilization = null,
 
     /// The date and time when the job run was updated.
     updated_at: i64,

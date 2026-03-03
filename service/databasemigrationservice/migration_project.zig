@@ -4,35 +4,35 @@ const DataProviderDescriptor = @import("data_provider_descriptor.zig").DataProvi
 /// Provides information that defines a migration project.
 pub const MigrationProject = struct {
     /// A user-friendly description of the migration project.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the instance profile for your migration
     /// project.
-    instance_profile_arn: ?[]const u8,
+    instance_profile_arn: ?[]const u8 = null,
 
     /// The name of the associated instance profile.
-    instance_profile_name: ?[]const u8,
+    instance_profile_name: ?[]const u8 = null,
 
     /// The ARN string that uniquely identifies the migration project.
-    migration_project_arn: ?[]const u8,
+    migration_project_arn: ?[]const u8 = null,
 
     /// The time when the migration project was created.
-    migration_project_creation_time: ?i64,
+    migration_project_creation_time: ?i64 = null,
 
     /// The name of the migration project.
-    migration_project_name: ?[]const u8,
+    migration_project_name: ?[]const u8 = null,
 
     /// The schema conversion application attributes, including the Amazon S3 bucket
     /// name and Amazon S3 role ARN.
-    schema_conversion_application_attributes: ?SCApplicationAttributes,
+    schema_conversion_application_attributes: ?SCApplicationAttributes = null,
 
     /// Information about the source data provider, including the name or ARN, and
     /// Secrets Manager parameters.
-    source_data_provider_descriptors: ?[]const DataProviderDescriptor,
+    source_data_provider_descriptors: ?[]const DataProviderDescriptor = null,
 
     /// Information about the target data provider, including the name or ARN, and
     /// Secrets Manager parameters.
-    target_data_provider_descriptors: ?[]const DataProviderDescriptor,
+    target_data_provider_descriptors: ?[]const DataProviderDescriptor = null,
 
     /// The settings in JSON format for migration rules. Migration rules make it
     /// possible for you to change
@@ -40,7 +40,7 @@ pub const MigrationProject = struct {
     /// can change an object name
     /// to lowercase or uppercase, add or remove a prefix or suffix, or rename
     /// objects.
-    transformation_rules: ?[]const u8,
+    transformation_rules: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

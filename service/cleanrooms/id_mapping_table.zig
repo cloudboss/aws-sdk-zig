@@ -18,7 +18,7 @@ pub const IdMappingTable = struct {
     create_time: i64,
 
     /// The description of the ID mapping table.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the ID mapping table.
     id: []const u8,
@@ -30,7 +30,7 @@ pub const IdMappingTable = struct {
     input_reference_properties: IdMappingTableInputReferenceProperties,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the membership resource for the ID mapping
     /// table.

@@ -9,7 +9,7 @@ pub const CreateAccessPointInput = struct {
     ///
     /// You can add more Availability Zones after you create the load balancer using
     /// EnableAvailabilityZonesForLoadBalancer.
-    availability_zones: ?[]const []const u8,
+    availability_zones: ?[]const []const u8 = null,
 
     /// The listeners.
     ///
@@ -36,14 +36,14 @@ pub const CreateAccessPointInput = struct {
     ///
     /// Specify `internal` to create a load balancer with a DNS name that resolves
     /// to private IP addresses.
-    scheme: ?[]const u8,
+    scheme: ?[]const u8 = null,
 
     /// The IDs of the security groups to assign to the load balancer.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// The IDs of the subnets in your VPC to attach to the load balancer.
     /// Specify one subnet per Availability Zone specified in `AvailabilityZones`.
-    subnets: ?[]const []const u8,
+    subnets: ?[]const []const u8 = null,
 
     /// A list of tags to assign to the load balancer.
     ///
@@ -51,5 +51,5 @@ pub const CreateAccessPointInput = struct {
     /// Load
     /// Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html)
     /// in the *Classic Load Balancers Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

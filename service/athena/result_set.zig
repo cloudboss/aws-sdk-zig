@@ -9,10 +9,10 @@ pub const ResultSet = struct {
     /// The metadata that describes the column structure and data types of a table
     /// of query
     /// results.
-    result_set_metadata: ?ResultSetMetadata,
+    result_set_metadata: ?ResultSetMetadata = null,
 
     /// The rows in the table.
-    rows: ?[]const Row,
+    rows: ?[]const Row = null,
 
     pub const json_field_names = .{
         .result_set_metadata = "ResultSetMetadata",

@@ -4,10 +4,10 @@ pub const ListFleetsRequest = struct {
     /// When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list
     /// response includes: fleet ID, Amazon Resource Name (ARN), creation time, and
     /// last modification time.
-    list_response_scope: ?ListResponseScope,
+    list_response_scope: ?ListResponseScope = null,
 
     /// The maximum number of items to return, between 1 and 100, inclusive.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// A pagination token for the next set of results.
     ///
@@ -16,7 +16,7 @@ pub const ListFleetsRequest = struct {
     /// retrieve the next set of results, reissue the search request and include the
     /// returned token. When all results have been returned, the response does not
     /// contain a pagination token value.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .list_response_scope = "listResponseScope",

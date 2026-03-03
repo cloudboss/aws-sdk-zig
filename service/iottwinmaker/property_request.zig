@@ -5,13 +5,13 @@ const DataValue = @import("data_value.zig").DataValue;
 /// An object that sets information about a property.
 pub const PropertyRequest = struct {
     /// An object that specifies information about a property.
-    definition: ?PropertyDefinitionRequest,
+    definition: ?PropertyDefinitionRequest = null,
 
     /// The update type of the update property request.
-    update_type: ?PropertyUpdateType,
+    update_type: ?PropertyUpdateType = null,
 
     /// The value of the property.
-    value: ?DataValue,
+    value: ?DataValue = null,
 
     pub const json_field_names = .{
         .definition = "definition",

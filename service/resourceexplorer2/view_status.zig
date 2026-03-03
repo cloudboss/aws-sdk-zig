@@ -6,13 +6,13 @@ const View = @import("view.zig").View;
 /// in a specific Region.
 pub const ViewStatus = struct {
     /// Details about any error that occurred during the view operation.
-    error_details: ?ErrorDetails,
+    error_details: ?ErrorDetails = null,
 
     /// The current status of the view operation. Valid values are `SUCCEEDED`,
     /// `FAILED`, `IN_PROGRESS`, or `SKIPPED`.
-    status: ?OperationStatus,
+    status: ?OperationStatus = null,
 
-    view: ?View,
+    view: ?View = null,
 
     pub const json_field_names = .{
         .error_details = "ErrorDetails",

@@ -5,7 +5,7 @@ const CreateAssessmentFrameworkControl = @import("create_assessment_framework_co
 pub const CreateAssessmentFrameworkControlSet = struct {
     /// The list of controls within the control set. This doesn't contain the
     /// control set ID.
-    controls: ?[]const CreateAssessmentFrameworkControl,
+    controls: ?[]const CreateAssessmentFrameworkControl = null,
 
     /// The name of the control set.
     name: []const u8,

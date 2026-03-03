@@ -8,13 +8,13 @@ pub const SamplingStatisticSummary = struct {
     request_count: i32 = 0,
 
     /// The name of the sampling rule.
-    rule_name: ?[]const u8,
+    rule_name: ?[]const u8 = null,
 
     /// The number of requests recorded.
     sampled_count: i32 = 0,
 
     /// The start time of the reporting window.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .borrow_count = "BorrowCount",

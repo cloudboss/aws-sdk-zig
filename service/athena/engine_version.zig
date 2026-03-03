@@ -10,12 +10,12 @@ pub const EngineVersion = struct {
     /// is chosen by Athena. When a request to update the engine version is made by
     /// a `CreateWorkGroup` or `UpdateWorkGroup` operation, the
     /// `EffectiveEngineVersion` field is ignored.
-    effective_engine_version: ?[]const u8,
+    effective_engine_version: ?[]const u8 = null,
 
     /// The engine version requested by the user. Possible values are determined by
     /// the output
     /// of `ListEngineVersions`, including AUTO. The default is AUTO.
-    selected_engine_version: ?[]const u8,
+    selected_engine_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .effective_engine_version = "EffectiveEngineVersion",

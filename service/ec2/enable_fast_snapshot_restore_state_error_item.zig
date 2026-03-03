@@ -4,11 +4,11 @@ const EnableFastSnapshotRestoreStateError = @import("enable_fast_snapshot_restor
 /// snapshot restores.
 pub const EnableFastSnapshotRestoreStateErrorItem = struct {
     /// The Availability Zone.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the Availability Zone.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The error.
-    @"error": ?EnableFastSnapshotRestoreStateError,
+    @"error": ?EnableFastSnapshotRestoreStateError = null,
 };

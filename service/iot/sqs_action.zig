@@ -7,7 +7,7 @@ pub const SqsAction = struct {
     role_arn: []const u8,
 
     /// Specifies whether to use Base64 encoding.
-    use_base_64: ?bool,
+    use_base_64: ?bool = null,
 
     pub const json_field_names = .{
         .queue_url = "queueUrl",

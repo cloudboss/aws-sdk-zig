@@ -28,16 +28,16 @@ pub const Rule = struct {
     ///
     /// * If the rule statement references a rule group, use the override action
     ///   setting and not this action setting.
-    action: ?RuleAction,
+    action: ?RuleAction = null,
 
     /// Specifies how WAF should handle `CAPTCHA` evaluations. If you don't specify
     /// this, WAF uses the `CAPTCHA` configuration that's defined for the web ACL.
-    captcha_config: ?CaptchaConfig,
+    captcha_config: ?CaptchaConfig = null,
 
     /// Specifies how WAF should handle `Challenge` evaluations. If you don't
     /// specify this, WAF uses the challenge configuration that's defined for the
     /// web ACL.
-    challenge_config: ?ChallengeConfig,
+    challenge_config: ?ChallengeConfig = null,
 
     /// The name of the rule.
     ///
@@ -59,7 +59,7 @@ pub const Rule = struct {
     /// count
     /// matches, do not use this and instead use the rule action override option,
     /// with `Count` action, in your rule group reference statement settings.
-    override_action: ?OverrideAction,
+    override_action: ?OverrideAction = null,
 
     /// If you define more than one `Rule` in a `WebACL`, WAF
     /// evaluates each request against the `Rules` in order based on the value of
@@ -97,7 +97,7 @@ pub const Rule = struct {
     /// `webacl`, `regexpatternset`, or `ipset`.
     ///
     /// For example, `myLabelName` or `nameSpace1:nameSpace2:myLabelName`.
-    rule_labels: ?[]const Label,
+    rule_labels: ?[]const Label = null,
 
     /// The WAF processing statement for the rule, for example ByteMatchStatement or
     /// SizeConstraintStatement.

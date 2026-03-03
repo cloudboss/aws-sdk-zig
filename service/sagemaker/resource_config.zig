@@ -7,25 +7,25 @@ const TrainingInstanceType = @import("training_instance_type.zig").TrainingInsta
 pub const ResourceConfig = struct {
     /// The number of ML compute instances to use. For distributed training, provide
     /// a value greater than 1.
-    instance_count: ?i32,
+    instance_count: ?i32 = null,
 
     /// The configuration of a heterogeneous cluster in JSON format.
-    instance_groups: ?[]const InstanceGroup,
+    instance_groups: ?[]const InstanceGroup = null,
 
     /// Configuration for how training job instances are placed and allocated within
     /// UltraServers. Only applicable for UltraServer capacity.
-    instance_placement_config: ?InstancePlacementConfig,
+    instance_placement_config: ?InstancePlacementConfig = null,
 
     /// The ML compute instance type.
-    instance_type: ?TrainingInstanceType,
+    instance_type: ?TrainingInstanceType = null,
 
     /// The duration of time in seconds to retain configured resources in a warm
     /// pool for subsequent training jobs.
-    keep_alive_period_in_seconds: ?i32,
+    keep_alive_period_in_seconds: ?i32 = null,
 
     /// The Amazon Resource Name (ARN); of the training plan to use for this
     /// resource configuration.
-    training_plan_arn: ?[]const u8,
+    training_plan_arn: ?[]const u8 = null,
 
     /// The Amazon Web Services KMS key that SageMaker uses to encrypt data on the
     /// storage volume attached to the ML compute instance(s) that run the training
@@ -52,7 +52,7 @@ pub const ResourceConfig = struct {
     /// * // Amazon Resource Name (ARN) of a KMS Key
     ///
     /// `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
-    volume_kms_key_id: ?[]const u8,
+    volume_kms_key_id: ?[]const u8 = null,
 
     /// The size of the ML storage volume that you want to provision.
     ///
@@ -79,7 +79,7 @@ pub const ResourceConfig = struct {
     /// see [Amazon SageMaker Training Storage Folders for Training Datasets,
     /// Checkpoints, Model Artifacts, and
     /// Outputs](https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html).
-    volume_size_in_gb: ?i32,
+    volume_size_in_gb: ?i32 = null,
 
     pub const json_field_names = .{
         .instance_count = "InstanceCount",

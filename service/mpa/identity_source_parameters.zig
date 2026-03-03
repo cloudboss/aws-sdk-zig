@@ -4,7 +4,7 @@ const IamIdentityCenter = @import("iam_identity_center.zig").IamIdentityCenter;
 /// source. For example, an IAM Identity Center instance.
 pub const IdentitySourceParameters = struct {
     /// IAM Identity Center credentials.
-    iam_identity_center: ?IamIdentityCenter,
+    iam_identity_center: ?IamIdentityCenter = null,
 
     pub const json_field_names = .{
         .iam_identity_center = "IamIdentityCenter",

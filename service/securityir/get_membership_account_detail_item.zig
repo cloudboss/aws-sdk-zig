@@ -2,11 +2,11 @@ const MembershipAccountRelationshipStatus = @import("membership_account_relation
 const MembershipAccountRelationshipType = @import("membership_account_relationship_type.zig").MembershipAccountRelationshipType;
 
 pub const GetMembershipAccountDetailItem = struct {
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
-    relationship_status: ?MembershipAccountRelationshipStatus,
+    relationship_status: ?MembershipAccountRelationshipStatus = null,
 
-    relationship_type: ?MembershipAccountRelationshipType,
+    relationship_type: ?MembershipAccountRelationshipType = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

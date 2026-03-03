@@ -10,34 +10,34 @@ const KPIVisualLayoutOptions = @import("kpi_visual_layout_options.zig").KPIVisua
 /// The options that determine the presentation of a KPI visual.
 pub const KPIOptions = struct {
     /// The comparison configuration of a KPI visual.
-    comparison: ?ComparisonConfiguration,
+    comparison: ?ComparisonConfiguration = null,
 
     /// The options that determine the primary value display type.
-    primary_value_display_type: ?PrimaryValueDisplayType,
+    primary_value_display_type: ?PrimaryValueDisplayType = null,
 
     /// The options that determine the primary value font configuration.
-    primary_value_font_configuration: ?FontConfiguration,
+    primary_value_font_configuration: ?FontConfiguration = null,
 
     /// The options that determine the presentation of the progress bar of a KPI
     /// visual.
-    progress_bar: ?ProgressBarOptions,
+    progress_bar: ?ProgressBarOptions = null,
 
     /// The options that determine the presentation of the secondary value of a KPI
     /// visual.
-    secondary_value: ?SecondaryValueOptions,
+    secondary_value: ?SecondaryValueOptions = null,
 
     /// The options that determine the secondary value font configuration.
-    secondary_value_font_configuration: ?FontConfiguration,
+    secondary_value_font_configuration: ?FontConfiguration = null,
 
     /// The options that determine the visibility, color, type, and tooltip
     /// visibility of the sparkline of a KPI visual.
-    sparkline: ?KPISparklineOptions,
+    sparkline: ?KPISparklineOptions = null,
 
     /// The options that determine the presentation of trend arrows in a KPI visual.
-    trend_arrows: ?TrendArrowOptions,
+    trend_arrows: ?TrendArrowOptions = null,
 
     /// The options that determine the layout a KPI visual.
-    visual_layout_options: ?KPIVisualLayoutOptions,
+    visual_layout_options: ?KPIVisualLayoutOptions = null,
 
     pub const json_field_names = .{
         .comparison = "Comparison",

@@ -13,11 +13,11 @@ pub const CreateIcebergTableInput = struct {
 
     /// The partitioning specification that defines how the Iceberg table data will
     /// be organized and partitioned for optimal query performance.
-    partition_spec: ?IcebergPartitionSpec,
+    partition_spec: ?IcebergPartitionSpec = null,
 
     /// Key-value pairs of additional table properties and configuration settings
     /// for the Iceberg table.
-    properties: ?[]const aws.map.StringMapEntry,
+    properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The schema definition that specifies the structure, field types, and
     /// metadata for the Iceberg table.
@@ -25,7 +25,7 @@ pub const CreateIcebergTableInput = struct {
 
     /// The sort order specification that defines how data should be ordered within
     /// each partition to optimize query performance.
-    write_order: ?IcebergSortOrder,
+    write_order: ?IcebergSortOrder = null,
 
     pub const json_field_names = .{
         .location = "Location",

@@ -8,7 +8,7 @@ pub const ChannelTargetInfo = struct {
     /// The number of minutes to wait before retrying to send engagement if the
     /// engagement
     /// initially failed.
-    retry_interval_in_minutes: ?i32,
+    retry_interval_in_minutes: ?i32 = null,
 
     pub const json_field_names = .{
         .contact_channel_id = "ContactChannelId",

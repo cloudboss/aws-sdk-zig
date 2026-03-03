@@ -4,7 +4,7 @@
 /// that is listed in the summary.
 pub const WhatIfForecastSummary = struct {
     /// When the what-if forecast was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The last time the resource was modified. The timestamp depends on the status
     /// of the job:
@@ -19,10 +19,10 @@ pub const WhatIfForecastSummary = struct {
     ///
     /// * `ACTIVE` or `CREATE_FAILED` - When the job finished or
     /// failed.
-    last_modification_time: ?i64,
+    last_modification_time: ?i64 = null,
 
     /// If an error occurred, an informational message about the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status of the what-if forecast. States include:
     ///
@@ -39,17 +39,17 @@ pub const WhatIfForecastSummary = struct {
     /// The `Status` of the what-if analysis must be `ACTIVE` before you can access
     /// the
     /// analysis.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the what-if analysis that contains this
     /// what-if forecast.
-    what_if_analysis_arn: ?[]const u8,
+    what_if_analysis_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the what-if forecast.
-    what_if_forecast_arn: ?[]const u8,
+    what_if_forecast_arn: ?[]const u8 = null,
 
     /// The name of the what-if forecast.
-    what_if_forecast_name: ?[]const u8,
+    what_if_forecast_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

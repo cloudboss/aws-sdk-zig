@@ -5,10 +5,10 @@ const FeatureStatus = @import("feature_status.zig").FeatureStatus;
 /// GuardDuty account.
 pub const DetectorAdditionalConfiguration = struct {
     /// Name of the additional configuration.
-    name: ?FeatureAdditionalConfiguration,
+    name: ?FeatureAdditionalConfiguration = null,
 
     /// Status of the additional configuration.
-    status: ?FeatureStatus,
+    status: ?FeatureStatus = null,
 
     pub const json_field_names = .{
         .name = "Name",

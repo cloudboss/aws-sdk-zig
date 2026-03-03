@@ -6,7 +6,7 @@ pub const InputParallelism = struct {
     /// Number of in-application streams to create.
     /// For more information, see
     /// [Limits](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html).
-    count: ?i32,
+    count: ?i32 = null,
 
     pub const json_field_names = .{
         .count = "Count",

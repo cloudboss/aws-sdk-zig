@@ -13,17 +13,17 @@ pub const DocumentParameter = struct {
     /// Description of the map field containing the patterns that need to be
     /// replaced in a
     /// managed template job document schema.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// An example illustrating a pattern that need to be replaced in a managed
     /// template job
     /// document schema.
-    example: ?[]const u8,
+    example: ?[]const u8 = null,
 
     /// Key of the map field containing the patterns that need to be replaced in a
     /// managed
     /// template job document schema.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// Specifies whether a pattern that needs to be replaced in a managed template
     /// job
@@ -33,7 +33,7 @@ pub const DocumentParameter = struct {
     /// A regular expression of the patterns that need to be replaced in a managed
     /// template
     /// job document schema.
-    regex: ?[]const u8,
+    regex: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "description",

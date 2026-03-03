@@ -3,16 +3,16 @@
 pub const Range = struct {
     /// The number of lines from the beginning of the file to the end of the
     /// sensitive data.
-    end: ?i64,
+    end: ?i64 = null,
 
     /// The number of lines from the beginning of the file to the beginning of the
     /// sensitive data.
-    start: ?i64,
+    start: ?i64 = null,
 
     /// The number of characters, with spaces and starting from 1, from the
     /// beginning of the first line that contains the sensitive data (start) to the
     /// beginning of the sensitive data.
-    start_column: ?i64,
+    start_column: ?i64 = null,
 
     pub const json_field_names = .{
         .end = "end",

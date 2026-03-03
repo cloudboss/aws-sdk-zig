@@ -6,7 +6,7 @@ pub const EC2ReplaceRouteTableAssociationAction = struct {
     association_id: ActionTarget,
 
     /// A description of the ReplaceRouteTableAssociation action in Amazon EC2.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about the ID of the new route table to associate with the
     /// subnet.

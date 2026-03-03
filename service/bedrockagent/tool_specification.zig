@@ -5,7 +5,7 @@ const ToolInputSchema = @import("tool_input_schema.zig").ToolInputSchema;
 /// response](https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html).
 pub const ToolSpecification = struct {
     /// The description of the tool.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The input schema for the tool.
     input_schema: ToolInputSchema,

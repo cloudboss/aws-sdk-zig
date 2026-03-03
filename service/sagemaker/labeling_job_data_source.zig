@@ -15,12 +15,12 @@ const LabelingJobSnsDataSource = @import("labeling_job_sns_data_source.zig").Lab
 /// `SnsDataSource` to create a streaming labeling job.
 pub const LabelingJobDataSource = struct {
     /// The Amazon S3 location of the input data objects.
-    s3_data_source: ?LabelingJobS3DataSource,
+    s3_data_source: ?LabelingJobS3DataSource = null,
 
     /// An Amazon SNS data source used for streaming labeling jobs. To learn more,
     /// see [Send Data to a Streaming Labeling
     /// Job](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-send-data).
-    sns_data_source: ?LabelingJobSnsDataSource,
+    sns_data_source: ?LabelingJobSnsDataSource = null,
 
     pub const json_field_names = .{
         .s3_data_source = "S3DataSource",

@@ -3,7 +3,7 @@ const SummarizedCounter = @import("summarized_counter.zig").SummarizedCounter;
 /// A summary of information about the attack.
 pub const SummarizedAttackVector = struct {
     /// The list of counters that describe the details of the attack.
-    vector_counters: ?[]const SummarizedCounter,
+    vector_counters: ?[]const SummarizedCounter = null,
 
     /// The attack type, for example, SNMP reflection or SYN flood.
     vector_type: []const u8,

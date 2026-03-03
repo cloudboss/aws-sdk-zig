@@ -9,16 +9,16 @@ pub const ComponentTypeSummary = struct {
     component_type_id: []const u8,
 
     /// The component type name.
-    component_type_name: ?[]const u8,
+    component_type_name: ?[]const u8 = null,
 
     /// The date and time when the component type was created.
     creation_date_time: i64,
 
     /// The description of the component type.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The current status of the component type.
-    status: ?Status,
+    status: ?Status = null,
 
     /// The date and time when the component type was last updated.
     update_date_time: i64,

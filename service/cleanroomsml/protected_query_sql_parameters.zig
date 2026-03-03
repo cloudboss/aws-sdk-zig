@@ -4,13 +4,13 @@ const aws = @import("aws");
 pub const ProtectedQuerySQLParameters = struct {
     /// The Amazon Resource Name (ARN) associated with the analysis template within
     /// a collaboration.
-    analysis_template_arn: ?[]const u8,
+    analysis_template_arn: ?[]const u8 = null,
 
     /// The protected query SQL parameters.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The query string to be submitted.
-    query_string: ?[]const u8,
+    query_string: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .analysis_template_arn = "analysisTemplateArn",

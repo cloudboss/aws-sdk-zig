@@ -8,7 +8,7 @@ pub const MemoryConfiguration = struct {
 
     /// Contains the configuration for SESSION_SUMMARY memory type enabled for the
     /// agent.
-    session_summary_configuration: ?SessionSummaryConfiguration,
+    session_summary_configuration: ?SessionSummaryConfiguration = null,
 
     /// The number of days the agent is configured to retain the conversational
     /// context.

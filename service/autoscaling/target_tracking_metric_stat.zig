@@ -16,7 +16,7 @@ pub const TargetTrackingMetricStat = struct {
     /// than 60. For more information, see
     /// [Create a target tracking policy using high-resolution metrics for faster
     /// response](https://docs.aws.amazon.com/autoscaling/ec2/userguide/policy-creating-high-resolution-metrics.html).
-    period: ?i32,
+    period: ?i32 = null,
 
     /// The statistic to return. It can include any CloudWatch statistic or extended
     /// statistic. For
@@ -31,5 +31,5 @@ pub const TargetTrackingMetricStat = struct {
     /// CloudWatch supports, see the
     /// [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html)
     /// data type in the *Amazon CloudWatch API Reference*.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 };

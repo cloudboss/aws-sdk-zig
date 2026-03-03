@@ -14,10 +14,10 @@ pub const LoadBalancerTlsCertificateDnsRecordCreationState = struct {
     /// * `STARTED` - The automatic DNS record creation has started.
     ///
     /// * `FAILED` - The validation record addition failed.
-    code: ?LoadBalancerTlsCertificateDnsRecordCreationStateCode,
+    code: ?LoadBalancerTlsCertificateDnsRecordCreationStateCode = null,
 
     /// The message that describes the reason for the status code.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

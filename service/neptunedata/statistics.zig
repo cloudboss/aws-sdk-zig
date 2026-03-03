@@ -8,16 +8,16 @@ const StatisticsSummary = @import("statistics_summary.zig").StatisticsSummary;
 /// use](https://docs.aws.amazon.com/neptune/latest/userguide/neptune-dfe-statistics.html).
 pub const Statistics = struct {
     /// Indicates whether or not DFE statistics generation is enabled at all.
-    active: ?bool,
+    active: ?bool = null,
 
     /// Indicates whether or not automatic statistics generation is enabled.
-    auto_compute: ?bool,
+    auto_compute: ?bool = null,
 
     /// The UTC time at which DFE statistics have most recently been generated.
-    date: ?i64,
+    date: ?i64 = null,
 
     /// A note about problems in the case where statistics are invalid.
-    note: ?[]const u8,
+    note: ?[]const u8 = null,
 
     /// A StatisticsSummary structure that contains:
     ///
@@ -25,11 +25,11 @@ pub const Statistics = struct {
     ///   characteristic sets.
     /// * `instanceCount` - The total number of characteristic-set instances.
     /// * `predicateCount` - The total number of unique predicates.
-    signature_info: ?StatisticsSummary,
+    signature_info: ?StatisticsSummary = null,
 
     /// Reports the ID of the current statistics generation run. A value of -1
     /// indicates that no statistics have been generated.
-    statistics_id: ?[]const u8,
+    statistics_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active = "active",

@@ -16,48 +16,48 @@ pub const Launch = struct {
     created_time: i64,
 
     /// The description of the launch.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A structure that contains information about the start and end times of the
     /// launch.
-    execution: ?LaunchExecution,
+    execution: ?LaunchExecution = null,
 
     /// An array of structures that define the feature variations that are being
     /// used in the launch.
-    groups: ?[]const LaunchGroup,
+    groups: ?[]const LaunchGroup = null,
 
     /// The date and time that the launch was most recently updated.
     last_updated_time: i64,
 
     /// An array of structures that define the metrics that are being used to
     /// monitor the launch performance.
-    metric_monitors: ?[]const MetricMonitor,
+    metric_monitors: ?[]const MetricMonitor = null,
 
     /// The name of the launch.
     name: []const u8,
 
     /// The name or ARN of the project that contains the launch.
-    project: ?[]const u8,
+    project: ?[]const u8 = null,
 
     /// This value is used when Evidently assigns a particular user session to the
     /// launch, to help create a randomization ID to determine which variation the
     /// user session is served. This randomization ID is a combination of the entity
     /// ID and `randomizationSalt`.
-    randomization_salt: ?[]const u8,
+    randomization_salt: ?[]const u8 = null,
 
     /// An array of structures that define the traffic allocation percentages among
     /// the feature variations during each step of the launch.
-    scheduled_splits_definition: ?ScheduledSplitsLaunchDefinition,
+    scheduled_splits_definition: ?ScheduledSplitsLaunchDefinition = null,
 
     /// The current state of the launch.
     status: LaunchStatus,
 
     /// If the launch was stopped, this is the string that was entered by the person
     /// who stopped the launch, to explain why it was stopped.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The list of tag keys and values associated with this launch.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of launch.
     @"type": LaunchType,

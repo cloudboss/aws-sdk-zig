@@ -6,11 +6,11 @@ const PrefixConfig = @import("prefix_config.zig").PrefixConfig;
 /// data
 /// when Upsolver is used as the destination.
 pub const UpsolverS3OutputFormatConfig = struct {
-    aggregation_config: ?AggregationConfig,
+    aggregation_config: ?AggregationConfig = null,
 
     /// Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3
     /// bucket.
-    file_type: ?FileType,
+    file_type: ?FileType = null,
 
     prefix_config: PrefixConfig,
 

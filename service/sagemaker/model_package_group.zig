@@ -4,19 +4,19 @@ const Tag = @import("tag.zig").Tag;
 
 /// A group of versioned models in the Model Registry.
 pub const ModelPackageGroup = struct {
-    created_by: ?UserContext,
+    created_by: ?UserContext = null,
 
     /// The time that the model group was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the model group.
-    model_package_group_arn: ?[]const u8,
+    model_package_group_arn: ?[]const u8 = null,
 
     /// The description for the model group.
-    model_package_group_description: ?[]const u8,
+    model_package_group_description: ?[]const u8 = null,
 
     /// The name of the model group.
-    model_package_group_name: ?[]const u8,
+    model_package_group_name: ?[]const u8 = null,
 
     /// The status of the model group. This can be one of the following values.
     ///
@@ -26,13 +26,13 @@ pub const ModelPackageGroup = struct {
     /// * `FAILED` - The model group failed.
     /// * `DELETING` - The model group is in the process of being deleted.
     /// * `DELETE_FAILED` - SageMaker failed to delete the model group.
-    model_package_group_status: ?ModelPackageGroupStatus,
+    model_package_group_status: ?ModelPackageGroupStatus = null,
 
     /// A list of the tags associated with the model group. For more information,
     /// see [Tagging Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
     /// in the *Amazon Web Services General Reference Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .created_by = "CreatedBy",

@@ -8,14 +8,14 @@ const TranscribeMedicalType = @import("transcribe_medical_type.zig").TranscribeM
 pub const EngineTranscribeMedicalSettings = struct {
     /// Set this field to `PHI` to identify personal health information in the
     /// transcription output.
-    content_identification_type: ?TranscribeMedicalContentIdentificationType,
+    content_identification_type: ?TranscribeMedicalContentIdentificationType = null,
 
     /// The language code specified for the Amazon Transcribe Medical engine.
     language_code: TranscribeMedicalLanguageCode,
 
     /// The Amazon Web Services Region passed to Amazon Transcribe Medical. If you
     /// don't specify a Region, Amazon Chime uses the meeting's Region.
-    region: ?TranscribeMedicalRegion,
+    region: ?TranscribeMedicalRegion = null,
 
     /// The specialty specified for the Amazon Transcribe Medical engine.
     specialty: TranscribeMedicalSpecialty,
@@ -24,7 +24,7 @@ pub const EngineTranscribeMedicalSettings = struct {
     @"type": TranscribeMedicalType,
 
     /// The name of the vocabulary passed to Amazon Transcribe Medical.
-    vocabulary_name: ?[]const u8,
+    vocabulary_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content_identification_type = "ContentIdentificationType",

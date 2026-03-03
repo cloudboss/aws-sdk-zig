@@ -10,31 +10,31 @@ const TargetType = @import("target_type.zig").TargetType;
 /// action.
 pub const DBProxyTarget = struct {
     /// The writer endpoint for the RDS DB instance or Aurora DB cluster.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// The port that the RDS Proxy uses to connect to the target RDS DB instance or
     /// Aurora DB cluster.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The identifier representing the target. It can be the instance identifier
     /// for an RDS DB instance, or the cluster identifier for an Aurora DB cluster.
-    rds_resource_id: ?[]const u8,
+    rds_resource_id: ?[]const u8 = null,
 
     /// A value that indicates whether the target of the proxy can be used for
     /// read/write or read-only operations.
-    role: ?TargetRole,
+    role: ?TargetRole = null,
 
     /// The Amazon Resource Name (ARN) for the RDS DB instance or Aurora DB cluster.
-    target_arn: ?[]const u8,
+    target_arn: ?[]const u8 = null,
 
     /// Information about the connection health of the RDS Proxy target.
-    target_health: ?TargetHealth,
+    target_health: ?TargetHealth = null,
 
     /// The DB cluster identifier when the target represents an Aurora DB cluster.
     /// This field is blank when the target represents an RDS DB instance.
-    tracked_cluster_id: ?[]const u8,
+    tracked_cluster_id: ?[]const u8 = null,
 
     /// Specifies the kind of database, such as an RDS DB instance or an Aurora DB
     /// cluster, that the target represents.
-    @"type": ?TargetType,
+    @"type": ?TargetType = null,
 };

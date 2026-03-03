@@ -9,7 +9,7 @@ pub const EntitySummary = struct {
     creation_date_time: i64,
 
     /// The description of the entity.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the entity.
     entity_id: []const u8,
@@ -19,10 +19,10 @@ pub const EntitySummary = struct {
 
     /// An **eventual** Boolean value that specifies whether the entity has child
     /// entities or not.
-    has_child_entities: ?bool,
+    has_child_entities: ?bool = null,
 
     /// The ID of the parent entity.
-    parent_entity_id: ?[]const u8,
+    parent_entity_id: ?[]const u8 = null,
 
     /// The current status of the entity.
     status: Status,

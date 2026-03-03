@@ -10,7 +10,7 @@ pub const WorkflowDetails = struct {
     /// A *partial upload* occurs when a file is open when the session disconnects.
     ///
     /// `OnPartialUpload` can contain a maximum of one `WorkflowDetail` object.
-    on_partial_upload: ?[]const WorkflowDetail,
+    on_partial_upload: ?[]const WorkflowDetail = null,
 
     /// A trigger that starts a workflow: the workflow begins to execute after a
     /// file is uploaded.
@@ -22,7 +22,7 @@ pub const WorkflowDetails = struct {
     /// --workflow-details '{"OnUpload":[]}'`
     ///
     /// `OnUpload` can contain a maximum of one `WorkflowDetail` object.
-    on_upload: ?[]const WorkflowDetail,
+    on_upload: ?[]const WorkflowDetail = null,
 
     pub const json_field_names = .{
         .on_partial_upload = "OnPartialUpload",

@@ -12,15 +12,15 @@ pub const AutoTuneMaintenanceSchedule = struct {
     /// A cron expression for a recurring maintenance schedule during which
     /// Auto-Tune can
     /// deploy changes.
-    cron_expression_for_recurrence: ?[]const u8,
+    cron_expression_for_recurrence: ?[]const u8 = null,
 
     /// The duration of the maintenance schedule. For example, `"Duration":
     /// {"Value": 2,
     /// "Unit": "HOURS"}`.
-    duration: ?Duration,
+    duration: ?Duration = null,
 
     /// The Epoch timestamp at which the Auto-Tune maintenance schedule starts.
-    start_at: ?i64,
+    start_at: ?i64 = null,
 
     pub const json_field_names = .{
         .cron_expression_for_recurrence = "CronExpressionForRecurrence",

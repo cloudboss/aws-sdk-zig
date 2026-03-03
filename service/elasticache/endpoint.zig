@@ -3,8 +3,8 @@
 /// node. This value is read-only.
 pub const Endpoint = struct {
     /// The DNS hostname of the cache node.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// The port number that the cache engine is listening on.
-    port: ?i32,
+    port: ?i32 = null,
 };

@@ -9,10 +9,10 @@ pub const AssetBundleImportSourceDescription = struct {
     /// Call
     /// `DescribeAssetBundleExportJob` again for a fresh URL if needed. The
     /// downloaded asset bundle is a `.qs` zip file.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// The Amazon S3 URI that you provided at the start of the import job.
-    s3_uri: ?[]const u8,
+    s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .body = "Body",

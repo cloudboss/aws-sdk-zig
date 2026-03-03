@@ -8,11 +8,11 @@ pub const ServerlessV2ScalingConfiguration = struct {
     /// Neptune Serverless cluster.
     /// You can specify NCU values in half-step increments, such as 40, 40.5, 41,
     /// and so on.
-    max_capacity: ?f64,
+    max_capacity: ?f64 = null,
 
     /// The minimum number of Neptune capacity units (NCUs) for a DB instance in a
     /// Neptune Serverless cluster.
     /// You can specify NCU values in half-step increments, such as 8, 8.5, 9, and
     /// so on.
-    min_capacity: ?f64,
+    min_capacity: ?f64 = null,
 };

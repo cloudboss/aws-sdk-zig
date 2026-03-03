@@ -5,7 +5,7 @@ pub const VpcDestinationConfiguration = struct {
     role_arn: []const u8,
 
     /// The security groups of the VPC destination.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// The subnet IDs of the VPC destination.
     subnet_ids: []const []const u8,

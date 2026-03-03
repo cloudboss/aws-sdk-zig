@@ -17,10 +17,10 @@ pub const IngestionJob = struct {
     data_source_id: []const u8,
 
     /// The description of the data ingestion job.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A list of reasons that the data ingestion job failed.
-    failure_reasons: ?[]const []const u8,
+    failure_reasons: ?[]const []const u8 = null,
 
     /// The unique identifier of the data ingestion job.
     ingestion_job_id: []const u8,
@@ -35,7 +35,7 @@ pub const IngestionJob = struct {
     started_at: i64,
 
     /// Contains statistics about the data ingestion job.
-    statistics: ?IngestionJobStatistics,
+    statistics: ?IngestionJobStatistics = null,
 
     /// The status of the data ingestion job.
     status: IngestionJobStatus,

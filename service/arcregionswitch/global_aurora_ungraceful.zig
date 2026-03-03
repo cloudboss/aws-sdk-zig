@@ -4,7 +4,7 @@ const GlobalAuroraUngracefulBehavior = @import("global_aurora_ungraceful_behavio
 /// global databases.
 pub const GlobalAuroraUngraceful = struct {
     /// The settings for ungraceful execution.
-    ungraceful: ?GlobalAuroraUngracefulBehavior,
+    ungraceful: ?GlobalAuroraUngracefulBehavior = null,
 
     pub const json_field_names = .{
         .ungraceful = "ungraceful",

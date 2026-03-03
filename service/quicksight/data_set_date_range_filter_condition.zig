@@ -3,16 +3,16 @@ const DataSetDateFilterValue = @import("data_set_date_filter_value.zig").DataSet
 /// A filter condition that filters date values within a specified range.
 pub const DataSetDateRangeFilterCondition = struct {
     /// Whether to include the maximum value in the filter range.
-    include_maximum: ?bool,
+    include_maximum: ?bool = null,
 
     /// Whether to include the minimum value in the filter range.
-    include_minimum: ?bool,
+    include_minimum: ?bool = null,
 
     /// The maximum date value for the range filter.
-    range_maximum: ?DataSetDateFilterValue,
+    range_maximum: ?DataSetDateFilterValue = null,
 
     /// The minimum date value for the range filter.
-    range_minimum: ?DataSetDateFilterValue,
+    range_minimum: ?DataSetDateFilterValue = null,
 
     pub const json_field_names = .{
         .include_maximum = "IncludeMaximum",

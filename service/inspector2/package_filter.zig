@@ -5,28 +5,28 @@ const NumberFilter = @import("number_filter.zig").NumberFilter;
 pub const PackageFilter = struct {
     /// An object that contains details on the package architecture type to filter
     /// on.
-    architecture: ?StringFilter,
+    architecture: ?StringFilter = null,
 
     /// An object that contains details on the package epoch to filter on.
-    epoch: ?NumberFilter,
+    epoch: ?NumberFilter = null,
 
     /// An object that contains details on the package file path to filter on.
-    file_path: ?StringFilter,
+    file_path: ?StringFilter = null,
 
     /// An object that contains details on the name of the package to filter on.
-    name: ?StringFilter,
+    name: ?StringFilter = null,
 
     /// An object that contains details on the package release to filter on.
-    release: ?StringFilter,
+    release: ?StringFilter = null,
 
     /// An object that describes the details of a string filter.
-    source_lambda_layer_arn: ?StringFilter,
+    source_lambda_layer_arn: ?StringFilter = null,
 
     /// An object that contains details on the source layer hash to filter on.
-    source_layer_hash: ?StringFilter,
+    source_layer_hash: ?StringFilter = null,
 
     /// The package version to filter on.
-    version: ?StringFilter,
+    version: ?StringFilter = null,
 
     pub const json_field_names = .{
         .architecture = "architecture",

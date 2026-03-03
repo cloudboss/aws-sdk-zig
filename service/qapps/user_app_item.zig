@@ -8,19 +8,19 @@ pub const UserAppItem = struct {
     app_id: []const u8,
 
     /// A flag indicating whether the user can edit the Q App.
-    can_edit: ?bool,
+    can_edit: ?bool = null,
 
     /// The date and time the user's association with the Q App was created.
     created_at: i64,
 
     /// The description of the Q App.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether the Q App has been verified.
     is_verified: bool = false,
 
     /// The status of the user's association with the Q App.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The title of the Q App.
     title: []const u8,

@@ -6,7 +6,7 @@ pub const CloudWatchLogsConfig = struct {
     /// [Working
     /// with Log Groups and Log
     /// Streams](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html).
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// The current status of the logs in CloudWatch Logs for a build project. Valid
     /// values are:
@@ -20,7 +20,7 @@ pub const CloudWatchLogsConfig = struct {
     /// see [Working
     /// with Log Groups and Log
     /// Streams](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html).
-    stream_name: ?[]const u8,
+    stream_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .group_name = "groupName",

@@ -5,11 +5,11 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// sorting order.
 pub const SaaSProductSort = struct {
     /// Field to sort the SaaS products by.
-    sort_by: ?SaaSProductSortBy,
+    sort_by: ?SaaSProductSortBy = null,
 
     /// The sorting order. Can be `ASCENDING` or `DESCENDING`. The default value is
     /// `DESCENDING`.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .sort_by = "SortBy",

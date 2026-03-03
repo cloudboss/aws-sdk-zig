@@ -12,7 +12,7 @@ pub const Condition = struct {
     /// is specified and sibling `KeyPrefixEquals` is not specified. If both are
     /// specified, then both
     /// must be true for the redirect to be applied.
-    http_error_code_returned_equals: ?[]const u8,
+    http_error_code_returned_equals: ?[]const u8 = null,
 
     /// The object key name prefix when the redirect is applied. For example, to
     /// redirect requests for
@@ -30,5 +30,5 @@ pub const Condition = struct {
     /// XML requests. For more information, see [
     /// XML related object key
     /// constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
-    key_prefix_equals: ?[]const u8,
+    key_prefix_equals: ?[]const u8 = null,
 };

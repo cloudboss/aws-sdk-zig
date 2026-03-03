@@ -5,19 +5,19 @@ const Method = @import("method.zig").Method;
 /// Represents an API resource.
 pub const Resource = struct {
     /// The resource's identifier.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The parent resource's identifier.
-    parent_id: ?[]const u8,
+    parent_id: ?[]const u8 = null,
 
     /// The full path for this resource.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// The last path segment for this resource.
-    path_part: ?[]const u8,
+    path_part: ?[]const u8 = null,
 
     /// Gets an API resource's method of a given HTTP verb.
-    resource_methods: ?[]const aws.map.MapEntry(Method),
+    resource_methods: ?[]const aws.map.MapEntry(Method) = null,
 
     pub const json_field_names = .{
         .id = "id",

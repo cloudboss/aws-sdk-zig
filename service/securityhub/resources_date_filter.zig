@@ -5,9 +5,9 @@ const DateFilter = @import("date_filter.zig").DateFilter;
 /// timestamp attributes.
 pub const ResourcesDateFilter = struct {
     /// The name of the field.
-    field_name: ?ResourcesDateField,
+    field_name: ?ResourcesDateField = null,
 
-    filter: ?DateFilter,
+    filter: ?DateFilter = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

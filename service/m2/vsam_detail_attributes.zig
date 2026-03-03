@@ -8,26 +8,26 @@ pub const VsamDetailAttributes = struct {
     /// defined, but if those alternate keys definitions exist, provide them as some
     /// applications
     /// will make use of them.
-    alternate_keys: ?[]const AlternateKey,
+    alternate_keys: ?[]const AlternateKey = null,
 
     /// If set to True, enforces loading the data set into cache before it’s used by
     /// the
     /// application.
-    cache_at_startup: ?bool,
+    cache_at_startup: ?bool = null,
 
     /// Indicates whether indexes for this dataset are stored as compressed values.
     /// If you have
     /// a large data set (typically > 100 Mb), consider setting this flag to True.
-    compressed: ?bool,
+    compressed: ?bool = null,
 
     /// The character set used by the data set. Can be ASCII, EBCDIC, or unknown.
-    encoding: ?[]const u8,
+    encoding: ?[]const u8 = null,
 
     /// The primary key of the data set.
-    primary_key: ?PrimaryKey,
+    primary_key: ?PrimaryKey = null,
 
     /// The record format of the data set.
-    record_format: ?[]const u8,
+    record_format: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alternate_keys = "alternateKeys",

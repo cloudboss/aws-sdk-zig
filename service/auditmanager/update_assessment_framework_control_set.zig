@@ -7,7 +7,7 @@ pub const UpdateAssessmentFrameworkControlSet = struct {
     controls: []const CreateAssessmentFrameworkControl,
 
     /// The unique identifier for the control set.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the control set.
     name: []const u8,

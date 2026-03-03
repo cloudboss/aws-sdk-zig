@@ -10,13 +10,13 @@ pub const DatasetInputDataConfig = struct {
     /// augmented manifest file is a labeled dataset that is produced by Amazon
     /// SageMaker Ground
     /// Truth.
-    augmented_manifests: ?[]const DatasetAugmentedManifestsListItem,
+    augmented_manifests: ?[]const DatasetAugmentedManifestsListItem = null,
 
     /// `COMPREHEND_CSV`: The data format is a two-column CSV file, where the
     /// first column contains labels and the second column contains documents.
     ///
     /// `AUGMENTED_MANIFEST`: The data format
-    data_format: ?DatasetDataFormat,
+    data_format: ?DatasetDataFormat = null,
 
     /// The input properties for training a document classifier model.
     ///
@@ -24,10 +24,10 @@ pub const DatasetInputDataConfig = struct {
     /// training
     /// data](https://docs.aws.amazon.com/comprehend/latest/dg/prep-classifier-data.html)
     /// in the Comprehend Developer Guide.
-    document_classifier_input_data_config: ?DatasetDocumentClassifierInputDataConfig,
+    document_classifier_input_data_config: ?DatasetDocumentClassifierInputDataConfig = null,
 
     /// The input properties for training an entity recognizer model.
-    entity_recognizer_input_data_config: ?DatasetEntityRecognizerInputDataConfig,
+    entity_recognizer_input_data_config: ?DatasetEntityRecognizerInputDataConfig = null,
 
     pub const json_field_names = .{
         .augmented_manifests = "AugmentedManifests",

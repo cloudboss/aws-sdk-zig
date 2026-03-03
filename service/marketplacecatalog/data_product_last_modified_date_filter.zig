@@ -4,7 +4,7 @@ const DataProductLastModifiedDateFilterDateRange = @import("data_product_last_mo
 /// products.
 pub const DataProductLastModifiedDateFilter = struct {
     /// Dates between which the data product was last modified.
-    date_range: ?DataProductLastModifiedDateFilterDateRange,
+    date_range: ?DataProductLastModifiedDateFilterDateRange = null,
 
     pub const json_field_names = .{
         .date_range = "DateRange",

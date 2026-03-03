@@ -4,27 +4,27 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// Describes the metadata of a resource.
 pub const ResourceMetadata = struct {
     /// The ID of the resource.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The original name of the resource before a rename operation.
-    original_name: ?[]const u8,
+    original_name: ?[]const u8 = null,
 
     /// The owner of the resource.
-    owner: ?UserMetadata,
+    owner: ?UserMetadata = null,
 
     /// The parent ID of the resource before a rename operation.
-    parent_id: ?[]const u8,
+    parent_id: ?[]const u8 = null,
 
     /// The type of resource.
-    @"type": ?ResourceType,
+    @"type": ?ResourceType = null,
 
     /// The version ID of the resource. This is an optional field and is filled for
     /// action
     /// on document version.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

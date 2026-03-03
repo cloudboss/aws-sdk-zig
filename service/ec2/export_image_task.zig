@@ -4,28 +4,28 @@ const Tag = @import("tag.zig").Tag;
 /// Describes an export image task.
 pub const ExportImageTask = struct {
     /// A description of the image being exported.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the export image task.
-    export_image_task_id: ?[]const u8,
+    export_image_task_id: ?[]const u8 = null,
 
     /// The ID of the image.
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// The percent complete of the export image task.
-    progress: ?[]const u8,
+    progress: ?[]const u8 = null,
 
     /// Information about the destination Amazon S3 bucket.
-    s3_export_location: ?ExportTaskS3Location,
+    s3_export_location: ?ExportTaskS3Location = null,
 
     /// The status of the export image task. The possible values are `active`,
     /// `completed`,
     /// `deleting`, and `deleted`.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The status message for the export image task.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// Any tags assigned to the export image task.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

@@ -5,7 +5,7 @@ pub const WaypointOptimizationTrafficOptions = struct {
     /// Determines if traffic should be used or ignored while calculating the route.
     ///
     /// Default Value: `UseTrafficData`
-    usage: ?TrafficUsage,
+    usage: ?TrafficUsage = null,
 
     pub const json_field_names = .{
         .usage = "Usage",

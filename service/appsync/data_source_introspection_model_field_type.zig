@@ -14,12 +14,12 @@ pub const DataSourceIntrospectionModelFieldType = struct {
     /// `null`.
     ///
     /// * `List`: Indicates the field contains a list.
-    kind: ?[]const u8,
+    kind: ?[]const u8 = null,
 
     /// The name of the data type that represents the field. For example, `String`
     /// is
     /// a valid `name` value.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The `DataSourceIntrospectionModelFieldType` object data. The
     /// `type` is only present if
@@ -36,7 +36,7 @@ pub const DataSourceIntrospectionModelFieldType = struct {
 
     /// The values of the `type` field. This field represents the AppSync data type
     /// equivalent of the introspected field.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .kind = "kind",

@@ -9,34 +9,34 @@ pub const ReservedInstancesListing = struct {
     /// request is
     /// idempotent. For more information, see [Ensuring
     /// Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The time the listing was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The number of instances in this state.
-    instance_counts: ?[]const InstanceCount,
+    instance_counts: ?[]const InstanceCount = null,
 
     /// The price of the Reserved Instance listing.
-    price_schedules: ?[]const PriceSchedule,
+    price_schedules: ?[]const PriceSchedule = null,
 
     /// The ID of the Reserved Instance.
-    reserved_instances_id: ?[]const u8,
+    reserved_instances_id: ?[]const u8 = null,
 
     /// The ID of the Reserved Instance listing.
-    reserved_instances_listing_id: ?[]const u8,
+    reserved_instances_listing_id: ?[]const u8 = null,
 
     /// The status of the Reserved Instance listing.
-    status: ?ListingStatus,
+    status: ?ListingStatus = null,
 
     /// The reason for the current status of the Reserved Instance listing. The
     /// response can be
     /// blank.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// Any tags assigned to the resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The last modified timestamp of the listing.
-    update_date: ?i64,
+    update_date: ?i64 = null,
 };

@@ -12,7 +12,7 @@ pub const SnsTopicConfiguration = struct {
     /// The JSON policy text that defines who can access an Amazon SNS topic. For
     /// more information, see [Example cases for Amazon SNS access
     /// control](https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html) in the *Amazon SNS Developer Guide*.
-    topic_policy: ?[]const u8,
+    topic_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .topic_policy = "topicPolicy",

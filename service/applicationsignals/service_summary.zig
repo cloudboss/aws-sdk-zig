@@ -42,7 +42,7 @@ pub const ServiceSummary = struct {
     ///   telemetry data.
     /// * `Telemetry.Source` Specifies the point of application where the telemetry
     ///   was collected or specifies what was used for the source of telemetry data.
-    attribute_maps: ?[]const []const aws.map.StringMapEntry,
+    attribute_maps: ?[]const []const aws.map.StringMapEntry = null,
 
     /// This is a string-to-string map that help identify the objects discovered by
     /// Application Signals. It can include the following fields.
@@ -65,7 +65,7 @@ pub const ServiceSummary = struct {
 
     /// An array of service groups that this service belongs to, based on the
     /// configured grouping attributes.
-    service_groups: ?[]const ServiceGroup,
+    service_groups: ?[]const ServiceGroup = null,
 
     pub const json_field_names = .{
         .attribute_maps = "AttributeMaps",

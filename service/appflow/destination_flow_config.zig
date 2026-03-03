@@ -6,12 +6,12 @@ const DestinationConnectorProperties = @import("destination_connector_properties
 /// flow.
 pub const DestinationFlowConfig = struct {
     /// The API version that the destination connector uses.
-    api_version: ?[]const u8,
+    api_version: ?[]const u8 = null,
 
     /// The name of the connector profile. This name must be unique for each
     /// connector profile in
     /// the Amazon Web Services account.
-    connector_profile_name: ?[]const u8,
+    connector_profile_name: ?[]const u8 = null,
 
     /// The type of connector, such as Salesforce, Amplitude, and so on.
     connector_type: ConnectorType,

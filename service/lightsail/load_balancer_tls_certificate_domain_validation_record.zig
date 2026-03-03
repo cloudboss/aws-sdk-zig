@@ -8,24 +8,24 @@ pub const LoadBalancerTlsCertificateDomainValidationRecord = struct {
     /// that are
     /// automatically added by Lightsail to the DNS of a domain to validate domain
     /// ownership.
-    dns_record_creation_state: ?LoadBalancerTlsCertificateDnsRecordCreationState,
+    dns_record_creation_state: ?LoadBalancerTlsCertificateDnsRecordCreationState = null,
 
     /// The domain name against which your SSL/TLS certificate was validated.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// A fully qualified domain name in the certificate. For example,
     /// `example.com`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of validation record. For example, `CNAME` for domain
     /// validation.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The validation status. Valid values are listed below.
-    validation_status: ?LoadBalancerTlsCertificateDomainStatus,
+    validation_status: ?LoadBalancerTlsCertificateDomainStatus = null,
 
     /// The value for that type.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dns_record_creation_state = "dnsRecordCreationState",

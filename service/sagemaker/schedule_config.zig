@@ -12,7 +12,7 @@ pub const ScheduleConfig = struct {
     /// `DataAnalysisStartTime` parameter.
     ///
     /// If you set `ScheduleExpression` to `NOW`, this parameter is required.
-    data_analysis_end_time: ?[]const u8,
+    data_analysis_end_time: ?[]const u8 = null,
 
     /// Sets the start time for a monitoring job window. Express this time as an
     /// offset to the times that you schedule your monitoring jobs to run. You
@@ -26,7 +26,7 @@ pub const ScheduleConfig = struct {
     /// `DataAnalysisEndTime` parameter.
     ///
     /// If you set `ScheduleExpression` to `NOW`, this parameter is required.
-    data_analysis_start_time: ?[]const u8,
+    data_analysis_start_time: ?[]const u8 = null,
 
     /// A cron expression that describes details about the monitoring schedule.
     ///

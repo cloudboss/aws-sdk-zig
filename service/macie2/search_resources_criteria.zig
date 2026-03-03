@@ -6,12 +6,12 @@ const SearchResourcesTagCriterion = @import("search_resources_tag_criterion.zig"
 pub const SearchResourcesCriteria = struct {
     /// A property-based condition that defines a property, operator, and one or
     /// more values for including or excluding resources from the results.
-    simple_criterion: ?SearchResourcesSimpleCriterion,
+    simple_criterion: ?SearchResourcesSimpleCriterion = null,
 
     /// A tag-based condition that defines an operator and tag keys, tag values, or
     /// tag key and value pairs for including or excluding resources from the
     /// results.
-    tag_criterion: ?SearchResourcesTagCriterion,
+    tag_criterion: ?SearchResourcesTagCriterion = null,
 
     pub const json_field_names = .{
         .simple_criterion = "simpleCriterion",

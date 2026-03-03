@@ -11,7 +11,7 @@ pub const AudioSegment = struct {
     s_3_uri: []const u8,
 
     /// The text transcription of the audio segment content.
-    transcription: ?[]const u8,
+    transcription: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s_3_uri = "s3Uri",

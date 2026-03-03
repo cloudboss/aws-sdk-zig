@@ -18,7 +18,7 @@ pub const ResourceDetails = struct {
     /// registry](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-view)
     /// and [Amazon Web Services resource and property types
     /// reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) in the CloudFormation User Guide.
-    resource_configuration_schema_type: ?ResourceConfigurationSchemaType,
+    resource_configuration_schema_type: ?ResourceConfigurationSchemaType = null,
 
     /// A unique resource ID for an evaluation.
     resource_id: []const u8,

@@ -4,25 +4,25 @@ const ImageSetWorkflowStatus = @import("image_set_workflow_status.zig").ImageSet
 /// Copy the image set properties of the destination image set.
 pub const CopyDestinationImageSetProperties = struct {
     /// The timestamp when the destination image set properties were created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) assigned to the destination image set.
-    image_set_arn: ?[]const u8,
+    image_set_arn: ?[]const u8 = null,
 
     /// The image set identifier of the copied image set properties.
     image_set_id: []const u8,
 
     /// The image set state of the destination image set properties.
-    image_set_state: ?ImageSetState,
+    image_set_state: ?ImageSetState = null,
 
     /// The image set workflow status of the destination image set properties.
-    image_set_workflow_status: ?ImageSetWorkflowStatus,
+    image_set_workflow_status: ?ImageSetWorkflowStatus = null,
 
     /// The latest version identifier for the destination image set properties.
     latest_version_id: []const u8,
 
     /// The timestamp when the destination image set properties were last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

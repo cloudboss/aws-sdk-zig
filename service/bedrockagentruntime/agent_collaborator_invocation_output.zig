@@ -4,16 +4,16 @@ const AgentCollaboratorOutputPayload = @import("agent_collaborator_output_payloa
 /// Output from an agent collaborator.
 pub const AgentCollaboratorInvocationOutput = struct {
     /// The output's agent collaborator alias ARN.
-    agent_collaborator_alias_arn: ?[]const u8,
+    agent_collaborator_alias_arn: ?[]const u8 = null,
 
     /// The output's agent collaborator name.
-    agent_collaborator_name: ?[]const u8,
+    agent_collaborator_name: ?[]const u8 = null,
 
     /// Contains information about the output from the agent collaborator.
-    metadata: ?Metadata,
+    metadata: ?Metadata = null,
 
     /// The output's output.
-    output: ?AgentCollaboratorOutputPayload,
+    output: ?AgentCollaboratorOutputPayload = null,
 
     pub const json_field_names = .{
         .agent_collaborator_alias_arn = "agentCollaboratorAliasArn",

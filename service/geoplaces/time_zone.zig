@@ -4,7 +4,7 @@ pub const TimeZone = struct {
     name: []const u8,
 
     /// Time zone offset of the timezone from UTC.
-    offset: ?[]const u8,
+    offset: ?[]const u8 = null,
 
     /// The offset of the time zone from UTC, in seconds.
     offset_seconds: i64 = 0,

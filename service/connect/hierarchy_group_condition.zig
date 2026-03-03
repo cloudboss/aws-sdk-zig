@@ -4,10 +4,10 @@ const HierarchyGroupMatchType = @import("hierarchy_group_match_type.zig").Hierar
 /// condition.
 pub const HierarchyGroupCondition = struct {
     /// The type of hierarchy group match.
-    hierarchy_group_match_type: ?HierarchyGroupMatchType,
+    hierarchy_group_match_type: ?HierarchyGroupMatchType = null,
 
     /// The value in the hierarchy group condition.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .hierarchy_group_match_type = "HierarchyGroupMatchType",

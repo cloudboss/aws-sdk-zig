@@ -6,7 +6,7 @@ pub const ScraperLoggingConfigurationStatus = struct {
     status_code: ScraperLoggingConfigurationStatusCode,
 
     /// The reason for the current status of the scraper logging configuration.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status_code = "statusCode",

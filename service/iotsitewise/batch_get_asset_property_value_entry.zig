@@ -12,7 +12,7 @@
 /// [UpdateAssetProperty](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
 pub const BatchGetAssetPropertyValueEntry = struct {
     /// The ID of the asset in which the asset property was created.
-    asset_id: ?[]const u8,
+    asset_id: ?[]const u8 = null,
 
     /// The ID of the entry.
     entry_id: []const u8,
@@ -24,10 +24,10 @@ pub const BatchGetAssetPropertyValueEntry = struct {
     /// [Mapping industrial data streams to asset
     /// properties](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html) in the
     /// *IoT SiteWise User Guide*.
-    property_alias: ?[]const u8,
+    property_alias: ?[]const u8 = null,
 
     /// The ID of the asset property, in UUID format.
-    property_id: ?[]const u8,
+    property_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .asset_id = "assetId",

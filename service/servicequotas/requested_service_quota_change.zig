@@ -6,45 +6,45 @@ const RequestStatus = @import("request_status.zig").RequestStatus;
 /// Information about a quota increase request.
 pub const RequestedServiceQuotaChange = struct {
     /// The case ID.
-    case_id: ?[]const u8,
+    case_id: ?[]const u8 = null,
 
     /// The date and time when the quota increase request was received and the case
     /// ID was
     /// created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The new, increased value for the quota.
-    desired_value: ?f64,
+    desired_value: ?f64 = null,
 
     /// Indicates whether the quota is global.
     global_quota: bool = false,
 
     /// The unique identifier.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The date and time of the most recent change.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the quota.
-    quota_arn: ?[]const u8,
+    quota_arn: ?[]const u8 = null,
 
     /// Specifies the quota identifier. To find the quota code for a specific
     /// quota, use the ListServiceQuotas operation, and look for the
     /// `QuotaCode` response in the output for the quota you want.
-    quota_code: ?[]const u8,
+    quota_code: ?[]const u8 = null,
 
     /// The context for this service quota.
-    quota_context: ?QuotaContextInfo,
+    quota_context: ?QuotaContextInfo = null,
 
     /// Specifies the quota name.
-    quota_name: ?[]const u8,
+    quota_name: ?[]const u8 = null,
 
     /// Filters the response to return quota requests for the `ACCOUNT`, `RESOURCE`,
     /// or `ALL` levels. `ACCOUNT` is the default.
-    quota_requested_at_level: ?AppliedLevelEnum,
+    quota_requested_at_level: ?AppliedLevelEnum = null,
 
     /// The IAM identity of the requester.
-    requester: ?[]const u8,
+    requester: ?[]const u8 = null,
 
     /// The type of quota increase request. Possible values include:
     ///
@@ -53,14 +53,14 @@ pub const RequestedServiceQuotaChange = struct {
     /// limit.
     ///
     /// If this field is not present, the request was manually created by a user.
-    request_type: ?RequestType,
+    request_type: ?RequestType = null,
 
     /// Specifies the service identifier. To find the service code value
     /// for an Amazon Web Services service, use the ListServices operation.
-    service_code: ?[]const u8,
+    service_code: ?[]const u8 = null,
 
     /// Specifies the service name.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// The state of the quota increase request.
     ///
@@ -88,10 +88,10 @@ pub const RequestedServiceQuotaChange = struct {
     /// * `INVALID_REQUEST`: Service Quotas couldn't process your resource-level
     ///   quota increase request because the
     /// Amazon Resource Name (ARN) specified as part of the `ContextId` is invalid.
-    status: ?RequestStatus,
+    status: ?RequestStatus = null,
 
     /// The unit of measurement.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .case_id = "CaseId",

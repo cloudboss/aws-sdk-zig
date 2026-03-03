@@ -6,18 +6,18 @@ pub const DocumentParameter = struct {
     /// If specified, the default values for the parameters. Parameters without a
     /// default value are
     /// required. Parameters with a default value are optional.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// A description of what the parameter does, how to use it, the default value,
     /// and whether or
     /// not the parameter is optional.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the parameter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of parameter. The type can be either String or StringList.
-    @"type": ?DocumentParameterType,
+    @"type": ?DocumentParameterType = null,
 
     pub const json_field_names = .{
         .default_value = "DefaultValue",

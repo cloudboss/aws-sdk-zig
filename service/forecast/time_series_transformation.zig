@@ -11,11 +11,11 @@ pub const TimeSeriesTransformation = struct {
     /// An array of actions that define a time series and how it is transformed.
     /// These transformations create a new
     /// time series that is used for the what-if analysis.
-    action: ?Action,
+    action: ?Action = null,
 
     /// An array of conditions that define which members of the related time series
     /// are transformed.
-    time_series_conditions: ?[]const TimeSeriesCondition,
+    time_series_conditions: ?[]const TimeSeriesCondition = null,
 
     pub const json_field_names = .{
         .action = "Action",

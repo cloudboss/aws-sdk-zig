@@ -6,7 +6,7 @@ pub const GeoSpatialColumnGroup = struct {
     columns: []const []const u8,
 
     /// Country code.
-    country_code: ?GeoSpatialCountryCode,
+    country_code: ?GeoSpatialCountryCode = null,
 
     /// A display name for the hierarchy.
     name: []const u8,

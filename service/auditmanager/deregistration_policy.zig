@@ -39,7 +39,7 @@ pub const DeregistrationPolicy = struct {
     /// years after its creation date. Your other Audit Manager resources will
     /// continue
     /// to exist indefinitely.
-    delete_resources: ?DeleteResources,
+    delete_resources: ?DeleteResources = null,
 
     pub const json_field_names = .{
         .delete_resources = "deleteResources",

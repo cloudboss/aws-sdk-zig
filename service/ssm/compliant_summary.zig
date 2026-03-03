@@ -8,7 +8,7 @@ pub const CompliantSummary = struct {
     compliant_count: i32 = 0,
 
     /// A summary of the compliance severity by compliance type.
-    severity_summary: ?SeveritySummary,
+    severity_summary: ?SeveritySummary = null,
 
     pub const json_field_names = .{
         .compliant_count = "CompliantCount",

@@ -14,7 +14,7 @@ pub const ProjectFileSystemLocation = struct {
     /// `CODEBUILD_MY_EFS`.
     ///
     /// The `identifier` is used to mount your file system.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// A string that specifies the location of the file system created by Amazon
     /// EFS. Its
@@ -31,7 +31,7 @@ pub const ProjectFileSystemLocation = struct {
     /// optional. If you do not specify a directory path, the location is only the
     /// DNS name and
     /// CodeBuild mounts the entire file system.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The mount options for a file system created by Amazon EFS. The default mount
     /// options
@@ -39,13 +39,13 @@ pub const ProjectFileSystemLocation = struct {
     /// `nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2`. For
     /// more information, see [Recommended NFS Mount
     /// Options](https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-nfs-mount-settings.html).
-    mount_options: ?[]const u8,
+    mount_options: ?[]const u8 = null,
 
     /// The location in the container where you mount the file system.
-    mount_point: ?[]const u8,
+    mount_point: ?[]const u8 = null,
 
     /// The type of the file system. The one supported type is `EFS`.
-    @"type": ?FileSystemType,
+    @"type": ?FileSystemType = null,
 
     pub const json_field_names = .{
         .identifier = "identifier",

@@ -2,7 +2,7 @@
 pub const TrackingFilterGeometry = struct {
     /// The set of arrays which define the polygon. A polygon can have between 4 and
     /// 1000 vertices.
-    polygon: ?[]const []const []const f64,
+    polygon: ?[]const []const []const f64 = null,
 
     pub const json_field_names = .{
         .polygon = "Polygon",

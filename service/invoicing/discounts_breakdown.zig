@@ -3,10 +3,10 @@ const DiscountsBreakdownAmount = @import("discounts_breakdown_amount.zig").Disco
 /// The discounts details.
 pub const DiscountsBreakdown = struct {
     /// The list of discounts information.
-    breakdown: ?[]const DiscountsBreakdownAmount,
+    breakdown: ?[]const DiscountsBreakdownAmount = null,
 
     /// The discount's total amount.
-    total_amount: ?[]const u8,
+    total_amount: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .breakdown = "Breakdown",

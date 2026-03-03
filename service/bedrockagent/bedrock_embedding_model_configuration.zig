@@ -6,22 +6,22 @@ const VideoConfiguration = @import("video_configuration.zig").VideoConfiguration
 pub const BedrockEmbeddingModelConfiguration = struct {
     /// Configuration settings for processing audio content in multimodal knowledge
     /// bases.
-    audio: ?[]const AudioConfiguration,
+    audio: ?[]const AudioConfiguration = null,
 
     /// The dimensions details for the vector configuration used on the Bedrock
     /// embeddings model.
-    dimensions: ?i32,
+    dimensions: ?i32 = null,
 
     /// The data type for the vectors when using a model to convert text into vector
     /// embeddings. The model must support the specified data type for vector
     /// embeddings. Floating-point (float32) is the default data type, and is
     /// supported by most models for vector embeddings. See [Supported embeddings
     /// models](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html) for information on the available models and their vector data types.
-    embedding_data_type: ?EmbeddingDataType,
+    embedding_data_type: ?EmbeddingDataType = null,
 
     /// Configuration settings for processing video content in multimodal knowledge
     /// bases.
-    video: ?[]const VideoConfiguration,
+    video: ?[]const VideoConfiguration = null,
 
     pub const json_field_names = .{
         .audio = "audio",

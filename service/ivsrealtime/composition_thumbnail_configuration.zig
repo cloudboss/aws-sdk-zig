@@ -14,10 +14,10 @@ pub const CompositionThumbnailConfiguration = struct {
     /// specified by `targetIntervalSeconds`. You can enable both
     /// `SEQUENTIAL` and `LATEST`. Default:
     /// `SEQUENTIAL`.
-    storage: ?[]const ThumbnailStorageType,
+    storage: ?[]const ThumbnailStorageType = null,
 
     /// The targeted thumbnail-generation interval in seconds. Default: 60.
-    target_interval_seconds: ?i32,
+    target_interval_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .storage = "storage",

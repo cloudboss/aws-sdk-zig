@@ -16,7 +16,7 @@ const ControlScope = @import("control_scope.zig").ControlScope;
 /// zone.
 pub const RegionConfiguration = struct {
     /// Regions in which the control is available to be deployed.
-    deployable_regions: ?[]const []const u8,
+    deployable_regions: ?[]const []const u8 = null,
 
     /// The coverage of the control, if deployed. Scope is an enumerated type, with
     /// value `Regional`, or `Global`. A control with Global scope is effective in

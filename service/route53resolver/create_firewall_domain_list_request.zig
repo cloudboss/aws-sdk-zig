@@ -12,7 +12,7 @@ pub const CreateFirewallDomainListRequest = struct {
 
     /// A list of the tag keys and values that you want to associate with the domain
     /// list.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .creator_request_id = "CreatorRequestId",

@@ -4,13 +4,13 @@ const AwsRedshiftClusterClusterParameterStatus = @import("aws_redshift_cluster_c
 /// cluster.
 pub const AwsRedshiftClusterClusterParameterGroup = struct {
     /// The list of parameter statuses.
-    cluster_parameter_status_list: ?[]const AwsRedshiftClusterClusterParameterStatus,
+    cluster_parameter_status_list: ?[]const AwsRedshiftClusterClusterParameterStatus = null,
 
     /// The status of updates to the parameters.
-    parameter_apply_status: ?[]const u8,
+    parameter_apply_status: ?[]const u8 = null,
 
     /// The name of the parameter group.
-    parameter_group_name: ?[]const u8,
+    parameter_group_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cluster_parameter_status_list = "ClusterParameterStatusList",

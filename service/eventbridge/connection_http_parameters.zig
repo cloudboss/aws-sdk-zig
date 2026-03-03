@@ -5,13 +5,13 @@ const ConnectionQueryStringParameter = @import("connection_query_string_paramete
 /// Any additional parameters for the connection.
 pub const ConnectionHttpParameters = struct {
     /// Any additional body string parameters for the connection.
-    body_parameters: ?[]const ConnectionBodyParameter,
+    body_parameters: ?[]const ConnectionBodyParameter = null,
 
     /// Any additional header parameters for the connection.
-    header_parameters: ?[]const ConnectionHeaderParameter,
+    header_parameters: ?[]const ConnectionHeaderParameter = null,
 
     /// Any additional query string parameters for the connection.
-    query_string_parameters: ?[]const ConnectionQueryStringParameter,
+    query_string_parameters: ?[]const ConnectionQueryStringParameter = null,
 
     pub const json_field_names = .{
         .body_parameters = "BodyParameters",

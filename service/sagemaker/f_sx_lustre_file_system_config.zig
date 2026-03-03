@@ -7,7 +7,7 @@ pub const FSxLustreFileSystemConfig = struct {
 
     /// The path to the file system directory that is accessible in Amazon SageMaker
     /// Studio. Permitted users can access only this directory and below.
-    file_system_path: ?[]const u8,
+    file_system_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .file_system_id = "FileSystemId",

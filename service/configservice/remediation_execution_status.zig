@@ -6,18 +6,18 @@ const RemediationExecutionStep = @import("remediation_execution_step.zig").Remed
 /// that resource.
 pub const RemediationExecutionStatus = struct {
     /// Start time when the remediation was executed.
-    invocation_time: ?i64,
+    invocation_time: ?i64 = null,
 
     /// The time when the remediation execution was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
-    resource_key: ?ResourceKey,
+    resource_key: ?ResourceKey = null,
 
     /// ENUM of the values.
-    state: ?RemediationExecutionState,
+    state: ?RemediationExecutionState = null,
 
     /// Details of every step.
-    step_details: ?[]const RemediationExecutionStep,
+    step_details: ?[]const RemediationExecutionStep = null,
 
     pub const json_field_names = .{
         .invocation_time = "InvocationTime",

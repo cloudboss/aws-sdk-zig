@@ -29,26 +29,26 @@ pub const HlsGroupSettings = struct {
     /// HLS output group in your job. This default manifest references every output
     /// in the output group. To create additional top-level manifests that reference
     /// a subset of the outputs in the output group, specify a list of them here.
-    additional_manifests: ?[]const HlsAdditionalManifest,
+    additional_manifests: ?[]const HlsAdditionalManifest = null,
 
     /// Choose one or more ad marker types to decorate your Apple HLS manifest. This
     /// setting does not determine whether SCTE-35 markers appear in the outputs
     /// themselves.
-    ad_markers: ?[]const HlsAdMarkers,
+    ad_markers: ?[]const HlsAdMarkers = null,
 
     /// Ignore this setting unless you are using FairPlay DRM with Verimatrix and
     /// you encounter playback issues. Keep the default value, Include, to output
     /// audio-only headers. Choose Exclude to remove the audio-only headers from
     /// your audio segments.
-    audio_only_header: ?HlsAudioOnlyHeader,
+    audio_only_header: ?HlsAudioOnlyHeader = null,
 
     /// A partial URI prefix that will be prepended to each output in the media
     /// .m3u8 file. Can be used if base manifest is delivered from a different URL
     /// than the main .m3u8 file.
-    base_url: ?[]const u8,
+    base_url: ?[]const u8 = null,
 
     /// Language to be used on Caption outputs
-    caption_language_mappings: ?[]const HlsCaptionLanguageMapping,
+    caption_language_mappings: ?[]const HlsCaptionLanguageMapping = null,
 
     /// Applies only to 608 Embedded output captions. Insert: Include
     /// CLOSED-CAPTIONS lines in the manifest. Specify at least one language in the
@@ -59,41 +59,41 @@ pub const HlsGroupSettings = struct {
     /// Otherwise, languages in the manifest will not match up properly with the
     /// output captions. None: Include CLOSED-CAPTIONS=NONE line in the manifest.
     /// Omit: Omit any CLOSED-CAPTIONS line from the manifest.
-    caption_language_setting: ?HlsCaptionLanguageSetting,
+    caption_language_setting: ?HlsCaptionLanguageSetting = null,
 
     /// Set Caption segment length control to Match video to create caption segments
     /// that align with the video segments from the first video output in this
     /// output group. For example, if the video segments are 2 seconds long, your
     /// WebVTT segments will also be 2 seconds long. Keep the default setting, Large
     /// segments to create caption segments that are 300 seconds long.
-    caption_segment_length_control: ?HlsCaptionSegmentLengthControl,
+    caption_segment_length_control: ?HlsCaptionSegmentLengthControl = null,
 
     /// Disable this setting only when your workflow requires the
     /// #EXT-X-ALLOW-CACHE:no tag. Otherwise, keep the default value Enabled and
     /// control caching in your video distribution set up. For example, use the
     /// Cache-Control http header.
-    client_cache: ?HlsClientCache,
+    client_cache: ?HlsClientCache = null,
 
     /// Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist
     /// generation.
-    codec_specification: ?HlsCodecSpecification,
+    codec_specification: ?HlsCodecSpecification = null,
 
     /// Use Destination to specify the S3 output location and the output filename
     /// base. Destination accepts format identifiers. If you do not specify the base
     /// filename in the URI, the service will use the filename of the input file. If
     /// your job has multiple inputs, the service uses the filename of the first
     /// input file.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// Settings associated with the destination. Will vary based on the type of
     /// destination
-    destination_settings: ?DestinationSettings,
+    destination_settings: ?DestinationSettings = null,
 
     /// Indicates whether segments should be placed in subdirectories.
-    directory_structure: ?HlsDirectoryStructure,
+    directory_structure: ?HlsDirectoryStructure = null,
 
     /// DRM settings.
-    encryption: ?HlsEncryptionSettings,
+    encryption: ?HlsEncryptionSettings = null,
 
     /// Specify whether MediaConvert generates images for trick play. Keep the
     /// default value, None, to not generate any images. Choose Thumbnail to
@@ -105,17 +105,17 @@ pub const HlsGroupSettings = struct {
     /// MediaConvert creates with this feature are compatible with this Roku
     /// specification:
     /// https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
-    image_based_trick_play: ?HlsImageBasedTrickPlay,
+    image_based_trick_play: ?HlsImageBasedTrickPlay = null,
 
     /// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
-    image_based_trick_play_settings: ?HlsImageBasedTrickPlaySettings,
+    image_based_trick_play_settings: ?HlsImageBasedTrickPlaySettings = null,
 
     /// When set to GZIP, compresses HLS playlist.
-    manifest_compression: ?HlsManifestCompression,
+    manifest_compression: ?HlsManifestCompression = null,
 
     /// Indicates whether the output manifest should use floating point values for
     /// segment duration.
-    manifest_duration_format: ?HlsManifestDurationFormat,
+    manifest_duration_format: ?HlsManifestDurationFormat = null,
 
     /// Keep this setting at the default value of 0, unless you are troubleshooting
     /// a problem with how devices play back the end of your video asset. If you
@@ -128,26 +128,26 @@ pub const HlsGroupSettings = struct {
     /// For example, your segment length is 3 seconds and your final segment is .5
     /// seconds without a minimum final segment length; when you set the minimum
     /// final segment length to 1, your final segment is 3.5 seconds.
-    min_final_segment_length: ?f64,
+    min_final_segment_length: ?f64 = null,
 
     /// When set, Minimum Segment Size is enforced by looking ahead and back within
     /// the specified range for a nearby avail and extending the segment size if
     /// needed.
-    min_segment_length: ?i32,
+    min_segment_length: ?i32 = null,
 
     /// Indicates whether the .m3u8 manifest file should be generated for this HLS
     /// output group.
-    output_selection: ?HlsOutputSelection,
+    output_selection: ?HlsOutputSelection = null,
 
     /// Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files.
     /// The value is calculated as follows: either the program date and time are
     /// initialized using the input timecode source, or the time is initialized
     /// using the input timecode source and the date is initialized using the
     /// timestamp_offset.
-    program_date_time: ?HlsProgramDateTime,
+    program_date_time: ?HlsProgramDateTime = null,
 
     /// Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
-    program_date_time_period: ?i32,
+    program_date_time_period: ?i32 = null,
 
     /// Specify whether MediaConvert generates HLS manifests while your job is
     /// running or when your job is complete. To generate HLS manifests while your
@@ -160,18 +160,18 @@ pub const HlsGroupSettings = struct {
     /// available media segment. When your job completes, the final child playlists
     /// include an EXT-X-ENDLIST tag. To generate HLS manifests only when your job
     /// completes: Choose Disabled.
-    progressive_write_hls_manifest: ?HlsProgressiveWriteHlsManifest,
+    progressive_write_hls_manifest: ?HlsProgressiveWriteHlsManifest = null,
 
     /// When set to SINGLE_FILE, emits program as a single media resource (.ts)
     /// file, uses #EXT-X-BYTERANGE tags to index segment for playback.
-    segment_control: ?HlsSegmentControl,
+    segment_control: ?HlsSegmentControl = null,
 
     /// Specify the length, in whole seconds, of each segment. When you don't
     /// specify a value, MediaConvert defaults to 10. Related settings: Use Segment
     /// length control to specify whether the encoder enforces this value strictly.
     /// Use Segment control to specify whether MediaConvert creates separate segment
     /// files or one content file that has metadata to mark the segment boundaries.
-    segment_length: ?i32,
+    segment_length: ?i32 = null,
 
     /// Specify how you want MediaConvert to determine segment lengths in this
     /// output group. To use the exact value that you specify under Segment length:
@@ -190,16 +190,16 @@ pub const HlsGroupSettings = struct {
     /// 2X). For example: 5, 15, 30 and 60. Or: 25 and 50. (Outputs must share an
     /// integer multiple.) - Output audio codec: Specify Advanced Audio Coding
     /// (AAC). - Output sample rate: Choose 48kHz.
-    segment_length_control: ?HlsSegmentLengthControl,
+    segment_length_control: ?HlsSegmentLengthControl = null,
 
     /// Specify the number of segments to write to a subdirectory before starting a
     /// new one. You must also set Directory structure to Subdirectory per stream
     /// for this setting to have an effect.
-    segments_per_subdirectory: ?i32,
+    segments_per_subdirectory: ?i32 = null,
 
     /// Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of
     /// variant manifest.
-    stream_inf_resolution: ?HlsStreamInfResolution,
+    stream_inf_resolution: ?HlsStreamInfResolution = null,
 
     /// When set to LEGACY, the segment target duration is always rounded up to the
     /// nearest integer value above its current value in seconds. When set to
@@ -210,23 +210,23 @@ pub const HlsGroupSettings = struct {
     /// the actual duration of the segment. Some older players may experience
     /// interrupted playback when the actual duration of a track in a segment is
     /// longer than the target duration.
-    target_duration_compatibility_mode: ?HlsTargetDurationCompatibilityMode,
+    target_duration_compatibility_mode: ?HlsTargetDurationCompatibilityMode = null,
 
     /// Specify the type of the ID3 frame to use for ID3 timestamps in your output.
     /// To include ID3 timestamps: Specify PRIV or TDRL and set ID3 metadata to
     /// Passthrough. To exclude ID3 timestamps: Set ID3 timestamp frame type to
     /// None.
-    timed_metadata_id_3_frame: ?HlsTimedMetadataId3Frame,
+    timed_metadata_id_3_frame: ?HlsTimedMetadataId3Frame = null,
 
     /// Specify the interval in seconds to write ID3 timestamps in your output. The
     /// first timestamp starts at the output timecode and date, and increases
     /// incrementally with each ID3 timestamp. To use the default interval of 10
     /// seconds: Leave blank. To include this metadata in your output: Set ID3
     /// timestamp frame type to PRIV or TDRL, and set ID3 metadata to Passthrough.
-    timed_metadata_id_3_period: ?i32,
+    timed_metadata_id_3_period: ?i32 = null,
 
     /// Provides an extra millisecond delta offset to fine tune the timestamps.
-    timestamp_delta_milliseconds: ?i32,
+    timestamp_delta_milliseconds: ?i32 = null,
 
     pub const json_field_names = .{
         .additional_manifests = "AdditionalManifests",

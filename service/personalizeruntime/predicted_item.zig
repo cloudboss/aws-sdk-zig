@@ -6,13 +6,13 @@ const aws = @import("aws");
 /// `PredictedItem`s.
 pub const PredictedItem = struct {
     /// The recommended item ID.
-    item_id: ?[]const u8,
+    item_id: ?[]const u8 = null,
 
     /// Metadata about the item from your Items dataset.
-    metadata: ?[]const aws.map.StringMapEntry,
+    metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the promotion that included the predicted item.
-    promotion_name: ?[]const u8,
+    promotion_name: ?[]const u8 = null,
 
     /// If you use User-Personalization-v2, a list of reasons for why the item was
     /// included in recommendations. Possible reasons include the following:
@@ -35,12 +35,12 @@ pub const PredictedItem = struct {
     /// recommendation request. These items are popular items, based on interactions
     /// data, that satisfy your filter criteria.
     /// They don't have a relevance score for the user.
-    reason: ?[]const []const u8,
+    reason: ?[]const []const u8 = null,
 
     /// A numeric representation of the model's certainty that the item will be the
     /// next user
     /// selection. For more information on scoring logic, see how-scores-work.
-    score: ?f64,
+    score: ?f64 = null,
 
     pub const json_field_names = .{
         .item_id = "itemId",

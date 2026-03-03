@@ -8,7 +8,7 @@ pub const ChannelMessages = struct {
     ///
     /// Example path: `channel/mychannel/__dt=2020-02-29
     /// 00:00:00/1582940490000_1582940520000_123456789012_mychannel_0_2118.0.json.gz`
-    s_3_paths: ?[]const []const u8,
+    s_3_paths: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .s_3_paths = "s3Paths",

@@ -4,7 +4,7 @@ pub const SecondaryAddressComponent = struct {
     /// The designator of the secondary address component.
     ///
     /// Example: `Apt`.
-    designator: ?[]const u8,
+    designator: ?[]const u8 = null,
 
     /// Number that uniquely identifies a secondary address.
     number: []const u8,

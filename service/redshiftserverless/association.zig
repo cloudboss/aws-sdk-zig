@@ -1,16 +1,16 @@
 /// An object that represents the custom domain name association.
 pub const Association = struct {
     /// The custom domain name’s certificate Amazon resource name (ARN).
-    custom_domain_certificate_arn: ?[]const u8,
+    custom_domain_certificate_arn: ?[]const u8 = null,
 
     /// The expiration time for the certificate.
-    custom_domain_certificate_expiry_time: ?i64,
+    custom_domain_certificate_expiry_time: ?i64 = null,
 
     /// The custom domain name associated with the workgroup.
-    custom_domain_name: ?[]const u8,
+    custom_domain_name: ?[]const u8 = null,
 
     /// The name of the workgroup associated with the database.
-    workgroup_name: ?[]const u8,
+    workgroup_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .custom_domain_certificate_arn = "customDomainCertificateArn",

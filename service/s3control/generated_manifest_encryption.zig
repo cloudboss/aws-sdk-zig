@@ -5,8 +5,8 @@ const SSES3Encryption = @import("sses3_encryption.zig").SSES3Encryption;
 pub const GeneratedManifestEncryption = struct {
     /// Configuration details on how SSE-KMS is used to encrypt generated manifest
     /// objects.
-    ssekms: ?SSEKMSEncryption,
+    ssekms: ?SSEKMSEncryption = null,
 
     /// Specifies the use of SSE-S3 to encrypt generated manifest objects.
-    sses3: ?SSES3Encryption,
+    sses3: ?SSES3Encryption = null,
 };

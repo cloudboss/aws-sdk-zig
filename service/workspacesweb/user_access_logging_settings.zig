@@ -3,10 +3,10 @@
 pub const UserAccessLoggingSettings = struct {
     /// A list of web portal ARNs that this user access logging settings is
     /// associated with.
-    associated_portal_arns: ?[]const []const u8,
+    associated_portal_arns: ?[]const []const u8 = null,
 
     /// The ARN of the Kinesis stream.
-    kinesis_stream_arn: ?[]const u8,
+    kinesis_stream_arn: ?[]const u8 = null,
 
     /// The ARN of the user access logging settings.
     user_access_logging_settings_arn: []const u8,

@@ -9,11 +9,11 @@ pub const AccessLevelFilter = struct {
     /// * `Role` - Filter results based on the federated role of the specified user.
     ///
     /// * `User` - Filter results based on the specified user.
-    key: ?AccessLevelFilterKey,
+    key: ?AccessLevelFilterKey = null,
 
     /// The user to which the access level applies. The only supported value is
     /// `self`.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

@@ -5,13 +5,13 @@ const RouteAnalysisStatus = @import("route_analysis_status.zig").RouteAnalysisSt
 /// Describes a route analysis.
 pub const RouteAnalysis = struct {
     /// The destination.
-    destination: ?RouteAnalysisEndpointOptions,
+    destination: ?RouteAnalysisEndpointOptions = null,
 
     /// The forward path.
-    forward_path: ?RouteAnalysisPath,
+    forward_path: ?RouteAnalysisPath = null,
 
     /// The ID of the global network.
-    global_network_id: ?[]const u8,
+    global_network_id: ?[]const u8 = null,
 
     /// Indicates whether to analyze the return path. The return path is not
     /// analyzed if the forward path
@@ -19,22 +19,22 @@ pub const RouteAnalysis = struct {
     include_return_path: bool = false,
 
     /// The ID of the AWS account that created the route analysis.
-    owner_account_id: ?[]const u8,
+    owner_account_id: ?[]const u8 = null,
 
     /// The return path.
-    return_path: ?RouteAnalysisPath,
+    return_path: ?RouteAnalysisPath = null,
 
     /// The ID of the route analysis.
-    route_analysis_id: ?[]const u8,
+    route_analysis_id: ?[]const u8 = null,
 
     /// The source.
-    source: ?RouteAnalysisEndpointOptions,
+    source: ?RouteAnalysisEndpointOptions = null,
 
     /// The time that the analysis started.
-    start_timestamp: ?i64,
+    start_timestamp: ?i64 = null,
 
     /// The status of the route analysis.
-    status: ?RouteAnalysisStatus,
+    status: ?RouteAnalysisStatus = null,
 
     /// Indicates whether to include the location of middlebox appliances in the
     /// route analysis.

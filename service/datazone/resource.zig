@@ -1,10 +1,10 @@
 /// The details of a provisioned resource of this Amazon DataZone environment.
 pub const Resource = struct {
     /// The name of a provisioned resource of this Amazon DataZone environment.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The provider of a provisioned resource of this Amazon DataZone environment.
-    provider: ?[]const u8,
+    provider: ?[]const u8 = null,
 
     /// The type of a provisioned resource of this Amazon DataZone environment.
     @"type": []const u8,

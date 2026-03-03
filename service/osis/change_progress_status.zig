@@ -5,13 +5,13 @@ const ChangeProgressStatuses = @import("change_progress_statuses.zig").ChangePro
 pub const ChangeProgressStatus = struct {
     /// Information about the stages that the pipeline is going through to perform
     /// the configuration change.
-    change_progress_stages: ?[]const ChangeProgressStage,
+    change_progress_stages: ?[]const ChangeProgressStage = null,
 
     /// The time at which the configuration change is made on the pipeline.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The overall status of the pipeline configuration change.
-    status: ?ChangeProgressStatuses,
+    status: ?ChangeProgressStatuses = null,
 
     /// The total number of stages required for the pipeline configuration change.
     total_number_of_stages: i32 = 0,

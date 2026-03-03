@@ -9,7 +9,7 @@
 pub const AggregatedVariablesImpactExplanation = struct {
     /// The names of all the event variables that were used to derive the aggregated
     /// variables.
-    event_variable_names: ?[]const []const u8,
+    event_variable_names: ?[]const []const u8 = null,
 
     /// The raw, uninterpreted value represented as log-odds of the fraud. These
     /// values are usually between -10 to +10, but range from -infinity to
@@ -18,11 +18,11 @@ pub const AggregatedVariablesImpactExplanation = struct {
     /// * A positive value indicates that the variables drove the risk score up.
     ///
     /// * A negative value indicates that the variables drove the risk score down.
-    log_odds_impact: ?f32,
+    log_odds_impact: ?f32 = null,
 
     /// The relative impact of the aggregated variables in terms of magnitude on the
     /// prediction scores.
-    relative_impact: ?[]const u8,
+    relative_impact: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .event_variable_names = "eventVariableNames",

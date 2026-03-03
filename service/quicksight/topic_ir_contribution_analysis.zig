@@ -6,16 +6,16 @@ const ContributionAnalysisTimeRanges = @import("contribution_analysis_time_range
 /// The definition for a `TopicIRContributionAnalysis`.
 pub const TopicIRContributionAnalysis = struct {
     /// The direction for the `TopicIRContributionAnalysis`.
-    direction: ?ContributionAnalysisDirection,
+    direction: ?ContributionAnalysisDirection = null,
 
     /// The factors for a `TopicIRContributionAnalysis`.
-    factors: ?[]const ContributionAnalysisFactor,
+    factors: ?[]const ContributionAnalysisFactor = null,
 
     /// The sort type for the `TopicIRContributionAnalysis`.
-    sort_type: ?ContributionAnalysisSortType,
+    sort_type: ?ContributionAnalysisSortType = null,
 
     /// The time ranges for the `TopicIRContributionAnalysis`.
-    time_ranges: ?ContributionAnalysisTimeRanges,
+    time_ranges: ?ContributionAnalysisTimeRanges = null,
 
     pub const json_field_names = .{
         .direction = "Direction",

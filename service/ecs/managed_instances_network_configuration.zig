@@ -13,14 +13,14 @@ pub const ManagedInstancesNetworkConfiguration = struct {
     /// These
     /// security groups control the network traffic allowed to and from the
     /// instances.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// The list of subnet IDs where Amazon ECS can launch Amazon ECS Managed
     /// Instances.
     /// Instances are distributed across the specified subnets for high
     /// availability. All
     /// subnets must be in the same VPC.
-    subnets: ?[]const []const u8,
+    subnets: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .security_groups = "securityGroups",

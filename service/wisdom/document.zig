@@ -7,10 +7,10 @@ pub const Document = struct {
     content_reference: ContentReference,
 
     /// The excerpt from the document.
-    excerpt: ?DocumentText,
+    excerpt: ?DocumentText = null,
 
     /// The title of the document.
-    title: ?DocumentText,
+    title: ?DocumentText = null,
 
     pub const json_field_names = .{
         .content_reference = "contentReference",

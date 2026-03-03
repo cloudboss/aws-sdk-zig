@@ -4,7 +4,7 @@ pub const WaypointOptimizationAvoidanceAreaGeometry = struct {
     /// coordinates (longitude and latitude,) of the southwest corner of the
     /// bounding box; the second pair represents the X and Y coordinates (longitude
     /// and latitude) of the northeast corner.
-    bounding_box: ?[]const f64,
+    bounding_box: ?[]const f64 = null,
 
     pub const json_field_names = .{
         .bounding_box = "BoundingBox",

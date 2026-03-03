@@ -6,7 +6,7 @@ pub const OverrideButtonConfiguration = struct {
     button_action: ButtonAction,
 
     /// Button destination.
-    link: ?[]const u8,
+    link: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .button_action = "ButtonAction",

@@ -4,7 +4,7 @@
 /// category, confidence score, type, stability score, and start and end times.
 pub const MedicalEntity = struct {
     /// The category of information identified. The only category is `PHI`.
-    category: ?[]const u8,
+    category: ?[]const u8 = null,
 
     /// The confidence score associated with the identified PHI entity in your
     /// audio.
@@ -14,10 +14,10 @@ pub const MedicalEntity = struct {
     /// probability that the identified entity correctly matches the entity spoken
     /// in your
     /// media.
-    confidence: ?f64,
+    confidence: ?f64 = null,
 
     /// The word or words identified as PHI.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The end time, in seconds, of the utterance that was identified as PHI.
     end_time: f64 = 0,

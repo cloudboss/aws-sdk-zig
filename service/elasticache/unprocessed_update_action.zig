@@ -3,17 +3,17 @@
 /// request
 pub const UnprocessedUpdateAction = struct {
     /// The ID of the cache cluster
-    cache_cluster_id: ?[]const u8,
+    cache_cluster_id: ?[]const u8 = null,
 
     /// The error message that describes the reason the request was not processed
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The error type for requests that are not processed
-    error_type: ?[]const u8,
+    error_type: ?[]const u8 = null,
 
     /// The replication group ID
-    replication_group_id: ?[]const u8,
+    replication_group_id: ?[]const u8 = null,
 
     /// The unique ID of the service update
-    service_update_name: ?[]const u8,
+    service_update_name: ?[]const u8 = null,
 };

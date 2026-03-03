@@ -11,7 +11,7 @@ const AggregatedLogOddsMetric = @import("aggregated_log_odds_metric.zig").Aggreg
 /// `IP address` and `user`.
 pub const AggregatedVariablesImportanceMetrics = struct {
     /// List of variables' metrics.
-    log_odds_metrics: ?[]const AggregatedLogOddsMetric,
+    log_odds_metrics: ?[]const AggregatedLogOddsMetric = null,
 
     pub const json_field_names = .{
         .log_odds_metrics = "logOddsMetrics",

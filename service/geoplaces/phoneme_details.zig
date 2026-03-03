@@ -4,10 +4,10 @@ const PhonemeTranscription = @import("phoneme_transcription.zig").PhonemeTranscr
 /// The phoneme details.
 pub const PhonemeDetails = struct {
     /// How to pronounce the address.
-    address: ?AddressComponentPhonemes,
+    address: ?AddressComponentPhonemes = null,
 
     /// List of `PhonemeTranscription`. See `PhonemeTranscription` for fields.
-    title: ?[]const PhonemeTranscription,
+    title: ?[]const PhonemeTranscription = null,
 
     pub const json_field_names = .{
         .address = "Address",

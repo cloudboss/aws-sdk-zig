@@ -17,13 +17,13 @@ pub const FarmSummary = struct {
     farm_id: []const u8,
 
     /// The ARN for the KMS key.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The date and time the resource was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user or system that updated this resource.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

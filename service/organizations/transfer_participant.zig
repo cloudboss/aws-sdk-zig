@@ -4,10 +4,10 @@
 /// with specified responsibilities for their organization.
 pub const TransferParticipant = struct {
     /// Email address for the management account.
-    management_account_email: ?[]const u8,
+    management_account_email: ?[]const u8 = null,
 
     /// ID for the management account.
-    management_account_id: ?[]const u8,
+    management_account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .management_account_email = "ManagementAccountEmail",

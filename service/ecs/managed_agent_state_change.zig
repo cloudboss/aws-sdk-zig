@@ -9,7 +9,7 @@ pub const ManagedAgentStateChange = struct {
     managed_agent_name: ManagedAgentName,
 
     /// The reason for the status of the managed agent.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The status of the managed agent.
     status: []const u8,

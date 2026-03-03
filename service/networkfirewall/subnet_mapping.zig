@@ -10,7 +10,7 @@ const IPAddressType = @import("ip_address_type.zig").IPAddressType;
 pub const SubnetMapping = struct {
     /// The subnet's IP address type. You can't change the IP address type after you
     /// create the subnet.
-    ip_address_type: ?IPAddressType,
+    ip_address_type: ?IPAddressType = null,
 
     /// The unique identifier for the subnet.
     subnet_id: []const u8,

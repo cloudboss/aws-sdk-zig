@@ -11,7 +11,7 @@ pub const ImportJobSummary = struct {
 
     /// The configuration information of the external source that the resource data
     /// are imported from.
-    external_source_configuration: ?ExternalSourceConfiguration,
+    external_source_configuration: ?ExternalSourceConfiguration = null,
 
     /// The identifier of the import job.
     import_job_id: []const u8,
@@ -29,7 +29,7 @@ pub const ImportJobSummary = struct {
     last_modified_time: i64,
 
     /// The metadata fields of the imported Amazon Q in Connect resources.
-    metadata: ?[]const aws.map.StringMapEntry,
+    metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// The status of the import job.
     status: ImportJobStatus,

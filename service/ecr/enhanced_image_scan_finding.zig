@@ -8,19 +8,19 @@ const ScoreDetails = @import("score_details.zig").ScoreDetails;
 /// enabled for your private registry.
 pub const EnhancedImageScanFinding = struct {
     /// The Amazon Web Services account ID associated with the image.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
     /// The description of the finding.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// If a finding discovered in your environment has an exploit available.
-    exploit_available: ?[]const u8,
+    exploit_available: ?[]const u8 = null,
 
     /// The Amazon Resource Number (ARN) of the finding.
-    finding_arn: ?[]const u8,
+    finding_arn: ?[]const u8 = null,
 
     /// The date and time that the finding was first observed.
-    first_observed_at: ?i64,
+    first_observed_at: ?i64 = null,
 
     /// Details on whether a fix is available through a version update. This value
     /// can be
@@ -28,40 +28,40 @@ pub const EnhancedImageScanFinding = struct {
     /// fix means that some, but not all, of the packages identified in the finding
     /// have fixes
     /// available through updated versions.
-    fix_available: ?[]const u8,
+    fix_available: ?[]const u8 = null,
 
     /// The date and time that the finding was last observed.
-    last_observed_at: ?i64,
+    last_observed_at: ?i64 = null,
 
     /// An object that contains the details of a package vulnerability finding.
-    package_vulnerability_details: ?PackageVulnerabilityDetails,
+    package_vulnerability_details: ?PackageVulnerabilityDetails = null,
 
     /// An object that contains the details about how to remediate a finding.
-    remediation: ?Remediation,
+    remediation: ?Remediation = null,
 
     /// Contains information on the resources involved in a finding.
-    resources: ?[]const Resource,
+    resources: ?[]const Resource = null,
 
     /// The Amazon Inspector score given to the finding.
     score: f64 = 0,
 
     /// An object that contains details of the Amazon Inspector score.
-    score_details: ?ScoreDetails,
+    score_details: ?ScoreDetails = null,
 
     /// The severity of the finding.
-    severity: ?[]const u8,
+    severity: ?[]const u8 = null,
 
     /// The status of the finding.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The title of the finding.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The type of the finding.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The date and time the finding was last updated at.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .aws_account_id = "awsAccountId",

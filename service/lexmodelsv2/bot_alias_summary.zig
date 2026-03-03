@@ -6,28 +6,28 @@ pub const BotAliasSummary = struct {
     /// The unique identifier assigned to the bot alias. You can use this ID
     /// to get detailed information about the alias using the
     /// [DescribeBotAlias](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeBotAlias.html) operation.
-    bot_alias_id: ?[]const u8,
+    bot_alias_id: ?[]const u8 = null,
 
     /// The name of the bot alias.
-    bot_alias_name: ?[]const u8,
+    bot_alias_name: ?[]const u8 = null,
 
     /// The current state of the bot alias. If the status is
     /// `Available`, the alias is ready for use.
-    bot_alias_status: ?BotAliasStatus,
+    bot_alias_status: ?BotAliasStatus = null,
 
     /// The version of the bot that the bot alias references.
-    bot_version: ?[]const u8,
+    bot_version: ?[]const u8 = null,
 
     /// A timestamp of the date and time that the bot alias was
     /// created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The description of the bot alias.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A timestamp of the date and time that the bot alias was last
     /// updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .bot_alias_id = "botAliasId",

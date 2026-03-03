@@ -46,10 +46,10 @@ pub const EvaluationResult = struct {
     /// this case, policy evaluation does not proceed any further and this parameter
     /// is not
     /// returned.
-    eval_decision_details: ?[]const aws.map.MapEntry(PolicyEvaluationDecisionType),
+    eval_decision_details: ?[]const aws.map.MapEntry(PolicyEvaluationDecisionType) = null,
 
     /// The ARN of the resource that the indicated API operation was tested on.
-    eval_resource_name: ?[]const u8,
+    eval_resource_name: ?[]const u8 = null,
 
     /// A list of the statements in the input policies that determine the result for
     /// this
@@ -58,7 +58,7 @@ pub const EvaluationResult = struct {
     /// only one statement denies that operation, then the explicit deny overrides
     /// any allow. In
     /// addition, the deny statement is the only entry included in the result.
-    matched_statements: ?[]const Statement,
+    matched_statements: ?[]const Statement = null,
 
     /// A list of context keys that are required by the included input policies but
     /// that were
@@ -71,20 +71,20 @@ pub const EvaluationResult = struct {
     /// context
     /// keys used by a set of policies, you can call
     /// [GetContextKeysForCustomPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html) or [GetContextKeysForPrincipalPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html).
-    missing_context_values: ?[]const []const u8,
+    missing_context_values: ?[]const []const u8 = null,
 
     /// A structure that details how Organizations and its service control policies
     /// affect the results of
     /// the simulation. Only applies if the simulated user's account is part of an
     /// organization.
-    organizations_decision_detail: ?OrganizationsDecisionDetail,
+    organizations_decision_detail: ?OrganizationsDecisionDetail = null,
 
     /// Contains information about the effect that a permissions boundary has on a
     /// policy
     /// simulation when the boundary is applied to an IAM entity.
-    permissions_boundary_decision_detail: ?PermissionsBoundaryDecisionDetail,
+    permissions_boundary_decision_detail: ?PermissionsBoundaryDecisionDetail = null,
 
     /// The individual results of the simulation of the API operation specified in
     /// EvalActionName on each resource.
-    resource_specific_results: ?[]const ResourceSpecificResult,
+    resource_specific_results: ?[]const ResourceSpecificResult = null,
 };

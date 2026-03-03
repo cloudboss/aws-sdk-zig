@@ -7,11 +7,11 @@ pub const QueryComputeRequest = struct {
     /// The mode in which Timestream Compute Units (TCUs) are allocated and utilized
     /// within an account. Note that in the Asia Pacific (Mumbai) region, the API
     /// operation only recognizes the value `PROVISIONED`.
-    compute_mode: ?ComputeMode,
+    compute_mode: ?ComputeMode = null,
 
     /// Configuration object that contains settings for provisioned Timestream
     /// Compute Units (TCUs) in your account.
-    provisioned_capacity: ?ProvisionedCapacityRequest,
+    provisioned_capacity: ?ProvisionedCapacityRequest = null,
 
     pub const json_field_names = .{
         .compute_mode = "ComputeMode",

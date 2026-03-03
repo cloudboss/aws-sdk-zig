@@ -17,7 +17,7 @@ pub const RuleGroupResponse = struct {
     /// example, if Network Firewall detects a rule that's routing traffic
     /// asymmetrically, which impacts the service's ability to properly process
     /// traffic, the service includes the rule in the list of analysis results.
-    analysis_results: ?[]const AnalysisResult,
+    analysis_results: ?[]const AnalysisResult = null,
 
     /// The maximum operating resources that this rule group can use. Rule group
     /// capacity is fixed at creation.
@@ -29,23 +29,23 @@ pub const RuleGroupResponse = struct {
     /// You can retrieve the capacity that would be required for a rule group before
     /// you create the rule group by calling
     /// CreateRuleGroup with `DryRun` set to `TRUE`.
-    capacity: ?i32,
+    capacity: ?i32 = null,
 
     /// The number of capacity units currently consumed by the rule group rules.
-    consumed_capacity: ?i32,
+    consumed_capacity: ?i32 = null,
 
     /// A description of the rule group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A complex type that contains the Amazon Web Services KMS encryption
     /// configuration settings for your rule group.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// The last time that the rule group was changed.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The number of firewall policies that use this rule group.
-    number_of_associations: ?i32,
+    number_of_associations: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the rule group.
     ///
@@ -62,7 +62,7 @@ pub const RuleGroupResponse = struct {
     rule_group_name: []const u8,
 
     /// Detailed information about the current status of a rule group.
-    rule_group_status: ?ResourceStatus,
+    rule_group_status: ?ResourceStatus = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service SNS
     /// topic that's
@@ -73,12 +73,12 @@ pub const RuleGroupResponse = struct {
     /// expiration. For more information, see the [Amazon Simple Notification
     /// Service Developer
     /// Guide.](https://docs.aws.amazon.com/sns/latest/dg/welcome.html).
-    sns_topic: ?[]const u8,
+    sns_topic: ?[]const u8 = null,
 
     /// A complex type that contains metadata about the rule group that your own
     /// rule group is copied from. You can use the metadata to track the version
     /// updates made to the originating rule group.
-    source_metadata: ?SourceMetadata,
+    source_metadata: ?SourceMetadata = null,
 
     /// A complex type containing the currently selected rule option fields that
     /// will be displayed for rule summarization returned by
@@ -87,15 +87,15 @@ pub const RuleGroupResponse = struct {
     /// * The `RuleOptions` specified in SummaryConfiguration
     ///
     /// * Rule metadata organization preferences
-    summary_configuration: ?SummaryConfiguration,
+    summary_configuration: ?SummaryConfiguration = null,
 
     /// The key:value pairs to associate with the resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// Indicates whether the rule group is stateless or stateful. If the rule group
     /// is stateless, it contains
     /// stateless rules. If it is stateful, it contains stateful rules.
-    @"type": ?RuleGroupType,
+    @"type": ?RuleGroupType = null,
 
     pub const json_field_names = .{
         .analysis_results = "AnalysisResults",

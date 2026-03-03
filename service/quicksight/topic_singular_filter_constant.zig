@@ -5,10 +5,10 @@ const ConstantType = @import("constant_type.zig").ConstantType;
 pub const TopicSingularFilterConstant = struct {
     /// The type of the singular filter constant. Valid values for this structure
     /// are `SINGULAR`.
-    constant_type: ?ConstantType,
+    constant_type: ?ConstantType = null,
 
     /// The value of the singular filter constant.
-    singular_constant: ?[]const u8,
+    singular_constant: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .constant_type = "ConstantType",

@@ -21,7 +21,7 @@ pub const AlfrescoConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Alfresco data source field names must exist
     /// in your Alfresco custom metadata.
-    blog_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    blog_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// `TRUE` to index comments of blogs and other content.
     crawl_comments: bool = false,
@@ -38,12 +38,12 @@ pub const AlfrescoConfiguration = struct {
     /// The
     /// Alfresco data source field names must exist in your Alfresco custom
     /// metadata.
-    document_library_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    document_library_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// Specify whether to index document libraries, wikis, or blogs. You can
     /// specify one or
     /// more of these options.
-    entity_filter: ?[]const AlfrescoEntity,
+    entity_filter: ?[]const AlfrescoEntity = null,
 
     /// A list of regular expression patterns to exclude certain files in your
     /// Alfresco data
@@ -54,7 +54,7 @@ pub const AlfrescoConfiguration = struct {
     /// pattern and an exclusion pattern, the exclusion pattern takes precedence and
     /// the file
     /// isn't included in the index.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of regular expression patterns to include certain files in your
     /// Alfresco data
@@ -65,7 +65,7 @@ pub const AlfrescoConfiguration = struct {
     /// and an exclusion pattern, the exclusion pattern takes precedence and the
     /// file isn't
     /// included in the index.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains
     /// the
@@ -100,7 +100,7 @@ pub const AlfrescoConfiguration = struct {
     /// your Alfresco.
     /// For more information, see [Configuring a
     /// VPC](https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
-    vpc_configuration: ?DataSourceVpcConfiguration,
+    vpc_configuration: ?DataSourceVpcConfiguration = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of Alfresco wikis to Amazon Kendra index field names. To create
@@ -112,7 +112,7 @@ pub const AlfrescoConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Alfresco data source field names must exist
     /// in your Alfresco custom metadata.
-    wiki_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    wiki_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     pub const json_field_names = .{
         .blog_field_mappings = "BlogFieldMappings",

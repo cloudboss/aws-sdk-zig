@@ -9,18 +9,18 @@ const TaskMode = @import("task_mode.zig").TaskMode;
 /// tasks.
 pub const TaskListEntry = struct {
     /// The name of the task.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The status of the task.
-    status: ?TaskStatus,
+    status: ?TaskStatus = null,
 
     /// The Amazon Resource Name (ARN) of the task.
-    task_arn: ?[]const u8,
+    task_arn: ?[]const u8 = null,
 
     /// The task mode that you're using. For more information, see [Choosing a task
     /// mode for your data
     /// transfer](https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html).
-    task_mode: ?TaskMode,
+    task_mode: ?TaskMode = null,
 
     pub const json_field_names = .{
         .name = "Name",

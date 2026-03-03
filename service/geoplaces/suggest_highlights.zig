@@ -5,11 +5,11 @@ const Highlight = @import("highlight.zig").Highlight;
 /// returning the sections of the response which matched to textQuery terms.
 pub const SuggestHighlights = struct {
     /// The place's address.
-    address: ?SuggestAddressHighlights,
+    address: ?SuggestAddressHighlights = null,
 
     /// Indicates the starting and ending index of the title in the text query that
     /// match the found title.
-    title: ?[]const Highlight,
+    title: ?[]const Highlight = null,
 
     pub const json_field_names = .{
         .address = "Address",

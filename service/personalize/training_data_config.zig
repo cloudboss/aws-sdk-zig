@@ -12,7 +12,7 @@ pub const TrainingDataConfig = struct {
     /// recommendations. You can
     /// exclude this column from training and Amazon Personalize considers it only
     /// when filtering.
-    excluded_dataset_columns: ?[]const aws.map.MapEntry([]const []const u8),
+    excluded_dataset_columns: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// A map that specifies which columns to include from each dataset during
     /// training. The map can contain up to 3 entries, where each key is a dataset
@@ -20,7 +20,7 @@ pub const TrainingDataConfig = struct {
     /// underscores) and each value is an array of up to 50 column names. Column
     /// names can be up to 150 characters long, must start with a letter or
     /// underscore, and can contain only letters, numbers, and underscores.
-    included_dataset_columns: ?[]const aws.map.MapEntry([]const []const u8),
+    included_dataset_columns: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     pub const json_field_names = .{
         .excluded_dataset_columns = "excludedDatasetColumns",

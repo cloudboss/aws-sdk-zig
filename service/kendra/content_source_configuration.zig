@@ -5,7 +5,7 @@
 pub const ContentSourceConfiguration = struct {
     /// The identifier of the data sources you want to use for your Amazon Kendra
     /// experience.
-    data_source_ids: ?[]const []const u8,
+    data_source_ids: ?[]const []const u8 = null,
 
     /// `TRUE` to use documents you indexed directly using the
     /// `BatchPutDocument` API.
@@ -13,7 +13,7 @@ pub const ContentSourceConfiguration = struct {
 
     /// The identifier of the FAQs that you want to use for your Amazon Kendra
     /// experience.
-    faq_ids: ?[]const []const u8,
+    faq_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .data_source_ids = "DataSourceIds",

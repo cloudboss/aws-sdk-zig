@@ -6,7 +6,7 @@ pub const DataReplicationInfoReplicatedDisk = struct {
     backlogged_storage_bytes: i64 = 0,
 
     /// The name of the device.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// The amount of data replicated so far in bytes.
     replicated_storage_bytes: i64 = 0,
@@ -18,7 +18,7 @@ pub const DataReplicationInfoReplicatedDisk = struct {
     total_storage_bytes: i64 = 0,
 
     /// The status of the volume.
-    volume_status: ?VolumeStatus,
+    volume_status: ?VolumeStatus = null,
 
     pub const json_field_names = .{
         .backlogged_storage_bytes = "backloggedStorageBytes",

@@ -3,10 +3,10 @@
 pub const ClusterMasterUserSecret = struct {
     /// The Amazon Web Services KMS key identifier that is used to encrypt the
     /// secret.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the secret.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     /// The status of the secret.
     ///
@@ -29,5 +29,5 @@ pub const ClusterMasterUserSecret = struct {
     /// Alternatively, modify the instance to turn off automatic management of
     /// database credentials, and then modify the instance again to turn on
     /// automatic management of database credentials.
-    secret_status: ?[]const u8,
+    secret_status: ?[]const u8 = null,
 };

@@ -11,12 +11,12 @@ pub const CustomizableMetricParameters = struct {
     /// * CPU utilization: `PERCENT_30 | PERCENT_20 | PERCENT_0`
     ///
     /// * Memory utilization: `PERCENT_30 | PERCENT_20 | PERCENT_10`
-    headroom: ?CustomizableMetricHeadroom,
+    headroom: ?CustomizableMetricHeadroom = null,
 
     /// The threshold value used for the specified metric parameter.
     ///
     /// You can only specify the threshold value for CPU utilization.
-    threshold: ?CustomizableMetricThreshold,
+    threshold: ?CustomizableMetricThreshold = null,
 
     pub const json_field_names = .{
         .headroom = "headroom",

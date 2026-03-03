@@ -10,7 +10,7 @@ pub const LustreLogConfiguration = struct {
     /// ARN must be in the same Amazon Web Services partition, Amazon Web Services
     /// Region,
     /// and Amazon Web Services account as your Amazon FSx file system.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// The data repository events that are logged by Amazon FSx.
     ///

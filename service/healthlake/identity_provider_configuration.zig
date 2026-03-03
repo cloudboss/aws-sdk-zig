@@ -29,7 +29,7 @@ pub const IdentityProviderConfiguration = struct {
     /// The Amazon Resource Name (ARN) of the Lambda function to use to decode the
     /// access token created by the
     /// authorization server.
-    idp_lambda_arn: ?[]const u8,
+    idp_lambda_arn: ?[]const u8 = null,
 
     /// The JSON metadata elements to use in your identity provider configuration.
     /// Required
@@ -55,7 +55,7 @@ pub const IdentityProviderConfiguration = struct {
     /// code challenge methods. You must include the `S256` method in the array of
     /// PKCE
     /// code challenge methods.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authorization_strategy = "AuthorizationStrategy",

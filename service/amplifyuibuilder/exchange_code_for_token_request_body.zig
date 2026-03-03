@@ -2,7 +2,7 @@
 /// token.
 pub const ExchangeCodeForTokenRequestBody = struct {
     /// The ID of the client to request the token from.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     /// The access code to send in the request.
     code: []const u8,

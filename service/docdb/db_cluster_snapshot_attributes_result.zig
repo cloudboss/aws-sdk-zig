@@ -4,8 +4,8 @@ const DBClusterSnapshotAttribute = @import("db_cluster_snapshot_attribute.zig").
 /// snapshot.
 pub const DBClusterSnapshotAttributesResult = struct {
     /// The list of attributes and values for the cluster snapshot.
-    db_cluster_snapshot_attributes: ?[]const DBClusterSnapshotAttribute,
+    db_cluster_snapshot_attributes: ?[]const DBClusterSnapshotAttribute = null,
 
     /// The identifier of the cluster snapshot that the attributes apply to.
-    db_cluster_snapshot_identifier: ?[]const u8,
+    db_cluster_snapshot_identifier: ?[]const u8 = null,
 };

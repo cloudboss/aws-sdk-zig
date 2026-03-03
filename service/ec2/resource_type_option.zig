@@ -12,7 +12,7 @@ pub const ResourceTypeOption = struct {
     ///
     /// Specify `version-depth` - The number of launch template versions to check,
     /// starting from the most recent version.
-    option_name: ?ImageReferenceOptionName,
+    option_name: ?ImageReferenceOptionName = null,
 
     /// A value for the specified option.
     ///
@@ -28,5 +28,5 @@ pub const ResourceTypeOption = struct {
     /// * Valid values: Integers between `1` and `10000`
     ///
     /// * Default: `10`
-    option_values: ?[]const []const u8,
+    option_values: ?[]const []const u8 = null,
 };

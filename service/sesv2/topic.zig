@@ -9,7 +9,7 @@ pub const Topic = struct {
     default_subscription_status: SubscriptionStatus,
 
     /// A description of what the topic is about, which the contact will see.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the topic the contact will see.
     display_name: []const u8,

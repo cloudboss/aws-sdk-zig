@@ -12,42 +12,42 @@ const SNOMEDCTEntityType = @import("snomedct_entity_type.zig").SNOMEDCTEntityTyp
 pub const SNOMEDCTEntity = struct {
     /// An extracted segment of the text that is an attribute of an entity, or
     /// otherwise related to an entity, such as the dosage of a medication taken.
-    attributes: ?[]const SNOMEDCTAttribute,
+    attributes: ?[]const SNOMEDCTAttribute = null,
 
     /// The 0-based character offset in the input text that shows where the entity
     /// begins. The offset returns the UTF-8 code point in the string.
-    begin_offset: ?i32,
+    begin_offset: ?i32 = null,
 
     /// The category of the detected entity. Possible categories are
     /// MEDICAL_CONDITION, ANATOMY, or TEST_TREATMENT_PROCEDURE.
-    category: ?SNOMEDCTEntityCategory,
+    category: ?SNOMEDCTEntityCategory = null,
 
     /// The 0-based character offset in the input text that shows where the entity
     /// ends. The offset returns the UTF-8 code point in the string.
-    end_offset: ?i32,
+    end_offset: ?i32 = null,
 
     /// The numeric identifier for the entity. This is a monotonically increasing id
     /// unique within this response rather than a global unique identifier.
-    id: ?i32,
+    id: ?i32 = null,
 
     /// The level of confidence that Amazon Comprehend Medical has in the accuracy
     /// of the detected entity.
-    score: ?f32,
+    score: ?f32 = null,
 
     /// The SNOMED concepts that the entity could refer to, along with a score
     /// indicating the likelihood of the match.
-    snomedct_concepts: ?[]const SNOMEDCTConcept,
+    snomedct_concepts: ?[]const SNOMEDCTConcept = null,
 
     /// The segment of input text extracted as this entity.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// Contextual information for the entity.
-    traits: ?[]const SNOMEDCTTrait,
+    traits: ?[]const SNOMEDCTTrait = null,
 
     /// Describes the specific type of entity with category of entities. Possible
     /// types include DX_NAME, ACUITY, DIRECTION, SYSTEM_ORGAN_SITE, TEST_NAME,
     /// TEST_VALUE, TEST_UNIT, PROCEDURE_NAME, or TREATMENT_NAME.
-    @"type": ?SNOMEDCTEntityType,
+    @"type": ?SNOMEDCTEntityType = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

@@ -9,17 +9,17 @@ pub const TextPartValue = struct {
     /// URL itself.
     ///
     /// Used for text parts with the type `URL`.
-    display_text: ?[]const u8,
+    display_text: ?[]const u8 = null,
 
     /// A map of locales to the text in that locale.
-    text_by_locale: ?[]const aws.map.StringMapEntry,
+    text_by_locale: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of text part. Determines the usage of all other fields and whether
     /// or not they're required.
     @"type": TextPartType,
 
     /// The URL itself.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .display_text = "displayText",

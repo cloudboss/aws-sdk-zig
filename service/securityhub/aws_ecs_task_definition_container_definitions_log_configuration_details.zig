@@ -33,14 +33,14 @@ pub const AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails = stru
     /// * `splunk`
     ///
     /// * `syslog`
-    log_driver: ?[]const u8,
+    log_driver: ?[]const u8 = null,
 
     /// The configuration options to send to the log driver. Requires version 1.19
     /// of the Docker Remote API or greater on your container instance.
-    options: ?[]const aws.map.StringMapEntry,
+    options: ?[]const aws.map.StringMapEntry = null,
 
     /// The secrets to pass to the log configuration.
-    secret_options: ?[]const AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails,
+    secret_options: ?[]const AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails = null,
 
     pub const json_field_names = .{
         .log_driver = "LogDriver",

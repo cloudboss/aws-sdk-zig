@@ -12,47 +12,47 @@ const CmafTimedMetadataPassthrough = @import("cmaf_timed_metadata_passthrough.zi
 pub const MediaPackageV2GroupSettings = struct {
     /// Optional an array of additional destinational HTTP destinations for the
     /// OutputGroup outputs
-    additional_destinations: ?[]const MediaPackageAdditionalDestinations,
+    additional_destinations: ?[]const MediaPackageAdditionalDestinations = null,
 
     /// Mapping of up to 4 caption channels to caption languages.
-    caption_language_mappings: ?[]const CaptionLanguageMapping,
+    caption_language_mappings: ?[]const CaptionLanguageMapping = null,
 
     /// Set to ENABLED to enable ID3 metadata insertion. To include metadata, you
     /// configure other parameters in the output group, or you add an ID3 action to
     /// the channel schedule.
-    id_3_behavior: ?CmafId3Behavior,
+    id_3_behavior: ?CmafId3Behavior = null,
 
     /// If set to passthrough, passes any KLV data from the input source to this
     /// output.
-    klv_behavior: ?CmafKLVBehavior,
+    klv_behavior: ?CmafKLVBehavior = null,
 
     /// If set to passthrough, Nielsen inaudible tones for media tracking will be
     /// detected in the input audio and an equivalent ID3 tag will be inserted in
     /// the output.
-    nielsen_id_3_behavior: ?CmafNielsenId3Behavior,
+    nielsen_id_3_behavior: ?CmafNielsenId3Behavior = null,
 
     /// Type of scte35 track to add. none or scte35WithoutSegmentation
-    scte_35_type: ?Scte35Type,
+    scte_35_type: ?Scte35Type = null,
 
     /// The nominal duration of segments. The units are specified in
     /// SegmentLengthUnits. The segments will end on the next keyframe after the
     /// specified duration, so the actual segment length might be longer, and it
     /// might be a fraction of the units.
-    segment_length: ?i32,
+    segment_length: ?i32 = null,
 
     /// Time unit for segment length parameter.
-    segment_length_units: ?CmafIngestSegmentLengthUnits,
+    segment_length_units: ?CmafIngestSegmentLengthUnits = null,
 
     /// Set to none if you don't want to insert a timecode in the output. Otherwise
     /// choose the frame type for the timecode.
-    timed_metadata_id_3_frame: ?CmafTimedMetadataId3Frame,
+    timed_metadata_id_3_frame: ?CmafTimedMetadataId3Frame = null,
 
     /// If you set up to insert a timecode in the output, specify the frequency for
     /// the frame, in seconds.
-    timed_metadata_id_3_period: ?i32,
+    timed_metadata_id_3_period: ?i32 = null,
 
     /// Set to enabled to pass through ID3 metadata from the input sources.
-    timed_metadata_passthrough: ?CmafTimedMetadataPassthrough,
+    timed_metadata_passthrough: ?CmafTimedMetadataPassthrough = null,
 
     pub const json_field_names = .{
         .additional_destinations = "AdditionalDestinations",

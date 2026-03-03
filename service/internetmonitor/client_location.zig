@@ -26,13 +26,13 @@ pub const ClientLocation = struct {
     /// this is a second-level subdivision. For example, in the United Kingdom, it
     /// could be a county, a London borough, a unitary
     /// authority, council area, and so on.
-    metro: ?[]const u8,
+    metro: ?[]const u8 = null,
 
     /// The subdivision location where the health event is located. The subdivision
     /// usually maps to states in most countries
     /// (including the United States). For United Kingdom, it maps to a country
     /// (England, Scotland, Wales) or province (Northern Ireland).
-    subdivision: ?[]const u8,
+    subdivision: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .as_name = "ASName",

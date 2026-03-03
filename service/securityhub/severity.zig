@@ -39,7 +39,7 @@ pub const Severity = struct {
     /// * 70–89 - `HIGH`
     ///
     /// * 90–100 - `CRITICAL`
-    label: ?SeverityLabel,
+    label: ?SeverityLabel = null,
 
     /// Deprecated. The normalized severity of a finding.
     /// Instead of providing `Normalized`, provide `Label`.
@@ -58,12 +58,12 @@ pub const Severity = struct {
     /// * `HIGH` - 70
     ///
     /// * `CRITICAL` - 90
-    normalized: ?i32,
+    normalized: ?i32 = null,
 
     /// The native severity from the finding product that generated the finding.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 64.
-    original: ?[]const u8,
+    original: ?[]const u8 = null,
 
     /// Deprecated. This attribute isn't included in findings. Instead of providing
     /// `Product`, provide `Original`.
@@ -71,7 +71,7 @@ pub const Severity = struct {
     /// The native severity as defined by the Amazon Web Services service or
     /// integrated partner product that
     /// generated the finding.
-    product: ?f64,
+    product: ?f64 = null,
 
     pub const json_field_names = .{
         .label = "Label",

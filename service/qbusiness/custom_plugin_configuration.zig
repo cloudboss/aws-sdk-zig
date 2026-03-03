@@ -6,7 +6,7 @@ pub const CustomPluginConfiguration = struct {
     /// Contains either details about the S3 object containing the OpenAPI schema
     /// for the action group or the JSON or YAML-formatted payload defining the
     /// schema.
-    api_schema: ?APISchema,
+    api_schema: ?APISchema = null,
 
     /// The type of OpenAPI schema to use.
     api_schema_type: APISchemaType,

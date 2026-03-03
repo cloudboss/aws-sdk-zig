@@ -13,7 +13,7 @@ pub const EksAnywhereSubscriptionTerm = struct {
     duration: i32 = 0,
 
     /// The term unit of the subscription. Valid value is `MONTHS`.
-    unit: ?EksAnywhereSubscriptionTermUnit,
+    unit: ?EksAnywhereSubscriptionTermUnit = null,
 
     pub const json_field_names = .{
         .duration = "duration",

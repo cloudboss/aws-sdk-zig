@@ -7,7 +7,7 @@ pub const MetricCharacteristics = struct {
     /// consistently during the model training period, and won't flag future similar
     /// spikes as
     /// anomalies.
-    periodic_spikes: ?bool,
+    periodic_spikes: ?bool = null,
 
     pub const json_field_names = .{
         .periodic_spikes = "PeriodicSpikes",

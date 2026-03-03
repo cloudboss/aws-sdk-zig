@@ -7,34 +7,34 @@ const RuleTargetType = @import("rule_target_type.zig").RuleTargetType;
 /// The summary of the rule.
 pub const RuleSummary = struct {
     /// The action of the rule.
-    action: ?RuleAction,
+    action: ?RuleAction = null,
 
     /// The ID of the rule.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// The timestamp at which the rule was last updated.
-    last_updated_by: ?[]const u8,
+    last_updated_by: ?[]const u8 = null,
 
     /// The name of the rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The revision of the rule.
-    revision: ?[]const u8,
+    revision: ?[]const u8 = null,
 
     /// The type of the rule.
-    rule_type: ?RuleType,
+    rule_type: ?RuleType = null,
 
     /// The scope of the rule.
-    scope: ?RuleScope,
+    scope: ?RuleScope = null,
 
     /// The target of the rule.
-    target: ?RuleTarget,
+    target: ?RuleTarget = null,
 
     /// The target type of the rule.
-    target_type: ?RuleTargetType,
+    target_type: ?RuleTargetType = null,
 
     /// The timestamp at which the rule was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .action = "action",

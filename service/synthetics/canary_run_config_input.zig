@@ -16,7 +16,7 @@ pub const CanaryRunConfigInput = struct {
     /// You can enable active tracing only for canaries that use version
     /// `syn-nodejs-2.0`
     /// or later for their canary runtime.
-    active_tracing: ?bool,
+    active_tracing: ?bool = null,
 
     /// Specifies the keys and values to use for any environment variables
     /// used in the canary script. Use the following format:
@@ -36,18 +36,18 @@ pub const CanaryRunConfigInput = struct {
     /// Services owned KMS keys. However, the environment variables
     /// are not encrypted on the client side. Do not store sensitive information
     /// in them.
-    environment_variables: ?[]const aws.map.StringMapEntry,
+    environment_variables: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies the amount of ephemeral storage (in MB) to allocate for the canary
     /// run during execution. This temporary storage is used for storing canary run
     /// artifacts (which are uploaded to an Amazon S3 bucket at the end of the run),
     /// and any canary browser operations. This temporary storage is cleared after
     /// the run is completed. Default storage value is 1024 MB.
-    ephemeral_storage: ?i32,
+    ephemeral_storage: ?i32 = null,
 
     /// The maximum amount of memory available to the canary while it is running, in
     /// MB. This value must be a multiple of 64.
-    memory_in_mb: ?i32,
+    memory_in_mb: ?i32 = null,
 
     /// How long the canary is allowed to run before it must stop. You can't set
     /// this time to be longer
@@ -56,7 +56,7 @@ pub const CanaryRunConfigInput = struct {
     /// If you omit this field, the
     /// frequency of the canary is used as this value, up to a maximum of 14
     /// minutes.
-    timeout_in_seconds: ?i32,
+    timeout_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .active_tracing = "ActiveTracing",

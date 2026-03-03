@@ -8,7 +8,7 @@ pub const AnonymousUserSnapshotJobResult = struct {
     /// If the job succeeds, these objects contain the location where the snapshot
     /// artifacts are stored. If the job fails, the objects contain information
     /// about the error that caused the job to fail.
-    file_groups: ?[]const SnapshotJobResultFileGroup,
+    file_groups: ?[]const SnapshotJobResultFileGroup = null,
 
     pub const json_field_names = .{
         .file_groups = "FileGroups",

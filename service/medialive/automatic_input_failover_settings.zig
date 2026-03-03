@@ -9,15 +9,15 @@ pub const AutomaticInputFailoverSettings = struct {
     /// important if the input_preference for the failover pair is set to
     /// PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back
     /// to the primary input.
-    error_clear_time_msec: ?i32,
+    error_clear_time_msec: ?i32 = null,
 
     /// A list of failover conditions. If any of these conditions occur, MediaLive
     /// will perform a failover to the other input.
-    failover_conditions: ?[]const FailoverCondition,
+    failover_conditions: ?[]const FailoverCondition = null,
 
     /// Input preference when deciding which input to make active when a previously
     /// failed input has recovered.
-    input_preference: ?InputPreference,
+    input_preference: ?InputPreference = null,
 
     /// The input ID of the secondary input in the automatic input failover pair.
     secondary_input_id: []const u8,

@@ -14,7 +14,7 @@ pub const ListFirewallRulesRequest = struct {
     ///
     /// * `BLOCK` - Disallow the request. If this is specified, additional handling
     ///   details are provided in the rule's `BlockResponse` setting.
-    action: ?Action,
+    action: ?Action = null,
 
     /// The unique identifier of the firewall rule group that you want to retrieve
     /// the rules for.
@@ -28,7 +28,7 @@ pub const ListFirewallRulesRequest = struct {
     ///
     /// If you don't specify a value for `MaxResults`, Resolver returns up to 100
     /// objects.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// For the first call to this list request, omit this value.
     ///
@@ -38,7 +38,7 @@ pub const ListFirewallRulesRequest = struct {
     /// Resolver returns a `NextToken` value in the response. To retrieve the next
     /// batch of objects, use the token that was returned for the prior request in
     /// your next request.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// Optional additional filter for the rules to retrieve.
     ///
@@ -46,7 +46,7 @@ pub const ListFirewallRulesRequest = struct {
     /// group. DNS Firewall
     /// processes the rules in a rule group by order of priority, starting from the
     /// lowest setting.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     pub const json_field_names = .{
         .action = "Action",

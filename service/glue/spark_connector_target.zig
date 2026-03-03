@@ -5,7 +5,7 @@ const GlueSchema = @import("glue_schema.zig").GlueSchema;
 /// Specifies a target that uses an Apache Spark connector.
 pub const SparkConnectorTarget = struct {
     /// Additional connection options for the connector.
-    additional_options: ?[]const aws.map.StringMapEntry,
+    additional_options: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of a connection for an Apache Spark connector.
     connection_name: []const u8,
@@ -24,7 +24,7 @@ pub const SparkConnectorTarget = struct {
     name: []const u8,
 
     /// Specifies the data schema for the custom spark target.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     pub const json_field_names = .{
         .additional_options = "AdditionalOptions",

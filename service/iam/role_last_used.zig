@@ -20,8 +20,8 @@ pub const RoleLastUsed = struct {
     /// period. For
     /// more information about the tracking period, see [Regions where data is
     /// tracked](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period) in the *IAM User Guide*.
-    last_used_date: ?i64,
+    last_used_date: ?i64 = null,
 
     /// The name of the Amazon Web Services Region in which the role was last used.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 };

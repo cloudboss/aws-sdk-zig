@@ -1,22 +1,22 @@
 /// Defines a mapping.
 pub const MappingEntry = struct {
     /// The source path.
-    source_path: ?[]const u8,
+    source_path: ?[]const u8 = null,
 
     /// The name of the source table.
-    source_table: ?[]const u8,
+    source_table: ?[]const u8 = null,
 
     /// The source type.
-    source_type: ?[]const u8,
+    source_type: ?[]const u8 = null,
 
     /// The target path.
-    target_path: ?[]const u8,
+    target_path: ?[]const u8 = null,
 
     /// The target table.
-    target_table: ?[]const u8,
+    target_table: ?[]const u8 = null,
 
     /// The target type.
-    target_type: ?[]const u8,
+    target_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_path = "SourcePath",

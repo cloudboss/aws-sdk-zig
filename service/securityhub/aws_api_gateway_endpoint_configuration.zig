@@ -5,7 +5,7 @@ pub const AwsApiGatewayEndpointConfiguration = struct {
     /// For an edge-optimized API, the endpoint type is `EDGE`. For a Regional API,
     /// the endpoint type is `REGIONAL`. For a private API, the endpoint type is
     /// `PRIVATE`.
-    types: ?[]const []const u8,
+    types: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .types = "Types",

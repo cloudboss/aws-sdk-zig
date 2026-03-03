@@ -7,7 +7,7 @@ pub const IncrementalExportSpecification = struct {
     /// counted in seconds from the start of the Unix epoch. The incremental export
     /// will reflect
     /// the table's state including and after this point in time.
-    export_from_time: ?i64,
+    export_from_time: ?i64 = null,
 
     /// Time in the past which provides the exclusive end range for the export
     /// table's data,
@@ -16,12 +16,12 @@ pub const IncrementalExportSpecification = struct {
     /// the table's state just prior to this point in time. If this is not provided,
     /// the latest
     /// time with data available will be used.
-    export_to_time: ?i64,
+    export_to_time: ?i64 = null,
 
     /// The view type that was chosen for the export. Valid values are
     /// `NEW_AND_OLD_IMAGES` and `NEW_IMAGES`. The default value is
     /// `NEW_AND_OLD_IMAGES`.
-    export_view_type: ?ExportViewType,
+    export_view_type: ?ExportViewType = null,
 
     pub const json_field_names = .{
         .export_from_time = "ExportFromTime",

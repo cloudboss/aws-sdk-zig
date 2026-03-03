@@ -9,12 +9,12 @@ pub const ListTagsRequest = struct {
     /// items to return in the response. If additional items exist beyond the number
     /// you specify, the **NextToken** element is sent in the response. Use this
     /// **NextToken** value in a subsequent request to retrieve additional items.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// Use this parameter when paginating results in a subsequent request after you
     /// receive a response with truncated results. Set it to the value of
     /// **NextToken** from the response you just received.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .certificate_authority_arn = "CertificateAuthorityArn",

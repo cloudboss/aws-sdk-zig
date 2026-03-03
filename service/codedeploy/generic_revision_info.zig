@@ -1,19 +1,19 @@
 /// Information about an application revision.
 pub const GenericRevisionInfo = struct {
     /// The deployment groups for which this is the current target revision.
-    deployment_groups: ?[]const []const u8,
+    deployment_groups: ?[]const []const u8 = null,
 
     /// A comment about the revision.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// When the revision was first used by CodeDeploy.
-    first_used_time: ?i64,
+    first_used_time: ?i64 = null,
 
     /// When the revision was last used by CodeDeploy.
-    last_used_time: ?i64,
+    last_used_time: ?i64 = null,
 
     /// When the revision was registered with CodeDeploy.
-    register_time: ?i64,
+    register_time: ?i64 = null,
 
     pub const json_field_names = .{
         .deployment_groups = "deploymentGroups",

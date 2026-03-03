@@ -17,7 +17,7 @@ pub const ResourceProfileArtifact = struct {
     classification_result_status: []const u8,
 
     /// Specifies whether Amazon Macie found sensitive data in the object.
-    sensitive: ?bool,
+    sensitive: ?bool = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -1,6 +1,6 @@
 pub const UpdateProjectRequest = struct {
     /// The description of the project.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the project.
     name: []const u8,

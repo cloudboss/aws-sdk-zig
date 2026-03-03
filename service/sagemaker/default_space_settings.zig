@@ -12,24 +12,24 @@ const DefaultSpaceStorageSettings = @import("default_space_storage_settings.zig"
 pub const DefaultSpaceSettings = struct {
     /// The settings for assigning a custom file system to a domain. Permitted users
     /// can access this file system in Amazon SageMaker AI Studio.
-    custom_file_system_configs: ?[]const CustomFileSystemConfig,
+    custom_file_system_configs: ?[]const CustomFileSystemConfig = null,
 
-    custom_posix_user_config: ?CustomPosixUserConfig,
+    custom_posix_user_config: ?CustomPosixUserConfig = null,
 
     /// The ARN of the execution role for the space.
-    execution_role: ?[]const u8,
+    execution_role: ?[]const u8 = null,
 
-    jupyter_lab_app_settings: ?JupyterLabAppSettings,
+    jupyter_lab_app_settings: ?JupyterLabAppSettings = null,
 
-    jupyter_server_app_settings: ?JupyterServerAppSettings,
+    jupyter_server_app_settings: ?JupyterServerAppSettings = null,
 
-    kernel_gateway_app_settings: ?KernelGatewayAppSettings,
+    kernel_gateway_app_settings: ?KernelGatewayAppSettings = null,
 
     /// The security group IDs for the Amazon VPC that the space uses for
     /// communication.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
-    space_storage_settings: ?DefaultSpaceStorageSettings,
+    space_storage_settings: ?DefaultSpaceStorageSettings = null,
 
     pub const json_field_names = .{
         .custom_file_system_configs = "CustomFileSystemConfigs",

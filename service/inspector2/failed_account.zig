@@ -16,10 +16,10 @@ pub const FailedAccount = struct {
 
     /// An object detailing which resources Amazon Inspector is enabled to scan for
     /// the account.
-    resource_status: ?ResourceStatus,
+    resource_status: ?ResourceStatus = null,
 
     /// The status of Amazon Inspector for the account.
-    status: ?Status,
+    status: ?Status = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

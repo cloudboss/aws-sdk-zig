@@ -12,20 +12,20 @@ pub const FindingSummaryV2 = struct {
     created_at: i64,
 
     /// The error that resulted in an Error finding.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// The type of the access finding. For external access analyzers, the type is
     /// `ExternalAccess`. For unused access analyzers, the type can be
     /// `UnusedIAMRole`, `UnusedIAMUserAccessKey`, `UnusedIAMUserPassword`, or
     /// `UnusedPermission`. For internal access analyzers, the type is
     /// `InternalAccess`.
-    finding_type: ?FindingType,
+    finding_type: ?FindingType = null,
 
     /// The ID of the finding.
     id: []const u8,
 
     /// The resource that the external principal has access to.
-    resource: ?[]const u8,
+    resource: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID that owns the resource.
     resource_owner_account: []const u8,

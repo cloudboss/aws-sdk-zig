@@ -24,7 +24,7 @@ pub const QuerySpatialCoverage = struct {
     ///
     /// * `PartitionKey` – The partition key used for partitioning, which can be a
     ///   default `measure_name` or a CDPK.
-    max: ?QuerySpatialCoverageMax,
+    max: ?QuerySpatialCoverageMax = null,
 
     pub const json_field_names = .{
         .max = "Max",

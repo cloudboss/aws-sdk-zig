@@ -1,13 +1,13 @@
 /// An array containing track mapping information.
 pub const TrackMapping = struct {
     /// The index numbers of the audio tracks in your media file.
-    audio_track_indexes: ?[]const i32,
+    audio_track_indexes: ?[]const i32 = null,
 
     /// The index numbers of the data tracks in your media file.
-    data_track_indexes: ?[]const i32,
+    data_track_indexes: ?[]const i32 = null,
 
     /// The index numbers of the video tracks in your media file.
-    video_track_indexes: ?[]const i32,
+    video_track_indexes: ?[]const i32 = null,
 
     pub const json_field_names = .{
         .audio_track_indexes = "AudioTrackIndexes",

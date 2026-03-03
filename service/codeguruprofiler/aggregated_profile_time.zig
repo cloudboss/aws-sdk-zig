@@ -17,7 +17,7 @@ pub const AggregatedProfileTime = struct {
     /// * `PT1H` — 1 hour
     ///
     /// * `PT5M` — 5 minutes
-    period: ?AggregationPeriod,
+    period: ?AggregationPeriod = null,
 
     /// The time that aggregation of posted agent profiles for a profiling group
     /// starts. The aggregation profile
@@ -29,7 +29,7 @@ pub const AggregatedProfileTime = struct {
     /// Specify `start` using the ISO 8601 format. For example,
     /// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02
     /// PM UTC.
-    start: ?i64,
+    start: ?i64 = null,
 
     pub const json_field_names = .{
         .period = "period",

@@ -6,13 +6,13 @@
 pub const VpcConfigInput = struct {
     /// Set this to `true` to allow outbound IPv6 traffic on VPC canaries that are
     /// connected to dual-stack subnets. The default is `false`
-    ipv_6_allowed_for_dual_stack: ?bool,
+    ipv_6_allowed_for_dual_stack: ?bool = null,
 
     /// The IDs of the security groups for this canary.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The IDs of the subnets where this canary is to run.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .ipv_6_allowed_for_dual_stack = "Ipv6AllowedForDualStack",

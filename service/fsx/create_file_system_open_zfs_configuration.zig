@@ -6,7 +6,7 @@ const OpenZFSCreateRootVolumeConfiguration = @import("open_zfs_create_root_volum
 /// The Amazon FSx for OpenZFS configuration properties for the file system that
 /// you are creating.
 pub const CreateFileSystemOpenZFSConfiguration = struct {
-    automatic_backup_retention_days: ?i32,
+    automatic_backup_retention_days: ?i32 = null,
 
     /// A Boolean value indicating whether tags for the file system should be copied
     /// to
@@ -20,7 +20,7 @@ pub const CreateFileSystemOpenZFSConfiguration = struct {
     /// more tags when creating a user-initiated backup, no tags are copied from the
     /// file
     /// system, regardless of this value.
-    copy_tags_to_backups: ?bool,
+    copy_tags_to_backups: ?bool = null,
 
     /// A Boolean value indicating whether tags for the file system should be copied
     /// to volumes.
@@ -31,9 +31,9 @@ pub const CreateFileSystemOpenZFSConfiguration = struct {
     /// are copied to volumes. If you specify one or more tags when creating the
     /// volume, no
     /// tags are copied from the file system, regardless of this value.
-    copy_tags_to_volumes: ?bool,
+    copy_tags_to_volumes: ?bool = null,
 
-    daily_automatic_backup_start_time: ?[]const u8,
+    daily_automatic_backup_start_time: ?[]const u8 = null,
 
     /// Specifies the file system deployment type. Valid values are the following:
     ///
@@ -67,7 +67,7 @@ pub const CreateFileSystemOpenZFSConfiguration = struct {
     /// in the *Amazon FSx for OpenZFS User Guide*.
     deployment_type: OpenZFSDeploymentType,
 
-    disk_iops_configuration: ?DiskIopsConfiguration,
+    disk_iops_configuration: ?DiskIopsConfiguration = null,
 
     /// (Multi-AZ only) Specifies the IPv4 address range in which the endpoints to
     /// access your
@@ -78,7 +78,7 @@ pub const CreateFileSystemOpenZFSConfiguration = struct {
     /// You can have overlapping endpoint IP addresses for file systems deployed in
     /// the
     /// same VPC/route tables, as long as they don't overlap with any subnet.
-    endpoint_ip_address_range: ?[]const u8,
+    endpoint_ip_address_range: ?[]const u8 = null,
 
     /// (Multi-AZ only) Specifies the IPv6 address range in which the endpoints to
     /// access
@@ -89,20 +89,20 @@ pub const CreateFileSystemOpenZFSConfiguration = struct {
     /// IP addresses for file systems deployed in the same VPC/route tables, as long
     /// as they
     /// don't overlap with any subnet.
-    endpoint_ipv_6_address_range: ?[]const u8,
+    endpoint_ipv_6_address_range: ?[]const u8 = null,
 
     /// Required when `DeploymentType` is set to `MULTI_AZ_1`. This specifies the
     /// subnet in which you want the preferred file server to be located.
-    preferred_subnet_id: ?[]const u8,
+    preferred_subnet_id: ?[]const u8 = null,
 
     /// Specifies the optional provisioned SSD read cache on file systems that use
     /// the Intelligent-Tiering storage class.
-    read_cache_configuration: ?OpenZFSReadCacheConfiguration,
+    read_cache_configuration: ?OpenZFSReadCacheConfiguration = null,
 
     /// The configuration Amazon FSx uses when creating the root value of the Amazon
     /// FSx for OpenZFS
     /// file system. All volumes are children of the root volume.
-    root_volume_configuration: ?OpenZFSCreateRootVolumeConfiguration,
+    root_volume_configuration: ?OpenZFSCreateRootVolumeConfiguration = null,
 
     /// (Multi-AZ only) Specifies the route tables in which Amazon FSx creates the
     /// rules
@@ -111,7 +111,7 @@ pub const CreateFileSystemOpenZFSConfiguration = struct {
     /// (VPC) route tables associated with the subnets in which your clients are
     /// located. By default,
     /// Amazon FSx selects your VPC's default route table.
-    route_table_ids: ?[]const []const u8,
+    route_table_ids: ?[]const []const u8 = null,
 
     /// Specifies the throughput of an Amazon FSx for OpenZFS file system, measured
     /// in megabytes per second (MBps). Valid values depend on the `DeploymentType`
@@ -126,7 +126,7 @@ pub const CreateFileSystemOpenZFSConfiguration = struct {
     /// You pay for additional throughput capacity that you provision.
     throughput_capacity: i32,
 
-    weekly_maintenance_start_time: ?[]const u8,
+    weekly_maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .automatic_backup_retention_days = "AutomaticBackupRetentionDays",

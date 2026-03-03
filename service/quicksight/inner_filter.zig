@@ -4,7 +4,7 @@ const CategoryInnerFilter = @import("category_inner_filter.zig").CategoryInnerFi
 /// `NestedFilter`.
 pub const InnerFilter = struct {
     /// A `CategoryInnerFilter` filters text values for the `NestedFilter`.
-    category_inner_filter: ?CategoryInnerFilter,
+    category_inner_filter: ?CategoryInnerFilter = null,
 
     pub const json_field_names = .{
         .category_inner_filter = "CategoryInnerFilter",

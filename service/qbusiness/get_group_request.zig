@@ -3,7 +3,7 @@ pub const GetGroupRequest = struct {
     application_id: []const u8,
 
     /// The identifier of the data source the group is attached to.
-    data_source_id: ?[]const u8,
+    data_source_id: ?[]const u8 = null,
 
     /// The name of the group.
     group_name: []const u8,

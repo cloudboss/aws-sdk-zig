@@ -3,7 +3,7 @@ const KafkaClusterEncryptionInTransitType = @import("kafka_cluster_encryption_in
 /// The description of the encryption in transit to the Apache Kafka cluster.
 pub const KafkaClusterEncryptionInTransitDescription = struct {
     /// The type of encryption in transit to the Apache Kafka cluster.
-    encryption_type: ?KafkaClusterEncryptionInTransitType,
+    encryption_type: ?KafkaClusterEncryptionInTransitType = null,
 
     pub const json_field_names = .{
         .encryption_type = "encryptionType",

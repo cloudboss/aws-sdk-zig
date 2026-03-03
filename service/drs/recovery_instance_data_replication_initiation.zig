@@ -3,10 +3,10 @@ const RecoveryInstanceDataReplicationInitiationStep = @import("recovery_instance
 /// Data replication initiation.
 pub const RecoveryInstanceDataReplicationInitiation = struct {
     /// The date and time of the current attempt to initiate data replication.
-    start_date_time: ?[]const u8,
+    start_date_time: ?[]const u8 = null,
 
     /// The steps of the current attempt to initiate data replication.
-    steps: ?[]const RecoveryInstanceDataReplicationInitiationStep,
+    steps: ?[]const RecoveryInstanceDataReplicationInitiationStep = null,
 
     pub const json_field_names = .{
         .start_date_time = "startDateTime",

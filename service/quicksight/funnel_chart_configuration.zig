@@ -10,29 +10,29 @@ const VisualPalette = @import("visual_palette.zig").VisualPalette;
 pub const FunnelChartConfiguration = struct {
     /// The label options of the categories that are displayed in a
     /// `FunnelChartVisual`.
-    category_label_options: ?ChartAxisLabelOptions,
+    category_label_options: ?ChartAxisLabelOptions = null,
 
     /// The options that determine the presentation of the data labels.
-    data_label_options: ?FunnelChartDataLabelOptions,
+    data_label_options: ?FunnelChartDataLabelOptions = null,
 
     /// The field well configuration of a `FunnelChartVisual`.
-    field_wells: ?FunnelChartFieldWells,
+    field_wells: ?FunnelChartFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The sort configuration of a `FunnelChartVisual`.
-    sort_configuration: ?FunnelChartSortConfiguration,
+    sort_configuration: ?FunnelChartSortConfiguration = null,
 
     /// The tooltip configuration of a `FunnelChartVisual`.
-    tooltip: ?TooltipOptions,
+    tooltip: ?TooltipOptions = null,
 
     /// The label options for the values that are displayed in a
     /// `FunnelChartVisual`.
-    value_label_options: ?ChartAxisLabelOptions,
+    value_label_options: ?ChartAxisLabelOptions = null,
 
     /// The visual palette configuration of a `FunnelChartVisual`.
-    visual_palette: ?VisualPalette,
+    visual_palette: ?VisualPalette = null,
 
     pub const json_field_names = .{
         .category_label_options = "CategoryLabelOptions",

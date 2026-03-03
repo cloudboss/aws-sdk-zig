@@ -7,7 +7,7 @@ pub const FieldError = struct {
     id: []const u8,
 
     /// The error message from getting a field.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

@@ -13,18 +13,18 @@ pub const SalesforceChatterFeedConfiguration = struct {
     /// The name of the column in the Salesforce FeedItem table that contains the
     /// title of the
     /// document. This is typically the `Title` column.
-    document_title_field_name: ?[]const u8,
+    document_title_field_name: ?[]const u8 = null,
 
     /// Maps fields from a Salesforce chatter feed into Amazon Kendra index
     /// fields.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// Filters the documents in the feed based on status of the user. When you
     /// specify
     /// `ACTIVE_USERS` only documents from users who have an active account are
     /// indexed. When you specify `STANDARD_USER` only documents for Salesforce
     /// standard users are documented. You can specify both.
-    include_filter_types: ?[]const SalesforceChatterFeedIncludeFilterType,
+    include_filter_types: ?[]const SalesforceChatterFeedIncludeFilterType = null,
 
     pub const json_field_names = .{
         .document_data_field_name = "DocumentDataFieldName",

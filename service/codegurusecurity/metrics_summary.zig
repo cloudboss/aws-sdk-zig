@@ -6,21 +6,21 @@ const ScanNameWithFindingNum = @import("scan_name_with_finding_num.zig").ScanNam
 pub const MetricsSummary = struct {
     /// A list of `CategoryWithFindingNum` objects for the top 5 finding categories
     /// with the most findings.
-    categories_with_most_findings: ?[]const CategoryWithFindingNum,
+    categories_with_most_findings: ?[]const CategoryWithFindingNum = null,
 
     /// The date from which the metrics summary information was retrieved.
-    date: ?i64,
+    date: ?i64 = null,
 
     /// The number of open findings of each severity.
-    open_findings: ?FindingMetricsValuePerSeverity,
+    open_findings: ?FindingMetricsValuePerSeverity = null,
 
     /// A list of `ScanNameWithFindingNum` objects for the top 3 scans with the most
     /// number of open critical findings.
-    scans_with_most_open_critical_findings: ?[]const ScanNameWithFindingNum,
+    scans_with_most_open_critical_findings: ?[]const ScanNameWithFindingNum = null,
 
     /// A list of `ScanNameWithFindingNum` objects for the top 3 scans with the most
     /// number of open findings.
-    scans_with_most_open_findings: ?[]const ScanNameWithFindingNum,
+    scans_with_most_open_findings: ?[]const ScanNameWithFindingNum = null,
 
     pub const json_field_names = .{
         .categories_with_most_findings = "categoriesWithMostFindings",

@@ -3,11 +3,11 @@
 pub const KeyValuePair = struct {
     /// One part of a key-value pair that comprises a tag. A tag key is a general
     /// label that acts as a category for more specific tag values.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// One part of a key-value pair that comprises a tag. A tag value acts as a
     /// descriptor for a tag key. A tag value can be an empty string.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "key",

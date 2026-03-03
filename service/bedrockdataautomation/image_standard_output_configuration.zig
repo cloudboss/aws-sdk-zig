@@ -3,9 +3,9 @@ const ImageStandardGenerativeField = @import("image_standard_generative_field.zi
 
 /// Standard Output Configuration of Image
 pub const ImageStandardOutputConfiguration = struct {
-    extraction: ?ImageStandardExtraction,
+    extraction: ?ImageStandardExtraction = null,
 
-    generative_field: ?ImageStandardGenerativeField,
+    generative_field: ?ImageStandardGenerativeField = null,
 
     pub const json_field_names = .{
         .extraction = "extraction",

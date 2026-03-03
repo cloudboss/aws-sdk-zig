@@ -12,7 +12,7 @@ pub const S3ItemFilter = struct {
     ///
     /// If more than one value is included, the results will return all items that
     /// match any of the values.
-    creation_times: ?[]const TimeCondition,
+    creation_times: ?[]const TimeCondition = null,
 
     /// You can include 1 to 10 values.
     ///
@@ -21,7 +21,7 @@ pub const S3ItemFilter = struct {
     ///
     /// If more than one value is included, the results will return all items that
     /// match any of the values.
-    e_tags: ?[]const StringCondition,
+    e_tags: ?[]const StringCondition = null,
 
     /// You can include 1 to 10 values.
     ///
@@ -30,7 +30,7 @@ pub const S3ItemFilter = struct {
     ///
     /// If more than one value is included, the results will return all items that
     /// match any of the values.
-    object_keys: ?[]const StringCondition,
+    object_keys: ?[]const StringCondition = null,
 
     /// You can include 1 to 10 values.
     ///
@@ -39,7 +39,7 @@ pub const S3ItemFilter = struct {
     ///
     /// If more than one value is included, the results will return all items that
     /// match any of the values.
-    sizes: ?[]const LongCondition,
+    sizes: ?[]const LongCondition = null,
 
     /// You can include 1 to 10 values.
     ///
@@ -48,7 +48,7 @@ pub const S3ItemFilter = struct {
     ///
     /// If more than one value is included, the results will return all items that
     /// match any of the values.
-    version_ids: ?[]const StringCondition,
+    version_ids: ?[]const StringCondition = null,
 
     pub const json_field_names = .{
         .creation_times = "CreationTimes",

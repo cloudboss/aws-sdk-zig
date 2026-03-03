@@ -1,10 +1,10 @@
 /// A namespaced kernel parameter to set in the container.
 pub const AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails = struct {
     /// The namespaced kernel parameter for which to set a value.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The value of the parameter.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .namespace = "Namespace",

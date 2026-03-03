@@ -17,13 +17,13 @@ pub const DeleteVolumeOntapConfiguration = struct {
     /// [
     /// Deleting a SnapLock
     /// volume](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-delete-volume.html).
-    bypass_snaplock_enterprise_retention: ?bool,
+    bypass_snaplock_enterprise_retention: ?bool = null,
 
-    final_backup_tags: ?[]const Tag,
+    final_backup_tags: ?[]const Tag = null,
 
     /// Set to true if you want to skip taking a final backup of the volume
     /// you are deleting.
-    skip_final_backup: ?bool,
+    skip_final_backup: ?bool = null,
 
     pub const json_field_names = .{
         .bypass_snaplock_enterprise_retention = "BypassSnaplockEnterpriseRetention",

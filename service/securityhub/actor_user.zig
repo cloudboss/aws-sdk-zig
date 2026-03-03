@@ -10,19 +10,19 @@ const UserAccount = @import("user_account.zig").UserAccount;
 /// ](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html) in the *Amazon GuardDuty User Guide*.
 pub const ActorUser = struct {
     /// The account of the threat actor.
-    account: ?UserAccount,
+    account: ?UserAccount = null,
 
     /// Unique identifier of the threat actor’s user credentials.
-    credential_uid: ?[]const u8,
+    credential_uid: ?[]const u8 = null,
 
     /// The name of the threat actor.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of user.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The unique identifier of the threat actor.
-    uid: ?[]const u8,
+    uid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account = "Account",

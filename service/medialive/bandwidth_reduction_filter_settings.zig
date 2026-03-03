@@ -11,13 +11,13 @@ pub const BandwidthReductionFilterSettings = struct {
     /// We recommend that you test each of the values (including DISABLED) to
     /// observe the sharpening effect on the
     /// content.
-    post_filter_sharpening: ?BandwidthReductionPostFilterSharpening,
+    post_filter_sharpening: ?BandwidthReductionPostFilterSharpening = null,
 
     /// Enables the bandwidth reduction filter. The filter strengths range from 1 to
     /// 4. We recommend that you always
     /// enable this filter and use AUTO, to let MediaLive apply the optimum
     /// filtering for the context.
-    strength: ?BandwidthReductionFilterStrength,
+    strength: ?BandwidthReductionFilterStrength = null,
 
     pub const json_field_names = .{
         .post_filter_sharpening = "PostFilterSharpening",

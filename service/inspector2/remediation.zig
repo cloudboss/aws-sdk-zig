@@ -5,7 +5,7 @@ pub const Remediation = struct {
     /// An object that contains information about the recommended course of action
     /// to remediate
     /// the finding.
-    recommendation: ?Recommendation,
+    recommendation: ?Recommendation = null,
 
     pub const json_field_names = .{
         .recommendation = "recommendation",

@@ -7,7 +7,7 @@ pub const AssetDestinationEntry = struct {
     bucket: []const u8,
 
     /// The name of the object in Amazon S3 for the asset.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .asset_id = "AssetId",

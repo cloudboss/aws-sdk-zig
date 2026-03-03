@@ -8,36 +8,36 @@ const Tag = @import("tag.zig").Tag;
 /// node.
 pub const Activation = struct {
     /// The ID created by Systems Manager when you submitted the activation.
-    activation_id: ?[]const u8,
+    activation_id: ?[]const u8 = null,
 
     /// The date the activation was created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// A name for the managed node when it is created.
-    default_instance_name: ?[]const u8,
+    default_instance_name: ?[]const u8 = null,
 
     /// A user defined description of the activation.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The date when this activation can no longer be used to register managed
     /// nodes.
-    expiration_date: ?i64,
+    expiration_date: ?i64 = null,
 
     /// Whether or not the activation is expired.
     expired: bool = false,
 
     /// The Identity and Access Management (IAM) role to assign to the managed node.
-    iam_role: ?[]const u8,
+    iam_role: ?[]const u8 = null,
 
     /// The maximum number of managed nodes that can be registered using this
     /// activation.
-    registration_limit: ?i32,
+    registration_limit: ?i32 = null,
 
     /// The number of managed nodes already registered with this activation.
-    registrations_count: ?i32,
+    registrations_count: ?i32 = null,
 
     /// Tags assigned to the activation.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .activation_id = "ActivationId",

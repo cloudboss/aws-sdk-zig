@@ -8,20 +8,20 @@ const AnalyticsUtteranceMetricResult = @import("analytics_utterance_metric_resul
 pub const AnalyticsUtteranceResult = struct {
     /// A list of objects containing information about the last used intent at the
     /// time of an utterance.
-    attribute_results: ?[]const AnalyticsUtteranceAttributeResult,
+    attribute_results: ?[]const AnalyticsUtteranceAttributeResult = null,
 
     /// A list of objects containing the criteria you requested for binning results
     /// and the values of the bins.
-    bin_keys: ?[]const AnalyticsBinKey,
+    bin_keys: ?[]const AnalyticsBinKey = null,
 
     /// A list of objects containing the criteria you requested for grouping results
     /// and the values of the bins.
-    group_by_keys: ?[]const AnalyticsUtteranceGroupByKey,
+    group_by_keys: ?[]const AnalyticsUtteranceGroupByKey = null,
 
     /// A list of objects, each of which contains a metric you want to list, the
     /// statistic for the metric you want to return, and the method by which to
     /// organize the results.
-    metrics_results: ?[]const AnalyticsUtteranceMetricResult,
+    metrics_results: ?[]const AnalyticsUtteranceMetricResult = null,
 
     pub const json_field_names = .{
         .attribute_results = "attributeResults",

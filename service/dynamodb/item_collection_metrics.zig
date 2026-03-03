@@ -12,7 +12,7 @@ pub const ItemCollectionMetrics = struct {
     /// The partition key value of the item collection. This value is the same as
     /// the
     /// partition key value of the item.
-    item_collection_key: ?[]const aws.map.MapEntry(AttributeValue),
+    item_collection_key: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// An estimate of item collection size, in gigabytes. This value is a
     /// two-element array
@@ -27,7 +27,7 @@ pub const ItemCollectionMetrics = struct {
     /// The estimate is subject to change over time; therefore, do not rely on the
     /// precision
     /// or accuracy of the estimate.
-    size_estimate_range_gb: ?[]const f64,
+    size_estimate_range_gb: ?[]const f64 = null,
 
     pub const json_field_names = .{
         .item_collection_key = "ItemCollectionKey",

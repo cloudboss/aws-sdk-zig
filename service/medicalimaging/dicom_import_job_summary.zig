@@ -4,13 +4,13 @@ const JobStatus = @import("job_status.zig").JobStatus;
 pub const DICOMImportJobSummary = struct {
     /// The Amazon Resource Name (ARN) that grants permissions to access medical
     /// imaging resources.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     /// The data store identifier.
     datastore_id: []const u8,
 
     /// The timestamp when an import job ended.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The import job identifier.
     job_id: []const u8,
@@ -22,10 +22,10 @@ pub const DICOMImportJobSummary = struct {
     job_status: JobStatus,
 
     /// The error message thrown if an import job fails.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The timestamp when an import job was submitted.
-    submitted_at: ?i64,
+    submitted_at: ?i64 = null,
 
     pub const json_field_names = .{
         .data_access_role_arn = "dataAccessRoleArn",

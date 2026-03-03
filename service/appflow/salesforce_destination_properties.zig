@@ -58,7 +58,7 @@ pub const SalesforceDestinationProperties = struct {
     /// attempts to transfer a vary large set of data, it might fail with a timed
     /// out
     /// error.
-    data_transfer_api: ?SalesforceDataTransferApi,
+    data_transfer_api: ?SalesforceDataTransferApi = null,
 
     /// The settings that determine how Amazon AppFlow handles an error when placing
     /// data in
@@ -69,12 +69,12 @@ pub const SalesforceDestinationProperties = struct {
     /// initial failure. `ErrorHandlingConfig` is a part of the destination
     /// connector
     /// details.
-    error_handling_config: ?ErrorHandlingConfig,
+    error_handling_config: ?ErrorHandlingConfig = null,
 
     /// The name of the field that Amazon AppFlow uses as an ID when performing a
     /// write
     /// operation such as update or delete.
-    id_field_names: ?[]const []const u8,
+    id_field_names: ?[]const []const u8 = null,
 
     /// The object specified in the Salesforce flow destination.
     object: []const u8,
@@ -82,7 +82,7 @@ pub const SalesforceDestinationProperties = struct {
     /// This specifies the type of write operation to be performed in Salesforce.
     /// When the value
     /// is `UPSERT`, then `idFieldNames` is required.
-    write_operation_type: ?WriteOperationType,
+    write_operation_type: ?WriteOperationType = null,
 
     pub const json_field_names = .{
         .data_transfer_api = "dataTransferApi",

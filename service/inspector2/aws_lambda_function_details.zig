@@ -10,7 +10,7 @@ pub const AwsLambdaFunctionDetails = struct {
     /// Architecture is a string array with one of the valid values. The default
     /// architecture value
     /// is `x86_64`.
-    architectures: ?[]const Architecture,
+    architectures: ?[]const Architecture = null,
 
     /// The SHA256 hash of the Amazon Web Services Lambda function's deployment
     /// package.
@@ -24,16 +24,16 @@ pub const AwsLambdaFunctionDetails = struct {
 
     /// The date and time that a user last updated the configuration, in [ISO 8601
     /// format](https://www.iso.org/iso-8601-date-and-time-format.html)
-    last_modified_at: ?i64,
+    last_modified_at: ?i64 = null,
 
     /// The Amazon Web Services Lambda function's [
     /// layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). A
     /// Lambda function can have up to five layers.
-    layers: ?[]const []const u8,
+    layers: ?[]const []const u8 = null,
 
     /// The type of deployment package. Set to `Image` for container image and set
     /// `Zip` for .zip file archive.
-    package_type: ?PackageType,
+    package_type: ?PackageType = null,
 
     /// The runtime environment for the Amazon Web Services Lambda function.
     runtime: Runtime,
@@ -42,7 +42,7 @@ pub const AwsLambdaFunctionDetails = struct {
     version: []const u8,
 
     /// The Amazon Web Services Lambda function's networking configuration.
-    vpc_config: ?LambdaVpcConfig,
+    vpc_config: ?LambdaVpcConfig = null,
 
     pub const json_field_names = .{
         .architectures = "architectures",

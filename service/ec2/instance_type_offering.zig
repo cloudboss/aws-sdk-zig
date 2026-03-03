@@ -6,14 +6,14 @@ pub const InstanceTypeOffering = struct {
     /// The instance type. For more information, see [Instance
     /// types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2
     /// User Guide*.
-    instance_type: ?InstanceType,
+    instance_type: ?InstanceType = null,
 
     /// The identifier for the location. This depends on the location type. For
     /// example, if the
     /// location type is `region`, the location is the Region code (for example,
     /// `us-east-2`.)
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The location type.
-    location_type: ?LocationType,
+    location_type: ?LocationType = null,
 };

@@ -12,7 +12,7 @@ pub const CostEstimationResourceCollectionFilter = struct {
     /// An object that specifies the CloudFormation stack that defines the Amazon
     /// Web Services resources
     /// used to create a monthly estimate for DevOps Guru.
-    cloud_formation: ?CloudFormationCostEstimationResourceCollectionFilter,
+    cloud_formation: ?CloudFormationCostEstimationResourceCollectionFilter = null,
 
     /// The Amazon Web Services tags used to filter the resource collection that is
     /// used for a cost
@@ -57,7 +57,7 @@ pub const CostEstimationResourceCollectionFilter = struct {
     /// *key*/*value* pairs in your
     /// application might be `Devops-Guru-production-application/RDS` or
     /// `Devops-Guru-production-application/containers`.
-    tags: ?[]const TagCostEstimationResourceCollectionFilter,
+    tags: ?[]const TagCostEstimationResourceCollectionFilter = null,
 
     pub const json_field_names = .{
         .cloud_formation = "CloudFormation",

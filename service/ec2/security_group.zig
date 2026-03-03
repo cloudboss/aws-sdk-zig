@@ -4,29 +4,29 @@ const Tag = @import("tag.zig").Tag;
 /// Describes a security group.
 pub const SecurityGroup = struct {
     /// A description of the security group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the security group.
-    group_id: ?[]const u8,
+    group_id: ?[]const u8 = null,
 
     /// The name of the security group.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// The inbound rules associated with the security group.
-    ip_permissions: ?[]const IpPermission,
+    ip_permissions: ?[]const IpPermission = null,
 
     /// The outbound rules associated with the security group.
-    ip_permissions_egress: ?[]const IpPermission,
+    ip_permissions_egress: ?[]const IpPermission = null,
 
     /// The Amazon Web Services account ID of the owner of the security group.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The ARN of the security group.
-    security_group_arn: ?[]const u8,
+    security_group_arn: ?[]const u8 = null,
 
     /// Any tags assigned to the security group.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the VPC for the security group.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

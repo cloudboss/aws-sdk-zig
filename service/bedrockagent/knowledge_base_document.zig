@@ -8,7 +8,7 @@ pub const KnowledgeBaseDocument = struct {
     content: DocumentContent,
 
     /// Contains the metadata to associate with the document.
-    metadata: ?DocumentMetadata,
+    metadata: ?DocumentMetadata = null,
 
     pub const json_field_names = .{
         .content = "content",

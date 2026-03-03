@@ -7,7 +7,7 @@ pub const AwsS3BucketServerSideEncryptionRule = struct {
     /// `PUT` object request doesn't specify any server-side encryption, this
     /// default
     /// encryption is applied.
-    apply_server_side_encryption_by_default: ?AwsS3BucketServerSideEncryptionByDefault,
+    apply_server_side_encryption_by_default: ?AwsS3BucketServerSideEncryptionByDefault = null,
 
     pub const json_field_names = .{
         .apply_server_side_encryption_by_default = "ApplyServerSideEncryptionByDefault",

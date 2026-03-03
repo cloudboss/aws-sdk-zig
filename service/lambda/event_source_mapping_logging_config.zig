@@ -9,7 +9,7 @@ pub const EventSourceMappingLoggingConfig = struct {
     /// `DEBUG` is the highest level and `WARN` is the lowest. For more information
     /// about these metrics, see [ Event source mapping
     /// logging](https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html).
-    system_log_level: ?EventSourceMappingSystemLogLevel,
+    system_log_level: ?EventSourceMappingSystemLogLevel = null,
 
     pub const json_field_names = .{
         .system_log_level = "SystemLogLevel",

@@ -9,40 +9,40 @@ pub const RxNormAttribute = struct {
     /// The 0-based character offset in the input text that shows where the
     /// attribute begins. The
     /// offset returns the UTF-8 code point in the string.
-    begin_offset: ?i32,
+    begin_offset: ?i32 = null,
 
     /// The 0-based character offset in the input text that shows where the
     /// attribute ends. The
     /// offset returns the UTF-8 code point in the string.
-    end_offset: ?i32,
+    end_offset: ?i32 = null,
 
     /// The numeric identifier for this attribute. This is a monotonically
     /// increasing id unique
     /// within this response rather than a global unique identifier.
-    id: ?i32,
+    id: ?i32 = null,
 
     /// The level of confidence that Amazon Comprehend Medical has that the
     /// attribute is
     /// accurately linked to an entity.
-    relationship_score: ?f32,
+    relationship_score: ?f32 = null,
 
     /// The level of confidence that Amazon Comprehend Medical has that the segment
     /// of text is correctly
     /// recognized as an attribute.
-    score: ?f32,
+    score: ?f32 = null,
 
     /// The segment of input text which corresponds to the detected attribute.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// Contextual information for the attribute. InferRxNorm recognizes the trait
     /// `NEGATION` for attributes, i.e. that the patient is not taking a specific
     /// dose or
     /// form of a medication.
-    traits: ?[]const RxNormTrait,
+    traits: ?[]const RxNormTrait = null,
 
     /// The type of attribute. The types of attributes recognized by InferRxNorm are
     /// `BRAND_NAME` and `GENERIC_NAME`.
-    @"type": ?RxNormAttributeType,
+    @"type": ?RxNormAttributeType = null,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",

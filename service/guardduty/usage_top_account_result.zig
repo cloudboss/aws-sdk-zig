@@ -4,9 +4,9 @@ const Total = @import("total.zig").Total;
 /// account IDs.
 pub const UsageTopAccountResult = struct {
     /// The unique account ID.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
-    total: ?Total,
+    total: ?Total = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

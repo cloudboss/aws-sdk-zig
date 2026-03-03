@@ -9,10 +9,10 @@ pub const Activity = struct {
     /// Metadata of the commenting activity. This is an optional field and is filled
     /// for
     /// commenting activities.
-    comment_metadata: ?CommentMetadata,
+    comment_metadata: ?CommentMetadata = null,
 
     /// The user who performed the action.
-    initiator: ?UserMetadata,
+    initiator: ?UserMetadata = null,
 
     /// Indicates whether an activity is indirect or direct. An indirect activity
     /// results
@@ -24,28 +24,28 @@ pub const Activity = struct {
     is_indirect_activity: bool = false,
 
     /// The ID of the organization.
-    organization_id: ?[]const u8,
+    organization_id: ?[]const u8 = null,
 
     /// The original parent of the resource. This is an optional field and is filled
     /// for
     /// move activities.
-    original_parent: ?ResourceMetadata,
+    original_parent: ?ResourceMetadata = null,
 
     /// The list of users or groups impacted by this action. This is an optional
     /// field and
     /// is filled for the following sharing activities: DOCUMENT_SHARED,
     /// DOCUMENT_SHARED,
     /// DOCUMENT_UNSHARED, FOLDER_SHARED, FOLDER_UNSHARED.
-    participants: ?Participants,
+    participants: ?Participants = null,
 
     /// The metadata of the resource involved in the user action.
-    resource_metadata: ?ResourceMetadata,
+    resource_metadata: ?ResourceMetadata = null,
 
     /// The timestamp when the action was performed.
-    time_stamp: ?i64,
+    time_stamp: ?i64 = null,
 
     /// The activity type.
-    @"type": ?ActivityType,
+    @"type": ?ActivityType = null,
 
     pub const json_field_names = .{
         .comment_metadata = "CommentMetadata",

@@ -8,14 +8,14 @@ const DatasetEntityRecognizerEntityList = @import("dataset_entity_recognizer_ent
 pub const DatasetEntityRecognizerInputDataConfig = struct {
     /// The S3 location of the annotation documents for your custom entity
     /// recognizer.
-    annotations: ?DatasetEntityRecognizerAnnotations,
+    annotations: ?DatasetEntityRecognizerAnnotations = null,
 
     /// The format and location of the training documents for your custom entity
     /// recognizer.
     documents: DatasetEntityRecognizerDocuments,
 
     /// The S3 location of the entity list for your custom entity recognizer.
-    entity_list: ?DatasetEntityRecognizerEntityList,
+    entity_list: ?DatasetEntityRecognizerEntityList = null,
 
     pub const json_field_names = .{
         .annotations = "Annotations",

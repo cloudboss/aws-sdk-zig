@@ -8,13 +8,13 @@ pub const VodSource = struct {
     arn: []const u8,
 
     /// The timestamp that indicates when the VOD source was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The HTTP package configurations for the VOD source.
     http_package_configurations: []const HttpPackageConfiguration,
 
     /// The timestamp that indicates when the VOD source was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the source location that the VOD source is associated with.
     source_location_name: []const u8,
@@ -24,7 +24,7 @@ pub const VodSource = struct {
     /// and cost tracking. For more information, see [Tagging AWS Elemental
     /// MediaTailor
     /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the VOD source.
     vod_source_name: []const u8,

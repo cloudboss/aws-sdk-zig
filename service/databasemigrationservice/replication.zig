@@ -10,21 +10,21 @@ pub const Replication = struct {
     /// either
     /// `CdcStartTime` or `CdcStartPosition` to specify when you want a
     /// CDC operation to start. Specifying both values results in an error.
-    cdc_start_position: ?[]const u8,
+    cdc_start_position: ?[]const u8 = null,
 
     /// Indicates the start time for a change data capture (CDC) operation. Use
     /// either
     /// `CdcStartTime` or `CdcStartPosition` to specify when you want a
     /// CDC operation to start. Specifying both values results in an error.
-    cdc_start_time: ?i64,
+    cdc_start_time: ?i64 = null,
 
     /// Indicates when you want a change data capture (CDC) operation to stop. The
     /// value can be
     /// either server time or commit time.
-    cdc_stop_position: ?[]const u8,
+    cdc_stop_position: ?[]const u8 = null,
 
     /// Error and other information about why a serverless replication failed.
-    failure_messages: ?[]const []const u8,
+    failure_messages: ?[]const []const u8 = null,
 
     /// Indicates whether the serverless replication is read-only. When set to
     /// `true`,
@@ -33,56 +33,56 @@ pub const Replication = struct {
     /// or deleted directly. You can only modify or delete read-only replications
     /// through their
     /// associated zero-ETL integration.
-    is_read_only: ?bool,
+    is_read_only: ?bool = null,
 
     /// The status output of premigration assessment in describe-replications.
-    premigration_assessment_statuses: ?[]const PremigrationAssessmentStatus,
+    premigration_assessment_statuses: ?[]const PremigrationAssessmentStatus = null,
 
     /// Information about provisioning resources for an DMS serverless replication.
-    provision_data: ?ProvisionData,
+    provision_data: ?ProvisionData = null,
 
     /// Indicates the last checkpoint that occurred during a change data capture
     /// (CDC)
     /// operation. You can provide this value to the `CdcStartPosition` parameter to
     /// start a CDC operation that begins at that checkpoint.
-    recovery_checkpoint: ?[]const u8,
+    recovery_checkpoint: ?[]const u8 = null,
 
     /// The Amazon Resource Name for the `ReplicationConfig` associated with the
     /// replication.
-    replication_config_arn: ?[]const u8,
+    replication_config_arn: ?[]const u8 = null,
 
     /// The identifier for the `ReplicationConfig` associated with the
     /// replication.
-    replication_config_identifier: ?[]const u8,
+    replication_config_identifier: ?[]const u8 = null,
 
     /// The time the serverless replication was created.
-    replication_create_time: ?i64,
+    replication_create_time: ?i64 = null,
 
     /// The timestamp when DMS will deprovision the replication.
-    replication_deprovision_time: ?i64,
+    replication_deprovision_time: ?i64 = null,
 
     /// The timestamp when replication was last stopped.
-    replication_last_stop_time: ?i64,
+    replication_last_stop_time: ?i64 = null,
 
     /// This object provides a collection of statistics about a serverless
     /// replication.
-    replication_stats: ?ReplicationStats,
+    replication_stats: ?ReplicationStats = null,
 
     /// The type of the serverless replication.
-    replication_type: ?MigrationTypeValue,
+    replication_type: ?MigrationTypeValue = null,
 
     /// The time the serverless replication was updated.
-    replication_update_time: ?i64,
+    replication_update_time: ?i64 = null,
 
     /// The Amazon Resource Name for an existing `Endpoint` the serverless
     /// replication uses for its data source.
-    source_endpoint_arn: ?[]const u8,
+    source_endpoint_arn: ?[]const u8 = null,
 
     /// The type of replication to start.
-    start_replication_type: ?[]const u8,
+    start_replication_type: ?[]const u8 = null,
 
     /// The current status of the serverless replication.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The reason the replication task was stopped. This response parameter can
     /// return one of
@@ -120,11 +120,11 @@ pub const Replication = struct {
     /// * `"Stop Reason RECONFIGURATION_RESTART"`
     ///
     /// * `"Stop Reason RECYCLE_TASK"`
-    stop_reason: ?[]const u8,
+    stop_reason: ?[]const u8 = null,
 
     /// The Amazon Resource Name for an existing `Endpoint` the serverless
     /// replication uses for its data target.
-    target_endpoint_arn: ?[]const u8,
+    target_endpoint_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cdc_start_position = "CdcStartPosition",

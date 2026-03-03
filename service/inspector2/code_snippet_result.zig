@@ -6,19 +6,19 @@ const SuggestedFix = @import("suggested_fix.zig").SuggestedFix;
 /// finding.
 pub const CodeSnippetResult = struct {
     /// Contains information on the retrieved code snippet.
-    code_snippet: ?[]const CodeLine,
+    code_snippet: ?[]const CodeLine = null,
 
     /// The line number of the last line of a code snippet.
-    end_line: ?i32,
+    end_line: ?i32 = null,
 
     /// The ARN of a finding that the code snippet is associated with.
-    finding_arn: ?[]const u8,
+    finding_arn: ?[]const u8 = null,
 
     /// The line number of the first line of a code snippet.
-    start_line: ?i32,
+    start_line: ?i32 = null,
 
     /// Details of a suggested code fix.
-    suggested_fixes: ?[]const SuggestedFix,
+    suggested_fixes: ?[]const SuggestedFix = null,
 
     pub const json_field_names = .{
         .code_snippet = "codeSnippet",

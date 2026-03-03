@@ -6,5 +6,5 @@ const RewriteConfig = @import("rewrite_config.zig").RewriteConfig;
 pub const HostHeaderRewriteConfig = struct {
     /// The host header rewrite transform. Each transform consists of a regular
     /// expression to match and a replacement string.
-    rewrites: ?[]const RewriteConfig,
+    rewrites: ?[]const RewriteConfig = null,
 };

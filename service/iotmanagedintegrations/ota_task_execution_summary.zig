@@ -3,26 +3,26 @@ const OtaTaskExecutionStatus = @import("ota_task_execution_status.zig").OtaTaskE
 /// Structure representing one over-the-air (OTA) task execution summary.
 pub const OtaTaskExecutionSummary = struct {
     /// The execution number of the over-the-air (OTA) task execution summary.
-    execution_number: ?i64,
+    execution_number: ?i64 = null,
 
     /// The timestamp value of when the over-the-air (OTA) task execution summary
     /// was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The timestamp value of when the over-the-air (OTA) task execution summary is
     /// targeted to start.
-    queued_at: ?i64,
+    queued_at: ?i64 = null,
 
     /// The number of retry attempts for starting the over-the-air (OTA) task
     /// execution summary after a failed attempt.
-    retry_attempt: ?i32,
+    retry_attempt: ?i32 = null,
 
     /// The timestamp value of when the over-the-air (OTA) task execution summary
     /// started.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The status of the over-the-air (OTA) task execution summary.
-    status: ?OtaTaskExecutionStatus,
+    status: ?OtaTaskExecutionStatus = null,
 
     pub const json_field_names = .{
         .execution_number = "ExecutionNumber",

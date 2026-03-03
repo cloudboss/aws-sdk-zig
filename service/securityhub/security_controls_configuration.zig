@@ -8,16 +8,16 @@ pub const SecurityControlsConfiguration = struct {
     /// A list of security controls that are disabled in the configuration policy.
     /// Security Hub enables all other
     /// controls (including newly released controls) other than the listed controls.
-    disabled_security_control_identifiers: ?[]const []const u8,
+    disabled_security_control_identifiers: ?[]const []const u8 = null,
 
     /// A list of security controls that are enabled in the configuration policy.
     /// Security Hub disables all other
     /// controls (including newly released controls) other than the listed controls.
-    enabled_security_control_identifiers: ?[]const []const u8,
+    enabled_security_control_identifiers: ?[]const []const u8 = null,
 
     /// A list of security controls and control parameter values that are included
     /// in a configuration policy.
-    security_control_custom_parameters: ?[]const SecurityControlCustomParameter,
+    security_control_custom_parameters: ?[]const SecurityControlCustomParameter = null,
 
     pub const json_field_names = .{
         .disabled_security_control_identifiers = "DisabledSecurityControlIdentifiers",

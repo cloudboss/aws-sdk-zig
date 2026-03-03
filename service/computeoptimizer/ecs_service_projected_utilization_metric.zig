@@ -21,7 +21,7 @@ pub const ECSServiceProjectedUtilizationMetric = struct {
     ///
     /// * `Memory` — The percentage of memory that's
     /// currently in use on the service tasks.
-    name: ?ECSServiceMetricName,
+    name: ?ECSServiceMetricName = null,
 
     /// The statistic of the projected utilization metric.
     ///
@@ -39,7 +39,7 @@ pub const ECSServiceProjectedUtilizationMetric = struct {
     /// using Amazon CloudWatch. For more information, see the [Amazon CloudWatch
     /// User
     /// Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
-    statistic: ?ECSServiceMetricStatistic,
+    statistic: ?ECSServiceMetricStatistic = null,
 
     /// The upper bound values for the projected utilization metrics.
     upper_bound_value: f64 = 0,

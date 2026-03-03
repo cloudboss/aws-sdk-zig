@@ -9,14 +9,14 @@ pub const DatabaseTableList = struct {
     /// read from.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    exclude: ?[]const []const u8,
+    exclude: ?[]const []const u8 = null,
 
     /// The list of table patterns in source database endpoint to be included for
     /// Firehose to
     /// read from.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    include: ?[]const []const u8,
+    include: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .exclude = "Exclude",

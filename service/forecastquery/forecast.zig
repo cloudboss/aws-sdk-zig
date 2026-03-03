@@ -19,7 +19,7 @@ pub const Forecast = struct {
     /// The default setting is `["0.1", "0.5", "0.9"]`. Use the optional
     /// `ForecastTypes` parameter of the
     /// [CreateForecast](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateForecast.html) operation to change the values. The values will vary depending on how this is set, with a minimum of `1` and a maximum of `5.`
-    predictions: ?[]const aws.map.MapEntry([]const DataPoint),
+    predictions: ?[]const aws.map.MapEntry([]const DataPoint) = null,
 
     pub const json_field_names = .{
         .predictions = "Predictions",

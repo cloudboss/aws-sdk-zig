@@ -6,19 +6,19 @@ const RDSInstanceSavingsOpportunityAfterDiscounts = @import("rds_instance_saving
 pub const RDSDBInstanceRecommendationOption = struct {
     /// Describes the DB instance class recommendation option for your Amazon Aurora
     /// or RDS database.
-    db_instance_class: ?[]const u8,
+    db_instance_class: ?[]const u8 = null,
 
     /// The performance risk of the DB instance recommendation option.
     performance_risk: f64 = 0,
 
     /// An array of objects that describe the projected utilization metrics of the
     /// DB instance recommendation option.
-    projected_utilization_metrics: ?[]const RDSDBUtilizationMetric,
+    projected_utilization_metrics: ?[]const RDSDBUtilizationMetric = null,
 
     /// The rank identifier of the DB instance recommendation option.
     rank: i32 = 0,
 
-    savings_opportunity: ?SavingsOpportunity,
+    savings_opportunity: ?SavingsOpportunity = null,
 
     /// Describes the savings opportunity for Amazon Aurora and RDS database
     /// recommendations or for the recommendation option.
@@ -27,7 +27,7 @@ pub const RDSDBInstanceRecommendationOption = struct {
     /// Savings Plans discounts.
     /// You can achieve this by implementing a given Compute Optimizer
     /// recommendation.
-    savings_opportunity_after_discounts: ?RDSInstanceSavingsOpportunityAfterDiscounts,
+    savings_opportunity_after_discounts: ?RDSInstanceSavingsOpportunityAfterDiscounts = null,
 
     pub const json_field_names = .{
         .db_instance_class = "dbInstanceClass",

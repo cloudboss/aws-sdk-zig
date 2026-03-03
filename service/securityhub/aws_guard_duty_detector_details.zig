@@ -6,19 +6,19 @@ const AwsGuardDutyDetectorFeaturesDetails = @import("aws_guard_duty_detector_fea
 /// to become operational.
 pub const AwsGuardDutyDetectorDetails = struct {
     /// Describes which data sources are activated for the detector.
-    data_sources: ?AwsGuardDutyDetectorDataSourcesDetails,
+    data_sources: ?AwsGuardDutyDetectorDataSourcesDetails = null,
 
     /// Describes which features are activated for the detector.
-    features: ?[]const AwsGuardDutyDetectorFeaturesDetails,
+    features: ?[]const AwsGuardDutyDetectorFeaturesDetails = null,
 
     /// The publishing frequency of the finding.
-    finding_publishing_frequency: ?[]const u8,
+    finding_publishing_frequency: ?[]const u8 = null,
 
     /// The GuardDuty service role.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
     /// The activation status of the detector.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_sources = "DataSources",

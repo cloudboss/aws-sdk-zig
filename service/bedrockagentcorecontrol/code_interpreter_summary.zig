@@ -13,13 +13,13 @@ pub const CodeInterpreterSummary = struct {
     created_at: i64,
 
     /// The description of the code interpreter.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The timestamp when the code interpreter was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The name of the code interpreter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the code interpreter.
     status: CodeInterpreterStatus,

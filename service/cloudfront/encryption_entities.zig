@@ -5,7 +5,7 @@ const EncryptionEntity = @import("encryption_entity.zig").EncryptionEntity;
 pub const EncryptionEntities = struct {
     /// An array of field patterns in a field-level encryption content type-profile
     /// mapping.
-    items: ?[]const EncryptionEntity,
+    items: ?[]const EncryptionEntity = null,
 
     /// Number of field pattern items in a field-level encryption content
     /// type-profile mapping.

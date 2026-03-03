@@ -15,7 +15,7 @@
 pub const DynamodbStreamConfiguration = struct {
     /// The proposed resource policy defining who can access or manage the DynamoDB
     /// stream.
-    stream_policy: ?[]const u8,
+    stream_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .stream_policy = "streamPolicy",

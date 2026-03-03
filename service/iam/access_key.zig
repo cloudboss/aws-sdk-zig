@@ -16,7 +16,7 @@ pub const AccessKey = struct {
     access_key_id: []const u8,
 
     /// The date when the access key was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The secret key used to sign requests.
     secret_access_key: []const u8,

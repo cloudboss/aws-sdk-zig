@@ -61,5 +61,5 @@ pub const CookiePreference = struct {
     /// For the current limit on the number of cookie names that you can whitelist
     /// for each cache behavior, see [ CloudFront
     /// Limits](https://docs.aws.amazon.com/general/latest/gr/xrefaws_service_limits.html#limits_cloudfront) in the *Amazon Web Services General Reference*.
-    whitelisted_names: ?CookieNames,
+    whitelisted_names: ?CookieNames = null,
 };

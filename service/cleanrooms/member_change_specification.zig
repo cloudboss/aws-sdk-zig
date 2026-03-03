@@ -10,7 +10,7 @@ pub const MemberChangeSpecification = struct {
     /// Specifies the display name that will be shown for this member in the
     /// collaboration. While this field is required when inviting new members, it
     /// becomes optional when modifying abilities of existing collaboration members.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The abilities granted to the collaboration member. These determine what
     /// actions the member can perform within the collaboration.

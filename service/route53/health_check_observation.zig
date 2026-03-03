@@ -8,14 +8,14 @@ pub const HealthCheckObservation = struct {
     /// The IP address of the Amazon Route 53 health checker that provided the
     /// failure reason
     /// in `StatusReport`.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The region of the Amazon Route 53 health checker that provided the status in
     /// `StatusReport`.
-    region: ?HealthCheckRegion,
+    region: ?HealthCheckRegion = null,
 
     /// A complex type that contains the last failure reason as reported by one
     /// Amazon Route
     /// 53 health checker and the time of the failed health check.
-    status_report: ?StatusReport,
+    status_report: ?StatusReport = null,
 };

@@ -16,10 +16,10 @@ pub const ApplicationVersionLifecycleConfig = struct {
     /// Specify a max age rule to restrict the length of time that application
     /// versions are
     /// retained for an application.
-    max_age_rule: ?MaxAgeRule,
+    max_age_rule: ?MaxAgeRule = null,
 
     /// Specify a max count rule to restrict the number of application versions that
     /// are
     /// retained for an application.
-    max_count_rule: ?MaxCountRule,
+    max_count_rule: ?MaxCountRule = null,
 };

@@ -3,14 +3,14 @@
 pub const ExecutionConfiguration = struct {
     /// True if account cleanup is enabled at the beginning of the test. Otherwise,
     /// false.
-    accounts_cleanup: ?bool,
+    accounts_cleanup: ?bool = null,
 
     /// True if app package cleanup is enabled at the beginning of the test.
     /// Otherwise, false.
-    app_packages_cleanup: ?bool,
+    app_packages_cleanup: ?bool = null,
 
     /// The number of minutes a test run executes before it times out.
-    job_timeout_minutes: ?i32,
+    job_timeout_minutes: ?i32 = null,
 
     /// When set to `true`, for private devices, Device Farm does not sign your app
     /// again. For public
@@ -19,11 +19,11 @@ pub const ExecutionConfiguration = struct {
     /// For more information about how Device Farm re-signs your apps, see [Do you
     /// modify my app?](http://aws.amazon.com/device-farm/faqs/) in the *AWS Device
     /// Farm FAQs*.
-    skip_app_resign: ?bool,
+    skip_app_resign: ?bool = null,
 
     /// Set to true to enable video capture. Otherwise, set to false. The default is
     /// true.
-    video_capture: ?bool,
+    video_capture: ?bool = null,
 
     pub const json_field_names = .{
         .accounts_cleanup = "accountsCleanup",

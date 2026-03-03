@@ -4,7 +4,7 @@
 /// `volumeType` attribute.
 pub const AttributeValue = struct {
     /// The specific value of an `attributeName`.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .value = "Value",

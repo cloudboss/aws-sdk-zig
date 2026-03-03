@@ -13,7 +13,7 @@ pub const PolicyVersion = struct {
     /// The date and time, in [ISO 8601 date-time
     /// format](http://www.iso.org/iso/iso8601), when the policy version was
     /// created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The policy document.
     ///
@@ -31,7 +31,7 @@ pub const PolicyVersion = struct {
     /// use Java, you can
     /// use the `decode` method of the `java.net.URLDecoder` utility class in
     /// the Java SDK. Other languages and SDKs provide similar functionality.
-    document: ?[]const u8,
+    document: ?[]const u8 = null,
 
     /// Specifies whether the policy version is set as the policy's default version.
     is_default_version: bool = false,
@@ -40,5 +40,5 @@ pub const PolicyVersion = struct {
     ///
     /// Policy version identifiers always begin with `v` (always lowercase). When a
     /// policy is created, the first policy version is `v1`.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 };

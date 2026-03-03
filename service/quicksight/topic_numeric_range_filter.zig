@@ -12,11 +12,11 @@ pub const TopicNumericRangeFilter = struct {
     /// `MEDIAN`, `MIN`, `STDEV`, `STDEVP`,
     /// `VAR`,
     /// and `VARP`.
-    aggregation: ?NamedFilterAggType,
+    aggregation: ?NamedFilterAggType = null,
 
     /// The constant used in a
     /// numeric range filter.
-    constant: ?TopicRangeFilterConstant,
+    constant: ?TopicRangeFilterConstant = null,
 
     /// A Boolean value that indicates whether the endpoints of the numeric range
     /// are included in the filter.

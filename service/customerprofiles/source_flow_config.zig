@@ -9,7 +9,7 @@ pub const SourceFlowConfig = struct {
     /// The name of the AppFlow connector profile. This name must be unique for each
     /// connector
     /// profile in the AWS account.
-    connector_profile_name: ?[]const u8,
+    connector_profile_name: ?[]const u8 = null,
 
     /// The type of connector, such as Salesforce, Marketo, and so on.
     connector_type: SourceConnectorType,
@@ -18,7 +18,7 @@ pub const SourceFlowConfig = struct {
     /// configuration is provided, the fields specified in the configuration are
     /// used when querying
     /// for the incremental data pull.
-    incremental_pull_config: ?IncrementalPullConfig,
+    incremental_pull_config: ?IncrementalPullConfig = null,
 
     /// Specifies the information that is required to query a particular source
     /// connector.

@@ -4,23 +4,23 @@ const MacSystemIntegrityProtectionSettingStatus = @import("mac_system_integrity_
 /// modification task.
 pub const MacSystemIntegrityProtectionConfigurationRequest = struct {
     /// Enables or disables Apple Internal.
-    apple_internal: ?MacSystemIntegrityProtectionSettingStatus,
+    apple_internal: ?MacSystemIntegrityProtectionSettingStatus = null,
 
     /// Enables or disables Base System.
-    base_system: ?MacSystemIntegrityProtectionSettingStatus,
+    base_system: ?MacSystemIntegrityProtectionSettingStatus = null,
 
     /// Enables or disables Debugging Restrictions.
-    debugging_restrictions: ?MacSystemIntegrityProtectionSettingStatus,
+    debugging_restrictions: ?MacSystemIntegrityProtectionSettingStatus = null,
 
     /// Enables or disables Dtrace Restrictions.
-    d_trace_restrictions: ?MacSystemIntegrityProtectionSettingStatus,
+    d_trace_restrictions: ?MacSystemIntegrityProtectionSettingStatus = null,
 
     /// Enables or disables Filesystem Protections.
-    filesystem_protections: ?MacSystemIntegrityProtectionSettingStatus,
+    filesystem_protections: ?MacSystemIntegrityProtectionSettingStatus = null,
 
     /// Enables or disables Kext Signing.
-    kext_signing: ?MacSystemIntegrityProtectionSettingStatus,
+    kext_signing: ?MacSystemIntegrityProtectionSettingStatus = null,
 
     /// Enables or disables Nvram Protections.
-    nvram_protections: ?MacSystemIntegrityProtectionSettingStatus,
+    nvram_protections: ?MacSystemIntegrityProtectionSettingStatus = null,
 };

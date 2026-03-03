@@ -3,7 +3,7 @@
 pub const UpdateBackendAuthIdentityPoolConfig = struct {
     /// A boolean value that can be set to allow or disallow guest-level
     /// authorization into your Amplify app.
-    unauthenticated_login: ?bool,
+    unauthenticated_login: ?bool = null,
 
     pub const json_field_names = .{
         .unauthenticated_login = "UnauthenticatedLogin",

@@ -5,7 +5,7 @@ const GuardrailConverseContentQualifier = @import("guardrail_converse_content_qu
 /// [GuardrailConverseContentBlock](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_GuardrailConverseContentBlock.html).
 pub const GuardrailConverseTextBlock = struct {
     /// The qualifier details for the guardrails contextual grounding filter.
-    qualifiers: ?[]const GuardrailConverseContentQualifier,
+    qualifiers: ?[]const GuardrailConverseContentQualifier = null,
 
     /// The text that you want to guard.
     text: []const u8,

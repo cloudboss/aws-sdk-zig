@@ -1,10 +1,10 @@
 /// Information about the recommended course of action to remediate a finding.
 pub const Recommendation = struct {
     /// The recommended course of action to remediate the finding.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// The URL address to the recommendation for remediating the finding.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .text = "text",

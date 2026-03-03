@@ -3,11 +3,11 @@
 pub const DataLakeUpdateException = struct {
     /// The reason code for the exception of the last `UpdateDataLake` or
     /// `DeleteDataLake` API request.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The reason for the exception of the last `UpdateDataLake`or
     /// `DeleteDataLake` API request.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

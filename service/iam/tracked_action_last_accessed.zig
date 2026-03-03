@@ -8,9 +8,9 @@ pub const TrackedActionLastAccessed = struct {
     /// The name of the tracked action to which access was attempted. Tracked
     /// actions are
     /// actions that report activity to IAM.
-    action_name: ?[]const u8,
+    action_name: ?[]const u8 = null,
 
-    last_accessed_entity: ?[]const u8,
+    last_accessed_entity: ?[]const u8 = null,
 
     /// The Region from which the authenticated entity (user or role) last attempted
     /// to access
@@ -21,7 +21,7 @@ pub const TrackedActionLastAccessed = struct {
     /// the
     /// [tracking
     /// period](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
-    last_accessed_region: ?[]const u8,
+    last_accessed_region: ?[]const u8 = null,
 
     /// The date and time, in [ISO 8601 date-time
     /// format](http://www.iso.org/iso/iso8601), when an authenticated entity most
@@ -33,5 +33,5 @@ pub const TrackedActionLastAccessed = struct {
     /// the
     /// [tracking
     /// period](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
-    last_accessed_time: ?i64,
+    last_accessed_time: ?i64 = null,
 };

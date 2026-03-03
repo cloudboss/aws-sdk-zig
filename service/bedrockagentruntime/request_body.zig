@@ -5,7 +5,7 @@ const Parameter = @import("parameter.zig").Parameter;
 /// The parameters in the API request body.
 pub const RequestBody = struct {
     /// The content in the request body.
-    content: ?[]const aws.map.MapEntry([]const Parameter),
+    content: ?[]const aws.map.MapEntry([]const Parameter) = null,
 
     pub const json_field_names = .{
         .content = "content",

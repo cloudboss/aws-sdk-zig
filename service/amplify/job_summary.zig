@@ -14,7 +14,7 @@ pub const JobSummary = struct {
     commit_time: i64,
 
     /// The end date and time for the job.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) for the job.
     job_arn: []const u8,
@@ -40,13 +40,13 @@ pub const JobSummary = struct {
     /// that is publicly accessible and downloads a single .zip file, or an Amazon
     /// S3
     /// bucket and prefix.
-    source_url: ?[]const u8,
+    source_url: ?[]const u8 = null,
 
     /// The type of source specified by the `sourceURL`. If the value is
     /// `ZIP`, the source is a .zip file. If the value is
     /// `BUCKET_PREFIX`, the source is an Amazon S3 bucket and prefix. If
     /// no value is specified, the default is `ZIP`.
-    source_url_type: ?SourceUrlType,
+    source_url_type: ?SourceUrlType = null,
 
     /// The start date and time for the job.
     start_time: i64,

@@ -3,7 +3,7 @@ const DeviceAttribute = @import("device_attribute.zig").DeviceAttribute;
 /// Represents information about incompatibility.
 pub const IncompatibilityMessage = struct {
     /// A message about the incompatibility.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The type of incompatibility.
     ///
@@ -20,7 +20,7 @@ pub const IncompatibilityMessage = struct {
     /// * REMOTE_ACCESS_ENABLED
     ///
     /// * APPIUM_VERSION
-    @"type": ?DeviceAttribute,
+    @"type": ?DeviceAttribute = null,
 
     pub const json_field_names = .{
         .message = "message",

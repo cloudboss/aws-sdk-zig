@@ -12,8 +12,8 @@ pub const ObjectLambdaAccessPointAlias = struct {
     /// `READY`, the Object Lambda Access Point alias is successfully provisioned
     /// and ready for
     /// use.
-    status: ?ObjectLambdaAccessPointAliasStatus,
+    status: ?ObjectLambdaAccessPointAliasStatus = null,
 
     /// The alias value of the Object Lambda Access Point.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

@@ -10,39 +10,39 @@ const VersioningConfiguration = @import("versioning_configuration.zig").Versioni
 pub const Dataset = struct {
     /// The `DatasetAction` objects that automatically create the dataset
     /// contents.
-    actions: ?[]const DatasetAction,
+    actions: ?[]const DatasetAction = null,
 
     /// The ARN of the dataset.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// When dataset contents are created they are delivered to destinations
     /// specified
     /// here.
-    content_delivery_rules: ?[]const DatasetContentDeliveryRule,
+    content_delivery_rules: ?[]const DatasetContentDeliveryRule = null,
 
     /// When the dataset was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The last time the dataset was updated.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// A list of data rules that send notifications to CloudWatch, when data
     /// arrives late. To specify `lateDataRules`, the dataset must use a
     /// [DeltaTimer](https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html) filter.
-    late_data_rules: ?[]const LateDataRule,
+    late_data_rules: ?[]const LateDataRule = null,
 
     /// The name of the dataset.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Optional. How long, in days, message data is kept for the dataset.
-    retention_period: ?RetentionPeriod,
+    retention_period: ?RetentionPeriod = null,
 
     /// The status of the dataset.
-    status: ?DatasetStatus,
+    status: ?DatasetStatus = null,
 
     /// The `DatasetTrigger` objects that specify when the dataset is automatically
     /// updated.
-    triggers: ?[]const DatasetTrigger,
+    triggers: ?[]const DatasetTrigger = null,
 
     /// Optional. How many versions of dataset contents are kept. If not specified
     /// or set to null,
@@ -54,7 +54,7 @@ pub const Dataset = struct {
     /// Keeping Multiple Versions of IoT Analytics
     /// datasets](https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions) in the
     /// *IoT Analytics User Guide*.
-    versioning_configuration: ?VersioningConfiguration,
+    versioning_configuration: ?VersioningConfiguration = null,
 
     pub const json_field_names = .{
         .actions = "actions",

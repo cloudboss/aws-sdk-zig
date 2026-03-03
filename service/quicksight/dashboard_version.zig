@@ -5,37 +5,37 @@ const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 /// Dashboard version.
 pub const DashboardVersion = struct {
     /// The Amazon Resource Name (ARN) of the resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time that this dashboard version was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The Amazon Resource Numbers (ARNs) for the datasets that are associated with
     /// this
     /// version of the dashboard.
-    data_set_arns: ?[]const []const u8,
+    data_set_arns: ?[]const []const u8 = null,
 
     /// Description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Errors associated with this dashboard version.
-    errors: ?[]const DashboardError,
+    errors: ?[]const DashboardError = null,
 
     /// A list of the associated sheets with the unique identifier and name of each
     /// sheet.
-    sheets: ?[]const Sheet,
+    sheets: ?[]const Sheet = null,
 
     /// Source entity ARN.
-    source_entity_arn: ?[]const u8,
+    source_entity_arn: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: ?ResourceStatus,
+    status: ?ResourceStatus = null,
 
     /// The ARN of the theme associated with a version of the dashboard.
-    theme_arn: ?[]const u8,
+    theme_arn: ?[]const u8 = null,
 
     /// Version number for this version of the dashboard.
-    version_number: ?i64,
+    version_number: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

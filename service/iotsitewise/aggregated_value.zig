@@ -6,7 +6,7 @@ const Aggregates = @import("aggregates.zig").Aggregates;
 /// maximum).
 pub const AggregatedValue = struct {
     /// The quality of the aggregated data.
-    quality: ?Quality,
+    quality: ?Quality = null,
 
     /// The date the aggregating computations occurred, in Unix epoch time.
     timestamp: i64,

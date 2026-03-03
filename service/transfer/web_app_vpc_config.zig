@@ -4,15 +4,15 @@ pub const WebAppVpcConfig = struct {
     /// The list of security group IDs that control access to the web app endpoint.
     /// These security groups determine which sources can access the endpoint based
     /// on IP addresses and port configurations.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The list of subnet IDs within the VPC where the web app endpoint will be
     /// deployed. These subnets must be in the same VPC specified in the VpcId
     /// parameter.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     /// The identifier of the VPC where the web app endpoint will be hosted.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .security_group_ids = "SecurityGroupIds",

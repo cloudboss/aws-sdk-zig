@@ -1,10 +1,10 @@
 /// A category used to classify and filter library items for Amazon Q Apps.
 pub const Category = struct {
     /// The number of published Amazon Q Apps associated with a category
-    app_count: ?i32,
+    app_count: ?i32 = null,
 
     /// The color of the category
-    color: ?[]const u8,
+    color: ?[]const u8 = null,
 
     /// The unique identifier of the category.
     id: []const u8,

@@ -7,7 +7,7 @@ const S3Content = @import("s3_content.zig").S3Content;
 pub const DocumentContent = struct {
     /// Contains information about the content to ingest into a knowledge base
     /// connected to a custom data source.
-    custom: ?CustomContent,
+    custom: ?CustomContent = null,
 
     /// The type of data source that is connected to the knowledge base to which to
     /// ingest this document.
@@ -15,7 +15,7 @@ pub const DocumentContent = struct {
 
     /// Contains information about the content to ingest into a knowledge base
     /// connected to an Amazon S3 data source
-    s_3: ?S3Content,
+    s_3: ?S3Content = null,
 
     pub const json_field_names = .{
         .custom = "custom",

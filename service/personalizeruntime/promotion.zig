@@ -7,7 +7,7 @@ pub const Promotion = struct {
     /// filter defines the criteria for promoted items. For more information, see
     /// [Promotion
     /// filters](https://docs.aws.amazon.com/personalize/latest/dg/promoting-items.html#promotion-filters).
-    filter_arn: ?[]const u8,
+    filter_arn: ?[]const u8 = null,
 
     /// The values to use when promoting items.
     /// For each placeholder parameter in your promotion's filter expression,
@@ -26,13 +26,13 @@ pub const Promotion = struct {
     /// For more information on creating filters, see
     /// [Filtering recommendations and user
     /// segments](https://docs.aws.amazon.com/personalize/latest/dg/filter.html).
-    filter_values: ?[]const aws.map.StringMapEntry,
+    filter_values: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the promotion.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The percentage of recommended items to apply the promotion to.
-    percent_promoted_items: ?i32,
+    percent_promoted_items: ?i32 = null,
 
     pub const json_field_names = .{
         .filter_arn = "filterArn",

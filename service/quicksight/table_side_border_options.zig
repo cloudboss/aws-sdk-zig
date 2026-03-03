@@ -3,22 +3,22 @@ const TableBorderOptions = @import("table_border_options.zig").TableBorderOption
 /// The side border options for a table.
 pub const TableSideBorderOptions = struct {
     /// The table border options of the bottom border.
-    bottom: ?TableBorderOptions,
+    bottom: ?TableBorderOptions = null,
 
     /// The table border options of the inner horizontal border.
-    inner_horizontal: ?TableBorderOptions,
+    inner_horizontal: ?TableBorderOptions = null,
 
     /// The table border options of the inner vertical border.
-    inner_vertical: ?TableBorderOptions,
+    inner_vertical: ?TableBorderOptions = null,
 
     /// The table border options of the left border.
-    left: ?TableBorderOptions,
+    left: ?TableBorderOptions = null,
 
     /// The table border options of the right border.
-    right: ?TableBorderOptions,
+    right: ?TableBorderOptions = null,
 
     /// The table border options of the top border.
-    top: ?TableBorderOptions,
+    top: ?TableBorderOptions = null,
 
     pub const json_field_names = .{
         .bottom = "Bottom",

@@ -9,7 +9,7 @@ pub const AmazonCodeGuruProfilerIntegration = struct {
     /// The status of the CodeGuru Profiler integration. Specifies if DevOps Guru is
     /// enabled to
     /// consume recommendations that are generated from Amazon CodeGuru Profiler.
-    status: ?EventSourceOptInStatus,
+    status: ?EventSourceOptInStatus = null,
 
     pub const json_field_names = .{
         .status = "Status",

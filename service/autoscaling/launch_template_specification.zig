@@ -11,7 +11,7 @@ pub const LaunchTemplateSpecification = struct {
     ///
     /// Conditional: You must specify either a `LaunchTemplateId` or a
     /// `LaunchTemplateName`.
-    launch_template_id: ?[]const u8,
+    launch_template_id: ?[]const u8 = null,
 
     /// The name of the launch template. To get the template name, use the Amazon
     /// EC2
@@ -21,7 +21,7 @@ pub const LaunchTemplateSpecification = struct {
     ///
     /// Conditional: You must specify either a `LaunchTemplateId` or a
     /// `LaunchTemplateName`.
-    launch_template_name: ?[]const u8,
+    launch_template_name: ?[]const u8 = null,
 
     /// The version number, `$Latest`, or `$Default`. To get the version
     /// number, use the Amazon EC2
@@ -33,5 +33,5 @@ pub const LaunchTemplateSpecification = struct {
     /// the value is `$Default`, Amazon EC2 Auto Scaling selects the default version
     /// of the launch
     /// template when launching instances. The default value is `$Default`.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 };

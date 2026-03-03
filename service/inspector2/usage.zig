@@ -4,7 +4,7 @@ const UsageType = @import("usage_type.zig").UsageType;
 /// Contains usage information about the cost of Amazon Inspector operation.
 pub const Usage = struct {
     /// The currency type used when calculating usage data.
-    currency: ?Currency,
+    currency: ?Currency = null,
 
     /// The estimated monthly cost of Amazon Inspector.
     estimated_monthly_cost: f64 = 0,
@@ -13,7 +13,7 @@ pub const Usage = struct {
     total: f64 = 0,
 
     /// The type scan.
-    @"type": ?UsageType,
+    @"type": ?UsageType = null,
 
     pub const json_field_names = .{
         .currency = "currency",

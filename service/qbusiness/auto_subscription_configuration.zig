@@ -12,7 +12,7 @@ pub const AutoSubscriptionConfiguration = struct {
     /// application using IAM identity federation for user management. If the value
     /// for `autoSubscribe` is set to `ENABLED` you must select a value for this
     /// field.
-    default_subscription_type: ?SubscriptionType,
+    default_subscription_type: ?SubscriptionType = null,
 
     pub const json_field_names = .{
         .auto_subscribe = "autoSubscribe",

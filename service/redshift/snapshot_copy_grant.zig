@@ -14,11 +14,11 @@ pub const SnapshotCopyGrant = struct {
     /// The unique identifier of the encrypted symmetric key in Amazon Web Services
     /// KMS to which
     /// Amazon Redshift is granted permission.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The name of the snapshot copy grant.
-    snapshot_copy_grant_name: ?[]const u8,
+    snapshot_copy_grant_name: ?[]const u8 = null,
 
     /// A list of tag instances.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

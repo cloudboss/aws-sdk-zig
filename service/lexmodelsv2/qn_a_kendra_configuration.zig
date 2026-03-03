@@ -16,7 +16,7 @@ pub const QnAKendraConfiguration = struct {
     /// information on the Amazon Kendra search filter JSON format, see [Using
     /// document attributes to filter search
     /// results](https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering).
-    query_filter_string: ?[]const u8,
+    query_filter_string: ?[]const u8 = null,
 
     /// Specifies whether to enable an Amazon Kendra filter string or not.
     query_filter_string_enabled: bool = false,

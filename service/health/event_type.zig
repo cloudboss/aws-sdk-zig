@@ -27,27 +27,27 @@ pub const EventType = struct {
     /// is needed to determine if action is required.
     /// Events with `INFORMATIONAL` actionability are provided for awareness and do
     /// not require immediate action.
-    actionability: ?EventTypeActionability,
+    actionability: ?EventTypeActionability = null,
 
     /// A list of event type category codes. Possible values are
     /// `issue`, `accountNotification`, or `scheduledChange`. Currently,
     /// the `investigation` value isn't supported at this time.
-    category: ?eventTypeCategory,
+    category: ?eventTypeCategory = null,
 
     /// The unique identifier for the event type. The format is
     /// `AWS_*SERVICE*_*DESCRIPTION*
     /// `; for example, `AWS_EC2_SYSTEM_MAINTENANCE_EVENT`.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// A list of persona classifications that indicate the target audience for the
     /// event. Possible values are `OPERATIONS`, `SECURITY`, and `BILLING`. Events
     /// can be associated with multiple personas to indicate relevance to different
     /// teams or roles within an organization.
-    personas: ?[]const EventTypePersona,
+    personas: ?[]const EventTypePersona = null,
 
     /// The Amazon Web Services service that is affected by the event. For example,
     /// `EC2`, `RDS`.
-    service: ?[]const u8,
+    service: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .actionability = "actionability",

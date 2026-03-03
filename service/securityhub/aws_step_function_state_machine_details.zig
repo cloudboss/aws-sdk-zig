@@ -8,29 +8,29 @@ pub const AwsStepFunctionStateMachineDetails = struct {
     /// A user-defined or an auto-generated string that identifies a `Map` state.
     /// This parameter is present only if
     /// the `stateMachineArn` specified in input is a qualified state machine ARN.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// Used to set CloudWatch Logs options.
-    logging_configuration: ?AwsStepFunctionStateMachineLoggingConfigurationDetails,
+    logging_configuration: ?AwsStepFunctionStateMachineLoggingConfigurationDetails = null,
 
     /// The name of the state machine.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role used when creating this state
     /// machine.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The ARN that identifies the state machine.
-    state_machine_arn: ?[]const u8,
+    state_machine_arn: ?[]const u8 = null,
 
     /// The current status of the state machine.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// Specifies whether X-Ray tracing is enabled.
-    tracing_configuration: ?AwsStepFunctionStateMachineTracingConfigurationDetails,
+    tracing_configuration: ?AwsStepFunctionStateMachineTracingConfigurationDetails = null,
 
     /// The type of the state machine (STANDARD or EXPRESS).
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .label = "Label",

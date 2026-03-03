@@ -45,7 +45,7 @@ pub const StepAdjustment = struct {
     /// exclusive (the metric must be greater than the threshold plus the lower
     /// bound). A null
     /// value indicates negative infinity.
-    metric_interval_lower_bound: ?f64,
+    metric_interval_lower_bound: ?f64 = null,
 
     /// The upper bound for the difference between the alarm threshold and the
     /// CloudWatch metric. If
@@ -58,7 +58,7 @@ pub const StepAdjustment = struct {
     /// indicates positive infinity.
     ///
     /// The upper bound must be greater than the lower bound.
-    metric_interval_upper_bound: ?f64,
+    metric_interval_upper_bound: ?f64 = null,
 
     /// The amount by which to scale, based on the specified adjustment type. A
     /// positive value

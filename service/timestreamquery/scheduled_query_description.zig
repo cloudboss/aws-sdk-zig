@@ -11,46 +11,46 @@ pub const ScheduledQueryDescription = struct {
     arn: []const u8,
 
     /// Creation time of the scheduled query.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Error-reporting configuration for the scheduled query.
-    error_report_configuration: ?ErrorReportConfiguration,
+    error_report_configuration: ?ErrorReportConfiguration = null,
 
     /// A customer provided KMS key used to encrypt the scheduled query resource.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Runtime summary for the last scheduled query run.
-    last_run_summary: ?ScheduledQueryRunSummary,
+    last_run_summary: ?ScheduledQueryRunSummary = null,
 
     /// Name of the scheduled query.
     name: []const u8,
 
     /// The next time the scheduled query is scheduled to run.
-    next_invocation_time: ?i64,
+    next_invocation_time: ?i64 = null,
 
     /// Notification configuration.
     notification_configuration: NotificationConfiguration,
 
     /// Last time the query was run.
-    previous_invocation_time: ?i64,
+    previous_invocation_time: ?i64 = null,
 
     /// The query to be run.
     query_string: []const u8,
 
     /// Runtime summary for the last five failed scheduled query runs.
-    recently_failed_runs: ?[]const ScheduledQueryRunSummary,
+    recently_failed_runs: ?[]const ScheduledQueryRunSummary = null,
 
     /// Schedule configuration.
     schedule_configuration: ScheduleConfiguration,
 
     /// IAM role that Timestream uses to run the schedule query.
-    scheduled_query_execution_role_arn: ?[]const u8,
+    scheduled_query_execution_role_arn: ?[]const u8 = null,
 
     /// State of the scheduled query.
     state: ScheduledQueryState,
 
     /// Scheduled query target store configuration.
-    target_configuration: ?TargetConfiguration,
+    target_configuration: ?TargetConfiguration = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

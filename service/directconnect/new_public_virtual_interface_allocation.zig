@@ -6,10 +6,10 @@ const Tag = @import("tag.zig").Tag;
 /// connection.
 pub const NewPublicVirtualInterfaceAllocation = struct {
     /// The address family for the BGP peer.
-    address_family: ?AddressFamily,
+    address_family: ?AddressFamily = null,
 
     /// The IP address assigned to the Amazon interface.
-    amazon_address: ?[]const u8,
+    amazon_address: ?[]const u8 = null,
 
     /// The autonomous system number (ASN). The valid range is from 1 to 2147483646
     /// for Border Gateway Protocol (BGP) configuration. If you provide a number
@@ -40,21 +40,21 @@ pub const NewPublicVirtualInterfaceAllocation = struct {
     /// * If you provide a value in the same API call for both `asn`
     /// and `asnLong`, the API will only accept the value for
     /// `asnLong`.
-    asn_long: ?i64,
+    asn_long: ?i64 = null,
 
     /// The authentication key for BGP configuration. This string has a minimum
     /// length of 6 characters and and a maximun lenth of 80 characters.
-    auth_key: ?[]const u8,
+    auth_key: ?[]const u8 = null,
 
     /// The IP address assigned to the customer interface.
-    customer_address: ?[]const u8,
+    customer_address: ?[]const u8 = null,
 
     /// The routes to be advertised to the Amazon Web Services network in this
     /// Region. Applies to public virtual interfaces.
-    route_filter_prefixes: ?[]const RouteFilterPrefix,
+    route_filter_prefixes: ?[]const RouteFilterPrefix = null,
 
     /// The tags associated with the public virtual interface.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The name of the virtual interface assigned by the customer network. The name
     /// has a maximum of 100 characters. The following are valid characters: a-z,

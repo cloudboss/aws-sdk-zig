@@ -7,10 +7,10 @@ const ParameterConfiguration = @import("parameter_configuration.zig").ParameterC
 pub const SecurityControlCustomParameter = struct {
     /// An object that specifies parameter values for a control in a configuration
     /// policy.
-    parameters: ?[]const aws.map.MapEntry(ParameterConfiguration),
+    parameters: ?[]const aws.map.MapEntry(ParameterConfiguration) = null,
 
     /// The ID of the security control.
-    security_control_id: ?[]const u8,
+    security_control_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .parameters = "Parameters",

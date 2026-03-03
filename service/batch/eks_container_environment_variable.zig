@@ -4,7 +4,7 @@ pub const EksContainerEnvironmentVariable = struct {
     name: []const u8,
 
     /// The value of the environment variable.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

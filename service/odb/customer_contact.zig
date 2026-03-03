@@ -2,7 +2,7 @@
 /// a specific Exadata infrastructure.
 pub const CustomerContact = struct {
     /// The email address of the contact.
-    email: ?[]const u8,
+    email: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .email = "email",

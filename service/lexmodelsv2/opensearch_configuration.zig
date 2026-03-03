@@ -11,11 +11,11 @@ pub const OpensearchConfiguration = struct {
     exact_response: bool = false,
 
     /// Contains the names of the fields used for an exact response to the user.
-    exact_response_fields: ?ExactResponseFields,
+    exact_response_fields: ?ExactResponseFields = null,
 
     /// Contains a list of fields from the Amazon OpenSearch Service that the model
     /// can use to generate the answer to the query.
-    include_fields: ?[]const []const u8,
+    include_fields: ?[]const []const u8 = null,
 
     /// The name of the Amazon OpenSearch Service index.
     index_name: []const u8,

@@ -23,13 +23,13 @@ pub const LaunchTemplateSpecificationOverride = struct {
     ///
     /// **Note:** If you specify the `launchTemplateId` you can't specify the
     /// `launchTemplateName` as well.
-    launch_template_id: ?[]const u8,
+    launch_template_id: ?[]const u8 = null,
 
     /// The name of the launch template.
     ///
     /// **Note:** If you specify the `launchTemplateName` you can't specify the
     /// `launchTemplateId` as well.
-    launch_template_name: ?[]const u8,
+    launch_template_name: ?[]const u8 = null,
 
     /// The instance type or family that this override launch template should be
     /// applied to.
@@ -53,7 +53,7 @@ pub const LaunchTemplateSpecificationOverride = struct {
     ///   environment. For example, you can't define one launch template override to
     ///   target an instance family and another define an instance type within this
     ///   same family.
-    target_instance_types: ?[]const []const u8,
+    target_instance_types: ?[]const []const u8 = null,
 
     /// The EKS node initialization process to use. You only need to specify this
     /// value if you are
@@ -61,7 +61,7 @@ pub const LaunchTemplateSpecificationOverride = struct {
     /// *imageType* is a custom AMI based on EKS_AL2023 or EKS_AL2023_NVIDIA then
     /// you
     /// must choose `EKS_NODEADM`.
-    userdata_type: ?UserdataType,
+    userdata_type: ?UserdataType = null,
 
     /// The version number of the launch template,
     /// `$Default`, or `$Latest`.
@@ -89,7 +89,7 @@ pub const LaunchTemplateSpecificationOverride = struct {
     /// Default: `$Default`
     ///
     /// Latest: `$Latest`
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .launch_template_id = "launchTemplateId",

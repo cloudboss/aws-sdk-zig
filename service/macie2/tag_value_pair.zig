@@ -5,12 +5,12 @@
 /// tag-based conditions.
 pub const TagValuePair = struct {
     /// The value for the tag key to use in the condition.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The tag value, associated with the specified tag key (key), to use in the
     /// condition. To specify only a tag key for a condition, specify the tag key
     /// for the key property and set this value to an empty string.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "key",

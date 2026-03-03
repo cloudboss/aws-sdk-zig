@@ -12,10 +12,10 @@ pub const StageDeclaration = struct {
     /// The method to use when a stage allows entry. For example, configuring this
     /// field for
     /// conditions will allow entry to the stage when the conditions are met.
-    before_entry: ?BeforeEntryConditions,
+    before_entry: ?BeforeEntryConditions = null,
 
     /// Reserved for future use.
-    blockers: ?[]const BlockerDeclaration,
+    blockers: ?[]const BlockerDeclaration = null,
 
     /// The name of the stage.
     name: []const u8,
@@ -24,12 +24,12 @@ pub const StageDeclaration = struct {
     /// configuring this field for rollback will roll back a failed stage
     /// automatically to the
     /// last successful pipeline execution in the stage.
-    on_failure: ?FailureConditions,
+    on_failure: ?FailureConditions = null,
 
     /// The method to use when a stage has succeeded. For example, configuring this
     /// field for
     /// conditions will allow the stage to succeed when the conditions are met.
-    on_success: ?SuccessConditions,
+    on_success: ?SuccessConditions = null,
 
     pub const json_field_names = .{
         .actions = "actions",

@@ -5,7 +5,7 @@ const ScteInSegments = @import("scte_in_segments.zig").ScteInSegments;
 pub const Scte = struct {
     /// The SCTE-35 message types that you want to be treated as ad markers in the
     /// output.
-    scte_filter: ?[]const ScteFilter,
+    scte_filter: ?[]const ScteFilter = null,
 
     /// Controls whether SCTE-35 messages are included in segment files.
     ///
@@ -15,7 +15,7 @@ pub const Scte = struct {
     /// For DASH manifests, when set to `All`, an `InbandEventStream` tag signals
     /// that SCTE messages are present in segments. This setting works independently
     /// of manifest ad markers.
-    scte_in_segments: ?ScteInSegments,
+    scte_in_segments: ?ScteInSegments = null,
 
     pub const json_field_names = .{
         .scte_filter = "ScteFilter",

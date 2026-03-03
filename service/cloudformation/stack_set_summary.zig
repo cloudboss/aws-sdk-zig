@@ -10,12 +10,12 @@ pub const StackSetSummary = struct {
     /// [Service-managed permissions] Describes whether StackSets automatically
     /// deploys to Organizations accounts that are added to a target organizational
     /// unit (OU).
-    auto_deployment: ?AutoDeployment,
+    auto_deployment: ?AutoDeployment = null,
 
     /// A description of the StackSet that you specify when the StackSet is created
     /// or
     /// updated.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Status of the StackSet's actual configuration compared to its expected
     /// template and
@@ -35,19 +35,19 @@ pub const StackSetSummary = struct {
     /// template and parameter configuration.
     ///
     /// * `UNKNOWN`: This value is reserved for future use.
-    drift_status: ?StackDriftStatus,
+    drift_status: ?StackDriftStatus = null,
 
     /// Most recent time when CloudFormation performed a drift detection operation
     /// on the StackSet. This
     /// value will be `NULL` for any StackSet that drift detection hasn't yet been
     /// performed
     /// on.
-    last_drift_check_timestamp: ?i64,
+    last_drift_check_timestamp: ?i64 = null,
 
     /// Describes whether StackSets performs non-conflicting operations concurrently
     /// and queues
     /// conflicting operations.
-    managed_execution: ?ManagedExecution,
+    managed_execution: ?ManagedExecution = null,
 
     /// Describes how the IAM roles required for StackSet operations are created.
     ///
@@ -64,14 +64,14 @@ pub const StackSetSummary = struct {
     /// see [Activate
     /// trusted access for StackSets with
     /// Organizations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html).
-    permission_model: ?PermissionModels,
+    permission_model: ?PermissionModels = null,
 
     /// The ID of the StackSet.
-    stack_set_id: ?[]const u8,
+    stack_set_id: ?[]const u8 = null,
 
     /// The name of the StackSet.
-    stack_set_name: ?[]const u8,
+    stack_set_name: ?[]const u8 = null,
 
     /// The status of the StackSet.
-    status: ?StackSetStatus,
+    status: ?StackSetStatus = null,
 };

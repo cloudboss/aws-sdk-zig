@@ -9,7 +9,7 @@ pub const SmallMultiplesOptions = struct {
     ///
     /// The default is `Auto`, which automatically adjusts the columns in the grid
     /// to fit the overall layout and size of the given chart.
-    max_visible_columns: ?i64,
+    max_visible_columns: ?i64 = null,
 
     /// Sets the maximum number of visible rows to display in the grid of small
     /// multiples panels.
@@ -17,16 +17,16 @@ pub const SmallMultiplesOptions = struct {
     /// The default value is `Auto`,
     /// which automatically adjusts the rows in the grid
     /// to fit the overall layout and size of the given chart.
-    max_visible_rows: ?i64,
+    max_visible_rows: ?i64 = null,
 
     /// Configures the display options for each small multiples panel.
-    panel_configuration: ?PanelConfiguration,
+    panel_configuration: ?PanelConfiguration = null,
 
     /// The properties of a small multiples X axis.
-    x_axis: ?SmallMultiplesAxisProperties,
+    x_axis: ?SmallMultiplesAxisProperties = null,
 
     /// The properties of a small multiples Y axis.
-    y_axis: ?SmallMultiplesAxisProperties,
+    y_axis: ?SmallMultiplesAxisProperties = null,
 
     pub const json_field_names = .{
         .max_visible_columns = "MaxVisibleColumns",

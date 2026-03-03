@@ -15,28 +15,28 @@ pub const SavingsPlansPurchaseRecommendation = struct {
     /// accounts if
     /// the value is set to `PAYER`. If the value is `LINKED`,
     /// recommendations are calculated for individual member accounts only.
-    account_scope: ?AccountScope,
+    account_scope: ?AccountScope = null,
 
     /// The lookback period in days that's used to generate the recommendation.
-    lookback_period_in_days: ?LookbackPeriodInDays,
+    lookback_period_in_days: ?LookbackPeriodInDays = null,
 
     /// The payment option that's used to generate the recommendation.
-    payment_option: ?PaymentOption,
+    payment_option: ?PaymentOption = null,
 
     /// Details for the Savings Plans that we recommend that you purchase to cover
     /// existing
     /// Savings Plans eligible workloads.
-    savings_plans_purchase_recommendation_details: ?[]const SavingsPlansPurchaseRecommendationDetail,
+    savings_plans_purchase_recommendation_details: ?[]const SavingsPlansPurchaseRecommendationDetail = null,
 
     /// Summary metrics for your Savings Plans Recommendations.
-    savings_plans_purchase_recommendation_summary: ?SavingsPlansPurchaseRecommendationSummary,
+    savings_plans_purchase_recommendation_summary: ?SavingsPlansPurchaseRecommendationSummary = null,
 
     /// The requested Savings Plans recommendation type.
-    savings_plans_type: ?SupportedSavingsPlansType,
+    savings_plans_type: ?SupportedSavingsPlansType = null,
 
     /// The Savings Plans recommendation term in years. It's used to generate the
     /// recommendation.
-    term_in_years: ?TermInYears,
+    term_in_years: ?TermInYears = null,
 
     pub const json_field_names = .{
         .account_scope = "AccountScope",

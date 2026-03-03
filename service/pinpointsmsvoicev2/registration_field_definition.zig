@@ -24,10 +24,10 @@ pub const RegistrationFieldDefinition = struct {
     section_path: []const u8,
 
     /// The validation rules for a select field.
-    select_validation: ?SelectValidation,
+    select_validation: ?SelectValidation = null,
 
     /// The validation rules for a text field.
-    text_validation: ?TextValidation,
+    text_validation: ?TextValidation = null,
 
     pub const json_field_names = .{
         .display_hints = "DisplayHints",

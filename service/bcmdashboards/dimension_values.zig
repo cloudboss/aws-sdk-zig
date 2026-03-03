@@ -10,7 +10,7 @@ pub const DimensionValues = struct {
 
     /// The match options for dimension values, such as `EQUALS`, `CONTAINS`,
     /// `STARTS_WITH`, or `ENDS_WITH`.
-    match_options: ?[]const MatchOption,
+    match_options: ?[]const MatchOption = null,
 
     /// The values to match for the specified dimension key.
     values: []const []const u8,

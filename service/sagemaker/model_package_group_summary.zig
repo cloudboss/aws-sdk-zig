@@ -9,7 +9,7 @@ pub const ModelPackageGroupSummary = struct {
     model_package_group_arn: []const u8,
 
     /// A description of the model group.
-    model_package_group_description: ?[]const u8,
+    model_package_group_description: ?[]const u8 = null,
 
     /// The name of the model group.
     model_package_group_name: []const u8,

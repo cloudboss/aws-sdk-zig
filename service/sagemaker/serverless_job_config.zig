@@ -12,27 +12,27 @@ pub const ServerlessJobConfig = struct {
     /// acceptable for your use case before downloading or using a model. For more
     /// information, see [End-user license
     /// agreements](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula) section for more details on accepting the EULA.
-    accept_eula: ?bool,
+    accept_eula: ?bool = null,
 
     /// The base model Amazon Resource Name (ARN) in [SageMaker Public
     /// Hub](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-use.html). SageMaker always selects the latest version of the provided model.
     base_model_arn: []const u8,
 
     /// The model customization technique.
-    customization_technique: ?CustomizationTechnique,
+    customization_technique: ?CustomizationTechnique = null,
 
     /// The evaluation job type. Required when serverless job type is `Evaluation`.
-    evaluation_type: ?EvaluationType,
+    evaluation_type: ?EvaluationType = null,
 
     /// The evaluator Amazon Resource Name (ARN) used as reward function or reward
     /// prompt.
-    evaluator_arn: ?[]const u8,
+    evaluator_arn: ?[]const u8 = null,
 
     /// The serverless training job type.
     job_type: ServerlessJobType,
 
     /// The parameter-efficient fine-tuning configuration.
-    peft: ?Peft,
+    peft: ?Peft = null,
 
     pub const json_field_names = .{
         .accept_eula = "AcceptEula",

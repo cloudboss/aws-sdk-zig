@@ -68,15 +68,15 @@ pub const ByoipCidr = struct {
     /// [Bring your own IP addresses
     /// (BYOIP)](https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
     /// the Global Accelerator Developer Guide.
-    cidr: ?[]const u8,
+    cidr: ?[]const u8 = null,
 
     /// A history of status changes for an IP address range that you bring to Global
     /// Accelerator
     /// through bring your own IP address (BYOIP).
-    events: ?[]const ByoipCidrEvent,
+    events: ?[]const ByoipCidrEvent = null,
 
     /// The state of the address pool.
-    state: ?ByoipCidrState,
+    state: ?ByoipCidrState = null,
 
     pub const json_field_names = .{
         .cidr = "Cidr",

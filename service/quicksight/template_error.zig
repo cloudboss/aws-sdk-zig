@@ -4,13 +4,13 @@ const Entity = @import("entity.zig").Entity;
 /// List of errors that occurred when the template version creation failed.
 pub const TemplateError = struct {
     /// Description of the error type.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Type of error.
-    @"type": ?TemplateErrorType,
+    @"type": ?TemplateErrorType = null,
 
     /// An error path that shows which entities caused the template error.
-    violated_entities: ?[]const Entity,
+    violated_entities: ?[]const Entity = null,
 
     pub const json_field_names = .{
         .message = "Message",

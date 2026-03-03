@@ -7,18 +7,18 @@ pub const GetObjectAttributesParts = struct {
     /// that the list was truncated. A list can be truncated if the number of parts
     /// exceeds the limit returned
     /// in the `MaxParts` element.
-    is_truncated: ?bool,
+    is_truncated: ?bool = null,
 
     /// The maximum number of parts allowed in the response.
-    max_parts: ?i32,
+    max_parts: ?i32 = null,
 
     /// When a list is truncated, this element specifies the last part in the list,
     /// as well as the value to
     /// use for the `PartNumberMarker` request parameter in a subsequent request.
-    next_part_number_marker: ?[]const u8,
+    next_part_number_marker: ?[]const u8 = null,
 
     /// The marker for the current part.
-    part_number_marker: ?[]const u8,
+    part_number_marker: ?[]const u8 = null,
 
     /// A container for elements related to a particular part. A response can
     /// contain zero or more
@@ -35,8 +35,8 @@ pub const GetObjectAttributesParts = struct {
     /// `GetObjectAttributes`, regardless of whether an additional checksum is
     /// applied to the
     /// object specified in the request, the response returns the `Part` element.
-    parts: ?[]const ObjectPart,
+    parts: ?[]const ObjectPart = null,
 
     /// The total number of parts.
-    total_parts_count: ?i32,
+    total_parts_count: ?i32 = null,
 };

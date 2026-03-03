@@ -6,25 +6,25 @@ const ArgoCdRoleMapping = @import("argo_cd_role_mapping.zig").ArgoCdRoleMapping;
 /// server URL that you use to access the Argo CD web interface and API.
 pub const ArgoCdConfigResponse = struct {
     /// The IAM Identity CenterIAM; Identity Center integration configuration.
-    aws_idc: ?ArgoCdAwsIdcConfigResponse,
+    aws_idc: ?ArgoCdAwsIdcConfigResponse = null,
 
     /// The Kubernetes namespace where Argo CD resources are monitored by your Argo
     /// CD Capability.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The network access configuration for the Argo CD capability's managed API
     /// server endpoint. If VPC endpoint IDs are specified, public access is blocked
     /// and the Argo CD server is only accessible through the specified VPC
     /// endpoints.
-    network_access: ?ArgoCdNetworkAccessConfigResponse,
+    network_access: ?ArgoCdNetworkAccessConfigResponse = null,
 
     /// The list of role mappings that define which IAM Identity CenterIAM; Identity
     /// Center users or groups have which Argo CD roles.
-    rbac_role_mappings: ?[]const ArgoCdRoleMapping,
+    rbac_role_mappings: ?[]const ArgoCdRoleMapping = null,
 
     /// The URL of the Argo CD server. Use this URL to access the Argo CD web
     /// interface and API.
-    server_url: ?[]const u8,
+    server_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_idc = "awsIdc",

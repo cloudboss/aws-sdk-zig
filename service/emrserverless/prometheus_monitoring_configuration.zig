@@ -3,7 +3,7 @@
 pub const PrometheusMonitoringConfiguration = struct {
     /// The remote write URL in the Amazon Managed Service for Prometheus workspace
     /// to send metrics to.
-    remote_write_url: ?[]const u8,
+    remote_write_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .remote_write_url = "remoteWriteUrl",

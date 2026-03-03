@@ -3,13 +3,13 @@ const Tag = @import("tag.zig").Tag;
 pub const DescribeTagsResponse = struct {
     /// If the request included a `Marker`, the response returns that value in this
     /// field.
-    marker: ?[]const u8,
+    marker: ?[]const u8 = null,
 
     /// If a value is present, there are more tags to return. In a subsequent
     /// request, you can
     /// provide the value of `NextMarker` as the value of the `Marker` parameter
     /// in your next request to retrieve the next set of tags.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// Returns tags associated with the file system as an array of `Tag` objects.
     tags: []const Tag,

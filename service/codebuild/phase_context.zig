@@ -5,10 +5,10 @@ pub const PhaseContext = struct {
     /// An explanation of the build phase's context. This might include a command ID
     /// and an
     /// exit code.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status code for the context of the build phase.
-    status_code: ?[]const u8,
+    status_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .message = "message",

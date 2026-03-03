@@ -3,13 +3,13 @@ const Identity = @import("identity.zig").Identity;
 /// The name and ARN of the admin for the `AppInstance`.
 pub const AppInstanceAdmin = struct {
     /// The `AppInstanceAdmin` data.
-    admin: ?Identity,
+    admin: ?Identity = null,
 
     /// The ARN of the `AppInstance` for which the user is an administrator.
-    app_instance_arn: ?[]const u8,
+    app_instance_arn: ?[]const u8 = null,
 
     /// The time at which an administrator was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .admin = "Admin",

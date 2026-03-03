@@ -9,11 +9,11 @@ pub const ServerSideEncryptionUpdateDetails = struct {
     /// Message explaining the current UpdateStatus. When the UpdateStatus is
     /// FAILED, this
     /// message explains the cause of the failure.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The previous KMS key ID the domain was encrypted with, before
     /// ServerSideEncryptionConfiguration was updated to a new KMS key ID.
-    old_kms_key_id: ?[]const u8,
+    old_kms_key_id: ?[]const u8 = null,
 
     /// Status of the server-side encryption update. During an update, if there is
     /// an issue
@@ -23,7 +23,7 @@ pub const ServerSideEncryptionUpdateDetails = struct {
     /// made accessible, and then an UpdateDomain call with the existing server-side
     /// encryption
     /// configuration will re-attempt this update process.
-    update_status: ?ServerSideEncryptionUpdateStatus,
+    update_status: ?ServerSideEncryptionUpdateStatus = null,
 
     pub const json_field_names = .{
         .message = "Message",

@@ -8,7 +8,7 @@ pub const AppSyncParameters = struct {
     ///
     /// For more information, see
     /// [Operations](https://docs.aws.amazon.com/appsync/latest/devguide/graphql-architecture.html#graphql-operations) in the *AppSync User Guide*.
-    graph_ql_operation: ?[]const u8,
+    graph_ql_operation: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .graph_ql_operation = "GraphQLOperation",

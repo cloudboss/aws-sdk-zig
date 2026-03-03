@@ -5,7 +5,7 @@ const AudioTrack = @import("audio_track.zig").AudioTrack;
 pub const AudioTrackSelection = struct {
     /// Configure decoding options for Dolby E streams - these should be Dolby E
     /// frames carried in PCM streams tagged with SMPTE-337
-    dolby_e_decode: ?AudioDolbyEDecode,
+    dolby_e_decode: ?AudioDolbyEDecode = null,
 
     /// Selects one or more unique audio tracks from within a source.
     tracks: []const AudioTrack,

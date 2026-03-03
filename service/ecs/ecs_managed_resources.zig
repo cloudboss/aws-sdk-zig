@@ -9,19 +9,19 @@ const ManagedSecurityGroup = @import("managed_security_group.zig").ManagedSecuri
 /// paths, auto-scaling policies, metric alarms, and security groups.
 pub const ECSManagedResources = struct {
     /// The auto-scaling configuration and policies for the Express service.
-    auto_scaling: ?ManagedAutoScaling,
+    auto_scaling: ?ManagedAutoScaling = null,
 
     /// The ingress paths and endpoints for the Express service.
-    ingress_paths: ?[]const ManagedIngressPath,
+    ingress_paths: ?[]const ManagedIngressPath = null,
 
     /// The log groups managed by the Express service.
-    log_groups: ?[]const ManagedLogGroup,
+    log_groups: ?[]const ManagedLogGroup = null,
 
     /// The CloudWatch metric alarms associated with the Express service.
-    metric_alarms: ?[]const ManagedMetricAlarm,
+    metric_alarms: ?[]const ManagedMetricAlarm = null,
 
     /// The security groups managed by the Express service.
-    service_security_groups: ?[]const ManagedSecurityGroup,
+    service_security_groups: ?[]const ManagedSecurityGroup = null,
 
     pub const json_field_names = .{
         .auto_scaling = "autoScaling",

@@ -7,17 +7,17 @@ const DataDestination = @import("data_destination.zig").DataDestination;
 /// `ForecastExportJobArn`.
 pub const ForecastExportJobSummary = struct {
     /// When the forecast export job was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The path to the Amazon Simple Storage Service (Amazon S3) bucket where the
     /// forecast is exported.
-    destination: ?DataDestination,
+    destination: ?DataDestination = null,
 
     /// The Amazon Resource Name (ARN) of the forecast export job.
-    forecast_export_job_arn: ?[]const u8,
+    forecast_export_job_arn: ?[]const u8 = null,
 
     /// The name of the forecast export job.
-    forecast_export_job_name: ?[]const u8,
+    forecast_export_job_name: ?[]const u8 = null,
 
     /// The last time the resource was modified. The timestamp depends on the status
     /// of the job:
@@ -32,10 +32,10 @@ pub const ForecastExportJobSummary = struct {
     ///
     /// * `ACTIVE` or `CREATE_FAILED` - When the job finished or
     /// failed.
-    last_modification_time: ?i64,
+    last_modification_time: ?i64 = null,
 
     /// If an error occurred, an informational message about the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status of the forecast export job. States include:
     ///
@@ -51,7 +51,7 @@ pub const ForecastExportJobSummary = struct {
     ///
     /// The `Status` of the forecast export job must be `ACTIVE` before
     /// you can access the forecast in your S3 bucket.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

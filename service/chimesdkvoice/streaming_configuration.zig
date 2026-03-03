@@ -14,10 +14,10 @@ pub const StreamingConfiguration = struct {
     disabled: bool,
 
     /// The call analytics configuration.
-    media_insights_configuration: ?MediaInsightsConfiguration,
+    media_insights_configuration: ?MediaInsightsConfiguration = null,
 
     /// The streaming notification targets.
-    streaming_notification_targets: ?[]const StreamingNotificationTarget,
+    streaming_notification_targets: ?[]const StreamingNotificationTarget = null,
 
     pub const json_field_names = .{
         .data_retention_in_hours = "DataRetentionInHours",

@@ -1,30 +1,30 @@
 /// Provides information about the logging status of the cluster.
 pub const AwsRedshiftClusterLoggingStatus = struct {
     /// The name of the S3 bucket where the log files are stored.
-    bucket_name: ?[]const u8,
+    bucket_name: ?[]const u8 = null,
 
     /// The message indicating that the logs failed to be delivered.
-    last_failure_message: ?[]const u8,
+    last_failure_message: ?[]const u8 = null,
 
     /// The last time when logs failed to be delivered.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    last_failure_time: ?[]const u8,
+    last_failure_time: ?[]const u8 = null,
 
     /// The last time that logs were delivered successfully.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    last_successful_delivery_time: ?[]const u8,
+    last_successful_delivery_time: ?[]const u8 = null,
 
     /// Indicates whether logging is enabled.
-    logging_enabled: ?bool,
+    logging_enabled: ?bool = null,
 
     /// Provides the prefix applied to the log file names.
-    s3_key_prefix: ?[]const u8,
+    s3_key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_name = "BucketName",

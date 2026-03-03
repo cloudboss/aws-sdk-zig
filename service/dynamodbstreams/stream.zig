@@ -1,7 +1,7 @@
 /// Represents all of the data describing a particular stream.
 pub const Stream = struct {
     /// The Amazon Resource Name (ARN) for the stream.
-    stream_arn: ?[]const u8,
+    stream_arn: ?[]const u8 = null,
 
     /// A timestamp, in ISO 8601 format, for this stream.
     ///
@@ -16,10 +16,10 @@ pub const Stream = struct {
     /// * the table name
     ///
     /// * the `StreamLabel`
-    stream_label: ?[]const u8,
+    stream_label: ?[]const u8 = null,
 
     /// The DynamoDB table with which the stream is associated.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .stream_arn = "StreamArn",

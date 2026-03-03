@@ -3,13 +3,13 @@
 /// trend being collected. For more information, see .
 pub const ReportGroupTrendStats = struct {
     /// Contains the average of all values analyzed.
-    average: ?[]const u8,
+    average: ?[]const u8 = null,
 
     /// Contains the maximum value analyzed.
-    max: ?[]const u8,
+    max: ?[]const u8 = null,
 
     /// Contains the minimum value analyzed.
-    min: ?[]const u8,
+    min: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .average = "average",

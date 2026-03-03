@@ -6,31 +6,31 @@ const Tag = @import("tag.zig").Tag;
 /// associated with the GuardDuty finding.
 pub const ResourceV2 = struct {
     /// The Amazon Web Services account ID to which the resource belongs.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The cloud partition within the Amazon Web Services Region to which the
     /// resource belongs.
-    cloud_partition: ?[]const u8,
+    cloud_partition: ?[]const u8 = null,
 
     /// Contains information about the Amazon Web Services resource associated with
     /// the activity that prompted
     /// GuardDuty to generate a finding.
-    data: ?ResourceData,
+    data: ?ResourceData = null,
 
     /// The name of the resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the resource belongs.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The type of the Amazon Web Services resource.
     resource_type: FindingResourceType,
 
     /// The Amazon Web Services service of the resource.
-    service: ?[]const u8,
+    service: ?[]const u8 = null,
 
     /// Contains information about the tags associated with the resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The unique identifier of the resource.
     uid: []const u8,

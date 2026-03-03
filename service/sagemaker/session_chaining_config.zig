@@ -8,7 +8,7 @@ pub const SessionChainingConfig = struct {
     /// Set to `True` to allow SageMaker to extract session tags from a training job
     /// creation role and reuse these tags when assuming the training job execution
     /// role.
-    enable_session_tag_chaining: ?bool,
+    enable_session_tag_chaining: ?bool = null,
 
     pub const json_field_names = .{
         .enable_session_tag_chaining = "EnableSessionTagChaining",

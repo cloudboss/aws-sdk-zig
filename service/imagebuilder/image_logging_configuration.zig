@@ -5,7 +5,7 @@ pub const ImageLoggingConfiguration = struct {
     /// The log group name that Image Builder uses for image creation. If not
     /// specified, the log group
     /// name defaults to `/aws/imagebuilder/image-name`.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .log_group_name = "logGroupName",

@@ -7,10 +7,10 @@ const SessionState = @import("session_state.zig").SessionState;
 pub const Session = struct {
     /// The authentication method. The user is authenticated using a streaming URL
     /// (`API`) or SAML 2.0 federation (`SAML`).
-    authentication_type: ?AuthenticationType,
+    authentication_type: ?AuthenticationType = null,
 
     /// Specifies whether a user is connected to the streaming session.
-    connection_state: ?SessionConnectionState,
+    connection_state: ?SessionConnectionState = null,
 
     /// The name of the fleet for the streaming session.
     fleet_name: []const u8,
@@ -19,7 +19,7 @@ pub const Session = struct {
     id: []const u8,
 
     /// The identifier for the instance hosting the session.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The time when the streaming session is set to expire. This time is based on
     /// the `MaxUserDurationinSeconds` value, which determines the maximum length of
@@ -29,16 +29,16 @@ pub const Session = struct {
     /// session. If the `DisconnectTimeOutInSeconds` elapses, or the user chooses to
     /// end his or her session, the streaming instance is terminated and the
     /// streaming session ends.
-    max_expiration_time: ?i64,
+    max_expiration_time: ?i64 = null,
 
     /// The network details for the streaming session.
-    network_access_configuration: ?NetworkAccessConfiguration,
+    network_access_configuration: ?NetworkAccessConfiguration = null,
 
     /// The name of the stack for the streaming session.
     stack_name: []const u8,
 
     /// The time when a streaming instance is dedicated for the user.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The current state of the streaming session.
     state: SessionState,

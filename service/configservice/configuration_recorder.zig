@@ -10,7 +10,7 @@ const RecordingScope = @import("recording_scope.zig").RecordingScope;
 /// ](https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html) in the *Config Developer Guide*.
 pub const ConfigurationRecorder = struct {
     /// The Amazon Resource Name (ARN) of the specified configuration recorder.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the configuration recorder.
     ///
@@ -29,7 +29,7 @@ pub const ConfigurationRecorder = struct {
     /// new name.
     ///
     /// You cannot change the name of a service-linked configuration recorder.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Specifies which resource types are in scope for the configuration recorder
     /// to record.
@@ -56,7 +56,7 @@ pub const ConfigurationRecorder = struct {
     /// resource types from being recorded, or run these types of workloads in a
     /// separate account with Config turned off to avoid
     /// increased configuration recording and rule evaluations.
-    recording_group: ?RecordingGroup,
+    recording_group: ?RecordingGroup = null,
 
     /// Specifies the default recording frequency for the configuration recorder.
     ///
@@ -76,11 +76,11 @@ pub const ConfigurationRecorder = struct {
     /// it is recommended that you set the recording frequency to Continuous.
     ///
     /// You can also override the recording frequency for specific resource types.
-    recording_mode: ?RecordingMode,
+    recording_mode: ?RecordingMode = null,
 
     /// Specifies whether the
     /// [ConfigurationItems](https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html) in scope for the specified configuration recorder are recorded for free (`INTERNAL`) or if it impacts the costs to your bill (`PAID`).
-    recording_scope: ?RecordingScope,
+    recording_scope: ?RecordingScope = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role assumed by Config and used by
     /// the specified configuration recorder.
@@ -125,11 +125,11 @@ pub const ConfigurationRecorder = struct {
     /// For service-linked configuration recorders, you must use the service-linked
     /// IAM role for Config:
     /// [AWSServiceRoleForConfig](https://docs.aws.amazon.com/config/latest/developerguide/using-service-linked-roles.html).
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// For service-linked configuration recorders, specifies the linked Amazon Web
     /// Services service for the configuration recorder.
-    service_principal: ?[]const u8,
+    service_principal: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

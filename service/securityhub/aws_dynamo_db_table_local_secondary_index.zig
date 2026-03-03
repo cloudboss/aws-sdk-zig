@@ -4,19 +4,19 @@ const AwsDynamoDbTableProjection = @import("aws_dynamo_db_table_projection.zig")
 /// Information about a local secondary index for a DynamoDB table.
 pub const AwsDynamoDbTableLocalSecondaryIndex = struct {
     /// The ARN of the index.
-    index_arn: ?[]const u8,
+    index_arn: ?[]const u8 = null,
 
     /// The name of the index.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
     /// The complete key schema for the index.
-    key_schema: ?[]const AwsDynamoDbTableKeySchema,
+    key_schema: ?[]const AwsDynamoDbTableKeySchema = null,
 
     /// Attributes that are copied from the table into the index. These are in
     /// addition to the
     /// primary key attributes and index key attributes, which are automatically
     /// projected.
-    projection: ?AwsDynamoDbTableProjection,
+    projection: ?AwsDynamoDbTableProjection = null,
 
     pub const json_field_names = .{
         .index_arn = "IndexArn",

@@ -3,7 +3,7 @@ const EncryptionContractConfiguration = @import("encryption_contract_configurati
 /// A configuration for accessing an external Secure Packager and Encoder Key
 /// Exchange (SPEKE) service that will provide encryption keys.
 pub const SpekeKeyProvider = struct {
-    encryption_contract_configuration: ?EncryptionContractConfiguration,
+    encryption_contract_configuration: ?EncryptionContractConfiguration = null,
 
     /// An Amazon Resource Name (ARN) of an IAM role that AWS Elemental
     /// MediaPackage will assume when accessing the key provider service.

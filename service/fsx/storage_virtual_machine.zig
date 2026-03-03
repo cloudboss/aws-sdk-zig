@@ -11,17 +11,17 @@ const Tag = @import("tag.zig").Tag;
 pub const StorageVirtualMachine = struct {
     /// Describes the Microsoft Active Directory configuration to which the SVM is
     /// joined, if applicable.
-    active_directory_configuration: ?SvmActiveDirectoryConfiguration,
+    active_directory_configuration: ?SvmActiveDirectoryConfiguration = null,
 
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The endpoints that are used to access data or to manage the SVM
     /// using the NetApp ONTAP CLI, REST API, or NetApp CloudManager. They
     /// are the `Iscsi`, `Management`, `Nfs`,
     /// and `Smb` endpoints.
-    endpoints: ?SvmEndpoints,
+    endpoints: ?SvmEndpoints = null,
 
-    file_system_id: ?[]const u8,
+    file_system_id: ?[]const u8 = null,
 
     /// Describes the SVM's lifecycle status.
     ///
@@ -36,29 +36,29 @@ pub const StorageVirtualMachine = struct {
     /// * `MISCONFIGURED` - The SVM is in a failed but recoverable state.
     ///
     /// * `PENDING` - Amazon FSx has not started creating the SVM.
-    lifecycle: ?StorageVirtualMachineLifecycle,
+    lifecycle: ?StorageVirtualMachineLifecycle = null,
 
     /// Describes why the SVM lifecycle state changed.
-    lifecycle_transition_reason: ?LifecycleTransitionReason,
+    lifecycle_transition_reason: ?LifecycleTransitionReason = null,
 
     /// The name of the SVM, if provisioned.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The security style of the root volume of the SVM.
-    root_volume_security_style: ?StorageVirtualMachineRootVolumeSecurityStyle,
+    root_volume_security_style: ?StorageVirtualMachineRootVolumeSecurityStyle = null,
 
     /// The SVM's system generated unique ID.
-    storage_virtual_machine_id: ?[]const u8,
+    storage_virtual_machine_id: ?[]const u8 = null,
 
     /// Describes the SVM's subtype.
-    subtype: ?StorageVirtualMachineSubtype,
+    subtype: ?StorageVirtualMachineSubtype = null,
 
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The SVM's UUID (universally unique identifier).
-    uuid: ?[]const u8,
+    uuid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active_directory_configuration = "ActiveDirectoryConfiguration",

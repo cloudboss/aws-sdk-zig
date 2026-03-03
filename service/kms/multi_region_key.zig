@@ -1,11 +1,11 @@
 /// Describes the primary or replica key in a multi-Region key.
 pub const MultiRegionKey = struct {
     /// Displays the key ARN of a primary or replica key of a multi-Region key.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Displays the Amazon Web Services Region of a primary or replica key in a
     /// multi-Region key.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

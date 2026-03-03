@@ -2,22 +2,22 @@
 /// uses the specified segment.
 pub const RefResource = struct {
     /// The ARN of the experiment or launch.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The day and time that this experiment or launch ended.
-    end_time: ?[]const u8,
+    end_time: ?[]const u8 = null,
 
     /// The day and time that this experiment or launch was most recently updated.
-    last_updated_on: ?[]const u8,
+    last_updated_on: ?[]const u8 = null,
 
     /// The name of the experiment or launch.
     name: []const u8,
 
     /// The day and time that this experiment or launch started.
-    start_time: ?[]const u8,
+    start_time: ?[]const u8 = null,
 
     /// The status of the experiment or launch.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// Specifies whether the resource that this structure contains information
     /// about is an experiment or a launch.

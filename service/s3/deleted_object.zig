@@ -10,7 +10,7 @@ pub const DeletedObject = struct {
     /// markers](https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeleteMarker.html).
     ///
     /// This functionality is not supported for directory buckets.
-    delete_marker: ?bool,
+    delete_marker: ?bool = null,
 
     /// The version ID of the delete marker created as a result of the DELETE
     /// operation. If you delete a
@@ -19,13 +19,13 @@ pub const DeletedObject = struct {
     /// deleted.
     ///
     /// This functionality is not supported for directory buckets.
-    delete_marker_version_id: ?[]const u8,
+    delete_marker_version_id: ?[]const u8 = null,
 
     /// The name of the deleted object.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The version ID of the deleted object.
     ///
     /// This functionality is not supported for directory buckets.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 };

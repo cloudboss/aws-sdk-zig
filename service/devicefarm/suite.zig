@@ -7,23 +7,23 @@ const TestType = @import("test_type.zig").TestType;
 /// Represents a collection of one or more tests.
 pub const Suite = struct {
     /// The suite's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The suite's result counters.
-    counters: ?Counters,
+    counters: ?Counters = null,
 
     /// When the suite was created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// Represents the total (metered or unmetered) minutes used by the test
     /// suite.
-    device_minutes: ?DeviceMinutes,
+    device_minutes: ?DeviceMinutes = null,
 
     /// A message about the suite's result.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The suite's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The suite's result.
     ///
@@ -42,10 +42,10 @@ pub const Suite = struct {
     /// * ERRORED
     ///
     /// * STOPPED
-    result: ?ExecutionResult,
+    result: ?ExecutionResult = null,
 
     /// The suite's start time.
-    started: ?i64,
+    started: ?i64 = null,
 
     /// The suite's status.
     ///
@@ -68,10 +68,10 @@ pub const Suite = struct {
     /// * COMPLETED
     ///
     /// * STOPPING
-    status: ?ExecutionStatus,
+    status: ?ExecutionStatus = null,
 
     /// The suite's stop time.
-    stopped: ?i64,
+    stopped: ?i64 = null,
 
     /// The suite's type.
     ///
@@ -104,7 +104,7 @@ pub const Suite = struct {
     /// * XCTEST
     ///
     /// * XCTEST_UI
-    @"type": ?TestType,
+    @"type": ?TestType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

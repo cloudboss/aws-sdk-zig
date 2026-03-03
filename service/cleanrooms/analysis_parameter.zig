@@ -5,7 +5,7 @@ const ParameterType = @import("parameter_type.zig").ParameterType;
 pub const AnalysisParameter = struct {
     /// Optional. The default value that is applied in the analysis template. The
     /// member who can query can override this value in the query editor.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// The name of the parameter. The name must use only alphanumeric or underscore
     /// (_) characters.

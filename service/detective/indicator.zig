@@ -14,10 +14,10 @@ pub const Indicator = struct {
     /// (IOC) is an artifact observed in or on a network, system, or environment
     /// that can (with a high level of confidence) identify malicious activity or a
     /// security incident.
-    indicator_detail: ?IndicatorDetail,
+    indicator_detail: ?IndicatorDetail = null,
 
     /// The type of indicator.
-    indicator_type: ?IndicatorType,
+    indicator_type: ?IndicatorType = null,
 
     pub const json_field_names = .{
         .indicator_detail = "IndicatorDetail",

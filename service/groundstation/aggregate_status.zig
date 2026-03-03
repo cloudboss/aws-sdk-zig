@@ -5,7 +5,7 @@ const AgentStatus = @import("agent_status.zig").AgentStatus;
 /// Aggregate status of Agent components.
 pub const AggregateStatus = struct {
     /// Sparse map of failure signatures.
-    signature_map: ?[]const aws.map.MapEntry(bool),
+    signature_map: ?[]const aws.map.MapEntry(bool) = null,
 
     /// Aggregate status.
     status: AgentStatus,

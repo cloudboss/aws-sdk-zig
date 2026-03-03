@@ -6,10 +6,10 @@ const ResourceTypeOption = @import("resource_type_option.zig").ResourceTypeOptio
 /// resource type is an EC2 instance or launch template.
 pub const ResourceTypeRequest = struct {
     /// The resource type.
-    resource_type: ?ImageReferenceResourceType,
+    resource_type: ?ImageReferenceResourceType = null,
 
     /// The options that affect the scope of the response. Valid only when
     /// `ResourceType` is `ec2:Instance` or
     /// `ec2:LaunchTemplate`.
-    resource_type_options: ?[]const ResourceTypeOption,
+    resource_type_options: ?[]const ResourceTypeOption = null,
 };

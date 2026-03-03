@@ -3,8 +3,8 @@ const Tag = @import("tag.zig").Tag;
 /// The tags associated with a load balancer.
 pub const TagDescription = struct {
     /// The name of the load balancer.
-    load_balancer_name: ?[]const u8,
+    load_balancer_name: ?[]const u8 = null,
 
     /// The tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

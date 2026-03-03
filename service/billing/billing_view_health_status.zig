@@ -5,10 +5,10 @@ const BillingViewStatusReason = @import("billing_view_status_reason.zig").Billin
 /// optional reasons for the status.
 pub const BillingViewHealthStatus = struct {
     /// The current health status code of the billing view.
-    status_code: ?BillingViewStatus,
+    status_code: ?BillingViewStatus = null,
 
     /// A list of reasons explaining the current health status, if applicable.
-    status_reasons: ?[]const BillingViewStatusReason,
+    status_reasons: ?[]const BillingViewStatusReason = null,
 
     pub const json_field_names = .{
         .status_code = "statusCode",

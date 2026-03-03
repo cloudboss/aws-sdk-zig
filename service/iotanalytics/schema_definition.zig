@@ -7,7 +7,7 @@ pub const SchemaDefinition = struct {
     /// Each schema can have up to 100 columns. Each column can have up to 100
     /// nested
     /// types.
-    columns: ?[]const Column,
+    columns: ?[]const Column = null,
 
     pub const json_field_names = .{
         .columns = "columns",

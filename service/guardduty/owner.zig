@@ -5,7 +5,7 @@ pub const Owner = struct {
     /// user ID see [Finding Your Account
     /// Canonical User
     /// ID.](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

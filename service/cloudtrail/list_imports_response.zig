@@ -2,10 +2,10 @@ const ImportsListItem = @import("imports_list_item.zig").ImportsListItem;
 
 pub const ListImportsResponse = struct {
     /// The list of returned imports.
-    imports: ?[]const ImportsListItem,
+    imports: ?[]const ImportsListItem = null,
 
     /// A token you can use to get the next page of import results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .imports = "Imports",

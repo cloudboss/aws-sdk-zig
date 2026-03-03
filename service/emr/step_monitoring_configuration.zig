@@ -8,7 +8,7 @@ pub const StepMonitoringConfiguration = struct {
     /// logging configuration. If you don't specify this
     /// configuration entirely, or omit individual fields, EMR falls back to
     /// cluster-level logging behavior.
-    s3_monitoring_configuration: ?S3MonitoringConfiguration,
+    s3_monitoring_configuration: ?S3MonitoringConfiguration = null,
 
     pub const json_field_names = .{
         .s3_monitoring_configuration = "S3MonitoringConfiguration",

@@ -10,7 +10,7 @@ pub const SourceEventMetadata = struct {
     event_occurrence_time: i64,
 
     /// The Region the event originated from.
-    event_origin_region: ?[]const u8,
+    event_origin_region: ?[]const u8 = null,
 
     /// The type of event. For example, an Amazon CloudWatch state change.
     event_type: []const u8,

@@ -25,13 +25,13 @@ pub const ErrorDetail = struct {
     ///
     /// * **VpcIdNotFound**: We couldn't find the VPC
     /// associated with the cluster.
-    error_code: ?ErrorCode,
+    error_code: ?ErrorCode = null,
 
     /// A more complete description of the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// An optional field that contains the resource IDs associated with the error.
-    resource_ids: ?[]const []const u8,
+    resource_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

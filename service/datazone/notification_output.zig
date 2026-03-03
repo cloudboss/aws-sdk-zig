@@ -25,10 +25,10 @@ pub const NotificationOutput = struct {
     message: []const u8,
 
     /// The metadata included in the notification.
-    metadata: ?[]const aws.map.StringMapEntry,
+    metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// The status included in the notification.
-    status: ?TaskStatus,
+    status: ?TaskStatus = null,
 
     /// The title of the notification.
     title: []const u8,

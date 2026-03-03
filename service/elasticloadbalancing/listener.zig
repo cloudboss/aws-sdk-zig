@@ -23,7 +23,7 @@ pub const Listener = struct {
     /// If there is another listener with the same `InstancePort` whose
     /// `InstanceProtocol` is HTTP or TCP,
     /// the listener's `InstanceProtocol` must be HTTP or TCP.
-    instance_protocol: ?[]const u8,
+    instance_protocol: ?[]const u8 = null,
 
     /// The port on which the load balancer is listening. On EC2-VPC, you can
     /// specify any port from the range 1-65535. On EC2-Classic, you can specify any
@@ -35,5 +35,5 @@ pub const Listener = struct {
     protocol: []const u8,
 
     /// The Amazon Resource Name (ARN) of the server certificate.
-    ssl_certificate_id: ?[]const u8,
+    ssl_certificate_id: ?[]const u8 = null,
 };

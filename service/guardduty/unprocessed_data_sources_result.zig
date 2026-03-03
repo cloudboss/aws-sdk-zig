@@ -2,7 +2,7 @@ const MalwareProtectionConfigurationResult = @import("malware_protection_configu
 
 /// Specifies the names of the data sources that couldn't be enabled.
 pub const UnprocessedDataSourcesResult = struct {
-    malware_protection: ?MalwareProtectionConfigurationResult,
+    malware_protection: ?MalwareProtectionConfigurationResult = null,
 
     pub const json_field_names = .{
         .malware_protection = "MalwareProtection",

@@ -7,15 +7,15 @@ const Tag = @import("tag.zig").Tag;
 pub const ResourceSharePermissionDetail = struct {
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of this RAM managed permission.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time when the permission was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Specifies whether the version of the permission represented in this response
     /// is the
     /// default version for this permission.
-    default_version: ?bool,
+    default_version: ?bool = null,
 
     /// Indicates what features are available for this resource share. This
     /// parameter can have one of
@@ -46,23 +46,23 @@ pub const ResourceSharePermissionDetail = struct {
     /// the PromoteResourceShareCreatedFromPolicy and that operation
     /// is still in progress. This value changes to `STANDARD` when
     /// complete.
-    feature_set: ?PermissionFeatureSet,
+    feature_set: ?PermissionFeatureSet = null,
 
     /// Specifies whether the version of the permission represented in this response
     /// is the
     /// default version for all resources of this resource type.
-    is_resource_type_default: ?bool,
+    is_resource_type_default: ?bool = null,
 
     /// The date and time when the permission was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The name of this permission.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The permission's effect and actions in JSON format. The `effect` indicates
     /// whether the specified actions are allowed or denied. The `actions` list the
     /// operations to which the principal is granted or denied access.
-    permission: ?[]const u8,
+    permission: ?[]const u8 = null,
 
     /// The type of managed permission. This can be one of the following values:
     ///
@@ -74,10 +74,10 @@ pub const ResourceSharePermissionDetail = struct {
     /// your account created this managed permission. You can associate it with your
     /// resource shares and create
     /// new versions that have different permissions.
-    permission_type: ?PermissionType,
+    permission_type: ?PermissionType = null,
 
     /// The resource type to which this permission applies.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The current status of the association between the permission and the
     /// resource share.
@@ -93,13 +93,13 @@ pub const ResourceSharePermissionDetail = struct {
     /// being deleted.
     ///
     /// * `DELETED` – This permission or version is deleted.
-    status: ?PermissionStatus,
+    status: ?PermissionStatus = null,
 
     /// The tag key and value pairs attached to the resource share.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The version of the permission described in this response.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

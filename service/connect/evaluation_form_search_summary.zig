@@ -7,13 +7,13 @@ const EvaluationFormVersionStatus = @import("evaluation_form_version_status.zig"
 /// Information about the returned evaluation forms.
 pub const EvaluationFormSearchSummary = struct {
     /// Active version of the evaluation form.
-    active_version: ?i32,
+    active_version: ?i32 = null,
 
     /// Whether automated evaluation is enabled.
     auto_evaluation_enabled: bool = false,
 
     /// The contact interaction type for this evaluation form.
-    contact_interaction_type: ?ContactInteractionType,
+    contact_interaction_type: ?ContactInteractionType = null,
 
     /// Who created the evaluation form.
     created_by: []const u8,
@@ -22,7 +22,7 @@ pub const EvaluationFormSearchSummary = struct {
     created_time: i64,
 
     /// The description of the evaluation form.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the evaluation form resource.
     evaluation_form_arn: []const u8,
@@ -31,13 +31,13 @@ pub const EvaluationFormSearchSummary = struct {
     evaluation_form_id: []const u8,
 
     /// The language of the evaluation form.
-    evaluation_form_language: ?EvaluationFormLanguageCode,
+    evaluation_form_language: ?EvaluationFormLanguageCode = null,
 
     /// The ID of user who last activated evaluation form.
-    last_activated_by: ?[]const u8,
+    last_activated_by: ?[]const u8 = null,
 
     /// When the evaluation format was last activated.
-    last_activated_time: ?i64,
+    last_activated_time: ?i64 = null,
 
     /// Who changed the evaluation form.
     last_modified_by: []const u8,
@@ -53,7 +53,7 @@ pub const EvaluationFormSearchSummary = struct {
 
     /// The tags used to organize, track, or control access for this resource. For
     /// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The title of the evaluation form.
     title: []const u8,

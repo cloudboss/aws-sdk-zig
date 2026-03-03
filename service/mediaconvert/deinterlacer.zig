@@ -10,7 +10,7 @@ pub const Deinterlacer = struct {
     /// bottom of the frame: Choose Interpolate ticker or Blend ticker. To apply
     /// field doubling: Choose Linear interpolation. Note that Linear interpolation
     /// may introduce video artifacts into your output.
-    algorithm: ?DeinterlaceAlgorithm,
+    algorithm: ?DeinterlaceAlgorithm = null,
 
     /// - When set to NORMAL (default), the deinterlacer does not convert frames
     /// that are tagged in metadata as progressive. It will only convert those that
@@ -20,14 +20,14 @@ pub const Deinterlacer = struct {
     /// chance that the metadata has tagged frames as progressive when they are not
     /// progressive. Do not turn on otherwise; processing frames that are already
     /// progressive into progressive will probably result in lower quality video.
-    control: ?DeinterlacerControl,
+    control: ?DeinterlacerControl = null,
 
     /// Use Deinterlacer to choose how the service will do deinterlacing. Default is
     /// Deinterlace.
     /// - Deinterlace converts interlaced to progressive.
     /// - Inverse telecine converts Hard Telecine 29.97i to progressive 23.976p.
     /// - Adaptive auto-detects and converts to progressive.
-    mode: ?DeinterlacerMode,
+    mode: ?DeinterlacerMode = null,
 
     pub const json_field_names = .{
         .algorithm = "Algorithm",

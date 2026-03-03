@@ -7,10 +7,10 @@ pub const ExportRevisionsToS3ResponseDetails = struct {
     data_set_id: []const u8,
 
     /// Encryption configuration of the export job.
-    encryption: ?ExportServerSideEncryption,
+    encryption: ?ExportServerSideEncryption = null,
 
     /// The Amazon Resource Name (ARN) of the event action.
-    event_action_arn: ?[]const u8,
+    event_action_arn: ?[]const u8 = null,
 
     /// The destination in Amazon S3 where the revision is exported.
     revision_destinations: []const RevisionDestinationEntry,

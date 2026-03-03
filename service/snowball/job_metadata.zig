@@ -21,14 +21,14 @@ const TaxDocuments = @import("tax_documents.zig").TaxDocuments;
 /// the `DescribeJob` action.
 pub const JobMetadata = struct {
     /// The ID for the address that you want the Snow device shipped to.
-    address_id: ?[]const u8,
+    address_id: ?[]const u8 = null,
 
     /// The 39-character ID for the cluster, for example
     /// `CID123e4567-e89b-12d3-a456-426655440000`.
-    cluster_id: ?[]const u8,
+    cluster_id: ?[]const u8 = null,
 
     /// The creation date for this job.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// A value that defines the real-time status of a Snow device's data transfer
     /// while the
@@ -36,24 +36,24 @@ pub const JobMetadata = struct {
     /// has a
     /// `JobState` value of `InProgress`, for both import and export
     /// jobs.
-    data_transfer_progress: ?DataTransfer,
+    data_transfer_progress: ?DataTransfer = null,
 
     /// The description of the job, provided at job creation.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
-    device_configuration: ?DeviceConfiguration,
+    device_configuration: ?DeviceConfiguration = null,
 
     /// The ID of the address that you want a job shipped to, after it will be
     /// shipped to its primary address. This field is not supported in most regions.
-    forwarding_address_id: ?[]const u8,
+    forwarding_address_id: ?[]const u8 = null,
 
     /// The highest impact level of data that will be stored or processed on the
     /// device, provided at job creation.
-    impact_level: ?ImpactLevel,
+    impact_level: ?ImpactLevel = null,
 
     /// The automatically generated ID for a job, for example
     /// `JID123e4567-e89b-12d3-a456-426655440000`.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// Links to Amazon S3 presigned URLs for the job report and logs. For import
     /// jobs, the PDF
@@ -62,36 +62,36 @@ pub const JobMetadata = struct {
     /// report typically becomes available while the Snow device for your job part
     /// is being delivered
     /// to you.
-    job_log_info: ?JobLogs,
+    job_log_info: ?JobLogs = null,
 
     /// The current status of the jobs.
-    job_state: ?JobState,
+    job_state: ?JobState = null,
 
     /// The type of job.
-    job_type: ?JobType,
+    job_type: ?JobType = null,
 
     /// The Amazon Resource Name (ARN) for the Key Management Service (KMS) key
     /// associated with this job. This ARN was created using the
     /// [CreateKey](https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) API action in KMS.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The ID of the long-term pricing type for the device.
-    long_term_pricing_id: ?[]const u8,
+    long_term_pricing_id: ?[]const u8 = null,
 
     /// The Amazon Simple Notification Service (Amazon SNS) notification settings
     /// associated
     /// with a specific job. The `Notification` object is returned as a part of the
     /// response syntax of the `DescribeJob` action in the `JobMetadata` data
     /// type.
-    notification: ?Notification,
+    notification: ?Notification = null,
 
     /// Represents metadata and configuration settings for services on an Amazon Web
     /// Services Snow Family
     /// device.
-    on_device_service_configuration: ?OnDeviceServiceConfiguration,
+    on_device_service_configuration: ?OnDeviceServiceConfiguration = null,
 
     /// Information identifying the person picking up the device.
-    pickup_details: ?PickupDetails,
+    pickup_details: ?PickupDetails = null,
 
     /// Allows you to securely operate and manage Snowcone devices remotely from
     /// outside of your
@@ -99,23 +99,23 @@ pub const JobMetadata = struct {
     /// automatically be available when the device arrives at your location.
     /// Otherwise, you need to
     /// use the Snowball Client to manage the device.
-    remote_management: ?RemoteManagement,
+    remote_management: ?RemoteManagement = null,
 
     /// An array of `S3Resource` objects. Each `S3Resource` object
     /// represents an Amazon S3 bucket that your transferred data will be exported
     /// from or imported
     /// into.
-    resources: ?JobResource,
+    resources: ?JobResource = null,
 
     /// The role ARN associated with this job. This ARN was created using the
     /// [CreateRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
     /// API action in Identity and Access Management.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// A job's shipping information, including inbound and outbound tracking
     /// numbers and
     /// shipping speed options.
-    shipping_details: ?ShippingDetails,
+    shipping_details: ?ShippingDetails = null,
 
     /// The Snow device capacity preference for this job, specified at job creation.
     /// In US
@@ -128,17 +128,17 @@ pub const JobMetadata = struct {
     /// Family Devices and Capacity) in the *Snowcone User Guide* or
     /// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow
     /// Family Devices and Capacity) in the *Snowcone User Guide*.
-    snowball_capacity_preference: ?SnowballCapacity,
+    snowball_capacity_preference: ?SnowballCapacity = null,
 
     /// Unique ID associated with a device.
-    snowball_id: ?[]const u8,
+    snowball_id: ?[]const u8 = null,
 
     /// The type of device used with this job.
-    snowball_type: ?SnowballType,
+    snowball_type: ?SnowballType = null,
 
     /// The metadata associated with the tax documents required in your Amazon Web
     /// Services Region.
-    tax_documents: ?TaxDocuments,
+    tax_documents: ?TaxDocuments = null,
 
     pub const json_field_names = .{
         .address_id = "AddressId",

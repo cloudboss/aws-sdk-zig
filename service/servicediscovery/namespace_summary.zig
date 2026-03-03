@@ -5,24 +5,24 @@ const NamespaceType = @import("namespace_type.zig").NamespaceType;
 pub const NamespaceSummary = struct {
     /// The Amazon Resource Name (ARN) that Cloud Map assigns to the namespace when
     /// you create it.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the namespace was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// A description for the namespace.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the namespace.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the namespace. When you create a namespace, Cloud Map
     /// automatically creates a
     /// Route 53 hosted zone that has the same name as the namespace.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The properties of the namespace.
-    properties: ?NamespaceProperties,
+    properties: ?NamespaceProperties = null,
 
     /// The ID of the Amazon Web Services account that created the namespace. If
     /// this isn't your account ID, it's
@@ -31,13 +31,13 @@ pub const NamespaceSummary = struct {
     /// shared namespaces, see [Cross-account Cloud Map namespace
     /// sharing](https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html) in the
     /// *Cloud Map Developer Guide*.
-    resource_owner: ?[]const u8,
+    resource_owner: ?[]const u8 = null,
 
     /// The number of services that were created using the namespace.
-    service_count: ?i32,
+    service_count: ?i32 = null,
 
     /// The type of the namespace, either public or private.
-    @"type": ?NamespaceType,
+    @"type": ?NamespaceType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

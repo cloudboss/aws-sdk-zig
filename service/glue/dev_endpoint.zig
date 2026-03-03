@@ -16,24 +16,24 @@ pub const DevEndpoint = struct {
     /// using the `Arguments` parameter in the `CreateDevEndpoint` or
     /// `UpdateDevEndpoint` APIs. If no arguments are provided, the version defaults
     /// to Python 2.
-    arguments: ?[]const aws.map.StringMapEntry,
+    arguments: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Web Services Availability Zone where this `DevEndpoint` is
     /// located.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The point in time at which this DevEndpoint was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The name of the `DevEndpoint`.
-    endpoint_name: ?[]const u8,
+    endpoint_name: ?[]const u8 = null,
 
     /// The path to one or more Java `.jar` files in an S3 bucket that should be
     /// loaded
     /// in your `DevEndpoint`.
     ///
     /// You can only use pure Java/Scala libraries with a `DevEndpoint`.
-    extra_jars_s3_path: ?[]const u8,
+    extra_jars_s3_path: ?[]const u8 = null,
 
     /// The paths to one or more Python libraries in an Amazon S3 bucket that should
     /// be loaded in
@@ -44,10 +44,10 @@ pub const DevEndpoint = struct {
     /// rely on
     /// C extensions, such as the [pandas](http://pandas.pydata.org/) Python data
     /// analysis library, are not currently supported.
-    extra_python_libs_s3_path: ?[]const u8,
+    extra_python_libs_s3_path: ?[]const u8 = null,
 
     /// The reason for a current failure in this `DevEndpoint`.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// Glue version determines the versions of Apache Spark and Python that Glue
     /// supports. The Python version indicates the version supported for running
@@ -65,13 +65,13 @@ pub const DevEndpoint = struct {
     /// using the `Arguments` parameter in the `CreateDevEndpoint` or
     /// `UpdateDevEndpoint` APIs. If no arguments are provided, the version defaults
     /// to Python 2.
-    glue_version: ?[]const u8,
+    glue_version: ?[]const u8 = null,
 
     /// The point in time at which this `DevEndpoint` was last modified.
-    last_modified_timestamp: ?i64,
+    last_modified_timestamp: ?i64 = null,
 
     /// The status of the last update.
-    last_update_status: ?[]const u8,
+    last_update_status: ?[]const u8 = null,
 
     /// The number of Glue Data Processing Units (DPUs) allocated to this
     /// `DevEndpoint`.
@@ -82,24 +82,24 @@ pub const DevEndpoint = struct {
     ///
     /// The maximum number of workers you can define are 299 for `G.1X`, and 149 for
     /// `G.2X`.
-    number_of_workers: ?i32,
+    number_of_workers: ?i32 = null,
 
     /// A private IP address to access the `DevEndpoint` within a VPC if the
     /// `DevEndpoint` is created within one. The `PrivateAddress` field is
     /// present only when you create the `DevEndpoint` within your VPC.
-    private_address: ?[]const u8,
+    private_address: ?[]const u8 = null,
 
     /// The public IP address used by this `DevEndpoint`. The
     /// `PublicAddress` field is present only when you create a non-virtual private
     /// cloud
     /// (VPC) `DevEndpoint`.
-    public_address: ?[]const u8,
+    public_address: ?[]const u8 = null,
 
     /// The public key to be used by this `DevEndpoint` for authentication. This
     /// attribute is provided for backward compatibility because the recommended
     /// attribute to use is
     /// public keys.
-    public_key: ?[]const u8,
+    public_key: ?[]const u8 = null,
 
     /// A list of public keys to be used by the `DevEndpoints` for authentication.
     /// Using this attribute is preferred over a single public key because the
@@ -113,27 +113,27 @@ pub const DevEndpoint = struct {
     /// with the public key content in the `deletePublicKeys` attribute, and the
     /// list of
     /// new keys in the `addPublicKeys` attribute.
-    public_keys: ?[]const []const u8,
+    public_keys: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role used in this
     /// `DevEndpoint`.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The name of the `SecurityConfiguration` structure to be used with this
     /// `DevEndpoint`.
-    security_configuration: ?[]const u8,
+    security_configuration: ?[]const u8 = null,
 
     /// A list of security group identifiers used in this `DevEndpoint`.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The current status of this `DevEndpoint`.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The subnet ID for this `DevEndpoint`.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The ID of the virtual private cloud (VPC) used by this `DevEndpoint`.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     /// The type of predefined worker that is allocated to the development endpoint.
     /// Accepts a value of Standard, G.1X, or G.2X.
@@ -152,10 +152,10 @@ pub const DevEndpoint = struct {
     /// Known issue: when a development endpoint is created with the `G.2X`
     /// `WorkerType` configuration, the Spark drivers for the development endpoint
     /// will run on 4 vCPU, 16 GB of memory, and a 64 GB disk.
-    worker_type: ?WorkerType,
+    worker_type: ?WorkerType = null,
 
     /// The YARN endpoint address used by this `DevEndpoint`.
-    yarn_endpoint_address: ?[]const u8,
+    yarn_endpoint_address: ?[]const u8 = null,
 
     /// The Apache Zeppelin port for the remote Apache Spark interpreter.
     zeppelin_remote_spark_interpreter_port: i32 = 0,

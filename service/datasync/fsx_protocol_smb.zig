@@ -18,9 +18,9 @@ pub const FsxProtocolSmb = struct {
     /// If you have multiple Active Directory domains in your environment,
     /// configuring this
     /// parameter makes sure that DataSync connects to the right SVM.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
-    mount_options: ?SmbMountOptions,
+    mount_options: ?SmbMountOptions = null,
 
     /// Specifies the password of a user who has permission to access your SVM.
     password: []const u8,

@@ -44,7 +44,7 @@ pub const AllowListStatus = struct {
     /// A brief description of the status of the allow list. Amazon Macie uses this
     /// value to provide additional information about an error that occurred when
     /// Macie tried to access and use the list's criteria.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

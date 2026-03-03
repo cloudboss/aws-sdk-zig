@@ -15,19 +15,19 @@ pub const ApplicationSummary = struct {
     /// A timestamp that indicates when this resource was created. Timestamps are
     /// expressed using in ISO8601 format, such as: `2022-12-27T22:29:40+00:00`
     /// (UTC).
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// A human-readable label for the application. You can edit this value.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// An ID that uniquely identifies the application resource. Example ID:
     /// `a-9ZY8X7Wv6`.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A timestamp that indicates when this resource was last updated. Timestamps
     /// are expressed using in ISO8601 format, such as: `2022-12-27T22:29:40+00:00`
     /// (UTC).
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// Configuration settings that identify the operating system for an application
     /// resource. This can also include a compatibility layer and other drivers.
@@ -44,7 +44,7 @@ pub const ApplicationSummary = struct {
     /// * Proton 9.0-2 (`Type=PROTON, Version=20250516`)
     /// * Proton 8.0-5 (`Type=PROTON, Version=20241007`)
     /// * Proton 8.0-2c (`Type=PROTON, Version=20230704`)
-    runtime_environment: ?RuntimeEnvironment,
+    runtime_environment: ?RuntimeEnvironment = null,
 
     /// The current status of the application resource. Possible statuses include
     /// the following:
@@ -60,7 +60,7 @@ pub const ApplicationSummary = struct {
     ///   `StatusReason`.
     /// * `DELETING`: Amazon GameLift Streams is in the process of deleting the
     ///   application.
-    status: ?ApplicationStatus,
+    status: ?ApplicationStatus = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

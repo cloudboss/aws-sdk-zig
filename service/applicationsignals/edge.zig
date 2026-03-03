@@ -5,16 +5,16 @@ const ConnectionType = @import("connection_type.zig").ConnectionType;
 pub const Edge = struct {
     /// The type of connection between the nodes, indicating the nature of the
     /// relationship.
-    connection_type: ?ConnectionType,
+    connection_type: ?ConnectionType = null,
 
     /// The identifier of the destination node in this edge connection.
-    destination_node_id: ?[]const u8,
+    destination_node_id: ?[]const u8 = null,
 
     /// The duration or latency associated with this connection, if applicable.
-    duration: ?f64,
+    duration: ?f64 = null,
 
     /// The identifier of the source node in this edge connection.
-    source_node_id: ?[]const u8,
+    source_node_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connection_type = "ConnectionType",

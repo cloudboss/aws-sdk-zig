@@ -36,7 +36,7 @@ pub const FolderSearchFilter = struct {
     ///   directly under that parent folder are returned. If you choose to use this
     ///   option and leave the value blank, all root-level folders in the account
     ///   are returned.
-    name: ?FolderFilterAttribute,
+    name: ?FolderFilterAttribute = null,
 
     /// The comparison operator that you want to use as a filter, for example
     /// `"Operator": "StringEquals"`. Valid values are `"StringEquals"` and
@@ -52,12 +52,12 @@ pub const FolderSearchFilter = struct {
     /// folders you are searching for. For example, `"Name":"FOLDER_NAME",
     /// "Operator": "StringLike", "Value": "Test"`. The `"StringLike"` operator only
     /// supports the `NAME` value `FOLDER_NAME`.
-    operator: ?FilterOperator,
+    operator: ?FilterOperator = null,
 
     /// The value of the named item (in this example, `PARENT_FOLDER_ARN`), that you
     /// want to use as a filter. For example, `"Value":
     /// "arn:aws:quicksight:us-east-1:1:folder/folderId"`.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

@@ -3,13 +3,13 @@ const ProtocolType = @import("protocol_type.zig").ProtocolType;
 /// The response details.
 pub const ImportAssetFromApiGatewayApiResponseDetails = struct {
     /// The API description.
-    api_description: ?[]const u8,
+    api_description: ?[]const u8 = null,
 
     /// The API ID.
     api_id: []const u8,
 
     /// The API key.
-    api_key: ?[]const u8,
+    api_key: ?[]const u8 = null,
 
     /// The API name.
     api_name: []const u8,

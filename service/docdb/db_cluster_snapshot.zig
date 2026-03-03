@@ -3,59 +3,59 @@ pub const DBClusterSnapshot = struct {
     /// Provides the list of Amazon EC2 Availability Zones that instances in the
     /// cluster
     /// snapshot can be restored in.
-    availability_zones: ?[]const []const u8,
+    availability_zones: ?[]const []const u8 = null,
 
     /// Specifies the time when the cluster was created, in Universal Coordinated
     /// Time
     /// (UTC).
-    cluster_create_time: ?i64,
+    cluster_create_time: ?i64 = null,
 
     /// Specifies the cluster identifier of the cluster that this cluster snapshot
     /// was created from.
-    db_cluster_identifier: ?[]const u8,
+    db_cluster_identifier: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the cluster snapshot.
-    db_cluster_snapshot_arn: ?[]const u8,
+    db_cluster_snapshot_arn: ?[]const u8 = null,
 
     /// Specifies the identifier for the cluster snapshot.
-    db_cluster_snapshot_identifier: ?[]const u8,
+    db_cluster_snapshot_identifier: ?[]const u8 = null,
 
     /// Specifies the name of the database engine.
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// Provides the version of the database engine for this cluster snapshot.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// If `StorageEncrypted` is `true`, the KMS key identifier for the encrypted
     /// cluster snapshot.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Provides the master user name for the cluster snapshot.
-    master_username: ?[]const u8,
+    master_username: ?[]const u8 = null,
 
     /// Specifies the percentage of the estimated data that has been transferred.
-    percent_progress: ?i32,
+    percent_progress: ?i32 = null,
 
     /// Specifies the port that the cluster was listening on at the time of the
     /// snapshot.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// Provides the time when the snapshot was taken, in UTC.
-    snapshot_create_time: ?i64,
+    snapshot_create_time: ?i64 = null,
 
     /// Provides the type of the cluster snapshot.
-    snapshot_type: ?[]const u8,
+    snapshot_type: ?[]const u8 = null,
 
     /// If the cluster snapshot was copied from a source cluster snapshot, the ARN
     /// for
     /// the source cluster snapshot; otherwise, a null value.
-    source_db_cluster_snapshot_arn: ?[]const u8,
+    source_db_cluster_snapshot_arn: ?[]const u8 = null,
 
     /// Specifies the status of this cluster snapshot.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// Specifies whether the cluster snapshot is encrypted.
-    storage_encrypted: ?bool,
+    storage_encrypted: ?bool = null,
 
     /// Storage type associated with your cluster snapshot
     ///
@@ -65,10 +65,10 @@ pub const DBClusterSnapshot = struct {
     /// Valid values for storage type - `standard | iopt1`
     ///
     /// Default value is `standard `
-    storage_type: ?[]const u8,
+    storage_type: ?[]const u8 = null,
 
     /// Provides the virtual private cloud (VPC) ID that is associated with the
     /// cluster
     /// snapshot.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

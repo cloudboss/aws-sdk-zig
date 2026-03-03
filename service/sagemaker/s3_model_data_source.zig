@@ -55,24 +55,24 @@ pub const S3ModelDataSource = struct {
     compression_type: ModelCompressionType,
 
     /// The ETag associated with S3 URI.
-    e_tag: ?[]const u8,
+    e_tag: ?[]const u8 = null,
 
     /// Configuration information for hub access.
-    hub_access_config: ?InferenceHubAccessConfig,
+    hub_access_config: ?InferenceHubAccessConfig = null,
 
     /// The ETag associated with Manifest S3 URI.
-    manifest_etag: ?[]const u8,
+    manifest_etag: ?[]const u8 = null,
 
     /// The Amazon S3 URI of the manifest file. The manifest file is a CSV file that
     /// stores the artifact locations.
-    manifest_s3_uri: ?[]const u8,
+    manifest_s3_uri: ?[]const u8 = null,
 
     /// Specifies the access configuration file for the ML model. You can explicitly
     /// accept the model end-user license agreement (EULA) within the
     /// `ModelAccessConfig`. You are responsible for reviewing and complying with
     /// any applicable license terms and making sure they are acceptable for your
     /// use case before downloading or using a model.
-    model_access_config: ?ModelAccessConfig,
+    model_access_config: ?ModelAccessConfig = null,
 
     /// Specifies the type of ML model data to deploy.
     ///

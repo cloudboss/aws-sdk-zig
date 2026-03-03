@@ -8,11 +8,11 @@ const S3ItemFilter = @import("s3_item_filter.zig").S3ItemFilter;
 pub const ItemFilters = struct {
     /// This array can contain CreationTimes, FilePaths, LastModificationTimes, or
     /// Sizes objects.
-    ebs_item_filters: ?[]const EBSItemFilter,
+    ebs_item_filters: ?[]const EBSItemFilter = null,
 
     /// This array can contain CreationTimes, ETags, ObjectKeys, Sizes, or
     /// VersionIds objects.
-    s3_item_filters: ?[]const S3ItemFilter,
+    s3_item_filters: ?[]const S3ItemFilter = null,
 
     pub const json_field_names = .{
         .ebs_item_filters = "EBSItemFilters",

@@ -10,10 +10,10 @@ const WeeklySetting = @import("weekly_setting.zig").WeeklySetting;
 /// lasts.
 pub const RecurrenceSettings = struct {
     /// Information about on-call rotations that recur daily.
-    daily_settings: ?[]const HandOffTime,
+    daily_settings: ?[]const HandOffTime = null,
 
     /// Information about on-call rotations that recur monthly.
-    monthly_settings: ?[]const MonthlySetting,
+    monthly_settings: ?[]const MonthlySetting = null,
 
     /// The number of contacts, or shift team members designated to be on call
     /// concurrently
@@ -27,10 +27,10 @@ pub const RecurrenceSettings = struct {
 
     /// Information about the days of the week that the on-call rotation coverage
     /// includes.
-    shift_coverages: ?[]const aws.map.MapEntry([]const CoverageTime),
+    shift_coverages: ?[]const aws.map.MapEntry([]const CoverageTime) = null,
 
     /// Information about on-call rotations that recur weekly.
-    weekly_settings: ?[]const WeeklySetting,
+    weekly_settings: ?[]const WeeklySetting = null,
 
     pub const json_field_names = .{
         .daily_settings = "DailySettings",

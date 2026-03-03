@@ -8,15 +8,15 @@ const TaskMode = @import("task_mode.zig").TaskMode;
 pub const TaskExecutionListEntry = struct {
     /// The status of a task execution. For more information, see [Task execution
     /// statuses](https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses).
-    status: ?TaskExecutionStatus,
+    status: ?TaskExecutionStatus = null,
 
     /// The Amazon Resource Name (ARN) of a task execution.
-    task_execution_arn: ?[]const u8,
+    task_execution_arn: ?[]const u8 = null,
 
     /// The task mode that you're using. For more information, see [Choosing a task
     /// mode for your data
     /// transfer](https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html).
-    task_mode: ?TaskMode,
+    task_mode: ?TaskMode = null,
 
     pub const json_field_names = .{
         .status = "Status",

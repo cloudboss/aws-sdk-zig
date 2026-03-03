@@ -11,12 +11,12 @@
 /// API](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Filtering.html#Filtering_Resources_CLI) in the *Amazon EC2 User Guide*.
 pub const Filter = struct {
     /// The name of the filter. Filter names are case-sensitive.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The filter values. Filter values are case-sensitive. If you specify multiple
     /// values for a
     /// filter, the values are joined with an `OR`, and the request returns all
     /// results
     /// that match any of the specified values.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 };

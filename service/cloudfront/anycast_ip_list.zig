@@ -15,11 +15,11 @@ pub const AnycastIpList = struct {
     id: []const u8,
 
     /// The IP address type for the Anycast static IP list.
-    ip_address_type: ?IpAddressType,
+    ip_address_type: ?IpAddressType = null,
 
     /// The IPAM configuration for the Anycast static IP list, that contains the
     /// quantity and list of IPAM CIDR configurations.
-    ipam_config: ?IpamConfig,
+    ipam_config: ?IpamConfig = null,
 
     /// The number of IP addresses in the Anycast static IP list.
     ip_count: i32,

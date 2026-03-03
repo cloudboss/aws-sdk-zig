@@ -10,7 +10,7 @@ pub const DataPathColor = struct {
     element: DataPathValue,
 
     /// The time granularity of the field that the color needs to be applied to.
-    time_granularity: ?TimeGranularity,
+    time_granularity: ?TimeGranularity = null,
 
     pub const json_field_names = .{
         .color = "Color",

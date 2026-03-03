@@ -4,10 +4,10 @@
 /// Amazon Web Services service.
 pub const Category = struct {
     /// The category code for the support case.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The category name for the support case.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

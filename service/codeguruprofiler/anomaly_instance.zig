@@ -7,7 +7,7 @@ pub const AnomalyInstance = struct {
     /// using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents
     /// 1
     /// millisecond past June 1, 2020 1:15:02 PM UTC.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The universally unique identifier (UUID) of an instance of an anomaly in a
     /// metric.
@@ -22,7 +22,7 @@ pub const AnomalyInstance = struct {
     start_time: i64,
 
     /// Feedback type on a specific instance of anomaly submitted by the user.
-    user_feedback: ?UserFeedback,
+    user_feedback: ?UserFeedback = null,
 
     pub const json_field_names = .{
         .end_time = "endTime",

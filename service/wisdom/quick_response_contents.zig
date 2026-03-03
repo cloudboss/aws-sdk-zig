@@ -2,9 +2,9 @@ const QuickResponseContentProvider = @import("quick_response_content_provider.zi
 
 /// The content of the quick response stored in different media types.
 pub const QuickResponseContents = struct {
-    markdown: ?QuickResponseContentProvider,
+    markdown: ?QuickResponseContentProvider = null,
 
-    plain_text: ?QuickResponseContentProvider,
+    plain_text: ?QuickResponseContentProvider = null,
 
     pub const json_field_names = .{
         .markdown = "markdown",

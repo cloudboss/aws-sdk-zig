@@ -7,61 +7,61 @@ const S3SseAlgorithm = @import("s3_sse_algorithm.zig").S3SseAlgorithm;
 /// Represents the properties of the exported table.
 pub const ExportDescription = struct {
     /// The billable size of the table export.
-    billed_size_bytes: ?i64,
+    billed_size_bytes: ?i64 = null,
 
     /// The client token that was provided for the export task. A client token makes
     /// calls to
     /// `ExportTableToPointInTimeInput` idempotent, meaning that multiple
     /// identical calls have the same effect as one single call.
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The time at which the export task completed.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the table export.
-    export_arn: ?[]const u8,
+    export_arn: ?[]const u8 = null,
 
     /// The format of the exported data. Valid values for `ExportFormat` are
     /// `DYNAMODB_JSON` or `ION`.
-    export_format: ?ExportFormat,
+    export_format: ?ExportFormat = null,
 
     /// The name of the manifest file for the export task.
-    export_manifest: ?[]const u8,
+    export_manifest: ?[]const u8 = null,
 
     /// Export can be in one of the following states: IN_PROGRESS, COMPLETED, or
     /// FAILED.
-    export_status: ?ExportStatus,
+    export_status: ?ExportStatus = null,
 
     /// Point in time from which table data was exported.
-    export_time: ?i64,
+    export_time: ?i64 = null,
 
     /// The type of export that was performed. Valid values are `FULL_EXPORT` or
     /// `INCREMENTAL_EXPORT`.
-    export_type: ?ExportType,
+    export_type: ?ExportType = null,
 
     /// Status code for the result of the failed export.
-    failure_code: ?[]const u8,
+    failure_code: ?[]const u8 = null,
 
     /// Export failure reason description.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// Optional object containing the parameters specific to an incremental export.
-    incremental_export_specification: ?IncrementalExportSpecification,
+    incremental_export_specification: ?IncrementalExportSpecification = null,
 
     /// The number of items exported.
-    item_count: ?i64,
+    item_count: ?i64 = null,
 
     /// The name of the Amazon S3 bucket containing the export.
-    s3_bucket: ?[]const u8,
+    s3_bucket: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the bucket containing
     /// the
     /// export.
-    s3_bucket_owner: ?[]const u8,
+    s3_bucket_owner: ?[]const u8 = null,
 
     /// The Amazon S3 bucket prefix used as the file name and path of the exported
     /// snapshot.
-    s3_prefix: ?[]const u8,
+    s3_prefix: ?[]const u8 = null,
 
     /// Type of encryption used on the bucket where export data is stored. Valid
     /// values for
@@ -72,20 +72,20 @@ pub const ExportDescription = struct {
     ///
     /// * `KMS` - server-side encryption with KMS managed
     /// keys
-    s3_sse_algorithm: ?S3SseAlgorithm,
+    s3_sse_algorithm: ?S3SseAlgorithm = null,
 
     /// The ID of the KMS managed key used to encrypt the S3 bucket where
     /// export data is stored (if applicable).
-    s3_sse_kms_key_id: ?[]const u8,
+    s3_sse_kms_key_id: ?[]const u8 = null,
 
     /// The time at which the export task began.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the table that was exported.
-    table_arn: ?[]const u8,
+    table_arn: ?[]const u8 = null,
 
     /// Unique ID of the table that was exported.
-    table_id: ?[]const u8,
+    table_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .billed_size_bytes = "BilledSizeBytes",

@@ -7,21 +7,21 @@ pub const ClassifierEvaluationMetrics = struct {
     /// number of labels in the test documents that were correctly recognized by the
     /// total number of
     /// labels in the test documents.
-    accuracy: ?f64,
+    accuracy: ?f64 = null,
 
     /// A measure of how accurate the classifier results are for the test data. It
     /// is derived from
     /// the `Precision` and `Recall` values. The `F1Score` is the
     /// harmonic average of the two scores. The highest score is 1, and the worst
     /// score is 0.
-    f1_score: ?f64,
+    f1_score: ?f64 = null,
 
     /// Indicates the fraction of labels that are incorrectly predicted. Also seen
     /// as the fraction
     /// of wrong labels compared to the total number of labels. Scores closer to
     /// zero are
     /// better.
-    hamming_loss: ?f64,
+    hamming_loss: ?f64 = null,
 
     /// A measure of how accurate the classifier results are for the test data. It
     /// is a
@@ -29,7 +29,7 @@ pub const ClassifierEvaluationMetrics = struct {
     /// `Micro F1Score` is the harmonic mean of the two scores. The highest score is
     /// 1,
     /// and the worst score is 0.
-    micro_f1_score: ?f64,
+    micro_f1_score: ?f64 = null,
 
     /// A measure of the usefulness of the recognizer results in the test data. High
     /// precision
@@ -38,7 +38,7 @@ pub const ClassifierEvaluationMetrics = struct {
     /// Unlike the Precision metric which comes from averaging the precision of all
     /// available labels,
     /// this is based on the overall score of all precision scores added together.
-    micro_precision: ?f64,
+    micro_precision: ?f64 = null,
 
     /// A measure of how complete the classifier results are for the test data. High
     /// recall means
@@ -51,19 +51,19 @@ pub const ClassifierEvaluationMetrics = struct {
     /// labels (as with Recall), micro Recall is based on the overall score of all
     /// recall scores added
     /// together.
-    micro_recall: ?f64,
+    micro_recall: ?f64 = null,
 
     /// A measure of the usefulness of the classifier results in the test data. High
     /// precision
     /// means that the classifier returned substantially more relevant results than
     /// irrelevant
     /// ones.
-    precision: ?f64,
+    precision: ?f64 = null,
 
     /// A measure of how complete the classifier results are for the test data. High
     /// recall means
     /// that the classifier returned most of the relevant results.
-    recall: ?f64,
+    recall: ?f64 = null,
 
     pub const json_field_names = .{
         .accuracy = "Accuracy",

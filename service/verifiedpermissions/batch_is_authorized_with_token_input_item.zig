@@ -7,15 +7,15 @@ const EntityIdentifier = @import("entity_identifier.zig").EntityIdentifier;
 pub const BatchIsAuthorizedWithTokenInputItem = struct {
     /// Specifies the requested action to be authorized. For example,
     /// `PhotoFlash::ReadPhoto`.
-    action: ?ActionIdentifier,
+    action: ?ActionIdentifier = null,
 
     /// Specifies additional context that can be used to make more granular
     /// authorization decisions.
-    context: ?ContextDefinition,
+    context: ?ContextDefinition = null,
 
     /// Specifies the resource that you want an authorization decision for. For
     /// example, `PhotoFlash::Photo`.
-    resource: ?EntityIdentifier,
+    resource: ?EntityIdentifier = null,
 
     pub const json_field_names = .{
         .action = "action",

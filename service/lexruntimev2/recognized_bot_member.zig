@@ -4,7 +4,7 @@ pub const RecognizedBotMember = struct {
     bot_id: []const u8,
 
     /// The name of the bot member that processes the request.
-    bot_name: ?[]const u8,
+    bot_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bot_id = "botId",

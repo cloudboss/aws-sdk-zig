@@ -14,7 +14,7 @@ pub const AgentRuntimeEndpoint = struct {
     created_at: i64,
 
     /// The description of the agent runtime endpoint.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the agent runtime endpoint.
     id: []const u8,
@@ -24,7 +24,7 @@ pub const AgentRuntimeEndpoint = struct {
 
     /// The live version of the agent runtime endpoint. This is the version that is
     /// currently serving requests.
-    live_version: ?[]const u8,
+    live_version: ?[]const u8 = null,
 
     /// The name of the agent runtime endpoint.
     name: []const u8,
@@ -34,7 +34,7 @@ pub const AgentRuntimeEndpoint = struct {
 
     /// The target version of the agent runtime endpoint. This is the version that
     /// the endpoint is being updated to.
-    target_version: ?[]const u8,
+    target_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .agent_runtime_arn = "agentRuntimeArn",

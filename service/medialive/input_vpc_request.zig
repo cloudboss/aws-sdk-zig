@@ -8,7 +8,7 @@ pub const InputVpcRequest = struct {
     /// network interfaces.
     /// Requires subnetIds. If none are specified then the VPC default security
     /// group will be used.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// A list of 2 VPC subnet IDs from the same VPC.
     /// Subnet IDs must be mapped to two unique availability zones (AZ).

@@ -4,7 +4,7 @@ pub const GetMetricDataResponse = struct {
     /// Information about the historical metrics.
     ///
     /// If no grouping is specified, a summary of metric data is returned.
-    metric_results: ?[]const HistoricalMetricResult,
+    metric_results: ?[]const HistoricalMetricResult = null,
 
     /// If there are additional results, this is the token for the next set of
     /// results.
@@ -13,7 +13,7 @@ pub const GetMetricDataResponse = struct {
     /// requests that use
     /// the token must use the same request parameters as the request that generated
     /// the token.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metric_results = "MetricResults",

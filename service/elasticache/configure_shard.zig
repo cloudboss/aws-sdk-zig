@@ -36,8 +36,8 @@ pub const ConfigureShard = struct {
     /// `NewReplicaCount` plus 1 to account for the primary node. If this member
     /// of `ReplicaConfiguration` is omitted, ElastiCache selects the
     /// availability zone for each of the replicas.
-    preferred_availability_zones: ?[]const []const u8,
+    preferred_availability_zones: ?[]const []const u8 = null,
 
     /// The outpost ARNs in which the cache cluster is created.
-    preferred_outpost_arns: ?[]const []const u8,
+    preferred_outpost_arns: ?[]const []const u8 = null,
 };

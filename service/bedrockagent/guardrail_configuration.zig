@@ -1,10 +1,10 @@
 /// Details about a guardrail associated with a resource.
 pub const GuardrailConfiguration = struct {
     /// The unique identifier of the guardrail.
-    guardrail_identifier: ?[]const u8,
+    guardrail_identifier: ?[]const u8 = null,
 
     /// The version of the guardrail.
-    guardrail_version: ?[]const u8,
+    guardrail_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .guardrail_identifier = "guardrailIdentifier",

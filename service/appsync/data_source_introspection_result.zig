@@ -4,13 +4,13 @@ const DataSourceIntrospectionModel = @import("data_source_introspection_model.zi
 /// populated result of a `GetDataSourceIntrospection` operation.
 pub const DataSourceIntrospectionResult = struct {
     /// The array of `DataSourceIntrospectionModel` objects.
-    models: ?[]const DataSourceIntrospectionModel,
+    models: ?[]const DataSourceIntrospectionModel = null,
 
     /// Determines the number of types to be returned in a single response before
     /// paginating.
     /// This value is typically taken from `nextToken` value from the previous
     /// response.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .models = "models",

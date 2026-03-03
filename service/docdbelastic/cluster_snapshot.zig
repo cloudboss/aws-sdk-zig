@@ -41,7 +41,7 @@ pub const ClusterSnapshot = struct {
     ///
     /// * `manual` - Return all cluster snapshots that you have manually created for
     ///   your Amazon Web Services account.
-    snapshot_type: ?SnapshotType,
+    snapshot_type: ?SnapshotType = null,
 
     /// The status of the elastic cluster snapshot.
     status: Status,

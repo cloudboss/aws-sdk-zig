@@ -40,7 +40,7 @@ pub const Leg = struct {
     end_position: []const f64,
 
     /// Contains the calculated route's path as a linestring geometry.
-    geometry: ?LegGeometry,
+    geometry: ?LegGeometry = null,
 
     /// The starting position of the leg. Follows the format `[longitude,latitude]`.
     ///

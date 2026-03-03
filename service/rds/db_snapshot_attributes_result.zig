@@ -8,8 +8,8 @@ const DBSnapshotAttribute = @import("db_snapshot_attribute.zig").DBSnapshotAttri
 /// information, see the `ModifyDBSnapshotAttribute` API action.
 pub const DBSnapshotAttributesResult = struct {
     /// The list of attributes and values for the manual DB snapshot.
-    db_snapshot_attributes: ?[]const DBSnapshotAttribute,
+    db_snapshot_attributes: ?[]const DBSnapshotAttribute = null,
 
     /// The identifier of the manual DB snapshot that the attributes apply to.
-    db_snapshot_identifier: ?[]const u8,
+    db_snapshot_identifier: ?[]const u8 = null,
 };

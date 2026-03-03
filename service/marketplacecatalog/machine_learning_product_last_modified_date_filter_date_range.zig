@@ -3,11 +3,11 @@
 pub const MachineLearningProductLastModifiedDateFilterDateRange = struct {
     /// The start date (inclusive) of the date range. The operation returns machine
     /// learning products with last modified dates on or after this date.
-    after_value: ?[]const u8,
+    after_value: ?[]const u8 = null,
 
     /// The end date (inclusive) of the date range. The operation returns machine
     /// learning products with last modified dates on or before this date.
-    before_value: ?[]const u8,
+    before_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .after_value = "AfterValue",

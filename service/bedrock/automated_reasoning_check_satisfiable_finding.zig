@@ -6,17 +6,17 @@ const AutomatedReasoningCheckTranslation = @import("automated_reasoning_check_tr
 /// additional assumptions not provided in the input.
 pub const AutomatedReasoningCheckSatisfiableFinding = struct {
     /// An example scenario demonstrating how the claims could be logically false.
-    claims_false_scenario: ?AutomatedReasoningCheckScenario,
+    claims_false_scenario: ?AutomatedReasoningCheckScenario = null,
 
     /// An example scenario demonstrating how the claims could be logically true.
-    claims_true_scenario: ?AutomatedReasoningCheckScenario,
+    claims_true_scenario: ?AutomatedReasoningCheckScenario = null,
 
     /// Indication of a logic issue with the translation without needing to consider
     /// the automated reasoning policy rules.
-    logic_warning: ?AutomatedReasoningCheckLogicWarning,
+    logic_warning: ?AutomatedReasoningCheckLogicWarning = null,
 
     /// The logical translation of the input that this finding evaluates.
-    translation: ?AutomatedReasoningCheckTranslation,
+    translation: ?AutomatedReasoningCheckTranslation = null,
 
     pub const json_field_names = .{
         .claims_false_scenario = "claimsFalseScenario",

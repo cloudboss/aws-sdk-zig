@@ -7,13 +7,13 @@ pub const EvaluationInferenceConfigSummary = struct {
     /// A summary of the models used in an Amazon Bedrock model evaluation job.
     /// These resources can be models in Amazon Bedrock or models outside of Amazon
     /// Bedrock that you use to generate your own inference response data.
-    model_config_summary: ?EvaluationModelConfigSummary,
+    model_config_summary: ?EvaluationModelConfigSummary = null,
 
     /// A summary of the RAG resources used in an Amazon Bedrock Knowledge Base
     /// evaluation job. These resources can be Knowledge Bases in Amazon Bedrock or
     /// RAG sources outside of Amazon Bedrock that you use to generate your own
     /// inference response data.
-    rag_config_summary: ?EvaluationRagConfigSummary,
+    rag_config_summary: ?EvaluationRagConfigSummary = null,
 
     pub const json_field_names = .{
         .model_config_summary = "modelConfigSummary",

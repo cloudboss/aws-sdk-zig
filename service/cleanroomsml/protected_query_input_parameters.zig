@@ -6,7 +6,7 @@ const ProtectedQuerySQLParameters = @import("protected_query_sql_parameters.zig"
 pub const ProtectedQueryInputParameters = struct {
     /// Provides configuration information for the workers that will perform the
     /// protected query.
-    compute_configuration: ?ComputeConfiguration,
+    compute_configuration: ?ComputeConfiguration = null,
 
     /// The format in which the query results should be returned. If not specified,
     /// defaults to `CSV`.

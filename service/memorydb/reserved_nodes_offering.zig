@@ -11,16 +11,16 @@ pub const ReservedNodesOffering = struct {
     /// The node type for the reserved nodes. For more information, see [Supported
     /// node
     /// types](https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported).
-    node_type: ?[]const u8,
+    node_type: ?[]const u8 = null,
 
     /// The offering type of this reserved node.
-    offering_type: ?[]const u8,
+    offering_type: ?[]const u8 = null,
 
     /// The recurring price charged to run this reserved node.
-    recurring_charges: ?[]const RecurringCharge,
+    recurring_charges: ?[]const RecurringCharge = null,
 
     /// The offering identifier.
-    reserved_nodes_offering_id: ?[]const u8,
+    reserved_nodes_offering_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .duration = "Duration",

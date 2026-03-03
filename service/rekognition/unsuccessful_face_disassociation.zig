@@ -5,13 +5,13 @@ const UnsuccessfulFaceDisassociationReason = @import("unsuccessful_face_disassoc
 /// disassociated.
 pub const UnsuccessfulFaceDisassociation = struct {
     /// A unique identifier assigned to the face.
-    face_id: ?[]const u8,
+    face_id: ?[]const u8 = null,
 
     /// The reason why the deletion was unsuccessful.
-    reasons: ?[]const UnsuccessfulFaceDisassociationReason,
+    reasons: ?[]const UnsuccessfulFaceDisassociationReason = null,
 
     /// A provided ID for the UserID. Unique within the collection.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .face_id = "FaceId",

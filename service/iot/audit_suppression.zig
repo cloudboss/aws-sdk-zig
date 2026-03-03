@@ -5,16 +5,16 @@ pub const AuditSuppression = struct {
     check_name: []const u8,
 
     /// The description of the audit suppression.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The expiration date (epoch timestamp in seconds) that you want the
     /// suppression to adhere to.
-    expiration_date: ?i64,
+    expiration_date: ?i64 = null,
 
     resource_identifier: ResourceIdentifier,
 
     /// Indicates whether a suppression should exist indefinitely or not.
-    suppress_indefinitely: ?bool,
+    suppress_indefinitely: ?bool = null,
 
     pub const json_field_names = .{
         .check_name = "checkName",

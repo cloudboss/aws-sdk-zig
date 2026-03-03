@@ -41,7 +41,7 @@ pub const Body = struct {
     /// so that you block any request whose body is over the limit.
     ///
     /// Default: `CONTINUE`
-    oversize_handling: ?OversizeHandling,
+    oversize_handling: ?OversizeHandling = null,
 
     pub const json_field_names = .{
         .oversize_handling = "OversizeHandling",

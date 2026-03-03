@@ -11,7 +11,7 @@ pub const VehicleSummary = struct {
     /// Static information about a vehicle in a key-value pair. For example:
     ///
     /// `"engineType"` : `"1.3 L R2"`
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The time the vehicle was created in seconds since epoch (January 1, 1970 at
     /// midnight UTC time).

@@ -17,19 +17,19 @@ pub const ReplicationConfiguration = struct {
     /// *Create traffic distribution groups* topic in the *Amazon Connect
     /// Administrator
     /// Guide*.
-    global_sign_in_endpoint: ?[]const u8,
+    global_sign_in_endpoint: ?[]const u8 = null,
 
     /// A list of replication status summaries. The summaries contain details about
     /// the replication of configuration
     /// information for Amazon Connect resources, for each Amazon Web Services
     /// Region.
-    replication_status_summary_list: ?[]const ReplicationStatusSummary,
+    replication_status_summary_list: ?[]const ReplicationStatusSummary = null,
 
     /// The Amazon Web Services Region where the source Amazon Connect instance was
     /// created. This is the Region where
     /// the
     /// [ReplicateInstance](https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html) API was called to start the replication process.
-    source_region: ?[]const u8,
+    source_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .global_sign_in_endpoint = "GlobalSignInEndpoint",

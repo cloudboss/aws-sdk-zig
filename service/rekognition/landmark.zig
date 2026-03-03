@@ -3,7 +3,7 @@ const LandmarkType = @import("landmark_type.zig").LandmarkType;
 /// Indicates the location of the landmark on the face.
 pub const Landmark = struct {
     /// Type of landmark.
-    @"type": ?LandmarkType,
+    @"type": ?LandmarkType = null,
 
     /// The x-coordinate of the landmark expressed as a ratio of the width of the
     /// image. The
@@ -11,7 +11,7 @@ pub const Landmark = struct {
     /// the image is 700
     /// pixels wide and the x-coordinate of the landmark is at 350 pixels, this
     /// value is 0.5.
-    x: ?f32,
+    x: ?f32 = null,
 
     /// The y-coordinate of the landmark expressed as a ratio of the height of the
     /// image. The
@@ -19,7 +19,7 @@ pub const Landmark = struct {
     /// image height is 200
     /// pixels and the y-coordinate of the landmark is at 50 pixels, this value is
     /// 0.25.
-    y: ?f32,
+    y: ?f32 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

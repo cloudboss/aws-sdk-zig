@@ -31,7 +31,7 @@ pub const WorkflowUpdate = struct {
     ///
     /// * `SUPPRESSED` - Indicates that you reviewed the finding and don't believe
     ///   that any action is needed. The finding is no longer updated.
-    status: ?WorkflowStatus,
+    status: ?WorkflowStatus = null,
 
     pub const json_field_names = .{
         .status = "Status",

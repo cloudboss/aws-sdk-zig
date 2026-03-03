@@ -5,7 +5,7 @@ pub const CloudWatchLoggingOptionUpdate = struct {
 
     /// The Amazon Resource Name (ARN) of the CloudWatch log to receive application
     /// messages.
-    log_stream_arn_update: ?[]const u8,
+    log_stream_arn_update: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cloud_watch_logging_option_id = "CloudWatchLoggingOptionId",

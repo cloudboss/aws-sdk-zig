@@ -6,14 +6,14 @@ const FilterRequirement = @import("filter_requirement.zig").FilterRequirement;
 /// conditions for WAF log records.
 pub const Filter = struct {
     /// The action to take for log records matching this filter (KEEP or DROP).
-    behavior: ?FilterBehavior,
+    behavior: ?FilterBehavior = null,
 
     /// The list of conditions that determine if a log record matches this filter.
-    conditions: ?[]const Condition,
+    conditions: ?[]const Condition = null,
 
     /// Whether the log record must meet all conditions (MEETS_ALL) or any condition
     /// (MEETS_ANY) to match this filter.
-    requirement: ?FilterRequirement,
+    requirement: ?FilterRequirement = null,
 
     pub const json_field_names = .{
         .behavior = "Behavior",

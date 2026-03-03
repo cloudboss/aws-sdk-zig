@@ -3,7 +3,7 @@ const AppflowIntegrationWorkflowMetrics = @import("appflow_integration_workflow_
 /// Generic object containing workflow execution metrics.
 pub const WorkflowMetrics = struct {
     /// Workflow execution metrics for `APPFLOW_INTEGRATION` workflow.
-    appflow_integration: ?AppflowIntegrationWorkflowMetrics,
+    appflow_integration: ?AppflowIntegrationWorkflowMetrics = null,
 
     pub const json_field_names = .{
         .appflow_integration = "AppflowIntegration",

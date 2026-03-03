@@ -5,14 +5,14 @@ const MigrationAlertType = @import("migration_alert_type.zig").MigrationAlertTyp
 /// issue.
 pub const MigrationAlert = struct {
     /// Additional details about the alert.
-    details: ?[]const []const u8,
+    details: ?[]const []const u8 = null,
 
     /// A message that describes why the alert was issued.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// A link to the Amazon Lex documentation that describes how to resolve
     /// the alert.
-    reference_ur_ls: ?[]const []const u8,
+    reference_ur_ls: ?[]const []const u8 = null,
 
     /// The type of alert. There are two kinds of alerts:
     ///
@@ -22,7 +22,7 @@ pub const MigrationAlert = struct {
     /// * `WARN` - There was an issue with the migration that
     /// requires manual changes to the new Amazon Lex V2 bot. The migration
     /// continues.
-    @"type": ?MigrationAlertType,
+    @"type": ?MigrationAlertType = null,
 
     pub const json_field_names = .{
         .details = "details",

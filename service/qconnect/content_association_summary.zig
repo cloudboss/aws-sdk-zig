@@ -31,7 +31,7 @@ pub const ContentAssociationSummary = struct {
     knowledge_base_id: []const u8,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .association_data = "associationData",

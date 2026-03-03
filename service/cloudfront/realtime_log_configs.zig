@@ -7,7 +7,7 @@ pub const RealtimeLogConfigs = struct {
     is_truncated: bool,
 
     /// Contains the list of real-time log configurations.
-    items: ?[]const RealtimeLogConfig,
+    items: ?[]const RealtimeLogConfig = null,
 
     /// This parameter indicates where this list of real-time log configurations
     /// begins. This list includes real-time log configurations that occur after the
@@ -21,5 +21,5 @@ pub const RealtimeLogConfigs = struct {
     /// is present. It contains the value that you should use in the `Marker` field
     /// of a subsequent request to continue listing real-time log configurations
     /// where you left off.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 };

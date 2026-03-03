@@ -4,14 +4,14 @@ const InsightsEvent = @import("insights_event.zig").InsightsEvent;
 /// specific email.
 pub const EmailInsights = struct {
     /// The recipient of the email.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// A list of events associated with the sent email.
-    events: ?[]const InsightsEvent,
+    events: ?[]const InsightsEvent = null,
 
     /// The recipient's ISP (e.g., `Gmail`, `Yahoo`,
     /// etc.).
-    isp: ?[]const u8,
+    isp: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

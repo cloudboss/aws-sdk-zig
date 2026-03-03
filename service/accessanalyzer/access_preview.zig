@@ -31,7 +31,7 @@ pub const AccessPreview = struct {
     /// For example, if the creation of the access preview fails, a `Failed` status
     /// is returned. This failure can be due to an internal issue with the analysis
     /// or due to an invalid resource configuration.
-    status_reason: ?AccessPreviewStatusReason,
+    status_reason: ?AccessPreviewStatusReason = null,
 
     pub const json_field_names = .{
         .analyzer_arn = "analyzerArn",

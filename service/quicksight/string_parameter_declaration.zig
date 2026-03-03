@@ -7,9 +7,9 @@ const StringValueWhenUnsetConfiguration = @import("string_value_when_unset_confi
 pub const StringParameterDeclaration = struct {
     /// The default values of a parameter. If the parameter is a single-value
     /// parameter, a maximum of one default value can be provided.
-    default_values: ?StringDefaultValues,
+    default_values: ?StringDefaultValues = null,
 
-    mapped_data_set_parameters: ?[]const MappedDataSetParameter,
+    mapped_data_set_parameters: ?[]const MappedDataSetParameter = null,
 
     /// The name of the parameter that is being declared.
     name: []const u8,
@@ -20,7 +20,7 @@ pub const StringParameterDeclaration = struct {
 
     /// The configuration that defines the default value of a `String` parameter
     /// when a value has not been set.
-    value_when_unset: ?StringValueWhenUnsetConfiguration,
+    value_when_unset: ?StringValueWhenUnsetConfiguration = null,
 
     pub const json_field_names = .{
         .default_values = "DefaultValues",

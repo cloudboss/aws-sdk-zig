@@ -15,7 +15,7 @@ pub const RecommenderConfig = struct {
     /// If you enable metadata in recommendations, you will incur additional costs.
     /// For more information, see [Amazon Personalize
     /// pricing](https://aws.amazon.com/personalize/pricing/).
-    enable_metadata_with_recommendations: ?bool,
+    enable_metadata_with_recommendations: ?bool = null,
 
     /// Specifies the exploration configuration hyperparameters, including
     /// `explorationWeight` and
@@ -24,7 +24,7 @@ pub const RecommenderConfig = struct {
     /// recommending items. Provide `itemExplorationConfig` data only if your
     /// recommenders generate personalized recommendations for a user
     /// (not popular items or similar items).
-    item_exploration_config: ?[]const aws.map.StringMapEntry,
+    item_exploration_config: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies the requested minimum provisioned recommendation requests per
     /// second that
@@ -34,11 +34,11 @@ pub const RecommenderConfig = struct {
     /// your usage using Amazon CloudWatch metrics, and increase the
     /// `minRecommendationRequestsPerSecond`
     /// as necessary.
-    min_recommendation_requests_per_second: ?i32,
+    min_recommendation_requests_per_second: ?i32 = null,
 
     /// Specifies the training data configuration to use when creating a domain
     /// recommender.
-    training_data_config: ?TrainingDataConfig,
+    training_data_config: ?TrainingDataConfig = null,
 
     pub const json_field_names = .{
         .enable_metadata_with_recommendations = "enableMetadataWithRecommendations",

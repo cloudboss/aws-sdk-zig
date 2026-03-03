@@ -8,7 +8,7 @@ const ResourceStatusValue = @import("resource_status_value.zig").ResourceStatusV
 /// completed yet.
 pub const ResourceStatus = struct {
     /// The current status.
-    name: ?ResourceStatusValue,
+    name: ?ResourceStatusValue = null,
 
     pub const json_field_names = .{
         .name = "Name",

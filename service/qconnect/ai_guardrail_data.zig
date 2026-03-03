@@ -30,40 +30,40 @@ pub const AIGuardrailData = struct {
     blocked_outputs_messaging: []const u8,
 
     /// Contains details about how to handle harmful content.
-    content_policy_config: ?AIGuardrailContentPolicyConfig,
+    content_policy_config: ?AIGuardrailContentPolicyConfig = null,
 
     /// The policy configuration details for the AI Guardrail's contextual grounding
     /// policy.
-    contextual_grounding_policy_config: ?AIGuardrailContextualGroundingPolicyConfig,
+    contextual_grounding_policy_config: ?AIGuardrailContextualGroundingPolicyConfig = null,
 
     /// A description of the AI Guardrail.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time the AI Guardrail was last modified.
-    modified_time: ?i64,
+    modified_time: ?i64 = null,
 
     /// The name of the AI Guardrail.
     name: []const u8,
 
     /// Contains details about PII entities and regular expressions to configure for
     /// the AI Guardrail.
-    sensitive_information_policy_config: ?AIGuardrailSensitiveInformationPolicyConfig,
+    sensitive_information_policy_config: ?AIGuardrailSensitiveInformationPolicyConfig = null,
 
     /// The status of the AI Guardrail.
-    status: ?Status,
+    status: ?Status = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Contains details about topics that the AI Guardrail should identify and
     /// deny.
-    topic_policy_config: ?AIGuardrailTopicPolicyConfig,
+    topic_policy_config: ?AIGuardrailTopicPolicyConfig = null,
 
     /// The visibility status of the AI Guardrail.
     visibility_status: VisibilityStatus,
 
     /// Contains details about the word policy to configured for the AI Guardrail.
-    word_policy_config: ?AIGuardrailWordPolicyConfig,
+    word_policy_config: ?AIGuardrailWordPolicyConfig = null,
 
     pub const json_field_names = .{
         .ai_guardrail_arn = "aiGuardrailArn",

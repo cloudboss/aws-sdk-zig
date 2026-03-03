@@ -31,9 +31,9 @@ pub const S3InitiateRestoreObjectOperation = struct {
     /// objects, but not both types in the same job. If you need to restore objects
     /// of both types
     /// you *must* create separate Batch Operations jobs.
-    expiration_in_days: ?i32,
+    expiration_in_days: ?i32 = null,
 
     /// S3 Batch Operations supports `STANDARD` and `BULK` retrieval tiers, but
     /// not the `EXPEDITED` retrieval tier.
-    glacier_job_tier: ?S3GlacierJobTier,
+    glacier_job_tier: ?S3GlacierJobTier = null,
 };

@@ -6,31 +6,31 @@ const OperatingSystemName = @import("operating_system_name.zig").OperatingSystem
 /// Describes the WorkSpace application.
 pub const WorkSpaceApplication = struct {
     /// The identifier of the application.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The time the application is created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The description of the WorkSpace application.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The license availability for the applications.
-    license_type: ?WorkSpaceApplicationLicenseType,
+    license_type: ?WorkSpaceApplicationLicenseType = null,
 
     /// The name of the WorkSpace application.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The owner of the WorkSpace application.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The status of WorkSpace application.
-    state: ?WorkSpaceApplicationState,
+    state: ?WorkSpaceApplicationState = null,
 
     /// The supported compute types of the WorkSpace application.
-    supported_compute_type_names: ?[]const Compute,
+    supported_compute_type_names: ?[]const Compute = null,
 
     /// The supported operating systems of the WorkSpace application.
-    supported_operating_system_names: ?[]const OperatingSystemName,
+    supported_operating_system_names: ?[]const OperatingSystemName = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

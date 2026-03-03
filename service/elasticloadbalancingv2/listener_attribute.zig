@@ -86,8 +86,8 @@ pub const ListenerAttribute = struct {
     /// whether the browser is allowed to render a page in a **frame**,
     /// **iframe**, **embed** or
     /// **object**.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value of the attribute.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

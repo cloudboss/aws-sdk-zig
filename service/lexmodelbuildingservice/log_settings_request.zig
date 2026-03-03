@@ -12,7 +12,7 @@ pub const LogSettingsRequest = struct {
     /// The Amazon Resource Name (ARN) of the AWS KMS customer managed key for
     /// encrypting audio logs delivered to an S3 bucket. The key does not apply to
     /// CloudWatch Logs and is optional for S3 buckets.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The type of logging to enable. Text logs are delivered to a CloudWatch
     /// Logs log group. Audio logs are delivered to an S3 bucket.

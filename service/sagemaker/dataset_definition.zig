@@ -7,11 +7,11 @@ const RedshiftDatasetDefinition = @import("redshift_dataset_definition.zig").Red
 /// must specify exactly one of either `AthenaDatasetDefinition` or
 /// `RedshiftDatasetDefinition` types.
 pub const DatasetDefinition = struct {
-    athena_dataset_definition: ?AthenaDatasetDefinition,
+    athena_dataset_definition: ?AthenaDatasetDefinition = null,
 
     /// Whether the generated dataset is `FullyReplicated` or `ShardedByS3Key`
     /// (default).
-    data_distribution_type: ?DataDistributionType,
+    data_distribution_type: ?DataDistributionType = null,
 
     /// Whether to use `File` or `Pipe` input mode. In `File` (default) mode, Amazon
     /// SageMaker copies the data from the input source onto the local Amazon
@@ -19,15 +19,15 @@ pub const DatasetDefinition = struct {
     /// algorithm. This is the most commonly used input mode. In `Pipe` mode, Amazon
     /// SageMaker streams input data from the source directly to your algorithm
     /// without using the EBS volume.
-    input_mode: ?InputMode,
+    input_mode: ?InputMode = null,
 
     /// The local path where you want Amazon SageMaker to download the Dataset
     /// Definition inputs to run a processing job. `LocalPath` is an absolute path
     /// to the input data. This is a required parameter when `AppManaged` is `False`
     /// (default).
-    local_path: ?[]const u8,
+    local_path: ?[]const u8 = null,
 
-    redshift_dataset_definition: ?RedshiftDatasetDefinition,
+    redshift_dataset_definition: ?RedshiftDatasetDefinition = null,
 
     pub const json_field_names = .{
         .athena_dataset_definition = "AthenaDatasetDefinition",

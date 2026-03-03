@@ -4,15 +4,15 @@ const ManagedThingAssociationStatus = @import("managed_thing_association_status.
 /// association, which connects a device to a third-party account.
 pub const ManagedThingAssociation = struct {
     /// The identifier of the account association in the association.
-    account_association_id: ?[]const u8,
+    account_association_id: ?[]const u8 = null,
 
     /// The status of the registration between the managed thing and the account
     /// association. Indicates whether the device is pre-associated or fully
     /// associated with the account association.
-    managed_thing_association_status: ?ManagedThingAssociationStatus,
+    managed_thing_association_status: ?ManagedThingAssociationStatus = null,
 
     /// The identifier of the managed thing in the association.
-    managed_thing_id: ?[]const u8,
+    managed_thing_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_association_id = "AccountAssociationId",

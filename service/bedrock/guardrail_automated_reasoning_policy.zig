@@ -4,7 +4,7 @@
 pub const GuardrailAutomatedReasoningPolicy = struct {
     /// The minimum confidence level required for Automated Reasoning policy
     /// violations to trigger guardrail actions. Values range from 0.0 to 1.0.
-    confidence_threshold: ?f64,
+    confidence_threshold: ?f64 = null,
 
     /// The list of Automated Reasoning policy ARNs that should be applied as part
     /// of this guardrail configuration.

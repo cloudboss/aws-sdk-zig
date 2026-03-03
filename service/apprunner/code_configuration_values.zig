@@ -9,12 +9,12 @@ const Runtime = @import("runtime.zig").Runtime;
 pub const CodeConfigurationValues = struct {
     /// The command App Runner runs to build your
     /// application.
-    build_command: ?[]const u8,
+    build_command: ?[]const u8 = null,
 
     /// The port that your application listens to in the container.
     ///
     /// Default: `8080`
-    port: ?[]const u8,
+    port: ?[]const u8 = null,
 
     /// A runtime environment type for building and running an App Runner service.
     /// It represents a
@@ -36,15 +36,15 @@ pub const CodeConfigurationValues = struct {
     ///
     /// * Currently, cross account referencing of Amazon Web Services Systems
     ///   Manager Parameter Store parameter is not supported.
-    runtime_environment_secrets: ?[]const aws.map.StringMapEntry,
+    runtime_environment_secrets: ?[]const aws.map.StringMapEntry = null,
 
     /// The environment variables that are available to your running App Runner
     /// service. An array of key-value pairs.
-    runtime_environment_variables: ?[]const aws.map.StringMapEntry,
+    runtime_environment_variables: ?[]const aws.map.StringMapEntry = null,
 
     /// The command App Runner runs to start your
     /// application.
-    start_command: ?[]const u8,
+    start_command: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .build_command = "BuildCommand",

@@ -6,11 +6,11 @@ const ClinicalNoteGenerationStatus = @import("clinical_note_generation_status.zi
 /// or failure reason if the analytics failed.
 pub const ClinicalNoteGenerationResult = struct {
     /// Holds the Amazon S3 URI for the output Clinical Note.
-    clinical_note_output_location: ?[]const u8,
+    clinical_note_output_location: ?[]const u8 = null,
 
     /// If `ClinicalNoteGenerationResult` is `FAILED`, information about why it
     /// failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The status of the clinical note generation.
     ///
@@ -31,10 +31,10 @@ pub const ClinicalNoteGenerationResult = struct {
     /// `TranscriptOutputLocation`.
     /// If the status is `FAILED`, `FailureReason` provides details about the
     /// failure.
-    status: ?ClinicalNoteGenerationStatus,
+    status: ?ClinicalNoteGenerationStatus = null,
 
     /// Holds the Amazon S3 URI for the output Transcript.
-    transcript_output_location: ?[]const u8,
+    transcript_output_location: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .clinical_note_output_location = "ClinicalNoteOutputLocation",

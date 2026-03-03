@@ -15,10 +15,10 @@ pub const LteNmrObj = struct {
 
     /// Signal power of the reference signal received, measured in dBm
     /// (decibel-milliwatts).
-    rsrp: ?i32,
+    rsrp: ?i32 = null,
 
     /// Signal quality of the reference Signal received, measured in decibels (dB).
-    rsrq: ?f32,
+    rsrq: ?f32 = null,
 
     pub const json_field_names = .{
         .earfcn = "Earfcn",

@@ -9,7 +9,7 @@ pub const ListClustersRequest = struct {
     /// then
     /// `ListClusters` returns up to 100 results and a `nextToken`
     /// value if applicable.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The `nextToken` value returned from a `ListClusters` request
     /// indicating that more results are available to fulfill the request and
@@ -20,7 +20,7 @@ pub const ListClustersRequest = struct {
     /// This token should be treated as an opaque identifier that is only used to
     /// retrieve
     /// the next items in a list and not for other programmatic purposes.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "maxResults",

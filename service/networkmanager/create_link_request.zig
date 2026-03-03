@@ -8,7 +8,7 @@ pub const CreateLinkRequest = struct {
     /// A description of the link.
     ///
     /// Constraints: Maximum length of 256 characters.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the global network.
     global_network_id: []const u8,
@@ -17,19 +17,19 @@ pub const CreateLinkRequest = struct {
     ///
     /// Constraints: Maximum length of 128 characters. Cannot include the following
     /// characters: | \ ^
-    provider: ?[]const u8,
+    provider: ?[]const u8 = null,
 
     /// The ID of the site.
     site_id: []const u8,
 
     /// The tags to apply to the resource during creation.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The type of the link.
     ///
     /// Constraints: Maximum length of 128 characters. Cannot include the following
     /// characters: | \ ^
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bandwidth = "Bandwidth",

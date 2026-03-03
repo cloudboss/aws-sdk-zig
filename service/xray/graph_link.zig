@@ -1,13 +1,13 @@
 /// The relation between two services.
 pub const GraphLink = struct {
     /// Destination traces of a link relationship.
-    destination_trace_ids: ?[]const []const u8,
+    destination_trace_ids: ?[]const []const u8 = null,
 
     /// Relationship of a trace to the corresponding service.
-    reference_type: ?[]const u8,
+    reference_type: ?[]const u8 = null,
 
     /// Source trace of a link relationship.
-    source_trace_id: ?[]const u8,
+    source_trace_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_trace_ids = "DestinationTraceIds",

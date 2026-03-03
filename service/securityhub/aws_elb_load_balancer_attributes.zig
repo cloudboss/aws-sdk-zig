@@ -11,10 +11,10 @@ pub const AwsElbLoadBalancerAttributes = struct {
     /// If the access log is enabled, the load balancer captures detailed
     /// information about all
     /// requests. It delivers the information to a specified S3 bucket.
-    access_log: ?AwsElbLoadBalancerAccessLog,
+    access_log: ?AwsElbLoadBalancerAccessLog = null,
 
     /// Any additional attributes for a load balancer.
-    additional_attributes: ?[]const AwsElbLoadBalancerAdditionalAttribute,
+    additional_attributes: ?[]const AwsElbLoadBalancerAdditionalAttribute = null,
 
     /// Information about the connection draining configuration for the load
     /// balancer.
@@ -23,7 +23,7 @@ pub const AwsElbLoadBalancerAttributes = struct {
     /// requests to
     /// complete before it shifts traffic away from a deregistered or unhealthy
     /// instance.
-    connection_draining: ?AwsElbLoadBalancerConnectionDraining,
+    connection_draining: ?AwsElbLoadBalancerConnectionDraining = null,
 
     /// Connection settings for the load balancer.
     ///
@@ -32,14 +32,14 @@ pub const AwsElbLoadBalancerAttributes = struct {
     /// for the specified duration. When a connection is idle, no data is sent over
     /// the
     /// connection.
-    connection_settings: ?AwsElbLoadBalancerConnectionSettings,
+    connection_settings: ?AwsElbLoadBalancerConnectionSettings = null,
 
     /// Cross-zone load balancing settings for the load balancer.
     ///
     /// If cross-zone load balancing is enabled, the load balancer routes the
     /// request traffic
     /// evenly across all instances regardless of the Availability Zones.
-    cross_zone_load_balancing: ?AwsElbLoadBalancerCrossZoneLoadBalancing,
+    cross_zone_load_balancing: ?AwsElbLoadBalancerCrossZoneLoadBalancing = null,
 
     pub const json_field_names = .{
         .access_log = "AccessLog",

@@ -17,12 +17,12 @@ pub const Attribute = struct {
     /// The ID of the target. You can specify the short form ID for a resource or
     /// the full
     /// Amazon Resource Name (ARN).
-    target_id: ?[]const u8,
+    target_id: ?[]const u8 = null,
 
     /// The type of the target to attach the attribute with. This parameter is
     /// required if you
     /// use the short form ID for a resource instead of the full ARN.
-    target_type: ?TargetType,
+    target_type: ?TargetType = null,
 
     /// The value of the attribute. The `value` must contain between 1 and 128
     /// characters. It can contain letters (uppercase and lowercase), numbers,
@@ -30,7 +30,7 @@ pub const Attribute = struct {
     /// underscores (_), periods (.), at signs (@), forward slashes (/), back
     /// slashes (\),
     /// colons (:), or spaces. The value can't start or end with a space.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

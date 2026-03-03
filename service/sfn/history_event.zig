@@ -36,113 +36,113 @@ const HistoryEventType = @import("history_event_type.zig").HistoryEventType;
 
 /// Contains details about the events of an execution.
 pub const HistoryEvent = struct {
-    activity_failed_event_details: ?ActivityFailedEventDetails,
+    activity_failed_event_details: ?ActivityFailedEventDetails = null,
 
-    activity_scheduled_event_details: ?ActivityScheduledEventDetails,
+    activity_scheduled_event_details: ?ActivityScheduledEventDetails = null,
 
     /// Contains details about an activity schedule event that failed during an
     /// execution.
-    activity_schedule_failed_event_details: ?ActivityScheduleFailedEventDetails,
+    activity_schedule_failed_event_details: ?ActivityScheduleFailedEventDetails = null,
 
-    activity_started_event_details: ?ActivityStartedEventDetails,
+    activity_started_event_details: ?ActivityStartedEventDetails = null,
 
-    activity_succeeded_event_details: ?ActivitySucceededEventDetails,
+    activity_succeeded_event_details: ?ActivitySucceededEventDetails = null,
 
-    activity_timed_out_event_details: ?ActivityTimedOutEventDetails,
+    activity_timed_out_event_details: ?ActivityTimedOutEventDetails = null,
 
     /// Contains details about an evaluation failure that occurred while processing
     /// a state.
-    evaluation_failed_event_details: ?EvaluationFailedEventDetails,
+    evaluation_failed_event_details: ?EvaluationFailedEventDetails = null,
 
-    execution_aborted_event_details: ?ExecutionAbortedEventDetails,
+    execution_aborted_event_details: ?ExecutionAbortedEventDetails = null,
 
-    execution_failed_event_details: ?ExecutionFailedEventDetails,
+    execution_failed_event_details: ?ExecutionFailedEventDetails = null,
 
     /// Contains details about the redrive attempt of an execution.
-    execution_redriven_event_details: ?ExecutionRedrivenEventDetails,
+    execution_redriven_event_details: ?ExecutionRedrivenEventDetails = null,
 
-    execution_started_event_details: ?ExecutionStartedEventDetails,
+    execution_started_event_details: ?ExecutionStartedEventDetails = null,
 
-    execution_succeeded_event_details: ?ExecutionSucceededEventDetails,
+    execution_succeeded_event_details: ?ExecutionSucceededEventDetails = null,
 
-    execution_timed_out_event_details: ?ExecutionTimedOutEventDetails,
+    execution_timed_out_event_details: ?ExecutionTimedOutEventDetails = null,
 
     /// The id of the event. Events are numbered sequentially, starting at one.
     id: i64 = 0,
 
-    lambda_function_failed_event_details: ?LambdaFunctionFailedEventDetails,
+    lambda_function_failed_event_details: ?LambdaFunctionFailedEventDetails = null,
 
-    lambda_function_scheduled_event_details: ?LambdaFunctionScheduledEventDetails,
+    lambda_function_scheduled_event_details: ?LambdaFunctionScheduledEventDetails = null,
 
-    lambda_function_schedule_failed_event_details: ?LambdaFunctionScheduleFailedEventDetails,
+    lambda_function_schedule_failed_event_details: ?LambdaFunctionScheduleFailedEventDetails = null,
 
     /// Contains details about a lambda function that failed to start during an
     /// execution.
-    lambda_function_start_failed_event_details: ?LambdaFunctionStartFailedEventDetails,
+    lambda_function_start_failed_event_details: ?LambdaFunctionStartFailedEventDetails = null,
 
     /// Contains details about a Lambda function that terminated successfully during
     /// an
     /// execution.
-    lambda_function_succeeded_event_details: ?LambdaFunctionSucceededEventDetails,
+    lambda_function_succeeded_event_details: ?LambdaFunctionSucceededEventDetails = null,
 
-    lambda_function_timed_out_event_details: ?LambdaFunctionTimedOutEventDetails,
+    lambda_function_timed_out_event_details: ?LambdaFunctionTimedOutEventDetails = null,
 
     /// Contains details about an iteration of a Map state that was aborted.
-    map_iteration_aborted_event_details: ?MapIterationEventDetails,
+    map_iteration_aborted_event_details: ?MapIterationEventDetails = null,
 
     /// Contains details about an iteration of a Map state that failed.
-    map_iteration_failed_event_details: ?MapIterationEventDetails,
+    map_iteration_failed_event_details: ?MapIterationEventDetails = null,
 
     /// Contains details about an iteration of a Map state that was started.
-    map_iteration_started_event_details: ?MapIterationEventDetails,
+    map_iteration_started_event_details: ?MapIterationEventDetails = null,
 
     /// Contains details about an iteration of a Map state that succeeded.
-    map_iteration_succeeded_event_details: ?MapIterationEventDetails,
+    map_iteration_succeeded_event_details: ?MapIterationEventDetails = null,
 
     /// Contains error and cause details about a Map Run that failed.
-    map_run_failed_event_details: ?MapRunFailedEventDetails,
+    map_run_failed_event_details: ?MapRunFailedEventDetails = null,
 
     /// Contains details about the redrive attempt of a Map Run.
-    map_run_redriven_event_details: ?MapRunRedrivenEventDetails,
+    map_run_redriven_event_details: ?MapRunRedrivenEventDetails = null,
 
     /// Contains details, such as `mapRunArn`, and the start date and time of a Map
     /// Run. `mapRunArn` is the Amazon Resource Name (ARN) of the Map Run that was
     /// started.
-    map_run_started_event_details: ?MapRunStartedEventDetails,
+    map_run_started_event_details: ?MapRunStartedEventDetails = null,
 
     /// Contains details about Map state that was started.
-    map_state_started_event_details: ?MapStateStartedEventDetails,
+    map_state_started_event_details: ?MapStateStartedEventDetails = null,
 
     /// The id of the previous event.
     previous_event_id: i64 = 0,
 
-    state_entered_event_details: ?StateEnteredEventDetails,
+    state_entered_event_details: ?StateEnteredEventDetails = null,
 
-    state_exited_event_details: ?StateExitedEventDetails,
+    state_exited_event_details: ?StateExitedEventDetails = null,
 
     /// Contains details about the failure of a task.
-    task_failed_event_details: ?TaskFailedEventDetails,
+    task_failed_event_details: ?TaskFailedEventDetails = null,
 
     /// Contains details about a task that was scheduled.
-    task_scheduled_event_details: ?TaskScheduledEventDetails,
+    task_scheduled_event_details: ?TaskScheduledEventDetails = null,
 
     /// Contains details about a task that was started.
-    task_started_event_details: ?TaskStartedEventDetails,
+    task_started_event_details: ?TaskStartedEventDetails = null,
 
     /// Contains details about a task that failed to start.
-    task_start_failed_event_details: ?TaskStartFailedEventDetails,
+    task_start_failed_event_details: ?TaskStartFailedEventDetails = null,
 
     /// Contains details about a task that where the submit failed.
-    task_submit_failed_event_details: ?TaskSubmitFailedEventDetails,
+    task_submit_failed_event_details: ?TaskSubmitFailedEventDetails = null,
 
     /// Contains details about a submitted task.
-    task_submitted_event_details: ?TaskSubmittedEventDetails,
+    task_submitted_event_details: ?TaskSubmittedEventDetails = null,
 
     /// Contains details about a task that succeeded.
-    task_succeeded_event_details: ?TaskSucceededEventDetails,
+    task_succeeded_event_details: ?TaskSucceededEventDetails = null,
 
     /// Contains details about a task that timed out.
-    task_timed_out_event_details: ?TaskTimedOutEventDetails,
+    task_timed_out_event_details: ?TaskTimedOutEventDetails = null,
 
     /// The date and time the event occurred, expressed in seconds and fractional
     /// milliseconds since the Unix epoch, which is defined as January 1, 1970, at

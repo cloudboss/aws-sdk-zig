@@ -5,20 +5,20 @@ const EntitlementStatus = @import("entitlement_status.zig").EntitlementStatus;
 pub const Entitlement = struct {
     /// Percentage from 0-100 of the data transfer cost to be billed to the
     /// subscriber.
-    data_transfer_subscriber_fee_percent: ?i32,
+    data_transfer_subscriber_fee_percent: ?i32 = null,
 
     /// A description of the entitlement.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The type of encryption that will be used on the output that is associated
     /// with this entitlement.
-    encryption: ?Encryption,
+    encryption: ?Encryption = null,
 
     /// The ARN of the entitlement.
     entitlement_arn: []const u8,
 
     /// An indication of whether the entitlement is enabled.
-    entitlement_status: ?EntitlementStatus,
+    entitlement_status: ?EntitlementStatus = null,
 
     /// The name of the entitlement.
     name: []const u8,

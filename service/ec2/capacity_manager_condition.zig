@@ -6,5 +6,5 @@ const DimensionCondition = @import("dimension_condition.zig").DimensionCondition
 pub const CapacityManagerCondition = struct {
     /// The dimension-based condition that specifies how to filter the data based on
     /// dimension values.
-    dimension_condition: ?DimensionCondition,
+    dimension_condition: ?DimensionCondition = null,
 };

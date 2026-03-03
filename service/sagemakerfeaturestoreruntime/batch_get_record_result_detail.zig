@@ -3,7 +3,7 @@ const FeatureValue = @import("feature_value.zig").FeatureValue;
 /// The output of records that have been retrieved in a batch.
 pub const BatchGetRecordResultDetail = struct {
     /// The `ExpiresAt` ISO string of the requested record.
-    expires_at: ?[]const u8,
+    expires_at: ?[]const u8 = null,
 
     /// The `FeatureGroupName` containing Records you retrieved in a batch.
     feature_group_name: []const u8,

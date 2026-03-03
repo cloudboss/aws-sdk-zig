@@ -10,7 +10,7 @@ pub const S3Location = struct {
 
     /// The version ID of the Amazon Amazon S3 object. If not specified, the latest
     /// version of the object is used.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

@@ -3,7 +3,7 @@ const VehicleState = @import("vehicle_state.zig").VehicleState;
 /// Information about a campaign associated with a vehicle.
 pub const VehicleStatus = struct {
     /// The name of a campaign.
-    campaign_name: ?[]const u8,
+    campaign_name: ?[]const u8 = null,
 
     /// The status of a campaign, which can be one of the following:
     ///
@@ -20,10 +20,10 @@ pub const VehicleStatus = struct {
     ///
     /// * `READY_FOR_CHECKIN` - The campaign is approved and waiting for vehicle
     ///   check-in before deployment.
-    status: ?VehicleState,
+    status: ?VehicleState = null,
 
     /// The unique ID of the vehicle.
-    vehicle_name: ?[]const u8,
+    vehicle_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .campaign_name = "campaignName",

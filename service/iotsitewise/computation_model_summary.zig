@@ -13,7 +13,7 @@ pub const ComputationModelSummary = struct {
     creation_date: i64,
 
     /// The description of the computation model.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the computation model.
     id: []const u8,

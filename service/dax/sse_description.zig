@@ -12,7 +12,7 @@ pub const SSEDescription = struct {
     /// * `DISABLING` - Server-side encryption is being disabled.
     ///
     /// * `DISABLED` - Server-side encryption is disabled.
-    status: ?SSEStatus,
+    status: ?SSEStatus = null,
 
     pub const json_field_names = .{
         .status = "Status",

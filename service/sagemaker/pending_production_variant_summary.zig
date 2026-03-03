@@ -15,55 +15,55 @@ pub const PendingProductionVariantSummary = struct {
     ///
     /// This parameter was used to specify the size of the EI instance to use for
     /// the production variant.
-    accelerator_type: ?ProductionVariantAcceleratorType,
+    accelerator_type: ?ProductionVariantAcceleratorType = null,
 
     /// The number of instances associated with the variant.
-    current_instance_count: ?i32,
+    current_instance_count: ?i32 = null,
 
     /// The serverless configuration for the endpoint.
-    current_serverless_config: ?ProductionVariantServerlessConfig,
+    current_serverless_config: ?ProductionVariantServerlessConfig = null,
 
     /// The weight associated with the variant.
-    current_weight: ?f32,
+    current_weight: ?f32 = null,
 
     /// An array of `DeployedImage` objects that specify the Amazon EC2 Container
     /// Registry paths of the inference images deployed on instances of this
     /// `ProductionVariant`.
-    deployed_images: ?[]const DeployedImage,
+    deployed_images: ?[]const DeployedImage = null,
 
     /// The number of instances requested in this deployment, as specified in the
     /// endpoint configuration for the endpoint. The value is taken from the request
     /// to the
     /// [CreateEndpointConfig](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html) operation.
-    desired_instance_count: ?i32,
+    desired_instance_count: ?i32 = null,
 
     /// The serverless configuration requested for this deployment, as specified in
     /// the endpoint configuration for the endpoint.
-    desired_serverless_config: ?ProductionVariantServerlessConfig,
+    desired_serverless_config: ?ProductionVariantServerlessConfig = null,
 
     /// The requested weight for the variant in this deployment, as specified in the
     /// endpoint configuration for the endpoint. The value is taken from the request
     /// to the
     /// [CreateEndpointConfig](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html) operation.
-    desired_weight: ?f32,
+    desired_weight: ?f32 = null,
 
     /// The type of instances associated with the variant.
-    instance_type: ?ProductionVariantInstanceType,
+    instance_type: ?ProductionVariantInstanceType = null,
 
     /// Settings that control the range in the number of instances that the endpoint
     /// provisions as it scales up or down to accommodate traffic.
-    managed_instance_scaling: ?ProductionVariantManagedInstanceScaling,
+    managed_instance_scaling: ?ProductionVariantManagedInstanceScaling = null,
 
     /// Settings that control how the endpoint routes incoming traffic to the
     /// instances that the endpoint hosts.
-    routing_config: ?ProductionVariantRoutingConfig,
+    routing_config: ?ProductionVariantRoutingConfig = null,
 
     /// The name of the variant.
     variant_name: []const u8,
 
     /// The endpoint variant status which describes the current deployment stage
     /// status or operational status.
-    variant_status: ?[]const ProductionVariantStatus,
+    variant_status: ?[]const ProductionVariantStatus = null,
 
     pub const json_field_names = .{
         .accelerator_type = "AcceleratorType",

@@ -1,22 +1,22 @@
 /// Defines a Neptune ML resource.
 pub const MlResourceDefinition = struct {
     /// The resource ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The CloudWatch log URL for the resource.
-    cloudwatch_log_url: ?[]const u8,
+    cloudwatch_log_url: ?[]const u8 = null,
 
     /// The failure reason, in case of a failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The resource name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The output location.
-    output_location: ?[]const u8,
+    output_location: ?[]const u8 = null,
 
     /// The resource status.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

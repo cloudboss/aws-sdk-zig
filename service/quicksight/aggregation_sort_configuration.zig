@@ -5,7 +5,7 @@ const SortDirection = @import("sort_direction.zig").SortDirection;
 /// The configuration options to sort aggregated values.
 pub const AggregationSortConfiguration = struct {
     /// The function that aggregates the values in `Column`.
-    aggregation_function: ?AggregationFunction,
+    aggregation_function: ?AggregationFunction = null,
 
     /// The column that determines the sort order of aggregated values.
     column: ColumnIdentifier,

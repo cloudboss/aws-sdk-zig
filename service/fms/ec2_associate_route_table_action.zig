@@ -5,11 +5,11 @@ const ActionTarget = @import("action_target.zig").ActionTarget;
 pub const EC2AssociateRouteTableAction = struct {
     /// A description of the EC2 route table that is associated with the remediation
     /// action.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the gateway to be used with the EC2 route table that is associated
     /// with the remediation action.
-    gateway_id: ?ActionTarget,
+    gateway_id: ?ActionTarget = null,
 
     /// The ID of the EC2 route table that is associated with the remediation
     /// action.
@@ -17,7 +17,7 @@ pub const EC2AssociateRouteTableAction = struct {
 
     /// The ID of the subnet for the EC2 route table that is associated with the
     /// remediation action.
-    subnet_id: ?ActionTarget,
+    subnet_id: ?ActionTarget = null,
 
     pub const json_field_names = .{
         .description = "Description",

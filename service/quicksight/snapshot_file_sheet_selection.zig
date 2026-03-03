@@ -25,7 +25,7 @@ pub const SnapshotFileSheetSelection = struct {
     /// selections for Excel. If you are generating an Excel workbook, the order of
     /// the visual IDs provided in this structure determines the order of the
     /// worksheets in the Excel file.
-    visual_ids: ?[]const []const u8,
+    visual_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .selection_scope = "SelectionScope",

@@ -7,7 +7,7 @@ pub const VirtualGatewayHttpConnectionPool = struct {
 
     /// Number of overflowing requests after `max_connections` Envoy will queue to
     /// upstream cluster.
-    max_pending_requests: ?i32,
+    max_pending_requests: ?i32 = null,
 
     pub const json_field_names = .{
         .max_connections = "maxConnections",

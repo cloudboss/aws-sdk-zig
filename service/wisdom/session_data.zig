@@ -5,10 +5,10 @@ const SessionIntegrationConfiguration = @import("session_integration_configurati
 /// Information about the session.
 pub const SessionData = struct {
     /// The description of the session.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The configuration information for the session integration.
-    integration_configuration: ?SessionIntegrationConfiguration,
+    integration_configuration: ?SessionIntegrationConfiguration = null,
 
     /// The name of the session.
     name: []const u8,
@@ -20,7 +20,7 @@ pub const SessionData = struct {
     session_id: []const u8,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .description = "description",

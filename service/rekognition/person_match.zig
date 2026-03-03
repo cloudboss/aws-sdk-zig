@@ -13,10 +13,10 @@ pub const PersonMatch = struct {
     /// Information about the faces in the input collection that match the face of a
     /// person in the
     /// video.
-    face_matches: ?[]const FaceMatch,
+    face_matches: ?[]const FaceMatch = null,
 
     /// Information about the matched person.
-    person: ?PersonDetail,
+    person: ?PersonDetail = null,
 
     /// The time, in milliseconds from the beginning of the video, that the person
     /// was matched in

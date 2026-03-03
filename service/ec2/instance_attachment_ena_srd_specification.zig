@@ -18,8 +18,8 @@ const InstanceAttachmentEnaSrdUdpSpecification = @import("instance_attachment_en
 /// is enabled, you can specify whether UDP network traffic uses it.
 pub const InstanceAttachmentEnaSrdSpecification = struct {
     /// Indicates whether ENA Express is enabled for the network interface.
-    ena_srd_enabled: ?bool,
+    ena_srd_enabled: ?bool = null,
 
     /// Configures ENA Express for UDP network traffic.
-    ena_srd_udp_specification: ?InstanceAttachmentEnaSrdUdpSpecification,
+    ena_srd_udp_specification: ?InstanceAttachmentEnaSrdUdpSpecification = null,
 };

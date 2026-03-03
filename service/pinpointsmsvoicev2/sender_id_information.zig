@@ -22,7 +22,7 @@ pub const SenderIdInformation = struct {
     registered: bool = false,
 
     /// The unique identifier for the registration.
-    registration_id: ?[]const u8,
+    registration_id: ?[]const u8 = null,
 
     /// The alphanumeric sender ID in a specific country that you'd like to
     /// describe.

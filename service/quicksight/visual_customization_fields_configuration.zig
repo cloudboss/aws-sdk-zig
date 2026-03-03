@@ -6,11 +6,11 @@ const DashboardCustomizationStatus = @import("dashboard_customization_status.zig
 pub const VisualCustomizationFieldsConfiguration = struct {
     /// The additional dataset fields available for dashboard readers to customize
     /// the visual with, beyond the fields already configured on the visual.
-    additional_fields: ?[]const ColumnIdentifier,
+    additional_fields: ?[]const ColumnIdentifier = null,
 
     /// Specifies whether dashboard readers can customize fields for this visual.
     /// This option is `ENABLED` by default.
-    status: ?DashboardCustomizationStatus,
+    status: ?DashboardCustomizationStatus = null,
 
     pub const json_field_names = .{
         .additional_fields = "AdditionalFields",

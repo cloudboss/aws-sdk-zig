@@ -5,7 +5,7 @@ const DeobfuscationStatus = @import("deobfuscation_status.zig").DeobfuscationSta
 pub const JavaScriptSourceMaps = struct {
     /// The S3Uri of the bucket or folder that stores the source map files. It is
     /// required if status is ENABLED.
-    s3_uri: ?[]const u8,
+    s3_uri: ?[]const u8 = null,
 
     /// Specifies whether JavaScript error stack traces should be unminified for
     /// this app monitor. The default is for JavaScript error stack trace

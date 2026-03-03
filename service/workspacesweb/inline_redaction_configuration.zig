@@ -11,17 +11,17 @@ pub const InlineRedactionConfiguration = struct {
     /// confidence, and redaction is enforced for both formatted pattern +
     /// unformatted pattern without keyword. This is applied to patterns that do not
     /// have a pattern-level confidence level. Defaults to confidence level 2.
-    global_confidence_level: ?i32,
+    global_confidence_level: ?i32 = null,
 
     /// The global enforced URL configuration for the inline redaction
     /// configuration. This is applied to patterns that do not have a pattern-level
     /// enforced URL list.
-    global_enforced_urls: ?[]const []const u8,
+    global_enforced_urls: ?[]const []const u8 = null,
 
     /// The global exempt URL configuration for the inline redaction configuration.
     /// This is applied to patterns that do not have a pattern-level exempt URL
     /// list.
-    global_exempt_urls: ?[]const []const u8,
+    global_exempt_urls: ?[]const []const u8 = null,
 
     /// The inline redaction patterns to be enabled for the inline redaction
     /// configuration.

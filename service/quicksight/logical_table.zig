@@ -14,7 +14,7 @@ pub const LogicalTable = struct {
 
     /// Transform operations that act on this logical table. For this structure to
     /// be valid, only one of the attributes can be non-null.
-    data_transforms: ?[]const TransformOperation,
+    data_transforms: ?[]const TransformOperation = null,
 
     /// Source of this logical table.
     source: LogicalTableSource,

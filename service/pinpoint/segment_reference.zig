@@ -4,7 +4,7 @@ pub const SegmentReference = struct {
     id: []const u8,
 
     /// The version number of the segment.
-    version: ?i32,
+    version: ?i32 = null,
 
     pub const json_field_names = .{
         .id = "Id",

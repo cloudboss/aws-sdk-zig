@@ -4,13 +4,13 @@ const IncompatibilityMessage = @import("incompatibility_message.zig").Incompatib
 /// Represents a device pool compatibility result.
 pub const DevicePoolCompatibilityResult = struct {
     /// Whether the result was compatible with the device pool.
-    compatible: ?bool,
+    compatible: ?bool = null,
 
     /// The device (phone or tablet) to return information about.
-    device: ?Device,
+    device: ?Device = null,
 
     /// Information about the compatibility.
-    incompatibility_messages: ?[]const IncompatibilityMessage,
+    incompatibility_messages: ?[]const IncompatibilityMessage = null,
 
     pub const json_field_names = .{
         .compatible = "compatible",

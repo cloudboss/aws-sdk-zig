@@ -5,7 +5,7 @@ pub const UpdateAttributesRequest = struct {
     /// associated with the application. The array can specify the complete, exact
     /// name of each attribute to remove or it can specify a glob pattern that an
     /// attribute name must match in order for the attribute to be removed.
-    blacklist: ?[]const []const u8,
+    blacklist: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .blacklist = "Blacklist",

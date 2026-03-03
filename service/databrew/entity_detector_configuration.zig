@@ -6,7 +6,7 @@ pub const EntityDetectorConfiguration = struct {
     /// Configuration of statistics that are allowed to be run on columns that
     /// contain detected entities. When undefined, no statistics will be computed
     /// on columns that contain detected entities.
-    allowed_statistics: ?[]const AllowedStatistics,
+    allowed_statistics: ?[]const AllowedStatistics = null,
 
     /// Entity types to detect. Can be any of the following:
     ///

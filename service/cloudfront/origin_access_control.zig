@@ -6,5 +6,5 @@ pub const OriginAccessControl = struct {
     id: []const u8,
 
     /// The origin access control.
-    origin_access_control_config: ?OriginAccessControlConfig,
+    origin_access_control_config: ?OriginAccessControlConfig = null,
 };

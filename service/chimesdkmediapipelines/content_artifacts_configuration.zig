@@ -4,7 +4,7 @@ const ArtifactsState = @import("artifacts_state.zig").ArtifactsState;
 /// The content artifact object.
 pub const ContentArtifactsConfiguration = struct {
     /// The MUX type of the artifact configuration.
-    mux_type: ?ContentMuxType,
+    mux_type: ?ContentMuxType = null,
 
     /// Indicates whether the content artifact is enabled or disabled.
     state: ArtifactsState,

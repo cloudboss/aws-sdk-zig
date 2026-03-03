@@ -7,13 +7,13 @@ const UpdateTarget = @import("update_target.zig").UpdateTarget;
 /// release.
 pub const ServerlessTrack = struct {
     /// The name of the track. Valid values are `current` and `trailing`.
-    track_name: ?[]const u8,
+    track_name: ?[]const u8 = null,
 
     /// An array of `UpdateTarget` objects to update with the track.
-    update_targets: ?[]const UpdateTarget,
+    update_targets: ?[]const UpdateTarget = null,
 
     /// The workgroup version number for the workgroup release.
-    workgroup_version: ?[]const u8,
+    workgroup_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .track_name = "trackName",

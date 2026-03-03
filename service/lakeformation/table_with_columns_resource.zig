@@ -8,15 +8,15 @@ const ColumnWildcard = @import("column_wildcard.zig").ColumnWildcard;
 pub const TableWithColumnsResource = struct {
     /// The identifier for the Data Catalog. By default, it is the account ID of the
     /// caller.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The list of column names for the table. At least one of `ColumnNames` or
     /// `ColumnWildcard` is required.
-    column_names: ?[]const []const u8,
+    column_names: ?[]const []const u8 = null,
 
     /// A wildcard specified by a `ColumnWildcard` object. At least one of
     /// `ColumnNames` or `ColumnWildcard` is required.
-    column_wildcard: ?ColumnWildcard,
+    column_wildcard: ?ColumnWildcard = null,
 
     /// The name of the database for the table with columns resource. Unique to the
     /// Data Catalog. A database is a set of associated table definitions organized

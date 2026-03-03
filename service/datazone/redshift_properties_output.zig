@@ -6,31 +6,31 @@ const RedshiftStorageProperties = @import("redshift_storage_properties.zig").Red
 /// The Amazon Redshift properties.
 pub const RedshiftPropertiesOutput = struct {
     /// The Amazon Redshift credentials.
-    credentials: ?RedshiftCredentials,
+    credentials: ?RedshiftCredentials = null,
 
     /// The Amazon Redshift database name.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// Specifies whether Amaon Redshift properties has a provisioned secret.
-    is_provisioned_secret: ?bool,
+    is_provisioned_secret: ?bool = null,
 
     /// The jdbcIam URL of the Amazon Redshift properties.
-    jdbc_iam_url: ?[]const u8,
+    jdbc_iam_url: ?[]const u8 = null,
 
     /// The jdbcURL of the Amazon Redshift properties.
-    jdbc_url: ?[]const u8,
+    jdbc_url: ?[]const u8 = null,
 
     /// The lineage syn of the Amazon Redshift properties.
-    lineage_sync: ?RedshiftLineageSyncConfigurationOutput,
+    lineage_sync: ?RedshiftLineageSyncConfigurationOutput = null,
 
     /// The redshiftTempDir of the Amazon Redshift properties.
-    redshift_temp_dir: ?[]const u8,
+    redshift_temp_dir: ?[]const u8 = null,
 
     /// The status in the Amazon Redshift properties.
-    status: ?ConnectionStatus,
+    status: ?ConnectionStatus = null,
 
     /// The storage in the Amazon Redshift properties.
-    storage: ?RedshiftStorageProperties,
+    storage: ?RedshiftStorageProperties = null,
 
     pub const json_field_names = .{
         .credentials = "credentials",

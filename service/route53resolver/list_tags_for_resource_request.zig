@@ -3,7 +3,7 @@ pub const ListTagsForResourceRequest = struct {
     /// `ListTagsForResource` request.
     /// If you don't specify a value for `MaxResults`, Resolver returns up to 100
     /// tags.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// For the first `ListTagsForResource` request, omit this value.
     ///
@@ -11,7 +11,7 @@ pub const ListTagsForResourceRequest = struct {
     /// `ListTagsForResource` request
     /// to get the next group of tags for the resource. In the next request, specify
     /// the value of `NextToken` from the previous response.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the resource that you want to list tags
     /// for.

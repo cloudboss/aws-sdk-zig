@@ -4,14 +4,14 @@
 /// JSONata, or individual states set to JSONata.
 pub const EvaluationFailedEventDetails = struct {
     /// A more detailed explanation of the cause of the failure.
-    cause: ?[]const u8,
+    cause: ?[]const u8 = null,
 
     /// The error code of the failure.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// The location of the field in the state in which the evaluation error
     /// occurred.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The name of the state in which the evaluation error occurred.
     state: []const u8,

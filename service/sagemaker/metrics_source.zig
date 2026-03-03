@@ -1,7 +1,7 @@
 /// Details about the metrics source.
 pub const MetricsSource = struct {
     /// The hash key used for the metrics source.
-    content_digest: ?[]const u8,
+    content_digest: ?[]const u8 = null,
 
     /// The metric source content type.
     content_type: []const u8,

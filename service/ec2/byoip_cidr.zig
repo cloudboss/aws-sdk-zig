@@ -15,16 +15,16 @@ pub const ByoipCidr = struct {
     ///
     /// For more information, see [Bring your own IP to CloudFront using
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoip-cloudfront.html) in the *Amazon VPC IPAM User Guide*.
-    advertisement_type: ?[]const u8,
+    advertisement_type: ?[]const u8 = null,
 
     /// The BYOIP CIDR associations with ASNs.
-    asn_associations: ?[]const AsnAssociation,
+    asn_associations: ?[]const AsnAssociation = null,
 
     /// The address range, in CIDR notation.
-    cidr: ?[]const u8,
+    cidr: ?[]const u8 = null,
 
     /// The description of the address range.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// If you have [Local
     /// Zones](https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html) enabled, you can choose a network border group for Local Zones when you provision and advertise a BYOIPv4 CIDR. Choose the network border group carefully as the EIP and the Amazon Web Services resource it is associated with must reside in the same network border group.
@@ -40,7 +40,7 @@ pub const ByoipCidr = struct {
     ///
     /// You cannot provision or advertise BYOIPv6 address ranges in Local Zones at
     /// this time.
-    network_border_group: ?[]const u8,
+    network_border_group: ?[]const u8 = null,
 
     /// The state of the address range.
     ///
@@ -67,9 +67,9 @@ pub const ByoipCidr = struct {
     ///
     /// * `provisioned-not-publicly-advertisable`: The address range is provisioned
     ///   and cannot be advertised.
-    state: ?ByoipCidrState,
+    state: ?ByoipCidrState = null,
 
     /// Upon success, contains the ID of the address pool. Otherwise, contains an
     /// error message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 };

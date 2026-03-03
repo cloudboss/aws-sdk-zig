@@ -33,13 +33,13 @@ pub const RestoreTestingSelectionForCreate = struct {
     /// `ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]`
     /// or by a wildcard: `ProtectedResourceArns: ["*"]`,
     /// but not both.
-    protected_resource_arns: ?[]const []const u8,
+    protected_resource_arns: ?[]const []const u8 = null,
 
     /// If you have included the wildcard in ProtectedResourceArns,
     /// you can include resource conditions, such as
     /// `ProtectedResourceConditions: { StringEquals: [{ key: "XXXX",
     /// value: "YYYY" }]`.
-    protected_resource_conditions: ?ProtectedResourceConditions,
+    protected_resource_conditions: ?ProtectedResourceConditions = null,
 
     /// The type of Amazon Web Services resource included in a restore
     /// testing selection; for example, an Amazon EBS volume or
@@ -75,7 +75,7 @@ pub const RestoreTestingSelectionForCreate = struct {
     /// See the complete list of [restore testing
     /// inferred
     /// metadata](https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html).
-    restore_metadata_overrides: ?[]const aws.map.StringMapEntry,
+    restore_metadata_overrides: ?[]const aws.map.StringMapEntry = null,
 
     /// The unique name of the restore testing selection
     /// that belongs to the related restore testing plan.

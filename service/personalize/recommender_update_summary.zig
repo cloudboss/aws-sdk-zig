@@ -5,23 +5,23 @@ const RecommenderConfig = @import("recommender_config.zig").RecommenderConfig;
 /// [DescribeRecommender](https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html) API.
 pub const RecommenderUpdateSummary = struct {
     /// The date and time (in Unix format) that the recommender update was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// If a recommender update fails, the reason behind the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The date and time (in Unix time) that the recommender update was last
     /// updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The configuration details of the recommender update.
-    recommender_config: ?RecommenderConfig,
+    recommender_config: ?RecommenderConfig = null,
 
     /// The status of the recommender update. A recommender update can be in one of
     /// the following states:
     ///
     /// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

@@ -12,5 +12,5 @@ pub const ScanFilter = struct {
     /// asterisk (`*`). You can place an asterisk at only the end of the string, for
     /// example,
     /// `AWS::S3::*`.
-    types: ?[]const []const u8,
+    types: ?[]const []const u8 = null,
 };

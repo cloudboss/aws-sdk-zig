@@ -2,7 +2,7 @@ const Filter = @import("filter.zig").Filter;
 
 pub const ListTagsForResourceMessage = struct {
     /// This parameter is not currently supported.
-    filters: ?[]const Filter,
+    filters: ?[]const Filter = null,
 
     /// The Amazon Neptune resource with tags to be listed. This value is an Amazon
     /// Resource Name

@@ -6,7 +6,7 @@ pub const EventSummary = struct {
     event_id: []const u8,
 
     /// A list of references in a `TimelineEvent`.
-    event_references: ?[]const EventReference,
+    event_references: ?[]const EventReference = null,
 
     /// The timestamp for when the event occurred.
     event_time: i64,

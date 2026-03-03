@@ -10,7 +10,7 @@ pub const PropertyValueEntry = struct {
     entity_property_reference: EntityPropertyReference,
 
     /// A list of objects that specify time series property values.
-    property_values: ?[]const PropertyValue,
+    property_values: ?[]const PropertyValue = null,
 
     pub const json_field_names = .{
         .entity_property_reference = "entityPropertyReference",

@@ -3,7 +3,7 @@ const GaugeChartConditionalFormattingOption = @import("gauge_chart_conditional_f
 /// The conditional formatting of a `GaugeChartVisual`.
 pub const GaugeChartConditionalFormatting = struct {
     /// Conditional formatting options of a `GaugeChartVisual`.
-    conditional_formatting_options: ?[]const GaugeChartConditionalFormattingOption,
+    conditional_formatting_options: ?[]const GaugeChartConditionalFormattingOption = null,
 
     pub const json_field_names = .{
         .conditional_formatting_options = "ConditionalFormattingOptions",

@@ -3,13 +3,13 @@ const EvaluationFormMultiSelectQuestionAutomationOption = @import("evaluation_fo
 
 /// Automation configuration for multi-select questions.
 pub const EvaluationFormMultiSelectQuestionAutomation = struct {
-    answer_source: ?EvaluationFormQuestionAutomationAnswerSource,
+    answer_source: ?EvaluationFormQuestionAutomationAnswerSource = null,
 
     /// Reference IDs of default options.
-    default_option_ref_ids: ?[]const []const u8,
+    default_option_ref_ids: ?[]const []const u8 = null,
 
     /// Automation options for the multi-select question.
-    options: ?[]const EvaluationFormMultiSelectQuestionAutomationOption,
+    options: ?[]const EvaluationFormMultiSelectQuestionAutomationOption = null,
 
     pub const json_field_names = .{
         .answer_source = "AnswerSource",

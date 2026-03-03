@@ -4,7 +4,7 @@ pub const S3BucketSource = struct {
     s_3_bucket: []const u8,
 
     /// S3 bucket source s3 bucket owner.
-    s_3_bucket_owner: ?[]const u8,
+    s_3_bucket_owner: ?[]const u8 = null,
 
     /// S3 bucket source s3 key.
     s_3_key: []const u8,

@@ -23,7 +23,7 @@ pub const AacSettings = struct {
     /// AudioType and FollowInputAudioType. Choose NORMAL when the input does not
     /// contain pre-mixed audio + audio description (AD). In this case, the encoder
     /// will use any values you provide for AudioType and FollowInputAudioType.
-    audio_description_broadcaster_mix: ?AacAudioDescriptionBroadcasterMix,
+    audio_description_broadcaster_mix: ?AacAudioDescriptionBroadcasterMix = null,
 
     /// Specify the average bitrate in bits per second. The set of valid values for
     /// this setting is: 6000, 8000, 10000, 12000, 14000, 16000, 20000, 24000,
@@ -32,7 +32,7 @@ pub const AacSettings = struct {
     /// 576000, 640000, 768000, 896000, 1024000. The value you set is also
     /// constrained by the values that you choose for Profile, Bitrate control mode,
     /// and Sample rate. Default values depend on Bitrate control mode and Profile.
-    bitrate: ?i32,
+    bitrate: ?i32 = null,
 
     /// Specify the AAC profile. For the widest player compatibility and where
     /// higher bitrates are acceptable: Keep the default profile, LC (AAC-LC) For
@@ -42,7 +42,7 @@ pub const AacSettings = struct {
     /// encoding stereo audio at very low bitrates. For improved audio quality at
     /// lower bitrates, adaptive audio bitrate switching, and loudness control:
     /// Choose XHE.
-    codec_profile: ?AacCodecProfile,
+    codec_profile: ?AacCodecProfile = null,
 
     /// The Coding mode that you specify determines the number of audio channels and
     /// the audio channel layout metadata in your AAC output. Valid coding modes
@@ -54,14 +54,14 @@ pub const AacSettings = struct {
     /// R. * 5.1 Surround: Six channels, C, L, R, Ls, Rs, LFE. To follow the number
     /// of channels from your input audio, choose CODING_MODE_AUTO, and the service
     /// will automatically choose from one of the coding modes above.
-    coding_mode: ?AacCodingMode,
+    coding_mode: ?AacCodingMode = null,
 
     /// Choose the loudness measurement mode for your audio content. For music or
     /// advertisements: We recommend that you keep the default value, Program. For
     /// speech or other content: We recommend that you choose Anchor. When you do,
     /// MediaConvert optimizes the loudness of your output for clarify by applying
     /// speech gates.
-    loudness_measurement_mode: ?AacLoudnessMeasurementMode,
+    loudness_measurement_mode: ?AacLoudnessMeasurementMode = null,
 
     /// Specify the RAP (Random Access Point) interval for your xHE-AAC audio
     /// output. A RAP allows a decoder to decode audio data mid-stream, without the
@@ -70,38 +70,38 @@ pub const AacSettings = struct {
     /// in milliseconds. Smaller values allow for better seeking and more frequent
     /// stream switching, while large values improve compression efficiency. To have
     /// MediaConvert automatically determine the RAP interval: Leave blank.
-    rap_interval: ?i32,
+    rap_interval: ?i32 = null,
 
     /// Specify the AAC rate control mode. For a constant bitrate: Choose CBR. Your
     /// AAC output bitrate will be equal to the value that you choose for Bitrate.
     /// For a variable bitrate: Choose VBR. Your AAC output bitrate will vary
     /// according to your audio content and the value that you choose for Bitrate
     /// quality.
-    rate_control_mode: ?AacRateControlMode,
+    rate_control_mode: ?AacRateControlMode = null,
 
     /// Enables LATM/LOAS AAC output. Note that if you use LATM/LOAS AAC in an
     /// output, you must choose "No container" for the output container.
-    raw_format: ?AacRawFormat,
+    raw_format: ?AacRawFormat = null,
 
     /// Specify the AAC sample rate in samples per second (Hz). Valid sample rates
     /// depend on the AAC profile and Coding mode that you select. For a list of
     /// supported sample rates, see:
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html
-    sample_rate: ?i32,
+    sample_rate: ?i32 = null,
 
     /// Use MPEG-2 AAC instead of MPEG-4 AAC audio for raw or MPEG-2 Transport
     /// Stream containers.
-    specification: ?AacSpecification,
+    specification: ?AacSpecification = null,
 
     /// Specify the xHE-AAC loudness target. Enter an integer from 6 to 16,
     /// representing "loudness units". For more information, see the following
     /// specification: Supplementary information for R 128 EBU Tech 3342-2023.
-    target_loudness_range: ?i32,
+    target_loudness_range: ?i32 = null,
 
     /// Specify the quality of your variable bitrate (VBR) AAC audio. For a list of
     /// approximate VBR bitrates, see:
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html#aac_vbr
-    vbr_quality: ?AacVbrQuality,
+    vbr_quality: ?AacVbrQuality = null,
 
     pub const json_field_names = .{
         .audio_description_broadcaster_mix = "AudioDescriptionBroadcasterMix",

@@ -6,7 +6,7 @@ const ReplacementTemplate = @import("replacement_template.zig").ReplacementTempl
 pub const ReplacementEmailContent = struct {
     /// The `ReplacementTemplate` associated with
     /// `ReplacementEmailContent`.
-    replacement_template: ?ReplacementTemplate,
+    replacement_template: ?ReplacementTemplate = null,
 
     pub const json_field_names = .{
         .replacement_template = "ReplacementTemplate",

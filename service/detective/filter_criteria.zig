@@ -5,20 +5,20 @@ const StringFilter = @import("string_filter.zig").StringFilter;
 pub const FilterCriteria = struct {
     /// Filter the investigation results based on when the investigation was
     /// created.
-    created_time: ?DateFilter,
+    created_time: ?DateFilter = null,
 
     /// Filter the investigation results based on the Amazon Resource Name (ARN) of
     /// the entity.
-    entity_arn: ?StringFilter,
+    entity_arn: ?StringFilter = null,
 
     /// Filter the investigation results based on the severity.
-    severity: ?StringFilter,
+    severity: ?StringFilter = null,
 
     /// Filter the investigation results based on the state.
-    state: ?StringFilter,
+    state: ?StringFilter = null,
 
     /// Filter the investigation results based on the status.
-    status: ?StringFilter,
+    status: ?StringFilter = null,
 
     pub const json_field_names = .{
         .created_time = "CreatedTime",

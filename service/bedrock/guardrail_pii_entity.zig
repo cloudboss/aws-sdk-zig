@@ -13,12 +13,12 @@ pub const GuardrailPiiEntity = struct {
     /// * `ANONYMIZE` – Mask the content and replace it with identifier tags.
     /// * `NONE` – Take no action but return detection information in the trace
     ///   response.
-    input_action: ?GuardrailSensitiveInformationAction,
+    input_action: ?GuardrailSensitiveInformationAction = null,
 
     /// Indicates whether guardrail evaluation is enabled on the input. When
     /// disabled, you aren't charged for the evaluation. The evaluation doesn't
     /// appear in the response.
-    input_enabled: ?bool,
+    input_enabled: ?bool = null,
 
     /// The action to take when harmful content is detected in the output. Supported
     /// values include:
@@ -27,12 +27,12 @@ pub const GuardrailPiiEntity = struct {
     /// * `ANONYMIZE` – Mask the content and replace it with identifier tags.
     /// * `NONE` – Take no action but return detection information in the trace
     ///   response.
-    output_action: ?GuardrailSensitiveInformationAction,
+    output_action: ?GuardrailSensitiveInformationAction = null,
 
     /// Indicates whether guardrail evaluation is enabled on the output. When
     /// disabled, you aren't charged for the evaluation. The evaluation doesn't
     /// appear in the response.
-    output_enabled: ?bool,
+    output_enabled: ?bool = null,
 
     /// The type of PII entity. For example, Social Security Number.
     @"type": GuardrailPiiEntityType,

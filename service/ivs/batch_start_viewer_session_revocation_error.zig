@@ -6,10 +6,10 @@ pub const BatchStartViewerSessionRevocationError = struct {
     channel_arn: []const u8,
 
     /// Error code.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// Error message, determined by the application.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The ID of the viewer session to revoke.
     viewer_id: []const u8,

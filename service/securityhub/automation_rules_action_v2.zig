@@ -6,11 +6,11 @@ const AutomationRulesActionTypeV2 = @import("automation_rules_action_type_v2.zig
 pub const AutomationRulesActionV2 = struct {
     /// The settings for integrating automation rule actions with external systems
     /// or service.
-    external_integration_configuration: ?ExternalIntegrationConfiguration,
+    external_integration_configuration: ?ExternalIntegrationConfiguration = null,
 
     /// The changes to be applied to fields in a security finding when an automation
     /// rule is triggered.
-    finding_fields_update: ?AutomationRulesFindingFieldsUpdateV2,
+    finding_fields_update: ?AutomationRulesFindingFieldsUpdateV2 = null,
 
     /// The category of action to be executed by the automation rule.
     @"type": AutomationRulesActionTypeV2,

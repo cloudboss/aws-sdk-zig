@@ -9,22 +9,22 @@ pub const CreateNodeRequest = struct {
     cluster_id: []const u8,
 
     /// The user-specified name of the Node to be created.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Documentation update needed
-    node_interface_mappings: ?[]const NodeInterfaceMappingCreateRequest,
+    node_interface_mappings: ?[]const NodeInterfaceMappingCreateRequest = null,
 
     /// An ID that you assign to a create request. This ID ensures idempotency when
     /// creating resources.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// The initial role of the Node in the Cluster. ACTIVE means the Node is
     /// available for encoding. BACKUP means the Node is a redundant Node and might
     /// get used if an ACTIVE Node fails.
-    role: ?NodeRole,
+    role: ?NodeRole = null,
 
     /// A collection of key-value pairs.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .cluster_id = "ClusterId",

@@ -16,18 +16,18 @@ pub const ChunkingConfiguration = struct {
 
     /// Configurations for when you choose fixed-size chunking. If you set the
     /// `chunkingStrategy` as `NONE`, exclude this field.
-    fixed_size_chunking_configuration: ?FixedSizeChunkingConfiguration,
+    fixed_size_chunking_configuration: ?FixedSizeChunkingConfiguration = null,
 
     /// Settings for hierarchical document chunking for a data source. Hierarchical
     /// chunking splits documents into layers of chunks where the first layer
     /// contains large chunks, and the second layer contains smaller chunks derived
     /// from the first layer.
-    hierarchical_chunking_configuration: ?HierarchicalChunkingConfiguration,
+    hierarchical_chunking_configuration: ?HierarchicalChunkingConfiguration = null,
 
     /// Settings for semantic document chunking for a data source. Semantic chunking
     /// splits a document into smaller documents based on groups of similar content
     /// derived from the text with natural language processing.
-    semantic_chunking_configuration: ?SemanticChunkingConfiguration,
+    semantic_chunking_configuration: ?SemanticChunkingConfiguration = null,
 
     pub const json_field_names = .{
         .chunking_strategy = "chunkingStrategy",

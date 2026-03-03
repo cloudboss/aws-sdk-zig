@@ -6,10 +6,10 @@ const ContentModerationSortBy = @import("content_moderation_sort_by.zig").Conten
 /// options.
 pub const GetContentModerationRequestMetadata = struct {
     /// The aggregation method chosen for a GetContentModeration request.
-    aggregate_by: ?ContentModerationAggregateBy,
+    aggregate_by: ?ContentModerationAggregateBy = null,
 
     /// The sorting method chosen for a GetContentModeration request.
-    sort_by: ?ContentModerationSortBy,
+    sort_by: ?ContentModerationSortBy = null,
 
     pub const json_field_names = .{
         .aggregate_by = "AggregateBy",

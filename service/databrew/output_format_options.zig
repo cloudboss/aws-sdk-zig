@@ -6,7 +6,7 @@ pub const OutputFormatOptions = struct {
     /// Represents a set of options that define the structure of comma-separated
     /// value (CSV)
     /// job output.
-    csv: ?CsvOutputOptions,
+    csv: ?CsvOutputOptions = null,
 
     pub const json_field_names = .{
         .csv = "Csv",

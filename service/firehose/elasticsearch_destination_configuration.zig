@@ -12,18 +12,18 @@ const VpcConfiguration = @import("vpc_configuration.zig").VpcConfiguration;
 pub const ElasticsearchDestinationConfiguration = struct {
     /// The buffering options. If no value is specified, the default values for
     /// `ElasticsearchBufferingHints` are used.
-    buffering_hints: ?ElasticsearchBufferingHints,
+    buffering_hints: ?ElasticsearchBufferingHints = null,
 
     /// The Amazon CloudWatch logging options for your Firehose stream.
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The endpoint to use when communicating with the cluster. Specify either this
     /// `ClusterEndpoint` or the `DomainARN` field.
-    cluster_endpoint: ?[]const u8,
+    cluster_endpoint: ?[]const u8 = null,
 
     /// Indicates the method for setting up document ID. The supported methods are
     /// Firehose generated document ID and OpenSearch Service generated document ID.
-    document_id_options: ?DocumentIdOptions,
+    document_id_options: ?DocumentIdOptions = null,
 
     /// The ARN of the Amazon OpenSearch Service domain. The IAM role must have
     /// permissions
@@ -34,7 +34,7 @@ pub const ElasticsearchDestinationConfiguration = struct {
     /// Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
     ///
     /// Specify either `ClusterEndpoint` or `DomainARN`.
-    domain_arn: ?[]const u8,
+    domain_arn: ?[]const u8 = null,
 
     /// The Elasticsearch index name.
     index_name: []const u8,
@@ -45,14 +45,14 @@ pub const ElasticsearchDestinationConfiguration = struct {
     /// see [Index Rotation for the
     /// Amazon OpenSearch Service
     /// Destination](https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation). The default value is `OneDay`.
-    index_rotation_period: ?ElasticsearchIndexRotationPeriod,
+    index_rotation_period: ?ElasticsearchIndexRotationPeriod = null,
 
     /// The data processing configuration.
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The retry behavior in case Firehose is unable to deliver documents to
     /// Amazon OpenSearch Service. The default value is 300 (5 minutes).
-    retry_options: ?ElasticsearchRetryOptions,
+    retry_options: ?ElasticsearchRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose
     /// for calling the Amazon OpenSearch Service Configuration API and for indexing
@@ -75,7 +75,7 @@ pub const ElasticsearchDestinationConfiguration = struct {
     /// `FailedDocumentsOnly`.
     ///
     /// You can't change this backup mode after you create the Firehose stream.
-    s3_backup_mode: ?ElasticsearchS3BackupMode,
+    s3_backup_mode: ?ElasticsearchS3BackupMode = null,
 
     /// The configuration for the backup Amazon S3 location.
     s3_configuration: S3DestinationConfiguration,
@@ -87,10 +87,10 @@ pub const ElasticsearchDestinationConfiguration = struct {
     /// type, Firehose returns an error during run time.
     ///
     /// For Elasticsearch 7.x, don't specify a `TypeName`.
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 
     /// The details of the VPC of the Amazon destination.
-    vpc_configuration: ?VpcConfiguration,
+    vpc_configuration: ?VpcConfiguration = null,
 
     pub const json_field_names = .{
         .buffering_hints = "BufferingHints",

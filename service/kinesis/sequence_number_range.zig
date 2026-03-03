@@ -3,7 +3,7 @@ pub const SequenceNumberRange = struct {
     /// The ending sequence number for the range. Shards that are in the OPEN state
     /// have an
     /// ending sequence number of `null`.
-    ending_sequence_number: ?[]const u8,
+    ending_sequence_number: ?[]const u8 = null,
 
     /// The starting sequence number for the range.
     starting_sequence_number: []const u8,

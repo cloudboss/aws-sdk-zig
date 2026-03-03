@@ -10,7 +10,7 @@ pub const StandardRouterInputConfiguration = struct {
     network_interface_arn: []const u8,
 
     /// The protocol used by the standard router input.
-    protocol: ?RouterInputProtocol,
+    protocol: ?RouterInputProtocol = null,
 
     /// The configuration settings for the protocol used by the standard router
     /// input.

@@ -10,29 +10,29 @@ const RedshiftInstanceDetails = @import("redshift_instance_details.zig").Redshif
 pub const InstanceDetails = struct {
     /// The Amazon EC2 reservations that Amazon Web Services recommends that you
     /// purchase.
-    ec2_instance_details: ?EC2InstanceDetails,
+    ec2_instance_details: ?EC2InstanceDetails = null,
 
     /// The ElastiCache reservations that Amazon Web Services recommends that you
     /// purchase.
-    elasti_cache_instance_details: ?ElastiCacheInstanceDetails,
+    elasti_cache_instance_details: ?ElastiCacheInstanceDetails = null,
 
     /// The Amazon OpenSearch Service reservations that Amazon Web Services
     /// recommends that you
     /// purchase.
-    es_instance_details: ?ESInstanceDetails,
+    es_instance_details: ?ESInstanceDetails = null,
 
     /// The MemoryDB reservations that Amazon Web Services recommends that you
     /// purchase.
-    memory_db_instance_details: ?MemoryDBInstanceDetails,
+    memory_db_instance_details: ?MemoryDBInstanceDetails = null,
 
     /// The Amazon RDS reservations that Amazon Web Services recommends that you
     /// purchase.
-    rds_instance_details: ?RDSInstanceDetails,
+    rds_instance_details: ?RDSInstanceDetails = null,
 
     /// The Amazon Redshift reservations that Amazon Web Services recommends that
     /// you
     /// purchase.
-    redshift_instance_details: ?RedshiftInstanceDetails,
+    redshift_instance_details: ?RedshiftInstanceDetails = null,
 
     pub const json_field_names = .{
         .ec2_instance_details = "EC2InstanceDetails",

@@ -6,10 +6,10 @@ const OverallDeploymentStatus = @import("overall_deployment_status.zig").Overall
 /// The environment deployment details.
 pub const EnvironmentDeploymentDetails = struct {
     /// Environment failure reasons.
-    environment_failure_reasons: ?[]const aws.map.MapEntry([]const EnvironmentError),
+    environment_failure_reasons: ?[]const aws.map.MapEntry([]const EnvironmentError) = null,
 
     /// The overall deployment status of the environment.
-    overall_deployment_status: ?OverallDeploymentStatus,
+    overall_deployment_status: ?OverallDeploymentStatus = null,
 
     pub const json_field_names = .{
         .environment_failure_reasons = "environmentFailureReasons",

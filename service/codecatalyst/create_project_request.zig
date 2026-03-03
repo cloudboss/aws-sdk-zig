@@ -2,7 +2,7 @@ pub const CreateProjectRequest = struct {
     /// The description of the project. This description will be displayed to all
     /// users of the project. We recommend providing a brief description of the
     /// project and its intended purpose.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The friendly name of the project that will be displayed to users.
     display_name: []const u8,

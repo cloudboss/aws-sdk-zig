@@ -6,12 +6,12 @@ pub const SortCriteria = struct {
     /// createdAt, policyDetails.action.apiCallDetails.firstSeen,
     /// policyDetails.action.apiCallDetails.lastSeen, resourcesAffected,
     /// severity.score, type, and updatedAt.
-    attribute_name: ?[]const u8,
+    attribute_name: ?[]const u8 = null,
 
     /// The sort order to apply to the results, based on the value for the property
     /// specified by the attributeName property. Valid values are: ASC, sort the
     /// results in ascending order; and, DESC, sort the results in descending order.
-    order_by: ?OrderBy,
+    order_by: ?OrderBy = null,
 
     pub const json_field_names = .{
         .attribute_name = "attributeName",

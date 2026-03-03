@@ -4,9 +4,9 @@ const Metric = @import("metric.zig").Metric;
 /// An object that contains a mapping between a `Metric` and
 /// `MetricAggregation`.
 pub const ExportMetric = struct {
-    aggregation: ?MetricAggregation,
+    aggregation: ?MetricAggregation = null,
 
-    name: ?Metric,
+    name: ?Metric = null,
 
     pub const json_field_names = .{
         .aggregation = "Aggregation",

@@ -7,11 +7,11 @@ pub const ArchiveOutputSettings = struct {
 
     /// Output file extension. If excluded, this will be auto-selected from the
     /// container type.
-    extension: ?[]const u8,
+    extension: ?[]const u8 = null,
 
     /// String concatenated to the end of the destination filename. Required for
     /// multiple outputs of the same type.
-    name_modifier: ?[]const u8,
+    name_modifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .container_settings = "ContainerSettings",

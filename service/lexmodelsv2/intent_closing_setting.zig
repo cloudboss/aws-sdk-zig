@@ -9,20 +9,20 @@ pub const IntentClosingSetting = struct {
     /// field is false, the closing response isn't sent to the user. If the
     /// `active` field isn't specified, the default is
     /// true.
-    active: ?bool,
+    active: ?bool = null,
 
     /// The response that Amazon Lex sends to the user when the intent is
     /// complete.
-    closing_response: ?ResponseSpecification,
+    closing_response: ?ResponseSpecification = null,
 
     /// A list of conditional branches associated with the intent's closing
     /// response. These branches are executed when the `nextStep`
     /// attribute is set to `EvalutateConditional`.
-    conditional: ?ConditionalSpecification,
+    conditional: ?ConditionalSpecification = null,
 
     /// Specifies the next step that the bot executes after playing the
     /// intent's closing response.
-    next_step: ?DialogState,
+    next_step: ?DialogState = null,
 
     pub const json_field_names = .{
         .active = "active",

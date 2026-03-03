@@ -4,10 +4,10 @@ const AnalyticsUtteranceField = @import("analytics_utterance_field.zig").Analyti
 /// values for that category.
 pub const AnalyticsUtteranceGroupByKey = struct {
     /// The category by which the utterance analytics were grouped.
-    name: ?AnalyticsUtteranceField,
+    name: ?AnalyticsUtteranceField = null,
 
     /// A member of the category by which the utterance analytics were grouped.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

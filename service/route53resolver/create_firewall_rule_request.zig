@@ -24,20 +24,20 @@ pub const CreateFirewallRuleRequest = struct {
     /// a `BlockResponse` setting of `OVERRIDE`.
     ///
     /// This setting is required if the `BlockResponse` setting is `OVERRIDE`.
-    block_override_dns_type: ?BlockOverrideDnsType,
+    block_override_dns_type: ?BlockOverrideDnsType = null,
 
     /// The custom DNS record to send back in response to the query. Used for the
     /// rule action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
     ///
     /// This setting is required if the `BlockResponse` setting is `OVERRIDE`.
-    block_override_domain: ?[]const u8,
+    block_override_domain: ?[]const u8 = null,
 
     /// The recommended amount of time, in seconds, for the DNS resolver or web
     /// browser to cache the provided override record. Used for the rule action
     /// `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
     ///
     /// This setting is required if the `BlockResponse` setting is `OVERRIDE`.
-    block_override_ttl: ?i32,
+    block_override_ttl: ?i32 = null,
 
     /// The way that you want DNS Firewall to block the request, used with the rule
     /// action
@@ -53,7 +53,7 @@ pub const CreateFirewallRuleRequest = struct {
     ///   requires custom handling details in the rule's `BlockOverride*` settings.
     ///
     /// This setting is required if the rule action setting is `BLOCK`.
-    block_response: ?BlockResponse,
+    block_response: ?BlockResponse = null,
 
     /// The confidence threshold for DNS Firewall Advanced. You must provide this
     /// value when you create a DNS Firewall Advanced rule. The confidence
@@ -67,7 +67,7 @@ pub const CreateFirewallRuleRequest = struct {
     ///
     /// * `HIGH`: Detects only the most well corroborated threats with a low rate of
     ///   false positives.
-    confidence_threshold: ?ConfidenceThreshold,
+    confidence_threshold: ?ConfidenceThreshold = null,
 
     /// A unique string that identifies the request and that allows you to retry
     /// failed requests
@@ -76,11 +76,11 @@ pub const CreateFirewallRuleRequest = struct {
     creator_request_id: []const u8,
 
     /// Use to create a DNS Firewall Advanced rule.
-    dns_threat_protection: ?DnsThreatProtection,
+    dns_threat_protection: ?DnsThreatProtection = null,
 
     /// The ID of the domain list that you want to use in the rule. Can't be used
     /// together with `DnsThreatProtecton`.
-    firewall_domain_list_id: ?[]const u8,
+    firewall_domain_list_id: ?[]const u8 = null,
 
     /// How you want the the rule to evaluate DNS redirection in the DNS redirection
     /// chain, such as CNAME or DNAME.
@@ -93,7 +93,7 @@ pub const CreateFirewallRuleRequest = struct {
     /// redirection chain. You don't need to add the subsequent domains in the
     /// domain in the redirection list to
     /// the domain list.
-    firewall_domain_redirection_action: ?FirewallDomainRedirectionAction,
+    firewall_domain_redirection_action: ?FirewallDomainRedirectionAction = null,
 
     /// The unique identifier of the firewall rule group where you want to create
     /// the rule.
@@ -148,7 +148,7 @@ pub const CreateFirewallRuleRequest = struct {
     /// example, TYPE28. For more information, see
     /// [List of DNS record
     /// types](https://en.wikipedia.org/wiki/List_of_DNS_record_types).
-    qtype: ?[]const u8,
+    qtype: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

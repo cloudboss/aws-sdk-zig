@@ -5,7 +5,7 @@ const MessageGroup = @import("message_group.zig").MessageGroup;
 pub const FulfillmentUpdateResponseSpecification = struct {
     /// Determines whether the user can interrupt an update message while it
     /// is playing.
-    allow_interrupt: ?bool,
+    allow_interrupt: ?bool = null,
 
     /// The frequency that a message is sent to the user. When the period
     /// ends, Amazon Lex chooses a message from the message groups and plays it to

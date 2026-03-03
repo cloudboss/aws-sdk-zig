@@ -6,25 +6,25 @@ const SeverityCounts = @import("severity_counts.zig").SeverityCounts;
 /// instance.
 pub const Ec2InstanceAggregationResponse = struct {
     /// The Amazon Web Services account for the Amazon EC2 instance.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Machine Image (AMI) of the Amazon EC2 instance.
-    ami: ?[]const u8,
+    ami: ?[]const u8 = null,
 
     /// The Amazon EC2 instance ID.
     instance_id: []const u8,
 
     /// The tags attached to the instance.
-    instance_tags: ?[]const aws.map.StringMapEntry,
+    instance_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The number of network findings for the Amazon EC2 instance.
-    network_findings: ?i64,
+    network_findings: ?i64 = null,
 
     /// The operating system of the Amazon EC2 instance.
-    operating_system: ?[]const u8,
+    operating_system: ?[]const u8 = null,
 
     /// An object that contains the count of matched findings per severity.
-    severity_counts: ?SeverityCounts,
+    severity_counts: ?SeverityCounts = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

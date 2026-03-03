@@ -10,7 +10,7 @@
 pub const ScheduleConfiguration = struct {
     /// A cron expression that defines when the workflow is automatically executed.
     /// Uses standard cron syntax.
-    cron_expression: ?[]const u8,
+    cron_expression: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cron_expression = "CronExpression",

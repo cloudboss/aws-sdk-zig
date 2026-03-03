@@ -4,7 +4,7 @@ const RespondsTo = @import("responds_to.zig").RespondsTo;
 /// The configuration for an Amazon Lex V2 bot.
 pub const LexConfiguration = struct {
     /// Specifies the type of message that triggers a bot.
-    invoked_by: ?InvokedBy,
+    invoked_by: ?InvokedBy = null,
 
     /// The ARN of the Amazon Lex V2 bot's alias. The ARN uses this format:
     /// `arn:aws:lex:REGION:ACCOUNT:bot-alias/MYBOTID/MYBOTALIAS`
@@ -23,10 +23,10 @@ pub const LexConfiguration = struct {
     ///
     /// Determines whether the Amazon Lex V2 bot responds to all standard messages.
     /// Control messages are not supported.
-    responds_to: ?RespondsTo,
+    responds_to: ?RespondsTo = null,
 
     /// The name of the welcome intent configured in the Amazon Lex V2 bot.
-    welcome_intent: ?[]const u8,
+    welcome_intent: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .invoked_by = "InvokedBy",

@@ -24,7 +24,7 @@ pub const Adapter = struct {
     ///
     /// * Specified pages must be greater than 0 and less than or equal to the
     ///   number of pages in the document.
-    pages: ?[]const []const u8,
+    pages: ?[]const []const u8 = null,
 
     /// A string that identifies the version of the adapter.
     version: []const u8,

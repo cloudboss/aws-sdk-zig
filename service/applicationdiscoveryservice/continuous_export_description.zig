@@ -8,22 +8,22 @@ pub const ContinuousExportDescription = struct {
     /// The type of data collector used to gather this data (currently only offered
     /// for
     /// AGENT).
-    data_source: ?DataSource,
+    data_source: ?DataSource = null,
 
     /// The unique ID assigned to this export.
-    export_id: ?[]const u8,
+    export_id: ?[]const u8 = null,
 
     /// The name of the s3 bucket where the export data parquet files are stored.
-    s_3_bucket: ?[]const u8,
+    s_3_bucket: ?[]const u8 = null,
 
     /// An object which describes how the data is stored.
     ///
     /// * `databaseName` - the name of the Glue database used to store the
     /// schema.
-    schema_storage_config: ?[]const aws.map.StringMapEntry,
+    schema_storage_config: ?[]const aws.map.StringMapEntry = null,
 
     /// The timestamp representing when the continuous export was started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Describes the status of the export. Can be one of the following values:
     ///
@@ -46,7 +46,7 @@ pub const ContinuousExportDescription = struct {
     /// * INACTIVE - the continuous export has been stopped. Data is no longer being
     ///   exported
     /// to the customer bucket.
-    status: ?ContinuousExportStatus,
+    status: ?ContinuousExportStatus = null,
 
     /// Contains information about any errors that have occurred. This data type can
     /// have the
@@ -138,10 +138,10 @@ pub const ContinuousExportDescription = struct {
     ///   service. You
     /// must sign up before you can use Amazon S3. You can sign up at the following
     /// URL: [https://aws.amazon.com/s3](https://aws.amazon.com/s3).
-    status_detail: ?[]const u8,
+    status_detail: ?[]const u8 = null,
 
     /// The timestamp that represents when this continuous export was stopped.
-    stop_time: ?i64,
+    stop_time: ?i64 = null,
 
     pub const json_field_names = .{
         .data_source = "dataSource",

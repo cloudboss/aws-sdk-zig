@@ -7,40 +7,40 @@ const UserData = @import("user_data.zig").UserData;
 /// Describes the launch specification for VM import.
 pub const ImportInstanceLaunchSpecification = struct {
     /// Reserved.
-    additional_info: ?[]const u8,
+    additional_info: ?[]const u8 = null,
 
     /// The architecture of the instance.
-    architecture: ?ArchitectureValues,
+    architecture: ?ArchitectureValues = null,
 
     /// The security group IDs.
-    group_ids: ?[]const []const u8,
+    group_ids: ?[]const []const u8 = null,
 
     /// The security group names.
-    group_names: ?[]const []const u8,
+    group_names: ?[]const []const u8 = null,
 
     /// Indicates whether an instance stops or terminates when you initiate shutdown
     /// from the instance (using the
     /// operating system command for system shutdown).
-    instance_initiated_shutdown_behavior: ?ShutdownBehavior,
+    instance_initiated_shutdown_behavior: ?ShutdownBehavior = null,
 
     /// The instance type. For more information about the instance types that you
     /// can import, see [Instance
     /// Types](https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-instance-types) in the
     /// VM Import/Export User Guide.
-    instance_type: ?InstanceType,
+    instance_type: ?InstanceType = null,
 
     /// Indicates whether monitoring is enabled.
-    monitoring: ?bool,
+    monitoring: ?bool = null,
 
     /// The placement information for the instance.
-    placement: ?Placement,
+    placement: ?Placement = null,
 
     /// [EC2-VPC] An available IP address from the IP address range of the subnet.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// [EC2-VPC] The ID of the subnet in which to launch the instance.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The Base64-encoded user data to make available to the instance.
-    user_data: ?UserData,
+    user_data: ?UserData = null,
 };

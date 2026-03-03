@@ -14,40 +14,40 @@ const CapacityReservationTenancy = @import("capacity_reservation_tenancy.zig").C
 /// Describes a Capacity Reservation.
 pub const CapacityReservation = struct {
     /// The Availability Zone in which the capacity is reserved.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the Availability Zone in which the capacity is reserved.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The remaining capacity. Indicates the number of instances that can be
     /// launched in the
     /// Capacity Reservation.
-    available_instance_count: ?i32,
+    available_instance_count: ?i32 = null,
 
     /// Information about instance capacity usage.
-    capacity_allocations: ?[]const CapacityAllocation,
+    capacity_allocations: ?[]const CapacityAllocation = null,
 
     /// The ID of the Capacity Block.
-    capacity_block_id: ?[]const u8,
+    capacity_block_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Capacity Reservation.
-    capacity_reservation_arn: ?[]const u8,
+    capacity_reservation_arn: ?[]const u8 = null,
 
     /// The ID of the Capacity Reservation Fleet to which the Capacity Reservation
     /// belongs.
     /// Only valid for Capacity Reservations that were created by a Capacity
     /// Reservation
     /// Fleet.
-    capacity_reservation_fleet_id: ?[]const u8,
+    capacity_reservation_fleet_id: ?[]const u8 = null,
 
     /// The ID of the Capacity Reservation.
-    capacity_reservation_id: ?[]const u8,
+    capacity_reservation_id: ?[]const u8 = null,
 
     /// Information about your commitment for a future-dated Capacity Reservation.
-    commitment_info: ?CapacityReservationCommitmentInfo,
+    commitment_info: ?CapacityReservationCommitmentInfo = null,
 
     /// The date and time the Capacity Reservation was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The delivery method for a future-dated Capacity Reservation. `incremental`
     /// indicates that the requested capacity is delivered in addition to any
@@ -55,7 +55,7 @@ pub const CapacityReservation = struct {
     /// and reserved capacity that you have in your account at the requested date
     /// and
     /// time.
-    delivery_preference: ?CapacityReservationDeliveryPreference,
+    delivery_preference: ?CapacityReservationDeliveryPreference = null,
 
     /// Indicates whether the Capacity Reservation supports EBS-optimized instances.
     /// This
@@ -65,7 +65,7 @@ pub const CapacityReservation = struct {
     /// with all
     /// instance types. Additional usage charges apply when using an EBS- optimized
     /// instance.
-    ebs_optimized: ?bool,
+    ebs_optimized: ?bool = null,
 
     /// The date and time the Capacity Reservation expires. When a Capacity
     /// Reservation expires, the reserved capacity is released and you can no longer
@@ -73,7 +73,7 @@ pub const CapacityReservation = struct {
     /// instances into it. The Capacity Reservation's state changes to `expired`
     /// when
     /// it reaches its end date and time.
-    end_date: ?i64,
+    end_date: ?i64 = null,
 
     /// Indicates the way in which the Capacity Reservation ends. A Capacity
     /// Reservation can
@@ -84,10 +84,10 @@ pub const CapacityReservation = struct {
     ///
     /// * `limited` - The Capacity Reservation expires automatically at a
     /// specified date and time.
-    end_date_type: ?EndDateType,
+    end_date_type: ?EndDateType = null,
 
     /// *Deprecated.*
-    ephemeral_storage: ?bool,
+    ephemeral_storage: ?bool = null,
 
     /// Indicates the type of instance launches that the Capacity Reservation
     /// accepts. The
@@ -105,36 +105,36 @@ pub const CapacityReservation = struct {
     /// and
     /// explicitly target the Capacity Reservation. This ensures that only permitted
     /// instances can use the reserved capacity.
-    instance_match_criteria: ?InstanceMatchCriteria,
+    instance_match_criteria: ?InstanceMatchCriteria = null,
 
     /// The type of operating system for which the Capacity Reservation reserves
     /// capacity.
-    instance_platform: ?CapacityReservationInstancePlatform,
+    instance_platform: ?CapacityReservationInstancePlatform = null,
 
     /// The type of instance for which the Capacity Reservation reserves capacity.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// Indicates whether this Capacity Reservation is interruptible, meaning
     /// instances may be terminated when the owner reclaims capacity.
-    interruptible: ?bool,
+    interruptible: ?bool = null,
 
     /// Contains allocation details for interruptible reservations, including
     /// current allocated instances and target instance counts within the
     /// interruptibleCapacityAllocation object.
-    interruptible_capacity_allocation: ?InterruptibleCapacityAllocation,
+    interruptible_capacity_allocation: ?InterruptibleCapacityAllocation = null,
 
     /// Information about the interruption configuration and association with the
     /// source reservation for interruptible Capacity Reservations.
-    interruption_info: ?InterruptionInfo,
+    interruption_info: ?InterruptionInfo = null,
 
     /// The Amazon Resource Name (ARN) of the Outpost on which the Capacity
     /// Reservation was
     /// created.
-    outpost_arn: ?[]const u8,
+    outpost_arn: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the Capacity
     /// Reservation.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the cluster placement group in which the
     /// Capacity
@@ -143,13 +143,13 @@ pub const CapacityReservation = struct {
     /// placement
     /// groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cr-cpg.html) in
     /// the *Amazon EC2 User Guide*.
-    placement_group_arn: ?[]const u8,
+    placement_group_arn: ?[]const u8 = null,
 
     /// The type of Capacity Reservation.
-    reservation_type: ?CapacityReservationType,
+    reservation_type: ?CapacityReservationType = null,
 
     /// The date and time the Capacity Reservation was started.
-    start_date: ?i64,
+    start_date: ?i64 = null,
 
     /// The current state of the Capacity Reservation. A Capacity Reservation can be
     /// in one of
@@ -203,10 +203,10 @@ pub const CapacityReservation = struct {
     /// constraints. You can view
     /// unsupported requests for 30 days. The Capacity Reservation will not be
     /// delivered.
-    state: ?CapacityReservationState,
+    state: ?CapacityReservationState = null,
 
     /// Any tags assigned to the Capacity Reservation.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// Indicates the tenancy of the Capacity Reservation. A Capacity Reservation
     /// can have one
@@ -217,14 +217,14 @@ pub const CapacityReservation = struct {
     ///
     /// * `dedicated` - The Capacity Reservation is created on single-tenant
     /// hardware that is dedicated to a single Amazon Web Services account.
-    tenancy: ?CapacityReservationTenancy,
+    tenancy: ?CapacityReservationTenancy = null,
 
     /// The total number of instances for which the Capacity Reservation reserves
     /// capacity.
-    total_instance_count: ?i32,
+    total_instance_count: ?i32 = null,
 
     /// The ID of the Amazon Web Services account to which billing of the unused
     /// capacity of
     /// the Capacity Reservation is assigned.
-    unused_reservation_billing_owner_id: ?[]const u8,
+    unused_reservation_billing_owner_id: ?[]const u8 = null,
 };

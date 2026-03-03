@@ -5,7 +5,7 @@ const DatasetSourceType = @import("dataset_source_type.zig").DatasetSourceType;
 /// The data source for the dataset.
 pub const DatasetSource = struct {
     /// The details of the dataset source associated with the dataset.
-    source_detail: ?SourceDetail,
+    source_detail: ?SourceDetail = null,
 
     /// The format of the dataset source associated with the dataset.
     source_format: DatasetSourceFormat,

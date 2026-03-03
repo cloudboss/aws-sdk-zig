@@ -14,15 +14,15 @@ const MedicalScribeVocabularyFilterMethod = @import("medical_scribe_vocabulary_f
 /// configurations that you provided to start the session.
 pub const MedicalScribeConfigurationEvent = struct {
     /// Specify which speaker is on which audio channel.
-    channel_definitions: ?[]const MedicalScribeChannelDefinition,
+    channel_definitions: ?[]const MedicalScribeChannelDefinition = null,
 
     /// Specify the encryption settings for your streaming session.
-    encryption_settings: ?MedicalScribeEncryptionSettings,
+    encryption_settings: ?MedicalScribeEncryptionSettings = null,
 
     /// The `MedicalScribeContext` object that contains contextual information used
     /// to generate
     /// customized clinical notes.
-    medical_scribe_context: ?MedicalScribeContext,
+    medical_scribe_context: ?MedicalScribeContext = null,
 
     /// Specify settings for post-stream analytics.
     post_stream_analytics_settings: MedicalScribePostStreamAnalyticsSettings,
@@ -50,7 +50,7 @@ pub const MedicalScribeConfigurationEvent = struct {
     /// To delete words, specify `remove`.
     ///
     /// To flag words without changing them, specify `tag`.
-    vocabulary_filter_method: ?MedicalScribeVocabularyFilterMethod,
+    vocabulary_filter_method: ?MedicalScribeVocabularyFilterMethod = null,
 
     /// Specify the name of the custom vocabulary filter you want to include in your
     /// streaming session.
@@ -59,12 +59,12 @@ pub const MedicalScribeConfigurationEvent = struct {
     /// If you include `VocabularyFilterName` in the
     /// `MedicalScribeConfigurationEvent`,
     /// you must also include `VocabularyFilterMethod`.
-    vocabulary_filter_name: ?[]const u8,
+    vocabulary_filter_name: ?[]const u8 = null,
 
     /// Specify the name of the custom vocabulary you want to use for your streaming
     /// session.
     /// Custom vocabulary names are case-sensitive.
-    vocabulary_name: ?[]const u8,
+    vocabulary_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channel_definitions = "ChannelDefinitions",

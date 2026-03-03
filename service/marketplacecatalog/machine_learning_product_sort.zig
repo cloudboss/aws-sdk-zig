@@ -5,10 +5,10 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 pub const MachineLearningProductSort = struct {
     /// The field to sort by. Valid values: `EntityId`, `LastModifiedDate`,
     /// `ProductTitle`, and `Visibility`.
-    sort_by: ?MachineLearningProductSortBy,
+    sort_by: ?MachineLearningProductSortBy = null,
 
     /// The sort order. Valid values are `ASC` (ascending) and `DESC` (descending).
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .sort_by = "SortBy",

@@ -10,17 +10,17 @@ const CustomActionURLOperation = @import("custom_action_url_operation.zig").Cust
 pub const VisualCustomActionOperation = struct {
     /// The filter operation that filters data included in a visual or in an entire
     /// sheet.
-    filter_operation: ?CustomActionFilterOperation,
+    filter_operation: ?CustomActionFilterOperation = null,
 
     /// The navigation operation that navigates between different sheets in the same
     /// analysis.
-    navigation_operation: ?CustomActionNavigationOperation,
+    navigation_operation: ?CustomActionNavigationOperation = null,
 
     /// The set parameter operation that sets parameters in custom action.
-    set_parameters_operation: ?CustomActionSetParametersOperation,
+    set_parameters_operation: ?CustomActionSetParametersOperation = null,
 
     /// The URL operation that opens a link to another webpage.
-    url_operation: ?CustomActionURLOperation,
+    url_operation: ?CustomActionURLOperation = null,
 
     pub const json_field_names = .{
         .filter_operation = "FilterOperation",

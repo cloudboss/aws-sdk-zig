@@ -2,7 +2,7 @@
 pub const PropertygraphData = struct {
     /// If this is an edge (type = `e`), the ID of the corresponding `from` vertex
     /// or source node.
-    from: ?[]const u8,
+    from: ?[]const u8 = null,
 
     /// The ID of the Gremlin or openCypher element.
     id: []const u8,
@@ -12,7 +12,7 @@ pub const PropertygraphData = struct {
 
     /// If this is an edge (type = `e`), the ID of the corresponding `to` vertex or
     /// target node.
-    to: ?[]const u8,
+    to: ?[]const u8 = null,
 
     /// The type of this Gremlin or openCypher element. Must be one of:
     ///

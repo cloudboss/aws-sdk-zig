@@ -4,15 +4,15 @@ const PipelineType = @import("pipeline_type.zig").PipelineType;
 /// Returns a summary of a pipeline.
 pub const PipelineSummary = struct {
     /// The date and time the pipeline was created, in timestamp format.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The method that the pipeline will use to handle multiple executions. The
     /// default
     /// mode is SUPERSEDED.
-    execution_mode: ?ExecutionMode,
+    execution_mode: ?ExecutionMode = null,
 
     /// The name of the pipeline.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// CodePipeline provides the following pipeline types, which differ in
     /// characteristics and price, so that you can tailor your pipeline features and
@@ -38,14 +38,14 @@ pub const PipelineSummary = struct {
     /// For information about which type of pipeline to choose, see [What type of
     /// pipeline is right for
     /// me?](https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html).
-    pipeline_type: ?PipelineType,
+    pipeline_type: ?PipelineType = null,
 
     /// The date and time of the last update to the pipeline, in timestamp
     /// format.
-    updated: ?i64,
+    updated: ?i64 = null,
 
     /// The version number of the pipeline.
-    version: ?i32,
+    version: ?i32 = null,
 
     pub const json_field_names = .{
         .created = "created",

@@ -11,7 +11,7 @@ pub const LifecyclePolicyDetailFilter = struct {
     /// this number of resources. If you have fewer resources than this number, the
     /// impacted resource
     /// is not deleted.
-    retain_at_least: ?i32,
+    retain_at_least: ?i32 = null,
 
     /// Filter resources based on either `age` or `count`.
     @"type": LifecyclePolicyDetailFilterType,
@@ -19,7 +19,7 @@ pub const LifecyclePolicyDetailFilter = struct {
     /// Defines the unit of time that the lifecycle policy uses to determine
     /// impacted
     /// resources. This is required for age-based rules.
-    unit: ?LifecyclePolicyTimeUnit,
+    unit: ?LifecyclePolicyTimeUnit = null,
 
     /// The number of units for the time period or for the count. For example, a
     /// value of

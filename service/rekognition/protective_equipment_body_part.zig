@@ -9,13 +9,13 @@ const BodyPart = @import("body_part.zig").BodyPart;
 pub const ProtectiveEquipmentBodyPart = struct {
     /// The confidence that Amazon Rekognition has in the detection accuracy of the
     /// detected body part.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// An array of Personal Protective Equipment items detected around a body part.
-    equipment_detections: ?[]const EquipmentDetection,
+    equipment_detections: ?[]const EquipmentDetection = null,
 
     /// The detected body part.
-    name: ?BodyPart,
+    name: ?BodyPart = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",

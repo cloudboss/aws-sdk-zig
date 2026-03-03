@@ -12,38 +12,38 @@ const ZeppelinApplicationConfigurationUpdate = @import("zeppelin_application_con
 pub const ApplicationConfigurationUpdate = struct {
     /// Describes updates to an application's code
     /// configuration.
-    application_code_configuration_update: ?ApplicationCodeConfigurationUpdate,
+    application_code_configuration_update: ?ApplicationCodeConfigurationUpdate = null,
 
     /// Represents an update for encryption at rest configuration.
-    application_encryption_configuration_update: ?ApplicationEncryptionConfigurationUpdate,
+    application_encryption_configuration_update: ?ApplicationEncryptionConfigurationUpdate = null,
 
     /// Describes whether snapshots are enabled for a Managed Service for Apache
     /// Flink application.
-    application_snapshot_configuration_update: ?ApplicationSnapshotConfigurationUpdate,
+    application_snapshot_configuration_update: ?ApplicationSnapshotConfigurationUpdate = null,
 
     /// Describes whether system rollbacks are enabled for a Managed Service for
     /// Apache Flink application.
-    application_system_rollback_configuration_update: ?ApplicationSystemRollbackConfigurationUpdate,
+    application_system_rollback_configuration_update: ?ApplicationSystemRollbackConfigurationUpdate = null,
 
     /// Describes updates to the environment properties for a Managed Service for
     /// Apache Flink application.
-    environment_property_updates: ?EnvironmentPropertyUpdates,
+    environment_property_updates: ?EnvironmentPropertyUpdates = null,
 
     /// Describes updates to a Managed Service for Apache Flink application's
     /// configuration.
-    flink_application_configuration_update: ?FlinkApplicationConfigurationUpdate,
+    flink_application_configuration_update: ?FlinkApplicationConfigurationUpdate = null,
 
     /// Describes updates to a SQL-based Kinesis Data Analytics application's
     /// configuration.
-    sql_application_configuration_update: ?SqlApplicationConfigurationUpdate,
+    sql_application_configuration_update: ?SqlApplicationConfigurationUpdate = null,
 
     /// Updates to the array of descriptions of VPC configurations available to the
     /// application.
-    vpc_configuration_updates: ?[]const VpcConfigurationUpdate,
+    vpc_configuration_updates: ?[]const VpcConfigurationUpdate = null,
 
     /// Updates to the configuration of a Managed Service for Apache Flink Studio
     /// notebook.
-    zeppelin_application_configuration_update: ?ZeppelinApplicationConfigurationUpdate,
+    zeppelin_application_configuration_update: ?ZeppelinApplicationConfigurationUpdate = null,
 
     pub const json_field_names = .{
         .application_code_configuration_update = "ApplicationCodeConfigurationUpdate",

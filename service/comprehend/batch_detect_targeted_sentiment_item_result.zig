@@ -3,10 +3,10 @@ const TargetedSentimentEntity = @import("targeted_sentiment_entity.zig").Targete
 /// Analysis results for one of the documents in the batch.
 pub const BatchDetectTargetedSentimentItemResult = struct {
     /// An array of targeted sentiment entities.
-    entities: ?[]const TargetedSentimentEntity,
+    entities: ?[]const TargetedSentimentEntity = null,
 
     /// The zero-based index of this result in the input list.
-    index: ?i32,
+    index: ?i32 = null,
 
     pub const json_field_names = .{
         .entities = "Entities",

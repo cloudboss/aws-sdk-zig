@@ -5,7 +5,7 @@ const KafkaClusterClientAuthenticationType = @import("kafka_cluster_client_authe
 pub const KafkaClusterClientAuthenticationDescription = struct {
     /// The type of client authentication used to connect to the Apache Kafka
     /// cluster. Value NONE means that no client authentication is used.
-    authentication_type: ?KafkaClusterClientAuthenticationType,
+    authentication_type: ?KafkaClusterClientAuthenticationType = null,
 
     pub const json_field_names = .{
         .authentication_type = "authenticationType",

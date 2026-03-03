@@ -13,7 +13,7 @@ pub const BackupDetails = struct {
     /// Time at which the automatic on-demand backup created by DynamoDB will
     /// expire. This `SYSTEM` on-demand backup expires automatically 35 days after
     /// its creation.
-    backup_expiry_date_time: ?i64,
+    backup_expiry_date_time: ?i64 = null,
 
     /// Name of the requested backup.
     backup_name: []const u8,
@@ -21,7 +21,7 @@ pub const BackupDetails = struct {
     /// Size of the backup in bytes. DynamoDB updates this value approximately every
     /// six
     /// hours. Recent changes might not be reflected in this value.
-    backup_size_bytes: ?i64,
+    backup_size_bytes: ?i64 = null,
 
     /// Backup can be in one of the following states: CREATING, ACTIVE, DELETED.
     backup_status: BackupStatus,

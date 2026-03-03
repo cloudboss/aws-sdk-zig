@@ -14,7 +14,7 @@ pub const EbsBlockDeviceConfig = struct {
     /// Number of EBS volumes with a specific volume configuration that are
     /// associated with
     /// every instance in the instance group
-    volumes_per_instance: ?i32,
+    volumes_per_instance: ?i32 = null,
 
     pub const json_field_names = .{
         .volume_specification = "VolumeSpecification",

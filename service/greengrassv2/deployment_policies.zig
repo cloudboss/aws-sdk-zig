@@ -9,19 +9,19 @@ pub const DeploymentPolicies = struct {
     /// The component update policy for the configuration deployment. This policy
     /// defines when
     /// it's safe to deploy the configuration to devices.
-    component_update_policy: ?DeploymentComponentUpdatePolicy,
+    component_update_policy: ?DeploymentComponentUpdatePolicy = null,
 
     /// The configuration validation policy for the configuration deployment. This
     /// policy defines
     /// how long each component has to validate its configure updates.
-    configuration_validation_policy: ?DeploymentConfigurationValidationPolicy,
+    configuration_validation_policy: ?DeploymentConfigurationValidationPolicy = null,
 
     /// The failure handling policy for the configuration deployment. This policy
     /// defines what to
     /// do if the deployment fails.
     ///
     /// Default: `ROLLBACK`
-    failure_handling_policy: ?DeploymentFailureHandlingPolicy,
+    failure_handling_policy: ?DeploymentFailureHandlingPolicy = null,
 
     pub const json_field_names = .{
         .component_update_policy = "componentUpdatePolicy",

@@ -6,10 +6,10 @@ pub const ConformancePackComplianceFilters = struct {
     ///
     /// The allowed values are `COMPLIANT` and `NON_COMPLIANT`. `INSUFFICIENT_DATA`
     /// is not supported.
-    compliance_type: ?ConformancePackComplianceType,
+    compliance_type: ?ConformancePackComplianceType = null,
 
     /// Filters the results by Config rule names.
-    config_rule_names: ?[]const []const u8,
+    config_rule_names: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .compliance_type = "ComplianceType",

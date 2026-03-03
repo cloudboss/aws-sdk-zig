@@ -4,10 +4,10 @@ pub const CanInterface = struct {
     name: []const u8,
 
     /// The name of the communication protocol for the interface.
-    protocol_name: ?[]const u8,
+    protocol_name: ?[]const u8 = null,
 
     /// The version of the communication protocol for the interface.
-    protocol_version: ?[]const u8,
+    protocol_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

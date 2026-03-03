@@ -3,7 +3,7 @@ const RouteMatrixDestinationOptions = @import("route_matrix_destination_options.
 /// The route destination.
 pub const RouteMatrixDestination = struct {
     /// Destination related options.
-    options: ?RouteMatrixDestinationOptions,
+    options: ?RouteMatrixDestinationOptions = null,
 
     /// Position defined as `[longitude, latitude]`.
     position: []const f64,

@@ -9,7 +9,7 @@ const TriggerDetails = @import("trigger_details.zig").TriggerDetails;
 /// Protection for EC2.
 pub const Scan = struct {
     /// The ID for the account that belongs to the scan.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The unique detector ID of the administrator account that the request is
     /// associated with.
@@ -20,50 +20,50 @@ pub const Scan = struct {
     /// To find the `detectorId` in the current Region, see the
     /// Settings page in the GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
-    admin_detector_id: ?[]const u8,
+    admin_detector_id: ?[]const u8 = null,
 
     /// List of volumes that were attached to the original instance to be scanned.
-    attached_volumes: ?[]const VolumeDetail,
+    attached_volumes: ?[]const VolumeDetail = null,
 
     /// The unique ID of the detector that is associated with the request.
     ///
     /// To find the `detectorId` in the current Region, see the
     /// Settings page in the GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
-    detector_id: ?[]const u8,
+    detector_id: ?[]const u8 = null,
 
     /// Represents the reason for `FAILED` scan status.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// Represents the number of files that were scanned.
-    file_count: ?i64,
+    file_count: ?i64 = null,
 
     /// Represents the resources that were scanned in the scan entry.
-    resource_details: ?ResourceDetails,
+    resource_details: ?ResourceDetails = null,
 
     /// The timestamp of when the scan was finished.
-    scan_end_time: ?i64,
+    scan_end_time: ?i64 = null,
 
     /// The unique scan ID associated with a scan entry.
-    scan_id: ?[]const u8,
+    scan_id: ?[]const u8 = null,
 
     /// Represents the result of the scan.
-    scan_result_details: ?ScanResultDetails,
+    scan_result_details: ?ScanResultDetails = null,
 
     /// The timestamp of when the scan was triggered.
-    scan_start_time: ?i64,
+    scan_start_time: ?i64 = null,
 
     /// An enum value representing possible scan statuses.
-    scan_status: ?ScanStatus,
+    scan_status: ?ScanStatus = null,
 
     /// Specifies the scan type that invoked the malware scan.
-    scan_type: ?ScanType,
+    scan_type: ?ScanType = null,
 
     /// Represents total bytes that were scanned.
-    total_bytes: ?i64,
+    total_bytes: ?i64 = null,
 
     /// Specifies the reason why the scan was initiated.
-    trigger_details: ?TriggerDetails,
+    trigger_details: ?TriggerDetails = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

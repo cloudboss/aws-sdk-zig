@@ -5,7 +5,7 @@ const ChannelStatus = @import("channel_status.zig").ChannelStatus;
 pub const ChannelData = struct {
     /// A description for the channel. This is used only to help you identify this
     /// channel.
-    channel_description: ?[]const u8,
+    channel_description: ?[]const u8 = null,
 
     /// The unique ID of the private re:Post channel.
     channel_id: []const u8,
@@ -20,7 +20,7 @@ pub const ChannelData = struct {
     create_date_time: i64,
 
     /// The date when the channel was deleted.
-    delete_date_time: ?i64,
+    delete_date_time: ?i64 = null,
 
     /// The number of groups that are part of the channel.
     group_count: i32,

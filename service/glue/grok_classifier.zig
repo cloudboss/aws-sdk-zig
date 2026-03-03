@@ -6,12 +6,12 @@ pub const GrokClassifier = struct {
     classification: []const u8,
 
     /// The time that this classifier was registered.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Optional custom grok patterns defined by this classifier.
     /// For more information, see custom patterns in [Writing Custom
     /// Classifiers](https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
-    custom_patterns: ?[]const u8,
+    custom_patterns: ?[]const u8 = null,
 
     /// The grok pattern applied to a data store by this classifier.
     /// For more information, see built-in patterns in [Writing Custom
@@ -19,7 +19,7 @@ pub const GrokClassifier = struct {
     grok_pattern: []const u8,
 
     /// The time that this classifier was last updated.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The name of the classifier.
     name: []const u8,

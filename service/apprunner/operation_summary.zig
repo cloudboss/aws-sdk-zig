@@ -5,28 +5,28 @@ const OperationType = @import("operation_type.zig").OperationType;
 /// service.
 pub const OperationSummary = struct {
     /// The time when the operation ended. It's in the Unix time stamp format.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// A unique ID of this operation. It's unique in the scope of the App Runner
     /// service.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The time when the operation started. It's in the Unix time stamp format.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The current state of the operation.
-    status: ?OperationStatus,
+    status: ?OperationStatus = null,
 
     /// The Amazon Resource Name (ARN) of the resource that the operation acted on
     /// (for example, an App Runner service).
-    target_arn: ?[]const u8,
+    target_arn: ?[]const u8 = null,
 
     /// The type of operation. It indicates a specific action that occured.
-    @"type": ?OperationType,
+    @"type": ?OperationType = null,
 
     /// The time when the operation was last updated. It's in the Unix time stamp
     /// format.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .ended_at = "EndedAt",

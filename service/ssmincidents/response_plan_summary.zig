@@ -4,7 +4,7 @@ pub const ResponsePlanSummary = struct {
     arn: []const u8,
 
     /// The human readable name of the response plan. This can include spaces.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The name of the response plan. This can't include spaces.
     name: []const u8,

@@ -8,37 +8,37 @@ const ConnectorType = @import("connector_type.zig").ConnectorType;
 /// Amazon Web Services account.
 pub const ConnectorSummary = struct {
     /// The Amazon Resource Name (ARN) of the connector.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the connector's associated certificate
     /// authority.
-    certificate_authority_arn: ?[]const u8,
+    certificate_authority_arn: ?[]const u8 = null,
 
     /// The date and time that the challenge was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The connector's HTTPS public SCEP URL.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// Contains settings relevant to the mobile device management system that you
     /// chose for the connector. If you didn't configure `MobileDeviceManagement`,
     /// then the connector is for general-purpose use and this object is empty.
-    mobile_device_management: ?MobileDeviceManagement,
+    mobile_device_management: ?MobileDeviceManagement = null,
 
     /// Contains OpenID Connect (OIDC) parameters for use with Microsoft Intune.
-    open_id_configuration: ?OpenIdConfiguration,
+    open_id_configuration: ?OpenIdConfiguration = null,
 
     /// The connector's status. Status can be creating, active, deleting, or failed.
-    status: ?ConnectorStatus,
+    status: ?ConnectorStatus = null,
 
     /// Information about why connector creation failed, if status is `FAILED`.
-    status_reason: ?ConnectorStatusReason,
+    status_reason: ?ConnectorStatusReason = null,
 
     /// The connector type.
-    @"type": ?ConnectorType,
+    @"type": ?ConnectorType = null,
 
     /// The date and time that the challenge was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -6,7 +6,7 @@ pub const CriteriaBlockForJob = struct {
     /// An array of conditions, one for each condition that determines which buckets
     /// to include or exclude from the job. If you specify more than one condition,
     /// Amazon Macie uses AND logic to join the conditions.
-    @"and": ?[]const CriteriaForJob,
+    @"and": ?[]const CriteriaForJob = null,
 
     pub const json_field_names = .{
         .@"and" = "and",

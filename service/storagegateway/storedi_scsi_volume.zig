@@ -5,9 +5,9 @@ pub const StorediSCSIVolume = struct {
     /// The date the volume was created. Volumes created prior to March 28, 2017
     /// don’t have this
     /// timestamp.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
-    kms_key: ?[]const u8,
+    kms_key: ?[]const u8 = null,
 
     /// Indicates if when the stored volume was created, existing data on the
     /// underlying local
@@ -19,7 +19,7 @@ pub const StorediSCSIVolume = struct {
     /// If the stored volume was created from a snapshot, this field contains the
     /// snapshot ID
     /// used, e.g. snap-78e22663. Otherwise, this field is not included.
-    source_snapshot_id: ?[]const u8,
+    source_snapshot_id: ?[]const u8 = null,
 
     /// The name of the iSCSI target used by an initiator to connect to a volume and
     /// used as a
@@ -31,45 +31,45 @@ pub const StorediSCSIVolume = struct {
     /// If you don't specify a value, Storage Gateway uses the value that was
     /// previously
     /// used for this volume as the new target name.
-    target_name: ?[]const u8,
+    target_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the storage volume.
-    volume_arn: ?[]const u8,
+    volume_arn: ?[]const u8 = null,
 
     /// A value that indicates whether a storage volume is attached to, detached
     /// from, or is in
     /// the process of detaching from a gateway. For more information, see [Moving
     /// your volumes to a different
     /// gateway](https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#attach-detach-volume).
-    volume_attachment_status: ?[]const u8,
+    volume_attachment_status: ?[]const u8 = null,
 
     /// The ID of the local disk that was specified in the CreateStorediSCSIVolume
     /// operation.
-    volume_disk_id: ?[]const u8,
+    volume_disk_id: ?[]const u8 = null,
 
     /// The unique identifier of the volume, e.g., vol-AE4B946D.
-    volume_id: ?[]const u8,
+    volume_id: ?[]const u8 = null,
 
     /// An VolumeiSCSIAttributes object that represents a collection of iSCSI
     /// attributes for one stored volume.
-    volumei_scsi_attributes: ?VolumeiSCSIAttributes,
+    volumei_scsi_attributes: ?VolumeiSCSIAttributes = null,
 
     /// Represents the percentage complete if the volume is restoring or
     /// bootstrapping that
     /// represents the percent of data transferred. This field does not appear in
     /// the response if
     /// the stored volume is not restoring or bootstrapping.
-    volume_progress: ?f64,
+    volume_progress: ?f64 = null,
 
     /// The size of the volume in bytes.
     volume_size_in_bytes: i64 = 0,
 
     /// One of the VolumeStatus values that indicates the state of the storage
     /// volume.
-    volume_status: ?[]const u8,
+    volume_status: ?[]const u8 = null,
 
     /// One of the VolumeType enumeration values describing the type of the volume.
-    volume_type: ?[]const u8,
+    volume_type: ?[]const u8 = null,
 
     /// The size of the data stored on the volume in bytes. This value is calculated
     /// based on
@@ -83,7 +83,7 @@ pub const StorediSCSIVolume = struct {
     /// This value is not available for volumes created prior to May 13, 2015, until
     /// you
     /// store data on the volume.
-    volume_used_in_bytes: ?i64,
+    volume_used_in_bytes: ?i64 = null,
 
     pub const json_field_names = .{
         .created_date = "CreatedDate",

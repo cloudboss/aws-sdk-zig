@@ -9,7 +9,7 @@ pub const BucketCorsConfig = struct {
     /// A set of origins and methods (cross-origin access that you want to allow).
     /// You can add up to 20 rules to the configuration. The total size is limited
     /// to 64 KB.
-    rules: ?[]const BucketCorsRule,
+    rules: ?[]const BucketCorsRule = null,
 
     pub const json_field_names = .{
         .rules = "rules",

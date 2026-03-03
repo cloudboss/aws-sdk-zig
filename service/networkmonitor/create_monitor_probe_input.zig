@@ -9,14 +9,14 @@ pub const CreateMonitorProbeInput = struct {
 
     /// The port associated with the `destination`. This is required only if the
     /// `protocol` is `TCP` and must be a number between `1` and `65536`.
-    destination_port: ?i32,
+    destination_port: ?i32 = null,
 
     /// The size of the packets sent between the source and destination. This must
     /// be a number between `56` and `8500`.
-    packet_size: ?i32,
+    packet_size: ?i32 = null,
 
     /// The list of key-value pairs created and assigned to the monitor.
-    probe_tags: ?[]const aws.map.StringMapEntry,
+    probe_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The protocol used for the network traffic between the `source` and
     /// `destination`. This must be either `TCP` or `ICMP`.

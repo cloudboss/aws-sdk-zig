@@ -11,12 +11,12 @@ pub const SignalMapSummary = struct {
     created_at: i64,
 
     /// A resource's optional description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A signal map's id.
     id: []const u8,
 
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     monitor_deployment_status: SignalMapMonitorDeploymentStatus,
 
@@ -26,7 +26,7 @@ pub const SignalMapSummary = struct {
 
     status: SignalMapStatus,
 
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

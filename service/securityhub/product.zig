@@ -4,16 +4,16 @@ const IntegrationType = @import("integration_type.zig").IntegrationType;
 pub const Product = struct {
     /// The URL to the service or product documentation about the integration with
     /// Security Hub, including how to activate the integration.
-    activation_url: ?[]const u8,
+    activation_url: ?[]const u8 = null,
 
     /// The categories assigned to the product.
-    categories: ?[]const []const u8,
+    categories: ?[]const []const u8 = null,
 
     /// The name of the company that provides the product.
-    company_name: ?[]const u8,
+    company_name: ?[]const u8 = null,
 
     /// A description of the product.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The types of integration that the product supports. Available values are the
     /// following.
@@ -27,23 +27,23 @@ pub const Product = struct {
     /// * `UPDATE_FINDINGS_IN_SECURITY_HUB` - The integration does not send new
     ///   findings to Security Hub, but does make updates to the findings that it
     ///   receives from Security Hub.
-    integration_types: ?[]const IntegrationType,
+    integration_types: ?[]const IntegrationType = null,
 
     /// For integrations with Amazon Web Services services, the Amazon Web Services
     /// Console URL from which to activate the service.
     ///
     /// For integrations with third-party products, the Amazon Web Services
     /// Marketplace URL from which to subscribe to or purchase the product.
-    marketplace_url: ?[]const u8,
+    marketplace_url: ?[]const u8 = null,
 
     /// The ARN assigned to the product.
     product_arn: []const u8,
 
     /// The name of the product.
-    product_name: ?[]const u8,
+    product_name: ?[]const u8 = null,
 
     /// The resource policy associated with the product.
-    product_subscription_resource_policy: ?[]const u8,
+    product_subscription_resource_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .activation_url = "ActivationUrl",

@@ -5,7 +5,7 @@ const CascadingControlConfiguration = @import("cascading_control_configuration.z
 pub const FilterCrossSheetControl = struct {
     /// The values that are displayed in a control can be configured to only show
     /// values that are valid based on what's selected in other controls.
-    cascading_control_configuration: ?CascadingControlConfiguration,
+    cascading_control_configuration: ?CascadingControlConfiguration = null,
 
     /// The ID of the `FilterCrossSheetControl`.
     filter_control_id: []const u8,

@@ -6,7 +6,7 @@
 pub const OidcMemberDefinition = struct {
     /// A list of comma seperated strings that identifies user groups in your OIDC
     /// IdP. Each user group is made up of a group of private workers.
-    groups: ?[]const []const u8,
+    groups: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .groups = "Groups",

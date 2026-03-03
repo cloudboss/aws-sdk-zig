@@ -8,7 +8,7 @@ pub const CallAnalyticsJobDetails = struct {
     ///
     /// This array lists all the analytics features that were skipped, along with
     /// their corresponding reason code and message.
-    skipped: ?[]const CallAnalyticsSkippedFeature,
+    skipped: ?[]const CallAnalyticsSkippedFeature = null,
 
     pub const json_field_names = .{
         .skipped = "Skipped",

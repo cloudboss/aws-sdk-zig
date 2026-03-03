@@ -9,28 +9,28 @@ const UplinkAwsGroundStationAgentEndpointDetails = @import("uplink_aws_ground_st
 /// Information about the endpoint details.
 pub const EndpointDetails = struct {
     /// An agent endpoint.
-    aws_ground_station_agent_endpoint: ?AwsGroundStationAgentEndpoint,
+    aws_ground_station_agent_endpoint: ?AwsGroundStationAgentEndpoint = null,
 
     /// Definition for a downlink agent endpoint
-    downlink_aws_ground_station_agent_endpoint: ?DownlinkAwsGroundStationAgentEndpointDetails,
+    downlink_aws_ground_station_agent_endpoint: ?DownlinkAwsGroundStationAgentEndpointDetails = null,
 
     /// A dataflow endpoint.
-    endpoint: ?DataflowEndpoint,
+    endpoint: ?DataflowEndpoint = null,
 
     /// Health reasons for a dataflow endpoint. This field is ignored when calling
     /// `CreateDataflowEndpointGroup`.
-    health_reasons: ?[]const CapabilityHealthReason,
+    health_reasons: ?[]const CapabilityHealthReason = null,
 
     /// A dataflow endpoint health status. This field is ignored when calling
     /// `CreateDataflowEndpointGroup`.
-    health_status: ?CapabilityHealth,
+    health_status: ?CapabilityHealth = null,
 
     /// Endpoint security details including a list of subnets, a list of security
     /// groups and a role to connect streams to instances.
-    security_details: ?SecurityDetails,
+    security_details: ?SecurityDetails = null,
 
     /// Definition for an uplink agent endpoint
-    uplink_aws_ground_station_agent_endpoint: ?UplinkAwsGroundStationAgentEndpointDetails,
+    uplink_aws_ground_station_agent_endpoint: ?UplinkAwsGroundStationAgentEndpointDetails = null,
 
     pub const json_field_names = .{
         .aws_ground_station_agent_endpoint = "awsGroundStationAgentEndpoint",

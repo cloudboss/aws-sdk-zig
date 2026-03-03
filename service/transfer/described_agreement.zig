@@ -35,18 +35,18 @@ pub const DescribedAgreement = struct {
     /// directory of the file location that's used in the `StartFileTransfer`
     /// request. Additionally, make sure that the role provides
     /// `secretsmanager:GetSecretValue` permission to Secrets Manager.
-    access_role: ?[]const u8,
+    access_role: ?[]const u8 = null,
 
     /// A unique identifier for the agreement. This identifier is returned when you
     /// create an agreement.
-    agreement_id: ?[]const u8,
+    agreement_id: ?[]const u8 = null,
 
     /// The unique Amazon Resource Name (ARN) for the agreement.
     arn: []const u8,
 
     /// The landing directory (folder) for files that are transferred by using the
     /// AS2 protocol.
-    base_directory: ?[]const u8,
+    base_directory: ?[]const u8 = null,
 
     /// A `CustomDirectoriesType` structure. This structure specifies custom
     /// directories for storing various AS2 message files. You can specify
@@ -57,10 +57,10 @@ pub const DescribedAgreement = struct {
     /// * Payload files
     /// * Status files
     /// * Temporary files
-    custom_directories: ?CustomDirectoriesType,
+    custom_directories: ?CustomDirectoriesType = null,
 
     /// The name or short description that's used to identify the agreement.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Determines whether or not unsigned messages from your trading partners will
     /// be accepted.
@@ -69,13 +69,13 @@ pub const DescribedAgreement = struct {
     ///   partner.
     /// * `DISABLED` (default value): Transfer Family accepts unsigned messages from
     ///   your trading partner.
-    enforce_message_signing: ?EnforceMessageSigningType,
+    enforce_message_signing: ?EnforceMessageSigningType = null,
 
     /// A unique identifier for the AS2 local profile.
-    local_profile_id: ?[]const u8,
+    local_profile_id: ?[]const u8 = null,
 
     /// A unique identifier for the partner profile used in the agreement.
-    partner_profile_id: ?[]const u8,
+    partner_profile_id: ?[]const u8 = null,
 
     /// Determines whether or not Transfer Family appends a unique string of
     /// characters to the end of the AS2 message payload filename when saving it.
@@ -85,17 +85,17 @@ pub const DescribedAgreement = struct {
     /// * `DISABLED` (default value): when Transfer Family saves the file, the
     ///   filename is adjusted, as described in [File names and
     ///   locations](https://docs.aws.amazon.com/transfer/latest/userguide/send-as2-messages.html#file-names-as2).
-    preserve_filename: ?PreserveFilenameType,
+    preserve_filename: ?PreserveFilenameType = null,
 
     /// A system-assigned unique identifier for a server instance. This identifier
     /// indicates the specific server that the agreement uses.
-    server_id: ?[]const u8,
+    server_id: ?[]const u8 = null,
 
     /// The current status of the agreement, either `ACTIVE` or `INACTIVE`.
-    status: ?AgreementStatusType,
+    status: ?AgreementStatusType = null,
 
     /// Key-value pairs that can be used to group and search for agreements.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .access_role = "AccessRole",

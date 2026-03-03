@@ -14,7 +14,7 @@ pub const MapRunExecutionCounts = struct {
     /// that cannot be redriven because their execution status is terminal. For
     /// example, child workflows with an execution status of `FAILED`, `ABORTED`, or
     /// `TIMED_OUT` and a `redriveStatus` of `NOT_REDRIVABLE`.
-    failures_not_redrivable: ?i64,
+    failures_not_redrivable: ?i64 = null,
 
     /// The total number of child workflow executions that were started by a Map
     /// Run, but haven't started executing yet.
@@ -24,7 +24,7 @@ pub const MapRunExecutionCounts = struct {
     /// redriven. The status of these child workflow executions could be `FAILED`,
     /// `ABORTED`, or `TIMED_OUT` in the original execution attempt or a previous
     /// redrive attempt.
-    pending_redrive: ?i64,
+    pending_redrive: ?i64 = null,
 
     /// Returns the count of child workflow executions whose results were written by
     /// `ResultWriter`. For more information, see

@@ -27,7 +27,7 @@ pub const ZonalConfig = struct {
     /// For more information about the zonal configuration feature, see [zonal
     /// configuration](https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config) in the *CodeDeploy User
     /// Guide*.
-    first_zone_monitor_duration_in_seconds: ?i64,
+    first_zone_monitor_duration_in_seconds: ?i64 = null,
 
     /// The number or percentage of instances that must remain available per
     /// Availability Zone
@@ -43,7 +43,7 @@ pub const ZonalConfig = struct {
     /// For more information about the zonal configuration feature, see [zonal
     /// configuration](https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config) in the *CodeDeploy User
     /// Guide*.
-    minimum_healthy_hosts_per_zone: ?MinimumHealthyHostsPerZone,
+    minimum_healthy_hosts_per_zone: ?MinimumHealthyHostsPerZone = null,
 
     /// The period of time, in seconds, that CodeDeploy must wait after completing a
     /// deployment to an Availability Zone. CodeDeploy will wait this amount of time
@@ -58,7 +58,7 @@ pub const ZonalConfig = struct {
     /// For more information about the zonal configuration feature, see [zonal
     /// configuration](https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config) in the *CodeDeploy User
     /// Guide*.
-    monitor_duration_in_seconds: ?i64,
+    monitor_duration_in_seconds: ?i64 = null,
 
     pub const json_field_names = .{
         .first_zone_monitor_duration_in_seconds = "firstZoneMonitorDurationInSeconds",

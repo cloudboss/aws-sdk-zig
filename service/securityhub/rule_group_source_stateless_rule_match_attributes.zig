@@ -7,23 +7,23 @@ const RuleGroupSourceStatelessRuleMatchAttributesTcpFlags = @import("rule_group_
 /// Criteria for the stateless rule.
 pub const RuleGroupSourceStatelessRuleMatchAttributes = struct {
     /// A list of port ranges to specify the destination ports to inspect for.
-    destination_ports: ?[]const RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts,
+    destination_ports: ?[]const RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts = null,
 
     /// The destination IP addresses and address ranges to inspect for, in CIDR
     /// notation.
-    destinations: ?[]const RuleGroupSourceStatelessRuleMatchAttributesDestinations,
+    destinations: ?[]const RuleGroupSourceStatelessRuleMatchAttributesDestinations = null,
 
     /// The protocols to inspect for.
-    protocols: ?[]const i32,
+    protocols: ?[]const i32 = null,
 
     /// A list of port ranges to specify the source ports to inspect for.
-    source_ports: ?[]const RuleGroupSourceStatelessRuleMatchAttributesSourcePorts,
+    source_ports: ?[]const RuleGroupSourceStatelessRuleMatchAttributesSourcePorts = null,
 
     /// The source IP addresses and address ranges to inspect for, in CIDR notation.
-    sources: ?[]const RuleGroupSourceStatelessRuleMatchAttributesSources,
+    sources: ?[]const RuleGroupSourceStatelessRuleMatchAttributesSources = null,
 
     /// The TCP flags and masks to inspect for.
-    tcp_flags: ?[]const RuleGroupSourceStatelessRuleMatchAttributesTcpFlags,
+    tcp_flags: ?[]const RuleGroupSourceStatelessRuleMatchAttributesTcpFlags = null,
 
     pub const json_field_names = .{
         .destination_ports = "DestinationPorts",

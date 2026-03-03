@@ -5,7 +5,7 @@ pub const IncludedOauth2ProviderConfigInput = struct {
     /// OAuth2 authorization endpoint for your isolated OAuth2 application tenant.
     /// This is where users are redirected to authenticate and authorize access to
     /// their resources.
-    authorization_endpoint: ?[]const u8,
+    authorization_endpoint: ?[]const u8 = null,
 
     /// The client ID for the supported OAuth2 provider. This identifier is assigned
     /// by the OAuth2 provider when you register your application.
@@ -18,11 +18,11 @@ pub const IncludedOauth2ProviderConfigInput = struct {
 
     /// Token issuer of your isolated OAuth2 application tenant. This URL identifies
     /// the authorization server that issues tokens for this provider.
-    issuer: ?[]const u8,
+    issuer: ?[]const u8 = null,
 
     /// OAuth2 token endpoint for your isolated OAuth2 application tenant. This is
     /// where authorization codes are exchanged for access tokens.
-    token_endpoint: ?[]const u8,
+    token_endpoint: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authorization_endpoint = "authorizationEndpoint",

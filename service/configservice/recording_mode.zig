@@ -39,7 +39,7 @@ pub const RecordingMode = struct {
     /// The `recordingModeOverride` object in the `recordingModeOverrides` array
     /// consists of three fields: a `description`, the new `recordingFrequency`, and
     /// an array of `resourceTypes` to override.
-    recording_mode_overrides: ?[]const RecordingModeOverride,
+    recording_mode_overrides: ?[]const RecordingModeOverride = null,
 
     pub const json_field_names = .{
         .recording_frequency = "recordingFrequency",

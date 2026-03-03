@@ -5,13 +5,13 @@ const InventoryResultItem = @import("inventory_result_item.zig").InventoryResult
 /// Inventory query results.
 pub const InventoryResultEntity = struct {
     /// The data section in the inventory result entity JSON.
-    data: ?[]const aws.map.MapEntry(InventoryResultItem),
+    data: ?[]const aws.map.MapEntry(InventoryResultItem) = null,
 
     /// ID of the inventory result entity. For example, for managed node inventory
     /// the result will
     /// be the managed node ID. For EC2 instance inventory, the result will be the
     /// instance ID.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data = "Data",

@@ -3,24 +3,24 @@ const DetectorState = @import("detector_state.zig").DetectorState;
 /// Information about the detector (instance).
 pub const Detector = struct {
     /// The time the detector (instance) was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The name of the detector model that created this detector (instance).
-    detector_model_name: ?[]const u8,
+    detector_model_name: ?[]const u8 = null,
 
     /// The version of the detector model that created this detector (instance).
-    detector_model_version: ?[]const u8,
+    detector_model_version: ?[]const u8 = null,
 
     /// The value of the key (identifying the device or system) that caused the
     /// creation of this
     /// detector (instance).
-    key_value: ?[]const u8,
+    key_value: ?[]const u8 = null,
 
     /// The time the detector (instance) was last updated.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The current state of the detector (instance).
-    state: ?DetectorState,
+    state: ?DetectorState = null,
 
     pub const json_field_names = .{
         .creation_time = "creationTime",

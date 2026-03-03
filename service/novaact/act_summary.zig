@@ -7,7 +7,7 @@ pub const ActSummary = struct {
     act_id: []const u8,
 
     /// The timestamp when the act completed execution, if applicable.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The unique identifier of the session containing this act.
     session_id: []const u8,
@@ -19,7 +19,7 @@ pub const ActSummary = struct {
     status: ActStatus,
 
     /// The location where trace information for this act is stored.
-    trace_location: ?TraceLocation,
+    trace_location: ?TraceLocation = null,
 
     /// The unique identifier of the workflow run containing this act.
     workflow_run_id: []const u8,

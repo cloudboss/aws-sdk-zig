@@ -5,10 +5,10 @@ const SlaType = @import("sla_type.zig").SlaType;
 /// Represents an SLA configuration.
 pub const SlaConfiguration = struct {
     /// Time at which an SLA was completed.
-    completion_time: ?i64,
+    completion_time: ?i64 = null,
 
     /// Unique identifier of a field.
-    field_id: ?[]const u8,
+    field_id: ?[]const u8 = null,
 
     /// Name of an SLA.
     name: []const u8,
@@ -18,7 +18,7 @@ pub const SlaConfiguration = struct {
 
     /// Represents a list of target field values for the fieldId specified in
     /// SlaConfiguration.
-    target_field_values: ?[]const FieldValueUnion,
+    target_field_values: ?[]const FieldValueUnion = null,
 
     /// Target time by which an SLA should be completed.
     target_time: i64,

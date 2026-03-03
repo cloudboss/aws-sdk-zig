@@ -7,7 +7,7 @@ pub const DataCatalogInputDefinition = struct {
     /// The unique identifier of the Amazon Web Services account that holds the Data
     /// Catalog that stores the
     /// data.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The name of a database in the Data Catalog.
     database_name: []const u8,
@@ -18,7 +18,7 @@ pub const DataCatalogInputDefinition = struct {
     table_name: []const u8,
 
     /// Represents an Amazon location where DataBrew can store intermediate results.
-    temp_directory: ?S3Location,
+    temp_directory: ?S3Location = null,
 
     pub const json_field_names = .{
         .catalog_id = "CatalogId",

@@ -10,12 +10,12 @@ pub const CreateEndpointRequest = struct {
     /// pool (CoIP pool).
     ///
     /// `Private` is the default access type value.
-    access_type: ?EndpointAccessType,
+    access_type: ?EndpointAccessType = null,
 
     /// The ID of the customer-owned IPv4 address pool (CoIP pool) for the endpoint.
     /// IP addresses
     /// are allocated from this pool for the endpoint.
-    customer_owned_ipv_4_pool: ?[]const u8,
+    customer_owned_ipv_4_pool: ?[]const u8 = null,
 
     /// The ID of the Outposts.
     outpost_id: []const u8,

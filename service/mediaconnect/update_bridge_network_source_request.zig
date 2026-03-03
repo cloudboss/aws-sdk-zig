@@ -4,22 +4,22 @@ const Protocol = @import("protocol.zig").Protocol;
 /// Update the network source of the bridge.
 pub const UpdateBridgeNetworkSourceRequest = struct {
     /// The network source multicast IP.
-    multicast_ip: ?[]const u8,
+    multicast_ip: ?[]const u8 = null,
 
     /// The settings related to the multicast source.
-    multicast_source_settings: ?MulticastSourceSettings,
+    multicast_source_settings: ?MulticastSourceSettings = null,
 
     /// The network source's gateway network name.
-    network_name: ?[]const u8,
+    network_name: ?[]const u8 = null,
 
     /// The network source port.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The network source protocol.
     ///
     /// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
     /// reference is maintained for legacy purposes only.
-    protocol: ?Protocol,
+    protocol: ?Protocol = null,
 
     pub const json_field_names = .{
         .multicast_ip = "MulticastIp",

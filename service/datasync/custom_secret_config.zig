@@ -14,10 +14,10 @@ pub const CustomSecretConfig = struct {
     /// Specifies the ARN for the Identity and Access Management role that DataSync
     /// uses to
     /// access the secret specified for `SecretArn`.
-    secret_access_role_arn: ?[]const u8,
+    secret_access_role_arn: ?[]const u8 = null,
 
     /// Specifies the ARN for an Secrets Manager secret.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .secret_access_role_arn = "SecretAccessRoleArn",

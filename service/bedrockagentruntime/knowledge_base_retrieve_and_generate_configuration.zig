@@ -13,7 +13,7 @@ const KnowledgeBaseRetrievalConfiguration = @import("knowledge_base_retrieval_co
 pub const KnowledgeBaseRetrieveAndGenerateConfiguration = struct {
     /// Contains configurations for response generation based on the knowledge base
     /// query results.
-    generation_configuration: ?GenerationConfiguration,
+    generation_configuration: ?GenerationConfiguration = null,
 
     /// The unique identifier of the knowledge base that is queried.
     knowledge_base_id: []const u8,
@@ -24,11 +24,11 @@ pub const KnowledgeBaseRetrieveAndGenerateConfiguration = struct {
 
     /// Settings for how the model processes the prompt prior to retrieval and
     /// generation.
-    orchestration_configuration: ?OrchestrationConfiguration,
+    orchestration_configuration: ?OrchestrationConfiguration = null,
 
     /// Contains configurations for how to retrieve and return the knowledge base
     /// query.
-    retrieval_configuration: ?KnowledgeBaseRetrievalConfiguration,
+    retrieval_configuration: ?KnowledgeBaseRetrievalConfiguration = null,
 
     pub const json_field_names = .{
         .generation_configuration = "generationConfiguration",

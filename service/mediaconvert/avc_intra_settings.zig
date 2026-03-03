@@ -20,11 +20,11 @@ pub const AvcIntraSettings = struct {
     /// output. Outputs with higher class values have higher bitrates and improved
     /// image quality. Note that for Class 4K/2K, MediaConvert supports only 4:2:2
     /// chroma subsampling.
-    avc_intra_class: ?AvcIntraClass,
+    avc_intra_class: ?AvcIntraClass = null,
 
     /// Optional when you set AVC-Intra class to Class 4K/2K. When you set AVC-Intra
     /// class to a different value, this object isn't allowed.
-    avc_intra_uhd_settings: ?AvcIntraUhdSettings,
+    avc_intra_uhd_settings: ?AvcIntraUhdSettings = null,
 
     /// If you are using the console, use the Framerate setting to specify the frame
     /// rate for this output. If you want to keep the same frame rate as the input
@@ -32,7 +32,7 @@ pub const AvcIntraSettings = struct {
     /// a frame rate from the dropdown list or choose Custom. The framerates shown
     /// in the dropdown list are decimal approximations of fractions. If you choose
     /// Custom, specify your frame rate as a fraction.
-    framerate_control: ?AvcIntraFramerateControl,
+    framerate_control: ?AvcIntraFramerateControl = null,
 
     /// Choose the method that you want MediaConvert to use when increasing or
     /// decreasing your video's frame rate. For numerically simple conversions, such
@@ -50,7 +50,7 @@ pub const AvcIntraSettings = struct {
     /// add, or otherwise change the frame count from your input to your output.
     /// Note that since the frame count is maintained, the duration of your output
     /// will become shorter at higher frame rates and longer at lower frame rates.
-    framerate_conversion_algorithm: ?AvcIntraFramerateConversionAlgorithm,
+    framerate_conversion_algorithm: ?AvcIntraFramerateConversionAlgorithm = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -59,7 +59,7 @@ pub const AvcIntraSettings = struct {
     /// use the console for transcode jobs that use frame rate conversion, provide
     /// the value as a decimal number for Framerate. In this example, specify
     /// 23.976.
-    framerate_denominator: ?i32,
+    framerate_denominator: ?i32 = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -67,7 +67,7 @@ pub const AvcIntraSettings = struct {
     /// this example, use 24000 for the value of FramerateNumerator. When you use
     /// the console for transcode jobs that use frame rate conversion, provide the
     /// value as a decimal number for Framerate. In this example, specify 23.976.
-    framerate_numerator: ?i32,
+    framerate_numerator: ?i32 = null,
 
     /// Choose the scan line type for the output. Keep the default value,
     /// Progressive to create a progressive output, regardless of the scan type of
@@ -80,7 +80,7 @@ pub const AvcIntraSettings = struct {
     /// interlaced with the same polarity as the source. If the source is
     /// progressive, the output will be interlaced with top field bottom field
     /// first, depending on which of the Follow options you choose.
-    interlace_mode: ?AvcIntraInterlaceMode,
+    interlace_mode: ?AvcIntraInterlaceMode = null,
 
     /// Optionally choose one or more per frame metric reports to generate along
     /// with your output. You can use these metrics to analyze your video output
@@ -100,7 +100,7 @@ pub const AvcIntraSettings = struct {
     /// Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     /// Quality-Defined Variable Bitrate. This option is only available when your
     /// output uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
-    per_frame_metrics: ?[]const FrameMetricType,
+    per_frame_metrics: ?[]const FrameMetricType = null,
 
     /// Use this setting for interlaced outputs, when your output frame rate is half
     /// of your input frame rate. In this situation, choose Optimized interlacing to
@@ -114,7 +114,7 @@ pub const AvcIntraSettings = struct {
     /// Required settings: To use optimized interlacing, you must set Telecine to
     /// None or Soft. You can't use optimized interlacing for hard telecine outputs.
     /// You must also set Interlace mode to a value other than Progressive.
-    scan_type_conversion_mode: ?AvcIntraScanTypeConversionMode,
+    scan_type_conversion_mode: ?AvcIntraScanTypeConversionMode = null,
 
     /// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
     /// second (fps). Enable slow PAL to create a 25 fps output. When you enable
@@ -122,14 +122,14 @@ pub const AvcIntraSettings = struct {
     /// your audio to keep it synchronized with the video. Note that enabling this
     /// setting will slightly reduce the duration of your video. Required settings:
     /// You must also set Framerate to 25.
-    slow_pal: ?AvcIntraSlowPal,
+    slow_pal: ?AvcIntraSlowPal = null,
 
     /// When you do frame rate conversion from 23.976 frames per second (fps) to
     /// 29.97 fps, and your output scan type is interlaced, you can optionally
     /// enable hard telecine to create a smoother picture. When you keep the default
     /// value, None, MediaConvert does a standard frame rate conversion to 29.97
     /// without doing anything with the field polarity to create a smoother picture.
-    telecine: ?AvcIntraTelecine,
+    telecine: ?AvcIntraTelecine = null,
 
     pub const json_field_names = .{
         .avc_intra_class = "AvcIntraClass",

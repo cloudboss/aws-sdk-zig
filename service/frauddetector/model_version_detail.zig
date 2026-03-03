@@ -9,48 +9,48 @@ const TrainingResultV2 = @import("training_result_v2.zig").TrainingResultV2;
 /// The details of the model version.
 pub const ModelVersionDetail = struct {
     /// The model version ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The timestamp when the model was created.
-    created_time: ?[]const u8,
+    created_time: ?[]const u8 = null,
 
     /// The external events data details. This will be populated if the
     /// `trainingDataSource` for the model version is specified as
     /// `EXTERNAL_EVENTS`.
-    external_events_detail: ?ExternalEventsDetail,
+    external_events_detail: ?ExternalEventsDetail = null,
 
     /// The ingested events data details. This will be populated if the
     /// `trainingDataSource` for the model version is specified as
     /// `INGESTED_EVENTS`.
-    ingested_events_detail: ?IngestedEventsDetail,
+    ingested_events_detail: ?IngestedEventsDetail = null,
 
     /// The timestamp when the model was last updated.
-    last_updated_time: ?[]const u8,
+    last_updated_time: ?[]const u8 = null,
 
     /// The model ID.
-    model_id: ?[]const u8,
+    model_id: ?[]const u8 = null,
 
     /// The model type.
-    model_type: ?ModelTypeEnum,
+    model_type: ?ModelTypeEnum = null,
 
     /// The model version number.
-    model_version_number: ?[]const u8,
+    model_version_number: ?[]const u8 = null,
 
     /// The status of the model version.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The training data schema.
-    training_data_schema: ?TrainingDataSchema,
+    training_data_schema: ?TrainingDataSchema = null,
 
     /// The model version training data source.
-    training_data_source: ?TrainingDataSourceEnum,
+    training_data_source: ?TrainingDataSourceEnum = null,
 
     /// The training results.
-    training_result: ?TrainingResult,
+    training_result: ?TrainingResult = null,
 
     /// The training result details. The details include the relative importance of
     /// the variables.
-    training_result_v2: ?TrainingResultV2,
+    training_result_v2: ?TrainingResultV2 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

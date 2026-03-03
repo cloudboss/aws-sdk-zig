@@ -5,7 +5,7 @@ const EksMetadata = @import("eks_metadata.zig").EksMetadata;
 /// job.
 pub const EksPodPropertiesOverride = struct {
     /// The overrides for the container that's used on the Amazon EKS pod.
-    containers: ?[]const EksContainerOverride,
+    containers: ?[]const EksContainerOverride = null,
 
     /// The overrides for the `initContainers` defined in the Amazon EKS pod. These
     /// containers run before
@@ -16,11 +16,11 @@ pub const EksPodPropertiesOverride = struct {
     /// registration information in the Kubernetes backend data store. For more
     /// information, see [Init
     /// Containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) in the *Kubernetes documentation*.
-    init_containers: ?[]const EksContainerOverride,
+    init_containers: ?[]const EksContainerOverride = null,
 
     /// Metadata about the overrides for the container that's used on the Amazon EKS
     /// pod.
-    metadata: ?EksMetadata,
+    metadata: ?EksMetadata = null,
 
     pub const json_field_names = .{
         .containers = "containers",

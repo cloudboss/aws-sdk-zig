@@ -5,11 +5,11 @@ const ExternalMetricStatusCode = @import("external_metric_status_code.zig").Exte
 pub const ExternalMetricStatus = struct {
     /// The status code for Compute Optimizer's integration with an external metrics
     /// provider.
-    status_code: ?ExternalMetricStatusCode,
+    status_code: ?ExternalMetricStatusCode = null,
 
     /// The reason for Compute Optimizer's integration status with your external
     /// metric provider.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status_code = "statusCode",

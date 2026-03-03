@@ -3,8 +3,8 @@ const NetworkInterfacePermissionStateCode = @import("network_interface_permissio
 /// Describes the state of a network interface permission.
 pub const NetworkInterfacePermissionState = struct {
     /// The state of the permission.
-    state: ?NetworkInterfacePermissionStateCode,
+    state: ?NetworkInterfacePermissionStateCode = null,
 
     /// A status message, if applicable.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 };

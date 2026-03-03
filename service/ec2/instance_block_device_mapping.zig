@@ -3,9 +3,9 @@ const EbsInstanceBlockDevice = @import("ebs_instance_block_device.zig").EbsInsta
 /// Describes a block device mapping.
 pub const InstanceBlockDeviceMapping = struct {
     /// The device name.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// Parameters used to automatically set up EBS volumes when the instance is
     /// launched.
-    ebs: ?EbsInstanceBlockDevice,
+    ebs: ?EbsInstanceBlockDevice = null,
 };

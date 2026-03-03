@@ -2,15 +2,15 @@ const MembershipStatus = @import("membership_status.zig").MembershipStatus;
 const AwsRegion = @import("aws_region.zig").AwsRegion;
 
 pub const ListMembershipItem = struct {
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
-    membership_arn: ?[]const u8,
+    membership_arn: ?[]const u8 = null,
 
     membership_id: []const u8,
 
-    membership_status: ?MembershipStatus,
+    membership_status: ?MembershipStatus = null,
 
-    region: ?AwsRegion,
+    region: ?AwsRegion = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

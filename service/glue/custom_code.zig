@@ -16,7 +16,7 @@ pub const CustomCode = struct {
     name: []const u8,
 
     /// Specifies the data schema for the custom code transform.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     pub const json_field_names = .{
         .class_name = "ClassName",

@@ -4,9 +4,9 @@ const AnalyzeIDDetections = @import("analyze_id_detections.zig").AnalyzeIDDetect
 /// and the text associated with it. These are extracted as Type and Value
 /// respectively.
 pub const IdentityDocumentField = struct {
-    @"type": ?AnalyzeIDDetections,
+    @"type": ?AnalyzeIDDetections = null,
 
-    value_detection: ?AnalyzeIDDetections,
+    value_detection: ?AnalyzeIDDetections = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

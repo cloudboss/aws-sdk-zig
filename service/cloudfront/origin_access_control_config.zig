@@ -5,7 +5,7 @@ const OriginAccessControlSigningProtocols = @import("origin_access_control_signi
 /// A CloudFront origin access control configuration.
 pub const OriginAccessControlConfig = struct {
     /// A description of the origin access control.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A name to identify the origin access control. You can specify up to 64
     /// characters.

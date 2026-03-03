@@ -1,7 +1,7 @@
 /// The indexing rule configuration for probabilistic sampling.
 pub const ProbabilisticRuleValue = struct {
     /// Applied sampling percentage of traceIds.
-    actual_sampling_percentage: ?f64,
+    actual_sampling_percentage: ?f64 = null,
 
     /// Configured sampling percentage of traceIds. Note that sampling can be
     /// subject to limits to ensure completeness of data.

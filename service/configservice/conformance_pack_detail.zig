@@ -12,32 +12,32 @@ pub const ConformancePackDetail = struct {
     conformance_pack_id: []const u8,
 
     /// A list of `ConformancePackInputParameter` objects.
-    conformance_pack_input_parameters: ?[]const ConformancePackInputParameter,
+    conformance_pack_input_parameters: ?[]const ConformancePackInputParameter = null,
 
     /// Name of the conformance pack.
     conformance_pack_name: []const u8,
 
     /// The Amazon Web Services service that created the conformance pack.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The name of the Amazon S3 bucket where Config stores conformance pack
     /// templates.
     ///
     /// This field is optional.
-    delivery_s3_bucket: ?[]const u8,
+    delivery_s3_bucket: ?[]const u8 = null,
 
     /// The prefix for the Amazon S3 bucket.
     ///
     /// This field is optional.
-    delivery_s3_key_prefix: ?[]const u8,
+    delivery_s3_key_prefix: ?[]const u8 = null,
 
     /// The last time a conformation pack update was requested.
-    last_update_requested_time: ?i64,
+    last_update_requested_time: ?i64 = null,
 
     /// An object that contains the name or Amazon Resource Name (ARN) of the Amazon
     /// Web Services Systems Manager document (SSM document) and the version of the
     /// SSM document that is used to create a conformance pack.
-    template_ssm_document_details: ?TemplateSSMDocumentDetails,
+    template_ssm_document_details: ?TemplateSSMDocumentDetails = null,
 
     pub const json_field_names = .{
         .conformance_pack_arn = "ConformancePackArn",

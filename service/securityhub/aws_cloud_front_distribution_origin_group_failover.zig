@@ -3,7 +3,7 @@ const AwsCloudFrontDistributionOriginGroupFailoverStatusCodes = @import("aws_clo
 /// Provides information about when an origin group fails over.
 pub const AwsCloudFrontDistributionOriginGroupFailover = struct {
     /// Information about the status codes that cause an origin group to fail over.
-    status_codes: ?AwsCloudFrontDistributionOriginGroupFailoverStatusCodes,
+    status_codes: ?AwsCloudFrontDistributionOriginGroupFailoverStatusCodes = null,
 
     pub const json_field_names = .{
         .status_codes = "StatusCodes",

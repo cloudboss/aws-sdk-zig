@@ -8,14 +8,14 @@ pub const CdnConfiguration = struct {
     /// Then specify the rule's name in this `AdSegmentUrlPrefix`. When AWS
     /// Elemental MediaTailor serves a manifest, it reports your CDN as the source
     /// for ad segments.
-    ad_segment_url_prefix: ?[]const u8,
+    ad_segment_url_prefix: ?[]const u8 = null,
 
     /// A content delivery network (CDN) to cache content segments, so that content
     /// requests don’t always have to go to the origin server. First, create a rule
     /// in your CDN for the content segment origin server. Then specify the rule's
     /// name in this `ContentSegmentUrlPrefix`. When AWS Elemental MediaTailor
     /// serves a manifest, it reports your CDN as the source for content segments.
-    content_segment_url_prefix: ?[]const u8,
+    content_segment_url_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ad_segment_url_prefix = "AdSegmentUrlPrefix",

@@ -6,5 +6,5 @@ pub const FleetSpotMaintenanceStrategiesRequest = struct {
     /// The strategy to use when Amazon EC2 emits a signal that your Spot Instance
     /// is at an
     /// elevated risk of being interrupted.
-    capacity_rebalance: ?FleetSpotCapacityRebalanceRequest,
+    capacity_rebalance: ?FleetSpotCapacityRebalanceRequest = null,
 };

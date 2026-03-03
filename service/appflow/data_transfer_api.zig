@@ -5,7 +5,7 @@ const DataTransferApiType = @import("data_transfer_api_type.zig").DataTransferAp
 /// data.
 pub const DataTransferApi = struct {
     /// The name of the connector application API.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// You can specify one of the following types:
     ///
@@ -26,7 +26,7 @@ pub const DataTransferApi = struct {
     /// **ASYNC**
     ///
     /// An asynchronous API. This type of API optimizes a flow for large datasets.
-    @"type": ?DataTransferApiType,
+    @"type": ?DataTransferApiType = null,
 
     pub const json_field_names = .{
         .name = "Name",

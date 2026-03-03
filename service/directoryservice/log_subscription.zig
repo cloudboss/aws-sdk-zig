@@ -4,13 +4,13 @@
 pub const LogSubscription = struct {
     /// Identifier (ID) of the directory that you want to associate with the log
     /// subscription.
-    directory_id: ?[]const u8,
+    directory_id: ?[]const u8 = null,
 
     /// The name of the log group.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     /// The date and time that the log subscription was created.
-    subscription_created_date_time: ?i64,
+    subscription_created_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",

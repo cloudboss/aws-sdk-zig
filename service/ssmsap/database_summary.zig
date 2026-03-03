@@ -5,22 +5,22 @@ const DatabaseType = @import("database_type.zig").DatabaseType;
 /// The summary of the database.
 pub const DatabaseSummary = struct {
     /// The ID of the application.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the database.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The ID of the component.
-    component_id: ?[]const u8,
+    component_id: ?[]const u8 = null,
 
     /// The ID of the database.
-    database_id: ?[]const u8,
+    database_id: ?[]const u8 = null,
 
     /// The type of the database.
-    database_type: ?DatabaseType,
+    database_type: ?DatabaseType = null,
 
     /// The tags of the database.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

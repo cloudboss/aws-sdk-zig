@@ -5,11 +5,11 @@ pub const BlockedPhrasesConfiguration = struct {
     ///
     /// Each phrase can contain a maximum of 36 characters. The list can contain a
     /// maximum of 20 phrases.
-    blocked_phrases: ?[]const []const u8,
+    blocked_phrases: ?[]const []const u8 = null,
 
     /// The configured custom message displayed to an end user informing them that
     /// they've used a blocked phrase during chat.
-    system_message_override: ?[]const u8,
+    system_message_override: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .blocked_phrases = "blockedPhrases",

@@ -5,11 +5,11 @@ const WorkspaceConfigurationStatus = @import("workspace_configuration_status.zig
 pub const WorkspaceConfigurationDescription = struct {
     /// This is an array of structures, where each structure displays one label sets
     /// for the workspace and the limits for that label set.
-    limits_per_label_set: ?[]const LimitsPerLabelSet,
+    limits_per_label_set: ?[]const LimitsPerLabelSet = null,
 
     /// This field displays how many days that metrics are retained in the
     /// workspace.
-    retention_period_in_days: ?i32,
+    retention_period_in_days: ?i32 = null,
 
     /// This structure displays the current status of the workspace configuration,
     /// and might also contain a reason for that status.

@@ -5,19 +5,19 @@
 /// updates statistics incrementally over the course of the import.
 pub const ImportStatistics = struct {
     /// The number of trail events imported into the event data store.
-    events_completed: ?i64,
+    events_completed: ?i64 = null,
 
     /// The number of failed entries.
-    failed_entries: ?i64,
+    failed_entries: ?i64 = null,
 
     /// The number of log files that completed import.
-    files_completed: ?i64,
+    files_completed: ?i64 = null,
 
     /// The number of S3 prefixes that completed import.
-    prefixes_completed: ?i64,
+    prefixes_completed: ?i64 = null,
 
     /// The number of S3 prefixes found for the import.
-    prefixes_found: ?i64,
+    prefixes_found: ?i64 = null,
 
     pub const json_field_names = .{
         .events_completed = "EventsCompleted",

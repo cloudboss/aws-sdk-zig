@@ -7,12 +7,12 @@ pub const CreatedAt = struct {
     /// Include service deployments in the result that were created after this time.
     /// The
     /// format is yyyy-MM-dd HH:mm:ss.SSSSSS.
-    after: ?i64,
+    after: ?i64 = null,
 
     /// Include service deployments in the result that were created before this
     /// time. The
     /// format is yyyy-MM-dd HH:mm:ss.SSSSSS.
-    before: ?i64,
+    before: ?i64 = null,
 
     pub const json_field_names = .{
         .after = "after",

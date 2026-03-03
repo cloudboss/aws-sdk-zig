@@ -4,10 +4,10 @@
 /// services from within an Amazon VPC.
 pub const IngressVpcConfiguration = struct {
     /// The ID of the VPC endpoint that your App Runner service connects to.
-    vpc_endpoint_id: ?[]const u8,
+    vpc_endpoint_id: ?[]const u8 = null,
 
     /// The ID of the VPC that is used for the VPC endpoint.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .vpc_endpoint_id = "VpcEndpointId",

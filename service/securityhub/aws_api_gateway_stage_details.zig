@@ -7,54 +7,54 @@ const AwsApiGatewayMethodSettings = @import("aws_api_gateway_method_settings.zig
 /// Provides information about a version 1 Amazon API Gateway stage.
 pub const AwsApiGatewayStageDetails = struct {
     /// Settings for logging access for the stage.
-    access_log_settings: ?AwsApiGatewayAccessLogSettings,
+    access_log_settings: ?AwsApiGatewayAccessLogSettings = null,
 
     /// Indicates whether a cache cluster is enabled for the stage.
-    cache_cluster_enabled: ?bool,
+    cache_cluster_enabled: ?bool = null,
 
     /// If a cache cluster is enabled, the size of the cache cluster.
-    cache_cluster_size: ?[]const u8,
+    cache_cluster_size: ?[]const u8 = null,
 
     /// If a cache cluster is enabled, the status of the cache cluster.
-    cache_cluster_status: ?[]const u8,
+    cache_cluster_status: ?[]const u8 = null,
 
     /// Information about settings for canary deployment in the stage.
-    canary_settings: ?AwsApiGatewayCanarySettings,
+    canary_settings: ?AwsApiGatewayCanarySettings = null,
 
     /// The identifier of the client certificate for the stage.
-    client_certificate_id: ?[]const u8,
+    client_certificate_id: ?[]const u8 = null,
 
     /// Indicates when the stage was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    created_date: ?[]const u8,
+    created_date: ?[]const u8 = null,
 
     /// The identifier of the deployment that the stage points to.
-    deployment_id: ?[]const u8,
+    deployment_id: ?[]const u8 = null,
 
     /// A description of the stage.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The version of the API documentation that is associated with the stage.
-    documentation_version: ?[]const u8,
+    documentation_version: ?[]const u8 = null,
 
     /// Indicates when the stage was most recently updated.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    last_updated_date: ?[]const u8,
+    last_updated_date: ?[]const u8 = null,
 
     /// Defines the method settings for the stage.
-    method_settings: ?[]const AwsApiGatewayMethodSettings,
+    method_settings: ?[]const AwsApiGatewayMethodSettings = null,
 
     /// The name of the stage.
-    stage_name: ?[]const u8,
+    stage_name: ?[]const u8 = null,
 
     /// Indicates whether active tracing with X-Ray is enabled for the stage.
-    tracing_enabled: ?bool,
+    tracing_enabled: ?bool = null,
 
     /// A map that defines the stage variables for the stage.
     ///
@@ -67,10 +67,10 @@ pub const AwsApiGatewayStageDetails = struct {
     /// * Numbers
     ///
     /// * Special characters -._~:/?#&=,
-    variables: ?[]const aws.map.StringMapEntry,
+    variables: ?[]const aws.map.StringMapEntry = null,
 
     /// The ARN of the web ACL associated with the stage.
-    web_acl_arn: ?[]const u8,
+    web_acl_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_log_settings = "AccessLogSettings",

@@ -15,12 +15,12 @@ pub const HealthCheckPolicy = struct {
     /// if the
     /// specified protocol is HTTP or HTTP/2. For any other protocol, this value is
     /// ignored.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// The destination port for the health check request. This port must match the
     /// port defined
     /// in the PortMapping for the listener.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The protocol for the health check request. If you specify `grpc`, then your
     /// service must conform to the [GRPC Health

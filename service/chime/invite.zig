@@ -6,16 +6,16 @@ const InviteStatus = @import("invite_status.zig").InviteStatus;
 /// `Team` account.
 pub const Invite = struct {
     /// The email address to which the invite is sent.
-    email_address: ?[]const u8,
+    email_address: ?[]const u8 = null,
 
     /// The status of the invite email.
-    email_status: ?EmailStatus,
+    email_status: ?EmailStatus = null,
 
     /// The invite ID.
-    invite_id: ?[]const u8,
+    invite_id: ?[]const u8 = null,
 
     /// The status of the invite.
-    status: ?InviteStatus,
+    status: ?InviteStatus = null,
 
     pub const json_field_names = .{
         .email_address = "EmailAddress",

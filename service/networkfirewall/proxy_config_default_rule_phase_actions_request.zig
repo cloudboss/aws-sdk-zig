@@ -7,13 +7,13 @@ const ProxyRulePhaseAction = @import("proxy_rule_phase_action.zig").ProxyRulePha
 /// UpdateProxyConfiguration APIs.
 pub const ProxyConfigDefaultRulePhaseActionsRequest = struct {
     /// After receiving response.
-    post_response: ?ProxyRulePhaseAction,
+    post_response: ?ProxyRulePhaseAction = null,
 
     /// Before domain resolution.
-    pre_dns: ?ProxyRulePhaseAction,
+    pre_dns: ?ProxyRulePhaseAction = null,
 
     /// After DNS, before request.
-    pre_request: ?ProxyRulePhaseAction,
+    pre_request: ?ProxyRulePhaseAction = null,
 
     pub const json_field_names = .{
         .post_response = "PostRESPONSE",

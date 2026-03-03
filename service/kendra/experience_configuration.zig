@@ -10,12 +10,12 @@ pub const ExperienceConfiguration = struct {
     /// The identifiers of your data sources and FAQs. Or, you can specify
     /// that you want to use documents indexed via the `BatchPutDocument`
     /// API. This is the content you want to use for your Amazon Kendra experience.
-    content_source_configuration: ?ContentSourceConfiguration,
+    content_source_configuration: ?ContentSourceConfiguration = null,
 
     /// The IAM Identity Center field name that contains the identifiers of your
     /// users,
     /// such as their emails.
-    user_identity_configuration: ?UserIdentityConfiguration,
+    user_identity_configuration: ?UserIdentityConfiguration = null,
 
     pub const json_field_names = .{
         .content_source_configuration = "ContentSourceConfiguration",

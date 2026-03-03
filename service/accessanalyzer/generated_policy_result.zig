@@ -6,7 +6,7 @@ pub const GeneratedPolicyResult = struct {
     /// The text to use as the content for the new policy. The policy is created
     /// using the
     /// [CreatePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html) action.
-    generated_policies: ?[]const GeneratedPolicy,
+    generated_policies: ?[]const GeneratedPolicy = null,
 
     /// A `GeneratedPolicyProperties` object that contains properties of the
     /// generated policy.

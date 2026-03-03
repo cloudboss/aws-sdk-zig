@@ -12,25 +12,25 @@ pub const TestExecutionResultItems = struct {
     /// Results related to conversations in the test set, including metrics about
     /// success and failure of
     /// conversations and intent and slot failures.
-    conversation_level_test_results: ?ConversationLevelTestResults,
+    conversation_level_test_results: ?ConversationLevelTestResults = null,
 
     /// Intent recognition results aggregated by intent name. The aggregated results
     /// contain success and failure rates of intent recognition,
     /// speech transcriptions, and end-to-end conversations.
-    intent_classification_test_results: ?IntentClassificationTestResults,
+    intent_classification_test_results: ?IntentClassificationTestResults = null,
 
     /// Slot resolution results aggregated by intent and slot name. The aggregated
     /// results contain success and failure rates of slot resolution,
     /// speech transcriptions, and end-to-end conversations
-    intent_level_slot_resolution_test_results: ?IntentLevelSlotResolutionTestResults,
+    intent_level_slot_resolution_test_results: ?IntentLevelSlotResolutionTestResults = null,
 
     /// Overall results for the test execution, including the breakdown of
     /// conversations and
     /// single-input utterances.
-    overall_test_results: ?OverallTestResults,
+    overall_test_results: ?OverallTestResults = null,
 
     /// Results related to utterances in the test set.
-    utterance_level_test_results: ?UtteranceLevelTestResults,
+    utterance_level_test_results: ?UtteranceLevelTestResults = null,
 
     pub const json_field_names = .{
         .conversation_level_test_results = "conversationLevelTestResults",

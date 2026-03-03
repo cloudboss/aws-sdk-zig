@@ -11,27 +11,27 @@ const DataAutomationProjectStatus = @import("data_automation_project_status.zig"
 pub const DataAutomationProject = struct {
     creation_time: i64,
 
-    custom_output_configuration: ?CustomOutputConfiguration,
+    custom_output_configuration: ?CustomOutputConfiguration = null,
 
-    kms_encryption_context: ?[]const aws.map.StringMapEntry,
+    kms_encryption_context: ?[]const aws.map.StringMapEntry = null,
 
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     last_modified_time: i64,
 
-    override_configuration: ?OverrideConfiguration,
+    override_configuration: ?OverrideConfiguration = null,
 
     project_arn: []const u8,
 
-    project_description: ?[]const u8,
+    project_description: ?[]const u8 = null,
 
     project_name: []const u8,
 
-    project_stage: ?DataAutomationProjectStage,
+    project_stage: ?DataAutomationProjectStage = null,
 
-    project_type: ?DataAutomationProjectType,
+    project_type: ?DataAutomationProjectType = null,
 
-    standard_output_configuration: ?StandardOutputConfiguration,
+    standard_output_configuration: ?StandardOutputConfiguration = null,
 
     status: DataAutomationProjectStatus,
 

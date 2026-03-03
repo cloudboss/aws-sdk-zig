@@ -10,7 +10,7 @@ pub const ApiGatewayToolConfiguration = struct {
 
     /// A list of explicit tool definitions with optional custom names and
     /// descriptions.
-    tool_overrides: ?[]const ApiGatewayToolOverride,
+    tool_overrides: ?[]const ApiGatewayToolOverride = null,
 
     pub const json_field_names = .{
         .tool_filters = "toolFilters",

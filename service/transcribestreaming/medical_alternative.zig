@@ -9,13 +9,13 @@ pub const MedicalAlternative = struct {
     /// Contains entities identified as personal health information (PHI) in your
     /// transcription
     /// output.
-    entities: ?[]const MedicalEntity,
+    entities: ?[]const MedicalEntity = null,
 
     /// Contains words, phrases, or punctuation marks in your transcription output.
-    items: ?[]const MedicalItem,
+    items: ?[]const MedicalItem = null,
 
     /// Contains transcribed text.
-    transcript: ?[]const u8,
+    transcript: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .entities = "Entities",

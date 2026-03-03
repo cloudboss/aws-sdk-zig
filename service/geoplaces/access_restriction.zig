@@ -5,10 +5,10 @@ const Category = @import("category.zig").Category;
 /// restriction.
 pub const AccessRestriction = struct {
     /// Categories of results that results must belong too.
-    categories: ?[]const Category,
+    categories: ?[]const Category = null,
 
     /// The restriction.
-    restricted: ?bool,
+    restricted: ?bool = null,
 
     pub const json_field_names = .{
         .categories = "Categories",

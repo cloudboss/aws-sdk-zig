@@ -1,10 +1,10 @@
 /// An Object to define the minimum and maximum proficiency levels.
 pub const Range = struct {
     /// The maximum proficiency level of the range.
-    max_proficiency_level: ?f32,
+    max_proficiency_level: ?f32 = null,
 
     /// The minimum proficiency level of the range.
-    min_proficiency_level: ?f32,
+    min_proficiency_level: ?f32 = null,
 
     pub const json_field_names = .{
         .max_proficiency_level = "MaxProficiencyLevel",

@@ -5,27 +5,27 @@ const WorkloadProfile = @import("workload_profile.zig").WorkloadProfile;
 
 /// A lens review summary of a workload.
 pub const LensReviewSummary = struct {
-    lens_alias: ?[]const u8,
+    lens_alias: ?[]const u8 = null,
 
     /// The ARN for the lens.
-    lens_arn: ?[]const u8,
+    lens_arn: ?[]const u8 = null,
 
-    lens_name: ?[]const u8,
+    lens_name: ?[]const u8 = null,
 
     /// The status of the lens.
-    lens_status: ?LensStatus,
+    lens_status: ?LensStatus = null,
 
     /// The version of the lens.
-    lens_version: ?[]const u8,
+    lens_version: ?[]const u8 = null,
 
-    prioritized_risk_counts: ?[]const aws.map.MapEntry(i32),
+    prioritized_risk_counts: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The profiles associated with the workload.
-    profiles: ?[]const WorkloadProfile,
+    profiles: ?[]const WorkloadProfile = null,
 
-    risk_counts: ?[]const aws.map.MapEntry(i32),
+    risk_counts: ?[]const aws.map.MapEntry(i32) = null,
 
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .lens_alias = "LensAlias",

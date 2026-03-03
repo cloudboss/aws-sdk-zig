@@ -5,16 +5,16 @@ const aws = @import("aws");
 /// attributes.
 pub const ThingAttribute = struct {
     /// A list of thing attributes which are name-value pairs.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The thing ARN.
-    thing_arn: ?[]const u8,
+    thing_arn: ?[]const u8 = null,
 
     /// The name of the thing.
-    thing_name: ?[]const u8,
+    thing_name: ?[]const u8 = null,
 
     /// The name of the thing type, if the thing has been associated with a type.
-    thing_type_name: ?[]const u8,
+    thing_type_name: ?[]const u8 = null,
 
     /// The version of the thing record in the registry.
     version: i64 = 0,

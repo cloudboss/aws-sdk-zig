@@ -24,7 +24,7 @@ pub const CodeSecurityIntegrationSummary = struct {
     status_reason: []const u8,
 
     /// The tags associated with the code security integration.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of repository provider for the integration.
     @"type": IntegrationType,

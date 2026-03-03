@@ -2,13 +2,13 @@
 /// before the Amazon Q in Connect session.
 pub const SelfServiceConversationHistory = struct {
     /// The bot response of the conversation history data.
-    bot_response: ?[]const u8,
+    bot_response: ?[]const u8 = null,
 
     /// The input transcript of the conversation history data.
-    input_transcript: ?[]const u8,
+    input_transcript: ?[]const u8 = null,
 
     /// The timestamp of the conversation history entry.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     /// The number of turn of the conversation history data.
     turn_number: i32 = 0,

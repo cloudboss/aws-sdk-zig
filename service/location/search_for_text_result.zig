@@ -9,7 +9,7 @@ pub const SearchForTextResult = struct {
     ///
     /// A great-circle arc is the shortest path on a sphere, in this case the Earth.
     /// This returns the shortest distance between two locations.
-    distance: ?f64,
+    distance: ?f64 = null,
 
     /// Details about the search result, such as its address and position.
     place: Place,
@@ -19,7 +19,7 @@ pub const SearchForTextResult = struct {
     ///
     /// For `SearchPlaceIndexForText` operations, the `PlaceId` is returned only by
     /// place indexes that use HERE or Grab as a data provider.
-    place_id: ?[]const u8,
+    place_id: ?[]const u8 = null,
 
     /// The relative confidence in the match for a result among the results
     /// returned. For example, if more fields for an address match (including house
@@ -27,7 +27,7 @@ pub const SearchForTextResult = struct {
     /// is closer to 1.
     ///
     /// Returned only when the partner selected is Esri or Grab.
-    relevance: ?f64,
+    relevance: ?f64 = null,
 
     pub const json_field_names = .{
         .distance = "Distance",

@@ -14,7 +14,7 @@ pub const GetSolNetworkPackageMetadata = struct {
 
     /// Metadata related to the onboarded network service descriptor in the network
     /// package.
-    nsd: ?NetworkArtifactMeta,
+    nsd: ?NetworkArtifactMeta = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

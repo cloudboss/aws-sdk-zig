@@ -10,12 +10,12 @@ pub const Tag = struct {
     /// Part of the key:value pair that defines a tag. You can use a tag key to
     /// describe a category of information, such as "customer." Tag keys are
     /// case-sensitive.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// Part of the key:value pair that defines a tag. You can use a tag value to
     /// describe a specific value within a category, such as "companyA" or
     /// "companyB." Tag values are case-sensitive.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

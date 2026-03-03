@@ -6,22 +6,22 @@ const MaintenanceWindowType = @import("maintenance_window_type.zig").Maintenance
 pub const MaintenanceWindow = struct {
     /// The option to set the maintenance window during the device local time or
     /// Universal Coordinated Time (UTC).
-    apply_time_of: ?ApplyTimeOf,
+    apply_time_of: ?ApplyTimeOf = null,
 
     /// The days of the week during which the maintenance window is open.
-    days_of_the_week: ?[]const DayOfWeek,
+    days_of_the_week: ?[]const DayOfWeek = null,
 
     /// The hour for the maintenance window end (`00`-`23`).
-    end_time_hour: ?i32,
+    end_time_hour: ?i32 = null,
 
     /// The minutes for the maintenance window end (`00`-`59`).
-    end_time_minute: ?i32,
+    end_time_minute: ?i32 = null,
 
     /// The hour for the maintenance window start (`00`-`23`).
-    start_time_hour: ?i32,
+    start_time_hour: ?i32 = null,
 
     /// The minutes past the hour for the maintenance window start (`00`-`59`).
-    start_time_minute: ?i32,
+    start_time_minute: ?i32 = null,
 
     /// An option to select the default or custom maintenance window.
     @"type": MaintenanceWindowType,

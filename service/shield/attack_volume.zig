@@ -6,16 +6,16 @@ const AttackVolumeStatistics = @import("attack_volume_statistics.zig").AttackVol
 pub const AttackVolume = struct {
     /// A statistics object that uses bits per second as the unit. This is included
     /// for network level attacks.
-    bits_per_second: ?AttackVolumeStatistics,
+    bits_per_second: ?AttackVolumeStatistics = null,
 
     /// A statistics object that uses packets per second as the unit. This is
     /// included for network level attacks.
-    packets_per_second: ?AttackVolumeStatistics,
+    packets_per_second: ?AttackVolumeStatistics = null,
 
     /// A statistics object that uses requests per second as the unit. This is
     /// included for application level attacks, and is only available for accounts
     /// that are subscribed to Shield Advanced.
-    requests_per_second: ?AttackVolumeStatistics,
+    requests_per_second: ?AttackVolumeStatistics = null,
 
     pub const json_field_names = .{
         .bits_per_second = "BitsPerSecond",

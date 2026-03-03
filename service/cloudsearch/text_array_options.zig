@@ -3,17 +3,17 @@
 /// field is always searchable. All options are enabled by default.
 pub const TextArrayOptions = struct {
     /// The name of an analysis scheme for a `text-array` field.
-    analysis_scheme: ?[]const u8,
+    analysis_scheme: ?[]const u8 = null,
 
     /// A value to use for the field if the field isn't specified for a document.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// Whether highlights can be returned for the field.
-    highlight_enabled: ?bool,
+    highlight_enabled: ?bool = null,
 
     /// Whether the contents of the field can be returned in the search results.
-    return_enabled: ?bool,
+    return_enabled: ?bool = null,
 
     /// A list of source fields to map to the field.
-    source_fields: ?[]const u8,
+    source_fields: ?[]const u8 = null,
 };

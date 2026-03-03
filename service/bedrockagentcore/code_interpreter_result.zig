@@ -15,13 +15,13 @@ pub const CodeInterpreterResult = struct {
     /// Indicates whether the result represents an error. If true, the content
     /// contains error messages or exception information. If false, the content
     /// contains successful execution results.
-    is_error: ?bool,
+    is_error: ?bool = null,
 
     /// The structured content of the execution result. This includes additional
     /// metadata about the execution, such as execution time, memory usage, and
     /// structured representations of output data. The format depends on the
     /// specific code interpreter and execution context.
-    structured_content: ?ToolResultStructuredContent,
+    structured_content: ?ToolResultStructuredContent = null,
 
     pub const json_field_names = .{
         .content = "content",

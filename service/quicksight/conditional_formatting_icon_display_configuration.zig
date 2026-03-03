@@ -3,7 +3,7 @@ const ConditionalFormattingIconDisplayOption = @import("conditional_formatting_i
 /// Determines the icon display configuration.
 pub const ConditionalFormattingIconDisplayConfiguration = struct {
     /// Determines the icon display configuration.
-    icon_display_option: ?ConditionalFormattingIconDisplayOption,
+    icon_display_option: ?ConditionalFormattingIconDisplayOption = null,
 
     pub const json_field_names = .{
         .icon_display_option = "IconDisplayOption",

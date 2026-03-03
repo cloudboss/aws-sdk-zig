@@ -6,7 +6,7 @@ pub const DeleteClusterSnapshotMessage = struct {
     /// specifies anything other than * for the cluster name.
     ///
     /// Constraints: Must be the name of valid cluster.
-    snapshot_cluster_identifier: ?[]const u8,
+    snapshot_cluster_identifier: ?[]const u8 = null,
 
     /// The unique identifier of the manual snapshot to be deleted.
     ///

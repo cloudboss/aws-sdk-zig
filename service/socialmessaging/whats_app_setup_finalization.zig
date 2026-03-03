@@ -10,7 +10,7 @@ pub const WhatsAppSetupFinalization = struct {
 
     /// Used to add a new phone number to an existing WhatsApp Business Account.
     /// This field can't be used when the `waba` field is present.
-    phone_number_parent: ?[]const u8,
+    phone_number_parent: ?[]const u8 = null,
 
     /// An array of WabaPhoneNumberSetupFinalization objects containing the details
     /// of each phone number associated with the WhatsApp Business Account.
@@ -18,7 +18,7 @@ pub const WhatsAppSetupFinalization = struct {
 
     /// Used to create a new WhatsApp Business Account and add a phone number. This
     /// field can't be used when the `phoneNumberParent` field is present.
-    waba: ?WabaSetupFinalization,
+    waba: ?WabaSetupFinalization = null,
 
     pub const json_field_names = .{
         .associate_in_progress_token = "associateInProgressToken",

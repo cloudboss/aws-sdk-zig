@@ -5,7 +5,7 @@ const OptInStatus = @import("opt_in_status.zig").OptInStatus;
 pub const LogsAnomalyDetectionIntegration = struct {
     /// Specifies if DevOps Guru is configured to perform log anomaly detection on
     /// CloudWatch log groups.
-    opt_in_status: ?OptInStatus,
+    opt_in_status: ?OptInStatus = null,
 
     pub const json_field_names = .{
         .opt_in_status = "OptInStatus",

@@ -4,7 +4,7 @@ const IsolineAvoidanceAreaGeometry = @import("isoline_avoidance_area_geometry.zi
 pub const IsolineAvoidanceArea = struct {
     /// Exceptions to the provided avoidance geometry, to be included while
     /// calculating an isoline.
-    except: ?[]const IsolineAvoidanceAreaGeometry,
+    except: ?[]const IsolineAvoidanceAreaGeometry = null,
 
     /// Geometry of the area to be avoided.
     geometry: IsolineAvoidanceAreaGeometry,

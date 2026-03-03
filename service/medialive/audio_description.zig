@@ -12,17 +12,17 @@ const RemixSettings = @import("remix_settings.zig").RemixSettings;
 pub const AudioDescription = struct {
     /// Identifies the DASH roles to assign to this audio output. Applies only when
     /// the audio output is configured for DVB DASH accessibility signaling.
-    audio_dash_roles: ?[]const DashRoleAudio,
+    audio_dash_roles: ?[]const DashRoleAudio = null,
 
     /// Advanced audio normalization settings.
-    audio_normalization_settings: ?AudioNormalizationSettings,
+    audio_normalization_settings: ?AudioNormalizationSettings = null,
 
     /// The name of the AudioSelector used as the source for this AudioDescription.
     audio_selector_name: []const u8,
 
     /// Applies only if audioTypeControl is useConfigured. The values for audioType
     /// are defined in ISO-IEC 13818-1.
-    audio_type: ?AudioType,
+    audio_type: ?AudioType = null,
 
     /// Determines how audio type is determined.
     /// followInput: If the input contains an ISO 639 audioType, then that value is
@@ -31,30 +31,30 @@ pub const AudioDescription = struct {
     /// useConfigured: The value in Audio Type is included in the output.
     /// Note that this field and audioType are both ignored if inputType is
     /// broadcasterMixedAd.
-    audio_type_control: ?AudioDescriptionAudioTypeControl,
+    audio_type_control: ?AudioDescriptionAudioTypeControl = null,
 
     /// Settings to configure one or more solutions that insert audio watermarks in
     /// the audio encode
-    audio_watermarking_settings: ?AudioWatermarkSettings,
+    audio_watermarking_settings: ?AudioWatermarkSettings = null,
 
     /// Audio codec settings.
-    codec_settings: ?AudioCodecSettings,
+    codec_settings: ?AudioCodecSettings = null,
 
     /// Identifies DVB DASH accessibility signaling in this audio output. Used in
     /// Microsoft Smooth Streaming outputs to signal accessibility information to
     /// packagers.
-    dvb_dash_accessibility: ?DvbDashAccessibility,
+    dvb_dash_accessibility: ?DvbDashAccessibility = null,
 
     /// RFC 5646 language code representing the language of the audio output track.
     /// Only used if languageControlMode is useConfigured, or there is no ISO 639
     /// language code specified in the input.
-    language_code: ?[]const u8,
+    language_code: ?[]const u8 = null,
 
     /// Choosing followInput will cause the ISO 639 language code of the output to
     /// follow the ISO 639 language code of the input. The languageCode will be used
     /// when useConfigured is set, or when followInput is selected but there is no
     /// ISO 639 language code specified by the input.
-    language_code_control: ?AudioDescriptionLanguageCodeControl,
+    language_code_control: ?AudioDescriptionLanguageCodeControl = null,
 
     /// The name of this AudioDescription. Outputs will use this name to uniquely
     /// identify this AudioDescription. Description names should be unique within
@@ -63,11 +63,11 @@ pub const AudioDescription = struct {
 
     /// Settings that control how input audio channels are remixed into the output
     /// audio channels.
-    remix_settings: ?RemixSettings,
+    remix_settings: ?RemixSettings = null,
 
     /// Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by
     /// the player (eg. English, or Director Commentary).
-    stream_name: ?[]const u8,
+    stream_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .audio_dash_roles = "AudioDashRoles",

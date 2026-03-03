@@ -30,14 +30,14 @@ pub const StorageTypeLimit = struct {
     /// * MinimumThroughput
     /// Minimum amount of Throughput that is applicable for given storage type.It
     /// can be empty if it is not applicable.
-    limit_name: ?[]const u8,
+    limit_name: ?[]const u8 = null,
 
     /// Values for the
     /// `
     /// StorageTypeLimit$LimitName
     /// `
     /// .
-    limit_values: ?[]const []const u8,
+    limit_values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .limit_name = "LimitName",

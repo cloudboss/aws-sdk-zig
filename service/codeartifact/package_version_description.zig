@@ -11,16 +11,16 @@ pub const PackageVersionDescription = struct {
     /// `ui`,
     /// is in the namespace `vue`, and has the format `npm`, then
     /// the `displayName` is `@vue/ui`.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The format of the package version.
-    format: ?PackageFormat,
+    format: ?PackageFormat = null,
 
     /// The homepage associated with the package.
-    home_page: ?[]const u8,
+    home_page: ?[]const u8 = null,
 
     /// Information about licenses associated with the package version.
-    licenses: ?[]const LicenseInfo,
+    licenses: ?[]const LicenseInfo = null,
 
     /// The namespace of the package version. The package component that specifies
     /// its
@@ -35,37 +35,37 @@ pub const PackageVersionDescription = struct {
     /// * Python, NuGet, Ruby, and Cargo package versions do not contain a
     ///   corresponding component, package versions
     /// of those formats do not have a namespace.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// A
     /// [PackageVersionOrigin](https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionOrigin.html) object that contains
     /// information about how the package version was added to the repository.
-    origin: ?PackageVersionOrigin,
+    origin: ?PackageVersionOrigin = null,
 
     /// The name of the requested package.
-    package_name: ?[]const u8,
+    package_name: ?[]const u8 = null,
 
     /// A timestamp that contains the date and time the package version was
     /// published.
-    published_time: ?i64,
+    published_time: ?i64 = null,
 
     /// The revision of the package version.
-    revision: ?[]const u8,
+    revision: ?[]const u8 = null,
 
     /// The repository for the source code in the package version, or the source
     /// code used to build it.
-    source_code_repository: ?[]const u8,
+    source_code_repository: ?[]const u8 = null,
 
     /// A string that contains the status of the package version.
-    status: ?PackageVersionStatus,
+    status: ?PackageVersionStatus = null,
 
     /// A summary of the package version. The summary is extracted from the package.
     /// The information in and
     /// detail level of the summary depends on the package version's format.
-    summary: ?[]const u8,
+    summary: ?[]const u8 = null,
 
     /// The version of the package.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .display_name = "displayName",

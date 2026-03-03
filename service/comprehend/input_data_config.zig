@@ -8,7 +8,7 @@ pub const InputDataConfig = struct {
     /// Provides configuration parameters to override the default actions for
     /// extracting text
     /// from PDF documents and image files.
-    document_reader_config: ?DocumentReaderConfig,
+    document_reader_config: ?DocumentReaderConfig = null,
 
     /// Specifies how the text in an input file should be processed:
     ///
@@ -21,7 +21,7 @@ pub const InputDataConfig = struct {
     /// document. Use this option when you are processing many short documents, such
     /// as text
     /// messages.
-    input_format: ?InputFormat,
+    input_format: ?InputFormat = null,
 
     /// The Amazon S3 URI for the input data. The URI must be in same Region as the
     /// API

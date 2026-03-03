@@ -6,16 +6,16 @@ const FileType = @import("file_type.zig").FileType;
 /// A source for a read set import job.
 pub const StartReadSetImportJobSourceItem = struct {
     /// The source's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Where the source originated.
-    generated_from: ?[]const u8,
+    generated_from: ?[]const u8 = null,
 
     /// The source's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The source's reference ARN.
-    reference_arn: ?[]const u8,
+    reference_arn: ?[]const u8 = null,
 
     /// The source's sample ID.
     sample_id: []const u8,
@@ -30,7 +30,7 @@ pub const StartReadSetImportJobSourceItem = struct {
     subject_id: []const u8,
 
     /// The source's tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .description = "description",

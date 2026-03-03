@@ -5,13 +5,13 @@ const ExperimentReportStatus = @import("experiment_report_status.zig").Experimen
 pub const ExperimentReportState = struct {
     /// The error information of the experiment when the experiment report
     /// generation has failed.
-    @"error": ?ExperimentReportError,
+    @"error": ?ExperimentReportError = null,
 
     /// The reason for the state of the experiment report generation.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The state of the experiment report generation.
-    status: ?ExperimentReportStatus,
+    status: ?ExperimentReportStatus = null,
 
     pub const json_field_names = .{
         .@"error" = "error",

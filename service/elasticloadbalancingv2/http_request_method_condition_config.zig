@@ -17,5 +17,5 @@ pub const HttpRequestMethodConditionConfig = struct {
     /// the HTTP request method. We recommend that you route GET and HEAD requests
     /// in the same way,
     /// because the response to a HEAD request may be cached.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 };

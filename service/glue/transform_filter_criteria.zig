@@ -5,44 +5,44 @@ const TransformType = @import("transform_type.zig").TransformType;
 /// The criteria used to filter the machine learning transforms.
 pub const TransformFilterCriteria = struct {
     /// The time and date after which the transforms were created.
-    created_after: ?i64,
+    created_after: ?i64 = null,
 
     /// The time and date before which the transforms were created.
-    created_before: ?i64,
+    created_before: ?i64 = null,
 
     /// This value determines which version of Glue this machine learning transform
     /// is compatible with. Glue 1.0 is recommended for most customers. If the value
     /// is not set, the Glue compatibility defaults to Glue 0.9. For more
     /// information, see [Glue
     /// Versions](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions) in the developer guide.
-    glue_version: ?[]const u8,
+    glue_version: ?[]const u8 = null,
 
     /// Filter on transforms last modified after this date.
-    last_modified_after: ?i64,
+    last_modified_after: ?i64 = null,
 
     /// Filter on transforms last modified before this date.
-    last_modified_before: ?i64,
+    last_modified_before: ?i64 = null,
 
     /// A unique transform name that is used to filter the machine learning
     /// transforms.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Filters on datasets with a specific schema. The `Map`
     /// object is an array of key-value pairs representing the schema this transform
     /// accepts, where
     /// `Column` is the name of a column, and `Type` is the type of the data
     /// such as an integer or string. Has an upper bound of 100 columns.
-    schema: ?[]const SchemaColumn,
+    schema: ?[]const SchemaColumn = null,
 
     /// Filters the list of machine learning transforms by the last known status of
     /// the transforms (to indicate whether a transform can be used or not). One of
     /// "NOT_READY", "READY", or "DELETING".
-    status: ?TransformStatusType,
+    status: ?TransformStatusType = null,
 
     /// The type of machine learning transform that is used to filter the machine
     /// learning
     /// transforms.
-    transform_type: ?TransformType,
+    transform_type: ?TransformType = null,
 
     pub const json_field_names = .{
         .created_after = "CreatedAfter",

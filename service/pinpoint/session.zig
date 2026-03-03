@@ -1,7 +1,7 @@
 /// Provides information about a session.
 pub const Session = struct {
     /// The duration of the session, in milliseconds.
-    duration: ?i32,
+    duration: ?i32 = null,
 
     /// The unique identifier for the session.
     id: []const u8,
@@ -10,7 +10,7 @@ pub const Session = struct {
     start_timestamp: []const u8,
 
     /// The date and time when the session ended.
-    stop_timestamp: ?[]const u8,
+    stop_timestamp: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .duration = "Duration",

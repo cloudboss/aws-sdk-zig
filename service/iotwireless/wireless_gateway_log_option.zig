@@ -6,7 +6,7 @@ const WirelessGatewayType = @import("wireless_gateway_type.zig").WirelessGateway
 /// a specific
 /// type of wireless gateway.
 pub const WirelessGatewayLogOption = struct {
-    events: ?[]const WirelessGatewayEventLogOption,
+    events: ?[]const WirelessGatewayEventLogOption = null,
 
     log_level: LogLevel,
 

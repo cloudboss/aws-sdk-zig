@@ -4,7 +4,7 @@ const DataAutomationProjectStage = @import("data_automation_project_stage.zig").
 pub const DataAutomationProjectFilter = struct {
     project_arn: []const u8,
 
-    project_stage: ?DataAutomationProjectStage,
+    project_stage: ?DataAutomationProjectStage = null,
 
     pub const json_field_names = .{
         .project_arn = "projectArn",

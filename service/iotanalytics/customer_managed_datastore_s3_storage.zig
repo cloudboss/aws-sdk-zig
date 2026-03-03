@@ -9,7 +9,7 @@ pub const CustomerManagedDatastoreS3Storage = struct {
     /// objects. Each object in an Amazon S3 bucket has a key that is its unique
     /// identifier in the bucket. Each object in a bucket has exactly one key. The
     /// prefix must end with a forward slash (/).
-    key_prefix: ?[]const u8,
+    key_prefix: ?[]const u8 = null,
 
     /// The ARN of the role that grants IoT Analytics permission to interact with
     /// your Amazon S3 resources.

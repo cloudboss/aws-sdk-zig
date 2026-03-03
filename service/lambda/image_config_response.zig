@@ -4,10 +4,10 @@ const ImageConfig = @import("image_config.zig").ImageConfig;
 /// Response to a `GetFunctionConfiguration` request.
 pub const ImageConfigResponse = struct {
     /// Error response to `GetFunctionConfiguration`.
-    @"error": ?ImageConfigError,
+    @"error": ?ImageConfigError = null,
 
     /// Configuration values that override the container image Dockerfile.
-    image_config: ?ImageConfig,
+    image_config: ?ImageConfig = null,
 
     pub const json_field_names = .{
         .@"error" = "Error",

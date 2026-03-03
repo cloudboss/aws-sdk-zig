@@ -10,32 +10,32 @@ const InstanceGroupStatus = @import("instance_group_status.zig").InstanceGroupSt
 pub const ClusterRestrictedInstanceGroupDetails = struct {
     /// The number of instances that are currently in the restricted instance group
     /// of a SageMaker HyperPod cluster.
-    current_count: ?i32,
+    current_count: ?i32 = null,
 
     /// The configuration for the restricted instance groups (RIG) environment.
-    environment_config: ?EnvironmentConfigDetails,
+    environment_config: ?EnvironmentConfigDetails = null,
 
     /// The execution role for the restricted instance group to assume.
-    execution_role: ?[]const u8,
+    execution_role: ?[]const u8 = null,
 
     /// The name of the restricted instance group of a SageMaker HyperPod cluster.
-    instance_group_name: ?[]const u8,
+    instance_group_name: ?[]const u8 = null,
 
     /// The additional storage configurations for the instances in the SageMaker
     /// HyperPod cluster restricted instance group.
-    instance_storage_configs: ?[]const ClusterInstanceStorageConfig,
+    instance_storage_configs: ?[]const ClusterInstanceStorageConfig = null,
 
     /// The instance type of the restricted instance group of a SageMaker HyperPod
     /// cluster.
-    instance_type: ?ClusterInstanceType,
+    instance_type: ?ClusterInstanceType = null,
 
     /// A flag indicating whether deep health checks should be performed when the
     /// cluster's restricted instance group is created or updated.
-    on_start_deep_health_checks: ?[]const DeepHealthCheckType,
+    on_start_deep_health_checks: ?[]const DeepHealthCheckType = null,
 
-    override_vpc_config: ?VpcConfig,
+    override_vpc_config: ?VpcConfig = null,
 
-    scheduled_update_config: ?ScheduledUpdateConfig,
+    scheduled_update_config: ?ScheduledUpdateConfig = null,
 
     /// The current status of the cluster's restricted instance group.
     ///
@@ -47,11 +47,11 @@ pub const ClusterRestrictedInstanceGroupDetails = struct {
     /// * `Degraded`: The restricted instance group is degraded, meaning that some
     ///   instances have failed to provision or are no longer healthy.
     /// * `Deleting`: The restricted instance group is being deleted.
-    status: ?InstanceGroupStatus,
+    status: ?InstanceGroupStatus = null,
 
     /// The number of instances you specified to add to the restricted instance
     /// group of a SageMaker HyperPod cluster.
-    target_count: ?i32,
+    target_count: ?i32 = null,
 
     /// The number you specified to `TreadsPerCore` in `CreateCluster` for enabling
     /// or disabling multithreading. For instance types that support multithreading,
@@ -59,17 +59,17 @@ pub const ClusterRestrictedInstanceGroupDetails = struct {
     /// multithreading. For more information, see the reference table of [CPU cores
     /// and threads per CPU core per instance
     /// type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html) in the *Amazon Elastic Compute Cloud User Guide*.
-    threads_per_core: ?i32,
+    threads_per_core: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the training plan to filter clusters by.
     /// For more information about reserving GPU capacity for your SageMaker
     /// HyperPod clusters using Amazon SageMaker Training Plan, see `
     /// [CreateTrainingPlan](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html) `.
-    training_plan_arn: ?[]const u8,
+    training_plan_arn: ?[]const u8 = null,
 
     /// The current status of the training plan associated with this cluster
     /// restricted instance group.
-    training_plan_status: ?[]const u8,
+    training_plan_status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .current_count = "CurrentCount",

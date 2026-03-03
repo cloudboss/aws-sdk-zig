@@ -16,32 +16,32 @@ const SelfManagedKafkaAccessConfigurationVpc = @import("self_managed_kafka_acces
 /// source](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html) in the *Amazon EventBridge User Guide*.
 pub const PipeSourceSelfManagedKafkaParameters = struct {
     /// An array of server URLs.
-    additional_bootstrap_servers: ?[]const []const u8,
+    additional_bootstrap_servers: ?[]const []const u8 = null,
 
     /// The maximum number of records to include in each batch.
-    batch_size: ?i32,
+    batch_size: ?i32 = null,
 
     /// The name of the destination queue to consume.
-    consumer_group_id: ?[]const u8,
+    consumer_group_id: ?[]const u8 = null,
 
     /// The credentials needed to access the resource.
-    credentials: ?SelfManagedKafkaAccessConfigurationCredentials,
+    credentials: ?SelfManagedKafkaAccessConfigurationCredentials = null,
 
     /// The maximum length of a time to wait for events.
-    maximum_batching_window_in_seconds: ?i32,
+    maximum_batching_window_in_seconds: ?i32 = null,
 
     /// The ARN of the Secrets Manager secret used for certification.
-    server_root_ca_certificate: ?[]const u8,
+    server_root_ca_certificate: ?[]const u8 = null,
 
     /// The position in a stream from which to start reading.
-    starting_position: ?SelfManagedKafkaStartPosition,
+    starting_position: ?SelfManagedKafkaStartPosition = null,
 
     /// The name of the topic that the pipe will read from.
     topic_name: []const u8,
 
     /// This structure specifies the VPC subnets and security groups for the stream,
     /// and whether a public IP address is to be used.
-    vpc: ?SelfManagedKafkaAccessConfigurationVpc,
+    vpc: ?SelfManagedKafkaAccessConfigurationVpc = null,
 
     pub const json_field_names = .{
         .additional_bootstrap_servers = "AdditionalBootstrapServers",

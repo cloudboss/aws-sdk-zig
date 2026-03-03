@@ -23,7 +23,7 @@ pub const OperationFilter = struct {
     /// Coordinated Universal Time (UTC). The start date must be the first value.
     /// `BETWEEN`
     /// is supported for `UPDATE_DATE`.
-    condition: ?FilterCondition,
+    condition: ?FilterCondition = null,
 
     /// Specify the operations that you want to get:
     ///

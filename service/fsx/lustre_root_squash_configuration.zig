@@ -25,7 +25,7 @@ pub const LustreRootSquashConfiguration = struct {
     /// * An address range is described using a dash to separate the range (for
     ///   example,
     /// `10.0.[2-10].[1-255]@tcp`).
-    no_squash_nids: ?[]const []const u8,
+    no_squash_nids: ?[]const []const u8 = null,
 
     /// You enable root squash by setting a user ID (UID) and group ID (GID) for the
     /// file
@@ -41,7 +41,7 @@ pub const LustreRootSquashConfiguration = struct {
     /// When root squash is enabled, the user ID and group ID of a root user
     /// accessing
     /// the file system are re-mapped to the UID and GID you provide.
-    root_squash: ?[]const u8,
+    root_squash: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .no_squash_nids = "NoSquashNids",

@@ -8,20 +8,20 @@ const EntitlementValue = @import("entitlement_value.zig").EntitlementValue;
 pub const Entitlement = struct {
     /// The `CustomerAWSAccountID` parameter specifies the AWS account ID of the
     /// buyer.
-    customer_aws_account_id: ?[]const u8,
+    customer_aws_account_id: ?[]const u8 = null,
 
     /// The customer identifier is a handle to each unique customer in an
     /// application. Customer
     /// identifiers are obtained through the ResolveCustomer operation in AWS
     /// Marketplace Metering
     /// Service.
-    customer_identifier: ?[]const u8,
+    customer_identifier: ?[]const u8 = null,
 
     /// The dimension for which the given entitlement applies. Dimensions represent
     /// categories of
     /// capacity in a product and are specified when the product is listed in AWS
     /// Marketplace.
-    dimension: ?[]const u8,
+    dimension: ?[]const u8 = null,
 
     /// The expiration date represents the minimum date through which this
     /// entitlement is
@@ -31,17 +31,17 @@ pub const Entitlement = struct {
     /// Customers who are opting
     /// to renew their contract will still have entitlements with an expiration
     /// date.
-    expiration_date: ?i64,
+    expiration_date: ?i64 = null,
 
     /// The product code for which the given entitlement applies. Product codes are
     /// provided by
     /// AWS Marketplace when the product listing is created.
-    product_code: ?[]const u8,
+    product_code: ?[]const u8 = null,
 
     /// The EntitlementValue represents the amount of capacity that the customer is
     /// entitled to
     /// for the product.
-    value: ?EntitlementValue,
+    value: ?EntitlementValue = null,
 
     pub const json_field_names = .{
         .customer_aws_account_id = "CustomerAWSAccountId",

@@ -1,7 +1,7 @@
 /// Set of options which defines notification preferences of given action.
 pub const NotificationOptions = struct {
     /// Text value to be included in the email body.
-    email_message: ?[]const u8,
+    email_message: ?[]const u8 = null,
 
     /// Boolean value to indicate an email notification should be sent to the
     /// recipients.

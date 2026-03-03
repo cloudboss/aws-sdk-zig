@@ -8,7 +8,7 @@ pub const SigningRule = struct {
     /// have their images signed on push. If no filters are specified, all
     /// images pushed to the registry are signed using the rule's signing
     /// profile. Maximum of 100 filters per rule.
-    repository_filters: ?[]const SigningRepositoryFilter,
+    repository_filters: ?[]const SigningRepositoryFilter = null,
 
     /// The ARN of the Amazon Web Services Signer signing profile to use for signing
     /// images that match this

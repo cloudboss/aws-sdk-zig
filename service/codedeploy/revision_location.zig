@@ -9,10 +9,10 @@ pub const RevisionLocation = struct {
     /// The content of an AppSpec file for an Lambda or Amazon ECS
     /// deployment. The content is formatted as JSON or YAML and stored as a
     /// RawString.
-    app_spec_content: ?AppSpecContent,
+    app_spec_content: ?AppSpecContent = null,
 
     /// Information about the location of application artifacts stored in GitHub.
-    git_hub_location: ?GitHubLocation,
+    git_hub_location: ?GitHubLocation = null,
 
     /// The type of application revision:
     ///
@@ -29,14 +29,14 @@ pub const RevisionLocation = struct {
     /// contents of an AppSpec file for an Lambda or Amazon ECS
     /// deployment. The content is formatted as JSON or YAML stored as a
     /// RawString.
-    revision_type: ?RevisionLocationType,
+    revision_type: ?RevisionLocationType = null,
 
     /// Information about the location of a revision stored in Amazon S3.
-    s_3_location: ?S3Location,
+    s_3_location: ?S3Location = null,
 
     /// Information about the location of an Lambda deployment revision stored
     /// as a RawString.
-    string: ?RawString,
+    string: ?RawString = null,
 
     pub const json_field_names = .{
         .app_spec_content = "appSpecContent",

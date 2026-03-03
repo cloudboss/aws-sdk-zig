@@ -4,32 +4,32 @@ const WirelessDeviceSidewalkStatus = @import("wireless_device_sidewalk_status.zi
 
 /// Sidewalk device object.
 pub const SidewalkDevice = struct {
-    amazon_id: ?[]const u8,
+    amazon_id: ?[]const u8 = null,
 
     /// The ID of the Sidewalk device profile.
-    certificate_id: ?[]const u8,
+    certificate_id: ?[]const u8 = null,
 
     /// The sidewalk device certificates for Ed25519 and P256r1.
-    device_certificates: ?[]const CertificateList,
+    device_certificates: ?[]const CertificateList = null,
 
     /// The ID of the Sidewalk device profile.
-    device_profile_id: ?[]const u8,
+    device_profile_id: ?[]const u8 = null,
 
     /// The Positioning object of the Sidewalk device.
-    positioning: ?SidewalkPositioning,
+    positioning: ?SidewalkPositioning = null,
 
     /// The Sidewalk device private keys that will be used for onboarding the
     /// device.
-    private_keys: ?[]const CertificateList,
+    private_keys: ?[]const CertificateList = null,
 
     /// The sidewalk device identification.
-    sidewalk_id: ?[]const u8,
+    sidewalk_id: ?[]const u8 = null,
 
     /// The Sidewalk manufacturing series number.
-    sidewalk_manufacturing_sn: ?[]const u8,
+    sidewalk_manufacturing_sn: ?[]const u8 = null,
 
     /// The Sidewalk device status, such as provisioned or registered.
-    status: ?WirelessDeviceSidewalkStatus,
+    status: ?WirelessDeviceSidewalkStatus = null,
 
     pub const json_field_names = .{
         .amazon_id = "AmazonId",

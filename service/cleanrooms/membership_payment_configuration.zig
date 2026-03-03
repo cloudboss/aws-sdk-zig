@@ -7,11 +7,11 @@ const MembershipQueryComputePaymentConfig = @import("membership_query_compute_pa
 pub const MembershipPaymentConfiguration = struct {
     /// The payment responsibilities accepted by the collaboration member for job
     /// compute costs.
-    job_compute: ?MembershipJobComputePaymentConfig,
+    job_compute: ?MembershipJobComputePaymentConfig = null,
 
     /// The payment responsibilities accepted by the collaboration member for
     /// machine learning costs.
-    machine_learning: ?MembershipMLPaymentConfig,
+    machine_learning: ?MembershipMLPaymentConfig = null,
 
     /// The payment responsibilities accepted by the collaboration member for query
     /// compute costs.

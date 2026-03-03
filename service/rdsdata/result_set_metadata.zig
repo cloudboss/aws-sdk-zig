@@ -6,7 +6,7 @@ pub const ResultSetMetadata = struct {
     column_count: i64 = 0,
 
     /// The metadata of the columns in the result set.
-    column_metadata: ?[]const ColumnMetadata,
+    column_metadata: ?[]const ColumnMetadata = null,
 
     pub const json_field_names = .{
         .column_count = "columnCount",

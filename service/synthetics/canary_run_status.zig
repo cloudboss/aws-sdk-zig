@@ -5,10 +5,10 @@ const CanaryRunTestResult = @import("canary_run_test_result.zig").CanaryRunTestR
 /// This structure contains the status information about a canary run.
 pub const CanaryRunStatus = struct {
     /// The current state of the run.
-    state: ?CanaryRunState,
+    state: ?CanaryRunState = null,
 
     /// If run of the canary failed, this field contains the reason for the error.
-    state_reason: ?[]const u8,
+    state_reason: ?[]const u8 = null,
 
     /// If this value is `CANARY_FAILURE`, either the canary script failed or
     /// Synthetics ran into a fatal error when running the canary. For example, a
@@ -22,13 +22,13 @@ pub const CanaryRunStatus = struct {
     /// If both types of failures occurred, the `CANARY_FAILURE` takes precedence.
     /// To understand the exact error, use the
     /// [StateReason](https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRunStatus.html) API.
-    state_reason_code: ?CanaryRunStateReasonCode,
+    state_reason_code: ?CanaryRunStateReasonCode = null,
 
     /// Specifies the status of canary script for this run. When Synthetics tries to
     /// determine the status but fails, the result is marked as `UNKNOWN`.
     /// For the overall status of canary run, see
     /// [State](https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRunStatus.html).
-    test_result: ?CanaryRunTestResult,
+    test_result: ?CanaryRunTestResult = null,
 
     pub const json_field_names = .{
         .state = "State",

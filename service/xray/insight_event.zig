@@ -9,21 +9,21 @@ pub const InsightEvent = struct {
     /// The impact statistics of the client side service. This includes the number
     /// of requests to the client service
     /// and whether the requests were faults or okay.
-    client_request_impact_statistics: ?RequestImpactStatistics,
+    client_request_impact_statistics: ?RequestImpactStatistics = null,
 
     /// The time, in Unix seconds, at which the event was recorded.
-    event_time: ?i64,
+    event_time: ?i64 = null,
 
     /// The impact statistics of the root cause service. This includes the number of
     /// requests to the client service
     /// and whether the requests were faults or okay.
-    root_cause_service_request_impact_statistics: ?RequestImpactStatistics,
+    root_cause_service_request_impact_statistics: ?RequestImpactStatistics = null,
 
     /// A brief description of the event.
-    summary: ?[]const u8,
+    summary: ?[]const u8 = null,
 
     /// The service during the event that is most impacted by the incident.
-    top_anomalous_services: ?[]const AnomalousService,
+    top_anomalous_services: ?[]const AnomalousService = null,
 
     pub const json_field_names = .{
         .client_request_impact_statistics = "ClientRequestImpactStatistics",

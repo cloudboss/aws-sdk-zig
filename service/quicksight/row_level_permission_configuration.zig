@@ -3,9 +3,9 @@ const RowLevelPermissionTagConfiguration = @import("row_level_permission_tag_con
 
 /// Configuration for row level security.
 pub const RowLevelPermissionConfiguration = struct {
-    row_level_permission_data_set: ?RowLevelPermissionDataSet,
+    row_level_permission_data_set: ?RowLevelPermissionDataSet = null,
 
-    tag_configuration: ?RowLevelPermissionTagConfiguration,
+    tag_configuration: ?RowLevelPermissionTagConfiguration = null,
 
     pub const json_field_names = .{
         .row_level_permission_data_set = "RowLevelPermissionDataSet",

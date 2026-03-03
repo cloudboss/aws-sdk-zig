@@ -9,7 +9,7 @@ pub const SubnetConfiguration = struct {
     /// endpoint network interface with a new endpoint network interface with this
     /// IP address.
     /// This process temporarily disconnects the subnet and the VPC endpoint.
-    ipv_4: ?[]const u8,
+    ipv_4: ?[]const u8 = null,
 
     /// The IPv6 address to assign to the endpoint network interface in the subnet.
     /// You must provide
@@ -20,8 +20,8 @@ pub const SubnetConfiguration = struct {
     /// endpoint network interface with a new endpoint network interface with this
     /// IP address.
     /// This process temporarily disconnects the subnet and the VPC endpoint.
-    ipv_6: ?[]const u8,
+    ipv_6: ?[]const u8 = null,
 
     /// The ID of the subnet.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 };

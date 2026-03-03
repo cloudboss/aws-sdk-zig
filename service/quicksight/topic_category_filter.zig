@@ -6,14 +6,14 @@ const TopicCategoryFilterConstant = @import("topic_category_filter_constant.zig"
 pub const TopicCategoryFilter = struct {
     /// The category filter function. Valid values for this structure are `EXACT`
     /// and `CONTAINS`.
-    category_filter_function: ?CategoryFilterFunction,
+    category_filter_function: ?CategoryFilterFunction = null,
 
     /// The category filter type. This element is used to specify whether a filter
     /// is a simple category filter or an inverse category filter.
-    category_filter_type: ?CategoryFilterType,
+    category_filter_type: ?CategoryFilterType = null,
 
     /// The constant used in a category filter.
-    constant: ?TopicCategoryFilterConstant,
+    constant: ?TopicCategoryFilterConstant = null,
 
     /// A Boolean value that indicates if the filter is inverse.
     inverse: bool = false,

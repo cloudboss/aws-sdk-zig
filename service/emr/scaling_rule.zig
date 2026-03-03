@@ -13,7 +13,7 @@ pub const ScalingRule = struct {
     action: ScalingAction,
 
     /// A friendly, more verbose description of the automatic scaling rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name used to identify an automatic scaling rule. Rule names must be
     /// unique within a

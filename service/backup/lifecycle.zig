@@ -26,21 +26,21 @@ pub const Lifecycle = struct {
     /// value must be
     /// at least 90 days after the number of days specified in
     /// `MoveToColdStorageAfterDays`.
-    delete_after_days: ?i64,
+    delete_after_days: ?i64 = null,
 
     /// The event after which a recovery point is deleted. A recovery point with
     /// both
     /// `DeleteAfterDays` and `DeleteAfterEvent` will delete after
     /// whichever condition is satisfied first. Not valid as an input.
-    delete_after_event: ?LifecycleDeleteAfterEvent,
+    delete_after_event: ?LifecycleDeleteAfterEvent = null,
 
     /// The number of days after creation that a recovery point is moved to cold
     /// storage.
-    move_to_cold_storage_after_days: ?i64,
+    move_to_cold_storage_after_days: ?i64 = null,
 
     /// If the value is true, your backup plan transitions supported resources to
     /// archive (cold) storage tier in accordance with your lifecycle settings.
-    opt_in_to_archive_for_supported_resources: ?bool,
+    opt_in_to_archive_for_supported_resources: ?bool = null,
 
     pub const json_field_names = .{
         .delete_after_days = "DeleteAfterDays",

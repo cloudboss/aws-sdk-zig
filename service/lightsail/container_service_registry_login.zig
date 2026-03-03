@@ -9,22 +9,22 @@ pub const ContainerServiceRegistryLogin = struct {
     /// point you will
     /// need to create a new set of log in credentials using the
     /// `CreateContainerServiceRegistryLogin` action.
-    expires_at: ?i64,
+    expires_at: ?i64 = null,
 
     /// The container service registry password to use to push container images to
     /// the container
     /// image registry of a Lightsail account
-    password: ?[]const u8,
+    password: ?[]const u8 = null,
 
     /// The address to use to push container images to the container image registry
     /// of a
     /// Lightsail account.
-    registry: ?[]const u8,
+    registry: ?[]const u8 = null,
 
     /// The container service registry username to use to push container images to
     /// the container
     /// image registry of a Lightsail account.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .expires_at = "expiresAt",

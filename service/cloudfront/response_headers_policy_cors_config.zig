@@ -50,7 +50,7 @@ pub const ResponseHeadersPolicyCorsConfig = struct {
     /// For more information about the `Access-Control-Expose-Headers` HTTP response
     /// header, see
     /// [Access-Control-Expose-Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers) in the MDN Web Docs.
-    access_control_expose_headers: ?ResponseHeadersPolicyAccessControlExposeHeaders,
+    access_control_expose_headers: ?ResponseHeadersPolicyAccessControlExposeHeaders = null,
 
     /// A number that CloudFront uses as the value for the `Access-Control-Max-Age`
     /// HTTP response header.
@@ -58,7 +58,7 @@ pub const ResponseHeadersPolicyCorsConfig = struct {
     /// For more information about the `Access-Control-Max-Age` HTTP response
     /// header, see
     /// [Access-Control-Max-Age](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age) in the MDN Web Docs.
-    access_control_max_age_sec: ?i32,
+    access_control_max_age_sec: ?i32 = null,
 
     /// A Boolean that determines whether CloudFront overrides HTTP response headers
     /// received from the origin with the ones specified in this response headers

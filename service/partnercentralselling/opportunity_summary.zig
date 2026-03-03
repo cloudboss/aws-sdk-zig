@@ -7,7 +7,7 @@ const ProjectSummary = @import("project_summary.zig").ProjectSummary;
 pub const OpportunitySummary = struct {
     /// The Amazon Resource Name (ARN) for the opportunity. This globally unique
     /// identifier can be used for IAM policies and cross-service references.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Specifies the catalog associated with the opportunity, either `AWS` or
     /// `Sandbox`. This indicates the environment in which the opportunity is
@@ -15,19 +15,19 @@ pub const OpportunitySummary = struct {
     catalog: []const u8,
 
     /// `DateTime` when the `Opportunity` was last created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// An object that contains the `Opportunity`'s customer details.
-    customer: ?CustomerSummary,
+    customer: ?CustomerSummary = null,
 
     /// Read-only, system-generated `Opportunity` unique identifier.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// `DateTime` when the `Opportunity` was last modified.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// An object that contains the `Opportunity`'s lifecycle details.
-    life_cycle: ?LifeCycleSummary,
+    life_cycle: ?LifeCycleSummary = null,
 
     /// Specifies opportunity type as a renewal, new, or expansion.
     ///
@@ -41,16 +41,16 @@ pub const OpportunitySummary = struct {
     /// * Expansion Opportunity: Represents an opportunity to expand the scope of an
     ///   existing contract or subscription, either by adding new services or
     ///   increasing the volume of existing services for a current customer.
-    opportunity_type: ?OpportunityType,
+    opportunity_type: ?OpportunityType = null,
 
     /// Specifies the `Opportunity`'s unique identifier in the partner's CRM system.
     /// This value is essential to track and reconcile because it's included in the
     /// outbound payload sent back to the partner. It allows partners to link an
     /// opportunity to their CRM.
-    partner_opportunity_identifier: ?[]const u8,
+    partner_opportunity_identifier: ?[]const u8 = null,
 
     /// An object that contains the `Opportunity`'s project details summary.
-    project: ?ProjectSummary,
+    project: ?ProjectSummary = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

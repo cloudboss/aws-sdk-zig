@@ -5,7 +5,7 @@ const PropertyNameQuery = @import("property_name_query.zig").PropertyNameQuery;
 pub const SuggestionQuery = struct {
     /// Defines a property name hint. Only property names that begin with the
     /// specified hint are included in the response.
-    property_name_query: ?PropertyNameQuery,
+    property_name_query: ?PropertyNameQuery = null,
 
     pub const json_field_names = .{
         .property_name_query = "PropertyNameQuery",

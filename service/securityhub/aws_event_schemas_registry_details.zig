@@ -4,13 +4,13 @@
 /// logical groups.
 pub const AwsEventSchemasRegistryDetails = struct {
     /// A description of the registry to be created.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the registry.
-    registry_arn: ?[]const u8,
+    registry_arn: ?[]const u8 = null,
 
     /// The name of the schema registry.
-    registry_name: ?[]const u8,
+    registry_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

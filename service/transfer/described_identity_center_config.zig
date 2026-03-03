@@ -3,14 +3,14 @@
 pub const DescribedIdentityCenterConfig = struct {
     /// The Amazon Resource Name (ARN) for the IAM Identity Center application: this
     /// value is set automatically when you create your web app.
-    application_arn: ?[]const u8,
+    application_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the IAM Identity Center used for the web
     /// app.
-    instance_arn: ?[]const u8,
+    instance_arn: ?[]const u8 = null,
 
     /// The IAM role in IAM Identity Center used for the web app.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_arn = "ApplicationArn",

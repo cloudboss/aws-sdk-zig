@@ -14,12 +14,12 @@ pub const SearchPlaceIndexForPositionSummary = struct {
     /// The preferred language used to return results. Matches the language in the
     /// request. The value is a valid [BCP 47](https://tools.ietf.org/search/bcp47)
     /// language tag, for example, `en` for English.
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// Contains the optional result count limit that is specified in the request.
     ///
     /// Default value: `50`
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The position specified in the request.
     position: []const f64,

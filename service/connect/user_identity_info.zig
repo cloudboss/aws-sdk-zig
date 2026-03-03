@@ -14,24 +14,24 @@ pub const UserIdentityInfo = struct {
     /// The email address. If you are using SAML for identity management and include
     /// this parameter, an error is
     /// returned.
-    email: ?[]const u8,
+    email: ?[]const u8 = null,
 
     /// The first name. This is required if you are using Amazon Connect or SAML for
     /// identity management. Inputs
     /// must be in Unicode Normalization Form C (NFC). Text containing characters in
     /// a non-NFC form (for example, decomposed
     /// characters or combining marks) are not accepted.
-    first_name: ?[]const u8,
+    first_name: ?[]const u8 = null,
 
     /// The last name. This is required if you are using Amazon Connect or SAML for
     /// identity management. Inputs must
     /// be in Unicode Normalization Form C (NFC). Text containing characters in a
     /// non-NFC form (for example, decomposed
     /// characters or combining marks) are not accepted.
-    last_name: ?[]const u8,
+    last_name: ?[]const u8 = null,
 
     /// The user's mobile number.
-    mobile: ?[]const u8,
+    mobile: ?[]const u8 = null,
 
     /// The user's secondary email address. If you provide a secondary email, the
     /// user receives email notifications -
@@ -39,7 +39,7 @@ pub const UserIdentityInfo = struct {
     /// to their primary email address.
     ///
     /// Pattern: `(?=^.{0,265}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}`
-    secondary_email: ?[]const u8,
+    secondary_email: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .email = "Email",

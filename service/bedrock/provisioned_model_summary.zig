@@ -9,11 +9,11 @@ const ProvisionedModelStatus = @import("provisioned_model_status.zig").Provision
 ///   response](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListProvisionedModelThroughputs.html#API_ListProvisionedModelThroughputs_ResponseSyntax)
 pub const ProvisionedModelSummary = struct {
     /// The duration for which the Provisioned Throughput was committed.
-    commitment_duration: ?CommitmentDuration,
+    commitment_duration: ?CommitmentDuration = null,
 
     /// The timestamp for when the commitment term of the Provisioned Throughput
     /// expires.
-    commitment_expiration_time: ?i64,
+    commitment_expiration_time: ?i64 = null,
 
     /// The time that the Provisioned Throughput was created.
     creation_time: i64,

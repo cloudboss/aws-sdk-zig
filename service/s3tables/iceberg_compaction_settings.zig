@@ -4,10 +4,10 @@ const IcebergCompactionStrategy = @import("iceberg_compaction_strategy.zig").Ice
 pub const IcebergCompactionSettings = struct {
     /// The compaction strategy to use for the table. This determines how files are
     /// selected and combined during compaction operations.
-    strategy: ?IcebergCompactionStrategy,
+    strategy: ?IcebergCompactionStrategy = null,
 
     /// The target file size for the table in MB.
-    target_file_size_mb: ?i32,
+    target_file_size_mb: ?i32 = null,
 
     pub const json_field_names = .{
         .strategy = "strategy",

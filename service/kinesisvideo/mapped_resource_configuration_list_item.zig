@@ -3,10 +3,10 @@
 pub const MappedResourceConfigurationListItem = struct {
     /// The Amazon Resource Name (ARN) of the Kinesis Video Stream resource,
     /// associated with the stream.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The type of the associated resource for the kinesis video stream.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "ARN",

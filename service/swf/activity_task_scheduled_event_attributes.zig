@@ -11,7 +11,7 @@ pub const ActivityTaskScheduledEventAttributes = struct {
 
     /// Data attached to the event that can be used by the decider in subsequent
     /// workflow tasks. This data isn't sent to the activity.
-    control: ?[]const u8,
+    control: ?[]const u8 = null,
 
     /// The ID of the `DecisionTaskCompleted` event corresponding to the decision
     /// that resulted in the scheduling of this activity task. This information can
@@ -25,20 +25,20 @@ pub const ActivityTaskScheduledEventAttributes = struct {
     /// is automatically timed out. If
     /// the worker subsequently attempts to record a heartbeat or return a result,
     /// it is ignored.
-    heartbeat_timeout: ?[]const u8,
+    heartbeat_timeout: ?[]const u8 = null,
 
     /// The input provided to the activity task.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The maximum amount of time for this activity task.
-    schedule_to_close_timeout: ?[]const u8,
+    schedule_to_close_timeout: ?[]const u8 = null,
 
     /// The maximum amount of time the activity task can wait to be assigned to a
     /// worker.
-    schedule_to_start_timeout: ?[]const u8,
+    schedule_to_start_timeout: ?[]const u8 = null,
 
     /// The maximum amount of time a worker may take to process the activity task.
-    start_to_close_timeout: ?[]const u8,
+    start_to_close_timeout: ?[]const u8 = null,
 
     /// The task list in which the activity task has been scheduled.
     task_list: TaskList,
@@ -53,7 +53,7 @@ pub const ActivityTaskScheduledEventAttributes = struct {
     ///
     /// For more information about setting task priority, see [Setting Task
     /// Priority](https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html) in the *Amazon SWF Developer Guide*.
-    task_priority: ?[]const u8,
+    task_priority: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .activity_id = "activityId",

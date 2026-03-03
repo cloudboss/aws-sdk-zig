@@ -20,7 +20,7 @@ pub const Index = struct {
     /// The encryption configuration for a vector index. By default, if you don't
     /// specify, all new vectors in the vector index will use the encryption
     /// configuration of the vector bucket.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the vector index.
     index_arn: []const u8,
@@ -29,7 +29,7 @@ pub const Index = struct {
     index_name: []const u8,
 
     /// The metadata configuration for the vector index.
-    metadata_configuration: ?MetadataConfiguration,
+    metadata_configuration: ?MetadataConfiguration = null,
 
     /// The name of the vector bucket that contains the vector index.
     vector_bucket_name: []const u8,

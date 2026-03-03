@@ -5,64 +5,64 @@ const UploadState = @import("upload_state.zig").UploadState;
 /// Full detail for report resource metadata.
 pub const ReportDetail = struct {
     /// Acceptance type for report.
-    acceptance_type: ?AcceptanceType,
+    acceptance_type: ?AcceptanceType = null,
 
     /// ARN for the report resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Category for the report resource.
-    category: ?[]const u8,
+    category: ?[]const u8 = null,
 
     /// Associated company name for the report resource.
-    company_name: ?[]const u8,
+    company_name: ?[]const u8 = null,
 
     /// Timestamp indicating when the report resource was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Timestamp indicating when the report resource was deleted.
-    deleted_at: ?i64,
+    deleted_at: ?i64 = null,
 
     /// Description for the report resource.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Unique resource ID for the report resource.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Timestamp indicating when the report resource was last modified.
-    last_modified_at: ?i64,
+    last_modified_at: ?i64 = null,
 
     /// Name for the report resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Timestamp indicating the report resource effective end.
-    period_end: ?i64,
+    period_end: ?i64 = null,
 
     /// Timestamp indicating the report resource effective start.
-    period_start: ?i64,
+    period_start: ?i64 = null,
 
     /// Associated product name for the report resource.
-    product_name: ?[]const u8,
+    product_name: ?[]const u8 = null,
 
     /// Sequence number to enforce optimistic locking.
-    sequence_number: ?i64,
+    sequence_number: ?i64 = null,
 
     /// Series for the report resource.
-    series: ?[]const u8,
+    series: ?[]const u8 = null,
 
     /// Current state of the report resource
-    state: ?PublishedState,
+    state: ?PublishedState = null,
 
     /// The message associated with the current upload state.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// Unique resource ARN for term resource.
-    term_arn: ?[]const u8,
+    term_arn: ?[]const u8 = null,
 
     /// The current state of the document upload.
-    upload_state: ?UploadState,
+    upload_state: ?UploadState = null,
 
     /// Version for the report resource.
-    version: ?i64,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .acceptance_type = "acceptanceType",

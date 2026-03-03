@@ -29,14 +29,14 @@ pub const AdditionalLimit = struct {
     /// ESPartitionInstanceType
     /// `
     /// upto which you don't need any master nodes to govern them.
-    limit_name: ?[]const u8,
+    limit_name: ?[]const u8 = null,
 
     /// Value for given
     /// `
     /// AdditionalLimit$LimitName
     /// `
     /// .
-    limit_values: ?[]const []const u8,
+    limit_values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .limit_name = "LimitName",

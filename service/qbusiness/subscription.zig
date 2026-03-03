@@ -12,21 +12,21 @@ const SubscriptionPrincipal = @import("subscription_principal.zig").Subscription
 /// pricing](https://aws.amazon.com/q/business/pricing/).
 pub const Subscription = struct {
     /// The type of your current Amazon Q Business subscription.
-    current_subscription: ?SubscriptionDetails,
+    current_subscription: ?SubscriptionDetails = null,
 
     /// The type of the Amazon Q Business subscription for the next month.
-    next_subscription: ?SubscriptionDetails,
+    next_subscription: ?SubscriptionDetails = null,
 
     /// The IAM Identity Center `UserId` or `GroupId` of a user or group in the IAM
     /// Identity Center instance connected to the Amazon Q Business application.
-    principal: ?SubscriptionPrincipal,
+    principal: ?SubscriptionPrincipal = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Q Business subscription that
     /// was updated.
-    subscription_arn: ?[]const u8,
+    subscription_arn: ?[]const u8 = null,
 
     /// The identifier of the Amazon Q Business subscription to be updated.
-    subscription_id: ?[]const u8,
+    subscription_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .current_subscription = "currentSubscription",

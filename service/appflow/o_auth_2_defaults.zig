@@ -4,19 +4,19 @@ const OAuth2GrantType = @import("o_auth_2_grant_type.zig").OAuth2GrantType;
 /// Contains the default values required for OAuth 2.0 authentication.
 pub const OAuth2Defaults = struct {
     /// Auth code URLs that can be used for OAuth 2.0 authentication.
-    auth_code_urls: ?[]const []const u8,
+    auth_code_urls: ?[]const []const u8 = null,
 
     /// List of custom parameters required for OAuth 2.0 authentication.
-    oauth_2_custom_properties: ?[]const OAuth2CustomParameter,
+    oauth_2_custom_properties: ?[]const OAuth2CustomParameter = null,
 
     /// OAuth 2.0 grant types supported by the connector.
-    oauth_2_grant_types_supported: ?[]const OAuth2GrantType,
+    oauth_2_grant_types_supported: ?[]const OAuth2GrantType = null,
 
     /// OAuth 2.0 scopes that the connector supports.
-    oauth_scopes: ?[]const []const u8,
+    oauth_scopes: ?[]const []const u8 = null,
 
     /// Token URLs that can be used for OAuth 2.0 authentication.
-    token_urls: ?[]const []const u8,
+    token_urls: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .auth_code_urls = "authCodeUrls",

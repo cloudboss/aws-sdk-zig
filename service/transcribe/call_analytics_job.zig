@@ -28,12 +28,12 @@ const Transcript = @import("transcript.zig").Transcript;
 pub const CallAnalyticsJob = struct {
     /// Provides detailed information about a call analytics job, including
     /// information about skipped analytics features.
-    call_analytics_job_details: ?CallAnalyticsJobDetails,
+    call_analytics_job_details: ?CallAnalyticsJobDetails = null,
 
     /// The name of the Call Analytics job. Job names are case sensitive and must be
     /// unique
     /// within an Amazon Web Services account.
-    call_analytics_job_name: ?[]const u8,
+    call_analytics_job_name: ?[]const u8 = null,
 
     /// Provides the status of the specified Call Analytics job.
     ///
@@ -42,27 +42,27 @@ pub const CallAnalyticsJob = struct {
     /// `RedactedTranscriptFileUri`, if you requested transcript redaction). If
     /// the status is `FAILED`, `FailureReason` provides details on why
     /// your transcription job failed.
-    call_analytics_job_status: ?CallAnalyticsJobStatus,
+    call_analytics_job_status: ?CallAnalyticsJobStatus = null,
 
     /// Indicates which speaker is on which channel.
-    channel_definitions: ?[]const ChannelDefinition,
+    channel_definitions: ?[]const ChannelDefinition = null,
 
     /// The date and time the specified Call Analytics job finished processing.
     ///
     /// Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     /// example, `2022-05-04T12:33:13.922000-07:00` represents a transcription job
     /// that started processing at 12:33 PM UTC-7 on May 4, 2022.
-    completion_time: ?i64,
+    completion_time: ?i64 = null,
 
     /// The date and time the specified Call Analytics job request was made.
     ///
     /// Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     /// example, `2022-05-04T12:32:58.761000-07:00` represents a transcription job
     /// that started processing at 12:32 PM UTC-7 on May 4, 2022.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) you included in your request.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     /// If `CallAnalyticsJobStatus` is `FAILED`,
     /// `FailureReason` contains information about why the Call Analytics job
@@ -108,7 +108,7 @@ pub const CallAnalyticsJob = struct {
     /// Your audio contains more channels than Amazon Transcribe is able to process.
     /// For more information, refer to [Service
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe).
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The confidence score associated with the language identified in your media
     /// file.
@@ -118,7 +118,7 @@ pub const CallAnalyticsJob = struct {
     /// probability that the identified language correctly matches the language
     /// spoken in your
     /// media.
-    identified_language_score: ?f32,
+    identified_language_score: ?f32 = null,
 
     /// The language code used to create your Call Analytics job. For a list of
     /// supported
@@ -132,36 +132,36 @@ pub const CallAnalyticsJob = struct {
     /// improve the
     /// accuracy of language identification, you can include several language codes
     /// and Amazon Transcribe chooses the closest match for your transcription.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// Provides the Amazon S3 location of the media file you used in your Call
     /// Analytics request.
-    media: ?Media,
+    media: ?Media = null,
 
     /// The format of the input media file.
-    media_format: ?MediaFormat,
+    media_format: ?MediaFormat = null,
 
     /// The sample rate, in hertz, of the audio track in your input media file.
-    media_sample_rate_hertz: ?i32,
+    media_sample_rate_hertz: ?i32 = null,
 
     /// Provides information on any additional settings that were included in your
     /// request.
     /// Additional settings include content redaction and language identification
     /// settings.
-    settings: ?CallAnalyticsJobSettings,
+    settings: ?CallAnalyticsJobSettings = null,
 
     /// The date and time the specified Call Analytics job began processing.
     ///
     /// Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     /// example, `2022-05-04T12:32:58.789000-07:00` represents a transcription job
     /// that started processing at 12:32 PM UTC-7 on May 4, 2022.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The tags, each in the form of a key:value pair, assigned to the specified
     /// call analytics job.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
-    transcript: ?Transcript,
+    transcript: ?Transcript = null,
 
     pub const json_field_names = .{
         .call_analytics_job_details = "CallAnalyticsJobDetails",

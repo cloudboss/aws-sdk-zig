@@ -7,7 +7,7 @@ const MetricsStatus = @import("metrics_status.zig").MetricsStatus;
 pub const Metrics = struct {
     /// A container specifying the time threshold for emitting the
     /// `s3:Replication:OperationMissedThreshold` event.
-    event_threshold: ?ReplicationTimeValue,
+    event_threshold: ?ReplicationTimeValue = null,
 
     /// Specifies whether the replication metrics are enabled.
     status: MetricsStatus,

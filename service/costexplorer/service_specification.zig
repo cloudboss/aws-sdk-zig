@@ -5,7 +5,7 @@ pub const ServiceSpecification = struct {
     /// The Amazon EC2 hardware specifications that you want Amazon Web Services to
     /// provide
     /// recommendations for.
-    ec2_specification: ?EC2Specification,
+    ec2_specification: ?EC2Specification = null,
 
     pub const json_field_names = .{
         .ec2_specification = "EC2Specification",

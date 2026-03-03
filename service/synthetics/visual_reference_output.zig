@@ -12,14 +12,14 @@ const BrowserType = @import("browser_type.zig").BrowserType;
 pub const VisualReferenceOutput = struct {
     /// The ID of the canary run that produced the baseline screenshots
     /// that are used for visual monitoring comparisons by this canary.
-    base_canary_run_id: ?[]const u8,
+    base_canary_run_id: ?[]const u8 = null,
 
     /// An array of screenshots that are used as the baseline for comparisons during
     /// visual monitoring.
-    base_screenshots: ?[]const BaseScreenshot,
+    base_screenshots: ?[]const BaseScreenshot = null,
 
     /// The browser type associated with this visual reference.
-    browser_type: ?BrowserType,
+    browser_type: ?BrowserType = null,
 
     pub const json_field_names = .{
         .base_canary_run_id = "BaseCanaryRunId",

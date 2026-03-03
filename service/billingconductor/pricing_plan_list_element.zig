@@ -2,19 +2,19 @@
 pub const PricingPlanListElement = struct {
     /// The pricing plan Amazon Resource Names (ARN). This can be used to uniquely
     /// identify a pricing plan.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time when the pricing plan was created.
     creation_time: i64 = 0,
 
     /// The pricing plan description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The most recent time when the pricing plan was modified.
     last_modified_time: i64 = 0,
 
     /// The name of a pricing plan.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The pricing rules count that's currently associated with this pricing plan
     /// list element.

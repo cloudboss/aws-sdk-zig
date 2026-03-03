@@ -3,7 +3,7 @@ const AwsEcsClusterConfigurationExecuteCommandConfigurationDetails = @import("aw
 /// The run command configuration for the cluster.
 pub const AwsEcsClusterConfigurationDetails = struct {
     /// Contains the run command configuration for the cluster.
-    execute_command_configuration: ?AwsEcsClusterConfigurationExecuteCommandConfigurationDetails,
+    execute_command_configuration: ?AwsEcsClusterConfigurationExecuteCommandConfigurationDetails = null,
 
     pub const json_field_names = .{
         .execute_command_configuration = "ExecuteCommandConfiguration",

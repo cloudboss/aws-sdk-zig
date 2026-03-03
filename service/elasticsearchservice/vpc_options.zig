@@ -3,10 +3,10 @@
 /// Domains](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
 pub const VPCOptions = struct {
     /// Specifies the security groups for VPC endpoint.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// Specifies the subnets for VPC endpoint.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .security_group_ids = "SecurityGroupIds",

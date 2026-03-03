@@ -10,14 +10,14 @@ pub const Facet = struct {
     /// `Static` and `Dynamic`. For static facets, all attributes must be defined in
     /// the schema. For dynamic facets, attributes can be defined during data plane
     /// operations.
-    facet_style: ?FacetStyle,
+    facet_style: ?FacetStyle = null,
 
     /// The name of the Facet.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The object type that is associated with the facet. See
     /// CreateFacetRequest$ObjectType for more details.
-    object_type: ?ObjectType,
+    object_type: ?ObjectType = null,
 
     pub const json_field_names = .{
         .facet_style = "FacetStyle",

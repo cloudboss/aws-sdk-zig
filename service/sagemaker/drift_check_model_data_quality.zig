@@ -4,10 +4,10 @@ const MetricsSource = @import("metrics_source.zig").MetricsSource;
 /// model monitor is set using the model package.
 pub const DriftCheckModelDataQuality = struct {
     /// The drift check model data quality constraints.
-    constraints: ?MetricsSource,
+    constraints: ?MetricsSource = null,
 
     /// The drift check model data quality statistics.
-    statistics: ?MetricsSource,
+    statistics: ?MetricsSource = null,
 
     pub const json_field_names = .{
         .constraints = "Constraints",

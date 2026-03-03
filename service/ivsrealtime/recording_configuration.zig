@@ -4,11 +4,11 @@ const CompositionRecordingHlsConfiguration = @import("composition_recording_hls_
 /// An object representing a configuration to record a stage stream.
 pub const RecordingConfiguration = struct {
     /// The recording format for storing a recording in Amazon S3.
-    format: ?RecordingConfigurationFormat,
+    format: ?RecordingConfigurationFormat = null,
 
     /// An HLS configuration object to return information about how the recording
     /// will be configured.
-    hls_configuration: ?CompositionRecordingHlsConfiguration,
+    hls_configuration: ?CompositionRecordingHlsConfiguration = null,
 
     pub const json_field_names = .{
         .format = "format",

@@ -7,61 +7,61 @@ const Vulnerability = @import("vulnerability.zig").Vulnerability;
 /// Information about a finding that was detected in your code.
 pub const Finding = struct {
     /// The time when the finding was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// A description of the finding.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier for the detector that detected the finding in your code. A
     /// detector is a defined rule based on industry standards and AWS best
     /// practices.
-    detector_id: ?[]const u8,
+    detector_id: ?[]const u8 = null,
 
     /// The name of the detector that identified the security vulnerability in your
     /// code.
-    detector_name: ?[]const u8,
+    detector_name: ?[]const u8 = null,
 
     /// One or more tags or categorizations that are associated with a detector.
     /// These tags are defined by type, programming language, or other
     /// classification such as maintainability or consistency.
-    detector_tags: ?[]const []const u8,
+    detector_tags: ?[]const []const u8 = null,
 
     /// The identifier for the component that generated a finding such as
     /// AmazonCodeGuruSecurity.
-    generator_id: ?[]const u8,
+    generator_id: ?[]const u8 = null,
 
     /// The identifier for a finding.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// An object that contains the details about how to remediate a finding.
-    remediation: ?Remediation,
+    remediation: ?Remediation = null,
 
     /// The resource where Amazon CodeGuru Security detected a finding.
-    resource: ?Resource,
+    resource: ?Resource = null,
 
     /// The identifier for the rule that generated the finding.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     /// The severity of the finding. Severity can be critical, high, medium, low, or
     /// informational. For information on severity levels, see [Finding
     /// severity](https://docs.aws.amazon.com/codeguru/latest/security-ug/findings-overview.html#severity-distribution) in the *Amazon CodeGuru Security User Guide*.
-    severity: ?Severity,
+    severity: ?Severity = null,
 
     /// The status of the finding. A finding status can be open or closed.
-    status: ?Status,
+    status: ?Status = null,
 
     /// The title of the finding.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The type of finding.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The time when the finding was last updated. Findings are updated when you
     /// remediate them or when the finding code location changes.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// An object that describes the detected security vulnerability.
-    vulnerability: ?Vulnerability,
+    vulnerability: ?Vulnerability = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

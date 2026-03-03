@@ -6,7 +6,7 @@ pub const TimestampPartition = struct {
     /// The timestamp format of a partition defined by a timestamp. The default
     /// format is seconds
     /// since epoch (January 1, 1970 at midnight UTC time).
-    timestamp_format: ?[]const u8,
+    timestamp_format: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attribute_name = "attributeName",

@@ -6,16 +6,16 @@
 pub const AwsWafRegionalRulePredicateListDetails = struct {
     /// A unique identifier for a predicate in a rule, such as `ByteMatchSetId` or
     /// `IPSetId`.
-    data_id: ?[]const u8,
+    data_id: ?[]const u8 = null,
 
     /// Specifies if you want WAF to allow, block, or count requests based on the
     /// settings in the
     /// `ByteMatchSet`, `IPSet`, `SqlInjectionMatchSet`, `XssMatchSet`,
     /// `RegexMatchSet`, `GeoMatchSet`, or `SizeConstraintSet`.
-    negated: ?bool,
+    negated: ?bool = null,
 
     /// The type of predicate in a rule, such as `ByteMatch` or `IPSet`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_id = "DataId",

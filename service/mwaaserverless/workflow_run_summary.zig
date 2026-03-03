@@ -5,19 +5,19 @@ const RunType = @import("run_type.zig").RunType;
 /// status information.
 pub const WorkflowRunSummary = struct {
     /// Summary details about the workflow run execution.
-    run_detail_summary: ?RunDetailSummary,
+    run_detail_summary: ?RunDetailSummary = null,
 
     /// The unique identifier of the workflow run.
-    run_id: ?[]const u8,
+    run_id: ?[]const u8 = null,
 
     /// The type of workflow run.
-    run_type: ?RunType,
+    run_type: ?RunType = null,
 
     /// The Amazon Resource Name (ARN) of the workflow that contains this run.
-    workflow_arn: ?[]const u8,
+    workflow_arn: ?[]const u8 = null,
 
     /// The version of the workflow used for this run.
-    workflow_version: ?[]const u8,
+    workflow_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .run_detail_summary = "RunDetailSummary",

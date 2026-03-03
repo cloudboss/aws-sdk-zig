@@ -11,10 +11,10 @@ pub const ListTrackersResponseEntry = struct {
     description: []const u8,
 
     /// Always returns `RequestBasedUsage`.
-    pricing_plan: ?PricingPlan,
+    pricing_plan: ?PricingPlan = null,
 
     /// No longer used. Always returns an empty string.
-    pricing_plan_data_source: ?[]const u8,
+    pricing_plan_data_source: ?[]const u8 = null,
 
     /// The name of the tracker resource.
     tracker_name: []const u8,

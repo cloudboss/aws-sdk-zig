@@ -13,10 +13,10 @@ const RegisteredUserQuickSightConsoleEmbeddingConfiguration = @import("registere
 /// than one experience configuration.
 pub const RegisteredUserEmbeddingExperienceConfiguration = struct {
     /// The configuration details for providing a dashboard embedding experience.
-    dashboard: ?RegisteredUserDashboardEmbeddingConfiguration,
+    dashboard: ?RegisteredUserDashboardEmbeddingConfiguration = null,
 
     /// The type of embedding experience. In this case, Amazon Quick Sight visuals.
-    dashboard_visual: ?RegisteredUserDashboardVisualEmbeddingConfiguration,
+    dashboard_visual: ?RegisteredUserDashboardVisualEmbeddingConfiguration = null,
 
     /// The configuration details for embedding the Generative Q&A experience.
     ///
@@ -24,17 +24,17 @@ pub const RegisteredUserEmbeddingExperienceConfiguration = struct {
     /// [Embedding
     /// Overview](https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html) in
     /// the *Amazon Quick Sight User Guide*.
-    generative_qn_a: ?RegisteredUserGenerativeQnAEmbeddingConfiguration,
+    generative_qn_a: ?RegisteredUserGenerativeQnAEmbeddingConfiguration = null,
 
     /// The configuration details for embedding the Q search bar.
     ///
     /// For more information about embedding the Q search bar, see [Embedding
     /// Overview](https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html) in
     /// the *Amazon Quick Sight User Guide*.
-    q_search_bar: ?RegisteredUserQSearchBarEmbeddingConfiguration,
+    q_search_bar: ?RegisteredUserQSearchBarEmbeddingConfiguration = null,
 
     /// The configuration details for embedding the Quick chat agent.
-    quick_chat: ?RegisteredUserQuickChatEmbeddingConfiguration,
+    quick_chat: ?RegisteredUserQuickChatEmbeddingConfiguration = null,
 
     /// The configuration details for providing each Amazon Quick Sight console
     /// embedding
@@ -75,7 +75,7 @@ pub const RegisteredUserEmbeddingExperienceConfiguration = struct {
     /// demo of the ways you can customize embedding, visit the [Amazon Quick Suite
     /// Developer
     /// Portal](https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
-    quick_sight_console: ?RegisteredUserQuickSightConsoleEmbeddingConfiguration,
+    quick_sight_console: ?RegisteredUserQuickSightConsoleEmbeddingConfiguration = null,
 
     pub const json_field_names = .{
         .dashboard = "Dashboard",

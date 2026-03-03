@@ -7,13 +7,13 @@ const aws = @import("aws");
 pub const OnlineAbConfig = struct {
     /// The name of the variation that is to be the default variation that the other
     /// variations are compared to.
-    control_treatment_name: ?[]const u8,
+    control_treatment_name: ?[]const u8 = null,
 
     /// A set of key-value pairs. The keys are variation names, and the values are
     /// the portion of experiment traffic to be assigned to that variation. Specify
     /// the traffic portion in thousandths of a percent, so 20,000 for a variation
     /// would allocate 20% of the experiment traffic to that variation.
-    treatment_weights: ?[]const aws.map.MapEntry(i64),
+    treatment_weights: ?[]const aws.map.MapEntry(i64) = null,
 
     pub const json_field_names = .{
         .control_treatment_name = "controlTreatmentName",

@@ -7,19 +7,19 @@ const BoundingBox = @import("bounding_box.zig").BoundingBox;
 pub const ProtectiveEquipmentPerson = struct {
     /// An array of body parts detected on a person's body (including body parts
     /// without PPE).
-    body_parts: ?[]const ProtectiveEquipmentBodyPart,
+    body_parts: ?[]const ProtectiveEquipmentBodyPart = null,
 
     /// A bounding box around the detected person.
-    bounding_box: ?BoundingBox,
+    bounding_box: ?BoundingBox = null,
 
     /// The confidence that Amazon Rekognition has that the bounding box contains a
     /// person.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// The identifier for the detected person. The identifier is only unique for a
     /// single call to
     /// `DetectProtectiveEquipment`.
-    id: ?i32,
+    id: ?i32 = null,
 
     pub const json_field_names = .{
         .body_parts = "BodyParts",

@@ -68,7 +68,7 @@ pub const HealthCheckCustomConfig = struct {
     /// the same value before 30 seconds has passed doesn't accelerate the change.
     /// Cloud Map still waits
     /// `30` seconds after the first request to make the change.
-    failure_threshold: ?i32,
+    failure_threshold: ?i32 = null,
 
     pub const json_field_names = .{
         .failure_threshold = "FailureThreshold",

@@ -7,41 +7,41 @@ const TrialComponentSource = @import("trial_component_source.zig").TrialComponen
 /// [DescribeTrialComponent](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrialComponent.html) API and provide the `TrialComponentName`.
 pub const TrialComponentSummary = struct {
     /// Who created the trial component.
-    created_by: ?UserContext,
+    created_by: ?UserContext = null,
 
     /// When the component was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The name of the component as displayed. If `DisplayName` isn't specified,
     /// `TrialComponentName` is displayed.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// When the component ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// Who last modified the component.
-    last_modified_by: ?UserContext,
+    last_modified_by: ?UserContext = null,
 
     /// When the component was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// When the component started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of the component. States include:
     ///
     /// * InProgress
     /// * Completed
     /// * Failed
-    status: ?TrialComponentStatus,
+    status: ?TrialComponentStatus = null,
 
     /// The Amazon Resource Name (ARN) of the trial component.
-    trial_component_arn: ?[]const u8,
+    trial_component_arn: ?[]const u8 = null,
 
     /// The name of the trial component.
-    trial_component_name: ?[]const u8,
+    trial_component_name: ?[]const u8 = null,
 
-    trial_component_source: ?TrialComponentSource,
+    trial_component_source: ?TrialComponentSource = null,
 
     pub const json_field_names = .{
         .created_by = "CreatedBy",

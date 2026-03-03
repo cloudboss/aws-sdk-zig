@@ -27,7 +27,7 @@ pub const CreateFileSystemLustreMetadataConfiguration = struct {
     /// you can choose to specify a valid value. If you're using AUTOMATIC mode,
     /// you cannot specify a value because FSx for Lustre automatically sets
     /// the value based on your file system storage capacity.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// The metadata configuration mode for provisioning Metadata IOPS for
     /// an FSx for Lustre file system using a `PERSISTENT_2`

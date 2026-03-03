@@ -7,21 +7,21 @@ const ContactFlowType = @import("contact_flow_type.zig").ContactFlowType;
 pub const ContactFlowSearchCriteria = struct {
     /// A list of conditions which would be applied together with an `AND`
     /// condition.
-    and_conditions: ?[]const ContactFlowSearchCriteria,
+    and_conditions: ?[]const ContactFlowSearchCriteria = null,
 
     /// A list of conditions which would be applied together with an `OR` condition.
-    or_conditions: ?[]const ContactFlowSearchCriteria,
+    or_conditions: ?[]const ContactFlowSearchCriteria = null,
 
     /// The state of the flow.
-    state_condition: ?ContactFlowState,
+    state_condition: ?ContactFlowState = null,
 
     /// The status of the flow.
-    status_condition: ?ContactFlowStatus,
+    status_condition: ?ContactFlowStatus = null,
 
-    string_condition: ?StringCondition,
+    string_condition: ?StringCondition = null,
 
     /// The type of flow.
-    type_condition: ?ContactFlowType,
+    type_condition: ?ContactFlowType = null,
 
     pub const json_field_names = .{
         .and_conditions = "AndConditions",

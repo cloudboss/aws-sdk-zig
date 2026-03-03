@@ -4,10 +4,10 @@ const MinimalWorkflow = @import("minimal_workflow.zig").MinimalWorkflow;
 /// Represents a warning about a resource in a Region switch plan.
 pub const ResourceWarning = struct {
     /// The Amazon Resource Name (ARN) of the resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The name of the step for the resource warning.
-    step_name: ?[]const u8,
+    step_name: ?[]const u8 = null,
 
     /// The version for the resource warning.
     version: []const u8,
@@ -22,7 +22,7 @@ pub const ResourceWarning = struct {
     warning_updated_time: i64,
 
     /// The workflow for the resource warning.
-    workflow: ?MinimalWorkflow,
+    workflow: ?MinimalWorkflow = null,
 
     pub const json_field_names = .{
         .resource_arn = "resourceArn",

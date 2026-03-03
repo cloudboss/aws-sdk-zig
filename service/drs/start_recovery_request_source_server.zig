@@ -2,7 +2,7 @@
 pub const StartRecoveryRequestSourceServer = struct {
     /// The ID of a Recovery Snapshot we want to recover from. Omit this field to
     /// launch from the latest data by taking an on-demand snapshot.
-    recovery_snapshot_id: ?[]const u8,
+    recovery_snapshot_id: ?[]const u8 = null,
 
     /// The ID of the Source Server you want to recover.
     source_server_id: []const u8,

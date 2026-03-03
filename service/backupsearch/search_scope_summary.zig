@@ -6,11 +6,11 @@
 pub const SearchScopeSummary = struct {
     /// This is the count of the total number of items that will be scanned in a
     /// search.
-    total_items_to_scan_count: ?i64,
+    total_items_to_scan_count: ?i64 = null,
 
     /// This is the count of the total number of backups that will be scanned in a
     /// search.
-    total_recovery_points_to_scan_count: ?i32,
+    total_recovery_points_to_scan_count: ?i32 = null,
 
     pub const json_field_names = .{
         .total_items_to_scan_count = "TotalItemsToScanCount",

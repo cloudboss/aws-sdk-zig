@@ -8,15 +8,15 @@ pub const TrainingJobSummary = struct {
     creation_time: i64,
 
     /// Timestamp when the training job was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The secondary status of the training job.
-    secondary_status: ?SecondaryStatus,
+    secondary_status: ?SecondaryStatus = null,
 
     /// A timestamp that shows when the training job ended. This field is set only
     /// if the training job has one of the terminal statuses (`Completed`, `Failed`,
     /// or `Stopped`).
-    training_end_time: ?i64,
+    training_end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the training job.
     training_job_arn: []const u8,
@@ -33,10 +33,10 @@ pub const TrainingJobSummary = struct {
     /// For more information about how to reserve GPU capacity for your SageMaker
     /// HyperPod clusters using Amazon SageMaker Training Plan, see `
     /// [CreateTrainingPlan](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html) `.
-    training_plan_arn: ?[]const u8,
+    training_plan_arn: ?[]const u8 = null,
 
     /// The status of the warm pool associated with the training job.
-    warm_pool_status: ?WarmPoolStatus,
+    warm_pool_status: ?WarmPoolStatus = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

@@ -4,11 +4,11 @@ const ThroughResourcesStatement = @import("through_resources_statement.zig").Thr
 /// Describes a path.
 pub const AccessScopePath = struct {
     /// The destination.
-    destination: ?PathStatement,
+    destination: ?PathStatement = null,
 
     /// The source.
-    source: ?PathStatement,
+    source: ?PathStatement = null,
 
     /// The through resources.
-    through_resources: ?[]const ThroughResourcesStatement,
+    through_resources: ?[]const ThroughResourcesStatement = null,
 };

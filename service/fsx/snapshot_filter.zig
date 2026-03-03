@@ -6,11 +6,11 @@ const SnapshotFilterName = @import("snapshot_filter_name.zig").SnapshotFilterNam
 pub const SnapshotFilter = struct {
     /// The name of the filter to use. You can filter by the `file-system-id` or by
     /// `volume-id`.
-    name: ?SnapshotFilterName,
+    name: ?SnapshotFilterName = null,
 
     /// The `file-system-id` or `volume-id` that you are filtering
     /// for.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

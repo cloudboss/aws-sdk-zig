@@ -13,14 +13,14 @@ pub const RestoreTestingPlanForList = struct {
     /// `LastExecutionDate` is accurate to milliseconds.
     /// For example, the value 1516925490.087 represents Friday,
     /// January 26, 2018 12:11:30.087 AM.
-    last_execution_time: ?i64,
+    last_execution_time: ?i64 = null,
 
     /// The date and time that the restore testing plan was updated.
     /// This update is in Unix format and Coordinated Universal Time (UTC).
     /// The value of `LastUpdateTime` is accurate to
     /// milliseconds. For example, the value 1516925490.087 represents
     /// Friday, January 26, 2018 12:11:30.087 AM.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// An Amazon Resource Name (ARN) that uniquely identifiesa
     /// restore testing plan.
@@ -38,7 +38,7 @@ pub const RestoreTestingPlanForList = struct {
     /// Optional. This is the timezone in which the schedule
     /// expression is set. By default, ScheduleExpressions are in UTC.
     /// You can modify this to a specified timezone.
-    schedule_expression_timezone: ?[]const u8,
+    schedule_expression_timezone: ?[]const u8 = null,
 
     /// Defaults to 24 hours.
     ///

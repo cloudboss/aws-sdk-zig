@@ -3,15 +3,15 @@ const LocalTimeZoneConfig = @import("local_time_zone_config.zig").LocalTimeZoneC
 
 /// Campaign communication time config
 pub const CommunicationTimeConfig = struct {
-    email: ?TimeWindow,
+    email: ?TimeWindow = null,
 
     local_time_zone_config: LocalTimeZoneConfig,
 
-    sms: ?TimeWindow,
+    sms: ?TimeWindow = null,
 
-    telephony: ?TimeWindow,
+    telephony: ?TimeWindow = null,
 
-    whats_app: ?TimeWindow,
+    whats_app: ?TimeWindow = null,
 
     pub const json_field_names = .{
         .email = "email",

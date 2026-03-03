@@ -3,36 +3,36 @@ const PackageManager = @import("package_manager.zig").PackageManager;
 /// Information on the vulnerable package identified by a finding.
 pub const VulnerablePackage = struct {
     /// The architecture of the vulnerable package.
-    arch: ?[]const u8,
+    arch: ?[]const u8 = null,
 
     /// The epoch of the vulnerable package.
     epoch: i32 = 0,
 
     /// The file path of the vulnerable package.
-    file_path: ?[]const u8,
+    file_path: ?[]const u8 = null,
 
     /// The version of the package that contains the vulnerability fix.
-    fixed_in_version: ?[]const u8,
+    fixed_in_version: ?[]const u8 = null,
 
     /// The name of the vulnerable package.
     name: []const u8,
 
     /// The package manager of the vulnerable package.
-    package_manager: ?PackageManager,
+    package_manager: ?PackageManager = null,
 
     /// The release of the vulnerable package.
-    release: ?[]const u8,
+    release: ?[]const u8 = null,
 
     /// The code to run in your environment to update packages with a fix available.
-    remediation: ?[]const u8,
+    remediation: ?[]const u8 = null,
 
     /// The Amazon Resource Number (ARN) of the Amazon Web Services Lambda function
     /// affected by a
     /// finding.
-    source_lambda_layer_arn: ?[]const u8,
+    source_lambda_layer_arn: ?[]const u8 = null,
 
     /// The source layer hash of the vulnerable package.
-    source_layer_hash: ?[]const u8,
+    source_layer_hash: ?[]const u8 = null,
 
     /// The version of the vulnerable package.
     version: []const u8,

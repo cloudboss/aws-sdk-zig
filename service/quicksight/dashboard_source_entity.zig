@@ -3,7 +3,7 @@ const DashboardSourceTemplate = @import("dashboard_source_template.zig").Dashboa
 /// Dashboard source entity.
 pub const DashboardSourceEntity = struct {
     /// Source template.
-    source_template: ?DashboardSourceTemplate,
+    source_template: ?DashboardSourceTemplate = null,
 
     pub const json_field_names = .{
         .source_template = "SourceTemplate",

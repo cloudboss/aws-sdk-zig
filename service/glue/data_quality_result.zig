@@ -9,55 +9,55 @@ pub const DataQualityResult = struct {
     /// A summary of `DataQualityAggregatedMetrics` objects showing the total counts
     /// of processed rows and rules, including their pass/fail statistics based on
     /// row-level results.
-    aggregated_metrics: ?DataQualityAggregatedMetrics,
+    aggregated_metrics: ?DataQualityAggregatedMetrics = null,
 
     /// A list of `DataQualityAnalyzerResult` objects representing the results for
     /// each analyzer.
-    analyzer_results: ?[]const DataQualityAnalyzerResult,
+    analyzer_results: ?[]const DataQualityAnalyzerResult = null,
 
     /// The date and time when this data quality run completed.
-    completed_on: ?i64,
+    completed_on: ?i64 = null,
 
     /// The table associated with the data quality result, if any.
-    data_source: ?DataSource,
+    data_source: ?DataSource = null,
 
     /// In the context of a job in Glue Studio, each node in the canvas is typically
     /// assigned some sort of name and data quality nodes will have names. In the
     /// case of multiple nodes, the `evaluationContext` can differentiate the nodes.
-    evaluation_context: ?[]const u8,
+    evaluation_context: ?[]const u8 = null,
 
     /// The job name associated with the data quality result, if any.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The job run ID associated with the data quality result, if any.
-    job_run_id: ?[]const u8,
+    job_run_id: ?[]const u8 = null,
 
     /// A list of `DataQualityObservation` objects representing the observations
     /// generated after evaluating the rules and analyzers.
-    observations: ?[]const DataQualityObservation,
+    observations: ?[]const DataQualityObservation = null,
 
     /// The Profile ID for the data quality result.
-    profile_id: ?[]const u8,
+    profile_id: ?[]const u8 = null,
 
     /// A unique result ID for the data quality result.
-    result_id: ?[]const u8,
+    result_id: ?[]const u8 = null,
 
     /// A list of `DataQualityRuleResult` objects representing the results for each
     /// rule.
-    rule_results: ?[]const DataQualityRuleResult,
+    rule_results: ?[]const DataQualityRuleResult = null,
 
     /// The unique run ID for the ruleset evaluation for this data quality result.
-    ruleset_evaluation_run_id: ?[]const u8,
+    ruleset_evaluation_run_id: ?[]const u8 = null,
 
     /// The name of the ruleset associated with the data quality result.
-    ruleset_name: ?[]const u8,
+    ruleset_name: ?[]const u8 = null,
 
     /// An aggregate data quality score. Represents the ratio of rules that passed
     /// to the total number of rules.
-    score: ?f64,
+    score: ?f64 = null,
 
     /// The date and time when this data quality run started.
-    started_on: ?i64,
+    started_on: ?i64 = null,
 
     pub const json_field_names = .{
         .aggregated_metrics = "AggregatedMetrics",

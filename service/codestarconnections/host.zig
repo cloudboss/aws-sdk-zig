@@ -13,30 +13,30 @@ const VpcConfiguration = @import("vpc_configuration.zig").VpcConfiguration;
 /// console.
 pub const Host = struct {
     /// The Amazon Resource Name (ARN) of the host.
-    host_arn: ?[]const u8,
+    host_arn: ?[]const u8 = null,
 
     /// The name of the host.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The endpoint of the infrastructure where your provider type is installed.
-    provider_endpoint: ?[]const u8,
+    provider_endpoint: ?[]const u8 = null,
 
     /// The name of the installed provider to be associated with your connection.
     /// The host
     /// resource represents the infrastructure where your provider type is
     /// installed. The valid
     /// provider type is GitHub Enterprise Server.
-    provider_type: ?ProviderType,
+    provider_type: ?ProviderType = null,
 
     /// The status of the host, such as PENDING, AVAILABLE, VPC_CONFIG_DELETING,
     /// VPC_CONFIG_INITIALIZING, and VPC_CONFIG_FAILED_INITIALIZATION.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The status description for the host.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The VPC configuration provisioned for the host.
-    vpc_configuration: ?VpcConfiguration,
+    vpc_configuration: ?VpcConfiguration = null,
 
     pub const json_field_names = .{
         .host_arn = "HostArn",

@@ -6,17 +6,17 @@ pub const JobFlowExecutionStatusDetail = struct {
     creation_date_time: i64,
 
     /// The completion date and time of the job flow.
-    end_date_time: ?i64,
+    end_date_time: ?i64 = null,
 
     /// Description of the job flow last changed state.
-    last_state_change_reason: ?[]const u8,
+    last_state_change_reason: ?[]const u8 = null,
 
     /// The date and time when the job flow was ready to start running bootstrap
     /// actions.
-    ready_date_time: ?i64,
+    ready_date_time: ?i64 = null,
 
     /// The start date and time of the job flow.
-    start_date_time: ?i64,
+    start_date_time: ?i64 = null,
 
     /// The state of the job flow.
     state: JobFlowExecutionState,

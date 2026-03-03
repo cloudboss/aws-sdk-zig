@@ -8,19 +8,19 @@ const TeletextSourceSettings = @import("teletext_source_settings.zig").TeletextS
 
 /// Caption Selector Settings
 pub const CaptionSelectorSettings = struct {
-    ancillary_source_settings: ?AncillarySourceSettings,
+    ancillary_source_settings: ?AncillarySourceSettings = null,
 
-    arib_source_settings: ?AribSourceSettings,
+    arib_source_settings: ?AribSourceSettings = null,
 
-    dvb_sub_source_settings: ?DvbSubSourceSettings,
+    dvb_sub_source_settings: ?DvbSubSourceSettings = null,
 
-    embedded_source_settings: ?EmbeddedSourceSettings,
+    embedded_source_settings: ?EmbeddedSourceSettings = null,
 
-    scte_20_source_settings: ?Scte20SourceSettings,
+    scte_20_source_settings: ?Scte20SourceSettings = null,
 
-    scte_27_source_settings: ?Scte27SourceSettings,
+    scte_27_source_settings: ?Scte27SourceSettings = null,
 
-    teletext_source_settings: ?TeletextSourceSettings,
+    teletext_source_settings: ?TeletextSourceSettings = null,
 
     pub const json_field_names = .{
         .ancillary_source_settings = "AncillarySourceSettings",

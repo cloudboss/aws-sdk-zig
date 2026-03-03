@@ -11,7 +11,7 @@ pub const AutoTrainingConfig = struct {
     ///
     /// For more information about auto training, see [Creating and configuring a
     /// solution](https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html).
-    scheduling_expression: ?[]const u8,
+    scheduling_expression: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .scheduling_expression = "schedulingExpression",

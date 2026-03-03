@@ -4,11 +4,11 @@ const ResaleAuthorizationCreatedDateFilterDateRange = @import("resale_authorizat
 pub const ResaleAuthorizationCreatedDateFilter = struct {
     /// Allows filtering on `CreatedDate` of a ResaleAuthorization with date range
     /// as input.
-    date_range: ?ResaleAuthorizationCreatedDateFilterDateRange,
+    date_range: ?ResaleAuthorizationCreatedDateFilterDateRange = null,
 
     /// Allows filtering on `CreatedDate` of a ResaleAuthorization with date value
     /// as input.
-    value_list: ?[]const []const u8,
+    value_list: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .date_range = "DateRange",

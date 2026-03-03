@@ -5,9 +5,9 @@ const ResourceSpec = @import("resource_spec.zig").ResourceSpec;
 pub const SpaceCodeEditorAppSettings = struct {
     /// Settings that are used to configure and manage the lifecycle of CodeEditor
     /// applications in a space.
-    app_lifecycle_management: ?SpaceAppLifecycleManagement,
+    app_lifecycle_management: ?SpaceAppLifecycleManagement = null,
 
-    default_resource_spec: ?ResourceSpec,
+    default_resource_spec: ?ResourceSpec = null,
 
     pub const json_field_names = .{
         .app_lifecycle_management = "AppLifecycleManagement",

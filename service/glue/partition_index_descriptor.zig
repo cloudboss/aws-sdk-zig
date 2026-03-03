@@ -6,7 +6,7 @@ const KeySchemaElement = @import("key_schema_element.zig").KeySchemaElement;
 pub const PartitionIndexDescriptor = struct {
     /// A list of errors that can occur when registering partition indexes for an
     /// existing table.
-    backfill_errors: ?[]const BackfillError,
+    backfill_errors: ?[]const BackfillError = null,
 
     /// The name of the partition index.
     index_name: []const u8,

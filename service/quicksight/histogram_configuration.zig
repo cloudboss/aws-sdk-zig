@@ -10,31 +10,31 @@ const ChartAxisLabelOptions = @import("chart_axis_label_options.zig").ChartAxisL
 /// The configuration for a `HistogramVisual`.
 pub const HistogramConfiguration = struct {
     /// The options that determine the presentation of histogram bins.
-    bin_options: ?HistogramBinOptions,
+    bin_options: ?HistogramBinOptions = null,
 
     /// The data label configuration of a histogram.
-    data_labels: ?DataLabelOptions,
+    data_labels: ?DataLabelOptions = null,
 
     /// The field well configuration of a histogram.
-    field_wells: ?HistogramFieldWells,
+    field_wells: ?HistogramFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The tooltip configuration of a histogram.
-    tooltip: ?TooltipOptions,
+    tooltip: ?TooltipOptions = null,
 
     /// The visual palette configuration of a histogram.
-    visual_palette: ?VisualPalette,
+    visual_palette: ?VisualPalette = null,
 
     /// The options that determine the presentation of the x-axis.
-    x_axis_display_options: ?AxisDisplayOptions,
+    x_axis_display_options: ?AxisDisplayOptions = null,
 
     /// The options that determine the presentation of the x-axis label.
-    x_axis_label_options: ?ChartAxisLabelOptions,
+    x_axis_label_options: ?ChartAxisLabelOptions = null,
 
     /// The options that determine the presentation of the y-axis.
-    y_axis_display_options: ?AxisDisplayOptions,
+    y_axis_display_options: ?AxisDisplayOptions = null,
 
     pub const json_field_names = .{
         .bin_options = "BinOptions",

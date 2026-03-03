@@ -3,12 +3,12 @@ const ChangeTypeEnum = @import("change_type_enum.zig").ChangeTypeEnum;
 /// Information about the file operation conflicts in a merge operation.
 pub const MergeOperations = struct {
     /// The operation on a file in the destination of a merge or pull request.
-    destination: ?ChangeTypeEnum,
+    destination: ?ChangeTypeEnum = null,
 
     /// The operation (add, modify, or delete) on a file in the source of a merge or
     /// pull
     /// request.
-    source: ?ChangeTypeEnum,
+    source: ?ChangeTypeEnum = null,
 
     pub const json_field_names = .{
         .destination = "destination",

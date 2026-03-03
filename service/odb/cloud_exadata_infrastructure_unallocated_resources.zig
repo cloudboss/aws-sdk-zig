@@ -4,25 +4,25 @@ const CloudAutonomousVmClusterResourceDetails = @import("cloud_autonomous_vm_clu
 pub const CloudExadataInfrastructureUnallocatedResources = struct {
     /// A list of Autonomous VM clusters associated with this Cloud Exadata
     /// Infrastructure.
-    cloud_autonomous_vm_clusters: ?[]const CloudAutonomousVmClusterResourceDetails,
+    cloud_autonomous_vm_clusters: ?[]const CloudAutonomousVmClusterResourceDetails = null,
 
     /// The display name of the Cloud Exadata infrastructure.
-    cloud_exadata_infrastructure_display_name: ?[]const u8,
+    cloud_exadata_infrastructure_display_name: ?[]const u8 = null,
 
     /// The unique identifier of the Cloud Exadata infrastructure.
-    cloud_exadata_infrastructure_id: ?[]const u8,
+    cloud_exadata_infrastructure_id: ?[]const u8 = null,
 
     /// The amount of unallocated Exadata storage available, in terabytes (TB).
-    exadata_storage_in_t_bs: ?f64,
+    exadata_storage_in_t_bs: ?f64 = null,
 
     /// The amount of unallocated local storage available, in gigabytes (GB).
-    local_storage_in_g_bs: ?i32,
+    local_storage_in_g_bs: ?i32 = null,
 
     /// The amount of unallocated memory available, in gigabytes (GB).
-    memory_in_g_bs: ?i32,
+    memory_in_g_bs: ?i32 = null,
 
     /// The number of unallocated Oracle CPU Units (OCPUs) available.
-    ocpus: ?i32,
+    ocpus: ?i32 = null,
 
     pub const json_field_names = .{
         .cloud_autonomous_vm_clusters = "cloudAutonomousVmClusters",

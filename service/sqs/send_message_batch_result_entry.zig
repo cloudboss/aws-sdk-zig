@@ -8,7 +8,7 @@ pub const SendMessageBatchResultEntry = struct {
     /// this attribute to verify that Amazon SQS received the message correctly.
     /// Amazon SQS URL-decodes the message before creating the MD5 digest. For
     /// information about MD5, see [RFC1321](https://www.ietf.org/rfc/rfc1321.txt).
-    md5_of_message_attributes: ?[]const u8,
+    md5_of_message_attributes: ?[]const u8 = null,
 
     /// An MD5 digest of the non-URL-encoded message body string. You can use this
     /// attribute to verify that Amazon SQS received the message correctly. Amazon
@@ -21,7 +21,7 @@ pub const SendMessageBatchResultEntry = struct {
     /// attribute to verify that Amazon SQS received the message correctly. Amazon
     /// SQS URL-decodes the message before creating the MD5 digest. For information
     /// about MD5, see [RFC1321](https://www.ietf.org/rfc/rfc1321.txt).
-    md5_of_message_system_attributes: ?[]const u8,
+    md5_of_message_system_attributes: ?[]const u8 = null,
 
     /// An identifier for the message.
     message_id: []const u8,
@@ -32,7 +32,7 @@ pub const SendMessageBatchResultEntry = struct {
     ///
     /// The length of `SequenceNumber` is 128 bits. As `SequenceNumber`
     /// continues to increase for a particular `MessageGroupId`.
-    sequence_number: ?[]const u8,
+    sequence_number: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

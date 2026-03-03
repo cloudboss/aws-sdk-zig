@@ -22,7 +22,7 @@ pub const StreamSpecification = struct {
     ///
     /// * `NEW_AND_OLD_IMAGES` - Both the new and the old item images of the
     /// item are written to the stream.
-    stream_view_type: ?StreamViewType,
+    stream_view_type: ?StreamViewType = null,
 
     pub const json_field_names = .{
         .stream_enabled = "StreamEnabled",

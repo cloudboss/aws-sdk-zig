@@ -8,7 +8,7 @@ pub const BatchParameters = struct {
     /// can be between 2 and 10,000. If you specify array properties for a job, it
     /// becomes an array
     /// job. This parameter is used only if the target is an Batch job.
-    array_properties: ?BatchArrayProperties,
+    array_properties: ?BatchArrayProperties = null,
 
     /// The ARN or name of the job definition to use if the event target is an Batch
     /// job. This
@@ -26,7 +26,7 @@ pub const BatchParameters = struct {
     /// you specify a retry strategy here, it overrides the retry strategy defined
     /// in the job
     /// definition.
-    retry_strategy: ?BatchRetryStrategy,
+    retry_strategy: ?BatchRetryStrategy = null,
 
     pub const json_field_names = .{
         .array_properties = "ArrayProperties",

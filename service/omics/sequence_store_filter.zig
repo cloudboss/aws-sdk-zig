@@ -3,22 +3,22 @@ const SequenceStoreStatus = @import("sequence_store_status.zig").SequenceStoreSt
 /// A filter for a sequence store.
 pub const SequenceStoreFilter = struct {
     /// The filter's start date.
-    created_after: ?i64,
+    created_after: ?i64 = null,
 
     /// The filter's end date.
-    created_before: ?i64,
+    created_before: ?i64 = null,
 
     /// A name to filter on.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Filter results based on status.
-    status: ?SequenceStoreStatus,
+    status: ?SequenceStoreStatus = null,
 
     /// Filter results based on stores updated after the specified time.
-    updated_after: ?i64,
+    updated_after: ?i64 = null,
 
     /// Filter results based on stores updated before the specified time.
-    updated_before: ?i64,
+    updated_before: ?i64 = null,
 
     pub const json_field_names = .{
         .created_after = "createdAfter",

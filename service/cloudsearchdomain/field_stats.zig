@@ -11,7 +11,7 @@ pub const FieldStats = struct {
     /// point value. If the field is `date` or `date-array`, `max` is the string
     /// representation of a date with the format specified in [IETF
     /// RFC3339](http://tools.ietf.org/html/rfc3339): yyyy-mm-ddTHH:mm:ss.SSSZ.
-    max: ?[]const u8,
+    max: ?[]const u8 = null,
 
     /// The average of the values found in the specified field in the result set.
     ///
@@ -20,7 +20,7 @@ pub const FieldStats = struct {
     /// point value. If the field is `date` or `date-array`, `mean` is the string
     /// representation of a date with the format specified in [IETF
     /// RFC3339](http://tools.ietf.org/html/rfc3339): yyyy-mm-ddTHH:mm:ss.SSSZ.
-    mean: ?[]const u8,
+    mean: ?[]const u8 = null,
 
     /// The minimum value found in the specified field in the result set.
     ///
@@ -29,7 +29,7 @@ pub const FieldStats = struct {
     /// point value. If the field is `date` or `date-array`, `min` is the string
     /// representation of a date with the format specified in [IETF
     /// RFC3339](http://tools.ietf.org/html/rfc3339): yyyy-mm-ddTHH:mm:ss.SSSZ.
-    min: ?[]const u8,
+    min: ?[]const u8 = null,
 
     /// The number of documents that do not contain a value in the specified field
     /// in the result set.

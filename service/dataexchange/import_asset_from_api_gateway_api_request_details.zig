@@ -3,13 +3,13 @@ const ProtocolType = @import("protocol_type.zig").ProtocolType;
 /// The request details.
 pub const ImportAssetFromApiGatewayApiRequestDetails = struct {
     /// The API description. Markdown supported.
-    api_description: ?[]const u8,
+    api_description: ?[]const u8 = null,
 
     /// The API Gateway API ID.
     api_id: []const u8,
 
     /// The API Gateway API key.
-    api_key: ?[]const u8,
+    api_key: ?[]const u8 = null,
 
     /// The API name.
     api_name: []const u8,

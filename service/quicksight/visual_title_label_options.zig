@@ -4,10 +4,10 @@ const Visibility = @import("visibility.zig").Visibility;
 /// The title label options for a visual.
 pub const VisualTitleLabelOptions = struct {
     /// The short text format of the title label, such as plain text or rich text.
-    format_text: ?ShortFormatText,
+    format_text: ?ShortFormatText = null,
 
     /// The visibility of the title label.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .format_text = "FormatText",

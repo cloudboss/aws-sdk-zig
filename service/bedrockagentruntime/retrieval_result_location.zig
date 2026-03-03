@@ -20,31 +20,31 @@ const RetrievalResultWebLocation = @import("retrieval_result_web_location.zig").
 ///   response](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax) – in the `location` field
 pub const RetrievalResultLocation = struct {
     /// The Confluence data source location.
-    confluence_location: ?RetrievalResultConfluenceLocation,
+    confluence_location: ?RetrievalResultConfluenceLocation = null,
 
     /// Specifies the location of a document in a custom data source.
-    custom_document_location: ?RetrievalResultCustomDocumentLocation,
+    custom_document_location: ?RetrievalResultCustomDocumentLocation = null,
 
     /// The location of a document in Amazon Kendra.
-    kendra_document_location: ?RetrievalResultKendraDocumentLocation,
+    kendra_document_location: ?RetrievalResultKendraDocumentLocation = null,
 
     /// The S3 data source location.
-    s_3_location: ?RetrievalResultS3Location,
+    s_3_location: ?RetrievalResultS3Location = null,
 
     /// The Salesforce data source location.
-    salesforce_location: ?RetrievalResultSalesforceLocation,
+    salesforce_location: ?RetrievalResultSalesforceLocation = null,
 
     /// The SharePoint data source location.
-    share_point_location: ?RetrievalResultSharePointLocation,
+    share_point_location: ?RetrievalResultSharePointLocation = null,
 
     /// Specifies information about the SQL query used to retrieve the result.
-    sql_location: ?RetrievalResultSqlLocation,
+    sql_location: ?RetrievalResultSqlLocation = null,
 
     /// The type of data source location.
     @"type": RetrievalResultLocationType,
 
     /// The web URL/URLs data source location.
-    web_location: ?RetrievalResultWebLocation,
+    web_location: ?RetrievalResultWebLocation = null,
 
     pub const json_field_names = .{
         .confluence_location = "confluenceLocation",

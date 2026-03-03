@@ -20,7 +20,7 @@ pub const ListGeofenceResponseEntry = struct {
     /// geofence.
     ///
     /// Format: `"key" : "value"`
-    geofence_properties: ?[]const aws.map.StringMapEntry,
+    geofence_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// Contains the geofence geometry details describing the position of the
     /// geofence. Can be a circle, a polygon, or a multipolygon.

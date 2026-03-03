@@ -13,7 +13,7 @@ pub const AutomatedReasoningPolicyBuildWorkflowDocument = struct {
 
     /// A detailed description of the document's content and how it should be used
     /// in the policy generation process.
-    document_description: ?[]const u8,
+    document_description: ?[]const u8 = null,
 
     /// A descriptive name for the document that helps identify its purpose and
     /// content.

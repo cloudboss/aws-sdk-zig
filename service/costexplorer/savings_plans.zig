@@ -5,26 +5,26 @@ const TermInYears = @import("term_in_years.zig").TermInYears;
 /// The Savings Plans commitment details.
 pub const SavingsPlans = struct {
     /// The instance family of the Savings Plans commitment.
-    instance_family: ?[]const u8,
+    instance_family: ?[]const u8 = null,
 
     /// The unique ID that's used to distinguish Savings Plans commitments from one
     /// another.
-    offering_id: ?[]const u8,
+    offering_id: ?[]const u8 = null,
 
     /// The payment option for the Savings Plans commitment.
-    payment_option: ?PaymentOption,
+    payment_option: ?PaymentOption = null,
 
     /// The Region associated with the Savings Plans commitment.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The Savings Plans commitment.
-    savings_plans_commitment: ?f64,
+    savings_plans_commitment: ?f64 = null,
 
     /// The Savings Plans type.
-    savings_plans_type: ?SupportedSavingsPlansType,
+    savings_plans_type: ?SupportedSavingsPlansType = null,
 
     /// The term that you want the Savings Plans commitment for.
-    term_in_years: ?TermInYears,
+    term_in_years: ?TermInYears = null,
 
     pub const json_field_names = .{
         .instance_family = "InstanceFamily",

@@ -25,10 +25,10 @@ const GenderType = @import("gender_type.zig").GenderType;
 /// individual's rights, privacy, or access to services.
 pub const Gender = struct {
     /// Level of confidence in the prediction.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// The predicted gender of the face.
-    value: ?GenderType,
+    value: ?GenderType = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",

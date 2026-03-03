@@ -3,7 +3,7 @@
 /// specified metric.
 pub const AutoMLResult = struct {
     /// The Amazon Resource Name (ARN) of the best recipe.
-    best_recipe_arn: ?[]const u8,
+    best_recipe_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .best_recipe_arn = "bestRecipeArn",

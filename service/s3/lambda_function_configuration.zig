@@ -9,9 +9,9 @@ pub const LambdaFunctionConfiguration = struct {
     /// the *Amazon S3 User Guide*.
     events: []const Event,
 
-    filter: ?NotificationConfigurationFilter,
+    filter: ?NotificationConfigurationFilter = null,
 
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Lambda function that Amazon S3 invokes
     /// when the specified event

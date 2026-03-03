@@ -3,13 +3,13 @@ const AmazonRedshiftNodeData = @import("amazon_redshift_node_data.zig").AmazonRe
 /// Specifies an Amazon Redshift target.
 pub const AmazonRedshiftTarget = struct {
     /// Specifies the data of the Amazon Redshift target node.
-    data: ?AmazonRedshiftNodeData,
+    data: ?AmazonRedshiftNodeData = null,
 
     /// The nodes that are inputs to the data target.
-    inputs: ?[]const []const u8,
+    inputs: ?[]const []const u8 = null,
 
     /// The name of the Amazon Redshift target.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data = "Data",

@@ -16,7 +16,7 @@ pub const Highlight = struct {
     top_answer: bool = false,
 
     /// The highlight type.
-    @"type": ?HighlightType,
+    @"type": ?HighlightType = null,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",

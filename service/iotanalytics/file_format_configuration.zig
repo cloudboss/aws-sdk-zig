@@ -9,10 +9,10 @@ const ParquetConfiguration = @import("parquet_configuration.zig").ParquetConfigu
 /// You can't change the file format after you create the data store.
 pub const FileFormatConfiguration = struct {
     /// Contains the configuration information of the JSON format.
-    json_configuration: ?JsonConfiguration,
+    json_configuration: ?JsonConfiguration = null,
 
     /// Contains the configuration information of the Parquet format.
-    parquet_configuration: ?ParquetConfiguration,
+    parquet_configuration: ?ParquetConfiguration = null,
 
     pub const json_field_names = .{
         .json_configuration = "jsonConfiguration",

@@ -5,7 +5,7 @@ pub const StepFunctionsAction = struct {
     /// prefix followed by a UUID. Step Functions automatically creates a unique
     /// name for each state
     /// machine execution if one is not provided.
-    execution_name_prefix: ?[]const u8,
+    execution_name_prefix: ?[]const u8 = null,
 
     /// The ARN of the role that grants IoT permission to start execution of a state
     /// machine

@@ -4,13 +4,13 @@ const ManagedResourceStatus = @import("managed_resource_status.zig").ManagedReso
 /// policy.
 pub const ManagedMetricAlarm = struct {
     /// The Amazon Resource Name (ARN) of the CloudWatch metric alarm.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The status of the CloudWatch metric alarm.
     status: ManagedResourceStatus,
 
     /// Information about why the CloudWatch metric alarm is in the current status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The Unix timestamp for when the CloudWatch metric alarm was last updated.
     updated_at: i64,

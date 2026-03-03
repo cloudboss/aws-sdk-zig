@@ -12,7 +12,7 @@
 /// * stuffed
 pub const EnumerationValue = struct {
     /// Additional values related to the slot type value.
-    synonyms: ?[]const []const u8,
+    synonyms: ?[]const []const u8 = null,
 
     /// The value of the slot type.
     value: []const u8,

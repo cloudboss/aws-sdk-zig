@@ -8,33 +8,33 @@ const ResourceState = @import("resource_state.zig").ResourceState;
 pub const TableStatus = struct {
     /// Indicates which action was called on the table, currently only `CREATE` or
     /// `UPDATE`.
-    action: ?ResourceAction,
+    action: ?ResourceAction = null,
 
     /// A `StatusDetails` object with information about the requested change.
     details: ?*StatusDetails = null,
 
     /// An error that will only appear when the state is "FAILED". This is a parent
     /// level exception message, there may be different `Error`s for each dialect.
-    @"error": ?ErrorDetail,
+    @"error": ?ErrorDetail = null,
 
     /// The ARN of the user who requested the asynchronous change.
-    requested_by: ?[]const u8,
+    requested_by: ?[]const u8 = null,
 
     /// An ISO 8601 formatted date string indicating the time that the change was
     /// initiated.
-    request_time: ?i64,
+    request_time: ?i64 = null,
 
     /// A generic status for the change in progress, such as QUEUED, IN_PROGRESS,
     /// SUCCESS, or FAILED.
-    state: ?ResourceState,
+    state: ?ResourceState = null,
 
     /// The ARN of the user to last manually alter the asynchronous change
     /// (requesting cancellation, etc).
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     /// An ISO 8601 formatted date string indicating the time that the state was
     /// last updated.
-    update_time: ?i64,
+    update_time: ?i64 = null,
 
     pub const json_field_names = .{
         .action = "Action",

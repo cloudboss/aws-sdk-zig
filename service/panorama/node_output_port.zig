@@ -3,13 +3,13 @@ const PortType = @import("port_type.zig").PortType;
 /// A node output port.
 pub const NodeOutputPort = struct {
     /// The output port's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The output port's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The output port's type.
-    @"type": ?PortType,
+    @"type": ?PortType = null,
 
     pub const json_field_names = .{
         .description = "Description",

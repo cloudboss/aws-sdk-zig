@@ -4,7 +4,7 @@ pub const AccountReceiver = struct {
     /// Represents the alias of the partner account receiving the Engagement
     /// Invitation, making it easier to identify and track the recipient in reports
     /// or logs.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// Indicates the AWS account ID of the partner who received the Engagement
     /// Invitation. This is a unique identifier for managing engagements with

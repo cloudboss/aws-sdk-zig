@@ -8,10 +8,10 @@ const RouteTruckType = @import("route_truck_type.zig").RouteTruckType;
 pub const RouteViolatedConstraints = struct {
     /// This restriction applies to truck cargo, where the resulting route excludes
     /// roads on which hazardous materials are prohibited from being transported.
-    all_hazards_restricted: ?bool,
+    all_hazards_restricted: ?bool = null,
 
     /// Total number of axles of the vehicle.
-    axle_count: ?RouteNoticeDetailRange,
+    axle_count: ?RouteNoticeDetailRange = null,
 
     /// List of Hazardous cargo contained in the vehicle.
     hazardous_cargos: []const RouteHazardousCargoType,
@@ -35,7 +35,7 @@ pub const RouteViolatedConstraints = struct {
     /// The maximum weight of the route.
     ///
     /// **Unit**: `Kilograms`
-    max_weight: ?RouteWeightConstraint,
+    max_weight: ?RouteWeightConstraint = null,
 
     /// The maximum weight per axle of the vehicle.
     ///
@@ -45,7 +45,7 @@ pub const RouteViolatedConstraints = struct {
     /// The maximum weight per axle group of the vehicle.
     ///
     /// **Unit**: `Kilograms`
-    max_weight_per_axle_group: ?WeightPerAxleGroup,
+    max_weight_per_axle_group: ?WeightPerAxleGroup = null,
 
     /// The maximum width of the vehicle.
     max_width: i64 = 0,
@@ -53,30 +53,30 @@ pub const RouteViolatedConstraints = struct {
     /// The number of occupants in the vehicle.
     ///
     /// Default Value: `1`
-    occupancy: ?RouteNoticeDetailRange,
+    occupancy: ?RouteNoticeDetailRange = null,
 
     /// Access radius restrictions based on time.
-    restricted_times: ?[]const u8,
+    restricted_times: ?[]const u8 = null,
 
     /// The time dependent constraint.
-    time_dependent: ?bool,
+    time_dependent: ?bool = null,
 
     /// Number of trailers attached to the vehicle.
     ///
     /// Default Value: `0`
-    trailer_count: ?RouteNoticeDetailRange,
+    trailer_count: ?RouteNoticeDetailRange = null,
 
     /// Travel mode corresponding to the leg.
-    travel_mode: ?bool,
+    travel_mode: ?bool = null,
 
     /// Truck road type identifiers. `BK1` through `BK4` apply only to Sweden.
     /// `A2,A4,B2,B4,C,D,ET2,ET4` apply only to Mexico.
     ///
     /// There are currently no other supported values as of 26th April 2024.
-    truck_road_type: ?[]const u8,
+    truck_road_type: ?[]const u8 = null,
 
     /// Type of the truck.
-    truck_type: ?RouteTruckType,
+    truck_type: ?RouteTruckType = null,
 
     /// The tunnel restriction code.
     ///
@@ -103,7 +103,7 @@ pub const RouteViolatedConstraints = struct {
     ///
     /// * *Risk Level*: Very high risk
     /// * *Restrictions*: Restricted tunnel
-    tunnel_restriction_code: ?[]const u8,
+    tunnel_restriction_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .all_hazards_restricted = "AllHazardsRestricted",

@@ -15,11 +15,11 @@ pub const ExportFilterPropertyAttributes = struct {
     /// (e.g. one vertex has "height" stored as a double, and another edge has it
     /// stored as a string), the type will be of Any type, otherwise, it will be the
     /// type of the property as present in vertices.
-    output_type: ?[]const u8,
+    output_type: ?[]const u8 = null,
 
     /// The name of the property as it exists in the original graph data. If not
     /// provided, it is assumed that the key matches the desired sourcePropertyName.
-    source_property_name: ?[]const u8,
+    source_property_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .multi_value_handling = "multiValueHandling",

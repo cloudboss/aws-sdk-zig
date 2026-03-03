@@ -9,7 +9,7 @@ pub const GuardrailPiiEntityFilter = struct {
 
     /// Indicates whether personally identifiable information (PII) that breaches
     /// the guardrail configuration is detected.
-    detected: ?bool,
+    detected: ?bool = null,
 
     /// The PII entity filter match.
     match: []const u8,

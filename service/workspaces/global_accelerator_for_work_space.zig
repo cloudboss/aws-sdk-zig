@@ -8,7 +8,7 @@ pub const GlobalAcceleratorForWorkSpace = struct {
     mode: AGAModeForWorkSpaceEnum,
 
     /// Indicates the preferred protocol for Global Accelerator.
-    preferred_protocol: ?AGAPreferredProtocolForWorkSpace,
+    preferred_protocol: ?AGAPreferredProtocolForWorkSpace = null,
 
     pub const json_field_names = .{
         .mode = "Mode",

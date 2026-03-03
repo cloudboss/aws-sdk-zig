@@ -3,7 +3,7 @@
 pub const AutomatedReasoningPolicyDefinitionTypeValue = struct {
     /// A human-readable description explaining what this type value represents and
     /// when it should be used.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The actual value or identifier for this type value.
     value: []const u8,

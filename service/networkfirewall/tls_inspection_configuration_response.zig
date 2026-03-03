@@ -8,26 +8,26 @@ const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 /// configuration. You can retrieve all objects for a TLS inspection
 /// configuration by calling `DescribeTLSInspectionConfiguration`.
 pub const TLSInspectionConfigurationResponse = struct {
-    certificate_authority: ?TlsCertificateData,
+    certificate_authority: ?TlsCertificateData = null,
 
     /// A list of the certificates associated with the TLS inspection configuration.
-    certificates: ?[]const TlsCertificateData,
+    certificates: ?[]const TlsCertificateData = null,
 
     /// A description of the TLS inspection configuration.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A complex type that contains the Amazon Web Services KMS encryption
     /// configuration settings for your TLS inspection configuration.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// The last time that the TLS inspection configuration was changed.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The number of firewall policies that use this TLS inspection configuration.
-    number_of_associations: ?i32,
+    number_of_associations: ?i32 = null,
 
     /// The key:value pairs to associate with the resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The Amazon Resource Name (ARN) of the TLS inspection configuration.
     tls_inspection_configuration_arn: []const u8,
@@ -45,7 +45,7 @@ pub const TLSInspectionConfigurationResponse = struct {
     /// TLSInspectionConfiguration. You can retrieve this for a TLS inspection
     /// configuration by calling DescribeTLSInspectionConfiguration and providing
     /// the TLS inspection configuration name and ARN.
-    tls_inspection_configuration_status: ?ResourceStatus,
+    tls_inspection_configuration_status: ?ResourceStatus = null,
 
     pub const json_field_names = .{
         .certificate_authority = "CertificateAuthority",

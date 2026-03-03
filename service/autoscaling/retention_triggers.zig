@@ -14,5 +14,5 @@ pub const RetentionTriggers = struct {
     ///
     /// Retained instances don't count toward desired capacity and remain until you
     /// call `TerminateInstanceInAutoScalingGroup`.
-    terminate_hook_abandon: ?RetentionAction,
+    terminate_hook_abandon: ?RetentionAction = null,
 };

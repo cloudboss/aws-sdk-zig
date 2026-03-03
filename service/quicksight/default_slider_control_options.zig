@@ -4,7 +4,7 @@ const SheetControlSliderType = @import("sheet_control_slider_type.zig").SheetCon
 /// The default options that correspond to the `Slider` filter control type.
 pub const DefaultSliderControlOptions = struct {
     /// The display options of a control.
-    display_options: ?SliderControlDisplayOptions,
+    display_options: ?SliderControlDisplayOptions = null,
 
     /// The larger value that is displayed at the right of the slider.
     maximum_value: f64 = 0,
@@ -21,7 +21,7 @@ pub const DefaultSliderControlOptions = struct {
     /// * `SINGLE_POINT`: Filter against(equals) a single data point.
     ///
     /// * `RANGE`: Filter data that is in a specified range.
-    @"type": ?SheetControlSliderType,
+    @"type": ?SheetControlSliderType = null,
 
     pub const json_field_names = .{
         .display_options = "DisplayOptions",

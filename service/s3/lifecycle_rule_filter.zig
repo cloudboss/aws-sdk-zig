@@ -8,13 +8,13 @@ const Tag = @import("tag.zig").Tag;
 /// objects in the
 /// bucket.
 pub const LifecycleRuleFilter = struct {
-    @"and": ?LifecycleRuleAndOperator,
+    @"and": ?LifecycleRuleAndOperator = null,
 
     /// Minimum object size to which the rule applies.
-    object_size_greater_than: ?i64,
+    object_size_greater_than: ?i64 = null,
 
     /// Maximum object size to which the rule applies.
-    object_size_less_than: ?i64,
+    object_size_less_than: ?i64 = null,
 
     /// Prefix identifying one or more objects to which the rule applies.
     ///
@@ -23,12 +23,12 @@ pub const LifecycleRuleFilter = struct {
     /// XML requests. For more information, see [
     /// XML related object key
     /// constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// This tag must exist in the object's tag set in order for the rule to apply.
     ///
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket
     /// lifecycle configurations.
-    tag: ?Tag,
+    tag: ?Tag = null,
 };

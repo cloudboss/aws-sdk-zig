@@ -2,7 +2,7 @@
 pub const CustomPluginFileDescription = struct {
     /// The hex-encoded MD5 checksum of the custom plugin file. You can use it to
     /// validate the file.
-    file_md_5: ?[]const u8,
+    file_md_5: ?[]const u8 = null,
 
     /// The size in bytes of the custom plugin file. You can use it to validate the
     /// file.

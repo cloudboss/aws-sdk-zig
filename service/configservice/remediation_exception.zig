@@ -6,10 +6,10 @@ pub const RemediationException = struct {
     config_rule_name: []const u8,
 
     /// The time when the remediation exception will be deleted.
-    expiration_time: ?i64,
+    expiration_time: ?i64 = null,
 
     /// An explanation of an remediation exception.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The ID of the resource (for example., sg-xxxxxx).
     resource_id: []const u8,

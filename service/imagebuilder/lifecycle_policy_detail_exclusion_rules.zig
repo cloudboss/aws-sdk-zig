@@ -7,12 +7,12 @@ pub const LifecyclePolicyDetailExclusionRules = struct {
     /// Lists configuration values that apply to AMIs that Image Builder should
     /// exclude
     /// from the lifecycle action.
-    amis: ?LifecyclePolicyDetailExclusionRulesAmis,
+    amis: ?LifecyclePolicyDetailExclusionRulesAmis = null,
 
     /// Contains a list of tags that Image Builder uses to skip lifecycle actions
     /// for Image Builder image
     /// resources that have them.
-    tag_map: ?[]const aws.map.StringMapEntry,
+    tag_map: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .amis = "amis",

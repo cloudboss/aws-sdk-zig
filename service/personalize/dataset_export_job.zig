@@ -12,40 +12,40 @@ const DatasetExportJobOutput = @import("dataset_export_job_output.zig").DatasetE
 pub const DatasetExportJob = struct {
     /// The creation date and time (in Unix time) of the dataset export
     /// job.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset to export.
-    dataset_arn: ?[]const u8,
+    dataset_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset export job.
-    dataset_export_job_arn: ?[]const u8,
+    dataset_export_job_arn: ?[]const u8 = null,
 
     /// If a dataset export job fails, provides the reason why.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The data to export, based on how you imported the data. You can choose
     /// to export `BULK` data that you imported using a dataset import
     /// job, `PUT` data that you imported incrementally (using the
     /// console, PutEvents, PutUsers and PutItems operations), or `ALL`
     /// for both types. The default value is `PUT`.
-    ingestion_mode: ?IngestionMode,
+    ingestion_mode: ?IngestionMode = null,
 
     /// The name of the export job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The path to the Amazon S3 bucket where the job's output is stored. For
     /// example:
     ///
     /// `s3://bucket-name/folder-name/`
-    job_output: ?DatasetExportJobOutput,
+    job_output: ?DatasetExportJobOutput = null,
 
     /// The date and time (in Unix time) the status of the dataset export job
     /// was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM service role that has
     /// permissions to add data to your output Amazon S3 bucket.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The status of the dataset export job.
     ///
@@ -53,7 +53,7 @@ pub const DatasetExportJob = struct {
     ///
     /// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
     /// FAILED
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

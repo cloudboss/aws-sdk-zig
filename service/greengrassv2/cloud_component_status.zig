@@ -6,7 +6,7 @@ const VendorGuidance = @import("vendor_guidance.zig").VendorGuidance;
 /// Contains the status of a component version in the IoT Greengrass service.
 pub const CloudComponentStatus = struct {
     /// The state of the component version.
-    component_state: ?CloudComponentState,
+    component_state: ?CloudComponentState = null,
 
     /// A dictionary of errors that communicate why the component version is in an
     /// error state.
@@ -15,12 +15,12 @@ pub const CloudComponentStatus = struct {
     /// `errors` contains the artifact's URI as a key, and the error message as the
     /// value
     /// for that key.
-    errors: ?[]const aws.map.StringMapEntry,
+    errors: ?[]const aws.map.StringMapEntry = null,
 
     /// A message that communicates details, such as errors, about the status of the
     /// component
     /// version.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The vendor guidance state for the component version. This state indicates
     /// whether
@@ -38,12 +38,12 @@ pub const CloudComponentStatus = struct {
     ///   you can't
     /// deploy it. If you have any existing deployments that specify this component
     /// version, those deployments will fail.
-    vendor_guidance: ?VendorGuidance,
+    vendor_guidance: ?VendorGuidance = null,
 
     /// A message that communicates details about the vendor guidance state
     /// of the component version. This message communicates why a component version
     /// is discontinued or deleted.
-    vendor_guidance_message: ?[]const u8,
+    vendor_guidance_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .component_state = "componentState",

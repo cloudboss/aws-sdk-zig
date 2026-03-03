@@ -3,10 +3,10 @@
 /// identified during target resolution.
 pub const TargetResourceTypeParameter = struct {
     /// A description of the parameter.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether the parameter is required.
-    required: ?bool,
+    required: ?bool = null,
 
     pub const json_field_names = .{
         .description = "description",

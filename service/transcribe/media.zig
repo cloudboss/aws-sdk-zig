@@ -18,7 +18,7 @@ pub const Media = struct {
     /// in the same Amazon Web Services Region where you're making your
     /// transcription
     /// request.
-    media_file_uri: ?[]const u8,
+    media_file_uri: ?[]const u8 = null,
 
     /// The Amazon S3 location of the media file you want to redact. For
     /// example:
@@ -36,7 +36,7 @@ pub const Media = struct {
     /// `RedactedMediaFileUri` produces a redacted audio file in addition to a
     /// redacted transcript. It is only supported for Call Analytics
     /// (`StartCallAnalyticsJob`) transcription requests.
-    redacted_media_file_uri: ?[]const u8,
+    redacted_media_file_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .media_file_uri = "MediaFileUri",

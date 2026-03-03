@@ -10,15 +10,15 @@ pub const HttpParameters = struct {
     /// The headers that need to be sent as part of request invoking the API Gateway
     /// API or
     /// EventBridge ApiDestination.
-    header_parameters: ?[]const aws.map.StringMapEntry,
+    header_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The path parameter values to be used to populate API Gateway API or
     /// EventBridge ApiDestination path wildcards ("*").
-    path_parameter_values: ?[]const []const u8,
+    path_parameter_values: ?[]const []const u8 = null,
 
     /// The query string keys/values that need to be sent as part of request
     /// invoking the API Gateway API or EventBridge ApiDestination.
-    query_string_parameters: ?[]const aws.map.StringMapEntry,
+    query_string_parameters: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .header_parameters = "HeaderParameters",

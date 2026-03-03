@@ -10,13 +10,13 @@ const VoiceId = @import("voice_id.zig").VoiceId;
 /// synthesis task.
 pub const SynthesisTask = struct {
     /// Timestamp for the time the synthesis task was started.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Specifies the engine (`standard`, `neural`,
     /// `long-form` or `generative`) for Amazon Polly to use
     /// when processing input text for speech synthesis. Using a voice that
     /// is not supported for the engine selected will result in an error.
-    engine: ?Engine,
+    engine: ?Engine = null,
 
     /// Optional language code for a synthesis task. This is only necessary if
     /// using a bilingual voice, such as Aditi, which can be used for either
@@ -28,20 +28,20 @@ pub const SynthesisTask = struct {
     /// [DescribeVoices](https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html) operation for the `LanguageCode`
     /// parameter. For example, if no language code is specified, Aditi will use
     /// Indian English rather than Hindi.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// List of one or more pronunciation lexicon names you want the service
     /// to apply during synthesis. Lexicons are applied only if the language of
     /// the lexicon is the same as the language of the voice.
-    lexicon_names: ?[]const []const u8,
+    lexicon_names: ?[]const []const u8 = null,
 
     /// The format in which the returned output will be encoded. For audio
     /// stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will
     /// be json.
-    output_format: ?OutputFormat,
+    output_format: ?OutputFormat = null,
 
     /// Pathway for the output speech file.
-    output_uri: ?[]const u8,
+    output_uri: ?[]const u8 = null,
 
     /// Number of billable characters synthesized.
     request_characters: i32 = 0,
@@ -55,31 +55,31 @@ pub const SynthesisTask = struct {
     ///
     /// Valid values for pcm are "8000" and "16000" The default value is
     /// "16000".
-    sample_rate: ?[]const u8,
+    sample_rate: ?[]const u8 = null,
 
     /// ARN for the SNS topic optionally used for providing status
     /// notification for a speech synthesis task.
-    sns_topic_arn: ?[]const u8,
+    sns_topic_arn: ?[]const u8 = null,
 
     /// The type of speech marks returned for the input text.
-    speech_mark_types: ?[]const SpeechMarkType,
+    speech_mark_types: ?[]const SpeechMarkType = null,
 
     /// The Amazon Polly generated identifier for a speech synthesis task.
-    task_id: ?[]const u8,
+    task_id: ?[]const u8 = null,
 
     /// Current status of the individual speech synthesis task.
-    task_status: ?TaskStatus,
+    task_status: ?TaskStatus = null,
 
     /// Reason for the current status of a specific speech synthesis task,
     /// including errors if the task has failed.
-    task_status_reason: ?[]const u8,
+    task_status_reason: ?[]const u8 = null,
 
     /// Specifies whether the input text is plain text or SSML. The default
     /// value is plain text.
-    text_type: ?TextType,
+    text_type: ?TextType = null,
 
     /// Voice ID to use for the synthesis.
-    voice_id: ?VoiceId,
+    voice_id: ?VoiceId = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

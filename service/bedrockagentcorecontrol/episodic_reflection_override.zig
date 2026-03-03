@@ -10,7 +10,7 @@ pub const EpisodicReflectionOverride = struct {
 
     /// The namespaces over which reflections were created. Can be less nested than
     /// the episodic namespaces.
-    namespaces: ?[]const []const u8,
+    namespaces: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .append_to_prompt = "appendToPrompt",

@@ -6,5 +6,5 @@ const S3KeyFilter = @import("s3_key_filter.zig").S3KeyFilter;
 /// filtering](https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-filtering.html) in the
 /// *Amazon S3 User Guide*.
 pub const NotificationConfigurationFilter = struct {
-    key: ?S3KeyFilter,
+    key: ?S3KeyFilter = null,
 };

@@ -12,7 +12,7 @@ pub const TemplateSummary = struct {
     /// Defines tag propagation configuration for resources created within a domain.
     /// Tags specified here will be automatically applied to resources being created
     /// for the specified resource type.
-    tag_propagation_configurations: ?[]const TagPropagationConfiguration,
+    tag_propagation_configurations: ?[]const TagPropagationConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the template.
     template_arn: []const u8,

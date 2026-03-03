@@ -10,7 +10,7 @@ pub const RuleTriggerEventSource = struct {
     event_source_name: EventSourceName,
 
     /// The identifier for the integration association.
-    integration_association_id: ?[]const u8,
+    integration_association_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .event_source_name = "EventSourceName",

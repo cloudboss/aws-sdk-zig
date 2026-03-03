@@ -5,10 +5,10 @@ const CheckType = @import("check_type.zig").CheckType;
 /// VMware VCF licensing compliance.
 pub const Check = struct {
     /// The time when environment health began to be impaired.
-    impaired_since: ?i64,
+    impaired_since: ?i64 = null,
 
     /// The check result.
-    result: ?CheckResult,
+    result: ?CheckResult = null,
 
     /// The check type. Amazon EVS performs the following checks.
     ///
@@ -27,7 +27,7 @@ pub const Check = struct {
     /// If this check fails, you will need to add hosts so that your environment
     /// meets this minimum requirement. Amazon EVS only supports environments with
     /// 4-16 hosts.
-    @"type": ?CheckType,
+    @"type": ?CheckType = null,
 
     pub const json_field_names = .{
         .impaired_since = "impairedSince",

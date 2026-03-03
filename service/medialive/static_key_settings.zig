@@ -3,7 +3,7 @@ const InputLocation = @import("input_location.zig").InputLocation;
 /// Static Key Settings
 pub const StaticKeySettings = struct {
     /// The URL of the license server used for protecting content.
-    key_provider_server: ?InputLocation,
+    key_provider_server: ?InputLocation = null,
 
     /// Static key value as a 32 character hexadecimal string.
     static_key_value: []const u8,

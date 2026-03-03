@@ -4,7 +4,7 @@
 pub const DBClusterRole = struct {
     /// The Amazon Resource Name (ARN) of the IAMrole that is associated with the DB
     /// cluster.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Describes the state of association between the IAMrole and the cluster. The
     /// `Status` property returns one of the following values:
@@ -17,5 +17,5 @@ pub const DBClusterRole = struct {
     /// * `INVALID` - The IAMrole ARN is associated with the cluster, but the
     ///   cluster cannot assume the IAMrole to access other Amazon Web Services
     ///   services on your behalf.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 };

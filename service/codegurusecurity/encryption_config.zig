@@ -3,7 +3,7 @@
 pub const EncryptionConfig = struct {
     /// The KMS key ARN that is used for encryption. If an AWS-managed key is used
     /// for encryption, returns empty.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .kms_key_arn = "kmsKeyArn",

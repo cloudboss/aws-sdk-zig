@@ -3,19 +3,19 @@
 /// given severity.
 pub const FindingMetricsValuePerSeverity = struct {
     /// A numeric value corresponding to a critical finding.
-    critical: ?f64,
+    critical: ?f64 = null,
 
     /// A numeric value corresponding to a high severity finding.
-    high: ?f64,
+    high: ?f64 = null,
 
     /// A numeric value corresponding to an informational finding.
-    info: ?f64,
+    info: ?f64 = null,
 
     /// A numeric value corresponding to a low severity finding.
-    low: ?f64,
+    low: ?f64 = null,
 
     /// A numeric value corresponding to a medium severity finding.
-    medium: ?f64,
+    medium: ?f64 = null,
 
     pub const json_field_names = .{
         .critical = "critical",

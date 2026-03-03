@@ -1,11 +1,11 @@
 /// An IAM role associated with the DB instance.
 pub const AwsRdsDbInstanceAssociatedRole = struct {
     /// The name of the feature associated with the IAM role.
-    feature_name: ?[]const u8,
+    feature_name: ?[]const u8 = null,
 
     /// The ARN of the IAM role that is associated with the DB
     /// instance.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Describes the state of the association between the IAM role and the DB
     /// instance. The
@@ -21,7 +21,7 @@ pub const AwsRdsDbInstanceAssociatedRole = struct {
     /// the DB instance is unable to assume the IAM role in order to access other
     /// Amazon Web Services
     /// services on your behalf.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .feature_name = "FeatureName",

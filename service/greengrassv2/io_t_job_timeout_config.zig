@@ -8,7 +8,7 @@ pub const IoTJobTimeoutConfig = struct {
     /// `TIMED_OUT`.
     ///
     /// The timeout interval must be between 1 minute and 7 days (10080 minutes).
-    in_progress_timeout_in_minutes: ?i64,
+    in_progress_timeout_in_minutes: ?i64 = null,
 
     pub const json_field_names = .{
         .in_progress_timeout_in_minutes = "inProgressTimeoutInMinutes",

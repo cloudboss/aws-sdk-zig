@@ -10,7 +10,7 @@ pub const NFSOnDeviceServiceConfiguration = struct {
     /// The scale unit of the NFS storage on the device.
     ///
     /// Valid values: TB.
-    storage_unit: ?StorageUnit,
+    storage_unit: ?StorageUnit = null,
 
     pub const json_field_names = .{
         .storage_limit = "StorageLimit",

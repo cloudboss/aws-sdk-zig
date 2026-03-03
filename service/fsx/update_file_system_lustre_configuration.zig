@@ -40,14 +40,14 @@ pub const UpdateFileSystemLustreConfiguration = struct {
     ///
     /// This parameter is not supported for file systems with a data repository
     /// association.
-    auto_import_policy: ?AutoImportPolicyType,
+    auto_import_policy: ?AutoImportPolicyType = null,
 
     /// The number of days to retain automatic backups. Setting this property to
     /// `0` disables automatic backups. You can retain automatic backups for a
     /// maximum of 90 days. The default is `0`.
-    automatic_backup_retention_days: ?i32,
+    automatic_backup_retention_days: ?i32 = null,
 
-    daily_automatic_backup_start_time: ?[]const u8,
+    daily_automatic_backup_start_time: ?[]const u8 = null,
 
     /// Sets the data compression configuration for the file system.
     /// `DataCompressionType`
@@ -64,24 +64,24 @@ pub const UpdateFileSystemLustreConfiguration = struct {
     ///
     /// For more information, see [Lustre data
     /// compression](https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html).
-    data_compression_type: ?DataCompressionType,
+    data_compression_type: ?DataCompressionType = null,
 
     /// Specifies the optional provisioned SSD read cache on Amazon FSx for Lustre
     /// file systems that
     /// use the Intelligent-Tiering storage class.
-    data_read_cache_configuration: ?LustreReadCacheConfiguration,
+    data_read_cache_configuration: ?LustreReadCacheConfiguration = null,
 
     /// The Lustre logging configuration used when updating an Amazon FSx for Lustre
     /// file system. When logging is enabled, Lustre logs error and warning events
     /// for
     /// data repositories associated with your file system to Amazon CloudWatch
     /// Logs.
-    log_configuration: ?LustreLogCreateConfiguration,
+    log_configuration: ?LustreLogCreateConfiguration = null,
 
     /// The Lustre metadata performance configuration for an Amazon FSx for Lustre
     /// file system using a `PERSISTENT_2` deployment type. When this configuration
     /// is enabled, the file system supports increasing metadata performance.
-    metadata_configuration: ?UpdateFileSystemLustreMetadataConfiguration,
+    metadata_configuration: ?UpdateFileSystemLustreMetadataConfiguration = null,
 
     /// The throughput of an Amazon FSx for Lustre Persistent SSD-based file system,
     /// measured in megabytes per second per tebibyte (MB/s/TiB). You can increase
@@ -100,27 +100,27 @@ pub const UpdateFileSystemLustreConfiguration = struct {
     /// [
     /// Managing throughput
     /// capacity](https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-throughput-capacity.html).
-    per_unit_storage_throughput: ?i32,
+    per_unit_storage_throughput: ?i32 = null,
 
     /// The Lustre root squash configuration used when updating an Amazon FSx for
     /// Lustre
     /// file system. When enabled, root squash restricts root-level access from
     /// clients that
     /// try to access your file system as a root user.
-    root_squash_configuration: ?LustreRootSquashConfiguration,
+    root_squash_configuration: ?LustreRootSquashConfiguration = null,
 
     /// The throughput of an Amazon FSx for Lustre file system using an
     /// Intelligent-Tiering
     /// storage class, measured in megabytes per second (MBps). You can only
     /// increase your file
     /// system's throughput. Valid values are 4000 MBps or multiples of 4000 MBps.
-    throughput_capacity: ?i32,
+    throughput_capacity: ?i32 = null,
 
     /// (Optional) The preferred start time to perform weekly maintenance, formatted
     /// d:HH:MM in the UTC
     /// time zone. d is the weekday number, from 1 through 7, beginning with Monday
     /// and ending with Sunday.
-    weekly_maintenance_start_time: ?[]const u8,
+    weekly_maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_import_policy = "AutoImportPolicy",

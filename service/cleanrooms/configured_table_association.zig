@@ -3,7 +3,7 @@ const ConfiguredTableAssociationAnalysisRuleType = @import("configured_table_ass
 /// A configured table association links a configured table to a collaboration.
 pub const ConfiguredTableAssociation = struct {
     /// The analysis rule types for the configured table association.
-    analysis_rule_types: ?[]const ConfiguredTableAssociationAnalysisRuleType,
+    analysis_rule_types: ?[]const ConfiguredTableAssociationAnalysisRuleType = null,
 
     /// The unique ARN for the configured table association.
     arn: []const u8,
@@ -18,7 +18,7 @@ pub const ConfiguredTableAssociation = struct {
     create_time: i64,
 
     /// A description of the configured table association.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique ID for the configured table association.
     id: []const u8,

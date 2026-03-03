@@ -3,7 +3,7 @@ const AssociationStatus = @import("association_status.zig").AssociationStatus;
 /// Describes an `ApiAssociation` object.
 pub const ApiAssociation = struct {
     /// The API ID.
-    api_id: ?[]const u8,
+    api_id: ?[]const u8 = null,
 
     /// Identifies the status of an association.
     ///
@@ -15,13 +15,13 @@ pub const ApiAssociation = struct {
     ///
     /// * **FAILED**: The API association has failed. You
     /// can modify associations after failure.
-    association_status: ?AssociationStatus,
+    association_status: ?AssociationStatus = null,
 
     /// Details about the last deployment status.
-    deployment_detail: ?[]const u8,
+    deployment_detail: ?[]const u8 = null,
 
     /// The domain name.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_id = "apiId",

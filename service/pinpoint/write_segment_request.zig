@@ -8,15 +8,15 @@ const SegmentGroupList = @import("segment_group_list.zig").SegmentGroupList;
 /// SegmentGroups object, but not both.
 pub const WriteSegmentRequest = struct {
     /// The criteria that define the dimensions for the segment.
-    dimensions: ?SegmentDimensions,
+    dimensions: ?SegmentDimensions = null,
 
     /// The name of the segment.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The segment group to use and the dimensions to apply to the group's base
     /// segments in order to build the segment. A segment group can consist of zero
     /// or more base segments. Your request can include only one segment group.
-    segment_groups: ?SegmentGroupList,
+    segment_groups: ?SegmentGroupList = null,
 
     /// As of **22-05-2023** tags has been deprecated for update operations. After
     /// this date any value in tags is not processed and an error code is not
@@ -26,7 +26,7 @@ pub const WriteSegmentRequest = struct {
     /// (Deprecated) A string-to-string map of key-value pairs that defines the tags
     /// to associate with the segment. Each tag consists of a required tag key and
     /// an associated tag value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",

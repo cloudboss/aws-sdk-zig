@@ -15,26 +15,26 @@ const GraphQLApiVisibility = @import("graph_ql_api_visibility.zig").GraphQLApiVi
 pub const GraphqlApi = struct {
     /// A list of additional authentication providers for the `GraphqlApi`
     /// API.
-    additional_authentication_providers: ?[]const AdditionalAuthenticationProvider,
+    additional_authentication_providers: ?[]const AdditionalAuthenticationProvider = null,
 
     /// The API ID.
-    api_id: ?[]const u8,
+    api_id: ?[]const u8 = null,
 
     /// The value that indicates whether the GraphQL API is a standard API
     /// (`GRAPHQL`) or merged API (`MERGED`).
-    api_type: ?GraphQLApiType,
+    api_type: ?GraphQLApiType = null,
 
     /// The Amazon Resource Name (ARN).
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The authentication type.
-    authentication_type: ?AuthenticationType,
+    authentication_type: ?AuthenticationType = null,
 
     /// The DNS records for the API.
-    dns: ?[]const aws.map.StringMapEntry,
+    dns: ?[]const aws.map.StringMapEntry = null,
 
     /// The `enhancedMetricsConfig` object.
-    enhanced_metrics_config: ?EnhancedMetricsConfig,
+    enhanced_metrics_config: ?EnhancedMetricsConfig = null,
 
     /// Sets the value of the GraphQL API to enable (`ENABLED`) or disable
     /// (`DISABLED`) introspection. If no value is provided, the introspection
@@ -46,13 +46,13 @@ pub const GraphqlApi = struct {
     ///
     /// For more information about introspection, see [GraphQL
     /// introspection](https://graphql.org/learn/introspection/).
-    introspection_config: ?GraphQLApiIntrospectionConfig,
+    introspection_config: ?GraphQLApiIntrospectionConfig = null,
 
     /// Configuration for Lambda function authorization.
-    lambda_authorizer_config: ?LambdaAuthorizerConfig,
+    lambda_authorizer_config: ?LambdaAuthorizerConfig = null,
 
     /// The Amazon CloudWatch Logs configuration.
-    log_config: ?LogConfig,
+    log_config: ?LogConfig = null,
 
     /// The Identity and Access Management service role ARN for a merged API. The
     /// AppSync
@@ -61,21 +61,21 @@ pub const GraphqlApi = struct {
     /// runtime and to prompt the `AUTO_MERGE` to update the merged API endpoint
     /// with
     /// the source API changes automatically.
-    merged_api_execution_role_arn: ?[]const u8,
+    merged_api_execution_role_arn: ?[]const u8 = null,
 
     /// The API name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The OpenID Connect configuration.
-    open_id_connect_config: ?OpenIDConnectConfig,
+    open_id_connect_config: ?OpenIDConnectConfig = null,
 
     /// The account owner of the GraphQL API.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The owner contact information for an API resource.
     ///
     /// This field accepts any string input with a length of 0 - 256 characters.
-    owner_contact: ?[]const u8,
+    owner_contact: ?[]const u8 = null,
 
     /// The maximum depth a query can have in a single request. Depth refers to the
     /// amount of
@@ -100,23 +100,23 @@ pub const GraphqlApi = struct {
     resolver_count_limit: i32 = 0,
 
     /// The tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The URIs.
-    uris: ?[]const aws.map.StringMapEntry,
+    uris: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Cognito user pool configuration.
-    user_pool_config: ?UserPoolConfig,
+    user_pool_config: ?UserPoolConfig = null,
 
     /// Sets the value of the GraphQL API to public (`GLOBAL`) or private
     /// (`PRIVATE`). If no value is provided, the visibility will be set to
     /// `GLOBAL` by default. This value cannot be changed once the API has been
     /// created.
-    visibility: ?GraphQLApiVisibility,
+    visibility: ?GraphQLApiVisibility = null,
 
     /// The ARN of the WAF access control list (ACL) associated with this
     /// `GraphqlApi`, if one exists.
-    waf_web_acl_arn: ?[]const u8,
+    waf_web_acl_arn: ?[]const u8 = null,
 
     /// A flag indicating whether to use X-Ray tracing for this
     /// `GraphqlApi`.

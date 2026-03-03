@@ -47,7 +47,7 @@ pub const IntegerParameterRange = struct {
     /// [Hyperparameter
     /// Scaling](http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
     /// One of the following values:
-    scaling_type: ?ScalingType,
+    scaling_type: ?ScalingType = null,
 
     pub const json_field_names = .{
         .max_value = "MaxValue",

@@ -4,12 +4,12 @@
 /// collaboration and management within the Engagement.
 pub const EngagementMemberSummary = struct {
     /// The official name of the member's company or organization.
-    company_name: ?[]const u8,
+    company_name: ?[]const u8 = null,
 
     /// The URL of the member company's website. This offers a way to find more
     /// information about the member organization and serves as an additional
     /// identifier.
-    website_url: ?[]const u8,
+    website_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .company_name = "CompanyName",

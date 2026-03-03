@@ -9,7 +9,7 @@ const Properties = @import("properties.zig").Properties;
 pub const ItemSource = struct {
     /// This is a dictionary of Asset Objects data associated with the Item that
     /// can be downloaded or streamed, each with a unique key.
-    assets: ?[]const aws.map.MapEntry(AssetValue),
+    assets: ?[]const aws.map.MapEntry(AssetValue) = null,
 
     /// The searchable date and time of the item, in UTC.
     date_time: i64,
@@ -21,7 +21,7 @@ pub const ItemSource = struct {
     id: []const u8,
 
     /// This field contains additional properties of the item.
-    properties: ?Properties,
+    properties: ?Properties = null,
 
     pub const json_field_names = .{
         .assets = "Assets",

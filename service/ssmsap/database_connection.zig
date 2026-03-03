@@ -3,13 +3,13 @@ const DatabaseConnectionMethod = @import("database_connection_method.zig").Datab
 /// The connection specifications for the database.
 pub const DatabaseConnection = struct {
     /// The IP address for connection.
-    connection_ip: ?[]const u8,
+    connection_ip: ?[]const u8 = null,
 
     /// The Amazon Resource Name of the connected SAP HANA database.
-    database_arn: ?[]const u8,
+    database_arn: ?[]const u8 = null,
 
     /// The method of connection.
-    database_connection_method: ?DatabaseConnectionMethod,
+    database_connection_method: ?DatabaseConnectionMethod = null,
 
     pub const json_field_names = .{
         .connection_ip = "ConnectionIp",

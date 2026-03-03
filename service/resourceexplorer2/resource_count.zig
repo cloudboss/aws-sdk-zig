@@ -12,13 +12,13 @@ pub const ResourceCount = struct {
     ///   that matches the query was counted.
     /// * If `False`, then the search reached the limit of 1,000 matching results,
     ///   and stopped counting.
-    complete: ?bool,
+    complete: ?bool = null,
 
     /// The number of resources that match the search query. This value can't exceed
     /// 1,000. If there are more than 1,000 resources that match the query, then
     /// only 1,000 are counted and the `Complete` field is set to false. We
     /// recommend that you refine your query to return a smaller number of results.
-    total_resources: ?i64,
+    total_resources: ?i64 = null,
 
     pub const json_field_names = .{
         .complete = "Complete",

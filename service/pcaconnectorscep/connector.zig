@@ -11,40 +11,40 @@ const ConnectorType = @import("connector_type.zig").ConnectorType;
 /// a complex type that contains the connector's configuration settings.
 pub const Connector = struct {
     /// The Amazon Resource Name (ARN) of the connector.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the certificate authority associated with
     /// the connector.
-    certificate_authority_arn: ?[]const u8,
+    certificate_authority_arn: ?[]const u8 = null,
 
     /// The date and time that the connector was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The connector's HTTPS public SCEP URL.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// Contains settings relevant to the mobile device management system that you
     /// chose for the connector. If you didn't configure `MobileDeviceManagement`,
     /// then the connector is for general-purpose use and this object is empty.
-    mobile_device_management: ?MobileDeviceManagement,
+    mobile_device_management: ?MobileDeviceManagement = null,
 
     /// Contains OpenID Connect (OIDC) parameters for use with Connector for SCEP
     /// for Microsoft Intune. For more information about using Connector for SCEP
     /// for Microsoft Intune, see [Using Connector for SCEP for Microsoft
     /// Intune](https://docs.aws.amazon.com/privateca/latest/userguide/scep-connector.htmlconnector-for-scep-intune.html).
-    open_id_configuration: ?OpenIdConfiguration,
+    open_id_configuration: ?OpenIdConfiguration = null,
 
     /// The connector's status.
-    status: ?ConnectorStatus,
+    status: ?ConnectorStatus = null,
 
     /// Information about why connector creation failed, if status is `FAILED`.
-    status_reason: ?ConnectorStatusReason,
+    status_reason: ?ConnectorStatusReason = null,
 
     /// The connector type.
-    @"type": ?ConnectorType,
+    @"type": ?ConnectorType = null,
 
     /// The date and time that the connector was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

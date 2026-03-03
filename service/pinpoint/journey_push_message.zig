@@ -10,7 +10,7 @@ pub const JourneyPushMessage = struct {
     ///
     /// This value doesn't apply to messages that are sent through the Amazon Device
     /// Messaging (ADM) service.
-    time_to_live: ?[]const u8,
+    time_to_live: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .time_to_live = "TimeToLive",

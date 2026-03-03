@@ -6,7 +6,7 @@ const ReportOutputConfiguration = @import("report_output_configuration.zig").Rep
 /// alarm states.
 pub const ReportConfiguration = struct {
     /// The output configuration for the report.
-    report_output: ?[]const ReportOutputConfiguration,
+    report_output: ?[]const ReportOutputConfiguration = null,
 
     pub const json_field_names = .{
         .report_output = "reportOutput",

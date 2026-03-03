@@ -5,17 +5,17 @@
 pub const S3Destination = struct {
     /// The name of the Amazon S3 bucket used as the destination of an export
     /// file.
-    bucket: ?[]const u8,
+    bucket: ?[]const u8 = null,
 
     /// The Amazon S3 bucket key of an export file.
     ///
     /// The key uniquely identifies the object, or export file, in the S3 bucket.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The Amazon S3 bucket key of a metadata file.
     ///
     /// The key uniquely identifies the object, or metadata file, in the S3 bucket.
-    metadata_key: ?[]const u8,
+    metadata_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

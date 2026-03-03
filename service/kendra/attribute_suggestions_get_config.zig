@@ -10,22 +10,22 @@ pub const AttributeSuggestionsGetConfig = struct {
     /// response. You can use additional fields to provide extra information in the
     /// response.
     /// Additional fields are not used to based suggestions on.
-    additional_response_attributes: ?[]const []const u8,
+    additional_response_attributes: ?[]const []const u8 = null,
 
     /// Filters the search results based on document fields/attributes.
-    attribute_filter: ?AttributeFilter,
+    attribute_filter: ?AttributeFilter = null,
 
     /// The list of document field/attribute keys or field names to use for query
     /// suggestions.
     /// If the content within any of the fields match what your user starts typing
     /// as their query,
     /// then the field content is returned as a query suggestion.
-    suggestion_attributes: ?[]const []const u8,
+    suggestion_attributes: ?[]const []const u8 = null,
 
     /// Applies user context filtering so that only users who are given access to
     /// certain
     /// documents see these document in their search results.
-    user_context: ?UserContext,
+    user_context: ?UserContext = null,
 
     pub const json_field_names = .{
         .additional_response_attributes = "AdditionalResponseAttributes",

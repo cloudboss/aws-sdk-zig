@@ -9,31 +9,31 @@ const LoadBalancerTypeEnum = @import("load_balancer_type_enum.zig").LoadBalancer
 /// Information about a load balancer.
 pub const LoadBalancer = struct {
     /// The subnets for the load balancer.
-    availability_zones: ?[]const AvailabilityZone,
+    availability_zones: ?[]const AvailabilityZone = null,
 
     /// The ID of the Amazon Route 53 hosted zone associated with the load balancer.
-    canonical_hosted_zone_id: ?[]const u8,
+    canonical_hosted_zone_id: ?[]const u8 = null,
 
     /// The date and time the load balancer was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// [Application Load Balancers on Outposts] The ID of the customer-owned
     /// address pool.
-    customer_owned_ipv_4_pool: ?[]const u8,
+    customer_owned_ipv_4_pool: ?[]const u8 = null,
 
     /// The public DNS name of the load balancer.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// [Network Load Balancers with UDP listeners] Indicates whether to use an IPv6
     /// prefix
     /// from each subnet for source NAT. The IP address type must be `dualstack`.
     /// The default value is `off`.
-    enable_prefix_for_ipv_6_source_nat: ?EnablePrefixForIpv6SourceNatEnum,
+    enable_prefix_for_ipv_6_source_nat: ?EnablePrefixForIpv6SourceNatEnum = null,
 
     /// Indicates whether to evaluate inbound security group rules for traffic sent
     /// to a
     /// Network Load Balancer through Amazon Web Services PrivateLink.
-    enforce_security_group_inbound_rules_on_private_link_traffic: ?[]const u8,
+    enforce_security_group_inbound_rules_on_private_link_traffic: ?[]const u8 = null,
 
     /// The type of IP addresses used for public or private connections by the
     /// subnets
@@ -47,17 +47,17 @@ pub const LoadBalancer = struct {
     /// [Network Load Balancers and Gateway Load Balancers] The possible values are
     /// `ipv4`
     /// (IPv4 addresses) and `dualstack` (IPv4 and IPv6 addresses).
-    ip_address_type: ?IpAddressType,
+    ip_address_type: ?IpAddressType = null,
 
     /// [Application Load Balancers] The IPAM pool in use by the load balancer, if
     /// configured.
-    ipam_pools: ?IpamPools,
+    ipam_pools: ?IpamPools = null,
 
     /// The Amazon Resource Name (ARN) of the load balancer.
-    load_balancer_arn: ?[]const u8,
+    load_balancer_arn: ?[]const u8 = null,
 
     /// The name of the load balancer.
-    load_balancer_name: ?[]const u8,
+    load_balancer_name: ?[]const u8 = null,
 
     /// The nodes of an Internet-facing load balancer have public IP addresses. The
     /// DNS name of an
@@ -74,17 +74,17 @@ pub const LoadBalancer = struct {
     /// Therefore, internal load balancers can route requests only from clients with
     /// access to the VPC
     /// for the load balancer.
-    scheme: ?LoadBalancerSchemeEnum,
+    scheme: ?LoadBalancerSchemeEnum = null,
 
     /// The IDs of the security groups for the load balancer.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// The state of the load balancer.
-    state: ?LoadBalancerState,
+    state: ?LoadBalancerState = null,
 
     /// The type of load balancer.
-    @"type": ?LoadBalancerTypeEnum,
+    @"type": ?LoadBalancerTypeEnum = null,
 
     /// The ID of the VPC for the load balancer.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

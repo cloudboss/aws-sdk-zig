@@ -8,12 +8,12 @@ pub const X12CodeListValidationRule = struct {
     /// Specifies a list of code values to add to the element's allowed values.
     /// These codes will be considered valid for the specified element in addition
     /// to the standard codes defined by the X12 specification.
-    codes_to_add: ?[]const []const u8,
+    codes_to_add: ?[]const []const u8 = null,
 
     /// Specifies a list of code values to remove from the element's allowed values.
     /// These codes will be considered invalid for the specified element, even if
     /// they are part of the standard codes defined by the X12 specification.
-    codes_to_remove: ?[]const []const u8,
+    codes_to_remove: ?[]const []const u8 = null,
 
     /// Specifies the four-digit element ID to which the code list modifications
     /// apply. This identifies which X12 element will have its allowed code values

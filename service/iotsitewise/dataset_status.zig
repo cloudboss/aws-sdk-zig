@@ -5,7 +5,7 @@ const DatasetState = @import("dataset_state.zig").DatasetState;
 /// The state is
 /// `ACTIVE` when ready to use.
 pub const DatasetStatus = struct {
-    @"error": ?ErrorDetails,
+    @"error": ?ErrorDetails = null,
 
     /// The current status of the dataset.
     state: DatasetState,

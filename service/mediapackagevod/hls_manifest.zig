@@ -11,13 +11,13 @@ pub const HlsManifest = struct {
     /// manifest.
     /// "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
     /// messages in the input source.
-    ad_markers: ?AdMarkers,
+    ad_markers: ?AdMarkers = null,
 
     /// When enabled, an I-Frame only stream will be included in the output.
-    include_iframe_only_stream: ?bool,
+    include_iframe_only_stream: ?bool = null,
 
     /// An optional string to include in the name of the manifest.
-    manifest_name: ?[]const u8,
+    manifest_name: ?[]const u8 = null,
 
     /// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
     /// inserted into manifests. Additionally, when an interval is specified
@@ -29,12 +29,12 @@ pub const HlsManifest = struct {
     /// of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming
     /// (HLS) input,
     /// it will be passed through to HLS output.
-    program_date_time_interval_seconds: ?i32,
+    program_date_time_interval_seconds: ?i32 = null,
 
     /// When enabled, the EXT-X-KEY tag will be repeated in output manifests.
-    repeat_ext_x_key: ?bool,
+    repeat_ext_x_key: ?bool = null,
 
-    stream_selection: ?StreamSelection,
+    stream_selection: ?StreamSelection = null,
 
     pub const json_field_names = .{
         .ad_markers = "AdMarkers",

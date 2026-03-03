@@ -6,30 +6,30 @@ const UserContext = @import("user_context.zig").UserContext;
 /// an association between a training job and a model.
 pub const AssociationSummary = struct {
     /// The type of the association.
-    association_type: ?AssociationEdgeType,
+    association_type: ?AssociationEdgeType = null,
 
-    created_by: ?UserContext,
+    created_by: ?UserContext = null,
 
     /// When the association was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the destination.
-    destination_arn: ?[]const u8,
+    destination_arn: ?[]const u8 = null,
 
     /// The name of the destination.
-    destination_name: ?[]const u8,
+    destination_name: ?[]const u8 = null,
 
     /// The destination type.
-    destination_type: ?[]const u8,
+    destination_type: ?[]const u8 = null,
 
     /// The ARN of the source.
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     /// The name of the source.
-    source_name: ?[]const u8,
+    source_name: ?[]const u8 = null,
 
     /// The source type.
-    source_type: ?[]const u8,
+    source_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_type = "AssociationType",

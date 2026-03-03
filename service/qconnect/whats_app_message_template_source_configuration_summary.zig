@@ -8,19 +8,19 @@ pub const WhatsAppMessageTemplateSourceConfigurationSummary = struct {
 
     /// The list of component mapping from WhatsApp template parameters to Message
     /// Template attributes.
-    components: ?[]const []const u8,
+    components: ?[]const []const u8 = null,
 
     /// The language of the WhatsApp template.
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// The name of the WhatsApp template.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The status of the message template.
-    status: ?WhatsAppSourceConfigurationStatus,
+    status: ?WhatsAppSourceConfigurationStatus = null,
 
     /// The status reason of the message template.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The ID of WhatsApp template.
     template_id: []const u8,

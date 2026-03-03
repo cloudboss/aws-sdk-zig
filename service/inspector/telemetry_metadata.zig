@@ -8,7 +8,7 @@ pub const TelemetryMetadata = struct {
 
     /// The data size of messages that the agent sends to the Amazon Inspector
     /// service.
-    data_size: ?i64,
+    data_size: ?i64 = null,
 
     /// A specific type of behavioral data that is collected by the agent.
     message_type: []const u8,

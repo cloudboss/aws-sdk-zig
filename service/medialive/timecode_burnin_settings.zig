@@ -10,7 +10,7 @@ pub const TimecodeBurninSettings = struct {
     position: TimecodeBurninPosition,
 
     /// Create a timecode burn-in prefix (optional)
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .font_size = "FontSize",

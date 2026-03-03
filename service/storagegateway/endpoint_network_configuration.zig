@@ -7,7 +7,7 @@ pub const EndpointNetworkConfiguration = struct {
     ///
     /// If multiple file systems are associated with this gateway, this field is
     /// required.
-    ip_addresses: ?[]const []const u8,
+    ip_addresses: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .ip_addresses = "IpAddresses",

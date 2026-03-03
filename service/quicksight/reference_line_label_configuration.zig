@@ -7,13 +7,13 @@ const ReferenceLineLabelVerticalPosition = @import("reference_line_label_vertica
 /// The label configuration of a reference line.
 pub const ReferenceLineLabelConfiguration = struct {
     /// The custom label configuration of the label in a reference line.
-    custom_label_configuration: ?ReferenceLineCustomLabelConfiguration,
+    custom_label_configuration: ?ReferenceLineCustomLabelConfiguration = null,
 
     /// The font color configuration of the label in a reference line.
-    font_color: ?[]const u8,
+    font_color: ?[]const u8 = null,
 
     /// The font configuration of the label in a reference line.
-    font_configuration: ?FontConfiguration,
+    font_configuration: ?FontConfiguration = null,
 
     /// The horizontal position configuration of the label in a reference line.
     /// Choose one of
@@ -24,10 +24,10 @@ pub const ReferenceLineLabelConfiguration = struct {
     /// * `CENTER`
     ///
     /// * `RIGHT`
-    horizontal_position: ?ReferenceLineLabelHorizontalPosition,
+    horizontal_position: ?ReferenceLineLabelHorizontalPosition = null,
 
     /// The value label configuration of the label in a reference line.
-    value_label_configuration: ?ReferenceLineValueLabelConfiguration,
+    value_label_configuration: ?ReferenceLineValueLabelConfiguration = null,
 
     /// The vertical position configuration of the label in a reference line. Choose
     /// one of the following options:
@@ -35,7 +35,7 @@ pub const ReferenceLineLabelConfiguration = struct {
     /// * `ABOVE`
     ///
     /// * `BELOW`
-    vertical_position: ?ReferenceLineLabelVerticalPosition,
+    vertical_position: ?ReferenceLineLabelVerticalPosition = null,
 
     pub const json_field_names = .{
         .custom_label_configuration = "CustomLabelConfiguration",

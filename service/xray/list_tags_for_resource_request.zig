@@ -3,7 +3,7 @@ pub const ListTagsForResourceRequest = struct {
     /// `NextToken` value returned with
     /// the current page of results as the value of this parameter to get the next
     /// page of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
     resource_arn: []const u8,

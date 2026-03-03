@@ -3,7 +3,7 @@ const ModelTypeEnum = @import("model_type_enum.zig").ModelTypeEnum;
 /// The model version.
 pub const ModelVersion = struct {
     /// The model version ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The model ID.
     model_id: []const u8,

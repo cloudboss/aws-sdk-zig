@@ -6,16 +6,16 @@ const SqlRunConfiguration = @import("sql_run_configuration.zig").SqlRunConfigura
 /// application.
 pub const RunConfiguration = struct {
     /// Describes the restore behavior of a restarting application.
-    application_restore_configuration: ?ApplicationRestoreConfiguration,
+    application_restore_configuration: ?ApplicationRestoreConfiguration = null,
 
     /// Describes the starting parameters for a Managed Service for Apache Flink
     /// application.
-    flink_run_configuration: ?FlinkRunConfiguration,
+    flink_run_configuration: ?FlinkRunConfiguration = null,
 
     /// Describes the starting parameters for a SQL-based Kinesis Data Analytics
     /// application
     /// application.
-    sql_run_configurations: ?[]const SqlRunConfiguration,
+    sql_run_configurations: ?[]const SqlRunConfiguration = null,
 
     pub const json_field_names = .{
         .application_restore_configuration = "ApplicationRestoreConfiguration",

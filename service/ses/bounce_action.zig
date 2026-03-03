@@ -23,7 +23,7 @@ pub const BounceAction = struct {
 
     /// The SMTP enhanced status code, as defined by [RFC
     /// 3463](https://tools.ietf.org/html/rfc3463).
-    status_code: ?[]const u8,
+    status_code: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the
     /// bounce action is
@@ -34,5 +34,5 @@ pub const BounceAction = struct {
     ///
     /// For more information about Amazon SNS topics, see the [Amazon SNS Developer
     /// Guide](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
-    topic_arn: ?[]const u8,
+    topic_arn: ?[]const u8 = null,
 };

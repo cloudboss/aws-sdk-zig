@@ -4,5 +4,5 @@ pub const IntegrationError = struct {
     error_code: []const u8,
 
     /// A message explaining the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 };

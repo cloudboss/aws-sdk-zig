@@ -19,10 +19,10 @@ pub const Destination = struct {
     /// source object.
     ///
     /// This is not supported by Amazon S3 on Outposts buckets.
-    access_control_translation: ?AccessControlTranslation,
+    access_control_translation: ?AccessControlTranslation = null,
 
     /// The destination bucket owner's account ID.
-    account: ?[]const u8,
+    account: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the access point for the destination
     /// bucket where you want
@@ -33,10 +33,10 @@ pub const Destination = struct {
     /// `SourceSelectionCriteria` is specified, you must specify this element.
     ///
     /// This is not supported by Amazon S3 on Outposts buckets.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// A container that specifies replication metrics-related settings.
-    metrics: ?Metrics,
+    metrics: ?Metrics = null,
 
     /// A container that specifies S3 Replication Time Control (S3 RTC) settings,
     /// including whether S3 RTC is enabled
@@ -45,7 +45,7 @@ pub const Destination = struct {
     /// specified together with a `Metrics` block.
     ///
     /// This is not supported by Amazon S3 on Outposts buckets.
-    replication_time: ?ReplicationTime,
+    replication_time: ?ReplicationTime = null,
 
     /// The storage class to use when replicating objects. All objects stored on S3
     /// on Outposts
@@ -53,5 +53,5 @@ pub const Destination = struct {
     /// `OUTPOSTS` storage class to create the object replicas.
     ///
     /// Values other than `OUTPOSTS` aren't supported by Amazon S3 on Outposts.
-    storage_class: ?ReplicationStorageClass,
+    storage_class: ?ReplicationStorageClass = null,
 };

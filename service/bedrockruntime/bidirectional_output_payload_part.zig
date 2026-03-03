@@ -2,7 +2,7 @@
 /// transcription.
 pub const BidirectionalOutputPayloadPart = struct {
     /// The speech output of the bidirectional stream.
-    bytes: ?[]const u8,
+    bytes: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bytes = "bytes",

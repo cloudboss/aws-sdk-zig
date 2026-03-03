@@ -11,17 +11,17 @@ pub const EvaluateDataQuality = struct {
     name: []const u8,
 
     /// The output of your data quality evaluation.
-    output: ?DQTransformOutput,
+    output: ?DQTransformOutput = null,
 
     /// Options to configure how your results are published.
-    publishing_options: ?DQResultsPublishingOptions,
+    publishing_options: ?DQResultsPublishingOptions = null,
 
     /// The ruleset for your data quality evaluation.
     ruleset: []const u8,
 
     /// Options to configure how your job will stop if your data quality evaluation
     /// fails.
-    stop_job_on_failure_options: ?DQStopJobOnFailureOptions,
+    stop_job_on_failure_options: ?DQStopJobOnFailureOptions = null,
 
     pub const json_field_names = .{
         .inputs = "Inputs",

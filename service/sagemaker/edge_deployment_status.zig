@@ -10,10 +10,10 @@ pub const EdgeDeploymentStatus = struct {
     edge_deployment_pending_in_stage: i32,
 
     /// The time when the deployment API started.
-    edge_deployment_stage_start_time: ?i64,
+    edge_deployment_stage_start_time: ?i64 = null,
 
     /// A detailed message about deployment status in current stage.
-    edge_deployment_status_message: ?[]const u8,
+    edge_deployment_status_message: ?[]const u8 = null,
 
     /// The number of edge devices with the successful deployment in the current
     /// stage.

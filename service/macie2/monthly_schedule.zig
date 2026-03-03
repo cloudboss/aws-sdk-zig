@@ -8,7 +8,7 @@ pub const MonthlySchedule = struct {
     /// specified day. For example, if this value is 31 and a month has only 30
     /// days, Macie doesn't run the job that month. To run the job every month,
     /// specify a value that's less than 29.
-    day_of_month: ?i32,
+    day_of_month: ?i32 = null,
 
     pub const json_field_names = .{
         .day_of_month = "dayOfMonth",

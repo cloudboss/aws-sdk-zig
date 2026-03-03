@@ -34,7 +34,7 @@ pub const Featurization = struct {
 
     /// An array of one `FeaturizationMethod` object that specifies the feature
     /// transformation method.
-    featurization_pipeline: ?[]const FeaturizationMethod,
+    featurization_pipeline: ?[]const FeaturizationMethod = null,
 
     pub const json_field_names = .{
         .attribute_name = "AttributeName",

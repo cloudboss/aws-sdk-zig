@@ -1,10 +1,10 @@
 /// Filters evaluation results based on start and end times.
 pub const TimeWindow = struct {
     /// The end time of an execution. The end time must be after the start date.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The start time of an execution.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .end_time = "EndTime",

@@ -5,7 +5,7 @@ pub const SourceResource = struct {
     /// A description that can be free-form text to record additional detail about
     /// the resource
     /// for clarity or later reference.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// This is the name that you want to use to identify the resource. If the
     /// resource is an
@@ -14,7 +14,7 @@ pub const SourceResource = struct {
     name: []const u8,
 
     /// A free-form description of the status of the resource.
-    status_detail: ?[]const u8,
+    status_detail: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

@@ -6,7 +6,7 @@ const TreeMapAggregatedFieldWells = @import("tree_map_aggregated_field_wells.zig
 /// the attributes can be defined.
 pub const TreeMapFieldWells = struct {
     /// The aggregated field wells of a tree map.
-    tree_map_aggregated_field_wells: ?TreeMapAggregatedFieldWells,
+    tree_map_aggregated_field_wells: ?TreeMapAggregatedFieldWells = null,
 
     pub const json_field_names = .{
         .tree_map_aggregated_field_wells = "TreeMapAggregatedFieldWells",

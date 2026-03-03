@@ -7,7 +7,7 @@ const JobManifestLocation = @import("job_manifest_location.zig").JobManifestLoca
 /// ManifestGenerator.
 pub const S3GeneratedManifestDescriptor = struct {
     /// The format of the generated manifest.
-    format: ?GeneratedManifestFormat,
+    format: ?GeneratedManifestFormat = null,
 
-    location: ?JobManifestLocation,
+    location: ?JobManifestLocation = null,
 };

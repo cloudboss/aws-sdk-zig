@@ -3,7 +3,7 @@ const EmailAddressInsightsConfidenceVerdict = @import("email_address_insights_co
 /// Contains the overall validation verdict for an email address.
 pub const EmailAddressInsightsVerdict = struct {
     /// The confidence level of the validation verdict.
-    confidence_verdict: ?EmailAddressInsightsConfidenceVerdict,
+    confidence_verdict: ?EmailAddressInsightsConfidenceVerdict = null,
 
     pub const json_field_names = .{
         .confidence_verdict = "ConfidenceVerdict",

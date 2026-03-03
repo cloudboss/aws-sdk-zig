@@ -11,7 +11,7 @@ const ProjectedMetric = @import("projected_metric.zig").ProjectedMetric;
 /// Agent](https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 pub const RecommendedOptionProjectedMetric = struct {
     /// An array of objects that describe a projected utilization metric.
-    projected_metrics: ?[]const ProjectedMetric,
+    projected_metrics: ?[]const ProjectedMetric = null,
 
     /// The rank of the recommendation option projected metric.
     ///
@@ -24,7 +24,7 @@ pub const RecommendedOptionProjectedMetric = struct {
     rank: i32 = 0,
 
     /// The recommended instance type.
-    recommended_instance_type: ?[]const u8,
+    recommended_instance_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .projected_metrics = "projectedMetrics",

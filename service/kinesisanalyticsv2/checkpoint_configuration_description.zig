@@ -10,7 +10,7 @@ pub const CheckpointConfigurationDescription = struct {
     /// the application will use a `CheckpointingEnabled` value of `true`, even if
     /// this value is set to
     /// another value using this API or in application code.
-    checkpointing_enabled: ?bool,
+    checkpointing_enabled: ?bool = null,
 
     /// Describes the interval in milliseconds between checkpoint operations.
     ///
@@ -18,7 +18,7 @@ pub const CheckpointConfigurationDescription = struct {
     /// the application will use a `CheckpointInterval` value of 60000, even if this
     /// value is set to another value
     /// using this API or in application code.
-    checkpoint_interval: ?i64,
+    checkpoint_interval: ?i64 = null,
 
     /// Describes whether the application uses the default checkpointing behavior in
     /// Managed Service for Apache Flink.
@@ -33,7 +33,7 @@ pub const CheckpointConfigurationDescription = struct {
     /// * **CheckpointInterval:** 60000
     ///
     /// * **MinPauseBetweenCheckpoints:** 5000
-    configuration_type: ?ConfigurationType,
+    configuration_type: ?ConfigurationType = null,
 
     /// Describes the minimum time in milliseconds after a checkpoint operation
     /// completes that a new checkpoint operation
@@ -43,7 +43,7 @@ pub const CheckpointConfigurationDescription = struct {
     /// the application will use a `MinPauseBetweenCheckpoints` value of 5000, even
     /// if this value is set using this
     /// API or in application code.
-    min_pause_between_checkpoints: ?i64,
+    min_pause_between_checkpoints: ?i64 = null,
 
     pub const json_field_names = .{
         .checkpointing_enabled = "CheckpointingEnabled",

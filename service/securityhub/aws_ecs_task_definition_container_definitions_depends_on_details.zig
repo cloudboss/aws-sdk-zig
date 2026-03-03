@@ -11,10 +11,10 @@ pub const AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails = struct {
     /// * `SUCCESS`
     ///
     /// * `START`
-    condition: ?[]const u8,
+    condition: ?[]const u8 = null,
 
     /// The name of the dependent container.
-    container_name: ?[]const u8,
+    container_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .condition = "Condition",

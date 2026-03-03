@@ -10,22 +10,22 @@ const UtilizationMetric = @import("utilization_metric.zig").UtilizationMetric;
 /// Describes an Amazon EC2 Auto Scaling group recommendation.
 pub const AutoScalingGroupRecommendation = struct {
     /// The Amazon Web Services account ID of the Amazon EC2 Auto Scaling group.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon EC2 Auto Scaling group.
-    auto_scaling_group_arn: ?[]const u8,
+    auto_scaling_group_arn: ?[]const u8 = null,
 
     /// The name of the Amazon EC2 Auto Scaling group.
-    auto_scaling_group_name: ?[]const u8,
+    auto_scaling_group_name: ?[]const u8 = null,
 
     /// An array of objects that describe the current configuration of the Amazon
     /// EC2 Auto Scaling
     /// group.
-    current_configuration: ?AutoScalingGroupConfiguration,
+    current_configuration: ?AutoScalingGroupConfiguration = null,
 
     /// Describes the GPU accelerator settings for the current instance type of the
     /// Amazon EC2 Auto Scaling group.
-    current_instance_gpu_info: ?GpuInfo,
+    current_instance_gpu_info: ?GpuInfo = null,
 
     /// The risk of the current Amazon EC2 Auto Scaling group not meeting the
     /// performance needs of
@@ -33,11 +33,11 @@ pub const AutoScalingGroupRecommendation = struct {
     /// Auto Scaling group
     /// configuration has insufficient capacity and cannot meet workload
     /// requirements.
-    current_performance_risk: ?CurrentPerformanceRisk,
+    current_performance_risk: ?CurrentPerformanceRisk = null,
 
     /// An object that describes the effective recommendation preferences for the
     /// Amazon EC2 Auto Scaling group.
-    effective_recommendation_preferences: ?EffectiveRecommendationPreferences,
+    effective_recommendation_preferences: ?EffectiveRecommendationPreferences = null,
 
     /// The finding classification of the Amazon EC2 Auto Scaling group.
     ///
@@ -58,7 +58,7 @@ pub const AutoScalingGroupRecommendation = struct {
     /// type.
     /// For optimized resources, Compute Optimizer might recommend a new generation
     /// instance type.
-    finding: ?Finding,
+    finding: ?Finding = null,
 
     /// The applications that might be running on the instances in the Amazon EC2
     /// Auto Scaling group
@@ -94,12 +94,12 @@ pub const AutoScalingGroupRecommendation = struct {
     ///
     /// * `SQLServer` - Infers that SQLServer might be running on the
     /// instance.
-    inferred_workload_types: ?[]const InferredWorkloadType,
+    inferred_workload_types: ?[]const InferredWorkloadType = null,
 
     /// The timestamp of when the Amazon EC2 Auto Scaling group recommendation was
     /// last
     /// generated.
-    last_refresh_timestamp: ?i64,
+    last_refresh_timestamp: ?i64 = null,
 
     /// The number of days for which utilization metrics were analyzed for the
     /// Amazon EC2 Auto Scaling group.
@@ -108,12 +108,12 @@ pub const AutoScalingGroupRecommendation = struct {
     /// An array of objects that describe the recommendation options for the Amazon
     /// EC2 Auto Scaling
     /// group.
-    recommendation_options: ?[]const AutoScalingGroupRecommendationOption,
+    recommendation_options: ?[]const AutoScalingGroupRecommendationOption = null,
 
     /// An array of objects that describe the utilization metrics of the Amazon EC2
     /// Auto Scaling
     /// group.
-    utilization_metrics: ?[]const UtilizationMetric,
+    utilization_metrics: ?[]const UtilizationMetric = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

@@ -32,7 +32,7 @@ pub const ClientSideAction = struct {
     /// and update it for your application's needs:
     ///
     /// `\/api\/|\.(acc|avi|css|gif|jpe?g|js|mp[34]|ogg|otf|pdf|png|tiff?|ttf|webm|webp|woff2?)$`
-    exempt_uri_regular_expressions: ?[]const Regex,
+    exempt_uri_regular_expressions: ?[]const Regex = null,
 
     /// The sensitivity that the rule group rule `ChallengeDDoSRequests` uses when
     /// matching against the
@@ -54,7 +54,7 @@ pub const ClientSideAction = struct {
     ///   low, medium, and high.
     ///
     /// Default: `HIGH`
-    sensitivity: ?SensitivityToAct,
+    sensitivity: ?SensitivityToAct = null,
 
     /// Determines whether to use the `AWSManagedRulesAntiDDoSRuleSet` rules
     /// `ChallengeAllDuringEvent` and `ChallengeDDoSRequests` in the rule group

@@ -1,7 +1,7 @@
 /// A system asset that's evaluated in an Audit Manager assessment.
 pub const Resource = struct {
     /// The Amazon Resource Name (ARN) for the resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The evaluation status for a resource that was assessed when collecting
     /// compliance check
@@ -25,10 +25,10 @@ pub const Resource = struct {
     /// data source type that doesn't support compliance checks (such as manual
     /// evidence,
     /// Amazon Web Services API calls, or CloudTrail).
-    compliance_check: ?[]const u8,
+    compliance_check: ?[]const u8 = null,
 
     /// The value of the resource.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

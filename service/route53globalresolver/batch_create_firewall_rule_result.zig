@@ -12,63 +12,63 @@ pub const BatchCreateFirewallRuleResult = struct {
 
     /// The DNS record type configured for the created firewall rule's custom
     /// response.
-    block_override_dns_type: ?BlockOverrideDnsQueryType,
+    block_override_dns_type: ?BlockOverrideDnsQueryType = null,
 
     /// The custom domain name configured for the created firewall rule's BLOCK
     /// response.
-    block_override_domain: ?[]const u8,
+    block_override_domain: ?[]const u8 = null,
 
     /// The TTL value configured for the created firewall rule's custom response.
-    block_override_ttl: ?i32,
+    block_override_ttl: ?i32 = null,
 
     /// The type of block response configured for the created firewall rule.
-    block_response: ?FirewallBlockResponse,
+    block_response: ?FirewallBlockResponse = null,
 
     /// The unique string that identified the request and ensured idempotency.
     client_token: []const u8,
 
     /// The confidence threshold configured for the created firewall rule's advanced
     /// threat detection.
-    confidence_threshold: ?ConfidenceThreshold,
+    confidence_threshold: ?ConfidenceThreshold = null,
 
     /// The date and time when the firewall rule was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of the created firewall rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether advanced DNS threat protection is enabled for the created firewall
     /// rule.
-    dns_advanced_protection: ?DnsAdvancedProtection,
+    dns_advanced_protection: ?DnsAdvancedProtection = null,
 
     /// The ID of the DNS view associated with the created firewall rule.
     dns_view_id: []const u8,
 
     /// The ID of the firewall domain list associated with the created firewall
     /// rule.
-    firewall_domain_list_id: ?[]const u8,
+    firewall_domain_list_id: ?[]const u8 = null,
 
     /// The unique identifier of the created firewall rule.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the managed domain list associated with the created firewall
     /// rule.
-    managed_domain_list_name: ?[]const u8,
+    managed_domain_list_name: ?[]const u8 = null,
 
     /// The name of the created firewall rule.
     name: []const u8,
 
     /// The priority of the created firewall rule.
-    priority: ?i64,
+    priority: ?i64 = null,
 
     /// The DNS query type that the created firewall rule matches.
-    query_type: ?[]const u8,
+    query_type: ?[]const u8 = null,
 
     /// The current status of the created firewall rule.
-    status: ?CRResourceStatus,
+    status: ?CRResourceStatus = null,
 
     /// The date and time when the firewall rule was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .action = "action",

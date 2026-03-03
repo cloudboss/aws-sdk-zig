@@ -117,22 +117,22 @@ pub const Block = struct {
     ///
     /// * `LAYOUT_TEXT` - Text that is present typically as a part of paragraphs in
     ///   documents.
-    block_type: ?BlockType,
+    block_type: ?BlockType = null,
 
     /// The column in which a table cell appears. The first column position is 1.
     /// `ColumnIndex` isn't returned by `DetectDocumentText` and
     /// `GetDocumentTextDetection`.
-    column_index: ?i32,
+    column_index: ?i32 = null,
 
     /// The number of columns that a table cell spans. `ColumnSpan` isn't returned
     /// by
     /// `DetectDocumentText` and `GetDocumentTextDetection`.
-    column_span: ?i32,
+    column_span: ?i32 = null,
 
     /// The confidence score that Amazon Textract has in the accuracy of the
     /// recognized text and
     /// the accuracy of the geometry points around the recognized text.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// The type of entity.
     ///
@@ -168,19 +168,19 @@ pub const Block = struct {
     ///
     /// `EntityTypes` isn't returned by `DetectDocumentText` and
     /// `GetDocumentTextDetection`.
-    entity_types: ?[]const EntityType,
+    entity_types: ?[]const EntityType = null,
 
     /// The location of the recognized text on the image. It includes an
     /// axis-aligned, coarse
     /// bounding box that surrounds the text, and a finer-grain polygon for more
     /// accurate spatial
     /// information.
-    geometry: ?Geometry,
+    geometry: ?Geometry = null,
 
     /// The identifier for the recognized text. The identifier is only unique for a
     /// single
     /// operation.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The page on which a block was detected. `Page` is returned by synchronous
     /// and
@@ -193,9 +193,9 @@ pub const Block = struct {
     /// single-page document. This means that for scanned images the value of `Page`
     /// is
     /// always 1.
-    page: ?i32,
+    page: ?i32 = null,
 
-    query: ?Query,
+    query: ?Query = null,
 
     /// A list of relationship objects that describe how blocks are related to each
     /// other. For
@@ -204,28 +204,28 @@ pub const Block = struct {
     /// make up the line of text. There aren't Relationship objects in the list for
     /// relationships
     /// that don't exist, such as when the current block has no child blocks.
-    relationships: ?[]const Relationship,
+    relationships: ?[]const Relationship = null,
 
     /// The row in which a table cell is located. The first row position is 1.
     /// `RowIndex` isn't returned by `DetectDocumentText` and
     /// `GetDocumentTextDetection`.
-    row_index: ?i32,
+    row_index: ?i32 = null,
 
     /// The number of rows that a table cell spans. `RowSpan` isn't returned by
     /// `DetectDocumentText` and `GetDocumentTextDetection`.
-    row_span: ?i32,
+    row_span: ?i32 = null,
 
     /// The selection status of a selection element, such as an option button or
     /// check box.
-    selection_status: ?SelectionStatus,
+    selection_status: ?SelectionStatus = null,
 
     /// The word or line of text that's recognized by Amazon Textract.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// The kind of text that Amazon Textract has detected. Can check for
     /// handwritten text and
     /// printed text.
-    text_type: ?TextType,
+    text_type: ?TextType = null,
 
     pub const json_field_names = .{
         .block_type = "BlockType",

@@ -13,21 +13,21 @@ pub const Build = struct {
     /// `arn:aws:gamelift:::build/build-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`. In a
     /// GameLift build ARN, the resource ID matches the
     /// *BuildId* value.
-    build_arn: ?[]const u8,
+    build_arn: ?[]const u8 = null,
 
     /// A unique identifier for the build.
-    build_id: ?[]const u8,
+    build_id: ?[]const u8 = null,
 
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A descriptive label that is associated with a build. Build names do not need
     /// to be unique. It can be set using
     /// [CreateBuild](https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateBuild.html) or
     /// [UpdateBuild](https://docs.aws.amazon.com/gamelift/latest/apireference/UpdateBuild).
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Operating system that the game server binaries are built to run on. This
     /// value
@@ -44,18 +44,18 @@ pub const Build = struct {
     /// [
     /// Migrate to server SDK version
     /// 5.](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html)
-    operating_system: ?OperatingSystem,
+    operating_system: ?OperatingSystem = null,
 
     /// The Amazon GameLift Servers Server SDK version used to develop your game
     /// server.
-    server_sdk_version: ?[]const u8,
+    server_sdk_version: ?[]const u8 = null,
 
     /// File size of the uploaded game build, expressed in bytes. When the build
     /// status is
     /// `INITIALIZED` or when using a custom Amazon S3 storage location, this value
     /// is
     /// 0.
-    size_on_disk: ?i64,
+    size_on_disk: ?i64 = null,
 
     /// Current status of the build.
     ///
@@ -73,11 +73,11 @@ pub const Build = struct {
     ///
     /// * **FAILED** -- The game build upload failed. You
     /// cannot create new fleets for this build.
-    status: ?BuildStatus,
+    status: ?BuildStatus = null,
 
     /// Version information that is associated with a build or script. Version
     /// strings do not need to be unique.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .build_arn = "BuildArn",

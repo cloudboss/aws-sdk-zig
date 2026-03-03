@@ -20,19 +20,19 @@ pub const LifecyclePolicy = struct {
     /// storage. Metadata operations such as listing the contents of a directory
     /// don't count as
     /// file access events.
-    transition_to_archive: ?TransitionToArchiveRules,
+    transition_to_archive: ?TransitionToArchiveRules = null,
 
     /// The number of days after files were last accessed in primary storage (the
     /// Standard storage class) at which to move them to Infrequent Access
     /// (IA) storage. Metadata operations such as listing the contents of a
     /// directory
     /// don't count as file access events.
-    transition_to_ia: ?TransitionToIARules,
+    transition_to_ia: ?TransitionToIARules = null,
 
     /// Whether to move files back to primary (Standard) storage after they are
     /// accessed in IA or Archive storage. Metadata operations such as
     /// listing the contents of a directory don't count as file access events.
-    transition_to_primary_storage_class: ?TransitionToPrimaryStorageClassRules,
+    transition_to_primary_storage_class: ?TransitionToPrimaryStorageClassRules = null,
 
     pub const json_field_names = .{
         .transition_to_archive = "TransitionToArchive",

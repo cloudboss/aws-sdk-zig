@@ -9,9 +9,9 @@ pub const AutomaticTapeCreationPolicyInfo = struct {
     /// This returns the rules that determine when and how to automatically create
     /// new
     /// tapes.
-    automatic_tape_creation_rules: ?[]const AutomaticTapeCreationRule,
+    automatic_tape_creation_rules: ?[]const AutomaticTapeCreationRule = null,
 
-    gateway_arn: ?[]const u8,
+    gateway_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .automatic_tape_creation_rules = "AutomaticTapeCreationRules",

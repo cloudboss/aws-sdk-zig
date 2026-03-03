@@ -10,7 +10,7 @@ pub const FormInputCard = struct {
     /// participants to submit the same form multiple times with different values. A
     /// compute mode of `replace`code> shall overwrite the current value for each
     /// participant.
-    compute_mode: ?InputCardComputeMode,
+    compute_mode: ?InputCardComputeMode = null,
 
     /// Any dependencies or requirements for the form input card.
     dependencies: []const []const u8,

@@ -8,10 +8,10 @@ pub const WorkflowExecutionFailedEventAttributes = struct {
     decision_task_completed_event_id: i64 = 0,
 
     /// The details of the failure.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// The descriptive reason provided for the failure.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .decision_task_completed_event_id = "decisionTaskCompletedEventId",

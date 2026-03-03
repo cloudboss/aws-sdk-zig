@@ -30,7 +30,7 @@ pub const AWSManagedRulesATPRuleSet = struct {
 
     /// The criteria for inspecting login requests, used by the ATP rule group to
     /// validate credentials usage.
-    request_inspection: ?RequestInspection,
+    request_inspection: ?RequestInspection = null,
 
     /// The criteria for inspecting responses to login requests, used by the ATP
     /// rule group to track login failure rates.
@@ -44,7 +44,7 @@ pub const AWSManagedRulesATPRuleSet = struct {
     /// rule group labels
     /// and mitigates requests from client sessions and IP addresses that have had
     /// too many failed login attempts in a short amount of time.
-    response_inspection: ?ResponseInspection,
+    response_inspection: ?ResponseInspection = null,
 
     pub const json_field_names = .{
         .enable_regex_in_path = "EnableRegexInPath",

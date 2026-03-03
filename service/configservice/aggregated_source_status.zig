@@ -5,15 +5,15 @@ const AggregatedSourceType = @import("aggregated_source_type.zig").AggregatedSou
 /// account.
 pub const AggregatedSourceStatus = struct {
     /// The region authorized to collect aggregated data.
-    aws_region: ?[]const u8,
+    aws_region: ?[]const u8 = null,
 
     /// The error code that Config returned when the source account
     /// aggregation last failed.
-    last_error_code: ?[]const u8,
+    last_error_code: ?[]const u8 = null,
 
     /// The message indicating that the source account aggregation
     /// failed due to an error.
-    last_error_message: ?[]const u8,
+    last_error_message: ?[]const u8 = null,
 
     /// Filters the last updated status type.
     ///
@@ -25,16 +25,16 @@ pub const AggregatedSourceStatus = struct {
     ///
     /// * Valid value OUTDATED indicates the data is not the most
     /// recent.
-    last_update_status: ?AggregatedSourceStatusType,
+    last_update_status: ?AggregatedSourceStatusType = null,
 
     /// The time of the last update.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The source account ID or an organization.
-    source_id: ?[]const u8,
+    source_id: ?[]const u8 = null,
 
     /// The source account or an organization.
-    source_type: ?AggregatedSourceType,
+    source_type: ?AggregatedSourceType = null,
 
     pub const json_field_names = .{
         .aws_region = "AwsRegion",

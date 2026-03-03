@@ -8,7 +8,7 @@ pub const KubernetesNetworkConfigRequest = struct {
     /// cluster. For more information, see EKS Auto Mode load balancing capability
     /// in the
     /// *Amazon EKS User Guide*.
-    elastic_load_balancing: ?ElasticLoadBalancing,
+    elastic_load_balancing: ?ElasticLoadBalancing = null,
 
     /// Specify which IP family is used to assign Kubernetes pod and service IP
     /// addresses. If you
@@ -30,7 +30,7 @@ pub const KubernetesNetworkConfigRequest = struct {
     /// specify
     /// a custom `IPv6` CIDR block. Pod addresses are assigned from the subnet's
     /// `IPv6` CIDR.
-    ip_family: ?IpFamily,
+    ip_family: ?IpFamily = null,
 
     /// Don't specify a value if you select `ipv6` for **ipFamily**. The CIDR block
     /// to assign Kubernetes service IP addresses from. If
@@ -54,7 +54,7 @@ pub const KubernetesNetworkConfigRequest = struct {
     /// You can only specify a custom CIDR block when you create a cluster. You
     /// can't
     /// change this value after the cluster is created.
-    service_ipv_4_cidr: ?[]const u8,
+    service_ipv_4_cidr: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .elastic_load_balancing = "elasticLoadBalancing",

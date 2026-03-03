@@ -8,10 +8,10 @@ pub const SensitiveDataConfiguration = struct {
     detection_mode: SensitiveDataDetectionMode,
 
     /// Scope of detection - what types of sensitive data to detect
-    detection_scope: ?[]const SensitiveDataDetectionScopeType,
+    detection_scope: ?[]const SensitiveDataDetectionScopeType = null,
 
     /// Configuration for PII entities detection and redaction
-    pii_entities_configuration: ?PIIEntitiesConfiguration,
+    pii_entities_configuration: ?PIIEntitiesConfiguration = null,
 
     pub const json_field_names = .{
         .detection_mode = "detectionMode",

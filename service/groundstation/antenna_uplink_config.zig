@@ -10,7 +10,7 @@ pub const AntennaUplinkConfig = struct {
     target_eirp: Eirp,
 
     /// Whether or not uplink transmit is disabled.
-    transmit_disabled: ?bool,
+    transmit_disabled: ?bool = null,
 
     pub const json_field_names = .{
         .spectrum_config = "spectrumConfig",

@@ -4,7 +4,7 @@ pub const MailDomainSummary = struct {
     default_domain: bool = false,
 
     /// The domain name.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .default_domain = "DefaultDomain",

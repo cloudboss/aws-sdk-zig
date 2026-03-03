@@ -11,22 +11,22 @@ const VCpuCountRange = @import("v_cpu_count_range.zig").VCpuCountRange;
 pub const ServiceManagedEc2InstanceCapabilities = struct {
     /// Describes the GPU accelerator capabilities required for worker host
     /// instances in this fleet.
-    accelerator_capabilities: ?AcceleratorCapabilities,
+    accelerator_capabilities: ?AcceleratorCapabilities = null,
 
     /// The allowable Amazon EC2 instance types.
-    allowed_instance_types: ?[]const []const u8,
+    allowed_instance_types: ?[]const []const u8 = null,
 
     /// The CPU architecture type.
     cpu_architecture_type: CpuArchitectureType,
 
     /// The custom capability amounts to require for instances in this fleet.
-    custom_amounts: ?[]const FleetAmountCapability,
+    custom_amounts: ?[]const FleetAmountCapability = null,
 
     /// The custom capability attributes to require for instances in this fleet.
-    custom_attributes: ?[]const FleetAttributeCapability,
+    custom_attributes: ?[]const FleetAttributeCapability = null,
 
     /// The instance types to exclude from the fleet.
-    excluded_instance_types: ?[]const []const u8,
+    excluded_instance_types: ?[]const []const u8 = null,
 
     /// The memory, as MiB, for the Amazon EC2 instance type.
     memory_mi_b: MemoryMiBRange,
@@ -35,7 +35,7 @@ pub const ServiceManagedEc2InstanceCapabilities = struct {
     os_family: ServiceManagedFleetOperatingSystemFamily,
 
     /// The root EBS volume.
-    root_ebs_volume: ?Ec2EbsVolume,
+    root_ebs_volume: ?Ec2EbsVolume = null,
 
     /// The amount of vCPU to require for instances in this fleet.
     v_cpu_count: VCpuCountRange,

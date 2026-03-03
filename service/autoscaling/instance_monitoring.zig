@@ -3,5 +3,5 @@
 pub const InstanceMonitoring = struct {
     /// If `true`, detailed monitoring is enabled. Otherwise, basic monitoring is
     /// enabled.
-    enabled: ?bool,
+    enabled: ?bool = null,
 };

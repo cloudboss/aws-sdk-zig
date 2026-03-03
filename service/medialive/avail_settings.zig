@@ -4,11 +4,11 @@ const Scte35TimeSignalApos = @import("scte_35_time_signal_apos.zig").Scte35TimeS
 
 /// Avail Settings
 pub const AvailSettings = struct {
-    esam: ?Esam,
+    esam: ?Esam = null,
 
-    scte_35_splice_insert: ?Scte35SpliceInsert,
+    scte_35_splice_insert: ?Scte35SpliceInsert = null,
 
-    scte_35_time_signal_apos: ?Scte35TimeSignalApos,
+    scte_35_time_signal_apos: ?Scte35TimeSignalApos = null,
 
     pub const json_field_names = .{
         .esam = "Esam",

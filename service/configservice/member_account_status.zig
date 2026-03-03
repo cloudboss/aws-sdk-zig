@@ -12,14 +12,14 @@ pub const MemberAccountStatus = struct {
 
     /// An error code that is returned when Config rule creation or deletion failed
     /// in the member account.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// An error message indicating that Config rule account creation or deletion
     /// has failed due to an error in the member account.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The timestamp of the last status update.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// Indicates deployment status for Config rule in the member account.
     /// When management account calls `PutOrganizationConfigRule` action for the

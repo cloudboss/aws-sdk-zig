@@ -17,17 +17,17 @@ pub const FailureConditions = struct {
     /// and [How do
     /// stage conditions
     /// work?](https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html).
-    conditions: ?[]const Condition,
+    conditions: ?[]const Condition = null,
 
     /// The specified result for when the failure conditions are met, such as
     /// rolling back the
     /// stage.
-    result: ?Result,
+    result: ?Result = null,
 
     /// The retry configuration specifies automatic retry for a failed stage, along
     /// with the
     /// configured retry mode.
-    retry_configuration: ?RetryConfiguration,
+    retry_configuration: ?RetryConfiguration = null,
 
     pub const json_field_names = .{
         .conditions = "conditions",

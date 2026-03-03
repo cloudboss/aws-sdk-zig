@@ -9,7 +9,7 @@ pub const Principal = struct {
 
     /// The identifier of the data source the principal should access documents
     /// from.
-    data_source_id: ?[]const u8,
+    data_source_id: ?[]const u8 = null,
 
     /// The name of the user or group.
     name: []const u8,

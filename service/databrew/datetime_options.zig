@@ -12,14 +12,14 @@ pub const DatetimeOptions = struct {
 
     /// Optional value for a non-US locale code, needed for correct interpretation
     /// of some date formats.
-    locale_code: ?[]const u8,
+    locale_code: ?[]const u8 = null,
 
     /// Optional value for a timezone offset of the datetime parameter value in the
     /// Amazon S3
     /// path. Shouldn't be used if Format for this parameter includes timezone
     /// fields.
     /// If no offset specified, UTC is assumed.
-    timezone_offset: ?[]const u8,
+    timezone_offset: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .format = "Format",

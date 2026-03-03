@@ -8,22 +8,22 @@ pub const DataModel = struct {
     /// Source to target mappings for dimensions.
     dimension_mappings: []const DimensionMapping,
 
-    measure_name_column: ?[]const u8,
+    measure_name_column: ?[]const u8 = null,
 
     /// Source to target mappings for measures.
-    mixed_measure_mappings: ?[]const MixedMeasureMapping,
+    mixed_measure_mappings: ?[]const MixedMeasureMapping = null,
 
     /// Source to target mappings for multi-measure records.
-    multi_measure_mappings: ?MultiMeasureMappings,
+    multi_measure_mappings: ?MultiMeasureMappings = null,
 
     /// Source column to be mapped to time.
-    time_column: ?[]const u8,
+    time_column: ?[]const u8 = null,
 
     /// The granularity of the timestamp unit. It indicates if the time value is in
     /// seconds,
     /// milliseconds, nanoseconds, or other supported values. Default is
     /// `MILLISECONDS`.
-    time_unit: ?TimeUnit,
+    time_unit: ?TimeUnit = null,
 
     pub const json_field_names = .{
         .dimension_mappings = "DimensionMappings",

@@ -5,5 +5,5 @@ pub const IpamPolicyOrganizationTarget = struct {
     /// A target can be an individual Amazon Web Services account or an entity
     /// within an Amazon Web Services Organization to which an IPAM policy can be
     /// applied.
-    organization_target_id: ?[]const u8,
+    organization_target_id: ?[]const u8 = null,
 };

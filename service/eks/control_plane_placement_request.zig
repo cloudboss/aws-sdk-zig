@@ -7,7 +7,7 @@ pub const ControlPlanePlacementRequest = struct {
     /// The name of the placement group for the Kubernetes control plane instances.
     /// This setting
     /// can't be changed after cluster creation.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .group_name = "groupName",

@@ -8,10 +8,10 @@ const QuickResponseStatus = @import("quick_response_status.zig").QuickResponseSt
 pub const QuickResponseData = struct {
     /// The Amazon Connect contact channels this quick response applies to. The
     /// supported contact channel types include `Chat`.
-    channels: ?[]const []const u8,
+    channels: ?[]const []const u8 = null,
 
     /// The contents of the quick response.
-    contents: ?QuickResponseContents,
+    contents: ?QuickResponseContents = null,
 
     /// The media type of the quick response content.
     ///
@@ -25,14 +25,14 @@ pub const QuickResponseData = struct {
     created_time: i64,
 
     /// The description of the quick response.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The configuration information of the user groups that the quick response is
     /// accessible to.
-    grouping_configuration: ?GroupingConfiguration,
+    grouping_configuration: ?GroupingConfiguration = null,
 
     /// Whether the quick response is active.
-    is_active: ?bool,
+    is_active: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the knowledge base.
     knowledge_base_arn: []const u8,
@@ -44,11 +44,11 @@ pub const QuickResponseData = struct {
     /// The language code value for the language in which the quick response is
     /// written. The supported language codes include `de_DE`, `en_US`, `es_ES`,
     /// `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`, `zh_CN`, `zh_TW`
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the user who last updated the quick
     /// response data.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The timestamp when the quick response data was last modified.
     last_modified_time: i64,
@@ -64,13 +64,13 @@ pub const QuickResponseData = struct {
 
     /// The shortcut key of the quick response. The value should be unique across
     /// the knowledge base.
-    shortcut_key: ?[]const u8,
+    shortcut_key: ?[]const u8 = null,
 
     /// The status of the quick response data.
     status: QuickResponseStatus,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .channels = "channels",

@@ -2,10 +2,10 @@
 /// procurement portal preference.
 pub const Contact = struct {
     /// The email address of the contact person or role.
-    email: ?[]const u8,
+    email: ?[]const u8 = null,
 
     /// The name of the contact person or role.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .email = "Email",

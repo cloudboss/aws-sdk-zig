@@ -32,19 +32,19 @@ pub const AlgorithmSpecification = struct {
     /// If you specify values for both parameters, the training job might break; if
     /// you don't specify any value for both parameters, the training job might
     /// raise a `null` error.
-    algorithm_name: ?[]const u8,
+    algorithm_name: ?[]const u8 = null,
 
     /// The arguments for a container used to run a training job. See [How Amazon
     /// SageMaker Runs Your Training
     /// Image](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html) for additional information.
-    container_arguments: ?[]const []const u8,
+    container_arguments: ?[]const []const u8 = null,
 
     /// The [entrypoint script for a Docker
     /// container](https://docs.docker.com/engine/reference/builder/) used to run a
     /// training job. This script takes precedence over the default train processing
     /// instructions. See [How Amazon SageMaker Runs Your Training
     /// Image](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html) for more information.
-    container_entrypoint: ?[]const []const u8,
+    container_entrypoint: ?[]const []const u8 = null,
 
     /// To generate and save time-series metrics during training, set to `true`. The
     /// default is `false` and time-series metrics aren't generated except in the
@@ -60,12 +60,12 @@ pub const AlgorithmSpecification = struct {
     ///
     /// * You specify at least one
     ///   [MetricDefinition](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_MetricDefinition.html)
-    enable_sage_maker_metrics_time_series: ?bool,
+    enable_sage_maker_metrics_time_series: ?bool = null,
 
     /// A list of metric definition objects. Each object specifies the metric name
     /// and regular expressions used to parse algorithm logs. SageMaker publishes
     /// each metric to Amazon CloudWatch.
-    metric_definitions: ?[]const MetricDefinition,
+    metric_definitions: ?[]const MetricDefinition = null,
 
     /// The registry path of the Docker image that contains the training algorithm.
     /// For information about docker registry paths for SageMaker built-in
@@ -78,11 +78,11 @@ pub const AlgorithmSpecification = struct {
     ///
     /// For more information, see the note in the `AlgorithmName` parameter
     /// description.
-    training_image: ?[]const u8,
+    training_image: ?[]const u8 = null,
 
     /// The configuration to use an image from a private Docker registry for a
     /// training job.
-    training_image_config: ?TrainingImageConfig,
+    training_image_config: ?TrainingImageConfig = null,
 
     training_input_mode: TrainingInputMode,
 

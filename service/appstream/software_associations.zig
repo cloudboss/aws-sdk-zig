@@ -5,7 +5,7 @@ const SoftwareDeploymentStatus = @import("software_deployment_status.zig").Softw
 pub const SoftwareAssociations = struct {
     /// The error details for failed deployments of the license-included
     /// application.
-    deployment_error: ?[]const ErrorDetails,
+    deployment_error: ?[]const ErrorDetails = null,
 
     /// The name of the license-included application.
     ///
@@ -58,10 +58,10 @@ pub const SoftwareAssociations = struct {
     /// * Microsoft_Project_2024_Standard_32Bit
     ///
     /// * Microsoft_Project_2024_Standard_64Bit
-    software_name: ?[]const u8,
+    software_name: ?[]const u8 = null,
 
     /// The deployment status of the license-included application.
-    status: ?SoftwareDeploymentStatus,
+    status: ?SoftwareDeploymentStatus = null,
 
     pub const json_field_names = .{
         .deployment_error = "DeploymentError",

@@ -2,10 +2,10 @@
 pub const OAuth2ClientApplication = struct {
     /// The reference to the SaaS-side client app that is Amazon Web Services
     /// managed.
-    aws_managed_client_application_reference: ?[]const u8,
+    aws_managed_client_application_reference: ?[]const u8 = null,
 
     /// The client application clientID if the ClientAppType is `USER_MANAGED`.
-    user_managed_client_application_client_id: ?[]const u8,
+    user_managed_client_application_client_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_managed_client_application_reference = "AWSManagedClientApplicationReference",

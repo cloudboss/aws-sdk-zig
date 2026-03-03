@@ -4,7 +4,7 @@ const ValueWhenUnsetOption = @import("value_when_unset_option.zig").ValueWhenUns
 /// when a value has not been set.
 pub const StringValueWhenUnsetConfiguration = struct {
     /// A custom value that's used when the value of a parameter isn't set.
-    custom_value: ?[]const u8,
+    custom_value: ?[]const u8 = null,
 
     /// The built-in options for default values. The value can be one of the
     /// following:
@@ -12,7 +12,7 @@ pub const StringValueWhenUnsetConfiguration = struct {
     /// * `RECOMMENDED`: The recommended value.
     ///
     /// * `NULL`: The `NULL` value.
-    value_when_unset_option: ?ValueWhenUnsetOption,
+    value_when_unset_option: ?ValueWhenUnsetOption = null,
 
     pub const json_field_names = .{
         .custom_value = "CustomValue",

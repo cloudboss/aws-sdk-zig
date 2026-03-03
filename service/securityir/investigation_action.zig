@@ -18,7 +18,7 @@ pub const InvestigationAction = struct {
     /// User feedback for this investigation result. This contains the user's
     /// assessment and comments about the quality and usefulness of the
     /// investigation findings.
-    feedback: ?InvestigationFeedback,
+    feedback: ?InvestigationFeedback = null,
 
     /// The unique identifier for this investigation action. This ID is used to
     /// track and reference the specific investigation throughout its lifecycle.

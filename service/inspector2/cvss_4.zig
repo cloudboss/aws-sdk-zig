@@ -7,7 +7,7 @@ pub const Cvss4 = struct {
 
     /// The CVSS v4 scoring vector, which contains the metrics and measurements that
     /// were used to calculate the base score.
-    scoring_vector: ?[]const u8,
+    scoring_vector: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .base_score = "baseScore",

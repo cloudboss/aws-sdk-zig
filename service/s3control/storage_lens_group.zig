@@ -19,5 +19,5 @@ pub const StorageLensGroup = struct {
     /// Contains the Amazon Resource Name (ARN) of the Storage Lens group. This
     /// property is
     /// read-only.
-    storage_lens_group_arn: ?[]const u8,
+    storage_lens_group_arn: ?[]const u8 = null,
 };

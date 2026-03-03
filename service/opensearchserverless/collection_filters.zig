@@ -4,13 +4,13 @@ const CollectionStatus = @import("collection_status.zig").CollectionStatus;
 /// to OpenSearch Serverless collections.
 pub const CollectionFilters = struct {
     /// The name of the collection group to filter by.
-    collection_group_name: ?[]const u8,
+    collection_group_name: ?[]const u8 = null,
 
     /// The name of the collection.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the collection.
-    status: ?CollectionStatus,
+    status: ?CollectionStatus = null,
 
     pub const json_field_names = .{
         .collection_group_name = "collectionGroupName",

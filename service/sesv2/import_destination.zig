@@ -6,11 +6,11 @@ const SuppressionListDestination = @import("suppression_list_destination.zig").S
 /// to target.
 pub const ImportDestination = struct {
     /// An object that contains the action of the import job towards a contact list.
-    contact_list_destination: ?ContactListDestination,
+    contact_list_destination: ?ContactListDestination = null,
 
     /// An object that contains the action of the import job towards suppression
     /// list.
-    suppression_list_destination: ?SuppressionListDestination,
+    suppression_list_destination: ?SuppressionListDestination = null,
 
     pub const json_field_names = .{
         .contact_list_destination = "ContactListDestination",

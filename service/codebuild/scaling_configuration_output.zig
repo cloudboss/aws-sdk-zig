@@ -4,16 +4,16 @@ const TargetTrackingScalingConfiguration = @import("target_tracking_scaling_conf
 /// The scaling configuration output of a compute fleet.
 pub const ScalingConfigurationOutput = struct {
     /// The desired number of instances in the ﬂeet when auto-scaling.
-    desired_capacity: ?i32,
+    desired_capacity: ?i32 = null,
 
     /// The maximum number of instances in the ﬂeet when auto-scaling.
-    max_capacity: ?i32,
+    max_capacity: ?i32 = null,
 
     /// The scaling type for a compute fleet.
-    scaling_type: ?FleetScalingType,
+    scaling_type: ?FleetScalingType = null,
 
     /// A list of `TargetTrackingScalingConfiguration` objects.
-    target_tracking_scaling_configs: ?[]const TargetTrackingScalingConfiguration,
+    target_tracking_scaling_configs: ?[]const TargetTrackingScalingConfiguration = null,
 
     pub const json_field_names = .{
         .desired_capacity = "desiredCapacity",

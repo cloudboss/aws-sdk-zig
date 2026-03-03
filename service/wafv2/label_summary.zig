@@ -9,7 +9,7 @@
 /// Statement definition of a rule.
 pub const LabelSummary = struct {
     /// An individual label specification.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

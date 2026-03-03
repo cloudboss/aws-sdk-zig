@@ -6,25 +6,25 @@ const ZookeeperNodeInfo = @import("zookeeper_node_info.zig").ZookeeperNodeInfo;
 /// The node information object.
 pub const NodeInfo = struct {
     /// The start time.
-    added_to_cluster_time: ?[]const u8,
+    added_to_cluster_time: ?[]const u8 = null,
 
     /// The broker node info.
-    broker_node_info: ?BrokerNodeInfo,
+    broker_node_info: ?BrokerNodeInfo = null,
 
     /// The ControllerNodeInfo.
-    controller_node_info: ?ControllerNodeInfo,
+    controller_node_info: ?ControllerNodeInfo = null,
 
     /// The instance type.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the node.
-    node_arn: ?[]const u8,
+    node_arn: ?[]const u8 = null,
 
     /// The node type.
-    node_type: ?NodeType,
+    node_type: ?NodeType = null,
 
     /// The ZookeeperNodeInfo.
-    zookeeper_node_info: ?ZookeeperNodeInfo,
+    zookeeper_node_info: ?ZookeeperNodeInfo = null,
 
     pub const json_field_names = .{
         .added_to_cluster_time = "AddedToClusterTime",

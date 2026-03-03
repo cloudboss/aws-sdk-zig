@@ -10,21 +10,21 @@ pub const PromptVariant = struct {
     /// `inferenceConfiguration` field. To see model-specific inference parameters,
     /// see [Inference request parameters and response fields for foundation
     /// models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html).
-    additional_model_request_fields: ?[]const u8,
+    additional_model_request_fields: ?[]const u8 = null,
 
     /// Specifies a generative AI resource with which to use the prompt.
-    gen_ai_resource: ?PromptGenAiResource,
+    gen_ai_resource: ?PromptGenAiResource = null,
 
     /// Contains inference configurations for the prompt variant.
-    inference_configuration: ?PromptInferenceConfiguration,
+    inference_configuration: ?PromptInferenceConfiguration = null,
 
     /// An array of objects, each containing a key-value pair that defines a
     /// metadata tag and value to attach to a prompt variant.
-    metadata: ?[]const PromptMetadataEntry,
+    metadata: ?[]const PromptMetadataEntry = null,
 
     /// The unique identifier of the model or [inference
     /// profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html) with which to run inference on the prompt.
-    model_id: ?[]const u8,
+    model_id: ?[]const u8 = null,
 
     /// The name of the prompt variant.
     name: []const u8,

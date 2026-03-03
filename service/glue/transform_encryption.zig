@@ -9,10 +9,10 @@ const MLUserDataEncryption = @import("ml_user_data_encryption.zig").MLUserDataEn
 pub const TransformEncryption = struct {
     /// An `MLUserDataEncryption` object containing the encryption mode and
     /// customer-provided KMS key ID.
-    ml_user_data_encryption: ?MLUserDataEncryption,
+    ml_user_data_encryption: ?MLUserDataEncryption = null,
 
     /// The name of the security configuration.
-    task_run_security_configuration_name: ?[]const u8,
+    task_run_security_configuration_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ml_user_data_encryption = "MlUserDataEncryption",

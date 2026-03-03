@@ -6,16 +6,16 @@ const PositionSolverType = @import("position_solver_type.zig").PositionSolverTyp
 /// Details of the Semtech GNSS solver object.
 pub const SemtechGnssDetail = struct {
     /// Whether forward error correction is enabled.
-    fec: ?PositionConfigurationFec,
+    fec: ?PositionConfigurationFec = null,
 
     /// The vendor of the solver object.
-    provider: ?PositionSolverProvider,
+    provider: ?PositionSolverProvider = null,
 
     /// The status indicating whether the solver is enabled.
-    status: ?PositionConfigurationStatus,
+    status: ?PositionConfigurationStatus = null,
 
     /// The type of positioning solver used.
-    @"type": ?PositionSolverType,
+    @"type": ?PositionSolverType = null,
 
     pub const json_field_names = .{
         .fec = "Fec",

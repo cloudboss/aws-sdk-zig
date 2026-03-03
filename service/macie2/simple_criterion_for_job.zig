@@ -6,10 +6,10 @@ const SimpleCriterionKeyForJob = @import("simple_criterion_key_for_job.zig").Sim
 pub const SimpleCriterionForJob = struct {
     /// The operator to use in the condition. Valid values are EQ (equals) and NE
     /// (not equals).
-    comparator: ?JobComparator,
+    comparator: ?JobComparator = null,
 
     /// The property to use in the condition.
-    key: ?SimpleCriterionKeyForJob,
+    key: ?SimpleCriterionKeyForJob = null,
 
     /// An array that lists one or more values to use in the condition. If you
     /// specify multiple values, Amazon Macie uses OR logic to join the values.
@@ -27,7 +27,7 @@ pub const SimpleCriterionForJob = struct {
     ///
     /// Values are case sensitive. Also, Macie doesn't support use of partial values
     /// or wildcard characters in these values.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .comparator = "comparator",

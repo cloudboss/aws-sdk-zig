@@ -1,13 +1,13 @@
 /// The template alias.
 pub const TemplateAlias = struct {
     /// The display name of the template alias.
-    alias_name: ?[]const u8,
+    alias_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the template alias.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The version number of the template alias.
-    template_version_number: ?i64,
+    template_version_number: ?i64 = null,
 
     pub const json_field_names = .{
         .alias_name = "AliasName",

@@ -8,23 +8,23 @@ const ListenerTls = @import("listener_tls.zig").ListenerTls;
 /// An object that represents a listener for a virtual node.
 pub const Listener = struct {
     /// The connection pool information for the listener.
-    connection_pool: ?VirtualNodeConnectionPool,
+    connection_pool: ?VirtualNodeConnectionPool = null,
 
     /// The health check information for the listener.
-    health_check: ?HealthCheckPolicy,
+    health_check: ?HealthCheckPolicy = null,
 
     /// The outlier detection information for the listener.
-    outlier_detection: ?OutlierDetection,
+    outlier_detection: ?OutlierDetection = null,
 
     /// The port mapping information for the listener.
     port_mapping: PortMapping,
 
     /// An object that represents timeouts for different protocols.
-    timeout: ?ListenerTimeout,
+    timeout: ?ListenerTimeout = null,
 
     /// A reference to an object that represents the Transport Layer Security (TLS)
     /// properties for a listener.
-    tls: ?ListenerTls,
+    tls: ?ListenerTls = null,
 
     pub const json_field_names = .{
         .connection_pool = "connectionPool",

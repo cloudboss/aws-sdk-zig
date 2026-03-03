@@ -2,10 +2,10 @@
 /// setup operation.
 pub const ErrorDetails = struct {
     /// The error code that identifies the type of error that occurred.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// A human-readable description of the error that occurred.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

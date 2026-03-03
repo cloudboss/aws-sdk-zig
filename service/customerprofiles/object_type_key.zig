@@ -5,7 +5,7 @@ const StandardIdentifier = @import("standard_identifier.zig").StandardIdentifier
 /// that can be used to search for a customer profile.
 pub const ObjectTypeKey = struct {
     /// The reference for the key name of the fields map.
-    field_names: ?[]const []const u8,
+    field_names: ?[]const []const u8 = null,
 
     /// The types of keys that a ProfileObject can have. Each ProfileObject can have
     /// only 1
@@ -24,7 +24,7 @@ pub const ObjectTypeKey = struct {
     /// before the object is ingested, otherwise it is only used for matching
     /// objects to
     /// profiles.
-    standard_identifiers: ?[]const StandardIdentifier,
+    standard_identifiers: ?[]const StandardIdentifier = null,
 
     pub const json_field_names = .{
         .field_names = "FieldNames",

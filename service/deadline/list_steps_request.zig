@@ -11,7 +11,7 @@ pub const ListStepsRequest = struct {
 
     /// The token for the next set of results, or `null` to start from the
     /// beginning.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The queue ID to include on the list of steps.
     queue_id: []const u8,

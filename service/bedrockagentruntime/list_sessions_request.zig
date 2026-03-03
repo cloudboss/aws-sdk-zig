@@ -8,7 +8,7 @@ pub const ListSessionsRequest = struct {
     /// If the total number of results is greater than the `maxResults` value
     /// provided in the request, enter the token returned in the `nextToken` field
     /// in the response in this field to return the next batch of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "maxResults",

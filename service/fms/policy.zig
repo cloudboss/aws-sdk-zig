@@ -49,7 +49,7 @@ pub const Policy = struct {
     ///   For example, the following is a valid map:
     /// `{“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
     /// “ouid112”]}`.
-    exclude_map: ?[]const aws.map.MapEntry([]const []const u8),
+    exclude_map: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// If set to `True`, resources with the tags that are specified in the
     /// `ResourceTag` array are not in scope of the policy. If set to `False`,
@@ -86,13 +86,13 @@ pub const Policy = struct {
     ///   For example, the following is a valid map:
     /// `{“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
     /// “ouid112”]}`.
-    include_map: ?[]const aws.map.MapEntry([]const []const u8),
+    include_map: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// Your description of the Firewall Manager policy.
-    policy_description: ?[]const u8,
+    policy_description: ?[]const u8 = null,
 
     /// The ID of the Firewall Manager policy.
-    policy_id: ?[]const u8,
+    policy_id: ?[]const u8 = null,
 
     /// The name of the Firewall Manager policy.
     policy_name: []const u8,
@@ -106,7 +106,7 @@ pub const Policy = struct {
     ///   can't edit or delete the policy. Existing policy protections stay in
     ///   place. Any new resources that come into scope of the policy won't be
     ///   protected.
-    policy_status: ?CustomerPolicyStatus,
+    policy_status: ?CustomerPolicyStatus = null,
 
     /// A unique identifier for each update to the policy. When issuing a
     /// `PutPolicy`
@@ -114,23 +114,23 @@ pub const Policy = struct {
     /// `PolicyUpdateToken` of the current policy version. To get the
     /// `PolicyUpdateToken` of the current policy version, use a `GetPolicy`
     /// request.
-    policy_update_token: ?[]const u8,
+    policy_update_token: ?[]const u8 = null,
 
     /// Indicates if the policy should be automatically applied to new resources.
     remediation_enabled: bool = false,
 
     /// The unique identifiers of the resource sets used by the policy.
-    resource_set_ids: ?[]const []const u8,
+    resource_set_ids: ?[]const []const u8 = null,
 
     /// Specifies whether to combine multiple resource tags with AND,
     /// so that a resource must have all tags to be included or excluded, or OR,
     /// so that a resource must have at least one tag.
     ///
     /// Default: `AND`
-    resource_tag_logical_operator: ?ResourceTagLogicalOperator,
+    resource_tag_logical_operator: ?ResourceTagLogicalOperator = null,
 
     /// An array of `ResourceTag` objects.
-    resource_tags: ?[]const ResourceTag,
+    resource_tags: ?[]const ResourceTag = null,
 
     /// The type of resource protected by or in scope of the policy. This is in the
     /// format shown
@@ -168,7 +168,7 @@ pub const Policy = struct {
 
     /// An array of `ResourceType` objects. Use this only to specify multiple
     /// resource types. To specify a single resource type, use `ResourceType`.
-    resource_type_list: ?[]const []const u8,
+    resource_type_list: ?[]const []const u8 = null,
 
     /// Details about the security service that is being used to protect the
     /// resources.

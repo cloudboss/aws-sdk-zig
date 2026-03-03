@@ -4,7 +4,7 @@ const S3TablesBucketType = @import("s3_tables_bucket_type.zig").S3TablesBucketTy
 pub const DestinationResult = struct {
     /// The Amazon Resource Name (ARN) of the table bucket where the metadata
     /// configuration is stored.
-    table_bucket_arn: ?[]const u8,
+    table_bucket_arn: ?[]const u8 = null,
 
     /// The type of the table bucket where the metadata configuration is stored. The
     /// `aws`
@@ -14,10 +14,10 @@ pub const DestinationResult = struct {
     /// Amazon Web Services managed table
     /// buckets, and V1 metadata configurations are stored in customer-managed table
     /// buckets.
-    table_bucket_type: ?S3TablesBucketType,
+    table_bucket_type: ?S3TablesBucketType = null,
 
     /// The namespace in the table bucket where the metadata tables for a metadata
     /// configuration are
     /// stored.
-    table_namespace: ?[]const u8,
+    table_namespace: ?[]const u8 = null,
 };

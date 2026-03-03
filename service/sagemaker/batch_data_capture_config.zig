@@ -5,7 +5,7 @@ pub const BatchDataCaptureConfig = struct {
     destination_s3_uri: []const u8,
 
     /// Flag that indicates whether to append inference id to the output.
-    generate_inference_id: ?bool,
+    generate_inference_id: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management
     /// Service key that SageMaker uses to encrypt data on the storage volume
@@ -18,7 +18,7 @@ pub const BatchDataCaptureConfig = struct {
     ///   `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     /// * Alias name: `alias/ExampleAlias`
     /// * Alias name ARN: `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_s3_uri = "DestinationS3Uri",

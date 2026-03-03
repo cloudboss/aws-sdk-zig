@@ -3,10 +3,10 @@ const DecimalNumber = @import("decimal_number.zig").DecimalNumber;
 /// Defines column statistics supported for fixed-point number data columns.
 pub const DecimalColumnStatisticsData = struct {
     /// The highest value in the column.
-    maximum_value: ?DecimalNumber,
+    maximum_value: ?DecimalNumber = null,
 
     /// The lowest value in the column.
-    minimum_value: ?DecimalNumber,
+    minimum_value: ?DecimalNumber = null,
 
     /// The number of distinct values in a column.
     number_of_distinct_values: i64 = 0,

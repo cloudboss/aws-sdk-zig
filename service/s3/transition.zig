@@ -9,7 +9,7 @@ pub const Transition = struct {
     /// Indicates when objects are transitioned to the specified storage class. The
     /// date value must be in
     /// ISO 8601 format. The time is always midnight UTC.
-    date: ?i64,
+    date: ?i64 = null,
 
     /// Indicates the number of days after creation when objects are transitioned to
     /// the specified storage
@@ -25,8 +25,8 @@ pub const Transition = struct {
     /// duration. For more information, see [ Constraints and considerations for
     /// transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User
     /// Guide*.
-    days: ?i32,
+    days: ?i32 = null,
 
     /// The storage class to which you want the object to transition.
-    storage_class: ?TransitionStorageClass,
+    storage_class: ?TransitionStorageClass = null,
 };

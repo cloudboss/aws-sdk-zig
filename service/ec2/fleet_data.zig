@@ -24,7 +24,7 @@ pub const FleetData = struct {
     /// when the fleet size meets or exceeds target capacity, `pending_termination`
     /// while instances are terminating when fleet size is decreased, and `error` if
     /// there's an error.
-    activity_status: ?FleetActivityStatus,
+    activity_status: ?FleetActivityStatus = null,
 
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the
@@ -32,64 +32,64 @@ pub const FleetData = struct {
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
     ///
     /// Constraints: Maximum 64 ASCII characters
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// Reserved.
-    context: ?[]const u8,
+    context: ?[]const u8 = null,
 
     /// The creation date and time of the EC2 Fleet.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// Information about the instances that could not be launched by the fleet.
     /// Valid only when
     /// **Type** is set to `instant`.
-    errors: ?[]const DescribeFleetError,
+    errors: ?[]const DescribeFleetError = null,
 
     /// Indicates whether running instances should be terminated if the target
     /// capacity of the
     /// EC2 Fleet is decreased below the current size of the EC2 Fleet.
     ///
     /// Supported only for fleets of type `maintain`.
-    excess_capacity_termination_policy: ?FleetExcessCapacityTerminationPolicy,
+    excess_capacity_termination_policy: ?FleetExcessCapacityTerminationPolicy = null,
 
     /// The ID of the EC2 Fleet.
-    fleet_id: ?[]const u8,
+    fleet_id: ?[]const u8 = null,
 
     /// The state of the EC2 Fleet.
-    fleet_state: ?FleetStateCode,
+    fleet_state: ?FleetStateCode = null,
 
     /// The number of units fulfilled by this request compared to the set target
     /// capacity.
-    fulfilled_capacity: ?f64,
+    fulfilled_capacity: ?f64 = null,
 
     /// The number of units fulfilled by this request compared to the set target
     /// On-Demand
     /// capacity.
-    fulfilled_on_demand_capacity: ?f64,
+    fulfilled_on_demand_capacity: ?f64 = null,
 
     /// Information about the instances that were launched by the fleet. Valid only
     /// when
     /// **Type** is set to `instant`.
-    instances: ?[]const DescribeFleetsInstances,
+    instances: ?[]const DescribeFleetsInstances = null,
 
     /// The launch template and overrides.
-    launch_template_configs: ?[]const FleetLaunchTemplateConfig,
+    launch_template_configs: ?[]const FleetLaunchTemplateConfig = null,
 
     /// The allocation strategy of On-Demand Instances in an EC2 Fleet.
-    on_demand_options: ?OnDemandOptions,
+    on_demand_options: ?OnDemandOptions = null,
 
     /// Indicates whether EC2 Fleet should replace unhealthy Spot Instances.
     /// Supported only for
     /// fleets of type `maintain`. For more information, see [EC2 Fleet
     /// health
     /// checks](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks) in the *Amazon EC2 User Guide*.
-    replace_unhealthy_instances: ?bool,
+    replace_unhealthy_instances: ?bool = null,
 
     /// The configuration of Spot Instances in an EC2 Fleet.
-    spot_options: ?SpotOptions,
+    spot_options: ?SpotOptions = null,
 
     /// The tags for an EC2 Fleet resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The number of units to request. You can choose to set the target capacity in
     /// terms of
@@ -97,11 +97,11 @@ pub const FleetData = struct {
     /// application workload,
     /// such as vCPUs, memory, or I/O. If the request type is `maintain`, you can
     /// specify a target capacity of 0 and add capacity later.
-    target_capacity_specification: ?TargetCapacitySpecification,
+    target_capacity_specification: ?TargetCapacitySpecification = null,
 
     /// Indicates whether running instances should be terminated when the EC2 Fleet
     /// expires.
-    terminate_instances_with_expiration: ?bool,
+    terminate_instances_with_expiration: ?bool = null,
 
     /// The type of request. Indicates whether the EC2 Fleet only `requests` the
     /// target
@@ -115,17 +115,17 @@ pub const FleetData = struct {
     /// places the required requests to meet this target capacity. It also
     /// automatically
     /// replenishes any interrupted Spot Instances. Default: `maintain`.
-    @"type": ?FleetType,
+    @"type": ?FleetType = null,
 
     /// The start date and time of the request, in UTC format (for example,
     /// *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     /// The default is to start fulfilling the request immediately.
-    valid_from: ?i64,
+    valid_from: ?i64 = null,
 
     /// The end date and time of the request, in UTC format (for example,
     /// *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     /// At this point, no new instance requests are placed or able to fulfill the
     /// request. The
     /// default end date is 7 days from the current date.
-    valid_until: ?i64,
+    valid_until: ?i64 = null,
 };

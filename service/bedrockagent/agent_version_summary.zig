@@ -16,10 +16,10 @@ pub const AgentVersionSummary = struct {
     created_at: i64,
 
     /// The description of the version of the agent.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Details about the guardrail associated with the agent.
-    guardrail_configuration: ?GuardrailConfiguration,
+    guardrail_configuration: ?GuardrailConfiguration = null,
 
     /// The time at which the version was last updated.
     updated_at: i64,

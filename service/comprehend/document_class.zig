@@ -1,15 +1,15 @@
 /// Specifies the class that categorizes the document being analyzed
 pub const DocumentClass = struct {
     /// The name of the class.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Page number in the input document. This field is present
     /// in the response only if your request includes the `Byte` parameter.
-    page: ?i32,
+    page: ?i32 = null,
 
     /// The confidence score that Amazon Comprehend has this class correctly
     /// attributed.
-    score: ?f32,
+    score: ?f32 = null,
 
     pub const json_field_names = .{
         .name = "Name",

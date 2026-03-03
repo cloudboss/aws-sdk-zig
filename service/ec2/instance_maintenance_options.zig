@@ -5,7 +5,7 @@ const InstanceRebootMigrationState = @import("instance_reboot_migration_state.zi
 pub const InstanceMaintenanceOptions = struct {
     /// Provides information on the current automatic recovery behavior of your
     /// instance.
-    auto_recovery: ?InstanceAutoRecoveryState,
+    auto_recovery: ?InstanceAutoRecoveryState = null,
 
     /// Specifies whether to attempt reboot migration during a user-initiated reboot
     /// of an
@@ -25,5 +25,5 @@ pub const InstanceMaintenanceOptions = struct {
     /// For more information, see [Enable or disable reboot
     /// migration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration) in the
     /// *Amazon EC2 User Guide*.
-    reboot_migration: ?InstanceRebootMigrationState,
+    reboot_migration: ?InstanceRebootMigrationState = null,
 };

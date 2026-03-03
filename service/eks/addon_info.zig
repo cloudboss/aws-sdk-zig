@@ -4,28 +4,28 @@ const MarketplaceInformation = @import("marketplace_information.zig").Marketplac
 /// Information about an add-on.
 pub const AddonInfo = struct {
     /// The name of the add-on.
-    addon_name: ?[]const u8,
+    addon_name: ?[]const u8 = null,
 
     /// An object representing information about available add-on versions and
     /// compatible
     /// Kubernetes versions.
-    addon_versions: ?[]const AddonVersionInfo,
+    addon_versions: ?[]const AddonVersionInfo = null,
 
     /// The default Kubernetes namespace where this addon is typically installed if
     /// no custom namespace is specified.
-    default_namespace: ?[]const u8,
+    default_namespace: ?[]const u8 = null,
 
     /// Information about the add-on from the Amazon Web Services Marketplace.
-    marketplace_information: ?MarketplaceInformation,
+    marketplace_information: ?MarketplaceInformation = null,
 
     /// The owner of the add-on.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The publisher of the add-on.
-    publisher: ?[]const u8,
+    publisher: ?[]const u8 = null,
 
     /// The type of the add-on.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .addon_name = "addonName",

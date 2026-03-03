@@ -7,21 +7,21 @@ pub const KxChangesetListEntry = struct {
     /// milliseconds. For example, the value for Monday, November 1, 2021 12:00:00
     /// PM UTC is specified as
     /// 1635768000000.
-    active_from_timestamp: ?i64,
+    active_from_timestamp: ?i64 = null,
 
     /// A unique identifier for the changeset.
-    changeset_id: ?[]const u8,
+    changeset_id: ?[]const u8 = null,
 
     /// The timestamp at which the changeset was created in FinSpace. The value is
     /// determined as epoch time in milliseconds. For example, the value for Monday,
     /// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The timestamp at which the changeset was modified. The value is determined
     /// as epoch time in milliseconds. For example, the value for Monday, November
     /// 1, 2021 12:00:00 PM UTC is specified as
     /// 1635768000000.
-    last_modified_timestamp: ?i64,
+    last_modified_timestamp: ?i64 = null,
 
     /// Status of the changeset.
     ///
@@ -32,7 +32,7 @@ pub const KxChangesetListEntry = struct {
     /// * Failed – Changeset creation has failed.
     ///
     /// * Complete – Changeset creation has succeeded.
-    status: ?ChangesetStatus,
+    status: ?ChangesetStatus = null,
 
     pub const json_field_names = .{
         .active_from_timestamp = "activeFromTimestamp",

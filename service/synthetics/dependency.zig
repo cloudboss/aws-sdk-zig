@@ -9,7 +9,7 @@ pub const Dependency = struct {
     reference: []const u8,
 
     /// The type of dependency. Valid value is `LambdaLayer`.
-    @"type": ?DependencyType,
+    @"type": ?DependencyType = null,
 
     pub const json_field_names = .{
         .reference = "Reference",

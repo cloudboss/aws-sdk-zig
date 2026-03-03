@@ -6,10 +6,10 @@ pub const ClientLoginBannerResponseOptions = struct {
     /// provided
     /// clients when a VPN session is established. UTF-8 encoded
     /// characters only. Maximum of 1400 characters.
-    banner_text: ?[]const u8,
+    banner_text: ?[]const u8 = null,
 
     /// Current state of text banner feature.
     ///
     /// Valid values: `true | false`
-    enabled: ?bool,
+    enabled: ?bool = null,
 };

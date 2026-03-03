@@ -10,10 +10,10 @@ const DeleteReplicaAction = @import("delete_replica_action.zig").DeleteReplicaAc
 /// * An existing replica to be removed from an existing global table.
 pub const ReplicaUpdate = struct {
     /// The parameters required for creating a replica on an existing global table.
-    create: ?CreateReplicaAction,
+    create: ?CreateReplicaAction = null,
 
     /// The name of the existing replica to be removed.
-    delete: ?DeleteReplicaAction,
+    delete: ?DeleteReplicaAction = null,
 
     pub const json_field_names = .{
         .create = "Create",

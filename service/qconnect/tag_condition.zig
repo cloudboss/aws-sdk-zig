@@ -4,7 +4,7 @@ pub const TagCondition = struct {
     key: []const u8,
 
     /// The tag value in the tag condition.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "key",

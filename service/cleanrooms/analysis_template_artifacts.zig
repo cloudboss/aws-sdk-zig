@@ -3,7 +3,7 @@ const AnalysisTemplateArtifact = @import("analysis_template_artifact.zig").Analy
 /// The analysis template artifacts.
 pub const AnalysisTemplateArtifacts = struct {
     /// Additional artifacts for the analysis template.
-    additional_artifacts: ?[]const AnalysisTemplateArtifact,
+    additional_artifacts: ?[]const AnalysisTemplateArtifact = null,
 
     /// The entry point for the analysis template artifacts.
     entry_point: AnalysisTemplateArtifact,

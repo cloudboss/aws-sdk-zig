@@ -6,7 +6,7 @@ pub const ReplayDestination = struct {
     arn: []const u8,
 
     /// A list of ARNs for rules to replay events to.
-    filter_arns: ?[]const []const u8,
+    filter_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

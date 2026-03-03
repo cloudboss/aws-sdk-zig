@@ -13,7 +13,7 @@ pub const InputDataConfig = struct {
 
     /// An array of supplementary features. The only supported feature is a holiday
     /// calendar.
-    supplementary_features: ?[]const SupplementaryFeature,
+    supplementary_features: ?[]const SupplementaryFeature = null,
 
     pub const json_field_names = .{
         .dataset_group_arn = "DatasetGroupArn",

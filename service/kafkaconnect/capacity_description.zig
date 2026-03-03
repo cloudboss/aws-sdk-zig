@@ -4,10 +4,10 @@ const ProvisionedCapacityDescription = @import("provisioned_capacity_description
 /// A description of the connector's capacity.
 pub const CapacityDescription = struct {
     /// Describes the connector's auto scaling capacity.
-    auto_scaling: ?AutoScalingDescription,
+    auto_scaling: ?AutoScalingDescription = null,
 
     /// Describes a connector's provisioned capacity.
-    provisioned_capacity: ?ProvisionedCapacityDescription,
+    provisioned_capacity: ?ProvisionedCapacityDescription = null,
 
     pub const json_field_names = .{
         .auto_scaling = "autoScaling",

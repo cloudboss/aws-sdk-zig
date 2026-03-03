@@ -9,17 +9,17 @@ const OcsfStringFilter = @import("ocsf_string_filter.zig").OcsfStringFilter;
 /// Enables the creation of filtering criteria for security findings.
 pub const CompositeFilter = struct {
     /// Enables filtering based on boolean field values.
-    boolean_filters: ?[]const OcsfBooleanFilter,
+    boolean_filters: ?[]const OcsfBooleanFilter = null,
 
     /// Enables filtering based on date and timestamp fields.
-    date_filters: ?[]const OcsfDateFilter,
+    date_filters: ?[]const OcsfDateFilter = null,
 
     /// A list of IP address filters that allowing you to filter findings based on
     /// IP address properties.
-    ip_filters: ?[]const OcsfIpFilter,
+    ip_filters: ?[]const OcsfIpFilter = null,
 
     /// Enables filtering based on map field values.
-    map_filters: ?[]const OcsfMapFilter,
+    map_filters: ?[]const OcsfMapFilter = null,
 
     /// Provides an additional level of filtering, creating a three-layer nested
     /// structure.
@@ -29,16 +29,16 @@ pub const CompositeFilter = struct {
     /// and `NestedCompositeFilters`.
     /// The third layer is `NestedCompositeFilters`, which contains additional
     /// filter conditions.
-    nested_composite_filters: ?[]const CompositeFilter,
+    nested_composite_filters: ?[]const CompositeFilter = null,
 
     /// Enables filtering based on numerical field values.
-    number_filters: ?[]const OcsfNumberFilter,
+    number_filters: ?[]const OcsfNumberFilter = null,
 
     /// The logical operator used to combine multiple filter conditions.
-    operator: ?AllowedOperators,
+    operator: ?AllowedOperators = null,
 
     /// Enables filtering based on string field values.
-    string_filters: ?[]const OcsfStringFilter,
+    string_filters: ?[]const OcsfStringFilter = null,
 
     pub const json_field_names = .{
         .boolean_filters = "BooleanFilters",

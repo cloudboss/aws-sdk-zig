@@ -26,7 +26,7 @@ pub const GatingRule = struct {
     name: []const u8,
 
     /// The Amazon Web Services account ID of the gating rule owner.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The criteria that you set for gating routing controls that designate how
     /// many of the routing control states must be ON to allow you to update target

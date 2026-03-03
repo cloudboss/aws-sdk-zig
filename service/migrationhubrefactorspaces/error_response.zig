@@ -7,22 +7,22 @@ const ErrorResourceType = @import("error_resource_type.zig").ErrorResourceType;
 /// response.
 pub const ErrorResponse = struct {
     /// The Amazon Web Services account ID of the resource owner.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Additional details about the error.
-    additional_details: ?[]const aws.map.StringMapEntry,
+    additional_details: ?[]const aws.map.StringMapEntry = null,
 
     /// The error code associated with the error.
-    code: ?ErrorCode,
+    code: ?ErrorCode = null,
 
     /// The message associated with the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The ID of the resource.
-    resource_identifier: ?[]const u8,
+    resource_identifier: ?[]const u8 = null,
 
     /// The type of resource.
-    resource_type: ?ErrorResourceType,
+    resource_type: ?ErrorResourceType = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

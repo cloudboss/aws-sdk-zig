@@ -2,7 +2,7 @@
 pub const DecisionTaskStartedEventAttributes = struct {
     /// Identity of the decider making the request. This enables diagnostic tracing
     /// when problems arise. The form of this identity is user defined.
-    identity: ?[]const u8,
+    identity: ?[]const u8 = null,
 
     /// The ID of the `DecisionTaskScheduled` event that was recorded when this
     /// decision task was scheduled.

@@ -3,7 +3,7 @@ const LastUpdateStatusValue = @import("last_update_status_value.zig").LastUpdate
 /// A value that indicates whether the update was successful.
 pub const LastUpdateStatus = struct {
     /// If the update wasn't successful, indicates the reason why it failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// A value that indicates whether the update was made successful.
     status: LastUpdateStatusValue,

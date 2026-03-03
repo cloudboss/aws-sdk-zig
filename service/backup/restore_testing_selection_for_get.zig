@@ -19,7 +19,7 @@ pub const RestoreTestingSelectionForGet = struct {
     ///
     /// If used, this parameter must contain 1 to 50 alphanumeric
     /// or '-_.' characters.
-    creator_request_id: ?[]const u8,
+    creator_request_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that
     /// Backup uses to create the target resource; for
@@ -30,12 +30,12 @@ pub const RestoreTestingSelectionForGet = struct {
     /// `ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]`
     /// or you can include a wildcard: `ProtectedResourceArns: ["*"]`,
     /// but not both.
-    protected_resource_arns: ?[]const []const u8,
+    protected_resource_arns: ?[]const []const u8 = null,
 
     /// In a resource testing selection, this parameter filters by
     /// specific conditions such as `StringEquals` or
     /// `StringNotEquals`.
-    protected_resource_conditions: ?ProtectedResourceConditions,
+    protected_resource_conditions: ?ProtectedResourceConditions = null,
 
     /// The type of Amazon Web Services resource included in a resource
     /// testing selection;
@@ -50,7 +50,7 @@ pub const RestoreTestingSelectionForGet = struct {
     /// See the complete list of [restore testing
     /// inferred
     /// metadata](https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html).
-    restore_metadata_overrides: ?[]const aws.map.StringMapEntry,
+    restore_metadata_overrides: ?[]const aws.map.StringMapEntry = null,
 
     /// The RestoreTestingPlanName is a unique string that is the name
     /// of the restore testing plan.

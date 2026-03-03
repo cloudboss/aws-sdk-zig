@@ -7,13 +7,13 @@ pub const ApplicationState = struct {
     /// The configurationId from the Application Discovery Service that uniquely
     /// identifies an
     /// application.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The current status of an application.
-    application_status: ?ApplicationStatus,
+    application_status: ?ApplicationStatus = null,
 
     /// The timestamp when the application status was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

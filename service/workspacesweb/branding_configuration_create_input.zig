@@ -26,7 +26,7 @@ pub const BrandingConfigurationCreateInput = struct {
 
     /// The terms of service text in Markdown format. Users will be presented with
     /// the terms of service after successfully signing in.
-    terms_of_service: ?[]const u8,
+    terms_of_service: ?[]const u8 = null,
 
     /// The wallpaper image for the portal. Provide either a binary image file or an
     /// S3 URI pointing to the image file. Maximum 5 MB in JPEG or PNG format.

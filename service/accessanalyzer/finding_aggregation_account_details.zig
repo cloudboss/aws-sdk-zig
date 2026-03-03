@@ -5,15 +5,15 @@ const aws = @import("aws");
 pub const FindingAggregationAccountDetails = struct {
     /// The ID of the Amazon Web Services account for which unused access finding
     /// details are provided.
-    account: ?[]const u8,
+    account: ?[]const u8 = null,
 
     /// Provides the number of active findings for each type of unused access for
     /// the specified Amazon Web Services account.
-    details: ?[]const aws.map.MapEntry(i32),
+    details: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The number of active unused access findings for the specified Amazon Web
     /// Services account.
-    number_of_active_findings: ?i32,
+    number_of_active_findings: ?i32 = null,
 
     pub const json_field_names = .{
         .account = "account",

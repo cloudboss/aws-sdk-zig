@@ -3,14 +3,14 @@ const WorkspaceRequest = @import("workspace_request.zig").WorkspaceRequest;
 /// Describes a WorkSpace that cannot be created.
 pub const FailedCreateWorkspaceRequest = struct {
     /// The error code that is returned if the WorkSpace cannot be created.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The text of the error message that is returned if the WorkSpace cannot be
     /// created.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// Information about the WorkSpace.
-    workspace_request: ?WorkspaceRequest,
+    workspace_request: ?WorkspaceRequest = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

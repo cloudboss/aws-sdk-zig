@@ -1,7 +1,7 @@
 /// Summary information about a managed firewall domain list.
 pub const ManagedFirewallDomainListsItem = struct {
     /// A description of the managed firewall domain list.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the managed firewall domain list.
     id: []const u8,

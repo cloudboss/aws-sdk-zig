@@ -4,7 +4,7 @@ const RouterInputMessage = @import("router_input_message.zig").RouterInputMessag
 /// Detailed metadata information about a router input source.
 pub const RouterInputSourceMetadataDetails = struct {
     /// Metadata information specific to the router input configuration and state.
-    router_input_metadata: ?RouterInputMetadata,
+    router_input_metadata: ?RouterInputMetadata = null,
 
     /// Collection of metadata messages associated with the router input source.
     source_metadata_messages: []const RouterInputMessage,

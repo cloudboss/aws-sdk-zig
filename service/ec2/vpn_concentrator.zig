@@ -3,20 +3,20 @@ const Tag = @import("tag.zig").Tag;
 /// Describes a VPN concentrator.
 pub const VpnConcentrator = struct {
     /// The current state of the VPN concentrator.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// Any tags assigned to the VPN concentrator.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the transit gateway attachment for the VPN concentrator.
-    transit_gateway_attachment_id: ?[]const u8,
+    transit_gateway_attachment_id: ?[]const u8 = null,
 
     /// The ID of the transit gateway associated with the VPN concentrator.
-    transit_gateway_id: ?[]const u8,
+    transit_gateway_id: ?[]const u8 = null,
 
     /// The type of VPN concentrator.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The ID of the VPN concentrator.
-    vpn_concentrator_id: ?[]const u8,
+    vpn_concentrator_id: ?[]const u8 = null,
 };

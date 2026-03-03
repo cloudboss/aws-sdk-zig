@@ -1,9 +1,9 @@
 /// An update to a profile question.
 pub const ProfileQuestionUpdate = struct {
-    question_id: ?[]const u8,
+    question_id: ?[]const u8 = null,
 
     /// The selected choices.
-    selected_choice_ids: ?[]const []const u8,
+    selected_choice_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .question_id = "QuestionId",

@@ -8,5 +8,5 @@ pub const ObjectLockRule = struct {
     /// period can be either
     /// `Days` or `Years` but you must select one. You cannot specify `Days`
     /// and `Years` at the same time.
-    default_retention: ?DefaultRetention,
+    default_retention: ?DefaultRetention = null,
 };

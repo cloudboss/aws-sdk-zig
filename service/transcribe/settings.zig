@@ -15,7 +15,7 @@ pub const Settings = struct {
     ///
     /// For more information, see [Transcribing multi-channel
     /// audio](https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html).
-    channel_identification: ?bool,
+    channel_identification: ?bool = null,
 
     /// Indicate the maximum number of alternative transcriptions you want Amazon
     /// Transcribe
@@ -32,7 +32,7 @@ pub const Settings = struct {
     ///
     /// For more information, see [Alternative
     /// transcriptions](https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
-    max_alternatives: ?i32,
+    max_alternatives: ?i32 = null,
 
     /// Specify the maximum number of speakers you want to partition in your media.
     ///
@@ -42,7 +42,7 @@ pub const Settings = struct {
     ///
     /// If you specify the `MaxSpeakerLabels` field, you must set the
     /// `ShowSpeakerLabels` field to true.
-    max_speaker_labels: ?i32,
+    max_speaker_labels: ?i32 = null,
 
     /// To include alternative transcriptions within your transcription output,
     /// include
@@ -60,7 +60,7 @@ pub const Settings = struct {
     ///
     /// For more information, see [Alternative
     /// transcriptions](https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
-    show_alternatives: ?bool,
+    show_alternatives: ?bool = null,
 
     /// Enables speaker partitioning (diarization) in your transcription output.
     /// Speaker
@@ -71,7 +71,7 @@ pub const Settings = struct {
     ///
     /// For more information, see [Partitioning speakers
     /// (diarization)](https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
-    show_speaker_labels: ?bool,
+    show_speaker_labels: ?bool = null,
 
     /// Specify how you want your custom vocabulary filter applied to your
     /// transcript.
@@ -81,7 +81,7 @@ pub const Settings = struct {
     /// To delete words, choose `remove`.
     ///
     /// To flag words without changing them, choose `tag`.
-    vocabulary_filter_method: ?VocabularyFilterMethod,
+    vocabulary_filter_method: ?VocabularyFilterMethod = null,
 
     /// The name of the custom vocabulary filter you want to use in your
     /// transcription job
@@ -91,13 +91,13 @@ pub const Settings = struct {
     ///
     /// Note that if you include `VocabularyFilterName` in your request, you must
     /// also include `VocabularyFilterMethod`.
-    vocabulary_filter_name: ?[]const u8,
+    vocabulary_filter_name: ?[]const u8 = null,
 
     /// The name of the custom vocabulary you want to use in your transcription job
     /// request.
     /// This name is case sensitive, cannot contain spaces, and must be unique
     /// within an Amazon Web Services account.
-    vocabulary_name: ?[]const u8,
+    vocabulary_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channel_identification = "ChannelIdentification",

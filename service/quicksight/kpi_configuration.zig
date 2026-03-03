@@ -6,16 +6,16 @@ const KPISortConfiguration = @import("kpi_sort_configuration.zig").KPISortConfig
 /// The configuration of a KPI visual.
 pub const KPIConfiguration = struct {
     /// The field well configuration of a KPI visual.
-    field_wells: ?KPIFieldWells,
+    field_wells: ?KPIFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The options that determine the presentation of a KPI visual.
-    kpi_options: ?KPIOptions,
+    kpi_options: ?KPIOptions = null,
 
     /// The sort configuration of a KPI visual.
-    sort_configuration: ?KPISortConfiguration,
+    sort_configuration: ?KPISortConfiguration = null,
 
     pub const json_field_names = .{
         .field_wells = "FieldWells",

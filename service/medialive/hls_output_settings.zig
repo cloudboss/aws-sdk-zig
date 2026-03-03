@@ -5,7 +5,7 @@ const HlsSettings = @import("hls_settings.zig").HlsSettings;
 pub const HlsOutputSettings = struct {
     /// Only applicable when this output is referencing an H.265 video description.
     /// Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
-    h265_packaging_type: ?HlsH265PackagingType,
+    h265_packaging_type: ?HlsH265PackagingType = null,
 
     /// Settings regarding the underlying stream. These settings are different for
     /// audio-only outputs.
@@ -13,10 +13,10 @@ pub const HlsOutputSettings = struct {
 
     /// String concatenated to the end of the destination filename. Accepts \"Format
     /// Identifiers\":#formatIdentifierParameters.
-    name_modifier: ?[]const u8,
+    name_modifier: ?[]const u8 = null,
 
     /// String concatenated to end of segment filenames.
-    segment_modifier: ?[]const u8,
+    segment_modifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .h265_packaging_type = "H265PackagingType",

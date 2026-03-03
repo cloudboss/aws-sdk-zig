@@ -12,19 +12,19 @@ pub const TopicRefreshSchedule = struct {
 
     /// The time of day when the refresh should run, for
     /// example, Monday-Sunday.
-    repeat_at: ?[]const u8,
+    repeat_at: ?[]const u8 = null,
 
     /// The starting date and time for the refresh schedule.
-    starting_at: ?i64,
+    starting_at: ?i64 = null,
 
     /// The timezone that you want the refresh schedule to use.
-    timezone: ?[]const u8,
+    timezone: ?[]const u8 = null,
 
     /// The type of refresh schedule. Valid values for this structure are `HOURLY`,
     /// `DAILY`,
     /// `WEEKLY`,
     /// and `MONTHLY`.
-    topic_schedule_type: ?TopicScheduleType,
+    topic_schedule_type: ?TopicScheduleType = null,
 
     pub const json_field_names = .{
         .based_on_spice_schedule = "BasedOnSpiceSchedule",

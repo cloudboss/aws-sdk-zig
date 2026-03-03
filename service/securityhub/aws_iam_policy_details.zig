@@ -3,46 +3,46 @@ const AwsIamPolicyVersion = @import("aws_iam_policy_version.zig").AwsIamPolicyVe
 /// Represents an IAM permissions policy.
 pub const AwsIamPolicyDetails = struct {
     /// The number of users, groups, and roles that the policy is attached to.
-    attachment_count: ?i32,
+    attachment_count: ?i32 = null,
 
     /// When the policy was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    create_date: ?[]const u8,
+    create_date: ?[]const u8 = null,
 
     /// The identifier of the default version of the policy.
-    default_version_id: ?[]const u8,
+    default_version_id: ?[]const u8 = null,
 
     /// A description of the policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether the policy can be attached to a user, group, or role.
-    is_attachable: ?bool,
+    is_attachable: ?bool = null,
 
     /// The path to the policy.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// The number of users and roles that use the policy to set the permissions
     /// boundary.
-    permissions_boundary_usage_count: ?i32,
+    permissions_boundary_usage_count: ?i32 = null,
 
     /// The unique identifier of the policy.
-    policy_id: ?[]const u8,
+    policy_id: ?[]const u8 = null,
 
     /// The name of the policy.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// List of versions of the policy.
-    policy_version_list: ?[]const AwsIamPolicyVersion,
+    policy_version_list: ?[]const AwsIamPolicyVersion = null,
 
     /// When the policy was most recently updated.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    update_date: ?[]const u8,
+    update_date: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attachment_count = "AttachmentCount",

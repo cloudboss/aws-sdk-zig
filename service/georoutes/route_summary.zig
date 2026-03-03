@@ -13,7 +13,7 @@ pub const RouteSummary = struct {
     duration: i64 = 0,
 
     /// Toll summary for the complete route.
-    tolls: ?RouteTollSummary,
+    tolls: ?RouteTollSummary = null,
 
     pub const json_field_names = .{
         .distance = "Distance",

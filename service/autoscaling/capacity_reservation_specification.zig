@@ -20,9 +20,9 @@ pub const CapacityReservationSpecification = struct {
     ///
     /// * `default` - Auto Scaling uses the Capacity Reservation preference from
     ///   your launch template or an open Capacity Reservation.
-    capacity_reservation_preference: ?CapacityReservationPreference,
+    capacity_reservation_preference: ?CapacityReservationPreference = null,
 
     /// Describes a target Capacity Reservation or Capacity Reservation resource
     /// group.
-    capacity_reservation_target: ?CapacityReservationTarget,
+    capacity_reservation_target: ?CapacityReservationTarget = null,
 };

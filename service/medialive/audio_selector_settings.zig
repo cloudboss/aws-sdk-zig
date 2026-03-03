@@ -5,13 +5,13 @@ const AudioTrackSelection = @import("audio_track_selection.zig").AudioTrackSelec
 
 /// Audio Selector Settings
 pub const AudioSelectorSettings = struct {
-    audio_hls_rendition_selection: ?AudioHlsRenditionSelection,
+    audio_hls_rendition_selection: ?AudioHlsRenditionSelection = null,
 
-    audio_language_selection: ?AudioLanguageSelection,
+    audio_language_selection: ?AudioLanguageSelection = null,
 
-    audio_pid_selection: ?AudioPidSelection,
+    audio_pid_selection: ?AudioPidSelection = null,
 
-    audio_track_selection: ?AudioTrackSelection,
+    audio_track_selection: ?AudioTrackSelection = null,
 
     pub const json_field_names = .{
         .audio_hls_rendition_selection = "AudioHlsRenditionSelection",

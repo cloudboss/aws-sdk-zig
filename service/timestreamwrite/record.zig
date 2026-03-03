@@ -30,27 +30,27 @@ const TimeUnit = @import("time_unit.zig").TimeUnit;
 /// `1` for records without the `Version` field.
 pub const Record = struct {
     /// Contains the list of dimensions for time-series data points.
-    dimensions: ?[]const Dimension,
+    dimensions: ?[]const Dimension = null,
 
     /// Measure represents the data attribute of the time series. For example, the
     /// CPU
     /// utilization of an EC2 instance or the RPM of a wind turbine are measures.
-    measure_name: ?[]const u8,
+    measure_name: ?[]const u8 = null,
 
     /// Contains the measure value for the time-series data point.
-    measure_value: ?[]const u8,
+    measure_value: ?[]const u8 = null,
 
     /// Contains the list of MeasureValue for time-series data points.
     ///
     /// This is only allowed for type `MULTI`. For scalar values, use
     /// `MeasureValue` attribute of the record directly.
-    measure_values: ?[]const MeasureValue,
+    measure_values: ?[]const MeasureValue = null,
 
     /// Contains the data type of the measure value for the time-series data point.
     /// Default
     /// type is `DOUBLE`. For more information, see [Data
     /// types](https://docs.aws.amazon.com/timestream/latest/developerguide/writes.html#writes.data-types).
-    measure_value_type: ?MeasureValueType,
+    measure_value_type: ?MeasureValueType = null,
 
     /// Contains the time at which the measure value for the data point was
     /// collected. The time
@@ -58,13 +58,13 @@ pub const Record = struct {
     /// if the time
     /// value is `12345` and the unit is `ms`, then `12345 ms`
     /// have elapsed since the epoch.
-    time: ?[]const u8,
+    time: ?[]const u8 = null,
 
     /// The granularity of the timestamp unit. It indicates if the time value is in
     /// seconds,
     /// milliseconds, nanoseconds, or other supported values. Default is
     /// `MILLISECONDS`.
-    time_unit: ?TimeUnit,
+    time_unit: ?TimeUnit = null,
 
     /// 64-bit attribute used for record updates. Write requests for duplicate data
     /// with a
@@ -76,7 +76,7 @@ pub const Record = struct {
     ///
     /// `Version` must be `1` or greater, or you will receive a
     /// `ValidationException` error.
-    version: ?i64,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",

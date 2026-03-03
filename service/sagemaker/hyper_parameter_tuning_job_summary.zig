@@ -10,7 +10,7 @@ pub const HyperParameterTuningJobSummary = struct {
     creation_time: i64,
 
     /// The date and time that the tuning job ended.
-    hyper_parameter_tuning_end_time: ?i64,
+    hyper_parameter_tuning_end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the tuning job.
     hyper_parameter_tuning_job_arn: []const u8,
@@ -22,7 +22,7 @@ pub const HyperParameterTuningJobSummary = struct {
     hyper_parameter_tuning_job_status: HyperParameterTuningJobStatus,
 
     /// The date and time that the tuning job was modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The
     /// [ObjectiveStatusCounters](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ObjectiveStatusCounters.html) object that specifies the numbers of training jobs, categorized by objective metric status, that this tuning job launched.
@@ -30,7 +30,7 @@ pub const HyperParameterTuningJobSummary = struct {
 
     /// The
     /// [ResourceLimits](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html) object that specifies the maximum number of training jobs and parallel training jobs allowed for this tuning job.
-    resource_limits: ?ResourceLimits,
+    resource_limits: ?ResourceLimits = null,
 
     /// Specifies the search strategy hyperparameter tuning uses to choose which
     /// hyperparameters to evaluate at each iteration.

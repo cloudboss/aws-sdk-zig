@@ -7,13 +7,13 @@ pub const PackageVersionOrigin = struct {
     /// [DomainEntryPoint](https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainEntryPoint.html) object that contains
     /// information about from which repository or external connection the package
     /// version was added to the domain.
-    domain_entry_point: ?DomainEntryPoint,
+    domain_entry_point: ?DomainEntryPoint = null,
 
     /// Describes how the package version was originally added to the domain. An
     /// `INTERNAL` origin type means the package version was published
     /// directly to a repository in the domain. An `EXTERNAL` origin type means the
     /// package version was ingested from an external connection.
-    origin_type: ?PackageVersionOriginType,
+    origin_type: ?PackageVersionOriginType = null,
 
     pub const json_field_names = .{
         .domain_entry_point = "domainEntryPoint",

@@ -3,22 +3,22 @@ const ProvisionedProductPlanType = @import("provisioned_product_plan_type.zig").
 /// Summary information about a plan.
 pub const ProvisionedProductPlanSummary = struct {
     /// The plan identifier.
-    plan_id: ?[]const u8,
+    plan_id: ?[]const u8 = null,
 
     /// The name of the plan.
-    plan_name: ?[]const u8,
+    plan_name: ?[]const u8 = null,
 
     /// The plan type.
-    plan_type: ?ProvisionedProductPlanType,
+    plan_type: ?ProvisionedProductPlanType = null,
 
     /// The identifier of the provisioning artifact.
-    provisioning_artifact_id: ?[]const u8,
+    provisioning_artifact_id: ?[]const u8 = null,
 
     /// The product identifier.
-    provision_product_id: ?[]const u8,
+    provision_product_id: ?[]const u8 = null,
 
     /// The user-friendly name of the provisioned product.
-    provision_product_name: ?[]const u8,
+    provision_product_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .plan_id = "PlanId",

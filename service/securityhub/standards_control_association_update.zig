@@ -19,7 +19,7 @@ pub const StandardsControlAssociationUpdate = struct {
     standards_arn: []const u8,
 
     /// The reason for updating the control's enablement status in the standard.
-    updated_reason: ?[]const u8,
+    updated_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_status = "AssociationStatus",

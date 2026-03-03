@@ -5,42 +5,42 @@ const InstanceStatus = @import("instance_status.zig").InstanceStatus;
 /// Represents an Amazon EC2 instance provisioned as part of cluster.
 pub const Instance = struct {
     /// The list of Amazon EBS volumes that are attached to this instance.
-    ebs_volumes: ?[]const EbsVolume,
+    ebs_volumes: ?[]const EbsVolume = null,
 
     /// The unique identifier of the instance in Amazon EC2.
-    ec_2_instance_id: ?[]const u8,
+    ec_2_instance_id: ?[]const u8 = null,
 
     /// The unique identifier for the instance in Amazon EMR.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The unique identifier of the instance fleet to which an Amazon EC2 instance
     /// belongs.
-    instance_fleet_id: ?[]const u8,
+    instance_fleet_id: ?[]const u8 = null,
 
     /// The identifier of the instance group to which this instance belongs.
-    instance_group_id: ?[]const u8,
+    instance_group_id: ?[]const u8 = null,
 
     /// The Amazon EC2 instance type, for example `m3.xlarge`.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// The instance purchasing option. Valid values are `ON_DEMAND` or
     /// `SPOT`.
-    market: ?MarketType,
+    market: ?MarketType = null,
 
     /// The private DNS name of the instance.
-    private_dns_name: ?[]const u8,
+    private_dns_name: ?[]const u8 = null,
 
     /// The private IP address of the instance.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// The public DNS name of the instance.
-    public_dns_name: ?[]const u8,
+    public_dns_name: ?[]const u8 = null,
 
     /// The public IP address of the instance.
-    public_ip_address: ?[]const u8,
+    public_ip_address: ?[]const u8 = null,
 
     /// The current status of the instance.
-    status: ?InstanceStatus,
+    status: ?InstanceStatus = null,
 
     pub const json_field_names = .{
         .ebs_volumes = "EbsVolumes",

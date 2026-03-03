@@ -5,7 +5,7 @@ const TransformType = @import("transform_type.zig").TransformType;
 /// learning transform.
 pub const EvaluationMetrics = struct {
     /// The evaluation metrics for the find matches algorithm.
-    find_matches_metrics: ?FindMatchesMetrics,
+    find_matches_metrics: ?FindMatchesMetrics = null,
 
     /// The type of machine learning transform.
     transform_type: TransformType,

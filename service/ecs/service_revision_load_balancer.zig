@@ -5,11 +5,11 @@ pub const ServiceRevisionLoadBalancer = struct {
     /// The Amazon Resource Name (ARN) of the production listener rule or listener
     /// that directs traffic to the target group associated with the service
     /// revision.
-    production_listener_rule: ?[]const u8,
+    production_listener_rule: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the target group associated with the
     /// service revision.
-    target_group_arn: ?[]const u8,
+    target_group_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .production_listener_rule = "productionListenerRule",

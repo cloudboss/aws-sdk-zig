@@ -25,7 +25,7 @@ pub const TaskDefinition = struct {
     /// type. For more information, see [Amazon ECS launch
     /// types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    compatibilities: ?[]const Compatibility,
+    compatibilities: ?[]const Compatibility = null,
 
     /// A list of container definitions in JSON format that describe the different
     /// containers
@@ -34,7 +34,7 @@ pub const TaskDefinition = struct {
     /// defaults, see [Amazon ECS Task
     /// Definitions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    container_definitions: ?[]const ContainerDefinition,
+    container_definitions: ?[]const ContainerDefinition = null,
 
     /// The number of `cpu` units used by the task. If you use the EC2 launch type,
     /// this field is optional. Any value can be used. If you use the Fargate launch
@@ -52,19 +52,19 @@ pub const TaskDefinition = struct {
     /// see [Task
     /// size](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    cpu: ?[]const u8,
+    cpu: ?[]const u8 = null,
 
     /// The Unix timestamp for the time when the task definition was deregistered.
-    deregistered_at: ?i64,
+    deregistered_at: ?i64 = null,
 
     /// Enables fault injection and allows for fault injection requests to be
     /// accepted from
     /// the task's containers. The default value is `false`.
-    enable_fault_injection: ?bool,
+    enable_fault_injection: ?bool = null,
 
     /// The ephemeral storage settings to use for tasks run with the task
     /// definition.
-    ephemeral_storage: ?EphemeralStorage,
+    ephemeral_storage: ?EphemeralStorage = null,
 
     /// The Amazon Resource Name (ARN) of the task execution role that grants the
     /// Amazon ECS
@@ -74,7 +74,7 @@ pub const TaskDefinition = struct {
     /// for Amazon
     /// ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-ecs-iam-role-overview.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The name of a family that this task definition is registered to. Up to 255
     /// characters
@@ -87,10 +87,10 @@ pub const TaskDefinition = struct {
     /// task definition that you registered to a family a revision number of 1.
     /// Amazon ECS gives
     /// sequential revision numbers to each task definition that you add.
-    family: ?[]const u8,
+    family: ?[]const u8 = null,
 
     /// The Elastic Inference accelerator that's associated with the task.
-    inference_accelerators: ?[]const InferenceAccelerator,
+    inference_accelerators: ?[]const InferenceAccelerator = null,
 
     /// The IPC resource namespace to use for the containers in the task. The valid
     /// values are
@@ -128,7 +128,7 @@ pub const TaskDefinition = struct {
     ///
     /// This parameter is not supported for Windows containers or tasks run on
     /// Fargate.
-    ipc_mode: ?IpcMode,
+    ipc_mode: ?IpcMode = null,
 
     /// The amount (in MiB) of memory used by the task.
     ///
@@ -176,7 +176,7 @@ pub const TaskDefinition = struct {
     /// values: 16384 (16 vCPU)
     ///
     /// This option requires Linux platform `1.4.0` or later.
-    memory: ?[]const u8,
+    memory: ?[]const u8 = null,
 
     /// The Docker networking mode to use for the containers in the task. The valid
     /// values are
@@ -215,7 +215,7 @@ pub const TaskDefinition = struct {
     ///
     /// If the network mode is `host`, you cannot run multiple instantiations of
     /// the same task on a single container instance when port mappings are used.
-    network_mode: ?NetworkMode,
+    network_mode: ?NetworkMode = null,
 
     /// The process namespace to use for the containers in the task. The valid
     /// values are
@@ -242,12 +242,12 @@ pub const TaskDefinition = struct {
     /// This parameter is only supported for tasks that are hosted on Fargate if
     /// the tasks are using platform version `1.4.0` or later (Linux). This isn't
     /// supported for Windows containers on Fargate.
-    pid_mode: ?PidMode,
+    pid_mode: ?PidMode = null,
 
     /// An array of placement constraint objects to use for tasks.
     ///
     /// This parameter isn't supported for tasks run on Fargate.
-    placement_constraints: ?[]const TaskDefinitionPlacementConstraint,
+    placement_constraints: ?[]const TaskDefinitionPlacementConstraint = null,
 
     /// The configuration details for the App Mesh proxy.
     ///
@@ -261,13 +261,13 @@ pub const TaskDefinition = struct {
     /// ECS-optimized Linux
     /// AMI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html) in the *Amazon Elastic Container
     /// Service Developer Guide*.
-    proxy_configuration: ?ProxyConfiguration,
+    proxy_configuration: ?ProxyConfiguration = null,
 
     /// The Unix timestamp for the time when the task definition was registered.
-    registered_at: ?i64,
+    registered_at: ?i64 = null,
 
     /// The principal that registered the task definition.
-    registered_by: ?[]const u8,
+    registered_by: ?[]const u8 = null,
 
     /// The container instance attributes required by your task. When an Amazon EC2
     /// instance
@@ -284,7 +284,7 @@ pub const TaskDefinition = struct {
     /// Guide*.
     ///
     /// This parameter isn't supported for tasks run on Fargate.
-    requires_attributes: ?[]const Attribute,
+    requires_attributes: ?[]const Attribute = null,
 
     /// The task launch types the task definition was validated against. The valid
     /// values are
@@ -292,7 +292,7 @@ pub const TaskDefinition = struct {
     /// `EXTERNAL`. For more information, see [Amazon ECS launch
     /// types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    requires_compatibilities: ?[]const Compatibility,
+    requires_compatibilities: ?[]const Compatibility = null,
 
     /// The revision of the task in a particular family. The revision is a version
     /// number of a
@@ -310,13 +310,13 @@ pub const TaskDefinition = struct {
     ///
     /// When you specify a task in a service, this value must match the
     /// `runtimePlatform` value of the service.
-    runtime_platform: ?RuntimePlatform,
+    runtime_platform: ?RuntimePlatform = null,
 
     /// The status of the task definition.
-    status: ?TaskDefinitionStatus,
+    status: ?TaskDefinitionStatus = null,
 
     /// The full Amazon Resource Name (ARN) of the task definition.
-    task_definition_arn: ?[]const u8,
+    task_definition_arn: ?[]const u8 = null,
 
     /// The short name or full Amazon Resource Name (ARN) of the Identity and Access
     /// Management
@@ -327,7 +327,7 @@ pub const TaskDefinition = struct {
     /// for Amazon
     /// ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-ecs-iam-role-overview.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    task_role_arn: ?[]const u8,
+    task_role_arn: ?[]const u8 = null,
 
     /// The list of data volume definitions for the task. For more information, see
     /// [Using data volumes in
@@ -336,7 +336,7 @@ pub const TaskDefinition = struct {
     ///
     /// The `host` and `sourcePath` parameters aren't supported for
     /// tasks run on Fargate.
-    volumes: ?[]const Volume,
+    volumes: ?[]const Volume = null,
 
     pub const json_field_names = .{
         .compatibilities = "compatibilities",

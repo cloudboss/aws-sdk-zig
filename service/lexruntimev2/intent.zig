@@ -8,7 +8,7 @@ const IntentState = @import("intent_state.zig").IntentState;
 pub const Intent = struct {
     /// Indicates whether the intent has been `Confirmed`, `Denied`, or `None` if
     /// the confirmation stage has not yet been reached.
-    confirmation_state: ?ConfirmationState,
+    confirmation_state: ?ConfirmationState = null,
 
     /// The name of the intent.
     name: []const u8,
@@ -16,7 +16,7 @@ pub const Intent = struct {
     /// A map of all of the slots for the intent. The name of the slot maps
     /// to the value of the slot. If a slot has not been filled, the value is
     /// null.
-    slots: ?[]const aws.map.MapEntry(Slot),
+    slots: ?[]const aws.map.MapEntry(Slot) = null,
 
     /// Indicates the fulfillment state for the intent. The meanings of each value
     /// are as follows:
@@ -36,7 +36,7 @@ pub const Intent = struct {
     ///
     /// * `Waiting` – The bot is waiting for a response from the user (limited to
     ///   streaming conversations).
-    state: ?IntentState,
+    state: ?IntentState = null,
 
     pub const json_field_names = .{
         .confirmation_state = "confirmationState",

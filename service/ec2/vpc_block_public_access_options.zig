@@ -10,16 +10,16 @@ const VpcBlockPublicAccessState = @import("vpc_block_public_access_state.zig").V
 /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html) in the *Amazon VPC User Guide*.
 pub const VpcBlockPublicAccessOptions = struct {
     /// An Amazon Web Services account ID.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
     /// An Amazon Web Services Region.
-    aws_region: ?[]const u8,
+    aws_region: ?[]const u8 = null,
 
     /// Determines if exclusions are allowed. If you have [enabled VPC BPA at the
     /// Organization
     /// level](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html#security-vpc-bpa-exclusions-orgs), exclusions may be
     /// `not-allowed`. Otherwise, they are `allowed`.
-    exclusions_allowed: ?VpcBlockPublicAccessExclusionsAllowed,
+    exclusions_allowed: ?VpcBlockPublicAccessExclusionsAllowed = null,
 
     /// The current mode of VPC BPA.
     ///
@@ -34,10 +34,10 @@ pub const VpcBlockPublicAccessOptions = struct {
     ///   (except for VPCs or subnets which are excluded). Only traffic to and from
     ///   NAT gateways and egress-only internet gateways is allowed because these
     ///   gateways only allow outbound connections to be established.
-    internet_gateway_block_mode: ?InternetGatewayBlockMode,
+    internet_gateway_block_mode: ?InternetGatewayBlockMode = null,
 
     /// The last time the VPC BPA mode was updated.
-    last_update_timestamp: ?i64,
+    last_update_timestamp: ?i64 = null,
 
     /// The entity that manages the state of VPC BPA. Possible values include:
     ///
@@ -45,11 +45,11 @@ pub const VpcBlockPublicAccessOptions = struct {
     ///
     /// * `declarative-policy` - The state is managed by a declarative policy
     /// and can't be modified by the account.
-    managed_by: ?ManagedBy,
+    managed_by: ?ManagedBy = null,
 
     /// The reason for the current state.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The current state of VPC BPA.
-    state: ?VpcBlockPublicAccessState,
+    state: ?VpcBlockPublicAccessState = null,
 };

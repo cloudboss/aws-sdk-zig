@@ -4,12 +4,12 @@ const UnaggregatedField = @import("unaggregated_field.zig").UnaggregatedField;
 /// The custom actions for a layer.
 pub const GeospatialLayerJoinDefinition = struct {
     /// The geospatial color field for the join definition.
-    color_field: ?GeospatialLayerColorField,
+    color_field: ?GeospatialLayerColorField = null,
 
-    dataset_key_field: ?UnaggregatedField,
+    dataset_key_field: ?UnaggregatedField = null,
 
     /// The name of the field or property in the geospatial data source.
-    shape_key_field: ?[]const u8,
+    shape_key_field: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .color_field = "ColorField",

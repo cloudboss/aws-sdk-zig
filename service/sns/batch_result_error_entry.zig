@@ -7,7 +7,7 @@ pub const BatchResultErrorEntry = struct {
     id: []const u8,
 
     /// A message explaining why the action failed on this entry.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Specifies whether the error happened due to the caller of the batch API
     /// action.

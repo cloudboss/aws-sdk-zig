@@ -8,23 +8,23 @@ pub const PredefinedAttribute = struct {
     /// in upstream services, such as controlling
     /// how a predefined attribute should be displayed in the Amazon Connect admin
     /// website.
-    attribute_configuration: ?PredefinedAttributeConfiguration,
+    attribute_configuration: ?PredefinedAttributeConfiguration = null,
 
     /// Last modified region.
-    last_modified_region: ?[]const u8,
+    last_modified_region: ?[]const u8 = null,
 
     /// Last modified time.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the predefined attribute.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Values that enable you to categorize your predefined attributes. You can use
     /// them in custom UI elements across the Amazon Connect admin website.
-    purposes: ?[]const []const u8,
+    purposes: ?[]const []const u8 = null,
 
     /// The values of the predefined attribute.
-    values: ?PredefinedAttributeValues,
+    values: ?PredefinedAttributeValues = null,
 
     pub const json_field_names = .{
         .attribute_configuration = "AttributeConfiguration",

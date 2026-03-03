@@ -3,7 +3,7 @@ const LicenseAssetRule = @import("license_asset_rule.zig").LicenseAssetRule;
 /// License asset ruleset.
 pub const LicenseAssetRuleset = struct {
     /// License asset ruleset description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) of the license asset ruleset.
     license_asset_ruleset_arn: []const u8,

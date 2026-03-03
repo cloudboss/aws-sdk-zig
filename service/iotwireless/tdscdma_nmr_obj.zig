@@ -5,10 +5,10 @@ pub const TdscdmaNmrObj = struct {
 
     /// Path loss, or path attenuation, is the reduction in power density of an
     /// electromagnetic wave as it propagates through space.
-    path_loss: ?i32,
+    path_loss: ?i32 = null,
 
     /// Code power of the received signal, measured in decibel-milliwatts (dBm).
-    rscp: ?i32,
+    rscp: ?i32 = null,
 
     /// TD-SCDMA UTRA (Universal Terrestrial Radio Access Network) absolute RF
     /// channel
@@ -16,7 +16,7 @@ pub const TdscdmaNmrObj = struct {
     uarfcn: i32,
 
     /// UTRAN (UMTS Terrestrial Radio Access Network) cell global identifier.
-    utran_cid: ?i32,
+    utran_cid: ?i32 = null,
 
     pub const json_field_names = .{
         .cell_params = "CellParams",

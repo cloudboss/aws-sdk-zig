@@ -10,14 +10,14 @@ pub const VideoSelector = struct {
     /// Typically, choose FOLLOW, which means to use the color space metadata
     /// without changing it. Or choose another value (a standard). In this case, the
     /// handling is controlled by the colorspaceUsage property.
-    color_space: ?VideoSelectorColorSpace,
+    color_space: ?VideoSelectorColorSpace = null,
 
     /// Choose HDR10 only if the following situation applies. Firstly, you specified
     /// HDR10 in ColorSpace. Secondly, the attached input is for AWS Elemental Link.
     /// Thirdly, you plan to convert the content to another color space. You need to
     /// specify the color space metadata that is missing from the source sent from
     /// AWS Elemental Link.
-    color_space_settings: ?VideoSelectorColorSpaceSettings,
+    color_space_settings: ?VideoSelectorColorSpaceSettings = null,
 
     /// Applies only if colorSpace is a value other than follow. This field controls
     /// how the value in the colorSpace field will be used. fallback means that when
@@ -27,10 +27,10 @@ pub const VideoSelector = struct {
     /// when it does have color space data, that data is correct. force means to
     /// always use the value in colorSpace. Choose force if your input usually has
     /// no color space data or might have unreliable color space data.
-    color_space_usage: ?VideoSelectorColorSpaceUsage,
+    color_space_usage: ?VideoSelectorColorSpaceUsage = null,
 
     /// The video selector settings.
-    selector_settings: ?VideoSelectorSettings,
+    selector_settings: ?VideoSelectorSettings = null,
 
     pub const json_field_names = .{
         .color_space = "ColorSpace",

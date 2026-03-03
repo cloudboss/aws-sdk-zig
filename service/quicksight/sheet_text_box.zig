@@ -3,10 +3,10 @@ const TextBoxInteractionOptions = @import("text_box_interaction_options.zig").Te
 /// A text box.
 pub const SheetTextBox = struct {
     /// The content that is displayed in the text box.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The general textbox interactions setup for a textbox.
-    interactions: ?TextBoxInteractionOptions,
+    interactions: ?TextBoxInteractionOptions = null,
 
     /// The unique identifier for a text box. This identifier must be unique within
     /// the context of a dashboard, template, or analysis. Two dashboards, analyses,

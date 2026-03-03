@@ -17,7 +17,7 @@ pub const EbsBlockDevice = struct {
     /// [RequestSpotFleet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html),
     /// [RequestSpotInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html), and
     /// [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html).
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the Availability Zone where the EBS volume will be created (for
     /// example,
@@ -35,18 +35,18 @@ pub const EbsBlockDevice = struct {
     /// [RequestSpotFleet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html),
     /// [RequestSpotInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html), and
     /// [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html).
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// Indicates whether the EBS volume is deleted on instance termination. For
     /// more
     /// information, see [Preserving Amazon EBS volumes on instance
     /// termination](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#preserving-volumes-on-termination) in the
     /// *Amazon EC2 User Guide*.
-    delete_on_termination: ?bool,
+    delete_on_termination: ?bool = null,
 
     /// The index of the EBS card. Some instance types support multiple EBS cards.
     /// The default EBS card index is 0.
-    ebs_card_index: ?i32,
+    ebs_card_index: ?i32 = null,
 
     /// Indicates whether the encryption state of an EBS volume is changed while
     /// being
@@ -93,7 +93,7 @@ pub const EbsBlockDevice = struct {
     /// the parameter is ignored and the block device mapping is always encrypted.
     /// In this
     /// case, we recommend that you omit the parameter.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The number of I/O operations per second (IOPS). For `gp3`, `io1`, and `io2`
     /// volumes,
@@ -119,7 +119,7 @@ pub const EbsBlockDevice = struct {
     /// This parameter is required for `io1` and `io2` volumes. The default for
     /// `gp3` volumes
     /// is 3,000 IOPS.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// Identifier (key ID, key alias, key ARN, or alias ARN) of the customer
     /// managed KMS key
@@ -129,23 +129,23 @@ pub const EbsBlockDevice = struct {
     /// [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html), [RequestSpotFleet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html),
     /// and
     /// [RequestSpotInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html).
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The ARN of the Outpost on which the snapshot is stored.
     ///
     /// This parameter is not supported when using
     /// [CreateImage](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html).
-    outpost_arn: ?[]const u8,
+    outpost_arn: ?[]const u8 = null,
 
     /// The ID of the snapshot.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
     /// The throughput that the volume supports, in MiB/s.
     ///
     /// This parameter is valid only for `gp3` volumes.
     ///
     /// Valid Range: Minimum value of 125. Maximum value of 2,000.
-    throughput: ?i32,
+    throughput: ?i32 = null,
 
     /// Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume
     /// initialization rate), in MiB/s, at which to download the snapshot
@@ -181,7 +181,7 @@ pub const EbsBlockDevice = struct {
     /// [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html).
     ///
     /// Valid range: 100 - 300 MiB/s
-    volume_initialization_rate: ?i32,
+    volume_initialization_rate: ?i32 = null,
 
     /// The size of the volume, in GiBs. You must specify either a snapshot ID or a
     /// volume
@@ -202,10 +202,10 @@ pub const EbsBlockDevice = struct {
     /// * `st1` and `sc1`: 125 - 16,384 GiB
     ///
     /// * `standard`: 1 - 1024 GiB
-    volume_size: ?i32,
+    volume_size: ?i32 = null,
 
     /// The volume type. For more information, see [Amazon EBS volume
     /// types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the
     /// *Amazon EBS User Guide*.
-    volume_type: ?VolumeType,
+    volume_type: ?VolumeType = null,
 };

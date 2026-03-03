@@ -14,7 +14,7 @@ pub const DataSourceSyncJobMetricTarget = struct {
     /// are generated and documents are indexed/deleted at the index level without
     /// sync job metrics
     /// included.
-    data_source_sync_job_id: ?[]const u8,
+    data_source_sync_job_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_source_id = "DataSourceId",

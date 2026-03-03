@@ -3,8 +3,8 @@ const DeleteQueuedReservedInstancesError = @import("delete_queued_reserved_insta
 /// Describes a Reserved Instance whose queued purchase was not deleted.
 pub const FailedQueuedPurchaseDeletion = struct {
     /// The error.
-    @"error": ?DeleteQueuedReservedInstancesError,
+    @"error": ?DeleteQueuedReservedInstancesError = null,
 
     /// The ID of the Reserved Instance.
-    reserved_instances_id: ?[]const u8,
+    reserved_instances_id: ?[]const u8 = null,
 };

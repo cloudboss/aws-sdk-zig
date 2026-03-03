@@ -36,12 +36,12 @@ const SeverityLabel = @import("severity_label.zig").SeverityLabel;
 /// object, even if the top-level `Severity` object is overwritten.
 pub const FindingProviderSeverity = struct {
     /// The severity label assigned to the finding by the finding provider.
-    label: ?SeverityLabel,
+    label: ?SeverityLabel = null,
 
     /// The finding provider's original value for the severity.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 64.
-    original: ?[]const u8,
+    original: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .label = "Label",

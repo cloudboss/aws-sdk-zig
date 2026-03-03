@@ -4,7 +4,7 @@ const ComponentMatchScores = @import("component_match_scores.zig").ComponentMatc
 pub const MatchScoreDetails = struct {
     /// Indicates how well the component input matches the returned. It is equal to
     /// 1 if all input tokens are recognized and matched.
-    components: ?ComponentMatchScores,
+    components: ?ComponentMatchScores = null,
 
     /// Indicates how well the entire input matches the returned. It is equal to 1
     /// if all input tokens are recognized and matched.

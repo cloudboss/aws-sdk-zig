@@ -14,7 +14,7 @@ pub const DataProcessing = struct {
     /// [JSONPath](https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators) expression used to select a portion of the input data to pass to the algorithm. Use the `InputFilter` parameter to exclude fields, such as an ID column, from the input. If you want SageMaker to pass the entire input dataset to the algorithm, accept the default value `$`.
     ///
     /// Examples: `"$"`, `"$[1:]"`, `"$.features"`
-    input_filter: ?[]const u8,
+    input_filter: ?[]const u8 = null,
 
     /// Specifies the source of the data to join with the transformed data. The
     /// valid values are `None` and `Input`. The default value is `None`, which
@@ -39,13 +39,13 @@ pub const DataProcessing = struct {
     /// For information on how joining in applied, see [Workflow for Associating
     /// Inferences with Input
     /// Records](https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow).
-    join_source: ?JoinSource,
+    join_source: ?JoinSource = null,
 
     /// A
     /// [JSONPath](https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators) expression used to select a portion of the joined dataset to save in the output file for a batch transform job. If you want SageMaker to store the entire input dataset in the output file, leave the default value, `$`. If you specify indexes that aren't within the dimension size of the joined dataset, you get an error.
     ///
     /// Examples: `"$"`, `"$[0,5:]"`, `"$['id','SageMakerOutput']"`
-    output_filter: ?[]const u8,
+    output_filter: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .input_filter = "InputFilter",

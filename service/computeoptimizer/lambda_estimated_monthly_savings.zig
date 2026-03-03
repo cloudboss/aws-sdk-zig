@@ -5,7 +5,7 @@ const Currency = @import("currency.zig").Currency;
 /// on Lambda functions pricing after applying Savings Plans discounts.
 pub const LambdaEstimatedMonthlySavings = struct {
     /// The currency of the estimated monthly savings.
-    currency: ?Currency,
+    currency: ?Currency = null,
 
     /// The value of the estimated monthly savings.
     value: f64 = 0,

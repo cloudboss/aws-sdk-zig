@@ -7,11 +7,11 @@ pub const ConfiguredTableAssociationAnalysisRuleAggregation = struct {
     /// The `allowedAdditionalAnalyses` parameter is currently supported for the
     /// list analysis rule (`AnalysisRuleList`) and the custom analysis rule
     /// (`AnalysisRuleCustom`).
-    allowed_additional_analyses: ?[]const []const u8,
+    allowed_additional_analyses: ?[]const []const u8 = null,
 
     /// The list of collaboration members who are allowed to receive results of
     /// queries run with this configured table.
-    allowed_result_receivers: ?[]const []const u8,
+    allowed_result_receivers: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .allowed_additional_analyses = "allowedAdditionalAnalyses",

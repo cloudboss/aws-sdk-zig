@@ -14,7 +14,7 @@ pub const TimeSeriesTransformations = struct {
     /// `min`, `max`.
     ///
     /// Aggregation is only supported for the target column.
-    aggregation: ?[]const aws.map.MapEntry(AggregationTransformationValue),
+    aggregation: ?[]const aws.map.MapEntry(AggregationTransformationValue) = null,
 
     /// A key value pair defining the filling method for a column, where the key is
     /// the column name and the value is an object which defines the filling logic.
@@ -32,7 +32,7 @@ pub const TimeSeriesTransformations = struct {
     /// the filling value in an additional parameter prefixed with "_value". For
     /// example, to set `backfill` to a value of `2`, you must include two
     /// parameters: `"backfill": "value"` and `"backfill_value":"2"`.
-    filling: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry),
+    filling: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry) = null,
 
     pub const json_field_names = .{
         .aggregation = "Aggregation",

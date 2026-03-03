@@ -10,7 +10,7 @@ const ManifestServiceExcludeEventType = @import("manifest_service_exclude_event_
 pub const ManifestServiceInteractionLog = struct {
     /// Indicates that MediaTailor won't emit the selected events in the logs for
     /// playback sessions that are initialized with this configuration.
-    exclude_event_types: ?[]const ManifestServiceExcludeEventType,
+    exclude_event_types: ?[]const ManifestServiceExcludeEventType = null,
 
     pub const json_field_names = .{
         .exclude_event_types = "ExcludeEventTypes",

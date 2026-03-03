@@ -11,7 +11,7 @@ pub const BatchCreateFirewallRuleOutputItem = struct {
 
     /// A message describing the result of the batch operation, including error
     /// details if applicable.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

@@ -4,7 +4,7 @@ const PITPolicyRuleUnits = @import("pit_policy_rule_units.zig").PITPolicyRuleUni
 /// and how long to retain them for.
 pub const PITPolicyRule = struct {
     /// Whether this rule is enabled or not.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// How often, in the chosen units, a snapshot should be taken.
     interval: i32,

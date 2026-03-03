@@ -18,7 +18,7 @@ pub const EnvironmentAccountConnectionSummary = struct {
     /// [Proton
     /// components](https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
     /// *Proton User Guide*.
-    component_role_arn: ?[]const u8,
+    component_role_arn: ?[]const u8 = null,
 
     /// The ID of the environment account that's connected to the environment
     /// account connection.

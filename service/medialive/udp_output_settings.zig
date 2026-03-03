@@ -8,7 +8,7 @@ pub const UdpOutputSettings = struct {
     /// the transcoder but simultaneously assist the transcoder in maintaining a
     /// constant, low-jitter UDP/RTP output while accommodating clock recovery,
     /// input switching, input disruptions, picture reordering, etc.
-    buffer_msec: ?i32,
+    buffer_msec: ?i32 = null,
 
     container_settings: UdpContainerSettings,
 
@@ -18,7 +18,7 @@ pub const UdpOutputSettings = struct {
     destination: OutputLocationRef,
 
     /// Settings for enabling and adjusting Forward Error Correction on UDP outputs.
-    fec_output_settings: ?FecOutputSettings,
+    fec_output_settings: ?FecOutputSettings = null,
 
     pub const json_field_names = .{
         .buffer_msec = "BufferMsec",

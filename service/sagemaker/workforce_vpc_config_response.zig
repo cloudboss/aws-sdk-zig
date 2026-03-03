@@ -10,7 +10,7 @@ pub const WorkforceVpcConfigResponse = struct {
 
     /// The IDs for the VPC service endpoints of your VPC workforce when it is
     /// created and updated.
-    vpc_endpoint_id: ?[]const u8,
+    vpc_endpoint_id: ?[]const u8 = null,
 
     /// The ID of the VPC that the workforce uses for communication.
     vpc_id: []const u8,

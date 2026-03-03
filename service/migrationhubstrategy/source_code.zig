@@ -4,16 +4,16 @@ const VersionControl = @import("version_control.zig").VersionControl;
 /// component.
 pub const SourceCode = struct {
     /// The repository name for the source code.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The name of the project.
-    project_name: ?[]const u8,
+    project_name: ?[]const u8 = null,
 
     /// The branch of the source code.
-    source_version: ?[]const u8,
+    source_version: ?[]const u8 = null,
 
     /// The type of repository to use for the source code.
-    version_control: ?VersionControl,
+    version_control: ?VersionControl = null,
 
     pub const json_field_names = .{
         .location = "location",

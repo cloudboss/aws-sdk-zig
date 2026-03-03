@@ -4,7 +4,7 @@ const AudioRecognitionStrategy = @import("audio_recognition_strategy.zig").Audio
 pub const AdvancedRecognitionSetting = struct {
     /// Enables using the slot values as a custom vocabulary for recognizing user
     /// utterances.
-    audio_recognition_strategy: ?AudioRecognitionStrategy,
+    audio_recognition_strategy: ?AudioRecognitionStrategy = null,
 
     pub const json_field_names = .{
         .audio_recognition_strategy = "audioRecognitionStrategy",

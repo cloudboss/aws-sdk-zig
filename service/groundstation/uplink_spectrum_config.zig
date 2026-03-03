@@ -9,7 +9,7 @@ pub const UplinkSpectrumConfig = struct {
 
     /// Polarization of an uplink spectral `Config`. Capturing both `"RIGHT_HAND"`
     /// and `"LEFT_HAND"` polarization requires two separate configs.
-    polarization: ?Polarization,
+    polarization: ?Polarization = null,
 
     pub const json_field_names = .{
         .center_frequency = "centerFrequency",

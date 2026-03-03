@@ -3,18 +3,18 @@ const aws = @import("aws");
 /// Identifying information about the device.
 pub const DeviceSummary = struct {
     /// The ID of the job used to order the device.
-    associated_with_job: ?[]const u8,
+    associated_with_job: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the device.
-    managed_device_arn: ?[]const u8,
+    managed_device_arn: ?[]const u8 = null,
 
     /// The ID of the device.
-    managed_device_id: ?[]const u8,
+    managed_device_id: ?[]const u8 = null,
 
     /// Optional metadata that you assign to a resource. You can use tags to
     /// categorize a resource
     /// in different ways, such as by purpose, owner, or environment.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .associated_with_job = "associatedWithJob",

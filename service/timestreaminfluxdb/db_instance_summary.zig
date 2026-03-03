@@ -7,22 +7,22 @@ const Status = @import("status.zig").Status;
 /// Contains a summary of a DB instance.
 pub const DbInstanceSummary = struct {
     /// The amount of storage to allocate for your DbStorageType in GiB (gibibytes).
-    allocated_storage: ?i32,
+    allocated_storage: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the DB instance.
     arn: []const u8,
 
     /// The Timestream for InfluxDB instance type to run InfluxDB on.
-    db_instance_type: ?DbInstanceType,
+    db_instance_type: ?DbInstanceType = null,
 
     /// The storage type for your DB instance.
-    db_storage_type: ?DbStorageType,
+    db_storage_type: ?DbStorageType = null,
 
     /// Single-Instance or with a MultiAZ Standby for High availability.
-    deployment_type: ?DeploymentType,
+    deployment_type: ?DeploymentType = null,
 
     /// The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// The service-generated unique identifier of the DB instance.
     id: []const u8,
@@ -35,13 +35,13 @@ pub const DbInstanceSummary = struct {
     /// Specifies whether the networkType of the Timestream for InfluxDB instance is
     /// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can
     /// communicate over both IPv4 and IPv6 protocols.
-    network_type: ?NetworkType,
+    network_type: ?NetworkType = null,
 
     /// The port number on which InfluxDB accepts connections.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The status of the DB instance.
-    status: ?Status,
+    status: ?Status = null,
 
     pub const json_field_names = .{
         .allocated_storage = "allocatedStorage",

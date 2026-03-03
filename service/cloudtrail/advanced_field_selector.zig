@@ -3,7 +3,7 @@ pub const AdvancedFieldSelector = struct {
     /// An operator that includes events that match the last few characters of the
     /// event record
     /// field specified as the value of `Field`.
-    ends_with: ?[]const []const u8,
+    ends_with: ?[]const []const u8 = null,
 
     /// An operator that includes events that match the exact value of the event
     /// record field
@@ -11,7 +11,7 @@ pub const AdvancedFieldSelector = struct {
     /// can
     /// use with the `readOnly`, `eventCategory`, and
     /// `resources.type` fields.
-    equals: ?[]const []const u8,
+    equals: ?[]const []const u8 = null,
 
     /// A field in a CloudTrail event record on which to filter events to be logged.
     /// For
@@ -33,22 +33,22 @@ pub const AdvancedFieldSelector = struct {
     /// An operator that excludes events that match the last few characters of the
     /// event record
     /// field specified as the value of `Field`.
-    not_ends_with: ?[]const []const u8,
+    not_ends_with: ?[]const []const u8 = null,
 
     /// An operator that excludes events that match the exact value of the event
     /// record field
     /// specified as the value of `Field`.
-    not_equals: ?[]const []const u8,
+    not_equals: ?[]const []const u8 = null,
 
     /// An operator that excludes events that match the first few characters of the
     /// event
     /// record field specified as the value of `Field`.
-    not_starts_with: ?[]const []const u8,
+    not_starts_with: ?[]const []const u8 = null,
 
     /// An operator that includes events that match the first few characters of the
     /// event record
     /// field specified as the value of `Field`.
-    starts_with: ?[]const []const u8,
+    starts_with: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .ends_with = "EndsWith",

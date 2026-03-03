@@ -13,42 +13,42 @@ pub const JobExecution = struct {
     /// seconds later than the estimated duration. This value will not be included
     /// if the job
     /// execution has reached a terminal status.
-    approximate_seconds_before_timed_out: ?i64,
+    approximate_seconds_before_timed_out: ?i64 = null,
 
     /// A string (consisting of the digits "0" through "9") which identifies this
     /// particular job execution on this particular device. It can be used in
     /// commands which
     /// return or update job execution information.
-    execution_number: ?i64,
+    execution_number: ?i64 = null,
 
     /// Will be `true` if the job execution was canceled with the optional
     /// `force` parameter set to `true`.
-    force_canceled: ?bool,
+    force_canceled: ?bool = null,
 
     /// The unique identifier you assigned to the job when it was created.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The time, in seconds since the epoch, when the job execution was last
     /// updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The time, in seconds since the epoch, when the job execution was queued.
-    queued_at: ?i64,
+    queued_at: ?i64 = null,
 
     /// The time, in seconds since the epoch, when the job execution started.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED,
     /// TIMED_OUT,
     /// CANCELED, or REJECTED).
-    status: ?JobExecutionStatus,
+    status: ?JobExecutionStatus = null,
 
     /// A collection of name/value pairs that describe the status of the job
     /// execution.
-    status_details: ?JobExecutionStatusDetails,
+    status_details: ?JobExecutionStatusDetails = null,
 
     /// The ARN of the thing on which the job execution is running.
-    thing_arn: ?[]const u8,
+    thing_arn: ?[]const u8 = null,
 
     /// The version of the job execution. Job execution versions are incremented
     /// each time

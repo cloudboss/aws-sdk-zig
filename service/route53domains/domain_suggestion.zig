@@ -48,10 +48,10 @@ pub const DomainSuggestion = struct {
     /// **UNAVAILABLE_RESTRICTED**
     ///
     /// The domain name is forbidden.
-    availability: ?[]const u8,
+    availability: ?[]const u8 = null,
 
     /// A suggested domain name.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .availability = "Availability",

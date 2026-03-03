@@ -7,5 +7,5 @@ pub const StorageLensGroupLevel = struct {
     /// Lens group
     /// aggregation. If this value is left null, then all Storage Lens groups are
     /// selected.
-    selection_criteria: ?StorageLensGroupLevelSelectionCriteria,
+    selection_criteria: ?StorageLensGroupLevelSelectionCriteria = null,
 };

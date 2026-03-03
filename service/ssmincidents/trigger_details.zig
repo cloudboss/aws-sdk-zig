@@ -2,7 +2,7 @@
 pub const TriggerDetails = struct {
     /// Raw data passed from either Amazon EventBridge, Amazon CloudWatch, or
     /// Incident Manager when an incident is created.
-    raw_data: ?[]const u8,
+    raw_data: ?[]const u8 = null,
 
     /// Identifies the service that sourced the event. All events sourced from
     /// within Amazon Web Services begin with "`aws.`" Customer-generated events can
@@ -16,7 +16,7 @@ pub const TriggerDetails = struct {
     timestamp: i64,
 
     /// The Amazon Resource Name (ARN) of the source that detected the incident.
-    trigger_arn: ?[]const u8,
+    trigger_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .raw_data = "rawData",

@@ -9,10 +9,10 @@
 ///   response](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax) – in the `span` field
 pub const Span = struct {
     /// Where the text with a citation ends in the generated output.
-    end: ?i32,
+    end: ?i32 = null,
 
     /// Where the text with a citation starts in the generated output.
-    start: ?i32,
+    start: ?i32 = null,
 
     pub const json_field_names = .{
         .end = "end",

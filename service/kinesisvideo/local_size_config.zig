@@ -8,11 +8,11 @@ const StrategyOnFullSize = @import("strategy_on_full_size.zig").StrategyOnFullSi
 pub const LocalSizeConfig = struct {
     /// The overall maximum size of the media that you want to store for a stream on
     /// the Edge Agent.
-    max_local_media_size_in_mb: ?i32,
+    max_local_media_size_in_mb: ?i32 = null,
 
     /// The strategy to perform when a stream’s `MaxLocalMediaSizeInMB` limit is
     /// reached.
-    strategy_on_full_size: ?StrategyOnFullSize,
+    strategy_on_full_size: ?StrategyOnFullSize = null,
 
     pub const json_field_names = .{
         .max_local_media_size_in_mb = "MaxLocalMediaSizeInMB",

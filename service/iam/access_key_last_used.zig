@@ -17,7 +17,7 @@ pub const AccessKeyLastUsed = struct {
     /// information.
     ///
     /// * There is no sign-in data associated with the user.
-    last_used_date: ?i64,
+    last_used_date: ?i64 = null,
 
     /// The Amazon Web Services Region where this access key was most recently used.
     /// The value for this field

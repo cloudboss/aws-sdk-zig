@@ -8,18 +8,18 @@ const Tag = @import("tag.zig").Tag;
 pub const FirewallPolicyResponse = struct {
     /// The number of capacity units currently consumed by the policy's stateful
     /// rules.
-    consumed_stateful_rule_capacity: ?i32,
+    consumed_stateful_rule_capacity: ?i32 = null,
 
     /// The number of capacity units currently consumed by the policy's stateless
     /// rules.
-    consumed_stateless_rule_capacity: ?i32,
+    consumed_stateless_rule_capacity: ?i32 = null,
 
     /// A description of the firewall policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A complex type that contains the Amazon Web Services KMS encryption
     /// configuration settings for your firewall policy.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the firewall policy.
     ///
@@ -39,16 +39,16 @@ pub const FirewallPolicyResponse = struct {
     /// firewall policy
     /// by calling DescribeFirewallPolicy and providing the firewall policy's
     /// name or ARN.
-    firewall_policy_status: ?ResourceStatus,
+    firewall_policy_status: ?ResourceStatus = null,
 
     /// The last time that the firewall policy was changed.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The number of firewalls that are associated with this firewall policy.
-    number_of_associations: ?i32,
+    number_of_associations: ?i32 = null,
 
     /// The key:value pairs to associate with the resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .consumed_stateful_rule_capacity = "ConsumedStatefulRuleCapacity",

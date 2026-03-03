@@ -9,14 +9,14 @@ pub const Distribution = struct {
     /// This field contains a list of key groups and the public keys in each key
     /// group that CloudFront can use to verify the signatures of signed URLs or
     /// signed cookies.
-    active_trusted_key_groups: ?ActiveTrustedKeyGroups,
+    active_trusted_key_groups: ?ActiveTrustedKeyGroups = null,
 
     /// We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     ///
     /// This field contains a list of Amazon Web Services account IDs and the active
     /// CloudFront key pairs in each account that CloudFront can use to verify the
     /// signatures of signed URLs or signed cookies.
-    active_trusted_signers: ?ActiveTrustedSigners,
+    active_trusted_signers: ?ActiveTrustedSigners = null,
 
     /// Amazon Web Services services in China customers must file for an Internet
     /// Content Provider (ICP) recordal if they want to serve content publicly on an
@@ -26,7 +26,7 @@ pub const Distribution = struct {
     ///
     /// For more information about ICP recordals, see [ Signup, Accounts, and
     /// Credentials](https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html) in *Getting Started with Amazon Web Services services in China*.
-    alias_icp_recordals: ?[]const AliasICPRecordal,
+    alias_icp_recordals: ?[]const AliasICPRecordal = null,
 
     /// The distribution's Amazon Resource Name (ARN).
     arn: []const u8,

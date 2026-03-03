@@ -11,7 +11,7 @@ pub const InsightRuleMetricDatapoint = struct {
     ///
     /// This statistic is returned only if you included it in the `Metrics` array
     /// in your request.
-    average: ?f64,
+    average: ?f64 = null,
 
     /// The maximum value provided by one contributor during this timestamp. Each
     /// timestamp is
@@ -21,7 +21,7 @@ pub const InsightRuleMetricDatapoint = struct {
     ///
     /// This statistic is returned only if you included it in the `Metrics` array
     /// in your request.
-    max_contributor_value: ?f64,
+    max_contributor_value: ?f64 = null,
 
     /// The maximum value from a single occurence from a single contributor during
     /// the time
@@ -29,7 +29,7 @@ pub const InsightRuleMetricDatapoint = struct {
     ///
     /// This statistic is returned only if you included it in the `Metrics` array
     /// in your request.
-    maximum: ?f64,
+    maximum: ?f64 = null,
 
     /// The minimum value from a single contributor during the time period
     /// represented by that
@@ -37,13 +37,13 @@ pub const InsightRuleMetricDatapoint = struct {
     ///
     /// This statistic is returned only if you included it in the `Metrics` array
     /// in your request.
-    minimum: ?f64,
+    minimum: ?f64 = null,
 
     /// The number of occurrences that matched the rule during this data point.
     ///
     /// This statistic is returned only if you included it in the `Metrics` array
     /// in your request.
-    sample_count: ?f64,
+    sample_count: ?f64 = null,
 
     /// The sum of the values from all contributors during the time period
     /// represented by that
@@ -51,7 +51,7 @@ pub const InsightRuleMetricDatapoint = struct {
     ///
     /// This statistic is returned only if you included it in the `Metrics` array
     /// in your request.
-    sum: ?f64,
+    sum: ?f64 = null,
 
     /// The timestamp of the data point.
     timestamp: i64,
@@ -60,7 +60,7 @@ pub const InsightRuleMetricDatapoint = struct {
     ///
     /// This statistic is returned only if you included it in the `Metrics` array
     /// in your request.
-    unique_contributors: ?f64,
+    unique_contributors: ?f64 = null,
 
     pub const json_field_names = .{
         .average = "Average",

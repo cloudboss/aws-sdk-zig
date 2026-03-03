@@ -3,7 +3,7 @@ const AssetPropertyValue = @import("asset_property_value.zig").AssetPropertyValu
 /// Contains success information for an entry that is associated with the
 /// [BatchGetAssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html) API.
 pub const BatchGetAssetPropertyValueSuccessEntry = struct {
-    asset_property_value: ?AssetPropertyValue,
+    asset_property_value: ?AssetPropertyValue = null,
 
     /// The ID of the entry.
     entry_id: []const u8,

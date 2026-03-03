@@ -29,7 +29,7 @@ pub const CacheBehavior = struct {
     /// applications that use cookies, headers, and query strings to personalize
     /// content for
     /// individual users.
-    behavior: ?BehaviorEnum,
+    behavior: ?BehaviorEnum = null,
 
     pub const json_field_names = .{
         .behavior = "behavior",

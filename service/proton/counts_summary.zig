@@ -11,33 +11,33 @@ pub const CountsSummary = struct {
     /// therefore they don't have the concept of staleness. The `components` object
     /// will only contain
     /// `total` and `failed` members.
-    components: ?ResourceCountsSummary,
+    components: ?ResourceCountsSummary = null,
 
     /// The staleness counts for Proton environments in the Amazon Web Services
     /// account. The `environments` object will only
     /// contain `total` members.
-    environments: ?ResourceCountsSummary,
+    environments: ?ResourceCountsSummary = null,
 
     /// The total number of environment templates in the Amazon Web Services
     /// account. The `environmentTemplates` object
     /// will only contain `total` members.
-    environment_templates: ?ResourceCountsSummary,
+    environment_templates: ?ResourceCountsSummary = null,
 
     /// The staleness counts for Proton pipelines in the Amazon Web Services
     /// account.
-    pipelines: ?ResourceCountsSummary,
+    pipelines: ?ResourceCountsSummary = null,
 
     /// The staleness counts for Proton service instances in the Amazon Web Services
     /// account.
-    service_instances: ?ResourceCountsSummary,
+    service_instances: ?ResourceCountsSummary = null,
 
     /// The staleness counts for Proton services in the Amazon Web Services account.
-    services: ?ResourceCountsSummary,
+    services: ?ResourceCountsSummary = null,
 
     /// The total number of service templates in the Amazon Web Services account.
     /// The `serviceTemplates` object will only
     /// contain `total` members.
-    service_templates: ?ResourceCountsSummary,
+    service_templates: ?ResourceCountsSummary = null,
 
     pub const json_field_names = .{
         .components = "components",

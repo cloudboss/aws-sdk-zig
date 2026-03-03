@@ -1,19 +1,19 @@
 /// An action taken by a TestGridSession browser instance.
 pub const TestGridSessionAction = struct {
     /// The action taken by the session.
-    action: ?[]const u8,
+    action: ?[]const u8 = null,
 
     /// The time, in milliseconds, that the action took to complete in the browser.
-    duration: ?i64,
+    duration: ?i64 = null,
 
     /// HTTP method that the browser used to make the request.
-    request_method: ?[]const u8,
+    request_method: ?[]const u8 = null,
 
     /// The time that the session invoked the action.
-    started: ?i64,
+    started: ?i64 = null,
 
     /// HTTP status code returned to the browser when the action was taken.
-    status_code: ?[]const u8,
+    status_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "action",

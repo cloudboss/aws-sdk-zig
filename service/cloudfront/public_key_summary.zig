@@ -2,7 +2,7 @@
 pub const PublicKeySummary = struct {
     /// A comment to describe the public key. The comment cannot be longer than 128
     /// characters.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The date and time when the public key was uploaded.
     created_time: i64,

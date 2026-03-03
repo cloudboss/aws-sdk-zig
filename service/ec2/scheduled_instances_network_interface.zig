@@ -18,39 +18,39 @@ pub const ScheduledInstancesNetworkInterface = struct {
     /// associated with running instances and Elastic IP addresses. For more
     /// information, see the *Public IPv4 Address* tab on the [Amazon VPC pricing
     /// page](http://aws.amazon.com/vpc/pricing/).
-    associate_public_ip_address: ?bool,
+    associate_public_ip_address: ?bool = null,
 
     /// Indicates whether to delete the interface when the instance is terminated.
-    delete_on_termination: ?bool,
+    delete_on_termination: ?bool = null,
 
     /// The description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The index of the device for the network interface attachment.
-    device_index: ?i32,
+    device_index: ?i32 = null,
 
     /// The IDs of the security groups.
-    groups: ?[]const []const u8,
+    groups: ?[]const []const u8 = null,
 
     /// The number of IPv6 addresses to assign to the network interface. The IPv6
     /// addresses are automatically selected from the subnet range.
-    ipv_6_address_count: ?i32,
+    ipv_6_address_count: ?i32 = null,
 
     /// The specific IPv6 addresses from the subnet range.
-    ipv_6_addresses: ?[]const ScheduledInstancesIpv6Address,
+    ipv_6_addresses: ?[]const ScheduledInstancesIpv6Address = null,
 
     /// The ID of the network interface.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// The IPv4 address of the network interface within the subnet.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// The private IPv4 addresses.
-    private_ip_address_configs: ?[]const ScheduledInstancesPrivateIpAddressConfig,
+    private_ip_address_configs: ?[]const ScheduledInstancesPrivateIpAddressConfig = null,
 
     /// The number of secondary private IPv4 addresses.
-    secondary_private_ip_address_count: ?i32,
+    secondary_private_ip_address_count: ?i32 = null,
 
     /// The ID of the subnet.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 };

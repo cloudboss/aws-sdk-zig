@@ -9,7 +9,7 @@ pub const ComponentPlatform = struct {
     /// component. For more
     /// information, see the [Greengrass nucleus
     /// component](https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html) in the *IoT Greengrass V2 Developer Guide*.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The friendly name of the platform. This name helps you identify the
     /// platform.
@@ -17,7 +17,7 @@ pub const ComponentPlatform = struct {
     /// If you omit this parameter, IoT Greengrass creates a friendly name from the
     /// `os` and
     /// `architecture` of the platform.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "attributes",

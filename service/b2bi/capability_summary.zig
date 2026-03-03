@@ -12,7 +12,7 @@ pub const CapabilitySummary = struct {
 
     /// Returns a timestamp that identifies the most recent date and time that the
     /// capability was modified.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// The display name of the capability.
     name: []const u8,

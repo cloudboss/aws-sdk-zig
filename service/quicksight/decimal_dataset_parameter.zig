@@ -5,7 +5,7 @@ const DatasetParameterValueType = @import("dataset_parameter_value_type.zig").Da
 pub const DecimalDatasetParameter = struct {
     /// A list of default values for a given decimal parameter. This structure only
     /// accepts static values.
-    default_values: ?DecimalDatasetParameterDefaultValues,
+    default_values: ?DecimalDatasetParameterDefaultValues = null,
 
     /// An identifier for the decimal parameter created in the dataset.
     id: []const u8,

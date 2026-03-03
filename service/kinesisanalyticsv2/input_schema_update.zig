@@ -8,14 +8,14 @@ pub const InputSchemaUpdate = struct {
     /// A list of `RecordColumn` objects. Each object describes the mapping
     /// of the streaming source element to the corresponding column in the
     /// in-application stream.
-    record_column_updates: ?[]const RecordColumn,
+    record_column_updates: ?[]const RecordColumn = null,
 
     /// Specifies the encoding of the records in the streaming source; for example,
     /// UTF-8.
-    record_encoding_update: ?[]const u8,
+    record_encoding_update: ?[]const u8 = null,
 
     /// Specifies the format of the records on the streaming source.
-    record_format_update: ?RecordFormat,
+    record_format_update: ?RecordFormat = null,
 
     pub const json_field_names = .{
         .record_column_updates = "RecordColumnUpdates",

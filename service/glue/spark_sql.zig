@@ -13,7 +13,7 @@ pub const SparkSQL = struct {
     name: []const u8,
 
     /// Specifies the data schema for the SparkSQL transform.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// A list of aliases. An alias allows you to specify what name to use in the
     /// SQL for a given input. For example, you have a datasource named

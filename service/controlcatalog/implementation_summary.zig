@@ -6,7 +6,7 @@
 pub const ImplementationSummary = struct {
     /// The identifier originally assigned by the Amazon Web Services service that
     /// implements the control. For example, `CODEPIPELINE_DEPLOYMENT_COUNT_CHECK`.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// A string that represents the Amazon Web Services service that implements
     /// this control. For example, a value of `AWS::Config::ConfigRule` indicates

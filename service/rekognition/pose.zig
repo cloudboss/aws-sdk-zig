@@ -1,13 +1,13 @@
 /// Indicates the pose of the face as determined by its pitch, roll, and yaw.
 pub const Pose = struct {
     /// Value representing the face rotation on the pitch axis.
-    pitch: ?f32,
+    pitch: ?f32 = null,
 
     /// Value representing the face rotation on the roll axis.
-    roll: ?f32,
+    roll: ?f32 = null,
 
     /// Value representing the face rotation on the yaw axis.
-    yaw: ?f32,
+    yaw: ?f32 = null,
 
     pub const json_field_names = .{
         .pitch = "Pitch",

@@ -3,9 +3,9 @@ const PrimaryChannelSettings = @import("primary_channel_settings.zig").PrimaryCh
 
 /// Configuration for linked channel relationships
 pub const LinkedChannelSettings = struct {
-    follower_channel_settings: ?FollowerChannelSettings,
+    follower_channel_settings: ?FollowerChannelSettings = null,
 
-    primary_channel_settings: ?PrimaryChannelSettings,
+    primary_channel_settings: ?PrimaryChannelSettings = null,
 
     pub const json_field_names = .{
         .follower_channel_settings = "FollowerChannelSettings",

@@ -11,7 +11,7 @@ pub const TargetTrackingScalingPolicyConfiguration = struct {
     /// A customized metric. You can specify either a predefined metric or a
     /// customized
     /// metric.
-    customized_metric_specification: ?CustomizedMetricSpecification,
+    customized_metric_specification: ?CustomizedMetricSpecification = null,
 
     /// Indicates whether scale in by the target tracking scaling policy is
     /// disabled. If the
@@ -21,25 +21,25 @@ pub const TargetTrackingScalingPolicyConfiguration = struct {
     /// target tracking scaling policy can remove capacity from the scalable target.
     /// The default
     /// value is `false`.
-    disable_scale_in: ?bool,
+    disable_scale_in: ?bool = null,
 
     /// A predefined metric. You can specify either a predefined metric or a
     /// customized
     /// metric.
-    predefined_metric_specification: ?PredefinedMetricSpecification,
+    predefined_metric_specification: ?PredefinedMetricSpecification = null,
 
     /// The amount of time, in seconds, after a scale-in activity completes before
     /// another
     /// scale-in activity can start. For more information and for default values,
     /// see [Define cooldown
     /// periods](https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown) in the *Application Auto Scaling User Guide*.
-    scale_in_cooldown: ?i32,
+    scale_in_cooldown: ?i32 = null,
 
     /// The amount of time, in seconds, to wait for a previous scale-out activity to
     /// take effect.
     /// For more information and for default values, see [Define cooldown
     /// periods](https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown) in the *Application Auto Scaling User Guide*.
-    scale_out_cooldown: ?i32,
+    scale_out_cooldown: ?i32 = null,
 
     /// The target value for the metric. Although this property accepts numbers of
     /// type Double,

@@ -4,7 +4,7 @@ const LogLevel = @import("log_level.zig").LogLevel;
 /// for Apache Flink Studio notebook.
 pub const ZeppelinMonitoringConfigurationDescription = struct {
     /// Describes the verbosity of the CloudWatch Logs for an application.
-    log_level: ?LogLevel,
+    log_level: ?LogLevel = null,
 
     pub const json_field_names = .{
         .log_level = "LogLevel",

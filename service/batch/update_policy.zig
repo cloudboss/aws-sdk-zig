@@ -7,12 +7,12 @@ pub const UpdatePolicy = struct {
     /// Specifies the job timeout (in minutes) when the compute environment
     /// infrastructure is
     /// updated. The default value is 30.
-    job_execution_timeout_minutes: ?i64,
+    job_execution_timeout_minutes: ?i64 = null,
 
     /// Specifies whether jobs are automatically terminated when the compute
     /// environment
     /// infrastructure is updated. The default value is `false`.
-    terminate_jobs_on_update: ?bool,
+    terminate_jobs_on_update: ?bool = null,
 
     pub const json_field_names = .{
         .job_execution_timeout_minutes = "jobExecutionTimeoutMinutes",

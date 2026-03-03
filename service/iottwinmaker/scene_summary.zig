@@ -11,7 +11,7 @@ pub const SceneSummary = struct {
     creation_date_time: i64,
 
     /// The scene description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the scene.
     scene_id: []const u8,

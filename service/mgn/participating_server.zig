@@ -4,13 +4,13 @@ const PostLaunchActionsStatus = @import("post_launch_actions_status.zig").PostLa
 /// Server participating in Job.
 pub const ParticipatingServer = struct {
     /// Participating server's launched ec2 instance ID.
-    launched_ec_2_instance_id: ?[]const u8,
+    launched_ec_2_instance_id: ?[]const u8 = null,
 
     /// Participating server launch status.
-    launch_status: ?LaunchStatus,
+    launch_status: ?LaunchStatus = null,
 
     /// Participating server's Post Launch Actions Status.
-    post_launch_actions_status: ?PostLaunchActionsStatus,
+    post_launch_actions_status: ?PostLaunchActionsStatus = null,
 
     /// Participating server Source Server ID.
     source_server_id: []const u8,

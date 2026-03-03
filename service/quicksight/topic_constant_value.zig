@@ -4,19 +4,19 @@ const CollectiveConstantEntry = @import("collective_constant_entry.zig").Collect
 /// The definition for a `TopicConstantValue`.
 pub const TopicConstantValue = struct {
     /// The constant type of a `TopicConstantValue`.
-    constant_type: ?ConstantType,
+    constant_type: ?ConstantType = null,
 
     /// The maximum for the `TopicConstantValue`.
-    maximum: ?[]const u8,
+    maximum: ?[]const u8 = null,
 
     /// The minimum for the `TopicConstantValue`.
-    minimum: ?[]const u8,
+    minimum: ?[]const u8 = null,
 
     /// The value of the `TopicConstantValue`.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     /// The value list of the `TopicConstantValue`.
-    value_list: ?[]const CollectiveConstantEntry,
+    value_list: ?[]const CollectiveConstantEntry = null,
 
     pub const json_field_names = .{
         .constant_type = "ConstantType",

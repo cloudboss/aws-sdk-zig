@@ -4,7 +4,7 @@ const AutoExportRevisionDestinationEntry = @import("auto_export_revision_destina
 /// Details of the operation to be performed by the job.
 pub const AutoExportRevisionToS3RequestDetails = struct {
     /// Encryption configuration for the auto export job.
-    encryption: ?ExportServerSideEncryption,
+    encryption: ?ExportServerSideEncryption = null,
 
     /// A revision destination is the Amazon S3 bucket folder destination to where
     /// the export

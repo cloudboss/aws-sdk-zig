@@ -2,13 +2,13 @@ const DesiredModality = @import("desired_modality.zig").DesiredModality;
 
 /// Configuration for routing file type to desired modality
 pub const ModalityRoutingConfiguration = struct {
-    jpeg: ?DesiredModality,
+    jpeg: ?DesiredModality = null,
 
-    mov: ?DesiredModality,
+    mov: ?DesiredModality = null,
 
-    mp_4: ?DesiredModality,
+    mp_4: ?DesiredModality = null,
 
-    png: ?DesiredModality,
+    png: ?DesiredModality = null,
 
     pub const json_field_names = .{
         .jpeg = "jpeg",

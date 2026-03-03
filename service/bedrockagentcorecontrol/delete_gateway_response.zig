@@ -8,7 +8,7 @@ pub const DeleteGatewayResponse = struct {
     status: GatewayStatus,
 
     /// The reasons for the current status of the gateway deletion.
-    status_reasons: ?[]const []const u8,
+    status_reasons: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .gateway_id = "gatewayId",

@@ -12,14 +12,14 @@ pub const Origination = struct {
     /// Amazon Chime SDK Voice Connector.
     /// This parameter is not required, but you must specify this parameter or
     /// `Routes`.
-    disabled: ?bool,
+    disabled: ?bool = null,
 
     /// The call distribution properties defined for your SIP hosts. Valid range:
     /// Minimum
     /// value of 1. Maximum value of 20. This parameter is not required, but you
     /// must specify
     /// this parameter or `Disabled`.
-    routes: ?[]const OriginationRoute,
+    routes: ?[]const OriginationRoute = null,
 
     pub const json_field_names = .{
         .disabled = "Disabled",

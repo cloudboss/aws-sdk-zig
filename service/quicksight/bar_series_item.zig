@@ -7,10 +7,10 @@ const FieldBarSeriesItem = @import("field_bar_series_item.zig").FieldBarSeriesIt
 /// the attributes can be defined.
 pub const BarSeriesItem = struct {
     /// The data field series item configuration of a `BarChartVisual`.
-    data_field_bar_series_item: ?DataFieldBarSeriesItem,
+    data_field_bar_series_item: ?DataFieldBarSeriesItem = null,
 
     /// The field series item configuration of a `BarChartVisual`.
-    field_bar_series_item: ?FieldBarSeriesItem,
+    field_bar_series_item: ?FieldBarSeriesItem = null,
 
     pub const json_field_names = .{
         .data_field_bar_series_item = "DataFieldBarSeriesItem",

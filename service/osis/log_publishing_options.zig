@@ -9,10 +9,10 @@ pub const LogPublishingOptions = struct {
     /// The destination for OpenSearch Ingestion logs sent to Amazon CloudWatch
     /// Logs. This
     /// parameter is required if `IsLoggingEnabled` is set to `true`.
-    cloud_watch_log_destination: ?CloudWatchLogDestination,
+    cloud_watch_log_destination: ?CloudWatchLogDestination = null,
 
     /// Whether logs should be published.
-    is_logging_enabled: ?bool,
+    is_logging_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .cloud_watch_log_destination = "CloudWatchLogDestination",

@@ -4,7 +4,7 @@ const ReturnValuesOnConditionCheckFailure = @import("return_values_on_condition_
 /// Represents a PartiQL statement that uses parameters.
 pub const ParameterizedStatement = struct {
     /// The parameter values.
-    parameters: ?[]const AttributeValue,
+    parameters: ?[]const AttributeValue = null,
 
     /// An optional parameter that returns the item attributes for a PartiQL
     /// `ParameterizedStatement` operation that failed a condition check.
@@ -14,7 +14,7 @@ pub const ParameterizedStatement = struct {
     /// small network and processing overhead of receiving a larger response. No
     /// read capacity
     /// units are consumed.
-    return_values_on_condition_check_failure: ?ReturnValuesOnConditionCheckFailure,
+    return_values_on_condition_check_failure: ?ReturnValuesOnConditionCheckFailure = null,
 
     /// A PartiQL statement that uses parameters.
     statement: []const u8,

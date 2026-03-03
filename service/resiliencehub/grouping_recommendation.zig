@@ -24,7 +24,7 @@ pub const GroupingRecommendation = struct {
 
     /// Indicates the reason you had selected while rejecting a grouping
     /// recommendation.
-    rejection_reason: ?GroupingRecommendationRejectionReason,
+    rejection_reason: ?GroupingRecommendationRejectionReason = null,
 
     /// Indicates the resources that are grouped in a recommended AppComponent.
     resources: []const GroupingResource,

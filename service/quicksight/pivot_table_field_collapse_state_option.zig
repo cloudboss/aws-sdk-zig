@@ -9,7 +9,7 @@ pub const PivotTableFieldCollapseStateOption = struct {
     /// * `COLLAPSED`
     ///
     /// * `EXPANDED`
-    state: ?PivotTableFieldCollapseState,
+    state: ?PivotTableFieldCollapseState = null,
 
     /// A tagged-union object that sets the collapse state.
     target: PivotTableFieldCollapseStateTarget,

@@ -5,7 +5,7 @@ const MatchingBucket = @import("matching_bucket.zig").MatchingBucket;
 pub const MatchingResource = struct {
     /// The details of an S3 bucket that Amazon Macie monitors and analyzes for your
     /// account.
-    matching_bucket: ?MatchingBucket,
+    matching_bucket: ?MatchingBucket = null,
 
     pub const json_field_names = .{
         .matching_bucket = "matchingBucket",

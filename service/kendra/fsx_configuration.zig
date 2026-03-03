@@ -31,7 +31,7 @@ pub const FsxConfiguration = struct {
     /// inclusion and exclusion pattern, the exclusion pattern takes precedence and
     /// the file
     /// isn't included in the index.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map Amazon FSx data
     /// source attributes or field names to Amazon Kendra index field names. To
@@ -41,7 +41,7 @@ pub const FsxConfiguration = struct {
     /// The
     /// Amazon FSx data source field names must exist in your Amazon FSx
     /// custom metadata.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// The identifier of the Amazon FSx file system.
     ///
@@ -64,7 +64,7 @@ pub const FsxConfiguration = struct {
     /// an inclusion and exclusion pattern, the exclusion pattern takes precedence
     /// and the file
     /// isn't included in the index.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains
     /// the
@@ -82,7 +82,7 @@ pub const FsxConfiguration = struct {
     ///
     /// * password—The password of the Active Directory user account with read
     /// and mounting access to the Amazon FSx Windows file system.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     /// Configuration information for an Amazon Virtual Private Cloud to connect to
     /// your Amazon FSx. Your Amazon FSx instance must reside inside your VPC.

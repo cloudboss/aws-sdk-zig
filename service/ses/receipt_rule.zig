@@ -18,7 +18,7 @@ pub const ReceiptRule = struct {
     /// An ordered list of actions to perform on messages that match at least one of
     /// the
     /// recipient email addresses or domains specified in the receipt rule.
-    actions: ?[]const ReceiptAction,
+    actions: ?[]const ReceiptAction = null,
 
     /// If `true`, the receipt rule is active. The default value is
     /// `false`.
@@ -39,7 +39,7 @@ pub const ReceiptRule = struct {
     /// If this
     /// field is not specified, this rule matches all recipients on all verified
     /// domains.
-    recipients: ?[]const []const u8,
+    recipients: ?[]const []const u8 = null,
 
     /// If `true`, then messages that this receipt rule applies to are scanned for
     /// spam and viruses. The default value is `false`.
@@ -51,5 +51,5 @@ pub const ReceiptRule = struct {
     /// is set to
     /// `Require`, Amazon SES bounces emails that are not received over TLS. The
     /// default is `Optional`.
-    tls_policy: ?TlsPolicy,
+    tls_policy: ?TlsPolicy = null,
 };

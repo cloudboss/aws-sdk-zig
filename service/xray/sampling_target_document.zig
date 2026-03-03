@@ -13,19 +13,19 @@ pub const SamplingTargetDocument = struct {
     /// The number of seconds for the service to wait before getting sampling
     /// targets
     /// again.
-    interval: ?i32,
+    interval: ?i32 = null,
 
     /// The number of requests per second that X-Ray allocated for this service.
-    reservoir_quota: ?i32,
+    reservoir_quota: ?i32 = null,
 
     /// When the reservoir quota expires.
-    reservoir_quota_ttl: ?i64,
+    reservoir_quota_ttl: ?i64 = null,
 
     /// The name of the sampling rule.
-    rule_name: ?[]const u8,
+    rule_name: ?[]const u8 = null,
 
     /// The sampling boost that X-Ray allocated for this service.
-    sampling_boost: ?SamplingBoost,
+    sampling_boost: ?SamplingBoost = null,
 
     pub const json_field_names = .{
         .fixed_rate = "FixedRate",

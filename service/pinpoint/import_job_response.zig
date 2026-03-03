@@ -12,10 +12,10 @@ pub const ImportJobResponse = struct {
 
     /// The number of pieces that were processed successfully (completed) by the
     /// import job, as of the time of the request.
-    completed_pieces: ?i32,
+    completed_pieces: ?i32 = null,
 
     /// The date, in ISO 8601 format, when the import job was completed.
-    completion_date: ?[]const u8,
+    completion_date: ?[]const u8 = null,
 
     /// The date, in ISO 8601 format, when the import job was created.
     creation_date: []const u8,
@@ -25,11 +25,11 @@ pub const ImportJobResponse = struct {
 
     /// The number of pieces that weren't processed successfully (failed) by the
     /// import job, as of the time of the request.
-    failed_pieces: ?i32,
+    failed_pieces: ?i32 = null,
 
     /// An array of entries, one for each of the first 100 entries that weren't
     /// processed successfully (failed) by the import job, if any.
-    failures: ?[]const []const u8,
+    failures: ?[]const []const u8 = null,
 
     /// The unique identifier for the import job.
     id: []const u8,
@@ -41,16 +41,16 @@ pub const ImportJobResponse = struct {
     /// The total number of endpoint definitions that weren't processed successfully
     /// (failed) by the import job, typically because an error, such as a syntax
     /// error, occurred.
-    total_failures: ?i32,
+    total_failures: ?i32 = null,
 
     /// The total number of pieces that must be processed to complete the import
     /// job. Each piece consists of an approximately equal portion of the endpoint
     /// definitions that are part of the import job.
-    total_pieces: ?i32,
+    total_pieces: ?i32 = null,
 
     /// The total number of endpoint definitions that were processed by the import
     /// job.
-    total_processed: ?i32,
+    total_processed: ?i32 = null,
 
     /// The job type. This value is IMPORT for import jobs.
     @"type": []const u8,

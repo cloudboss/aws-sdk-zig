@@ -5,10 +5,10 @@ pub const ReservedInstancesModificationResult = struct {
     /// The ID for the Reserved Instances that were created as part of the
     /// modification request.
     /// This field is only available when the modification is fulfilled.
-    reserved_instances_id: ?[]const u8,
+    reserved_instances_id: ?[]const u8 = null,
 
     /// The target Reserved Instances configurations supplied as part of the
     /// modification
     /// request.
-    target_configuration: ?ReservedInstancesConfiguration,
+    target_configuration: ?ReservedInstancesConfiguration = null,
 };

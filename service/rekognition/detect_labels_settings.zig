@@ -9,10 +9,10 @@ const DetectLabelsImagePropertiesSettings = @import("detect_labels_image_propert
 /// of a maximum number of dominant colors.
 pub const DetectLabelsSettings = struct {
     /// Contains the specified filters for GENERAL_LABELS.
-    general_labels: ?GeneralLabelsSettings,
+    general_labels: ?GeneralLabelsSettings = null,
 
     /// Contains the chosen number of maximum dominant colors in an image.
-    image_properties: ?DetectLabelsImagePropertiesSettings,
+    image_properties: ?DetectLabelsImagePropertiesSettings = null,
 
     pub const json_field_names = .{
         .general_labels = "GeneralLabels",

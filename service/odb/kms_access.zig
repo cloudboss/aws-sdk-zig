@@ -5,19 +5,19 @@ const ManagedResourceStatus = @import("managed_resource_status.zig").ManagedReso
 pub const KmsAccess = struct {
     /// The domain name for Amazon Web Services Key Management Service (KMS) access
     /// configuration.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// The IPv4 addresses allowed for Amazon Web Services Key Management Service
     /// (KMS) access.
-    ipv_4_addresses: ?[]const []const u8,
+    ipv_4_addresses: ?[]const []const u8 = null,
 
     /// The Amazon Web Services Key Management Service (KMS) policy document that
     /// defines permissions for key usage.
-    kms_policy_document: ?[]const u8,
+    kms_policy_document: ?[]const u8 = null,
 
     /// The current status of the Amazon Web Services Key Management Service (KMS)
     /// access configuration.
-    status: ?ManagedResourceStatus,
+    status: ?ManagedResourceStatus = null,
 
     pub const json_field_names = .{
         .domain_name = "domainName",

@@ -5,10 +5,10 @@ const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 /// Information about a database server.
 pub const DbServerSummary = struct {
     /// A list of unique identifiers for the Autonomous VMs.
-    autonomous_virtual_machine_ids: ?[]const []const u8,
+    autonomous_virtual_machine_ids: ?[]const []const u8 = null,
 
     /// A list of identifiers for the Autonomous VM clusters.
-    autonomous_vm_cluster_ids: ?[]const []const u8,
+    autonomous_vm_cluster_ids: ?[]const []const u8 = null,
 
     /// The OCI model compute model used when you create or clone an instance: ECPU
     /// or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are
@@ -16,64 +16,64 @@ pub const DbServerSummary = struct {
     /// and storage servers. An OCPU is a legacy physical measure of compute
     /// resources. OCPUs are based on the physical core of a processor with
     /// hyper-threading enabled.
-    compute_model: ?ComputeModel,
+    compute_model: ?ComputeModel = null,
 
     /// The number of CPU cores enabled on the database server.
-    cpu_core_count: ?i32,
+    cpu_core_count: ?i32 = null,
 
     /// The date and time when the database server was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The amount of local node storage, in gigabytes (GB), that's allocated on the
     /// database server.
-    db_node_storage_size_in_g_bs: ?i32,
+    db_node_storage_size_in_g_bs: ?i32 = null,
 
     /// The unique identifier of the database server.
-    db_server_id: ?[]const u8,
+    db_server_id: ?[]const u8 = null,
 
-    db_server_patching_details: ?DbServerPatchingDetails,
+    db_server_patching_details: ?DbServerPatchingDetails = null,
 
     /// The user-friendly name of the database server. The name doesn't need to be
     /// unique.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The ID of the Exadata infrastructure that hosts the database server.
-    exadata_infrastructure_id: ?[]const u8,
+    exadata_infrastructure_id: ?[]const u8 = null,
 
     /// The total number of CPU cores available on the database server.
-    max_cpu_count: ?i32,
+    max_cpu_count: ?i32 = null,
 
     /// The total amount of local node storage, in gigabytes (GB), that's available
     /// on the database server.
-    max_db_node_storage_in_g_bs: ?i32,
+    max_db_node_storage_in_g_bs: ?i32 = null,
 
     /// The total amount of memory, in gigabytes (GB), that's available on the
     /// database server.
-    max_memory_in_g_bs: ?i32,
+    max_memory_in_g_bs: ?i32 = null,
 
     /// The amount of memory, in gigabytes (GB), that's allocated on the database
     /// server.
-    memory_size_in_g_bs: ?i32,
+    memory_size_in_g_bs: ?i32 = null,
 
     /// The OCID of the database server.
-    ocid: ?[]const u8,
+    ocid: ?[]const u8 = null,
 
     /// The name of the OCI resource anchor for the database server.
-    oci_resource_anchor_name: ?[]const u8,
+    oci_resource_anchor_name: ?[]const u8 = null,
 
     /// The hardware system model of the Exadata infrastructure that the database
     /// server is hosted on. The shape determines the amount of CPU, storage, and
     /// memory resources available.
-    shape: ?[]const u8,
+    shape: ?[]const u8 = null,
 
     /// The current status of the database server.
-    status: ?ResourceStatus,
+    status: ?ResourceStatus = null,
 
     /// Additional information about the status of the database server.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The IDs of the VM clusters that are associated with the database server.
-    vm_cluster_ids: ?[]const []const u8,
+    vm_cluster_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .autonomous_virtual_machine_ids = "autonomousVirtualMachineIds",

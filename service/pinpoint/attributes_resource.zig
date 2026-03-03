@@ -6,7 +6,7 @@ pub const AttributesResource = struct {
 
     /// An array that specifies the names of the attributes that were removed from
     /// the endpoints.
-    attributes: ?[]const []const u8,
+    attributes: ?[]const []const u8 = null,
 
     /// The type of attribute or attributes that were removed from the endpoints.
     /// Valid values are:

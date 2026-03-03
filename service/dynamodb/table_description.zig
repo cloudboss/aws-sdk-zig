@@ -20,7 +20,7 @@ const TableWarmThroughputDescription = @import("table_warm_throughput_descriptio
 /// Represents the properties of a table.
 pub const TableDescription = struct {
     /// Contains information about the table archive.
-    archival_summary: ?ArchivalSummary,
+    archival_summary: ?ArchivalSummary = null,
 
     /// An array of `AttributeDefinition` objects. Each of these objects describes
     /// one attribute in the table and index key schema.
@@ -30,19 +30,19 @@ pub const TableDescription = struct {
     /// * `AttributeName` - The name of the attribute.
     ///
     /// * `AttributeType` - The data type for the attribute.
-    attribute_definitions: ?[]const AttributeDefinition,
+    attribute_definitions: ?[]const AttributeDefinition = null,
 
     /// Contains the details for the read/write capacity mode.
-    billing_mode_summary: ?BillingModeSummary,
+    billing_mode_summary: ?BillingModeSummary = null,
 
     /// The date and time when the table was created, in [UNIX epoch
     /// time](http://www.epochconverter.com/) format.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// Indicates whether deletion protection is enabled (true) or disabled (false)
     /// on the
     /// table.
-    deletion_protection_enabled: ?bool,
+    deletion_protection_enabled: ?bool = null,
 
     /// The global secondary indexes, if any, on the table. Each index is scoped to
     /// a given
@@ -128,7 +128,7 @@ pub const TableDescription = struct {
     ///
     /// If the table is in the `DELETING` state, no information about indexes will
     /// be returned.
-    global_secondary_indexes: ?[]const GlobalSecondaryIndexDescription,
+    global_secondary_indexes: ?[]const GlobalSecondaryIndexDescription = null,
 
     /// Indicates one of the settings synchronization modes for the global table:
     ///
@@ -143,22 +143,22 @@ pub const TableDescription = struct {
     /// * `ENABLED_WITH_OVERRIDES`: This mode is set by default for a same account
     ///   global table.
     /// Indicates that certain global table settings can be overridden.
-    global_table_settings_replication_mode: ?GlobalTableSettingsReplicationMode,
+    global_table_settings_replication_mode: ?GlobalTableSettingsReplicationMode = null,
 
     /// Represents the version of [global
     /// tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html)
     /// in use, if the table is replicated across Amazon Web Services Regions.
-    global_table_version: ?[]const u8,
+    global_table_version: ?[]const u8 = null,
 
     /// The witness Region and its current status in the MRSC global table. Only one
     /// witness
     /// Region can be configured per MRSC global table.
-    global_table_witnesses: ?[]const GlobalTableWitnessDescription,
+    global_table_witnesses: ?[]const GlobalTableWitnessDescription = null,
 
     /// The number of items in the specified table. DynamoDB updates this value
     /// approximately
     /// every six hours. Recent changes might not be reflected in this value.
-    item_count: ?i64,
+    item_count: ?i64 = null,
 
     /// The primary key structure for the table. Each `KeySchemaElement` consists
     /// of:
@@ -184,12 +184,12 @@ pub const TableDescription = struct {
     /// For more information about primary keys, see [Primary
     /// Key](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey) in the *Amazon DynamoDB Developer
     /// Guide*.
-    key_schema: ?[]const KeySchemaElement,
+    key_schema: ?[]const KeySchemaElement = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the latest stream
     /// for this
     /// table.
-    latest_stream_arn: ?[]const u8,
+    latest_stream_arn: ?[]const u8 = null,
 
     /// A timestamp, in ISO 8601 format, for this stream.
     ///
@@ -204,7 +204,7 @@ pub const TableDescription = struct {
     /// * Table name
     ///
     /// * `StreamLabel`
-    latest_stream_label: ?[]const u8,
+    latest_stream_label: ?[]const u8 = null,
 
     /// Represents one or more local secondary indexes on the table. Each index is
     /// scoped to a
@@ -262,7 +262,7 @@ pub const TableDescription = struct {
     ///
     /// If the table is in the `DELETING` state, no information about indexes will
     /// be returned.
-    local_secondary_indexes: ?[]const LocalSecondaryIndexDescription,
+    local_secondary_indexes: ?[]const LocalSecondaryIndexDescription = null,
 
     /// Indicates one of the following consistency modes for a global table:
     ///
@@ -278,47 +278,47 @@ pub const TableDescription = struct {
     /// see [
     /// Consistency
     /// modes](https://docs.aws.amazon.com/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes) in DynamoDB developer guide.
-    multi_region_consistency: ?MultiRegionConsistency,
+    multi_region_consistency: ?MultiRegionConsistency = null,
 
     /// The maximum number of read and write units for the specified on-demand
     /// table. If you
     /// use this parameter, you must specify `MaxReadRequestUnits`,
     /// `MaxWriteRequestUnits`, or both.
-    on_demand_throughput: ?OnDemandThroughput,
+    on_demand_throughput: ?OnDemandThroughput = null,
 
     /// The provisioned throughput settings for the table, consisting of read and
     /// write
     /// capacity units, along with data about increases and decreases.
-    provisioned_throughput: ?ProvisionedThroughputDescription,
+    provisioned_throughput: ?ProvisionedThroughputDescription = null,
 
     /// Represents replicas of the table.
-    replicas: ?[]const ReplicaDescription,
+    replicas: ?[]const ReplicaDescription = null,
 
     /// Contains details for the restore.
-    restore_summary: ?RestoreSummary,
+    restore_summary: ?RestoreSummary = null,
 
     /// The description of the server-side encryption status on the specified table.
-    sse_description: ?SSEDescription,
+    sse_description: ?SSEDescription = null,
 
     /// The current DynamoDB Streams configuration for the table.
-    stream_specification: ?StreamSpecification,
+    stream_specification: ?StreamSpecification = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the table.
-    table_arn: ?[]const u8,
+    table_arn: ?[]const u8 = null,
 
     /// Contains details of the table class.
-    table_class_summary: ?TableClassSummary,
+    table_class_summary: ?TableClassSummary = null,
 
     /// Unique identifier for the table for which the backup was created.
-    table_id: ?[]const u8,
+    table_id: ?[]const u8 = null,
 
     /// The name of the table.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The total size of the specified table, in bytes. DynamoDB updates this value
     /// approximately every six hours. Recent changes might not be reflected in this
     /// value.
-    table_size_bytes: ?i64,
+    table_size_bytes: ?i64 = null,
 
     /// The current state of the table:
     ///
@@ -343,10 +343,10 @@ pub const TableDescription = struct {
     ///
     /// * `ARCHIVED` - The table has been archived. See the ArchivalReason for
     /// more information.
-    table_status: ?TableStatus,
+    table_status: ?TableStatus = null,
 
     /// Describes the warm throughput value of the base table.
-    warm_throughput: ?TableWarmThroughputDescription,
+    warm_throughput: ?TableWarmThroughputDescription = null,
 
     pub const json_field_names = .{
         .archival_summary = "ArchivalSummary",

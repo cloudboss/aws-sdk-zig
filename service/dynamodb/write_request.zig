@@ -7,10 +7,10 @@ const PutRequest = @import("put_request.zig").PutRequest;
 /// you need to provide two separate `WriteRequest` objects.
 pub const WriteRequest = struct {
     /// A request to perform a `DeleteItem` operation.
-    delete_request: ?DeleteRequest,
+    delete_request: ?DeleteRequest = null,
 
     /// A request to perform a `PutItem` operation.
-    put_request: ?PutRequest,
+    put_request: ?PutRequest = null,
 
     pub const json_field_names = .{
         .delete_request = "DeleteRequest",

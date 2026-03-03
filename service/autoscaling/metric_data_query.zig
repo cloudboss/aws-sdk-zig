@@ -22,7 +22,7 @@ pub const MetricDataQuery = struct {
     ///
     /// Conditional: Within each `MetricDataQuery` object, you must specify either
     /// `Expression` or `MetricStat`, but not both.
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     /// A short name that identifies the object's results in the response. This name
     /// must be
@@ -39,13 +39,13 @@ pub const MetricDataQuery = struct {
     /// A human-readable label for this metric or expression. This is especially
     /// useful if
     /// this is a math expression, so that you know what the value represents.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// Information about the metric data to return.
     ///
     /// Conditional: Within each `MetricDataQuery` object, you must specify either
     /// `Expression` or `MetricStat`, but not both.
-    metric_stat: ?MetricStat,
+    metric_stat: ?MetricStat = null,
 
     /// Indicates whether to return the timestamps and raw data values of this
     /// metric.
@@ -60,5 +60,5 @@ pub const MetricDataQuery = struct {
     /// do not
     /// specify anything for `ReturnData`. This sets it to its default
     /// (`true`).
-    return_data: ?bool,
+    return_data: ?bool = null,
 };

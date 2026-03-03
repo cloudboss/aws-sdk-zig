@@ -2,11 +2,11 @@
 pub const BatchCreateCategoryInputCategory = struct {
     /// The color to be associated with a category. The color must be a hexadecimal
     /// value of either 3 or 6 digits.
-    color: ?[]const u8,
+    color: ?[]const u8 = null,
 
     /// The unique identifier to be associated with a category. If you don't include
     /// a value, the category is automatically assigned a unique identifier.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the category.
     title: []const u8,

@@ -16,28 +16,28 @@ const TimedMetadataInsertion = @import("timed_metadata_insertion.zig").TimedMeta
 pub const JobTemplateSettings = struct {
     /// When specified, this offset (in milliseconds) is added to the input Ad Avail
     /// PTS time.
-    ad_avail_offset: ?i32,
+    ad_avail_offset: ?i32 = null,
 
     /// Settings for ad avail blanking. Video can be blanked or overlaid with an
     /// image, and audio muted during SCTE-35 triggered ad avails.
-    avail_blanking: ?AvailBlanking,
+    avail_blanking: ?AvailBlanking = null,
 
     /// Use 3D LUTs to specify custom color mapping behavior when you convert from
     /// one color space into another. You can include up to 8 different 3D LUTs. For
     /// more information, see:
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/3d-luts.html
-    color_conversion_3_dlut_settings: ?[]const ColorConversion3DLUTSetting,
+    color_conversion_3_dlut_settings: ?[]const ColorConversion3DLUTSetting = null,
 
     /// Settings for Event Signaling And Messaging (ESAM). If you don't do ad
     /// insertion, you can ignore these settings.
-    esam: ?EsamSettings,
+    esam: ?EsamSettings = null,
 
     /// If your source content has EIA-608 Line 21 Data Services, enable this
     /// feature to specify what MediaConvert does with the Extended Data Services
     /// (XDS) packets. You can choose to pass through XDS packets, or remove them
     /// from the output. For more information about XDS, see EIA-608 Line Data
     /// Services, section 9.5.1.5 05h Content Advisory.
-    extended_data_services: ?ExtendedDataServices,
+    extended_data_services: ?ExtendedDataServices = null,
 
     /// Specify the input that MediaConvert references for your default output
     /// settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel
@@ -47,12 +47,12 @@ pub const JobTemplateSettings = struct {
     /// you specify an audio-only input, MediaConvert uses the first followable
     /// input instead. In your JSON job specification, enter an integer from 1 to
     /// 150 corresponding to the order of your inputs.
-    follow_source: ?i32,
+    follow_source: ?i32 = null,
 
     /// Use Inputs to define the source file used in the transcode job. There can
     /// only be one input in a job template. Using the API, you can include multiple
     /// inputs when referencing a job template.
-    inputs: ?[]const InputTemplate,
+    inputs: ?[]const InputTemplate = null,
 
     /// Use these settings only when you use Kantar watermarking. Specify the values
     /// that MediaConvert uses to generate and place Kantar watermarks in your
@@ -60,18 +60,18 @@ pub const JobTemplateSettings = struct {
     /// to specifying these values, you also need to store your Kantar credentials
     /// in AWS Secrets Manager. For more information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
-    kantar_watermark: ?KantarWatermarkSettings,
+    kantar_watermark: ?KantarWatermarkSettings = null,
 
     /// Overlay motion graphics on top of your video. The motion graphics that you
     /// specify here appear on all outputs in all output groups. For more
     /// information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
-    motion_image_inserter: ?MotionImageInserter,
+    motion_image_inserter: ?MotionImageInserter = null,
 
     /// Settings for your Nielsen configuration. If you don't do Nielsen measurement
     /// and analytics, ignore these settings. When you enable Nielsen configuration,
     /// MediaConvert enables PCM to ID3 tagging for all outputs in the job.
-    nielsen_configuration: ?NielsenConfiguration,
+    nielsen_configuration: ?NielsenConfiguration = null,
 
     /// Ignore these settings unless you are using Nielsen non-linear watermarking.
     /// Specify the values that MediaConvert uses to generate and place Nielsen
@@ -81,7 +81,7 @@ pub const JobTemplateSettings = struct {
     /// following Nielsen versions: Nielsen Watermark SDK Version 6.0.13 Nielsen NLM
     /// Watermark Engine Version 1.3.3 Nielsen Watermark Authenticator [SID_TIC]
     /// Version [7.0.0]
-    nielsen_non_linear_watermark: ?NielsenNonLinearWatermarkSettings,
+    nielsen_non_linear_watermark: ?NielsenNonLinearWatermarkSettings = null,
 
     /// Contains one group of settings for each set of outputs that share a common
     /// package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and
@@ -92,16 +92,16 @@ pub const JobTemplateSettings = struct {
     /// HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings *
     /// MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS,
     /// CmafGroupSettings
-    output_groups: ?[]const OutputGroup,
+    output_groups: ?[]const OutputGroup = null,
 
     /// These settings control how the service handles timecodes throughout the job.
     /// These settings don't affect input clipping.
-    timecode_config: ?TimecodeConfig,
+    timecode_config: ?TimecodeConfig = null,
 
     /// Insert user-defined custom ID3 metadata at timecodes that you specify. In
     /// each output that you want to include this metadata, you must set ID3
     /// metadata to Passthrough.
-    timed_metadata_insertion: ?TimedMetadataInsertion,
+    timed_metadata_insertion: ?TimedMetadataInsertion = null,
 
     pub const json_field_names = .{
         .ad_avail_offset = "AdAvailOffset",

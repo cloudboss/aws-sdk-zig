@@ -12,13 +12,13 @@ pub const ComponentDependencyRequirement = struct {
     /// state.
     ///
     /// Default: `HARD`
-    dependency_type: ?ComponentDependencyType,
+    dependency_type: ?ComponentDependencyType = null,
 
     /// The component version requirement for the component dependency.
     ///
     /// IoT Greengrass V2 uses semantic version constraints. For more information,
     /// see [Semantic Versioning](https://semver.org/).
-    version_requirement: ?[]const u8,
+    version_requirement: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dependency_type = "dependencyType",

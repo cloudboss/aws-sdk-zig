@@ -8,16 +8,16 @@ const EntityReference = @import("entity_reference.zig").EntityReference;
 pub const PolicyFilter = struct {
     /// Filters the output to only template-linked policies that were instantiated
     /// from the specified policy template.
-    policy_template_id: ?[]const u8,
+    policy_template_id: ?[]const u8 = null,
 
     /// Filters the output to only policies of the specified type.
-    policy_type: ?PolicyType,
+    policy_type: ?PolicyType = null,
 
     /// Filters the output to only policies that reference the specified principal.
-    principal: ?EntityReference,
+    principal: ?EntityReference = null,
 
     /// Filters the output to only policies that reference the specified resource.
-    resource: ?EntityReference,
+    resource: ?EntityReference = null,
 
     pub const json_field_names = .{
         .policy_template_id = "policyTemplateId",

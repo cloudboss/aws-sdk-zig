@@ -1,7 +1,7 @@
 /// Contains information about where human output will be stored.
 pub const FlowDefinitionOutputConfig = struct {
     /// The Amazon Key Management Service (KMS) key ID for server-side encryption.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The Amazon S3 path where the object containing human output will be made
     /// available.

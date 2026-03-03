@@ -9,7 +9,7 @@ pub const ServiceTemplateVersionSummary = struct {
     created_at: i64,
 
     /// A description of the version of a service template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time when the version of a service template was last modified.
     last_modified_at: i64,
@@ -22,13 +22,13 @@ pub const ServiceTemplateVersionSummary = struct {
     minor_version: []const u8,
 
     /// The recommended minor version of the service template.
-    recommended_minor_version: ?[]const u8,
+    recommended_minor_version: ?[]const u8 = null,
 
     /// The service template minor version status.
     status: TemplateVersionStatus,
 
     /// A service template minor version status message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The name of the service template.
     template_name: []const u8,

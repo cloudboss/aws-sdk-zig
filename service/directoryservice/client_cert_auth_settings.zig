@@ -6,7 +6,7 @@ pub const ClientCertAuthSettings = struct {
     /// status. A
     /// secondary value to any OCSP address found in the AIA extension of the user
     /// certificate.
-    ocsp_url: ?[]const u8,
+    ocsp_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ocsp_url = "OCSPUrl",

@@ -7,10 +7,10 @@ const AxisDisplayMinMaxRange = @import("axis_display_min_max_range.zig").AxisDis
 /// the attributes can be defined.
 pub const AxisDisplayRange = struct {
     /// The data-driven setup of an axis display range.
-    data_driven: ?AxisDisplayDataDrivenRange,
+    data_driven: ?AxisDisplayDataDrivenRange = null,
 
     /// The minimum and maximum setup of an axis display range.
-    min_max: ?AxisDisplayMinMaxRange,
+    min_max: ?AxisDisplayMinMaxRange = null,
 
     pub const json_field_names = .{
         .data_driven = "DataDriven",

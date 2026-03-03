@@ -6,5 +6,5 @@ pub const MultiRegionAccessPointsAsyncResponse = struct {
     /// A collection of status information for the different Regions that a
     /// Multi-Region Access Point
     /// supports.
-    regions: ?[]const MultiRegionAccessPointRegionalResponse,
+    regions: ?[]const MultiRegionAccessPointRegionalResponse = null,
 };

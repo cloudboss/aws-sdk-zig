@@ -11,29 +11,29 @@ const ContactSearchSummarySegmentAttributeValue = @import("contact_search_summar
 /// Information of returned contact.
 pub const ContactSearchSummary = struct {
     /// Information about the agent who accepted the contact.
-    agent_info: ?ContactSearchSummaryAgentInfo,
+    agent_info: ?ContactSearchSummaryAgentInfo = null,
 
     /// The Amazon Resource Name (ARN) of the contact.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// How the contact reached your contact center.
-    channel: ?Channel,
+    channel: ?Channel = null,
 
     /// The timestamp when the customer endpoint disconnected from Amazon Connect.
-    disconnect_timestamp: ?i64,
+    disconnect_timestamp: ?i64 = null,
 
     /// Additional routing information for contacts created in ACGR instances.
-    global_resiliency_metadata: ?GlobalResiliencyMetadata,
+    global_resiliency_metadata: ?GlobalResiliencyMetadata = null,
 
     /// The identifier of the contact summary.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// If this contact is related to other contacts, this is the ID of the initial
     /// contact.
-    initial_contact_id: ?[]const u8,
+    initial_contact_id: ?[]const u8 = null,
 
     /// Indicates how the contact was initiated.
-    initiation_method: ?ContactInitiationMethod,
+    initiation_method: ?ContactInitiationMethod = null,
 
     /// The date and time this contact was initiated, in UTC time. For `INBOUND`,
     /// this is when the contact
@@ -46,30 +46,30 @@ pub const ContactSearchSummary = struct {
     /// started dialing the external participant. For `MONITOR`, this is when the
     /// supervisor started listening to
     /// a contact.
-    initiation_timestamp: ?i64,
+    initiation_timestamp: ?i64 = null,
 
     /// Indicates name of the contact.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// If this contact is not the first contact, this is the ID of the previous
     /// contact.
-    previous_contact_id: ?[]const u8,
+    previous_contact_id: ?[]const u8 = null,
 
     /// If this contact was queued, this contains information about the queue.
-    queue_info: ?ContactSearchSummaryQueueInfo,
+    queue_info: ?ContactSearchSummaryQueueInfo = null,
 
-    routing_criteria: ?RoutingCriteria,
+    routing_criteria: ?RoutingCriteria = null,
 
     /// The timestamp, in Unix epoch time format, at which to start running the
     /// inbound flow.
-    scheduled_timestamp: ?i64,
+    scheduled_timestamp: ?i64 = null,
 
     /// Set of segment attributes for a contact.
-    segment_attributes: ?[]const aws.map.MapEntry(ContactSearchSummarySegmentAttributeValue),
+    segment_attributes: ?[]const aws.map.MapEntry(ContactSearchSummarySegmentAttributeValue) = null,
 
     /// Tags associated with the contact. This contains both Amazon Web Services
     /// generated and user-defined tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .agent_info = "AgentInfo",

@@ -4,7 +4,7 @@ pub const S3Config = struct {
     bucket_name: []const u8,
 
     /// S3 prefix.
-    key_prefix: ?[]const u8,
+    key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_name = "bucketName",

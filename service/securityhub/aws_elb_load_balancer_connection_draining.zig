@@ -3,12 +3,12 @@
 /// balancer.
 pub const AwsElbLoadBalancerConnectionDraining = struct {
     /// Indicates whether connection draining is enabled for the load balancer.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The maximum time, in seconds, to keep the existing connections open before
     /// deregistering
     /// the instances.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

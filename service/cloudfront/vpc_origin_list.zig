@@ -8,7 +8,7 @@ pub const VpcOriginList = struct {
     is_truncated: bool,
 
     /// The items of the VPC origins list.
-    items: ?[]const VpcOriginSummary,
+    items: ?[]const VpcOriginSummary = null,
 
     /// The marker associated with the VPC origins list.
     marker: []const u8,
@@ -17,7 +17,7 @@ pub const VpcOriginList = struct {
     max_items: i32,
 
     /// The next marker associated with the VPC origins list.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The number of VPC origins in the list.
     quantity: i32,

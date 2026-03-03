@@ -3,7 +3,7 @@ pub const AssetPropertyTimestamp = struct {
     /// Optional. A string that contains the nanosecond time offset. Accepts
     /// substitution
     /// templates.
-    offset_in_nanos: ?[]const u8,
+    offset_in_nanos: ?[]const u8 = null,
 
     /// A string that contains the time in seconds since epoch. Accepts substitution
     /// templates.

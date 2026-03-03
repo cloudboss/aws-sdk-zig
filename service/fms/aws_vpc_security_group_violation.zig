@@ -6,16 +6,16 @@ const SecurityGroupRemediationAction = @import("security_group_remediation_actio
 pub const AwsVPCSecurityGroupViolation = struct {
     /// List of rules specified in the security group of the Firewall Manager policy
     /// that partially match the `ViolationTarget` rule.
-    partial_matches: ?[]const PartialMatch,
+    partial_matches: ?[]const PartialMatch = null,
 
     /// Remediation options for the rule specified in the `ViolationTarget`.
-    possible_security_group_remediation_actions: ?[]const SecurityGroupRemediationAction,
+    possible_security_group_remediation_actions: ?[]const SecurityGroupRemediationAction = null,
 
     /// The security group rule that is being evaluated.
-    violation_target: ?[]const u8,
+    violation_target: ?[]const u8 = null,
 
     /// A description of the security group that violates the policy.
-    violation_target_description: ?[]const u8,
+    violation_target_description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .partial_matches = "PartialMatches",

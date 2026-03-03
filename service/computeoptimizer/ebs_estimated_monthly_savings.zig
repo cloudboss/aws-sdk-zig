@@ -5,7 +5,7 @@ const Currency = @import("currency.zig").Currency;
 /// recommendations. This includes any applicable discounts.
 pub const EBSEstimatedMonthlySavings = struct {
     /// The currency of the estimated monthly savings.
-    currency: ?Currency,
+    currency: ?Currency = null,
 
     /// The value of the estimated monthly savings.
     value: f64 = 0,

@@ -4,22 +4,22 @@ const BillScenarioCommitmentModificationAction = @import("bill_scenario_commitme
 /// scenario commitment modifications.
 pub const BatchCreateBillScenarioCommitmentModificationItem = struct {
     /// The specific commitment action that was taken.
-    commitment_action: ?BillScenarioCommitmentModificationAction,
+    commitment_action: ?BillScenarioCommitmentModificationAction = null,
 
     /// The group identifier for the created commitment modification.
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// The unique identifier assigned to the created commitment modification.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The key of the successfully created entry. This can be any valid string.
     /// This key is useful to identify errors associated with any commitment entry
     /// as any error is returned with this key.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID associated with the created commitment
     /// modification.
-    usage_account_id: ?[]const u8,
+    usage_account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .commitment_action = "commitmentAction",

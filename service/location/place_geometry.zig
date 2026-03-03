@@ -5,7 +5,7 @@ pub const PlaceGeometry = struct {
     ///
     /// * *x* — Specifies the x coordinate or longitude.
     /// * *y* — Specifies the y coordinate or latitude.
-    point: ?[]const f64,
+    point: ?[]const f64 = null,
 
     pub const json_field_names = .{
         .point = "Point",

@@ -3,16 +3,16 @@ const ContactDetails = @import("contact_details.zig").ContactDetails;
 /// A list of potential contact methods for the result/place.
 pub const Contacts = struct {
     /// List of emails for contacts of the result.
-    emails: ?[]const ContactDetails,
+    emails: ?[]const ContactDetails = null,
 
     /// List of fax addresses for the result contact.
-    faxes: ?[]const ContactDetails,
+    faxes: ?[]const ContactDetails = null,
 
     /// List of phone numbers for the results contact.
-    phones: ?[]const ContactDetails,
+    phones: ?[]const ContactDetails = null,
 
     /// List of website URLs that belong to the result.
-    websites: ?[]const ContactDetails,
+    websites: ?[]const ContactDetails = null,
 
     pub const json_field_names = .{
         .emails = "Emails",

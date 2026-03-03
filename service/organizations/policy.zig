@@ -6,10 +6,10 @@ const PolicySummary = @import("policy_summary.zig").PolicySummary;
 /// hierarchies.
 pub const Policy = struct {
     /// The text content of the policy.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// A structure that contains additional details about the policy.
-    policy_summary: ?PolicySummary,
+    policy_summary: ?PolicySummary = null,
 
     pub const json_field_names = .{
         .content = "Content",

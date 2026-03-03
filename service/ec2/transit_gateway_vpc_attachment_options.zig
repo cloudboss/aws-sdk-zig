@@ -6,13 +6,13 @@ const SecurityGroupReferencingSupportValue = @import("security_group_referencing
 /// Describes the VPC attachment options.
 pub const TransitGatewayVpcAttachmentOptions = struct {
     /// Indicates whether appliance mode support is enabled.
-    appliance_mode_support: ?ApplianceModeSupportValue,
+    appliance_mode_support: ?ApplianceModeSupportValue = null,
 
     /// Indicates whether DNS support is enabled.
-    dns_support: ?DnsSupportValue,
+    dns_support: ?DnsSupportValue = null,
 
     /// Indicates whether IPv6 support is disabled.
-    ipv_6_support: ?Ipv6SupportValue,
+    ipv_6_support: ?Ipv6SupportValue = null,
 
     /// Enables you to reference a security group across VPCs attached to a transit
     /// gateway to simplify security group management.
@@ -21,5 +21,5 @@ pub const TransitGatewayVpcAttachmentOptions = struct {
     ///
     /// For more information about security group referencing, see [Security group
     /// referencing](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security) in the *Amazon Web Services Transit Gateways Guide*.
-    security_group_referencing_support: ?SecurityGroupReferencingSupportValue,
+    security_group_referencing_support: ?SecurityGroupReferencingSupportValue = null,
 };

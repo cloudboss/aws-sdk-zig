@@ -14,31 +14,31 @@ pub const StepSummary = struct {
     created_by: []const u8,
 
     /// The number of dependencies for the step.
-    dependency_counts: ?DependencyCounts,
+    dependency_counts: ?DependencyCounts = null,
 
     /// The date and time the resource ended running.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The life cycle status.
     lifecycle_status: StepLifecycleStatus,
 
     /// A message that describes the lifecycle of the step.
-    lifecycle_status_message: ?[]const u8,
+    lifecycle_status_message: ?[]const u8 = null,
 
     /// The name of the step.
     name: []const u8,
 
     /// The date and time the resource started running.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The step ID.
     step_id: []const u8,
 
     /// The task status to update the job's tasks to.
-    target_task_run_status: ?StepTargetTaskRunStatus,
+    target_task_run_status: ?StepTargetTaskRunStatus = null,
 
     /// The total number of times tasks from the step failed and were retried.
-    task_failure_retry_count: ?i32,
+    task_failure_retry_count: ?i32 = null,
 
     /// The task run status for the job.
     ///
@@ -58,10 +58,10 @@ pub const StepSummary = struct {
     task_run_status_counts: []const aws.map.MapEntry(i32),
 
     /// The date and time the resource was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user or system that updated this resource.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

@@ -6,7 +6,7 @@ pub const PortalTheme = struct {
     custom_colors: CustomColors,
 
     /// The timestamp when the logo was last uploaded.
-    logo_last_uploaded: ?i64,
+    logo_last_uploaded: ?i64 = null,
 
     pub const json_field_names = .{
         .custom_colors = "CustomColors",

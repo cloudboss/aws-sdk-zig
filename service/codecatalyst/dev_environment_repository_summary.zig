@@ -2,7 +2,7 @@
 pub const DevEnvironmentRepositorySummary = struct {
     /// The name of the branch in a source repository cloned into the Dev
     /// Environment.
-    branch_name: ?[]const u8,
+    branch_name: ?[]const u8 = null,
 
     /// The name of the source repository.
     repository_name: []const u8,

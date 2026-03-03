@@ -12,10 +12,10 @@ pub const GrpcRoute = struct {
     match: GrpcRouteMatch,
 
     /// An object that represents a retry policy.
-    retry_policy: ?GrpcRetryPolicy,
+    retry_policy: ?GrpcRetryPolicy = null,
 
     /// An object that represents types of timeouts.
-    timeout: ?GrpcTimeout,
+    timeout: ?GrpcTimeout = null,
 
     pub const json_field_names = .{
         .action = "action",

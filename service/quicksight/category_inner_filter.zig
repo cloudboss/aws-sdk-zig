@@ -8,7 +8,7 @@ pub const CategoryInnerFilter = struct {
 
     configuration: CategoryFilterConfiguration,
 
-    default_filter_control_configuration: ?DefaultFilterControlConfiguration,
+    default_filter_control_configuration: ?DefaultFilterControlConfiguration = null,
 
     pub const json_field_names = .{
         .column = "Column",

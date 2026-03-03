@@ -7,7 +7,7 @@ const Format = @import("format.zig").Format;
 pub const SegmentImportResource = struct {
     /// The number of channel types in the endpoint definitions that were imported
     /// to create the segment.
-    channel_counts: ?[]const aws.map.MapEntry(i32),
+    channel_counts: ?[]const aws.map.MapEntry(i32) = null,
 
     /// (Deprecated) Your AWS account ID, which you assigned to an external ID key
     /// in an IAM trust policy. Amazon Pinpoint previously used this value to assume

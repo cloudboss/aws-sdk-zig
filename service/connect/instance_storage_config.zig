@@ -8,20 +8,20 @@ const StorageType = @import("storage_type.zig").StorageType;
 pub const InstanceStorageConfig = struct {
     /// The existing association identifier that uniquely identifies the resource
     /// type and storage config for the given instance ID.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The configuration of the Kinesis Firehose delivery stream.
-    kinesis_firehose_config: ?KinesisFirehoseConfig,
+    kinesis_firehose_config: ?KinesisFirehoseConfig = null,
 
     /// The configuration of the Kinesis data stream.
-    kinesis_stream_config: ?KinesisStreamConfig,
+    kinesis_stream_config: ?KinesisStreamConfig = null,
 
     /// The configuration of the Kinesis video stream.
-    kinesis_video_stream_config: ?KinesisVideoStreamConfig,
+    kinesis_video_stream_config: ?KinesisVideoStreamConfig = null,
 
     /// The S3 bucket
     /// configuration.
-    s3_config: ?S3Config,
+    s3_config: ?S3Config = null,
 
     /// A valid storage type.
     storage_type: StorageType,

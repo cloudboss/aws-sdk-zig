@@ -7,12 +7,12 @@ pub const SnowflakeNodeData = struct {
     /// Specifies what action to take when writing to a table with preexisting data.
     /// Valid values: `
     /// append`, `merge`, `truncate`, `drop`.
-    action: ?[]const u8,
+    action: ?[]const u8 = null,
 
     /// Specifies additional options passed to the Snowflake connector. If options
     /// are specified
     /// elsewhere in this node, this will take precedence.
-    additional_options: ?[]const aws.map.StringMapEntry,
+    additional_options: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies whether automatic query pushdown is enabled. If pushdown
     /// is enabled, then when a query is run on Spark, if part of the query can be
@@ -23,71 +23,71 @@ pub const SnowflakeNodeData = struct {
     auto_pushdown: bool = false,
 
     /// Specifies a Glue Data Catalog Connection to a Snowflake endpoint.
-    connection: ?Option,
+    connection: ?Option = null,
 
     /// Specifies a Snowflake database for your node to use.
-    database: ?[]const u8,
+    database: ?[]const u8 = null,
 
     /// Not currently used.
-    iam_role: ?Option,
+    iam_role: ?Option = null,
 
     /// Specifies a merge action. Valid values: `simple`, `custom`. If
     /// simple, merge behavior is defined by `MergeWhenMatched` and `
     /// MergeWhenNotMatched`. If custom, defined by `MergeClause`.
-    merge_action: ?[]const u8,
+    merge_action: ?[]const u8 = null,
 
     /// A SQL statement that specifies a custom merge behavior.
-    merge_clause: ?[]const u8,
+    merge_clause: ?[]const u8 = null,
 
     /// Specifies how to resolve records that match preexisting data when merging.
     /// Valid values: `
     /// update`, `delete`.
-    merge_when_matched: ?[]const u8,
+    merge_when_matched: ?[]const u8 = null,
 
     /// Specifies how to process records that do not match preexisting data when
     /// merging. Valid
     /// values: `insert`, `none`.
-    merge_when_not_matched: ?[]const u8,
+    merge_when_not_matched: ?[]const u8 = null,
 
     /// A SQL string run after the Snowflake connector performs its standard
     /// actions.
-    post_action: ?[]const u8,
+    post_action: ?[]const u8 = null,
 
     /// A SQL string run before the Snowflake connector performs its standard
     /// actions.
-    pre_action: ?[]const u8,
+    pre_action: ?[]const u8 = null,
 
     /// A SQL string used to retrieve data with the `query` sourcetype.
-    sample_query: ?[]const u8,
+    sample_query: ?[]const u8 = null,
 
     /// Specifies a Snowflake database schema for your node to use.
-    schema: ?[]const u8,
+    schema: ?[]const u8 = null,
 
     /// Specifies the columns combined to identify a record when detecting matches
     /// for merges and
     /// upserts. A list of structures with `value`, `label` and `
     /// description` keys. Each structure describes a column.
-    selected_columns: ?[]const Option,
+    selected_columns: ?[]const Option = null,
 
     /// Specifies how retrieved data is specified. Valid values: `"table"`, `
     /// "query"`.
-    source_type: ?[]const u8,
+    source_type: ?[]const u8 = null,
 
     /// The name of a staging table used when performing `merge` or upsert `append`
     /// actions. Data is written to this table, then moved to `table` by a generated
     /// postaction.
-    staging_table: ?[]const u8,
+    staging_table: ?[]const u8 = null,
 
     /// Specifies a Snowflake table for your node to use.
-    table: ?[]const u8,
+    table: ?[]const u8 = null,
 
     /// Manually defines the target schema for the node. A list of structures with
     /// `value`
     /// , `label` and `description` keys. Each structure defines a column.
-    table_schema: ?[]const Option,
+    table_schema: ?[]const Option = null,
 
     /// Not currently used.
-    temp_dir: ?[]const u8,
+    temp_dir: ?[]const u8 = null,
 
     /// Used when Action is `append`. Specifies the resolution behavior when a row
     /// already exists. If true, preexisting rows will be updated. If false, those

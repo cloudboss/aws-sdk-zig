@@ -56,7 +56,7 @@ pub const IPSet = struct {
     arn: []const u8,
 
     /// A description of the IP set that helps with identification.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier for the set. This ID is returned in the responses to
     /// create and list commands. You provide it to operations like update and

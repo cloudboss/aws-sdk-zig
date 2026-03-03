@@ -8,7 +8,7 @@ pub const UpdateProjectRequest = struct {
 
     /// The number of minutes a test run in the project executes before it times
     /// out.
-    default_job_timeout_minutes: ?i32,
+    default_job_timeout_minutes: ?i32 = null,
 
     /// A set of environment variables which are used by default for all runs in the
     /// project.
@@ -19,16 +19,16 @@ pub const UpdateProjectRequest = struct {
     /// [Custom test environments
     /// ](https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html) in *AWS Device
     /// Farm.*
-    environment_variables: ?[]const EnvironmentVariable,
+    environment_variables: ?[]const EnvironmentVariable = null,
 
     /// An IAM role to be assumed by the test host for all runs in the project.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// A string that represents the new name of the project that you are updating.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The VPC security groups and subnets that are attached to a project.
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .arn = "arn",

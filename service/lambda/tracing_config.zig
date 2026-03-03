@@ -6,7 +6,7 @@ const TracingMode = @import("tracing_mode.zig").TracingMode;
 /// `Active`.
 pub const TracingConfig = struct {
     /// The tracing mode.
-    mode: ?TracingMode,
+    mode: ?TracingMode = null,
 
     pub const json_field_names = .{
         .mode = "Mode",

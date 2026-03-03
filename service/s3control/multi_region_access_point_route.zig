@@ -14,13 +14,13 @@ pub const MultiRegionAccessPointRoute = struct {
     /// configuration change.
     /// Either the `Bucket` or the `Region` value must be provided. If both
     /// are provided, the bucket must be in the specified Region.
-    bucket: ?[]const u8,
+    bucket: ?[]const u8 = null,
 
     /// The Amazon Web Services Region to which you'll be submitting a routing
     /// configuration change. Either
     /// the `Bucket` or the `Region` value must be provided. If both are
     /// provided, the bucket must be in the specified Region.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The traffic state for the specified bucket or Amazon Web Services Region.
     ///

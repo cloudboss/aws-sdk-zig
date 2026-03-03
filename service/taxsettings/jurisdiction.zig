@@ -9,7 +9,7 @@ pub const Jurisdiction = struct {
     /// The state, region, or province associated with the country of the
     /// jurisdiction, if
     /// applicable.
-    state_or_region: ?[]const u8,
+    state_or_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .country_code = "countryCode",

@@ -6,19 +6,19 @@ const ServerType = @import("server_type.zig").ServerType;
 /// repository.
 pub const SourceCredentialsInfo = struct {
     /// The Amazon Resource Name (ARN) of the token.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The type of authentication used by the credentials. Valid options are OAUTH,
     /// BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, or SECRETS_MANAGER.
-    auth_type: ?AuthType,
+    auth_type: ?AuthType = null,
 
     /// The connection ARN if your authType is CODECONNECTIONS or SECRETS_MANAGER.
-    resource: ?[]const u8,
+    resource: ?[]const u8 = null,
 
     /// The type of source provider. The valid options are GITHUB,
     /// GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED, or
     /// BITBUCKET.
-    server_type: ?ServerType,
+    server_type: ?ServerType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -6,7 +6,7 @@ pub const AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation = struct {
     feedback: []const u8,
 
     /// The list of rule identifiers that the feedback applies to.
-    rule_ids: ?[]const []const u8,
+    rule_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .feedback = "feedback",

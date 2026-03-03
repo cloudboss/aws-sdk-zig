@@ -10,10 +10,10 @@ pub const SourceAlgorithm = struct {
     algorithm_name: []const u8,
 
     /// The ETag associated with Model Data URL.
-    model_data_e_tag: ?[]const u8,
+    model_data_e_tag: ?[]const u8 = null,
 
     /// Specifies the location of ML model data to deploy during endpoint creation.
-    model_data_source: ?ModelDataSource,
+    model_data_source: ?ModelDataSource = null,
 
     /// The Amazon S3 path where the model artifacts, which result from model
     /// training, are stored. This path must point to a single `gzip` compressed tar
@@ -21,7 +21,7 @@ pub const SourceAlgorithm = struct {
     ///
     /// The model artifacts must be in an S3 bucket that is in the same Amazon Web
     /// Services region as the algorithm.
-    model_data_url: ?[]const u8,
+    model_data_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .algorithm_name = "AlgorithmName",

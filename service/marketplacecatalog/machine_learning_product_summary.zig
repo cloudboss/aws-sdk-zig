@@ -3,11 +3,11 @@ const MachineLearningProductVisibilityString = @import("machine_learning_product
 /// A summary of a machine learning product.
 pub const MachineLearningProductSummary = struct {
     /// The title of the machine learning product.
-    product_title: ?[]const u8,
+    product_title: ?[]const u8 = null,
 
     /// The visibility status of the machine learning product. Valid values are
     /// `Limited`, `Public`, `Restricted`, and `Draft`.
-    visibility: ?MachineLearningProductVisibilityString,
+    visibility: ?MachineLearningProductVisibilityString = null,
 
     pub const json_field_names = .{
         .product_title = "ProductTitle",

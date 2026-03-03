@@ -9,12 +9,12 @@ pub const ReplicaGlobalSecondaryIndex = struct {
     /// Overrides the maximum on-demand throughput settings for the specified global
     /// secondary
     /// index in the specified replica table.
-    on_demand_throughput_override: ?OnDemandThroughputOverride,
+    on_demand_throughput_override: ?OnDemandThroughputOverride = null,
 
     /// Replica table GSI-specific provisioned throughput. If not specified, uses
     /// the source
     /// table GSI's read capacity settings.
-    provisioned_throughput_override: ?ProvisionedThroughputOverride,
+    provisioned_throughput_override: ?ProvisionedThroughputOverride = null,
 
     pub const json_field_names = .{
         .index_name = "IndexName",

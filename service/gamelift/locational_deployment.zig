@@ -20,7 +20,7 @@ pub const LocationalDeployment = struct {
     /// been completed.
     ///
     /// * `CANCELLED` -- The deployment was cancelled.
-    deployment_status: ?DeploymentStatus,
+    deployment_status: ?DeploymentStatus = null,
 
     pub const json_field_names = .{
         .deployment_status = "DeploymentStatus",

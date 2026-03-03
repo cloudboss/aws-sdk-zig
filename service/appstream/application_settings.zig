@@ -8,7 +8,7 @@ pub const ApplicationSettings = struct {
     /// settings are stored. You can allow the same persistent application settings
     /// to be used across multiple stacks by specifying the same settings group for
     /// each stack.
-    settings_group: ?[]const u8,
+    settings_group: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

@@ -13,13 +13,13 @@ pub const InstanceGroupConfig = struct {
     /// dynamically adds and terminates Amazon EC2 instances in response to the
     /// value of a
     /// CloudWatch metric. See PutAutoScalingPolicy.
-    auto_scaling_policy: ?AutoScalingPolicy,
+    auto_scaling_policy: ?AutoScalingPolicy = null,
 
     /// The bid price for each Amazon EC2 Spot Instance type as defined by
     /// `InstanceType`. Expressed in USD. If neither `BidPrice` nor
     /// `BidPriceAsPercentageOfOnDemandPrice` is provided,
     /// `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
-    bid_price: ?[]const u8,
+    bid_price: ?[]const u8 = null,
 
     /// Amazon EMR releases 4.x or later.
     ///
@@ -28,14 +28,14 @@ pub const InstanceGroupConfig = struct {
     /// You can specify a separate configuration for each instance group (master,
     /// core, and
     /// task).
-    configurations: ?[]const Configuration,
+    configurations: ?[]const Configuration = null,
 
     /// The custom AMI ID to use for the provisioned instance group.
-    custom_ami_id: ?[]const u8,
+    custom_ami_id: ?[]const u8 = null,
 
     /// EBS configurations that will be attached to each Amazon EC2 instance in the
     /// instance group.
-    ebs_configuration: ?EbsConfiguration,
+    ebs_configuration: ?EbsConfiguration = null,
 
     /// Target number of instances for the instance group.
     instance_count: i32,
@@ -47,10 +47,10 @@ pub const InstanceGroupConfig = struct {
     instance_type: []const u8,
 
     /// Market type of the Amazon EC2 instances used to create a cluster node.
-    market: ?MarketType,
+    market: ?MarketType = null,
 
     /// Friendly name given to the instance group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_scaling_policy = "AutoScalingPolicy",

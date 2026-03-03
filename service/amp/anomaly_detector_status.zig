@@ -6,7 +6,7 @@ pub const AnomalyDetectorStatus = struct {
     status_code: AnomalyDetectorStatusCode,
 
     /// A description of the current status of the anomaly detector.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status_code = "statusCode",

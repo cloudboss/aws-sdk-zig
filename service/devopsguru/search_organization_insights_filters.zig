@@ -6,15 +6,15 @@ const InsightStatus = @import("insight_status.zig").InsightStatus;
 /// Filters you can use to specify which events are returned when `ListEvents`
 /// is called.
 pub const SearchOrganizationInsightsFilters = struct {
-    resource_collection: ?ResourceCollection,
+    resource_collection: ?ResourceCollection = null,
 
-    service_collection: ?ServiceCollection,
+    service_collection: ?ServiceCollection = null,
 
     /// An array of severity values used to search for insights.
-    severities: ?[]const InsightSeverity,
+    severities: ?[]const InsightSeverity = null,
 
     /// An array of status values used to search for insights.
-    statuses: ?[]const InsightStatus,
+    statuses: ?[]const InsightStatus = null,
 
     pub const json_field_names = .{
         .resource_collection = "ResourceCollection",

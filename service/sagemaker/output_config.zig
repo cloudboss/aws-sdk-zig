@@ -66,7 +66,7 @@ pub const OutputConfig = struct {
     /// * `class_labels`: Specifies the classification labels file name inside input
     ///   tar.gz file. For example, `{"class_labels": "imagenet_labels_1000.txt"}`.
     ///   Labels inside the txt file should be separated by newlines.
-    compiler_options: ?[]const u8,
+    compiler_options: ?[]const u8 = null,
 
     /// The Amazon Web Services Key Management Service key (Amazon Web Services KMS)
     /// that Amazon SageMaker AI uses to encrypt your output models with Amazon S3
@@ -82,7 +82,7 @@ pub const OutputConfig = struct {
     ///   `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     /// * Alias name: `alias/ExampleAlias`
     /// * Alias name ARN: `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Identifies the S3 bucket where you want Amazon SageMaker AI to store the
     /// model artifacts. For example, `s3://bucket-name/key-name-prefix`.
@@ -95,7 +95,7 @@ pub const OutputConfig = struct {
     ///
     /// Currently `ml_trn1` is available only in US East (N. Virginia) Region, and
     /// `ml_inf2` is available only in US East (Ohio) Region.
-    target_device: ?TargetDevice,
+    target_device: ?TargetDevice = null,
 
     /// Contains information about a target platform that you want your model to run
     /// on, such as OS, architecture, and accelerators. It is an alternative of
@@ -135,7 +135,7 @@ pub const OutputConfig = struct {
     /// `"TargetPlatform": {"Os": "ANDROID", "Arch": "ARM64"},`
     ///
     /// ` "CompilerOptions": {'ANDROID_PLATFORM': 29}`
-    target_platform: ?TargetPlatform,
+    target_platform: ?TargetPlatform = null,
 
     pub const json_field_names = .{
         .compiler_options = "CompilerOptions",

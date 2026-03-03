@@ -4,10 +4,10 @@ pub const DurationRange = struct {
     /// The maximum value of the duration range. Must be less than or equal to
     /// 604800 seconds
     /// (1 week).
-    max_seconds: ?i32,
+    max_seconds: ?i32 = null,
 
     /// The minimum value of the duration range. Must be greater than zero.
-    min_seconds: ?i32,
+    min_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .max_seconds = "maxSeconds",

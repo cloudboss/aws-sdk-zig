@@ -3,7 +3,7 @@ const DetailedAlgorithmStatus = @import("detailed_algorithm_status.zig").Detaile
 /// Represents the overall status of an algorithm.
 pub const AlgorithmStatusItem = struct {
     /// if the overall status is `Failed`, the reason for the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The name of the algorithm for which the overall status is being reported.
     name: []const u8,

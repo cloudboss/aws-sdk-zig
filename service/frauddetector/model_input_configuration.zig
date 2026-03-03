@@ -7,22 +7,22 @@ pub const ModelInputConfiguration = struct {
     /// the placeholders for variable-names in the template will be replaced with
     /// the variable
     /// values before being sent to SageMaker.
-    csv_input_template: ?[]const u8,
+    csv_input_template: ?[]const u8 = null,
 
     /// The event type name.
-    event_type_name: ?[]const u8,
+    event_type_name: ?[]const u8 = null,
 
     /// The format of the model input configuration. The format differs depending on
     /// if it is
     /// passed through to SageMaker or constructed by Amazon Fraud Detector.
-    format: ?ModelInputDataFormat,
+    format: ?ModelInputDataFormat = null,
 
     /// Template for constructing the JSON input-data sent to SageMaker. At
     /// event-evaluation,
     /// the placeholders for variable names in the template will be replaced with
     /// the variable
     /// values before being sent to SageMaker.
-    json_input_template: ?[]const u8,
+    json_input_template: ?[]const u8 = null,
 
     /// The event variables.
     use_event_variables: bool,

@@ -7,27 +7,27 @@ const PropertyType = @import("property_type.zig").PropertyType;
 pub const Property = struct {
     /// A list of `AllowedValue` objects representing the values allowed for the
     /// property.
-    allowed_values: ?[]const AllowedValue,
+    allowed_values: ?[]const AllowedValue = null,
 
     /// Indicates which data operations are applicable to the property.
-    data_operation_scopes: ?[]const DataOperation,
+    data_operation_scopes: ?[]const DataOperation = null,
 
     /// The default value for the property.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// A description of the property.
     description: []const u8,
 
     /// A key name to use when sending this property in API requests, if different
     /// from the display name.
-    key_override: ?[]const u8,
+    key_override: ?[]const u8 = null,
 
     /// The name of the property.
     name: []const u8,
 
     /// Specifies where this property should be included in REST requests, such as
     /// in headers, query parameters, or request body.
-    property_location: ?PropertyLocation,
+    property_location: ?PropertyLocation = null,
 
     /// Describes the type of property.
     property_types: []const PropertyType = &.{},

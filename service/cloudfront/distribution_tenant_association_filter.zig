@@ -2,9 +2,9 @@
 pub const DistributionTenantAssociationFilter = struct {
     /// The ID of the connection group to filter by. You can find distribution
     /// tenants associated with a specific connection group.
-    connection_group_id: ?[]const u8,
+    connection_group_id: ?[]const u8 = null,
 
     /// The distribution ID to filter by. You can find distribution tenants
     /// associated with a specific distribution.
-    distribution_id: ?[]const u8,
+    distribution_id: ?[]const u8 = null,
 };

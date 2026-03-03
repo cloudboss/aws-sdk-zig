@@ -4,14 +4,14 @@ const AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails 
 /// proxy.
 pub const AwsEcsTaskDefinitionProxyConfigurationDetails = struct {
     /// The name of the container that will serve as the App Mesh proxy.
-    container_name: ?[]const u8,
+    container_name: ?[]const u8 = null,
 
     /// The set of network configuration parameters to provide to the Container
     /// Network Interface (CNI) plugin, specified as key-value pairs.
-    proxy_configuration_properties: ?[]const AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails,
+    proxy_configuration_properties: ?[]const AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails = null,
 
     /// The proxy type.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .container_name = "ContainerName",

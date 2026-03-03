@@ -28,10 +28,10 @@ pub const PropertyValue = struct {
     /// * *± HH:mm*: time zone offset in Hours and Minutes.
     ///
     /// *Required sub-fields*: YYYY-MM-DDThh:mm:ss and [Z/±HH:mm]
-    time: ?[]const u8,
+    time: ?[]const u8 = null,
 
     /// The timestamp of a value for a time series property.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     /// An object that specifies a value for a time series property.
     value: DataValue,

@@ -9,29 +9,29 @@ pub const Activity = struct {
     activity_id: []const u8,
 
     /// The Amazon Resource Name (ARN) of the Auto Scaling group.
-    auto_scaling_group_arn: ?[]const u8,
+    auto_scaling_group_arn: ?[]const u8 = null,
 
     /// The name of the Auto Scaling group.
     auto_scaling_group_name: []const u8,
 
     /// The state of the Auto Scaling group, which is either `InService` or
     /// `Deleted`.
-    auto_scaling_group_state: ?[]const u8,
+    auto_scaling_group_state: ?[]const u8 = null,
 
     /// The reason the activity began.
     cause: []const u8,
 
     /// A friendly, more verbose description of the activity.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The details about the activity.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// The end time of the activity.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// A value between 0 and 100 that indicates the progress of the activity.
-    progress: ?i32,
+    progress: ?i32 = null,
 
     /// The start time of the activity.
     start_time: i64,
@@ -40,5 +40,5 @@ pub const Activity = struct {
     status_code: ScalingActivityStatusCode,
 
     /// A friendly, more verbose description of the activity status.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 };

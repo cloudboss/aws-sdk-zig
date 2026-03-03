@@ -1,14 +1,14 @@
 /// The custom structure represents a complex or higher-order data structure.
 pub const CustomStruct = struct {
     /// A comment in addition to the description.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The deprecation message for the node or the branch that was moved or
     /// deleted.
-    deprecation_message: ?[]const u8,
+    deprecation_message: ?[]const u8 = null,
 
     /// A brief description of the custom structure.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The fully qualified name of the custom structure. For example, the fully
     /// qualified

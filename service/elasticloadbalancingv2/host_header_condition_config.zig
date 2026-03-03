@@ -2,7 +2,7 @@
 pub const HostHeaderConditionConfig = struct {
     /// The regular expressions to compare against the host header. The maximum
     /// length of each string is 128 characters.
-    regex_values: ?[]const []const u8,
+    regex_values: ?[]const []const u8 = null,
 
     /// The host names. The maximum length of each string is 128 characters. The
     /// comparison is
@@ -16,5 +16,5 @@ pub const HostHeaderConditionConfig = struct {
     /// If you specify multiple strings, the condition is satisfied if one of the
     /// strings matches
     /// the host name.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 };

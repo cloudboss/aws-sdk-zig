@@ -14,13 +14,13 @@ pub const ToolResultBlock = struct {
     ///
     /// This field is only supported by Amazon Nova and Anthropic Claude 3 and 4
     /// models.
-    status: ?ToolResultStatus,
+    status: ?ToolResultStatus = null,
 
     /// The ID of the tool request that this is the result for.
     tool_use_id: []const u8,
 
     /// The type for the tool result content block.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content = "content",

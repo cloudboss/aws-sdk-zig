@@ -8,14 +8,14 @@ const LogDeliveryStatus = @import("log_delivery_status.zig").LogDeliveryStatus;
 /// whether you choose to deliver internet measurements to S3 logs.
 pub const S3Config = struct {
     /// The Amazon S3 bucket name.
-    bucket_name: ?[]const u8,
+    bucket_name: ?[]const u8 = null,
 
     /// The Amazon S3 bucket prefix.
-    bucket_prefix: ?[]const u8,
+    bucket_prefix: ?[]const u8 = null,
 
     /// The status of publishing Internet Monitor internet measurements to an Amazon
     /// S3 bucket.
-    log_delivery_status: ?LogDeliveryStatus,
+    log_delivery_status: ?LogDeliveryStatus = null,
 
     pub const json_field_names = .{
         .bucket_name = "BucketName",

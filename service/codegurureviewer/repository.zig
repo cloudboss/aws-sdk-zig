@@ -10,15 +10,15 @@ const S3Repository = @import("s3_repository.zig").S3Repository;
 /// GitHub repository.
 pub const Repository = struct {
     /// Information about a Bitbucket repository.
-    bitbucket: ?ThirdPartySourceRepository,
+    bitbucket: ?ThirdPartySourceRepository = null,
 
     /// Information about an Amazon Web Services CodeCommit repository.
-    code_commit: ?CodeCommitRepository,
+    code_commit: ?CodeCommitRepository = null,
 
     /// Information about a GitHub Enterprise Server repository.
-    git_hub_enterprise_server: ?ThirdPartySourceRepository,
+    git_hub_enterprise_server: ?ThirdPartySourceRepository = null,
 
-    s3_bucket: ?S3Repository,
+    s3_bucket: ?S3Repository = null,
 
     pub const json_field_names = .{
         .bitbucket = "Bitbucket",

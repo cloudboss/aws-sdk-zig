@@ -4,11 +4,11 @@
 pub const NielsenConfiguration = struct {
     /// Nielsen has discontinued the use of breakout code functionality. If you must
     /// include this property, set the value to zero.
-    breakout_code: ?i32,
+    breakout_code: ?i32 = null,
 
     /// Use Distributor ID to specify the distributor ID that is assigned to your
     /// organization by Nielsen.
-    distributor_id: ?[]const u8,
+    distributor_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .breakout_code = "BreakoutCode",

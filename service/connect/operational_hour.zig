@@ -4,10 +4,10 @@ const OverrideTimeSlice = @import("override_time_slice.zig").OverrideTimeSlice;
 /// applied.
 pub const OperationalHour = struct {
     /// The end time that your contact center closes.
-    end: ?OverrideTimeSlice,
+    end: ?OverrideTimeSlice = null,
 
     /// The start time that your contact center opens.
-    start: ?OverrideTimeSlice,
+    start: ?OverrideTimeSlice = null,
 
     pub const json_field_names = .{
         .end = "End",

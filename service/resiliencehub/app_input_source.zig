@@ -5,7 +5,7 @@ const TerraformSource = @import("terraform_source.zig").TerraformSource;
 /// The list of Resilience Hub application input sources.
 pub const AppInputSource = struct {
     /// The namespace on your Amazon Elastic Kubernetes Service cluster.
-    eks_source_cluster_namespace: ?EksSourceClusterNamespace,
+    eks_source_cluster_namespace: ?EksSourceClusterNamespace = null,
 
     /// The resource type of the input source.
     import_type: ResourceMappingType,
@@ -19,13 +19,13 @@ pub const AppInputSource = struct {
     /// Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the
     /// *Amazon Web Services General Reference* guide.
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     /// The name of the input source.
-    source_name: ?[]const u8,
+    source_name: ?[]const u8 = null,
 
     /// The name of the Terraform s3 state ﬁle.
-    terraform_source: ?TerraformSource,
+    terraform_source: ?TerraformSource = null,
 
     pub const json_field_names = .{
         .eks_source_cluster_namespace = "eksSourceClusterNamespace",

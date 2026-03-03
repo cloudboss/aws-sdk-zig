@@ -7,7 +7,7 @@ pub const FieldBarSeriesItem = struct {
 
     /// Options that determine the presentation of bar series associated to the
     /// field.
-    settings: ?BarChartSeriesSettings,
+    settings: ?BarChartSeriesSettings = null,
 
     pub const json_field_names = .{
         .field_id = "FieldId",

@@ -1,15 +1,15 @@
 pub const BackendConnectionErrors = struct {
-    connection_refused_count: ?i32,
+    connection_refused_count: ?i32 = null,
 
-    http_code_4_xx_count: ?i32,
+    http_code_4_xx_count: ?i32 = null,
 
-    http_code_5_xx_count: ?i32,
+    http_code_5_xx_count: ?i32 = null,
 
-    other_count: ?i32,
+    other_count: ?i32 = null,
 
-    timeout_count: ?i32,
+    timeout_count: ?i32 = null,
 
-    unknown_host_count: ?i32,
+    unknown_host_count: ?i32 = null,
 
     pub const json_field_names = .{
         .connection_refused_count = "ConnectionRefusedCount",

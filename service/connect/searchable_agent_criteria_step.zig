@@ -3,10 +3,10 @@ const SearchContactsMatchType = @import("search_contacts_match_type.zig").Search
 /// The agent criteria to search for preferred agents on the routing criteria.
 pub const SearchableAgentCriteriaStep = struct {
     /// The identifiers of agents used in preferred agents matching.
-    agent_ids: ?[]const []const u8,
+    agent_ids: ?[]const []const u8 = null,
 
     /// The match type combining multiple agent criteria steps.
-    match_type: ?SearchContactsMatchType,
+    match_type: ?SearchContactsMatchType = null,
 
     pub const json_field_names = .{
         .agent_ids = "AgentIds",

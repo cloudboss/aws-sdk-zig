@@ -5,22 +5,22 @@ const AdapterVersionStatus = @import("adapter_version_status.zig").AdapterVersio
 /// AdapterVersion, CreationTime, FeatureTypes, and Status.
 pub const AdapterVersionOverview = struct {
     /// A unique identifier for the adapter associated with a given adapter version.
-    adapter_id: ?[]const u8,
+    adapter_id: ?[]const u8 = null,
 
     /// An identified for a given adapter version.
-    adapter_version: ?[]const u8,
+    adapter_version: ?[]const u8 = null,
 
     /// The date and time that a given adapter version was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The feature types that the adapter version is operating on.
-    feature_types: ?[]const FeatureType,
+    feature_types: ?[]const FeatureType = null,
 
     /// Contains information on the status of a given adapter version.
-    status: ?AdapterVersionStatus,
+    status: ?AdapterVersionStatus = null,
 
     /// A message explaining the status of a given adapter vesion.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .adapter_id = "AdapterId",

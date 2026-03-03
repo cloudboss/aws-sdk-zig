@@ -5,10 +5,10 @@ const DialogActionType = @import("dialog_action_type.zig").DialogActionType;
 pub const DialogAction = struct {
     /// If the dialog action is `ElicitSlot`, defines the slot to
     /// elicit from the user.
-    slot_to_elicit: ?[]const u8,
+    slot_to_elicit: ?[]const u8 = null,
 
     /// When true the next message for the intent is not used.
-    suppress_next_message: ?bool,
+    suppress_next_message: ?bool = null,
 
     /// The action that the bot should execute.
     @"type": DialogActionType,

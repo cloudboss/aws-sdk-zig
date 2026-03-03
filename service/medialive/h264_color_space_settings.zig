@@ -4,11 +4,11 @@ const Rec709Settings = @import("rec_709_settings.zig").Rec709Settings;
 
 /// H264 Color Space Settings
 pub const H264ColorSpaceSettings = struct {
-    color_space_passthrough_settings: ?ColorSpacePassthroughSettings,
+    color_space_passthrough_settings: ?ColorSpacePassthroughSettings = null,
 
-    rec_601_settings: ?Rec601Settings,
+    rec_601_settings: ?Rec601Settings = null,
 
-    rec_709_settings: ?Rec709Settings,
+    rec_709_settings: ?Rec709Settings = null,
 
     pub const json_field_names = .{
         .color_space_passthrough_settings = "ColorSpacePassthroughSettings",

@@ -14,12 +14,12 @@ pub const CanaryConfiguration = struct {
     /// remaining production traffic to the new service revision. Valid values are 0
     /// to 1440
     /// minutes (24 hours). The default value is 10.
-    canary_bake_time_in_minutes: ?i32,
+    canary_bake_time_in_minutes: ?i32 = null,
 
     /// The percentage of production traffic to shift to the new service revision
     /// during the canary phase. Valid values are multiples of 0.1 from 0.1 to
     /// 100.0. The default value is 5.0.
-    canary_percent: ?f64,
+    canary_percent: ?f64 = null,
 
     pub const json_field_names = .{
         .canary_bake_time_in_minutes = "canaryBakeTimeInMinutes",

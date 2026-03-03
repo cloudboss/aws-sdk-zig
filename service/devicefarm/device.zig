@@ -8,24 +8,24 @@ const Resolution = @import("resolution.zig").Resolution;
 /// Represents a device type that an app is tested against.
 pub const Device = struct {
     /// The device's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Indicates how likely a device is available for a test run. Currently
     /// available in the ListDevices and GetDevice API methods.
-    availability: ?DeviceAvailability,
+    availability: ?DeviceAvailability = null,
 
     /// The device's carrier.
-    carrier: ?[]const u8,
+    carrier: ?[]const u8 = null,
 
     /// Information about the device's CPU.
-    cpu: ?CPU,
+    cpu: ?CPU = null,
 
     /// The name of the fleet to which this device belongs.
-    fleet_name: ?[]const u8,
+    fleet_name: ?[]const u8 = null,
 
     /// The type of fleet to which this device belongs. Possible values are PRIVATE
     /// and PUBLIC.
-    fleet_type: ?[]const u8,
+    fleet_type: ?[]const u8 = null,
 
     /// The device's form factor.
     ///
@@ -34,34 +34,34 @@ pub const Device = struct {
     /// * PHONE
     ///
     /// * TABLET
-    form_factor: ?DeviceFormFactor,
+    form_factor: ?DeviceFormFactor = null,
 
     /// The device's heap size, expressed in bytes.
-    heap_size: ?i64,
+    heap_size: ?i64 = null,
 
     /// The device's image name.
-    image: ?[]const u8,
+    image: ?[]const u8 = null,
 
     /// The instances that belong to this device.
-    instances: ?[]const DeviceInstance,
+    instances: ?[]const DeviceInstance = null,
 
     /// The device's manufacturer name.
-    manufacturer: ?[]const u8,
+    manufacturer: ?[]const u8 = null,
 
     /// The device's total memory size, expressed in bytes.
-    memory: ?i64,
+    memory: ?i64 = null,
 
     /// The device's model name.
-    model: ?[]const u8,
+    model: ?[]const u8 = null,
 
     /// The device's model ID.
-    model_id: ?[]const u8,
+    model_id: ?[]const u8 = null,
 
     /// The device's display name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The device's operating system type.
-    os: ?[]const u8,
+    os: ?[]const u8 = null,
 
     /// The device's platform.
     ///
@@ -70,14 +70,14 @@ pub const Device = struct {
     /// * ANDROID
     ///
     /// * IOS
-    platform: ?DevicePlatform,
+    platform: ?DevicePlatform = null,
 
     /// The device's radio.
-    radio: ?[]const u8,
+    radio: ?[]const u8 = null,
 
     /// Specifies whether remote access has been enabled for the specified
     /// device.
-    remote_access_enabled: ?bool,
+    remote_access_enabled: ?bool = null,
 
     /// This flag is set to `true` if remote debugging is enabled for the
     /// device.
@@ -85,10 +85,10 @@ pub const Device = struct {
     /// Remote debugging is [no
     /// longer
     /// supported](https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
-    remote_debug_enabled: ?bool,
+    remote_debug_enabled: ?bool = null,
 
     /// The resolution of the device.
-    resolution: ?Resolution,
+    resolution: ?Resolution = null,
 
     pub const json_field_names = .{
         .arn = "arn",

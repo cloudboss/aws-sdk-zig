@@ -16,7 +16,7 @@ pub const RecommendationTemplate = struct {
     /// Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the
     /// *Amazon Web Services General Reference* guide.
-    app_arn: ?[]const u8,
+    app_arn: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
     /// arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
@@ -28,7 +28,7 @@ pub const RecommendationTemplate = struct {
     assessment_arn: []const u8,
 
     /// The end time for the action.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// Format of the recommendation template.
     ///
@@ -42,16 +42,16 @@ pub const RecommendationTemplate = struct {
     format: TemplateFormat,
 
     /// Message for the recommendation template.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Name for the recommendation template.
     name: []const u8,
 
     /// Indicates if replacements are needed.
-    needs_replacements: ?bool,
+    needs_replacements: ?bool = null,
 
     /// Identifiers for the recommendations used in the recommendation template.
-    recommendation_ids: ?[]const []const u8,
+    recommendation_ids: ?[]const []const u8 = null,
 
     /// Amazon Resource Name (ARN) for the recommendation template.
     recommendation_template_arn: []const u8,
@@ -72,7 +72,7 @@ pub const RecommendationTemplate = struct {
     recommendation_types: []const RenderRecommendationType,
 
     /// The start time for the action.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Status of the action.
     status: RecommendationTemplateStatus,
@@ -80,10 +80,10 @@ pub const RecommendationTemplate = struct {
     /// Tags assigned to the resource. A tag is a label that you assign to an Amazon
     /// Web Services resource.
     /// Each tag consists of a key/value pair.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The file location of the template.
-    templates_location: ?S3Location,
+    templates_location: ?S3Location = null,
 
     pub const json_field_names = .{
         .app_arn = "appArn",

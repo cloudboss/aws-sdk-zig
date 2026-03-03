@@ -9,7 +9,7 @@ pub const SearchPlaceIndexForTextSummary = struct {
     ///
     /// For example, `[-123.1174, 49.2847]` represents the position with longitude
     /// `-123.1174` and latitude `49.2847`.
-    bias_position: ?[]const f64,
+    bias_position: ?[]const f64 = null,
 
     /// The geospatial data provider attached to the place index resource specified
     /// in the request. Values can be one of the following:
@@ -24,27 +24,27 @@ pub const SearchPlaceIndexForTextSummary = struct {
 
     /// Contains the coordinates for the optional bounding box specified in the
     /// request.
-    filter_b_box: ?[]const f64,
+    filter_b_box: ?[]const f64 = null,
 
     /// The optional category filter specified in the request.
-    filter_categories: ?[]const []const u8,
+    filter_categories: ?[]const []const u8 = null,
 
     /// Contains the optional country filter specified in the request.
-    filter_countries: ?[]const []const u8,
+    filter_countries: ?[]const []const u8 = null,
 
     /// The preferred language used to return results. Matches the language in the
     /// request. The value is a valid [BCP 47](https://tools.ietf.org/search/bcp47)
     /// language tag, for example, `en` for English.
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// Contains the optional result count limit specified in the request.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The bounding box that fully contains all search results.
     ///
     /// If you specified the optional `FilterBBox` parameter in the request,
     /// `ResultBBox` is contained within `FilterBBox`.
-    result_b_box: ?[]const f64,
+    result_b_box: ?[]const f64 = null,
 
     /// The search text specified in the request.
     text: []const u8,

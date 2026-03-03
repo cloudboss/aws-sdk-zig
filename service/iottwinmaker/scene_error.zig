@@ -3,10 +3,10 @@ const SceneErrorCode = @import("scene_error_code.zig").SceneErrorCode;
 /// The scene error.
 pub const SceneError = struct {
     /// The SceneError code.
-    code: ?SceneErrorCode,
+    code: ?SceneErrorCode = null,
 
     /// The SceneError message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

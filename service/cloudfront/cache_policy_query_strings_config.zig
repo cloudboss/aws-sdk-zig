@@ -31,5 +31,5 @@ pub const CachePolicyQueryStringsConfig = struct {
     /// set to `whitelist` (the listed query strings * **are** * included) or
     /// `allExcept` (the listed query strings * **are not** * included, but all
     /// other query strings are).
-    query_strings: ?QueryStringNames,
+    query_strings: ?QueryStringNames = null,
 };

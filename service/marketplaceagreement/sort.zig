@@ -4,11 +4,11 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 pub const Sort = struct {
     /// The attribute on which the data is grouped, which can be by `StartTime` and
     /// `EndTime`. The default value is `EndTime`.
-    sort_by: ?[]const u8,
+    sort_by: ?[]const u8 = null,
 
     /// The sorting order, which can be `ASCENDING` or `DESCENDING`. The default
     /// value is `DESCENDING`.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .sort_by = "sortBy",

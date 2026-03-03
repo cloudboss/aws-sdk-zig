@@ -4,7 +4,7 @@ const OutputFile = @import("output_file.zig").OutputFile;
 /// generated.
 pub const InlineAgentFilePart = struct {
     /// Files containing intermediate response for the user.
-    files: ?[]const OutputFile,
+    files: ?[]const OutputFile = null,
 
     pub const json_field_names = .{
         .files = "files",

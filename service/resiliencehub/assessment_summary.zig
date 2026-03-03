@@ -12,13 +12,13 @@ pub const AssessmentSummary = struct {
     /// address it.
     ///
     /// This property is available only in the US East (N. Virginia) Region.
-    risk_recommendations: ?[]const AssessmentRiskRecommendation,
+    risk_recommendations: ?[]const AssessmentRiskRecommendation = null,
 
     /// Indicates a concise summary that provides an overview of the Resilience Hub
     /// assessment.
     ///
     /// This property is available only in the US East (N. Virginia) Region.
-    summary: ?[]const u8,
+    summary: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .risk_recommendations = "riskRecommendations",

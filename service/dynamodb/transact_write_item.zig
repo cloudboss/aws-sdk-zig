@@ -8,16 +8,16 @@ const Update = @import("update.zig").Update;
 /// multiple items in one or more tables atomically.
 pub const TransactWriteItem = struct {
     /// A request to perform a check item operation.
-    condition_check: ?ConditionCheck,
+    condition_check: ?ConditionCheck = null,
 
     /// A request to perform a `DeleteItem` operation.
-    delete: ?Delete,
+    delete: ?Delete = null,
 
     /// A request to perform a `PutItem` operation.
-    put: ?Put,
+    put: ?Put = null,
 
     /// A request to perform an `UpdateItem` operation.
-    update: ?Update,
+    update: ?Update = null,
 
     pub const json_field_names = .{
         .condition_check = "ConditionCheck",

@@ -6,9 +6,9 @@ const StringFilter = @import("string_filter.zig").StringFilter;
 pub const ResourcesTrendsStringFilter = struct {
     /// The name of the resources field to filter on, such as resourceType,
     /// accountId, or region.
-    field_name: ?ResourcesTrendsStringField,
+    field_name: ?ResourcesTrendsStringField = null,
 
-    filter: ?StringFilter,
+    filter: ?StringFilter = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

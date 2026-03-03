@@ -3,9 +3,9 @@ const LoadBalancerDescription = @import("load_balancer_description.zig").LoadBal
 /// Contains the parameters for DescribeLoadBalancers.
 pub const DescribeAccessPointsOutput = struct {
     /// Information about the load balancers.
-    load_balancer_descriptions: ?[]const LoadBalancerDescription,
+    load_balancer_descriptions: ?[]const LoadBalancerDescription = null,
 
     /// The marker to use when requesting the next set of results. If there are no
     /// additional results, the string is empty.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 };

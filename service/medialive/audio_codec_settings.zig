@@ -8,19 +8,19 @@ const WavSettings = @import("wav_settings.zig").WavSettings;
 
 /// Audio Codec Settings
 pub const AudioCodecSettings = struct {
-    aac_settings: ?AacSettings,
+    aac_settings: ?AacSettings = null,
 
-    ac_3_settings: ?Ac3Settings,
+    ac_3_settings: ?Ac3Settings = null,
 
-    eac_3_atmos_settings: ?Eac3AtmosSettings,
+    eac_3_atmos_settings: ?Eac3AtmosSettings = null,
 
-    eac_3_settings: ?Eac3Settings,
+    eac_3_settings: ?Eac3Settings = null,
 
-    mp_2_settings: ?Mp2Settings,
+    mp_2_settings: ?Mp2Settings = null,
 
-    pass_through_settings: ?PassThroughSettings,
+    pass_through_settings: ?PassThroughSettings = null,
 
-    wav_settings: ?WavSettings,
+    wav_settings: ?WavSettings = null,
 
     pub const json_field_names = .{
         .aac_settings = "AacSettings",

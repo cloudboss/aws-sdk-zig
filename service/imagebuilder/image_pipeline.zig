@@ -12,7 +12,7 @@ const WorkflowConfiguration = @import("workflow_configuration.zig").WorkflowConf
 /// Details of an image pipeline.
 pub const ImagePipeline = struct {
     /// The Amazon Resource Name (ARN) of the image pipeline.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Image Builder tracks the number of consecutive failures for scheduled
     /// pipeline
@@ -36,85 +36,85 @@ pub const ImagePipeline = struct {
     /// If the pipeline runs manually and fails, the count remains the same. The
     /// next
     /// scheduled run continues to increment where it left off before.
-    consecutive_failures: ?i32,
+    consecutive_failures: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the container recipe that is used for this
     /// pipeline.
-    container_recipe_arn: ?[]const u8,
+    container_recipe_arn: ?[]const u8 = null,
 
     /// The date on which this image pipeline was created.
-    date_created: ?[]const u8,
+    date_created: ?[]const u8 = null,
 
     /// This is no longer supported, and does not return a value.
-    date_last_run: ?[]const u8,
+    date_last_run: ?[]const u8 = null,
 
     /// The next date when the pipeline is scheduled to run.
-    date_next_run: ?[]const u8,
+    date_next_run: ?[]const u8 = null,
 
     /// The date on which this image pipeline was last updated.
-    date_updated: ?[]const u8,
+    date_updated: ?[]const u8 = null,
 
     /// The description of the image pipeline.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the distribution configuration associated
     /// with this
     /// image pipeline.
-    distribution_configuration_arn: ?[]const u8,
+    distribution_configuration_arn: ?[]const u8 = null,
 
     /// Collects additional information about the image being created, including the
     /// operating
     /// system (OS) version and package list. This information is used to enhance
     /// the overall
     /// experience of using EC2 Image Builder. Enabled by default.
-    enhanced_image_metadata_enabled: ?bool,
+    enhanced_image_metadata_enabled: ?bool = null,
 
     /// The name or Amazon Resource Name (ARN) for the IAM role you create that
     /// grants
     /// Image Builder access to perform workflow actions.
-    execution_role: ?[]const u8,
+    execution_role: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the image recipe associated with this
     /// image
     /// pipeline.
-    image_recipe_arn: ?[]const u8,
+    image_recipe_arn: ?[]const u8 = null,
 
     /// Contains settings for vulnerability scans.
-    image_scanning_configuration: ?ImageScanningConfiguration,
+    image_scanning_configuration: ?ImageScanningConfiguration = null,
 
     /// The image tests configuration of the image pipeline.
-    image_tests_configuration: ?ImageTestsConfiguration,
+    image_tests_configuration: ?ImageTestsConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the infrastructure configuration
     /// associated with
     /// this image pipeline.
-    infrastructure_configuration_arn: ?[]const u8,
+    infrastructure_configuration_arn: ?[]const u8 = null,
 
     /// The status of the last image that this pipeline built, such as
     /// `BUILDING`, `TESTING`, `FAILED`,
     /// or `AVAILABLE`.
-    last_run_status: ?ImageStatus,
+    last_run_status: ?ImageStatus = null,
 
     /// Defines logging configuration for the output image.
-    logging_configuration: ?PipelineLoggingConfiguration,
+    logging_configuration: ?PipelineLoggingConfiguration = null,
 
     /// The name of the image pipeline.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The platform of the image pipeline.
-    platform: ?Platform,
+    platform: ?Platform = null,
 
     /// The schedule of the image pipeline.
-    schedule: ?Schedule,
+    schedule: ?Schedule = null,
 
     /// The status of the image pipeline.
-    status: ?PipelineStatus,
+    status: ?PipelineStatus = null,
 
     /// The tags of this image pipeline.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Contains the workflows that run for the image pipeline.
-    workflows: ?[]const WorkflowConfiguration,
+    workflows: ?[]const WorkflowConfiguration = null,
 
     pub const json_field_names = .{
         .arn = "arn",

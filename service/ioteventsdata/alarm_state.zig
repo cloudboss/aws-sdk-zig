@@ -7,10 +7,10 @@ const SystemEvent = @import("system_event.zig").SystemEvent;
 pub const AlarmState = struct {
     /// Contains information about the action that you can take to respond to the
     /// alarm.
-    customer_action: ?CustomerAction,
+    customer_action: ?CustomerAction = null,
 
     /// Information needed to evaluate data.
-    rule_evaluation: ?RuleEvaluation,
+    rule_evaluation: ?RuleEvaluation = null,
 
     /// The name of the alarm state. The state name can be one of the following
     /// values:
@@ -36,10 +36,10 @@ pub const AlarmState = struct {
     /// the alarm was invoked. However, the data that the alarm is currently
     /// evaluating is within the specified range.
     /// To change the alarm to the `NORMAL` state, you must acknowledge the alarm.
-    state_name: ?AlarmStateName,
+    state_name: ?AlarmStateName = null,
 
     /// Contains information about alarm state changes.
-    system_event: ?SystemEvent,
+    system_event: ?SystemEvent = null,
 
     pub const json_field_names = .{
         .customer_action = "customerAction",

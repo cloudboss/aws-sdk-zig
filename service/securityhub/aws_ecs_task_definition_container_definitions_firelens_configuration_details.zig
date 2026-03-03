@@ -14,10 +14,10 @@ pub const AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails =
     /// `file`.
     ///
     /// * `config-file-value`. The value is either an S3 ARN or a file path.
-    options: ?[]const aws.map.StringMapEntry,
+    options: ?[]const aws.map.StringMapEntry = null,
 
     /// The log router to use. Valid values are `fluentbit` or `fluentd`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .options = "Options",

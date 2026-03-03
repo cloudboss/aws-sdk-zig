@@ -11,7 +11,7 @@ pub const AmazonTranscribeCallAnalyticsProcessorConfiguration = struct {
     /// By default, all `CategoryEvents` are sent to the insights target. If this
     /// parameter is specified, only included categories are sent to the insights
     /// target.
-    call_analytics_stream_categories: ?[]const []const u8,
+    call_analytics_stream_categories: ?[]const []const u8 = null,
 
     /// Labels all personally identifiable information (PII) identified in your
     /// transcript.
@@ -25,7 +25,7 @@ pub const AmazonTranscribeCallAnalyticsProcessorConfiguration = struct {
     /// For more information, see [Redacting or identifying personally identifiable
     /// information](https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
     /// in the *Amazon Transcribe Developer Guide*.
-    content_identification_type: ?ContentType,
+    content_identification_type: ?ContentType = null,
 
     /// Redacts all personally identifiable information (PII) identified in your
     /// transcript.
@@ -40,7 +40,7 @@ pub const AmazonTranscribeCallAnalyticsProcessorConfiguration = struct {
     /// For more information, see [Redacting or identifying personally identifiable
     /// information](https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
     /// in the *Amazon Transcribe Developer Guide*.
-    content_redaction_type: ?ContentType,
+    content_redaction_type: ?ContentType = null,
 
     /// Enables partial result stabilization for your transcription. Partial result
     /// stabilization can reduce latency in your output, but may impact accuracy.
@@ -68,7 +68,7 @@ pub const AmazonTranscribeCallAnalyticsProcessorConfiguration = struct {
     ///
     /// For more information, see [Custom language
     /// models](https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html) in the *Amazon Transcribe Developer Guide*.
-    language_model_name: ?[]const u8,
+    language_model_name: ?[]const u8 = null,
 
     /// Specifies the level of stability to use when you enable partial results
     /// stabilization
@@ -80,7 +80,7 @@ pub const AmazonTranscribeCallAnalyticsProcessorConfiguration = struct {
     /// For more information, see [Partial-result
     /// stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
     /// in the *Amazon Transcribe Developer Guide*.
-    partial_results_stability: ?PartialResultsStability,
+    partial_results_stability: ?PartialResultsStability = null,
 
     /// Specifies the types of personally identifiable information (PII) to redact
     /// from a transcript. You can include as many types as you'd like, or you can
@@ -96,10 +96,10 @@ pub const AmazonTranscribeCallAnalyticsProcessorConfiguration = struct {
     /// `NAME`, `PHONE`, `PIN`, `SSN`, or `ALL`.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 300.
-    pii_entity_types: ?[]const u8,
+    pii_entity_types: ?[]const u8 = null,
 
     /// The settings for a post-call analysis task in an analytics configuration.
-    post_call_analytics_settings: ?PostCallAnalyticsSettings,
+    post_call_analytics_settings: ?PostCallAnalyticsSettings = null,
 
     /// Specifies how to apply a vocabulary filter to a transcript.
     ///
@@ -108,7 +108,7 @@ pub const AmazonTranscribeCallAnalyticsProcessorConfiguration = struct {
     /// To delete words, choose `remove`.
     ///
     /// To flag words without changing them, choose `tag`.
-    vocabulary_filter_method: ?VocabularyFilterMethod,
+    vocabulary_filter_method: ?VocabularyFilterMethod = null,
 
     /// Specifies the name of the custom vocabulary filter to use when processing a
     /// transcription. Note that vocabulary filter names are case sensitive.
@@ -122,7 +122,7 @@ pub const AmazonTranscribeCallAnalyticsProcessorConfiguration = struct {
     /// in the *Amazon Transcribe Developer Guide*.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 200.
-    vocabulary_filter_name: ?[]const u8,
+    vocabulary_filter_name: ?[]const u8 = null,
 
     /// Specifies the name of the custom vocabulary to use when processing a
     /// transcription. Note
@@ -136,7 +136,7 @@ pub const AmazonTranscribeCallAnalyticsProcessorConfiguration = struct {
     /// vocabularies](https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html) in the *Amazon Transcribe Developer Guide*.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 200.
-    vocabulary_name: ?[]const u8,
+    vocabulary_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .call_analytics_stream_categories = "CallAnalyticsStreamCategories",

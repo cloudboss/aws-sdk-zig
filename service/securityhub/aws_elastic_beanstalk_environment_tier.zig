@@ -1,13 +1,13 @@
 /// Contains information about the tier of the environment.
 pub const AwsElasticBeanstalkEnvironmentTier = struct {
     /// The name of the environment tier. Valid values are `WebServer` or `Worker`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of environment tier. Valid values are `Standard` or `SQS/HTTP`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The version of the environment tier.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

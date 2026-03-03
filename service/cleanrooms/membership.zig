@@ -32,11 +32,11 @@ pub const Membership = struct {
     create_time: i64,
 
     /// The default job result configuration for the membership.
-    default_job_result_configuration: ?MembershipProtectedJobResultConfiguration,
+    default_job_result_configuration: ?MembershipProtectedJobResultConfiguration = null,
 
     /// The default protected query result configuration as specified by the member
     /// who can receive results.
-    default_result_configuration: ?MembershipProtectedQueryResultConfiguration,
+    default_result_configuration: ?MembershipProtectedQueryResultConfiguration = null,
 
     /// The unique ID of the membership.
     id: []const u8,
@@ -46,7 +46,7 @@ pub const Membership = struct {
     ///
     /// When `true`, metrics about query execution are collected in Amazon
     /// CloudWatch.
-    is_metrics_enabled: ?bool,
+    is_metrics_enabled: ?bool = null,
 
     /// An indicator as to whether job logging has been enabled or disabled for the
     /// collaboration.
@@ -54,14 +54,14 @@ pub const Membership = struct {
     /// When `ENABLED`, Clean Rooms logs details about jobs run within this
     /// collaboration and those logs can be viewed in Amazon CloudWatch Logs. The
     /// default value is `DISABLED`.
-    job_log_status: ?MembershipJobLogStatus,
+    job_log_status: ?MembershipJobLogStatus = null,
 
     /// The abilities granted to the collaboration member.
     member_abilities: []const MemberAbility,
 
     /// Specifies the ML member abilities that are granted to a collaboration
     /// member.
-    ml_member_abilities: ?MLMemberAbilities,
+    ml_member_abilities: ?MLMemberAbilities = null,
 
     /// The payment responsibilities accepted by the collaboration member.
     payment_configuration: MembershipPaymentConfiguration,

@@ -12,5 +12,5 @@ pub const NoncurrentVersionTransition = struct {
     noncurrent_days: i32 = 0,
 
     /// The class of storage used to store the object.
-    storage_class: ?TransitionStorageClass,
+    storage_class: ?TransitionStorageClass = null,
 };

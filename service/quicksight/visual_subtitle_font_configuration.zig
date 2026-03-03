@@ -4,13 +4,13 @@ const TextTransform = @import("text_transform.zig").TextTransform;
 
 /// Configures the display properties of the visual sub-title.
 pub const VisualSubtitleFontConfiguration = struct {
-    font_configuration: ?FontConfiguration,
+    font_configuration: ?FontConfiguration = null,
 
     /// Determines the alignment of visual sub-title.
-    text_alignment: ?HorizontalTextAlignment,
+    text_alignment: ?HorizontalTextAlignment = null,
 
     /// Determines the text transformation of visual sub-title.
-    text_transform: ?TextTransform,
+    text_transform: ?TextTransform = null,
 
     pub const json_field_names = .{
         .font_configuration = "FontConfiguration",

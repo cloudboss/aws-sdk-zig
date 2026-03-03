@@ -8,16 +8,16 @@ pub const TaxExemption = struct {
     authority: Authority,
 
     /// The tax exemption effective date.
-    effective_date: ?i64,
+    effective_date: ?i64 = null,
 
     /// The tax exemption expiration date.
-    expiration_date: ?i64,
+    expiration_date: ?i64 = null,
 
     /// The tax exemption status.
-    status: ?EntityExemptionAccountStatus,
+    status: ?EntityExemptionAccountStatus = null,
 
     /// The tax exemption recording time in the `TaxSettings` system.
-    system_effective_date: ?i64,
+    system_effective_date: ?i64 = null,
 
     /// The tax exemption type.
     tax_exemption_type: TaxExemptionType,

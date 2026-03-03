@@ -12,7 +12,7 @@ pub const WaypointOptimizationClusteringOptions = struct {
 
     /// Driving distance options to be used when the clustering algorithm is
     /// DrivingDistance.
-    driving_distance_options: ?WaypointOptimizationDrivingDistanceOptions,
+    driving_distance_options: ?WaypointOptimizationDrivingDistanceOptions = null,
 
     pub const json_field_names = .{
         .algorithm = "Algorithm",

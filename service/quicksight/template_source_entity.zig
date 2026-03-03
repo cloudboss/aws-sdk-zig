@@ -4,10 +4,10 @@ const TemplateSourceTemplate = @import("template_source_template.zig").TemplateS
 /// The source entity of the template.
 pub const TemplateSourceEntity = struct {
     /// The source analysis, if it is based on an analysis.
-    source_analysis: ?TemplateSourceAnalysis,
+    source_analysis: ?TemplateSourceAnalysis = null,
 
     /// The source template, if it is based on an template.
-    source_template: ?TemplateSourceTemplate,
+    source_template: ?TemplateSourceTemplate = null,
 
     pub const json_field_names = .{
         .source_analysis = "SourceAnalysis",

@@ -7,7 +7,7 @@ const GeoSpatialColumnGroup = @import("geo_spatial_column_group.zig").GeoSpatial
 /// be non-null.
 pub const ColumnGroup = struct {
     /// Geospatial column group that denotes a hierarchy.
-    geo_spatial_column_group: ?GeoSpatialColumnGroup,
+    geo_spatial_column_group: ?GeoSpatialColumnGroup = null,
 
     pub const json_field_names = .{
         .geo_spatial_column_group = "GeoSpatialColumnGroup",

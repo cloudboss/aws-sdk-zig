@@ -5,16 +5,16 @@ const aws = @import("aws");
 /// instance profiles provide credentials to Amazon EC2 instances.
 pub const PodIdentityAssociation = struct {
     /// The Amazon Resource Name (ARN) of the association.
-    association_arn: ?[]const u8,
+    association_arn: ?[]const u8 = null,
 
     /// The ID of the association.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The name of the cluster that the association is in.
-    cluster_name: ?[]const u8,
+    cluster_name: ?[]const u8 = null,
 
     /// The timestamp that the association was created at.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The state of the automatic sessions tags. The value of *true*
     /// disables these tags.
@@ -30,7 +30,7 @@ pub const PodIdentityAssociation = struct {
     /// list of tags added by EKS Pod Identity, see [List of session tags
     /// added by EKS Pod
     /// Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-abac.html#pod-id-abac-tags) in the *Amazon EKS User Guide*.
-    disable_session_tags: ?bool,
+    disable_session_tags: ?bool = null,
 
     /// The unique identifier for this EKS Pod Identity association for a target IAM
     /// role. You put this value
@@ -43,32 +43,32 @@ pub const PodIdentityAssociation = struct {
     /// If you want to use the same target role with multiple associations or
     /// other roles, use independent statements in the trust policy to allow
     /// `sts:AssumeRole` access from each role.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The most recent timestamp that the association was modified at.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// The name of the Kubernetes namespace inside the cluster to create the
     /// association in. The
     /// service account and the Pods that use the service account must be in this
     /// namespace.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// If defined, the EKS Pod Identity association is owned by an Amazon EKS
     /// add-on.
-    owner_arn: ?[]const u8,
+    owner_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role to associate with the service
     /// account. The EKS Pod Identity
     /// agent manages credentials to assume this role for applications in the
     /// containers in the
     /// Pods that use this service account.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The name of the Kubernetes service account inside the cluster to associate
     /// the IAM
     /// credentials with.
-    service_account: ?[]const u8,
+    service_account: ?[]const u8 = null,
 
     /// Metadata that assists with categorization and organization.
     /// Each tag consists of a key and an optional value. You define both. Tags
@@ -101,14 +101,14 @@ pub const PodIdentityAssociation = struct {
     /// Amazon Web Services use. You cannot edit or delete tag keys or values with
     /// this prefix. Tags with
     /// this prefix do not count against your tags per resource limit.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Resource Name (ARN) of the target IAM role to associate with the
     /// service account. This
     /// role is assumed by using the EKS Pod Identity association role, then the
     /// credentials for this
     /// role are injected into the Pod.
-    target_role_arn: ?[]const u8,
+    target_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_arn = "associationArn",

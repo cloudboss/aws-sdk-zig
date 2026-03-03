@@ -10,7 +10,7 @@ pub const HeaderFooterSectionConfiguration = struct {
     section_id: []const u8,
 
     /// The style options of a header or footer section.
-    style: ?SectionStyle,
+    style: ?SectionStyle = null,
 
     pub const json_field_names = .{
         .layout = "Layout",

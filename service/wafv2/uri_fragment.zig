@@ -41,7 +41,7 @@ pub const UriFragment = struct {
     /// see [JSON
     /// body](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-fields-list.html#waf-rule-statement-request-component-json-body)
     /// in the *WAF Developer Guide*.
-    fallback_behavior: ?FallbackBehavior,
+    fallback_behavior: ?FallbackBehavior = null,
 
     pub const json_field_names = .{
         .fallback_behavior = "FallbackBehavior",

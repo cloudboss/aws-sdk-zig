@@ -3,11 +3,11 @@ pub const ConfiguredTeam = struct {
     /// Either `ENABLED` or `DISABLED`. The resource returns `DISABLED` if the
     /// organization's AWS Chatbot policy has explicitly denied that configuration.
     /// For example, if Amazon Chime is disabled.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// Provided if State is `DISABLED`. Provides context as to why the resource is
     /// disabled.
-    state_reason: ?[]const u8,
+    state_reason: ?[]const u8 = null,
 
     /// The ID of the Microsoft Teams authorized with AWS Chatbot.
     ///
@@ -19,7 +19,7 @@ pub const ConfiguredTeam = struct {
     team_id: []const u8,
 
     /// The name of the Microsoft Teams Team.
-    team_name: ?[]const u8,
+    team_name: ?[]const u8 = null,
 
     /// The ID of the Microsoft Teams tenant.
     tenant_id: []const u8,

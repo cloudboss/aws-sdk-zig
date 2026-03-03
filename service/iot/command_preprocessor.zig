@@ -5,7 +5,7 @@ const AwsJsonSubstitutionCommandPreprocessorConfig = @import("aws_json_substitut
 /// devices at `StartCommandExecution` API invocation.
 pub const CommandPreprocessor = struct {
     /// Configuration for the JSON substitution preprocessor.
-    aws_json_substitution: ?AwsJsonSubstitutionCommandPreprocessorConfig,
+    aws_json_substitution: ?AwsJsonSubstitutionCommandPreprocessorConfig = null,
 
     pub const json_field_names = .{
         .aws_json_substitution = "awsJsonSubstitution",

@@ -4,14 +4,14 @@ const VolumeSpecification = @import("volume_specification.zig").VolumeSpecificat
 /// group.
 pub const EbsBlockDevice = struct {
     /// The device name that is exposed to the instance, such as /dev/sdh.
-    device: ?[]const u8,
+    device: ?[]const u8 = null,
 
     /// EBS volume specifications such as volume type, IOPS, size (GiB) and
     /// throughput (MiB/s)
     /// that are requested for the EBS volume attached to an Amazon EC2 instance in
     /// the
     /// cluster.
-    volume_specification: ?VolumeSpecification,
+    volume_specification: ?VolumeSpecification = null,
 
     pub const json_field_names = .{
         .device = "Device",

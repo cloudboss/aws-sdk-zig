@@ -9,34 +9,34 @@ pub const ServiceSoftwareOptions = struct {
     /// The timestamp, in Epoch time, until which you can manually request a service
     /// software
     /// update. After this date, we automatically update your service software.
-    automated_update_date: ?i64,
+    automated_update_date: ?i64 = null,
 
     /// True if you're able to cancel your service software version update. False if
     /// you
     /// can't cancel your service software update.
-    cancellable: ?bool,
+    cancellable: ?bool = null,
 
     /// The current service software version present on the domain.
-    current_version: ?[]const u8,
+    current_version: ?[]const u8 = null,
 
     /// A description of the service software update status.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The new service software version, if one is available.
-    new_version: ?[]const u8,
+    new_version: ?[]const u8 = null,
 
     /// True if a service software is never automatically updated. False if a
     /// service software
     /// is automatically updated after the automated update date.
-    optional_deployment: ?bool,
+    optional_deployment: ?bool = null,
 
     /// True if you're able to update your service software version. False if you
     /// can't update
     /// your service software version.
-    update_available: ?bool,
+    update_available: ?bool = null,
 
     /// The status of your service software update.
-    update_status: ?DeploymentStatus,
+    update_status: ?DeploymentStatus = null,
 
     pub const json_field_names = .{
         .automated_update_date = "AutomatedUpdateDate",

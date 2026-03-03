@@ -1,13 +1,13 @@
 /// A structure that describes a target database for resource linking.
 pub const DatabaseIdentifier = struct {
     /// The ID of the Data Catalog in which the database resides.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The name of the catalog database.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// Region of the target database.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .catalog_id = "CatalogId",

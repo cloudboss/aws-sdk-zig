@@ -6,10 +6,10 @@ const MessageTemplateSourceConfiguration = @import("message_template_source_conf
 /// The summary of the message template.
 pub const MessageTemplateSummary = struct {
     /// The version number of the message template version that is activated.
-    active_version_number: ?i64,
+    active_version_number: ?i64 = null,
 
     /// The channel this message template applies to.
-    channel: ?[]const u8,
+    channel: ?[]const u8 = null,
 
     /// The channel subtype this message template applies to.
     channel_subtype: ChannelSubtype,
@@ -18,7 +18,7 @@ pub const MessageTemplateSummary = struct {
     created_time: i64,
 
     /// The description of the message template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the knowledge base.
     knowledge_base_arn: []const u8,
@@ -42,10 +42,10 @@ pub const MessageTemplateSummary = struct {
     /// The name of the message template.
     name: []const u8,
 
-    source_configuration: ?MessageTemplateSourceConfiguration,
+    source_configuration: ?MessageTemplateSourceConfiguration = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .active_version_number = "activeVersionNumber",

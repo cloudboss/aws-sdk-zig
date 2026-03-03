@@ -22,21 +22,21 @@ pub const ContainerRecipe = struct {
     ///
     /// * Build version ARNs have all four nodes, and point to a specific build for
     ///   a specific version of an object.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Build and test components that are included in the container recipe.
     /// Recipes require a minimum of one build component, and can
     /// have a maximum of 20 build and test components in any combination.
-    components: ?[]const ComponentConfiguration,
+    components: ?[]const ComponentConfiguration = null,
 
     /// Specifies the type of container, such as Docker.
-    container_type: ?ContainerType,
+    container_type: ?ContainerType = null,
 
     /// The date when this container recipe was created.
-    date_created: ?[]const u8,
+    date_created: ?[]const u8 = null,
 
     /// The description of the container recipe.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Dockerfiles are text documents that are used to build Docker containers, and
     /// ensure
@@ -45,15 +45,15 @@ pub const ContainerRecipe = struct {
     /// template data consists of contextual variables where Image Builder places
     /// build information or
     /// scripts, based on your container image recipe.
-    dockerfile_template_data: ?[]const u8,
+    dockerfile_template_data: ?[]const u8 = null,
 
     /// A flag that indicates if the target container is encrypted.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// A group of options that can be used to configure an instance for building
     /// and testing
     /// container images.
-    instance_configuration: ?InstanceConfiguration,
+    instance_configuration: ?InstanceConfiguration = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies which KMS key is
     /// used to encrypt the container image
@@ -61,29 +61,29 @@ pub const ContainerRecipe = struct {
     /// Alias ARN. For more information, see [Key identifiers
     /// (KeyId)](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN)
     /// in the *Key Management Service Developer Guide*.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The name of the container recipe.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The owner of the container recipe.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The base image for customizations specified in the container recipe. This
     /// can
     /// contain an Image Builder image resource ARN or a container image URI, for
     /// example
     /// `amazonlinux:latest`.
-    parent_image: ?[]const u8,
+    parent_image: ?[]const u8 = null,
 
     /// The system platform for the container, such as Windows or Linux.
-    platform: ?Platform,
+    platform: ?Platform = null,
 
     /// Tags that are attached to the container recipe.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The destination repository for the container image.
-    target_repository: ?TargetContainerRepository,
+    target_repository: ?TargetContainerRepository = null,
 
     /// The semantic version of the container recipe.
     ///
@@ -109,10 +109,10 @@ pub const ContainerRecipe = struct {
     /// recipe. When you use a wildcard in any node, all nodes to the right of the
     /// first wildcard must also be
     /// wildcards.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     /// The working directory for use during build and test workflows.
-    working_directory: ?[]const u8,
+    working_directory: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

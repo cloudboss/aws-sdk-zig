@@ -4,7 +4,7 @@ const SlaType = @import("sla_type.zig").SlaType;
 /// Represents the input configuration of an SLA being created.
 pub const SlaInputConfiguration = struct {
     /// Unique identifier of a field.
-    field_id: ?[]const u8,
+    field_id: ?[]const u8 = null,
 
     /// Name of an SLA.
     name: []const u8,
@@ -12,7 +12,7 @@ pub const SlaInputConfiguration = struct {
     /// Represents a list of target field values for the fieldId specified in
     /// SlaInputConfiguration. The SLA is considered met if any one of these target
     /// field values matches the actual field value.
-    target_field_values: ?[]const FieldValueUnion,
+    target_field_values: ?[]const FieldValueUnion = null,
 
     /// Target duration in minutes within which an SLA should be completed.
     target_sla_minutes: i64,

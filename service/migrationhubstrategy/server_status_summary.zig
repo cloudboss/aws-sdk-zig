@@ -4,10 +4,10 @@ const RunTimeAssessmentStatus = @import("run_time_assessment_status.zig").RunTim
 pub const ServerStatusSummary = struct {
     /// The number of servers successfully analyzed, partially successful or failed
     /// analysis.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// The status of the run time.
-    run_time_assessment_status: ?RunTimeAssessmentStatus,
+    run_time_assessment_status: ?RunTimeAssessmentStatus = null,
 
     pub const json_field_names = .{
         .count = "count",

@@ -5,7 +5,7 @@ const SchemaUnion = @import("schema_union.zig").SchemaUnion;
 /// The structure for a Dataset.
 pub const Dataset = struct {
     /// The unique resource identifier for a Dataset.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The timestamp at which the Dataset was created in FinSpace. The value is
     /// determined as epoch time in milliseconds. For example, the value for Monday,
@@ -13,23 +13,23 @@ pub const Dataset = struct {
     create_time: i64 = 0,
 
     /// The ARN identifier of the Dataset.
-    dataset_arn: ?[]const u8,
+    dataset_arn: ?[]const u8 = null,
 
     /// Description for a Dataset.
-    dataset_description: ?[]const u8,
+    dataset_description: ?[]const u8 = null,
 
     /// An identifier for a Dataset.
-    dataset_id: ?[]const u8,
+    dataset_id: ?[]const u8 = null,
 
     /// Display title for a Dataset.
-    dataset_title: ?[]const u8,
+    dataset_title: ?[]const u8 = null,
 
     /// The format in which Dataset data is structured.
     ///
     /// * `TABULAR` – Data is structured in a tabular format.
     ///
     /// * `NON_TABULAR` – Data is structured in a non-tabular format.
-    kind: ?DatasetKind,
+    kind: ?DatasetKind = null,
 
     /// The last time that the Dataset was modified. The value is determined as
     /// epoch time in milliseconds. For example, the value for Monday, November 1,
@@ -37,10 +37,10 @@ pub const Dataset = struct {
     last_modified_time: i64 = 0,
 
     /// Contact information for a Dataset owner.
-    owner_info: ?DatasetOwnerInfo,
+    owner_info: ?DatasetOwnerInfo = null,
 
     /// Definition for a schema on a tabular Dataset.
-    schema_definition: ?SchemaUnion,
+    schema_definition: ?SchemaUnion = null,
 
     pub const json_field_names = .{
         .alias = "alias",

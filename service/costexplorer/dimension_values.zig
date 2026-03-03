@@ -18,7 +18,7 @@ pub const DimensionValues = struct {
     /// `ANOMALY_TOTAL_IMPACT_ABSOLUTE` and
     /// `ANOMALY_TOTAL_IMPACT_PERCENTAGE` can only be used in
     /// [AnomalySubscriptions](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html).
-    key: ?Dimension,
+    key: ?Dimension = null,
 
     /// The match options that you can use to filter your results.
     ///
@@ -29,12 +29,12 @@ pub const DimensionValues = struct {
     ///
     /// The default values for `MatchOptions` are `EQUALS` and
     /// `CASE_SENSITIVE`.
-    match_options: ?[]const MatchOption,
+    match_options: ?[]const MatchOption = null,
 
     /// The metadata values that you can use to filter and group your results. You
     /// can use
     /// `GetDimensionValues` to find specific values.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

@@ -10,7 +10,7 @@ pub const Instance = struct {
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The DNS identifier assigned to the instance that is running the game
     /// session. Values have
@@ -24,28 +24,28 @@ pub const Instance = struct {
     ///
     /// When connecting to a game session that is running on a TLS-enabled fleet,
     /// you must use the DNS name, not the IP address.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
     /// that is assigned to a Amazon GameLift Servers fleet resource and uniquely
     /// identifies it. ARNs are unique across all Regions. Format is
     /// `arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
-    fleet_arn: ?[]const u8,
+    fleet_arn: ?[]const u8 = null,
 
     /// A unique identifier for the fleet that the instance belongs to.
-    fleet_id: ?[]const u8,
+    fleet_id: ?[]const u8 = null,
 
     /// A unique identifier for the instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// IP address that is assigned to the instance.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The fleet location of the instance, expressed as an Amazon Web Services
     /// Region code, such as
     /// `us-west-2`.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// Operating system that is running on this EC2 instance.
     ///
@@ -61,7 +61,7 @@ pub const Instance = struct {
     /// [
     /// Migrate to server SDK version
     /// 5.](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html)
-    operating_system: ?OperatingSystem,
+    operating_system: ?OperatingSystem = null,
 
     /// Current status of the instance. Possible statuses include the following:
     ///
@@ -81,10 +81,10 @@ pub const Instance = struct {
     /// of shutting down. This may happen to reduce capacity during a scaling down
     /// event
     /// or to recycle resources in the event of a problem.
-    status: ?InstanceStatus,
+    status: ?InstanceStatus = null,
 
     /// EC2 instance type that defines the computing resources of this instance.
-    @"type": ?EC2InstanceType,
+    @"type": ?EC2InstanceType = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

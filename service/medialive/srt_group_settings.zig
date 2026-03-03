@@ -9,7 +9,7 @@ pub const SrtGroupSettings = struct {
     /// the TS bitrate requirement). Or, when emitProgram is chosen the transport
     /// stream will continue to be produced normally with repeat frames, black
     /// frames, or slate frames substituted for the absent input video.
-    input_loss_action: ?InputLossActionForUdpOut,
+    input_loss_action: ?InputLossActionForUdpOut = null,
 
     pub const json_field_names = .{
         .input_loss_action = "InputLossAction",

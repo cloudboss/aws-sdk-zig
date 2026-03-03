@@ -6,10 +6,10 @@ const RelativeDateTimeControlDisplayOptions = @import("relative_date_time_contro
 pub const DefaultRelativeDateTimeControlOptions = struct {
     /// The visibility configuration of the Apply button on a
     /// `RelativeDateTimeControl`.
-    commit_mode: ?CommitMode,
+    commit_mode: ?CommitMode = null,
 
     /// The display options of a control.
-    display_options: ?RelativeDateTimeControlDisplayOptions,
+    display_options: ?RelativeDateTimeControlDisplayOptions = null,
 
     pub const json_field_names = .{
         .commit_mode = "CommitMode",

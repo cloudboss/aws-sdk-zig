@@ -1,10 +1,10 @@
 /// Describes the segments associated with the service insertion action.
 pub const ServiceInsertionSegments = struct {
     /// The list of segments associated with the `send-to` action.
-    send_to: ?[]const []const u8,
+    send_to: ?[]const []const u8 = null,
 
     /// The list of segments associated with the `send-via` action.
-    send_via: ?[]const []const u8,
+    send_via: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .send_to = "SendTo",

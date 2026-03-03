@@ -3,7 +3,7 @@ const ManagedResourceStatus = @import("managed_resource_status.zig").ManagedReso
 /// The Application Load Balancer associated with the Express service.
 pub const ManagedLoadBalancer = struct {
     /// The Amazon Resource Name (ARN) of the load balancer.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The scheme of the load balancer. By default, the scheme of the load balancer
     /// is
@@ -11,16 +11,16 @@ pub const ManagedLoadBalancer = struct {
     scheme: []const u8,
 
     /// The IDs of the security groups associated with the load balancer.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The status of the load balancer.
     status: ManagedResourceStatus,
 
     /// Information about why the load balancer is in the current status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The IDs of the subnets associated with the load balancer.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     /// The Unix timestamp for when this load balancer was most recently updated.
     updated_at: i64,

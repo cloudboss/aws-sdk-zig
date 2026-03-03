@@ -14,10 +14,10 @@ pub const CustomModelDeploymentSummary = struct {
 
     /// If the deployment status is `FAILED`, this field contains a message
     /// describing the failure reason.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// The date and time when the custom model deployment was last modified.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the custom model associated with this
     /// deployment.

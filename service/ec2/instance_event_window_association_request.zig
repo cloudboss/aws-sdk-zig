@@ -5,14 +5,14 @@ const Tag = @import("tag.zig").Tag;
 /// can be associated with an event window.
 pub const InstanceEventWindowAssociationRequest = struct {
     /// The IDs of the Dedicated Hosts to associate with the event window.
-    dedicated_host_ids: ?[]const []const u8,
+    dedicated_host_ids: ?[]const []const u8 = null,
 
     /// The IDs of the instances to associate with the event window. If the instance
     /// is on a
     /// Dedicated Host, you can't specify the Instance ID parameter; you must use
     /// the Dedicated
     /// Host ID parameter.
-    instance_ids: ?[]const []const u8,
+    instance_ids: ?[]const []const u8 = null,
 
     /// The instance tags to associate with the event window. Any instances
     /// associated with the
@@ -22,5 +22,5 @@ pub const InstanceEventWindowAssociationRequest = struct {
     /// specify existing Amazon Web Services managed tag keys (with the `aws:`
     /// prefix) when specifying
     /// them as targets to associate with the event window.
-    instance_tags: ?[]const Tag,
+    instance_tags: ?[]const Tag = null,
 };

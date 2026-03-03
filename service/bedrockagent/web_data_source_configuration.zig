@@ -4,7 +4,7 @@ const WebSourceConfiguration = @import("web_source_configuration.zig").WebSource
 /// The configuration details for the web data source.
 pub const WebDataSourceConfiguration = struct {
     /// The Web Crawler configuration details for the web data source.
-    crawler_configuration: ?WebCrawlerConfiguration,
+    crawler_configuration: ?WebCrawlerConfiguration = null,
 
     /// The source configuration details for the web data source.
     source_configuration: WebSourceConfiguration,

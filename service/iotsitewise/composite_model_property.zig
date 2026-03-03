@@ -7,10 +7,10 @@ pub const CompositeModelProperty = struct {
     /// The external ID of the composite model that contains the property. For more
     /// information, see [Using external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ID of the composite model that contains the property.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the property.
     name: []const u8,

@@ -17,7 +17,7 @@ pub const GeoRestriction = struct {
     /// on the *International Organization for Standardization* website. You can
     /// also refer to the country list on the CloudFront console, which includes
     /// both country names and codes.
-    items: ?[]const []const u8,
+    items: ?[]const []const u8 = null,
 
     /// When geo restriction is `enabled`, this is the number of countries in your
     /// `whitelist` or `blacklist`. Otherwise, when it is not enabled, `Quantity` is

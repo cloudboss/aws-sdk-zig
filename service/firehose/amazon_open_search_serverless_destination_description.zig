@@ -10,32 +10,32 @@ const VpcConfigurationDescription = @import("vpc_configuration_description.zig")
 /// Service.
 pub const AmazonOpenSearchServerlessDestinationDescription = struct {
     /// The buffering options.
-    buffering_hints: ?AmazonOpenSearchServerlessBufferingHints,
+    buffering_hints: ?AmazonOpenSearchServerlessBufferingHints = null,
 
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The endpoint to use when communicating with the collection in the Serverless
     /// offering
     /// for Amazon OpenSearch Service.
-    collection_endpoint: ?[]const u8,
+    collection_endpoint: ?[]const u8 = null,
 
     /// The Serverless offering for Amazon OpenSearch Service index name.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The Serverless offering for Amazon OpenSearch Service retry options.
-    retry_options: ?AmazonOpenSearchServerlessRetryOptions,
+    retry_options: ?AmazonOpenSearchServerlessRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services credentials.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The Amazon S3 backup mode.
-    s3_backup_mode: ?AmazonOpenSearchServerlessS3BackupMode,
+    s3_backup_mode: ?AmazonOpenSearchServerlessS3BackupMode = null,
 
-    s3_destination_description: ?S3DestinationDescription,
+    s3_destination_description: ?S3DestinationDescription = null,
 
-    vpc_configuration_description: ?VpcConfigurationDescription,
+    vpc_configuration_description: ?VpcConfigurationDescription = null,
 
     pub const json_field_names = .{
         .buffering_hints = "BufferingHints",

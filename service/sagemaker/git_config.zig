@@ -2,7 +2,7 @@
 /// Services account.
 pub const GitConfig = struct {
     /// The default branch for the Git repository.
-    branch: ?[]const u8,
+    branch: ?[]const u8 = null,
 
     /// The URL where the Git repository is located.
     repository_url: []const u8,
@@ -13,7 +13,7 @@ pub const GitConfig = struct {
     /// following format:
     ///
     /// `{"username": *UserName*, "password": *Password*}`
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .branch = "Branch",

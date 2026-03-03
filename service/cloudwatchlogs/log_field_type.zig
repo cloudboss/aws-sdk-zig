@@ -8,10 +8,10 @@ pub const LogFieldType = struct {
     element: ?*LogFieldType = null,
 
     /// For complex types, contains the nested field definitions.
-    fields: ?[]const LogFieldsListItem,
+    fields: ?[]const LogFieldsListItem = null,
 
     /// The data type of the log field.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .element = "element",

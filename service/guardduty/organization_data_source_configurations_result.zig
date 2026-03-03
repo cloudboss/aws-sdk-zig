@@ -7,11 +7,11 @@ const OrganizationS3LogsConfigurationResult = @import("organization_s3_logs_conf
 /// new members within the organization.
 pub const OrganizationDataSourceConfigurationsResult = struct {
     /// Describes the configuration of Kubernetes data sources.
-    kubernetes: ?OrganizationKubernetesConfigurationResult,
+    kubernetes: ?OrganizationKubernetesConfigurationResult = null,
 
     /// Describes the configuration of Malware Protection data source for an
     /// organization.
-    malware_protection: ?OrganizationMalwareProtectionConfigurationResult,
+    malware_protection: ?OrganizationMalwareProtectionConfigurationResult = null,
 
     /// Describes whether S3 data event logs are enabled as a data source.
     s3_logs: OrganizationS3LogsConfigurationResult,

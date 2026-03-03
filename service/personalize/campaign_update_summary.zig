@@ -4,24 +4,24 @@ const CampaignConfig = @import("campaign_config.zig").CampaignConfig;
 /// listing, call the
 /// [DescribeCampaign](https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html) API.
 pub const CampaignUpdateSummary = struct {
-    campaign_config: ?CampaignConfig,
+    campaign_config: ?CampaignConfig = null,
 
     /// The date and time (in Unix time) that the campaign update was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// If a campaign update fails, the reason behind the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The date and time (in Unix time) that the campaign update was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// Specifies the requested minimum provisioned transactions (recommendations)
     /// per second that
     /// Amazon Personalize will support.
-    min_provisioned_tps: ?i32,
+    min_provisioned_tps: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the deployed solution version.
-    solution_version_arn: ?[]const u8,
+    solution_version_arn: ?[]const u8 = null,
 
     /// The status of the campaign update.
     ///
@@ -30,7 +30,7 @@ pub const CampaignUpdateSummary = struct {
     /// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
     ///
     /// * DELETE PENDING > DELETE IN_PROGRESS
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .campaign_config = "campaignConfig",

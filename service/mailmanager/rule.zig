@@ -16,15 +16,15 @@ pub const Rule = struct {
     /// The conditions of this rule. All conditions must match the email for the
     /// actions to be executed. An empty list of conditions means that all emails
     /// match, but are still subject to any "unless conditions"
-    conditions: ?[]const RuleCondition,
+    conditions: ?[]const RuleCondition = null,
 
     /// The user-friendly name of the rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The "unless conditions" of this rule. None of the conditions can match the
     /// email for the actions to be executed. If any of these conditions do match
     /// the email, then the actions are not executed.
-    unless: ?[]const RuleCondition,
+    unless: ?[]const RuleCondition = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

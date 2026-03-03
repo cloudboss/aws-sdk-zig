@@ -2,7 +2,7 @@
 pub const TimerStartedEventAttributes = struct {
     /// Data attached to the event that can be used by the decider in subsequent
     /// workflow tasks.
-    control: ?[]const u8,
+    control: ?[]const u8 = null,
 
     /// The ID of the `DecisionTaskCompleted` event corresponding to the decision
     /// task that resulted in the

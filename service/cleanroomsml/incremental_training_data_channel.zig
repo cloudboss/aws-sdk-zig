@@ -16,7 +16,7 @@ pub const IncrementalTrainingDataChannel = struct {
 
     /// The version identifier of the base trained model to use for incremental
     /// training. If not specified, the latest version of the trained model is used.
-    version_identifier: ?[]const u8,
+    version_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channel_name = "channelName",

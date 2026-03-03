@@ -8,13 +8,13 @@ pub const ThousandSeparatorOptions = struct {
     /// standards. The `DEFAULT` value uses the standard international grouping
     /// system and groups numbers by the thousands. The `LAKHS` value uses the
     /// Indian numbering system and groups numbers by lakhs and crores.
-    grouping_style: ?DigitGroupingStyle,
+    grouping_style: ?DigitGroupingStyle = null,
 
     /// Determines the thousands separator symbol.
-    symbol: ?NumericSeparatorSymbol,
+    symbol: ?NumericSeparatorSymbol = null,
 
     /// Determines the visibility of the thousands separator.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .grouping_style = "GroupingStyle",

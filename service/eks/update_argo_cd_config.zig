@@ -7,11 +7,11 @@ pub const UpdateArgoCdConfig = struct {
     /// Updated network access configuration for the Argo CD capability's managed
     /// API server endpoint. You can add or remove VPC endpoint associations to
     /// control which VPCs have private access to the Argo CD server.
-    network_access: ?ArgoCdNetworkAccessConfigRequest,
+    network_access: ?ArgoCdNetworkAccessConfigRequest = null,
 
     /// Updated RBAC role mappings for the Argo CD capability. You can add, update,
     /// or remove role mappings.
-    rbac_role_mappings: ?UpdateRoleMappings,
+    rbac_role_mappings: ?UpdateRoleMappings = null,
 
     pub const json_field_names = .{
         .network_access = "networkAccess",

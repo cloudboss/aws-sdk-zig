@@ -8,16 +8,16 @@ const AmiProductVisibilityFilter = @import("ami_product_visibility_filter.zig").
 /// filters in a single `ListEntities` request.
 pub const AmiProductFilters = struct {
     /// Unique identifier for the AMI product.
-    entity_id: ?AmiProductEntityIdFilter,
+    entity_id: ?AmiProductEntityIdFilter = null,
 
     /// The last date on which the AMI product was modified.
-    last_modified_date: ?AmiProductLastModifiedDateFilter,
+    last_modified_date: ?AmiProductLastModifiedDateFilter = null,
 
     /// The title of the AMI product.
-    product_title: ?AmiProductTitleFilter,
+    product_title: ?AmiProductTitleFilter = null,
 
     /// The visibility of the AMI product.
-    visibility: ?AmiProductVisibilityFilter,
+    visibility: ?AmiProductVisibilityFilter = null,
 
     pub const json_field_names = .{
         .entity_id = "EntityId",

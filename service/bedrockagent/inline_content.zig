@@ -6,10 +6,10 @@ const InlineContentType = @import("inline_content_type.zig").InlineContentType;
 /// source. Choose a `type` and include the field that corresponds to it.
 pub const InlineContent = struct {
     /// Contains information about content defined inline in bytes.
-    byte_content: ?ByteContentDoc,
+    byte_content: ?ByteContentDoc = null,
 
     /// Contains information about content defined inline in text.
-    text_content: ?TextContentDoc,
+    text_content: ?TextContentDoc = null,
 
     /// The type of inline content to define.
     @"type": InlineContentType,

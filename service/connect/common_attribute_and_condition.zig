@@ -4,7 +4,7 @@ const TagCondition = @import("tag_condition.zig").TagCondition;
 /// condition.
 pub const CommonAttributeAndCondition = struct {
     /// A leaf node condition which can be used to specify a tag condition.
-    tag_conditions: ?[]const TagCondition,
+    tag_conditions: ?[]const TagCondition = null,
 
     pub const json_field_names = .{
         .tag_conditions = "TagConditions",

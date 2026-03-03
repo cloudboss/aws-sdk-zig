@@ -4,7 +4,7 @@ const Duration = @import("duration.zig").Duration;
 pub const HttpTimeout = struct {
     /// An object that represents an idle timeout. An idle timeout bounds the amount
     /// of time that a connection may be idle. The default value is none.
-    idle: ?Duration,
+    idle: ?Duration = null,
 
     /// An object that represents a per request timeout. The default value is 15
     /// seconds. If you set a higher timeout, then make sure that the higher value
@@ -13,7 +13,7 @@ pub const HttpTimeout = struct {
     /// virtual router provider to route to another virtual node, then the timeout
     /// should be greater than 15
     /// seconds for the source and destination virtual node and the route.
-    per_request: ?Duration,
+    per_request: ?Duration = null,
 
     pub const json_field_names = .{
         .idle = "idle",

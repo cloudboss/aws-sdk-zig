@@ -7,10 +7,10 @@ const ServiceType = @import("service_type.zig").ServiceType;
 pub const ServiceSummary = struct {
     /// The Amazon Resource Name (ARN) that Cloud Map assigns to the service when
     /// you create it.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the service was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The ID of the Amazon Web Services account that created the service. If this
     /// isn't your account ID, it is
@@ -20,21 +20,21 @@ pub const ServiceSummary = struct {
     /// Cloud Map
     /// namespace
     /// sharing](https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html) in the *Cloud Map Developer Guide*.
-    created_by_account: ?[]const u8,
+    created_by_account: ?[]const u8 = null,
 
     /// The description that you specify when you create the service.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about the Route 53 DNS records that you want Cloud Map to create
     /// when you register
     /// an instance.
-    dns_config: ?DnsConfig,
+    dns_config: ?DnsConfig = null,
 
     /// *Public DNS and HTTP namespaces only.* Settings for an optional health
     /// check. If you specify settings for a health check, Cloud Map associates the
     /// health check with
     /// the records that you specify in `DnsConfig`.
-    health_check_config: ?HealthCheckConfig,
+    health_check_config: ?HealthCheckConfig = null,
 
     /// Information about an optional custom health check. A custom health check,
     /// which requires
@@ -56,20 +56,20 @@ pub const ServiceSummary = struct {
     ///
     /// If you specify a health check configuration, you can specify either
     /// `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
-    health_check_custom_config: ?HealthCheckCustomConfig,
+    health_check_custom_config: ?HealthCheckCustomConfig = null,
 
     /// The ID that Cloud Map assigned to the service when you created it.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The number of instances that are currently associated with the service.
     /// Instances that were
     /// previously associated with the service but that are deleted aren't included
     /// in the count. The
     /// count might not reflect pending registrations and deregistrations.
-    instance_count: ?i32,
+    instance_count: ?i32 = null,
 
     /// The name of the service.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that created the namespace with
     /// which the service is associated.
@@ -79,7 +79,7 @@ pub const ServiceSummary = struct {
     /// Cloud Map
     /// namespace
     /// sharing](https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html) in the *Cloud Map Developer Guide*.
-    resource_owner: ?[]const u8,
+    resource_owner: ?[]const u8 = null,
 
     /// Describes the systems that can be used to discover the service instances.
     ///
@@ -97,7 +97,7 @@ pub const ServiceSummary = struct {
     /// **DNS**
     ///
     /// Reserved.
-    @"type": ?ServiceType,
+    @"type": ?ServiceType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

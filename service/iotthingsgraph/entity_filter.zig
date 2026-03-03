@@ -9,11 +9,11 @@ pub const EntityFilter = struct {
     /// The name of the entity search filter field. `REFERENCED_ENTITY_ID` filters
     /// on entities that are used by the entity in the result set. For example,
     /// you can filter on the ID of a property that is used in a state.
-    name: ?EntityFilterName,
+    name: ?EntityFilterName = null,
 
     /// An array of string values for the search filter field. Multiple values
     /// function as AND criteria in the search.
-    value: ?[]const []const u8,
+    value: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

@@ -11,18 +11,18 @@ pub const EnabledBaselineDetails = struct {
     baseline_identifier: []const u8,
 
     /// The enabled version of the `Baseline`.
-    baseline_version: ?[]const u8,
+    baseline_version: ?[]const u8 = null,
 
     /// The drift status of the enabled baseline.
-    drift_status_summary: ?EnabledBaselineDriftStatusSummary,
+    drift_status_summary: ?EnabledBaselineDriftStatusSummary = null,
 
     /// Shows the parameters that are applied when enabling this `Baseline`.
-    parameters: ?[]const EnabledBaselineParameterSummary,
+    parameters: ?[]const EnabledBaselineParameterSummary = null,
 
     /// An ARN that represents the parent `EnabledBaseline` at the Organizational
     /// Unit (OU) level, from which the child `EnabledBaseline` inherits its
     /// configuration. The value is returned by `GetEnabledBaseline`.
-    parent_identifier: ?[]const u8,
+    parent_identifier: ?[]const u8 = null,
 
     status_summary: EnablementStatusSummary,
 

@@ -19,13 +19,13 @@ const VPCDerivedInfo = @import("vpc_derived_info.zig").VPCDerivedInfo;
 /// The current status of an Elasticsearch domain.
 pub const ElasticsearchDomainStatus = struct {
     /// IAM access policy as a JSON-formatted string.
-    access_policies: ?[]const u8,
+    access_policies: ?[]const u8 = null,
 
     /// Specifies the status of the `AdvancedOptions`
-    advanced_options: ?[]const aws.map.StringMapEntry,
+    advanced_options: ?[]const aws.map.StringMapEntry = null,
 
     /// The current status of the Elasticsearch domain's advanced security options.
-    advanced_security_options: ?AdvancedSecurityOptions,
+    advanced_security_options: ?AdvancedSecurityOptions = null,
 
     /// The Amazon resource name (ARN) of an Elasticsearch domain. See [Identifiers
     /// for IAM
@@ -33,28 +33,28 @@ pub const ElasticsearchDomainStatus = struct {
     arn: []const u8,
 
     /// The current status of the Elasticsearch domain's Auto-Tune options.
-    auto_tune_options: ?AutoTuneOptionsOutput,
+    auto_tune_options: ?AutoTuneOptionsOutput = null,
 
     /// Specifies change details of the domain configuration change.
-    change_progress_details: ?ChangeProgressDetails,
+    change_progress_details: ?ChangeProgressDetails = null,
 
     /// The `CognitoOptions` for the specified domain. For more information, see
     /// [Amazon Cognito Authentication for
     /// Kibana](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
-    cognito_options: ?CognitoOptions,
+    cognito_options: ?CognitoOptions = null,
 
     /// The domain creation status. `True` if the creation of an Elasticsearch
     /// domain is complete. `False` if domain creation is still in progress.
-    created: ?bool,
+    created: ?bool = null,
 
     /// The domain deletion status. `True` if a delete request has been received for
     /// the domain but resource cleanup is still in progress. `False` if the domain
     /// has not been deleted. Once domain deletion is complete, the status of the
     /// domain is no longer returned.
-    deleted: ?bool,
+    deleted: ?bool = null,
 
     /// The current status of the Elasticsearch domain's endpoint options.
-    domain_endpoint_options: ?DomainEndpointOptions,
+    domain_endpoint_options: ?DomainEndpointOptions = null,
 
     /// The unique identifier for the specified Elasticsearch domain.
     domain_id: []const u8,
@@ -66,58 +66,58 @@ pub const ElasticsearchDomainStatus = struct {
     domain_name: []const u8,
 
     /// The status of any changes that are currently in progress for the domain.
-    domain_processing_status: ?DomainProcessingStatusType,
+    domain_processing_status: ?DomainProcessingStatusType = null,
 
     /// The `EBSOptions` for the specified domain. See [Configuring EBS-based
     /// Storage](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs) for more information.
-    ebs_options: ?EBSOptions,
+    ebs_options: ?EBSOptions = null,
 
     /// The type and number of instances in the domain cluster.
     elasticsearch_cluster_config: ElasticsearchClusterConfig,
 
-    elasticsearch_version: ?[]const u8,
+    elasticsearch_version: ?[]const u8 = null,
 
     /// Specifies the status of the `EncryptionAtRestOptions`.
-    encryption_at_rest_options: ?EncryptionAtRestOptions,
+    encryption_at_rest_options: ?EncryptionAtRestOptions = null,
 
     /// The Elasticsearch domain endpoint that you use to submit index and search
     /// requests.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// Map containing the Elasticsearch domain endpoints used to submit index and
     /// search requests. Example `key, value`:
     /// `'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'`.
-    endpoints: ?[]const aws.map.StringMapEntry,
+    endpoints: ?[]const aws.map.StringMapEntry = null,
 
     /// Log publishing options for the given domain.
-    log_publishing_options: ?[]const aws.map.MapEntry(LogPublishingOption),
+    log_publishing_options: ?[]const aws.map.MapEntry(LogPublishingOption) = null,
 
     /// Information about the domain properties that are currently being modified.
-    modifying_properties: ?[]const ModifyingProperties,
+    modifying_properties: ?[]const ModifyingProperties = null,
 
     /// Specifies the status of the `NodeToNodeEncryptionOptions`.
-    node_to_node_encryption_options: ?NodeToNodeEncryptionOptions,
+    node_to_node_encryption_options: ?NodeToNodeEncryptionOptions = null,
 
     /// The status of the Elasticsearch domain configuration. `True` if Amazon
     /// Elasticsearch Service is processing configuration changes. `False` if the
     /// configuration is active.
-    processing: ?bool,
+    processing: ?bool = null,
 
     /// The current status of the Elasticsearch domain's service software.
-    service_software_options: ?ServiceSoftwareOptions,
+    service_software_options: ?ServiceSoftwareOptions = null,
 
     /// Specifies the status of the `SnapshotOptions`
-    snapshot_options: ?SnapshotOptions,
+    snapshot_options: ?SnapshotOptions = null,
 
     /// The status of an Elasticsearch domain version upgrade. `True` if Amazon
     /// Elasticsearch Service is undergoing a version upgrade. `False` if the
     /// configuration is active.
-    upgrade_processing: ?bool,
+    upgrade_processing: ?bool = null,
 
     /// The `VPCOptions` for the specified domain. For more information, see [VPC
     /// Endpoints for Amazon Elasticsearch Service
     /// Domains](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
-    vpc_options: ?VPCDerivedInfo,
+    vpc_options: ?VPCDerivedInfo = null,
 
     pub const json_field_names = .{
         .access_policies = "AccessPolicies",

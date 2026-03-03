@@ -12,7 +12,7 @@ pub const DNISEmergencyCallingConfiguration = struct {
     emergency_phone_number: []const u8,
 
     /// The DNIS phone number for routing test emergency calls to, in E.164 format.
-    test_phone_number: ?[]const u8,
+    test_phone_number: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .calling_country = "CallingCountry",

@@ -7,19 +7,19 @@ const VolumeStatusInfo = @import("volume_status_info.zig").VolumeStatusInfo;
 /// Describes the volume status.
 pub const VolumeStatusItem = struct {
     /// The details of the operation.
-    actions: ?[]const VolumeStatusAction,
+    actions: ?[]const VolumeStatusAction = null,
 
     /// Information about the instances to which the volume is attached.
-    attachment_statuses: ?[]const VolumeStatusAttachmentStatus,
+    attachment_statuses: ?[]const VolumeStatusAttachmentStatus = null,
 
     /// The Availability Zone of the volume.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the Availability Zone.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// A list of events associated with the volume.
-    events: ?[]const VolumeStatusEvent,
+    events: ?[]const VolumeStatusEvent = null,
 
     /// Information about the volume initialization. It can take up to 5 minutes
     /// for the volume initialization information to be updated.
@@ -31,14 +31,14 @@ pub const VolumeStatusItem = struct {
     /// [
     /// Initialize Amazon EBS
     /// volumes](https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html).
-    initialization_status_details: ?InitializationStatusDetails,
+    initialization_status_details: ?InitializationStatusDetails = null,
 
     /// The Amazon Resource Name (ARN) of the Outpost.
-    outpost_arn: ?[]const u8,
+    outpost_arn: ?[]const u8 = null,
 
     /// The volume ID.
-    volume_id: ?[]const u8,
+    volume_id: ?[]const u8 = null,
 
     /// The volume status.
-    volume_status: ?VolumeStatusInfo,
+    volume_status: ?VolumeStatusInfo = null,
 };

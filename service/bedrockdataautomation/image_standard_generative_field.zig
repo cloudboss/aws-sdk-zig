@@ -5,7 +5,7 @@ const ImageStandardGenerativeFieldType = @import("image_standard_generative_fiel
 pub const ImageStandardGenerativeField = struct {
     state: State,
 
-    types: ?[]const ImageStandardGenerativeFieldType,
+    types: ?[]const ImageStandardGenerativeFieldType = null,
 
     pub const json_field_names = .{
         .state = "state",

@@ -23,7 +23,7 @@ pub const OpportunityInvitationPayload = struct {
     /// Represents the contact details of the AWS representatives involved in
     /// sending the Engagement Invitation. These contacts are opportunity
     /// stakeholders.
-    sender_contacts: ?[]const SenderContact,
+    sender_contacts: ?[]const SenderContact = null,
 
     pub const json_field_names = .{
         .customer = "Customer",

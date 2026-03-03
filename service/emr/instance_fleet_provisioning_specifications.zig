@@ -16,12 +16,12 @@ pub const InstanceFleetProvisioningSpecifications = struct {
     /// 4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation
     /// strategy is
     /// available in Amazon EMR releases 5.12.1 and later.
-    on_demand_specification: ?OnDemandProvisioningSpecification,
+    on_demand_specification: ?OnDemandProvisioningSpecification = null,
 
     /// The launch specification for Spot instances in the fleet, which determines
     /// the allocation strategy, defined
     /// duration, and provisioning timeout behavior.
-    spot_specification: ?SpotProvisioningSpecification,
+    spot_specification: ?SpotProvisioningSpecification = null,
 
     pub const json_field_names = .{
         .on_demand_specification = "OnDemandSpecification",

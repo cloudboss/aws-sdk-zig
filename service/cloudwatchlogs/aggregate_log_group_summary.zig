@@ -11,10 +11,10 @@ pub const AggregateLogGroupSummary = struct {
     /// The size and content of this array depends on the `groupBy` parameter
     /// specified
     /// in the request.
-    grouping_identifiers: ?[]const GroupingIdentifier,
+    grouping_identifiers: ?[]const GroupingIdentifier = null,
 
     /// The number of log groups in this aggregate summary group.
-    log_group_count: ?i32,
+    log_group_count: ?i32 = null,
 
     pub const json_field_names = .{
         .grouping_identifiers = "groupingIdentifiers",

@@ -5,12 +5,12 @@ pub const JobExecutionsRolloutConfig = struct {
     /// The rate of increase for a job rollout. This parameter allows you to define
     /// an
     /// exponential rate for a job rollout.
-    exponential_rate: ?ExponentialRolloutRate,
+    exponential_rate: ?ExponentialRolloutRate = null,
 
     /// The maximum number of things that will be notified of a pending job, per
     /// minute.
     /// This parameter allows you to create a staged rollout.
-    maximum_per_minute: ?i32,
+    maximum_per_minute: ?i32 = null,
 
     pub const json_field_names = .{
         .exponential_rate = "exponentialRate",

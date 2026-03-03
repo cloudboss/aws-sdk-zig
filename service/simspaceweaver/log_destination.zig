@@ -6,7 +6,7 @@ pub const LogDestination = struct {
     /// more information about log groups, see [Working with log
     /// groups and log
     /// streams](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html) in the *Amazon CloudWatch Logs User Guide*.
-    cloud_watch_logs_log_group: ?CloudWatchLogsLogGroup,
+    cloud_watch_logs_log_group: ?CloudWatchLogsLogGroup = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs_log_group = "CloudWatchLogsLogGroup",

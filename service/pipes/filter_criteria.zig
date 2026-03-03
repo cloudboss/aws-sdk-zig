@@ -9,7 +9,7 @@ const Filter = @import("filter.zig").Filter;
 /// Patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html) in the *Amazon EventBridge User Guide*.
 pub const FilterCriteria = struct {
     /// The event patterns.
-    filters: ?[]const Filter,
+    filters: ?[]const Filter = null,
 
     pub const json_field_names = .{
         .filters = "Filters",

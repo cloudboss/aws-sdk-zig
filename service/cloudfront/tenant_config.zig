@@ -8,5 +8,5 @@ const ParameterDefinition = @import("parameter_definition.zig").ParameterDefinit
 /// The configuration for a distribution tenant.
 pub const TenantConfig = struct {
     /// The parameters that you specify for a distribution tenant.
-    parameter_definitions: ?[]const ParameterDefinition,
+    parameter_definitions: ?[]const ParameterDefinition = null,
 };

@@ -6,10 +6,10 @@ const EcrRescanDuration = @import("ecr_rescan_duration.zig").EcrRescanDuration;
 /// environment.
 pub const EcrConfiguration = struct {
     /// The rescan duration configured for image pull date.
-    pull_date_rescan_duration: ?EcrPullDateRescanDuration,
+    pull_date_rescan_duration: ?EcrPullDateRescanDuration = null,
 
     /// The pull date for the re-scan mode.
-    pull_date_rescan_mode: ?EcrPullDateRescanMode,
+    pull_date_rescan_mode: ?EcrPullDateRescanMode = null,
 
     /// The rescan duration configured for image push date.
     rescan_duration: EcrRescanDuration,

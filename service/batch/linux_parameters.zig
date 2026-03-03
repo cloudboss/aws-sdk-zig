@@ -16,7 +16,7 @@ pub const LinuxParameters = struct {
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't
     /// provide it for these jobs.
-    devices: ?[]const Device,
+    devices: ?[]const Device = null,
 
     /// If true, run an `init` process inside the container that forwards signals
     /// and
@@ -27,7 +27,7 @@ pub const LinuxParameters = struct {
     /// instance, log in to your
     /// container instance and run the following command: `sudo docker version |
     /// grep "Server API version"`
-    init_process_enabled: ?bool,
+    init_process_enabled: ?bool = null,
 
     /// The total amount of swap memory (in MiB) a container can use. This parameter
     /// is translated
@@ -48,7 +48,7 @@ pub const LinuxParameters = struct {
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't
     /// provide it for these jobs.
-    max_swap: ?i32,
+    max_swap: ?i32 = null,
 
     /// The value for the size (in MiB) of the `/dev/shm` volume. This parameter
     /// maps to
@@ -58,7 +58,7 @@ pub const LinuxParameters = struct {
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't
     /// provide it for these jobs.
-    shared_memory_size: ?i32,
+    shared_memory_size: ?i32 = null,
 
     /// You can use this parameter to tune a container's memory swappiness behavior.
     /// A
@@ -98,7 +98,7 @@ pub const LinuxParameters = struct {
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't
     /// provide it for these jobs.
-    swappiness: ?i32,
+    swappiness: ?i32 = null,
 
     /// The container path, mount options, and size (in MiB) of the `tmpfs` mount.
     /// This
@@ -108,7 +108,7 @@ pub const LinuxParameters = struct {
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't
     /// provide this parameter for this resource type.
-    tmpfs: ?[]const Tmpfs,
+    tmpfs: ?[]const Tmpfs = null,
 
     pub const json_field_names = .{
         .devices = "devices",

@@ -10,7 +10,7 @@ pub const KmsEncryptionConfig = struct {
     /// The Key Management Service (KMS) encryption key id/alias used to encrypt the
     /// data store contents at
     /// rest.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cmk_type = "CmkType",

@@ -15,14 +15,14 @@ pub const EffectiveDeploymentStatusDetails = struct {
     /// `coreDeviceExecutionStatus` is in a failed state. The response will be an
     /// empty
     /// list if there is no error.
-    error_stack: ?[]const []const u8,
+    error_stack: ?[]const []const u8 = null,
 
     /// Contains tags which describe the error. You can use the error types to
     /// classify errors to
     /// assist with remediating the failure. The response will be an empty list if
     /// there is no
     /// error.
-    error_types: ?[]const []const u8,
+    error_types: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .error_stack = "errorStack",

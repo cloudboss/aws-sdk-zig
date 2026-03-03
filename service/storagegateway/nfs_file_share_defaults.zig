@@ -11,21 +11,21 @@ pub const NFSFileShareDefaults = struct {
     /// the default access mode for all directories inside the file share. The
     /// default value is
     /// `0777`.
-    directory_mode: ?[]const u8,
+    directory_mode: ?[]const u8 = null,
 
     /// The Unix file mode in the form "nnnn". For example, `0666` represents the
     /// default file mode inside the file share. The default value is `0666`.
-    file_mode: ?[]const u8,
+    file_mode: ?[]const u8 = null,
 
     /// The default group ID for the file share (unless the files have another group
     /// ID
     /// specified). The default value is `nfsnobody`.
-    group_id: ?i64,
+    group_id: ?i64 = null,
 
     /// The default owner ID for files in the file share (unless the files have
     /// another owner ID
     /// specified). The default value is `nfsnobody`.
-    owner_id: ?i64,
+    owner_id: ?i64 = null,
 
     pub const json_field_names = .{
         .directory_mode = "DirectoryMode",

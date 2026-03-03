@@ -3,10 +3,10 @@ const AwsDynamoDbTableProvisionedThroughputOverride = @import("aws_dynamo_db_tab
 /// Information about a global secondary index for a DynamoDB table replica.
 pub const AwsDynamoDbTableReplicaGlobalSecondaryIndex = struct {
     /// The name of the index.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
     /// Replica-specific configuration for the provisioned throughput for the index.
-    provisioned_throughput_override: ?AwsDynamoDbTableProvisionedThroughputOverride,
+    provisioned_throughput_override: ?AwsDynamoDbTableProvisionedThroughputOverride = null,
 
     pub const json_field_names = .{
         .index_name = "IndexName",

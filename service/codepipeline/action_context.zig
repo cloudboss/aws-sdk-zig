@@ -2,10 +2,10 @@
 /// worker.
 pub const ActionContext = struct {
     /// The system-generated unique ID that corresponds to an action's execution.
-    action_execution_id: ?[]const u8,
+    action_execution_id: ?[]const u8 = null,
 
     /// The name of the action in the context of a job.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action_execution_id = "actionExecutionId",

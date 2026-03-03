@@ -2,11 +2,11 @@
 pub const DeleteObjectInput = struct {
     /// The Amazon S3 ETag of the object. Returned by `GetTableObjects` for
     /// validation and used to identify changes to the underlying data.
-    e_tag: ?[]const u8,
+    e_tag: ?[]const u8 = null,
 
     /// A list of partition values for the object. A value must be specified for
     /// each partition key associated with the governed table.
-    partition_values: ?[]const []const u8,
+    partition_values: ?[]const []const u8 = null,
 
     /// The Amazon S3 location of the object to delete.
     uri: []const u8,

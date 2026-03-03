@@ -44,7 +44,7 @@ pub const S3Action = struct {
     /// managed key and Amazon SNS topic).
     /// Therefore, setting up individual resource access permissions is not
     /// required.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// The customer managed key that Amazon SES should use to encrypt your emails
     /// before saving
@@ -97,12 +97,12 @@ pub const S3Action = struct {
     /// managed keys, see the
     /// [Amazon S3 Developer
     /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html).
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The key prefix of the Amazon S3 bucket. The key prefix is similar to a
     /// directory name that
     /// enables you to store similar data under the same directory in a bucket.
-    object_key_prefix: ?[]const u8,
+    object_key_prefix: ?[]const u8 = null,
 
     /// The ARN of the Amazon SNS topic to notify when the message is saved to the
     /// Amazon S3 bucket. You
@@ -113,5 +113,5 @@ pub const S3Action = struct {
     ///
     /// For more information about Amazon SNS topics, see the [Amazon SNS Developer
     /// Guide](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
-    topic_arn: ?[]const u8,
+    topic_arn: ?[]const u8 = null,
 };

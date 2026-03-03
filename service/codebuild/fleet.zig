@@ -11,15 +11,15 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 /// A set of dedicated instances for your build environment.
 pub const Fleet = struct {
     /// The ARN of the compute fleet.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The initial number of machines allocated to the compute ﬂeet, which deﬁnes
     /// the number of builds that can run in parallel.
-    base_capacity: ?i32,
+    base_capacity: ?i32 = null,
 
     /// The compute configuration of the compute fleet. This is only required if
     /// `computeType` is set to `ATTRIBUTE_BASED_COMPUTE` or `CUSTOM_INSTANCE_TYPE`.
-    compute_configuration: ?ComputeConfiguration,
+    compute_configuration: ?ComputeConfiguration = null,
 
     /// Information about the compute resources the compute fleet uses. Available
     /// values
@@ -100,10 +100,10 @@ pub const Fleet = struct {
     /// For more information, see [On-demand environment
     /// types](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types)
     /// in the *CodeBuild User Guide.*
-    compute_type: ?ComputeType,
+    compute_type: ?ComputeType = null,
 
     /// The time at which the compute fleet was created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The environment type of the compute fleet.
     ///
@@ -173,25 +173,25 @@ pub const Fleet = struct {
     /// For more information, see [Build environment compute
     /// types](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html) in the *CodeBuild
     /// user guide*.
-    environment_type: ?EnvironmentType,
+    environment_type: ?EnvironmentType = null,
 
     /// The service role associated with the compute fleet. For more information,
     /// see [
     /// Allow a user to add a permission policy for a fleet service
     /// role](https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html) in the *CodeBuild User Guide*.
-    fleet_service_role: ?[]const u8,
+    fleet_service_role: ?[]const u8 = null,
 
     /// The ID of the compute fleet.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Machine Image (AMI) of the compute fleet.
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// The time at which the compute fleet was last modified.
-    last_modified: ?i64,
+    last_modified: ?i64 = null,
 
     /// The name of the compute fleet.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The compute fleet overflow behavior.
     ///
@@ -209,25 +209,25 @@ pub const Fleet = struct {
     /// policy statement to allow CodeBuild access to Amazon Web Services services
     /// required to create a VPC network
     /// interface](https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface).
-    overflow_behavior: ?FleetOverflowBehavior,
+    overflow_behavior: ?FleetOverflowBehavior = null,
 
     /// The proxy configuration of the compute fleet.
-    proxy_configuration: ?ProxyConfiguration,
+    proxy_configuration: ?ProxyConfiguration = null,
 
     /// The scaling configuration of the compute fleet.
-    scaling_configuration: ?ScalingConfigurationOutput,
+    scaling_configuration: ?ScalingConfigurationOutput = null,
 
     /// The status of the compute fleet.
-    status: ?FleetStatus,
+    status: ?FleetStatus = null,
 
     /// A list of tag key and value pairs associated with this compute fleet.
     ///
     /// These tags are available for use by Amazon Web Services services that
     /// support CodeBuild build project
     /// tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .arn = "arn",

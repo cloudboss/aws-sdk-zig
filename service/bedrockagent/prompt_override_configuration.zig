@@ -10,7 +10,7 @@ pub const PromptOverrideConfiguration = struct {
     /// set to `OVERRIDDEN`. For more information, see [Parser Lambda function in
     /// Amazon Bedrock
     /// Agents](https://docs.aws.amazon.com/bedrock/latest/userguide/lambda-parser.html).
-    override_lambda: ?[]const u8,
+    override_lambda: ?[]const u8 = null,
 
     /// Contains configurations to override a prompt template in one part of an
     /// agent sequence. For more information, see [Advanced

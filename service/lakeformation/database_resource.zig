@@ -2,7 +2,7 @@
 pub const DatabaseResource = struct {
     /// The identifier for the Data Catalog. By default, it is the account ID of the
     /// caller.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The name of the database resource. Unique to the Data Catalog.
     name: []const u8,

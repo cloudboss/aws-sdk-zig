@@ -9,13 +9,13 @@ pub const ListOperationsRequest = struct {
     /// If you specify more than one filter, an operation must match all filters to
     /// be returned by
     /// `ListOperations`.
-    filters: ?[]const OperationFilter,
+    filters: ?[]const OperationFilter = null,
 
     /// The maximum number of items that you want Cloud Map to return in the
     /// response to a
     /// `ListOperations` request. If you don't specify a value for `MaxResults`,
     /// Cloud Map returns up to 100 operations.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// For the first `ListOperations` request, omit this value.
     ///
@@ -30,7 +30,7 @@ pub const ListOperationsRequest = struct {
     /// operations matched the specified criteria but that subsequent groups of
     /// `MaxResults`
     /// operations do contain operations that match the criteria.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .filters = "Filters",

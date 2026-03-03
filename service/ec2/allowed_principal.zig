@@ -4,17 +4,17 @@ const Tag = @import("tag.zig").Tag;
 /// Describes a principal.
 pub const AllowedPrincipal = struct {
     /// The Amazon Resource Name (ARN) of the principal.
-    principal: ?[]const u8,
+    principal: ?[]const u8 = null,
 
     /// The type of principal.
-    principal_type: ?PrincipalType,
+    principal_type: ?PrincipalType = null,
 
     /// The ID of the service.
-    service_id: ?[]const u8,
+    service_id: ?[]const u8 = null,
 
     /// The ID of the service permission.
-    service_permission_id: ?[]const u8,
+    service_permission_id: ?[]const u8 = null,
 
     /// The tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

@@ -4,19 +4,19 @@ const ColumnDataType = @import("column_data_type.zig").ColumnDataType;
 /// Output column.
 pub const OutputColumn = struct {
     /// A description for a column.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier for the output column.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The display name of the column..
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The sub data type of the column.
-    sub_type: ?ColumnDataSubType,
+    sub_type: ?ColumnDataSubType = null,
 
     /// The data type of the column.
-    @"type": ?ColumnDataType,
+    @"type": ?ColumnDataType = null,
 
     pub const json_field_names = .{
         .description = "Description",

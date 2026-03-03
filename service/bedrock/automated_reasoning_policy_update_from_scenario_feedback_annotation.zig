@@ -3,11 +3,11 @@
 pub const AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation = struct {
     /// The feedback information about scenario performance, including any issues or
     /// improvements identified.
-    feedback: ?[]const u8,
+    feedback: ?[]const u8 = null,
 
     /// The list of rule identifiers that were involved in the scenario being
     /// evaluated.
-    rule_ids: ?[]const []const u8,
+    rule_ids: ?[]const []const u8 = null,
 
     /// The logical expression that defines the test scenario that generated this
     /// feedback.

@@ -11,10 +11,10 @@ const GeoSpatialDataRole = @import("geo_spatial_data_role.zig").GeoSpatialDataRo
 /// be non-null.
 pub const ColumnTag = struct {
     /// A description for a column.
-    column_description: ?ColumnDescription,
+    column_description: ?ColumnDescription = null,
 
     /// A geospatial role for a column.
-    column_geographic_role: ?GeoSpatialDataRole,
+    column_geographic_role: ?GeoSpatialDataRole = null,
 
     pub const json_field_names = .{
         .column_description = "ColumnDescription",

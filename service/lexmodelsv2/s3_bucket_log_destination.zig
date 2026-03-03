@@ -3,7 +3,7 @@ pub const S3BucketLogDestination = struct {
     /// The Amazon Resource Name (ARN) of an Amazon Web Services Key Management
     /// Service
     /// (KMS) key for encrypting audio log files stored in an S3 bucket.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The S3 prefix to assign to audio log files.
     log_prefix: []const u8,

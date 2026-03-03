@@ -7,19 +7,19 @@ const ConfigStreamDeliveryInfo = @import("config_stream_delivery_info.zig").Conf
 pub const DeliveryChannelStatus = struct {
     /// A list that contains the status of the delivery of the
     /// configuration history to the specified Amazon S3 bucket.
-    config_history_delivery_info: ?ConfigExportDeliveryInfo,
+    config_history_delivery_info: ?ConfigExportDeliveryInfo = null,
 
     /// A list containing the status of the delivery of the snapshot to
     /// the specified Amazon S3 bucket.
-    config_snapshot_delivery_info: ?ConfigExportDeliveryInfo,
+    config_snapshot_delivery_info: ?ConfigExportDeliveryInfo = null,
 
     /// A list containing the status of the delivery of the
     /// configuration stream notification to the specified Amazon SNS
     /// topic.
-    config_stream_delivery_info: ?ConfigStreamDeliveryInfo,
+    config_stream_delivery_info: ?ConfigStreamDeliveryInfo = null,
 
     /// The name of the delivery channel.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .config_history_delivery_info = "configHistoryDeliveryInfo",

@@ -10,7 +10,7 @@ pub const Domain = struct {
 
     /// The hosted zone ID for a domain hosted in Route 53. Required when
     /// configuring a domain hosted in Route 53.
-    hosted_zone_id: ?[]const u8,
+    hosted_zone_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",

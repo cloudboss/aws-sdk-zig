@@ -25,17 +25,17 @@ pub const PasswordPolicy = struct {
     /// permission and active access keys can reset their own expired console
     /// password using the
     /// CLI or API.
-    hard_expiry: ?bool,
+    hard_expiry: ?bool = null,
 
     /// The number of days that an IAM user password is valid.
-    max_password_age: ?i32,
+    max_password_age: ?i32 = null,
 
     /// Minimum length to require for IAM user passwords.
-    minimum_password_length: ?i32,
+    minimum_password_length: ?i32 = null,
 
     /// Specifies the number of previous passwords that IAM users are prevented from
     /// reusing.
-    password_reuse_prevention: ?i32,
+    password_reuse_prevention: ?i32 = null,
 
     /// Specifies whether IAM user passwords must contain at least one lowercase
     /// character (a

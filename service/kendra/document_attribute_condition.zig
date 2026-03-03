@@ -39,7 +39,7 @@ pub const DocumentAttributeCondition = struct {
     /// For example, you can specify the value 'financial' for strings in the
     /// 'Source_URI'
     /// field that partially match or contain this value.
-    condition_on_value: ?DocumentAttributeValue,
+    condition_on_value: ?DocumentAttributeValue = null,
 
     /// The condition operator.
     ///

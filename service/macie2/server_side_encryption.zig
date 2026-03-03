@@ -7,12 +7,12 @@ pub const ServerSideEncryption = struct {
     /// bucket or object. If default encryption settings aren't configured for the
     /// bucket or the object isn't encrypted using server-side encryption, this
     /// value is NONE.
-    encryption_type: ?EncryptionType,
+    encryption_type: ?EncryptionType = null,
 
     /// The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key
     /// that's used to encrypt data in the bucket or the object. This value is null
     /// if an KMS key isn't used to encrypt the data.
-    kms_master_key_id: ?[]const u8,
+    kms_master_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .encryption_type = "encryptionType",

@@ -6,13 +6,13 @@ const PluginVisualOptions = @import("plugin_visual_options.zig").PluginVisualOpt
 /// options, and persisted options of the plugin visual.
 pub const PluginVisualConfiguration = struct {
     /// The field wells configuration of the plugin visual.
-    field_wells: ?[]const PluginVisualFieldWell,
+    field_wells: ?[]const PluginVisualFieldWell = null,
 
     /// The sort configuration of the plugin visual.
-    sort_configuration: ?PluginVisualSortConfiguration,
+    sort_configuration: ?PluginVisualSortConfiguration = null,
 
     /// The persisted properties of the plugin visual.
-    visual_options: ?PluginVisualOptions,
+    visual_options: ?PluginVisualOptions = null,
 
     pub const json_field_names = .{
         .field_wells = "FieldWells",

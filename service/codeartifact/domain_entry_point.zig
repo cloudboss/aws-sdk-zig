@@ -12,10 +12,10 @@
 /// change from the original package version's value.
 pub const DomainEntryPoint = struct {
     /// The name of the external connection that a package was ingested from.
-    external_connection_name: ?[]const u8,
+    external_connection_name: ?[]const u8 = null,
 
     /// The name of the repository that a package was originally published to.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .external_connection_name = "externalConnectionName",

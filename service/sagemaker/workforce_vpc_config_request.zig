@@ -2,13 +2,13 @@
 pub const WorkforceVpcConfigRequest = struct {
     /// The VPC security group IDs, in the form `sg-xxxxxxxx`. The security groups
     /// must be for the same VPC as specified in the subnet.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The ID of the subnets in the VPC that you want to connect.
-    subnets: ?[]const []const u8,
+    subnets: ?[]const []const u8 = null,
 
     /// The ID of the VPC that the workforce uses for communication.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .security_group_ids = "SecurityGroupIds",

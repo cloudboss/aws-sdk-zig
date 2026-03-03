@@ -46,11 +46,11 @@ pub const PoolInformation = struct {
     status: PoolStatus,
 
     /// The Amazon Resource Name (ARN) of the two way channel.
-    two_way_channel_arn: ?[]const u8,
+    two_way_channel_arn: ?[]const u8 = null,
 
     /// An optional IAM Role Arn for a service to assume, to be able to post inbound
     /// SMS messages.
-    two_way_channel_role: ?[]const u8,
+    two_way_channel_role: ?[]const u8 = null,
 
     /// When set to true you can receive incoming text messages from your end
     /// recipients using the TwoWayChannelArn.

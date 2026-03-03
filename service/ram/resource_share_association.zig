@@ -21,34 +21,34 @@ pub const ResourceShareAssociation = struct {
     /// * The ARN of an IAM role
     ///
     /// * The ARN of an IAM user
-    associated_entity: ?[]const u8,
+    associated_entity: ?[]const u8 = null,
 
     /// The type of entity included in this association.
-    association_type: ?ResourceShareAssociationType,
+    association_type: ?ResourceShareAssociationType = null,
 
     /// The date and time when the association was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Indicates whether the principal belongs to the same organization in
     /// Organizations as the
     /// Amazon Web Services account that owns the resource share.
-    external: ?bool,
+    external: ?bool = null,
 
     /// The date and time when the association was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share.
-    resource_share_arn: ?[]const u8,
+    resource_share_arn: ?[]const u8 = null,
 
     /// The name of the resource share.
-    resource_share_name: ?[]const u8,
+    resource_share_name: ?[]const u8 = null,
 
     /// The current status of the association.
-    status: ?ResourceShareAssociationStatus,
+    status: ?ResourceShareAssociationStatus = null,
 
     /// A message about the status of the association.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .associated_entity = "associatedEntity",

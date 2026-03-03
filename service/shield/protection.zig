@@ -6,24 +6,24 @@ pub const Protection = struct {
     /// This configuration determines whether Shield Advanced automatically
     /// manages rules in the web ACL in order to respond to application layer events
     /// that Shield Advanced determines to be DDoS attacks.
-    application_layer_automatic_response_configuration: ?ApplicationLayerAutomaticResponseConfiguration,
+    application_layer_automatic_response_configuration: ?ApplicationLayerAutomaticResponseConfiguration = null,
 
     /// The unique identifier (ID) for the Route 53 health check that's associated
     /// with the protection.
-    health_check_ids: ?[]const []const u8,
+    health_check_ids: ?[]const []const u8 = null,
 
     /// The unique identifier (ID) of the protection.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the protection. For example, `My CloudFront distributions`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN (Amazon Resource Name) of the protection.
-    protection_arn: ?[]const u8,
+    protection_arn: ?[]const u8 = null,
 
     /// The ARN (Amazon Resource Name) of the Amazon Web Services resource that is
     /// protected.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_layer_automatic_response_configuration = "ApplicationLayerAutomaticResponseConfiguration",

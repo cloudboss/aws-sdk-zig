@@ -16,7 +16,7 @@ pub const AggregateOperation = struct {
     /// The list of column names to group by when performing the aggregation. Rows
     /// with the same values in
     /// these columns will be grouped together.
-    group_by_column_names: ?[]const []const u8,
+    group_by_column_names: ?[]const []const u8 = null,
 
     /// The source transform operation that provides input data for the aggregation.
     source: TransformOperationSource,

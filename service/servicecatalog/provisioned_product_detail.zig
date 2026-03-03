@@ -3,18 +3,18 @@ const ProvisionedProductStatus = @import("provisioned_product_status.zig").Provi
 /// Information about a provisioned product.
 pub const ProvisionedProductDetail = struct {
     /// The ARN of the provisioned product.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The UTC time stamp of the creation time.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The identifier of the provisioned product.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A unique identifier that you provide to ensure idempotency. If multiple
     /// requests differ only by the idempotency token,
     /// the same response is returned for each repeated request.
-    idempotency_token: ?[]const u8,
+    idempotency_token: ?[]const u8 = null,
 
     /// The record identifier of the last request performed on this provisioned
     /// product of the following types:
@@ -26,11 +26,11 @@ pub const ProvisionedProductDetail = struct {
     /// * ExecuteProvisionedProductPlan
     ///
     /// * TerminateProvisionedProduct
-    last_provisioning_record_id: ?[]const u8,
+    last_provisioning_record_id: ?[]const u8 = null,
 
     /// The record identifier of the last request performed on this provisioned
     /// product.
-    last_record_id: ?[]const u8,
+    last_record_id: ?[]const u8 = null,
 
     /// The record identifier of the last successful request performed on this
     /// provisioned product of the following types:
@@ -42,20 +42,20 @@ pub const ProvisionedProductDetail = struct {
     /// * ExecuteProvisionedProductPlan
     ///
     /// * TerminateProvisionedProduct
-    last_successful_provisioning_record_id: ?[]const u8,
+    last_successful_provisioning_record_id: ?[]const u8 = null,
 
     /// The ARN of the launch role associated with the provisioned product.
-    launch_role_arn: ?[]const u8,
+    launch_role_arn: ?[]const u8 = null,
 
     /// The user-friendly name of the provisioned product.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The product identifier. For example, `prod-abcdzk7xy33qa`.
-    product_id: ?[]const u8,
+    product_id: ?[]const u8 = null,
 
     /// The identifier of the provisioning artifact. For example,
     /// `pa-4abcdjnxjj6ne`.
-    provisioning_artifact_id: ?[]const u8,
+    provisioning_artifact_id: ?[]const u8 = null,
 
     /// The current status of the provisioned product.
     ///
@@ -82,16 +82,16 @@ pub const ProvisionedProductDetail = struct {
     /// but resources have not yet been created. After reviewing the list of
     /// resources to be created, execute the plan. Wait for an `AVAILABLE` status
     /// before performing operations.
-    status: ?ProvisionedProductStatus,
+    status: ?ProvisionedProductStatus = null,
 
     /// The current status message of the provisioned product.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The type of provisioned product.
     /// The supported values are `CFN_STACK`, `CFN_STACKSET`,
     /// `TERRAFORM_OPEN_SOURCE`,
     /// `TERRAFORM_CLOUD`, and `EXTERNAL`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

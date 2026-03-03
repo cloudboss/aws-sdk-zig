@@ -54,13 +54,13 @@ pub const IdentityProvider = struct {
     /// * `IDPInit` (boolean) *optional*
     /// * `RequestSigningAlgorithm` (string) *optional* - Only accepts `rsa-sha256`
     /// * `EncryptedResponses` (boolean) *optional*
-    identity_provider_details: ?[]const aws.map.StringMapEntry,
+    identity_provider_details: ?[]const aws.map.StringMapEntry = null,
 
     /// The identity provider name.
-    identity_provider_name: ?[]const u8,
+    identity_provider_name: ?[]const u8 = null,
 
     /// The identity provider type.
-    identity_provider_type: ?IdentityProviderType,
+    identity_provider_type: ?IdentityProviderType = null,
 
     pub const json_field_names = .{
         .identity_provider_arn = "identityProviderArn",

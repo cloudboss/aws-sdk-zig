@@ -7,7 +7,7 @@ pub const S3Location = struct {
     object_key: []const u8,
 
     /// The bucket's Region.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_name = "BucketName",

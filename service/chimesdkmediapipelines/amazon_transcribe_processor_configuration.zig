@@ -25,7 +25,7 @@ pub const AmazonTranscribeProcessorConfiguration = struct {
     /// For more information, see [Redacting or identifying personally identifiable
     /// information](https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
     /// in the *Amazon Transcribe Developer Guide*.
-    content_identification_type: ?ContentType,
+    content_identification_type: ?ContentType = null,
 
     /// Redacts all personally identifiable information (PII) identified in your
     /// transcript.
@@ -39,7 +39,7 @@ pub const AmazonTranscribeProcessorConfiguration = struct {
     /// For more information, see [Redacting or identifying personally identifiable
     /// information](https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
     /// in the *Amazon Transcribe Developer Guide*.
-    content_redaction_type: ?ContentType,
+    content_redaction_type: ?ContentType = null,
 
     /// Enables partial result stabilization for your transcription. Partial result
     /// stabilization can reduce latency in your output, but may impact accuracy.
@@ -73,7 +73,7 @@ pub const AmazonTranscribeProcessorConfiguration = struct {
     /// [Supported languages
     /// table](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
     /// in the *Amazon Transcribe Developer Guide*.
-    language_code: ?CallAnalyticsLanguageCode,
+    language_code: ?CallAnalyticsLanguageCode = null,
 
     /// The name of the custom language model that you want to use when processing
     /// your
@@ -86,11 +86,11 @@ pub const AmazonTranscribeProcessorConfiguration = struct {
     ///
     /// For more information, see [Custom language
     /// models](https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html) in the *Amazon Transcribe Developer Guide*.
-    language_model_name: ?[]const u8,
+    language_model_name: ?[]const u8 = null,
 
     /// The language options for the transcription, such as automatic language
     /// detection.
-    language_options: ?[]const u8,
+    language_options: ?[]const u8 = null,
 
     /// The level of stability to use when you enable partial results stabilization
     /// (`EnablePartialResultsStabilization`).
@@ -101,7 +101,7 @@ pub const AmazonTranscribeProcessorConfiguration = struct {
     /// For more information, see [Partial-result
     /// stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
     /// in the *Amazon Transcribe Developer Guide*.
-    partial_results_stability: ?PartialResultsStability,
+    partial_results_stability: ?PartialResultsStability = null,
 
     /// The types of personally identifiable information (PII) to redact from a
     /// transcript. You
@@ -118,10 +118,10 @@ pub const AmazonTranscribeProcessorConfiguration = struct {
     ///
     /// If you leave this parameter empty, the default behavior is equivalent to
     /// `ALL`.
-    pii_entity_types: ?[]const u8,
+    pii_entity_types: ?[]const u8 = null,
 
     /// The preferred language for the transcription.
-    preferred_language: ?CallAnalyticsLanguageCode,
+    preferred_language: ?CallAnalyticsLanguageCode = null,
 
     /// Enables speaker partitioning (diarization) in your transcription output.
     /// Speaker partitioning labels the speech from individual speakers in your
@@ -132,28 +132,28 @@ pub const AmazonTranscribeProcessorConfiguration = struct {
     show_speaker_label: bool = false,
 
     /// The vocabulary filtering method used in your Call Analytics transcription.
-    vocabulary_filter_method: ?VocabularyFilterMethod,
+    vocabulary_filter_method: ?VocabularyFilterMethod = null,
 
     /// The name of the custom vocabulary filter that you specified in your Call
     /// Analytics
     /// request.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 200.
-    vocabulary_filter_name: ?[]const u8,
+    vocabulary_filter_name: ?[]const u8 = null,
 
     /// The names of the custom vocabulary filter or filters using during
     /// transcription.
-    vocabulary_filter_names: ?[]const u8,
+    vocabulary_filter_names: ?[]const u8 = null,
 
     /// The name of the custom vocabulary that you specified in your Call Analytics
     /// request.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 200.
-    vocabulary_name: ?[]const u8,
+    vocabulary_name: ?[]const u8 = null,
 
     /// The names of the custom vocabulary or vocabularies used during
     /// transcription.
-    vocabulary_names: ?[]const u8,
+    vocabulary_names: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content_identification_type = "ContentIdentificationType",

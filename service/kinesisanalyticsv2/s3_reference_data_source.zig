@@ -6,10 +6,10 @@
 /// operation to trigger reloading of data into your application.
 pub const S3ReferenceDataSource = struct {
     /// The Amazon Resource Name (ARN) of the S3 bucket.
-    bucket_arn: ?[]const u8,
+    bucket_arn: ?[]const u8 = null,
 
     /// The object key name containing the reference data.
-    file_key: ?[]const u8,
+    file_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_arn = "BucketARN",

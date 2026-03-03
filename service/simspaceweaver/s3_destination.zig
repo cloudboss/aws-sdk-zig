@@ -13,7 +13,7 @@ pub const S3Destination = struct {
     /// the Amazon S3 console using
     /// folders](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)
     /// in the *Amazon Simple Storage Service User Guide*.
-    object_key_prefix: ?[]const u8,
+    object_key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_name = "BucketName",

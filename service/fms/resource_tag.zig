@@ -24,7 +24,7 @@ pub const ResourceTag = struct {
 
     /// The resource tag value. To specify an empty string value, either don't
     /// provide this or specify it as "".
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

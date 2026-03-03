@@ -4,7 +4,7 @@ pub const DatetimeRange = struct {
     begin: []const u8,
 
     /// End of the time range.
-    end: ?[]const u8,
+    end: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .begin = "Begin",

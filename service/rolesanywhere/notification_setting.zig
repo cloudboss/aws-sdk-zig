@@ -10,7 +10,7 @@ pub const NotificationSetting = struct {
     ///
     /// In the absence of a specific channel, IAM Roles Anywhere applies this
     /// setting to 'ALL' channels.
-    channel: ?NotificationChannel,
+    channel: ?NotificationChannel = null,
 
     /// Indicates whether the notification setting is enabled.
     enabled: bool,
@@ -20,7 +20,7 @@ pub const NotificationSetting = struct {
 
     /// The number of days before a notification event. This value is required for a
     /// notification setting that is enabled.
-    threshold: ?i32,
+    threshold: ?i32 = null,
 
     pub const json_field_names = .{
         .channel = "channel",

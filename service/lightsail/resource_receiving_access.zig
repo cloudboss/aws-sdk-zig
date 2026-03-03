@@ -2,10 +2,10 @@
 /// bucket.
 pub const ResourceReceivingAccess = struct {
     /// The name of the Lightsail instance.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Lightsail resource type (for example, `Instance`).
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

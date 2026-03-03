@@ -4,13 +4,13 @@ const Visibility = @import("visibility.zig").Visibility;
 /// width, and color properties.
 pub const BorderSettings = struct {
     /// Color of the border.
-    border_color: ?[]const u8,
+    border_color: ?[]const u8 = null,
 
     /// Visibility setting for the border.
-    border_visibility: ?Visibility,
+    border_visibility: ?Visibility = null,
 
     /// Width of the border. Valid range is from 1px to 8px.
-    border_width: ?[]const u8,
+    border_width: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .border_color = "BorderColor",

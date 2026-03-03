@@ -6,13 +6,13 @@ pub const AssetBundleImportJobDataSourceCredentials = struct {
     /// data source.
     /// Keep this field blank if you are using a Secrets Manager secret to provide
     /// credentials.
-    credential_pair: ?AssetBundleImportJobDataSourceCredentialPair,
+    credential_pair: ?AssetBundleImportJobDataSourceCredentialPair = null,
 
     /// The ARN of the Secrets Manager secret that's used to create the imported
     /// data source.
     /// Keep this field blank, unless you are using a secret in place of a
     /// credential pair.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .credential_pair = "CredentialPair",

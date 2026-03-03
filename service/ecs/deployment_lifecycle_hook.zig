@@ -9,14 +9,14 @@ const DeploymentLifecycleHookStage = @import("deployment_lifecycle_hook_stage.zi
 pub const DeploymentLifecycleHook = struct {
     /// Use this field to specify custom parameters that Amazon ECS will pass to
     /// your hook target invocations (such as a Lambda function).
-    hook_details: ?[]const u8,
+    hook_details: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda
     /// function ARNs are supported.
     ///
     /// You must provide this parameter when configuring a deployment lifecycle
     /// hook.
-    hook_target_arn: ?[]const u8,
+    hook_target_arn: ?[]const u8 = null,
 
     /// The lifecycle stages at which to run the hook. Choose from these valid
     /// values:
@@ -72,7 +72,7 @@ pub const DeploymentLifecycleHook = struct {
     ///
     /// You must provide this parameter when configuring a deployment lifecycle
     /// hook.
-    lifecycle_stages: ?[]const DeploymentLifecycleHookStage,
+    lifecycle_stages: ?[]const DeploymentLifecycleHookStage = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS
     /// permission to call Lambda functions on your behalf.
@@ -81,7 +81,7 @@ pub const DeploymentLifecycleHook = struct {
     /// for Lambda functions in Amazon ECS blue/green
     /// deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *
     /// Amazon Elastic Container Service Developer Guide*.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .hook_details = "hookDetails",

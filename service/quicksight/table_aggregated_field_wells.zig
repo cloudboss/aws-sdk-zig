@@ -5,11 +5,11 @@ const MeasureField = @import("measure_field.zig").MeasureField;
 pub const TableAggregatedFieldWells = struct {
     /// The group by field well for a pivot table. Values are grouped by group by
     /// fields.
-    group_by: ?[]const DimensionField,
+    group_by: ?[]const DimensionField = null,
 
     /// The values field well for a pivot table. Values are aggregated based on
     /// group by fields.
-    values: ?[]const MeasureField,
+    values: ?[]const MeasureField = null,
 
     pub const json_field_names = .{
         .group_by = "GroupBy",

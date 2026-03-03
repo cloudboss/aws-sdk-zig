@@ -13,43 +13,43 @@ const VoiceEnhancementSinkConfiguration = @import("voice_enhancement_sink_config
 pub const MediaInsightsPipelineConfigurationElement = struct {
     /// The analytics configuration settings for transcribing audio in a media
     /// insights pipeline configuration element.
-    amazon_transcribe_call_analytics_processor_configuration: ?AmazonTranscribeCallAnalyticsProcessorConfiguration,
+    amazon_transcribe_call_analytics_processor_configuration: ?AmazonTranscribeCallAnalyticsProcessorConfiguration = null,
 
     /// The transcription processor configuration settings in a media insights
     /// pipeline
     /// configuration element.
-    amazon_transcribe_processor_configuration: ?AmazonTranscribeProcessorConfiguration,
+    amazon_transcribe_processor_configuration: ?AmazonTranscribeProcessorConfiguration = null,
 
     /// The configuration settings for the Kinesis Data Stream Sink in a media
     /// insights pipeline configuration element.
-    kinesis_data_stream_sink_configuration: ?KinesisDataStreamSinkConfiguration,
+    kinesis_data_stream_sink_configuration: ?KinesisDataStreamSinkConfiguration = null,
 
     /// The configuration settings for the Amazon Web Services Lambda sink in a
     /// media insights pipeline configuration element.
-    lambda_function_sink_configuration: ?LambdaFunctionSinkConfiguration,
+    lambda_function_sink_configuration: ?LambdaFunctionSinkConfiguration = null,
 
     /// The configuration settings for the Amazon S3 recording bucket in a media
     /// insights pipeline configuration element.
-    s3_recording_sink_configuration: ?S3RecordingSinkConfiguration,
+    s3_recording_sink_configuration: ?S3RecordingSinkConfiguration = null,
 
     /// The configuration settings for an SNS topic sink in a media insights
     /// pipeline configuration element.
-    sns_topic_sink_configuration: ?SnsTopicSinkConfiguration,
+    sns_topic_sink_configuration: ?SnsTopicSinkConfiguration = null,
 
     /// The configuration settings for an SQS queue sink in a media insights
     /// pipeline configuration element.
-    sqs_queue_sink_configuration: ?SqsQueueSinkConfiguration,
+    sqs_queue_sink_configuration: ?SqsQueueSinkConfiguration = null,
 
     /// The element type.
     @"type": MediaInsightsPipelineConfigurationElementType,
 
     /// The voice analytics configuration settings in a media insights pipeline
     /// configuration element.
-    voice_analytics_processor_configuration: ?VoiceAnalyticsProcessorConfiguration,
+    voice_analytics_processor_configuration: ?VoiceAnalyticsProcessorConfiguration = null,
 
     /// The configuration settings for voice enhancement sink in a media insights
     /// pipeline configuration element.
-    voice_enhancement_sink_configuration: ?VoiceEnhancementSinkConfiguration,
+    voice_enhancement_sink_configuration: ?VoiceEnhancementSinkConfiguration = null,
 
     pub const json_field_names = .{
         .amazon_transcribe_call_analytics_processor_configuration = "AmazonTranscribeCallAnalyticsProcessorConfiguration",

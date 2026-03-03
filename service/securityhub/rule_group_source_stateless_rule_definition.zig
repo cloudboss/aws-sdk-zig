@@ -6,11 +6,11 @@ pub const RuleGroupSourceStatelessRuleDefinition = struct {
     /// definition's match attributes. You must specify a standard action
     /// (`aws:pass`, `aws:drop`, or `aws:forward_to_sfe`). You can then add custom
     /// actions.
-    actions: ?[]const []const u8,
+    actions: ?[]const []const u8 = null,
 
     /// The criteria for Network Firewall to use to inspect an individual packet in
     /// a stateless rule inspection.
-    match_attributes: ?RuleGroupSourceStatelessRuleMatchAttributes,
+    match_attributes: ?RuleGroupSourceStatelessRuleMatchAttributes = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

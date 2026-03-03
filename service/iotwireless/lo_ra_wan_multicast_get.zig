@@ -5,15 +5,15 @@ const SupportedRfRegion = @import("supported_rf_region.zig").SupportedRfRegion;
 /// The LoRaWAN information that is to be returned from getting multicast group
 /// information.
 pub const LoRaWANMulticastGet = struct {
-    dl_class: ?DlClass,
+    dl_class: ?DlClass = null,
 
-    number_of_devices_in_group: ?i32,
+    number_of_devices_in_group: ?i32 = null,
 
-    number_of_devices_requested: ?i32,
+    number_of_devices_requested: ?i32 = null,
 
-    participating_gateways: ?ParticipatingGatewaysMulticast,
+    participating_gateways: ?ParticipatingGatewaysMulticast = null,
 
-    rf_region: ?SupportedRfRegion,
+    rf_region: ?SupportedRfRegion = null,
 
     pub const json_field_names = .{
         .dl_class = "DlClass",

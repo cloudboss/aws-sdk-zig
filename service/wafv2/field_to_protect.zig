@@ -5,7 +5,7 @@ const FieldToProtectType = @import("field_to_protect_type.zig").FieldToProtectTy
 pub const FieldToProtect = struct {
     /// Specifies the keys to protect for the specified field type. If you don't
     /// specify any key, then all keys for the field type are protected.
-    field_keys: ?[]const []const u8,
+    field_keys: ?[]const []const u8 = null,
 
     /// Specifies the web request component type to protect.
     field_type: FieldToProtectType,

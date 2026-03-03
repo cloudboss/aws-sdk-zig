@@ -10,13 +10,13 @@ pub const LabelingJobForWorkteamSummary = struct {
     job_reference_code: []const u8,
 
     /// Provides information about the progress of a labeling job.
-    label_counters: ?LabelCountersForWorkteam,
+    label_counters: ?LabelCountersForWorkteam = null,
 
     /// The name of the labeling job that the work team is assigned to.
-    labeling_job_name: ?[]const u8,
+    labeling_job_name: ?[]const u8 = null,
 
     /// The configured number of workers per data object.
-    number_of_human_workers_per_data_object: ?i32,
+    number_of_human_workers_per_data_object: ?i32 = null,
 
     /// The Amazon Web Services account ID of the account used to start the labeling
     /// job.

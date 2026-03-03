@@ -13,25 +13,25 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// servers.
 pub const Origin = struct {
     /// The name of the origin resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The protocol that your Amazon Lightsail distribution uses when establishing
     /// a connection
     /// with your origin to pull content.
-    protocol_policy: ?OriginProtocolPolicyEnum,
+    protocol_policy: ?OriginProtocolPolicyEnum = null,
 
     /// The AWS Region name of the origin resource.
-    region_name: ?RegionName,
+    region_name: ?RegionName = null,
 
     /// The resource type of the origin resource (*Instance*).
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The amount of time, in seconds, that the distribution waits for a response
     /// after
     /// forwarding a request to the origin. The minimum timeout is 1 second, the
     /// maximum is 60
     /// seconds, and the default (if you don't specify otherwise) is 30 seconds.
-    response_timeout: ?i32,
+    response_timeout: ?i32 = null,
 
     pub const json_field_names = .{
         .name = "name",

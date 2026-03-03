@@ -2,10 +2,10 @@
 /// Pardot.
 pub const PardotConnectorProfileProperties = struct {
     /// The business unit id of Salesforce Pardot instance.
-    business_unit_id: ?[]const u8,
+    business_unit_id: ?[]const u8 = null,
 
     /// The location of the Salesforce Pardot resource.
-    instance_url: ?[]const u8,
+    instance_url: ?[]const u8 = null,
 
     /// Indicates whether the connector profile applies to a sandbox or production
     /// environment.

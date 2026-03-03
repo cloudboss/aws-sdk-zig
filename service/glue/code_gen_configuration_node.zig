@@ -83,280 +83,280 @@ const Union = @import("union.zig").Union;
 pub const CodeGenConfigurationNode = struct {
     /// Specifies a transform that groups rows by chosen fields and computes the
     /// aggregated value by specified function.
-    aggregate: ?Aggregate,
+    aggregate: ?Aggregate = null,
 
     /// Specifies a target that writes to a data source in Amazon Redshift.
-    amazon_redshift_source: ?AmazonRedshiftSource,
+    amazon_redshift_source: ?AmazonRedshiftSource = null,
 
     /// Specifies a target that writes to a data target in Amazon Redshift.
-    amazon_redshift_target: ?AmazonRedshiftTarget,
+    amazon_redshift_target: ?AmazonRedshiftTarget = null,
 
     /// Specifies a transform that maps data property keys in the data source to
     /// data property keys in the data target. You can rename keys, modify the data
     /// types for keys, and choose which keys to drop from the dataset.
-    apply_mapping: ?ApplyMapping,
+    apply_mapping: ?ApplyMapping = null,
 
     /// Specifies a connector to an Amazon Athena data source.
-    athena_connector_source: ?AthenaConnectorSource,
+    athena_connector_source: ?AthenaConnectorSource = null,
 
     /// Specifies a Delta Lake data source that is registered in the Glue Data
     /// Catalog.
-    catalog_delta_source: ?CatalogDeltaSource,
+    catalog_delta_source: ?CatalogDeltaSource = null,
 
     /// Specifies a Hudi data source that is registered in the Glue Data Catalog.
-    catalog_hudi_source: ?CatalogHudiSource,
+    catalog_hudi_source: ?CatalogHudiSource = null,
 
     /// Specifies an Apache Iceberg data source that is registered in the Glue Data
     /// Catalog.
-    catalog_iceberg_source: ?CatalogIcebergSource,
+    catalog_iceberg_source: ?CatalogIcebergSource = null,
 
     /// Specifies an Apache Kafka data store in the Data Catalog.
-    catalog_kafka_source: ?CatalogKafkaSource,
+    catalog_kafka_source: ?CatalogKafkaSource = null,
 
     /// Specifies a Kinesis data source in the Glue Data Catalog.
-    catalog_kinesis_source: ?CatalogKinesisSource,
+    catalog_kinesis_source: ?CatalogKinesisSource = null,
 
     /// Specifies a data store in the Glue Data Catalog.
-    catalog_source: ?CatalogSource,
+    catalog_source: ?CatalogSource = null,
 
     /// Specifies a target that uses a Glue Data Catalog table.
-    catalog_target: ?BasicCatalogTarget,
+    catalog_target: ?BasicCatalogTarget = null,
 
     /// Specifies a source generated with standard connection options.
-    connector_data_source: ?ConnectorDataSource,
+    connector_data_source: ?ConnectorDataSource = null,
 
     /// Specifies a target generated with standard connection options.
-    connector_data_target: ?ConnectorDataTarget,
+    connector_data_target: ?ConnectorDataTarget = null,
 
     /// Specifies a transform that uses custom code you provide to perform the data
     /// transformation. The output is a collection of DynamicFrames.
-    custom_code: ?CustomCode,
+    custom_code: ?CustomCode = null,
 
-    direct_jdbc_source: ?DirectJDBCSource,
+    direct_jdbc_source: ?DirectJDBCSource = null,
 
     /// Specifies an Apache Kafka data store.
-    direct_kafka_source: ?DirectKafkaSource,
+    direct_kafka_source: ?DirectKafkaSource = null,
 
     /// Specifies a direct Amazon Kinesis data source.
-    direct_kinesis_source: ?DirectKinesisSource,
+    direct_kinesis_source: ?DirectKinesisSource = null,
 
     /// Specifies a transform that removes rows of repeating data from a data set.
-    drop_duplicates: ?DropDuplicates,
+    drop_duplicates: ?DropDuplicates = null,
 
     /// Specifies a transform that chooses the data property keys that you want to
     /// drop.
-    drop_fields: ?DropFields,
+    drop_fields: ?DropFields = null,
 
     /// Specifies a transform that removes columns from the dataset if all values in
     /// the column are 'null'. By default, Glue Studio will recognize null objects,
     /// but some values such as empty strings, strings that are "null", -1 integers
     /// or other placeholders such as zeros, are not automatically recognized as
     /// nulls.
-    drop_null_fields: ?DropNullFields,
+    drop_null_fields: ?DropNullFields = null,
 
     /// Specifies a custom visual transform created by a user.
-    dynamic_transform: ?DynamicTransform,
+    dynamic_transform: ?DynamicTransform = null,
 
     /// Specifies a DynamoDBC Catalog data store in the Glue Data Catalog.
-    dynamo_db_catalog_source: ?DynamoDBCatalogSource,
+    dynamo_db_catalog_source: ?DynamoDBCatalogSource = null,
 
     /// Specifies a DynamoDB ELT connector source for extracting data from DynamoDB
     /// tables.
-    dynamo_dbelt_connector_source: ?DynamoDBELTConnectorSource,
+    dynamo_dbelt_connector_source: ?DynamoDBELTConnectorSource = null,
 
     /// Specifies your data quality evaluation criteria.
-    evaluate_data_quality: ?EvaluateDataQuality,
+    evaluate_data_quality: ?EvaluateDataQuality = null,
 
     /// Specifies your data quality evaluation criteria. Allows multiple input data
     /// and returns a collection of Dynamic Frames.
-    evaluate_data_quality_multi_frame: ?EvaluateDataQualityMultiFrame,
+    evaluate_data_quality_multi_frame: ?EvaluateDataQualityMultiFrame = null,
 
     /// Specifies a transform that locates records in the dataset that have missing
     /// values and adds a new field with a value determined by imputation. The input
     /// data set is used to train the machine learning model that determines what
     /// the missing value should be.
-    fill_missing_values: ?FillMissingValues,
+    fill_missing_values: ?FillMissingValues = null,
 
     /// Specifies a transform that splits a dataset into two, based on a filter
     /// condition.
-    filter: ?Filter,
+    filter: ?Filter = null,
 
     /// Specifies a data source in a goverened Data Catalog.
-    governed_catalog_source: ?GovernedCatalogSource,
+    governed_catalog_source: ?GovernedCatalogSource = null,
 
     /// Specifies a data target that writes to a goverened catalog.
-    governed_catalog_target: ?GovernedCatalogTarget,
+    governed_catalog_target: ?GovernedCatalogTarget = null,
 
     /// Specifies a connector to a JDBC data source.
-    jdbc_connector_source: ?JDBCConnectorSource,
+    jdbc_connector_source: ?JDBCConnectorSource = null,
 
     /// Specifies a data target that writes to Amazon S3 in Apache Parquet columnar
     /// storage.
-    jdbc_connector_target: ?JDBCConnectorTarget,
+    jdbc_connector_target: ?JDBCConnectorTarget = null,
 
     /// Specifies a transform that joins two datasets into one dataset using a
     /// comparison phrase on the specified data property keys. You can use inner,
     /// outer, left, right, left semi, and left anti joins.
-    join: ?Join,
+    join: ?Join = null,
 
     /// Specifies a transform that merges a `DynamicFrame` with a staging
     /// `DynamicFrame` based on the specified primary keys to identify records.
     /// Duplicate records (records with the same primary keys) are not
     /// de-duplicated.
-    merge: ?Merge,
+    merge: ?Merge = null,
 
     /// Specifies a Microsoft SQL server data source in the Glue Data Catalog.
-    microsoft_sql_server_catalog_source: ?MicrosoftSQLServerCatalogSource,
+    microsoft_sql_server_catalog_source: ?MicrosoftSQLServerCatalogSource = null,
 
     /// Specifies a target that uses Microsoft SQL.
-    microsoft_sql_server_catalog_target: ?MicrosoftSQLServerCatalogTarget,
+    microsoft_sql_server_catalog_target: ?MicrosoftSQLServerCatalogTarget = null,
 
     /// Specifies a MySQL data source in the Glue Data Catalog.
-    my_sql_catalog_source: ?MySQLCatalogSource,
+    my_sql_catalog_source: ?MySQLCatalogSource = null,
 
     /// Specifies a target that uses MySQL.
-    my_sql_catalog_target: ?MySQLCatalogTarget,
+    my_sql_catalog_target: ?MySQLCatalogTarget = null,
 
     /// Specifies an Oracle data source in the Glue Data Catalog.
-    oracle_sql_catalog_source: ?OracleSQLCatalogSource,
+    oracle_sql_catalog_source: ?OracleSQLCatalogSource = null,
 
     /// Specifies a target that uses Oracle SQL.
-    oracle_sql_catalog_target: ?OracleSQLCatalogTarget,
+    oracle_sql_catalog_target: ?OracleSQLCatalogTarget = null,
 
     /// Specifies a transform that identifies, removes or masks PII data.
-    pii_detection: ?PIIDetection,
+    pii_detection: ?PIIDetection = null,
 
     /// Specifies a PostgresSQL data source in the Glue Data Catalog.
-    postgre_sql_catalog_source: ?PostgreSQLCatalogSource,
+    postgre_sql_catalog_source: ?PostgreSQLCatalogSource = null,
 
     /// Specifies a target that uses Postgres SQL.
-    postgre_sql_catalog_target: ?PostgreSQLCatalogTarget,
+    postgre_sql_catalog_target: ?PostgreSQLCatalogTarget = null,
 
     /// Specifies a Glue DataBrew recipe node.
-    recipe: ?Recipe,
+    recipe: ?Recipe = null,
 
     /// Specifies an Amazon Redshift data store.
-    redshift_source: ?RedshiftSource,
+    redshift_source: ?RedshiftSource = null,
 
     /// Specifies a target that uses Amazon Redshift.
-    redshift_target: ?RedshiftTarget,
+    redshift_target: ?RedshiftTarget = null,
 
     /// Specifies a relational catalog data store in the Glue Data Catalog.
-    relational_catalog_source: ?RelationalCatalogSource,
+    relational_catalog_source: ?RelationalCatalogSource = null,
 
     /// Specifies a transform that renames a single data property key.
-    rename_field: ?RenameField,
+    rename_field: ?RenameField = null,
 
     /// Specifies a route node that directs data to different output paths based on
     /// defined filtering conditions.
-    route: ?Route,
+    route: ?Route = null,
 
     /// Specifies a Delta Lake data source that is registered in the Glue Data
     /// Catalog. The data source must be stored in Amazon S3.
-    s3_catalog_delta_source: ?S3CatalogDeltaSource,
+    s3_catalog_delta_source: ?S3CatalogDeltaSource = null,
 
     /// Specifies a Hudi data source that is registered in the Glue Data Catalog.
     /// The data source must be stored in Amazon S3.
-    s3_catalog_hudi_source: ?S3CatalogHudiSource,
+    s3_catalog_hudi_source: ?S3CatalogHudiSource = null,
 
     /// Specifies an Apache Iceberg data source that is registered in the Glue Data
     /// Catalog. The Iceberg data source must be stored in Amazon S3.
-    s3_catalog_iceberg_source: ?S3CatalogIcebergSource,
+    s3_catalog_iceberg_source: ?S3CatalogIcebergSource = null,
 
     /// Specifies an Amazon S3 data store in the Glue Data Catalog.
-    s3_catalog_source: ?S3CatalogSource,
+    s3_catalog_source: ?S3CatalogSource = null,
 
     /// Specifies a data target that writes to Amazon S3 using the Glue Data
     /// Catalog.
-    s3_catalog_target: ?S3CatalogTarget,
+    s3_catalog_target: ?S3CatalogTarget = null,
 
     /// Specifies a command-separated value (CSV) data store stored in Amazon S3.
-    s3_csv_source: ?S3CsvSource,
+    s3_csv_source: ?S3CsvSource = null,
 
     /// Specifies a target that writes to a Delta Lake data source in the Glue Data
     /// Catalog.
-    s3_delta_catalog_target: ?S3DeltaCatalogTarget,
+    s3_delta_catalog_target: ?S3DeltaCatalogTarget = null,
 
     /// Specifies a target that writes to a Delta Lake data source in Amazon S3.
-    s3_delta_direct_target: ?S3DeltaDirectTarget,
+    s3_delta_direct_target: ?S3DeltaDirectTarget = null,
 
     /// Specifies a Delta Lake data source stored in Amazon S3.
-    s3_delta_source: ?S3DeltaSource,
+    s3_delta_source: ?S3DeltaSource = null,
 
     /// Specifies a data target that writes to Amazon S3.
-    s3_direct_target: ?S3DirectTarget,
+    s3_direct_target: ?S3DirectTarget = null,
 
     /// Defines configuration parameters for reading Excel files from Amazon S3.
-    s3_excel_source: ?S3ExcelSource,
+    s3_excel_source: ?S3ExcelSource = null,
 
     /// Specifies a data target that writes to Amazon S3 in Apache Parquet columnar
     /// storage.
-    s3_glue_parquet_target: ?S3GlueParquetTarget,
+    s3_glue_parquet_target: ?S3GlueParquetTarget = null,
 
     /// Specifies a target that writes to a Hudi data source in the Glue Data
     /// Catalog.
-    s3_hudi_catalog_target: ?S3HudiCatalogTarget,
+    s3_hudi_catalog_target: ?S3HudiCatalogTarget = null,
 
     /// Specifies a target that writes to a Hudi data source in Amazon S3.
-    s3_hudi_direct_target: ?S3HudiDirectTarget,
+    s3_hudi_direct_target: ?S3HudiDirectTarget = null,
 
     /// Specifies a Hudi data source stored in Amazon S3.
-    s3_hudi_source: ?S3HudiSource,
+    s3_hudi_source: ?S3HudiSource = null,
 
     /// Defines configuration parameters for writing data to Amazon S3 using
     /// HyperDirect optimization.
-    s3_hyper_direct_target: ?S3HyperDirectTarget,
+    s3_hyper_direct_target: ?S3HyperDirectTarget = null,
 
     /// Specifies an Apache Iceberg catalog target that writes data to Amazon S3 and
     /// registers the table in the Glue Data Catalog.
-    s3_iceberg_catalog_target: ?S3IcebergCatalogTarget,
+    s3_iceberg_catalog_target: ?S3IcebergCatalogTarget = null,
 
     /// Defines configuration parameters for writing data to Amazon S3 as an Apache
     /// Iceberg table.
-    s3_iceberg_direct_target: ?S3IcebergDirectTarget,
+    s3_iceberg_direct_target: ?S3IcebergDirectTarget = null,
 
     /// Specifies a JSON data store stored in Amazon S3.
-    s3_json_source: ?S3JsonSource,
+    s3_json_source: ?S3JsonSource = null,
 
     /// Specifies an Apache Parquet data store stored in Amazon S3.
-    s3_parquet_source: ?S3ParquetSource,
+    s3_parquet_source: ?S3ParquetSource = null,
 
     /// Specifies a transform that chooses the data property keys that you want to
     /// keep.
-    select_fields: ?SelectFields,
+    select_fields: ?SelectFields = null,
 
     /// Specifies a transform that chooses one `DynamicFrame` from a collection of
     /// `DynamicFrames`. The output is the selected `DynamicFrame`
-    select_from_collection: ?SelectFromCollection,
+    select_from_collection: ?SelectFromCollection = null,
 
     /// Specifies a Snowflake data source.
-    snowflake_source: ?SnowflakeSource,
+    snowflake_source: ?SnowflakeSource = null,
 
     /// Specifies a target that writes to a Snowflake data source.
-    snowflake_target: ?SnowflakeTarget,
+    snowflake_target: ?SnowflakeTarget = null,
 
     /// Specifies a connector to an Apache Spark data source.
-    spark_connector_source: ?SparkConnectorSource,
+    spark_connector_source: ?SparkConnectorSource = null,
 
     /// Specifies a target that uses an Apache Spark connector.
-    spark_connector_target: ?SparkConnectorTarget,
+    spark_connector_target: ?SparkConnectorTarget = null,
 
     /// Specifies a transform where you enter a SQL query using Spark SQL syntax to
     /// transform the data. The output is a single `DynamicFrame`.
-    spark_sql: ?SparkSQL,
+    spark_sql: ?SparkSQL = null,
 
     /// Specifies a transform that writes samples of the data to an Amazon S3
     /// bucket.
-    spigot: ?Spigot,
+    spigot: ?Spigot = null,
 
     /// Specifies a transform that splits data property keys into two
     /// `DynamicFrames`. The output is a collection of `DynamicFrames`: one with
     /// selected data property keys, and one with the remaining data property keys.
-    split_fields: ?SplitFields,
+    split_fields: ?SplitFields = null,
 
     /// Specifies a transform that combines the rows from two or more datasets into
     /// a single result.
-    @"union": ?Union,
+    @"union": ?Union = null,
 
     pub const json_field_names = .{
         .aggregate = "Aggregate",

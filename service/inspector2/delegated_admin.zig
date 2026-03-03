@@ -5,10 +5,10 @@ const RelationshipStatus = @import("relationship_status.zig").RelationshipStatus
 pub const DelegatedAdmin = struct {
     /// The Amazon Web Services account ID of the Amazon Inspector delegated
     /// administrator for your organization.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The status of the Amazon Inspector delegated administrator.
-    relationship_status: ?RelationshipStatus,
+    relationship_status: ?RelationshipStatus = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

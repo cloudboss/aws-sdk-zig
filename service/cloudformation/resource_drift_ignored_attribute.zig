@@ -3,7 +3,7 @@ const DriftIgnoredReason = @import("drift_ignored_reason.zig").DriftIgnoredReaso
 /// The `ResourceDriftIgnoredAttribute` data type.
 pub const ResourceDriftIgnoredAttribute = struct {
     /// Path of the resource attribute for which drift was ignored.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// Reason why drift was ignored for the attribute, can have 2 possible values:
     ///
@@ -13,5 +13,5 @@ pub const ResourceDriftIgnoredAttribute = struct {
     /// * `MANAGED_BY_AWS` - Property is managed by an Amazon Web Services service
     ///   and is expected to be
     /// dynamically modified.
-    reason: ?DriftIgnoredReason,
+    reason: ?DriftIgnoredReason = null,
 };

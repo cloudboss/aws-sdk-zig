@@ -11,19 +11,19 @@ pub const DomainValidationRecord = struct {
     /// that are
     /// automatically added by Lightsail to the DNS of the domain to validate domain
     /// ownership.
-    dns_record_creation_state: ?DnsRecordCreationState,
+    dns_record_creation_state: ?DnsRecordCreationState = null,
 
     /// The domain name of the certificate validation record. For example,
     /// `example.com` or `www.example.com`.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// An object that describes the DNS records to add to your domain's DNS to
     /// validate it for
     /// the certificate.
-    resource_record: ?ResourceRecord,
+    resource_record: ?ResourceRecord = null,
 
     /// The validation status of the record.
-    validation_status: ?CertificateDomainValidationStatus,
+    validation_status: ?CertificateDomainValidationStatus = null,
 
     pub const json_field_names = .{
         .dns_record_creation_state = "dnsRecordCreationState",

@@ -22,14 +22,14 @@
 /// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess.html](https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess.html).
 pub const AwsCredentials = struct {
     /// The access key ID that identifies the temporary security credentials.
-    access_key_id: ?[]const u8,
+    access_key_id: ?[]const u8 = null,
 
     /// The secret access key that can be used to sign requests.
-    secret_access_key: ?[]const u8,
+    secret_access_key: ?[]const u8 = null,
 
     /// The token that users must pass to the service API to use the temporary
     /// credentials.
-    session_token: ?[]const u8,
+    session_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_key_id = "AccessKeyId",

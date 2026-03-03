@@ -11,7 +11,7 @@ pub const S3UpdateObjectEncryptionSSEKMS = struct {
     /// value isn't specified, it defaults to `false`. Setting this value
     /// to `true` causes Amazon S3 to use an S3 Bucket Key for update object
     /// encryption with SSE-KMS.
-    bucket_key_enabled: ?bool,
+    bucket_key_enabled: ?bool = null,
 
     /// Specifies the Amazon Web Services KMS key Amazon Resource Name (ARN) to use
     /// for the

@@ -33,5 +33,5 @@ pub const IpamPrefixListResolverVersion = struct {
     /// Each version is a snapshot of what CIDRs matched your rules at that moment
     /// in time. The version number increments every time the CIDR list
     /// changes due to infrastructure changes.
-    version: ?i64,
+    version: ?i64 = null,
 };

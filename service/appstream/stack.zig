@@ -10,51 +10,51 @@ pub const Stack = struct {
     /// The list of virtual private cloud (VPC) interface endpoint objects. Users of
     /// the stack can connect to WorkSpaces Applications only through the specified
     /// endpoints.
-    access_endpoints: ?[]const AccessEndpoint,
+    access_endpoints: ?[]const AccessEndpoint = null,
 
     /// The persistent application settings for users of the stack.
-    application_settings: ?ApplicationSettingsResponse,
+    application_settings: ?ApplicationSettingsResponse = null,
 
     /// The ARN of the stack.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time the stack was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The description to display.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The stack name to display.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The domains where WorkSpaces Applications streaming sessions can be embedded
     /// in an iframe. You must approve the domains that you want to host embedded
     /// WorkSpaces Applications streaming sessions.
-    embed_host_domains: ?[]const []const u8,
+    embed_host_domains: ?[]const []const u8 = null,
 
     /// The URL that users are redirected to after they click the Send Feedback
     /// link. If no URL is specified, no Send Feedback link is displayed.
-    feedback_url: ?[]const u8,
+    feedback_url: ?[]const u8 = null,
 
     /// The name of the stack.
     name: []const u8,
 
     /// The URL that users are redirected to after their streaming session ends.
-    redirect_url: ?[]const u8,
+    redirect_url: ?[]const u8 = null,
 
     /// The errors for the stack.
-    stack_errors: ?[]const StackError,
+    stack_errors: ?[]const StackError = null,
 
     /// The storage connectors to enable.
-    storage_connectors: ?[]const StorageConnector,
+    storage_connectors: ?[]const StorageConnector = null,
 
     /// The streaming protocol you want your stack to prefer. This can be UDP or
     /// TCP. Currently, UDP is only supported in the Windows native client.
-    streaming_experience_settings: ?StreamingExperienceSettings,
+    streaming_experience_settings: ?StreamingExperienceSettings = null,
 
     /// The actions that are enabled or disabled for users during their streaming
     /// sessions. By default these actions are enabled.
-    user_settings: ?[]const UserSetting,
+    user_settings: ?[]const UserSetting = null,
 
     pub const json_field_names = .{
         .access_endpoints = "AccessEndpoints",

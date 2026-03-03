@@ -8,7 +8,7 @@ pub const AudioSilenceFailoverSettings = struct {
     /// The amount of time (in milliseconds) that the active input must be silent
     /// before automatic input failover occurs. Silence is defined as audio loss or
     /// audio quieter than -50 dBFS.
-    audio_silence_threshold_msec: ?i32,
+    audio_silence_threshold_msec: ?i32 = null,
 
     pub const json_field_names = .{
         .audio_selector_name = "AudioSelectorName",

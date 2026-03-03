@@ -6,10 +6,10 @@ const KubernetesWorkloadDetails = @import("kubernetes_workload_details.zig").Kub
 /// in a Kubernetes finding.
 pub const KubernetesDetails = struct {
     /// Details about the Kubernetes user involved in a Kubernetes finding.
-    kubernetes_user_details: ?KubernetesUserDetails,
+    kubernetes_user_details: ?KubernetesUserDetails = null,
 
     /// Details about the Kubernetes workload involved in a Kubernetes finding.
-    kubernetes_workload_details: ?KubernetesWorkloadDetails,
+    kubernetes_workload_details: ?KubernetesWorkloadDetails = null,
 
     pub const json_field_names = .{
         .kubernetes_user_details = "KubernetesUserDetails",

@@ -17,7 +17,7 @@ pub const EntityInfo = struct {
     /// The path to the entity (user or role). For more information about paths, see
     /// [IAM
     /// identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the *IAM User Guide*.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// The type of entity (user or role).
     @"type": policyOwnerEntityType,

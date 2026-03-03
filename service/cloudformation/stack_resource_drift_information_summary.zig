@@ -7,7 +7,7 @@ pub const StackResourceDriftInformationSummary = struct {
     /// When CloudFormation last checked if the resource had drifted from its
     /// expected
     /// configuration.
-    last_check_timestamp: ?i64,
+    last_check_timestamp: ?i64 = null,
 
     /// Status of the resource's actual configuration compared to its expected
     /// configuration.

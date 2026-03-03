@@ -5,14 +5,14 @@ const S3Object = @import("s3_object.zig").S3Object;
 /// trail
 /// purposes, returned as Base64-encoded bytes.
 pub const AuditImage = struct {
-    bounding_box: ?BoundingBox,
+    bounding_box: ?BoundingBox = null,
 
     /// The Base64-encoded bytes representing an image selected from the Face
     /// Liveness video and
     /// returned for audit purposes.
-    bytes: ?[]const u8,
+    bytes: ?[]const u8 = null,
 
-    s3_object: ?S3Object,
+    s3_object: ?S3Object = null,
 
     pub const json_field_names = .{
         .bounding_box = "BoundingBox",

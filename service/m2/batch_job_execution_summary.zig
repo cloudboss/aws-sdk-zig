@@ -8,22 +8,22 @@ pub const BatchJobExecutionSummary = struct {
     application_id: []const u8,
 
     /// The unique identifier of this batch job.
-    batch_job_identifier: ?BatchJobIdentifier,
+    batch_job_identifier: ?BatchJobIdentifier = null,
 
     /// The timestamp when this batch job execution ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The unique identifier of this execution of the batch job.
     execution_id: []const u8,
 
     /// The unique identifier of a particular batch job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The name of a particular batch job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The type of a particular batch job execution.
-    job_type: ?BatchJobType,
+    job_type: ?BatchJobType = null,
 
     /// The batch job return code from either the Blu Age or Micro Focus runtime
     /// engines. For more
@@ -31,7 +31,7 @@ pub const BatchJobExecutionSummary = struct {
     /// codes](https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes)
     /// in the *IBM WebSphere Application Server*
     /// documentation.
-    return_code: ?[]const u8,
+    return_code: ?[]const u8 = null,
 
     /// The timestamp when a particular batch job execution started.
     start_time: i64,

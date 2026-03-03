@@ -30,11 +30,11 @@ pub const Rule = struct {
     /// 128 and minimum length one. It can't contain
     /// whitespace or metric names reserved for AWS WAF, including "All" and
     /// "Default_Action." You can't change `MetricName` after you create the `Rule`.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The friendly name or description for the `Rule`. You can't change the name
     /// of a `Rule` after you create it.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The `Predicates` object contains one `Predicate` element for each
     /// ByteMatchSet, IPSet, or

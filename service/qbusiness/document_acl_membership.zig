@@ -6,11 +6,11 @@ const MemberRelation = @import("member_relation.zig").MemberRelation;
 pub const DocumentAclMembership = struct {
     /// An array of conditions that define the membership rules. Each condition
     /// specifies criteria for users or groups to be included in this membership.
-    conditions: ?[]const DocumentAclCondition,
+    conditions: ?[]const DocumentAclCondition = null,
 
     /// The logical relation between members in the membership rule, determining how
     /// multiple conditions are combined.
-    member_relation: ?MemberRelation,
+    member_relation: ?MemberRelation = null,
 
     pub const json_field_names = .{
         .conditions = "conditions",

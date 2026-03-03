@@ -9,7 +9,7 @@ pub const OverallTestResultItem = struct {
     multi_turn_conversation: bool = false,
 
     /// The number of speech transcription results in the overall test.
-    speech_transcription_result_counts: ?[]const aws.map.MapEntry(i32),
+    speech_transcription_result_counts: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The total number of overall results in the result of the test execution.
     total_result_count: i32,

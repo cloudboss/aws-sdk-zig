@@ -9,13 +9,13 @@ pub const Association = struct {
     /// The ID created by the system when you create an association. An association
     /// is a binding
     /// between a document and a set of targets with a schedule.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The association name.
-    association_name: ?[]const u8,
+    association_name: ?[]const u8 = null,
 
     /// The association version.
-    association_version: ?[]const u8,
+    association_version: ?[]const u8 = null,
 
     /// The version of the document used in the association. If you change a
     /// document version for a
@@ -32,46 +32,46 @@ pub const Association = struct {
     /// new version was processed. If you want to run an association using a new
     /// version of a document
     /// shared form another account, you must set the document version to `default`.
-    document_version: ?[]const u8,
+    document_version: ?[]const u8 = null,
 
     /// The number of hours that an association can run on specified targets. After
     /// the resulting
     /// cutoff time passes, associations that are currently running are cancelled,
     /// and no pending
     /// executions are started on remaining targets.
-    duration: ?i32,
+    duration: ?i32 = null,
 
     /// The managed node ID.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The date on which the association was last run.
-    last_execution_date: ?i64,
+    last_execution_date: ?i64 = null,
 
     /// The name of the SSM document.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Information about the association.
-    overview: ?AssociationOverview,
+    overview: ?AssociationOverview = null,
 
     /// A cron expression that specifies a schedule when the association runs. The
     /// schedule runs in
     /// Coordinated Universal Time (UTC).
-    schedule_expression: ?[]const u8,
+    schedule_expression: ?[]const u8 = null,
 
     /// Number of days to wait after the scheduled day to run an association.
-    schedule_offset: ?i32,
+    schedule_offset: ?i32 = null,
 
     /// A key-value mapping of document parameters to target resources. Both Targets
     /// and TargetMaps
     /// can't be specified together.
-    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8),
+    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8) = null,
 
     /// The managed nodes targeted by the request to create an association. You can
     /// target all
     /// managed nodes in an Amazon Web Services account by specifying the
     /// `InstanceIds` key with a value of
     /// `*`.
-    targets: ?[]const Target,
+    targets: ?[]const Target = null,
 
     pub const json_field_names = .{
         .association_id = "AssociationId",

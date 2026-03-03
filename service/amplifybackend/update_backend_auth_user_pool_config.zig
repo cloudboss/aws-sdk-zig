@@ -9,23 +9,23 @@ const UpdateBackendAuthVerificationMessageConfig = @import("update_backend_auth_
 pub const UpdateBackendAuthUserPoolConfig = struct {
     /// **(DEPRECATED)** Describes the forgot password policy for your Amazon
     /// Cognito user pool, configured as a part of your Amplify project.
-    forgot_password: ?UpdateBackendAuthForgotPasswordConfig,
+    forgot_password: ?UpdateBackendAuthForgotPasswordConfig = null,
 
     /// Describes whether to apply multi-factor authentication policies for your
     /// Amazon Cognito user pool configured as a part of your Amplify project.
-    mfa: ?UpdateBackendAuthMFAConfig,
+    mfa: ?UpdateBackendAuthMFAConfig = null,
 
     /// Describes the OAuth policy and rules for your Amazon Cognito user pool,
     /// configured as a part of your Amplify project.
-    o_auth: ?UpdateBackendAuthOAuthConfig,
+    o_auth: ?UpdateBackendAuthOAuthConfig = null,
 
     /// Describes the password policy for your Amazon Cognito user pool, configured
     /// as a part of your Amplify project.
-    password_policy: ?UpdateBackendAuthPasswordPolicyConfig,
+    password_policy: ?UpdateBackendAuthPasswordPolicyConfig = null,
 
     /// Describes the email or SMS verification message for your Amazon Cognito user
     /// pool, configured as a part of your Amplify project.
-    verification_message: ?UpdateBackendAuthVerificationMessageConfig,
+    verification_message: ?UpdateBackendAuthVerificationMessageConfig = null,
 
     pub const json_field_names = .{
         .forgot_password = "ForgotPassword",

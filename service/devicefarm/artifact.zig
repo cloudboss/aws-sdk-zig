@@ -4,13 +4,13 @@ const ArtifactType = @import("artifact_type.zig").ArtifactType;
 /// screenshots.
 pub const Artifact = struct {
     /// The artifact's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The artifact's file extension.
-    extension: ?[]const u8,
+    extension: ?[]const u8 = null,
 
     /// The artifact's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The artifact's type.
     ///
@@ -58,12 +58,12 @@ pub const Artifact = struct {
     /// * CUSTOMER_ARTIFACT_LOG
     ///
     /// * TESTSPEC_OUTPUT
-    @"type": ?ArtifactType,
+    @"type": ?ArtifactType = null,
 
     /// The presigned Amazon S3 URL that can be used with a GET request to download
     /// the artifact's
     /// file.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

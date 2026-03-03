@@ -5,7 +5,7 @@ const FleetStatus = @import("fleet_status.zig").FleetStatus;
 /// The details of a fleet.
 pub const FleetSummary = struct {
     /// The Auto Scaling status of a fleet.
-    auto_scaling_status: ?AutoScalingStatus,
+    auto_scaling_status: ?AutoScalingStatus = null,
 
     /// The configuration details for the fleet.
     configuration: FleetConfiguration,
@@ -39,16 +39,16 @@ pub const FleetSummary = struct {
     status: FleetStatus,
 
     /// A message that communicates a suspended status of the fleet.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The target number of workers in a fleet.
-    target_worker_count: ?i32,
+    target_worker_count: ?i32 = null,
 
     /// The date and time the resource was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user or system that updated this resource.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     /// The number of workers in the fleet summary.
     worker_count: i32,

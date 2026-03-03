@@ -21,7 +21,7 @@ pub const AccessRules = struct {
     /// individual objects to public (read-only) using the `public-read` ACL, or to
     /// private
     /// using the `private` ACL.
-    allow_public_overrides: ?bool,
+    allow_public_overrides: ?bool = null,
 
     /// Specifies the anonymous access to all objects in a bucket.
     ///
@@ -45,7 +45,7 @@ pub const AccessRules = struct {
     /// ACL. Individual objects with a `public-read` ACL are readable by anyone in
     /// the
     /// world.
-    get_object: ?AccessType,
+    get_object: ?AccessType = null,
 
     pub const json_field_names = .{
         .allow_public_overrides = "allowPublicOverrides",

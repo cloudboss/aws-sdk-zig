@@ -6,13 +6,13 @@ pub const CurrentRevision = struct {
     /// The date and time when the most recent revision of the artifact was created,
     /// in
     /// timestamp format.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The revision ID of the current version of an artifact.
     revision: []const u8,
 
     /// The summary of the most recent revision of the artifact.
-    revision_summary: ?[]const u8,
+    revision_summary: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .change_identifier = "changeIdentifier",

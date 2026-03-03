@@ -7,10 +7,10 @@ const ResultSetMetadata = @import("result_set_metadata.zig").ResultSetMetadata;
 /// Use the `BatchExecuteStatement` or `ExecuteStatement` operation instead.
 pub const ResultFrame = struct {
     /// The records in the result set.
-    records: ?[]const Record,
+    records: ?[]const Record = null,
 
     /// The result-set metadata in the result set.
-    result_set_metadata: ?ResultSetMetadata,
+    result_set_metadata: ?ResultSetMetadata = null,
 
     pub const json_field_names = .{
         .records = "records",

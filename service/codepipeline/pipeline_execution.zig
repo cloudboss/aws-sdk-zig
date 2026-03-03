@@ -10,27 +10,27 @@ const ResolvedPipelineVariable = @import("resolved_pipeline_variable.zig").Resol
 pub const PipelineExecution = struct {
     /// A list of `ArtifactRevision` objects included in a pipeline
     /// execution.
-    artifact_revisions: ?[]const ArtifactRevision,
+    artifact_revisions: ?[]const ArtifactRevision = null,
 
     /// The method that the pipeline will use to handle multiple executions. The
     /// default
     /// mode is SUPERSEDED.
-    execution_mode: ?ExecutionMode,
+    execution_mode: ?ExecutionMode = null,
 
     /// The type of the pipeline execution.
-    execution_type: ?ExecutionType,
+    execution_type: ?ExecutionType = null,
 
     /// The ID of the pipeline execution.
-    pipeline_execution_id: ?[]const u8,
+    pipeline_execution_id: ?[]const u8 = null,
 
     /// The name of the pipeline with the specified pipeline execution.
-    pipeline_name: ?[]const u8,
+    pipeline_name: ?[]const u8 = null,
 
     /// The version number of the pipeline with the specified pipeline execution.
-    pipeline_version: ?i32,
+    pipeline_version: ?i32 = null,
 
     /// The metadata about the execution pertaining to stage rollback.
-    rollback_metadata: ?PipelineRollbackMetadata,
+    rollback_metadata: ?PipelineRollbackMetadata = null,
 
     /// The status of the pipeline execution.
     ///
@@ -59,15 +59,15 @@ pub const PipelineExecution = struct {
     /// Executions](https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded).
     ///
     /// * Failed: The pipeline execution was not completed successfully.
-    status: ?PipelineExecutionStatus,
+    status: ?PipelineExecutionStatus = null,
 
     /// A summary that contains a description of the pipeline execution status.
-    status_summary: ?[]const u8,
+    status_summary: ?[]const u8 = null,
 
-    trigger: ?ExecutionTrigger,
+    trigger: ?ExecutionTrigger = null,
 
     /// A list of pipeline variables used for the pipeline execution.
-    variables: ?[]const ResolvedPipelineVariable,
+    variables: ?[]const ResolvedPipelineVariable = null,
 
     pub const json_field_names = .{
         .artifact_revisions = "artifactRevisions",

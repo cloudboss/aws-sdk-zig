@@ -33,7 +33,7 @@ pub const SmbMountOptions = struct {
     /// The `SMB1` option isn't available when [creating an Amazon FSx for NetApp
     /// ONTAP
     /// location](https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationFsxOntap.html).
-    version: ?SmbVersion,
+    version: ?SmbVersion = null,
 
     pub const json_field_names = .{
         .version = "Version",

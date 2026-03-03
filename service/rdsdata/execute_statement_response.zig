@@ -7,7 +7,7 @@ const Field = @import("field.zig").Field;
 pub const ExecuteStatementResponse = struct {
     /// Metadata for the columns included in the results. This field is blank if the
     /// `formatRecordsAs` parameter is set to `JSON`.
-    column_metadata: ?[]const ColumnMetadata,
+    column_metadata: ?[]const ColumnMetadata = null,
 
     /// A string value that represents the result set of a `SELECT` statement
     /// in JSON format. This value is only present when the `formatRecordsAs`
@@ -16,7 +16,7 @@ pub const ExecuteStatementResponse = struct {
     /// The size limit for this field is currently 10 MB. If the JSON-formatted
     /// string representing the
     /// result set requires more than 10 MB, the call returns an error.
-    formatted_records: ?[]const u8,
+    formatted_records: ?[]const u8 = null,
 
     /// Values for fields generated during a DML request.
     ///
@@ -25,14 +25,14 @@ pub const ExecuteStatementResponse = struct {
     /// more information, see [Returning Data From
     /// Modified Rows](https://www.postgresql.org/docs/10/dml-returning.html) in the
     /// PostgreSQL documentation.
-    generated_fields: ?[]const Field,
+    generated_fields: ?[]const Field = null,
 
     /// The number of records updated by the request.
     number_of_records_updated: i64 = 0,
 
     /// The records returned by the SQL statement. This field is blank if the
     /// `formatRecordsAs` parameter is set to `JSON`.
-    records: ?[]const []const Field,
+    records: ?[]const []const Field = null,
 
     pub const json_field_names = .{
         .column_metadata = "columnMetadata",

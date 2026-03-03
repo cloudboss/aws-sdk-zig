@@ -10,22 +10,22 @@ const ResourceSpec = @import("resource_spec.zig").ResourceSpec;
 pub const CodeEditorAppSettings = struct {
     /// Settings that are used to configure and manage the lifecycle of CodeEditor
     /// applications.
-    app_lifecycle_management: ?AppLifecycleManagement,
+    app_lifecycle_management: ?AppLifecycleManagement = null,
 
     /// The lifecycle configuration that runs before the default lifecycle
     /// configuration. It can override changes made in the default lifecycle
     /// configuration.
-    built_in_lifecycle_config_arn: ?[]const u8,
+    built_in_lifecycle_config_arn: ?[]const u8 = null,
 
     /// A list of custom SageMaker images that are configured to run as a Code
     /// Editor app.
-    custom_images: ?[]const CustomImage,
+    custom_images: ?[]const CustomImage = null,
 
-    default_resource_spec: ?ResourceSpec,
+    default_resource_spec: ?ResourceSpec = null,
 
     /// The Amazon Resource Name (ARN) of the Code Editor application lifecycle
     /// configuration.
-    lifecycle_config_arns: ?[]const []const u8,
+    lifecycle_config_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .app_lifecycle_management = "AppLifecycleManagement",

@@ -7,23 +7,23 @@ const TrainingType = @import("training_type.zig").TrainingType;
 pub const SolutionVersionSummary = struct {
     /// The date and time (in Unix time) that this version of a solution was
     /// created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// If a solution version fails, the reason behind the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The date and time (in Unix time) that the solution version was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the solution version.
-    solution_version_arn: ?[]const u8,
+    solution_version_arn: ?[]const u8 = null,
 
     /// The status of the solution version.
     ///
     /// A solution version can be in one of the following states:
     ///
     /// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The scope of training to be performed when creating the solution version. A
     /// `FULL` training considers all of the data in your dataset group.
@@ -31,10 +31,10 @@ pub const SolutionVersionSummary = struct {
     /// has changed since the latest training. Only solution versions created with
     /// the User-Personalization
     /// recipe can use `UPDATE`.
-    training_mode: ?TrainingMode,
+    training_mode: ?TrainingMode = null,
 
     /// Whether the solution version was created automatically or manually.
-    training_type: ?TrainingType,
+    training_type: ?TrainingType = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

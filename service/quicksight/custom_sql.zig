@@ -3,7 +3,7 @@ const InputColumn = @import("input_column.zig").InputColumn;
 /// A physical table type built from the results of the custom SQL query.
 pub const CustomSql = struct {
     /// The column schema from the SQL query result set.
-    columns: ?[]const InputColumn,
+    columns: ?[]const InputColumn = null,
 
     /// The Amazon Resource Name (ARN) of the data source.
     data_source_arn: []const u8,

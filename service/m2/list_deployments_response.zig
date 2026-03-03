@@ -7,7 +7,7 @@ pub const ListDeploymentsResponse = struct {
     /// If there are more items to return, this contains a token
     /// that is passed to a subsequent call to this operation to retrieve the next
     /// set of items.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .deployments = "deployments",

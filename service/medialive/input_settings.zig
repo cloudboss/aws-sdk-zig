@@ -13,34 +13,34 @@ const VideoSelector = @import("video_selector.zig").VideoSelector;
 pub const InputSettings = struct {
     /// Used to select the audio stream to decode for inputs that have multiple
     /// available.
-    audio_selectors: ?[]const AudioSelector,
+    audio_selectors: ?[]const AudioSelector = null,
 
     /// Used to select the caption input to use for inputs that have multiple
     /// available.
-    caption_selectors: ?[]const CaptionSelector,
+    caption_selectors: ?[]const CaptionSelector = null,
 
     /// Enable or disable the deblock filter when filtering.
-    deblock_filter: ?InputDeblockFilter,
+    deblock_filter: ?InputDeblockFilter = null,
 
     /// Enable or disable the denoise filter when filtering.
-    denoise_filter: ?InputDenoiseFilter,
+    denoise_filter: ?InputDenoiseFilter = null,
 
     /// Adjusts the magnitude of filtering from 1 (minimal) to 5 (strongest).
-    filter_strength: ?i32,
+    filter_strength: ?i32 = null,
 
     /// Turns on the filter for this input. MPEG-2 inputs have the deblocking filter
     /// enabled by default.
     /// 1) auto - filtering will be applied depending on input type/quality
     /// 2) disabled - no filtering will be applied to the input
     /// 3) forced - filtering will be applied regardless of input type
-    input_filter: ?InputFilter,
+    input_filter: ?InputFilter = null,
 
     /// Input settings.
-    network_input_settings: ?NetworkInputSettings,
+    network_input_settings: ?NetworkInputSettings = null,
 
     /// PID from which to read SCTE-35 messages. If left undefined, EML will select
     /// the first SCTE-35 PID found in the input.
-    scte_35_pid: ?i32,
+    scte_35_pid: ?i32 = null,
 
     /// Specifies whether to extract applicable ancillary data from a SMPTE-2038
     /// source in this input. Applicable data types are captions, timecode, AFD, and
@@ -48,15 +48,15 @@ pub const InputSettings = struct {
     /// - PREFER: Extract from SMPTE-2038 if present in this input, otherwise
     /// extract from another source (if any).
     /// - IGNORE: Never extract any ancillary data from SMPTE-2038.
-    smpte_2038_data_preference: ?Smpte2038DataPreference,
+    smpte_2038_data_preference: ?Smpte2038DataPreference = null,
 
     /// Loop input if it is a file. This allows a file input to be streamed
     /// indefinitely.
-    source_end_behavior: ?InputSourceEndBehavior,
+    source_end_behavior: ?InputSourceEndBehavior = null,
 
     /// Informs which video elementary stream to decode for input types that have
     /// multiple available.
-    video_selector: ?VideoSelector,
+    video_selector: ?VideoSelector = null,
 
     pub const json_field_names = .{
         .audio_selectors = "AudioSelectors",

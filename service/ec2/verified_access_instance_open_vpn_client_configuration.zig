@@ -3,8 +3,8 @@ const VerifiedAccessInstanceOpenVpnClientConfigurationRoute = @import("verified_
 /// Describes a set of routes.
 pub const VerifiedAccessInstanceOpenVpnClientConfiguration = struct {
     /// The base64-encoded Open VPN client configuration.
-    config: ?[]const u8,
+    config: ?[]const u8 = null,
 
     /// The routes.
-    routes: ?[]const VerifiedAccessInstanceOpenVpnClientConfigurationRoute,
+    routes: ?[]const VerifiedAccessInstanceOpenVpnClientConfigurationRoute = null,
 };

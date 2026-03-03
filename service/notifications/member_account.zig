@@ -7,7 +7,7 @@ pub const MemberAccount = struct {
 
     /// The Amazon Resource Name (ARN) of the notification configuration associated
     /// with the member account.
-    notification_configuration_arn: ?[]const u8,
+    notification_configuration_arn: ?[]const u8 = null,
 
     /// The unique identifier of the organizational unit containing the member
     /// account.

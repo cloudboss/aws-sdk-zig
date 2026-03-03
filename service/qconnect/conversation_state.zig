@@ -4,7 +4,7 @@ const ConversationStatus = @import("conversation_status.zig").ConversationStatus
 /// The conversation state associated to a message.
 pub const ConversationState = struct {
     /// The reason of the conversation state.
-    reason: ?ConversationStatusReason,
+    reason: ?ConversationStatusReason = null,
 
     /// The status of the conversation state.
     status: ConversationStatus,

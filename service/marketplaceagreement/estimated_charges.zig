@@ -21,10 +21,10 @@ pub const EstimatedCharges = struct {
     /// `ConfigurableUpfrontPricingTerm` or `RecurringPaymentTerm`. This occurs for
     /// usage-based pricing (such as SaaS metered or AMI/container hourly or
     /// monthly), because the exact usage is not known upfront.
-    agreement_value: ?[]const u8,
+    agreement_value: ?[]const u8 = null,
 
     /// Defines the currency code for the charge.
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .agreement_value = "agreementValue",

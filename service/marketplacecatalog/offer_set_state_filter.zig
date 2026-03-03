@@ -3,7 +3,7 @@ const OfferSetStateString = @import("offer_set_state_string.zig").OfferSetStateS
 /// Allows filtering on the `State` of an offer set.
 pub const OfferSetStateFilter = struct {
     /// Allows filtering on the `State` of an offer set with list input.
-    value_list: ?[]const OfferSetStateString,
+    value_list: ?[]const OfferSetStateString = null,
 
     pub const json_field_names = .{
         .value_list = "ValueList",

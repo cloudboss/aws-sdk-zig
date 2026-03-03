@@ -13,7 +13,7 @@ pub const SyncConfiguration = struct {
     /// The file path to the configuration file associated with a specific sync
     /// configuration. The path should point to an actual file in the sync
     /// configurations linked repository.
-    config_file: ?[]const u8,
+    config_file: ?[]const u8 = null,
 
     /// The owner ID for the repository associated with a specific sync
     /// configuration, such as
@@ -27,11 +27,11 @@ pub const SyncConfiguration = struct {
 
     /// Whether to enable or disable publishing of deployment status to source
     /// providers.
-    publish_deployment_status: ?PublishDeploymentStatus,
+    publish_deployment_status: ?PublishDeploymentStatus = null,
 
     /// A toggle that specifies whether to enable or disable pull request comments
     /// for the sync configuration to be created.
-    pull_request_comment: ?PullRequestComment,
+    pull_request_comment: ?PullRequestComment = null,
 
     /// The ID of the repository link associated with a specific sync configuration.
     repository_link_id: []const u8,
@@ -51,7 +51,7 @@ pub const SyncConfiguration = struct {
     sync_type: SyncConfigurationType,
 
     /// When to trigger Git sync to begin the stack update.
-    trigger_resource_update_on: ?TriggerResourceUpdateOn,
+    trigger_resource_update_on: ?TriggerResourceUpdateOn = null,
 
     pub const json_field_names = .{
         .branch = "Branch",

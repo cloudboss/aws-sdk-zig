@@ -5,13 +5,13 @@
 /// errors.
 pub const DisassociateClientDeviceFromCoreDeviceErrorEntry = struct {
     /// The error code for the request.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// A message that provides additional information about the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The name of the IoT thing whose disassociate request failed.
-    thing_name: ?[]const u8,
+    thing_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

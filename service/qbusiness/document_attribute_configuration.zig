@@ -9,14 +9,14 @@ const AttributeType = @import("attribute_type.zig").AttributeType;
 /// attributes](https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes.html).
 pub const DocumentAttributeConfiguration = struct {
     /// The name of the document attribute.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Information about whether the document attribute can be used by an end user
     /// to search for information on their web experience.
-    search: ?Status,
+    search: ?Status = null,
 
     /// The type of document attribute.
-    @"type": ?AttributeType,
+    @"type": ?AttributeType = null,
 
     pub const json_field_names = .{
         .name = "name",

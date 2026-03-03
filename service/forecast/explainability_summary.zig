@@ -6,18 +6,18 @@ const ExplainabilityConfig = @import("explainability_config.zig").Explainability
 /// `ExplainabilityArn`.
 pub const ExplainabilitySummary = struct {
     /// When the Explainability was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the Explainability.
-    explainability_arn: ?[]const u8,
+    explainability_arn: ?[]const u8 = null,
 
     /// The configuration settings that define the granularity of time series and
     /// time points
     /// for the Explainability.
-    explainability_config: ?ExplainabilityConfig,
+    explainability_config: ?ExplainabilityConfig = null,
 
     /// The name of the Explainability.
-    explainability_name: ?[]const u8,
+    explainability_name: ?[]const u8 = null,
 
     /// The last time the resource was modified. The timestamp depends on the status
     /// of the
@@ -33,17 +33,17 @@ pub const ExplainabilitySummary = struct {
     ///
     /// * `ACTIVE` or `CREATE_FAILED` - When the job finished or
     /// failed.
-    last_modification_time: ?i64,
+    last_modification_time: ?i64 = null,
 
     /// Information about any errors that may have occurred during the
     /// Explainability creation
     /// process.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Predictor or Forecast used to create
     /// the
     /// Explainability.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The status of the Explainability. States include:
     ///
@@ -56,7 +56,7 @@ pub const ExplainabilitySummary = struct {
     ///
     /// * `DELETE_PENDING`, `DELETE_IN_PROGRESS`,
     /// `DELETE_FAILED`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

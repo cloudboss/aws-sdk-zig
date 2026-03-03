@@ -10,40 +10,40 @@ const WorkflowRun = @import("workflow_run.zig").WorkflowRun;
 pub const Workflow = struct {
     /// This structure indicates the details of the blueprint that this particular
     /// workflow is created from.
-    blueprint_details: ?BlueprintDetails,
+    blueprint_details: ?BlueprintDetails = null,
 
     /// The date and time when the workflow was created.
-    created_on: ?i64,
+    created_on: ?i64 = null,
 
     /// A collection of properties to be used as part of each execution of the
     /// workflow.
     /// The run properties are made available to each job in the workflow. A job can
     /// modify
     /// the properties for the next jobs in the flow.
-    default_run_properties: ?[]const aws.map.StringMapEntry,
+    default_run_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// A description of the workflow.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The graph representing all the Glue components that belong to the workflow
     /// as nodes and directed
     /// connections between them as edges.
-    graph: ?WorkflowGraph,
+    graph: ?WorkflowGraph = null,
 
     /// The date and time when the workflow was last modified.
-    last_modified_on: ?i64,
+    last_modified_on: ?i64 = null,
 
     /// The information about the last execution of the workflow.
-    last_run: ?WorkflowRun,
+    last_run: ?WorkflowRun = null,
 
     /// You can use this parameter to prevent unwanted multiple updates to data, to
     /// control costs, or in some cases, to prevent exceeding the maximum number of
     /// concurrent runs of any of the component jobs. If you leave this parameter
     /// blank, there is no limit to the number of concurrent workflow runs.
-    max_concurrent_runs: ?i32,
+    max_concurrent_runs: ?i32 = null,
 
     /// The name of the workflow.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .blueprint_details = "BlueprintDetails",

@@ -7,34 +7,34 @@ const ViolationEventType = @import("violation_event_type.zig").ViolationEventTyp
 /// Information about a Device Defender security profile behavior violation.
 pub const ViolationEvent = struct {
     /// The behavior that was violated.
-    behavior: ?Behavior,
+    behavior: ?Behavior = null,
 
     /// The value of the metric (the measurement).
-    metric_value: ?MetricValue,
+    metric_value: ?MetricValue = null,
 
     /// The name of the security profile whose behavior was violated.
-    security_profile_name: ?[]const u8,
+    security_profile_name: ?[]const u8 = null,
 
     /// The name of the thing responsible for the violation event.
-    thing_name: ?[]const u8,
+    thing_name: ?[]const u8 = null,
 
     /// The verification state of the violation (detect alarm).
-    verification_state: ?VerificationState,
+    verification_state: ?VerificationState = null,
 
     /// The description of the verification state of the violation.
-    verification_state_description: ?[]const u8,
+    verification_state_description: ?[]const u8 = null,
 
     /// The details of a violation event.
-    violation_event_additional_info: ?ViolationEventAdditionalInfo,
+    violation_event_additional_info: ?ViolationEventAdditionalInfo = null,
 
     /// The time the violation event occurred.
-    violation_event_time: ?i64,
+    violation_event_time: ?i64 = null,
 
     /// The type of violation event.
-    violation_event_type: ?ViolationEventType,
+    violation_event_type: ?ViolationEventType = null,
 
     /// The ID of the violation event.
-    violation_id: ?[]const u8,
+    violation_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .behavior = "behavior",

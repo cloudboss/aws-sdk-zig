@@ -10,7 +10,7 @@ pub const CardStatus = struct {
     current_value: []const u8,
 
     /// A list of previous submissions, if the card is a form card.
-    submissions: ?[]const Submission,
+    submissions: ?[]const Submission = null,
 
     pub const json_field_names = .{
         .current_state = "currentState",

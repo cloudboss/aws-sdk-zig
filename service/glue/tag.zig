@@ -11,11 +11,11 @@
 pub const Tag = struct {
     /// The tag key. The key is required when you create a tag on an object. The key
     /// is case-sensitive, and must not contain the prefix aws.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The tag value. The value is optional when you create a tag on an object. The
     /// value is case-sensitive, and must not contain the prefix aws.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "key",

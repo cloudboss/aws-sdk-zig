@@ -26,7 +26,7 @@ pub const TransformResources = struct {
     ///
     /// * Accelerator: GPU
     /// * NVIDIA driver version: 535
-    transform_ami_version: ?[]const u8,
+    transform_ami_version: ?[]const u8 = null,
 
     /// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
     /// that Amazon SageMaker uses to encrypt model data on the storage volume
@@ -52,7 +52,7 @@ pub const TransformResources = struct {
     ///   `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     /// * Alias name: `alias/ExampleAlias`
     /// * Alias name ARN: `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
-    volume_kms_key_id: ?[]const u8,
+    volume_kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .instance_count = "InstanceCount",

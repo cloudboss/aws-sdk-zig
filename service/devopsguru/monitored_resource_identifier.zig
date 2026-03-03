@@ -6,18 +6,18 @@ const ResourcePermission = @import("resource_permission.zig").ResourcePermission
 /// given to DevOps Guru to access that resource.
 pub const MonitoredResourceIdentifier = struct {
     /// The time at which DevOps Guru last updated this resource.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The name of the resource being monitored.
-    monitored_resource_name: ?[]const u8,
+    monitored_resource_name: ?[]const u8 = null,
 
-    resource_collection: ?ResourceCollection,
+    resource_collection: ?ResourceCollection = null,
 
     /// The permission status of a resource.
-    resource_permission: ?ResourcePermission,
+    resource_permission: ?ResourcePermission = null,
 
     /// The type of resource being monitored.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .last_updated = "LastUpdated",

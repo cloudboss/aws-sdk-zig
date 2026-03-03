@@ -7,7 +7,7 @@ pub const TargetDataSetting = struct {
     /// migration, either by leaving them untouched, dropping and recreating them,
     /// or truncating
     /// the existing data in the target tables.
-    table_preparation_mode: ?TablePreparationMode,
+    table_preparation_mode: ?TablePreparationMode = null,
 
     pub const json_field_names = .{
         .table_preparation_mode = "TablePreparationMode",

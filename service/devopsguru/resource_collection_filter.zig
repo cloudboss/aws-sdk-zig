@@ -12,7 +12,7 @@ pub const ResourceCollectionFilter = struct {
     /// information, see
     /// [Stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in the
     /// *Amazon Web Services CloudFormation User Guide*.
-    cloud_formation: ?CloudFormationCollectionFilter,
+    cloud_formation: ?CloudFormationCollectionFilter = null,
 
     /// The Amazon Web Services tags used to filter the resources in the resource
     /// collection.
@@ -56,7 +56,7 @@ pub const ResourceCollectionFilter = struct {
     /// *key*/*value* pairs in your
     /// application might be `Devops-Guru-production-application/RDS` or
     /// `Devops-Guru-production-application/containers`.
-    tags: ?[]const TagCollectionFilter,
+    tags: ?[]const TagCollectionFilter = null,
 
     pub const json_field_names = .{
         .cloud_formation = "CloudFormation",

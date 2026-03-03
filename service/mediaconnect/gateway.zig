@@ -14,10 +14,10 @@ pub const Gateway = struct {
     gateway_arn: []const u8,
 
     /// Messages with information about the gateway.
-    gateway_messages: ?[]const MessageDetail,
+    gateway_messages: ?[]const MessageDetail = null,
 
     /// The current status of the gateway.
-    gateway_state: ?GatewayState,
+    gateway_state: ?GatewayState = null,
 
     /// The name of the gateway. This name can not be modified after the gateway is
     /// created.

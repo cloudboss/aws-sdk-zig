@@ -11,7 +11,7 @@ pub const Relationship = struct {
     /// array of IDs for related blocks. You can get the type of the relationship
     /// from the
     /// `Type` element.
-    ids: ?[]const []const u8,
+    ids: ?[]const []const u8 = null,
 
     /// The type of relationship between the blocks in the IDs array and the current
     /// block. The
@@ -40,7 +40,7 @@ pub const Relationship = struct {
     ///
     /// * *TABLE_FOOTER* - A list of IDs that identify the TABLE_FOOTER
     /// block types in a table.
-    @"type": ?RelationshipType,
+    @"type": ?RelationshipType = null,
 
     pub const json_field_names = .{
         .ids = "Ids",

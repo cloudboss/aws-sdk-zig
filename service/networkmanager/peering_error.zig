@@ -4,20 +4,20 @@ const PermissionsErrorContext = @import("permissions_error_context.zig").Permiss
 /// Describes an error associated with a peering request.
 pub const PeeringError = struct {
     /// The error code for the peering request.
-    code: ?PeeringErrorCode,
+    code: ?PeeringErrorCode = null,
 
     /// The message associated with the error `code`.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Provides additional information about missing permissions for the peering
     /// error.
-    missing_permissions_context: ?PermissionsErrorContext,
+    missing_permissions_context: ?PermissionsErrorContext = null,
 
     /// The ID of the Peering request.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// The ARN of the requested peering resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

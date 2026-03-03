@@ -5,13 +5,13 @@ const ErrorCode = @import("error_code.zig").ErrorCode;
 pub const UnprocessedAccount = struct {
     /// The Amazon Web Services account ID for the account that the request applies
     /// to.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The source of the issue or delay in processing the request.
-    error_code: ?ErrorCode,
+    error_code: ?ErrorCode = null,
 
     /// The reason why the request hasn't been processed.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

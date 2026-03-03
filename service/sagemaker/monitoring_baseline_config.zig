@@ -6,15 +6,15 @@ const MonitoringStatisticsResource = @import("monitoring_statistics_resource.zig
 /// the series of jobs scheduled to collect data periodically.
 pub const MonitoringBaselineConfig = struct {
     /// The name of the job that performs baselining for the monitoring job.
-    baselining_job_name: ?[]const u8,
+    baselining_job_name: ?[]const u8 = null,
 
     /// The baseline constraint file in Amazon S3 that the current monitoring job
     /// should validated against.
-    constraints_resource: ?MonitoringConstraintsResource,
+    constraints_resource: ?MonitoringConstraintsResource = null,
 
     /// The baseline statistics file in Amazon S3 that the current monitoring job
     /// should be validated against.
-    statistics_resource: ?MonitoringStatisticsResource,
+    statistics_resource: ?MonitoringStatisticsResource = null,
 
     pub const json_field_names = .{
         .baselining_job_name = "BaseliningJobName",

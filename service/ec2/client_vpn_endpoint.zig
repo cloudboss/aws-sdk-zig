@@ -15,23 +15,23 @@ const VpnProtocol = @import("vpn_protocol.zig").VpnProtocol;
 pub const ClientVpnEndpoint = struct {
     /// Information about the associated target networks. A target network is a
     /// subnet in a VPC.
-    associated_target_networks: ?[]const AssociatedTargetNetwork,
+    associated_target_networks: ?[]const AssociatedTargetNetwork = null,
 
     /// Information about the authentication method used by the Client VPN endpoint.
-    authentication_options: ?[]const ClientVpnAuthentication,
+    authentication_options: ?[]const ClientVpnAuthentication = null,
 
     /// The IPv4 address range, in CIDR notation, from which client IP addresses are
     /// assigned.
-    client_cidr_block: ?[]const u8,
+    client_cidr_block: ?[]const u8 = null,
 
     /// The options for managing connection authorization for new client
     /// connections.
-    client_connect_options: ?ClientConnectResponseOptions,
+    client_connect_options: ?ClientConnectResponseOptions = null,
 
     /// Options for enabling a customizable text banner that will be displayed on
     /// Amazon Web Services provided clients when a VPN session is
     /// established.
-    client_login_banner_options: ?ClientLoginBannerResponseOptions,
+    client_login_banner_options: ?ClientLoginBannerResponseOptions = null,
 
     /// Client route enforcement is a feature of the Client VPN service that helps
     /// enforce administrator defined routes on devices connected through the VPN. T
@@ -44,57 +44,57 @@ pub const ClientVpnEndpoint = struct {
     /// detects any VPN routing policy modifications, it will automatically force an
     /// update to the route table,
     /// reverting it back to the expected route configurations.
-    client_route_enforcement_options: ?ClientRouteEnforcementResponseOptions,
+    client_route_enforcement_options: ?ClientRouteEnforcementResponseOptions = null,
 
     /// The ID of the Client VPN endpoint.
-    client_vpn_endpoint_id: ?[]const u8,
+    client_vpn_endpoint_id: ?[]const u8 = null,
 
     /// Information about the client connection logging options for the Client VPN
     /// endpoint.
-    connection_log_options: ?ConnectionLogResponseOptions,
+    connection_log_options: ?ConnectionLogResponseOptions = null,
 
     /// The date and time the Client VPN endpoint was created.
-    creation_time: ?[]const u8,
+    creation_time: ?[]const u8 = null,
 
     /// The date and time the Client VPN endpoint was deleted, if applicable.
-    deletion_time: ?[]const u8,
+    deletion_time: ?[]const u8 = null,
 
     /// A brief description of the endpoint.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether the client VPN session is disconnected after the maximum
     /// `sessionTimeoutHours` is reached. If `true`, users are prompted to reconnect
     /// client VPN. If `false`, client VPN attempts to reconnect automatically. The
     /// default value is `true`.
-    disconnect_on_session_timeout: ?bool,
+    disconnect_on_session_timeout: ?bool = null,
 
     /// The DNS name to be used by clients when connecting to the Client VPN
     /// endpoint.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// Information about the DNS servers to be used for DNS resolution.
-    dns_servers: ?[]const []const u8,
+    dns_servers: ?[]const []const u8 = null,
 
     /// The IP address type of the Client VPN endpoint. Possible values are `ipv4`
     /// for IPv4 addressing only, `ipv6` for IPv6 addressing only, or `dual-stack
     /// `for both IPv4 and IPv6 addressing.
-    endpoint_ip_address_type: ?EndpointIpAddressType,
+    endpoint_ip_address_type: ?EndpointIpAddressType = null,
 
     /// The IDs of the security groups for the target network.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The URL of the self-service portal.
-    self_service_portal_url: ?[]const u8,
+    self_service_portal_url: ?[]const u8 = null,
 
     /// The ARN of the server certificate.
-    server_certificate_arn: ?[]const u8,
+    server_certificate_arn: ?[]const u8 = null,
 
     /// The maximum VPN session duration time in hours.
     ///
     /// Valid values: `8 | 10 | 12 | 24`
     ///
     /// Default value: `24`
-    session_timeout_hours: ?i32,
+    session_timeout_hours: ?i32 = null,
 
     /// Indicates whether split-tunnel is enabled in the Client VPN endpoint.
     ///
@@ -102,28 +102,28 @@ pub const ClientVpnEndpoint = struct {
     /// VPN
     /// endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html)
     /// in the *Client VPN Administrator Guide*.
-    split_tunnel: ?bool,
+    split_tunnel: ?bool = null,
 
     /// The current state of the Client VPN endpoint.
-    status: ?ClientVpnEndpointStatus,
+    status: ?ClientVpnEndpointStatus = null,
 
     /// Any tags assigned to the Client VPN endpoint.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The IP address type of the Client VPN endpoint. Possible values are either
     /// `ipv4` for IPv4 addressing only, `ipv6` for IPv6 addressing only, or
     /// `dual-stack` for both IPv4 and IPv6 addressing.
-    traffic_ip_address_type: ?TrafficIpAddressType,
+    traffic_ip_address_type: ?TrafficIpAddressType = null,
 
     /// The transport protocol used by the Client VPN endpoint.
-    transport_protocol: ?TransportProtocol,
+    transport_protocol: ?TransportProtocol = null,
 
     /// The ID of the VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     /// The port number for the Client VPN endpoint.
-    vpn_port: ?i32,
+    vpn_port: ?i32 = null,
 
     /// The protocol used by the VPN session.
-    vpn_protocol: ?VpnProtocol,
+    vpn_protocol: ?VpnProtocol = null,
 };

@@ -16,24 +16,24 @@ pub const Block = struct {
     ///
     /// * LINE - A string of tab-delimited, contiguous words
     /// that are detected on a document page
-    block_type: ?BlockType,
+    block_type: ?BlockType = null,
 
     /// Co-ordinates of the rectangle or polygon that contains the text.
-    geometry: ?Geometry,
+    geometry: ?Geometry = null,
 
     /// Unique identifier for the block.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Page number where the block appears.
-    page: ?i32,
+    page: ?i32 = null,
 
     /// A list of child blocks of the current block.
     /// For example, a LINE object has child blocks for each WORD block that's part
     /// of the line of text.
-    relationships: ?[]const RelationshipsListItem,
+    relationships: ?[]const RelationshipsListItem = null,
 
     /// The word or line of text extracted from the block.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .block_type = "BlockType",

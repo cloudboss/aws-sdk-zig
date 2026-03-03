@@ -6,7 +6,7 @@ pub const OpenSearchResourceConfig = struct {
     /// OpenSearch Service, specify it here. If you omit this, a new application
     /// will be
     /// created.
-    application_arn: ?[]const u8,
+    application_arn: ?[]const u8 = null,
 
     /// Specify the ARNs of IAM roles and IAM users who you want to
     /// grant permission to for viewing the dashboards.
@@ -30,7 +30,7 @@ pub const OpenSearchResourceConfig = struct {
     /// CloudWatch Logs default encryption method, specify the ARN of the KMS key
     /// that you
     /// want to use.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// Specify how many days that you want the data derived by OpenSearch Service
     /// to be retained

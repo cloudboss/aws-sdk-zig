@@ -6,7 +6,7 @@ pub const OptionStatus = struct {
     creation_date: i64,
 
     /// Indicates that the option will be deleted once processing is complete.
-    pending_deletion: ?bool,
+    pending_deletion: ?bool = null,
 
     /// The state of processing a change to an option. Possible values:
     ///

@@ -13,7 +13,7 @@ pub const RoutingRule = struct {
     /// `/documents` folder. 2. If request results in HTTP error 4xx, redirect
     /// request to another
     /// host where you might process the error.
-    condition: ?Condition,
+    condition: ?Condition = null,
 
     /// Container for redirect information. You can redirect requests to another
     /// host, to another page, or

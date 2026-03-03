@@ -16,7 +16,7 @@ pub const CalculatedSpend = struct {
     /// The amount of cost, usage, RI units, or Savings Plans units that you're
     /// forecasted to
     /// use.
-    forecasted_spend: ?Spend,
+    forecasted_spend: ?Spend = null,
 
     pub const json_field_names = .{
         .actual_spend = "ActualSpend",

@@ -13,36 +13,36 @@ pub const SpaceSettings = struct {
     ///
     /// If using the [
     /// UpdateSpace](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateSpace.html) API, you can't change the app type of your space by specifying a different value for this field.
-    app_type: ?AppType,
+    app_type: ?AppType = null,
 
     /// The Code Editor application settings.
-    code_editor_app_settings: ?SpaceCodeEditorAppSettings,
+    code_editor_app_settings: ?SpaceCodeEditorAppSettings = null,
 
     /// A file system, created by you, that you assign to a space for an Amazon
     /// SageMaker AI Domain. Permitted users can access this file system in Amazon
     /// SageMaker AI Studio.
-    custom_file_systems: ?[]const CustomFileSystem,
+    custom_file_systems: ?[]const CustomFileSystem = null,
 
     /// The settings for the JupyterLab application.
-    jupyter_lab_app_settings: ?SpaceJupyterLabAppSettings,
+    jupyter_lab_app_settings: ?SpaceJupyterLabAppSettings = null,
 
-    jupyter_server_app_settings: ?JupyterServerAppSettings,
+    jupyter_server_app_settings: ?JupyterServerAppSettings = null,
 
-    kernel_gateway_app_settings: ?KernelGatewayAppSettings,
+    kernel_gateway_app_settings: ?KernelGatewayAppSettings = null,
 
     /// A setting that enables or disables remote access for a SageMaker space. When
     /// enabled, this allows you to connect to the remote space from your local IDE.
-    remote_access: ?FeatureStatus,
+    remote_access: ?FeatureStatus = null,
 
     /// If you enable this option, SageMaker AI creates the following resources on
     /// your behalf when you create the space:
     ///
     /// * The user profile that possesses the space.
     /// * The app that the space contains.
-    space_managed_resources: ?FeatureStatus,
+    space_managed_resources: ?FeatureStatus = null,
 
     /// The storage settings for a space.
-    space_storage_settings: ?SpaceStorageSettings,
+    space_storage_settings: ?SpaceStorageSettings = null,
 
     pub const json_field_names = .{
         .app_type = "AppType",

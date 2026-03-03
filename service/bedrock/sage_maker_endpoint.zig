@@ -17,10 +17,10 @@ pub const SageMakerEndpoint = struct {
     /// The Amazon Web Services KMS key that Amazon SageMaker uses to encrypt data
     /// on the storage volume attached to the Amazon EC2 compute instance that hosts
     /// the endpoint.
-    kms_encryption_key: ?[]const u8,
+    kms_encryption_key: ?[]const u8 = null,
 
     /// The VPC configuration for the endpoint.
-    vpc: ?VpcConfig,
+    vpc: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .execution_role = "executionRole",

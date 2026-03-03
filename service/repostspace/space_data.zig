@@ -13,17 +13,17 @@ pub const SpaceData = struct {
     configuration_status: ConfigurationStatus,
 
     /// The content size of the private re:Post.
-    content_size: ?i64,
+    content_size: ?i64 = null,
 
     /// The date when the private re:Post was created.
     create_date_time: i64,
 
     /// The date when the private re:Post was deleted.
-    delete_date_time: ?i64,
+    delete_date_time: ?i64 = null,
 
     /// The description for the private re:Post. This is used only to help you
     /// identify this private re:Post.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name for the private re:Post.
     name: []const u8,
@@ -40,16 +40,16 @@ pub const SpaceData = struct {
     /// The storage limit of the private re:Post.
     storage_limit: i64,
 
-    supported_email_domains: ?SupportedEmailDomainsStatus,
+    supported_email_domains: ?SupportedEmailDomainsStatus = null,
 
     /// The pricing tier of the private re:Post.
     tier: TierLevel,
 
     /// The number of onboarded users to the private re:Post.
-    user_count: ?i32,
+    user_count: ?i32 = null,
 
     /// The custom AWS KMS key ARN that’s used for the AWS KMS encryption.
-    user_kms_key: ?[]const u8,
+    user_kms_key: ?[]const u8 = null,
 
     /// This custom subdomain that you use to access your private re:Post. All
     /// custom subdomains must be approved by AWS before use.

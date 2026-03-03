@@ -6,16 +6,16 @@
 pub const VpcConfigOutput = struct {
     /// Indicates whether this canary allows outbound IPv6 traffic if it is
     /// connected to dual-stack subnets.
-    ipv_6_allowed_for_dual_stack: ?bool,
+    ipv_6_allowed_for_dual_stack: ?bool = null,
 
     /// The IDs of the security groups for this canary.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The IDs of the subnets where this canary is to run.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     /// The IDs of the VPC where this canary is to run.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ipv_6_allowed_for_dual_stack = "Ipv6AllowedForDualStack",

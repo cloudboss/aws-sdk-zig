@@ -8,11 +8,11 @@ pub const DataQualityEncryption = struct {
     ///
     /// Valid values are `SSEKMS` for encryption using a customer-managed KMS key,
     /// or `DISABLED`.
-    data_quality_encryption_mode: ?DataQualityEncryptionMode,
+    data_quality_encryption_mode: ?DataQualityEncryptionMode = null,
 
     /// The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the
     /// data.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_quality_encryption_mode = "DataQualityEncryptionMode",

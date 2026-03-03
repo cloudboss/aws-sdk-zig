@@ -5,14 +5,14 @@ const OperationStatus = @import("operation_status.zig").OperationStatus;
 /// A description of the application operation that provides information about
 /// the updates that were made to the application.
 pub const ApplicationOperationInfoDetails = struct {
-    application_version_change_details: ?ApplicationVersionChangeDetails,
+    application_version_change_details: ?ApplicationVersionChangeDetails = null,
 
     /// The timestamp that indicates when the operation finished.
     end_time: i64,
 
     operation: []const u8,
 
-    operation_failure_details: ?OperationFailureDetails,
+    operation_failure_details: ?OperationFailureDetails = null,
 
     operation_status: OperationStatus,
 

@@ -5,7 +5,7 @@ const TriggerMode = @import("trigger_mode.zig").TriggerMode;
 /// recognize what data to collect.
 pub const ConditionBasedCollectionScheme = struct {
     /// Specifies the version of the conditional expression language.
-    condition_language_version: ?i32,
+    condition_language_version: ?i32 = null,
 
     /// The logical expression used to recognize what data to collect. For example,
     /// `$variable.`Vehicle.OutsideAirTemperature` >= 105.0`.
@@ -16,7 +16,7 @@ pub const ConditionBasedCollectionScheme = struct {
     /// milliseconds.
     ///
     /// If a signal changes often, you might want to collect data at a slower rate.
-    minimum_trigger_interval_ms: ?i64,
+    minimum_trigger_interval_ms: ?i64 = null,
 
     /// Whether to collect data for all triggering events (`ALWAYS`). Specify
     /// (`RISING_EDGE`), or specify only when the condition first evaluates to
@@ -25,7 +25,7 @@ pub const ConditionBasedCollectionScheme = struct {
     /// triggering when the airbag is already exploded; they only care about the
     /// change from not
     /// deployed => deployed.
-    trigger_mode: ?TriggerMode,
+    trigger_mode: ?TriggerMode = null,
 
     pub const json_field_names = .{
         .condition_language_version = "conditionLanguageVersion",

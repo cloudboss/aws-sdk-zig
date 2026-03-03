@@ -5,46 +5,46 @@ const ManagedEndpointCredentials = @import("managed_endpoint_credentials.zig").M
 /// The Spark EMR properties.
 pub const SparkEmrPropertiesOutput = struct {
     /// The certificate data of the EMR on EKS cluster.
-    certificate_data: ?[]const u8,
+    certificate_data: ?[]const u8 = null,
 
     /// The compute ARN of the Spark EMR.
-    compute_arn: ?[]const u8,
+    compute_arn: ?[]const u8 = null,
 
     /// The credentials of the Spark EMR.
-    credentials: ?UsernamePassword,
+    credentials: ?UsernamePassword = null,
 
     /// The credential expiration of the Spark EMR.
-    credentials_expiration: ?i64,
+    credentials_expiration: ?i64 = null,
 
     /// The governance type of the Spark EMR.
-    governance_type: ?GovernanceType,
+    governance_type: ?GovernanceType = null,
 
     /// The instance profile ARN of the Spark EMR.
-    instance_profile_arn: ?[]const u8,
+    instance_profile_arn: ?[]const u8 = null,
 
     /// The Java virtual env of the Spark EMR.
-    java_virtual_env: ?[]const u8,
+    java_virtual_env: ?[]const u8 = null,
 
     /// The livy endpoint of the Spark EMR.
-    livy_endpoint: ?[]const u8,
+    livy_endpoint: ?[]const u8 = null,
 
     /// The log URI of the Spark EMR.
-    log_uri: ?[]const u8,
+    log_uri: ?[]const u8 = null,
 
     /// The managed endpoint ARN of the EMR on EKS cluster.
-    managed_endpoint_arn: ?[]const u8,
+    managed_endpoint_arn: ?[]const u8 = null,
 
     /// The managed endpoint credentials of the EMR on EKS cluster.
-    managed_endpoint_credentials: ?ManagedEndpointCredentials,
+    managed_endpoint_credentials: ?ManagedEndpointCredentials = null,
 
     /// The Python virtual env of the Spark EMR.
-    python_virtual_env: ?[]const u8,
+    python_virtual_env: ?[]const u8 = null,
 
     /// The runtime role of the Spark EMR.
-    runtime_role: ?[]const u8,
+    runtime_role: ?[]const u8 = null,
 
     /// The trusted certificate S3 URL of the Spark EMR.
-    trusted_certificates_s3_uri: ?[]const u8,
+    trusted_certificates_s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .certificate_data = "certificateData",

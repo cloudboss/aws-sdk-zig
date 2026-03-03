@@ -10,34 +10,34 @@ const WAFLoggingParameters = @import("waf_logging_parameters.zig").WAFLoggingPar
 pub const TelemetryDestinationConfiguration = struct {
     /// Configuration parameters specific to Amazon Web Services CloudTrail when
     /// CloudTrail is the source type.
-    cloudtrail_parameters: ?CloudtrailParameters,
+    cloudtrail_parameters: ?CloudtrailParameters = null,
 
     /// The pattern used to generate the destination path or name, supporting macros
     /// like <resourceId> and <accountId>.
-    destination_pattern: ?[]const u8,
+    destination_pattern: ?[]const u8 = null,
 
     /// The type of destination for the telemetry data (e.g., "Amazon CloudWatch
     /// Logs", "S3").
-    destination_type: ?DestinationType,
+    destination_type: ?DestinationType = null,
 
     /// Configuration parameters specific to ELB load balancer logging when ELB is
     /// the resource type.
-    elb_load_balancer_logging_parameters: ?ELBLoadBalancerLoggingParameters,
+    elb_load_balancer_logging_parameters: ?ELBLoadBalancerLoggingParameters = null,
 
     /// Configuration parameters specific to Amazon Bedrock AgentCore logging when
     /// Amazon Bedrock AgentCore is the resource type.
-    log_delivery_parameters: ?LogDeliveryParameters,
+    log_delivery_parameters: ?LogDeliveryParameters = null,
 
     /// The number of days to retain the telemetry data in the destination.
-    retention_in_days: ?i32,
+    retention_in_days: ?i32 = null,
 
     /// Configuration parameters specific to VPC Flow Logs when VPC is the resource
     /// type.
-    vpc_flow_log_parameters: ?VPCFlowLogParameters,
+    vpc_flow_log_parameters: ?VPCFlowLogParameters = null,
 
     /// Configuration parameters specific to WAF logging when WAF is the resource
     /// type.
-    waf_logging_parameters: ?WAFLoggingParameters,
+    waf_logging_parameters: ?WAFLoggingParameters = null,
 
     pub const json_field_names = .{
         .cloudtrail_parameters = "CloudtrailParameters",

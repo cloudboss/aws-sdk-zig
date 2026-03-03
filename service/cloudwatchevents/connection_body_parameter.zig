@@ -6,10 +6,10 @@ pub const ConnectionBodyParameter = struct {
     is_value_secret: bool = false,
 
     /// The key for the parameter.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value associated with the key.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .is_value_secret = "IsValueSecret",

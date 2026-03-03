@@ -4,7 +4,7 @@ const Tag = @import("tag.zig").Tag;
 /// `DeleteFileSystem` operation.
 pub const DeleteFileSystemWindowsConfiguration = struct {
     /// A set of tags for your final backup.
-    final_backup_tags: ?[]const Tag,
+    final_backup_tags: ?[]const Tag = null,
 
     /// By default, Amazon FSx for Windows takes a final backup on your behalf when
     /// the
@@ -12,7 +12,7 @@ pub const DeleteFileSystemWindowsConfiguration = struct {
     /// from data loss, and we highly recommend taking the final backup. If you want
     /// to skip
     /// this backup, use this flag to do so.
-    skip_final_backup: ?bool,
+    skip_final_backup: ?bool = null,
 
     pub const json_field_names = .{
         .final_backup_tags = "FinalBackupTags",

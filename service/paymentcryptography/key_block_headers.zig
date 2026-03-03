@@ -18,13 +18,13 @@ pub const KeyBlockHeaders = struct {
     /// using TR-31, TR-34, RSA wrap and unwrap cryptogram or using a symmetric
     /// cryptogram key export method. For further information refer to [ANSI
     /// X9.143-2022](https://webstore.ansi.org/standards/ascx9/ansix91432022).
-    key_exportability: ?KeyExportability,
+    key_exportability: ?KeyExportability = null,
 
-    key_modes_of_use: ?KeyModesOfUse,
+    key_modes_of_use: ?KeyModesOfUse = null,
 
     /// Parameter used to indicate the version of the key carried in the key block
     /// or indicate the value carried in the key block is a component of a key.
-    key_version: ?[]const u8,
+    key_version: ?[]const u8 = null,
 
     /// Parameter used to indicate the type of optional data in key block headers.
     /// Refer to [ANSI
@@ -35,7 +35,7 @@ pub const KeyBlockHeaders = struct {
     /// characters are reserved for optional block ID and 2 characters reserved for
     /// optional block length. More than one optional blocks can be included as long
     /// as the combined length does not increase 112 characters.
-    optional_blocks: ?[]const aws.map.StringMapEntry,
+    optional_blocks: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .key_exportability = "KeyExportability",

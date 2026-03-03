@@ -15,35 +15,35 @@ const RDSDBUtilizationMetric = @import("rdsdb_utilization_metric.zig").RDSDBUtil
 /// Describes an Amazon Aurora and RDS database recommendation.
 pub const RDSDBRecommendation = struct {
     /// The Amazon Web Services account ID of the Amazon Aurora or RDS database.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The DB instance class of the current Aurora or RDS DB instance.
-    current_db_instance_class: ?[]const u8,
+    current_db_instance_class: ?[]const u8 = null,
 
     /// The performance risk for the current DB instance.
-    current_instance_performance_risk: ?RDSCurrentInstancePerformanceRisk,
+    current_instance_performance_risk: ?RDSCurrentInstancePerformanceRisk = null,
 
     /// The configuration of the current DB storage.
-    current_storage_configuration: ?DBStorageConfiguration,
+    current_storage_configuration: ?DBStorageConfiguration = null,
 
     /// The level of variation in monthly I/O costs for the current DB storage
     /// configuration.
-    current_storage_estimated_monthly_volume_io_ps_cost_variation: ?RDSEstimatedMonthlyVolumeIOPsCostVariation,
+    current_storage_estimated_monthly_volume_io_ps_cost_variation: ?RDSEstimatedMonthlyVolumeIOPsCostVariation = null,
 
     /// The identifier for DB cluster.
-    db_cluster_identifier: ?[]const u8,
+    db_cluster_identifier: ?[]const u8 = null,
 
     /// Describes the effective recommendation preferences for DB instances.
-    effective_recommendation_preferences: ?RDSEffectiveRecommendationPreferences,
+    effective_recommendation_preferences: ?RDSEffectiveRecommendationPreferences = null,
 
     /// The engine of the DB instance.
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// The database engine version.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// This indicates if the DB instance is idle or not.
-    idle: ?Idle,
+    idle: ?Idle = null,
 
     /// The finding classification of an Amazon Aurora and RDS DB instance.
     ///
@@ -51,30 +51,30 @@ pub const RDSDBRecommendation = struct {
     /// Finding classifications for Aurora and RDS
     /// databases](https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-rds-recommendations.html#rds-recommendations-findings) in the *Compute Optimizer User
     /// Guide*.
-    instance_finding: ?RDSInstanceFinding,
+    instance_finding: ?RDSInstanceFinding = null,
 
     /// The reason for the finding classification of a DB instance.
-    instance_finding_reason_codes: ?[]const RDSInstanceFindingReasonCode,
+    instance_finding_reason_codes: ?[]const RDSInstanceFindingReasonCode = null,
 
     /// An array of objects that describe the recommendation options for the RDS DB
     /// instance.
-    instance_recommendation_options: ?[]const RDSDBInstanceRecommendationOption,
+    instance_recommendation_options: ?[]const RDSDBInstanceRecommendationOption = null,
 
     /// The timestamp of when the DB instance recommendation was last generated.
-    last_refresh_timestamp: ?i64,
+    last_refresh_timestamp: ?i64 = null,
 
     /// The number of days the DB instance utilization metrics were analyzed.
     lookback_period_in_days: f64 = 0,
 
     /// The promotion tier for the Aurora instance.
-    promotion_tier: ?i32,
+    promotion_tier: ?i32 = null,
 
     /// The ARN of the current Amazon Aurora or RDS database.
     ///
     /// The following is the format of the ARN:
     ///
     /// `arn:aws:rds:{region}:{accountId}:db:{resourceName}`
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The finding classification of Amazon RDS DB instance storage.
     ///
@@ -82,21 +82,21 @@ pub const RDSDBRecommendation = struct {
     /// Finding classifications for Aurora and RDS
     /// databases](https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-rds-recommendations.html#rds-recommendations-findings) in the *Compute Optimizer User
     /// Guide*.
-    storage_finding: ?RDSStorageFinding,
+    storage_finding: ?RDSStorageFinding = null,
 
     /// The reason for the finding classification of RDS DB instance storage.
-    storage_finding_reason_codes: ?[]const RDSStorageFindingReasonCode,
+    storage_finding_reason_codes: ?[]const RDSStorageFindingReasonCode = null,
 
     /// An array of objects that describe the recommendation options for DB instance
     /// storage.
-    storage_recommendation_options: ?[]const RDSDBStorageRecommendationOption,
+    storage_recommendation_options: ?[]const RDSDBStorageRecommendationOption = null,
 
     /// A list of tags assigned to your DB instance recommendations.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// An array of objects that describe the utilization metrics of the DB
     /// instance.
-    utilization_metrics: ?[]const RDSDBUtilizationMetric,
+    utilization_metrics: ?[]const RDSDBUtilizationMetric = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

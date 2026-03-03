@@ -4,13 +4,13 @@ const PrivateConnectionProvisioningStatus = @import("private_connection_provisio
 /// Specifies the private connection provisioning state.
 pub const PrivateConnectionProvisioningState = struct {
     /// Specifies the private connection provisioning failure cause.
-    failure_cause: ?PrivateConnectionProvisioningFailureCause,
+    failure_cause: ?PrivateConnectionProvisioningFailureCause = null,
 
     /// Specifies the private connection provisioning failure reason.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// Specifies the private connection provisioning status.
-    status: ?PrivateConnectionProvisioningStatus,
+    status: ?PrivateConnectionProvisioningStatus = null,
 
     pub const json_field_names = .{
         .failure_cause = "failureCause",

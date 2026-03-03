@@ -3,7 +3,7 @@
 pub const CheckpointConfig = struct {
     /// (Optional) The local directory where checkpoints are written. The default
     /// directory is `/opt/ml/checkpoints/`.
-    local_path: ?[]const u8,
+    local_path: ?[]const u8 = null,
 
     /// Identifies the S3 path where you want SageMaker to store checkpoints. For
     /// example, `s3://bucket-name/key-name-prefix`.

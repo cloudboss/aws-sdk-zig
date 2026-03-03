@@ -7,7 +7,7 @@ pub const ScopeSettings = struct {
     /// Setting the value to `ALL` applies the scope settings to all existing and
     /// future
     /// projects imported into Amazon Inspector.
-    project_selection_scope: ?ProjectSelectionScope,
+    project_selection_scope: ?ProjectSelectionScope = null,
 
     pub const json_field_names = .{
         .project_selection_scope = "projectSelectionScope",

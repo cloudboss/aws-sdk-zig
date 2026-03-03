@@ -3,10 +3,10 @@ const aws = @import("aws");
 /// Summary information about a public key.
 pub const PublicKeySummary = struct {
     /// Public key ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Public key name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Tags attached to the resource. Array of maps, each of the form
     /// `string:string
@@ -17,7 +17,7 @@ pub const PublicKeySummary = struct {
     /// limits and requirements"; Amazon IVS has no constraints on tags beyond what
     /// is documented
     /// there.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

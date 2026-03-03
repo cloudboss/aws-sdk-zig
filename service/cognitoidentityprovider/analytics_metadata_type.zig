@@ -13,7 +13,7 @@ pub const AnalyticsMetadataType = struct {
     /// The endpoint ID. Information that you want to pass to Amazon Pinpoint about
     /// where to send
     /// notifications.
-    analytics_endpoint_id: ?[]const u8,
+    analytics_endpoint_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .analytics_endpoint_id = "AnalyticsEndpointId",

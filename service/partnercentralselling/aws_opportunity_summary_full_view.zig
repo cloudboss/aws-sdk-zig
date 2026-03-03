@@ -11,33 +11,33 @@ const Visibility = @import("visibility.zig").Visibility;
 
 /// Provides a comprehensive view of AwsOpportunitySummaryFullView template.
 pub const AwsOpportunitySummaryFullView = struct {
-    customer: ?AwsOpportunityCustomer,
+    customer: ?AwsOpportunityCustomer = null,
 
-    insights: ?AwsOpportunityInsights,
+    insights: ?AwsOpportunityInsights = null,
 
     /// Type of AWS involvement in the opportunity.
-    involvement_type: ?SalesInvolvementType,
+    involvement_type: ?SalesInvolvementType = null,
 
     /// Reason for changes in AWS involvement type for the opportunity.
-    involvement_type_change_reason: ?InvolvementTypeChangeReason,
+    involvement_type_change_reason: ?InvolvementTypeChangeReason = null,
 
-    life_cycle: ?AwsOpportunityLifeCycle,
+    life_cycle: ?AwsOpportunityLifeCycle = null,
 
     /// AWS team members involved in the opportunity.
-    opportunity_team: ?[]const AwsTeamMember,
+    opportunity_team: ?[]const AwsTeamMember = null,
 
     /// Source origin of the AWS opportunity.
-    origin: ?OpportunityOrigin,
+    origin: ?OpportunityOrigin = null,
 
-    project: ?AwsOpportunityProject,
+    project: ?AwsOpportunityProject = null,
 
-    related_entity_ids: ?AwsOpportunityRelatedEntities,
+    related_entity_ids: ?AwsOpportunityRelatedEntities = null,
 
     /// Identifier of the related partner opportunity.
-    related_opportunity_id: ?[]const u8,
+    related_opportunity_id: ?[]const u8 = null,
 
     /// Visibility level for the AWS opportunity.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .customer = "Customer",

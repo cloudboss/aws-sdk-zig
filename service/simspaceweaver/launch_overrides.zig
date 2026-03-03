@@ -4,7 +4,7 @@ pub const LaunchOverrides = struct {
     /// App launch commands and command line parameters that override the launch
     /// command
     /// configured in the simulation schema.
-    launch_commands: ?[]const []const u8,
+    launch_commands: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .launch_commands = "LaunchCommands",

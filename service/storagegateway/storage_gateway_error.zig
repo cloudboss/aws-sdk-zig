@@ -8,10 +8,10 @@ const ErrorCode = @import("error_code.zig").ErrorCode;
 /// the error.
 pub const StorageGatewayError = struct {
     /// Additional information about the error.
-    error_code: ?ErrorCode,
+    error_code: ?ErrorCode = null,
 
     /// Human-readable text that provides detail about the error that occurred.
-    error_details: ?[]const aws.map.StringMapEntry,
+    error_details: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

@@ -13,16 +13,16 @@ pub const AnalyzerSummary = struct {
     /// Specifies if the analyzer is an external access, unused access, or internal
     /// access analyzer. The
     /// [GetAnalyzer](https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_GetAnalyzer.html) action includes this property in its response if a configuration is specified, while the [ListAnalyzers](https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_ListAnalyzers.html) action omits it.
-    configuration: ?AnalyzerConfiguration,
+    configuration: ?AnalyzerConfiguration = null,
 
     /// A timestamp for the time at which the analyzer was created.
     created_at: i64,
 
     /// The resource that was most recently analyzed by the analyzer.
-    last_resource_analyzed: ?[]const u8,
+    last_resource_analyzed: ?[]const u8 = null,
 
     /// The time at which the most recently analyzed resource was analyzed.
-    last_resource_analyzed_at: ?i64,
+    last_resource_analyzed_at: ?i64 = null,
 
     /// The name of the analyzer.
     name: []const u8,
@@ -40,7 +40,7 @@ pub const AnalyzerSummary = struct {
     /// status is returned. For an analyzer with organization as the type, this
     /// failure can be due to an issue with creating the service-linked roles
     /// required in the member accounts of the Amazon Web Services organization.
-    status_reason: ?StatusReason,
+    status_reason: ?StatusReason = null,
 
     /// An array of key-value pairs applied to the analyzer. The key-value pairs
     /// consist of the set of Unicode letters, digits, whitespace, `_`, `.`, `/`,
@@ -50,7 +50,7 @@ pub const AnalyzerSummary = struct {
     /// prefixed with `aws:`.
     ///
     /// The tag value is a value that is 0 to 256 characters in length.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type represents the zone of trust or scope for the analyzer.
     @"type": Type,

@@ -5,20 +5,20 @@ const ModelConfiguration = @import("model_configuration.zig").ModelConfiguration
 
 /// The details for a specific benchmark from an Inference Recommender job.
 pub const RecommendationJobInferenceBenchmark = struct {
-    endpoint_configuration: ?EndpointOutputConfiguration,
+    endpoint_configuration: ?EndpointOutputConfiguration = null,
 
-    endpoint_metrics: ?InferenceMetrics,
+    endpoint_metrics: ?InferenceMetrics = null,
 
     /// The reason why a benchmark failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// A timestamp that shows when the benchmark completed.
-    invocation_end_time: ?i64,
+    invocation_end_time: ?i64 = null,
 
     /// A timestamp that shows when the benchmark started.
-    invocation_start_time: ?i64,
+    invocation_start_time: ?i64 = null,
 
-    metrics: ?RecommendationMetrics,
+    metrics: ?RecommendationMetrics = null,
 
     model_configuration: ModelConfiguration,
 

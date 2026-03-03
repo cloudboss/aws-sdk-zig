@@ -5,11 +5,11 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// sorting order.
 pub const AmiProductSort = struct {
     /// Field to sort the AMI products by.
-    sort_by: ?AmiProductSortBy,
+    sort_by: ?AmiProductSortBy = null,
 
     /// The sorting order. Can be `ASCENDING` or `DESCENDING`. The default value is
     /// `DESCENDING`.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .sort_by = "SortBy",

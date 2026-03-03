@@ -1,7 +1,7 @@
 /// Information about a filter used to limit results of a query.
 pub const Filter = struct {
     /// The operator used to compare the fields.
-    comparison_operator: ?[]const u8,
+    comparison_operator: ?[]const u8 = null,
 
     /// A key that can be used to sort results.
     key: []const u8,

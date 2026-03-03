@@ -5,7 +5,7 @@ const ActionTarget = @import("action_target.zig").ActionTarget;
 /// is a remediation option in `RemediationAction`.
 pub const CreateNetworkAclEntriesAction = struct {
     /// Brief description of this remediation action.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether it is possible for Firewall Manager to perform this
     /// remediation action. A false value indicates that auto remediation is
@@ -14,10 +14,10 @@ pub const CreateNetworkAclEntriesAction = struct {
     fms_can_remediate: bool = false,
 
     /// Lists the entries that the remediation action would create.
-    network_acl_entries_to_be_created: ?[]const EntryDescription,
+    network_acl_entries_to_be_created: ?[]const EntryDescription = null,
 
     /// The network ACL that's associated with the remediation action.
-    network_acl_id: ?ActionTarget,
+    network_acl_id: ?ActionTarget = null,
 
     pub const json_field_names = .{
         .description = "Description",

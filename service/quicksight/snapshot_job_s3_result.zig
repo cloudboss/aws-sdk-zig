@@ -7,14 +7,14 @@ const SnapshotS3DestinationConfiguration = @import("snapshot_s3_destination_conf
 pub const SnapshotJobS3Result = struct {
     /// An array of error records that describe any failures that occur while the
     /// dashboard snapshot job runs.
-    error_info: ?[]const SnapshotJobResultErrorInfo,
+    error_info: ?[]const SnapshotJobResultErrorInfo = null,
 
     /// A list of Amazon S3 bucket configurations that are provided when you make a
     /// `StartDashboardSnapshotJob` API call.
-    s3_destination_configuration: ?SnapshotS3DestinationConfiguration,
+    s3_destination_configuration: ?SnapshotS3DestinationConfiguration = null,
 
     /// The Amazon S3 Uri.
-    s3_uri: ?[]const u8,
+    s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_info = "ErrorInfo",

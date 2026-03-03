@@ -5,7 +5,7 @@ const RecommendationRelatedCloudWatchMetricsSourceDetail = @import("recommendati
 pub const RecommendationRelatedAnomalySourceDetail = struct {
     /// An array of `CloudWatchMetricsDetail` objects that contains information
     /// about the analyzed metrics that displayed anomalous behavior.
-    cloud_watch_metrics: ?[]const RecommendationRelatedCloudWatchMetricsSourceDetail,
+    cloud_watch_metrics: ?[]const RecommendationRelatedCloudWatchMetricsSourceDetail = null,
 
     pub const json_field_names = .{
         .cloud_watch_metrics = "CloudWatchMetrics",

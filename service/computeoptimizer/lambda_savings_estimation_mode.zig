@@ -5,7 +5,7 @@ const LambdaSavingsEstimationModeSource = @import("lambda_savings_estimation_mod
 pub const LambdaSavingsEstimationMode = struct {
     /// Describes the source for calculation of savings opportunity for Lambda
     /// functions.
-    source: ?LambdaSavingsEstimationModeSource,
+    source: ?LambdaSavingsEstimationModeSource = null,
 
     pub const json_field_names = .{
         .source = "source",

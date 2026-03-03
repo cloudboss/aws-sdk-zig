@@ -9,7 +9,7 @@ pub const PropertyValueHistory = struct {
     /// A list of objects that contain information about the values in the history
     /// of a time
     /// series property.
-    values: ?[]const PropertyValue,
+    values: ?[]const PropertyValue = null,
 
     pub const json_field_names = .{
         .entity_property_reference = "entityPropertyReference",

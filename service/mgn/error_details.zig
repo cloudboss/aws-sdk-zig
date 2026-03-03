@@ -1,16 +1,16 @@
 /// Error details.
 pub const ErrorDetails = struct {
     /// Error details code.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// Error details message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Error details resourceId.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// Error details resourceType.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

@@ -5,31 +5,31 @@ const UsageQuantity = @import("usage_quantity.zig").UsageQuantity;
 pub const BillEstimateInputUsageModificationSummary = struct {
     /// The availability zone associated with this usage modification, if
     /// applicable.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The group identifier for the usage modification.
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// Historical usage data associated with this modification, if available.
-    historical_usage: ?HistoricalUsageEntity,
+    historical_usage: ?HistoricalUsageEntity = null,
 
     /// The unique identifier of the usage modification.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The location associated with this usage modification.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The specific operation associated with this usage modification.
     operation: []const u8,
 
     /// The modified usage quantities.
-    quantities: ?[]const UsageQuantity,
+    quantities: ?[]const UsageQuantity = null,
 
     /// The Amazon Web Services service code for this usage modification.
     service_code: []const u8,
 
     /// The Amazon Web Services account ID associated with this usage modification.
-    usage_account_id: ?[]const u8,
+    usage_account_id: ?[]const u8 = null,
 
     /// The type of usage being modified.
     usage_type: []const u8,

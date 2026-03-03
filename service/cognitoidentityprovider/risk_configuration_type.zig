@@ -8,30 +8,30 @@ const RiskExceptionConfigurationType = @import("risk_exception_configuration_typ
 pub const RiskConfigurationType = struct {
     /// The settings for automated responses and notification templates for adaptive
     /// authentication with threat protection.
-    account_takeover_risk_configuration: ?AccountTakeoverRiskConfigurationType,
+    account_takeover_risk_configuration: ?AccountTakeoverRiskConfigurationType = null,
 
     /// The app client where this configuration is applied. When this parameter
     /// isn't present,
     /// the risk configuration applies to all user pool app clients that don't have
     /// client-level settings.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     /// Settings for compromised-credentials actions and authentication types with
     /// threat
     /// protection in full-function `ENFORCED` mode.
-    compromised_credentials_risk_configuration: ?CompromisedCredentialsRiskConfigurationType,
+    compromised_credentials_risk_configuration: ?CompromisedCredentialsRiskConfigurationType = null,
 
     /// The date and time when the item was modified. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// Exceptions to the risk evaluation configuration, including always-allow and
     /// always-block IP address ranges.
-    risk_exception_configuration: ?RiskExceptionConfigurationType,
+    risk_exception_configuration: ?RiskExceptionConfigurationType = null,
 
     /// The ID of the user pool that has the risk configuration applied.
-    user_pool_id: ?[]const u8,
+    user_pool_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_takeover_risk_configuration = "AccountTakeoverRiskConfiguration",

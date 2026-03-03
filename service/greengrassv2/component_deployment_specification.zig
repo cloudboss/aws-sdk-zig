@@ -16,7 +16,7 @@ pub const ComponentDeploymentSpecification = struct {
     /// information, see
     /// [Update component
     /// configurations](https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html) in the *IoT Greengrass V2 Developer Guide*.
-    configuration_update: ?ComponentConfigurationUpdate,
+    configuration_update: ?ComponentConfigurationUpdate = null,
 
     /// The system user and group that the IoT Greengrass Core software uses to run
     /// component processes on the
@@ -26,7 +26,7 @@ pub const ComponentDeploymentSpecification = struct {
     /// the user and group that run
     /// components](https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user) in the *IoT Greengrass V2 Developer
     /// Guide*.
-    run_with: ?ComponentRunWith,
+    run_with: ?ComponentRunWith = null,
 
     pub const json_field_names = .{
         .component_version = "componentVersion",

@@ -19,7 +19,7 @@ pub const ManagedNotificationChildEventOverview = struct {
     managed_notification_configuration_arn: []const u8,
 
     /// The Organizational Unit Id that an AWS account belongs to.
-    organizational_unit_id: ?[]const u8,
+    organizational_unit_id: ?[]const u8 = null,
 
     /// The account that related to the `ManagedNotificationChildEvent`.
     related_account: []const u8,

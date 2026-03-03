@@ -3,17 +3,17 @@
 pub const PullRequestCreatedEventMetadata = struct {
     /// The commit ID of the tip of the branch specified as the destination branch
     /// when the pull request was created.
-    destination_commit_id: ?[]const u8,
+    destination_commit_id: ?[]const u8 = null,
 
     /// The commit ID of the most recent commit that the source branch and the
     /// destination branch have in common.
-    merge_base: ?[]const u8,
+    merge_base: ?[]const u8 = null,
 
     /// The name of the repository where the pull request was created.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     /// The commit ID on the source branch used when the pull request was created.
-    source_commit_id: ?[]const u8,
+    source_commit_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_commit_id = "destinationCommitId",

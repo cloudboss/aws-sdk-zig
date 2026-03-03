@@ -4,9 +4,9 @@ const BlueprintStage = @import("blueprint_stage.zig").BlueprintStage;
 pub const BlueprintFilter = struct {
     blueprint_arn: []const u8,
 
-    blueprint_stage: ?BlueprintStage,
+    blueprint_stage: ?BlueprintStage = null,
 
-    blueprint_version: ?[]const u8,
+    blueprint_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .blueprint_arn = "blueprintArn",

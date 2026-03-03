@@ -17,12 +17,12 @@ pub const ParsingConfiguration = struct {
     /// If you specify `BEDROCK_DATA_AUTOMATION` as the parsing strategy for
     /// ingesting your data source, use this object to modify configurations for
     /// using the Amazon Bedrock Data Automation parser.
-    bedrock_data_automation_configuration: ?BedrockDataAutomationConfiguration,
+    bedrock_data_automation_configuration: ?BedrockDataAutomationConfiguration = null,
 
     /// If you specify `BEDROCK_FOUNDATION_MODEL` as the parsing strategy for
     /// ingesting your data source, use this object to modify configurations for
     /// using a foundation model to parse documents.
-    bedrock_foundation_model_configuration: ?BedrockFoundationModelConfiguration,
+    bedrock_foundation_model_configuration: ?BedrockFoundationModelConfiguration = null,
 
     /// The parsing strategy for the data source.
     parsing_strategy: ParsingStrategy,

@@ -4,7 +4,7 @@ const MetricStatistic = @import("metric_statistic.zig").MetricStatistic;
 /// Describes the utilization metric of an idle resource.
 pub const IdleUtilizationMetric = struct {
     /// The name of the utilization metric.
-    name: ?IdleMetricName,
+    name: ?IdleMetricName = null,
 
     /// The statistic of the utilization metric.
     ///
@@ -22,7 +22,7 @@ pub const IdleUtilizationMetric = struct {
     /// using Amazon CloudWatch. For more information, see the [Amazon CloudWatch
     /// User
     /// Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
-    statistic: ?MetricStatistic,
+    statistic: ?MetricStatistic = null,
 
     /// The value of the utilization metric.
     value: f64 = 0,

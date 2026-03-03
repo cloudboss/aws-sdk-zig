@@ -8,16 +8,16 @@ const StorageLensTableDestination = @import("storage_lens_table_destination.zig"
 pub const StorageLensDataExport = struct {
     /// A container for enabling Amazon CloudWatch publishing for S3 Storage Lens
     /// metrics.
-    cloud_watch_metrics: ?CloudWatchMetrics,
+    cloud_watch_metrics: ?CloudWatchMetrics = null,
 
     /// A container for the bucket where the S3 Storage Lens metrics export will be
     /// located.
     ///
     /// This bucket must be located in the same Region as the storage lens
     /// configuration.
-    s3_bucket_destination: ?S3BucketDestination,
+    s3_bucket_destination: ?S3BucketDestination = null,
 
     /// A container for configuring S3 Storage Lens data exports to read-only S3
     /// table buckets.
-    storage_lens_table_destination: ?StorageLensTableDestination,
+    storage_lens_table_destination: ?StorageLensTableDestination = null,
 };

@@ -10,34 +10,34 @@ pub const PostFulfillmentStatusSpecification = struct {
     /// code hook throws an exception or returns with the `State`
     /// field of the `Intent` object set to
     /// `Failed`.
-    failure_conditional: ?ConditionalSpecification,
+    failure_conditional: ?ConditionalSpecification = null,
 
     /// Specifies the next step the bot runs after the fulfillment code hook
     /// throws an exception or returns with the `State` field of the
     /// `Intent` object set to `Failed`.
-    failure_next_step: ?DialogState,
+    failure_next_step: ?DialogState = null,
 
-    failure_response: ?ResponseSpecification,
+    failure_response: ?ResponseSpecification = null,
 
     /// A list of conditional branches to evaluate after the fulfillment
     /// code hook finishes successfully.
-    success_conditional: ?ConditionalSpecification,
+    success_conditional: ?ConditionalSpecification = null,
 
     /// Specifies the next step in the conversation that Amazon Lex
     /// invokes when the fulfillment code hook completes successfully.
-    success_next_step: ?DialogState,
+    success_next_step: ?DialogState = null,
 
-    success_response: ?ResponseSpecification,
+    success_response: ?ResponseSpecification = null,
 
     /// A list of conditional branches to evaluate if the fulfillment code
     /// hook times out.
-    timeout_conditional: ?ConditionalSpecification,
+    timeout_conditional: ?ConditionalSpecification = null,
 
     /// Specifies the next step that the bot runs when the fulfillment code
     /// hook times out.
-    timeout_next_step: ?DialogState,
+    timeout_next_step: ?DialogState = null,
 
-    timeout_response: ?ResponseSpecification,
+    timeout_response: ?ResponseSpecification = null,
 
     pub const json_field_names = .{
         .failure_conditional = "failureConditional",

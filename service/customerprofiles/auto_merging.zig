@@ -8,13 +8,13 @@ pub const AutoMerging = struct {
     /// example, if Profile A and Profile B have the same `FirstName` and
     /// `LastName` (and that is the matching criteria), which
     /// `EmailAddress` should be used?
-    conflict_resolution: ?ConflictResolution,
+    conflict_resolution: ?ConflictResolution = null,
 
     /// A list of matching attributes that represent matching criteria. If two
     /// profiles meet at
     /// least one of the requirements in the matching attributes list, they will be
     /// merged.
-    consolidation: ?Consolidation,
+    consolidation: ?Consolidation = null,
 
     /// The flag that enables the auto-merging of duplicate profiles.
     enabled: bool,
@@ -24,7 +24,7 @@ pub const AutoMerging = struct {
     /// profiles within a matching group to be merged during the auto-merge process.
     /// A higher score
     /// means higher similarity required to merge profiles.
-    min_allowed_confidence_score_for_merging: ?f64,
+    min_allowed_confidence_score_for_merging: ?f64 = null,
 
     pub const json_field_names = .{
         .conflict_resolution = "ConflictResolution",

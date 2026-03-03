@@ -2,7 +2,7 @@
 /// resource or account level.
 pub const NewAsoDetail = struct {
     /// Details about the new Autonomous System Organization (ASO).
-    aso: ?[]const u8,
+    aso: ?[]const u8 = null,
 
     /// Checks if the Autonomous System Organization (ASO) is new for the entire
     /// account.

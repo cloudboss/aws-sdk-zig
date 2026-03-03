@@ -11,10 +11,10 @@ pub const DocumentMetadataConfiguration = struct {
 
     /// Provides tuning parameters to determine how the field affects the search
     /// results.
-    relevance: ?Relevance,
+    relevance: ?Relevance = null,
 
     /// Provides information about how the field is used during a search.
-    search: ?Search,
+    search: ?Search = null,
 
     /// The data type of the index field.
     @"type": DocumentAttributeValueType,

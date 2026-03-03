@@ -13,14 +13,14 @@ pub const LambdaConfigType = struct {
     /// triggers in
     /// the sequence of the [custom authentication challenge
     /// triggers](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html).
-    create_auth_challenge: ?[]const u8,
+    create_auth_challenge: ?[]const u8 = null,
 
     /// The configuration of a custom email sender Lambda trigger. This trigger
     /// routes all
     /// email notifications from a user pool to a Lambda function that delivers the
     /// message using
     /// custom logic.
-    custom_email_sender: ?CustomEmailLambdaVersionConfigType,
+    custom_email_sender: ?CustomEmailLambdaVersionConfigType = null,
 
     /// A custom message Lambda trigger. This trigger is an opportunity to customize
     /// all SMS
@@ -29,54 +29,54 @@ pub const LambdaConfigType = struct {
     /// user pool routes all messages to a Lambda function that returns a
     /// runtime-customized
     /// message subject and body for your user pool to deliver to a user.
-    custom_message: ?[]const u8,
+    custom_message: ?[]const u8 = null,
 
     /// The configuration of a custom SMS sender Lambda trigger. This trigger routes
     /// all SMS
     /// notifications from a user pool to a Lambda function that delivers the
     /// message using
     /// custom logic.
-    custom_sms_sender: ?CustomSMSLambdaVersionConfigType,
+    custom_sms_sender: ?CustomSMSLambdaVersionConfigType = null,
 
     /// The configuration of a define auth challenge Lambda trigger, one of three
     /// triggers in
     /// the sequence of the [custom authentication challenge
     /// triggers](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html).
-    define_auth_challenge: ?[]const u8,
+    define_auth_challenge: ?[]const u8 = null,
 
     /// The configuration of an inbound federation Lambda trigger. This trigger can
     /// transform federated user attributes during the authentication with external
     /// identity providers.
-    inbound_federation: ?InboundFederationLambdaType,
+    inbound_federation: ?InboundFederationLambdaType = null,
 
     /// The ARN of an [KMS
     /// key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys). Amazon Cognito uses the key to encrypt codes and temporary passwords sent to
     /// custom sender Lambda triggers.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The configuration of a [post authentication Lambda
     /// trigger](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-post-authentication.html) in a user pool. This
     /// trigger can take custom actions after a user signs in.
-    post_authentication: ?[]const u8,
+    post_authentication: ?[]const u8 = null,
 
     /// The configuration of a [post confirmation Lambda
     /// trigger](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-post-confirmation.html) in a user pool. This
     /// trigger can take custom actions after a user confirms their user account and
     /// their email
     /// address or phone number.
-    post_confirmation: ?[]const u8,
+    post_confirmation: ?[]const u8 = null,
 
     /// The configuration of a [pre authentication
     /// trigger](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-authentication.html) in a user pool. This trigger
     /// can evaluate and modify user sign-in events.
-    pre_authentication: ?[]const u8,
+    pre_authentication: ?[]const u8 = null,
 
     /// The configuration of a [pre sign-up Lambda
     /// trigger](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-sign-up.html) in a user pool. This trigger
     /// evaluates new users and can bypass confirmation, [link a federated user
     /// profile](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation-consolidate-users.html), or block sign-up
     /// requests.
-    pre_sign_up: ?[]const u8,
+    pre_sign_up: ?[]const u8 = null,
 
     /// The legacy configuration of a [pre token generation Lambda
     /// trigger](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-token-generation.html) in a user
@@ -86,26 +86,26 @@ pub const LambdaConfigType = struct {
     /// `PreTokenGenerationConfig`, its value must be identical to
     /// `PreTokenGeneration`. For new instances of pre token generation triggers,
     /// set the `LambdaArn` of `PreTokenGenerationConfig`.
-    pre_token_generation: ?[]const u8,
+    pre_token_generation: ?[]const u8 = null,
 
     /// The detailed configuration of a [pre token generation Lambda
     /// trigger](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-token-generation.html) in a user pool. If
     /// you also set an ARN in `PreTokenGeneration`, its value must be identical to
     /// `PreTokenGenerationConfig`.
-    pre_token_generation_config: ?PreTokenGenerationVersionConfigType,
+    pre_token_generation_config: ?PreTokenGenerationVersionConfigType = null,
 
     /// The configuration of a [migrate user Lambda
     /// trigger](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-migrate-user.html) in a user pool. This trigger
     /// can create user profiles when users sign in or attempt to reset their
     /// password with
     /// credentials that don't exist yet.
-    user_migration: ?[]const u8,
+    user_migration: ?[]const u8 = null,
 
     /// The configuration of a verify auth challenge Lambda trigger, one of three
     /// triggers in
     /// the sequence of the [custom authentication challenge
     /// triggers](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html).
-    verify_auth_challenge_response: ?[]const u8,
+    verify_auth_challenge_response: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .create_auth_challenge = "CreateAuthChallenge",

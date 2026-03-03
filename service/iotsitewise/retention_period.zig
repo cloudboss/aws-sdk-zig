@@ -5,13 +5,13 @@ pub const RetentionPeriod = struct {
     ///
     /// If you specified a value for this parameter, the `unlimited` parameter must
     /// be `false`.
-    number_of_days: ?i32,
+    number_of_days: ?i32 = null,
 
     /// If true, your data is kept indefinitely.
     ///
     /// If configured to `true`, you must not specify a value for the
     /// `numberOfDays` parameter.
-    unlimited: ?bool,
+    unlimited: ?bool = null,
 
     pub const json_field_names = .{
         .number_of_days = "numberOfDays",

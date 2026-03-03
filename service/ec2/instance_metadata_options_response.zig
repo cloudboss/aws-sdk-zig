@@ -11,19 +11,19 @@ pub const InstanceMetadataOptionsResponse = struct {
     ///
     /// If the value is `disabled`, you cannot access your instance
     /// metadata.
-    http_endpoint: ?InstanceMetadataEndpointState,
+    http_endpoint: ?InstanceMetadataEndpointState = null,
 
     /// Indicates whether the IPv6 endpoint for the instance metadata service is
     /// enabled or
     /// disabled.
     ///
     /// Default: `disabled`
-    http_protocol_ipv_6: ?InstanceMetadataProtocolState,
+    http_protocol_ipv_6: ?InstanceMetadataProtocolState = null,
 
     /// The maximum number of hops that the metadata token can travel.
     ///
     /// Possible values: Integers from `1` to `64`
-    http_put_response_hop_limit: ?i32,
+    http_put_response_hop_limit: ?i32 = null,
 
     /// Indicates whether IMDSv2 is required.
     ///
@@ -32,14 +32,14 @@ pub const InstanceMetadataOptionsResponse = struct {
     ///
     /// * `required` - IMDSv2 is required, which means that IMDSv1 is
     /// disabled, and you must use IMDSv2.
-    http_tokens: ?HttpTokensState,
+    http_tokens: ?HttpTokensState = null,
 
     /// Indicates whether access to instance tags from the instance metadata is
     /// enabled or
     /// disabled. For more information, see [Work with
     /// instance tags using the instance
     /// metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS).
-    instance_metadata_tags: ?InstanceMetadataTagsState,
+    instance_metadata_tags: ?InstanceMetadataTagsState = null,
 
     /// The state of the metadata option changes.
     ///
@@ -48,5 +48,5 @@ pub const InstanceMetadataOptionsResponse = struct {
     ///
     /// `applied` - The metadata options have been successfully applied on the
     /// instance.
-    state: ?InstanceMetadataOptionsState,
+    state: ?InstanceMetadataOptionsState = null,
 };

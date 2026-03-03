@@ -9,7 +9,7 @@ pub const MicrosoftOauth2ProviderConfigInput = struct {
     /// The Microsoft Entra ID (formerly Azure AD) tenant ID for your organization.
     /// This identifies the specific tenant within Microsoft's identity platform
     /// where your application is registered.
-    tenant_id: ?[]const u8,
+    tenant_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_id = "clientId",

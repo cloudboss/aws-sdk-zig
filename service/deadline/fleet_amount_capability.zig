@@ -1,7 +1,7 @@
 /// The fleet amount and attribute capabilities.
 pub const FleetAmountCapability = struct {
     /// The maximum amount of the fleet worker capability.
-    max: ?f32,
+    max: ?f32 = null,
 
     /// The minimum amount of fleet worker capability.
     min: f32,

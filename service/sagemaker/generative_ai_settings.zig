@@ -9,7 +9,7 @@ pub const GenerativeAiSettings = struct {
     /// language models (LLMs) in Amazon Bedrock. The IAM role should have Amazon S3
     /// read and write permissions, as well as a trust relationship that establishes
     /// `bedrock.amazonaws.com` as a service principal.
-    amazon_bedrock_role_arn: ?[]const u8,
+    amazon_bedrock_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .amazon_bedrock_role_arn = "AmazonBedrockRoleArn",

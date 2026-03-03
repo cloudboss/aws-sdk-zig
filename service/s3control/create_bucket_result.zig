@@ -10,8 +10,8 @@ pub const CreateBucketResult = struct {
     /// `reports` through Outpost `my-outpost` owned by account `123456789012` in
     /// Region `us-west-2`, use the URL encoding of
     /// `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`. The value must be URL encoded.
-    bucket_arn: ?[]const u8,
+    bucket_arn: ?[]const u8 = null,
 
     /// The location of the bucket.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 };

@@ -12,7 +12,7 @@ pub const UserIdentityConfiguration = struct {
     /// [Getting
     /// started with an IAM Identity Center identity
     /// source](https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html).
-    identity_attribute_name: ?[]const u8,
+    identity_attribute_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .identity_attribute_name = "IdentityAttributeName",

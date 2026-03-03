@@ -8,21 +8,21 @@ const ServiceStatus = @import("service_status.zig").ServiceStatus;
 pub const ServiceSummary = struct {
     /// The time when the App Runner service was created. It's in the Unix time
     /// stamp format.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of this service.
-    service_arn: ?[]const u8,
+    service_arn: ?[]const u8 = null,
 
     /// An ID that App Runner generated for this service. It's unique within the
     /// Amazon Web Services Region.
-    service_id: ?[]const u8,
+    service_id: ?[]const u8 = null,
 
     /// The customer-provided service name.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// A subdomain URL that App Runner generated for this service. You can use this
     /// URL to access your service web application.
-    service_url: ?[]const u8,
+    service_url: ?[]const u8 = null,
 
     /// The current state of the App Runner service. These particular values mean
     /// the following.
@@ -36,11 +36,11 @@ pub const ServiceSummary = struct {
     /// * `DELETE_FAILED` – The service failed to delete and can't be successfully
     ///   recovered. Retry the service deletion call to ensure
     /// that all related resources are removed.
-    status: ?ServiceStatus,
+    status: ?ServiceStatus = null,
 
     /// The time when the App Runner service was last updated. It's in theUnix time
     /// stamp format.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

@@ -2,7 +2,7 @@
 pub const DatabaseConfigDetail = struct {
     /// AWS Secrets Manager key that holds the credentials that you use to connect
     /// to a database.
-    secret_name: ?[]const u8,
+    secret_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .secret_name = "secretName",

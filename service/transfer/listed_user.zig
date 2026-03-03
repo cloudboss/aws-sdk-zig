@@ -13,7 +13,7 @@ pub const ListedUser = struct {
     ///
     /// You can use the `HomeDirectory` parameter for `HomeDirectoryType` when it is
     /// set to either `PATH` or `LOGICAL`.
-    home_directory: ?[]const u8,
+    home_directory: ?[]const u8 = null,
 
     /// The type of landing directory (folder) that you want your users' home
     /// directory to be when they log in to the server. If you set it to `PATH`, the
@@ -27,7 +27,7 @@ pub const ListedUser = struct {
     /// `HomeDirectoryType` is `PATH`, you provide an absolute path using the
     /// `HomeDirectory` parameter. You cannot have both `HomeDirectory` and
     /// `HomeDirectoryMappings` in your template.
-    home_directory_type: ?HomeDirectoryType,
+    home_directory_type: ?HomeDirectoryType = null,
 
     /// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
     /// role that controls your users' access to your Amazon S3 bucket or Amazon EFS
@@ -44,14 +44,14 @@ pub const ListedUser = struct {
     /// The policies attached to this role determine the level of access you want to
     /// provide your users when transferring files into and out of your S3 buckets
     /// or EFS file systems.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     /// Specifies the number of SSH public keys stored for the user you specified.
-    ssh_public_key_count: ?i32,
+    ssh_public_key_count: ?i32 = null,
 
     /// Specifies the name of the user whose ARN was specified. User names are used
     /// for authentication purposes.
-    user_name: ?[]const u8,
+    user_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

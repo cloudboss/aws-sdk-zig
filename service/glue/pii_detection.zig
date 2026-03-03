@@ -4,11 +4,11 @@ const PiiType = @import("pii_type.zig").PiiType;
 pub const PIIDetection = struct {
     /// Additional parameters for configuring PII detection behavior and sensitivity
     /// settings.
-    detection_parameters: ?[]const u8,
+    detection_parameters: ?[]const u8 = null,
 
     /// The sensitivity level for PII detection. Higher sensitivity levels detect
     /// more potential PII but may result in more false positives.
-    detection_sensitivity: ?[]const u8,
+    detection_sensitivity: ?[]const u8 = null,
 
     /// Indicates the types of entities the PIIDetection transform will identify as
     /// PII data.
@@ -24,11 +24,11 @@ pub const PIIDetection = struct {
     inputs: []const []const u8,
 
     /// Indicates the value that will replace the detected entity.
-    mask_value: ?[]const u8,
+    mask_value: ?[]const u8 = null,
 
     /// A regular expression pattern used to identify additional PII content beyond
     /// the standard detection algorithms.
-    match_pattern: ?[]const u8,
+    match_pattern: ?[]const u8 = null,
 
     /// The name of the transform node.
     name: []const u8,
@@ -36,34 +36,34 @@ pub const PIIDetection = struct {
     /// The number of characters to exclude from redaction on the left side of
     /// detected PII content. This allows preserving context around the sensitive
     /// data.
-    num_left_chars_to_exclude: ?i32,
+    num_left_chars_to_exclude: ?i32 = null,
 
     /// The number of characters to exclude from redaction on the right side of
     /// detected PII content. This allows preserving context around the sensitive
     /// data.
-    num_right_chars_to_exclude: ?i32,
+    num_right_chars_to_exclude: ?i32 = null,
 
     /// Indicates the output column name that will contain any entity type detected
     /// in that row.
-    output_column_name: ?[]const u8,
+    output_column_name: ?[]const u8 = null,
 
     /// Indicates the type of PIIDetection transform.
     pii_type: PiiType,
 
     /// The character used to replace detected PII content when redaction is
     /// enabled. The default redaction character is `*`.
-    redact_char: ?[]const u8,
+    redact_char: ?[]const u8 = null,
 
     /// Specifies whether to redact the detected PII text. When set to `true`, PII
     /// content is replaced with redaction characters.
-    redact_text: ?[]const u8,
+    redact_text: ?[]const u8 = null,
 
     /// Indicates the fraction of the data to sample when scanning for PII entities.
-    sample_fraction: ?f64,
+    sample_fraction: ?f64 = null,
 
     /// Indicates the fraction of the data that must be met in order for a column to
     /// be identified as PII data.
-    threshold_fraction: ?f64,
+    threshold_fraction: ?f64 = null,
 
     pub const json_field_names = .{
         .detection_parameters = "DetectionParameters",

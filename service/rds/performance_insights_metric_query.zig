@@ -15,7 +15,7 @@ pub const PerformanceInsightsMetricQuery = struct {
     /// all of the dimensions within that group, unless you provide the names of
     /// specific dimensions within that group. You can also request that Performance
     /// Insights return a limited number of values for a dimension.
-    group_by: ?PerformanceInsightsMetricDimensionGroup,
+    group_by: ?PerformanceInsightsMetricDimensionGroup = null,
 
     /// The name of a Performance Insights metric to be measured.
     ///
@@ -35,5 +35,5 @@ pub const PerformanceInsightsMetricQuery = struct {
     /// `db.load.avg` showing the scaled values, `db.sampledload.avg` showing the
     /// raw values, and `db.sampledload.avg` less than `db.load.avg`. For most use
     /// cases, you can query `db.load.avg` only.
-    metric: ?[]const u8,
+    metric: ?[]const u8 = null,
 };

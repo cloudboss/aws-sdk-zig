@@ -8,16 +8,16 @@ const ContainerProductVisibilityFilter = @import("container_product_visibility_f
 /// `ListEntities` request.
 pub const ContainerProductFilters = struct {
     /// Unique identifier for the container product.
-    entity_id: ?ContainerProductEntityIdFilter,
+    entity_id: ?ContainerProductEntityIdFilter = null,
 
     /// The last date on which the container product was modified.
-    last_modified_date: ?ContainerProductLastModifiedDateFilter,
+    last_modified_date: ?ContainerProductLastModifiedDateFilter = null,
 
     /// The title of the container product.
-    product_title: ?ContainerProductTitleFilter,
+    product_title: ?ContainerProductTitleFilter = null,
 
     /// The visibility of the container product.
-    visibility: ?ContainerProductVisibilityFilter,
+    visibility: ?ContainerProductVisibilityFilter = null,
 
     pub const json_field_names = .{
         .entity_id = "EntityId",

@@ -19,7 +19,7 @@ pub const VoiceSettings = struct {
     /// operation](https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine) in the *Amazon Polly developer guide*.
     ///
     /// If you do not specify a value, the default is `standard`.
-    engine: ?VoiceEngine,
+    engine: ?VoiceEngine = null,
 
     /// The identifier of the Amazon Polly voice to use.
     voice_id: []const u8,

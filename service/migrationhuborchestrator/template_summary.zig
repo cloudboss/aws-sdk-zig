@@ -1,16 +1,16 @@
 /// The summary of the template.
 pub const TemplateSummary = struct {
     /// The Amazon Resource Name (ARN) of the template.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The description of the template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the template.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the template.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

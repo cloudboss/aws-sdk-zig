@@ -10,7 +10,7 @@ pub const OrgConfiguration = struct {
 
     /// This value shows whether or not you have a valid a service-linked role
     /// required to start the multi-account search feature.
-    service_linked_role: ?[]const u8,
+    service_linked_role: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_service_access_status = "AWSServiceAccessStatus",

@@ -18,10 +18,10 @@ pub const ErrorReason = struct {
     ///
     /// * `SERVICE_QUOTA_NOT_AVAILABLE_ERROR` - There was an error in
     /// Service Quotas.
-    error_code: ?ErrorCode,
+    error_code: ?ErrorCode = null,
 
     /// The error message.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

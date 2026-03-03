@@ -6,23 +6,23 @@ const WeightedQuantileLoss = @import("weighted_quantile_loss.zig").WeightedQuant
 /// part of the WindowSummary object.
 pub const Metrics = struct {
     /// The average value of all weighted quantile losses.
-    average_weighted_quantile_loss: ?f64,
+    average_weighted_quantile_loss: ?f64 = null,
 
     /// Provides detailed error metrics for each forecast type. Metrics include
     /// root-mean
     /// square-error (RMSE), mean absolute percentage error (MAPE), mean absolute
     /// scaled error (MASE),
     /// and weighted average percentage error (WAPE).
-    error_metrics: ?[]const ErrorMetric,
+    error_metrics: ?[]const ErrorMetric = null,
 
     /// The root-mean-square error (RMSE).
-    rmse: ?f64,
+    rmse: ?f64 = null,
 
     /// An array of weighted quantile losses. Quantiles divide a probability
     /// distribution into
     /// regions of equal probability. The distribution in this case is the loss
     /// function.
-    weighted_quantile_losses: ?[]const WeightedQuantileLoss,
+    weighted_quantile_losses: ?[]const WeightedQuantileLoss = null,
 
     pub const json_field_names = .{
         .average_weighted_quantile_loss = "AverageWeightedQuantileLoss",

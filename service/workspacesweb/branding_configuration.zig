@@ -24,7 +24,7 @@ pub const BrandingConfiguration = struct {
 
     /// The terms of service text in Markdown format that users must accept before
     /// accessing the portal.
-    terms_of_service: ?[]const u8,
+    terms_of_service: ?[]const u8 = null,
 
     /// Metadata for the wallpaper image file, including the MIME type, file
     /// extension, and upload timestamp.

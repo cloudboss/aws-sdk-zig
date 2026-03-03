@@ -6,9 +6,9 @@ const AquaStatus = @import("aqua_status.zig").AquaStatus;
 pub const AquaConfiguration = struct {
     /// This field is retired. Amazon Redshift automatically determines whether to
     /// use AQUA (Advanced Query Accelerator).
-    aqua_configuration_status: ?AquaConfigurationStatus,
+    aqua_configuration_status: ?AquaConfigurationStatus = null,
 
     /// This field is retired. Amazon Redshift automatically determines whether to
     /// use AQUA (Advanced Query Accelerator).
-    aqua_status: ?AquaStatus,
+    aqua_status: ?AquaStatus = null,
 };

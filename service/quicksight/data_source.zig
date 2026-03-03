@@ -22,57 +22,57 @@ pub const DataSource = struct {
     /// existing data source. If the `AlternateDataSourceParameters` list is null,
     /// the `Credentials` originally used with this `DataSourceParameters`
     /// are automatically allowed.
-    alternate_data_source_parameters: ?[]const DataSourceParameters,
+    alternate_data_source_parameters: ?[]const DataSourceParameters = null,
 
     /// The Amazon Resource Name (ARN) of the data source.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time that this data source was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The ID of the data source. This ID is unique per Amazon Web Services Region
     /// for each
     /// Amazon Web Services account.
-    data_source_id: ?[]const u8,
+    data_source_id: ?[]const u8 = null,
 
     /// The parameters that Quick Sight uses to connect to your underlying source.
     /// This
     /// is a variant type structure. For this structure to be valid, only one of the
     /// attributes
     /// can be non-null.
-    data_source_parameters: ?DataSourceParameters,
+    data_source_parameters: ?DataSourceParameters = null,
 
     /// Error information from the last update or the creation of the data source.
-    error_info: ?DataSourceErrorInfo,
+    error_info: ?DataSourceErrorInfo = null,
 
     /// The last time that this data source was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// A display name for the data source.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the secret associated with the data source
     /// in Amazon Secrets Manager.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     /// Secure Socket Layer (SSL) properties that apply when Quick Sight connects to
     /// your
     /// underlying source.
-    ssl_properties: ?SslProperties,
+    ssl_properties: ?SslProperties = null,
 
     /// The HTTP status of the request.
-    status: ?ResourceStatus,
+    status: ?ResourceStatus = null,
 
     /// The type of the data source. This type indicates which database engine the
     /// data source
     /// connects to.
-    @"type": ?DataSourceType,
+    @"type": ?DataSourceType = null,
 
     /// The VPC connection information. You need to use this parameter only when you
     /// want
     /// Quick Sight to use a VPC connection when connecting to your underlying
     /// source.
-    vpc_connection_properties: ?VpcConnectionProperties,
+    vpc_connection_properties: ?VpcConnectionProperties = null,
 
     pub const json_field_names = .{
         .alternate_data_source_parameters = "AlternateDataSourceParameters",

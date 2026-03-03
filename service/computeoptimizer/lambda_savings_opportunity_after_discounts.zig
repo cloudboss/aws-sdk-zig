@@ -11,7 +11,7 @@ pub const LambdaSavingsOpportunityAfterDiscounts = struct {
     /// The estimated monthly savings possible by adopting Compute Optimizer’s
     /// Lambda function recommendations. This
     /// includes any applicable Savings Plans discounts.
-    estimated_monthly_savings: ?LambdaEstimatedMonthlySavings,
+    estimated_monthly_savings: ?LambdaEstimatedMonthlySavings = null,
 
     /// The estimated monthly savings possible as a percentage of monthly cost by
     /// adopting Compute Optimizer’s Lambda

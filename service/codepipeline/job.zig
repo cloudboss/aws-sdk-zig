@@ -3,18 +3,18 @@ const JobData = @import("job_data.zig").JobData;
 /// Represents information about a job.
 pub const Job = struct {
     /// The ID of the Amazon Web Services account to use when performing the job.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Other data about a job.
-    data: ?JobData,
+    data: ?JobData = null,
 
     /// The unique system-generated ID of the job.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A system-generated random number that CodePipeline uses to ensure that the
     /// job is being worked on by only one job worker. Use this number in an
     /// AcknowledgeJob request.
-    nonce: ?[]const u8,
+    nonce: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

@@ -4,10 +4,10 @@ const RecommendationSourceType = @import("recommendation_source_type.zig").Recom
 /// Amazon EC2 Auto Scaling group.
 pub const RecommendationSource = struct {
     /// The Amazon Resource Name (ARN) of the recommendation source.
-    recommendation_source_arn: ?[]const u8,
+    recommendation_source_arn: ?[]const u8 = null,
 
     /// The resource type of the recommendation source.
-    recommendation_source_type: ?RecommendationSourceType,
+    recommendation_source_type: ?RecommendationSourceType = null,
 
     pub const json_field_names = .{
         .recommendation_source_arn = "recommendationSourceArn",

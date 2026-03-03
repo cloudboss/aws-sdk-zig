@@ -13,7 +13,7 @@ pub const MonitoringClusterConfig = struct {
     /// The Key Management Service (KMS) key that Amazon SageMaker AI uses to
     /// encrypt data on the storage volume attached to the ML compute instance(s)
     /// that run the model monitoring job.
-    volume_kms_key_id: ?[]const u8,
+    volume_kms_key_id: ?[]const u8 = null,
 
     /// The size of the ML storage volume, in gigabytes, that you want to provision.
     /// You must specify sufficient ML storage for your scenario.

@@ -4,19 +4,19 @@ const MpaSessionStatus = @import("mpa_session_status.zig").MpaSessionStatus;
 /// association.
 pub const LatestMpaApprovalTeamUpdate = struct {
     /// The date and time when the MPA approval team update will expire.
-    expiry_date: ?i64,
+    expiry_date: ?i64 = null,
 
     /// The date and time when the MPA approval team update was initiated.
-    initiation_date: ?i64,
+    initiation_date: ?i64 = null,
 
     /// The ARN of the MPA session associated with this update.
-    mpa_session_arn: ?[]const u8,
+    mpa_session_arn: ?[]const u8 = null,
 
     /// The current status of the MPA approval team update.
-    status: ?MpaSessionStatus,
+    status: ?MpaSessionStatus = null,
 
     /// A message describing the current status of the MPA approval team update.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .expiry_date = "ExpiryDate",

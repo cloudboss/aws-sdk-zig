@@ -6,33 +6,33 @@ const Region = @import("region.zig").Region;
 /// Information about the enabled control.
 pub const EnabledControlDetails = struct {
     /// The ARN of the enabled control.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The control identifier of the enabled control. For information on how to
     /// find the `controlIdentifier`, see [the overview
     /// page](https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html).
-    control_identifier: ?[]const u8,
+    control_identifier: ?[]const u8 = null,
 
     /// The drift status of the enabled control.
-    drift_status_summary: ?DriftStatusSummary,
+    drift_status_summary: ?DriftStatusSummary = null,
 
     /// Array of `EnabledControlParameter` objects.
-    parameters: ?[]const EnabledControlParameterSummary,
+    parameters: ?[]const EnabledControlParameterSummary = null,
 
     /// The ARN of the parent enabled control from which this control inherits its
     /// configuration, if applicable.
-    parent_identifier: ?[]const u8,
+    parent_identifier: ?[]const u8 = null,
 
     /// The deployment summary of the enabled control.
-    status_summary: ?EnablementStatusSummary,
+    status_summary: ?EnablementStatusSummary = null,
 
     /// The ARN of the organizational unit. For information on how to find the
     /// `targetIdentifier`, see [the overview
     /// page](https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html).
-    target_identifier: ?[]const u8,
+    target_identifier: ?[]const u8 = null,
 
     /// Target Amazon Web Services Regions for the enabled control.
-    target_regions: ?[]const Region,
+    target_regions: ?[]const Region = null,
 
     pub const json_field_names = .{
         .arn = "arn",

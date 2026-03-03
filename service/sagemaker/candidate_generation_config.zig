@@ -48,7 +48,7 @@ pub const CandidateGenerationConfig = struct {
     /// time-series forecasting.
     /// * When `AlgorithmsConfig` is not provided, `CandidateGenerationConfig` uses
     ///   the full set of algorithms for time-series forecasting.
-    algorithms_config: ?[]const AutoMLAlgorithmConfig,
+    algorithms_config: ?[]const AutoMLAlgorithmConfig = null,
 
     pub const json_field_names = .{
         .algorithms_config = "AlgorithmsConfig",

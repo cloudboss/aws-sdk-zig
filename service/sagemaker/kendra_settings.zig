@@ -5,7 +5,7 @@ const FeatureStatus = @import("feature_status.zig").FeatureStatus;
 pub const KendraSettings = struct {
     /// Describes whether the document querying feature is enabled or disabled in
     /// the Canvas application.
-    status: ?FeatureStatus,
+    status: ?FeatureStatus = null,
 
     pub const json_field_names = .{
         .status = "Status",

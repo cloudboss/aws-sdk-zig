@@ -8,7 +8,7 @@ pub const EnvironmentAccountConnection = struct {
     /// The Amazon Resource Name (ARN) of an IAM service role in the environment
     /// account. Proton uses this role to provision infrastructure resources
     /// using CodeBuild-based provisioning in the associated environment account.
-    codebuild_role_arn: ?[]const u8,
+    codebuild_role_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
     /// provisioning directly defined components in the associated
@@ -23,7 +23,7 @@ pub const EnvironmentAccountConnection = struct {
     /// [Proton
     /// components](https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
     /// *Proton User Guide*.
-    component_role_arn: ?[]const u8,
+    component_role_arn: ?[]const u8 = null,
 
     /// The environment account that's connected to the environment account
     /// connection.

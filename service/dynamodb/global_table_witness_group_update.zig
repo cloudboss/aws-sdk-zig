@@ -12,14 +12,14 @@ pub const GlobalTableWitnessGroupUpdate = struct {
     /// Specifies a witness Region to be added to a new MRSC global table. The
     /// witness must be
     /// added when creating the MRSC global table.
-    create: ?CreateGlobalTableWitnessGroupMemberAction,
+    create: ?CreateGlobalTableWitnessGroupMemberAction = null,
 
     /// Specifies a witness Region to be removed from an existing global table. Must
     /// be done
     /// in conjunction with removing a replica. The deletion of both a witness and
     /// replica
     /// converts the remaining replica to a single-Region DynamoDB table.
-    delete: ?DeleteGlobalTableWitnessGroupMemberAction,
+    delete: ?DeleteGlobalTableWitnessGroupMemberAction = null,
 
     pub const json_field_names = .{
         .create = "Create",

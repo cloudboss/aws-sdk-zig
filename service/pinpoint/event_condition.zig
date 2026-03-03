@@ -4,11 +4,11 @@ const EventDimensions = @import("event_dimensions.zig").EventDimensions;
 /// activity in a journey.
 pub const EventCondition = struct {
     /// The dimensions for the event filter to use for the activity.
-    dimensions: ?EventDimensions,
+    dimensions: ?EventDimensions = null,
 
     /// The message identifier (message_id) for the message to use when determining
     /// whether message events meet the condition.
-    message_activity: ?[]const u8,
+    message_activity: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",

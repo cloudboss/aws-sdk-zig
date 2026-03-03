@@ -5,12 +5,12 @@ pub const WorkerResourceConfig = struct {
     cpu: []const u8,
 
     /// The disk requirements for every worker instance of the worker type.
-    disk: ?[]const u8,
+    disk: ?[]const u8 = null,
 
     /// The disk type for every worker instance of the work type. Shuffle optimized
     /// disks have higher performance characteristics and are better for shuffle
     /// heavy workloads. Default is `STANDARD`.
-    disk_type: ?[]const u8,
+    disk_type: ?[]const u8 = null,
 
     /// The memory requirements for every worker instance of the worker type.
     memory: []const u8,

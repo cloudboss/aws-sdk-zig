@@ -11,7 +11,7 @@ pub const File = struct {
     /// The version ID to identify a specific version of the Amazon S3 object that
     /// contains your
     /// data.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

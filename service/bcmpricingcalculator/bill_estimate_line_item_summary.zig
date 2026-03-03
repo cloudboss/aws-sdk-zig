@@ -4,48 +4,48 @@ const UsageQuantityResult = @import("usage_quantity_result.zig").UsageQuantityRe
 /// Provides a summary of a line item in a bill estimate.
 pub const BillEstimateLineItemSummary = struct {
     /// The availability zone associated with this line item, if applicable.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The estimated cost for this line item.
-    estimated_cost: ?CostAmount,
+    estimated_cost: ?CostAmount = null,
 
     /// The estimated usage quantity for this line item.
-    estimated_usage_quantity: ?UsageQuantityResult,
+    estimated_usage_quantity: ?UsageQuantityResult = null,
 
     /// The historical cost for this line item.
-    historical_cost: ?CostAmount,
+    historical_cost: ?CostAmount = null,
 
     /// The historical usage quantity for this line item.
-    historical_usage_quantity: ?UsageQuantityResult,
+    historical_usage_quantity: ?UsageQuantityResult = null,
 
     /// The unique identifier of this line item.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The line item identifier from the original bill.
-    line_item_id: ?[]const u8,
+    line_item_id: ?[]const u8 = null,
 
     /// The type of this line item (e.g., Usage, Tax, Credit).
-    line_item_type: ?[]const u8,
+    line_item_type: ?[]const u8 = null,
 
     /// The location associated with this line item.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The specific operation associated with this line item.
     operation: []const u8,
 
     /// The Amazon Web Services account ID of the payer for this line item.
-    payer_account_id: ?[]const u8,
+    payer_account_id: ?[]const u8 = null,
 
     /// The Amazon Resource Names (ARNs) of any Savings Plans applied to this line
     /// item.
-    savings_plan_arns: ?[]const []const u8,
+    savings_plan_arns: ?[]const []const u8 = null,
 
     /// The Amazon Web Services service code associated with this line item.
     service_code: []const u8,
 
     /// The Amazon Web Services account ID associated with the usage for this line
     /// item.
-    usage_account_id: ?[]const u8,
+    usage_account_id: ?[]const u8 = null,
 
     /// The type of usage for this line item.
     usage_type: []const u8,

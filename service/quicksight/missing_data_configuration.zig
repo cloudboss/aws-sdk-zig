@@ -13,7 +13,7 @@ pub const MissingDataConfiguration = struct {
     /// * `SHOW_AS_ZERO`: Show missing values as the value `0`.
     ///
     /// * `SHOW_AS_BLANK`: Display a blank space when rendering missing data.
-    treatment_option: ?MissingDataTreatmentOption,
+    treatment_option: ?MissingDataTreatmentOption = null,
 
     pub const json_field_names = .{
         .treatment_option = "TreatmentOption",

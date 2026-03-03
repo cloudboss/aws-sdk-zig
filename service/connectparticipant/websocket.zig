@@ -4,10 +4,10 @@ pub const Websocket = struct {
     ///
     /// It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
     /// 2019-11-08T02:41:28.172Z.
-    connection_expiry: ?[]const u8,
+    connection_expiry: ?[]const u8 = null,
 
     /// The URL of the websocket.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connection_expiry = "ConnectionExpiry",

@@ -13,7 +13,7 @@ pub const IotEventsAction = struct {
     /// `BatchPutMessage`
     /// ](https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchPutMessage.html). The resulting array can't have more
     /// than 10 messages.
-    batch_mode: ?bool,
+    batch_mode: ?bool = null,
 
     /// The name of the IoT Events input.
     input_name: []const u8,
@@ -26,7 +26,7 @@ pub const IotEventsAction = struct {
     /// Assign a value to this property to ensure that only one input (message) with
     /// a given
     /// `messageId` will be processed by an IoT Events detector.
-    message_id: ?[]const u8,
+    message_id: ?[]const u8 = null,
 
     /// The ARN of the role that grants IoT permission to send an input to an IoT
     /// Events detector. ("Action":"iotevents:BatchPutMessage").

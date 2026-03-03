@@ -6,7 +6,7 @@ pub const FileBatchJobIdentifier = struct {
     file_name: []const u8,
 
     /// The relative path to the file name for the batch job identifier.
-    folder_path: ?[]const u8,
+    folder_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .file_name = "fileName",

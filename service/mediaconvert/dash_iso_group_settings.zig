@@ -21,7 +21,7 @@ pub const DashIsoGroupSettings = struct {
     /// output group in your job. This default manifest references every output in
     /// the output group. To create additional DASH manifests that reference a
     /// subset of the outputs in the output group, specify a list of them here.
-    additional_manifests: ?[]const DashAdditionalManifest,
+    additional_manifests: ?[]const DashAdditionalManifest = null,
 
     /// Use this setting only when your audio codec is a Dolby one (AC3, EAC3, or
     /// Atmos) and your downstream workflow requires that your DASH manifest use the
@@ -32,12 +32,12 @@ pub const DashIsoGroupSettings = struct {
     /// MediaConvert write this: urn:mpeg:mpegB:cicp:ChannelConfiguration. Choose
     /// Dolby channel configuration to have MediaConvert write this instead:
     /// tag:dolby.com,2014:dash:audio_channel_configuration:2011.
-    audio_channel_config_scheme_id_uri: ?DashIsoGroupAudioChannelConfigSchemeIdUri,
+    audio_channel_config_scheme_id_uri: ?DashIsoGroupAudioChannelConfigSchemeIdUri = null,
 
     /// A partial URI prefix that will be put in the manifest (.mpd) file at the top
     /// level BaseURL element. Can be used if streams are delivered from a different
     /// URL than the manifest file.
-    base_url: ?[]const u8,
+    base_url: ?[]const u8 = null,
 
     /// Specify whether MediaConvert generates I-frame only video segments for DASH
     /// trick play, also known as trick mode. When specified, the I-frame only video
@@ -48,7 +48,7 @@ pub const DashIsoGroupSettings = struct {
     /// URI, and used for the I-frame only video segment files. You may also include
     /// format identifiers. For more information, see:
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html#using-settings-variables-with-streaming-outputs To not generate I-frame only video segments: Leave blank.
-    dash_i_frame_trick_play_name_modifier: ?[]const u8,
+    dash_i_frame_trick_play_name_modifier: ?[]const u8 = null,
 
     /// Specify how MediaConvert writes SegmentTimeline in your output DASH
     /// manifest. To write a SegmentTimeline for outputs that you also specify a
@@ -60,21 +60,21 @@ pub const DashIsoGroupSettings = struct {
     /// To write a video AdaptationSet for each different output framerate, and a
     /// common SegmentTimeline in each AdaptationSet: Choose Distinct. To write a
     /// SegmentTimeline in each AdaptationSet: Choose Full.
-    dash_manifest_style: ?DashManifestStyle,
+    dash_manifest_style: ?DashManifestStyle = null,
 
     /// Use Destination to specify the S3 output location and the output filename
     /// base. Destination accepts format identifiers. If you do not specify the base
     /// filename in the URI, the service will use the filename of the input file. If
     /// your job has multiple inputs, the service uses the filename of the first
     /// input file.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// Settings associated with the destination. Will vary based on the type of
     /// destination
-    destination_settings: ?DestinationSettings,
+    destination_settings: ?DestinationSettings = null,
 
     /// DRM settings.
-    encryption: ?DashIsoEncryptionSettings,
+    encryption: ?DashIsoEncryptionSettings = null,
 
     /// Length of fragments to generate (in seconds). Fragment length must be
     /// compatible with GOP size and Framerate. Note that fragments will end on the
@@ -82,10 +82,10 @@ pub const DashIsoGroupSettings = struct {
     /// longer. When Emit Single File is checked, the fragmentation is internal to a
     /// single output file and it does not cause the creation of many output files
     /// as in other output types.
-    fragment_length: ?i32,
+    fragment_length: ?i32 = null,
 
     /// Supports HbbTV specification as indicated
-    hbbtv_compliance: ?DashIsoHbbtvCompliance,
+    hbbtv_compliance: ?DashIsoHbbtvCompliance = null,
 
     /// Specify whether MediaConvert generates images for trick play. Keep the
     /// default value, None, to not generate any images. Choose Thumbnail to
@@ -96,14 +96,14 @@ pub const DashIsoGroupSettings = struct {
     /// full-frame images that MediaConvert creates with this feature are compatible
     /// with this Roku specification:
     /// https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
-    image_based_trick_play: ?DashIsoImageBasedTrickPlay,
+    image_based_trick_play: ?DashIsoImageBasedTrickPlay = null,
 
     /// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
-    image_based_trick_play_settings: ?DashIsoImageBasedTrickPlaySettings,
+    image_based_trick_play_settings: ?DashIsoImageBasedTrickPlaySettings = null,
 
     /// Minimum time of initially buffered media that is needed to ensure smooth
     /// playout.
-    min_buffer_time: ?i32,
+    min_buffer_time: ?i32 = null,
 
     /// Keep this setting at the default value of 0, unless you are troubleshooting
     /// a problem with how devices play back the end of your video asset. If you
@@ -116,7 +116,7 @@ pub const DashIsoGroupSettings = struct {
     /// For example, your segment length is 3 seconds and your final segment is .5
     /// seconds without a minimum final segment length; when you set the minimum
     /// final segment length to 1, your final segment is 3.5 seconds.
-    min_final_segment_length: ?f64,
+    min_final_segment_length: ?f64 = null,
 
     /// Specify how the value for bandwidth is determined for each video
     /// Representation in your output MPD manifest. We recommend that you choose a
@@ -124,7 +124,7 @@ pub const DashIsoGroupSettings = struct {
     /// configuration. Max: Use the same value that you specify for Max bitrate in
     /// the video output, in bits per second. Average: Use the calculated average
     /// bitrate of the encoded video output, in bits per second.
-    mpd_manifest_bandwidth_type: ?DashIsoMpdManifestBandwidthType,
+    mpd_manifest_bandwidth_type: ?DashIsoMpdManifestBandwidthType = null,
 
     /// Specify whether your DASH profile is on-demand or main. When you choose Main
     /// profile, the service signals urn:mpeg:dash:profile:isoff-main:2011 in your
@@ -132,7 +132,7 @@ pub const DashIsoGroupSettings = struct {
     /// urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose
     /// On-demand, you must also set the output group setting Segment control to
     /// Single file.
-    mpd_profile: ?DashIsoMpdProfile,
+    mpd_profile: ?DashIsoMpdProfile = null,
 
     /// Use this setting only when your output video stream has B-frames, which
     /// causes the initial presentation time stamp (PTS) to be offset from the
@@ -143,19 +143,19 @@ pub const DashIsoGroupSettings = struct {
     /// the video stream and instead write the initial time stamp as zero in the
     /// manifest. For outputs that don't have B-frames, the time stamps in your DASH
     /// manifests start at zero regardless of your choice here.
-    pts_offset_handling_for_b_frames: ?DashIsoPtsOffsetHandlingForBFrames,
+    pts_offset_handling_for_b_frames: ?DashIsoPtsOffsetHandlingForBFrames = null,
 
     /// When set to SINGLE_FILE, a single output file is generated, which is
     /// internally segmented using the Fragment Length and Segment Length. When set
     /// to SEGMENTED_FILES, separate segment files will be created.
-    segment_control: ?DashIsoSegmentControl,
+    segment_control: ?DashIsoSegmentControl = null,
 
     /// Specify the length, in whole seconds, of each segment. When you don't
     /// specify a value, MediaConvert defaults to 30. Related settings: Use Segment
     /// length control to specify whether the encoder enforces this value strictly.
     /// Use Segment control to specify whether MediaConvert creates separate segment
     /// files or one content file that has metadata to mark the segment boundaries.
-    segment_length: ?i32,
+    segment_length: ?i32 = null,
 
     /// Specify how you want MediaConvert to determine segment lengths in this
     /// output group. To use the exact value that you specify under Segment length:
@@ -174,7 +174,7 @@ pub const DashIsoGroupSettings = struct {
     /// 2X). For example: 5, 15, 30 and 60. Or: 25 and 50. (Outputs must share an
     /// integer multiple.) - Output audio codec: Specify Advanced Audio Coding
     /// (AAC). - Output sample rate: Choose 48kHz.
-    segment_length_control: ?DashIsoSegmentLengthControl,
+    segment_length_control: ?DashIsoSegmentLengthControl = null,
 
     /// Specify the video sample composition time offset mode in the output fMP4
     /// TRUN box. For wider player compatibility, set Video composition offsets to
@@ -183,7 +183,7 @@ pub const DashIsoGroupSettings = struct {
     /// integers. For strict fMP4 video and audio timing, set Video composition
     /// offsets to Signed. The earliest presentation time will be equal to zero, and
     /// sample composition time offsets will increment using signed integers.
-    video_composition_offsets: ?DashIsoVideoCompositionOffsets,
+    video_composition_offsets: ?DashIsoVideoCompositionOffsets = null,
 
     /// If you get an HTTP error in the 400 range when you play back your DASH
     /// output, enable this setting and run your transcoding job again. When you
@@ -192,7 +192,7 @@ pub const DashIsoGroupSettings = struct {
     /// SegmentTimeline element, inside SegmentTemplate at the Representation level.
     /// When you don't enable this setting, the service writes approximate segment
     /// durations in your DASH manifest.
-    write_segment_timeline_in_representation: ?DashIsoWriteSegmentTimelineInRepresentation,
+    write_segment_timeline_in_representation: ?DashIsoWriteSegmentTimelineInRepresentation = null,
 
     pub const json_field_names = .{
         .additional_manifests = "AdditionalManifests",

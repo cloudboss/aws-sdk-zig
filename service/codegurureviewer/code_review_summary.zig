@@ -8,20 +8,20 @@ const Type = @import("type.zig").Type;
 pub const CodeReviewSummary = struct {
     /// The Amazon Resource Name (ARN) of the
     /// [CodeReview](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html) object.
-    code_review_arn: ?[]const u8,
+    code_review_arn: ?[]const u8 = null,
 
     /// The time, in milliseconds since the epoch, when the code review was created.
-    created_time_stamp: ?i64,
+    created_time_stamp: ?i64 = null,
 
     /// The time, in milliseconds since the epoch, when the code review was last
     /// updated.
-    last_updated_time_stamp: ?i64,
+    last_updated_time_stamp: ?i64 = null,
 
     /// The statistics from the code review.
-    metrics_summary: ?MetricsSummary,
+    metrics_summary: ?MetricsSummary = null,
 
     /// The name of the code review.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The owner of the repository. For an Amazon Web Services CodeCommit
     /// repository, this is the Amazon Web Services account ID of the
@@ -30,18 +30,18 @@ pub const CodeReviewSummary = struct {
     /// repository.
     /// For an S3 repository, it can be the username or Amazon Web Services account
     /// ID.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The provider type of the repository association.
-    provider_type: ?ProviderType,
+    provider_type: ?ProviderType = null,
 
     /// The pull request ID for the code review.
-    pull_request_id: ?[]const u8,
+    pull_request_id: ?[]const u8 = null,
 
     /// The name of the repository.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
-    source_code_type: ?SourceCodeType,
+    source_code_type: ?SourceCodeType = null,
 
     /// The state of the code review.
     ///
@@ -54,10 +54,10 @@ pub const CodeReviewSummary = struct {
     /// * `Failed`: The code review failed.
     ///
     /// * `Deleting`: The code review is being deleted.
-    state: ?JobState,
+    state: ?JobState = null,
 
     /// The type of the code review.
-    @"type": ?Type,
+    @"type": ?Type = null,
 
     pub const json_field_names = .{
         .code_review_arn = "CodeReviewArn",

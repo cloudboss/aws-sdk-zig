@@ -9,13 +9,13 @@ pub const Service = struct {
     /// The name of the code repository branch that holds the code that's deployed
     /// in
     /// Proton.
-    branch_name: ?[]const u8,
+    branch_name: ?[]const u8 = null,
 
     /// The time when the service was created.
     created_at: i64,
 
     /// A description of the service.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time when the service was last modified.
     last_modified_at: i64,
@@ -24,17 +24,17 @@ pub const Service = struct {
     name: []const u8,
 
     /// The service pipeline detail data.
-    pipeline: ?ServicePipeline,
+    pipeline: ?ServicePipeline = null,
 
     /// The Amazon Resource Name (ARN) of the repository connection. For more
     /// information, see
     /// [Setting up an
     /// AWS CodeStar
     /// connection](https://docs.aws.amazon.com/proton/latest/userguide/setting-up-for-service.html#setting-up-vcontrol) in the *Proton User Guide*.
-    repository_connection_arn: ?[]const u8,
+    repository_connection_arn: ?[]const u8 = null,
 
     /// The ID of the source code repository.
-    repository_id: ?[]const u8,
+    repository_id: ?[]const u8 = null,
 
     /// The formatted specification that defines the service.
     spec: []const u8,
@@ -43,7 +43,7 @@ pub const Service = struct {
     status: ServiceStatus,
 
     /// A service status message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The name of the service template.
     template_name: []const u8,

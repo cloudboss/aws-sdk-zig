@@ -4,16 +4,16 @@ const TargetType = @import("target_type.zig").TargetType;
 /// Describes a route in a route table.
 pub const Route = struct {
     /// The destination of the route.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// The type of destination for the route.
-    destination_type: ?DestinationType,
+    destination_type: ?DestinationType = null,
 
     /// The route's target.
-    target: ?[]const u8,
+    target: ?[]const u8 = null,
 
     /// The type of target for the route.
-    target_type: ?TargetType,
+    target_type: ?TargetType = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

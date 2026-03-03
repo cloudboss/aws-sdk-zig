@@ -5,14 +5,14 @@ const AwsElbLbCookieStickinessPolicy = @import("aws_elb_lb_cookie_stickiness_pol
 pub const AwsElbLoadBalancerPolicies = struct {
     /// The stickiness policies that are created using
     /// `CreateAppCookieStickinessPolicy`.
-    app_cookie_stickiness_policies: ?[]const AwsElbAppCookieStickinessPolicy,
+    app_cookie_stickiness_policies: ?[]const AwsElbAppCookieStickinessPolicy = null,
 
     /// The stickiness policies that are created using
     /// `CreateLBCookieStickinessPolicy`.
-    lb_cookie_stickiness_policies: ?[]const AwsElbLbCookieStickinessPolicy,
+    lb_cookie_stickiness_policies: ?[]const AwsElbLbCookieStickinessPolicy = null,
 
     /// The policies other than the stickiness policies.
-    other_policies: ?[]const []const u8,
+    other_policies: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .app_cookie_stickiness_policies = "AppCookieStickinessPolicies",

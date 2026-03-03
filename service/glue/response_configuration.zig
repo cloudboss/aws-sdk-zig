@@ -3,7 +3,7 @@
 pub const ResponseConfiguration = struct {
     /// The JSON path expression that identifies where error information is located
     /// within API responses when requests fail.
-    error_path: ?[]const u8,
+    error_path: ?[]const u8 = null,
 
     /// The JSON path expression that identifies where the actual result data is
     /// located within the API response.

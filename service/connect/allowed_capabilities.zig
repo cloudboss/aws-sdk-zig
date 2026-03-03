@@ -3,10 +3,10 @@ const ParticipantCapabilities = @import("participant_capabilities.zig").Particip
 /// Information about the capabilities enabled for participants of the contact.
 pub const AllowedCapabilities = struct {
     /// Information about the agent's video sharing capabilities.
-    agent: ?ParticipantCapabilities,
+    agent: ?ParticipantCapabilities = null,
 
     /// Information about the customer's video sharing capabilities.
-    customer: ?ParticipantCapabilities,
+    customer: ?ParticipantCapabilities = null,
 
     pub const json_field_names = .{
         .agent = "Agent",

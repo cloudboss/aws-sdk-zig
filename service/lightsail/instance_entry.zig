@@ -64,7 +64,7 @@ pub const InstanceEntry = struct {
     /// your instance
     /// varies. Amazon Linux and CentOS use `yum`, Debian and Ubuntu use
     /// `apt-get`, and FreeBSD uses `pkg`.
-    user_data: ?[]const u8,
+    user_data: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .availability_zone = "availabilityZone",

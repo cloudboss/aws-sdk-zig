@@ -41,5 +41,5 @@ pub const MetricCollectionType = struct {
     /// * `GroupAndWarmPoolDesiredCapacity`
     ///
     /// * `GroupAndWarmPoolTotalCapacity`
-    metric: ?[]const u8,
+    metric: ?[]const u8 = null,
 };

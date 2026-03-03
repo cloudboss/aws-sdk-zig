@@ -6,40 +6,40 @@ const OperationStatus = @import("operation_status.zig").OperationStatus;
 /// Describes the API operation.
 pub const Operation = struct {
     /// The timestamp when the operation was initialized (`1479816991.349`).
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The error code.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error details.
-    error_details: ?[]const u8,
+    error_details: ?[]const u8 = null,
 
     /// The ID of the operation.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A Boolean value indicating whether the operation is terminal.
-    is_terminal: ?bool,
+    is_terminal: ?bool = null,
 
     /// The Amazon Web Services Region and Availability Zone.
-    location: ?ResourceLocation,
+    location: ?ResourceLocation = null,
 
     /// Details about the operation (`Debian-1GB-Ohio-1`).
-    operation_details: ?[]const u8,
+    operation_details: ?[]const u8 = null,
 
     /// The type of operation.
-    operation_type: ?OperationType,
+    operation_type: ?OperationType = null,
 
     /// The resource name.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// The resource type.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The status of the operation.
-    status: ?OperationStatus,
+    status: ?OperationStatus = null,
 
     /// The timestamp when the status was changed (`1479816991.349`).
-    status_changed_at: ?i64,
+    status_changed_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

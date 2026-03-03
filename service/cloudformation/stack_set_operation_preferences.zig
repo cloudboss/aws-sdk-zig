@@ -32,7 +32,7 @@ pub const StackSetOperationPreferences = struct {
     /// operations to run at the concurrency level set by the `MaxConcurrentCount`
     /// value, or
     /// `MaxConcurrentPercentage`, regardless of the number of failures.
-    concurrency_mode: ?ConcurrencyMode,
+    concurrency_mode: ?ConcurrencyMode = null,
 
     /// The number of accounts per Region this operation can fail in before
     /// CloudFormation stops the
@@ -44,7 +44,7 @@ pub const StackSetOperationPreferences = struct {
     /// `FailureTolerancePercentage`, but not both.
     ///
     /// By default, `0` is specified.
-    failure_tolerance_count: ?i32,
+    failure_tolerance_count: ?i32 = null,
 
     /// The percentage of accounts per Region this stack operation can fail in
     /// before CloudFormation
@@ -60,7 +60,7 @@ pub const StackSetOperationPreferences = struct {
     /// `FailureTolerancePercentage`, but not both.
     ///
     /// By default, `0` is specified.
-    failure_tolerance_percentage: ?i32,
+    failure_tolerance_percentage: ?i32 = null,
 
     /// The maximum number of accounts in which to perform this operation at one
     /// time. This can
@@ -77,7 +77,7 @@ pub const StackSetOperationPreferences = struct {
     /// `MaxConcurrentPercentage`, but not both.
     ///
     /// By default, `1` is specified.
-    max_concurrent_count: ?i32,
+    max_concurrent_count: ?i32 = null,
 
     /// The maximum percentage of accounts in which to perform this operation at one
     /// time.
@@ -97,13 +97,13 @@ pub const StackSetOperationPreferences = struct {
     /// `MaxConcurrentPercentage`, but not both.
     ///
     /// By default, `1` is specified.
-    max_concurrent_percentage: ?i32,
+    max_concurrent_percentage: ?i32 = null,
 
     /// The concurrency type of deploying StackSets operations in Regions, could be
     /// in parallel or
     /// one Region at a time.
-    region_concurrency_type: ?RegionConcurrencyType,
+    region_concurrency_type: ?RegionConcurrencyType = null,
 
     /// The order of the Regions where you want to perform the stack operation.
-    region_order: ?[]const []const u8,
+    region_order: ?[]const []const u8 = null,
 };

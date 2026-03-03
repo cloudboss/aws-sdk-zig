@@ -6,7 +6,7 @@ pub const SearchForSuggestionsResult = struct {
     /// For more information about using categories, including a list of Amazon
     /// Location categories, see [Categories and
     /// filtering](https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html), in the *Amazon Location Service developer guide*.
-    categories: ?[]const []const u8,
+    categories: ?[]const []const u8 = null,
 
     /// The unique identifier of the Place. You can use this with the `GetPlace`
     /// operation to find the place again later, or to get full information for the
@@ -17,11 +17,11 @@ pub const SearchForSuggestionsResult = struct {
     ///
     /// For `SearchPlaceIndexForSuggestions` operations, the `PlaceId` is returned
     /// by place indexes that use Esri, Grab, or HERE as data providers.
-    place_id: ?[]const u8,
+    place_id: ?[]const u8 = null,
 
     /// Categories from the data provider that describe the Place that are not
     /// mapped to any Amazon Location categories.
-    supplemental_categories: ?[]const []const u8,
+    supplemental_categories: ?[]const []const u8 = null,
 
     /// The text of the place suggestion, typically formatted as an address string.
     text: []const u8,

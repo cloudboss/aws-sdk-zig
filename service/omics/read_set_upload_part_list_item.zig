@@ -9,10 +9,10 @@ pub const ReadSetUploadPartListItem = struct {
     checksum: []const u8,
 
     /// The time stamp for when a direct upload was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The time stamp for the most recent update to an uploaded part.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The number identifying the part in an upload.
     part_number: i32,

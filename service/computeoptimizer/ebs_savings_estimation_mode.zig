@@ -5,7 +5,7 @@ const EBSSavingsEstimationModeSource = @import("ebs_savings_estimation_mode_sour
 pub const EBSSavingsEstimationMode = struct {
     /// Describes the source for calculating the savings opportunity for Amazon EBS
     /// volumes.
-    source: ?EBSSavingsEstimationModeSource,
+    source: ?EBSSavingsEstimationModeSource = null,
 
     pub const json_field_names = .{
         .source = "source",

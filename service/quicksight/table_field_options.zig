@@ -6,16 +6,16 @@ const TransposedTableOption = @import("transposed_table_option.zig").TransposedT
 pub const TableFieldOptions = struct {
     /// The order of the field IDs that are configured as field options for a table
     /// visual.
-    order: ?[]const []const u8,
+    order: ?[]const []const u8 = null,
 
     /// The settings for the pinned columns of a table visual.
-    pinned_field_options: ?TablePinnedFieldOptions,
+    pinned_field_options: ?TablePinnedFieldOptions = null,
 
     /// The field options to be configured to a table.
-    selected_field_options: ?[]const TableFieldOption,
+    selected_field_options: ?[]const TableFieldOption = null,
 
     /// The `TableOptions` of a transposed table.
-    transposed_table_options: ?[]const TransposedTableOption,
+    transposed_table_options: ?[]const TransposedTableOption = null,
 
     pub const json_field_names = .{
         .order = "Order",

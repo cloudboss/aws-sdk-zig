@@ -7,7 +7,7 @@ pub const AudienceGenerationJobSummary = struct {
 
     /// The identifier of the collaboration that contains this audience generation
     /// job.
-    collaboration_id: ?[]const u8,
+    collaboration_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the configured audience model that was
     /// used for this audience generation job.
@@ -17,13 +17,13 @@ pub const AudienceGenerationJobSummary = struct {
     create_time: i64,
 
     /// The description of the audience generation job.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the audience generation job.
     name: []const u8,
 
     /// The AWS Account that submitted the job.
-    started_by: ?[]const u8,
+    started_by: ?[]const u8 = null,
 
     /// The status of the audience generation job.
     status: AudienceGenerationJobStatus,

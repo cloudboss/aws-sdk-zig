@@ -13,13 +13,13 @@ pub const SrtCallerRouterOutputConfiguration = struct {
 
     /// Defines the encryption settings for an SRT caller output, including the
     /// encryption key configuration and associated parameters.
-    encryption_configuration: ?SrtEncryptionConfiguration,
+    encryption_configuration: ?SrtEncryptionConfiguration = null,
 
     /// The minimum latency in milliseconds for the SRT protocol in caller mode.
     minimum_latency_milliseconds: i64,
 
     /// The stream ID for the SRT protocol in caller mode.
-    stream_id: ?[]const u8,
+    stream_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_address = "DestinationAddress",

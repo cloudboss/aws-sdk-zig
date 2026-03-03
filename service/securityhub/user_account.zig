@@ -8,10 +8,10 @@
 /// ](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html) in the *Amazon GuardDuty User Guide*.
 pub const UserAccount = struct {
     /// The name of the user account involved in the attack sequence.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The unique identifier of the user account involved in the attack sequence.
-    uid: ?[]const u8,
+    uid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

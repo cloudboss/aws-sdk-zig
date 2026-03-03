@@ -5,10 +5,10 @@ pub const ListSessionsResponse = struct {
     /// pagination if a previous request was truncated. To obtain the next set of
     /// pages, pass in
     /// the `NextToken` from the response object of the previous page call.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// A list of sessions.
-    sessions: ?[]const SessionSummary,
+    sessions: ?[]const SessionSummary = null,
 
     pub const json_field_names = .{
         .next_token = "NextToken",

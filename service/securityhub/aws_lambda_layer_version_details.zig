@@ -16,17 +16,17 @@ pub const AwsLambdaLayerVersionDetails = struct {
     /// go1.x | ruby2.5 | ruby2.7 | provided | provided.al2 | nodejs18.x |
     /// python3.10 | java17 | ruby3.2 | python3.11 | nodejs20.x | provided.al2023 |
     /// python3.12 | java21`
-    compatible_runtimes: ?[]const []const u8,
+    compatible_runtimes: ?[]const []const u8 = null,
 
     /// Indicates when the version was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    created_date: ?[]const u8,
+    created_date: ?[]const u8 = null,
 
     /// The version number.
-    version: ?i64,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .compatible_runtimes = "CompatibleRuntimes",

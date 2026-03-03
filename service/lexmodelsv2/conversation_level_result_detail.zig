@@ -6,7 +6,7 @@ pub const ConversationLevelResultDetail = struct {
     end_to_end_result: TestResultMatchStatus,
 
     /// The speech transcription success or failure details of the conversation.
-    speech_transcription_result: ?TestResultMatchStatus,
+    speech_transcription_result: ?TestResultMatchStatus = null,
 
     pub const json_field_names = .{
         .end_to_end_result = "endToEndResult",

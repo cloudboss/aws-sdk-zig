@@ -7,7 +7,7 @@ pub const InboundEmailContent = struct {
     message_source_type: InboundMessageSourceType,
 
     /// The raw email body content.
-    raw_message: ?InboundRawMessage,
+    raw_message: ?InboundRawMessage = null,
 
     pub const json_field_names = .{
         .message_source_type = "MessageSourceType",

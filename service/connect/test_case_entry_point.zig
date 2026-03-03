@@ -4,10 +4,10 @@ const VoiceCallEntryPointParameters = @import("voice_call_entry_point_parameters
 /// Defines the starting point for a test case.
 pub const TestCaseEntryPoint = struct {
     /// The type of entry point.
-    @"type": ?TestCaseEntryPointType,
+    @"type": ?TestCaseEntryPointType = null,
 
     /// Parameters for voice call entry point.
-    voice_call_entry_point_parameters: ?VoiceCallEntryPointParameters,
+    voice_call_entry_point_parameters: ?VoiceCallEntryPointParameters = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

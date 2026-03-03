@@ -7,43 +7,43 @@ const Tag = @import("tag.zig").Tag;
 /// describes a created file system association.
 pub const FileSystemAssociationInfo = struct {
     /// The Amazon Resource Name (ARN) of the storage used for the audit logs.
-    audit_destination_arn: ?[]const u8,
+    audit_destination_arn: ?[]const u8 = null,
 
-    cache_attributes: ?CacheAttributes,
+    cache_attributes: ?CacheAttributes = null,
 
     /// Specifies network configuration information for the gateway associated with
     /// the Amazon FSx file system.
     ///
     /// If multiple file systems are associated with this gateway, this parameter's
     /// `IpAddresses` field is required.
-    endpoint_network_configuration: ?EndpointNetworkConfiguration,
+    endpoint_network_configuration: ?EndpointNetworkConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the file system association.
-    file_system_association_arn: ?[]const u8,
+    file_system_association_arn: ?[]const u8 = null,
 
     /// The status of the file system association. Valid Values: `AVAILABLE` |
     /// `CREATING` | `DELETING` | `FORCE_DELETING` |
     /// `UPDATING` | `ERROR`
-    file_system_association_status: ?[]const u8,
+    file_system_association_status: ?[]const u8 = null,
 
     /// An array containing the FileSystemAssociationStatusDetail data type, which
     /// provides
     /// detailed information on file system association status.
-    file_system_association_status_details: ?[]const FileSystemAssociationStatusDetail,
+    file_system_association_status_details: ?[]const FileSystemAssociationStatusDetail = null,
 
-    gateway_arn: ?[]const u8,
+    gateway_arn: ?[]const u8 = null,
 
     /// The ARN of the backend Amazon FSx file system used for storing file data.
     /// For
     /// information, see
     /// [FileSystem](https://docs.aws.amazon.com/fsx/latest/APIReference/API_FileSystem.html) in the
     /// *Amazon FSx API Reference*.
-    location_arn: ?[]const u8,
+    location_arn: ?[]const u8 = null,
 
     /// A list of up to 50 tags assigned to the SMB file share, sorted
     /// alphabetically by key
     /// name. Each tag is a key-value pair.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .audit_destination_arn = "AuditDestinationARN",

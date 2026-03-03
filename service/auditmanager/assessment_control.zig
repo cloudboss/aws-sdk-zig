@@ -9,28 +9,28 @@ pub const AssessmentControl = struct {
     assessment_report_evidence_count: i32 = 0,
 
     /// The list of comments that's attached to the control.
-    comments: ?[]const ControlComment,
+    comments: ?[]const ControlComment = null,
 
     /// The description of the control.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The amount of evidence that's collected for the control.
     evidence_count: i32 = 0,
 
     /// The list of data sources for the evidence.
-    evidence_sources: ?[]const []const u8,
+    evidence_sources: ?[]const []const u8 = null,
 
     /// The identifier for the control.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the control.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The response of the control.
-    response: ?ControlResponse,
+    response: ?ControlResponse = null,
 
     /// The status of the control.
-    status: ?ControlStatus,
+    status: ?ControlStatus = null,
 
     pub const json_field_names = .{
         .assessment_report_evidence_count = "assessmentReportEvidenceCount",

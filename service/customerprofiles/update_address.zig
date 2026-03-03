@@ -1,34 +1,34 @@
 /// Updates associated with the address properties of a customer profile.
 pub const UpdateAddress = struct {
     /// The first line of a customer address.
-    address_1: ?[]const u8,
+    address_1: ?[]const u8 = null,
 
     /// The second line of a customer address.
-    address_2: ?[]const u8,
+    address_2: ?[]const u8 = null,
 
     /// The third line of a customer address.
-    address_3: ?[]const u8,
+    address_3: ?[]const u8 = null,
 
     /// The fourth line of a customer address.
-    address_4: ?[]const u8,
+    address_4: ?[]const u8 = null,
 
     /// The city in which a customer lives.
-    city: ?[]const u8,
+    city: ?[]const u8 = null,
 
     /// The country in which a customer lives.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// The county in which a customer lives.
-    county: ?[]const u8,
+    county: ?[]const u8 = null,
 
     /// The postal code of a customer address.
-    postal_code: ?[]const u8,
+    postal_code: ?[]const u8 = null,
 
     /// The province in which a customer lives.
-    province: ?[]const u8,
+    province: ?[]const u8 = null,
 
     /// The state in which a customer lives.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .address_1 = "Address1",

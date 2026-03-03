@@ -27,11 +27,11 @@ pub const AudioSelector = struct {
     /// Frame depending on your input, regardless of the accuracy of your input's
     /// STTS table. Your output audio and video may not be aligned or it may contain
     /// audio artifacts.
-    audio_duration_correction: ?AudioDurationCorrection,
+    audio_duration_correction: ?AudioDurationCorrection = null,
 
     /// Selects a specific language code from within an audio source, using the ISO
     /// 639-2 or ISO 639-3 three-letter language code
-    custom_language_code: ?[]const u8,
+    custom_language_code: ?[]const u8 = null,
 
     /// Specify a fallback audio selector for this input. Use to ensure outputs have
     /// audio even when the audio selector you specify in your output is missing
@@ -42,10 +42,10 @@ pub const AudioSelector = struct {
     /// (Unchecked in the MediaConvert console): MediaConvert will not fallback from
     /// any missing audio selector. Any output specifying a missing audio selector
     /// will be silent.
-    default_selection: ?AudioDefaultSelection,
+    default_selection: ?AudioDefaultSelection = null,
 
     /// Specify the S3, HTTP, or HTTPS URL for your external audio file input.
-    external_audio_file_input: ?[]const u8,
+    external_audio_file_input: ?[]const u8 = null,
 
     /// Settings specific to audio sources in an HLS alternate rendition group.
     /// Specify the properties (renditionGroupId, renditionName or
@@ -55,22 +55,22 @@ pub const AudioSelector = struct {
     /// If no properties in hlsRenditionGroupSettings are specified, the default
     /// audio track within the video segment is chosen. If there is no audio within
     /// video segment, the alternative audio with DEFAULT=YES is chosen instead.
-    hls_rendition_group_settings: ?HlsRenditionGroupSettings,
+    hls_rendition_group_settings: ?HlsRenditionGroupSettings = null,
 
     /// Specify the language, using an ISO 639-2 three-letter code in all capital
     /// letters. You can find a list of codes at:
     /// https://www.loc.gov/standards/iso639-2/php/code_list.php
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// Specify a time delta, in milliseconds, to offset the audio from the input
     /// video.
     /// To specify no offset: Keep the default value, 0.
     /// To specify an offset: Enter an integer from -2147483648 to 2147483647
-    offset: ?i32,
+    offset: ?i32 = null,
 
     /// Selects a specific PID from within an audio source (e.g. 257 selects PID
     /// 0x101).
-    pids: ?[]const i32,
+    pids: ?[]const i32 = null,
 
     /// Use this setting for input streams that contain Dolby E, to have the service
     /// extract specific program data from the track. To select multiple programs,
@@ -80,12 +80,12 @@ pub const AudioSelector = struct {
     /// incorrect metadata, you can choose All channels instead of a program number
     /// to have the service ignore the program IDs and include all the programs in
     /// the track.
-    program_selection: ?i32,
+    program_selection: ?i32 = null,
 
     /// Use these settings to reorder the audio channels of one input to match those
     /// of another input. This allows you to combine the two files into a single
     /// output, one after the other.
-    remix_settings: ?RemixSettings,
+    remix_settings: ?RemixSettings = null,
 
     /// Specify how MediaConvert selects audio content within your input. The
     /// default is Track. PID: Select audio by specifying the Packet Identifier
@@ -111,7 +111,7 @@ pub const AudioSelector = struct {
     /// which is not recognized by the service, then the corresponding stream number
     /// will still be reserved for future use. If more types of audio data get
     /// recognized in the future, these numberings will not shift.
-    selector_type: ?AudioSelectorType,
+    selector_type: ?AudioSelectorType = null,
 
     /// Identify a track from the input audio to include in this selector by
     /// entering the stream index number. These numberings count all tracks in the
@@ -119,7 +119,7 @@ pub const AudioSelector = struct {
     /// include several tracks in a single audio selector, specify multiple tracks
     /// as follows. Using the console, enter a comma-separated list. For example,
     /// type "1,2,3" to include tracks 1 through 3.
-    streams: ?[]const i32,
+    streams: ?[]const i32 = null,
 
     /// Identify a track from the input audio to include in this selector by
     /// entering the track index number. These numberings include only tracks
@@ -128,7 +128,7 @@ pub const AudioSelector = struct {
     /// single audio selector, specify multiple tracks as follows. Using the
     /// console, enter a comma-separated list. For example, type "1,2,3" to include
     /// tracks 1 through 3.
-    tracks: ?[]const i32,
+    tracks: ?[]const i32 = null,
 
     pub const json_field_names = .{
         .audio_duration_correction = "AudioDurationCorrection",

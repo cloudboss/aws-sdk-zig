@@ -4,16 +4,16 @@ const MediaPipelineTaskStatus = @import("media_pipeline_task_status.zig").MediaP
 /// on a media insights pipeline.
 pub const VoiceToneAnalysisTask = struct {
     /// The time at which a voice tone analysis task was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The time at which a voice tone analysis task was updated.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     /// The ID of the voice tone analysis task.
-    voice_tone_analysis_task_id: ?[]const u8,
+    voice_tone_analysis_task_id: ?[]const u8 = null,
 
     /// The status of a voice tone analysis task.
-    voice_tone_analysis_task_status: ?MediaPipelineTaskStatus,
+    voice_tone_analysis_task_status: ?MediaPipelineTaskStatus = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

@@ -17,7 +17,7 @@ pub const ParseCloudfront = struct {
     /// Omit this parameter and the whole log message will be processed by this
     /// processor. No
     /// other value than `@message` is allowed for `source`.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source = "source",

@@ -5,13 +5,13 @@ const DeviceDiscoveryStatus = @import("device_discovery_status.zig").DeviceDisco
 /// including its identifier, type, and status.
 pub const DeviceDiscoverySummary = struct {
     /// The type of discovery process used to find devices.
-    discovery_type: ?DiscoveryType,
+    discovery_type: ?DiscoveryType = null,
 
     /// The unique identifier of the device discovery job.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The current status of the device discovery job.
-    status: ?DeviceDiscoveryStatus,
+    status: ?DeviceDiscoveryStatus = null,
 
     pub const json_field_names = .{
         .discovery_type = "DiscoveryType",

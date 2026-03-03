@@ -3,7 +3,7 @@ const ErrorHandlingConfig = @import("error_handling_config.zig").ErrorHandlingCo
 /// The properties that Amazon AppFlow applies when you use Marketo as a flow
 /// destination.
 pub const MarketoDestinationProperties = struct {
-    error_handling_config: ?ErrorHandlingConfig,
+    error_handling_config: ?ErrorHandlingConfig = null,
 
     /// The object specified in the Marketo flow destination.
     object: []const u8,

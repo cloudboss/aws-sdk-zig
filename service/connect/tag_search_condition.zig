@@ -3,18 +3,18 @@ const StringComparisonType = @import("string_comparison_type.zig").StringCompari
 /// The search criteria to be used to return tags.
 pub const TagSearchCondition = struct {
     /// The tag key used in the tag search condition.
-    tag_key: ?[]const u8,
+    tag_key: ?[]const u8 = null,
 
     /// The type of comparison to be made when evaluating the tag key in tag search
     /// condition.
-    tag_key_comparison_type: ?StringComparisonType,
+    tag_key_comparison_type: ?StringComparisonType = null,
 
     /// The tag value used in the tag search condition.
-    tag_value: ?[]const u8,
+    tag_value: ?[]const u8 = null,
 
     /// The type of comparison to be made when evaluating the tag value in tag
     /// search condition.
-    tag_value_comparison_type: ?StringComparisonType,
+    tag_value_comparison_type: ?StringComparisonType = null,
 
     pub const json_field_names = .{
         .tag_key = "tagKey",

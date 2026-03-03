@@ -5,7 +5,7 @@ pub const ApiGatewayToolOverride = struct {
     /// The description of the tool. Provides information about the purpose and
     /// usage of the tool. If not provided, uses the description from the API's
     /// OpenAPI specification.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The HTTP method to expose for the specified path.
     method: RestApiMethod,

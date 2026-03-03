@@ -6,25 +6,25 @@ const LogConfiguration = @import("log_configuration.zig").LogConfiguration;
 /// The session logger resource.
 pub const SessionLogger = struct {
     /// The additional encryption context of the session logger.
-    additional_encryption_context: ?[]const aws.map.StringMapEntry,
+    additional_encryption_context: ?[]const aws.map.StringMapEntry = null,
 
     /// The associated portal ARN.
-    associated_portal_arns: ?[]const []const u8,
+    associated_portal_arns: ?[]const []const u8 = null,
 
     /// The date the session logger resource was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The custom managed key of the session logger.
-    customer_managed_key: ?[]const u8,
+    customer_managed_key: ?[]const u8 = null,
 
     /// The human-readable display name.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The filter that specifies which events to monitor.
-    event_filter: ?EventFilter,
+    event_filter: ?EventFilter = null,
 
     /// The configuration that specifies where logs are fowarded.
-    log_configuration: ?LogConfiguration,
+    log_configuration: ?LogConfiguration = null,
 
     /// The ARN of the session logger resource.
     session_logger_arn: []const u8,

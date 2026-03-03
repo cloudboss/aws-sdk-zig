@@ -7,5 +7,5 @@
 /// notes/summer/july, the common prefix is notes/summer/.
 pub const CommonPrefix = struct {
     /// Container for the specified common prefix.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 };

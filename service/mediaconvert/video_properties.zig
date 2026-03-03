@@ -9,42 +9,42 @@ pub const VideoProperties = struct {
     /// The number of bits used per color component such as 8, 10, or 12 bits.
     /// Standard range (SDR) video typically uses 8-bit, while 10-bit is common for
     /// high dynamic range (HDR).
-    bit_depth: ?i32,
+    bit_depth: ?i32 = null,
 
     /// The bit rate of the video track, in bits per second.
-    bit_rate: ?i64,
+    bit_rate: ?i64 = null,
 
     /// Codec-specific parameters parsed from the video essence headers. This
     /// information provides detailed technical specifications about how the video
     /// was encoded, including profile settings, resolution details, and color space
     /// information that can help you understand the source video characteristics
     /// and make informed encoding decisions.
-    codec_metadata: ?CodecMetadata,
+    codec_metadata: ?CodecMetadata = null,
 
     /// The color space primaries of the video track, defining the red, green, and
     /// blue color coordinates used for the video. This information helps ensure
     /// accurate color reproduction during playback and transcoding.
-    color_primaries: ?ColorPrimaries,
+    color_primaries: ?ColorPrimaries = null,
 
     /// The frame rate of the video or audio track, expressed as a fraction with
     /// numerator and denominator values.
-    frame_rate: ?FrameRate,
+    frame_rate: ?FrameRate = null,
 
     /// The height of the video track, in pixels.
-    height: ?i32,
+    height: ?i32 = null,
 
     /// The color space matrix coefficients of the video track, defining how RGB
     /// color values are converted to and from YUV color space. This affects color
     /// accuracy during encoding and decoding processes.
-    matrix_coefficients: ?MatrixCoefficients,
+    matrix_coefficients: ?MatrixCoefficients = null,
 
     /// The color space transfer characteristics of the video track, defining the
     /// relationship between linear light values and the encoded signal values. This
     /// affects brightness and contrast reproduction.
-    transfer_characteristics: ?TransferCharacteristics,
+    transfer_characteristics: ?TransferCharacteristics = null,
 
     /// The width of the video track, in pixels.
-    width: ?i32,
+    width: ?i32 = null,
 
     pub const json_field_names = .{
         .bit_depth = "BitDepth",

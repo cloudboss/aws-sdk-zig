@@ -5,7 +5,7 @@ const ModelMetadataFilter = @import("model_metadata_filter.zig").ModelMetadataFi
 /// included in the search results
 pub const ModelMetadataSearchExpression = struct {
     /// A list of filter objects.
-    filters: ?[]const ModelMetadataFilter,
+    filters: ?[]const ModelMetadataFilter = null,
 
     pub const json_field_names = .{
         .filters = "Filters",

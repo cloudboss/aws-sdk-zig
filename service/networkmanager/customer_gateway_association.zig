@@ -3,19 +3,19 @@ const CustomerGatewayAssociationState = @import("customer_gateway_association_st
 /// Describes the association between a customer gateway, a device, and a link.
 pub const CustomerGatewayAssociation = struct {
     /// The Amazon Resource Name (ARN) of the customer gateway.
-    customer_gateway_arn: ?[]const u8,
+    customer_gateway_arn: ?[]const u8 = null,
 
     /// The ID of the device.
-    device_id: ?[]const u8,
+    device_id: ?[]const u8 = null,
 
     /// The ID of the global network.
-    global_network_id: ?[]const u8,
+    global_network_id: ?[]const u8 = null,
 
     /// The ID of the link.
-    link_id: ?[]const u8,
+    link_id: ?[]const u8 = null,
 
     /// The association state.
-    state: ?CustomerGatewayAssociationState,
+    state: ?CustomerGatewayAssociationState = null,
 
     pub const json_field_names = .{
         .customer_gateway_arn = "CustomerGatewayArn",

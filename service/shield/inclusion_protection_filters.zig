@@ -8,14 +8,14 @@ const ProtectedResourceType = @import("protected_resource_type.zig").ProtectedRe
 /// that you provide.
 pub const InclusionProtectionFilters = struct {
     /// The name of the protection that you want to retrieve.
-    protection_names: ?[]const []const u8,
+    protection_names: ?[]const []const u8 = null,
 
     /// The ARN (Amazon Resource Name) of the resource whose protection you want to
     /// retrieve.
-    resource_arns: ?[]const []const u8,
+    resource_arns: ?[]const []const u8 = null,
 
     /// The type of protected resource whose protections you want to retrieve.
-    resource_types: ?[]const ProtectedResourceType,
+    resource_types: ?[]const ProtectedResourceType = null,
 
     pub const json_field_names = .{
         .protection_names = "ProtectionNames",

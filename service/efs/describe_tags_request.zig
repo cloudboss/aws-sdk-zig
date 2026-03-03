@@ -6,14 +6,14 @@ pub const DescribeTagsRequest = struct {
     /// `DescribeTags` operation (String). If present, it specifies to continue the
     /// list
     /// from where the previous call left off.
-    marker: ?[]const u8,
+    marker: ?[]const u8 = null,
 
     /// (Optional) The maximum number of file system tags to return in the response.
     /// Currently,
     /// this number is automatically set to
     /// 100, and other values are ignored. The response is paginated at 100 per page
     /// if you have more than 100 tags.
-    max_items: ?i32,
+    max_items: ?i32 = null,
 
     pub const json_field_names = .{
         .file_system_id = "FileSystemId",

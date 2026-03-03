@@ -9,24 +9,24 @@ const MetricDimension = @import("metric_dimension.zig").MetricDimension;
 /// Specifies the dimension settings for a segment.
 pub const SegmentDimensions = struct {
     /// One or more custom attributes to use as criteria for the segment.
-    attributes: ?[]const aws.map.MapEntry(AttributeDimension),
+    attributes: ?[]const aws.map.MapEntry(AttributeDimension) = null,
 
     /// The behavior-based criteria, such as how recently users have used your app,
     /// for the segment.
-    behavior: ?SegmentBehaviors,
+    behavior: ?SegmentBehaviors = null,
 
     /// The demographic-based criteria, such as device platform, for the segment.
-    demographic: ?SegmentDemographics,
+    demographic: ?SegmentDemographics = null,
 
     /// The location-based criteria, such as region or GPS coordinates, for the
     /// segment.
-    location: ?SegmentLocation,
+    location: ?SegmentLocation = null,
 
     /// One or more custom metrics to use as criteria for the segment.
-    metrics: ?[]const aws.map.MapEntry(MetricDimension),
+    metrics: ?[]const aws.map.MapEntry(MetricDimension) = null,
 
     /// One or more custom user attributes to use as criteria for the segment.
-    user_attributes: ?[]const aws.map.MapEntry(AttributeDimension),
+    user_attributes: ?[]const aws.map.MapEntry(AttributeDimension) = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

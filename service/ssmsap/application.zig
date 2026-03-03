@@ -5,35 +5,35 @@ const ApplicationType = @import("application_type.zig").ApplicationType;
 /// An SAP application registered with AWS Systems Manager for SAP.
 pub const Application = struct {
     /// The Amazon Resource Name (ARN) of the Application Registry.
-    app_registry_arn: ?[]const u8,
+    app_registry_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the application.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Amazon Resource Names of the associated AWS Systems Manager for SAP
     /// applications.
-    associated_application_arns: ?[]const []const u8,
+    associated_application_arns: ?[]const []const u8 = null,
 
     /// The components of the application.
-    components: ?[]const []const u8,
+    components: ?[]const []const u8 = null,
 
     /// The latest discovery result for the application.
-    discovery_status: ?ApplicationDiscoveryStatus,
+    discovery_status: ?ApplicationDiscoveryStatus = null,
 
     /// The ID of the application.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The time at which the application was last updated.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The status of the application.
-    status: ?ApplicationStatus,
+    status: ?ApplicationStatus = null,
 
     /// The status message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The type of the application.
-    @"type": ?ApplicationType,
+    @"type": ?ApplicationType = null,
 
     pub const json_field_names = .{
         .app_registry_arn = "AppRegistryArn",

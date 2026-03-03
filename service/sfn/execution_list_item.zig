@@ -9,13 +9,13 @@ pub const ExecutionListItem = struct {
     /// field is returned only if `mapRunArn` was specified in the `ListExecutions`
     /// API action. If `stateMachineArn` was specified in `ListExecutions`, the
     /// `itemCount` field isn't returned.
-    item_count: ?i32,
+    item_count: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of a Map Run. This field is returned only if
     /// `mapRunArn` was specified in the `ListExecutions` API action. If
     /// `stateMachineArn` was specified in `ListExecutions`, the `mapRunArn` isn't
     /// returned.
-    map_run_arn: ?[]const u8,
+    map_run_arn: ?[]const u8 = null,
 
     /// The name of the execution.
     ///
@@ -42,10 +42,10 @@ pub const ExecutionListItem = struct {
     /// The number of times you've redriven an execution. If you have not yet
     /// redriven an execution, the `redriveCount` is 0. This count is only updated
     /// when you successfully redrive an execution.
-    redrive_count: ?i32,
+    redrive_count: ?i32 = null,
 
     /// The date the execution was last redriven.
-    redrive_date: ?i64,
+    redrive_date: ?i64 = null,
 
     /// The date the execution started.
     start_date: i64,
@@ -55,7 +55,7 @@ pub const ExecutionListItem = struct {
     ///
     /// If the state machine execution was started with an unqualified ARN or a
     /// version ARN, it returns null.
-    state_machine_alias_arn: ?[]const u8,
+    state_machine_alias_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the state machine that ran the execution.
     state_machine_arn: []const u8,
@@ -69,13 +69,13 @@ pub const ExecutionListItem = struct {
     /// If the execution was started using a `stateMachineAliasArn`, both the
     /// `stateMachineAliasArn` and `stateMachineVersionArn` parameters contain the
     /// respective values.
-    state_machine_version_arn: ?[]const u8,
+    state_machine_version_arn: ?[]const u8 = null,
 
     /// The current status of the execution.
     status: ExecutionStatus,
 
     /// If the execution already ended, the date the execution stopped.
-    stop_date: ?i64,
+    stop_date: ?i64 = null,
 
     pub const json_field_names = .{
         .execution_arn = "executionArn",

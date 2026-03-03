@@ -3,7 +3,7 @@
 pub const RdsFieldMapping = struct {
     /// Provide a name for the universal metadata field where Amazon Bedrock will
     /// store any custom metadata from your data source.
-    custom_metadata_field: ?[]const u8,
+    custom_metadata_field: ?[]const u8 = null,
 
     /// The name of the field in which Amazon Bedrock stores metadata about the
     /// vector store.

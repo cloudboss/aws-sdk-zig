@@ -9,28 +9,28 @@ pub const ClusterPendingModifiedValues = struct {
     /// `AllocatedStorage` always returns 1, because Neptune DB cluster storage size
     /// isn't fixed, but
     /// instead automatically adjusts as needed.
-    allocated_storage: ?i32,
+    allocated_storage: ?i32 = null,
 
     /// The number of days for which automatic DB snapshots are retained.
-    backup_retention_period: ?i32,
+    backup_retention_period: ?i32 = null,
 
     /// The DBClusterIdentifier value for the DB cluster.
-    db_cluster_identifier: ?[]const u8,
+    db_cluster_identifier: ?[]const u8 = null,
 
     /// The database engine version.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// A value that indicates whether mapping of Amazon Web Services Identity and
     /// Access Management (IAM) accounts to database accounts is enabled.
-    iam_database_authentication_enabled: ?bool,
+    iam_database_authentication_enabled: ?bool = null,
 
     /// The Provisioned IOPS (I/O operations per second) value. This setting is only
     /// for Multi-AZ DB clusters.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// This `PendingCloudwatchLogsExports` structure specifies
     /// pending changes to which CloudWatch logs are enabled and which are disabled.
-    pending_cloudwatch_logs_exports: ?PendingCloudwatchLogsExports,
+    pending_cloudwatch_logs_exports: ?PendingCloudwatchLogsExports = null,
 
     /// The pending change in storage type for the DB cluster.   Valid Values:
     ///
@@ -52,5 +52,5 @@ pub const ClusterPendingModifiedValues = struct {
     ///
     /// Neptune I/O-Optimized storage is only available starting with engine release
     /// 1.3.0.0.
-    storage_type: ?[]const u8,
+    storage_type: ?[]const u8 = null,
 };

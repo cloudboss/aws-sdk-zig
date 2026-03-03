@@ -23,7 +23,7 @@
 pub const CompleteWorkflowExecutionDecisionAttributes = struct {
     /// The result of the workflow execution. The form of the result is
     /// implementation defined.
-    result: ?[]const u8,
+    result: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .result = "result",

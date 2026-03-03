@@ -17,7 +17,7 @@ pub const ReplicationRuleFilter = struct {
     /// * If you specify a filter based on multiple tags, wrap the `Tag` elements in
     ///   an
     /// `And` tag.
-    @"and": ?ReplicationRuleAndOperator,
+    @"and": ?ReplicationRuleAndOperator = null,
 
     /// An object key name prefix that identifies the subset of objects to which the
     /// rule applies.
@@ -27,10 +27,10 @@ pub const ReplicationRuleFilter = struct {
     /// XML requests. For more information, see [
     /// XML related object key
     /// constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// A container for specifying a tag key and value.
     ///
     /// The rule applies only to objects that have the tag in their tag set.
-    tag: ?Tag,
+    tag: ?Tag = null,
 };

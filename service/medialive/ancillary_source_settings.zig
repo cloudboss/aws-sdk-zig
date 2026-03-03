@@ -6,7 +6,7 @@ pub const AncillarySourceSettings = struct {
     /// the captions destination in the output (to pass through all the channels in
     /// the ancillary captions), leave this field blank because MediaLive ignores
     /// the field.
-    source_ancillary_channel_number: ?i32,
+    source_ancillary_channel_number: ?i32 = null,
 
     pub const json_field_names = .{
         .source_ancillary_channel_number = "SourceAncillaryChannelNumber",

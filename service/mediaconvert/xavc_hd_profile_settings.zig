@@ -10,7 +10,7 @@ pub const XavcHdProfileSettings = struct {
     /// Specify the XAVC HD (Long GOP) Bitrate Class to set the bitrate of your
     /// output. Outputs of the same class have similar image quality over the
     /// operating points that are valid for that class.
-    bitrate_class: ?XavcHdProfileBitrateClass,
+    bitrate_class: ?XavcHdProfileBitrateClass = null,
 
     /// The best way to set up adaptive quantization is to keep the default value,
     /// Auto, for the setting Adaptive quantization. When you do so, MediaConvert
@@ -26,26 +26,26 @@ pub const XavcHdProfileSettings = struct {
     /// Adaptive quantization to a value other than Off or Auto. Use Adaptive
     /// quantization to adjust the degree of smoothing that Flicker adaptive
     /// quantization provides.
-    flicker_adaptive_quantization: ?XavcFlickerAdaptiveQuantization,
+    flicker_adaptive_quantization: ?XavcFlickerAdaptiveQuantization = null,
 
     /// Specify whether the encoder uses B-frames as reference frames for other
     /// pictures in the same GOP. Choose Allow to allow the encoder to use B-frames
     /// as reference frames. Choose Don't allow to prevent the encoder from using
     /// B-frames as reference frames.
-    gop_b_reference: ?XavcGopBReference,
+    gop_b_reference: ?XavcGopBReference = null,
 
     /// Frequency of closed GOPs. In streaming applications, it is recommended that
     /// this be set to 1 so a decoder joining mid-stream will receive an IDR frame
     /// as quickly as possible. Setting this value to 0 will break output
     /// segmenting.
-    gop_closed_cadence: ?i32,
+    gop_closed_cadence: ?i32 = null,
 
     /// Specify the size of the buffer that MediaConvert uses in the HRD buffer
     /// model for this output. Specify this value in bits; for example, enter five
     /// megabits as 5000000. When you don't set this value, or you set it to zero,
     /// MediaConvert calculates the default by doubling the bitrate of this output
     /// point.
-    hrd_buffer_size: ?i32,
+    hrd_buffer_size: ?i32 = null,
 
     /// Choose the scan line type for the output. Keep the default value,
     /// Progressive to create a progressive output, regardless of the scan type of
@@ -58,23 +58,23 @@ pub const XavcHdProfileSettings = struct {
     /// interlaced with the same polarity as the source. If the source is
     /// progressive, the output will be interlaced with top field bottom field
     /// first, depending on which of the Follow options you choose.
-    interlace_mode: ?XavcInterlaceMode,
+    interlace_mode: ?XavcInterlaceMode = null,
 
     /// Optional. Use Quality tuning level to choose how you want to trade off
     /// encoding speed for output video quality. The default behavior is faster,
     /// lower quality, single-pass encoding.
-    quality_tuning_level: ?XavcHdProfileQualityTuningLevel,
+    quality_tuning_level: ?XavcHdProfileQualityTuningLevel = null,
 
     /// Number of slices per picture. Must be less than or equal to the number of
     /// macroblock rows for progressive pictures, and less than or equal to half the
     /// number of macroblock rows for interlaced pictures.
-    slices: ?i32,
+    slices: ?i32 = null,
 
     /// Ignore this setting unless you set Frame rate (framerateNumerator divided by
     /// framerateDenominator) to 29.970. If your input framerate is 23.976, choose
     /// Hard. Otherwise, keep the default value None. For more information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-telecine-and-inverse-telecine.html.
-    telecine: ?XavcHdProfileTelecine,
+    telecine: ?XavcHdProfileTelecine = null,
 
     pub const json_field_names = .{
         .bitrate_class = "BitrateClass",

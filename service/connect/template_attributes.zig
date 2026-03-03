@@ -6,14 +6,14 @@ pub const TemplateAttributes = struct {
     /// in the message template. This object
     /// contains different categories of key-value pairs. Each key defines a
     /// variable or placeholder in the message template.
-    custom_attributes: ?[]const aws.map.StringMapEntry,
+    custom_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// An object that specifies the customer profile attributes values to use for
     /// variables in the message template.
     /// This object contains different categories of key-value pairs. Each key
     /// defines a variable or placeholder in the
     /// message template.
-    customer_profile_attributes: ?[]const u8,
+    customer_profile_attributes: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .custom_attributes = "CustomAttributes",

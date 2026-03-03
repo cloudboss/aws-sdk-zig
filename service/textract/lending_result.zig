@@ -6,13 +6,13 @@ const PageClassification = @import("page_classification.zig").PageClassification
 pub const LendingResult = struct {
     /// An array of Extraction to hold structured data. e.g. normalized key value
     /// pairs instead of raw OCR detections .
-    extractions: ?[]const Extraction,
+    extractions: ?[]const Extraction = null,
 
     /// The page number for a page, with regard to whole submission.
-    page: ?i32,
+    page: ?i32 = null,
 
     /// The classifier result for a given page.
-    page_classification: ?PageClassification,
+    page_classification: ?PageClassification = null,
 
     pub const json_field_names = .{
         .extractions = "Extractions",

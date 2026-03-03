@@ -3,10 +3,10 @@
 /// execution role.
 pub const JobRunExecutionIamPolicy = struct {
     /// An IAM inline policy to use as an execution IAM policy.
-    policy: ?[]const u8,
+    policy: ?[]const u8 = null,
 
     /// A list of Amazon Resource Names (ARNs) to use as an execution IAM policy.
-    policy_arns: ?[]const []const u8,
+    policy_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .policy = "policy",

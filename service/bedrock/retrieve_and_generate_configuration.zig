@@ -7,11 +7,11 @@ const RetrieveAndGenerateType = @import("retrieve_and_generate_type.zig").Retrie
 pub const RetrieveAndGenerateConfiguration = struct {
     /// The configuration for the external source wrapper object in the
     /// `retrieveAndGenerate` function.
-    external_sources_configuration: ?ExternalSourcesRetrieveAndGenerateConfiguration,
+    external_sources_configuration: ?ExternalSourcesRetrieveAndGenerateConfiguration = null,
 
     /// Contains configuration details for the knowledge base retrieval and response
     /// generation.
-    knowledge_base_configuration: ?KnowledgeBaseRetrieveAndGenerateConfiguration,
+    knowledge_base_configuration: ?KnowledgeBaseRetrieveAndGenerateConfiguration = null,
 
     /// The type of resource that contains your data for retrieving information and
     /// generating responses.

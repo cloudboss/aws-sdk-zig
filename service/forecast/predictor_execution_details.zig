@@ -12,7 +12,7 @@ pub const PredictorExecutionDetails = struct {
     /// particular algorithm. The `NumberOfBacktestWindows` from the object
     /// determines the number of windows in the
     /// array.
-    predictor_executions: ?[]const PredictorExecution,
+    predictor_executions: ?[]const PredictorExecution = null,
 
     pub const json_field_names = .{
         .predictor_executions = "PredictorExecutions",

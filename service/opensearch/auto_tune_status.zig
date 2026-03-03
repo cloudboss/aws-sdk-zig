@@ -8,10 +8,10 @@ pub const AutoTuneStatus = struct {
     creation_date: i64,
 
     /// Any errors that occurred while enabling or disabling Auto-Tune.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// Indicates whether the domain is being deleted.
-    pending_deletion: ?bool,
+    pending_deletion: ?bool = null,
 
     /// The current state of Auto-Tune on the domain.
     state: AutoTuneState,

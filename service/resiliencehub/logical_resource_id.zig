@@ -4,19 +4,19 @@ pub const LogicalResourceId = struct {
     /// resource belongs to.
     ///
     /// This parameter accepts values in "eks-cluster/namespace" format.
-    eks_source_name: ?[]const u8,
+    eks_source_name: ?[]const u8 = null,
 
     /// Identifier of the resource.
     identifier: []const u8,
 
     /// The name of the CloudFormation stack this resource belongs to.
-    logical_stack_name: ?[]const u8,
+    logical_stack_name: ?[]const u8 = null,
 
     /// The name of the resource group that this resource belongs to.
-    resource_group_name: ?[]const u8,
+    resource_group_name: ?[]const u8 = null,
 
     /// The name of the Terraform S3 state file this resource belongs to.
-    terraform_source_name: ?[]const u8,
+    terraform_source_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .eks_source_name = "eksSourceName",

@@ -5,37 +5,37 @@ const ContactInitiationMethod = @import("contact_initiation_method.zig").Contact
 /// identifier.
 pub const AssociatedContactSummary = struct {
     /// How the contact reached your contact center.
-    channel: ?Channel,
+    channel: ?Channel = null,
 
     /// The Amazon Resource Name (ARN) of the contact
-    contact_arn: ?[]const u8,
+    contact_arn: ?[]const u8 = null,
 
     /// The identifier of the contact in this instance of Amazon Connect.
-    contact_id: ?[]const u8,
+    contact_id: ?[]const u8 = null,
 
     /// The date and time that the customer endpoint disconnected from the current
     /// contact, in UTC time. In transfer
     /// scenarios, the DisconnectTimestamp of the previous contact indicates the
     /// date and time when that contact
     /// ended.
-    disconnect_timestamp: ?i64,
+    disconnect_timestamp: ?i64 = null,
 
     /// If this contact is related to other contacts, this is the ID of the initial
     /// contact.
-    initial_contact_id: ?[]const u8,
+    initial_contact_id: ?[]const u8 = null,
 
     /// Indicates how the contact was initiated.
-    initiation_method: ?ContactInitiationMethod,
+    initiation_method: ?ContactInitiationMethod = null,
 
     /// The date and time this contact was initiated, in UTC time.
-    initiation_timestamp: ?i64,
+    initiation_timestamp: ?i64 = null,
 
     /// If this contact is not the first contact, this is the ID of the previous
     /// contact.
-    previous_contact_id: ?[]const u8,
+    previous_contact_id: ?[]const u8 = null,
 
     /// The contactId that is related to this contact.
-    related_contact_id: ?[]const u8,
+    related_contact_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channel = "Channel",

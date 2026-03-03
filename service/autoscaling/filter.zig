@@ -82,7 +82,7 @@ pub const Filter = struct {
     /// values, see
     /// [Activity](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html)
     /// in the *Amazon EC2 Auto Scaling API Reference*.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// One or more filter values. Filter values are case-sensitive.
     ///
@@ -100,5 +100,5 @@ pub const Filter = struct {
     /// filter name and "Successful,Failed" for the filter values to find scaling
     /// activities with a
     /// status of either "Successful" or "Failed".
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 };

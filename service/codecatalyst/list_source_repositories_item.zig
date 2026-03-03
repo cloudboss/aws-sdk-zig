@@ -7,7 +7,7 @@ pub const ListSourceRepositoriesItem = struct {
     created_time: i64,
 
     /// The description of the repository, if any.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The system-generated unique ID of the source repository.
     id: []const u8,

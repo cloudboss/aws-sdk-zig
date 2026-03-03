@@ -6,10 +6,10 @@ const LastUploaderStatus = @import("last_uploader_status.zig").LastUploaderStatu
 /// health of an edge agent.
 pub const EdgeAgentStatus = struct {
     /// The latest status of a stream’s edge recording job.
-    last_recorder_status: ?LastRecorderStatus,
+    last_recorder_status: ?LastRecorderStatus = null,
 
     /// The latest status of a stream’s edge to cloud uploader job.
-    last_uploader_status: ?LastUploaderStatus,
+    last_uploader_status: ?LastUploaderStatus = null,
 
     pub const json_field_names = .{
         .last_recorder_status = "LastRecorderStatus",

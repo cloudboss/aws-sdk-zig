@@ -26,16 +26,16 @@ pub const DomainStatus = struct {
     /// Identity and Access Management (IAM) policy document specifying the access
     /// policies for the
     /// domain.
-    access_policies: ?[]const u8,
+    access_policies: ?[]const u8 = null,
 
     /// Key-value pairs that specify advanced configuration options.
-    advanced_options: ?[]const aws.map.StringMapEntry,
+    advanced_options: ?[]const aws.map.StringMapEntry = null,
 
     /// Settings for fine-grained access control.
-    advanced_security_options: ?AdvancedSecurityOptions,
+    advanced_security_options: ?AdvancedSecurityOptions = null,
 
     /// Container for parameters required to enable all machine learning features.
-    aiml_options: ?AIMLOptionsOutput,
+    aiml_options: ?AIMLOptionsOutput = null,
 
     /// The Amazon Resource Name (ARN) of the domain. For more information, see [IAM
     /// identifiers
@@ -43,37 +43,37 @@ pub const DomainStatus = struct {
     arn: []const u8,
 
     /// Auto-Tune settings for the domain.
-    auto_tune_options: ?AutoTuneOptionsOutput,
+    auto_tune_options: ?AutoTuneOptionsOutput = null,
 
     /// Information about a configuration change happening on the domain.
-    change_progress_details: ?ChangeProgressDetails,
+    change_progress_details: ?ChangeProgressDetails = null,
 
     /// Container for the cluster configuration of the domain.
     cluster_config: ClusterConfig,
 
     /// Key-value pairs to configure Amazon Cognito authentication for OpenSearch
     /// Dashboards.
-    cognito_options: ?CognitoOptions,
+    cognito_options: ?CognitoOptions = null,
 
     /// Creation status of an OpenSearch Service domain. True if domain creation is
     /// complete. False
     /// if domain creation is still in progress.
-    created: ?bool,
+    created: ?bool = null,
 
     /// Deletion status of an OpenSearch Service domain. True if domain deletion is
     /// complete. False
     /// if domain deletion is still in progress. Once deletion is complete, the
     /// status of the domain is
     /// no longer returned.
-    deleted: ?bool,
+    deleted: ?bool = null,
 
     /// Additional options for the domain endpoint, such as whether to require HTTPS
     /// for all
     /// traffic.
-    domain_endpoint_options: ?DomainEndpointOptions,
+    domain_endpoint_options: ?DomainEndpointOptions = null,
 
     /// The dual stack hosted zone ID for the domain.
-    domain_endpoint_v2_hosted_zone_id: ?[]const u8,
+    domain_endpoint_v2_hosted_zone_id: ?[]const u8 = null,
 
     /// Unique identifier for the domain.
     domain_id: []const u8,
@@ -84,18 +84,18 @@ pub const DomainStatus = struct {
     domain_name: []const u8,
 
     /// The status of any changes that are currently in progress for the domain.
-    domain_processing_status: ?DomainProcessingStatusType,
+    domain_processing_status: ?DomainProcessingStatusType = null,
 
     /// Container for EBS-based storage settings for the domain.
-    ebs_options: ?EBSOptions,
+    ebs_options: ?EBSOptions = null,
 
     /// Encryption at rest settings for the domain.
-    encryption_at_rest_options: ?EncryptionAtRestOptions,
+    encryption_at_rest_options: ?EncryptionAtRestOptions = null,
 
     /// Domain-specific endpoint used to submit index, search, and data upload
     /// requests to the
     /// domain.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// The key-value pair that exists if the OpenSearch Service domain uses VPC
     /// endpoints. For
@@ -106,66 +106,66 @@ pub const DomainStatus = struct {
     ///
     /// * **Dual stack IP addresses** -
     /// `'vpcv2':'vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.aos.us-east-1.on.aws'`
-    endpoints: ?[]const aws.map.StringMapEntry,
+    endpoints: ?[]const aws.map.StringMapEntry = null,
 
     /// If `IPAddressType` to set to `dualstack`, a version 2 domain endpoint
     /// is provisioned. This endpoint functions like a normal endpoint, except that
     /// it works with both
     /// IPv4 and IPv6 IP addresses. Normal endpoints work only with IPv4 IP
     /// addresses.
-    endpoint_v2: ?[]const u8,
+    endpoint_v2: ?[]const u8 = null,
 
     /// Version of OpenSearch or Elasticsearch that the domain is running, in the
     /// format
     /// `Elasticsearch_X.Y` or `OpenSearch_X.Y`.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// Configuration options for controlling IAM Identity Center integration within
     /// a
     /// domain.
-    identity_center_options: ?IdentityCenterOptions,
+    identity_center_options: ?IdentityCenterOptions = null,
 
     /// The type of IP addresses supported by the endpoint for the domain.
-    ip_address_type: ?IPAddressType,
+    ip_address_type: ?IPAddressType = null,
 
     /// Log publishing options for the domain.
-    log_publishing_options: ?[]const aws.map.MapEntry(LogPublishingOption),
+    log_publishing_options: ?[]const aws.map.MapEntry(LogPublishingOption) = null,
 
     /// Information about the domain properties that are currently being modified.
-    modifying_properties: ?[]const ModifyingProperties,
+    modifying_properties: ?[]const ModifyingProperties = null,
 
     /// Whether node-to-node encryption is enabled or disabled.
-    node_to_node_encryption_options: ?NodeToNodeEncryptionOptions,
+    node_to_node_encryption_options: ?NodeToNodeEncryptionOptions = null,
 
     /// Options that specify a custom 10-hour window during which OpenSearch Service
     /// can perform
     /// configuration changes on the domain.
-    off_peak_window_options: ?OffPeakWindowOptions,
+    off_peak_window_options: ?OffPeakWindowOptions = null,
 
     /// The status of the domain configuration. True if OpenSearch Service is
     /// processing
     /// configuration changes. False if the configuration is active.
-    processing: ?bool,
+    processing: ?bool = null,
 
     /// The current status of the domain's service software.
-    service_software_options: ?ServiceSoftwareOptions,
+    service_software_options: ?ServiceSoftwareOptions = null,
 
     /// DEPRECATED. Container for parameters required to configure automated
     /// snapshots of
     /// domain indexes.
-    snapshot_options: ?SnapshotOptions,
+    snapshot_options: ?SnapshotOptions = null,
 
     /// Service software update options for the domain.
-    software_update_options: ?SoftwareUpdateOptions,
+    software_update_options: ?SoftwareUpdateOptions = null,
 
     /// The status of a domain version upgrade to a new version of OpenSearch or
     /// Elasticsearch. True if OpenSearch Service is in the process of a version
     /// upgrade. False
     /// if the configuration is active.
-    upgrade_processing: ?bool,
+    upgrade_processing: ?bool = null,
 
     /// The VPC configuration for the domain.
-    vpc_options: ?VPCDerivedInfo,
+    vpc_options: ?VPCDerivedInfo = null,
 
     pub const json_field_names = .{
         .access_policies = "AccessPolicies",

@@ -8,10 +8,10 @@
 /// is.
 pub const MessageData = struct {
     /// The error code or status code associated with the message.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The message text.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

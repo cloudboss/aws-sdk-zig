@@ -3,7 +3,7 @@
 /// hosting.
 pub const AwsCloudFrontDistributionOriginS3OriginConfig = struct {
     /// The CloudFront origin access identity to associate with the origin.
-    origin_access_identity: ?[]const u8,
+    origin_access_identity: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .origin_access_identity = "OriginAccessIdentity",

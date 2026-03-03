@@ -3,18 +3,18 @@ const VolumeType = @import("volume_type.zig").VolumeType;
 /// The parameters for a block device for an EBS volume.
 pub const LaunchTemplateEbsBlockDeviceRequest = struct {
     /// Indicates whether the EBS volume is deleted on instance termination.
-    delete_on_termination: ?bool,
+    delete_on_termination: ?bool = null,
 
     /// The index of the EBS card. Some instance types support multiple EBS cards.
     /// The default EBS card index is 0.
-    ebs_card_index: ?i32,
+    ebs_card_index: ?i32 = null,
 
     /// Indicates whether the EBS volume is encrypted. Encrypted volumes can only be
     /// attached
     /// to instances that support Amazon EBS encryption. If you are creating a
     /// volume from a
     /// snapshot, you can't specify an encryption value.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The number of I/O operations per second (IOPS). For `gp3`,
     /// `io1`, and `io2` volumes, this represents the number of IOPS that
@@ -37,20 +37,20 @@ pub const LaunchTemplateEbsBlockDeviceRequest = struct {
     /// System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html). On other instances, you can achieve performance up to 32,000 IOPS.
     ///
     /// This parameter is supported for `io1`, `io2`, and `gp3` volumes only.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// Identifier (key ID, key alias, key ARN, or alias ARN) of the customer
     /// managed KMS key to use for EBS encryption.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The ID of the snapshot.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
     /// The throughput to provision for a `gp3` volume, with a maximum of 2,000
     /// MiB/s.
     ///
     /// Valid Range: Minimum value of 125. Maximum value of 2,000.
-    throughput: ?i32,
+    throughput: ?i32 = null,
 
     /// Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume
     /// initialization rate), in MiB/s, at which to download
@@ -82,7 +82,7 @@ pub const LaunchTemplateEbsBlockDeviceRequest = struct {
     /// volumes](https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html) in the *Amazon EC2 User Guide*.
     ///
     /// Valid range: 100 - 300 MiB/s
-    volume_initialization_rate: ?i32,
+    volume_initialization_rate: ?i32 = null,
 
     /// The size of the volume, in GiBs. You must specify either a snapshot ID or a
     /// volume
@@ -99,10 +99,10 @@ pub const LaunchTemplateEbsBlockDeviceRequest = struct {
     /// * `st1` and `sc1`: 125 - 16,384 GiB
     ///
     /// * `standard`: 1 - 1024 GiB
-    volume_size: ?i32,
+    volume_size: ?i32 = null,
 
     /// The volume type. For more information, see [Amazon EBS volume
     /// types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the
     /// *Amazon EBS User Guide*.
-    volume_type: ?VolumeType,
+    volume_type: ?VolumeType = null,
 };

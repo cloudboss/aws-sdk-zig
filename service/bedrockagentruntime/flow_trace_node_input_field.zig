@@ -10,22 +10,22 @@ const FlowNodeIODataType = @import("flow_node_io_data_type.zig").FlowNodeIODataT
 /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html).
 pub const FlowTraceNodeInputField = struct {
     /// The category of the input field.
-    category: ?FlowNodeInputCategory,
+    category: ?FlowNodeInputCategory = null,
 
     /// The content of the node input.
     content: FlowTraceNodeInputContent,
 
     /// The execution path through nested nodes like iterators and loops.
-    execution_chain: ?[]const FlowTraceNodeInputExecutionChainItem,
+    execution_chain: ?[]const FlowTraceNodeInputExecutionChainItem = null,
 
     /// The name of the node input.
     node_input_name: []const u8,
 
     /// The source node that provides input data to this field.
-    source: ?FlowTraceNodeInputSource,
+    source: ?FlowTraceNodeInputSource = null,
 
     /// The data type of the input field for compatibility validation.
-    @"type": ?FlowNodeIODataType,
+    @"type": ?FlowNodeIODataType = null,
 
     pub const json_field_names = .{
         .category = "category",

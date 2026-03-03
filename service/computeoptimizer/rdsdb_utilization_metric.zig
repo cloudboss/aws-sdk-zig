@@ -9,7 +9,7 @@ const RDSDBMetricStatistic = @import("rdsdb_metric_statistic.zig").RDSDBMetricSt
 /// utilization metric data.
 pub const RDSDBUtilizationMetric = struct {
     /// The name of the utilization metric.
-    name: ?RDSDBMetricName,
+    name: ?RDSDBMetricName = null,
 
     /// The statistic of the utilization metric.
     ///
@@ -27,7 +27,7 @@ pub const RDSDBUtilizationMetric = struct {
     /// using Amazon CloudWatch. For more information, see the [Amazon CloudWatch
     /// User
     /// Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
-    statistic: ?RDSDBMetricStatistic,
+    statistic: ?RDSDBMetricStatistic = null,
 
     /// The value of the utilization metric.
     value: f64 = 0,

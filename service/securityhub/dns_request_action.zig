@@ -2,17 +2,17 @@
 /// about the DNS request that was detected.
 pub const DnsRequestAction = struct {
     /// Indicates whether the DNS request was blocked.
-    blocked: ?bool,
+    blocked: ?bool = null,
 
     /// The DNS domain that is associated with the DNS request.
     ///
     /// Length Constraints: 128.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// The protocol that was used for the DNS request.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 64.
-    protocol: ?[]const u8,
+    protocol: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .blocked = "Blocked",

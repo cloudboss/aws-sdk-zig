@@ -1,10 +1,10 @@
 /// Information about a project.
 pub const ProjectSummary = struct {
     /// The description of the project.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The friendly name displayed to users of the project in Amazon CodeCatalyst.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The name of the project in the space.
     name: []const u8,

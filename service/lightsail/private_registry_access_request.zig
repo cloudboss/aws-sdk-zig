@@ -13,7 +13,7 @@ pub const PrivateRegistryAccessRequest = struct {
     /// grant an Amazon Lightsail container service access to Amazon Elastic
     /// Container Registry
     /// (Amazon ECR) private repositories.
-    ecr_image_puller_role: ?ContainerServiceECRImagePullerRoleRequest,
+    ecr_image_puller_role: ?ContainerServiceECRImagePullerRoleRequest = null,
 
     pub const json_field_names = .{
         .ecr_image_puller_role = "ecrImagePullerRole",

@@ -3,7 +3,7 @@ const SharedViewConfigurations = @import("shared_view_configurations.zig").Share
 /// The feature configuration for an embedded dashboard.
 pub const AnonymousUserDashboardFeatureConfigurations = struct {
     /// The shared view settings of an embedded dashboard.
-    shared_view: ?SharedViewConfigurations,
+    shared_view: ?SharedViewConfigurations = null,
 
     pub const json_field_names = .{
         .shared_view = "SharedView",

@@ -4,7 +4,7 @@ const EventNotificationTopicStatus = @import("event_notification_topic_status.zi
 /// configuration object for Sidewalk-related event topics.
 pub const SidewalkEventNotificationConfigurations = struct {
     /// Denotes whether the Amazon ID event topic is enabled or disabled.
-    amazon_id_event_topic: ?EventNotificationTopicStatus,
+    amazon_id_event_topic: ?EventNotificationTopicStatus = null,
 
     pub const json_field_names = .{
         .amazon_id_event_topic = "AmazonIdEventTopic",

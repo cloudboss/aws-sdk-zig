@@ -13,12 +13,12 @@ const PermissionsBoundaryAttachmentType = @import("permissions_boundary_attachme
 pub const AttachedPermissionsBoundary = struct {
     /// The ARN of the policy used to set the permissions boundary for the user or
     /// role.
-    permissions_boundary_arn: ?[]const u8,
+    permissions_boundary_arn: ?[]const u8 = null,
 
     /// The permissions boundary usage type that indicates what type of IAM resource
     /// is used
     /// as the permissions boundary for an entity. This data type can only have a
     /// value of
     /// `Policy`.
-    permissions_boundary_type: ?PermissionsBoundaryAttachmentType,
+    permissions_boundary_type: ?PermissionsBoundaryAttachmentType = null,
 };

@@ -6,25 +6,25 @@ const Authentication = @import("authentication.zig").Authentication;
 /// MemoryDB clusters.
 pub const User = struct {
     /// Access permissions string used for this user.
-    access_string: ?[]const u8,
+    access_string: ?[]const u8 = null,
 
     /// The names of the Access Control Lists to which the user belongs
-    acl_names: ?[]const []const u8,
+    acl_names: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the user.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Denotes whether the user requires a password to authenticate.
-    authentication: ?Authentication,
+    authentication: ?Authentication = null,
 
     /// The minimum engine version supported for the user
-    minimum_engine_version: ?[]const u8,
+    minimum_engine_version: ?[]const u8 = null,
 
     /// The name of the user
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Indicates the user status. Can be "active", "modifying" or "deleting".
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_string = "AccessString",

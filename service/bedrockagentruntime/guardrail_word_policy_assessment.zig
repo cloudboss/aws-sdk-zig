@@ -4,10 +4,10 @@ const GuardrailManagedWord = @import("guardrail_managed_word.zig").GuardrailMana
 /// The assessment details for words defined in the Guardrail filter.
 pub const GuardrailWordPolicyAssessment = struct {
     /// The custom word details for words defined in the Guardrail filter.
-    custom_words: ?[]const GuardrailCustomWord,
+    custom_words: ?[]const GuardrailCustomWord = null,
 
     /// The managed word lists for words defined in the Guardrail filter.
-    managed_word_lists: ?[]const GuardrailManagedWord,
+    managed_word_lists: ?[]const GuardrailManagedWord = null,
 
     pub const json_field_names = .{
         .custom_words = "customWords",

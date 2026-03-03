@@ -11,10 +11,10 @@ const EmotionName = @import("emotion_name.zig").EmotionName;
 /// the EU Artificial Intelligence Act or any other applicable law.
 pub const Emotion = struct {
     /// Level of confidence in the determination.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// Type of emotion detected.
-    @"type": ?EmotionName,
+    @"type": ?EmotionName = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",

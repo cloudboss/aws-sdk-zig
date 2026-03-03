@@ -4,7 +4,7 @@ const QueryNetwork = @import("query_network.zig").QueryNetwork;
 /// The container of the transaction output.
 pub const TransactionOutputItem = struct {
     /// Specifies whether to list transactions that have not reached Finality.
-    confirmation_status: ?ConfirmationStatus,
+    confirmation_status: ?ConfirmationStatus = null,
 
     /// The blockchain network where the transaction occurred.
     network: QueryNetwork,
@@ -14,7 +14,7 @@ pub const TransactionOutputItem = struct {
 
     /// The identifier of a Bitcoin transaction. It is generated when a transaction
     /// is created.
-    transaction_id: ?[]const u8,
+    transaction_id: ?[]const u8 = null,
 
     /// The time when the transaction occurred.
     transaction_timestamp: i64,

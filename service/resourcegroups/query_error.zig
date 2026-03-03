@@ -4,10 +4,10 @@ const QueryErrorCode = @import("query_error_code.zig").QueryErrorCode;
 /// `SearchResources`.
 pub const QueryError = struct {
     /// Specifies the error code that was raised.
-    error_code: ?QueryErrorCode,
+    error_code: ?QueryErrorCode = null,
 
     /// A message that explains the `ErrorCode`.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

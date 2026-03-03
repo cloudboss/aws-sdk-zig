@@ -7,7 +7,7 @@ pub const GuardrailTopicConfig = struct {
 
     /// A list of prompts, each of which is an example of a prompt that can be
     /// categorized as belonging to the topic.
-    examples: ?[]const []const u8,
+    examples: ?[]const []const u8 = null,
 
     /// The name of the topic to deny.
     name: []const u8,

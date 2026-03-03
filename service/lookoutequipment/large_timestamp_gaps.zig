@@ -4,10 +4,10 @@ const StatisticalIssueStatus = @import("statistical_issue_status.zig").Statistic
 /// timestamps in data.
 pub const LargeTimestampGaps = struct {
     /// Indicates the size of the largest timestamp gap, in days.
-    max_timestamp_gap_in_days: ?i32,
+    max_timestamp_gap_in_days: ?i32 = null,
 
     /// Indicates the number of large timestamp gaps, if there are any.
-    number_of_large_timestamp_gaps: ?i32,
+    number_of_large_timestamp_gaps: ?i32 = null,
 
     /// Indicates whether there is a potential data issue related to large gaps in
     /// timestamps.

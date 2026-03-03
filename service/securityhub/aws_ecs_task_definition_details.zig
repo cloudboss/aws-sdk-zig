@@ -10,7 +10,7 @@ const AwsEcsTaskDefinitionVolumesDetails = @import("aws_ecs_task_definition_volu
 pub const AwsEcsTaskDefinitionDetails = struct {
     /// The container definitions that describe the containers that make up the
     /// task.
-    container_definitions: ?[]const AwsEcsTaskDefinitionContainerDefinitionsDetails,
+    container_definitions: ?[]const AwsEcsTaskDefinitionContainerDefinitionsDetails = null,
 
     /// The number of CPU units used by the task.Valid values are as follows:
     ///
@@ -23,17 +23,17 @@ pub const AwsEcsTaskDefinitionDetails = struct {
     /// * `2048 (2 vCPU)`
     ///
     /// * `4096 (4 vCPU)`
-    cpu: ?[]const u8,
+    cpu: ?[]const u8 = null,
 
     /// The ARN of the task execution role that grants the container agent
     /// permission to make API calls on behalf of the container user.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The name of a family that this task definition is registered to.
-    family: ?[]const u8,
+    family: ?[]const u8 = null,
 
     /// The Elastic Inference accelerators to use for the containers in the task.
-    inference_accelerators: ?[]const AwsEcsTaskDefinitionInferenceAcceleratorsDetails,
+    inference_accelerators: ?[]const AwsEcsTaskDefinitionInferenceAcceleratorsDetails = null,
 
     /// The inter-process communication (IPC) resource namespace to use for the
     /// containers in the task. Valid values are as follows:
@@ -43,7 +43,7 @@ pub const AwsEcsTaskDefinitionDetails = struct {
     /// * `none`
     ///
     /// * `task`
-    ipc_mode: ?[]const u8,
+    ipc_mode: ?[]const u8 = null,
 
     /// The amount (in MiB) of memory used by the task.
     ///
@@ -54,7 +54,7 @@ pub const AwsEcsTaskDefinitionDetails = struct {
     /// Amazon Elastic Container Service Developer Guide*
     /// , which determines your range of supported values for the `Cpu` and `Memory`
     /// parameters.
-    memory: ?[]const u8,
+    memory: ?[]const u8 = null,
 
     /// The Docker networking mode to use for the containers in the task. Valid
     /// values are as follows:
@@ -66,30 +66,30 @@ pub const AwsEcsTaskDefinitionDetails = struct {
     /// * `host`
     ///
     /// * `none`
-    network_mode: ?[]const u8,
+    network_mode: ?[]const u8 = null,
 
     /// The process namespace to use for the containers in the task. Valid values
     /// are `host` or `task`.
-    pid_mode: ?[]const u8,
+    pid_mode: ?[]const u8 = null,
 
     /// The placement constraint objects to use for tasks.
-    placement_constraints: ?[]const AwsEcsTaskDefinitionPlacementConstraintsDetails,
+    placement_constraints: ?[]const AwsEcsTaskDefinitionPlacementConstraintsDetails = null,
 
     /// The configuration details for the App Mesh proxy.
-    proxy_configuration: ?AwsEcsTaskDefinitionProxyConfigurationDetails,
+    proxy_configuration: ?AwsEcsTaskDefinitionProxyConfigurationDetails = null,
 
     /// The task launch types that the task definition was validated against.
-    requires_compatibilities: ?[]const []const u8,
+    requires_compatibilities: ?[]const []const u8 = null,
 
     /// The status of the task definition.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The short name or ARN of the IAM role that grants containers in the task
     /// permission to call Amazon Web Services API operations on your behalf.
-    task_role_arn: ?[]const u8,
+    task_role_arn: ?[]const u8 = null,
 
     /// The data volume definitions for the task.
-    volumes: ?[]const AwsEcsTaskDefinitionVolumesDetails,
+    volumes: ?[]const AwsEcsTaskDefinitionVolumesDetails = null,
 
     pub const json_field_names = .{
         .container_definitions = "ContainerDefinitions",

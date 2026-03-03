@@ -1,8 +1,8 @@
 /// Information about the instances to which the volume is attached.
 pub const VolumeStatusAttachmentStatus = struct {
     /// The ID of the attached instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The maximum IOPS supported by the attached instance.
-    io_performance: ?[]const u8,
+    io_performance: ?[]const u8 = null,
 };

@@ -16,7 +16,7 @@ pub const ImageConfig = struct {
     /// only if you specified `Vpc` as the value for the `RepositoryAccessMode`
     /// field, and the private Docker registry where the model image is hosted
     /// requires authentication.
-    repository_auth_config: ?RepositoryAuthConfig,
+    repository_auth_config: ?RepositoryAuthConfig = null,
 
     pub const json_field_names = .{
         .repository_access_mode = "RepositoryAccessMode",

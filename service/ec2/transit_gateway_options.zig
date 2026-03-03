@@ -13,13 +13,13 @@ pub const TransitGatewayOptions = struct {
     /// session.
     /// The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for
     /// 32-bit ASNs.
-    amazon_side_asn: ?i64,
+    amazon_side_asn: ?i64 = null,
 
     /// The ID of the default association route table.
-    association_default_route_table_id: ?[]const u8,
+    association_default_route_table_id: ?[]const u8 = null,
 
     /// Indicates whether attachment requests are automatically accepted.
-    auto_accept_shared_attachments: ?AutoAcceptSharedAttachmentsValue,
+    auto_accept_shared_attachments: ?AutoAcceptSharedAttachmentsValue = null,
 
     /// Indicates whether resource attachments are automatically associated with the
     /// default
@@ -27,7 +27,7 @@ pub const TransitGatewayOptions = struct {
     /// `defaultRouteTableAssociation` or `defaultRouteTablePropagation` must be set
     /// to `enable` for Amazon Web Services Transit Gateway to create the default
     /// transit gateway route table.
-    default_route_table_association: ?DefaultRouteTableAssociationValue,
+    default_route_table_association: ?DefaultRouteTableAssociationValue = null,
 
     /// Indicates whether resource attachments automatically propagate routes to the
     /// default
@@ -37,29 +37,29 @@ pub const TransitGatewayOptions = struct {
     /// Amazon Web Services Transit Gateway creates the default transit gateway
     /// route
     /// table.
-    default_route_table_propagation: ?DefaultRouteTablePropagationValue,
+    default_route_table_propagation: ?DefaultRouteTablePropagationValue = null,
 
     /// Indicates whether DNS support is enabled.
-    dns_support: ?DnsSupportValue,
+    dns_support: ?DnsSupportValue = null,
 
     /// Defines if the Transit Gateway supports VPC Encryption Control.
-    encryption_support: ?EncryptionSupport,
+    encryption_support: ?EncryptionSupport = null,
 
     /// Indicates whether multicast is enabled on the transit gateway
-    multicast_support: ?MulticastSupportValue,
+    multicast_support: ?MulticastSupportValue = null,
 
     /// The ID of the default propagation route table.
-    propagation_default_route_table_id: ?[]const u8,
+    propagation_default_route_table_id: ?[]const u8 = null,
 
     /// Enables you to reference a security group across VPCs attached to a transit
     /// gateway to simplify security group management.
     ///
     /// This option is disabled by default.
-    security_group_referencing_support: ?SecurityGroupReferencingSupportValue,
+    security_group_referencing_support: ?SecurityGroupReferencingSupportValue = null,
 
     /// The transit gateway CIDR blocks.
-    transit_gateway_cidr_blocks: ?[]const []const u8,
+    transit_gateway_cidr_blocks: ?[]const []const u8 = null,
 
     /// Indicates whether Equal Cost Multipath Protocol support is enabled.
-    vpn_ecmp_support: ?VpnEcmpSupportValue,
+    vpn_ecmp_support: ?VpnEcmpSupportValue = null,
 };

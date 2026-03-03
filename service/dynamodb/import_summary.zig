@@ -7,35 +7,35 @@ pub const ImportSummary = struct {
     /// The Amazon Resource Number (ARN) of the Cloudwatch Log Group associated with
     /// this
     /// import task.
-    cloud_watch_log_group_arn: ?[]const u8,
+    cloud_watch_log_group_arn: ?[]const u8 = null,
 
     /// The time at which this import task ended. (Does this include the successful
     /// complete
     /// creation of the table it was imported to?)
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The Amazon Resource Number (ARN) corresponding to the import request.
-    import_arn: ?[]const u8,
+    import_arn: ?[]const u8 = null,
 
     /// The status of the import operation.
-    import_status: ?ImportStatus,
+    import_status: ?ImportStatus = null,
 
     /// The format of the source data. Valid values are `CSV`,
     /// `DYNAMODB_JSON` or `ION`.
-    input_format: ?InputFormat,
+    input_format: ?InputFormat = null,
 
     /// The path and S3 bucket of the source file that is being imported. This
     /// includes the
     /// S3Bucket (required), S3KeyPrefix (optional) and S3BucketOwner (optional if
     /// the bucket is
     /// owned by the requester).
-    s3_bucket_source: ?S3BucketSource,
+    s3_bucket_source: ?S3BucketSource = null,
 
     /// The time at which this import task began.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The Amazon Resource Number (ARN) of the table being imported into.
-    table_arn: ?[]const u8,
+    table_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cloud_watch_log_group_arn = "CloudWatchLogGroupArn",

@@ -7,10 +7,10 @@ pub const ImageUsageResourceTypeRequest = struct {
     /// The resource type.
     ///
     /// Valid values: `ec2:Instance` | `ec2:LaunchTemplate`
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The options that affect the scope of the report. Valid only when
     /// `ResourceType`
     /// is `ec2:LaunchTemplate`.
-    resource_type_options: ?[]const ImageUsageResourceTypeOptionRequest,
+    resource_type_options: ?[]const ImageUsageResourceTypeOptionRequest = null,
 };

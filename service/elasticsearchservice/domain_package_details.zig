@@ -5,32 +5,32 @@ const PackageType = @import("package_type.zig").PackageType;
 /// Information on a package that is associated with a domain.
 pub const DomainPackageDetails = struct {
     /// Name of the domain you've associated a package with.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// State of the association. Values are
     /// ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.
-    domain_package_status: ?DomainPackageStatus,
+    domain_package_status: ?DomainPackageStatus = null,
 
     /// Additional information if the package is in an error state. Null otherwise.
-    error_details: ?ErrorDetails,
+    error_details: ?ErrorDetails = null,
 
     /// Timestamp of the most-recent update to the association status.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// Internal ID of the package.
-    package_id: ?[]const u8,
+    package_id: ?[]const u8 = null,
 
     /// User specified name of the package.
-    package_name: ?[]const u8,
+    package_name: ?[]const u8 = null,
 
     /// Currently supports only TXT-DICTIONARY.
-    package_type: ?PackageType,
+    package_type: ?PackageType = null,
 
-    package_version: ?[]const u8,
+    package_version: ?[]const u8 = null,
 
     /// The relative path on Amazon ES nodes, which can be used as synonym_path when
     /// the package is synonym file.
-    reference_path: ?[]const u8,
+    reference_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",

@@ -5,7 +5,7 @@ const Telemetry = @import("telemetry.zig").Telemetry;
 pub const TelemetryConfiguration = struct {
     /// Synchronization status of the device reported configuration with the desired
     /// configuration.
-    configuration_sync_status: ?ConfigurationSyncStatus,
+    configuration_sync_status: ?ConfigurationSyncStatus = null,
 
     /// Configure telemetry to be on or off.
     telemetry: Telemetry,

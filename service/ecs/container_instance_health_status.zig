@@ -6,12 +6,12 @@ pub const ContainerInstanceHealthStatus = struct {
     /// An array of objects representing the details of the container instance
     /// health
     /// status.
-    details: ?[]const InstanceHealthCheckResult,
+    details: ?[]const InstanceHealthCheckResult = null,
 
     /// The overall health status of the container instance. This is an aggregate
     /// status of
     /// all container instance health checks.
-    overall_status: ?InstanceHealthCheckState,
+    overall_status: ?InstanceHealthCheckState = null,
 
     pub const json_field_names = .{
         .details = "details",

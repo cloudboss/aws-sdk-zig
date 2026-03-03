@@ -11,14 +11,14 @@ pub const PlayerLatencyPolicy = struct {
     /// The maximum latency value that is allowed for any player, in milliseconds.
     /// All
     /// policies must have a value set for this property.
-    maximum_individual_player_latency_milliseconds: ?i32,
+    maximum_individual_player_latency_milliseconds: ?i32 = null,
 
     /// The length of time, in seconds, that the policy is enforced while placing a
     /// new game
     /// session. A null value for this property means that the policy is enforced
     /// until the
     /// queue times out.
-    policy_duration_seconds: ?i32,
+    policy_duration_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .maximum_individual_player_latency_milliseconds = "MaximumIndividualPlayerLatencyMilliseconds",

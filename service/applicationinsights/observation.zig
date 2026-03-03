@@ -5,148 +5,148 @@ const LogFilter = @import("log_filter.zig").LogFilter;
 pub const Observation = struct {
     /// The detail type of the CloudWatch Event-based observation, for example, `EC2
     /// Instance State-change Notification`.
-    cloud_watch_event_detail_type: ?[]const u8,
+    cloud_watch_event_detail_type: ?[]const u8 = null,
 
     /// The ID of the CloudWatch Event-based observation related to the detected
     /// problem.
-    cloud_watch_event_id: ?[]const u8,
+    cloud_watch_event_id: ?[]const u8 = null,
 
     /// The source of the CloudWatch Event.
-    cloud_watch_event_source: ?CloudWatchEventSource,
+    cloud_watch_event_source: ?CloudWatchEventSource = null,
 
     /// The CodeDeploy application to which the deployment belongs.
-    code_deploy_application: ?[]const u8,
+    code_deploy_application: ?[]const u8 = null,
 
     /// The deployment group to which the CodeDeploy deployment belongs.
-    code_deploy_deployment_group: ?[]const u8,
+    code_deploy_deployment_group: ?[]const u8 = null,
 
     /// The deployment ID of the CodeDeploy-based observation related to the
     /// detected problem.
-    code_deploy_deployment_id: ?[]const u8,
+    code_deploy_deployment_id: ?[]const u8 = null,
 
     /// The instance group to which the CodeDeploy instance belongs.
-    code_deploy_instance_group_id: ?[]const u8,
+    code_deploy_instance_group_id: ?[]const u8 = null,
 
     /// The status of the CodeDeploy deployment, for example `SUCCESS` or `
     /// FAILURE`.
-    code_deploy_state: ?[]const u8,
+    code_deploy_state: ?[]const u8 = null,
 
     /// The cause of an EBS CloudWatch event.
-    ebs_cause: ?[]const u8,
+    ebs_cause: ?[]const u8 = null,
 
     /// The type of EBS CloudWatch event, such as `createVolume`,
     /// `deleteVolume` or `attachVolume`.
-    ebs_event: ?[]const u8,
+    ebs_event: ?[]const u8 = null,
 
     /// The request ID of an EBS CloudWatch event.
-    ebs_request_id: ?[]const u8,
+    ebs_request_id: ?[]const u8 = null,
 
     /// The result of an EBS CloudWatch event, such as `failed` or
     /// `succeeded`.
-    ebs_result: ?[]const u8,
+    ebs_result: ?[]const u8 = null,
 
     /// The state of the instance, such as `STOPPING` or `TERMINATING`.
-    ec_2_state: ?[]const u8,
+    ec_2_state: ?[]const u8 = null,
 
     /// The time when the observation ended, in epoch seconds.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the Health Event-based observation.
-    health_event_arn: ?[]const u8,
+    health_event_arn: ?[]const u8 = null,
 
     /// The description of the Health event provided by the service, such as Amazon
     /// EC2.
-    health_event_description: ?[]const u8,
+    health_event_description: ?[]const u8 = null,
 
     /// The category of the Health event, such as `issue`.
-    health_event_type_category: ?[]const u8,
+    health_event_type_category: ?[]const u8 = null,
 
     /// The type of the Health event, for example,
     /// `AWS_EC2_POWER_CONNECTIVITY_ISSUE`.
-    health_event_type_code: ?[]const u8,
+    health_event_type_code: ?[]const u8 = null,
 
     /// The service to which the Health Event belongs, such as EC2.
-    health_service: ?[]const u8,
+    health_service: ?[]const u8 = null,
 
     /// The ID of the observation type.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The timestamp in the CloudWatch Logs that specifies when the matched line
     /// occurred.
-    line_time: ?i64,
+    line_time: ?i64 = null,
 
     /// The log filter of the observation.
-    log_filter: ?LogFilter,
+    log_filter: ?LogFilter = null,
 
     /// The log group name.
-    log_group: ?[]const u8,
+    log_group: ?[]const u8 = null,
 
     /// The log text of the observation.
-    log_text: ?[]const u8,
+    log_text: ?[]const u8 = null,
 
     /// The name of the observation metric.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The namespace of the observation metric.
-    metric_namespace: ?[]const u8,
+    metric_namespace: ?[]const u8 = null,
 
     /// The category of an RDS event.
-    rds_event_categories: ?[]const u8,
+    rds_event_categories: ?[]const u8 = null,
 
     /// The message of an RDS event.
-    rds_event_message: ?[]const u8,
+    rds_event_message: ?[]const u8 = null,
 
     /// The name of the S3 CloudWatch Event-based observation.
-    s3_event_name: ?[]const u8,
+    s3_event_name: ?[]const u8 = null,
 
     /// The source resource ARN of the observation.
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     /// The source type of the observation.
-    source_type: ?[]const u8,
+    source_type: ?[]const u8 = null,
 
     /// The time when the observation was first detected, in epoch seconds.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the step function-based observation.
-    states_arn: ?[]const u8,
+    states_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the step function execution-based
     /// observation.
-    states_execution_arn: ?[]const u8,
+    states_execution_arn: ?[]const u8 = null,
 
     /// The input to the step function-based observation.
-    states_input: ?[]const u8,
+    states_input: ?[]const u8 = null,
 
     /// The status of the step function-related observation.
-    states_status: ?[]const u8,
+    states_status: ?[]const u8 = null,
 
     /// The unit of the source observation metric.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     /// The value of the source observation metric.
-    value: ?f64,
+    value: ?f64 = null,
 
     /// The X-Ray request error percentage for this node.
-    x_ray_error_percent: ?i32,
+    x_ray_error_percent: ?i32 = null,
 
     /// The X-Ray request fault percentage for this node.
-    x_ray_fault_percent: ?i32,
+    x_ray_fault_percent: ?i32 = null,
 
     /// The name of the X-Ray node.
-    x_ray_node_name: ?[]const u8,
+    x_ray_node_name: ?[]const u8 = null,
 
     /// The type of the X-Ray node.
-    x_ray_node_type: ?[]const u8,
+    x_ray_node_type: ?[]const u8 = null,
 
     /// The X-Ray node request average latency for this node.
-    x_ray_request_average_latency: ?i64,
+    x_ray_request_average_latency: ?i64 = null,
 
     /// The X-Ray request count for this node.
-    x_ray_request_count: ?i32,
+    x_ray_request_count: ?i32 = null,
 
     /// The X-Ray request throttle percentage for this node.
-    x_ray_throttle_percent: ?i32,
+    x_ray_throttle_percent: ?i32 = null,
 
     pub const json_field_names = .{
         .cloud_watch_event_detail_type = "CloudWatchEventDetailType",

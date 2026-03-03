@@ -7,19 +7,19 @@ const ApplicationType = @import("application_type.zig").ApplicationType;
 /// SAP.
 pub const ApplicationSummary = struct {
     /// The Amazon Resource Name (ARN) of the application.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The status of the latest discovery.
-    discovery_status: ?ApplicationDiscoveryStatus,
+    discovery_status: ?ApplicationDiscoveryStatus = null,
 
     /// The ID of the application.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The tags on the application.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the application.
-    @"type": ?ApplicationType,
+    @"type": ?ApplicationType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

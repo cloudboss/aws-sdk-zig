@@ -8,7 +8,7 @@ pub const CodeConfiguration = struct {
     /// it to quickly launch an App Runner service without providing a
     /// `apprunner.yaml` file in the source code repository (or ignoring the file if
     /// it exists).
-    code_configuration_values: ?CodeConfigurationValues,
+    code_configuration_values: ?CodeConfigurationValues = null,
 
     /// The source of the App Runner configuration. Values are interpreted as
     /// follows:

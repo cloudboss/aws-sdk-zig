@@ -7,9 +7,9 @@ pub const StreamSummary = struct {
     stream_arn: []const u8,
 
     /// The timestamp at which the stream was created.
-    stream_creation_timestamp: ?i64,
+    stream_creation_timestamp: ?i64 = null,
 
-    stream_mode_details: ?StreamModeDetails,
+    stream_mode_details: ?StreamModeDetails = null,
 
     /// The name of a stream.
     stream_name: []const u8,

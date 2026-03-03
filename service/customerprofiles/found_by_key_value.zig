@@ -3,10 +3,10 @@
 /// [SearchProfiles](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html) request.
 pub const FoundByKeyValue = struct {
     /// A searchable identifier of a customer profile.
-    key_name: ?[]const u8,
+    key_name: ?[]const u8 = null,
 
     /// A list of key values.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key_name = "KeyName",

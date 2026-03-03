@@ -3,7 +3,7 @@ const EvaluationFormItemEnablementSourceType = @import("evaluation_form_item_ena
 /// An enablement expression source item.
 pub const EvaluationFormItemEnablementSource = struct {
     /// A referenceId of the source item.
-    ref_id: ?[]const u8,
+    ref_id: ?[]const u8 = null,
 
     /// A type of source item.
     @"type": EvaluationFormItemEnablementSourceType,

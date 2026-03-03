@@ -33,7 +33,7 @@ pub const TimestreamAction = struct {
     /// If omitted, the topic rule action assigns the timestamp, in milliseconds, at
     /// the time it
     /// processed the rule.
-    timestamp: ?TimestreamTimestamp,
+    timestamp: ?TimestreamTimestamp = null,
 
     pub const json_field_names = .{
         .database_name = "databaseName",

@@ -12,7 +12,7 @@ pub const HealthCheck = struct {
     /// A complex type that contains information about the CloudWatch alarm that
     /// Amazon Route
     /// 53 is monitoring for this health check.
-    cloud_watch_alarm_configuration: ?CloudWatchAlarmConfiguration,
+    cloud_watch_alarm_configuration: ?CloudWatchAlarmConfiguration = null,
 
     /// A complex type that contains detailed information about one health check.
     health_check_config: HealthCheckConfig,
@@ -35,5 +35,5 @@ pub const HealthCheck = struct {
     /// health check. When a health check is created by another service, you can't
     /// edit or
     /// delete it using Amazon Route 53.
-    linked_service: ?LinkedService,
+    linked_service: ?LinkedService = null,
 };

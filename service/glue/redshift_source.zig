@@ -8,13 +8,13 @@ pub const RedshiftSource = struct {
 
     /// The Amazon S3 path where temporary data can be staged when copying out of
     /// the database.
-    redshift_tmp_dir: ?[]const u8,
+    redshift_tmp_dir: ?[]const u8 = null,
 
     /// The database table to read from.
     table: []const u8,
 
     /// The IAM role with permissions.
-    tmp_dir_iam_role: ?[]const u8,
+    tmp_dir_iam_role: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .database = "Database",

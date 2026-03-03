@@ -13,7 +13,7 @@ pub const S3BatchJobIdentifier = struct {
 
     /// The key prefix that specifies the path to the folder in the S3 bucket that
     /// has the batch job definitions.
-    key_prefix: ?[]const u8,
+    key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

@@ -7,13 +7,13 @@ pub const BridgeFlowSource = struct {
     flow_arn: []const u8,
 
     /// The name of the VPC interface attachment to use for this source.
-    flow_vpc_interface_attachment: ?VpcInterfaceAttachment,
+    flow_vpc_interface_attachment: ?VpcInterfaceAttachment = null,
 
     /// The name of the flow source.
     name: []const u8,
 
     /// The Amazon Resource Number (ARN) of the output.
-    output_arn: ?[]const u8,
+    output_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .flow_arn = "FlowArn",

@@ -1,22 +1,22 @@
 /// A subset of the possible data set attributes.
 pub const DataSetSummary = struct {
     /// The timestamp when the data set was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The name of the data set.
     data_set_name: []const u8,
 
     /// The type of data set. The only supported value is VSAM.
-    data_set_org: ?[]const u8,
+    data_set_org: ?[]const u8 = null,
 
     /// The format of the data set.
-    format: ?[]const u8,
+    format: ?[]const u8 = null,
 
     /// The last time the data set was referenced.
-    last_referenced_time: ?i64,
+    last_referenced_time: ?i64 = null,
 
     /// The last time the data set was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     pub const json_field_names = .{
         .creation_time = "creationTime",

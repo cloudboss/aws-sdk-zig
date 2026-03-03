@@ -7,7 +7,7 @@ const ProvisioningArtifactType = @import("provisioning_artifact_type.zig").Provi
 pub const ProvisioningArtifactProperties = struct {
     /// The description of the provisioning artifact, including how it differs from
     /// the previous provisioning artifact.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// If set to true, Service Catalog stops validating the specified provisioning
     /// artifact even if it is invalid.
@@ -31,11 +31,11 @@ pub const ProvisioningArtifactProperties = struct {
     /// physical id in JSON
     /// format as follows: `ImportFromPhysicalId:
     /// “arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]`
-    info: ?[]const aws.map.StringMapEntry,
+    info: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the provisioning artifact (for example, v1 v2beta). No spaces
     /// are allowed.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of provisioning artifact.
     ///
@@ -46,7 +46,7 @@ pub const ProvisioningArtifactProperties = struct {
     /// * `TERRAFORM_CLOUD` - Terraform Cloud configuration file
     ///
     /// * `EXTERNAL` - External configuration file
-    @"type": ?ProvisioningArtifactType,
+    @"type": ?ProvisioningArtifactType = null,
 
     pub const json_field_names = .{
         .description = "Description",

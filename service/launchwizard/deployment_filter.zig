@@ -5,12 +5,12 @@ const DeploymentFilterKey = @import("deployment_filter_key.zig").DeploymentFilte
 /// by specific criteria.
 pub const DeploymentFilter = struct {
     /// The name of the filter. Filter names are case-sensitive.
-    name: ?DeploymentFilterKey,
+    name: ?DeploymentFilterKey = null,
 
     /// The filter values. Filter values are case-sensitive. If you specify multiple
     /// values for a filter, the values are joined with an `OR`, and the request
     /// returns all results that match any of the specified values.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

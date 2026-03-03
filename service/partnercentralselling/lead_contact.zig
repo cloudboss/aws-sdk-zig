@@ -16,7 +16,7 @@ pub const LeadContact = struct {
     last_name: []const u8,
 
     /// The lead contact's phone number associated with the engagement.
-    phone: ?[]const u8,
+    phone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .business_title = "BusinessTitle",

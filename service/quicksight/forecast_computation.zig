@@ -8,22 +8,22 @@ pub const ForecastComputation = struct {
     computation_id: []const u8,
 
     /// The custom seasonality value setup of a forecast computation.
-    custom_seasonality_value: ?i32,
+    custom_seasonality_value: ?i32 = null,
 
     /// The lower boundary setup of a forecast computation.
-    lower_boundary: ?f64,
+    lower_boundary: ?f64 = null,
 
     /// The name of a computation.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The periods backward setup of a forecast computation.
-    periods_backward: ?i32,
+    periods_backward: ?i32 = null,
 
     /// The periods forward setup of a forecast computation.
-    periods_forward: ?i32,
+    periods_forward: ?i32 = null,
 
     /// The prediction interval setup of a forecast computation.
-    prediction_interval: ?i32,
+    prediction_interval: ?i32 = null,
 
     /// The seasonality setup of a forecast computation. Choose one of the following
     /// options:
@@ -31,16 +31,16 @@ pub const ForecastComputation = struct {
     /// * `AUTOMATIC`
     ///
     /// * `CUSTOM`: Checks the custom seasonality value.
-    seasonality: ?ForecastComputationSeasonality,
+    seasonality: ?ForecastComputationSeasonality = null,
 
     /// The time field that is used in a computation.
-    time: ?DimensionField,
+    time: ?DimensionField = null,
 
     /// The upper boundary setup of a forecast computation.
-    upper_boundary: ?f64,
+    upper_boundary: ?f64 = null,
 
     /// The value field that is used in a computation.
-    value: ?MeasureField,
+    value: ?MeasureField = null,
 
     pub const json_field_names = .{
         .computation_id = "ComputationId",

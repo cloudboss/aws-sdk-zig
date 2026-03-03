@@ -69,7 +69,7 @@ pub const ServerSideEncryptionByDefault = struct {
     /// see [Asymmetric keys in
     /// Amazon Web Services
     /// KMS](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *Amazon Web Services Key Management Service Developer Guide*.
-    kms_master_key_id: ?[]const u8,
+    kms_master_key_id: ?[]const u8 = null,
 
     /// Server-side encryption algorithm to use for the default encryption.
     ///

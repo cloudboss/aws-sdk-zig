@@ -11,13 +11,13 @@ const IntegerParameterRange = @import("integer_parameter_range.zig").IntegerPara
 /// HyperParameterTuningJobConfig object.
 pub const ParameterRanges = struct {
     /// Specifies the tunable range for each categorical hyperparameter.
-    categorical_parameter_ranges: ?[]const CategoricalParameterRange,
+    categorical_parameter_ranges: ?[]const CategoricalParameterRange = null,
 
     /// Specifies the tunable range for each continuous hyperparameter.
-    continuous_parameter_ranges: ?[]const ContinuousParameterRange,
+    continuous_parameter_ranges: ?[]const ContinuousParameterRange = null,
 
     /// Specifies the tunable range for each integer hyperparameter.
-    integer_parameter_ranges: ?[]const IntegerParameterRange,
+    integer_parameter_ranges: ?[]const IntegerParameterRange = null,
 
     pub const json_field_names = .{
         .categorical_parameter_ranges = "CategoricalParameterRanges",

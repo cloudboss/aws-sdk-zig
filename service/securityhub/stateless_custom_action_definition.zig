@@ -4,7 +4,7 @@ const StatelessCustomPublishMetricAction = @import("stateless_custom_publish_met
 /// handling.
 pub const StatelessCustomActionDefinition = struct {
     /// Information about metrics to publish to CloudWatch.
-    publish_metric_action: ?StatelessCustomPublishMetricAction,
+    publish_metric_action: ?StatelessCustomPublishMetricAction = null,
 
     pub const json_field_names = .{
         .publish_metric_action = "PublishMetricAction",

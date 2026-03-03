@@ -12,24 +12,24 @@ pub const MedicalItem = struct {
     /// probability that the identified item correctly matches the item spoken in
     /// your
     /// media.
-    confidence: ?f64,
+    confidence: ?f64 = null,
 
     /// The word or punctuation that was transcribed.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The end time, in seconds, of the transcribed item.
     end_time: f64 = 0,
 
     /// If speaker partitioning is enabled, `Speaker` labels the speaker of the
     /// specified item.
-    speaker: ?[]const u8,
+    speaker: ?[]const u8 = null,
 
     /// The start time, in seconds, of the transcribed item.
     start_time: f64 = 0,
 
     /// The type of item identified. Options are: `PRONUNCIATION` (spoken
     /// words) and `PUNCTUATION`.
-    @"type": ?ItemType,
+    @"type": ?ItemType = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",

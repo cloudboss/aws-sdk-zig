@@ -8,39 +8,39 @@ pub const PipelineExecutionStep = struct {
     /// The current attempt of the execution step. For more information, see [Retry
     /// Policy for SageMaker Pipelines
     /// steps](https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html).
-    attempt_count: ?i32,
+    attempt_count: ?i32 = null,
 
     /// If this pipeline execution step was cached, details on the cache hit.
-    cache_hit_result: ?CacheHitResult,
+    cache_hit_result: ?CacheHitResult = null,
 
     /// The time that the step stopped executing.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The reason why the step failed execution. This is only returned if the step
     /// failed its execution.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// Metadata to run the pipeline step.
-    metadata: ?PipelineExecutionStepMetadata,
+    metadata: ?PipelineExecutionStepMetadata = null,
 
     /// The ARN from an execution of the current pipeline from which results are
     /// reused for this step.
-    selective_execution_result: ?SelectiveExecutionResult,
+    selective_execution_result: ?SelectiveExecutionResult = null,
 
     /// The time that the step started executing.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The description of the step.
-    step_description: ?[]const u8,
+    step_description: ?[]const u8 = null,
 
     /// The display name of the step.
-    step_display_name: ?[]const u8,
+    step_display_name: ?[]const u8 = null,
 
     /// The name of the step that is executed.
-    step_name: ?[]const u8,
+    step_name: ?[]const u8 = null,
 
     /// The status of the step execution.
-    step_status: ?StepStatus,
+    step_status: ?StepStatus = null,
 
     pub const json_field_names = .{
         .attempt_count = "AttemptCount",

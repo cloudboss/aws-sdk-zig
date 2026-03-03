@@ -13,16 +13,16 @@ const RouteVehicleLegDetails = @import("route_vehicle_leg_details.zig").RouteVeh
 pub const RouteLeg = struct {
     /// FerryLegDetails is populated when the Leg type is Ferry, and provides
     /// additional information that is specific
-    ferry_leg_details: ?RouteFerryLegDetails,
+    ferry_leg_details: ?RouteFerryLegDetails = null,
 
     /// Geometry of the area to be avoided.
     geometry: RouteLegGeometry,
 
     /// List of languages for instructions within steps in the response.
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// Details related to the pedestrian leg.
-    pedestrian_leg_details: ?RoutePedestrianLegDetails,
+    pedestrian_leg_details: ?RoutePedestrianLegDetails = null,
 
     /// Specifies the mode of transport when calculating a route. Used in estimating
     /// the speed of travel and road compatibility.
@@ -34,7 +34,7 @@ pub const RouteLeg = struct {
     @"type": RouteLegType,
 
     /// Details related to the vehicle leg.
-    vehicle_leg_details: ?RouteVehicleLegDetails,
+    vehicle_leg_details: ?RouteVehicleLegDetails = null,
 
     pub const json_field_names = .{
         .ferry_leg_details = "FerryLegDetails",

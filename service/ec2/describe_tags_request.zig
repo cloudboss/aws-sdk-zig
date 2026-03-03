@@ -6,7 +6,7 @@ pub const DescribeTagsRequest = struct {
     /// and provides an error response. If you have the required permissions, the
     /// error response is `DryRunOperation`.
     /// Otherwise, it is `UnauthorizedOperation`.
-    dry_run: ?bool,
+    dry_run: ?bool = null,
 
     /// The filters.
     ///
@@ -23,7 +23,7 @@ pub const DescribeTagsRequest = struct {
     /// resources with the tag "Owner=TeamA".
     ///
     /// * `value` - The tag value.
-    filters: ?[]const Filter,
+    filters: ?[]const Filter = null,
 
     /// The maximum number of items to return for this request. This value can be
     /// between 5 and 1000.
@@ -31,10 +31,10 @@ pub const DescribeTagsRequest = struct {
     /// in the output.
     /// For more information, see
     /// [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The token returned from a previous paginated request.
     /// Pagination continues from the end of the items returned by the previous
     /// request.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 };

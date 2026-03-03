@@ -4,7 +4,7 @@ const Permission = @import("permission.zig").Permission;
 pub const ResourceAccessPolicy = struct {
     /// The permissions that the Lambda function has to the resource. Can be one of
     /// ''rw'' (read/write) or ''ro'' (read-only).
-    permission: ?Permission,
+    permission: ?Permission = null,
 
     /// The ID of the resource. (This ID is assigned to the resource when you create
     /// the resource definiton.)

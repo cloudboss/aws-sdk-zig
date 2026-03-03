@@ -13,6 +13,8 @@ import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.traits.DocumentationTrait
 import software.amazon.smithy.model.traits.ErrorTrait
+import software.amazon.smithy.model.traits.RequiredTrait
+import software.amazon.smithy.zig.generators.StructureGenerator
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
 import software.amazon.smithy.zig.ZigSymbolVisitor
@@ -28,12 +30,27 @@ class ServiceGeneratorTest {
 
     private fun buildTestModel(): Model {
         return Model.assembler()
-            // Shared structure type used in operation output
+            // Shared structure type used in operation output (all optional members)
             .addShape(
                 StructureShape.builder()
                     .id("test#Credentials")
                     .addMember("AccessKeyId", ShapeId.from("smithy.api#String"))
                     .addMember("SecretAccessKey", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            // Shared structure with a mix of required and optional members
+            .addShape(
+                StructureShape.builder()
+                    .id("test#AccountInfo")
+                    .addMember(
+                        software.amazon.smithy.model.shapes.MemberShape.builder()
+                            .id("test#AccountInfo\$AccountId")
+                            .target(ShapeId.from("smithy.api#String"))
+                            .addTrait(RequiredTrait())
+                            .build()
+                    )
+                    .addMember("AccountName", ShapeId.from("smithy.api#String"))
+                    .addMember("Email", ShapeId.from("smithy.api#String"))
                     .build()
             )
             // Error shapes
@@ -65,6 +82,7 @@ class ServiceGeneratorTest {
                     .addMember("Arn", ShapeId.from("smithy.api#String"))
                     .addMember("UserId", ShapeId.from("smithy.api#String"))
                     .addMember("Credentials", ShapeId.from("test#Credentials"))
+                    .addMember("AccountInfo", ShapeId.from("test#AccountInfo"))
                     .build()
             )
             .addShape(
@@ -426,5 +444,78 @@ class ServiceGeneratorTest {
         for (expected in expectedFiles) {
             assertTrue(files.containsKey(expected), "Missing generated file: $expected")
         }
+    }
+
+    // ---- Optional Field Default Tests ----
+
+    @Test
+    fun operationOutputOptionalFieldsDefaultToNull() {
+        val files = generateAndGetFiles()
+        val op = files["get_caller_identity.zig"]!!
+
+        assertTrue(
+            op.contains("account: ?[]const u8 = null,"),
+            "Optional output field should default to null",
+        )
+        assertTrue(
+            op.contains("arn: ?[]const u8 = null,"),
+            "Optional output field should default to null",
+        )
+    }
+
+    // ---- StructureGenerator Optional Default Tests ----
+
+    private fun generateStructFile(shape: StructureShape, model: Model): String {
+        val context = createContext(model)
+        val symbolProvider = context.symbolProvider()
+        val symbol = symbolProvider.toSymbol(shape)
+        StructureGenerator(context, shape, symbolProvider, symbol, model).run()
+        context.writerDelegator().flushWriters()
+
+        val expectedFileName = software.amazon.smithy.zig.NamingUtil.toZigFileName(shape.id.name)
+        for (file in context.fileManifest().files) {
+            if (file.fileName.toString().endsWith(expectedFileName)) {
+                return file.toFile().readText()
+            }
+        }
+        throw AssertionError("No file '$expectedFileName' generated for ${shape.id}; files: ${context.fileManifest().files.map { it.fileName }}")
+    }
+
+    @Test
+    fun structOptionalFieldsDefaultToNull() {
+        val model = buildTestModel()
+        val shape = model.expectShape(ShapeId.from("test#Credentials"), StructureShape::class.java)
+        val content = generateStructFile(shape, model)
+
+        assertTrue(
+            content.contains("access_key_id: ?[]const u8 = null,"),
+            "Optional string field should default to null; got:\n$content",
+        )
+        assertTrue(
+            content.contains("secret_access_key: ?[]const u8 = null,"),
+            "Optional string field should default to null; got:\n$content",
+        )
+    }
+
+    @Test
+    fun structRequiredFieldsHaveNoDefault() {
+        val model = buildTestModel()
+        val shape = model.expectShape(ShapeId.from("test#AccountInfo"), StructureShape::class.java)
+        val content = generateStructFile(shape, model)
+
+        // Required field: bare type, no default
+        assertTrue(
+            content.contains("account_id: []const u8,"),
+            "Required field should have bare type with no default; got:\n$content",
+        )
+        // Optional fields: default to null
+        assertTrue(
+            content.contains("account_name: ?[]const u8 = null,"),
+            "Optional field should default to null; got:\n$content",
+        )
+        assertTrue(
+            content.contains("email: ?[]const u8 = null,"),
+            "Optional field should default to null; got:\n$content",
+        )
     }
 }

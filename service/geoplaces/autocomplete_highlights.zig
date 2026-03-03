@@ -5,10 +5,10 @@ const Highlight = @import("highlight.zig").Highlight;
 /// returning the sections of the response which matched to input query terms.
 pub const AutocompleteHighlights = struct {
     /// Describes how part of the result address match the input query.
-    address: ?AutocompleteAddressHighlights,
+    address: ?AutocompleteAddressHighlights = null,
 
     /// Indicates where the title field in the result matches the input query.
-    title: ?[]const Highlight,
+    title: ?[]const Highlight = null,
 
     pub const json_field_names = .{
         .address = "Address",

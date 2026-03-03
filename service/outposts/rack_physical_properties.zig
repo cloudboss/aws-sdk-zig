@@ -15,12 +15,12 @@ const UplinkGbps = @import("uplink_gbps.zig").UplinkGbps;
 /// checklist](https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist) in the Amazon Web Services Outposts User Guide.
 pub const RackPhysicalProperties = struct {
     /// The type of fiber used to attach the Outpost to the network.
-    fiber_optic_cable_type: ?FiberOpticCableType,
+    fiber_optic_cable_type: ?FiberOpticCableType = null,
 
     /// The maximum rack weight that this site can support. `NO_LIMIT` is over 2000
     /// lbs
     /// (907 kg).
-    maximum_supported_weight_lbs: ?MaximumSupportedWeightLbs,
+    maximum_supported_weight_lbs: ?MaximumSupportedWeightLbs = null,
 
     /// The type of optical standard used to attach the Outpost to the network. This
     /// field is
@@ -29,25 +29,25 @@ pub const RackPhysicalProperties = struct {
     /// about networking requirements for racks, see
     /// [Network](https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking)
     /// in the Amazon Web Services Outposts User Guide.
-    optical_standard: ?OpticalStandard,
+    optical_standard: ?OpticalStandard = null,
 
     /// The power connector for the hardware.
-    power_connector: ?PowerConnector,
+    power_connector: ?PowerConnector = null,
 
     /// The power draw available at the hardware placement position for the rack.
-    power_draw_kva: ?PowerDrawKva,
+    power_draw_kva: ?PowerDrawKva = null,
 
     /// The position of the power feed.
-    power_feed_drop: ?PowerFeedDrop,
+    power_feed_drop: ?PowerFeedDrop = null,
 
     /// The power option that you can provide for hardware.
-    power_phase: ?PowerPhase,
+    power_phase: ?PowerPhase = null,
 
     /// The number of uplinks each Outpost network device.
-    uplink_count: ?UplinkCount,
+    uplink_count: ?UplinkCount = null,
 
     /// The uplink speed the rack supports for the connection to the Region.
-    uplink_gbps: ?UplinkGbps,
+    uplink_gbps: ?UplinkGbps = null,
 
     pub const json_field_names = .{
         .fiber_optic_cable_type = "FiberOpticCableType",

@@ -10,7 +10,7 @@ const VolumeStyle = @import("volume_style.zig").VolumeStyle;
 pub const OntapVolumeConfiguration = struct {
     /// This structure specifies configuration options for a volume’s storage
     /// aggregate or aggregates.
-    aggregate_configuration: ?AggregateConfiguration,
+    aggregate_configuration: ?AggregateConfiguration = null,
 
     /// A boolean flag indicating whether tags for the volume should be copied to
     /// backups. This value defaults to
@@ -21,7 +21,7 @@ pub const OntapVolumeConfiguration = struct {
     /// specified tags are copied to backups. If you specify one or more tags when
     /// creating a user-initiated
     /// backup, no tags are copied from the volume, regardless of this value.
-    copy_tags_to_backups: ?bool,
+    copy_tags_to_backups: ?bool = null,
 
     /// Specifies the FlexCache endpoint type of the volume.
     /// Valid values are the following:
@@ -33,7 +33,7 @@ pub const OntapVolumeConfiguration = struct {
     ///   volume.
     ///
     /// * `CACHE` specifies that the volume is a FlexCache volume.
-    flex_cache_endpoint_type: ?FlexCacheEndpointType,
+    flex_cache_endpoint_type: ?FlexCacheEndpointType = null,
 
     /// Specifies the directory that network-attached storage (NAS) clients use to
     /// mount the
@@ -43,7 +43,7 @@ pub const OntapVolumeConfiguration = struct {
     /// junction or on a directory within a volume. A `JunctionPath` for a volume
     /// named `vol3` might be `/vol1/vol2/vol3`, or
     /// `/vol1/dir2/vol3`, or even `/dir1/dir2/vol3`.
-    junction_path: ?[]const u8,
+    junction_path: ?[]const u8 = null,
 
     /// Specifies the type of volume. Valid values are the following:
     ///
@@ -59,21 +59,21 @@ pub const OntapVolumeConfiguration = struct {
     /// network traffic to a FlexVol volume by providing additional read-only access
     /// to
     /// clients.
-    ontap_volume_type: ?OntapVolumeType,
+    ontap_volume_type: ?OntapVolumeType = null,
 
     /// The security style for the volume, which can be `UNIX`, `NTFS`,
     /// or
     /// `MIXED`.
-    security_style: ?SecurityStyle,
+    security_style: ?SecurityStyle = null,
 
     /// The configured size of the volume, in bytes.
-    size_in_bytes: ?i64,
+    size_in_bytes: ?i64 = null,
 
     /// The configured size of the volume, in megabytes (MBs).
-    size_in_megabytes: ?i32,
+    size_in_megabytes: ?i32 = null,
 
     /// The SnapLock configuration object for an FSx for ONTAP SnapLock volume.
-    snaplock_configuration: ?SnaplockConfiguration,
+    snaplock_configuration: ?SnaplockConfiguration = null,
 
     /// Specifies the snapshot policy for the volume. There are three built-in
     /// snapshot policies:
@@ -98,13 +98,13 @@ pub const OntapVolumeConfiguration = struct {
     /// For more information, see [Snapshot
     /// policies](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies)
     /// in the Amazon FSx for NetApp ONTAP User Guide.
-    snapshot_policy: ?[]const u8,
+    snapshot_policy: ?[]const u8 = null,
 
     /// The volume's storage efficiency setting.
-    storage_efficiency_enabled: ?bool,
+    storage_efficiency_enabled: ?bool = null,
 
     /// The ID of the volume's storage virtual machine.
-    storage_virtual_machine_id: ?[]const u8,
+    storage_virtual_machine_id: ?[]const u8 = null,
 
     /// A Boolean flag indicating whether this volume is the root volume for its
     /// storage
@@ -117,19 +117,19 @@ pub const OntapVolumeConfiguration = struct {
     /// delete all
     /// non-root volumes. This flag, when set to `false`, helps you identify which
     /// volumes to delete before you can delete the SVM.
-    storage_virtual_machine_root: ?bool,
+    storage_virtual_machine_root: ?bool = null,
 
     /// The volume's `TieringPolicy` setting.
-    tiering_policy: ?TieringPolicy,
+    tiering_policy: ?TieringPolicy = null,
 
     /// The volume's universally unique identifier (UUID).
-    uuid: ?[]const u8,
+    uuid: ?[]const u8 = null,
 
     /// Use to specify the style of an ONTAP volume. For more information about
     /// FlexVols and FlexGroups, see [Volume
     /// types](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types.html)
     /// in Amazon FSx for NetApp ONTAP User Guide.
-    volume_style: ?VolumeStyle,
+    volume_style: ?VolumeStyle = null,
 
     pub const json_field_names = .{
         .aggregate_configuration = "AggregateConfiguration",

@@ -2,7 +2,7 @@
 /// outbound shipment.
 pub const Shipment = struct {
     /// Status information for a shipment.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The tracking number for this job. Using this tracking number with your
     /// region's
@@ -11,7 +11,7 @@ pub const Shipment = struct {
     /// For India, the carrier is Amazon Logistics. For all other regions, UPS is
     /// the
     /// carrier.
-    tracking_number: ?[]const u8,
+    tracking_number: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status = "Status",

@@ -15,7 +15,7 @@ pub const PartnerProfile = struct {
     industry_segments: []const IndustrySegment,
 
     /// A list of localized content versions for different languages and regions.
-    localized_contents: ?[]const LocalizedContent,
+    localized_contents: ?[]const LocalizedContent = null,
 
     /// The URL to the partner's logo image.
     logo_url: []const u8,
@@ -24,7 +24,7 @@ pub const PartnerProfile = struct {
     primary_solution_type: PrimarySolutionType,
 
     /// The unique identifier of the partner profile.
-    profile_id: ?[]const u8,
+    profile_id: ?[]const u8 = null,
 
     /// The source locale used for automatic translation of profile content.
     translation_source_locale: []const u8,

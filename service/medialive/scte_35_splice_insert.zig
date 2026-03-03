@@ -7,15 +7,15 @@ pub const Scte35SpliceInsert = struct {
     /// When specified, this offset (in milliseconds) is added to the input Ad Avail
     /// PTS time. This only applies to embedded SCTE 104/35 messages and does not
     /// apply to OOB messages.
-    ad_avail_offset: ?i32,
+    ad_avail_offset: ?i32 = null,
 
     /// When set to ignore, Segment Descriptors with noRegionalBlackoutFlag set to 0
     /// will no longer trigger blackouts or Ad Avail slates
-    no_regional_blackout_flag: ?Scte35SpliceInsertNoRegionalBlackoutBehavior,
+    no_regional_blackout_flag: ?Scte35SpliceInsertNoRegionalBlackoutBehavior = null,
 
     /// When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0
     /// will no longer trigger blackouts or Ad Avail slates
-    web_delivery_allowed_flag: ?Scte35SpliceInsertWebDeliveryAllowedBehavior,
+    web_delivery_allowed_flag: ?Scte35SpliceInsertWebDeliveryAllowedBehavior = null,
 
     pub const json_field_names = .{
         .ad_avail_offset = "AdAvailOffset",

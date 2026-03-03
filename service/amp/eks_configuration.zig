@@ -6,7 +6,7 @@ pub const EksConfiguration = struct {
 
     /// A list of the security group IDs for the Amazon EKS cluster VPC
     /// configuration.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// A list of subnet IDs for the Amazon EKS cluster VPC configuration.
     subnet_ids: []const []const u8,

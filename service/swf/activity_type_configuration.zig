@@ -18,7 +18,7 @@ pub const ActivityTypeConfiguration = struct {
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    default_task_heartbeat_timeout: ?[]const u8,
+    default_task_heartbeat_timeout: ?[]const u8 = null,
 
     /// The default task list specified for this activity type at registration. This
     /// default is used if
@@ -28,7 +28,7 @@ pub const ActivityTypeConfiguration = struct {
     /// a task through the
     /// `ScheduleActivityTask`
     /// Decision.
-    default_task_list: ?TaskList,
+    default_task_list: ?TaskList = null,
 
     /// The default task priority for tasks of this activity type, specified at
     /// registration. If not
@@ -42,7 +42,7 @@ pub const ActivityTypeConfiguration = struct {
     ///
     /// For more information about setting task priority, see [Setting Task
     /// Priority](https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html) in the *Amazon SWF Developer Guide*.
-    default_task_priority: ?[]const u8,
+    default_task_priority: ?[]const u8 = null,
 
     /// The default maximum duration, specified when registering the activity type,
     /// for tasks of this activity
@@ -52,7 +52,7 @@ pub const ActivityTypeConfiguration = struct {
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    default_task_schedule_to_close_timeout: ?[]const u8,
+    default_task_schedule_to_close_timeout: ?[]const u8 = null,
 
     /// The default maximum duration, specified when registering the activity type,
     /// that a task of an
@@ -63,7 +63,7 @@ pub const ActivityTypeConfiguration = struct {
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    default_task_schedule_to_start_timeout: ?[]const u8,
+    default_task_schedule_to_start_timeout: ?[]const u8 = null,
 
     /// The default maximum duration for tasks of an activity type specified when
     /// registering the activity
@@ -73,7 +73,7 @@ pub const ActivityTypeConfiguration = struct {
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    default_task_start_to_close_timeout: ?[]const u8,
+    default_task_start_to_close_timeout: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .default_task_heartbeat_timeout = "defaultTaskHeartbeatTimeout",

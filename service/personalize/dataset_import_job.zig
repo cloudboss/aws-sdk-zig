@@ -12,37 +12,37 @@ const ImportMode = @import("import_mode.zig").ImportMode;
 pub const DatasetImportJob = struct {
     /// The creation date and time (in Unix time) of the dataset import
     /// job.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset that receives the
     /// imported data.
-    dataset_arn: ?[]const u8,
+    dataset_arn: ?[]const u8 = null,
 
     /// The ARN of the dataset import job.
-    dataset_import_job_arn: ?[]const u8,
+    dataset_import_job_arn: ?[]const u8 = null,
 
     /// The Amazon S3 bucket that contains the training data to import.
-    data_source: ?DataSource,
+    data_source: ?DataSource = null,
 
     /// If a dataset import job fails, provides the reason why.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The import mode used by the dataset import job to import new
     /// records.
-    import_mode: ?ImportMode,
+    import_mode: ?ImportMode = null,
 
     /// The name of the import job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The date and time (in Unix time) the dataset was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// Whether the job publishes metrics to Amazon S3 for a metric attribution.
-    publish_attribution_metrics_to_s3: ?bool,
+    publish_attribution_metrics_to_s3: ?bool = null,
 
     /// The ARN of the IAM role that has permissions to read from the Amazon S3
     /// data source.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The status of the dataset import job.
     ///
@@ -50,7 +50,7 @@ pub const DatasetImportJob = struct {
     ///
     /// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
     /// FAILED
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

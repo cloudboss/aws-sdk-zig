@@ -5,20 +5,20 @@ const SimpleEmailPart = @import("simple_email_part.zig").SimpleEmailPart;
 /// part, and an HTML part.
 pub const SimpleEmail = struct {
     /// The list of MessageHeaders for the email. You can have up to 15 Headers.
-    headers: ?[]const MessageHeader,
+    headers: ?[]const MessageHeader = null,
 
     /// The body of the email message, in HTML format. We recommend using HTML
     /// format for email clients that render HTML content. You can include links,
     /// formatted text, and more in an HTML message.
-    html_part: ?SimpleEmailPart,
+    html_part: ?SimpleEmailPart = null,
 
     /// The subject line, or title, of the email.
-    subject: ?SimpleEmailPart,
+    subject: ?SimpleEmailPart = null,
 
     /// The body of the email message, in plain text format. We recommend using
     /// plain text format for email clients that don't render HTML content and
     /// clients that are connected to high-latency networks, such as mobile devices.
-    text_part: ?SimpleEmailPart,
+    text_part: ?SimpleEmailPart = null,
 
     pub const json_field_names = .{
         .headers = "Headers",

@@ -5,18 +5,18 @@ const IssuanceDetail = @import("issuance_detail.zig").IssuanceDetail;
 /// quotas or service limits.
 pub const ConsumableDetails = struct {
     /// The total amount of the consumable benefit that has been allocated.
-    allocated_amount: ?MonetaryValue,
+    allocated_amount: ?MonetaryValue = null,
 
     /// Detailed information about how the consumable benefit was issued and
     /// distributed.
-    issuance_details: ?IssuanceDetail,
+    issuance_details: ?IssuanceDetail = null,
 
     /// The remaining amount of the consumable benefit that is still available for
     /// use.
-    remaining_amount: ?MonetaryValue,
+    remaining_amount: ?MonetaryValue = null,
 
     /// The amount of the consumable benefit that has already been used.
-    utilized_amount: ?MonetaryValue,
+    utilized_amount: ?MonetaryValue = null,
 
     pub const json_field_names = .{
         .allocated_amount = "AllocatedAmount",

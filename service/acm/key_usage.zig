@@ -4,7 +4,7 @@ const KeyUsageName = @import("key_usage_name.zig").KeyUsageName;
 /// contained in the certificate.
 pub const KeyUsage = struct {
     /// A string value that contains a Key Usage extension name.
-    name: ?KeyUsageName,
+    name: ?KeyUsageName = null,
 
     pub const json_field_names = .{
         .name = "Name",

@@ -4,7 +4,7 @@ pub const SpeakerSearchResult = struct {
     confidence_score: f32 = 0,
 
     /// The voice profile ID.
-    voice_profile_id: ?[]const u8,
+    voice_profile_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .confidence_score = "ConfidenceScore",

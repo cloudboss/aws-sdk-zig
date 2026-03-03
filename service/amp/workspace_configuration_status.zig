@@ -7,7 +7,7 @@ pub const WorkspaceConfigurationStatus = struct {
     status_code: WorkspaceConfigurationStatusCode,
 
     /// The reason for the current status, if a reason is available.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status_code = "statusCode",

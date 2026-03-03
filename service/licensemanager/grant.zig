@@ -26,13 +26,13 @@ pub const Grant = struct {
     license_arn: []const u8,
 
     /// The options specified for the grant.
-    options: ?Options,
+    options: ?Options = null,
 
     /// Parent ARN.
     parent_arn: []const u8,
 
     /// Grant status reason.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// Grant version.
     version: []const u8,

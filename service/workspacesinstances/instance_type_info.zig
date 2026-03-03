@@ -3,12 +3,12 @@ const SupportedInstanceConfiguration = @import("supported_instance_configuration
 /// Provides details about a specific WorkSpace Instance type.
 pub const InstanceTypeInfo = struct {
     /// Unique identifier for the WorkSpace Instance type.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// Lists all valid combinations of tenancy, platform type, and billing mode
     /// supported for the specific WorkSpace Instance type. Contains the complete
     /// set of configuration options available for this instance type.
-    supported_instance_configurations: ?[]const SupportedInstanceConfiguration,
+    supported_instance_configurations: ?[]const SupportedInstanceConfiguration = null,
 
     pub const json_field_names = .{
         .instance_type = "InstanceType",

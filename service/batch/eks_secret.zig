@@ -4,7 +4,7 @@
 /// *Kubernetes documentation*.
 pub const EksSecret = struct {
     /// Specifies whether the secret or the secret's keys must be defined.
-    optional: ?bool,
+    optional: ?bool = null,
 
     /// The name of the secret. The name must be allowed as a DNS subdomain name.
     /// For more

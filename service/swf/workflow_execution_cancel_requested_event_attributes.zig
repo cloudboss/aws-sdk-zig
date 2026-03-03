@@ -7,7 +7,7 @@ pub const WorkflowExecutionCancelRequestedEventAttributes = struct {
     /// automatically generated, and specifies the cause. This happens if the parent
     /// workflow execution times out or is terminated, and the child policy is set
     /// to cancel child executions.
-    cause: ?WorkflowExecutionCancelRequestedCause,
+    cause: ?WorkflowExecutionCancelRequestedCause = null,
 
     /// The ID of the `RequestCancelExternalWorkflowExecutionInitiated` event
     /// corresponding to the
@@ -20,7 +20,7 @@ pub const WorkflowExecutionCancelRequestedEventAttributes = struct {
     external_initiated_event_id: i64 = 0,
 
     /// The external workflow execution for which the cancellation was requested.
-    external_workflow_execution: ?WorkflowExecution,
+    external_workflow_execution: ?WorkflowExecution = null,
 
     pub const json_field_names = .{
         .cause = "cause",

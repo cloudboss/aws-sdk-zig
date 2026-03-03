@@ -19,7 +19,7 @@ pub const ConfluenceSpaceConfiguration = struct {
     /// and attachments in the space are not indexed. If a space is in both the
     /// `ExcludeSpaces` and the `IncludeSpaces` list, the space is
     /// excluded.
-    exclude_spaces: ?[]const []const u8,
+    exclude_spaces: ?[]const []const u8 = null,
 
     /// A list of space keys for Confluence spaces. If you include a key, the blogs,
     /// documents, and attachments in the space are indexed. Spaces that aren't in
@@ -29,7 +29,7 @@ pub const ConfluenceSpaceConfiguration = struct {
     /// error when the data source is synchronized. If a space is in both the
     /// `IncludeSpaces` and the `ExcludeSpaces` list, the space is
     /// excluded.
-    include_spaces: ?[]const []const u8,
+    include_spaces: ?[]const []const u8 = null,
 
     /// Maps attributes or field names of Confluence spaces to Amazon Kendra index
     /// field
@@ -42,7 +42,7 @@ pub const ConfluenceSpaceConfiguration = struct {
     ///
     /// If you specify the `SpaceFieldMappings` parameter, you must specify at
     /// least one field mapping.
-    space_field_mappings: ?[]const ConfluenceSpaceToIndexFieldMapping,
+    space_field_mappings: ?[]const ConfluenceSpaceToIndexFieldMapping = null,
 
     pub const json_field_names = .{
         .crawl_archived_spaces = "CrawlArchivedSpaces",

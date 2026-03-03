@@ -5,14 +5,14 @@
 /// (SNS).
 pub const NotificationConfiguration = struct {
     /// The Amazon Resource Name (ARN) that identifies the topic.
-    topic_arn: ?[]const u8,
+    topic_arn: ?[]const u8 = null,
 
     /// The current state of the topic. A value of “active” means that notifications
     /// will
     /// be sent to the topic. A value of “inactive” means that notifications will
     /// not be sent to
     /// the topic.
-    topic_status: ?[]const u8,
+    topic_status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .topic_arn = "TopicArn",

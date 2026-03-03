@@ -4,7 +4,7 @@ pub const ProtectedJobS3OutputConfigurationInput = struct {
     bucket: []const u8,
 
     /// The S3 prefix to unload the protected job results.
-    key_prefix: ?[]const u8,
+    key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

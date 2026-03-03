@@ -9,20 +9,20 @@ const FraudRiskDetails = @import("fraud_risk_details.zig").FraudRiskDetails;
 pub const FraudDetectionResult = struct {
     /// A timestamp of when audio aggregation ended for this fraud detection
     /// result.
-    audio_aggregation_ended_at: ?i64,
+    audio_aggregation_ended_at: ?i64 = null,
 
     /// A timestamp of when audio aggregation started for this fraud detection
     /// result.
-    audio_aggregation_started_at: ?i64,
+    audio_aggregation_started_at: ?i64 = null,
 
     /// The `FraudDetectionConfiguration` used to generate this fraud detection
     /// result.
-    configuration: ?FraudDetectionConfiguration,
+    configuration: ?FraudDetectionConfiguration = null,
 
     /// The fraud detection decision produced by Voice ID, processed against the
     /// current
     /// session state and streamed audio of the speaker.
-    decision: ?FraudDetectionDecision,
+    decision: ?FraudDetectionDecision = null,
 
     /// The unique identifier for this fraud detection result. Given there can be
     /// multiple
@@ -33,17 +33,17 @@ pub const FraudDetectionResult = struct {
     /// any new streaming activity or risk threshold changes, Voice ID always
     /// returns cached
     /// Fraud Detection result for this API.
-    fraud_detection_result_id: ?[]const u8,
+    fraud_detection_result_id: ?[]const u8 = null,
 
     /// The reason speaker was flagged by the fraud detection system. This is only
     /// be
     /// populated if fraud detection Decision is `HIGH_RISK`, and the following
     /// possible values: `KNOWN_FRAUDSTER` and `VOICE_SPOOFING`.
-    reasons: ?[]const FraudDetectionReason,
+    reasons: ?[]const FraudDetectionReason = null,
 
     /// Details about each risk analyzed for this speaker. Currently, this contains
     /// KnownFraudsterRisk and VoiceSpoofingRisk details.
-    risk_details: ?FraudRiskDetails,
+    risk_details: ?FraudRiskDetails = null,
 
     pub const json_field_names = .{
         .audio_aggregation_ended_at = "AudioAggregationEndedAt",

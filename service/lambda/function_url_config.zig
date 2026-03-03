@@ -14,7 +14,7 @@ pub const FunctionUrlConfig = struct {
     /// The [cross-origin resource sharing
     /// (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for
     /// your function URL.
-    cors: ?Cors,
+    cors: ?Cors = null,
 
     /// When the function URL was created, in [ISO-8601
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
@@ -35,7 +35,7 @@ pub const FunctionUrlConfig = struct {
     ///   available. Lambda invokes your function using the
     ///   `InvokeWithResponseStream` API operation. The maximum response payload
     ///   size is 200 MB.
-    invoke_mode: ?InvokeMode,
+    invoke_mode: ?InvokeMode = null,
 
     /// When the function URL configuration was last updated, in [ISO-8601
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).

@@ -1,10 +1,10 @@
 /// Parameters supported by the application.
 pub const ParameterDefinition = struct {
     /// A regular expression that represents the patterns to allow for String types.
-    allowed_pattern: ?[]const u8,
+    allowed_pattern: ?[]const u8 = null,
 
     /// An array containing the list of values allowed for the parameter.
-    allowed_values: ?[]const []const u8,
+    allowed_values: ?[]const []const u8 = null,
 
     /// A string that explains a constraint when the constraint is violated. For
     /// example, without a constraint description,
@@ -20,32 +20,32 @@ pub const ParameterDefinition = struct {
     ///
     /// Malformed input-Parameter MyParameter must contain only uppercase and
     /// lowercase letters and numbers.
-    constraint_description: ?[]const u8,
+    constraint_description: ?[]const u8 = null,
 
     /// A value of the appropriate type for the template to use if no value is
     /// specified when a stack is created.
     /// If you define constraints for the parameter, you must specify a value that
     /// adheres to those constraints.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// A string of up to 4,000 characters that describes the parameter.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// An integer value that determines the largest number of characters that you
     /// want to allow for String types.
-    max_length: ?i32,
+    max_length: ?i32 = null,
 
     /// A numeric value that determines the largest numeric value that you want to
     /// allow for Number types.
-    max_value: ?i32,
+    max_value: ?i32 = null,
 
     /// An integer value that determines the smallest number of characters that you
     /// want to allow for String types.
-    min_length: ?i32,
+    min_length: ?i32 = null,
 
     /// A numeric value that determines the smallest numeric value that you want to
     /// allow for Number types.
-    min_value: ?i32,
+    min_value: ?i32 = null,
 
     /// The name of the parameter.
     name: []const u8,
@@ -53,7 +53,7 @@ pub const ParameterDefinition = struct {
     /// Whether to mask the parameter value whenever anyone makes a call that
     /// describes the stack. If you set the
     /// value to true, the parameter value is masked with asterisks (*****).
-    no_echo: ?bool,
+    no_echo: ?bool = null,
 
     /// A list of AWS SAM resources that use this parameter.
     referenced_by_resources: []const []const u8,
@@ -88,7 +88,7 @@ pub const ParameterDefinition = struct {
     ///
     /// For example, users might specify "test,dev,prod", and then Ref results in
     /// ["test","dev","prod"].
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allowed_pattern = "AllowedPattern",

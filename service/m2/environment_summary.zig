@@ -28,7 +28,7 @@ pub const EnvironmentSummary = struct {
     name: []const u8,
 
     /// The network type supported by the runtime environment.
-    network_type: ?NetworkType,
+    network_type: ?NetworkType = null,
 
     /// The status of the runtime environment
     status: EnvironmentLifecycle,

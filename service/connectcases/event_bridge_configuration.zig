@@ -8,7 +8,7 @@ pub const EventBridgeConfiguration = struct {
 
     /// Details of what case and related item data is published through the case
     /// event stream.
-    included_data: ?EventIncludedData,
+    included_data: ?EventIncludedData = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

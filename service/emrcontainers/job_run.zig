@@ -12,58 +12,58 @@ const JobRunState = @import("job_run_state.zig").JobRunState;
 /// PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.
 pub const JobRun = struct {
     /// The ARN of job run.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The client token used to start a job run.
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The configuration settings that are used to override default configuration.
-    configuration_overrides: ?ConfigurationOverrides,
+    configuration_overrides: ?ConfigurationOverrides = null,
 
     /// The date and time when the job run was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The user who created the job run.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The execution role ARN of the job run.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The reasons why the job run has failed.
-    failure_reason: ?FailureReason,
+    failure_reason: ?FailureReason = null,
 
     /// The date and time when the job run has finished.
-    finished_at: ?i64,
+    finished_at: ?i64 = null,
 
     /// The ID of the job run.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Parameters of job driver for the job run.
-    job_driver: ?JobDriver,
+    job_driver: ?JobDriver = null,
 
     /// The name of the job run.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The release version of Amazon EMR.
-    release_label: ?[]const u8,
+    release_label: ?[]const u8 = null,
 
     /// The configuration of the retry policy that the job runs on.
-    retry_policy_configuration: ?RetryPolicyConfiguration,
+    retry_policy_configuration: ?RetryPolicyConfiguration = null,
 
     /// The current status of the retry policy executed on the job.
-    retry_policy_execution: ?RetryPolicyExecution,
+    retry_policy_execution: ?RetryPolicyExecution = null,
 
     /// The state of the job run.
-    state: ?JobRunState,
+    state: ?JobRunState = null,
 
     /// Additional details of the job run state.
-    state_details: ?[]const u8,
+    state_details: ?[]const u8 = null,
 
     /// The assigned tags of the job run.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The ID of the job run's virtual cluster.
-    virtual_cluster_id: ?[]const u8,
+    virtual_cluster_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

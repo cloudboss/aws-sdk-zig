@@ -7,12 +7,12 @@ pub const CaptionSourceFramerate = struct {
     /// Specify the denominator of the fraction that represents the frame rate for
     /// the setting Caption source frame rate. Use this setting along with the
     /// setting Framerate numerator.
-    framerate_denominator: ?i32,
+    framerate_denominator: ?i32 = null,
 
     /// Specify the numerator of the fraction that represents the frame rate for the
     /// setting Caption source frame rate. Use this setting along with the setting
     /// Framerate denominator.
-    framerate_numerator: ?i32,
+    framerate_numerator: ?i32 = null,
 
     pub const json_field_names = .{
         .framerate_denominator = "FramerateDenominator",

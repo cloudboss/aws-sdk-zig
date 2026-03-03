@@ -3,7 +3,7 @@
 /// CreateStreamProcessor in the Amazon Rekognition Developer Guide.
 pub const KinesisVideoStream = struct {
     /// ARN of the Kinesis video stream stream that streams the source video.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -8,7 +8,7 @@ pub const FlinkApplicationConfigurationDescription = struct {
     /// Describes an application's checkpointing configuration. Checkpointing is the
     /// process of persisting application state
     /// for fault tolerance.
-    checkpoint_configuration_description: ?CheckpointConfigurationDescription,
+    checkpoint_configuration_description: ?CheckpointConfigurationDescription = null,
 
     /// The job plan for an application. For more information about the job plan,
     /// see [Jobs and
@@ -17,15 +17,15 @@ pub const FlinkApplicationConfigurationDescription = struct {
     /// To retrieve the job plan for the application, use the
     /// DescribeApplicationRequest$IncludeAdditionalDetails parameter of the
     /// DescribeApplication operation.
-    job_plan_description: ?[]const u8,
+    job_plan_description: ?[]const u8 = null,
 
     /// Describes configuration parameters for Amazon CloudWatch logging for an
     /// application.
-    monitoring_configuration_description: ?MonitoringConfigurationDescription,
+    monitoring_configuration_description: ?MonitoringConfigurationDescription = null,
 
     /// Describes parameters for how an application executes multiple tasks
     /// simultaneously.
-    parallelism_configuration_description: ?ParallelismConfigurationDescription,
+    parallelism_configuration_description: ?ParallelismConfigurationDescription = null,
 
     pub const json_field_names = .{
         .checkpoint_configuration_description = "CheckpointConfigurationDescription",

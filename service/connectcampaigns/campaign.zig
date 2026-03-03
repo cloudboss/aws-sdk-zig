@@ -17,7 +17,7 @@ pub const Campaign = struct {
 
     outbound_call_config: OutboundCallConfig,
 
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

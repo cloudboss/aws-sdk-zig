@@ -18,7 +18,7 @@ pub const JobFilter = struct {
     ///
     /// Specify `JobStatus` to return export jobs with a specific status (e.g,
     /// `Complete`).
-    name: ?JobFilterName,
+    name: ?JobFilterName = null,
 
     /// The value of the filter.
     ///
@@ -35,7 +35,7 @@ pub const JobFilter = struct {
     /// * Specify `Queued`, `InProgress`, `Complete`,
     /// or `Failed` if you specify the `name` parameter as
     /// `JobStatus`.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

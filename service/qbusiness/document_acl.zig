@@ -5,12 +5,12 @@ const DocumentAclMembership = @import("document_acl_membership.zig").DocumentAcl
 pub const DocumentAcl = struct {
     /// The allowlist conditions for the document. Users or groups matching these
     /// conditions are granted access to the document.
-    allowlist: ?DocumentAclMembership,
+    allowlist: ?DocumentAclMembership = null,
 
     /// The denylist conditions for the document. Users or groups matching these
     /// conditions are denied access to the document, overriding allowlist
     /// permissions.
-    deny_list: ?DocumentAclMembership,
+    deny_list: ?DocumentAclMembership = null,
 
     pub const json_field_names = .{
         .allowlist = "allowlist",

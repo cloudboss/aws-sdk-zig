@@ -7,18 +7,18 @@ pub const LastDeploymentInfo = struct {
     /// A timestamp that indicates when the most recent deployment to the deployment
     /// group
     /// started.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The unique ID of a deployment.
-    deployment_id: ?[]const u8,
+    deployment_id: ?[]const u8 = null,
 
     /// A timestamp that indicates when the most recent deployment to the deployment
     /// group was
     /// complete.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The status of the most recent deployment.
-    status: ?DeploymentStatus,
+    status: ?DeploymentStatus = null,
 
     pub const json_field_names = .{
         .create_time = "createTime",

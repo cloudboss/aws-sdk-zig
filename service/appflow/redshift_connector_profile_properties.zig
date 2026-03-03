@@ -5,23 +5,23 @@ pub const RedshiftConnectorProfileProperties = struct {
 
     /// The object key for the destination bucket in which Amazon AppFlow places the
     /// files.
-    bucket_prefix: ?[]const u8,
+    bucket_prefix: ?[]const u8 = null,
 
     /// The unique ID that's assigned to an Amazon Redshift cluster.
-    cluster_identifier: ?[]const u8,
+    cluster_identifier: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an IAM role that permits Amazon AppFlow to
     /// access your Amazon Redshift database through the Data API. For more
     /// information, and for the polices that you attach to this role, see [Allow
     /// Amazon AppFlow to access Amazon Redshift databases with the Data
     /// API](https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_service-role-policies.html#access-redshift).
-    data_api_role_arn: ?[]const u8,
+    data_api_role_arn: ?[]const u8 = null,
 
     /// The name of an Amazon Redshift database.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The JDBC URL of the Amazon Redshift cluster.
-    database_url: ?[]const u8,
+    database_url: ?[]const u8 = null,
 
     /// Indicates whether the connector profile defines a connection to an Amazon
     /// Redshift
@@ -37,7 +37,7 @@ pub const RedshiftConnectorProfileProperties = struct {
     role_arn: []const u8,
 
     /// The name of an Amazon Redshift workgroup.
-    workgroup_name: ?[]const u8,
+    workgroup_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_name = "bucketName",

@@ -4,13 +4,13 @@
 /// S3 bucket URL.
 pub const RecordOutput = struct {
     /// The description of the output.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The output key.
-    output_key: ?[]const u8,
+    output_key: ?[]const u8 = null,
 
     /// The output value.
-    output_value: ?[]const u8,
+    output_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

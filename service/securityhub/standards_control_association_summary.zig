@@ -9,7 +9,7 @@ pub const StandardsControlAssociationSummary = struct {
 
     /// The requirement that underlies this control in the compliance framework
     /// related to the standard.
-    related_requirements: ?[]const []const u8,
+    related_requirements: ?[]const []const u8 = null,
 
     /// The ARN of a control, such as
     /// `arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1`. This
@@ -29,18 +29,18 @@ pub const StandardsControlAssociationSummary = struct {
     /// evaluates the control and the
     /// conditions under which it produces a failed finding. The parameter may
     /// reference a specific standard.
-    standards_control_description: ?[]const u8,
+    standards_control_description: ?[]const u8 = null,
 
     /// The title of a control.
-    standards_control_title: ?[]const u8,
+    standards_control_title: ?[]const u8 = null,
 
     /// The last time that a control's enablement status in a specified standard was
     /// updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The reason for updating a control's enablement status in a specified
     /// standard.
-    updated_reason: ?[]const u8,
+    updated_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_status = "AssociationStatus",

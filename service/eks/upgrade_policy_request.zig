@@ -16,7 +16,7 @@ pub const UpgradePolicyRequest = struct {
     ///
     /// [Learn more about EKS Extended Support in the *Amazon EKS User
     /// Guide*.](https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html)
-    support_type: ?SupportType,
+    support_type: ?SupportType = null,
 
     pub const json_field_names = .{
         .support_type = "supportType",

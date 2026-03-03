@@ -4,7 +4,7 @@ const DataSourceVpcConfiguration = @import("data_source_vpc_configuration.zig").
 
 pub const UpdateDataSourceRequest = struct {
     /// Configuration information you want to update for the data source connector.
-    configuration: ?DataSourceConfiguration,
+    configuration: ?DataSourceConfiguration = null,
 
     /// Configuration information you want to update for altering document metadata
     /// and
@@ -15,10 +15,10 @@ pub const UpdateDataSourceRequest = struct {
     /// other content alterations when you ingest documents into Amazon Kendra, see
     /// [Customizing document metadata during the ingestion
     /// process](https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
-    custom_document_enrichment_configuration: ?CustomDocumentEnrichmentConfiguration,
+    custom_document_enrichment_configuration: ?CustomDocumentEnrichmentConfiguration = null,
 
     /// A new description for the data source connector.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the data source connector you want to update.
     id: []const u8,
@@ -34,25 +34,25 @@ pub const UpdateDataSourceRequest = struct {
     /// see [Adding
     /// documents in languages other than
     /// English](https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
-    language_code: ?[]const u8,
+    language_code: ?[]const u8 = null,
 
     /// A new name for the data source connector.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an IAM role with permission to access
     /// the data source and required resources. For more information, see [IAM roles
     /// for Amazon
     /// Kendra](https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The sync schedule you want to update for the data source connector.
-    schedule: ?[]const u8,
+    schedule: ?[]const u8 = null,
 
     /// Configuration information for an Amazon Virtual Private Cloud to connect to
     /// your data source.
     /// For more information, see [Configuring a
     /// VPC](https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
-    vpc_configuration: ?DataSourceVpcConfiguration,
+    vpc_configuration: ?DataSourceVpcConfiguration = null,
 
     pub const json_field_names = .{
         .configuration = "Configuration",

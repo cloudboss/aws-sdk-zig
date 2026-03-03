@@ -12,7 +12,7 @@ pub const StackInstanceResourceDriftsSummary = struct {
     /// The name or unique identifier that corresponds to a physical instance ID of
     /// a resource
     /// supported by CloudFormation.
-    physical_resource_id: ?[]const u8,
+    physical_resource_id: ?[]const u8 = null,
 
     /// Context information that enables CloudFormation to uniquely identify a
     /// resource. CloudFormation uses
@@ -21,14 +21,14 @@ pub const StackInstanceResourceDriftsSummary = struct {
     /// uniquely identify that resource. Each context key-value pair specifies a
     /// unique resource that
     /// contains the targeted resource.
-    physical_resource_id_context: ?[]const PhysicalResourceIdContextKeyValuePair,
+    physical_resource_id_context: ?[]const PhysicalResourceIdContextKeyValuePair = null,
 
     /// Status of the actual configuration of the resource compared to its expected
     /// configuration.
     /// These will be present only for resources whose
     /// `StackInstanceResourceDriftStatus` is
     /// `MODIFIED`.
-    property_differences: ?[]const PropertyDifference,
+    property_differences: ?[]const PropertyDifference = null,
 
     /// Type of resource. For more information, see [Amazon Web Services resource
     /// and

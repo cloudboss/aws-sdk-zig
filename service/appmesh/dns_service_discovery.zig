@@ -13,10 +13,10 @@ pub const DnsServiceDiscovery = struct {
     /// virtual node only overrides the IP preference set for the mesh on this
     /// specific
     /// node.
-    ip_preference: ?IpPreference,
+    ip_preference: ?IpPreference = null,
 
     /// Specifies the DNS response type for the virtual node.
-    response_type: ?DnsResponseType,
+    response_type: ?DnsResponseType = null,
 
     pub const json_field_names = .{
         .hostname = "hostname",

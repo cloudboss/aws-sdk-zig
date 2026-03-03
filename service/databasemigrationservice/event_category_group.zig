@@ -5,13 +5,13 @@
 /// ](https://docs.aws.amazon.com/dms/latest/APIReference/API_EventCategoryGroup.html) action.
 pub const EventCategoryGroup = struct {
     /// A list of event categories from a source type that you've chosen.
-    event_categories: ?[]const []const u8,
+    event_categories: ?[]const []const u8 = null,
 
     /// The type of DMS resource that generates events.
     ///
     /// Valid values: replication-instance | replication-server | security-group |
     /// replication-task
-    source_type: ?[]const u8,
+    source_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .event_categories = "EventCategories",

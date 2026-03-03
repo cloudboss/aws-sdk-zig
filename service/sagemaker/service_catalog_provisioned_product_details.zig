@@ -3,7 +3,7 @@
 /// Catalog](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
 pub const ServiceCatalogProvisionedProductDetails = struct {
     /// The ID of the provisioned product.
-    provisioned_product_id: ?[]const u8,
+    provisioned_product_id: ?[]const u8 = null,
 
     /// The current status of the product.
     ///
@@ -22,7 +22,7 @@ pub const ServiceCatalogProvisionedProductDetails = struct {
     ///   to provision a new product, but resources have not yet been created. After
     ///   reviewing the list of resources to be created, execute the plan. Wait for
     ///   an AVAILABLE status before performing operations.
-    provisioned_product_status_message: ?[]const u8,
+    provisioned_product_status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .provisioned_product_id = "ProvisionedProductId",

@@ -8,25 +8,25 @@ const EvaluationJobStatus = @import("evaluation_job_status.zig").EvaluationJobSt
 pub const EvaluationSummary = struct {
     /// Specifies whether the evaluation job is for evaluating a model or evaluating
     /// a knowledge base (retrieval and response generation).
-    application_type: ?ApplicationType,
+    application_type: ?ApplicationType = null,
 
     /// The time the evaluation job was created.
     creation_time: i64,
 
     /// The Amazon Resource Names (ARNs) of the models used to compute custom
     /// metrics in an Amazon Bedrock evaluation job.
-    custom_metrics_evaluator_model_identifiers: ?[]const []const u8,
+    custom_metrics_evaluator_model_identifiers: ?[]const []const u8 = null,
 
     /// The type of task for model evaluation.
     evaluation_task_types: []const EvaluationTaskType,
 
     /// The Amazon Resource Names (ARNs) of the models used to compute the metrics
     /// for a knowledge base evaluation job.
-    evaluator_model_identifiers: ?[]const []const u8,
+    evaluator_model_identifiers: ?[]const []const u8 = null,
 
     /// Identifies the models, Knowledge Bases, or other RAG sources evaluated in a
     /// model or Knowledge Base evaluation job.
-    inference_config_summary: ?EvaluationInferenceConfigSummary,
+    inference_config_summary: ?EvaluationInferenceConfigSummary = null,
 
     /// The Amazon Resource Name (ARN) of the evaluation job.
     job_arn: []const u8,
@@ -43,7 +43,7 @@ pub const EvaluationSummary = struct {
 
     /// The Amazon Resource Names (ARNs) of the knowledge base resources used for a
     /// knowledge base evaluation job.
-    rag_identifiers: ?[]const []const u8,
+    rag_identifiers: ?[]const []const u8 = null,
 
     /// The current status of the evaluation job.
     status: EvaluationJobStatus,

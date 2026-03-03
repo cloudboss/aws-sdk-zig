@@ -7,7 +7,7 @@ pub const FleetEbsBlockDeviceRequest = struct {
     /// information, see [Preserve data when
     /// an instance is
     /// terminated](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/preserving-volumes-on-termination.html) in the *Amazon EC2 User Guide*.
-    delete_on_termination: ?bool,
+    delete_on_termination: ?bool = null,
 
     /// Indicates whether the encryption state of an EBS volume is changed while
     /// being restored
@@ -55,7 +55,7 @@ pub const FleetEbsBlockDeviceRequest = struct {
     /// `true` or `false`. However, if you specify
     /// `false`, the parameter is ignored and the block device mapping is
     /// always encrypted. In this case, we recommend that you omit the parameter.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The number of I/O operations per second (IOPS). For `gp3`, `io1`, and `io2`
     /// volumes,
@@ -81,7 +81,7 @@ pub const FleetEbsBlockDeviceRequest = struct {
     /// This parameter is required for `io1` and `io2` volumes. The default for
     /// `gp3` volumes
     /// is 3,000 IOPS.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// Identifier (key ID, key alias, key ARN, or alias ARN) of the customer
     /// managed KMS key
@@ -89,17 +89,17 @@ pub const FleetEbsBlockDeviceRequest = struct {
     ///
     /// This parameter is only supported on `BlockDeviceMapping` objects called by
     /// [CreateFleet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet.html), [RequestSpotInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html), and [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html).
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The ID of the snapshot.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
     /// The throughput that the volume supports, in MiB/s.
     ///
     /// This parameter is valid only for `gp3` volumes.
     ///
     /// Valid Range: Minimum value of 125. Maximum value of 2,000.
-    throughput: ?i32,
+    throughput: ?i32 = null,
 
     /// The size of the volume, in GiBs. You must specify either a snapshot ID or a
     /// volume
@@ -120,10 +120,10 @@ pub const FleetEbsBlockDeviceRequest = struct {
     /// * `st1` and `sc1`: 125 - 16,384 GiB
     ///
     /// * `standard`: 1 - 1024 GiB
-    volume_size: ?i32,
+    volume_size: ?i32 = null,
 
     /// The volume type. For more information, see [Amazon EBS volume
     /// types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the
     /// *Amazon EBS User Guide*.
-    volume_type: ?VolumeType,
+    volume_type: ?VolumeType = null,
 };

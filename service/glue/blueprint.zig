@@ -4,35 +4,35 @@ const BlueprintStatus = @import("blueprint_status.zig").BlueprintStatus;
 /// The details of a blueprint.
 pub const Blueprint = struct {
     /// Specifies the path in Amazon S3 where the blueprint is published.
-    blueprint_location: ?[]const u8,
+    blueprint_location: ?[]const u8 = null,
 
     /// Specifies a path in Amazon S3 where the blueprint is copied when you call
     /// `CreateBlueprint/UpdateBlueprint` to register the blueprint in Glue.
-    blueprint_service_location: ?[]const u8,
+    blueprint_service_location: ?[]const u8 = null,
 
     /// The date and time the blueprint was registered.
-    created_on: ?i64,
+    created_on: ?i64 = null,
 
     /// The description of the blueprint.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// An error message.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// When there are multiple versions of a blueprint and the latest version has
     /// some errors, this attribute indicates the last successful blueprint
     /// definition that is available with the service.
-    last_active_definition: ?LastActiveDefinition,
+    last_active_definition: ?LastActiveDefinition = null,
 
     /// The date and time the blueprint was last modified.
-    last_modified_on: ?i64,
+    last_modified_on: ?i64 = null,
 
     /// The name of the blueprint.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A JSON string that indicates the list of parameter specifications for the
     /// blueprint.
-    parameter_spec: ?[]const u8,
+    parameter_spec: ?[]const u8 = null,
 
     /// The status of the blueprint registration.
     ///
@@ -43,7 +43,7 @@ pub const Blueprint = struct {
     /// * Updating — An update to the blueprint registration is in progress.
     ///
     /// * Failed — The blueprint registration failed.
-    status: ?BlueprintStatus,
+    status: ?BlueprintStatus = null,
 
     pub const json_field_names = .{
         .blueprint_location = "BlueprintLocation",

@@ -8,24 +8,24 @@ pub const AccessorSummary = struct {
     /// ARNs and their format, see [Amazon Resource
     /// Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon Web Services General Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The creation date and time of the accessor.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The unique identifier of the accessor.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The blockchain network that the Accessor token is created for.
-    network_type: ?AccessorNetworkType,
+    network_type: ?AccessorNetworkType = null,
 
     /// The current status of the accessor.
-    status: ?AccessorStatus,
+    status: ?AccessorStatus = null,
 
     /// The type of the accessor.
     ///
     /// Currently accessor type is restricted to `BILLING_TOKEN`.
-    @"type": ?AccessorType,
+    @"type": ?AccessorType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

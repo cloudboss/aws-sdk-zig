@@ -7,25 +7,25 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 pub const Ec2InstanceAggregation = struct {
     /// The AMI IDs associated with the Amazon EC2 instances to aggregate findings
     /// for.
-    amis: ?[]const StringFilter,
+    amis: ?[]const StringFilter = null,
 
     /// The Amazon EC2 instance IDs to aggregate findings for.
-    instance_ids: ?[]const StringFilter,
+    instance_ids: ?[]const StringFilter = null,
 
     /// The Amazon EC2 instance tags to aggregate findings for.
-    instance_tags: ?[]const MapFilter,
+    instance_tags: ?[]const MapFilter = null,
 
     /// The operating system types to aggregate findings for. Valid values must be
     /// uppercase and
     /// underscore separated, examples are `ORACLE_LINUX_7` and
     /// `ALPINE_LINUX_3_8`.
-    operating_systems: ?[]const StringFilter,
+    operating_systems: ?[]const StringFilter = null,
 
     /// The value to sort results by.
-    sort_by: ?Ec2InstanceSortBy,
+    sort_by: ?Ec2InstanceSortBy = null,
 
     /// The order to sort results by.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .amis = "amis",

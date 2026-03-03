@@ -6,7 +6,7 @@ pub const PackageConfiguration = struct {
     configuration_requirement: RequirementLevel,
 
     /// The relative file path for the license associated with the package.
-    license_filepath: ?[]const u8,
+    license_filepath: ?[]const u8 = null,
 
     /// The license requirements for the package.
     license_requirement: RequirementLevel,
@@ -14,7 +14,7 @@ pub const PackageConfiguration = struct {
     /// This indicates whether a B/G deployment is required for updating the
     /// configuration
     /// that the plugin is prerequisite for.
-    requires_restart_for_configuration_update: ?bool,
+    requires_restart_for_configuration_update: ?bool = null,
 
     pub const json_field_names = .{
         .configuration_requirement = "ConfigurationRequirement",

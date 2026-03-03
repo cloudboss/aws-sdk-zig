@@ -6,7 +6,7 @@ const Scope = @import("scope.zig").Scope;
 /// state of the assessment template.
 pub const ExclusionPreview = struct {
     /// The system-defined attributes for the exclusion preview.
-    attributes: ?[]const Attribute,
+    attributes: ?[]const Attribute = null,
 
     /// The description of the exclusion preview.
     description: []const u8,

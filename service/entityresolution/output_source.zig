@@ -9,17 +9,17 @@ pub const OutputSource = struct {
     /// example, if an attribute has an `AttributeType` of `PHONE_NUMBER`, and the
     /// data in the input table is in a format of 1234567890, Entity Resolution will
     /// normalize this field in the output to (123)-456-7890.
-    apply_normalization: ?bool,
+    apply_normalization: ?bool = null,
 
     /// Specifies the Customer Profiles integration configuration for sending
     /// matched output directly to Customer Profiles. When configured, Entity
     /// Resolution automatically creates and updates customer profiles based on
     /// match clusters, eliminating the need for manual Amazon S3 integration setup.
-    customer_profiles_integration_config: ?CustomerProfilesIntegrationConfig,
+    customer_profiles_integration_config: ?CustomerProfilesIntegrationConfig = null,
 
     /// Customer KMS ARN for encryption at rest. If not provided, system will use an
     /// Entity Resolution managed KMS key.
-    kms_arn: ?[]const u8,
+    kms_arn: ?[]const u8 = null,
 
     /// A list of `OutputAttribute` objects, each of which have the fields `Name`
     /// and `Hashed`. Each of these objects selects a column to be included in the

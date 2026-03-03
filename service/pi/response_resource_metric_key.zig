@@ -4,7 +4,7 @@ const aws = @import("aws");
 /// dimensions for that metric.
 pub const ResponseResourceMetricKey = struct {
     /// The valid dimensions for the metric.
-    dimensions: ?[]const aws.map.StringMapEntry,
+    dimensions: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of a Performance Insights metric to be measured.
     ///

@@ -12,10 +12,10 @@ pub const X12Details = struct {
     /// Returns an enumerated type where each value identifies an X12 transaction
     /// set. Transaction sets are maintained by the X12 Accredited Standards
     /// Committee.
-    transaction_set: ?X12TransactionSet,
+    transaction_set: ?X12TransactionSet = null,
 
     /// Returns the version to use for the specified X12 transaction set.
-    version: ?X12Version,
+    version: ?X12Version = null,
 
     pub const json_field_names = .{
         .transaction_set = "transactionSet",

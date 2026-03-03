@@ -15,7 +15,7 @@ pub const RevealConfiguration = struct {
     /// alias/. If this value specifies a key that's owned by another Amazon Web
     /// Services account, it must specify the ARN of the key or the ARN of the key's
     /// alias.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The status of the configuration for the Amazon Macie account. In a response,
     /// possible values are: ENABLED, the configuration is currently enabled for the

@@ -14,10 +14,10 @@ const LaunchTemplate = @import("launch_template.zig").LaunchTemplate;
 /// *Amazon EC2 Auto Scaling User Guide*.
 pub const MixedInstancesPolicy = struct {
     /// The instances distribution.
-    instances_distribution: ?InstancesDistribution,
+    instances_distribution: ?InstancesDistribution = null,
 
     /// One or more launch templates and the instance types (overrides) that are
     /// used to
     /// launch EC2 instances to fulfill On-Demand and Spot capacities.
-    launch_template: ?LaunchTemplate,
+    launch_template: ?LaunchTemplate = null,
 };

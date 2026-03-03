@@ -1,7 +1,7 @@
 /// Specifies a transform that removes rows of repeating data from a data set.
 pub const DropDuplicates = struct {
     /// The name of the columns to be merged or removed if repeating.
-    columns: ?[]const []const []const u8,
+    columns: ?[]const []const []const u8 = null,
 
     /// The data inputs identified by their node names.
     inputs: []const []const u8,

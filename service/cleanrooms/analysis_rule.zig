@@ -9,10 +9,10 @@ pub const AnalysisRule = struct {
     /// The unique ID for the associated collaboration.
     collaboration_id: []const u8,
 
-    collaboration_policy: ?ConfiguredTableAssociationAnalysisRulePolicy,
+    collaboration_policy: ?ConfiguredTableAssociationAnalysisRulePolicy = null,
 
     /// The consolidated policy for the analysis rule.
-    consolidated_policy: ?ConsolidatedPolicy,
+    consolidated_policy: ?ConsolidatedPolicy = null,
 
     /// The time the analysis rule was created.
     create_time: i64,

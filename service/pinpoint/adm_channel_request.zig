@@ -9,7 +9,7 @@ pub const ADMChannelRequest = struct {
     client_secret: []const u8,
 
     /// Specifies whether to enable the ADM channel for the application.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .client_id = "ClientId",

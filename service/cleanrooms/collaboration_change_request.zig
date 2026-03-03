@@ -9,7 +9,7 @@ const ChangeRequestStatus = @import("change_request_status.zig").ChangeRequestSt
 pub const CollaborationChangeRequest = struct {
     /// A list of approval details from collaboration members, including approval
     /// status and multi-party approval workflow information.
-    approvals: ?[]const aws.map.MapEntry(ApprovalStatusDetails),
+    approvals: ?[]const aws.map.MapEntry(ApprovalStatusDetails) = null,
 
     /// The list of changes specified in this change request.
     changes: []const Change,

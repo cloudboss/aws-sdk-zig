@@ -5,7 +5,7 @@ const AwsBackupBackupPlanLifecycleDetails = @import("aws_backup_backup_plan_life
 pub const AwsBackupBackupPlanRuleCopyActionsDetails = struct {
     /// An Amazon Resource Name (ARN) that uniquely identifies the destination
     /// backup vault for the copied backup.
-    destination_backup_vault_arn: ?[]const u8,
+    destination_backup_vault_arn: ?[]const u8 = null,
 
     /// Defines when a protected resource is transitioned to cold storage and when
     /// it expires.
@@ -15,7 +15,7 @@ pub const AwsBackupBackupPlanRuleCopyActionsDetails = struct {
     ///
     /// Backups transitioned to cold storage must be stored in cold storage for a
     /// minimum of 90 days.
-    lifecycle: ?AwsBackupBackupPlanLifecycleDetails,
+    lifecycle: ?AwsBackupBackupPlanLifecycleDetails = null,
 
     pub const json_field_names = .{
         .destination_backup_vault_arn = "DestinationBackupVaultArn",

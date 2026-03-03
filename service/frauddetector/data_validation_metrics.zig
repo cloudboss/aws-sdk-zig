@@ -4,10 +4,10 @@ const FileValidationMessage = @import("file_validation_message.zig").FileValidat
 /// The model training data validation metrics.
 pub const DataValidationMetrics = struct {
     /// The field-specific model training validation messages.
-    field_level_messages: ?[]const FieldValidationMessage,
+    field_level_messages: ?[]const FieldValidationMessage = null,
 
     /// The file-specific model training data validation messages.
-    file_level_messages: ?[]const FileValidationMessage,
+    file_level_messages: ?[]const FileValidationMessage = null,
 
     pub const json_field_names = .{
         .field_level_messages = "fieldLevelMessages",

@@ -7,11 +7,11 @@ const SystemInstanceFilterName = @import("system_instance_filter_name.zig").Syst
 /// group that have the specified status.
 pub const SystemInstanceFilter = struct {
     /// The name of the search filter field.
-    name: ?SystemInstanceFilterName,
+    name: ?SystemInstanceFilterName = null,
 
     /// An array of string values for the search filter field. Multiple values
     /// function as AND criteria in the search.
-    value: ?[]const []const u8,
+    value: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

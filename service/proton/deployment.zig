@@ -8,10 +8,10 @@ pub const Deployment = struct {
     arn: []const u8,
 
     /// The date and time the deployment was completed.
-    completed_at: ?i64,
+    completed_at: ?i64 = null,
 
     /// The name of the component associated with this deployment.
-    component_name: ?[]const u8,
+    component_name: ?[]const u8 = null,
 
     /// The date and time the deployment was created.
     created_at: i64,
@@ -20,7 +20,7 @@ pub const Deployment = struct {
     deployment_status: DeploymentStatus,
 
     /// The deployment status message.
-    deployment_status_message: ?[]const u8,
+    deployment_status_message: ?[]const u8 = null,
 
     /// The name of the environment associated with this deployment.
     environment_name: []const u8,
@@ -29,22 +29,22 @@ pub const Deployment = struct {
     id: []const u8,
 
     /// The initial state of the target resource at the time of the deployment.
-    initial_state: ?DeploymentState,
+    initial_state: ?DeploymentState = null,
 
     /// The ID of the last attempted deployment.
-    last_attempted_deployment_id: ?[]const u8,
+    last_attempted_deployment_id: ?[]const u8 = null,
 
     /// The date and time the deployment was last modified.
     last_modified_at: i64,
 
     /// The ID of the last successful deployment.
-    last_succeeded_deployment_id: ?[]const u8,
+    last_succeeded_deployment_id: ?[]const u8 = null,
 
     /// The name of the deployment's service instance.
-    service_instance_name: ?[]const u8,
+    service_instance_name: ?[]const u8 = null,
 
     /// The name of the service in this deployment.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the target of the deployment.
     target_arn: []const u8,
@@ -57,7 +57,7 @@ pub const Deployment = struct {
     target_resource_type: DeploymentTargetResourceType,
 
     /// The target state of the target resource at the time of the deployment.
-    target_state: ?DeploymentState,
+    target_state: ?DeploymentState = null,
 
     pub const json_field_names = .{
         .arn = "arn",

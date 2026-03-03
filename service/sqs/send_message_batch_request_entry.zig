@@ -14,7 +14,7 @@ pub const SendMessageBatchRequestEntry = struct {
     ///
     /// When you set `FifoQueue`, you can't set `DelaySeconds` per message. You can
     /// set this parameter only on a queue level.
-    delay_seconds: ?i32,
+    delay_seconds: ?i32 = null,
 
     /// An identifier for a message in this batch used to communicate the result.
     ///
@@ -29,7 +29,7 @@ pub const SendMessageBatchRequestEntry = struct {
     /// [Amazon SQS
     /// message
     /// attributes](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes) in the *Amazon SQS Developer Guide*.
-    message_attributes: ?[]const aws.map.MapEntry(MessageAttributeValue),
+    message_attributes: ?[]const aws.map.MapEntry(MessageAttributeValue) = null,
 
     /// The body of the message.
     message_body: []const u8,
@@ -94,7 +94,7 @@ pub const SendMessageBatchRequestEntry = struct {
     /// MessageDeduplicationId
     /// Property](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html) in the *Amazon SQS Developer
     /// Guide*.
-    message_deduplication_id: ?[]const u8,
+    message_deduplication_id: ?[]const u8 = null,
 
     /// `MessageGroupId` is an attribute used in Amazon SQS FIFO
     /// (First-In-First-Out) and standard queues.
@@ -153,7 +153,7 @@ pub const SendMessageBatchRequestEntry = struct {
     /// For best practices of using `MessageGroupId`, see [Using the MessageGroupId
     /// Property](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html) in the *Amazon SQS Developer
     /// Guide*.
-    message_group_id: ?[]const u8,
+    message_group_id: ?[]const u8 = null,
 
     /// The message system attribute to send Each message system attribute consists
     /// of a `Name`, `Type`, and `Value`.
@@ -165,7 +165,7 @@ pub const SendMessageBatchRequestEntry = struct {
     ///
     /// * The size of a message system attribute doesn't count towards the total
     ///   size of a message.
-    message_system_attributes: ?[]const aws.map.MapEntry(MessageSystemAttributeValue),
+    message_system_attributes: ?[]const aws.map.MapEntry(MessageSystemAttributeValue) = null,
 
     pub const json_field_names = .{
         .delay_seconds = "DelaySeconds",

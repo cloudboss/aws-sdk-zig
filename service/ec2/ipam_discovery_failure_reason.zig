@@ -20,8 +20,8 @@ pub const IpamDiscoveryFailureReason = struct {
     /// * `unauthorized-failure` - Amazon Web Services account making the request is
     ///   not authorized. For more information, see
     ///   [AuthFailure](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html) in the *Amazon Elastic Compute Cloud API Reference*.
-    code: ?IpamDiscoveryFailureCode,
+    code: ?IpamDiscoveryFailureCode = null,
 
     /// The discovery failure message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

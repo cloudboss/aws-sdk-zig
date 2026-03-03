@@ -6,7 +6,7 @@ pub const ListTagsForResourceResponse = struct {
     /// control, and cost tracking. For more information, see [Tagging AWS Elemental
     /// MediaTailor
     /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .tags = "Tags",

@@ -7,15 +7,15 @@ pub const ReportResult = struct {
     /// Indicates the code associated with the error if DataSync can't create a
     /// complete
     /// report.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// Provides details about issues creating a report.
-    error_detail: ?[]const u8,
+    error_detail: ?[]const u8 = null,
 
     /// Indicates whether DataSync is still working on your report, created a
     /// report, or
     /// can't create a complete report.
-    status: ?PhaseStatus,
+    status: ?PhaseStatus = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

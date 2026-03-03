@@ -9,29 +9,29 @@ const DataTableAttributeValueType = @import("data_table_attribute_value_type.zig
 /// primary key for record identification.
 pub const DataTableAttribute = struct {
     /// The unique identifier for the attribute within the data table.
-    attribute_id: ?[]const u8,
+    attribute_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the data table that contains this
     /// attribute.
-    data_table_arn: ?[]const u8,
+    data_table_arn: ?[]const u8 = null,
 
     /// The unique identifier of the data table that contains this attribute.
-    data_table_id: ?[]const u8,
+    data_table_id: ?[]const u8 = null,
 
     /// An optional description explaining the purpose and usage of this attribute.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where this attribute was last modified, used
     /// for region replication.
-    last_modified_region: ?[]const u8,
+    last_modified_region: ?[]const u8 = null,
 
     /// The timestamp when this attribute was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The lock version for this attribute, used for optimistic locking to prevent
     /// concurrent modification
     /// conflicts.
-    lock_version: ?DataTableLockVersion,
+    lock_version: ?DataTableLockVersion = null,
 
     /// The human-readable name of the attribute. Must be unique within the data
     /// table and conform to Connect naming
@@ -46,7 +46,7 @@ pub const DataTableAttribute = struct {
     /// The validation rules applied to values of this attribute. Based on JSON
     /// Schema Draft 2020-12 with additional
     /// Connect-specific validations for data integrity.
-    validation: ?Validation,
+    validation: ?Validation = null,
 
     /// The type of value allowed for this attribute. Must be one of TEXT,
     /// TEXT_LIST, NUMBER, NUMBER_LIST, or BOOLEAN.
@@ -55,7 +55,7 @@ pub const DataTableAttribute = struct {
 
     /// The version identifier for this attribute, used for versioning and change
     /// tracking.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attribute_id = "AttributeId",

@@ -3,7 +3,7 @@ const ProviderSummary = @import("provider_summary.zig").ProviderSummary;
 /// A condensed overview of the connectorV2..
 pub const ConnectorSummary = struct {
     /// The Amazon Resource Name (ARN) of the connectorV2.
-    connector_arn: ?[]const u8,
+    connector_arn: ?[]const u8 = null,
 
     /// The UUID of the connectorV2 to identify connectorV2 resource.
     connector_id: []const u8,
@@ -12,7 +12,7 @@ pub const ConnectorSummary = struct {
     created_at: i64,
 
     /// The description of the connectorV2.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Name field contains the user-defined name assigned to the integration
     /// connector. This helps identify and manage multiple connectors within

@@ -7,7 +7,7 @@ pub const OnPremisesTagSet = struct {
     /// to be included in the deployment group, it must be identified by all of the
     /// tag groups
     /// in the list.
-    on_premises_tag_set_list: ?[]const []const TagFilter,
+    on_premises_tag_set_list: ?[]const []const TagFilter = null,
 
     pub const json_field_names = .{
         .on_premises_tag_set_list = "onPremisesTagSetList",

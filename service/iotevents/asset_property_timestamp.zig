@@ -34,7 +34,7 @@
 pub const AssetPropertyTimestamp = struct {
     /// The nanosecond offset converted from `timeInSeconds`. The valid range is
     /// between 0-999999999.
-    offset_in_nanos: ?[]const u8,
+    offset_in_nanos: ?[]const u8 = null,
 
     /// The timestamp, in seconds, in the Unix epoch format. The valid range is
     /// between

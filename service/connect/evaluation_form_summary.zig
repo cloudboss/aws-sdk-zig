@@ -1,7 +1,7 @@
 /// Summary information about an evaluation form.
 pub const EvaluationFormSummary = struct {
     /// The version of the active evaluation form version.
-    active_version: ?i32,
+    active_version: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the user who created the evaluation form.
     created_by: []const u8,
@@ -17,10 +17,10 @@ pub const EvaluationFormSummary = struct {
 
     /// The Amazon Resource Name (ARN) of the user who last activated the evaluation
     /// form.
-    last_activated_by: ?[]const u8,
+    last_activated_by: ?[]const u8 = null,
 
     /// The timestamp for when the evaluation form was last activated.
-    last_activated_time: ?i64,
+    last_activated_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the user who last updated the evaluation
     /// form.

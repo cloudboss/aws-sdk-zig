@@ -4,7 +4,7 @@ const SeedUrl = @import("seed_url.zig").SeedUrl;
 /// crawl. You should be authorized to crawl the URLs.
 pub const UrlConfiguration = struct {
     /// List of URLs for crawling.
-    seed_urls: ?[]const SeedUrl,
+    seed_urls: ?[]const SeedUrl = null,
 
     pub const json_field_names = .{
         .seed_urls = "seedUrls",

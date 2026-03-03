@@ -4,7 +4,7 @@ const aws = @import("aws");
 pub const OidcConfig = struct {
     /// A string to string map of identifiers specific to the custom identity
     /// provider (IdP) being used.
-    authentication_request_extra_params: ?[]const aws.map.StringMapEntry,
+    authentication_request_extra_params: ?[]const aws.map.StringMapEntry = null,
 
     /// The OIDC IdP authorization endpoint used to configure your private
     /// workforce.
@@ -28,7 +28,7 @@ pub const OidcConfig = struct {
 
     /// An array of string identifiers used to refer to the specific pieces of user
     /// data or claims that the client application wants to access.
-    scope: ?[]const u8,
+    scope: ?[]const u8 = null,
 
     /// The OIDC IdP token endpoint used to configure your private workforce.
     token_endpoint: []const u8,

@@ -9,7 +9,7 @@ const SheetVisualScopingConfiguration = @import("sheet_visual_scoping_configurat
 pub const SelectedSheetsFilterScopeConfiguration = struct {
     /// The sheet ID and visual IDs of the sheet and visuals that the filter is
     /// applied to.
-    sheet_visual_scoping_configurations: ?[]const SheetVisualScopingConfiguration,
+    sheet_visual_scoping_configurations: ?[]const SheetVisualScopingConfiguration = null,
 
     pub const json_field_names = .{
         .sheet_visual_scoping_configurations = "SheetVisualScopingConfigurations",

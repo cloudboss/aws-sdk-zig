@@ -7,7 +7,7 @@ pub const IcebergEncryptedKey = struct {
     /// Optional ID of the key used to encrypt or wrap the key metadata in Iceberg
     /// table encryption. This field references another encryption key that was used
     /// to encrypt the current key's metadata.
-    encrypted_by_id: ?[]const u8,
+    encrypted_by_id: ?[]const u8 = null,
 
     /// Encrypted key and metadata, base64 encoded. The format of encrypted key
     /// metadata is determined by the table's encryption scheme and can be a wrapped
@@ -22,7 +22,7 @@ pub const IcebergEncryptedKey = struct {
     /// A string to string map of additional metadata used by the table's encryption
     /// scheme. These properties provide additional context and configuration for
     /// the encryption key implementation.
-    properties: ?[]const aws.map.StringMapEntry,
+    properties: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .encrypted_by_id = "EncryptedById",

@@ -3,7 +3,7 @@ const GuardrailAutomatedReasoningTranslation = @import("guardrail_automated_reas
 /// Represents one possible logical interpretation of ambiguous input content.
 pub const GuardrailAutomatedReasoningTranslationOption = struct {
     /// Example translations that provide this possible interpretation of the input.
-    translations: ?[]const GuardrailAutomatedReasoningTranslation,
+    translations: ?[]const GuardrailAutomatedReasoningTranslation = null,
 
     pub const json_field_names = .{
         .translations = "translations",

@@ -15,10 +15,10 @@ pub const Cluster = struct {
     created_at: i64,
 
     /// The list of endpoints available for interaction with the scheduler.
-    endpoints: ?[]const Endpoint,
+    endpoints: ?[]const Endpoint = null,
 
     /// The list of errors that occurred during cluster provisioning.
-    error_info: ?[]const ErrorInfo,
+    error_info: ?[]const ErrorInfo = null,
 
     /// The generated unique ID of the cluster.
     id: []const u8,
@@ -41,7 +41,7 @@ pub const Cluster = struct {
     size: Size,
 
     /// Additional options related to the Slurm scheduler.
-    slurm_configuration: ?ClusterSlurmConfiguration,
+    slurm_configuration: ?ClusterSlurmConfiguration = null,
 
     /// The provisioning status of the cluster.
     ///

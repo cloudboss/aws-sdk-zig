@@ -8,7 +8,7 @@ pub const VectorSearchBedrockRerankingConfiguration = struct {
     /// Configuration for how document metadata should be used during the reranking
     /// process. This determines which metadata fields are included when reordering
     /// search results.
-    metadata_configuration: ?MetadataConfigurationForReranking,
+    metadata_configuration: ?MetadataConfigurationForReranking = null,
 
     /// Configuration for the Amazon Bedrock foundation model used for reranking.
     /// This includes the model ARN and any additional request fields required by
@@ -18,7 +18,7 @@ pub const VectorSearchBedrockRerankingConfiguration = struct {
     /// The maximum number of results to rerank. This limits how many of the initial
     /// vector search results will be processed by the reranking model. A smaller
     /// number improves performance but may exclude potentially relevant results.
-    number_of_reranked_results: ?i32,
+    number_of_reranked_results: ?i32 = null,
 
     pub const json_field_names = .{
         .metadata_configuration = "metadataConfiguration",

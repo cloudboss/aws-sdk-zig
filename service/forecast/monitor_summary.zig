@@ -4,7 +4,7 @@
 /// `MonitorArn`.
 pub const MonitorSummary = struct {
     /// When the monitor resource was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The last time the monitor resource was modified. The timestamp depends on
     /// the status of the
@@ -18,16 +18,16 @@ pub const MonitorSummary = struct {
     ///
     /// * `ACTIVE` or `CREATE_FAILED` - When the monitor creation finished or
     /// failed.
-    last_modification_time: ?i64,
+    last_modification_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the monitor resource.
-    monitor_arn: ?[]const u8,
+    monitor_arn: ?[]const u8 = null,
 
     /// The name of the monitor resource.
-    monitor_name: ?[]const u8,
+    monitor_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the predictor being monitored.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The status of the monitor. States include:
     ///
@@ -40,7 +40,7 @@ pub const MonitorSummary = struct {
     /// * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
     ///
     /// * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

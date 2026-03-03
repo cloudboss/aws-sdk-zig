@@ -6,13 +6,13 @@
 pub const PolicyAttachment = struct {
     /// The `ObjectIdentifier` that is associated with
     /// `PolicyAttachment`.
-    object_identifier: ?[]const u8,
+    object_identifier: ?[]const u8 = null,
 
     /// The ID of `PolicyAttachment`.
-    policy_id: ?[]const u8,
+    policy_id: ?[]const u8 = null,
 
     /// The type of policy that can be associated with `PolicyAttachment`.
-    policy_type: ?[]const u8,
+    policy_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .object_identifier = "ObjectIdentifier",

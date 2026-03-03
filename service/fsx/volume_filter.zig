@@ -6,11 +6,11 @@ const VolumeFilterName = @import("volume_filter_name.zig").VolumeFilterName;
 /// return results that meet all applied filter requirements.
 pub const VolumeFilter = struct {
     /// The name for this filter.
-    name: ?VolumeFilterName,
+    name: ?VolumeFilterName = null,
 
     /// The values of the filter. These are all the values for any of the applied
     /// filters.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

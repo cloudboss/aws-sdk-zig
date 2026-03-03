@@ -4,19 +4,19 @@ const AudioExtractionType = @import("audio_extraction_type.zig").AudioExtraction
 /// information.
 pub const AudioSourceDetails = struct {
     /// The type of audio extraction performed on the content.
-    audio_extraction_type: ?AudioExtractionType,
+    audio_extraction_type: ?AudioExtractionType = null,
 
     /// The ending timestamp in milliseconds for the relevant audio segment.
-    end_time_milliseconds: ?i64,
+    end_time_milliseconds: ?i64 = null,
 
     /// Unique identifier for the audio media file.
-    media_id: ?[]const u8,
+    media_id: ?[]const u8 = null,
 
     /// The MIME type of the audio file (e.g., audio/mp3, audio/wav).
-    media_mime_type: ?[]const u8,
+    media_mime_type: ?[]const u8 = null,
 
     /// The starting timestamp in milliseconds for the relevant audio segment.
-    start_time_milliseconds: ?i64,
+    start_time_milliseconds: ?i64 = null,
 
     pub const json_field_names = .{
         .audio_extraction_type = "audioExtractionType",

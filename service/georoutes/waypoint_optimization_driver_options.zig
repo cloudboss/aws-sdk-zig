@@ -8,16 +8,16 @@ pub const WaypointOptimizationDriverOptions = struct {
     /// to be taken after the short work duration. The short cycle can be repeated
     /// until you hit the long work duration, at which point the long rest duration
     /// should be taken before restarting.
-    rest_cycles: ?WaypointOptimizationRestCycles,
+    rest_cycles: ?WaypointOptimizationRestCycles = null,
 
     /// Pre defined rest profiles for a driver schedule. The only currently
     /// supported profile is EU.
-    rest_profile: ?WaypointOptimizationRestProfile,
+    rest_profile: ?WaypointOptimizationRestProfile = null,
 
     /// If the service time provided at a waypoint/destination should be considered
     /// as rest or work. This contributes to the total time breakdown returned
     /// within the response.
-    treat_service_time_as: ?WaypointOptimizationServiceTimeTreatment,
+    treat_service_time_as: ?WaypointOptimizationServiceTimeTreatment = null,
 
     pub const json_field_names = .{
         .rest_cycles = "RestCycles",

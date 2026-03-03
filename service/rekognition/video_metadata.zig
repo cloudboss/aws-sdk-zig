@@ -5,26 +5,26 @@ const VideoColorRange = @import("video_color_range.zig").VideoColorRange;
 /// every page of paginated responses from a Amazon Rekognition video operation.
 pub const VideoMetadata = struct {
     /// Type of compression used in the analyzed video.
-    codec: ?[]const u8,
+    codec: ?[]const u8 = null,
 
     /// A description of the range of luminance values in a video, either LIMITED
     /// (16 to 235) or FULL (0 to 255).
-    color_range: ?VideoColorRange,
+    color_range: ?VideoColorRange = null,
 
     /// Length of the video in milliseconds.
-    duration_millis: ?i64,
+    duration_millis: ?i64 = null,
 
     /// Format of the analyzed video. Possible values are MP4, MOV and AVI.
-    format: ?[]const u8,
+    format: ?[]const u8 = null,
 
     /// Vertical pixel dimension of the video.
-    frame_height: ?i64,
+    frame_height: ?i64 = null,
 
     /// Number of frames per second in the video.
-    frame_rate: ?f32,
+    frame_rate: ?f32 = null,
 
     /// Horizontal pixel dimension of the video.
-    frame_width: ?i64,
+    frame_width: ?i64 = null,
 
     pub const json_field_names = .{
         .codec = "Codec",

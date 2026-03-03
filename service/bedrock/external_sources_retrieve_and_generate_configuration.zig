@@ -6,7 +6,7 @@ const ExternalSource = @import("external_source.zig").ExternalSource;
 pub const ExternalSourcesRetrieveAndGenerateConfiguration = struct {
     /// Contains configurations details for response generation based on retrieved
     /// text chunks.
-    generation_configuration: ?ExternalSourcesGenerationConfiguration,
+    generation_configuration: ?ExternalSourcesGenerationConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the foundation model or [inference
     /// profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html) used to generate responses.

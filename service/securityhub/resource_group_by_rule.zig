@@ -5,7 +5,7 @@ const ResourceGroupByField = @import("resource_group_by_field.zig").ResourceGrou
 /// Services resources based on associated security findings.
 pub const ResourceGroupByRule = struct {
     /// The criteria used to select resources and associated security findings.
-    filters: ?ResourcesFilters,
+    filters: ?ResourcesFilters = null,
 
     /// Specifies the attribute that resources should be grouped by.
     group_by_field: ResourceGroupByField,

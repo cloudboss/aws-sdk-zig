@@ -8,17 +8,17 @@ pub const AwsS3BucketBucketLifecycleConfigurationRulesDetails = struct {
     /// How Amazon S3 responds when a multipart upload is incomplete. Specifically,
     /// provides a number
     /// of days before Amazon S3 cancels the entire upload.
-    abort_incomplete_multipart_upload: ?AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails,
+    abort_incomplete_multipart_upload: ?AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails = null,
 
     /// The date when objects are moved or deleted.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    expiration_date: ?[]const u8,
+    expiration_date: ?[]const u8 = null,
 
     /// The length in days of the lifetime for objects that are subject to the rule.
-    expiration_in_days: ?i32,
+    expiration_in_days: ?i32 = null,
 
     /// Whether Amazon S3 removes a delete marker that has no noncurrent versions.
     /// If set to
@@ -27,32 +27,32 @@ pub const AwsS3BucketBucketLifecycleConfigurationRulesDetails = struct {
     ///
     /// If you provide `ExpiredObjectDeleteMarker`, you cannot provide
     /// `ExpirationInDays` or `ExpirationDate`.
-    expired_object_delete_marker: ?bool,
+    expired_object_delete_marker: ?bool = null,
 
     /// Identifies the objects that a rule applies to.
-    filter: ?AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails,
+    filter: ?AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails = null,
 
     /// The unique identifier of the rule.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The number of days that an object is noncurrent before Amazon S3 can perform
     /// the associated action.
-    noncurrent_version_expiration_in_days: ?i32,
+    noncurrent_version_expiration_in_days: ?i32 = null,
 
     /// Transition rules that describe when noncurrent objects transition to a
     /// specified storage class.
-    noncurrent_version_transitions: ?[]const AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails,
+    noncurrent_version_transitions: ?[]const AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails = null,
 
     /// A prefix that identifies one or more objects that the rule applies to.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The current status of the rule. Indicates whether the rule is currently
     /// being applied.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// Transition rules that indicate when objects transition to a specified
     /// storage class.
-    transitions: ?[]const AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails,
+    transitions: ?[]const AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails = null,
 
     pub const json_field_names = .{
         .abort_incomplete_multipart_upload = "AbortIncompleteMultipartUpload",

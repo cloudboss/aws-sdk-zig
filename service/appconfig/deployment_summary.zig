@@ -4,13 +4,13 @@ const DeploymentState = @import("deployment_state.zig").DeploymentState;
 /// Information about the deployment.
 pub const DeploymentSummary = struct {
     /// Time the deployment completed.
-    completed_at: ?i64,
+    completed_at: ?i64 = null,
 
     /// The name of the configuration.
-    configuration_name: ?[]const u8,
+    configuration_name: ?[]const u8 = null,
 
     /// The version of the configuration.
-    configuration_version: ?[]const u8,
+    configuration_version: ?[]const u8 = null,
 
     /// Total amount of time the deployment lasted.
     deployment_duration_in_minutes: i32 = 0,
@@ -24,22 +24,22 @@ pub const DeploymentSummary = struct {
 
     /// The percentage of targets to receive a deployed configuration during each
     /// interval.
-    growth_factor: ?f32,
+    growth_factor: ?f32 = null,
 
     /// The algorithm used to define how percentage grows over time.
-    growth_type: ?GrowthType,
+    growth_type: ?GrowthType = null,
 
     /// The percentage of targets for which the deployment is available.
-    percentage_complete: ?f32,
+    percentage_complete: ?f32 = null,
 
     /// Time the deployment started.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The state of the deployment.
-    state: ?DeploymentState,
+    state: ?DeploymentState = null,
 
     /// A user-defined label for an AppConfig hosted configuration version.
-    version_label: ?[]const u8,
+    version_label: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .completed_at = "CompletedAt",

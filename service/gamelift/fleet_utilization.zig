@@ -5,36 +5,36 @@ pub const FleetUtilization = struct {
     /// The number of active game sessions that are currently being hosted across
     /// all
     /// instances in the fleet location.
-    active_game_session_count: ?i32,
+    active_game_session_count: ?i32 = null,
 
     /// The number of server processes in `ACTIVE` status that are currently
     /// running across all instances in the fleet location.
-    active_server_process_count: ?i32,
+    active_server_process_count: ?i32 = null,
 
     /// The number of active player sessions that are currently being hosted across
     /// all
     /// instances in the fleet location.
-    current_player_session_count: ?i32,
+    current_player_session_count: ?i32 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
     /// that is assigned to a Amazon GameLift Servers fleet resource and uniquely
     /// identifies it. ARNs are unique across all Regions. Format is
     /// `arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
-    fleet_arn: ?[]const u8,
+    fleet_arn: ?[]const u8 = null,
 
     /// A unique identifier for the fleet associated with the location.
-    fleet_id: ?[]const u8,
+    fleet_id: ?[]const u8 = null,
 
     /// The fleet location for the fleet utilization information, expressed as an
     /// Amazon Web Services Region
     /// code, such as `us-west-2`.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The maximum number of players allowed across all game sessions that are
     /// currently
     /// being hosted across all instances in the fleet location.
-    maximum_player_session_count: ?i32,
+    maximum_player_session_count: ?i32 = null,
 
     pub const json_field_names = .{
         .active_game_session_count = "ActiveGameSessionCount",

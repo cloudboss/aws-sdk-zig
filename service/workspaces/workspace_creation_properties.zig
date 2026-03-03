@@ -5,7 +5,7 @@
 /// WorkSpaces](https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html).
 pub const WorkspaceCreationProperties = struct {
     /// The identifier of your custom security group.
-    custom_security_group_id: ?[]const u8,
+    custom_security_group_id: ?[]const u8 = null,
 
     /// The default organizational unit (OU) for your WorkSpaces directories. This
     /// string must
@@ -23,22 +23,22 @@ pub const WorkspaceCreationProperties = struct {
     /// Names](https://docs.microsoft.com/previous-versions/windows/desktop/ldap/distinguished-names) in the Microsoft documentation.
     ///
     /// * The API doesn't validate whether the OU exists.
-    default_ou: ?[]const u8,
+    default_ou: ?[]const u8 = null,
 
     /// Indicates whether internet access is enabled for your WorkSpaces.
-    enable_internet_access: ?bool,
+    enable_internet_access: ?bool = null,
 
     /// Indicates whether maintenance mode is enabled for your WorkSpaces. For more
     /// information,
     /// see [WorkSpace
     /// Maintenance](https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html).
-    enable_maintenance_mode: ?bool,
+    enable_maintenance_mode: ?bool = null,
 
     /// Indicates the IAM role ARN of the instance.
-    instance_iam_role_arn: ?[]const u8,
+    instance_iam_role_arn: ?[]const u8 = null,
 
     /// Indicates whether users are local administrators of their WorkSpaces.
-    user_enabled_as_local_administrator: ?bool,
+    user_enabled_as_local_administrator: ?bool = null,
 
     pub const json_field_names = .{
         .custom_security_group_id = "CustomSecurityGroupId",

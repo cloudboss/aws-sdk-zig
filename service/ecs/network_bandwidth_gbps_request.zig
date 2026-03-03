@@ -5,12 +5,12 @@ pub const NetworkBandwidthGbpsRequest = struct {
     /// The maximum network bandwidth in Gbps. Instance types with higher network
     /// bandwidth
     /// are excluded from selection.
-    max: ?f64,
+    max: ?f64 = null,
 
     /// The minimum network bandwidth in Gbps. Instance types with lower network
     /// bandwidth are
     /// excluded from selection.
-    min: ?f64,
+    min: ?f64 = null,
 
     pub const json_field_names = .{
         .max = "max",

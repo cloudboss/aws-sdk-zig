@@ -4,7 +4,7 @@ const GuardrailTopicConfig = @import("guardrail_topic_config.zig").GuardrailTopi
 /// Contains details about topics that the guardrail should identify and deny.
 pub const GuardrailTopicPolicyConfig = struct {
     /// The tier that your guardrail uses for denied topic filters.
-    tier_config: ?GuardrailTopicsTierConfig,
+    tier_config: ?GuardrailTopicsTierConfig = null,
 
     /// A list of policies related to topics that the guardrail should deny.
     topics_config: []const GuardrailTopicConfig,

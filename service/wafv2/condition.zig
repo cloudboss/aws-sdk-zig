@@ -5,14 +5,14 @@ const LabelNameCondition = @import("label_name_condition.zig").LabelNameConditio
 pub const Condition = struct {
     /// A single action condition. This is the action setting that a log record must
     /// contain in order to meet the condition.
-    action_condition: ?ActionCondition,
+    action_condition: ?ActionCondition = null,
 
     /// A single label name condition. This is the fully qualified label name that a
     /// log record must contain in order to meet the condition.
     /// Fully qualified labels have a prefix, optional namespaces, and label name.
     /// The prefix identifies the rule group or web ACL context of the rule that
     /// added the label.
-    label_name_condition: ?LabelNameCondition,
+    label_name_condition: ?LabelNameCondition = null,
 
     pub const json_field_names = .{
         .action_condition = "ActionCondition",

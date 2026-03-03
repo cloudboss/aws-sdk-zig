@@ -10,7 +10,7 @@ pub const TransformProcessingConfig = struct {
     /// The compute location for the given transform property.
     compute_location: ComputeLocation,
 
-    forwarding_config: ?ForwardingConfig,
+    forwarding_config: ?ForwardingConfig = null,
 
     pub const json_field_names = .{
         .compute_location = "computeLocation",

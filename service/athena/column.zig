@@ -1,13 +1,13 @@
 /// Contains metadata for a column in a table.
 pub const Column = struct {
     /// Optional information about the column.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The name of the column.
     name: []const u8,
 
     /// The data type of the column.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comment = "Comment",

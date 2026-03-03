@@ -1,19 +1,19 @@
 /// A prepared SQL statement for use with Athena.
 pub const PreparedStatement = struct {
     /// The description of the prepared statement.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The last modified time of the prepared statement.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The query string for the prepared statement.
-    query_statement: ?[]const u8,
+    query_statement: ?[]const u8 = null,
 
     /// The name of the prepared statement.
-    statement_name: ?[]const u8,
+    statement_name: ?[]const u8 = null,
 
     /// The name of the workgroup to which the prepared statement belongs.
-    work_group_name: ?[]const u8,
+    work_group_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

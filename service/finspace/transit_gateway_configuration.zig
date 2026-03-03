@@ -5,7 +5,7 @@ const NetworkACLEntry = @import("network_acl_entry.zig").NetworkACLEntry;
 pub const TransitGatewayConfiguration = struct {
     /// The rules that define how you manage the outbound traffic from kdb network
     /// to your internal network.
-    attachment_network_acl_configuration: ?[]const NetworkACLEntry,
+    attachment_network_acl_configuration: ?[]const NetworkACLEntry = null,
 
     /// The routing CIDR on behalf of kdb environment. It could be any "/26 range in
     /// the 100.64.0.0 CIDR space. After providing, it will be added to the

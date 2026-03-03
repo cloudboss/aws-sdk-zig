@@ -7,7 +7,7 @@ pub const S3Destination = struct {
 
     /// The path prefix to use in the path to the location in the bucket. This
     /// prefix specifies where to store classification results in the bucket.
-    key_prefix: ?[]const u8,
+    key_prefix: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the customer managed KMS key to use for
     /// encryption of the results. This must be the ARN of an existing, symmetric

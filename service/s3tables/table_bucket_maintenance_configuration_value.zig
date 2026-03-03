@@ -5,10 +5,10 @@ const MaintenanceStatus = @import("maintenance_status.zig").MaintenanceStatus;
 /// table bucket.
 pub const TableBucketMaintenanceConfigurationValue = struct {
     /// Contains details about the settings of the maintenance configuration.
-    settings: ?TableBucketMaintenanceSettings,
+    settings: ?TableBucketMaintenanceSettings = null,
 
     /// The status of the maintenance configuration.
-    status: ?MaintenanceStatus,
+    status: ?MaintenanceStatus = null,
 
     pub const json_field_names = .{
         .settings = "settings",

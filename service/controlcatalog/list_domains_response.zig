@@ -5,7 +5,7 @@ pub const ListDomainsResponse = struct {
     domains: []const DomainSummary,
 
     /// The pagination token that's used to fetch the next set of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domains = "Domains",

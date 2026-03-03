@@ -12,10 +12,10 @@ pub const TimeRangeFilter = struct {
 
     /// The default configurations for the associated controls. This applies only
     /// for filters that are scoped to multiple sheets.
-    default_filter_control_configuration: ?DefaultFilterControlConfiguration,
+    default_filter_control_configuration: ?DefaultFilterControlConfiguration = null,
 
     /// The exclude period of the time range filter.
-    exclude_period_configuration: ?ExcludePeriodConfiguration,
+    exclude_period_configuration: ?ExcludePeriodConfiguration = null,
 
     /// An identifier that uniquely identifies a filter within a dashboard,
     /// analysis, or template.
@@ -23,11 +23,11 @@ pub const TimeRangeFilter = struct {
 
     /// Determines whether the maximum value in the filter value range should be
     /// included in the filtered results.
-    include_maximum: ?bool,
+    include_maximum: ?bool = null,
 
     /// Determines whether the minimum value in the filter value range should be
     /// included in the filtered results.
-    include_minimum: ?bool,
+    include_minimum: ?bool = null,
 
     /// This option determines how null values should be treated when filtering
     /// data.
@@ -40,13 +40,13 @@ pub const TimeRangeFilter = struct {
     null_option: FilterNullOption,
 
     /// The maximum value for the filter value range.
-    range_maximum_value: ?TimeRangeFilterValue,
+    range_maximum_value: ?TimeRangeFilterValue = null,
 
     /// The minimum value for the filter value range.
-    range_minimum_value: ?TimeRangeFilterValue,
+    range_minimum_value: ?TimeRangeFilterValue = null,
 
     /// The level of time precision that is used to aggregate `DateTime` values.
-    time_granularity: ?TimeGranularity,
+    time_granularity: ?TimeGranularity = null,
 
     pub const json_field_names = .{
         .column = "Column",

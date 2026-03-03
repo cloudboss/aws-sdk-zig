@@ -12,7 +12,7 @@ pub const CaseRuleSummary = struct {
     case_rule_id: []const u8,
 
     /// Description of a case rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Name of the case rule.
     name: []const u8,

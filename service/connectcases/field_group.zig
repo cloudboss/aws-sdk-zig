@@ -6,7 +6,7 @@ pub const FieldGroup = struct {
     fields: []const FieldItem,
 
     /// Name of the field group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .fields = "fields",

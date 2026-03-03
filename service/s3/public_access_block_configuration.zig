@@ -21,7 +21,7 @@ pub const PublicAccessBlockConfiguration = struct {
     /// * PUT Bucket calls fail if the request includes a public ACL.
     ///
     /// Enabling this setting doesn't affect existing policies or ACLs.
-    block_public_acls: ?bool,
+    block_public_acls: ?bool = null,
 
     /// Specifies whether Amazon S3 should block public bucket policies for this
     /// bucket. Setting this element to
@@ -30,7 +30,7 @@ pub const PublicAccessBlockConfiguration = struct {
     /// allows public access.
     ///
     /// Enabling this setting doesn't affect existing bucket policies.
-    block_public_policy: ?bool,
+    block_public_policy: ?bool = null,
 
     /// Specifies whether Amazon S3 should ignore public ACLs for this bucket and
     /// objects in this bucket. Setting
@@ -41,7 +41,7 @@ pub const PublicAccessBlockConfiguration = struct {
     /// Enabling this setting doesn't affect the persistence of any existing ACLs
     /// and doesn't prevent new
     /// public ACLs from being set.
-    ignore_public_acls: ?bool,
+    ignore_public_acls: ?bool = null,
 
     /// Specifies whether Amazon S3 should restrict public bucket policies for this
     /// bucket. Setting this element
@@ -54,5 +54,5 @@ pub const PublicAccessBlockConfiguration = struct {
     /// cross-account access within any public bucket policy, including non-public
     /// delegation to specific
     /// accounts, is blocked.
-    restrict_public_buckets: ?bool,
+    restrict_public_buckets: ?bool = null,
 };

@@ -10,7 +10,7 @@ pub const ManifestProcessingRules = struct {
     /// No logic is applied to these ad markers. For example, if `EXT-X-CUE-OUT` has
     /// a value of `60`, but no ads are filled for that ad break, MediaTailor will
     /// not set the value to `0`.
-    ad_marker_passthrough: ?AdMarkerPassthrough,
+    ad_marker_passthrough: ?AdMarkerPassthrough = null,
 
     pub const json_field_names = .{
         .ad_marker_passthrough = "AdMarkerPassthrough",

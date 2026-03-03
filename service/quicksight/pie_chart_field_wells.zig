@@ -6,7 +6,7 @@ const PieChartAggregatedFieldWells = @import("pie_chart_aggregated_field_wells.z
 /// the attributes can be defined.
 pub const PieChartFieldWells = struct {
     /// The field well configuration of a pie chart.
-    pie_chart_aggregated_field_wells: ?PieChartAggregatedFieldWells,
+    pie_chart_aggregated_field_wells: ?PieChartAggregatedFieldWells = null,
 
     pub const json_field_names = .{
         .pie_chart_aggregated_field_wells = "PieChartAggregatedFieldWells",

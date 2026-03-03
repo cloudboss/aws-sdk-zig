@@ -3,7 +3,7 @@ const StaticFileSource = @import("static_file_source.zig").StaticFileSource;
 /// A static file that contains the geospatial data.
 pub const SpatialStaticFile = struct {
     /// The source of the spatial static file.
-    source: ?StaticFileSource,
+    source: ?StaticFileSource = null,
 
     /// The ID of the spatial static file.
     static_file_id: []const u8,

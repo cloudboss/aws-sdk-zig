@@ -4,12 +4,12 @@
 /// `PredictedAction`s.
 pub const PredictedAction = struct {
     /// The ID of the recommended action.
-    action_id: ?[]const u8,
+    action_id: ?[]const u8 = null,
 
     /// The score of the recommended action. For information about action scores,
     /// see [How action recommendation scoring
     /// works](https://docs.aws.amazon.com/personalize/latest/dg/how-action-recommendation-scoring-works.html).
-    score: ?f64,
+    score: ?f64 = null,
 
     pub const json_field_names = .{
         .action_id = "actionId",

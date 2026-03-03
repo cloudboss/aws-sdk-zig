@@ -9,14 +9,14 @@ const ClientVpnAuthenticationType = @import("client_vpn_authentication_type.zig"
 /// in the *Client VPN Administrator Guide*.
 pub const ClientVpnAuthentication = struct {
     /// Information about the Active Directory, if applicable.
-    active_directory: ?DirectoryServiceAuthentication,
+    active_directory: ?DirectoryServiceAuthentication = null,
 
     /// Information about the IAM SAML identity provider, if applicable.
-    federated_authentication: ?FederatedAuthentication,
+    federated_authentication: ?FederatedAuthentication = null,
 
     /// Information about the authentication certificates, if applicable.
-    mutual_authentication: ?CertificateAuthentication,
+    mutual_authentication: ?CertificateAuthentication = null,
 
     /// The authentication type used.
-    @"type": ?ClientVpnAuthenticationType,
+    @"type": ?ClientVpnAuthenticationType = null,
 };

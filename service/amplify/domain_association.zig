@@ -6,12 +6,12 @@ const UpdateStatus = @import("update_status.zig").UpdateStatus;
 /// Describes the association between a custom domain and an Amplify app.
 pub const DomainAssociation = struct {
     /// Sets branch patterns for automatic subdomain creation.
-    auto_sub_domain_creation_patterns: ?[]const []const u8,
+    auto_sub_domain_creation_patterns: ?[]const []const u8 = null,
 
     /// The required AWS Identity and Access Management (IAM) service role for the
     /// Amazon
     /// Resource Name (ARN) for automatically creating subdomains.
-    auto_sub_domain_iam_role: ?[]const u8,
+    auto_sub_domain_iam_role: ?[]const u8 = null,
 
     /// Describes the SSL/TLS certificate for the domain association. This can be
     /// your own
@@ -22,10 +22,10 @@ pub const DomainAssociation = struct {
     /// `certificate` points to the new certificate that is being created instead
     /// of the current active certificate. Otherwise, `certificate` points to the
     /// current active certificate.
-    certificate: ?Certificate,
+    certificate: ?Certificate = null,
 
     /// The DNS record for certificate verification.
-    certificate_verification_dns_record: ?[]const u8,
+    certificate_verification_dns_record: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the domain association.
     domain_association_arn: []const u8,
@@ -91,7 +91,7 @@ pub const DomainAssociation = struct {
     ///
     /// The certificate has failed to be provisioned or associated, and there is
     /// no existing active certificate to roll back to.
-    update_status: ?UpdateStatus,
+    update_status: ?UpdateStatus = null,
 
     pub const json_field_names = .{
         .auto_sub_domain_creation_patterns = "autoSubDomainCreationPatterns",

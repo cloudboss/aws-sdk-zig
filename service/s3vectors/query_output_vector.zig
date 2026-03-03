@@ -2,13 +2,13 @@
 pub const QueryOutputVector = struct {
     /// The measure of similarity between the vector in the response and the query
     /// vector.
-    distance: ?f32,
+    distance: ?f32 = null,
 
     /// The key of the vector in the approximate nearest neighbor search.
     key: []const u8,
 
     /// The metadata associated with the vector, if requested.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .distance = "distance",

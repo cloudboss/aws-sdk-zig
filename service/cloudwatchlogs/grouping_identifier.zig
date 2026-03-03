@@ -5,11 +5,11 @@ pub const GroupingIdentifier = struct {
     /// uses dot
     /// notation. Examples are, `dataSource.Name`, `dataSource.Type`, and
     /// `dataSource.Format`.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value associated with the grouping characteristic. Examples are
     /// `amazon_vpc`, `flow`, and `OCSF`.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "key",

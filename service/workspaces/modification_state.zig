@@ -4,10 +4,10 @@ const ModificationStateEnum = @import("modification_state_enum.zig").Modificatio
 /// Describes a WorkSpace modification.
 pub const ModificationState = struct {
     /// The resource.
-    resource: ?ModificationResourceEnum,
+    resource: ?ModificationResourceEnum = null,
 
     /// The modification state.
-    state: ?ModificationStateEnum,
+    state: ?ModificationStateEnum = null,
 
     pub const json_field_names = .{
         .resource = "Resource",

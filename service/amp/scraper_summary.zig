@@ -9,7 +9,7 @@ const ScraperStatus = @import("scraper_status.zig").ScraperStatus;
 /// scraper in your account.
 pub const ScraperSummary = struct {
     /// (Optional) A name associated with the scraper.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the scraper.
     arn: []const u8,
@@ -30,7 +30,7 @@ pub const ScraperSummary = struct {
 
     /// This structure displays information about the IAM roles used for
     /// cross-account scraping configuration.
-    role_configuration: ?RoleConfiguration,
+    role_configuration: ?RoleConfiguration = null,
 
     /// The ID of the scraper.
     scraper_id: []const u8,
@@ -42,10 +42,10 @@ pub const ScraperSummary = struct {
     status: ScraperStatus,
 
     /// If there is a failure, the reason for the failure.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// (Optional) The list of tag keys and values associated with the scraper.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .alias = "alias",

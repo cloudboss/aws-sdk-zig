@@ -14,41 +14,41 @@ const AssetBundleExportJobVPCConnectionOverrideProperties = @import("asset_bundl
 pub const AssetBundleCloudFormationOverridePropertyConfiguration = struct {
     /// An optional list of structures that control how `Analysis` resources are
     /// parameterized in the returned CloudFormation template.
-    analyses: ?[]const AssetBundleExportJobAnalysisOverrideProperties,
+    analyses: ?[]const AssetBundleExportJobAnalysisOverrideProperties = null,
 
     /// An optional list of structures that control how `Dashboard` resources are
     /// parameterized in the returned CloudFormation template.
-    dashboards: ?[]const AssetBundleExportJobDashboardOverrideProperties,
+    dashboards: ?[]const AssetBundleExportJobDashboardOverrideProperties = null,
 
     /// An optional list of structures that control how `DataSet` resources are
     /// parameterized in the returned CloudFormation template.
-    data_sets: ?[]const AssetBundleExportJobDataSetOverrideProperties,
+    data_sets: ?[]const AssetBundleExportJobDataSetOverrideProperties = null,
 
     /// An optional list of structures that control how `DataSource` resources are
     /// parameterized in the returned CloudFormation template.
-    data_sources: ?[]const AssetBundleExportJobDataSourceOverrideProperties,
+    data_sources: ?[]const AssetBundleExportJobDataSourceOverrideProperties = null,
 
     /// An optional list of structures that controls how `Folder` resources are
     /// parameterized in the returned CloudFormation template.
-    folders: ?[]const AssetBundleExportJobFolderOverrideProperties,
+    folders: ?[]const AssetBundleExportJobFolderOverrideProperties = null,
 
     /// An optional list of structures that control how `RefreshSchedule` resources
     /// are parameterized in the returned CloudFormation template.
-    refresh_schedules: ?[]const AssetBundleExportJobRefreshScheduleOverrideProperties,
+    refresh_schedules: ?[]const AssetBundleExportJobRefreshScheduleOverrideProperties = null,
 
     /// An optional list of structures that control how resource IDs are
     /// parameterized in the
     /// returned CloudFormation template.
-    resource_id_override_configuration: ?AssetBundleExportJobResourceIdOverrideConfiguration,
+    resource_id_override_configuration: ?AssetBundleExportJobResourceIdOverrideConfiguration = null,
 
     /// An optional list of structures that control how `Theme` resources are
     /// parameterized in the returned CloudFormation template.
-    themes: ?[]const AssetBundleExportJobThemeOverrideProperties,
+    themes: ?[]const AssetBundleExportJobThemeOverrideProperties = null,
 
     /// An optional list of structures that control how `VPCConnection` resources
     /// are
     /// parameterized in the returned CloudFormation template.
-    vpc_connections: ?[]const AssetBundleExportJobVPCConnectionOverrideProperties,
+    vpc_connections: ?[]const AssetBundleExportJobVPCConnectionOverrideProperties = null,
 
     pub const json_field_names = .{
         .analyses = "Analyses",

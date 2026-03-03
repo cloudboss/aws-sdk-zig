@@ -22,7 +22,7 @@ pub const ProcurementPortalPreference = struct {
 
     /// List of contact information for portal administrators and technical
     /// contacts.
-    contacts: ?[]const Contact,
+    contacts: ?[]const Contact = null,
 
     /// The date and time when the procurement portal preference was created.
     create_date: i64,
@@ -33,19 +33,19 @@ pub const ProcurementPortalPreference = struct {
 
     /// The configuration settings that specify how e-invoices are delivered to the
     /// procurement portal.
-    einvoice_delivery_preference: ?EinvoiceDeliveryPreference,
+    einvoice_delivery_preference: ?EinvoiceDeliveryPreference = null,
 
     /// The current status of the e-invoice delivery preference.
-    einvoice_delivery_preference_status: ?ProcurementPortalPreferenceStatus,
+    einvoice_delivery_preference_status: ?ProcurementPortalPreferenceStatus = null,
 
     /// The reason for the current e-invoice delivery preference status.
-    einvoice_delivery_preference_status_reason: ?[]const u8,
+    einvoice_delivery_preference_status_reason: ?[]const u8 = null,
 
     /// The date and time when the procurement portal preference was last updated.
     last_update_date: i64,
 
     /// The endpoint URL where e-invoices are delivered to the procurement portal.
-    procurement_portal_instance_endpoint: ?[]const u8,
+    procurement_portal_instance_endpoint: ?[]const u8 = null,
 
     /// The name of the procurement portal.
     procurement_portal_name: ProcurementPortalName,
@@ -55,7 +55,7 @@ pub const ProcurementPortalPreference = struct {
 
     /// The shared secret or authentication credential used for secure communication
     /// with the procurement portal.
-    procurement_portal_shared_secret: ?[]const u8,
+    procurement_portal_shared_secret: ?[]const u8 = null,
 
     /// Indicates whether purchase order retrieval is enabled for this procurement
     /// portal preference.
@@ -63,15 +63,15 @@ pub const ProcurementPortalPreference = struct {
 
     /// The endpoint URL used for retrieving purchase orders from the procurement
     /// portal.
-    purchase_order_retrieval_endpoint: ?[]const u8,
+    purchase_order_retrieval_endpoint: ?[]const u8 = null,
 
     /// The current status of the purchase order retrieval preference.
-    purchase_order_retrieval_preference_status: ?ProcurementPortalPreferenceStatus,
+    purchase_order_retrieval_preference_status: ?ProcurementPortalPreferenceStatus = null,
 
     /// The reason for the current purchase order retrieval preference status.
-    purchase_order_retrieval_preference_status_reason: ?[]const u8,
+    purchase_order_retrieval_preference_status_reason: ?[]const u8 = null,
 
-    selector: ?ProcurementPortalPreferenceSelector,
+    selector: ?ProcurementPortalPreferenceSelector = null,
 
     /// The domain identifier for the supplier in the procurement portal.
     supplier_domain: SupplierDomain,
@@ -81,7 +81,7 @@ pub const ProcurementPortalPreference = struct {
 
     /// Configuration on settings for the test environment of the procurement
     /// portal.
-    test_env_preference: ?TestEnvPreference,
+    test_env_preference: ?TestEnvPreference = null,
 
     /// The version number of the procurement portal preference configuration.
     version: i64,

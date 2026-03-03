@@ -1,22 +1,22 @@
 /// Information about the expected route in the route table.
 pub const ExpectedRoute = struct {
     /// Information about the allowed targets.
-    allowed_targets: ?[]const []const u8,
+    allowed_targets: ?[]const []const u8 = null,
 
     /// Information about the contributing subnets.
-    contributing_subnets: ?[]const []const u8,
+    contributing_subnets: ?[]const []const u8 = null,
 
     /// Information about the IPv4 CIDR block.
-    ip_v4_cidr: ?[]const u8,
+    ip_v4_cidr: ?[]const u8 = null,
 
     /// Information about the IPv6 CIDR block.
-    ip_v6_cidr: ?[]const u8,
+    ip_v6_cidr: ?[]const u8 = null,
 
     /// Information about the ID of the prefix list for the route.
-    prefix_list_id: ?[]const u8,
+    prefix_list_id: ?[]const u8 = null,
 
     /// Information about the route table ID.
-    route_table_id: ?[]const u8,
+    route_table_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allowed_targets = "AllowedTargets",

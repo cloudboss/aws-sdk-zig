@@ -5,7 +5,7 @@ const ErrorHandlingConfig = @import("error_handling_config.zig").ErrorHandlingCo
 pub const SnowflakeDestinationProperties = struct {
     /// The object key for the destination bucket in which Amazon AppFlow places the
     /// files.
-    bucket_prefix: ?[]const u8,
+    bucket_prefix: ?[]const u8 = null,
 
     /// The settings that determine how Amazon AppFlow handles an error when placing
     /// data in
@@ -16,7 +16,7 @@ pub const SnowflakeDestinationProperties = struct {
     /// initial failure. `ErrorHandlingConfig` is a part of the destination
     /// connector
     /// details.
-    error_handling_config: ?ErrorHandlingConfig,
+    error_handling_config: ?ErrorHandlingConfig = null,
 
     /// The intermediate bucket that Amazon AppFlow uses when moving data into
     /// Snowflake.

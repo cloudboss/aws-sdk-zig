@@ -3,10 +3,10 @@ const AwsEc2NetworkInterfaceViolation = @import("aws_ec_2_network_interface_viol
 /// Violation detail for an EC2 instance resource.
 pub const AwsEc2InstanceViolation = struct {
     /// Violation detail for network interfaces associated with the EC2 instance.
-    aws_ec_2_network_interface_violations: ?[]const AwsEc2NetworkInterfaceViolation,
+    aws_ec_2_network_interface_violations: ?[]const AwsEc2NetworkInterfaceViolation = null,
 
     /// The resource ID of the EC2 instance.
-    violation_target: ?[]const u8,
+    violation_target: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_ec_2_network_interface_violations = "AwsEc2NetworkInterfaceViolations",

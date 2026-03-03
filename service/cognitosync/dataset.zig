@@ -9,32 +9,32 @@
 pub const Dataset = struct {
     /// Date on which the dataset was
     /// created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// A string of up to 128 characters. Allowed characters
     /// are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.' (dot).
-    dataset_name: ?[]const u8,
+    dataset_name: ?[]const u8 = null,
 
     /// Total size in bytes of the records in this
     /// dataset.
-    data_storage: ?i64,
+    data_storage: ?i64 = null,
 
     /// A name-spaced GUID (for example,
     /// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
     /// GUID generation is
     /// unique within a region.
-    identity_id: ?[]const u8,
+    identity_id: ?[]const u8 = null,
 
     /// The device that made the last change to this
     /// dataset.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// Date when the dataset was last
     /// modified.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// Number of records in this dataset.
-    num_records: ?i64,
+    num_records: ?i64 = null,
 
     pub const json_field_names = .{
         .creation_date = "CreationDate",

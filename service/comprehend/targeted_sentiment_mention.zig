@@ -9,28 +9,28 @@ const TargetedSentimentEntityType = @import("targeted_sentiment_entity_type.zig"
 /// sentiment](https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html) in the *Amazon Comprehend Developer Guide*.
 pub const TargetedSentimentMention = struct {
     /// The offset into the document text where the mention begins.
-    begin_offset: ?i32,
+    begin_offset: ?i32 = null,
 
     /// The offset into the document text where the mention ends.
-    end_offset: ?i32,
+    end_offset: ?i32 = null,
 
     /// The confidence that all the entities mentioned in the group relate to the
     /// same entity.
-    group_score: ?f32,
+    group_score: ?f32 = null,
 
     /// Contains the sentiment and sentiment score for the mention.
-    mention_sentiment: ?MentionSentiment,
+    mention_sentiment: ?MentionSentiment = null,
 
     /// Model confidence that the entity is relevant. Value range is zero to one,
     /// where one is highest confidence.
-    score: ?f32,
+    score: ?f32 = null,
 
     /// The text in the document that identifies the entity.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// The type of the entity. Amazon Comprehend supports a variety of [entity
     /// types](https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html#how-targeted-sentiment-entities).
-    @"type": ?TargetedSentimentEntityType,
+    @"type": ?TargetedSentimentEntityType = null,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",

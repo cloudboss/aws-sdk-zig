@@ -11,19 +11,19 @@ pub const GoogleDriveConfiguration = struct {
     /// For a list of MIME types, see [Using a
     /// Google Workspace Drive data
     /// source](https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html).
-    exclude_mime_types: ?[]const []const u8,
+    exclude_mime_types: ?[]const []const u8 = null,
 
     /// A list of identifiers or shared drives to exclude from the index. All files
     /// and
     /// folders stored on the shared drive are excluded.
-    exclude_shared_drives: ?[]const []const u8,
+    exclude_shared_drives: ?[]const []const u8 = null,
 
     /// A list of email addresses of the users. Documents owned by these users are
     /// excluded
     /// from the index. Documents shared with excluded users are indexed unless they
     /// are
     /// excluded in another way.
-    exclude_user_accounts: ?[]const []const u8,
+    exclude_user_accounts: ?[]const []const u8 = null,
 
     /// A list of regular expression patterns to exclude certain items in your
     /// Google Drive,
@@ -34,7 +34,7 @@ pub const GoogleDriveConfiguration = struct {
     /// item matches both an inclusion and exclusion pattern, the exclusion pattern
     /// takes
     /// precedence and the item isn't included in the index.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// Maps Google Drive data source attributes or field names to Amazon Kendra
     /// index
@@ -44,7 +44,7 @@ pub const GoogleDriveConfiguration = struct {
     /// The
     /// Google Drive data source field names must exist in your Google Drive custom
     /// metadata.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of regular expression patterns to include certain items in your
     /// Google Drive,
@@ -55,7 +55,7 @@ pub const GoogleDriveConfiguration = struct {
     /// item matches both an inclusion and exclusion pattern, the exclusion pattern
     /// takes
     /// precedence and the item isn't included in the index.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of a Secrets Managersecret that contains the
     /// credentials required to connect to Google Drive. For more information, see

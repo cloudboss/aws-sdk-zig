@@ -6,7 +6,7 @@ const KernelSpec = @import("kernel_spec.zig").KernelSpec;
 pub const KernelGatewayImageConfig = struct {
     /// The Amazon Elastic File System storage configuration for a SageMaker AI
     /// image.
-    file_system_config: ?FileSystemConfig,
+    file_system_config: ?FileSystemConfig = null,
 
     /// The specification of the Jupyter kernels in the image.
     kernel_specs: []const KernelSpec,

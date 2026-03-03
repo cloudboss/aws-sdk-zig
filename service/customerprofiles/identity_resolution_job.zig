@@ -5,25 +5,25 @@ const IdentityResolutionJobStatus = @import("identity_resolution_job_status.zig"
 /// Information about the Identity Resolution Job.
 pub const IdentityResolutionJob = struct {
     /// The unique name of the domain.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// The S3 location where the Identity Resolution Job writes result files.
-    exporting_location: ?ExportingLocation,
+    exporting_location: ?ExportingLocation = null,
 
     /// The timestamp of when the job was completed.
-    job_end_time: ?i64,
+    job_end_time: ?i64 = null,
 
     /// The unique identifier of the Identity Resolution Job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The timestamp of when the job was started or will be started.
-    job_start_time: ?i64,
+    job_start_time: ?i64 = null,
 
     /// Statistics about an Identity Resolution Job.
-    job_stats: ?JobStats,
+    job_stats: ?JobStats = null,
 
     /// The error messages that are generated when the Identity Resolution Job runs.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status of the Identity Resolution Job.
     ///
@@ -50,7 +50,7 @@ pub const IdentityResolutionJob = struct {
     /// * `FAILED`: The Identity Resolution Job did not merge any data. It writes a
     ///   message
     /// indicating the source of the problem.
-    status: ?IdentityResolutionJobStatus,
+    status: ?IdentityResolutionJobStatus = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",

@@ -38,7 +38,7 @@ pub const FileCacheDataRepositoryAssociation = struct {
     /// in effect is the
     /// root of the subdirectories. Note that `DataRepositorySubdirectories`
     /// is not supported for S3 data repositories.
-    data_repository_subdirectories: ?[]const []const u8,
+    data_repository_subdirectories: ?[]const []const u8 = null,
 
     /// A path on the cache that points to a high-level directory (such
     /// as `/ns1/`) or subdirectory (such as `/ns1/subdir/`)
@@ -63,7 +63,7 @@ pub const FileCacheDataRepositoryAssociation = struct {
 
     /// The configuration for a data repository association that
     /// links an Amazon File Cache resource to an NFS data repository.
-    nfs: ?FileCacheNFSConfiguration,
+    nfs: ?FileCacheNFSConfiguration = null,
 
     pub const json_field_names = .{
         .data_repository_path = "DataRepositoryPath",

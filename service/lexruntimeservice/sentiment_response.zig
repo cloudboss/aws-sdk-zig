@@ -6,10 +6,10 @@
 pub const SentimentResponse = struct {
     /// The inferred sentiment that Amazon Comprehend has the highest
     /// confidence in.
-    sentiment_label: ?[]const u8,
+    sentiment_label: ?[]const u8 = null,
 
     /// The likelihood that the sentiment was correctly inferred.
-    sentiment_score: ?[]const u8,
+    sentiment_score: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .sentiment_label = "sentimentLabel",

@@ -19,24 +19,24 @@ pub const SegmentResponse = struct {
     creation_date: []const u8,
 
     /// The dimension settings for the segment.
-    dimensions: ?SegmentDimensions,
+    dimensions: ?SegmentDimensions = null,
 
     /// The unique identifier for the segment.
     id: []const u8,
 
     /// The settings for the import job that's associated with the segment.
-    import_definition: ?SegmentImportResource,
+    import_definition: ?SegmentImportResource = null,
 
     /// The date and time when the segment was last modified.
-    last_modified_date: ?[]const u8,
+    last_modified_date: ?[]const u8 = null,
 
     /// The name of the segment.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A list of one or more segment groups that apply to the segment. Each segment
     /// group consists of zero or more base segments and the dimensions that are
     /// applied to those base segments.
-    segment_groups: ?SegmentGroupList,
+    segment_groups: ?SegmentGroupList = null,
 
     /// The segment type. Valid values are:
     ///
@@ -51,10 +51,10 @@ pub const SegmentResponse = struct {
     /// A string-to-string map of key-value pairs that identifies the tags that are
     /// associated with the segment. Each tag consists of a required tag key and an
     /// associated tag value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The version number of the segment.
-    version: ?i32,
+    version: ?i32 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

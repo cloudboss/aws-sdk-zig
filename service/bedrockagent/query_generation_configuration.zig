@@ -5,10 +5,10 @@ const QueryGenerationContext = @import("query_generation_context.zig").QueryGene
 /// source](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html) in the Amazon Bedrock User Guide..
 pub const QueryGenerationConfiguration = struct {
     /// The time after which query generation will time out.
-    execution_timeout_seconds: ?i32,
+    execution_timeout_seconds: ?i32 = null,
 
     /// Specifies configurations for context to use during query generation.
-    generation_context: ?QueryGenerationContext,
+    generation_context: ?QueryGenerationContext = null,
 
     pub const json_field_names = .{
         .execution_timeout_seconds = "executionTimeoutSeconds",

@@ -14,7 +14,7 @@ pub const CreateDeploymentRequest = struct {
     /// with the same clientToken, you will get the same response. The service also
     /// handles
     /// deleting the clientToken after it expires.
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The identifier of the runtime environment where you want to deploy this
     /// application.

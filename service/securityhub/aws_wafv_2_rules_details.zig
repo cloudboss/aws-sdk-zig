@@ -9,24 +9,24 @@ pub const AwsWafv2RulesDetails = struct {
     /// The action that WAF should take on a web request when it matches the rule
     /// statement. Settings at the web ACL level can override the rule action
     /// setting.
-    action: ?AwsWafv2RulesActionDetails,
+    action: ?AwsWafv2RulesActionDetails = null,
 
     /// The name of the rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The action to use in the place of the action that results from the rule
     /// group evaluation.
-    override_action: ?[]const u8,
+    override_action: ?[]const u8 = null,
 
     /// If you define more than one Rule in a WebACL, WAF evaluates each request
     /// against the Rules in order based on the value of `Priority`.
     /// WAF processes rules with lower priority first. The priorities don't need to
     /// be consecutive, but they must all be different.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// Defines and enables Amazon CloudWatch metrics and web request sample
     /// collection.
-    visibility_config: ?AwsWafv2VisibilityConfigDetails,
+    visibility_config: ?AwsWafv2VisibilityConfigDetails = null,
 
     pub const json_field_names = .{
         .action = "Action",

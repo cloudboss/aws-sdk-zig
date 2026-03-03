@@ -2,14 +2,14 @@
 /// moved, along with the timestamp of the move
 pub const QueueTransition = struct {
     /// The queue that the job was on after the transition.
-    destination_queue: ?[]const u8,
+    destination_queue: ?[]const u8 = null,
 
     /// The queue that the job was on before the transition.
-    source_queue: ?[]const u8,
+    source_queue: ?[]const u8 = null,
 
     /// The time, in Unix epoch format, that the job moved from the source queue to
     /// the destination queue.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .destination_queue = "DestinationQueue",

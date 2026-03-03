@@ -3,10 +3,10 @@ const ErrorCode = @import("error_code.zig").ErrorCode;
 /// Provides information about a Amazon Q Business request error.
 pub const ErrorDetail = struct {
     /// The code associated with the Amazon Q Business request error.
-    error_code: ?ErrorCode,
+    error_code: ?ErrorCode = null,
 
     /// The message explaining the Amazon Q Business request error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

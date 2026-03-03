@@ -2,8 +2,8 @@
 /// Access.
 pub const VerifiedAccessInstanceCustomSubDomain = struct {
     /// The name servers.
-    nameservers: ?[]const []const u8,
+    nameservers: ?[]const []const u8 = null,
 
     /// The subdomain.
-    sub_domain: ?[]const u8,
+    sub_domain: ?[]const u8 = null,
 };

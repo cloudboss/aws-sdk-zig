@@ -11,17 +11,17 @@ pub const InstanceMetadataOptionsRequest = struct {
     /// metadata.
     ///
     /// Default: `enabled`
-    http_endpoint: ?InstanceMetadataEndpointState,
+    http_endpoint: ?InstanceMetadataEndpointState = null,
 
     /// Enables or disables the IPv6 endpoint for the instance metadata service.
     ///
     /// Default: `disabled`
-    http_protocol_ipv_6: ?InstanceMetadataProtocolState,
+    http_protocol_ipv_6: ?InstanceMetadataProtocolState = null,
 
     /// The maximum number of hops that the metadata token can travel.
     ///
     /// Possible values: Integers from 1 to 64
-    http_put_response_hop_limit: ?i32,
+    http_put_response_hop_limit: ?i32 = null,
 
     /// Indicates whether IMDSv2 is required.
     ///
@@ -46,7 +46,7 @@ pub const InstanceMetadataOptionsRequest = struct {
     /// information, see [Order of precedence for instance metadata
     /// options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence) in the
     /// *Amazon EC2 User Guide*.
-    http_tokens: ?HttpTokensState,
+    http_tokens: ?HttpTokensState = null,
 
     /// Set to `enabled` to allow access to instance tags from the instance
     /// metadata. Set to `disabled` to turn off access to instance tags from the
@@ -55,5 +55,5 @@ pub const InstanceMetadataOptionsRequest = struct {
     /// metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS).
     ///
     /// Default: `disabled`
-    instance_metadata_tags: ?InstanceMetadataTagsState,
+    instance_metadata_tags: ?InstanceMetadataTagsState = null,
 };

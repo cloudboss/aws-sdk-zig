@@ -5,11 +5,11 @@ const GuardrailAutomatedReasoningTranslationOption = @import("guardrail_automate
 /// requiring additional context or clarification.
 pub const GuardrailAutomatedReasoningTranslationAmbiguousFinding = struct {
     /// Scenarios showing how the different translation options differ in meaning.
-    difference_scenarios: ?[]const GuardrailAutomatedReasoningScenario,
+    difference_scenarios: ?[]const GuardrailAutomatedReasoningScenario = null,
 
     /// Different logical interpretations that were detected during translation of
     /// the input.
-    options: ?[]const GuardrailAutomatedReasoningTranslationOption,
+    options: ?[]const GuardrailAutomatedReasoningTranslationOption = null,
 
     pub const json_field_names = .{
         .difference_scenarios = "differenceScenarios",

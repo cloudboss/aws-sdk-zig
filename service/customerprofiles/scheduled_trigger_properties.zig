@@ -7,15 +7,15 @@ pub const ScheduledTriggerProperties = struct {
     /// Specifies whether a scheduled flow has an incremental data transfer or a
     /// complete data
     /// transfer for each flow run.
-    data_pull_mode: ?DataPullMode,
+    data_pull_mode: ?DataPullMode = null,
 
     /// Specifies the date range for the records to import from the connector in the
     /// first flow
     /// run.
-    first_execution_from: ?i64,
+    first_execution_from: ?i64 = null,
 
     /// Specifies the scheduled end time for a scheduled-trigger flow.
-    schedule_end_time: ?i64,
+    schedule_end_time: ?i64 = null,
 
     /// The scheduling expression that determines the rate at which the schedule
     /// will run, for
@@ -24,14 +24,14 @@ pub const ScheduledTriggerProperties = struct {
 
     /// Specifies the optional offset that is added to the time interval for a
     /// schedule-triggered flow.
-    schedule_offset: ?i64,
+    schedule_offset: ?i64 = null,
 
     /// Specifies the scheduled start time for a scheduled-trigger flow.
-    schedule_start_time: ?i64,
+    schedule_start_time: ?i64 = null,
 
     /// Specifies the time zone used when referring to the date and time of a
     /// scheduled-triggered flow, such as America/New_York.
-    timezone: ?[]const u8,
+    timezone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_pull_mode = "DataPullMode",

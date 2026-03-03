@@ -11,7 +11,7 @@ pub const ScteDash = struct {
     /// * `Binary` - The SCTE-35 marker is expressed as a hex-string (Base64 string)
     ///   rather than full XML.
     /// * `XML` - The SCTE marker is expressed fully in XML.
-    ad_marker_dash: ?AdMarkerDash,
+    ad_marker_dash: ?AdMarkerDash = null,
 
     pub const json_field_names = .{
         .ad_marker_dash = "AdMarkerDash",

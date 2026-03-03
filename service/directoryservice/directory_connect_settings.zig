@@ -7,7 +7,7 @@ pub const DirectoryConnectSettings = struct {
 
     /// The IPv6 addresses of DNS servers or domain controllers in your
     /// self-managed directory.
-    customer_dns_ips_v6: ?[]const []const u8,
+    customer_dns_ips_v6: ?[]const []const u8 = null,
 
     /// The user name of an account in your self-managed directory that is used to
     /// connect to the

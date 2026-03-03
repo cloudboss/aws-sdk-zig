@@ -14,7 +14,7 @@ pub const MapRunItemCounts = struct {
     /// child workflows is terminal. For example, child workflows with an execution
     /// status of `FAILED`, `ABORTED`, or `TIMED_OUT` and a `redriveStatus` of
     /// `NOT_REDRIVABLE`.
-    failures_not_redrivable: ?i64,
+    failures_not_redrivable: ?i64 = null,
 
     /// The total number of items to process in child workflow executions that
     /// haven't started running yet.
@@ -22,7 +22,7 @@ pub const MapRunItemCounts = struct {
 
     /// The number of unsuccessful items in child workflow executions currently
     /// waiting to be redriven.
-    pending_redrive: ?i64,
+    pending_redrive: ?i64 = null,
 
     /// Returns the count of items whose results were written by `ResultWriter`. For
     /// more information, see

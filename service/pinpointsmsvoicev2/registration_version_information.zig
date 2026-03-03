@@ -5,11 +5,11 @@ const RegistrationVersionStatusHistory = @import("registration_version_status_hi
 /// Provides information about the specified version of the registration.
 pub const RegistrationVersionInformation = struct {
     /// An array of RegistrationDeniedReasonInformation objects.
-    denied_reasons: ?[]const RegistrationDeniedReasonInformation,
+    denied_reasons: ?[]const RegistrationDeniedReasonInformation = null,
 
     /// Feedback information provided during the registration review process. This
     /// includes comments, suggestions, or additional requirements.
-    feedback: ?[]const u8,
+    feedback: ?[]const u8 = null,
 
     /// The status of the registration.
     ///

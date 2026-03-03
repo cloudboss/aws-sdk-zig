@@ -3,7 +3,7 @@ const PrimaryAttributeAccessControlConfigurationItem = @import("primary_attribut
 /// A data table access control configuration.
 pub const DataTableAccessControlConfiguration = struct {
     /// The configuration's primary attribute access control configuration.
-    primary_attribute_access_control_configuration: ?PrimaryAttributeAccessControlConfigurationItem,
+    primary_attribute_access_control_configuration: ?PrimaryAttributeAccessControlConfigurationItem = null,
 
     pub const json_field_names = .{
         .primary_attribute_access_control_configuration = "PrimaryAttributeAccessControlConfiguration",

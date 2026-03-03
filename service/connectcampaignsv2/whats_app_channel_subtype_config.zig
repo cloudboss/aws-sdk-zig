@@ -3,7 +3,7 @@ const WhatsAppOutboundMode = @import("whats_app_outbound_mode.zig").WhatsAppOutb
 
 /// WhatsApp Channel Subtype config
 pub const WhatsAppChannelSubtypeConfig = struct {
-    capacity: ?f64,
+    capacity: ?f64 = null,
 
     default_outbound_config: WhatsAppOutboundConfig,
 

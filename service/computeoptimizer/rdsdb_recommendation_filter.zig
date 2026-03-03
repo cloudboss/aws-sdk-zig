@@ -28,10 +28,10 @@ pub const RDSDBRecommendationFilter = struct {
     /// your DB instance recommendations with a tag key value of `Owner` or without
     /// any tag
     /// keys assigned.
-    name: ?RDSDBRecommendationFilterName,
+    name: ?RDSDBRecommendationFilterName = null,
 
     /// The value of the filter.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

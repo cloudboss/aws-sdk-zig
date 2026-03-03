@@ -20,7 +20,7 @@ pub const GetDomainResponse = struct {
 
     /// A map of of key-value pairs that represent tags on a resource. Tags are used
     /// to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .created_time = "createdTime",

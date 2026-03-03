@@ -23,5 +23,5 @@ pub const QueryStringConditionConfig = struct {
     /// If you specify multiple key/value pairs or values, the condition is
     /// satisfied if one of
     /// them is found in the query string.
-    values: ?[]const QueryStringKeyValuePair,
+    values: ?[]const QueryStringKeyValuePair = null,
 };

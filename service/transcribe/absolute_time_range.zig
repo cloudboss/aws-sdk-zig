@@ -23,23 +23,23 @@ pub const AbsoluteTimeRange = struct {
     /// specified
     /// criteria in your audio. If you include `EndTime` in your request, you must
     /// also include `StartTime`.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The time, in milliseconds, from the start of your media file until the
     /// specified value.
     /// Amazon Transcribe searches for your specified criteria in this time segment.
-    first: ?i64,
+    first: ?i64 = null,
 
     /// The time, in milliseconds, from the specified value until the end of your
     /// media file.
     /// Amazon Transcribe searches for your specified criteria in this time segment.
-    last: ?i64,
+    last: ?i64 = null,
 
     /// The time, in milliseconds, when Amazon Transcribe starts searching for the
     /// specified
     /// criteria in your audio. If you include `StartTime` in your request, you must
     /// also include `EndTime`.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .end_time = "EndTime",

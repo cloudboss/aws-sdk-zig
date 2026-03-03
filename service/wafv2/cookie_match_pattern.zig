@@ -10,15 +10,15 @@ const All = @import("all.zig").All;
 /// "session-id" ] }`
 pub const CookieMatchPattern = struct {
     /// Inspect all cookies.
-    all: ?All,
+    all: ?All = null,
 
     /// Inspect only the cookies whose keys don't match any of the strings specified
     /// here.
-    excluded_cookies: ?[]const []const u8,
+    excluded_cookies: ?[]const []const u8 = null,
 
     /// Inspect only the cookies that have a key that matches one of the strings
     /// specified here.
-    included_cookies: ?[]const []const u8,
+    included_cookies: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .all = "All",

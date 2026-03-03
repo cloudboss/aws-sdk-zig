@@ -8,85 +8,85 @@ const AvailableProcessorFeature = @import("available_processor_feature.zig").Ava
 /// `DescribeOrderableDBInstanceOptions` action.
 pub const OrderableDBInstanceOption = struct {
     /// The Availability Zone group for a DB instance.
-    availability_zone_group: ?[]const u8,
+    availability_zone_group: ?[]const u8 = null,
 
     /// A list of Availability Zones for a DB instance.
-    availability_zones: ?[]const AvailabilityZone,
+    availability_zones: ?[]const AvailabilityZone = null,
 
     /// The available options for additional storage volumes for the DB instance
     /// class.
-    available_additional_storage_volumes_options: ?[]const AvailableAdditionalStorageVolumesOption,
+    available_additional_storage_volumes_options: ?[]const AvailableAdditionalStorageVolumesOption = null,
 
     /// A list of the available processor features for the DB instance class of a DB
     /// instance.
-    available_processor_features: ?[]const AvailableProcessorFeature,
+    available_processor_features: ?[]const AvailableProcessorFeature = null,
 
     /// The DB instance class for a DB instance.
-    db_instance_class: ?[]const u8,
+    db_instance_class: ?[]const u8 = null,
 
     /// The engine type of a DB instance.
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// The engine version of a DB instance.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// The license model for a DB instance.
-    license_model: ?[]const u8,
+    license_model: ?[]const u8 = null,
 
     /// Maximum total provisioned IOPS for a DB instance.
-    max_iops_per_db_instance: ?i32,
+    max_iops_per_db_instance: ?i32 = null,
 
     /// Maximum provisioned IOPS per GiB for a DB instance.
-    max_iops_per_gib: ?f64,
+    max_iops_per_gib: ?f64 = null,
 
     /// Maximum storage size for a DB instance.
-    max_storage_size: ?i32,
+    max_storage_size: ?i32 = null,
 
     /// Maximum storage throughput for a DB instance.
-    max_storage_throughput_per_db_instance: ?i32,
+    max_storage_throughput_per_db_instance: ?i32 = null,
 
     /// Maximum storage throughput to provisioned IOPS ratio for a DB instance.
-    max_storage_throughput_per_iops: ?f64,
+    max_storage_throughput_per_iops: ?f64 = null,
 
     /// Minimum total provisioned IOPS for a DB instance.
-    min_iops_per_db_instance: ?i32,
+    min_iops_per_db_instance: ?i32 = null,
 
     /// Minimum provisioned IOPS per GiB for a DB instance.
-    min_iops_per_gib: ?f64,
+    min_iops_per_gib: ?f64 = null,
 
     /// Minimum storage size for a DB instance.
-    min_storage_size: ?i32,
+    min_storage_size: ?i32 = null,
 
     /// Minimum storage throughput for a DB instance.
-    min_storage_throughput_per_db_instance: ?i32,
+    min_storage_throughput_per_db_instance: ?i32 = null,
 
     /// Minimum storage throughput to provisioned IOPS ratio for a DB instance.
-    min_storage_throughput_per_iops: ?f64,
+    min_storage_throughput_per_iops: ?f64 = null,
 
     /// Indicates whether a DB instance is Multi-AZ capable.
-    multi_az_capable: ?bool,
+    multi_az_capable: ?bool = null,
 
     /// Indicates whether a DB instance supports RDS on Outposts.
     ///
     /// For more information about RDS on Outposts, see [Amazon RDS on Amazon Web
     /// Services
     /// Outposts](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in the *Amazon RDS User Guide.*
-    outpost_capable: ?bool,
+    outpost_capable: ?bool = null,
 
     /// Indicates whether a DB instance can have a read replica.
-    read_replica_capable: ?bool,
+    read_replica_capable: ?bool = null,
 
     /// The storage type for a DB instance.
-    storage_type: ?[]const u8,
+    storage_type: ?[]const u8 = null,
 
     /// The list of supported modes for Database Activity Streams. Aurora PostgreSQL
     /// returns the value `[sync, async]`. Aurora MySQL and RDS for Oracle return
     /// `[async]` only. If Database Activity Streams isn't supported, the return
     /// value is an empty list.
-    supported_activity_stream_modes: ?[]const []const u8,
+    supported_activity_stream_modes: ?[]const []const u8 = null,
 
     /// A list of the supported DB engine modes.
-    supported_engine_modes: ?[]const []const u8,
+    supported_engine_modes: ?[]const []const u8 = null,
 
     /// The network types supported by the DB instance (`IPV4` or `DUAL`).
     ///
@@ -95,54 +95,54 @@ pub const OrderableDBInstanceOption = struct {
     ///
     /// For more information, see [ Working with a DB instance in a
     /// VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html) in the *Amazon RDS User Guide.*
-    supported_network_types: ?[]const []const u8,
+    supported_network_types: ?[]const []const u8 = null,
 
     /// Indicates whether the DB instance class supports additional storage volumes.
-    supports_additional_storage_volumes: ?bool,
+    supports_additional_storage_volumes: ?bool = null,
 
     /// Indicates whether DB instances can be configured as a Multi-AZ DB cluster.
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ deployments
     /// with two readable standby DB
     /// instances](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide.*
-    supports_clusters: ?bool,
+    supports_clusters: ?bool = null,
 
     /// Indicates whether a DB instance supports using a dedicated log volume (DLV).
-    supports_dedicated_log_volume: ?bool,
+    supports_dedicated_log_volume: ?bool = null,
 
     /// Indicates whether a DB instance supports Enhanced Monitoring at intervals
     /// from 1 to 60 seconds.
-    supports_enhanced_monitoring: ?bool,
+    supports_enhanced_monitoring: ?bool = null,
 
     /// Indicates whether you can use Aurora global databases with a specific
     /// combination of other DB engine attributes.
-    supports_global_databases: ?bool,
+    supports_global_databases: ?bool = null,
 
     /// Indicates whether a DB instance supports HTTP endpoints.
-    supports_http_endpoint: ?bool,
+    supports_http_endpoint: ?bool = null,
 
     /// Indicates whether a DB instance supports IAM database authentication.
-    supports_iam_database_authentication: ?bool,
+    supports_iam_database_authentication: ?bool = null,
 
     /// Indicates whether a DB instance supports provisioned IOPS.
-    supports_iops: ?bool,
+    supports_iops: ?bool = null,
 
     /// Indicates whether a DB instance supports Kerberos Authentication.
-    supports_kerberos_authentication: ?bool,
+    supports_kerberos_authentication: ?bool = null,
 
     /// Indicates whether a DB instance supports Performance Insights.
-    supports_performance_insights: ?bool,
+    supports_performance_insights: ?bool = null,
 
     /// Indicates whether Amazon RDS can automatically scale storage for DB
     /// instances that use the specified DB instance class.
-    supports_storage_autoscaling: ?bool,
+    supports_storage_autoscaling: ?bool = null,
 
     /// Indicates whether a DB instance supports encrypted storage.
-    supports_storage_encryption: ?bool,
+    supports_storage_encryption: ?bool = null,
 
     /// Indicates whether a DB instance supports storage throughput.
-    supports_storage_throughput: ?bool,
+    supports_storage_throughput: ?bool = null,
 
     /// Indicates whether a DB instance is in a VPC.
-    vpc: ?bool,
+    vpc: ?bool = null,
 };

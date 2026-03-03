@@ -6,19 +6,19 @@ pub const AccessKeyLastUsed = struct {
     /// The date and time when the access key was most recently used.
     ///
     /// This value is null if the access key has not been used.
-    last_used_date: ?i64,
+    last_used_date: ?i64 = null,
 
     /// The Amazon Web Services Region where this access key was most recently used.
     ///
     /// This value is `N/A` if the access key has not been used.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The name of the Amazon Web Services service with which this access key was
     /// most recently
     /// used.
     ///
     /// This value is `N/A` if the access key has not been used.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .last_used_date = "lastUsedDate",

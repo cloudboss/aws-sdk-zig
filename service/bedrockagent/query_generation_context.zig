@@ -5,11 +5,11 @@ const QueryGenerationTable = @import("query_generation_table.zig").QueryGenerati
 pub const QueryGenerationContext = struct {
     /// An array of objects, each of which defines information about example queries
     /// to help the query engine generate appropriate SQL queries.
-    curated_queries: ?[]const CuratedQuery,
+    curated_queries: ?[]const CuratedQuery = null,
 
     /// An array of objects, each of which defines information about a table in the
     /// database.
-    tables: ?[]const QueryGenerationTable,
+    tables: ?[]const QueryGenerationTable = null,
 
     pub const json_field_names = .{
         .curated_queries = "curatedQueries",

@@ -5,7 +5,7 @@ pub const LambdaInvokeOperation = struct {
     /// The Amazon Resource Name (ARN) for the Lambda function that the specified
     /// job will
     /// invoke on every object in the manifest.
-    function_arn: ?[]const u8,
+    function_arn: ?[]const u8 = null,
 
     /// Specifies the schema version for the payload that Batch Operations sends
     /// when invoking
@@ -25,7 +25,7 @@ pub const LambdaInvokeOperation = struct {
     /// **Directory buckets** - To initiate Amazon Web Services Lambda function to
     /// perform custom actions on objects in directory buckets, you must specify
     /// `2.0`.
-    invocation_schema_version: ?[]const u8,
+    invocation_schema_version: ?[]const u8 = null,
 
     /// Key-value pairs that are passed in the payload that Batch Operations sends
     /// when invoking
@@ -34,5 +34,5 @@ pub const LambdaInvokeOperation = struct {
     /// `UserArguments`. For more information, see [Automate object processing in
     /// Amazon S3 directory buckets with S3 Batch Operations and
     /// Lambda](https://aws.amazon.com/blogs/storage/automate-object-processing-in-amazon-s3-directory-buckets-with-s3-batch-operations-and-aws-lambda/) in the *Amazon Web Services Storage Blog*.
-    user_arguments: ?[]const aws.map.StringMapEntry,
+    user_arguments: ?[]const aws.map.StringMapEntry = null,
 };

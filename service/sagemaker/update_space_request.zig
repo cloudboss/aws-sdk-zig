@@ -5,13 +5,13 @@ pub const UpdateSpaceRequest = struct {
     domain_id: []const u8,
 
     /// The name of the space that appears in the Amazon SageMaker Studio UI.
-    space_display_name: ?[]const u8,
+    space_display_name: ?[]const u8 = null,
 
     /// The name of the space.
     space_name: []const u8,
 
     /// A collection of space settings.
-    space_settings: ?SpaceSettings,
+    space_settings: ?SpaceSettings = null,
 
     pub const json_field_names = .{
         .domain_id = "DomainId",

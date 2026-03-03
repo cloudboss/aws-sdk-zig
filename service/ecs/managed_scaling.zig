@@ -21,12 +21,12 @@ pub const ManagedScaling = struct {
     /// contribute to CloudWatch metrics for Auto Scaling group. If this parameter
     /// is omitted,
     /// the default value of `300` seconds is used.
-    instance_warmup_period: ?i32,
+    instance_warmup_period: ?i32 = null,
 
     /// The maximum number of Amazon EC2 instances that Amazon ECS will scale out at
     /// one time.
     /// If this parameter is omitted, the default value of `10000` is used.
-    maximum_scaling_step_size: ?i32,
+    maximum_scaling_step_size: ?i32 = null,
 
     /// The minimum number of Amazon EC2 instances that Amazon ECS will scale out at
     /// one time.
@@ -38,10 +38,10 @@ pub const ManagedScaling = struct {
     /// scaling
     /// step size even if the actual demand is less than the minimum scaling step
     /// size.
-    minimum_scaling_step_size: ?i32,
+    minimum_scaling_step_size: ?i32 = null,
 
     /// Determines whether to use managed scaling for the capacity provider.
-    status: ?ManagedScalingStatus,
+    status: ?ManagedScalingStatus = null,
 
     /// The target capacity utilization as a percentage for the capacity provider.
     /// The
@@ -51,7 +51,7 @@ pub const ManagedScaling = struct {
     /// `targetCapacity` of `90`. The default value of
     /// `100` percent results in the Amazon EC2 instances in your Auto Scaling
     /// group being completely used.
-    target_capacity: ?i32,
+    target_capacity: ?i32 = null,
 
     pub const json_field_names = .{
         .instance_warmup_period = "instanceWarmupPeriod",

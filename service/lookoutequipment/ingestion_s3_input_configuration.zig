@@ -17,11 +17,11 @@ pub const IngestionS3InputConfiguration = struct {
     /// {prefix}/{component_name}[DELIMITER]* (Allowed delimiters : space, dot,
     /// underscore,
     /// hyphen)
-    key_pattern: ?[]const u8,
+    key_pattern: ?[]const u8 = null,
 
     /// The prefix for the S3 location being used for the input data for the data
     /// ingestion.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "Bucket",

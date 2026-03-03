@@ -11,7 +11,7 @@ pub const JobSummary = struct {
     device: []const u8,
 
     /// The time at which the Amazon Braket hybrid job ended.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The ARN of the Amazon Braket hybrid job.
     job_arn: []const u8,
@@ -20,13 +20,13 @@ pub const JobSummary = struct {
     job_name: []const u8,
 
     /// The time at which the Amazon Braket hybrid job was started.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The status of the Amazon Braket hybrid job.
     status: JobPrimaryStatus,
 
     /// Displays the key, value pairs of tags associated with this hybrid job.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

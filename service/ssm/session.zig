@@ -7,43 +7,43 @@ pub const Session = struct {
     /// `Standard` access type is the default for Session Manager sessions.
     /// `JustInTime` is the access type for [Just-in-time node
     /// access](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-just-in-time-node-access.html).
-    access_type: ?AccessType,
+    access_type: ?AccessType = null,
 
     /// Reserved for future use.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// The name of the Session Manager SSM document used to define the parameters
     /// and plugin settings for the
     /// session. For example, `SSM-SessionManagerRunShell`.
-    document_name: ?[]const u8,
+    document_name: ?[]const u8 = null,
 
     /// The date and time, in ISO-8601 Extended format, when the session was
     /// terminated.
-    end_date: ?i64,
+    end_date: ?i64 = null,
 
     /// The maximum duration of a session before it terminates.
-    max_session_duration: ?[]const u8,
+    max_session_duration: ?[]const u8 = null,
 
     /// Reserved for future use.
-    output_url: ?SessionManagerOutputUrl,
+    output_url: ?SessionManagerOutputUrl = null,
 
     /// The ID of the Amazon Web Services user that started the session.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The reason for connecting to the instance.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The ID of the session.
-    session_id: ?[]const u8,
+    session_id: ?[]const u8 = null,
 
     /// The date and time, in ISO-8601 Extended format, when the session began.
-    start_date: ?i64,
+    start_date: ?i64 = null,
 
     /// The status of the session. For example, "Connected" or "Terminated".
-    status: ?SessionStatus,
+    status: ?SessionStatus = null,
 
     /// The managed node that the Session Manager session connected to.
-    target: ?[]const u8,
+    target: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_type = "AccessType",

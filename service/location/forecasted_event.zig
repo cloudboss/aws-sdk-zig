@@ -24,13 +24,13 @@ pub const ForecastedEvent = struct {
     /// The forecasted time the device will breach the geofence in [ISO
     /// 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format:
     /// `YYYY-MM-DDThh:mm:ss.sssZ`
-    forecasted_breach_time: ?i64,
+    forecasted_breach_time: ?i64 = null,
 
     /// The geofence identifier pertaining to the forecasted event.
     geofence_id: []const u8,
 
     /// The geofence properties.
-    geofence_properties: ?[]const aws.map.StringMapEntry,
+    geofence_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// Indicates if the device is located within the geofence.
     is_device_in_geofence: bool,

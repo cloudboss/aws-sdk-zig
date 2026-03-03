@@ -5,14 +5,14 @@ const Format = @import("format.zig").Format;
 pub const ImportJobRequest = struct {
     /// Specifies whether to create a segment that contains the endpoints, when the
     /// endpoint definitions are imported.
-    define_segment: ?bool,
+    define_segment: ?bool = null,
 
     /// (Deprecated) Your AWS account ID, which you assigned to an external ID key
     /// in an IAM trust policy. Amazon Pinpoint previously used this value to assume
     /// an IAM role when importing endpoint definitions, but we removed this
     /// requirement. We don't recommend use of external IDs for IAM roles that are
     /// assumed by Amazon Pinpoint.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The format of the files that contain the endpoint definitions to import.
     /// Valid values are: CSV, for comma-separated values format; and, JSON, for
@@ -23,7 +23,7 @@ pub const ImportJobRequest = struct {
 
     /// Specifies whether to register the endpoints with Amazon Pinpoint, when the
     /// endpoint definitions are imported.
-    register_endpoints: ?bool,
+    register_endpoints: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
     /// (IAM) role that authorizes Amazon Pinpoint to access the Amazon S3 location
@@ -43,11 +43,11 @@ pub const ImportJobRequest = struct {
 
     /// The identifier for the segment to update or add the imported endpoint
     /// definitions to, if the import job is meant to update an existing segment.
-    segment_id: ?[]const u8,
+    segment_id: ?[]const u8 = null,
 
     /// A custom name for the segment that's created by the import job, if the value
     /// of the DefineSegment property is true.
-    segment_name: ?[]const u8,
+    segment_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .define_segment = "DefineSegment",

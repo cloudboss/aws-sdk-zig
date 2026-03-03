@@ -6,10 +6,10 @@ pub const DefaultCategoricalHyperParameterRange = struct {
     is_tunable: bool = false,
 
     /// The name of the hyperparameter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A list of the categories for the hyperparameter.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .is_tunable = "isTunable",

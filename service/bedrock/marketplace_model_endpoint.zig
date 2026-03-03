@@ -19,7 +19,7 @@ pub const MarketplaceModelEndpoint = struct {
     endpoint_status: []const u8,
 
     /// Additional information about the endpoint status, if available.
-    endpoint_status_message: ?[]const u8,
+    endpoint_status_message: ?[]const u8 = null,
 
     /// The ARN of the model from Amazon Bedrock Marketplace that is deployed on
     /// this endpoint.
@@ -27,10 +27,10 @@ pub const MarketplaceModelEndpoint = struct {
 
     /// The overall status of the endpoint in Amazon Bedrock Marketplace (e.g.,
     /// ACTIVE, INACTIVE).
-    status: ?Status,
+    status: ?Status = null,
 
     /// Additional information about the overall status, if available.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The timestamp when the endpoint was last updated.
     updated_at: i64,

@@ -4,7 +4,7 @@ const ActionConfigurationPropertyType = @import("action_configuration_property_t
 pub const ActionConfigurationProperty = struct {
     /// The description of the action configuration property that is displayed to
     /// users.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether the configuration property is a key.
     key: bool = false,
@@ -40,7 +40,7 @@ pub const ActionConfigurationProperty = struct {
     secret: bool = false,
 
     /// The type of the configuration property.
-    @"type": ?ActionConfigurationPropertyType,
+    @"type": ?ActionConfigurationPropertyType = null,
 
     pub const json_field_names = .{
         .description = "description",

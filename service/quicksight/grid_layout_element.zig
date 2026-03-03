@@ -6,16 +6,16 @@ const LoadingAnimation = @import("loading_animation.zig").LoadingAnimation;
 /// An element within a grid layout.
 pub const GridLayoutElement = struct {
     /// The background style configuration of a grid layout element.
-    background_style: ?GridLayoutElementBackgroundStyle,
+    background_style: ?GridLayoutElementBackgroundStyle = null,
 
     /// The border radius of a grid layout element.
-    border_radius: ?[]const u8,
+    border_radius: ?[]const u8 = null,
 
     /// The border style configuration of a grid layout element.
-    border_style: ?GridLayoutElementBorderStyle,
+    border_style: ?GridLayoutElementBorderStyle = null,
 
     /// The column index for the upper left corner of an element.
-    column_index: ?i32,
+    column_index: ?i32 = null,
 
     /// The width of a grid element expressed as a number of grid columns.
     column_span: i32,
@@ -26,20 +26,20 @@ pub const GridLayoutElement = struct {
     /// The type of element.
     element_type: LayoutElementType,
 
-    loading_animation: ?LoadingAnimation,
+    loading_animation: ?LoadingAnimation = null,
 
     /// The padding of a grid layout element.
-    padding: ?[]const u8,
+    padding: ?[]const u8 = null,
 
     /// The row index for the upper left corner of an element.
-    row_index: ?i32,
+    row_index: ?i32 = null,
 
     /// The height of a grid element expressed as a number of grid rows.
     row_span: i32,
 
     /// The border style configuration of a grid layout element. This border style
     /// is used when the element is selected.
-    selected_border_style: ?GridLayoutElementBorderStyle,
+    selected_border_style: ?GridLayoutElementBorderStyle = null,
 
     pub const json_field_names = .{
         .background_style = "BackgroundStyle",

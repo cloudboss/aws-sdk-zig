@@ -45,7 +45,7 @@ pub const AttributeTypesSelector = struct {
     /// `MaillingAddress.City`, you need to choose the `BusinessAddress`
     /// and the `MaillingAddress` to represent the Address type and specify the
     /// `Address.City` on the matching rule.
-    address: ?[]const []const u8,
+    address: ?[]const []const u8 = null,
 
     /// Configures the `AttributeMatchingModel`, you can either choose
     /// `ONE_TO_ONE` or `MANY_TO_MANY`.
@@ -60,7 +60,7 @@ pub const AttributeTypesSelector = struct {
     /// `PersonalEmailAddress` and the `BusinessEmailAddress` to represent
     /// the `EmailAddress` type and only specify the `EmailAddress` on the
     /// matching rule.
-    email_address: ?[]const []const u8,
+    email_address: ?[]const []const u8 = null,
 
     /// The `PhoneNumber` type. You can choose from `PhoneNumber`,
     /// `HomePhoneNumber`, and `MobilePhoneNumber`.
@@ -70,7 +70,7 @@ pub const AttributeTypesSelector = struct {
     /// `HomePhone`, you need to choose the `Phone` and the
     /// `HomePhone` to represent the `PhoneNumber` type and only specify
     /// the `PhoneNumber` on the matching rule.
-    phone_number: ?[]const []const u8,
+    phone_number: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .address = "Address",

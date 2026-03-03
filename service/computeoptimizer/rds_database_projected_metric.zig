@@ -9,13 +9,13 @@ const RDSDBMetricName = @import("rdsdb_metric_name.zig").RDSDBMetricName;
 /// its projected metric data.
 pub const RDSDatabaseProjectedMetric = struct {
     /// The name of the projected metric.
-    name: ?RDSDBMetricName,
+    name: ?RDSDBMetricName = null,
 
     /// The timestamps of the projected metric.
-    timestamps: ?[]const i64,
+    timestamps: ?[]const i64 = null,
 
     /// The values for the projected metric.
-    values: ?[]const f64,
+    values: ?[]const f64 = null,
 
     pub const json_field_names = .{
         .name = "name",

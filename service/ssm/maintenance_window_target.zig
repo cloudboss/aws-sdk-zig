@@ -4,18 +4,18 @@ const Target = @import("target.zig").Target;
 /// The target registered with the maintenance window.
 pub const MaintenanceWindowTarget = struct {
     /// A description for the target.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name for the maintenance window target.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A user-provided value that will be included in any Amazon CloudWatch Events
     /// events that are
     /// raised while running tasks for these targets in this maintenance window.
-    owner_information: ?[]const u8,
+    owner_information: ?[]const u8 = null,
 
     /// The type of target that is being registered with the maintenance window.
-    resource_type: ?MaintenanceWindowResourceType,
+    resource_type: ?MaintenanceWindowResourceType = null,
 
     /// The targets, either managed nodes or tags.
     ///
@@ -26,13 +26,13 @@ pub const MaintenanceWindowTarget = struct {
     /// Tags are specified using the following format:
     ///
     /// `Key=,Values=`.
-    targets: ?[]const Target,
+    targets: ?[]const Target = null,
 
     /// The ID of the maintenance window to register the target with.
-    window_id: ?[]const u8,
+    window_id: ?[]const u8 = null,
 
     /// The ID of the target.
-    window_target_id: ?[]const u8,
+    window_target_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

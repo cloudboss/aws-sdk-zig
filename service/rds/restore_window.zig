@@ -1,8 +1,8 @@
 /// Earliest and latest time an instance can be restored to:
 pub const RestoreWindow = struct {
     /// The earliest time you can restore an instance to.
-    earliest_time: ?i64,
+    earliest_time: ?i64 = null,
 
     /// The latest time you can restore an instance to.
-    latest_time: ?i64,
+    latest_time: ?i64 = null,
 };

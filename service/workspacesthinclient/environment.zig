@@ -9,67 +9,67 @@ const SoftwareSetUpdateSchedule = @import("software_set_update_schedule.zig").So
 /// Describes an environment.
 pub const Environment = struct {
     /// The activation code to register a device to the environment.
-    activation_code: ?[]const u8,
+    activation_code: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the environment.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The timestamp of when the environment was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The ID of the software set to apply.
-    desired_software_set_id: ?[]const u8,
+    desired_software_set_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the desktop to stream from Amazon
     /// WorkSpaces, WorkSpaces Secure Browser, or AppStream 2.0.
-    desktop_arn: ?[]const u8,
+    desktop_arn: ?[]const u8 = null,
 
     /// The URL for the identity provider login (only for environments that use
     /// AppStream 2.0).
-    desktop_endpoint: ?[]const u8,
+    desktop_endpoint: ?[]const u8 = null,
 
     /// The type of streaming desktop for the environment.
-    desktop_type: ?DesktopType,
+    desktop_type: ?DesktopType = null,
 
     /// The tag keys and optional values for the newly created devices for this
     /// environment.
-    device_creation_tags: ?[]const aws.map.StringMapEntry,
+    device_creation_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The ID of the environment.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Key Management Service key used to
     /// encrypt the environment.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// A specification for a time window to apply software updates.
-    maintenance_window: ?MaintenanceWindow,
+    maintenance_window: ?MaintenanceWindow = null,
 
     /// The name of the environment.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the software set that is pending to be installed.
-    pending_software_set_id: ?[]const u8,
+    pending_software_set_id: ?[]const u8 = null,
 
     /// The version of the software set that is pending to be installed.
-    pending_software_set_version: ?[]const u8,
+    pending_software_set_version: ?[]const u8 = null,
 
     /// The number of devices registered to the environment.
-    registered_devices_count: ?i32,
+    registered_devices_count: ?i32 = null,
 
     /// Describes if the software currently installed on all devices in the
     /// environment is a supported version.
-    software_set_compliance_status: ?EnvironmentSoftwareSetComplianceStatus,
+    software_set_compliance_status: ?EnvironmentSoftwareSetComplianceStatus = null,
 
     /// An option to define which software updates to apply.
-    software_set_update_mode: ?SoftwareSetUpdateMode,
+    software_set_update_mode: ?SoftwareSetUpdateMode = null,
 
     /// An option to define if software updates should be applied within a
     /// maintenance window.
-    software_set_update_schedule: ?SoftwareSetUpdateSchedule,
+    software_set_update_schedule: ?SoftwareSetUpdateSchedule = null,
 
     /// The timestamp of when the device was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .activation_code = "activationCode",

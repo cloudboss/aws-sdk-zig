@@ -4,7 +4,7 @@
 /// configuration.
 pub const Source = struct {
     /// The plugin name of the source, such as `cloudwatch_logs` or `s3`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

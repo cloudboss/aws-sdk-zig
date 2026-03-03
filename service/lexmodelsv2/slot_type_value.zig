@@ -5,10 +5,10 @@ const SampleValue = @import("sample_value.zig").SampleValue;
 /// take.
 pub const SlotTypeValue = struct {
     /// The value of the slot type entry.
-    sample_value: ?SampleValue,
+    sample_value: ?SampleValue = null,
 
     /// Additional values related to the slot type entry.
-    synonyms: ?[]const SampleValue,
+    synonyms: ?[]const SampleValue = null,
 
     pub const json_field_names = .{
         .sample_value = "sampleValue",

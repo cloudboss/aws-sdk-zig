@@ -15,13 +15,13 @@ pub const AssessmentRunNotification = struct {
     event: InspectorEvent,
 
     /// The message included in the notification.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status code of the SNS notification.
-    sns_publish_status_code: ?AssessmentRunNotificationSnsStatusCode,
+    sns_publish_status_code: ?AssessmentRunNotificationSnsStatusCode = null,
 
     /// The SNS topic to which the SNS notification is sent.
-    sns_topic_arn: ?[]const u8,
+    sns_topic_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .date = "date",

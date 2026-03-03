@@ -13,10 +13,10 @@ const NetworkInterfaceStatus = @import("network_interface_status.zig").NetworkIn
 pub const InstanceNetworkInterface = struct {
     /// The association information for an Elastic IPv4 associated with the network
     /// interface.
-    association: ?InstanceNetworkInterfaceAssociation,
+    association: ?InstanceNetworkInterfaceAssociation = null,
 
     /// The network interface attachment.
-    attachment: ?InstanceNetworkInterfaceAttachment,
+    attachment: ?InstanceNetworkInterfaceAttachment = null,
 
     /// A security group connection tracking configuration that enables you to set
     /// the timeout
@@ -25,60 +25,60 @@ pub const InstanceNetworkInterface = struct {
     /// [Connection tracking
     /// timeouts](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts) in the
     /// *Amazon EC2 User Guide*.
-    connection_tracking_configuration: ?ConnectionTrackingSpecificationResponse,
+    connection_tracking_configuration: ?ConnectionTrackingSpecificationResponse = null,
 
     /// The description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The security groups.
-    groups: ?[]const GroupIdentifier,
+    groups: ?[]const GroupIdentifier = null,
 
     /// The type of network interface.
     ///
     /// Valid values: `interface` | `efa` | `efa-only` | `evs` |
     /// `trunk`
-    interface_type: ?[]const u8,
+    interface_type: ?[]const u8 = null,
 
     /// The IPv4 delegated prefixes that are assigned to the network interface.
-    ipv_4_prefixes: ?[]const InstanceIpv4Prefix,
+    ipv_4_prefixes: ?[]const InstanceIpv4Prefix = null,
 
     /// The IPv6 addresses associated with the network interface.
-    ipv_6_addresses: ?[]const InstanceIpv6Address,
+    ipv_6_addresses: ?[]const InstanceIpv6Address = null,
 
     /// The IPv6 delegated prefixes that are assigned to the network interface.
-    ipv_6_prefixes: ?[]const InstanceIpv6Prefix,
+    ipv_6_prefixes: ?[]const InstanceIpv6Prefix = null,
 
     /// The MAC address.
-    mac_address: ?[]const u8,
+    mac_address: ?[]const u8 = null,
 
     /// The ID of the network interface.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// The service provider that manages the network interface.
-    operator: ?OperatorResponse,
+    operator: ?OperatorResponse = null,
 
     /// The ID of the Amazon Web Services account that created the network
     /// interface.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The private DNS name.
-    private_dns_name: ?[]const u8,
+    private_dns_name: ?[]const u8 = null,
 
     /// The IPv4 address of the network interface within the subnet.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// The private IPv4 addresses associated with the network interface.
-    private_ip_addresses: ?[]const InstancePrivateIpAddress,
+    private_ip_addresses: ?[]const InstancePrivateIpAddress = null,
 
     /// Indicates whether source/destination checking is enabled.
-    source_dest_check: ?bool,
+    source_dest_check: ?bool = null,
 
     /// The status of the network interface.
-    status: ?NetworkInterfaceStatus,
+    status: ?NetworkInterfaceStatus = null,
 
     /// The ID of the subnet.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The ID of the VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

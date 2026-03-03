@@ -4,13 +4,13 @@ const ServiceName = @import("service_name.zig").ServiceName;
 /// The details for a backend storage resource.
 pub const GetBackendStorageResourceConfig = struct {
     /// The name of the S3 bucket.
-    bucket_name: ?[]const u8,
+    bucket_name: ?[]const u8 = null,
 
     /// Returns True if the storage resource has been imported.
     imported: bool,
 
     /// The authorization configuration for the storage S3 bucket.
-    permissions: ?BackendStoragePermissions,
+    permissions: ?BackendStoragePermissions = null,
 
     /// The name of the storage service.
     service_name: ServiceName,

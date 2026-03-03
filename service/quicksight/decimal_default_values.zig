@@ -4,10 +4,10 @@ const DynamicDefaultValue = @import("dynamic_default_value.zig").DynamicDefaultV
 pub const DecimalDefaultValues = struct {
     /// The dynamic value of the `DecimalDefaultValues`. Different defaults are
     /// displayed according to users, groups, and values mapping.
-    dynamic_value: ?DynamicDefaultValue,
+    dynamic_value: ?DynamicDefaultValue = null,
 
     /// The static values of the `DecimalDefaultValues`.
-    static_values: ?[]const f64,
+    static_values: ?[]const f64 = null,
 
     pub const json_field_names = .{
         .dynamic_value = "DynamicValue",

@@ -2,7 +2,7 @@
 /// along with the percentage of queried log events in which each field appears.
 pub const LogGroupField = struct {
     /// The name of a log field.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The percentage of log events queried that contained the field.
     percent: i32 = 0,

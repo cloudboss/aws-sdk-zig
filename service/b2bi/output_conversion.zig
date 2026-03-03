@@ -6,11 +6,11 @@ const ToFormat = @import("to_format.zig").ToFormat;
 /// XML as input and converts it to an EDI document (currently only X12 format
 /// is supported).
 pub const OutputConversion = struct {
-    advanced_options: ?AdvancedOptions,
+    advanced_options: ?AdvancedOptions = null,
 
     /// A structure that contains the X12 transaction set and version for the
     /// transformer output.
-    format_options: ?FormatOptions,
+    format_options: ?FormatOptions = null,
 
     /// The format for the output from an outbound transformer: only X12 is
     /// currently supported.

@@ -8,22 +8,22 @@ const LambdaFunctionMetadata = @import("lambda_function_metadata.zig").LambdaFun
 /// resource.
 pub const ResourceScanMetadata = struct {
     /// Contains metadata about scan coverage for a code repository resource.
-    code_repository: ?CodeRepositoryMetadata,
+    code_repository: ?CodeRepositoryMetadata = null,
 
     /// An object that contains metadata details for an Amazon EC2 instance.
-    ec_2: ?Ec2Metadata,
+    ec_2: ?Ec2Metadata = null,
 
     /// An object that contains details about the container metadata for an Amazon
     /// ECR image.
-    ecr_image: ?EcrContainerImageMetadata,
+    ecr_image: ?EcrContainerImageMetadata = null,
 
     /// An object that contains details about the repository an Amazon ECR image
     /// resides in.
-    ecr_repository: ?EcrRepositoryMetadata,
+    ecr_repository: ?EcrRepositoryMetadata = null,
 
     /// An object that contains metadata details for an Amazon Web Services Lambda
     /// function.
-    lambda_function: ?LambdaFunctionMetadata,
+    lambda_function: ?LambdaFunctionMetadata = null,
 
     pub const json_field_names = .{
         .code_repository = "codeRepository",

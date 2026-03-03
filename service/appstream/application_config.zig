@@ -12,24 +12,24 @@ pub const ApplicationConfig = struct {
     /// optional and can be 1-32767 characters. If not provided, the icon is derived
     /// from the executable. Use PNG images with proper transparency for the best
     /// user experience.
-    absolute_icon_path: ?[]const u8,
+    absolute_icon_path: ?[]const u8 = null,
 
     /// The absolute path to the prewarm manifest file for this application. This
     /// field is optional and only applicable when using application-specific
     /// manifests. The path can be 1-32767 characters and should point to a text
     /// file containing file paths to prewarm.
-    absolute_manifest_path: ?[]const u8,
+    absolute_manifest_path: ?[]const u8 = null,
 
     /// The display name shown to users for this application. This field is optional
     /// and can be 0-100 characters, matching the pattern ^[a-zA-Z0-9][a-zA-Z0-9_.
     /// -]{0,99}$.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The launch parameters to pass to the application executable. This field is
     /// optional and can be 0-1024 characters. Use escaped strings with the full
     /// list of required parameters, such as PowerShell script paths or command-line
     /// arguments.
-    launch_parameters: ?[]const u8,
+    launch_parameters: ?[]const u8 = null,
 
     /// The name of the application. This is a required field that must be unique
     /// within the application catalog and between 1-100 characters, matching the
@@ -39,7 +39,7 @@ pub const ApplicationConfig = struct {
     /// The working directory to use when launching the application. This field is
     /// optional and can be 0-32767 characters. Use escaped file path strings like
     /// "C:\\\\Path\\\\To\\\\Working\\\\Directory".
-    working_directory: ?[]const u8,
+    working_directory: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .absolute_app_path = "AbsoluteAppPath",

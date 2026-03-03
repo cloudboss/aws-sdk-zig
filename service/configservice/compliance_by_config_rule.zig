@@ -6,10 +6,10 @@ const Compliance = @import("compliance.zig").Compliance;
 /// comply.
 pub const ComplianceByConfigRule = struct {
     /// Indicates whether the Config rule is compliant.
-    compliance: ?Compliance,
+    compliance: ?Compliance = null,
 
     /// The name of the Config rule.
-    config_rule_name: ?[]const u8,
+    config_rule_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .compliance = "Compliance",

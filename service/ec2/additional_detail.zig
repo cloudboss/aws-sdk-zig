@@ -8,26 +8,26 @@ const RuleOption = @import("rule_option.zig").RuleOption;
 /// codes](https://docs.aws.amazon.com/vpc/latest/reachability/additional-detail-codes.html).
 pub const AdditionalDetail = struct {
     /// The additional detail code.
-    additional_detail_type: ?[]const u8,
+    additional_detail_type: ?[]const u8 = null,
 
     /// The path component.
-    component: ?AnalysisComponent,
+    component: ?AnalysisComponent = null,
 
     /// The load balancers.
-    load_balancers: ?[]const AnalysisComponent,
+    load_balancers: ?[]const AnalysisComponent = null,
 
     /// The rule options.
-    rule_group_rule_options_pairs: ?[]const RuleGroupRuleOptionsPair,
+    rule_group_rule_options_pairs: ?[]const RuleGroupRuleOptionsPair = null,
 
     /// The rule group type.
-    rule_group_type_pairs: ?[]const RuleGroupTypePair,
+    rule_group_type_pairs: ?[]const RuleGroupTypePair = null,
 
     /// The rule options.
-    rule_options: ?[]const RuleOption,
+    rule_options: ?[]const RuleOption = null,
 
     /// The name of the VPC endpoint service.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// The VPC endpoint service.
-    vpc_endpoint_service: ?AnalysisComponent,
+    vpc_endpoint_service: ?AnalysisComponent = null,
 };

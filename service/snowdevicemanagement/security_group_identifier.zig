@@ -1,10 +1,10 @@
 /// Information about the device's security group.
 pub const SecurityGroupIdentifier = struct {
     /// The security group ID.
-    group_id: ?[]const u8,
+    group_id: ?[]const u8 = null,
 
     /// The security group name.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .group_id = "groupId",

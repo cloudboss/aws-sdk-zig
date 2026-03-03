@@ -3,14 +3,14 @@ const WriteOperationType = @import("write_operation_type.zig").WriteOperationTyp
 
 /// The properties that are applied when Zendesk is used as a destination.
 pub const ZendeskDestinationProperties = struct {
-    error_handling_config: ?ErrorHandlingConfig,
+    error_handling_config: ?ErrorHandlingConfig = null,
 
-    id_field_names: ?[]const []const u8,
+    id_field_names: ?[]const []const u8 = null,
 
     /// The object specified in the Zendesk flow destination.
     object: []const u8,
 
-    write_operation_type: ?WriteOperationType,
+    write_operation_type: ?WriteOperationType = null,
 
     pub const json_field_names = .{
         .error_handling_config = "errorHandlingConfig",

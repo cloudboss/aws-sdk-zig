@@ -11,5 +11,5 @@ pub const LaunchTemplateNetworkPerformanceOptions = struct {
     /// instance remains the same. The default option uses the standard bandwidth
     /// configuration
     /// for your instance type.
-    bandwidth_weighting: ?InstanceBandwidthWeighting,
+    bandwidth_weighting: ?InstanceBandwidthWeighting = null,
 };

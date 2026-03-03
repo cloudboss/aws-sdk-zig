@@ -46,7 +46,7 @@ pub const LanguageIdSettings = struct {
     /// language model isn't applied. There are no errors or warnings associated
     /// with a language
     /// mismatch.
-    language_model_name: ?[]const u8,
+    language_model_name: ?[]const u8 = null,
 
     /// The name of the custom vocabulary filter you want to use when processing
     /// your
@@ -62,7 +62,7 @@ pub const LanguageIdSettings = struct {
     ///
     /// Note that if you include `VocabularyFilterName` in your request, you must
     /// also include `VocabularyFilterMethod`.
-    vocabulary_filter_name: ?[]const u8,
+    vocabulary_filter_name: ?[]const u8 = null,
 
     /// The name of the custom vocabulary you want to use when processing your
     /// transcription
@@ -75,7 +75,7 @@ pub const LanguageIdSettings = struct {
     /// vocabulary isn't applied. There are no errors or warnings associated with a
     /// language
     /// mismatch.
-    vocabulary_name: ?[]const u8,
+    vocabulary_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .language_model_name = "LanguageModelName",

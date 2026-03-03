@@ -11,13 +11,13 @@ pub const DataQualityGlueTable = struct {
     ///
     /// * `catalogPartitionPredicate`: to use server-side partition pruning using
     ///   partition indexes in the Glue Data Catalog.
-    additional_options: ?[]const aws.map.StringMapEntry,
+    additional_options: ?[]const aws.map.StringMapEntry = null,
 
     /// A unique identifier for the Glue Data Catalog.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The name of the connection to the Glue Data Catalog.
-    connection_name: ?[]const u8,
+    connection_name: ?[]const u8 = null,
 
     /// A database name in the Glue Data Catalog.
     database_name: []const u8,
@@ -25,7 +25,7 @@ pub const DataQualityGlueTable = struct {
     /// SQL Query of SparkSQL format that can be used to pre-process the data for
     /// the table in Glue Data Catalog,
     /// before running the Data Quality Operation.
-    pre_processing_query: ?[]const u8,
+    pre_processing_query: ?[]const u8 = null,
 
     /// A table name in the Glue Data Catalog.
     table_name: []const u8,

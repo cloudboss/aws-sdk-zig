@@ -5,21 +5,21 @@ const CodeLine = @import("code_line.zig").CodeLine;
 pub const FilePath = struct {
     /// A list of `CodeLine` objects that describe where the security vulnerability
     /// appears in your code.
-    code_snippet: ?[]const CodeLine,
+    code_snippet: ?[]const CodeLine = null,
 
     /// The last line number of the code snippet where the security vulnerability
     /// appears in your code.
-    end_line: ?i32,
+    end_line: ?i32 = null,
 
     /// The name of the file.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The path to the resource with the security vulnerability.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// The first line number of the code snippet where the security vulnerability
     /// appears in your code.
-    start_line: ?i32,
+    start_line: ?i32 = null,
 
     pub const json_field_names = .{
         .code_snippet = "codeSnippet",

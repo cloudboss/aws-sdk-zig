@@ -7,30 +7,30 @@ const Tag = @import("tag.zig").Tag;
 /// the resource CIDRs discovered by the associated resource discovery.
 pub const IpamResourceDiscoveryAssociation = struct {
     /// The IPAM ARN.
-    ipam_arn: ?[]const u8,
+    ipam_arn: ?[]const u8 = null,
 
     /// The IPAM ID.
-    ipam_id: ?[]const u8,
+    ipam_id: ?[]const u8 = null,
 
     /// The IPAM home Region.
-    ipam_region: ?[]const u8,
+    ipam_region: ?[]const u8 = null,
 
     /// The resource discovery association Amazon Resource Name (ARN).
-    ipam_resource_discovery_association_arn: ?[]const u8,
+    ipam_resource_discovery_association_arn: ?[]const u8 = null,
 
     /// The resource discovery association ID.
-    ipam_resource_discovery_association_id: ?[]const u8,
+    ipam_resource_discovery_association_id: ?[]const u8 = null,
 
     /// The resource discovery ID.
-    ipam_resource_discovery_id: ?[]const u8,
+    ipam_resource_discovery_id: ?[]const u8 = null,
 
     /// Defines if the resource discovery is the default. When you create an IPAM, a
     /// default resource discovery is created for your IPAM and it's associated with
     /// your IPAM.
-    is_default: ?bool,
+    is_default: ?bool = null,
 
     /// The Amazon Web Services account ID of the resource discovery owner.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The resource discovery status.
     ///
@@ -42,7 +42,7 @@ pub const IpamResourceDiscoveryAssociation = struct {
     /// of the resource discovery stopped sharing it or deleted the resource
     /// discovery. Verify the resource discovery still exists and the Amazon Web
     /// Services RAM resource share is still intact.
-    resource_discovery_status: ?IpamAssociatedResourceDiscoveryStatus,
+    resource_discovery_status: ?IpamAssociatedResourceDiscoveryStatus = null,
 
     /// The lifecycle state of the association when you associate or disassociate a
     /// resource discovery.
@@ -66,10 +66,10 @@ pub const IpamResourceDiscoveryAssociation = struct {
     /// * `isolate-complete` - Resource discovery isolation is complete.
     ///
     /// * `restore-in-progress` - Resource discovery is being restored.
-    state: ?IpamResourceDiscoveryAssociationState,
+    state: ?IpamResourceDiscoveryAssociationState = null,
 
     /// A tag is a label that you assign to an Amazon Web Services resource. Each
     /// tag consists of a key and an optional value. You can use tags to search and
     /// filter your resources or track your Amazon Web Services costs.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

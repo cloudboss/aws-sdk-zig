@@ -4,21 +4,21 @@ const ZeroETLIntegrationStatus = @import("zero_etl_integration_status.zig").Zero
 /// The content of an inbound integration.
 pub const InboundIntegration = struct {
     /// The creation time of an inbound integration.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The outstanding errors of an inbound integration. Each item is an
     /// "IntegrationError". This is null if there is no error.
-    errors: ?[]const IntegrationError,
+    errors: ?[]const IntegrationError = null,
 
     /// The Amazon Resource Name (ARN) of an inbound integration.
-    integration_arn: ?[]const u8,
+    integration_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the source of an inbound integration.
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     /// The status of an inbound integration.
-    status: ?ZeroETLIntegrationStatus,
+    status: ?ZeroETLIntegrationStatus = null,
 
     /// The Amazon Resource Name (ARN) of the target of an inbound integration.
-    target_arn: ?[]const u8,
+    target_arn: ?[]const u8 = null,
 };

@@ -12,7 +12,7 @@ pub const LeadCustomer = struct {
     /// Indicates the customer's level of experience and adoption with AWS services.
     /// This assessment helps determine the appropriate engagement approach and
     /// solution complexity.
-    aws_maturity: ?[]const u8,
+    aws_maturity: ?[]const u8 = null,
 
     /// The name of the lead customer's company. This field is essential for
     /// identifying and tracking the customer organization associated with the lead.
@@ -21,17 +21,17 @@ pub const LeadCustomer = struct {
     /// Specifies the industry sector to which the lead customer's company belongs.
     /// This categorization helps in understanding the customer's business context
     /// and tailoring appropriate solutions.
-    industry: ?Industry,
+    industry: ?Industry = null,
 
     /// Specifies the market segment classification of the lead customer, such as
     /// enterprise, mid-market, or small business. This segmentation helps in
     /// targeting appropriate solutions and engagement strategies.
-    market_segment: ?MarketSegment,
+    market_segment: ?MarketSegment = null,
 
     /// The website URL of the lead customer's company. This provides additional
     /// context about the customer organization and helps verify company legitimacy
     /// and size.
-    website_url: ?[]const u8,
+    website_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .address = "Address",

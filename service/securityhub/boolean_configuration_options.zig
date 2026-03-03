@@ -3,7 +3,7 @@
 /// `true` and `false`.
 pub const BooleanConfigurationOptions = struct {
     /// The Security Hub default value for a boolean parameter.
-    default_value: ?bool,
+    default_value: ?bool = null,
 
     pub const json_field_names = .{
         .default_value = "DefaultValue",

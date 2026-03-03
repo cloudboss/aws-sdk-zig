@@ -10,7 +10,7 @@ const NodePropertyOverride = @import("node_property_override.zig").NodePropertyO
 /// provide it for these jobs. Rather, use `containerOverrides` instead.
 pub const NodeOverrides = struct {
     /// The node property overrides for the job.
-    node_property_overrides: ?[]const NodePropertyOverride,
+    node_property_overrides: ?[]const NodePropertyOverride = null,
 
     /// The number of nodes to use with a multi-node parallel job. This value
     /// overrides the number
@@ -29,7 +29,7 @@ pub const NodeOverrides = struct {
     /// * The main node index that's specified in the job definition must be fewer
     ///   than the number
     /// of nodes specified in the override.
-    num_nodes: ?i32,
+    num_nodes: ?i32 = null,
 
     pub const json_field_names = .{
         .node_property_overrides = "nodePropertyOverrides",

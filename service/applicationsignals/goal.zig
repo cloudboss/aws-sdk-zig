@@ -15,17 +15,17 @@ pub const Goal = struct {
     ///
     /// If you omit this parameter, 99 is used to represent 99% as the attainment
     /// goal.
-    attainment_goal: ?f64,
+    attainment_goal: ?f64 = null,
 
     /// The time period used to evaluate the SLO. It can be either a calendar
     /// interval or rolling interval.
     ///
     /// If you omit this parameter, a rolling interval of 7 days is used.
-    interval: ?Interval,
+    interval: ?Interval = null,
 
     /// The percentage of remaining budget over total budget that you want to get
     /// warnings for. If you omit this parameter, the default of 50.0 is used.
-    warning_threshold: ?f64,
+    warning_threshold: ?f64 = null,
 
     pub const json_field_names = .{
         .attainment_goal = "AttainmentGoal",

@@ -8,7 +8,7 @@ pub const FlowTransitEncryption = struct {
     encryption_key_configuration: FlowTransitEncryptionKeyConfiguration,
 
     /// The type of encryption key to use for flow transit encryption.
-    encryption_key_type: ?FlowTransitEncryptionKeyType,
+    encryption_key_type: ?FlowTransitEncryptionKeyType = null,
 
     pub const json_field_names = .{
         .encryption_key_configuration = "EncryptionKeyConfiguration",

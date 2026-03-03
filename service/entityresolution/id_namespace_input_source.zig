@@ -5,7 +5,7 @@ pub const IdNamespaceInputSource = struct {
     input_source_arn: []const u8,
 
     /// The name of the schema.
-    schema_name: ?[]const u8,
+    schema_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .input_source_arn = "inputSourceARN",

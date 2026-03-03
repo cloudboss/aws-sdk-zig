@@ -8,19 +8,19 @@ const SetupStatus = @import("setup_status.zig").SetupStatus;
 /// The status of each command is also returned.
 pub const SetupHistory = struct {
     /// Describes the full details of the request.
-    execution_details: ?[]const SetupExecutionDetails,
+    execution_details: ?[]const SetupExecutionDetails = null,
 
     /// A GUID that's used to identify the operation.
-    operation_id: ?[]const u8,
+    operation_id: ?[]const u8 = null,
 
     /// Information about the specified request.
-    request: ?SetupRequest,
+    request: ?SetupRequest = null,
 
     /// The target resource name for the request.
-    resource: ?SetupHistoryResource,
+    resource: ?SetupHistoryResource = null,
 
     /// The status of the request.
-    status: ?SetupStatus,
+    status: ?SetupStatus = null,
 
     pub const json_field_names = .{
         .execution_details = "executionDetails",

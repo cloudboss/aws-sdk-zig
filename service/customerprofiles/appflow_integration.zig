@@ -4,7 +4,7 @@ const FlowDefinition = @import("flow_definition.zig").FlowDefinition;
 /// Details for workflow of type `APPFLOW_INTEGRATION`.
 pub const AppflowIntegration = struct {
     /// Batches in workflow of type `APPFLOW_INTEGRATION`.
-    batches: ?[]const Batch,
+    batches: ?[]const Batch = null,
 
     flow_definition: FlowDefinition,
 

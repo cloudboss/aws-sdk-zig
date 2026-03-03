@@ -7,7 +7,7 @@ pub const ProductInformationFilter = struct {
     product_information_filter_name: []const u8,
 
     /// Filter value.
-    product_information_filter_value: ?[]const []const u8,
+    product_information_filter_value: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .product_information_filter_comparator = "ProductInformationFilterComparator",

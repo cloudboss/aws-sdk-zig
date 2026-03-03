@@ -11,11 +11,11 @@ const CreateConnectionOAuthRequestParameters = @import("create_connection_o_auth
 pub const CreateConnectionAuthRequestParameters = struct {
     /// The API
     /// key authorization parameters to use for the connection.
-    api_key_auth_parameters: ?CreateConnectionApiKeyAuthRequestParameters,
+    api_key_auth_parameters: ?CreateConnectionApiKeyAuthRequestParameters = null,
 
     /// The Basic
     /// authorization parameters to use for the connection.
-    basic_auth_parameters: ?CreateConnectionBasicAuthRequestParameters,
+    basic_auth_parameters: ?CreateConnectionBasicAuthRequestParameters = null,
 
     /// If you specify a private OAuth endpoint, the parameters for EventBridge to
     /// use when authenticating against the endpoint.
@@ -24,7 +24,7 @@ pub const CreateConnectionAuthRequestParameters = struct {
     /// connections](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-target-connection-auth.html) in the *
     /// Amazon EventBridge User Guide*
     /// .
-    connectivity_parameters: ?ConnectivityResourceParameters,
+    connectivity_parameters: ?ConnectivityResourceParameters = null,
 
     /// The API key authorization
     /// parameters to use for the connection. Note that if you include additional
@@ -32,11 +32,11 @@ pub const CreateConnectionAuthRequestParameters = struct {
     /// target of a rule via `HttpParameters`, including query strings, the
     /// parameters
     /// added for the connection take precedence.
-    invocation_http_parameters: ?ConnectionHttpParameters,
+    invocation_http_parameters: ?ConnectionHttpParameters = null,
 
     /// The OAuth
     /// authorization parameters to use for the connection.
-    o_auth_parameters: ?CreateConnectionOAuthRequestParameters,
+    o_auth_parameters: ?CreateConnectionOAuthRequestParameters = null,
 
     pub const json_field_names = .{
         .api_key_auth_parameters = "ApiKeyAuthParameters",

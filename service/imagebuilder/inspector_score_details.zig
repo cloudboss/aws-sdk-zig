@@ -7,7 +7,7 @@ pub const InspectorScoreDetails = struct {
     /// An object that contains details about an adjustment that Amazon Inspector
     /// made to the CVSS score
     /// for the finding.
-    adjusted_cvss: ?CvssScoreDetails,
+    adjusted_cvss: ?CvssScoreDetails = null,
 
     pub const json_field_names = .{
         .adjusted_cvss = "adjustedCvss",

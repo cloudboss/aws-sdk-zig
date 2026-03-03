@@ -10,15 +10,15 @@ pub const ReplicationStatusSummary = struct {
     /// The Amazon Web Services Region. This can be either the source or the replica
     /// Region, depending where it appears
     /// in the summary list.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The state of the replication.
-    replication_status: ?InstanceReplicationStatus,
+    replication_status: ?InstanceReplicationStatus = null,
 
     /// A description of the replication status. Use this information to resolve any
     /// issues that are preventing the
     /// successful replication of your Amazon Connect instance to another Region.
-    replication_status_reason: ?[]const u8,
+    replication_status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .region = "Region",

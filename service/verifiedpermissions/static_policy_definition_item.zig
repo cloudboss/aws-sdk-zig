@@ -5,7 +5,7 @@
 /// [PolicyDefinition](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinition.html) structure as part of a request parameter for the [CreatePolicy](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html) operation.
 pub const StaticPolicyDefinitionItem = struct {
     /// A description of the static policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "description",

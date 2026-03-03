@@ -4,13 +4,13 @@ const EdgePresetDeploymentType = @import("edge_preset_deployment_type.zig").Edge
 /// The output of a SageMaker Edge Manager deployable resource.
 pub const EdgePresetDeploymentOutput = struct {
     /// The Amazon Resource Name (ARN) of the generated deployable resource.
-    artifact: ?[]const u8,
+    artifact: ?[]const u8 = null,
 
     /// The status of the deployable resource.
-    status: ?EdgePresetDeploymentStatus,
+    status: ?EdgePresetDeploymentStatus = null,
 
     /// Returns a message describing the status of the deployed resource.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The deployment type created by SageMaker Edge Manager. Currently only
     /// supports Amazon Web Services IoT Greengrass Version 2 components.

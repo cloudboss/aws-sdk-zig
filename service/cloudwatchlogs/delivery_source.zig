@@ -41,27 +41,27 @@ const aws = @import("aws");
 pub const DeliverySource = struct {
     /// The Amazon Resource Name (ARN) that uniquely identifies this delivery
     /// source.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The type of log that the source is sending. For valid values for this
     /// parameter, see the
     /// documentation for the source service.
-    log_type: ?[]const u8,
+    log_type: ?[]const u8 = null,
 
     /// The unique name of the delivery source.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// This array contains the ARN of the Amazon Web Services resource that sends
     /// logs and is
     /// represented by this delivery source. Currently, only one ARN can be in the
     /// array.
-    resource_arns: ?[]const []const u8,
+    resource_arns: ?[]const []const u8 = null,
 
     /// The Amazon Web Services service that is sending logs.
-    service: ?[]const u8,
+    service: ?[]const u8 = null,
 
     /// The tags that have been assigned to this delivery source.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

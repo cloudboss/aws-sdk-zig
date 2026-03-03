@@ -13,7 +13,7 @@ pub const TargetGroupInfo = struct {
     /// instances are deregistered from, so they are not serving traffic during a
     /// deployment,
     /// and then re-registered with after the deployment is complete.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

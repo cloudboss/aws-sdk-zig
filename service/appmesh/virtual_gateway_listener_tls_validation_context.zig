@@ -8,7 +8,7 @@ pub const VirtualGatewayListenerTlsValidationContext = struct {
     /// A reference to an object that represents the SANs for a virtual gateway
     /// listener's Transport Layer Security (TLS)
     /// validation context.
-    subject_alternative_names: ?SubjectAlternativeNames,
+    subject_alternative_names: ?SubjectAlternativeNames = null,
 
     /// A reference to where to retrieve the trust chain when validating a peer’s
     /// Transport Layer Security (TLS)

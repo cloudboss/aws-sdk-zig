@@ -16,7 +16,7 @@ pub const ConnectedHomeSettings = struct {
     labels: []const []const u8,
 
     /// The minimum confidence required to label an object in the video.
-    min_confidence: ?f32,
+    min_confidence: ?f32 = null,
 
     pub const json_field_names = .{
         .labels = "Labels",

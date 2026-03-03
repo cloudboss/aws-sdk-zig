@@ -5,7 +5,7 @@ pub const DeliverToMailboxAction = struct {
     /// A policy that states what to do in the case of failure. The action will fail
     /// if there are configuration errors. For example, the mailbox ARN is no longer
     /// valid.
-    action_failure_policy: ?ActionFailurePolicy,
+    action_failure_policy: ?ActionFailurePolicy = null,
 
     /// The Amazon Resource Name (ARN) of a WorkMail organization to deliver the
     /// email to.

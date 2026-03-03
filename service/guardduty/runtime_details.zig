@@ -5,10 +5,10 @@ const ProcessDetails = @import("process_details.zig").ProcessDetails;
 /// finding.
 pub const RuntimeDetails = struct {
     /// Additional information about the suspicious activity.
-    context: ?RuntimeContext,
+    context: ?RuntimeContext = null,
 
     /// Information about the observed process.
-    process: ?ProcessDetails,
+    process: ?ProcessDetails = null,
 
     pub const json_field_names = .{
         .context = "Context",

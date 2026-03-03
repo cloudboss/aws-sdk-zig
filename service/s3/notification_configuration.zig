@@ -8,19 +8,19 @@ const TopicConfiguration = @import("topic_configuration.zig").TopicConfiguration
 /// notifications are turned off for the bucket.
 pub const NotificationConfiguration = struct {
     /// Enables delivery of events to Amazon EventBridge.
-    event_bridge_configuration: ?EventBridgeConfiguration,
+    event_bridge_configuration: ?EventBridgeConfiguration = null,
 
     /// Describes the Lambda functions to invoke and the events for which to invoke
     /// them.
-    lambda_function_configurations: ?[]const LambdaFunctionConfiguration,
+    lambda_function_configurations: ?[]const LambdaFunctionConfiguration = null,
 
     /// The Amazon Simple Queue Service queues to publish messages to and the events
     /// for which to publish
     /// messages.
-    queue_configurations: ?[]const QueueConfiguration,
+    queue_configurations: ?[]const QueueConfiguration = null,
 
     /// The topic to which notifications are sent and the events for which
     /// notifications are
     /// generated.
-    topic_configurations: ?[]const TopicConfiguration,
+    topic_configurations: ?[]const TopicConfiguration = null,
 };

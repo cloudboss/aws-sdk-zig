@@ -10,7 +10,7 @@ pub const PushNotificationPreferences = struct {
 
     /// The simple JSON object used to send a subset of a push notification to the
     /// requested member.
-    filter_rule: ?[]const u8,
+    filter_rule: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allow_notifications = "AllowNotifications",

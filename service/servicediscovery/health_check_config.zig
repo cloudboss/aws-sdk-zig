@@ -84,7 +84,7 @@ pub const HealthCheckConfig = struct {
     /// Determines Whether an Endpoint Is
     /// Healthy](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html) in the
     /// *Route 53 Developer Guide*.
-    failure_threshold: ?i32,
+    failure_threshold: ?i32 = null,
 
     /// The path that you want Route 53 to request when performing health checks.
     /// The path can be any
@@ -98,7 +98,7 @@ pub const HealthCheckConfig = struct {
     ///
     /// If you specify `TCP` for `Type`, you must *not*
     /// specify a value for `ResourcePath`.
-    resource_path: ?[]const u8,
+    resource_path: ?[]const u8 = null,
 
     /// The type of health check that you want to create, which indicates how
     /// Route 53 determines

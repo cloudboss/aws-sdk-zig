@@ -27,110 +27,110 @@ const UpperCaseString = @import("upper_case_string.zig").UpperCaseString;
 pub const Processor = struct {
     /// Use this parameter to include the [
     /// addKeys](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-addKeys) processor in your transformer.
-    add_keys: ?AddKeys,
+    add_keys: ?AddKeys = null,
 
     /// Use this parameter to include the [
     /// copyValue](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-copyValue) processor in your transformer.
-    copy_value: ?CopyValue,
+    copy_value: ?CopyValue = null,
 
     /// Use this parameter to include the [
     /// CSV](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-CSV) processor in your transformer.
-    csv: ?CSV,
+    csv: ?CSV = null,
 
     /// Use this parameter to include the [
     /// datetimeConverter](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-datetimeConverter) processor in your transformer.
-    date_time_converter: ?DateTimeConverter,
+    date_time_converter: ?DateTimeConverter = null,
 
     /// Use this parameter to include the [
     /// deleteKeys](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-deleteKeys) processor in your transformer.
-    delete_keys: ?DeleteKeys,
+    delete_keys: ?DeleteKeys = null,
 
     /// Use this parameter to include the [
     /// grok](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-grok) processor in your transformer.
-    grok: ?Grok,
+    grok: ?Grok = null,
 
     /// Use this parameter to include the [
     /// listToMap](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-listToMap) processor in your transformer.
-    list_to_map: ?ListToMap,
+    list_to_map: ?ListToMap = null,
 
     /// Use this parameter to include the [
     /// lowerCaseString](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-lowerCaseString) processor in your transformer.
-    lower_case_string: ?LowerCaseString,
+    lower_case_string: ?LowerCaseString = null,
 
     /// Use this parameter to include the [
     /// moveKeys](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-moveKeys) processor in your transformer.
-    move_keys: ?MoveKeys,
+    move_keys: ?MoveKeys = null,
 
     /// Use this parameter to include the [
     /// parseCloudfront](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseCloudfront) processor in your transformer.
     ///
     /// If you use this processor, it must be the first processor in your
     /// transformer.
-    parse_cloudfront: ?ParseCloudfront,
+    parse_cloudfront: ?ParseCloudfront = null,
 
     /// Use this parameter to include the [
     /// parseJSON](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseJSON) processor in your transformer.
-    parse_json: ?ParseJSON,
+    parse_json: ?ParseJSON = null,
 
     /// Use this parameter to include the [
     /// parseKeyValue](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseKeyValue) processor in your transformer.
-    parse_key_value: ?ParseKeyValue,
+    parse_key_value: ?ParseKeyValue = null,
 
     /// Use this parameter to include the [
     /// parsePostGres](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parsePostGres) processor in your transformer.
     ///
     /// If you use this processor, it must be the first processor in your
     /// transformer.
-    parse_postgres: ?ParsePostgres,
+    parse_postgres: ?ParsePostgres = null,
 
     /// Use this parameter to include the [
     /// parseRoute53](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseRoute53) processor in your transformer.
     ///
     /// If you use this processor, it must be the first processor in your
     /// transformer.
-    parse_route_53: ?ParseRoute53,
+    parse_route_53: ?ParseRoute53 = null,
 
     /// Use this parameter to convert logs into Open Cybersecurity Schema (OCSF)
     /// format.
-    parse_to_ocsf: ?ParseToOCSF,
+    parse_to_ocsf: ?ParseToOCSF = null,
 
     /// Use this parameter to include the [
     /// parseVPC](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseVPC) processor in your transformer.
     ///
     /// If you use this processor, it must be the first processor in your
     /// transformer.
-    parse_vpc: ?ParseVPC,
+    parse_vpc: ?ParseVPC = null,
 
     /// Use this parameter to include the [
     /// parseWAF](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseWAF) processor in your transformer.
     ///
     /// If you use this processor, it must be the first processor in your
     /// transformer.
-    parse_waf: ?ParseWAF,
+    parse_waf: ?ParseWAF = null,
 
     /// Use this parameter to include the [
     /// renameKeys](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-renameKeys) processor in your transformer.
-    rename_keys: ?RenameKeys,
+    rename_keys: ?RenameKeys = null,
 
     /// Use this parameter to include the [
     /// splitString](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-splitString) processor in your transformer.
-    split_string: ?SplitString,
+    split_string: ?SplitString = null,
 
     /// Use this parameter to include the [
     /// substituteString](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-substituteString) processor in your transformer.
-    substitute_string: ?SubstituteString,
+    substitute_string: ?SubstituteString = null,
 
     /// Use this parameter to include the [
     /// trimString](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-trimString) processor in your transformer.
-    trim_string: ?TrimString,
+    trim_string: ?TrimString = null,
 
     /// Use this parameter to include the [
     /// typeConverter](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-typeConverter) processor in your transformer.
-    type_converter: ?TypeConverter,
+    type_converter: ?TypeConverter = null,
 
     /// Use this parameter to include the [
     /// upperCaseString](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-upperCaseString) processor in your transformer.
-    upper_case_string: ?UpperCaseString,
+    upper_case_string: ?UpperCaseString = null,
 
     pub const json_field_names = .{
         .add_keys = "addKeys",

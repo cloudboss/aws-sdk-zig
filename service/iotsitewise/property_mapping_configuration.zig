@@ -17,7 +17,7 @@ pub const PropertyMappingConfiguration = struct {
     /// A list of specific property mappings that override the automatic mapping by
     /// name when an
     /// interface is applied to an asset model.
-    overrides: ?[]const PropertyMapping,
+    overrides: ?[]const PropertyMapping = null,
 
     pub const json_field_names = .{
         .create_missing_property = "createMissingProperty",

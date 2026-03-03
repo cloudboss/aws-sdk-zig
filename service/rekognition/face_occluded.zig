@@ -16,7 +16,7 @@
 pub const FaceOccluded = struct {
     /// The confidence that the service has detected the presence of a face
     /// occlusion.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// True if a detected face’s eyes, nose, and mouth are partially captured or if
     /// they are

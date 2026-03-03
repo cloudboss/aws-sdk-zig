@@ -10,10 +10,10 @@ pub const PeriodicScanConfiguration = struct {
     /// to run. If you provide the `frequencyExpression`, the schedule must match
     /// the
     /// specified `frequency`.
-    frequency: ?PeriodicScanFrequency,
+    frequency: ?PeriodicScanFrequency = null,
 
     /// The schedule expression for periodic scans, in cron format.
-    frequency_expression: ?[]const u8,
+    frequency_expression: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .frequency = "frequency",

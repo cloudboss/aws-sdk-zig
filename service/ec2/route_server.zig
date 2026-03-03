@@ -29,7 +29,7 @@ pub const RouteServer = struct {
     /// appliance. Valid values are from 1 to 4294967295. We recommend using a
     /// private ASN in the 64512–65534 (16-bit ASN) or 4200000000–4294967294 (32-bit
     /// ASN) range.
-    amazon_side_asn: ?i64,
+    amazon_side_asn: ?i64 = null,
 
     /// The number of minutes a route server will wait after BGP is re-established
     /// to unpersist the routes in the FIB and RIB. Value must be in the range of
@@ -43,25 +43,25 @@ pub const RouteServer = struct {
     /// sufficient. If, however, you have concerns that your BGP network may not be
     /// capable of fully re-establishing and re-learning everything in 1 minute, you
     /// can increase the duration up to 5 minutes.
-    persist_routes_duration: ?i64,
+    persist_routes_duration: ?i64 = null,
 
     /// The current state of route persistence for the route server.
-    persist_routes_state: ?RouteServerPersistRoutesState,
+    persist_routes_state: ?RouteServerPersistRoutesState = null,
 
     /// The unique identifier of the route server.
-    route_server_id: ?[]const u8,
+    route_server_id: ?[]const u8 = null,
 
     /// Indicates whether SNS notifications are enabled for the route server.
     /// Enabling SNS notifications persists BGP status changes to an SNS topic
     /// provisioned by Amazon Web Services.
-    sns_notifications_enabled: ?bool,
+    sns_notifications_enabled: ?bool = null,
 
     /// The ARN of the SNS topic where notifications are published.
-    sns_topic_arn: ?[]const u8,
+    sns_topic_arn: ?[]const u8 = null,
 
     /// The current state of the route server.
-    state: ?RouteServerState,
+    state: ?RouteServerState = null,
 
     /// Any tags assigned to the route server.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

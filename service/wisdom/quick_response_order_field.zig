@@ -32,7 +32,7 @@ pub const QuickResponseOrderField = struct {
     name: []const u8,
 
     /// The order at which the quick responses are sorted by.
-    order: ?Order,
+    order: ?Order = null,
 
     pub const json_field_names = .{
         .name = "name",

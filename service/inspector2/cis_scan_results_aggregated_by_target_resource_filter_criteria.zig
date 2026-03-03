@@ -8,31 +8,31 @@ const CisTargetStatusReasonFilter = @import("cis_target_status_reason_filter.zig
 /// The scan results aggregated by target resource filter criteria.
 pub const CisScanResultsAggregatedByTargetResourceFilterCriteria = struct {
     /// The criteria's account ID filters.
-    account_id_filters: ?[]const CisStringFilter,
+    account_id_filters: ?[]const CisStringFilter = null,
 
     /// The criteria's check ID filters.
-    check_id_filters: ?[]const CisStringFilter,
+    check_id_filters: ?[]const CisStringFilter = null,
 
     /// The criteria's failed checks filters.
-    failed_checks_filters: ?[]const CisNumberFilter,
+    failed_checks_filters: ?[]const CisNumberFilter = null,
 
     /// The criteria's platform filters.
-    platform_filters: ?[]const CisStringFilter,
+    platform_filters: ?[]const CisStringFilter = null,
 
     /// The criteria's status filter.
-    status_filters: ?[]const CisResultStatusFilter,
+    status_filters: ?[]const CisResultStatusFilter = null,
 
     /// The criteria's target resource ID filters.
-    target_resource_id_filters: ?[]const CisStringFilter,
+    target_resource_id_filters: ?[]const CisStringFilter = null,
 
     /// The criteria's target resource tag filters.
-    target_resource_tag_filters: ?[]const TagFilter,
+    target_resource_tag_filters: ?[]const TagFilter = null,
 
     /// The criteria's target status filters.
-    target_status_filters: ?[]const CisTargetStatusFilter,
+    target_status_filters: ?[]const CisTargetStatusFilter = null,
 
     /// The criteria's target status reason filters.
-    target_status_reason_filters: ?[]const CisTargetStatusReasonFilter,
+    target_status_reason_filters: ?[]const CisTargetStatusReasonFilter = null,
 
     pub const json_field_names = .{
         .account_id_filters = "accountIdFilters",

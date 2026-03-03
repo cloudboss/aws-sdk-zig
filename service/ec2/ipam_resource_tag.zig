@@ -6,8 +6,8 @@
 pub const IpamResourceTag = struct {
     /// The key of a tag assigned to the resource. Use this filter to find all
     /// resources assigned a tag with a specific key, regardless of the tag value.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value of the tag.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

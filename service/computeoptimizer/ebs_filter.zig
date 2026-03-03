@@ -35,12 +35,12 @@ pub const EBSFilter = struct {
     /// your Amazon EBS volume recommendations with a tag key value of `Owner` or
     /// without any tag
     /// keys assigned.
-    name: ?EBSFilterName,
+    name: ?EBSFilterName = null,
 
     /// The value of the filter.
     ///
     /// The valid values are `Optimized`, or `NotOptimized`.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

@@ -5,19 +5,19 @@ const TaskCredentials = @import("task_credentials.zig").TaskCredentials;
 pub const LambdaFunctionScheduledEventDetails = struct {
     /// The JSON data input to the Lambda function. Length constraints apply to the
     /// payload size, and are expressed as bytes in UTF-8 encoding.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// Contains details about input for an execution history event.
-    input_details: ?HistoryEventExecutionDataDetails,
+    input_details: ?HistoryEventExecutionDataDetails = null,
 
     /// The Amazon Resource Name (ARN) of the scheduled Lambda function.
     resource: []const u8,
 
     /// The credentials that Step Functions uses for the task.
-    task_credentials: ?TaskCredentials,
+    task_credentials: ?TaskCredentials = null,
 
     /// The maximum allowed duration of the Lambda function.
-    timeout_in_seconds: ?i64,
+    timeout_in_seconds: ?i64 = null,
 
     pub const json_field_names = .{
         .input = "input",

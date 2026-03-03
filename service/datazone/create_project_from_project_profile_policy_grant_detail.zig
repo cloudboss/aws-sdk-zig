@@ -3,11 +3,11 @@
 pub const CreateProjectFromProjectProfilePolicyGrantDetail = struct {
     /// Specifies whether to include child domain units when creating a project from
     /// project profile policy grant details
-    include_child_domain_units: ?bool,
+    include_child_domain_units: ?bool = null,
 
     /// Specifies project profiles when creating a project from project profile
     /// policy grant details
-    project_profiles: ?[]const []const u8,
+    project_profiles: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .include_child_domain_units = "includeChildDomainUnits",

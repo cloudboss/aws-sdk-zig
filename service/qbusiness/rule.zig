@@ -6,13 +6,13 @@ const RuleType = @import("rule_type.zig").RuleType;
 /// supports only one rule at a time.
 pub const Rule = struct {
     /// Users and groups to be excluded from a rule.
-    excluded_users_and_groups: ?UsersAndGroups,
+    excluded_users_and_groups: ?UsersAndGroups = null,
 
     /// Users and groups to be included in a rule.
-    included_users_and_groups: ?UsersAndGroups,
+    included_users_and_groups: ?UsersAndGroups = null,
 
     /// The configuration information for a rule.
-    rule_configuration: ?RuleConfiguration,
+    rule_configuration: ?RuleConfiguration = null,
 
     /// The type of rule.
     rule_type: RuleType,

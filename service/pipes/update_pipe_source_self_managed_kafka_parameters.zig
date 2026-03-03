@@ -15,20 +15,20 @@ const SelfManagedKafkaAccessConfigurationVpc = @import("self_managed_kafka_acces
 /// source](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html) in the *Amazon EventBridge User Guide*.
 pub const UpdatePipeSourceSelfManagedKafkaParameters = struct {
     /// The maximum number of records to include in each batch.
-    batch_size: ?i32,
+    batch_size: ?i32 = null,
 
     /// The credentials needed to access the resource.
-    credentials: ?SelfManagedKafkaAccessConfigurationCredentials,
+    credentials: ?SelfManagedKafkaAccessConfigurationCredentials = null,
 
     /// The maximum length of a time to wait for events.
-    maximum_batching_window_in_seconds: ?i32,
+    maximum_batching_window_in_seconds: ?i32 = null,
 
     /// The ARN of the Secrets Manager secret used for certification.
-    server_root_ca_certificate: ?[]const u8,
+    server_root_ca_certificate: ?[]const u8 = null,
 
     /// This structure specifies the VPC subnets and security groups for the stream,
     /// and whether a public IP address is to be used.
-    vpc: ?SelfManagedKafkaAccessConfigurationVpc,
+    vpc: ?SelfManagedKafkaAccessConfigurationVpc = null,
 
     pub const json_field_names = .{
         .batch_size = "BatchSize",

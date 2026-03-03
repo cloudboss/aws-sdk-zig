@@ -1,10 +1,10 @@
 /// Information about the campaign.
 pub const SourceCampaign = struct {
     /// A unique identifier for a campaign.
-    campaign_id: ?[]const u8,
+    campaign_id: ?[]const u8 = null,
 
     /// A unique identifier for a each request part of same campaign.
-    outbound_request_id: ?[]const u8,
+    outbound_request_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .campaign_id = "CampaignId",

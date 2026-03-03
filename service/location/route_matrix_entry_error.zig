@@ -26,7 +26,7 @@ pub const RouteMatrixEntryError = struct {
     code: RouteMatrixErrorCode,
 
     /// A message about the error that occurred for the route calculation.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

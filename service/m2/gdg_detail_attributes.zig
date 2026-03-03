@@ -12,7 +12,7 @@ pub const GdgDetailAttributes = struct {
     limit: i32 = 0,
 
     /// The disposition of the data set in the catalog.
-    roll_disposition: ?[]const u8,
+    roll_disposition: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .limit = "limit",

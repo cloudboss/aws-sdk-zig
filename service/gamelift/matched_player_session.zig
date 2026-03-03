@@ -9,10 +9,10 @@
 /// player session ID in order to claim their assigned player slot.
 pub const MatchedPlayerSession = struct {
     /// A unique identifier for a player
-    player_id: ?[]const u8,
+    player_id: ?[]const u8 = null,
 
     /// A unique identifier for a player session
-    player_session_id: ?[]const u8,
+    player_session_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .player_id = "PlayerId",

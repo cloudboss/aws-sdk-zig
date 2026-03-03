@@ -6,7 +6,7 @@ const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 /// Organization Recommendation Resource Summary
 pub const OrganizationRecommendationResourceSummary = struct {
     /// The AWS account ID
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The ARN of the Recommendation Resource
     arn: []const u8,

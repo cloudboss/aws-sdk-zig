@@ -5,13 +5,13 @@ const ScanningConfigurationFailureCode = @import("scanning_configuration_failure
 /// repository.
 pub const RepositoryScanningConfigurationFailure = struct {
     /// The failure code.
-    failure_code: ?ScanningConfigurationFailureCode,
+    failure_code: ?ScanningConfigurationFailureCode = null,
 
     /// The reason for the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The name of the repository.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .failure_code = "failureCode",

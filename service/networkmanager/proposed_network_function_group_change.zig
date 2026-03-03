@@ -4,14 +4,14 @@ const Tag = @import("tag.zig").Tag;
 pub const ProposedNetworkFunctionGroupChange = struct {
     /// The proposed new attachment policy rule number for the network function
     /// group.
-    attachment_policy_rule_number: ?i32,
+    attachment_policy_rule_number: ?i32 = null,
 
     /// The proposed name change for the network function group name.
-    network_function_group_name: ?[]const u8,
+    network_function_group_name: ?[]const u8 = null,
 
     /// The list of proposed changes to the key-value tags associated with the
     /// network function group.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .attachment_policy_rule_number = "AttachmentPolicyRuleNumber",

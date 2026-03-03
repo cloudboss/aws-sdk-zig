@@ -8,12 +8,12 @@ pub const S3ObjectTag = struct {
     /// Constraints: Tag keys are case-sensitive and can be up to 128 Unicode
     /// characters in
     /// length. May not begin with `aws`:.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value of the tag.
     ///
     /// Constraints: Tag values are case-sensitive and can be up to 256 Unicode
     /// characters in
     /// length.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

@@ -4,7 +4,7 @@ pub const Authority = struct {
     country: []const u8,
 
     /// The state that the address is located.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .country = "country",

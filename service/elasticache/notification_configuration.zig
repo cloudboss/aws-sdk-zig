@@ -5,8 +5,8 @@
 /// (SNS).
 pub const NotificationConfiguration = struct {
     /// The Amazon Resource Name (ARN) that identifies the topic.
-    topic_arn: ?[]const u8,
+    topic_arn: ?[]const u8 = null,
 
     /// The current state of the topic.
-    topic_status: ?[]const u8,
+    topic_status: ?[]const u8 = null,
 };

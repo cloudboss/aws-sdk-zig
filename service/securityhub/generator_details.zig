@@ -7,15 +7,15 @@
 /// in collaboration with Amazon CodeGuru. Security Hub receives those findings.
 pub const GeneratorDetails = struct {
     /// The description of the detector used to identify the code vulnerability.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// An array of tags used to identify the detector associated with the finding.
     ///
     /// Array Members: Minimum number of 0 items. Maximum number of 10 items.
-    labels: ?[]const []const u8,
+    labels: ?[]const []const u8 = null,
 
     /// The name of the detector used to identify the code vulnerability.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

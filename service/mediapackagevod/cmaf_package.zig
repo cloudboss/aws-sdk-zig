@@ -3,7 +3,7 @@ const HlsManifest = @import("hls_manifest.zig").HlsManifest;
 
 /// A CMAF packaging configuration.
 pub const CmafPackage = struct {
-    encryption: ?CmafEncryption,
+    encryption: ?CmafEncryption = null,
 
     /// A list of HLS manifest configurations.
     hls_manifests: []const HlsManifest,
@@ -13,11 +13,11 @@ pub const CmafPackage = struct {
     /// (PPS), and Video Parameter Set (VPS) metadata in every video segment instead
     /// of in the init fragment. This lets you use different SPS/PPS/VPS settings
     /// for your assets during content playback.
-    include_encoder_configuration_in_segments: ?bool,
+    include_encoder_configuration_in_segments: ?bool = null,
 
     /// Duration (in seconds) of each fragment. Actual fragments will be
     /// rounded to the nearest multiple of the source fragment duration.
-    segment_duration_seconds: ?i32,
+    segment_duration_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .encryption = "Encryption",

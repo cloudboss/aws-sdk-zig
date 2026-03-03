@@ -9,17 +9,17 @@ pub const CreateProjectRequest = struct {
     /// project. Automatic retraining is done as a best effort. Required argument
     /// for Content
     /// Moderation. Applicable only to adapters.
-    auto_update: ?ProjectAutoUpdate,
+    auto_update: ?ProjectAutoUpdate = null,
 
     /// Specifies feature that is being customized. If no value is provided
     /// CUSTOM_LABELS is used as a default.
-    feature: ?CustomizationFeature,
+    feature: ?CustomizationFeature = null,
 
     /// The name of the project to create.
     project_name: []const u8,
 
     /// A set of tags (key-value pairs) that you want to attach to the project.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .auto_update = "AutoUpdate",

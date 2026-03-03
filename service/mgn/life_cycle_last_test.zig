@@ -5,13 +5,13 @@ const LifeCycleLastTestReverted = @import("life_cycle_last_test_reverted.zig").L
 /// Lifecycle last Test.
 pub const LifeCycleLastTest = struct {
     /// Lifecycle last Test finalized.
-    finalized: ?LifeCycleLastTestFinalized,
+    finalized: ?LifeCycleLastTestFinalized = null,
 
     /// Lifecycle last Test initiated.
-    initiated: ?LifeCycleLastTestInitiated,
+    initiated: ?LifeCycleLastTestInitiated = null,
 
     /// Lifecycle last Test reverted.
-    reverted: ?LifeCycleLastTestReverted,
+    reverted: ?LifeCycleLastTestReverted = null,
 
     pub const json_field_names = .{
         .finalized = "finalized",

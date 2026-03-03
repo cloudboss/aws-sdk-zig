@@ -5,10 +5,10 @@ const UnsearchedFaceReason = @import("unsearched_face_reason.zig").UnsearchedFac
 /// attribute
 /// contains reasons for why a face wasn't used for Search.
 pub const UnsearchedFace = struct {
-    face_details: ?FaceDetail,
+    face_details: ?FaceDetail = null,
 
     /// Reasons why a face wasn't used for Search.
-    reasons: ?[]const UnsearchedFaceReason,
+    reasons: ?[]const UnsearchedFaceReason = null,
 
     pub const json_field_names = .{
         .face_details = "FaceDetails",

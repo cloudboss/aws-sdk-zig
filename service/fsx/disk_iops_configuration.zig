@@ -19,13 +19,13 @@ pub const DiskIopsConfiguration = struct {
     ///
     /// Amazon FSx responds with an HTTP status code 400 (Bad Request) if the value
     /// of `Iops` is outside of the minimum or maximum values.
-    iops: ?i64,
+    iops: ?i64 = null,
 
     /// Specifies whether the file system is
     /// using the `AUTOMATIC` setting of SSD IOPS of 3 IOPS per GB of storage
     /// capacity, or
     /// if it using a `USER_PROVISIONED` value.
-    mode: ?DiskIopsConfigurationMode,
+    mode: ?DiskIopsConfigurationMode = null,
 
     pub const json_field_names = .{
         .iops = "Iops",

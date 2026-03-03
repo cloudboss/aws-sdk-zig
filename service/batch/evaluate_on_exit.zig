@@ -18,7 +18,7 @@ pub const EvaluateOnExit = struct {
     /// to be an exact match.
     ///
     /// The string can contain up to 512 characters.
-    on_exit_code: ?[]const u8,
+    on_exit_code: ?[]const u8 = null,
 
     /// Contains a glob pattern to match against the `Reason` returned for a job.
     /// The
@@ -27,7 +27,7 @@ pub const EvaluateOnExit = struct {
     /// (:), and white space (including spaces and tabs). It can optionally end with
     /// an asterisk (*) so
     /// that only the start of the string needs to be an exact match.
-    on_reason: ?[]const u8,
+    on_reason: ?[]const u8 = null,
 
     /// Contains a glob pattern to match against the `StatusReason` returned for a
     /// job.
@@ -36,7 +36,7 @@ pub const EvaluateOnExit = struct {
     /// colons (:), and white spaces (including spaces or tabs). It can optionally
     /// end with an asterisk (*)
     /// so that only the start of the string needs to be an exact match.
-    on_status_reason: ?[]const u8,
+    on_status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "action",

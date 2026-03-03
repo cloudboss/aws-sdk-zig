@@ -6,7 +6,7 @@ pub const OrganizationAggregationSource = struct {
     all_aws_regions: bool = false,
 
     /// The source regions being aggregated.
-    aws_regions: ?[]const []const u8,
+    aws_regions: ?[]const []const u8 = null,
 
     /// ARN of the IAM role used to retrieve Amazon Web Services Organization
     /// details

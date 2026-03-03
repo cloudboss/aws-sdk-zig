@@ -3,10 +3,10 @@ const MatterCluster = @import("matter_cluster.zig").MatterCluster;
 /// Structure describing a managed thing.
 pub const MatterEndpoint = struct {
     /// A list of Matter clusters for a managed thing.
-    clusters: ?[]const MatterCluster,
+    clusters: ?[]const MatterCluster = null,
 
     /// The Matter endpoint id.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .clusters = "clusters",

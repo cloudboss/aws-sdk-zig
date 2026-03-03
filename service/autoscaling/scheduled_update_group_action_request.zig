@@ -6,16 +6,16 @@ pub const ScheduledUpdateGroupActionRequest = struct {
     /// The desired capacity is the initial capacity of the Auto Scaling group after
     /// the scheduled
     /// action runs and the capacity it attempts to maintain.
-    desired_capacity: ?i32,
+    desired_capacity: ?i32 = null,
 
     /// The date and time for the recurring schedule to end, in UTC.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The maximum size of the Auto Scaling group.
-    max_size: ?i32,
+    max_size: ?i32 = null,
 
     /// The minimum size of the Auto Scaling group.
-    min_size: ?i32,
+    min_size: ?i32 = null,
 
     /// The recurring schedule for the action, in Unix cron syntax format. This
     /// format
@@ -31,7 +31,7 @@ pub const ScheduledUpdateGroupActionRequest = struct {
     /// starts and stops.
     ///
     /// Cron expressions use Universal Coordinated Time (UTC) by default.
-    recurrence: ?[]const u8,
+    recurrence: ?[]const u8 = null,
 
     /// The name of the scaling action.
     scheduled_action_name: []const u8,
@@ -48,7 +48,7 @@ pub const ScheduledUpdateGroupActionRequest = struct {
     /// If you try to schedule the action in the past, Amazon EC2 Auto Scaling
     /// returns an error
     /// message.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Specifies the time zone for a cron expression. If a time zone is not
     /// provided, UTC is
@@ -59,5 +59,5 @@ pub const ScheduledUpdateGroupActionRequest = struct {
     /// Time Zone Database (such as `Etc/GMT+9` or `Pacific/Tahiti`). For
     /// more information, see
     /// [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
-    time_zone: ?[]const u8,
+    time_zone: ?[]const u8 = null,
 };

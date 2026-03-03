@@ -2,7 +2,7 @@ const ControlPlaneAttributeFilter = @import("control_plane_attribute_filter.zig"
 
 /// A data table search filter.
 pub const DataTableSearchFilter = struct {
-    attribute_filter: ?ControlPlaneAttributeFilter,
+    attribute_filter: ?ControlPlaneAttributeFilter = null,
 
     pub const json_field_names = .{
         .attribute_filter = "AttributeFilter",

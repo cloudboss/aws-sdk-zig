@@ -16,7 +16,7 @@ const TargetTrackingScalingPolicyConfiguration = @import("target_tracking_scalin
 /// *Application Auto Scaling User Guide*.
 pub const ScalingPolicy = struct {
     /// The CloudWatch alarms associated with the scaling policy.
-    alarms: ?[]const Alarm,
+    alarms: ?[]const Alarm = null,
 
     /// The Unix timestamp for when the scaling policy was created.
     creation_time: i64,
@@ -41,7 +41,7 @@ pub const ScalingPolicy = struct {
     policy_type: PolicyType,
 
     /// The predictive scaling policy configuration.
-    predictive_scaling_policy_configuration: ?PredictiveScalingPolicyConfiguration,
+    predictive_scaling_policy_configuration: ?PredictiveScalingPolicyConfiguration = null,
 
     /// The identifier of the resource associated with the scaling policy.
     /// This string consists of the resource type and unique identifier.
@@ -216,10 +216,10 @@ pub const ScalingPolicy = struct {
     service_namespace: ServiceNamespace,
 
     /// A step scaling policy.
-    step_scaling_policy_configuration: ?StepScalingPolicyConfiguration,
+    step_scaling_policy_configuration: ?StepScalingPolicyConfiguration = null,
 
     /// A target tracking scaling policy.
-    target_tracking_scaling_policy_configuration: ?TargetTrackingScalingPolicyConfiguration,
+    target_tracking_scaling_policy_configuration: ?TargetTrackingScalingPolicyConfiguration = null,
 
     pub const json_field_names = .{
         .alarms = "Alarms",

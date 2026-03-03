@@ -4,7 +4,7 @@ const FastLaunchSnapshotConfiguration = @import("fast_launch_snapshot_configurat
 /// Define and configure faster launching for output Windows AMIs.
 pub const FastLaunchConfiguration = struct {
     /// The owner account ID for the fast-launch enabled Windows AMI.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// A Boolean that represents the current state of faster launching for the
     /// Windows AMI.
@@ -15,17 +15,17 @@ pub const FastLaunchConfiguration = struct {
     /// The launch template that the fast-launch enabled Windows AMI uses when it
     /// launches
     /// Windows instances to create pre-provisioned snapshots.
-    launch_template: ?FastLaunchLaunchTemplateSpecification,
+    launch_template: ?FastLaunchLaunchTemplateSpecification = null,
 
     /// The maximum number of parallel instances that are launched for creating
     /// resources.
-    max_parallel_launches: ?i32,
+    max_parallel_launches: ?i32 = null,
 
     /// Configuration settings for managing the number of snapshots that are created
     /// from
     /// pre-provisioned instances for the Windows AMI when faster launching is
     /// enabled.
-    snapshot_configuration: ?FastLaunchSnapshotConfiguration,
+    snapshot_configuration: ?FastLaunchSnapshotConfiguration = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

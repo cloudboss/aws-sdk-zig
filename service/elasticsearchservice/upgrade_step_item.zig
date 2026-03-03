@@ -6,11 +6,11 @@ const UpgradeStatus = @import("upgrade_status.zig").UpgradeStatus;
 pub const UpgradeStepItem = struct {
     /// A list of strings containing detailed information about the errors
     /// encountered in a particular step.
-    issues: ?[]const []const u8,
+    issues: ?[]const []const u8 = null,
 
     /// The Floating point value representing progress percentage of a particular
     /// step.
-    progress_percent: ?f64,
+    progress_percent: ?f64 = null,
 
     /// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
     /// through:
@@ -20,7 +20,7 @@ pub const UpgradeStepItem = struct {
     /// * Snapshot
     ///
     /// * Upgrade
-    upgrade_step: ?UpgradeStep,
+    upgrade_step: ?UpgradeStep = null,
 
     /// The status of a particular step during an upgrade. The status can take one
     /// of the following values:
@@ -32,7 +32,7 @@ pub const UpgradeStepItem = struct {
     /// * Succeeded with Issues
     ///
     /// * Failed
-    upgrade_step_status: ?UpgradeStatus,
+    upgrade_step_status: ?UpgradeStatus = null,
 
     pub const json_field_names = .{
         .issues = "Issues",

@@ -9,7 +9,7 @@ const MessageDetail = @import("message_detail.zig").MessageDetail;
 pub const NdiSourceMetadataInfo = struct {
     /// The connected NDI sender that's currently sending source content to the
     /// flow's NDI source.
-    active_source: ?NdiSourceInfo,
+    active_source: ?NdiSourceInfo = null,
 
     /// A list of the available upstream NDI senders aggregated from all of your
     /// configured discovery servers.

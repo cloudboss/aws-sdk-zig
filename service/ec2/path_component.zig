@@ -12,62 +12,62 @@ const TransitGatewayRouteTableRoute = @import("transit_gateway_route_table_route
 /// Describes a path component.
 pub const PathComponent = struct {
     /// The network ACL rule.
-    acl_rule: ?AnalysisAclRule,
+    acl_rule: ?AnalysisAclRule = null,
 
     /// The additional details.
-    additional_details: ?[]const AdditionalDetail,
+    additional_details: ?[]const AdditionalDetail = null,
 
     /// The resource to which the path component is attached.
-    attached_to: ?AnalysisComponent,
+    attached_to: ?AnalysisComponent = null,
 
     /// The component.
-    component: ?AnalysisComponent,
+    component: ?AnalysisComponent = null,
 
     /// The destination VPC.
-    destination_vpc: ?AnalysisComponent,
+    destination_vpc: ?AnalysisComponent = null,
 
     /// The load balancer listener.
-    elastic_load_balancer_listener: ?AnalysisComponent,
+    elastic_load_balancer_listener: ?AnalysisComponent = null,
 
     /// The explanation codes.
-    explanations: ?[]const Explanation,
+    explanations: ?[]const Explanation = null,
 
     /// The Network Firewall stateful rule.
-    firewall_stateful_rule: ?FirewallStatefulRule,
+    firewall_stateful_rule: ?FirewallStatefulRule = null,
 
     /// The Network Firewall stateless rule.
-    firewall_stateless_rule: ?FirewallStatelessRule,
+    firewall_stateless_rule: ?FirewallStatelessRule = null,
 
     /// The inbound header.
-    inbound_header: ?AnalysisPacketHeader,
+    inbound_header: ?AnalysisPacketHeader = null,
 
     /// The outbound header.
-    outbound_header: ?AnalysisPacketHeader,
+    outbound_header: ?AnalysisPacketHeader = null,
 
     /// The route table route.
-    route_table_route: ?AnalysisRouteTableRoute,
+    route_table_route: ?AnalysisRouteTableRoute = null,
 
     /// The security group rule.
-    security_group_rule: ?AnalysisSecurityGroupRule,
+    security_group_rule: ?AnalysisSecurityGroupRule = null,
 
     /// The sequence number.
-    sequence_number: ?i32,
+    sequence_number: ?i32 = null,
 
     /// The name of the VPC endpoint service.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// The source VPC.
-    source_vpc: ?AnalysisComponent,
+    source_vpc: ?AnalysisComponent = null,
 
     /// The subnet.
-    subnet: ?AnalysisComponent,
+    subnet: ?AnalysisComponent = null,
 
     /// The transit gateway.
-    transit_gateway: ?AnalysisComponent,
+    transit_gateway: ?AnalysisComponent = null,
 
     /// The route in a transit gateway route table.
-    transit_gateway_route_table_route: ?TransitGatewayRouteTableRoute,
+    transit_gateway_route_table_route: ?TransitGatewayRouteTableRoute = null,
 
     /// The component VPC.
-    vpc: ?AnalysisComponent,
+    vpc: ?AnalysisComponent = null,
 };

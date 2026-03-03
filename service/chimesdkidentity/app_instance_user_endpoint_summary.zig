@@ -7,22 +7,22 @@ pub const AppInstanceUserEndpointSummary = struct {
     /// BBoolean that controls whether the `AppInstanceUserEndpoint` is opted in to
     /// receive messages. `ALL` indicates the endpoint will receive all messages.
     /// `NONE` indicates the endpoint will receive no messages.
-    allow_messages: ?AllowMessages,
+    allow_messages: ?AllowMessages = null,
 
     /// The ARN of the `AppInstanceUser`.
-    app_instance_user_arn: ?[]const u8,
+    app_instance_user_arn: ?[]const u8 = null,
 
     /// The unique identifier of the `AppInstanceUserEndpoint`.
-    endpoint_id: ?[]const u8,
+    endpoint_id: ?[]const u8 = null,
 
     /// A read-only field that represent the state of an `AppInstanceUserEndpoint`.
-    endpoint_state: ?EndpointState,
+    endpoint_state: ?EndpointState = null,
 
     /// The name of the `AppInstanceUserEndpoint`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of the `AppInstanceUserEndpoint`.
-    @"type": ?AppInstanceUserEndpointType,
+    @"type": ?AppInstanceUserEndpointType = null,
 
     pub const json_field_names = .{
         .allow_messages = "AllowMessages",

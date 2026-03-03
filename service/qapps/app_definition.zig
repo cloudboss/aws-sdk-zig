@@ -6,7 +6,7 @@ pub const AppDefinition = struct {
     app_definition_version: []const u8,
 
     /// A flag indicating whether the Q App's definition can be edited by the user.
-    can_edit: ?bool,
+    can_edit: ?bool = null,
 
     /// The cards that make up the Q App, such as text input, file upload, or query
     /// cards.

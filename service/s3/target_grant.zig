@@ -9,8 +9,8 @@ const BucketLogsPermission = @import("bucket_logs_permission.zig").BucketLogsPer
 /// delivery](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general) in the *Amazon S3 User Guide*.
 pub const TargetGrant = struct {
     /// Container for the person being granted permissions.
-    grantee: ?Grantee,
+    grantee: ?Grantee = null,
 
     /// Logging permissions assigned to the grantee for the bucket.
-    permission: ?BucketLogsPermission,
+    permission: ?BucketLogsPermission = null,
 };

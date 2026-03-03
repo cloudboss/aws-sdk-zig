@@ -6,7 +6,7 @@ pub const ObjectiveFilter = struct {
     ///
     /// You can use this parameter to specify one domain ARN at a time. Passing
     /// multiple ARNs in the `ObjectiveFilter` isn’t supported.
-    domains: ?[]const DomainResourceFilter,
+    domains: ?[]const DomainResourceFilter = null,
 
     pub const json_field_names = .{
         .domains = "Domains",

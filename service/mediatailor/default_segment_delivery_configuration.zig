@@ -8,7 +8,7 @@
 pub const DefaultSegmentDeliveryConfiguration = struct {
     /// The hostname of the server that will be used to serve segments. This string
     /// must include the protocol, such as **https://**.
-    base_url: ?[]const u8,
+    base_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .base_url = "BaseUrl",

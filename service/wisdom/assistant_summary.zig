@@ -14,10 +14,10 @@ pub const AssistantSummary = struct {
     assistant_id: []const u8,
 
     /// The description of the assistant.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The configuration information for the Wisdom assistant integration.
-    integration_configuration: ?AssistantIntegrationConfiguration,
+    integration_configuration: ?AssistantIntegrationConfiguration = null,
 
     /// The name of the assistant.
     name: []const u8,
@@ -37,13 +37,13 @@ pub const AssistantSummary = struct {
     /// [Enable Amazon Connect Wisdom
     /// for your
     /// instance](https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html).
-    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration,
+    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration = null,
 
     /// The status of the assistant.
     status: AssistantStatus,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the assistant.
     @"type": AssistantType,

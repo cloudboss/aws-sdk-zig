@@ -33,7 +33,7 @@ pub const RouteVehicleLegDetails = struct {
     spans: []const RouteVehicleSpan,
 
     /// Summarized details of the leg.
-    summary: ?RouteVehicleSummary,
+    summary: ?RouteVehicleSummary = null,
 
     /// Toll related options.
     tolls: []const RouteToll,

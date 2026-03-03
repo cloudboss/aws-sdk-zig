@@ -4,25 +4,25 @@ const AnalyticsMode = @import("analytics_mode.zig").AnalyticsMode;
 pub const ViewFrame = struct {
     /// Controls if analytics computation is enabled or disabled. Enabled by
     /// default.
-    analytics: ?AnalyticsMode,
+    analytics: ?AnalyticsMode = null,
 
     /// The number of columns to include in the view frame, beginning with the
     /// `StartColumnIndex` value and ignoring any columns in the
     /// `HiddenColumns` list.
-    column_range: ?i32,
+    column_range: ?i32 = null,
 
     /// A list of columns to hide in the view frame.
-    hidden_columns: ?[]const []const u8,
+    hidden_columns: ?[]const []const u8 = null,
 
     /// The number of rows to include in the view frame, beginning with the
     /// `StartRowIndex` value.
-    row_range: ?i32,
+    row_range: ?i32 = null,
 
     /// The starting index for the range of columns to return in the view frame.
     start_column_index: i32,
 
     /// The starting index for the range of rows to return in the view frame.
-    start_row_index: ?i32,
+    start_row_index: ?i32 = null,
 
     pub const json_field_names = .{
         .analytics = "Analytics",

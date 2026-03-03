@@ -20,41 +20,41 @@ pub const ComponentVersion = struct {
     ///
     /// * Build version ARNs have all four nodes, and point to a specific build for
     ///   a specific version of an object.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date that the component was created.
-    date_created: ?[]const u8,
+    date_created: ?[]const u8 = null,
 
     /// The description of the component.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the component.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The owner of the component.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The platform of the component.
-    platform: ?Platform,
+    platform: ?Platform = null,
 
     /// Contains product codes that are used for billing purposes for Amazon Web
     /// Services Marketplace components.
-    product_codes: ?[]const ProductCodeListItem,
+    product_codes: ?[]const ProductCodeListItem = null,
 
     /// Describes the current status of the component version.
-    status: ?ComponentStatus,
+    status: ?ComponentStatus = null,
 
     /// he operating system (OS) version supported by the component. If the OS
     /// information is
     /// available, a prefix match is performed against the base image OS version
     /// during image
     /// recipe creation.
-    supported_os_versions: ?[]const []const u8,
+    supported_os_versions: ?[]const []const u8 = null,
 
     /// The type of the component denotes whether the component is used to build the
     /// image or
     /// only to test it.
-    @"type": ?ComponentType,
+    @"type": ?ComponentType = null,
 
     /// The semantic version of the component.
     ///
@@ -80,7 +80,7 @@ pub const ComponentVersion = struct {
     /// recipe. When you use a wildcard in any node, all nodes to the right of the
     /// first wildcard must also be
     /// wildcards.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

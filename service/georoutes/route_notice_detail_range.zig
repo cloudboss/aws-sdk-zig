@@ -1,10 +1,10 @@
 /// Notice Detail that is a range.
 pub const RouteNoticeDetailRange = struct {
     /// Maximum value for the range.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// Minimum value for the range.
-    min: ?i32,
+    min: ?i32 = null,
 
     pub const json_field_names = .{
         .max = "Max",

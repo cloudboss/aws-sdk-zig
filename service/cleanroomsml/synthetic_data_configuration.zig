@@ -9,7 +9,7 @@ pub const SyntheticDataConfiguration = struct {
     /// Evaluation scores that assess the quality and privacy characteristics of the
     /// generated synthetic data, providing metrics on data utility and privacy
     /// preservation.
-    synthetic_data_evaluation_scores: ?SyntheticDataEvaluationScores,
+    synthetic_data_evaluation_scores: ?SyntheticDataEvaluationScores = null,
 
     /// The parameters that control how synthetic data is generated, including
     /// privacy settings, column classifications, and other configuration options

@@ -21,10 +21,10 @@ pub const DataSourceConfigurationsResult = struct {
 
     /// An object that contains information on the status of all Kubernetes data
     /// sources.
-    kubernetes: ?KubernetesConfigurationResult,
+    kubernetes: ?KubernetesConfigurationResult = null,
 
     /// Describes the configuration of Malware Protection data sources.
-    malware_protection: ?MalwareProtectionConfigurationResult,
+    malware_protection: ?MalwareProtectionConfigurationResult = null,
 
     /// An object that contains information on the status of S3 Data event logs as a
     /// data

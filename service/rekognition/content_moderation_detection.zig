@@ -7,24 +7,24 @@ pub const ContentModerationDetection = struct {
     /// A list of predicted results for the type of content an image contains. For
     /// example,
     /// the image content might be from animation, sports, or a video game.
-    content_types: ?[]const ContentType,
+    content_types: ?[]const ContentType = null,
 
     /// The time duration of a segment in milliseconds, I.e. time elapsed from
     /// StartTimestampMillis to EndTimestampMillis.
-    duration_millis: ?i64,
+    duration_millis: ?i64 = null,
 
     /// The time in milliseconds defining the end of the timeline segment containing
     /// a
     /// continuously detected moderation label.
-    end_timestamp_millis: ?i64,
+    end_timestamp_millis: ?i64 = null,
 
     /// The content moderation label detected by in the stored video.
-    moderation_label: ?ModerationLabel,
+    moderation_label: ?ModerationLabel = null,
 
     /// The time in milliseconds defining the start of the timeline segment
     /// containing a
     /// continuously detected moderation label.
-    start_timestamp_millis: ?i64,
+    start_timestamp_millis: ?i64 = null,
 
     /// Time, in milliseconds from the beginning of the video, that the content
     /// moderation label was detected.

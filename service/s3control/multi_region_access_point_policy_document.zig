@@ -12,8 +12,8 @@ const ProposedMultiRegionAccessPointPolicy = @import("proposed_multi_region_acce
 /// the established policy.
 pub const MultiRegionAccessPointPolicyDocument = struct {
     /// The last established policy for the Multi-Region Access Point.
-    established: ?EstablishedMultiRegionAccessPointPolicy,
+    established: ?EstablishedMultiRegionAccessPointPolicy = null,
 
     /// The proposed policy for the Multi-Region Access Point.
-    proposed: ?ProposedMultiRegionAccessPointPolicy,
+    proposed: ?ProposedMultiRegionAccessPointPolicy = null,
 };

@@ -5,13 +5,13 @@ const PendingModifiedServiceUpdate = @import("pending_modified_service_update.zi
 /// A list of updates being applied to the cluster
 pub const ClusterPendingUpdates = struct {
     /// A list of ACLs associated with the cluster that are being updated
-    ac_ls: ?ACLsUpdateStatus,
+    ac_ls: ?ACLsUpdateStatus = null,
 
     /// The status of an online resharding operation.
-    resharding: ?ReshardingStatus,
+    resharding: ?ReshardingStatus = null,
 
     /// A list of service updates being applied to the cluster
-    service_updates: ?[]const PendingModifiedServiceUpdate,
+    service_updates: ?[]const PendingModifiedServiceUpdate = null,
 
     pub const json_field_names = .{
         .ac_ls = "ACLs",

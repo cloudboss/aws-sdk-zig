@@ -31,12 +31,12 @@ const HlsTsFileMode = @import("hls_ts_file_mode.zig").HlsTsFileMode;
 pub const HlsGroupSettings = struct {
     /// Choose one or more ad marker types to pass SCTE35 signals through to this
     /// group of Apple HLS outputs.
-    ad_markers: ?[]const HlsAdMarkers,
+    ad_markers: ?[]const HlsAdMarkers = null,
 
     /// A partial URI prefix that will be prepended to each output in the media
     /// .m3u8 file. Can be used if base manifest is delivered from a different URL
     /// than the main .m3u8 file.
-    base_url_content: ?[]const u8,
+    base_url_content: ?[]const u8 = null,
 
     /// Optional. One value per output group.
     ///
@@ -44,12 +44,12 @@ pub const HlsGroupSettings = struct {
     /// the downstream system has notified you that the media files for pipeline 1
     /// of all outputs are in a location different from the media files for pipeline
     /// 0.
-    base_url_content_1: ?[]const u8,
+    base_url_content_1: ?[]const u8 = null,
 
     /// A partial URI prefix that will be prepended to each output in the media
     /// .m3u8 file. Can be used if base manifest is delivered from a different URL
     /// than the main .m3u8 file.
-    base_url_manifest: ?[]const u8,
+    base_url_manifest: ?[]const u8 = null,
 
     /// Optional. One value per output group.
     ///
@@ -57,11 +57,11 @@ pub const HlsGroupSettings = struct {
     /// downstream system has notified you that the child manifest files for
     /// pipeline 1 of all outputs are in a location different from the child
     /// manifest files for pipeline 0.
-    base_url_manifest_1: ?[]const u8,
+    base_url_manifest_1: ?[]const u8 = null,
 
     /// Mapping of up to 4 caption channels to caption languages. Is only meaningful
     /// if captionLanguageSetting is set to "insert".
-    caption_language_mappings: ?[]const CaptionLanguageMapping,
+    caption_language_mappings: ?[]const CaptionLanguageMapping = null,
 
     /// Applies only to 608 Embedded output captions.
     /// insert: Include CLOSED-CAPTIONS lines in the manifest. Specify at least one
@@ -73,27 +73,27 @@ pub const HlsGroupSettings = struct {
     /// properly with the output captions.
     /// none: Include CLOSED-CAPTIONS=NONE line in the manifest.
     /// omit: Omit any CLOSED-CAPTIONS line from the manifest.
-    caption_language_setting: ?HlsCaptionLanguageSetting,
+    caption_language_setting: ?HlsCaptionLanguageSetting = null,
 
     /// When set to "disabled", sets the #EXT-X-ALLOW-CACHE:no tag in the manifest,
     /// which prevents clients from saving media segments for later replay.
-    client_cache: ?HlsClientCache,
+    client_cache: ?HlsClientCache = null,
 
     /// Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist
     /// generation.
-    codec_specification: ?HlsCodecSpecification,
+    codec_specification: ?HlsCodecSpecification = null,
 
     /// For use with encryptionType. This is a 128-bit, 16-byte hex value
     /// represented by a 32-character text string. If ivSource is set to "explicit"
     /// then this parameter is required and is used as the IV for encryption.
-    constant_iv: ?[]const u8,
+    constant_iv: ?[]const u8 = null,
 
     /// A directory or HTTP destination for the HLS segments, manifest files, and
     /// encryption keys (if enabled).
     destination: OutputLocationRef,
 
     /// Place segments in subdirectories.
-    directory_structure: ?HlsDirectoryStructure,
+    directory_structure: ?HlsDirectoryStructure = null,
 
     /// Specifies whether to insert EXT-X-DISCONTINUITY tags in the HLS child
     /// manifests for this output group.
@@ -102,17 +102,17 @@ pub const HlsGroupSettings = struct {
     /// Choose Never Insert only if the downstream system is doing real-time
     /// failover (without using the MediaLive automatic failover feature) and only
     /// if that downstream system has advised you to exclude the tags.
-    discontinuity_tags: ?HlsDiscontinuityTags,
+    discontinuity_tags: ?HlsDiscontinuityTags = null,
 
     /// Encrypts the segments with the given encryption scheme. Exclude this
     /// parameter if no encryption is desired.
-    encryption_type: ?HlsEncryptionType,
+    encryption_type: ?HlsEncryptionType = null,
 
     /// Parameters that control interactions with the CDN.
-    hls_cdn_settings: ?HlsCdnSettings,
+    hls_cdn_settings: ?HlsCdnSettings = null,
 
     /// State of HLS ID3 Segment Tagging
-    hls_id_3_segment_tagging: ?HlsId3SegmentTaggingState,
+    hls_id_3_segment_tagging: ?HlsId3SegmentTaggingState = null,
 
     /// DISABLED: Do not create an I-frame-only manifest, but do create the master
     /// and media manifests (according to the Output Selection field).
@@ -122,7 +122,7 @@ pub const HlsGroupSettings = struct {
     /// field). The I-frame manifest contains a #EXT-X-I-FRAMES-ONLY tag to indicate
     /// it is I-frame only, and one or more #EXT-X-BYTERANGE entries identifying the
     /// I-frame position. For example, #EXT-X-BYTERANGE:160364@1461888"
-    i_frame_only_playlists: ?IFrameOnlyPlaylistType,
+    i_frame_only_playlists: ?IFrameOnlyPlaylistType = null,
 
     /// Specifies whether to include the final (incomplete) segment in the media
     /// output when the pipeline stops producing output because of a channel stop, a
@@ -131,30 +131,30 @@ pub const HlsGroupSettings = struct {
     /// depending on the channel class and the types of output groups.
     /// Suppress means to never include the incomplete segment. We recommend you
     /// choose Auto and let MediaLive control the behavior.
-    incomplete_segment_behavior: ?HlsIncompleteSegmentBehavior,
+    incomplete_segment_behavior: ?HlsIncompleteSegmentBehavior = null,
 
     /// Applies only if Mode field is LIVE.
     ///
     /// Specifies the maximum number of segments in the media manifest file. After
     /// this maximum, older segments are removed from the media manifest. This
     /// number must be smaller than the number in the Keep Segments field.
-    index_n_segments: ?i32,
+    index_n_segments: ?i32 = null,
 
     /// Parameter that control output group behavior on input loss.
-    input_loss_action: ?InputLossActionForHlsOut,
+    input_loss_action: ?InputLossActionForHlsOut = null,
 
     /// For use with encryptionType. The IV (Initialization Vector) is a 128-bit
     /// number used in conjunction with the key for encrypting blocks. If set to
     /// "include", IV is listed in the manifest, otherwise the IV is not in the
     /// manifest.
-    iv_in_manifest: ?HlsIvInManifest,
+    iv_in_manifest: ?HlsIvInManifest = null,
 
     /// For use with encryptionType. The IV (Initialization Vector) is a 128-bit
     /// number used in conjunction with the key for encrypting blocks. If this
     /// setting is "followsSegmentNumber", it will cause the IV to change every
     /// segment (to match the segment number). If this is set to "explicit", you
     /// must enter a constantIv value.
-    iv_source: ?HlsIvSource,
+    iv_source: ?HlsIvSource = null,
 
     /// Applies only if Mode field is LIVE.
     ///
@@ -167,31 +167,31 @@ pub const HlsGroupSettings = struct {
     /// that segment has been removed from the destination directory (as directed by
     /// indexNSegments). This situation would result in a 404 HTTP error on the
     /// player.
-    keep_segments: ?i32,
+    keep_segments: ?i32 = null,
 
     /// The value specifies how the key is represented in the resource identified by
     /// the URI. If parameter is absent, an implicit value of "identity" is used. A
     /// reverse DNS string can also be given.
-    key_format: ?[]const u8,
+    key_format: ?[]const u8 = null,
 
     /// Either a single positive integer version value or a slash delimited list of
     /// version values (1/2/3).
-    key_format_versions: ?[]const u8,
+    key_format_versions: ?[]const u8 = null,
 
     /// The key provider settings.
-    key_provider_settings: ?KeyProviderSettings,
+    key_provider_settings: ?KeyProviderSettings = null,
 
     /// When set to gzip, compresses HLS playlist.
-    manifest_compression: ?HlsManifestCompression,
+    manifest_compression: ?HlsManifestCompression = null,
 
     /// Indicates whether the output manifest should use floating point or integer
     /// values for segment duration.
-    manifest_duration_format: ?HlsManifestDurationFormat,
+    manifest_duration_format: ?HlsManifestDurationFormat = null,
 
     /// Minimum length of MPEG-2 Transport Stream segments in seconds. When set,
     /// minimum segment length is enforced by looking ahead and back within the
     /// specified range for a nearby avail and extending the segment size if needed.
-    min_segment_length: ?i32,
+    min_segment_length: ?i32 = null,
 
     /// If "vod", all segments are indexed and kept permanently in the destination
     /// and manifest. If "live", only the number segments specified in keepSegments
@@ -201,7 +201,7 @@ pub const HlsGroupSettings = struct {
     ///
     /// VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running,
     /// converting it to a "VOD" type manifest on completion of the stream.
-    mode: ?HlsMode,
+    mode: ?HlsMode = null,
 
     /// MANIFESTS_AND_SEGMENTS: Generates manifests (master manifest, if applicable,
     /// and media manifests) for this output group.
@@ -210,11 +210,11 @@ pub const HlsGroupSettings = struct {
     /// group, but not a master manifest.
     ///
     /// SEGMENTS_ONLY: Does not generate any manifests for this output group.
-    output_selection: ?HlsOutputSelection,
+    output_selection: ?HlsOutputSelection = null,
 
     /// Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files.
     /// The value is calculated using the program date time clock.
-    program_date_time: ?HlsProgramDateTime,
+    program_date_time: ?HlsProgramDateTime = null,
 
     /// Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock.
     /// Options include:
@@ -227,10 +227,10 @@ pub const HlsGroupSettings = struct {
     /// clock, then incremented by the EXTINF duration of each encoded segment. If
     /// the PDT clock diverges from the wall clock by more than 500ms, it is
     /// resynchronized to the wall clock.
-    program_date_time_clock: ?HlsProgramDateTimeClock,
+    program_date_time_clock: ?HlsProgramDateTimeClock = null,
 
     /// Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
-    program_date_time_period: ?i32,
+    program_date_time_period: ?i32 = null,
 
     /// ENABLED: The master manifest (.m3u8 file) for each pipeline includes
     /// information about both pipelines: first its own media files, then the media
@@ -246,34 +246,34 @@ pub const HlsGroupSettings = struct {
     /// For an HLS output group with MediaPackage as the destination, the DISABLED
     /// behavior is always followed. MediaPackage regenerates the manifests it
     /// serves to players so a redundant manifest from MediaLive is irrelevant.
-    redundant_manifest: ?HlsRedundantManifest,
+    redundant_manifest: ?HlsRedundantManifest = null,
 
     /// useInputSegmentation has been deprecated. The configured segment size is
     /// always used.
-    segmentation_mode: ?HlsSegmentationMode,
+    segmentation_mode: ?HlsSegmentationMode = null,
 
     /// Length of MPEG-2 Transport Stream segments to create in seconds. Note that
     /// segments will end on the next keyframe after this duration, so actual
     /// segment length may be longer.
-    segment_length: ?i32,
+    segment_length: ?i32 = null,
 
     /// Number of segments to write to a subdirectory before starting a new one.
     /// directoryStructure must be subdirectoryPerStream for this setting to have an
     /// effect.
-    segments_per_subdirectory: ?i32,
+    segments_per_subdirectory: ?i32 = null,
 
     /// Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of
     /// variant manifest.
-    stream_inf_resolution: ?HlsStreamInfResolution,
+    stream_inf_resolution: ?HlsStreamInfResolution = null,
 
     /// Indicates ID3 frame that has the timecode.
-    timed_metadata_id_3_frame: ?HlsTimedMetadataId3Frame,
+    timed_metadata_id_3_frame: ?HlsTimedMetadataId3Frame = null,
 
     /// Timed Metadata interval in seconds.
-    timed_metadata_id_3_period: ?i32,
+    timed_metadata_id_3_period: ?i32 = null,
 
     /// Provides an extra millisecond delta offset to fine tune the timestamps.
-    timestamp_delta_milliseconds: ?i32,
+    timestamp_delta_milliseconds: ?i32 = null,
 
     /// SEGMENTED_FILES: Emit the program as segments - multiple .ts media files.
     ///
@@ -283,7 +283,7 @@ pub const HlsGroupSettings = struct {
     /// output to AWS Elemental MediaConvert, which can accept only a single media
     /// file. Playback while the channel is running is not guaranteed due to HTTP
     /// server caching.
-    ts_file_mode: ?HlsTsFileMode,
+    ts_file_mode: ?HlsTsFileMode = null,
 
     pub const json_field_names = .{
         .ad_markers = "AdMarkers",

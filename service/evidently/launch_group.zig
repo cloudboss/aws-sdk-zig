@@ -4,7 +4,7 @@ const aws = @import("aws");
 /// variation of the feature that you are including in the launch.
 pub const LaunchGroup = struct {
     /// A description of the launch group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The feature variation for this launch group. This is a key-value pair.
     feature_variations: []const aws.map.StringMapEntry,

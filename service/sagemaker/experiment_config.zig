@@ -9,18 +9,18 @@
 ///   [CreateTransformJob](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html)
 pub const ExperimentConfig = struct {
     /// The name of an existing experiment to associate with the trial component.
-    experiment_name: ?[]const u8,
+    experiment_name: ?[]const u8 = null,
 
     /// The name of the experiment run to associate with the trial component.
-    run_name: ?[]const u8,
+    run_name: ?[]const u8 = null,
 
     /// The display name for the trial component. If this key isn't specified, the
     /// display name is the trial component name.
-    trial_component_display_name: ?[]const u8,
+    trial_component_display_name: ?[]const u8 = null,
 
     /// The name of an existing trial to associate the trial component with. If not
     /// specified, a new trial is created.
-    trial_name: ?[]const u8,
+    trial_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .experiment_name = "ExperimentName",

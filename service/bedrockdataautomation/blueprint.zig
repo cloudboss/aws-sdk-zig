@@ -10,21 +10,21 @@ pub const Blueprint = struct {
 
     blueprint_name: []const u8,
 
-    blueprint_stage: ?BlueprintStage,
+    blueprint_stage: ?BlueprintStage = null,
 
-    blueprint_version: ?[]const u8,
+    blueprint_version: ?[]const u8 = null,
 
     creation_time: i64,
 
-    kms_encryption_context: ?[]const aws.map.StringMapEntry,
+    kms_encryption_context: ?[]const aws.map.StringMapEntry = null,
 
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     last_modified_time: i64,
 
-    optimization_samples: ?[]const BlueprintOptimizationSample,
+    optimization_samples: ?[]const BlueprintOptimizationSample = null,
 
-    optimization_time: ?i64,
+    optimization_time: ?i64 = null,
 
     schema: []const u8,
 

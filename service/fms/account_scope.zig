@@ -9,7 +9,7 @@ pub const AccountScope = struct {
     /// members of the organization except for the accounts in this list. If
     /// `ExcludeSpecifiedAccounts` is set to `false`, then the Firewall Manager
     /// administrator can only apply policies to the accounts in this list.
-    accounts: ?[]const []const u8,
+    accounts: ?[]const []const u8 = null,
 
     /// A boolean value that indicates if the administrator can apply policies to
     /// all accounts within an organization. If true, the administrator can apply

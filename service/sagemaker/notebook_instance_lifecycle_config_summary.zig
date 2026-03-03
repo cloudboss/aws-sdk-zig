@@ -1,10 +1,10 @@
 /// Provides a summary of a notebook instance lifecycle configuration.
 pub const NotebookInstanceLifecycleConfigSummary = struct {
     /// A timestamp that tells when the lifecycle configuration was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A timestamp that tells when the lifecycle configuration was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the lifecycle configuration.
     notebook_instance_lifecycle_config_arn: []const u8,

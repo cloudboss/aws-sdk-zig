@@ -19,10 +19,10 @@ pub const LibraryItemMember = struct {
     created_by: []const u8,
 
     /// Whether the current user has rated the library item.
-    is_rated_by_user: ?bool,
+    is_rated_by_user: ?bool = null,
 
     /// Indicates whether the library item has been verified.
-    is_verified: ?bool,
+    is_verified: ?bool = null,
 
     /// The unique identifier of the library item.
     library_item_id: []const u8,
@@ -34,13 +34,13 @@ pub const LibraryItemMember = struct {
     status: []const u8,
 
     /// The date and time the library item was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user who last updated the library item.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     /// The number of users who have the associated Q App.
-    user_count: ?i32,
+    user_count: ?i32 = null,
 
     pub const json_field_names = .{
         .app_id = "appId",

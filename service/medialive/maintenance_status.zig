@@ -3,17 +3,17 @@ const MaintenanceDay = @import("maintenance_day.zig").MaintenanceDay;
 /// Placeholder documentation for MaintenanceStatus
 pub const MaintenanceStatus = struct {
     /// The currently selected maintenance day.
-    maintenance_day: ?MaintenanceDay,
+    maintenance_day: ?MaintenanceDay = null,
 
     /// Maintenance is required by the displayed date and time. Date and time is in
     /// ISO.
-    maintenance_deadline: ?[]const u8,
+    maintenance_deadline: ?[]const u8 = null,
 
     /// The currently scheduled maintenance date and time. Date and time is in ISO.
-    maintenance_scheduled_date: ?[]const u8,
+    maintenance_scheduled_date: ?[]const u8 = null,
 
     /// The currently selected maintenance start time. Time is in UTC.
-    maintenance_start_time: ?[]const u8,
+    maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .maintenance_day = "MaintenanceDay",

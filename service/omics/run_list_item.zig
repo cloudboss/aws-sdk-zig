@@ -4,42 +4,42 @@ const StorageType = @import("storage_type.zig").StorageType;
 /// A workflow run.
 pub const RunListItem = struct {
     /// The run's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// When the run was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The run's ID.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The run's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The run's priority.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// When the run started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The run's status.
-    status: ?RunStatus,
+    status: ?RunStatus = null,
 
     /// When the run stopped.
-    stop_time: ?i64,
+    stop_time: ?i64 = null,
 
     /// The run's storage capacity in gibibytes. For dynamic storage, after the run
     /// has completed, this value is the maximum amount of storage used during the
     /// run.
-    storage_capacity: ?i32,
+    storage_capacity: ?i32 = null,
 
     /// The run's storage type.
-    storage_type: ?StorageType,
+    storage_type: ?StorageType = null,
 
     /// The run's workflow ID.
-    workflow_id: ?[]const u8,
+    workflow_id: ?[]const u8 = null,
 
     /// The name of the workflow version.
-    workflow_version_name: ?[]const u8,
+    workflow_version_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

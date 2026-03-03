@@ -1,7 +1,7 @@
 /// Describes the state of a target group.
 pub const LoadBalancerTargetGroupState = struct {
     /// The Amazon Resource Name (ARN) of the target group.
-    load_balancer_target_group_arn: ?[]const u8,
+    load_balancer_target_group_arn: ?[]const u8 = null,
 
     /// The state of the target group.
     ///
@@ -21,5 +21,5 @@ pub const LoadBalancerTargetGroupState = struct {
     ///
     /// * `Removed` - All Auto Scaling instances are deregistered from the target
     /// group.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 };

@@ -5,12 +5,12 @@ pub const InternalAccessAnalysisRuleCriteria = struct {
     /// A list of Amazon Web Services account IDs to apply to the internal access
     /// analysis rule criteria. Account IDs can only be applied to the analysis rule
     /// criteria for organization-level analyzers.
-    account_ids: ?[]const []const u8,
+    account_ids: ?[]const []const u8 = null,
 
     /// A list of resource ARNs to apply to the internal access analysis rule
     /// criteria. The analyzer will only generate findings for resources that match
     /// these ARNs.
-    resource_arns: ?[]const []const u8,
+    resource_arns: ?[]const []const u8 = null,
 
     /// A list of resource types to apply to the internal access analysis rule
     /// criteria. The analyzer will only generate findings for resources of these
@@ -23,7 +23,7 @@ pub const InternalAccessAnalysisRuleCriteria = struct {
     /// * `AWS::S3Express::DirectoryBucket`
     /// * `AWS::DynamoDB::Table`
     /// * `AWS::DynamoDB::Stream`
-    resource_types: ?[]const ResourceType,
+    resource_types: ?[]const ResourceType = null,
 
     pub const json_field_names = .{
         .account_ids = "accountIds",

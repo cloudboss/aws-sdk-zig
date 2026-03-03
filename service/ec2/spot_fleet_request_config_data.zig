@@ -75,29 +75,29 @@ pub const SpotFleetRequestConfigData = struct {
     /// might lead to high interruption rates.
     ///
     /// Default: `lowestPrice`
-    allocation_strategy: ?AllocationStrategy,
+    allocation_strategy: ?AllocationStrategy = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure the
     /// idempotency of your
     /// listings. This helps to avoid duplicate listings. For more information, see
     /// [Ensuring
     /// Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// Reserved.
-    context: ?[]const u8,
+    context: ?[]const u8 = null,
 
     /// Indicates whether running instances should be terminated if you decrease the
     /// target capacity of the Spot Fleet request below the current size of the Spot
     /// Fleet.
     ///
     /// Supported only for fleets of type `maintain`.
-    excess_capacity_termination_policy: ?ExcessCapacityTerminationPolicy,
+    excess_capacity_termination_policy: ?ExcessCapacityTerminationPolicy = null,
 
     /// The number of units fulfilled by this request compared to the set target
     /// capacity. You
     /// cannot set this value.
-    fulfilled_capacity: ?f64,
+    fulfilled_capacity: ?f64 = null,
 
     /// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM)
     /// role
@@ -114,7 +114,7 @@ pub const SpotFleetRequestConfigData = struct {
 
     /// The behavior when a Spot Instance is interrupted. The default is
     /// `terminate`.
-    instance_interruption_behavior: ?InstanceInterruptionBehavior,
+    instance_interruption_behavior: ?InstanceInterruptionBehavior = null,
 
     /// The number of Spot pools across which to allocate your target Spot capacity.
     /// Valid
@@ -136,7 +136,7 @@ pub const SpotFleetRequestConfigData = struct {
     /// capacity, you might receive your full target capacity from fewer than the
     /// number of
     /// pools that you specified.
-    instance_pools_to_use_count: ?i32,
+    instance_pools_to_use_count: ?i32 = null,
 
     /// The launch specifications for the Spot Fleet request. If you specify
     /// `LaunchSpecifications`, you can't specify
@@ -147,12 +147,12 @@ pub const SpotFleetRequestConfigData = struct {
     /// no new
     /// instances can be launched from the AMI. For fleets of type `maintain`, the
     /// target capacity will not be maintained.
-    launch_specifications: ?[]const SpotFleetLaunchSpecification,
+    launch_specifications: ?[]const SpotFleetLaunchSpecification = null,
 
     /// The launch template and overrides. If you specify `LaunchTemplateConfigs`,
     /// you can't specify `LaunchSpecifications`. If you include On-Demand capacity
     /// in your request, you must use `LaunchTemplateConfigs`.
-    launch_template_configs: ?[]const LaunchTemplateConfig,
+    launch_template_configs: ?[]const LaunchTemplateConfig = null,
 
     /// One or more Classic Load Balancers and target groups to attach to the Spot
     /// Fleet
@@ -165,7 +165,7 @@ pub const SpotFleetRequestConfigData = struct {
     /// following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1,
     /// HS1, M1, M2,
     /// M3, and T1.
-    load_balancers_config: ?LoadBalancersConfig,
+    load_balancers_config: ?LoadBalancersConfig = null,
 
     /// The order of the launch template overrides to use in fulfilling On-Demand
     /// capacity. If
@@ -176,12 +176,12 @@ pub const SpotFleetRequestConfigData = struct {
     /// that you assign to each Spot Fleet launch template override, launching the
     /// highest priority
     /// first. If you do not specify a value, Spot Fleet defaults to `lowestPrice`.
-    on_demand_allocation_strategy: ?OnDemandAllocationStrategy,
+    on_demand_allocation_strategy: ?OnDemandAllocationStrategy = null,
 
     /// The number of On-Demand units fulfilled by this request compared to the set
     /// target
     /// On-Demand capacity.
-    on_demand_fulfilled_capacity: ?f64,
+    on_demand_fulfilled_capacity: ?f64 = null,
 
     /// The maximum amount per hour for On-Demand Instances that you're willing to
     /// pay. You
@@ -208,7 +208,7 @@ pub const SpotFleetRequestConfigData = struct {
     /// credits can incur
     /// charges](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode-concepts.html#unlimited-mode-surplus-credits) in the
     /// *Amazon EC2 User Guide*.
-    on_demand_max_total_price: ?[]const u8,
+    on_demand_max_total_price: ?[]const u8 = null,
 
     /// The number of On-Demand units to request. You can choose to set the target
     /// capacity in
@@ -216,15 +216,15 @@ pub const SpotFleetRequestConfigData = struct {
     /// application
     /// workload, such as vCPUs, memory, or I/O. If the request type is `maintain`,
     /// you can specify a target capacity of 0 and add capacity later.
-    on_demand_target_capacity: ?i32,
+    on_demand_target_capacity: ?i32 = null,
 
     /// Indicates whether Spot Fleet should replace unhealthy instances.
-    replace_unhealthy_instances: ?bool,
+    replace_unhealthy_instances: ?bool = null,
 
     /// The strategies for managing your Spot Instances that are at an elevated risk
     /// of being
     /// interrupted.
-    spot_maintenance_strategies: ?SpotMaintenanceStrategies,
+    spot_maintenance_strategies: ?SpotMaintenanceStrategies = null,
 
     /// The maximum amount per hour for Spot Instances that you're willing to pay.
     /// You can use
@@ -249,7 +249,7 @@ pub const SpotFleetRequestConfigData = struct {
     /// credits can incur
     /// charges](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode-concepts.html#unlimited-mode-surplus-credits) in the
     /// *Amazon EC2 User Guide*.
-    spot_max_total_price: ?[]const u8,
+    spot_max_total_price: ?[]const u8 = null,
 
     /// The maximum price per unit hour that you are willing to pay for a Spot
     /// Instance. We do not recommend
@@ -258,7 +258,7 @@ pub const SpotFleetRequestConfigData = struct {
     ///
     /// If you specify a maximum price, your instances will be interrupted more
     /// frequently than if you do not specify this parameter.
-    spot_price: ?[]const u8,
+    spot_price: ?[]const u8 = null,
 
     /// The key-value pair for tagging the Spot Fleet request on creation. The value
     /// for
@@ -272,7 +272,7 @@ pub const SpotFleetRequestConfigData = struct {
     /// `LaunchSpecifications`). For information about tagging after launch, see
     /// [Tag your
     /// resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources).
-    tag_specifications: ?[]const TagSpecification,
+    tag_specifications: ?[]const TagSpecification = null,
 
     /// The number of units to request for the Spot Fleet. You can choose to set the
     /// target
@@ -287,12 +287,12 @@ pub const SpotFleetRequestConfigData = struct {
     /// using attribute-based instance type selection.
     ///
     /// Default: `units` (the number of instances)
-    target_capacity_unit_type: ?TargetCapacityUnitType,
+    target_capacity_unit_type: ?TargetCapacityUnitType = null,
 
     /// Indicates whether running Spot Instances are terminated when the Spot Fleet
     /// request
     /// expires.
-    terminate_instances_with_expiration: ?bool,
+    terminate_instances_with_expiration: ?bool = null,
 
     /// The type of request. Indicates whether the Spot Fleet only requests the
     /// target
@@ -307,12 +307,12 @@ pub const SpotFleetRequestConfigData = struct {
     /// capacity and automatically replenishes any interrupted instances. Default:
     /// `maintain`. `instant` is listed but is not used by Spot
     /// Fleet.
-    @"type": ?FleetType,
+    @"type": ?FleetType = null,
 
     /// The start date and time of the request, in UTC format
     /// (*YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     /// By default, Amazon EC2 starts fulfilling the request immediately.
-    valid_from: ?i64,
+    valid_from: ?i64 = null,
 
     /// The end date and time of the request, in UTC format
     /// (*YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
@@ -321,5 +321,5 @@ pub const SpotFleetRequestConfigData = struct {
     /// the request. If no value is specified, the Spot Fleet request remains until
     /// you cancel
     /// it.
-    valid_until: ?i64,
+    valid_until: ?i64 = null,
 };

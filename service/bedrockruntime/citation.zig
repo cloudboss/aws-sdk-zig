@@ -7,17 +7,17 @@ const CitationSourceContent = @import("citation_source_content.zig").CitationSou
 pub const Citation = struct {
     /// The precise location within the source document where the cited content can
     /// be found, including character positions, page numbers, or chunk identifiers.
-    location: ?CitationLocation,
+    location: ?CitationLocation = null,
 
     /// The source from the original search result that provided the cited content.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     /// The specific content from the source document that was referenced or cited
     /// in the generated response.
-    source_content: ?[]const CitationSourceContent,
+    source_content: ?[]const CitationSourceContent = null,
 
     /// The title or identifier of the source document being cited.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .location = "location",

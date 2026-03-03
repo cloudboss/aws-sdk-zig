@@ -60,7 +60,7 @@ pub const AppIntegrationsConfiguration = struct {
     /// Make sure to include additional fields. These fields are indexed and used to
     /// source
     /// recommendations.
-    object_fields: ?[]const []const u8,
+    object_fields: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .app_integration_arn = "appIntegrationArn",

@@ -19,10 +19,10 @@ pub const UserPhoneConfig = struct {
     auto_accept: bool = false,
 
     /// The phone number for the user's desk phone.
-    desk_phone_number: ?[]const u8,
+    desk_phone_number: ?[]const u8 = null,
 
     /// The persistent connection setting for the user.
-    persistent_connection: ?bool,
+    persistent_connection: ?bool = null,
 
     /// The phone type.
     phone_type: PhoneType,

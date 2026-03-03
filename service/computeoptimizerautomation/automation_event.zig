@@ -6,50 +6,50 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// Contains information about an automation event.
 pub const AutomationEvent = struct {
     /// The Amazon Web Services account ID associated with the automation event.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The timestamp when the automation event completed.
-    completed_timestamp: ?i64,
+    completed_timestamp: ?i64 = null,
 
     /// The timestamp when the automation event was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The estimated monthly cost savings associated with this automation event.
-    estimated_monthly_savings: ?EstimatedMonthlySavings,
+    estimated_monthly_savings: ?EstimatedMonthlySavings = null,
 
     /// A description of the automation event.
-    event_description: ?[]const u8,
+    event_description: ?[]const u8 = null,
 
     /// The unique identifier for the automation event.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The current status of the automation event.
-    event_status: ?EventStatus,
+    event_status: ?EventStatus = null,
 
     /// The reason for the current event status.
-    event_status_reason: ?[]const u8,
+    event_status_reason: ?[]const u8 = null,
 
     /// The type of automation event.
-    event_type: ?EventType,
+    event_type: ?EventType = null,
 
     /// The ID of the recommended action associated with this automation event.
-    recommended_action_id: ?[]const u8,
+    recommended_action_id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the automation event occurred.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the resource affected by the automation
     /// event.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The ID of the resource affected by the automation event.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The type of resource affected by the automation event.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The ID of the automation rule that triggered this event.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

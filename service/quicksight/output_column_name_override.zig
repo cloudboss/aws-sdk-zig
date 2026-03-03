@@ -5,7 +5,7 @@ pub const OutputColumnNameOverride = struct {
     output_column_name: []const u8,
 
     /// The original name of the column from the source transform operation.
-    source_column_name: ?[]const u8,
+    source_column_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .output_column_name = "OutputColumnName",

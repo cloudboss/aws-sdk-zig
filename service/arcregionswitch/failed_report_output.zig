@@ -3,10 +3,10 @@ const FailedReportErrorCode = @import("failed_report_error_code.zig").FailedRepo
 /// Information about a report generation that failed.
 pub const FailedReportOutput = struct {
     /// The error code for the failed report generation.
-    error_code: ?FailedReportErrorCode,
+    error_code: ?FailedReportErrorCode = null,
 
     /// The error message for the failed report generation.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

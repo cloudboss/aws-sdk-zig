@@ -8,22 +8,22 @@ const MalwareProtectionDataSourceFreeTrial = @import("malware_protection_data_so
 pub const DataSourcesFreeTrial = struct {
     /// Describes whether any Amazon Web Services CloudTrail management event logs
     /// are enabled as data sources.
-    cloud_trail: ?DataSourceFreeTrial,
+    cloud_trail: ?DataSourceFreeTrial = null,
 
     /// Describes whether any DNS logs are enabled as data sources.
-    dns_logs: ?DataSourceFreeTrial,
+    dns_logs: ?DataSourceFreeTrial = null,
 
     /// Describes whether any VPC Flow logs are enabled as data sources.
-    flow_logs: ?DataSourceFreeTrial,
+    flow_logs: ?DataSourceFreeTrial = null,
 
     /// Describes whether any Kubernetes logs are enabled as data sources.
-    kubernetes: ?KubernetesDataSourceFreeTrial,
+    kubernetes: ?KubernetesDataSourceFreeTrial = null,
 
     /// Describes whether Malware Protection is enabled as a data source.
-    malware_protection: ?MalwareProtectionDataSourceFreeTrial,
+    malware_protection: ?MalwareProtectionDataSourceFreeTrial = null,
 
     /// Describes whether any S3 data event logs are enabled as data sources.
-    s3_logs: ?DataSourceFreeTrial,
+    s3_logs: ?DataSourceFreeTrial = null,
 
     pub const json_field_names = .{
         .cloud_trail = "CloudTrail",

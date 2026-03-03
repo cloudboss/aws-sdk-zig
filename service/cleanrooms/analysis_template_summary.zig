@@ -14,13 +14,13 @@ pub const AnalysisTemplateSummary = struct {
     create_time: i64,
 
     /// The description of the analysis template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the analysis template.
     id: []const u8,
 
     /// Indicates if this analysis template summary generated synthetic data.
-    is_synthetic_data: ?bool,
+    is_synthetic_data: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the member who created the analysis
     /// template.

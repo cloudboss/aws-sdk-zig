@@ -6,9 +6,9 @@ const S3Object = @import("s3_object.zig").S3Object;
 pub const MediaAnalysisResults = struct {
     /// Information about the model versions for the features selected in a given
     /// job.
-    model_versions: ?MediaAnalysisModelVersions,
+    model_versions: ?MediaAnalysisModelVersions = null,
 
-    s3_object: ?S3Object,
+    s3_object: ?S3Object = null,
 
     pub const json_field_names = .{
         .model_versions = "ModelVersions",

@@ -30,73 +30,73 @@ const ModelPackageValidationSpecification = @import("model_package_validation_sp
 /// ](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModelPackage.html).
 pub const ModelPackage = struct {
     /// An array of additional Inference Specification objects.
-    additional_inference_specifications: ?[]const AdditionalInferenceSpecificationDefinition,
+    additional_inference_specifications: ?[]const AdditionalInferenceSpecificationDefinition = null,
 
     /// A description provided when the model approval is set.
-    approval_description: ?[]const u8,
+    approval_description: ?[]const u8 = null,
 
     /// Whether the model package is to be certified to be listed on Amazon Web
     /// Services Marketplace. For information about listing model packages on Amazon
     /// Web Services Marketplace, see [List Your Algorithm or Model Package on
     /// Amazon Web Services
     /// Marketplace](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-list.html).
-    certify_for_marketplace: ?bool,
+    certify_for_marketplace: ?bool = null,
 
     /// Information about the user who created or modified an experiment, trial,
     /// trial component, lineage group, or project.
-    created_by: ?UserContext,
+    created_by: ?UserContext = null,
 
     /// The time that the model package was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The metadata properties for the model package.
-    customer_metadata_properties: ?[]const aws.map.StringMapEntry,
+    customer_metadata_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The machine learning domain of your model package and its components. Common
     /// machine learning domains include computer vision and natural language
     /// processing.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// Represents the drift check baselines that can be used when the model monitor
     /// is set using the model package.
-    drift_check_baselines: ?DriftCheckBaselines,
+    drift_check_baselines: ?DriftCheckBaselines = null,
 
     /// Defines how to perform inference generation after a training job is run.
-    inference_specification: ?InferenceSpecification,
+    inference_specification: ?InferenceSpecification = null,
 
     /// Information about the user who created or modified an experiment, trial,
     /// trial component, lineage group, or project.
-    last_modified_by: ?UserContext,
+    last_modified_by: ?UserContext = null,
 
     /// The last time the model package was modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// Metadata properties of the tracking entity, trial, or trial component.
-    metadata_properties: ?MetadataProperties,
+    metadata_properties: ?MetadataProperties = null,
 
     /// The approval status of the model. This can be one of the following values.
     ///
     /// * `APPROVED` - The model is approved
     /// * `REJECTED` - The model is rejected.
     /// * `PENDING_MANUAL_APPROVAL` - The model is waiting for manual approval.
-    model_approval_status: ?ModelApprovalStatus,
+    model_approval_status: ?ModelApprovalStatus = null,
 
-    model_card: ?ModelPackageModelCard,
+    model_card: ?ModelPackageModelCard = null,
 
     /// A structure describing the current state of the model in its life cycle.
-    model_life_cycle: ?ModelLifeCycle,
+    model_life_cycle: ?ModelLifeCycle = null,
 
     /// Metrics for the model.
-    model_metrics: ?ModelMetrics,
+    model_metrics: ?ModelMetrics = null,
 
     /// The Amazon Resource Name (ARN) of the model package.
-    model_package_arn: ?[]const u8,
+    model_package_arn: ?[]const u8 = null,
 
     /// The description of the model package.
-    model_package_description: ?[]const u8,
+    model_package_description: ?[]const u8 = null,
 
     /// The model group to which the model belongs.
-    model_package_group_name: ?[]const u8,
+    model_package_group_name: ?[]const u8 = null,
 
     /// The name of the model package. The name can be as follows:
     ///
@@ -104,10 +104,10 @@ pub const ModelPackage = struct {
     ///   Model Registry and follows the format
     ///   '`ModelPackageGroupName/ModelPackageVersion`'.
     /// * For an unversioned model, you must provide the name.
-    model_package_name: ?[]const u8,
+    model_package_name: ?[]const u8 = null,
 
     /// The package registration type of the model package.
-    model_package_registration_type: ?ModelPackageRegistrationType,
+    model_package_registration_type: ?ModelPackageRegistrationType = null,
 
     /// The status of the model package. This can be one of the following values.
     ///
@@ -116,43 +116,43 @@ pub const ModelPackage = struct {
     /// * `COMPLETED` - The model package was successfully created.
     /// * `FAILED` - The model package failed.
     /// * `DELETING` - The model package is in the process of being deleted.
-    model_package_status: ?ModelPackageStatus,
+    model_package_status: ?ModelPackageStatus = null,
 
     /// Specifies the validation and image scan statuses of the model package.
-    model_package_status_details: ?ModelPackageStatusDetails,
+    model_package_status_details: ?ModelPackageStatusDetails = null,
 
     /// The version number of a versioned model.
-    model_package_version: ?i32,
+    model_package_version: ?i32 = null,
 
     /// The Amazon Simple Storage Service path where the sample payload are stored.
     /// This path must point to a single gzip compressed tar archive (.tar.gz
     /// suffix).
-    sample_payload_url: ?[]const u8,
+    sample_payload_url: ?[]const u8 = null,
 
-    security_config: ?ModelPackageSecurityConfig,
+    security_config: ?ModelPackageSecurityConfig = null,
 
     /// Indicates if you want to skip model validation.
-    skip_model_validation: ?SkipModelValidation,
+    skip_model_validation: ?SkipModelValidation = null,
 
     /// A list of algorithms that were used to create a model package.
-    source_algorithm_specification: ?SourceAlgorithmSpecification,
+    source_algorithm_specification: ?SourceAlgorithmSpecification = null,
 
     /// The URI of the source for the model package.
-    source_uri: ?[]const u8,
+    source_uri: ?[]const u8 = null,
 
     /// A list of the tags associated with the model package. For more information,
     /// see [Tagging Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
     /// in the *Amazon Web Services General Reference Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The machine learning task your model package accomplishes. Common machine
     /// learning tasks include object detection and image classification.
-    task: ?[]const u8,
+    task: ?[]const u8 = null,
 
     /// Specifies batch transform jobs that SageMaker runs to validate your model
     /// package.
-    validation_specification: ?ModelPackageValidationSpecification,
+    validation_specification: ?ModelPackageValidationSpecification = null,
 
     pub const json_field_names = .{
         .additional_inference_specifications = "AdditionalInferenceSpecifications",

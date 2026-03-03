@@ -6,10 +6,10 @@ const VnfOperationalState = @import("vnf_operational_state.zig").VnfOperationalS
 /// A network function instance is a function in a function package .
 pub const GetSolVnfInfo = struct {
     /// Compute info used by the network function instance.
-    vnfc_resource_info: ?[]const GetSolVnfcResourceInfo,
+    vnfc_resource_info: ?[]const GetSolVnfcResourceInfo = null,
 
     /// State of the network function instance.
-    vnf_state: ?VnfOperationalState,
+    vnf_state: ?VnfOperationalState = null,
 
     pub const json_field_names = .{
         .vnfc_resource_info = "vnfcResourceInfo",

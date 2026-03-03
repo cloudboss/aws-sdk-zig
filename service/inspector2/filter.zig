@@ -18,7 +18,7 @@ pub const Filter = struct {
     criteria: FilterCriteria,
 
     /// A description of the filter.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the filter.
     name: []const u8,
@@ -27,10 +27,10 @@ pub const Filter = struct {
     owner_id: []const u8,
 
     /// The reason for the filter.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The tags attached to the filter.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The date and time the filter was last updated at.
     updated_at: i64,

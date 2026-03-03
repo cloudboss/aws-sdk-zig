@@ -1,9 +1,9 @@
 pub const ListTagsForResourceRequest = struct {
     /// Reserved for future use.
-    limit: ?i32,
+    limit: ?i32 = null,
 
     /// Reserved for future use.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// Identifier (ID) of the directory for which you want to retrieve tags.
     resource_id: []const u8,

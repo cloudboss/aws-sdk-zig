@@ -1,7 +1,7 @@
 /// The connector-specific profile properties required when using Salesforce.
 pub const SalesforceConnectorProfileProperties = struct {
     /// The location of the Salesforce resource.
-    instance_url: ?[]const u8,
+    instance_url: ?[]const u8 = null,
 
     /// Indicates whether the connector profile applies to a sandbox or production
     /// environment.

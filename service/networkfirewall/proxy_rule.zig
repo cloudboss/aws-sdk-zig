@@ -6,18 +6,18 @@ const ProxyRuleCondition = @import("proxy_rule_condition.zig").ProxyRuleConditio
 /// methods) and what action to take (allow, deny, alert).
 pub const ProxyRule = struct {
     /// Action to take.
-    action: ?ProxyRulePhaseAction,
+    action: ?ProxyRulePhaseAction = null,
 
     /// Match criteria that specify what traffic attributes to examine. Conditions
     /// include operators (StringEquals, StringLike) and values to match against.
-    conditions: ?[]const ProxyRuleCondition,
+    conditions: ?[]const ProxyRuleCondition = null,
 
     /// A description of the proxy rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The descriptive name of the proxy rule. You can't change the name of a proxy
     /// rule after you create it.
-    proxy_rule_name: ?[]const u8,
+    proxy_rule_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

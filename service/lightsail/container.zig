@@ -7,10 +7,10 @@ const ContainerServiceProtocol = @import("container_service_protocol.zig").Conta
 /// Amazon Lightsail container service.
 pub const Container = struct {
     /// The launch command for the container.
-    command: ?[]const []const u8,
+    command: ?[]const []const u8 = null,
 
     /// The environment variables of the container.
-    environment: ?[]const aws.map.StringMapEntry,
+    environment: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the image used for the container.
     ///
@@ -31,10 +31,10 @@ pub const Container = struct {
     /// Container images sourced from a public registry like Docker Hub don't start
     /// with a colon.
     /// For example, `nginx:latest` or `nginx`.
-    image: ?[]const u8,
+    image: ?[]const u8 = null,
 
     /// The open firewall ports of the container.
-    ports: ?[]const aws.map.MapEntry(ContainerServiceProtocol),
+    ports: ?[]const aws.map.MapEntry(ContainerServiceProtocol) = null,
 
     pub const json_field_names = .{
         .command = "command",

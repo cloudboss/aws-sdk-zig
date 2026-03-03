@@ -3,22 +3,22 @@
 pub const RecoveryPoint = struct {
     /// The Amazon Resource Name (ARN) of the namespace the recovery point is
     /// associated with.
-    namespace_arn: ?[]const u8,
+    namespace_arn: ?[]const u8 = null,
 
     /// The name of the namespace the recovery point is associated with.
-    namespace_name: ?[]const u8,
+    namespace_name: ?[]const u8 = null,
 
     /// The time the recovery point is created.
-    recovery_point_create_time: ?i64,
+    recovery_point_create_time: ?i64 = null,
 
     /// The unique identifier of the recovery point.
-    recovery_point_id: ?[]const u8,
+    recovery_point_id: ?[]const u8 = null,
 
     /// The total size of the data in the recovery point in megabytes.
-    total_size_in_mega_bytes: ?f64,
+    total_size_in_mega_bytes: ?f64 = null,
 
     /// The name of the workgroup the recovery point is associated with.
-    workgroup_name: ?[]const u8,
+    workgroup_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .namespace_arn = "namespaceArn",

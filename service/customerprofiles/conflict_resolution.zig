@@ -17,7 +17,7 @@ pub const ConflictResolution = struct {
 
     /// The `ObjectType` name that is used to resolve profile merging conflicts when
     /// choosing `SOURCE` as the `ConflictResolvingModel`.
-    source_name: ?[]const u8,
+    source_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .conflict_resolving_model = "ConflictResolvingModel",

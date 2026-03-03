@@ -17,7 +17,7 @@ pub const Item = struct {
     /// string data, to include multiple categories for a single item,
     /// separate each category with a pipe separator (`|`). For example,
     /// `\"Horror|Action\"`.
-    properties: ?[]const u8,
+    properties: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .item_id = "itemId",

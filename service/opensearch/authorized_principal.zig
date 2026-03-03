@@ -7,10 +7,10 @@ const PrincipalType = @import("principal_type.zig").PrincipalType;
 pub const AuthorizedPrincipal = struct {
     /// The [IAM
     /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html) that is allowed access to the domain.
-    principal: ?[]const u8,
+    principal: ?[]const u8 = null,
 
     /// The type of principal.
-    principal_type: ?PrincipalType,
+    principal_type: ?PrincipalType = null,
 
     pub const json_field_names = .{
         .principal = "Principal",

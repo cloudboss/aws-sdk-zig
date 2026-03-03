@@ -235,59 +235,59 @@ const StartTimerDecisionAttributes = @import("start_timer_decision_attributes.zi
 pub const Decision = struct {
     /// Provides the details of the `CancelTimer` decision. It isn't set for other
     /// decision types.
-    cancel_timer_decision_attributes: ?CancelTimerDecisionAttributes,
+    cancel_timer_decision_attributes: ?CancelTimerDecisionAttributes = null,
 
     /// Provides the details of the `CancelWorkflowExecution` decision. It isn't set
     /// for other decision types.
-    cancel_workflow_execution_decision_attributes: ?CancelWorkflowExecutionDecisionAttributes,
+    cancel_workflow_execution_decision_attributes: ?CancelWorkflowExecutionDecisionAttributes = null,
 
     /// Provides the details of the `CompleteWorkflowExecution` decision. It isn't
     /// set for other decision types.
-    complete_workflow_execution_decision_attributes: ?CompleteWorkflowExecutionDecisionAttributes,
+    complete_workflow_execution_decision_attributes: ?CompleteWorkflowExecutionDecisionAttributes = null,
 
     /// Provides the details of the `ContinueAsNewWorkflowExecution` decision. It
     /// isn't set for other decision types.
-    continue_as_new_workflow_execution_decision_attributes: ?ContinueAsNewWorkflowExecutionDecisionAttributes,
+    continue_as_new_workflow_execution_decision_attributes: ?ContinueAsNewWorkflowExecutionDecisionAttributes = null,
 
     /// Specifies the type of the decision.
     decision_type: DecisionType,
 
     /// Provides the details of the `FailWorkflowExecution` decision. It isn't set
     /// for other decision types.
-    fail_workflow_execution_decision_attributes: ?FailWorkflowExecutionDecisionAttributes,
+    fail_workflow_execution_decision_attributes: ?FailWorkflowExecutionDecisionAttributes = null,
 
     /// Provides the details of the `RecordMarker` decision. It isn't set for other
     /// decision types.
-    record_marker_decision_attributes: ?RecordMarkerDecisionAttributes,
+    record_marker_decision_attributes: ?RecordMarkerDecisionAttributes = null,
 
     /// Provides the details of the `RequestCancelActivityTask` decision. It isn't
     /// set for other decision types.
-    request_cancel_activity_task_decision_attributes: ?RequestCancelActivityTaskDecisionAttributes,
+    request_cancel_activity_task_decision_attributes: ?RequestCancelActivityTaskDecisionAttributes = null,
 
     /// Provides the details of the `RequestCancelExternalWorkflowExecution`
     /// decision.
     /// It isn't set for other decision types.
-    request_cancel_external_workflow_execution_decision_attributes: ?RequestCancelExternalWorkflowExecutionDecisionAttributes,
+    request_cancel_external_workflow_execution_decision_attributes: ?RequestCancelExternalWorkflowExecutionDecisionAttributes = null,
 
     /// Provides the details of the `ScheduleActivityTask` decision. It isn't set
     /// for other decision types.
-    schedule_activity_task_decision_attributes: ?ScheduleActivityTaskDecisionAttributes,
+    schedule_activity_task_decision_attributes: ?ScheduleActivityTaskDecisionAttributes = null,
 
     /// Provides the details of the `ScheduleLambdaFunction` decision. It isn't set
     /// for other decision types.
-    schedule_lambda_function_decision_attributes: ?ScheduleLambdaFunctionDecisionAttributes,
+    schedule_lambda_function_decision_attributes: ?ScheduleLambdaFunctionDecisionAttributes = null,
 
     /// Provides the details of the `SignalExternalWorkflowExecution` decision. It
     /// isn't set for other decision types.
-    signal_external_workflow_execution_decision_attributes: ?SignalExternalWorkflowExecutionDecisionAttributes,
+    signal_external_workflow_execution_decision_attributes: ?SignalExternalWorkflowExecutionDecisionAttributes = null,
 
     /// Provides the details of the `StartChildWorkflowExecution` decision. It isn't
     /// set for other decision types.
-    start_child_workflow_execution_decision_attributes: ?StartChildWorkflowExecutionDecisionAttributes,
+    start_child_workflow_execution_decision_attributes: ?StartChildWorkflowExecutionDecisionAttributes = null,
 
     /// Provides the details of the `StartTimer` decision. It isn't set for other
     /// decision types.
-    start_timer_decision_attributes: ?StartTimerDecisionAttributes,
+    start_timer_decision_attributes: ?StartTimerDecisionAttributes = null,
 
     pub const json_field_names = .{
         .cancel_timer_decision_attributes = "cancelTimerDecisionAttributes",

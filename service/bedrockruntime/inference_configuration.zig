@@ -10,11 +10,11 @@ pub const InferenceConfiguration = struct {
     /// value is the maximum allowed value for the model that you are using. For
     /// more information, see [Inference parameters for foundation
     /// models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html).
-    max_tokens: ?i32,
+    max_tokens: ?i32 = null,
 
     /// A list of stop sequences. A stop sequence is a sequence of characters that
     /// causes the model to stop generating the response.
-    stop_sequences: ?[]const []const u8,
+    stop_sequences: ?[]const []const u8 = null,
 
     /// The likelihood of the model selecting higher-probability options while
     /// generating a response. A lower value makes the model more likely to choose
@@ -24,7 +24,7 @@ pub const InferenceConfiguration = struct {
     /// The default value is the default value for the model that you are using. For
     /// more information, see [Inference parameters for foundation
     /// models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html).
-    temperature: ?f32,
+    temperature: ?f32 = null,
 
     /// The percentage of most-likely candidates that the model considers for the
     /// next token. For example, if you choose a value of 0.8 for `topP`, the model
@@ -34,7 +34,7 @@ pub const InferenceConfiguration = struct {
     /// The default value is the default value for the model that you are using. For
     /// more information, see [Inference parameters for foundation
     /// models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html).
-    top_p: ?f32,
+    top_p: ?f32 = null,
 
     pub const json_field_names = .{
         .max_tokens = "maxTokens",

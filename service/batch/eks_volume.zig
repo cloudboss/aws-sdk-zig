@@ -10,14 +10,14 @@ pub const EksVolume = struct {
     /// see
     /// [emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
     /// in the *Kubernetes documentation*.
-    empty_dir: ?EksEmptyDir,
+    empty_dir: ?EksEmptyDir = null,
 
     /// Specifies the configuration of a Kubernetes `hostPath` volume. For more
     /// information,
     /// see
     /// [hostPath](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath)
     /// in the *Kubernetes documentation*.
-    host_path: ?EksHostPath,
+    host_path: ?EksHostPath = null,
 
     /// The name of the volume. The name must be allowed as a DNS subdomain name.
     /// For more
@@ -30,13 +30,13 @@ pub const EksVolume = struct {
     /// `persistentVolume`. For more information, see [
     /// Persistent Volume
     /// Claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims) in the *Kubernetes documentation*.
-    persistent_volume_claim: ?EksPersistentVolumeClaim,
+    persistent_volume_claim: ?EksPersistentVolumeClaim = null,
 
     /// Specifies the configuration of a Kubernetes `secret` volume. For more
     /// information, see
     /// [secret](https://kubernetes.io/docs/concepts/storage/volumes/#secret) in the
     /// *Kubernetes documentation*.
-    secret: ?EksSecret,
+    secret: ?EksSecret = null,
 
     pub const json_field_names = .{
         .empty_dir = "emptyDir",

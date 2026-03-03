@@ -17,7 +17,7 @@ pub const TargetTrackingMetricDataQuery = struct {
     ///
     /// Conditional: Within each `TargetTrackingMetricDataQuery` object, you must
     /// specify either `Expression` or `MetricStat`, but not both.
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     /// A short name that identifies the object's results in the response. This name
     /// must be
@@ -34,20 +34,20 @@ pub const TargetTrackingMetricDataQuery = struct {
     /// A human-readable label for this metric or expression. This is especially
     /// useful if
     /// this is a math expression, so that you know what the value represents.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// Information about the metric data to return.
     ///
     /// Conditional: Within each `TargetTrackingMetricDataQuery` object, you must
     /// specify either `Expression` or `MetricStat`, but not both.
-    metric_stat: ?TargetTrackingMetricStat,
+    metric_stat: ?TargetTrackingMetricStat = null,
 
     /// The period of the metric in seconds. The default value is 60. Accepted
     /// values are 10, 30, and 60. For high resolution metric, set the value to less
     /// than 60. For more information, see
     /// [Create a target tracking policy using high-resolution metrics for faster
     /// response](https://docs.aws.amazon.com/autoscaling/ec2/userguide/policy-creating-high-resolution-metrics.html).
-    period: ?i32,
+    period: ?i32 = null,
 
     /// Indicates whether to return the timestamps and raw data values of this
     /// metric.
@@ -62,5 +62,5 @@ pub const TargetTrackingMetricDataQuery = struct {
     /// do not
     /// specify anything for `ReturnData`. This sets it to its default
     /// (`true`).
-    return_data: ?bool,
+    return_data: ?bool = null,
 };

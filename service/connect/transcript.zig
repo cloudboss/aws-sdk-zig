@@ -10,7 +10,7 @@ pub const Transcript = struct {
     criteria: []const TranscriptCriteria,
 
     /// The match type combining search criteria using multiple transcript criteria.
-    match_type: ?SearchContactsMatchType,
+    match_type: ?SearchContactsMatchType = null,
 
     pub const json_field_names = .{
         .criteria = "Criteria",

@@ -16,44 +16,44 @@ const InstanceFleetStatus = @import("instance_fleet_status.zig").InstanceFleetSt
 /// 4.8.0 and later, excluding 5.0.x versions.
 pub const InstanceFleet = struct {
     /// Reserved.
-    context: ?[]const u8,
+    context: ?[]const u8 = null,
 
     /// The unique identifier of the instance fleet.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The node type that the instance fleet hosts. Valid values are MASTER, CORE,
     /// or TASK.
-    instance_fleet_type: ?InstanceFleetType,
+    instance_fleet_type: ?InstanceFleetType = null,
 
     /// An array of specifications for the instance types that comprise an instance
     /// fleet.
-    instance_type_specifications: ?[]const InstanceTypeSpecification,
+    instance_type_specifications: ?[]const InstanceTypeSpecification = null,
 
     /// Describes the launch specification for an instance fleet.
-    launch_specifications: ?InstanceFleetProvisioningSpecifications,
+    launch_specifications: ?InstanceFleetProvisioningSpecifications = null,
 
     /// A friendly name for the instance fleet.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The number of On-Demand units that have been provisioned for the instance
     /// fleet to
     /// fulfill `TargetOnDemandCapacity`. This provisioned capacity might be less
     /// than
     /// or greater than `TargetOnDemandCapacity`.
-    provisioned_on_demand_capacity: ?i32,
+    provisioned_on_demand_capacity: ?i32 = null,
 
     /// The number of Spot units that have been provisioned for this instance fleet
     /// to fulfill
     /// `TargetSpotCapacity`. This provisioned capacity might be less than or
     /// greater
     /// than `TargetSpotCapacity`.
-    provisioned_spot_capacity: ?i32,
+    provisioned_spot_capacity: ?i32 = null,
 
     /// The resize specification for the instance fleet.
-    resize_specifications: ?InstanceFleetResizingSpecifications,
+    resize_specifications: ?InstanceFleetResizingSpecifications = null,
 
     /// The current status of the instance fleet.
-    status: ?InstanceFleetStatus,
+    status: ?InstanceFleetStatus = null,
 
     /// The target capacity of On-Demand units for the instance fleet, which
     /// determines how many
@@ -82,7 +82,7 @@ pub const InstanceFleet = struct {
     /// `TargetSpotCapacity`
     /// and `TargetOnDemandCapacity` can be specified, and its value must be
     /// 1.
-    target_on_demand_capacity: ?i32,
+    target_on_demand_capacity: ?i32 = null,
 
     /// The target capacity of Spot units for the instance fleet, which determines
     /// how many Spot
@@ -109,7 +109,7 @@ pub const InstanceFleet = struct {
     /// `TargetOnDemandCapacity` should be greater than 0. For a master instance
     /// fleet, only one of `TargetSpotCapacity` and
     /// `TargetOnDemandCapacity` can be specified, and its value must be 1.
-    target_spot_capacity: ?i32,
+    target_spot_capacity: ?i32 = null,
 
     pub const json_field_names = .{
         .context = "Context",

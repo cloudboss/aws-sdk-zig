@@ -5,13 +5,13 @@ const SystemMessageType = @import("system_message_type.zig").SystemMessageType;
 pub const TextOutputEvent = struct {
     /// The identifier of the conversation with which the text output event is
     /// associated.
-    conversation_id: ?[]const u8,
+    conversation_id: ?[]const u8 = null,
 
     /// An AI-generated message in a `TextOutputEvent`.
-    system_message: ?[]const u8,
+    system_message: ?[]const u8 = null,
 
     /// The identifier of an AI-generated message in a `TextOutputEvent`.
-    system_message_id: ?[]const u8,
+    system_message_id: ?[]const u8 = null,
 
     /// The type of AI-generated message in a `TextOutputEvent`. Amazon Q Business
     /// currently supports two types of messages:
@@ -21,10 +21,10 @@ pub const TextOutputEvent = struct {
     ///   returned by Amazon Q Business. Available only if hallucination reduction
     ///   is supported and configured for the application and detected in the end
     ///   user chat query by Amazon Q Business.
-    system_message_type: ?SystemMessageType,
+    system_message_type: ?SystemMessageType = null,
 
     /// The identifier of an end user message in a `TextOutputEvent`.
-    user_message_id: ?[]const u8,
+    user_message_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .conversation_id = "conversationId",

@@ -4,10 +4,10 @@ const TypedAttributeValue = @import("typed_attribute_value.zig").TypedAttributeV
 /// The action to take on the object attribute.
 pub const ObjectAttributeAction = struct {
     /// A type that can be either `Update` or `Delete`.
-    object_attribute_action_type: ?UpdateActionType,
+    object_attribute_action_type: ?UpdateActionType = null,
 
     /// The value that you want to update to.
-    object_attribute_update_value: ?TypedAttributeValue,
+    object_attribute_update_value: ?TypedAttributeValue = null,
 
     pub const json_field_names = .{
         .object_attribute_action_type = "ObjectAttributeActionType",

@@ -11,7 +11,7 @@ pub const AutomatedAbrSettings = struct {
     /// rendition will be equal to or below this value, depending on the quality,
     /// complexity, and resolution of your content. Note that the instantaneous
     /// maximum bitrate may vary above the value that you specify.
-    max_abr_bitrate: ?i32,
+    max_abr_bitrate: ?i32 = null,
 
     /// Optional. Specify the QVBR quality level to use for all renditions in your
     /// automated ABR stack. To have MediaConvert automatically determine the
@@ -20,7 +20,7 @@ pub const AutomatedAbrSettings = struct {
     /// that you specify, depending on your source. For more information about QVBR
     /// quality levels, see:
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/qvbr-guidelines.html
-    max_quality_level: ?f64,
+    max_quality_level: ?f64 = null,
 
     /// Optional. The maximum number of renditions that MediaConvert will create in
     /// your automated ABR stack. The number of renditions is determined
@@ -28,20 +28,20 @@ pub const AutomatedAbrSettings = struct {
     /// limit. When you set this to Auto in the console, which is equivalent to
     /// excluding it from your JSON job specification, MediaConvert defaults to a
     /// limit of 15.
-    max_renditions: ?i32,
+    max_renditions: ?i32 = null,
 
     /// Specify the minimum average bitrate for MediaConvert to use in your
     /// automated ABR stack. If you don't specify a value, MediaConvert uses 600,000
     /// (600 kb/s) by default. The average bitrate of your lowest-quality rendition
     /// will be near this value. Note that the instantaneous minimum bitrate may
     /// vary below the value that you specify.
-    min_abr_bitrate: ?i32,
+    min_abr_bitrate: ?i32 = null,
 
     /// Optional. Use Automated ABR rules to specify restrictions for the rendition
     /// sizes MediaConvert will create in your ABR stack. You can use these rules if
     /// your ABR workflow has specific rendition size requirements, but you still
     /// want MediaConvert to optimize for video quality and overall file size.
-    rules: ?[]const AutomatedAbrRule,
+    rules: ?[]const AutomatedAbrRule = null,
 
     pub const json_field_names = .{
         .max_abr_bitrate = "MaxAbrBitrate",

@@ -15,7 +15,7 @@ pub const SourceS3Location = struct {
     /// For more infomration about Regions that are disabled by default, see [
     /// Enabling a
     /// Region](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable) in the *AWS General Reference guide*.
-    region: ?S3BucketRegion,
+    region: ?S3BucketRegion = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

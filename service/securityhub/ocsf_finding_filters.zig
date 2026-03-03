@@ -5,11 +5,11 @@ const AllowedOperators = @import("allowed_operators.zig").AllowedOperators;
 pub const OcsfFindingFilters = struct {
     /// Enables the creation of complex filtering conditions by combining filter
     /// criteria.
-    composite_filters: ?[]const CompositeFilter,
+    composite_filters: ?[]const CompositeFilter = null,
 
     /// The logical operators used to combine the filtering on multiple
     /// `CompositeFilters`.
-    composite_operator: ?AllowedOperators,
+    composite_operator: ?AllowedOperators = null,
 
     pub const json_field_names = .{
         .composite_filters = "CompositeFilters",

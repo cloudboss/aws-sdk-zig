@@ -4,7 +4,7 @@
 /// available by using the global variable `.aws.tp_log_path`.
 pub const TickerplantLogConfiguration = struct {
     /// The name of the volumes for tickerplant logs.
-    tickerplant_log_volumes: ?[]const []const u8,
+    tickerplant_log_volumes: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .tickerplant_log_volumes = "tickerplantLogVolumes",

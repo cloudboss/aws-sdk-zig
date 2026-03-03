@@ -24,5 +24,5 @@ pub const LaunchTemplateNetworkPerformanceOptionsRequest = struct {
     ///
     /// This option boosts your EBS baseline bandwidth and reduces your networking
     /// baseline bandwidth.
-    bandwidth_weighting: ?InstanceBandwidthWeighting,
+    bandwidth_weighting: ?InstanceBandwidthWeighting = null,
 };

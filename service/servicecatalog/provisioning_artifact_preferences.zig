@@ -12,7 +12,7 @@ pub const ProvisioningArtifactPreferences = struct {
     /// `UpdateProvisioningPreferences$StackSetAccounts`.
     ///
     /// Applicable only to a `CFN_STACKSET` provisioned product type.
-    stack_set_accounts: ?[]const []const u8,
+    stack_set_accounts: ?[]const []const u8 = null,
 
     /// One or more Amazon Web Services Regions where stack instances are deployed
     /// from the stack set. These Regions can be scoped in
@@ -20,7 +20,7 @@ pub const ProvisioningArtifactPreferences = struct {
     /// `UpdateProvisioningPreferences$StackSetRegions`.
     ///
     /// Applicable only to a `CFN_STACKSET` provisioned product type.
-    stack_set_regions: ?[]const []const u8,
+    stack_set_regions: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .stack_set_accounts = "StackSetAccounts",

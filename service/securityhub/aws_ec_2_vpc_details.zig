@@ -4,20 +4,20 @@ const Ipv6CidrBlockAssociation = @import("ipv_6_cidr_block_association.zig").Ipv
 /// Details about an EC2 VPC.
 pub const AwsEc2VpcDetails = struct {
     /// Information about the IPv4 CIDR blocks associated with the VPC.
-    cidr_block_association_set: ?[]const CidrBlockAssociation,
+    cidr_block_association_set: ?[]const CidrBlockAssociation = null,
 
     /// The identifier of the set of Dynamic Host Configuration Protocol (DHCP)
     /// options that are
     /// associated with the VPC. If the default options are associated with the VPC,
     /// then this is
     /// default.
-    dhcp_options_id: ?[]const u8,
+    dhcp_options_id: ?[]const u8 = null,
 
     /// Information about the IPv6 CIDR blocks associated with the VPC.
-    ipv_6_cidr_block_association_set: ?[]const Ipv6CidrBlockAssociation,
+    ipv_6_cidr_block_association_set: ?[]const Ipv6CidrBlockAssociation = null,
 
     /// The current state of the VPC. Valid values are `available` or `pending`.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cidr_block_association_set = "CidrBlockAssociationSet",

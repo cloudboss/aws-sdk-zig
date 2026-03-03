@@ -3,8 +3,8 @@
 /// subelements.
 pub const TenantDatabasePendingModifiedValues = struct {
     /// The master password for the tenant database.
-    master_user_password: ?[]const u8,
+    master_user_password: ?[]const u8 = null,
 
     /// The name of the tenant database.
-    tenant_db_name: ?[]const u8,
+    tenant_db_name: ?[]const u8 = null,
 };

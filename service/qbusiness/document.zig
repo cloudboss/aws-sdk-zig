@@ -8,34 +8,34 @@ const MediaExtractionConfiguration = @import("media_extraction_configuration.zig
 /// A document in an Amazon Q Business application.
 pub const Document = struct {
     /// Configuration information for access permission to a document.
-    access_configuration: ?AccessConfiguration,
+    access_configuration: ?AccessConfiguration = null,
 
     /// Custom attributes to apply to the document for refining Amazon Q Business
     /// web experience responses.
-    attributes: ?[]const DocumentAttribute,
+    attributes: ?[]const DocumentAttribute = null,
 
     /// The contents of the document.
-    content: ?DocumentContent,
+    content: ?DocumentContent = null,
 
     /// The file type of the document in the Blob field.
     ///
     /// If you want to index snippets or subsets of HTML documents instead of the
     /// entirety of the HTML documents, you add the `HTML` start and closing tags
     /// (`<HTML>content</HTML>`) around the content.
-    content_type: ?ContentType,
+    content_type: ?ContentType = null,
 
     /// The configuration information for altering document metadata and content
     /// during the document ingestion process.
-    document_enrichment_configuration: ?DocumentEnrichmentConfiguration,
+    document_enrichment_configuration: ?DocumentEnrichmentConfiguration = null,
 
     /// The identifier of the document.
     id: []const u8,
 
     /// The configuration for extracting information from media in the document.
-    media_extraction_configuration: ?MediaExtractionConfiguration,
+    media_extraction_configuration: ?MediaExtractionConfiguration = null,
 
     /// The title of the document.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_configuration = "accessConfiguration",

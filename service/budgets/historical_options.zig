@@ -35,7 +35,7 @@ pub const HistoricalOptions = struct {
     /// You can’t set your own `LookBackAvailablePeriods`. The value is
     /// automatically calculated from the `BudgetAdjustmentPeriod` and your
     /// historical cost data.
-    look_back_available_periods: ?i32,
+    look_back_available_periods: ?i32 = null,
 
     pub const json_field_names = .{
         .budget_adjustment_period = "BudgetAdjustmentPeriod",

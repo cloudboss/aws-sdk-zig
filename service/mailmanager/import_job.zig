@@ -7,24 +7,24 @@ pub const ImportJob = struct {
     address_list_id: []const u8,
 
     /// The timestamp of when the import job was completed.
-    completed_timestamp: ?i64,
+    completed_timestamp: ?i64 = null,
 
     /// The timestamp of when the import job was created.
     created_timestamp: i64,
 
     /// The reason for failure of an import job.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// The number of addresses in the input that failed to get imported into
     /// address list.
-    failed_items_count: ?i32,
+    failed_items_count: ?i32 = null,
 
     /// The format of the input for the import job.
     import_data_format: ImportDataFormat,
 
     /// The number of addresses in the input that were successfully imported into
     /// the address list.
-    imported_items_count: ?i32,
+    imported_items_count: ?i32 = null,
 
     /// The identifier of the import job.
     job_id: []const u8,
@@ -36,7 +36,7 @@ pub const ImportJob = struct {
     pre_signed_url: []const u8,
 
     /// The timestamp of when the import job was started.
-    start_timestamp: ?i64,
+    start_timestamp: ?i64 = null,
 
     /// The status of the import job.
     status: ImportJobStatus,

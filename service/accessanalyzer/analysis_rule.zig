@@ -6,7 +6,7 @@ const AnalysisRuleCriteria = @import("analysis_rule_criteria.zig").AnalysisRuleC
 pub const AnalysisRule = struct {
     /// A list of rules for the analyzer containing criteria to exclude from
     /// analysis. Entities that meet the rule criteria will not generate findings.
-    exclusions: ?[]const AnalysisRuleCriteria,
+    exclusions: ?[]const AnalysisRuleCriteria = null,
 
     pub const json_field_names = .{
         .exclusions = "exclusions",

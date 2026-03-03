@@ -6,14 +6,14 @@ const MembershipSyntheticDataGenerationPaymentConfig = @import("membership_synth
 /// responsibilities set by the collaboration creator.
 pub const MembershipMLPaymentConfig = struct {
     /// The payment responsibilities accepted by the member for model inference.
-    model_inference: ?MembershipModelInferencePaymentConfig,
+    model_inference: ?MembershipModelInferencePaymentConfig = null,
 
     /// The payment responsibilities accepted by the member for model training.
-    model_training: ?MembershipModelTrainingPaymentConfig,
+    model_training: ?MembershipModelTrainingPaymentConfig = null,
 
     /// The payment configuration for synthetic data generation for this machine
     /// learning membership.
-    synthetic_data_generation: ?MembershipSyntheticDataGenerationPaymentConfig,
+    synthetic_data_generation: ?MembershipSyntheticDataGenerationPaymentConfig = null,
 
     pub const json_field_names = .{
         .model_inference = "modelInference",

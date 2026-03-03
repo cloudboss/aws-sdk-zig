@@ -10,14 +10,14 @@ const EventDescription = @import("event_description.zig").EventDescription;
 pub const OrganizationEventDetails = struct {
     /// The 12-digit Amazon Web Services account numbers that contains the affected
     /// entities.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
-    event: ?Event,
+    event: ?Event = null,
 
-    event_description: ?EventDescription,
+    event_description: ?EventDescription = null,
 
     /// Additional metadata about the event.
-    event_metadata: ?[]const aws.map.StringMapEntry,
+    event_metadata: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .aws_account_id = "awsAccountId",

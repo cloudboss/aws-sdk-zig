@@ -5,25 +5,25 @@ const ErrorCode = @import("error_code.zig").ErrorCode;
 /// A summary of the analysis.
 pub const AnalysisSummary = struct {
     /// The completion time of the analysis.
-    analysis_completion_time: ?[]const u8,
+    analysis_completion_time: ?[]const u8 = null,
 
     /// The analysis ID that's associated with the commitment purchase analysis.
-    analysis_id: ?[]const u8,
+    analysis_id: ?[]const u8 = null,
 
     /// The start time of the analysis.
-    analysis_started_time: ?[]const u8,
+    analysis_started_time: ?[]const u8 = null,
 
     /// The status of the analysis.
-    analysis_status: ?AnalysisStatus,
+    analysis_status: ?AnalysisStatus = null,
 
     /// The configuration for the commitment purchase analysis.
-    commitment_purchase_analysis_configuration: ?CommitmentPurchaseAnalysisConfiguration,
+    commitment_purchase_analysis_configuration: ?CommitmentPurchaseAnalysisConfiguration = null,
 
     /// The error code used for the analysis.
-    error_code: ?ErrorCode,
+    error_code: ?ErrorCode = null,
 
     /// The estimated time for when the analysis will complete.
-    estimated_completion_time: ?[]const u8,
+    estimated_completion_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .analysis_completion_time = "AnalysisCompletionTime",

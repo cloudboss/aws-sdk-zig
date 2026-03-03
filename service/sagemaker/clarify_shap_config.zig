@@ -9,12 +9,12 @@ pub const ClarifyShapConfig = struct {
     /// has an impact on latency of explainability requests. For more information,
     /// see the **Synthetic data** of [Configure and create an
     /// endpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html).
-    number_of_samples: ?i32,
+    number_of_samples: ?i32 = null,
 
     /// The starting value used to initialize the random number generator in the
     /// explainer. Provide a value for this parameter to obtain a deterministic SHAP
     /// result.
-    seed: ?i32,
+    seed: ?i32 = null,
 
     /// The configuration for the SHAP baseline of the Kernal SHAP algorithm.
     shap_baseline_config: ClarifyShapBaselineConfig,
@@ -22,11 +22,11 @@ pub const ClarifyShapConfig = struct {
     /// A parameter that indicates if text features are treated as text and
     /// explanations are provided for individual units of text. Required for natural
     /// language processing (NLP) explainability only.
-    text_config: ?ClarifyTextConfig,
+    text_config: ?ClarifyTextConfig = null,
 
     /// A Boolean toggle to indicate if you want to use the logit function (true) or
     /// log-odds units (false) for model predictions. Defaults to false.
-    use_logit: ?bool,
+    use_logit: ?bool = null,
 
     pub const json_field_names = .{
         .number_of_samples = "NumberOfSamples",

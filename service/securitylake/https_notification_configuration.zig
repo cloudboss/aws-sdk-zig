@@ -3,10 +3,10 @@ const HttpMethod = @import("http_method.zig").HttpMethod;
 /// The configurations used for HTTPS subscriber notification.
 pub const HttpsNotificationConfiguration = struct {
     /// The key name for the notification subscription.
-    authorization_api_key_name: ?[]const u8,
+    authorization_api_key_name: ?[]const u8 = null,
 
     /// The key value for the notification subscription.
-    authorization_api_key_value: ?[]const u8,
+    authorization_api_key_value: ?[]const u8 = null,
 
     /// The subscription endpoint in Security Lake. If you prefer notification with
     /// an HTTPs
@@ -14,7 +14,7 @@ pub const HttpsNotificationConfiguration = struct {
     endpoint: []const u8,
 
     /// The HTTPS method used for the notification subscription.
-    http_method: ?HttpMethod,
+    http_method: ?HttpMethod = null,
 
     /// The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role
     /// that you

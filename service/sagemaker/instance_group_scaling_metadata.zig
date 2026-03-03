@@ -1,16 +1,16 @@
 /// Metadata information about scaling operations for an instance group.
 pub const InstanceGroupScalingMetadata = struct {
     /// An error message describing why the scaling operation failed, if applicable.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// The current number of instances in the group.
-    instance_count: ?i32,
+    instance_count: ?i32 = null,
 
     /// Minimum instance count of the instance group.
-    min_count: ?i32,
+    min_count: ?i32 = null,
 
     /// The desired number of instances for the group after scaling.
-    target_count: ?i32,
+    target_count: ?i32 = null,
 
     pub const json_field_names = .{
         .failure_message = "FailureMessage",

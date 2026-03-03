@@ -3,10 +3,10 @@ const DescribeNodeSummary = @import("describe_node_summary.zig").DescribeNodeSum
 /// Placeholder documentation for ListNodesResponse
 pub const ListNodesResponse = struct {
     /// Token for the next result.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// An array of Nodes that exist in the Cluster.
-    nodes: ?[]const DescribeNodeSummary,
+    nodes: ?[]const DescribeNodeSummary = null,
 
     pub const json_field_names = .{
         .next_token = "NextToken",

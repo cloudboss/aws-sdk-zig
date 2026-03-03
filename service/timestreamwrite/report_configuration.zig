@@ -7,7 +7,7 @@ pub const ReportConfiguration = struct {
     /// Configuration of an S3 location to write error reports and events for a
     /// batch
     /// load.
-    report_s3_configuration: ?ReportS3Configuration,
+    report_s3_configuration: ?ReportS3Configuration = null,
 
     pub const json_field_names = .{
         .report_s3_configuration = "ReportS3Configuration",

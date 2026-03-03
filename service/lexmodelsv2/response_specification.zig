@@ -5,7 +5,7 @@ const MessageGroup = @import("message_group.zig").MessageGroup;
 pub const ResponseSpecification = struct {
     /// Indicates whether the user can interrupt a speech response from
     /// Amazon Lex.
-    allow_interrupt: ?bool,
+    allow_interrupt: ?bool = null,
 
     /// A collection of responses that Amazon Lex can send to the user. Amazon Lex
     /// chooses the actual response to send at runtime.

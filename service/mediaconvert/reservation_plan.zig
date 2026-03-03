@@ -6,20 +6,20 @@ const ReservationPlanStatus = @import("reservation_plan_status.zig").Reservation
 /// reserved queues and not applicable to on-demand queues.
 pub const ReservationPlan = struct {
     /// The length of the term of your reserved queue pricing plan commitment.
-    commitment: ?Commitment,
+    commitment: ?Commitment = null,
 
     /// The timestamp in epoch seconds for when the current pricing plan term for
     /// this reserved queue expires.
-    expires_at: ?i64,
+    expires_at: ?i64 = null,
 
     /// The timestamp in epoch seconds for when you set up the current pricing plan
     /// for this reserved queue.
-    purchased_at: ?i64,
+    purchased_at: ?i64 = null,
 
     /// Specifies whether the term of your reserved queue pricing plan is
     /// automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the
     /// term.
-    renewal_type: ?RenewalType,
+    renewal_type: ?RenewalType = null,
 
     /// Specifies the number of reserved transcode slots (RTS) for this queue. The
     /// number of RTS determines how many jobs the queue can process in parallel;
@@ -27,11 +27,11 @@ pub const ReservationPlan = struct {
     /// extend your existing commitment with a new 12-month commitment for a larger
     /// number of RTS. The new commitment begins when you purchase the additional
     /// capacity. You can't decrease the number of RTS in your reserved queue.
-    reserved_slots: ?i32,
+    reserved_slots: ?i32 = null,
 
     /// Specifies whether the pricing plan for your reserved queue is ACTIVE or
     /// EXPIRED.
-    status: ?ReservationPlanStatus,
+    status: ?ReservationPlanStatus = null,
 
     pub const json_field_names = .{
         .commitment = "Commitment",

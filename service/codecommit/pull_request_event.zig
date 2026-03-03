@@ -14,40 +14,40 @@ pub const PullRequestEvent = struct {
     /// Examples include updating the pull request with more commits or changing the
     /// status of a
     /// pull request.
-    actor_arn: ?[]const u8,
+    actor_arn: ?[]const u8 = null,
 
     /// Information about a pull request event.
-    approval_rule_event_metadata: ?ApprovalRuleEventMetadata,
+    approval_rule_event_metadata: ?ApprovalRuleEventMetadata = null,
 
     /// Information about an approval rule override event for a pull request.
-    approval_rule_overridden_event_metadata: ?ApprovalRuleOverriddenEventMetadata,
+    approval_rule_overridden_event_metadata: ?ApprovalRuleOverriddenEventMetadata = null,
 
     /// Information about an approval state change for a pull request.
-    approval_state_changed_event_metadata: ?ApprovalStateChangedEventMetadata,
+    approval_state_changed_event_metadata: ?ApprovalStateChangedEventMetadata = null,
 
     /// The day and time of the pull request event, in timestamp format.
-    event_date: ?i64,
+    event_date: ?i64 = null,
 
     /// Information about the source and destination branches for the pull request.
-    pull_request_created_event_metadata: ?PullRequestCreatedEventMetadata,
+    pull_request_created_event_metadata: ?PullRequestCreatedEventMetadata = null,
 
     /// The type of the pull request event (for example, a status change event
     /// (PULL_REQUEST_STATUS_CHANGED) or update event
     /// (PULL_REQUEST_SOURCE_REFERENCE_UPDATED)).
-    pull_request_event_type: ?PullRequestEventType,
+    pull_request_event_type: ?PullRequestEventType = null,
 
     /// The system-generated ID of the pull request.
-    pull_request_id: ?[]const u8,
+    pull_request_id: ?[]const u8 = null,
 
     /// Information about the change in mergability state for the pull request
     /// event.
-    pull_request_merged_state_changed_event_metadata: ?PullRequestMergedStateChangedEventMetadata,
+    pull_request_merged_state_changed_event_metadata: ?PullRequestMergedStateChangedEventMetadata = null,
 
     /// Information about the updated source branch for the pull request event.
-    pull_request_source_reference_updated_event_metadata: ?PullRequestSourceReferenceUpdatedEventMetadata,
+    pull_request_source_reference_updated_event_metadata: ?PullRequestSourceReferenceUpdatedEventMetadata = null,
 
     /// Information about the change in status for the pull request event.
-    pull_request_status_changed_event_metadata: ?PullRequestStatusChangedEventMetadata,
+    pull_request_status_changed_event_metadata: ?PullRequestStatusChangedEventMetadata = null,
 
     pub const json_field_names = .{
         .actor_arn = "actorArn",

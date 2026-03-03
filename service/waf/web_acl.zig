@@ -33,11 +33,11 @@ pub const WebACL = struct {
     /// whitespace or metric names reserved for AWS WAF, including "All" and
     /// "Default_Action." You can't change `MetricName` after you create the
     /// `WebACL`.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// A friendly name or description of the `WebACL`. You can't change the name of
     /// a `WebACL` after you create it.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// An array that contains the action for each `Rule` in a `WebACL`, the
     /// priority of the `Rule`,
@@ -45,7 +45,7 @@ pub const WebACL = struct {
     rules: []const ActivatedRule,
 
     /// Tha Amazon Resource Name (ARN) of the web ACL.
-    web_acl_arn: ?[]const u8,
+    web_acl_arn: ?[]const u8 = null,
 
     /// A unique identifier for a `WebACL`. You use `WebACLId` to get information
     /// about a `WebACL`

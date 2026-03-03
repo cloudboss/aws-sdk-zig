@@ -20,7 +20,7 @@ pub const PublishBatchRequestEntry = struct {
     /// `Value`. For more information, see [Amazon SNS message
     /// attributes](https://docs.aws.amazon.com/sns/latest/dg/sns-message-attributes.html) in
     /// the Amazon SNS Developer Guide.
-    message_attributes: ?[]const aws.map.MapEntry(MessageAttributeValue),
+    message_attributes: ?[]const aws.map.MapEntry(MessageAttributeValue) = null,
 
     /// This parameter applies only to FIFO (first-in-first-out) topics.
     ///
@@ -84,7 +84,7 @@ pub const PublishBatchRequestEntry = struct {
     /// Amazon SNS continues to keep track of the message deduplication ID even
     /// after the
     /// message is received and deleted.
-    message_deduplication_id: ?[]const u8,
+    message_deduplication_id: ?[]const u8 = null,
 
     /// FIFO topics: The tag that specifies that a message belongs to a specific
     /// message group.
@@ -111,7 +111,7 @@ pub const PublishBatchRequestEntry = struct {
     /// `MessageGroupId` can contain alphanumeric characters `(a-z, A-Z,
     /// 0-9)` and punctuation
     /// `(!"#$%&'()*+,-./:;?@[\]^_`{|}~)`.
-    message_group_id: ?[]const u8,
+    message_group_id: ?[]const u8 = null,
 
     /// Set `MessageStructure` to `json` if you want to send a different
     /// message for each protocol. For example, using one publish action, you can
@@ -129,8 +129,8 @@ pub const PublishBatchRequestEntry = struct {
     /// You can define other top-level keys that define the message you want to send
     /// to a
     /// specific transport protocol (for example, http).
-    message_structure: ?[]const u8,
+    message_structure: ?[]const u8 = null,
 
     /// The subject of the batch message.
-    subject: ?[]const u8,
+    subject: ?[]const u8 = null,
 };

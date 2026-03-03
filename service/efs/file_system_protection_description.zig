@@ -22,7 +22,7 @@ pub const FileSystemProtectionDescription = struct {
     /// If the replication configuration is deleted, the file system's replication
     /// overwrite
     /// protection is re-enabled, the file system becomes writeable.
-    replication_overwrite_protection: ?ReplicationOverwriteProtection,
+    replication_overwrite_protection: ?ReplicationOverwriteProtection = null,
 
     pub const json_field_names = .{
         .replication_overwrite_protection = "ReplicationOverwriteProtection",

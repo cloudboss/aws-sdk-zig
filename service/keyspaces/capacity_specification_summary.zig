@@ -10,11 +10,11 @@ const ThroughputMode = @import("throughput_mode.zig").ThroughputMode;
 pub const CapacitySpecificationSummary = struct {
     /// The timestamp of the last operation that changed the provisioned throughput
     /// capacity of a table.
-    last_update_to_pay_per_request_timestamp: ?i64,
+    last_update_to_pay_per_request_timestamp: ?i64 = null,
 
     /// The throughput capacity specified for `read` operations defined in `read
     /// capacity units` `(RCUs)`.
-    read_capacity_units: ?i64,
+    read_capacity_units: ?i64 = null,
 
     /// The read/write throughput capacity mode for a table. The options are:
     ///
@@ -30,7 +30,7 @@ pub const CapacitySpecificationSummary = struct {
 
     /// The throughput capacity specified for `write` operations defined in `write
     /// capacity units` `(WCUs)`.
-    write_capacity_units: ?i64,
+    write_capacity_units: ?i64 = null,
 
     pub const json_field_names = .{
         .last_update_to_pay_per_request_timestamp = "lastUpdateToPayPerRequestTimestamp",

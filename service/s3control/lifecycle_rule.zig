@@ -15,22 +15,22 @@ pub const LifecycleRule = struct {
     /// Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle
     /// Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config) in
     /// the *Amazon S3 User Guide*.
-    abort_incomplete_multipart_upload: ?AbortIncompleteMultipartUpload,
+    abort_incomplete_multipart_upload: ?AbortIncompleteMultipartUpload = null,
 
     /// Specifies the expiration for the lifecycle of the object in the form of
     /// date, days and,
     /// whether the object has a delete marker.
-    expiration: ?LifecycleExpiration,
+    expiration: ?LifecycleExpiration = null,
 
     /// The container for the filter of lifecycle rule.
-    filter: ?LifecycleRuleFilter,
+    filter: ?LifecycleRuleFilter = null,
 
     /// Unique identifier for the rule. The value cannot be longer than 255
     /// characters.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The noncurrent version expiration of the lifecycle rule.
-    noncurrent_version_expiration: ?NoncurrentVersionExpiration,
+    noncurrent_version_expiration: ?NoncurrentVersionExpiration = null,
 
     /// Specifies the transition rule for the lifecycle rule that describes when
     /// noncurrent
@@ -43,7 +43,7 @@ pub const LifecycleRule = struct {
     /// lifetime.
     ///
     /// This is not supported by Amazon S3 on Outposts buckets.
-    noncurrent_version_transitions: ?[]const NoncurrentVersionTransition,
+    noncurrent_version_transitions: ?[]const NoncurrentVersionTransition = null,
 
     /// If 'Enabled', the rule is currently being applied. If 'Disabled', the rule
     /// is not
@@ -53,5 +53,5 @@ pub const LifecycleRule = struct {
     /// Specifies when an Amazon S3 object transitions to a specified storage class.
     ///
     /// This is not supported by Amazon S3 on Outposts buckets.
-    transitions: ?[]const Transition,
+    transitions: ?[]const Transition = null,
 };

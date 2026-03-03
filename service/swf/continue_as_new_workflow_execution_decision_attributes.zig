@@ -56,7 +56,7 @@ pub const ContinueAsNewWorkflowExecutionDecisionAttributes = struct {
     /// default for the workflow type or through this parameter. If neither this
     /// parameter is set nor a default child policy was specified at registration
     /// time then a fault is returned.
-    child_policy: ?ChildPolicy,
+    child_policy: ?ChildPolicy = null,
 
     /// If set, specifies the total duration for this workflow execution. This
     /// overrides the
@@ -70,24 +70,24 @@ pub const ContinueAsNewWorkflowExecutionDecisionAttributes = struct {
     /// specified either as a default for the workflow type or through this field.
     /// If neither this field is set nor a default execution start-to-close timeout
     /// was specified at registration time then a fault is returned.
-    execution_start_to_close_timeout: ?[]const u8,
+    execution_start_to_close_timeout: ?[]const u8 = null,
 
     /// The input provided to the new workflow execution.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The IAM role to attach to the new (continued) execution.
-    lambda_role: ?[]const u8,
+    lambda_role: ?[]const u8 = null,
 
     /// The list of tags to associate with the new workflow execution. A maximum of
     /// 5 tags can be specified. You can
     /// list workflow executions with a specific tag by calling
     /// ListOpenWorkflowExecutions or
     /// ListClosedWorkflowExecutions and specifying a TagFilter.
-    tag_list: ?[]const []const u8,
+    tag_list: ?[]const []const u8 = null,
 
     /// The task list to use for the decisions of the new (continued) workflow
     /// execution.
-    task_list: ?TaskList,
+    task_list: ?TaskList = null,
 
     /// The task priority that, if set, specifies the priority for the decision
     /// tasks for this workflow
@@ -99,7 +99,7 @@ pub const ContinueAsNewWorkflowExecutionDecisionAttributes = struct {
     ///
     /// For more information about setting task priority, see [Setting Task
     /// Priority](https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html) in the *Amazon SWF Developer Guide*.
-    task_priority: ?[]const u8,
+    task_priority: ?[]const u8 = null,
 
     /// Specifies the maximum duration of decision tasks for the new workflow
     /// execution. This parameter overrides the
@@ -115,10 +115,10 @@ pub const ContinueAsNewWorkflowExecutionDecisionAttributes = struct {
     /// parameter. If neither this parameter is set nor a default task
     /// start-to-close timeout was specified at registration time then a fault is
     /// returned.
-    task_start_to_close_timeout: ?[]const u8,
+    task_start_to_close_timeout: ?[]const u8 = null,
 
     /// The version of the workflow to start.
-    workflow_type_version: ?[]const u8,
+    workflow_type_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .child_policy = "childPolicy",

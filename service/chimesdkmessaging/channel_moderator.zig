@@ -3,16 +3,16 @@ const Identity = @import("identity.zig").Identity;
 /// The details of a channel moderator.
 pub const ChannelModerator = struct {
     /// The ARN of the moderator's channel.
-    channel_arn: ?[]const u8,
+    channel_arn: ?[]const u8 = null,
 
     /// The `AppInstanceUser` who created the moderator.
-    created_by: ?Identity,
+    created_by: ?Identity = null,
 
     /// The time at which the moderator was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The moderator's data.
-    moderator: ?Identity,
+    moderator: ?Identity = null,
 
     pub const json_field_names = .{
         .channel_arn = "ChannelArn",

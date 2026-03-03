@@ -11,19 +11,19 @@ pub const Mp2Settings = struct {
     /// AudioType and FollowInputAudioType. Choose NONE when the input does not
     /// contain pre-mixed audio + audio description (AD). In this case, the encoder
     /// will use any values you provide for AudioType and FollowInputAudioType.
-    audio_description_mix: ?Mp2AudioDescriptionMix,
+    audio_description_mix: ?Mp2AudioDescriptionMix = null,
 
     /// Specify the average bitrate in bits per second.
-    bitrate: ?i32,
+    bitrate: ?i32 = null,
 
     /// Set Channels to specify the number of channels in this output audio track.
     /// Choosing Follow input will use the number of channels found in the audio
     /// source; choosing Mono will give you 1 output channel; choosing Stereo will
     /// give you 2. In the API, valid values are 0, 1, and 2.
-    channels: ?i32,
+    channels: ?i32 = null,
 
     /// Sample rate in Hz.
-    sample_rate: ?i32,
+    sample_rate: ?i32 = null,
 
     pub const json_field_names = .{
         .audio_description_mix = "AudioDescriptionMix",

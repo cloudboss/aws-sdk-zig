@@ -4,7 +4,7 @@
 /// resource.
 pub const ResourceDetails = struct {
     /// The value of the tag.
-    tag_value: ?[]const u8,
+    tag_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .tag_value = "tagValue",

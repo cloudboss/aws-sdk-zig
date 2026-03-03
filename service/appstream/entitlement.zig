@@ -19,13 +19,13 @@ pub const Entitlement = struct {
     attributes: []const EntitlementAttribute,
 
     /// The time when the entitlement was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The description of the entitlement.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time when the entitlement was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the entitlement.
     name: []const u8,

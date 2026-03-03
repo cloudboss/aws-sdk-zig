@@ -8,18 +8,18 @@ const ReservedCapacityType = @import("reserved_capacity_type.zig").ReservedCapac
 /// [CreateTrainingPlan](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html) `.
 pub const ReservedCapacityOffering = struct {
     /// The availability zone for the reserved capacity offering.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The number of whole hours in the total duration for this reserved capacity
     /// offering.
-    duration_hours: ?i64,
+    duration_hours: ?i64 = null,
 
     /// The additional minutes beyond whole hours in the total duration for this
     /// reserved capacity offering.
-    duration_minutes: ?i64,
+    duration_minutes: ?i64 = null,
 
     /// The end time of the reserved capacity offering.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The number of instances in the reserved capacity offering.
     instance_count: i32,
@@ -28,17 +28,17 @@ pub const ReservedCapacityOffering = struct {
     instance_type: ReservedCapacityInstanceType,
 
     /// The type of reserved capacity offering.
-    reserved_capacity_type: ?ReservedCapacityType,
+    reserved_capacity_type: ?ReservedCapacityType = null,
 
     /// The start time of the reserved capacity offering.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The number of UltraServers included in this reserved capacity offering.
-    ultra_server_count: ?i32,
+    ultra_server_count: ?i32 = null,
 
     /// The type of UltraServer included in this reserved capacity offering, such as
     /// ml.u-p6e-gb200x72.
-    ultra_server_type: ?[]const u8,
+    ultra_server_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .availability_zone = "AvailabilityZone",

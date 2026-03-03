@@ -5,10 +5,10 @@ const aws = @import("aws");
 pub const ModelQuantizationConfig = struct {
     /// The URI of an LMI DLC in Amazon ECR. SageMaker uses this image to run the
     /// optimization.
-    image: ?[]const u8,
+    image: ?[]const u8 = null,
 
     /// Environment variables that override the default ones in the model container.
-    override_environment: ?[]const aws.map.StringMapEntry,
+    override_environment: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .image = "Image",

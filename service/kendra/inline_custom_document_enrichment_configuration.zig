@@ -15,7 +15,7 @@ pub const InlineCustomDocumentEnrichmentConfiguration = struct {
     /// Configuration of the condition used for the target document attribute or
     /// metadata
     /// field when ingesting documents into Amazon Kendra.
-    condition: ?DocumentAttributeCondition,
+    condition: ?DocumentAttributeCondition = null,
 
     /// `TRUE` to delete content if the condition used for the target attribute is
     /// met.
@@ -24,7 +24,7 @@ pub const InlineCustomDocumentEnrichmentConfiguration = struct {
     /// Configuration of the target document attribute or metadata field when
     /// ingesting
     /// documents into Amazon Kendra. You can also include a value.
-    target: ?DocumentAttributeTarget,
+    target: ?DocumentAttributeTarget = null,
 
     pub const json_field_names = .{
         .condition = "Condition",

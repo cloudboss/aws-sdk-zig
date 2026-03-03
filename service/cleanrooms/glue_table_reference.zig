@@ -8,7 +8,7 @@ pub const GlueTableReference = struct {
     /// The Amazon Web Services Region where the Glue table is located. This
     /// parameter is required to uniquely identify and access tables across
     /// different Regions.
-    region: ?CommercialRegion,
+    region: ?CommercialRegion = null,
 
     /// The name of the Glue table.
     table_name: []const u8,

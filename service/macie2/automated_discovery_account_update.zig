@@ -4,13 +4,13 @@ const AutomatedDiscoveryAccountStatus = @import("automated_discovery_account_sta
 /// account.
 pub const AutomatedDiscoveryAccountUpdate = struct {
     /// The Amazon Web Services account ID for the account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The new status of automated sensitive data discovery for the account. Valid
     /// values are: ENABLED, perform automated sensitive data discovery activities
     /// for the account; and, DISABLED, don't perform automated sensitive data
     /// discovery activities for the account.
-    status: ?AutomatedDiscoveryAccountStatus,
+    status: ?AutomatedDiscoveryAccountStatus = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

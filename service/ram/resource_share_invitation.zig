@@ -5,35 +5,35 @@ const ResourceShareInvitationStatus = @import("resource_share_invitation_status.
 /// resource share.
 pub const ResourceShareInvitation = struct {
     /// The date and time when the invitation was sent.
-    invitation_timestamp: ?i64,
+    invitation_timestamp: ?i64 = null,
 
     /// The ID of the Amazon Web Services account that received the invitation.
-    receiver_account_id: ?[]const u8,
+    receiver_account_id: ?[]const u8 = null,
 
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM user or role that received the invitation.
-    receiver_arn: ?[]const u8,
+    receiver_arn: ?[]const u8 = null,
 
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share
-    resource_share_arn: ?[]const u8,
+    resource_share_arn: ?[]const u8 = null,
 
     /// To view the resources associated with a pending resource share invitation,
     /// use ListPendingInvitationResources.
-    resource_share_associations: ?[]const ResourceShareAssociation,
+    resource_share_associations: ?[]const ResourceShareAssociation = null,
 
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the invitation.
-    resource_share_invitation_arn: ?[]const u8,
+    resource_share_invitation_arn: ?[]const u8 = null,
 
     /// The name of the resource share.
-    resource_share_name: ?[]const u8,
+    resource_share_name: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that sent the invitation.
-    sender_account_id: ?[]const u8,
+    sender_account_id: ?[]const u8 = null,
 
     /// The current status of the invitation.
-    status: ?ResourceShareInvitationStatus,
+    status: ?ResourceShareInvitationStatus = null,
 
     pub const json_field_names = .{
         .invitation_timestamp = "invitationTimestamp",

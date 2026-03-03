@@ -6,7 +6,7 @@ pub const EC2TagSet = struct {
     /// instance to be included in the deployment group, it must be identified by
     /// all of the tag
     /// groups in the list.
-    ec_2_tag_set_list: ?[]const []const EC2TagFilter,
+    ec_2_tag_set_list: ?[]const []const EC2TagFilter = null,
 
     pub const json_field_names = .{
         .ec_2_tag_set_list = "ec2TagSetList",

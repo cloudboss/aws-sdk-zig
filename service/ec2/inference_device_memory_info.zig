@@ -3,5 +3,5 @@
 /// Describes the memory available to the inference accelerator.
 pub const InferenceDeviceMemoryInfo = struct {
     /// The size of the memory available to the inference accelerator, in MiB.
-    size_in_mi_b: ?i32,
+    size_in_mi_b: ?i32 = null,
 };

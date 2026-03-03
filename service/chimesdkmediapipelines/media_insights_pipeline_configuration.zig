@@ -5,29 +5,29 @@ const RealTimeAlertConfiguration = @import("real_time_alert_configuration.zig").
 /// pipeline.
 pub const MediaInsightsPipelineConfiguration = struct {
     /// The time at which the configuration was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The elements in the configuration.
-    elements: ?[]const MediaInsightsPipelineConfigurationElement,
+    elements: ?[]const MediaInsightsPipelineConfigurationElement = null,
 
     /// The ARN of the configuration.
-    media_insights_pipeline_configuration_arn: ?[]const u8,
+    media_insights_pipeline_configuration_arn: ?[]const u8 = null,
 
     /// The ID of the configuration.
-    media_insights_pipeline_configuration_id: ?[]const u8,
+    media_insights_pipeline_configuration_id: ?[]const u8 = null,
 
     /// The name of the configuration.
-    media_insights_pipeline_configuration_name: ?[]const u8,
+    media_insights_pipeline_configuration_name: ?[]const u8 = null,
 
     /// Lists the rules that trigger a real-time alert.
-    real_time_alert_configuration: ?RealTimeAlertConfiguration,
+    real_time_alert_configuration: ?RealTimeAlertConfiguration = null,
 
     /// The ARN of the role used by the service to access Amazon Web Services
     /// resources.
-    resource_access_role_arn: ?[]const u8,
+    resource_access_role_arn: ?[]const u8 = null,
 
     /// The time at which the configuration was last updated.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

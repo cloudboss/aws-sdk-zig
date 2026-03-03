@@ -1,28 +1,28 @@
 /// Contains information about an alias.
 pub const ContactFlowModuleAliasInfo = struct {
     /// The identifier of the alias.
-    alias_id: ?[]const u8,
+    alias_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the flow module.
-    contact_flow_module_arn: ?[]const u8,
+    contact_flow_module_arn: ?[]const u8 = null,
 
     /// The identifier of the flow module.
-    contact_flow_module_id: ?[]const u8,
+    contact_flow_module_id: ?[]const u8 = null,
 
     /// The description of the alias.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where this resource was last modified.
-    last_modified_region: ?[]const u8,
+    last_modified_region: ?[]const u8 = null,
 
     /// The timestamp when this resource was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the alias.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The version of the flow module.
-    version: ?i64,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .alias_id = "AliasId",

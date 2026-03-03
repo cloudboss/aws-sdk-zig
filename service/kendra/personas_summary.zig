@@ -12,12 +12,12 @@ const Persona = @import("persona.zig").Persona;
 /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
 pub const PersonasSummary = struct {
     /// The Unix timestamp when the summary information was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of a user or group in your IAM Identity Center identity
     /// source.
     /// For example, a user ID could be an email.
-    entity_id: ?[]const u8,
+    entity_id: ?[]const u8 = null,
 
     /// The persona that defines the specific permissions of the user or group in
     /// your IAM Identity Center identity source. The available personas or access
@@ -25,10 +25,10 @@ pub const PersonasSummary = struct {
     /// these personas, see [Providing
     /// access to your search
     /// page](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience).
-    persona: ?Persona,
+    persona: ?Persona = null,
 
     /// The Unix timestamp when the summary information was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

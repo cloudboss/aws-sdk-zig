@@ -4,13 +4,13 @@ const S3AccessPointVpcConfiguration = @import("s3_access_point_vpc_configuration
 /// attachment.
 pub const S3AccessPoint = struct {
     /// The S3 access point's alias.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// he S3 access point's ARN.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The S3 access point's virtual private cloud (VPC) configuration.
-    vpc_configuration: ?S3AccessPointVpcConfiguration,
+    vpc_configuration: ?S3AccessPointVpcConfiguration = null,
 
     pub const json_field_names = .{
         .alias = "Alias",

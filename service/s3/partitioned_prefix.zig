@@ -20,5 +20,5 @@ pub const PartitionedPrefix = struct {
     /// day correspond to the day on which the event occurred, and the hour, minutes
     /// and seconds are set to 00
     /// in the key.
-    partition_date_source: ?PartitionDateSource,
+    partition_date_source: ?PartitionDateSource = null,
 };

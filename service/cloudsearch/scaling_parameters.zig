@@ -5,7 +5,7 @@ const PartitionInstanceType = @import("partition_instance_type.zig").PartitionIn
 pub const ScalingParameters = struct {
     /// The instance type that you want to preconfigure for your domain. For
     /// example, `search.m1.small`.
-    desired_instance_type: ?PartitionInstanceType,
+    desired_instance_type: ?PartitionInstanceType = null,
 
     /// The number of partitions you want to preconfigure for your domain. Only
     /// valid when

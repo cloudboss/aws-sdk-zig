@@ -7,21 +7,21 @@ const StorageType = @import("storage_type.zig").StorageType;
 pub const RecordingInfo = struct {
     /// If the recording/transcript was deleted, this is the reason entered for the
     /// deletion.
-    deletion_reason: ?[]const u8,
+    deletion_reason: ?[]const u8 = null,
 
     /// The number that identifies the Kinesis Video Streams fragment where the
     /// customer audio stream started.
-    fragment_start_number: ?[]const u8,
+    fragment_start_number: ?[]const u8 = null,
 
     /// The number that identifies the Kinesis Video Streams fragment where the
     /// customer audio stream stopped.
-    fragment_stop_number: ?[]const u8,
+    fragment_stop_number: ?[]const u8 = null,
 
     /// The location, in Amazon S3, for the recording/transcript.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// Information about the media stream used during the conversation.
-    media_stream_type: ?MediaStreamType,
+    media_stream_type: ?MediaStreamType = null,
 
     /// Information about the conversation participant, whether they are an agent or
     /// contact. The participant types are
@@ -38,23 +38,23 @@ pub const RecordingInfo = struct {
     /// * Thirdparty
     ///
     /// * Supervisor
-    participant_type: ?ParticipantType,
+    participant_type: ?ParticipantType = null,
 
     /// When the conversation of the last leg of the recording started in UTC time.
-    start_timestamp: ?i64,
+    start_timestamp: ?i64 = null,
 
     /// The status of the recording/transcript.
-    status: ?RecordingStatus,
+    status: ?RecordingStatus = null,
 
     /// When the conversation of the last leg of recording stopped in UTC time.
-    stop_timestamp: ?i64,
+    stop_timestamp: ?i64 = null,
 
     /// Where the recording/transcript is stored.
-    storage_type: ?StorageType,
+    storage_type: ?StorageType = null,
 
     /// The location, in Amazon S3, for the unprocessed transcript if any media
     /// processing was performed.
-    unprocessed_transcript_location: ?[]const u8,
+    unprocessed_transcript_location: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .deletion_reason = "DeletionReason",

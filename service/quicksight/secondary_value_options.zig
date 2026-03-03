@@ -4,7 +4,7 @@ const Visibility = @import("visibility.zig").Visibility;
 /// visual.
 pub const SecondaryValueOptions = struct {
     /// Determines the visibility of the secondary value.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .visibility = "Visibility",

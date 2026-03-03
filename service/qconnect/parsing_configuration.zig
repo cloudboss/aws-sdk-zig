@@ -8,7 +8,7 @@ const ParsingStrategy = @import("parsing_strategy.zig").ParsingStrategy;
 /// describe the contents of each page.
 pub const ParsingConfiguration = struct {
     /// Settings for a foundation model used to parse documents for a data source.
-    bedrock_foundation_model_configuration: ?BedrockFoundationModelConfigurationForParsing,
+    bedrock_foundation_model_configuration: ?BedrockFoundationModelConfigurationForParsing = null,
 
     /// The parsing strategy for the data source.
     parsing_strategy: ParsingStrategy,

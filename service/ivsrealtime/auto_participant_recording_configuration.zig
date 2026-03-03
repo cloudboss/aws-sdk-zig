@@ -5,10 +5,10 @@ const ParticipantThumbnailConfiguration = @import("participant_thumbnail_configu
 /// Object specifying a configuration for individual participant recording.
 pub const AutoParticipantRecordingConfiguration = struct {
     /// HLS configuration object for individual participant recording.
-    hls_configuration: ?ParticipantRecordingHlsConfiguration,
+    hls_configuration: ?ParticipantRecordingHlsConfiguration = null,
 
     /// Types of media to be recorded. Default: `AUDIO_VIDEO`.
-    media_types: ?[]const ParticipantRecordingMediaType,
+    media_types: ?[]const ParticipantRecordingMediaType = null,
 
     /// If a stage publisher disconnects and then reconnects within the specified
     /// interval,
@@ -40,7 +40,7 @@ pub const AutoParticipantRecordingConfiguration = struct {
     /// individual participant recording and modify the interval at which thumbnails
     /// are generated
     /// for the live session.
-    thumbnail_configuration: ?ParticipantThumbnailConfiguration,
+    thumbnail_configuration: ?ParticipantThumbnailConfiguration = null,
 
     pub const json_field_names = .{
         .hls_configuration = "hlsConfiguration",

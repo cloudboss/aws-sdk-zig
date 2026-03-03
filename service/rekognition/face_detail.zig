@@ -47,20 +47,20 @@ pub const FaceDetail = struct {
     /// The estimated age range, in years, for the face. Low represents the lowest
     /// estimated
     /// age and High represents the highest estimated age.
-    age_range: ?AgeRange,
+    age_range: ?AgeRange = null,
 
     /// Indicates whether or not the face has a beard, and the confidence level in
     /// the
     /// determination.
-    beard: ?Beard,
+    beard: ?Beard = null,
 
     /// Bounding box of the face. Default attribute.
-    bounding_box: ?BoundingBox,
+    bounding_box: ?BoundingBox = null,
 
     /// Confidence level that the bounding box contains a face (and not a different
     /// object such
     /// as a tree). Default attribute.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// The emotions that appear to be expressed on the face, and the confidence
     /// level in the
@@ -71,20 +71,20 @@ pub const FaceDetail = struct {
     /// used in such a way. For example, a person pretending to have a sad face
     /// might not be sad
     /// emotionally.
-    emotions: ?[]const Emotion,
+    emotions: ?[]const Emotion = null,
 
     /// Indicates the direction the eyes are gazing in, as defined by pitch and yaw.
-    eye_direction: ?EyeDirection,
+    eye_direction: ?EyeDirection = null,
 
     /// Indicates whether or not the face is wearing eye glasses, and the confidence
     /// level in
     /// the determination.
-    eyeglasses: ?Eyeglasses,
+    eyeglasses: ?Eyeglasses = null,
 
     /// Indicates whether or not the eyes on the face are open, and the confidence
     /// level in the
     /// determination.
-    eyes_open: ?EyeOpen,
+    eyes_open: ?EyeOpen = null,
 
     /// `FaceOccluded` should return "true" with a high confidence score if a
     /// detected
@@ -97,41 +97,41 @@ pub const FaceDetail = struct {
     /// verification are detected, such as eye glasses, lightly tinted sunglasses,
     /// strands of hair,
     /// and others.
-    face_occluded: ?FaceOccluded,
+    face_occluded: ?FaceOccluded = null,
 
     /// The predicted gender of a detected face.
-    gender: ?Gender,
+    gender: ?Gender = null,
 
     /// Indicates the location of landmarks on the face. Default attribute.
-    landmarks: ?[]const Landmark,
+    landmarks: ?[]const Landmark = null,
 
     /// Indicates whether or not the mouth on the face is open, and the confidence
     /// level in the
     /// determination.
-    mouth_open: ?MouthOpen,
+    mouth_open: ?MouthOpen = null,
 
     /// Indicates whether or not the face has a mustache, and the confidence level
     /// in the
     /// determination.
-    mustache: ?Mustache,
+    mustache: ?Mustache = null,
 
     /// Indicates the pose of the face as determined by its pitch, roll, and yaw.
     /// Default
     /// attribute.
-    pose: ?Pose,
+    pose: ?Pose = null,
 
     /// Identifies image brightness and sharpness. Default attribute.
-    quality: ?ImageQuality,
+    quality: ?ImageQuality = null,
 
     /// Indicates whether or not the face is smiling, and the confidence level in
     /// the
     /// determination.
-    smile: ?Smile,
+    smile: ?Smile = null,
 
     /// Indicates whether or not the face is wearing sunglasses, and the confidence
     /// level in
     /// the determination.
-    sunglasses: ?Sunglasses,
+    sunglasses: ?Sunglasses = null,
 
     pub const json_field_names = .{
         .age_range = "AgeRange",

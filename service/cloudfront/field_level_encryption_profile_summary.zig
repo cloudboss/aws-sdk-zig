@@ -4,7 +4,7 @@ const EncryptionEntities = @import("encryption_entities.zig").EncryptionEntities
 pub const FieldLevelEncryptionProfileSummary = struct {
     /// An optional comment for the field-level encryption profile summary. The
     /// comment cannot be longer than 128 characters.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// A complex data type of encryption entities for the field-level encryption
     /// profile that include the public key ID, provider, and field patterns for

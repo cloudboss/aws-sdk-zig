@@ -13,7 +13,7 @@ pub const MapRunListItem = struct {
     state_machine_arn: []const u8,
 
     /// The date on which the Map Run stopped.
-    stop_date: ?i64,
+    stop_date: ?i64 = null,
 
     pub const json_field_names = .{
         .execution_arn = "executionArn",

@@ -3,16 +3,16 @@ const ReprocessingSummary = @import("reprocessing_summary.zig").ReprocessingSumm
 /// A summary of information about a pipeline.
 pub const PipelineSummary = struct {
     /// When the pipeline was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// When the pipeline was last updated.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The name of the pipeline.
-    pipeline_name: ?[]const u8,
+    pipeline_name: ?[]const u8 = null,
 
     /// A summary of information about the pipeline reprocessing.
-    reprocessing_summaries: ?[]const ReprocessingSummary,
+    reprocessing_summaries: ?[]const ReprocessingSummary = null,
 
     pub const json_field_names = .{
         .creation_time = "creationTime",

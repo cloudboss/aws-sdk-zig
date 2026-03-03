@@ -7,7 +7,7 @@ pub const Tag = struct {
     /// The string can only contain the set of Unicode letters, digits, white-space,
     /// '_', '.', '/', '=', '+', '-' (Java regex:
     /// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// A value is the optional value of the tag. The string value can be from 1 to
     /// 256 Unicode
@@ -15,5 +15,5 @@ pub const Tag = struct {
     /// The string can only contain the set of Unicode letters, digits, white-space,
     /// '_', '.', '/', '=', '+', '-' (Java regex:
     /// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

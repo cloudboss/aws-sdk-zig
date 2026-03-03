@@ -8,7 +8,7 @@ pub const PosixProfile = struct {
     gid: i64,
 
     /// The secondary POSIX group IDs used for all EFS operations by this user.
-    secondary_gids: ?[]const i64,
+    secondary_gids: ?[]const i64 = null,
 
     /// The POSIX user ID used for all EFS operations by this user.
     uid: i64,

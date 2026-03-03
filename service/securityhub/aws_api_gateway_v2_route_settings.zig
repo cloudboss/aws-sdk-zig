@@ -4,10 +4,10 @@ pub const AwsApiGatewayV2RouteSettings = struct {
     /// the log
     /// entries that are pushed to CloudWatch Logs. Supported only for WebSocket
     /// APIs.
-    data_trace_enabled: ?bool,
+    data_trace_enabled: ?bool = null,
 
     /// Indicates whether detailed metrics are enabled.
-    detailed_metrics_enabled: ?bool,
+    detailed_metrics_enabled: ?bool = null,
 
     /// The logging level. The logging level affects the log entries that are pushed
     /// to
@@ -20,13 +20,13 @@ pub const AwsApiGatewayV2RouteSettings = struct {
     /// events and extra informational events.
     ///
     /// Valid values: `OFF` | `ERROR` | `INFO`
-    logging_level: ?[]const u8,
+    logging_level: ?[]const u8 = null,
 
     /// The throttling burst limit.
-    throttling_burst_limit: ?i32,
+    throttling_burst_limit: ?i32 = null,
 
     /// The throttling rate limit.
-    throttling_rate_limit: ?f64,
+    throttling_rate_limit: ?f64 = null,
 
     pub const json_field_names = .{
         .data_trace_enabled = "DataTraceEnabled",

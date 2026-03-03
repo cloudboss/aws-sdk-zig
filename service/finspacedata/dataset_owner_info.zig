@@ -1,13 +1,13 @@
 /// A structure for Dataset owner info.
 pub const DatasetOwnerInfo = struct {
     /// Email address for the Dataset owner.
-    email: ?[]const u8,
+    email: ?[]const u8 = null,
 
     /// The name of the Dataset owner.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Phone number for the Dataset owner.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .email = "email",

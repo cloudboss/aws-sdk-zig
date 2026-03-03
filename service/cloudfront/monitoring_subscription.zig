@@ -5,5 +5,5 @@ const RealtimeMetricsSubscriptionConfig = @import("realtime_metrics_subscription
 /// distribution.
 pub const MonitoringSubscription = struct {
     /// A subscription configuration for additional CloudWatch metrics.
-    realtime_metrics_subscription_config: ?RealtimeMetricsSubscriptionConfig,
+    realtime_metrics_subscription_config: ?RealtimeMetricsSubscriptionConfig = null,
 };

@@ -1,7 +1,7 @@
 /// Identifies an Amazon EC2 launch template to use for a specific account.
 pub const LaunchTemplateConfiguration = struct {
     /// The account ID that this configuration applies to.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Identifies the Amazon EC2 launch template to use.
     launch_template_id: []const u8,

@@ -25,7 +25,7 @@ pub const InvalidRequestDetail = struct {
     ///
     /// * INVALID_DOCUMENT - Invalid document. Check the file and resubmit the
     ///   request.
-    reason: ?InvalidRequestDetailReason,
+    reason: ?InvalidRequestDetailReason = null,
 
     pub const json_field_names = .{
         .reason = "Reason",

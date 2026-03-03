@@ -7,7 +7,7 @@ pub const AudioConfiguration = struct {
     channels: i64 = 0,
 
     /// Codec used for the audio encoding.
-    codec: ?[]const u8,
+    codec: ?[]const u8 = null,
 
     /// Number of audio samples recorded per second.
     sample_rate: i64 = 0,
@@ -18,7 +18,7 @@ pub const AudioConfiguration = struct {
 
     /// Name of the audio track (if the stream has an audio track). If multitrack is
     /// not enabled, this is track0 (the sole track).
-    track: ?[]const u8,
+    track: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channels = "channels",

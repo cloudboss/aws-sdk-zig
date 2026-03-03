@@ -17,10 +17,10 @@ pub const KnowledgeBaseVectorSearchConfiguration = struct {
     /// Specifies the filters to use on the metadata in the knowledge base data
     /// sources before returning results. For more information, see [Query
     /// configurations](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html).
-    filter: ?RetrievalFilter,
+    filter: ?RetrievalFilter = null,
 
     /// Settings for implicit filtering.
-    implicit_filter_configuration: ?ImplicitFilterConfiguration,
+    implicit_filter_configuration: ?ImplicitFilterConfiguration = null,
 
     /// The number of source chunks to retrieve.
     number_of_results: i32 = 5,
@@ -33,12 +33,12 @@ pub const KnowledgeBaseVectorSearchConfiguration = struct {
     /// configurations, only `SEMANTIC` search is available. For more information,
     /// see [Test a knowledge
     /// base](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-test.html).
-    override_search_type: ?SearchType,
+    override_search_type: ?SearchType = null,
 
     /// Contains configurations for reranking the retrieved results. For more
     /// information, see [Improve the relevance of query responses with a reranker
     /// model](https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html).
-    reranking_configuration: ?VectorSearchRerankingConfiguration,
+    reranking_configuration: ?VectorSearchRerankingConfiguration = null,
 
     pub const json_field_names = .{
         .filter = "filter",

@@ -5,28 +5,28 @@ const LineItemStatus = @import("line_item_status.zig").LineItemStatus;
 /// Information about a line item.
 pub const LineItem = struct {
     /// Information about assets.
-    asset_information_list: ?[]const LineItemAssetInformation,
+    asset_information_list: ?[]const LineItemAssetInformation = null,
 
     /// The ID of the catalog item.
-    catalog_item_id: ?[]const u8,
+    catalog_item_id: ?[]const u8 = null,
 
     /// The ID of the line item.
-    line_item_id: ?[]const u8,
+    line_item_id: ?[]const u8 = null,
 
     /// The ID of the previous line item.
-    previous_line_item_id: ?[]const u8,
+    previous_line_item_id: ?[]const u8 = null,
 
     /// The ID of the previous order.
-    previous_order_id: ?[]const u8,
+    previous_order_id: ?[]const u8 = null,
 
     /// The quantity of the line item.
-    quantity: ?i32,
+    quantity: ?i32 = null,
 
     /// Information about a line item shipment.
-    shipment_information: ?ShipmentInformation,
+    shipment_information: ?ShipmentInformation = null,
 
     /// The status of the line item.
-    status: ?LineItemStatus,
+    status: ?LineItemStatus = null,
 
     pub const json_field_names = .{
         .asset_information_list = "AssetInformationList",

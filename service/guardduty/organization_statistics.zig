@@ -10,21 +10,21 @@ const OrganizationFeatureStatistics = @import("organization_feature_statistics.z
 pub const OrganizationStatistics = struct {
     /// Total number of active accounts in your Amazon Web Services
     /// organization that are associated with GuardDuty.
-    active_accounts_count: ?i32,
+    active_accounts_count: ?i32 = null,
 
     /// Retrieves the coverage
     /// statistics for each feature.
-    count_by_feature: ?[]const OrganizationFeatureStatistics,
+    count_by_feature: ?[]const OrganizationFeatureStatistics = null,
 
     /// Total number of accounts that have enabled GuardDuty.
-    enabled_accounts_count: ?i32,
+    enabled_accounts_count: ?i32 = null,
 
     /// Total number of accounts in your Amazon Web Services organization
     /// that are associated with GuardDuty.
-    member_accounts_count: ?i32,
+    member_accounts_count: ?i32 = null,
 
     /// Total number of accounts in your Amazon Web Services organization.
-    total_accounts_count: ?i32,
+    total_accounts_count: ?i32 = null,
 
     pub const json_field_names = .{
         .active_accounts_count = "ActiveAccountsCount",

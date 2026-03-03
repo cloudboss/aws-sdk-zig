@@ -3,7 +3,7 @@ const AgreementStatus = @import("agreement_status.zig").AgreementStatus;
 /// Information about the agreement availability
 pub const AgreementAvailability = struct {
     /// Error message.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// Status of the agreement.
     status: AgreementStatus,

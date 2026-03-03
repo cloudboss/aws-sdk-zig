@@ -18,30 +18,30 @@ pub const Canary = struct {
     /// A structure that contains the configuration for canary artifacts, including
     /// the encryption-at-rest settings for artifacts that the canary uploads to
     /// Amazon S3.
-    artifact_config: ?ArtifactConfigOutput,
+    artifact_config: ?ArtifactConfigOutput = null,
 
     /// The location in Amazon S3 where Synthetics stores artifacts from the runs of
     /// this
     /// canary. Artifacts include the log file, screenshots, and HAR files.
-    artifact_s3_location: ?[]const u8,
+    artifact_s3_location: ?[]const u8 = null,
 
     /// A structure that specifies the browser type to use for a canary run.
     /// CloudWatch Synthetics supports running canaries on both `CHROME` and
     /// `FIREFOX` browsers.
     ///
     /// If not specified, `browserConfigs` defaults to Chrome.
-    browser_configs: ?[]const BrowserConfig,
+    browser_configs: ?[]const BrowserConfig = null,
 
-    code: ?CanaryCodeOutput,
+    code: ?CanaryCodeOutput = null,
 
     /// Returns the dry run configurations for a canary.
-    dry_run_config: ?DryRunConfigOutput,
+    dry_run_config: ?DryRunConfigOutput = null,
 
     /// The ARN of the Lambda function that is used as your canary's engine. For
     /// more information
     /// about Lambda ARN format, see [Resources and Conditions for Lambda
     /// Actions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-api-permissions-ref.html).
-    engine_arn: ?[]const u8,
+    engine_arn: ?[]const u8 = null,
 
     /// A list of engine configurations for the canary, one for each browser type
     /// that the canary is configured to run on.
@@ -53,25 +53,25 @@ pub const Canary = struct {
     /// Runtime versions older than `syn-nodejs-puppeteer-11.0` and
     /// `syn-nodejs-playwright-3.0` continue to support `engineArn` to ensure
     /// backward compatibility.
-    engine_configs: ?[]const EngineConfig,
+    engine_configs: ?[]const EngineConfig = null,
 
     /// The ARN of the IAM role used to run the canary. This role must include
     /// `lambda.amazonaws.com` as a principal in the trust
     /// policy.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The number of days to retain data about failed runs of this canary.
     ///
     /// This setting affects the range of information returned by
     /// [GetCanaryRuns](https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html), as well as
     /// the range of information displayed in the Synthetics console.
-    failure_retention_period_in_days: ?i32,
+    failure_retention_period_in_days: ?i32 = null,
 
     /// The unique ID of this canary.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the canary.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Specifies whether to also delete the Lambda functions and layers used by
     /// this canary
@@ -84,46 +84,46 @@ pub const Canary = struct {
     /// of the
     /// [DeleteCanary](https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html) operation
     /// determines whether the Lambda functions and layers will be deleted.
-    provisioned_resource_cleanup: ?ProvisionedResourceCleanupSetting,
+    provisioned_resource_cleanup: ?ProvisionedResourceCleanupSetting = null,
 
-    run_config: ?CanaryRunConfigOutput,
+    run_config: ?CanaryRunConfigOutput = null,
 
     /// Specifies the runtime version to use for the canary. For more information
     /// about
     /// runtime versions, see [
     /// Canary Runtime
     /// Versions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
-    runtime_version: ?[]const u8,
+    runtime_version: ?[]const u8 = null,
 
     /// A structure that contains information about how often the canary is to run,
     /// and when
     /// these runs are to stop.
-    schedule: ?CanaryScheduleOutput,
+    schedule: ?CanaryScheduleOutput = null,
 
     /// A structure that contains information about the canary's status.
-    status: ?CanaryStatus,
+    status: ?CanaryStatus = null,
 
     /// The number of days to retain data about successful runs of this canary.
     ///
     /// This setting affects the range of information returned by
     /// [GetCanaryRuns](https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html), as well as
     /// the range of information displayed in the Synthetics console.
-    success_retention_period_in_days: ?i32,
+    success_retention_period_in_days: ?i32 = null,
 
     /// The list of key-value pairs that are associated with the canary.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// A structure that contains information about when the canary was created,
     /// modified, and
     /// most recently run.
-    timeline: ?CanaryTimeline,
+    timeline: ?CanaryTimeline = null,
 
     /// If this canary performs visual monitoring by comparing screenshots, this
     /// structure contains the ID of the canary run to use as the baseline for
     /// screenshots, and the coordinates
     /// of any parts of the screen to ignore during the visual monitoring
     /// comparison.
-    visual_reference: ?VisualReferenceOutput,
+    visual_reference: ?VisualReferenceOutput = null,
 
     /// A list of visual reference configurations for the canary, one for each
     /// browser type that the canary is configured to run on. Visual references are
@@ -137,9 +137,9 @@ pub const Canary = struct {
     /// `visualReference` and `visualReferences` for backward compatibility. It is
     /// recommended to use `visualReferences`
     /// for consistency and future compatibility.
-    visual_references: ?[]const VisualReferenceOutput,
+    visual_references: ?[]const VisualReferenceOutput = null,
 
-    vpc_config: ?VpcConfigOutput,
+    vpc_config: ?VpcConfigOutput = null,
 
     pub const json_field_names = .{
         .artifact_config = "ArtifactConfig",

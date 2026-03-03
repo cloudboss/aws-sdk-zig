@@ -6,17 +6,17 @@ const Visibility = @import("visibility.zig").Visibility;
 pub const TooltipOptions = struct {
     /// The setup for the detailed tooltip. The tooltip setup is always saved. The
     /// display type is decided based on the tooltip type.
-    field_based_tooltip: ?FieldBasedTooltip,
+    field_based_tooltip: ?FieldBasedTooltip = null,
 
     /// The selected type for the tooltip. Choose one of the following options:
     ///
     /// * `BASIC`: A basic tooltip.
     ///
     /// * `DETAILED`: A detailed tooltip.
-    selected_tooltip_type: ?SelectedTooltipType,
+    selected_tooltip_type: ?SelectedTooltipType = null,
 
     /// Determines whether or not the tooltip is visible.
-    tooltip_visibility: ?Visibility,
+    tooltip_visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .field_based_tooltip = "FieldBasedTooltip",

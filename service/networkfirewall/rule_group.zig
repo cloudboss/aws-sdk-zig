@@ -19,7 +19,7 @@ const StatefulRuleOptions = @import("stateful_rule_options.zig").StatefulRuleOpt
 /// than one firewall.
 pub const RuleGroup = struct {
     /// The list of a rule group's reference sets.
-    reference_sets: ?ReferenceSets,
+    reference_sets: ?ReferenceSets = null,
 
     /// The stateful rules or stateless rules for the rule group.
     rules_source: RulesSource,
@@ -27,7 +27,7 @@ pub const RuleGroup = struct {
     /// Settings that are available for use in the rules in the rule group. You can
     /// only use
     /// these for stateful rule groups.
-    rule_variables: ?RuleVariables,
+    rule_variables: ?RuleVariables = null,
 
     /// Additional options governing how Network Firewall handles stateful rules.
     /// The policies where you use your stateful
@@ -35,7 +35,7 @@ pub const RuleGroup = struct {
     /// these settings. Some limitations apply; for more information, see [Strict
     /// evaluation
     /// order](https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-limitations-caveats.html) in the *Network Firewall Developer Guide*.
-    stateful_rule_options: ?StatefulRuleOptions,
+    stateful_rule_options: ?StatefulRuleOptions = null,
 
     pub const json_field_names = .{
         .reference_sets = "ReferenceSets",

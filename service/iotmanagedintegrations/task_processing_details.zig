@@ -1,31 +1,31 @@
 /// Details about the over-the-air (OTA) task process.
 pub const TaskProcessingDetails = struct {
     /// The number of canceled things in an over-the-air (OTA) task.
-    number_of_canceled_things: ?i32,
+    number_of_canceled_things: ?i32 = null,
 
     /// The number of failed things in an over-the-air (OTA) task.
-    number_of_failed_things: ?i32,
+    number_of_failed_things: ?i32 = null,
 
     /// The number of in progress things in an over-the-air (OTA) task.
-    number_of_in_progress_things: ?i32,
+    number_of_in_progress_things: ?i32 = null,
 
     /// The number of queued things in an over-the-air (OTA) task.
-    number_of_queued_things: ?i32,
+    number_of_queued_things: ?i32 = null,
 
     /// The number of rejected things in an over-the-air (OTA) task.
-    number_of_rejected_things: ?i32,
+    number_of_rejected_things: ?i32 = null,
 
     /// The number of removed things in an over-the-air (OTA) task.
-    number_of_removed_things: ?i32,
+    number_of_removed_things: ?i32 = null,
 
     /// The number of succeeded things in an over-the-air (OTA) task.
-    number_of_succeeded_things: ?i32,
+    number_of_succeeded_things: ?i32 = null,
 
     /// The number of timed out things in an over-the-air (OTA) task.
-    number_of_timed_out_things: ?i32,
+    number_of_timed_out_things: ?i32 = null,
 
     /// The targets of the over-the-air (OTA) task.
-    processing_targets: ?[]const []const u8,
+    processing_targets: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .number_of_canceled_things = "NumberOfCanceledThings",

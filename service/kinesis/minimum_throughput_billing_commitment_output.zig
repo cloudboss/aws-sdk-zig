@@ -4,13 +4,13 @@ const MinimumThroughputBillingCommitmentOutputStatus = @import("minimum_throughp
 /// an account.
 pub const MinimumThroughputBillingCommitmentOutput = struct {
     /// The earliest timestamp when the commitment can be ended.
-    earliest_allowed_end_at: ?i64,
+    earliest_allowed_end_at: ?i64 = null,
 
     /// The timestamp when the commitment was ended.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The timestamp when the commitment was started.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The current status of the minimum throughput billing commitment.
     status: MinimumThroughputBillingCommitmentOutputStatus,

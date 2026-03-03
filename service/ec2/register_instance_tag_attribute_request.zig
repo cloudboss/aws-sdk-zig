@@ -7,8 +7,8 @@
 pub const RegisterInstanceTagAttributeRequest = struct {
     /// Indicates whether to register all tag keys in the current Region. Specify
     /// `true` to register all tag keys.
-    include_all_tags_of_instance: ?bool,
+    include_all_tags_of_instance: ?bool = null,
 
     /// The tag keys to register.
-    instance_tag_keys: ?[]const []const u8,
+    instance_tag_keys: ?[]const []const u8 = null,
 };

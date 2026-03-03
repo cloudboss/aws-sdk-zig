@@ -6,7 +6,7 @@ const WrapFormat = @import("wrap_format.zig").WrapFormat;
 pub const WrapOptions = struct {
     /// Specifies the maximum length of a line before wrapping occurs. This value is
     /// used when `wrapBy` is set to `LINE_LENGTH`.
-    line_length: ?i32,
+    line_length: ?i32 = null,
 
     /// Specifies the character sequence used to terminate lines when wrapping.
     /// Valid values:
@@ -14,7 +14,7 @@ pub const WrapOptions = struct {
     /// * `CRLF`: carriage return and line feed
     /// * `LF`: line feed)
     /// * `CR`: carriage return
-    line_terminator: ?LineTerminator,
+    line_terminator: ?LineTerminator = null,
 
     /// Specifies the method used for wrapping lines in the EDI output. Valid
     /// values:

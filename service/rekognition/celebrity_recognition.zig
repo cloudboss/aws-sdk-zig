@@ -6,7 +6,7 @@ const CelebrityDetail = @import("celebrity_detail.zig").CelebrityDetail;
 /// Developer Guide.
 pub const CelebrityRecognition = struct {
     /// Information about a recognized celebrity.
-    celebrity: ?CelebrityDetail,
+    celebrity: ?CelebrityDetail = null,
 
     /// The time, in milliseconds from the start of the video, that the celebrity
     /// was recognized.

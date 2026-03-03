@@ -10,10 +10,10 @@ pub const DataCatalogEncryptionSettings = struct {
     /// the connection properties. You can enable catalog encryption or only
     /// password
     /// encryption.
-    connection_password_encryption: ?ConnectionPasswordEncryption,
+    connection_password_encryption: ?ConnectionPasswordEncryption = null,
 
     /// Specifies the encryption-at-rest configuration for the Data Catalog.
-    encryption_at_rest: ?EncryptionAtRest,
+    encryption_at_rest: ?EncryptionAtRest = null,
 
     pub const json_field_names = .{
         .connection_password_encryption = "ConnectionPasswordEncryption",

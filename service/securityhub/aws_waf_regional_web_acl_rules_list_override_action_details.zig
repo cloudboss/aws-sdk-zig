@@ -3,7 +3,7 @@
 /// evaluation.
 pub const AwsWafRegionalWebAclRulesListOverrideActionDetails = struct {
     /// Overrides the rule evaluation result in the rule group.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

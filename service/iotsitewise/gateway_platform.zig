@@ -20,13 +20,13 @@ const SiemensIE = @import("siemens_ie.zig").SiemensIE;
 /// valid IoT Core thing name.
 pub const GatewayPlatform = struct {
     /// A gateway that runs on IoT Greengrass.
-    greengrass: ?Greengrass,
+    greengrass: ?Greengrass = null,
 
     /// A gateway that runs on IoT Greengrass V2.
-    greengrass_v2: ?GreengrassV2,
+    greengrass_v2: ?GreengrassV2 = null,
 
     /// A SiteWise Edge gateway that runs on a Siemens Industrial Edge Device.
-    siemens_ie: ?SiemensIE,
+    siemens_ie: ?SiemensIE = null,
 
     pub const json_field_names = .{
         .greengrass = "greengrass",

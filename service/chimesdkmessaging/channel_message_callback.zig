@@ -10,7 +10,7 @@ pub const ChannelMessageCallback = struct {
     /// [Processing responses from an
     /// AppInstanceBot](https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html) in the
     /// *Amazon Chime SDK Messaging Developer Guide*.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The content type of the call-back message. For Amazon Lex V2 bot responses,
     /// the content type is `application/amz-chime-lex-msgs` for success responses
@@ -20,7 +20,7 @@ pub const ChannelMessageCallback = struct {
     /// [Processing responses from an
     /// AppInstanceBot](https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html) in the
     /// *Amazon Chime SDK Messaging Developer Guide*.
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// The attributes for the channel message. For Amazon Lex V2 bot responses, the
     /// attributes are mapped to specific fields from the bot. For more information,
@@ -28,19 +28,19 @@ pub const ChannelMessageCallback = struct {
     /// [Processing responses from an
     /// AppInstanceBot](https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html) in the
     /// *Amazon Chime SDK Messaging Developer Guide*.
-    message_attributes: ?[]const aws.map.MapEntry(MessageAttributeValue),
+    message_attributes: ?[]const aws.map.MapEntry(MessageAttributeValue) = null,
 
     /// The message ID.
     message_id: []const u8,
 
     /// The message metadata.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     /// The push notification configuration of the message.
-    push_notification: ?PushNotificationConfiguration,
+    push_notification: ?PushNotificationConfiguration = null,
 
     /// The ID of the SubChannel.
-    sub_channel_id: ?[]const u8,
+    sub_channel_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content = "Content",

@@ -17,7 +17,7 @@ pub const RenderingConfiguration = struct {
     /// The variable is replaced with the actual value for a piece of content when
     /// calling
     /// [GetContent](https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContent.html).
-    template_uri: ?[]const u8,
+    template_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .template_uri = "templateUri",

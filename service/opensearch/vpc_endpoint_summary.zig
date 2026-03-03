@@ -3,16 +3,16 @@ const VpcEndpointStatus = @import("vpc_endpoint_status.zig").VpcEndpointStatus;
 /// Summary information for an Amazon OpenSearch Service-managed VPC endpoint.
 pub const VpcEndpointSummary = struct {
     /// The Amazon Resource Name (ARN) of the domain associated with the endpoint.
-    domain_arn: ?[]const u8,
+    domain_arn: ?[]const u8 = null,
 
     /// The current status of the endpoint.
-    status: ?VpcEndpointStatus,
+    status: ?VpcEndpointStatus = null,
 
     /// The unique identifier of the endpoint.
-    vpc_endpoint_id: ?[]const u8,
+    vpc_endpoint_id: ?[]const u8 = null,
 
     /// The creator of the endpoint.
-    vpc_endpoint_owner: ?[]const u8,
+    vpc_endpoint_owner: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domain_arn = "DomainArn",

@@ -5,7 +5,7 @@ pub const UntagResourceResult = struct {
     /// status of the
     /// request, the timestamp of the request, and the resources affected by the
     /// request.
-    operations: ?[]const Operation,
+    operations: ?[]const Operation = null,
 
     pub const json_field_names = .{
         .operations = "operations",

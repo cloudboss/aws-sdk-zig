@@ -14,7 +14,7 @@ pub const OpenZFSCreateRootVolumeConfiguration = struct {
     /// copied to snapshots. If you specify one or more tags when creating the
     /// snapshot, no tags
     /// are copied from the volume, regardless of this value.
-    copy_tags_to_snapshots: ?bool,
+    copy_tags_to_snapshots: ?bool = null,
 
     /// Specifies the method used to compress the data on the volume. The
     /// compression
@@ -30,16 +30,16 @@ pub const OpenZFSCreateRootVolumeConfiguration = struct {
     /// * `LZ4` - Compresses the data in the volume using the LZ4
     /// compression algorithm. Compared to Z-Standard, LZ4 is less compute-intensive
     /// and delivers higher write throughput speeds.
-    data_compression_type: ?OpenZFSDataCompressionType,
+    data_compression_type: ?OpenZFSDataCompressionType = null,
 
     /// The configuration object for mounting a file system.
-    nfs_exports: ?[]const OpenZFSNfsExport,
+    nfs_exports: ?[]const OpenZFSNfsExport = null,
 
     /// A Boolean value indicating whether the volume is read-only. Setting this
     /// value to
     /// `true` can be useful after you have completed changes to a volume and no
     /// longer want changes to occur.
-    read_only: ?bool,
+    read_only: ?bool = null,
 
     /// Specifies the record size of an OpenZFS root volume, in kibibytes (KiB).
     /// Valid values are 4, 8,
@@ -53,10 +53,10 @@ pub const OpenZFSCreateRootVolumeConfiguration = struct {
     /// Tips for maximizing
     /// performance](https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs) in the
     /// *Amazon FSx for OpenZFS User Guide*.
-    record_size_ki_b: ?i32,
+    record_size_ki_b: ?i32 = null,
 
     /// An object specifying how much storage users or groups can use on the volume.
-    user_and_group_quotas: ?[]const OpenZFSUserOrGroupQuota,
+    user_and_group_quotas: ?[]const OpenZFSUserOrGroupQuota = null,
 
     pub const json_field_names = .{
         .copy_tags_to_snapshots = "CopyTagsToSnapshots",

@@ -7,7 +7,7 @@ const WorkspaceStatus = @import("workspace_status.zig").WorkspaceStatus;
 pub const WorkspaceSummary = struct {
     /// The alias that is assigned to this workspace to help identify it. It does
     /// not need to be unique.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The ARN of the workspace.
     arn: []const u8,
@@ -17,13 +17,13 @@ pub const WorkspaceSummary = struct {
 
     /// (optional) If the workspace was created with a customer managed KMS key, the
     /// ARN for the key used.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The current status of the workspace.
     status: WorkspaceStatus,
 
     /// The list of tag keys and values that are associated with the workspace.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The unique ID for the workspace.
     workspace_id: []const u8,

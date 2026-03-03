@@ -5,13 +5,13 @@ const PayloadType = @import("payload_type.zig").PayloadType;
 /// invocation result.
 pub const AgentCollaboratorOutputPayload = struct {
     /// An action invocation result.
-    return_control_payload: ?ReturnControlPayload,
+    return_control_payload: ?ReturnControlPayload = null,
 
     /// Text output.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// The type of output.
-    @"type": ?PayloadType,
+    @"type": ?PayloadType = null,
 
     pub const json_field_names = .{
         .return_control_payload = "returnControlPayload",

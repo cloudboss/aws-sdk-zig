@@ -6,10 +6,10 @@ const NetworkInputServerValidation = @import("network_input_server_validation.zi
 /// that is running the live event through a network connection.
 pub const NetworkInputSettings = struct {
     /// Specifies HLS input settings when the uri is for a HLS manifest.
-    hls_input_settings: ?HlsInputSettings,
+    hls_input_settings: ?HlsInputSettings = null,
 
     /// Specifies multicast input settings when the uri is for a multicast event.
-    multicast_input_settings: ?MulticastInputSettings,
+    multicast_input_settings: ?MulticastInputSettings = null,
 
     /// Check HTTPS server certificates. When set to checkCryptographyOnly,
     /// cryptography in the certificate will be checked, but not the server's name.
@@ -17,7 +17,7 @@ pub const NetworkInputSettings = struct {
     /// not strictly match the corresponding certificate's wildcard pattern and
     /// would otherwise cause the event to error. This setting is ignored for
     /// protocols that do not use https.
-    server_validation: ?NetworkInputServerValidation,
+    server_validation: ?NetworkInputServerValidation = null,
 
     pub const json_field_names = .{
         .hls_input_settings = "HlsInputSettings",

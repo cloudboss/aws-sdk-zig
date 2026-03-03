@@ -8,14 +8,14 @@ pub const Change = struct {
     /// Is either `null`, if no Hooks invoke for the resource, or contains the
     /// number
     /// of Hooks that will invoke for the resource.
-    hook_invocation_count: ?i32,
+    hook_invocation_count: ?i32 = null,
 
     /// A `ResourceChange` structure that describes the resource and action that
     /// CloudFormation will perform.
-    resource_change: ?ResourceChange,
+    resource_change: ?ResourceChange = null,
 
     /// The type of entity that CloudFormation changes.
     ///
     /// * `Resource` This change is for a resource.
-    @"type": ?ChangeType,
+    @"type": ?ChangeType = null,
 };

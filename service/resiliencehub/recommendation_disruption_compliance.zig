@@ -9,7 +9,7 @@ pub const RecommendationDisruptionCompliance = struct {
     /// The expected Recovery Point Objective (RPO) description after applying the
     /// recommended
     /// configuration change.
-    expected_rpo_description: ?[]const u8,
+    expected_rpo_description: ?[]const u8 = null,
 
     /// The expected RPO after applying the recommended configuration change.
     expected_rpo_in_secs: i32 = 0,
@@ -17,7 +17,7 @@ pub const RecommendationDisruptionCompliance = struct {
     /// The expected Recovery Time Objective (RTO) description after applying the
     /// recommended
     /// configuration change.
-    expected_rto_description: ?[]const u8,
+    expected_rto_description: ?[]const u8 = null,
 
     /// The expected RTO after applying the recommended configuration change.
     expected_rto_in_secs: i32 = 0,

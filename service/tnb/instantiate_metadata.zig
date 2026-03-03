@@ -2,7 +2,7 @@
 /// of the network instance.
 pub const InstantiateMetadata = struct {
     /// The configurable properties used during instantiation.
-    additional_params_for_ns: ?[]const u8,
+    additional_params_for_ns: ?[]const u8 = null,
 
     /// The network service descriptor used for instantiating the network instance.
     nsd_info_id: []const u8,

@@ -6,11 +6,11 @@ pub const AthenaIntegration = struct {
     integration_result_s3_destination_arn: []const u8,
 
     /// The end date for the partition.
-    partition_end_date: ?i64,
+    partition_end_date: ?i64 = null,
 
     /// The schedule for adding new partitions to the table.
     partition_load_frequency: PartitionLoadFrequency,
 
     /// The start date for the partition.
-    partition_start_date: ?i64,
+    partition_start_date: ?i64 = null,
 };

@@ -23,7 +23,7 @@ pub const AutoshiftSummary = struct {
     away_from: []const u8,
 
     /// The time (in UTC) when the autoshift ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The time (in UTC) when the autoshift started.
     start_time: i64,

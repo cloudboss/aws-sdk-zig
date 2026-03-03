@@ -14,7 +14,7 @@ pub const AlternateKey = struct {
     length: i32 = 0,
 
     /// The name of the alternate key.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A positive integer value representing the offset to mark the start of the
     /// alternate key

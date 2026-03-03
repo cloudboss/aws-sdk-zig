@@ -14,7 +14,7 @@ pub const AssessmentTarget = struct {
     /// The ARN that specifies the resource group that is associated with the
     /// assessment
     /// target.
-    resource_group_arn: ?[]const u8,
+    resource_group_arn: ?[]const u8 = null,
 
     /// The time at which UpdateAssessmentTarget is called.
     updated_at: i64,

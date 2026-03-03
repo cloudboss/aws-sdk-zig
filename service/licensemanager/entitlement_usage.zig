@@ -6,7 +6,7 @@ pub const EntitlementUsage = struct {
     consumed_value: []const u8,
 
     /// Maximum entitlement usage count.
-    max_count: ?[]const u8,
+    max_count: ?[]const u8 = null,
 
     /// Entitlement usage name.
     name: []const u8,

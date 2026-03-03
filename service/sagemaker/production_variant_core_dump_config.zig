@@ -35,7 +35,7 @@ pub const ProductionVariantCoreDumpConfig = struct {
     /// your `CreateEndpoint` and `UpdateEndpoint` requests. For more information,
     /// see [Using Key Policies in Amazon Web Services
     /// KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *Amazon Web Services Key Management Service Developer Guide*.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_s3_uri = "DestinationS3Uri",

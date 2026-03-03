@@ -14,10 +14,10 @@ pub const HookProgressEvent = struct {
     ///
     /// * `WARN`: This will fail the Hook invocation, but not the request associated
     ///   with it.
-    failure_mode: ?[]const u8,
+    failure_mode: ?[]const u8 = null,
 
     /// The time that the Hook invocation request initiated.
-    hook_event_time: ?i64,
+    hook_event_time: ?i64 = null,
 
     /// The status of the Hook invocation. The following are potential statuses:
     ///
@@ -33,22 +33,22 @@ pub const HookProgressEvent = struct {
     ///   result.
     ///
     /// * `HOOK_FAILED`: The Hook invocation didn't complete successfully.
-    hook_status: ?[]const u8,
+    hook_status: ?[]const u8 = null,
 
     /// The message explaining the current Hook status.
-    hook_status_message: ?[]const u8,
+    hook_status_message: ?[]const u8 = null,
 
     /// The ARN of the Hook being invoked.
-    hook_type_arn: ?[]const u8,
+    hook_type_arn: ?[]const u8 = null,
 
     /// The type name of the Hook being invoked.
-    hook_type_name: ?[]const u8,
+    hook_type_name: ?[]const u8 = null,
 
     /// The type version of the Hook being invoked.
-    hook_type_version_id: ?[]const u8,
+    hook_type_version_id: ?[]const u8 = null,
 
     /// States whether the Hook is invoked before or after resource provisioning.
-    invocation_point: ?[]const u8,
+    invocation_point: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .failure_mode = "FailureMode",

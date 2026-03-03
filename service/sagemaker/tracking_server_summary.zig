@@ -4,25 +4,25 @@ const TrackingServerStatus = @import("tracking_server_status.zig").TrackingServe
 /// The summary of the tracking server to list.
 pub const TrackingServerSummary = struct {
     /// The creation time of a listed tracking server.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The activity status of a listed tracking server.
-    is_active: ?IsTrackingServerActive,
+    is_active: ?IsTrackingServerActive = null,
 
     /// The last modified time of a listed tracking server.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The MLflow version used for a listed tracking server.
-    mlflow_version: ?[]const u8,
+    mlflow_version: ?[]const u8 = null,
 
     /// The ARN of a listed tracking server.
-    tracking_server_arn: ?[]const u8,
+    tracking_server_arn: ?[]const u8 = null,
 
     /// The name of a listed tracking server.
-    tracking_server_name: ?[]const u8,
+    tracking_server_name: ?[]const u8 = null,
 
     /// The creation status of a listed tracking server.
-    tracking_server_status: ?TrackingServerStatus,
+    tracking_server_status: ?TrackingServerStatus = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

@@ -6,7 +6,7 @@ pub const MetadataGenerationRunTarget = struct {
     identifier: []const u8,
 
     /// The revision of the asset for which metadata was generated.
-    revision: ?[]const u8,
+    revision: ?[]const u8 = null,
 
     /// The type of the asset for which metadata was generated.
     @"type": MetadataGenerationTargetType,

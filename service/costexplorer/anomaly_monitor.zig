@@ -8,19 +8,19 @@ const MonitorType = @import("monitor_type.zig").MonitorType;
 /// of detailed metadata and the current status of the monitor object.
 pub const AnomalyMonitor = struct {
     /// The date when the monitor was created.
-    creation_date: ?[]const u8,
+    creation_date: ?[]const u8 = null,
 
     /// The value for evaluated dimensions.
     dimensional_value_count: i32 = 0,
 
     /// The date when the monitor last evaluated for anomalies.
-    last_evaluated_date: ?[]const u8,
+    last_evaluated_date: ?[]const u8 = null,
 
     /// The date when the monitor was last updated.
-    last_updated_date: ?[]const u8,
+    last_updated_date: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) value.
-    monitor_arn: ?[]const u8,
+    monitor_arn: ?[]const u8 = null,
 
     /// For customer managed monitors, do not specify this field.
     ///
@@ -30,7 +30,7 @@ pub const AnomalyMonitor = struct {
     /// ` dimensions, you must also specify MonitorSpecification to configure the
     /// specific
     /// tag or cost category key to analyze.
-    monitor_dimension: ?MonitorDimension,
+    monitor_dimension: ?MonitorDimension = null,
 
     /// The name of the monitor.
     monitor_name: []const u8,
@@ -63,7 +63,7 @@ pub const AnomalyMonitor = struct {
     /// * To track cost categories, set this field to`{ "CostCategories": { "Key":
     /// "your cost category key", "Values": [ "your cost category value" ] } }
     /// `
-    monitor_specification: ?Expression,
+    monitor_specification: ?Expression = null,
 
     /// The type of the monitor.
     ///

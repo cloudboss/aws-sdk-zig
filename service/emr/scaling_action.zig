@@ -8,7 +8,7 @@ pub const ScalingAction = struct {
     /// Not available for instance groups. Instance groups use the market type
     /// specified for the
     /// group.
-    market: ?MarketType,
+    market: ?MarketType = null,
 
     /// The type of adjustment the automatic scaling activity makes when triggered,
     /// and the

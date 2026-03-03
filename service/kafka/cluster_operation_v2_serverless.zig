@@ -4,7 +4,7 @@ const VpcConnectionInfoServerless = @import("vpc_connection_info_serverless.zig"
 pub const ClusterOperationV2Serverless = struct {
     /// Description of the VPC connection for CreateVpcConnection and
     /// DeleteVpcConnection operations.
-    vpc_connection_info: ?VpcConnectionInfoServerless,
+    vpc_connection_info: ?VpcConnectionInfoServerless = null,
 
     pub const json_field_names = .{
         .vpc_connection_info = "VpcConnectionInfo",

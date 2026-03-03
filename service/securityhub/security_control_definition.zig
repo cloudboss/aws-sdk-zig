@@ -18,7 +18,7 @@ pub const SecurityControlDefinition = struct {
     /// parameter customization is supported for select
     /// controls. An empty array is returned for controls that don’t support custom
     /// properties.
-    customizable_properties: ?[]const SecurityControlProperty,
+    customizable_properties: ?[]const SecurityControlProperty = null,
 
     /// The description of a security control across standards. This typically
     /// summarizes how
@@ -30,7 +30,7 @@ pub const SecurityControlDefinition = struct {
     /// An object that provides a security control parameter name, description, and
     /// the options for customizing it. This
     /// object is excluded for a control that doesn't support custom parameters.
-    parameter_definitions: ?[]const aws.map.MapEntry(ParameterDefinition),
+    parameter_definitions: ?[]const aws.map.MapEntry(ParameterDefinition) = null,
 
     /// A link to Security Hub documentation that explains how to remediate a failed
     /// finding for a security control.

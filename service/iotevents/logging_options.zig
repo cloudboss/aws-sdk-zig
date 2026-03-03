@@ -6,7 +6,7 @@ pub const LoggingOptions = struct {
     /// Information that identifies those detector models and their detectors
     /// (instances) for
     /// which the logging level is given.
-    detector_debug_options: ?[]const DetectorDebugOption,
+    detector_debug_options: ?[]const DetectorDebugOption = null,
 
     /// If TRUE, logging is enabled for AWS IoT Events.
     enabled: bool = false,

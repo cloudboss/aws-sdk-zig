@@ -8,7 +8,7 @@ pub const AdvancedEventSelector = struct {
 
     /// An optional, descriptive name for an advanced event selector, such as "Log
     /// data events for only two S3 buckets".
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .field_selectors = "FieldSelectors",

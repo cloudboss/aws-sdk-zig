@@ -4,10 +4,10 @@ const OverrideStatus = @import("override_status.zig").OverrideStatus;
 /// request.
 pub const ApprovalRuleOverriddenEventMetadata = struct {
     /// The status of the override event.
-    override_status: ?OverrideStatus,
+    override_status: ?OverrideStatus = null,
 
     /// The revision ID of the pull request when the override event occurred.
-    revision_id: ?[]const u8,
+    revision_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .override_status = "overrideStatus",

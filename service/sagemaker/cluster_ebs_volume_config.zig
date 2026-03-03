@@ -25,16 +25,16 @@ pub const ClusterEbsVolumeConfig = struct {
     /// * You can optionally specify the `VolumeKmsKeyId` to encrypt the secondary
     ///   volume with your own KMS key instead of an Amazon Web Services owned KMS
     ///   key.
-    root_volume: ?bool,
+    root_volume: ?bool = null,
 
     /// The ID of a KMS key to encrypt the Amazon EBS volume.
-    volume_kms_key_id: ?[]const u8,
+    volume_kms_key_id: ?[]const u8 = null,
 
     /// The size in gigabytes (GB) of the additional EBS volume to be attached to
     /// the instances in the SageMaker HyperPod cluster instance group. The
     /// additional EBS volume is attached to each instance within the SageMaker
     /// HyperPod cluster instance group and mounted to `/opt/sagemaker`.
-    volume_size_in_gb: ?i32,
+    volume_size_in_gb: ?i32 = null,
 
     pub const json_field_names = .{
         .root_volume = "RootVolume",

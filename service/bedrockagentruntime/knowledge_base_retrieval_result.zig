@@ -14,15 +14,15 @@ pub const KnowledgeBaseRetrievalResult = struct {
     content: RetrievalResultContent,
 
     /// Contains information about the location of the data source.
-    location: ?RetrievalResultLocation,
+    location: ?RetrievalResultLocation = null,
 
     /// Contains metadata attributes and their values for the file in the data
     /// source. For more information, see [Metadata and
     /// filtering](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html#kb-ds-metadata).
-    metadata: ?[]const aws.map.StringMapEntry,
+    metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// The level of relevance of the result to the query.
-    score: ?f64,
+    score: ?f64 = null,
 
     pub const json_field_names = .{
         .content = "content",

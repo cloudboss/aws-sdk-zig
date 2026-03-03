@@ -7,14 +7,14 @@ const AutomatedReasoningCheckTranslation = @import("automated_reasoning_check_tr
 pub const AutomatedReasoningCheckInvalidFinding = struct {
     /// The automated reasoning policy rules that contradict the claims in the
     /// input.
-    contradicting_rules: ?[]const AutomatedReasoningCheckRule,
+    contradicting_rules: ?[]const AutomatedReasoningCheckRule = null,
 
     /// Indication of a logic issue with the translation without needing to consider
     /// the automated reasoning policy rules.
-    logic_warning: ?AutomatedReasoningCheckLogicWarning,
+    logic_warning: ?AutomatedReasoningCheckLogicWarning = null,
 
     /// The logical translation of the input that this finding invalidates.
-    translation: ?AutomatedReasoningCheckTranslation,
+    translation: ?AutomatedReasoningCheckTranslation = null,
 
     pub const json_field_names = .{
         .contradicting_rules = "contradictingRules",

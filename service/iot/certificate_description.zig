@@ -6,13 +6,13 @@ const CertificateValidity = @import("certificate_validity.zig").CertificateValid
 /// Describes a certificate.
 pub const CertificateDescription = struct {
     /// The certificate ID of the CA certificate used to sign this certificate.
-    ca_certificate_id: ?[]const u8,
+    ca_certificate_id: ?[]const u8 = null,
 
     /// The ARN of the certificate.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The ID of the certificate.
-    certificate_id: ?[]const u8,
+    certificate_id: ?[]const u8 = null,
 
     /// The mode of the certificate.
     ///
@@ -34,38 +34,38 @@ pub const CertificateDescription = struct {
     /// For more information about the value for SNI extension, see [Transport
     /// security in
     /// IoT](https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html).
-    certificate_mode: ?CertificateMode,
+    certificate_mode: ?CertificateMode = null,
 
     /// The certificate data, in PEM format.
-    certificate_pem: ?[]const u8,
+    certificate_pem: ?[]const u8 = null,
 
     /// The date and time the certificate was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The customer version of the certificate.
-    customer_version: ?i32,
+    customer_version: ?i32 = null,
 
     /// The generation ID of the certificate.
-    generation_id: ?[]const u8,
+    generation_id: ?[]const u8 = null,
 
     /// The date and time the certificate was last modified.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The ID of the Amazon Web Services account that owns the certificate.
-    owned_by: ?[]const u8,
+    owned_by: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account of the previous owner of the
     /// certificate.
-    previous_owned_by: ?[]const u8,
+    previous_owned_by: ?[]const u8 = null,
 
     /// The status of the certificate.
-    status: ?CertificateStatus,
+    status: ?CertificateStatus = null,
 
     /// The transfer data.
-    transfer_data: ?TransferData,
+    transfer_data: ?TransferData = null,
 
     /// When the certificate is valid.
-    validity: ?CertificateValidity,
+    validity: ?CertificateValidity = null,
 
     pub const json_field_names = .{
         .ca_certificate_id = "caCertificateId",

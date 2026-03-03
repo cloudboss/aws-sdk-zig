@@ -150,7 +150,7 @@ pub const DkimSigningAttributes = struct {
     /// * `AWS_SES_US_WEST_2` – Configure DKIM for the identity by replicating from
     ///   a parent
     /// identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).
-    domain_signing_attributes_origin: ?DkimSigningAttributesOrigin,
+    domain_signing_attributes_origin: ?DkimSigningAttributesOrigin = null,
 
     /// [Bring Your Own DKIM] A private key that's used to generate a DKIM
     /// signature.
@@ -158,17 +158,17 @@ pub const DkimSigningAttributes = struct {
     /// The private key must use 1024 or 2048-bit RSA encryption, and must be
     /// encoded using
     /// base64 encoding.
-    domain_signing_private_key: ?[]const u8,
+    domain_signing_private_key: ?[]const u8 = null,
 
     /// [Bring Your Own DKIM] A string that's used to identify a public key in the
     /// DNS
     /// configuration for a domain.
-    domain_signing_selector: ?[]const u8,
+    domain_signing_selector: ?[]const u8 = null,
 
     /// [Easy DKIM] The key length of the future DKIM key pair to be generated. This
     /// can be
     /// changed at most once per day.
-    next_signing_key_length: ?DkimSigningKeyLength,
+    next_signing_key_length: ?DkimSigningKeyLength = null,
 
     pub const json_field_names = .{
         .domain_signing_attributes_origin = "DomainSigningAttributesOrigin",

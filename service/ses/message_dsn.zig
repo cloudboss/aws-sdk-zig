@@ -10,10 +10,10 @@ const ExtensionField = @import("extension_field.zig").ExtensionField;
 pub const MessageDsn = struct {
     /// When the message was received by the reporting mail transfer agent (MTA), in
     /// [RFC 822](https://www.ietf.org/rfc/rfc0822.txt) date-time format.
-    arrival_date: ?i64,
+    arrival_date: ?i64 = null,
 
     /// Additional X-headers to include in the DSN.
-    extension_fields: ?[]const ExtensionField,
+    extension_fields: ?[]const ExtensionField = null,
 
     /// The reporting MTA that attempted to deliver the message, formatted as
     /// specified in

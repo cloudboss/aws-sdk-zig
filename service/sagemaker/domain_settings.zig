@@ -11,38 +11,38 @@ const UnifiedStudioSettings = @import("unified_studio_settings.zig").UnifiedStud
 pub const DomainSettings = struct {
     /// A collection of settings that configure the Amazon Q experience within the
     /// domain. The `AuthMode` that you use to create the domain must be `SSO`.
-    amazon_q_settings: ?AmazonQSettings,
+    amazon_q_settings: ?AmazonQSettings = null,
 
     /// A collection of settings that configure the domain's Docker interaction.
-    docker_settings: ?DockerSettings,
+    docker_settings: ?DockerSettings = null,
 
     /// The configuration for attaching a SageMaker AI user profile name to the
     /// execution role as a [sts:SourceIdentity
     /// key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html).
-    execution_role_identity_config: ?ExecutionRoleIdentityConfig,
+    execution_role_identity_config: ?ExecutionRoleIdentityConfig = null,
 
     /// The IP address type for the domain. Specify `ipv4` for IPv4-only
     /// connectivity or `dualstack` for both IPv4 and IPv6 connectivity. When you
     /// specify `dualstack`, the subnet must support IPv6 CIDR blocks. If not
     /// specified, defaults to `ipv4`.
-    ip_address_type: ?IPAddressType,
+    ip_address_type: ?IPAddressType = null,
 
     /// A collection of settings that configure the `RStudioServerPro` Domain-level
     /// app.
-    r_studio_server_pro_domain_settings: ?RStudioServerProDomainSettings,
+    r_studio_server_pro_domain_settings: ?RStudioServerProDomainSettings = null,
 
     /// The security groups for the Amazon Virtual Private Cloud that the `Domain`
     /// uses for communication between Domain-level apps and user apps.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The Trusted Identity Propagation (TIP) settings for the SageMaker domain.
     /// These settings determine how user identities from IAM Identity Center are
     /// propagated through the domain to TIP enabled Amazon Web Services services.
-    trusted_identity_propagation_settings: ?TrustedIdentityPropagationSettings,
+    trusted_identity_propagation_settings: ?TrustedIdentityPropagationSettings = null,
 
     /// The settings that apply to an SageMaker AI domain when you use it in Amazon
     /// SageMaker Unified Studio.
-    unified_studio_settings: ?UnifiedStudioSettings,
+    unified_studio_settings: ?UnifiedStudioSettings = null,
 
     pub const json_field_names = .{
         .amazon_q_settings = "AmazonQSettings",

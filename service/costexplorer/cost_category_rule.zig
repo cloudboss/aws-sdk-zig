@@ -9,7 +9,7 @@ pub const CostCategoryRule = struct {
     /// The value the line item is categorized as if the line item contains the
     /// matched
     /// dimension.
-    inherited_value: ?CostCategoryInheritedValueDimension,
+    inherited_value: ?CostCategoryInheritedValueDimension = null,
 
     /// An
     /// [Expression](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
@@ -28,7 +28,7 @@ pub const CostCategoryRule = struct {
     /// [Term
     /// Comparisons](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms) in the *Billing and Cost Management User
     /// Guide*.
-    rule: ?Expression,
+    rule: ?Expression = null,
 
     /// You can define the `CostCategoryRule` rule type as either
     /// `REGULAR` or `INHERITED_VALUE`. The
@@ -42,9 +42,9 @@ pub const CostCategoryRule = struct {
     /// key. First, choose an inherited value rule type, and then choose the tag
     /// dimension and
     /// specify the tag key to use.
-    @"type": ?CostCategoryRuleType,
+    @"type": ?CostCategoryRuleType = null,
 
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .inherited_value = "InheritedValue",

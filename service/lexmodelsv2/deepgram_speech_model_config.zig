@@ -7,7 +7,7 @@ pub const DeepgramSpeechModelConfig = struct {
 
     /// The identifier of the Deepgram speech-to-text model to use for processing
     /// speech input.
-    model_id: ?[]const u8,
+    model_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_token_secret_arn = "apiTokenSecretArn",

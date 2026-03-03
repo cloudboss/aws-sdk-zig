@@ -3,8 +3,8 @@ const DeleteFleetErrorCode = @import("delete_fleet_error_code.zig").DeleteFleetE
 /// Describes an EC2 Fleet error.
 pub const DeleteFleetError = struct {
     /// The error code.
-    code: ?DeleteFleetErrorCode,
+    code: ?DeleteFleetErrorCode = null,
 
     /// The description for the error code.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

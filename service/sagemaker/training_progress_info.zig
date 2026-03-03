@@ -1,16 +1,16 @@
 /// The serverless training job progress information.
 pub const TrainingProgressInfo = struct {
     /// The current epoch number.
-    current_epoch: ?i64,
+    current_epoch: ?i64 = null,
 
     /// The current step number.
-    current_step: ?i64,
+    current_step: ?i64 = null,
 
     /// The maximum number of epochs for this job.
-    max_epoch: ?i64,
+    max_epoch: ?i64 = null,
 
     /// The total step count per epoch.
-    total_step_count_per_epoch: ?i64,
+    total_step_count_per_epoch: ?i64 = null,
 
     pub const json_field_names = .{
         .current_epoch = "CurrentEpoch",

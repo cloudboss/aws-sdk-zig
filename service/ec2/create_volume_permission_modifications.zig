@@ -4,8 +4,8 @@ const CreateVolumePermission = @import("create_volume_permission.zig").CreateVol
 /// volume.
 pub const CreateVolumePermissionModifications = struct {
     /// Adds the specified Amazon Web Services account ID or group to the list.
-    add: ?[]const CreateVolumePermission,
+    add: ?[]const CreateVolumePermission = null,
 
     /// Removes the specified Amazon Web Services account ID or group from the list.
-    remove: ?[]const CreateVolumePermission,
+    remove: ?[]const CreateVolumePermission = null,
 };

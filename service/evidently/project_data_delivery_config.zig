@@ -6,11 +6,11 @@ const S3DestinationConfig = @import("s3_destination_config.zig").S3DestinationCo
 pub const ProjectDataDeliveryConfig = struct {
     /// If the project stores evaluation events in CloudWatch Logs, this structure
     /// stores the log group name.
-    cloud_watch_logs: ?CloudWatchLogsDestinationConfig,
+    cloud_watch_logs: ?CloudWatchLogsDestinationConfig = null,
 
     /// If the project stores evaluation events in an Amazon S3 bucket, this
     /// structure stores the bucket name and bucket prefix.
-    s_3_destination: ?S3DestinationConfig,
+    s_3_destination: ?S3DestinationConfig = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs = "cloudWatchLogs",

@@ -9,55 +9,55 @@ const UrlEndpointSummary = @import("url_endpoint_summary.zig").UrlEndpointSummar
 /// A summary for the service as a response to `ListServices`.
 pub const ServiceSummary = struct {
     /// The unique identifier of the application.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the service.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID of the service creator.
-    created_by_account_id: ?[]const u8,
+    created_by_account_id: ?[]const u8 = null,
 
     /// A timestamp that indicates when the service is created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// A description of the service.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The endpoint type of the service.
-    endpoint_type: ?ServiceEndpointType,
+    endpoint_type: ?ServiceEndpointType = null,
 
     /// The unique identifier of the environment.
-    environment_id: ?[]const u8,
+    environment_id: ?[]const u8 = null,
 
     /// Any error associated with the service resource.
-    @"error": ?ErrorResponse,
+    @"error": ?ErrorResponse = null,
 
     /// A summary of the configuration for the Lambda endpoint type.
-    lambda_endpoint: ?LambdaEndpointSummary,
+    lambda_endpoint: ?LambdaEndpointSummary = null,
 
     /// A timestamp that indicates when the service was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The name of the service.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID of the service owner.
-    owner_account_id: ?[]const u8,
+    owner_account_id: ?[]const u8 = null,
 
     /// The unique identifier of the service.
-    service_id: ?[]const u8,
+    service_id: ?[]const u8 = null,
 
     /// The current state of the service.
-    state: ?ServiceState,
+    state: ?ServiceState = null,
 
     /// The tags assigned to the service.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The summary of the configuration for the URL endpoint type.
-    url_endpoint: ?UrlEndpointSummary,
+    url_endpoint: ?UrlEndpointSummary = null,
 
     /// The ID of the virtual private cloud (VPC).
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

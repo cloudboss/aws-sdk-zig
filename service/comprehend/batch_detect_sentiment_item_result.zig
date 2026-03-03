@@ -7,15 +7,15 @@ const SentimentScore = @import("sentiment_score.zig").SentimentScore;
 /// operation.
 pub const BatchDetectSentimentItemResult = struct {
     /// The zero-based index of the document in the input list.
-    index: ?i32,
+    index: ?i32 = null,
 
     /// The sentiment detected in the document.
-    sentiment: ?SentimentType,
+    sentiment: ?SentimentType = null,
 
     /// The level of confidence that Amazon Comprehend has in the accuracy of its
     /// sentiment
     /// detection.
-    sentiment_score: ?SentimentScore,
+    sentiment_score: ?SentimentScore = null,
 
     pub const json_field_names = .{
         .index = "Index",

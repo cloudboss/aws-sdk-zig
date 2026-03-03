@@ -3,7 +3,7 @@ const CloudFrontOriginAccessIdentityConfig = @import("cloud_front_origin_access_
 /// CloudFront origin access identity.
 pub const CloudFrontOriginAccessIdentity = struct {
     /// The current configuration information for the identity.
-    cloud_front_origin_access_identity_config: ?CloudFrontOriginAccessIdentityConfig,
+    cloud_front_origin_access_identity_config: ?CloudFrontOriginAccessIdentityConfig = null,
 
     /// The ID for the origin access identity, for example, `E74FTE3AJFJ256A`.
     id: []const u8,

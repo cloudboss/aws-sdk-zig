@@ -4,13 +4,13 @@ const ParentChildFieldOptionsMapping = @import("parent_child_field_options_mappi
 /// selected value in a parent field.
 pub const FieldOptionsCaseRule = struct {
     /// The identifier of the child field whose options are controlled.
-    child_field_id: ?[]const u8,
+    child_field_id: ?[]const u8 = null,
 
     /// A mapping between a parent field option value and child field option values.
     parent_child_field_options_mappings: []const ParentChildFieldOptionsMapping,
 
     /// The identifier of the parent field that controls options.
-    parent_field_id: ?[]const u8,
+    parent_field_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .child_field_id = "childFieldId",

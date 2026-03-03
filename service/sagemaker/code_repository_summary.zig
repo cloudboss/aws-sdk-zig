@@ -14,7 +14,7 @@ pub const CodeRepositorySummary = struct {
     /// Configuration details for the Git repository, including the URL where it is
     /// located and the ARN of the Amazon Web Services Secrets Manager secret that
     /// contains the credentials used to access the repository.
-    git_config: ?GitConfig,
+    git_config: ?GitConfig = null,
 
     /// The date and time that the Git repository was last modified.
     last_modified_time: i64,

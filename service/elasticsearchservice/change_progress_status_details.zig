@@ -7,35 +7,35 @@ const OverallChangeStatus = @import("overall_change_status.zig").OverallChangeSt
 pub const ChangeProgressStatusDetails = struct {
     /// The unique change identifier associated with a specific domain configuration
     /// change.
-    change_id: ?[]const u8,
+    change_id: ?[]const u8 = null,
 
     /// The specific stages that the domain is going through to perform the
     /// configuration change.
-    change_progress_stages: ?[]const ChangeProgressStage,
+    change_progress_stages: ?[]const ChangeProgressStage = null,
 
     /// The list of properties involved in the domain configuration change that are
     /// completed.
-    completed_properties: ?[]const []const u8,
+    completed_properties: ?[]const []const u8 = null,
 
     /// The current status of the configuration change.
-    config_change_status: ?ConfigChangeStatus,
+    config_change_status: ?ConfigChangeStatus = null,
 
     /// The IAM principal who initiated the configuration change.
-    initiated_by: ?InitiatedBy,
+    initiated_by: ?InitiatedBy = null,
 
     /// The last time that the status of the configuration change was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The list of properties involved in the domain configuration change that are
     /// still in pending.
-    pending_properties: ?[]const []const u8,
+    pending_properties: ?[]const []const u8 = null,
 
     /// The time at which the configuration change is made on the domain.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The overall status of the domain configuration change. This field can take
     /// the following values: `PENDING`, `PROCESSING`, `COMPLETED` and `FAILED`
-    status: ?OverallChangeStatus,
+    status: ?OverallChangeStatus = null,
 
     /// The total number of stages required for the configuration change.
     total_number_of_stages: i32 = 0,

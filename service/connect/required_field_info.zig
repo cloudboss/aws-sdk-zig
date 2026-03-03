@@ -3,7 +3,7 @@ const TaskTemplateFieldIdentifier = @import("task_template_field_identifier.zig"
 /// Information about a required field.
 pub const RequiredFieldInfo = struct {
     /// The unique identifier for the field.
-    id: ?TaskTemplateFieldIdentifier,
+    id: ?TaskTemplateFieldIdentifier = null,
 
     pub const json_field_names = .{
         .id = "Id",

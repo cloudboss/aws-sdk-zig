@@ -3,7 +3,7 @@ const RelativePosition = @import("relative_position.zig").RelativePosition;
 /// Program transition configuration.
 pub const Transition = struct {
     /// The duration of the live program in seconds.
-    duration_millis: ?i64,
+    duration_millis: ?i64 = null,
 
     /// The position where this program will be inserted relative to the
     /// `RelativePosition`.
@@ -11,11 +11,11 @@ pub const Transition = struct {
 
     /// The name of the program that this program will be inserted next to, as
     /// defined by `RelativePosition`.
-    relative_program: ?[]const u8,
+    relative_program: ?[]const u8 = null,
 
     /// The date and time that the program is scheduled to start, in epoch
     /// milliseconds.
-    scheduled_start_time_millis: ?i64,
+    scheduled_start_time_millis: ?i64 = null,
 
     /// Defines when the program plays in the schedule. You can set the value to
     /// `ABSOLUTE` or `RELATIVE`.

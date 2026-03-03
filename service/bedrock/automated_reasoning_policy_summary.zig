@@ -5,7 +5,7 @@ pub const AutomatedReasoningPolicySummary = struct {
     created_at: i64,
 
     /// The description of the policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the policy.
     name: []const u8,

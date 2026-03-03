@@ -7,11 +7,11 @@ const Node = @import("node.zig").Node;
 pub const WorkflowGraph = struct {
     /// A list of all the directed connections between the nodes belonging to the
     /// workflow.
-    edges: ?[]const Edge,
+    edges: ?[]const Edge = null,
 
     /// A list of the the Glue components belong to the workflow represented as
     /// nodes.
-    nodes: ?[]const Node,
+    nodes: ?[]const Node = null,
 
     pub const json_field_names = .{
         .edges = "Edges",

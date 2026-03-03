@@ -5,7 +5,7 @@ pub const ActivityTaskTimedOutEventAttributes = struct {
     /// Contains the content of the `details` parameter for the last call made by
     /// the activity to
     /// `RecordActivityTaskHeartbeat`.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// The ID of the `ActivityTaskScheduled` event that was recorded when this
     /// activity task was scheduled. This information can be useful for diagnosing

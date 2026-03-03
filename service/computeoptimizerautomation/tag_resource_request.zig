@@ -4,7 +4,7 @@ pub const TagResourceRequest = struct {
     /// A unique, case-sensitive identifier that you provide to ensure the
     /// idempotency of the request. Must be 1-64 characters long and contain only
     /// alphanumeric characters, underscores, and hyphens.
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The ARN of the resource to tag.
     resource_arn: []const u8,

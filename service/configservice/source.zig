@@ -11,7 +11,7 @@ const SourceDetail = @import("source_detail.zig").SourceDetail;
 pub const Source = struct {
     /// Provides the runtime system, policy definition, and whether debug logging is
     /// enabled. Required when owner is set to `CUSTOM_POLICY`.
-    custom_policy_details: ?CustomPolicyDetails,
+    custom_policy_details: ?CustomPolicyDetails = null,
 
     /// Indicates whether Amazon Web Services or the customer owns and manages the
     /// Config rule.
@@ -34,7 +34,7 @@ pub const Source = struct {
     /// If the owner is set to `CUSTOM_POLICY`, the only acceptable values for the
     /// Config rule trigger message type are `ConfigurationItemChangeNotification`
     /// and `OversizedConfigurationItemChangeNotification`.
-    source_details: ?[]const SourceDetail,
+    source_details: ?[]const SourceDetail = null,
 
     /// For Config Managed rules, a predefined identifier from a
     /// list. For example, `IAM_PASSWORD_POLICY` is a managed
@@ -46,7 +46,7 @@ pub const Source = struct {
     /// `arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name`.
     ///
     /// For Config Custom Policy rules, this field will be ignored.
-    source_identifier: ?[]const u8,
+    source_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .custom_policy_details = "CustomPolicyDetails",

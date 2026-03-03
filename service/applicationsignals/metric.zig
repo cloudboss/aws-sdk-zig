@@ -6,14 +6,14 @@ pub const Metric = struct {
     /// An array of one or more dimensions to use to define the metric that you want
     /// to use. For more information, see
     /// [Dimensions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension).
-    dimensions: ?[]const Dimension,
+    dimensions: ?[]const Dimension = null,
 
     /// The name of the metric to use.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The namespace of the metric. For more information, see
     /// [Namespaces](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace).
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",

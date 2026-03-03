@@ -5,7 +5,7 @@ pub const Bucket = struct {
     count: i32 = 0,
 
     /// The value counted for the particular bucket.
-    key_value: ?[]const u8,
+    key_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .count = "count",

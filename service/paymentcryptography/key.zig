@@ -16,17 +16,17 @@ pub const Key = struct {
     /// The date and time after which Amazon Web Services Payment Cryptography will
     /// delete the key. This value is present only when `KeyState` is
     /// `DELETE_PENDING` and the key is scheduled for deletion.
-    delete_pending_timestamp: ?i64,
+    delete_pending_timestamp: ?i64 = null,
 
     /// The date and time after which Amazon Web Services Payment Cryptography will
     /// delete the key. This value is present only when when the `KeyState` is
     /// `DELETE_COMPLETE` and the Amazon Web Services Payment Cryptography key is
     /// deleted.
-    delete_timestamp: ?i64,
+    delete_timestamp: ?i64 = null,
 
     /// The cryptographic usage of an ECDH derived key as deﬁned in section A.5.2 of
     /// the TR-31 spec.
-    derive_key_usage: ?DeriveKeyUsage,
+    derive_key_usage: ?DeriveKeyUsage = null,
 
     /// Specifies whether the key is enabled.
     enabled: bool,
@@ -76,9 +76,9 @@ pub const Key = struct {
     /// Services Regions) or a Replica Region key (RRK) (which is a copy of a PRK in
     /// another Region). For more information, see [Multi-Region key
     /// replication](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html).
-    multi_region_key_type: ?MultiRegionKeyType,
+    multi_region_key_type: ?MultiRegionKeyType = null,
 
-    primary_region: ?[]const u8,
+    primary_region: ?[]const u8 = null,
 
     /// Information about the replication status of the key across different Amazon
     /// Web Services Regions.
@@ -86,15 +86,15 @@ pub const Key = struct {
     /// This field provides details about the current state of key replication,
     /// including any status messages or operational information. It helps track the
     /// progress and health of key replication operations.
-    replication_status: ?[]const aws.map.MapEntry(ReplicationStatusType),
+    replication_status: ?[]const aws.map.MapEntry(ReplicationStatusType) = null,
 
     /// The date and time after which Amazon Web Services Payment Cryptography will
     /// start using the key material for cryptographic operations.
-    usage_start_timestamp: ?i64,
+    usage_start_timestamp: ?i64 = null,
 
     /// The date and time after which Amazon Web Services Payment Cryptography will
     /// stop using the key material for cryptographic operations.
-    usage_stop_timestamp: ?i64,
+    usage_stop_timestamp: ?i64 = null,
 
     /// Indicates whether this key is using the account's default replication
     /// regions configuration for [Multi-Region key
@@ -104,7 +104,7 @@ pub const Key = struct {
     /// specified in the account's default replication settings. When set to
     /// `false`, the key has a custom replication configuration that overrides the
     /// account defaults.
-    using_default_replication_regions: ?bool,
+    using_default_replication_regions: ?bool = null,
 
     pub const json_field_names = .{
         .create_timestamp = "CreateTimestamp",

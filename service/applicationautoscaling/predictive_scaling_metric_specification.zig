@@ -17,23 +17,23 @@ const PredictiveScalingPredefinedScalingMetricSpecification = @import("predictiv
 /// metric and the scaling metric.
 pub const PredictiveScalingMetricSpecification = struct {
     /// The customized capacity metric specification.
-    customized_capacity_metric_specification: ?PredictiveScalingCustomizedMetricSpecification,
+    customized_capacity_metric_specification: ?PredictiveScalingCustomizedMetricSpecification = null,
 
     /// The customized load metric specification.
-    customized_load_metric_specification: ?PredictiveScalingCustomizedMetricSpecification,
+    customized_load_metric_specification: ?PredictiveScalingCustomizedMetricSpecification = null,
 
     /// The customized scaling metric specification.
-    customized_scaling_metric_specification: ?PredictiveScalingCustomizedMetricSpecification,
+    customized_scaling_metric_specification: ?PredictiveScalingCustomizedMetricSpecification = null,
 
     /// The predefined load metric specification.
-    predefined_load_metric_specification: ?PredictiveScalingPredefinedLoadMetricSpecification,
+    predefined_load_metric_specification: ?PredictiveScalingPredefinedLoadMetricSpecification = null,
 
     /// The predefined metric pair specification that determines the appropriate
     /// scaling metric and load metric to use.
-    predefined_metric_pair_specification: ?PredictiveScalingPredefinedMetricPairSpecification,
+    predefined_metric_pair_specification: ?PredictiveScalingPredefinedMetricPairSpecification = null,
 
     /// The predefined scaling metric specification.
-    predefined_scaling_metric_specification: ?PredictiveScalingPredefinedScalingMetricSpecification,
+    predefined_scaling_metric_specification: ?PredictiveScalingPredefinedScalingMetricSpecification = null,
 
     /// Specifies the target utilization.
     target_value: f64,

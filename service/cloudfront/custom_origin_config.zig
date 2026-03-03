@@ -19,7 +19,7 @@ pub const CustomOriginConfig = struct {
     /// Specifies which IP protocol CloudFront uses when connecting to your origin.
     /// If your origin uses both IPv4 and IPv6 protocols, you can choose `dualstack`
     /// to help optimize reliability.
-    ip_address_type: ?IpAddressType,
+    ip_address_type: ?IpAddressType = null,
 
     /// Specifies how long, in seconds, CloudFront persists its connection to the
     /// origin. The minimum timeout is 1 second, the maximum is 120 seconds, and the
@@ -27,11 +27,11 @@ pub const CustomOriginConfig = struct {
     ///
     /// For more information, see [Keep-alive timeout (custom origins
     /// only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.
-    origin_keepalive_timeout: ?i32,
+    origin_keepalive_timeout: ?i32 = null,
 
     /// Configures mutual TLS authentication between CloudFront and your origin
     /// server.
-    origin_mtls_config: ?OriginMtlsConfig,
+    origin_mtls_config: ?OriginMtlsConfig = null,
 
     /// Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to
     /// the origin. Valid values are:
@@ -49,7 +49,7 @@ pub const CustomOriginConfig = struct {
     ///
     /// For more information, see [Response
     /// timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.
-    origin_read_timeout: ?i32,
+    origin_read_timeout: ?i32 = null,
 
     /// Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting
     /// to your origin over HTTPS. Valid values include `SSLv3`, `TLSv1`, `TLSv1.1`,
@@ -57,5 +57,5 @@ pub const CustomOriginConfig = struct {
     ///
     /// For more information, see [Minimum Origin SSL
     /// Protocol](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginSSLProtocols) in the *Amazon CloudFront Developer Guide*.
-    origin_ssl_protocols: ?OriginSslProtocols,
+    origin_ssl_protocols: ?OriginSslProtocols = null,
 };

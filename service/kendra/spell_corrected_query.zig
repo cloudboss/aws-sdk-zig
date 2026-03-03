@@ -3,10 +3,10 @@ const Correction = @import("correction.zig").Correction;
 /// A query with suggested spell corrections.
 pub const SpellCorrectedQuery = struct {
     /// The corrected misspelled word or words in a query.
-    corrections: ?[]const Correction,
+    corrections: ?[]const Correction = null,
 
     /// The query with the suggested spell corrections.
-    suggested_query_text: ?[]const u8,
+    suggested_query_text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .corrections = "Corrections",

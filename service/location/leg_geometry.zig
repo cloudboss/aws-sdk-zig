@@ -7,7 +7,7 @@ pub const LegGeometry = struct {
     /// last position is the closest to the end position for the leg.
     ///
     /// * For example, `[[-123.117, 49.284],[-123.115, 49.285],[-123.115, 49.285]]`
-    line_string: ?[]const []const f64,
+    line_string: ?[]const []const f64 = null,
 
     pub const json_field_names = .{
         .line_string = "LineString",

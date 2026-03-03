@@ -10,26 +10,26 @@ const DefaultTextFieldControlOptions = @import("default_text_field_control_optio
 pub const DefaultFilterControlOptions = struct {
     /// The default options that correspond to the filter control type of a
     /// `DateTimePicker`.
-    default_date_time_picker_options: ?DefaultDateTimePickerControlOptions,
+    default_date_time_picker_options: ?DefaultDateTimePickerControlOptions = null,
 
     /// The default options that correspond to the `Dropdown` filter control type.
-    default_dropdown_options: ?DefaultFilterDropDownControlOptions,
+    default_dropdown_options: ?DefaultFilterDropDownControlOptions = null,
 
     /// The default options that correspond to the `List` filter control type.
-    default_list_options: ?DefaultFilterListControlOptions,
+    default_list_options: ?DefaultFilterListControlOptions = null,
 
     /// The default options that correspond to the `RelativeDateTime` filter control
     /// type.
-    default_relative_date_time_options: ?DefaultRelativeDateTimeControlOptions,
+    default_relative_date_time_options: ?DefaultRelativeDateTimeControlOptions = null,
 
     /// The default options that correspond to the `Slider` filter control type.
-    default_slider_options: ?DefaultSliderControlOptions,
+    default_slider_options: ?DefaultSliderControlOptions = null,
 
     /// The default options that correspond to the `TextArea` filter control type.
-    default_text_area_options: ?DefaultTextAreaControlOptions,
+    default_text_area_options: ?DefaultTextAreaControlOptions = null,
 
     /// The default options that correspond to the `TextField` filter control type.
-    default_text_field_options: ?DefaultTextFieldControlOptions,
+    default_text_field_options: ?DefaultTextFieldControlOptions = null,
 
     pub const json_field_names = .{
         .default_date_time_picker_options = "DefaultDateTimePickerOptions",

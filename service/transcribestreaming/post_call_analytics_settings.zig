@@ -22,7 +22,7 @@ pub const PostCallAnalyticsSettings = struct {
     ///
     /// Note that to include `ContentRedactionOutput` in your request, you must
     /// enable content redaction (`ContentRedactionType`).
-    content_redaction_output: ?ContentRedactionOutput,
+    content_redaction_output: ?ContentRedactionOutput = null,
 
     /// The Amazon Resource Name (ARN) of an IAM role that has permissions to
     /// access the Amazon S3 bucket that contains your input files. If the role that
@@ -70,7 +70,7 @@ pub const PostCallAnalyticsSettings = struct {
     ///
     /// Note that the role making the
     /// request must have permission to use the specified KMS key.
-    output_encryption_kms_key_id: ?[]const u8,
+    output_encryption_kms_key_id: ?[]const u8 = null,
 
     /// The Amazon S3 location where you want your Call Analytics post-call
     /// transcription output stored. You can use any of the following formats to

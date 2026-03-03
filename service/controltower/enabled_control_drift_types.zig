@@ -6,11 +6,11 @@ const EnabledControlResourceDrift = @import("enabled_control_resource_drift.zig"
 pub const EnabledControlDriftTypes = struct {
     /// Indicates drift related to inheritance configuration between parent and
     /// child controls.
-    inheritance: ?EnabledControlInheritanceDrift,
+    inheritance: ?EnabledControlInheritanceDrift = null,
 
     /// Indicates drift related to the underlying Amazon Web Services resources
     /// managed by the control.
-    resource: ?EnabledControlResourceDrift,
+    resource: ?EnabledControlResourceDrift = null,
 
     pub const json_field_names = .{
         .inheritance = "inheritance",

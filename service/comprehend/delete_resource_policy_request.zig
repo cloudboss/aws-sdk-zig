@@ -1,6 +1,6 @@
 pub const DeleteResourcePolicyRequest = struct {
     /// The revision ID of the policy to delete.
-    policy_revision_id: ?[]const u8,
+    policy_revision_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the custom model version that has the
     /// policy to delete.

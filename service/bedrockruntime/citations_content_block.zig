@@ -8,10 +8,10 @@ const CitationGeneratedContent = @import("citation_generated_content.zig").Citat
 pub const CitationsContentBlock = struct {
     /// An array of citations that reference the source documents used to generate
     /// the associated content.
-    citations: ?[]const Citation,
+    citations: ?[]const Citation = null,
 
     /// The generated content that is supported by the associated citations.
-    content: ?[]const CitationGeneratedContent,
+    content: ?[]const CitationGeneratedContent = null,
 
     pub const json_field_names = .{
         .citations = "citations",

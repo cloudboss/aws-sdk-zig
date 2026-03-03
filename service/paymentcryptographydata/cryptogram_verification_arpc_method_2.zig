@@ -7,7 +7,7 @@ pub const CryptogramVerificationArpcMethod2 = struct {
 
     /// The proprietary authentication data used by issuer for communication during
     /// online transaction using an EMV chip card.
-    proprietary_authentication_data: ?[]const u8,
+    proprietary_authentication_data: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .card_status_update = "CardStatusUpdate",

@@ -6,7 +6,7 @@ const CardType = @import("card_type.zig").CardType;
 pub const QQueryCardInput = struct {
     /// Turns on filtering of responses based on document attributes or metadata
     /// fields.
-    attribute_filter: ?AttributeFilter,
+    attribute_filter: ?AttributeFilter = null,
 
     /// The unique identifier of the query card.
     id: []const u8,

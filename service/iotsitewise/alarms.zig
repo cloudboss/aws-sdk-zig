@@ -14,7 +14,7 @@ pub const Alarms = struct {
     /// [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the Lambda function that manages alarm notifications. For more
     /// information, see [Managing alarm
     /// notifications](https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html) in the *IoT Events Developer Guide*.
-    notification_lambda_arn: ?[]const u8,
+    notification_lambda_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alarm_role_arn = "alarmRoleArn",

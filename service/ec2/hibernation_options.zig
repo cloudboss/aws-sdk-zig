@@ -6,5 +6,5 @@
 pub const HibernationOptions = struct {
     /// If `true`, your instance is enabled for hibernation; otherwise, it is not
     /// enabled for hibernation.
-    configured: ?bool,
+    configured: ?bool = null,
 };

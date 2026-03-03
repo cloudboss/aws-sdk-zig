@@ -15,9 +15,9 @@ pub const RedshiftDatasetDefinition = struct {
 
     /// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
     /// that Amazon SageMaker uses to encrypt data from a Redshift execution.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
-    output_compression: ?RedshiftResultCompressionType,
+    output_compression: ?RedshiftResultCompressionType = null,
 
     output_format: RedshiftResultFormat,
 

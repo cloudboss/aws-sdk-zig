@@ -5,13 +5,13 @@ const SsmActionDefinition = @import("ssm_action_definition.zig").SsmActionDefini
 /// Specifies all of the type-specific parameters.
 pub const Definition = struct {
     /// The Identity and Access Management (IAM) action definition details.
-    iam_action_definition: ?IamActionDefinition,
+    iam_action_definition: ?IamActionDefinition = null,
 
     /// The service control policies (SCPs) action definition details.
-    scp_action_definition: ?ScpActionDefinition,
+    scp_action_definition: ?ScpActionDefinition = null,
 
     /// The Amazon Web Services Systems Manager (SSM) action definition details.
-    ssm_action_definition: ?SsmActionDefinition,
+    ssm_action_definition: ?SsmActionDefinition = null,
 
     pub const json_field_names = .{
         .iam_action_definition = "IamActionDefinition",

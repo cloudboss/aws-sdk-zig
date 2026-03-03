@@ -8,43 +8,43 @@ const ComputeEnvironments = @import("compute_environments.zig").ComputeEnvironme
 /// The Amazon Web Services Glue connecton input.
 pub const GlueConnectionInput = struct {
     /// The Amazon Athena properties of the Amazon Web Services Glue connection.
-    athena_properties: ?[]const aws.map.StringMapEntry,
+    athena_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The authentication configuration of the Amazon Web Services Glue connection.
-    authentication_configuration: ?AuthenticationConfigurationInput,
+    authentication_configuration: ?AuthenticationConfigurationInput = null,
 
     /// The connection properties of the Amazon Web Services Glue connection.
-    connection_properties: ?[]const aws.map.StringMapEntry,
+    connection_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The connection type of the Amazon Web Services Glue connection.
-    connection_type: ?GlueConnectionType,
+    connection_type: ?GlueConnectionType = null,
 
     /// The description of the Amazon Web Services Glue connection.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The match criteria of the Amazon Web Services Glue connection.
-    match_criteria: ?[]const u8,
+    match_criteria: ?[]const u8 = null,
 
     /// The name of the Amazon Web Services Glue connection.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The physical connection requirements for the Amazon Web Services Glue
     /// connection.
-    physical_connection_requirements: ?PhysicalConnectionRequirements,
+    physical_connection_requirements: ?PhysicalConnectionRequirements = null,
 
     /// The Python properties of the Amazon Web Services Glue connection.
-    python_properties: ?[]const aws.map.StringMapEntry,
+    python_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The Spark properties of the Amazon Web Services Glue connection.
-    spark_properties: ?[]const aws.map.StringMapEntry,
+    spark_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// Speciefies whether to validate credentials of the Amazon Web Services Glue
     /// connection.
-    validate_credentials: ?bool,
+    validate_credentials: ?bool = null,
 
     /// Speciefies whether to validate for compute environments of the Amazon Web
     /// Services Glue connection.
-    validate_for_compute_environments: ?[]const ComputeEnvironments,
+    validate_for_compute_environments: ?[]const ComputeEnvironments = null,
 
     pub const json_field_names = .{
         .athena_properties = "athenaProperties",

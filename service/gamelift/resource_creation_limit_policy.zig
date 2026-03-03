@@ -23,10 +23,10 @@ pub const ResourceCreationLimitPolicy = struct {
     /// player (identified by
     /// `CreatorId`) has created fewer than game session limit in the specified
     /// time period.
-    new_game_sessions_per_creator: ?i32,
+    new_game_sessions_per_creator: ?i32 = null,
 
     /// The time span used in evaluating the resource creation limit policy.
-    policy_period_in_minutes: ?i32,
+    policy_period_in_minutes: ?i32 = null,
 
     pub const json_field_names = .{
         .new_game_sessions_per_creator = "NewGameSessionsPerCreator",

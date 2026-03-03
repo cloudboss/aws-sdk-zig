@@ -8,16 +8,16 @@ pub const TransformJobSummary = struct {
     creation_time: i64,
 
     /// If the transform job failed, the reason it failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// Indicates when the transform job was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// Indicates when the transform job ends on compute instances. For successful
     /// jobs and stopped jobs, this is the exact time recorded after the results are
     /// uploaded. For failed jobs, this is when Amazon SageMaker detected that the
     /// job failed.
-    transform_end_time: ?i64,
+    transform_end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the transform job.
     transform_job_arn: []const u8,

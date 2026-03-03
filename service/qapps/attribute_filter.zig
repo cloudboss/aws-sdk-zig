@@ -4,50 +4,50 @@ const DocumentAttribute = @import("document_attribute.zig").DocumentAttribute;
 /// metadata fields.
 pub const AttributeFilter = struct {
     /// Performs a logical `AND` operation on all supplied filters.
-    and_all_filters: ?[]const AttributeFilter,
+    and_all_filters: ?[]const AttributeFilter = null,
 
     /// Returns `true` when a document contains all the specified document
     /// attributes or metadata fields. Supported for the following [document
     /// attribute value
     /// types](https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html): `stringListValue`.
-    contains_all: ?DocumentAttribute,
+    contains_all: ?DocumentAttribute = null,
 
     /// Returns `true` when a document contains any of the specified document
     /// attributes or metadata fields. Supported for the following [document
     /// attribute value
     /// types](https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html): `stringListValue`.
-    contains_any: ?DocumentAttribute,
+    contains_any: ?DocumentAttribute = null,
 
     /// Performs an *equals* operation on two document attributes or metadata
     /// fields. Supported for the following [document attribute value
     /// types](https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html): `dateValue`, `longValue`, `stringListValue` and `stringValue`.
-    equals_to: ?DocumentAttribute,
+    equals_to: ?DocumentAttribute = null,
 
     /// Performs a *greater than* operation on two document attributes or metadata
     /// fields. Supported for the following [document attribute value
     /// types](https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html): `dateValue` and `longValue`.
-    greater_than: ?DocumentAttribute,
+    greater_than: ?DocumentAttribute = null,
 
     /// Performs a *greater than or equals* operation on two document attributes or
     /// metadata fields. Supported for the following [document attribute value
     /// types](https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html): `dateValue` and `longValue`.
-    greater_than_or_equals: ?DocumentAttribute,
+    greater_than_or_equals: ?DocumentAttribute = null,
 
     /// Performs a *less than* operation on two document attributes or metadata
     /// fields. Supported for the following [document attribute value
     /// types](https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html): `dateValue` and `longValue`.
-    less_than: ?DocumentAttribute,
+    less_than: ?DocumentAttribute = null,
 
     /// Performs a *less than or equals* operation on two document attributes or
     /// metadata fields.Supported for the following [document attribute value
     /// type](https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html): `dateValue` and `longValue`.
-    less_than_or_equals: ?DocumentAttribute,
+    less_than_or_equals: ?DocumentAttribute = null,
 
     /// Performs a logical `NOT` operation on all supplied filters.
     not_filter: ?*AttributeFilter = null,
 
     /// Performs a logical `OR` operation on all supplied filters.
-    or_all_filters: ?[]const AttributeFilter,
+    or_all_filters: ?[]const AttributeFilter = null,
 
     pub const json_field_names = .{
         .and_all_filters = "andAllFilters",

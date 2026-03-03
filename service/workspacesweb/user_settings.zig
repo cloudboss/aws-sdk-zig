@@ -10,68 +10,68 @@ const ToolbarConfiguration = @import("toolbar_configuration.zig").ToolbarConfigu
 /// data between a streaming session and the their local devices.
 pub const UserSettings = struct {
     /// The additional encryption context of the user settings.
-    additional_encryption_context: ?[]const aws.map.StringMapEntry,
+    additional_encryption_context: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of web portal ARNs that this user settings is associated with.
-    associated_portal_arns: ?[]const []const u8,
+    associated_portal_arns: ?[]const []const u8 = null,
 
     /// The branding configuration output that customizes the appearance of the web
     /// portal for end users.
-    branding_configuration: ?BrandingConfiguration,
+    branding_configuration: ?BrandingConfiguration = null,
 
     /// The configuration that specifies which cookies should be synchronized from
     /// the end user's local browser to the remote browser.
-    cookie_synchronization_configuration: ?CookieSynchronizationConfiguration,
+    cookie_synchronization_configuration: ?CookieSynchronizationConfiguration = null,
 
     /// Specifies whether the user can copy text from the streaming session to the
     /// local device.
-    copy_allowed: ?EnabledType,
+    copy_allowed: ?EnabledType = null,
 
     /// The customer managed key used to encrypt sensitive information in the user
     /// settings.
-    customer_managed_key: ?[]const u8,
+    customer_managed_key: ?[]const u8 = null,
 
     /// Specifies whether the user can use deep links that open automatically when
     /// connecting to a session.
-    deep_link_allowed: ?EnabledType,
+    deep_link_allowed: ?EnabledType = null,
 
     /// The amount of time that a streaming session remains active after users
     /// disconnect.
-    disconnect_timeout_in_minutes: ?i32,
+    disconnect_timeout_in_minutes: ?i32 = null,
 
     /// Specifies whether the user can download files from the streaming session to
     /// the local device.
-    download_allowed: ?EnabledType,
+    download_allowed: ?EnabledType = null,
 
     /// The amount of time that users can be idle (inactive) before they are
     /// disconnected from their streaming session and the disconnect timeout
     /// interval begins.
-    idle_disconnect_timeout_in_minutes: ?i32,
+    idle_disconnect_timeout_in_minutes: ?i32 = null,
 
     /// Specifies whether the user can paste text from the local device to the
     /// streaming session.
-    paste_allowed: ?EnabledType,
+    paste_allowed: ?EnabledType = null,
 
     /// Specifies whether the user can print to the local device.
-    print_allowed: ?EnabledType,
+    print_allowed: ?EnabledType = null,
 
     /// The configuration of the toolbar. This allows administrators to select the
     /// toolbar type and visual mode, set maximum display resolution for sessions,
     /// and choose which items are visible to end users during their sessions. If
     /// administrators do not modify these settings, end users retain control over
     /// their toolbar preferences.
-    toolbar_configuration: ?ToolbarConfiguration,
+    toolbar_configuration: ?ToolbarConfiguration = null,
 
     /// Specifies whether the user can upload files from the local device to the
     /// streaming session.
-    upload_allowed: ?EnabledType,
+    upload_allowed: ?EnabledType = null,
 
     /// The ARN of the user settings.
     user_settings_arn: []const u8,
 
     /// Specifies whether the user can use WebAuthn redirection for passwordless
     /// login to websites within the streaming session.
-    web_authn_allowed: ?EnabledType,
+    web_authn_allowed: ?EnabledType = null,
 
     pub const json_field_names = .{
         .additional_encryption_context = "additionalEncryptionContext",

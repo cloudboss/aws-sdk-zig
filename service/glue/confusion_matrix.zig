@@ -6,21 +6,21 @@
 pub const ConfusionMatrix = struct {
     /// The number of matches in the data that the transform didn't find, in the
     /// confusion matrix for your transform.
-    num_false_negatives: ?i64,
+    num_false_negatives: ?i64 = null,
 
     /// The number of nonmatches in the data that the transform incorrectly
     /// classified as a match,
     /// in the confusion matrix for your transform.
-    num_false_positives: ?i64,
+    num_false_positives: ?i64 = null,
 
     /// The number of nonmatches in the data that the transform correctly rejected,
     /// in the
     /// confusion matrix for your transform.
-    num_true_negatives: ?i64,
+    num_true_negatives: ?i64 = null,
 
     /// The number of matches in the data that the transform correctly found, in the
     /// confusion matrix for your transform.
-    num_true_positives: ?i64,
+    num_true_positives: ?i64 = null,
 
     pub const json_field_names = .{
         .num_false_negatives = "NumFalseNegatives",

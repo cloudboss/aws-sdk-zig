@@ -5,13 +5,13 @@ const Status = @import("status.zig").Status;
 /// Information about a product view.
 pub const ProductViewDetail = struct {
     /// The UTC time stamp of the creation time.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The ARN of the product.
-    product_arn: ?[]const u8,
+    product_arn: ?[]const u8 = null,
 
     /// Summary information about the product view.
-    product_view_summary: ?ProductViewSummary,
+    product_view_summary: ?ProductViewSummary = null,
 
     /// A top level `ProductViewDetail` response containing details about the
     /// product’s connection.
@@ -20,7 +20,7 @@ pub const ProductViewDetail = struct {
     /// This response contains the same fields as the `ConnectionParameters`
     /// request, with the
     /// addition of the `LastSync` response.
-    source_connection: ?SourceConnectionDetail,
+    source_connection: ?SourceConnectionDetail = null,
 
     /// The status of the product.
     ///
@@ -30,7 +30,7 @@ pub const ProductViewDetail = struct {
     ///   use.
     ///
     /// * `FAILED` - An action failed.
-    status: ?Status,
+    status: ?Status = null,
 
     pub const json_field_names = .{
         .created_time = "CreatedTime",

@@ -27,10 +27,10 @@ pub const EksEmptyDir = struct {
     /// volume are lost when the node reboots, and any storage on the volume counts
     /// against the
     /// container's memory limit.
-    medium: ?[]const u8,
+    medium: ?[]const u8 = null,
 
     /// The maximum size of the volume. By default, there's no maximum size defined.
-    size_limit: ?[]const u8,
+    size_limit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .medium = "medium",

@@ -3,21 +3,21 @@ const InputDeviceIpScheme = @import("input_device_ip_scheme.zig").InputDeviceIpS
 /// The network settings for the input device.
 pub const InputDeviceNetworkSettings = struct {
     /// The DNS addresses of the input device.
-    dns_addresses: ?[]const []const u8,
+    dns_addresses: ?[]const []const u8 = null,
 
     /// The network gateway IP address.
-    gateway: ?[]const u8,
+    gateway: ?[]const u8 = null,
 
     /// The IP address of the input device.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// Specifies whether the input device has been configured (outside of
     /// MediaLive) to use a dynamic IP address assignment (DHCP) or a static IP
     /// address.
-    ip_scheme: ?InputDeviceIpScheme,
+    ip_scheme: ?InputDeviceIpScheme = null,
 
     /// The subnet mask of the input device.
-    subnet_mask: ?[]const u8,
+    subnet_mask: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dns_addresses = "DnsAddresses",

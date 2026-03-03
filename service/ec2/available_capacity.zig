@@ -10,9 +10,9 @@ pub const AvailableCapacity = struct {
     /// this parameter represents the number of instances for each instance size
     /// that is
     /// supported on the host.
-    available_instance_capacity: ?[]const InstanceCapacity,
+    available_instance_capacity: ?[]const InstanceCapacity = null,
 
     /// The number of vCPUs available for launching instances onto the Dedicated
     /// Host.
-    available_v_cpus: ?i32,
+    available_v_cpus: ?i32 = null,
 };

@@ -3,7 +3,7 @@ const TimeoutConfig = @import("timeout_config.zig").TimeoutConfig;
 
 /// Preview config
 pub const PreviewConfig = struct {
-    agent_actions: ?[]const AgentAction,
+    agent_actions: ?[]const AgentAction = null,
 
     bandwidth_allocation: f64,
 

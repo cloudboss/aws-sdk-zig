@@ -14,7 +14,7 @@ pub const SuppressionConditionThreshold = struct {
     condition_threshold_enabled: FeatureStatus,
 
     /// The overall confidence threshold used to determine suppression decisions.
-    overall_confidence_threshold: ?SuppressionConfidenceThreshold,
+    overall_confidence_threshold: ?SuppressionConfidenceThreshold = null,
 
     pub const json_field_names = .{
         .condition_threshold_enabled = "ConditionThresholdEnabled",

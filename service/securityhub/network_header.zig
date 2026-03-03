@@ -5,15 +5,15 @@ const NetworkPathComponentDetails = @import("network_path_component_details.zig"
 /// component.
 pub const NetworkHeader = struct {
     /// Information about the destination of the component.
-    destination: ?NetworkPathComponentDetails,
+    destination: ?NetworkPathComponentDetails = null,
 
     /// The protocol used for the component.
     ///
     /// Length Constraints: Minimum of 1. Maximum of 16.
-    protocol: ?[]const u8,
+    protocol: ?[]const u8 = null,
 
     /// Information about the origin of the component.
-    source: ?NetworkPathComponentDetails,
+    source: ?NetworkPathComponentDetails = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

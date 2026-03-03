@@ -46,12 +46,12 @@ pub const RetainRule = struct {
     /// oldest retained snapshot is deleted, or it is moved to the archive tier if
     /// you have specified an
     /// [ArchiveRule](https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html).
-    count: ?i32,
+    count: ?i32 = null,
 
     /// The amount of time to retain each snapshot. The maximum is 100 years. This
     /// is
     /// equivalent to 1200 months, 5200 weeks, or 36500 days.
-    interval: ?i32,
+    interval: ?i32 = null,
 
     /// The unit of time for time-based retention. For example, to retain snapshots
     /// for 3 months, specify
@@ -60,7 +60,7 @@ pub const RetainRule = struct {
     /// 3 months, it is deleted, or it is moved to the archive tier if you have
     /// specified an
     /// [ArchiveRule](https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html).
-    interval_unit: ?RetentionIntervalUnitValues,
+    interval_unit: ?RetentionIntervalUnitValues = null,
 
     pub const json_field_names = .{
         .count = "Count",

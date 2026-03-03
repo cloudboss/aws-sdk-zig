@@ -14,11 +14,11 @@ pub const BotRecommendationSummary = struct {
 
     /// A timestamp of the date and time that the bot recommendation was
     /// created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// A timestamp of the date and time that the bot recommendation was
     /// last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .bot_recommendation_id = "botRecommendationId",

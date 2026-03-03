@@ -4,7 +4,7 @@ const EventType = @import("event_type.zig").EventType;
 /// Describes an event in the history of the Spot Fleet request.
 pub const HistoryRecord = struct {
     /// Information about the event.
-    event_information: ?EventInformation,
+    event_information: ?EventInformation = null,
 
     /// The event type.
     ///
@@ -16,9 +16,9 @@ pub const HistoryRecord = struct {
     /// * `instanceChange` - An instance was launched or terminated.
     ///
     /// * `Information` - An informational event.
-    event_type: ?EventType,
+    event_type: ?EventType = null,
 
     /// The date and time of the event, in UTC format (for example,
     /// *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 };

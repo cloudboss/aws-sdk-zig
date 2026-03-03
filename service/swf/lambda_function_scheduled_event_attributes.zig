@@ -4,7 +4,7 @@ pub const LambdaFunctionScheduledEventAttributes = struct {
     /// Data attached to the event that the decider can use in subsequent workflow
     /// tasks. This
     /// data isn't sent to the Lambda task.
-    control: ?[]const u8,
+    control: ?[]const u8 = null,
 
     /// The ID of the `LambdaFunctionCompleted` event corresponding to the decision
     /// that resulted in scheduling this activity task. To help diagnose issues, use
@@ -15,13 +15,13 @@ pub const LambdaFunctionScheduledEventAttributes = struct {
     id: []const u8,
 
     /// The input provided to the Lambda task.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The name of the Lambda function.
     name: []const u8,
 
     /// The maximum amount of time a worker can take to process the Lambda task.
-    start_to_close_timeout: ?[]const u8,
+    start_to_close_timeout: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .control = "control",

@@ -5,7 +5,7 @@ const EbsVolumeConfiguration = @import("ebs_volume_configuration.zig").EbsVolume
 pub const EbsVolume = struct {
     /// The configuration details of the EBS volume, including type, size, IOPS, and
     /// throughput.
-    configuration: ?EbsVolumeConfiguration,
+    configuration: ?EbsVolumeConfiguration = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

@@ -13,7 +13,7 @@ pub const RecordingConfigurationSummary = struct {
     destination_configuration: DestinationConfiguration,
 
     /// Recording-configuration name. The value does not need to be unique.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Indicates the current state of the recording configuration. When the state
     /// is
@@ -25,7 +25,7 @@ pub const RecordingConfigurationSummary = struct {
     /// (key:value)`. See [Best practices and
     /// strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
     /// service-specific constraints beyond what is documented there.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

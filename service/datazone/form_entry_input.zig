@@ -1,7 +1,7 @@
 /// The details of the form entry.
 pub const FormEntryInput = struct {
     /// Specifies whether a form entry is required.
-    required: ?bool,
+    required: ?bool = null,
 
     /// The type ID of the form entry.
     type_identifier: []const u8,

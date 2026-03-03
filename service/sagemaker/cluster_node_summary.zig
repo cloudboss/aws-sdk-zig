@@ -19,7 +19,7 @@ pub const ClusterNodeSummary = struct {
 
     /// The time when SageMaker last updated the software of the instances in the
     /// cluster.
-    last_software_update_time: ?i64,
+    last_software_update_time: ?i64 = null,
 
     /// The time when the instance is launched.
     launch_time: i64,
@@ -29,13 +29,13 @@ pub const ClusterNodeSummary = struct {
     /// track the node even before it has an assigned `InstanceId`. This field is
     /// only included when `IncludeNodeLogicalIds` is set to `True` in the
     /// `ListClusterNodes` request.
-    node_logical_id: ?[]const u8,
+    node_logical_id: ?[]const u8 = null,
 
     /// The private DNS hostname of the SageMaker HyperPod cluster node.
-    private_dns_hostname: ?[]const u8,
+    private_dns_hostname: ?[]const u8 = null,
 
     /// Contains information about the UltraServer.
-    ultra_server_info: ?UltraServerInfo,
+    ultra_server_info: ?UltraServerInfo = null,
 
     pub const json_field_names = .{
         .instance_group_name = "InstanceGroupName",

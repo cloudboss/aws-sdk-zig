@@ -7,7 +7,7 @@ pub const EmergencyCallingConfiguration = struct {
     /// The Dialed Number Identification Service (DNIS) emergency calling
     /// configuration
     /// details.
-    dnis: ?[]const DNISEmergencyCallingConfiguration,
+    dnis: ?[]const DNISEmergencyCallingConfiguration = null,
 
     pub const json_field_names = .{
         .dnis = "DNIS",

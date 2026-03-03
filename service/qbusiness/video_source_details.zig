@@ -4,19 +4,19 @@ const VideoExtractionType = @import("video_extraction_type.zig").VideoExtraction
 /// information.
 pub const VideoSourceDetails = struct {
     /// The ending timestamp in milliseconds for the relevant video segment.
-    end_time_milliseconds: ?i64,
+    end_time_milliseconds: ?i64 = null,
 
     /// Unique identifier for the video media file.
-    media_id: ?[]const u8,
+    media_id: ?[]const u8 = null,
 
     /// The MIME type of the video file (e.g., video/mp4, video/avi).
-    media_mime_type: ?[]const u8,
+    media_mime_type: ?[]const u8 = null,
 
     /// The starting timestamp in milliseconds for the relevant video segment.
-    start_time_milliseconds: ?i64,
+    start_time_milliseconds: ?i64 = null,
 
     /// The type of video extraction performed on the content.
-    video_extraction_type: ?VideoExtractionType,
+    video_extraction_type: ?VideoExtractionType = null,
 
     pub const json_field_names = .{
         .end_time_milliseconds = "endTimeMilliseconds",

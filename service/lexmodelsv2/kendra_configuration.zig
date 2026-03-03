@@ -14,7 +14,7 @@ pub const KendraConfiguration = struct {
     /// a query. The filter is in the format defined by Amazon Kendra. For more
     /// information, see [Filtering
     /// queries](https://docs.aws.amazon.com/kendra/latest/dg/filtering.html).
-    query_filter_string: ?[]const u8,
+    query_filter_string: ?[]const u8 = null,
 
     /// Determines whether the `AMAZON.KendraSearchIntent` intent uses a
     /// custom query string to query the Amazon Kendra index.

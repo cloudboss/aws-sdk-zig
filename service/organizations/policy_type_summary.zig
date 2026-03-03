@@ -9,10 +9,10 @@ pub const PolicyTypeSummary = struct {
     /// of the specified type to a root or to an OU or account in that root, it must
     /// be
     /// available in the organization and enabled for that root.
-    status: ?PolicyTypeStatus,
+    status: ?PolicyTypeStatus = null,
 
     /// The name of the policy type.
-    @"type": ?PolicyType,
+    @"type": ?PolicyType = null,
 
     pub const json_field_names = .{
         .status = "Status",

@@ -2,11 +2,11 @@
 /// of the charge.
 pub const ScheduleItem = struct {
     /// The price that the customer would pay on the scheduled date (chargeDate).
-    charge_amount: ?[]const u8,
+    charge_amount: ?[]const u8 = null,
 
     /// The date that the customer would pay the price defined in this payment
     /// schedule term. Invoices are generated on the date provided.
-    charge_date: ?i64,
+    charge_date: ?i64 = null,
 
     pub const json_field_names = .{
         .charge_amount = "chargeAmount",

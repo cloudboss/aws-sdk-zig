@@ -3,7 +3,7 @@ const PerformanceConfiguration = @import("performance_configuration.zig").Perfor
 /// The performance configuration for a model called with InvokeFlow.
 pub const ModelPerformanceConfiguration = struct {
     /// The latency configuration for the model.
-    performance_config: ?PerformanceConfiguration,
+    performance_config: ?PerformanceConfiguration = null,
 
     pub const json_field_names = .{
         .performance_config = "performanceConfig",

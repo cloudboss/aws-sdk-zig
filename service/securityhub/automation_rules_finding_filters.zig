@@ -8,19 +8,19 @@ pub const AutomationRulesFindingFilters = struct {
     /// The Amazon Web Services account ID in which a finding was generated.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 100 items.
-    aws_account_id: ?[]const StringFilter,
+    aws_account_id: ?[]const StringFilter = null,
 
     /// The name of the Amazon Web Services account in which a finding was
     /// generated.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    aws_account_name: ?[]const StringFilter,
+    aws_account_name: ?[]const StringFilter = null,
 
     /// The name of the company for the product that generated the finding.
     /// For control-based findings, the company is Amazon Web Services.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    company_name: ?[]const StringFilter,
+    company_name: ?[]const StringFilter = null,
 
     /// The unique identifier of a standard in which a control is enabled. This
     /// field consists of the resource portion of
@@ -28,20 +28,20 @@ pub const AutomationRulesFindingFilters = struct {
     /// [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API response.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    compliance_associated_standards_id: ?[]const StringFilter,
+    compliance_associated_standards_id: ?[]const StringFilter = null,
 
     /// The security control ID for which a finding was generated. Security control
     /// IDs are the same across standards.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    compliance_security_control_id: ?[]const StringFilter,
+    compliance_security_control_id: ?[]const StringFilter = null,
 
     /// The result of a security check. This field is only used for findings
     /// generated
     /// from controls.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    compliance_status: ?[]const StringFilter,
+    compliance_status: ?[]const StringFilter = null,
 
     /// The likelihood that a finding accurately identifies the behavior or issue
     /// that it was
@@ -54,7 +54,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// [Confidence](https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence) in the *Security Hub User Guide*.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    confidence: ?[]const NumberFilter,
+    confidence: ?[]const NumberFilter = null,
 
     /// A timestamp that indicates when this finding record was created.
     ///
@@ -63,7 +63,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    created_at: ?[]const DateFilter,
+    created_at: ?[]const DateFilter = null,
 
     /// The level of importance that is assigned to the resources that are
     /// associated with a
@@ -77,12 +77,12 @@ pub const AutomationRulesFindingFilters = struct {
     /// [Criticality](https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality) in the *Security Hub User Guide*.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    criticality: ?[]const NumberFilter,
+    criticality: ?[]const NumberFilter = null,
 
     /// A finding's description.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    description: ?[]const StringFilter,
+    description: ?[]const StringFilter = null,
 
     /// A timestamp that indicates when the potential security issue captured by a
     /// finding was first observed by the security findings product.
@@ -92,18 +92,18 @@ pub const AutomationRulesFindingFilters = struct {
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    first_observed_at: ?[]const DateFilter,
+    first_observed_at: ?[]const DateFilter = null,
 
     /// The identifier for the solution-specific component that
     /// generated a finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 100 items.
-    generator_id: ?[]const StringFilter,
+    generator_id: ?[]const StringFilter = null,
 
     /// The product-specific identifier for a finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    id: ?[]const StringFilter,
+    id: ?[]const StringFilter = null,
 
     /// A timestamp that indicates when the security findings provider most recently
     /// observed a change in the resource that is involved in the finding.
@@ -113,12 +113,12 @@ pub const AutomationRulesFindingFilters = struct {
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    last_observed_at: ?[]const DateFilter,
+    last_observed_at: ?[]const DateFilter = null,
 
     /// The text of a user-defined note that's added to a finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    note_text: ?[]const StringFilter,
+    note_text: ?[]const StringFilter = null,
 
     /// The timestamp of when the note was updated.
     ///
@@ -127,56 +127,56 @@ pub const AutomationRulesFindingFilters = struct {
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    note_updated_at: ?[]const DateFilter,
+    note_updated_at: ?[]const DateFilter = null,
 
     /// The principal that created a note.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    note_updated_by: ?[]const StringFilter,
+    note_updated_by: ?[]const StringFilter = null,
 
     /// The Amazon Resource Name (ARN) for a third-party product that generated a
     /// finding in
     /// Security Hub.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    product_arn: ?[]const StringFilter,
+    product_arn: ?[]const StringFilter = null,
 
     /// Provides the name of the product that generated the finding. For
     /// control-based findings, the product name is Security Hub.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    product_name: ?[]const StringFilter,
+    product_name: ?[]const StringFilter = null,
 
     /// Provides the current state of a finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    record_state: ?[]const StringFilter,
+    record_state: ?[]const StringFilter = null,
 
     /// The product-generated identifier for a related finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    related_findings_id: ?[]const StringFilter,
+    related_findings_id: ?[]const StringFilter = null,
 
     /// The ARN for the product that generated a related finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    related_findings_product_arn: ?[]const StringFilter,
+    related_findings_product_arn: ?[]const StringFilter = null,
 
     /// The Amazon Resource Name (ARN) of the application that is related to a
     /// finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    resource_application_arn: ?[]const StringFilter,
+    resource_application_arn: ?[]const StringFilter = null,
 
     /// The name of the application that is related to a finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    resource_application_name: ?[]const StringFilter,
+    resource_application_name: ?[]const StringFilter = null,
 
     /// Custom fields and values about the resource that a finding pertains to.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    resource_details_other: ?[]const MapFilter,
+    resource_details_other: ?[]const MapFilter = null,
 
     /// The identifier for the given resource type. For Amazon Web Services
     /// resources that are identified by
@@ -189,47 +189,47 @@ pub const AutomationRulesFindingFilters = struct {
     /// resource.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 100 items.
-    resource_id: ?[]const StringFilter,
+    resource_id: ?[]const StringFilter = null,
 
     /// The partition in which the resource that the finding pertains to is located.
     /// A partition is a group of Amazon Web Services Regions. Each Amazon Web
     /// Services account is scoped to one partition.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    resource_partition: ?[]const StringFilter,
+    resource_partition: ?[]const StringFilter = null,
 
     /// The Amazon Web Services Region where the resource that a finding pertains to
     /// is located.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    resource_region: ?[]const StringFilter,
+    resource_region: ?[]const StringFilter = null,
 
     /// A list of Amazon Web Services tags associated with a resource at the time
     /// the finding was processed.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    resource_tags: ?[]const MapFilter,
+    resource_tags: ?[]const MapFilter = null,
 
     /// The type of resource that the finding pertains to.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    resource_type: ?[]const StringFilter,
+    resource_type: ?[]const StringFilter = null,
 
     /// The severity value of the finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    severity_label: ?[]const StringFilter,
+    severity_label: ?[]const StringFilter = null,
 
     /// Provides a URL that links to a page about the current finding in the finding
     /// product.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    source_url: ?[]const StringFilter,
+    source_url: ?[]const StringFilter = null,
 
     /// A finding's title.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 100 items.
-    title: ?[]const StringFilter,
+    title: ?[]const StringFilter = null,
 
     /// One or more finding types in the format of namespace/category/classifier
     /// that classify
@@ -238,7 +238,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// ASFF](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html) in the *Security Hub User Guide*.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    @"type": ?[]const StringFilter,
+    @"type": ?[]const StringFilter = null,
 
     /// A timestamp that indicates when the finding record was most recently
     /// updated.
@@ -248,22 +248,22 @@ pub const AutomationRulesFindingFilters = struct {
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    updated_at: ?[]const DateFilter,
+    updated_at: ?[]const DateFilter = null,
 
     /// A list of user-defined name and value string pairs added to a finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    user_defined_fields: ?[]const MapFilter,
+    user_defined_fields: ?[]const MapFilter = null,
 
     /// Provides the veracity of a finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    verification_state: ?[]const StringFilter,
+    verification_state: ?[]const StringFilter = null,
 
     /// Provides information about the status of the investigation into a finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    workflow_status: ?[]const StringFilter,
+    workflow_status: ?[]const StringFilter = null,
 
     pub const json_field_names = .{
         .aws_account_id = "AwsAccountId",

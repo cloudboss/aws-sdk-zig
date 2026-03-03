@@ -3,10 +3,10 @@
 /// associated with the identity.
 pub const SOARecord = struct {
     /// Administrative contact email from the SOA record.
-    admin_email: ?[]const u8,
+    admin_email: ?[]const u8 = null,
 
     /// Primary name server specified in the SOA record.
-    primary_name_server: ?[]const u8,
+    primary_name_server: ?[]const u8 = null,
 
     /// Serial number from the SOA record.
     serial_number: i64 = 0,

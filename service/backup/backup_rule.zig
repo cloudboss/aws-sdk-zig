@@ -10,16 +10,16 @@ pub const BackupRule = struct {
     /// A value in minutes after a backup job is successfully started before it must
     /// be
     /// completed or it will be canceled by Backup. This value is optional.
-    completion_window_minutes: ?i64,
+    completion_window_minutes: ?i64 = null,
 
     /// An array of `CopyAction` objects, which contains the details of the copy
     /// operation.
-    copy_actions: ?[]const CopyAction,
+    copy_actions: ?[]const CopyAction = null,
 
     /// Specifies whether Backup creates continuous backups. True causes Backup to
     /// create continuous backups capable of point-in-time restore (PITR). False
     /// (or not specified) causes Backup to create snapshot backups.
-    enable_continuous_backup: ?bool,
+    enable_continuous_backup: ?bool = null,
 
     /// IndexActions is an array you use to specify how backup data should
     /// be indexed.
@@ -29,7 +29,7 @@ pub const BackupRule = struct {
     ///
     /// Within the array is ResourceType. Only one will be accepted for each
     /// BackupRule.
-    index_actions: ?[]const IndexAction,
+    index_actions: ?[]const IndexAction = null,
 
     /// The lifecycle defines when a protected resource is transitioned to cold
     /// storage and when
@@ -49,16 +49,16 @@ pub const BackupRule = struct {
     /// [Feature availability
     /// by
     /// resource](https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource) table. Backup ignores this expression for other resource types.
-    lifecycle: ?Lifecycle,
+    lifecycle: ?Lifecycle = null,
 
     /// The tags that are assigned to resources that are associated
     /// with this rule when restored from backup.
-    recovery_point_tags: ?[]const aws.map.StringMapEntry,
+    recovery_point_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Uniquely identifies a rule that is used to schedule the backup of a
     /// selection of
     /// resources.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     /// A display name for a backup rule. Must contain 1 to 50 alphanumeric or '-_.'
     /// characters.
@@ -66,7 +66,7 @@ pub const BackupRule = struct {
 
     /// Contains your scanning configuration for the backup rule and includes the
     /// malware scanner, and scan mode of either full or incremental.
-    scan_actions: ?[]const ScanAction,
+    scan_actions: ?[]const ScanAction = null,
 
     /// A cron expression in UTC specifying when Backup initiates a backup job.
     /// When no CRON expression is provided, Backup will use the default
@@ -83,11 +83,11 @@ pub const BackupRule = struct {
     /// backup every day at 12 noon UTC).
     ///
     /// For a table of examples, click the preceding link and scroll down the page.
-    schedule_expression: ?[]const u8,
+    schedule_expression: ?[]const u8 = null,
 
     /// The timezone in which the schedule expression is set. By default,
     /// ScheduleExpressions are in UTC. You can modify this to a specified timezone.
-    schedule_expression_timezone: ?[]const u8,
+    schedule_expression_timezone: ?[]const u8 = null,
 
     /// A value in minutes after a backup is scheduled before a job will be canceled
     /// if it
@@ -105,7 +105,7 @@ pub const BackupRule = struct {
     /// status
     /// changes to `EXPIRED` (which is expected to occur when the start window time
     /// is over).
-    start_window_minutes: ?i64,
+    start_window_minutes: ?i64 = null,
 
     /// The name of a logical container where backups are stored. Backup vaults are
     /// identified
@@ -123,7 +123,7 @@ pub const BackupRule = struct {
     /// then copy it to logically air-gapped vault. Unsupported resources only back
     /// up to the specified
     /// backup vault.
-    target_logically_air_gapped_backup_vault_arn: ?[]const u8,
+    target_logically_air_gapped_backup_vault_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .completion_window_minutes = "CompletionWindowMinutes",

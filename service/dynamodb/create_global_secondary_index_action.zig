@@ -19,7 +19,7 @@ pub const CreateGlobalSecondaryIndexAction = struct {
     /// `MaxWriteRequestUnits`, or both. You must use either `OnDemand
     /// Throughput` or `ProvisionedThroughput` based on your table's
     /// capacity mode.
-    on_demand_throughput: ?OnDemandThroughput,
+    on_demand_throughput: ?OnDemandThroughput = null,
 
     /// Represents attributes that are copied (projected) from the table into an
     /// index. These
@@ -36,12 +36,12 @@ pub const CreateGlobalSecondaryIndexAction = struct {
     /// Account, and Table
     /// Quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    provisioned_throughput: ?ProvisionedThroughput,
+    provisioned_throughput: ?ProvisionedThroughput = null,
 
     /// Represents the warm throughput value (in read units per second and write
     /// units per
     /// second) when creating a secondary index.
-    warm_throughput: ?WarmThroughput,
+    warm_throughput: ?WarmThroughput = null,
 
     pub const json_field_names = .{
         .index_name = "IndexName",

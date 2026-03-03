@@ -22,24 +22,24 @@ const VpcSecurityGroupMembership = @import("vpc_security_group_membership.zig").
 pub const Cluster = struct {
     /// A boolean value that, if `true`, indicates that major version upgrades
     /// will be applied automatically to the cluster during the maintenance window.
-    allow_version_upgrade: ?bool,
+    allow_version_upgrade: ?bool = null,
 
     /// This field is retired. Amazon Redshift automatically determines whether to
     /// use AQUA (Advanced Query Accelerator).
-    aqua_configuration: ?AquaConfiguration,
+    aqua_configuration: ?AquaConfiguration = null,
 
     /// The number of days that automatic cluster snapshots are retained.
-    automated_snapshot_retention_period: ?i32,
+    automated_snapshot_retention_period: ?i32 = null,
 
     /// The name of the Availability Zone in which the cluster is located.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// Describes the status of the Availability Zone relocation operation.
-    availability_zone_relocation_status: ?[]const u8,
+    availability_zone_relocation_status: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Glue data catalog associated with the
     /// cluster enabled with Amazon Redshift federated permissions.
-    catalog_arn: ?[]const u8,
+    catalog_arn: ?[]const u8 = null,
 
     /// The availability status of the cluster for queries. Possible values are the
     /// following:
@@ -55,30 +55,30 @@ pub const Cluster = struct {
     ///   changes that modify the cluster.
     ///
     /// * Failed - The cluster failed and is not available for queries.
-    cluster_availability_status: ?[]const u8,
+    cluster_availability_status: ?[]const u8 = null,
 
     /// The date and time that the cluster was created.
-    cluster_create_time: ?i64,
+    cluster_create_time: ?i64 = null,
 
     /// The unique identifier of the cluster.
-    cluster_identifier: ?[]const u8,
+    cluster_identifier: ?[]const u8 = null,
 
     /// The namespace Amazon Resource Name (ARN) of the cluster.
-    cluster_namespace_arn: ?[]const u8,
+    cluster_namespace_arn: ?[]const u8 = null,
 
     /// The nodes in the cluster.
-    cluster_nodes: ?[]const ClusterNode,
+    cluster_nodes: ?[]const ClusterNode = null,
 
     /// The list of cluster parameter groups that are associated with this cluster.
     /// Each
     /// parameter group in the list is returned with its status.
-    cluster_parameter_groups: ?[]const ClusterParameterGroupStatus,
+    cluster_parameter_groups: ?[]const ClusterParameterGroupStatus = null,
 
     /// The public key for the cluster.
-    cluster_public_key: ?[]const u8,
+    cluster_public_key: ?[]const u8 = null,
 
     /// The specific revision number of the database in the cluster.
-    cluster_revision_number: ?[]const u8,
+    cluster_revision_number: ?[]const u8 = null,
 
     /// A list of cluster security group that are associated with the cluster. Each
     /// security group is represented by an element that contains
@@ -90,11 +90,11 @@ pub const Cluster = struct {
     /// Virtual Private Cloud (VPC). Clusters that are created in a VPC use VPC
     /// security groups,
     /// which are listed by the **VpcSecurityGroups** parameter.
-    cluster_security_groups: ?[]const ClusterSecurityGroupMembership,
+    cluster_security_groups: ?[]const ClusterSecurityGroupMembership = null,
 
     /// A value that returns the destination region and retention period that are
     /// configured for cross-region snapshot copy.
-    cluster_snapshot_copy_status: ?ClusterSnapshotCopyStatus,
+    cluster_snapshot_copy_status: ?ClusterSnapshotCopyStatus = null,
 
     /// The current state of the cluster. Possible values are the following:
     ///
@@ -137,55 +137,55 @@ pub const Cluster = struct {
     /// * `storage-full`
     ///
     /// * `updating-hsm`
-    cluster_status: ?[]const u8,
+    cluster_status: ?[]const u8 = null,
 
     /// The name of the subnet group that is associated with the cluster. This
     /// parameter is
     /// valid only when the cluster is in a VPC.
-    cluster_subnet_group_name: ?[]const u8,
+    cluster_subnet_group_name: ?[]const u8 = null,
 
     /// The version ID of the Amazon Redshift engine that is running on the cluster.
-    cluster_version: ?[]const u8,
+    cluster_version: ?[]const u8 = null,
 
     /// The certificate Amazon Resource Name (ARN) for the custom domain name.
-    custom_domain_certificate_arn: ?[]const u8,
+    custom_domain_certificate_arn: ?[]const u8 = null,
 
     /// The expiration date for the certificate associated with the custom domain
     /// name.
-    custom_domain_certificate_expiry_date: ?i64,
+    custom_domain_certificate_expiry_date: ?i64 = null,
 
     /// The custom domain name associated with the cluster.
-    custom_domain_name: ?[]const u8,
+    custom_domain_name: ?[]const u8 = null,
 
-    data_transfer_progress: ?DataTransferProgress,
+    data_transfer_progress: ?DataTransferProgress = null,
 
     /// The name of the initial database that was created when the cluster was
     /// created.
     /// This same name is returned for the life of the cluster. If an initial
     /// database was not
     /// specified, a database named `dev`dev was created by default.
-    db_name: ?[]const u8,
+    db_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the IAM role set as default for the
     /// cluster.
-    default_iam_role_arn: ?[]const u8,
+    default_iam_role_arn: ?[]const u8 = null,
 
     /// Describes a group of `DeferredMaintenanceWindow` objects.
-    deferred_maintenance_windows: ?[]const DeferredMaintenanceWindow,
+    deferred_maintenance_windows: ?[]const DeferredMaintenanceWindow = null,
 
     /// The status of the elastic IP (EIP) address.
-    elastic_ip_status: ?ElasticIpStatus,
+    elastic_ip_status: ?ElasticIpStatus = null,
 
     /// The number of nodes that you can resize the cluster to with the elastic
     /// resize method.
-    elastic_resize_number_of_node_options: ?[]const u8,
+    elastic_resize_number_of_node_options: ?[]const u8 = null,
 
     /// A boolean value that, if `true`, indicates that data in the cluster is
     /// encrypted at rest.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The connection endpoint.
-    endpoint: ?Endpoint,
+    endpoint: ?Endpoint = null,
 
     /// An option that specifies whether to create the cluster with enhanced VPC
     /// routing
@@ -198,11 +198,11 @@ pub const Cluster = struct {
     /// If this option is `true`, enhanced VPC routing is enabled.
     ///
     /// Default: false
-    enhanced_vpc_routing: ?bool,
+    enhanced_vpc_routing: ?bool = null,
 
     /// The date and time when the next snapshot is expected to be taken for
     /// clusters with a valid snapshot schedule and backups enabled.
-    expected_next_snapshot_schedule_time: ?i64,
+    expected_next_snapshot_schedule_time: ?i64 = null,
 
     /// The status of next expected snapshot for clusters having a valid snapshot
     /// schedule and backups enabled. Possible values are the following:
@@ -210,13 +210,13 @@ pub const Cluster = struct {
     /// * OnTrack - The next snapshot is expected to be taken on time.
     ///
     /// * Pending - The next snapshot is pending to be taken.
-    expected_next_snapshot_schedule_time_status: ?[]const u8,
+    expected_next_snapshot_schedule_time_status: ?[]const u8 = null,
 
     /// A boolean value that, if `true`, indicates that the cluster allocates
     /// additional compute resources to run automatic optimization operations.
     ///
     /// Default: false
-    extra_compute_for_automatic_optimization: ?[]const u8,
+    extra_compute_for_automatic_optimization: ?[]const u8 = null,
 
     /// A value that reports whether the Amazon Redshift cluster has finished
     /// applying any
@@ -225,27 +225,27 @@ pub const Cluster = struct {
     /// command.
     ///
     /// Values: active, applying
-    hsm_status: ?HsmStatus,
+    hsm_status: ?HsmStatus = null,
 
     /// A list of Identity and Access Management (IAM) roles that can be used by the
     /// cluster to access other Amazon Web Services services.
-    iam_roles: ?[]const ClusterIamRole,
+    iam_roles: ?[]const ClusterIamRole = null,
 
     /// The IP address type for the cluster. Possible values are `ipv4` and
     /// `dualstack`.
-    ip_address_type: ?[]const u8,
+    ip_address_type: ?[]const u8 = null,
 
     /// The Key Management Service (KMS) key ID of the encryption key used to
     /// encrypt data in the cluster.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The status of the lakehouse registration for the cluster. Indicates whether
     /// the cluster is successfully registered with Amazon Redshift federated
     /// permissions.
-    lakehouse_registration_status: ?[]const u8,
+    lakehouse_registration_status: ?[]const u8 = null,
 
     /// The name of the maintenance track for the cluster.
-    maintenance_track_name: ?[]const u8,
+    maintenance_track_name: ?[]const u8 = null,
 
     /// The default number of days to retain a manual snapshot. If the value is -1,
     /// the
@@ -254,62 +254,62 @@ pub const Cluster = struct {
     /// of existing snapshots.
     ///
     /// The value must be either -1 or an integer between 1 and 3,653.
-    manual_snapshot_retention_period: ?i32,
+    manual_snapshot_retention_period: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) for the cluster's admin user credentials
     /// secret.
-    master_password_secret_arn: ?[]const u8,
+    master_password_secret_arn: ?[]const u8 = null,
 
     /// The ID of the Key Management Service (KMS) key used to encrypt and store the
     /// cluster's admin credentials secret.
-    master_password_secret_kms_key_id: ?[]const u8,
+    master_password_secret_kms_key_id: ?[]const u8 = null,
 
     /// The admin user name for the cluster. This name is used to connect to the
     /// database
     /// that is specified in the **DBName** parameter.
-    master_username: ?[]const u8,
+    master_username: ?[]const u8 = null,
 
     /// The status of a modify operation, if any, initiated for the cluster.
-    modify_status: ?[]const u8,
+    modify_status: ?[]const u8 = null,
 
     /// A boolean value that, if true, indicates that the cluster is deployed in two
     /// Availability Zones.
-    multi_az: ?[]const u8,
+    multi_az: ?[]const u8 = null,
 
     /// The secondary compute unit of a cluster, if Multi-AZ deployment is turned
     /// on.
-    multi_az_secondary: ?SecondaryClusterInfo,
+    multi_az_secondary: ?SecondaryClusterInfo = null,
 
     /// The date and time in UTC when system maintenance can begin.
-    next_maintenance_window_start_time: ?i64,
+    next_maintenance_window_start_time: ?i64 = null,
 
     /// The node type for the nodes in the cluster.
-    node_type: ?[]const u8,
+    node_type: ?[]const u8 = null,
 
     /// The number of compute nodes in the cluster.
-    number_of_nodes: ?i32,
+    number_of_nodes: ?i32 = null,
 
     /// Cluster operations that are waiting to be started.
-    pending_actions: ?[]const []const u8,
+    pending_actions: ?[]const []const u8 = null,
 
     /// A value that, if present, indicates that changes to the cluster are pending.
     /// Specific pending changes are identified by subelements.
-    pending_modified_values: ?PendingModifiedValues,
+    pending_modified_values: ?PendingModifiedValues = null,
 
     /// The weekly time range, in Universal Coordinated Time (UTC), during which
     /// system
     /// maintenance can occur.
-    preferred_maintenance_window: ?[]const u8,
+    preferred_maintenance_window: ?[]const u8 = null,
 
     /// A boolean value that, if `true`, indicates that the cluster can be
     /// accessed from a public network.
     ///
     /// Default: false
-    publicly_accessible: ?bool,
+    publicly_accessible: ?bool = null,
 
     /// The status of the reserved-node exchange request. Statuses include
     /// in-progress and requested.
-    reserved_node_exchange_status: ?ReservedNodeExchangeStatus,
+    reserved_node_exchange_status: ?ReservedNodeExchangeStatus = null,
 
     /// Returns the following:
     ///
@@ -318,31 +318,31 @@ pub const Cluster = struct {
     /// cancelled.
     ///
     /// * ResizeType: Returns ClassicResize
-    resize_info: ?ResizeInfo,
+    resize_info: ?ResizeInfo = null,
 
     /// A value that describes the status of a cluster restore action. This
     /// parameter
     /// returns null if the cluster was not created by restoring a snapshot.
-    restore_status: ?RestoreStatus,
+    restore_status: ?RestoreStatus = null,
 
     /// A unique identifier for the cluster snapshot schedule.
-    snapshot_schedule_identifier: ?[]const u8,
+    snapshot_schedule_identifier: ?[]const u8 = null,
 
     /// The current state of the cluster snapshot schedule.
-    snapshot_schedule_state: ?ScheduleState,
+    snapshot_schedule_state: ?ScheduleState = null,
 
     /// The list of tags for the cluster.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The total storage capacity of the cluster in megabytes.
-    total_storage_capacity_in_mega_bytes: ?i64,
+    total_storage_capacity_in_mega_bytes: ?i64 = null,
 
     /// The identifier of the VPC the cluster is in, if the cluster is in a VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     /// A list of Amazon Virtual Private Cloud (Amazon VPC) security groups that are
     /// associated with the cluster. This parameter is returned only if the cluster
     /// is in a
     /// VPC.
-    vpc_security_groups: ?[]const VpcSecurityGroupMembership,
+    vpc_security_groups: ?[]const VpcSecurityGroupMembership = null,
 };

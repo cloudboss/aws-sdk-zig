@@ -3,13 +3,13 @@ const InclusionAnnotationValue = @import("inclusion_annotation_value.zig").Inclu
 /// An Inclusion Annotation.
 pub const DatapointInclusionAnnotation = struct {
     /// The inclusion annotation value to apply to the statistic.
-    inclusion_annotation: ?InclusionAnnotationValue,
+    inclusion_annotation: ?InclusionAnnotationValue = null,
 
     /// The ID of the data quality profile the statistic belongs to.
-    profile_id: ?[]const u8,
+    profile_id: ?[]const u8 = null,
 
     /// The Statistic ID.
-    statistic_id: ?[]const u8,
+    statistic_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .inclusion_annotation = "InclusionAnnotation",

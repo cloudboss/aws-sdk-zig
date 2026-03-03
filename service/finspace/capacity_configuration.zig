@@ -2,7 +2,7 @@
 /// CPUs needed, memory of instances, and number of instances.
 pub const CapacityConfiguration = struct {
     /// The number of instances running in a cluster.
-    node_count: ?i32,
+    node_count: ?i32 = null,
 
     /// The type that determines the hardware of the host computer used for your
     /// cluster instance. Each node type offers different memory and storage
@@ -31,7 +31,7 @@ pub const CapacityConfiguration = struct {
     ///
     /// * `kx.s.32xlarge` – The node type with a configuration of 864 GiB memory and
     ///   128 vCPUs.
-    node_type: ?[]const u8,
+    node_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .node_count = "nodeCount",

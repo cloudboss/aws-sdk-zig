@@ -5,11 +5,11 @@ const ProcessingInstanceType = @import("processing_instance_type.zig").Processin
 /// Configuration information for profiling rules.
 pub const ProfilerRuleConfiguration = struct {
     /// The instance type to deploy a custom rule for profiling a training job.
-    instance_type: ?ProcessingInstanceType,
+    instance_type: ?ProcessingInstanceType = null,
 
     /// Path to local storage location for output of rules. Defaults to
     /// `/opt/ml/processing/output/rule/`.
-    local_path: ?[]const u8,
+    local_path: ?[]const u8 = null,
 
     /// The name of the rule configuration. It must be unique relative to other rule
     /// configuration names.
@@ -19,14 +19,14 @@ pub const ProfilerRuleConfiguration = struct {
     rule_evaluator_image: []const u8,
 
     /// Runtime configuration for rule container.
-    rule_parameters: ?[]const aws.map.StringMapEntry,
+    rule_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// Path to Amazon S3 storage location for rules.
-    s3_output_path: ?[]const u8,
+    s3_output_path: ?[]const u8 = null,
 
     /// The size, in GB, of the ML storage volume attached to the processing
     /// instance.
-    volume_size_in_gb: ?i32,
+    volume_size_in_gb: ?i32 = null,
 
     pub const json_field_names = .{
         .instance_type = "InstanceType",

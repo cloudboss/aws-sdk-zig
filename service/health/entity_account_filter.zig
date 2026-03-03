@@ -5,7 +5,7 @@ const entityStatusCode = @import("entity_status_code.zig").entityStatusCode;
 pub const EntityAccountFilter = struct {
     /// The 12-digit Amazon Web Services account numbers that contains the affected
     /// entities.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
     /// The unique identifier for the event. The event ARN has the
     /// `arn:aws:health:*event-region*::event/*SERVICE*/*EVENT_TYPE_CODE*/*EVENT_TYPE_PLUS_ID*
@@ -18,7 +18,7 @@ pub const EntityAccountFilter = struct {
     event_arn: []const u8,
 
     /// A list of entity status codes.
-    status_codes: ?[]const entityStatusCode,
+    status_codes: ?[]const entityStatusCode = null,
 
     pub const json_field_names = .{
         .aws_account_id = "awsAccountId",

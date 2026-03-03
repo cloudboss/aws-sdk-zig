@@ -24,7 +24,7 @@ pub const CollaborationIdNamespaceAssociationSummary = struct {
     creator_account_id: []const u8,
 
     /// The description of the collaboration ID namepsace association.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the collaboration ID namespace association.
     id: []const u8,

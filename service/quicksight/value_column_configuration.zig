@@ -5,7 +5,7 @@ const DataPrepAggregationFunction = @import("data_prep_aggregation_function.zig"
 pub const ValueColumnConfiguration = struct {
     /// The aggregation function to apply when multiple values map to the same
     /// pivoted cell.
-    aggregation_function: ?DataPrepAggregationFunction,
+    aggregation_function: ?DataPrepAggregationFunction = null,
 
     pub const json_field_names = .{
         .aggregation_function = "AggregationFunction",

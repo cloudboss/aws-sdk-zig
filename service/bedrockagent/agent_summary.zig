@@ -13,13 +13,13 @@ pub const AgentSummary = struct {
     agent_status: AgentStatus,
 
     /// The description of the agent.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Details about the guardrail associated with the agent.
-    guardrail_configuration: ?GuardrailConfiguration,
+    guardrail_configuration: ?GuardrailConfiguration = null,
 
     /// The latest version of the agent.
-    latest_agent_version: ?[]const u8,
+    latest_agent_version: ?[]const u8 = null,
 
     /// The time at which the agent was last updated.
     updated_at: i64,

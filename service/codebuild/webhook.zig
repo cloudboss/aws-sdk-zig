@@ -16,7 +16,7 @@ pub const Webhook = struct {
     ///
     /// It is recommended that you use `filterGroups` instead of
     /// `branchFilter`.
-    branch_filter: ?[]const u8,
+    branch_filter: ?[]const u8 = null,
 
     /// Specifies the type of build this webhook will trigger.
     ///
@@ -27,7 +27,7 @@ pub const Webhook = struct {
     /// CodeBuild-hosted Buildkite
     /// runner](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-runner-buildkite.html) in the *CodeBuild
     /// user guide*.
-    build_type: ?WebhookBuildType,
+    build_type: ?WebhookBuildType = null,
 
     /// An array of arrays of `WebhookFilter` objects used to determine which
     /// webhooks are triggered. At least one `WebhookFilter` in the array must
@@ -36,11 +36,11 @@ pub const Webhook = struct {
     /// For a build to be triggered, at least one filter group in the
     /// `filterGroups` array must pass. For a filter group to pass, each of its
     /// filters must pass.
-    filter_groups: ?[]const []const WebhookFilter,
+    filter_groups: ?[]const []const WebhookFilter = null,
 
     /// A timestamp that indicates the last time a repository's secret token was
     /// modified.
-    last_modified_secret: ?i64,
+    last_modified_secret: ?i64 = null,
 
     /// If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and
     /// instead returns `payloadUrl` and
@@ -49,23 +49,23 @@ pub const Webhook = struct {
     /// be used to manually create a webhook within GitHub.
     ///
     /// manualCreation is only available for GitHub webhooks.
-    manual_creation: ?bool,
+    manual_creation: ?bool = null,
 
     /// The CodeBuild endpoint where webhook events are sent.
-    payload_url: ?[]const u8,
+    payload_url: ?[]const u8 = null,
 
-    pull_request_build_policy: ?PullRequestBuildPolicy,
+    pull_request_build_policy: ?PullRequestBuildPolicy = null,
 
     /// The scope configuration for global or organization webhooks.
     ///
     /// Global or organization webhooks are only available for GitHub and Github
     /// Enterprise webhooks.
-    scope_configuration: ?ScopeConfiguration,
+    scope_configuration: ?ScopeConfiguration = null,
 
     /// The secret token of the associated repository.
     ///
     /// A Bitbucket webhook does not support `secret`.
-    secret: ?[]const u8,
+    secret: ?[]const u8 = null,
 
     /// The status of the webhook. Valid values include:
     ///
@@ -76,13 +76,13 @@ pub const Webhook = struct {
     /// * `ACTIVE`: The webhook has succeeded and is active.
     ///
     /// * `DELETING`: The webhook is being deleted.
-    status: ?WebhookStatus,
+    status: ?WebhookStatus = null,
 
     /// A message associated with the status of a webhook.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The URL to the webhook.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .branch_filter = "branchFilter",

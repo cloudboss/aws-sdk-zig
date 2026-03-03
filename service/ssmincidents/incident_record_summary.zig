@@ -16,7 +16,7 @@ pub const IncidentRecordSummary = struct {
     incident_record_source: IncidentRecordSource,
 
     /// The timestamp for when the incident was resolved.
-    resolved_time: ?i64,
+    resolved_time: ?i64 = null,
 
     /// The current status of the incident.
     status: IncidentRecordStatus,

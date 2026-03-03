@@ -12,7 +12,7 @@ pub const FinalHyperParameterTuningJobObjectiveMetric = struct {
 
     /// Select if you want to minimize or maximize the objective metric during
     /// hyperparameter tuning.
-    @"type": ?HyperParameterTuningJobObjectiveType,
+    @"type": ?HyperParameterTuningJobObjectiveType = null,
 
     /// The value of the objective metric.
     value: f32,

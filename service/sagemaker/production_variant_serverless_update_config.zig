@@ -3,11 +3,11 @@
 pub const ProductionVariantServerlessUpdateConfig = struct {
     /// The updated maximum number of concurrent invocations your serverless
     /// endpoint can process.
-    max_concurrency: ?i32,
+    max_concurrency: ?i32 = null,
 
     /// The updated amount of provisioned concurrency to allocate for the serverless
     /// endpoint. Should be less than or equal to `MaxConcurrency`.
-    provisioned_concurrency: ?i32,
+    provisioned_concurrency: ?i32 = null,
 
     pub const json_field_names = .{
         .max_concurrency = "MaxConcurrency",

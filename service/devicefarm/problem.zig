@@ -5,13 +5,13 @@ const ExecutionResult = @import("execution_result.zig").ExecutionResult;
 /// Represents a specific warning or failure.
 pub const Problem = struct {
     /// Information about the associated device.
-    device: ?Device,
+    device: ?Device = null,
 
     /// Information about the associated job.
-    job: ?ProblemDetail,
+    job: ?ProblemDetail = null,
 
     /// A message about the problem's result.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The problem's result.
     ///
@@ -30,16 +30,16 @@ pub const Problem = struct {
     /// * ERRORED
     ///
     /// * STOPPED
-    result: ?ExecutionResult,
+    result: ?ExecutionResult = null,
 
     /// Information about the associated run.
-    run: ?ProblemDetail,
+    run: ?ProblemDetail = null,
 
     /// Information about the associated suite.
-    suite: ?ProblemDetail,
+    suite: ?ProblemDetail = null,
 
     /// Information about the associated test.
-    @"test": ?ProblemDetail,
+    @"test": ?ProblemDetail = null,
 
     pub const json_field_names = .{
         .device = "device",

@@ -13,7 +13,7 @@ pub const MathActivity = struct {
     name: []const u8,
 
     /// The next activity in the pipeline.
-    next: ?[]const u8,
+    next: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attribute = "attribute",

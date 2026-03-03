@@ -11,11 +11,11 @@ pub const BlueGreenUpdatePolicy = struct {
     /// Maximum execution timeout for the deployment. Note that the timeout value
     /// should be larger than the total waiting time specified in
     /// `TerminationWaitInSeconds` and `WaitIntervalInSeconds`.
-    maximum_execution_timeout_in_seconds: ?i32,
+    maximum_execution_timeout_in_seconds: ?i32 = null,
 
     /// Additional waiting time in seconds after the completion of an endpoint
     /// deployment before terminating the old endpoint fleet. Default is 0.
-    termination_wait_in_seconds: ?i32,
+    termination_wait_in_seconds: ?i32 = null,
 
     /// Defines the traffic routing strategy to shift traffic from the old fleet to
     /// the new fleet during an endpoint deployment.

@@ -5,11 +5,11 @@ const TransferTableStatus = @import("transfer_table_status.zig").TransferTableSt
 pub const ConnectorFileTransferResult = struct {
     /// For transfers that fail, this parameter contains a code indicating the
     /// reason. For example, `RETRIEVE_FILE_NOT_FOUND`
-    failure_code: ?[]const u8,
+    failure_code: ?[]const u8 = null,
 
     /// For transfers that fail, this parameter describes the reason for the
     /// failure.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// The filename and path to where the file was sent to or retrieved from.
     file_path: []const u8,

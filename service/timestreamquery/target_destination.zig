@@ -5,7 +5,7 @@ const TimestreamDestination = @import("timestream_destination.zig").TimestreamDe
 /// source is Timestream.
 pub const TargetDestination = struct {
     /// Query result destination details for Timestream data source.
-    timestream_destination: ?TimestreamDestination,
+    timestream_destination: ?TimestreamDestination = null,
 
     pub const json_field_names = .{
         .timestream_destination = "TimestreamDestination",

@@ -6,49 +6,49 @@ const UserType = @import("user_type.zig").UserType;
 /// Describes a user.
 pub const User = struct {
     /// The time when the user was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The email address of the user.
-    email_address: ?[]const u8,
+    email_address: ?[]const u8 = null,
 
     /// The given name of the user.
-    given_name: ?[]const u8,
+    given_name: ?[]const u8 = null,
 
     /// The ID of the user.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The locale of the user.
-    locale: ?LocaleType,
+    locale: ?LocaleType = null,
 
     /// The time when the user was modified.
-    modified_timestamp: ?i64,
+    modified_timestamp: ?i64 = null,
 
     /// The ID of the organization.
-    organization_id: ?[]const u8,
+    organization_id: ?[]const u8 = null,
 
     /// The ID of the recycle bin folder.
-    recycle_bin_folder_id: ?[]const u8,
+    recycle_bin_folder_id: ?[]const u8 = null,
 
     /// The ID of the root folder.
-    root_folder_id: ?[]const u8,
+    root_folder_id: ?[]const u8 = null,
 
     /// The status of the user.
-    status: ?UserStatusType,
+    status: ?UserStatusType = null,
 
     /// The storage for the user.
-    storage: ?UserStorageMetadata,
+    storage: ?UserStorageMetadata = null,
 
     /// The surname of the user.
-    surname: ?[]const u8,
+    surname: ?[]const u8 = null,
 
     /// The time zone ID of the user.
-    time_zone_id: ?[]const u8,
+    time_zone_id: ?[]const u8 = null,
 
     /// The type of user.
-    @"type": ?UserType,
+    @"type": ?UserType = null,
 
     /// The login name of the user.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

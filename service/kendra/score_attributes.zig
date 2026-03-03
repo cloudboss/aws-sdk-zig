@@ -5,7 +5,7 @@ const ScoreConfidence = @import("score_confidence.zig").ScoreConfidence;
 /// response is relevant to the query.
 pub const ScoreAttributes = struct {
     /// A relative ranking for how relevant the response is to the query.
-    score_confidence: ?ScoreConfidence,
+    score_confidence: ?ScoreConfidence = null,
 
     pub const json_field_names = .{
         .score_confidence = "ScoreConfidence",

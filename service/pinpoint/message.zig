@@ -12,40 +12,40 @@ pub const Message = struct {
     ///   app. This setting uses the deep-linking features of iOS and Android.
     /// * URL - The default mobile browser on the recipient's device opens and loads
     ///   the web page at a URL that you specify.
-    action: ?Action,
+    action: ?Action = null,
 
     /// The body of the notification message. The maximum number of characters is
     /// 200.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// The URL of the image to display as the push-notification icon, such as the
     /// icon for the app.
-    image_icon_url: ?[]const u8,
+    image_icon_url: ?[]const u8 = null,
 
     /// The URL of the image to display as the small, push-notification icon, such
     /// as a small version of the icon for the app.
-    image_small_icon_url: ?[]const u8,
+    image_small_icon_url: ?[]const u8 = null,
 
     /// The URL of an image to display in the push notification.
-    image_url: ?[]const u8,
+    image_url: ?[]const u8 = null,
 
     /// The JSON payload to use for a silent push notification.
-    json_body: ?[]const u8,
+    json_body: ?[]const u8 = null,
 
     /// The URL of the image or video to display in the push notification.
-    media_url: ?[]const u8,
+    media_url: ?[]const u8 = null,
 
     /// The raw, JSON-formatted string to use as the payload for the notification
     /// message. If specified, this value overrides all other content for the
     /// message.
-    raw_content: ?[]const u8,
+    raw_content: ?[]const u8 = null,
 
     /// Specifies whether the notification is a silent push notification, which is a
     /// push notification that doesn't display on a recipient's device. Silent push
     /// notifications can be used for cases such as updating an app's configuration,
     /// displaying messages in an in-app message center, or supporting phone home
     /// functionality.
-    silent_push: ?bool,
+    silent_push: ?bool = null,
 
     /// The number of seconds that the push-notification service should keep the
     /// message, if the service is unable to deliver the notification the first
@@ -56,14 +56,14 @@ pub const Message = struct {
     ///
     /// This value doesn't apply to messages that are sent through the Amazon Device
     /// Messaging (ADM) service.
-    time_to_live: ?i32,
+    time_to_live: ?i32 = null,
 
     /// The title to display above the notification message on a recipient's device.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The URL to open in a recipient's default mobile browser, if a recipient taps
     /// the push notification and the value of the Action property is URL.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

@@ -2,10 +2,10 @@
 /// account.
 pub const ListInvestigationGroupsModel = struct {
     /// The Amazon Resource Name (ARN) of the investigation group.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the investigation group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

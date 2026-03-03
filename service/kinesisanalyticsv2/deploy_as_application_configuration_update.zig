@@ -5,7 +5,7 @@ const S3ContentBaseLocationUpdate = @import("s3_content_base_location_update.zig
 pub const DeployAsApplicationConfigurationUpdate = struct {
     /// Updates to the location that holds the data required to specify an Amazon
     /// Data Analytics application.
-    s3_content_location_update: ?S3ContentBaseLocationUpdate,
+    s3_content_location_update: ?S3ContentBaseLocationUpdate = null,
 
     pub const json_field_names = .{
         .s3_content_location_update = "S3ContentLocationUpdate",

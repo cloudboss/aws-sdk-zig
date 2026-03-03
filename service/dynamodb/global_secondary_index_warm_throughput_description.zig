@@ -5,17 +5,17 @@ pub const GlobalSecondaryIndexWarmThroughputDescription = struct {
     /// Represents warm throughput read units per second value for a global
     /// secondary
     /// index.
-    read_units_per_second: ?i64,
+    read_units_per_second: ?i64 = null,
 
     /// Represents the warm throughput status being created or updated on a global
     /// secondary
     /// index. The status can only be `UPDATING` or `ACTIVE`.
-    status: ?IndexStatus,
+    status: ?IndexStatus = null,
 
     /// Represents warm throughput write units per second value for a global
     /// secondary
     /// index.
-    write_units_per_second: ?i64,
+    write_units_per_second: ?i64 = null,
 
     pub const json_field_names = .{
         .read_units_per_second = "ReadUnitsPerSecond",

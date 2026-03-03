@@ -10,7 +10,7 @@ pub const TemplateResponse = struct {
     /// use the GetEmailTemplate, GetPushTemplate, GetSmsTemplate, or
     /// GetVoiceTemplate operation, depending on the type of template that you want
     /// to retrieve the ARN for.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date, in ISO 8601 format, when the message template was created.
     creation_date: []const u8,
@@ -21,7 +21,7 @@ pub const TemplateResponse = struct {
     /// GetEmailTemplate, GetPushTemplate, GetSmsTemplate, or GetVoiceTemplate
     /// operation, depending on the type of template that you want to retrieve the
     /// object for.
-    default_substitutions: ?[]const u8,
+    default_substitutions: ?[]const u8 = null,
 
     /// The date, in ISO 8601 format, when the message template was last modified.
     last_modified_date: []const u8,
@@ -31,14 +31,14 @@ pub const TemplateResponse = struct {
     /// object. To retrieve this object for a template, use the GetEmailTemplate,
     /// GetPushTemplate, GetSmsTemplate, or GetVoiceTemplate operation, depending on
     /// the type of template that you want to retrieve the object for.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The custom description of the message template. This value isn't included in
     /// a TemplateResponse object. To retrieve the description of a template, use
     /// the GetEmailTemplate, GetPushTemplate, GetSmsTemplate, or GetVoiceTemplate
     /// operation, depending on the type of template that you want to retrieve the
     /// description for.
-    template_description: ?[]const u8,
+    template_description: ?[]const u8 = null,
 
     /// The name of the message template.
     template_name: []const u8,
@@ -49,7 +49,7 @@ pub const TemplateResponse = struct {
 
     /// The unique identifier, as an integer, for the active version of the message
     /// template.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

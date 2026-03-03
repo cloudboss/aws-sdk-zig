@@ -10,7 +10,7 @@ pub const Event = struct {
     /// the event ID to distinguish unique events. Any subsequent events after the
     /// first with the
     /// same event ID are not used in model training.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The type of event, such as click or download. This property corresponds to
     /// the `EVENT_TYPE`
@@ -20,7 +20,7 @@ pub const Event = struct {
 
     /// The event value that corresponds to the `EVENT_VALUE` field of the Item
     /// interactions schema.
-    event_value: ?f32,
+    event_value: ?f32 = null,
 
     /// A list of item IDs that represents the sequence of items you have shown the
     /// user. For example, `["itemId1", "itemId2", "itemId3"]`. Provide a list of
@@ -28,16 +28,16 @@ pub const Event = struct {
     /// on recording impressions data,
     /// see [Recording impressions
     /// data](https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#putevents-including-impressions-data).
-    impression: ?[]const []const u8,
+    impression: ?[]const []const u8 = null,
 
     /// The item ID key that corresponds to the `ITEM_ID` field of the Item
     /// interactions dataset's schema.
-    item_id: ?[]const u8,
+    item_id: ?[]const u8 = null,
 
     /// Contains information about the metric attribution associated with an event.
     /// For more information about metric attributions, see [Measuring impact of
     /// recommendations](https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
-    metric_attribution: ?MetricAttribution,
+    metric_attribution: ?MetricAttribution = null,
 
     /// A string map of event-specific data that you might choose to record. For
     /// example, if a
@@ -68,7 +68,7 @@ pub const Event = struct {
     /// * recommendationId
     ///
     /// * impression
-    properties: ?[]const u8,
+    properties: ?[]const u8 = null,
 
     /// The ID of the list of recommendations that contains the item the user
     /// interacted with. Provide a `recommendationId` to have Amazon Personalize
@@ -83,7 +83,7 @@ pub const Event = struct {
     /// For more information on creating a metric attribution see [Measuring impact
     /// of
     /// recommendations](https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
-    recommendation_id: ?[]const u8,
+    recommendation_id: ?[]const u8 = null,
 
     /// The timestamp (in Unix time) on the client side when the event occurred.
     sent_at: i64,

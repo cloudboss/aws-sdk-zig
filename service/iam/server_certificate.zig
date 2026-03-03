@@ -11,7 +11,7 @@ pub const ServerCertificate = struct {
     certificate_body: []const u8,
 
     /// The contents of the public key certificate chain.
-    certificate_chain: ?[]const u8,
+    certificate_chain: ?[]const u8 = null,
 
     /// The meta information of the server certificate, such as its name, path, ID,
     /// and
@@ -23,5 +23,5 @@ pub const ServerCertificate = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

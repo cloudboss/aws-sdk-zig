@@ -10,7 +10,7 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     ///
     /// Either `AvailabilityZone` or `AvailabilityZoneId` must be
     /// specified in the request, but not both.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the Availability Zone in which to launch the instances. For
     /// example,
@@ -18,7 +18,7 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     ///
     /// Either `AvailabilityZone` or `AvailabilityZoneId` must be
     /// specified in the request, but not both.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The block device mappings, which define the EBS volumes and instance store
     /// volumes to
@@ -30,7 +30,7 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// for volumes on Amazon EC2
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html) in the *Amazon EC2 User
     /// Guide*.
-    block_device_mappings: ?[]const FleetBlockDeviceMappingRequest,
+    block_device_mappings: ?[]const FleetBlockDeviceMappingRequest = null,
 
     /// The ID of the AMI in the format `ami-17characters00000`.
     ///
@@ -72,7 +72,7 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// This parameter is only available for fleets of type `instant`. For fleets
     /// of type `maintain` and `request`, you must specify the AMI ID in
     /// the launch template.
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// The attributes for the instance types. When you specify instance attributes,
     /// Amazon EC2 will
@@ -80,7 +80,7 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     ///
     /// If you specify `InstanceRequirements`, you can't specify
     /// `InstanceType`.
-    instance_requirements: ?InstanceRequirementsRequest,
+    instance_requirements: ?InstanceRequirementsRequest = null,
 
     /// The instance type.
     ///
@@ -88,7 +88,7 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     ///
     /// If you specify `InstanceType`, you can't specify
     /// `InstanceRequirements`.
-    instance_type: ?InstanceType,
+    instance_type: ?InstanceType = null,
 
     /// The maximum price per unit hour that you are willing to pay for a Spot
     /// Instance. We do not
@@ -103,10 +103,10 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// a value
     /// below USD $0.001 will result in an `InvalidParameterValue` error
     /// message.
-    max_price: ?[]const u8,
+    max_price: ?[]const u8 = null,
 
     /// The location where the instance launched, if applicable.
-    placement: ?Placement,
+    placement: ?Placement = null,
 
     /// The priority for the launch template override. The highest priority is
     /// launched
@@ -129,13 +129,13 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// the lowest
     /// priority. You can set the same priority for different launch template
     /// overrides.
-    priority: ?f64,
+    priority: ?f64 = null,
 
     /// The IDs of the subnets in which to launch the instances. Separate multiple
     /// subnet IDs using commas (for example, `subnet-1234abcdeexample1,
     /// subnet-0987cdef6example2`). A request of type `instant` can have only one
     /// subnet ID.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The number of units provided by the specified instance type. These are the
     /// same units
@@ -155,5 +155,5 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// weight). However, if all the specified weights are above the requested
     /// `TargetCapacity`, resulting in only 1 instance being launched, the price
     /// used is per *instance* hour.
-    weighted_capacity: ?f64,
+    weighted_capacity: ?f64 = null,
 };

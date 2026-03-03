@@ -14,11 +14,11 @@ pub const Spigot = struct {
     /// The probability (a decimal value with a maximum value of 1) of picking any
     /// given record. A value of 1 indicates that each row read from the dataset
     /// should be included in the sample output.
-    prob: ?f64,
+    prob: ?f64 = null,
 
     /// Specifies a number of records to write starting from the beginning of the
     /// dataset.
-    topk: ?i32,
+    topk: ?i32 = null,
 
     pub const json_field_names = .{
         .inputs = "Inputs",

@@ -10,7 +10,7 @@ pub const JwtBearerGrant = struct {
     ///
     /// `AuthorizedTokenIssuers` is required when the grant type is
     /// `JwtBearerGrant`.
-    authorized_token_issuers: ?[]const AuthorizedTokenIssuer,
+    authorized_token_issuers: ?[]const AuthorizedTokenIssuer = null,
 
     pub const json_field_names = .{
         .authorized_token_issuers = "AuthorizedTokenIssuers",

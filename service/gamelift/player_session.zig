@@ -21,7 +21,7 @@ pub const PlayerSession = struct {
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The DNS identifier assigned to the instance that is running the game
     /// session. Values have
@@ -35,42 +35,42 @@ pub const PlayerSession = struct {
     ///
     /// When connecting to a game session that is running on a TLS-enabled fleet,
     /// you must use the DNS name, not the IP address.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
     /// associated with the GameLift fleet that the player's game session is
     /// running on.
-    fleet_arn: ?[]const u8,
+    fleet_arn: ?[]const u8 = null,
 
     /// A unique identifier for the fleet that the player's game session is running
     /// on.
-    fleet_id: ?[]const u8,
+    fleet_id: ?[]const u8 = null,
 
     /// A unique identifier for the game session that the player session is
     /// connected to.
-    game_session_id: ?[]const u8,
+    game_session_id: ?[]const u8 = null,
 
     /// The IP address of the game session. To connect to a Amazon GameLift Servers
     /// game server, an app needs both the IP address and port number.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// Developer-defined information related to a player. Amazon GameLift Servers
     /// does not use this data, so it can be formatted as needed for use in the
     /// game.
-    player_data: ?[]const u8,
+    player_data: ?[]const u8 = null,
 
     /// A unique identifier for a player that is associated with this player
     /// session.
-    player_id: ?[]const u8,
+    player_id: ?[]const u8 = null,
 
     /// A unique identifier for a player session.
-    player_session_id: ?[]const u8,
+    player_session_id: ?[]const u8 = null,
 
     /// Port number for the game session. To connect to a Amazon GameLift Servers
     /// server process, an app needs
     /// both the IP address and port number.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// Current status of the player session.
     ///
@@ -90,12 +90,12 @@ pub const PlayerSession = struct {
     /// * **TIMEDOUT** -- A player session request was
     /// received, but the player did not connect and/or was not validated within the
     /// timeout limit (60 seconds).
-    status: ?PlayerSessionStatus,
+    status: ?PlayerSessionStatus = null,
 
     /// A time stamp indicating when this data object was terminated. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    termination_time: ?i64,
+    termination_time: ?i64 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

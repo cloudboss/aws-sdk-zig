@@ -8,7 +8,7 @@ pub const ImportAssetsFromLakeFormationTagPolicyRequestDetails = struct {
     catalog_id: []const u8,
 
     /// A structure for the database object.
-    database: ?DatabaseLFTagPolicyAndPermissions,
+    database: ?DatabaseLFTagPolicyAndPermissions = null,
 
     /// The unique identifier for the data set associated with this import job.
     data_set_id: []const u8,
@@ -22,7 +22,7 @@ pub const ImportAssetsFromLakeFormationTagPolicyRequestDetails = struct {
     role_arn: []const u8,
 
     /// A structure for the table object.
-    table: ?TableLFTagPolicyAndPermissions,
+    table: ?TableLFTagPolicyAndPermissions = null,
 
     pub const json_field_names = .{
         .catalog_id = "CatalogId",

@@ -2,19 +2,19 @@ const EnvironmentState = @import("environment_state.zig").EnvironmentState;
 
 pub const DeleteEnvironmentResponse = struct {
     /// The Amazon Resource Name (ARN) of the environment.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The unique identifier of the environment.
-    environment_id: ?[]const u8,
+    environment_id: ?[]const u8 = null,
 
     /// A timestamp that indicates when the environment was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The name of the environment.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current state of the environment.
-    state: ?EnvironmentState,
+    state: ?EnvironmentState = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

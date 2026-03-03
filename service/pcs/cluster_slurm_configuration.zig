@@ -8,26 +8,26 @@ const SlurmRest = @import("slurm_rest.zig").SlurmRest;
 pub const ClusterSlurmConfiguration = struct {
     /// The accounting configuration includes configurable settings for Slurm
     /// accounting.
-    accounting: ?Accounting,
+    accounting: ?Accounting = null,
 
     /// The shared Slurm key for authentication, also known as the **cluster
     /// secret**.
-    auth_key: ?SlurmAuthKey,
+    auth_key: ?SlurmAuthKey = null,
 
     /// The JWT authentication configuration for Slurm REST API access.
-    jwt_auth: ?JwtAuth,
+    jwt_auth: ?JwtAuth = null,
 
     /// The time (in seconds) before an idle node is scaled down.
     ///
     /// Default: `600`
-    scale_down_idle_time_in_seconds: ?i32,
+    scale_down_idle_time_in_seconds: ?i32 = null,
 
     /// Additional Slurm-specific configuration that directly maps to Slurm
     /// settings.
-    slurm_custom_settings: ?[]const SlurmCustomSetting,
+    slurm_custom_settings: ?[]const SlurmCustomSetting = null,
 
     /// The Slurm REST API configuration for the cluster.
-    slurm_rest: ?SlurmRest,
+    slurm_rest: ?SlurmRest = null,
 
     pub const json_field_names = .{
         .accounting = "accounting",

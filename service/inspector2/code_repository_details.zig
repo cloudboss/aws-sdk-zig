@@ -5,13 +5,13 @@ pub const CodeRepositoryDetails = struct {
     /// The Amazon Resource Name (ARN) of the code security integration associated
     /// with the
     /// repository.
-    integration_arn: ?[]const u8,
+    integration_arn: ?[]const u8 = null,
 
     /// The name of the project in the code repository.
-    project_name: ?[]const u8,
+    project_name: ?[]const u8 = null,
 
     /// The type of repository provider (such as GitHub, GitLab, etc.).
-    provider_type: ?CodeRepositoryProviderType,
+    provider_type: ?CodeRepositoryProviderType = null,
 
     pub const json_field_names = .{
         .integration_arn = "integrationArn",

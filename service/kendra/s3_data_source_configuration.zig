@@ -26,12 +26,12 @@ pub const S3DataSourceConfiguration = struct {
     /// files for
     /// the data source. For the format of the file, see [Access control for S3 data
     /// sources](https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html).
-    access_control_list_configuration: ?AccessControlListConfiguration,
+    access_control_list_configuration: ?AccessControlListConfiguration = null,
 
     /// The name of the bucket that contains the documents.
     bucket_name: []const u8,
 
-    documents_metadata_configuration: ?DocumentsMetadataConfiguration,
+    documents_metadata_configuration: ?DocumentsMetadataConfiguration = null,
 
     /// A list of glob patterns (patterns that can expand a wildcard pattern into a
     /// list of
@@ -68,7 +68,7 @@ pub const S3DataSourceConfiguration = struct {
     /// For more examples, see [Use of Exclude and
     /// Include
     /// Filters](https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters) in the Amazon Web Services CLI Command Reference.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of glob patterns (patterns that can expand a wildcard pattern into a
     /// list of
@@ -105,11 +105,11 @@ pub const S3DataSourceConfiguration = struct {
     /// For more examples, see [Use of Exclude and
     /// Include
     /// Filters](https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters) in the Amazon Web Services CLI Command Reference.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of S3 prefixes for the documents that should be included in the
     /// index.
-    inclusion_prefixes: ?[]const []const u8,
+    inclusion_prefixes: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .access_control_list_configuration = "AccessControlListConfiguration",

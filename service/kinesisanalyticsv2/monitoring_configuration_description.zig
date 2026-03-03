@@ -7,13 +7,13 @@ const MetricsLevel = @import("metrics_level.zig").MetricsLevel;
 pub const MonitoringConfigurationDescription = struct {
     /// Describes whether to use the default CloudWatch logging configuration for an
     /// application.
-    configuration_type: ?ConfigurationType,
+    configuration_type: ?ConfigurationType = null,
 
     /// Describes the verbosity of the CloudWatch Logs for an application.
-    log_level: ?LogLevel,
+    log_level: ?LogLevel = null,
 
     /// Describes the granularity of the CloudWatch Logs for an application.
-    metrics_level: ?MetricsLevel,
+    metrics_level: ?MetricsLevel = null,
 
     pub const json_field_names = .{
         .configuration_type = "ConfigurationType",

@@ -16,7 +16,7 @@ pub const EvaluationBedrockModel = struct {
     model_identifier: []const u8,
 
     /// Specifies performance settings for the model or inference profile.
-    performance_config: ?PerformanceConfiguration,
+    performance_config: ?PerformanceConfiguration = null,
 
     pub const json_field_names = .{
         .inference_params = "inferenceParams",

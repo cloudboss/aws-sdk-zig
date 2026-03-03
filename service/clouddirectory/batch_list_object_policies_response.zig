@@ -2,10 +2,10 @@
 pub const BatchListObjectPoliciesResponse = struct {
     /// A list of policy `ObjectIdentifiers`, that are attached to the
     /// object.
-    attached_policy_ids: ?[]const []const u8,
+    attached_policy_ids: ?[]const []const u8 = null,
 
     /// The pagination token.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attached_policy_ids = "AttachedPolicyIds",

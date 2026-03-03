@@ -16,7 +16,7 @@ pub const StageExecution = struct {
 
     /// The type of pipeline execution for the stage, such as a rollback pipeline
     /// execution.
-    @"type": ?ExecutionType,
+    @"type": ?ExecutionType = null,
 
     pub const json_field_names = .{
         .pipeline_execution_id = "pipelineExecutionId",

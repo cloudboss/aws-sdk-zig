@@ -9,23 +9,23 @@ pub const BucketCountBySharedAccessType = struct {
     /// following or any combination of the following: an Amazon CloudFront OAI, a
     /// CloudFront OAC, or an Amazon Web Services account that isn't in the same
     /// Amazon Macie organization.
-    external: ?i64,
+    external: ?i64 = null,
 
     /// The total number of buckets that are shared with one or more Amazon Web
     /// Services accounts in the same Amazon Macie organization. These buckets
     /// aren't shared with Amazon CloudFront OAIs or OACs.
-    internal: ?i64,
+    internal: ?i64 = null,
 
     /// The total number of buckets that aren't shared with other Amazon Web
     /// Services accounts, Amazon CloudFront OAIs, or CloudFront OACs.
-    not_shared: ?i64,
+    not_shared: ?i64 = null,
 
     /// The total number of buckets that Amazon Macie wasn't able to evaluate shared
     /// access settings for. For example, the buckets' permissions settings or a
     /// quota prevented Macie from retrieving the requisite data. Macie can't
     /// determine whether the buckets are shared with other Amazon Web Services
     /// accounts, Amazon CloudFront OAIs, or CloudFront OACs.
-    unknown: ?i64,
+    unknown: ?i64 = null,
 
     pub const json_field_names = .{
         .external = "external",

@@ -2,10 +2,10 @@
 pub const Logs = struct {
     /// Enables audit logging. Every user management action made using JMX or the
     /// ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.
-    audit: ?bool,
+    audit: ?bool = null,
 
     /// Enables general logging.
-    general: ?bool,
+    general: ?bool = null,
 
     pub const json_field_names = .{
         .audit = "Audit",

@@ -2,10 +2,10 @@
 /// `groupedByResource` statistics.
 pub const ResourceStatistics = struct {
     /// The ID of the Amazon Web Services account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The timestamp at which the statistics for this resource was last generated.
-    last_generated_at: ?i64,
+    last_generated_at: ?i64 = null,
 
     /// ID associated with each resource. The following list provides the mapping of
     /// the resource type
@@ -33,13 +33,13 @@ pub const ResourceStatistics = struct {
     /// * S3Bucket - `resource.s3BucketDetails.name`
     ///
     /// * S3Object - `resource.s3BucketDetails.name`
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The type of resource.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The total number of findings associated with this resource.
-    total_findings: ?i32,
+    total_findings: ?i32 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

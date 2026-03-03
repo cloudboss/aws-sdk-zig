@@ -6,11 +6,11 @@ const EngagementContextType = @import("engagement_context_type.zig").EngagementC
 pub const EngagementContextDetails = struct {
     /// The unique identifier of the engagement context. This ID is used to
     /// reference and manage the specific context within the engagement.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Contains the specific details of the Engagement context. The structure of
     /// this payload varies depending on the Type field.
-    payload: ?EngagementContextPayload,
+    payload: ?EngagementContextPayload = null,
 
     /// Specifies the type of Engagement context. Valid values are "CustomerProject"
     /// or "Document", indicating whether the context relates to a customer project

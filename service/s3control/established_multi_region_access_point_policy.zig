@@ -9,5 +9,5 @@
 /// the established policy.
 pub const EstablishedMultiRegionAccessPointPolicy = struct {
     /// The details of the last established policy.
-    policy: ?[]const u8,
+    policy: ?[]const u8 = null,
 };

@@ -24,16 +24,16 @@ pub const DescribedServer = struct {
     /// These IP addresses are assigned automatically when you create an AS2 server.
     /// Additionally, if you update an existing server and add the AS2 protocol,
     /// static IP addresses are assigned as well.
-    as_2_service_managed_egress_ip_addresses: ?[]const []const u8,
+    as_2_service_managed_egress_ip_addresses: ?[]const []const u8 = null,
 
     /// Specifies the ARN of the Amazon Web ServicesCertificate Manager (ACM)
     /// certificate. Required when `Protocols` is set to `FTPS`.
-    certificate: ?[]const u8,
+    certificate: ?[]const u8 = null,
 
     /// Specifies the domain of the storage system that is used for file transfers.
     /// There are two domains available: Amazon Simple Storage Service (Amazon S3)
     /// and Amazon Elastic File System (Amazon EFS). The default value is S3.
-    domain: ?Domain,
+    domain: ?Domain = null,
 
     /// The virtual private cloud (VPC) endpoint settings that are configured for
     /// your server. When you host your endpoint within your VPC, you can make your
@@ -41,22 +41,22 @@ pub const DescribedServer = struct {
     /// Elastic IP addresses and make your endpoint accessible to clients over the
     /// internet. Your VPC's default security groups are automatically assigned to
     /// your endpoint.
-    endpoint_details: ?EndpointDetails,
+    endpoint_details: ?EndpointDetails = null,
 
     /// Defines the type of endpoint that your server is connected to. If your
     /// server is connected to a VPC endpoint, your server isn't accessible over the
     /// public internet.
-    endpoint_type: ?EndpointType,
+    endpoint_type: ?EndpointType = null,
 
     /// Specifies the Base64-encoded SHA256 fingerprint of the server's host key.
     /// This value is equivalent to the output of the `ssh-keygen -l -f
     /// my-new-server-key` command.
-    host_key_fingerprint: ?[]const u8,
+    host_key_fingerprint: ?[]const u8 = null,
 
     /// Specifies information to call a customer-supplied authentication API. This
     /// field is not populated when the `IdentityProviderType` of a server is
     /// `AWS_DIRECTORY_SERVICE` or `SERVICE_MANAGED`.
-    identity_provider_details: ?IdentityProviderDetails,
+    identity_provider_details: ?IdentityProviderDetails = null,
 
     /// The mode of authentication for a server. The default value is
     /// `SERVICE_MANAGED`, which allows you to store and access user credentials
@@ -77,7 +77,7 @@ pub const DescribedServer = struct {
     /// identity provider. If you choose this value, you must specify the ARN for
     /// the Lambda function in the `Function` parameter for the
     /// `IdentityProviderDetails` data type.
-    identity_provider_type: ?IdentityProviderType,
+    identity_provider_type: ?IdentityProviderType = null,
 
     /// Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for
     /// your Transfer Family endpoint. The default value is `IPV4`.
@@ -92,19 +92,19 @@ pub const DescribedServer = struct {
     /// When using `DUALSTACK` as the `IpAddressType`, you cannot set the
     /// `AddressAllocationIds` parameter for the
     /// [EndpointDetails](https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html) for the server.
-    ip_address_type: ?IpAddressType,
+    ip_address_type: ?IpAddressType = null,
 
     /// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
     /// role that allows a server to turn on Amazon CloudWatch logging for Amazon S3
     /// or Amazon EFS events. When set, you can view user activity in your
     /// CloudWatch logs.
-    logging_role: ?[]const u8,
+    logging_role: ?[]const u8 = null,
 
     /// Specifies a string to display when users connect to a server. This string is
     /// displayed after the user authenticates.
     ///
     /// The SFTP protocol does not support post-authentication display banners.
-    post_authentication_login_banner: ?[]const u8,
+    post_authentication_login_banner: ?[]const u8 = null,
 
     /// Specifies a string to display when users connect to a server. This string is
     /// displayed before the user authenticates. For example, the following banner
@@ -114,7 +114,7 @@ pub const DescribedServer = struct {
     /// computer system without authority, or in excess of their authority, are
     /// subject to having all of their activities on this system monitored and
     /// recorded by system personnel.`
-    pre_authentication_login_banner: ?[]const u8,
+    pre_authentication_login_banner: ?[]const u8 = null,
 
     /// The protocol settings that are configured for your server.
     ///
@@ -140,7 +140,7 @@ pub const DescribedServer = struct {
     ///   `TlsSessionResumptionMode` parameter.
     /// * `As2Transports` indicates the transport method for the AS2 messages.
     ///   Currently, only HTTP is supported.
-    protocol_details: ?ProtocolDetails,
+    protocol_details: ?ProtocolDetails = null,
 
     /// Specifies the file transfer protocol or protocols over which your file
     /// transfer protocol client can connect to your server's endpoint. The
@@ -166,7 +166,7 @@ pub const DescribedServer = struct {
     ///   or `API_GATEWAY`.
     /// * If `Protocol` includes `AS2`, then the `EndpointType` must be `VPC`, and
     ///   domain must be Amazon S3.
-    protocols: ?[]const Protocol,
+    protocols: ?[]const Protocol = null,
 
     /// Specifies whether or not performance for your Amazon S3 directories is
     /// optimized.
@@ -178,14 +178,14 @@ pub const DescribedServer = struct {
     /// enable this option, you would then need to explicitly set the
     /// `HomeDirectoryMapEntry` `Type` to `FILE` if you want a mapping to have a
     /// file target.
-    s3_storage_options: ?S3StorageOptions,
+    s3_storage_options: ?S3StorageOptions = null,
 
     /// Specifies the name of the security policy for the server.
-    security_policy_name: ?[]const u8,
+    security_policy_name: ?[]const u8 = null,
 
     /// Specifies the unique system-assigned identifier for a server that you
     /// instantiate.
-    server_id: ?[]const u8,
+    server_id: ?[]const u8 = null,
 
     /// The condition of the server that was described. A value of `ONLINE`
     /// indicates that the server can accept jobs and transfer files. A `State`
@@ -196,7 +196,7 @@ pub const DescribedServer = struct {
     /// intermediate state, either not fully able to respond, or not fully offline.
     /// The values of `START_FAILED` or `STOP_FAILED` can indicate an error
     /// condition.
-    state: ?State,
+    state: ?State = null,
 
     /// Specifies the log groups to which your server logs are sent.
     ///
@@ -213,15 +213,15 @@ pub const DescribedServer = struct {
     ///
     /// `update-server --server-id s-1234567890abcdef0
     /// --structured-log-destinations`
-    structured_log_destinations: ?[]const []const u8,
+    structured_log_destinations: ?[]const []const u8 = null,
 
     /// Specifies the key-value pairs that you can use to search for and group
     /// servers that were assigned to the server that was described.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// Specifies the number of users that are assigned to a server you specified
     /// with the `ServerId`.
-    user_count: ?i32,
+    user_count: ?i32 = null,
 
     /// Specifies the workflow ID for the workflow to assign and the execution role
     /// that's used for executing the workflow.
@@ -230,7 +230,7 @@ pub const DescribedServer = struct {
     /// `WorkflowDetails` can also contain a workflow ID (and execution role) for a
     /// workflow to execute on partial upload. A partial upload occurs when the
     /// server session disconnects while the file is still being uploaded.
-    workflow_details: ?WorkflowDetails,
+    workflow_details: ?WorkflowDetails = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

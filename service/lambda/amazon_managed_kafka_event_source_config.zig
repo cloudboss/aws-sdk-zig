@@ -8,10 +8,10 @@ pub const AmazonManagedKafkaEventSourceConfig = struct {
     /// event source mapping with the consumer group ID specified, you cannot update
     /// this value. For more information, see [Customizable consumer group
     /// ID](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id).
-    consumer_group_id: ?[]const u8,
+    consumer_group_id: ?[]const u8 = null,
 
     /// Specific configuration settings for a Kafka schema registry.
-    schema_registry_config: ?KafkaSchemaRegistryConfig,
+    schema_registry_config: ?KafkaSchemaRegistryConfig = null,
 
     pub const json_field_names = .{
         .consumer_group_id = "ConsumerGroupId",

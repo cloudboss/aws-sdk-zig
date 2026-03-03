@@ -9,19 +9,19 @@ pub const SourceDescription = struct {
     /// Details about a database used as the source for a Firehose stream.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    database_source_description: ?DatabaseSourceDescription,
+    database_source_description: ?DatabaseSourceDescription = null,
 
     /// Details about Direct PUT used as the source for a Firehose stream.
-    direct_put_source_description: ?DirectPutSourceDescription,
+    direct_put_source_description: ?DirectPutSourceDescription = null,
 
     /// The KinesisStreamSourceDescription value for the source Kinesis
     /// data stream.
-    kinesis_stream_source_description: ?KinesisStreamSourceDescription,
+    kinesis_stream_source_description: ?KinesisStreamSourceDescription = null,
 
     /// The configuration description for the Amazon MSK cluster to be used as the
     /// source for a delivery
     /// stream.
-    msk_source_description: ?MSKSourceDescription,
+    msk_source_description: ?MSKSourceDescription = null,
 
     pub const json_field_names = .{
         .database_source_description = "DatabaseSourceDescription",

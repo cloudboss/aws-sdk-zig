@@ -10,7 +10,7 @@ pub const SchedulingPolicyDetail = struct {
     arn: []const u8,
 
     /// The fair-share scheduling policy details.
-    fairshare_policy: ?FairsharePolicy,
+    fairshare_policy: ?FairsharePolicy = null,
 
     /// The name of the fair-share scheduling policy.
     name: []const u8,
@@ -22,7 +22,7 @@ pub const SchedulingPolicyDetail = struct {
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
     /// in
     /// *Amazon Web Services General Reference*.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

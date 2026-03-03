@@ -5,11 +5,11 @@ pub const InventoryRetrievalJobInput = struct {
     /// created before this date. This value should be a string in the ISO 8601 date
     /// format, for
     /// example `2013-03-20T17:03:43Z`.
-    end_date: ?[]const u8,
+    end_date: ?[]const u8 = null,
 
     /// Specifies the maximum number of inventory items returned per vault inventory
     /// retrieval request. Valid values are greater than or equal to 1.
-    limit: ?[]const u8,
+    limit: ?[]const u8 = null,
 
     /// An opaque string that represents where to continue pagination of the vault
     /// inventory
@@ -17,14 +17,14 @@ pub const InventoryRetrievalJobInput = struct {
     /// request to obtain additional inventory items. If there are no more inventory
     /// items, this
     /// value is `null`.
-    marker: ?[]const u8,
+    marker: ?[]const u8 = null,
 
     /// The start of the date range in UTC for vault inventory retrieval that
     /// includes
     /// archives created on or after this date. This value should be a string in the
     /// ISO 8601 date
     /// format, for example `2013-03-20T17:03:43Z`.
-    start_date: ?[]const u8,
+    start_date: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .end_date = "EndDate",

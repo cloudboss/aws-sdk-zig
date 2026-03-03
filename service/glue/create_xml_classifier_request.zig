@@ -14,7 +14,7 @@ pub const CreateXMLClassifierRequest = struct {
     /// with a closing tag
     /// (for example, `` is okay, but
     /// `` is not).
-    row_tag: ?[]const u8,
+    row_tag: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .classification = "Classification",

@@ -15,11 +15,11 @@ pub const ExportJobRequest = struct {
     /// The identifier for the segment to export endpoint definitions from. If you
     /// don't specify this value, Amazon Pinpoint exports definitions for all the
     /// endpoints that are associated with the application.
-    segment_id: ?[]const u8,
+    segment_id: ?[]const u8 = null,
 
     /// The version of the segment to export endpoint definitions from, if
     /// specified.
-    segment_version: ?i32,
+    segment_version: ?i32 = null,
 
     pub const json_field_names = .{
         .role_arn = "RoleArn",

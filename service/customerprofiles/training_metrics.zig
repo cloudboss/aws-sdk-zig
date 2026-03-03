@@ -5,10 +5,10 @@ const aws = @import("aws");
 pub const TrainingMetrics = struct {
     /// A collection of performance metrics and statistics from the training
     /// process.
-    metrics: ?[]const aws.map.MapEntry(f64),
+    metrics: ?[]const aws.map.MapEntry(f64) = null,
 
     /// The timestamp when these training metrics were recorded.
-    time: ?i64,
+    time: ?i64 = null,
 
     pub const json_field_names = .{
         .metrics = "Metrics",

@@ -26,7 +26,7 @@ pub const FairsharePolicy = struct {
     /// two fair share identifiers, and 1.56% if there are three share identifiers.
     ///
     /// The minimum value is 0 and the maximum value is 99.
-    compute_reservation: ?i32,
+    compute_reservation: ?i32 = null,
 
     /// The amount of time (in seconds) to use to calculate a fair-share percentage
     /// for each
@@ -41,13 +41,13 @@ pub const FairsharePolicy = struct {
     /// or a large difference in job count or job run times between share
     /// identifiers, and the allocation
     /// of resources doesn't meet your needs.
-    share_decay_seconds: ?i32,
+    share_decay_seconds: ?i32 = null,
 
     /// An array of `SharedIdentifier` objects that contain the weights for the
     /// share identifiers for the fair-share policy. Share identifiers that aren't
     /// included have a
     /// default weight of `1.0`.
-    share_distribution: ?[]const ShareAttributes,
+    share_distribution: ?[]const ShareAttributes = null,
 
     pub const json_field_names = .{
         .compute_reservation = "computeReservation",

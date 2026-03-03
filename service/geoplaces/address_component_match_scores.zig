@@ -24,7 +24,7 @@ pub const AddressComponentMatchScores = struct {
     /// Name of the streets in the intersection.
     ///
     /// Example: `["Friedrichstraße","Unter den Linden"]`
-    intersection: ?[]const f64,
+    intersection: ?[]const f64 = null,
 
     /// The city or locality results should be present in.
     ///
@@ -45,7 +45,7 @@ pub const AddressComponentMatchScores = struct {
     ///
     /// Coverage for this functionality is available in the following countries:
     /// AUS, AUT, BRA, CAN, ESP, FRA, GBR, IDN, IND, NZL, TUR, TWN, USA.
-    secondary_address_components: ?[]const SecondaryAddressComponentMatchScore,
+    secondary_address_components: ?[]const SecondaryAddressComponentMatchScore = null,
 
     /// Name of sub-block.
     ///

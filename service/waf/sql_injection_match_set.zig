@@ -19,7 +19,7 @@ const SqlInjectionMatchTuple = @import("sql_injection_match_tuple.zig").SqlInjec
 /// request to be considered a match.
 pub const SqlInjectionMatchSet = struct {
     /// The name, if any, of the `SqlInjectionMatchSet`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A unique identifier for a `SqlInjectionMatchSet`. You use
     /// `SqlInjectionMatchSetId` to get information about a

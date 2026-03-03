@@ -6,7 +6,7 @@ pub const NotificationConfig = struct {
     /// An Amazon Resource Name (ARN) for an Amazon Simple Notification Service
     /// (Amazon SNS) topic. Run
     /// Command pushes notifications about command status changes to this topic.
-    notification_arn: ?[]const u8,
+    notification_arn: ?[]const u8 = null,
 
     /// The different events for which you can receive notifications. To learn more
     /// about these
@@ -14,7 +14,7 @@ pub const NotificationConfig = struct {
     /// changes using Amazon SNS
     /// notifications](https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html) in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    notification_events: ?[]const NotificationEvent,
+    notification_events: ?[]const NotificationEvent = null,
 
     /// The type of notification.
     ///
@@ -23,7 +23,7 @@ pub const NotificationConfig = struct {
     /// * `Invocation`: For commands sent to multiple managed nodes, receive
     ///   notification
     /// on a per-node basis when the status of a command changes.
-    notification_type: ?NotificationType,
+    notification_type: ?NotificationType = null,
 
     pub const json_field_names = .{
         .notification_arn = "NotificationArn",

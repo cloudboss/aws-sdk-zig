@@ -3,7 +3,7 @@ const RegisteredUserDashboardFeatureConfigurations = @import("registered_user_da
 /// Information about the dashboard you want to embed.
 pub const RegisteredUserDashboardEmbeddingConfiguration = struct {
     /// The feature configurations of an embbedded Amazon Quick Sight dashboard.
-    feature_configurations: ?RegisteredUserDashboardFeatureConfigurations,
+    feature_configurations: ?RegisteredUserDashboardFeatureConfigurations = null,
 
     /// The dashboard ID for the dashboard that you want the user to see first. This
     /// ID is

@@ -3,10 +3,10 @@ const ProductCodeMode = @import("product_code_mode.zig").ProductCodeMode;
 /// Properties of a product code associated with a volume.
 pub const ProductCode = struct {
     /// Id of a product code associated with a volume.
-    product_code_id: ?[]const u8,
+    product_code_id: ?[]const u8 = null,
 
     /// Mode of a product code associated with a volume.
-    product_code_mode: ?ProductCodeMode,
+    product_code_mode: ?ProductCodeMode = null,
 
     pub const json_field_names = .{
         .product_code_id = "productCodeId",

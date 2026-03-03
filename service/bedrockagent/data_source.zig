@@ -10,7 +10,7 @@ pub const DataSource = struct {
     created_at: i64,
 
     /// The data deletion policy for the data source.
-    data_deletion_policy: ?DataDeletionPolicy,
+    data_deletion_policy: ?DataDeletionPolicy = null,
 
     /// The connection configuration for the data source.
     data_source_configuration: DataSourceConfiguration,
@@ -19,10 +19,10 @@ pub const DataSource = struct {
     data_source_id: []const u8,
 
     /// The description of the data source.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The detailed reasons on the failure to delete a data source.
-    failure_reasons: ?[]const []const u8,
+    failure_reasons: ?[]const []const u8 = null,
 
     /// The unique identifier of the knowledge base to which the data source
     /// belongs.
@@ -32,7 +32,7 @@ pub const DataSource = struct {
     name: []const u8,
 
     /// Contains details about the configuration of the server-side encryption.
-    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration,
+    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration = null,
 
     /// The status of the data source. The following statuses are possible:
     ///
@@ -45,7 +45,7 @@ pub const DataSource = struct {
     updated_at: i64,
 
     /// Contains details about how to ingest the documents in the data source.
-    vector_ingestion_configuration: ?VectorIngestionConfiguration,
+    vector_ingestion_configuration: ?VectorIngestionConfiguration = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

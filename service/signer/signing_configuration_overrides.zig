@@ -8,12 +8,12 @@ pub const SigningConfigurationOverrides = struct {
     /// A specified override of the default encryption algorithm that is used in a
     /// code-signing
     /// job.
-    encryption_algorithm: ?EncryptionAlgorithm,
+    encryption_algorithm: ?EncryptionAlgorithm = null,
 
     /// A specified override of the default hash algorithm that is used in a
     /// code-signing
     /// job.
-    hash_algorithm: ?HashAlgorithm,
+    hash_algorithm: ?HashAlgorithm = null,
 
     pub const json_field_names = .{
         .encryption_algorithm = "encryptionAlgorithm",

@@ -19,7 +19,7 @@ pub const PortalProductSummary = struct {
 
     /// The collection of tags. Each tag element is associated with a given
     /// resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .description = "Description",

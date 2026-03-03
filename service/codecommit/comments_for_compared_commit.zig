@@ -5,34 +5,34 @@ const Location = @import("location.zig").Location;
 pub const CommentsForComparedCommit = struct {
     /// The full blob ID of the commit used to establish the after of the
     /// comparison.
-    after_blob_id: ?[]const u8,
+    after_blob_id: ?[]const u8 = null,
 
     /// The full commit ID of the commit used to establish the after of the
     /// comparison.
-    after_commit_id: ?[]const u8,
+    after_commit_id: ?[]const u8 = null,
 
     /// The full blob ID of the commit used to establish the before of the
     /// comparison.
-    before_blob_id: ?[]const u8,
+    before_blob_id: ?[]const u8 = null,
 
     /// The full commit ID of the commit used to establish the before of the
     /// comparison.
-    before_commit_id: ?[]const u8,
+    before_commit_id: ?[]const u8 = null,
 
     /// An array of comment objects. Each comment object contains information about
     /// a comment on the comparison
     /// between commits.
-    comments: ?[]const Comment,
+    comments: ?[]const Comment = null,
 
     /// Location information about the comment on the comparison, including the file
     /// name,
     /// line number, and whether the version of the file where the comment was made
     /// is BEFORE or
     /// AFTER.
-    location: ?Location,
+    location: ?Location = null,
 
     /// The name of the repository that contains the compared commits.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .after_blob_id = "afterBlobId",

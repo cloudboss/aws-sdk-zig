@@ -5,7 +5,7 @@ pub const AppBundle = struct {
 
     /// The Amazon Resource Name (ARN) of the Key Management Service (KMS) key
     /// used to encrypt the application data.
-    customer_managed_key_arn: ?[]const u8,
+    customer_managed_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

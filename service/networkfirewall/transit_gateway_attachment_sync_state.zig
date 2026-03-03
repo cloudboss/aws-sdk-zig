@@ -6,7 +6,7 @@ const TransitGatewayAttachmentStatus = @import("transit_gateway_attachment_statu
 /// changes.
 pub const TransitGatewayAttachmentSyncState = struct {
     /// The unique identifier of the transit gateway attachment.
-    attachment_id: ?[]const u8,
+    attachment_id: ?[]const u8 = null,
 
     /// A message providing additional information about the current status,
     /// particularly useful when the transit gateway attachment is in a non-`READY`
@@ -35,7 +35,7 @@ pub const TransitGatewayAttachmentSyncState = struct {
     /// For information about troubleshooting endpoint failures, see
     /// [Troubleshooting firewall endpoint
     /// failures](https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html) in the *Network Firewall Developer Guide*.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The current status of the transit gateway attachment.
     ///
@@ -58,7 +58,7 @@ pub const TransitGatewayAttachmentSyncState = struct {
     /// * `REJECTING` - The attachment is in the process of being rejected
     ///
     /// * `REJECTED` - The attachment has been rejected
-    transit_gateway_attachment_status: ?TransitGatewayAttachmentStatus,
+    transit_gateway_attachment_status: ?TransitGatewayAttachmentStatus = null,
 
     pub const json_field_names = .{
         .attachment_id = "AttachmentId",

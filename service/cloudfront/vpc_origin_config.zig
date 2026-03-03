@@ -6,7 +6,7 @@ pub const VpcOriginConfig = struct {
     ///
     /// For more information, see [Keep-alive timeout (custom origins
     /// only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.
-    origin_keepalive_timeout: ?i32,
+    origin_keepalive_timeout: ?i32 = null,
 
     /// Specifies how long, in seconds, CloudFront waits for a response from the
     /// origin. This is also known as the *origin response timeout*. The minimum
@@ -15,10 +15,10 @@ pub const VpcOriginConfig = struct {
     ///
     /// For more information, see [Response
     /// timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.
-    origin_read_timeout: ?i32,
+    origin_read_timeout: ?i32 = null,
 
     /// The account ID of the Amazon Web Services account that owns the VPC origin.
-    owner_account_id: ?[]const u8,
+    owner_account_id: ?[]const u8 = null,
 
     /// The VPC origin ID.
     vpc_origin_id: []const u8,

@@ -4,10 +4,10 @@ const AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesL
 /// Describes a launch template and overrides for a mixed instances policy.
 pub const AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails = struct {
     /// The launch template to use for a mixed instances policy.
-    launch_template_specification: ?AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification,
+    launch_template_specification: ?AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification = null,
 
     /// Property values to use to override the values in the launch template.
-    overrides: ?[]const AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails,
+    overrides: ?[]const AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails = null,
 
     pub const json_field_names = .{
         .launch_template_specification = "LaunchTemplateSpecification",

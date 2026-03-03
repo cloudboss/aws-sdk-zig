@@ -8,7 +8,7 @@ pub const IpPermission = struct {
     /// If the protocol is TCP or UDP, this is the start of the port range.
     /// If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP
     /// types).
-    from_port: ?i32,
+    from_port: ?i32 = null,
 
     /// The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`)
     /// or number (see [Protocol
@@ -21,24 +21,24 @@ pub const IpPermission = struct {
     /// `udp`, and `icmp`, you must specify a port range. For `icmpv6`,
     /// the port range is optional; if you omit the port range, traffic for all
     /// types and codes is allowed.
-    ip_protocol: ?[]const u8,
+    ip_protocol: ?[]const u8 = null,
 
     /// The IPv4 address ranges.
-    ip_ranges: ?[]const IpRange,
+    ip_ranges: ?[]const IpRange = null,
 
     /// The IPv6 address ranges.
-    ipv_6_ranges: ?[]const Ipv6Range,
+    ipv_6_ranges: ?[]const Ipv6Range = null,
 
     /// The prefix list IDs.
-    prefix_list_ids: ?[]const PrefixListId,
+    prefix_list_ids: ?[]const PrefixListId = null,
 
     /// If the protocol is TCP or UDP, this is the end of the port range.
     /// If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP
     /// codes).
     /// If the start port is -1 (all ICMP types), then the end port must be -1 (all
     /// ICMP codes).
-    to_port: ?i32,
+    to_port: ?i32 = null,
 
     /// The security group and Amazon Web Services account ID pairs.
-    user_id_group_pairs: ?[]const UserIdGroupPair,
+    user_id_group_pairs: ?[]const UserIdGroupPair = null,
 };

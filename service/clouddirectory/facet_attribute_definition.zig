@@ -8,13 +8,13 @@ const FacetAttributeType = @import("facet_attribute_type.zig").FacetAttributeTyp
 /// References](https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html) for more information.
 pub const FacetAttributeDefinition = struct {
     /// The default value of the attribute (if configured).
-    default_value: ?TypedAttributeValue,
+    default_value: ?TypedAttributeValue = null,
 
     /// Whether the attribute is mutable or not.
     is_immutable: bool = false,
 
     /// Validation rules attached to the attribute definition.
-    rules: ?[]const aws.map.MapEntry(Rule),
+    rules: ?[]const aws.map.MapEntry(Rule) = null,
 
     /// The type of the attribute.
     @"type": FacetAttributeType,

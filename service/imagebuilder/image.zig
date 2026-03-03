@@ -38,7 +38,7 @@ pub const Image = struct {
     ///
     /// * Build version ARNs have all four nodes, and point to a specific build for
     ///   a specific version of an object.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Indicates the type of build that created this image. The build can be
     /// initiated in the
@@ -56,91 +56,91 @@ pub const Image = struct {
     ///
     /// * **IMPORT_ISO** – An ISO disk import created
     /// the image.
-    build_type: ?BuildType,
+    build_type: ?BuildType = null,
 
     /// For container images, this is the container recipe that Image Builder used
     /// to create the
     /// image. For images that distribute an AMI, this is empty.
-    container_recipe: ?ContainerRecipe,
+    container_recipe: ?ContainerRecipe = null,
 
     /// The date on which Image Builder created this image.
-    date_created: ?[]const u8,
+    date_created: ?[]const u8 = null,
 
     /// The time when deprecation occurs for an image resource. This can be a past
     /// or future date.
-    deprecation_time: ?i64,
+    deprecation_time: ?i64 = null,
 
     /// The distribution configuration that Image Builder used to create this image.
-    distribution_configuration: ?DistributionConfiguration,
+    distribution_configuration: ?DistributionConfiguration = null,
 
     /// Indicates whether Image Builder collects additional information about the
     /// image, such as
     /// the operating system (OS) version and package list.
-    enhanced_image_metadata_enabled: ?bool,
+    enhanced_image_metadata_enabled: ?bool = null,
 
     /// The name or Amazon Resource Name (ARN) for the IAM role you create that
     /// grants
     /// Image Builder access to perform workflow actions.
-    execution_role: ?[]const u8,
+    execution_role: ?[]const u8 = null,
 
     /// For images that distribute an AMI, this is the image recipe that Image
     /// Builder used to
     /// create the image. For container images, this is empty.
-    image_recipe: ?ImageRecipe,
+    image_recipe: ?ImageRecipe = null,
 
     /// Contains settings for vulnerability scans.
-    image_scanning_configuration: ?ImageScanningConfiguration,
+    image_scanning_configuration: ?ImageScanningConfiguration = null,
 
     /// The origin of the base image that Image Builder used to build this image.
-    image_source: ?ImageSource,
+    image_source: ?ImageSource = null,
 
     /// The image tests that ran when that Image Builder created this image.
-    image_tests_configuration: ?ImageTestsConfiguration,
+    image_tests_configuration: ?ImageTestsConfiguration = null,
 
     /// The infrastructure that Image Builder used to create this image.
-    infrastructure_configuration: ?InfrastructureConfiguration,
+    infrastructure_configuration: ?InfrastructureConfiguration = null,
 
     /// Identifies the last runtime instance of the lifecycle policy to take action
     /// on the image.
-    lifecycle_execution_id: ?[]const u8,
+    lifecycle_execution_id: ?[]const u8 = null,
 
     /// The logging configuration that's defined for the image. Image Builder uses
     /// the defined settings
     /// to direct execution log output during image creation.
-    logging_configuration: ?ImageLoggingConfiguration,
+    logging_configuration: ?ImageLoggingConfiguration = null,
 
     /// The name of the image.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The operating system version for instances that launch from this image. For
     /// example,
     /// Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
-    os_version: ?[]const u8,
+    os_version: ?[]const u8 = null,
 
     /// The output resources that Image Builder produces for this image.
-    output_resources: ?OutputResources,
+    output_resources: ?OutputResources = null,
 
     /// The image operating system platform, such as Linux or Windows.
-    platform: ?Platform,
+    platform: ?Platform = null,
 
     /// Contains information about the current state of scans for this image.
-    scan_state: ?ImageScanState,
+    scan_state: ?ImageScanState = null,
 
     /// The Amazon Resource Name (ARN) of the image pipeline that created this
     /// image.
-    source_pipeline_arn: ?[]const u8,
+    source_pipeline_arn: ?[]const u8 = null,
 
     /// The name of the image pipeline that created this image.
-    source_pipeline_name: ?[]const u8,
+    source_pipeline_name: ?[]const u8 = null,
 
     /// The state of the image.
-    state: ?ImageState,
+    state: ?ImageState = null,
 
     /// The tags that apply to this image.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies whether this image produces an AMI or a container image.
-    @"type": ?ImageType,
+    @"type": ?ImageType = null,
 
     /// The semantic version of the image.
     ///
@@ -166,10 +166,10 @@ pub const Image = struct {
     /// recipe. When you use a wildcard in any node, all nodes to the right of the
     /// first wildcard must also be
     /// wildcards.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     /// Contains the build and test workflows that are associated with the image.
-    workflows: ?[]const WorkflowConfiguration,
+    workflows: ?[]const WorkflowConfiguration = null,
 
     pub const json_field_names = .{
         .arn = "arn",

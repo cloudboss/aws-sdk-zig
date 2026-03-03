@@ -22,7 +22,7 @@ pub const MediaConcurrency = struct {
     /// example, this allows you to offer an agent a different contact from another
     /// channel when they are currently working
     /// with a contact from a Voice channel.
-    cross_channel_behavior: ?CrossChannelBehavior,
+    cross_channel_behavior: ?CrossChannelBehavior = null,
 
     pub const json_field_names = .{
         .channel = "Channel",

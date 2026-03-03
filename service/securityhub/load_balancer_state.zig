@@ -7,10 +7,10 @@ pub const LoadBalancerState = struct {
     /// active.
     ///
     /// If the load balancer could not be set up, its state is failed.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// A description of the state.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

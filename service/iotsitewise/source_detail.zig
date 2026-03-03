@@ -3,7 +3,7 @@ const KendraSourceDetail = @import("kendra_source_detail.zig").KendraSourceDetai
 /// The details of the dataset source associated with the dataset.
 pub const SourceDetail = struct {
     /// Contains details about the Kendra dataset source.
-    kendra: ?KendraSourceDetail,
+    kendra: ?KendraSourceDetail = null,
 
     pub const json_field_names = .{
         .kendra = "kendra",

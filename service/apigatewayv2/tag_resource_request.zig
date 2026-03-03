@@ -7,7 +7,7 @@ pub const TagResourceRequest = struct {
 
     /// The collection of tags. Each tag element is associated with a given
     /// resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .resource_arn = "ResourceArn",

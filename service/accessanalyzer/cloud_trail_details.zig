@@ -10,7 +10,7 @@ pub const CloudTrailDetails = struct {
     /// CloudTrail events. Events with a timestamp after this time are not
     /// considered to generate a policy. If this is not included in the request, the
     /// default value is the current time.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The start of the time range for which IAM Access Analyzer reviews your
     /// CloudTrail events. Events with a timestamp before this time are not

@@ -14,25 +14,25 @@ pub const UpdateOntapVolumeConfiguration = struct {
     /// specified tags are copied to backups. If you specify one or more tags when
     /// creating a user-initiated
     /// backup, no tags are copied from the volume, regardless of this value.
-    copy_tags_to_backups: ?bool,
+    copy_tags_to_backups: ?bool = null,
 
     /// Specifies the location in the SVM's namespace where the volume is mounted.
     /// The `JunctionPath` must have a leading forward slash, such as `/vol3`.
-    junction_path: ?[]const u8,
+    junction_path: ?[]const u8 = null,
 
     /// The security style for the volume, which can be `UNIX`,
     /// `NTFS`, or `MIXED`.
-    security_style: ?SecurityStyle,
+    security_style: ?SecurityStyle = null,
 
     /// The configured size of the volume, in bytes.
-    size_in_bytes: ?i64,
+    size_in_bytes: ?i64 = null,
 
     /// Specifies the size of the volume in megabytes.
-    size_in_megabytes: ?i32,
+    size_in_megabytes: ?i32 = null,
 
     /// The configuration object for updating the SnapLock configuration of an FSx
     /// for ONTAP SnapLock volume.
-    snaplock_configuration: ?UpdateSnaplockConfiguration,
+    snaplock_configuration: ?UpdateSnaplockConfiguration = null,
 
     /// Specifies the snapshot policy for the volume. There are three built-in
     /// snapshot policies:
@@ -57,14 +57,14 @@ pub const UpdateOntapVolumeConfiguration = struct {
     /// For more information, see [Snapshot
     /// policies](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies)
     /// in the *Amazon FSx for NetApp ONTAP User Guide*.
-    snapshot_policy: ?[]const u8,
+    snapshot_policy: ?[]const u8 = null,
 
     /// Default is `false`. Set to true to enable the deduplication,
     /// compression, and compaction storage efficiency features on the volume.
-    storage_efficiency_enabled: ?bool,
+    storage_efficiency_enabled: ?bool = null,
 
     /// Update the volume's data tiering policy.
-    tiering_policy: ?TieringPolicy,
+    tiering_policy: ?TieringPolicy = null,
 
     pub const json_field_names = .{
         .copy_tags_to_backups = "CopyTagsToBackups",

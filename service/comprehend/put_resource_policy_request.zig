@@ -4,7 +4,7 @@ pub const PutResourcePolicyRequest = struct {
     /// you are creating a new policy that has no prior version, don't use this
     /// parameter. Amazon
     /// Comprehend creates the revision ID for you.
-    policy_revision_id: ?[]const u8,
+    policy_revision_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the custom model to attach the policy to.
     resource_arn: []const u8,

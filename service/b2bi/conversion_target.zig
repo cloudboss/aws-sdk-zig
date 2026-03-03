@@ -5,18 +5,18 @@ const OutputSampleFileSource = @import("output_sample_file_source.zig").OutputSa
 
 /// Provide a sample of what the output of the transformation should look like.
 pub const ConversionTarget = struct {
-    advanced_options: ?AdvancedOptions,
+    advanced_options: ?AdvancedOptions = null,
 
     /// Currently, only X12 format is supported.
     file_format: ConversionTargetFormat,
 
     /// A structure that contains the formatting details for the conversion target.
-    format_details: ?ConversionTargetFormatDetails,
+    format_details: ?ConversionTargetFormatDetails = null,
 
     /// Customer uses this to provide a sample on what should file look like after
     /// conversion
     /// X12 EDI use case around this would be discovering the file syntax
-    output_sample_file: ?OutputSampleFileSource,
+    output_sample_file: ?OutputSampleFileSource = null,
 
     pub const json_field_names = .{
         .advanced_options = "advancedOptions",

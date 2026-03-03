@@ -5,25 +5,25 @@ const AssociationStateReason = @import("association_state_reason.zig").Associati
 /// Describes the association between an application and a WorkSpace resource.
 pub const WorkspaceResourceAssociation = struct {
     /// The identifier of the associated resource.
-    associated_resource_id: ?[]const u8,
+    associated_resource_id: ?[]const u8 = null,
 
     /// The resource types of the associated resource.
-    associated_resource_type: ?WorkSpaceAssociatedResourceType,
+    associated_resource_type: ?WorkSpaceAssociatedResourceType = null,
 
     /// The time the association is created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The time the association status was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The status of the WorkSpace resource association.
-    state: ?AssociationState,
+    state: ?AssociationState = null,
 
     /// The reason the association deployment failed.
-    state_reason: ?AssociationStateReason,
+    state_reason: ?AssociationStateReason = null,
 
     /// The identifier of the WorkSpace.
-    workspace_id: ?[]const u8,
+    workspace_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .associated_resource_id = "AssociatedResourceId",

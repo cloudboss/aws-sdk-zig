@@ -1,10 +1,10 @@
 /// Information about a pipeline.
 pub const PipelineMetadata = struct {
     /// The date and time the pipeline was created, in timestamp format.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the pipeline.
-    pipeline_arn: ?[]const u8,
+    pipeline_arn: ?[]const u8 = null,
 
     /// The date and time that polling for source changes (periodic checks) was
     /// stopped for
@@ -26,10 +26,10 @@ pub const PipelineMetadata = struct {
     /// polling
     /// pipelines to use event-based change
     /// detection](https://docs.aws.amazon.com/codepipeline/latest/userguide/update-change-detection.html) in the *CodePipeline User Guide*.
-    polling_disabled_at: ?i64,
+    polling_disabled_at: ?i64 = null,
 
     /// The date and time the pipeline was last updated, in timestamp format.
-    updated: ?i64,
+    updated: ?i64 = null,
 
     pub const json_field_names = .{
         .created = "created",

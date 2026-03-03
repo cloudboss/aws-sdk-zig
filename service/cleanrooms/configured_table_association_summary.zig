@@ -5,7 +5,7 @@ const ConfiguredTableAssociationAnalysisRuleType = @import("configured_table_ass
 pub const ConfiguredTableAssociationSummary = struct {
     /// The analysis rule types that are associated with the configured table
     /// associations in this summary.
-    analysis_rule_types: ?[]const ConfiguredTableAssociationAnalysisRuleType,
+    analysis_rule_types: ?[]const ConfiguredTableAssociationAnalysisRuleType = null,
 
     /// The unique ARN for the configured table association.
     arn: []const u8,

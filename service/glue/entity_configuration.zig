@@ -8,11 +8,11 @@ const SourceConfiguration = @import("source_configuration.zig").SourceConfigurat
 pub const EntityConfiguration = struct {
     /// The schema definition for this entity, including field names, types, and
     /// other metadata that describes the structure of the data.
-    schema: ?[]const aws.map.MapEntry(FieldDefinition),
+    schema: ?[]const aws.map.MapEntry(FieldDefinition) = null,
 
     /// The source configuration that defines how to make requests to access this
     /// entity's data through the REST API.
-    source_configuration: ?SourceConfiguration,
+    source_configuration: ?SourceConfiguration = null,
 
     pub const json_field_names = .{
         .schema = "Schema",

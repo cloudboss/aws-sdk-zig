@@ -7,10 +7,10 @@ const TableRecordExpirationStatus = @import("table_record_expiration_status.zig"
 /// the record expiration settings for the table.
 pub const TableRecordExpirationConfigurationValue = struct {
     /// The expiration settings for records in the table.
-    settings: ?TableRecordExpirationSettings,
+    settings: ?TableRecordExpirationSettings = null,
 
     /// The status of the expiration settings for records in the table.
-    status: ?TableRecordExpirationStatus,
+    status: ?TableRecordExpirationStatus = null,
 
     pub const json_field_names = .{
         .settings = "settings",

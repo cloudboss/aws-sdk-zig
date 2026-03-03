@@ -4,7 +4,7 @@ const ReferenceLinePatternType = @import("reference_line_pattern_type.zig").Refe
 /// line.
 pub const ReferenceLineStyleConfiguration = struct {
     /// The hex color of the reference line.
-    color: ?[]const u8,
+    color: ?[]const u8 = null,
 
     /// The pattern type of the line style. Choose one of the following options:
     ///
@@ -13,7 +13,7 @@ pub const ReferenceLineStyleConfiguration = struct {
     /// * `DASHED`
     ///
     /// * `DOTTED`
-    pattern: ?ReferenceLinePatternType,
+    pattern: ?ReferenceLinePatternType = null,
 
     pub const json_field_names = .{
         .color = "Color",

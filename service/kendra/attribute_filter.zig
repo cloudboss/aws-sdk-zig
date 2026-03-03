@@ -43,56 +43,56 @@ const DocumentAttribute = @import("document_attribute.zig").DocumentAttribute;
 /// results](https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering).
 pub const AttributeFilter = struct {
     /// Performs a logical `AND` operation on all filters that you specify.
-    and_all_filters: ?[]const AttributeFilter,
+    and_all_filters: ?[]const AttributeFilter = null,
 
     /// Returns true when a document contains all of the specified document
     /// attributes/fields.
     /// This filter is only applicable to
     /// [StringListValue](https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html).
-    contains_all: ?DocumentAttribute,
+    contains_all: ?DocumentAttribute = null,
 
     /// Returns true when a document contains any of the specified document
     /// attributes/fields.
     /// This filter is only applicable to
     /// [StringListValue](https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html).
-    contains_any: ?DocumentAttribute,
+    contains_any: ?DocumentAttribute = null,
 
     /// Performs an equals operation on document attributes/fields and their values.
-    equals_to: ?DocumentAttribute,
+    equals_to: ?DocumentAttribute = null,
 
     /// Performs a greater than operation on document attributes/fields and their
     /// values. Use
     /// with the [document attribute
     /// type](https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html)
     /// `Date` or `Long`.
-    greater_than: ?DocumentAttribute,
+    greater_than: ?DocumentAttribute = null,
 
     /// Performs a greater or equals than operation on document attributes/fields
     /// and their
     /// values. Use with the [document attribute
     /// type](https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html)
     /// `Date` or `Long`.
-    greater_than_or_equals: ?DocumentAttribute,
+    greater_than_or_equals: ?DocumentAttribute = null,
 
     /// Performs a less than operation on document attributes/fields and their
     /// values. Use with
     /// the [document attribute
     /// type](https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html)
     /// `Date` or `Long`.
-    less_than: ?DocumentAttribute,
+    less_than: ?DocumentAttribute = null,
 
     /// Performs a less than or equals operation on document attributes/fields and
     /// their values.
     /// Use with the [document attribute
     /// type](https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html)
     /// `Date` or `Long`.
-    less_than_or_equals: ?DocumentAttribute,
+    less_than_or_equals: ?DocumentAttribute = null,
 
     /// Performs a logical `NOT` operation on all filters that you specify.
     not_filter: ?*AttributeFilter = null,
 
     /// Performs a logical `OR` operation on all filters that you specify.
-    or_all_filters: ?[]const AttributeFilter,
+    or_all_filters: ?[]const AttributeFilter = null,
 
     pub const json_field_names = .{
         .and_all_filters = "AndAllFilters",

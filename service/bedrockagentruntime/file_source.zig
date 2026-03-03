@@ -5,10 +5,10 @@ const FileSourceType = @import("file_source_type.zig").FileSourceType;
 /// The source file of the content contained in the wrapper object.
 pub const FileSource = struct {
     /// The data and the text of the attached files.
-    byte_content: ?ByteContentFile,
+    byte_content: ?ByteContentFile = null,
 
     /// The s3 location of the files to attach.
-    s_3_location: ?S3ObjectFile,
+    s_3_location: ?S3ObjectFile = null,
 
     /// The source type of the files to attach.
     source_type: FileSourceType,

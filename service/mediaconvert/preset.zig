@@ -5,19 +5,19 @@ const Type = @import("type.zig").Type;
 /// want MediaConvert to apply to the output during the conversion process.
 pub const Preset = struct {
     /// An identifier for this resource that is unique within all of AWS.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// An optional category you create to organize your presets.
-    category: ?[]const u8,
+    category: ?[]const u8 = null,
 
     /// The timestamp in epoch seconds for preset creation.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// An optional description you create for each preset.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The timestamp in epoch seconds when the preset was last updated.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// A name you create for each preset. Each name must be unique within your
     /// account.
@@ -28,7 +28,7 @@ pub const Preset = struct {
 
     /// A preset can be of two types: system or custom. System or built-in preset
     /// can't be modified or deleted by the user.
-    @"type": ?Type,
+    @"type": ?Type = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -6,7 +6,7 @@ pub const SchemaChangeRequestDetails = struct {
     /// of schema changes happening in the scope of this
     /// notification. This
     /// can have up to 100 entries.
-    changes: ?[]const SchemaChangeDetails,
+    changes: ?[]const SchemaChangeDetails = null,
 
     /// A
     /// date in the future when the schema change is taking effect.

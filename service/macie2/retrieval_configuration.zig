@@ -12,7 +12,7 @@ pub const RetrievalConfiguration = struct {
     /// administrator to retrieve sensitive data from an affected S3 object for a
     /// member account, the trust policy for the role in the member account must
     /// include an sts:ExternalId condition that requires this ID.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The access method that's used to retrieve sensitive data from affected S3
     /// objects. Valid values are: ASSUME_ROLE, assume an IAM role that is in the
@@ -25,7 +25,7 @@ pub const RetrievalConfiguration = struct {
     /// and Amazon Macie is allowed to assume when retrieving sensitive data from
     /// affected S3 objects for the account. This value is null if the value for
     /// retrievalMode is CALLER_CREDENTIALS.
-    role_name: ?[]const u8,
+    role_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .external_id = "externalId",

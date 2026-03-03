@@ -5,13 +5,13 @@ const ImportTaskSummaryWaves = @import("import_task_summary_waves.zig").ImportTa
 /// Import task summary.
 pub const ImportTaskSummary = struct {
     /// Import task summary applications.
-    applications: ?ImportTaskSummaryApplications,
+    applications: ?ImportTaskSummaryApplications = null,
 
     /// Import task summary servers.
-    servers: ?ImportTaskSummaryServers,
+    servers: ?ImportTaskSummaryServers = null,
 
     /// Import task summary waves.
-    waves: ?ImportTaskSummaryWaves,
+    waves: ?ImportTaskSummaryWaves = null,
 
     pub const json_field_names = .{
         .applications = "applications",

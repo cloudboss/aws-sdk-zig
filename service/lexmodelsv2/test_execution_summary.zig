@@ -7,32 +7,32 @@ const TestExecutionStatus = @import("test_execution_status.zig").TestExecutionSt
 pub const TestExecutionSummary = struct {
     /// Specifies whether the API mode for the test execution is streaming
     /// or non-streaming.
-    api_mode: ?TestExecutionApiMode,
+    api_mode: ?TestExecutionApiMode = null,
 
     /// The date and time at which the test execution was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The date and time at which the test execution was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// Contains information about the bot used for the test execution..
-    target: ?TestExecutionTarget,
+    target: ?TestExecutionTarget = null,
 
     /// The unique identifier of the test execution.
-    test_execution_id: ?[]const u8,
+    test_execution_id: ?[]const u8 = null,
 
     /// Specifies whether the data used for the test execution is written
     /// or spoken.
-    test_execution_modality: ?TestExecutionModality,
+    test_execution_modality: ?TestExecutionModality = null,
 
     /// The current status of the test execution.
-    test_execution_status: ?TestExecutionStatus,
+    test_execution_status: ?TestExecutionStatus = null,
 
     /// The unique identifier of the test set used in the test execution.
-    test_set_id: ?[]const u8,
+    test_set_id: ?[]const u8 = null,
 
     /// The name of the test set used in the test execution.
-    test_set_name: ?[]const u8,
+    test_set_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_mode = "apiMode",

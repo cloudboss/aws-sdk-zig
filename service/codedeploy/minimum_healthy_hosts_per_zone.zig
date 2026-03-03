@@ -5,7 +5,7 @@ const MinimumHealthyHostsPerZoneType = @import("minimum_healthy_hosts_per_zone_t
 pub const MinimumHealthyHostsPerZone = struct {
     /// The `type` associated with the `MinimumHealthyHostsPerZone`
     /// option.
-    @"type": ?MinimumHealthyHostsPerZoneType,
+    @"type": ?MinimumHealthyHostsPerZoneType = null,
 
     /// The `value` associated with the `MinimumHealthyHostsPerZone`
     /// option.

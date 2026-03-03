@@ -7,7 +7,7 @@ pub const DocumentSuggesterOptions = struct {
     /// prefix. With low, suggestions must differ from the specified string by no
     /// more than one character. With high, suggestions can differ by up to two
     /// characters. The default is none.
-    fuzzy_matching: ?SuggesterFuzzyMatching,
+    fuzzy_matching: ?SuggesterFuzzyMatching = null,
 
     /// An expression that computes a score for each suggestion to control how they
     /// are sorted. The scores are rounded to the nearest
@@ -19,7 +19,7 @@ pub const DocumentSuggesterOptions = struct {
     /// the name of the field or expression. If no expression is configured for the
     /// suggester, the
     /// suggestions are sorted with the closest matches listed first.
-    sort_expression: ?[]const u8,
+    sort_expression: ?[]const u8 = null,
 
     /// The name of the index field you want to use for suggestions.
     source_field: []const u8,

@@ -13,7 +13,7 @@ pub const ServiceObservabilityConfiguration = struct {
     ///
     /// Specify just the name to associate the latest revision. For example:
     /// `arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing`
-    observability_configuration_arn: ?[]const u8,
+    observability_configuration_arn: ?[]const u8 = null,
 
     /// When `true`, an observability configuration resource is associated with the
     /// service, and an `ObservabilityConfigurationArn` is

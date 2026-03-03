@@ -4,10 +4,10 @@
 /// [Bumpers](https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html).
 pub const Bumper = struct {
     /// The URL for the end bumper asset.
-    end_url: ?[]const u8,
+    end_url: ?[]const u8 = null,
 
     /// The URL for the start bumper asset.
-    start_url: ?[]const u8,
+    start_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .end_url = "EndUrl",

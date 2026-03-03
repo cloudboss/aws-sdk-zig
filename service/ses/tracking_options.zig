@@ -10,5 +10,5 @@ pub const TrackingOptions = struct {
     /// The custom subdomain that is used to redirect email recipients to the Amazon
     /// SES event
     /// tracking domain.
-    custom_redirect_domain: ?[]const u8,
+    custom_redirect_domain: ?[]const u8 = null,
 };

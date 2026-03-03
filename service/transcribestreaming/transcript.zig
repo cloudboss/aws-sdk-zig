@@ -15,7 +15,7 @@ pub const Transcript = struct {
     /// transcriptions, channel identification, partial result stabilization,
     /// language identification, and other
     /// transcription-related data.
-    results: ?[]const Result,
+    results: ?[]const Result = null,
 
     pub const json_field_names = .{
         .results = "Results",

@@ -8,7 +8,7 @@ const ECSServiceMetricName = @import("ecs_service_metric_name.zig").ECSServiceMe
 /// compare the metric data of your service against its projected metric data.
 pub const ECSServiceProjectedMetric = struct {
     /// The lower bound values for the projected metric.
-    lower_bound_values: ?[]const f64,
+    lower_bound_values: ?[]const f64 = null,
 
     /// The name of the projected metric.
     ///
@@ -19,13 +19,13 @@ pub const ECSServiceProjectedMetric = struct {
     ///
     /// * `Memory` — The percentage of memory that's
     /// currently in use on the service tasks.
-    name: ?ECSServiceMetricName,
+    name: ?ECSServiceMetricName = null,
 
     /// The timestamps of the projected metric.
-    timestamps: ?[]const i64,
+    timestamps: ?[]const i64 = null,
 
     /// The upper bound values for the projected metric.
-    upper_bound_values: ?[]const f64,
+    upper_bound_values: ?[]const f64 = null,
 
     pub const json_field_names = .{
         .lower_bound_values = "lowerBoundValues",

@@ -7,20 +7,20 @@ pub const ManagedLoginBrandingType = struct {
     /// icons. Each object must also indicate whether it is for dark mode, light
     /// mode, or
     /// browser-adaptive mode.
-    assets: ?[]const AssetType,
+    assets: ?[]const AssetType = null,
 
     /// The date and time when the item was created. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The date and time when the item was modified. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The ID of the managed login branding style.
-    managed_login_branding_id: ?[]const u8,
+    managed_login_branding_id: ?[]const u8 = null,
 
     /// A JSON file, encoded as a `Document` type, with the the settings that you
     /// want to apply to your style.
@@ -37,7 +37,7 @@ pub const ManagedLoginBrandingType = struct {
     ///
     /// * `languageSelector` (for localization, see [Managed login
     ///   localization)](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html#managed-login-localization)
-    settings: ?[]const u8,
+    settings: ?[]const u8 = null,
 
     /// When true, applies the default branding style options. This option reverts
     /// to default
@@ -50,7 +50,7 @@ pub const ManagedLoginBrandingType = struct {
     use_cognito_provided_values: bool = false,
 
     /// The user pool where the branding style is assigned.
-    user_pool_id: ?[]const u8,
+    user_pool_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .assets = "Assets",

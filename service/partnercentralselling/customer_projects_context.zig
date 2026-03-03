@@ -12,10 +12,10 @@ const EngagementCustomerProjectDetails = @import("engagement_customer_project_de
 /// targeted invitations, allowing partners to focus on specific customers and
 /// their business problems when sending Engagement invitations.
 pub const CustomerProjectsContext = struct {
-    customer: ?EngagementCustomer,
+    customer: ?EngagementCustomer = null,
 
     /// Information about the customer project associated with the Engagement.
-    project: ?EngagementCustomerProjectDetails,
+    project: ?EngagementCustomerProjectDetails = null,
 
     pub const json_field_names = .{
         .customer = "Customer",

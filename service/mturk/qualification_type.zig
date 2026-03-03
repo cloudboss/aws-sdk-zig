@@ -8,49 +8,49 @@ const QualificationTypeStatus = @import("qualification_type_status.zig").Qualifi
 pub const QualificationType = struct {
     /// The answers to the Qualification test specified in the Test
     /// parameter.
-    answer_key: ?[]const u8,
+    answer_key: ?[]const u8 = null,
 
     /// Specifies that requests for the Qualification type are
     /// granted immediately, without prompting the Worker with a
     /// Qualification test. Valid values are True | False.
-    auto_granted: ?bool,
+    auto_granted: ?bool = null,
 
     /// The Qualification integer value to use for automatically
     /// granted Qualifications, if AutoGranted is true. This is 1 by default.
-    auto_granted_value: ?i32,
+    auto_granted_value: ?i32 = null,
 
     /// The date and time the Qualification type was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A long description for the Qualification type.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Specifies whether the Qualification type is one that a user
     /// can request through the Amazon Mechanical Turk web site, such as by
     /// taking a Qualification test. This value is False for Qualifications
     /// assigned automatically by the system. Valid values are True | False.
-    is_requestable: ?bool,
+    is_requestable: ?bool = null,
 
     /// One or more words or phrases that describe theQualification
     /// type, separated by commas. The Keywords make the type easier to find
     /// using a search.
-    keywords: ?[]const u8,
+    keywords: ?[]const u8 = null,
 
     /// The name of the Qualification type. The type name is used to
     /// identify the type, and to find the type using a Qualification type
     /// search.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A unique identifier for the Qualification type. A
     /// Qualification type is given a Qualification type ID when you call the
     /// CreateQualificationType operation.
-    qualification_type_id: ?[]const u8,
+    qualification_type_id: ?[]const u8 = null,
 
     /// The status of the Qualification type. A Qualification type's
     /// status determines if users can apply to receive a Qualification of
     /// this type, and if HITs can be created with requirements based on this
     /// type. Valid values are Active | Inactive.
-    qualification_type_status: ?QualificationTypeStatus,
+    qualification_type_status: ?QualificationTypeStatus = null,
 
     /// The amount of time, in seconds, Workers must wait after
     /// taking the Qualification test before they can take it again. Workers
@@ -59,19 +59,19 @@ pub const QualificationType = struct {
     /// gradient score and they want a better score. If not specified,
     /// retries are disabled and Workers can request a Qualification only
     /// once.
-    retry_delay_in_seconds: ?i64,
+    retry_delay_in_seconds: ?i64 = null,
 
     /// The questions for a Qualification test associated with this
     /// Qualification type that a user can take to obtain a Qualification of
     /// this type. This parameter must be specified if AnswerKey is present.
     /// A Qualification type cannot have both a specified Test parameter and
     /// an AutoGranted value of true.
-    @"test": ?[]const u8,
+    @"test": ?[]const u8 = null,
 
     /// The amount of time, in seconds, given to a Worker to
     /// complete the Qualification test, beginning from the time the Worker
     /// requests the Qualification.
-    test_duration_in_seconds: ?i64,
+    test_duration_in_seconds: ?i64 = null,
 
     pub const json_field_names = .{
         .answer_key = "AnswerKey",

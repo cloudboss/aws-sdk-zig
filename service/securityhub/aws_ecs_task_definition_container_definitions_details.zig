@@ -20,129 +20,129 @@ const AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails = @import("aws_
 /// A container definition that describes a container in the task.
 pub const AwsEcsTaskDefinitionContainerDefinitionsDetails = struct {
     /// The command that is passed to the container.
-    command: ?[]const []const u8,
+    command: ?[]const []const u8 = null,
 
     /// The number of CPU units reserved for the container.
-    cpu: ?i32,
+    cpu: ?i32 = null,
 
     /// The dependencies that are defined for container startup and shutdown.
-    depends_on: ?[]const AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails,
+    depends_on: ?[]const AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails = null,
 
     /// Whether to disable networking within the container.
-    disable_networking: ?bool,
+    disable_networking: ?bool = null,
 
     /// A list of DNS search domains that are presented to the container.
-    dns_search_domains: ?[]const []const u8,
+    dns_search_domains: ?[]const []const u8 = null,
 
     /// A list of DNS servers that are presented to the container.
-    dns_servers: ?[]const []const u8,
+    dns_servers: ?[]const []const u8 = null,
 
     /// A key-value map of labels to add to the container.
-    docker_labels: ?[]const aws.map.StringMapEntry,
+    docker_labels: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of strings to provide custom labels for SELinux and AppArmor
     /// multi-level security systems.
-    docker_security_options: ?[]const []const u8,
+    docker_security_options: ?[]const []const u8 = null,
 
     /// The entry point that is passed to the container.
-    entry_point: ?[]const []const u8,
+    entry_point: ?[]const []const u8 = null,
 
     /// The environment variables to pass to a container.
-    environment: ?[]const AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails,
+    environment: ?[]const AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails = null,
 
     /// A list of files containing the environment variables to pass to a container.
-    environment_files: ?[]const AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails,
+    environment_files: ?[]const AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails = null,
 
     /// Whether the container is essential. All tasks must have at least one
     /// essential container.
-    essential: ?bool,
+    essential: ?bool = null,
 
     /// A list of hostnames and IP address mappings to append to the **/etc/hosts**
     /// file on the container.
-    extra_hosts: ?[]const AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails,
+    extra_hosts: ?[]const AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails = null,
 
     /// The FireLens configuration for the container. Specifies and configures a log
     /// router for container logs.
-    firelens_configuration: ?AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails,
+    firelens_configuration: ?AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails = null,
 
     /// The container health check command and associated configuration parameters
     /// for the container.
-    health_check: ?AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails,
+    health_check: ?AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails = null,
 
     /// The hostname to use for the container.
-    hostname: ?[]const u8,
+    hostname: ?[]const u8 = null,
 
     /// The image used to start the container.
-    image: ?[]const u8,
+    image: ?[]const u8 = null,
 
     /// If set to true, then containerized applications can be deployed that require
     /// `stdin` or a `tty` to be allocated.
-    interactive: ?bool,
+    interactive: ?bool = null,
 
     /// A list of links for the container in the form `
     /// *container_name*:*alias*
     /// `. Allows containers to communicate with each other without the need for
     /// port mappings.
-    links: ?[]const []const u8,
+    links: ?[]const []const u8 = null,
 
     /// Linux-specific modifications that are applied to the container, such as
     /// Linux kernel capabilities.
-    linux_parameters: ?AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails,
+    linux_parameters: ?AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails = null,
 
     /// The log configuration specification for the container.
-    log_configuration: ?AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails,
+    log_configuration: ?AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails = null,
 
     /// The amount (in MiB) of memory to present to the container. If the container
     /// attempts to exceed the memory specified here, the container is shut down.
     /// The total amount of memory reserved for all containers within a task must be
     /// lower than the task memory value, if one is specified.
-    memory: ?i32,
+    memory: ?i32 = null,
 
     /// The soft limit (in MiB) of memory to reserve for the container.
-    memory_reservation: ?i32,
+    memory_reservation: ?i32 = null,
 
     /// The mount points for the data volumes in the container.
-    mount_points: ?[]const AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails,
+    mount_points: ?[]const AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails = null,
 
     /// The name of the container.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The list of port mappings for the container.
-    port_mappings: ?[]const AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails,
+    port_mappings: ?[]const AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails = null,
 
     /// Whether the container is given elevated privileges on the host container
     /// instance. The elevated privileges are similar to the root user.
-    privileged: ?bool,
+    privileged: ?bool = null,
 
     /// Whether to allocate a TTY to the container.
-    pseudo_terminal: ?bool,
+    pseudo_terminal: ?bool = null,
 
     /// Whether the container is given read-only access to its root file system.
-    readonly_root_filesystem: ?bool,
+    readonly_root_filesystem: ?bool = null,
 
     /// The private repository authentication credentials to use.
-    repository_credentials: ?AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails,
+    repository_credentials: ?AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails = null,
 
     /// The type and amount of a resource to assign to a container. The only
     /// supported resource is a GPU.
-    resource_requirements: ?[]const AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails,
+    resource_requirements: ?[]const AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails = null,
 
     /// The secrets to pass to the container.
-    secrets: ?[]const AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails,
+    secrets: ?[]const AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails = null,
 
     /// The number of seconds to wait before giving up on resolving dependencies for
     /// a container.
-    start_timeout: ?i32,
+    start_timeout: ?i32 = null,
 
     /// The number of seconds to wait before the container is stopped if it doesn't
     /// shut down normally on its own.
-    stop_timeout: ?i32,
+    stop_timeout: ?i32 = null,
 
     /// A list of namespaced kernel parameters to set in the container.
-    system_controls: ?[]const AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails,
+    system_controls: ?[]const AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails = null,
 
     /// A list of ulimits to set in the container.
-    ulimits: ?[]const AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails,
+    ulimits: ?[]const AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails = null,
 
     /// The user to use inside the container.
     ///
@@ -179,13 +179,13 @@ pub const AwsEcsTaskDefinitionContainerDefinitionsDetails = struct {
     /// `:`
     /// *group*
     /// `
-    user: ?[]const u8,
+    user: ?[]const u8 = null,
 
     /// Data volumes to mount from another container.
-    volumes_from: ?[]const AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails,
+    volumes_from: ?[]const AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails = null,
 
     /// The working directory in which to run commands inside the container.
-    working_directory: ?[]const u8,
+    working_directory: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .command = "Command",

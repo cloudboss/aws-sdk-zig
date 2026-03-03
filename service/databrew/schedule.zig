@@ -3,37 +3,37 @@ const aws = @import("aws");
 /// Represents one or more dates and times when a job is to run.
 pub const Schedule = struct {
     /// The ID of the Amazon Web Services account that owns the schedule.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The date and time that the schedule was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the user who created the schedule.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The dates and times when the job is to run. For more information, see [Cron
     /// expressions](https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html)
     /// in the *Glue DataBrew Developer
     /// Guide*.
-    cron_expression: ?[]const u8,
+    cron_expression: ?[]const u8 = null,
 
     /// A list of jobs to be run, according to the schedule.
-    job_names: ?[]const []const u8,
+    job_names: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the user who last modified the schedule.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The date and time when the schedule was last modified.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The name of the schedule.
     name: []const u8,
 
     /// The Amazon Resource Name (ARN) of the schedule.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// Metadata tags that have been applied to the schedule.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

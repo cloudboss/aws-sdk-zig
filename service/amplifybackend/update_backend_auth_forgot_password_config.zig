@@ -7,15 +7,15 @@ const SmsSettings = @import("sms_settings.zig").SmsSettings;
 pub const UpdateBackendAuthForgotPasswordConfig = struct {
     /// **(DEPRECATED)** Describes which mode to use (either SMS or email) to
     /// deliver messages to app users that want to recover their password.
-    delivery_method: ?DeliveryMethod,
+    delivery_method: ?DeliveryMethod = null,
 
     /// **(DEPRECATED)** The configuration for the email sent when an app user
     /// forgets their password.
-    email_settings: ?EmailSettings,
+    email_settings: ?EmailSettings = null,
 
     /// **(DEPRECATED)** The configuration for the SMS message sent when an Amplify
     /// app user forgets their password.
-    sms_settings: ?SmsSettings,
+    sms_settings: ?SmsSettings = null,
 
     pub const json_field_names = .{
         .delivery_method = "DeliveryMethod",

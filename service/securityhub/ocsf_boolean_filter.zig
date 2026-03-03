@@ -5,9 +5,9 @@ const BooleanFilter = @import("boolean_filter.zig").BooleanFilter;
 /// OCSF.
 pub const OcsfBooleanFilter = struct {
     /// The name of the field.
-    field_name: ?OcsfBooleanField,
+    field_name: ?OcsfBooleanField = null,
 
-    filter: ?BooleanFilter,
+    filter: ?BooleanFilter = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

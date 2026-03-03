@@ -4,7 +4,7 @@ const Readiness = @import("readiness.zig").Readiness;
 /// resource.
 pub const ResourceResult = struct {
     /// The component id of the resource.
-    component_id: ?[]const u8,
+    component_id: ?[]const u8 = null,
 
     /// The time (UTC) that the resource was last checked for readiness, in ISO-8601
     /// format.
@@ -14,7 +14,7 @@ pub const ResourceResult = struct {
     readiness: Readiness,
 
     /// The Amazon Resource Name (ARN) of the resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .component_id = "ComponentId",

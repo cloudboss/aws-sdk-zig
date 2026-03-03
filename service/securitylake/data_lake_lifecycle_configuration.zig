@@ -4,10 +4,10 @@ const DataLakeLifecycleTransition = @import("data_lake_lifecycle_transition.zig"
 /// Provides lifecycle details of Amazon Security Lake object.
 pub const DataLakeLifecycleConfiguration = struct {
     /// Provides data expiration details of Amazon Security Lake object.
-    expiration: ?DataLakeLifecycleExpiration,
+    expiration: ?DataLakeLifecycleExpiration = null,
 
     /// Provides data storage transition details of Amazon Security Lake object.
-    transitions: ?[]const DataLakeLifecycleTransition,
+    transitions: ?[]const DataLakeLifecycleTransition = null,
 
     pub const json_field_names = .{
         .expiration = "expiration",

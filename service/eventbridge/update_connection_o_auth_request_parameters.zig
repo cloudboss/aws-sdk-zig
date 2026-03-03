@@ -7,19 +7,19 @@ pub const UpdateConnectionOAuthRequestParameters = struct {
     /// The URL to the authorization endpoint when OAuth is specified as the
     /// authorization
     /// type.
-    authorization_endpoint: ?[]const u8,
+    authorization_endpoint: ?[]const u8 = null,
 
     /// The
     /// client parameters to use for the connection when OAuth is specified as the
     /// authorization
     /// type.
-    client_parameters: ?UpdateConnectionOAuthClientRequestParameters,
+    client_parameters: ?UpdateConnectionOAuthClientRequestParameters = null,
 
     /// The method used to connect to the HTTP endpoint.
-    http_method: ?ConnectionOAuthHttpMethod,
+    http_method: ?ConnectionOAuthHttpMethod = null,
 
     /// The additional HTTP parameters used for the OAuth authorization request.
-    o_auth_http_parameters: ?ConnectionHttpParameters,
+    o_auth_http_parameters: ?ConnectionHttpParameters = null,
 
     pub const json_field_names = .{
         .authorization_endpoint = "AuthorizationEndpoint",

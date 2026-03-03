@@ -6,7 +6,7 @@ pub const ActionConfiguration = struct {
     action: []const u8,
 
     /// The filter configuration for the action, if any.
-    filter_configuration: ?ActionFilterConfiguration,
+    filter_configuration: ?ActionFilterConfiguration = null,
 
     pub const json_field_names = .{
         .action = "action",

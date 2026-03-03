@@ -6,7 +6,7 @@ pub const KmsConfiguration = struct {
     key_type: KeyType,
 
     /// The Amazon Resource Name (ARN) of the KMS key.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key_type = "keyType",

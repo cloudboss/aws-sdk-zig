@@ -5,7 +5,7 @@ pub const AssociatedStandard = struct {
     /// field consists of the resource portion of the
     /// Amazon Resource Name (ARN) returned for a standard in the
     /// [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API response.
-    standards_id: ?[]const u8,
+    standards_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .standards_id = "StandardsId",

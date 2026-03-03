@@ -28,5 +28,5 @@ pub const MetricStat = struct {
     /// CloudWatch supports, see the
     /// [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html)
     /// data type in the *Amazon CloudWatch API Reference*.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 };

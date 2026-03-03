@@ -3,7 +3,7 @@ const LocalizedString = @import("localized_string.zig").LocalizedString;
 /// Span computed for the requested SpanAdditionalFeatures.
 pub const RouteFerrySpan = struct {
     /// 3 letter Country code corresponding to the Span.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// Distance of the computed span. This feature doesn't split a span, but is
     /// always computed on a span split by other properties.
@@ -18,14 +18,14 @@ pub const RouteFerrySpan = struct {
     duration: i64 = 0,
 
     /// Offset in the leg geometry corresponding to the start of this span.
-    geometry_offset: ?i32,
+    geometry_offset: ?i32 = null,
 
     /// Provides an array of names of the ferry span in available languages.
-    names: ?[]const LocalizedString,
+    names: ?[]const LocalizedString = null,
 
     /// 2-3 letter Region code corresponding to the Span. This is either a province
     /// or a state.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .country = "Country",

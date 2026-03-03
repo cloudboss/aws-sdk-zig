@@ -4,13 +4,13 @@ const Fault = @import("fault.zig").Fault;
 /// Describes a failed association.
 pub const FailedCreateAssociation = struct {
     /// The association.
-    entry: ?CreateAssociationBatchRequestEntry,
+    entry: ?CreateAssociationBatchRequestEntry = null,
 
     /// The source of the failure.
-    fault: ?Fault,
+    fault: ?Fault = null,
 
     /// A description of the failure.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .entry = "Entry",

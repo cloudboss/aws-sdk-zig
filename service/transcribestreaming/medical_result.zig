@@ -15,10 +15,10 @@ pub const MedicalResult = struct {
     /// alternative may
     /// contain one or more of `Items`, `Entities`, or
     /// `Transcript`.
-    alternatives: ?[]const MedicalAlternative,
+    alternatives: ?[]const MedicalAlternative = null,
 
     /// Indicates the channel identified for the `Result`.
-    channel_id: ?[]const u8,
+    channel_id: ?[]const u8 = null,
 
     /// The end time, in seconds, of the `Result`.
     end_time: f64 = 0,
@@ -30,7 +30,7 @@ pub const MedicalResult = struct {
     is_partial: bool = false,
 
     /// Provides a unique identifier for the `Result`.
-    result_id: ?[]const u8,
+    result_id: ?[]const u8 = null,
 
     /// The start time, in seconds, of the `Result`.
     start_time: f64 = 0,

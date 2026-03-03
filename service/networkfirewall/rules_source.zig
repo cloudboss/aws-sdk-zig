@@ -8,7 +8,7 @@ const StatelessRulesAndCustomActions = @import("stateless_rules_and_custom_actio
 /// either stateless rules or stateful rules.
 pub const RulesSource = struct {
     /// Stateful inspection criteria for a domain list rule group.
-    rules_source_list: ?RulesSourceList,
+    rules_source_list: ?RulesSourceList = null,
 
     /// Stateful inspection criteria, provided in Suricata compatible rules.
     /// Suricata is an open-source threat detection framework that includes a
@@ -23,7 +23,7 @@ pub const RulesSource = struct {
     ///
     /// You can't use the `priority` keyword if the `RuleOrder` option in
     /// StatefulRuleOptions is set to `STRICT_ORDER`.
-    rules_string: ?[]const u8,
+    rules_string: ?[]const u8 = null,
 
     /// An array of individual stateful rules inspection criteria to be used
     /// together in a stateful rule group.
@@ -32,10 +32,10 @@ pub const RulesSource = struct {
     /// For information about the Suricata `Rules` format, see
     /// [Rules
     /// Format](https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html).
-    stateful_rules: ?[]const StatefulRule,
+    stateful_rules: ?[]const StatefulRule = null,
 
     /// Stateless inspection criteria to be used in a stateless rule group.
-    stateless_rules_and_custom_actions: ?StatelessRulesAndCustomActions,
+    stateless_rules_and_custom_actions: ?StatelessRulesAndCustomActions = null,
 
     pub const json_field_names = .{
         .rules_source_list = "RulesSourceList",

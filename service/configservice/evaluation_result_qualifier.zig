@@ -6,16 +6,16 @@ const EvaluationMode = @import("evaluation_mode.zig").EvaluationMode;
 pub const EvaluationResultQualifier = struct {
     /// The name of the Config rule that was used in the
     /// evaluation.
-    config_rule_name: ?[]const u8,
+    config_rule_name: ?[]const u8 = null,
 
     /// The mode of an evaluation. The valid values are Detective or Proactive.
-    evaluation_mode: ?EvaluationMode,
+    evaluation_mode: ?EvaluationMode = null,
 
     /// The ID of the evaluated Amazon Web Services resource.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The type of Amazon Web Services resource that was evaluated.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .config_rule_name = "ConfigRuleName",

@@ -7,23 +7,23 @@ pub const TTPsObservedDetail = struct {
 
     /// The name of the API where the tactics, techniques, and procedure (TTP) was
     /// observed.
-    api_name: ?[]const u8,
+    api_name: ?[]const u8 = null,
 
     /// The total number of successful API requests.
     api_success_count: i64 = 0,
 
     /// The IP address where the tactics, techniques, and procedure (TTP) was
     /// observed.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The procedure used, identified by the investigation.
-    procedure: ?[]const u8,
+    procedure: ?[]const u8 = null,
 
     /// The tactic used, identified by the investigation.
-    tactic: ?[]const u8,
+    tactic: ?[]const u8 = null,
 
     /// The technique used, identified by the investigation.
-    technique: ?[]const u8,
+    technique: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_failure_count = "APIFailureCount",

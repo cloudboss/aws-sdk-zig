@@ -17,7 +17,7 @@ pub const CellOutput = struct {
     parent_readiness_scopes: []const []const u8,
 
     /// Tags on the resources.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .cell_arn = "CellArn",

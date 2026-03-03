@@ -1,13 +1,13 @@
 /// The Amazon Q properties of the connection.
 pub const AmazonQPropertiesOutput = struct {
     /// The authentication mode of the connection's Amazon Q properties.
-    auth_mode: ?[]const u8,
+    auth_mode: ?[]const u8 = null,
 
     /// Specifies whether Amazon Q is enabled for the connection.
     is_enabled: bool,
 
     /// The profile ARN of the connection's Amazon Q properties.
-    profile_arn: ?[]const u8,
+    profile_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auth_mode = "authMode",

@@ -2,16 +2,16 @@
 pub const IamIdentityCenterOptions = struct {
     /// Indicates whether IAM Identity Center is enabled for the OpenSearch
     /// application.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
-    iam_identity_center_application_arn: ?[]const u8,
+    iam_identity_center_application_arn: ?[]const u8 = null,
 
-    iam_identity_center_instance_arn: ?[]const u8,
+    iam_identity_center_instance_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role assigned to the IAM Identity
     /// Center
     /// application for the OpenSearch application.
-    iam_role_for_identity_center_application_arn: ?[]const u8,
+    iam_role_for_identity_center_application_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

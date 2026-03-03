@@ -5,7 +5,7 @@ pub const UserDetails = struct {
 
     /// The system-assigned unique identifier for a session that corresponds to the
     /// workflow.
-    session_id: ?[]const u8,
+    session_id: ?[]const u8 = null,
 
     /// A unique string that identifies a Transfer Family user associated with a
     /// server.

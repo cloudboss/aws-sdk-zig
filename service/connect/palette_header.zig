@@ -1,16 +1,16 @@
 /// Contains color configuration for header elements in a workspace theme.
 pub const PaletteHeader = struct {
     /// The background color of the header.
-    background: ?[]const u8,
+    background: ?[]const u8 = null,
 
     /// Whether to invert the colors of action buttons in the header.
     invert_actions_colors: bool = false,
 
     /// The text color in the header.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// The text color when hovering over header elements.
-    text_hover: ?[]const u8,
+    text_hover: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .background = "Background",

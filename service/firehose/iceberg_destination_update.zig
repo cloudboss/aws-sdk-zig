@@ -24,43 +24,43 @@ pub const IcebergDestinationUpdate = struct {
     /// you set this parameter to true for a stream with updates and deletes, you
     /// will see out of
     /// order delivery.
-    append_only: ?bool,
+    append_only: ?bool = null,
 
-    buffering_hints: ?BufferingHints,
+    buffering_hints: ?BufferingHints = null,
 
     /// Configuration describing where the destination Iceberg tables are persisted.
-    catalog_configuration: ?CatalogConfiguration,
+    catalog_configuration: ?CatalogConfiguration = null,
 
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// Provides a list of `DestinationTableConfigurations` which Firehose uses
     /// to deliver data to Apache Iceberg Tables. Firehose will write data with
     /// insert if table specific configuration is not provided here.
-    destination_table_configuration_list: ?[]const DestinationTableConfiguration,
+    destination_table_configuration_list: ?[]const DestinationTableConfiguration = null,
 
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
-    retry_options: ?RetryOptions,
+    retry_options: ?RetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for
     /// calling Apache Iceberg Tables.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Describes how Firehose will backup records. Currently,Firehose only supports
     /// `FailedDataOnly`.
-    s3_backup_mode: ?IcebergS3BackupMode,
+    s3_backup_mode: ?IcebergS3BackupMode = null,
 
-    s3_configuration: ?S3DestinationConfiguration,
+    s3_configuration: ?S3DestinationConfiguration = null,
 
     /// The configuration to enable automatic schema evolution.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    schema_evolution_configuration: ?SchemaEvolutionConfiguration,
+    schema_evolution_configuration: ?SchemaEvolutionConfiguration = null,
 
     /// The configuration to enable automatic table creation.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    table_creation_configuration: ?TableCreationConfiguration,
+    table_creation_configuration: ?TableCreationConfiguration = null,
 
     pub const json_field_names = .{
         .append_only = "AppendOnly",

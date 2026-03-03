@@ -10,10 +10,10 @@ pub const ListRulesResponse = struct {
     ///
     /// Using an expired pagination token results in an `HTTP 400 InvalidToken`
     /// error.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The rules that match the specified criteria.
-    rules: ?[]const Rule,
+    rules: ?[]const Rule = null,
 
     pub const json_field_names = .{
         .next_token = "NextToken",

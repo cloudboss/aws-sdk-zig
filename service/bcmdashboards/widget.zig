@@ -10,7 +10,7 @@ pub const Widget = struct {
     configs: []const WidgetConfig,
 
     /// A description of the widget's purpose or the data it displays.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The height of the widget in row spans. The dashboard layout consists of a
     /// grid system.

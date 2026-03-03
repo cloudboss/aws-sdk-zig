@@ -6,13 +6,13 @@ const MonitoringConfiguration = @import("monitoring_configuration.zig").Monitori
 /// configurations.
 pub const ConfigurationOverrides = struct {
     /// The override configurations for the application.
-    application_configuration: ?[]const Configuration,
+    application_configuration: ?[]const Configuration = null,
 
     /// The override configuration to encrypt local disks.
-    disk_encryption_configuration: ?DiskEncryptionConfiguration,
+    disk_encryption_configuration: ?DiskEncryptionConfiguration = null,
 
     /// The override configurations for monitoring.
-    monitoring_configuration: ?MonitoringConfiguration,
+    monitoring_configuration: ?MonitoringConfiguration = null,
 
     pub const json_field_names = .{
         .application_configuration = "applicationConfiguration",

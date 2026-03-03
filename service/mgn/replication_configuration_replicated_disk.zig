@@ -3,16 +3,16 @@ const ReplicationConfigurationReplicatedDiskStagingDiskType = @import("replicati
 /// Replication Configuration replicated disk.
 pub const ReplicationConfigurationReplicatedDisk = struct {
     /// Replication Configuration replicated disk device name.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// Replication Configuration replicated disk IOPs.
     iops: i64 = 0,
 
     /// Replication Configuration replicated disk boot disk.
-    is_boot_disk: ?bool,
+    is_boot_disk: ?bool = null,
 
     /// Replication Configuration replicated disk staging disk type.
-    staging_disk_type: ?ReplicationConfigurationReplicatedDiskStagingDiskType,
+    staging_disk_type: ?ReplicationConfigurationReplicatedDiskStagingDiskType = null,
 
     /// Replication Configuration replicated disk throughput.
     throughput: i64 = 0,

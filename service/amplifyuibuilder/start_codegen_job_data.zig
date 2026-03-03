@@ -7,20 +7,20 @@ const CodegenJobRenderConfig = @import("codegen_job_render_config.zig").CodegenJ
 /// The code generation job resource configuration.
 pub const StartCodegenJobData = struct {
     /// Specifies whether to autogenerate forms in the code generation job.
-    auto_generate_forms: ?bool,
+    auto_generate_forms: ?bool = null,
 
     /// The feature flags for a code generation job.
-    features: ?CodegenFeatureFlags,
+    features: ?CodegenFeatureFlags = null,
 
     /// The data schema to use for a code generation job.
-    generic_data_schema: ?CodegenJobGenericDataSchema,
+    generic_data_schema: ?CodegenJobGenericDataSchema = null,
 
     /// The code generation configuration for the codegen job.
     render_config: CodegenJobRenderConfig,
 
     /// One or more key-value pairs to use when tagging the code generation job
     /// data.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .auto_generate_forms = "autoGenerateForms",

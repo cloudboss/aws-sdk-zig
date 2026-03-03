@@ -7,7 +7,7 @@ pub const TextInputEvent = struct {
 
     /// A unique identifier that your application assigns to the event. You
     /// can use this to identify events in logs.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The text from the user. Amazon Lex V2 processes this as a complete
     /// statement.

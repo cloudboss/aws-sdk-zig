@@ -5,7 +5,7 @@
 /// action, only the envelope recipients are updated.
 pub const ReplaceRecipientAction = struct {
     /// This action specifies the replacement recipient email addresses to insert.
-    replace_with: ?[]const []const u8,
+    replace_with: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .replace_with = "ReplaceWith",

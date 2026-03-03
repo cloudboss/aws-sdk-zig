@@ -8,20 +8,20 @@ const RepositoryAssociationState = @import("repository_association_state.zig").R
 /// `RepositoryAssociation` object.
 pub const RepositoryAssociation = struct {
     /// The Amazon Resource Name (ARN) identifying the repository association.
-    association_arn: ?[]const u8,
+    association_arn: ?[]const u8 = null,
 
     /// The ID of the repository association.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar
     /// Connections connection. Its format is
     /// `arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id`. For more information, see [Connection](https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html) in the *Amazon Web Services CodeStar Connections API Reference*.
-    connection_arn: ?[]const u8,
+    connection_arn: ?[]const u8 = null,
 
     /// The time, in milliseconds since the epoch, when the repository association
     /// was
     /// created.
-    created_time_stamp: ?i64,
+    created_time_stamp: ?i64 = null,
 
     /// A `KMSKeyDetails` object that contains:
     ///
@@ -33,15 +33,15 @@ pub const RepositoryAssociation = struct {
     /// * The ID of the Amazon Web Services KMS key that is associated with this
     ///   repository
     /// association.
-    kms_key_details: ?KMSKeyDetails,
+    kms_key_details: ?KMSKeyDetails = null,
 
     /// The time, in milliseconds since the epoch, when the repository association
     /// was last
     /// updated.
-    last_updated_time_stamp: ?i64,
+    last_updated_time_stamp: ?i64 = null,
 
     /// The name of the repository.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The owner of the repository. For an Amazon Web Services CodeCommit
     /// repository, this is the Amazon Web Services account ID of the
@@ -50,12 +50,12 @@ pub const RepositoryAssociation = struct {
     /// repository.
     /// For an S3 repository, it can be the username or Amazon Web Services account
     /// ID.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The provider type of the repository association.
-    provider_type: ?ProviderType,
+    provider_type: ?ProviderType = null,
 
-    s3_repository_details: ?S3RepositoryDetails,
+    s3_repository_details: ?S3RepositoryDetails = null,
 
     /// The state of the repository association.
     ///
@@ -88,10 +88,10 @@ pub const RepositoryAssociation = struct {
     ///   disassociated. For more information, see [Using tags to control access to
     ///   associated
     ///   repositories](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html) in the *Amazon CodeGuru Reviewer User Guide*.
-    state: ?RepositoryAssociationState,
+    state: ?RepositoryAssociationState = null,
 
     /// A description of why the repository association is in the current state.
-    state_reason: ?[]const u8,
+    state_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_arn = "AssociationArn",

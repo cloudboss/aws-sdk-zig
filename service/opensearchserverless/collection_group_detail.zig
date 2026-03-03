@@ -5,32 +5,32 @@ const Tag = @import("tag.zig").Tag;
 /// Details about a collection group.
 pub const CollectionGroupDetail = struct {
     /// The Amazon Resource Name (ARN) of the collection group.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The capacity limits for the collection group, in OpenSearch Compute Units
     /// (OCUs).
-    capacity_limits: ?CollectionGroupCapacityLimits,
+    capacity_limits: ?CollectionGroupCapacityLimits = null,
 
     /// The Epoch time when the collection group was created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// The description of the collection group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the collection group.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the collection group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The number of collections associated with the collection group.
-    number_of_collections: ?i32,
+    number_of_collections: ?i32 = null,
 
     /// Indicates whether standby replicas are used for the collection group.
-    standby_replicas: ?StandbyReplicas,
+    standby_replicas: ?StandbyReplicas = null,
 
     /// A map of key-value pairs associated with the collection group.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .arn = "arn",

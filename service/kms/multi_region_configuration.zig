@@ -10,17 +10,17 @@ const MultiRegionKey = @import("multi_region_key.zig").MultiRegionKey;
 pub const MultiRegionConfiguration = struct {
     /// Indicates whether the KMS key is a `PRIMARY` or `REPLICA`
     /// key.
-    multi_region_key_type: ?MultiRegionKeyType,
+    multi_region_key_type: ?MultiRegionKeyType = null,
 
     /// Displays the key ARN and Region of the primary key. This field includes the
     /// current KMS
     /// key if it is the primary key.
-    primary_key: ?MultiRegionKey,
+    primary_key: ?MultiRegionKey = null,
 
     /// displays the key ARNs and Regions of all replica keys. This field includes
     /// the current KMS
     /// key if it is a replica key.
-    replica_keys: ?[]const MultiRegionKey,
+    replica_keys: ?[]const MultiRegionKey = null,
 
     pub const json_field_names = .{
         .multi_region_key_type = "MultiRegionKeyType",

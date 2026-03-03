@@ -12,45 +12,45 @@ const RunType = @import("run_type.zig").RunType;
 pub const WorkflowRunDetail = struct {
     /// The timestamp when the workflow run completed execution, in ISO 8601
     /// date-time format. This value is null if the run is not complete.
-    completed_on: ?i64,
+    completed_on: ?i64 = null,
 
     /// The timestamp when the workflow run was created, in ISO 8601 date-time
     /// format.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The total duration of the workflow run execution in seconds. This value is
     /// null if the run is not complete.
-    duration: ?i32,
+    duration: ?i32 = null,
 
     /// The error message if the workflow run failed. This value is null if the run
     /// completed successfully.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The timestamp when the workflow run was last modified, in ISO 8601 date-time
     /// format.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// The unique identifier of this workflow run.
-    run_id: ?[]const u8,
+    run_id: ?[]const u8 = null,
 
     /// The current execution state of the workflow run.
-    run_state: ?WorkflowRunStatus,
+    run_state: ?WorkflowRunStatus = null,
 
     /// The type of workflow run.
-    run_type: ?RunType,
+    run_type: ?RunType = null,
 
     /// The timestamp when the workflow run started execution, in ISO 8601 date-time
     /// format.
-    started_on: ?i64,
+    started_on: ?i64 = null,
 
     /// A list of task instance IDs that are part of this workflow run.
-    task_instances: ?[]const []const u8,
+    task_instances: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the workflow that contains this run.
-    workflow_arn: ?[]const u8,
+    workflow_arn: ?[]const u8 = null,
 
     /// The version of the workflow used for this run.
-    workflow_version: ?[]const u8,
+    workflow_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .completed_on = "CompletedOn",

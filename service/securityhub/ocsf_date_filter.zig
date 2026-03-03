@@ -5,9 +5,9 @@ const DateFilter = @import("date_filter.zig").DateFilter;
 /// OCSF.
 pub const OcsfDateFilter = struct {
     /// The name of the field.
-    field_name: ?OcsfDateField,
+    field_name: ?OcsfDateField = null,
 
-    filter: ?DateFilter,
+    filter: ?DateFilter = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

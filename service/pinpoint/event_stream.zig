@@ -19,13 +19,13 @@ pub const EventStream = struct {
     /// an IAM role when publishing event data, but we removed this requirement. We
     /// don't recommend use of external IDs for IAM roles that are assumed by Amazon
     /// Pinpoint.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The date, in ISO 8601 format, when the event stream was last modified.
-    last_modified_date: ?[]const u8,
+    last_modified_date: ?[]const u8 = null,
 
     /// The IAM user who last modified the event stream.
-    last_updated_by: ?[]const u8,
+    last_updated_by: ?[]const u8 = null,
 
     /// The AWS Identity and Access Management (IAM) role that authorizes Amazon
     /// Pinpoint to publish event data to the stream in your AWS account.

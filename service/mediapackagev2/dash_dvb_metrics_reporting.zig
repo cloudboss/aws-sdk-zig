@@ -5,7 +5,7 @@ pub const DashDvbMetricsReporting = struct {
     /// The number of playback devices per 1000 that will send error reports to the
     /// reporting URL. This represents the probability that a playback device will
     /// be a reporting player for this session.
-    probability: ?i32,
+    probability: ?i32 = null,
 
     /// The URL where playback devices send error reports.
     reporting_url: []const u8,

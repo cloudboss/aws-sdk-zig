@@ -8,11 +8,11 @@ pub const MsSmoothAdditionalManifest = struct {
     /// Microsoft Smooth group is film-name.ismv. If you enter "-no-premium" for
     /// this setting, then the file name the service generates for this top-level
     /// manifest is film-name-no-premium.ismv.
-    manifest_name_modifier: ?[]const u8,
+    manifest_name_modifier: ?[]const u8 = null,
 
     /// Specify the outputs that you want this additional top-level manifest to
     /// reference.
-    selected_outputs: ?[]const []const u8,
+    selected_outputs: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .manifest_name_modifier = "ManifestNameModifier",

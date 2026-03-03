@@ -6,45 +6,45 @@ const BillingViewHealthStatus = @import("billing_view_health_status.zig").Billin
 pub const BillingViewElement = struct {
     /// The Amazon Resource Name (ARN) that can be used to uniquely identify the
     /// billing view.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The type of billing group.
-    billing_view_type: ?BillingViewType,
+    billing_view_type: ?BillingViewType = null,
 
     /// The time when the billing view was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// See
     /// [Expression](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html). Billing view only supports `LINKED_ACCOUNT`, `Tags`, and `CostCategories`.
-    data_filter_expression: ?Expression,
+    data_filter_expression: ?Expression = null,
 
     /// The number of billing views that use this billing view as a source.
-    derived_view_count: ?i32,
+    derived_view_count: ?i32 = null,
 
     /// The description of the billing view.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The current health status of the billing view.
-    health_status: ?BillingViewHealthStatus,
+    health_status: ?BillingViewHealthStatus = null,
 
     /// The account name of the billing view.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The account owner of the billing view.
-    owner_account_id: ?[]const u8,
+    owner_account_id: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID that owns the source billing view, if
     /// this is a derived billing view.
-    source_account_id: ?[]const u8,
+    source_account_id: ?[]const u8 = null,
 
     /// The number of source views associated with this billing view.
-    source_view_count: ?i32,
+    source_view_count: ?i32 = null,
 
     /// The time when the billing view was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The timestamp of when the billing view definition was last updated.
-    view_definition_last_updated_at: ?i64,
+    view_definition_last_updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -14,7 +14,7 @@ pub const AutoMLCandidate = struct {
     candidate_name: []const u8,
 
     /// The properties of an AutoML candidate job.
-    candidate_properties: ?CandidateProperties,
+    candidate_properties: ?CandidateProperties = null,
 
     /// The candidate's status.
     candidate_status: CandidateStatus,
@@ -26,22 +26,22 @@ pub const AutoMLCandidate = struct {
     creation_time: i64,
 
     /// The end time.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The failure reason.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
-    final_auto_ml_job_objective_metric: ?FinalAutoMLJobObjectiveMetric,
+    final_auto_ml_job_objective_metric: ?FinalAutoMLJobObjectiveMetric = null,
 
     /// The mapping of all supported processing unit (CPU, GPU, etc...) to inference
     /// container definitions for the candidate. This field is populated for the
     /// AutoML jobs V2 (for example, for jobs created by calling
     /// `CreateAutoMLJobV2`) related to image or text classification problem types
     /// only.
-    inference_container_definitions: ?[]const aws.map.MapEntry([]const AutoMLContainerDefinition),
+    inference_container_definitions: ?[]const aws.map.MapEntry([]const AutoMLContainerDefinition) = null,
 
     /// Information about the recommended inference container definitions.
-    inference_containers: ?[]const AutoMLContainerDefinition,
+    inference_containers: ?[]const AutoMLContainerDefinition = null,
 
     /// The last modified time.
     last_modified_time: i64,

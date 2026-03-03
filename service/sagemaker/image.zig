@@ -8,14 +8,14 @@ pub const Image = struct {
     creation_time: i64,
 
     /// The description of the image.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the image as displayed.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// When a create, update, or delete operation fails, the reason for the
     /// failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The ARN of the image.
     image_arn: []const u8,

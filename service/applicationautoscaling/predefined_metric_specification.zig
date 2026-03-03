@@ -38,7 +38,7 @@ pub const PredefinedMetricSpecification = struct {
     /// [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operation. To find the ARN for the target group, use
     /// the
     /// [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) API operation.
-    resource_label: ?[]const u8,
+    resource_label: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .predefined_metric_type = "PredefinedMetricType",

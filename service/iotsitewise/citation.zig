@@ -6,10 +6,10 @@ const Reference = @import("reference.zig").Reference;
 /// It also contains information about the source.
 pub const Citation = struct {
     /// Contains the cited text from the data source.
-    content: ?Content,
+    content: ?Content = null,
 
     /// Contains information about the data source.
-    reference: ?Reference,
+    reference: ?Reference = null,
 
     pub const json_field_names = .{
         .content = "content",

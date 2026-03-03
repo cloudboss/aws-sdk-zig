@@ -3,22 +3,22 @@ const QueueType = @import("queue_type.zig").QueueType;
 /// Contains summary information about a queue.
 pub const QueueSummary = struct {
     /// The Amazon Resource Name (ARN) of the queue.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The identifier of the queue.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where this resource was last modified.
-    last_modified_region: ?[]const u8,
+    last_modified_region: ?[]const u8 = null,
 
     /// The timestamp when this resource was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the queue.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of queue.
-    queue_type: ?QueueType,
+    queue_type: ?QueueType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

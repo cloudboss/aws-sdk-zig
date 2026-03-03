@@ -9,50 +9,50 @@ const NodeStructure = @import("node_structure.zig").NodeStructure;
 /// (PG)](https://docs.aws.amazon.com/neptune/latest/userguide/neptune-graph-summary.html#neptune-graph-summary-pg-response).
 pub const PropertygraphSummary = struct {
     /// A list of the distinct edge labels in the graph.
-    edge_labels: ?[]const []const u8,
+    edge_labels: ?[]const []const u8 = null,
 
     /// A list of the distinct edge properties in the graph, along with the count of
     /// edges where each property is used.
-    edge_properties: ?[]const []const aws.map.MapEntry(i64),
+    edge_properties: ?[]const []const aws.map.MapEntry(i64) = null,
 
     /// This field is only present when the requested mode is `DETAILED`. It
     /// contains a list of edge structures.
-    edge_structures: ?[]const EdgeStructure,
+    edge_structures: ?[]const EdgeStructure = null,
 
     /// A list of the distinct node labels in the graph.
-    node_labels: ?[]const []const u8,
+    node_labels: ?[]const []const u8 = null,
 
     /// The number of distinct node properties in the graph.
-    node_properties: ?[]const []const aws.map.MapEntry(i64),
+    node_properties: ?[]const []const aws.map.MapEntry(i64) = null,
 
     /// This field is only present when the requested mode is `DETAILED`. It
     /// contains a list of node structures.
-    node_structures: ?[]const NodeStructure,
+    node_structures: ?[]const NodeStructure = null,
 
     /// The number of distinct edge labels in the graph.
-    num_edge_labels: ?i64,
+    num_edge_labels: ?i64 = null,
 
     /// The number of distinct edge properties in the graph.
-    num_edge_properties: ?i64,
+    num_edge_properties: ?i64 = null,
 
     /// The number of edges in the graph.
-    num_edges: ?i64,
+    num_edges: ?i64 = null,
 
     /// The number of distinct node labels in the graph.
-    num_node_labels: ?i64,
+    num_node_labels: ?i64 = null,
 
     /// A list of the distinct node properties in the graph, along with the count of
     /// nodes where each property is used.
-    num_node_properties: ?i64,
+    num_node_properties: ?i64 = null,
 
     /// The number of nodes in the graph.
-    num_nodes: ?i64,
+    num_nodes: ?i64 = null,
 
     /// The total number of usages of all edge properties.
-    total_edge_property_values: ?i64,
+    total_edge_property_values: ?i64 = null,
 
     /// The total number of usages of all node properties.
-    total_node_property_values: ?i64,
+    total_node_property_values: ?i64 = null,
 
     pub const json_field_names = .{
         .edge_labels = "edgeLabels",

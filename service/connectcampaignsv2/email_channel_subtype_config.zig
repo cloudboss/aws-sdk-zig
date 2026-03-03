@@ -3,7 +3,7 @@ const EmailOutboundMode = @import("email_outbound_mode.zig").EmailOutboundMode;
 
 /// Email Channel Subtype config
 pub const EmailChannelSubtypeConfig = struct {
-    capacity: ?f64,
+    capacity: ?f64 = null,
 
     default_outbound_config: EmailOutboundConfig,
 

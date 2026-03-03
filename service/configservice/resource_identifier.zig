@@ -5,17 +5,17 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// custom resource name.
 pub const ResourceIdentifier = struct {
     /// The time that the resource was deleted.
-    resource_deletion_time: ?i64,
+    resource_deletion_time: ?i64 = null,
 
     /// The ID of the resource (for example,
     /// `sg-xxxxxx`).
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The custom name of the resource (if available).
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// The type of resource.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .resource_deletion_time = "resourceDeletionTime",

@@ -4,12 +4,12 @@ const CertificateStatus = @import("certificate_status.zig").CertificateStatus;
 /// Information about a certificate.
 pub const Certificate = struct {
     /// The ARN of the certificate.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The ID of the certificate. (The last part of the certificate ARN contains
     /// the
     /// certificate ID.)
-    certificate_id: ?[]const u8,
+    certificate_id: ?[]const u8 = null,
 
     /// The mode of the certificate.
     ///
@@ -27,15 +27,15 @@ pub const Certificate = struct {
     /// CA. Devices with certificates
     /// in `SNI_ONLY` mode must send the SNI extension when connecting to Amazon Web
     /// Services IoT Core.
-    certificate_mode: ?CertificateMode,
+    certificate_mode: ?CertificateMode = null,
 
     /// The date and time the certificate was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The status of the certificate.
     ///
     /// The status value REGISTER_INACTIVE is deprecated and should not be used.
-    status: ?CertificateStatus,
+    status: ?CertificateStatus = null,
 
     pub const json_field_names = .{
         .certificate_arn = "certificateArn",

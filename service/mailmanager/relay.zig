@@ -2,13 +2,13 @@
 /// the destination relay server.
 pub const Relay = struct {
     /// The timestamp of when the relay was last modified.
-    last_modified_timestamp: ?i64,
+    last_modified_timestamp: ?i64 = null,
 
     /// The unique relay identifier.
-    relay_id: ?[]const u8,
+    relay_id: ?[]const u8 = null,
 
     /// The unique relay name.
-    relay_name: ?[]const u8,
+    relay_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .last_modified_timestamp = "LastModifiedTimestamp",

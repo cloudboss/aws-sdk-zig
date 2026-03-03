@@ -5,10 +5,10 @@ const Sequence = @import("sequence.zig").Sequence;
 pub const Detection = struct {
     /// The details about the anomalous activity that caused GuardDuty to
     /// generate the finding.
-    anomaly: ?Anomaly,
+    anomaly: ?Anomaly = null,
 
     /// The details about the attack sequence.
-    sequence: ?Sequence,
+    sequence: ?Sequence = null,
 
     pub const json_field_names = .{
         .anomaly = "Anomaly",

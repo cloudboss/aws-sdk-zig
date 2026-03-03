@@ -7,20 +7,20 @@ pub const ScheduledAuditMetadata = struct {
     /// `frequency` is "MONTHLY").
     /// If days 29-31 are specified, and the month does not have that many
     /// days, the audit takes place on the "LAST" day of the month.
-    day_of_month: ?[]const u8,
+    day_of_month: ?[]const u8 = null,
 
     /// The day of the week on which the scheduled audit is run (if the
     /// `frequency` is "WEEKLY" or "BIWEEKLY").
-    day_of_week: ?DayOfWeek,
+    day_of_week: ?DayOfWeek = null,
 
     /// How often the scheduled audit occurs.
-    frequency: ?AuditFrequency,
+    frequency: ?AuditFrequency = null,
 
     /// The ARN of the scheduled audit.
-    scheduled_audit_arn: ?[]const u8,
+    scheduled_audit_arn: ?[]const u8 = null,
 
     /// The name of the scheduled audit.
-    scheduled_audit_name: ?[]const u8,
+    scheduled_audit_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .day_of_month = "dayOfMonth",

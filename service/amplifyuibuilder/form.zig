@@ -17,7 +17,7 @@ pub const Form = struct {
     app_id: []const u8,
 
     /// Stores the call to action configuration for the form.
-    cta: ?FormCTA,
+    cta: ?FormCTA = null,
 
     /// The type of data source to use to create the form.
     data_type: FormDataTypeConfig,
@@ -35,7 +35,7 @@ pub const Form = struct {
     id: []const u8,
 
     /// Specifies an icon or decoration to display on the form.
-    label_decorator: ?LabelDecorator,
+    label_decorator: ?LabelDecorator = null,
 
     /// The name of the form.
     name: []const u8,
@@ -52,7 +52,7 @@ pub const Form = struct {
     style: FormStyle,
 
     /// One or more key-value pairs to use when tagging the form.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .app_id = "appId",

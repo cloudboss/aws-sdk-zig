@@ -7,53 +7,53 @@ const configStatus = @import("config_status.zig").configStatus;
 pub const OidcIdentityProviderConfig = struct {
     /// This is also known as *audience*. The ID of the client application
     /// that makes authentication requests to the OIDC identity provider.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     /// The name of your cluster.
-    cluster_name: ?[]const u8,
+    cluster_name: ?[]const u8 = null,
 
     /// The JSON web token (JWT) claim that the provider uses to return your groups.
-    groups_claim: ?[]const u8,
+    groups_claim: ?[]const u8 = null,
 
     /// The prefix that is prepended to group claims to prevent clashes with
     /// existing names
     /// (such as `system:` groups). For example, the value` oidc:` creates
     /// group names like `oidc:engineering` and `oidc:infra`. The prefix
     /// can't contain `system:`
-    groups_prefix: ?[]const u8,
+    groups_prefix: ?[]const u8 = null,
 
     /// The ARN of the configuration.
-    identity_provider_config_arn: ?[]const u8,
+    identity_provider_config_arn: ?[]const u8 = null,
 
     /// The name of the configuration.
-    identity_provider_config_name: ?[]const u8,
+    identity_provider_config_name: ?[]const u8 = null,
 
     /// The URL of the OIDC identity provider that allows the API server to discover
     /// public
     /// signing keys for verifying tokens.
-    issuer_url: ?[]const u8,
+    issuer_url: ?[]const u8 = null,
 
     /// The key-value pairs that describe required claims in the identity token. If
     /// set, each
     /// claim is verified to be present in the token with a matching value.
-    required_claims: ?[]const aws.map.StringMapEntry,
+    required_claims: ?[]const aws.map.StringMapEntry = null,
 
     /// The status of the OIDC identity provider.
-    status: ?configStatus,
+    status: ?configStatus = null,
 
     /// Metadata that assists with categorization and organization.
     /// Each tag consists of a key and an optional value. You define both. Tags
     /// don't
     /// propagate to any other cluster or Amazon Web Services resources.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The JSON Web token (JWT) claim that is used as the username.
-    username_claim: ?[]const u8,
+    username_claim: ?[]const u8 = null,
 
     /// The prefix that is prepended to username claims to prevent clashes with
     /// existing
     /// names. The prefix can't contain `system:`
-    username_prefix: ?[]const u8,
+    username_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_id = "clientId",

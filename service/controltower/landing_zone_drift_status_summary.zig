@@ -14,7 +14,7 @@ pub const LandingZoneDriftStatusSummary = struct {
     ///   the configuration that Amazon Web Services Control Tower expected.
     /// * `IN_SYNC`: The landing zone deployed in this configuration matches the
     ///   configuration that Amazon Web Services Control Tower expected.
-    status: ?LandingZoneDriftStatus,
+    status: ?LandingZoneDriftStatus = null,
 
     pub const json_field_names = .{
         .status = "status",

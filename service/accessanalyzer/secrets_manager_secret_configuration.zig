@@ -17,10 +17,10 @@
 /// Manager.](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html).
 pub const SecretsManagerSecretConfiguration = struct {
     /// The proposed ARN, key ID, or alias of the KMS key.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The proposed resource policy defining who can access or manage the secret.
-    secret_policy: ?[]const u8,
+    secret_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .kms_key_id = "kmsKeyId",

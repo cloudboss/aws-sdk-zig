@@ -7,19 +7,19 @@ const VersionControlInfo = @import("version_control_info.zig").VersionControlInf
 /// Summary of the collector configuration.
 pub const ConfigurationSummary = struct {
     /// IP address based configurations.
-    ip_address_based_remote_info_list: ?[]const IPAddressBasedRemoteInfo,
+    ip_address_based_remote_info_list: ?[]const IPAddressBasedRemoteInfo = null,
 
     /// The list of pipeline info configurations.
-    pipeline_info_list: ?[]const PipelineInfo,
+    pipeline_info_list: ?[]const PipelineInfo = null,
 
     /// Info about the remote server source code configuration.
-    remote_source_code_analysis_server_info: ?RemoteSourceCodeAnalysisServerInfo,
+    remote_source_code_analysis_server_info: ?RemoteSourceCodeAnalysisServerInfo = null,
 
     /// The list of vCenter configurations.
-    vcenter_based_remote_info_list: ?[]const VcenterBasedRemoteInfo,
+    vcenter_based_remote_info_list: ?[]const VcenterBasedRemoteInfo = null,
 
     /// The list of the version control configurations.
-    version_control_info_list: ?[]const VersionControlInfo,
+    version_control_info_list: ?[]const VersionControlInfo = null,
 
     pub const json_field_names = .{
         .ip_address_based_remote_info_list = "ipAddressBasedRemoteInfoList",

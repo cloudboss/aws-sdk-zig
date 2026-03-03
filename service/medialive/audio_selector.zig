@@ -7,7 +7,7 @@ pub const AudioSelector = struct {
     name: []const u8,
 
     /// The audio selector settings.
-    selector_settings: ?AudioSelectorSettings,
+    selector_settings: ?AudioSelectorSettings = null,
 
     pub const json_field_names = .{
         .name = "Name",

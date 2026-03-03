@@ -3,9 +3,9 @@ const InstanceLimitsHandling = @import("instance_limits_handling.zig").InstanceL
 
 /// Communication limits config
 pub const CommunicationLimitsConfig = struct {
-    all_channel_subtypes: ?CommunicationLimits,
+    all_channel_subtypes: ?CommunicationLimits = null,
 
-    instance_limits_handling: ?InstanceLimitsHandling,
+    instance_limits_handling: ?InstanceLimitsHandling = null,
 
     pub const json_field_names = .{
         .all_channel_subtypes = "allChannelSubtypes",

@@ -17,22 +17,22 @@ pub const ResourceSpec = struct {
     /// For **KernelGateway apps**, the `system` value is translated to
     /// `ml.t3.medium`. KernelGateway apps also support all other values for
     /// available instance types.
-    instance_type: ?AppInstanceType,
+    instance_type: ?AppInstanceType = null,
 
     /// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to
     /// the Resource.
-    lifecycle_config_arn: ?[]const u8,
+    lifecycle_config_arn: ?[]const u8 = null,
 
     /// The ARN of the SageMaker AI image that the image version belongs to.
-    sage_maker_image_arn: ?[]const u8,
+    sage_maker_image_arn: ?[]const u8 = null,
 
     /// The SageMakerImageVersionAlias of the image to launch with. This value is in
     /// SemVer 2.0.0 versioning format.
-    sage_maker_image_version_alias: ?[]const u8,
+    sage_maker_image_version_alias: ?[]const u8 = null,
 
     /// The ARN of the image version created on the instance. To clear the value set
     /// for `SageMakerImageVersionArn`, pass `None` as the value.
-    sage_maker_image_version_arn: ?[]const u8,
+    sage_maker_image_version_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .instance_type = "InstanceType",

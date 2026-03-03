@@ -6,7 +6,7 @@ const FindingSourceType = @import("finding_source_type.zig").FindingSourceType;
 pub const FindingSource = struct {
     /// Includes details about how the access that generated the finding is granted.
     /// This is populated for Amazon S3 bucket findings.
-    detail: ?FindingSourceDetail,
+    detail: ?FindingSourceDetail = null,
 
     /// Indicates the type of access that generated the finding.
     @"type": FindingSourceType,

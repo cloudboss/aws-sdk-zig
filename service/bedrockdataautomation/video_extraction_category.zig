@@ -5,7 +5,7 @@ const VideoExtractionCategoryType = @import("video_extraction_category_type.zig"
 pub const VideoExtractionCategory = struct {
     state: State,
 
-    types: ?[]const VideoExtractionCategoryType,
+    types: ?[]const VideoExtractionCategoryType = null,
 
     pub const json_field_names = .{
         .state = "state",

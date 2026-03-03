@@ -17,42 +17,42 @@ pub const HttpEndpointDestinationConfiguration = struct {
     /// parameters are optional. However, if you specify a value for one of them,
     /// you must also
     /// provide a value for the other.
-    buffering_hints: ?HttpEndpointBufferingHints,
+    buffering_hints: ?HttpEndpointBufferingHints = null,
 
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The configuration of the HTTP endpoint selected as the destination.
     endpoint_configuration: HttpEndpointConfiguration,
 
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The configuration of the request sent to the HTTP endpoint that is specified
     /// as the
     /// destination.
-    request_configuration: ?HttpEndpointRequestConfiguration,
+    request_configuration: ?HttpEndpointRequestConfiguration = null,
 
     /// Describes the retry behavior in case Firehose is unable to deliver data to
     /// the specified HTTP endpoint destination, or if it doesn't receive a valid
     /// acknowledgment of
     /// receipt from the specified HTTP endpoint destination.
-    retry_options: ?HttpEndpointRetryOptions,
+    retry_options: ?HttpEndpointRetryOptions = null,
 
     /// Firehose uses this IAM role for all the permissions that the delivery
     /// stream needs.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Describes the S3 bucket backup options for the data that Firehose delivers
     /// to the HTTP endpoint destination. You can back up all documents (`AllData`)
     /// or
     /// only the documents that Firehose could not deliver to the specified HTTP
     /// endpoint destination (`FailedDataOnly`).
-    s3_backup_mode: ?HttpEndpointS3BackupMode,
+    s3_backup_mode: ?HttpEndpointS3BackupMode = null,
 
     s3_configuration: S3DestinationConfiguration,
 
     /// The configuration that defines how you access secrets for HTTP Endpoint
     /// destination.
-    secrets_manager_configuration: ?SecretsManagerConfiguration,
+    secrets_manager_configuration: ?SecretsManagerConfiguration = null,
 
     pub const json_field_names = .{
         .buffering_hints = "BufferingHints",

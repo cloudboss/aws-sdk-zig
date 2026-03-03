@@ -10,7 +10,7 @@ pub const PlacementStrategy = struct {
     /// strategy, valid values are
     /// `cpu` and `memory`. For the random placement strategy, this field is not
     /// used.
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// The type of placement strategy. The random placement strategy randomly
     /// places tasks on available candidates. The spread placement strategy spreads
@@ -20,7 +20,7 @@ pub const PlacementStrategy = struct {
     /// that is specified with the field parameter.
     /// For example, if you binpack on memory, a task is placed on the instance with
     /// the least amount of remaining memory (but still enough to run the task).
-    @"type": ?PlacementStrategyType,
+    @"type": ?PlacementStrategyType = null,
 
     pub const json_field_names = .{
         .field = "field",

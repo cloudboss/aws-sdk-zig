@@ -18,7 +18,7 @@ pub const CustomDeliveryConfiguration = struct {
     /// The types of endpoints to send the campaign or treatment to. Each valid
     /// value maps to a type of channel that you can associate with an endpoint by
     /// using the ChannelType property of an endpoint.
-    endpoint_types: ?[]const __EndpointTypesElement,
+    endpoint_types: ?[]const __EndpointTypesElement = null,
 
     pub const json_field_names = .{
         .delivery_uri = "DeliveryUri",

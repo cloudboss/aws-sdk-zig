@@ -8,53 +8,53 @@ const EntityStatus = @import("entity_status.zig").EntityStatus;
 pub const BatchPrediction = struct {
     /// The ID of the `DataSource` that points to the group of observations to
     /// predict.
-    batch_prediction_data_source_id: ?[]const u8,
+    batch_prediction_data_source_id: ?[]const u8 = null,
 
     /// The ID assigned to the `BatchPrediction` at creation. This value should be
     /// identical to the value of the `BatchPredictionID`
     /// in the request.
-    batch_prediction_id: ?[]const u8,
+    batch_prediction_id: ?[]const u8 = null,
 
-    compute_time: ?i64,
+    compute_time: ?i64 = null,
 
     /// The time that the `BatchPrediction` was created. The time is expressed in
     /// epoch time.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The AWS user account that invoked the `BatchPrediction`. The account type
     /// can be either an AWS root account or an AWS Identity and Access Management
     /// (IAM) user account.
-    created_by_iam_user: ?[]const u8,
+    created_by_iam_user: ?[]const u8 = null,
 
-    finished_at: ?i64,
+    finished_at: ?i64 = null,
 
     /// The location of the data file or directory in Amazon Simple Storage Service
     /// (Amazon S3).
-    input_data_location_s3: ?[]const u8,
+    input_data_location_s3: ?[]const u8 = null,
 
-    invalid_record_count: ?i64,
+    invalid_record_count: ?i64 = null,
 
     /// The time of the most recent edit to the `BatchPrediction`. The time is
     /// expressed in epoch time.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// A description of the most recent details about processing the batch
     /// prediction request.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The ID of the `MLModel` that generated predictions for the `BatchPrediction`
     /// request.
-    ml_model_id: ?[]const u8,
+    ml_model_id: ?[]const u8 = null,
 
     /// A user-supplied name or description of the `BatchPrediction`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The location of an Amazon S3 bucket or directory to receive the operation
     /// results. The following substrings are not allowed in the `s3 key` portion of
     /// the `outputURI` field: ':', '//', '/./', '/../'.
-    output_uri: ?[]const u8,
+    output_uri: ?[]const u8 = null,
 
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The status of the `BatchPrediction`. This element can have one of the
     /// following values:
@@ -70,9 +70,9 @@ pub const BatchPrediction = struct {
     /// * `COMPLETED` - The batch prediction process completed successfully.
     ///
     /// * `DELETED` - The `BatchPrediction` is marked as deleted. It is not usable.
-    status: ?EntityStatus,
+    status: ?EntityStatus = null,
 
-    total_record_count: ?i64,
+    total_record_count: ?i64 = null,
 
     pub const json_field_names = .{
         .batch_prediction_data_source_id = "BatchPredictionDataSourceId",

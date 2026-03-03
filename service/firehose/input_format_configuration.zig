@@ -8,7 +8,7 @@ pub const InputFormatConfiguration = struct {
     /// JSON SerDe
     /// or the OpenX JSON SerDe. If both are non-null, the server rejects the
     /// request.
-    deserializer: ?Deserializer,
+    deserializer: ?Deserializer = null,
 
     pub const json_field_names = .{
         .deserializer = "Deserializer",

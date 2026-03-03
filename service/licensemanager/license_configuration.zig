@@ -16,55 +16,55 @@ const ProductInformation = @import("product_information.zig").ProductInformation
 /// used.
 pub const LicenseConfiguration = struct {
     /// Automated discovery information.
-    automated_discovery_information: ?AutomatedDiscoveryInformation,
+    automated_discovery_information: ?AutomatedDiscoveryInformation = null,
 
     /// Number of licenses consumed.
-    consumed_licenses: ?i64,
+    consumed_licenses: ?i64 = null,
 
     /// Summaries for licenses consumed by various resources.
-    consumed_license_summary_list: ?[]const ConsumedLicenseSummary,
+    consumed_license_summary_list: ?[]const ConsumedLicenseSummary = null,
 
     /// Description of the license configuration.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// When true, disassociates a resource when software is uninstalled.
-    disassociate_when_not_found: ?bool,
+    disassociate_when_not_found: ?bool = null,
 
     /// Amazon Resource Name (ARN) of the license configuration.
-    license_configuration_arn: ?[]const u8,
+    license_configuration_arn: ?[]const u8 = null,
 
     /// Unique ID of the license configuration.
-    license_configuration_id: ?[]const u8,
+    license_configuration_id: ?[]const u8 = null,
 
     /// Number of licenses managed by the license configuration.
-    license_count: ?i64,
+    license_count: ?i64 = null,
 
     /// Number of available licenses as a hard limit.
-    license_count_hard_limit: ?bool,
+    license_count_hard_limit: ?bool = null,
 
     /// Dimension to use to track the license inventory.
-    license_counting_type: ?LicenseCountingType,
+    license_counting_type: ?LicenseCountingType = null,
 
     /// License configuration expiry time in Unix timestamp format.
-    license_expiry: ?i64,
+    license_expiry: ?i64 = null,
 
     /// License rules.
-    license_rules: ?[]const []const u8,
+    license_rules: ?[]const []const u8 = null,
 
     /// Summaries for managed resources.
-    managed_resource_summary_list: ?[]const ManagedResourceSummary,
+    managed_resource_summary_list: ?[]const ManagedResourceSummary = null,
 
     /// Name of the license configuration.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Account ID of the license configuration's owner.
-    owner_account_id: ?[]const u8,
+    owner_account_id: ?[]const u8 = null,
 
     /// Product information.
-    product_information_list: ?[]const ProductInformation,
+    product_information_list: ?[]const ProductInformation = null,
 
     /// Status of the license configuration.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .automated_discovery_information = "AutomatedDiscoveryInformation",

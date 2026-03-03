@@ -13,7 +13,7 @@ pub const ProductRestEndpointPageSummaryNoBody = struct {
     last_modified: i64,
 
     /// The operation name of the product REST endpoint.
-    operation_name: ?[]const u8,
+    operation_name: ?[]const u8 = null,
 
     /// The ARN of the product REST endpoint page.
     product_rest_endpoint_page_arn: []const u8,
@@ -28,7 +28,7 @@ pub const ProductRestEndpointPageSummaryNoBody = struct {
     status: Status,
 
     /// The status exception information.
-    status_exception: ?StatusException,
+    status_exception: ?StatusException = null,
 
     /// The try it state of a product REST endpoint page.
     try_it_state: TryItState,

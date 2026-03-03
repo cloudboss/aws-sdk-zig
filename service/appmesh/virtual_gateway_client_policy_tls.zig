@@ -6,14 +6,14 @@ pub const VirtualGatewayClientPolicyTls = struct {
     /// A reference to an object that represents a virtual gateway's client's
     /// Transport Layer Security (TLS)
     /// certificate.
-    certificate: ?VirtualGatewayClientTlsCertificate,
+    certificate: ?VirtualGatewayClientTlsCertificate = null,
 
     /// Whether the policy is enforced. The default is `True`, if a value isn't
     /// specified.
-    enforce: ?bool,
+    enforce: ?bool = null,
 
     /// One or more ports that the policy is enforced for.
-    ports: ?[]const i32,
+    ports: ?[]const i32 = null,
 
     /// A reference to an object that represents a Transport Layer Security (TLS)
     /// validation context.

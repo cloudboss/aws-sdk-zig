@@ -3,7 +3,7 @@
 pub const AwsGuardDutyDetectorDataSourcesS3LogsDetails = struct {
     /// A value that describes whether S3 data event logs are automatically enabled
     /// for new members of an organization.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status = "Status",

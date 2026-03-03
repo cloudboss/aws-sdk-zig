@@ -5,7 +5,7 @@ const CategoryFilterSelectAllOptions = @import("category_filter_select_all_optio
 /// A list of custom filter values.
 pub const CustomFilterListConfiguration = struct {
     /// The list of category values for the filter.
-    category_values: ?[]const []const u8,
+    category_values: ?[]const []const u8 = null,
 
     /// The match operator that is used to determine if a filter should be applied.
     match_operator: CategoryFilterMatchOperator,
@@ -23,7 +23,7 @@ pub const CustomFilterListConfiguration = struct {
     /// Select all of the values. Null is not the assigned value of select all.
     ///
     /// * `FILTER_ALL_VALUES`
-    select_all_options: ?CategoryFilterSelectAllOptions,
+    select_all_options: ?CategoryFilterSelectAllOptions = null,
 
     pub const json_field_names = .{
         .category_values = "CategoryValues",

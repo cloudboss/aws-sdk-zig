@@ -6,7 +6,7 @@ pub const Filter = struct {
     attribute: []const u8,
 
     /// A search filter integer value in Amazon DataZone.
-    int_value: ?i64,
+    int_value: ?i64 = null,
 
     /// Specifies the search filter operator.
     operator: FilterOperator = "EQ",

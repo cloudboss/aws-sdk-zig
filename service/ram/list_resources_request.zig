@@ -16,7 +16,7 @@ pub const ListResourcesRequest = struct {
     /// should check `NextToken` after every operation to ensure that you receive
     /// all
     /// of the results.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// Specifies that you want to receive the next page of results. Valid
     /// only if you received a `NextToken` response in the previous request. If you
@@ -24,18 +24,18 @@ pub const ListResourcesRequest = struct {
     /// value
     /// provided by the previous call's `NextToken` response to request the
     /// next page of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// Specifies that you want to list only the resource shares that are associated
     /// with the specified
     /// principal.
-    principal: ?[]const u8,
+    principal: ?[]const u8 = null,
 
     /// Specifies that you want to list only the resource shares that include
     /// resources with the
     /// specified [Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-    resource_arns: ?[]const []const u8,
+    resource_arns: ?[]const []const u8 = null,
 
     /// Specifies that you want to list only the resource shares that match the
     /// following:
@@ -64,20 +64,20 @@ pub const ListResourcesRequest = struct {
     /// resources or resource types.
     ///
     /// The default value is `ALL`.
-    resource_region_scope: ?ResourceRegionScopeFilter,
+    resource_region_scope: ?ResourceRegionScopeFilter = null,
 
     /// Specifies that you want to list only resources in the resource shares
     /// identified by the
     /// specified [Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-    resource_share_arns: ?[]const []const u8,
+    resource_share_arns: ?[]const []const u8 = null,
 
     /// Specifies that you want to list only the resource shares that include
     /// resources of the specified
     /// resource type.
     ///
     /// For valid values, query the ListResourceTypes operation.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "maxResults",

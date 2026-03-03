@@ -19,7 +19,7 @@ pub const RootDirectory = struct {
     /// If you do not provide `CreationInfo` and the specified `RootDirectory` >
     /// `Path` does not exist,
     /// attempts to mount the file system using the access point will fail.
-    creation_info: ?CreationInfo,
+    creation_info: ?CreationInfo = null,
 
     /// Specifies the path on the EFS file system to expose as the root directory to
     /// NFS clients using the access point to access the EFS file system. A path can
@@ -27,7 +27,7 @@ pub const RootDirectory = struct {
     /// up to four subdirectories. If the specified path does not exist, you are
     /// required to provide
     /// the `CreationInfo`.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_info = "CreationInfo",

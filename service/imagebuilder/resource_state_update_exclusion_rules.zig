@@ -3,7 +3,7 @@ const LifecyclePolicyDetailExclusionRulesAmis = @import("lifecycle_policy_detail
 /// Additional rules to specify resources that should be exempt from ad-hoc
 /// lifecycle actions.
 pub const ResourceStateUpdateExclusionRules = struct {
-    amis: ?LifecyclePolicyDetailExclusionRulesAmis,
+    amis: ?LifecyclePolicyDetailExclusionRulesAmis = null,
 
     pub const json_field_names = .{
         .amis = "amis",

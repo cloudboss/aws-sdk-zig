@@ -4,10 +4,10 @@ const AwsCodeBuildProjectLogsConfigS3LogsDetails = @import("aws_code_build_proje
 /// Information about logs for the build project.
 pub const AwsCodeBuildProjectLogsConfigDetails = struct {
     /// Information about CloudWatch Logs for the build project.
-    cloud_watch_logs: ?AwsCodeBuildProjectLogsConfigCloudWatchLogsDetails,
+    cloud_watch_logs: ?AwsCodeBuildProjectLogsConfigCloudWatchLogsDetails = null,
 
     /// Information about logs built to an S3 bucket for a build project.
-    s3_logs: ?AwsCodeBuildProjectLogsConfigS3LogsDetails,
+    s3_logs: ?AwsCodeBuildProjectLogsConfigS3LogsDetails = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs = "CloudWatchLogs",

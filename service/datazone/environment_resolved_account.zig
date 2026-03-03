@@ -8,7 +8,7 @@ pub const EnvironmentResolvedAccount = struct {
     region_name: []const u8,
 
     /// The ID of the account pool.
-    source_account_pool_id: ?[]const u8,
+    source_account_pool_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_account_id = "awsAccountId",

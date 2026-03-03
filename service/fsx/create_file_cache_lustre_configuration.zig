@@ -14,7 +14,7 @@ pub const CreateFileCacheLustreConfiguration = struct {
     /// value is `1000`.
     per_unit_storage_throughput: i32,
 
-    weekly_maintenance_start_time: ?[]const u8,
+    weekly_maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .deployment_type = "DeploymentType",

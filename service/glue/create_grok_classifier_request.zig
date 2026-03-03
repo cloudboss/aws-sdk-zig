@@ -6,7 +6,7 @@ pub const CreateGrokClassifierRequest = struct {
     classification: []const u8,
 
     /// Optional custom grok patterns used by this classifier.
-    custom_patterns: ?[]const u8,
+    custom_patterns: ?[]const u8 = null,
 
     /// The grok pattern used by this classifier.
     grok_pattern: []const u8,

@@ -3,10 +3,10 @@ const TopicTimeGranularity = @import("topic_time_granularity.zig").TopicTimeGran
 /// A structure that represents a data aggregation.
 pub const DataAggregation = struct {
     /// The level of time precision that is used to aggregate `DateTime` values.
-    dataset_row_date_granularity: ?TopicTimeGranularity,
+    dataset_row_date_granularity: ?TopicTimeGranularity = null,
 
     /// The column name for the default date.
-    default_date_column_name: ?[]const u8,
+    default_date_column_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dataset_row_date_granularity = "DatasetRowDateGranularity",

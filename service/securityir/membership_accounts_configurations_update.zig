@@ -20,14 +20,14 @@ pub const MembershipAccountsConfigurationsUpdate = struct {
     /// When set to `true`, the configuration will be applied to all accounts within
     /// the organization. When set to `false`, the configuration will only apply to
     /// specifically designated accounts.
-    cover_entire_organization: ?bool,
+    cover_entire_organization: ?bool = null,
 
     /// A list of organizational unit IDs to add to the membership configuration.
     /// Each organizational unit ID must match the pattern
     /// `ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}`.
     ///
     /// The list must contain between 1 and 5 organizational unit IDs.
-    organizational_units_to_add: ?[]const []const u8,
+    organizational_units_to_add: ?[]const []const u8 = null,
 
     /// A list of organizational unit IDs to remove from the membership
     /// configuration. Each organizational unit ID must match the pattern
@@ -35,7 +35,7 @@ pub const MembershipAccountsConfigurationsUpdate = struct {
     ///
     /// The list must contain between 1 and 5 organizational unit IDs per invocation
     /// of the API request.
-    organizational_units_to_remove: ?[]const []const u8,
+    organizational_units_to_remove: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .cover_entire_organization = "coverEntireOrganization",

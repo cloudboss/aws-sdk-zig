@@ -9,20 +9,20 @@ pub const ComponentConditionProperty = struct {
     @"else": ?*ComponentProperty = null,
 
     /// The name of a field. Specify this when the property is a data model.
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// The value of the property to evaluate.
-    operand: ?[]const u8,
+    operand: ?[]const u8 = null,
 
     /// The type of the property to evaluate.
-    operand_type: ?[]const u8,
+    operand_type: ?[]const u8 = null,
 
     /// The operator to use to perform the evaluation, such as `eq` to represent
     /// equals.
-    operator: ?[]const u8,
+    operator: ?[]const u8 = null,
 
     /// The name of the conditional property.
-    property: ?[]const u8,
+    property: ?[]const u8 = null,
 
     /// The value to assign to the property if the condition is met.
     then: ?*ComponentProperty = null,

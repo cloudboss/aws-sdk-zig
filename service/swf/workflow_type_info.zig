@@ -8,10 +8,10 @@ pub const WorkflowTypeInfo = struct {
 
     /// If the type is in deprecated state, then it is set to the date when the type
     /// was deprecated.
-    deprecation_date: ?i64,
+    deprecation_date: ?i64 = null,
 
     /// The description of the type registered through RegisterWorkflowType.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The current status of the workflow type.
     status: RegistrationStatus,

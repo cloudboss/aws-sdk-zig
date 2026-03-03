@@ -3,23 +3,23 @@ const aws = @import("aws");
 const S3SSEAlgorithm = @import("s3_sse_algorithm.zig").S3SSEAlgorithm;
 
 pub const S3ObjectMetadata = struct {
-    cache_control: ?[]const u8,
+    cache_control: ?[]const u8 = null,
 
-    content_disposition: ?[]const u8,
+    content_disposition: ?[]const u8 = null,
 
-    content_encoding: ?[]const u8,
+    content_encoding: ?[]const u8 = null,
 
-    content_language: ?[]const u8,
-
-    /// *This member has been deprecated.*
-    content_length: ?i64,
+    content_language: ?[]const u8 = null,
 
     /// *This member has been deprecated.*
-    content_md5: ?[]const u8,
+    content_length: ?i64 = null,
 
-    content_type: ?[]const u8,
+    /// *This member has been deprecated.*
+    content_md5: ?[]const u8 = null,
 
-    http_expires_date: ?i64,
+    content_type: ?[]const u8 = null,
+
+    http_expires_date: ?i64 = null,
 
     /// *This member has been deprecated.*
     requester_charged: bool = false,
@@ -32,7 +32,7 @@ pub const S3ObjectMetadata = struct {
     /// (SSE-KMS) (`KMS`). For more
     /// information, see [Protecting data with server-side
     /// encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html) in the *Amazon S3 User Guide*. For [the Copy operation in Batch Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops), see [S3CopyObjectOperation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_S3CopyObjectOperation.html).
-    sse_algorithm: ?S3SSEAlgorithm,
+    sse_algorithm: ?S3SSEAlgorithm = null,
 
-    user_metadata: ?[]const aws.map.StringMapEntry,
+    user_metadata: ?[]const aws.map.StringMapEntry = null,
 };

@@ -7,13 +7,13 @@ const S3LoggingConfiguration = @import("s3_logging_configuration.zig").S3Logging
 /// Amazon CloudWatch log groups etc.
 pub const MonitoringConfiguration = struct {
     /// Configuration settings for delivering logs to Amazon CloudWatch log groups.
-    cloud_watch_logging_configuration: ?CloudWatchLoggingConfiguration,
+    cloud_watch_logging_configuration: ?CloudWatchLoggingConfiguration = null,
 
     /// Configuration settings for managed log persistence.
-    managed_logging_configuration: ?ManagedLoggingConfiguration,
+    managed_logging_configuration: ?ManagedLoggingConfiguration = null,
 
     /// Configuration settings for delivering logs to Amazon S3 buckets.
-    s3_logging_configuration: ?S3LoggingConfiguration,
+    s3_logging_configuration: ?S3LoggingConfiguration = null,
 
     pub const json_field_names = .{
         .cloud_watch_logging_configuration = "CloudWatchLoggingConfiguration",

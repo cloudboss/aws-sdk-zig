@@ -12,22 +12,22 @@ pub const Finding = struct {
     arn: []const u8,
 
     /// Amazon Resource Name (ARN) associated with the attack sequence finding.
-    associated_attack_sequence_arn: ?[]const u8,
+    associated_attack_sequence_arn: ?[]const u8 = null,
 
     /// The confidence score for the finding.
-    confidence: ?f64,
+    confidence: ?f64 = null,
 
     /// The time and date when the finding was created.
     created_at: []const u8,
 
     /// The description of the finding.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the finding.
     id: []const u8,
 
     /// The partition associated with the finding.
-    partition: ?[]const u8,
+    partition: ?[]const u8 = null,
 
     /// The Region where the finding was generated. For findings generated
     /// from [Global Service
@@ -43,13 +43,13 @@ pub const Finding = struct {
     /// The version of the schema used for the finding.
     schema_version: []const u8,
 
-    service: ?Service,
+    service: ?Service = null,
 
     /// The severity of the finding.
     severity: f64,
 
     /// The title of the finding.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The type of finding.
     @"type": []const u8,

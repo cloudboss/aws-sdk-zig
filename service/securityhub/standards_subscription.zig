@@ -17,7 +17,7 @@ pub const StandardsSubscription = struct {
     ///
     /// * `NOT_READY_FOR_UPDATES` - Controls in the standard cannot be retrieved or
     ///   configured.
-    standards_controls_updatable: ?StandardsControlsUpdatable,
+    standards_controls_updatable: ?StandardsControlsUpdatable = null,
 
     /// A key-value pair of input for the standard.
     standards_input: []const aws.map.StringMapEntry,
@@ -42,7 +42,7 @@ pub const StandardsSubscription = struct {
     standards_status: StandardsStatus,
 
     /// The reason for the current status.
-    standards_status_reason: ?StandardsStatusReason,
+    standards_status_reason: ?StandardsStatusReason = null,
 
     /// The ARN of the resource that represents your subscription to the standard.
     standards_subscription_arn: []const u8,

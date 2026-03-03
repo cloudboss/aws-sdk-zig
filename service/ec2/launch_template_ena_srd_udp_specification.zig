@@ -11,5 +11,5 @@ pub const LaunchTemplateEnaSrdUdpSpecification = struct {
     /// Indicates whether UDP traffic to and from the instance uses ENA Express. To
     /// specify this setting,
     /// you must first enable ENA Express.
-    ena_srd_udp_enabled: ?bool,
+    ena_srd_udp_enabled: ?bool = null,
 };

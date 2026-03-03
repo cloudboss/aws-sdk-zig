@@ -23,7 +23,7 @@ pub const AnomalyDetectorSummary = struct {
     status: AnomalyDetectorStatus,
 
     /// The tags applied to the anomaly detector.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .alias = "alias",

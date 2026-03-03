@@ -5,7 +5,7 @@ const RuleExecutionResult = @import("rule_execution_result.zig").RuleExecutionRe
 pub const RuleExecutionOutput = struct {
     /// Execution result information listed in the output details for a rule
     /// execution.
-    execution_result: ?RuleExecutionResult,
+    execution_result: ?RuleExecutionResult = null,
 
     pub const json_field_names = .{
         .execution_result = "executionResult",

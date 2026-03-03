@@ -26,29 +26,29 @@ const PerformanceInsightsStat = @import("performance_insights_stat.zig").Perform
 ///   Guide](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html).
 pub const PerformanceInsightsMetricsDetail = struct {
     /// The name used for a specific Performance Insights metric.
-    metric_display_name: ?[]const u8,
+    metric_display_name: ?[]const u8 = null,
 
     /// A single query to be processed for the metric. For more information, see `
     /// [PerformanceInsightsMetricQuery](https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsMetricQuery.html)
     /// `.
-    metric_query: ?PerformanceInsightsMetricQuery,
+    metric_query: ?PerformanceInsightsMetricQuery = null,
 
     /// For more information, see `
     /// [PerformanceInsightsReferenceData](https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsReferenceData.html)
     /// `.
-    reference_data: ?[]const PerformanceInsightsReferenceData,
+    reference_data: ?[]const PerformanceInsightsReferenceData = null,
 
     /// The metric statistics during the anomalous period detected by DevOps Guru;
-    stats_at_anomaly: ?[]const PerformanceInsightsStat,
+    stats_at_anomaly: ?[]const PerformanceInsightsStat = null,
 
     /// Typical metric statistics that are not considered anomalous. When DevOps
     /// Guru analyzes
     /// metrics, it compares them to `StatsAtBaseline` to help determine if they are
     /// anomalous.
-    stats_at_baseline: ?[]const PerformanceInsightsStat,
+    stats_at_baseline: ?[]const PerformanceInsightsStat = null,
 
     /// The unit of measure for a metric. For example, a session or a process.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metric_display_name = "MetricDisplayName",

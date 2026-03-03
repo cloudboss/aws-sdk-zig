@@ -42,18 +42,18 @@ pub const StreamEvent = struct {
     ///
     /// `StreamTakeoverLimitBreached` — The broadcast client reached the maximum
     /// allowed takeover attempts for this stream.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// Time when the event occurred. This is an ISO 8601 timestamp; *note that this
     /// is
     /// returned as a string*.
-    event_time: ?i64,
+    event_time: ?i64 = null,
 
     /// Name that identifies the stream event within a `type`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Logical group for certain events.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

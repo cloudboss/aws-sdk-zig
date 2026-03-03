@@ -5,7 +5,7 @@ pub const AssociateAccountsRequest = struct {
 
     /// A unique identifier to ensure idempotency of the request. Valid for 24 hours
     /// after creation.
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_ids = "accountIds",

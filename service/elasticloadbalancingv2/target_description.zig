@@ -28,7 +28,7 @@ pub const TargetDescription = struct {
     ///
     /// If the target type is `lambda`, this parameter is optional and the only
     /// supported value is `all`.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the target. If the target type of the target group is `instance`,
     /// specify an instance ID. If the target type is `ip`, specify an IP address.
@@ -45,7 +45,7 @@ pub const TargetDescription = struct {
     /// Balancer must have at least one listener whose port matches the target group
     /// port. This
     /// parameter is not used if the target is a Lambda function.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The server ID for the targets. This value is required if the protocol is
     /// `QUIC` or `TCP_QUIC` and can't be used with other protocols.
@@ -56,5 +56,5 @@ pub const TargetDescription = struct {
     /// modify the server ID for a registered target. You must deregister the target
     /// and then
     /// provide a new server ID when you register the target again.
-    quic_server_id: ?[]const u8,
+    quic_server_id: ?[]const u8 = null,
 };

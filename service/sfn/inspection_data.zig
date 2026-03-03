@@ -9,69 +9,69 @@ pub const InspectionData = struct {
     /// only be present when QueryLanguage for the state machine or individual
     /// states is set to JSONata. For more info, see [Transforming data with Step
     /// Functions](https://docs.aws.amazon.com/step-functions/latest/dg/data-transform.html).
-    after_arguments: ?[]const u8,
+    after_arguments: ?[]const u8 = null,
 
     /// The input after Step Functions applies the
     /// [InputPath](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-inputpath) filter. Not populated when QueryLanguage is JSONata.
-    after_input_path: ?[]const u8,
+    after_input_path: ?[]const u8 = null,
 
     /// The effective input after the ItemBatcher filter is applied in a Map state.
-    after_item_batcher: ?[]const u8,
+    after_item_batcher: ?[]const u8 = null,
 
     /// An array containing the inputs for each Map iteration, transformed by the
     /// ItemSelector specified in a Map state.
-    after_item_selector: ?[]const u8,
+    after_item_selector: ?[]const u8 = null,
 
     /// The effective input after the ItemsPath filter is applied. Not populated
     /// when the QueryLanguage is JSONata.
-    after_items_path: ?[]const u8,
+    after_items_path: ?[]const u8 = null,
 
     /// The effective input after the ItemsPointer filter is applied in a Map state.
-    after_items_pointer: ?[]const u8,
+    after_items_pointer: ?[]const u8 = null,
 
     /// The effective input after Step Functions applies the
     /// [Parameters](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-parameters) filter. Not populated when QueryLanguage is JSONata.
-    after_parameters: ?[]const u8,
+    after_parameters: ?[]const u8 = null,
 
     /// The effective result combined with the raw state input after Step Functions
     /// applies the
     /// [ResultPath](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultpath.html) filter. Not populated when QueryLanguage is JSONata.
-    after_result_path: ?[]const u8,
+    after_result_path: ?[]const u8 = null,
 
     /// The effective result after Step Functions applies the
     /// [ResultSelector](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-resultselector) filter. Not populated when QueryLanguage is JSONata.
-    after_result_selector: ?[]const u8,
+    after_result_selector: ?[]const u8 = null,
 
     /// An object containing data about a handled exception in the tested state.
-    error_details: ?InspectionErrorDetails,
+    error_details: ?InspectionErrorDetails = null,
 
     /// The raw state input.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The max concurrency of the Map state.
-    max_concurrency: ?i32,
+    max_concurrency: ?i32 = null,
 
     /// The raw HTTP request that is sent when you test an HTTP Task.
-    request: ?InspectionDataRequest,
+    request: ?InspectionDataRequest = null,
 
     /// The raw HTTP response that is returned when you test an HTTP Task.
-    response: ?InspectionDataResponse,
+    response: ?InspectionDataResponse = null,
 
     /// The state's raw result.
-    result: ?[]const u8,
+    result: ?[]const u8 = null,
 
     /// The tolerated failure threshold for a Map state as defined in number of Map
     /// state iterations.
-    tolerated_failure_count: ?i32,
+    tolerated_failure_count: ?i32 = null,
 
     /// The tolerated failure threshold for a Map state as defined in percentage of
     /// Map state iterations.
-    tolerated_failure_percentage: ?f32,
+    tolerated_failure_percentage: ?f32 = null,
 
     /// JSON string that contains the set of workflow variables after execution of
     /// the state. The set will include variables assigned in the state and
     /// variables set up as test state input.
-    variables: ?[]const u8,
+    variables: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .after_arguments = "afterArguments",

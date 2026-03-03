@@ -6,7 +6,7 @@ pub const S3KnowledgeBaseParameters = struct {
 
     /// The location of metadata files within the S3 bucket that describe the
     /// structure and content of the knowledge base.
-    metadata_files_location: ?[]const u8,
+    metadata_files_location: ?[]const u8 = null,
 
     /// Use the `RoleArn` structure to override an account-wide role for a specific
     /// S3 Knowledge Base data source. For example, say an account administrator has
@@ -14,7 +14,7 @@ pub const S3KnowledgeBaseParameters = struct {
     /// then use `RoleArn` to bypass the account-wide role and allow S3 access for
     /// the single S3 Knowledge Base data source that is specified in the structure,
     /// even if the account-wide role forbidding S3 access is still active.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_url = "BucketUrl",

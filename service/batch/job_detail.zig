@@ -18,18 +18,18 @@ const JobTimeout = @import("job_timeout.zig").JobTimeout;
 /// An object that represents an Batch job.
 pub const JobDetail = struct {
     /// The array properties of the job, if it's an array job.
-    array_properties: ?ArrayPropertiesDetail,
+    array_properties: ?ArrayPropertiesDetail = null,
 
     /// A list of job attempts that are associated with this job.
-    attempts: ?[]const AttemptDetail,
+    attempts: ?[]const AttemptDetail = null,
 
     /// Contains a list of consumable resources required by the job.
-    consumable_resource_properties: ?ConsumableResourceProperties,
+    consumable_resource_properties: ?ConsumableResourceProperties = null,
 
     /// An object that represents the details for the container that's associated
     /// with the job. If
     /// the details are for a multiple-container job, this object will be empty.
-    container: ?ContainerDetail,
+    container: ?ContainerDetail = null,
 
     /// The Unix timestamp (in milliseconds) for when the job was created. For
     /// non-array jobs and
@@ -40,29 +40,29 @@ pub const JobDetail = struct {
     /// jobs, this is when the child job was spawned by its parent and entered the
     /// `PENDING`
     /// state.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// A list of job IDs that this job depends on.
-    depends_on: ?[]const JobDependency,
+    depends_on: ?[]const JobDependency = null,
 
     /// An object with properties that are specific to Amazon ECS-based jobs.
-    ecs_properties: ?EcsPropertiesDetail,
+    ecs_properties: ?EcsPropertiesDetail = null,
 
     /// A list of job attempts that are associated with this job.
-    eks_attempts: ?[]const EksAttemptDetail,
+    eks_attempts: ?[]const EksAttemptDetail = null,
 
     /// An object with various properties that are specific to Amazon EKS based
     /// jobs.
-    eks_properties: ?EksPropertiesDetail,
+    eks_properties: ?EksPropertiesDetail = null,
 
     /// Indicates whether the job is canceled.
-    is_cancelled: ?bool,
+    is_cancelled: ?bool = null,
 
     /// Indicates whether the job is terminated.
-    is_terminated: ?bool,
+    is_terminated: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the job.
-    job_arn: ?[]const u8,
+    job_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the job definition that this job uses.
     job_definition: []const u8,
@@ -80,24 +80,24 @@ pub const JobDetail = struct {
     /// An object that represents the details of a node that's associated with a
     /// multi-node parallel
     /// job.
-    node_details: ?NodeDetails,
+    node_details: ?NodeDetails = null,
 
     /// An object that represents the node properties of a multi-node parallel job.
     ///
     /// This isn't applicable to jobs that are running on Fargate resources.
-    node_properties: ?NodeProperties,
+    node_properties: ?NodeProperties = null,
 
     /// Additional parameters that are passed to the job that replace parameter
     /// substitution
     /// placeholders or override any corresponding parameter defaults from the job
     /// definition.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The platform capabilities required by the job definition. If no value is
     /// specified, it
     /// defaults to `EC2`. Jobs run on Fargate resources specify
     /// `FARGATE`.
-    platform_capabilities: ?[]const PlatformCapability,
+    platform_capabilities: ?[]const PlatformCapability = null,
 
     /// Specifies whether to propagate the tags from the job or job definition to
     /// the corresponding
@@ -108,20 +108,20 @@ pub const JobDetail = struct {
     /// over job definitions tags. If the total number of combined tags from the job
     /// and job definition
     /// is over 50, the job is moved to the `FAILED` state.
-    propagate_tags: ?bool,
+    propagate_tags: ?bool = null,
 
     /// The retry strategy to use for this job if an attempt fails.
-    retry_strategy: ?RetryStrategy,
+    retry_strategy: ?RetryStrategy = null,
 
     /// The scheduling policy of the job definition. This only affects jobs in job
     /// queues with a
     /// fair-share policy. Jobs with a higher scheduling priority are scheduled
     /// before jobs with a lower
     /// scheduling priority.
-    scheduling_priority: ?i32,
+    scheduling_priority: ?i32 = null,
 
     /// The share identifier for the job.
-    share_identifier: ?[]const u8,
+    share_identifier: ?[]const u8 = null,
 
     /// The Unix timestamp (in milliseconds) for when the job was started. More
     /// specifically, it's
@@ -153,20 +153,20 @@ pub const JobDetail = struct {
     /// * `MISCONFIGURATION:SERVICE_ROLE_PERMISSIONS` - All compute environments
     ///   have
     /// problems with the service role permissions.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The Unix timestamp (in milliseconds) for when the job was stopped. More
     /// specifically, it's
     /// when the job transitioned from the `RUNNING` state to a terminal state, such
     /// as
     /// `SUCCEEDED` or `FAILED`.
-    stopped_at: ?i64,
+    stopped_at: ?i64 = null,
 
     /// The tags that are applied to the job.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The timeout configuration for the job.
-    timeout: ?JobTimeout,
+    timeout: ?JobTimeout = null,
 
     pub const json_field_names = .{
         .array_properties = "arrayProperties",

@@ -12,7 +12,7 @@ pub const ListSolFunctionInstanceInfo = struct {
     /// Network function instance ID.
     id: []const u8,
 
-    instantiated_vnf_info: ?GetSolInstantiatedVnfInfo,
+    instantiated_vnf_info: ?GetSolInstantiatedVnfInfo = null,
 
     /// Network function instance instantiation state.
     instantiation_state: VnfInstantiationState,
@@ -27,7 +27,7 @@ pub const ListSolFunctionInstanceInfo = struct {
     vnf_pkg_id: []const u8,
 
     /// Function package name.
-    vnf_pkg_name: ?[]const u8,
+    vnf_pkg_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

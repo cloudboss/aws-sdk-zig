@@ -11,7 +11,7 @@ pub const ManagedRuleSetVersion = struct {
     /// The Amazon Resource Name (ARN) of the vendor rule group that's used to
     /// define the
     /// published version of your managed rule group.
-    associated_rule_group_arn: ?[]const u8,
+    associated_rule_group_arn: ?[]const u8 = null,
 
     /// The web ACL capacity units (WCUs) required for this rule group.
     ///
@@ -26,29 +26,29 @@ pub const ManagedRuleSetVersion = struct {
     /// web ACL capacity units
     /// (WCU)](https://docs.aws.amazon.com/waf/latest/developerguide/aws-waf-capacity-units.html)
     /// in the *WAF Developer Guide*.
-    capacity: ?i64,
+    capacity: ?i64 = null,
 
     /// The time that this version is set to expire.
     ///
     /// Times are in Coordinated Universal Time (UTC) format. UTC format includes
     /// the special designator, Z. For example, "2016-09-27T14:50Z".
-    expiry_timestamp: ?i64,
+    expiry_timestamp: ?i64 = null,
 
     /// The amount of time you expect this version of your managed rule group to
     /// last, in days.
-    forecasted_lifetime: ?i32,
+    forecasted_lifetime: ?i32 = null,
 
     /// The last time that you updated this version.
     ///
     /// Times are in Coordinated Universal Time (UTC) format. UTC format includes
     /// the special designator, Z. For example, "2016-09-27T14:50Z".
-    last_update_timestamp: ?i64,
+    last_update_timestamp: ?i64 = null,
 
     /// The time that you first published this version.
     ///
     /// Times are in Coordinated Universal Time (UTC) format. UTC format includes
     /// the special designator, Z. For example, "2016-09-27T14:50Z".
-    publish_timestamp: ?i64,
+    publish_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .associated_rule_group_arn = "AssociatedRuleGroupArn",

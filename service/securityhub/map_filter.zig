@@ -69,18 +69,18 @@ pub const MapFilter = struct {
     /// rules. For more information,
     /// see [Automation
     /// rules](https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html) in the *Security Hub User Guide*.
-    comparison: ?MapFilterComparison,
+    comparison: ?MapFilterComparison = null,
 
     /// The key of the map filter. For example, for `ResourceTags`, `Key`
     /// identifies the name of the tag. For `UserDefinedFields`, `Key` is the
     /// name of the field.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value for the key in the map filter. Filter values are case sensitive.
     /// For example,
     /// one of the values for a tag called `Department` might be `Security`.
     /// If you provide `security` as the filter value, then there's no match.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comparison = "Comparison",

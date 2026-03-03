@@ -13,13 +13,13 @@ const DocumentAttributeTarget = @import("document_attribute_target.zig").Documen
 /// For more information, see [Custom document
 /// enrichment](https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html).
 pub const InlineDocumentEnrichmentConfiguration = struct {
-    condition: ?DocumentAttributeCondition,
+    condition: ?DocumentAttributeCondition = null,
 
     /// `TRUE` to delete content if the condition used for the target attribute is
     /// met.
-    document_content_operator: ?DocumentContentOperator,
+    document_content_operator: ?DocumentContentOperator = null,
 
-    target: ?DocumentAttributeTarget,
+    target: ?DocumentAttributeTarget = null,
 
     pub const json_field_names = .{
         .condition = "condition",

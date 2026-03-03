@@ -4,7 +4,7 @@ const AwsCloudFrontDistributionOriginGroup = @import("aws_cloud_front_distributi
 /// CloudFront distribution.
 pub const AwsCloudFrontDistributionOriginGroups = struct {
     /// The list of origin groups.
-    items: ?[]const AwsCloudFrontDistributionOriginGroup,
+    items: ?[]const AwsCloudFrontDistributionOriginGroup = null,
 
     pub const json_field_names = .{
         .items = "Items",

@@ -4,10 +4,10 @@ const EmailAddressInsightsVerdict = @import("email_address_insights_verdict.zig"
 /// Contains detailed validation information about an email address.
 pub const MailboxValidation = struct {
     /// Specific validation checks performed on the email address.
-    evaluations: ?EmailAddressInsightsMailboxEvaluations,
+    evaluations: ?EmailAddressInsightsMailboxEvaluations = null,
 
     /// Overall validity assessment with a conﬁdence verdict.
-    is_valid: ?EmailAddressInsightsVerdict,
+    is_valid: ?EmailAddressInsightsVerdict = null,
 
     pub const json_field_names = .{
         .evaluations = "Evaluations",

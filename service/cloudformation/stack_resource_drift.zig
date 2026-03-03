@@ -28,10 +28,10 @@ pub const StackResourceDrift = struct {
     ///
     /// For resources whose `StackResourceDriftStatus` is `DELETED`, this
     /// structure will not be present.
-    actual_properties: ?[]const u8,
+    actual_properties: ?[]const u8 = null,
 
     /// The reason for the drift status.
-    drift_status_reason: ?[]const u8,
+    drift_status_reason: ?[]const u8 = null,
 
     /// A JSON structure that contains the expected property values of the stack
     /// resource, as
@@ -40,7 +40,7 @@ pub const StackResourceDrift = struct {
     ///
     /// For resources whose `StackResourceDriftStatus` is `DELETED`, this
     /// structure will not be present.
-    expected_properties: ?[]const u8,
+    expected_properties: ?[]const u8 = null,
 
     /// The logical name of the resource specified in the template.
     logical_resource_id: []const u8,
@@ -48,12 +48,12 @@ pub const StackResourceDrift = struct {
     /// Contains information about the module from which the resource was created,
     /// if the resource
     /// was created from a module included in the stack template.
-    module_info: ?ModuleInfo,
+    module_info: ?ModuleInfo = null,
 
     /// The name or unique identifier that corresponds to a physical instance ID of
     /// a resource
     /// supported by CloudFormation.
-    physical_resource_id: ?[]const u8,
+    physical_resource_id: ?[]const u8 = null,
 
     /// Context information that enables CloudFormation to uniquely identify a
     /// resource. CloudFormation uses
@@ -62,14 +62,14 @@ pub const StackResourceDrift = struct {
     /// uniquely identify that resource. Each context key-value pair specifies a
     /// unique resource that
     /// contains the targeted resource.
-    physical_resource_id_context: ?[]const PhysicalResourceIdContextKeyValuePair,
+    physical_resource_id_context: ?[]const PhysicalResourceIdContextKeyValuePair = null,
 
     /// A collection of the resource properties whose actual values differ from
     /// their expected
     /// values. These will be present only for resources whose
     /// `StackResourceDriftStatus` is
     /// `MODIFIED`.
-    property_differences: ?[]const PropertyDifference,
+    property_differences: ?[]const PropertyDifference = null,
 
     /// The type of the resource.
     resource_type: []const u8,

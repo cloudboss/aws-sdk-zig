@@ -6,7 +6,7 @@ pub const ImageConfiguration = struct {
     /// The SHA256 digest of the image URI. This indicates which specific image the
     /// application is configured for. The image digest doesn't exist until an
     /// application has started.
-    resolved_image_digest: ?[]const u8,
+    resolved_image_digest: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .image_uri = "imageUri",

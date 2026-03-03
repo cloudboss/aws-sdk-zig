@@ -4,7 +4,7 @@ const SidewalkResourceTypeEventConfiguration = @import("sidewalk_resource_type_e
 /// enabling or
 /// disabling relevant topic.
 pub const MessageDeliveryStatusResourceTypeEventConfiguration = struct {
-    sidewalk: ?SidewalkResourceTypeEventConfiguration,
+    sidewalk: ?SidewalkResourceTypeEventConfiguration = null,
 
     pub const json_field_names = .{
         .sidewalk = "Sidewalk",

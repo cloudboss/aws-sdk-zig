@@ -7,7 +7,7 @@ pub const CodeRepository = struct {
     /// repository.
     ///
     /// `CodeConfiguration` is required only for `CreateService` request.
-    code_configuration: ?CodeConfiguration,
+    code_configuration: ?CodeConfiguration = null,
 
     /// The location of the repository that contains the source code.
     repository_url: []const u8,
@@ -18,7 +18,7 @@ pub const CodeRepository = struct {
     /// The path of the directory that stores source code and configuration files.
     /// The build and start commands also execute from here. The path is absolute
     /// from root and, if not specified, defaults to the repository root.
-    source_directory: ?[]const u8,
+    source_directory: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code_configuration = "CodeConfiguration",

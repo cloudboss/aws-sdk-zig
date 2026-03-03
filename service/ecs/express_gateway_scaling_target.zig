@@ -15,17 +15,17 @@ const ExpressGatewayServiceScalingMetric = @import("express_gateway_service_scal
 pub const ExpressGatewayScalingTarget = struct {
     /// The metric used for auto-scaling decisions. The default metric used for an
     /// Express service is `CPUUtilization`.
-    auto_scaling_metric: ?ExpressGatewayServiceScalingMetric,
+    auto_scaling_metric: ?ExpressGatewayServiceScalingMetric = null,
 
     /// The target value for the auto-scaling metric. The default value for an
     /// Express service is 60.
-    auto_scaling_target_value: ?i32,
+    auto_scaling_target_value: ?i32 = null,
 
     /// The maximum number of tasks to run in the Express service.
-    max_task_count: ?i32,
+    max_task_count: ?i32 = null,
 
     /// The minimum number of tasks to run in the Express service.
-    min_task_count: ?i32,
+    min_task_count: ?i32 = null,
 
     pub const json_field_names = .{
         .auto_scaling_metric = "autoScalingMetric",

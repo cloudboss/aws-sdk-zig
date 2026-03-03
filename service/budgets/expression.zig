@@ -5,22 +5,22 @@ const TagValues = @import("tag_values.zig").TagValues;
 /// Use Expression to filter in various Budgets APIs.
 pub const Expression = struct {
     /// Return results that match both Dimension objects.
-    @"and": ?[]const Expression,
+    @"and": ?[]const Expression = null,
 
     /// The filter that's based on CostCategoryValues.
-    cost_categories: ?CostCategoryValues,
+    cost_categories: ?CostCategoryValues = null,
 
     /// The specific Dimension to use for Expression.
-    dimensions: ?ExpressionDimensionValues,
+    dimensions: ?ExpressionDimensionValues = null,
 
     /// Return results that don't match a Dimension object.
     not: ?*Expression = null,
 
     /// Return results that match either Dimension object.
-    @"or": ?[]const Expression,
+    @"or": ?[]const Expression = null,
 
     /// The specific Tag to use for Expression.
-    tags: ?TagValues,
+    tags: ?TagValues = null,
 
     pub const json_field_names = .{
         .@"and" = "And",

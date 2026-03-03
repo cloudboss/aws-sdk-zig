@@ -3,14 +3,14 @@
 /// profile to a local user profile.
 pub const ProviderUserIdentifierType = struct {
     /// The name of the provider attribute to link to, such as `NameID`.
-    provider_attribute_name: ?[]const u8,
+    provider_attribute_name: ?[]const u8 = null,
 
     /// The value of the provider attribute to link to, such as
     /// `xxxxx_account`.
-    provider_attribute_value: ?[]const u8,
+    provider_attribute_value: ?[]const u8 = null,
 
     /// The name of the provider, such as Facebook, Google, or Login with Amazon.
-    provider_name: ?[]const u8,
+    provider_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .provider_attribute_name = "ProviderAttributeName",

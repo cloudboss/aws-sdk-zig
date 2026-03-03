@@ -8,63 +8,63 @@ const CRResourceStatus = @import("cr_resource_status.zig").CRResourceStatus;
 /// Information about a firewall rule that was updated in a batch operation.
 pub const BatchUpdateFirewallRuleResult = struct {
     /// The action configured for the updated firewall rule.
-    action: ?FirewallRuleAction,
+    action: ?FirewallRuleAction = null,
 
     /// The DNS record type configured for the updated firewall rule's custom
     /// response.
-    block_override_dns_type: ?BlockOverrideDnsQueryType,
+    block_override_dns_type: ?BlockOverrideDnsQueryType = null,
 
     /// The custom domain name configured for the updated firewall rule's BLOCK
     /// response.
-    block_override_domain: ?[]const u8,
+    block_override_domain: ?[]const u8 = null,
 
     /// The TTL value configured for the updated firewall rule's custom response.
-    block_override_ttl: ?i32,
+    block_override_ttl: ?i32 = null,
 
     /// The type of block response configured for the updated firewall rule.
-    block_response: ?FirewallBlockResponse,
+    block_response: ?FirewallBlockResponse = null,
 
     /// The unique string that identified the request and ensured idempotency.
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The confidence threshold configured for the updated firewall rule's advanced
     /// threat detection.
-    confidence_threshold: ?ConfidenceThreshold,
+    confidence_threshold: ?ConfidenceThreshold = null,
 
     /// The date and time when the firewall rule was originally created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of the updated firewall rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether advanced DNS threat protection is enabled for the updated firewall
     /// rule.
-    dns_advanced_protection: ?DnsAdvancedProtection,
+    dns_advanced_protection: ?DnsAdvancedProtection = null,
 
     /// The ID of the DNS view associated with the updated firewall rule.
-    dns_view_id: ?[]const u8,
+    dns_view_id: ?[]const u8 = null,
 
     /// The ID of the firewall domain list associated with the updated firewall
     /// rule.
-    firewall_domain_list_id: ?[]const u8,
+    firewall_domain_list_id: ?[]const u8 = null,
 
     /// The unique identifier of the updated firewall rule.
     id: []const u8,
 
     /// The name of the updated firewall rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The priority of the updated firewall rule.
-    priority: ?i64,
+    priority: ?i64 = null,
 
     /// The DNS query type that the updated firewall rule matches.
-    query_type: ?[]const u8,
+    query_type: ?[]const u8 = null,
 
     /// The current status of the updated firewall rule.
-    status: ?CRResourceStatus,
+    status: ?CRResourceStatus = null,
 
     /// The date and time when the firewall rule was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .action = "action",

@@ -12,5 +12,5 @@ pub const Tag = struct {
     /// The string length should be between 0 and 256 characters. Valid characters
     /// include `a-z`, `A-Z`, `0-9`, space, and the special characters `_ - . : / =
     /// + @`.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

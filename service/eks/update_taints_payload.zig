@@ -7,10 +7,10 @@ const Taint = @import("taint.zig").Taint;
 /// groups](https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html) in the *Amazon EKS User Guide*.
 pub const UpdateTaintsPayload = struct {
     /// Kubernetes taints to be added or updated.
-    add_or_update_taints: ?[]const Taint,
+    add_or_update_taints: ?[]const Taint = null,
 
     /// Kubernetes taints to remove.
-    remove_taints: ?[]const Taint,
+    remove_taints: ?[]const Taint = null,
 
     pub const json_field_names = .{
         .add_or_update_taints = "addOrUpdateTaints",

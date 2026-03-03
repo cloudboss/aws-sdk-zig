@@ -6,29 +6,29 @@ const DataLabelPosition = @import("data_label_position.zig").DataLabelPosition;
 /// The options that determine the presentation of the data labels.
 pub const FunnelChartDataLabelOptions = struct {
     /// The visibility of the category labels within the data labels.
-    category_label_visibility: ?Visibility,
+    category_label_visibility: ?Visibility = null,
 
     /// The color of the data label text.
-    label_color: ?[]const u8,
+    label_color: ?[]const u8 = null,
 
     /// The font configuration for the data labels.
     ///
     /// Only the `FontSize` attribute of the font configuration is used for data
     /// labels.
-    label_font_configuration: ?FontConfiguration,
+    label_font_configuration: ?FontConfiguration = null,
 
     /// Determines the style of the metric labels.
-    measure_data_label_style: ?FunnelChartMeasureDataLabelStyle,
+    measure_data_label_style: ?FunnelChartMeasureDataLabelStyle = null,
 
     /// The visibility of the measure labels within the data labels.
-    measure_label_visibility: ?Visibility,
+    measure_label_visibility: ?Visibility = null,
 
     /// Determines the positioning of the data label relative to a section of the
     /// funnel.
-    position: ?DataLabelPosition,
+    position: ?DataLabelPosition = null,
 
     /// The visibility option that determines if data labels are displayed.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .category_label_visibility = "CategoryLabelVisibility",

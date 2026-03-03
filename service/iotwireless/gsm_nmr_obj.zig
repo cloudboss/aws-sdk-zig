@@ -9,11 +9,11 @@ pub const GsmNmrObj = struct {
     bsic: i32,
 
     /// Global identity information of the GSM object.
-    global_identity: ?GlobalIdentity,
+    global_identity: ?GlobalIdentity = null,
 
     /// Rx level, which is the received signal power, measured in dBm
     /// (decibel-milliwatts).
-    rx_level: ?i32,
+    rx_level: ?i32 = null,
 
     pub const json_field_names = .{
         .bcch = "Bcch",

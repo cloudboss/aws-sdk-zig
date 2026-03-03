@@ -6,7 +6,7 @@ pub const ResourceTag = struct {
     resource_tag_key: []const u8,
 
     /// The tag value.
-    resource_tag_value: ?[]const u8,
+    resource_tag_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resource_tag_key = "ResourceTagKey",

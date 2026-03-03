@@ -5,13 +5,13 @@
 pub const OpenIdConfiguration = struct {
     /// The audience value to copy into your Microsoft Entra app registration's
     /// OIDC.
-    audience: ?[]const u8,
+    audience: ?[]const u8 = null,
 
     /// The issuer value to copy into your Microsoft Entra app registration's OIDC.
-    issuer: ?[]const u8,
+    issuer: ?[]const u8 = null,
 
     /// The subject value to copy into your Microsoft Entra app registration's OIDC.
-    subject: ?[]const u8,
+    subject: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .audience = "Audience",

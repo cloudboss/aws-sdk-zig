@@ -9,7 +9,7 @@ pub const PivotOperation = struct {
     alias: []const u8,
 
     /// The list of column names to group by when performing the pivot operation.
-    group_by_column_names: ?[]const []const u8,
+    group_by_column_names: ?[]const []const u8 = null,
 
     /// Configuration that specifies which labels to pivot and how to structure the
     /// resulting columns.

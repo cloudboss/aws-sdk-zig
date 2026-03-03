@@ -5,14 +5,14 @@ const FieldSortOptions = @import("field_sort_options.zig").FieldSortOptions;
 pub const SankeyDiagramSortConfiguration = struct {
     /// The limit on the number of destination nodes that are displayed in a sankey
     /// diagram.
-    destination_items_limit: ?ItemsLimitConfiguration,
+    destination_items_limit: ?ItemsLimitConfiguration = null,
 
     /// The limit on the number of source nodes that are displayed in a sankey
     /// diagram.
-    source_items_limit: ?ItemsLimitConfiguration,
+    source_items_limit: ?ItemsLimitConfiguration = null,
 
     /// The sort configuration of the weight fields.
-    weight_sort: ?[]const FieldSortOptions,
+    weight_sort: ?[]const FieldSortOptions = null,
 
     pub const json_field_names = .{
         .destination_items_limit = "DestinationItemsLimit",

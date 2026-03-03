@@ -18,28 +18,28 @@ pub const WriteJourneyRequest = struct {
     /// (string) for an activity and the value is the settings for the activity. An
     /// activity identifier can contain a maximum of 100 characters. The characters
     /// must be alphanumeric characters.
-    activities: ?[]const aws.map.MapEntry(Activity),
+    activities: ?[]const aws.map.MapEntry(Activity) = null,
 
     /// The time when journey will stop sending messages. QuietTime should be
     /// configured first and SendingSchedule should be set to true.
-    closed_days: ?ClosedDays,
+    closed_days: ?ClosedDays = null,
 
     /// The date, in ISO 8601 format, when the journey was created.
-    creation_date: ?[]const u8,
+    creation_date: ?[]const u8 = null,
 
     /// The channel-specific configurations for the journey.
-    journey_channel_settings: ?JourneyChannelSettings,
+    journey_channel_settings: ?JourneyChannelSettings = null,
 
     /// The date, in ISO 8601 format, when the journey was last modified.
-    last_modified_date: ?[]const u8,
+    last_modified_date: ?[]const u8 = null,
 
     /// The messaging and entry limits for the journey.
-    limits: ?JourneyLimits,
+    limits: ?JourneyLimits = null,
 
     /// Specifies whether the journey's scheduled start and end times use each
     /// participant's local time. To base the schedule on each participant's local
     /// time, set this value to true.
-    local_time: ?bool,
+    local_time: ?bool = null,
 
     /// The name of the journey. A journey name can contain a maximum of 150
     /// characters. The characters can be alphanumeric characters or symbols, such
@@ -48,7 +48,7 @@ pub const WriteJourneyRequest = struct {
 
     /// The time when journey allow to send messages. QuietTime should be configured
     /// first and SendingSchedule should be set to true.
-    open_hours: ?OpenHours,
+    open_hours: ?OpenHours = null,
 
     /// The quiet time settings for the journey. Quiet time is a specific time range
     /// when a journey doesn't send messages to participants, if all the following
@@ -63,30 +63,30 @@ pub const WriteJourneyRequest = struct {
     ///
     /// If any of the preceding conditions isn't met, the participant will receive
     /// messages from the journey, even if quiet time is enabled.
-    quiet_time: ?QuietTime,
+    quiet_time: ?QuietTime = null,
 
     /// The frequency with which Amazon Pinpoint evaluates segment and event data
     /// for the journey, as a duration in ISO 8601 format.
-    refresh_frequency: ?[]const u8,
+    refresh_frequency: ?[]const u8 = null,
 
     /// Indicates whether the journey participants should be refreshed when a
     /// segment is updated.
-    refresh_on_segment_update: ?bool,
+    refresh_on_segment_update: ?bool = null,
 
     /// The schedule settings for the journey.
-    schedule: ?JourneySchedule,
+    schedule: ?JourneySchedule = null,
 
     /// Indicates if journey has Advance Quiet Time enabled. This flag should be set
     /// to true in order to allow using OpenHours and ClosedDays.
-    sending_schedule: ?bool,
+    sending_schedule: ?bool = null,
 
     /// The unique identifier for the first activity in the journey. The identifier
     /// for this activity can contain a maximum of 128 characters. The characters
     /// must be alphanumeric characters.
-    start_activity: ?[]const u8,
+    start_activity: ?[]const u8 = null,
 
     /// The segment that defines which users are participants in the journey.
-    start_condition: ?StartCondition,
+    start_condition: ?StartCondition = null,
 
     /// The status of the journey. Valid values are:
     ///
@@ -99,7 +99,7 @@ pub const WriteJourneyRequest = struct {
     /// PAUSED, CANCELLED, COMPLETED, and CLOSED states are not supported in
     /// requests to create or update a journey. To cancel, pause, or resume a
     /// journey, use the Journey State resource.
-    state: ?State,
+    state: ?State = null,
 
     /// An array of time zone estimation methods, if any, to use for determining an
     /// [Endpoints](https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html) time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.
@@ -112,11 +112,11 @@ pub const WriteJourneyRequest = struct {
     /// POSTAL_CODE detection is only supported in the United States, United
     /// Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and
     /// in regions where Amazon Pinpoint is available.
-    timezone_estimation_methods: ?[]const __TimezoneEstimationMethodsElement,
+    timezone_estimation_methods: ?[]const __TimezoneEstimationMethodsElement = null,
 
     /// Specifies whether endpoints in quiet hours should enter a wait till the end
     /// of their quiet hours.
-    wait_for_quiet_time: ?bool,
+    wait_for_quiet_time: ?bool = null,
 
     pub const json_field_names = .{
         .activities = "Activities",

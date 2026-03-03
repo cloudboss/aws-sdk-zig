@@ -5,10 +5,10 @@ const Positioning = @import("positioning.zig").Positioning;
 pub const UpdateFPorts = struct {
     /// LoRaWAN application, which can be used for geolocation by activating
     /// positioning.
-    applications: ?[]const ApplicationConfig,
+    applications: ?[]const ApplicationConfig = null,
 
     /// Positioning FPorts for the ClockSync, Stream, and GNSS functions.
-    positioning: ?Positioning,
+    positioning: ?Positioning = null,
 
     pub const json_field_names = .{
         .applications = "Applications",

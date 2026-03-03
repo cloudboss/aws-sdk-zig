@@ -4,7 +4,7 @@ pub const NetworkSettingsSummary = struct {
     network_settings_arn: []const u8,
 
     /// The VPC ID of the network settings.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .network_settings_arn = "networkSettingsArn",

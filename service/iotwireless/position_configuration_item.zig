@@ -6,16 +6,16 @@ pub const PositionConfigurationItem = struct {
     /// The position data destination that describes the AWS IoT rule that processes
     /// the
     /// device's position data for use by AWS IoT Core for LoRaWAN.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// Resource identifier for the position configuration.
-    resource_identifier: ?[]const u8,
+    resource_identifier: ?[]const u8 = null,
 
     /// Resource type of the resource for the position configuration.
-    resource_type: ?PositionResourceType,
+    resource_type: ?PositionResourceType = null,
 
     /// The details of the positioning solver object used to compute the location.
-    solvers: ?PositionSolverDetails,
+    solvers: ?PositionSolverDetails = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

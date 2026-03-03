@@ -1,10 +1,10 @@
 /// The connection endpoint for an Amazon Redshift cluster.
 pub const AwsRedshiftClusterEndpoint = struct {
     /// The DNS address of the cluster.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// The port that the database engine listens on.
-    port: ?i32,
+    port: ?i32 = null,
 
     pub const json_field_names = .{
         .address = "Address",

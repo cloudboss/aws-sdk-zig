@@ -3,7 +3,7 @@ const ConnectorOAuthRequest = @import("connector_o_auth_request.zig").ConnectorO
 /// The connector-specific profile credentials required by Google Analytics.
 pub const GoogleAnalyticsConnectorProfileCredentials = struct {
     /// The credentials used to access protected Google Analytics resources.
-    access_token: ?[]const u8,
+    access_token: ?[]const u8 = null,
 
     /// The identifier for the desired client.
     client_id: []const u8,
@@ -14,12 +14,12 @@ pub const GoogleAnalyticsConnectorProfileCredentials = struct {
 
     /// The OAuth requirement needed to request security tokens from the connector
     /// endpoint.
-    o_auth_request: ?ConnectorOAuthRequest,
+    o_auth_request: ?ConnectorOAuthRequest = null,
 
     /// The credentials used to acquire new access tokens. This is required only for
     /// OAuth2
     /// access tokens, and is not required for OAuth1 access tokens.
-    refresh_token: ?[]const u8,
+    refresh_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_token = "accessToken",

@@ -2,7 +2,7 @@ const ResourcePendingMaintenanceActions = @import("resource_pending_maintenance_
 
 pub const ApplyPendingMaintenanceActionResponse = struct {
     /// The DMS resource that the pending maintenance action will be applied to.
-    resource_pending_maintenance_actions: ?ResourcePendingMaintenanceActions,
+    resource_pending_maintenance_actions: ?ResourcePendingMaintenanceActions = null,
 
     pub const json_field_names = .{
         .resource_pending_maintenance_actions = "ResourcePendingMaintenanceActions",

@@ -1,35 +1,35 @@
 /// Details on the Amazon EC2 Resource.
 pub const EC2ResourceDetails = struct {
     /// The hourly public On-Demand rate for the instance type.
-    hourly_on_demand_rate: ?[]const u8,
+    hourly_on_demand_rate: ?[]const u8 = null,
 
     /// The type of Amazon Web Services instance.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// The memory capacity of the Amazon Web Services instance.
-    memory: ?[]const u8,
+    memory: ?[]const u8 = null,
 
     /// The network performance capacity of the Amazon Web Services instance.
-    network_performance: ?[]const u8,
+    network_performance: ?[]const u8 = null,
 
     /// The platform of the Amazon Web Services instance. The platform is the
     /// specific
     /// combination of operating system, license model, and software on an instance.
-    platform: ?[]const u8,
+    platform: ?[]const u8 = null,
 
     /// The Amazon Web Services Region of the instance.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The SKU of the product.
-    sku: ?[]const u8,
+    sku: ?[]const u8 = null,
 
     /// The disk storage of the Amazon Web Services instance. This doesn't include
     /// EBS
     /// storage.
-    storage: ?[]const u8,
+    storage: ?[]const u8 = null,
 
     /// The number of VCPU cores in the Amazon Web Services instance type.
-    vcpu: ?[]const u8,
+    vcpu: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .hourly_on_demand_rate = "HourlyOnDemandRate",

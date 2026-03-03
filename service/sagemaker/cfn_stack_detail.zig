@@ -1,10 +1,10 @@
 /// Details about the CloudFormation stack.
 pub const CfnStackDetail = struct {
     /// The unique identifier of the CloudFormation stack.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the CloudFormation stack.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A human-readable message about the stack's current status.
     status_message: []const u8,

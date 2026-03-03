@@ -9,7 +9,7 @@ const PromptAttemptSpecification = @import("prompt_attempt_specification.zig").P
 pub const PromptSpecification = struct {
     /// Indicates whether the user can interrupt a speech prompt from the
     /// bot.
-    allow_interrupt: ?bool,
+    allow_interrupt: ?bool = null,
 
     /// The maximum number of times the bot tries to elicit a response from
     /// the user using this prompt.
@@ -20,10 +20,10 @@ pub const PromptSpecification = struct {
     message_groups: []const MessageGroup,
 
     /// Indicates how a message is selected from a message group among retries.
-    message_selection_strategy: ?MessageSelectionStrategy,
+    message_selection_strategy: ?MessageSelectionStrategy = null,
 
     /// Specifies the advanced settings on each attempt of the prompt.
-    prompt_attempts_specification: ?[]const aws.map.MapEntry(PromptAttemptSpecification),
+    prompt_attempts_specification: ?[]const aws.map.MapEntry(PromptAttemptSpecification) = null,
 
     pub const json_field_names = .{
         .allow_interrupt = "allowInterrupt",

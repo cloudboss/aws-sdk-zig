@@ -3,16 +3,16 @@ const Compatibility = @import("compatibility.zig").Compatibility;
 /// Information about an add-on version.
 pub const AddonVersionInfo = struct {
     /// The version of the add-on.
-    addon_version: ?[]const u8,
+    addon_version: ?[]const u8 = null,
 
     /// The architectures that the version supports.
-    architecture: ?[]const []const u8,
+    architecture: ?[]const []const u8 = null,
 
     /// An object representing the compatibilities of a version.
-    compatibilities: ?[]const Compatibility,
+    compatibilities: ?[]const Compatibility = null,
 
     /// Indicates the compute type of the add-on version.
-    compute_types: ?[]const []const u8,
+    compute_types: ?[]const []const u8 = null,
 
     /// Whether the add-on requires configuration.
     requires_configuration: bool = false,

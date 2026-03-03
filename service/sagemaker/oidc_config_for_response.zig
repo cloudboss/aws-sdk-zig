@@ -4,35 +4,35 @@ const aws = @import("aws");
 pub const OidcConfigForResponse = struct {
     /// A string to string map of identifiers specific to the custom identity
     /// provider (IdP) being used.
-    authentication_request_extra_params: ?[]const aws.map.StringMapEntry,
+    authentication_request_extra_params: ?[]const aws.map.StringMapEntry = null,
 
     /// The OIDC IdP authorization endpoint used to configure your private
     /// workforce.
-    authorization_endpoint: ?[]const u8,
+    authorization_endpoint: ?[]const u8 = null,
 
     /// The OIDC IdP client ID used to configure your private workforce.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     /// The OIDC IdP issuer used to configure your private workforce.
-    issuer: ?[]const u8,
+    issuer: ?[]const u8 = null,
 
     /// The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private
     /// workforce.
-    jwks_uri: ?[]const u8,
+    jwks_uri: ?[]const u8 = null,
 
     /// The OIDC IdP logout endpoint used to configure your private workforce.
-    logout_endpoint: ?[]const u8,
+    logout_endpoint: ?[]const u8 = null,
 
     /// An array of string identifiers used to refer to the specific pieces of user
     /// data or claims that the client application wants to access.
-    scope: ?[]const u8,
+    scope: ?[]const u8 = null,
 
     /// The OIDC IdP token endpoint used to configure your private workforce.
-    token_endpoint: ?[]const u8,
+    token_endpoint: ?[]const u8 = null,
 
     /// The OIDC IdP user information endpoint used to configure your private
     /// workforce.
-    user_info_endpoint: ?[]const u8,
+    user_info_endpoint: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authentication_request_extra_params = "AuthenticationRequestExtraParams",

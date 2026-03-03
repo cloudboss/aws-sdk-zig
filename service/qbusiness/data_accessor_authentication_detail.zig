@@ -6,7 +6,7 @@ const DataAccessorAuthenticationType = @import("data_accessor_authentication_typ
 /// data accessor.
 pub const DataAccessorAuthenticationDetail = struct {
     /// The specific authentication configuration based on the authentication type.
-    authentication_configuration: ?DataAccessorAuthenticationConfiguration,
+    authentication_configuration: ?DataAccessorAuthenticationConfiguration = null,
 
     /// The type of authentication to use for the data accessor. This determines how
     /// the ISV authenticates when accessing data. You can use one of two
@@ -23,7 +23,7 @@ pub const DataAccessorAuthenticationDetail = struct {
     /// A list of external identifiers associated with this authentication
     /// configuration. These are used to correlate the data accessor with external
     /// systems.
-    external_ids: ?[]const []const u8,
+    external_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .authentication_configuration = "authenticationConfiguration",

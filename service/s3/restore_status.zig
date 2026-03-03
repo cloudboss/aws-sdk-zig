@@ -25,7 +25,7 @@ pub const RestoreStatus = struct {
     /// RestoreExpiryDate="2012-12-21T00:00:00.000Z"`
     ///
     /// If the object hasn't been restored, there is no header response.
-    is_restore_in_progress: ?bool,
+    is_restore_in_progress: ?bool = null,
 
     /// Indicates when the restored copy will expire. This value is populated only
     /// if the object has already
@@ -33,5 +33,5 @@ pub const RestoreStatus = struct {
     ///
     /// `x-amz-optional-object-attributes: IsRestoreInProgress="false",
     /// RestoreExpiryDate="2012-12-21T00:00:00.000Z"`
-    restore_expiry_date: ?i64,
+    restore_expiry_date: ?i64 = null,
 };

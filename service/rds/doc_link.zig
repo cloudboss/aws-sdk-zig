@@ -2,8 +2,8 @@
 /// recommendation.
 pub const DocLink = struct {
     /// The text with the link to documentation for the recommendation.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// The URL for the documentation for the recommendation.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 };

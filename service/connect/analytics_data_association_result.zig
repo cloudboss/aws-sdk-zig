@@ -5,19 +5,19 @@
 /// `ResourceShareArn`.
 pub const AnalyticsDataAssociationResult = struct {
     /// The identifier of the dataset.
-    data_set_id: ?[]const u8,
+    data_set_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Resource Access Manager share.
-    resource_share_arn: ?[]const u8,
+    resource_share_arn: ?[]const u8 = null,
 
     /// The Resource Access Manager share ID.
-    resource_share_id: ?[]const u8,
+    resource_share_id: ?[]const u8 = null,
 
     /// The Amazon Web Services Resource Access Manager status of association.
-    resource_share_status: ?[]const u8,
+    resource_share_status: ?[]const u8 = null,
 
     /// The identifier of the target account.
-    target_account_id: ?[]const u8,
+    target_account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_set_id = "DataSetId",

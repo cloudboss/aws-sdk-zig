@@ -2,18 +2,18 @@
 pub const PullRequestSourceReferenceUpdatedEventMetadata = struct {
     /// The full commit ID of the commit in the source branch that was the tip of
     /// the branch at the time the pull request was updated.
-    after_commit_id: ?[]const u8,
+    after_commit_id: ?[]const u8 = null,
 
     /// The full commit ID of the commit in the destination branch that was the tip
     /// of the branch at the time the pull request was updated.
-    before_commit_id: ?[]const u8,
+    before_commit_id: ?[]const u8 = null,
 
     /// The commit ID of the most recent commit that the source branch and the
     /// destination branch have in common.
-    merge_base: ?[]const u8,
+    merge_base: ?[]const u8 = null,
 
     /// The name of the repository where the pull request was updated.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .after_commit_id = "afterCommitId",

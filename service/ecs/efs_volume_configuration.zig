@@ -8,7 +8,7 @@ const EFSTransitEncryption = @import("efs_transit_encryption.zig").EFSTransitEnc
 /// the *Amazon Elastic Container Service Developer Guide*.
 pub const EFSVolumeConfiguration = struct {
     /// The authorization configuration details for the Amazon EFS file system.
-    authorization_config: ?EFSAuthorizationConfig,
+    authorization_config: ?EFSAuthorizationConfig = null,
 
     /// The Amazon EFS file system ID to use.
     file_system_id: []const u8,
@@ -22,7 +22,7 @@ pub const EFSVolumeConfiguration = struct {
     /// If an EFS access point is specified in the `authorizationConfig`, the
     /// root directory parameter must either be omitted or set to `/` which will
     /// enforce the path set on the EFS access point.
-    root_directory: ?[]const u8,
+    root_directory: ?[]const u8 = null,
 
     /// Determines whether to use encryption for Amazon EFS data in transit between
     /// the Amazon
@@ -33,7 +33,7 @@ pub const EFSVolumeConfiguration = struct {
     /// `DISABLED` is used. For more information, see [Encrypting data in
     /// transit](https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html) in
     /// the *Amazon Elastic File System User Guide*.
-    transit_encryption: ?EFSTransitEncryption,
+    transit_encryption: ?EFSTransitEncryption = null,
 
     /// The port to use when sending encrypted data between the Amazon ECS host and
     /// the Amazon
@@ -45,7 +45,7 @@ pub const EFSVolumeConfiguration = struct {
     /// helper](https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html) in
     /// the *Amazon Elastic File System User
     /// Guide*.
-    transit_encryption_port: ?i32,
+    transit_encryption_port: ?i32 = null,
 
     pub const json_field_names = .{
         .authorization_config = "authorizationConfig",

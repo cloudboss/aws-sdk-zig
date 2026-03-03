@@ -1,7 +1,7 @@
 /// Locations or sites where the toll fare is collected.
 pub const RouteTollPaymentSite = struct {
     /// Name of the payment site.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Position defined as `[longitude, latitude]`.
     position: []const f64,

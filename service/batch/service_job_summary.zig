@@ -5,10 +5,10 @@ const ServiceJobStatus = @import("service_job_status.zig").ServiceJobStatus;
 /// Summary information about a service job.
 pub const ServiceJobSummary = struct {
     /// The Unix timestamp (in milliseconds) for when the service job was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the service job.
-    job_arn: ?[]const u8,
+    job_arn: ?[]const u8 = null,
 
     /// The job ID for the service job.
     job_id: []const u8,
@@ -17,28 +17,28 @@ pub const ServiceJobSummary = struct {
     job_name: []const u8,
 
     /// Information about the latest attempt for the service job.
-    latest_attempt: ?LatestServiceJobAttempt,
+    latest_attempt: ?LatestServiceJobAttempt = null,
 
     /// The type of service job. For SageMaker Training jobs, this value is
     /// `SAGEMAKER_TRAINING`.
     service_job_type: ServiceJobType,
 
     /// The share identifier for the job.
-    share_identifier: ?[]const u8,
+    share_identifier: ?[]const u8 = null,
 
     /// The Unix timestamp (in milliseconds) for when the service job was started.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The current status of the service job.
-    status: ?ServiceJobStatus,
+    status: ?ServiceJobStatus = null,
 
     /// A short string to provide more details on the current status of the service
     /// job.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The Unix timestamp (in milliseconds) for when the service job stopped
     /// running.
-    stopped_at: ?i64,
+    stopped_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

@@ -4,7 +4,7 @@ const S3LocationDescription = @import("s3_location_description.zig").S3LocationD
 pub const CustomPluginLocationDescription = struct {
     /// The S3 bucket Amazon Resource Name (ARN), file key, and object version of
     /// the plugin file stored in Amazon S3.
-    s_3_location: ?S3LocationDescription,
+    s_3_location: ?S3LocationDescription = null,
 
     pub const json_field_names = .{
         .s_3_location = "s3Location",

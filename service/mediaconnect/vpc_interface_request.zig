@@ -8,7 +8,7 @@ pub const VpcInterfaceRequest = struct {
     name: []const u8,
 
     /// The type of network interface.
-    network_interface_type: ?NetworkInterfaceType,
+    network_interface_type: ?NetworkInterfaceType = null,
 
     /// The Amazon Resource Name (ARN) of the role that you created when you set up
     /// MediaConnect as a trusted service.
@@ -29,7 +29,7 @@ pub const VpcInterfaceRequest = struct {
 
     /// The key-value pairs that can be used to tag and organize the VPC network
     /// interface.
-    vpc_interface_tags: ?[]const aws.map.StringMapEntry,
+    vpc_interface_tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .name = "Name",

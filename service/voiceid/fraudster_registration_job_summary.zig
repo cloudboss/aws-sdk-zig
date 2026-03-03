@@ -5,13 +5,13 @@ const FraudsterRegistrationJobStatus = @import("fraudster_registration_job_statu
 /// Contains a summary of information about a fraudster registration job.
 pub const FraudsterRegistrationJobSummary = struct {
     /// A timestamp of when the fraudster registration job was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of the domain that contains the fraudster registration job.
-    domain_id: ?[]const u8,
+    domain_id: ?[]const u8 = null,
 
     /// A timestamp of when the fraudster registration job ended.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// Contains details that are populated when an entire batch job fails. In cases
     /// of
@@ -21,20 +21,20 @@ pub const FraudsterRegistrationJobSummary = struct {
     /// use the job output file to identify the individual registration requests
     /// that
     /// failed.
-    failure_details: ?FailureDetails,
+    failure_details: ?FailureDetails = null,
 
     /// The service-generated identifier for the fraudster registration job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The client-provided name for the fraudster registration job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// Shows the completed percentage of registration requests listed in the input
     /// file.
-    job_progress: ?JobProgress,
+    job_progress: ?JobProgress = null,
 
     /// The current status of the fraudster registration job.
-    job_status: ?FraudsterRegistrationJobStatus,
+    job_status: ?FraudsterRegistrationJobStatus = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

@@ -3,16 +3,16 @@
 /// expression.
 pub const Filter = struct {
     /// The time at which the filter was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The ARN of the dataset group to which the filter belongs.
-    dataset_group_arn: ?[]const u8,
+    dataset_group_arn: ?[]const u8 = null,
 
     /// If the filter failed, the reason for its failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The ARN of the filter.
-    filter_arn: ?[]const u8,
+    filter_arn: ?[]const u8 = null,
 
     /// Specifies the type of item interactions to filter out of recommendation
     /// results. The
@@ -20,16 +20,16 @@ pub const Filter = struct {
     /// filter expression structure and syntax, see
     /// [Filter
     /// expressions](https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html).
-    filter_expression: ?[]const u8,
+    filter_expression: ?[]const u8 = null,
 
     /// The time at which the filter was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The name of the filter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The status of the filter.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

@@ -4,9 +4,9 @@ const Metric = @import("metric.zig").Metric;
 /// sum or average of unused capacity hours.
 pub const MetricValue = struct {
     /// The name of the metric.
-    metric: ?Metric,
+    metric: ?Metric = null,
 
     /// The numerical value of the metric for the specified statistic and time
     /// period.
-    value: ?f64,
+    value: ?f64 = null,
 };

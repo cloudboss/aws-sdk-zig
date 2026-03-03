@@ -5,7 +5,7 @@ const BlockPublicAccess = @import("block_public_access.zig").BlockPublicAccess;
 pub const AccountLevelPermissions = struct {
     /// The block public access settings for the Amazon Web Services account that
     /// owns the bucket.
-    block_public_access: ?BlockPublicAccess,
+    block_public_access: ?BlockPublicAccess = null,
 
     pub const json_field_names = .{
         .block_public_access = "blockPublicAccess",

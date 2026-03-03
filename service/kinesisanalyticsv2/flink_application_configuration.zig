@@ -13,15 +13,15 @@ pub const FlinkApplicationConfiguration = struct {
     /// Tolerance](https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing) in the
     /// [Apache Flink
     /// Documentation](https://nightlies.apache.org/flink/flink-docs-release-1.20/).
-    checkpoint_configuration: ?CheckpointConfiguration,
+    checkpoint_configuration: ?CheckpointConfiguration = null,
 
     /// Describes configuration parameters for Amazon CloudWatch logging for an
     /// application.
-    monitoring_configuration: ?MonitoringConfiguration,
+    monitoring_configuration: ?MonitoringConfiguration = null,
 
     /// Describes parameters for how an application executes multiple tasks
     /// simultaneously.
-    parallelism_configuration: ?ParallelismConfiguration,
+    parallelism_configuration: ?ParallelismConfiguration = null,
 
     pub const json_field_names = .{
         .checkpoint_configuration = "CheckpointConfiguration",

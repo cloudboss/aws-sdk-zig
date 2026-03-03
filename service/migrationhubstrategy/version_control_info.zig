@@ -3,10 +3,10 @@ const VersionControlType = @import("version_control_type.zig").VersionControlTyp
 /// Details about the version control configuration.
 pub const VersionControlInfo = struct {
     /// The time when the version control system was last configured.
-    version_control_configuration_time_stamp: ?[]const u8,
+    version_control_configuration_time_stamp: ?[]const u8 = null,
 
     /// The type of version control.
-    version_control_type: ?VersionControlType,
+    version_control_type: ?VersionControlType = null,
 
     pub const json_field_names = .{
         .version_control_configuration_time_stamp = "versionControlConfigurationTimeStamp",

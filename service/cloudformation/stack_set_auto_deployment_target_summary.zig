@@ -4,8 +4,8 @@ pub const StackSetAutoDeploymentTargetSummary = struct {
     /// The organization root ID or organizational unit (OU) IDs where the StackSet
     /// is
     /// targeted.
-    organizational_unit_id: ?[]const u8,
+    organizational_unit_id: ?[]const u8 = null,
 
     /// The list of Regions targeted for this organization or OU.
-    regions: ?[]const []const u8,
+    regions: ?[]const []const u8 = null,
 };

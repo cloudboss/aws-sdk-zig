@@ -9,38 +9,38 @@ pub const Item = struct {
     ///
     /// It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
     /// 2019-11-08T02:41:28.172Z.
-    absolute_time: ?[]const u8,
+    absolute_time: ?[]const u8 = null,
 
     /// Provides information about the attachments.
-    attachments: ?[]const AttachmentItem,
+    attachments: ?[]const AttachmentItem = null,
 
     /// The contactId on which the transcript item was originally sent. This field
     /// is
     /// populated only when the transcript item is from the current chat session.
-    contact_id: ?[]const u8,
+    contact_id: ?[]const u8 = null,
 
     /// The content of the message or event.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The type of content of the item.
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// The chat display name of the sender.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The ID of the item.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The metadata related to the message. Currently this supports only
     /// information related
     /// to message receipts.
-    message_metadata: ?MessageMetadata,
+    message_metadata: ?MessageMetadata = null,
 
     /// The ID of the sender in the session.
-    participant_id: ?[]const u8,
+    participant_id: ?[]const u8 = null,
 
     /// The role of the sender. For example, is it a customer, agent, or system.
-    participant_role: ?ParticipantRole,
+    participant_role: ?ParticipantRole = null,
 
     /// The contactId on which the transcript item was originally sent. This field
     /// is only
@@ -48,10 +48,10 @@ pub const Item = struct {
     /// chat session.
     /// For more information, see [Enable persistent
     /// chat](https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html).
-    related_contact_id: ?[]const u8,
+    related_contact_id: ?[]const u8 = null,
 
     /// Type of the item: message or event.
-    @"type": ?ChatItemType,
+    @"type": ?ChatItemType = null,
 
     pub const json_field_names = .{
         .absolute_time = "AbsoluteTime",

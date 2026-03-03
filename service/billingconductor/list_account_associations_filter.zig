@@ -8,11 +8,11 @@
 /// Billing Group Arn.
 pub const ListAccountAssociationsFilter = struct {
     /// The Amazon Web Services account ID to filter on.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The list of Amazon Web Services IDs to retrieve their associated billing
     /// group for a given time range.
-    account_ids: ?[]const []const u8,
+    account_ids: ?[]const []const u8 = null,
 
     /// `MONITORED`: linked accounts that are associated to billing groups.
     ///
@@ -20,7 +20,7 @@ pub const ListAccountAssociationsFilter = struct {
     ///
     /// `Billing Group Arn`: linked accounts that are associated to the provided
     /// Billing Group Arn.
-    association: ?[]const u8,
+    association: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

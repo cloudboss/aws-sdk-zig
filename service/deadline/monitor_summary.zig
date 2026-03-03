@@ -33,10 +33,10 @@ pub const MonitorSummary = struct {
     subdomain: []const u8,
 
     /// The UNIX timestamp of the date and time that the monitor was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user name of the person that last updated the monitor.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     /// The complete URL of the monitor. The full URL of the monitor is
     /// subdomain.Region.deadlinecloud.amazonaws.com.

@@ -5,17 +5,17 @@ const AutomaticFailoverStatus = @import("automatic_failover_status.zig").Automat
 /// region and the role of the replication group.
 pub const GlobalReplicationGroupMember = struct {
     /// Indicates whether automatic failover is enabled for the replication group.
-    automatic_failover: ?AutomaticFailoverStatus,
+    automatic_failover: ?AutomaticFailoverStatus = null,
 
     /// The replication group id of the Global datastore member.
-    replication_group_id: ?[]const u8,
+    replication_group_id: ?[]const u8 = null,
 
     /// The Amazon region of the Global datastore member.
-    replication_group_region: ?[]const u8,
+    replication_group_region: ?[]const u8 = null,
 
     /// Indicates the role of the replication group, primary or secondary.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     /// The status of the membership of the replication group.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 };

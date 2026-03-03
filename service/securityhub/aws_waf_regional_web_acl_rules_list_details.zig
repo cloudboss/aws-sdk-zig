@@ -8,21 +8,21 @@ pub const AwsWafRegionalWebAclRulesListDetails = struct {
     /// The action that WAF takes when a web request matches all conditions in the
     /// rule, such as allow,
     /// block, or count the request.
-    action: ?AwsWafRegionalWebAclRulesListActionDetails,
+    action: ?AwsWafRegionalWebAclRulesListActionDetails = null,
 
     /// Overrides the rule evaluation result in the rule group.
-    override_action: ?AwsWafRegionalWebAclRulesListOverrideActionDetails,
+    override_action: ?AwsWafRegionalWebAclRulesListOverrideActionDetails = null,
 
     /// The order in which WAF evaluates the rules in a web ACL.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The ID of an WAF Regional rule to associate with a web ACL.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     /// For actions that are associated with a rule, the action that WAF takes when
     /// a web
     /// request matches all conditions in a rule.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

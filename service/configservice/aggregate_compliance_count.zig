@@ -5,11 +5,11 @@ const ComplianceSummary = @import("compliance_summary.zig").ComplianceSummary;
 pub const AggregateComplianceCount = struct {
     /// The number of compliant and noncompliant Config
     /// rules.
-    compliance_summary: ?ComplianceSummary,
+    compliance_summary: ?ComplianceSummary = null,
 
     /// The 12-digit account ID or region based on the GroupByKey
     /// value.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .compliance_summary = "ComplianceSummary",

@@ -1,25 +1,25 @@
 /// A set of rules used to make a recommendation during an analysis.
 pub const Pattern = struct {
     /// A list of the different counters used to determine if there is a match.
-    counters_to_aggregate: ?[]const []const u8,
+    counters_to_aggregate: ?[]const []const u8 = null,
 
     /// The description of the recommendation. This explains a potential
     /// inefficiency in a profiled application.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The universally unique identifier (UUID) of this pattern.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name for this pattern.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A string that contains the steps recommended to address the potential
     /// inefficiency.
-    resolution_steps: ?[]const u8,
+    resolution_steps: ?[]const u8 = null,
 
     /// A list of frame names that were searched during the analysis that generated
     /// a recommendation.
-    target_frames: ?[]const []const []const u8,
+    target_frames: ?[]const []const []const u8 = null,
 
     /// The percentage of time an application spends in one method that triggers
     /// a recommendation. The percentage of time is the same as the percentage of

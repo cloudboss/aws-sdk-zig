@@ -4,22 +4,22 @@ const RoutingInformationNextHop = @import("routing_information_next_hop.zig").Ro
 /// attributes.
 pub const CoreNetworkRoutingInformation = struct {
     /// The BGP AS path for the route.
-    as_path: ?[]const []const u8,
+    as_path: ?[]const []const u8 = null,
 
     /// The BGP community values for the route.
-    communities: ?[]const []const u8,
+    communities: ?[]const []const u8 = null,
 
     /// The BGP local preference value for the route.
-    local_preference: ?[]const u8,
+    local_preference: ?[]const u8 = null,
 
     /// The BGP Multi-Exit Discriminator (MED) value for the route.
-    med: ?[]const u8,
+    med: ?[]const u8 = null,
 
     /// The next hop information for the route.
-    next_hop: ?RoutingInformationNextHop,
+    next_hop: ?RoutingInformationNextHop = null,
 
     /// The IP prefix for the route.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .as_path = "AsPath",

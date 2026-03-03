@@ -33,7 +33,7 @@ pub const InputDataConfig = struct {
     ///
     /// Here's an example URI path:
     /// `s3://DOC-EXAMPLE-BUCKET/my-model-tuning-data/`
-    tuning_data_s3_uri: ?[]const u8,
+    tuning_data_s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_access_role_arn = "DataAccessRoleArn",

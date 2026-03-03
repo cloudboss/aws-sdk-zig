@@ -2,7 +2,7 @@
 /// security tools and services.
 pub const ExternalIntegrationConfiguration = struct {
     /// The ARN of the connector that establishes the integration.
-    connector_arn: ?[]const u8,
+    connector_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connector_arn = "ConnectorArn",

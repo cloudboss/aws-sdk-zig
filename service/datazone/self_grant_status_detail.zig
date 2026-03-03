@@ -6,10 +6,10 @@ pub const SelfGrantStatusDetail = struct {
     database_name: []const u8,
 
     /// The reason for why the operation failed.
-    failure_cause: ?[]const u8,
+    failure_cause: ?[]const u8 = null,
 
     /// The name of the schema used in the data source.
-    schema_name: ?[]const u8,
+    schema_name: ?[]const u8 = null,
 
     /// The self granting status of the data source.
     status: SelfGrantStatus,

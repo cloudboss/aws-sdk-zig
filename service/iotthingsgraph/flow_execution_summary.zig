@@ -3,22 +3,22 @@ const FlowExecutionStatus = @import("flow_execution_status.zig").FlowExecutionSt
 /// An object that contains summary information about a flow execution.
 pub const FlowExecutionSummary = struct {
     /// The date and time when the flow execution summary was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The ID of the flow execution.
-    flow_execution_id: ?[]const u8,
+    flow_execution_id: ?[]const u8 = null,
 
     /// The ID of the flow.
-    flow_template_id: ?[]const u8,
+    flow_template_id: ?[]const u8 = null,
 
     /// The current status of the flow execution.
-    status: ?FlowExecutionStatus,
+    status: ?FlowExecutionStatus = null,
 
     /// The ID of the system instance that contains the flow.
-    system_instance_id: ?[]const u8,
+    system_instance_id: ?[]const u8 = null,
 
     /// The date and time when the flow execution summary was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

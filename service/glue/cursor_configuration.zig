@@ -5,7 +5,7 @@ const ExtractedParameter = @import("extracted_parameter.zig").ExtractedParameter
 pub const CursorConfiguration = struct {
     /// The parameter name used to specify the maximum number of results to return
     /// per page.
-    limit_parameter: ?ExtractedParameter,
+    limit_parameter: ?ExtractedParameter = null,
 
     /// The parameter name or JSON path that contains the cursor or token for
     /// retrieving the next page of results.

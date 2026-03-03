@@ -8,7 +8,7 @@ pub const CreateBucketConfiguration = struct {
     /// Specifies the information about the bucket that will be created.
     ///
     /// This functionality is only supported by directory buckets.
-    bucket: ?BucketInfo,
+    bucket: ?BucketInfo = null,
 
     /// Specifies the location where the bucket will be created.
     ///
@@ -23,7 +23,7 @@ pub const CreateBucketConfiguration = struct {
     /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/opt-in-directory-bucket-lz.html) in the *Amazon S3 User Guide*.
     ///
     /// This functionality is only supported by directory buckets.
-    location: ?LocationInfo,
+    location: ?LocationInfo = null,
 
     /// Specifies the Region where the bucket will be created. You might choose a
     /// Region to optimize
@@ -42,7 +42,7 @@ pub const CreateBucketConfiguration = struct {
     /// Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
     ///
     /// This functionality is not supported for directory buckets.
-    location_constraint: ?BucketLocationConstraint,
+    location_constraint: ?BucketLocationConstraint = null,
 
     /// An array of tags that you can apply to the bucket that you're creating. Tags
     /// are key-value pairs of metadata used to categorize and organize your
@@ -57,5 +57,5 @@ pub const CreateBucketConfiguration = struct {
     /// after ABAC is enabled on the bucket. To learn more, see [Enabling ABAC in
     /// general purpose
     /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

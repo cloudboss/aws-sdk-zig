@@ -9,7 +9,7 @@ pub const StartTechnicalCueDetectionFilter = struct {
     /// Videos can come from multiple sources, formats, and time periods, with
     /// different standards and varying noise levels for black frames that need to
     /// be accounted for.
-    black_frame: ?BlackFrame,
+    black_frame: ?BlackFrame = null,
 
     /// Specifies the minimum confidence that Amazon Rekognition Video must have in
     /// order to return a detected segment. Confidence
@@ -21,7 +21,7 @@ pub const StartTechnicalCueDetectionFilter = struct {
     ///
     /// If you don't specify `MinSegmentConfidence`, `GetSegmentDetection` returns
     /// segments with confidence values greater than or equal to 50 percent.
-    min_segment_confidence: ?f32,
+    min_segment_confidence: ?f32 = null,
 
     pub const json_field_names = .{
         .black_frame = "BlackFrame",

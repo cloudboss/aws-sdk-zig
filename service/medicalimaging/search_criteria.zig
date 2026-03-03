@@ -4,10 +4,10 @@ const Sort = @import("sort.zig").Sort;
 /// The search criteria.
 pub const SearchCriteria = struct {
     /// The filters for the search criteria.
-    filters: ?[]const SearchFilter,
+    filters: ?[]const SearchFilter = null,
 
     /// The sort input for search criteria.
-    sort: ?Sort,
+    sort: ?Sort = null,
 
     pub const json_field_names = .{
         .filters = "filters",

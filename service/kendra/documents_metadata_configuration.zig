@@ -8,7 +8,7 @@ pub const DocumentsMetadataConfiguration = struct {
     /// Services S3
     /// bucket. The S3 bucket might contain multiple metadata files. Use `S3Prefix`
     /// to include only the desired metadata files.
-    s3_prefix: ?[]const u8,
+    s3_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s3_prefix = "S3Prefix",

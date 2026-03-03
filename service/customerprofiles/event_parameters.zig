@@ -4,7 +4,7 @@ pub const EventParameters = struct {
     event_type: []const u8,
 
     /// The minimum value threshold that an event must meet to be considered valid.
-    event_value_threshold: ?f64,
+    event_value_threshold: ?f64 = null,
 
     pub const json_field_names = .{
         .event_type = "EventType",

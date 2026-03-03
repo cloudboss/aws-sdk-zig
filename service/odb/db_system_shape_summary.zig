@@ -7,38 +7,38 @@ const ShapeType = @import("shape_type.zig").ShapeType;
 pub const DbSystemShapeSummary = struct {
     /// Indicates whether the hardware system model supports configurable database
     /// and server storage types.
-    are_server_types_supported: ?bool,
+    are_server_types_supported: ?bool = null,
 
     /// The maximum number of CPU cores that can be enabled for the shape.
-    available_core_count: ?i32,
+    available_core_count: ?i32 = null,
 
     /// The maximum number of CPU cores per DB node that can be enabled for the
     /// shape.
-    available_core_count_per_node: ?i32,
+    available_core_count_per_node: ?i32 = null,
 
     /// The maximum amount of data storage, in terabytes (TB), that can be enabled
     /// for the shape.
-    available_data_storage_in_t_bs: ?i32,
+    available_data_storage_in_t_bs: ?i32 = null,
 
     /// The maximum amount of data storage, in terabytes (TB), that's available per
     /// storage server for the shape.
-    available_data_storage_per_server_in_t_bs: ?i32,
+    available_data_storage_per_server_in_t_bs: ?i32 = null,
 
     /// The maximum amount of DB node storage, in gigabytes (GB), that's available
     /// per DB node for the shape.
-    available_db_node_per_node_in_g_bs: ?i32,
+    available_db_node_per_node_in_g_bs: ?i32 = null,
 
     /// The maximum amount of DB node storage, in gigabytes (GB), that can be
     /// enabled for the shape.
-    available_db_node_storage_in_g_bs: ?i32,
+    available_db_node_storage_in_g_bs: ?i32 = null,
 
     /// The maximum amount of memory, in gigabytes (GB), that can be enabled for the
     /// shape.
-    available_memory_in_g_bs: ?i32,
+    available_memory_in_g_bs: ?i32 = null,
 
     /// The maximum amount of memory, in gigabytes (GB), that's available per DB
     /// node for the shape.
-    available_memory_per_node_in_g_bs: ?i32,
+    available_memory_per_node_in_g_bs: ?i32 = null,
 
     /// The OCI model compute model used when you create or clone an instance: ECPU
     /// or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are
@@ -46,55 +46,55 @@ pub const DbSystemShapeSummary = struct {
     /// and storage servers. An OCPU is a legacy physical measure of compute
     /// resources. OCPUs are based on the physical core of a processor with
     /// hyper-threading enabled.
-    compute_model: ?ComputeModel,
+    compute_model: ?ComputeModel = null,
 
     /// The discrete number by which the CPU core count for the shape can be
     /// increased or decreased.
-    core_count_increment: ?i32,
+    core_count_increment: ?i32 = null,
 
     /// The maximum number of compute servers that is available for the shape.
-    maximum_node_count: ?i32,
+    maximum_node_count: ?i32 = null,
 
     /// The maximum number of Exadata storage servers that's available for the
     /// shape.
-    max_storage_count: ?i32,
+    max_storage_count: ?i32 = null,
 
     /// The minimum number of CPU cores that can be enabled per node for the shape.
-    min_core_count_per_node: ?i32,
+    min_core_count_per_node: ?i32 = null,
 
     /// The minimum amount of data storage, in terabytes (TB), that must be
     /// allocated for the shape.
-    min_data_storage_in_t_bs: ?i32,
+    min_data_storage_in_t_bs: ?i32 = null,
 
     /// The minimum amount of DB node storage, in gigabytes (GB), that must be
     /// allocated per DB node for the shape.
-    min_db_node_storage_per_node_in_g_bs: ?i32,
+    min_db_node_storage_per_node_in_g_bs: ?i32 = null,
 
     /// The minimum number of CPU cores that can be enabled for the shape.
-    minimum_core_count: ?i32,
+    minimum_core_count: ?i32 = null,
 
     /// The minimum number of compute servers that are available for the shape.
-    minimum_node_count: ?i32,
+    minimum_node_count: ?i32 = null,
 
     /// The minimum amount of memory, in gigabytes (GB), that must be allocated per
     /// DB node for the shape.
-    min_memory_per_node_in_g_bs: ?i32,
+    min_memory_per_node_in_g_bs: ?i32 = null,
 
     /// The minimum number of Exadata storage servers that are available for the
     /// shape.
-    min_storage_count: ?i32,
+    min_storage_count: ?i32 = null,
 
     /// The name of the shape.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The runtime minimum number of CPU cores that can be enabled for the shape.
-    runtime_minimum_core_count: ?i32,
+    runtime_minimum_core_count: ?i32 = null,
 
     /// The family of the shape.
-    shape_family: ?[]const u8,
+    shape_family: ?[]const u8 = null,
 
     /// The shape type. This property is determined by the CPU hardware.
-    shape_type: ?ShapeType,
+    shape_type: ?ShapeType = null,
 
     pub const json_field_names = .{
         .are_server_types_supported = "areServerTypesSupported",

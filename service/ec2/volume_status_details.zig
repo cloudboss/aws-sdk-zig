@@ -17,8 +17,8 @@ pub const VolumeStatusDetails = struct {
     /// * `initialization-state` - Indicates the status of the volume
     /// initialization process. For more information, see [Initialize Amazon EBS
     /// volumes](https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html).
-    name: ?VolumeStatusName,
+    name: ?VolumeStatusName = null,
 
     /// The intended status of the volume status.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 };

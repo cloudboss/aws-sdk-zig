@@ -15,7 +15,7 @@ const Method = @import("method.zig").Method;
 /// you don't want them to. For example, you might not want users to have
 /// permissions to delete objects from your origin.
 pub const AllowedMethods = struct {
-    cached_methods: ?CachedMethods,
+    cached_methods: ?CachedMethods = null,
 
     /// A complex type that contains the HTTP methods that you want CloudFront to
     /// process and forward to your origin.

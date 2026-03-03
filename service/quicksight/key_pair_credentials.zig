@@ -8,7 +8,7 @@ pub const KeyPairCredentials = struct {
     private_key: []const u8,
 
     /// PrivateKeyPassphrase
-    private_key_passphrase: ?[]const u8,
+    private_key_passphrase: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key_pair_username = "KeyPairUsername",

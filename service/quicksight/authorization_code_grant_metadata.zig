@@ -4,10 +4,10 @@ const AuthorizationCodeGrantCredentialsSource = @import("authorization_code_gran
 /// Metadata for OAuth 2.0 authorization code grant authentication.
 pub const AuthorizationCodeGrantMetadata = struct {
     /// The detailed credentials configuration for authorization code grant.
-    authorization_code_grant_credentials_details: ?AuthorizationCodeGrantCredentialsDetails,
+    authorization_code_grant_credentials_details: ?AuthorizationCodeGrantCredentialsDetails = null,
 
     /// The source of the authorization code grant credentials.
-    authorization_code_grant_credentials_source: ?AuthorizationCodeGrantCredentialsSource,
+    authorization_code_grant_credentials_source: ?AuthorizationCodeGrantCredentialsSource = null,
 
     /// The base URL endpoint for the external service.
     base_endpoint: []const u8,

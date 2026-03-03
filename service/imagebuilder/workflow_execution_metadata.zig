@@ -5,23 +5,23 @@ const WorkflowType = @import("workflow_type.zig").WorkflowType;
 /// workflow.
 pub const WorkflowExecutionMetadata = struct {
     /// The timestamp when this runtime instance of the workflow finished.
-    end_time: ?[]const u8,
+    end_time: ?[]const u8 = null,
 
     /// The runtime output message from the workflow, if applicable.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The name of the test group that included the test workflow resource at
     /// runtime.
-    parallel_group: ?[]const u8,
+    parallel_group: ?[]const u8 = null,
 
     /// Indicates retry status for this runtime instance of the workflow.
-    retried: ?bool,
+    retried: ?bool = null,
 
     /// The timestamp when the runtime instance of this workflow started.
-    start_time: ?[]const u8,
+    start_time: ?[]const u8 = null,
 
     /// The current runtime status for this workflow.
-    status: ?WorkflowExecutionStatus,
+    status: ?WorkflowExecutionStatus = null,
 
     /// The total number of steps in the workflow. This should equal the sum of the
     /// step
@@ -40,16 +40,16 @@ pub const WorkflowExecutionMetadata = struct {
 
     /// Indicates what type of workflow that Image Builder ran for this runtime
     /// instance of the workflow.
-    @"type": ?WorkflowType,
+    @"type": ?WorkflowType = null,
 
     /// The Amazon Resource Name (ARN) of the workflow resource build version that
     /// ran.
-    workflow_build_version_arn: ?[]const u8,
+    workflow_build_version_arn: ?[]const u8 = null,
 
     /// Unique identifier that Image Builder assigns to keep track of runtime
     /// resources each time it runs a
     /// workflow.
-    workflow_execution_id: ?[]const u8,
+    workflow_execution_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .end_time = "endTime",

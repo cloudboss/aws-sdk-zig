@@ -15,7 +15,7 @@ pub const JobSample = struct {
     /// * CUSTOM_ROWS - The profile job is run on the number of rows specified in
     ///   the
     /// `Size` parameter.
-    mode: ?SampleMode,
+    mode: ?SampleMode = null,
 
     /// The `Size` parameter is only required when the mode is CUSTOM_ROWS. The
     /// profile job is run on the specified number of rows. The maximum value for
@@ -23,7 +23,7 @@ pub const JobSample = struct {
     /// Long.MAX_VALUE.
     ///
     /// Long.MAX_VALUE = 9223372036854775807
-    size: ?i64,
+    size: ?i64 = null,
 
     pub const json_field_names = .{
         .mode = "Mode",

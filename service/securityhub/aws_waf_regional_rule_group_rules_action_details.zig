@@ -6,7 +6,7 @@ pub const AwsWafRegionalRuleGroupRulesActionDetails = struct {
     /// `GeoMatchSet`, and `SizeConstraintSet` objects that you want to add to a
     /// rule and, for each object, indicates whether you want to negate the
     /// settings.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

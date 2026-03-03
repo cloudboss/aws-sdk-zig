@@ -14,15 +14,15 @@ pub const AutomatedReasoningCheckTranslation = struct {
 
     /// The logical statements that serve as the foundation or assumptions for the
     /// claims.
-    premises: ?[]const AutomatedReasoningLogicStatement,
+    premises: ?[]const AutomatedReasoningLogicStatement = null,
 
     /// References to portions of the original input text that correspond to the
     /// claims but could not be fully translated.
-    untranslated_claims: ?[]const AutomatedReasoningCheckInputTextReference,
+    untranslated_claims: ?[]const AutomatedReasoningCheckInputTextReference = null,
 
     /// References to portions of the original input text that correspond to the
     /// premises but could not be fully translated.
-    untranslated_premises: ?[]const AutomatedReasoningCheckInputTextReference,
+    untranslated_premises: ?[]const AutomatedReasoningCheckInputTextReference = null,
 
     pub const json_field_names = .{
         .claims = "claims",

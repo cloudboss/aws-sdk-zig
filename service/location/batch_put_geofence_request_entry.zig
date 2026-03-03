@@ -12,7 +12,7 @@ pub const BatchPutGeofenceRequestEntry = struct {
     /// triggered with that geofence.
     ///
     /// Format: `"key" : "value"`
-    geofence_properties: ?[]const aws.map.StringMapEntry,
+    geofence_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// Contains the details to specify the position of the geofence. Can be a
     /// circle, a polygon, or a multipolygon. `Polygon` and `MultiPolygon`

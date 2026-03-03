@@ -4,8 +4,8 @@ pub const ValidationTokenDetail = struct {
     domain: []const u8,
 
     /// The domain to redirect from.
-    redirect_from: ?[]const u8,
+    redirect_from: ?[]const u8 = null,
 
     /// The domain to redirect to.
-    redirect_to: ?[]const u8,
+    redirect_to: ?[]const u8 = null,
 };

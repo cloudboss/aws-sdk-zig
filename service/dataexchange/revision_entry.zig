@@ -4,7 +4,7 @@ pub const RevisionEntry = struct {
     arn: []const u8,
 
     /// An optional comment about the revision.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The date and time that the revision was created, in ISO 8601 format.
     created_at: i64,
@@ -32,20 +32,20 @@ pub const RevisionEntry = struct {
     /// A required comment to inform subscribers of the reason their access to the
     /// revision was
     /// revoked.
-    revocation_comment: ?[]const u8,
+    revocation_comment: ?[]const u8 = null,
 
     /// A status indicating that subscribers' access to the revision was revoked.
     revoked: bool = false,
 
     /// The date and time that the revision was revoked, in ISO 8601 format.
-    revoked_at: ?i64,
+    revoked_at: ?i64 = null,
 
     /// The revision ID of the owned revision corresponding to the entitled revision
     /// being
     /// viewed. This parameter is returned when a revision owner is viewing the
     /// entitled copy of
     /// its owned revision.
-    source_id: ?[]const u8,
+    source_id: ?[]const u8 = null,
 
     /// The date and time that the revision was last updated, in ISO 8601 format.
     updated_at: i64,

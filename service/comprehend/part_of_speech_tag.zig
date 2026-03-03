@@ -11,10 +11,10 @@ pub const PartOfSpeechTag = struct {
     /// The confidence that Amazon Comprehend has that the part of speech was
     /// correctly
     /// identified.
-    score: ?f32,
+    score: ?f32 = null,
 
     /// Identifies the part of speech that the token represents.
-    tag: ?PartOfSpeechTagType,
+    tag: ?PartOfSpeechTagType = null,
 
     pub const json_field_names = .{
         .score = "Score",

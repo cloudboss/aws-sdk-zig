@@ -4,9 +4,9 @@ const ResourceCostCalculation = @import("resource_cost_calculation.zig").Resourc
 /// The NAT Gateway recommendation details.
 pub const NatGateway = struct {
     /// The NAT Gateway configuration used for recommendations.
-    configuration: ?NatGatewayConfiguration,
+    configuration: ?NatGatewayConfiguration = null,
 
-    cost_calculation: ?ResourceCostCalculation,
+    cost_calculation: ?ResourceCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

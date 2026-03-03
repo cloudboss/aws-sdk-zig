@@ -19,7 +19,7 @@ pub const AnalyticsSessionMetricResult = struct {
     ///
     /// * `Concurrency` – The number of sessions occurring in the same period of
     ///   time.
-    name: ?AnalyticsSessionMetricName,
+    name: ?AnalyticsSessionMetricName = null,
 
     /// The summary statistic that you requested to calculate.
     ///
@@ -29,10 +29,10 @@ pub const AnalyticsSessionMetricResult = struct {
     ///   category you provide in `name`.
     ///
     /// * `Max` – The highest count in the category you provide in `name`.
-    statistic: ?AnalyticsMetricStatistic,
+    statistic: ?AnalyticsMetricStatistic = null,
 
     /// The value of the summary statistic for the metric that you requested.
-    value: ?f64,
+    value: ?f64 = null,
 
     pub const json_field_names = .{
         .name = "name",

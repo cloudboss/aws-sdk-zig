@@ -3,24 +3,24 @@ const DmsSslModeValue = @import("dms_ssl_mode_value.zig").DmsSslModeValue;
 /// Provides information that defines a MySQL data provider.
 pub const MySqlDataProviderSettings = struct {
     /// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The port value for the MySQL data provider.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The ARN for the role the application uses to access its Amazon S3 bucket.
-    s3_access_role_arn: ?[]const u8,
+    s3_access_role_arn: ?[]const u8 = null,
 
     /// The path for the Amazon S3 bucket that the application uses for accessing
     /// the user-defined schema.
-    s3_path: ?[]const u8,
+    s3_path: ?[]const u8 = null,
 
     /// The name of the MySQL server.
-    server_name: ?[]const u8,
+    server_name: ?[]const u8 = null,
 
     /// The SSL mode used to connect to the MySQL data provider.
     /// The default value is `none`.
-    ssl_mode: ?DmsSslModeValue,
+    ssl_mode: ?DmsSslModeValue = null,
 
     pub const json_field_names = .{
         .certificate_arn = "CertificateArn",

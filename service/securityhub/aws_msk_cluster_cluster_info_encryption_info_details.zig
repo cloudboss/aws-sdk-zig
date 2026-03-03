@@ -7,10 +7,10 @@ const AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails = @import
 pub const AwsMskClusterClusterInfoEncryptionInfoDetails = struct {
     /// The data-volume encryption details. You can't update encryption at rest
     /// settings for existing clusters.
-    encryption_at_rest: ?AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails,
+    encryption_at_rest: ?AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails = null,
 
     /// The settings for encrypting data in transit.
-    encryption_in_transit: ?AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails,
+    encryption_in_transit: ?AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails = null,
 
     pub const json_field_names = .{
         .encryption_at_rest = "EncryptionAtRest",

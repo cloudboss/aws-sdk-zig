@@ -4,10 +4,10 @@ const AttributeConfig = @import("attribute_config.zig").AttributeConfig;
 /// The data configuration for your dataset group and any additional datasets.
 pub const DataConfig = struct {
     /// Additional built-in datasets like Holidays and the Weather Index.
-    additional_datasets: ?[]const AdditionalDataset,
+    additional_datasets: ?[]const AdditionalDataset = null,
 
     /// Aggregation and filling options for attributes in your dataset group.
-    attribute_configs: ?[]const AttributeConfig,
+    attribute_configs: ?[]const AttributeConfig = null,
 
     /// The ARN of the dataset group used to train the predictor.
     dataset_group_arn: []const u8,

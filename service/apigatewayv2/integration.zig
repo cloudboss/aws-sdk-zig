@@ -11,17 +11,17 @@ pub const Integration = struct {
     /// Specifies whether an integration is managed by API Gateway. If you created
     /// an API using using quick create, the resulting integration is managed by API
     /// Gateway. You can update a managed integration, but you can't delete it.
-    api_gateway_managed: ?bool,
+    api_gateway_managed: ?bool = null,
 
     /// The ID of the VPC link for a private integration. Supported only for HTTP
     /// APIs.
-    connection_id: ?[]const u8,
+    connection_id: ?[]const u8 = null,
 
     /// The type of the network connection to the integration endpoint. Specify
     /// INTERNET for connections through the public routable internet or VPC_LINK
     /// for private connections between API Gateway and resources in a VPC. The
     /// default value is INTERNET.
-    connection_type: ?ConnectionType,
+    connection_type: ?ConnectionType = null,
 
     /// Supported only for WebSocket APIs. Specifies how to handle response payload
     /// content type conversions. Supported values are CONVERT_TO_BINARY and
@@ -36,7 +36,7 @@ pub const Integration = struct {
     /// If this property is not defined, the response payload will be passed through
     /// from the integration response to the route response or method response
     /// without modification.
-    content_handling_strategy: ?ContentHandlingStrategy,
+    content_handling_strategy: ?ContentHandlingStrategy = null,
 
     /// Specifies the credentials required for the integration, if any. For AWS
     /// integrations, three options are available. To specify an IAM Role for API
@@ -44,26 +44,26 @@ pub const Integration = struct {
     /// that the caller's identity be passed through from the request, specify the
     /// string arn:aws:iam::*:user/*. To use resource-based permissions on supported
     /// AWS services, specify null.
-    credentials_arn: ?[]const u8,
+    credentials_arn: ?[]const u8 = null,
 
     /// Represents the description of an integration.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Represents the identifier of an integration.
-    integration_id: ?[]const u8,
+    integration_id: ?[]const u8 = null,
 
     /// Specifies the integration's HTTP method type.
-    integration_method: ?[]const u8,
+    integration_method: ?[]const u8 = null,
 
     /// The integration response selection expression for the integration. Supported
     /// only for WebSocket APIs. See [Integration Response Selection
     /// Expressions](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions).
-    integration_response_selection_expression: ?[]const u8,
+    integration_response_selection_expression: ?[]const u8 = null,
 
     /// Supported only for HTTP API AWS_PROXY integrations. Specifies the AWS
     /// service action to invoke. To learn more, see [Integration subtype
     /// reference](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html).
-    integration_subtype: ?[]const u8,
+    integration_subtype: ?[]const u8 = null,
 
     /// The integration type of an integration. One of the following:
     ///
@@ -88,7 +88,7 @@ pub const Integration = struct {
     /// MOCK: for integrating the route or method request with API Gateway as a
     /// "loopback" endpoint without invoking any backend. Supported only for
     /// WebSocket APIs.
-    integration_type: ?IntegrationType,
+    integration_type: ?IntegrationType = null,
 
     /// For a Lambda integration, specify the URI of a Lambda function.
     ///
@@ -100,7 +100,7 @@ pub const Integration = struct {
     /// DiscoverInstances to identify resources. You can use query parameters to
     /// target specific resources. To learn more, see
     /// [DiscoverInstances](https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html). For private integrations, all resources must be owned by the same AWS account.
-    integration_uri: ?[]const u8,
+    integration_uri: ?[]const u8 = null,
 
     /// Specifies the pass-through behavior for incoming requests based on the
     /// Content-Type header in the request, and the available mapping templates
@@ -118,14 +118,14 @@ pub const Integration = struct {
     /// types mapped to templates. However, if there is at least one content type
     /// defined, unmapped content types will be rejected with the same HTTP 415
     /// Unsupported Media Type response.
-    passthrough_behavior: ?PassthroughBehavior,
+    passthrough_behavior: ?PassthroughBehavior = null,
 
     /// Specifies the format of the payload sent to an integration. Required for
     /// HTTP APIs. Supported values for Lambda proxy integrations are 1.0 and 2.0.
     /// For all other integrations, 1.0 is the only supported value. To learn more,
     /// see [Working with AWS Lambda proxy integrations for HTTP
     /// APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html).
-    payload_format_version: ?[]const u8,
+    payload_format_version: ?[]const u8 = null,
 
     /// For WebSocket APIs, a key-value map specifying request parameters that are
     /// passed from the method request to the backend. The key is an integration
@@ -154,13 +154,13 @@ pub const Integration = struct {
     /// map request data, stage variables, or context variables that are evaluated
     /// at runtime. To learn more, see [Transforming API requests and
     /// responses](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html).
-    request_parameters: ?[]const aws.map.StringMapEntry,
+    request_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// Represents a map of Velocity templates that are applied on the request
     /// payload based on the value of the Content-Type header sent by the client.
     /// The content type value is the key in this map, and the template (as a
     /// String) is the value. Supported only for WebSocket APIs.
-    request_templates: ?[]const aws.map.StringMapEntry,
+    request_templates: ?[]const aws.map.StringMapEntry = null,
 
     /// Supported only for HTTP APIs. You use response parameters to transform the
     /// HTTP response from a backend integration before returning the response to
@@ -172,21 +172,21 @@ pub const Integration = struct {
     /// or map to response data, stage variables, or context variables that are
     /// evaluated at runtime. To learn more, see [Transforming API requests and
     /// responses](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html).
-    response_parameters: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry),
+    response_parameters: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry) = null,
 
     /// The template selection expression for the integration. Supported only for
     /// WebSocket APIs.
-    template_selection_expression: ?[]const u8,
+    template_selection_expression: ?[]const u8 = null,
 
     /// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and
     /// between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29
     /// seconds for WebSocket APIs and 30 seconds for HTTP APIs.
-    timeout_in_millis: ?i32,
+    timeout_in_millis: ?i32 = null,
 
     /// The TLS configuration for a private integration. If you specify a TLS
     /// configuration, private integration traffic uses the HTTPS protocol.
     /// Supported only for HTTP APIs.
-    tls_config: ?TlsConfig,
+    tls_config: ?TlsConfig = null,
 
     pub const json_field_names = .{
         .api_gateway_managed = "ApiGatewayManaged",

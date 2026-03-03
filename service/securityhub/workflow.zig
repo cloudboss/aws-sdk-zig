@@ -31,7 +31,7 @@ pub const Workflow = struct {
     ///
     /// * `RESOLVED` - The finding was reviewed and remediated and is now
     /// considered resolved.
-    status: ?WorkflowStatus,
+    status: ?WorkflowStatus = null,
 
     pub const json_field_names = .{
         .status = "Status",

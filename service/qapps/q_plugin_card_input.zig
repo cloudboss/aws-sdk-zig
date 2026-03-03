@@ -3,7 +3,7 @@ const CardType = @import("card_type.zig").CardType;
 /// The input shape for defining a plugin card in an Amazon Q App.
 pub const QPluginCardInput = struct {
     /// The action identifier of the action to be performed by the plugin card.
-    action_identifier: ?[]const u8,
+    action_identifier: ?[]const u8 = null,
 
     /// The unique identifier of the plugin card.
     id: []const u8,

@@ -41,7 +41,7 @@ pub const MinimumHealthyHosts = struct {
     /// Instance
     /// Health](https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html) in the *CodeDeploy User
     /// Guide*.
-    @"type": ?MinimumHealthyHostsType,
+    @"type": ?MinimumHealthyHostsType = null,
 
     /// The minimum healthy instance value.
     value: i32 = 0,

@@ -2,7 +2,7 @@
 /// job output.
 pub const ExportS3DataInput = struct {
     /// The Key Management Service key ID for server-side encryption.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The URL to the Amazon S3 data input.
     s3_uri: []const u8,

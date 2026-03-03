@@ -5,7 +5,7 @@ const ConnectedHomeSettingsForUpdate = @import("connected_home_settings_for_upda
 /// confidence.
 pub const StreamProcessorSettingsForUpdate = struct {
     /// The label detection settings you want to use for your stream processor.
-    connected_home_for_update: ?ConnectedHomeSettingsForUpdate,
+    connected_home_for_update: ?ConnectedHomeSettingsForUpdate = null,
 
     pub const json_field_names = .{
         .connected_home_for_update = "ConnectedHomeForUpdate",

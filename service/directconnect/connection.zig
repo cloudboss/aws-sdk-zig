@@ -6,24 +6,24 @@ const Tag = @import("tag.zig").Tag;
 /// Information about an Direct Connect connection.
 pub const Connection = struct {
     /// The Direct Connect endpoint on which the physical connection terminates.
-    aws_device: ?[]const u8,
+    aws_device: ?[]const u8 = null,
 
     /// The Direct Connect endpoint that terminates the physical connection.
-    aws_device_v2: ?[]const u8,
+    aws_device_v2: ?[]const u8 = null,
 
     /// The Direct Connect endpoint that terminates the logical connection. This
     /// device might be
     /// different than the device that terminates the physical connection.
-    aws_logical_device_id: ?[]const u8,
+    aws_logical_device_id: ?[]const u8 = null,
 
     /// The bandwidth of the connection.
-    bandwidth: ?[]const u8,
+    bandwidth: ?[]const u8 = null,
 
     /// The ID of the connection.
-    connection_id: ?[]const u8,
+    connection_id: ?[]const u8 = null,
 
     /// The name of the connection.
-    connection_name: ?[]const u8,
+    connection_name: ?[]const u8 = null,
 
     /// The state of the connection. The following are the possible values:
     ///
@@ -49,60 +49,60 @@ pub const Connection = struct {
     ///   `rejected` state if it is deleted by the customer.
     ///
     /// * `unknown`: The state of the connection is not available.
-    connection_state: ?ConnectionState,
+    connection_state: ?ConnectionState = null,
 
     /// The MAC Security (MACsec) connection encryption mode.
     ///
     /// The valid values are `no_encrypt`, `should_encrypt`, and `must_encrypt`.
-    encryption_mode: ?[]const u8,
+    encryption_mode: ?[]const u8 = null,
 
     /// Indicates whether the connection supports a secondary BGP peer in the same
     /// address family (IPv4/IPv6).
-    has_logical_redundancy: ?HasLogicalRedundancy,
+    has_logical_redundancy: ?HasLogicalRedundancy = null,
 
     /// Indicates whether jumbo frames are supported.
-    jumbo_frame_capable: ?bool,
+    jumbo_frame_capable: ?bool = null,
 
     /// The ID of the LAG.
-    lag_id: ?[]const u8,
+    lag_id: ?[]const u8 = null,
 
     /// The time of the most recent call to DescribeLoa for this connection.
-    loa_issue_time: ?i64,
+    loa_issue_time: ?i64 = null,
 
     /// The location of the connection.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// Indicates whether the connection supports MAC Security (MACsec).
-    mac_sec_capable: ?bool,
+    mac_sec_capable: ?bool = null,
 
     /// The MAC Security (MACsec) security keys associated with the connection.
-    mac_sec_keys: ?[]const MacSecKey,
+    mac_sec_keys: ?[]const MacSecKey = null,
 
     /// The ID of the Amazon Web Services account that owns the connection.
-    owner_account: ?[]const u8,
+    owner_account: ?[]const u8 = null,
 
     /// Indicates whether the interconnect hosting this connection supports MAC
     /// Security (MACsec).
-    partner_interconnect_mac_sec_capable: ?bool,
+    partner_interconnect_mac_sec_capable: ?bool = null,
 
     /// The name of the Direct Connect service provider associated with the
     /// connection.
-    partner_name: ?[]const u8,
+    partner_name: ?[]const u8 = null,
 
     /// The MAC Security (MACsec) port link status of the connection.
     ///
     /// The valid values are `Encryption Up`, which means that there is an active
     /// Connection Key Name, or `Encryption Down`.
-    port_encryption_status: ?[]const u8,
+    port_encryption_status: ?[]const u8 = null,
 
     /// The name of the service provider associated with the connection.
-    provider_name: ?[]const u8,
+    provider_name: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the connection is located.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The tags associated with the connection.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the VLAN.
     vlan: i32 = 0,

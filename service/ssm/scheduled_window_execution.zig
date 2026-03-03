@@ -3,13 +3,13 @@ pub const ScheduledWindowExecution = struct {
     /// The time, in ISO-8601 Extended format, that the maintenance window is
     /// scheduled to be
     /// run.
-    execution_time: ?[]const u8,
+    execution_time: ?[]const u8 = null,
 
     /// The name of the maintenance window to be run.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the maintenance window to be run.
-    window_id: ?[]const u8,
+    window_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .execution_time = "ExecutionTime",

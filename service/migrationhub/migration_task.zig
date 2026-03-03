@@ -5,21 +5,21 @@ const Task = @import("task.zig").Task;
 pub const MigrationTask = struct {
     /// Unique identifier that references the migration task. *Do not store personal
     /// data in this field.*
-    migration_task_name: ?[]const u8,
+    migration_task_name: ?[]const u8 = null,
 
     /// A name that identifies the vendor of the migration tool being used.
-    progress_update_stream: ?[]const u8,
+    progress_update_stream: ?[]const u8 = null,
 
     /// Information about the resource that is being migrated. This data will be
     /// used to map the
     /// task to a resource in the Application Discovery Service repository.
-    resource_attribute_list: ?[]const ResourceAttribute,
+    resource_attribute_list: ?[]const ResourceAttribute = null,
 
     /// Task object encapsulating task information.
-    task: ?Task,
+    task: ?Task = null,
 
     /// The timestamp when the task was gathered.
-    update_date_time: ?i64,
+    update_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .migration_task_name = "MigrationTaskName",

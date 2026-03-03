@@ -4,13 +4,13 @@
 /// provided.
 pub const SipRuleTargetApplication = struct {
     /// The AWS Region of a rule's target SIP media application.
-    aws_region: ?[]const u8,
+    aws_region: ?[]const u8 = null,
 
     /// The priority setting of a rule's target SIP media application.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The ID of a rule's target SIP media application.
-    sip_media_application_id: ?[]const u8,
+    sip_media_application_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_region = "AwsRegion",

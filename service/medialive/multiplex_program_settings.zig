@@ -5,16 +5,16 @@ const MultiplexVideoSettings = @import("multiplex_video_settings.zig").Multiplex
 /// Multiplex Program settings configuration.
 pub const MultiplexProgramSettings = struct {
     /// Indicates which pipeline is preferred by the multiplex for program ingest.
-    preferred_channel_pipeline: ?PreferredChannelPipeline,
+    preferred_channel_pipeline: ?PreferredChannelPipeline = null,
 
     /// Unique program number.
     program_number: i32,
 
     /// Transport stream service descriptor configuration for the Multiplex program.
-    service_descriptor: ?MultiplexProgramServiceDescriptor,
+    service_descriptor: ?MultiplexProgramServiceDescriptor = null,
 
     /// Program video settings configuration.
-    video_settings: ?MultiplexVideoSettings,
+    video_settings: ?MultiplexVideoSettings = null,
 
     pub const json_field_names = .{
         .preferred_channel_pipeline = "PreferredChannelPipeline",

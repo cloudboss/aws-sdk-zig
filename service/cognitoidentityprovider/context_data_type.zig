@@ -9,7 +9,7 @@ pub const ContextDataType = struct {
     /// context data collection library. For more information, see [Adding user
     /// device and session data to API
     /// requests](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint).
-    encoded_data: ?[]const u8,
+    encoded_data: ?[]const u8 = null,
 
     /// The HTTP headers from your user's authentication request.
     http_headers: []const HttpHeader,

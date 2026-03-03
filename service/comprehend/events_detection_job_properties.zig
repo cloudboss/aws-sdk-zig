@@ -7,15 +7,15 @@ const OutputDataConfig = @import("output_data_config.zig").OutputDataConfig;
 pub const EventsDetectionJobProperties = struct {
     /// The Amazon Resource Name (ARN) of the IAM role that
     /// grants Amazon Comprehend read access to your input data.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     /// The time that the events detection job completed.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The input data configuration that you supplied when you created the events
     /// detection
     /// job.
-    input_data_config: ?InputDataConfig,
+    input_data_config: ?InputDataConfig = null,
 
     /// The Amazon Resource Name (ARN) of the events detection job. It is a unique,
     /// fully
@@ -28,33 +28,33 @@ pub const EventsDetectionJobProperties = struct {
     /// The following is an example job ARN:
     ///
     /// `arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab`
-    job_arn: ?[]const u8,
+    job_arn: ?[]const u8 = null,
 
     /// The identifier assigned to the events detection job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The name you assigned the events detection job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The current status of the events detection job.
-    job_status: ?JobStatus,
+    job_status: ?JobStatus = null,
 
     /// The language code of the input documents.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// A description of the status of the events detection job.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The output data configuration that you supplied when you created the events
     /// detection
     /// job.
-    output_data_config: ?OutputDataConfig,
+    output_data_config: ?OutputDataConfig = null,
 
     /// The time that the events detection job was submitted for processing.
-    submit_time: ?i64,
+    submit_time: ?i64 = null,
 
     /// The types of events that are detected by the job.
-    target_event_types: ?[]const []const u8,
+    target_event_types: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .data_access_role_arn = "DataAccessRoleArn",

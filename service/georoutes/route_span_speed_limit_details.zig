@@ -8,7 +8,7 @@ pub const RouteSpanSpeedLimitDetails = struct {
     max_speed: f64 = 0,
 
     /// If the span doesn't have a speed limit like the Autobahn.
-    unlimited: ?bool,
+    unlimited: ?bool = null,
 
     pub const json_field_names = .{
         .max_speed = "MaxSpeed",

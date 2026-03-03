@@ -6,22 +6,22 @@ pub const AssetFilterSummary = struct {
     asset_id: []const u8,
 
     /// The timestamp at which the asset filter was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of the asset filter.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the domain where the asset filter lives.
     domain_id: []const u8,
 
     /// The effective column names of the asset filter.
-    effective_column_names: ?[]const []const u8,
+    effective_column_names: ?[]const []const u8 = null,
 
     /// The effective row filter of the asset filter.
-    effective_row_filter: ?[]const u8,
+    effective_row_filter: ?[]const u8 = null,
 
     /// The error message that is displayed if the action does not succeed.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The ID of the asset filter.
     id: []const u8,
@@ -30,7 +30,7 @@ pub const AssetFilterSummary = struct {
     name: []const u8,
 
     /// The status of the asset filter.
-    status: ?FilterStatus,
+    status: ?FilterStatus = null,
 
     pub const json_field_names = .{
         .asset_id = "assetId",

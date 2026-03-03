@@ -3,10 +3,10 @@
 /// historical data has been processed and reflected.
 pub const Readiness = struct {
     /// Any customer messaging.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Approximately how far the Calculated Attribute creation is from completion.
-    progress_percentage: ?i32,
+    progress_percentage: ?i32 = null,
 
     pub const json_field_names = .{
         .message = "Message",

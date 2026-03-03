@@ -11,7 +11,7 @@ pub const InstanceSavingsOpportunityAfterDiscounts = struct {
     /// Compute Optimizer’s Amazon EC2 instance recommendations. This is
     /// based on pricing after applying the Savings Plans and Reserved Instances
     /// discounts.
-    estimated_monthly_savings: ?InstanceEstimatedMonthlySavings,
+    estimated_monthly_savings: ?InstanceEstimatedMonthlySavings = null,
 
     /// The estimated monthly savings possible as a percentage of monthly cost after
     /// applying the Savings Plans and Reserved Instances discounts.

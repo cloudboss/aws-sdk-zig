@@ -6,10 +6,10 @@ const ConfigurationObject = @import("configuration_object.zig").ConfigurationObj
 /// usage profile.
 pub const ProfileConfiguration = struct {
     /// A key-value map of configuration parameters for Glue jobs.
-    job_configuration: ?[]const aws.map.MapEntry(ConfigurationObject),
+    job_configuration: ?[]const aws.map.MapEntry(ConfigurationObject) = null,
 
     /// A key-value map of configuration parameters for Glue sessions.
-    session_configuration: ?[]const aws.map.MapEntry(ConfigurationObject),
+    session_configuration: ?[]const aws.map.MapEntry(ConfigurationObject) = null,
 
     pub const json_field_names = .{
         .job_configuration = "JobConfiguration",

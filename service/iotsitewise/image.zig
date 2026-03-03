@@ -6,11 +6,11 @@ const ImageFile = @import("image_file.zig").ImageFile;
 ///
 /// * The ID of an existing image. Choose this option to keep an existing image.
 pub const Image = struct {
-    file: ?ImageFile,
+    file: ?ImageFile = null,
 
     /// The ID of an existing image. Specify this parameter to keep an existing
     /// image.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .file = "file",

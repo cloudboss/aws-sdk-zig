@@ -11,26 +11,26 @@ const EvaluationResult = @import("evaluation_result.zig").EvaluationResult;
 /// policies.
 pub const PolicyComplianceStatus = struct {
     /// An array of `EvaluationResult` objects.
-    evaluation_results: ?[]const EvaluationResult,
+    evaluation_results: ?[]const EvaluationResult = null,
 
     /// Details about problems with dependent services, such as WAF or Config,
     /// and the error message received that indicates the problem with the service.
-    issue_info_map: ?[]const aws.map.StringMapEntry,
+    issue_info_map: ?[]const aws.map.StringMapEntry = null,
 
     /// Timestamp of the last update to the `EvaluationResult` objects.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The member account ID.
-    member_account: ?[]const u8,
+    member_account: ?[]const u8 = null,
 
     /// The ID of the Firewall Manager policy.
-    policy_id: ?[]const u8,
+    policy_id: ?[]const u8 = null,
 
     /// The name of the Firewall Manager policy.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// The Amazon Web Services account that created the Firewall Manager policy.
-    policy_owner: ?[]const u8,
+    policy_owner: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .evaluation_results = "EvaluationResults",

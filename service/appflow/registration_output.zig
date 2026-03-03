@@ -14,15 +14,15 @@ pub const RegistrationOutput = struct {
     /// Explains the status of the registration attempt from Amazon AppFlow. If the
     /// attempt
     /// fails, the message explains why.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Indicates the number of resources that Amazon AppFlow created or updated.
     /// Possible
     /// resources include metadata tables and data partitions.
-    result: ?[]const u8,
+    result: ?[]const u8 = null,
 
     /// Indicates the status of the registration attempt from Amazon AppFlow.
-    status: ?ExecutionStatus,
+    status: ?ExecutionStatus = null,
 
     pub const json_field_names = .{
         .message = "message",

@@ -2,7 +2,7 @@
 /// cluster and its nodes.
 pub const Endpoint = struct {
     /// The DNS hostname of the node.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// The port number that the engine is listening on.
     port: i32 = 0,

@@ -5,5 +5,5 @@ pub const ResourceQuota = struct {
     /// The maximum number of instances of this Elastic Beanstalk resource type that
     /// an AWS account can
     /// use.
-    maximum: ?i32,
+    maximum: ?i32 = null,
 };

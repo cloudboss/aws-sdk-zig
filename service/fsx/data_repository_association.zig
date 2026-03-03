@@ -23,7 +23,7 @@ const Tag = @import("tag.zig").Tag;
 /// Intelligent-Tiering and `scratch_1` file systems.
 pub const DataRepositoryAssociation = struct {
     /// The system-generated, unique ID of the data repository association.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// A boolean flag indicating whether an import data repository task to import
     /// metadata should run after the data repository association is created. The
@@ -31,9 +31,9 @@ pub const DataRepositoryAssociation = struct {
     ///
     /// `BatchImportMetaDataOnCreate` is not supported for data repositories
     /// linked to an Amazon File Cache resource.
-    batch_import_meta_data_on_create: ?bool,
+    batch_import_meta_data_on_create: ?bool = null,
 
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The path to the data repository that will be linked to the cache
     /// or file system.
@@ -60,7 +60,7 @@ pub const DataRepositoryAssociation = struct {
     /// * For Amazon FSx for Lustre, the path can be an S3 bucket or prefix
     /// in the format `s3://bucket-name/prefix/` (where `prefix`
     /// is optional).
-    data_repository_path: ?[]const u8,
+    data_repository_path: ?[]const u8 = null,
 
     /// For Amazon File Cache, a list of NFS Exports that will be linked with an
     /// NFS data repository association. All the subdirectories must be on a single
@@ -71,12 +71,12 @@ pub const DataRepositoryAssociation = struct {
     /// in effect is the
     /// root of the subdirectories. Note that `DataRepositorySubdirectories` is not
     /// supported for S3 data repositories.
-    data_repository_subdirectories: ?[]const []const u8,
+    data_repository_subdirectories: ?[]const []const u8 = null,
 
-    failure_details: ?DataRepositoryFailureDetails,
+    failure_details: ?DataRepositoryFailureDetails = null,
 
     /// The globally unique ID of the Amazon File Cache resource.
-    file_cache_id: ?[]const u8,
+    file_cache_id: ?[]const u8 = null,
 
     /// A path on the Amazon File Cache that points to a high-level directory (such
     /// as `/ns1/`) or subdirectory (such as `/ns1/subdir/`)
@@ -97,9 +97,9 @@ pub const DataRepositoryAssociation = struct {
     /// on the cache.
     ///
     /// The cache path cannot be set to root (/) for an S3 DRA.
-    file_cache_path: ?[]const u8,
+    file_cache_path: ?[]const u8 = null,
 
-    file_system_id: ?[]const u8,
+    file_system_id: ?[]const u8 = null,
 
     /// A path on the Amazon FSx for Lustre file system that points to a high-level
     /// directory (such
@@ -120,7 +120,7 @@ pub const DataRepositoryAssociation = struct {
     /// specify
     /// "/" as the file system path for the first data repository associated with a
     /// file system.
-    file_system_path: ?[]const u8,
+    file_system_path: ?[]const u8 = null,
 
     /// For files imported from a data repository, this value determines the stripe
     /// count and
@@ -133,7 +133,7 @@ pub const DataRepositoryAssociation = struct {
     /// The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000
     /// MiB (500
     /// GiB). Amazon S3 objects have a maximum size of 5 TB.
-    imported_file_chunk_size: ?i32,
+    imported_file_chunk_size: ?i32 = null,
 
     /// Describes the state of a data repository association. The lifecycle can have
     /// the following values:
@@ -157,19 +157,19 @@ pub const DataRepositoryAssociation = struct {
     ///
     /// * `FAILED` - The data repository association is in a terminal
     /// state that cannot be recovered.
-    lifecycle: ?DataRepositoryLifecycle,
+    lifecycle: ?DataRepositoryLifecycle = null,
 
     /// The configuration for an NFS data repository linked to an
     /// Amazon File Cache resource with a data repository association.
-    nfs: ?NFSDataRepositoryConfiguration,
+    nfs: ?NFSDataRepositoryConfiguration = null,
 
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The configuration for an Amazon S3 data repository linked to an
     /// Amazon FSx for Lustre file system with a data repository association.
-    s3: ?S3DataRepositoryConfiguration,
+    s3: ?S3DataRepositoryConfiguration = null,
 
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .association_id = "AssociationId",

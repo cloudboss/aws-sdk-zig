@@ -3,19 +3,19 @@ const ImpersonationRoleType = @import("impersonation_role_type.zig").Impersonati
 /// An impersonation role for the given WorkMail organization.
 pub const ImpersonationRole = struct {
     /// The date when the impersonation role was created.
-    date_created: ?i64,
+    date_created: ?i64 = null,
 
     /// The date when the impersonation role was last modified.
-    date_modified: ?i64,
+    date_modified: ?i64 = null,
 
     /// The identifier of the impersonation role.
-    impersonation_role_id: ?[]const u8,
+    impersonation_role_id: ?[]const u8 = null,
 
     /// The impersonation role name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The impersonation role type.
-    @"type": ?ImpersonationRoleType,
+    @"type": ?ImpersonationRoleType = null,
 
     pub const json_field_names = .{
         .date_created = "DateCreated",

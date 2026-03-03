@@ -6,10 +6,10 @@ const ProjectPeriodicScanConfiguration = @import("project_periodic_scan_configur
 /// repository.
 pub const ProjectCodeSecurityScanConfiguration = struct {
     /// The continuous integration scan configurations applied to the project.
-    continuous_integration_scan_configurations: ?[]const ProjectContinuousIntegrationScanConfiguration,
+    continuous_integration_scan_configurations: ?[]const ProjectContinuousIntegrationScanConfiguration = null,
 
     /// The periodic scan configurations applied to the project.
-    periodic_scan_configurations: ?[]const ProjectPeriodicScanConfiguration,
+    periodic_scan_configurations: ?[]const ProjectPeriodicScanConfiguration = null,
 
     pub const json_field_names = .{
         .continuous_integration_scan_configurations = "continuousIntegrationScanConfigurations",

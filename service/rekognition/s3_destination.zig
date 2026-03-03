@@ -6,13 +6,13 @@
 pub const S3Destination = struct {
     /// The name of the Amazon S3 bucket you want to associate with the streaming
     /// video project. You must be the owner of the Amazon S3 bucket.
-    bucket: ?[]const u8,
+    bucket: ?[]const u8 = null,
 
     /// The prefix value of the location within the bucket that you want the
     /// information to be published to.
     /// For more information, see [Using
     /// prefixes](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html).
-    key_prefix: ?[]const u8,
+    key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "Bucket",

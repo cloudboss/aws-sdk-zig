@@ -13,21 +13,21 @@ pub const IpamPrefixListResolverRule = struct {
     /// The conditions that determine which CIDRs are selected by this rule.
     /// Conditions specify criteria such as resource type, tags, account IDs, and
     /// Regions.
-    conditions: ?[]const IpamPrefixListResolverRuleCondition,
+    conditions: ?[]const IpamPrefixListResolverRuleCondition = null,
 
     /// The ID of the IPAM scope from which to select CIDRs. This determines whether
     /// to select from public or private IP address space.
-    ipam_scope_id: ?[]const u8,
+    ipam_scope_id: ?[]const u8 = null,
 
     /// For rules of type `ipam-resource-cidr`, this is the resource type.
-    resource_type: ?IpamResourceType,
+    resource_type: ?IpamResourceType = null,
 
     /// The type of CIDR selection rule. Valid values include `include` for
     /// selecting CIDRs that match the conditions, and `exclude` for excluding CIDRs
     /// that match the conditions.
-    rule_type: ?IpamPrefixListResolverRuleType,
+    rule_type: ?IpamPrefixListResolverRuleType = null,
 
     /// A fixed list of CIDRs that do not change (like a manual list replicated
     /// across Regions).
-    static_cidr: ?[]const u8,
+    static_cidr: ?[]const u8 = null,
 };

@@ -8,7 +8,7 @@ pub const LocationListEntry = struct {
     /// the location is the export path. For Amazon S3, the location is the prefix
     /// path that you
     /// want to mount and use as the root of the location.
-    location_arn: ?[]const u8,
+    location_arn: ?[]const u8 = null,
 
     /// Represents a list of URIs of a location. `LocationUri` returns an array that
     /// contains a list of locations when the
@@ -35,7 +35,7 @@ pub const LocationListEntry = struct {
     /// Amazon S3, it's the prefix path that you mount to and treat as the root of
     /// the
     /// location.
-    location_uri: ?[]const u8,
+    location_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .location_arn = "LocationArn",

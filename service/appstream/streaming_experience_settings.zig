@@ -5,7 +5,7 @@ const PreferredProtocol = @import("preferred_protocol.zig").PreferredProtocol;
 pub const StreamingExperienceSettings = struct {
     /// The preferred protocol that you want to use while streaming your
     /// application.
-    preferred_protocol: ?PreferredProtocol,
+    preferred_protocol: ?PreferredProtocol = null,
 
     pub const json_field_names = .{
         .preferred_protocol = "PreferredProtocol",

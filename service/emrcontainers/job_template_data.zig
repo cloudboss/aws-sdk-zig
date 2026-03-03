@@ -9,7 +9,7 @@ const TemplateParameterConfiguration = @import("template_parameter_configuration
 /// template.
 pub const JobTemplateData = struct {
     /// The configuration settings that are used to override defaults configuration.
-    configuration_overrides: ?ParametricConfigurationOverrides,
+    configuration_overrides: ?ParametricConfigurationOverrides = null,
 
     /// The execution role ARN of the job run.
     execution_role_arn: []const u8,
@@ -17,10 +17,10 @@ pub const JobTemplateData = struct {
     job_driver: JobDriver,
 
     /// The tags assigned to jobs started using the job template.
-    job_tags: ?[]const aws.map.StringMapEntry,
+    job_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The configuration of parameters existing in the job template.
-    parameter_configuration: ?[]const aws.map.MapEntry(TemplateParameterConfiguration),
+    parameter_configuration: ?[]const aws.map.MapEntry(TemplateParameterConfiguration) = null,
 
     /// The release version of Amazon EMR.
     release_label: []const u8,

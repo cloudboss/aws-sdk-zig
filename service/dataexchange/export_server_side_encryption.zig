@@ -9,7 +9,7 @@ pub const ExportServerSideEncryption = struct {
     /// the Amazon
     /// S3 objects. This parameter is required if you choose aws:kms as an
     /// encryption type.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The type of server side encryption used for encrypting the objects in Amazon
     /// S3.

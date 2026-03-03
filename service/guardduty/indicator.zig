@@ -10,14 +10,14 @@ pub const Indicator = struct {
     key: IndicatorType,
 
     /// Title describing the indicator.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// Values associated with each indicator key. For example, if the indicator key
     /// is
     /// `SUSPICIOUS_NETWORK`, then the value will be the name of the network. If
     /// the indicator key is `ATTACK_TACTIC`, then the value will be one of the
     /// MITRE tactics.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

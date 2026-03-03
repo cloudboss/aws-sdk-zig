@@ -3,12 +3,12 @@ pub const VaultNotificationConfig = struct {
     /// A list of one or more events for which Amazon Glacier will send a
     /// notification to the
     /// specified Amazon SNS topic.
-    events: ?[]const []const u8,
+    events: ?[]const []const u8 = null,
 
     /// The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource
     /// Name
     /// (ARN).
-    sns_topic: ?[]const u8,
+    sns_topic: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .events = "Events",

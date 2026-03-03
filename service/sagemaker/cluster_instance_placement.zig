@@ -4,11 +4,11 @@
 pub const ClusterInstancePlacement = struct {
     /// The Availability Zone where the node in the SageMaker HyperPod cluster is
     /// launched.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The unique identifier (ID) of the Availability Zone where the node in the
     /// SageMaker HyperPod cluster is launched.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .availability_zone = "AvailabilityZone",

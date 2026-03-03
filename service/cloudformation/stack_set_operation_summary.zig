@@ -12,7 +12,7 @@ pub const StackSetOperationSummary = struct {
     /// the specified StackSet. Update operations affect both the StackSet itself
     /// and
     /// *all* associated StackSet instances.
-    action: ?StackSetOperationAction,
+    action: ?StackSetOperationAction = null,
 
     /// The time at which the operation was initiated. Note that the creation times
     /// for the StackSet
@@ -21,17 +21,17 @@ pub const StackSetOperationSummary = struct {
     /// because CloudFormation needs to perform preparatory work for the operation,
     /// such as dispatching the
     /// work to the requested Regions, before actually creating the first stacks.
-    creation_timestamp: ?i64,
+    creation_timestamp: ?i64 = null,
 
     /// The time at which the StackSet operation ended, across all accounts and
     /// Regions specified.
     /// Note that this doesn't necessarily mean that the StackSet operation was
     /// successful, or even
     /// attempted, in each account or Region.
-    end_timestamp: ?i64,
+    end_timestamp: ?i64 = null,
 
     /// The unique ID of the StackSet operation.
-    operation_id: ?[]const u8,
+    operation_id: ?[]const u8 = null,
 
     /// The user-specified preferences for how CloudFormation performs a StackSet
     /// operation.
@@ -40,7 +40,7 @@ pub const StackSetOperationSummary = struct {
     /// tolerance, see [StackSet
     /// operation
     /// options](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options).
-    operation_preferences: ?StackSetOperationPreferences,
+    operation_preferences: ?StackSetOperationPreferences = null,
 
     /// The overall status of the operation.
     ///
@@ -73,11 +73,11 @@ pub const StackSetOperationSummary = struct {
     /// * `SUCCEEDED`: The operation completed creating or updating all the
     ///   specified
     /// stacks without exceeding the failure tolerance for the operation.
-    status: ?StackSetOperationStatus,
+    status: ?StackSetOperationStatus = null,
 
     /// Detailed information about the StackSet operation.
-    status_details: ?StackSetOperationStatusDetails,
+    status_details: ?StackSetOperationStatusDetails = null,
 
     /// The status of the operation in details.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 };

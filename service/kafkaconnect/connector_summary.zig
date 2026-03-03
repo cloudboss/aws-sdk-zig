@@ -11,56 +11,56 @@ const WorkerConfigurationDescription = @import("worker_configuration_description
 /// Summary of a connector.
 pub const ConnectorSummary = struct {
     /// The connector's compute capacity settings.
-    capacity: ?CapacityDescription,
+    capacity: ?CapacityDescription = null,
 
     /// The Amazon Resource Name (ARN) of the connector.
-    connector_arn: ?[]const u8,
+    connector_arn: ?[]const u8 = null,
 
     /// The description of the connector.
-    connector_description: ?[]const u8,
+    connector_description: ?[]const u8 = null,
 
     /// The name of the connector.
-    connector_name: ?[]const u8,
+    connector_name: ?[]const u8 = null,
 
     /// The state of the connector.
-    connector_state: ?ConnectorState,
+    connector_state: ?ConnectorState = null,
 
     /// The time that the connector was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The current version of the connector.
-    current_version: ?[]const u8,
+    current_version: ?[]const u8 = null,
 
     /// The details of the Apache Kafka cluster to which the connector is connected.
-    kafka_cluster: ?KafkaClusterDescription,
+    kafka_cluster: ?KafkaClusterDescription = null,
 
     /// The type of client authentication used to connect to the Apache Kafka
     /// cluster. The value is NONE when no client authentication is used.
-    kafka_cluster_client_authentication: ?KafkaClusterClientAuthenticationDescription,
+    kafka_cluster_client_authentication: ?KafkaClusterClientAuthenticationDescription = null,
 
     /// Details of encryption in transit to the Apache Kafka cluster.
-    kafka_cluster_encryption_in_transit: ?KafkaClusterEncryptionInTransitDescription,
+    kafka_cluster_encryption_in_transit: ?KafkaClusterEncryptionInTransitDescription = null,
 
     /// The version of Kafka Connect. It has to be compatible with both the Apache
     /// Kafka cluster's version and the plugins.
-    kafka_connect_version: ?[]const u8,
+    kafka_connect_version: ?[]const u8 = null,
 
     /// The settings for delivering connector logs to Amazon CloudWatch Logs.
-    log_delivery: ?LogDeliveryDescription,
+    log_delivery: ?LogDeliveryDescription = null,
 
     /// The network type of the connector. It gives connectors connectivity to
     /// either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults to IPV4.
-    network_type: ?NetworkType,
+    network_type: ?NetworkType = null,
 
     /// Specifies which plugins were used for this connector.
-    plugins: ?[]const PluginDescription,
+    plugins: ?[]const PluginDescription = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role used by the connector to
     /// access Amazon Web Services resources.
-    service_execution_role_arn: ?[]const u8,
+    service_execution_role_arn: ?[]const u8 = null,
 
     /// The worker configurations that are in use with the connector.
-    worker_configuration: ?WorkerConfigurationDescription,
+    worker_configuration: ?WorkerConfigurationDescription = null,
 
     pub const json_field_names = .{
         .capacity = "capacity",

@@ -4,7 +4,7 @@ const OfferingType = @import("offering_type.zig").OfferingType;
 /// payment schedule for the reservation.
 pub const ReservationOffering = struct {
     /// The currency code for the offering.
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// The duration, in seconds, for which the reservation reserves the RPUs.
     duration: i32 = 0,
@@ -13,10 +13,10 @@ pub const ReservationOffering = struct {
     hourly_charge: f64 = 0,
 
     /// The offering identifier.
-    offering_id: ?[]const u8,
+    offering_id: ?[]const u8 = null,
 
     /// Determines the payment schedule for the reservation.
-    offering_type: ?OfferingType,
+    offering_type: ?OfferingType = null,
 
     /// The up-front price you are charged for the reservation.
     upfront_charge: f64 = 0,

@@ -9,7 +9,7 @@ pub const GraphSnapshotSummary = struct {
     id: []const u8,
 
     /// The ID of the KMS key used to encrypt and decrypt the snapshot.
-    kms_key_identifier: ?[]const u8,
+    kms_key_identifier: ?[]const u8 = null,
 
     /// The snapshot name. For example: `my-snapshot-1`.
     ///
@@ -19,13 +19,13 @@ pub const GraphSnapshotSummary = struct {
     name: []const u8,
 
     /// The time when the snapshot was created.
-    snapshot_create_time: ?i64,
+    snapshot_create_time: ?i64 = null,
 
     /// The graph identifier for the graph for which a snapshot is to be created.
-    source_graph_id: ?[]const u8,
+    source_graph_id: ?[]const u8 = null,
 
     /// The status of the graph snapshot.
-    status: ?SnapshotStatus,
+    status: ?SnapshotStatus = null,
 
     pub const json_field_names = .{
         .arn = "arn",

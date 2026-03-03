@@ -13,45 +13,45 @@ const ReportType = @import("report_type.zig").ReportType;
 /// such as unit tests, integration tests, and functional tests.
 pub const Report = struct {
     /// The ARN of the report run.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A `CodeCoverageReportSummary` object that contains a code coverage summary
     /// for
     /// this report.
-    code_coverage_summary: ?CodeCoverageReportSummary,
+    code_coverage_summary: ?CodeCoverageReportSummary = null,
 
     /// The date and time this report run occurred.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The ARN of the build run that generated this report.
-    execution_id: ?[]const u8,
+    execution_id: ?[]const u8 = null,
 
     /// The date and time a report expires. A report expires 30 days after it is
     /// created. An
     /// expired report is not available to view in CodeBuild.
-    expired: ?i64,
+    expired: ?i64 = null,
 
     /// Information about where the raw data used to generate this report was
     /// exported.
-    export_config: ?ReportExportConfig,
+    export_config: ?ReportExportConfig = null,
 
     /// The name of the report that was run.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN of the report group associated with this report.
-    report_group_arn: ?[]const u8,
+    report_group_arn: ?[]const u8 = null,
 
     /// The status of this report.
-    status: ?ReportStatusType,
+    status: ?ReportStatusType = null,
 
     /// A `TestReportSummary` object that contains information about this test
     /// report.
-    test_summary: ?TestReportSummary,
+    test_summary: ?TestReportSummary = null,
 
     /// A boolean that specifies if this report run is truncated. The list of test
     /// cases is
     /// truncated after the maximum number of test cases is reached.
-    truncated: ?bool,
+    truncated: ?bool = null,
 
     /// The type of the report that was run.
     ///
@@ -62,7 +62,7 @@ pub const Report = struct {
     /// **TEST**
     ///
     /// A test report.
-    @"type": ?ReportType,
+    @"type": ?ReportType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -7,10 +7,10 @@ pub const DomainUnitPolicyGrantPrincipal = struct {
     domain_unit_designation: DomainUnitDesignation,
 
     /// The grant filter for the domain unit.
-    domain_unit_grant_filter: ?DomainUnitGrantFilter,
+    domain_unit_grant_filter: ?DomainUnitGrantFilter = null,
 
     /// The ID of the domain unit.
-    domain_unit_identifier: ?[]const u8,
+    domain_unit_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domain_unit_designation = "domainUnitDesignation",

@@ -5,10 +5,10 @@
 /// specified within.
 pub const ParametricCloudWatchMonitoringConfiguration = struct {
     /// The name of the log group for log publishing.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     /// The specified name prefix for log streams.
-    log_stream_name_prefix: ?[]const u8,
+    log_stream_name_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .log_group_name = "logGroupName",

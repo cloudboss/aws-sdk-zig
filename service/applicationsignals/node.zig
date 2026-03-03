@@ -5,7 +5,7 @@ const aws = @import("aws");
 /// characteristics.
 pub const Node = struct {
     /// The duration or processing time associated with this node, if applicable.
-    duration: ?f64,
+    duration: ?f64 = null,
 
     /// The key attributes that identify this node, including Type, Name, and
     /// Environment information.
@@ -18,14 +18,14 @@ pub const Node = struct {
     node_id: []const u8,
 
     /// The operation associated with this node, if applicable.
-    operation: ?[]const u8,
+    operation: ?[]const u8 = null,
 
     /// The status of the entity represented by this node.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The type of entity represented by this node, such as `Service` or
     /// `Resource`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .duration = "Duration",

@@ -16,7 +16,7 @@ pub const ListToMap = struct {
     /// specify which element, `first` or `last`, to keep.
     ///
     /// You must specify this parameter if `flatten` is `true`
-    flattened_element: ?FlattenedElement,
+    flattened_element: ?FlattenedElement = null,
 
     /// The key of the field to be extracted as keys in the generated map
     key: []const u8,
@@ -27,7 +27,7 @@ pub const ListToMap = struct {
     source: []const u8,
 
     /// The key of the field that will hold the generated map
-    target: ?[]const u8,
+    target: ?[]const u8 = null,
 
     /// If this is specified, the values that you specify in this parameter will be
     /// extracted from
@@ -35,7 +35,7 @@ pub const ListToMap = struct {
     /// Otherwise,
     /// original objects in the source list will be put into the values of the
     /// generated map.
-    value_key: ?[]const u8,
+    value_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .flatten = "flatten",

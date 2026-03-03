@@ -3,7 +3,7 @@ const InboundConnectionStatusCode = @import("inbound_connection_status_code.zig"
 /// The status of an inbound cross-cluster connection for OpenSearch Service.
 pub const InboundConnectionStatus = struct {
     /// Information about the connection.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status code for the connection. Can be one of the following:
     ///
@@ -29,7 +29,7 @@ pub const InboundConnectionStatus = struct {
     ///
     /// * **DELETED**: Inbound connection is deleted and can no longer
     /// be used.
-    status_code: ?InboundConnectionStatusCode,
+    status_code: ?InboundConnectionStatusCode = null,
 
     pub const json_field_names = .{
         .message = "Message",

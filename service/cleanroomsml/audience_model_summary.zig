@@ -9,7 +9,7 @@ pub const AudienceModelSummary = struct {
     create_time: i64,
 
     /// The description of the audience model.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the audience model.
     name: []const u8,

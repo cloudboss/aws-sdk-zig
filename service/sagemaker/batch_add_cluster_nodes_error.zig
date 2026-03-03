@@ -13,7 +13,7 @@ pub const BatchAddClusterNodesError = struct {
     instance_group_name: []const u8,
 
     /// A descriptive message providing additional details about the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

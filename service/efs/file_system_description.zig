@@ -13,7 +13,7 @@ pub const FileSystemDescription = struct {
     /// `use1-az1` is an Availability Zone ID for the us-east-1 Amazon Web Services
     /// Region, and
     /// it has the same location in every Amazon Web Services account.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// Describes the Amazon Web Services Availability Zone in which the file system
     /// is located, and is
@@ -21,7 +21,7 @@ pub const FileSystemDescription = struct {
     /// storage
     /// classes](https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in
     /// the *Amazon EFS User Guide*.
-    availability_zone_name: ?[]const u8,
+    availability_zone_name: ?[]const u8 = null,
 
     /// The time that the file system was created, in seconds (since
     /// 1970-01-01T00:00:00Z).
@@ -31,7 +31,7 @@ pub const FileSystemDescription = struct {
     creation_token: []const u8,
 
     /// A Boolean value that, if true, indicates that the file system is encrypted.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The Amazon Resource Name (ARN) for the EFS file system, in the
     /// format
@@ -39,16 +39,16 @@ pub const FileSystemDescription = struct {
     /// `.
     /// Example with sample data:
     /// `arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567`
-    file_system_arn: ?[]const u8,
+    file_system_arn: ?[]const u8 = null,
 
     /// The ID of the file system, assigned by Amazon EFS.
     file_system_id: []const u8,
 
     /// Describes the protection on the file system.
-    file_system_protection: ?FileSystemProtectionDescription,
+    file_system_protection: ?FileSystemProtectionDescription = null,
 
     /// The ID of an KMS key used to protect the encrypted file system.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The lifecycle phase of the file system.
     life_cycle_state: LifeCycleState,
@@ -57,7 +57,7 @@ pub const FileSystemDescription = struct {
     /// information, see CreateFileSystem. If the file system has a `Name` tag,
     /// Amazon EFS returns
     /// the value in this field.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current number of mount targets that the file system has. For more
     /// information, see CreateMountTarget.
@@ -72,7 +72,7 @@ pub const FileSystemDescription = struct {
     /// The amount of provisioned throughput, measured in MiBps, for the file
     /// system. Valid for
     /// file systems using `ThroughputMode` set to `provisioned`.
-    provisioned_throughput_in_mibps: ?f64,
+    provisioned_throughput_in_mibps: ?f64 = null,
 
     /// The latest known metered size (in bytes) of data stored in the file system,
     /// in its
@@ -98,7 +98,7 @@ pub const FileSystemDescription = struct {
     /// [Throughput
     /// modes](https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes)
     /// in the *Amazon EFS User Guide*.
-    throughput_mode: ?ThroughputMode,
+    throughput_mode: ?ThroughputMode = null,
 
     pub const json_field_names = .{
         .availability_zone_id = "AvailabilityZoneId",

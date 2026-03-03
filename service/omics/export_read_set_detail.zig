@@ -9,7 +9,7 @@ pub const ExportReadSetDetail = struct {
     status: ReadSetExportJobItemStatus,
 
     /// The set's status message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",

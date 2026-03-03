@@ -10,7 +10,7 @@ pub const SignInPolicyType = struct {
     /// users to start authentication with a standard username and password, or with
     /// other
     /// one-time password and hardware factors.
-    allowed_first_auth_factors: ?[]const AuthFactorType,
+    allowed_first_auth_factors: ?[]const AuthFactorType = null,
 
     pub const json_field_names = .{
         .allowed_first_auth_factors = "AllowedFirstAuthFactors",

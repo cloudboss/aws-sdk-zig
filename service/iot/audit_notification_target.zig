@@ -5,10 +5,10 @@ pub const AuditNotificationTarget = struct {
 
     /// The ARN of the role that grants permission to send notifications to the
     /// target.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The ARN of the target (SNS topic) to which audit notifications are sent.
-    target_arn: ?[]const u8,
+    target_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

@@ -7,7 +7,7 @@ pub const S3Location = struct {
     file_key: []const u8,
 
     /// The version of an object in an S3 bucket.
-    object_version: ?[]const u8,
+    object_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_arn = "bucketArn",

@@ -9,7 +9,7 @@ pub const CreateSvmActiveDirectoryConfiguration = struct {
     /// created for your SVM.
     net_bios_name: []const u8,
 
-    self_managed_active_directory_configuration: ?SelfManagedActiveDirectoryConfiguration,
+    self_managed_active_directory_configuration: ?SelfManagedActiveDirectoryConfiguration = null,
 
     pub const json_field_names = .{
         .net_bios_name = "NetBiosName",

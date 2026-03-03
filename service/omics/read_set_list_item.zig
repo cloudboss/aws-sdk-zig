@@ -13,14 +13,14 @@ pub const ReadSetListItem = struct {
     creation_time: i64,
 
     /// The creation type of the read set.
-    creation_type: ?CreationType,
+    creation_type: ?CreationType = null,
 
     /// The read set's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The entity tag (ETag) is a hash of the object representing its semantic
     /// content.
-    etag: ?ETag,
+    etag: ?ETag = null,
 
     /// The read set's file type.
     file_type: FileType,
@@ -29,15 +29,15 @@ pub const ReadSetListItem = struct {
     id: []const u8,
 
     /// The read set's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The read set's genome reference ARN.
-    reference_arn: ?[]const u8,
+    reference_arn: ?[]const u8 = null,
 
     /// The read set's sample ID.
-    sample_id: ?[]const u8,
+    sample_id: ?[]const u8 = null,
 
-    sequence_information: ?SequenceInformation,
+    sequence_information: ?SequenceInformation = null,
 
     /// The read set's sequence store ID.
     sequence_store_id: []const u8,
@@ -47,10 +47,10 @@ pub const ReadSetListItem = struct {
 
     /// The status for a read set. It provides more detail as to why the read set
     /// has a status.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The read set's subject ID.
-    subject_id: ?[]const u8,
+    subject_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

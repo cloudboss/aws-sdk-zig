@@ -6,23 +6,23 @@ const Tag = @import("tag.zig").Tag;
 /// Describes an export instance task.
 pub const ExportTask = struct {
     /// A description of the resource being exported.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the export task.
-    export_task_id: ?[]const u8,
+    export_task_id: ?[]const u8 = null,
 
     /// Information about the export task.
-    export_to_s3_task: ?ExportToS3Task,
+    export_to_s3_task: ?ExportToS3Task = null,
 
     /// Information about the instance to export.
-    instance_export_details: ?InstanceExportDetails,
+    instance_export_details: ?InstanceExportDetails = null,
 
     /// The state of the export task.
-    state: ?ExportTaskState,
+    state: ?ExportTaskState = null,
 
     /// The status message related to the export task.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The tags for the export task.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

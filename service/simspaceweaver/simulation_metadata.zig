@@ -7,21 +7,21 @@ pub const SimulationMetadata = struct {
     /// ARNs, see [Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
     /// in the *Amazon Web Services General Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time when the simulation was created, expressed as the
     /// number of seconds and milliseconds in UTC since the Unix epoch (0:0:0.000,
     /// January 1, 1970).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The name of the simulation.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the simulation.
-    status: ?SimulationStatus,
+    status: ?SimulationStatus = null,
 
     /// The desired status of the simulation.
-    target_status: ?SimulationTargetStatus,
+    target_status: ?SimulationTargetStatus = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

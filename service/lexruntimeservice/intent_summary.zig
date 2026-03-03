@@ -15,7 +15,7 @@ pub const IntentSummary = struct {
     /// Use the `checkpointLabelFilter` parameter of the
     /// `GetSessionRequest` operation to filter the intents returned
     /// by the operation to those with only the specified label.
-    checkpoint_label: ?[]const u8,
+    checkpoint_label: ?[]const u8 = null,
 
     /// The status of the intent after the user responds to the confirmation
     /// prompt. If the user confirms the intent, Amazon Lex sets this field to
@@ -32,7 +32,7 @@ pub const IntentSummary = struct {
     /// * `None` - The user has never been prompted for
     /// confirmation; or, the user was prompted but did not confirm or deny
     /// the prompt.
-    confirmation_status: ?ConfirmationStatus,
+    confirmation_status: ?ConfirmationStatus = null,
 
     /// The next action that the bot should take in its interaction with the
     /// user. The possible values are:
@@ -63,17 +63,17 @@ pub const IntentSummary = struct {
     /// * `ReadyForFulfillment` - All of the information
     /// necessary for the intent is present and the intent ready to be
     /// fulfilled by the client application.
-    fulfillment_state: ?FulfillmentState,
+    fulfillment_state: ?FulfillmentState = null,
 
     /// The name of the intent.
-    intent_name: ?[]const u8,
+    intent_name: ?[]const u8 = null,
 
     /// Map of the slots that have been gathered and their values.
-    slots: ?[]const aws.map.StringMapEntry,
+    slots: ?[]const aws.map.StringMapEntry = null,
 
     /// The next slot to elicit from the user. If there is not slot to elicit,
     /// the field is blank.
-    slot_to_elicit: ?[]const u8,
+    slot_to_elicit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .checkpoint_label = "checkpointLabel",

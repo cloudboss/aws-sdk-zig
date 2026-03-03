@@ -55,21 +55,21 @@ pub const ViewerCertificate = struct {
     ///
     /// If you specify an ACM certificate ARN, you must also specify values for
     /// `MinimumProtocolVersion` and `SSLSupportMethod`.
-    acm_certificate_arn: ?[]const u8,
+    acm_certificate_arn: ?[]const u8 = null,
 
     /// This field is deprecated. Use one of the following fields instead:
     ///
     /// * `ACMCertificateArn`
     /// * `IAMCertificateId`
     /// * `CloudFrontDefaultCertificate`
-    certificate: ?[]const u8,
+    certificate: ?[]const u8 = null,
 
     /// This field is deprecated. Use one of the following fields instead:
     ///
     /// * `ACMCertificateArn`
     /// * `IAMCertificateId`
     /// * `CloudFrontDefaultCertificate`
-    certificate_source: ?CertificateSource,
+    certificate_source: ?CertificateSource = null,
 
     /// If the distribution uses the CloudFront domain name such as
     /// `d111111abcdef8.cloudfront.net`, set this field to `true`.
@@ -81,7 +81,7 @@ pub const ViewerCertificate = struct {
     ///   both)
     /// * `MinimumProtocolVersion`
     /// * `SSLSupportMethod`
-    cloud_front_default_certificate: ?bool,
+    cloud_front_default_certificate: ?bool = null,
 
     /// This field only supports standard distributions. You can't specify this
     /// field for multi-tenant distributions. For more information, see [Unsupported
@@ -94,7 +94,7 @@ pub const ViewerCertificate = struct {
     ///
     /// If you specify an IAM certificate ID, you must also specify values for
     /// `MinimumProtocolVersion` and `SSLSupportMethod`.
-    iam_certificate_id: ?[]const u8,
+    iam_certificate_id: ?[]const u8 = null,
 
     /// If the distribution uses `Aliases` (alternate domain names or CNAMEs),
     /// specify the security policy that you want CloudFront to use for HTTPS
@@ -117,7 +117,7 @@ pub const ViewerCertificate = struct {
     /// `d111111abcdef8.cloudfront.net` (you set `CloudFrontDefaultCertificate` to
     /// `true`), CloudFront automatically sets the security policy to `TLSv1`
     /// regardless of the value that you set here.
-    minimum_protocol_version: ?MinimumProtocolVersion,
+    minimum_protocol_version: ?MinimumProtocolVersion = null,
 
     /// If the distribution uses `Aliases` (alternate domain names or CNAMEs),
     /// specify which viewers the distribution accepts HTTPS connections from.
@@ -137,5 +137,5 @@ pub const ViewerCertificate = struct {
     ///
     /// If the distribution uses the CloudFront domain name such as
     /// `d111111abcdef8.cloudfront.net`, don't set a value for this field.
-    ssl_support_method: ?SSLSupportMethod,
+    ssl_support_method: ?SSLSupportMethod = null,
 };

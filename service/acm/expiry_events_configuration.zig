@@ -5,7 +5,7 @@ pub const ExpiryEventsConfiguration = struct {
     /// generating `EventBridge` events. ACM sends one event per day per certificate
     /// until the certificate expires. By default, accounts receive events starting
     /// 45 days before certificate expiration.
-    days_before_expiry: ?i32,
+    days_before_expiry: ?i32 = null,
 
     pub const json_field_names = .{
         .days_before_expiry = "DaysBeforeExpiry",

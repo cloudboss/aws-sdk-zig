@@ -1,10 +1,10 @@
 /// Elemental anywhere settings
 pub const DescribeAnywhereSettings = struct {
     /// The ID of the channel placement group for the channel.
-    channel_placement_group_id: ?[]const u8,
+    channel_placement_group_id: ?[]const u8 = null,
 
     /// The ID of the cluster for the channel.
-    cluster_id: ?[]const u8,
+    cluster_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channel_placement_group_id = "ChannelPlacementGroupId",

@@ -5,7 +5,7 @@ const OrganizationStatus = @import("organization_status.zig").OrganizationStatus
 pub const AdminAccountSummary = struct {
     /// The Amazon Web Services account ID of the Firewall Manager administrator's
     /// account.
-    admin_account: ?[]const u8,
+    admin_account: ?[]const u8 = null,
 
     /// A boolean value that indicates if the administrator is the default
     /// administrator. If true, then this is the default administrator account. The
@@ -31,7 +31,7 @@ pub const AdminAccountSummary = struct {
     ///
     /// * `OFFBOARDING_COMPLETE` - The account has been removed as an Firewall
     ///   Manager administrator.
-    status: ?OrganizationStatus,
+    status: ?OrganizationStatus = null,
 
     pub const json_field_names = .{
         .admin_account = "AdminAccount",

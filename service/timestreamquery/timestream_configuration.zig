@@ -17,13 +17,13 @@ pub const TimestreamConfiguration = struct {
     dimension_mappings: []const DimensionMapping,
 
     /// Name of the measure column.
-    measure_name_column: ?[]const u8,
+    measure_name_column: ?[]const u8 = null,
 
     /// Specifies how to map measures to multi-measure records.
-    mixed_measure_mappings: ?[]const MixedMeasureMapping,
+    mixed_measure_mappings: ?[]const MixedMeasureMapping = null,
 
     /// Multi-measure mappings.
-    multi_measure_mappings: ?MultiMeasureMappings,
+    multi_measure_mappings: ?MultiMeasureMappings = null,
 
     /// Name of Timestream table that the query result will be written to. The table
     /// should be

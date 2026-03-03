@@ -20,7 +20,7 @@ pub const HLSTimestampRange = struct {
     /// (starting) timestamp of the fragment. Fragments that start before the
     /// `EndTimestamp` value and continue past it are included in the
     /// session.
-    end_timestamp: ?i64,
+    end_timestamp: ?i64 = null,
 
     /// The start of the timestamp range for the requested media.
     ///
@@ -32,7 +32,7 @@ pub const HLSTimestampRange = struct {
     /// past it aren't included in the session. If `FragmentSelectorType` is
     /// `SERVER_TIMESTAMP`, the `StartTimestamp` must be later than
     /// the stream head.
-    start_timestamp: ?i64,
+    start_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .end_timestamp = "EndTimestamp",

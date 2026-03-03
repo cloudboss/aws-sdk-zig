@@ -12,13 +12,13 @@ const VirtualizationType = @import("virtualization_type.zig").VirtualizationType
 /// `InstanceTypes`.
 pub const InstanceRequirementsWithMetadataRequest = struct {
     /// The architecture type.
-    architecture_types: ?[]const ArchitectureType,
+    architecture_types: ?[]const ArchitectureType = null,
 
     /// The attributes for the instance types. When you specify instance attributes,
     /// Amazon EC2 will
     /// identify instance types with those attributes.
-    instance_requirements: ?InstanceRequirementsRequest,
+    instance_requirements: ?InstanceRequirementsRequest = null,
 
     /// The virtualization type.
-    virtualization_types: ?[]const VirtualizationType,
+    virtualization_types: ?[]const VirtualizationType = null,
 };

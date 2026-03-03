@@ -22,13 +22,13 @@ pub const Limits = struct {
     /// InstanceRole
     /// `
     /// .
-    additional_limits: ?[]const AdditionalLimit,
+    additional_limits: ?[]const AdditionalLimit = null,
 
-    instance_limits: ?InstanceLimits,
+    instance_limits: ?InstanceLimits = null,
 
     /// StorageType represents the list of storage related types and attributes
     /// that are available for given InstanceType.
-    storage_types: ?[]const StorageType,
+    storage_types: ?[]const StorageType = null,
 
     pub const json_field_names = .{
         .additional_limits = "AdditionalLimits",

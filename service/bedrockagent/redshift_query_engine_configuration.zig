@@ -8,10 +8,10 @@ const RedshiftQueryEngineType = @import("redshift_query_engine_type.zig").Redshi
 /// source](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html) in the Amazon Bedrock User Guide.
 pub const RedshiftQueryEngineConfiguration = struct {
     /// Specifies configurations for a provisioned Amazon Redshift query engine.
-    provisioned_configuration: ?RedshiftProvisionedConfiguration,
+    provisioned_configuration: ?RedshiftProvisionedConfiguration = null,
 
     /// Specifies configurations for a serverless Amazon Redshift query engine.
-    serverless_configuration: ?RedshiftServerlessConfiguration,
+    serverless_configuration: ?RedshiftServerlessConfiguration = null,
 
     /// The type of query engine.
     @"type": RedshiftQueryEngineType,

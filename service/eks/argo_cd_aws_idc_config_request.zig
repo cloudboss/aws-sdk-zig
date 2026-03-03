@@ -8,7 +8,7 @@ pub const ArgoCdAwsIdcConfigRequest = struct {
 
     /// The Region where your IAM Identity CenterIAM; Identity Center instance is
     /// located.
-    idc_region: ?[]const u8,
+    idc_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .idc_instance_arn = "idcInstanceArn",

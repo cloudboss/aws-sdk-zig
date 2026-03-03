@@ -3,10 +3,10 @@
 pub const ResponseExtractionMapping = struct {
     /// A JSON path expression that specifies how to extract a value from the
     /// response body content.
-    content_path: ?[]const u8,
+    content_path: ?[]const u8 = null,
 
     /// The name of an HTTP response header from which to extract the value.
-    header_key: ?[]const u8,
+    header_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content_path = "ContentPath",

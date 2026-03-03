@@ -17,7 +17,7 @@ pub const ServiceConnectTestTrafficHeaderRules = struct {
 
     /// The header value matching configuration that determines how the HTTP header
     /// value is evaluated for test traffic routing decisions.
-    value: ?ServiceConnectTestTrafficHeaderMatchRules,
+    value: ?ServiceConnectTestTrafficHeaderMatchRules = null,
 
     pub const json_field_names = .{
         .name = "name",

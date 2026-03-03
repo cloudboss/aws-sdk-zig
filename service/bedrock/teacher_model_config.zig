@@ -2,7 +2,7 @@
 pub const TeacherModelConfig = struct {
     /// The maximum number of tokens requested when the customization job invokes
     /// the teacher model.
-    max_response_length_for_inference: ?i32,
+    max_response_length_for_inference: ?i32 = null,
 
     /// The identifier of the teacher model.
     teacher_model_identifier: []const u8,

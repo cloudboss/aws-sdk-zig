@@ -6,7 +6,7 @@ pub const ParallelismConfigurationUpdate = struct {
     /// Describes updates to whether the Managed Service for Apache Flink service
     /// can increase the parallelism of a Managed Service for Apache Flink
     /// application in response to increased throughput.
-    auto_scaling_enabled_update: ?bool,
+    auto_scaling_enabled_update: ?bool = null,
 
     /// Describes updates to whether the application uses the default parallelism
     /// for the Managed Service for Apache Flink service, or if a custom parallelism
@@ -14,11 +14,11 @@ pub const ParallelismConfigurationUpdate = struct {
     /// You must set this property to `CUSTOM`
     /// in order to change your application's `AutoScalingEnabled`, `Parallelism`,
     /// or `ParallelismPerKPU` properties.
-    configuration_type_update: ?ConfigurationType,
+    configuration_type_update: ?ConfigurationType = null,
 
     /// Describes updates to the number of parallel tasks an application can perform
     /// per Kinesis Processing Unit (KPU) used by the application.
-    parallelism_per_kpu_update: ?i32,
+    parallelism_per_kpu_update: ?i32 = null,
 
     /// Describes updates to the initial number of parallel tasks an application can
     /// perform. If `AutoScalingEnabled` is set to True, then
@@ -31,7 +31,7 @@ pub const ParallelismConfigurationUpdate = struct {
     /// by requesting a limit increase. If application load is reduced, the service
     /// will
     /// reduce `CurrentParallelism` down to the `Parallelism` setting.
-    parallelism_update: ?i32,
+    parallelism_update: ?i32 = null,
 
     pub const json_field_names = .{
         .auto_scaling_enabled_update = "AutoScalingEnabledUpdate",

@@ -8,22 +8,22 @@ const ResponseItemType = @import("response_item_type.zig").ResponseItemType;
 /// query.
 pub const ResponseItem = struct {
     /// The comment that matches the query.
-    comment_metadata: ?CommentMetadata,
+    comment_metadata: ?CommentMetadata = null,
 
     /// The document that matches the query.
-    document_metadata: ?DocumentMetadata,
+    document_metadata: ?DocumentMetadata = null,
 
     /// The document version that matches the metadata.
-    document_version_metadata: ?DocumentVersionMetadata,
+    document_version_metadata: ?DocumentVersionMetadata = null,
 
     /// The folder that matches the query.
-    folder_metadata: ?FolderMetadata,
+    folder_metadata: ?FolderMetadata = null,
 
     /// The type of item being returned.
-    resource_type: ?ResponseItemType,
+    resource_type: ?ResponseItemType = null,
 
     /// The webUrl of the item being returned.
-    web_url: ?[]const u8,
+    web_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comment_metadata = "CommentMetadata",

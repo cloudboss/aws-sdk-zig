@@ -11,22 +11,22 @@ pub const CoveredResource = struct {
     account_id: []const u8,
 
     /// The date and time the resource was last checked for vulnerabilities.
-    last_scanned_at: ?i64,
+    last_scanned_at: ?i64 = null,
 
     /// The ID of the covered resource.
     resource_id: []const u8,
 
     /// An object that contains details about the metadata.
-    resource_metadata: ?ResourceScanMetadata,
+    resource_metadata: ?ResourceScanMetadata = null,
 
     /// The type of the covered resource.
     resource_type: CoverageResourceType,
 
     /// The scan method that is applied to the instance.
-    scan_mode: ?ScanMode,
+    scan_mode: ?ScanMode = null,
 
     /// The status of the scan covering the resource.
-    scan_status: ?ScanStatus,
+    scan_status: ?ScanStatus = null,
 
     /// The Amazon Inspector scan type covering the resource.
     scan_type: ScanType,

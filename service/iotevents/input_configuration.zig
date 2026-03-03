@@ -9,7 +9,7 @@ pub const InputConfiguration = struct {
     input_arn: []const u8,
 
     /// A brief description of the input.
-    input_description: ?[]const u8,
+    input_description: ?[]const u8 = null,
 
     /// The name of the input.
     input_name: []const u8,

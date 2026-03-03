@@ -9,21 +9,21 @@
 /// networks under preview only.
 pub const BatchCreateUserRequestItem = struct {
     /// Indicates whether the user can be verified through a custom invite code.
-    code_validation: ?bool,
+    code_validation: ?bool = null,
 
     /// The first name of the user.
-    first_name: ?[]const u8,
+    first_name: ?[]const u8 = null,
 
     /// A custom invite code for the user. If not provided, one will be generated
     /// automatically.
-    invite_code: ?[]const u8,
+    invite_code: ?[]const u8 = null,
 
     /// The time-to-live for the invite code in days. After this period, the invite
     /// code will expire.
-    invite_code_ttl: ?i32,
+    invite_code_ttl: ?i32 = null,
 
     /// The last name of the user.
-    last_name: ?[]const u8,
+    last_name: ?[]const u8 = null,
 
     /// A list of security group IDs to which the user should be assigned.
     security_group_ids: []const []const u8,

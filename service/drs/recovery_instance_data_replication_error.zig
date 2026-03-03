@@ -3,10 +3,10 @@ const FailbackReplicationError = @import("failback_replication_error.zig").Failb
 /// Error in data replication.
 pub const RecoveryInstanceDataReplicationError = struct {
     /// Error in data replication.
-    @"error": ?FailbackReplicationError,
+    @"error": ?FailbackReplicationError = null,
 
     /// Error in data replication.
-    raw_error: ?[]const u8,
+    raw_error: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"error" = "error",

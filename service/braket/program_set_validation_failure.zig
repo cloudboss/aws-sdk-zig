@@ -2,10 +2,10 @@
 /// processing of a program set in a quantum task.
 pub const ProgramSetValidationFailure = struct {
     /// A list of error messages describing the validation failures that occurred.
-    errors: ?[]const []const u8,
+    errors: ?[]const []const u8 = null,
 
     /// The index of the input within the program set that failed validation.
-    inputs_index: ?i64,
+    inputs_index: ?i64 = null,
 
     /// The index of the program within the program set that failed validation.
     program_index: i64,

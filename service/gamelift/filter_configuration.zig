@@ -9,7 +9,7 @@ pub const FilterConfiguration = struct {
     /// A list of locations to allow game session placement in, in the form of
     /// Amazon Web Services Region
     /// codes such as `us-west-2`.
-    allowed_locations: ?[]const []const u8,
+    allowed_locations: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .allowed_locations = "AllowedLocations",

@@ -14,7 +14,7 @@ pub const CreateManagedInstancesProviderConfiguration = struct {
     /// your capacity provider.
     /// Provides control over the delay between when EC2 instances become idle or
     /// underutilized and when Amazon ECS optimizes them.
-    infrastructure_optimization: ?InfrastructureOptimization,
+    infrastructure_optimization: ?InfrastructureOptimization = null,
 
     /// The Amazon Resource Name (ARN) of the infrastructure role that Amazon ECS
     /// uses to
@@ -48,7 +48,7 @@ pub const CreateManagedInstancesProviderConfiguration = struct {
     /// Managed Instances. When enabled, tags applied to the capacity provider are
     /// automatically
     /// applied to all instances launched by this provider.
-    propagate_tags: ?PropagateMITags,
+    propagate_tags: ?PropagateMITags = null,
 
     pub const json_field_names = .{
         .infrastructure_optimization = "infrastructureOptimization",

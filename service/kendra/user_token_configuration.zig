@@ -10,10 +10,10 @@ const JwtTokenTypeConfiguration = @import("jwt_token_type_configuration.zig").Jw
 /// a `ValidationException` error.
 pub const UserTokenConfiguration = struct {
     /// Information about the JSON token type configuration.
-    json_token_type_configuration: ?JsonTokenTypeConfiguration,
+    json_token_type_configuration: ?JsonTokenTypeConfiguration = null,
 
     /// Information about the JWT token type configuration.
-    jwt_token_type_configuration: ?JwtTokenTypeConfiguration,
+    jwt_token_type_configuration: ?JwtTokenTypeConfiguration = null,
 
     pub const json_field_names = .{
         .json_token_type_configuration = "JsonTokenTypeConfiguration",

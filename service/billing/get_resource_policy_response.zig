@@ -1,7 +1,7 @@
 pub const GetResourcePolicyResponse = struct {
     /// The resource-based policy document attached to the resource in `JSON`
     /// format.
-    policy: ?[]const u8,
+    policy: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the billing view resource to which the
     /// policy is attached to.

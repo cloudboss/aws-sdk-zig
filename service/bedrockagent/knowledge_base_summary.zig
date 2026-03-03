@@ -3,7 +3,7 @@ const KnowledgeBaseStatus = @import("knowledge_base_status.zig").KnowledgeBaseSt
 /// Contains details about a knowledge base.
 pub const KnowledgeBaseSummary = struct {
     /// The description of the knowledge base.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the knowledge base.
     knowledge_base_id: []const u8,

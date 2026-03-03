@@ -8,10 +8,10 @@ pub const EventTriggerLimits = struct {
     /// In milliseconds. Specifies that an event will only trigger the destination
     /// if it is
     /// processed within a certain latency period.
-    event_expiration: ?i64,
+    event_expiration: ?i64 = null,
 
     /// A list of time periods during which the limits apply.
-    periods: ?[]const Period,
+    periods: ?[]const Period = null,
 
     pub const json_field_names = .{
         .event_expiration = "EventExpiration",

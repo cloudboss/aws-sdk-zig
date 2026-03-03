@@ -12,7 +12,7 @@ pub const MemoryMetadataFilterExpression = struct {
     /// the metadata filter.
     operator: OperatorType,
 
-    right: ?RightExpression,
+    right: ?RightExpression = null,
 
     pub const json_field_names = .{
         .left = "left",

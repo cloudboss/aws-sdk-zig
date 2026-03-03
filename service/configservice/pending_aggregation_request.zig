@@ -4,10 +4,10 @@
 pub const PendingAggregationRequest = struct {
     /// The 12-digit account ID of the account requesting to aggregate
     /// data.
-    requester_account_id: ?[]const u8,
+    requester_account_id: ?[]const u8 = null,
 
     /// The region requesting to aggregate data.
-    requester_aws_region: ?[]const u8,
+    requester_aws_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .requester_account_id = "RequesterAccountId",

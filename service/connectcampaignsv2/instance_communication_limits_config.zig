@@ -2,7 +2,7 @@ const CommunicationLimits = @import("communication_limits.zig").CommunicationLim
 
 /// Instance Communication limits config
 pub const InstanceCommunicationLimitsConfig = struct {
-    all_channel_subtypes: ?CommunicationLimits,
+    all_channel_subtypes: ?CommunicationLimits = null,
 
     pub const json_field_names = .{
         .all_channel_subtypes = "allChannelSubtypes",

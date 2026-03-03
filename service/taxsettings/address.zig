@@ -4,7 +4,7 @@ pub const Address = struct {
     address_line_1: []const u8,
 
     /// The second line of the address, if applicable.
-    address_line_2: ?[]const u8,
+    address_line_2: ?[]const u8 = null,
 
     /// The third line of the address, if applicable. Currently, the Tax Settings
     /// API accepts the
@@ -13,7 +13,7 @@ pub const Address = struct {
     /// Arabia, you must enter the `addressLine3` and specify the building number
     /// for the
     /// address. For example, you might enter `1234`.
-    address_line_3: ?[]const u8,
+    address_line_3: ?[]const u8 = null,
 
     /// The city that the address is in.
     city: []const u8,
@@ -26,7 +26,7 @@ pub const Address = struct {
     /// For addresses in Brazil, this parameter uses the name of the neighborhood.
     /// When you set
     /// a TRN in Brazil, use `districtOrCounty` for the neighborhood name.
-    district_or_county: ?[]const u8,
+    district_or_county: ?[]const u8 = null,
 
     /// The postal code associated with the address.
     postal_code: []const u8,
@@ -37,7 +37,7 @@ pub const Address = struct {
     ///
     /// If this is required for tax settings, use the same name as shown on the
     /// **Tax Settings** page.
-    state_or_region: ?[]const u8,
+    state_or_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .address_line_1 = "addressLine1",

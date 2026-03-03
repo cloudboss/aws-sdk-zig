@@ -4,10 +4,10 @@ const VpcConnectivity = @import("vpc_connectivity.zig").VpcConnectivity;
 /// Information about the broker access configuration.
 pub const ConnectivityInfo = struct {
     /// Public access control for brokers.
-    public_access: ?PublicAccess,
+    public_access: ?PublicAccess = null,
 
     /// VPC connectivity access control for brokers.
-    vpc_connectivity: ?VpcConnectivity,
+    vpc_connectivity: ?VpcConnectivity = null,
 
     pub const json_field_names = .{
         .public_access = "PublicAccess",

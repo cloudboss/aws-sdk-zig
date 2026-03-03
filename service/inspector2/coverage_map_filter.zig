@@ -9,7 +9,7 @@ pub const CoverageMapFilter = struct {
     key: []const u8,
 
     /// The tag value associated with the coverage map filter.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comparison = "comparison",

@@ -5,13 +5,13 @@ const RootCauseException = @import("root_cause_exception.zig").RootCauseExceptio
 /// fault error.
 pub const FaultRootCauseEntity = struct {
     /// The types and messages of the exceptions.
-    exceptions: ?[]const RootCauseException,
+    exceptions: ?[]const RootCauseException = null,
 
     /// The name of the entity.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A flag that denotes a remote subsegment.
-    remote: ?bool,
+    remote: ?bool = null,
 
     pub const json_field_names = .{
         .exceptions = "Exceptions",

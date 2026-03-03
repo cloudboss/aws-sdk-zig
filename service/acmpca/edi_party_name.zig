@@ -3,7 +3,7 @@
 /// Name](https://datatracker.ietf.org/doc/html/rfc5280) in RFC 5280.
 pub const EdiPartyName = struct {
     /// Specifies the name assigner.
-    name_assigner: ?[]const u8,
+    name_assigner: ?[]const u8 = null,
 
     /// Specifies the party name.
     party_name: []const u8,

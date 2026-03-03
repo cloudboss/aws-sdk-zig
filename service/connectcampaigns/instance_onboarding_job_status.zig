@@ -5,7 +5,7 @@ const InstanceOnboardingJobStatusCode = @import("instance_onboarding_job_status_
 pub const InstanceOnboardingJobStatus = struct {
     connect_instance_id: []const u8,
 
-    failure_code: ?InstanceOnboardingJobFailureCode,
+    failure_code: ?InstanceOnboardingJobFailureCode = null,
 
     status: InstanceOnboardingJobStatusCode,
 

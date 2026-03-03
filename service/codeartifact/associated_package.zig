@@ -11,10 +11,10 @@ pub const AssociatedPackage = struct {
     /// and weak matches, see [Package group definition syntax and matching
     /// behavior](https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html)
     /// in the *CodeArtifact User Guide*.
-    association_type: ?PackageGroupAssociationType,
+    association_type: ?PackageGroupAssociationType = null,
 
     /// A format that specifies the type of the associated package.
-    format: ?PackageFormat,
+    format: ?PackageFormat = null,
 
     /// The namespace of the associated package. The package component that
     /// specifies its
@@ -29,10 +29,10 @@ pub const AssociatedPackage = struct {
     /// * Python, NuGet, Ruby, and Cargo package versions do not contain a
     ///   corresponding component, package versions
     /// of those formats do not have a namespace.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The name of the associated package.
-    package: ?[]const u8,
+    package: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_type = "associationType",

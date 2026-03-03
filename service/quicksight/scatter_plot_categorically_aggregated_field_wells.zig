@@ -4,23 +4,23 @@ const MeasureField = @import("measure_field.zig").MeasureField;
 /// The aggregated field well of a scatter plot.
 pub const ScatterPlotCategoricallyAggregatedFieldWells = struct {
     /// The category field well of a scatter plot.
-    category: ?[]const DimensionField,
+    category: ?[]const DimensionField = null,
 
     /// The label field well of a scatter plot.
-    label: ?[]const DimensionField,
+    label: ?[]const DimensionField = null,
 
     /// The size field well of a scatter plot.
-    size: ?[]const MeasureField,
+    size: ?[]const MeasureField = null,
 
     /// The x-axis field well of a scatter plot.
     ///
     /// The x-axis is aggregated by category.
-    x_axis: ?[]const MeasureField,
+    x_axis: ?[]const MeasureField = null,
 
     /// The y-axis field well of a scatter plot.
     ///
     /// The y-axis is aggregated by category.
-    y_axis: ?[]const MeasureField,
+    y_axis: ?[]const MeasureField = null,
 
     pub const json_field_names = .{
         .category = "Category",

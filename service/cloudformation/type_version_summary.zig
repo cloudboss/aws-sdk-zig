@@ -4,10 +4,10 @@ const RegistryType = @import("registry_type.zig").RegistryType;
 /// extension.
 pub const TypeVersionSummary = struct {
     /// The ARN of the extension version.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The description of the extension version.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether the specified extension version is set as the default version.
     ///
@@ -16,7 +16,7 @@ pub const TypeVersionSummary = struct {
     /// published by Amazon. For public third-party extensions, CloudFormation
     /// returns
     /// `null`.
-    is_default_version: ?bool,
+    is_default_version: ?bool = null,
 
     /// For public extensions that have been activated for this account and Region,
     /// the version of
@@ -32,19 +32,19 @@ pub const TypeVersionSummary = struct {
     /// released. For more information, see [Automatically use new versions of
     /// extensions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto) in the
     /// *CloudFormation User Guide*.
-    public_version_number: ?[]const u8,
+    public_version_number: ?[]const u8 = null,
 
     /// When the version was registered.
-    time_created: ?i64,
+    time_created: ?i64 = null,
 
     /// The kind of extension.
-    @"type": ?RegistryType,
+    @"type": ?RegistryType = null,
 
     /// The name of the extension.
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 
     /// The ID of a specific version of the extension. The version ID is the value
     /// at the end of the
     /// ARN assigned to the extension version when it's registered.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 };

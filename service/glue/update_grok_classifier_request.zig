@@ -4,13 +4,13 @@ pub const UpdateGrokClassifierRequest = struct {
     /// An identifier of the data format that the classifier matches, such as
     /// Twitter, JSON, Omniture logs,
     /// Amazon CloudWatch Logs, and so on.
-    classification: ?[]const u8,
+    classification: ?[]const u8 = null,
 
     /// Optional custom grok patterns used by this classifier.
-    custom_patterns: ?[]const u8,
+    custom_patterns: ?[]const u8 = null,
 
     /// The grok pattern used by this classifier.
-    grok_pattern: ?[]const u8,
+    grok_pattern: ?[]const u8 = null,
 
     /// The name of the `GrokClassifier`.
     name: []const u8,

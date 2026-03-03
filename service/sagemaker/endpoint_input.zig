@@ -11,16 +11,16 @@ pub const EndpointInput = struct {
     /// information about using offsets for scheduling monitoring jobs, see
     /// [Schedule Model Quality Monitoring
     /// Jobs](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html).
-    end_time_offset: ?[]const u8,
+    end_time_offset: ?[]const u8 = null,
 
     /// The attributes of the input data to exclude from the analysis.
-    exclude_features_attribute: ?[]const u8,
+    exclude_features_attribute: ?[]const u8 = null,
 
     /// The attributes of the input data that are the input features.
-    features_attribute: ?[]const u8,
+    features_attribute: ?[]const u8 = null,
 
     /// The attribute of the input data that represents the ground truth label.
-    inference_attribute: ?[]const u8,
+    inference_attribute: ?[]const u8 = null,
 
     /// Path to the filesystem where the endpoint data is available to the
     /// container.
@@ -28,27 +28,27 @@ pub const EndpointInput = struct {
 
     /// In a classification problem, the attribute that represents the class
     /// probability.
-    probability_attribute: ?[]const u8,
+    probability_attribute: ?[]const u8 = null,
 
     /// The threshold for the class probability to be evaluated as a positive
     /// result.
-    probability_threshold_attribute: ?f64,
+    probability_threshold_attribute: ?f64 = null,
 
     /// Whether input data distributed in Amazon S3 is fully replicated or sharded
     /// by an Amazon S3 key. Defaults to `FullyReplicated`
-    s3_data_distribution_type: ?ProcessingS3DataDistributionType,
+    s3_data_distribution_type: ?ProcessingS3DataDistributionType = null,
 
     /// Whether the `Pipe` or `File` is used as the input mode for transferring data
     /// for the monitoring job. `Pipe` mode is recommended for large datasets.
     /// `File` mode is useful for small files that fit in memory. Defaults to
     /// `File`.
-    s3_input_mode: ?ProcessingS3InputMode,
+    s3_input_mode: ?ProcessingS3InputMode = null,
 
     /// If specified, monitoring jobs substract this time from the start time. For
     /// information about using offsets for scheduling monitoring jobs, see
     /// [Schedule Model Quality Monitoring
     /// Jobs](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html).
-    start_time_offset: ?[]const u8,
+    start_time_offset: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .endpoint_name = "EndpointName",

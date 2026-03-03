@@ -6,24 +6,24 @@ const ScheduleConfiguration = @import("schedule_configuration.zig").ScheduleConf
 pub const WorkflowVersionSummary = struct {
     /// The timestamp when the workflow version was created, in ISO 8601 date-time
     /// format.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon S3 location of the workflow definition file for this version.
-    definition_s3_location: ?DefinitionS3Location,
+    definition_s3_location: ?DefinitionS3Location = null,
 
     /// Boolean flag that indicates whether this is the latest version of the
     /// workflow.
-    is_latest_version: ?bool,
+    is_latest_version: ?bool = null,
 
     /// The timestamp when the workflow version was last modified, in ISO 8601
     /// date-time format.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// The schedule configuration for this workflow version.
-    schedule_configuration: ?ScheduleConfiguration,
+    schedule_configuration: ?ScheduleConfiguration = null,
 
     /// The trigger mode for the workflow execution.
-    trigger_mode: ?[]const u8,
+    trigger_mode: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the workflow that contains this version.
     workflow_arn: []const u8,

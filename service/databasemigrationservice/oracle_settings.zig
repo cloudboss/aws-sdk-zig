@@ -9,7 +9,7 @@ pub const OracleSettings = struct {
     /// access redo logs through any specified path prefix replacement using direct
     /// file
     /// access.
-    access_alternate_directly: ?bool,
+    access_alternate_directly: ?bool = null,
 
     /// Set this attribute with `ArchivedLogDestId` in a primary/ standby setup.
     /// This
@@ -24,7 +24,7 @@ pub const OracleSettings = struct {
     /// about `RESETLOGS`, see [RMAN Data Repair
     /// Concepts](https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B) in the *Oracle Database Backup and Recovery
     /// User's Guide*.
-    additional_archived_log_dest_id: ?i32,
+    additional_archived_log_dest_id: ?i32 = null,
 
     /// Set this attribute to set up table-level supplemental logging for the Oracle
     /// database.
@@ -34,11 +34,11 @@ pub const OracleSettings = struct {
     ///
     /// If you use this option, you still need to enable database-level supplemental
     /// logging.
-    add_supplemental_logging: ?bool,
+    add_supplemental_logging: ?bool = null,
 
     /// Set this attribute to `true` to enable replication of Oracle tables
     /// containing columns that are nested tables or defined types.
-    allow_select_nested_tables: ?bool,
+    allow_select_nested_tables: ?bool = null,
 
     /// Specifies the ID of the destination for the archived redo logs. This value
     /// should be the
@@ -49,13 +49,13 @@ pub const OracleSettings = struct {
     /// specify the additional destination ID. Doing this improves performance by
     /// ensuring that the
     /// correct logs are accessed from the outset.
-    archived_log_dest_id: ?i32,
+    archived_log_dest_id: ?i32 = null,
 
     /// When this field is set to `True`, DMS only accesses the archived redo logs.
     /// If the archived redo logs are stored on Automatic Storage Management (ASM)
     /// only, the DMS
     /// user account needs to be granted ASM privileges.
-    archived_logs_only: ?bool,
+    archived_logs_only: ?bool = null,
 
     /// For an Oracle source endpoint, your Oracle Automatic Storage Management
     /// (ASM) password.
@@ -67,7 +67,7 @@ pub const OracleSettings = struct {
     /// transaction logs using Binary Reader. For more information, see
     /// [Configuration for change data capture (CDC) on an Oracle source
     /// database](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration).
-    asm_password: ?[]const u8,
+    asm_password: ?[]const u8 = null,
 
     /// For an Oracle source endpoint, your ASM server address. You can set this
     /// value from the
@@ -77,7 +77,7 @@ pub const OracleSettings = struct {
     /// For more information, see [Configuration for change data capture (CDC) on an
     /// Oracle source
     /// database](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration).
-    asm_server: ?[]const u8,
+    asm_server: ?[]const u8 = null,
 
     /// For an Oracle source endpoint, your ASM user name. You can set this value
     /// from the
@@ -87,10 +87,10 @@ pub const OracleSettings = struct {
     /// For more information, see [Configuration for change data capture (CDC) on an
     /// Oracle source
     /// database](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration).
-    asm_user: ?[]const u8,
+    asm_user: ?[]const u8 = null,
 
     /// Specifies the authentication method to be used with Oracle.
-    authentication_method: ?OracleAuthenticationMethod,
+    authentication_method: ?OracleAuthenticationMethod = null,
 
     /// Specifies whether the length of a character column is in bytes or in
     /// characters. To
@@ -99,32 +99,32 @@ pub const OracleSettings = struct {
     /// `CHAR`. Otherwise, the character column length is in bytes.
     ///
     /// Example: `charLengthSemantics=CHAR;`
-    char_length_semantics: ?CharLengthSemantics,
+    char_length_semantics: ?CharLengthSemantics = null,
 
     /// When true, converts timestamps with the `timezone` datatype to their UTC
     /// value.
-    convert_timestamp_with_zone_to_utc: ?bool,
+    convert_timestamp_with_zone_to_utc: ?bool = null,
 
     /// Database name for the endpoint.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// When set to `true`, this attribute helps to increase the commit rate on the
     /// Oracle target database by writing directly to tables and not writing a trail
     /// to database
     /// logs.
-    direct_path_no_log: ?bool,
+    direct_path_no_log: ?bool = null,
 
     /// When set to `true`, this attribute specifies a parallel load when
     /// `useDirectPathFullLoad` is set to `Y`. This attribute also only
     /// applies when you use the DMS parallel load feature. Note that the target
     /// table cannot
     /// have any constraints or indexes.
-    direct_path_parallel_load: ?bool,
+    direct_path_parallel_load: ?bool = null,
 
     /// Set this attribute to enable homogenous tablespace replication and create
     /// existing
     /// tables or indexes under the same tablespace on the target.
-    enable_homogenous_tablespace: ?bool,
+    enable_homogenous_tablespace: ?bool = null,
 
     /// Specifies the IDs of one more destinations for one or more archived redo
     /// logs. These IDs
@@ -155,21 +155,21 @@ pub const OracleSettings = struct {
     /// about `RESETLOGS`, see [ RMAN Data Repair
     /// Concepts](https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B) in the *Oracle Database Backup and Recovery
     /// User's Guide*.
-    extra_archived_log_dest_ids: ?[]const i32,
+    extra_archived_log_dest_ids: ?[]const i32 = null,
 
     /// When set to `true`, this attribute causes a task to fail if the actual size
     /// of an LOB column is greater than the specified `LobMaxSize`.
     ///
     /// If a task is set to limited LOB mode and this option is set to `true`, the
     /// task fails instead of truncating the LOB data.
-    fail_tasks_on_lob_truncation: ?bool,
+    fail_tasks_on_lob_truncation: ?bool = null,
 
     /// Specifies the number scale. You can select a scale up to 38, or you can
     /// select FLOAT. By
     /// default, the NUMBER data type is converted to precision 38, scale 10.
     ///
     /// Example: `numberDataTypeScale=12`
-    number_datatype_scale: ?i32,
+    number_datatype_scale: ?i32 = null,
 
     /// The timeframe in minutes to check for open transactions for a CDC-only task.
     ///
@@ -177,14 +177,14 @@ pub const OracleSettings = struct {
     /// maximum).
     ///
     /// This parameter is only valid in DMS version 3.5.0 and later.
-    open_transaction_window: ?i32,
+    open_transaction_window: ?i32 = null,
 
     /// Set this string attribute to the required value in order to use the Binary
     /// Reader to
     /// capture change data for an Amazon RDS for Oracle as the source. This value
     /// specifies the
     /// default Oracle root used to access the redo logs.
-    oracle_path_prefix: ?[]const u8,
+    oracle_path_prefix: ?[]const u8 = null,
 
     /// Set this attribute to change the number of threads that DMS configures to
     /// perform a
@@ -193,13 +193,13 @@ pub const OracleSettings = struct {
     /// specify an integer value between 2 (the default) and 8 (the maximum). Use
     /// this attribute
     /// together with the `readAheadBlocks` attribute.
-    parallel_asm_read_threads: ?i32,
+    parallel_asm_read_threads: ?i32 = null,
 
     /// Endpoint connection password.
-    password: ?[]const u8,
+    password: ?[]const u8 = null,
 
     /// Endpoint TCP port.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// Set this attribute to change the number of read-ahead blocks that DMS
     /// configures to
@@ -207,10 +207,10 @@ pub const OracleSettings = struct {
     /// Management (ASM).
     /// You can specify an integer value between 1000 (the default) and 200,000 (the
     /// maximum).
-    read_ahead_blocks: ?i32,
+    read_ahead_blocks: ?i32 = null,
 
     /// When set to `true`, this attribute supports tablespace replication.
-    read_table_space_name: ?bool,
+    read_table_space_name: ?bool = null,
 
     /// Set this attribute to true in order to use the Binary Reader to capture
     /// change data for
@@ -218,13 +218,13 @@ pub const OracleSettings = struct {
     /// replace the default
     /// Oracle root with the specified `usePathPrefix` setting to access the redo
     /// logs.
-    replace_path_prefix: ?bool,
+    replace_path_prefix: ?bool = null,
 
     /// Specifies the number of seconds that the system waits before resending a
     /// query.
     ///
     /// Example: `retryInterval=6;`
-    retry_interval: ?i32,
+    retry_interval: ?i32 = null,
 
     /// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as
     /// the trusted
@@ -245,7 +245,7 @@ pub const OracleSettings = struct {
     /// Service
     /// resources](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager) in the
     /// *Database Migration Service User Guide*.
-    secrets_manager_access_role_arn: ?[]const u8,
+    secrets_manager_access_role_arn: ?[]const u8 = null,
 
     /// Required only if your Oracle endpoint uses Automatic Storage Management
     /// (ASM). The full
@@ -266,18 +266,18 @@ pub const OracleSettings = struct {
     /// to access Database Migration Service
     /// resources](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager) in the
     /// *Database Migration Service User Guide*.
-    secrets_manager_oracle_asm_access_role_arn: ?[]const u8,
+    secrets_manager_oracle_asm_access_role_arn: ?[]const u8 = null,
 
     /// Required only if your Oracle endpoint uses Automatic Storage Management
     /// (ASM). The full
     /// ARN, partial ARN, or friendly name of the `SecretsManagerOracleAsmSecret`
     /// that
     /// contains the Oracle ASM connection details for the Oracle endpoint.
-    secrets_manager_oracle_asm_secret_id: ?[]const u8,
+    secrets_manager_oracle_asm_secret_id: ?[]const u8 = null,
 
     /// The full ARN, partial ARN, or friendly name of the `SecretsManagerSecret`
     /// that contains the Oracle endpoint connection details.
-    secrets_manager_secret_id: ?[]const u8,
+    secrets_manager_secret_id: ?[]const u8 = null,
 
     /// For an Oracle source endpoint, the transparent data encryption (TDE)
     /// password required
@@ -292,7 +292,7 @@ pub const OracleSettings = struct {
     /// encryption methods for using Oracle as a source for
     /// DMS
     /// ](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption) in the *Database Migration Service User Guide*.
-    security_db_encryption: ?[]const u8,
+    security_db_encryption: ?[]const u8 = null,
 
     /// For an Oracle source endpoint, the name of a key used for the transparent
     /// data
@@ -306,14 +306,14 @@ pub const OracleSettings = struct {
     /// encryption methods for using Oracle as a source for
     /// DMS
     /// ](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption) in the *Database Migration Service User Guide*.
-    security_db_encryption_name: ?[]const u8,
+    security_db_encryption_name: ?[]const u8 = null,
 
     /// Fully qualified domain name of the endpoint.
     ///
     /// For an Amazon RDS Oracle instance, this is the output of
     /// [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html), in the `
     /// [Endpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html).Address` field.
-    server_name: ?[]const u8,
+    server_name: ?[]const u8 = null,
 
     /// Use this attribute to convert `SDO_GEOMETRY` to `GEOJSON` format.
     /// By default, DMS calls the `SDO2GEOJSON` custom function if present and
@@ -321,7 +321,7 @@ pub const OracleSettings = struct {
     /// operation of
     /// `SDOGEOJSON` and set `SpatialDataOptionToGeoJsonFunctionName` to
     /// call it instead.
-    spatial_data_option_to_geo_json_function_name: ?[]const u8,
+    spatial_data_option_to_geo_json_function_name: ?[]const u8 = null,
 
     /// Use this attribute to specify a time in minutes for the delay in standby
     /// sync. If the
@@ -334,17 +334,17 @@ pub const OracleSettings = struct {
     /// instance as a source for replicating ongoing changes. Doing this eliminates
     /// the need to
     /// connect to an active database that might be in production.
-    standby_delay_time: ?i32,
+    standby_delay_time: ?i32 = null,
 
     /// Use the `TrimSpaceInChar` source endpoint setting to trim data on CHAR and
     /// NCHAR data types during migration. The default value is `true`.
-    trim_space_in_char: ?bool,
+    trim_space_in_char: ?bool = null,
 
     /// Set this attribute to `true` in order to use the Binary Reader to capture
     /// change data for an Amazon RDS for Oracle as the source. This tells the DMS
     /// instance to use any
     /// specified prefix replacement to access all online redo logs.
-    use_alternate_folder_for_online: ?bool,
+    use_alternate_folder_for_online: ?bool = null,
 
     /// Set this attribute to True to capture change data using the Binary Reader
     /// utility. Set
@@ -355,14 +355,14 @@ pub const OracleSettings = struct {
     /// Management (ASM), see
     /// [ Using Oracle LogMiner or DMS Binary Reader for
     /// CDC](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC).
-    use_b_file: ?bool,
+    use_b_file: ?bool = null,
 
     /// Set this attribute to True to have DMS use a direct path full load. Specify
     /// this value
     /// to use the direct path protocol in the Oracle Call Interface (OCI). By using
     /// this OCI
     /// protocol, you can bulk-load Oracle target tables during a full load.
-    use_direct_path_full_load: ?bool,
+    use_direct_path_full_load: ?bool = null,
 
     /// Set this attribute to True to capture change data using the Oracle LogMiner
     /// utility (the
@@ -373,17 +373,17 @@ pub const OracleSettings = struct {
     /// Oracle LogMiner or DMS Binary Reader for
     /// CDC](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC) in
     /// the *DMS User Guide*.
-    use_logminer_reader: ?bool,
+    use_logminer_reader: ?bool = null,
 
     /// Set this string attribute to the required value in order to use the Binary
     /// Reader to
     /// capture change data for an Amazon RDS for Oracle as the source. This value
     /// specifies the
     /// path prefix used to replace the default Oracle root to access the redo logs.
-    use_path_prefix: ?[]const u8,
+    use_path_prefix: ?[]const u8 = null,
 
     /// Endpoint connection user name.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_alternate_directly = "AccessAlternateDirectly",

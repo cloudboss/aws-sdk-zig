@@ -6,7 +6,7 @@ pub const DataIntegrationFlowDatasetSourceConfiguration = struct {
     dataset_identifier: []const u8,
 
     /// The dataset DataIntegrationFlow source options.
-    options: ?DataIntegrationFlowDatasetOptions,
+    options: ?DataIntegrationFlowDatasetOptions = null,
 
     pub const json_field_names = .{
         .dataset_identifier = "datasetIdentifier",

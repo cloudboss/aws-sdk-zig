@@ -11,36 +11,36 @@ pub const AwsApiGatewayV2ApiDetails = struct {
     /// The stage name is typically appended to the URI to form a complete path to a
     /// deployed
     /// API stage.
-    api_endpoint: ?[]const u8,
+    api_endpoint: ?[]const u8 = null,
 
     /// The identifier of the API.
-    api_id: ?[]const u8,
+    api_id: ?[]const u8 = null,
 
     /// An API key selection expression. Supported only for WebSocket APIs.
-    api_key_selection_expression: ?[]const u8,
+    api_key_selection_expression: ?[]const u8 = null,
 
     /// A cross-origin resource sharing (CORS) configuration. Supported only for
     /// HTTP
     /// APIs.
-    cors_configuration: ?AwsCorsConfiguration,
+    cors_configuration: ?AwsCorsConfiguration = null,
 
     /// Indicates when the API was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    created_date: ?[]const u8,
+    created_date: ?[]const u8 = null,
 
     /// A description of the API.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the API.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The API protocol for the API.
     ///
     /// Valid values: `WEBSOCKET` | `HTTP`
-    protocol_type: ?[]const u8,
+    protocol_type: ?[]const u8 = null,
 
     /// The route selection expression for the API.
     ///
@@ -48,10 +48,10 @@ pub const AwsApiGatewayV2ApiDetails = struct {
     /// default value for HTTP APIs.
     ///
     /// For WebSocket APIs, there is no default value.
-    route_selection_expression: ?[]const u8,
+    route_selection_expression: ?[]const u8 = null,
 
     /// The version identifier for the API.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_endpoint = "ApiEndpoint",

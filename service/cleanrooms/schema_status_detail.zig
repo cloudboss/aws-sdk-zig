@@ -11,7 +11,7 @@ const SchemaStatus = @import("schema_status.zig").SchemaStatus;
 /// schema.
 pub const SchemaStatusDetail = struct {
     /// The analysis rule type for which the schema status has been evaluated.
-    analysis_rule_type: ?AnalysisRuleType,
+    analysis_rule_type: ?AnalysisRuleType = null,
 
     /// The type of analysis that can be performed on the schema.
     ///
@@ -20,10 +20,10 @@ pub const SchemaStatusDetail = struct {
     analysis_type: AnalysisType,
 
     /// The configuration details of the schema analysis rule for the given type.
-    configurations: ?[]const SchemaConfiguration,
+    configurations: ?[]const SchemaConfiguration = null,
 
     /// The reasons why the schema status is set to its current state.
-    reasons: ?[]const SchemaStatusReason,
+    reasons: ?[]const SchemaStatusReason = null,
 
     /// The status of the schema, indicating if it is ready to query.
     status: SchemaStatus,

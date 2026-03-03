@@ -5,21 +5,21 @@ const TargetResource = @import("target_resource.zig").TargetResource;
 pub const DNSTargetResource = struct {
     /// The domain name that acts as an ingress point to a portion of the customer
     /// application.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// The hosted zone Amazon Resource Name (ARN) that contains the DNS record with
     /// the provided name of the target resource.
-    hosted_zone_arn: ?[]const u8,
+    hosted_zone_arn: ?[]const u8 = null,
 
     /// The Route 53 record set ID that uniquely identifies a DNS record, given a
     /// name and a type.
-    record_set_id: ?[]const u8,
+    record_set_id: ?[]const u8 = null,
 
     /// The type of DNS record of the target resource.
-    record_type: ?[]const u8,
+    record_type: ?[]const u8 = null,
 
     /// The target resource of the DNS target resource.
-    target_resource: ?TargetResource,
+    target_resource: ?TargetResource = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",

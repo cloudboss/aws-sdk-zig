@@ -6,24 +6,24 @@ const ImageStatus = @import("image_status.zig").ImageStatus;
 /// operation.
 pub const ImageDetail = struct {
     /// The artifact media type of the image.
-    artifact_media_type: ?[]const u8,
+    artifact_media_type: ?[]const u8 = null,
 
     /// The `sha256` digest of the image manifest.
-    image_digest: ?[]const u8,
+    image_digest: ?[]const u8 = null,
 
     /// The media type of the image manifest.
-    image_manifest_media_type: ?[]const u8,
+    image_manifest_media_type: ?[]const u8 = null,
 
     /// The date and time, expressed in standard JavaScript date format, at which
     /// the current
     /// image was pushed to the repository.
-    image_pushed_at: ?i64,
+    image_pushed_at: ?i64 = null,
 
     /// A summary of the last completed image scan.
-    image_scan_findings_summary: ?ImageScanFindingsSummary,
+    image_scan_findings_summary: ?ImageScanFindingsSummary = null,
 
     /// The current state of the scan.
-    image_scan_status: ?ImageScanStatus,
+    image_scan_status: ?ImageScanStatus = null,
 
     /// The size, in bytes, of the image in the repository.
     ///
@@ -37,21 +37,21 @@ pub const ImageDetail = struct {
     /// command shows the uncompressed image size. Therefore, Docker might return a
     /// larger
     /// image than the image shown in the Amazon Web Services Management Console.
-    image_size_in_bytes: ?i64,
+    image_size_in_bytes: ?i64 = null,
 
     /// The current status of the image.
-    image_status: ?ImageStatus,
+    image_status: ?ImageStatus = null,
 
     /// The list of tags associated with this image.
-    image_tags: ?[]const []const u8,
+    image_tags: ?[]const []const u8 = null,
 
     /// The date and time, expressed in standard JavaScript date format, when the
     /// image was last restored from Amazon ECR archive to Amazon ECR standard.
-    last_activated_at: ?i64,
+    last_activated_at: ?i64 = null,
 
     /// The date and time, expressed in standard JavaScript date format, when the
     /// image was last transitioned to Amazon ECR archive.
-    last_archived_at: ?i64,
+    last_archived_at: ?i64 = null,
 
     /// The date and time, expressed in standard JavaScript date format, when Amazon
     /// ECR recorded
@@ -65,17 +65,17 @@ pub const ImageDetail = struct {
     /// you pull an image once an hour, because Amazon ECR refreshes the
     /// `lastRecordedPullTime` timestamp at least once every 24 hours, the
     /// result may not be the exact time that the image was last pulled.
-    last_recorded_pull_time: ?i64,
+    last_recorded_pull_time: ?i64 = null,
 
     /// The Amazon Web Services account ID associated with the registry to which
     /// this image belongs.
-    registry_id: ?[]const u8,
+    registry_id: ?[]const u8 = null,
 
     /// The name of the repository to which this image belongs.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     /// The digest of the subject manifest for images that are referrers.
-    subject_manifest_digest: ?[]const u8,
+    subject_manifest_digest: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .artifact_media_type = "artifactMediaType",

@@ -2,19 +2,19 @@
 /// Serverless managed VPC endpoint.
 pub const NetworkInterface = struct {
     /// The availability Zone.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The IPv6 address of the network interface within the subnet.
-    ipv_6_address: ?[]const u8,
+    ipv_6_address: ?[]const u8 = null,
 
     /// The unique identifier of the network interface.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// The IPv4 address of the network interface within the subnet.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// The unique identifier of the subnet.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .availability_zone = "availabilityZone",

@@ -7,17 +7,17 @@ const S3MonitoringConfiguration = @import("s3_monitoring_configuration.zig").S3M
 pub const MonitoringConfiguration = struct {
     /// The Amazon CloudWatch configuration for monitoring logs. You can configure
     /// your jobs to send log information to CloudWatch.
-    cloud_watch_logging_configuration: ?CloudWatchLoggingConfiguration,
+    cloud_watch_logging_configuration: ?CloudWatchLoggingConfiguration = null,
 
     /// The managed log persistence configuration for a job run.
-    managed_persistence_monitoring_configuration: ?ManagedPersistenceMonitoringConfiguration,
+    managed_persistence_monitoring_configuration: ?ManagedPersistenceMonitoringConfiguration = null,
 
     /// The monitoring configuration object you can configure to send metrics to
     /// Amazon Managed Service for Prometheus for a job run.
-    prometheus_monitoring_configuration: ?PrometheusMonitoringConfiguration,
+    prometheus_monitoring_configuration: ?PrometheusMonitoringConfiguration = null,
 
     /// The Amazon S3 configuration for monitoring log publishing.
-    s_3_monitoring_configuration: ?S3MonitoringConfiguration,
+    s_3_monitoring_configuration: ?S3MonitoringConfiguration = null,
 
     pub const json_field_names = .{
         .cloud_watch_logging_configuration = "cloudWatchLoggingConfiguration",

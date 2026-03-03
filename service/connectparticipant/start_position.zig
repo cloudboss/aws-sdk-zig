@@ -6,10 +6,10 @@ pub const StartPosition = struct {
     ///
     /// It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
     /// 2019-11-08T02:41:28.172Z.
-    absolute_time: ?[]const u8,
+    absolute_time: ?[]const u8 = null,
 
     /// The ID of the message or event where to start.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The start position of the most recent message where you want to start.
     most_recent: i32 = 0,

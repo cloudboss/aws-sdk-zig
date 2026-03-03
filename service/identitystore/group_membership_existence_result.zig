@@ -3,12 +3,12 @@ const MemberId = @import("member_id.zig").MemberId;
 /// Indicates whether a resource is a member of a group in the identity store.
 pub const GroupMembershipExistenceResult = struct {
     /// The identifier for a group in the identity store.
-    group_id: ?[]const u8,
+    group_id: ?[]const u8 = null,
 
     /// An object that contains the identifier of a group member. Setting the
     /// `UserID` field to the specific identifier for a user indicates that the user
     /// is a member of the group.
-    member_id: ?MemberId,
+    member_id: ?MemberId = null,
 
     /// Indicates whether a membership relation exists or not.
     membership_exists: bool = false,

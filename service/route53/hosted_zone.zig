@@ -12,11 +12,11 @@ pub const HostedZone = struct {
     /// elements. If you omitted the `HostedZoneConfig` and `Comment`
     /// elements from the request, the `Config` and `Comment` elements
     /// don't appear in the response.
-    config: ?HostedZoneConfig,
+    config: ?HostedZoneConfig = null,
 
     /// The features configuration for the hosted zone, including accelerated
     /// recovery settings and status information.
-    features: ?HostedZoneFeatures,
+    features: ?HostedZoneFeatures = null,
 
     /// The ID that Amazon Route 53 assigned to the hosted zone when you created it.
     id: []const u8,
@@ -26,7 +26,7 @@ pub const HostedZone = struct {
     /// zone. When a hosted zone is created by another service, you can't edit or
     /// delete it
     /// using Route 53.
-    linked_service: ?LinkedService,
+    linked_service: ?LinkedService = null,
 
     /// The name of the domain. For public hosted zones, this is the name that you
     /// have
@@ -39,5 +39,5 @@ pub const HostedZone = struct {
     name: []const u8,
 
     /// The number of resource record sets in the hosted zone.
-    resource_record_set_count: ?i64,
+    resource_record_set_count: ?i64 = null,
 };

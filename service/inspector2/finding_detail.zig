@@ -7,36 +7,36 @@ pub const FindingDetail = struct {
     /// The Cybersecurity and Infrastructure Security Agency (CISA) details for a
     /// specific
     /// vulnerability.
-    cisa_data: ?CisaData,
+    cisa_data: ?CisaData = null,
 
     /// The Common Weakness Enumerations (CWEs) associated with the vulnerability.
-    cwes: ?[]const []const u8,
+    cwes: ?[]const []const u8 = null,
 
     /// The Exploit Prediction Scoring System (EPSS) score of the vulnerability.
-    epss_score: ?f64,
+    epss_score: ?f64 = null,
 
     /// Information on the evidence of the vulnerability.
-    evidences: ?[]const Evidence,
+    evidences: ?[]const Evidence = null,
 
     /// Contains information on when this exploit was observed.
-    exploit_observed: ?ExploitObserved,
+    exploit_observed: ?ExploitObserved = null,
 
     /// The finding ARN that the vulnerability details are associated with.
-    finding_arn: ?[]const u8,
+    finding_arn: ?[]const u8 = null,
 
     /// The reference URLs for the vulnerability data.
-    reference_urls: ?[]const []const u8,
+    reference_urls: ?[]const []const u8 = null,
 
     /// The risk score of the vulnerability.
-    risk_score: ?i32,
+    risk_score: ?i32 = null,
 
     /// The known malware tools or kits that can exploit the vulnerability.
-    tools: ?[]const []const u8,
+    tools: ?[]const []const u8 = null,
 
     /// The MITRE adversary tactics, techniques, or procedures (TTPs) associated
     /// with the
     /// vulnerability.
-    ttps: ?[]const []const u8,
+    ttps: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .cisa_data = "cisaData",

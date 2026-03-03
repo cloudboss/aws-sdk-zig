@@ -4,13 +4,13 @@ const GuardrailManagedWordType = @import("guardrail_managed_word_type.zig").Guar
 /// The managed word details for the filter in the Guardrail.
 pub const GuardrailManagedWord = struct {
     /// The action details for the managed word filter in the Guardrail.
-    action: ?GuardrailWordPolicyAction,
+    action: ?GuardrailWordPolicyAction = null,
 
     /// The match details for the managed word filter in the Guardrail.
-    match: ?[]const u8,
+    match: ?[]const u8 = null,
 
     /// The type details for the managed word filter in the Guardrail.
-    @"type": ?GuardrailManagedWordType,
+    @"type": ?GuardrailManagedWordType = null,
 
     pub const json_field_names = .{
         .action = "action",

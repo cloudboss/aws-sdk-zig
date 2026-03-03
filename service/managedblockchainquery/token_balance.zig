@@ -15,14 +15,14 @@ pub const TokenBalance = struct {
 
     /// The `Timestamp` of the last transaction at which the balance for the token
     /// in the wallet was updated.
-    last_updated_time: ?BlockchainInstant,
+    last_updated_time: ?BlockchainInstant = null,
 
     /// The container for the identifier of the owner.
-    owner_identifier: ?OwnerIdentifier,
+    owner_identifier: ?OwnerIdentifier = null,
 
     /// The identifier for the token, including the unique token ID and its
     /// blockchain network.
-    token_identifier: ?TokenIdentifier,
+    token_identifier: ?TokenIdentifier = null,
 
     pub const json_field_names = .{
         .at_blockchain_instant = "atBlockchainInstant",

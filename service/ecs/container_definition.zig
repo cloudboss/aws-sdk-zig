@@ -27,7 +27,7 @@ pub const ContainerDefinition = struct {
     /// run. If there are multiple arguments, each argument is a separated string in
     /// the
     /// array.
-    command: ?[]const []const u8,
+    command: ?[]const []const u8 = null,
 
     /// The number of `cpu` units reserved for the container. This parameter maps
     /// to `CpuShares` in the docker container create command and the
@@ -144,7 +144,7 @@ pub const ContainerDefinition = struct {
     /// information, see [Using gMSAs for Windows
     /// Containers](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html) and [Using gMSAs for Linux
     /// Containers](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html).
-    credential_specs: ?[]const []const u8,
+    credential_specs: ?[]const []const u8 = null,
 
     /// The dependencies defined for container startup and shutdown. A container can
     /// contain
@@ -177,14 +177,14 @@ pub const ContainerDefinition = struct {
     /// * Linux platform version `1.3.0` or later.
     ///
     /// * Windows platform version `1.0.0` or later.
-    depends_on: ?[]const ContainerDependency,
+    depends_on: ?[]const ContainerDependency = null,
 
     /// When this parameter is true, networking is off within the container. This
     /// parameter
     /// maps to `NetworkDisabled` in the docker container create command.
     ///
     /// This parameter is not supported for Windows containers.
-    disable_networking: ?bool,
+    disable_networking: ?bool = null,
 
     /// A list of DNS search domains that are presented to the container. This
     /// parameter maps
@@ -192,7 +192,7 @@ pub const ContainerDefinition = struct {
     /// `--dns-search` option to docker run.
     ///
     /// This parameter is not supported for Windows containers.
-    dns_search_domains: ?[]const []const u8,
+    dns_search_domains: ?[]const []const u8 = null,
 
     /// A list of DNS servers that are presented to the container. This parameter
     /// maps to
@@ -200,7 +200,7 @@ pub const ContainerDefinition = struct {
     /// option to docker run.
     ///
     /// This parameter is not supported for Windows containers.
-    dns_servers: ?[]const []const u8,
+    dns_servers: ?[]const []const u8 = null,
 
     /// A key/value map of labels to add to the container. This parameter maps to
     /// `Labels` in the docker container create command and the
@@ -210,7 +210,7 @@ pub const ContainerDefinition = struct {
     /// API version on your container instance, log in to your container instance
     /// and run the
     /// following command: `sudo docker version --format '{{.Server.APIVersion}}'`
-    docker_labels: ?[]const aws.map.StringMapEntry,
+    docker_labels: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of strings to provide custom configuration for multiple security
     /// systems. This
@@ -244,7 +244,7 @@ pub const ContainerDefinition = struct {
     ///
     /// Valid values: "no-new-privileges" | "apparmor:PROFILE" | "label:value" |
     /// "credentialspec:CredentialSpecFilePath"
-    docker_security_options: ?[]const []const u8,
+    docker_security_options: ?[]const []const u8 = null,
 
     /// Early versions of the Amazon ECS container agent don't properly handle
     /// `entryPoint` parameters. If you have problems using
@@ -254,7 +254,7 @@ pub const ContainerDefinition = struct {
     /// The entry point that's passed to the container. This parameter maps to
     /// `Entrypoint` in the docker container create command and the
     /// `--entrypoint` option to docker run.
-    entry_point: ?[]const []const u8,
+    entry_point: ?[]const []const u8 = null,
 
     /// The environment variables to pass to a container. This parameter maps to
     /// `Env` in the docker container create command and the `--env`
@@ -263,7 +263,7 @@ pub const ContainerDefinition = struct {
     /// We don't recommend that you use plaintext environment variables for
     /// sensitive
     /// information, such as credential data.
-    environment: ?[]const KeyValuePair,
+    environment: ?[]const KeyValuePair = null,
 
     /// A list of files containing the environment variables to pass to a container.
     /// This
@@ -285,7 +285,7 @@ pub const ContainerDefinition = struct {
     /// variable names. For more information, see [Specifying Environment
     /// Variables](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    environment_files: ?[]const EnvironmentFile,
+    environment_files: ?[]const EnvironmentFile = null,
 
     /// If the `essential` parameter of a container is marked as `true`,
     /// and that container fails or stops for any reason, all other containers that
@@ -303,7 +303,7 @@ pub const ContainerDefinition = struct {
     /// definitions. For more information, see [Application
     /// Architecture](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    essential: ?bool,
+    essential: ?bool = null,
 
     /// A list of hostnames and IP address mappings to append to the `/etc/hosts`
     /// file on the container. This parameter maps to `ExtraHosts` in the docker
@@ -311,20 +311,20 @@ pub const ContainerDefinition = struct {
     ///
     /// This parameter isn't supported for Windows containers or tasks that use the
     /// `awsvpc` network mode.
-    extra_hosts: ?[]const HostEntry,
+    extra_hosts: ?[]const HostEntry = null,
 
     /// The FireLens configuration for the container. This is used to specify and
     /// configure a
     /// log router for container logs. For more information, see [Custom Log
     /// Routing](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    firelens_configuration: ?FirelensConfiguration,
+    firelens_configuration: ?FirelensConfiguration = null,
 
     /// The container health check command and associated configuration parameters
     /// for the
     /// container. This parameter maps to `HealthCheck` in the docker container
     /// create command and the `HEALTHCHECK` parameter of docker run.
-    health_check: ?HealthCheck,
+    health_check: ?HealthCheck = null,
 
     /// The hostname to use for your container. This parameter maps to `Hostname`
     /// in the docker container create command and the `--hostname` option to docker
@@ -332,7 +332,7 @@ pub const ContainerDefinition = struct {
     ///
     /// The `hostname` parameter is not supported if you're using the
     /// `awsvpc` network mode.
-    hostname: ?[]const u8,
+    hostname: ?[]const u8 = null,
 
     /// The image used to start a container. This string is passed directly to the
     /// Docker
@@ -383,13 +383,13 @@ pub const ContainerDefinition = struct {
     ///
     /// * Images in other online repositories are qualified further by a domain name
     /// (for example, `quay.io/assemblyline/ubuntu`).
-    image: ?[]const u8,
+    image: ?[]const u8 = null,
 
     /// When this parameter is `true`, you can deploy containerized applications
     /// that require `stdin` or a `tty` to be allocated. This parameter
     /// maps to `OpenStdin` in the docker container create command and the
     /// `--interactive` option to docker run.
-    interactive: ?bool,
+    interactive: ?bool = null,
 
     /// The `links` parameter allows containers to communicate with each other
     /// without the need for port mappings. This parameter is only supported if the
@@ -409,7 +409,7 @@ pub const ContainerDefinition = struct {
     /// isolation is achieved on the container instance using security groups and
     /// VPC
     /// settings.
-    links: ?[]const []const u8,
+    links: ?[]const []const u8 = null,
 
     /// Linux-specific modifications that are applied to the default Docker
     /// container
@@ -417,7 +417,7 @@ pub const ContainerDefinition = struct {
     /// [KernelCapabilities](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_KernelCapabilities.html).
     ///
     /// This parameter is not supported for Windows containers.
-    linux_parameters: ?LinuxParameters,
+    linux_parameters: ?LinuxParameters = null,
 
     /// The log configuration specification for the container.
     ///
@@ -457,7 +457,7 @@ pub const ContainerDefinition = struct {
     /// Agent
     /// Configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service
     /// Developer Guide*.
-    log_configuration: ?LogConfiguration,
+    log_configuration: ?LogConfiguration = null,
 
     /// The amount (in MiB) of memory to present to the container. If your container
     /// attempts
@@ -487,7 +487,7 @@ pub const ContainerDefinition = struct {
     /// The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB of
     /// memory for a
     /// container. So, don't specify less than 4 MiB of memory for your containers.
-    memory: ?i32,
+    memory: ?i32 = null,
 
     /// The soft limit (in MiB) of memory to reserve for the container. When system
     /// memory is
@@ -528,7 +528,7 @@ pub const ContainerDefinition = struct {
     /// The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB of
     /// memory for a
     /// container. So, don't specify less than 4 MiB of memory for your containers.
-    memory_reservation: ?i32,
+    memory_reservation: ?i32 = null,
 
     /// The mount points for data volumes in your container.
     ///
@@ -538,7 +538,7 @@ pub const ContainerDefinition = struct {
     /// Windows containers can mount whole directories on the same drive as
     /// `$env:ProgramData`. Windows containers can't mount directories on a
     /// different drive, and mount point can't be across drives.
-    mount_points: ?[]const MountPoint,
+    mount_points: ?[]const MountPoint = null,
 
     /// The name of a container. If you're linking multiple containers together in a
     /// task
@@ -548,7 +548,7 @@ pub const ContainerDefinition = struct {
     /// This parameter
     /// maps to `name` in the docker container create command and the
     /// `--name` option to docker run.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The list of port mappings for the container. Port mappings allow containers
     /// to access
@@ -576,7 +576,7 @@ pub const ContainerDefinition = struct {
     /// `networkBindings` section
     /// [DescribeTasks](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html)
     /// responses.
-    port_mappings: ?[]const PortMapping,
+    port_mappings: ?[]const PortMapping = null,
 
     /// When this parameter is true, the container is given elevated privileges on
     /// the host
@@ -586,12 +586,12 @@ pub const ContainerDefinition = struct {
     ///
     /// This parameter is not supported for Windows containers or tasks run on
     /// Fargate.
-    privileged: ?bool,
+    privileged: ?bool = null,
 
     /// When this parameter is `true`, a TTY is allocated. This parameter maps to
     /// `Tty` in the docker container create command and the `--tty`
     /// option to docker run.
-    pseudo_terminal: ?bool,
+    pseudo_terminal: ?bool = null,
 
     /// When this parameter is true, the container is given read-only access to its
     /// root file
@@ -599,15 +599,15 @@ pub const ContainerDefinition = struct {
     /// create command and the `--read-only` option to docker run.
     ///
     /// This parameter is not supported for Windows containers.
-    readonly_root_filesystem: ?bool,
+    readonly_root_filesystem: ?bool = null,
 
     /// The private repository authentication credentials to use.
-    repository_credentials: ?RepositoryCredentials,
+    repository_credentials: ?RepositoryCredentials = null,
 
     /// The type and amount of a resource to assign to a container. The only
     /// supported
     /// resource is a GPU.
-    resource_requirements: ?[]const ResourceRequirement,
+    resource_requirements: ?[]const ResourceRequirement = null,
 
     /// The restart policy for a container. When you set up a restart policy, Amazon
     /// ECS can
@@ -617,13 +617,13 @@ pub const ContainerDefinition = struct {
     /// individual containers in Amazon ECS tasks with container restart
     /// policies](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-restart-policy.html) in
     /// the *Amazon Elastic Container Service Developer Guide*.
-    restart_policy: ?ContainerRestartPolicy,
+    restart_policy: ?ContainerRestartPolicy = null,
 
     /// The secrets to pass to the container. For more information, see [Specifying
     /// Sensitive
     /// Data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    secrets: ?[]const Secret,
+    secrets: ?[]const Secret = null,
 
     /// Time duration (in seconds) to wait before giving up on resolving
     /// dependencies for a
@@ -667,7 +667,7 @@ pub const ContainerDefinition = struct {
     /// Service Developer Guide*.
     ///
     /// The valid values for Fargate are 2-120 seconds.
-    start_timeout: ?i32,
+    start_timeout: ?i32 = null,
 
     /// Time duration (in seconds) to wait before the container is forcefully killed
     /// if it
@@ -713,7 +713,7 @@ pub const ContainerDefinition = struct {
     /// Service Developer Guide*.
     ///
     /// The valid values for Fargate are 2-120 seconds.
-    stop_timeout: ?i32,
+    stop_timeout: ?i32 = null,
 
     /// A list of namespaced kernel parameters to set in the container. This
     /// parameter maps to
@@ -721,7 +721,7 @@ pub const ContainerDefinition = struct {
     /// `--sysctl` option to docker run. For example, you can configure
     /// `net.ipv4.tcp_keepalive_time` setting to maintain longer lived
     /// connections.
-    system_controls: ?[]const SystemControl,
+    system_controls: ?[]const SystemControl = null,
 
     /// A list of `ulimits` to set in the container. If a `ulimit` value
     /// is specified in a task definition, it overrides the default values set by
@@ -748,7 +748,7 @@ pub const ContainerDefinition = struct {
     /// version --format '{{.Server.APIVersion}}'`
     ///
     /// This parameter is not supported for Windows containers.
-    ulimits: ?[]const Ulimit,
+    ulimits: ?[]const Ulimit = null,
 
     /// The user to use inside the container. This parameter maps to `User` in the
     /// docker container create command and the `--user` option to docker run.
@@ -773,7 +773,7 @@ pub const ContainerDefinition = struct {
     /// * `uid:group`
     ///
     /// This parameter is not supported for Windows containers.
-    user: ?[]const u8,
+    user: ?[]const u8 = null,
 
     /// Specifies whether Amazon ECS will resolve the container image tag provided
     /// in the
@@ -786,18 +786,18 @@ pub const ContainerDefinition = struct {
     /// container image resolution, see [Container image
     /// resolution](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html#deployment-container-image-stability) in the *Amazon ECS Developer
     /// Guide*.
-    version_consistency: ?VersionConsistency,
+    version_consistency: ?VersionConsistency = null,
 
     /// Data volumes to mount from another container. This parameter maps to
     /// `VolumesFrom` in the docker container create command and the
     /// `--volumes-from` option to docker run.
-    volumes_from: ?[]const VolumeFrom,
+    volumes_from: ?[]const VolumeFrom = null,
 
     /// The working directory to run commands inside the container in. This
     /// parameter maps to
     /// `WorkingDir` in the docker container create command and the
     /// `--workdir` option to docker run.
-    working_directory: ?[]const u8,
+    working_directory: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .command = "command",

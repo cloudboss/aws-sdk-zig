@@ -23,7 +23,7 @@ pub const ListEarthObservationJobOutputConfig = struct {
     status: EarthObservationJobStatus,
 
     /// Each tag consists of a key and a value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

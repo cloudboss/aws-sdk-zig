@@ -9,13 +9,13 @@ pub const CreateAccessConfigRequest = struct {
     /// the cluster by using the Amazon Web Services Management Console, the default
     /// value is
     /// `API_AND_CONFIG_MAP`.
-    authentication_mode: ?AuthenticationMode,
+    authentication_mode: ?AuthenticationMode = null,
 
     /// Specifies whether or not the cluster creator IAM principal was set as a
     /// cluster
     /// admin access entry during cluster creation time. The default value is
     /// `true`.
-    bootstrap_cluster_creator_admin_permissions: ?bool,
+    bootstrap_cluster_creator_admin_permissions: ?bool = null,
 
     pub const json_field_names = .{
         .authentication_mode = "authenticationMode",

@@ -7,11 +7,11 @@ pub const DominantLanguage = struct {
     /// 5646, see [Tags for Identifying
     /// Languages](https://tools.ietf.org/html/rfc5646) on the *IETF Tools* web
     /// site.
-    language_code: ?[]const u8,
+    language_code: ?[]const u8 = null,
 
     /// The level of confidence that Amazon Comprehend has in the accuracy of the
     /// detection.
-    score: ?f32,
+    score: ?f32 = null,
 
     pub const json_field_names = .{
         .language_code = "LanguageCode",

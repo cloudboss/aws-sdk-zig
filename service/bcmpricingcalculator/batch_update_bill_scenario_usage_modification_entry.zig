@@ -4,10 +4,10 @@ const UsageAmount = @import("usage_amount.zig").UsageAmount;
 /// modifications.
 pub const BatchUpdateBillScenarioUsageModificationEntry = struct {
     /// The updated usage amounts for the modification.
-    amounts: ?[]const UsageAmount,
+    amounts: ?[]const UsageAmount = null,
 
     /// The updated group identifier for the usage modification.
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// The unique identifier of the usage modification to update.
     id: []const u8,

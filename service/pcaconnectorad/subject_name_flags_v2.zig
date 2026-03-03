@@ -12,34 +12,34 @@
 /// If you leave the SAN blank, then you must set a subject name.
 pub const SubjectNameFlagsV2 = struct {
     /// Include the common name in the subject name.
-    require_common_name: ?bool,
+    require_common_name: ?bool = null,
 
     /// Include the directory path in the subject name.
-    require_directory_path: ?bool,
+    require_directory_path: ?bool = null,
 
     /// Include the DNS as common name in the subject name.
-    require_dns_as_cn: ?bool,
+    require_dns_as_cn: ?bool = null,
 
     /// Include the subject's email in the subject name.
-    require_email: ?bool,
+    require_email: ?bool = null,
 
     /// Include the globally unique identifier (GUID) in the subject alternate name.
-    san_require_directory_guid: ?bool,
+    san_require_directory_guid: ?bool = null,
 
     /// Include the DNS in the subject alternate name.
-    san_require_dns: ?bool,
+    san_require_dns: ?bool = null,
 
     /// Include the domain DNS in the subject alternate name.
-    san_require_domain_dns: ?bool,
+    san_require_domain_dns: ?bool = null,
 
     /// Include the subject's email in the subject alternate name.
-    san_require_email: ?bool,
+    san_require_email: ?bool = null,
 
     /// Include the service principal name (SPN) in the subject alternate name.
-    san_require_spn: ?bool,
+    san_require_spn: ?bool = null,
 
     /// Include the user principal name (UPN) in the subject alternate name.
-    san_require_upn: ?bool,
+    san_require_upn: ?bool = null,
 
     pub const json_field_names = .{
         .require_common_name = "RequireCommonName",

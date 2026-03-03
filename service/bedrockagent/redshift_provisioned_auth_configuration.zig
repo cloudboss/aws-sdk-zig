@@ -7,13 +7,13 @@ const RedshiftProvisionedAuthType = @import("redshift_provisioned_auth_type.zig"
 pub const RedshiftProvisionedAuthConfiguration = struct {
     /// The database username for authentication to an Amazon Redshift provisioned
     /// data warehouse.
-    database_user: ?[]const u8,
+    database_user: ?[]const u8 = null,
 
     /// The type of authentication to use.
     @"type": RedshiftProvisionedAuthType,
 
     /// The ARN of an Secrets Manager secret for authentication.
-    username_password_secret_arn: ?[]const u8,
+    username_password_secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .database_user = "databaseUser",

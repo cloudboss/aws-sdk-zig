@@ -5,20 +5,20 @@ const Node = @import("node.zig").Node;
 /// nodes.
 pub const Shard = struct {
     /// The name of the shard
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A list containing information about individual nodes within the shard
-    nodes: ?[]const Node,
+    nodes: ?[]const Node = null,
 
     /// The number of nodes in the shard
-    number_of_nodes: ?i32,
+    number_of_nodes: ?i32 = null,
 
     /// The keyspace for this shard.
-    slots: ?[]const u8,
+    slots: ?[]const u8 = null,
 
     /// The current state of this replication group - creating, available,
     /// modifying, deleting.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

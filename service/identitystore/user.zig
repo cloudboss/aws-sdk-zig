@@ -13,78 +13,78 @@ const UserStatus = @import("user_status.zig").UserStatus;
 /// user.
 pub const User = struct {
     /// A list of `Address` objects containing addresses associated with the user.
-    addresses: ?[]const Address,
+    addresses: ?[]const Address = null,
 
     /// The user's birthdate in YYYY-MM-DD format. This field stores personal
     /// birthdate information for the user.
-    birthdate: ?[]const u8,
+    birthdate: ?[]const u8 = null,
 
     /// The date and time the user was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of the user or system that created the user.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// A string containing the name of the user that is formatted for display when
     /// the user is referenced. For example, "John Doe."
     ///
     /// Prefix search supports a maximum of 1,000 characters for the string.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// A list of `Email` objects containing email addresses associated with the
     /// user.
-    emails: ?[]const Email,
+    emails: ?[]const Email = null,
 
     /// A map of explicitly requested attribute extensions associated with the user.
     /// Not populated if the user has no requested extensions.
-    extensions: ?[]const aws.map.StringMapEntry,
+    extensions: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of `ExternalId` objects that contains the identifiers issued to this
     /// resource by an external identity provider.
-    external_ids: ?[]const ExternalId,
+    external_ids: ?[]const ExternalId = null,
 
     /// The globally unique identifier for the identity store.
     identity_store_id: []const u8,
 
     /// A string containing the geographical region or location of the user.
-    locale: ?[]const u8,
+    locale: ?[]const u8 = null,
 
     /// An object containing the name of the user.
-    name: ?Name,
+    name: ?Name = null,
 
     /// A string containing an alternate name for the user.
-    nick_name: ?[]const u8,
+    nick_name: ?[]const u8 = null,
 
     /// A list of `PhoneNumber` objects containing phone numbers associated with the
     /// user.
-    phone_numbers: ?[]const PhoneNumber,
+    phone_numbers: ?[]const PhoneNumber = null,
 
     /// A list of photos associated with the user. Users can have up to 3 photos
     /// with metadata including type, display name, and primary designation.
-    photos: ?[]const Photo,
+    photos: ?[]const Photo = null,
 
     /// A string containing the preferred language of the user. For example,
     /// "American English" or "en-us."
-    preferred_language: ?[]const u8,
+    preferred_language: ?[]const u8 = null,
 
     /// A string containing a URL that might be associated with the user.
-    profile_url: ?[]const u8,
+    profile_url: ?[]const u8 = null,
 
     /// A list of `Role` objects containing roles associated with the user.
-    roles: ?[]const Role,
+    roles: ?[]const Role = null,
 
     /// A string containing the time zone of the user.
-    timezone: ?[]const u8,
+    timezone: ?[]const u8 = null,
 
     /// A string containing the title of the user. Possible values are left
     /// unspecified. The value can vary based on your specific use case.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The date and time the user was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The identifier of the user or system that last updated the user.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     /// The identifier for a user in the identity store.
     user_id: []const u8,
@@ -93,18 +93,18 @@ pub const User = struct {
     /// characters. This value can consist of letters, accented characters, symbols,
     /// numbers, and punctuation. This value is specified at the time the user is
     /// created and stored as an attribute of the user object in the identity store.
-    user_name: ?[]const u8,
+    user_name: ?[]const u8 = null,
 
     /// The current status of the user account.
-    user_status: ?UserStatus,
+    user_status: ?UserStatus = null,
 
     /// A string indicating the type of user. Possible values are left unspecified.
     /// The value can vary based on your specific use case.
-    user_type: ?[]const u8,
+    user_type: ?[]const u8 = null,
 
     /// The user's personal website or blog URL. This field stores website
     /// information for personal or professional use.
-    website: ?[]const u8,
+    website: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .addresses = "Addresses",

@@ -7,10 +7,10 @@ const TableUnaggregatedFieldWells = @import("table_unaggregated_field_wells.zig"
 /// the attributes can be defined.
 pub const TableFieldWells = struct {
     /// The aggregated field well for the table.
-    table_aggregated_field_wells: ?TableAggregatedFieldWells,
+    table_aggregated_field_wells: ?TableAggregatedFieldWells = null,
 
     /// The unaggregated field well for the table.
-    table_unaggregated_field_wells: ?TableUnaggregatedFieldWells,
+    table_unaggregated_field_wells: ?TableUnaggregatedFieldWells = null,
 
     pub const json_field_names = .{
         .table_aggregated_field_wells = "TableAggregatedFieldWells",

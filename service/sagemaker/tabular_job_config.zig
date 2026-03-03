@@ -7,9 +7,9 @@ const ProblemType = @import("problem_type.zig").ProblemType;
 /// type.
 pub const TabularJobConfig = struct {
     /// The configuration information of how model candidates are generated.
-    candidate_generation_config: ?CandidateGenerationConfig,
+    candidate_generation_config: ?CandidateGenerationConfig = null,
 
-    completion_criteria: ?AutoMLJobCompletionCriteria,
+    completion_criteria: ?AutoMLJobCompletionCriteria = null,
 
     /// A URL to the Amazon S3 data source containing selected features from the
     /// input data source to run an Autopilot job V2. You can input
@@ -39,12 +39,12 @@ pub const TabularJobConfig = struct {
     /// `["col1", "col2", ...]` are case sensitive and should be a list of strings
     /// containing unique values that are a subset of the column names in the input
     /// data. The list of columns provided must not include the target column.
-    feature_specification_s3_uri: ?[]const u8,
+    feature_specification_s3_uri: ?[]const u8 = null,
 
     /// Generates possible candidates without training the models. A model candidate
     /// is a combination of data preprocessors, algorithms, and algorithm parameter
     /// settings.
-    generate_candidate_definitions_only: ?bool,
+    generate_candidate_definitions_only: ?bool = null,
 
     /// The method that Autopilot uses to train the data. You can either specify the
     /// mode manually or let Autopilot choose for you based on the dataset size by
@@ -65,7 +65,7 @@ pub const TabularJobConfig = struct {
     /// for the type of problem you want to solve. Then HPO finds the best
     /// hyperparameters according to your objective metric. See [Autopilot algorithm
     /// support](https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support) for a list of algorithms supported by `HYPERPARAMETER_TUNING` mode.
-    mode: ?AutoMLMode,
+    mode: ?AutoMLMode = null,
 
     /// The type of supervised learning problem available for the model candidates
     /// of the AutoML job V2. For more information, see [ SageMaker Autopilot
@@ -75,7 +75,7 @@ pub const TabularJobConfig = struct {
     /// You must either specify the type of supervised learning problem in
     /// `ProblemType` and provide the
     /// [AutoMLJobObjective](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html#sagemaker-CreateAutoMLJobV2-request-AutoMLJobObjective) metric, or none at all.
-    problem_type: ?ProblemType,
+    problem_type: ?ProblemType = null,
 
     /// If specified, this column name indicates which column of the dataset should
     /// be treated as sample weights for use by the objective metric during the
@@ -90,7 +90,7 @@ pub const TabularJobConfig = struct {
     ///
     /// Support for sample weights is available in
     /// [Ensembling](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html) mode only.
-    sample_weight_attribute_name: ?[]const u8,
+    sample_weight_attribute_name: ?[]const u8 = null,
 
     /// The name of the target variable in supervised learning, usually represented
     /// by 'y'.

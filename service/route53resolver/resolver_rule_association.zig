@@ -14,29 +14,29 @@ pub const ResolverRuleAssociation = struct {
     /// assigns this value when you submit an
     /// [AssociateResolverRule](https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html)
     /// request.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of an association between a Resolver rule and a VPC.
     ///
     /// The name can be up to 64 characters long and can contain letters (a-z, A-Z),
     /// numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot
     /// consist of only numbers.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the Resolver rule that you associated with the VPC that is
     /// specified by `VPCId`.
-    resolver_rule_id: ?[]const u8,
+    resolver_rule_id: ?[]const u8 = null,
 
     /// A code that specifies the current status of the association between a
     /// Resolver rule and a VPC.
-    status: ?ResolverRuleAssociationStatus,
+    status: ?ResolverRuleAssociationStatus = null,
 
     /// A detailed description of the status of the association between a Resolver
     /// rule and a VPC.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The ID of the VPC that you associated the Resolver rule with.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

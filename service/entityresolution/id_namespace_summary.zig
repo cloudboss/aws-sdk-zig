@@ -7,11 +7,11 @@ pub const IdNamespaceSummary = struct {
     created_at: i64,
 
     /// The description of the ID namespace.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// An object which defines any additional configurations required by the ID
     /// mapping workflow.
-    id_mapping_workflow_properties: ?[]const IdNamespaceIdMappingWorkflowMetadata,
+    id_mapping_workflow_properties: ?[]const IdNamespaceIdMappingWorkflowMetadata = null,
 
     /// The Amazon Resource Name (ARN) of the ID namespace.
     id_namespace_arn: []const u8,

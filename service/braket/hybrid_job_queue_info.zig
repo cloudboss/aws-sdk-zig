@@ -5,7 +5,7 @@ pub const HybridJobQueueInfo = struct {
     /// Optional. Provides more information about the queue position. For example,
     /// if the hybrid job is complete and no longer in the queue, the message field
     /// contains that information.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Current position of the hybrid job in the jobs queue.
     position: []const u8,

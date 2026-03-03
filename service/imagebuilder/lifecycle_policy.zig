@@ -8,45 +8,45 @@ const LifecyclePolicyStatus = @import("lifecycle_policy_status.zig").LifecyclePo
 /// The configuration details for a lifecycle policy resource.
 pub const LifecyclePolicy = struct {
     /// The Amazon Resource Name (ARN) of the lifecycle policy resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The timestamp when Image Builder created the lifecycle policy resource.
-    date_created: ?i64,
+    date_created: ?i64 = null,
 
     /// The timestamp for the last time Image Builder ran the lifecycle policy.
-    date_last_run: ?i64,
+    date_last_run: ?i64 = null,
 
     /// The timestamp when Image Builder updated the lifecycle policy resource.
-    date_updated: ?i64,
+    date_updated: ?i64 = null,
 
     /// Optional description for the lifecycle policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name or Amazon Resource Name (ARN) of the IAM role that Image Builder
     /// uses to run the lifecycle policy.
     /// This is a custom role that you create.
-    execution_role: ?[]const u8,
+    execution_role: ?[]const u8 = null,
 
     /// The name of the lifecycle policy.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The configuration details for a lifecycle policy resource.
-    policy_details: ?[]const LifecyclePolicyDetail,
+    policy_details: ?[]const LifecyclePolicyDetail = null,
 
     /// Resource selection criteria used to run the lifecycle policy.
-    resource_selection: ?LifecyclePolicyResourceSelection,
+    resource_selection: ?LifecyclePolicyResourceSelection = null,
 
     /// The type of resources the lifecycle policy targets.
-    resource_type: ?LifecyclePolicyResourceType,
+    resource_type: ?LifecyclePolicyResourceType = null,
 
     /// Indicates whether the lifecycle policy resource is enabled.
-    status: ?LifecyclePolicyStatus,
+    status: ?LifecyclePolicyStatus = null,
 
     /// To help manage your lifecycle policy resources, you can assign your own
     /// metadata to each resource in the form of tags. Each tag consists of a key
     /// and
     /// an optional value, both of which you define.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

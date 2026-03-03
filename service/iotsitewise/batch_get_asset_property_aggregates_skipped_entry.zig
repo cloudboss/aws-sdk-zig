@@ -12,7 +12,7 @@ pub const BatchGetAssetPropertyAggregatesSkippedEntry = struct {
     entry_id: []const u8,
 
     /// The error information, such as the error code and the timestamp.
-    error_info: ?BatchGetAssetPropertyAggregatesErrorInfo,
+    error_info: ?BatchGetAssetPropertyAggregatesErrorInfo = null,
 
     pub const json_field_names = .{
         .completion_status = "completionStatus",

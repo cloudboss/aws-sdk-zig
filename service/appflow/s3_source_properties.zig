@@ -8,9 +8,9 @@ pub const S3SourceProperties = struct {
 
     /// The object key for the Amazon S3 bucket in which the source files are
     /// stored.
-    bucket_prefix: ?[]const u8,
+    bucket_prefix: ?[]const u8 = null,
 
-    s_3_input_format_config: ?S3InputFormatConfig,
+    s_3_input_format_config: ?S3InputFormatConfig = null,
 
     pub const json_field_names = .{
         .bucket_name = "bucketName",

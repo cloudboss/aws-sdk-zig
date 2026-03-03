@@ -18,8 +18,8 @@ pub const LaunchTemplateTagSpecificationRequest = struct {
     ///
     /// To tag a resource after it has been created, see
     /// [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The tags to apply to the resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

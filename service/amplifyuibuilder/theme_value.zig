@@ -3,10 +3,10 @@ const ThemeValues = @import("theme_values.zig").ThemeValues;
 /// Describes the configuration of a theme's properties.
 pub const ThemeValue = struct {
     /// A list of key-value pairs that define the theme's properties.
-    children: ?[]const ThemeValues,
+    children: ?[]const ThemeValues = null,
 
     /// The value of a theme property.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .children = "children",

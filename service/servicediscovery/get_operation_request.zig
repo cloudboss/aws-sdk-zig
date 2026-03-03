@@ -6,7 +6,7 @@ pub const GetOperationRequest = struct {
     /// with the operation, as specified in the namespace `ResourceOwner` field. For
     /// operations associated with namespaces that are shared with your account, you
     /// must specify an `OwnerAccount`.
-    owner_account: ?[]const u8,
+    owner_account: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .operation_id = "OperationId",

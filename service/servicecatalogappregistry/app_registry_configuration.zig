@@ -5,7 +5,7 @@ const TagQueryConfiguration = @import("tag_query_configuration.zig").TagQueryCon
 pub const AppRegistryConfiguration = struct {
     /// Includes the definition
     /// of a `tagQuery`.
-    tag_query_configuration: ?TagQueryConfiguration,
+    tag_query_configuration: ?TagQueryConfiguration = null,
 
     pub const json_field_names = .{
         .tag_query_configuration = "tagQueryConfiguration",

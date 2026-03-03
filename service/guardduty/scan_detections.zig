@@ -8,16 +8,16 @@ pub const ScanDetections = struct {
     /// Details of the highest severity threat detected during malware scan and
     /// number of infected
     /// files.
-    highest_severity_threat_details: ?HighestSeverityThreatDetails,
+    highest_severity_threat_details: ?HighestSeverityThreatDetails = null,
 
     /// Total number of scanned files.
-    scanned_item_count: ?ScannedItemCount,
+    scanned_item_count: ?ScannedItemCount = null,
 
     /// Contains details about identified threats organized by threat name.
-    threat_detected_by_name: ?ThreatDetectedByName,
+    threat_detected_by_name: ?ThreatDetectedByName = null,
 
     /// Total number of infected files.
-    threats_detected_item_count: ?ThreatsDetectedItemCount,
+    threats_detected_item_count: ?ThreatsDetectedItemCount = null,
 
     pub const json_field_names = .{
         .highest_severity_threat_details = "HighestSeverityThreatDetails",

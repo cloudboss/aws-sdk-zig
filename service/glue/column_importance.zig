@@ -5,10 +5,10 @@
 /// by identifying which columns in your records are more important than others.
 pub const ColumnImportance = struct {
     /// The name of a column.
-    column_name: ?[]const u8,
+    column_name: ?[]const u8 = null,
 
     /// The column importance score for the column, as a decimal.
-    importance: ?f64,
+    importance: ?f64 = null,
 
     pub const json_field_names = .{
         .column_name = "ColumnName",

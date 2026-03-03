@@ -9,21 +9,21 @@ const Source = @import("source.zig").Source;
 /// Represents a dataset that can be processed by DataBrew.
 pub const Dataset = struct {
     /// The ID of the Amazon Web Services account that owns the dataset.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The date and time that the dataset was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the user who created the dataset.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The file format of a dataset that is created from an Amazon S3 file or
     /// folder.
-    format: ?InputFormat,
+    format: ?InputFormat = null,
 
     /// A set of options that define how DataBrew interprets the data in the
     /// dataset.
-    format_options: ?FormatOptions,
+    format_options: ?FormatOptions = null,
 
     /// Information on how DataBrew can find the dataset, in either the Glue Data
     /// Catalog
@@ -31,27 +31,27 @@ pub const Dataset = struct {
     input: Input,
 
     /// The Amazon Resource Name (ARN) of the user who last modified the dataset.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The last modification date and time of the dataset.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The unique name of the dataset.
     name: []const u8,
 
     /// A set of options that defines how DataBrew interprets an Amazon S3
     /// path of the dataset.
-    path_options: ?PathOptions,
+    path_options: ?PathOptions = null,
 
     /// The unique Amazon Resource Name (ARN) for the dataset.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The location of the data for the dataset, either Amazon S3 or the Glue Data
     /// Catalog.
-    source: ?Source,
+    source: ?Source = null,
 
     /// Metadata tags that have been applied to the dataset.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

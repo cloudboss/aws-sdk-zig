@@ -6,7 +6,7 @@ pub const GetStreamSessionRequest = struct {
     /// channel. If no
     /// `streamId` is provided, this returns the most recent stream session for the
     /// channel, if it exists.
-    stream_id: ?[]const u8,
+    stream_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channel_arn = "channelArn",

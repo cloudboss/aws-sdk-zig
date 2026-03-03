@@ -14,49 +14,49 @@ pub const Activity = struct {
     /// The settings for a yes/no split activity. This type of activity sends
     /// participants down one of two paths in a journey, based on conditions that
     /// you specify.
-    conditional_split: ?ConditionalSplitActivity,
+    conditional_split: ?ConditionalSplitActivity = null,
 
     /// The settings for a connect activity. This type of activity initiates a
     /// contact center call to participants.
-    contact_center: ?ContactCenterActivity,
+    contact_center: ?ContactCenterActivity = null,
 
     /// The settings for a custom message activity. This type of activity calls an
     /// AWS Lambda function or web hook that sends messages to participants.
-    custom: ?CustomMessageActivity,
+    custom: ?CustomMessageActivity = null,
 
     /// The custom description of the activity.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The settings for an email activity. This type of activity sends an email
     /// message to participants.
-    email: ?EmailMessageActivity,
+    email: ?EmailMessageActivity = null,
 
     /// The settings for a holdout activity. This type of activity stops a journey
     /// for a specified percentage of participants.
-    holdout: ?HoldoutActivity,
+    holdout: ?HoldoutActivity = null,
 
     /// The settings for a multivariate split activity. This type of activity sends
     /// participants down one of as many as five paths (including a default *Else*
     /// path) in a journey, based on conditions that you specify.
-    multi_condition: ?MultiConditionalSplitActivity,
+    multi_condition: ?MultiConditionalSplitActivity = null,
 
     /// The settings for a push notification activity. This type of activity sends a
     /// push notification to participants.
-    push: ?PushMessageActivity,
+    push: ?PushMessageActivity = null,
 
     /// The settings for a random split activity. This type of activity randomly
     /// sends specified percentages of participants down one of as many as five
     /// paths in a journey, based on conditions that you specify.
-    random_split: ?RandomSplitActivity,
+    random_split: ?RandomSplitActivity = null,
 
     /// The settings for an SMS activity. This type of activity sends a text message
     /// to participants.
-    sms: ?SMSMessageActivity,
+    sms: ?SMSMessageActivity = null,
 
     /// The settings for a wait activity. This type of activity waits for a certain
     /// amount of time or until a specific date and time before moving participants
     /// to the next activity in a journey.
-    wait: ?WaitActivity,
+    wait: ?WaitActivity = null,
 
     pub const json_field_names = .{
         .conditional_split = "ConditionalSplit",

@@ -3,13 +3,13 @@ const ConfigurationId = @import("configuration_id.zig").ConfigurationId;
 /// Broker configuration information
 pub const Configurations = struct {
     /// The broker's current configuration.
-    current: ?ConfigurationId,
+    current: ?ConfigurationId = null,
 
     /// The history of configurations applied to the broker.
-    history: ?[]const ConfigurationId,
+    history: ?[]const ConfigurationId = null,
 
     /// The broker's pending configuration.
-    pending: ?ConfigurationId,
+    pending: ?ConfigurationId = null,
 
     pub const json_field_names = .{
         .current = "Current",

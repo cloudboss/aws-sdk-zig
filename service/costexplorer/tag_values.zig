@@ -12,17 +12,17 @@ const MatchOption = @import("match_option.zig").MatchOption;
 /// filtered on resources without the given tag key.
 pub const TagValues = struct {
     /// The key for the tag.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The match options that you can use to filter your results. `MatchOptions`
     /// is only applicable for actions related to cost category. The default values
     /// for
     /// `MatchOptions` are `EQUALS` and
     /// `CASE_SENSITIVE`.
-    match_options: ?[]const MatchOption,
+    match_options: ?[]const MatchOption = null,
 
     /// The specific value of the tag.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

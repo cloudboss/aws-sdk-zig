@@ -4,7 +4,7 @@ const Template = @import("template.zig").Template;
 /// message.
 pub const BulkEmailContent = struct {
     /// The template to use for the bulk email message.
-    template: ?Template,
+    template: ?Template = null,
 
     pub const json_field_names = .{
         .template = "Template",

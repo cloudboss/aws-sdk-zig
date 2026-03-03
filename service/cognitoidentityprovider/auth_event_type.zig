@@ -13,18 +13,18 @@ const EventType = @import("event_type.zig").EventType;
 pub const AuthEventType = struct {
     /// A list of the challenges that the user was requested to answer, for example
     /// `Password`, and the result, for example `Success`.
-    challenge_responses: ?[]const ChallengeResponseType,
+    challenge_responses: ?[]const ChallengeResponseType = null,
 
     /// The date and time when the item was created. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The user context data captured at the time of an event request. This value
     /// provides
     /// additional information about the client from which event the request is
     /// received.
-    event_context_data: ?EventContextDataType,
+    event_context_data: ?EventContextDataType = null,
 
     /// The `UpdateAuthEventFeedback` or `AdminUpdateAuthEventFeedback`
     /// feedback that you or your user provided in response to the event. A value of
@@ -33,23 +33,23 @@ pub const AuthEventType = struct {
     /// value of
     /// `Invalid` indicates that you agreed with the user pool risk level and
     /// evaluated a session to be invalid, or likely malicious.
-    event_feedback: ?EventFeedbackType,
+    event_feedback: ?EventFeedbackType = null,
 
     /// The event ID.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The event response.
-    event_response: ?EventResponseType,
+    event_response: ?EventResponseType = null,
 
     /// The threat evaluation from your user pool about an event. Contains
     /// information about
     /// whether your user pool detected compromised credentials, whether the event
     /// triggered an
     /// automated response, and the level of risk.
-    event_risk: ?EventRiskType,
+    event_risk: ?EventRiskType = null,
 
     /// The type of authentication event.
-    event_type: ?EventType,
+    event_type: ?EventType = null,
 
     pub const json_field_names = .{
         .challenge_responses = "ChallengeResponses",

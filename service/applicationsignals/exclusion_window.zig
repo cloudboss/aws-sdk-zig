@@ -6,15 +6,15 @@ const Window = @import("window.zig").Window;
 pub const ExclusionWindow = struct {
     /// A description explaining why this time period should be excluded from SLO
     /// calculations.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The recurrence rule for the SLO time window exclusion. Supports both cron
     /// and rate expressions.
-    recurrence_rule: ?RecurrenceRule,
+    recurrence_rule: ?RecurrenceRule = null,
 
     /// The start of the SLO time window exclusion. Defaults to current time if not
     /// specified.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The SLO time window exclusion .
     window: Window,

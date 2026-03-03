@@ -7,16 +7,16 @@ const LineChartMarkerStyleSettings = @import("line_chart_marker_style_settings.z
 /// `LineChartVisual`.
 pub const LineChartDefaultSeriesSettings = struct {
     /// The axis to which you are binding all line series to.
-    axis_binding: ?AxisBinding,
+    axis_binding: ?AxisBinding = null,
 
     /// Decal settings options for all line series in the visual.
-    decal_settings: ?DecalSettings,
+    decal_settings: ?DecalSettings = null,
 
     /// Line styles options for all line series in the visual.
-    line_style_settings: ?LineChartLineStyleSettings,
+    line_style_settings: ?LineChartLineStyleSettings = null,
 
     /// Marker styles options for all line series in the visual.
-    marker_style_settings: ?LineChartMarkerStyleSettings,
+    marker_style_settings: ?LineChartMarkerStyleSettings = null,
 
     pub const json_field_names = .{
         .axis_binding = "AxisBinding",

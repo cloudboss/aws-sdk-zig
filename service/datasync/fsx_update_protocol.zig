@@ -8,13 +8,13 @@ const FsxUpdateProtocolSmb = @import("fsx_update_protocol_smb.zig").FsxUpdatePro
 /// FSx for ONTAP locations. DataSync currently only supports NFS version 3 with
 /// this location type.
 pub const FsxUpdateProtocol = struct {
-    nfs: ?FsxProtocolNfs,
+    nfs: ?FsxProtocolNfs = null,
 
     /// Specifies the Server Message Block (SMB) protocol configuration that
     /// DataSync
     /// uses to access your FSx for ONTAP file system's storage virtual machine
     /// (SVM).
-    smb: ?FsxUpdateProtocolSmb,
+    smb: ?FsxUpdateProtocolSmb = null,
 
     pub const json_field_names = .{
         .nfs = "NFS",

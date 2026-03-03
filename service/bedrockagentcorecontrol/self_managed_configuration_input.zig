@@ -10,7 +10,7 @@ pub const SelfManagedConfigurationInput = struct {
     invocation_configuration: InvocationConfigurationInput,
 
     /// A list of conditions that trigger memory processing.
-    trigger_conditions: ?[]const TriggerConditionInput,
+    trigger_conditions: ?[]const TriggerConditionInput = null,
 
     pub const json_field_names = .{
         .historical_context_window_size = "historicalContextWindowSize",

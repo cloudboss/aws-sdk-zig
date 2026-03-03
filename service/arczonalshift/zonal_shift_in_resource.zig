@@ -68,7 +68,7 @@ pub const ZonalShiftInResource = struct {
     /// For more information about practice run outcomes, see [ Considerations when
     /// you configure zonal
     /// autoshift](https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.configure.html) in the Amazon Application Recovery Controller Developer Guide.
-    practice_run_outcome: ?PracticeRunOutcome,
+    practice_run_outcome: ?PracticeRunOutcome = null,
 
     /// The identifier for the resource to include in a zonal shift. The identifier
     /// is the Amazon Resource Name (ARN) for the resource.
@@ -87,7 +87,7 @@ pub const ZonalShiftInResource = struct {
     resource_identifier: []const u8,
 
     /// Defines the zonal shift type.
-    shift_type: ?ShiftType,
+    shift_type: ?ShiftType = null,
 
     /// The time (UTC) when the zonal shift starts.
     start_time: i64,

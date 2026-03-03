@@ -26,7 +26,7 @@ pub const SourceSelectionCriteria = struct {
     /// You must enable replica modification sync on the source and destination
     /// buckets to
     /// replicate replica metadata changes between the source and the replicas.
-    replica_modifications: ?ReplicaModifications,
+    replica_modifications: ?ReplicaModifications = null,
 
     /// A filter that you can use to select Amazon S3 objects that are encrypted
     /// with server-side
@@ -35,5 +35,5 @@ pub const SourceSelectionCriteria = struct {
     /// required.
     ///
     /// This is not supported by Amazon S3 on Outposts buckets.
-    sse_kms_encrypted_objects: ?SseKmsEncryptedObjects,
+    sse_kms_encrypted_objects: ?SseKmsEncryptedObjects = null,
 };

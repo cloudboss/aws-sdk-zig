@@ -19,8 +19,8 @@ pub const FilterRule = struct {
     /// suffixes are not supported.
     /// For more information, see [Configuring Event
     /// Notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.
-    name: ?FilterRuleName,
+    name: ?FilterRuleName = null,
 
     /// The value that the filter searches for in object key names.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

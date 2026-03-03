@@ -10,7 +10,7 @@ pub const CustomerManagedPolicyReference = struct {
     /// you want to deploy your permission set. The default is `/`. For more
     /// information, see [Friendly names and
     /// paths](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names) in the *IAM User Guide*.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

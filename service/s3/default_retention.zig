@@ -13,15 +13,15 @@ pub const DefaultRetention = struct {
     /// The number of days that you want to specify for the default retention
     /// period. Must be used with
     /// `Mode`.
-    days: ?i32,
+    days: ?i32 = null,
 
     /// The default Object Lock retention mode you want to apply to new objects
     /// placed in the specified
     /// bucket. Must be used with either `Days` or `Years`.
-    mode: ?ObjectLockRetentionMode,
+    mode: ?ObjectLockRetentionMode = null,
 
     /// The number of years that you want to specify for the default retention
     /// period. Must be used with
     /// `Mode`.
-    years: ?i32,
+    years: ?i32 = null,
 };

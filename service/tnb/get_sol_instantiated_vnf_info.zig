@@ -7,7 +7,7 @@ const VnfOperationalState = @import("vnf_operational_state.zig").VnfOperationalS
 /// update, and delete) can be performed.
 pub const GetSolInstantiatedVnfInfo = struct {
     /// State of the network function.
-    vnf_state: ?VnfOperationalState,
+    vnf_state: ?VnfOperationalState = null,
 
     pub const json_field_names = .{
         .vnf_state = "vnfState",

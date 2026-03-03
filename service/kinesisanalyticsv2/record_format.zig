@@ -12,7 +12,7 @@ pub const RecordFormat = struct {
     /// provides additional mapping information specific to the record format (such
     /// as JSON, CSV, or
     /// record fields delimited by some delimiter) on the streaming source.
-    mapping_parameters: ?MappingParameters,
+    mapping_parameters: ?MappingParameters = null,
 
     /// The type of record format.
     record_format_type: RecordFormatType,

@@ -39,7 +39,7 @@ pub const SlackConfiguration = struct {
     /// and exclusion pattern, the exclusion pattern takes precedence and the file
     /// isn't
     /// included in the index.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map Slack data
     /// source attributes or field names to Amazon Kendra index field names. To
@@ -49,7 +49,7 @@ pub const SlackConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The
     /// Slack data source field names must exist in your Slack custom metadata.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of regular expression patterns to include certain attached files in
     /// your Slack
@@ -60,7 +60,7 @@ pub const SlackConfiguration = struct {
     /// inclusion and exclusion pattern, the exclusion pattern takes precedence and
     /// the file
     /// isn't included in the index.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// The number of hours for change log to look back from when you last
     /// synchronized your
@@ -74,21 +74,21 @@ pub const SlackConfiguration = struct {
     /// set the
     /// `LookBackPeriod` to the number of hours you want change log to look
     /// back.
-    look_back_period: ?i32,
+    look_back_period: ?i32 = null,
 
     /// The list of private channel names from your Slack workspace team. You use
     /// this if you
     /// want to index specific private channels, not all private channels. You can
     /// also use
     /// regular expression patterns to filter private channels.
-    private_channel_filter: ?[]const []const u8,
+    private_channel_filter: ?[]const []const u8 = null,
 
     /// The list of public channel names to index from your Slack workspace team.
     /// You use this
     /// if you want to index specific public channels, not all public channels. You
     /// can also use
     /// regular expression patterns to filter public channels.
-    public_channel_filter: ?[]const []const u8,
+    public_channel_filter: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains
     /// the
@@ -132,7 +132,7 @@ pub const SlackConfiguration = struct {
     /// your Slack. For
     /// more information, see [Configuring a
     /// VPC](https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
-    vpc_configuration: ?DataSourceVpcConfiguration,
+    vpc_configuration: ?DataSourceVpcConfiguration = null,
 
     pub const json_field_names = .{
         .crawl_bot_message = "CrawlBotMessage",

@@ -8,5 +8,5 @@ pub const PolicyDescriptorType = struct {
     /// (ARNs) and Amazon Web Services
     /// Service
     /// Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon Web Services General Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 };

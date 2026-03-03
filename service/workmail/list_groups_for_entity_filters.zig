@@ -2,7 +2,7 @@
 /// input to Operation.
 pub const ListGroupsForEntityFilters = struct {
     /// Filters only group names that start with the provided name prefix.
-    group_name_prefix: ?[]const u8,
+    group_name_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .group_name_prefix = "GroupNamePrefix",

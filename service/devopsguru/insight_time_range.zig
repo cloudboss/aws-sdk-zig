@@ -3,7 +3,7 @@
 /// ended.
 pub const InsightTimeRange = struct {
     /// The time when the behavior described in an insight ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The time when the behavior described in an insight started.
     start_time: i64,

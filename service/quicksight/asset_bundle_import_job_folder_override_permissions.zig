@@ -8,7 +8,7 @@ pub const AssetBundleImportJobFolderOverridePermissions = struct {
     /// override all folders in this asset bundle.
     folder_ids: []const []const u8,
 
-    permissions: ?AssetBundleResourcePermissions,
+    permissions: ?AssetBundleResourcePermissions = null,
 
     pub const json_field_names = .{
         .folder_ids = "FolderIds",

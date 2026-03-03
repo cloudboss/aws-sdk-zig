@@ -21,23 +21,23 @@ pub const GameSessionConnectionInfo = struct {
     ///
     /// When connecting to a game session that is running on a TLS-enabled fleet,
     /// you must use the DNS name, not the IP address.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// A unique identifier for the game session. Use the game session ID.
-    game_session_arn: ?[]const u8,
+    game_session_arn: ?[]const u8 = null,
 
     /// The IP address of the game session. To connect to a Amazon GameLift Servers
     /// game server, an app needs both the IP address and port number.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// A collection of player session IDs, one for each player ID that was included
     /// in the
     /// original matchmaking request.
-    matched_player_sessions: ?[]const MatchedPlayerSession,
+    matched_player_sessions: ?[]const MatchedPlayerSession = null,
 
     /// The port number for the game session. To connect to a Amazon GameLift
     /// Servers game server, an app needs both the IP address and port number.
-    port: ?i32,
+    port: ?i32 = null,
 
     pub const json_field_names = .{
         .dns_name = "DnsName",

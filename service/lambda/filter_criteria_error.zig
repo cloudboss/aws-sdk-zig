@@ -3,10 +3,10 @@
 pub const FilterCriteriaError = struct {
     /// The KMS exception that resulted from filter criteria encryption or
     /// decryption.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

@@ -4,12 +4,12 @@ const ClientVpnEndpointAttributeStatus = @import("client_vpn_endpoint_attribute_
 /// connections.
 pub const ClientConnectResponseOptions = struct {
     /// Indicates whether client connect options are enabled.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the Lambda function used for connection
     /// authorization.
-    lambda_function_arn: ?[]const u8,
+    lambda_function_arn: ?[]const u8 = null,
 
     /// The status of any updates to the client connect options.
-    status: ?ClientVpnEndpointAttributeStatus,
+    status: ?ClientVpnEndpointAttributeStatus = null,
 };

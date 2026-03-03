@@ -6,26 +6,26 @@ const ActionRemotePortDetails = @import("action_remote_port_details.zig").Action
 /// details about the attempted network connection that was detected.
 pub const NetworkConnectionAction = struct {
     /// Indicates whether the network connection attempt was blocked.
-    blocked: ?bool,
+    blocked: ?bool = null,
 
     /// The direction of the network connection request (`IN` or
     /// `OUT`).
-    connection_direction: ?[]const u8,
+    connection_direction: ?[]const u8 = null,
 
     /// Information about the port on the EC2 instance.
-    local_port_details: ?ActionLocalPortDetails,
+    local_port_details: ?ActionLocalPortDetails = null,
 
     /// The protocol used to make the network connection request.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 64.
-    protocol: ?[]const u8,
+    protocol: ?[]const u8 = null,
 
     /// Information about the remote IP address that issued the network connection
     /// request.
-    remote_ip_details: ?ActionRemoteIpDetails,
+    remote_ip_details: ?ActionRemoteIpDetails = null,
 
     /// Information about the port on the remote IP address.
-    remote_port_details: ?ActionRemotePortDetails,
+    remote_port_details: ?ActionRemotePortDetails = null,
 
     pub const json_field_names = .{
         .blocked = "Blocked",

@@ -12,10 +12,10 @@ pub const ListOperationsResponse = struct {
     /// operations matched the specified criteria but that subsequent groups of
     /// `MaxResults`
     /// operations do contain operations that match the criteria.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// Summary information about the operations that match the specified criteria.
-    operations: ?[]const OperationSummary,
+    operations: ?[]const OperationSummary = null,
 
     pub const json_field_names = .{
         .next_token = "NextToken",

@@ -5,10 +5,10 @@ pub const ListTagsForResourceResponse = struct {
     /// The opaque string that indicates the position to begin the next list of
     /// results in the
     /// response.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// An array of tags applied to the specified resource.
-    tags: ?[]const TagListEntry,
+    tags: ?[]const TagListEntry = null,
 
     pub const json_field_names = .{
         .next_token = "NextToken",

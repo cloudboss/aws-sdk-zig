@@ -1,10 +1,10 @@
 /// Information about a quota increase request.
 pub const ServiceQuotaIncreaseRequestInTemplate = struct {
     /// The Amazon Web Services Region.
-    aws_region: ?[]const u8,
+    aws_region: ?[]const u8 = null,
 
     /// The new, increased value of the quota.
-    desired_value: ?f64,
+    desired_value: ?f64 = null,
 
     /// Indicates whether the quota is global.
     global_quota: bool = false,
@@ -12,20 +12,20 @@ pub const ServiceQuotaIncreaseRequestInTemplate = struct {
     /// Specifies the quota identifier. To find the quota code for a specific
     /// quota, use the ListServiceQuotas operation, and look for the
     /// `QuotaCode` response in the output for the quota you want.
-    quota_code: ?[]const u8,
+    quota_code: ?[]const u8 = null,
 
     /// Specifies the quota name.
-    quota_name: ?[]const u8,
+    quota_name: ?[]const u8 = null,
 
     /// Specifies the service identifier. To find the service code value
     /// for an Amazon Web Services service, use the ListServices operation.
-    service_code: ?[]const u8,
+    service_code: ?[]const u8 = null,
 
     /// Specifies the service name.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// The unit of measurement.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_region = "AwsRegion",

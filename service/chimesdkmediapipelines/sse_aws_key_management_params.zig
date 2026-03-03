@@ -11,7 +11,7 @@ pub const SseAwsKeyManagementParams = struct {
     /// of security for your data. For more information, see [KMS encryption
     /// context](https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html) and [Asymmetric keys in KMS](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer
     /// Guide*.
-    aws_kms_encryption_context: ?[]const u8,
+    aws_kms_encryption_context: ?[]const u8 = null,
 
     /// The KMS key you want to use to encrypt your media pipeline output.
     /// Decryption is required for concatenation pipeline. If using a key located in

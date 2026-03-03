@@ -7,5 +7,5 @@ pub const InstanceReusePolicy = struct {
     /// Specifies whether instances in the Auto Scaling group can be returned to the
     /// warm pool on
     /// scale in.
-    reuse_on_scale_in: ?bool,
+    reuse_on_scale_in: ?bool = null,
 };

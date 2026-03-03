@@ -12,9 +12,9 @@ const WrapOptions = @import("wrap_options.zig").WrapOptions;
 /// * Transaction Set
 pub const X12Envelope = struct {
     /// A container for the X12 outbound EDI headers.
-    common: ?X12OutboundEdiHeaders,
+    common: ?X12OutboundEdiHeaders = null,
 
-    wrap_options: ?WrapOptions,
+    wrap_options: ?WrapOptions = null,
 
     pub const json_field_names = .{
         .common = "common",

@@ -5,12 +5,12 @@ pub const DataRetrievalRule = struct {
     /// This field is required only if the value of the Strategy field is
     /// `BytesPerHour`. Your PUT operation will be rejected if the Strategy field is
     /// not set to `BytesPerHour` and you set this field.
-    bytes_per_hour: ?i64,
+    bytes_per_hour: ?i64 = null,
 
     /// The type of data retrieval policy to set.
     ///
     /// Valid values: BytesPerHour|FreeTier|None
-    strategy: ?[]const u8,
+    strategy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bytes_per_hour = "BytesPerHour",

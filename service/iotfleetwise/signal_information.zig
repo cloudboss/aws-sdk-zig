@@ -13,17 +13,17 @@ pub const SignalInformation = struct {
     /// Access to certain Amazon Web Services IoT FleetWise features is currently
     /// gated. For more information, see [Amazon Web Services Region and feature
     /// availability](https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html) in the *Amazon Web Services IoT FleetWise Developer Guide*.
-    data_partition_id: ?[]const u8,
+    data_partition_id: ?[]const u8 = null,
 
     /// The maximum number of samples to collect.
-    max_sample_count: ?i64,
+    max_sample_count: ?i64 = null,
 
     /// The minimum duration of time (in milliseconds) between two triggering events
     /// to
     /// collect data.
     ///
     /// If a signal changes often, you might want to collect data at a slower rate.
-    minimum_sampling_interval_ms: ?i64,
+    minimum_sampling_interval_ms: ?i64 = null,
 
     /// The name of the signal.
     name: []const u8,

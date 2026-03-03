@@ -7,5 +7,5 @@ pub const SnapshotSortingEntity = struct {
     attribute: SnapshotAttributeToSortBy,
 
     /// The order for listing the attributes.
-    sort_order: ?SortByOrder,
+    sort_order: ?SortByOrder = null,
 };

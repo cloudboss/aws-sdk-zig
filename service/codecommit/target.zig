@@ -3,7 +3,7 @@ pub const Target = struct {
     /// The branch of the repository where the pull request changes are merged. Also
     /// known as
     /// the destination branch.
-    destination_reference: ?[]const u8,
+    destination_reference: ?[]const u8 = null,
 
     /// The name of the repository that contains the pull request.
     repository_name: []const u8,

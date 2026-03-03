@@ -6,7 +6,7 @@ pub const ProximityResourceTypeEventConfiguration = struct {
     /// Proximity resource type event configuration object for enabling and
     /// disabling wireless
     /// device topic.
-    sidewalk: ?SidewalkResourceTypeEventConfiguration,
+    sidewalk: ?SidewalkResourceTypeEventConfiguration = null,
 
     pub const json_field_names = .{
         .sidewalk = "Sidewalk",

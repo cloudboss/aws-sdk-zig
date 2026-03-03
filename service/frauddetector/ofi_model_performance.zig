@@ -5,11 +5,11 @@ pub const OFIModelPerformance = struct {
     /// The area under the curve (auc). This summarizes the total positive rate
     /// (tpr) and false positive rate (FPR) across all possible model score
     /// thresholds.
-    auc: ?f32,
+    auc: ?f32 = null,
 
     /// Indicates the range of area under curve (auc) expected from the OFI model. A
     /// range greater than 0.1 indicates higher model uncertainity.
-    uncertainty_range: ?UncertaintyRange,
+    uncertainty_range: ?UncertaintyRange = null,
 
     pub const json_field_names = .{
         .auc = "auc",

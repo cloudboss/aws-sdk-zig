@@ -7,28 +7,28 @@ pub const TargetInstance = struct {
     /// The currency code that Amazon Web Services used to calculate the costs for
     /// this
     /// instance.
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// Determines whether this recommendation is the defaulted Amazon Web Services
     /// recommendation.
     default_target_instance: bool = false,
 
     /// The expected cost to operate this instance type on a monthly basis.
-    estimated_monthly_cost: ?[]const u8,
+    estimated_monthly_cost: ?[]const u8 = null,
 
     /// The estimated savings that result from modification, on a monthly basis.
-    estimated_monthly_savings: ?[]const u8,
+    estimated_monthly_savings: ?[]const u8 = null,
 
     /// The expected utilization metrics for target instance type.
-    expected_resource_utilization: ?ResourceUtilization,
+    expected_resource_utilization: ?ResourceUtilization = null,
 
     /// Explains the actions that you might need to take to successfully migrate
     /// your
     /// workloads from the current instance type to the recommended instance type.
-    platform_differences: ?[]const PlatformDifference,
+    platform_differences: ?[]const PlatformDifference = null,
 
     /// Details on the target instance type.
-    resource_details: ?ResourceDetails,
+    resource_details: ?ResourceDetails = null,
 
     pub const json_field_names = .{
         .currency_code = "CurrencyCode",

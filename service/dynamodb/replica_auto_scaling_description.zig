@@ -5,14 +5,14 @@ const ReplicaStatus = @import("replica_status.zig").ReplicaStatus;
 /// Represents the auto scaling settings of the replica.
 pub const ReplicaAutoScalingDescription = struct {
     /// Replica-specific global secondary index auto scaling settings.
-    global_secondary_indexes: ?[]const ReplicaGlobalSecondaryIndexAutoScalingDescription,
+    global_secondary_indexes: ?[]const ReplicaGlobalSecondaryIndexAutoScalingDescription = null,
 
     /// The Region where the replica exists.
-    region_name: ?[]const u8,
+    region_name: ?[]const u8 = null,
 
-    replica_provisioned_read_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription,
+    replica_provisioned_read_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription = null,
 
-    replica_provisioned_write_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription,
+    replica_provisioned_write_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription = null,
 
     /// The current state of the replica:
     ///
@@ -23,7 +23,7 @@ pub const ReplicaAutoScalingDescription = struct {
     /// * `DELETING` - The replica is being deleted.
     ///
     /// * `ACTIVE` - The replica is ready for use.
-    replica_status: ?ReplicaStatus,
+    replica_status: ?ReplicaStatus = null,
 
     pub const json_field_names = .{
         .global_secondary_indexes = "GlobalSecondaryIndexes",

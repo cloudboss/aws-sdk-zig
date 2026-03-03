@@ -5,18 +5,18 @@ const ReplicationStatus = @import("replication_status.zig").ReplicationStatus;
 /// current replication state, last successful update, and any error messages.
 pub const ReplicationDestinationStatusModel = struct {
     /// The Amazon Resource Name (ARN) of the destination table.
-    destination_table_arn: ?[]const u8,
+    destination_table_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the destination table bucket.
     destination_table_bucket_arn: []const u8,
 
     /// If replication has failed, this field contains an error message describing
     /// the failure reason.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// Information about the most recent successful replication update to this
     /// destination.
-    last_successful_replicated_update: ?LastSuccessfulReplicatedUpdate,
+    last_successful_replicated_update: ?LastSuccessfulReplicatedUpdate = null,
 
     /// The current status of replication to this destination.
     replication_status: ReplicationStatus,

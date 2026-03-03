@@ -8,16 +8,16 @@ const S3Location = @import("s3_location.zig").S3Location;
 /// Amazon S3.
 pub const Input = struct {
     /// Connection information for dataset input files stored in a database.
-    database_input_definition: ?DatabaseInputDefinition,
+    database_input_definition: ?DatabaseInputDefinition = null,
 
     /// The Glue Data Catalog parameters for the data.
-    data_catalog_input_definition: ?DataCatalogInputDefinition,
+    data_catalog_input_definition: ?DataCatalogInputDefinition = null,
 
     /// Contains additional resource information needed for specific datasets.
-    metadata: ?Metadata,
+    metadata: ?Metadata = null,
 
     /// The Amazon S3 location where the data is stored.
-    s3_input_definition: ?S3Location,
+    s3_input_definition: ?S3Location = null,
 
     pub const json_field_names = .{
         .database_input_definition = "DatabaseInputDefinition",

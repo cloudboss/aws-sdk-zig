@@ -5,13 +5,13 @@ const EmailHeader = @import("email_header.zig").EmailHeader;
 /// subtype.
 pub const EmailMessageTemplateContent = struct {
     /// The body to use in email messages.
-    body: ?EmailMessageTemplateContentBody,
+    body: ?EmailMessageTemplateContentBody = null,
 
     /// The email headers to include in email messages.
-    headers: ?[]const EmailHeader,
+    headers: ?[]const EmailHeader = null,
 
     /// The subject line, or title, to use in email messages.
-    subject: ?[]const u8,
+    subject: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .body = "body",

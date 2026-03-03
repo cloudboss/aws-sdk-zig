@@ -15,7 +15,7 @@ pub const StreamingConfigurations = struct {
     /// **Example response in chunks: Interval set to 20 or more characters**
     ///
     /// `Hello, I am an Agent`
-    apply_guardrail_interval: ?i32,
+    apply_guardrail_interval: ?i32 = null,
 
     /// Specifies whether to enable streaming for the final response. This is set to
     /// `false` by default.

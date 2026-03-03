@@ -12,23 +12,23 @@ pub const RecommendationSummary = struct {
     arn: []const u8,
 
     /// The AWS Services that the Recommendation applies to
-    aws_services: ?[]const []const u8,
+    aws_services: ?[]const []const u8 = null,
 
     /// The AWS Trusted Advisor Check ARN that relates to the Recommendation
-    check_arn: ?[]const u8,
+    check_arn: ?[]const u8 = null,
 
     /// When the Recommendation was created, if created by AWS Trusted Advisor
     /// Priority
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The ID which identifies where the Recommendation was produced
     id: []const u8,
 
     /// When the Recommendation was last updated
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The lifecycle stage from AWS Trusted Advisor Priority
-    lifecycle_stage: ?RecommendationLifecycleStage,
+    lifecycle_stage: ?RecommendationLifecycleStage = null,
 
     /// The name of the AWS Trusted Advisor Recommendation
     name: []const u8,
@@ -37,7 +37,7 @@ pub const RecommendationSummary = struct {
     pillars: []const RecommendationPillar,
 
     /// The pillar aggregations for cost savings
-    pillar_specific_aggregates: ?RecommendationPillarSpecificAggregates,
+    pillar_specific_aggregates: ?RecommendationPillarSpecificAggregates = null,
 
     /// An aggregation of all resources
     resources_aggregates: RecommendationResourcesAggregates,

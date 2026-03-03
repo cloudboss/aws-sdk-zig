@@ -4,12 +4,12 @@ pub const S3DataSourceConfiguration = struct {
     bucket_arn: []const u8,
 
     /// The account ID for the owner of the S3 bucket.
-    bucket_owner_account_id: ?[]const u8,
+    bucket_owner_account_id: ?[]const u8 = null,
 
     /// A list of S3 prefixes to include certain files or content. For more
     /// information, see [Organizing objects using
     /// prefixes](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html).
-    inclusion_prefixes: ?[]const []const u8,
+    inclusion_prefixes: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .bucket_arn = "bucketArn",

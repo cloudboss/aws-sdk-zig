@@ -8,43 +8,43 @@ const TaskRunStatus = @import("task_run_status.zig").TaskRunStatus;
 /// The details of a step search.
 pub const StepSearchSummary = struct {
     /// The date and time the resource was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The user or system that created this resource.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The date and time the resource ended running.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The job ID.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The life cycle status.
-    lifecycle_status: ?StepLifecycleStatus,
+    lifecycle_status: ?StepLifecycleStatus = null,
 
     /// The life cycle status message.
-    lifecycle_status_message: ?[]const u8,
+    lifecycle_status_message: ?[]const u8 = null,
 
     /// The step name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The parameters and combination expressions for the search.
-    parameter_space: ?ParameterSpace,
+    parameter_space: ?ParameterSpace = null,
 
     /// The queue ID.
-    queue_id: ?[]const u8,
+    queue_id: ?[]const u8 = null,
 
     /// The date and time the resource started running.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The step ID.
-    step_id: ?[]const u8,
+    step_id: ?[]const u8 = null,
 
     /// The task status to update the job's tasks to.
-    target_task_run_status: ?StepTargetTaskRunStatus,
+    target_task_run_status: ?StepTargetTaskRunStatus = null,
 
     /// The total number of times tasks from the step failed and were retried.
-    task_failure_retry_count: ?i32,
+    task_failure_retry_count: ?i32 = null,
 
     /// The task run status for the job.
     ///
@@ -58,16 +58,16 @@ pub const StepSearchSummary = struct {
     /// * `CANCELED`–the task has been canceled.
     /// * `FAILED`–the task has failed.
     /// * `SUCCEEDED`–the task has succeeded.
-    task_run_status: ?TaskRunStatus,
+    task_run_status: ?TaskRunStatus = null,
 
     /// The number of tasks running on the job.
-    task_run_status_counts: ?[]const aws.map.MapEntry(i32),
+    task_run_status_counts: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The date and time the resource was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user or system that updated this resource.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

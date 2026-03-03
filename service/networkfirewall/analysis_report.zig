@@ -11,17 +11,17 @@ const EnabledAnalysisType = @import("enabled_analysis_type.zig").EnabledAnalysis
 /// until 30 days pass.
 pub const AnalysisReport = struct {
     /// The unique ID of the query that ran when you requested an analysis report.
-    analysis_report_id: ?[]const u8,
+    analysis_report_id: ?[]const u8 = null,
 
     /// The type of traffic that will be used to generate a report.
-    analysis_type: ?EnabledAnalysisType,
+    analysis_type: ?EnabledAnalysisType = null,
 
     /// The date and time the analysis report was ran.
-    report_time: ?i64,
+    report_time: ?i64 = null,
 
     /// The status of the analysis report you specify. Statuses include `RUNNING`,
     /// `COMPLETED`, or `FAILED`.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .analysis_report_id = "AnalysisReportId",

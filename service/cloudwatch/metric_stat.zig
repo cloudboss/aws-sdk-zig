@@ -51,7 +51,7 @@ pub const MetricStat = struct {
     /// that does not match the data collected, the results of the operation are
     /// null.
     /// CloudWatch does not perform unit conversions.
-    unit: ?StandardUnit,
+    unit: ?StandardUnit = null,
 
     pub const json_field_names = .{
         .metric = "Metric",

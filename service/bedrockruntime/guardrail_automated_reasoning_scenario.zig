@@ -4,7 +4,7 @@ const GuardrailAutomatedReasoningStatement = @import("guardrail_automated_reason
 /// false, containing specific logical assignments.
 pub const GuardrailAutomatedReasoningScenario = struct {
     /// List of logical assignments and statements that define this scenario.
-    statements: ?[]const GuardrailAutomatedReasoningStatement,
+    statements: ?[]const GuardrailAutomatedReasoningStatement = null,
 
     pub const json_field_names = .{
         .statements = "statements",

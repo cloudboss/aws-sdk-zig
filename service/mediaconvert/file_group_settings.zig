@@ -9,11 +9,11 @@ pub const FileGroupSettings = struct {
     /// filename in the URI, the service will use the filename of the input file. If
     /// your job has multiple inputs, the service uses the filename of the first
     /// input file.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// Settings associated with the destination. Will vary based on the type of
     /// destination
-    destination_settings: ?DestinationSettings,
+    destination_settings: ?DestinationSettings = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

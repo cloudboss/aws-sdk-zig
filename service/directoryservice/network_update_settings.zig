@@ -5,10 +5,10 @@ pub const NetworkUpdateSettings = struct {
     /// IPv6 addresses of DNS servers or domain controllers in the self-managed
     /// directory.
     /// Required only when updating an AD Connector directory.
-    customer_dns_ips_v6: ?[]const []const u8,
+    customer_dns_ips_v6: ?[]const []const u8 = null,
 
     /// The target network type for the directory update.
-    network_type: ?NetworkType,
+    network_type: ?NetworkType = null,
 
     pub const json_field_names = .{
         .customer_dns_ips_v6 = "CustomerDnsIpsV6",

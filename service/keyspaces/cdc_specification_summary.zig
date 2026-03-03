@@ -21,7 +21,7 @@ pub const CdcSpecificationSummary = struct {
     /// * `OLD_IMAGE` - the version of the row before the change.
     /// * `KEYS_ONLY` - the partition and clustering keys of the row that was
     ///   changed.
-    view_type: ?ViewType,
+    view_type: ?ViewType = null,
 
     pub const json_field_names = .{
         .status = "status",

@@ -10,40 +10,40 @@ const EventDataStoreStatus = @import("event_data_store_status.zig").EventDataSto
 pub const EventDataStore = struct {
     /// The advanced event selectors that were used to select
     /// events for the data store.
-    advanced_event_selectors: ?[]const AdvancedEventSelector,
+    advanced_event_selectors: ?[]const AdvancedEventSelector = null,
 
     /// The timestamp of the event data store's creation.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The ARN of the event data store.
-    event_data_store_arn: ?[]const u8,
+    event_data_store_arn: ?[]const u8 = null,
 
     /// Indicates whether the event data store includes events
     /// from all Regions, or only from the Region in which it was created.
-    multi_region_enabled: ?bool,
+    multi_region_enabled: ?bool = null,
 
     /// The name of the event data store.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Indicates that an event data store is collecting logged
     /// events for an organization.
-    organization_enabled: ?bool,
+    organization_enabled: ?bool = null,
 
     /// The retention period, in days.
-    retention_period: ?i32,
+    retention_period: ?i32 = null,
 
     /// The status of an event data store.
-    status: ?EventDataStoreStatus,
+    status: ?EventDataStoreStatus = null,
 
     /// Indicates whether the event data store is protected from
     /// termination.
-    termination_protection_enabled: ?bool,
+    termination_protection_enabled: ?bool = null,
 
     /// The timestamp showing when an event data store was
     /// updated, if applicable. `UpdatedTimestamp` is always either the same or
     /// newer
     /// than the time shown in `CreatedTimestamp`.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .advanced_event_selectors = "AdvancedEventSelectors",

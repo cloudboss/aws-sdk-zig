@@ -4,10 +4,10 @@ const CanaryRun = @import("canary_run.zig").CanaryRun;
 /// canary.
 pub const CanaryLastRun = struct {
     /// The name of the canary.
-    canary_name: ?[]const u8,
+    canary_name: ?[]const u8 = null,
 
     /// The results from this canary's most recent run.
-    last_run: ?CanaryRun,
+    last_run: ?CanaryRun = null,
 
     pub const json_field_names = .{
         .canary_name = "CanaryName",

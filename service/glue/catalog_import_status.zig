@@ -4,10 +4,10 @@ pub const CatalogImportStatus = struct {
     import_completed: bool = false,
 
     /// The name of the person who initiated the migration.
-    imported_by: ?[]const u8,
+    imported_by: ?[]const u8 = null,
 
     /// The time that the migration was started.
-    import_time: ?i64,
+    import_time: ?i64 = null,
 
     pub const json_field_names = .{
         .import_completed = "ImportCompleted",

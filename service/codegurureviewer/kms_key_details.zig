@@ -15,11 +15,11 @@ pub const KMSKeyDetails = struct {
     /// Amazon Web Services Key
     /// Management Service (KMS) (`AWS_OWNED_CMK`) or customer managed
     /// (`CUSTOMER_MANAGED_CMK`).
-    encryption_option: ?EncryptionOption,
+    encryption_option: ?EncryptionOption = null,
 
     /// The ID of the Amazon Web Services KMS key that is associated with a
     /// repository association.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .encryption_option = "EncryptionOption",

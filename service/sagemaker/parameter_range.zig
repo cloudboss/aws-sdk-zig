@@ -7,15 +7,15 @@ const IntegerParameterRangeSpecification = @import("integer_parameter_range_spec
 pub const ParameterRange = struct {
     /// A `CategoricalParameterRangeSpecification` object that defines the possible
     /// values for a categorical hyperparameter.
-    categorical_parameter_range_specification: ?CategoricalParameterRangeSpecification,
+    categorical_parameter_range_specification: ?CategoricalParameterRangeSpecification = null,
 
     /// A `ContinuousParameterRangeSpecification` object that defines the possible
     /// values for a continuous hyperparameter.
-    continuous_parameter_range_specification: ?ContinuousParameterRangeSpecification,
+    continuous_parameter_range_specification: ?ContinuousParameterRangeSpecification = null,
 
     /// A `IntegerParameterRangeSpecification` object that defines the possible
     /// values for an integer hyperparameter.
-    integer_parameter_range_specification: ?IntegerParameterRangeSpecification,
+    integer_parameter_range_specification: ?IntegerParameterRangeSpecification = null,
 
     pub const json_field_names = .{
         .categorical_parameter_range_specification = "CategoricalParameterRangeSpecification",

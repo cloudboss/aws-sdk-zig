@@ -23,7 +23,7 @@ pub const MetricQuery = struct {
     ///
     /// The `db.sql.db_id` filter isn't available for RDS for SQL Server DB
     /// instances.
-    filter: ?[]const aws.map.StringMapEntry,
+    filter: ?[]const aws.map.StringMapEntry = null,
 
     /// A specification for how to aggregate the data points from a query result.
     /// You must
@@ -32,7 +32,7 @@ pub const MetricQuery = struct {
     /// unless you provide the names of specific dimensions within that group. You
     /// can also request
     /// that Performance Insights return a limited number of values for a dimension.
-    group_by: ?DimensionGroup,
+    group_by: ?DimensionGroup = null,
 
     /// The name of a Performance Insights metric to be measured.
     ///

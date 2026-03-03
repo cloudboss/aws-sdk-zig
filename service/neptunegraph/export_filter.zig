@@ -9,11 +9,11 @@ const ExportFilterElement = @import("export_filter_element.zig").ExportFilterEle
 pub const ExportFilter = struct {
     /// Used to specify filters on a per-label basis for edges. This allows you to
     /// control which edge labels and properties are included in the export.
-    edge_filter: ?[]const aws.map.MapEntry(ExportFilterElement),
+    edge_filter: ?[]const aws.map.MapEntry(ExportFilterElement) = null,
 
     /// Used to specify filters on a per-label basis for vertices. This allows you
     /// to control which vertex labels and properties are included in the export.
-    vertex_filter: ?[]const aws.map.MapEntry(ExportFilterElement),
+    vertex_filter: ?[]const aws.map.MapEntry(ExportFilterElement) = null,
 
     pub const json_field_names = .{
         .edge_filter = "edgeFilter",

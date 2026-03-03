@@ -8,7 +8,7 @@ pub const HttpEndpointRetryOptions = struct {
     /// HTTPS endpoint
     /// fails. It doesn't include the periods during which Firehose waits for
     /// acknowledgment from the specified destination after each attempt.
-    duration_in_seconds: ?i32,
+    duration_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .duration_in_seconds = "DurationInSeconds",

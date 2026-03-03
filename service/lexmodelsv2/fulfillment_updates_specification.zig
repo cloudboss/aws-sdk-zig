@@ -14,15 +14,15 @@ pub const FulfillmentUpdatesSpecification = struct {
 
     /// Provides configuration information for the message sent to users
     /// when the fulfillment Lambda functions starts running.
-    start_response: ?FulfillmentStartResponseSpecification,
+    start_response: ?FulfillmentStartResponseSpecification = null,
 
     /// The length of time that the fulfillment Lambda function should run
     /// before it times out.
-    timeout_in_seconds: ?i32,
+    timeout_in_seconds: ?i32 = null,
 
     /// Provides configuration information for messages sent periodically to
     /// the user while the fulfillment Lambda function is running.
-    update_response: ?FulfillmentUpdateResponseSpecification,
+    update_response: ?FulfillmentUpdateResponseSpecification = null,
 
     pub const json_field_names = .{
         .active = "active",

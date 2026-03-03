@@ -5,19 +5,19 @@ const ShiftType = @import("shift_type.zig").ShiftType;
 pub const RotationShift = struct {
     /// The Amazon Resource Names (ARNs) of the contacts who are part of the shift
     /// rotation.
-    contact_ids: ?[]const []const u8,
+    contact_ids: ?[]const []const u8 = null,
 
     /// The time a shift rotation ends.
     end_time: i64,
 
     /// Additional information about an on-call rotation shift.
-    shift_details: ?ShiftDetails,
+    shift_details: ?ShiftDetails = null,
 
     /// The time a shift rotation begins.
     start_time: i64,
 
     /// The type of shift rotation.
-    @"type": ?ShiftType,
+    @"type": ?ShiftType = null,
 
     pub const json_field_names = .{
         .contact_ids = "ContactIds",

@@ -2,7 +2,7 @@ const HtmlMotionGraphicsSettings = @import("html_motion_graphics_settings.zig").
 
 /// Motion Graphics Settings
 pub const MotionGraphicsSettings = struct {
-    html_motion_graphics_settings: ?HtmlMotionGraphicsSettings,
+    html_motion_graphics_settings: ?HtmlMotionGraphicsSettings = null,
 
     pub const json_field_names = .{
         .html_motion_graphics_settings = "HtmlMotionGraphicsSettings",

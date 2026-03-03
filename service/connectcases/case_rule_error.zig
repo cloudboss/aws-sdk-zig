@@ -11,7 +11,7 @@ pub const CaseRuleError = struct {
     id: []const u8,
 
     /// Error message from getting a case rule.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

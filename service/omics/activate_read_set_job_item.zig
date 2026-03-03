@@ -3,7 +3,7 @@ const ReadSetActivationJobStatus = @import("read_set_activation_job_status.zig")
 /// A read set activation job.
 pub const ActivateReadSetJobItem = struct {
     /// When the job completed.
-    completion_time: ?i64,
+    completion_time: ?i64 = null,
 
     /// When the job was created.
     creation_time: i64,

@@ -8,20 +8,20 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 pub const LambdaLayerAggregation = struct {
     /// The names of the Amazon Web Services Lambda functions associated with the
     /// layers.
-    function_names: ?[]const StringFilter,
+    function_names: ?[]const StringFilter = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services Lambda function
     /// layer.
-    layer_arns: ?[]const StringFilter,
+    layer_arns: ?[]const StringFilter = null,
 
     /// The resource IDs for the Amazon Web Services Lambda function layers.
-    resource_ids: ?[]const StringFilter,
+    resource_ids: ?[]const StringFilter = null,
 
     /// The finding severity to use for sorting the results.
-    sort_by: ?LambdaLayerSortBy,
+    sort_by: ?LambdaLayerSortBy = null,
 
     /// The order to use for sorting the results.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .function_names = "functionNames",

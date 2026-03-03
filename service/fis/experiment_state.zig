@@ -4,13 +4,13 @@ const ExperimentStatus = @import("experiment_status.zig").ExperimentStatus;
 /// Describes the state of an experiment.
 pub const ExperimentState = struct {
     /// The error information of the experiment when the action has `failed`.
-    @"error": ?ExperimentError,
+    @"error": ?ExperimentError = null,
 
     /// The reason for the state.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The state of the experiment.
-    status: ?ExperimentStatus,
+    status: ?ExperimentStatus = null,
 
     pub const json_field_names = .{
         .@"error" = "error",

@@ -2,23 +2,23 @@
 pub const GroupIdentifier = struct {
     /// The critical rank of the application group on a scale of 1 to 10, with a
     /// rank of 1 being the most critical, and a rank of 10 being least critical.
-    criticality: ?i32,
+    criticality: ?i32 = null,
 
     /// The description of the application group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the application group, which you can change at any time.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The Amazon resource name (ARN) of the resource group.
-    group_arn: ?[]const u8,
+    group_arn: ?[]const u8 = null,
 
     /// The name of the resource group.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// A name, email address or other identifier for the person or group
     /// who is considered as the owner of this group within your organization.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .criticality = "Criticality",

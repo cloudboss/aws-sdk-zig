@@ -18,7 +18,7 @@ const Asset = @import("asset.zig").Asset;
 /// the validation data.
 pub const ValidationData = struct {
     /// The assets that comprise the validation data.
-    assets: ?[]const Asset,
+    assets: ?[]const Asset = null,
 
     pub const json_field_names = .{
         .assets = "Assets",

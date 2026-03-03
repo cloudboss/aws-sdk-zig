@@ -16,15 +16,15 @@ pub const ContextEntry = struct {
     /// The full name of a condition context key, including the service prefix. For
     /// example,
     /// `aws:SourceIp` or `s3:VersionId`.
-    context_key_name: ?[]const u8,
+    context_key_name: ?[]const u8 = null,
 
     /// The data type of the value (or values) specified in the `ContextKeyValues`
     /// parameter.
-    context_key_type: ?ContextKeyTypeEnum,
+    context_key_type: ?ContextKeyTypeEnum = null,
 
     /// The value (or values, if the condition context key supports multiple values)
     /// to provide
     /// to the simulation when the key is referenced by a `Condition` element in an
     /// input policy.
-    context_key_values: ?[]const []const u8,
+    context_key_values: ?[]const []const u8 = null,
 };

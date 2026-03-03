@@ -11,7 +11,7 @@ pub const EndpointRequest = struct {
     container_port: i32,
 
     /// An object that describes the health check configuration of the container.
-    health_check: ?ContainerServiceHealthCheckConfig,
+    health_check: ?ContainerServiceHealthCheckConfig = null,
 
     pub const json_field_names = .{
         .container_name = "containerName",

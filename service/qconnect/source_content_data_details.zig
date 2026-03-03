@@ -7,7 +7,7 @@ const SourceContentType = @import("source_content_type.zig").SourceContentType;
 pub const SourceContentDataDetails = struct {
     /// Contains information about where the text with a citation begins and ends in
     /// the generated output.
-    citation_span: ?CitationSpan,
+    citation_span: ?CitationSpan = null,
 
     /// The identifier of the source content.
     id: []const u8,

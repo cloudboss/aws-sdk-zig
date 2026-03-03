@@ -6,11 +6,11 @@ const RouteServerAssociationState = @import("route_server_association_state.zig"
 /// server and a VPC.
 pub const RouteServerAssociation = struct {
     /// The ID of the associated route server.
-    route_server_id: ?[]const u8,
+    route_server_id: ?[]const u8 = null,
 
     /// The current state of the association.
-    state: ?RouteServerAssociationState,
+    state: ?RouteServerAssociationState = null,
 
     /// The ID of the associated VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

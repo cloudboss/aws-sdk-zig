@@ -7,10 +7,10 @@ pub const ListResourcesResponse = struct {
     /// of the
     /// output. You should repeat this until the `NextToken` response element comes
     /// back as `null`. This indicates that this is the last page of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// An array of objects that contain information about the resources.
-    resources: ?[]const Resource,
+    resources: ?[]const Resource = null,
 
     pub const json_field_names = .{
         .next_token = "nextToken",

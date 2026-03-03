@@ -8,7 +8,7 @@ pub const AutomatedReasoningLogicStatement = struct {
 
     /// The natural language representation of the logical statement, providing a
     /// human-readable interpretation of the formal logic.
-    natural_language: ?[]const u8,
+    natural_language: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .logic = "logic",

@@ -3,11 +3,11 @@
 /// of the version.
 pub const ClusterVersion = struct {
     /// The name of the cluster parameter group family for the cluster.
-    cluster_parameter_group_family: ?[]const u8,
+    cluster_parameter_group_family: ?[]const u8 = null,
 
     /// The version number used by the cluster.
-    cluster_version: ?[]const u8,
+    cluster_version: ?[]const u8 = null,
 
     /// The description of the cluster version.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 };

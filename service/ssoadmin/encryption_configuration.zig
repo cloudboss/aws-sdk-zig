@@ -8,7 +8,7 @@ pub const EncryptionConfiguration = struct {
 
     /// The ARN of the KMS key used to encrypt data. Required when KeyType is
     /// CUSTOMER_MANAGED_KEY. Cannot be specified when KeyType is AWS_OWNED_KMS_KEY.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key_type = "KeyType",

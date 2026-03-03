@@ -7,10 +7,10 @@ pub const EncryptionAtRest = struct {
 
     /// The role that Glue assumes to encrypt and decrypt the Data Catalog objects
     /// on the caller's behalf.
-    catalog_encryption_service_role: ?[]const u8,
+    catalog_encryption_service_role: ?[]const u8 = null,
 
     /// The ID of the KMS key to use for encryption at rest.
-    sse_aws_kms_key_id: ?[]const u8,
+    sse_aws_kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .catalog_encryption_mode = "CatalogEncryptionMode",

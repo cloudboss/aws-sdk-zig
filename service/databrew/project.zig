@@ -5,49 +5,49 @@ const Sample = @import("sample.zig").Sample;
 /// Represents all of the attributes of a DataBrew project.
 pub const Project = struct {
     /// The ID of the Amazon Web Services account that owns the project.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The date and time that the project was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the user who crated the project.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The dataset that the project is to act upon.
-    dataset_name: ?[]const u8,
+    dataset_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the user who last modified the project.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The last modification date and time for the project.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The unique name of a project.
     name: []const u8,
 
     /// The date and time when the project was opened.
-    open_date: ?i64,
+    open_date: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the user that opened the project for use.
-    opened_by: ?[]const u8,
+    opened_by: ?[]const u8 = null,
 
     /// The name of a recipe that will be developed during a project session.
     recipe_name: []const u8,
 
     /// The Amazon Resource Name (ARN) for the project.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the role that will be assumed for this
     /// project.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The sample size and sampling type to apply to the data. If this parameter
     /// isn't
     /// specified, then the sample consists of the first 500 rows from the dataset.
-    sample: ?Sample,
+    sample: ?Sample = null,
 
     /// Metadata tags that have been applied to the project.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

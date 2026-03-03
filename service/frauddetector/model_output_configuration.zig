@@ -6,14 +6,14 @@ const ModelOutputDataFormat = @import("model_output_data_format.zig").ModelOutpu
 pub const ModelOutputConfiguration = struct {
     /// A map of CSV index values in the SageMaker response to the Amazon Fraud
     /// Detector variables.
-    csv_index_to_variable_map: ?[]const aws.map.StringMapEntry,
+    csv_index_to_variable_map: ?[]const aws.map.StringMapEntry = null,
 
     /// The format of the model output configuration.
     format: ModelOutputDataFormat,
 
     /// A map of JSON keys in response from SageMaker to the Amazon Fraud Detector
     /// variables.
-    json_key_to_variable_map: ?[]const aws.map.StringMapEntry,
+    json_key_to_variable_map: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .csv_index_to_variable_map = "csvIndexToVariableMap",

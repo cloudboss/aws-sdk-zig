@@ -2,7 +2,7 @@
 /// columns.
 pub const ColumnGroupColumnSchema = struct {
     /// The name of the column group's column schema.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

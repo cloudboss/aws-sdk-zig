@@ -5,7 +5,7 @@ const AutoScalingSettingsDescription = @import("auto_scaling_settings_descriptio
 /// index.
 pub const ReplicaGlobalSecondaryIndexAutoScalingDescription = struct {
     /// The name of the global secondary index.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
     /// The current state of the replica global secondary index:
     ///
@@ -18,11 +18,11 @@ pub const ReplicaGlobalSecondaryIndexAutoScalingDescription = struct {
     /// * `DELETING` - The index is being deleted.
     ///
     /// * `ACTIVE` - The index is ready for use.
-    index_status: ?IndexStatus,
+    index_status: ?IndexStatus = null,
 
-    provisioned_read_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription,
+    provisioned_read_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription = null,
 
-    provisioned_write_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription,
+    provisioned_write_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription = null,
 
     pub const json_field_names = .{
         .index_name = "IndexName",

@@ -6,11 +6,11 @@ pub const RtmpOutputSettings = struct {
     /// If set to verifyAuthenticity, verify the tls certificate chain to a trusted
     /// Certificate Authority (CA). This will cause rtmps outputs with self-signed
     /// certificates to fail.
-    certificate_mode: ?RtmpOutputCertificateMode,
+    certificate_mode: ?RtmpOutputCertificateMode = null,
 
     /// Number of seconds to wait before retrying a connection to the Flash Media
     /// server if the connection is lost.
-    connection_retry_interval: ?i32,
+    connection_retry_interval: ?i32 = null,
 
     /// The RTMP endpoint excluding the stream name (eg. rtmp://host/appname). For
     /// connection to Akamai, a username and password must be supplied. URI fields
@@ -18,7 +18,7 @@ pub const RtmpOutputSettings = struct {
     destination: OutputLocationRef,
 
     /// Number of retry attempts.
-    num_retries: ?i32,
+    num_retries: ?i32 = null,
 
     pub const json_field_names = .{
         .certificate_mode = "CertificateMode",

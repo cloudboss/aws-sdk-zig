@@ -8,13 +8,13 @@ pub const NeptuneImportOptions = struct {
     /// default labels, and has no other properties or edges, then the vertex will
     /// effectively not get imported into Neptune Analytics when
     /// preserveDefaultVertexLabels is set to false.
-    preserve_default_vertex_labels: ?bool,
+    preserve_default_vertex_labels: ?bool = null,
 
     /// Neptune Analytics currently does not support user defined edge ids. The edge
     /// ids are not imported by default. They are imported if *preserveEdgeIds* is
     /// set to true, and ids are stored as properties on the relationships with the
     /// property name *neptuneEdgeId*.
-    preserve_edge_ids: ?bool,
+    preserve_edge_ids: ?bool = null,
 
     /// The KMS key to use to encrypt data in the S3 bucket where the graph data is
     /// exported

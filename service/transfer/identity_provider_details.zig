@@ -6,15 +6,15 @@ const SftpAuthenticationMethods = @import("sftp_authentication_methods.zig").Sft
 pub const IdentityProviderDetails = struct {
     /// The identifier of the Directory Service directory that you want to use as
     /// your identity provider.
-    directory_id: ?[]const u8,
+    directory_id: ?[]const u8 = null,
 
     /// The ARN for a Lambda function to use for the Identity provider.
-    function: ?[]const u8,
+    function: ?[]const u8 = null,
 
     /// This parameter is only applicable if your `IdentityProviderType` is
     /// `API_GATEWAY`. Provides the type of `InvocationRole` used to authenticate
     /// the user account.
-    invocation_role: ?[]const u8,
+    invocation_role: ?[]const u8 = null,
 
     /// For SFTP-enabled servers, and for custom identity providers *only*, you can
     /// specify whether to authenticate using a password, SSH key pair, or both.
@@ -28,10 +28,10 @@ pub const IdentityProviderDetails = struct {
     ///   the key is valid, the system prompts for a password. If the private key
     ///   provided does not match the public key that is stored, authentication
     ///   fails.
-    sftp_authentication_methods: ?SftpAuthenticationMethods,
+    sftp_authentication_methods: ?SftpAuthenticationMethods = null,
 
     /// Provides the location of the service endpoint used to authenticate users.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",

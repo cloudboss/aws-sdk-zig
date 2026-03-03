@@ -28,10 +28,10 @@ pub const DockerServer = struct {
     /// Security groups configured for Docker servers should allow ingress network
     /// traffic from the VPC configured in the project. They should allow ingress on
     /// port 9876.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// A DockerServerStatus object to use for this docker server.
-    status: ?DockerServerStatus,
+    status: ?DockerServerStatus = null,
 
     pub const json_field_names = .{
         .compute_type = "computeType",

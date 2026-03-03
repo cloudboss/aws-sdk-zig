@@ -66,11 +66,11 @@
 /// RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) in the *Amazon RDS User Guide* and [Quotas for Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html) in the *Amazon Aurora User Guide*.
 pub const AccountQuota = struct {
     /// The name of the Amazon RDS quota for this Amazon Web Services account.
-    account_quota_name: ?[]const u8,
+    account_quota_name: ?[]const u8 = null,
 
     /// The maximum allowed value for the quota.
-    max: ?i64,
+    max: ?i64 = null,
 
     /// The amount currently used toward the quota maximum.
-    used: ?i64,
+    used: ?i64 = null,
 };

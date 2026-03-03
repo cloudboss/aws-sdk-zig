@@ -10,7 +10,7 @@ pub const JobRunAttemptSummary = struct {
     arn: []const u8,
 
     /// The attempt number of the job run execution.
-    attempt: ?i32,
+    attempt: ?i32 = null,
 
     /// The date and time when the job run attempt was created.
     created_at: i64,
@@ -28,10 +28,10 @@ pub const JobRunAttemptSummary = struct {
     job_created_at: i64,
 
     /// The mode of the job run attempt.
-    mode: ?JobRunMode,
+    mode: ?JobRunMode = null,
 
     /// The name of the job run attempt.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon EMR release label of the job run attempt.
     release_label: []const u8,
@@ -43,7 +43,7 @@ pub const JobRunAttemptSummary = struct {
     state_details: []const u8,
 
     /// The type of the job run, such as Spark or Hive.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The date and time of when the job run attempt was last updated.
     updated_at: i64,

@@ -7,29 +7,29 @@ const AwsS3AccessPointVpcConfigurationDetails = @import("aws_s3_access_point_vpc
 /// S3 object operations.
 pub const AwsS3AccessPointDetails = struct {
     /// The Amazon Resource Name (ARN) of the access point.
-    access_point_arn: ?[]const u8,
+    access_point_arn: ?[]const u8 = null,
 
     /// The name or alias of the access point.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The name of the S3 bucket associated with the specified access point.
-    bucket: ?[]const u8,
+    bucket: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID associated with the S3 bucket associated
     /// with this access point.
-    bucket_account_id: ?[]const u8,
+    bucket_account_id: ?[]const u8 = null,
 
     /// The name of the specified access point.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Indicates whether this access point allows access from the public internet.
-    network_origin: ?[]const u8,
+    network_origin: ?[]const u8 = null,
 
-    public_access_block_configuration: ?AwsS3AccountPublicAccessBlockDetails,
+    public_access_block_configuration: ?AwsS3AccountPublicAccessBlockDetails = null,
 
     /// Contains the virtual private cloud (VPC) configuration for the specified
     /// access point.
-    vpc_configuration: ?AwsS3AccessPointVpcConfigurationDetails,
+    vpc_configuration: ?AwsS3AccessPointVpcConfigurationDetails = null,
 
     pub const json_field_names = .{
         .access_point_arn = "AccessPointArn",

@@ -10,7 +10,7 @@ pub const IngestConfigurationSummary = struct {
     ingest_protocol: IngestProtocol,
 
     /// Ingest name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// ID of the participant within the stage.
     participant_id: []const u8,
@@ -30,7 +30,7 @@ pub const IngestConfigurationSummary = struct {
     /// any UTF-8 encoded text. *This field is exposed to all stage participants and
     /// should not be used for personally identifying, confidential, or sensitive
     /// information.*
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

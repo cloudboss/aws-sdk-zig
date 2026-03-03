@@ -4,12 +4,12 @@ const TransitionEvent = @import("transition_event.zig").TransitionEvent;
 /// Specifies the actions performed when the `condition` evaluates to TRUE.
 pub const OnInputLifecycle = struct {
     /// Specifies the actions performed when the `condition` evaluates to TRUE.
-    events: ?[]const Event,
+    events: ?[]const Event = null,
 
     /// Specifies the actions performed, and the next state entered, when a
     /// `condition`
     /// evaluates to TRUE.
-    transition_events: ?[]const TransitionEvent,
+    transition_events: ?[]const TransitionEvent = null,
 
     pub const json_field_names = .{
         .events = "events",

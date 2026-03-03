@@ -2,7 +2,7 @@
 /// multicast source.
 pub const MulticastSource = struct {
     /// This represents the ip address of the device sending the multicast stream.
-    source_ip: ?[]const u8,
+    source_ip: ?[]const u8 = null,
 
     /// This represents the customer's source URL where multicast stream is pulled
     /// from.

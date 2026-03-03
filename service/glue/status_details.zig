@@ -8,7 +8,7 @@ pub const StatusDetails = struct {
 
     /// A list of `ViewValidation` objects that contain information for an
     /// analytical engine to validate a view.
-    view_validations: ?[]const ViewValidation,
+    view_validations: ?[]const ViewValidation = null,
 
     pub const json_field_names = .{
         .requested_change = "RequestedChange",

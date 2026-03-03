@@ -6,20 +6,20 @@ const ScanJobState = @import("scan_job_state.zig").ScanJobState;
 /// state, and any findings discovered.
 pub const ScanResult = struct {
     /// An array of findings discovered during the scan.
-    findings: ?[]const ScanFinding,
+    findings: ?[]const ScanFinding = null,
 
     /// The timestamp of when the last scan was performed, in Unix format and
     /// Coordinated Universal Time (UTC).
-    last_scan_timestamp: ?i64,
+    last_scan_timestamp: ?i64 = null,
 
     /// The malware scanner used to perform the scan. Currently only `GUARDDUTY` is
     /// supported.
-    malware_scanner: ?MalwareScanner,
+    malware_scanner: ?MalwareScanner = null,
 
     /// The final state of the scan job.
     ///
     /// Valid values: `COMPLETED` | `FAILED` | `CANCELED`.
-    scan_job_state: ?ScanJobState,
+    scan_job_state: ?ScanJobState = null,
 
     pub const json_field_names = .{
         .findings = "Findings",

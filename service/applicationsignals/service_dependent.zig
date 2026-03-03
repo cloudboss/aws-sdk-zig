@@ -24,7 +24,7 @@ pub const ServiceDependent = struct {
 
     /// If the dependent invoker was a service that invoked it from an operation,
     /// the name of that dependent operation is displayed here.
-    dependent_operation_name: ?[]const u8,
+    dependent_operation_name: ?[]const u8 = null,
 
     /// An array of structures that each contain information about one metric
     /// associated with this service dependent that was discovered by Application
@@ -33,7 +33,7 @@ pub const ServiceDependent = struct {
 
     /// If the invoked entity is an operation on an entity, the name of that
     /// dependent operation is displayed here.
-    operation_name: ?[]const u8,
+    operation_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dependent_key_attributes = "DependentKeyAttributes",

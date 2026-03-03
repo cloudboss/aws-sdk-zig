@@ -4,14 +4,14 @@ const SidewalkPositioning = @import("sidewalk_positioning.zig").SidewalkPosition
 /// onboarded.
 pub const SidewalkGetStartImportInfo = struct {
     /// List of Sidewalk devices that are added to the import task.
-    device_creation_file_list: ?[]const []const u8,
+    device_creation_file_list: ?[]const []const u8 = null,
 
     /// The Positioning object of the Sidewalk device.
-    positioning: ?SidewalkPositioning,
+    positioning: ?SidewalkPositioning = null,
 
     /// The IAM role that allows AWS IoT Wireless to access the CSV file in the S3
     /// bucket.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .device_creation_file_list = "DeviceCreationFileList",

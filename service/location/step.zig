@@ -19,7 +19,7 @@ pub const Step = struct {
     ///
     /// Included in the response for queries that set `IncludeLegGeometry` to
     /// `True`.
-    geometry_offset: ?i32,
+    geometry_offset: ?i32 = null,
 
     /// The starting position of a step. If the position is the first step in the
     /// leg, this position is the same as the start position of the leg.

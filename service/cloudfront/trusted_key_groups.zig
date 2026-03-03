@@ -7,7 +7,7 @@ pub const TrustedKeyGroups = struct {
     enabled: bool,
 
     /// A list of key groups identifiers.
-    items: ?[]const []const u8,
+    items: ?[]const []const u8 = null,
 
     /// The number of key groups in the list.
     quantity: i32,

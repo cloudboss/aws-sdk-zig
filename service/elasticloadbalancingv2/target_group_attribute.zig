@@ -183,8 +183,8 @@ pub const TargetGroupAttribute = struct {
     /// (`target_failover.on_deregistration` and
     /// `target_failover.on_unhealthy`) can't be set independently. The value you
     /// set for both attributes must be the same.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value of the attribute.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

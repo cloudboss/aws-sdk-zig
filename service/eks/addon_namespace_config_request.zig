@@ -3,7 +3,7 @@
 pub const AddonNamespaceConfigRequest = struct {
     /// The name of the Kubernetes namespace to install the addon in. Must be a
     /// valid RFC 1123 DNS label.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .namespace = "namespace",

@@ -1,13 +1,13 @@
 /// The timeline of the instance group lifecycle.
 pub const InstanceGroupTimeline = struct {
     /// The creation date and time of the instance group.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The date and time when the instance group terminated.
-    end_date_time: ?i64,
+    end_date_time: ?i64 = null,
 
     /// The date and time when the instance group became ready to perform tasks.
-    ready_date_time: ?i64,
+    ready_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "CreationDateTime",

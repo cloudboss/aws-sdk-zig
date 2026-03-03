@@ -25,101 +25,101 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 /// Contains information about a training job.
 pub const TrainingJob = struct {
     /// Information about the algorithm used for training, and algorithm metadata.
-    algorithm_specification: ?AlgorithmSpecification,
+    algorithm_specification: ?AlgorithmSpecification = null,
 
     /// The Amazon Resource Name (ARN) of the job.
-    auto_ml_job_arn: ?[]const u8,
+    auto_ml_job_arn: ?[]const u8 = null,
 
     /// The billable time in seconds.
-    billable_time_in_seconds: ?i32,
+    billable_time_in_seconds: ?i32 = null,
 
-    checkpoint_config: ?CheckpointConfig,
+    checkpoint_config: ?CheckpointConfig = null,
 
     /// A timestamp that indicates when the training job was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
-    debug_hook_config: ?DebugHookConfig,
+    debug_hook_config: ?DebugHookConfig = null,
 
     /// Information about the debug rule configuration.
-    debug_rule_configurations: ?[]const DebugRuleConfiguration,
+    debug_rule_configurations: ?[]const DebugRuleConfiguration = null,
 
     /// Information about the evaluation status of the rules for the training job.
-    debug_rule_evaluation_statuses: ?[]const DebugRuleEvaluationStatus,
+    debug_rule_evaluation_statuses: ?[]const DebugRuleEvaluationStatus = null,
 
     /// To encrypt all communications between ML compute instances in distributed
     /// training, choose `True`. Encryption provides greater security for
     /// distributed training, but training might take longer. How long it takes
     /// depends on the amount of communication between compute instances, especially
     /// if you use a deep learning algorithm in distributed training.
-    enable_inter_container_traffic_encryption: ?bool,
+    enable_inter_container_traffic_encryption: ?bool = null,
 
     /// When true, enables managed spot training using Amazon EC2 Spot instances to
     /// run training jobs instead of on-demand instances. For more information, see
     /// [Managed Spot
     /// Training](https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
-    enable_managed_spot_training: ?bool,
+    enable_managed_spot_training: ?bool = null,
 
     /// If the `TrainingJob` was created with network isolation, the value is set to
     /// `true`. If network isolation is enabled, nodes can't communicate beyond the
     /// VPC they run in.
-    enable_network_isolation: ?bool,
+    enable_network_isolation: ?bool = null,
 
     /// The environment variables to set in the Docker container.
-    environment: ?[]const aws.map.StringMapEntry,
+    environment: ?[]const aws.map.StringMapEntry = null,
 
-    experiment_config: ?ExperimentConfig,
+    experiment_config: ?ExperimentConfig = null,
 
     /// If the training job failed, the reason it failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// A list of final metric values that are set when the training job completes.
     /// Used only if the training job was configured to use metrics.
-    final_metric_data_list: ?[]const MetricData,
+    final_metric_data_list: ?[]const MetricData = null,
 
     /// Algorithm-specific parameters.
-    hyper_parameters: ?[]const aws.map.StringMapEntry,
+    hyper_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// An array of `Channel` objects that describes each data input channel.
     ///
     /// Your input must be in the same Amazon Web Services region as your training
     /// job.
-    input_data_config: ?[]const Channel,
+    input_data_config: ?[]const Channel = null,
 
     /// The Amazon Resource Name (ARN) of the labeling job.
-    labeling_job_arn: ?[]const u8,
+    labeling_job_arn: ?[]const u8 = null,
 
     /// A timestamp that indicates when the status of the training job was last
     /// modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// Information about the Amazon S3 location that is configured for storing
     /// model artifacts.
-    model_artifacts: ?ModelArtifacts,
+    model_artifacts: ?ModelArtifacts = null,
 
     /// The model package configuration.
-    model_package_config: ?ModelPackageConfig,
+    model_package_config: ?ModelPackageConfig = null,
 
     /// The S3 path where model artifacts that you configured when creating the job
     /// are stored. SageMaker creates subfolders for model artifacts.
-    output_data_config: ?OutputDataConfig,
+    output_data_config: ?OutputDataConfig = null,
 
     /// The output model package Amazon Resource Name (ARN) that contains model
     /// weights or checkpoint.
-    output_model_package_arn: ?[]const u8,
+    output_model_package_arn: ?[]const u8 = null,
 
-    profiler_config: ?ProfilerConfig,
+    profiler_config: ?ProfilerConfig = null,
 
     /// Resources, including ML compute instances and ML storage volumes, that are
     /// configured for model training.
-    resource_config: ?ResourceConfig,
+    resource_config: ?ResourceConfig = null,
 
     /// The number of times to retry the job when the job fails due to an
     /// `InternalServerError`.
-    retry_strategy: ?RetryStrategy,
+    retry_strategy: ?RetryStrategy = null,
 
     /// The Amazon Web Services Identity and Access Management (IAM) role configured
     /// for the training job.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Provides detailed information about the state of the training job. For
     /// detailed information about the secondary status of the training job, see
@@ -165,11 +165,11 @@ pub const TrainingJob = struct {
     /// * `LaunchingMLInstances`
     /// * `PreparingTrainingStack`
     /// * `DownloadingTrainingImage`
-    secondary_status: ?SecondaryStatus,
+    secondary_status: ?SecondaryStatus = null,
 
     /// A history of all of the secondary statuses that the training job has
     /// transitioned through.
-    secondary_status_transitions: ?[]const SecondaryStatusTransition,
+    secondary_status_transitions: ?[]const SecondaryStatusTransition = null,
 
     /// Specifies a limit to how long a model training job can run. It also
     /// specifies how long a managed Spot training job has to complete. When the job
@@ -179,28 +179,28 @@ pub const TrainingJob = struct {
     /// To stop a job, SageMaker sends the algorithm the `SIGTERM` signal, which
     /// delays job termination for 120 seconds. Algorithms can use this 120-second
     /// window to save the model artifacts, so the results of training are not lost.
-    stopping_condition: ?StoppingCondition,
+    stopping_condition: ?StoppingCondition = null,
 
     /// An array of key-value pairs. You can use tags to categorize your Amazon Web
     /// Services resources in different ways, for example, by purpose, owner, or
     /// environment. For more information, see [Tagging Amazon Web Services
     /// Resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
-    tensor_board_output_config: ?TensorBoardOutputConfig,
+    tensor_board_output_config: ?TensorBoardOutputConfig = null,
 
     /// Indicates the time when the training job ends on training instances. You are
     /// billed for the time interval between the value of `TrainingStartTime` and
     /// this time. For successful jobs and stopped jobs, this is the time after
     /// model artifacts are uploaded. For failed jobs, this is the time when
     /// SageMaker detects a job failure.
-    training_end_time: ?i64,
+    training_end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the training job.
-    training_job_arn: ?[]const u8,
+    training_job_arn: ?[]const u8 = null,
 
     /// The name of the training job.
-    training_job_name: ?[]const u8,
+    training_job_name: ?[]const u8 = null,
 
     /// The status of the training job.
     ///
@@ -215,25 +215,25 @@ pub const TrainingJob = struct {
     /// * `Stopped` - The training job has stopped.
     ///
     /// For more detailed information, see `SecondaryStatus`.
-    training_job_status: ?TrainingJobStatus,
+    training_job_status: ?TrainingJobStatus = null,
 
     /// Indicates the time when the training job starts on training instances. You
     /// are billed for the time interval between this time and the value of
     /// `TrainingEndTime`. The start time in CloudWatch Logs might be later than
     /// this time. The difference is due to the time it takes to download the
     /// training data and to the size of the training container.
-    training_start_time: ?i64,
+    training_start_time: ?i64 = null,
 
     /// The training time in seconds.
-    training_time_in_seconds: ?i32,
+    training_time_in_seconds: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the associated hyperparameter tuning job
     /// if the training job was launched by a hyperparameter tuning job.
-    tuning_job_arn: ?[]const u8,
+    tuning_job_arn: ?[]const u8 = null,
 
     /// A
     /// [VpcConfig](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html) object that specifies the VPC that this training job has access to. For more information, see [Protect Training Jobs by Using an Amazon Virtual Private Cloud](https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .algorithm_specification = "AlgorithmSpecification",

@@ -7,13 +7,13 @@ pub const IcebergInput = struct {
     /// The configuration parameters required to create a new Iceberg table in the
     /// Glue Data Catalog, including table properties
     /// and metadata specifications.
-    create_iceberg_table_input: ?CreateIcebergTableInput,
+    create_iceberg_table_input: ?CreateIcebergTableInput = null,
 
     /// A required metadata operation. Can only be set to `CREATE`.
     metadata_operation: MetadataOperation,
 
     /// The table version for the Iceberg table. Defaults to 2.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .create_iceberg_table_input = "CreateIcebergTableInput",

@@ -5,29 +5,29 @@ const Entity = @import("entity.zig").Entity;
 /// The event details.
 pub const Event = struct {
     /// The label associated with the event.
-    current_label: ?[]const u8,
+    current_label: ?[]const u8 = null,
 
     /// The event entities.
-    entities: ?[]const Entity,
+    entities: ?[]const Entity = null,
 
     /// The event ID.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The timestamp that defines when the event under evaluation occurred. The
     /// timestamp must be specified using ISO 8601 standard in UTC.
-    event_timestamp: ?[]const u8,
+    event_timestamp: ?[]const u8 = null,
 
     /// The event type.
-    event_type_name: ?[]const u8,
+    event_type_name: ?[]const u8 = null,
 
     /// Names of the event type's variables you defined in Amazon Fraud Detector to
     /// represent data elements and their corresponding values for the event you are
     /// sending for evaluation.
-    event_variables: ?[]const aws.map.StringMapEntry,
+    event_variables: ?[]const aws.map.StringMapEntry = null,
 
     /// The timestamp associated with the label to update. The timestamp must be
     /// specified using ISO 8601 standard in UTC.
-    label_timestamp: ?[]const u8,
+    label_timestamp: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .current_label = "currentLabel",

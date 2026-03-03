@@ -42,7 +42,7 @@ pub const IPSet = struct {
 
     /// A friendly name or description of the IPSet. You can't change the name of an
     /// `IPSet` after you create it.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ip_set_descriptors = "IPSetDescriptors",

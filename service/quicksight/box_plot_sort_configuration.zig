@@ -4,10 +4,10 @@ const PaginationConfiguration = @import("pagination_configuration.zig").Paginati
 /// The sort configuration of a `BoxPlotVisual`.
 pub const BoxPlotSortConfiguration = struct {
     /// The sort configuration of a group by fields.
-    category_sort: ?[]const FieldSortOptions,
+    category_sort: ?[]const FieldSortOptions = null,
 
     /// The pagination configuration of a table visual or box plot.
-    pagination_configuration: ?PaginationConfiguration,
+    pagination_configuration: ?PaginationConfiguration = null,
 
     pub const json_field_names = .{
         .category_sort = "CategorySort",

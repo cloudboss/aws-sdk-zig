@@ -3,10 +3,10 @@ const AllowAWSToRetainLogs = @import("allow_aws_to_retain_logs.zig").AllowAWSToR
 /// The entity that provides configuration control over managed logs.
 pub const ManagedLogs = struct {
     /// Determines whether Amazon Web Services can retain logs.
-    allow_aws_to_retain_logs: ?AllowAWSToRetainLogs,
+    allow_aws_to_retain_logs: ?AllowAWSToRetainLogs = null,
 
     /// The Amazon resource name (ARN) of the encryption key for logs.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allow_aws_to_retain_logs = "allowAWSToRetainLogs",

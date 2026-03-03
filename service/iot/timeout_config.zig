@@ -15,7 +15,7 @@ pub const TimeoutConfig = struct {
     /// longer than
     /// this interval, the job execution will fail and switch to the terminal
     /// `TIMED_OUT` status.
-    in_progress_timeout_in_minutes: ?i64,
+    in_progress_timeout_in_minutes: ?i64 = null,
 
     pub const json_field_names = .{
         .in_progress_timeout_in_minutes = "inProgressTimeoutInMinutes",

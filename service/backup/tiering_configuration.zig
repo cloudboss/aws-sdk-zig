@@ -11,19 +11,19 @@ pub const TieringConfiguration = struct {
     /// is accurate to milliseconds. For example, the value 1516925490.087
     /// represents
     /// Friday, January 26, 2018 12:11:30.087AM.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// This is a unique string that identifies the request and
     /// allows failed requests to be retried without the risk of running
     /// the operation twice.
-    creator_request_id: ?[]const u8,
+    creator_request_id: ?[]const u8 = null,
 
     /// The date and time a tiering configuration was updated, in Unix format
     /// and Coordinated Universal Time (UTC). The value of `LastUpdatedTime`
     /// is accurate to milliseconds. For example, the value 1516925490.087
     /// represents
     /// Friday, January 26, 2018 12:11:30.087AM.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// An array of resource selection objects that specify which resources
     /// are included in the tiering configuration and their tiering settings.
@@ -31,7 +31,7 @@ pub const TieringConfiguration = struct {
 
     /// An Amazon Resource Name (ARN) that uniquely identifies the
     /// tiering configuration.
-    tiering_configuration_arn: ?[]const u8,
+    tiering_configuration_arn: ?[]const u8 = null,
 
     /// The unique name of the tiering configuration. This cannot be changed
     /// after creation, and it must consist of only alphanumeric characters and

@@ -8,10 +8,10 @@ pub const FaceRecord = struct {
     /// Describes the face properties such as the bounding box, face ID, image ID of
     /// the input
     /// image, and external image ID that you assigned.
-    face: ?Face,
+    face: ?Face = null,
 
     /// Structure containing attributes of the face that the algorithm detected.
-    face_detail: ?FaceDetail,
+    face_detail: ?FaceDetail = null,
 
     pub const json_field_names = .{
         .face = "Face",

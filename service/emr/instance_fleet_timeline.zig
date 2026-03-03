@@ -6,13 +6,13 @@
 /// 4.8.0 and later, excluding 5.0.x versions.
 pub const InstanceFleetTimeline = struct {
     /// The time and date the instance fleet was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The time and date the instance fleet terminated.
-    end_date_time: ?i64,
+    end_date_time: ?i64 = null,
 
     /// The time and date the instance fleet was ready to run jobs.
-    ready_date_time: ?i64,
+    ready_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "CreationDateTime",

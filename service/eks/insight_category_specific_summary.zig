@@ -6,12 +6,12 @@ const DeprecationDetail = @import("deprecation_detail.zig").DeprecationDetail;
 /// returned with certain insights having category `UPGRADE_READINESS`.
 pub const InsightCategorySpecificSummary = struct {
     /// A list of `AddonCompatibilityDetail` objects for Amazon EKS add-ons.
-    addon_compatibility_details: ?[]const AddonCompatibilityDetail,
+    addon_compatibility_details: ?[]const AddonCompatibilityDetail = null,
 
     /// The summary information about deprecated resource usage for an insight check
     /// in the
     /// `UPGRADE_READINESS` category.
-    deprecation_details: ?[]const DeprecationDetail,
+    deprecation_details: ?[]const DeprecationDetail = null,
 
     pub const json_field_names = .{
         .addon_compatibility_details = "addonCompatibilityDetails",

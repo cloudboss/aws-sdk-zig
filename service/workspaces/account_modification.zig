@@ -8,25 +8,25 @@ pub const AccountModification = struct {
     /// The IP address range, specified as an IPv4 CIDR block, for the management
     /// network
     /// interface used for the account.
-    dedicated_tenancy_management_cidr_range: ?[]const u8,
+    dedicated_tenancy_management_cidr_range: ?[]const u8 = null,
 
     /// The status of BYOL (whether BYOL is being enabled or disabled).
-    dedicated_tenancy_support: ?DedicatedTenancySupportResultEnum,
+    dedicated_tenancy_support: ?DedicatedTenancySupportResultEnum = null,
 
     /// The error code that is returned if the configuration of BYOL cannot be
     /// modified.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The text of the error message that is returned if the configuration of BYOL
     /// cannot be
     /// modified.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The state of the modification to the configuration of BYOL.
-    modification_state: ?DedicatedTenancyModificationStateEnum,
+    modification_state: ?DedicatedTenancyModificationStateEnum = null,
 
     /// The timestamp when the modification of the BYOL configuration was started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .dedicated_tenancy_management_cidr_range = "DedicatedTenancyManagementCidrRange",

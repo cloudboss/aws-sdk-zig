@@ -3,7 +3,7 @@ const LogType = @import("log_type.zig").LogType;
 /// The log delivery option to send data to Amazon CloudWatch Logs.
 pub const CloudWatchLogDeliveryOptions = struct {
     /// The Amazon CloudWatch Logs group the operation sends data to.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     /// The type of log to send data to Amazon CloudWatch Logs.
     log_type: LogType,

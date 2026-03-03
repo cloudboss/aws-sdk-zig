@@ -3,10 +3,10 @@ const WorkspaceState = @import("workspace_state.zig").WorkspaceState;
 /// Information about the standby WorkSpace.
 pub const PendingCreateStandbyWorkspacesRequest = struct {
     /// The identifier of the directory for the standby WorkSpace.
-    directory_id: ?[]const u8,
+    directory_id: ?[]const u8 = null,
 
     /// The operational state of the standby WorkSpace.
-    state: ?WorkspaceState,
+    state: ?WorkspaceState = null,
 
     /// Describes the standby WorkSpace that was created.
     ///
@@ -16,10 +16,10 @@ pub const PendingCreateStandbyWorkspacesRequest = struct {
     /// [
     /// DescribeWorkspaces](https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html)
     /// before the WorkSpace is created, the information returned can be incomplete.
-    user_name: ?[]const u8,
+    user_name: ?[]const u8 = null,
 
     /// The identifier of the standby WorkSpace.
-    workspace_id: ?[]const u8,
+    workspace_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",

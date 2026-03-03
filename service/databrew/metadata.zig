@@ -3,7 +3,7 @@ pub const Metadata = struct {
     /// The Amazon Resource Name (ARN) associated with the dataset. Currently,
     /// DataBrew
     /// only supports ARNs from Amazon AppFlow.
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_arn = "SourceArn",

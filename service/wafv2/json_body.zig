@@ -50,7 +50,7 @@ pub const JsonBody = struct {
     /// see [JSON
     /// body](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-fields-list.html#waf-rule-statement-request-component-json-body)
     /// in the *WAF Developer Guide*.
-    invalid_fallback_behavior: ?BodyParsingFallbackBehavior,
+    invalid_fallback_behavior: ?BodyParsingFallbackBehavior = null,
 
     /// The patterns to look for in the JSON body. WAF inspects the results of these
     /// pattern matches against the rule inspection criteria.
@@ -102,7 +102,7 @@ pub const JsonBody = struct {
     /// so that you block any request whose body is over the limit.
     ///
     /// Default: `CONTINUE`
-    oversize_handling: ?OversizeHandling,
+    oversize_handling: ?OversizeHandling = null,
 
     pub const json_field_names = .{
         .invalid_fallback_behavior = "InvalidFallbackBehavior",

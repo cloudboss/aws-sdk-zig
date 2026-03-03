@@ -7,7 +7,7 @@ pub const OrganizationFeatureConfigurationResult = struct {
     /// The additional configuration that is configured for the member accounts
     /// within the
     /// organization.
-    additional_configuration: ?[]const OrganizationAdditionalConfigurationResult,
+    additional_configuration: ?[]const OrganizationAdditionalConfigurationResult = null,
 
     /// Describes the status of the feature that is configured for the member
     /// accounts within
@@ -29,12 +29,12 @@ pub const OrganizationFeatureConfigurationResult = struct {
     /// individually
     /// by the
     /// administrator.
-    auto_enable: ?OrgFeatureStatus,
+    auto_enable: ?OrgFeatureStatus = null,
 
     /// The name of the feature that is configured for the member accounts within
     /// the
     /// organization.
-    name: ?OrgFeature,
+    name: ?OrgFeature = null,
 
     pub const json_field_names = .{
         .additional_configuration = "AdditionalConfiguration",

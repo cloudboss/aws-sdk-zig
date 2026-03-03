@@ -4,29 +4,29 @@
 /// called SQLNET.ENCRYPTION_SERVER that can have several different values.
 pub const OptionSetting = struct {
     /// The allowed values of the option setting.
-    allowed_values: ?[]const u8,
+    allowed_values: ?[]const u8 = null,
 
     /// The DB engine specific parameter type.
-    apply_type: ?[]const u8,
+    apply_type: ?[]const u8 = null,
 
     /// The data type of the option setting.
-    data_type: ?[]const u8,
+    data_type: ?[]const u8 = null,
 
     /// The default value of the option setting.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// The description of the option setting.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether the option setting is part of a collection.
-    is_collection: ?bool,
+    is_collection: ?bool = null,
 
     /// Indicates whether the option setting can be modified from the default.
-    is_modifiable: ?bool,
+    is_modifiable: ?bool = null,
 
     /// The name of the option that has settings that you can set.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current value of the option setting.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

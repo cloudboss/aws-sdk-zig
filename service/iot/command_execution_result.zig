@@ -10,15 +10,15 @@ pub const CommandExecutionResult = struct {
     /// An attribute of type Boolean. For example:
     ///
     /// `"BOOL": true`
-    b: ?bool,
+    b: ?bool = null,
 
     /// An attribute of type Binary.
-    bin: ?[]const u8,
+    bin: ?[]const u8 = null,
 
     /// An attribute of type String. For example:
     ///
     /// `"S": "Hello"`
-    s: ?[]const u8,
+    s: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .b = "B",

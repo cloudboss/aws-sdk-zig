@@ -1,11 +1,11 @@
 /// Describes a warning that occurred during an Asset Bundle import job.
 pub const AssetBundleImportJobWarning = struct {
     /// The ARN of the resource that the warning occurred for.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A description of the warning that occurred during an Asset Bundle import
     /// job.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

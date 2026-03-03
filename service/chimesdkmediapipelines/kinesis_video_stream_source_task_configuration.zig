@@ -4,7 +4,7 @@ pub const KinesisVideoStreamSourceTaskConfiguration = struct {
     channel_id: i32 = 0,
 
     /// The unique identifier of the fragment to begin processing.
-    fragment_number: ?[]const u8,
+    fragment_number: ?[]const u8 = null,
 
     /// The ARN of the stream.
     stream_arn: []const u8,

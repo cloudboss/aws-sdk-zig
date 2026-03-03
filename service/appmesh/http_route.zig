@@ -12,10 +12,10 @@ pub const HttpRoute = struct {
     match: HttpRouteMatch,
 
     /// An object that represents a retry policy.
-    retry_policy: ?HttpRetryPolicy,
+    retry_policy: ?HttpRetryPolicy = null,
 
     /// An object that represents types of timeouts.
-    timeout: ?HttpTimeout,
+    timeout: ?HttpTimeout = null,
 
     pub const json_field_names = .{
         .action = "action",

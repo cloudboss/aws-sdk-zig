@@ -4,14 +4,14 @@ const PluginType = @import("plugin_type.zig").PluginType;
 /// Summary metadata information for a Amazon Q Business plugin.
 pub const PluginTypeMetadataSummary = struct {
     /// The category of the plugin type.
-    category: ?PluginTypeCategory,
+    category: ?PluginTypeCategory = null,
 
     /// The description assigned by Amazon Q Business to a plugin. You can't modify
     /// this value.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The type of the plugin.
-    @"type": ?PluginType,
+    @"type": ?PluginType = null,
 
     pub const json_field_names = .{
         .category = "category",

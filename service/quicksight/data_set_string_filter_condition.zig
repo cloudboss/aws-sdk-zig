@@ -5,14 +5,14 @@ const DataSetStringListFilterCondition = @import("data_set_string_list_filter_co
 /// list-based filtering.
 pub const DataSetStringFilterCondition = struct {
     /// The name of the string column to filter.
-    column_name: ?[]const u8,
+    column_name: ?[]const u8 = null,
 
     /// A comparison-based filter condition for the string column.
-    comparison_filter_condition: ?DataSetStringComparisonFilterCondition,
+    comparison_filter_condition: ?DataSetStringComparisonFilterCondition = null,
 
     /// A list-based filter condition that includes or excludes values from a
     /// specified list.
-    list_filter_condition: ?DataSetStringListFilterCondition,
+    list_filter_condition: ?DataSetStringListFilterCondition = null,
 
     pub const json_field_names = .{
         .column_name = "ColumnName",

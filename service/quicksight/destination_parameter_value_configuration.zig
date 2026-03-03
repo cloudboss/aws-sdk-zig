@@ -9,18 +9,18 @@ const ColumnIdentifier = @import("column_identifier.zig").ColumnIdentifier;
 pub const DestinationParameterValueConfiguration = struct {
     /// The configuration of custom values for destination parameter in
     /// `DestinationParameterValueConfiguration`.
-    custom_values_configuration: ?CustomValuesConfiguration,
+    custom_values_configuration: ?CustomValuesConfiguration = null,
 
     /// The configuration that selects all options.
-    select_all_value_options: ?SelectAllValueOptions,
+    select_all_value_options: ?SelectAllValueOptions = null,
 
-    source_column: ?ColumnIdentifier,
+    source_column: ?ColumnIdentifier = null,
 
     /// The source field ID of the destination parameter.
-    source_field: ?[]const u8,
+    source_field: ?[]const u8 = null,
 
     /// The source parameter name of the destination parameter.
-    source_parameter_name: ?[]const u8,
+    source_parameter_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .custom_values_configuration = "CustomValuesConfiguration",

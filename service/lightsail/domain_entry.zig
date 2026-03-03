@@ -3,7 +3,7 @@ const aws = @import("aws");
 /// Describes a domain recordset entry.
 pub const DomainEntry = struct {
     /// The ID of the domain recordset entry.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// When `true`, specifies whether the domain entry is an alias used by the
     /// Lightsail load balancer, Lightsail container service, Lightsail content
@@ -13,17 +13,17 @@ pub const DomainEntry = struct {
     /// name of a load balancer, container service, CDN distribution, or other
     /// Amazon Web Services
     /// resource and routes traffic to that resource.
-    is_alias: ?bool,
+    is_alias: ?bool = null,
 
     /// The name of the domain.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// (Discontinued) The options for the domain entry.
     ///
     /// In releases prior to November 29, 2017, this parameter was not included in
     /// the API
     /// response. It is now discontinued.
-    options: ?[]const aws.map.StringMapEntry,
+    options: ?[]const aws.map.StringMapEntry = null,
 
     /// The target IP address (`192.0.2.0`), or AWS name server
     /// (`ns-111.awsdns-22.com.`).
@@ -38,7 +38,7 @@ pub const DomainEntry = struct {
     /// sure to
     /// also set `isAlias` to `true` when setting up an A record for a
     /// Lightsail load balancer, distribution, or container service.
-    target: ?[]const u8,
+    target: ?[]const u8 = null,
 
     /// The type of domain entry, such as address for IPv4 (A), address for IPv6
     /// (AAAA), canonical
@@ -63,7 +63,7 @@ pub const DomainEntry = struct {
     /// * `SRV`
     ///
     /// * `TXT`
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",

@@ -9,11 +9,11 @@ pub const TimeSeriesForecastingSettings = struct {
     /// in the Domain that owns the `UserProfile`. To allow time series forecasting,
     /// this IAM role should have the [
     /// AmazonSageMakerCanvasForecastAccess](https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-canvas.html#security-iam-awsmanpol-AmazonSageMakerCanvasForecastAccess) policy attached and `forecast.amazonaws.com` added in the trust relationship as a service principal.
-    amazon_forecast_role_arn: ?[]const u8,
+    amazon_forecast_role_arn: ?[]const u8 = null,
 
     /// Describes whether time series forecasting is enabled or disabled in the
     /// Canvas application.
-    status: ?FeatureStatus,
+    status: ?FeatureStatus = null,
 
     pub const json_field_names = .{
         .amazon_forecast_role_arn = "AmazonForecastRoleArn",

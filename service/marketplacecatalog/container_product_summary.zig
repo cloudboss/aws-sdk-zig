@@ -3,10 +3,10 @@ const ContainerProductVisibilityString = @import("container_product_visibility_s
 /// Object that contains summarized information about a container product.
 pub const ContainerProductSummary = struct {
     /// The title of the container product.
-    product_title: ?[]const u8,
+    product_title: ?[]const u8 = null,
 
     /// The lifecycle of the product.
-    visibility: ?ContainerProductVisibilityString,
+    visibility: ?ContainerProductVisibilityString = null,
 
     pub const json_field_names = .{
         .product_title = "ProductTitle",

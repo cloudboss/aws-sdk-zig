@@ -11,7 +11,7 @@ pub const UpdateManagedInstancesProviderConfiguration = struct {
     /// The updated infrastructure optimization configuration.
     /// Changes to this setting affect how Amazon ECS optimizes instances going
     /// forward.
-    infrastructure_optimization: ?InfrastructureOptimization,
+    infrastructure_optimization: ?InfrastructureOptimization = null,
 
     /// The updated Amazon Resource Name (ARN) of the infrastructure role. The new
     /// role must
@@ -35,7 +35,7 @@ pub const UpdateManagedInstancesProviderConfiguration = struct {
     /// The updated tag propagation setting. When changed, this affects only new
     /// instances
     /// launched after the update.
-    propagate_tags: ?PropagateMITags,
+    propagate_tags: ?PropagateMITags = null,
 
     pub const json_field_names = .{
         .infrastructure_optimization = "infrastructureOptimization",

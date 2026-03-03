@@ -15,30 +15,30 @@ pub const DatabaseSourceDescription = struct {
     /// from.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    columns: ?DatabaseColumnList,
+    columns: ?DatabaseColumnList = null,
 
     /// The list of database patterns in source database endpoint for Firehose to
     /// read from.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    databases: ?DatabaseList,
+    databases: ?DatabaseList = null,
 
     /// The structure to configure the authentication methods for Firehose to
     /// connect to source database endpoint.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    database_source_authentication_configuration: ?DatabaseSourceAuthenticationConfiguration,
+    database_source_authentication_configuration: ?DatabaseSourceAuthenticationConfiguration = null,
 
     /// The details of the VPC Endpoint Service which Firehose uses to create a
     /// PrivateLink to the database.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    database_source_vpc_configuration: ?DatabaseSourceVPCConfiguration,
+    database_source_vpc_configuration: ?DatabaseSourceVPCConfiguration = null,
 
     /// The endpoint of the database server.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// The port of the database. This can be one of the following values.
     ///
@@ -47,37 +47,37 @@ pub const DatabaseSourceDescription = struct {
     /// * 5432 for PostgreSQL database type
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The structure that describes the snapshot information of a table in source
     /// database endpoint that Firehose reads.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    snapshot_info: ?[]const DatabaseSnapshotInfo,
+    snapshot_info: ?[]const DatabaseSnapshotInfo = null,
 
     /// The fully qualified name of the table in source database endpoint that
     /// Firehose uses to track snapshot progress.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    snapshot_watermark_table: ?[]const u8,
+    snapshot_watermark_table: ?[]const u8 = null,
 
     /// The mode to enable or disable SSL when Firehose connects to the database
     /// endpoint.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    ssl_mode: ?SSLMode,
+    ssl_mode: ?SSLMode = null,
 
     /// The optional list of table and column names used as unique key columns when
     /// taking snapshot if the tables don’t have primary keys configured.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    surrogate_keys: ?[]const []const u8,
+    surrogate_keys: ?[]const []const u8 = null,
 
     /// The list of table patterns in source database endpoint for Firehose to read
     /// from.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    tables: ?DatabaseTableList,
+    tables: ?DatabaseTableList = null,
 
     /// The type of database engine. This can be one of the following values.
     ///
@@ -86,7 +86,7 @@ pub const DatabaseSourceDescription = struct {
     /// * PostgreSQL
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    @"type": ?DatabaseType,
+    @"type": ?DatabaseType = null,
 
     pub const json_field_names = .{
         .columns = "Columns",

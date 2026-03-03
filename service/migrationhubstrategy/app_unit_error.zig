@@ -3,7 +3,7 @@ const AppUnitErrorCategory = @import("app_unit_error_category.zig").AppUnitError
 /// Error in the analysis of the application unit.
 pub const AppUnitError = struct {
     /// The category of the error.
-    app_unit_error_category: ?AppUnitErrorCategory,
+    app_unit_error_category: ?AppUnitErrorCategory = null,
 
     pub const json_field_names = .{
         .app_unit_error_category = "appUnitErrorCategory",

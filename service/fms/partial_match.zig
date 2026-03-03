@@ -3,10 +3,10 @@
 pub const PartialMatch = struct {
     /// The reference rule from the primary security group of the Firewall Manager
     /// policy.
-    reference: ?[]const u8,
+    reference: ?[]const u8 = null,
 
     /// The violation reason.
-    target_violation_reasons: ?[]const []const u8,
+    target_violation_reasons: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .reference = "Reference",

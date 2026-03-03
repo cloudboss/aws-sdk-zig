@@ -9,10 +9,10 @@ pub const PerformanceInsightsReferenceData = struct {
     /// `
     /// [PerformanceInsightsReferenceComparisonValues](https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsReferenceComparisonValues.html)
     /// `.
-    comparison_values: ?PerformanceInsightsReferenceComparisonValues,
+    comparison_values: ?PerformanceInsightsReferenceComparisonValues = null,
 
     /// The name of the reference data.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comparison_values = "ComparisonValues",

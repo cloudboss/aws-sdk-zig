@@ -5,14 +5,14 @@ const ArtifactStatus = @import("artifact_status.zig").ArtifactStatus;
 /// An object representing an artifact associated with a subject image.
 pub const ImageReferrer = struct {
     /// A map of annotations associated with the artifact.
-    annotations: ?[]const aws.map.StringMapEntry,
+    annotations: ?[]const aws.map.StringMapEntry = null,
 
     /// The status of the artifact. Valid values are `ACTIVE`, `ARCHIVED`, or
     /// `ACTIVATING`.
-    artifact_status: ?ArtifactStatus,
+    artifact_status: ?ArtifactStatus = null,
 
     /// A string identifying the type of artifact.
-    artifact_type: ?[]const u8,
+    artifact_type: ?[]const u8 = null,
 
     /// The digest of the artifact manifest.
     digest: []const u8,

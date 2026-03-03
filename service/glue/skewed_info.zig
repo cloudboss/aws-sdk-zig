@@ -5,14 +5,14 @@ const aws = @import("aws");
 /// frequency.
 pub const SkewedInfo = struct {
     /// A list of names of columns that contain skewed values.
-    skewed_column_names: ?[]const []const u8,
+    skewed_column_names: ?[]const []const u8 = null,
 
     /// A mapping of skewed values to the columns that contain them.
-    skewed_column_value_location_maps: ?[]const aws.map.StringMapEntry,
+    skewed_column_value_location_maps: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of values that appear so frequently as to be considered
     /// skewed.
-    skewed_column_values: ?[]const []const u8,
+    skewed_column_values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .skewed_column_names = "SkewedColumnNames",

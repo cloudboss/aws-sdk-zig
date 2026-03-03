@@ -9,49 +9,49 @@ const PhoneNumberType = @import("phone_number_type.zig").PhoneNumberType;
 /// Chime SDK Voice Connector.
 pub const PhoneNumber = struct {
     /// The phone number's associations.
-    associations: ?[]const PhoneNumberAssociation,
+    associations: ?[]const PhoneNumberAssociation = null,
 
     /// The outbound calling name associated with the phone number.
-    calling_name: ?[]const u8,
+    calling_name: ?[]const u8 = null,
 
     /// The outbound calling name status.
-    calling_name_status: ?CallingNameStatus,
+    calling_name_status: ?CallingNameStatus = null,
 
     /// The phone number's capabilities.
-    capabilities: ?PhoneNumberCapabilities,
+    capabilities: ?PhoneNumberCapabilities = null,
 
     /// The phone number's country. Format: ISO 3166-1 alpha-2.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// The phone number creation timestamp, in ISO 8601 format.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The deleted phone number timestamp, in ISO 8601 format.
-    deletion_timestamp: ?i64,
+    deletion_timestamp: ?i64 = null,
 
     /// The phone number, in E.164 format.
-    e164_phone_number: ?[]const u8,
+    e164_phone_number: ?[]const u8 = null,
 
     /// The name of the phone number.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The phone number's order ID.
-    order_id: ?[]const u8,
+    order_id: ?[]const u8 = null,
 
     /// The phone number's ID.
-    phone_number_id: ?[]const u8,
+    phone_number_id: ?[]const u8 = null,
 
     /// The phone number's product type.
-    product_type: ?PhoneNumberProductType,
+    product_type: ?PhoneNumberProductType = null,
 
     /// The phone number's status.
-    status: ?PhoneNumberStatus,
+    status: ?PhoneNumberStatus = null,
 
     /// The phone number's type.
-    @"type": ?PhoneNumberType,
+    @"type": ?PhoneNumberType = null,
 
     /// The updated phone number timestamp, in ISO 8601 format.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .associations = "Associations",

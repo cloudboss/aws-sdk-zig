@@ -9,10 +9,10 @@ pub const ListCallerAccessGrantsEntry = struct {
     /// application associated with your Identity Center instance. If the grant
     /// includes an application ARN, the grantee can only access the S3 data through
     /// this application.
-    application_arn: ?[]const u8,
+    application_arn: ?[]const u8 = null,
 
     /// The S3 path of the data to which you have been granted access.
-    grant_scope: ?[]const u8,
+    grant_scope: ?[]const u8 = null,
 
     /// The type of permission granted, which can be one of the following values:
     ///
@@ -21,5 +21,5 @@ pub const ListCallerAccessGrantsEntry = struct {
     /// * `WRITE` - Grants write-only access to the S3 data.
     ///
     /// * `READWRITE` - Grants both read and write access to the S3 data.
-    permission: ?Permission,
+    permission: ?Permission = null,
 };

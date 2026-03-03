@@ -5,10 +5,10 @@ const DateTimeRange = @import("date_time_range.zig").DateTimeRange;
 /// Defines the parameters for querying Savings Plans utilization data,
 /// including time granularity and sorting preferences.
 pub const SavingsPlansUtilizationQuery = struct {
-    filter: ?Expression,
+    filter: ?Expression = null,
 
     /// The time granularity of the retrieved data: HOURLY, DAILY, or MONTHLY.
-    granularity: ?Granularity,
+    granularity: ?Granularity = null,
 
     time_range: DateTimeRange,
 

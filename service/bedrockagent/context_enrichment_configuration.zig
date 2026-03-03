@@ -6,7 +6,7 @@ const ContextEnrichmentType = @import("context_enrichment_type.zig").ContextEnri
 pub const ContextEnrichmentConfiguration = struct {
     /// The configuration of the Amazon Bedrock foundation model used for context
     /// enrichment.
-    bedrock_foundation_model_configuration: ?BedrockFoundationModelContextEnrichmentConfiguration,
+    bedrock_foundation_model_configuration: ?BedrockFoundationModelContextEnrichmentConfiguration = null,
 
     /// The method used for context enrichment. It must be Amazon Bedrock foundation
     /// models.

@@ -8,7 +8,7 @@ pub const DBClusterSnapshotAttribute = struct {
     /// The attribute named `restore` refers to the list of Amazon Web Services
     /// accounts that have permission to copy or restore the manual cluster
     /// snapshot.
-    attribute_name: ?[]const u8,
+    attribute_name: ?[]const u8 = null,
 
     /// The values for the manual cluster snapshot attribute.
     ///
@@ -17,5 +17,5 @@ pub const DBClusterSnapshotAttribute = struct {
     /// copy or restore the manual cluster snapshot. If a value of `all` is in the
     /// list, then the manual cluster snapshot is public and available for any
     /// Amazon Web Services account to copy or restore.
-    attribute_values: ?[]const []const u8,
+    attribute_values: ?[]const []const u8 = null,
 };

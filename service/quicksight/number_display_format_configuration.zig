@@ -7,25 +7,25 @@ const NumericSeparatorConfiguration = @import("numeric_separator_configuration.z
 /// The options that determine the number display format configuration.
 pub const NumberDisplayFormatConfiguration = struct {
     /// The option that determines the decimal places configuration.
-    decimal_places_configuration: ?DecimalPlacesConfiguration,
+    decimal_places_configuration: ?DecimalPlacesConfiguration = null,
 
     /// The options that determine the negative value configuration.
-    negative_value_configuration: ?NegativeValueConfiguration,
+    negative_value_configuration: ?NegativeValueConfiguration = null,
 
     /// The options that determine the null value format configuration.
-    null_value_format_configuration: ?NullValueFormatConfiguration,
+    null_value_format_configuration: ?NullValueFormatConfiguration = null,
 
     /// Determines the number scale value of the number format.
-    number_scale: ?NumberScale,
+    number_scale: ?NumberScale = null,
 
     /// Determines the prefix value of the number format.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The options that determine the numeric separator configuration.
-    separator_configuration: ?NumericSeparatorConfiguration,
+    separator_configuration: ?NumericSeparatorConfiguration = null,
 
     /// Determines the suffix value of the number format.
-    suffix: ?[]const u8,
+    suffix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .decimal_places_configuration = "DecimalPlacesConfiguration",

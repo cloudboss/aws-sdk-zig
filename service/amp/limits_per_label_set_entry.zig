@@ -7,7 +7,7 @@ pub const LimitsPerLabelSetEntry = struct {
     /// Setting this to 0 causes no label set limit to be enforced, but it does
     /// cause Amazon Managed Service for Prometheus to vend label set metrics to
     /// CloudWatch
-    max_series: ?i64,
+    max_series: ?i64 = null,
 
     pub const json_field_names = .{
         .max_series = "maxSeries",

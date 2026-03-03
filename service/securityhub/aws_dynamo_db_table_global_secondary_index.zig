@@ -5,16 +5,16 @@ const AwsDynamoDbTableProvisionedThroughput = @import("aws_dynamo_db_table_provi
 /// Information abut a global secondary index for the table.
 pub const AwsDynamoDbTableGlobalSecondaryIndex = struct {
     /// Whether the index is currently backfilling.
-    backfilling: ?bool,
+    backfilling: ?bool = null,
 
     /// The ARN of the index.
-    index_arn: ?[]const u8,
+    index_arn: ?[]const u8 = null,
 
     /// The name of the index.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
     /// The total size in bytes of the index.
-    index_size_bytes: ?i64,
+    index_size_bytes: ?i64 = null,
 
     /// The current status of the index.
     ///
@@ -25,19 +25,19 @@ pub const AwsDynamoDbTableGlobalSecondaryIndex = struct {
     /// * `DELETING`
     ///
     /// * `UPDATING`
-    index_status: ?[]const u8,
+    index_status: ?[]const u8 = null,
 
     /// The number of items in the index.
-    item_count: ?i32,
+    item_count: ?i32 = null,
 
     /// The key schema for the index.
-    key_schema: ?[]const AwsDynamoDbTableKeySchema,
+    key_schema: ?[]const AwsDynamoDbTableKeySchema = null,
 
     /// Attributes that are copied from the table into an index.
-    projection: ?AwsDynamoDbTableProjection,
+    projection: ?AwsDynamoDbTableProjection = null,
 
     /// Information about the provisioned throughput settings for the indexes.
-    provisioned_throughput: ?AwsDynamoDbTableProvisionedThroughput,
+    provisioned_throughput: ?AwsDynamoDbTableProvisionedThroughput = null,
 
     pub const json_field_names = .{
         .backfilling = "Backfilling",

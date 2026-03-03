@@ -8,7 +8,7 @@ pub const S3ApplicationCodeLocationDescription = struct {
     file_key: []const u8,
 
     /// The version of the object containing the application code.
-    object_version: ?[]const u8,
+    object_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_arn = "BucketARN",

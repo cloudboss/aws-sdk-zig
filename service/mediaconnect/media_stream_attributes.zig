@@ -6,7 +6,7 @@ pub const MediaStreamAttributes = struct {
     fmtp: Fmtp,
 
     /// The audio language, in a format that is recognized by the receiver.
-    lang: ?[]const u8,
+    lang: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .fmtp = "Fmtp",

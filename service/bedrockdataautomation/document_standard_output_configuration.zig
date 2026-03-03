@@ -4,11 +4,11 @@ const DocumentOutputFormat = @import("document_output_format.zig").DocumentOutpu
 
 /// Standard Output Configuration of Document
 pub const DocumentStandardOutputConfiguration = struct {
-    extraction: ?DocumentStandardExtraction,
+    extraction: ?DocumentStandardExtraction = null,
 
-    generative_field: ?DocumentStandardGenerativeField,
+    generative_field: ?DocumentStandardGenerativeField = null,
 
-    output_format: ?DocumentOutputFormat,
+    output_format: ?DocumentOutputFormat = null,
 
     pub const json_field_names = .{
         .extraction = "extraction",

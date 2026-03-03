@@ -5,7 +5,7 @@ const ActionParameters = @import("action_parameters.zig").ActionParameters;
 /// that is available in this environment.
 pub const EnvironmentActionSummary = struct {
     /// The environment action description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon DataZone domain ID of the environment action.
     domain_id: []const u8,

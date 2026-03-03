@@ -11,13 +11,13 @@ pub const NotificationSettingDetail = struct {
     ///
     /// In the absence of a specific channel, IAM Roles Anywhere applies this
     /// setting to 'ALL' channels.
-    channel: ?NotificationChannel,
+    channel: ?NotificationChannel = null,
 
     /// The principal that configured the notification setting. For default settings
     /// configured by IAM Roles Anywhere, the value is
     /// `rolesanywhere.amazonaws.com`, and for customized notifications settings, it
     /// is the respective account ID.
-    configured_by: ?[]const u8,
+    configured_by: ?[]const u8 = null,
 
     /// Indicates whether the notification setting is enabled.
     enabled: bool,
@@ -26,7 +26,7 @@ pub const NotificationSettingDetail = struct {
     event: NotificationEvent,
 
     /// The number of days before a notification event.
-    threshold: ?i32,
+    threshold: ?i32 = null,
 
     pub const json_field_names = .{
         .channel = "channel",

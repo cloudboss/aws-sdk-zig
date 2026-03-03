@@ -7,20 +7,20 @@ const UpdateConnectionOAuthRequestParameters = @import("update_connection_o_auth
 pub const UpdateConnectionAuthRequestParameters = struct {
     /// A `UpdateConnectionApiKeyAuthRequestParameters` object that contains the
     /// authorization parameters for API key authorization.
-    api_key_auth_parameters: ?UpdateConnectionApiKeyAuthRequestParameters,
+    api_key_auth_parameters: ?UpdateConnectionApiKeyAuthRequestParameters = null,
 
     /// A `UpdateConnectionBasicAuthRequestParameters` object that contains the
     /// authorization parameters for Basic authorization.
-    basic_auth_parameters: ?UpdateConnectionBasicAuthRequestParameters,
+    basic_auth_parameters: ?UpdateConnectionBasicAuthRequestParameters = null,
 
     /// A `ConnectionHttpParameters` object that contains the additional parameters
     /// to
     /// use for the connection.
-    invocation_http_parameters: ?ConnectionHttpParameters,
+    invocation_http_parameters: ?ConnectionHttpParameters = null,
 
     /// A `UpdateConnectionOAuthRequestParameters` object that contains the
     /// authorization parameters for OAuth authorization.
-    o_auth_parameters: ?UpdateConnectionOAuthRequestParameters,
+    o_auth_parameters: ?UpdateConnectionOAuthRequestParameters = null,
 
     pub const json_field_names = .{
         .api_key_auth_parameters = "ApiKeyAuthParameters",

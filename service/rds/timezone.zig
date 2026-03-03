@@ -3,5 +3,5 @@
 /// `DescribeDBSnapshots`, and the `DescribeDBEngineVersions` actions.
 pub const Timezone = struct {
     /// The name of the time zone.
-    timezone_name: ?[]const u8,
+    timezone_name: ?[]const u8 = null,
 };

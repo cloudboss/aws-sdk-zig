@@ -5,5 +5,5 @@ pub const ReplicationTimeValue = struct {
     /// Contains an integer specifying time in minutes.
     ///
     /// Valid value: 15
-    minutes: ?i32,
+    minutes: ?i32 = null,
 };

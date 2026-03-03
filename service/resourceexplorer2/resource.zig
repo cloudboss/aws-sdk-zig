@@ -6,29 +6,29 @@ const ResourceProperty = @import("resource_property.zig").ResourceProperty;
 pub const Resource = struct {
     /// The [Amazon resource name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that Resource Explorer last queried this resource and
     /// updated the index with the latest information about the resource.
-    last_reported_at: ?i64,
+    last_reported_at: ?i64 = null,
 
     /// The Amazon Web Services account that owns the resource.
-    owning_account_id: ?[]const u8,
+    owning_account_id: ?[]const u8 = null,
 
     /// A structure with additional type-specific details about the resource. These
     /// properties can be added by turning on integration between Resource Explorer
     /// and other Amazon Web Services services.
-    properties: ?[]const ResourceProperty,
+    properties: ?[]const ResourceProperty = null,
 
     /// The Amazon Web Services Region in which the resource was created and exists.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The type of the resource.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The Amazon Web Services service that owns the resource and is responsible
     /// for creating and updating it.
-    service: ?[]const u8,
+    service: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

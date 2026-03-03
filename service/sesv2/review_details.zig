@@ -3,7 +3,7 @@ const ReviewStatus = @import("review_status.zig").ReviewStatus;
 /// An object that contains information about your account details review.
 pub const ReviewDetails = struct {
     /// The associated support center case ID (if any).
-    case_id: ?[]const u8,
+    case_id: ?[]const u8 = null,
 
     /// The status of the latest review of your account. The status can be one of
     /// the
@@ -20,7 +20,7 @@ pub const ReviewDetails = struct {
     ///
     /// * `FAILED` – An internal error occurred and we didn't receive
     /// your appeal. You can submit your appeal again.
-    status: ?ReviewStatus,
+    status: ?ReviewStatus = null,
 
     pub const json_field_names = .{
         .case_id = "CaseId",

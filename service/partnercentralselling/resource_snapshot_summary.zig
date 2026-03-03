@@ -6,26 +6,26 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 pub const ResourceSnapshotSummary = struct {
     /// The Amazon Resource Name (ARN) of the snapshot. This globally unique
     /// identifier can be used for cross-service references and in IAM policies.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The AWS account ID of the entity that owns the resource from which the
     /// snapshot was created.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The identifier of the specific resource snapshotted. The format might vary
     /// depending on the ResourceType.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The name of the template used to create the snapshot.
-    resource_snapshot_template_name: ?[]const u8,
+    resource_snapshot_template_name: ?[]const u8 = null,
 
     /// The type of resource snapshotted.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The revision number of the snapshot. This integer value is incremented each
     /// time the snapshot is updated, allowing for version tracking of the resource
     /// snapshot.
-    revision: ?i32,
+    revision: ?i32 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

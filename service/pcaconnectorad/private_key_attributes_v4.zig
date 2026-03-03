@@ -5,10 +5,10 @@ const KeyUsageProperty = @import("key_usage_property.zig").KeyUsageProperty;
 /// Defines the attributes of the private key.
 pub const PrivateKeyAttributesV4 = struct {
     /// Defines the algorithm used to generate the private key.
-    algorithm: ?PrivateKeyAlgorithm,
+    algorithm: ?PrivateKeyAlgorithm = null,
 
     /// Defines the cryptographic providers used to generate the private key.
-    crypto_providers: ?[]const []const u8,
+    crypto_providers: ?[]const []const u8 = null,
 
     /// Defines the purpose of the private key. Set it to "KEY_EXCHANGE" or
     /// "SIGNATURE"
@@ -20,7 +20,7 @@ pub const PrivateKeyAttributesV4 = struct {
     /// certificate. You can specify specific purposes using property flags or all
     /// by using
     /// property type ALL.
-    key_usage_property: ?KeyUsageProperty,
+    key_usage_property: ?KeyUsageProperty = null,
 
     /// Set the minimum key length of the private key.
     minimal_key_length: i32,

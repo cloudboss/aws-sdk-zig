@@ -7,29 +7,29 @@ const RemotePortDetails = @import("remote_port_details.zig").RemotePortDetails;
 /// finding.
 pub const NetworkConnectionAction = struct {
     /// Indicates whether EC2 blocked the network connection to your instance.
-    blocked: ?bool,
+    blocked: ?bool = null,
 
     /// The network connection direction.
-    connection_direction: ?[]const u8,
+    connection_direction: ?[]const u8 = null,
 
     /// The local IP information of the connection.
-    local_ip_details: ?LocalIpDetails,
+    local_ip_details: ?LocalIpDetails = null,
 
     /// The EC2 instance's local elastic network interface utilized for the
     /// connection.
-    local_network_interface: ?[]const u8,
+    local_network_interface: ?[]const u8 = null,
 
     /// The local port information of the connection.
-    local_port_details: ?LocalPortDetails,
+    local_port_details: ?LocalPortDetails = null,
 
     /// The network connection protocol.
-    protocol: ?[]const u8,
+    protocol: ?[]const u8 = null,
 
     /// The remote IP information of the connection.
-    remote_ip_details: ?RemoteIpDetails,
+    remote_ip_details: ?RemoteIpDetails = null,
 
     /// The remote port information of the connection.
-    remote_port_details: ?RemotePortDetails,
+    remote_port_details: ?RemotePortDetails = null,
 
     pub const json_field_names = .{
         .blocked = "Blocked",

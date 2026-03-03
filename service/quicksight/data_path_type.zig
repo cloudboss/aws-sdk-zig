@@ -17,7 +17,7 @@ pub const DataPathType = struct {
     ///
     /// * `COUNT_METRIC_COLUMN` - The type of data path for the column with `COUNT`
     ///   as the metric, when there is no field in the `ValuesFieldWell`.
-    pivot_table_data_path_type: ?PivotTableDataPathType,
+    pivot_table_data_path_type: ?PivotTableDataPathType = null,
 
     pub const json_field_names = .{
         .pivot_table_data_path_type = "PivotTableDataPathType",

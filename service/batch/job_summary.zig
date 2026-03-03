@@ -6,12 +6,12 @@ const JobStatus = @import("job_status.zig").JobStatus;
 /// An object that represents summary details of a job.
 pub const JobSummary = struct {
     /// The array properties of the job, if it's an array job.
-    array_properties: ?ArrayPropertiesSummary,
+    array_properties: ?ArrayPropertiesSummary = null,
 
     /// An object that represents the details of the container that's associated
     /// with the
     /// job.
-    container: ?ContainerSummary,
+    container: ?ContainerSummary = null,
 
     /// The Unix timestamp (in milliseconds) for when the job was created. For
     /// non-array jobs and
@@ -21,13 +21,13 @@ pub const JobSummary = struct {
     /// was called). For array child jobs, this is when the child job was spawned by
     /// its parent and
     /// entered the `PENDING` state.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the job.
-    job_arn: ?[]const u8,
+    job_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the job definition.
-    job_definition: ?[]const u8,
+    job_definition: ?[]const u8 = null,
 
     /// The job ID.
     job_id: []const u8,
@@ -38,26 +38,26 @@ pub const JobSummary = struct {
     /// The node properties for a single node in a job summary list.
     ///
     /// This isn't applicable to jobs that are running on Fargate resources.
-    node_properties: ?NodePropertiesSummary,
+    node_properties: ?NodePropertiesSummary = null,
 
     /// The Unix timestamp for when the job was started. More specifically, it's
     /// when the job
     /// transitioned from the `STARTING` state to the `RUNNING` state.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The current status for the job.
-    status: ?JobStatus,
+    status: ?JobStatus = null,
 
     /// A short, human-readable string to provide more details for the current
     /// status of the
     /// job.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The Unix timestamp for when the job was stopped. More specifically, it's
     /// when the job
     /// transitioned from the `RUNNING` state to a terminal state, such as
     /// `SUCCEEDED` or `FAILED`.
-    stopped_at: ?i64,
+    stopped_at: ?i64 = null,
 
     pub const json_field_names = .{
         .array_properties = "arrayProperties",

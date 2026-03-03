@@ -8,13 +8,13 @@ const TableStatus = @import("table_status.zig").TableStatus;
 /// access.
 pub const TableWarmThroughputDescription = struct {
     /// Represents the base table's warm throughput value in read units per second.
-    read_units_per_second: ?i64,
+    read_units_per_second: ?i64 = null,
 
     /// Represents warm throughput value of the base table.
-    status: ?TableStatus,
+    status: ?TableStatus = null,
 
     /// Represents the base table's warm throughput value in write units per second.
-    write_units_per_second: ?i64,
+    write_units_per_second: ?i64 = null,
 
     pub const json_field_names = .{
         .read_units_per_second = "ReadUnitsPerSecond",

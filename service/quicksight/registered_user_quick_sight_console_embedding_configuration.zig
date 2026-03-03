@@ -3,7 +3,7 @@ const RegisteredUserConsoleFeatureConfigurations = @import("registered_user_cons
 /// Information about the Amazon Quick Sight console that you want to embed.
 pub const RegisteredUserQuickSightConsoleEmbeddingConfiguration = struct {
     /// The embedding configuration of an embedded Amazon Quick Sight console.
-    feature_configurations: ?RegisteredUserConsoleFeatureConfigurations,
+    feature_configurations: ?RegisteredUserConsoleFeatureConfigurations = null,
 
     /// The initial URL path for the Amazon Quick Sight console. `InitialPath` is
     /// required.
@@ -23,7 +23,7 @@ pub const RegisteredUserQuickSightConsoleEmbeddingConfiguration = struct {
     ///
     /// * `/analyses/AnalysisId`. *AnalysisId* is the
     /// actual ID key from the Amazon Quick Sight console URL of the analysis.
-    initial_path: ?[]const u8,
+    initial_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .feature_configurations = "FeatureConfigurations",

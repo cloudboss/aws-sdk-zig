@@ -14,41 +14,41 @@ pub const CodegenJob = struct {
     app_id: []const u8,
 
     /// The `CodegenJobAsset` to use for the code generation job.
-    asset: ?CodegenJobAsset,
+    asset: ?CodegenJobAsset = null,
 
     /// Specifies whether to autogenerate forms in the code generation job.
-    auto_generate_forms: ?bool,
+    auto_generate_forms: ?bool = null,
 
     /// The time that the code generation job was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Lists the dependency packages that may be required for the project code to
     /// run.
-    dependencies: ?[]const CodegenDependency,
+    dependencies: ?[]const CodegenDependency = null,
 
     /// The name of the backend environment associated with the code generation job.
     environment_name: []const u8,
 
-    features: ?CodegenFeatureFlags,
+    features: ?CodegenFeatureFlags = null,
 
-    generic_data_schema: ?CodegenJobGenericDataSchema,
+    generic_data_schema: ?CodegenJobGenericDataSchema = null,
 
     /// The unique ID for the code generation job.
     id: []const u8,
 
     /// The time that the code generation job was modified.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
-    render_config: ?CodegenJobRenderConfig,
+    render_config: ?CodegenJobRenderConfig = null,
 
     /// The status of the code generation job.
-    status: ?CodegenJobStatus,
+    status: ?CodegenJobStatus = null,
 
     /// The customized status message for the code generation job.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// One or more key-value pairs to use when tagging the code generation job.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .app_id = "appId",

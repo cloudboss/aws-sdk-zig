@@ -6,12 +6,12 @@ const StringCondition = @import("string_condition.zig").StringCondition;
 /// ProficiencyLimit.
 pub const Condition = struct {
     /// A leaf node condition which can be used to specify a numeric condition.
-    number_condition: ?NumberCondition,
+    number_condition: ?NumberCondition = null,
 
     /// A leaf node condition which can be used to specify a string condition.
     ///
     /// The currently supported values for `FieldName` are `name` and `value`.
-    string_condition: ?StringCondition,
+    string_condition: ?StringCondition = null,
 
     pub const json_field_names = .{
         .number_condition = "NumberCondition",

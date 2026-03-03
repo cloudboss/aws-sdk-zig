@@ -19,12 +19,12 @@ pub const Encryption = struct {
     /// Valid values: `true` | `false`
     ///
     /// Default: `false`
-    cmaf_exclude_segment_drm_metadata: ?bool,
+    cmaf_exclude_segment_drm_metadata: ?bool = null,
 
     /// A 128-bit, 16-byte hex value represented by a 32-character string, used in
     /// conjunction with the key for encrypting content. If you don't specify a
     /// value, then MediaPackage creates the constant initialization vector (IV).
-    constant_initialization_vector: ?[]const u8,
+    constant_initialization_vector: ?[]const u8 = null,
 
     /// The encryption method to use.
     encryption_method: EncryptionMethod,
@@ -38,7 +38,7 @@ pub const Encryption = struct {
     ///
     /// The following example setting causes the service to rotate keys every thirty
     /// minutes: `1800`
-    key_rotation_interval_seconds: ?i32,
+    key_rotation_interval_seconds: ?i32 = null,
 
     /// The parameters for the SPEKE key provider.
     speke_key_provider: SpekeKeyProvider,

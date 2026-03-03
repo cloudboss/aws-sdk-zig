@@ -58,14 +58,14 @@ pub const UiConfig = struct {
     ///
     /// *
     ///   `arn:aws:sagemaker:aws-region:394669845002:human-task-ui/VideoObjectTracking`
-    human_task_ui_arn: ?[]const u8,
+    human_task_ui_arn: ?[]const u8 = null,
 
     /// The Amazon S3 bucket location of the UI template, or worker task template.
     /// This is the template used to render the worker UI and tools for labeling job
     /// tasks. For more information about the contents of a UI template, see [
     /// Creating Your Custom Labeling Task
     /// Template](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step2.html).
-    ui_template_s3_uri: ?[]const u8,
+    ui_template_s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .human_task_ui_arn = "HumanTaskUiArn",

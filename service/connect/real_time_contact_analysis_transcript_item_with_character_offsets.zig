@@ -9,7 +9,7 @@ const RealTimeContactAnalysisCharacterInterval = @import("real_time_contact_anal
 /// category.
 pub const RealTimeContactAnalysisTranscriptItemWithCharacterOffsets = struct {
     /// List of character intervals within transcript content/text.
-    character_offsets: ?RealTimeContactAnalysisCharacterInterval,
+    character_offsets: ?RealTimeContactAnalysisCharacterInterval = null,
 
     /// Transcript identifier. Matches the identifier from one of the
     /// TranscriptSegments.

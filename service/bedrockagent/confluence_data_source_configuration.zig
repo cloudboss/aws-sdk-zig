@@ -5,7 +5,7 @@ const ConfluenceSourceConfiguration = @import("confluence_source_configuration.z
 pub const ConfluenceDataSourceConfiguration = struct {
     /// The configuration of the Confluence content. For example, configuring
     /// specific types of Confluence content.
-    crawler_configuration: ?ConfluenceCrawlerConfiguration,
+    crawler_configuration: ?ConfluenceCrawlerConfiguration = null,
 
     /// The endpoint information to connect to your Confluence data source.
     source_configuration: ConfluenceSourceConfiguration,

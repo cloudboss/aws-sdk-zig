@@ -7,30 +7,30 @@ const InvoiceUnitRule = @import("invoice_unit_rule.zig").InvoiceUnitRule;
 pub const InvoiceUnit = struct {
     /// The assigned description for an invoice unit. This information can't be
     /// modified or deleted.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The account that receives invoices related to the invoice unit.
-    invoice_receiver: ?[]const u8,
+    invoice_receiver: ?[]const u8 = null,
 
     /// ARN to identify an invoice unit. This information can't be modified or
     /// deleted.
-    invoice_unit_arn: ?[]const u8,
+    invoice_unit_arn: ?[]const u8 = null,
 
     /// The last time the invoice unit was updated. This is important to determine
     /// the version of invoice unit configuration used to create the invoices. Any
     /// invoice created after this modified time will use this invoice unit
     /// configuration.
-    last_modified: ?i64,
+    last_modified: ?i64 = null,
 
     /// A unique name that is distinctive within your Amazon Web Services.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// An `InvoiceUnitRule` object used the categorize invoice units.
-    rule: ?InvoiceUnitRule,
+    rule: ?InvoiceUnitRule = null,
 
     /// Whether the invoice unit based tax inheritance is/ should be enabled or
     /// disabled.
-    tax_inheritance_disabled: ?bool,
+    tax_inheritance_disabled: ?bool = null,
 
     pub const json_field_names = .{
         .description = "Description",

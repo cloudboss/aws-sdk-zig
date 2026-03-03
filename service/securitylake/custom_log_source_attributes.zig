@@ -1,14 +1,14 @@
 /// The attributes of a third-party custom source.
 pub const CustomLogSourceAttributes = struct {
     /// The ARN of the Glue crawler.
-    crawler_arn: ?[]const u8,
+    crawler_arn: ?[]const u8 = null,
 
     /// The ARN of the Glue database where results are written, such as:
     /// `arn:aws:daylight:us-east-1::database/sometable/*`.
-    database_arn: ?[]const u8,
+    database_arn: ?[]const u8 = null,
 
     /// The ARN of the Glue table.
-    table_arn: ?[]const u8,
+    table_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .crawler_arn = "crawlerArn",

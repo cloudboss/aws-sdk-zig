@@ -5,5 +5,5 @@ pub const PrefixLevelStorageMetrics = struct {
     /// A container for whether prefix-level storage metrics are enabled.
     is_enabled: bool = false,
 
-    selection_criteria: ?SelectionCriteria,
+    selection_criteria: ?SelectionCriteria = null,
 };

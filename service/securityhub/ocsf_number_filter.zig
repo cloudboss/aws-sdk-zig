@@ -5,9 +5,9 @@ const NumberFilter = @import("number_filter.zig").NumberFilter;
 /// OCSF.
 pub const OcsfNumberFilter = struct {
     /// The name of the field.
-    field_name: ?OcsfNumberField,
+    field_name: ?OcsfNumberField = null,
 
-    filter: ?NumberFilter,
+    filter: ?NumberFilter = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

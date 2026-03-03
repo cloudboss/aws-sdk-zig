@@ -5,16 +5,16 @@ const AwsMemberBusinessTitle = @import("aws_member_business_title.zig").AwsMembe
 pub const AwsTeamMember = struct {
     /// Specifies the Amazon Web Services team member's business title and indicates
     /// their organizational role.
-    business_title: ?AwsMemberBusinessTitle,
+    business_title: ?AwsMemberBusinessTitle = null,
 
     /// Provides the Amazon Web Services team member's email address.
-    email: ?[]const u8,
+    email: ?[]const u8 = null,
 
     /// Provides the Amazon Web Services team member's first name.
-    first_name: ?[]const u8,
+    first_name: ?[]const u8 = null,
 
     /// Provides the Amazon Web Services team member's last name.
-    last_name: ?[]const u8,
+    last_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .business_title = "BusinessTitle",

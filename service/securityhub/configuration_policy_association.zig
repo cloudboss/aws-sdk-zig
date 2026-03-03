@@ -7,7 +7,7 @@ const Target = @import("target.zig").Target;
 /// behavior.
 pub const ConfigurationPolicyAssociation = struct {
     /// The target account, organizational unit, or the root.
-    target: ?Target,
+    target: ?Target = null,
 
     pub const json_field_names = .{
         .target = "Target",

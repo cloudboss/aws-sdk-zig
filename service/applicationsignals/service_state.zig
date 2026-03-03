@@ -9,7 +9,7 @@ const ChangeEvent = @import("change_event.zig").ChangeEvent;
 pub const ServiceState = struct {
     /// The attribute filters that were applied when retrieving this service state
     /// information.
-    attribute_filters: ?[]const AttributeFilter,
+    attribute_filters: ?[]const AttributeFilter = null,
 
     /// An array containing the most recent change events for this service, such as
     /// deployments, with information about when they occurred and who initiated

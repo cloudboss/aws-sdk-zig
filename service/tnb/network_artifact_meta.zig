@@ -6,7 +6,7 @@ const ToscaOverride = @import("tosca_override.zig").ToscaOverride;
 /// the package.
 pub const NetworkArtifactMeta = struct {
     /// Lists network package overrides.
-    overrides: ?[]const ToscaOverride,
+    overrides: ?[]const ToscaOverride = null,
 
     pub const json_field_names = .{
         .overrides = "overrides",

@@ -23,10 +23,10 @@ const PhoneNumberWorkflowStatus = @import("phone_number_workflow_status.zig").Ph
 /// customers to claim.
 pub const PhoneNumberStatus = struct {
     /// The status message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status.
-    status: ?PhoneNumberWorkflowStatus,
+    status: ?PhoneNumberWorkflowStatus = null,
 
     pub const json_field_names = .{
         .message = "Message",

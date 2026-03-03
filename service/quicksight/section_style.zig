@@ -6,13 +6,13 @@ pub const SectionStyle = struct {
     ///
     /// Heights can only be defined for header and footer sections. The default
     /// height margin is 0.5 inches.
-    height: ?[]const u8,
+    height: ?[]const u8 = null,
 
     /// The spacing between section content and its top, bottom, left, and right
     /// edges.
     ///
     /// There is no padding by default.
-    padding: ?Spacing,
+    padding: ?Spacing = null,
 
     pub const json_field_names = .{
         .height = "Height",

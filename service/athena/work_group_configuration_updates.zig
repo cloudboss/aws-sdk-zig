@@ -19,14 +19,14 @@ const ResultConfigurationUpdates = @import("result_configuration_updates.zig").R
 /// query, if it is specified.
 pub const WorkGroupConfigurationUpdates = struct {
     /// Contains a user defined string in JSON format for a Spark-enabled workgroup.
-    additional_configuration: ?[]const u8,
+    additional_configuration: ?[]const u8 = null,
 
     /// The upper limit (cutoff) for the amount of bytes a single query in a
     /// workgroup is
     /// allowed to scan.
-    bytes_scanned_cutoff_per_query: ?i64,
+    bytes_scanned_cutoff_per_query: ?i64 = null,
 
-    customer_content_encryption_configuration: ?CustomerContentEncryptionConfiguration,
+    customer_content_encryption_configuration: ?CustomerContentEncryptionConfiguration = null,
 
     /// Enforces a minimal level of encryption for the workgroup for query and
     /// calculation
@@ -40,16 +40,16 @@ pub const WorkGroupConfigurationUpdates = struct {
     /// `EnforceWorkGroupConfiguration` is true, the
     /// `EnableMinimumEncryptionConfiguration` flag is ignored, and the workgroup
     /// configuration for encryption is used.
-    enable_minimum_encryption_configuration: ?bool,
+    enable_minimum_encryption_configuration: ?bool = null,
 
     /// If set to "true", the settings for the workgroup override client-side
     /// settings. If set
     /// to "false" client-side settings are used. For more information, see
     /// [Workgroup Settings Override Client-Side
     /// Settings](https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
-    enforce_work_group_configuration: ?bool,
+    enforce_work_group_configuration: ?bool = null,
 
-    engine_configuration: ?EngineConfiguration,
+    engine_configuration: ?EngineConfiguration = null,
 
     /// The engine version requested when a workgroup is updated. After the update,
     /// all
@@ -57,39 +57,39 @@ pub const WorkGroupConfigurationUpdates = struct {
     /// was previously
     /// set, the default is Auto. Queries on the `AmazonAthenaPreviewFunctionality`
     /// workgroup run on the preview engine regardless of this setting.
-    engine_version: ?EngineVersion,
+    engine_version: ?EngineVersion = null,
 
     /// The ARN of the execution role used to access user resources for Spark
     /// sessions and
     /// Identity Center enabled workgroups. This property applies only to Spark
     /// enabled
     /// workgroups and Identity Center enabled workgroups.
-    execution_role: ?[]const u8,
+    execution_role: ?[]const u8 = null,
 
     /// Updates configuration information for managed query results in the
     /// workgroup.
-    managed_query_results_configuration_updates: ?ManagedQueryResultsConfigurationUpdates,
+    managed_query_results_configuration_updates: ?ManagedQueryResultsConfigurationUpdates = null,
 
     /// Contains the configuration settings for managed log persistence, delivering
     /// logs to Amazon S3 buckets,
     /// Amazon CloudWatch log groups etc.
-    monitoring_configuration: ?MonitoringConfiguration,
+    monitoring_configuration: ?MonitoringConfiguration = null,
 
     /// Indicates whether this workgroup enables publishing metrics to Amazon
     /// CloudWatch.
-    publish_cloud_watch_metrics_enabled: ?bool,
+    publish_cloud_watch_metrics_enabled: ?bool = null,
 
     /// Specifies whether Amazon S3 access grants are enabled for query
     /// results.
-    query_results_s3_access_grants_configuration: ?QueryResultsS3AccessGrantsConfiguration,
+    query_results_s3_access_grants_configuration: ?QueryResultsS3AccessGrantsConfiguration = null,
 
     /// Indicates that the data usage control limit per query is removed.
     /// WorkGroupConfiguration$BytesScannedCutoffPerQuery
-    remove_bytes_scanned_cutoff_per_query: ?bool,
+    remove_bytes_scanned_cutoff_per_query: ?bool = null,
 
     /// Removes content encryption configuration from an Apache Spark-enabled Athena
     /// workgroup.
-    remove_customer_content_encryption_configuration: ?bool,
+    remove_customer_content_encryption_configuration: ?bool = null,
 
     /// If set to `true`, allows members assigned to a workgroup to specify Amazon
     /// S3 Requester Pays buckets in queries. If set to `false`, workgroup
@@ -99,14 +99,14 @@ pub const WorkGroupConfigurationUpdates = struct {
     /// information about Requester Pays buckets, see [Requester Pays
     /// Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html)
     /// in the *Amazon Simple Storage Service Developer Guide*.
-    requester_pays_enabled: ?bool,
+    requester_pays_enabled: ?bool = null,
 
     /// The result configuration information about the queries in this workgroup
     /// that will be
     /// updated. Includes the updated results location and an updated option for
     /// encrypting
     /// query results.
-    result_configuration_updates: ?ResultConfigurationUpdates,
+    result_configuration_updates: ?ResultConfigurationUpdates = null,
 
     pub const json_field_names = .{
         .additional_configuration = "AdditionalConfiguration",

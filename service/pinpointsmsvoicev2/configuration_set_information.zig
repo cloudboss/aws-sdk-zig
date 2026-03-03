@@ -15,22 +15,22 @@ pub const ConfigurationSetInformation = struct {
     created_timestamp: i64,
 
     /// True if message feedback is enabled.
-    default_message_feedback_enabled: ?bool,
+    default_message_feedback_enabled: ?bool = null,
 
     /// The type of message. Valid values are TRANSACTIONAL for messages that are
     /// critical or time-sensitive and PROMOTIONAL for messages that aren't critical
     /// or time-sensitive.
-    default_message_type: ?MessageType,
+    default_message_type: ?MessageType = null,
 
     /// The default sender ID used by the ConfigurationSet.
-    default_sender_id: ?[]const u8,
+    default_sender_id: ?[]const u8 = null,
 
     /// An array of EventDestination objects that describe any events to log and
     /// where to log them.
     event_destinations: []const EventDestination,
 
     /// The unique identifier for the protect configuration.
-    protect_configuration_id: ?[]const u8,
+    protect_configuration_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration_set_arn = "ConfigurationSetArn",

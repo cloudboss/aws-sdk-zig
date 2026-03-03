@@ -7,19 +7,19 @@ const OverrideType = @import("override_type.zig").OverrideType;
 /// Contains configuration information for a memory strategy.
 pub const StrategyConfiguration = struct {
     /// The consolidation configuration for the memory strategy.
-    consolidation: ?ConsolidationConfiguration,
+    consolidation: ?ConsolidationConfiguration = null,
 
     /// The extraction configuration for the memory strategy.
-    extraction: ?ExtractionConfiguration,
+    extraction: ?ExtractionConfiguration = null,
 
     /// The reflection configuration for the memory strategy.
-    reflection: ?ReflectionConfiguration,
+    reflection: ?ReflectionConfiguration = null,
 
     /// Self-managed configuration settings.
-    self_managed_configuration: ?SelfManagedConfiguration,
+    self_managed_configuration: ?SelfManagedConfiguration = null,
 
     /// The type of override for the strategy configuration.
-    @"type": ?OverrideType,
+    @"type": ?OverrideType = null,
 
     pub const json_field_names = .{
         .consolidation = "consolidation",

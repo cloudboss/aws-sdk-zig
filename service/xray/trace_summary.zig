@@ -14,57 +14,57 @@ const TraceUser = @import("trace_user.zig").TraceUser;
 /// Metadata generated from the segment documents in a trace.
 pub const TraceSummary = struct {
     /// Annotations from the trace's segment documents.
-    annotations: ?[]const aws.map.MapEntry([]const ValueWithServiceIds),
+    annotations: ?[]const aws.map.MapEntry([]const ValueWithServiceIds) = null,
 
     /// A list of Availability Zones for any zone corresponding to the trace
     /// segments.
-    availability_zones: ?[]const AvailabilityZoneDetail,
+    availability_zones: ?[]const AvailabilityZoneDetail = null,
 
     /// The length of time in seconds between the start time of the earliest segment
     /// that started and the end time of the last segment that completed.
-    duration: ?f64,
+    duration: ?f64 = null,
 
     /// The root of a trace.
-    entry_point: ?ServiceId,
+    entry_point: ?ServiceId = null,
 
     /// A collection of ErrorRootCause structures corresponding to the trace
     /// segments.
-    error_root_causes: ?[]const ErrorRootCause,
+    error_root_causes: ?[]const ErrorRootCause = null,
 
     /// A collection of FaultRootCause structures corresponding to the trace
     /// segments.
-    fault_root_causes: ?[]const FaultRootCause,
+    fault_root_causes: ?[]const FaultRootCause = null,
 
     /// The root segment document has a 400 series error.
-    has_error: ?bool,
+    has_error: ?bool = null,
 
     /// The root segment document has a 500 series error.
-    has_fault: ?bool,
+    has_fault: ?bool = null,
 
     /// One or more of the segment documents has a 429 throttling error.
-    has_throttle: ?bool,
+    has_throttle: ?bool = null,
 
     /// Information about the HTTP request served by the trace.
-    http: ?Http,
+    http: ?Http = null,
 
     /// The unique identifier for the request that generated the trace's segments
     /// and
     /// subsegments.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A list of EC2 instance IDs for any instance corresponding to the trace
     /// segments.
-    instance_ids: ?[]const InstanceIdDetail,
+    instance_ids: ?[]const InstanceIdDetail = null,
 
     /// One or more of the segment documents is in progress.
-    is_partial: ?bool,
+    is_partial: ?bool = null,
 
     /// The matched time stamp of a defined event.
-    matched_event_time: ?i64,
+    matched_event_time: ?i64 = null,
 
     /// A list of resource ARNs for any resource corresponding to the trace
     /// segments.
-    resource_ar_ns: ?[]const ResourceARNDetail,
+    resource_ar_ns: ?[]const ResourceARNDetail = null,
 
     /// The length of time in seconds between the start and end times of the root
     /// segment. If
@@ -73,23 +73,23 @@ pub const TraceSummary = struct {
     /// response is sent to the user, while the duration measures the amount of time
     /// before the last
     /// traced activity completes.
-    response_time: ?f64,
+    response_time: ?f64 = null,
 
     /// A collection of ResponseTimeRootCause structures corresponding to the trace
     /// segments.
-    response_time_root_causes: ?[]const ResponseTimeRootCause,
+    response_time_root_causes: ?[]const ResponseTimeRootCause = null,
 
     /// The revision number of a trace.
     revision: i32 = 0,
 
     /// Service IDs from the trace's segment documents.
-    service_ids: ?[]const ServiceId,
+    service_ids: ?[]const ServiceId = null,
 
     /// The start time of a trace, based on the earliest trace segment start time.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Users from the trace's segment documents.
-    users: ?[]const TraceUser,
+    users: ?[]const TraceUser = null,
 
     pub const json_field_names = .{
         .annotations = "Annotations",

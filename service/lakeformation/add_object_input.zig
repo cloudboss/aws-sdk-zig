@@ -10,7 +10,7 @@ pub const AddObjectInput = struct {
     /// The supported data types are integer, long, date(yyyy-MM-dd),
     /// timestamp(yyyy-MM-dd HH:mm:ssXXX or yyyy-MM-dd HH:mm:ss"), string and
     /// decimal.
-    partition_values: ?[]const []const u8,
+    partition_values: ?[]const []const u8 = null,
 
     /// The size of the Amazon S3 object in bytes.
     size: i64 = 0,

@@ -7,7 +7,7 @@ pub const WorkerComputeConfiguration = struct {
     /// The number of compute workers that are used.
     number: i32 = 16,
 
-    properties: ?WorkerComputeConfigurationProperties,
+    properties: ?WorkerComputeConfigurationProperties = null,
 
     /// The instance type of the compute workers that are used.
     @"type": WorkerComputeType = "CR.1X",

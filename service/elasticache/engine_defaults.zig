@@ -7,7 +7,7 @@ pub const EngineDefaults = struct {
     /// A list of parameters specific to a particular cache node type. Each element
     /// in the
     /// list contains detailed information about one parameter.
-    cache_node_type_specific_parameters: ?[]const CacheNodeTypeSpecificParameter,
+    cache_node_type_specific_parameters: ?[]const CacheNodeTypeSpecificParameter = null,
 
     /// Specifies the name of the cache parameter group family to which the engine
     /// default
@@ -17,11 +17,11 @@ pub const EngineDefaults = struct {
     /// `memcached1.6` | `redis2.6` | `redis2.8` |
     /// `redis3.2` | `redis4.0` | `redis5.0` |
     /// `redis6.0` | `redis6.x` | `redis7`
-    cache_parameter_group_family: ?[]const u8,
+    cache_parameter_group_family: ?[]const u8 = null,
 
     /// Provides an identifier to allow retrieval of paginated results.
-    marker: ?[]const u8,
+    marker: ?[]const u8 = null,
 
     /// Contains a list of engine default parameters.
-    parameters: ?[]const Parameter,
+    parameters: ?[]const Parameter = null,
 };

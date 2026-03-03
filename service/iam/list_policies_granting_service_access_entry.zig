@@ -9,7 +9,7 @@ const PolicyGrantingServiceAccess = @import("policy_granting_service_access.zig"
 pub const ListPoliciesGrantingServiceAccessEntry = struct {
     /// The `PoliciesGrantingServiceAccess` object that contains details about the
     /// policy.
-    policies: ?[]const PolicyGrantingServiceAccess,
+    policies: ?[]const PolicyGrantingServiceAccess = null,
 
     /// The namespace of the service that was accessed.
     ///
@@ -24,5 +24,5 @@ pub const ListPoliciesGrantingServiceAccessEntry = struct {
     /// see [Amazon Web Services
     /// service
     /// namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces) in the *Amazon Web Services General Reference*.
-    service_namespace: ?[]const u8,
+    service_namespace: ?[]const u8 = null,
 };

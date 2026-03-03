@@ -11,7 +11,7 @@ pub const AuthorizationConfig = struct {
     authorization_type: AuthorizationType,
 
     /// The Identity and Access Management (IAM) settings.
-    aws_iam_config: ?AwsIamConfig,
+    aws_iam_config: ?AwsIamConfig = null,
 
     pub const json_field_names = .{
         .authorization_type = "authorizationType",

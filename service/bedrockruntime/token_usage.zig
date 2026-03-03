@@ -4,13 +4,13 @@ const CacheDetail = @import("cache_detail.zig").CacheDetail;
 pub const TokenUsage = struct {
     /// Detailed breakdown of cache writes by TTL. Empty if no cache creation
     /// occurred. Sorted by TTL duration (1h before 5m).
-    cache_details: ?[]const CacheDetail,
+    cache_details: ?[]const CacheDetail = null,
 
     /// The number of input tokens read from the cache for the request.
-    cache_read_input_tokens: ?i32,
+    cache_read_input_tokens: ?i32 = null,
 
     /// The number of input tokens written to the cache for the request.
-    cache_write_input_tokens: ?i32,
+    cache_write_input_tokens: ?i32 = null,
 
     /// The number of tokens sent in the request to the model.
     input_tokens: i32,

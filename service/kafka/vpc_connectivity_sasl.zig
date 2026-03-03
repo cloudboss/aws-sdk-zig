@@ -4,10 +4,10 @@ const VpcConnectivityScram = @import("vpc_connectivity_scram.zig").VpcConnectivi
 /// Details for SASL client authentication for VPC connectivity.
 pub const VpcConnectivitySasl = struct {
     /// Details for SASL/IAM client authentication for VPC connectivity.
-    iam: ?VpcConnectivityIam,
+    iam: ?VpcConnectivityIam = null,
 
     /// Details for SASL/SCRAM client authentication for VPC connectivity.
-    scram: ?VpcConnectivityScram,
+    scram: ?VpcConnectivityScram = null,
 
     pub const json_field_names = .{
         .iam = "Iam",

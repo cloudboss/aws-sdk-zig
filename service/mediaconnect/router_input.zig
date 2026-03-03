@@ -34,16 +34,16 @@ pub const RouterInput = struct {
     input_type: RouterInputType,
 
     /// The IP address of the router input.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The maintenance configuration settings applied to this router input.
     maintenance_configuration: MaintenanceConfiguration,
 
     /// The current maintenance schedule details for this router input.
-    maintenance_schedule: ?MaintenanceSchedule,
+    maintenance_schedule: ?MaintenanceSchedule = null,
 
     /// The type of maintenance schedule currently in effect for this router input.
-    maintenance_schedule_type: ?MaintenanceScheduleType,
+    maintenance_schedule_type: ?MaintenanceScheduleType = null,
 
     /// The type of maintenance configuration applied to this router input.
     maintenance_type: MaintenanceType,
@@ -53,7 +53,7 @@ pub const RouterInput = struct {
 
     /// The maximum number of outputs that can be simultaneously routed to this
     /// input.
-    maximum_routed_outputs: ?i32,
+    maximum_routed_outputs: ?i32 = null,
 
     /// The messages associated with the router input.
     messages: []const RouterInputMessage,

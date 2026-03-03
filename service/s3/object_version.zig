@@ -7,30 +7,30 @@ const ObjectVersionStorageClass = @import("object_version_storage_class.zig").Ob
 /// The version of an object.
 pub const ObjectVersion = struct {
     /// The algorithm that was used to create a checksum of the object.
-    checksum_algorithm: ?[]const ChecksumAlgorithm,
+    checksum_algorithm: ?[]const ChecksumAlgorithm = null,
 
     /// The checksum type that is used to calculate the object’s checksum value. For
     /// more information, see
     /// [Checking
     /// object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
-    checksum_type: ?ChecksumType,
+    checksum_type: ?ChecksumType = null,
 
     /// The entity tag is an MD5 hash of that version of the object.
-    e_tag: ?[]const u8,
+    e_tag: ?[]const u8 = null,
 
     /// Specifies whether the object is (true) or is not (false) the latest version
     /// of an object.
-    is_latest: ?bool,
+    is_latest: ?bool = null,
 
     /// The object key.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// Date and time when the object was last modified.
-    last_modified: ?i64,
+    last_modified: ?i64 = null,
 
     /// Specifies the owner of the object.
-    owner: ?Owner,
+    owner: ?Owner = null,
 
     /// Specifies the restoration status of an object. Objects in certain storage
     /// classes must be restored
@@ -39,14 +39,14 @@ pub const ObjectVersion = struct {
     /// archived objects, see [
     /// Working with archived
     /// objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/archived-objects.html) in the *Amazon S3 User Guide*.
-    restore_status: ?RestoreStatus,
+    restore_status: ?RestoreStatus = null,
 
     /// Size in bytes of the object.
-    size: ?i64,
+    size: ?i64 = null,
 
     /// The class of storage used to store the object.
-    storage_class: ?ObjectVersionStorageClass,
+    storage_class: ?ObjectVersionStorageClass = null,
 
     /// Version ID of an object.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 };

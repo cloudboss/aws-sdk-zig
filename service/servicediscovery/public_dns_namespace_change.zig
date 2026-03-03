@@ -5,11 +5,11 @@ const PublicDnsNamespacePropertiesChange = @import("public_dns_namespace_propert
 pub const PublicDnsNamespaceChange = struct {
     /// An updated
     /// description for the public DNS namespace.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Properties to be
     /// updated in the public DNS namespace.
-    properties: ?PublicDnsNamespacePropertiesChange,
+    properties: ?PublicDnsNamespacePropertiesChange = null,
 
     pub const json_field_names = .{
         .description = "Description",

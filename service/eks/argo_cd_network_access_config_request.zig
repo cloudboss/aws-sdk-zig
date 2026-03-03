@@ -7,7 +7,7 @@ pub const ArgoCdNetworkAccessConfigRequest = struct {
     /// endpoint. Each VPC endpoint provides private connectivity from a specific
     /// VPC to the Argo CD server. You can specify multiple VPC endpoint IDs to
     /// enable access from multiple VPCs.
-    vpce_ids: ?[]const []const u8,
+    vpce_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .vpce_ids = "vpceIds",

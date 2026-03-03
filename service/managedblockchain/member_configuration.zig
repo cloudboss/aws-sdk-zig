@@ -8,7 +8,7 @@ const MemberLogPublishingConfiguration = @import("member_log_publishing_configur
 /// Applies only to Hyperledger Fabric.
 pub const MemberConfiguration = struct {
     /// An optional description of the member.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Configuration properties of the blockchain framework relevant to the member.
     framework_configuration: MemberFrameworkConfiguration,
@@ -33,11 +33,11 @@ pub const MemberConfiguration = struct {
     ///
     /// The following is an example of a KMS key ARN:
     /// `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// Configuration properties for logging events associated with a member of a
     /// Managed Blockchain network.
-    log_publishing_configuration: ?MemberLogPublishingConfiguration,
+    log_publishing_configuration: ?MemberLogPublishingConfiguration = null,
 
     /// The name of the member.
     name: []const u8,
@@ -50,7 +50,7 @@ pub const MemberConfiguration = struct {
     ///
     /// For more information about tags, see [Tagging
     /// Resources](https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html) in the *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging Resources](https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html) in the *Amazon Managed Blockchain Hyperledger Fabric Developer Guide*.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .description = "Description",

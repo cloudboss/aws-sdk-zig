@@ -15,7 +15,7 @@ pub const BandwidthReductionFilter = struct {
     /// video content and can reduce softness. Keep the default value Off to apply
     /// no sharpening. Set Sharpening strength to Low to apply a minimal amount of
     /// sharpening, or High to apply a maximum amount of sharpening.
-    sharpening: ?BandwidthReductionFilterSharpening,
+    sharpening: ?BandwidthReductionFilterSharpening = null,
 
     /// Specify the strength of the Bandwidth reduction filter. For most workflows,
     /// we recommend that you choose Auto to reduce the bandwidth of your output
@@ -23,7 +23,7 @@ pub const BandwidthReductionFilter = struct {
     /// high bitrate outputs, choose Low. For the most bandwidth reduction, choose
     /// High. We recommend that you choose High for low bitrate outputs. Note that
     /// High may incur a slight increase in the softness of your output.
-    strength: ?BandwidthReductionFilterStrength,
+    strength: ?BandwidthReductionFilterStrength = null,
 
     pub const json_field_names = .{
         .sharpening = "Sharpening",

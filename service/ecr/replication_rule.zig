@@ -13,7 +13,7 @@ pub const ReplicationRule = struct {
     /// repository filter for a replication rule provides a method for controlling
     /// which
     /// repositories in a private registry are replicated.
-    repository_filters: ?[]const RepositoryFilter,
+    repository_filters: ?[]const RepositoryFilter = null,
 
     pub const json_field_names = .{
         .destinations = "destinations",

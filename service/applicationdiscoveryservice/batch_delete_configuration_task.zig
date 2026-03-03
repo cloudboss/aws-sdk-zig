@@ -6,37 +6,37 @@ const BatchDeleteConfigurationTaskStatus = @import("batch_delete_configuration_t
 /// A metadata object that represents the deletion task being executed.
 pub const BatchDeleteConfigurationTask = struct {
     /// The type of configuration item to delete. Supported types are: SERVER.
-    configuration_type: ?DeletionConfigurationItemType,
+    configuration_type: ?DeletionConfigurationItemType = null,
 
     /// The list of configuration IDs that were successfully deleted by the deletion
     /// task.
-    deleted_configurations: ?[]const []const u8,
+    deleted_configurations: ?[]const []const u8 = null,
 
     /// A list of configuration IDs that produced warnings regarding their deletion,
     /// paired with a warning message.
-    deletion_warnings: ?[]const DeletionWarning,
+    deletion_warnings: ?[]const DeletionWarning = null,
 
     /// An epoch seconds timestamp (UTC) of when the deletion task was completed or
     /// failed.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// A list of configuration IDs that failed to delete during the deletion task,
     /// each paired with an error message.
-    failed_configurations: ?[]const FailedConfiguration,
+    failed_configurations: ?[]const FailedConfiguration = null,
 
     /// The list of configuration IDs that were originally requested to be deleted
     /// by the deletion task.
-    requested_configurations: ?[]const []const u8,
+    requested_configurations: ?[]const []const u8 = null,
 
     /// An epoch seconds timestamp (UTC) of when the deletion task was started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The current execution status of the deletion task.
     /// Valid status are: INITIALIZING | VALIDATING | DELETING | COMPLETED | FAILED.
-    status: ?BatchDeleteConfigurationTaskStatus,
+    status: ?BatchDeleteConfigurationTaskStatus = null,
 
     /// The deletion task's unique identifier.
-    task_id: ?[]const u8,
+    task_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration_type = "configurationType",

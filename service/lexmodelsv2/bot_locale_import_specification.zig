@@ -40,22 +40,22 @@ pub const BotLocaleImportSpecification = struct {
     /// * `IntentB`
     ///
     /// * `IntentC`
-    nlu_intent_confidence_threshold: ?f64,
+    nlu_intent_confidence_threshold: ?f64 = null,
 
     /// The sensitivity level for voice activity detection (VAD) in the bot locale.
     /// This setting helps optimize speech recognition accuracy by adjusting how the
     /// system responds to background noise during voice interactions.
-    speech_detection_sensitivity: ?SpeechDetectionSensitivity,
+    speech_detection_sensitivity: ?SpeechDetectionSensitivity = null,
 
     /// Speech-to-text settings to apply when importing the bot locale
     /// configuration.
-    speech_recognition_settings: ?SpeechRecognitionSettings,
+    speech_recognition_settings: ?SpeechRecognitionSettings = null,
 
     /// Unified speech settings to apply when importing the bot locale
     /// configuration.
-    unified_speech_settings: ?UnifiedSpeechSettings,
+    unified_speech_settings: ?UnifiedSpeechSettings = null,
 
-    voice_settings: ?VoiceSettings,
+    voice_settings: ?VoiceSettings = null,
 
     pub const json_field_names = .{
         .bot_id = "botId",

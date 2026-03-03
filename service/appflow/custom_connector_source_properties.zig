@@ -6,12 +6,12 @@ const DataTransferApi = @import("data_transfer_api.zig").DataTransferApi;
 /// source.
 pub const CustomConnectorSourceProperties = struct {
     /// Custom properties that are required to use the custom connector as a source.
-    custom_properties: ?[]const aws.map.StringMapEntry,
+    custom_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The API of the connector application that Amazon AppFlow uses to transfer
     /// your
     /// data.
-    data_transfer_api: ?DataTransferApi,
+    data_transfer_api: ?DataTransferApi = null,
 
     /// The entity specified in the custom connector as a source in the flow.
     entity_name: []const u8,

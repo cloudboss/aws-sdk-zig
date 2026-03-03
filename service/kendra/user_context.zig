@@ -38,22 +38,22 @@ pub const UserContext = struct {
     /// The list of data source groups you want to filter search results based on
     /// groups' access
     /// to documents in that data source.
-    data_source_groups: ?[]const DataSourceGroup,
+    data_source_groups: ?[]const DataSourceGroup = null,
 
     /// The list of groups you want to filter search results based on the groups'
     /// access to
     /// documents.
-    groups: ?[]const []const u8,
+    groups: ?[]const []const u8 = null,
 
     /// The user context token for filtering search results for a user. It must be a
     /// JWT or a
     /// JSON token.
-    token: ?[]const u8,
+    token: ?[]const u8 = null,
 
     /// The identifier of the user you want to filter search results based on their
     /// access to
     /// documents.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_source_groups = "DataSourceGroups",

@@ -7,12 +7,12 @@ pub const ClusterNetworkSettings = struct {
     /// traffic isn't covered by the route table for any of the networks. Specify
     /// the value of the appropriate logicalInterfaceName parameter that you create
     /// in the interfaceMappings.
-    default_route: ?[]const u8,
+    default_route: ?[]const u8 = null,
 
     /// An array of interfaceMapping objects for this Cluster. Each mapping
     /// logically connects one interface on the nodes with one Network. You need
     /// only one mapping for each interface because all the Nodes share the mapping.
-    interface_mappings: ?[]const InterfaceMapping,
+    interface_mappings: ?[]const InterfaceMapping = null,
 
     pub const json_field_names = .{
         .default_route = "DefaultRoute",

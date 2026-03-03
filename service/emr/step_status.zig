@@ -8,16 +8,16 @@ pub const StepStatus = struct {
     /// The details for the step failure including reason, message, and log file
     /// path where the
     /// root cause was identified.
-    failure_details: ?FailureDetails,
+    failure_details: ?FailureDetails = null,
 
     /// The execution state of the cluster step.
-    state: ?StepState,
+    state: ?StepState = null,
 
     /// The reason for the step execution status change.
-    state_change_reason: ?StepStateChangeReason,
+    state_change_reason: ?StepStateChangeReason = null,
 
     /// The timeline of the cluster step status over time.
-    timeline: ?StepTimeline,
+    timeline: ?StepTimeline = null,
 
     pub const json_field_names = .{
         .failure_details = "FailureDetails",

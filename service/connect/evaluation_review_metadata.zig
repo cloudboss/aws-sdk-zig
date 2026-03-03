@@ -9,7 +9,7 @@ pub const EvaluationReviewMetadata = struct {
     created_time: i64,
 
     /// The unique identifier for the evaluation review.
-    review_id: ?[]const u8,
+    review_id: ?[]const u8 = null,
 
     /// Comments provided when requesting the evaluation review.
     review_request_comments: []const EvaluationReviewRequestComment,

@@ -4,25 +4,25 @@ const AttachmentContentTransferEncoding = @import("attachment_content_transfer_e
 /// Contains metadata and attachment raw content.
 pub const Attachment = struct {
     /// A brief description of the attachment content.
-    content_description: ?[]const u8,
+    content_description: ?[]const u8 = null,
 
     /// A standard descriptor indicating how the attachment should be rendered in
     /// the email.
     /// Supported values: `ATTACHMENT` or `INLINE`.
-    content_disposition: ?AttachmentContentDisposition,
+    content_disposition: ?AttachmentContentDisposition = null,
 
     /// Unique identifier for the attachment, used for referencing attachments with
     /// INLINE disposition in HTML content.
-    content_id: ?[]const u8,
+    content_id: ?[]const u8 = null,
 
     /// Specifies how the attachment is encoded.
     /// Supported values: `BASE64`, `QUOTED_PRINTABLE`, `SEVEN_BIT`.
-    content_transfer_encoding: ?AttachmentContentTransferEncoding,
+    content_transfer_encoding: ?AttachmentContentTransferEncoding = null,
 
     /// The MIME type of the attachment.
     ///
     /// Example: `application/pdf`, `image/jpeg`
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// The file name for the attachment as it will appear in the email.
     /// Amazon SES restricts certain file extensions. To ensure attachments are

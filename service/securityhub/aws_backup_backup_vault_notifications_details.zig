@@ -12,12 +12,12 @@ pub const AwsBackupBackupVaultNotificationsDetails = struct {
     /// * `RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED | RECOVERY_POINT_MODIFIED`
     ///
     /// * `S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED`
-    backup_vault_events: ?[]const []const u8,
+    backup_vault_events: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the Amazon SNS topic
     /// for
     /// a backup vault's events.
-    sns_topic_arn: ?[]const u8,
+    sns_topic_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .backup_vault_events = "BackupVaultEvents",

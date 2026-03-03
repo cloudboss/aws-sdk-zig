@@ -6,34 +6,34 @@ const Tag = @import("tag.zig").Tag;
 /// [Search](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html) API. For information about experiments, see the [CreateExperiment](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateExperiment.html) API.
 pub const Experiment = struct {
     /// Who created the experiment.
-    created_by: ?UserContext,
+    created_by: ?UserContext = null,
 
     /// When the experiment was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The description of the experiment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the experiment as displayed. If `DisplayName` isn't specified,
     /// `ExperimentName` is displayed.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the experiment.
-    experiment_arn: ?[]const u8,
+    experiment_arn: ?[]const u8 = null,
 
     /// The name of the experiment.
-    experiment_name: ?[]const u8,
+    experiment_name: ?[]const u8 = null,
 
-    last_modified_by: ?UserContext,
+    last_modified_by: ?UserContext = null,
 
     /// When the experiment was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
-    source: ?ExperimentSource,
+    source: ?ExperimentSource = null,
 
     /// The list of tags that are associated with the experiment. You can use
     /// [Search](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html) API to search on the tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .created_by = "CreatedBy",

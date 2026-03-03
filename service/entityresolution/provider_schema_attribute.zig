@@ -6,10 +6,10 @@ pub const ProviderSchemaAttribute = struct {
     field_name: []const u8,
 
     /// The hashing attribute of the provider schema.
-    hashing: ?bool,
+    hashing: ?bool = null,
 
     /// The sub type of the provider schema attribute.
-    sub_type: ?[]const u8,
+    sub_type: ?[]const u8 = null,
 
     /// The type of the provider schema attribute.
     ///

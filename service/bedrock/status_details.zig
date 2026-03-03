@@ -13,13 +13,13 @@ const ValidationDetails = @import("validation_details.zig").ValidationDetails;
 /// * Failed
 pub const StatusDetails = struct {
     /// The status details for the data processing sub-task of the job.
-    data_processing_details: ?DataProcessingDetails,
+    data_processing_details: ?DataProcessingDetails = null,
 
     /// The status details for the training sub-task of the job.
-    training_details: ?TrainingDetails,
+    training_details: ?TrainingDetails = null,
 
     /// The status details for the validation sub-task of the job.
-    validation_details: ?ValidationDetails,
+    validation_details: ?ValidationDetails = null,
 
     pub const json_field_names = .{
         .data_processing_details = "dataProcessingDetails",

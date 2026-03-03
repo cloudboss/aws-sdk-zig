@@ -10,7 +10,7 @@ pub const RecipeStep = struct {
     ///
     /// All of the conditions in the array must be met. In other words, all of the
     /// conditions must be combined using a logical AND operation.
-    condition_expressions: ?[]const ConditionExpression,
+    condition_expressions: ?[]const ConditionExpression = null,
 
     pub const json_field_names = .{
         .action = "Action",

@@ -23,7 +23,7 @@ pub const StackEvent = struct {
     /// event would be
     /// assigned the same token in the following format:
     /// `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
-    client_request_token: ?[]const u8,
+    client_request_token: ?[]const u8 = null,
 
     /// An optional field that contains information about the detailed status of the
     /// stack
@@ -40,7 +40,7 @@ pub const StackEvent = struct {
     /// in the template. The `ResourceStatusReason` field shows what properties are
     /// defined
     /// incorrectly.
-    detailed_status: ?DetailedStatus,
+    detailed_status: ?DetailedStatus = null,
 
     /// The unique identifier of this event.
     event_id: []const u8,
@@ -51,47 +51,47 @@ pub const StackEvent = struct {
     /// * `FAIL` Stops provisioning resources.
     ///
     /// * `WARN` Allows provisioning to continue with a warning message.
-    hook_failure_mode: ?HookFailureMode,
+    hook_failure_mode: ?HookFailureMode = null,
 
     /// The unique identifier of the Hook invocation.
-    hook_invocation_id: ?[]const u8,
+    hook_invocation_id: ?[]const u8 = null,
 
     /// The specific point in the provisioning process where the Hook is invoked.
-    hook_invocation_point: ?HookInvocationPoint,
+    hook_invocation_point: ?HookInvocationPoint = null,
 
     /// Provides the status of the change set Hook.
-    hook_status: ?HookStatus,
+    hook_status: ?HookStatus = null,
 
     /// Provides the reason for the Hook status.
-    hook_status_reason: ?[]const u8,
+    hook_status_reason: ?[]const u8 = null,
 
     /// The name of the Hook.
-    hook_type: ?[]const u8,
+    hook_type: ?[]const u8 = null,
 
     /// The logical name of the resource specified in the template.
-    logical_resource_id: ?[]const u8,
+    logical_resource_id: ?[]const u8 = null,
 
     /// The unique identifier of the operation that generated this stack event.
-    operation_id: ?[]const u8,
+    operation_id: ?[]const u8 = null,
 
     /// The name or unique identifier associated with the physical instance of the
     /// resource.
-    physical_resource_id: ?[]const u8,
+    physical_resource_id: ?[]const u8 = null,
 
     /// BLOB of the properties used to create the resource.
-    resource_properties: ?[]const u8,
+    resource_properties: ?[]const u8 = null,
 
     /// Current status of the resource.
-    resource_status: ?ResourceStatus,
+    resource_status: ?ResourceStatus = null,
 
     /// Success/failure message associated with the resource.
-    resource_status_reason: ?[]const u8,
+    resource_status_reason: ?[]const u8 = null,
 
     /// Type of resource. For more information, see [Amazon Web Services resource
     /// and
     /// property types
     /// reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) in the *CloudFormation User Guide*.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The unique ID name of the instance of the stack.
     stack_id: []const u8,

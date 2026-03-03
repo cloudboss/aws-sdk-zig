@@ -5,7 +5,7 @@ const DatasetParameterValueType = @import("dataset_parameter_value_type.zig").Da
 pub const StringDatasetParameter = struct {
     /// A list of default values for a given string dataset parameter type. This
     /// structure only accepts static values.
-    default_values: ?StringDatasetParameterDefaultValues,
+    default_values: ?StringDatasetParameterDefaultValues = null,
 
     /// An identifier for the string parameter that is created in the dataset.
     id: []const u8,

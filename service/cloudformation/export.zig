@@ -5,16 +5,16 @@
 /// stack](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html).
 pub const Export = struct {
     /// The stack that contains the exported output name and value.
-    exporting_stack_id: ?[]const u8,
+    exporting_stack_id: ?[]const u8 = null,
 
     /// The name of exported output value. Use this name and the `Fn::ImportValue`
     /// function to import the associated value into other stacks. The name is
     /// defined in the
     /// `Export` field in the associated stack's `Outputs` section.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The value of the exported output, such as a resource physical ID. This value
     /// is defined in
     /// the `Export` field in the associated stack's `Outputs` section.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

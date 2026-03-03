@@ -23,7 +23,7 @@ pub const Cluster = struct {
     /// cluster,
     /// the capacity provider and associated resources are returned as cluster
     /// attachments.
-    attachments: ?[]const Attachment,
+    attachments: ?[]const Attachment = null,
 
     /// The status of the capacity providers associated with the cluster. The
     /// following are
@@ -40,30 +40,30 @@ pub const Cluster = struct {
     /// **UPDATE_FAILED**
     ///
     /// The capacity provider updates failed.
-    attachments_status: ?[]const u8,
+    attachments_status: ?[]const u8 = null,
 
     /// The capacity providers associated with the cluster.
-    capacity_providers: ?[]const []const u8,
+    capacity_providers: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) that identifies the cluster. For more
     /// information about
     /// the ARN format, see [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids) in the *Amazon ECS Developer
     /// Guide*.
-    cluster_arn: ?[]const u8,
+    cluster_arn: ?[]const u8 = null,
 
     /// A user-generated string that you use to identify your cluster.
-    cluster_name: ?[]const u8,
+    cluster_name: ?[]const u8 = null,
 
     /// The execute command and managed storage configuration for the cluster.
-    configuration: ?ClusterConfiguration,
+    configuration: ?ClusterConfiguration = null,
 
     /// The default capacity provider strategy for the cluster. When services or
     /// tasks are run
     /// in the cluster with no launch type or capacity provider strategy specified,
     /// the default
     /// capacity provider strategy is used.
-    default_capacity_provider_strategy: ?[]const CapacityProviderStrategyItem,
+    default_capacity_provider_strategy: ?[]const CapacityProviderStrategyItem = null,
 
     /// The number of tasks in the cluster that are in the `PENDING` state.
     pending_tasks_count: i32 = 0,
@@ -98,12 +98,12 @@ pub const Cluster = struct {
     /// Service Connect. For more information, see [Service
     /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    service_connect_defaults: ?ClusterServiceConnectDefaults,
+    service_connect_defaults: ?ClusterServiceConnectDefaults = null,
 
     /// The settings for the cluster. This parameter indicates whether CloudWatch
     /// Container
     /// Insights is on or off for a cluster.
-    settings: ?[]const ClusterSetting,
+    settings: ?[]const ClusterSetting = null,
 
     /// Additional information about your clusters that are separated by launch
     /// type. They
@@ -124,7 +124,7 @@ pub const Cluster = struct {
     /// * drainingEC2ServiceCount
     ///
     /// * drainingFargateServiceCount
-    statistics: ?[]const KeyValuePair,
+    statistics: ?[]const KeyValuePair = null,
 
     /// The status of the cluster. The following are the possible states that are
     /// returned.
@@ -155,7 +155,7 @@ pub const Cluster = struct {
     /// status may remain discoverable in your account for a period of time.
     /// However, this behavior is subject to change in the future. We don't
     /// recommend that you rely on `INACTIVE` clusters persisting.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The metadata that you apply to the cluster to help you categorize and
     /// organize them.
@@ -189,7 +189,7 @@ pub const Cluster = struct {
     /// this prefix. Tags with this prefix do not count against your tags per
     /// resource
     /// limit.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .active_services_count = "activeServicesCount",

@@ -2,19 +2,19 @@
 /// including minimum length and character type requirements.
 pub const PasswordRequirements = struct {
     /// The minimum number of lowercase letters required in passwords.
-    lowercase: ?i32,
+    lowercase: ?i32 = null,
 
     /// The minimum password length in characters.
-    min_length: ?i32,
+    min_length: ?i32 = null,
 
     /// The minimum number of numeric characters required in passwords.
-    numbers: ?i32,
+    numbers: ?i32 = null,
 
     /// The minimum number of special symbol characters required in passwords.
-    symbols: ?i32,
+    symbols: ?i32 = null,
 
     /// The minimum number of uppercase letters required in passwords.
-    uppercase: ?i32,
+    uppercase: ?i32 = null,
 
     pub const json_field_names = .{
         .lowercase = "lowercase",

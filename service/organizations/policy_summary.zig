@@ -9,7 +9,7 @@ pub const PolicySummary = struct {
     /// For more information about ARNs in Organizations, see [ARN
     /// Formats Supported by
     /// Organizations](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies) in the *Amazon Web Services Service Authorization Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A boolean value that indicates whether the specified policy is an Amazon Web
     /// Services managed
@@ -19,7 +19,7 @@ pub const PolicySummary = struct {
     aws_managed: bool = false,
 
     /// The description of the policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier (ID) of the policy.
     ///
@@ -27,7 +27,7 @@ pub const PolicySummary = struct {
     /// requires "p-" followed
     /// by from 8 to 128 lowercase or uppercase letters, digits, or the underscore
     /// character (_).
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The friendly name of the policy.
     ///
@@ -35,10 +35,10 @@ pub const PolicySummary = struct {
     /// that is used to validate this parameter is a string of any of the characters
     /// in the ASCII
     /// character range.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of policy.
-    @"type": ?PolicyType,
+    @"type": ?PolicyType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

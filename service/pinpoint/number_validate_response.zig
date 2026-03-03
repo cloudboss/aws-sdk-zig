@@ -4,56 +4,56 @@ pub const NumberValidateResponse = struct {
     /// registered with. In some countries and regions, this value may be the
     /// carrier or service provider that the phone number was originally registered
     /// with.
-    carrier: ?[]const u8,
+    carrier: ?[]const u8 = null,
 
     /// The name of the city where the phone number was originally registered.
-    city: ?[]const u8,
+    city: ?[]const u8 = null,
 
     /// The cleansed phone number, in E.164 format, for the location where the phone
     /// number was originally registered.
-    cleansed_phone_number_e164: ?[]const u8,
+    cleansed_phone_number_e164: ?[]const u8 = null,
 
     /// The cleansed phone number, in the format for the location where the phone
     /// number was originally registered.
-    cleansed_phone_number_national: ?[]const u8,
+    cleansed_phone_number_national: ?[]const u8 = null,
 
     /// The name of the country or region where the phone number was originally
     /// registered.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
     /// region where the phone number was originally registered.
-    country_code_iso_2: ?[]const u8,
+    country_code_iso_2: ?[]const u8 = null,
 
     /// The numeric code for the country or region where the phone number was
     /// originally registered.
-    country_code_numeric: ?[]const u8,
+    country_code_numeric: ?[]const u8 = null,
 
     /// The name of the county where the phone number was originally registered.
-    county: ?[]const u8,
+    county: ?[]const u8 = null,
 
     /// The two-character code, in ISO 3166-1 alpha-2 format, that was sent in the
     /// request body.
-    original_country_code_iso_2: ?[]const u8,
+    original_country_code_iso_2: ?[]const u8 = null,
 
     /// The phone number that was sent in the request body.
-    original_phone_number: ?[]const u8,
+    original_phone_number: ?[]const u8 = null,
 
     /// The description of the phone type. Valid values are: MOBILE, LANDLINE, VOIP,
     /// INVALID, PREPAID, and OTHER.
-    phone_type: ?[]const u8,
+    phone_type: ?[]const u8 = null,
 
     /// The phone type, represented by an integer. Valid values are: 0 (mobile), 1
     /// (landline), 2 (VoIP), 3 (invalid), 4 (other), and 5 (prepaid).
-    phone_type_code: ?i32,
+    phone_type_code: ?i32 = null,
 
     /// The time zone for the location where the phone number was originally
     /// registered.
-    timezone: ?[]const u8,
+    timezone: ?[]const u8 = null,
 
     /// The postal or ZIP code for the location where the phone number was
     /// originally registered.
-    zip_code: ?[]const u8,
+    zip_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .carrier = "Carrier",

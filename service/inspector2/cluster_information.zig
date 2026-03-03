@@ -6,7 +6,7 @@ pub const ClusterInformation = struct {
     cluster_arn: []const u8,
 
     /// Details about the cluster.
-    cluster_details: ?[]const ClusterDetails,
+    cluster_details: ?[]const ClusterDetails = null,
 
     pub const json_field_names = .{
         .cluster_arn = "clusterArn",

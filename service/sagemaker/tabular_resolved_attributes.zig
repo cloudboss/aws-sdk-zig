@@ -6,7 +6,7 @@ pub const TabularResolvedAttributes = struct {
     /// of the AutoML job V2 (Binary Classification, Multiclass Classification,
     /// Regression). For more information, see [ SageMaker Autopilot problem
     /// types](https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types).
-    problem_type: ?ProblemType,
+    problem_type: ?ProblemType = null,
 
     pub const json_field_names = .{
         .problem_type = "ProblemType",

@@ -8,19 +8,19 @@ const RegistrationConfig = @import("registration_config.zig").RegistrationConfig
 /// Contains all the information about a fraudster registration job.
 pub const FraudsterRegistrationJob = struct {
     /// A timestamp of when the fraudster registration job was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to
     /// access
     /// customer's buckets to read the input manifest file and write the job output
     /// file.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     /// The identifier of the domain that contains the fraudster registration job.
-    domain_id: ?[]const u8,
+    domain_id: ?[]const u8 = null,
 
     /// A timestamp of when the fraudster registration job ended.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// Contains details that are populated when an entire batch job fails. In cases
     /// of
@@ -30,38 +30,38 @@ pub const FraudsterRegistrationJob = struct {
     /// use the job output file to identify the individual registration requests
     /// that
     /// failed.
-    failure_details: ?FailureDetails,
+    failure_details: ?FailureDetails = null,
 
     /// The input data config containing an S3 URI for the input manifest file that
     /// contains
     /// the list of fraudster registration job requests.
-    input_data_config: ?InputDataConfig,
+    input_data_config: ?InputDataConfig = null,
 
     /// The service-generated identifier for the fraudster registration job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The client-provided name for the fraudster registration job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// Shows the completed percentage of registration requests listed in the input
     /// file.
-    job_progress: ?JobProgress,
+    job_progress: ?JobProgress = null,
 
     /// The current status of the fraudster registration job.
-    job_status: ?FraudsterRegistrationJobStatus,
+    job_status: ?FraudsterRegistrationJobStatus = null,
 
     /// The output data config containing the S3 location where you want Voice ID to
     /// write
     /// your job output file; you must also include a KMS key ID in order to
     /// encrypt the file.
-    output_data_config: ?OutputDataConfig,
+    output_data_config: ?OutputDataConfig = null,
 
     /// The registration config containing details such as the action to take when a
     /// duplicate
     /// fraudster is detected, and the similarity threshold to use for detecting a
     /// duplicate
     /// fraudster.
-    registration_config: ?RegistrationConfig,
+    registration_config: ?RegistrationConfig = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

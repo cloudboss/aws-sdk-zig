@@ -8,19 +8,19 @@ pub const PresetSettings = struct {
     /// Contains groups of audio encoding settings organized by audio codec. Include
     /// one instance of per output. Can contain multiple groups of encoding
     /// settings.
-    audio_descriptions: ?[]const AudioDescription,
+    audio_descriptions: ?[]const AudioDescription = null,
 
     /// This object holds groups of settings related to captions for one output. For
     /// each output that has captions, include one instance of CaptionDescriptions.
-    caption_descriptions: ?[]const CaptionDescriptionPreset,
+    caption_descriptions: ?[]const CaptionDescriptionPreset = null,
 
     /// Container specific settings.
-    container_settings: ?ContainerSettings,
+    container_settings: ?ContainerSettings = null,
 
     /// VideoDescription contains a group of video encoding settings. The specific
     /// video settings depend on the video codec that you choose for the property
     /// codec. Include one instance of VideoDescription per output.
-    video_description: ?VideoDescription,
+    video_description: ?VideoDescription = null,
 
     pub const json_field_names = .{
         .audio_descriptions = "AudioDescriptions",

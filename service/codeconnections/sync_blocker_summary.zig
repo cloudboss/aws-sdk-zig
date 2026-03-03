@@ -3,10 +3,10 @@ const SyncBlocker = @import("sync_blocker.zig").SyncBlocker;
 /// A summary for sync blockers.
 pub const SyncBlockerSummary = struct {
     /// The latest events for a sync blocker summary.
-    latest_blockers: ?[]const SyncBlocker,
+    latest_blockers: ?[]const SyncBlocker = null,
 
     /// The parent resource name for a sync blocker summary.
-    parent_resource_name: ?[]const u8,
+    parent_resource_name: ?[]const u8 = null,
 
     /// The resource name for sync blocker summary.
     resource_name: []const u8,

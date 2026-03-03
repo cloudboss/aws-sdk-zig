@@ -4,22 +4,22 @@ const CustomPluginRevisionSummary = @import("custom_plugin_revision_summary.zig"
 /// A summary of the custom plugin.
 pub const CustomPluginSummary = struct {
     /// The time that the custom plugin was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the custom plugin.
-    custom_plugin_arn: ?[]const u8,
+    custom_plugin_arn: ?[]const u8 = null,
 
     /// The state of the custom plugin.
-    custom_plugin_state: ?CustomPluginState,
+    custom_plugin_state: ?CustomPluginState = null,
 
     /// A description of the custom plugin.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The latest revision of the custom plugin.
-    latest_revision: ?CustomPluginRevisionSummary,
+    latest_revision: ?CustomPluginRevisionSummary = null,
 
     /// The name of the custom plugin.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "creationTime",

@@ -1,7 +1,7 @@
 /// Defines the Glue data source that contains the training data.
 pub const GlueDataSource = struct {
     /// The Glue catalog that contains the training data.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The Glue database that contains the training data.
     database_name: []const u8,

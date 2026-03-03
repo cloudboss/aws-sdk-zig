@@ -8,34 +8,34 @@ pub const Comment = struct {
     comment_id: []const u8,
 
     /// The details of the user who made the comment.
-    contributor: ?User,
+    contributor: ?User = null,
 
     /// The time that the comment was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The ID of the parent comment.
-    parent_id: ?[]const u8,
+    parent_id: ?[]const u8 = null,
 
     /// If the comment is a reply to another user's comment, this field contains the
     /// user
     /// ID of the user being replied to.
-    recipient_id: ?[]const u8,
+    recipient_id: ?[]const u8 = null,
 
     /// The status of the comment.
-    status: ?CommentStatusType,
+    status: ?CommentStatusType = null,
 
     /// The text of the comment.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// The ID of the root comment in the thread.
-    thread_id: ?[]const u8,
+    thread_id: ?[]const u8 = null,
 
     /// The visibility of the comment. Options are either PRIVATE, where the comment
     /// is
     /// visible only to the comment author and document owner and co-owners, or
     /// PUBLIC, where
     /// the comment is visible to document owners, co-owners, and contributors.
-    visibility: ?CommentVisibilityType,
+    visibility: ?CommentVisibilityType = null,
 
     pub const json_field_names = .{
         .comment_id = "CommentId",

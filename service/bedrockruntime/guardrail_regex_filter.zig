@@ -7,16 +7,16 @@ pub const GuardrailRegexFilter = struct {
 
     /// Indicates whether custom regex entities that breach the guardrail
     /// configuration are detected.
-    detected: ?bool,
+    detected: ?bool = null,
 
     /// The regesx filter match.
-    match: ?[]const u8,
+    match: ?[]const u8 = null,
 
     /// The regex filter name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The regex query.
-    regex: ?[]const u8,
+    regex: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "action",

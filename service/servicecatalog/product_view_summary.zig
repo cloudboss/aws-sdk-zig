@@ -4,7 +4,7 @@ const ProductType = @import("product_type.zig").ProductType;
 pub const ProductViewSummary = struct {
     /// The distributor of the product. Contact the product administrator for the
     /// significance of this value.
-    distributor: ?[]const u8,
+    distributor: ?[]const u8 = null,
 
     /// Indicates whether the product has a default path.
     /// If the product does not have a default path, call ListLaunchPaths
@@ -14,36 +14,36 @@ pub const ProductViewSummary = struct {
     has_default_path: bool = false,
 
     /// The product view identifier.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the product.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The owner of the product. Contact the product administrator for the
     /// significance of
     /// this value.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The product identifier.
-    product_id: ?[]const u8,
+    product_id: ?[]const u8 = null,
 
     /// Short description of the product.
-    short_description: ?[]const u8,
+    short_description: ?[]const u8 = null,
 
     /// The description of the support for this Product.
-    support_description: ?[]const u8,
+    support_description: ?[]const u8 = null,
 
     /// The email contact information to obtain support for this Product.
-    support_email: ?[]const u8,
+    support_email: ?[]const u8 = null,
 
     /// The URL information to obtain support for this Product.
-    support_url: ?[]const u8,
+    support_url: ?[]const u8 = null,
 
     /// The product type. Contact the product administrator for the significance of
     /// this
     /// value. If this value is `MARKETPLACE`, the product was created by Amazon Web
     /// Services Marketplace.
-    @"type": ?ProductType,
+    @"type": ?ProductType = null,
 
     pub const json_field_names = .{
         .distributor = "Distributor",

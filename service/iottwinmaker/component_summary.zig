@@ -10,25 +10,25 @@ pub const ComponentSummary = struct {
 
     /// This string specifies the path to the composite component, starting from the
     /// top-level component.
-    component_path: ?[]const u8,
+    component_path: ?[]const u8 = null,
 
     /// The ID of the component type.
     component_type_id: []const u8,
 
     /// The name of the property definition set in the request.
-    defined_in: ?[]const u8,
+    defined_in: ?[]const u8 = null,
 
     /// The description of the component request.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The property groups.
-    property_groups: ?[]const aws.map.MapEntry(ComponentPropertyGroupResponse),
+    property_groups: ?[]const aws.map.MapEntry(ComponentPropertyGroupResponse) = null,
 
     /// The status of the component type.
     status: Status,
 
     /// The `syncSource` of the sync job, if this entity was created by a sync job.
-    sync_source: ?[]const u8,
+    sync_source: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .component_name = "componentName",

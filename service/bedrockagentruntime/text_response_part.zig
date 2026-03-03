@@ -12,10 +12,10 @@ const Span = @import("span.zig").Span;
 pub const TextResponsePart = struct {
     /// Contains information about where the text with a citation begins and ends in
     /// the generated output.
-    span: ?Span,
+    span: ?Span = null,
 
     /// The part of the generated text that contains a citation.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .span = "span",

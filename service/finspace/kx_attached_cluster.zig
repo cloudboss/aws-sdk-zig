@@ -4,7 +4,7 @@ const KxClusterType = @import("kx_cluster_type.zig").KxClusterType;
 /// The structure containing the metadata of the attached clusters.
 pub const KxAttachedCluster = struct {
     /// A unique name for the attached cluster.
-    cluster_name: ?[]const u8,
+    cluster_name: ?[]const u8 = null,
 
     /// The status of the attached cluster.
     ///
@@ -23,11 +23,11 @@ pub const KxAttachedCluster = struct {
     /// * DELETED – The cluster has been deleted.
     ///
     /// * DELETE_FAILED – The cluster failed to delete.
-    cluster_status: ?KxClusterStatus,
+    cluster_status: ?KxClusterStatus = null,
 
     /// Specifies the type of cluster. The volume for TP and RDB cluster types will
     /// be used for TP logs.
-    cluster_type: ?KxClusterType,
+    cluster_type: ?KxClusterType = null,
 
     pub const json_field_names = .{
         .cluster_name = "clusterName",

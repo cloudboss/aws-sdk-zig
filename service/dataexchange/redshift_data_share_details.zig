@@ -13,22 +13,22 @@ pub const RedshiftDataShareDetails = struct {
     /// A
     /// function name in the Redshift database that is being affected by this
     /// notification.
-    function: ?[]const u8,
+    function: ?[]const u8 = null,
 
     /// A
     /// schema name in the Redshift database that is being affected by this
     /// notification.
-    schema: ?[]const u8,
+    schema: ?[]const u8 = null,
 
     /// A
     /// table name in the Redshift database that is being affected by this
     /// notification.
-    table: ?[]const u8,
+    table: ?[]const u8 = null,
 
     /// A
     /// view name in the Redshift database that is being affected by this
     /// notification.
-    view: ?[]const u8,
+    view: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

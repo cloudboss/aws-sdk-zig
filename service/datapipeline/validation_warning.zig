@@ -3,10 +3,10 @@
 /// by AWS Data Pipeline.
 pub const ValidationWarning = struct {
     /// The identifier of the object that contains the validation warning.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A description of the validation warning.
-    warnings: ?[]const []const u8,
+    warnings: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",

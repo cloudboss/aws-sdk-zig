@@ -8,24 +8,24 @@ pub const CreateSpaceRequest = struct {
     domain_id: []const u8,
 
     /// A collection of ownership settings.
-    ownership_settings: ?OwnershipSettings,
+    ownership_settings: ?OwnershipSettings = null,
 
     /// The name of the space that appears in the SageMaker Studio UI.
-    space_display_name: ?[]const u8,
+    space_display_name: ?[]const u8 = null,
 
     /// The name of the space.
     space_name: []const u8,
 
     /// A collection of space settings.
-    space_settings: ?SpaceSettings,
+    space_settings: ?SpaceSettings = null,
 
     /// A collection of space sharing settings.
-    space_sharing_settings: ?SpaceSharingSettings,
+    space_sharing_settings: ?SpaceSharingSettings = null,
 
     /// Tags to associated with the space. Each tag consists of a key and an
     /// optional value. Tag keys must be unique for each resource. Tags are
     /// searchable using the `Search` API.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .domain_id = "DomainId",

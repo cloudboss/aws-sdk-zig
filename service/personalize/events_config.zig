@@ -4,7 +4,7 @@ const EventParameters = @import("event_parameters.zig").EventParameters;
 pub const EventsConfig = struct {
     /// A list of event parameters, which includes event types and their event value
     /// thresholds and weights.
-    event_parameters_list: ?[]const EventParameters,
+    event_parameters_list: ?[]const EventParameters = null,
 
     pub const json_field_names = .{
         .event_parameters_list = "eventParametersList",

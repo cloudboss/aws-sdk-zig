@@ -14,12 +14,12 @@ pub const EksContainerOverride = struct {
     /// and [Define a command an arguments for a
     /// pod](https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/) in the *Kubernetes
     /// documentation*.
-    args: ?[]const []const u8,
+    args: ?[]const []const u8 = null,
 
     /// The command to send to the container that overrides the default command from
     /// the Docker
     /// image or the job definition.
-    command: ?[]const []const u8,
+    command: ?[]const []const u8 = null,
 
     /// The environment variables to send to the container. You can add new
     /// environment variables,
@@ -29,15 +29,15 @@ pub const EksContainerOverride = struct {
     ///
     /// Environment variables cannot start with "`AWS_BATCH`". This naming
     /// convention is reserved for variables that Batch sets.
-    env: ?[]const EksContainerEnvironmentVariable,
+    env: ?[]const EksContainerEnvironmentVariable = null,
 
     /// The override of the Docker image that's used to start the container.
-    image: ?[]const u8,
+    image: ?[]const u8 = null,
 
     /// A pointer to the container that you want to override. The name must match a
     /// unique container
     /// name that you wish to override.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type and amount of resources to assign to a container. These override
     /// the settings in
@@ -46,7 +46,7 @@ pub const EksContainerOverride = struct {
     /// management for pods and
     /// containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) in the *Kubernetes
     /// documentation*.
-    resources: ?EksContainerResourceRequirements,
+    resources: ?EksContainerResourceRequirements = null,
 
     pub const json_field_names = .{
         .args = "args",

@@ -13,13 +13,13 @@ pub const DeliveryStreamEncryptionConfiguration = struct {
     /// error related
     /// to KMS: CreateDeliveryStream, DeleteDeliveryStream,
     /// StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
-    failure_description: ?FailureDescription,
+    failure_description: ?FailureDescription = null,
 
     /// If `KeyType` is `CUSTOMER_MANAGED_CMK`, this field contains the
     /// ARN of the customer managed CMK. If `KeyType` is `Amazon Web
     /// Services_OWNED_CMK`, `DeliveryStreamEncryptionConfiguration` doesn't contain
     /// a value for `KeyARN`.
-    key_arn: ?[]const u8,
+    key_arn: ?[]const u8 = null,
 
     /// Indicates the type of customer master key (CMK) that is used for encryption.
     /// The default
@@ -27,7 +27,7 @@ pub const DeliveryStreamEncryptionConfiguration = struct {
     /// see
     /// [Customer Master Keys
     /// (CMKs)](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
-    key_type: ?KeyType,
+    key_type: ?KeyType = null,
 
     /// This is the server-side encryption (SSE) status for the Firehose stream. For
     /// a full
@@ -37,7 +37,7 @@ pub const DeliveryStreamEncryptionConfiguration = struct {
     /// or `DISABLING_FAILED`, it is the status of the most recent attempt to enable
     /// or
     /// disable SSE, respectively.
-    status: ?DeliveryStreamEncryptionStatus,
+    status: ?DeliveryStreamEncryptionStatus = null,
 
     pub const json_field_names = .{
         .failure_description = "FailureDescription",

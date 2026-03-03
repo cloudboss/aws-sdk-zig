@@ -8,14 +8,14 @@ const RDSDatabaseProjectedMetric = @import("rds_database_projected_metric.zig").
 /// the metric data of your service against its projected metric data.
 pub const RDSDatabaseRecommendedOptionProjectedMetric = struct {
     /// An array of objects that describe the projected metric.
-    projected_metrics: ?[]const RDSDatabaseProjectedMetric,
+    projected_metrics: ?[]const RDSDatabaseProjectedMetric = null,
 
     /// The rank identifier of the Amazon Aurora or RDS DB instance recommendation
     /// option.
     rank: i32 = 0,
 
     /// The recommended DB instance class for the Amazon Aurora or RDS database.
-    recommended_db_instance_class: ?[]const u8,
+    recommended_db_instance_class: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .projected_metrics = "projectedMetrics",

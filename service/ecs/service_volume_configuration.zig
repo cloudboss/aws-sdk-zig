@@ -13,7 +13,7 @@ pub const ServiceVolumeConfiguration = struct {
     /// created for each task in the service. The Amazon EBS volumes are visible in
     /// your account
     /// in the Amazon EC2 console once they are created.
-    managed_ebs_volume: ?ServiceManagedEBSVolumeConfiguration,
+    managed_ebs_volume: ?ServiceManagedEBSVolumeConfiguration = null,
 
     /// The name of the volume. This value must match the volume name from the
     /// `Volume` object in the task definition.

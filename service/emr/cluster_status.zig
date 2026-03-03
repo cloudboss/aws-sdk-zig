@@ -9,17 +9,17 @@ pub const ClusterStatus = struct {
     /// cluster to
     /// terminate. This structure can contain up to 10 different `ErrorDetail`
     /// tuples.
-    error_details: ?[]const ErrorDetail,
+    error_details: ?[]const ErrorDetail = null,
 
     /// The current state of the cluster.
-    state: ?ClusterState,
+    state: ?ClusterState = null,
 
     /// The reason for the cluster status change.
-    state_change_reason: ?ClusterStateChangeReason,
+    state_change_reason: ?ClusterStateChangeReason = null,
 
     /// A timeline that represents the status of a cluster over the lifetime of the
     /// cluster.
-    timeline: ?ClusterTimeline,
+    timeline: ?ClusterTimeline = null,
 
     pub const json_field_names = .{
         .error_details = "ErrorDetails",

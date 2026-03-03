@@ -8,7 +8,7 @@ pub const Compliance = struct {
     /// The number of Amazon Web Services resources or Config rules that cause a
     /// result of `NON_COMPLIANT`, up to a maximum
     /// number.
-    compliance_contributor_count: ?ComplianceContributorCount,
+    compliance_contributor_count: ?ComplianceContributorCount = null,
 
     /// Indicates whether an Amazon Web Services resource or Config rule is
     /// compliant.
@@ -30,7 +30,7 @@ pub const Compliance = struct {
     /// `INSUFFICIENT_DATA` values. Config does not
     /// support the `NOT_APPLICABLE` value for the
     /// `Compliance` data type.
-    compliance_type: ?ComplianceType,
+    compliance_type: ?ComplianceType = null,
 
     pub const json_field_names = .{
         .compliance_contributor_count = "ComplianceContributorCount",

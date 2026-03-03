@@ -16,7 +16,7 @@ pub const FlinkRunConfiguration = struct {
     /// This value defaults to `false`. If you update your application without
     /// specifying this parameter, `AllowNonRestoredState` will be set to `false`,
     /// even if it was previously set to `true`.
-    allow_non_restored_state: ?bool,
+    allow_non_restored_state: ?bool = null,
 
     pub const json_field_names = .{
         .allow_non_restored_state = "AllowNonRestoredState",

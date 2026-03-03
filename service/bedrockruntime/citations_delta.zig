@@ -8,17 +8,17 @@ pub const CitationsDelta = struct {
     /// Specifies the precise location within a source document where cited content
     /// can be found. This can include character-level positions, page numbers, or
     /// document chunks depending on the document type and indexing method.
-    location: ?CitationLocation,
+    location: ?CitationLocation = null,
 
     /// The source from the original search result that provided the cited content.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     /// The specific content from the source document that was referenced or cited
     /// in the generated response.
-    source_content: ?[]const CitationSourceContentDelta,
+    source_content: ?[]const CitationSourceContentDelta = null,
 
     /// The title or identifier of the source document being cited.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .location = "location",

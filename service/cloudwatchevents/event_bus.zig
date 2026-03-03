@@ -9,15 +9,15 @@
 /// partners services or applications.
 pub const EventBus = struct {
     /// The ARN of the event bus.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the event bus.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The permissions policy of the event bus, describing which other Amazon Web
     /// Services accounts can write
     /// events to this event bus.
-    policy: ?[]const u8,
+    policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

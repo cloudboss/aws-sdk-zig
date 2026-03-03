@@ -7,7 +7,7 @@ const CriterionAdditionalProperties = @import("criterion_additional_properties.z
 pub const FindingCriteria = struct {
     /// A condition that specifies the property, operator, and one or more values to
     /// use to filter the results.
-    criterion: ?[]const aws.map.MapEntry(CriterionAdditionalProperties),
+    criterion: ?[]const aws.map.MapEntry(CriterionAdditionalProperties) = null,
 
     pub const json_field_names = .{
         .criterion = "criterion",

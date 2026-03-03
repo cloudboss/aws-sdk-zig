@@ -4,7 +4,7 @@ const DeploymentConfiguration = @import("deployment_configuration.zig").Deployme
 /// updating the AMI.
 pub const ScheduledUpdateConfig = struct {
     /// The configuration to use when updating the AMI versions.
-    deployment_config: ?DeploymentConfiguration,
+    deployment_config: ?DeploymentConfiguration = null,
 
     /// A cron expression that specifies the schedule that SageMaker follows when
     /// updating the AMI.

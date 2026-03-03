@@ -6,10 +6,10 @@ const PolicyAttachment = @import("policy_attachment.zig").PolicyAttachment;
 /// object.
 pub const PolicyToPath = struct {
     /// The path that is referenced from the root.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// List of policy objects.
-    policies: ?[]const PolicyAttachment,
+    policies: ?[]const PolicyAttachment = null,
 
     pub const json_field_names = .{
         .path = "Path",

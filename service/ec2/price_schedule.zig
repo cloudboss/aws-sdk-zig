@@ -17,18 +17,18 @@ pub const PriceSchedule = struct {
     /// months 5, 4, and 3. Then schedule 2, covering the last two months of the
     /// term, will be active
     /// for months 2 and 1.
-    active: ?bool,
+    active: ?bool = null,
 
     /// The currency for transacting the Reserved Instance resale. At this time, the
     /// only
     /// supported currency is `USD`.
-    currency_code: ?CurrencyCodeValues,
+    currency_code: ?CurrencyCodeValues = null,
 
     /// The fixed price for the term.
-    price: ?f64,
+    price: ?f64 = null,
 
     /// The number of months remaining in the reservation. For example, 2 is the
     /// second to the
     /// last month before the capacity reservation expires.
-    term: ?i64,
+    term: ?i64 = null,
 };

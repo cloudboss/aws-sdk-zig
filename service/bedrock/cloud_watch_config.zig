@@ -3,7 +3,7 @@ const S3Config = @import("s3_config.zig").S3Config;
 /// CloudWatch logging configuration.
 pub const CloudWatchConfig = struct {
     /// S3 configuration for delivering a large amount of data.
-    large_data_delivery_s3_config: ?S3Config,
+    large_data_delivery_s3_config: ?S3Config = null,
 
     /// The log group name.
     log_group_name: []const u8,

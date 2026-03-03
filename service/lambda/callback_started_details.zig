@@ -6,10 +6,10 @@ pub const CallbackStartedDetails = struct {
     callback_id: []const u8,
 
     /// The heartbeat timeout value, in seconds.
-    heartbeat_timeout: ?i32,
+    heartbeat_timeout: ?i32 = null,
 
     /// The timeout value, in seconds.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 
     pub const json_field_names = .{
         .callback_id = "CallbackId",

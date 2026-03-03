@@ -12,66 +12,66 @@ const AwsDynamoDbTableStreamSpecification = @import("aws_dynamo_db_table_stream_
 /// Provides details about a DynamoDB table.
 pub const AwsDynamoDbTableDetails = struct {
     /// A list of attribute definitions for the table.
-    attribute_definitions: ?[]const AwsDynamoDbTableAttributeDefinition,
+    attribute_definitions: ?[]const AwsDynamoDbTableAttributeDefinition = null,
 
     /// Information about the billing for read/write capacity on the table.
-    billing_mode_summary: ?AwsDynamoDbTableBillingModeSummary,
+    billing_mode_summary: ?AwsDynamoDbTableBillingModeSummary = null,
 
     /// Indicates when the table was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    creation_date_time: ?[]const u8,
+    creation_date_time: ?[]const u8 = null,
 
     /// Indicates whether deletion protection is to be enabled (true) or disabled
     /// (false) on the table.
-    deletion_protection_enabled: ?bool,
+    deletion_protection_enabled: ?bool = null,
 
     /// List of global secondary indexes for the table.
-    global_secondary_indexes: ?[]const AwsDynamoDbTableGlobalSecondaryIndex,
+    global_secondary_indexes: ?[]const AwsDynamoDbTableGlobalSecondaryIndex = null,
 
     /// The version of global tables being used.
-    global_table_version: ?[]const u8,
+    global_table_version: ?[]const u8 = null,
 
     /// The number of items in the table.
-    item_count: ?i32,
+    item_count: ?i32 = null,
 
     /// The primary key structure for the table.
-    key_schema: ?[]const AwsDynamoDbTableKeySchema,
+    key_schema: ?[]const AwsDynamoDbTableKeySchema = null,
 
     /// The ARN of the latest stream for the table.
-    latest_stream_arn: ?[]const u8,
+    latest_stream_arn: ?[]const u8 = null,
 
     /// The label of the latest stream. The label is not a unique identifier.
-    latest_stream_label: ?[]const u8,
+    latest_stream_label: ?[]const u8 = null,
 
     /// The list of local secondary indexes for the table.
-    local_secondary_indexes: ?[]const AwsDynamoDbTableLocalSecondaryIndex,
+    local_secondary_indexes: ?[]const AwsDynamoDbTableLocalSecondaryIndex = null,
 
     /// Information about the provisioned throughput for the table.
-    provisioned_throughput: ?AwsDynamoDbTableProvisionedThroughput,
+    provisioned_throughput: ?AwsDynamoDbTableProvisionedThroughput = null,
 
     /// The list of replicas of this table.
-    replicas: ?[]const AwsDynamoDbTableReplica,
+    replicas: ?[]const AwsDynamoDbTableReplica = null,
 
     /// Information about the restore for the table.
-    restore_summary: ?AwsDynamoDbTableRestoreSummary,
+    restore_summary: ?AwsDynamoDbTableRestoreSummary = null,
 
     /// Information about the server-side encryption for the table.
-    sse_description: ?AwsDynamoDbTableSseDescription,
+    sse_description: ?AwsDynamoDbTableSseDescription = null,
 
     /// The current DynamoDB Streams configuration for the table.
-    stream_specification: ?AwsDynamoDbTableStreamSpecification,
+    stream_specification: ?AwsDynamoDbTableStreamSpecification = null,
 
     /// The identifier of the table.
-    table_id: ?[]const u8,
+    table_id: ?[]const u8 = null,
 
     /// The name of the table.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The total size of the table in bytes.
-    table_size_bytes: ?i64,
+    table_size_bytes: ?i64 = null,
 
     /// The current status of the table. Valid values are as follows:
     ///
@@ -88,7 +88,7 @@ pub const AwsDynamoDbTableDetails = struct {
     /// * `INACCESSIBLE_ENCRYPTION_CREDENTIALS`
     ///
     /// * `UPDATING`
-    table_status: ?[]const u8,
+    table_status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attribute_definitions = "AttributeDefinitions",

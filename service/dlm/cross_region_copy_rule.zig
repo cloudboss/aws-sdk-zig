@@ -10,16 +10,16 @@ pub const CrossRegionCopyRule = struct {
     /// The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If
     /// this
     /// parameter is not specified, the default KMS key for the account is used.
-    cmk_arn: ?[]const u8,
+    cmk_arn: ?[]const u8 = null,
 
     /// Indicates whether to copy all user-defined tags from the source snapshot or
     /// AMI to the
     /// cross-Region copy.
-    copy_tags: ?bool,
+    copy_tags: ?bool = null,
 
     /// **[Custom AMI policies only]** The AMI deprecation rule for cross-Region AMI
     /// copies created by the rule.
-    deprecate_rule: ?CrossRegionCopyDeprecateRule,
+    deprecate_rule: ?CrossRegionCopyDeprecateRule = null,
 
     /// To encrypt a copy of an unencrypted snapshot if encryption by default is not
     /// enabled,
@@ -31,7 +31,7 @@ pub const CrossRegionCopyRule = struct {
     /// The retention rule that indicates how long the cross-Region snapshot or AMI
     /// copies are
     /// to be retained in the destination Region.
-    retain_rule: ?CrossRegionCopyRetainRule,
+    retain_rule: ?CrossRegionCopyRetainRule = null,
 
     /// Use this parameter for snapshot policies only. For AMI policies, use
     /// **TargetRegion** instead.
@@ -39,7 +39,7 @@ pub const CrossRegionCopyRule = struct {
     /// **[Custom snapshot policies only]** The target Region or the Amazon Resource
     /// Name (ARN) of the target Outpost for the
     /// snapshot copies.
-    target: ?[]const u8,
+    target: ?[]const u8 = null,
 
     /// Use this parameter for AMI policies only. For snapshot policies, use
     /// **Target** instead. For snapshot policies
@@ -50,7 +50,7 @@ pub const CrossRegionCopyRule = struct {
     /// **[Custom AMI policies only]** The target Region or the Amazon Resource Name
     /// (ARN) of the target Outpost for the
     /// snapshot copies.
-    target_region: ?[]const u8,
+    target_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cmk_arn = "CmkArn",

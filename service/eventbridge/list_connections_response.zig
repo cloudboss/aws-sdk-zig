@@ -2,7 +2,7 @@ const Connection = @import("connection.zig").Connection;
 
 pub const ListConnectionsResponse = struct {
     /// An array of connections objects that include details about the connections.
-    connections: ?[]const Connection,
+    connections: ?[]const Connection = null,
 
     /// A token indicating there are more results available. If there are no more
     /// results, no token is included in the response.
@@ -13,7 +13,7 @@ pub const ListConnectionsResponse = struct {
     ///
     /// Using an expired pagination token results in an `HTTP 400 InvalidToken`
     /// error.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connections = "Connections",

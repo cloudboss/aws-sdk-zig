@@ -4,7 +4,7 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 /// Serverless cluster.
 pub const Serverless = struct {
     /// Includes all client authentication information.
-    client_authentication: ?ServerlessClientAuthentication,
+    client_authentication: ?ServerlessClientAuthentication = null,
 
     /// The configuration of the Amazon VPCs for the cluster.
     vpc_configs: []const VpcConfig,

@@ -15,7 +15,7 @@ const Tag = @import("tag.zig").Tag;
 /// in the *Amazon VPC IPAM User Guide*.
 pub const IpamScope = struct {
     /// The description of the scope.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The external authority configuration for this IPAM scope, if configured.
     ///
@@ -28,39 +28,39 @@ pub const IpamScope = struct {
     /// IPAM pools. This allows you to use your existing IP management system to
     /// control which address ranges are allocated to Amazon Web Services while
     /// using Amazon VPC IPAM to manage subnets within those ranges.
-    external_authority_configuration: ?IpamScopeExternalAuthorityConfiguration,
+    external_authority_configuration: ?IpamScopeExternalAuthorityConfiguration = null,
 
     /// The ARN of the IPAM.
-    ipam_arn: ?[]const u8,
+    ipam_arn: ?[]const u8 = null,
 
     /// The Amazon Web Services Region of the IPAM scope.
-    ipam_region: ?[]const u8,
+    ipam_region: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the scope.
-    ipam_scope_arn: ?[]const u8,
+    ipam_scope_arn: ?[]const u8 = null,
 
     /// The ID of the scope.
-    ipam_scope_id: ?[]const u8,
+    ipam_scope_id: ?[]const u8 = null,
 
     /// The type of the scope.
-    ipam_scope_type: ?IpamScopeType,
+    ipam_scope_type: ?IpamScopeType = null,
 
     /// Defines if the scope is the default scope or not.
-    is_default: ?bool,
+    is_default: ?bool = null,
 
     /// The Amazon Web Services account ID of the owner of the scope.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The number of pools in the scope.
-    pool_count: ?i32,
+    pool_count: ?i32 = null,
 
     /// The state of the IPAM scope.
-    state: ?IpamScopeState,
+    state: ?IpamScopeState = null,
 
     /// The key/value combination of a tag assigned to the resource. Use the tag key
     /// in the filter name and the tag value as the filter value.
     /// For example, to find all resources that have a tag with the key `Owner` and
     /// the value `TeamA`, specify `tag:Owner` for the filter name and `TeamA` for
     /// the filter value.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

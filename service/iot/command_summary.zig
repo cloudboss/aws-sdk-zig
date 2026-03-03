@@ -1,25 +1,25 @@
 /// Summary information about a particular command resource.
 pub const CommandSummary = struct {
     /// The Amazon Resource Name (ARN) of the command.
-    command_arn: ?[]const u8,
+    command_arn: ?[]const u8 = null,
 
     /// The unique identifier of the command.
-    command_id: ?[]const u8,
+    command_id: ?[]const u8 = null,
 
     /// The timestamp, when the command was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Indicates whether the command has been deprecated.
-    deprecated: ?bool,
+    deprecated: ?bool = null,
 
     /// The display name of the command.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The timestamp, when the command was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// Indicates whether the command is pending deletion.
-    pending_deletion: ?bool,
+    pending_deletion: ?bool = null,
 
     pub const json_field_names = .{
         .command_arn = "commandArn",

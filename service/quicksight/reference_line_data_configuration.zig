@@ -11,10 +11,10 @@ pub const ReferenceLineDataConfiguration = struct {
     /// * `PrimaryY`
     ///
     /// * `SecondaryY`
-    axis_binding: ?AxisBinding,
+    axis_binding: ?AxisBinding = null,
 
     /// The dynamic configuration of the reference line data configuration.
-    dynamic_configuration: ?ReferenceLineDynamicDataConfiguration,
+    dynamic_configuration: ?ReferenceLineDynamicDataConfiguration = null,
 
     /// The series type of the reference line data configuration. Choose one of the
     /// following options:
@@ -22,10 +22,10 @@ pub const ReferenceLineDataConfiguration = struct {
     /// * `BAR`
     ///
     /// * `LINE`
-    series_type: ?ReferenceLineSeriesType,
+    series_type: ?ReferenceLineSeriesType = null,
 
     /// The static data configuration of the reference line data configuration.
-    static_configuration: ?ReferenceLineStaticDataConfiguration,
+    static_configuration: ?ReferenceLineStaticDataConfiguration = null,
 
     pub const json_field_names = .{
         .axis_binding = "AxisBinding",

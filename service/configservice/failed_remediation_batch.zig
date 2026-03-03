@@ -3,10 +3,10 @@ const RemediationConfiguration = @import("remediation_configuration.zig").Remedi
 /// List of each of the failed remediations with specific reasons.
 pub const FailedRemediationBatch = struct {
     /// Returns remediation configurations of the failed items.
-    failed_items: ?[]const RemediationConfiguration,
+    failed_items: ?[]const RemediationConfiguration = null,
 
     /// Returns a failure message. For example, the resource is already compliant.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .failed_items = "FailedItems",

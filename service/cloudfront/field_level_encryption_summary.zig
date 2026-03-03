@@ -5,10 +5,10 @@ const QueryArgProfileConfig = @import("query_arg_profile_config.zig").QueryArgPr
 pub const FieldLevelEncryptionSummary = struct {
     /// An optional comment about the field-level encryption item. The comment
     /// cannot be longer than 128 characters.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// A summary of a content type-profile mapping.
-    content_type_profile_config: ?ContentTypeProfileConfig,
+    content_type_profile_config: ?ContentTypeProfileConfig = null,
 
     /// The unique ID of a field-level encryption item.
     id: []const u8,
@@ -17,5 +17,5 @@ pub const FieldLevelEncryptionSummary = struct {
     last_modified_time: i64,
 
     /// A summary of a query argument-profile mapping.
-    query_arg_profile_config: ?QueryArgProfileConfig,
+    query_arg_profile_config: ?QueryArgProfileConfig = null,
 };

@@ -7,25 +7,25 @@ const ActionStatus = @import("action_status.zig").ActionStatus;
 /// artifact.
 pub const ActionSummary = struct {
     /// The Amazon Resource Name (ARN) of the action.
-    action_arn: ?[]const u8,
+    action_arn: ?[]const u8 = null,
 
     /// The name of the action.
-    action_name: ?[]const u8,
+    action_name: ?[]const u8 = null,
 
     /// The type of the action.
-    action_type: ?[]const u8,
+    action_type: ?[]const u8 = null,
 
     /// When the action was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// When the action was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The source of the action.
-    source: ?ActionSource,
+    source: ?ActionSource = null,
 
     /// The status of the action.
-    status: ?ActionStatus,
+    status: ?ActionStatus = null,
 
     pub const json_field_names = .{
         .action_arn = "ActionArn",

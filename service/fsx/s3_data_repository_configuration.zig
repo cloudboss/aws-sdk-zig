@@ -17,12 +17,12 @@ pub const S3DataRepositoryConfiguration = struct {
     /// Specifies the type of updated objects (new, changed, deleted)
     /// that will be automatically exported from your file system to
     /// the linked S3 bucket.
-    auto_export_policy: ?AutoExportPolicy,
+    auto_export_policy: ?AutoExportPolicy = null,
 
     /// Specifies the type of updated objects (new, changed, deleted)
     /// that will be automatically imported from the linked S3 bucket
     /// to your file system.
-    auto_import_policy: ?AutoImportPolicy,
+    auto_import_policy: ?AutoImportPolicy = null,
 
     pub const json_field_names = .{
         .auto_export_policy = "AutoExportPolicy",

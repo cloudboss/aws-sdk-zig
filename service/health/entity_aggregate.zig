@@ -15,10 +15,10 @@ pub const EntityAggregate = struct {
     /// For example, an event ARN might look like the following:
     ///
     /// `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
-    event_arn: ?[]const u8,
+    event_arn: ?[]const u8 = null,
 
     /// The number of affected entities aggregated by the entity status codes.
-    statuses: ?[]const aws.map.MapEntry(i32),
+    statuses: ?[]const aws.map.MapEntry(i32) = null,
 
     pub const json_field_names = .{
         .count = "count",

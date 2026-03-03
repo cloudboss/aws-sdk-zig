@@ -4,10 +4,10 @@
 /// agent configuration was updated.
 pub const AgentConfigurationStatus = struct {
     /// The agent ID.
-    agent_id: ?[]const u8,
+    agent_id: ?[]const u8 = null,
 
     /// A description of the operation performed.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about the status of the `StartDataCollection` and
     /// `StopDataCollection` operations. The system has recorded the data collection

@@ -11,37 +11,37 @@ const CapabilityType = @import("capability_type.zig").CapabilityType;
 /// capability.
 pub const Capability = struct {
     /// The Amazon Resource Name (ARN) of the capability.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The unique name of the capability within the cluster.
-    capability_name: ?[]const u8,
+    capability_name: ?[]const u8 = null,
 
     /// The name of the Amazon EKS cluster that contains this capability.
-    cluster_name: ?[]const u8,
+    cluster_name: ?[]const u8 = null,
 
     /// The configuration settings for the capability. The structure varies
     /// depending on the capability type.
-    configuration: ?CapabilityConfigurationResponse,
+    configuration: ?CapabilityConfigurationResponse = null,
 
     /// The Unix epoch timestamp in seconds for when the capability was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The delete propagation policy for the capability. Currently, the only
     /// supported value is `RETAIN`, which keeps all resources managed by the
     /// capability when the capability is deleted.
-    delete_propagation_policy: ?CapabilityDeletePropagationPolicy,
+    delete_propagation_policy: ?CapabilityDeletePropagationPolicy = null,
 
     /// Health information for the capability, including any issues that may be
     /// affecting its operation.
-    health: ?CapabilityHealth,
+    health: ?CapabilityHealth = null,
 
     /// The Unix epoch timestamp in seconds for when the capability was last
     /// modified.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that the capability uses to
     /// interact with Amazon Web Services services.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The current status of the capability. Valid values include:
     ///
@@ -58,15 +58,15 @@ pub const Capability = struct {
     /// * `UPDATE_FAILED` – The capability update failed.
     ///
     /// * `DELETE_FAILED` – The capability deletion failed.
-    status: ?CapabilityStatus,
+    status: ?CapabilityStatus = null,
 
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of capability. Valid values are `ACK`, `ARGOCD`, or `KRO`.
-    @"type": ?CapabilityType,
+    @"type": ?CapabilityType = null,
 
     /// The version of the capability software that is currently running.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

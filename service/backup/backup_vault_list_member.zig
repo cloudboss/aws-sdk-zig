@@ -7,14 +7,14 @@ pub const BackupVaultListMember = struct {
     /// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
     /// example,
     /// `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
-    backup_vault_arn: ?[]const u8,
+    backup_vault_arn: ?[]const u8 = null,
 
     /// The name of a logical container where backups are stored. Backup vaults are
     /// identified
     /// by names that are unique to the account used to create them and the Amazon
     /// Web Services
     /// Region where they are created.
-    backup_vault_name: ?[]const u8,
+    backup_vault_name: ?[]const u8 = null,
 
     /// The date and time a resource backup is created, in Unix format and
     /// Coordinated Universal
@@ -22,7 +22,7 @@ pub const BackupVaultListMember = struct {
     /// example, the value 1516925490.087 represents Friday, January 26, 2018
     /// 12:11:30.087
     /// AM.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// A unique string that identifies the request and allows failed requests to be
     /// retried
@@ -30,7 +30,7 @@ pub const BackupVaultListMember = struct {
     ///
     /// If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
     /// characters.
-    creator_request_id: ?[]const u8,
+    creator_request_id: ?[]const u8 = null,
 
     /// A server-side encryption key you can specify to encrypt your backups from
     /// services
@@ -46,12 +46,12 @@ pub const BackupVaultListMember = struct {
     /// full Backup, see [
     /// Encryption for backups in
     /// Backup](https://docs.aws.amazon.com/aws-backup/latest/devguide/encryption.html)
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The type of encryption key used for the backup vault. Valid values are
     /// CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web
     /// Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.
-    encryption_key_type: ?EncryptionKeyType,
+    encryption_key_type: ?EncryptionKeyType = null,
 
     /// The date and time when Backup Vault Lock configuration becomes immutable,
     /// meaning it cannot be changed or deleted.
@@ -66,12 +66,12 @@ pub const BackupVaultListMember = struct {
     /// milliseconds. For example, the value 1516925490.087 represents Friday,
     /// January 26, 2018
     /// 12:11:30.087 AM.
-    lock_date: ?i64,
+    lock_date: ?i64 = null,
 
     /// A Boolean value that indicates whether Backup Vault Lock applies to the
     /// selected backup vault. If `true`, Vault Lock prevents delete and update
     /// operations on the recovery points in the selected vault.
-    locked: ?bool,
+    locked: ?bool = null,
 
     /// The Backup Vault Lock setting that specifies the maximum retention period
     /// that the vault retains its recovery points. If this parameter is not
@@ -91,7 +91,7 @@ pub const BackupVaultListMember = struct {
     /// vault. Recovery points already stored in the vault prior to Vault Lock are
     /// not
     /// affected.
-    max_retention_days: ?i64,
+    max_retention_days: ?i64 = null,
 
     /// The Backup Vault Lock setting that specifies the minimum retention period
     /// that the vault retains its recovery points. If this parameter is not
@@ -109,16 +109,16 @@ pub const BackupVaultListMember = struct {
     /// vault. Recovery points already stored in the vault prior to Vault Lock are
     /// not
     /// affected.
-    min_retention_days: ?i64,
+    min_retention_days: ?i64 = null,
 
     /// The number of recovery points that are stored in a backup vault.
     number_of_recovery_points: i64 = 0,
 
     /// The current state of the vault.
-    vault_state: ?VaultState,
+    vault_state: ?VaultState = null,
 
     /// The type of vault in which the described recovery point is stored.
-    vault_type: ?VaultType,
+    vault_type: ?VaultType = null,
 
     pub const json_field_names = .{
         .backup_vault_arn = "BackupVaultArn",

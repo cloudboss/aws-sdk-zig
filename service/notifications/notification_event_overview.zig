@@ -6,7 +6,7 @@ const NotificationEventSummary = @import("notification_event_summary.zig").Notif
 /// listing notification events.
 pub const NotificationEventOverview = struct {
     /// The ARN of the `aggregatedNotificationEventArn` to match.
-    aggregate_notification_event_arn: ?[]const u8,
+    aggregate_notification_event_arn: ?[]const u8 = null,
 
     /// The `NotificationConfiguration`'s aggregation type.
     ///
@@ -25,10 +25,10 @@ pub const NotificationEventOverview = struct {
     /// * `NONE`
     ///
     /// * The notification isn't aggregated.
-    aggregation_event_type: ?AggregationEventType,
+    aggregation_event_type: ?AggregationEventType = null,
 
     /// Provides an aggregated summary data for notification events.
-    aggregation_summary: ?AggregationSummary,
+    aggregation_summary: ?AggregationSummary = null,
 
     /// The Amazon Resource Name (ARN) of the resource.
     arn: []const u8,
@@ -46,7 +46,7 @@ pub const NotificationEventOverview = struct {
 
     /// The unique identifier of the organizational unit in the notification event
     /// overview.
-    organizational_unit_id: ?[]const u8,
+    organizational_unit_id: ?[]const u8 = null,
 
     /// The account name containing the `NotificationHub`.
     related_account: []const u8,

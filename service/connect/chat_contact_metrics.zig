@@ -1,32 +1,32 @@
 /// Information about the overall participant interactions at the contact level.
 pub const ChatContactMetrics = struct {
     /// The time for an agent to respond after obtaining a chat contact.
-    agent_first_response_time_in_millis: ?i64,
+    agent_first_response_time_in_millis: ?i64 = null,
 
     /// The agent first response timestamp for a chat contact.
-    agent_first_response_timestamp: ?i64,
+    agent_first_response_timestamp: ?i64 = null,
 
     /// The time it took for a contact to end after the last customer message.
-    conversation_close_time_in_millis: ?i64,
+    conversation_close_time_in_millis: ?i64 = null,
 
     /// The number of conversation turns in a chat contact, which represents the
     /// back-and-forth exchanges between
     /// customer and other participants.
-    conversation_turn_count: ?i32,
+    conversation_turn_count: ?i32 = null,
 
     /// A boolean flag indicating whether multiparty chat or supervisor barge were
     /// enabled on this contact.
-    multi_party: ?bool,
+    multi_party: ?bool = null,
 
     /// The total number of characters from bot and automated messages on a chat
     /// contact.
-    total_bot_message_length_in_chars: ?i32,
+    total_bot_message_length_in_chars: ?i32 = null,
 
     /// The total number of bot and automated messages on a chat contact.
-    total_bot_messages: ?i32,
+    total_bot_messages: ?i32 = null,
 
     /// The number of chat messages on the contact.
-    total_messages: ?i32,
+    total_messages: ?i32 = null,
 
     pub const json_field_names = .{
         .agent_first_response_time_in_millis = "AgentFirstResponseTimeInMillis",

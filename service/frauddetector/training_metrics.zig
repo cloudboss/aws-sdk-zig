@@ -6,10 +6,10 @@ pub const TrainingMetrics = struct {
     /// positive rate (FPR) across all possible model score thresholds. A model with
     /// no predictive power has an AUC of 0.5, whereas a perfect model has a score
     /// of 1.0.
-    auc: ?f32,
+    auc: ?f32 = null,
 
     /// The data points details.
-    metric_data_points: ?[]const MetricDataPoint,
+    metric_data_points: ?[]const MetricDataPoint = null,
 
     pub const json_field_names = .{
         .auc = "auc",

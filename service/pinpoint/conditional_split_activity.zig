@@ -13,19 +13,19 @@ const WaitTime = @import("wait_time.zig").WaitTime;
 pub const ConditionalSplitActivity = struct {
     /// The conditions that define the paths for the activity, and the relationship
     /// between the conditions.
-    condition: ?Condition,
+    condition: ?Condition = null,
 
     /// The amount of time to wait before determining whether the conditions are
     /// met, or the date and time when Amazon Pinpoint determines whether the
     /// conditions are met.
-    evaluation_wait_time: ?WaitTime,
+    evaluation_wait_time: ?WaitTime = null,
 
     /// The unique identifier for the activity to perform if the conditions aren't
     /// met.
-    false_activity: ?[]const u8,
+    false_activity: ?[]const u8 = null,
 
     /// The unique identifier for the activity to perform if the conditions are met.
-    true_activity: ?[]const u8,
+    true_activity: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .condition = "Condition",

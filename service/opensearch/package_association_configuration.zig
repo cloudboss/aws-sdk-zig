@@ -5,7 +5,7 @@ pub const PackageAssociationConfiguration = struct {
     /// The configuration parameters to enable accessing the key store required by
     /// the
     /// package.
-    key_store_access_option: ?KeyStoreAccessOption,
+    key_store_access_option: ?KeyStoreAccessOption = null,
 
     pub const json_field_names = .{
         .key_store_access_option = "KeyStoreAccessOption",

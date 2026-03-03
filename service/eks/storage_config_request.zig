@@ -8,7 +8,7 @@ const BlockStorage = @import("block_storage.zig").BlockStorage;
 pub const StorageConfigRequest = struct {
     /// Request to configure EBS Block Storage settings for your EKS Auto Mode
     /// cluster.
-    block_storage: ?BlockStorage,
+    block_storage: ?BlockStorage = null,
 
     pub const json_field_names = .{
         .block_storage = "blockStorage",

@@ -5,10 +5,10 @@ const UplinkDataflowDetails = @import("uplink_dataflow_details.zig").UplinkDataf
 /// Details for an uplink agent endpoint
 pub const UplinkAwsGroundStationAgentEndpointDetails = struct {
     /// Status of the agent associated with the uplink dataflow endpoint
-    agent_status: ?AgentStatus,
+    agent_status: ?AgentStatus = null,
 
     /// Health audit results for the uplink dataflow endpoint
-    audit_results: ?AuditResults,
+    audit_results: ?AuditResults = null,
 
     /// Dataflow details for the uplink endpoint
     dataflow_details: UplinkDataflowDetails,

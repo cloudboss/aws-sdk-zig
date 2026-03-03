@@ -5,12 +5,12 @@ pub const DBClusterRole = struct {
     /// The name of the feature associated with the Amazon Identity and Access
     /// Management (IAM) role.
     /// For the list of supported feature names, see DescribeDBEngineVersions.
-    feature_name: ?[]const u8,
+    feature_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that is associated with the
     /// DB
     /// cluster.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Describes the state of association between the IAM role and the DB cluster.
     /// The Status
@@ -26,5 +26,5 @@ pub const DBClusterRole = struct {
     /// cluster is unable to assume the IAM role in order to access other Amazon
     /// services on your
     /// behalf.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 };

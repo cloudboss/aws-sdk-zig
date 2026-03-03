@@ -7,5 +7,5 @@ pub const AwsLambdaTransformation = struct {
     /// Additional JSON that provides supplemental data to the Lambda function used
     /// to transform
     /// objects.
-    function_payload: ?[]const u8,
+    function_payload: ?[]const u8 = null,
 };

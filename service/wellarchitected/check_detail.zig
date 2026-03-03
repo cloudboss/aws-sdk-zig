@@ -5,39 +5,39 @@ const CheckStatus = @import("check_status.zig").CheckStatus;
 /// Account details for a Well-Architected best practice in relation to Trusted
 /// Advisor checks.
 pub const CheckDetail = struct {
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
-    choice_id: ?[]const u8,
+    choice_id: ?[]const u8 = null,
 
     /// Trusted Advisor check description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Count of flagged resources associated to the check.
-    flagged_resources: ?i32,
+    flagged_resources: ?i32 = null,
 
     /// Trusted Advisor check ID.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Well-Architected Lens ARN associated to the check.
-    lens_arn: ?[]const u8,
+    lens_arn: ?[]const u8 = null,
 
     /// Trusted Advisor check name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    pillar_id: ?[]const u8,
+    pillar_id: ?[]const u8 = null,
 
     /// Provider of the check related to the best practice.
-    provider: ?CheckProvider,
+    provider: ?CheckProvider = null,
 
-    question_id: ?[]const u8,
+    question_id: ?[]const u8 = null,
 
     /// Reason associated to the check.
-    reason: ?CheckFailureReason,
+    reason: ?CheckFailureReason = null,
 
     /// Status associated to the check.
-    status: ?CheckStatus,
+    status: ?CheckStatus = null,
 
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

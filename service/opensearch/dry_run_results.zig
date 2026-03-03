@@ -17,10 +17,10 @@ pub const DryRunResults = struct {
     ///
     /// * **None** - The request doesn't include any
     /// configuration changes.
-    deployment_type: ?[]const u8,
+    deployment_type: ?[]const u8 = null,
 
     /// A message corresponding to the deployment type.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .deployment_type = "DeploymentType",

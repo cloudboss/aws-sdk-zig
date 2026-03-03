@@ -24,7 +24,7 @@ pub const IntegrationPartition = struct {
     ///
     /// Using high-cardinality columns with identity partitioning creates many small
     /// partitions, which can significantly degrade ingestion performance.
-    conversion_spec: ?[]const u8,
+    conversion_spec: ?[]const u8 = null,
 
     /// The field name used to partition data on the target. Avoid using columns
     /// that have unique values for each row (for example, `LastModifiedTimestamp`,
@@ -32,7 +32,7 @@ pub const IntegrationPartition = struct {
     /// suitable for partitioning because they create a large number of small
     /// partitions,
     /// which can lead to performance issues.
-    field_name: ?[]const u8,
+    field_name: ?[]const u8 = null,
 
     /// Specifies the function used to partition data on the target. The accepted
     /// values for this parameter are:
@@ -46,7 +46,7 @@ pub const IntegrationPartition = struct {
     /// * `day` - Extracts the day from timestamp values (e.g., 2023-01-15)
     ///
     /// * `hour` - Extracts the hour from timestamp values (e.g., 2023-01-15-14)
-    function_spec: ?[]const u8,
+    function_spec: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .conversion_spec = "ConversionSpec",

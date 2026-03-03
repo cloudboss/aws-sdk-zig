@@ -5,20 +5,20 @@ pub const ClassifierMetadata = struct {
     /// Describes the result metrics for the test data associated with an
     /// documentation
     /// classifier.
-    evaluation_metrics: ?ClassifierEvaluationMetrics,
+    evaluation_metrics: ?ClassifierEvaluationMetrics = null,
 
     /// The number of labels in the input data.
-    number_of_labels: ?i32,
+    number_of_labels: ?i32 = null,
 
     /// The number of documents in the input data that were used to test the
     /// classifier. Typically
     /// this is 10 to 20 percent of the input documents, up to 10,000 documents.
-    number_of_test_documents: ?i32,
+    number_of_test_documents: ?i32 = null,
 
     /// The number of documents in the input data that were used to train the
     /// classifier.
     /// Typically this is 80 to 90 percent of the input documents.
-    number_of_trained_documents: ?i32,
+    number_of_trained_documents: ?i32 = null,
 
     pub const json_field_names = .{
         .evaluation_metrics = "EvaluationMetrics",

@@ -5,19 +5,19 @@ const OfferingType = @import("offering_type.zig").OfferingType;
 /// Represents the metadata of a device offering.
 pub const Offering = struct {
     /// A string that describes the offering.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID that corresponds to a device offering.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The platform of the device (for example, `ANDROID` or `IOS`).
-    platform: ?DevicePlatform,
+    platform: ?DevicePlatform = null,
 
     /// Specifies whether there are recurring charges for the offering.
-    recurring_charges: ?[]const RecurringCharge,
+    recurring_charges: ?[]const RecurringCharge = null,
 
     /// The type of offering (for example, `RECURRING`) for a device.
-    @"type": ?OfferingType,
+    @"type": ?OfferingType = null,
 
     pub const json_field_names = .{
         .description = "description",

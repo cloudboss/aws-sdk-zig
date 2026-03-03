@@ -7,7 +7,7 @@ const SnapStartApplyOn = @import("snap_start_apply_on.zig").SnapStartApplyOn;
 pub const SnapStart = struct {
     /// Set to `PublishedVersions` to create a snapshot of the initialized execution
     /// environment when you publish a function version.
-    apply_on: ?SnapStartApplyOn,
+    apply_on: ?SnapStartApplyOn = null,
 
     pub const json_field_names = .{
         .apply_on = "ApplyOn",

@@ -4,7 +4,7 @@
 /// in standby mode for automatic switchover during a failure scenario.
 pub const NetworkInterface = struct {
     /// The unique ID of the elastic network interface.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .network_interface_id = "networkInterfaceId",

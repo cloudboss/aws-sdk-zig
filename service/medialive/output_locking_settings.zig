@@ -4,11 +4,11 @@ const PipelineLockingSettings = @import("pipeline_locking_settings.zig").Pipelin
 
 /// Output Locking Settings
 pub const OutputLockingSettings = struct {
-    disabled_locking_settings: ?DisabledLockingSettings,
+    disabled_locking_settings: ?DisabledLockingSettings = null,
 
-    epoch_locking_settings: ?EpochLockingSettings,
+    epoch_locking_settings: ?EpochLockingSettings = null,
 
-    pipeline_locking_settings: ?PipelineLockingSettings,
+    pipeline_locking_settings: ?PipelineLockingSettings = null,
 
     pub const json_field_names = .{
         .disabled_locking_settings = "DisabledLockingSettings",

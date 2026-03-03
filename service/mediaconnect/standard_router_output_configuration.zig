@@ -10,7 +10,7 @@ pub const StandardRouterOutputConfiguration = struct {
     network_interface_arn: []const u8,
 
     /// The protocol used by the standard router output.
-    protocol: ?RouterOutputProtocol,
+    protocol: ?RouterOutputProtocol = null,
 
     /// The configuration settings for the protocol used by the standard router
     /// output.

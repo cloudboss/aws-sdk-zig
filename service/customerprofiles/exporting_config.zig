@@ -11,7 +11,7 @@ const S3ExportingConfig = @import("s3_exporting_config.zig").S3ExportingConfig;
 /// prevention](https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service).
 pub const ExportingConfig = struct {
     /// The S3 location where Identity Resolution Jobs write result files.
-    s3_exporting: ?S3ExportingConfig,
+    s3_exporting: ?S3ExportingConfig = null,
 
     pub const json_field_names = .{
         .s3_exporting = "S3Exporting",

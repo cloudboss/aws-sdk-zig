@@ -16,21 +16,21 @@ pub const NonTalkTimeFilter = struct {
     /// Makes it possible to specify a time range (in milliseconds) in your audio,
     /// during
     /// which you want to search for a period of silence. See for more detail.
-    absolute_time_range: ?AbsoluteTimeRange,
+    absolute_time_range: ?AbsoluteTimeRange = null,
 
     /// Set to `TRUE` to flag periods of speech. Set to `FALSE` to flag
     /// periods of silence
-    negate: ?bool,
+    negate: ?bool = null,
 
     /// Makes it possible to specify a time range (in percentage) in your media
     /// file, during
     /// which you want to search for a period of silence. See for more detail.
-    relative_time_range: ?RelativeTimeRange,
+    relative_time_range: ?RelativeTimeRange = null,
 
     /// Specify the duration, in milliseconds, of the period of silence that you
     /// want to flag.
     /// For example, you can flag a silent period that lasts 30,000 milliseconds.
-    threshold: ?i64,
+    threshold: ?i64 = null,
 
     pub const json_field_names = .{
         .absolute_time_range = "AbsoluteTimeRange",

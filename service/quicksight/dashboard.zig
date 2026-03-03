@@ -3,29 +3,29 @@ const DashboardVersion = @import("dashboard_version.zig").DashboardVersion;
 /// Dashboard.
 pub const Dashboard = struct {
     /// The Amazon Resource Name (ARN) of the resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time that this dashboard was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// Dashboard ID.
-    dashboard_id: ?[]const u8,
+    dashboard_id: ?[]const u8 = null,
 
     /// The last time that this dashboard was published.
-    last_published_time: ?i64,
+    last_published_time: ?i64 = null,
 
     /// The last time that this dashboard was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// A list of analysis Amazon Resource Names (ARNs) to be linked to the
     /// dashboard.
-    link_entities: ?[]const []const u8,
+    link_entities: ?[]const []const u8 = null,
 
     /// A display name for the dashboard.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Version.
-    version: ?DashboardVersion,
+    version: ?DashboardVersion = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

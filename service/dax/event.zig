@@ -7,20 +7,20 @@ const SourceType = @import("source_type.zig").SourceType;
 /// node.
 pub const Event = struct {
     /// The date and time when the event occurred.
-    date: ?i64,
+    date: ?i64 = null,
 
     /// A user-defined message associated with the event.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The source of the event. For example, if the event occurred at the node
     /// level, the
     /// source would be the node ID.
-    source_name: ?[]const u8,
+    source_name: ?[]const u8 = null,
 
     /// Specifies the origin of this event - a cluster, a parameter group, a node
     /// ID,
     /// etc.
-    source_type: ?SourceType,
+    source_type: ?SourceType = null,
 
     pub const json_field_names = .{
         .date = "Date",

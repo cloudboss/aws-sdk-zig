@@ -5,11 +5,11 @@ const AcceptRuleBehavior = @import("accept_rule_behavior.zig").AcceptRuleBehavio
 pub const AcceptRule = struct {
     /// Specifies whether you want to accept the top prediction for all targets or
     /// none.
-    rule: ?AcceptRuleBehavior,
+    rule: ?AcceptRuleBehavior = null,
 
     /// The confidence score that specifies the condition at which a prediction can
     /// be accepted.
-    threshold: ?f32,
+    threshold: ?f32 = null,
 
     pub const json_field_names = .{
         .rule = "rule",

@@ -5,10 +5,10 @@ const SourceConfiguration = @import("source_configuration.zig").SourceConfigurat
 /// media pipeline. `SourceType` must be `ChimeSdkMeeting`.
 pub const ChimeSdkMeetingConfiguration = struct {
     /// The configuration for the artifacts in an Amazon Chime SDK meeting.
-    artifacts_configuration: ?ArtifactsConfiguration,
+    artifacts_configuration: ?ArtifactsConfiguration = null,
 
     /// The source configuration for a specified media pipeline.
-    source_configuration: ?SourceConfiguration,
+    source_configuration: ?SourceConfiguration = null,
 
     pub const json_field_names = .{
         .artifacts_configuration = "ArtifactsConfiguration",

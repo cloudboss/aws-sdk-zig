@@ -6,9 +6,9 @@ const LaunchTemplateOverrides = @import("launch_template_overrides.zig").LaunchT
 /// a mixed instances policy.
 pub const LaunchTemplate = struct {
     /// The launch template.
-    launch_template_specification: ?LaunchTemplateSpecification,
+    launch_template_specification: ?LaunchTemplateSpecification = null,
 
     /// Any properties that you specify override the same properties in the launch
     /// template.
-    overrides: ?[]const LaunchTemplateOverrides,
+    overrides: ?[]const LaunchTemplateOverrides = null,
 };

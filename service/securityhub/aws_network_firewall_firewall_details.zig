@@ -4,37 +4,37 @@ const AwsNetworkFirewallFirewallSubnetMappingsDetails = @import("aws_network_fir
 pub const AwsNetworkFirewallFirewallDetails = struct {
     /// Whether the firewall is protected from deletion. If set to `true`, then the
     /// firewall cannot be deleted.
-    delete_protection: ?bool,
+    delete_protection: ?bool = null,
 
     /// A description of the firewall.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ARN of the firewall.
-    firewall_arn: ?[]const u8,
+    firewall_arn: ?[]const u8 = null,
 
     /// The identifier of the firewall.
-    firewall_id: ?[]const u8,
+    firewall_id: ?[]const u8 = null,
 
     /// A descriptive name of the firewall.
-    firewall_name: ?[]const u8,
+    firewall_name: ?[]const u8 = null,
 
     /// The ARN of the firewall policy.
-    firewall_policy_arn: ?[]const u8,
+    firewall_policy_arn: ?[]const u8 = null,
 
     /// Whether the firewall is protected from a change to the firewall policy. If
     /// set to `true`, you cannot associate a different policy with the firewall.
-    firewall_policy_change_protection: ?bool,
+    firewall_policy_change_protection: ?bool = null,
 
     /// Whether the firewall is protected from a change to the subnet associations.
     /// If set to `true`, you cannot map different subnets to the firewall.
-    subnet_change_protection: ?bool,
+    subnet_change_protection: ?bool = null,
 
     /// The public subnets that Network Firewall uses for the firewall. Each subnet
     /// must belong to a different Availability Zone.
-    subnet_mappings: ?[]const AwsNetworkFirewallFirewallSubnetMappingsDetails,
+    subnet_mappings: ?[]const AwsNetworkFirewallFirewallSubnetMappingsDetails = null,
 
     /// The identifier of the VPC where the firewall is used.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .delete_protection = "DeleteProtection",

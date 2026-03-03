@@ -3,7 +3,7 @@
 pub const IcebergStructField = struct {
     /// Optional documentation or description text that provides additional context
     /// about the purpose and usage of this field.
-    doc: ?[]const u8,
+    doc: ?[]const u8 = null,
 
     /// The unique identifier assigned to this field within the Iceberg table
     /// schema, used for schema evolution and field tracking.
@@ -12,7 +12,7 @@ pub const IcebergStructField = struct {
     /// Default value used to populate the field's value for all records that were
     /// written before the field was added to the schema. This enables backward
     /// compatibility when adding new fields to existing Iceberg tables.
-    initial_default: ?[]const u8,
+    initial_default: ?[]const u8 = null,
 
     /// The name of the field as it appears in the table schema and query
     /// operations.
@@ -29,7 +29,7 @@ pub const IcebergStructField = struct {
     /// Default value used to populate the field's value for any records written
     /// after the field was added to the schema, if the writer does not supply the
     /// field's value. This can be changed through schema evolution.
-    write_default: ?[]const u8,
+    write_default: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .doc = "Doc",

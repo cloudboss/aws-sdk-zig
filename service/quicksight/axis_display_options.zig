@@ -6,23 +6,23 @@ const AxisTickLabelOptions = @import("axis_tick_label_options.zig").AxisTickLabe
 /// The display options for the axis label.
 pub const AxisDisplayOptions = struct {
     /// Determines whether or not the axis line is visible.
-    axis_line_visibility: ?Visibility,
+    axis_line_visibility: ?Visibility = null,
 
     /// The offset value that determines the starting placement of the axis within a
     /// visual's bounds.
-    axis_offset: ?[]const u8,
+    axis_offset: ?[]const u8 = null,
 
     /// The data options for an axis.
-    data_options: ?AxisDataOptions,
+    data_options: ?AxisDataOptions = null,
 
     /// Determines whether or not the grid line is visible.
-    grid_line_visibility: ?Visibility,
+    grid_line_visibility: ?Visibility = null,
 
     /// The scroll bar options for an axis.
-    scrollbar_options: ?ScrollBarOptions,
+    scrollbar_options: ?ScrollBarOptions = null,
 
     /// The tick label options of an axis.
-    tick_label_options: ?AxisTickLabelOptions,
+    tick_label_options: ?AxisTickLabelOptions = null,
 
     pub const json_field_names = .{
         .axis_line_visibility = "AxisLineVisibility",

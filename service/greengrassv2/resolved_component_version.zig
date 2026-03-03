@@ -6,21 +6,21 @@ const VendorGuidance = @import("vendor_guidance.zig").VendorGuidance;
 pub const ResolvedComponentVersion = struct {
     /// The
     /// [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the component.
-    component_name: ?[]const u8,
+    component_name: ?[]const u8 = null,
 
     /// The version of the component.
-    component_version: ?[]const u8,
+    component_version: ?[]const u8 = null,
 
     /// A message that communicates details about the vendor guidance state
     /// of the component version. This message communicates why a component version
     /// is discontinued or deleted.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The recipe of the component version.
-    recipe: ?[]const u8,
+    recipe: ?[]const u8 = null,
 
     /// The vendor guidance state for the component version. This state indicates
     /// whether
@@ -38,7 +38,7 @@ pub const ResolvedComponentVersion = struct {
     ///   you can't
     /// deploy it. If you have any existing deployments that specify this component
     /// version, those deployments will fail.
-    vendor_guidance: ?VendorGuidance,
+    vendor_guidance: ?VendorGuidance = null,
 
     pub const json_field_names = .{
         .arn = "arn",

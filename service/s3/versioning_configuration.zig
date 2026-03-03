@@ -10,8 +10,8 @@ pub const VersioningConfiguration = struct {
     /// returned if the bucket has been configured with MFA delete. If the bucket
     /// has never been so configured,
     /// this element is not returned.
-    mfa_delete: ?MFADelete,
+    mfa_delete: ?MFADelete = null,
 
     /// The versioning state of the bucket.
-    status: ?BucketVersioningStatus,
+    status: ?BucketVersioningStatus = null,
 };

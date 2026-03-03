@@ -967,10 +967,10 @@ pub const Error = struct {
     /// * *HTTP Status Code:* 400 Bad Request
     ///
     /// * *SOAP Fault Code Prefix:* Client
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The error key.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The error message contains a generic description of the error condition in
     /// English. It is intended
@@ -980,10 +980,10 @@ pub const Error = struct {
     /// programs with more exhaustive
     /// error handling and proper internationalization are more likely to ignore the
     /// error message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The version ID of the error.
     ///
     /// This functionality is not supported for directory buckets.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 };

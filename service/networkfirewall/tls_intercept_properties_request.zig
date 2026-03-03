@@ -9,10 +9,10 @@ pub const TlsInterceptPropertiesRequest = struct {
     /// so that the proxy can present PCA-signed certificates which applications
     /// trust through the same root, establishing a secure and consistent trust
     /// model for encrypted communication.
-    pca_arn: ?[]const u8,
+    pca_arn: ?[]const u8 = null,
 
     /// Specifies whether to enable or disable TLS Intercept Mode.
-    tls_intercept_mode: ?TlsInterceptMode,
+    tls_intercept_mode: ?TlsInterceptMode = null,
 
     pub const json_field_names = .{
         .pca_arn = "PcaArn",

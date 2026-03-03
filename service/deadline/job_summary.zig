@@ -13,7 +13,7 @@ pub const JobSummary = struct {
     created_by: []const u8,
 
     /// The date and time the resource ended running.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The job ID.
     job_id: []const u8,
@@ -26,10 +26,10 @@ pub const JobSummary = struct {
 
     /// The number of task failures before the job stops running and is marked as
     /// `FAILED`.
-    max_failed_tasks_count: ?i32,
+    max_failed_tasks_count: ?i32 = null,
 
     /// The maximum number of retries for a job.
-    max_retries_per_task: ?i32,
+    max_retries_per_task: ?i32 = null,
 
     /// The maximum number of worker hosts that can concurrently process a job. When
     /// the `maxWorkerCount` is reached, no more workers will be assigned to process
@@ -40,7 +40,7 @@ pub const JobSummary = struct {
     /// maximum number of workers.
     ///
     /// If you don't specify the `maxWorkerCount`, the default is -1.
-    max_worker_count: ?i32,
+    max_worker_count: ?i32 = null,
 
     /// The job name.
     name: []const u8,
@@ -49,16 +49,16 @@ pub const JobSummary = struct {
     priority: i32,
 
     /// The job ID for the source job.
-    source_job_id: ?[]const u8,
+    source_job_id: ?[]const u8 = null,
 
     /// The date and time the resource started running.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The task status to update the job's tasks to.
-    target_task_run_status: ?JobTargetTaskRunStatus,
+    target_task_run_status: ?JobTargetTaskRunStatus = null,
 
     /// The total number of times tasks from the job failed and were retried.
-    task_failure_retry_count: ?i32,
+    task_failure_retry_count: ?i32 = null,
 
     /// The task run status for the job.
     ///
@@ -72,16 +72,16 @@ pub const JobSummary = struct {
     /// * `CANCELED`–the task has been canceled.
     /// * `FAILED`–the task has failed.
     /// * `SUCCEEDED`–the task has succeeded.
-    task_run_status: ?TaskRunStatus,
+    task_run_status: ?TaskRunStatus = null,
 
     /// The number of tasks running on the job.
-    task_run_status_counts: ?[]const aws.map.MapEntry(i32),
+    task_run_status_counts: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The date and time the resource was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user or system that updated this resource.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

@@ -2,7 +2,7 @@
 /// variation of the feature that you are including in the launch.
 pub const LaunchGroupConfig = struct {
     /// A description of the launch group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The feature that this launch is using.
     feature: []const u8,

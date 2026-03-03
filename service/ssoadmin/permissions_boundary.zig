@@ -17,11 +17,11 @@ pub const PermissionsBoundary = struct {
     /// Specifies the name and path of a customer managed policy. You must have an
     /// IAM policy that matches the name and path in each Amazon Web Services
     /// account where you want to deploy your permission set.
-    customer_managed_policy_reference: ?CustomerManagedPolicyReference,
+    customer_managed_policy_reference: ?CustomerManagedPolicyReference = null,
 
     /// The Amazon Web Services managed policy ARN that you want to attach to a
     /// permission set as a permissions boundary.
-    managed_policy_arn: ?[]const u8,
+    managed_policy_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .customer_managed_policy_reference = "CustomerManagedPolicyReference",

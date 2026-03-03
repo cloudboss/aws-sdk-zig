@@ -4,10 +4,10 @@ const ProvisionedThroughput = @import("provisioned_throughput.zig").ProvisionedT
 /// broker nodes.
 pub const EBSStorageInfo = struct {
     /// EBS volume provisioned throughput information.
-    provisioned_throughput: ?ProvisionedThroughput,
+    provisioned_throughput: ?ProvisionedThroughput = null,
 
     /// The size in GiB of the EBS volume for the data drive on each broker node.
-    volume_size: ?i32,
+    volume_size: ?i32 = null,
 
     pub const json_field_names = .{
         .provisioned_throughput = "ProvisionedThroughput",

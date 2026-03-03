@@ -5,11 +5,11 @@ const AutoTuneStatus = @import("auto_tune_status.zig").AutoTuneStatus;
 /// domain.
 pub const AutoTuneOptionsStatus = struct {
     /// Specifies Auto-Tune options for the specified Elasticsearch domain.
-    options: ?AutoTuneOptions,
+    options: ?AutoTuneOptions = null,
 
     /// Specifies Status of the Auto-Tune options for the specified Elasticsearch
     /// domain.
-    status: ?AutoTuneStatus,
+    status: ?AutoTuneStatus = null,
 
     pub const json_field_names = .{
         .options = "Options",

@@ -12,5 +12,5 @@ pub const AvailabilityZoneDistribution = struct {
     /// * `balanced-best-effort` - If launches fail in an Availability Zone, Auto
     ///   Scaling will attempt to launch in another healthy Availability Zone
     ///   instead.
-    capacity_distribution_strategy: ?CapacityDistributionStrategy,
+    capacity_distribution_strategy: ?CapacityDistributionStrategy = null,
 };

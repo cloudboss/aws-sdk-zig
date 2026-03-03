@@ -5,10 +5,10 @@ const BGPStatus = @import("bgp_status.zig").BGPStatus;
 /// Information about a BGP peer.
 pub const BGPPeer = struct {
     /// The address family for the BGP peer.
-    address_family: ?AddressFamily,
+    address_family: ?AddressFamily = null,
 
     /// The IP address assigned to the Amazon interface.
-    amazon_address: ?[]const u8,
+    amazon_address: ?[]const u8 = null,
 
     /// The autonomous system number (ASN). The valid range is from 1 to 2147483646
     /// for Border Gateway Protocol (BGP) configuration. If you provide a number
@@ -37,22 +37,22 @@ pub const BGPPeer = struct {
     /// * If you provide a value in the same API call for both `asn`
     /// and `asnLong`, the API will only accept the value for
     /// `asnLong`.
-    asn_long: ?i64,
+    asn_long: ?i64 = null,
 
     /// The authentication key for BGP configuration. This string has a minimum
     /// length of 6 characters and and a maximun lenth of 80 characters.
-    auth_key: ?[]const u8,
+    auth_key: ?[]const u8 = null,
 
     /// The Direct Connect endpoint that terminates the BGP peer.
-    aws_device_v2: ?[]const u8,
+    aws_device_v2: ?[]const u8 = null,
 
     /// The Direct Connect endpoint that terminates the logical connection. This
     /// device might be
     /// different than the device that terminates the physical connection.
-    aws_logical_device_id: ?[]const u8,
+    aws_logical_device_id: ?[]const u8 = null,
 
     /// The ID of the BGP peer.
-    bgp_peer_id: ?[]const u8,
+    bgp_peer_id: ?[]const u8 = null,
 
     /// The state of the BGP peer. The following are the possible values:
     ///
@@ -68,7 +68,7 @@ pub const BGPPeer = struct {
     /// * `deleting`: The BGP peer is being deleted.
     ///
     /// * `deleted`: The BGP peer is deleted and cannot be established.
-    bgp_peer_state: ?BGPPeerState,
+    bgp_peer_state: ?BGPPeerState = null,
 
     /// The status of the BGP peer. The following are the possible values:
     ///
@@ -79,10 +79,10 @@ pub const BGPPeer = struct {
     /// * `down`: The BGP peer is down.
     ///
     /// * `unknown`: The BGP peer status is not available.
-    bgp_status: ?BGPStatus,
+    bgp_status: ?BGPStatus = null,
 
     /// The IP address assigned to the customer interface.
-    customer_address: ?[]const u8,
+    customer_address: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .address_family = "addressFamily",

@@ -9,7 +9,7 @@ const rs = @import("rs.zig").rs;
 pub const ReplicationSpecification = struct {
     /// The `regionList` contains the Amazon Web Services Regions where the keyspace
     /// is replicated in.
-    region_list: ?[]const []const u8,
+    region_list: ?[]const []const u8 = null,
 
     /// The `replicationStrategy` of a keyspace, the required value is
     /// `SINGLE_REGION` or `MULTI_REGION`.

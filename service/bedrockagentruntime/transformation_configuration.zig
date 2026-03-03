@@ -8,7 +8,7 @@ pub const TransformationConfiguration = struct {
     mode: QueryTransformationMode,
 
     /// Specifies configurations for transforming text to SQL.
-    text_to_sql_configuration: ?TextToSqlConfiguration,
+    text_to_sql_configuration: ?TextToSqlConfiguration = null,
 
     pub const json_field_names = .{
         .mode = "mode",

@@ -8,7 +8,7 @@ pub const EksPodProperties = struct {
     /// The properties of the container that's used on the Amazon EKS pod.
     ///
     /// This object is limited to 10 elements.
-    containers: ?[]const EksContainer,
+    containers: ?[]const EksContainer = null,
 
     /// The DNS policy for the pod. The default value is `ClusterFirst`. If the
     /// `hostNetwork` parameter is not specified, the default is
@@ -20,7 +20,7 @@ pub const EksPodProperties = struct {
     ///
     /// Valid values: `Default` | `ClusterFirst` |
     /// `ClusterFirstWithHostNet`
-    dns_policy: ?[]const u8,
+    dns_policy: ?[]const u8 = null,
 
     /// Indicates if the pod uses the hosts' network IP address. The default value
     /// is
@@ -30,14 +30,14 @@ pub const EksPodProperties = struct {
     /// pod for incoming connections. For more information, see [Host
     /// namespaces](https://kubernetes.io/docs/concepts/security/pod-security-policy/#host-namespaces) and [Pod networking](https://kubernetes.io/docs/concepts/workloads/pods/#pod-networking)
     /// in the *Kubernetes documentation*.
-    host_network: ?bool,
+    host_network: ?bool = null,
 
     /// References a Kubernetes secret resource. It holds a list of secrets. These
     /// secrets help to gain
     /// access to pull an images from a private registry.
     ///
     /// `ImagePullSecret$name` is required when this object is used.
-    image_pull_secrets: ?[]const ImagePullSecret,
+    image_pull_secrets: ?[]const ImagePullSecret = null,
 
     /// These containers run before application containers, always runs to
     /// completion, and must
@@ -49,13 +49,13 @@ pub const EksPodProperties = struct {
     /// Containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) in the *Kubernetes documentation*.
     ///
     /// This object is limited to 10 elements.
-    init_containers: ?[]const EksContainer,
+    init_containers: ?[]const EksContainer = null,
 
     /// Metadata about the Kubernetes pod. For more information, see [Understanding
     /// Kubernetes
     /// Objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/) in the *Kubernetes
     /// documentation*.
-    metadata: ?EksMetadata,
+    metadata: ?EksMetadata = null,
 
     /// The name of the service account that's used to run the pod. For more
     /// information, see
@@ -64,17 +64,17 @@ pub const EksPodProperties = struct {
     /// to assume an IAM
     /// role](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html) in the *Amazon EKS User Guide* and [Configure service accounts for pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) in the *Kubernetes
     /// documentation*.
-    service_account_name: ?[]const u8,
+    service_account_name: ?[]const u8 = null,
 
     /// Indicates if the processes in a container are shared, or visible, to other
     /// containers in the
     /// same pod. For more information, see [Share
     /// Process Namespace between Containers in a
     /// Pod](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/).
-    share_process_namespace: ?bool,
+    share_process_namespace: ?bool = null,
 
     /// Specifies the volumes for a job definition that uses Amazon EKS resources.
-    volumes: ?[]const EksVolume,
+    volumes: ?[]const EksVolume = null,
 
     pub const json_field_names = .{
         .containers = "containers",

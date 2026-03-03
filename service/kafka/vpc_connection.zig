@@ -3,13 +3,13 @@ const VpcConnectionState = @import("vpc_connection_state.zig").VpcConnectionStat
 /// The VPC connection object.
 pub const VpcConnection = struct {
     /// Information about the auth scheme of Vpc Connection.
-    authentication: ?[]const u8,
+    authentication: ?[]const u8 = null,
 
     /// Creation time of the Vpc Connection.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// State of the Vpc Connection.
-    state: ?VpcConnectionState,
+    state: ?VpcConnectionState = null,
 
     /// The ARN that identifies the Cluster which the Vpc Connection belongs to.
     target_cluster_arn: []const u8,
@@ -18,7 +18,7 @@ pub const VpcConnection = struct {
     vpc_connection_arn: []const u8,
 
     /// The vpcId that belongs to the Vpc Connection.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authentication = "Authentication",

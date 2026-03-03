@@ -6,15 +6,15 @@ const ApiKeyCredentialLocation = @import("api_key_credential_location.zig").ApiK
 pub const GatewayApiKeyCredentialProvider = struct {
     /// The location of the API key credential. This field specifies where in the
     /// request the API key should be placed.
-    credential_location: ?ApiKeyCredentialLocation,
+    credential_location: ?ApiKeyCredentialLocation = null,
 
     /// The name of the credential parameter for the API key. This parameter name is
     /// used when sending the API key to the target endpoint.
-    credential_parameter_name: ?[]const u8,
+    credential_parameter_name: ?[]const u8 = null,
 
     /// The prefix for the API key credential. This prefix is added to the API key
     /// when sending it to the target endpoint.
-    credential_prefix: ?[]const u8,
+    credential_prefix: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the API key credential provider. This ARN
     /// identifies the provider in Amazon Web Services.

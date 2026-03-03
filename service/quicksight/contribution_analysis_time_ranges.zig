@@ -3,10 +3,10 @@ const TopicIRFilterOption = @import("topic_ir_filter_option.zig").TopicIRFilterO
 /// The definition for the `ContributionAnalysisTimeRanges`.
 pub const ContributionAnalysisTimeRanges = struct {
     /// The end range for the `ContributionAnalysisTimeRanges`.
-    end_range: ?TopicIRFilterOption,
+    end_range: ?TopicIRFilterOption = null,
 
     /// The start range for the `ContributionAnalysisTimeRanges`.
-    start_range: ?TopicIRFilterOption,
+    start_range: ?TopicIRFilterOption = null,
 
     pub const json_field_names = .{
         .end_range = "EndRange",

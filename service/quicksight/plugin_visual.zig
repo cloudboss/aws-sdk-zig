@@ -7,20 +7,20 @@ const VisualTitleLabelOptions = @import("visual_title_label_options.zig").Visual
 /// to create new custom charts in Quick Sight.
 pub const PluginVisual = struct {
     /// The list of custom actions that are configured for a visual.
-    actions: ?[]const VisualCustomAction,
+    actions: ?[]const VisualCustomAction = null,
 
     /// A description of the plugin field wells and their persisted properties.
-    chart_configuration: ?PluginVisualConfiguration,
+    chart_configuration: ?PluginVisualConfiguration = null,
 
     /// The Amazon Resource Name (ARN) that reflects the plugin and version.
     plugin_arn: []const u8,
 
-    subtitle: ?VisualSubtitleLabelOptions,
+    subtitle: ?VisualSubtitleLabelOptions = null,
 
-    title: ?VisualTitleLabelOptions,
+    title: ?VisualTitleLabelOptions = null,
 
     /// The alt text for the visual.
-    visual_content_alt_text: ?[]const u8,
+    visual_content_alt_text: ?[]const u8 = null,
 
     /// The ID of the visual that you want to use.
     visual_id: []const u8,

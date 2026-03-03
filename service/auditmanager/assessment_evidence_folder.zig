@@ -1,28 +1,28 @@
 /// The folder where Audit Manager stores evidence for an assessment.
 pub const AssessmentEvidenceFolder = struct {
     /// The identifier for the assessment.
-    assessment_id: ?[]const u8,
+    assessment_id: ?[]const u8 = null,
 
     /// The total count of evidence that's included in the assessment report.
     assessment_report_selection_count: i32 = 0,
 
     /// The name of the user who created the evidence folder.
-    author: ?[]const u8,
+    author: ?[]const u8 = null,
 
     /// The unique identifier for the control.
-    control_id: ?[]const u8,
+    control_id: ?[]const u8 = null,
 
     /// The name of the control.
-    control_name: ?[]const u8,
+    control_name: ?[]const u8 = null,
 
     /// The identifier for the control set.
-    control_set_id: ?[]const u8,
+    control_set_id: ?[]const u8 = null,
 
     /// The Amazon Web Services service that the evidence was collected from.
-    data_source: ?[]const u8,
+    data_source: ?[]const u8 = null,
 
     /// The date when the first evidence was added to the evidence folder.
-    date: ?i64,
+    date: ?i64 = null,
 
     /// The total number of Amazon Web Services resources that were assessed to
     /// generate the
@@ -59,10 +59,10 @@ pub const AssessmentEvidenceFolder = struct {
     evidence_resources_included_count: i32 = 0,
 
     /// The identifier for the folder that the evidence is stored in.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the evidence folder.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The total amount of evidence in the evidence folder.
     total_evidence: i32 = 0,

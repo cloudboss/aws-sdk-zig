@@ -13,13 +13,13 @@ pub const RenditionConfiguration = struct {
     /// dimensions of each
     /// rendition, see [Auto-Record to Amazon
     /// S3](https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html).
-    renditions: ?[]const RenditionConfigurationRendition,
+    renditions: ?[]const RenditionConfigurationRendition = null,
 
     /// Indicates which set of renditions are recorded for a stream. For `BASIC`
     /// channels, the `CUSTOM` value has no effect. If `CUSTOM` is specified, a
     /// set of renditions must be specified in the `renditions` field. Default:
     /// `ALL`.
-    rendition_selection: ?RenditionConfigurationRenditionSelection,
+    rendition_selection: ?RenditionConfigurationRenditionSelection = null,
 
     pub const json_field_names = .{
         .renditions = "renditions",

@@ -3,13 +3,13 @@
 /// using the NetApp ONTAP CLI, REST API, or NetApp SnapMirror. They
 /// are the `Management` and `Intercluster` endpoints.
 pub const FileSystemEndpoint = struct {
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// The IPv4 addresses of the file system endpoint.
-    ip_addresses: ?[]const []const u8,
+    ip_addresses: ?[]const []const u8 = null,
 
     /// The IPv6 addresses of the file system endpoint.
-    ipv_6_addresses: ?[]const []const u8,
+    ipv_6_addresses: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .dns_name = "DNSName",

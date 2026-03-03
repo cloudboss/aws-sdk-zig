@@ -8,12 +8,12 @@ pub const ApplicationMetrics = struct {
     /// have 5 requests (`request_count`) within the most recent time slice of 10
     /// seconds
     /// (`duration`).
-    duration: ?i32,
+    duration: ?i32 = null,
 
     /// Represents the average latency for the slowest X percent of requests over
     /// the last 10
     /// seconds. Latencies are in seconds with one millisecond resolution.
-    latency: ?Latency,
+    latency: ?Latency = null,
 
     /// Average number of requests handled by the web server per second over the
     /// last 10
@@ -23,5 +23,5 @@ pub const ApplicationMetrics = struct {
     /// Represents the percentage of requests over the last 10 seconds that resulted
     /// in each
     /// type of status code response.
-    status_codes: ?StatusCodes,
+    status_codes: ?StatusCodes = null,
 };

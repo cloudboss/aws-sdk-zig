@@ -18,7 +18,7 @@ pub const PortfolioShareDetail = struct {
     ///
     /// 4. The organization itself. (This shares with every account in the
     /// organization).
-    principal_id: ?[]const u8,
+    principal_id: ?[]const u8 = null,
 
     /// Indicates if `Principal` sharing is enabled or disabled for the portfolio
     /// share.
@@ -29,7 +29,7 @@ pub const PortfolioShareDetail = struct {
     share_tag_options: bool = false,
 
     /// The type of the portfolio share.
-    @"type": ?DescribePortfolioShareType,
+    @"type": ?DescribePortfolioShareType = null,
 
     pub const json_field_names = .{
         .accepted = "Accepted",

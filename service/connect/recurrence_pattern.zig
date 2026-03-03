@@ -9,7 +9,7 @@ pub const RecurrencePattern = struct {
     /// month.
     ///
     /// Note: It does not accept multiple values in the same list
-    by_month: ?[]const i32,
+    by_month: ?[]const i32 = null,
 
     /// Specifies which day of the month the event should occur on (1-31). Used with
     /// MONTHLY or YEARLY frequency to schedule events on specific date within a
@@ -24,7 +24,7 @@ pub const RecurrencePattern = struct {
     /// event will be skipped for that month. This field cannot be used
     /// simultaneously with ByWeekdayOccurrence as they represent different
     /// scheduling approaches (specific dates vs. relative weekday positions).
-    by_month_day: ?[]const i32,
+    by_month_day: ?[]const i32 = null,
 
     /// Specifies which occurrence of a weekday within the month the event should
     /// occur on. Must be used with MONTHLY or YEARLY frequency.
@@ -36,7 +36,7 @@ pub const RecurrencePattern = struct {
     /// Example: To schedule the recurring event for the 2nd Thursday of April every
     /// year, set ByWeekdayOccurrence=[2], Day=THURSDAY, ByMonth=[4], Frequency:
     /// YEARLY and INTERVAL=1.
-    by_weekday_occurrence: ?[]const i32,
+    by_weekday_occurrence: ?[]const i32 = null,
 
     /// Defines how often the pattern repeats. This is the base unit for the
     /// recurrence schedule and works in conjunction with the Interval field to

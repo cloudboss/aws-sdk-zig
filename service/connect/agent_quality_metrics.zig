@@ -3,7 +3,7 @@ const AudioQualityMetricsInfo = @import("audio_quality_metrics_info.zig").AudioQ
 /// Information about the quality of the Agent's media connection
 pub const AgentQualityMetrics = struct {
     /// Information about the audio quality of the Agent
-    audio: ?AudioQualityMetricsInfo,
+    audio: ?AudioQualityMetricsInfo = null,
 
     pub const json_field_names = .{
         .audio = "Audio",

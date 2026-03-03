@@ -18,7 +18,7 @@ pub const TaskManagedEBSVolumeConfiguration = struct {
     /// of the [CreateVolume
     /// API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in
     /// the *Amazon EC2 API Reference*.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The Linux filesystem type for the volume. For volumes created from a
     /// snapshot, you
@@ -30,7 +30,7 @@ pub const TaskManagedEBSVolumeConfiguration = struct {
     /// The available filesystem types are  `ext3`, `ext4`, and
     /// `xfs`. If no value is specified, the `xfs` filesystem type is
     /// used by default.
-    filesystem_type: ?TaskFilesystemType,
+    filesystem_type: ?TaskFilesystemType = null,
 
     /// The number of I/O operations per second (IOPS). For `gp3`,
     /// `io1`, and `io2` volumes, this represents the number of IOPS that
@@ -55,7 +55,7 @@ pub const TaskManagedEBSVolumeConfiguration = struct {
     /// This parameter maps 1:1 with the `Iops` parameter of the [CreateVolume
     /// API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API
     /// Reference*.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) identifier of the Amazon Web Services Key
     /// Management Service key
@@ -76,7 +76,7 @@ pub const TaskManagedEBSVolumeConfiguration = struct {
     /// key asynchronously. Therefore, if you specify an ID, alias, or ARN that is
     /// invalid,
     /// the action can appear to complete, but eventually fails.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The ARN of the IAM role to associate with this volume. This is the Amazon
     /// ECS
@@ -109,7 +109,7 @@ pub const TaskManagedEBSVolumeConfiguration = struct {
     /// * `st1` and `sc1`: 125-16,384
     ///
     /// * `standard`: 1-1,024
-    size_in_gi_b: ?i32,
+    size_in_gi_b: ?i32 = null,
 
     /// The snapshot that Amazon ECS uses to create the volume. You must specify
     /// either a
@@ -117,7 +117,7 @@ pub const TaskManagedEBSVolumeConfiguration = struct {
     /// parameter of the [CreateVolume
     /// API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in
     /// the *Amazon EC2 API Reference*.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
     /// The tags to apply to the volume. Amazon ECS applies service-managed tags by
     /// default.
@@ -125,13 +125,13 @@ pub const TaskManagedEBSVolumeConfiguration = struct {
     /// [CreateVolume
     /// API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API
     /// Reference*.
-    tag_specifications: ?[]const EBSTagSpecification,
+    tag_specifications: ?[]const EBSTagSpecification = null,
 
     /// The termination policy for the volume when the task exits. This provides a
     /// way to
     /// control whether Amazon ECS terminates the Amazon EBS volume when the task
     /// stops.
-    termination_policy: ?TaskManagedEBSVolumeTerminationPolicy,
+    termination_policy: ?TaskManagedEBSVolumeTerminationPolicy = null,
 
     /// The throughput to provision for a volume, in MiB/s, with a maximum of 1,000
     /// MiB/s.
@@ -140,7 +140,7 @@ pub const TaskManagedEBSVolumeConfiguration = struct {
     /// Reference*.
     ///
     /// This parameter is only supported for the `gp3` volume type.
-    throughput: ?i32,
+    throughput: ?i32 = null,
 
     /// The rate, in MiB/s, at which data is fetched from a snapshot of an existing
     /// Amazon EBS
@@ -149,7 +149,7 @@ pub const TaskManagedEBSVolumeConfiguration = struct {
     /// only if you specify a `snapshotId`. For more information, see [Initialize
     /// Amazon EBS
     /// volumes](https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html) in the *Amazon EBS User Guide*.
-    volume_initialization_rate: ?i32,
+    volume_initialization_rate: ?i32 = null,
 
     /// The volume type. This parameter maps 1:1 with the `VolumeType` parameter of
     /// the [CreateVolume
@@ -171,7 +171,7 @@ pub const TaskManagedEBSVolumeConfiguration = struct {
     /// * Magnetic: `standard`
     ///
     /// The magnetic volume type is not supported on Fargate.
-    volume_type: ?[]const u8,
+    volume_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .encrypted = "encrypted",

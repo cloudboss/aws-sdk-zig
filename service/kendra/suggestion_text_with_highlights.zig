@@ -5,10 +5,10 @@ const SuggestionHighlight = @import("suggestion_highlight.zig").SuggestionHighli
 pub const SuggestionTextWithHighlights = struct {
     /// The beginning and end of the query suggestion text that should be
     /// highlighted.
-    highlights: ?[]const SuggestionHighlight,
+    highlights: ?[]const SuggestionHighlight = null,
 
     /// The query suggestion text to display to the user.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .highlights = "Highlights",

@@ -5,12 +5,12 @@ const OrderBy = @import("order_by.zig").OrderBy;
 /// about classification jobs.
 pub const ListJobsSortCriteria = struct {
     /// The property to sort the results by.
-    attribute_name: ?ListJobsSortAttributeName,
+    attribute_name: ?ListJobsSortAttributeName = null,
 
     /// The sort order to apply to the results, based on the value for the property
     /// specified by the attributeName property. Valid values are: ASC, sort the
     /// results in ascending order; and, DESC, sort the results in descending order.
-    order_by: ?OrderBy,
+    order_by: ?OrderBy = null,
 
     pub const json_field_names = .{
         .attribute_name = "attributeName",

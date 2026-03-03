@@ -9,7 +9,7 @@ pub const MultiModelConfig = struct {
     /// each invoked infrequently, the endpoint might perform better if you disable
     /// model caching. To disable model caching, set the value of this parameter to
     /// `Disabled`.
-    model_cache_setting: ?ModelCacheSetting,
+    model_cache_setting: ?ModelCacheSetting = null,
 
     pub const json_field_names = .{
         .model_cache_setting = "ModelCacheSetting",

@@ -10,24 +10,24 @@ const VpcEndpoint = @import("vpc_endpoint.zig").VpcEndpoint;
 
 /// Information about an existing OpenSearch Ingestion pipeline.
 pub const Pipeline = struct {
-    buffer_options: ?BufferOptions,
+    buffer_options: ?BufferOptions = null,
 
     /// The date and time when the pipeline was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Destinations to which the pipeline writes data.
-    destinations: ?[]const PipelineDestination,
+    destinations: ?[]const PipelineDestination = null,
 
-    encryption_at_rest_options: ?EncryptionAtRestOptions,
+    encryption_at_rest_options: ?EncryptionAtRestOptions = null,
 
     /// The ingestion endpoints for the pipeline, which you can send data to.
-    ingest_endpoint_urls: ?[]const []const u8,
+    ingest_endpoint_urls: ?[]const []const u8 = null,
 
     /// The date and time when the pipeline was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// Key-value pairs that represent log publishing settings.
-    log_publishing_options: ?LogPublishingOptions,
+    log_publishing_options: ?LogPublishingOptions = null,
 
     /// The maximum pipeline capacity, in Ingestion Compute Units (ICUs).
     max_units: i32 = 0,
@@ -36,37 +36,37 @@ pub const Pipeline = struct {
     min_units: i32 = 0,
 
     /// The Amazon Resource Name (ARN) of the pipeline.
-    pipeline_arn: ?[]const u8,
+    pipeline_arn: ?[]const u8 = null,
 
     /// The Data Prepper pipeline configuration in YAML format.
-    pipeline_configuration_body: ?[]const u8,
+    pipeline_configuration_body: ?[]const u8 = null,
 
     /// The name of the pipeline.
-    pipeline_name: ?[]const u8,
+    pipeline_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that the pipeline uses to
     /// access AWS
     /// resources.
-    pipeline_role_arn: ?[]const u8,
+    pipeline_role_arn: ?[]const u8 = null,
 
     /// A list of VPC endpoints that OpenSearch Ingestion has created to other
     /// Amazon Web Services services.
-    service_vpc_endpoints: ?[]const ServiceVpcEndpoint,
+    service_vpc_endpoints: ?[]const ServiceVpcEndpoint = null,
 
     /// The current status of the pipeline.
-    status: ?PipelineStatus,
+    status: ?PipelineStatus = null,
 
     /// The reason for the current status of the pipeline.
-    status_reason: ?PipelineStatusReason,
+    status_reason: ?PipelineStatusReason = null,
 
     /// A list of tags associated with the given pipeline.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The VPC interface endpoints that have access to the pipeline.
-    vpc_endpoints: ?[]const VpcEndpoint,
+    vpc_endpoints: ?[]const VpcEndpoint = null,
 
     /// The VPC endpoint service name for the pipeline.
-    vpc_endpoint_service: ?[]const u8,
+    vpc_endpoint_service: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .buffer_options = "BufferOptions",

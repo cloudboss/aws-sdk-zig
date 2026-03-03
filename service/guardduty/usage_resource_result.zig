@@ -4,10 +4,10 @@ const Total = @import("total.zig").Total;
 /// resource.
 pub const UsageResourceResult = struct {
     /// The Amazon Web Services resource that generated usage.
-    resource: ?[]const u8,
+    resource: ?[]const u8 = null,
 
     /// Represents the sum total of usage for the specified resource type.
-    total: ?Total,
+    total: ?Total = null,
 
     pub const json_field_names = .{
         .resource = "Resource",

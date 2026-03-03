@@ -28,8 +28,8 @@ pub const DeleteSnapshotReturnCode = struct {
     /// event history. For more information, see [View event
     /// history](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/tutorial-event-history.html)
     /// in the *Amazon Web Services CloudTrail User Guide*.
-    return_code: ?SnapshotReturnCodes,
+    return_code: ?SnapshotReturnCodes = null,
 
     /// The ID of the snapshot.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 };

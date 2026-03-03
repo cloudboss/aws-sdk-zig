@@ -5,7 +5,7 @@ const Order = @import("order.zig").Order;
 /// descending order.
 pub const OrderBy = struct {
     /// The set order that filters results.
-    order: ?Order,
+    order: ?Order = null,
 
     /// The property name.
     property_name: []const u8,

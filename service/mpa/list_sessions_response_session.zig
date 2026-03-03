@@ -10,61 +10,61 @@ pub const ListSessionsResponseSession = struct {
     /// Strategy for executing the protected operation.
     /// `AUTO_COMPLETION_UPON_APPROVAL` means the operation is executed
     /// automatically using the requester's permissions, if approved.
-    action_completion_strategy: ?ActionCompletionStrategy,
+    action_completion_strategy: ?ActionCompletionStrategy = null,
 
     /// Name of the protected operation.
-    action_name: ?[]const u8,
+    action_name: ?[]const u8 = null,
 
     /// A list of `AdditionalSecurityRequirement` applied to the session.
-    additional_security_requirements: ?[]const AdditionalSecurityRequirement,
+    additional_security_requirements: ?[]const AdditionalSecurityRequirement = null,
 
     /// Amazon Resource Name (ARN) for the approval team.
-    approval_team_arn: ?[]const u8,
+    approval_team_arn: ?[]const u8 = null,
 
     /// Name of the approval team.
-    approval_team_name: ?[]const u8,
+    approval_team_name: ?[]const u8 = null,
 
     /// Timestamp when the session was completed.
-    completion_time: ?i64,
+    completion_time: ?i64 = null,
 
     /// Description for the team.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Timestamp when the session was expire.
-    expiration_time: ?i64,
+    expiration_time: ?i64 = null,
 
     /// Timestamp when the session was initiated.
-    initiation_time: ?i64,
+    initiation_time: ?i64 = null,
 
     /// Amazon Resource Name (ARN) for the protected operation.
-    protected_resource_arn: ?[]const u8,
+    protected_resource_arn: ?[]const u8 = null,
 
     /// ID for the account that made the operation request.
-    requester_account_id: ?[]const u8,
+    requester_account_id: ?[]const u8 = null,
 
     /// [IAM
     /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/intro-structure.html#intro-structure-request) that made the operation request.
-    requester_principal_arn: ?[]const u8,
+    requester_principal_arn: ?[]const u8 = null,
 
     /// Amazon Web Services Region where the operation request originated.
-    requester_region: ?[]const u8,
+    requester_region: ?[]const u8 = null,
 
     /// [Service
     /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services) for the service associated with the protected operation.
-    requester_service_principal: ?[]const u8,
+    requester_service_principal: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) for the session.
-    session_arn: ?[]const u8,
+    session_arn: ?[]const u8 = null,
 
     /// Status for the protected operation. For example, if the operation is
     /// `PENDING`.
-    status: ?SessionStatus,
+    status: ?SessionStatus = null,
 
     /// Status code of the session.
-    status_code: ?SessionStatusCode,
+    status_code: ?SessionStatusCode = null,
 
     /// Message describing the status for session.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action_completion_strategy = "ActionCompletionStrategy",

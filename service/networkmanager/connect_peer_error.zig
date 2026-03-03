@@ -3,16 +3,16 @@ const ConnectPeerErrorCode = @import("connect_peer_error_code.zig").ConnectPeerE
 /// Describes an error associated with a Connect peer request
 pub const ConnectPeerError = struct {
     /// The error code for the Connect peer request.
-    code: ?ConnectPeerErrorCode,
+    code: ?ConnectPeerErrorCode = null,
 
     /// The message associated with the error `code`.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The ID of the Connect peer request.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// The ARN of the requested Connect peer resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

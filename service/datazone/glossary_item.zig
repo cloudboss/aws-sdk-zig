@@ -5,16 +5,16 @@ const GlossaryUsageRestriction = @import("glossary_usage_restriction.zig").Gloss
 /// The details of a business glossary.
 pub const GlossaryItem = struct {
     /// The additional attributes of an Amazon DataZone glossary.
-    additional_attributes: ?GlossaryItemAdditionalAttributes,
+    additional_attributes: ?GlossaryItemAdditionalAttributes = null,
 
     /// The timestamp of when the glossary was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon DataZone user who created the glossary.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The business glossary description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the Amazon DataZone domain in which the business glossary
     /// exists.
@@ -33,13 +33,13 @@ pub const GlossaryItem = struct {
     status: GlossaryStatus,
 
     /// The timestamp of when the business glossary was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The Amazon DataZone user who updated the business glossary.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     /// The usage restrictions associated with a goverened glossary term.
-    usage_restrictions: ?[]const GlossaryUsageRestriction,
+    usage_restrictions: ?[]const GlossaryUsageRestriction = null,
 
     pub const json_field_names = .{
         .additional_attributes = "additionalAttributes",

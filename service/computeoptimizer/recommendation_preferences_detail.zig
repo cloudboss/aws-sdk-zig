@@ -21,7 +21,7 @@ pub const RecommendationPreferencesDetail = struct {
     /// infrastructure
     /// metrics](https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html) in the *Compute Optimizer User
     /// Guide*.
-    enhanced_infrastructure_metrics: ?EnhancedInfrastructureMetrics,
+    enhanced_infrastructure_metrics: ?EnhancedInfrastructureMetrics = null,
 
     /// An object that describes the external metrics recommendation preference.
     ///
@@ -31,7 +31,7 @@ pub const RecommendationPreferencesDetail = struct {
     /// applied
     /// to the recommendations already, then this object doesn't appear in the
     /// response.
-    external_metrics_preference: ?ExternalMetricsPreference,
+    external_metrics_preference: ?ExternalMetricsPreference = null,
 
     /// The status of the inferred workload types recommendation preference.
     ///
@@ -39,19 +39,19 @@ pub const RecommendationPreferencesDetail = struct {
     /// that the preference is applied to the recommendations, and a status of
     /// `Inactive` confirms that the preference isn't yet applied to
     /// recommendations.
-    inferred_workload_types: ?InferredWorkloadTypesPreference,
+    inferred_workload_types: ?InferredWorkloadTypesPreference = null,
 
     /// The preference to control the number of days the utilization metrics of the
     /// Amazon Web Services resource are analyzed.
     /// If the preference isn’t set, this object is null.
-    look_back_period: ?LookBackPeriodPreference,
+    look_back_period: ?LookBackPeriodPreference = null,
 
     /// The preference to control which resource type values are considered when
     /// generating rightsizing recommendations.
     /// This object resolves any wildcard expressions and returns the effective list
     /// of candidate resource type values.
     /// If the preference isn’t set, this object is null.
-    preferred_resources: ?[]const EffectivePreferredResource,
+    preferred_resources: ?[]const EffectivePreferredResource = null,
 
     /// The target resource type of the recommendation preference to create.
     ///
@@ -60,14 +60,14 @@ pub const RecommendationPreferencesDetail = struct {
     /// option
     /// encompasses only instances that are part of an Amazon EC2 Auto Scaling
     /// group.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// Describes the savings estimation mode used for calculating savings
     /// opportunity.
     ///
     /// Only the account manager or delegated administrator of your organization can
     /// activate this preference.
-    savings_estimation_mode: ?SavingsEstimationMode,
+    savings_estimation_mode: ?SavingsEstimationMode = null,
 
     /// An object that describes the scope of the recommendation preference.
     ///
@@ -79,14 +79,14 @@ pub const RecommendationPreferencesDetail = struct {
     /// enhanced infrastructure
     /// metrics](https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html) in the *Compute Optimizer User
     /// Guide*.
-    scope: ?Scope,
+    scope: ?Scope = null,
 
     /// The preference to control the resource’s CPU utilization threshold, CPU
     /// utilization headroom, and memory utilization headroom.
     /// If the preference isn’t set, this object is null.
     ///
     /// This preference is only available for the Amazon EC2 instance resource type.
-    utilization_preferences: ?[]const UtilizationPreference,
+    utilization_preferences: ?[]const UtilizationPreference = null,
 
     pub const json_field_names = .{
         .enhanced_infrastructure_metrics = "enhancedInfrastructureMetrics",

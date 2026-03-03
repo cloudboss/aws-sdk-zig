@@ -2,7 +2,7 @@ const CapacityDescription = @import("capacity_description.zig").CapacityDescript
 
 /// Details about worker setting of a connector
 pub const WorkerSetting = struct {
-    capacity: ?CapacityDescription,
+    capacity: ?CapacityDescription = null,
 
     pub const json_field_names = .{
         .capacity = "capacity",

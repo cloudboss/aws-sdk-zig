@@ -9,7 +9,7 @@ pub const InsightRule = struct {
     /// for log groups
     /// that have [Log
     /// transformation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html) enabled. If this is `false`, log events are evaluated before they are transformed.
-    apply_on_transformed_logs: ?bool,
+    apply_on_transformed_logs: ?bool = null,
 
     /// The definition of the rule, as a JSON object. The definition contains the
     /// keywords
@@ -21,7 +21,7 @@ pub const InsightRule = struct {
     definition: []const u8,
 
     /// An optional built-in rule that Amazon Web Services manages.
-    managed_rule: ?bool,
+    managed_rule: ?bool = null,
 
     /// The name of the rule.
     name: []const u8,

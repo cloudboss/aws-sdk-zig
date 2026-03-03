@@ -5,7 +5,7 @@ pub const TlsConfig = struct {
     /// policies
     /// ](https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table) in the *Amazon Web Services IoT Core developer
     /// guide*.
-    security_policy: ?[]const u8,
+    security_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .security_policy = "securityPolicy",

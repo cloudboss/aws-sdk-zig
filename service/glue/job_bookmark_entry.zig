@@ -4,19 +4,19 @@ pub const JobBookmarkEntry = struct {
     attempt: i32 = 0,
 
     /// The bookmark itself.
-    job_bookmark: ?[]const u8,
+    job_bookmark: ?[]const u8 = null,
 
     /// The name of the job in question.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The unique run identifier associated with the previous job run.
-    previous_run_id: ?[]const u8,
+    previous_run_id: ?[]const u8 = null,
 
     /// The run ID number.
     run: i32 = 0,
 
     /// The run ID number.
-    run_id: ?[]const u8,
+    run_id: ?[]const u8 = null,
 
     /// The version of the job.
     version: i32 = 0,

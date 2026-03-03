@@ -6,11 +6,11 @@
 /// this parameter after it's already been specified.
 pub const EncryptionAtRestOptions = struct {
     /// True to enable encryption at rest.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The KMS key ID. Takes the form
     /// `1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a`.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

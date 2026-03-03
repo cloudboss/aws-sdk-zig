@@ -8,8 +8,8 @@ const InstanceRefreshWarmPoolProgress = @import("instance_refresh_warm_pool_prog
 /// (the live pool).
 pub const InstanceRefreshProgressDetails = struct {
     /// Reports progress on replacing instances that are in the Auto Scaling group.
-    live_pool_progress: ?InstanceRefreshLivePoolProgress,
+    live_pool_progress: ?InstanceRefreshLivePoolProgress = null,
 
     /// Reports progress on replacing instances that are in the warm pool.
-    warm_pool_progress: ?InstanceRefreshWarmPoolProgress,
+    warm_pool_progress: ?InstanceRefreshWarmPoolProgress = null,
 };

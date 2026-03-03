@@ -5,7 +5,7 @@ pub const SNSTopicPublishAction = struct {
     /// You can configure the action payload when you send a message as an Amazon
     /// SNS push
     /// notification.
-    payload: ?Payload,
+    payload: ?Payload = null,
 
     /// The ARN of the Amazon SNS target where the message is sent.
     target_arn: []const u8,

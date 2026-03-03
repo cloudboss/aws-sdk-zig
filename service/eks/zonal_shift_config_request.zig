@@ -2,7 +2,7 @@
 pub const ZonalShiftConfigRequest = struct {
     /// If zonal shift is enabled, Amazon Web Services configures zonal autoshift
     /// for the cluster.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

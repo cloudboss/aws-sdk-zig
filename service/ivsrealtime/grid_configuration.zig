@@ -11,7 +11,7 @@ pub const GridConfiguration = struct {
     /// to `"true"` (as a string value) in ParticipantTokenConfiguration is placed
     /// in the featured slot. Default: `""` (no featured
     /// participant).
-    featured_participant_attribute: ?[]const u8,
+    featured_participant_attribute: ?[]const u8 = null,
 
     /// Specifies the spacing between participant tiles in pixels. Default:
     /// `2`.
@@ -27,19 +27,19 @@ pub const GridConfiguration = struct {
     /// Participants with `participantOrderAttribute` set to `""` or not specified
     /// are ordered based
     /// on their arrival time into the stage.
-    participant_order_attribute: ?[]const u8,
+    participant_order_attribute: ?[]const u8 = null,
 
     /// Sets the non-featured participant display mode, to control the aspect ratio
     /// of video
     /// tiles. `VIDEO` is 16:9, `SQUARE` is 1:1, and `PORTRAIT` is
     /// 3:4. Default: `VIDEO`.
-    video_aspect_ratio: ?VideoAspectRatio,
+    video_aspect_ratio: ?VideoAspectRatio = null,
 
     /// Defines how video content fits within the participant tile: `FILL`
     /// (stretched), `COVER` (cropped), or `CONTAIN` (letterboxed). When not
     /// set, `videoFillMode` defaults to `COVER` fill mode for participants
     /// in the grid and to `CONTAIN` fill mode for featured participants.
-    video_fill_mode: ?VideoFillMode,
+    video_fill_mode: ?VideoFillMode = null,
 
     pub const json_field_names = .{
         .featured_participant_attribute = "featuredParticipantAttribute",

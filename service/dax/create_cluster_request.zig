@@ -11,14 +11,14 @@ pub const CreateClusterRequest = struct {
     /// `ReplicationFactor` parameter. If you omit this parameter, DAX will spread
     /// the nodes across Availability Zones for the highest
     /// availability.
-    availability_zones: ?[]const []const u8,
+    availability_zones: ?[]const []const u8 = null,
 
     /// The type of encryption the cluster's endpoint should support. Values are:
     ///
     /// * `NONE` for no encryption
     ///
     /// * `TLS` for Transport Layer Security
-    cluster_endpoint_encryption_type: ?ClusterEndpointEncryptionType,
+    cluster_endpoint_encryption_type: ?ClusterEndpointEncryptionType = null,
 
     /// The cluster identifier. This parameter is stored as a lowercase string.
     ///
@@ -34,7 +34,7 @@ pub const CreateClusterRequest = struct {
     cluster_name: []const u8,
 
     /// A description of the cluster.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A valid Amazon Resource Name (ARN) that identifies an IAM role. At
     /// runtime, DAX will assume this role and use the role's permissions to
@@ -56,7 +56,7 @@ pub const CreateClusterRequest = struct {
     ///
     /// If no explicit `NetworkType` is provided, the network type is
     /// derived based on the subnet group's configuration.
-    network_type: ?NetworkType,
+    network_type: ?NetworkType = null,
 
     /// The compute and memory capacity of the nodes in the cluster.
     node_type: []const u8,
@@ -66,10 +66,10 @@ pub const CreateClusterRequest = struct {
     ///
     /// The Amazon SNS topic owner must be same as the DAX
     /// cluster owner.
-    notification_topic_arn: ?[]const u8,
+    notification_topic_arn: ?[]const u8 = null,
 
     /// The parameter group to be associated with the DAX cluster.
-    parameter_group_name: ?[]const u8,
+    parameter_group_name: ?[]const u8 = null,
 
     /// Specifies the weekly time range during which maintenance on the DAX cluster
     /// is
@@ -98,7 +98,7 @@ pub const CreateClusterRequest = struct {
     /// modify a
     /// cache cluster, DAX assigns a 60-minute maintenance window on a
     /// randomly selected day of the week.
-    preferred_maintenance_window: ?[]const u8,
+    preferred_maintenance_window: ?[]const u8 = null,
 
     /// The number of nodes in the DAX cluster. A replication factor of 1
     /// will create a single-node cluster, without any read replicas. For additional
@@ -120,21 +120,21 @@ pub const CreateClusterRequest = struct {
     ///
     /// If this parameter is not specified, DAX assigns the default VPC
     /// security group to each node.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// Represents the settings used to enable server-side encryption on the
     /// cluster.
-    sse_specification: ?SSESpecification,
+    sse_specification: ?SSESpecification = null,
 
     /// The name of the subnet group to be used for the replication group.
     ///
     /// DAX clusters can only run in an Amazon VPC environment.
     /// All of the subnets that you specify in a subnet group must exist in the same
     /// VPC.
-    subnet_group_name: ?[]const u8,
+    subnet_group_name: ?[]const u8 = null,
 
     /// A set of tags to associate with the DAX cluster.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .availability_zones = "AvailabilityZones",

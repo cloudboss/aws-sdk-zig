@@ -6,10 +6,10 @@ const ReplacementTypeEnum = @import("replacement_type_enum.zig").ReplacementType
 pub const ReplaceContentEntry = struct {
     /// The base-64 encoded content to use when the replacement type is
     /// USE_NEW_CONTENT.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The file mode to apply during conflict resoltion.
-    file_mode: ?FileModeTypeEnum,
+    file_mode: ?FileModeTypeEnum = null,
 
     /// The path of the conflicting file.
     file_path: []const u8,

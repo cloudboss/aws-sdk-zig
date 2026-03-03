@@ -5,11 +5,11 @@ const VerifiedAccessEndpointProtocol = @import("verified_access_endpoint_protoco
 /// `network-interface` type.
 pub const ModifyVerifiedAccessEndpointEniOptions = struct {
     /// The IP port number.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The port ranges.
-    port_ranges: ?[]const ModifyVerifiedAccessEndpointPortRange,
+    port_ranges: ?[]const ModifyVerifiedAccessEndpointPortRange = null,
 
     /// The IP protocol.
-    protocol: ?VerifiedAccessEndpointProtocol,
+    protocol: ?VerifiedAccessEndpointProtocol = null,
 };

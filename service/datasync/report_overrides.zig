@@ -8,19 +8,19 @@ pub const ReportOverrides = struct {
     /// that DataSync attempted to delete in your destination location. This only
     /// applies if you [configure your
     /// task](https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html) to delete data in the destination that isn't in the source.
-    deleted: ?ReportOverride,
+    deleted: ?ReportOverride = null,
 
     /// Specifies the level of reporting for the files, objects, and directories
     /// that DataSync attempted to skip during your transfer.
-    skipped: ?ReportOverride,
+    skipped: ?ReportOverride = null,
 
     /// Specifies the level of reporting for the files, objects, and directories
     /// that DataSync attempted to transfer.
-    transferred: ?ReportOverride,
+    transferred: ?ReportOverride = null,
 
     /// Specifies the level of reporting for the files, objects, and directories
     /// that DataSync attempted to verify at the end of your transfer.
-    verified: ?ReportOverride,
+    verified: ?ReportOverride = null,
 
     pub const json_field_names = .{
         .deleted = "Deleted",

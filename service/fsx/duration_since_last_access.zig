@@ -10,7 +10,7 @@ pub const DurationSinceLastAccess = struct {
     /// determine if a file can be released, based on when it was last
     /// accessed. `DAYS` is the only supported value. This
     /// is a required parameter.
-    unit: ?Unit,
+    unit: ?Unit = null,
 
     /// An integer that represents the minimum amount of time (in days)
     /// since a file was last accessed in the file system. Only exported files
@@ -23,7 +23,7 @@ pub const DurationSinceLastAccess = struct {
     /// its file or directory path must also be specified in the `Paths`
     /// parameter of the operation
     /// in order for the file to be released.
-    value: ?i64,
+    value: ?i64 = null,
 
     pub const json_field_names = .{
         .unit = "Unit",

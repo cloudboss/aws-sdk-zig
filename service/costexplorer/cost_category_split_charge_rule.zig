@@ -19,7 +19,7 @@ pub const CostCategorySplitChargeRule = struct {
 
     /// The parameters for a split charge method. This is only required for the
     /// `FIXED` method.
-    parameters: ?[]const CostCategorySplitChargeRuleParameter,
+    parameters: ?[]const CostCategorySplitChargeRuleParameter = null,
 
     /// The cost category value that you want to split. That value can't be used as
     /// a source

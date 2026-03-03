@@ -26,7 +26,7 @@ pub const EffectiveRecommendationPreferences = struct {
     /// * A ExportEC2InstanceRecommendations or
     ///   ExportAutoScalingGroupRecommendations request, Compute Optimizer
     /// exports recommendations that consist of Graviton instance types only.
-    cpu_vendor_architectures: ?[]const CpuVendorArchitecture,
+    cpu_vendor_architectures: ?[]const CpuVendorArchitecture = null,
 
     /// Describes the activation status of the enhanced infrastructure metrics
     /// preference.
@@ -40,7 +40,7 @@ pub const EffectiveRecommendationPreferences = struct {
     /// infrastructure
     /// metrics](https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html) in the *Compute Optimizer User
     /// Guide*.
-    enhanced_infrastructure_metrics: ?EnhancedInfrastructureMetrics,
+    enhanced_infrastructure_metrics: ?EnhancedInfrastructureMetrics = null,
 
     /// An object that describes the external metrics recommendation preference.
     ///
@@ -50,33 +50,33 @@ pub const EffectiveRecommendationPreferences = struct {
     /// applied
     /// to the recommendations already, then this object doesn't appear in the
     /// response.
-    external_metrics_preference: ?ExternalMetricsPreference,
+    external_metrics_preference: ?ExternalMetricsPreference = null,
 
     /// Describes the activation status of the inferred workload types preference.
     ///
     /// A status of `Active` confirms that the preference is applied in the latest
     /// recommendation refresh. A status of `Inactive` confirms that it's not yet
     /// applied to recommendations.
-    inferred_workload_types: ?InferredWorkloadTypesPreference,
+    inferred_workload_types: ?InferredWorkloadTypesPreference = null,
 
     /// The number of days the utilization metrics of the Amazon Web Services
     /// resource are analyzed.
-    look_back_period: ?LookBackPeriodPreference,
+    look_back_period: ?LookBackPeriodPreference = null,
 
     /// The resource type values that are considered as candidates when generating
     /// rightsizing recommendations.
-    preferred_resources: ?[]const EffectivePreferredResource,
+    preferred_resources: ?[]const EffectivePreferredResource = null,
 
     /// Describes the savings estimation mode applied for calculating savings
     /// opportunity for a resource.
-    savings_estimation_mode: ?InstanceSavingsEstimationMode,
+    savings_estimation_mode: ?InstanceSavingsEstimationMode = null,
 
     /// The resource’s CPU and memory utilization preferences, such as threshold and
     /// headroom, that
     /// are used to generate rightsizing recommendations.
     ///
     /// This preference is only available for the Amazon EC2 instance resource type.
-    utilization_preferences: ?[]const UtilizationPreference,
+    utilization_preferences: ?[]const UtilizationPreference = null,
 
     pub const json_field_names = .{
         .cpu_vendor_architectures = "cpuVendorArchitectures",

@@ -8,12 +8,12 @@ pub const EndpointOutputConfiguration = struct {
     endpoint_name: []const u8,
 
     /// The number of instances recommended to launch initially.
-    initial_instance_count: ?i32,
+    initial_instance_count: ?i32 = null,
 
     /// The instance type recommended by Amazon SageMaker Inference Recommender.
-    instance_type: ?ProductionVariantInstanceType,
+    instance_type: ?ProductionVariantInstanceType = null,
 
-    serverless_config: ?ProductionVariantServerlessConfig,
+    serverless_config: ?ProductionVariantServerlessConfig = null,
 
     /// The name of the production variant (deployed model) made during a
     /// recommendation job.

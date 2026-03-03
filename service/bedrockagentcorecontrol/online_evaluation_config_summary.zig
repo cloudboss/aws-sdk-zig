@@ -8,7 +8,7 @@ pub const OnlineEvaluationConfigSummary = struct {
     created_at: i64,
 
     /// The description of the online evaluation configuration.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The execution status indicating whether the online evaluation is currently
     /// running.
@@ -16,7 +16,7 @@ pub const OnlineEvaluationConfigSummary = struct {
 
     /// The reason for failure if the online evaluation configuration execution
     /// failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the online evaluation configuration.
     online_evaluation_config_arn: []const u8,

@@ -9,19 +9,19 @@ const VisualTitleLabelOptions = @import("visual_title_label_options.zig").Visual
 /// histograms](https://docs.aws.amazon.com/quicksight/latest/user/histogram-charts.html) in the *Amazon Quick Suite User Guide*.
 pub const HistogramVisual = struct {
     /// The list of custom actions that are configured for a visual.
-    actions: ?[]const VisualCustomAction,
+    actions: ?[]const VisualCustomAction = null,
 
     /// The configuration for a `HistogramVisual`.
-    chart_configuration: ?HistogramConfiguration,
+    chart_configuration: ?HistogramConfiguration = null,
 
     /// The subtitle that is displayed on the visual.
-    subtitle: ?VisualSubtitleLabelOptions,
+    subtitle: ?VisualSubtitleLabelOptions = null,
 
     /// The title that is displayed on the visual.
-    title: ?VisualTitleLabelOptions,
+    title: ?VisualTitleLabelOptions = null,
 
     /// The alt text for the visual.
-    visual_content_alt_text: ?[]const u8,
+    visual_content_alt_text: ?[]const u8 = null,
 
     /// The unique identifier of a visual. This identifier must be unique within the
     /// context of a dashboard, template, or analysis. Two dashboards, analyses, or

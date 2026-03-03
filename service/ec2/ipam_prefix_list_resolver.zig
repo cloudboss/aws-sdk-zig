@@ -12,47 +12,47 @@ const Tag = @import("tag.zig").Tag;
 /// lists used in resources such as VPC route tables and security groups.
 pub const IpamPrefixListResolver = struct {
     /// The address family (IPv4 or IPv6) for the IPAM prefix list resolver.
-    address_family: ?AddressFamily,
+    address_family: ?AddressFamily = null,
 
     /// The description of the IPAM prefix list resolver.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IPAM associated with this resolver.
-    ipam_arn: ?[]const u8,
+    ipam_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IPAM prefix list resolver.
-    ipam_prefix_list_resolver_arn: ?[]const u8,
+    ipam_prefix_list_resolver_arn: ?[]const u8 = null,
 
     /// The ID of the IPAM prefix list resolver.
-    ipam_prefix_list_resolver_id: ?[]const u8,
+    ipam_prefix_list_resolver_id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the associated IPAM is located.
-    ipam_region: ?[]const u8,
+    ipam_region: ?[]const u8 = null,
 
     /// The status for the last time a version was created.
     ///
     /// Each version is a snapshot of what CIDRs matched your rules at that moment
     /// in time. The version number increments every time the CIDR list
     /// changes due to infrastructure changes.
-    last_version_creation_status: ?IpamPrefixListResolverVersionCreationStatus,
+    last_version_creation_status: ?IpamPrefixListResolverVersionCreationStatus = null,
 
     /// The status message for the last time a version was created.
     ///
     /// Each version is a snapshot of what CIDRs matched your rules at that moment
     /// in time. The version number increments every time the CIDR list
     /// changes due to infrastructure changes.
-    last_version_creation_status_message: ?[]const u8,
+    last_version_creation_status_message: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the IPAM prefix list
     /// resolver.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The current state of the IPAM prefix list resolver. Valid values include
     /// `create-in-progress`, `create-complete`, `create-failed`,
     /// `modify-in-progress`, `modify-complete`, `modify-failed`,
     /// `delete-in-progress`, `delete-complete`, and `delete-failed`.
-    state: ?IpamPrefixListResolverState,
+    state: ?IpamPrefixListResolverState = null,
 
     /// The tags assigned to the IPAM prefix list resolver.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

@@ -8,12 +8,12 @@ pub const RevocationConfiguration = struct {
     /// by your private CA. A CRL is typically updated approximately 30 minutes
     /// after a certificate is revoked. If for any reason a CRL update fails, Amazon
     /// Web Services Private CA makes further attempts every 15 minutes.
-    crl_configuration: ?CrlConfiguration,
+    crl_configuration: ?CrlConfiguration = null,
 
     /// Configuration of Online Certificate Status Protocol (OCSP) support, if any,
     /// maintained by your private CA. When you revoke a certificate, OCSP responses
     /// may take up to 60 minutes to reflect the new status.
-    ocsp_configuration: ?OcspConfiguration,
+    ocsp_configuration: ?OcspConfiguration = null,
 
     pub const json_field_names = .{
         .crl_configuration = "CrlConfiguration",

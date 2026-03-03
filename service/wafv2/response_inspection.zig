@@ -28,20 +28,20 @@ pub const ResponseInspection = struct {
     /// Configures inspection of the response body for success and failure
     /// indicators. WAF can inspect the first 65,536 bytes (64 KB) of the response
     /// body.
-    body_contains: ?ResponseInspectionBodyContains,
+    body_contains: ?ResponseInspectionBodyContains = null,
 
     /// Configures inspection of the response header for success and failure
     /// indicators.
-    header: ?ResponseInspectionHeader,
+    header: ?ResponseInspectionHeader = null,
 
     /// Configures inspection of the response JSON for success and failure
     /// indicators. WAF can inspect the first 65,536 bytes (64 KB) of the response
     /// JSON.
-    json: ?ResponseInspectionJson,
+    json: ?ResponseInspectionJson = null,
 
     /// Configures inspection of the response status code for success and failure
     /// indicators.
-    status_code: ?ResponseInspectionStatusCode,
+    status_code: ?ResponseInspectionStatusCode = null,
 
     pub const json_field_names = .{
         .body_contains = "BodyContains",

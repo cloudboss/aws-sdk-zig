@@ -4,7 +4,7 @@ pub const GetJobRunRequest = struct {
 
     /// An optimal parameter that indicates the amount of attempts for the job. If
     /// not specified, this value defaults to the attempt of the latest job.
-    attempt: ?i32,
+    attempt: ?i32 = null,
 
     /// The ID of the job run.
     job_run_id: []const u8,

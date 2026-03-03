@@ -7,7 +7,7 @@ const InputLambdaProcessorDescription = @import("input_lambda_processor_descript
 pub const InputProcessingConfigurationDescription = struct {
     /// Provides configuration information about the associated
     /// InputLambdaProcessorDescription
-    input_lambda_processor_description: ?InputLambdaProcessorDescription,
+    input_lambda_processor_description: ?InputLambdaProcessorDescription = null,
 
     pub const json_field_names = .{
         .input_lambda_processor_description = "InputLambdaProcessorDescription",

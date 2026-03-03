@@ -3,17 +3,17 @@ pub const DBClusterMember = struct {
     /// Specifies the status of the cluster parameter group for this member of the
     /// DB
     /// cluster.
-    db_cluster_parameter_group_status: ?[]const u8,
+    db_cluster_parameter_group_status: ?[]const u8 = null,
 
     /// Specifies the instance identifier for this member of the cluster.
-    db_instance_identifier: ?[]const u8,
+    db_instance_identifier: ?[]const u8 = null,
 
     /// A value that is `true` if the cluster member is the primary instance for
     /// the cluster and `false` otherwise.
-    is_cluster_writer: ?bool,
+    is_cluster_writer: ?bool = null,
 
     /// A value that specifies the order in which an Amazon DocumentDB replica is
     /// promoted to the
     /// primary instance after a failure of the existing primary instance.
-    promotion_tier: ?i32,
+    promotion_tier: ?i32 = null,
 };

@@ -8,25 +8,25 @@ const NetworkType = @import("network_type.zig").NetworkType;
 /// * `ModifyCacheSubnetGroup`
 pub const CacheSubnetGroup = struct {
     /// The ARN (Amazon Resource Name) of the cache subnet group.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The description of the cache subnet group.
-    cache_subnet_group_description: ?[]const u8,
+    cache_subnet_group_description: ?[]const u8 = null,
 
     /// The name of the cache subnet group.
-    cache_subnet_group_name: ?[]const u8,
+    cache_subnet_group_name: ?[]const u8 = null,
 
     /// A list of subnets associated with the cache subnet group.
-    subnets: ?[]const Subnet,
+    subnets: ?[]const Subnet = null,
 
     /// Either `ipv4` | `ipv6` | `dual_stack`. IPv6 is
     /// supported for workloads using Valkey 7.2 and above, Redis OSS engine version
     /// 6.2
     /// to 7.1 or Memcached engine version 1.6.6 and above on all instances built on
     /// the [Nitro system](http://aws.amazon.com/ec2/nitro/).
-    supported_network_types: ?[]const NetworkType,
+    supported_network_types: ?[]const NetworkType = null,
 
     /// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet
     /// group.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

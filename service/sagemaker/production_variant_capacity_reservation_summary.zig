@@ -5,7 +5,7 @@ const Ec2CapacityReservation = @import("ec_2_capacity_reservation.zig").Ec2Capac
 pub const ProductionVariantCapacityReservationSummary = struct {
     /// The number of instances that are currently available in the ML capacity
     /// reservation.
-    available_instance_count: ?i32,
+    available_instance_count: ?i32 = null,
 
     /// The option that you chose for the capacity reservation. SageMaker AI
     /// supports the following options:
@@ -14,22 +14,22 @@ pub const ProductionVariantCapacityReservationSummary = struct {
     ///
     /// SageMaker AI launches instances only into an ML capacity reservation. If no
     /// capacity is available, the instances fail to launch.
-    capacity_reservation_preference: ?CapacityReservationPreference,
+    capacity_reservation_preference: ?CapacityReservationPreference = null,
 
     /// The EC2 capacity reservations that are shared to this ML capacity
     /// reservation, if any.
-    ec_2_capacity_reservations: ?[]const Ec2CapacityReservation,
+    ec_2_capacity_reservations: ?[]const Ec2CapacityReservation = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity
     /// reservation that SageMaker AI applies when it deploys the endpoint.
-    ml_reservation_arn: ?[]const u8,
+    ml_reservation_arn: ?[]const u8 = null,
 
     /// The number of instances that you allocated to the ML capacity reservation.
-    total_instance_count: ?i32,
+    total_instance_count: ?i32 = null,
 
     /// The number of instances from the ML capacity reservation that are being used
     /// by the endpoint.
-    used_by_current_endpoint: ?i32,
+    used_by_current_endpoint: ?i32 = null,
 
     pub const json_field_names = .{
         .available_instance_count = "AvailableInstanceCount",

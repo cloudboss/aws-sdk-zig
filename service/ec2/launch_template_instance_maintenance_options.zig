@@ -4,5 +4,5 @@ const LaunchTemplateAutoRecoveryState = @import("launch_template_auto_recovery_s
 pub const LaunchTemplateInstanceMaintenanceOptions = struct {
     /// Disables the automatic recovery behavior of your instance or sets it to
     /// default.
-    auto_recovery: ?LaunchTemplateAutoRecoveryState,
+    auto_recovery: ?LaunchTemplateAutoRecoveryState = null,
 };

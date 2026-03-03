@@ -5,7 +5,7 @@ const OAuth2Defaults = @import("o_auth_2_defaults.zig").OAuth2Defaults;
 /// supports.
 pub const AuthenticationConfig = struct {
     /// Contains information required for custom authentication.
-    custom_auth_configs: ?[]const CustomAuthConfig,
+    custom_auth_configs: ?[]const CustomAuthConfig = null,
 
     /// Indicates whether API key authentication is supported by the connector
     is_api_key_auth_supported: bool = false,
@@ -20,7 +20,7 @@ pub const AuthenticationConfig = struct {
     is_o_auth_2_supported: bool = false,
 
     /// Contains the default values required for OAuth 2.0 authentication.
-    o_auth_2_defaults: ?OAuth2Defaults,
+    o_auth_2_defaults: ?OAuth2Defaults = null,
 
     pub const json_field_names = .{
         .custom_auth_configs = "customAuthConfigs",

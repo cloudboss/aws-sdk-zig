@@ -4,7 +4,7 @@ const ZipClassificationCode = @import("zip_classification_code.zig").ZipClassifi
 pub const UspsZip = struct {
     /// The ZIP Classification Code, or in other words what type of postal code is
     /// it.
-    zip_classification_code: ?ZipClassificationCode,
+    zip_classification_code: ?ZipClassificationCode = null,
 
     pub const json_field_names = .{
         .zip_classification_code = "ZipClassificationCode",

@@ -13,17 +13,17 @@
 /// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html), [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html)
 pub const GameServerContainerGroupCounts = struct {
     /// The number of container groups that have active game sessions.
-    active: ?i32,
+    active: ?i32 = null,
 
     /// The number of container groups that have no active game sessions.
-    idle: ?i32,
+    idle: ?i32 = null,
 
     /// The number of container groups that are starting up but haven't yet
     /// registered.
-    pending: ?i32,
+    pending: ?i32 = null,
 
     /// The number of container groups that are in the process of shutting down.
-    terminating: ?i32,
+    terminating: ?i32 = null,
 
     pub const json_field_names = .{
         .active = "ACTIVE",

@@ -5,7 +5,7 @@ const KeyUsage = @import("key_usage.zig").KeyUsage;
 pub const ExtensionsV3 = struct {
     /// Application policies specify what the certificate is used for and its
     /// purpose.
-    application_policies: ?ApplicationPolicies,
+    application_policies: ?ApplicationPolicies = null,
 
     /// The key usage extension defines the purpose (e.g., encipherment, signature,
     /// certificate

@@ -10,7 +10,7 @@ const MultiModelConfig = @import("multi_model_config.zig").MultiModelConfig;
 pub const ContainerDefinition = struct {
     /// Data sources that are available to your model in addition to the one that
     /// you specify for `ModelDataSource` when you use the `CreateModel` action.
-    additional_model_data_sources: ?[]const AdditionalModelDataSource,
+    additional_model_data_sources: ?[]const AdditionalModelDataSource = null,
 
     /// This parameter is ignored for models that contain only a `PrimaryContainer`.
     ///
@@ -19,7 +19,7 @@ pub const ContainerDefinition = struct {
     /// and metrics. For information, see [Use Logs and Metrics to Monitor an
     /// Inference
     /// Pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html). If you don't specify a value for this parameter for a `ContainerDefinition` that is part of an inference pipeline, a unique name is automatically assigned based on the position of the `ContainerDefinition` in the pipeline. If you specify a value for the `ContainerHostName` for any `ContainerDefinition` that is part of an inference pipeline, you must specify a value for the `ContainerHostName` parameter of every `ContainerDefinition` in that pipeline.
-    container_hostname: ?[]const u8,
+    container_hostname: ?[]const u8 = null,
 
     /// The environment variables to set in the Docker container. Don't include any
     /// sensitive data in your environment variables.
@@ -28,7 +28,7 @@ pub const ContainerDefinition = struct {
     /// bytes. The maximum length of all keys and values in the map, combined, is 32
     /// KB. If you pass multiple containers to a `CreateModel` request, then the
     /// maximum length of all of their maps, combined, is also 32 KB.
-    environment: ?[]const aws.map.StringMapEntry,
+    environment: ?[]const aws.map.StringMapEntry = null,
 
     /// The path where inference code is stored. This can be either in Amazon EC2
     /// Container Registry or in a Docker registry that is accessible from the same
@@ -42,7 +42,7 @@ pub const ContainerDefinition = struct {
     /// The model artifacts in an Amazon S3 bucket and the Docker image for
     /// inference container in Amazon EC2 Container Registry must be in the same
     /// region as the model or endpoint you are creating.
-    image: ?[]const u8,
+    image: ?[]const u8 = null,
 
     /// Specifies whether the model container is in Amazon ECR or a private Docker
     /// registry accessible from your Amazon Virtual Private Cloud (VPC). For
@@ -53,20 +53,20 @@ pub const ContainerDefinition = struct {
     /// The model artifacts in an Amazon S3 bucket and the Docker image for
     /// inference container in Amazon EC2 Container Registry must be in the same
     /// region as the model or endpoint you are creating.
-    image_config: ?ImageConfig,
+    image_config: ?ImageConfig = null,
 
     /// The inference specification name in the model package version.
-    inference_specification_name: ?[]const u8,
+    inference_specification_name: ?[]const u8 = null,
 
     /// Whether the container hosts a single model or multiple models.
-    mode: ?ContainerMode,
+    mode: ?ContainerMode = null,
 
     /// Specifies the location of ML model data to deploy.
     ///
     /// Currently you cannot use `ModelDataSource` in conjunction with SageMaker
     /// batch transform, SageMaker serverless endpoints, SageMaker multi-model
     /// endpoints, and SageMaker Marketplace.
-    model_data_source: ?ModelDataSource,
+    model_data_source: ?ModelDataSource = null,
 
     /// The S3 path where the model artifacts, which result from model training, are
     /// stored. This path must point to a single gzip compressed tar archive
@@ -89,14 +89,14 @@ pub const ContainerDefinition = struct {
     ///
     /// If you use a built-in algorithm to create a model, SageMaker requires that
     /// you provide a S3 path to the model artifacts in `ModelDataUrl`.
-    model_data_url: ?[]const u8,
+    model_data_url: ?[]const u8 = null,
 
     /// The name or Amazon Resource Name (ARN) of the model package to use to create
     /// the model.
-    model_package_name: ?[]const u8,
+    model_package_name: ?[]const u8 = null,
 
     /// Specifies additional configuration for multi-model endpoints.
-    multi_model_config: ?MultiModelConfig,
+    multi_model_config: ?MultiModelConfig = null,
 
     pub const json_field_names = .{
         .additional_model_data_sources = "AdditionalModelDataSources",

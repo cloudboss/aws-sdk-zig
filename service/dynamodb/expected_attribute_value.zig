@@ -48,7 +48,7 @@ pub const ExpectedAttributeValue = struct {
     /// For information on specifying data types in JSON, see [JSON Data
     /// Format](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html)
     /// in the *Amazon DynamoDB Developer Guide*.
-    attribute_value_list: ?[]const AttributeValue,
+    attribute_value_list: ?[]const AttributeValue = null,
 
     /// A comparator for evaluating attributes in the `AttributeValueList`. For
     /// example, equals, greater than, less than, etc.
@@ -210,7 +210,7 @@ pub const ExpectedAttributeValue = struct {
     /// `{"S":"6"}` does not compare to `{"N":"6"}`. Also,
     /// `{"N":"6"}` does not compare to `{"NS":["6", "2",
     /// "1"]}`
-    comparison_operator: ?ComparisonOperator,
+    comparison_operator: ?ComparisonOperator = null,
 
     /// Causes DynamoDB to evaluate the value before attempting a conditional
     /// operation:
@@ -244,7 +244,7 @@ pub const ExpectedAttributeValue = struct {
     /// * `Exists` is `false` but you also provide a
     /// `Value`. (You cannot expect an attribute to have a value, while
     /// also expecting it not to exist.)
-    exists: ?bool,
+    exists: ?bool = null,
 
     /// Represents the data for the expected attribute.
     ///
@@ -255,7 +255,7 @@ pub const ExpectedAttributeValue = struct {
     /// For more information, see [Data
     /// Types](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes) in the *Amazon DynamoDB Developer
     /// Guide*.
-    value: ?AttributeValue,
+    value: ?AttributeValue = null,
 
     pub const json_field_names = .{
         .attribute_value_list = "AttributeValueList",

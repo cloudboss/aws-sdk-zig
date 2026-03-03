@@ -6,13 +6,13 @@ const Platform = @import("platform.zig").Platform;
 /// A summary of a container recipe
 pub const ContainerRecipeSummary = struct {
     /// The Amazon Resource Name (ARN) of the container recipe.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Specifies the type of container, such as "Docker".
-    container_type: ?ContainerType,
+    container_type: ?ContainerType = null,
 
     /// The date when this container recipe was created.
-    date_created: ?[]const u8,
+    date_created: ?[]const u8 = null,
 
     /// The base image for a container build and test instance. This can contain an
     /// AMI ID
@@ -22,22 +22,22 @@ pub const ContainerRecipeSummary = struct {
     ///
     /// If not specified, Image Builder uses the appropriate ECS-optimized AMI as a
     /// base image.
-    instance_image: ?[]const u8,
+    instance_image: ?[]const u8 = null,
 
     /// The name of the container recipe.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The owner of the container recipe.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The base image for the container recipe.
-    parent_image: ?[]const u8,
+    parent_image: ?[]const u8 = null,
 
     /// The system platform for the container, such as Windows or Linux.
-    platform: ?Platform,
+    platform: ?Platform = null,
 
     /// Tags that are attached to the container recipe.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -17,7 +17,7 @@ pub const Input = struct {
     ///
     /// (see [Configuring Application
     /// Input](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-    input_parallelism: ?InputParallelism,
+    input_parallelism: ?InputParallelism = null,
 
     /// The
     /// [InputProcessingConfiguration](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html) for the input. An input
@@ -27,7 +27,7 @@ pub const Input = struct {
     /// configuration
     /// available is
     /// [InputLambdaProcessor](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html).
-    input_processing_configuration: ?InputProcessingConfiguration,
+    input_processing_configuration: ?InputProcessingConfiguration = null,
 
     /// Describes the format of the data in the streaming source, and how each data
     /// element maps to corresponding columns in the in-application stream that is
@@ -43,14 +43,14 @@ pub const Input = struct {
     /// access the stream on your behalf.
     ///
     /// Note: Either `KinesisStreamsInput` or `KinesisFirehoseInput` is required.
-    kinesis_firehose_input: ?KinesisFirehoseInput,
+    kinesis_firehose_input: ?KinesisFirehoseInput = null,
 
     /// If the streaming source is an Amazon Kinesis stream,
     /// identifies the stream's Amazon Resource Name (ARN) and an IAM role
     /// that enables Amazon Kinesis Analytics to access the stream on your behalf.
     ///
     /// Note: Either `KinesisStreamsInput` or `KinesisFirehoseInput` is required.
-    kinesis_streams_input: ?KinesisStreamsInput,
+    kinesis_streams_input: ?KinesisStreamsInput = null,
 
     /// Name prefix to use when creating an in-application stream. Suppose that you
     /// specify

@@ -5,7 +5,7 @@ const Mode = @import("mode.zig").Mode;
 pub const CampaignHook = struct {
     /// The name or Amazon Resource Name (ARN) of the AWS Lambda function that
     /// Amazon Pinpoint invokes to customize a segment for a campaign.
-    lambda_function_name: ?[]const u8,
+    lambda_function_name: ?[]const u8 = null,
 
     /// The mode that Amazon Pinpoint uses to invoke the AWS Lambda function.
     /// Possible values are:
@@ -17,11 +17,11 @@ pub const CampaignHook = struct {
     ///   anymore. To send a campaign through a custom channel, use the
     ///   CustomDeliveryConfiguration and CampaignCustomMessage objects of the
     ///   campaign.
-    mode: ?Mode,
+    mode: ?Mode = null,
 
     /// The web URL that Amazon Pinpoint calls to invoke the AWS Lambda function
     /// over HTTPS.
-    web_url: ?[]const u8,
+    web_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .lambda_function_name = "LambdaFunctionName",

@@ -30,7 +30,7 @@ pub const StoppingCondition = struct {
     ///
     /// `MaxPendingTimeInSeconds` only increments when jobs are actively waiting for
     /// capacity in an `Active` plan.
-    max_pending_time_in_seconds: ?i32,
+    max_pending_time_in_seconds: ?i32 = null,
 
     /// The maximum length of time, in seconds, that a training or compilation job
     /// can run before it is stopped.
@@ -48,7 +48,7 @@ pub const StoppingCondition = struct {
     /// The maximum time that a `TrainingJob` can run in total, including any time
     /// spent publishing metrics or archiving and uploading models after it has been
     /// stopped, is 30 days.
-    max_runtime_in_seconds: ?i32,
+    max_runtime_in_seconds: ?i32 = null,
 
     /// The maximum length of time, in seconds, that a managed Spot training job has
     /// to complete. It is the amount of time spent waiting for Spot capacity plus
@@ -59,7 +59,7 @@ pub const StoppingCondition = struct {
     /// When `RetryStrategy` is specified in the job request, `MaxWaitTimeInSeconds`
     /// specifies the maximum time for all of the attempts in total, not each
     /// individual attempt.
-    max_wait_time_in_seconds: ?i32,
+    max_wait_time_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .max_pending_time_in_seconds = "MaxPendingTimeInSeconds",

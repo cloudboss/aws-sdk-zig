@@ -16,12 +16,12 @@ pub const KmsKeyConfiguration = struct {
     /// grant configuration is for an existing key, the access preview uses the
     /// proposed list of grant configurations in place of the existing grants.
     /// Otherwise, the access preview uses the existing grants for the key.
-    grants: ?[]const KmsGrantConfiguration,
+    grants: ?[]const KmsGrantConfiguration = null,
 
     /// Resource policy configuration for the KMS key. The only valid value for the
     /// name of the key policy is `default`. For more information, see [Default key
     /// policy](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default).
-    key_policies: ?[]const aws.map.StringMapEntry,
+    key_policies: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .grants = "grants",

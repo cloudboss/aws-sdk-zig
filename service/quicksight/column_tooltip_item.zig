@@ -6,19 +6,19 @@ const Visibility = @import("visibility.zig").Visibility;
 /// The tooltip item for the columns that are not part of a field well.
 pub const ColumnTooltipItem = struct {
     /// The aggregation function of the column tooltip item.
-    aggregation: ?AggregationFunction,
+    aggregation: ?AggregationFunction = null,
 
     /// The target column of the tooltip item.
     column: ColumnIdentifier,
 
     /// The label of the tooltip item.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// Determines the target of the column tooltip item in a combo chart visual.
-    tooltip_target: ?TooltipTarget,
+    tooltip_target: ?TooltipTarget = null,
 
     /// The visibility of the tooltip item.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .aggregation = "Aggregation",

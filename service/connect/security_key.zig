@@ -2,13 +2,13 @@
 pub const SecurityKey = struct {
     /// The existing association identifier that uniquely identifies the resource
     /// type and storage config for the given instance ID.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// When the security key was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The key of the security key.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_id = "AssociationId",

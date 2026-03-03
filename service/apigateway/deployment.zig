@@ -8,16 +8,16 @@ const MethodSnapshot = @import("method_snapshot.zig").MethodSnapshot;
 pub const Deployment = struct {
     /// A summary of the RestApi at the date and time that the deployment resource
     /// was created.
-    api_summary: ?[]const aws.map.MapEntry([]const aws.map.MapEntry(MethodSnapshot)),
+    api_summary: ?[]const aws.map.MapEntry([]const aws.map.MapEntry(MethodSnapshot)) = null,
 
     /// The date and time that the deployment resource was created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// The description for the deployment resource.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier for the deployment resource.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_summary = "apiSummary",

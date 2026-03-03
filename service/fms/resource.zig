@@ -2,7 +2,7 @@
 /// set.
 pub const Resource = struct {
     /// The Amazon Web Services account ID that the associated resource belongs to.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The resource's universal resource indicator (URI).
     uri: []const u8,

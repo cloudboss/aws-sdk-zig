@@ -10,7 +10,7 @@ pub const StatefulRuleOptions = struct {
     /// based on certain settings. For more information, see
     /// [Evaluation order for stateful
     /// rules](https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html) in the *Network Firewall Developer Guide*.
-    rule_order: ?RuleOrder,
+    rule_order: ?RuleOrder = null,
 
     pub const json_field_names = .{
         .rule_order = "RuleOrder",

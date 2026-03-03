@@ -4,7 +4,7 @@ pub const NdiSourceSettings = struct {
     /// The exact name of an existing NDI sender that's registered with your
     /// discovery server. If included, the format of this name must be `MACHINENAME
     /// (ProgramName)`.
-    source_name: ?[]const u8,
+    source_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_name = "SourceName",

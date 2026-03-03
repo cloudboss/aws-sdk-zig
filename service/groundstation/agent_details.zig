@@ -3,7 +3,7 @@ const ComponentVersion = @import("component_version.zig").ComponentVersion;
 /// Detailed information about the agent.
 pub const AgentDetails = struct {
     /// List of CPU cores reserved for the agent.
-    agent_cpu_cores: ?[]const i32,
+    agent_cpu_cores: ?[]const i32 = null,
 
     /// Current agent version.
     agent_version: []const u8,
@@ -21,7 +21,7 @@ pub const AgentDetails = struct {
     ///
     /// List of CPU cores reserved for processes other than the agent running on the
     /// EC2 instance.
-    reserved_cpu_cores: ?[]const i32,
+    reserved_cpu_cores: ?[]const i32 = null,
 
     pub const json_field_names = .{
         .agent_cpu_cores = "agentCpuCores",

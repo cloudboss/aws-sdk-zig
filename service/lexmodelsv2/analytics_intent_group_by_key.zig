@@ -4,10 +4,10 @@ const AnalyticsIntentField = @import("analytics_intent_field.zig").AnalyticsInte
 /// member of that category.
 pub const AnalyticsIntentGroupByKey = struct {
     /// A category by which the intent analytics were grouped.
-    name: ?AnalyticsIntentField,
+    name: ?AnalyticsIntentField = null,
 
     /// A member of the category by which the intent analytics were grouped.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

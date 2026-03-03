@@ -9,5 +9,5 @@ pub const InventoryTableConfigurationUpdates = struct {
     configuration_state: InventoryConfigurationState,
 
     /// The encryption configuration for the inventory table.
-    encryption_configuration: ?MetadataTableEncryptionConfiguration,
+    encryption_configuration: ?MetadataTableEncryptionConfiguration = null,
 };

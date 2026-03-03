@@ -5,10 +5,10 @@ const TimestampPartition = @import("timestamp_partition.zig").TimestampPartition
 /// `AttributePartition` or a `TimestampPartition`.
 pub const DatastorePartition = struct {
     /// A partition dimension defined by an `attributeName`.
-    attribute_partition: ?Partition,
+    attribute_partition: ?Partition = null,
 
     /// A partition dimension defined by a timestamp attribute.
-    timestamp_partition: ?TimestampPartition,
+    timestamp_partition: ?TimestampPartition = null,
 
     pub const json_field_names = .{
         .attribute_partition = "attributePartition",

@@ -11,7 +11,7 @@ const EncryptionType = @import("encryption_type.zig").EncryptionType;
 pub const EncryptionConfiguration = struct {
     /// The ID or ARN of the Amazon Web Services KMS key to use for encryption.
     /// Required when `Type` is `CUSTOMER_MANAGED_KEY`.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The type of encryption to use. Values are `AWS_MANAGED_KEY` (Amazon Web
     /// Services manages the encryption key) or `CUSTOMER_MANAGED_KEY` (you provide

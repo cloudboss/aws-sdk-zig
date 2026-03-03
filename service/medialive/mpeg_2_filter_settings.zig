@@ -2,7 +2,7 @@ const TemporalFilterSettings = @import("temporal_filter_settings.zig").TemporalF
 
 /// Mpeg2 Filter Settings
 pub const Mpeg2FilterSettings = struct {
-    temporal_filter_settings: ?TemporalFilterSettings,
+    temporal_filter_settings: ?TemporalFilterSettings = null,
 
     pub const json_field_names = .{
         .temporal_filter_settings = "TemporalFilterSettings",

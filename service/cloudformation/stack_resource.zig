@@ -5,7 +5,7 @@ const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 /// The `StackResource` data type.
 pub const StackResource = struct {
     /// User defined description associated with the resource.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about whether the resource's actual configuration differs, or
     /// has
@@ -14,7 +14,7 @@ pub const StackResource = struct {
     /// [Detect
     /// unmanaged configuration changes to stacks and resources with drift
     /// detection](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
-    drift_information: ?StackResourceDriftInformation,
+    drift_information: ?StackResourceDriftInformation = null,
 
     /// The logical name of the resource specified in the template.
     logical_resource_id: []const u8,
@@ -22,18 +22,18 @@ pub const StackResource = struct {
     /// Contains information about the module from which the resource was created,
     /// if the resource
     /// was created from a module included in the stack template.
-    module_info: ?ModuleInfo,
+    module_info: ?ModuleInfo = null,
 
     /// The name or unique identifier that corresponds to a physical instance ID of
     /// a resource
     /// supported by CloudFormation.
-    physical_resource_id: ?[]const u8,
+    physical_resource_id: ?[]const u8 = null,
 
     /// Current status of the resource.
     resource_status: ResourceStatus,
 
     /// Success/failure message associated with the resource.
-    resource_status_reason: ?[]const u8,
+    resource_status_reason: ?[]const u8 = null,
 
     /// Type of resource. For more information, see [Amazon Web Services resource
     /// and
@@ -42,10 +42,10 @@ pub const StackResource = struct {
     resource_type: []const u8,
 
     /// Unique identifier of the stack.
-    stack_id: ?[]const u8,
+    stack_id: ?[]const u8 = null,
 
     /// The name associated with the stack.
-    stack_name: ?[]const u8,
+    stack_name: ?[]const u8 = null,
 
     /// Time the status was updated.
     timestamp: i64,

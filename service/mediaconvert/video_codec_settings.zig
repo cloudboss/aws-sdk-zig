@@ -26,7 +26,7 @@ const XavcSettings = @import("xavc_settings.zig").XavcSettings;
 pub const VideoCodecSettings = struct {
     /// Required when you set Codec, under VideoDescription>CodecSettings to the
     /// value AV1.
-    av_1_settings: ?Av1Settings,
+    av_1_settings: ?Av1Settings = null,
 
     /// Required when you choose AVC-Intra for your output video codec. For more
     /// information about the AVC-Intra settings, see the relevant specification.
@@ -34,52 +34,52 @@ pub const VideoCodecSettings = struct {
     /// https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in
     /// AVC-Intra, see
     /// https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
-    avc_intra_settings: ?AvcIntraSettings,
+    avc_intra_settings: ?AvcIntraSettings = null,
 
     /// Specifies the video codec. This must be equal to one of the enum values
     /// defined by the object VideoCodec. To passthrough the video stream of your
     /// input without any video encoding: Choose Passthrough. More information about
     /// passthrough codec support and job settings requirements, see:
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/video-passthrough-feature-restrictions.html
-    codec: ?VideoCodec,
+    codec: ?VideoCodec = null,
 
     /// Required when you set Codec to the value FRAME_CAPTURE.
-    frame_capture_settings: ?FrameCaptureSettings,
+    frame_capture_settings: ?FrameCaptureSettings = null,
 
     /// Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
     /// the value GIF
-    gif_settings: ?GifSettings,
+    gif_settings: ?GifSettings = null,
 
     /// Required when you set Codec to the value H_264.
-    h264_settings: ?H264Settings,
+    h264_settings: ?H264Settings = null,
 
     /// Settings for H265 codec
-    h265_settings: ?H265Settings,
+    h265_settings: ?H265Settings = null,
 
     /// Required when you set Codec to the value MPEG2.
-    mpeg_2_settings: ?Mpeg2Settings,
+    mpeg_2_settings: ?Mpeg2Settings = null,
 
     /// Optional settings when you set Codec to the value Passthrough.
-    passthrough_settings: ?PassthroughSettings,
+    passthrough_settings: ?PassthroughSettings = null,
 
     /// Required when you set Codec to the value PRORES.
-    prores_settings: ?ProresSettings,
+    prores_settings: ?ProresSettings = null,
 
     /// Required when you set Codec, under VideoDescription>CodecSettings to the
     /// value UNCOMPRESSED.
-    uncompressed_settings: ?UncompressedSettings,
+    uncompressed_settings: ?UncompressedSettings = null,
 
     /// Required when you set Codec to the value VC3
-    vc_3_settings: ?Vc3Settings,
+    vc_3_settings: ?Vc3Settings = null,
 
     /// Required when you set Codec to the value VP8.
-    vp_8_settings: ?Vp8Settings,
+    vp_8_settings: ?Vp8Settings = null,
 
     /// Required when you set Codec to the value VP9.
-    vp_9_settings: ?Vp9Settings,
+    vp_9_settings: ?Vp9Settings = null,
 
     /// Required when you set Codec to the value XAVC.
-    xavc_settings: ?XavcSettings,
+    xavc_settings: ?XavcSettings = null,
 
     pub const json_field_names = .{
         .av_1_settings = "Av1Settings",

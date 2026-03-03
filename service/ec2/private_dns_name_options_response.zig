@@ -5,13 +5,13 @@ pub const PrivateDnsNameOptionsResponse = struct {
     /// Indicates whether to respond to DNS queries for instance hostnames with DNS
     /// AAAA
     /// records.
-    enable_resource_name_dns_aaaa_record: ?bool,
+    enable_resource_name_dns_aaaa_record: ?bool = null,
 
     /// Indicates whether to respond to DNS queries for instance hostnames with DNS
     /// A
     /// records.
-    enable_resource_name_dns_a_record: ?bool,
+    enable_resource_name_dns_a_record: ?bool = null,
 
     /// The type of hostname to assign to an instance.
-    hostname_type: ?HostnameType,
+    hostname_type: ?HostnameType = null,
 };

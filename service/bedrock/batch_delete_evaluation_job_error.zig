@@ -7,7 +7,7 @@ pub const BatchDeleteEvaluationJobError = struct {
     job_identifier: []const u8,
 
     /// A status message about the evaluation job deletion.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

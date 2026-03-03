@@ -15,28 +15,28 @@ const VirtualClusterState = @import("virtual_cluster_state.zig").VirtualClusterS
 /// or that require lifecycle management outside the service.
 pub const VirtualCluster = struct {
     /// The ARN of the virtual cluster.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The container provider of the virtual cluster.
-    container_provider: ?ContainerProvider,
+    container_provider: ?ContainerProvider = null,
 
     /// The date and time when the virtual cluster is created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The ID of the virtual cluster.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the virtual cluster.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the security configuration.
-    security_configuration_id: ?[]const u8,
+    security_configuration_id: ?[]const u8 = null,
 
     /// The state of the virtual cluster.
-    state: ?VirtualClusterState,
+    state: ?VirtualClusterState = null,
 
     /// The assigned tags of the virtual cluster.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

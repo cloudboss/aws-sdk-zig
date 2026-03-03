@@ -7,15 +7,15 @@ const Tag = @import("tag.zig").Tag;
 /// operator.
 pub const LifecycleRuleAndOperator = struct {
     /// Minimum object size to which the rule applies.
-    object_size_greater_than: ?i64,
+    object_size_greater_than: ?i64 = null,
 
     /// Maximum object size to which the rule applies.
-    object_size_less_than: ?i64,
+    object_size_less_than: ?i64 = null,
 
     /// Prefix identifying one or more objects to which the rule applies.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// All of these tags must exist in the object's tag set in order for the rule
     /// to apply.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

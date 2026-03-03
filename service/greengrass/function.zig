@@ -3,10 +3,10 @@ const FunctionConfiguration = @import("function_configuration.zig").FunctionConf
 /// Information about a Lambda function.
 pub const Function = struct {
     /// The ARN of the Lambda function.
-    function_arn: ?[]const u8,
+    function_arn: ?[]const u8 = null,
 
     /// The configuration of the Lambda function.
-    function_configuration: ?FunctionConfiguration,
+    function_configuration: ?FunctionConfiguration = null,
 
     /// A descriptive or arbitrary ID for the function. This value must be unique
     /// within the function definition version. Max length is 128 characters with

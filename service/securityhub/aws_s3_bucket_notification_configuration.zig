@@ -4,7 +4,7 @@ const AwsS3BucketNotificationConfigurationDetail = @import("aws_s3_bucket_notifi
 /// configuration for the S3 bucket.
 pub const AwsS3BucketNotificationConfiguration = struct {
     /// Configurations for S3 bucket notifications.
-    configurations: ?[]const AwsS3BucketNotificationConfigurationDetail,
+    configurations: ?[]const AwsS3BucketNotificationConfigurationDetail = null,
 
     pub const json_field_names = .{
         .configurations = "Configurations",

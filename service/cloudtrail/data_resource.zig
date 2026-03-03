@@ -79,7 +79,7 @@ pub const DataResource = struct {
     /// event selectors. For more
     /// information, see
     /// [AdvancedEventSelector](https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html).
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// An array of Amazon Resource Name (ARN) strings or partial ARN strings for
     /// the specified
@@ -127,7 +127,7 @@ pub const DataResource = struct {
     ///
     /// * To log data events for all DynamoDB tables in your Amazon Web Services
     ///   account, specify the prefix as `arn:aws:dynamodb`.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

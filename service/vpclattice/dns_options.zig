@@ -17,13 +17,13 @@ pub const DnsOptions = struct {
     /// * `SPECIFIED_DOMAINS_ONLY` - VPC Lattice provisions a private hosted zone
     ///   for domain names specified by the resource consumer. The resource consumer
     ///   specifies the domain names in the privateDnsSpecifiedDomains parameter.
-    private_dns_preference: ?PrivateDnsPreference,
+    private_dns_preference: ?PrivateDnsPreference = null,
 
     /// Indicates which of the private domains to create private hosted zones for
     /// and associate with the specified VPC. Only supported when private DNS is
     /// enabled and the private DNS preference is
     /// `VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS` or `SPECIFIED_DOMAINS_ONLY`.
-    private_dns_specified_domains: ?[]const []const u8,
+    private_dns_specified_domains: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .private_dns_preference = "privateDnsPreference",

@@ -5,13 +5,13 @@ pub const AwsS3BucketNotificationConfigurationDetail = struct {
     /// The ARN of the Lambda function, Amazon SQS queue, or Amazon SNS topic that
     /// generates the
     /// notification.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// The list of events that trigger a notification.
-    events: ?[]const []const u8,
+    events: ?[]const []const u8 = null,
 
     /// The filters that determine which S3 buckets generate notifications.
-    filter: ?AwsS3BucketNotificationConfigurationFilter,
+    filter: ?AwsS3BucketNotificationConfigurationFilter = null,
 
     /// Indicates the type of notification. Notifications can be generated using
     /// Lambda functions,
@@ -23,7 +23,7 @@ pub const AwsS3BucketNotificationConfigurationDetail = struct {
     /// * `QueueConfiguration`
     ///
     /// * `TopicConfiguration`
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

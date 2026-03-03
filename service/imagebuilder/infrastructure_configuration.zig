@@ -7,45 +7,45 @@ const Placement = @import("placement.zig").Placement;
 /// Details of the infrastructure configuration.
 pub const InfrastructureConfiguration = struct {
     /// The Amazon Resource Name (ARN) of the infrastructure configuration.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date on which the infrastructure configuration was created.
-    date_created: ?[]const u8,
+    date_created: ?[]const u8 = null,
 
     /// The date on which the infrastructure configuration was last updated.
-    date_updated: ?[]const u8,
+    date_updated: ?[]const u8 = null,
 
     /// The description of the infrastructure configuration.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The instance metadata option settings for the infrastructure configuration.
-    instance_metadata_options: ?InstanceMetadataOptions,
+    instance_metadata_options: ?InstanceMetadataOptions = null,
 
     /// The instance profile of the infrastructure configuration.
-    instance_profile_name: ?[]const u8,
+    instance_profile_name: ?[]const u8 = null,
 
     /// The instance types of the infrastructure configuration.
-    instance_types: ?[]const []const u8,
+    instance_types: ?[]const []const u8 = null,
 
     /// The Amazon EC2 key pair of the infrastructure configuration.
-    key_pair: ?[]const u8,
+    key_pair: ?[]const u8 = null,
 
     /// The logging configuration of the infrastructure configuration.
-    logging: ?Logging,
+    logging: ?Logging = null,
 
     /// The name of the infrastructure configuration.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The instance placement settings that define where the instances that are
     /// launched
     /// from your image will run.
-    placement: ?Placement,
+    placement: ?Placement = null,
 
     /// The tags attached to the resource created by Image Builder.
-    resource_tags: ?[]const aws.map.StringMapEntry,
+    resource_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The security group IDs of the infrastructure configuration.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the SNS topic to which we send image
     /// build event
@@ -56,17 +56,17 @@ pub const InfrastructureConfiguration = struct {
     /// from other accounts. The key that is used to encrypt the SNS topic must
     /// reside in the
     /// account that the Image Builder service runs under.
-    sns_topic_arn: ?[]const u8,
+    sns_topic_arn: ?[]const u8 = null,
 
     /// The subnet ID of the infrastructure configuration.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The tags of the infrastructure configuration.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The terminate instance on failure configuration of the infrastructure
     /// configuration.
-    terminate_instance_on_failure: ?bool,
+    terminate_instance_on_failure: ?bool = null,
 
     pub const json_field_names = .{
         .arn = "arn",

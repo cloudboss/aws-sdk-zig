@@ -7,13 +7,13 @@ pub const ProbeResult = struct {
     /// The container of your media file. This information helps you understand the
     /// overall structure and details of your media, including format, duration, and
     /// track layout.
-    container: ?Container,
+    container: ?Container = null,
 
     /// Metadata and other file information.
-    metadata: ?Metadata,
+    metadata: ?Metadata = null,
 
     /// An array containing track mapping information.
-    track_mappings: ?[]const TrackMapping,
+    track_mappings: ?[]const TrackMapping = null,
 
     pub const json_field_names = .{
         .container = "Container",

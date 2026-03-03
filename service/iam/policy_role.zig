@@ -11,8 +11,8 @@ pub const PolicyRole = struct {
     /// about IDs, see
     /// [IAM
     /// identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in the *IAM User Guide*.
-    role_id: ?[]const u8,
+    role_id: ?[]const u8 = null,
 
     /// The name (friendly name, not ARN) identifying the role.
-    role_name: ?[]const u8,
+    role_name: ?[]const u8 = null,
 };

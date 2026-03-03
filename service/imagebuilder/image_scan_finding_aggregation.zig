@@ -8,18 +8,18 @@ const VulnerabilityIdAggregation = @import("vulnerability_id_aggregation.zig").V
 /// its API action.
 pub const ImageScanFindingAggregation = struct {
     /// Returns an object that contains severity counts based on an account ID.
-    account_aggregation: ?AccountAggregation,
+    account_aggregation: ?AccountAggregation = null,
 
     /// Returns an object that contains severity counts based on the Amazon Resource
     /// Name (ARN) for a specific image.
-    image_aggregation: ?ImageAggregation,
+    image_aggregation: ?ImageAggregation = null,
 
     /// Returns an object that contains severity counts based on an image pipeline
     /// ARN.
-    image_pipeline_aggregation: ?ImagePipelineAggregation,
+    image_pipeline_aggregation: ?ImagePipelineAggregation = null,
 
     /// Returns an object that contains severity counts based on vulnerability ID.
-    vulnerability_id_aggregation: ?VulnerabilityIdAggregation,
+    vulnerability_id_aggregation: ?VulnerabilityIdAggregation = null,
 
     pub const json_field_names = .{
         .account_aggregation = "accountAggregation",

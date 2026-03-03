@@ -6,12 +6,12 @@ pub const AttributeAggregationFunction = struct {
     ///
     /// * `UNIQUE_VALUE`: Returns the unique value for a field, aggregated by the
     ///   dimension fields.
-    simple_attribute_aggregation: ?SimpleAttributeAggregationFunction,
+    simple_attribute_aggregation: ?SimpleAttributeAggregationFunction = null,
 
     /// Used by the `UNIQUE_VALUE` aggregation function. If there are multiple
     /// values for the field used by the aggregation, the value for this property
     /// will be returned instead. Defaults to '*'.
-    value_for_multiple_values: ?[]const u8,
+    value_for_multiple_values: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .simple_attribute_aggregation = "SimpleAttributeAggregation",

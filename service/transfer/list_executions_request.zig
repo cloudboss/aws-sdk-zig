@@ -1,6 +1,6 @@
 pub const ListExecutionsRequest = struct {
     /// The maximum number of items to return.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// `ListExecutions` returns the `NextToken` parameter in the output. You can
     /// then pass the `NextToken` parameter in a subsequent command to continue
@@ -22,7 +22,7 @@ pub const ListExecutionsRequest = struct {
     /// This call returns the next 10 executions, the 11th through the 20th. You can
     /// then repeat the call until the details for all 100 executions have been
     /// returned.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// A unique identifier for the workflow.
     workflow_id: []const u8,

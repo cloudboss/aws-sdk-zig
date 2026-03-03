@@ -8,11 +8,11 @@ pub const OptimizationObjective = struct {
     /// The numerical metadata column in an Items dataset related to the
     /// optimization objective. For example, VIDEO_LENGTH (to maximize streaming
     /// minutes), or PRICE (to maximize revenue).
-    item_attribute: ?[]const u8,
+    item_attribute: ?[]const u8 = null,
 
     /// Specifies how Amazon Personalize balances the importance of your
     /// optimization objective versus relevance.
-    objective_sensitivity: ?ObjectiveSensitivity,
+    objective_sensitivity: ?ObjectiveSensitivity = null,
 
     pub const json_field_names = .{
         .item_attribute = "itemAttribute",

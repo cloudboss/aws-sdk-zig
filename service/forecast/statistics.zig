@@ -4,52 +4,52 @@
 /// [CreateDatasetImportJob](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html) operation.
 pub const Statistics = struct {
     /// For a numeric field, the average value in the field.
-    avg: ?f64,
+    avg: ?f64 = null,
 
     /// The number of values in the field. If the response value is -1, refer to
     /// `CountLong`.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// The number of distinct values in the field. If the response value is -1,
     /// refer to
     /// `CountDistinctLong`.
-    count_distinct: ?i32,
+    count_distinct: ?i32 = null,
 
     /// The number of distinct values in the field. `CountDistinctLong` is used
     /// instead
     /// of `CountDistinct` if the value is greater than 2,147,483,647.
-    count_distinct_long: ?i64,
+    count_distinct_long: ?i64 = null,
 
     /// The number of values in the field. `CountLong` is used instead of
     /// `Count` if the value is greater than 2,147,483,647.
-    count_long: ?i64,
+    count_long: ?i64 = null,
 
     /// The number of NAN (not a number) values in the field. If the response value
     /// is -1, refer
     /// to `CountNanLong`.
-    count_nan: ?i32,
+    count_nan: ?i32 = null,
 
     /// The number of NAN (not a number) values in the field. `CountNanLong` is used
     /// instead of `CountNan` if the value is greater than 2,147,483,647.
-    count_nan_long: ?i64,
+    count_nan_long: ?i64 = null,
 
     /// The number of null values in the field. If the response value is -1, refer
     /// to
     /// `CountNullLong`.
-    count_null: ?i32,
+    count_null: ?i32 = null,
 
     /// The number of null values in the field. `CountNullLong` is used instead of
     /// `CountNull` if the value is greater than 2,147,483,647.
-    count_null_long: ?i64,
+    count_null_long: ?i64 = null,
 
     /// For a numeric field, the maximum value in the field.
-    max: ?[]const u8,
+    max: ?[]const u8 = null,
 
     /// For a numeric field, the minimum value in the field.
-    min: ?[]const u8,
+    min: ?[]const u8 = null,
 
     /// For a numeric field, the standard deviation.
-    stddev: ?f64,
+    stddev: ?f64 = null,
 
     pub const json_field_names = .{
         .avg = "Avg",

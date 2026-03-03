@@ -38,7 +38,7 @@ pub const ContentSummary = struct {
     status: ContentStatus,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The title of the content.
     title: []const u8,

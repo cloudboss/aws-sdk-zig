@@ -14,50 +14,50 @@ const SaaSProductSummary = @import("saa_s_product_summary.zig").SaaSProductSumma
 /// common across all entities.
 pub const EntitySummary = struct {
     /// An object that contains summary information about the AMI product.
-    ami_product_summary: ?AmiProductSummary,
+    ami_product_summary: ?AmiProductSummary = null,
 
     /// An object that contains summary information about the container product.
-    container_product_summary: ?ContainerProductSummary,
+    container_product_summary: ?ContainerProductSummary = null,
 
     /// An object that contains summary information about the data product.
-    data_product_summary: ?DataProductSummary,
+    data_product_summary: ?DataProductSummary = null,
 
     /// The ARN associated with the unique identifier for the entity.
-    entity_arn: ?[]const u8,
+    entity_arn: ?[]const u8 = null,
 
     /// The unique identifier for the entity.
-    entity_id: ?[]const u8,
+    entity_id: ?[]const u8 = null,
 
     /// The type of the entity.
-    entity_type: ?[]const u8,
+    entity_type: ?[]const u8 = null,
 
     /// The last time the entity was published, using ISO 8601 format
     /// (2018-02-27T13:45:22Z).
-    last_modified_date: ?[]const u8,
+    last_modified_date: ?[]const u8 = null,
 
-    machine_learning_product_summary: ?MachineLearningProductSummary,
+    machine_learning_product_summary: ?MachineLearningProductSummary = null,
 
     /// The name for the entity. This value is not unique. It is defined by the
     /// seller.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// An object that contains summary information about the offer set.
-    offer_set_summary: ?OfferSetSummary,
+    offer_set_summary: ?OfferSetSummary = null,
 
     /// An object that contains summary information about the offer.
-    offer_summary: ?OfferSummary,
+    offer_summary: ?OfferSummary = null,
 
     /// An object that contains summary information about the Resale Authorization.
-    resale_authorization_summary: ?ResaleAuthorizationSummary,
+    resale_authorization_summary: ?ResaleAuthorizationSummary = null,
 
     /// An object that contains summary information about the SaaS product.
-    saa_s_product_summary: ?SaaSProductSummary,
+    saa_s_product_summary: ?SaaSProductSummary = null,
 
     /// The visibility status of the entity to buyers. This value can be `Public`
     /// (everyone can view the entity), `Limited` (the entity is visible to limited
     /// accounts only), or `Restricted` (the entity was published and then
     /// unpublished and only existing buyers can view it).
-    visibility: ?[]const u8,
+    visibility: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ami_product_summary = "AmiProductSummary",

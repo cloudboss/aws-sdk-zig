@@ -24,17 +24,17 @@ pub const RuntimeConfiguration = struct {
     /// `ACTIVATING`. If the game session does not become active before the
     /// timeout, it is ended and the game session status is changed to
     /// `TERMINATED`.
-    game_session_activation_timeout_seconds: ?i32,
+    game_session_activation_timeout_seconds: ?i32 = null,
 
     /// The number of game sessions in status `ACTIVATING` to allow on an
     /// instance or compute. This setting limits the instance resources that can be
     /// used for new game activations at any one time.
-    max_concurrent_game_session_activations: ?i32,
+    max_concurrent_game_session_activations: ?i32 = null,
 
     /// A collection of server process configurations that identify what server
     /// processes to
     /// run on fleet computes.
-    server_processes: ?[]const ServerProcess,
+    server_processes: ?[]const ServerProcess = null,
 
     pub const json_field_names = .{
         .game_session_activation_timeout_seconds = "GameSessionActivationTimeoutSeconds",

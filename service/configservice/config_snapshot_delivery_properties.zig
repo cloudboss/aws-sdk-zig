@@ -49,7 +49,7 @@ const MaximumExecutionFrequency = @import("maximum_execution_frequency.zig").Max
 pub const ConfigSnapshotDeliveryProperties = struct {
     /// The frequency with which Config delivers configuration
     /// snapshots.
-    delivery_frequency: ?MaximumExecutionFrequency,
+    delivery_frequency: ?MaximumExecutionFrequency = null,
 
     pub const json_field_names = .{
         .delivery_frequency = "deliveryFrequency",

@@ -6,10 +6,10 @@ pub const DefaultFormatting = struct {
     /// The display format. Valid values for this structure are `AUTO`,
     /// `PERCENT`, `CURRENCY`, `NUMBER`, `DATE`, and
     /// `STRING`.
-    display_format: ?DisplayFormat,
+    display_format: ?DisplayFormat = null,
 
     /// The additional options for display formatting.
-    display_format_options: ?DisplayFormatOptions,
+    display_format_options: ?DisplayFormatOptions = null,
 
     pub const json_field_names = .{
         .display_format = "DisplayFormat",

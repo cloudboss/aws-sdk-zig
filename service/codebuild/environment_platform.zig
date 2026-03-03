@@ -6,10 +6,10 @@ const PlatformType = @import("platform_type.zig").PlatformType;
 pub const EnvironmentPlatform = struct {
     /// The list of programming languages that are available for the specified
     /// platform.
-    languages: ?[]const EnvironmentLanguage,
+    languages: ?[]const EnvironmentLanguage = null,
 
     /// The platform's name.
-    platform: ?PlatformType,
+    platform: ?PlatformType = null,
 
     pub const json_field_names = .{
         .languages = "languages",

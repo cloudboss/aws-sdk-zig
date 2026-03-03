@@ -4,10 +4,10 @@ const VpcDestinationConfiguration = @import("vpc_destination_configuration.zig")
 /// Configuration of the topic rule destination.
 pub const TopicRuleDestinationConfiguration = struct {
     /// Configuration of the HTTP URL.
-    http_url_configuration: ?HttpUrlDestinationConfiguration,
+    http_url_configuration: ?HttpUrlDestinationConfiguration = null,
 
     /// Configuration of the virtual private cloud (VPC) connection.
-    vpc_configuration: ?VpcDestinationConfiguration,
+    vpc_configuration: ?VpcDestinationConfiguration = null,
 
     pub const json_field_names = .{
         .http_url_configuration = "httpUrlConfiguration",

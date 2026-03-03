@@ -6,13 +6,13 @@ const FeatureType = @import("feature_type.zig").FeatureType;
 /// baseline model performance and individual adapter version perfromance.
 pub const AdapterVersionEvaluationMetric = struct {
     /// The F1 score, precision, and recall metrics for the baseline model.
-    adapter_version: ?EvaluationMetric,
+    adapter_version: ?EvaluationMetric = null,
 
     /// The F1 score, precision, and recall metrics for the baseline model.
-    baseline: ?EvaluationMetric,
+    baseline: ?EvaluationMetric = null,
 
     /// Indicates the feature type being analyzed by a given adapter version.
-    feature_type: ?FeatureType,
+    feature_type: ?FeatureType = null,
 
     pub const json_field_names = .{
         .adapter_version = "AdapterVersion",

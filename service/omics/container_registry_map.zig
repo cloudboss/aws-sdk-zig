@@ -9,11 +9,11 @@ const RegistryMapping = @import("registry_mapping.zig").RegistryMapping;
 pub const ContainerRegistryMap = struct {
     /// Image mappings specify path mappings between the ECR private repository and
     /// their corresponding external repositories.
-    image_mappings: ?[]const ImageMapping,
+    image_mappings: ?[]const ImageMapping = null,
 
     /// Mapping that provides the ECR repository path where upstream container
     /// images are pulled and synchronized.
-    registry_mappings: ?[]const RegistryMapping,
+    registry_mappings: ?[]const RegistryMapping = null,
 
     pub const json_field_names = .{
         .image_mappings = "imageMappings",

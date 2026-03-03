@@ -4,9 +4,9 @@ const ResourceCostCalculation = @import("resource_cost_calculation.zig").Resourc
 /// Contains the details of an Amazon RDS DB instance.
 pub const RdsDbInstance = struct {
     /// The Amazon RDS DB instance configuration used for recommendations.
-    configuration: ?RdsDbInstanceConfiguration,
+    configuration: ?RdsDbInstanceConfiguration = null,
 
-    cost_calculation: ?ResourceCostCalculation,
+    cost_calculation: ?ResourceCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

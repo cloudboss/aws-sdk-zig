@@ -4,10 +4,10 @@ const RetentionPeriod = @import("retention_period.zig").RetentionPeriod;
 /// Information about a Recycle Bin retention rule.
 pub const RuleSummary = struct {
     /// The retention rule description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique ID of the retention rule.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// [Region-level retention rules only] The lock state for the retention rule.
     ///
@@ -27,14 +27,14 @@ pub const RuleSummary = struct {
     ///   has
     /// been locked, it can transition between the `locked` and `unlocked` states
     /// only; it can never transition back to `null`.
-    lock_state: ?LockState,
+    lock_state: ?LockState = null,
 
     /// Information about the retention period for which the retention rule is to
     /// retain resources.
-    retention_period: ?RetentionPeriod,
+    retention_period: ?RetentionPeriod = null,
 
     /// The Amazon Resource Name (ARN) of the retention rule.
-    rule_arn: ?[]const u8,
+    rule_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

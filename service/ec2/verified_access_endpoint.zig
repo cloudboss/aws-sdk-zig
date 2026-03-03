@@ -15,72 +15,72 @@ const Tag = @import("tag.zig").Tag;
 /// before you attached it to a group.
 pub const VerifiedAccessEndpoint = struct {
     /// The DNS name for users to reach your application.
-    application_domain: ?[]const u8,
+    application_domain: ?[]const u8 = null,
 
     /// The type of attachment used to provide connectivity between the Amazon Web
     /// Services Verified Access endpoint and the
     /// application.
-    attachment_type: ?VerifiedAccessEndpointAttachmentType,
+    attachment_type: ?VerifiedAccessEndpointAttachmentType = null,
 
     /// The options for a CIDR endpoint.
-    cidr_options: ?VerifiedAccessEndpointCidrOptions,
+    cidr_options: ?VerifiedAccessEndpointCidrOptions = null,
 
     /// The creation time.
-    creation_time: ?[]const u8,
+    creation_time: ?[]const u8 = null,
 
     /// The deletion time.
-    deletion_time: ?[]const u8,
+    deletion_time: ?[]const u8 = null,
 
     /// A description for the Amazon Web Services Verified Access endpoint.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Returned if endpoint has a device trust provider attached.
-    device_validation_domain: ?[]const u8,
+    device_validation_domain: ?[]const u8 = null,
 
     /// The ARN of a public TLS/SSL certificate imported into or created with ACM.
-    domain_certificate_arn: ?[]const u8,
+    domain_certificate_arn: ?[]const u8 = null,
 
     /// A DNS name that is generated for the endpoint.
-    endpoint_domain: ?[]const u8,
+    endpoint_domain: ?[]const u8 = null,
 
     /// The type of Amazon Web Services Verified Access endpoint. Incoming
     /// application requests will be sent to an IP
     /// address, load balancer or a network interface depending on the endpoint type
     /// specified.
-    endpoint_type: ?VerifiedAccessEndpointType,
+    endpoint_type: ?VerifiedAccessEndpointType = null,
 
     /// The last updated time.
-    last_updated_time: ?[]const u8,
+    last_updated_time: ?[]const u8 = null,
 
     /// The load balancer details if creating the Amazon Web Services Verified
     /// Access endpoint as
     /// `load-balancer`type.
-    load_balancer_options: ?VerifiedAccessEndpointLoadBalancerOptions,
+    load_balancer_options: ?VerifiedAccessEndpointLoadBalancerOptions = null,
 
     /// The options for network-interface type endpoint.
-    network_interface_options: ?VerifiedAccessEndpointEniOptions,
+    network_interface_options: ?VerifiedAccessEndpointEniOptions = null,
 
     /// The options for an RDS endpoint.
-    rds_options: ?VerifiedAccessEndpointRdsOptions,
+    rds_options: ?VerifiedAccessEndpointRdsOptions = null,
 
     /// The IDs of the security groups for the endpoint.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The options in use for server side encryption.
-    sse_specification: ?VerifiedAccessSseSpecificationResponse,
+    sse_specification: ?VerifiedAccessSseSpecificationResponse = null,
 
     /// The endpoint status.
-    status: ?VerifiedAccessEndpointStatus,
+    status: ?VerifiedAccessEndpointStatus = null,
 
     /// The tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the Amazon Web Services Verified Access endpoint.
-    verified_access_endpoint_id: ?[]const u8,
+    verified_access_endpoint_id: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services Verified Access group.
-    verified_access_group_id: ?[]const u8,
+    verified_access_group_id: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services Verified Access instance.
-    verified_access_instance_id: ?[]const u8,
+    verified_access_instance_id: ?[]const u8 = null,
 };

@@ -2,11 +2,11 @@
 /// filtering and analysis.
 pub const TimePeriod = struct {
     /// The end time of the period, exclusive. Events before this time are included.
-    end_time_exclusive: ?i64,
+    end_time_exclusive: ?i64 = null,
 
     /// The start time of the period, inclusive. Events at or after this time are
     /// included.
-    start_time_inclusive: ?i64,
+    start_time_inclusive: ?i64 = null,
 
     pub const json_field_names = .{
         .end_time_exclusive = "endTimeExclusive",

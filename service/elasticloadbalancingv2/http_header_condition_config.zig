@@ -13,11 +13,11 @@ pub const HttpHeaderConditionConfig = struct {
     /// You can't use an HTTP header condition to specify the host header. Instead,
     /// use a [host
     /// condition](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#host-conditions).
-    http_header_name: ?[]const u8,
+    http_header_name: ?[]const u8 = null,
 
     /// The regular expression to compare against the HTTP header. The maximum
     /// length of each string is 128 characters.
-    regex_values: ?[]const []const u8,
+    regex_values: ?[]const []const u8 = null,
 
     /// The strings to compare against the value of the HTTP header. The maximum
     /// length of
@@ -36,5 +36,5 @@ pub const HttpHeaderConditionConfig = struct {
     /// the value of the HTTP header. To require that all of the strings are a
     /// match, create one
     /// condition per string.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 };

@@ -4,11 +4,11 @@ const IngressPointPasswordConfiguration = @import("ingress_point_password_config
 pub const IngressPointAuthConfiguration = struct {
     /// The ingress endpoint password configuration for the ingress endpoint
     /// resource.
-    ingress_point_password_configuration: ?IngressPointPasswordConfiguration,
+    ingress_point_password_configuration: ?IngressPointPasswordConfiguration = null,
 
     /// The ingress endpoint SecretsManager::Secret ARN configuration for the
     /// ingress endpoint resource.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ingress_point_password_configuration = "IngressPointPasswordConfiguration",

@@ -12,18 +12,18 @@ pub const Segment = struct {
     created_time: i64,
 
     /// The customer-created description for this segment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The number of experiments that this segment is used in. This count includes
     /// all current experiments, not just those that are currently running.
-    experiment_count: ?i64,
+    experiment_count: ?i64 = null,
 
     /// The date and time that this segment was most recently updated.
     last_updated_time: i64,
 
     /// The number of launches that this segment is used in. This count includes all
     /// current launches, not just those that are currently running.
-    launch_count: ?i64,
+    launch_count: ?i64 = null,
 
     /// The name of the segment.
     name: []const u8,
@@ -35,7 +35,7 @@ pub const Segment = struct {
     pattern: []const u8,
 
     /// The list of tag keys and values associated with this launch.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

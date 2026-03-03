@@ -12,7 +12,7 @@ pub const Trigger = struct {
     conditions: []const TriggerCondition,
 
     /// The description for a trigger.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The minimum time, in minutes, that must elapse between automatic executions
     /// of the plan.

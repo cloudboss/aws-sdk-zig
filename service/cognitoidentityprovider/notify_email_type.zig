@@ -5,7 +5,7 @@ pub const NotifyEmailType = struct {
     /// The body of an email notification formatted in HTML. Choose an `HtmlBody`
     /// or a `TextBody` to send an HTML-formatted or plaintext message,
     /// respectively.
-    html_body: ?[]const u8,
+    html_body: ?[]const u8 = null,
 
     /// The subject of the threat protection email notification.
     subject: []const u8,
@@ -13,7 +13,7 @@ pub const NotifyEmailType = struct {
     /// The body of an email notification formatted in plaintext. Choose an
     /// `HtmlBody` or a `TextBody` to send an HTML-formatted or
     /// plaintext message, respectively.
-    text_body: ?[]const u8,
+    text_body: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .html_body = "HtmlBody",

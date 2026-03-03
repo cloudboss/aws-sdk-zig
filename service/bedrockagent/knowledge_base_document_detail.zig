@@ -33,10 +33,10 @@ pub const KnowledgeBaseDocumentDetail = struct {
     status: DocumentStatus,
 
     /// The reason for the status. Appears alongside the status `IGNORED`.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The date and time at which the document was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .data_source_id = "dataSourceId",

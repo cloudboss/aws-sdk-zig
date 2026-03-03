@@ -9,7 +9,7 @@ pub const CreateMonitorRequest = struct {
 
     /// A list of
     /// [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the monitor resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .monitor_name = "MonitorName",

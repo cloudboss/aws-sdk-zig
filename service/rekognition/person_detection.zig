@@ -10,7 +10,7 @@ const PersonDetail = @import("person_detail.zig").PersonDetail;
 /// Developer Guide.
 pub const PersonDetection = struct {
     /// Details about a person whose path was tracked in a video.
-    person: ?PersonDetail,
+    person: ?PersonDetail = null,
 
     /// The time, in milliseconds from the start of the video, that the person's
     /// path was tracked.

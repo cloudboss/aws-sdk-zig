@@ -6,7 +6,7 @@ pub const CaptchaConfig = struct {
     /// Determines how long a `CAPTCHA` timestamp in the token remains valid after
     /// the client
     /// successfully solves a `CAPTCHA` puzzle.
-    immunity_time_property: ?ImmunityTimeProperty,
+    immunity_time_property: ?ImmunityTimeProperty = null,
 
     pub const json_field_names = .{
         .immunity_time_property = "ImmunityTimeProperty",

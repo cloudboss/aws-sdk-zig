@@ -4,10 +4,10 @@ const BridgeNetworkSource = @import("bridge_network_source.zig").BridgeNetworkSo
 /// The bridge's source.
 pub const BridgeSource = struct {
     /// The source of the associated flow.
-    flow_source: ?BridgeFlowSource,
+    flow_source: ?BridgeFlowSource = null,
 
     /// The network source for the bridge.
-    network_source: ?BridgeNetworkSource,
+    network_source: ?BridgeNetworkSource = null,
 
     pub const json_field_names = .{
         .flow_source = "FlowSource",

@@ -3,13 +3,13 @@ const aws = @import("aws");
 /// An Firewall Manager protocols list.
 pub const ProtocolsListData = struct {
     /// The time that the Firewall Manager protocols list was created.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The time that the Firewall Manager protocols list was last updated.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The ID of the Firewall Manager protocols list.
-    list_id: ?[]const u8,
+    list_id: ?[]const u8 = null,
 
     /// The name of the Firewall Manager protocols list.
     list_name: []const u8,
@@ -18,10 +18,10 @@ pub const ProtocolsListData = struct {
     /// the list, the update token must match the token of the current version of
     /// the application list.
     /// You can retrieve the update token by getting the list.
-    list_update_token: ?[]const u8,
+    list_update_token: ?[]const u8 = null,
 
     /// A map of previous version numbers to their corresponding protocol arrays.
-    previous_protocols_list: ?[]const aws.map.MapEntry([]const []const u8),
+    previous_protocols_list: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// An array of protocols in the Firewall Manager protocols list.
     protocols_list: []const []const u8,

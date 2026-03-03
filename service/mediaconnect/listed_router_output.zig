@@ -22,11 +22,11 @@ pub const ListedRouterOutput = struct {
     id: []const u8,
 
     /// The details of the maintenance schedule for the listed router output.
-    maintenance_schedule: ?MaintenanceSchedule,
+    maintenance_schedule: ?MaintenanceSchedule = null,
 
     /// The type of maintenance schedule currently associated with the listed router
     /// output.
-    maintenance_schedule_type: ?MaintenanceScheduleType,
+    maintenance_schedule_type: ?MaintenanceScheduleType = null,
 
     /// The maximum bitrate of the router output.
     maximum_bitrate: i64,
@@ -38,7 +38,7 @@ pub const ListedRouterOutput = struct {
     name: []const u8,
 
     /// The ARN of the network interface associated with the router output.
-    network_interface_arn: ?[]const u8,
+    network_interface_arn: ?[]const u8 = null,
 
     /// The type of the router output.
     output_type: RouterOutputType,
@@ -47,7 +47,7 @@ pub const ListedRouterOutput = struct {
     region_name: []const u8,
 
     /// The ARN of the router input associated with the output.
-    routed_input_arn: ?[]const u8,
+    routed_input_arn: ?[]const u8 = null,
 
     /// The current state of the association between the router output and its
     /// input.

@@ -6,17 +6,17 @@ const VerifiedAccessEndpointProtocol = @import("verified_access_endpoint_protoco
 /// `load-balancer` type.
 pub const VerifiedAccessEndpointLoadBalancerOptions = struct {
     /// The ARN of the load balancer.
-    load_balancer_arn: ?[]const u8,
+    load_balancer_arn: ?[]const u8 = null,
 
     /// The IP port number.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The port ranges.
-    port_ranges: ?[]const VerifiedAccessEndpointPortRange,
+    port_ranges: ?[]const VerifiedAccessEndpointPortRange = null,
 
     /// The IP protocol.
-    protocol: ?VerifiedAccessEndpointProtocol,
+    protocol: ?VerifiedAccessEndpointProtocol = null,
 
     /// The IDs of the subnets.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 };

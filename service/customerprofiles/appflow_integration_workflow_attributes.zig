@@ -8,7 +8,7 @@ pub const AppflowIntegrationWorkflowAttributes = struct {
 
     /// The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes
     /// this role to create resources on your behalf as part of workflow execution.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Specifies the source connector type, such as Salesforce, ServiceNow, and
     /// Marketo.

@@ -2,16 +2,16 @@ const Type = @import("type.zig").Type;
 
 pub const SchemaVersionSummary = struct {
     /// The ARN of the schema version.
-    schema_arn: ?[]const u8,
+    schema_arn: ?[]const u8 = null,
 
     /// The name of the schema.
-    schema_name: ?[]const u8,
+    schema_name: ?[]const u8 = null,
 
     /// The version number of the schema.
-    schema_version: ?[]const u8,
+    schema_version: ?[]const u8 = null,
 
     /// The type of schema.
-    @"type": ?Type,
+    @"type": ?Type = null,
 
     pub const json_field_names = .{
         .schema_arn = "SchemaArn",

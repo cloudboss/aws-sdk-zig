@@ -7,35 +7,35 @@ const NetworkType = @import("network_type.zig").NetworkType;
 pub const VoiceConnector = struct {
     /// The AWS Region in which the Voice Connector is created.
     /// Default: us-east-1.
-    aws_region: ?VoiceConnectorAwsRegion,
+    aws_region: ?VoiceConnectorAwsRegion = null,
 
     /// The Voice Connector's creation timestamp, in ISO 8601 format.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The connectors for use with Amazon Connect.
-    integration_type: ?VoiceConnectorIntegrationType,
+    integration_type: ?VoiceConnectorIntegrationType = null,
 
     /// The Voice Connector's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of network of the Voice Connector. Either IPv4 only or dual-stack
     /// (IPv4 and IPv6).
-    network_type: ?NetworkType,
+    network_type: ?NetworkType = null,
 
     /// The outbound host name for the Voice Connector.
-    outbound_host_name: ?[]const u8,
+    outbound_host_name: ?[]const u8 = null,
 
     /// Enables or disables encryption for the Voice Connector.
-    require_encryption: ?bool,
+    require_encryption: ?bool = null,
 
     /// The Voice Connector's updated timestamp, in ISO 8601 format.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     /// The ARN of the Voice Connector.
-    voice_connector_arn: ?[]const u8,
+    voice_connector_arn: ?[]const u8 = null,
 
     /// The Voice Connector's ID.
-    voice_connector_id: ?[]const u8,
+    voice_connector_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_region = "AwsRegion",

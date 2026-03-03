@@ -14,7 +14,7 @@ pub const SelectiveExecutionConfig = struct {
     /// on output collaterals from any non-specified pipeline steps. For more
     /// information, see [Selective Execution for Pipeline
     /// Steps](https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-selective-ex.html).
-    source_pipeline_execution_arn: ?[]const u8,
+    source_pipeline_execution_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .selected_steps = "SelectedSteps",

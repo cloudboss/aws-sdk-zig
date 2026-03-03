@@ -7,7 +7,7 @@ pub const LineageConfiguration = struct {
     /// * ENABLE: enables data lineage for the crawler
     ///
     /// * DISABLE: disables data lineage for the crawler
-    crawler_lineage_settings: ?CrawlerLineageSettings,
+    crawler_lineage_settings: ?CrawlerLineageSettings = null,
 
     pub const json_field_names = .{
         .crawler_lineage_settings = "CrawlerLineageSettings",

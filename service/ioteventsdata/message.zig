@@ -15,7 +15,7 @@ pub const Message = struct {
     payload: []const u8,
 
     /// The timestamp associated with the message.
-    timestamp: ?TimestampValue,
+    timestamp: ?TimestampValue = null,
 
     pub const json_field_names = .{
         .input_name = "inputName",

@@ -7,7 +7,7 @@ pub const DataQuery = struct {
     query_statement: []const u8,
 
     /// The table configuration.
-    table_configurations: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry),
+    table_configurations: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry) = null,
 
     pub const json_field_names = .{
         .query_statement = "QueryStatement",

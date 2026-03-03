@@ -2,10 +2,10 @@
 /// Amazon EC2 instance.
 pub const AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails = struct {
     /// The maximum number of network interfaces.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// The minimum number of network interfaces.
-    min: ?i32,
+    min: ?i32 = null,
 
     pub const json_field_names = .{
         .max = "Max",

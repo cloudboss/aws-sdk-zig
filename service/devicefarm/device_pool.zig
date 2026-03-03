@@ -4,10 +4,10 @@ const DevicePoolType = @import("device_pool_type.zig").DevicePoolType;
 /// Represents a collection of device types.
 pub const DevicePool = struct {
     /// The device pool's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The device pool's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The number of devices that Device Farm can add to your device pool. Device
     /// Farm adds devices that are
@@ -20,13 +20,13 @@ pub const DevicePool = struct {
     /// By specifying the maximum number of devices, you can control the costs that
     /// you incur
     /// by running tests.
-    max_devices: ?i32,
+    max_devices: ?i32 = null,
 
     /// The device pool's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Information about the device pool's rules.
-    rules: ?[]const Rule,
+    rules: ?[]const Rule = null,
 
     /// The device pool's type.
     ///
@@ -37,7 +37,7 @@ pub const DevicePool = struct {
     ///
     /// * PRIVATE: A device pool that is created and managed by the device pool
     /// developer.
-    @"type": ?DevicePoolType,
+    @"type": ?DevicePoolType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

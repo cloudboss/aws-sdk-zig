@@ -8,7 +8,7 @@ pub const StandardsControlAssociationDetail = struct {
 
     /// The requirement that underlies a control in the compliance framework related
     /// to the standard.
-    related_requirements: ?[]const []const u8,
+    related_requirements: ?[]const []const u8 = null,
 
     /// The ARN of a security control across standards, such as
     /// `arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1`. This
@@ -26,24 +26,24 @@ pub const StandardsControlAssociationDetail = struct {
     /// Provides the input parameter that Security Hub uses to call the
     /// [UpdateStandardsControl](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateStandardsControl.html) API. This API can be used to enable or disable a control
     /// in a specified standard.
-    standards_control_arns: ?[]const []const u8,
+    standards_control_arns: ?[]const []const u8 = null,
 
     /// The description of a control. This typically summarizes how Security Hub
     /// evaluates the control and the
     /// conditions under which it produces a failed finding. This parameter may
     /// reference a specific standard.
-    standards_control_description: ?[]const u8,
+    standards_control_description: ?[]const u8 = null,
 
     /// The title of a control. This field may reference a specific standard.
-    standards_control_title: ?[]const u8,
+    standards_control_title: ?[]const u8 = null,
 
     /// The time at which the enablement status of the control in the specified
     /// standard was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The reason for updating the enablement status of a control in a specified
     /// standard.
-    updated_reason: ?[]const u8,
+    updated_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_status = "AssociationStatus",

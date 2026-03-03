@@ -5,31 +5,31 @@ const MonitoringProblemType = @import("monitoring_problem_type.zig").MonitoringP
 /// Container image configuration object for the monitoring job.
 pub const ModelQualityAppSpecification = struct {
     /// An array of arguments for the container used to run the monitoring job.
-    container_arguments: ?[]const []const u8,
+    container_arguments: ?[]const []const u8 = null,
 
     /// Specifies the entrypoint for a container that the monitoring job runs.
-    container_entrypoint: ?[]const []const u8,
+    container_entrypoint: ?[]const []const u8 = null,
 
     /// Sets the environment variables in the container that the monitoring job
     /// runs.
-    environment: ?[]const aws.map.StringMapEntry,
+    environment: ?[]const aws.map.StringMapEntry = null,
 
     /// The address of the container image that the monitoring job runs.
     image_uri: []const u8,
 
     /// An Amazon S3 URI to a script that is called after analysis has been
     /// performed. Applicable only for the built-in (first party) containers.
-    post_analytics_processor_source_uri: ?[]const u8,
+    post_analytics_processor_source_uri: ?[]const u8 = null,
 
     /// The machine learning problem type of the model that the monitoring job
     /// monitors.
-    problem_type: ?MonitoringProblemType,
+    problem_type: ?MonitoringProblemType = null,
 
     /// An Amazon S3 URI to a script that is called per row prior to running
     /// analysis. It can base64 decode the payload and convert it into a flattened
     /// JSON so that the built-in container can use the converted data. Applicable
     /// only for the built-in (first party) containers.
-    record_preprocessor_source_uri: ?[]const u8,
+    record_preprocessor_source_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .container_arguments = "ContainerArguments",

@@ -10,25 +10,25 @@ const ThresholdAlertsConfigurations = @import("threshold_alerts_configurations.z
 pub const RegisteredUserDashboardFeatureConfigurations = struct {
     /// The Amazon Q configurations of an embedded Amazon Quick Sight
     /// dashboard.
-    amazon_q_in_quick_sight: ?AmazonQInQuickSightDashboardConfigurations,
+    amazon_q_in_quick_sight: ?AmazonQInQuickSightDashboardConfigurations = null,
 
     /// The bookmarks configuration for an embedded dashboard in Amazon Quick Sight.
-    bookmarks: ?BookmarksConfigurations,
+    bookmarks: ?BookmarksConfigurations = null,
 
     /// The recent snapshots configuration for an Quick Sight embedded dashboard
-    recent_snapshots: ?RecentSnapshotsConfigurations,
+    recent_snapshots: ?RecentSnapshotsConfigurations = null,
 
     /// The schedules configuration for an embedded Quick Sight dashboard.
-    schedules: ?SchedulesConfigurations,
+    schedules: ?SchedulesConfigurations = null,
 
     /// The shared view settings of an embedded dashboard.
-    shared_view: ?SharedViewConfigurations,
+    shared_view: ?SharedViewConfigurations = null,
 
     /// The state persistence settings of an embedded dashboard.
-    state_persistence: ?StatePersistenceConfigurations,
+    state_persistence: ?StatePersistenceConfigurations = null,
 
     /// The threshold alerts configuration for an Quick Sight embedded dashboard.
-    threshold_alerts: ?ThresholdAlertsConfigurations,
+    threshold_alerts: ?ThresholdAlertsConfigurations = null,
 
     pub const json_field_names = .{
         .amazon_q_in_quick_sight = "AmazonQInQuickSight",

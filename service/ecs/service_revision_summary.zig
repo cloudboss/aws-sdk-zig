@@ -3,7 +3,7 @@
 /// service revision.
 pub const ServiceRevisionSummary = struct {
     /// The ARN of the service revision.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The number of pending tasks for the service revision.
     pending_task_count: i32 = 0,
@@ -13,7 +13,7 @@ pub const ServiceRevisionSummary = struct {
     /// value represents a snapshot of the traffic distribution and may not reflect
     /// real-time
     /// changes during active deployments. Valid values are 0.0 to 100.0.
-    requested_production_traffic_weight: ?f64,
+    requested_production_traffic_weight: ?f64 = null,
 
     /// The number of requested tasks for the service revision.
     requested_task_count: i32 = 0,
@@ -23,7 +23,7 @@ pub const ServiceRevisionSummary = struct {
     /// represents a snapshot of the traffic distribution and may not reflect
     /// real-time changes
     /// during active deployments. Valid values are 0.0 to 100.0.
-    requested_test_traffic_weight: ?f64,
+    requested_test_traffic_weight: ?f64 = null,
 
     /// The number of running tasks for the service revision.
     running_task_count: i32 = 0,

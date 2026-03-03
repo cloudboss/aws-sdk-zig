@@ -3,7 +3,7 @@
 pub const JobCheckpointConfig = struct {
     /// (Optional) The local directory where checkpoint data is stored. The default
     /// directory is `/opt/braket/checkpoints/`.
-    local_path: ?[]const u8,
+    local_path: ?[]const u8 = null,
 
     /// Identifies the S3 path where you want Amazon Braket to store checkpoint
     /// data. For example, `s3://bucket-name/key-name-prefix`.

@@ -6,7 +6,7 @@ const S3Presign = @import("s3_presign.zig").S3Presign;
 /// presigned URL.
 pub const WorkerAccessConfiguration = struct {
     /// Defines any Amazon S3 resource constraints.
-    s3_presign: ?S3Presign,
+    s3_presign: ?S3Presign = null,
 
     pub const json_field_names = .{
         .s3_presign = "S3Presign",

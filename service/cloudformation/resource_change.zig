@@ -17,37 +17,37 @@ pub const ResourceChange = struct {
     /// can't be determined), or `SyncWithActual` (resource will not be changed,
     /// only
     /// CloudFormation metadata will change).
-    action: ?ChangeAction,
+    action: ?ChangeAction = null,
 
     /// An encoded JSON string that contains the context of the resource after the
     /// change is
     /// executed.
-    after_context: ?[]const u8,
+    after_context: ?[]const u8 = null,
 
     /// An encoded JSON string that contains the context of the resource before the
     /// change is
     /// executed.
-    before_context: ?[]const u8,
+    before_context: ?[]const u8 = null,
 
     /// The change set ID of the nested change set.
-    change_set_id: ?[]const u8,
+    change_set_id: ?[]const u8 = null,
 
     /// For the `Modify` action, a list of `ResourceChangeDetail` structures
     /// that describes the changes that CloudFormation will make to the resource.
-    details: ?[]const ResourceChangeDetail,
+    details: ?[]const ResourceChangeDetail = null,
 
     /// The resource's logical ID, which is defined in the stack's template.
-    logical_resource_id: ?[]const u8,
+    logical_resource_id: ?[]const u8 = null,
 
     /// Contains information about the module from which the resource was created,
     /// if the resource
     /// was created from a module included in the stack template.
-    module_info: ?ModuleInfo,
+    module_info: ?ModuleInfo = null,
 
     /// The resource's physical ID (resource name). Resources that you are adding
     /// don't have
     /// physical IDs because they haven't been created.
-    physical_resource_id: ?[]const u8,
+    physical_resource_id: ?[]const u8 = null,
 
     /// The action that will be taken on the physical resource when the change set
     /// is
@@ -66,11 +66,11 @@ pub const ResourceChange = struct {
     /// * `ReplaceAndSnapshot` The resource will be replaced and then have a
     ///   snapshot
     /// taken.
-    policy_action: ?PolicyAction,
+    policy_action: ?PolicyAction = null,
 
     /// Information about the resource's state from the previous CloudFormation
     /// deployment.
-    previous_deployment_context: ?[]const u8,
+    previous_deployment_context: ?[]const u8 = null,
 
     /// For the `Modify` action, indicates whether CloudFormation will replace the
     /// resource
@@ -87,10 +87,10 @@ pub const ResourceChange = struct {
     /// `Replacement` value depends on the change with the most impact. A
     /// `RequiresRecreation` value of `Always` has the most impact, followed by
     /// `Conditional`, and then `Never`.
-    replacement: ?Replacement,
+    replacement: ?Replacement = null,
 
     /// List of resource attributes for which drift was ignored.
-    resource_drift_ignored_attributes: ?[]const ResourceDriftIgnoredAttribute,
+    resource_drift_ignored_attributes: ?[]const ResourceDriftIgnoredAttribute = null,
 
     /// The drift status of the resource. Valid values:
     ///
@@ -107,14 +107,14 @@ pub const ResourceChange = struct {
     /// * `UNSUPPORTED` – Resource type does not support actual state comparison.
     ///
     /// Only present for drift-aware change sets.
-    resource_drift_status: ?StackResourceDriftStatus,
+    resource_drift_status: ?StackResourceDriftStatus = null,
 
     /// The type of CloudFormation resource, such as `AWS::S3::Bucket`.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// For the `Modify` action, indicates which resource attribute is triggering
     /// this
     /// update, such as a change in the resource attribute's `Metadata`,
     /// `Properties`, or `Tags`.
-    scope: ?[]const ResourceAttribute,
+    scope: ?[]const ResourceAttribute = null,
 };

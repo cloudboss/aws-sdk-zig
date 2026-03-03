@@ -7,16 +7,16 @@ const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 /// feature.
 pub const NetworkConfiguration = struct {
     /// Network configuration settings for outbound message traffic.
-    egress_configuration: ?EgressConfiguration,
+    egress_configuration: ?EgressConfiguration = null,
 
     /// Network configuration settings for inbound message traffic.
-    ingress_configuration: ?IngressConfiguration,
+    ingress_configuration: ?IngressConfiguration = null,
 
     /// App Runner provides you with the option to choose between *IPv4* and *dual
     /// stack* (IPv4 and IPv6).
     /// This is an optional parameter. If you do not specify an `IpAddressType`, it
     /// defaults to select IPv4.
-    ip_address_type: ?IpAddressType,
+    ip_address_type: ?IpAddressType = null,
 
     pub const json_field_names = .{
         .egress_configuration = "EgressConfiguration",

@@ -7,20 +7,20 @@ pub const PutRecordsResultEntry = struct {
     /// The error code for an individual record result. `ErrorCodes` can be either
     /// `ProvisionedThroughputExceededException` or
     /// `InternalFailure`.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message for an individual record result. An `ErrorCode` value of
     /// `ProvisionedThroughputExceededException` has an error message that
     /// includes the account ID, stream name, and shard ID. An `ErrorCode` value of
     /// `InternalFailure` has the error message `"Internal Service
     /// Failure"`.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The sequence number for an individual record result.
-    sequence_number: ?[]const u8,
+    sequence_number: ?[]const u8 = null,
 
     /// The shard ID for an individual record result.
-    shard_id: ?[]const u8,
+    shard_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

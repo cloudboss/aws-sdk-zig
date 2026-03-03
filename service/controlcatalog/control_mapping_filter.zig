@@ -6,15 +6,15 @@ const MappingType = @import("mapping_type.zig").MappingType;
 pub const ControlMappingFilter = struct {
     /// A list of common control ARNs to filter the mappings. When specified, only
     /// mappings associated with these common controls are returned.
-    common_control_arns: ?[]const []const u8,
+    common_control_arns: ?[]const []const u8 = null,
 
     /// A list of control ARNs to filter the mappings. When specified, only mappings
     /// associated with these controls are returned.
-    control_arns: ?[]const []const u8,
+    control_arns: ?[]const []const u8 = null,
 
     /// A list of mapping types to filter the mappings. When specified, only
     /// mappings of these types are returned.
-    mapping_types: ?[]const MappingType,
+    mapping_types: ?[]const MappingType = null,
 
     pub const json_field_names = .{
         .common_control_arns = "CommonControlArns",

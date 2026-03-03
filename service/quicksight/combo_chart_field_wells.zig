@@ -7,7 +7,7 @@ const ComboChartAggregatedFieldWells = @import("combo_chart_aggregated_field_wel
 pub const ComboChartFieldWells = struct {
     /// The aggregated field wells of a combo chart. Combo charts only have
     /// aggregated field wells. Columns in a combo chart are aggregated by category.
-    combo_chart_aggregated_field_wells: ?ComboChartAggregatedFieldWells,
+    combo_chart_aggregated_field_wells: ?ComboChartAggregatedFieldWells = null,
 
     pub const json_field_names = .{
         .combo_chart_aggregated_field_wells = "ComboChartAggregatedFieldWells",

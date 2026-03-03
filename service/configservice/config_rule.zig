@@ -41,14 +41,14 @@ const Source = @import("source.zig").Source;
 pub const ConfigRule = struct {
     /// The Amazon Resource Name (ARN) of the Config
     /// rule.
-    config_rule_arn: ?[]const u8,
+    config_rule_arn: ?[]const u8 = null,
 
     /// The ID of the Config rule.
-    config_rule_id: ?[]const u8,
+    config_rule_id: ?[]const u8 = null,
 
     /// The name that you assign to the Config rule. The name is
     /// required if you are adding a new rule.
-    config_rule_name: ?[]const u8,
+    config_rule_name: ?[]const u8 = null,
 
     /// Indicates whether the Config rule is active or is currently
     /// being deleted by Config. It can also indicate the evaluation
@@ -69,7 +69,7 @@ pub const ConfigRule = struct {
     /// `DeleteConfigRule` request to delete the rule. After
     /// Config deletes the rule, the rule and all of its evaluations are
     /// erased and are no longer available.
-    config_rule_state: ?ConfigRuleState,
+    config_rule_state: ?ConfigRuleState = null,
 
     /// Service principal name of the service that created the
     /// rule.
@@ -77,19 +77,19 @@ pub const ConfigRule = struct {
     /// The field is populated only if the service-linked rule is
     /// created by a service. The field is empty if you create your own
     /// rule.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The description that you provide for the Config
     /// rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The modes the Config rule can be evaluated in. The valid values are distinct
     /// objects. By default, the value is Detective evaluation mode only.
-    evaluation_modes: ?[]const EvaluationModeConfiguration,
+    evaluation_modes: ?[]const EvaluationModeConfiguration = null,
 
     /// A string, in JSON format, that is passed to the Config rule
     /// Lambda function.
-    input_parameters: ?[]const u8,
+    input_parameters: ?[]const u8 = null,
 
     /// The maximum frequency with which Config runs evaluations
     /// for a rule. You can specify a value for
@@ -106,7 +106,7 @@ pub const ConfigRule = struct {
     /// every 24 hours. To change the frequency, specify a valid value
     /// for the `MaximumExecutionFrequency`
     /// parameter.
-    maximum_execution_frequency: ?MaximumExecutionFrequency,
+    maximum_execution_frequency: ?MaximumExecutionFrequency = null,
 
     /// Defines which resources can trigger an evaluation for the rule.
     /// The scope can include one or more resource types, a combination of
@@ -115,7 +115,7 @@ pub const ConfigRule = struct {
     /// trigger an evaluation for the rule. If you do not specify a scope,
     /// evaluations are triggered when any resource in the recording group
     /// changes.
-    scope: ?Scope,
+    scope: ?Scope = null,
 
     /// Provides the rule owner (`Amazon Web Services` for managed rules,
     /// `CUSTOM_POLICY` for Custom Policy rules, and `CUSTOM_LAMBDA` for Custom

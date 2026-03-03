@@ -17,8 +17,8 @@ const SMSSandboxPhoneNumberVerificationStatus = @import("sms_sandbox_phone_numbe
 /// the *Amazon SNS Developer Guide*.
 pub const SMSSandboxPhoneNumber = struct {
     /// The destination phone number.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     /// The destination phone number's verification status.
-    status: ?SMSSandboxPhoneNumberVerificationStatus,
+    status: ?SMSSandboxPhoneNumberVerificationStatus = null,
 };

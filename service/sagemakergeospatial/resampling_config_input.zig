@@ -4,7 +4,7 @@ const OutputResolutionResamplingInput = @import("output_resolution_resampling_in
 /// The structure representing input for resampling operation.
 pub const ResamplingConfigInput = struct {
     /// The name of the algorithm used for resampling.
-    algorithm_name: ?AlgorithmNameResampling,
+    algorithm_name: ?AlgorithmNameResampling = null,
 
     /// The structure representing output
     /// resolution (in target georeferenced units) of the result of resampling
@@ -13,7 +13,7 @@ pub const ResamplingConfigInput = struct {
 
     /// Bands used in the operation. If no target bands are specified, it uses all
     /// bands available in the input.
-    target_bands: ?[]const []const u8,
+    target_bands: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .algorithm_name = "AlgorithmName",

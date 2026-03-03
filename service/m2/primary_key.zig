@@ -5,7 +5,7 @@ pub const PrimaryKey = struct {
     length: i32 = 0,
 
     /// A name for the Primary Key.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A positive integer value representing the offset to mark the start of the
     /// primary key in

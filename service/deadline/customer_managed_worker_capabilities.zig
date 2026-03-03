@@ -11,22 +11,22 @@ const VCpuCountRange = @import("v_cpu_count_range.zig").VCpuCountRange;
 /// The worker capabilities for a customer managed workflow.
 pub const CustomerManagedWorkerCapabilities = struct {
     /// The range of the accelerator.
-    accelerator_count: ?AcceleratorCountRange,
+    accelerator_count: ?AcceleratorCountRange = null,
 
     /// The total memory (MiB) for the customer managed worker capabilities.
-    accelerator_total_memory_mi_b: ?AcceleratorTotalMemoryMiBRange,
+    accelerator_total_memory_mi_b: ?AcceleratorTotalMemoryMiBRange = null,
 
     /// The accelerator types for the customer managed worker capabilities.
-    accelerator_types: ?[]const AcceleratorType,
+    accelerator_types: ?[]const AcceleratorType = null,
 
     /// The CPU architecture type for the customer managed worker capabilities.
     cpu_architecture_type: CpuArchitectureType,
 
     /// Custom requirement ranges for customer managed worker capabilities.
-    custom_amounts: ?[]const FleetAmountCapability,
+    custom_amounts: ?[]const FleetAmountCapability = null,
 
     /// Custom attributes for the customer manged worker capabilities.
-    custom_attributes: ?[]const FleetAttributeCapability,
+    custom_attributes: ?[]const FleetAttributeCapability = null,
 
     /// The memory (MiB).
     memory_mi_b: MemoryMiBRange,

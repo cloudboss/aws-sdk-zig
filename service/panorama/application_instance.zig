@@ -7,40 +7,40 @@ const ApplicationInstanceStatus = @import("application_instance_status.zig").App
 /// An application instance on a device.
 pub const ApplicationInstance = struct {
     /// The application instance's ID.
-    application_instance_id: ?[]const u8,
+    application_instance_id: ?[]const u8 = null,
 
     /// The application instance's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// When the application instance was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The device's ID.
-    default_runtime_context_device: ?[]const u8,
+    default_runtime_context_device: ?[]const u8 = null,
 
     /// The device's name.
-    default_runtime_context_device_name: ?[]const u8,
+    default_runtime_context_device_name: ?[]const u8 = null,
 
     /// The application instance's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The application instance's health status.
-    health_status: ?ApplicationInstanceHealthStatus,
+    health_status: ?ApplicationInstanceHealthStatus = null,
 
     /// The application instance's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The application's state.
-    runtime_context_states: ?[]const ReportedRuntimeContextState,
+    runtime_context_states: ?[]const ReportedRuntimeContextState = null,
 
     /// The application instance's status.
-    status: ?ApplicationInstanceStatus,
+    status: ?ApplicationInstanceStatus = null,
 
     /// The application instance's status description.
-    status_description: ?[]const u8,
+    status_description: ?[]const u8 = null,
 
     /// The application instance's tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .application_instance_id = "ApplicationInstanceId",

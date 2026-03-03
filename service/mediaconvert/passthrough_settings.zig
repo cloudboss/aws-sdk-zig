@@ -14,7 +14,7 @@ pub const PassthroughSettings = struct {
     /// input clip duration. We only recommend this setting for special workflows,
     /// and when you choose this setting your output may not be compatible with most
     /// players.
-    frame_control: ?FrameControl,
+    frame_control: ?FrameControl = null,
 
     /// AUTO will select the highest bitrate input in the video selector source.
     /// REMUX_ALL will passthrough all the selected streams in the video selector
@@ -22,7 +22,7 @@ pub const PassthroughSettings = struct {
     /// video selector type): REMUX_ALL will only remux all streams selected, and
     /// AUTO will use the highest bitrate video stream among the selected streams as
     /// source.
-    video_selector_mode: ?VideoSelectorMode,
+    video_selector_mode: ?VideoSelectorMode = null,
 
     pub const json_field_names = .{
         .frame_control = "FrameControl",

@@ -12,11 +12,11 @@ pub const NewSessionDetails = struct {
     /// There can be up to 32,768 UTF-8 bytes across all key-value pairs per
     /// contact. Attribute keys can include only
     /// alphanumeric, dash, and underscore characters.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
-    participant_details: ?ParticipantDetails,
+    participant_details: ?ParticipantDetails = null,
 
-    streaming_configuration: ?ChatStreamingConfiguration,
+    streaming_configuration: ?ChatStreamingConfiguration = null,
 
     /// The supported chat message content types. Supported types are `text/plain`,
     /// `text/markdown`, `application/json`,
@@ -31,7 +31,7 @@ pub const NewSessionDetails = struct {
     /// `[text/plain,
     /// application/json,
     /// application/vnd.amazonaws.connect.message.interactive.response]`.
-    supported_messaging_content_types: ?[]const []const u8,
+    supported_messaging_content_types: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

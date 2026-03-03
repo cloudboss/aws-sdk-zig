@@ -7,10 +7,10 @@ pub const PutResourcePolicyRequest = struct {
     /// attempt to overwrite a policy. You must provide this hash when updating or
     /// deleting a
     /// policy.
-    policy_hash: ?[]const u8,
+    policy_hash: ?[]const u8 = null,
 
     /// The policy ID.
-    policy_id: ?[]const u8,
+    policy_id: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) of the resource to which you want to attach a
     /// policy.

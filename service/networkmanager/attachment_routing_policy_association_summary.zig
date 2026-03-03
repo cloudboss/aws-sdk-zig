@@ -1,17 +1,17 @@
 /// Summary information about routing policy associations for an attachment.
 pub const AttachmentRoutingPolicyAssociationSummary = struct {
     /// The list of routing policies currently associated with the attachment.
-    associated_routing_policies: ?[]const []const u8,
+    associated_routing_policies: ?[]const []const u8 = null,
 
     /// The ID of the attachment associated with the routing policy.
-    attachment_id: ?[]const u8,
+    attachment_id: ?[]const u8 = null,
 
     /// The list of routing policies that are pending association with the
     /// attachment.
-    pending_routing_policies: ?[]const []const u8,
+    pending_routing_policies: ?[]const []const u8 = null,
 
     /// The routing policy label associated with the attachment.
-    routing_policy_label: ?[]const u8,
+    routing_policy_label: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .associated_routing_policies = "AssociatedRoutingPolicies",

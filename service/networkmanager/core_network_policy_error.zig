@@ -7,7 +7,7 @@ pub const CoreNetworkPolicyError = struct {
     message: []const u8,
 
     /// The JSON path where the error was discovered in the policy document.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

@@ -4,10 +4,10 @@ const ViewDialect = @import("view_dialect.zig").ViewDialect;
 /// engine.
 pub const SupportedDialect = struct {
     /// The dialect of the query engine.
-    dialect: ?ViewDialect,
+    dialect: ?ViewDialect = null,
 
     /// The version of the dialect of the query engine. For example, 3.0.0.
-    dialect_version: ?[]const u8,
+    dialect_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dialect = "Dialect",

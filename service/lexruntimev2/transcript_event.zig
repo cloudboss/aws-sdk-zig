@@ -5,10 +5,10 @@ pub const TranscriptEvent = struct {
     /// the form `RESPONSE-N`, where N is a number starting with one
     /// and incremented for each event sent by Amazon Lex V2 in the current
     /// session.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The transcript of the voice audio from the user.
-    transcript: ?[]const u8,
+    transcript: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .event_id = "eventId",

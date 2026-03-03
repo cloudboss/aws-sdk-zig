@@ -13,19 +13,19 @@ pub const LaunchPermissionConfiguration = struct {
     /// [Organizations
     /// terminology and
     /// concepts](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html).
-    organizational_unit_arns: ?[]const []const u8,
+    organizational_unit_arns: ?[]const []const u8 = null,
 
     /// The ARN for an Amazon Web Services Organization that you want to share your
     /// AMI with. For more
     /// information, see [What is
     /// Organizations?](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html).
-    organization_arns: ?[]const []const u8,
+    organization_arns: ?[]const []const u8 = null,
 
     /// The name of the group.
-    user_groups: ?[]const []const u8,
+    user_groups: ?[]const []const u8 = null,
 
     /// The Amazon Web Services account ID.
-    user_ids: ?[]const []const u8,
+    user_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .organizational_unit_arns = "organizationalUnitArns",

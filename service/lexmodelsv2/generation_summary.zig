@@ -3,16 +3,16 @@ const GenerationStatus = @import("generation_status.zig").GenerationStatus;
 /// Contains information about a generation request made for the bot locale.
 pub const GenerationSummary = struct {
     /// The date and time at which the generation request was made.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The unique identifier of the generation request.
-    generation_id: ?[]const u8,
+    generation_id: ?[]const u8 = null,
 
     /// The status of the generation request.
-    generation_status: ?GenerationStatus,
+    generation_status: ?GenerationStatus = null,
 
     /// The date and time at which the generation request was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

@@ -8,17 +8,17 @@ const ConflictingAlias = @import("conflicting_alias.zig").ConflictingAlias;
 /// own.
 pub const ConflictingAliasesList = struct {
     /// Contains the conflicting aliases in the list.
-    items: ?[]const ConflictingAlias,
+    items: ?[]const ConflictingAlias = null,
 
     /// The maximum number of conflicting aliases requested.
-    max_items: ?i32,
+    max_items: ?i32 = null,
 
     /// If there are more items in the list than are in this response, this element
     /// is present. It contains the value that you should use in the `Marker` field
     /// of a subsequent request to continue listing conflicting aliases where you
     /// left off.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The number of conflicting aliases returned in the response.
-    quantity: ?i32,
+    quantity: ?i32 = null,
 };

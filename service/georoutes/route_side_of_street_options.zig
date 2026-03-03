@@ -8,7 +8,7 @@ pub const RouteSideOfStreetOptions = struct {
     /// Strategy that defines when the side of street position should be used.
     ///
     /// Default Value: `DividedStreetOnly`
-    use_with: ?SideOfStreetMatchingStrategy,
+    use_with: ?SideOfStreetMatchingStrategy = null,
 
     pub const json_field_names = .{
         .position = "Position",

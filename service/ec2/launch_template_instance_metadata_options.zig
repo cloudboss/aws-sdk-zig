@@ -15,19 +15,19 @@ pub const LaunchTemplateInstanceMetadataOptions = struct {
     ///
     /// If you specify a value of `disabled`, you will not be able to access
     /// your instance metadata.
-    http_endpoint: ?LaunchTemplateInstanceMetadataEndpointState,
+    http_endpoint: ?LaunchTemplateInstanceMetadataEndpointState = null,
 
     /// Enables or disables the IPv6 endpoint for the instance metadata service.
     ///
     /// Default: `disabled`
-    http_protocol_ipv_6: ?LaunchTemplateInstanceMetadataProtocolIpv6,
+    http_protocol_ipv_6: ?LaunchTemplateInstanceMetadataProtocolIpv6 = null,
 
     /// The desired HTTP PUT response hop limit for instance metadata requests. The
     /// larger the
     /// number, the further instance metadata requests can travel.
     ///
     /// Possible values: Integers from 1 to 64
-    http_put_response_hop_limit: ?i32,
+    http_put_response_hop_limit: ?i32 = null,
 
     /// Indicates whether IMDSv2 is required.
     ///
@@ -45,7 +45,7 @@ pub const LaunchTemplateInstanceMetadataOptions = struct {
     /// role credentials always returns IMDSv2 credentials; IMDSv1 credentials are
     /// not
     /// available.
-    http_tokens: ?LaunchTemplateHttpTokensState,
+    http_tokens: ?LaunchTemplateHttpTokensState = null,
 
     /// Set to `enabled` to allow access to instance tags from the instance
     /// metadata. Set to `disabled` to turn off access to instance tags from the
@@ -54,7 +54,7 @@ pub const LaunchTemplateInstanceMetadataOptions = struct {
     /// metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-tags-in-IMDS.html).
     ///
     /// Default: `disabled`
-    instance_metadata_tags: ?LaunchTemplateInstanceMetadataTagsState,
+    instance_metadata_tags: ?LaunchTemplateInstanceMetadataTagsState = null,
 
     /// The state of the metadata option changes.
     ///
@@ -63,5 +63,5 @@ pub const LaunchTemplateInstanceMetadataOptions = struct {
     ///
     /// `applied` - The metadata options have been successfully applied on the
     /// instance.
-    state: ?LaunchTemplateInstanceMetadataOptionsState,
+    state: ?LaunchTemplateInstanceMetadataOptionsState = null,
 };

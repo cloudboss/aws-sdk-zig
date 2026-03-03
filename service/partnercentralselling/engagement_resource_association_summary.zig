@@ -13,17 +13,17 @@ pub const EngagementResourceAssociationSummary = struct {
 
     /// The AWS account ID of the entity that owns the resource. Identifies the
     /// account responsible for or having primary control over the resource.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// A unique identifier for the engagement associated with the resource.
-    engagement_id: ?[]const u8,
+    engagement_id: ?[]const u8 = null,
 
     /// A unique identifier for the specific resource. Varies depending on the
     /// resource type.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// Categorizes the type of resource associated with the engagement.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .catalog = "Catalog",

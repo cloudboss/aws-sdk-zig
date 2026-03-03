@@ -15,11 +15,11 @@ pub const BrowserSessionSummary = struct {
 
     /// The timestamp when the browser session was last updated. This value is in
     /// ISO 8601 format.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The name of the browser session. This name helps identify and manage the
     /// session.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The unique identifier of the browser session. This identifier is used in
     /// operations that interact with the session.

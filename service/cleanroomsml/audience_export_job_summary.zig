@@ -14,18 +14,18 @@ pub const AudienceExportJobSummary = struct {
     create_time: i64,
 
     /// The description of the audience export job.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the audience export job.
     name: []const u8,
 
     /// The Amazon S3 bucket where the audience export is stored.
-    output_location: ?[]const u8,
+    output_location: ?[]const u8 = null,
 
     /// The status of the audience export job.
     status: AudienceExportJobStatus,
 
-    status_details: ?StatusDetails,
+    status_details: ?StatusDetails = null,
 
     /// The most recent time at which the audience export job was updated.
     update_time: i64,

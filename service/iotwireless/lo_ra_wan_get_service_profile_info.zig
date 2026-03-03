@@ -4,19 +4,19 @@ pub const LoRaWANGetServiceProfileInfo = struct {
     add_gw_metadata: bool = false,
 
     /// The ChannelMask value.
-    channel_mask: ?[]const u8,
+    channel_mask: ?[]const u8 = null,
 
     /// The DevStatusReqFreq value.
-    dev_status_req_freq: ?i32,
+    dev_status_req_freq: ?i32 = null,
 
     /// The DLBucketSize value.
-    dl_bucket_size: ?i32,
+    dl_bucket_size: ?i32 = null,
 
     /// The DLRate value.
-    dl_rate: ?i32,
+    dl_rate: ?i32 = null,
 
     /// The DLRatePolicy value.
-    dl_rate_policy: ?[]const u8,
+    dl_rate_policy: ?[]const u8 = null,
 
     /// The DRMax value.
     dr_max: i32 = 0,
@@ -28,17 +28,17 @@ pub const LoRaWANGetServiceProfileInfo = struct {
     hr_allowed: bool = false,
 
     /// The MinGwDiversity value.
-    min_gw_diversity: ?i32,
+    min_gw_diversity: ?i32 = null,
 
     /// The maximum number of transmissions.
     ///
     /// Default: `3`
-    nb_trans_max: ?i32,
+    nb_trans_max: ?i32 = null,
 
     /// The minimum number of transmissions.
     ///
     /// Default: `0`
-    nb_trans_min: ?i32,
+    nb_trans_min: ?i32 = null,
 
     /// The NwkGeoLoc value.
     nwk_geo_loc: bool = false,
@@ -61,21 +61,21 @@ pub const LoRaWANGetServiceProfileInfo = struct {
     /// The Transmit Power Index maximum value.
     ///
     /// Default: `15`
-    tx_power_index_max: ?i32,
+    tx_power_index_max: ?i32 = null,
 
     /// The Transmit Power Index minimum value.
     ///
     /// Default: `0`
-    tx_power_index_min: ?i32,
+    tx_power_index_min: ?i32 = null,
 
     /// The ULBucketSize value.
-    ul_bucket_size: ?i32,
+    ul_bucket_size: ?i32 = null,
 
     /// The ULRate value.
-    ul_rate: ?i32,
+    ul_rate: ?i32 = null,
 
     /// The ULRatePolicy value.
-    ul_rate_policy: ?[]const u8,
+    ul_rate_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .add_gw_metadata = "AddGwMetadata",

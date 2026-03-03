@@ -6,7 +6,7 @@ pub const TargetPreview = struct {
     count: i32 = 0,
 
     /// A type of resource that was included in the execution preview.
-    target_type: ?[]const u8,
+    target_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .count = "Count",

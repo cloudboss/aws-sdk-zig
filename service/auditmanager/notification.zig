@@ -4,28 +4,28 @@
 /// review.
 pub const Notification = struct {
     /// The identifier for the assessment.
-    assessment_id: ?[]const u8,
+    assessment_id: ?[]const u8 = null,
 
     /// The name of the related assessment.
-    assessment_name: ?[]const u8,
+    assessment_name: ?[]const u8 = null,
 
     /// The identifier for the control set.
-    control_set_id: ?[]const u8,
+    control_set_id: ?[]const u8 = null,
 
     /// Specifies the name of the control set that the notification is about.
-    control_set_name: ?[]const u8,
+    control_set_name: ?[]const u8 = null,
 
     /// The description of the notification.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time when the notification was sent.
-    event_time: ?i64,
+    event_time: ?i64 = null,
 
     /// The unique identifier for the notification.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The sender of the notification.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .assessment_id = "assessmentId",

@@ -4,10 +4,10 @@ pub const ResourceDescription = struct {
     ///
     /// For more information, see [Identifying
     /// resources](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html) in the *Amazon Web Services Cloud Control API User Guide*.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// A list of the resource properties and their current values.
-    properties: ?[]const u8,
+    properties: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .identifier = "Identifier",

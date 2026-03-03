@@ -8,12 +8,12 @@ const OpenSearchResourceStatus = @import("open_search_resource_status.zig").Open
 /// policies](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html#serverless-encryption-policies) in the OpenSearch Service Developer Guide.
 pub const OpenSearchEncryptionPolicy = struct {
     /// The name of the encryption policy.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// This structure contains information about the status of this OpenSearch
     /// Service
     /// resource.
-    status: ?OpenSearchResourceStatus,
+    status: ?OpenSearchResourceStatus = null,
 
     pub const json_field_names = .{
         .policy_name = "policyName",

@@ -1,16 +1,16 @@
 /// An object that contains summary information about a workflow.
 pub const FlowTemplateSummary = struct {
     /// The ARN of the workflow.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date when the workflow was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The ID of the workflow.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The revision number of the workflow.
-    revision_number: ?i64,
+    revision_number: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -4,16 +4,16 @@
 /// Access](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html) for more information.
 pub const BlockPublicAccess = struct {
     /// Indicates if S3 Block Public Access is set to `BlockPublicAcls`.
-    block_public_acls: ?bool,
+    block_public_acls: ?bool = null,
 
     /// Indicates if S3 Block Public Access is set to `BlockPublicPolicy`.
-    block_public_policy: ?bool,
+    block_public_policy: ?bool = null,
 
     /// Indicates if S3 Block Public Access is set to `IgnorePublicAcls`.
-    ignore_public_acls: ?bool,
+    ignore_public_acls: ?bool = null,
 
     /// Indicates if S3 Block Public Access is set to `RestrictPublicBuckets`.
-    restrict_public_buckets: ?bool,
+    restrict_public_buckets: ?bool = null,
 
     pub const json_field_names = .{
         .block_public_acls = "BlockPublicAcls",

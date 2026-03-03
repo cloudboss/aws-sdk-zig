@@ -9,7 +9,7 @@ const FindingStatus = @import("finding_status.zig").FindingStatus;
 pub const Finding = struct {
     /// The action in the analyzed policy statement that an external principal has
     /// permission to use.
-    action: ?[]const []const u8,
+    action: ?[]const []const u8 = null,
 
     /// The time at which the resource was analyzed.
     analyzed_at: i64,
@@ -21,25 +21,25 @@ pub const Finding = struct {
     created_at: i64,
 
     /// An error.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// The ID of the finding.
     id: []const u8,
 
     /// Indicates whether the policy that generated the finding allows public access
     /// to the resource.
-    is_public: ?bool,
+    is_public: ?bool = null,
 
     /// The external principal that has access to a resource within the zone of
     /// trust.
-    principal: ?[]const aws.map.StringMapEntry,
+    principal: ?[]const aws.map.StringMapEntry = null,
 
     /// The resource that an external principal has access to.
-    resource: ?[]const u8,
+    resource: ?[]const u8 = null,
 
     /// The type of restriction applied to the finding by the resource owner with an
     /// Organizations resource control policy (RCP).
-    resource_control_policy_restriction: ?ResourceControlPolicyRestriction,
+    resource_control_policy_restriction: ?ResourceControlPolicyRestriction = null,
 
     /// The Amazon Web Services account ID that owns the resource.
     resource_owner_account: []const u8,
@@ -49,7 +49,7 @@ pub const Finding = struct {
 
     /// The sources of the finding. This indicates how the access that generated the
     /// finding is granted. It is populated for Amazon S3 bucket findings.
-    sources: ?[]const FindingSource,
+    sources: ?[]const FindingSource = null,
 
     /// The current status of the finding.
     status: FindingStatus,

@@ -5,13 +5,13 @@ pub const RoleConfiguration = struct {
     /// enable cross-account scraping. For information about the contents of this
     /// policy, see [Cross-account
     /// setup](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#cross-account-remote-write).
-    source_role_arn: ?[]const u8,
+    source_role_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the role used in the target account to
     /// enable cross-account scraping. For information about the contents of this
     /// policy, see [Cross-account
     /// setup](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#cross-account-remote-write).
-    target_role_arn: ?[]const u8,
+    target_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_role_arn = "sourceRoleArn",

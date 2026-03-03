@@ -17,7 +17,7 @@ pub const InstanceMetadataOptions = struct {
     /// destination. The default is one hop. However, if HTTP tokens are required,
     /// container
     /// image builds need a minimum of two hops.
-    http_put_response_hop_limit: ?i32,
+    http_put_response_hop_limit: ?i32 = null,
 
     /// Indicates whether a signed token header is required for instance metadata
     /// retrieval
@@ -34,7 +34,7 @@ pub const InstanceMetadataOptions = struct {
     /// Otherwise, version 1.0 credentials are returned.
     ///
     /// The default setting is **optional**.
-    http_tokens: ?[]const u8,
+    http_tokens: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .http_put_response_hop_limit = "httpPutResponseHopLimit",

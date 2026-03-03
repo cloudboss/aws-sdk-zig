@@ -13,13 +13,13 @@ pub const BackendEnvironment = struct {
     create_time: i64,
 
     /// The name of deployment artifacts.
-    deployment_artifacts: ?[]const u8,
+    deployment_artifacts: ?[]const u8 = null,
 
     /// The name for a backend environment that is part of an Amplify app.
     environment_name: []const u8,
 
     /// The AWS CloudFormation stack name of a backend environment.
-    stack_name: ?[]const u8,
+    stack_name: ?[]const u8 = null,
 
     /// The last updated date and time for a backend environment that is part of an
     /// Amplify

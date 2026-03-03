@@ -5,32 +5,32 @@
 pub const InstanceHealthSummary = struct {
     /// **Red.** The health agent is reporting a high number of request
     /// failures or other issues for an instance or environment.
-    degraded: ?i32,
+    degraded: ?i32 = null,
 
     /// **Green.** An operation is in progress on an instance.
-    info: ?i32,
+    info: ?i32 = null,
 
     /// **Grey.** AWS Elastic Beanstalk and the health agent are
     /// reporting no data on an instance.
-    no_data: ?i32,
+    no_data: ?i32 = null,
 
     /// **Green.** An instance is passing health checks and the health
     /// agent is not reporting any problems.
-    ok: ?i32,
+    ok: ?i32 = null,
 
     /// **Grey.** An operation is in progress on an instance within the
     /// command timeout.
-    pending: ?i32,
+    pending: ?i32 = null,
 
     /// **Red.** The health agent is reporting a very high number of
     /// request failures or other issues for an instance or environment.
-    severe: ?i32,
+    severe: ?i32 = null,
 
     /// **Grey.** AWS Elastic Beanstalk and the health agent are
     /// reporting an insufficient amount of data on an instance.
-    unknown: ?i32,
+    unknown: ?i32 = null,
 
     /// **Yellow.** The health agent is reporting a moderate number of
     /// request failures or other issues for an instance or environment.
-    warning: ?i32,
+    warning: ?i32 = null,
 };

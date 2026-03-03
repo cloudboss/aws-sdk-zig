@@ -1,7 +1,7 @@
 /// Describes a refresh token.
 pub const RefreshTokenRequestBody = struct {
     /// The ID of the client to request the token from.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     /// The token to use to refresh a previously issued access token that might have
     /// expired.

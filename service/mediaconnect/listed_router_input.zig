@@ -24,11 +24,11 @@ pub const ListedRouterInput = struct {
     input_type: RouterInputType,
 
     /// The details of the maintenance schedule for the listed router input.
-    maintenance_schedule: ?MaintenanceSchedule,
+    maintenance_schedule: ?MaintenanceSchedule = null,
 
     /// The type of maintenance schedule currently associated with the listed router
     /// input.
-    maintenance_schedule_type: ?MaintenanceScheduleType,
+    maintenance_schedule_type: ?MaintenanceScheduleType = null,
 
     /// The maximum bitrate of the router input.
     maximum_bitrate: i64,
@@ -40,7 +40,7 @@ pub const ListedRouterInput = struct {
     name: []const u8,
 
     /// The ARN of the network interface associated with the router input.
-    network_interface_arn: ?[]const u8,
+    network_interface_arn: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the router input is located.
     region_name: []const u8,

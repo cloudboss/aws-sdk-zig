@@ -9,38 +9,38 @@ pub const Integration = struct {
     /// see [Encryption
     /// context](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context) in the *Amazon Web Services Key Management Service Developer
     /// Guide*.
-    additional_encryption_context: ?[]const aws.map.StringMapEntry,
+    additional_encryption_context: ?[]const aws.map.StringMapEntry = null,
 
     /// The time (UTC) when the integration was created.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The description of the integration.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Any errors associated with the integration.
-    errors: ?[]const IntegrationError,
+    errors: ?[]const IntegrationError = null,
 
     /// The Amazon Resource Name (ARN) of the integration.
-    integration_arn: ?[]const u8,
+    integration_arn: ?[]const u8 = null,
 
     /// The name of the integration.
-    integration_name: ?[]const u8,
+    integration_name: ?[]const u8 = null,
 
     /// The Key Management Service (KMS) key identifier for the key used to
     /// encrypt the integration.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the database used as the source for
     /// replication.
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     /// The current status of the integration.
-    status: ?ZeroETLIntegrationStatus,
+    status: ?ZeroETLIntegrationStatus = null,
 
     /// The list of tags associated with the integration.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Redshift data warehouse to use
     /// as the target for replication.
-    target_arn: ?[]const u8,
+    target_arn: ?[]const u8 = null,
 };

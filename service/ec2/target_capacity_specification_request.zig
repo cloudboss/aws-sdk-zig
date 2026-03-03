@@ -24,20 +24,20 @@ const TargetCapacityUnitType = @import("target_capacity_unit_type.zig").TargetCa
 /// [SpotOptionsRequest](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptionsRequest).
 pub const TargetCapacitySpecificationRequest = struct {
     /// The default target capacity type.
-    default_target_capacity_type: ?DefaultTargetCapacityType,
+    default_target_capacity_type: ?DefaultTargetCapacityType = null,
 
     /// The number of On-Demand units to request.
-    on_demand_target_capacity: ?i32,
+    on_demand_target_capacity: ?i32 = null,
 
     /// The number of Spot units to request.
-    spot_target_capacity: ?i32,
+    spot_target_capacity: ?i32 = null,
 
     /// The unit for the target capacity. You can specify this parameter only when
     /// using
     /// attributed-based instance type selection.
     ///
     /// Default: `units` (the number of instances)
-    target_capacity_unit_type: ?TargetCapacityUnitType,
+    target_capacity_unit_type: ?TargetCapacityUnitType = null,
 
     /// The number of units to request, filled using the default target capacity
     /// type.

@@ -5,7 +5,7 @@ const TextInferenceConfig = @import("text_inference_config.zig").TextInferenceCo
 pub const InferenceConfig = struct {
     /// Configuration settings specific to text generation while generating
     /// responses using RetrieveAndGenerate.
-    text_inference_config: ?TextInferenceConfig,
+    text_inference_config: ?TextInferenceConfig = null,
 
     pub const json_field_names = .{
         .text_inference_config = "textInferenceConfig",

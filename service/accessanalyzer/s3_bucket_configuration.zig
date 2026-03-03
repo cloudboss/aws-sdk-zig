@@ -19,20 +19,20 @@ const S3PublicAccessBlockConfiguration = @import("s3_public_access_block_configu
 pub const S3BucketConfiguration = struct {
     /// The configuration of Amazon S3 access points or multi-region access points
     /// for the bucket. You can propose up to 10 new access points per bucket.
-    access_points: ?[]const aws.map.MapEntry(S3AccessPointConfiguration),
+    access_points: ?[]const aws.map.MapEntry(S3AccessPointConfiguration) = null,
 
     /// The proposed list of ACL grants for the Amazon S3 bucket. You can propose up
     /// to 100 ACL grants per bucket. If the proposed grant configuration is for an
     /// existing bucket, the access preview uses the proposed list of grant
     /// configurations in place of the existing grants. Otherwise, the access
     /// preview uses the existing grants for the bucket.
-    bucket_acl_grants: ?[]const S3BucketAclGrantConfiguration,
+    bucket_acl_grants: ?[]const S3BucketAclGrantConfiguration = null,
 
     /// The proposed bucket policy for the Amazon S3 bucket.
-    bucket_policy: ?[]const u8,
+    bucket_policy: ?[]const u8 = null,
 
     /// The proposed block public access configuration for the Amazon S3 bucket.
-    bucket_public_access_block: ?S3PublicAccessBlockConfiguration,
+    bucket_public_access_block: ?S3PublicAccessBlockConfiguration = null,
 
     pub const json_field_names = .{
         .access_points = "accessPoints",

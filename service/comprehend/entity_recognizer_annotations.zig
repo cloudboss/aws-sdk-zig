@@ -10,7 +10,7 @@ pub const EntityRecognizerAnnotations = struct {
     /// recognizer are
     /// located. The URI must be in the same Region as the API endpoint that you are
     /// calling.
-    test_s3_uri: ?[]const u8,
+    test_s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s3_uri = "S3Uri",

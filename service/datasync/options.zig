@@ -49,12 +49,12 @@ pub const Options = struct {
     ///
     /// If `Atime` is set to `NONE`, `Mtime` must also be
     /// `NONE`.
-    atime: ?Atime,
+    atime: ?Atime = null,
 
     /// Limits the bandwidth used by a DataSync task. For example, if you want
     /// DataSync to use a maximum of 1 MB, set this value to `1048576`
     /// (`=1024*1024`).
-    bytes_per_second: ?i64,
+    bytes_per_second: ?i64 = null,
 
     /// Specifies the POSIX group ID (GID) of the file's owners.
     ///
@@ -66,7 +66,7 @@ pub const Options = struct {
     /// For more information, see [Understanding how DataSync handles file and
     /// object
     /// metadata](https://docs.aws.amazon.com/datasync/latest/userguide/metadata-copied.html).
-    gid: ?Gid,
+    gid: ?Gid = null,
 
     /// Specifies the type of logs that DataSync publishes to a Amazon CloudWatch
     /// Logs
@@ -80,7 +80,7 @@ pub const Options = struct {
     ///   task transfers and performs data-integrity checks on.
     ///
     /// * `OFF` - No logs are published.
-    log_level: ?LogLevel,
+    log_level: ?LogLevel = null,
 
     /// Specifies whether to preserve metadata indicating the last time that a file
     /// was written
@@ -98,12 +98,12 @@ pub const Options = struct {
     ///
     /// If `Mtime` is set to `NONE`, `Atime` must also be set
     /// to `NONE`.
-    mtime: ?Mtime,
+    mtime: ?Mtime = null,
 
     /// Specifies whether you want DataSync to `PRESERVE` object tags
     /// (default behavior) when transferring between object storage systems. If you
     /// want your DataSync task to ignore object tags, specify the `NONE` value.
-    object_tags: ?ObjectTags,
+    object_tags: ?ObjectTags = null,
 
     /// Specifies whether DataSync should modify or preserve data at the destination
     /// location.
@@ -122,7 +122,7 @@ pub const Options = struct {
     /// location even if the source data has changed. You can use this option to
     /// protect against
     /// overwriting changes made to files or objects in the destination.
-    overwrite_mode: ?OverwriteMode,
+    overwrite_mode: ?OverwriteMode = null,
 
     /// Specifies which users or groups can access a file for a specific purpose
     /// such as reading,
@@ -138,7 +138,7 @@ pub const Options = struct {
     /// * `NONE` - Ignores POSIX-style permissions.
     ///
     /// DataSync can preserve extant permissions of a source location.
-    posix_permissions: ?PosixPermissions,
+    posix_permissions: ?PosixPermissions = null,
 
     /// Specifies whether files in the destination location that don't exist in the
     /// source
@@ -159,7 +159,7 @@ pub const Options = struct {
     /// If you set this parameter to `REMOVE`, you can't set
     /// `TransferMode` to `ALL`. When you transfer all data, DataSync doesn't scan
     /// your destination location and doesn't know what to delete.
-    preserve_deleted_files: ?PreserveDeletedFiles,
+    preserve_deleted_files: ?PreserveDeletedFiles = null,
 
     /// Specifies whether DataSync should preserve the metadata of block and
     /// character devices in the source location and recreate the files with that
@@ -175,7 +175,7 @@ pub const Options = struct {
     ///
     /// * `PRESERVE` - Preserves character and block device metadata. This option
     /// currently isn't supported for Amazon EFS.
-    preserve_devices: ?PreserveDevices,
+    preserve_devices: ?PreserveDevices = null,
 
     /// Specifies which components of the SMB security descriptor are copied from
     /// source to
@@ -225,13 +225,13 @@ pub const Options = struct {
     /// the destination
     /// location. DACLs and SACLs are set based on the destination server’s
     /// configuration.
-    security_descriptor_copy_flags: ?SmbSecurityDescriptorCopyFlags,
+    security_descriptor_copy_flags: ?SmbSecurityDescriptorCopyFlags = null,
 
     /// Specifies whether your transfer tasks should be put into a queue during
     /// certain scenarios
     /// when [running multiple
     /// tasks](https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#running-multiple-tasks). This is `ENABLED` by default.
-    task_queueing: ?TaskQueueing,
+    task_queueing: ?TaskQueueing = null,
 
     /// Specifies whether DataSync transfers only the data (including metadata) that
     /// differs between locations following an initial copy or transfers all data
@@ -247,7 +247,7 @@ pub const Options = struct {
     ///
     /// * `ALL` - DataSync copies everything in the source to the
     /// destination without comparing differences between the locations.
-    transfer_mode: ?TransferMode,
+    transfer_mode: ?TransferMode = null,
 
     /// Specifies the POSIX user ID (UID) of the file's owner.
     ///
@@ -258,7 +258,7 @@ pub const Options = struct {
     ///
     /// For more information, see [Metadata copied by
     /// DataSync](https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied).
-    uid: ?Uid,
+    uid: ?Uid = null,
 
     /// Specifies if and how DataSync checks the integrity of your data at the end
     /// of
@@ -302,7 +302,7 @@ pub const Options = struct {
     /// your transfer. Unlike other options, there's no additional verification at
     /// the end of your
     /// transfer.
-    verify_mode: ?VerifyMode,
+    verify_mode: ?VerifyMode = null,
 
     pub const json_field_names = .{
         .atime = "Atime",

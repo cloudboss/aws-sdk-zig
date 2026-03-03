@@ -6,15 +6,15 @@ const VideoOverrideConfiguration = @import("video_override_configuration.zig").V
 
 /// Override configuration
 pub const OverrideConfiguration = struct {
-    audio: ?AudioOverrideConfiguration,
+    audio: ?AudioOverrideConfiguration = null,
 
-    document: ?DocumentOverrideConfiguration,
+    document: ?DocumentOverrideConfiguration = null,
 
-    image: ?ImageOverrideConfiguration,
+    image: ?ImageOverrideConfiguration = null,
 
-    modality_routing: ?ModalityRoutingConfiguration,
+    modality_routing: ?ModalityRoutingConfiguration = null,
 
-    video: ?VideoOverrideConfiguration,
+    video: ?VideoOverrideConfiguration = null,
 
     pub const json_field_names = .{
         .audio = "audio",

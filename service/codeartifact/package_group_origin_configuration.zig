@@ -7,7 +7,7 @@ const PackageGroupOriginRestriction = @import("package_group_origin_restriction.
 pub const PackageGroupOriginConfiguration = struct {
     /// The origin configuration settings that determine how package versions can
     /// enter repositories.
-    restrictions: ?[]const aws.map.MapEntry(PackageGroupOriginRestriction),
+    restrictions: ?[]const aws.map.MapEntry(PackageGroupOriginRestriction) = null,
 
     pub const json_field_names = .{
         .restrictions = "restrictions",

@@ -25,56 +25,56 @@ pub const FunctionConfiguration = struct {
     /// The instruction set architecture that the function supports. Architecture is
     /// a string array with one of the valid values. The default architecture value
     /// is `x86_64`.
-    architectures: ?[]const Architecture,
+    architectures: ?[]const Architecture = null,
 
     /// Configuration for the capacity provider that manages compute resources for
     /// Lambda functions.
-    capacity_provider_config: ?CapacityProviderConfig,
+    capacity_provider_config: ?CapacityProviderConfig = null,
 
     /// The SHA256 hash of the function's deployment package.
-    code_sha_256: ?[]const u8,
+    code_sha_256: ?[]const u8 = null,
 
     /// The size of the function's deployment package, in bytes.
     code_size: i64 = 0,
 
     /// The SHA256 hash of the function configuration.
-    config_sha_256: ?[]const u8,
+    config_sha_256: ?[]const u8 = null,
 
     /// The function's dead letter queue.
-    dead_letter_config: ?DeadLetterConfig,
+    dead_letter_config: ?DeadLetterConfig = null,
 
     /// The function's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The function's durable execution configuration settings, if the function is
     /// configured for durability.
-    durable_config: ?DurableConfig,
+    durable_config: ?DurableConfig = null,
 
     /// The function's [environment
     /// variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html). Omitted from CloudTrail logs.
-    environment: ?EnvironmentResponse,
+    environment: ?EnvironmentResponse = null,
 
     /// The size of the function's `/tmp` directory in MB. The default value is 512,
     /// but can be any whole number between 512 and 10,240 MB. For more information,
     /// see [Configuring ephemeral storage
     /// (console)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage).
-    ephemeral_storage: ?EphemeralStorage,
+    ephemeral_storage: ?EphemeralStorage = null,
 
     /// Connection settings for an [Amazon EFS file
     /// system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
-    file_system_configs: ?[]const FileSystemConfig,
+    file_system_configs: ?[]const FileSystemConfig = null,
 
     /// The function's Amazon Resource Name (ARN).
-    function_arn: ?[]const u8,
+    function_arn: ?[]const u8 = null,
 
     /// The name of the function.
-    function_name: ?[]const u8,
+    function_name: ?[]const u8 = null,
 
     /// The function that Lambda calls to begin running your function.
-    handler: ?[]const u8,
+    handler: ?[]const u8 = null,
 
     /// The function's image configuration values.
-    image_config_response: ?ImageConfigResponse,
+    image_config_response: ?ImageConfigResponse = null,
 
     /// The ARN of the Key Management Service (KMS) customer managed key that's used
     /// to encrypt the following resources:
@@ -96,44 +96,44 @@ pub const FunctionConfiguration = struct {
     /// If you don't provide a customer managed key, Lambda uses an [Amazon Web
     /// Services owned
     /// key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk) or an [Amazon Web Services managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The date and time that the function was last updated, in [ISO-8601
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
-    last_modified: ?[]const u8,
+    last_modified: ?[]const u8 = null,
 
     /// The status of the last update that was performed on the function. This is
     /// first set to `Successful` after function creation completes.
-    last_update_status: ?LastUpdateStatus,
+    last_update_status: ?LastUpdateStatus = null,
 
     /// The reason for the last update that was performed on the function.
-    last_update_status_reason: ?[]const u8,
+    last_update_status_reason: ?[]const u8 = null,
 
     /// The reason code for the last update that was performed on the function.
-    last_update_status_reason_code: ?LastUpdateStatusReasonCode,
+    last_update_status_reason_code: ?LastUpdateStatusReasonCode = null,
 
     /// The function's
     /// [layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-    layers: ?[]const Layer,
+    layers: ?[]const Layer = null,
 
     /// The function's Amazon CloudWatch Logs configuration settings.
-    logging_config: ?LoggingConfig,
+    logging_config: ?LoggingConfig = null,
 
     /// For Lambda@Edge functions, the ARN of the main function.
-    master_arn: ?[]const u8,
+    master_arn: ?[]const u8 = null,
 
     /// The amount of memory available to the function at runtime.
-    memory_size: ?i32,
+    memory_size: ?i32 = null,
 
     /// The type of deployment package. Set to `Image` for container image and set
     /// `Zip` for .zip file archive.
-    package_type: ?PackageType,
+    package_type: ?PackageType = null,
 
     /// The latest updated revision of the function or alias.
-    revision_id: ?[]const u8,
+    revision_id: ?[]const u8 = null,
 
     /// The function's execution role.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     /// The identifier of the function's [
     /// runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
@@ -148,51 +148,51 @@ pub const FunctionConfiguration = struct {
     ///
     /// For a list of all currently supported runtimes, see [Supported
     /// runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported).
-    runtime: ?Runtime,
+    runtime: ?Runtime = null,
 
     /// The ARN of the runtime and any errors that occured.
-    runtime_version_config: ?RuntimeVersionConfig,
+    runtime_version_config: ?RuntimeVersionConfig = null,
 
     /// The ARN of the signing job.
-    signing_job_arn: ?[]const u8,
+    signing_job_arn: ?[]const u8 = null,
 
     /// The ARN of the signing profile version.
-    signing_profile_version_arn: ?[]const u8,
+    signing_profile_version_arn: ?[]const u8 = null,
 
     /// Set `ApplyOn` to `PublishedVersions` to create a snapshot of the initialized
     /// execution environment when you publish a function version. For more
     /// information, see [Improving startup performance with Lambda
     /// SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
-    snap_start: ?SnapStartResponse,
+    snap_start: ?SnapStartResponse = null,
 
     /// The current state of the function. When the state is `Inactive`, you can
     /// reactivate the function by invoking it.
-    state: ?State,
+    state: ?State = null,
 
     /// The reason for the function's current state.
-    state_reason: ?[]const u8,
+    state_reason: ?[]const u8 = null,
 
     /// The reason code for the function's current state. When the code is
     /// `Creating`, you can't invoke or modify the function.
-    state_reason_code: ?StateReasonCode,
+    state_reason_code: ?StateReasonCode = null,
 
     /// The function's tenant isolation configuration settings. Determines whether
     /// the Lambda function runs on a shared or dedicated infrastructure per unique
     /// tenant.
-    tenancy_config: ?TenancyConfig,
+    tenancy_config: ?TenancyConfig = null,
 
     /// The amount of time in seconds that Lambda allows a function to run before
     /// stopping it.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 
     /// The function's X-Ray tracing configuration.
-    tracing_config: ?TracingConfigResponse,
+    tracing_config: ?TracingConfigResponse = null,
 
     /// The version of the Lambda function.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     /// The function's networking configuration.
-    vpc_config: ?VpcConfigResponse,
+    vpc_config: ?VpcConfigResponse = null,
 
     pub const json_field_names = .{
         .architectures = "Architectures",

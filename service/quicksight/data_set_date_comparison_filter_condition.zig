@@ -11,7 +11,7 @@ pub const DataSetDateComparisonFilterCondition = struct {
     operator: DataSetDateComparisonFilterOperator,
 
     /// The date value to compare against.
-    value: ?DataSetDateFilterValue,
+    value: ?DataSetDateFilterValue = null,
 
     pub const json_field_names = .{
         .operator = "Operator",

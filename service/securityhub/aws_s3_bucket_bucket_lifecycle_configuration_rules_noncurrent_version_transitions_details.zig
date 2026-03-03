@@ -3,11 +3,11 @@
 pub const AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails = struct {
     /// The number of days that an object is noncurrent before Amazon S3 can perform
     /// the associated action.
-    days: ?i32,
+    days: ?i32 = null,
 
     /// The class of storage to change the object to after the object is noncurrent
     /// for the specified number of days.
-    storage_class: ?[]const u8,
+    storage_class: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .days = "Days",

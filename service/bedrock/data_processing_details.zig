@@ -4,13 +4,13 @@ const JobStatusDetails = @import("job_status_details.zig").JobStatusDetails;
 /// of the job.
 pub const DataProcessingDetails = struct {
     /// The start time of the data processing sub-task of the job.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The latest update to the data processing sub-task of the job.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The status of the data processing sub-task of the job.
-    status: ?JobStatusDetails,
+    status: ?JobStatusDetails = null,
 
     pub const json_field_names = .{
         .creation_time = "creationTime",

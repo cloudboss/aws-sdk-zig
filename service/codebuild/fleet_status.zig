@@ -8,10 +8,10 @@ pub const FleetStatus = struct {
     /// * `CREATE_FAILED`: The compute fleet has failed to create.
     ///
     /// * `UPDATE_FAILED`: The compute fleet has failed to update.
-    context: ?FleetContextCode,
+    context: ?FleetContextCode = null,
 
     /// A message associated with the status of a compute fleet.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status code of the compute fleet. Valid values include:
     ///
@@ -31,7 +31,7 @@ pub const FleetStatus = struct {
     ///   not rollback to previous state.
     ///
     /// * `ACTIVE`: The compute fleet has succeeded and is active.
-    status_code: ?FleetStatusCode,
+    status_code: ?FleetStatusCode = null,
 
     pub const json_field_names = .{
         .context = "context",

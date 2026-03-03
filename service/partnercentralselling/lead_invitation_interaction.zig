@@ -26,7 +26,7 @@ pub const LeadInvitationInteraction = struct {
     /// Describes the specific use case or business scenario associated with the
     /// lead interaction. This information helps partners understand the customer's
     /// interests and potential solution requirements.
-    usecase: ?[]const u8,
+    usecase: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .contact_business_title = "ContactBusinessTitle",

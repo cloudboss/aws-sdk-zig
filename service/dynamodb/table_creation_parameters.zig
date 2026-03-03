@@ -13,23 +13,23 @@ pub const TableCreationParameters = struct {
 
     /// The billing mode for provisioning the table created as part of the import
     /// operation.
-    billing_mode: ?BillingMode,
+    billing_mode: ?BillingMode = null,
 
     /// The Global Secondary Indexes (GSI) of the table to be created as part of the
     /// import
     /// operation.
-    global_secondary_indexes: ?[]const GlobalSecondaryIndex,
+    global_secondary_indexes: ?[]const GlobalSecondaryIndex = null,
 
     /// The primary key and option sort key of the table created as part of the
     /// import
     /// operation.
     key_schema: []const KeySchemaElement,
 
-    on_demand_throughput: ?OnDemandThroughput,
+    on_demand_throughput: ?OnDemandThroughput = null,
 
-    provisioned_throughput: ?ProvisionedThroughput,
+    provisioned_throughput: ?ProvisionedThroughput = null,
 
-    sse_specification: ?SSESpecification,
+    sse_specification: ?SSESpecification = null,
 
     /// The name of the table created as part of the import operation.
     table_name: []const u8,

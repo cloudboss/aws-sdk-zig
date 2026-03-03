@@ -15,7 +15,7 @@ pub const MultiMeasureMappings = struct {
     /// when measureNameColumn is not provided. If MeasureNameColumn is provided,
     /// then value
     /// from that column will be used as multi-measure name.
-    target_multi_measure_name: ?[]const u8,
+    target_multi_measure_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .multi_measure_attribute_mappings = "MultiMeasureAttributeMappings",

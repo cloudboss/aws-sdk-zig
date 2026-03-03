@@ -3,7 +3,7 @@ const TextFieldControlDisplayOptions = @import("text_field_control_display_optio
 /// The default options that correspond to the `TextField` filter control type.
 pub const DefaultTextFieldControlOptions = struct {
     /// The display options of a control.
-    display_options: ?TextFieldControlDisplayOptions,
+    display_options: ?TextFieldControlDisplayOptions = null,
 
     pub const json_field_names = .{
         .display_options = "DisplayOptions",

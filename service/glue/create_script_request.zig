@@ -4,13 +4,13 @@ const Language = @import("language.zig").Language;
 
 pub const CreateScriptRequest = struct {
     /// A list of the edges in the DAG.
-    dag_edges: ?[]const CodeGenEdge,
+    dag_edges: ?[]const CodeGenEdge = null,
 
     /// A list of the nodes in the DAG.
-    dag_nodes: ?[]const CodeGenNode,
+    dag_nodes: ?[]const CodeGenNode = null,
 
     /// The programming language of the resulting code from the DAG.
-    language: ?Language,
+    language: ?Language = null,
 
     pub const json_field_names = .{
         .dag_edges = "DagEdges",

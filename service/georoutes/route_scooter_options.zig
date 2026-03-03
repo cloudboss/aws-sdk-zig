@@ -4,20 +4,20 @@ const RouteVehicleLicensePlate = @import("route_vehicle_license_plate.zig").Rout
 /// Travel mode options when the provided travel mode is `Scooter`
 pub const RouteScooterOptions = struct {
     /// Engine type of the vehicle.
-    engine_type: ?RouteEngineType,
+    engine_type: ?RouteEngineType = null,
 
     /// The vehicle License Plate.
-    license_plate: ?RouteVehicleLicensePlate,
+    license_plate: ?RouteVehicleLicensePlate = null,
 
     /// Maximum speed
     ///
     /// **Unit**: `KilometersPerHour`
-    max_speed: ?f64,
+    max_speed: ?f64 = null,
 
     /// The number of occupants in the vehicle.
     ///
     /// Default Value: `1`
-    occupancy: ?i32,
+    occupancy: ?i32 = null,
 
     pub const json_field_names = .{
         .engine_type = "EngineType",

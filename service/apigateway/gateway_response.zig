@@ -13,17 +13,17 @@ pub const GatewayResponse = struct {
     /// Response parameters (paths, query strings and headers) of the
     /// GatewayResponse as a
     /// string-to-string map of key-value pairs.
-    response_parameters: ?[]const aws.map.StringMapEntry,
+    response_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// Response templates of the GatewayResponse as a string-to-string map of
     /// key-value pairs.
-    response_templates: ?[]const aws.map.StringMapEntry,
+    response_templates: ?[]const aws.map.StringMapEntry = null,
 
     /// The response type of the associated GatewayResponse.
-    response_type: ?GatewayResponseType,
+    response_type: ?GatewayResponseType = null,
 
     /// The HTTP status code for this GatewayResponse.
-    status_code: ?[]const u8,
+    status_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .default_response = "defaultResponse",

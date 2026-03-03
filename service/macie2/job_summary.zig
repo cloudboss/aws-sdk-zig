@@ -13,21 +13,21 @@ pub const JobSummary = struct {
     /// job uses these criteria to determine which buckets to analyze. A job's
     /// definition can contain a bucketCriteria object or a bucketDefinitions array,
     /// not both.
-    bucket_criteria: ?S3BucketCriteriaForJob,
+    bucket_criteria: ?S3BucketCriteriaForJob = null,
 
     /// An array of objects, one for each Amazon Web Services account that owns
     /// specific S3 buckets for the job to analyze. Each object specifies the
     /// account ID for an account and one or more buckets to analyze for that
     /// account. A job's definition can contain a bucketDefinitions array or a
     /// bucketCriteria object, not both.
-    bucket_definitions: ?[]const S3BucketDefinitionForJob,
+    bucket_definitions: ?[]const S3BucketDefinitionForJob = null,
 
     /// The date and time, in UTC and extended ISO 8601 format, when the job was
     /// created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The unique identifier for the job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The current status of the job. Possible values are:
     ///
@@ -47,27 +47,27 @@ pub const JobSummary = struct {
     ///   the job or job run will expire and be cancelled, depending on the job's
     ///   type. To check the expiration date, refer to the
     ///   UserPausedDetails.jobExpiresAt property.
-    job_status: ?JobStatus,
+    job_status: ?JobStatus = null,
 
     /// The schedule for running the job. Possible values are:
     ///
     /// * ONE_TIME - The job runs only once.
     /// * SCHEDULED - The job runs on a daily, weekly, or monthly basis.
-    job_type: ?JobType,
+    job_type: ?JobType = null,
 
     /// Specifies whether any account- or bucket-level access errors occurred when
     /// the job ran. For a recurring job, this value indicates the error status of
     /// the job's most recent run.
-    last_run_error_status: ?LastRunErrorStatus,
+    last_run_error_status: ?LastRunErrorStatus = null,
 
     /// The custom name of the job.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// If the current status of the job is USER_PAUSED, specifies when the job was
     /// paused and when the job or job run will expire and be cancelled if it isn't
     /// resumed. This value is present only if the value for jobStatus is
     /// USER_PAUSED.
-    user_paused_details: ?UserPausedDetails,
+    user_paused_details: ?UserPausedDetails = null,
 
     pub const json_field_names = .{
         .bucket_criteria = "bucketCriteria",

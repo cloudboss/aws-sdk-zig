@@ -26,13 +26,13 @@ const PageBasedErrorCode = @import("page_based_error_code.zig").PageBasedErrorCo
 ///   API request again.
 pub const ErrorsListItem = struct {
     /// Error code for the cause of the error.
-    error_code: ?PageBasedErrorCode,
+    error_code: ?PageBasedErrorCode = null,
 
     /// Text message explaining the reason for the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// Page number where the error occurred.
-    page: ?i32,
+    page: ?i32 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

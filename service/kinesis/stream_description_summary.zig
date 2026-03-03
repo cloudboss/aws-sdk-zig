@@ -7,14 +7,14 @@ const WarmThroughputObject = @import("warm_throughput_object.zig").WarmThroughpu
 /// Represents the output for DescribeStreamSummary
 pub const StreamDescriptionSummary = struct {
     /// The number of enhanced fan-out consumers registered with the stream.
-    consumer_count: ?i32,
+    consumer_count: ?i32 = null,
 
     /// The encryption type used. This value is one of the following:
     ///
     /// * `KMS`
     ///
     /// * `NONE`
-    encryption_type: ?EncryptionType,
+    encryption_type: ?EncryptionType = null,
 
     /// Represents the current enhanced monitoring settings of the stream.
     enhanced_monitoring: []const EnhancedMetrics,
@@ -40,11 +40,11 @@ pub const StreamDescriptionSummary = struct {
     ///
     /// * Master key owned by Kinesis Data Streams:
     /// `alias/aws/kinesis`
-    key_id: ?[]const u8,
+    key_id: ?[]const u8 = null,
 
     /// The maximum record size of a single record in kibibyte (KiB) that you can
     /// write to, and read from a stream.
-    max_record_size_in_ki_b: ?i32,
+    max_record_size_in_ki_b: ?i32 = null,
 
     /// The number of open shards in the stream.
     open_shard_count: i32,
@@ -59,13 +59,13 @@ pub const StreamDescriptionSummary = struct {
     stream_creation_timestamp: i64,
 
     /// Not Implemented. Reserved for future use.
-    stream_id: ?[]const u8,
+    stream_id: ?[]const u8 = null,
 
     /// Specifies the capacity mode to which you want to set your data stream.
     /// Currently, in
     /// Kinesis Data Streams, you can choose between an **on-demand** ycapacity mode
     /// and a **provisioned** capacity mode for your data streams.
-    stream_mode_details: ?StreamModeDetails,
+    stream_mode_details: ?StreamModeDetails = null,
 
     /// The name of the stream being described.
     stream_name: []const u8,
@@ -94,7 +94,7 @@ pub const StreamDescriptionSummary = struct {
 
     /// The warm throughput in MB/s for the stream. This represents the throughput
     /// capacity that will be immediately available for write operations.
-    warm_throughput: ?WarmThroughputObject,
+    warm_throughput: ?WarmThroughputObject = null,
 
     pub const json_field_names = .{
         .consumer_count = "ConsumerCount",

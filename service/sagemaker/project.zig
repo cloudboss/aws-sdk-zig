@@ -8,43 +8,43 @@ const TemplateProviderDetail = @import("template_provider_detail.zig").TemplateP
 /// The properties of a project as returned by the Search API.
 pub const Project = struct {
     /// Who created the project.
-    created_by: ?UserContext,
+    created_by: ?UserContext = null,
 
     /// A timestamp specifying when the project was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
-    last_modified_by: ?UserContext,
+    last_modified_by: ?UserContext = null,
 
     /// A timestamp container for when the project was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the project.
-    project_arn: ?[]const u8,
+    project_arn: ?[]const u8 = null,
 
     /// The description of the project.
-    project_description: ?[]const u8,
+    project_description: ?[]const u8 = null,
 
     /// The ID of the project.
-    project_id: ?[]const u8,
+    project_id: ?[]const u8 = null,
 
     /// The name of the project.
-    project_name: ?[]const u8,
+    project_name: ?[]const u8 = null,
 
     /// The status of the project.
-    project_status: ?ProjectStatus,
+    project_status: ?ProjectStatus = null,
 
-    service_catalog_provisioned_product_details: ?ServiceCatalogProvisionedProductDetails,
+    service_catalog_provisioned_product_details: ?ServiceCatalogProvisionedProductDetails = null,
 
-    service_catalog_provisioning_details: ?ServiceCatalogProvisioningDetails,
+    service_catalog_provisioning_details: ?ServiceCatalogProvisioningDetails = null,
 
     /// An array of key-value pairs. You can use tags to categorize your Amazon Web
     /// Services resources in different ways, for example, by purpose, owner, or
     /// environment. For more information, see [Tagging Amazon Web Services
     /// Resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// An array of template providers associated with the project.
-    template_provider_details: ?[]const TemplateProviderDetail,
+    template_provider_details: ?[]const TemplateProviderDetail = null,
 
     pub const json_field_names = .{
         .created_by = "CreatedBy",

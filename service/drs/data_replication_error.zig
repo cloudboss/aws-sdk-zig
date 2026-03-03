@@ -3,10 +3,10 @@ const DataReplicationErrorString = @import("data_replication_error_string.zig").
 /// Error in data replication.
 pub const DataReplicationError = struct {
     /// Error in data replication.
-    @"error": ?DataReplicationErrorString,
+    @"error": ?DataReplicationErrorString = null,
 
     /// Error in data replication.
-    raw_error: ?[]const u8,
+    raw_error: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"error" = "error",

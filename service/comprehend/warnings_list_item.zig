@@ -10,13 +10,13 @@ const PageBasedWarningCode = @import("page_based_warning_code.zig").PageBasedWar
 ///   plain-text model.
 pub const WarningsListItem = struct {
     /// Page number in the input document.
-    page: ?i32,
+    page: ?i32 = null,
 
     /// The type of warning.
-    warn_code: ?PageBasedWarningCode,
+    warn_code: ?PageBasedWarningCode = null,
 
     /// Text message associated with the warning.
-    warn_message: ?[]const u8,
+    warn_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .page = "Page",

@@ -6,7 +6,7 @@ pub const WorkflowRunSummary = struct {
     /// The date and time the workflow run ended, in coordinated universal time
     /// (UTC) timestamp format as specified in [RFC
     /// 3339](https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The system-generated unique ID of the workflow run.
     id: []const u8,
@@ -25,7 +25,7 @@ pub const WorkflowRunSummary = struct {
     status: WorkflowRunStatus,
 
     /// The reasons for the workflow run status.
-    status_reasons: ?[]const WorkflowRunStatusReason,
+    status_reasons: ?[]const WorkflowRunStatusReason = null,
 
     /// The system-generated unique ID of the workflow.
     workflow_id: []const u8,

@@ -2,7 +2,7 @@
 pub const VCpuCountRangeRequest = struct {
     /// The maximum number of vCPUs. To specify no maximum limit, omit this
     /// parameter.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// The minimum number of vCPUs. To specify no minimum limit, specify `0`.
     min: i32,

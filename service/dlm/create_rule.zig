@@ -19,14 +19,14 @@ pub const CreateRule = struct {
     /// year. For more information, see the [Cron expressions
     /// reference](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cron-expressions.html) in
     /// the *Amazon EventBridge User Guide*.
-    cron_expression: ?[]const u8,
+    cron_expression: ?[]const u8 = null,
 
     /// The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8,
     /// 12, and 24.
-    interval: ?i32,
+    interval: ?i32 = null,
 
     /// The interval unit.
-    interval_unit: ?IntervalUnitValues,
+    interval_unit: ?IntervalUnitValues = null,
 
     /// **[Custom snapshot policies only]** Specifies the destination for snapshots
     /// created by the policy. The
@@ -56,7 +56,7 @@ pub const CreateRule = struct {
     /// `OUTPOST_LOCAL`.
     ///
     /// Default: `CLOUD`
-    location: ?LocationValues,
+    location: ?LocationValues = null,
 
     /// **[Custom snapshot policies that target instances only]** Specifies pre
     /// and/or post scripts for a snapshot lifecycle policy
@@ -68,7 +68,7 @@ pub const CreateRule = struct {
     /// For more information, see [Automating
     /// application-consistent snapshots with pre and post
     /// scripts](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/automate-app-consistent-backups.html).
-    scripts: ?[]const Script,
+    scripts: ?[]const Script = null,
 
     /// The time, in UTC, to start the operation. The supported format is hh:mm.
     ///
@@ -76,7 +76,7 @@ pub const CreateRule = struct {
     /// If you do
     /// not specify a time, Amazon Data Lifecycle Manager selects a time within the
     /// next 24 hours.
-    times: ?[]const []const u8,
+    times: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .cron_expression = "CronExpression",

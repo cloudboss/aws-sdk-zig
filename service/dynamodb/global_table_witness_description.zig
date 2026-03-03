@@ -5,10 +5,10 @@ pub const GlobalTableWitnessDescription = struct {
     /// The name of the Amazon Web Services Region that serves as a witness for the
     /// MRSC global
     /// table.
-    region_name: ?[]const u8,
+    region_name: ?[]const u8 = null,
 
     /// The current status of the witness Region in the MRSC global table.
-    witness_status: ?WitnessStatus,
+    witness_status: ?WitnessStatus = null,
 
     pub const json_field_names = .{
         .region_name = "RegionName",

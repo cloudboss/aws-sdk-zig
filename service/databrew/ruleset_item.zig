@@ -3,34 +3,34 @@ const aws = @import("aws");
 /// Contains metadata about the ruleset.
 pub const RulesetItem = struct {
     /// The ID of the Amazon Web Services account that owns the ruleset.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The date and time that the ruleset was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the user who created the ruleset.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The description of the ruleset.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the user who last modified the ruleset.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The modification date and time of the ruleset.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The name of the ruleset.
     name: []const u8,
 
     /// The Amazon Resource Name (ARN) for the ruleset.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The number of rules that are defined in the ruleset.
     rule_count: i32 = 0,
 
     /// Metadata tags that have been applied to the ruleset.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is
     /// associated with.

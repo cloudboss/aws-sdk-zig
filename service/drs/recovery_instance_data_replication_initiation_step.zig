@@ -4,10 +4,10 @@ const RecoveryInstanceDataReplicationInitiationStepStatus = @import("recovery_in
 /// Data replication initiation step.
 pub const RecoveryInstanceDataReplicationInitiationStep = struct {
     /// The name of the step.
-    name: ?RecoveryInstanceDataReplicationInitiationStepName,
+    name: ?RecoveryInstanceDataReplicationInitiationStepName = null,
 
     /// The status of the step.
-    status: ?RecoveryInstanceDataReplicationInitiationStepStatus,
+    status: ?RecoveryInstanceDataReplicationInitiationStepStatus = null,
 
     pub const json_field_names = .{
         .name = "name",

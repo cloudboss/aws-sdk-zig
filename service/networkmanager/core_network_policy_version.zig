@@ -5,22 +5,22 @@ const ChangeSetState = @import("change_set_state.zig").ChangeSetState;
 pub const CoreNetworkPolicyVersion = struct {
     /// Whether a core network policy is the current policy or the most recently
     /// submitted policy.
-    alias: ?CoreNetworkPolicyAlias,
+    alias: ?CoreNetworkPolicyAlias = null,
 
     /// The status of the policy version change set.
-    change_set_state: ?ChangeSetState,
+    change_set_state: ?ChangeSetState = null,
 
     /// The ID of a core network.
-    core_network_id: ?[]const u8,
+    core_network_id: ?[]const u8 = null,
 
     /// The timestamp when a core network policy version was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of a core network policy version.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the policy version.
-    policy_version_id: ?i32,
+    policy_version_id: ?i32 = null,
 
     pub const json_field_names = .{
         .alias = "Alias",

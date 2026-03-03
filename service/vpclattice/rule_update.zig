@@ -4,14 +4,14 @@ const RuleMatch = @import("rule_match.zig").RuleMatch;
 /// Describes a rule update.
 pub const RuleUpdate = struct {
     /// The rule action.
-    action: ?RuleAction,
+    action: ?RuleAction = null,
 
     /// The rule match.
-    match: ?RuleMatch,
+    match: ?RuleMatch = null,
 
     /// The rule priority. A listener can't have multiple rules with the same
     /// priority.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The ID or ARN of the rule.
     rule_identifier: []const u8,

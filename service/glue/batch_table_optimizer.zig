@@ -4,17 +4,17 @@ const TableOptimizer = @import("table_optimizer.zig").TableOptimizer;
 /// `BatchGetTableOptimizer` operation.
 pub const BatchTableOptimizer = struct {
     /// The Catalog ID of the table.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The name of the database in the catalog in which the table resides.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The name of the table.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// A `TableOptimizer` object that contains details on the configuration and
     /// last run of a table optimizer.
-    table_optimizer: ?TableOptimizer,
+    table_optimizer: ?TableOptimizer = null,
 
     pub const json_field_names = .{
         .catalog_id = "catalogId",

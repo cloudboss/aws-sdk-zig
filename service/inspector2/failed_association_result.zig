@@ -5,18 +5,18 @@ const AssociationResultStatusCode = @import("association_result_status_code.zig"
 /// repository with a
 /// scan configuration.
 pub const FailedAssociationResult = struct {
-    resource: ?CodeSecurityResource,
+    resource: ?CodeSecurityResource = null,
 
     /// The Amazon Resource Name (ARN) of the scan configuration that failed to be
     /// associated or
     /// disassociated.
-    scan_configuration_arn: ?[]const u8,
+    scan_configuration_arn: ?[]const u8 = null,
 
     /// The status code indicating why the association or disassociation failed.
-    status_code: ?AssociationResultStatusCode,
+    status_code: ?AssociationResultStatusCode = null,
 
     /// A message explaining why the association or disassociation failed.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resource = "resource",

@@ -5,11 +5,11 @@ const S3InputFileLocation = @import("s3_input_file_location.zig").S3InputFileLoc
 pub const InputFileLocation = struct {
     /// Specifies the details for the Amazon Elastic File System (Amazon EFS) file
     /// that's being decrypted.
-    efs_file_location: ?EfsFileLocation,
+    efs_file_location: ?EfsFileLocation = null,
 
     /// Specifies the details for the Amazon S3 file that's being copied or
     /// decrypted.
-    s3_file_location: ?S3InputFileLocation,
+    s3_file_location: ?S3InputFileLocation = null,
 
     pub const json_field_names = .{
         .efs_file_location = "EfsFileLocation",

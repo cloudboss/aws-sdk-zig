@@ -7,10 +7,10 @@ const BlockAction = @import("block_action.zig").BlockAction;
 /// action must be a terminating action.
 pub const DefaultAction = struct {
     /// Specifies that WAF should allow requests by default.
-    allow: ?AllowAction,
+    allow: ?AllowAction = null,
 
     /// Specifies that WAF should block requests by default.
-    block: ?BlockAction,
+    block: ?BlockAction = null,
 
     pub const json_field_names = .{
         .allow = "Allow",

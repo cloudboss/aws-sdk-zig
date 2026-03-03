@@ -27,7 +27,7 @@ pub const ListRouteCalculatorsResponseEntry = struct {
     description: []const u8,
 
     /// Always returns `RequestBasedUsage`.
-    pricing_plan: ?PricingPlan,
+    pricing_plan: ?PricingPlan = null,
 
     /// The timestamp when the route calculator resource was last updated in [ISO
     /// 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format:

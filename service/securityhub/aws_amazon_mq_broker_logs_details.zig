@@ -4,20 +4,20 @@ const AwsAmazonMqBrokerLogsPendingDetails = @import("aws_amazon_mq_broker_logs_p
 pub const AwsAmazonMqBrokerLogsDetails = struct {
     /// Activates audit logging. Every user management action made using JMX or the
     /// ActiveMQ Web Console is logged. Doesn't apply to RabbitMQ brokers.
-    audit: ?bool,
+    audit: ?bool = null,
 
     /// The location of the CloudWatch Logs log group where audit logs are sent.
-    audit_log_group: ?[]const u8,
+    audit_log_group: ?[]const u8 = null,
 
     /// Activates general logging.
-    general: ?bool,
+    general: ?bool = null,
 
     /// The location of the CloudWatch Logs log group where general logs are sent.
-    general_log_group: ?[]const u8,
+    general_log_group: ?[]const u8 = null,
 
     /// The list of information about logs that are to be turned on for the
     /// specified broker.
-    pending: ?AwsAmazonMqBrokerLogsPendingDetails,
+    pending: ?AwsAmazonMqBrokerLogsPendingDetails = null,
 
     pub const json_field_names = .{
         .audit = "Audit",

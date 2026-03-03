@@ -1,13 +1,13 @@
 /// Error info for scram secret associate/disassociate failure.
 pub const UnprocessedScramSecret = struct {
     /// Error code for associate/disassociate failure.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// Error message for associate/disassociate failure.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// AWS Secrets Manager secret ARN.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

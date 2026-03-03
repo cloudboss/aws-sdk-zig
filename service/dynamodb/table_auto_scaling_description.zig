@@ -4,10 +4,10 @@ const TableStatus = @import("table_status.zig").TableStatus;
 /// Represents the auto scaling configuration for a global table.
 pub const TableAutoScalingDescription = struct {
     /// Represents replicas of the global table.
-    replicas: ?[]const ReplicaAutoScalingDescription,
+    replicas: ?[]const ReplicaAutoScalingDescription = null,
 
     /// The name of the table.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The current state of the table:
     ///
@@ -18,7 +18,7 @@ pub const TableAutoScalingDescription = struct {
     /// * `DELETING` - The table is being deleted.
     ///
     /// * `ACTIVE` - The table is ready for use.
-    table_status: ?TableStatus,
+    table_status: ?TableStatus = null,
 
     pub const json_field_names = .{
         .replicas = "Replicas",

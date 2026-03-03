@@ -16,7 +16,7 @@ pub const ReportOverride = struct {
     /// successfully skipped and if something transferred that you didn't to
     /// transfer
     /// (`SUCCESSES_AND_ERRORS`).
-    report_level: ?ReportLevel,
+    report_level: ?ReportLevel = null,
 
     pub const json_field_names = .{
         .report_level = "ReportLevel",

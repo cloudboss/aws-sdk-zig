@@ -8,23 +8,23 @@ pub const BucketCountByEncryptionType = struct {
     /// to encrypt new objects with an KMS key, either an Amazon Web Services
     /// managed key or a customer managed key. By default, these buckets encrypt new
     /// objects automatically using DSSE-KMS or SSE-KMS encryption.
-    kms_managed: ?i64,
+    kms_managed: ?i64 = null,
 
     /// The total number of buckets whose default encryption settings are configured
     /// to encrypt new objects with an Amazon S3 managed key. By default, these
     /// buckets encrypt new objects automatically using SSE-S3 encryption.
-    s_3_managed: ?i64,
+    s_3_managed: ?i64 = null,
 
     /// The total number of buckets that don't specify default server-side
     /// encryption behavior for new objects. Default encryption settings aren't
     /// configured for these buckets.
-    unencrypted: ?i64,
+    unencrypted: ?i64 = null,
 
     /// The total number of buckets that Amazon Macie doesn't have current
     /// encryption metadata for. For example, the buckets' permissions settings or a
     /// quota prevented Macie from retrieving the default encryption settings for
     /// the buckets.
-    unknown: ?i64,
+    unknown: ?i64 = null,
 
     pub const json_field_names = .{
         .kms_managed = "kmsManaged",

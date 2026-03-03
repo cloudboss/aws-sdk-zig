@@ -17,7 +17,7 @@ pub const VisualCustomAction = struct {
     name: []const u8,
 
     /// The status of the `VisualCustomAction`.
-    status: ?WidgetStatus,
+    status: ?WidgetStatus = null,
 
     /// The trigger of the `VisualCustomAction`.
     ///

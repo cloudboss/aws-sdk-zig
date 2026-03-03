@@ -5,7 +5,7 @@ pub const ClientInfo = struct {
     compatibility_version: i32,
 
     /// The version of the SDK being used by the client.
-    sdk_version: ?[]const u8,
+    sdk_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .compatibility_version = "compatibilityVersion",

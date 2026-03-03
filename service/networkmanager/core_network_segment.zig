@@ -2,13 +2,13 @@
 /// attachments within this segment can communicate with each other.
 pub const CoreNetworkSegment = struct {
     /// The Regions where the edges are located.
-    edge_locations: ?[]const []const u8,
+    edge_locations: ?[]const []const u8 = null,
 
     /// The name of a core network segment.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The shared segments of a core network.
-    shared_segments: ?[]const []const u8,
+    shared_segments: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .edge_locations = "EdgeLocations",

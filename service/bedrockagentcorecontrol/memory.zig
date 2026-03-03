@@ -10,22 +10,22 @@ pub const Memory = struct {
     created_at: i64,
 
     /// The description of the memory.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ARN of the KMS key used to encrypt the memory.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The number of days after which memory events will expire.
     event_expiry_duration: i32,
 
     /// The reason for failure if the memory is in a failed state.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The unique identifier of the memory.
     id: []const u8,
 
     /// The ARN of the IAM role that provides permissions for the memory.
-    memory_execution_role_arn: ?[]const u8,
+    memory_execution_role_arn: ?[]const u8 = null,
 
     /// The name of the memory.
     name: []const u8,
@@ -34,7 +34,7 @@ pub const Memory = struct {
     status: MemoryStatus,
 
     /// The list of memory strategies associated with this memory.
-    strategies: ?[]const MemoryStrategy,
+    strategies: ?[]const MemoryStrategy = null,
 
     /// The timestamp when the memory was last updated.
     updated_at: i64,

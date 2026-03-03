@@ -3,7 +3,7 @@ const MotionGraphicsSettings = @import("motion_graphics_settings.zig").MotionGra
 
 /// Motion Graphics Configuration
 pub const MotionGraphicsConfiguration = struct {
-    motion_graphics_insertion: ?MotionGraphicsInsertion,
+    motion_graphics_insertion: ?MotionGraphicsInsertion = null,
 
     /// Motion Graphics Settings
     motion_graphics_settings: MotionGraphicsSettings,

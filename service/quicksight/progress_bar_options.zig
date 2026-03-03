@@ -4,7 +4,7 @@ const Visibility = @import("visibility.zig").Visibility;
 /// visual.
 pub const ProgressBarOptions = struct {
     /// The visibility of the progress bar.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .visibility = "Visibility",

@@ -5,38 +5,38 @@ const AuthorizerStatus = @import("authorizer_status.zig").AuthorizerStatus;
 /// The authorizer description.
 pub const AuthorizerDescription = struct {
     /// The authorizer ARN.
-    authorizer_arn: ?[]const u8,
+    authorizer_arn: ?[]const u8 = null,
 
     /// The authorizer's Lambda function ARN.
-    authorizer_function_arn: ?[]const u8,
+    authorizer_function_arn: ?[]const u8 = null,
 
     /// The authorizer name.
-    authorizer_name: ?[]const u8,
+    authorizer_name: ?[]const u8 = null,
 
     /// The UNIX timestamp of when the authorizer was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// When `true`, the result from the authorizer’s Lambda function is
     /// cached for the time specified in `refreshAfterInSeconds`. The cached
     /// result is used while the device reuses the same HTTP connection.
-    enable_caching_for_http: ?bool,
+    enable_caching_for_http: ?bool = null,
 
     /// The UNIX timestamp of when the authorizer was last updated.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// Specifies whether IoT validates the token signature in an authorization
     /// request.
-    signing_disabled: ?bool,
+    signing_disabled: ?bool = null,
 
     /// The status of the authorizer.
-    status: ?AuthorizerStatus,
+    status: ?AuthorizerStatus = null,
 
     /// The key used to extract the token from the HTTP headers.
-    token_key_name: ?[]const u8,
+    token_key_name: ?[]const u8 = null,
 
     /// The public keys used to validate the token signature returned by your custom
     /// authentication service.
-    token_signing_public_keys: ?[]const aws.map.StringMapEntry,
+    token_signing_public_keys: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .authorizer_arn = "authorizerArn",

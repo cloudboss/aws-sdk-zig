@@ -5,13 +5,13 @@ const SubscriberType = @import("subscriber_type.zig").SubscriberType;
 pub const Subscriber = struct {
     /// The email address or SNS Amazon Resource Name (ARN). This depends on the
     /// `Type`.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// Indicates if the subscriber accepts the notifications.
-    status: ?SubscriberStatus,
+    status: ?SubscriberStatus = null,
 
     /// The notification delivery channel.
-    @"type": ?SubscriberType,
+    @"type": ?SubscriberType = null,
 
     pub const json_field_names = .{
         .address = "Address",

@@ -3,10 +3,10 @@ const DeviceInfo = @import("device_info.zig").DeviceInfo;
 
 /// Information about the Customer on the contact.
 pub const Customer = struct {
-    capabilities: ?ParticipantCapabilities,
+    capabilities: ?ParticipantCapabilities = null,
 
     /// Information regarding Customer’s device.
-    device_info: ?DeviceInfo,
+    device_info: ?DeviceInfo = null,
 
     pub const json_field_names = .{
         .capabilities = "Capabilities",

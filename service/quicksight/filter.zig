@@ -17,35 +17,35 @@ pub const Filter = struct {
     ///
     /// For more information, see [Adding text
     /// filters](https://docs.aws.amazon.com/quicksight/latest/user/add-a-text-filter-data-prep.html) in the *Amazon Quick Suite User Guide*.
-    category_filter: ?CategoryFilter,
+    category_filter: ?CategoryFilter = null,
 
     /// A `NestedFilter` filters data with a subset of data that is defined by the
     /// nested inner filter.
-    nested_filter: ?NestedFilter,
+    nested_filter: ?NestedFilter = null,
 
     /// A `NumericEqualityFilter` filters numeric values that equal or do not equal
     /// a given numeric value.
-    numeric_equality_filter: ?NumericEqualityFilter,
+    numeric_equality_filter: ?NumericEqualityFilter = null,
 
     /// A `NumericRangeFilter` filters numeric values that are either inside or
     /// outside a given numeric range.
-    numeric_range_filter: ?NumericRangeFilter,
+    numeric_range_filter: ?NumericRangeFilter = null,
 
     /// A `RelativeDatesFilter` filters date values that are relative to a given
     /// date.
-    relative_dates_filter: ?RelativeDatesFilter,
+    relative_dates_filter: ?RelativeDatesFilter = null,
 
     /// A `TimeEqualityFilter` filters date-time values that equal or do not equal
     /// a given date/time value.
-    time_equality_filter: ?TimeEqualityFilter,
+    time_equality_filter: ?TimeEqualityFilter = null,
 
     /// A `TimeRangeFilter` filters date-time values that are either inside or
     /// outside a given date/time range.
-    time_range_filter: ?TimeRangeFilter,
+    time_range_filter: ?TimeRangeFilter = null,
 
     /// A `TopBottomFilter` filters data to the top or bottom values for a given
     /// column.
-    top_bottom_filter: ?TopBottomFilter,
+    top_bottom_filter: ?TopBottomFilter = null,
 
     pub const json_field_names = .{
         .category_filter = "CategoryFilter",

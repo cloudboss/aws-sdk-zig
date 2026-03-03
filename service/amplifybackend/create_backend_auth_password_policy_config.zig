@@ -4,7 +4,7 @@ const AdditionalConstraintsElement = @import("additional_constraints_element.zig
 pub const CreateBackendAuthPasswordPolicyConfig = struct {
     /// Additional constraints for the password used to access the backend of your
     /// Amplify project.
-    additional_constraints: ?[]const AdditionalConstraintsElement,
+    additional_constraints: ?[]const AdditionalConstraintsElement = null,
 
     /// The minimum length of the password used to access the backend of your
     /// Amplify project.

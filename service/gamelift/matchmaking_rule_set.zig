@@ -48,7 +48,7 @@ pub const MatchmakingRuleSet = struct {
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
@@ -57,7 +57,7 @@ pub const MatchmakingRuleSet = struct {
     /// `arn:aws:gamelift:::matchmakingruleset/`. In a GameLift rule set ARN, the
     /// resource ID matches the
     /// *RuleSetName* value.
-    rule_set_arn: ?[]const u8,
+    rule_set_arn: ?[]const u8 = null,
 
     /// A collection of matchmaking rules, formatted as a JSON string. Comments are
     /// not
@@ -65,7 +65,7 @@ pub const MatchmakingRuleSet = struct {
     rule_set_body: []const u8,
 
     /// A unique identifier for the matchmaking rule set
-    rule_set_name: ?[]const u8,
+    rule_set_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

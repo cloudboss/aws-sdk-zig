@@ -7,38 +7,38 @@ const SavingsPlanOfferingProperty = @import("savings_plan_offering_property.zig"
 /// Information about a Savings Plan offering.
 pub const SavingsPlanOffering = struct {
     /// The currency.
-    currency: ?CurrencyCode,
+    currency: ?CurrencyCode = null,
 
     /// The description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The duration, in seconds.
     duration_seconds: i64 = 0,
 
     /// The ID of the offering.
-    offering_id: ?[]const u8,
+    offering_id: ?[]const u8 = null,
 
     /// The specific Amazon Web Services operation for the line item in the billing
     /// report.
-    operation: ?[]const u8,
+    operation: ?[]const u8 = null,
 
     /// The payment option.
-    payment_option: ?SavingsPlanPaymentOption,
+    payment_option: ?SavingsPlanPaymentOption = null,
 
     /// The plan type.
-    plan_type: ?SavingsPlanType,
+    plan_type: ?SavingsPlanType = null,
 
     /// The product type.
-    product_types: ?[]const SavingsPlanProductType,
+    product_types: ?[]const SavingsPlanProductType = null,
 
     /// The properties.
-    properties: ?[]const SavingsPlanOfferingProperty,
+    properties: ?[]const SavingsPlanOfferingProperty = null,
 
     /// The service.
-    service_code: ?[]const u8,
+    service_code: ?[]const u8 = null,
 
     /// The usage details of the line item in the billing report.
-    usage_type: ?[]const u8,
+    usage_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .currency = "currency",

@@ -2,7 +2,7 @@
 pub const SlackUserIdentity = struct {
     /// The AWS user identity ARN used to associate a Slack user ID with an IAM
     /// Role.
-    aws_user_identity: ?[]const u8,
+    aws_user_identity: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the SlackChannelConfiguration associated
     /// with the user identity to delete.

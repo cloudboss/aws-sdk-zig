@@ -6,16 +6,16 @@ pub const ColumnInfo = struct {
     case_sensitive: bool = false,
 
     /// The catalog to which the query results belong.
-    catalog_name: ?[]const u8,
+    catalog_name: ?[]const u8 = null,
 
     /// A column label.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// The name of the column.
     name: []const u8,
 
     /// Unsupported constraint. This value always shows as `UNKNOWN`.
-    nullable: ?ColumnNullable,
+    nullable: ?ColumnNullable = null,
 
     /// For `DECIMAL` data types, specifies the total number of digits, up to 38.
     /// For performance reasons, we recommend up to 18 digits.
@@ -26,10 +26,10 @@ pub const ColumnInfo = struct {
     scale: i32 = 0,
 
     /// The schema name (database name) to which the query results belong.
-    schema_name: ?[]const u8,
+    schema_name: ?[]const u8 = null,
 
     /// The table name for the query results.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The data type of the column.
     @"type": []const u8,

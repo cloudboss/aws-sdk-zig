@@ -4,7 +4,7 @@ const ExperimentTemplateReportConfigurationCloudWatchDashboard = @import("experi
 pub const ExperimentTemplateReportConfigurationDataSources = struct {
     /// The CloudWatch dashboards to include as data sources in the experiment
     /// report.
-    cloud_watch_dashboards: ?[]const ExperimentTemplateReportConfigurationCloudWatchDashboard,
+    cloud_watch_dashboards: ?[]const ExperimentTemplateReportConfigurationCloudWatchDashboard = null,
 
     pub const json_field_names = .{
         .cloud_watch_dashboards = "cloudWatchDashboards",

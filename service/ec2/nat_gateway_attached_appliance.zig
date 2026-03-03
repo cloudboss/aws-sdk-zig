@@ -7,27 +7,27 @@ const NatGatewayApplianceType = @import("nat_gateway_appliance_type.zig").NatGat
 pub const NatGatewayAttachedAppliance = struct {
     /// The Amazon Resource Name (ARN) of the attached appliance, identifying the
     /// specific proxy or security appliance resource.
-    appliance_arn: ?[]const u8,
+    appliance_arn: ?[]const u8 = null,
 
     /// The current attachment state of the appliance.
-    attachment_state: ?NatGatewayApplianceState,
+    attachment_state: ?NatGatewayApplianceState = null,
 
     /// The failure code if the appliance attachment or modification operation
     /// failed.
-    failure_code: ?[]const u8,
+    failure_code: ?[]const u8 = null,
 
     /// A descriptive message explaining the failure if the appliance attachment or
     /// modification operation failed.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// The current modification state of the appliance.
-    modification_state: ?NatGatewayApplianceModifyState,
+    modification_state: ?NatGatewayApplianceModifyState = null,
 
     /// The type of appliance attached to the NAT Gateway. For network firewall
     /// proxy functionality, this will be "network-firewall-proxy".
-    @"type": ?NatGatewayApplianceType,
+    @"type": ?NatGatewayApplianceType = null,
 
     /// The VPC endpoint ID used to route traffic from application VPCs to the proxy
     /// for inspection and filtering.
-    vpc_endpoint_id: ?[]const u8,
+    vpc_endpoint_id: ?[]const u8 = null,
 };

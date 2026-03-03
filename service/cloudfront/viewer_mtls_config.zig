@@ -7,5 +7,5 @@ pub const ViewerMtlsConfig = struct {
     mode: ViewerMtlsMode = "required",
 
     /// The trust store configuration associated with the viewer mTLS configuration.
-    trust_store_config: ?TrustStoreConfig,
+    trust_store_config: ?TrustStoreConfig = null,
 };

@@ -16,7 +16,7 @@ pub const ComponentConfigurationUpdate = struct {
     /// object. For more information, see [Merge configuration
     /// updates](https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#merge-configuration-update) in the *IoT Greengrass V2 Developer
     /// Guide*.
-    merge: ?[]const u8,
+    merge: ?[]const u8 = null,
 
     /// The list of configuration nodes to reset to default values on target
     /// devices. Use JSON
@@ -28,7 +28,7 @@ pub const ComponentConfigurationUpdate = struct {
     /// specification](https://tools.ietf.org/html/rfc6901) and [Reset configuration
     /// updates](https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update) in the *IoT Greengrass V2 Developer
     /// Guide*.
-    reset: ?[]const []const u8,
+    reset: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .merge = "merge",

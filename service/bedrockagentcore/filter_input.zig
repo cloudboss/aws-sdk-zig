@@ -4,10 +4,10 @@ const EventMetadataFilterExpression = @import("event_metadata_filter_expression.
 /// Contains filter criteria for listing events.
 pub const FilterInput = struct {
     /// The branch filter criteria to apply when listing events.
-    branch: ?BranchFilter,
+    branch: ?BranchFilter = null,
 
     /// Event metadata filter criteria to apply when retrieving events.
-    event_metadata: ?[]const EventMetadataFilterExpression,
+    event_metadata: ?[]const EventMetadataFilterExpression = null,
 
     pub const json_field_names = .{
         .branch = "branch",

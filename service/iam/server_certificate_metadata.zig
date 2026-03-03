@@ -13,7 +13,7 @@ pub const ServerCertificateMetadata = struct {
     arn: []const u8,
 
     /// The date on which the certificate is set to expire.
-    expiration: ?i64,
+    expiration: ?i64 = null,
 
     /// The path to the server certificate. For more information about paths, see
     /// [IAM
@@ -30,5 +30,5 @@ pub const ServerCertificateMetadata = struct {
     server_certificate_name: []const u8,
 
     /// The date when the server certificate was uploaded.
-    upload_date: ?i64,
+    upload_date: ?i64 = null,
 };

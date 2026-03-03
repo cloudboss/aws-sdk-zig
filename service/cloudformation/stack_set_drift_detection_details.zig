@@ -33,7 +33,7 @@ pub const StackSetDriftDetectionDetails = struct {
     /// performed.
     ///
     /// * `STOPPED`: The user has canceled the drift detection operation.
-    drift_detection_status: ?StackSetDriftDetectionStatus,
+    drift_detection_status: ?StackSetDriftDetectionStatus = null,
 
     /// The number of stack instances that have drifted from the expected template
     /// and parameter
@@ -41,7 +41,7 @@ pub const StackSetDriftDetectionDetails = struct {
     /// drifted if one or more of
     /// the resources in the associated stack don't match their expected
     /// configuration.
-    drifted_stack_instances_count: ?i32,
+    drifted_stack_instances_count: ?i32 = null,
 
     /// Status of the StackSet's actual configuration compared to its expected
     /// template and
@@ -59,26 +59,26 @@ pub const StackSetDriftDetectionDetails = struct {
     /// * `IN_SYNC`: All of the stack instances belonging to the StackSet stack
     ///   match the
     /// expected template and parameter configuration.
-    drift_status: ?StackSetDriftStatus,
+    drift_status: ?StackSetDriftStatus = null,
 
     /// The number of stack instances for which the drift detection operation
     /// failed.
-    failed_stack_instances_count: ?i32,
+    failed_stack_instances_count: ?i32 = null,
 
     /// The number of stack instances that are currently being checked for drift.
-    in_progress_stack_instances_count: ?i32,
+    in_progress_stack_instances_count: ?i32 = null,
 
     /// The number of stack instances which match the expected template and
     /// parameter configuration
     /// of the StackSet.
-    in_sync_stack_instances_count: ?i32,
+    in_sync_stack_instances_count: ?i32 = null,
 
     /// Most recent time when CloudFormation performed a drift detection operation
     /// on the StackSet. This
     /// value will be `NULL` for any StackSet that drift detection hasn't yet been
     /// performed
     /// on.
-    last_drift_check_timestamp: ?i64,
+    last_drift_check_timestamp: ?i64 = null,
 
     /// The total number of stack instances belonging to this StackSet.
     ///
@@ -91,5 +91,5 @@ pub const StackSetDriftDetectionDetails = struct {
     /// * Stack instances where the drift detection operation has failed.
     ///
     /// * Stack instances currently being checked for drift.
-    total_stack_instances_count: ?i32,
+    total_stack_instances_count: ?i32 = null,
 };

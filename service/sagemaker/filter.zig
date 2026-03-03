@@ -122,13 +122,13 @@ pub const Filter = struct {
     /// values of `Name`. In these cases, if you include multiple `Contains`
     /// operators in the `SearchExpression`, the result is the following error
     /// message: "`'CONTAINS' operator usage limit of 1 exceeded.`"
-    operator: ?Operator,
+    operator: ?Operator = null,
 
     /// A value used with `Name` and `Operator` to determine which resources satisfy
     /// the filter's condition. For numerical properties, `Value` must be an integer
     /// or floating-point decimal. For timestamp properties, `Value` must be an ISO
     /// 8601 date-time string of the following format: `YYYY-mm-dd'T'HH:MM:SS`.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

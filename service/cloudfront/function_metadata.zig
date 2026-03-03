@@ -3,7 +3,7 @@ const FunctionStage = @import("function_stage.zig").FunctionStage;
 /// Contains metadata about a CloudFront function.
 pub const FunctionMetadata = struct {
     /// The date and time when the function was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies
     /// the function.
@@ -19,5 +19,5 @@ pub const FunctionMetadata = struct {
     ///
     /// When a function is in the `LIVE` stage, you can attach the function to a
     /// distribution's cache behavior, using the function's ARN.
-    stage: ?FunctionStage,
+    stage: ?FunctionStage = null,
 };

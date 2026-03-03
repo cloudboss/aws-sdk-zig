@@ -15,24 +15,24 @@ pub const Extensions = struct {
     /// the certificate was issued and the purposes for which it may be used. In a
     /// CA certificate, these terms limit the set of policies for certification
     /// paths that include this certificate.
-    certificate_policies: ?[]const PolicyInformation,
+    certificate_policies: ?[]const PolicyInformation = null,
 
     /// Contains a sequence of one or more X.509 extensions, each of which consists
     /// of an object identifier (OID), a base64-encoded value, and the critical
     /// flag. For more information, see the [Global OID reference
     /// database.](https://oidref.com/2.5.29)
-    custom_extensions: ?[]const CustomExtension,
+    custom_extensions: ?[]const CustomExtension = null,
 
     /// Specifies additional purposes for which the certified public key may be used
     /// other than basic purposes indicated in the `KeyUsage` extension.
-    extended_key_usage: ?[]const ExtendedKeyUsage,
+    extended_key_usage: ?[]const ExtendedKeyUsage = null,
 
-    key_usage: ?KeyUsage,
+    key_usage: ?KeyUsage = null,
 
     /// The subject alternative name extension allows identities to be bound to the
     /// subject of the certificate. These identities may be included in addition to
     /// or in place of the identity in the subject field of the certificate.
-    subject_alternative_names: ?[]const GeneralName,
+    subject_alternative_names: ?[]const GeneralName = null,
 
     pub const json_field_names = .{
         .certificate_policies = "CertificatePolicies",

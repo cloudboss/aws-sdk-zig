@@ -17,7 +17,7 @@ pub const DeploymentReadyOption = struct {
     /// traffic rerouting is not started before the end of the specified wait
     /// period,
     /// the deployment status is changed to Stopped.
-    action_on_timeout: ?DeploymentReadyAction,
+    action_on_timeout: ?DeploymentReadyAction = null,
 
     /// The number of minutes to wait before the status of a blue/green deployment
     /// is changed

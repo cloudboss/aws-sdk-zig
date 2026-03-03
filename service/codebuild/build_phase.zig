@@ -7,14 +7,14 @@ pub const BuildPhase = struct {
     /// Additional information about a build phase, especially to help troubleshoot
     /// a failed
     /// build.
-    contexts: ?[]const PhaseContext,
+    contexts: ?[]const PhaseContext = null,
 
     /// How long, in seconds, between the starting and ending times of the build's
     /// phase.
-    duration_in_seconds: ?i64,
+    duration_in_seconds: ?i64 = null,
 
     /// When the build phase ended, expressed in Unix time format.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The current status of the build phase. Valid values include:
     ///
@@ -41,7 +41,7 @@ pub const BuildPhase = struct {
     /// **TIMED_OUT**
     ///
     /// The build phase timed out.
-    phase_status: ?StatusType,
+    phase_status: ?StatusType = null,
 
     /// The name of the build phase. Valid values include:
     ///
@@ -89,10 +89,10 @@ pub const BuildPhase = struct {
     /// **UPLOAD_ARTIFACTS**
     ///
     /// Build output artifacts are being uploaded to the output location.
-    phase_type: ?BuildPhaseType,
+    phase_type: ?BuildPhaseType = null,
 
     /// When the build phase started, expressed in Unix time format.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .contexts = "contexts",

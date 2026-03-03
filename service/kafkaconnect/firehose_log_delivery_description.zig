@@ -3,7 +3,7 @@
 pub const FirehoseLogDeliveryDescription = struct {
     /// The name of the Kinesis Data Firehose delivery stream that is the
     /// destination for log delivery.
-    delivery_stream: ?[]const u8,
+    delivery_stream: ?[]const u8 = null,
 
     /// Specifies whether connector logs get delivered to Amazon Kinesis Data
     /// Firehose.

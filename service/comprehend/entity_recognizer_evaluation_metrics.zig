@@ -8,18 +8,18 @@ pub const EntityRecognizerEvaluationMetrics = struct {
     /// where 100 is the best score. For PDF/Word entity recognizer models, the
     /// range is 0 to 1,
     /// where 1 is the best score.
-    f1_score: ?f64,
+    f1_score: ?f64 = null,
 
     /// A measure of the usefulness of the recognizer results in the test data. High
     /// precision
     /// means that the recognizer returned substantially more relevant results than
     /// irrelevant ones.
-    precision: ?f64,
+    precision: ?f64 = null,
 
     /// A measure of how complete the recognizer results are for the test data. High
     /// recall means
     /// that the recognizer returned most of the relevant results.
-    recall: ?f64,
+    recall: ?f64 = null,
 
     pub const json_field_names = .{
         .f1_score = "F1Score",

@@ -3,7 +3,7 @@ const SampleType = @import("sample_type.zig").SampleType;
 /// Represents a sample of performance data.
 pub const Sample = struct {
     /// The sample's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The sample's type.
     ///
@@ -47,12 +47,12 @@ pub const Sample = struct {
     ///
     /// * TX_RATE: The total number of bytes per second (TCP and UDP) that are
     /// received, by app process.
-    @"type": ?SampleType,
+    @"type": ?SampleType = null,
 
     /// The presigned Amazon S3 URL that can be used with a GET request to download
     /// the sample's
     /// file.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

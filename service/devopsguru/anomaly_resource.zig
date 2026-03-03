@@ -7,10 +7,10 @@
 /// the problem.
 pub const AnomalyResource = struct {
     /// The name of the Amazon Web Services resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of the Amazon Web Services resource.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

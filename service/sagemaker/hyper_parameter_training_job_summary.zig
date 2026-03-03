@@ -10,11 +10,11 @@ pub const HyperParameterTrainingJobSummary = struct {
     creation_time: i64,
 
     /// The reason that the training job failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The
     /// [FinalHyperParameterTuningJobObjectiveMetric](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_FinalHyperParameterTuningJobObjectiveMetric.html) object that specifies the value of the objective metric of the tuning job that launched this training job.
-    final_hyper_parameter_tuning_job_objective_metric: ?FinalHyperParameterTuningJobObjectiveMetric,
+    final_hyper_parameter_tuning_job_objective_metric: ?FinalHyperParameterTuningJobObjectiveMetric = null,
 
     /// The status of the objective metric for the training job:
     ///
@@ -28,20 +28,20 @@ pub const HyperParameterTrainingJobSummary = struct {
     /// * Failed: The final objective metric for the training job was not evaluated,
     ///   and was not used in the hyperparameter tuning process. This typically
     ///   occurs when the training job failed or did not emit an objective metric.
-    objective_status: ?ObjectiveStatus,
+    objective_status: ?ObjectiveStatus = null,
 
     /// Specifies the time when the training job ends on training instances. You are
     /// billed for the time interval between the value of `TrainingStartTime` and
     /// this time. For successful jobs and stopped jobs, this is the time after
     /// model artifacts are uploaded. For failed jobs, this is the time when
     /// SageMaker detects a job failure.
-    training_end_time: ?i64,
+    training_end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the training job.
     training_job_arn: []const u8,
 
     /// The training job definition name.
-    training_job_definition_name: ?[]const u8,
+    training_job_definition_name: ?[]const u8 = null,
 
     /// The name of the training job.
     training_job_name: []const u8,
@@ -50,13 +50,13 @@ pub const HyperParameterTrainingJobSummary = struct {
     training_job_status: TrainingJobStatus,
 
     /// The date and time that the training job started.
-    training_start_time: ?i64,
+    training_start_time: ?i64 = null,
 
     /// A list of the hyperparameters for which you specified ranges to search.
     tuned_hyper_parameters: []const aws.map.StringMapEntry,
 
     /// The HyperParameter tuning job that launched the training job.
-    tuning_job_name: ?[]const u8,
+    tuning_job_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

@@ -12,22 +12,22 @@ const QuerySuggestionsBlockListStatus = @import("query_suggestions_block_list_st
 /// Kendra](https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
 pub const QuerySuggestionsBlockListSummary = struct {
     /// The Unix timestamp when the block list was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of a block list.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The number of items in the block list file.
-    item_count: ?i32,
+    item_count: ?i32 = null,
 
     /// The name of the block list.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The status of the block list.
-    status: ?QuerySuggestionsBlockListStatus,
+    status: ?QuerySuggestionsBlockListStatus = null,
 
     /// The Unix timestamp when the block list was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

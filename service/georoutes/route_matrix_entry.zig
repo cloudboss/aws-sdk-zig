@@ -14,7 +14,7 @@ pub const RouteMatrixEntry = struct {
     duration: i64 = 0,
 
     /// Error code that occurred during calculation of the route.
-    @"error": ?RouteMatrixErrorCode,
+    @"error": ?RouteMatrixErrorCode = null,
 
     pub const json_field_names = .{
         .distance = "Distance",

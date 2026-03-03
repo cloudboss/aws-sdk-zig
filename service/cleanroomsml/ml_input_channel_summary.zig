@@ -14,7 +14,7 @@ pub const MLInputChannelSummary = struct {
     create_time: i64,
 
     /// The description of the ML input channel.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The membership ID of the membership that contains the ML input channel.
     membership_identifier: []const u8,
@@ -26,7 +26,7 @@ pub const MLInputChannelSummary = struct {
     name: []const u8,
 
     /// The ID of the protected query that was used to create the ML input channel.
-    protected_query_identifier: ?[]const u8,
+    protected_query_identifier: ?[]const u8 = null,
 
     /// The status of the ML input channel.
     status: MLInputChannelStatus,

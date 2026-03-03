@@ -8,7 +8,7 @@ pub const CustomActionAttachmentCriteria = struct {
 
     /// A value that is compared with the actual value of the variable based on the
     /// behavior of the operator.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     /// The name of the variable to operate on.
     variable_name: []const u8,

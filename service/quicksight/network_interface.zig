@@ -3,19 +3,19 @@ const NetworkInterfaceStatus = @import("network_interface_status.zig").NetworkIn
 /// The structure that contains information about a network interface.
 pub const NetworkInterface = struct {
     /// The availability zone that the network interface resides in.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// An error message.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The network interface ID.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// The status of the network interface.
-    status: ?NetworkInterfaceStatus,
+    status: ?NetworkInterfaceStatus = null,
 
     /// The subnet ID associated with the network interface.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .availability_zone = "AvailabilityZone",

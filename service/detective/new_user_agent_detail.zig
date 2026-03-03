@@ -4,7 +4,7 @@ pub const NewUserAgentDetail = struct {
     is_new_for_entire_account: bool = false,
 
     /// New user agent which accessed the resource.
-    user_agent: ?[]const u8,
+    user_agent: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .is_new_for_entire_account = "IsNewForEntireAccount",

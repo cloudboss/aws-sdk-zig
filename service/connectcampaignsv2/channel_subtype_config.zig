@@ -5,13 +5,13 @@ const WhatsAppChannelSubtypeConfig = @import("whats_app_channel_subtype_config.z
 
 /// Campaign Channel Subtype config
 pub const ChannelSubtypeConfig = struct {
-    email: ?EmailChannelSubtypeConfig,
+    email: ?EmailChannelSubtypeConfig = null,
 
-    sms: ?SmsChannelSubtypeConfig,
+    sms: ?SmsChannelSubtypeConfig = null,
 
-    telephony: ?TelephonyChannelSubtypeConfig,
+    telephony: ?TelephonyChannelSubtypeConfig = null,
 
-    whats_app: ?WhatsAppChannelSubtypeConfig,
+    whats_app: ?WhatsAppChannelSubtypeConfig = null,
 
     pub const json_field_names = .{
         .email = "email",

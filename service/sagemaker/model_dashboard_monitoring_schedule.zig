@@ -8,38 +8,38 @@ const MonitoringType = @import("monitoring_type.zig").MonitoringType;
 /// A monitoring schedule for a model displayed in the Amazon SageMaker Model
 /// Dashboard.
 pub const ModelDashboardMonitoringSchedule = struct {
-    batch_transform_input: ?BatchTransformInput,
+    batch_transform_input: ?BatchTransformInput = null,
 
     /// A timestamp that indicates when the monitoring schedule was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The endpoint which is monitored.
-    endpoint_name: ?[]const u8,
+    endpoint_name: ?[]const u8 = null,
 
     /// If a monitoring job failed, provides the reason.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// A timestamp that indicates when the monitoring schedule was last updated.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
-    last_monitoring_execution_summary: ?MonitoringExecutionSummary,
+    last_monitoring_execution_summary: ?MonitoringExecutionSummary = null,
 
     /// A JSON array where each element is a summary for a monitoring alert.
-    monitoring_alert_summaries: ?[]const MonitoringAlertSummary,
+    monitoring_alert_summaries: ?[]const MonitoringAlertSummary = null,
 
     /// The Amazon Resource Name (ARN) of a monitoring schedule.
-    monitoring_schedule_arn: ?[]const u8,
+    monitoring_schedule_arn: ?[]const u8 = null,
 
-    monitoring_schedule_config: ?MonitoringScheduleConfig,
+    monitoring_schedule_config: ?MonitoringScheduleConfig = null,
 
     /// The name of a monitoring schedule.
-    monitoring_schedule_name: ?[]const u8,
+    monitoring_schedule_name: ?[]const u8 = null,
 
     /// The status of the monitoring schedule.
-    monitoring_schedule_status: ?ScheduleStatus,
+    monitoring_schedule_status: ?ScheduleStatus = null,
 
     /// The monitor type of a model monitor.
-    monitoring_type: ?MonitoringType,
+    monitoring_type: ?MonitoringType = null,
 
     pub const json_field_names = .{
         .batch_transform_input = "BatchTransformInput",

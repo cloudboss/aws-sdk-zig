@@ -13,11 +13,11 @@ pub const CognitoUserPoolConfiguration = struct {
     /// Amazon Cognito user pool.
     ///
     /// Example: `"ClientIds": ["&ExampleCogClientId;"]`
-    client_ids: ?[]const []const u8,
+    client_ids: ?[]const []const u8 = null,
 
     /// The type of entity that a policy store maps to groups from an Amazon Cognito
     /// user pool identity source.
-    group_configuration: ?CognitoGroupConfiguration,
+    group_configuration: ?CognitoGroupConfiguration = null,
 
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the Amazon Cognito user pool that contains the identities to be authorized.

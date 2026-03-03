@@ -5,14 +5,14 @@ const EmvEncryptionMode = @import("emv_encryption_mode.zig").EmvEncryptionMode;
 pub const EmvEncryptionAttributes = struct {
     /// An input used to provide the intial state. If no value is provided, Amazon
     /// Web Services Payment Cryptography defaults it to zero.
-    initialization_vector: ?[]const u8,
+    initialization_vector: ?[]const u8 = null,
 
     /// The EMV derivation mode to use for ICC master key derivation as per EMV
     /// version 4.3 book 2.
     major_key_derivation_mode: EmvMajorKeyDerivationMode,
 
     /// The block cipher method to use for encryption.
-    mode: ?EmvEncryptionMode,
+    mode: ?EmvEncryptionMode = null,
 
     /// A number that identifies and differentiates payment cards with the same
     /// Primary Account Number (PAN). Typically 00 is used, if no value is provided

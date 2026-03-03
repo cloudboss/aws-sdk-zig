@@ -17,43 +17,43 @@ const ResaleAuthorizationStatusFilter = @import("resale_authorization_status_fil
 /// single `ListEntities` request.
 pub const ResaleAuthorizationFilters = struct {
     /// Allows filtering on the `AvailabilityEndDate` of a ResaleAuthorization.
-    availability_end_date: ?ResaleAuthorizationAvailabilityEndDateFilter,
+    availability_end_date: ?ResaleAuthorizationAvailabilityEndDateFilter = null,
 
     /// Allows filtering on the `CreatedDate` of a ResaleAuthorization.
-    created_date: ?ResaleAuthorizationCreatedDateFilter,
+    created_date: ?ResaleAuthorizationCreatedDateFilter = null,
 
     /// Allows filtering on the `EntityId` of a ResaleAuthorization.
-    entity_id: ?ResaleAuthorizationEntityIdFilter,
+    entity_id: ?ResaleAuthorizationEntityIdFilter = null,
 
     /// Allows filtering on the `LastModifiedDate` of a ResaleAuthorization.
-    last_modified_date: ?ResaleAuthorizationLastModifiedDateFilter,
+    last_modified_date: ?ResaleAuthorizationLastModifiedDateFilter = null,
 
     /// Allows filtering on the `ManufacturerAccountId` of a ResaleAuthorization.
-    manufacturer_account_id: ?ResaleAuthorizationManufacturerAccountIdFilter,
+    manufacturer_account_id: ?ResaleAuthorizationManufacturerAccountIdFilter = null,
 
     /// Allows filtering on the `ManufacturerLegalName` of a ResaleAuthorization.
-    manufacturer_legal_name: ?ResaleAuthorizationManufacturerLegalNameFilter,
+    manufacturer_legal_name: ?ResaleAuthorizationManufacturerLegalNameFilter = null,
 
     /// Allows filtering on the `Name` of a ResaleAuthorization.
-    name: ?ResaleAuthorizationNameFilter,
+    name: ?ResaleAuthorizationNameFilter = null,
 
     /// Allows filtering on the `OfferExtendedStatus` of a ResaleAuthorization.
-    offer_extended_status: ?ResaleAuthorizationOfferExtendedStatusFilter,
+    offer_extended_status: ?ResaleAuthorizationOfferExtendedStatusFilter = null,
 
     /// Allows filtering on the `ProductId` of a ResaleAuthorization.
-    product_id: ?ResaleAuthorizationProductIdFilter,
+    product_id: ?ResaleAuthorizationProductIdFilter = null,
 
     /// Allows filtering on the `ProductName` of a ResaleAuthorization.
-    product_name: ?ResaleAuthorizationProductNameFilter,
+    product_name: ?ResaleAuthorizationProductNameFilter = null,
 
     /// Allows filtering on the `ResellerAccountID` of a ResaleAuthorization.
-    reseller_account_id: ?ResaleAuthorizationResellerAccountIDFilter,
+    reseller_account_id: ?ResaleAuthorizationResellerAccountIDFilter = null,
 
     /// Allows filtering on the `ResellerLegalName` of a ResaleAuthorization.
-    reseller_legal_name: ?ResaleAuthorizationResellerLegalNameFilter,
+    reseller_legal_name: ?ResaleAuthorizationResellerLegalNameFilter = null,
 
     /// Allows filtering on the `Status` of a ResaleAuthorization.
-    status: ?ResaleAuthorizationStatusFilter,
+    status: ?ResaleAuthorizationStatusFilter = null,
 
     pub const json_field_names = .{
         .availability_end_date = "AvailabilityEndDate",

@@ -3,22 +3,22 @@ const PriceWithCurrency = @import("price_with_currency.zig").PriceWithCurrency;
 /// Information about the domain price associated with a TLD.
 pub const DomainPrice = struct {
     /// The price for changing domain ownership.
-    change_ownership_price: ?PriceWithCurrency,
+    change_ownership_price: ?PriceWithCurrency = null,
 
     /// The name of the TLD for which the prices apply.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The price for domain registration with Route 53.
-    registration_price: ?PriceWithCurrency,
+    registration_price: ?PriceWithCurrency = null,
 
     /// The price for renewing domain registration with Route 53.
-    renewal_price: ?PriceWithCurrency,
+    renewal_price: ?PriceWithCurrency = null,
 
     /// The price for restoring the domain with Route 53.
-    restoration_price: ?PriceWithCurrency,
+    restoration_price: ?PriceWithCurrency = null,
 
     /// The price for transferring the domain registration to Route 53.
-    transfer_price: ?PriceWithCurrency,
+    transfer_price: ?PriceWithCurrency = null,
 
     pub const json_field_names = .{
         .change_ownership_price = "ChangeOwnershipPrice",

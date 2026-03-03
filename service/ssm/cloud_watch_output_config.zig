@@ -8,7 +8,7 @@ pub const CloudWatchOutputConfig = struct {
     ///
     /// `aws/ssm/*SystemsManagerDocumentName*
     /// `
-    cloud_watch_log_group_name: ?[]const u8,
+    cloud_watch_log_group_name: ?[]const u8 = null,
 
     /// Enables Systems Manager to send command output to CloudWatch Logs.
     cloud_watch_output_enabled: bool = false,

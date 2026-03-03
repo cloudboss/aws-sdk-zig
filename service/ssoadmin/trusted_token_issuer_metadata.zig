@@ -4,14 +4,14 @@ const TrustedTokenIssuerType = @import("trusted_token_issuer_type.zig").TrustedT
 pub const TrustedTokenIssuerMetadata = struct {
     /// The name of the trusted token issuer configuration in the instance of IAM
     /// Identity Center.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN of the trusted token issuer configuration in the instance of IAM
     /// Identity Center.
-    trusted_token_issuer_arn: ?[]const u8,
+    trusted_token_issuer_arn: ?[]const u8 = null,
 
     /// The type of trusted token issuer.
-    trusted_token_issuer_type: ?TrustedTokenIssuerType,
+    trusted_token_issuer_type: ?TrustedTokenIssuerType = null,
 
     pub const json_field_names = .{
         .name = "Name",

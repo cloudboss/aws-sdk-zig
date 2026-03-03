@@ -9,27 +9,27 @@ pub const AwsOpportunityLifeCycle = struct {
     /// Indicates the reason why an opportunity was marked as `Closed Lost`. This
     /// helps in understanding the context behind the lost opportunity and aids in
     /// refining future strategies.
-    closed_lost_reason: ?AwsClosedLostReason,
+    closed_lost_reason: ?AwsClosedLostReason = null,
 
     /// Specifies the immediate next steps required to progress the opportunity.
     /// These steps are based on AWS guidance and the current stage of the
     /// opportunity.
-    next_steps: ?[]const u8,
+    next_steps: ?[]const u8 = null,
 
     /// Provides a historical log of previous next steps that were taken to move the
     /// opportunity forward. This helps in tracking the decision-making process and
     /// identifying any delays or obstacles encountered.
-    next_steps_history: ?[]const ProfileNextStepsHistory,
+    next_steps_history: ?[]const ProfileNextStepsHistory = null,
 
     /// Represents the current stage of the opportunity in its lifecycle, such as
     /// `Qualification`, `Validation`, or `Closed Won`. This helps in understanding
     /// the opportunity's progress.
-    stage: ?AwsOpportunityStage,
+    stage: ?AwsOpportunityStage = null,
 
     /// Indicates the expected date by which the opportunity is projected to close.
     /// This field helps in planning resources and timelines for both the partner
     /// and AWS.
-    target_close_date: ?[]const u8,
+    target_close_date: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .closed_lost_reason = "ClosedLostReason",

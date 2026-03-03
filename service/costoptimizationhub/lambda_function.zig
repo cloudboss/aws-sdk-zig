@@ -4,10 +4,10 @@ const ResourceCostCalculation = @import("resource_cost_calculation.zig").Resourc
 /// The Lambda function recommendation details.
 pub const LambdaFunction = struct {
     /// The Lambda function configuration used for recommendations.
-    configuration: ?LambdaFunctionConfiguration,
+    configuration: ?LambdaFunctionConfiguration = null,
 
     /// Cost impact of the recommendation.
-    cost_calculation: ?ResourceCostCalculation,
+    cost_calculation: ?ResourceCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

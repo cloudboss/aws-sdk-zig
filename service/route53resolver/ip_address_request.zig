@@ -6,10 +6,10 @@
 /// address.
 pub const IpAddressRequest = struct {
     /// The IPv4 address that you want to use for DNS queries.
-    ip: ?[]const u8,
+    ip: ?[]const u8 = null,
 
     /// The IPv6 address that you want to use for DNS queries.
-    ipv_6: ?[]const u8,
+    ipv_6: ?[]const u8 = null,
 
     /// The ID of the subnet that contains the IP address.
     subnet_id: []const u8,

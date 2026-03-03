@@ -5,7 +5,7 @@ pub const AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails = struct {
     ///
     /// If set to `false`, then instances in the group launch with basic
     /// monitoring.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

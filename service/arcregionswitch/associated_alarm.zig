@@ -8,10 +8,10 @@ pub const AssociatedAlarm = struct {
     alarm_type: AlarmType,
 
     /// The cross account role for the configuration.
-    cross_account_role: ?[]const u8,
+    cross_account_role: ?[]const u8 = null,
 
     /// The external ID (secret key) for the configuration.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The resource identifier for alarms that you associate with a plan.
     resource_identifier: []const u8,

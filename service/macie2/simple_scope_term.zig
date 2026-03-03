@@ -14,10 +14,10 @@ pub const SimpleScopeTerm = struct {
     ///   equals)
     /// * OBJECT_SIZE - EQ (equals), GT (greater than), GTE (greater than or
     ///   equals), LT (less than), LTE (less than or equals), or NE (not equals)
-    comparator: ?JobComparator,
+    comparator: ?JobComparator = null,
 
     /// The object property to use in the condition.
-    key: ?ScopeFilterKey,
+    key: ?ScopeFilterKey = null,
 
     /// An array that lists the values to use in the condition. If the value for the
     /// key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify
@@ -39,7 +39,7 @@ pub const SimpleScopeTerm = struct {
     ///
     /// Macie doesn't support use of wildcard characters in these values. Also,
     /// string values are case sensitive.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .comparator = "comparator",

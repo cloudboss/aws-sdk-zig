@@ -5,15 +5,15 @@ const DimensionField = @import("dimension_field.zig").DimensionField;
 pub const TreeMapAggregatedFieldWells = struct {
     /// The color field well of a tree map. Values are grouped by aggregations based
     /// on group by fields.
-    colors: ?[]const MeasureField,
+    colors: ?[]const MeasureField = null,
 
     /// The group by field well of a tree map. Values are grouped based on group by
     /// fields.
-    groups: ?[]const DimensionField,
+    groups: ?[]const DimensionField = null,
 
     /// The size field well of a tree map. Values are aggregated based on group by
     /// fields.
-    sizes: ?[]const MeasureField,
+    sizes: ?[]const MeasureField = null,
 
     pub const json_field_names = .{
         .colors = "Colors",

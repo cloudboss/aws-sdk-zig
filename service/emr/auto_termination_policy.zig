@@ -10,7 +10,7 @@ pub const AutoTerminationPolicy = struct {
     /// terminates. You can specify a minimum of 60 seconds and a maximum of 604800
     /// seconds (seven
     /// days).
-    idle_timeout: ?i64,
+    idle_timeout: ?i64 = null,
 
     pub const json_field_names = .{
         .idle_timeout = "IdleTimeout",

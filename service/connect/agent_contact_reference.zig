@@ -13,24 +13,24 @@ pub const AgentContactReference = struct {
     /// is not changed. Instead, `StateStartTimestamp` reflects the time the contact
     /// was `CONNECTED`
     /// to the agent.
-    agent_contact_state: ?ContactState,
+    agent_contact_state: ?ContactState = null,
 
     /// The channel of the contact.
-    channel: ?Channel,
+    channel: ?Channel = null,
 
     /// The time at which the contact was connected to an agent.
-    connected_to_agent_timestamp: ?i64,
+    connected_to_agent_timestamp: ?i64 = null,
 
     /// The identifier of the contact in this instance of Amazon Connect.
-    contact_id: ?[]const u8,
+    contact_id: ?[]const u8 = null,
 
     /// How the contact was initiated.
-    initiation_method: ?ContactInitiationMethod,
+    initiation_method: ?ContactInitiationMethod = null,
 
-    queue: ?QueueReference,
+    queue: ?QueueReference = null,
 
     /// The epoch timestamp when the contact state started.
-    state_start_timestamp: ?i64,
+    state_start_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .agent_contact_state = "AgentContactState",

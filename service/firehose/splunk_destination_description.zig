@@ -11,35 +11,35 @@ const SecretsManagerConfiguration = @import("secrets_manager_configuration.zig")
 pub const SplunkDestinationDescription = struct {
     /// The buffering options. If no value is specified, the default values for
     /// Splunk are used.
-    buffering_hints: ?SplunkBufferingHints,
+    buffering_hints: ?SplunkBufferingHints = null,
 
     /// The Amazon CloudWatch logging options for your Firehose stream.
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The amount of time that Firehose waits to receive an acknowledgment from
     /// Splunk after it sends it data. At the end of the timeout period, Firehose
     /// either tries to send the data again or considers it an error, based on your
     /// retry
     /// settings.
-    hec_acknowledgment_timeout_in_seconds: ?i32,
+    hec_acknowledgment_timeout_in_seconds: ?i32 = null,
 
     /// The HTTP Event Collector (HEC) endpoint to which Firehose sends your
     /// data.
-    hec_endpoint: ?[]const u8,
+    hec_endpoint: ?[]const u8 = null,
 
     /// This type can be either "Raw" or "Event."
-    hec_endpoint_type: ?HECEndpointType,
+    hec_endpoint_type: ?HECEndpointType = null,
 
     /// A GUID you obtain from your Splunk cluster when you create a new HEC
     /// endpoint.
-    hec_token: ?[]const u8,
+    hec_token: ?[]const u8 = null,
 
     /// The data processing configuration.
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The retry behavior in case Firehose is unable to deliver data to Splunk
     /// or if it doesn't receive an acknowledgment of receipt from Splunk.
-    retry_options: ?SplunkRetryOptions,
+    retry_options: ?SplunkRetryOptions = null,
 
     /// Defines how documents should be delivered to Amazon S3. When set to
     /// `FailedDocumentsOnly`, Firehose writes any data that could not
@@ -47,13 +47,13 @@ pub const SplunkDestinationDescription = struct {
     /// `AllDocuments`,
     /// Firehose delivers all incoming records to Amazon S3, and also writes failed
     /// documents to Amazon S3. Default value is `FailedDocumentsOnly`.
-    s3_backup_mode: ?SplunkS3BackupMode,
+    s3_backup_mode: ?SplunkS3BackupMode = null,
 
     /// The Amazon S3 destination.>
-    s3_destination_description: ?S3DestinationDescription,
+    s3_destination_description: ?S3DestinationDescription = null,
 
     /// The configuration that defines how you access secrets for Splunk.
-    secrets_manager_configuration: ?SecretsManagerConfiguration,
+    secrets_manager_configuration: ?SecretsManagerConfiguration = null,
 
     pub const json_field_names = .{
         .buffering_hints = "BufferingHints",

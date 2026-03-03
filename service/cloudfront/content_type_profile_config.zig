@@ -3,7 +3,7 @@ const ContentTypeProfiles = @import("content_type_profiles.zig").ContentTypeProf
 /// The configuration for a field-level encryption content type-profile mapping.
 pub const ContentTypeProfileConfig = struct {
     /// The configuration for a field-level encryption content type-profile.
-    content_type_profiles: ?ContentTypeProfiles,
+    content_type_profiles: ?ContentTypeProfiles = null,
 
     /// The setting in a field-level encryption content type-profile mapping that
     /// specifies what to do when an unknown content type is provided for the

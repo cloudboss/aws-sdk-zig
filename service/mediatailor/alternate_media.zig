@@ -5,25 +5,25 @@ const ClipRange = @import("clip_range.zig").ClipRange;
 /// media on a particular program.
 pub const AlternateMedia = struct {
     /// Ad break configuration parameters defined in AlternateMedia.
-    ad_breaks: ?[]const AdBreak,
+    ad_breaks: ?[]const AdBreak = null,
 
-    clip_range: ?ClipRange,
+    clip_range: ?ClipRange = null,
 
     /// The duration of the alternateMedia in milliseconds.
-    duration_millis: ?i64,
+    duration_millis: ?i64 = null,
 
     /// The name of the live source for alternateMedia.
-    live_source_name: ?[]const u8,
+    live_source_name: ?[]const u8 = null,
 
     /// The date and time that the alternateMedia is scheduled to start, in epoch
     /// milliseconds.
-    scheduled_start_time_millis: ?i64,
+    scheduled_start_time_millis: ?i64 = null,
 
     /// The name of the source location for alternateMedia.
-    source_location_name: ?[]const u8,
+    source_location_name: ?[]const u8 = null,
 
     /// The name of the VOD source for alternateMedia.
-    vod_source_name: ?[]const u8,
+    vod_source_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ad_breaks = "AdBreaks",

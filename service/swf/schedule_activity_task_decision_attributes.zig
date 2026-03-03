@@ -47,7 +47,7 @@ pub const ScheduleActivityTaskDecisionAttributes = struct {
 
     /// Data attached to the event that can be used by the decider in subsequent
     /// workflow tasks. This data isn't sent to the activity.
-    control: ?[]const u8,
+    control: ?[]const u8 = null,
 
     /// If set, specifies the maximum time before which a worker processing a task
     /// of this type must report progress by
@@ -61,10 +61,10 @@ pub const ScheduleActivityTaskDecisionAttributes = struct {
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    heartbeat_timeout: ?[]const u8,
+    heartbeat_timeout: ?[]const u8 = null,
 
     /// The input provided to the activity task.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The maximum duration for this activity task.
     ///
@@ -75,7 +75,7 @@ pub const ScheduleActivityTaskDecisionAttributes = struct {
     /// as a default for the activity type or through this field. If neither this
     /// field is set nor a default schedule-to-close timeout was specified at
     /// registration time then a fault is returned.
-    schedule_to_close_timeout: ?[]const u8,
+    schedule_to_close_timeout: ?[]const u8 = null,
 
     /// If set, specifies the maximum duration the activity task can wait to be
     /// assigned to a worker.
@@ -90,7 +90,7 @@ pub const ScheduleActivityTaskDecisionAttributes = struct {
     /// as a default for the activity type or through this field. If neither this
     /// field is set nor a default schedule-to-start timeout was specified at
     /// registration time then a fault is returned.
-    schedule_to_start_timeout: ?[]const u8,
+    schedule_to_start_timeout: ?[]const u8 = null,
 
     /// If set, specifies the maximum duration a worker may take to process this
     /// activity task. This overrides the
@@ -104,7 +104,7 @@ pub const ScheduleActivityTaskDecisionAttributes = struct {
     /// a default for the activity type or through this field. If neither this field
     /// is set nor a default start-to-close timeout was specified at registration
     /// time then a fault is returned.
-    start_to_close_timeout: ?[]const u8,
+    start_to_close_timeout: ?[]const u8 = null,
 
     /// If set, specifies the name of the task list in which to schedule the
     /// activity task. If not specified, the
@@ -119,7 +119,7 @@ pub const ScheduleActivityTaskDecisionAttributes = struct {
     /// `:` (colon), `/` (slash), `|` (vertical bar), or any
     /// control characters (`\u0000-\u001f` | `\u007f-\u009f`). Also, it must
     /// *not* be the literal string `arn`.
-    task_list: ?TaskList,
+    task_list: ?TaskList = null,
 
     /// If set, specifies the priority with which the activity task is to be
     /// assigned to a worker. This
@@ -131,7 +131,7 @@ pub const ScheduleActivityTaskDecisionAttributes = struct {
     ///
     /// For more information about setting task priority, see [Setting Task
     /// Priority](https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html) in the *Amazon SWF Developer Guide*.
-    task_priority: ?[]const u8,
+    task_priority: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .activity_id = "activityId",

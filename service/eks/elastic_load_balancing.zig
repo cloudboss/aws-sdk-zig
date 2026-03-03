@@ -10,7 +10,7 @@ pub const ElasticLoadBalancing = struct {
     /// If the load balancing capability is enabled, EKS Auto Mode will create and
     /// delete load
     /// balancers in your Amazon Web Services account.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

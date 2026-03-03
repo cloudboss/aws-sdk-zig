@@ -13,7 +13,7 @@ pub const SchemaSummary = struct {
     ///
     /// `MULTIPLE` allows both SQL queries and PySpark jobs to be run directly on
     /// this table.
-    analysis_method: ?AnalysisMethod,
+    analysis_method: ?AnalysisMethod = null,
 
     /// The types of analysis rules that are associated with this schema object.
     analysis_rule_types: []const AnalysisRuleType,
@@ -35,10 +35,10 @@ pub const SchemaSummary = struct {
     name: []const u8,
 
     /// The Amazon Resource Name (ARN) of the schema summary resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The selected analysis methods for the schema.
-    selected_analysis_methods: ?[]const SelectedAnalysisMethod,
+    selected_analysis_methods: ?[]const SelectedAnalysisMethod = null,
 
     /// The type of schema object.
     @"type": SchemaType,

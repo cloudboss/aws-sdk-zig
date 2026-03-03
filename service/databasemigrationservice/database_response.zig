@@ -5,27 +5,27 @@ const DatabaseInstanceSoftwareDetailsResponse = @import("database_instance_softw
 /// Describes a database in a Fleet Advisor collector inventory.
 pub const DatabaseResponse = struct {
     /// A list of collectors associated with the database.
-    collectors: ?[]const CollectorShortInfoResponse,
+    collectors: ?[]const CollectorShortInfoResponse = null,
 
     /// The ID of a database in a Fleet Advisor collector inventory.
-    database_id: ?[]const u8,
+    database_id: ?[]const u8 = null,
 
     /// The name of a database in a Fleet Advisor collector inventory.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The IP address of a database in a Fleet Advisor collector inventory.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The number of schemas in a Fleet Advisor collector inventory database.
-    number_of_schemas: ?i64,
+    number_of_schemas: ?i64 = null,
 
     /// The server name of a database in a Fleet Advisor collector inventory.
-    server: ?ServerShortInfoResponse,
+    server: ?ServerShortInfoResponse = null,
 
     /// The software details of a database in a Fleet Advisor collector inventory,
     /// such as database engine and
     /// version.
-    software_details: ?DatabaseInstanceSoftwareDetailsResponse,
+    software_details: ?DatabaseInstanceSoftwareDetailsResponse = null,
 
     pub const json_field_names = .{
         .collectors = "Collectors",

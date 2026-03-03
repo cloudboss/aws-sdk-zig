@@ -17,7 +17,7 @@ pub const ApiCache = struct {
     ///
     /// * **OPERATION_LEVEL_CACHING**: Full requests are cached together and
     ///   returned without executing resolvers.
-    api_caching_behavior: ?ApiCachingBehavior,
+    api_caching_behavior: ?ApiCachingBehavior = null,
 
     /// At-rest encryption flag for cache. You cannot update this setting after
     /// creation.
@@ -40,7 +40,7 @@ pub const ApiCache = struct {
     ///
     /// Metrics will be recorded by API ID. You can set the value to `ENABLED` or
     /// `DISABLED`.
-    health_metrics_config: ?CacheHealthMetricsConfig,
+    health_metrics_config: ?CacheHealthMetricsConfig = null,
 
     /// The cache instance status.
     ///
@@ -58,7 +58,7 @@ pub const ApiCache = struct {
     ///
     /// * **FAILED**: The instance has failed
     /// creation.
-    status: ?ApiCacheStatus,
+    status: ?ApiCacheStatus = null,
 
     /// Transit encryption flag when connecting to cache. You cannot update this
     /// setting after
@@ -108,7 +108,7 @@ pub const ApiCache = struct {
     /// * **R4_4XLARGE**: A r4.4xlarge instance type.
     ///
     /// * **R4_8XLARGE**: A r4.8xlarge instance type.
-    @"type": ?ApiCacheType,
+    @"type": ?ApiCacheType = null,
 
     pub const json_field_names = .{
         .api_caching_behavior = "apiCachingBehavior",

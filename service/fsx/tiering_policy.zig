@@ -27,7 +27,7 @@ pub const TieringPolicy = struct {
     /// Enter a whole number between 2 and 183. Default values are 31 days for
     /// `AUTO` and 2 days for
     /// `SNAPSHOT_ONLY`.
-    cooling_period: ?i32,
+    cooling_period: ?i32 = null,
 
     /// Specifies the tiering policy used to transition data. Default value is
     /// `SNAPSHOT_ONLY`.
@@ -45,7 +45,7 @@ pub const TieringPolicy = struct {
     /// * `NONE` - keeps a volume's data in the primary storage tier, preventing it
     ///   from being moved to
     /// the capacity pool tier.
-    name: ?TieringPolicyName,
+    name: ?TieringPolicyName = null,
 
     pub const json_field_names = .{
         .cooling_period = "CoolingPeriod",

@@ -5,7 +5,7 @@ const Action = @import("action.zig").Action;
 pub const ActionCondition = struct {
     /// The WAF action to match against (ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE,
     /// EXCLUDED_AS_COUNT).
-    action: ?Action,
+    action: ?Action = null,
 
     pub const json_field_names = .{
         .action = "Action",

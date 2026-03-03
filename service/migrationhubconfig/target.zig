@@ -7,7 +7,7 @@ const TargetType = @import("target_type.zig").TargetType;
 pub const Target = struct {
     /// The `TargetID` is a 12-character identifier of the `ACCOUNT` for
     /// which the control was created. (This must be the current account.)
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The target type is always an `ACCOUNT`.
     @"type": TargetType,

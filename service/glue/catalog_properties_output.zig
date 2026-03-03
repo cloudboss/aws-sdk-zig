@@ -8,17 +8,17 @@ const IcebergOptimizationPropertiesOutput = @import("iceberg_optimization_proper
 pub const CatalogPropertiesOutput = struct {
     /// Additional key-value properties for the catalog, such as column statistics
     /// optimizations.
-    custom_properties: ?[]const aws.map.StringMapEntry,
+    custom_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// A `DataLakeAccessProperties` object with input properties to configure data
     /// lake access for your catalog resource in the Glue Data Catalog.
-    data_lake_access_properties: ?DataLakeAccessPropertiesOutput,
+    data_lake_access_properties: ?DataLakeAccessPropertiesOutput = null,
 
     /// An `IcebergOptimizationPropertiesOutput` object that specifies Iceberg table
     /// optimization settings for the catalog, including
     /// configurations for compaction, retention, and orphan file deletion
     /// operations.
-    iceberg_optimization_properties: ?IcebergOptimizationPropertiesOutput,
+    iceberg_optimization_properties: ?IcebergOptimizationPropertiesOutput = null,
 
     pub const json_field_names = .{
         .custom_properties = "CustomProperties",

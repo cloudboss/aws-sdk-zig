@@ -10,17 +10,17 @@ pub const AutomatedReasoningPolicyDefinition = struct {
     /// The formal logic rules extracted from the source document. Rules define the
     /// logical constraints that determine whether model responses are valid,
     /// invalid, or satisfiable.
-    rules: ?[]const AutomatedReasoningPolicyDefinitionRule,
+    rules: ?[]const AutomatedReasoningPolicyDefinitionRule = null,
 
     /// The custom user-defined vairable types used in the policy. Types are
     /// enum-based variable types that provide additional context beyond the
     /// predefined variable types.
-    types: ?[]const AutomatedReasoningPolicyDefinitionType,
+    types: ?[]const AutomatedReasoningPolicyDefinitionType = null,
 
     /// The variables that represent concepts in the policy. Variables can have
     /// values assigned when translating natural language into formal logic. Their
     /// descriptions are crucial for accurate translation.
-    variables: ?[]const AutomatedReasoningPolicyDefinitionVariable,
+    variables: ?[]const AutomatedReasoningPolicyDefinitionVariable = null,
 
     /// The version of the policy definition format.
     version: []const u8 = "1",

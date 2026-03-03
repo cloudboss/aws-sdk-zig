@@ -1,10 +1,10 @@
 /// The estimated size of the resource.
 pub const EstimatedResourceSize = struct {
     /// The time when the estimate of the size of the resource was made.
-    estimated_on: ?i64,
+    estimated_on: ?i64 = null,
 
     /// The estimated size of the resource, in bytes.
-    estimated_size_in_bytes: ?f64,
+    estimated_size_in_bytes: ?f64 = null,
 
     pub const json_field_names = .{
         .estimated_on = "estimatedOn",

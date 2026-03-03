@@ -4,7 +4,7 @@ pub const PutResourcePolicyRequest = struct {
     /// provided to prevent concurrent modifications. Use `null` when creating a
     /// resource
     /// policy for the first time.
-    expected_revision_id: ?[]const u8,
+    expected_revision_id: ?[]const u8 = null,
 
     /// Details of the new policy, including the identity of the principal that is
     /// enabled to
@@ -37,15 +37,15 @@ pub const PutResourcePolicyRequest = struct {
     /// "Condition": { "ArnLike": { "aws:SourceArn": "myRoute53ResourceArn" },
     /// "StringEquals": {
     /// "aws:SourceAccount": "myAwsAccountId" } } } ] }`
-    policy_document: ?[]const u8,
+    policy_document: ?[]const u8 = null,
 
     /// Name of the new policy. This parameter is required.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// The ARN of the CloudWatch Logs resource to which the resource policy needs
     /// to be added
     /// or attached. Currently only supports LogGroup ARN.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .expected_revision_id = "expectedRevisionId",

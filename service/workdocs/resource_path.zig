@@ -3,7 +3,7 @@ const ResourcePathComponent = @import("resource_path_component.zig").ResourcePat
 /// Describes the path information of a resource.
 pub const ResourcePath = struct {
     /// The components of the resource path.
-    components: ?[]const ResourcePathComponent,
+    components: ?[]const ResourcePathComponent = null,
 
     pub const json_field_names = .{
         .components = "Components",

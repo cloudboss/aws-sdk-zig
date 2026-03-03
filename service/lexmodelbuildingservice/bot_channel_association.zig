@@ -8,31 +8,31 @@ const ChannelType = @import("channel_type.zig").ChannelType;
 pub const BotChannelAssociation = struct {
     /// An alias pointing to the specific version of the Amazon Lex bot to which
     /// this association is being made.
-    bot_alias: ?[]const u8,
+    bot_alias: ?[]const u8 = null,
 
     /// Provides information necessary to communicate with the messaging
     /// platform.
-    bot_configuration: ?[]const aws.map.StringMapEntry,
+    bot_configuration: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the Amazon Lex bot to which this association is being made.
     ///
     /// Currently, Amazon Lex supports associations with Facebook and Slack,
     /// and Twilio.
-    bot_name: ?[]const u8,
+    bot_name: ?[]const u8 = null,
 
     /// The date that the association between the Amazon Lex bot and the channel
     /// was created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// A text description of the association you are creating.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// If `status` is `FAILED`, Amazon Lex provides the
     /// reason that it failed to create the association.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The name of the association between the bot and the channel.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The status of the bot channel.
     ///
@@ -45,12 +45,12 @@ pub const BotChannelAssociation = struct {
     /// * `FAILED` - There was an error creating the channel.
     /// For information about the reason for the failure, see the
     /// `failureReason` field.
-    status: ?ChannelStatus,
+    status: ?ChannelStatus = null,
 
     /// Specifies the type of association by indicating the type of channel
     /// being established between the Amazon Lex bot and the external messaging
     /// platform.
-    @"type": ?ChannelType,
+    @"type": ?ChannelType = null,
 
     pub const json_field_names = .{
         .bot_alias = "botAlias",

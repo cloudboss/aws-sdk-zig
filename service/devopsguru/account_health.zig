@@ -7,13 +7,13 @@ const AccountInsightHealth = @import("account_insight_health.zig").AccountInsigh
 /// health of operations in your Amazon Web Services account.
 pub const AccountHealth = struct {
     /// The ID of the Amazon Web Services account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Information about the health of the Amazon Web Services resources in your
     /// account, including the
     /// number of open proactive, open reactive insights, and the Mean Time to
     /// Recover (MTTR) of closed insights.
-    insight: ?AccountInsightHealth,
+    insight: ?AccountInsightHealth = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

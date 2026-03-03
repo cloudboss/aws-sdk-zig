@@ -1,7 +1,7 @@
 /// Returns details of a specific query.
 pub const StoredQueryMetadata = struct {
     /// A unique description for the query.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) of the query. For example,
     /// arn:partition:service:region:account-id:resource-type/resource-name/resource-id.

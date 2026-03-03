@@ -5,24 +5,24 @@ const AwsMskClusterClusterInfoEncryptionInfoDetails = @import("aws_msk_cluster_c
 /// MSK) cluster.
 pub const AwsMskClusterClusterInfoDetails = struct {
     /// Provides information for different modes of client authentication.
-    client_authentication: ?AwsMskClusterClusterInfoClientAuthenticationDetails,
+    client_authentication: ?AwsMskClusterClusterInfoClientAuthenticationDetails = null,
 
     /// The name of the cluster.
-    cluster_name: ?[]const u8,
+    cluster_name: ?[]const u8 = null,
 
     /// The current version of the cluster.
-    current_version: ?[]const u8,
+    current_version: ?[]const u8 = null,
 
     /// Includes encryption-related information, such as the KMS key used for
     /// encrypting data at rest and
     /// whether you want Amazon MSK to encrypt your data in transit.
-    encryption_info: ?AwsMskClusterClusterInfoEncryptionInfoDetails,
+    encryption_info: ?AwsMskClusterClusterInfoEncryptionInfoDetails = null,
 
     /// Specifies the level of monitoring for the cluster.
-    enhanced_monitoring: ?[]const u8,
+    enhanced_monitoring: ?[]const u8 = null,
 
     /// The number of broker nodes in the cluster.
-    number_of_broker_nodes: ?i32,
+    number_of_broker_nodes: ?i32 = null,
 
     pub const json_field_names = .{
         .client_authentication = "ClientAuthentication",

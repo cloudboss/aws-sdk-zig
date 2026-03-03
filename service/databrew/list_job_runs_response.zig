@@ -6,7 +6,7 @@ pub const ListJobRunsResponse = struct {
 
     /// A token that you can use in a subsequent call to retrieve the next set of
     /// results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .job_runs = "JobRuns",

@@ -2,10 +2,10 @@
 /// be used.
 pub const SnowflakeRoleConfiguration = struct {
     /// Enable Snowflake role
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The Snowflake role you wish to configure
-    snowflake_role: ?[]const u8,
+    snowflake_role: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

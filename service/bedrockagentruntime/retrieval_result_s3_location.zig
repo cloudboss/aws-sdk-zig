@@ -10,7 +10,7 @@
 ///   response](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax) – in the `s3Location` field
 pub const RetrievalResultS3Location = struct {
     /// The S3 URI for the data source location.
-    uri: ?[]const u8,
+    uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .uri = "uri",

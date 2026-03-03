@@ -16,32 +16,32 @@ pub const Transaction = struct {
     /// The block hash is a unique identifier for a block. It is a fixed-size
     /// string that is calculated by using the information in the block. The block
     /// hash is used to verify the integrity of the data in the block.
-    block_hash: ?[]const u8,
+    block_hash: ?[]const u8 = null,
 
     /// The block number in which the transaction is recorded.
-    block_number: ?[]const u8,
+    block_number: ?[]const u8 = null,
 
     /// Specifies whether the transaction has reached Finality.
-    confirmation_status: ?ConfirmationStatus,
+    confirmation_status: ?ConfirmationStatus = null,
 
     /// The blockchain address for the contract.
-    contract_address: ?[]const u8,
+    contract_address: ?[]const u8 = null,
 
     /// The amount of gas used up to the specified point in the block.
-    cumulative_gas_used: ?[]const u8,
+    cumulative_gas_used: ?[]const u8 = null,
 
     /// The effective gas price.
-    effective_gas_price: ?[]const u8,
+    effective_gas_price: ?[]const u8 = null,
 
     /// Identifies whether the transaction has succeeded or failed.
-    execution_status: ?ExecutionStatus,
+    execution_status: ?ExecutionStatus = null,
 
     /// The initiator of the transaction. It is either in the form a public key or a
     /// contract address.
-    from: ?[]const u8,
+    from: ?[]const u8 = null,
 
     /// The amount of gas used for the transaction.
-    gas_used: ?[]const u8,
+    gas_used: ?[]const u8 = null,
 
     /// The blockchain network where the transaction occurred.
     network: QueryNetwork,
@@ -50,27 +50,27 @@ pub const Transaction = struct {
     number_of_transactions: i64,
 
     /// The signature of the transaction. The X coordinate of a point R.
-    signature_r: ?[]const u8,
+    signature_r: ?[]const u8 = null,
 
     /// The signature of the transaction. The Y coordinate of a point S.
-    signature_s: ?[]const u8,
+    signature_s: ?[]const u8 = null,
 
     /// The signature of the transaction. The Z coordinate of a point V.
-    signature_v: ?i32,
+    signature_v: ?i32 = null,
 
     /// The identifier of the transaction. It is generated whenever a transaction is
     /// verified and added to the blockchain.
     to: []const u8,
 
     /// The transaction fee.
-    transaction_fee: ?[]const u8,
+    transaction_fee: ?[]const u8 = null,
 
     /// The hash of a transaction. It is generated when a transaction is created.
     transaction_hash: []const u8,
 
     /// The identifier of a Bitcoin transaction. It is generated when a transaction
     /// is created.
-    transaction_id: ?[]const u8,
+    transaction_id: ?[]const u8 = null,
 
     /// The index of the transaction within a blockchain.
     transaction_index: i64,

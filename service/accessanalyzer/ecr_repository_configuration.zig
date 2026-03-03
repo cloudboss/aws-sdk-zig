@@ -16,7 +16,7 @@ pub const EcrRepositoryConfiguration = struct {
     /// The JSON repository policy text to apply to the Amazon ECR repository. For
     /// more information, see [Private repository policy
     /// examples](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html) in the *Amazon ECR User Guide*.
-    repository_policy: ?[]const u8,
+    repository_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .repository_policy = "repositoryPolicy",

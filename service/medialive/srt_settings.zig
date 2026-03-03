@@ -3,9 +3,9 @@ const SrtListenerSettings = @import("srt_listener_settings.zig").SrtListenerSett
 
 /// The configured settings for SRT inputs (caller and listener).
 pub const SrtSettings = struct {
-    srt_caller_sources: ?[]const SrtCallerSource,
+    srt_caller_sources: ?[]const SrtCallerSource = null,
 
-    srt_listener_settings: ?SrtListenerSettings,
+    srt_listener_settings: ?SrtListenerSettings = null,
 
     pub const json_field_names = .{
         .srt_caller_sources = "SrtCallerSources",

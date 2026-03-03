@@ -8,22 +8,22 @@ const ResponseConfiguration = @import("response_configuration.zig").ResponseConf
 pub const SourceConfiguration = struct {
     /// Configuration for handling paginated responses from the REST API, supporting
     /// both cursor-based and offset-based pagination strategies.
-    pagination_configuration: ?PaginationConfiguration,
+    pagination_configuration: ?PaginationConfiguration = null,
 
     /// The HTTP method to use for requests to this endpoint, such as GET, POST.
-    request_method: ?HTTPMethod,
+    request_method: ?HTTPMethod = null,
 
     /// Configuration for request parameters that should be included in API calls,
     /// such as query parameters, headers, or body content.
-    request_parameters: ?[]const ConnectorProperty,
+    request_parameters: ?[]const ConnectorProperty = null,
 
     /// The URL path for the REST endpoint, which may include parameter placeholders
     /// that will be replaced with actual values during requests.
-    request_path: ?[]const u8,
+    request_path: ?[]const u8 = null,
 
     /// Configuration that defines how to parse and extract data from API responses,
     /// including success and error handling.
-    response_configuration: ?ResponseConfiguration,
+    response_configuration: ?ResponseConfiguration = null,
 
     pub const json_field_names = .{
         .pagination_configuration = "PaginationConfiguration",

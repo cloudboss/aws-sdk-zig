@@ -15,7 +15,7 @@ pub const MediaStorageConfiguration = struct {
     status: MediaStorageConfigurationStatus,
 
     /// The Amazon Resource Name (ARN) of the stream.
-    stream_arn: ?[]const u8,
+    stream_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status = "Status",

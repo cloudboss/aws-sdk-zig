@@ -10,10 +10,10 @@ pub const AiAgentInfo = struct {
     /// The unique identifier that specifies both the AI agent ID and its version
     /// number that was involved in the
     /// contact
-    ai_agent_version_id: ?[]const u8,
+    ai_agent_version_id: ?[]const u8 = null,
 
     /// The use case or scenario for which the AI agent is involved in the contact
-    ai_use_case: ?AiUseCase,
+    ai_use_case: ?AiUseCase = null,
 
     pub const json_field_names = .{
         .ai_agent_escalated = "AiAgentEscalated",

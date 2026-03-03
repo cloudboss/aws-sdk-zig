@@ -6,14 +6,14 @@ pub const ActiveInstance = struct {
     /// status check
     /// or the system status check is `impaired`, the health status of the instance
     /// is `unhealthy`. Otherwise, the health status is `healthy`.
-    instance_health: ?InstanceHealthStatus,
+    instance_health: ?InstanceHealthStatus = null,
 
     /// The ID of the instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The instance type.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// The ID of the Spot Instance request.
-    spot_instance_request_id: ?[]const u8,
+    spot_instance_request_id: ?[]const u8 = null,
 };

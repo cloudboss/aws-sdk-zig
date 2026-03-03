@@ -6,35 +6,35 @@ const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 pub const DestinationPortMapping = struct {
     /// The Amazon Resource Name (ARN) of the custom routing accelerator
     /// that you have port mappings for.
-    accelerator_arn: ?[]const u8,
+    accelerator_arn: ?[]const u8 = null,
 
     /// The IP address/port combinations (sockets) that map to a given destination
     /// socket
     /// address.
-    accelerator_socket_addresses: ?[]const SocketAddress,
+    accelerator_socket_addresses: ?[]const SocketAddress = null,
 
     /// The endpoint IP address/port combination for traffic received on the
     /// accelerator socket address.
-    destination_socket_address: ?SocketAddress,
+    destination_socket_address: ?SocketAddress = null,
 
     /// Indicates whether or not a port mapping destination can receive traffic. The
     /// value is either ALLOW, if
     /// traffic is allowed to the destination, or DENY, if traffic is not allowed to
     /// the destination.
-    destination_traffic_state: ?CustomRoutingDestinationTrafficState,
+    destination_traffic_state: ?CustomRoutingDestinationTrafficState = null,
 
     /// The Amazon Resource Name (ARN) of the endpoint group.
-    endpoint_group_arn: ?[]const u8,
+    endpoint_group_arn: ?[]const u8 = null,
 
     /// The Amazon Web Services Region for the endpoint group.
-    endpoint_group_region: ?[]const u8,
+    endpoint_group_region: ?[]const u8 = null,
 
     /// The ID for the virtual private cloud (VPC) subnet.
-    endpoint_id: ?[]const u8,
+    endpoint_id: ?[]const u8 = null,
 
     /// The IP address type that an accelerator supports. For a custom routing
     /// accelerator, the value must be IPV4.
-    ip_address_type: ?IpAddressType,
+    ip_address_type: ?IpAddressType = null,
 
     pub const json_field_names = .{
         .accelerator_arn = "AcceleratorArn",

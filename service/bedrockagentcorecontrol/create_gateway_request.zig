@@ -11,7 +11,7 @@ const GatewayProtocolType = @import("gateway_protocol_type.zig").GatewayProtocol
 pub const CreateGatewayRequest = struct {
     /// The authorizer configuration for the gateway. Required if `authorizerType`
     /// is `CUSTOM_JWT`.
-    authorizer_configuration: ?AuthorizerConfiguration,
+    authorizer_configuration: ?AuthorizerConfiguration = null,
 
     /// The type of authorizer to use for the gateway.
     ///
@@ -26,10 +26,10 @@ pub const CreateGatewayRequest = struct {
     /// ignores the request, but doesn't return an error. For more information, see
     /// [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The description of the gateway.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The level of detail in error messages returned when invoking the gateway.
     ///
@@ -37,15 +37,15 @@ pub const CreateGatewayRequest = struct {
     ///   a user debug the gateway.
     /// * If the value is omitted, a generic error message is returned to the end
     ///   user.
-    exception_level: ?ExceptionLevel,
+    exception_level: ?ExceptionLevel = null,
 
     /// A list of configuration settings for a gateway interceptor. Gateway
     /// interceptors allow custom code to be invoked during gateway invocations.
-    interceptor_configurations: ?[]const GatewayInterceptorConfiguration,
+    interceptor_configurations: ?[]const GatewayInterceptorConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the KMS key used to encrypt data
     /// associated with the gateway.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The name of the gateway. The name must be unique within your account.
     name: []const u8,
@@ -55,11 +55,11 @@ pub const CreateGatewayRequest = struct {
     /// associated with a gateway, the policy engine intercepts all agent requests
     /// and determines whether to allow or deny each action based on the defined
     /// policies.
-    policy_engine_configuration: ?GatewayPolicyEngineConfiguration,
+    policy_engine_configuration: ?GatewayPolicyEngineConfiguration = null,
 
     /// The configuration settings for the protocol specified in the `protocolType`
     /// parameter.
-    protocol_configuration: ?GatewayProtocolConfiguration,
+    protocol_configuration: ?GatewayProtocolConfiguration = null,
 
     /// The protocol type for the gateway.
     protocol_type: GatewayProtocolType,
@@ -69,7 +69,7 @@ pub const CreateGatewayRequest = struct {
     role_arn: []const u8,
 
     /// A map of key-value pairs to associate with the gateway as metadata tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .authorizer_configuration = "authorizerConfiguration",

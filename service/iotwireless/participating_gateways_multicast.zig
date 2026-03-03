@@ -12,12 +12,12 @@ pub const ParticipatingGatewaysMulticast = struct {
     /// chooses the
     /// gateways that were most recently used by the devices to send an uplink
     /// message.
-    gateway_list: ?[]const []const u8,
+    gateway_list: ?[]const []const u8 = null,
 
     /// The duration of time in milliseconds for which AWS IoT Core for LoRaWAN will
     /// wait
     /// before transmitting the multicast payload to the next gateway in the list.
-    transmission_interval: ?i32,
+    transmission_interval: ?i32 = null,
 
     pub const json_field_names = .{
         .gateway_list = "GatewayList",

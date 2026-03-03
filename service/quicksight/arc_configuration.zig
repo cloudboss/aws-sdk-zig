@@ -3,10 +3,10 @@ const ArcThicknessOptions = @import("arc_thickness_options.zig").ArcThicknessOpt
 /// The arc configuration of a `GaugeChartVisual`.
 pub const ArcConfiguration = struct {
     /// The option that determines the arc angle of a `GaugeChartVisual`.
-    arc_angle: ?f64,
+    arc_angle: ?f64 = null,
 
     /// The options that determine the arc thickness of a `GaugeChartVisual`.
-    arc_thickness: ?ArcThicknessOptions,
+    arc_thickness: ?ArcThicknessOptions = null,
 
     pub const json_field_names = .{
         .arc_angle = "ArcAngle",

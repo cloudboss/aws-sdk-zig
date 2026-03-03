@@ -13,7 +13,7 @@ pub const ResponderErrorMaskingForHttpCode = struct {
     logging_types: []const ResponderErrorMaskingLoggingType,
 
     /// The percentage of response logging.
-    response_logging_percentage: ?f32,
+    response_logging_percentage: ?f32 = null,
 
     pub const json_field_names = .{
         .action = "action",

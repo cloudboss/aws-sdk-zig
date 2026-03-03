@@ -8,7 +8,7 @@ pub const Environment = struct {
     /// Environment variable key-value pairs. For more information, see [Using
     /// Lambda environment
     /// variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
-    variables: ?[]const aws.map.StringMapEntry,
+    variables: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .variables = "Variables",

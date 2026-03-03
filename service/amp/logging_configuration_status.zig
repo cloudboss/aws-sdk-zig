@@ -8,7 +8,7 @@ pub const LoggingConfigurationStatus = struct {
     status_code: LoggingConfigurationStatusCode,
 
     /// If failed, the reason for the failure.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status_code = "statusCode",

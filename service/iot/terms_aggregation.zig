@@ -3,7 +3,7 @@
 /// field value.
 pub const TermsAggregation = struct {
     /// The number of buckets to return in the response. Default to 10.
-    max_buckets: ?i32,
+    max_buckets: ?i32 = null,
 
     pub const json_field_names = .{
         .max_buckets = "maxBuckets",

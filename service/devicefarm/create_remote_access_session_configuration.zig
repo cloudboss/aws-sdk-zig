@@ -6,17 +6,17 @@ const DeviceProxy = @import("device_proxy.zig").DeviceProxy;
 pub const CreateRemoteAccessSessionConfiguration = struct {
     /// A list of upload ARNs for app packages to be installed onto your device.
     /// (Maximum 3)
-    auxiliary_apps: ?[]const []const u8,
+    auxiliary_apps: ?[]const []const u8 = null,
 
     /// The billing method for the remote access session.
-    billing_method: ?BillingMethod,
+    billing_method: ?BillingMethod = null,
 
     /// The device proxy to be configured on the device for the remote access
     /// session.
-    device_proxy: ?DeviceProxy,
+    device_proxy: ?DeviceProxy = null,
 
     /// An array of ARNs included in the VPC endpoint configuration.
-    vpce_configuration_arns: ?[]const []const u8,
+    vpce_configuration_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .auxiliary_apps = "auxiliaryApps",

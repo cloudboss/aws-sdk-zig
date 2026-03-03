@@ -8,7 +8,7 @@ const PatchSource = @import("patch_source.zig").PatchSource;
 
 /// Defines the basic information about a patch baseline override.
 pub const BaselineOverride = struct {
-    approval_rules: ?PatchRuleGroup,
+    approval_rules: ?PatchRuleGroup = null,
 
     /// A list of explicitly approved patches for the baseline.
     ///
@@ -17,12 +17,12 @@ pub const BaselineOverride = struct {
     /// see [Package
     /// name formats for approved and rejected patch
     /// lists](https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html) in the *Amazon Web Services Systems Manager User Guide*.
-    approved_patches: ?[]const []const u8,
+    approved_patches: ?[]const []const u8 = null,
 
     /// Defines the compliance level for approved patches. When an approved patch is
     /// reported as
     /// missing, this value describes the severity of the compliance violation.
-    approved_patches_compliance_level: ?PatchComplianceLevel,
+    approved_patches_compliance_level: ?PatchComplianceLevel = null,
 
     /// Indicates whether the list of approved patches includes non-security updates
     /// that should be
@@ -38,12 +38,12 @@ pub const BaselineOverride = struct {
     /// or `UpdatePatchBaseline` commands are run.
     ///
     /// Applies to Windows Server managed nodes only.
-    available_security_updates_compliance_status: ?PatchComplianceStatus,
+    available_security_updates_compliance_status: ?PatchComplianceStatus = null,
 
-    global_filters: ?PatchFilterGroup,
+    global_filters: ?PatchFilterGroup = null,
 
     /// The operating system rule used by the patch baseline override.
-    operating_system: ?OperatingSystem,
+    operating_system: ?OperatingSystem = null,
 
     /// A list of explicitly rejected patches for the baseline.
     ///
@@ -52,19 +52,19 @@ pub const BaselineOverride = struct {
     /// see [Package
     /// name formats for approved and rejected patch
     /// lists](https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html) in the *Amazon Web Services Systems Manager User Guide*.
-    rejected_patches: ?[]const []const u8,
+    rejected_patches: ?[]const []const u8 = null,
 
     /// The action for Patch Manager to take on patches included in the
     /// `RejectedPackages` list. A patch can be allowed only if it is a dependency
     /// of another
     /// package, or blocked entirely along with packages that include it as a
     /// dependency.
-    rejected_patches_action: ?PatchAction,
+    rejected_patches_action: ?PatchAction = null,
 
     /// Information about the patches to use to update the managed nodes, including
     /// target operating
     /// systems and source repositories. Applies to Linux managed nodes only.
-    sources: ?[]const PatchSource,
+    sources: ?[]const PatchSource = null,
 
     pub const json_field_names = .{
         .approval_rules = "ApprovalRules",

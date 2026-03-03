@@ -8,7 +8,7 @@ pub const LaunchTemplateOverrides = struct {
     ///
     /// Either `AvailabilityZone` or `AvailabilityZoneId` must be
     /// specified in the request, but not both.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the Availability Zone in which to launch the instances. For
     /// example,
@@ -16,7 +16,7 @@ pub const LaunchTemplateOverrides = struct {
     ///
     /// Either `AvailabilityZone` or `AvailabilityZoneId` must be
     /// specified in the request, but not both.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The instance requirements. When you specify instance requirements, Amazon
     /// EC2 will identify
@@ -28,10 +28,10 @@ pub const LaunchTemplateOverrides = struct {
     ///
     /// If you specify `InstanceRequirements`, you can't specify
     /// `InstanceType`.
-    instance_requirements: ?InstanceRequirements,
+    instance_requirements: ?InstanceRequirements = null,
 
     /// The instance type.
-    instance_type: ?InstanceType,
+    instance_type: ?InstanceType = null,
 
     /// The priority for the launch template override. The highest priority is
     /// launched
@@ -54,7 +54,7 @@ pub const LaunchTemplateOverrides = struct {
     /// the lowest
     /// priority. You can set the same priority for different launch template
     /// overrides.
-    priority: ?f64,
+    priority: ?f64 = null,
 
     /// The maximum price per unit hour that you are willing to pay for a Spot
     /// Instance. We do not recommend using this parameter because it can lead to
@@ -63,10 +63,10 @@ pub const LaunchTemplateOverrides = struct {
     ///
     /// If you specify a maximum price, your instances will be interrupted more
     /// frequently than if you do not specify this parameter.
-    spot_price: ?[]const u8,
+    spot_price: ?[]const u8 = null,
 
     /// The ID of the subnet in which to launch the instances.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The number of units provided by the specified instance type. These are the
     /// same units
@@ -86,5 +86,5 @@ pub const LaunchTemplateOverrides = struct {
     /// weight). However, if all the specified weights are above the requested
     /// `TargetCapacity`, resulting in only 1 instance being launched, the price
     /// used is per *instance* hour.
-    weighted_capacity: ?f64,
+    weighted_capacity: ?f64 = null,
 };

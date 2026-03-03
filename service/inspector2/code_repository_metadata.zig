@@ -8,13 +8,13 @@ pub const CodeRepositoryMetadata = struct {
     /// The Amazon Resource Name (ARN) of the code security integration associated
     /// with the
     /// repository.
-    integration_arn: ?[]const u8,
+    integration_arn: ?[]const u8 = null,
 
     /// The ID of the last commit that was scanned in the repository.
-    last_scanned_commit_id: ?[]const u8,
+    last_scanned_commit_id: ?[]const u8 = null,
 
     /// Information about on-demand scans performed on the repository.
-    on_demand_scan: ?CodeRepositoryOnDemandScan,
+    on_demand_scan: ?CodeRepositoryOnDemandScan = null,
 
     /// The name of the project in the code repository.
     project_name: []const u8,
@@ -26,7 +26,7 @@ pub const CodeRepositoryMetadata = struct {
     provider_type_visibility: []const u8,
 
     /// The scan configuration settings applied to the code repository.
-    scan_configuration: ?ProjectCodeSecurityScanConfiguration,
+    scan_configuration: ?ProjectCodeSecurityScanConfiguration = null,
 
     pub const json_field_names = .{
         .integration_arn = "integrationArn",

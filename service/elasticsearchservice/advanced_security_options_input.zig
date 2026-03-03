@@ -8,19 +8,19 @@ const SAMLOptionsInput = @import("saml_options_input.zig").SAMLOptionsInput;
 pub const AdvancedSecurityOptionsInput = struct {
     /// True if Anonymous auth is enabled. Anonymous auth can be enabled only when
     /// AdvancedSecurity is enabled on existing domains.
-    anonymous_auth_enabled: ?bool,
+    anonymous_auth_enabled: ?bool = null,
 
     /// True if advanced security is enabled.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// True if the internal user database is enabled.
-    internal_user_database_enabled: ?bool,
+    internal_user_database_enabled: ?bool = null,
 
     /// Credentials for the master user: username and password, ARN, or both.
-    master_user_options: ?MasterUserOptions,
+    master_user_options: ?MasterUserOptions = null,
 
     /// Specifies the SAML application configuration for the domain.
-    saml_options: ?SAMLOptionsInput,
+    saml_options: ?SAMLOptionsInput = null,
 
     pub const json_field_names = .{
         .anonymous_auth_enabled = "AnonymousAuthEnabled",

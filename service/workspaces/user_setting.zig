@@ -7,7 +7,7 @@ pub const UserSetting = struct {
     action: UserSettingActionEnum,
 
     /// Indicates the maximum character length for the specified user setting.
-    maximum_length: ?i32,
+    maximum_length: ?i32 = null,
 
     /// Indicates if the setting is enabled or disabled.
     permission: UserSettingPermissionEnum,

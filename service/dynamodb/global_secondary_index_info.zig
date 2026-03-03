@@ -8,7 +8,7 @@ const ProvisionedThroughput = @import("provisioned_throughput.zig").ProvisionedT
 /// was created.
 pub const GlobalSecondaryIndexInfo = struct {
     /// The name of the global secondary index.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
     /// The complete key schema for a global secondary index, which consists of one
     /// or more
@@ -28,21 +28,21 @@ pub const GlobalSecondaryIndexInfo = struct {
     /// the same partition key physically close together, in sorted order by the
     /// sort key
     /// value.
-    key_schema: ?[]const KeySchemaElement,
+    key_schema: ?[]const KeySchemaElement = null,
 
-    on_demand_throughput: ?OnDemandThroughput,
+    on_demand_throughput: ?OnDemandThroughput = null,
 
     /// Represents attributes that are copied (projected) from the table into the
     /// global
     /// secondary index. These are in addition to the primary key attributes and
     /// index key
     /// attributes, which are automatically projected.
-    projection: ?Projection,
+    projection: ?Projection = null,
 
     /// Represents the provisioned throughput settings for the specified global
     /// secondary
     /// index.
-    provisioned_throughput: ?ProvisionedThroughput,
+    provisioned_throughput: ?ProvisionedThroughput = null,
 
     pub const json_field_names = .{
         .index_name = "IndexName",

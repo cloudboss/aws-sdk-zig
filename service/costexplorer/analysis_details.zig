@@ -3,7 +3,7 @@ const SavingsPlansPurchaseAnalysisDetails = @import("savings_plans_purchase_anal
 /// Details about the analysis.
 pub const AnalysisDetails = struct {
     /// Details about the Savings Plans purchase analysis.
-    savings_plans_purchase_analysis_details: ?SavingsPlansPurchaseAnalysisDetails,
+    savings_plans_purchase_analysis_details: ?SavingsPlansPurchaseAnalysisDetails = null,
 
     pub const json_field_names = .{
         .savings_plans_purchase_analysis_details = "SavingsPlansPurchaseAnalysisDetails",

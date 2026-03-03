@@ -1,7 +1,7 @@
 /// A summary that contains details about your connection groups.
 pub const ConnectionGroupSummary = struct {
     /// The ID of the Anycast static IP list.
-    anycast_ip_list_id: ?[]const u8,
+    anycast_ip_list_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the connection group.
     arn: []const u8,
@@ -10,7 +10,7 @@ pub const ConnectionGroupSummary = struct {
     created_time: i64,
 
     /// Whether the connection group is enabled
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The current version of the connection group.
     e_tag: []const u8,
@@ -20,7 +20,7 @@ pub const ConnectionGroupSummary = struct {
 
     /// Whether the connection group is the default connection group for the
     /// distribution tenants.
-    is_default: ?bool,
+    is_default: ?bool = null,
 
     /// The date and time when the connection group was updated.
     last_modified_time: i64,
@@ -33,5 +33,5 @@ pub const ConnectionGroupSummary = struct {
     routing_endpoint: []const u8,
 
     /// The status of the connection group.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 };

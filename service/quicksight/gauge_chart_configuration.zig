@@ -9,25 +9,25 @@ const VisualPalette = @import("visual_palette.zig").VisualPalette;
 /// The configuration of a `GaugeChartVisual`.
 pub const GaugeChartConfiguration = struct {
     /// The color configuration of a `GaugeChartVisual`.
-    color_configuration: ?GaugeChartColorConfiguration,
+    color_configuration: ?GaugeChartColorConfiguration = null,
 
     /// The data label configuration of a `GaugeChartVisual`.
-    data_labels: ?DataLabelOptions,
+    data_labels: ?DataLabelOptions = null,
 
     /// The field well configuration of a `GaugeChartVisual`.
-    field_wells: ?GaugeChartFieldWells,
+    field_wells: ?GaugeChartFieldWells = null,
 
     /// The options that determine the presentation of the `GaugeChartVisual`.
-    gauge_chart_options: ?GaugeChartOptions,
+    gauge_chart_options: ?GaugeChartOptions = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The tooltip configuration of a `GaugeChartVisual`.
-    tooltip_options: ?TooltipOptions,
+    tooltip_options: ?TooltipOptions = null,
 
     /// The visual palette configuration of a `GaugeChartVisual`.
-    visual_palette: ?VisualPalette,
+    visual_palette: ?VisualPalette = null,
 
     pub const json_field_names = .{
         .color_configuration = "ColorConfiguration",

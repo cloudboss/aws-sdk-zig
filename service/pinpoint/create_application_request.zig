@@ -10,7 +10,7 @@ pub const CreateApplicationRequest = struct {
     /// A string-to-string map of key-value pairs that defines the tags to associate
     /// with the application. Each tag consists of a required tag key and an
     /// associated tag value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .name = "Name",

@@ -4,16 +4,16 @@ const TableOptimizerType = @import("table_optimizer_type.zig").TableOptimizerTyp
 /// operation.
 pub const BatchGetTableOptimizerEntry = struct {
     /// The Catalog ID of the table.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The name of the database in the catalog in which the table resides.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The name of the table.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The type of table optimizer.
-    @"type": ?TableOptimizerType,
+    @"type": ?TableOptimizerType = null,
 
     pub const json_field_names = .{
         .catalog_id = "catalogId",

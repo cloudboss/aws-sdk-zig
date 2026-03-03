@@ -11,7 +11,7 @@ pub const ApplicationRestoreConfiguration = struct {
     /// The application uses this value if `RESTORE_FROM_CUSTOM_SNAPSHOT` is
     /// specified for the
     /// `ApplicationRestoreType`.
-    snapshot_name: ?[]const u8,
+    snapshot_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_restore_type = "ApplicationRestoreType",

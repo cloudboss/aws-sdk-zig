@@ -2,7 +2,7 @@ const Filter = @import("filter.zig").Filter;
 
 pub const ListTagsForResourceMessage = struct {
     /// This parameter isn't currently supported.
-    filters: ?[]const Filter,
+    filters: ?[]const Filter = null,
 
     /// The Amazon RDS resource with tags to be listed. This value is an Amazon
     /// Resource Name (ARN). For information about creating an ARN, see [

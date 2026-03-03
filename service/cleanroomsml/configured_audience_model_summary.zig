@@ -15,7 +15,7 @@ pub const ConfiguredAudienceModelSummary = struct {
     create_time: i64,
 
     /// The description of the configured audience model.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the configured audience model.
     name: []const u8,

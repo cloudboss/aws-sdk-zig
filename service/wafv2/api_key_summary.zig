@@ -10,13 +10,13 @@
 pub const APIKeySummary = struct {
     /// The generated, encrypted API key. You can copy this for use in your
     /// JavaScript CAPTCHA integration.
-    api_key: ?[]const u8,
+    api_key: ?[]const u8 = null,
 
     /// The date and time that the key was created.
-    creation_timestamp: ?i64,
+    creation_timestamp: ?i64 = null,
 
     /// The token domains that are defined in this API key.
-    token_domains: ?[]const []const u8,
+    token_domains: ?[]const []const u8 = null,
 
     /// Internal value used by WAF to manage the key.
     version: i32 = 0,

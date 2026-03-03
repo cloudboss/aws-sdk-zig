@@ -6,12 +6,12 @@ const FilterType = @import("filter_type.zig").FilterType;
 pub const FilterRule = struct {
     /// The type of filter rule to apply. DataSync only supports the SIMPLE_PATTERN
     /// rule type.
-    filter_type: ?FilterType,
+    filter_type: ?FilterType = null,
 
     /// A single filter string that consists of the patterns to include or exclude.
     /// The patterns
     /// are delimited by "|" (that is, a pipe), for example: `/folder1|/folder2`
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .filter_type = "FilterType",

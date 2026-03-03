@@ -7,39 +7,39 @@ const IncludedProperty = @import("included_property.zig").IncludedProperty;
 /// information, see [Managed
 /// views](https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html).
 pub const ManagedView = struct {
-    filters: ?SearchFilter,
+    filters: ?SearchFilter = null,
 
     /// A structure that contains additional information about the managed view.
-    included_properties: ?[]const IncludedProperty,
+    included_properties: ?[]const IncludedProperty = null,
 
     /// The date and time when this managed view was last modified.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The [Amazon resource name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the managed view.
-    managed_view_arn: ?[]const u8,
+    managed_view_arn: ?[]const u8 = null,
 
     /// The name of the managed view.
-    managed_view_name: ?[]const u8,
+    managed_view_name: ?[]const u8 = null,
 
     /// The Amazon Web Services account that owns this managed view.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The resource policy that defines access to the managed view. To learn more
     /// about this policy, review [Managed
     /// views](https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html).
-    resource_policy: ?[]const u8,
+    resource_policy: ?[]const u8 = null,
 
     /// An [Amazon resource name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of an Amazon Web Services account or organization that specifies whether this managed view includes resources from only the specified Amazon Web Services account or all accounts in the specified organization.
-    scope: ?[]const u8,
+    scope: ?[]const u8 = null,
 
     /// The service principal of the Amazon Web Services service that created and
     /// manages the managed view.
-    trusted_service: ?[]const u8,
+    trusted_service: ?[]const u8 = null,
 
     /// The version of the managed view.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .filters = "Filters",

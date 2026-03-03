@@ -3,7 +3,7 @@
 pub const HoldoutActivity = struct {
     /// The unique identifier for the next activity to perform, after performing the
     /// holdout activity.
-    next_activity: ?[]const u8,
+    next_activity: ?[]const u8 = null,
 
     /// The percentage of participants who shouldn't continue the journey.
     ///

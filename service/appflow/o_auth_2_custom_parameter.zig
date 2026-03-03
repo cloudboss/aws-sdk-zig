@@ -5,10 +5,10 @@ pub const OAuth2CustomParameter = struct {
     /// Contains default values for this authentication parameter that are supplied
     /// by the
     /// connector.
-    connector_supplied_values: ?[]const []const u8,
+    connector_supplied_values: ?[]const []const u8 = null,
 
     /// A description about the custom parameter used for OAuth 2.0 authentication.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether the custom parameter for OAuth 2.0 authentication is
     /// required.
@@ -18,13 +18,13 @@ pub const OAuth2CustomParameter = struct {
     is_sensitive_field: bool = false,
 
     /// The key of the custom parameter required for OAuth 2.0 authentication.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The label of the custom parameter used for OAuth 2.0 authentication.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// Indicates whether custom parameter is used with TokenUrl or AuthUrl.
-    @"type": ?OAuth2CustomPropType,
+    @"type": ?OAuth2CustomPropType = null,
 
     pub const json_field_names = .{
         .connector_supplied_values = "connectorSuppliedValues",

@@ -5,7 +5,7 @@ const aws = @import("aws");
 pub const VoiceTemplateRequest = struct {
     /// The text of the script to use in messages that are based on the message
     /// template, in plain text format.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// A JSON object that specifies the default values to use for message variables
     /// in the message template. This object is a set of key-value pairs. Each key
@@ -13,13 +13,13 @@ pub const VoiceTemplateRequest = struct {
     /// the default value for that variable. When you create a message that's based
     /// on the template, you can override these defaults with message-specific and
     /// address-specific variables and values.
-    default_substitutions: ?[]const u8,
+    default_substitutions: ?[]const u8 = null,
 
     /// The code for the language to use when synthesizing the text of the script in
     /// messages that are based on the message template. For a list of supported
     /// languages and the code for each one, see the [Amazon Polly Developer
     /// Guide](https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
-    language_code: ?[]const u8,
+    language_code: ?[]const u8 = null,
 
     /// As of **22-05-2023** tags has been deprecated for update operations. After
     /// this date any value in tags is not processed and an error code is not
@@ -29,15 +29,15 @@ pub const VoiceTemplateRequest = struct {
     /// (Deprecated) A string-to-string map of key-value pairs that defines the tags
     /// to associate with the message template. Each tag consists of a required tag
     /// key and an associated tag value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// A custom description of the message template.
-    template_description: ?[]const u8,
+    template_description: ?[]const u8 = null,
 
     /// The name of the voice to use when delivering messages that are based on the
     /// message template. For a list of supported voices, see the [Amazon Polly
     /// Developer Guide](https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
-    voice_id: ?[]const u8,
+    voice_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .body = "Body",

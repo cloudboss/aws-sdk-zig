@@ -26,7 +26,7 @@ pub const AdvancedBackupSetting = struct {
     /// For more information about Windows VSS backups, see [Creating a VSS-Enabled
     /// Windows
     /// Backup](https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html).
-    backup_options: ?[]const aws.map.StringMapEntry,
+    backup_options: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies an object containing resource type and backup options. The only
     /// supported
@@ -37,7 +37,7 @@ pub const AdvancedBackupSetting = struct {
     /// VSS](https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html) in the *Backup User Guide*.
     ///
     /// Valid values: `EC2`.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .backup_options = "BackupOptions",

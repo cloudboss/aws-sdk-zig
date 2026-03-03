@@ -10,14 +10,14 @@ pub const AwsVpcConfiguration = struct {
     /// address. You
     /// can specify `ENABLED` only when `LaunchType` in
     /// `EcsParameters` is set to `FARGATE`.
-    assign_public_ip: ?AssignPublicIp,
+    assign_public_ip: ?AssignPublicIp = null,
 
     /// Specifies the security groups associated with the task. These security
     /// groups must all
     /// be in the same VPC. You can specify as many as five security groups. If you
     /// do not specify
     /// a security group, the default security group for the VPC is used.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// Specifies the subnets associated with the task. These subnets must all be in
     /// the same

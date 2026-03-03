@@ -3,10 +3,10 @@ pub const ExportStatistics = struct {
     /// The number of records that were exported to the final export file.
     ///
     /// This value might not be available for all export source types
-    exported_records_count: ?i32,
+    exported_records_count: ?i32 = null,
 
     /// The number of records that were processed to generate the final export file.
-    processed_records_count: ?i32,
+    processed_records_count: ?i32 = null,
 
     pub const json_field_names = .{
         .exported_records_count = "ExportedRecordsCount",

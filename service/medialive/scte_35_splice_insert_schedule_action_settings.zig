@@ -6,7 +6,7 @@ pub const Scte35SpliceInsertScheduleActionSettings = struct {
     /// cue in at that time. If you do not enter a duration, the splice_insert will
     /// continue indefinitely and there is an expectation that you will enter a
     /// return_to_network to end the splice_insert at the appropriate time.
-    duration: ?i64,
+    duration: ?i64 = null,
 
     /// The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
     splice_event_id: i64,

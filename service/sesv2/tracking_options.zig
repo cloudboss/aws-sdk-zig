@@ -18,7 +18,7 @@ pub const TrackingOptions = struct {
     custom_redirect_domain: []const u8,
 
     /// The https policy to use for tracking open and click events.
-    https_policy: ?HttpsPolicy,
+    https_policy: ?HttpsPolicy = null,
 
     pub const json_field_names = .{
         .custom_redirect_domain = "CustomRedirectDomain",

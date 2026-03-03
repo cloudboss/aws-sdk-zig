@@ -7,22 +7,22 @@ const OAuth2Properties = @import("o_auth_2_properties.zig").OAuth2Properties;
 /// The authentication configuration of a connection.
 pub const AuthenticationConfigurationInput = struct {
     /// The authentication type of a connection.
-    authentication_type: ?AuthenticationType,
+    authentication_type: ?AuthenticationType = null,
 
     /// The basic authentication credentials of a connection.
-    basic_authentication_credentials: ?BasicAuthenticationCredentials,
+    basic_authentication_credentials: ?BasicAuthenticationCredentials = null,
 
     /// The custom authentication credentials of a connection.
-    custom_authentication_credentials: ?[]const aws.map.StringMapEntry,
+    custom_authentication_credentials: ?[]const aws.map.StringMapEntry = null,
 
     /// The KMS key ARN of a connection.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The oAuth2 properties of a connection.
-    o_auth_2_properties: ?OAuth2Properties,
+    o_auth_2_properties: ?OAuth2Properties = null,
 
     /// The secret ARN of a connection.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authentication_type = "authenticationType",

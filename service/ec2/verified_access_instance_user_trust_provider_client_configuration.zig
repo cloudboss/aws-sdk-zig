@@ -3,32 +3,32 @@ const UserTrustProviderType = @import("user_trust_provider_type.zig").UserTrustP
 /// Describes the trust provider.
 pub const VerifiedAccessInstanceUserTrustProviderClientConfiguration = struct {
     /// The authorization endpoint of the IdP.
-    authorization_endpoint: ?[]const u8,
+    authorization_endpoint: ?[]const u8 = null,
 
     /// The OAuth 2.0 client identifier.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     /// The OAuth 2.0 client secret.
-    client_secret: ?[]const u8,
+    client_secret: ?[]const u8 = null,
 
     /// The OIDC issuer identifier of the IdP.
-    issuer: ?[]const u8,
+    issuer: ?[]const u8 = null,
 
     /// Indicates whether Proof of Key Code Exchange (PKCE) is enabled.
-    pkce_enabled: ?bool,
+    pkce_enabled: ?bool = null,
 
     /// The public signing key endpoint.
-    public_signing_key_endpoint: ?[]const u8,
+    public_signing_key_endpoint: ?[]const u8 = null,
 
     /// The set of user claims to be requested from the IdP.
-    scopes: ?[]const u8,
+    scopes: ?[]const u8 = null,
 
     /// The token endpoint of the IdP.
-    token_endpoint: ?[]const u8,
+    token_endpoint: ?[]const u8 = null,
 
     /// The trust provider type.
-    @"type": ?UserTrustProviderType,
+    @"type": ?UserTrustProviderType = null,
 
     /// The user info endpoint of the IdP.
-    user_info_endpoint: ?[]const u8,
+    user_info_endpoint: ?[]const u8 = null,
 };

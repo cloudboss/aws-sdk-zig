@@ -4,11 +4,11 @@ const ThroughResourcesStatementRequest = @import("through_resources_statement_re
 /// Describes a path.
 pub const AccessScopePathRequest = struct {
     /// The destination.
-    destination: ?PathStatementRequest,
+    destination: ?PathStatementRequest = null,
 
     /// The source.
-    source: ?PathStatementRequest,
+    source: ?PathStatementRequest = null,
 
     /// The through resources.
-    through_resources: ?[]const ThroughResourcesStatementRequest,
+    through_resources: ?[]const ThroughResourcesStatementRequest = null,
 };

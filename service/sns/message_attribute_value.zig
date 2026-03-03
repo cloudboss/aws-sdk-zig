@@ -20,7 +20,7 @@ pub const MessageAttributeValue = struct {
     /// Binary type attributes can store any binary data, for example, compressed
     /// data,
     /// encrypted data, or images.
-    binary_value: ?[]const u8,
+    binary_value: ?[]const u8 = null,
 
     /// Amazon SNS supports the following logical data types: String, String.Array,
     /// Number, and
@@ -32,5 +32,5 @@ pub const MessageAttributeValue = struct {
     /// Strings are Unicode with UTF8 binary encoding. For a list of code values,
     /// see [ASCII Printable
     /// Characters](https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
-    string_value: ?[]const u8,
+    string_value: ?[]const u8 = null,
 };

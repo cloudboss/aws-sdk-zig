@@ -1,7 +1,7 @@
 /// Reports progress on replacing instances that are in the Auto Scaling group.
 pub const InstanceRefreshLivePoolProgress = struct {
     /// The number of instances remaining to update.
-    instances_to_update: ?i32,
+    instances_to_update: ?i32 = null,
 
     /// The percentage of instances in the Auto Scaling group that have been
     /// replaced. For each
@@ -11,5 +11,5 @@ pub const InstanceRefreshLivePoolProgress = struct {
     /// warm-up time
     /// passes, the instance is considered updated and is added to the percentage
     /// complete.
-    percentage_complete: ?i32,
+    percentage_complete: ?i32 = null,
 };

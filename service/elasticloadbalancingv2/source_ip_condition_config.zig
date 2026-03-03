@@ -20,5 +20,5 @@ pub const SourceIpConditionConfig = struct {
     /// condition](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#http-header-conditions).
     ///
     /// The total number of values must be less than, or equal to five.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 };

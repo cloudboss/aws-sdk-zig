@@ -8,7 +8,7 @@ pub const RoutingCriteriaInput = struct {
     /// until a join is completed with an agent.
     /// When all steps are exhausted, the contact will be offered to any agent in
     /// the queue.
-    steps: ?[]const RoutingCriteriaInputStep,
+    steps: ?[]const RoutingCriteriaInputStep = null,
 
     pub const json_field_names = .{
         .steps = "Steps",

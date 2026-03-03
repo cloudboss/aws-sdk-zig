@@ -5,7 +5,7 @@ const TumblingWindow = @import("tumbling_window.zig").TumblingWindow;
 /// average, sum, count, and so on).
 pub const MetricWindow = struct {
     /// The tumbling time interval window.
-    tumbling: ?TumblingWindow,
+    tumbling: ?TumblingWindow = null,
 
     pub const json_field_names = .{
         .tumbling = "tumbling",

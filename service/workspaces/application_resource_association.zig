@@ -6,25 +6,25 @@ const AssociationStateReason = @import("association_state_reason.zig").Associati
 /// resource.
 pub const ApplicationResourceAssociation = struct {
     /// The identifier of the application.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The identifier of the associated resource.
-    associated_resource_id: ?[]const u8,
+    associated_resource_id: ?[]const u8 = null,
 
     /// The resource type of the associated resource.
-    associated_resource_type: ?ApplicationAssociatedResourceType,
+    associated_resource_type: ?ApplicationAssociatedResourceType = null,
 
     /// The time the association was created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The time the association status was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The status of the application resource association.
-    state: ?AssociationState,
+    state: ?AssociationState = null,
 
     /// The reason the association deployment failed.
-    state_reason: ?AssociationStateReason,
+    state_reason: ?AssociationStateReason = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

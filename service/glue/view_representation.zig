@@ -4,18 +4,18 @@ const ViewDialect = @import("view_dialect.zig").ViewDialect;
 /// defines the view.
 pub const ViewRepresentation = struct {
     /// The dialect of the query engine.
-    dialect: ?ViewDialect,
+    dialect: ?ViewDialect = null,
 
     /// The version of the dialect of the query engine. For example, 3.0.0.
-    dialect_version: ?[]const u8,
+    dialect_version: ?[]const u8 = null,
 
     /// Dialects marked as stale are no longer valid and must be updated before they
     /// can be queried in their respective query engines.
-    is_stale: ?bool,
+    is_stale: ?bool = null,
 
     /// The name of the connection to be used to validate the specific
     /// representation of the view.
-    validation_connection: ?[]const u8,
+    validation_connection: ?[]const u8 = null,
 
     /// The expanded SQL for the view. This SQL is used by engines while processing
     /// a query on a view. Engines may perform operations during view creation to
@@ -23,13 +23,13 @@ pub const ViewRepresentation = struct {
     ///
     /// * Fully qualified identifiers: `SELECT * from table1 -> SELECT * from
     ///   db1.table1`
-    view_expanded_text: ?[]const u8,
+    view_expanded_text: ?[]const u8 = null,
 
     /// The `SELECT` query provided by the customer during `CREATE VIEW DDL`. This
     /// SQL is not used during a query on a view (`ViewExpandedText` is used
     /// instead). `ViewOriginalText` is used for cases like `SHOW CREATE VIEW` where
     /// users want to see the original DDL command that created the view.
-    view_original_text: ?[]const u8,
+    view_original_text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dialect = "Dialect",

@@ -4,7 +4,7 @@ const MeasureField = @import("measure_field.zig").MeasureField;
 pub const HistogramAggregatedFieldWells = struct {
     /// The value field wells of a histogram. Values are aggregated by `COUNT` or
     /// `DISTINCT_COUNT`.
-    values: ?[]const MeasureField,
+    values: ?[]const MeasureField = null,
 
     pub const json_field_names = .{
         .values = "Values",

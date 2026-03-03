@@ -4,10 +4,10 @@ const GlueTable = @import("glue_table.zig").GlueTable;
 /// A data source (an Glue table) for which you want data quality results.
 pub const DataSource = struct {
     /// An Glue table for Data Quality Operations.
-    data_quality_glue_table: ?DataQualityGlueTable,
+    data_quality_glue_table: ?DataQualityGlueTable = null,
 
     /// An Glue table.
-    glue_table: ?GlueTable,
+    glue_table: ?GlueTable = null,
 
     pub const json_field_names = .{
         .data_quality_glue_table = "DataQualityGlueTable",

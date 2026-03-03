@@ -6,7 +6,7 @@ const Currency = @import("currency.zig").Currency;
 /// discounts.
 pub const ECSEstimatedMonthlySavings = struct {
     /// The currency of the estimated monthly savings.
-    currency: ?Currency,
+    currency: ?Currency = null,
 
     /// The value of the estimated monthly savings for Amazon ECS services.
     value: f64 = 0,

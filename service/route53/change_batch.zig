@@ -7,5 +7,5 @@ pub const ChangeBatch = struct {
 
     /// *Optional:* Any comments you want to include about a change batch
     /// request.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 };

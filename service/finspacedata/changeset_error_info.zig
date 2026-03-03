@@ -25,10 +25,10 @@ pub const ChangesetErrorInfo = struct {
     /// * `CANCELLED` – Cancelled.
     ///
     /// * `USER_RECOVERABLE` – A user recoverable error has occurred.
-    error_category: ?ErrorCategory,
+    error_category: ?ErrorCategory = null,
 
     /// The text of the error message.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_category = "errorCategory",

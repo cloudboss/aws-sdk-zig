@@ -3,13 +3,13 @@
 /// could not process.
 pub const UnprocessedStatistics = struct {
     /// The error code.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The name of the sampling rule.
-    rule_name: ?[]const u8,
+    rule_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

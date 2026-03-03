@@ -12,9 +12,9 @@ const NetworkOriginConfiguration = @import("network_origin_configuration.zig").N
 pub const S3ExpressDirectoryAccessPointConfiguration = struct {
     /// The proposed access point policy for an Amazon S3 directory bucket access
     /// point.
-    access_point_policy: ?[]const u8,
+    access_point_policy: ?[]const u8 = null,
 
-    network_origin: ?NetworkOriginConfiguration,
+    network_origin: ?NetworkOriginConfiguration = null,
 
     pub const json_field_names = .{
         .access_point_policy = "accessPointPolicy",

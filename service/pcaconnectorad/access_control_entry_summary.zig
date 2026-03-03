@@ -8,26 +8,26 @@ pub const AccessControlEntrySummary = struct {
     /// Allow or deny an Active Directory group from enrolling and autoenrolling
     /// certificates issued against
     /// a template.
-    access_rights: ?AccessRights,
+    access_rights: ?AccessRights = null,
 
     /// The date and time that the Access Control Entry was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Name of the Active Directory group. This name does not need to match the
     /// group name in Active Directory.
-    group_display_name: ?[]const u8,
+    group_display_name: ?[]const u8 = null,
 
     /// Security identifier (SID) of the group object from Active Directory. The SID
     /// starts with
     /// "S-".
-    group_security_identifier: ?[]const u8,
+    group_security_identifier: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) that was returned when you called
     /// [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
-    template_arn: ?[]const u8,
+    template_arn: ?[]const u8 = null,
 
     /// The date and time that the Access Control Entry was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .access_rights = "AccessRights",

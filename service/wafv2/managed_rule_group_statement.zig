@@ -24,7 +24,7 @@ pub const ManagedRuleGroupStatement = struct {
     ///
     /// Instead of this option, use `RuleActionOverrides`. It accepts any valid
     /// action setting, including `Count`.
-    excluded_rules: ?[]const ExcludedRule,
+    excluded_rules: ?[]const ExcludedRule = null,
 
     /// Additional information that's used by a managed rule group. Many managed
     /// rule groups don't require this.
@@ -53,7 +53,7 @@ pub const ManagedRuleGroupStatement = struct {
     /// * Use the `AWSManagedRulesBotControlRuleSet` configuration object to
     ///   configure the
     /// protection level that you want the Bot Control rule group to use.
-    managed_rule_group_configs: ?[]const ManagedRuleGroupConfig,
+    managed_rule_group_configs: ?[]const ManagedRuleGroupConfig = null,
 
     /// The name of the managed rule group. You use this, along with the vendor
     /// name, to identify the rule group.
@@ -74,7 +74,7 @@ pub const ManagedRuleGroupStatement = struct {
     /// understand how the rule group would handle your web traffic. You can also
     /// permanently override some or all actions, to modify how the rule group
     /// manages your web traffic.
-    rule_action_overrides: ?[]const RuleActionOverride,
+    rule_action_overrides: ?[]const RuleActionOverride = null,
 
     /// An optional nested statement that narrows the scope of the web requests that
     /// are
@@ -97,7 +97,7 @@ pub const ManagedRuleGroupStatement = struct {
     /// default version, and then keeps the version at the vendor's default when the
     /// vendor updates
     /// the managed rule group settings.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .excluded_rules = "ExcludedRules",

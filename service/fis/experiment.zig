@@ -12,56 +12,56 @@ const ExperimentTarget = @import("experiment_target.zig").ExperimentTarget;
 /// Describes an experiment.
 pub const Experiment = struct {
     /// The actions for the experiment.
-    actions: ?[]const aws.map.MapEntry(ExperimentAction),
+    actions: ?[]const aws.map.MapEntry(ExperimentAction) = null,
 
     /// The Amazon Resource Name (ARN) of the experiment.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time that the experiment was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The time that the experiment ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The experiment options for the experiment.
-    experiment_options: ?ExperimentOptions,
+    experiment_options: ?ExperimentOptions = null,
 
     /// The experiment report for the experiment.
-    experiment_report: ?ExperimentReport,
+    experiment_report: ?ExperimentReport = null,
 
     /// The experiment report configuration for the experiment.
-    experiment_report_configuration: ?ExperimentReportConfiguration,
+    experiment_report_configuration: ?ExperimentReportConfiguration = null,
 
     /// The ID of the experiment template.
-    experiment_template_id: ?[]const u8,
+    experiment_template_id: ?[]const u8 = null,
 
     /// The ID of the experiment.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The configuration for experiment logging.
-    log_configuration: ?ExperimentLogConfiguration,
+    log_configuration: ?ExperimentLogConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of an IAM role that grants the FIS service
     /// permission to perform service actions on your behalf.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The time that the experiment started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The state of the experiment.
-    state: ?ExperimentState,
+    state: ?ExperimentState = null,
 
     /// The stop conditions for the experiment.
-    stop_conditions: ?[]const ExperimentStopCondition,
+    stop_conditions: ?[]const ExperimentStopCondition = null,
 
     /// The tags for the experiment.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The count of target account configurations for the experiment.
-    target_account_configurations_count: ?i64,
+    target_account_configurations_count: ?i64 = null,
 
     /// The targets for the experiment.
-    targets: ?[]const aws.map.MapEntry(ExperimentTarget),
+    targets: ?[]const aws.map.MapEntry(ExperimentTarget) = null,
 
     pub const json_field_names = .{
         .actions = "actions",

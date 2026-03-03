@@ -8,13 +8,13 @@ const RunningMode = @import("running_mode.zig").RunningMode;
 pub const WorkspaceProperties = struct {
     /// The compute type. For more information, see [Amazon WorkSpaces
     /// Bundles](http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles).
-    compute_type_name: ?Compute,
+    compute_type_name: ?Compute = null,
 
     /// Indicates the Global Accelerator properties.
-    global_accelerator: ?GlobalAcceleratorForWorkSpace,
+    global_accelerator: ?GlobalAcceleratorForWorkSpace = null,
 
     /// The name of the operating system.
-    operating_system_name: ?OperatingSystemName,
+    operating_system_name: ?OperatingSystemName = null,
 
     /// The protocol. For more information, see
     /// [
@@ -29,13 +29,13 @@ pub const WorkspaceProperties = struct {
     /// * Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based
     ///   bundles
     /// (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).
-    protocols: ?[]const Protocol,
+    protocols: ?[]const Protocol = null,
 
     /// The size of the root volume. For important information about how to modify
     /// the size of
     /// the root and user volumes, see [Modify a
     /// WorkSpace](https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html).
-    root_volume_size_gib: ?i32,
+    root_volume_size_gib: ?i32 = null,
 
     /// The running mode. For more information, see [Manage the WorkSpace Running
     /// Mode](https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html).
@@ -50,18 +50,18 @@ pub const WorkspaceProperties = struct {
     /// budget. For more information on switching running modes, see [ Can I switch
     /// between hourly and monthly
     /// billing?](http://aws.amazon.com/workspaces-family/workspaces/faqs/#:~:text=Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%20on%20WorkSpaces%20Personal%3F)
-    running_mode: ?RunningMode,
+    running_mode: ?RunningMode = null,
 
     /// The time after a user logs off when WorkSpaces are automatically stopped.
     /// Configured in
     /// 60-minute intervals.
-    running_mode_auto_stop_timeout_in_minutes: ?i32,
+    running_mode_auto_stop_timeout_in_minutes: ?i32 = null,
 
     /// The size of the user storage. For important information about how to modify
     /// the size of
     /// the root and user volumes, see [Modify a
     /// WorkSpace](https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html).
-    user_volume_size_gib: ?i32,
+    user_volume_size_gib: ?i32 = null,
 
     pub const json_field_names = .{
         .compute_type_name = "ComputeTypeName",

@@ -4,7 +4,7 @@ const ApplicationState = @import("application_state.zig").ApplicationState;
 /// The summary of attributes associated with an application.
 pub const ApplicationSummary = struct {
     /// The CPU architecture of an application.
-    architecture: ?Architecture,
+    architecture: ?Architecture = null,
 
     /// The ARN of the application.
     arn: []const u8,
@@ -16,7 +16,7 @@ pub const ApplicationSummary = struct {
     id: []const u8,
 
     /// The name of the application.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon EMR release associated with the application.
     release_label: []const u8,
@@ -25,7 +25,7 @@ pub const ApplicationSummary = struct {
     state: ApplicationState,
 
     /// The state details of the application.
-    state_details: ?[]const u8,
+    state_details: ?[]const u8 = null,
 
     /// The type of application, such as Spark or Hive.
     @"type": []const u8,

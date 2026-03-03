@@ -5,7 +5,7 @@ pub const PutResourcePolicyResponse = struct {
     /// resource. For more information about this policy,
     /// see [Default resource policy for delegated
     /// administrators](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-organizations.html#cloudtrail-lake-organizations-eds-rbp).
-    delegated_admin_resource_policy: ?[]const u8,
+    delegated_admin_resource_policy: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the CloudTrail event data store,
     /// dashboard, or channel attached to the resource-based policy.
@@ -18,11 +18,11 @@ pub const PutResourcePolicyResponse = struct {
     ///
     /// Example channel ARN format:
     /// `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The JSON-formatted string of the Amazon Web Services resource-based policy
     /// attached to the CloudTrail event data store, dashboard, or channel.
-    resource_policy: ?[]const u8,
+    resource_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .delegated_admin_resource_policy = "DelegatedAdminResourcePolicy",

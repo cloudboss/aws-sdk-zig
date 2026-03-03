@@ -28,11 +28,11 @@ pub const WorkflowExecutionInfo = struct {
     /// * `CONTINUED_AS_NEW` – the execution is logically continued. This means the
     ///   current execution was
     /// completed and a new execution was started to carry on the workflow.
-    close_status: ?CloseStatus,
+    close_status: ?CloseStatus = null,
 
     /// The time when the workflow execution was closed. Set only if the execution
     /// status is CLOSED.
-    close_timestamp: ?i64,
+    close_timestamp: ?i64 = null,
 
     /// The workflow execution this information is about.
     execution: WorkflowExecution,
@@ -42,7 +42,7 @@ pub const WorkflowExecutionInfo = struct {
 
     /// If this workflow execution is a child of another execution then contains the
     /// workflow execution that started this execution.
-    parent: ?WorkflowExecution,
+    parent: ?WorkflowExecution = null,
 
     /// The time when the execution was started.
     start_timestamp: i64,
@@ -50,7 +50,7 @@ pub const WorkflowExecutionInfo = struct {
     /// The list of tags associated with the workflow execution. Tags can be used to
     /// identify and list workflow executions of interest through the visibility
     /// APIs. A workflow execution can have a maximum of 5 tags.
-    tag_list: ?[]const []const u8,
+    tag_list: ?[]const []const u8 = null,
 
     /// The type of the workflow execution.
     workflow_type: WorkflowType,

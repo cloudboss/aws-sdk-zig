@@ -7,16 +7,16 @@ pub const InvestigationFeedback = struct {
     /// Optional user comments providing additional context about the investigation
     /// feedback. This allows users to explain their rating or provide suggestions
     /// for improvement.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// ISO 8601 timestamp when the feedback was submitted. This records when the
     /// user provided their assessment of the investigation results.
-    submitted_at: ?i64,
+    submitted_at: ?i64 = null,
 
     /// User assessment of the investigation result's quality and helpfulness. This
     /// rating indicates how valuable the investigation findings were in addressing
     /// the case.
-    usefulness: ?UsefulnessRating,
+    usefulness: ?UsefulnessRating = null,
 
     pub const json_field_names = .{
         .comment = "comment",

@@ -5,5 +5,5 @@ pub const LaunchTemplateEnclaveOptions = struct {
     /// Services Nitro
     /// Enclaves; otherwise, it is not enabled for Amazon Web Services Nitro
     /// Enclaves.
-    enabled: ?bool,
+    enabled: ?bool = null,
 };

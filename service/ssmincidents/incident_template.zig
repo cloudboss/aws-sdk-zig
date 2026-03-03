@@ -26,7 +26,7 @@ pub const IncidentTemplate = struct {
     /// enter
     /// your own deduplication string to prevent duplication for these resource
     /// types.
-    dedupe_string: ?[]const u8,
+    dedupe_string: ?[]const u8 = null,
 
     /// The impact of the incident on your customers and applications.
     ///
@@ -46,16 +46,16 @@ pub const IncidentTemplate = struct {
     /// Tags to assign to the template. When the `StartIncident` API action is
     /// called,
     /// Incident Manager assigns the tags specified in the template to the incident.
-    incident_tags: ?[]const aws.map.StringMapEntry,
+    incident_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon SNS targets that are notified when updates are made to an
     /// incident.
-    notification_targets: ?[]const NotificationTargetItem,
+    notification_targets: ?[]const NotificationTargetItem = null,
 
     /// The summary of the incident. The summary is a brief synopsis of what
     /// occurred, what's
     /// currently happening, and context.
-    summary: ?[]const u8,
+    summary: ?[]const u8 = null,
 
     /// The title of the incident.
     title: []const u8,

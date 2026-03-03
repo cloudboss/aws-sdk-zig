@@ -4,7 +4,7 @@ pub const FileBatchJobDefinition = struct {
     file_name: []const u8,
 
     /// The path to the file containing the batch job definition.
-    folder_path: ?[]const u8,
+    folder_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .file_name = "fileName",

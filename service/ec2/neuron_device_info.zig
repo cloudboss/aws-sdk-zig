@@ -4,14 +4,14 @@ const NeuronDeviceMemoryInfo = @import("neuron_device_memory_info.zig").NeuronDe
 /// Describes the neuron accelerators for the instance type.
 pub const NeuronDeviceInfo = struct {
     /// Describes the cores available to each neuron accelerator.
-    core_info: ?NeuronDeviceCoreInfo,
+    core_info: ?NeuronDeviceCoreInfo = null,
 
     /// The number of neuron accelerators for the instance type.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// Describes the memory available to each neuron accelerator.
-    memory_info: ?NeuronDeviceMemoryInfo,
+    memory_info: ?NeuronDeviceMemoryInfo = null,
 
     /// The name of the neuron accelerator.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 };

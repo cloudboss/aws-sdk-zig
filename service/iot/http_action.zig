@@ -5,12 +5,12 @@ const HttpActionHeader = @import("http_action_header.zig").HttpActionHeader;
 /// Send data to an HTTPS endpoint.
 pub const HttpAction = struct {
     /// The authentication method to use when sending data to an HTTPS endpoint.
-    auth: ?HttpAuthorization,
+    auth: ?HttpAuthorization = null,
 
     /// The configuration settings for batching. For more information, see [
     /// Batching HTTP action
     /// messages](https://docs.aws.amazon.com/iot/latest/developerguide/http_batching.html).
-    batch_config: ?BatchConfig,
+    batch_config: ?BatchConfig = null,
 
     /// The URL to which IoT sends a confirmation message. The value of the
     /// confirmation URL
@@ -23,14 +23,14 @@ pub const HttpAction = struct {
     /// possible value of the substitution template before traffic is allowed to
     /// your endpoint
     /// URL.
-    confirmation_url: ?[]const u8,
+    confirmation_url: ?[]const u8 = null,
 
     /// Whether to process the HTTP action messages into a single request. Value can
     /// be true or false.
-    enable_batching: ?bool,
+    enable_batching: ?bool = null,
 
     /// The HTTP headers to send with the message data.
-    headers: ?[]const HttpActionHeader,
+    headers: ?[]const HttpActionHeader = null,
 
     /// The endpoint URL. If substitution templates are used in the URL, you must
     /// also specify a

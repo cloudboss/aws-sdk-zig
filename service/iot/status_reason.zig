@@ -8,7 +8,7 @@ pub const StatusReason = struct {
     /// A literal string for devices to optionally provide additional information
     /// about the
     /// reason code for a command execution status.
-    reason_description: ?[]const u8,
+    reason_description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .reason_code = "reasonCode",

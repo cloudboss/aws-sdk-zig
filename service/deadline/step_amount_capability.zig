@@ -1,16 +1,16 @@
 /// The details outlining the minimum and maximum capability of a step.
 pub const StepAmountCapability = struct {
     /// The maximum amount.
-    max: ?f64,
+    max: ?f64 = null,
 
     /// The minimum amount.
-    min: ?f64,
+    min: ?f64 = null,
 
     /// The name of the step.
     name: []const u8,
 
     /// The amount value.
-    value: ?f64,
+    value: ?f64 = null,
 
     pub const json_field_names = .{
         .max = "max",

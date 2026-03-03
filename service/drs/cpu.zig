@@ -4,7 +4,7 @@ pub const CPU = struct {
     cores: i64 = 0,
 
     /// The model name of the CPU.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cores = "cores",

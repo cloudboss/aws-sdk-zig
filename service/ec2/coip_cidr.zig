@@ -1,11 +1,11 @@
 /// Information about a customer-owned IP address range.
 pub const CoipCidr = struct {
     /// An address range in a customer-owned IP address space.
-    cidr: ?[]const u8,
+    cidr: ?[]const u8 = null,
 
     /// The ID of the address pool.
-    coip_pool_id: ?[]const u8,
+    coip_pool_id: ?[]const u8 = null,
 
     /// The ID of the local gateway route table.
-    local_gateway_route_table_id: ?[]const u8,
+    local_gateway_route_table_id: ?[]const u8 = null,
 };

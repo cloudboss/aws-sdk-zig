@@ -4,7 +4,7 @@ const LambdaIsolationMode = @import("lambda_isolation_mode.zig").LambdaIsolation
 /// Contains parameters for a Linux process that contains an Lambda function.
 pub const LambdaLinuxProcessParams = struct {
     /// The parameters for the container in which the Lambda function runs.
-    container_params: ?LambdaContainerParams,
+    container_params: ?LambdaContainerParams = null,
 
     /// The isolation mode for the process that contains the Lambda function. The
     /// process can run
@@ -13,7 +13,7 @@ pub const LambdaLinuxProcessParams = struct {
     /// any container.
     ///
     /// Default: `GreengrassContainer`
-    isolation_mode: ?LambdaIsolationMode,
+    isolation_mode: ?LambdaIsolationMode = null,
 
     pub const json_field_names = .{
         .container_params = "containerParams",

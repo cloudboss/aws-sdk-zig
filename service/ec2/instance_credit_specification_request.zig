@@ -7,7 +7,7 @@ pub const InstanceCreditSpecificationRequest = struct {
     ///
     /// T3 instances with `host` tenancy do not support the `unlimited`
     /// CPU credit option.
-    cpu_credits: ?[]const u8,
+    cpu_credits: ?[]const u8 = null,
 
     /// The ID of the instance.
     instance_id: []const u8,

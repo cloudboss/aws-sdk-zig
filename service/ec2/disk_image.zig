@@ -4,11 +4,11 @@ const VolumeDetail = @import("volume_detail.zig").VolumeDetail;
 /// Describes a disk image.
 pub const DiskImage = struct {
     /// A description of the disk image.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about the disk image.
-    image: ?DiskImageDetail,
+    image: ?DiskImageDetail = null,
 
     /// Information about the volume.
-    volume: ?VolumeDetail,
+    volume: ?VolumeDetail = null,
 };

@@ -11,7 +11,7 @@ pub const LogConfigurationType = struct {
     /// The CloudWatch log group destination of user pool detailed activity logs, or
     /// of user
     /// activity log export with threat protection.
-    cloud_watch_logs_configuration: ?CloudWatchLogsConfigurationType,
+    cloud_watch_logs_configuration: ?CloudWatchLogsConfigurationType = null,
 
     /// The source of events that your user pool sends for logging. To send
     /// error-level logs
@@ -26,7 +26,7 @@ pub const LogConfigurationType = struct {
     /// To activate this setting, your user pool must be on the [
     /// Plus
     /// tier](https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html).
-    firehose_configuration: ?FirehoseConfigurationType,
+    firehose_configuration: ?FirehoseConfigurationType = null,
 
     /// The `errorlevel` selection of logs that a user pool sends for detailed
     /// activity logging. To send `userNotification` activity with [information
@@ -44,7 +44,7 @@ pub const LogConfigurationType = struct {
     /// To activate this setting, your user pool must be on the [
     /// Plus
     /// tier](https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html).
-    s3_configuration: ?S3ConfigurationType,
+    s3_configuration: ?S3ConfigurationType = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs_configuration = "CloudWatchLogsConfiguration",

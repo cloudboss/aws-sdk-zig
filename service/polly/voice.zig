@@ -12,29 +12,29 @@ pub const Voice = struct {
     /// because it was first used for that language. Since Aditi is bilingual and
     /// fluent in both Indian English and Hindi, this parameter would show the
     /// code `hi-IN`.
-    additional_language_codes: ?[]const LanguageCode,
+    additional_language_codes: ?[]const LanguageCode = null,
 
     /// Gender of the voice.
-    gender: ?Gender,
+    gender: ?Gender = null,
 
     /// Amazon Polly assigned voice ID. This is the ID that you specify when
     /// calling the `SynthesizeSpeech` operation.
-    id: ?VoiceId,
+    id: ?VoiceId = null,
 
     /// Language code of the voice.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// Human readable name of the language in English.
-    language_name: ?[]const u8,
+    language_name: ?[]const u8 = null,
 
     /// Name of the voice (for example, Salli, Kendra, etc.). This provides
     /// a human readable voice name that you might display in your
     /// application.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Specifies which engines (`standard`, `neural`,
     /// `long-form` or `generative`) are supported by a given voice.
-    supported_engines: ?[]const Engine,
+    supported_engines: ?[]const Engine = null,
 
     pub const json_field_names = .{
         .additional_language_codes = "AdditionalLanguageCodes",

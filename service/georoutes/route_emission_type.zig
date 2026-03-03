@@ -3,7 +3,7 @@
 /// **Valid values**: `Euro1, Euro2, Euro3, Euro4, Euro5, Euro6, EuroEev`
 pub const RouteEmissionType = struct {
     /// The CO 2 emission classes.
-    co_2_emission_class: ?[]const u8,
+    co_2_emission_class: ?[]const u8 = null,
 
     /// Type of the emission.
     ///

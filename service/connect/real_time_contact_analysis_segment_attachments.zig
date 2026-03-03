@@ -8,7 +8,7 @@ pub const RealTimeContactAnalysisSegmentAttachments = struct {
     attachments: []const RealTimeContactAnalysisAttachment,
 
     /// The display name of the participant. Can be redacted.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The identifier of the segment.
     id: []const u8,

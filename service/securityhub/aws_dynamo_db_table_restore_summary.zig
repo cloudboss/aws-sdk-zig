@@ -5,16 +5,16 @@ pub const AwsDynamoDbTableRestoreSummary = struct {
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    restore_date_time: ?[]const u8,
+    restore_date_time: ?[]const u8 = null,
 
     /// Whether a restore is currently in progress.
-    restore_in_progress: ?bool,
+    restore_in_progress: ?bool = null,
 
     /// The ARN of the source backup from which the table was restored.
-    source_backup_arn: ?[]const u8,
+    source_backup_arn: ?[]const u8 = null,
 
     /// The ARN of the source table for the backup.
-    source_table_arn: ?[]const u8,
+    source_table_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .restore_date_time = "RestoreDateTime",

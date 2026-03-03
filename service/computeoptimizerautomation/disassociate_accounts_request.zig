@@ -3,7 +3,7 @@ pub const DisassociateAccountsRequest = struct {
     account_ids: []const []const u8,
 
     /// A unique identifier to ensure idempotency of the request.
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_ids = "accountIds",

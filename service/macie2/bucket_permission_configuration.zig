@@ -5,10 +5,10 @@ const BucketLevelPermissions = @import("bucket_level_permissions.zig").BucketLev
 /// settings for an S3 bucket.
 pub const BucketPermissionConfiguration = struct {
     /// The account-level permissions settings that apply to the bucket.
-    account_level_permissions: ?AccountLevelPermissions,
+    account_level_permissions: ?AccountLevelPermissions = null,
 
     /// The bucket-level permissions settings for the bucket.
-    bucket_level_permissions: ?BucketLevelPermissions,
+    bucket_level_permissions: ?BucketLevelPermissions = null,
 
     pub const json_field_names = .{
         .account_level_permissions = "accountLevelPermissions",

@@ -4,30 +4,30 @@ const DetectorModelVersionStatus = @import("detector_model_version_status.zig").
 /// Information about the detector model version.
 pub const DetectorModelVersionSummary = struct {
     /// The time the detector model version was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The ARN of the detector model version.
-    detector_model_arn: ?[]const u8,
+    detector_model_arn: ?[]const u8 = null,
 
     /// The name of the detector model.
-    detector_model_name: ?[]const u8,
+    detector_model_name: ?[]const u8 = null,
 
     /// The ID of the detector model version.
-    detector_model_version: ?[]const u8,
+    detector_model_version: ?[]const u8 = null,
 
     /// Information about the order in which events are evaluated and how actions
     /// are executed.
-    evaluation_method: ?EvaluationMethod,
+    evaluation_method: ?EvaluationMethod = null,
 
     /// The last time the detector model version was updated.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The ARN of the role that grants the detector model permission to perform its
     /// tasks.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The status of the detector model version.
-    status: ?DetectorModelVersionStatus,
+    status: ?DetectorModelVersionStatus = null,
 
     pub const json_field_names = .{
         .creation_time = "creationTime",

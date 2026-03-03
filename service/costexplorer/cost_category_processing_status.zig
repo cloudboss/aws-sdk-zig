@@ -6,10 +6,10 @@ const CostCategoryStatus = @import("cost_category_status.zig").CostCategoryStatu
 /// category.
 pub const CostCategoryProcessingStatus = struct {
     /// The Cost Management product name of the applied status.
-    component: ?CostCategoryStatusComponent,
+    component: ?CostCategoryStatusComponent = null,
 
     /// The process status for a specific cost category.
-    status: ?CostCategoryStatus,
+    status: ?CostCategoryStatus = null,
 
     pub const json_field_names = .{
         .component = "Component",

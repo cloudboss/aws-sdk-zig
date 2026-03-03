@@ -50,7 +50,7 @@ pub const User = struct {
     /// This value is returned only in the
     /// [GetUser](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUser.html) and [ListUsers](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListUsers.html)
     /// operations.
-    password_last_used: ?i64,
+    password_last_used: ?i64 = null,
 
     /// The path to the user. For more information about paths, see [IAM
     /// identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
@@ -63,14 +63,14 @@ pub const User = struct {
     /// boundaries for IAM
     /// identities
     /// ](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM User Guide*.
-    permissions_boundary: ?AttachedPermissionsBoundary,
+    permissions_boundary: ?AttachedPermissionsBoundary = null,
 
     /// A list of tags that are associated with the user. For more information about
     /// tagging, see [Tagging IAM
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The stable and unique string identifying the user. For more information
     /// about IDs, see

@@ -2,10 +2,10 @@
 /// model.
 pub const AssetModelCompositeModelPathSegment = struct {
     /// The ID of the path segment.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the path segment.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",

@@ -6,13 +6,13 @@ pub const APIErrorType = struct {
     /// `ResourceNotFoundException`,`InvalidParameterException`,
     /// `InvalidRequestException`, `DecryptionFailure`, or
     /// `AccessDeniedException`.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// A message describing the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The ARN or name of the secret.
-    secret_id: ?[]const u8,
+    secret_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

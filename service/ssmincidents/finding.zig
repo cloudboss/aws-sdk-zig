@@ -9,7 +9,7 @@ pub const Finding = struct {
     creation_time: i64,
 
     /// Details about the finding.
-    details: ?FindingDetails,
+    details: ?FindingDetails = null,
 
     /// The ID assigned to the finding.
     id: []const u8,

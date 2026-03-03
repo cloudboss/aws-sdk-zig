@@ -6,7 +6,7 @@ pub const BedrockRerankingConfiguration = struct {
     model_configuration: BedrockRerankingModelConfiguration,
 
     /// The number of results to return after reranking.
-    number_of_results: ?i32,
+    number_of_results: ?i32 = null,
 
     pub const json_field_names = .{
         .model_configuration = "modelConfiguration",

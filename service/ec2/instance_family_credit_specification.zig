@@ -7,8 +7,8 @@ pub const InstanceFamilyCreditSpecification = struct {
     /// The default credit option for CPU usage of the instance family. Valid values
     /// are
     /// `standard` and `unlimited`.
-    cpu_credits: ?[]const u8,
+    cpu_credits: ?[]const u8 = null,
 
     /// The instance family.
-    instance_family: ?UnlimitedSupportedInstanceFamily,
+    instance_family: ?UnlimitedSupportedInstanceFamily = null,
 };

@@ -3,73 +3,73 @@ const aws = @import("aws");
 /// A duplicate customer profile that is to be merged into a main profile.
 pub const FieldSourceProfileIds = struct {
     /// A unique identifier for the account number field to be merged.
-    account_number: ?[]const u8,
+    account_number: ?[]const u8 = null,
 
     /// A unique identifier for the additional information field to be merged.
-    additional_information: ?[]const u8,
+    additional_information: ?[]const u8 = null,
 
     /// A unique identifier for the party type field to be merged.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// A unique identifier for the attributes field to be merged.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// A unique identifier for the billing type field to be merged.
-    billing_address: ?[]const u8,
+    billing_address: ?[]const u8 = null,
 
     /// A unique identifier for the birthdate field to be merged.
-    birth_date: ?[]const u8,
+    birth_date: ?[]const u8 = null,
 
     /// A unique identifier for the party type field to be merged.
-    business_email_address: ?[]const u8,
+    business_email_address: ?[]const u8 = null,
 
     /// A unique identifier for the business name field to be merged.
-    business_name: ?[]const u8,
+    business_name: ?[]const u8 = null,
 
     /// A unique identifier for the business phone number field to be merged.
-    business_phone_number: ?[]const u8,
+    business_phone_number: ?[]const u8 = null,
 
     /// A unique identifier for the email address field to be merged.
-    email_address: ?[]const u8,
+    email_address: ?[]const u8 = null,
 
     /// A unique identifier for the engagement preferences field to be merged.
-    engagement_preferences: ?[]const u8,
+    engagement_preferences: ?[]const u8 = null,
 
     /// A unique identifier for the first name field to be merged.
-    first_name: ?[]const u8,
+    first_name: ?[]const u8 = null,
 
     /// A unique identifier for the gender field to be merged.
-    gender: ?[]const u8,
+    gender: ?[]const u8 = null,
 
     /// A unique identifier for the home phone number field to be merged.
-    home_phone_number: ?[]const u8,
+    home_phone_number: ?[]const u8 = null,
 
     /// A unique identifier for the last name field to be merged.
-    last_name: ?[]const u8,
+    last_name: ?[]const u8 = null,
 
     /// A unique identifier for the mailing address field to be merged.
-    mailing_address: ?[]const u8,
+    mailing_address: ?[]const u8 = null,
 
     /// A unique identifier for the middle name field to be merged.
-    middle_name: ?[]const u8,
+    middle_name: ?[]const u8 = null,
 
     /// A unique identifier for the mobile phone number field to be merged.
-    mobile_phone_number: ?[]const u8,
+    mobile_phone_number: ?[]const u8 = null,
 
     /// A unique identifier for the party type field to be merged.
-    party_type: ?[]const u8,
+    party_type: ?[]const u8 = null,
 
     /// A unique identifier for the personal email address field to be merged.
-    personal_email_address: ?[]const u8,
+    personal_email_address: ?[]const u8 = null,
 
     /// A unique identifier for the phone number field to be merged.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     /// A unique identifier for the profile type field to be merged.
-    profile_type: ?[]const u8,
+    profile_type: ?[]const u8 = null,
 
     /// A unique identifier for the shipping address field to be merged.
-    shipping_address: ?[]const u8,
+    shipping_address: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_number = "AccountNumber",

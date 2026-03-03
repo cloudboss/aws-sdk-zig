@@ -14,14 +14,14 @@ pub const TrainingResultV2 = struct {
     /// number of times an user has logged in using the same IP address.
     /// In this case, event variables used to derive the aggregated variables are
     /// `IP address` and `user`.
-    aggregated_variables_importance_metrics: ?AggregatedVariablesImportanceMetrics,
+    aggregated_variables_importance_metrics: ?AggregatedVariablesImportanceMetrics = null,
 
-    data_validation_metrics: ?DataValidationMetrics,
+    data_validation_metrics: ?DataValidationMetrics = null,
 
     /// The training metric details.
-    training_metrics_v2: ?TrainingMetricsV2,
+    training_metrics_v2: ?TrainingMetricsV2 = null,
 
-    variable_importance_metrics: ?VariableImportanceMetrics,
+    variable_importance_metrics: ?VariableImportanceMetrics = null,
 
     pub const json_field_names = .{
         .aggregated_variables_importance_metrics = "aggregatedVariablesImportanceMetrics",

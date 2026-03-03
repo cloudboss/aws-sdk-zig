@@ -14,24 +14,24 @@ pub const VpcPeeringConnection = struct {
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
     /// associated with the GameLift fleet resource for this connection.
-    fleet_arn: ?[]const u8,
+    fleet_arn: ?[]const u8 = null,
 
     /// A unique identifier for the fleet. This ID determines the ID of the Amazon
     /// GameLift Servers VPC for your fleet.
-    fleet_id: ?[]const u8,
+    fleet_id: ?[]const u8 = null,
 
     /// A unique identifier for the VPC that contains the Amazon GameLift Servers
     /// fleet for this connection.
     /// This VPC is managed by Amazon GameLift Servers and does not appear in your
     /// Amazon Web Services account.
-    game_lift_vpc_id: ?[]const u8,
+    game_lift_vpc_id: ?[]const u8 = null,
 
     /// CIDR block of IPv4 addresses assigned to the VPC peering connection for the
     /// GameLift
     /// VPC. The peered VPC also has an IPv4 CIDR block associated with it; these
     /// blocks cannot
     /// overlap or the peering connection cannot be created.
-    ip_v4_cidr_block: ?[]const u8,
+    ip_v4_cidr_block: ?[]const u8 = null,
 
     /// A unique identifier for a VPC with resources to be accessed by your Amazon
     /// GameLift Servers fleet. The
@@ -40,18 +40,18 @@ pub const VpcPeeringConnection = struct {
     /// Services Management Console.
     /// Learn more about VPC peering in [VPC Peering with Amazon GameLift Servers
     /// Fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
-    peer_vpc_id: ?[]const u8,
+    peer_vpc_id: ?[]const u8 = null,
 
     /// The status information about the connection. Status indicates if a
     /// connection is
     /// pending, successful, or failed.
-    status: ?VpcPeeringConnectionStatus,
+    status: ?VpcPeeringConnectionStatus = null,
 
     /// A unique identifier that is automatically assigned to the connection record.
     /// This ID
     /// is referenced in VPC peering connection events, and is used when deleting a
     /// connection.
-    vpc_peering_connection_id: ?[]const u8,
+    vpc_peering_connection_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .fleet_arn = "FleetArn",

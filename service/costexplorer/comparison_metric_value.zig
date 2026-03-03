@@ -5,17 +5,17 @@
 /// unit of measurement.
 pub const ComparisonMetricValue = struct {
     /// The numeric value for the baseline time period measurement.
-    baseline_time_period_amount: ?[]const u8,
+    baseline_time_period_amount: ?[]const u8 = null,
 
     /// The numeric value for the comparison time period measurement.
-    comparison_time_period_amount: ?[]const u8,
+    comparison_time_period_amount: ?[]const u8 = null,
 
     /// The calculated difference between `ComparisonTimePeriodAmount` and
     /// `BaselineTimePeriodAmount`.
-    difference: ?[]const u8,
+    difference: ?[]const u8 = null,
 
     /// The unit of measurement applicable to all numeric values in this comparison.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .baseline_time_period_amount = "BaselineTimePeriodAmount",

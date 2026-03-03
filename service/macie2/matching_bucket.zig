@@ -18,22 +18,22 @@ const ObjectLevelStatistics = @import("object_level_statistics.zig").ObjectLevel
 pub const MatchingBucket = struct {
     /// The unique identifier for the Amazon Web Services account that owns the
     /// bucket.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Specifies whether automated sensitive data discovery is currently configured
     /// to analyze objects in the bucket. Possible values are: MONITORED, the bucket
     /// is included in analyses; and, NOT_MONITORED, the bucket is excluded from
     /// analyses. If automated sensitive data discovery is disabled for your
     /// account, this value is NOT_MONITORED.
-    automated_discovery_monitoring_status: ?AutomatedDiscoveryMonitoringStatus,
+    automated_discovery_monitoring_status: ?AutomatedDiscoveryMonitoringStatus = null,
 
     /// The name of the bucket.
-    bucket_name: ?[]const u8,
+    bucket_name: ?[]const u8 = null,
 
     /// The total number of objects that Amazon Macie can analyze in the bucket.
     /// These objects use a supported storage class and have a file name extension
     /// for a supported file or storage format.
-    classifiable_object_count: ?i64,
+    classifiable_object_count: ?i64 = null,
 
     /// The total storage size, in bytes, of the objects that Amazon Macie can
     /// analyze in the bucket. These objects use a supported storage class and have
@@ -43,7 +43,7 @@ pub const MatchingBucket = struct {
     /// on the size of the latest version of each applicable object in the bucket.
     /// This value doesn't reflect the storage size of all versions of each
     /// applicable object in the bucket.
-    classifiable_size_in_bytes: ?i64,
+    classifiable_size_in_bytes: ?i64 = null,
 
     /// The code for an error or issue that prevented Amazon Macie from retrieving
     /// and processing information about the bucket and the bucket's objects.
@@ -58,32 +58,32 @@ pub const MatchingBucket = struct {
     ///
     /// If this value is null, Macie was able to retrieve and process the
     /// information.
-    error_code: ?BucketMetadataErrorCode,
+    error_code: ?BucketMetadataErrorCode = null,
 
     /// A brief description of the error or issue (errorCode) that prevented Amazon
     /// Macie from retrieving and processing information about the bucket and the
     /// bucket's objects. This value is null if Macie was able to retrieve and
     /// process the information.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// Specifies whether any one-time or recurring classification jobs are
     /// configured to analyze objects in the bucket, and, if so, the details of the
     /// job that ran most recently.
-    job_details: ?JobDetails,
+    job_details: ?JobDetails = null,
 
     /// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie
     /// most recently analyzed objects in the bucket while performing automated
     /// sensitive data discovery. This value is null if this analysis hasn't
     /// occurred.
-    last_automated_discovery_time: ?i64,
+    last_automated_discovery_time: ?i64 = null,
 
     /// The total number of objects in the bucket.
-    object_count: ?i64,
+    object_count: ?i64 = null,
 
     /// The total number of objects in the bucket, grouped by server-side encryption
     /// type. This includes a grouping that reports the total number of objects that
     /// aren't encrypted or use client-side encryption.
-    object_count_by_encryption_type: ?ObjectCountByEncryptionType,
+    object_count_by_encryption_type: ?ObjectCountByEncryptionType = null,
 
     /// The sensitivity score for the bucket, ranging from -1 (classification error)
     /// to 100 (sensitive).
@@ -92,7 +92,7 @@ pub const MatchingBucket = struct {
     /// account or it's been disabled for your organization or standalone account
     /// for more than 30 days, possible values are: 1, the bucket is empty; or, 50,
     /// the bucket stores objects but it's been excluded from recent analyses.
-    sensitivity_score: ?i32,
+    sensitivity_score: ?i32 = null,
 
     /// The total storage size, in bytes, of the bucket.
     ///
@@ -100,7 +100,7 @@ pub const MatchingBucket = struct {
     /// based on the size of the latest version of each object in the bucket. This
     /// value doesn't reflect the storage size of all versions of each object in the
     /// bucket.
-    size_in_bytes: ?i64,
+    size_in_bytes: ?i64 = null,
 
     /// The total storage size, in bytes, of the objects that are compressed (.gz,
     /// .gzip, .zip) files in the bucket.
@@ -109,17 +109,17 @@ pub const MatchingBucket = struct {
     /// based on the size of the latest version of each applicable object in the
     /// bucket. This value doesn't reflect the storage size of all versions of each
     /// applicable object in the bucket.
-    size_in_bytes_compressed: ?i64,
+    size_in_bytes_compressed: ?i64 = null,
 
     /// The total number of objects that Amazon Macie can't analyze in the bucket.
     /// These objects don't use a supported storage class or don't have a file name
     /// extension for a supported file or storage format.
-    unclassifiable_object_count: ?ObjectLevelStatistics,
+    unclassifiable_object_count: ?ObjectLevelStatistics = null,
 
     /// The total storage size, in bytes, of the objects that Amazon Macie can't
     /// analyze in the bucket. These objects don't use a supported storage class or
     /// don't have a file name extension for a supported file or storage format.
-    unclassifiable_object_size_in_bytes: ?ObjectLevelStatistics,
+    unclassifiable_object_size_in_bytes: ?ObjectLevelStatistics = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

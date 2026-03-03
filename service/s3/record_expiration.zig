@@ -9,7 +9,7 @@ pub const RecordExpiration = struct {
     /// of 7 days. To set
     /// this value, specify any whole number from `7` to `2147483647`. For example,
     /// to retain your journal table records for one year, set this value to `365`.
-    days: ?i32,
+    days: ?i32 = null,
 
     /// Specifies whether journal table record expiration is enabled or disabled.
     expiration: ExpirationState,

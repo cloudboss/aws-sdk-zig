@@ -28,86 +28,86 @@ pub const M2tsSettings = struct {
     /// output audio configuration to dynamically change based on input
     /// configuration. If this is set to encodeSilence, all output audio streams
     /// will output encoded silence when not connected to an active input stream.
-    absent_input_audio_behavior: ?M2tsAbsentInputAudioBehavior,
+    absent_input_audio_behavior: ?M2tsAbsentInputAudioBehavior = null,
 
     /// When set to enabled, uses ARIB-compliant field muxing and removes video
     /// descriptor.
-    arib: ?M2tsArib,
+    arib: ?M2tsArib = null,
 
     /// Packet Identifier (PID) for ARIB Captions in the transport stream. Can be
     /// entered as a decimal or hexadecimal value. Valid values are 32 (or
     /// 0x20)..8182 (or 0x1ff6).
-    arib_captions_pid: ?[]const u8,
+    arib_captions_pid: ?[]const u8 = null,
 
     /// If set to auto, pid number used for ARIB Captions will be auto-selected from
     /// unused pids. If set to useConfigured, ARIB Captions will be on the
     /// configured pid number.
-    arib_captions_pid_control: ?M2tsAribCaptionsPidControl,
+    arib_captions_pid_control: ?M2tsAribCaptionsPidControl = null,
 
     /// When set to dvb, uses DVB buffer model for Dolby Digital audio. When set to
     /// atsc, the ATSC model is used.
-    audio_buffer_model: ?M2tsAudioBufferModel,
+    audio_buffer_model: ?M2tsAudioBufferModel = null,
 
     /// The number of audio frames to insert for each PES packet.
-    audio_frames_per_pes: ?i32,
+    audio_frames_per_pes: ?i32 = null,
 
     /// Packet Identifier (PID) of the elementary audio stream(s) in the transport
     /// stream. Multiple values are accepted, and can be entered in ranges and/or by
     /// comma separation. Can be entered as decimal or hexadecimal values. Each PID
     /// specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).
-    audio_pids: ?[]const u8,
+    audio_pids: ?[]const u8 = null,
 
     /// When set to atsc, uses stream type = 0x81 for AC3 and stream type = 0x87 for
     /// EAC3. When set to dvb, uses stream type = 0x06.
-    audio_stream_type: ?M2tsAudioStreamType,
+    audio_stream_type: ?M2tsAudioStreamType = null,
 
     /// The output bitrate of the transport stream in bits per second. Setting to 0
     /// lets the muxer automatically determine the appropriate bitrate.
-    bitrate: ?i32,
+    bitrate: ?i32 = null,
 
     /// Controls the timing accuracy for output network traffic. Leave as MULTIPLEX
     /// to ensure accurate network packet timing. Or set to NONE, which might result
     /// in lower latency but will result in more variability in output network
     /// packet timing. This variability might cause interruptions, jitter, or bursty
     /// behavior in your playback or receiving devices.
-    buffer_model: ?M2tsBufferModel,
+    buffer_model: ?M2tsBufferModel = null,
 
     /// When set to enabled, generates captionServiceDescriptor in PMT.
-    cc_descriptor: ?M2tsCcDescriptor,
+    cc_descriptor: ?M2tsCcDescriptor = null,
 
     /// Inserts DVB Network Information Table (NIT) at the specified table
     /// repetition interval.
-    dvb_nit_settings: ?DvbNitSettings,
+    dvb_nit_settings: ?DvbNitSettings = null,
 
     /// Inserts DVB Service Description Table (SDT) at the specified table
     /// repetition interval.
-    dvb_sdt_settings: ?DvbSdtSettings,
+    dvb_sdt_settings: ?DvbSdtSettings = null,
 
     /// Packet Identifier (PID) for input source DVB Subtitle data to this output.
     /// Multiple values are accepted, and can be entered in ranges and/or by comma
     /// separation. Can be entered as decimal or hexadecimal values. Each PID
     /// specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).
-    dvb_sub_pids: ?[]const u8,
+    dvb_sub_pids: ?[]const u8 = null,
 
     /// Inserts DVB Time and Date Table (TDT) at the specified table repetition
     /// interval.
-    dvb_tdt_settings: ?DvbTdtSettings,
+    dvb_tdt_settings: ?DvbTdtSettings = null,
 
     /// Packet Identifier (PID) for input source DVB Teletext data to this output.
     /// Can be entered as a decimal or hexadecimal value. Valid values are 32 (or
     /// 0x20)..8182 (or 0x1ff6).
-    dvb_teletext_pid: ?[]const u8,
+    dvb_teletext_pid: ?[]const u8 = null,
 
     /// If set to passthrough, passes any EBIF data from the input source to this
     /// output.
-    ebif: ?M2tsEbifControl,
+    ebif: ?M2tsEbifControl = null,
 
     /// When videoAndFixedIntervals is selected, audio EBP markers will be added to
     /// partitions 3 and 4. The interval between these additional markers will be
     /// fixed, and will be slightly shorter than the video EBP marker interval. Only
     /// available when EBP Cablelabs segmentation markers are selected. Partitions 1
     /// and 2 will always follow the video interval.
-    ebp_audio_interval: ?M2tsAudioInterval,
+    ebp_audio_interval: ?M2tsAudioInterval = null,
 
     /// When set, enforces that Encoder Boundary Points do not come within the
     /// specified time interval of each other by looking ahead at input video. If
@@ -116,102 +116,102 @@ pub const M2tsSettings = struct {
     /// marker. The lookahead value does not add latency to the system. The Live
     /// Event must be configured elsewhere to create sufficient latency to make the
     /// lookahead accurate.
-    ebp_lookahead_ms: ?i32,
+    ebp_lookahead_ms: ?i32 = null,
 
     /// Controls placement of EBP on Audio PIDs. If set to videoAndAudioPids, EBP
     /// markers will be placed on the video PID and all audio PIDs. If set to
     /// videoPid, EBP markers will be placed on only the video PID.
-    ebp_placement: ?M2tsEbpPlacement,
+    ebp_placement: ?M2tsEbpPlacement = null,
 
     /// This field is unused and deprecated.
-    ecm_pid: ?[]const u8,
+    ecm_pid: ?[]const u8 = null,
 
     /// Include or exclude the ES Rate field in the PES header.
-    es_rate_in_pes: ?M2tsEsRateInPes,
+    es_rate_in_pes: ?M2tsEsRateInPes = null,
 
     /// Packet Identifier (PID) for input source ETV Platform data to this output.
     /// Can be entered as a decimal or hexadecimal value. Valid values are 32 (or
     /// 0x20)..8182 (or 0x1ff6).
-    etv_platform_pid: ?[]const u8,
+    etv_platform_pid: ?[]const u8 = null,
 
     /// Packet Identifier (PID) for input source ETV Signal data to this output. Can
     /// be entered as a decimal or hexadecimal value. Valid values are 32 (or
     /// 0x20)..8182 (or 0x1ff6).
-    etv_signal_pid: ?[]const u8,
+    etv_signal_pid: ?[]const u8 = null,
 
     /// The length in seconds of each fragment. Only used with EBP markers.
-    fragment_time: ?f64,
+    fragment_time: ?f64 = null,
 
     /// If set to passthrough, passes any KLV data from the input source to this
     /// output.
-    klv: ?M2tsKlv,
+    klv: ?M2tsKlv = null,
 
     /// Packet Identifier (PID) for input source KLV data to this output. Multiple
     /// values are accepted, and can be entered in ranges and/or by comma
     /// separation. Can be entered as decimal or hexadecimal values. Each PID
     /// specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).
-    klv_data_pids: ?[]const u8,
+    klv_data_pids: ?[]const u8 = null,
 
     /// If set to passthrough, Nielsen inaudible tones for media tracking will be
     /// detected in the input audio and an equivalent ID3 tag will be inserted in
     /// the output.
-    nielsen_id_3_behavior: ?M2tsNielsenId3Behavior,
+    nielsen_id_3_behavior: ?M2tsNielsenId3Behavior = null,
 
     /// Value in bits per second of extra null packets to insert into the transport
     /// stream. This can be used if a downstream encryption system requires periodic
     /// null packets.
-    null_packet_bitrate: ?f64,
+    null_packet_bitrate: ?f64 = null,
 
     /// The number of milliseconds between instances of this table in the output
     /// transport stream. Valid values are 0, 10..1000.
-    pat_interval: ?i32,
+    pat_interval: ?i32 = null,
 
     /// When set to pcrEveryPesPacket, a Program Clock Reference value is inserted
     /// for every Packetized Elementary Stream (PES) header. This parameter is
     /// effective only when the PCR PID is the same as the video or audio elementary
     /// stream.
-    pcr_control: ?M2tsPcrControl,
+    pcr_control: ?M2tsPcrControl = null,
 
     /// Maximum time in milliseconds between Program Clock Reference (PCRs) inserted
     /// into the transport stream.
-    pcr_period: ?i32,
+    pcr_period: ?i32 = null,
 
     /// Packet Identifier (PID) of the Program Clock Reference (PCR) in the
     /// transport stream. When no value is given, the encoder will assign the same
     /// value as the Video PID. Can be entered as a decimal or hexadecimal value.
     /// Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
-    pcr_pid: ?[]const u8,
+    pcr_pid: ?[]const u8 = null,
 
     /// The number of milliseconds between instances of this table in the output
     /// transport stream. Valid values are 0, 10..1000.
-    pmt_interval: ?i32,
+    pmt_interval: ?i32 = null,
 
     /// Packet Identifier (PID) for the Program Map Table (PMT) in the transport
     /// stream. Can be entered as a decimal or hexadecimal value. Valid values are
     /// 32 (or 0x20)..8182 (or 0x1ff6).
-    pmt_pid: ?[]const u8,
+    pmt_pid: ?[]const u8 = null,
 
     /// The value of the program number field in the Program Map Table.
-    program_num: ?i32,
+    program_num: ?i32 = null,
 
     /// When vbr, does not insert null packets into transport stream to fill
     /// specified bitrate. The bitrate setting acts as the maximum bitrate when vbr
     /// is set.
-    rate_mode: ?M2tsRateMode,
+    rate_mode: ?M2tsRateMode = null,
 
     /// Packet Identifier (PID) for input source SCTE-27 data to this output.
     /// Multiple values are accepted, and can be entered in ranges and/or by comma
     /// separation. Can be entered as decimal or hexadecimal values. Each PID
     /// specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).
-    scte_27_pids: ?[]const u8,
+    scte_27_pids: ?[]const u8 = null,
 
     /// Optionally pass SCTE-35 signals from the input source to this output.
-    scte_35_control: ?M2tsScte35Control,
+    scte_35_control: ?M2tsScte35Control = null,
 
     /// Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can
     /// be entered as a decimal or hexadecimal value. Valid values are 32 (or
     /// 0x20)..8182 (or 0x1ff6).
-    scte_35_pid: ?[]const u8,
+    scte_35_pid: ?[]const u8 = null,
 
     /// Defines the amount SCTE-35 preroll will be increased (in milliseconds) on
     /// the output. Preroll is the amount of time between the presence of a SCTE-35
@@ -220,7 +220,7 @@ pub const M2tsSettings = struct {
     /// zero). Negative pullup is not supported, which means that you can't make the
     /// preroll shorter. Be aware that latency in the output will increase by the
     /// pullup amount.
-    scte_35_preroll_pullup_milliseconds: ?f64,
+    scte_35_preroll_pullup_milliseconds: ?f64 = null,
 
     /// Inserts segmentation markers at each segmentationTime period. raiSegstart
     /// sets the Random Access Indicator bit in the adaptation field. raiAdapt sets
@@ -229,7 +229,7 @@ pub const M2tsSettings = struct {
     /// Encoder Boundary Point information to the adaptation field as per OpenCable
     /// specification OC-SP-EBP-I01-130118. ebpLegacy adds Encoder Boundary Point
     /// information to the adaptation field using a legacy proprietary format.
-    segmentation_markers: ?M2tsSegmentationMarkers,
+    segmentation_markers: ?M2tsSegmentationMarkers = null,
 
     /// The segmentation style parameter controls how segmentation markers are
     /// inserted into the transport stream. With avails, it is possible that
@@ -246,28 +246,28 @@ pub const M2tsSettings = struct {
     /// means the subsequent segment will likely be truncated as well. However, all
     /// segments after that will have a duration of $segmentationTime seconds. Note
     /// that EBP lookahead is a slight exception to this rule.
-    segmentation_style: ?M2tsSegmentationStyle,
+    segmentation_style: ?M2tsSegmentationStyle = null,
 
     /// The length in seconds of each segment. Required unless markers is set to
     /// _none_.
-    segmentation_time: ?f64,
+    segmentation_time: ?f64 = null,
 
     /// When set to passthrough, timed metadata will be passed through from input to
     /// output.
-    timed_metadata_behavior: ?M2tsTimedMetadataBehavior,
+    timed_metadata_behavior: ?M2tsTimedMetadataBehavior = null,
 
     /// Packet Identifier (PID) of the timed metadata stream in the transport
     /// stream. Can be entered as a decimal or hexadecimal value. Valid values are
     /// 32 (or 0x20)..8182 (or 0x1ff6).
-    timed_metadata_pid: ?[]const u8,
+    timed_metadata_pid: ?[]const u8 = null,
 
     /// The value of the transport stream ID field in the Program Map Table.
-    transport_stream_id: ?i32,
+    transport_stream_id: ?i32 = null,
 
     /// Packet Identifier (PID) of the elementary video stream in the transport
     /// stream. Can be entered as a decimal or hexadecimal value. Valid values are
     /// 32 (or 0x20)..8182 (or 0x1ff6).
-    video_pid: ?[]const u8,
+    video_pid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .absent_input_audio_behavior = "AbsentInputAudioBehavior",

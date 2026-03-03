@@ -15,7 +15,7 @@ const CedarTagValue = @import("cedar_tag_value.zig").CedarTagValue;
 /// "alice_folder" } ] }`
 pub const EntityItem = struct {
     /// A list of attributes for the entity.
-    attributes: ?[]const aws.map.MapEntry(AttributeValue),
+    attributes: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// The identifier of the entity.
     identifier: EntityIdentifier,
@@ -28,10 +28,10 @@ pub const EntityItem = struct {
     /// direct parents, and parents of parents. For example, a user can be a member
     /// of 91 groups if one of those groups is a member of eight groups, for a total
     /// of 100: one entity, 91 entity parents, and eight parents of parents.
-    parents: ?[]const EntityIdentifier,
+    parents: ?[]const EntityIdentifier = null,
 
     /// A list of cedar tags for the entity.
-    tags: ?[]const aws.map.MapEntry(CedarTagValue),
+    tags: ?[]const aws.map.MapEntry(CedarTagValue) = null,
 
     pub const json_field_names = .{
         .attributes = "attributes",

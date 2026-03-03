@@ -30,7 +30,7 @@ pub const ConnectorDataTarget = struct {
     data: []const aws.map.StringMapEntry,
 
     /// The nodes that are inputs to the data target.
-    inputs: ?[]const []const u8,
+    inputs: ?[]const []const u8 = null,
 
     /// The name of this target node.
     name: []const u8,

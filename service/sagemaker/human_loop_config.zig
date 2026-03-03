@@ -16,11 +16,11 @@ pub const HumanLoopConfig = struct {
     /// Templates](https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-worker-template-console.html).
     human_task_ui_arn: []const u8,
 
-    public_workforce_task_price: ?PublicWorkforceTaskPrice,
+    public_workforce_task_price: ?PublicWorkforceTaskPrice = null,
 
     /// The length of time that a task remains available for review by human
     /// workers.
-    task_availability_lifetime_in_seconds: ?i32,
+    task_availability_lifetime_in_seconds: ?i32 = null,
 
     /// The number of distinct workers who will perform the same task on each
     /// object. For example, if `TaskCount` is set to `3` for an image
@@ -32,11 +32,11 @@ pub const HumanLoopConfig = struct {
     task_description: []const u8,
 
     /// Keywords used to describe the task so that workers can discover the task.
-    task_keywords: ?[]const []const u8,
+    task_keywords: ?[]const []const u8 = null,
 
     /// The amount of time that a worker has to complete a task. The default value
     /// is 3,600 seconds (1 hour).
-    task_time_limit_in_seconds: ?i32,
+    task_time_limit_in_seconds: ?i32 = null,
 
     /// A title for the human worker task.
     task_title: []const u8,

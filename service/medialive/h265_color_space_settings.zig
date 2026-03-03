@@ -7,17 +7,17 @@ const Rec709Settings = @import("rec_709_settings.zig").Rec709Settings;
 
 /// H265 Color Space Settings
 pub const H265ColorSpaceSettings = struct {
-    color_space_passthrough_settings: ?ColorSpacePassthroughSettings,
+    color_space_passthrough_settings: ?ColorSpacePassthroughSettings = null,
 
-    dolby_vision_81_settings: ?DolbyVision81Settings,
+    dolby_vision_81_settings: ?DolbyVision81Settings = null,
 
-    hdr_10_settings: ?Hdr10Settings,
+    hdr_10_settings: ?Hdr10Settings = null,
 
-    hlg_2020_settings: ?Hlg2020Settings,
+    hlg_2020_settings: ?Hlg2020Settings = null,
 
-    rec_601_settings: ?Rec601Settings,
+    rec_601_settings: ?Rec601Settings = null,
 
-    rec_709_settings: ?Rec709Settings,
+    rec_709_settings: ?Rec709Settings = null,
 
     pub const json_field_names = .{
         .color_space_passthrough_settings = "ColorSpacePassthroughSettings",

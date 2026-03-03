@@ -7,9 +7,9 @@ const TimeSeriesTransformations = @import("time_series_transformations.zig").Tim
 /// The collection of settings used by an AutoML job V2 for the time-series
 /// forecasting problem type.
 pub const TimeSeriesForecastingJobConfig = struct {
-    candidate_generation_config: ?CandidateGenerationConfig,
+    candidate_generation_config: ?CandidateGenerationConfig = null,
 
-    completion_criteria: ?AutoMLJobCompletionCriteria,
+    completion_criteria: ?AutoMLJobCompletionCriteria = null,
 
     /// A URL to the Amazon S3 data source containing additional selected features
     /// that complement the target, itemID, timestamp, and grouped columns set in
@@ -33,7 +33,7 @@ pub const TimeSeriesForecastingJobConfig = struct {
     /// `text`, and `datetime`.
     ///
     /// These column keys must not include any column set in `TimeSeriesConfig`.
-    feature_specification_s3_uri: ?[]const u8,
+    feature_specification_s3_uri: ?[]const u8 = null,
 
     /// The frequency of predictions in a forecast.
     ///
@@ -63,18 +63,18 @@ pub const TimeSeriesForecastingJobConfig = struct {
     /// 0.01 or higher. Up to five forecast quantiles can be specified. When
     /// `ForecastQuantiles` is not provided, the AutoML job uses the quantiles p10,
     /// p50, and p90 as default.
-    forecast_quantiles: ?[]const []const u8,
+    forecast_quantiles: ?[]const []const u8 = null,
 
     /// The collection of holiday featurization attributes used to incorporate
     /// national holiday information into your forecasting model.
-    holiday_config: ?[]const HolidayConfigAttributes,
+    holiday_config: ?[]const HolidayConfigAttributes = null,
 
     /// The collection of components that defines the time-series.
     time_series_config: TimeSeriesConfig,
 
     /// The transformations modifying specific attributes of the time-series, such
     /// as filling strategies for missing values.
-    transformations: ?TimeSeriesTransformations,
+    transformations: ?TimeSeriesTransformations = null,
 
     pub const json_field_names = .{
         .candidate_generation_config = "CandidateGenerationConfig",

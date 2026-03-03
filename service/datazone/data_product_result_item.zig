@@ -3,28 +3,28 @@ const DataProductItemAdditionalAttributes = @import("data_product_item_additiona
 /// The data product.
 pub const DataProductResultItem = struct {
     /// The additional attributes of an Amazon DataZone data product.
-    additional_attributes: ?DataProductItemAdditionalAttributes,
+    additional_attributes: ?DataProductItemAdditionalAttributes = null,
 
     /// The timestamp at which the data product was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The user who created the data product.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The description of the data product.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the domain where the data product lives.
     domain_id: []const u8,
 
     /// The timestamp at which first revision of the data product was created.
-    first_revision_created_at: ?i64,
+    first_revision_created_at: ?i64 = null,
 
     /// The user who created the first revision of the data product.
-    first_revision_created_by: ?[]const u8,
+    first_revision_created_by: ?[]const u8 = null,
 
     /// The glossary terms of the data product.
-    glossary_terms: ?[]const []const u8,
+    glossary_terms: ?[]const []const u8 = null,
 
     /// The ID of the data product.
     id: []const u8,

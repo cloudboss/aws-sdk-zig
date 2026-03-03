@@ -5,40 +5,40 @@ const ServiceNetworkVpcAssociationStatus = @import("service_network_vpc_associat
 /// VPC.
 pub const ServiceNetworkVpcAssociationSummary = struct {
     /// The Amazon Resource Name (ARN) of the association.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the association was created, in ISO-8601 format.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The account that created the association.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The DNS options for the service network VPC association.
-    dns_options: ?DnsOptions,
+    dns_options: ?DnsOptions = null,
 
     /// The ID of the association.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The date and time that the association was last updated, in ISO-8601 format.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// Indicates if private DNS is enabled for the service network VPC association.
-    private_dns_enabled: ?bool,
+    private_dns_enabled: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the service network.
-    service_network_arn: ?[]const u8,
+    service_network_arn: ?[]const u8 = null,
 
     /// The ID of the service network.
-    service_network_id: ?[]const u8,
+    service_network_id: ?[]const u8 = null,
 
     /// The name of the service network.
-    service_network_name: ?[]const u8,
+    service_network_name: ?[]const u8 = null,
 
     /// The status.
-    status: ?ServiceNetworkVpcAssociationStatus,
+    status: ?ServiceNetworkVpcAssociationStatus = null,
 
     /// The ID of the VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

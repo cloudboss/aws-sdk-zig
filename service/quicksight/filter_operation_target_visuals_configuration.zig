@@ -7,7 +7,7 @@ const SameSheetTargetVisualConfiguration = @import("same_sheet_target_visual_con
 pub const FilterOperationTargetVisualsConfiguration = struct {
     /// The configuration of the same-sheet target visuals that you want to be
     /// filtered.
-    same_sheet_target_visual_configuration: ?SameSheetTargetVisualConfiguration,
+    same_sheet_target_visual_configuration: ?SameSheetTargetVisualConfiguration = null,
 
     pub const json_field_names = .{
         .same_sheet_target_visual_configuration = "SameSheetTargetVisualConfiguration",

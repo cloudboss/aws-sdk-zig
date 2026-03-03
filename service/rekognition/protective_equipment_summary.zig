@@ -24,16 +24,16 @@
 pub const ProtectiveEquipmentSummary = struct {
     /// An array of IDs for persons where it was not possible to determine if they
     /// are wearing personal protective equipment.
-    persons_indeterminate: ?[]const i32,
+    persons_indeterminate: ?[]const i32 = null,
 
     /// An array of IDs for persons who are not wearing all of the types of PPE
     /// specified in the `RequiredEquipmentTypes` field of
     /// the detected personal protective equipment.
-    persons_without_required_equipment: ?[]const i32,
+    persons_without_required_equipment: ?[]const i32 = null,
 
     /// An array of IDs for persons who are wearing detected personal protective
     /// equipment.
-    persons_with_required_equipment: ?[]const i32,
+    persons_with_required_equipment: ?[]const i32 = null,
 
     pub const json_field_names = .{
         .persons_indeterminate = "PersonsIndeterminate",

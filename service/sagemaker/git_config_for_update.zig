@@ -7,7 +7,7 @@ pub const GitConfigForUpdate = struct {
     /// following format:
     ///
     /// `{"username": *UserName*, "password": *Password*}`
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .secret_arn = "SecretArn",

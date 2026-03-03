@@ -6,22 +6,22 @@ const TagValues = @import("tag_values.zig").TagValues;
 /// `NOT`) and various filter types.
 pub const Expression = struct {
     /// A list of expressions to combine with AND logic.
-    @"and": ?[]const Expression,
+    @"and": ?[]const Expression = null,
 
     /// The cost category values to include in the filter expression.
-    cost_categories: ?CostCategoryValues,
+    cost_categories: ?CostCategoryValues = null,
 
     /// The dimension values to include in the filter expression.
-    dimensions: ?DimensionValues,
+    dimensions: ?DimensionValues = null,
 
     /// An expression to negate with NOT logic.
     not: ?*Expression = null,
 
     /// A list of expressions to combine with OR logic.
-    @"or": ?[]const Expression,
+    @"or": ?[]const Expression = null,
 
     /// The tag values to include in the filter expression.
-    tags: ?TagValues,
+    tags: ?TagValues = null,
 
     pub const json_field_names = .{
         .@"and" = "and",

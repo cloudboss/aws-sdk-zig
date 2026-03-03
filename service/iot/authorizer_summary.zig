@@ -1,10 +1,10 @@
 /// The authorizer summary.
 pub const AuthorizerSummary = struct {
     /// The authorizer ARN.
-    authorizer_arn: ?[]const u8,
+    authorizer_arn: ?[]const u8 = null,
 
     /// The authorizer name.
-    authorizer_name: ?[]const u8,
+    authorizer_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authorizer_arn = "authorizerArn",

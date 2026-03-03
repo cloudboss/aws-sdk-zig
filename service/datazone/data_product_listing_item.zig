@@ -5,43 +5,43 @@ const ListingSummaryItem = @import("listing_summary_item.zig").ListingSummaryIte
 /// The asset of the data product listing.
 pub const DataProductListingItem = struct {
     /// The additional attributes of the asset of the data product.
-    additional_attributes: ?DataProductListingItemAdditionalAttributes,
+    additional_attributes: ?DataProductListingItemAdditionalAttributes = null,
 
     /// The timestamp at which the asset of the data product listing was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of the asset of the asset of the data product.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The entity ID of the asset of the asset of the data product.
-    entity_id: ?[]const u8,
+    entity_id: ?[]const u8 = null,
 
     /// The revision of the asset of the asset of the data product.
-    entity_revision: ?[]const u8,
+    entity_revision: ?[]const u8 = null,
 
     /// The glossary terms of the asset of the asset of the data product.
-    glossary_terms: ?[]const DetailedGlossaryTerm,
+    glossary_terms: ?[]const DetailedGlossaryTerm = null,
 
     /// The data of the asset of the data product.
-    items: ?[]const ListingSummaryItem,
+    items: ?[]const ListingSummaryItem = null,
 
     /// The timestamp at which the listing was created.
-    listing_created_by: ?[]const u8,
+    listing_created_by: ?[]const u8 = null,
 
     /// The ID of the listing.
-    listing_id: ?[]const u8,
+    listing_id: ?[]const u8 = null,
 
     /// The revision of the listing.
-    listing_revision: ?[]const u8,
+    listing_revision: ?[]const u8 = null,
 
     /// The user who updated the listing.
-    listing_updated_by: ?[]const u8,
+    listing_updated_by: ?[]const u8 = null,
 
     /// The name of the asset of the data product.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the owning project of the asset of the data product.
-    owning_project_id: ?[]const u8,
+    owning_project_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .additional_attributes = "additionalAttributes",

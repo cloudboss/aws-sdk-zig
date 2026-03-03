@@ -12,7 +12,7 @@ const FormStyle = @import("form_style.zig").FormStyle;
 pub const CreateFormData = struct {
     /// The `FormCTA` object that stores the call to action configuration for the
     /// form.
-    cta: ?FormCTA,
+    cta: ?FormCTA = null,
 
     /// The type of data source to use to create the form.
     data_type: FormDataTypeConfig,
@@ -24,7 +24,7 @@ pub const CreateFormData = struct {
     form_action_type: FormActionType,
 
     /// Specifies an icon or decoration to display on the form.
-    label_decorator: ?LabelDecorator,
+    label_decorator: ?LabelDecorator = null,
 
     /// The name of the form.
     name: []const u8,
@@ -41,7 +41,7 @@ pub const CreateFormData = struct {
     style: FormStyle,
 
     /// One or more key-value pairs to use when tagging the form data.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .cta = "cta",

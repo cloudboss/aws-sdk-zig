@@ -13,7 +13,7 @@ pub const TimeoutConfiguration = struct {
     /// `HTTP`/`HTTP2`/`GRPC` is 5 minutes.
     ///
     /// The `idleTimeout` default for `TCP` is 1 hour.
-    idle_timeout_seconds: ?i32,
+    idle_timeout_seconds: ?i32 = null,
 
     /// The amount of time waiting for the upstream to respond with a complete
     /// response per
@@ -22,7 +22,7 @@ pub const TimeoutConfiguration = struct {
     /// `appProtocol` isn't `TCP`. Only `idleTimeout` is
     /// allowed for `TCP`
     /// `appProtocol`.
-    per_request_timeout_seconds: ?i32,
+    per_request_timeout_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .idle_timeout_seconds = "idleTimeoutSeconds",

@@ -1,22 +1,22 @@
 /// Summary of a profile.
 pub const ProfileSummary = struct {
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The profile ARN.
-    profile_arn: ?[]const u8,
+    profile_arn: ?[]const u8 = null,
 
     /// The profile description.
-    profile_description: ?[]const u8,
+    profile_description: ?[]const u8 = null,
 
     /// The profile name.
-    profile_name: ?[]const u8,
+    profile_name: ?[]const u8 = null,
 
     /// The profile version.
-    profile_version: ?[]const u8,
+    profile_version: ?[]const u8 = null,
 
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

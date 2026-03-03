@@ -22,26 +22,26 @@ pub const InterruptionFilter = struct {
     /// Makes it possible to specify a time range (in milliseconds) in your audio,
     /// during
     /// which you want to search for an interruption. See for more detail.
-    absolute_time_range: ?AbsoluteTimeRange,
+    absolute_time_range: ?AbsoluteTimeRange = null,
 
     /// Set to `TRUE` to flag speech that does not contain interruptions. Set to
     /// `FALSE` to flag speech that contains interruptions.
-    negate: ?bool,
+    negate: ?bool = null,
 
     /// Specify the interrupter that you want to flag. Omitting this parameter is
     /// equivalent
     /// to specifying both participants.
-    participant_role: ?ParticipantRole,
+    participant_role: ?ParticipantRole = null,
 
     /// Makes it possible to specify a time range (in percentage) in your media
     /// file, during
     /// which you want to search for an interruption. See for more detail.
-    relative_time_range: ?RelativeTimeRange,
+    relative_time_range: ?RelativeTimeRange = null,
 
     /// Specify the duration of the interruptions in milliseconds. For example, you
     /// can flag
     /// speech that contains more than 10,000 milliseconds of interruptions.
-    threshold: ?i64,
+    threshold: ?i64 = null,
 
     pub const json_field_names = .{
         .absolute_time_range = "AbsoluteTimeRange",

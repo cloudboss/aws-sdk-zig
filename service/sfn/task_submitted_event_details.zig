@@ -4,10 +4,10 @@ const HistoryEventExecutionDataDetails = @import("history_event_execution_data_d
 pub const TaskSubmittedEventDetails = struct {
     /// The response from a resource when a task has started. Length constraints
     /// apply to the payload size, and are expressed as bytes in UTF-8 encoding.
-    output: ?[]const u8,
+    output: ?[]const u8 = null,
 
     /// Contains details about the output of an execution history event.
-    output_details: ?HistoryEventExecutionDataDetails,
+    output_details: ?HistoryEventExecutionDataDetails = null,
 
     /// The action of the resource called by a task state.
     resource: []const u8,

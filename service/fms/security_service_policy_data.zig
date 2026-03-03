@@ -298,11 +298,11 @@ pub const SecurityServicePolicyData = struct {
     /// * Example: `WAF Classic`
     ///
     /// `"{\"ruleGroups\":[{\"id\":\"78cb36c0-1b5e-4d7d-82b2-cf48d3ad9659\",\"overrideAction\":{\"type\":\"NONE\"}}],\"overrideCustomerWebACLAssociation\":true,\"defaultAction\":{\"type\":\"ALLOW\"},\"type\":\"WAF\"}"`
-    managed_service_data: ?[]const u8,
+    managed_service_data: ?[]const u8 = null,
 
     /// Contains the settings to configure a network ACL policy, a Network Firewall
     /// firewall policy deployment model, or a third-party firewall policy.
-    policy_option: ?PolicyOption,
+    policy_option: ?PolicyOption = null,
 
     /// The service that the policy is using to protect the resources. This
     /// specifies the type of

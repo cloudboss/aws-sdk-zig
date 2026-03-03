@@ -56,7 +56,7 @@ pub const ApiKey = struct {
     deletes: i64 = 0,
 
     /// A description of the purpose of the API key.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time after which the API key expires. The date is represented as seconds
     /// since the
@@ -64,7 +64,7 @@ pub const ApiKey = struct {
     expires: i64 = 0,
 
     /// The API key ID.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .deletes = "deletes",

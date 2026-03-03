@@ -3,12 +3,12 @@ const Reaction = @import("reaction.zig").Reaction;
 /// Information about recommendation feedback summaries.
 pub const RecommendationFeedbackSummary = struct {
     /// List for storing reactions. Reactions are utf-8 text code for emojis.
-    reactions: ?[]const Reaction,
+    reactions: ?[]const Reaction = null,
 
     /// The recommendation ID that can be used to track the provided
     /// recommendations. Later on
     /// it can be used to collect the feedback.
-    recommendation_id: ?[]const u8,
+    recommendation_id: ?[]const u8 = null,
 
     /// The ID of the user that gave the feedback.
     ///
@@ -17,7 +17,7 @@ pub const RecommendationFeedbackSummary = struct {
     /// more information, see [
     /// Specifying a
     /// Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying) in the *Amazon Web Services Identity and Access Management User Guide*.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .reactions = "Reactions",

@@ -8,11 +8,11 @@ const TimeSignalMessage = @import("time_signal_message.zig").TimeSignalMessage;
 pub const AdBreak = struct {
     /// Defines a list of key/value pairs that MediaTailor generates within the
     /// `EXT-X-ASSET`tag for `SCTE35_ENHANCED` output.
-    ad_break_metadata: ?[]const KeyValuePair,
+    ad_break_metadata: ?[]const KeyValuePair = null,
 
     /// The SCTE-35 ad insertion type. Accepted value: `SPLICE_INSERT`,
     /// `TIME_SIGNAL`.
-    message_type: ?MessageType,
+    message_type: ?MessageType = null,
 
     /// How long (in milliseconds) after the beginning of the program that an ad
     /// starts. This value must fall within 100ms of a segment boundary, otherwise
@@ -20,12 +20,12 @@ pub const AdBreak = struct {
     offset_millis: i64 = 0,
 
     /// Ad break slate configuration.
-    slate: ?SlateSource,
+    slate: ?SlateSource = null,
 
     /// This defines the SCTE-35 `splice_insert()` message inserted around the ad.
     /// For information about using `splice_insert()`, see the SCTE-35
     /// specficiaiton, section 9.7.3.1.
-    splice_insert_message: ?SpliceInsertMessage,
+    splice_insert_message: ?SpliceInsertMessage = null,
 
     /// Defines the SCTE-35 `time_signal` message inserted around the ad.
     ///
@@ -34,7 +34,7 @@ pub const AdBreak = struct {
     /// This message provides basic metadata about the ad break.
     ///
     /// See section 9.7.4 of the 2022 SCTE-35 specification for more information.
-    time_signal_message: ?TimeSignalMessage,
+    time_signal_message: ?TimeSignalMessage = null,
 
     pub const json_field_names = .{
         .ad_break_metadata = "AdBreakMetadata",

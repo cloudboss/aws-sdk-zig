@@ -6,7 +6,7 @@ pub const PivotTableDataPathOption = struct {
     data_path_list: []const DataPathValue,
 
     /// The width of the data path option.
-    width: ?[]const u8,
+    width: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_path_list = "DataPathList",

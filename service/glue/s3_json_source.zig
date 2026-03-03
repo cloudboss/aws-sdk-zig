@@ -5,63 +5,63 @@ const GlueSchema = @import("glue_schema.zig").GlueSchema;
 /// Specifies a JSON data store stored in Amazon S3.
 pub const S3JsonSource = struct {
     /// Specifies additional connection options.
-    additional_options: ?S3DirectSourceAdditionalOptions,
+    additional_options: ?S3DirectSourceAdditionalOptions = null,
 
     /// Specifies how the data is compressed. This is generally not necessary if the
     /// data has a standard file extension. Possible values are `"gzip"` and
     /// `"bzip"`).
-    compression_type: ?CompressionType,
+    compression_type: ?CompressionType = null,
 
     /// A string containing a JSON list of Unix-style glob patterns to exclude. For
     /// example, "[\"**.pdf\"]" excludes all PDF files.
-    exclusions: ?[]const []const u8,
+    exclusions: ?[]const []const u8 = null,
 
     /// Grouping files is turned on by default when the input contains more than
     /// 50,000 files. To turn on grouping with fewer than 50,000 files, set this
     /// parameter to "inPartition". To disable grouping when there are more than
     /// 50,000 files, set this parameter to `"none"`.
-    group_files: ?[]const u8,
+    group_files: ?[]const u8 = null,
 
     /// The target group size in bytes. The default is computed based on the input
     /// data size and the size of your cluster. When there are fewer than 50,000
     /// input files, `"groupFiles"` must be set to `"inPartition"` for this to take
     /// effect.
-    group_size: ?[]const u8,
+    group_size: ?[]const u8 = null,
 
     /// A JsonPath string defining the JSON data.
-    json_path: ?[]const u8,
+    json_path: ?[]const u8 = null,
 
     /// This option controls the duration in milliseconds after which the s3 listing
     /// is likely to be consistent. Files with modification timestamps falling
     /// within the last maxBand milliseconds are tracked specially when using
     /// JobBookmarks to account for Amazon S3 eventual consistency. Most users don't
     /// need to set this option. The default is 900000 milliseconds, or 15 minutes.
-    max_band: ?i32,
+    max_band: ?i32 = null,
 
     /// This option specifies the maximum number of files to save from the last
     /// maxBand seconds. If this number is exceeded, extra files are skipped and
     /// only processed in the next job run.
-    max_files_in_band: ?i32,
+    max_files_in_band: ?i32 = null,
 
     /// A Boolean value that specifies whether a single record can span multiple
     /// lines. This can occur when a field contains a quoted new-line character. You
     /// must set this option to True if any record spans multiple lines. The default
     /// value is `False`, which allows for more aggressive file-splitting during
     /// parsing.
-    multiline: ?bool,
+    multiline: ?bool = null,
 
     /// The name of the data store.
     name: []const u8,
 
     /// Specifies the data schema for the S3 JSON source.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// A list of the Amazon S3 paths to read from.
     paths: []const []const u8,
 
     /// If set to true, recursively reads files in all subdirectories under the
     /// specified paths.
-    recurse: ?bool,
+    recurse: ?bool = null,
 
     pub const json_field_names = .{
         .additional_options = "AdditionalOptions",

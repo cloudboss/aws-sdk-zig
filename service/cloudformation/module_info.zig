@@ -22,7 +22,7 @@ pub const ModuleInfo = struct {
     /// For more information, see [Reference module resources in
     /// CloudFormation
     /// templates](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/module-ref-resources.html) in the *CloudFormation User Guide*.
-    logical_id_hierarchy: ?[]const u8,
+    logical_id_hierarchy: ?[]const u8 = null,
 
     /// A concatenated list of the module type or types that contains the resource.
     /// Module types are
@@ -33,5 +33,5 @@ pub const ModuleInfo = struct {
     /// `AWS::Second::Example::MODULE`.
     ///
     /// `AWS::First::Example::MODULE/AWS::Second::Example::MODULE`
-    type_hierarchy: ?[]const u8,
+    type_hierarchy: ?[]const u8 = null,
 };

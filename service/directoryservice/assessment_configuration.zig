@@ -24,7 +24,7 @@ pub const AssessmentConfiguration = struct {
     /// allows network traffic to and from your self-managed domain controllers
     /// outside of your
     /// Amazon VPC.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     vpc_settings: DirectoryVpcSettings,
 

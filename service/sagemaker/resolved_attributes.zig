@@ -4,12 +4,12 @@ const ProblemType = @import("problem_type.zig").ProblemType;
 
 /// The resolved attributes.
 pub const ResolvedAttributes = struct {
-    auto_ml_job_objective: ?AutoMLJobObjective,
+    auto_ml_job_objective: ?AutoMLJobObjective = null,
 
-    completion_criteria: ?AutoMLJobCompletionCriteria,
+    completion_criteria: ?AutoMLJobCompletionCriteria = null,
 
     /// The problem type.
-    problem_type: ?ProblemType,
+    problem_type: ?ProblemType = null,
 
     pub const json_field_names = .{
         .auto_ml_job_objective = "AutoMLJobObjective",

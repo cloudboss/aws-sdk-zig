@@ -17,11 +17,11 @@ pub const PerformanceInsightsMetricDimensionGroup = struct {
     /// A list of specific dimensions from a dimension group. If this list isn't
     /// included, then all of the dimensions in the group were requested, or are
     /// present in the response.
-    dimensions: ?[]const []const u8,
+    dimensions: ?[]const []const u8 = null,
 
     /// The available dimension groups for Performance Insights metric type.
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// The maximum number of items to fetch for this dimension group.
-    limit: ?i32,
+    limit: ?i32 = null,
 };

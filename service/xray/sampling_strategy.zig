@@ -3,10 +3,10 @@ const SamplingStrategyName = @import("sampling_strategy_name.zig").SamplingStrat
 /// The name and value of a sampling rule to apply to a trace summary.
 pub const SamplingStrategy = struct {
     /// The name of a sampling rule.
-    name: ?SamplingStrategyName,
+    name: ?SamplingStrategyName = null,
 
     /// The value of a sampling rule.
-    value: ?f64,
+    value: ?f64 = null,
 
     pub const json_field_names = .{
         .name = "Name",

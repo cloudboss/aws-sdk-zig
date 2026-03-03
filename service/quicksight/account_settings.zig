@@ -7,17 +7,17 @@ pub const AccountSettings = struct {
     /// You create this name when you sign up for Quick Sight. It is unique in all
     /// of Amazon Web Services and
     /// it appears only when users sign in.
-    account_name: ?[]const u8,
+    account_name: ?[]const u8 = null,
 
     /// The default Quick Sight namespace for your Amazon Web Services account.
-    default_namespace: ?[]const u8,
+    default_namespace: ?[]const u8 = null,
 
     /// The edition of Quick Sight that you're currently subscribed to:
     /// Enterprise edition or Standard edition.
-    edition: ?Edition,
+    edition: ?Edition = null,
 
     /// The main notification email for your Quick Sight subscription.
-    notification_email: ?[]const u8,
+    notification_email: ?[]const u8 = null,
 
     /// A Boolean value that indicates whether public sharing is turned on for an
     /// Quick Suite account. For more information about turning on public sharing,

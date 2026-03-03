@@ -5,26 +5,26 @@ const CapabilityType = @import("capability_type.zig").CapabilityType;
 /// configuration details. This is returned by the `ListCapabilities` operation.
 pub const CapabilitySummary = struct {
     /// The Amazon Resource Name (ARN) of the capability.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The unique name of the capability within the cluster.
-    capability_name: ?[]const u8,
+    capability_name: ?[]const u8 = null,
 
     /// The Unix epoch timestamp in seconds for when the capability was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Unix epoch timestamp in seconds for when the capability was last
     /// modified.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// The current status of the capability.
-    status: ?CapabilityStatus,
+    status: ?CapabilityStatus = null,
 
     /// The type of capability. Valid values are `ACK`, `ARGOCD`, or `KRO`.
-    @"type": ?CapabilityType,
+    @"type": ?CapabilityType = null,
 
     /// The version of the capability software that is currently running.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

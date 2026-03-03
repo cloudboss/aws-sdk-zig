@@ -5,10 +5,10 @@ pub const DnsServersOptionsModifyStructure = struct {
     /// two DNS servers. Ensure that the DNS servers can be reached by the clients.
     /// The specified values
     /// overwrite the existing values.
-    custom_dns_servers: ?[]const []const u8,
+    custom_dns_servers: ?[]const []const u8 = null,
 
     /// Indicates whether DNS servers should be used. Specify `False` to delete the
     /// existing DNS
     /// servers.
-    enabled: ?bool,
+    enabled: ?bool = null,
 };

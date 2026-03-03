@@ -12,19 +12,19 @@ pub const CapacityReservationFleet = struct {
     /// information, see
     /// [Allocation
     /// strategy](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#allocation-strategy) in the *Amazon EC2 User Guide*.
-    allocation_strategy: ?[]const u8,
+    allocation_strategy: ?[]const u8 = null,
 
     /// The ARN of the Capacity Reservation Fleet.
-    capacity_reservation_fleet_arn: ?[]const u8,
+    capacity_reservation_fleet_arn: ?[]const u8 = null,
 
     /// The ID of the Capacity Reservation Fleet.
-    capacity_reservation_fleet_id: ?[]const u8,
+    capacity_reservation_fleet_id: ?[]const u8 = null,
 
     /// The date and time at which the Capacity Reservation Fleet was created.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The date and time at which the Capacity Reservation Fleet expires.
-    end_date: ?i64,
+    end_date: ?i64 = null,
 
     /// Indicates the type of instance launches that the Capacity Reservation Fleet
     /// accepts.
@@ -39,10 +39,10 @@ pub const CapacityReservationFleet = struct {
     /// Instances do not need to explicitly target a Capacity Reservation Fleet to
     /// use its
     /// reserved capacity.
-    instance_match_criteria: ?FleetInstanceMatchCriteria,
+    instance_match_criteria: ?FleetInstanceMatchCriteria = null,
 
     /// Information about the instance types for which to reserve the capacity.
-    instance_type_specifications: ?[]const FleetCapacityReservation,
+    instance_type_specifications: ?[]const FleetCapacityReservation = null,
 
     /// The state of the Capacity Reservation Fleet. Possible states include:
     ///
@@ -84,10 +84,10 @@ pub const CapacityReservationFleet = struct {
     ///
     /// * `failed` - The Capacity Reservation Fleet failed to reserve
     /// capacity for the specified instance types.
-    state: ?CapacityReservationFleetState,
+    state: ?CapacityReservationFleetState = null,
 
     /// The tags assigned to the Capacity Reservation Fleet.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The tenancy of the Capacity Reservation Fleet. Tenancies include:
     ///
@@ -97,14 +97,14 @@ pub const CapacityReservationFleet = struct {
     /// * `dedicated` - The Capacity Reservation Fleet is created on
     /// single-tenant hardware that is dedicated to a single Amazon Web Services
     /// account.
-    tenancy: ?FleetCapacityReservationTenancy,
+    tenancy: ?FleetCapacityReservationTenancy = null,
 
     /// The capacity units that have been fulfilled.
-    total_fulfilled_capacity: ?f64,
+    total_fulfilled_capacity: ?f64 = null,
 
     /// The total number of capacity units for which the Capacity Reservation Fleet
     /// reserves
     /// capacity. For more information, see [Total target
     /// capacity](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity) in the *Amazon EC2 User Guide*.
-    total_target_capacity: ?i32,
+    total_target_capacity: ?i32 = null,
 };

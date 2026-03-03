@@ -12,7 +12,7 @@ pub const DatabaseOutput = struct {
 
     /// The output mode to write into the database. Currently supported option:
     /// NEW_TABLE.
-    database_output_mode: ?DatabaseOutputMode,
+    database_output_mode: ?DatabaseOutputMode = null,
 
     /// The Glue connection that stores the connection information for the
     /// target database.

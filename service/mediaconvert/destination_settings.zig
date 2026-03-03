@@ -4,7 +4,7 @@ const S3DestinationSettings = @import("s3_destination_settings.zig").S3Destinati
 /// destination
 pub const DestinationSettings = struct {
     /// Settings associated with S3 destination
-    s3_settings: ?S3DestinationSettings,
+    s3_settings: ?S3DestinationSettings = null,
 
     pub const json_field_names = .{
         .s3_settings = "S3Settings",

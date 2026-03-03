@@ -14,35 +14,35 @@ pub const PromptConfiguration = struct {
     ///
     /// For more information, see *Inference request parameters and response fields
     /// for foundation models* in the Amazon Bedrock user guide.
-    additional_model_request_fields: ?[]const u8,
+    additional_model_request_fields: ?[]const u8 = null,
 
     /// Defines the prompt template with which to replace the default prompt
     /// template. You can use placeholder variables in the base prompt template to
     /// customize the prompt. For more information, see [Prompt template placeholder
     /// variables](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html). For more information, see [Configure the prompt templates](https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts-configure.html).
-    base_prompt_template: ?[]const u8,
+    base_prompt_template: ?[]const u8 = null,
 
     /// The agent's foundation model.
-    foundation_model: ?[]const u8,
+    foundation_model: ?[]const u8 = null,
 
     /// Contains inference parameters to use when the agent invokes a foundation
     /// model in the part of the agent sequence defined by the `promptType`. For
     /// more information, see [Inference parameters for foundation
     /// models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html).
-    inference_configuration: ?InferenceConfiguration,
+    inference_configuration: ?InferenceConfiguration = null,
 
     /// Specifies whether to override the default parser Lambda function when
     /// parsing the raw foundation model output in the part of the agent sequence
     /// defined by the `promptType`. If you set the field as `OVERRIDDEN`, the
     /// `overrideLambda` field in the
     /// [PromptOverrideConfiguration](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html) must be specified with the ARN of a Lambda function.
-    parser_mode: ?CreationMode,
+    parser_mode: ?CreationMode = null,
 
     /// Specifies whether to override the default prompt template for this
     /// `promptType`. Set this value to `OVERRIDDEN` to use the prompt that you
     /// provide in the `basePromptTemplate`. If you leave it as `DEFAULT`, the agent
     /// uses a default prompt template.
-    prompt_creation_mode: ?CreationMode,
+    prompt_creation_mode: ?CreationMode = null,
 
     /// Specifies whether to allow the agent to carry out the step specified in the
     /// `promptType`. If you set this value to `DISABLED`, the agent skips that
@@ -52,10 +52,10 @@ pub const PromptConfiguration = struct {
     /// * `ORCHESTRATION` – `ENABLED`
     /// * `KNOWLEDGE_BASE_RESPONSE_GENERATION` – `ENABLED`
     /// * `POST_PROCESSING` – `DISABLED`
-    prompt_state: ?PromptState,
+    prompt_state: ?PromptState = null,
 
     /// The step in the agent sequence that this prompt configuration applies to.
-    prompt_type: ?PromptType,
+    prompt_type: ?PromptType = null,
 
     pub const json_field_names = .{
         .additional_model_request_fields = "additionalModelRequestFields",

@@ -7,7 +7,7 @@ pub const InstanceConfiguration = struct {
     /// Defines the block devices to attach for building an instance from this Image
     /// Builder
     /// AMI.
-    block_device_mappings: ?[]const InstanceBlockDeviceMapping,
+    block_device_mappings: ?[]const InstanceBlockDeviceMapping = null,
 
     /// The base image for a container build and test instance. This can contain an
     /// AMI ID
@@ -17,7 +17,7 @@ pub const InstanceConfiguration = struct {
     ///
     /// If not specified, Image Builder uses the appropriate ECS-optimized AMI as a
     /// base image.
-    image: ?[]const u8,
+    image: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .block_device_mappings = "blockDeviceMappings",

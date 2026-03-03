@@ -2,13 +2,13 @@
 /// VLAN subnet.
 pub const EipAssociation = struct {
     /// The Elastic IP address allocation ID.
-    allocation_id: ?[]const u8,
+    allocation_id: ?[]const u8 = null,
 
     /// A unique ID for the elastic IP address association with the VLAN subnet.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The Elastic IP address.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allocation_id = "allocationId",

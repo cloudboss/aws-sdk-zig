@@ -3,7 +3,7 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 
 pub const ListSpacesRequest = struct {
     /// A parameter to search for the domain ID.
-    domain_id_equals: ?[]const u8,
+    domain_id_equals: ?[]const u8 = null,
 
     /// This parameter defines the maximum number of results that can be return in a
     /// single response. The `MaxResults` parameter is an upper bound, not a target.
@@ -11,20 +11,20 @@ pub const ListSpacesRequest = struct {
     /// is provided in the response. The `NextToken` indicates that the user should
     /// get the next set of results by providing this token as a part of a
     /// subsequent call. The default value for `MaxResults` is 10.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// If the previous response was truncated, you will receive this token. Use it
     /// in your next request to receive the next set of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The parameter by which to sort the results. The default is `CreationTime`.
-    sort_by: ?SpaceSortKey,
+    sort_by: ?SpaceSortKey = null,
 
     /// The sort order for the results. The default is `Ascending`.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     /// A parameter by which to filter the results.
-    space_name_contains: ?[]const u8,
+    space_name_contains: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domain_id_equals = "DomainIdEquals",

@@ -10,21 +10,21 @@ const DeploymentStrategy = @import("deployment_strategy.zig").DeploymentStrategy
 /// the ordering of stopping and starting tasks.
 pub const DeploymentConfiguration = struct {
     /// Information about the CloudWatch alarms.
-    alarms: ?DeploymentAlarms,
+    alarms: ?DeploymentAlarms = null,
 
     /// The time period when both blue and green service revisions are running
     /// simultaneously after the production traffic has shifted.
     ///
     /// You must provide this parameter when you use the `BLUE_GREEN` deployment
     /// strategy.
-    bake_time_in_minutes: ?i32,
+    bake_time_in_minutes: ?i32 = null,
 
     /// Configuration for canary deployment strategy. Only valid when the deployment
     /// strategy
     /// is `CANARY`. This configuration enables shifting a fixed percentage of
     /// traffic for testing, followed by shifting the remaining traffic after a bake
     /// period.
-    canary_configuration: ?CanaryConfiguration,
+    canary_configuration: ?CanaryConfiguration = null,
 
     /// The deployment circuit breaker can only be used for services using the
     /// rolling
@@ -42,18 +42,18 @@ pub const DeploymentConfiguration = struct {
     /// For more information, see [Rolling
     /// update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer
     /// Guide*
-    deployment_circuit_breaker: ?DeploymentCircuitBreaker,
+    deployment_circuit_breaker: ?DeploymentCircuitBreaker = null,
 
     /// An array of deployment lifecycle hook objects to run custom logic at
     /// specific stages of the deployment lifecycle.
-    lifecycle_hooks: ?[]const DeploymentLifecycleHook,
+    lifecycle_hooks: ?[]const DeploymentLifecycleHook = null,
 
     /// Configuration for linear deployment strategy. Only valid when the deployment
     /// strategy
     /// is `LINEAR`. This configuration enables progressive traffic shifting in
     /// equal
     /// percentage increments with configurable bake times between each step.
-    linear_configuration: ?LinearConfiguration,
+    linear_configuration: ?LinearConfiguration = null,
 
     /// If a service is using the rolling update (`ECS`) deployment type, the
     /// `maximumPercent` parameter represents an upper limit on the number of
@@ -95,7 +95,7 @@ pub const DeploymentConfiguration = struct {
     /// launch type, the maximum percent value is not used. The value is still
     /// returned when
     /// describing your service.
-    maximum_percent: ?i32,
+    maximum_percent: ?i32 = null,
 
     /// If a service is using the rolling update (`ECS`) deployment type, the
     /// `minimumHealthyPercent` represents a lower limit on the number of your
@@ -185,7 +185,7 @@ pub const DeploymentConfiguration = struct {
     /// launch type, the minimum healthy percent value is not used, although it is
     /// returned when
     /// describing your service.
-    minimum_healthy_percent: ?i32,
+    minimum_healthy_percent: ?i32 = null,
 
     /// The deployment strategy for the service. Choose from these valid values:
     ///
@@ -222,7 +222,7 @@ pub const DeploymentConfiguration = struct {
     /// time period. This allows you to test the new version with a subset of users
     /// before
     /// full deployment.
-    strategy: ?DeploymentStrategy,
+    strategy: ?DeploymentStrategy = null,
 
     pub const json_field_names = .{
         .alarms = "alarms",

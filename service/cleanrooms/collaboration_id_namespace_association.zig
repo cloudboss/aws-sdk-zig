@@ -24,12 +24,12 @@ pub const CollaborationIdNamespaceAssociation = struct {
     creator_account_id: []const u8,
 
     /// The description of the collaboration ID namespace association.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the collaboration ID namespace association.
     id: []const u8,
 
-    id_mapping_config: ?IdMappingConfig,
+    id_mapping_config: ?IdMappingConfig = null,
 
     /// The input reference configuration that's necessary to create the
     /// collaboration ID namespace association.

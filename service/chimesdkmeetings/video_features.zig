@@ -12,7 +12,7 @@ pub const VideoFeatures = struct {
     /// Defaults to `HD`. To use `FHD`, you must also provide a
     /// `MeetingFeatures:Attendee:MaxCount` value and override the default size
     /// limit of 250 attendees.
-    max_resolution: ?VideoResolution,
+    max_resolution: ?VideoResolution = null,
 
     pub const json_field_names = .{
         .max_resolution = "MaxResolution",

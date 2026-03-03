@@ -7,7 +7,7 @@ pub const TargetSummary = struct {
     created_at: i64,
 
     /// The description of the target.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the target.
     name: []const u8,

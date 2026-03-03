@@ -15,5 +15,5 @@ const CpuPerformanceFactor = @import("cpu_performance_factor.zig").CpuPerformanc
 pub const BaselinePerformanceFactors = struct {
     /// The CPU performance to consider, using an instance family as the baseline
     /// reference.
-    cpu: ?CpuPerformanceFactor,
+    cpu: ?CpuPerformanceFactor = null,
 };

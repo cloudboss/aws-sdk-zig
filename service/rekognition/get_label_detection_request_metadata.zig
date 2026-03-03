@@ -6,10 +6,10 @@ const LabelDetectionSortBy = @import("label_detection_sort_by.zig").LabelDetecti
 /// options.
 pub const GetLabelDetectionRequestMetadata = struct {
     /// The aggregation method chosen for a GetLabelDetection request.
-    aggregate_by: ?LabelDetectionAggregateBy,
+    aggregate_by: ?LabelDetectionAggregateBy = null,
 
     /// The sorting method chosen for a GetLabelDetection request.
-    sort_by: ?LabelDetectionSortBy,
+    sort_by: ?LabelDetectionSortBy = null,
 
     pub const json_field_names = .{
         .aggregate_by = "AggregateBy",

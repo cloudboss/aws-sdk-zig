@@ -12,26 +12,26 @@ pub const SubscriptionRequestSummary = struct {
     created_by: []const u8,
 
     /// The decision comment of the subscription request.
-    decision_comment: ?[]const u8,
+    decision_comment: ?[]const u8 = null,
 
     /// The identifier of the Amazon DataZone domain in which a subscription request
     /// exists.
     domain_id: []const u8,
 
     /// The ID of the existing subscription.
-    existing_subscription_id: ?[]const u8,
+    existing_subscription_id: ?[]const u8 = null,
 
     /// The identifier of the subscription request.
     id: []const u8,
 
     /// The summary of the metadata forms.
-    metadata_forms_summary: ?[]const MetadataFormSummary,
+    metadata_forms_summary: ?[]const MetadataFormSummary = null,
 
     /// The reason for the subscription request.
     request_reason: []const u8,
 
     /// The identifier of the subscription request reviewer.
-    reviewer_id: ?[]const u8,
+    reviewer_id: ?[]const u8 = null,
 
     /// The status of the subscription request.
     status: SubscriptionRequestStatus,
@@ -47,7 +47,7 @@ pub const SubscriptionRequestSummary = struct {
 
     /// The identifier of the Amazon DataZone user who updated the subscription
     /// request.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

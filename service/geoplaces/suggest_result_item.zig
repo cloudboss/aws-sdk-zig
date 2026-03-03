@@ -7,12 +7,12 @@ const SuggestResultItemType = @import("suggest_result_item_type.zig").SuggestRes
 pub const SuggestResultItem = struct {
     /// Describes how the parts of the response element matched the input query by
     /// returning the sections of the response which matched to input query terms.
-    highlights: ?SuggestHighlights,
+    highlights: ?SuggestHighlights = null,
 
     /// The suggested place by its unique ID.
-    place: ?SuggestPlaceResult,
+    place: ?SuggestPlaceResult = null,
 
-    query: ?SuggestQueryResult,
+    query: ?SuggestQueryResult = null,
 
     /// The result type. Place results represent the final result for a point of
     /// interest, Query results represent a follow up query which can be completed

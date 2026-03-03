@@ -13,7 +13,7 @@ pub const GetSolNetworkOperationMetadata = struct {
     /// Metadata related to the network operation occurrence for network
     /// instantiation.
     /// This is populated only if the lcmOperationType is `INSTANTIATE`.
-    instantiate_metadata: ?InstantiateMetadata,
+    instantiate_metadata: ?InstantiateMetadata = null,
 
     /// The date that the resource was last modified.
     last_modified: i64,
@@ -22,13 +22,13 @@ pub const GetSolNetworkOperationMetadata = struct {
     /// updates in a network instance.
     /// This is populated only if the lcmOperationType is `UPDATE` and the
     /// updateType is `MODIFY_VNF_INFORMATION`.
-    modify_vnf_info_metadata: ?ModifyVnfInfoMetadata,
+    modify_vnf_info_metadata: ?ModifyVnfInfoMetadata = null,
 
     /// Metadata related to the network operation occurrence for network instance
     /// updates.
     /// This is populated only if the lcmOperationType is `UPDATE` and the
     /// updateType is `UPDATE_NS`.
-    update_ns_metadata: ?UpdateNsMetadata,
+    update_ns_metadata: ?UpdateNsMetadata = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

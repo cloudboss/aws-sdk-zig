@@ -16,10 +16,10 @@ pub const DirectJDBCSource = struct {
     name: []const u8,
 
     /// Specifies the data schema for the direct JDBC source.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// The temp directory of the JDBC Redshift source.
-    redshift_tmp_dir: ?[]const u8,
+    redshift_tmp_dir: ?[]const u8 = null,
 
     /// The table of the JDBC source connection.
     table: []const u8,

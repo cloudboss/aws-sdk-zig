@@ -3,13 +3,13 @@ const aws = @import("aws");
 /// An extension that was invoked during a deployment.
 pub const AppliedExtension = struct {
     /// The system-generated ID for the association.
-    extension_association_id: ?[]const u8,
+    extension_association_id: ?[]const u8 = null,
 
     /// The system-generated ID of the extension.
-    extension_id: ?[]const u8,
+    extension_id: ?[]const u8 = null,
 
     /// One or more parameters for the actions called by the extension.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The extension version number.
     version_number: i32 = 0,

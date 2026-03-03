@@ -10,7 +10,7 @@ pub const Event = struct {
     actor_id: []const u8,
 
     /// The branch information for the event.
-    branch: ?Branch,
+    branch: ?Branch = null,
 
     /// The unique identifier of the event.
     event_id: []const u8,
@@ -22,7 +22,7 @@ pub const Event = struct {
     memory_id: []const u8,
 
     /// Metadata associated with an event.
-    metadata: ?[]const aws.map.MapEntry(MetadataValue),
+    metadata: ?[]const aws.map.MapEntry(MetadataValue) = null,
 
     /// The content payload of the event.
     payload: []const PayloadType,

@@ -11,16 +11,16 @@ pub const DataCatalogSummary = struct {
     /// or hyphen characters. The remainder of the length constraint of 256 is
     /// reserved for use
     /// by Athena.
-    catalog_name: ?[]const u8,
+    catalog_name: ?[]const u8 = null,
 
     /// The type of connection for a `FEDERATED` data catalog (for example,
     /// `REDSHIFT`, `MYSQL`, or `SQLSERVER`). For
     /// information about individual connectors, see [Available data source
     /// connectors](https://docs.aws.amazon.com/athena/latest/ug/connectors-available.html).
-    connection_type: ?ConnectionType,
+    connection_type: ?ConnectionType = null,
 
     /// Text of the error that occurred during data catalog creation or deletion.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// The status of the creation or deletion of the data catalog.
     ///
@@ -57,10 +57,10 @@ pub const DataCatalogSummary = struct {
     ///
     /// * `DELETE_FAILED`: Federated data catalog could not be
     /// deleted.
-    status: ?DataCatalogStatus,
+    status: ?DataCatalogStatus = null,
 
     /// The data catalog type.
-    @"type": ?DataCatalogType,
+    @"type": ?DataCatalogType = null,
 
     pub const json_field_names = .{
         .catalog_name = "CatalogName",

@@ -10,7 +10,7 @@ pub const SrtDestinationSettings = struct {
     /// captions. Set Style passthrough to DISABLED, or leave blank, to ignore the
     /// style and position information from your input captions and use simplified
     /// output captions.
-    style_passthrough: ?SrtStylePassthrough,
+    style_passthrough: ?SrtStylePassthrough = null,
 
     pub const json_field_names = .{
         .style_passthrough = "StylePassthrough",

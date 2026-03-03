@@ -8,13 +8,13 @@ pub const InventoryTableConfigurationResult = struct {
     /// or disabled.
     configuration_state: InventoryConfigurationState,
 
-    @"error": ?ErrorDetails,
+    @"error": ?ErrorDetails = null,
 
     /// The Amazon Resource Name (ARN) for the inventory table.
-    table_arn: ?[]const u8,
+    table_arn: ?[]const u8 = null,
 
     /// The name of the inventory table.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The status of the inventory table. The status values are:
     ///
@@ -44,5 +44,5 @@ pub const InventoryTableConfigurationResult = struct {
     /// * `FAILED` - Amazon S3 is unable to create the inventory table, or Amazon S3
     ///   is unable to deliver
     /// records.
-    table_status: ?[]const u8,
+    table_status: ?[]const u8 = null,
 };

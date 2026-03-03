@@ -18,7 +18,7 @@ pub const ConversationLevelTestResultItem = struct {
 
     /// The speech transcription success or failure of the test result evaluation
     /// item.
-    speech_transcription_result: ?TestResultMatchStatus,
+    speech_transcription_result: ?TestResultMatchStatus = null,
 
     pub const json_field_names = .{
         .conversation_id = "conversationId",

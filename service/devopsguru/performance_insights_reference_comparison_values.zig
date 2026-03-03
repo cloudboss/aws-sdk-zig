@@ -12,14 +12,14 @@ pub const PerformanceInsightsReferenceComparisonValues = struct {
     /// A metric that DevOps Guru compares to actual metric values. This reference
     /// metric is used to
     /// determine if an actual metric should be considered anomalous.
-    reference_metric: ?PerformanceInsightsReferenceMetric,
+    reference_metric: ?PerformanceInsightsReferenceMetric = null,
 
     /// A scalar value DevOps Guru for a metric that DevOps Guru compares to actual
     /// metric values. This
     /// reference value is used to determine if an actual metric value should be
     /// considered
     /// anomalous.
-    reference_scalar: ?PerformanceInsightsReferenceScalar,
+    reference_scalar: ?PerformanceInsightsReferenceScalar = null,
 
     pub const json_field_names = .{
         .reference_metric = "ReferenceMetric",

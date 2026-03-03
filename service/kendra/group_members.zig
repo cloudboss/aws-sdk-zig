@@ -12,12 +12,12 @@ pub const GroupMembers = struct {
     /// the sub groups "Research", "Engineering", and "Sales and Marketing" all
     /// belong to the group
     /// "Company A".
-    member_groups: ?[]const MemberGroup,
+    member_groups: ?[]const MemberGroup = null,
 
     /// A list of users that belong to a group. For example, a list of interns all
     /// belong to
     /// the "Interns" group.
-    member_users: ?[]const MemberUser,
+    member_users: ?[]const MemberUser = null,
 
     /// If you have more than 1000 users and/or sub groups for a single group, you
     /// need to
@@ -32,7 +32,7 @@ pub const GroupMembers = struct {
     /// file](https://docs.aws.amazon.com/kendra/latest/dg/samples/group_members.zip) that uses the correct format for listing group members. Note,
     /// `dataSourceId` is optional. The value of `type` for a group is
     /// always `GROUP` and for a user it is always `USER`.
-    s3_pathfor_group_members: ?S3Path,
+    s3_pathfor_group_members: ?S3Path = null,
 
     pub const json_field_names = .{
         .member_groups = "MemberGroups",

@@ -41,16 +41,16 @@ pub const GuardrailContentFilterConfig = struct {
     /// * `BLOCK` – Block the content and replace it with blocked messaging.
     /// * `NONE` – Take no action but return detection information in the trace
     ///   response.
-    input_action: ?GuardrailContentFilterAction,
+    input_action: ?GuardrailContentFilterAction = null,
 
     /// Specifies whether to enable guardrail evaluation on the input. When
     /// disabled, you aren't charged for the evaluation. The evaluation doesn't
     /// appear in the response.
-    input_enabled: ?bool,
+    input_enabled: ?bool = null,
 
     /// The input modalities selected for the guardrail content filter
     /// configuration.
-    input_modalities: ?[]const GuardrailModality,
+    input_modalities: ?[]const GuardrailModality = null,
 
     /// The strength of the content filter to apply to prompts. As you increase the
     /// filter strength, the likelihood of filtering harmful content increases and
@@ -63,16 +63,16 @@ pub const GuardrailContentFilterConfig = struct {
     /// * `BLOCK` – Block the content and replace it with blocked messaging.
     /// * `NONE` – Take no action but return detection information in the trace
     ///   response.
-    output_action: ?GuardrailContentFilterAction,
+    output_action: ?GuardrailContentFilterAction = null,
 
     /// Specifies whether to enable guardrail evaluation on the output. When
     /// disabled, you aren't charged for the evaluation. The evaluation doesn't
     /// appear in the response.
-    output_enabled: ?bool,
+    output_enabled: ?bool = null,
 
     /// The output modalities selected for the guardrail content filter
     /// configuration.
-    output_modalities: ?[]const GuardrailModality,
+    output_modalities: ?[]const GuardrailModality = null,
 
     /// The strength of the content filter to apply to model responses. As you
     /// increase the filter strength, the likelihood of filtering harmful content

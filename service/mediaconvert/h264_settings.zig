@@ -41,7 +41,7 @@ pub const H264Settings = struct {
     /// that you choose here applies to the following settings:
     /// H264FlickerAdaptiveQuantization, H264SpatialAdaptiveQuantization, and
     /// H264TemporalAdaptiveQuantization.
-    adaptive_quantization: ?H264AdaptiveQuantization,
+    adaptive_quantization: ?H264AdaptiveQuantization = null,
 
     /// The Bandwidth reduction filter increases the video quality of your output
     /// relative to its bitrate. Use to lower the bitrate of your constant quality
@@ -51,20 +51,20 @@ pub const H264Settings = struct {
     /// your input is low quality or noisy. Outputs that use this feature incur
     /// pro-tier pricing. When you include Bandwidth reduction filter, you cannot
     /// include the Noise reducer preprocessor.
-    bandwidth_reduction_filter: ?BandwidthReductionFilter,
+    bandwidth_reduction_filter: ?BandwidthReductionFilter = null,
 
     /// Specify the average bitrate in bits per second. Required for VBR and CBR.
     /// For MS Smooth outputs, bitrates must be unique when rounded down to the
     /// nearest multiple of 1000.
-    bitrate: ?i32,
+    bitrate: ?i32 = null,
 
     /// Specify an H.264 level that is consistent with your output video settings.
     /// If you aren't sure what level to specify, choose Auto.
-    codec_level: ?H264CodecLevel,
+    codec_level: ?H264CodecLevel = null,
 
     /// H.264 Profile. High 4:2:2 and 10-bit profiles are only available with the
     /// AVC-I License.
-    codec_profile: ?H264CodecProfile,
+    codec_profile: ?H264CodecProfile = null,
 
     /// Specify whether to allow the number of B-frames in your output GOP structure
     /// to vary or not depending on your input video content. To improve the
@@ -74,24 +74,24 @@ pub const H264Settings = struct {
     /// number of B- frames is limited by the value that you choose for B-frames
     /// between reference frames. To use the same number B-frames for all types of
     /// content: Choose Static.
-    dynamic_sub_gop: ?H264DynamicSubGop,
+    dynamic_sub_gop: ?H264DynamicSubGop = null,
 
     /// Optionally include or suppress markers at the end of your output that signal
     /// the end of the video stream. To include end of stream markers: Leave blank
     /// or keep the default value, Include. To not include end of stream markers:
     /// Choose Suppress. This is useful when your output will be inserted into
     /// another stream.
-    end_of_stream_markers: ?H264EndOfStreamMarkers,
+    end_of_stream_markers: ?H264EndOfStreamMarkers = null,
 
     /// Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.
-    entropy_encoding: ?H264EntropyEncoding,
+    entropy_encoding: ?H264EntropyEncoding = null,
 
     /// The video encoding method for your MPEG-4 AVC output. Keep the default
     /// value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs.
     /// Choose Force field to disable PAFF encoding and create separate interlaced
     /// fields. Choose MBAFF to disable PAFF and have MediaConvert use MBAFF
     /// encoding for interlaced outputs.
-    field_encoding: ?H264FieldEncoding,
+    field_encoding: ?H264FieldEncoding = null,
 
     /// Only use this setting when you change the default value, AUTO, for the
     /// setting H264AdaptiveQuantization. When you keep all defaults, excluding
@@ -107,7 +107,7 @@ pub const H264Settings = struct {
     /// out the flicker. To manually enable or disable
     /// H264FlickerAdaptiveQuantization, you must set Adaptive quantization to a
     /// value other than AUTO.
-    flicker_adaptive_quantization: ?H264FlickerAdaptiveQuantization,
+    flicker_adaptive_quantization: ?H264FlickerAdaptiveQuantization = null,
 
     /// If you are using the console, use the Framerate setting to specify the frame
     /// rate for this output. If you want to keep the same frame rate as the input
@@ -115,7 +115,7 @@ pub const H264Settings = struct {
     /// a frame rate from the dropdown list or choose Custom. The framerates shown
     /// in the dropdown list are decimal approximations of fractions. If you choose
     /// Custom, specify your frame rate as a fraction.
-    framerate_control: ?H264FramerateControl,
+    framerate_control: ?H264FramerateControl = null,
 
     /// Choose the method that you want MediaConvert to use when increasing or
     /// decreasing your video's frame rate. For numerically simple conversions, such
@@ -133,7 +133,7 @@ pub const H264Settings = struct {
     /// add, or otherwise change the frame count from your input to your output.
     /// Note that since the frame count is maintained, the duration of your output
     /// will become shorter at higher frame rates and longer at lower frame rates.
-    framerate_conversion_algorithm: ?H264FramerateConversionAlgorithm,
+    framerate_conversion_algorithm: ?H264FramerateConversionAlgorithm = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -142,7 +142,7 @@ pub const H264Settings = struct {
     /// use the console for transcode jobs that use frame rate conversion, provide
     /// the value as a decimal number for Framerate. In this example, specify
     /// 23.976.
-    framerate_denominator: ?i32,
+    framerate_denominator: ?i32 = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -150,14 +150,14 @@ pub const H264Settings = struct {
     /// this example, use 24000 for the value of FramerateNumerator. When you use
     /// the console for transcode jobs that use frame rate conversion, provide the
     /// value as a decimal number for Framerate. In this example, specify 23.976.
-    framerate_numerator: ?i32,
+    framerate_numerator: ?i32 = null,
 
     /// Specify whether to allow B-frames to be referenced by other frame types. To
     /// use reference B-frames when your GOP structure has 1 or more B-frames: Leave
     /// blank or keep the default value Enabled. We recommend that you choose
     /// Enabled to help improve the video quality of your output relative to its
     /// bitrate. To not use reference B-frames: Choose Disabled.
-    gop_b_reference: ?H264GopBReference,
+    gop_b_reference: ?H264GopBReference = null,
 
     /// Specify the relative frequency of open to closed GOPs in this output. For
     /// example, if you want to allow four open GOPs and then require a closed GOP,
@@ -166,7 +166,7 @@ pub const H264Settings = struct {
     /// the console, do this by keeping the default empty value. If you do
     /// explicitly specify a value, for segmented outputs, don't set this value to
     /// 0.
-    gop_closed_cadence: ?i32,
+    gop_closed_cadence: ?i32 = null,
 
     /// Use this setting only when you set GOP mode control to Specified, frames or
     /// Specified, seconds. Specify the GOP length using a whole number of frames or
@@ -176,7 +176,7 @@ pub const H264Settings = struct {
     /// size blank and set GOP mode control to Auto. If your output group specifies
     /// HLS, DASH, or CMAF, leave GOP size blank and set GOP mode control to Auto in
     /// each output in your output group.
-    gop_size: ?f64,
+    gop_size: ?f64 = null,
 
     /// Specify how the transcoder determines GOP size for this output. We recommend
     /// that you have the transcoder automatically choose this value for you based
@@ -187,20 +187,20 @@ pub const H264Settings = struct {
     /// GOP size blank in each output in your output group. To explicitly specify
     /// the GOP length, choose Specified, frames or Specified, seconds and then
     /// provide the GOP length in the related setting GOP size.
-    gop_size_units: ?H264GopSizeUnits,
+    gop_size_units: ?H264GopSizeUnits = null,
 
     /// If your downstream systems have strict buffer requirements: Specify the
     /// minimum percentage of the HRD buffer that's available at the end of each
     /// encoded video segment. For the best video quality: Set to 0 or leave blank
     /// to automatically determine the final buffer fill percentage.
-    hrd_buffer_final_fill_percentage: ?i32,
+    hrd_buffer_final_fill_percentage: ?i32 = null,
 
     /// Percentage of the buffer that should initially be filled (HRD buffer model).
-    hrd_buffer_initial_fill_percentage: ?i32,
+    hrd_buffer_initial_fill_percentage: ?i32 = null,
 
     /// Size of buffer (HRD buffer model) in bits. For example, enter five megabits
     /// as 5000000.
-    hrd_buffer_size: ?i32,
+    hrd_buffer_size: ?i32 = null,
 
     /// Choose the scan line type for the output. Keep the default value,
     /// Progressive to create a progressive output, regardless of the scan type of
@@ -213,11 +213,11 @@ pub const H264Settings = struct {
     /// interlaced with the same polarity as the source. If the source is
     /// progressive, the output will be interlaced with top field bottom field
     /// first, depending on which of the Follow options you choose.
-    interlace_mode: ?H264InterlaceMode,
+    interlace_mode: ?H264InterlaceMode = null,
 
     /// Maximum bitrate in bits/second. For example, enter five megabits per second
     /// as 5000000. Required when Rate control mode is QVBR.
-    max_bitrate: ?i32,
+    max_bitrate: ?i32 = null,
 
     /// Specify the minimum number of frames allowed between two IDR-frames in your
     /// output. This includes frames created at the start of a GOP or a scene
@@ -236,18 +236,18 @@ pub const H264Settings = struct {
     /// requirements. To disable GOP size variance: Enter 0. MediaConvert will only
     /// create IDR-frames at the start of your output's cadence-driven GOP. Use when
     /// your downstream systems require a regular GOP size.
-    min_i_interval: ?i32,
+    min_i_interval: ?i32 = null,
 
     /// Specify the number of B-frames between reference frames in this output. For
     /// the best video quality: Leave blank. MediaConvert automatically determines
     /// the number of B-frames to use based on the characteristics of your input
     /// video. To manually specify the number of B-frames between reference frames:
     /// Enter an integer from 0 to 7.
-    number_b_frames_between_reference_frames: ?i32,
+    number_b_frames_between_reference_frames: ?i32 = null,
 
     /// Number of reference frames to use. The encoder may use more than requested
     /// if using B-frames and/or interlaced encoding.
-    number_reference_frames: ?i32,
+    number_reference_frames: ?i32 = null,
 
     /// Optional. Specify how the service determines the pixel aspect ratio (PAR)
     /// for this output. The default behavior, Follow source, uses the PAR from your
@@ -255,7 +255,7 @@ pub const H264Settings = struct {
     /// choose any value other than Follow source. When you choose SPECIFIED for
     /// this setting, you must also specify values for the parNumerator and
     /// parDenominator settings.
-    par_control: ?H264ParControl,
+    par_control: ?H264ParControl = null,
 
     /// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
     /// corresponds to any value other than Follow source. When you specify an
@@ -263,7 +263,7 @@ pub const H264Settings = struct {
     /// provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen,
     /// you would specify the ratio 40:33. In this example, the value for
     /// parDenominator is 33.
-    par_denominator: ?i32,
+    par_denominator: ?i32 = null,
 
     /// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
     /// corresponds to any value other than Follow source. When you specify an
@@ -271,7 +271,7 @@ pub const H264Settings = struct {
     /// provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen,
     /// you would specify the ratio 40:33. In this example, the value for
     /// parNumerator is 40.
-    par_numerator: ?i32,
+    par_numerator: ?i32 = null,
 
     /// Optionally choose one or more per frame metric reports to generate along
     /// with your output. You can use these metrics to analyze your video output
@@ -291,7 +291,7 @@ pub const H264Settings = struct {
     /// Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     /// Quality-Defined Variable Bitrate. This option is only available when your
     /// output uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
-    per_frame_metrics: ?[]const FrameMetricType,
+    per_frame_metrics: ?[]const FrameMetricType = null,
 
     /// The Quality tuning level you choose represents a trade-off between the
     /// encoding speed of your job and the output video quality. For the fastest
@@ -301,18 +301,18 @@ pub const H264Settings = struct {
     /// encoding speed: Choose Multi pass HQ. MediaConvert performs an analysis pass
     /// on your input followed by an encoding pass. Outputs that use this feature
     /// incur pro-tier pricing.
-    quality_tuning_level: ?H264QualityTuningLevel,
+    quality_tuning_level: ?H264QualityTuningLevel = null,
 
     /// Settings for quality-defined variable bitrate encoding with the H.265 codec.
     /// Use these settings only when you set QVBR for Rate control mode.
-    qvbr_settings: ?H264QvbrSettings,
+    qvbr_settings: ?H264QvbrSettings = null,
 
     /// Use this setting to specify whether this output has a variable bitrate
     /// (VBR), constant bitrate (CBR) or quality-defined variable bitrate (QVBR).
-    rate_control_mode: ?H264RateControlMode,
+    rate_control_mode: ?H264RateControlMode = null,
 
     /// Places a PPS header on each encoded picture, even if repeated.
-    repeat_pps: ?H264RepeatPps,
+    repeat_pps: ?H264RepeatPps = null,
 
     /// Specify whether to apply Saliency aware encoding to your output. Use to
     /// improve the perceptual video quality of your output by allocating more
@@ -323,7 +323,7 @@ pub const H264Settings = struct {
     /// encoding will only apply to outputs that are 720p or higher in resolution.
     /// To not apply saliency aware encoding, prioritizing encoding speed over
     /// perceptual video quality: Choose Disabled.
-    saliency_aware_encoding: ?H264SaliencyAwareEncoding,
+    saliency_aware_encoding: ?H264SaliencyAwareEncoding = null,
 
     /// Use this setting for interlaced outputs, when your output frame rate is half
     /// of your input frame rate. In this situation, choose Optimized interlacing to
@@ -337,19 +337,19 @@ pub const H264Settings = struct {
     /// Required settings: To use optimized interlacing, you must set Telecine to
     /// None or Soft. You can't use optimized interlacing for hard telecine outputs.
     /// You must also set Interlace mode to a value other than Progressive.
-    scan_type_conversion_mode: ?H264ScanTypeConversionMode,
+    scan_type_conversion_mode: ?H264ScanTypeConversionMode = null,
 
     /// Enable this setting to insert I-frames at scene changes that the service
     /// automatically detects. This improves video quality and is enabled by
     /// default. If this output uses QVBR, choose Transition detection for further
     /// video quality improvement. For more information about QVBR, see
     /// https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
-    scene_change_detect: ?H264SceneChangeDetect,
+    scene_change_detect: ?H264SceneChangeDetect = null,
 
     /// Number of slices per picture. Must be less than or equal to the number of
     /// macroblock rows for progressive pictures, and less than or equal to half the
     /// number of macroblock rows for interlaced pictures.
-    slices: ?i32,
+    slices: ?i32 = null,
 
     /// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
     /// second (fps). Enable slow PAL to create a 25 fps output. When you enable
@@ -357,7 +357,7 @@ pub const H264Settings = struct {
     /// your audio to keep it synchronized with the video. Note that enabling this
     /// setting will slightly reduce the duration of your video. Required settings:
     /// You must also set Framerate to 25.
-    slow_pal: ?H264SlowPal,
+    slow_pal: ?H264SlowPal = null,
 
     /// Ignore this setting unless you need to comply with a specification that
     /// requires a specific value. If you don't have a specification requirement, we
@@ -369,7 +369,7 @@ pub const H264Settings = struct {
     /// specification. Choose a value from 17 to 128 to use planar interpolation.
     /// Increasing values from 17 to 128 result in increasing reduction of
     /// high-frequency data. The value 128 results in the softest video.
-    softness: ?i32,
+    softness: ?i32 = null,
 
     /// Only use this setting when you change the default value, Auto, for the
     /// setting H264AdaptiveQuantization. When you keep all defaults, excluding
@@ -395,10 +395,10 @@ pub const H264Settings = struct {
     /// textures, set it to High or Higher. To manually enable or disable
     /// H264SpatialAdaptiveQuantization, you must set Adaptive quantization to a
     /// value other than AUTO.
-    spatial_adaptive_quantization: ?H264SpatialAdaptiveQuantization,
+    spatial_adaptive_quantization: ?H264SpatialAdaptiveQuantization = null,
 
     /// Produces a bitstream compliant with SMPTE RP-2027.
-    syntax: ?H264Syntax,
+    syntax: ?H264Syntax = null,
 
     /// When you do frame rate conversion from 23.976 frames per second (fps) to
     /// 29.97 fps, and your output scan type is interlaced, you can optionally
@@ -408,7 +408,7 @@ pub const H264Settings = struct {
     /// play back. When you keep the default value, None, MediaConvert does a
     /// standard frame rate conversion to 29.97 without doing anything with the
     /// field polarity to create a smoother picture.
-    telecine: ?H264Telecine,
+    telecine: ?H264Telecine = null,
 
     /// Only use this setting when you change the default value, AUTO, for the
     /// setting H264AdaptiveQuantization. When you keep all defaults, excluding
@@ -432,10 +432,10 @@ pub const H264Settings = struct {
     /// setting Adaptive quantization. To manually enable or disable
     /// H264TemporalAdaptiveQuantization, you must set Adaptive quantization to a
     /// value other than AUTO.
-    temporal_adaptive_quantization: ?H264TemporalAdaptiveQuantization,
+    temporal_adaptive_quantization: ?H264TemporalAdaptiveQuantization = null,
 
     /// Inserts timecode for each frame as 4 bytes of an unregistered SEI message.
-    unregistered_sei_timecode: ?H264UnregisteredSeiTimecode,
+    unregistered_sei_timecode: ?H264UnregisteredSeiTimecode = null,
 
     /// Specify how SPS and PPS NAL units are written in your output MP4 container,
     /// according to ISO/IEC 14496-15. If the location of these parameters doesn't
@@ -444,7 +444,7 @@ pub const H264Settings = struct {
     /// samples directly). To write SPS and PPS NAL units directly into samples (but
     /// not in the 'stsd' box): Choose AVC3. When you do, note that your output
     /// might not play properly with some downstream systems or players.
-    write_mp_4_packaging_type: ?H264WriteMp4PackagingType,
+    write_mp_4_packaging_type: ?H264WriteMp4PackagingType = null,
 
     pub const json_field_names = .{
         .adaptive_quantization = "AdaptiveQuantization",

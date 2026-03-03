@@ -11,12 +11,12 @@ pub const MessageReviewHandler = struct {
     /// connected to the room. If denied, the message is not delivered to any user.
     /// Default:
     /// `ALLOW`.
-    fallback_result: ?FallbackResult,
+    fallback_result: ?FallbackResult = null,
 
     /// Identifier of the message review handler. Currently this must be an ARN of a
     /// lambda
     /// function.
-    uri: ?[]const u8,
+    uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .fallback_result = "fallbackResult",

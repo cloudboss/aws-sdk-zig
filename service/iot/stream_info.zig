@@ -3,28 +3,28 @@ const StreamFile = @import("stream_file.zig").StreamFile;
 /// Information about a stream.
 pub const StreamInfo = struct {
     /// The date when the stream was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of the stream.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The files to stream.
-    files: ?[]const StreamFile,
+    files: ?[]const StreamFile = null,
 
     /// The date when the stream was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// An IAM role IoT assumes to access your S3 files.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The stream ARN.
-    stream_arn: ?[]const u8,
+    stream_arn: ?[]const u8 = null,
 
     /// The stream ID.
-    stream_id: ?[]const u8,
+    stream_id: ?[]const u8 = null,
 
     /// The stream version.
-    stream_version: ?i32,
+    stream_version: ?i32 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

@@ -10,20 +10,20 @@ const ZendeskSourceProperties = @import("zendesk_source_properties.zig").Zendesk
 /// Amazon S3.
 pub const SourceConnectorProperties = struct {
     /// The properties that are applied when Marketo is being used as a source.
-    marketo: ?MarketoSourceProperties,
+    marketo: ?MarketoSourceProperties = null,
 
     /// The properties that are applied when Amazon S3 is being used as the flow
     /// source.
-    s3: ?S3SourceProperties,
+    s3: ?S3SourceProperties = null,
 
     /// The properties that are applied when Salesforce is being used as a source.
-    salesforce: ?SalesforceSourceProperties,
+    salesforce: ?SalesforceSourceProperties = null,
 
     /// The properties that are applied when ServiceNow is being used as a source.
-    service_now: ?ServiceNowSourceProperties,
+    service_now: ?ServiceNowSourceProperties = null,
 
     /// The properties that are applied when using Zendesk as a flow source.
-    zendesk: ?ZendeskSourceProperties,
+    zendesk: ?ZendeskSourceProperties = null,
 
     pub const json_field_names = .{
         .marketo = "Marketo",

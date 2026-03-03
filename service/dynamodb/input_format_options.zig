@@ -7,7 +7,7 @@ pub const InputFormatOptions = struct {
     /// The options for imported source files in CSV format. The values are
     /// Delimiter and
     /// HeaderList.
-    csv: ?CsvOptions,
+    csv: ?CsvOptions = null,
 
     pub const json_field_names = .{
         .csv = "Csv",

@@ -8,41 +8,41 @@ pub const FunctionConfiguration = struct {
     /// The `function` code that contains the request and response functions. When
     /// code is used, the `runtime` is required. The `runtime` value must be
     /// `APPSYNC_JS`.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The name of the `DataSource`.
-    data_source_name: ?[]const u8,
+    data_source_name: ?[]const u8 = null,
 
     /// The `Function` description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the `Function` object.
-    function_arn: ?[]const u8,
+    function_arn: ?[]const u8 = null,
 
     /// A unique ID representing the `Function` object.
-    function_id: ?[]const u8,
+    function_id: ?[]const u8 = null,
 
     /// The version of the request mapping template. Currently, only the 2018-05-29
     /// version of
     /// the template is supported.
-    function_version: ?[]const u8,
+    function_version: ?[]const u8 = null,
 
     /// The maximum batching size for a resolver.
     max_batch_size: i32 = 0,
 
     /// The name of the `Function` object.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The `Function` request mapping template. Functions support only the
     /// 2018-05-29 version of the request mapping template.
-    request_mapping_template: ?[]const u8,
+    request_mapping_template: ?[]const u8 = null,
 
     /// The `Function` response mapping template.
-    response_mapping_template: ?[]const u8,
+    response_mapping_template: ?[]const u8 = null,
 
-    runtime: ?AppSyncRuntime,
+    runtime: ?AppSyncRuntime = null,
 
-    sync_config: ?SyncConfig,
+    sync_config: ?SyncConfig = null,
 
     pub const json_field_names = .{
         .code = "code",

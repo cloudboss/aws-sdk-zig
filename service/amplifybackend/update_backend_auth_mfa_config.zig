@@ -5,11 +5,11 @@ const Settings = @import("settings.zig").Settings;
 /// of your Amplify project.
 pub const UpdateBackendAuthMFAConfig = struct {
     /// The MFA mode for the backend of your Amplify project.
-    mfa_mode: ?MFAMode,
+    mfa_mode: ?MFAMode = null,
 
     /// The settings of your MFA configuration for the backend of your Amplify
     /// project.
-    settings: ?Settings,
+    settings: ?Settings = null,
 
     pub const json_field_names = .{
         .mfa_mode = "MFAMode",

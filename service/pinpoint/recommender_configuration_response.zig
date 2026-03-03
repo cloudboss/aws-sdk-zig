@@ -13,14 +13,14 @@ pub const RecommenderConfigurationResponse = struct {
     /// This value is null if the configuration doesn't invoke an AWS Lambda
     /// function (RecommendationTransformerUri) to perform additional processing of
     /// recommendation data.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The date, in extended ISO 8601 format, when the configuration was created
     /// for the recommender model.
     creation_date: []const u8,
 
     /// The custom description of the configuration for the recommender model.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier for the recommender model configuration.
     id: []const u8,
@@ -30,7 +30,7 @@ pub const RecommenderConfigurationResponse = struct {
     last_modified_date: []const u8,
 
     /// The custom name of the configuration for the recommender model.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of Amazon Pinpoint ID that's associated with unique user IDs in the
     /// recommender model. This value enables the model to use attribute and event
@@ -45,7 +45,7 @@ pub const RecommenderConfigurationResponse = struct {
     ///   IDs in Amazon Pinpoint. If this value is specified, an endpoint definition
     ///   in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint
     ///   ID. Otherwise, messages won’t be sent to the user's endpoint.
-    recommendation_provider_id_type: ?[]const u8,
+    recommendation_provider_id_type: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
     /// (IAM) role that authorizes Amazon Pinpoint to retrieve recommendation data
@@ -66,18 +66,18 @@ pub const RecommenderConfigurationResponse = struct {
     /// This value is null if the configuration doesn't invoke an AWS Lambda
     /// function (RecommendationTransformerUri) to perform additional processing of
     /// recommendation data.
-    recommendations_display_name: ?[]const u8,
+    recommendations_display_name: ?[]const u8 = null,
 
     /// The number of recommended items that are retrieved from the model for each
     /// endpoint or user, depending on the value for the
     /// RecommendationProviderIdType property. This number determines how many
     /// recommended items are available for use in message variables.
-    recommendations_per_message: ?i32,
+    recommendations_per_message: ?i32 = null,
 
     /// The name or Amazon Resource Name (ARN) of the AWS Lambda function that
     /// Amazon Pinpoint invokes to perform additional processing of recommendation
     /// data that it retrieves from the recommender model.
-    recommendation_transformer_uri: ?[]const u8,
+    recommendation_transformer_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

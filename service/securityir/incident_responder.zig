@@ -1,7 +1,7 @@
 const CommunicationType = @import("communication_type.zig").CommunicationType;
 
 pub const IncidentResponder = struct {
-    communication_preferences: ?[]const CommunicationType,
+    communication_preferences: ?[]const CommunicationType = null,
 
     email: []const u8,
 

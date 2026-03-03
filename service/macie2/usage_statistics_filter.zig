@@ -7,10 +7,10 @@ pub const UsageStatisticsFilter = struct {
     /// The operator to use in the condition. If the value for the key property is
     /// accountId, this value must be CONTAINS. If the value for the key property is
     /// any other supported field, this value can be EQ, GT, GTE, LT, LTE, or NE.
-    comparator: ?UsageStatisticsFilterComparator,
+    comparator: ?UsageStatisticsFilterComparator = null,
 
     /// The field to use in the condition.
-    key: ?UsageStatisticsFilterKey,
+    key: ?UsageStatisticsFilterKey = null,
 
     /// An array that lists values to use in the condition, based on the value for
     /// the field specified by the key property. If the value for the key property
@@ -26,7 +26,7 @@ pub const UsageStatisticsFilter = struct {
     ///   account has reached its monthly quota.
     /// * total - A string that represents the current estimated cost for an
     ///   account.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .comparator = "comparator",

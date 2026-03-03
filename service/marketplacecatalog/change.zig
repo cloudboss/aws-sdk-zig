@@ -5,7 +5,7 @@ const Tag = @import("tag.zig").Tag;
 /// `Entity`.
 pub const Change = struct {
     /// Optional name for the change.
-    change_name: ?[]const u8,
+    change_name: ?[]const u8 = null,
 
     /// Change types are single string values that describe your intention for the
     /// change.
@@ -25,7 +25,7 @@ pub const Change = struct {
     /// products](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products). Also, for more information about change
     /// types available for container-based products, see [Working with container
     /// products](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products).
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// Alternative field that accepts a JSON value instead of a string for
     /// `ChangeType` details. You can use either `Details` or
@@ -35,13 +35,13 @@ pub const Change = struct {
     /// [Python](https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python)
     /// and
     /// [Java](https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main) shapes on GitHub.
-    details_document: ?[]const u8,
+    details_document: ?[]const u8 = null,
 
     /// The entity to be changed.
     entity: Entity,
 
     /// The tags associated with the change.
-    entity_tags: ?[]const Tag,
+    entity_tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .change_name = "ChangeName",

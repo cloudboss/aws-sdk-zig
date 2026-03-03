@@ -9,18 +9,18 @@ pub const Slot = struct {
     /// that the `values` field contains a list of slot values. When
     /// the value is `Scalar`, it indicates that the
     /// `value` field contains a single value.
-    shape: ?Shape,
+    shape: ?Shape = null,
 
     /// The constituent sub slots of a composite slot.
-    sub_slots: ?[]const aws.map.MapEntry(Slot),
+    sub_slots: ?[]const aws.map.MapEntry(Slot) = null,
 
     /// The current value of the slot.
-    value: ?Value,
+    value: ?Value = null,
 
     /// A list of one or more values that the user provided for the slot.
     /// For example, if a for a slot that elicits pizza toppings, the values
     /// might be "pepperoni" and "pineapple."
-    values: ?[]const Slot,
+    values: ?[]const Slot = null,
 
     pub const json_field_names = .{
         .shape = "shape",

@@ -23,7 +23,7 @@ pub const DataLakeDatasetSchema = struct {
     /// have duplicate records, duplicate records can still be ingested if
     /// CreateDataIntegrationFlow's dedupe disabled or through
     /// SendDataIntegrationEvent's APPEND operation.
-    primary_keys: ?[]const DataLakeDatasetPrimaryKeyField,
+    primary_keys: ?[]const DataLakeDatasetPrimaryKeyField = null,
 
     pub const json_field_names = .{
         .fields = "fields",

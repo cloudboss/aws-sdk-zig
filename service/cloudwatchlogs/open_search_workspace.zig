@@ -13,10 +13,10 @@ pub const OpenSearchWorkspace = struct {
     /// This structure contains information about the status of an OpenSearch
     /// Service
     /// resource.
-    status: ?OpenSearchResourceStatus,
+    status: ?OpenSearchResourceStatus = null,
 
     /// The ID of this workspace.
-    workspace_id: ?[]const u8,
+    workspace_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status = "status",

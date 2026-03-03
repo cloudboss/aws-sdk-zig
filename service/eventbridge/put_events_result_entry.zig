@@ -59,13 +59,13 @@ pub const PutEventsResultEntry = struct {
     /// You do not have permissions to publish events with this detail type onto
     /// this event
     /// bus.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message that explains why the event submission failed.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The ID of the event.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

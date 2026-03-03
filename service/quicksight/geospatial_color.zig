@@ -5,13 +5,13 @@ const GeospatialSolidColor = @import("geospatial_solid_color.zig").GeospatialSol
 /// The visualization properties for solid, gradient, and categorical colors.
 pub const GeospatialColor = struct {
     /// The visualization properties for the categorical color.
-    categorical: ?GeospatialCategoricalColor,
+    categorical: ?GeospatialCategoricalColor = null,
 
     /// The visualization properties for the gradient color.
-    gradient: ?GeospatialGradientColor,
+    gradient: ?GeospatialGradientColor = null,
 
     /// The visualization properties for the solid color.
-    solid: ?GeospatialSolidColor,
+    solid: ?GeospatialSolidColor = null,
 
     pub const json_field_names = .{
         .categorical = "Categorical",

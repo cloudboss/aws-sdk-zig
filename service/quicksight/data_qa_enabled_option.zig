@@ -6,7 +6,7 @@ const DashboardBehavior = @import("dashboard_behavior.zig").DashboardBehavior;
 /// dashboard. If a topic is linked, Topic Q&A is enabled.
 pub const DataQAEnabledOption = struct {
     /// The status of the Data Q&A option on the dashboard.
-    availability_status: ?DashboardBehavior,
+    availability_status: ?DashboardBehavior = null,
 
     pub const json_field_names = .{
         .availability_status = "AvailabilityStatus",

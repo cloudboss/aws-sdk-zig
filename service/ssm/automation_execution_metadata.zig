@@ -13,21 +13,21 @@ const AlarmStateInformation = @import("alarm_state_information.zig").AlarmStateI
 /// Details about a specific Automation execution.
 pub const AutomationExecutionMetadata = struct {
     /// The details for the CloudWatch alarm applied to your automation.
-    alarm_configuration: ?AlarmConfiguration,
+    alarm_configuration: ?AlarmConfiguration = null,
 
     /// The ID of a State Manager association used in the Automation operation.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The execution ID.
-    automation_execution_id: ?[]const u8,
+    automation_execution_id: ?[]const u8 = null,
 
     /// The status of the execution.
-    automation_execution_status: ?AutomationExecutionStatus,
+    automation_execution_status: ?AutomationExecutionStatus = null,
 
     /// The subtype of the Automation operation. Currently, the only supported value
     /// is
     /// `ChangeRequest`.
-    automation_subtype: ?AutomationSubtype,
+    automation_subtype: ?AutomationSubtype = null,
 
     /// Use this filter with DescribeAutomationExecutions. Specify either Local or
     /// CrossAccount. CrossAccount is an Automation that runs in multiple Amazon Web
@@ -36,62 +36,62 @@ pub const AutomationExecutionMetadata = struct {
     /// in multiple Amazon Web Services Regions and
     /// accounts](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html) in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    automation_type: ?AutomationType,
+    automation_type: ?AutomationType = null,
 
     /// The name of the Change Manager change request.
-    change_request_name: ?[]const u8,
+    change_request_name: ?[]const u8 = null,
 
     /// The action of the step that is currently running.
-    current_action: ?[]const u8,
+    current_action: ?[]const u8 = null,
 
     /// The name of the step that is currently running.
-    current_step_name: ?[]const u8,
+    current_step_name: ?[]const u8 = null,
 
     /// The name of the Automation runbook used during execution.
-    document_name: ?[]const u8,
+    document_name: ?[]const u8 = null,
 
     /// The document version used during the execution.
-    document_version: ?[]const u8,
+    document_version: ?[]const u8 = null,
 
     /// The IAM role ARN of the user who ran the automation.
-    executed_by: ?[]const u8,
+    executed_by: ?[]const u8 = null,
 
     /// The time the execution finished. This isn't populated if the execution is
     /// still in
     /// progress.
-    execution_end_time: ?i64,
+    execution_end_time: ?i64 = null,
 
     /// The time the execution started.
-    execution_start_time: ?i64,
+    execution_start_time: ?i64 = null,
 
     /// The list of execution outputs as defined in the Automation runbook.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// An S3 bucket where execution information is stored.
-    log_file: ?[]const u8,
+    log_file: ?[]const u8 = null,
 
     /// The `MaxConcurrency` value specified by the user when starting the
     /// automation.
-    max_concurrency: ?[]const u8,
+    max_concurrency: ?[]const u8 = null,
 
     /// The `MaxErrors` value specified by the user when starting the automation.
-    max_errors: ?[]const u8,
+    max_errors: ?[]const u8 = null,
 
     /// The Automation execution mode.
-    mode: ?ExecutionMode,
+    mode: ?ExecutionMode = null,
 
     /// The ID of an OpsItem that is created to represent a Change Manager change
     /// request.
-    ops_item_id: ?[]const u8,
+    ops_item_id: ?[]const u8 = null,
 
     /// The list of execution outputs as defined in the Automation runbook.
-    outputs: ?[]const aws.map.MapEntry([]const []const u8),
+    outputs: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The execution ID of the parent automation.
-    parent_automation_execution_id: ?[]const u8,
+    parent_automation_execution_id: ?[]const u8 = null,
 
     /// A list of targets that resolved during the execution.
-    resolved_targets: ?ResolvedTargets,
+    resolved_targets: ?ResolvedTargets = null,
 
     /// Information about the Automation runbooks that are run during a runbook
     /// workflow in
@@ -100,30 +100,30 @@ pub const AutomationExecutionMetadata = struct {
     /// The Automation runbooks specified for the runbook workflow can't run until
     /// all required
     /// approvals for the change request have been received.
-    runbooks: ?[]const Runbook,
+    runbooks: ?[]const Runbook = null,
 
     /// The date and time the Automation operation is scheduled to start.
-    scheduled_time: ?i64,
+    scheduled_time: ?i64 = null,
 
     /// The list of execution outputs as defined in the Automation runbook.
-    target: ?[]const u8,
+    target: ?[]const u8 = null,
 
     /// A publicly accessible URL for a file that contains the `TargetLocations`
     /// body.
     /// Currently, only files in presigned Amazon S3 buckets are supported
-    target_locations_url: ?[]const u8,
+    target_locations_url: ?[]const u8 = null,
 
     /// The specified key-value mapping of document parameters to target resources.
-    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8),
+    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8) = null,
 
     /// The list of execution outputs as defined in the Automation runbook.
-    target_parameter_name: ?[]const u8,
+    target_parameter_name: ?[]const u8 = null,
 
     /// The targets defined by the user when starting the automation.
-    targets: ?[]const Target,
+    targets: ?[]const Target = null,
 
     /// The CloudWatch alarm that was invoked by the automation.
-    triggered_alarms: ?[]const AlarmStateInformation,
+    triggered_alarms: ?[]const AlarmStateInformation = null,
 
     pub const json_field_names = .{
         .alarm_configuration = "AlarmConfiguration",

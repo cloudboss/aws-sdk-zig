@@ -22,7 +22,7 @@ pub const AssessmentRun = struct {
     /// The assessment run completion time that corresponds to the rules packages
     /// evaluation
     /// completion time or failure.
-    completed_at: ?i64,
+    completed_at: ?i64 = null,
 
     /// The time when StartAssessmentRun was called.
     created_at: i64,
@@ -49,7 +49,7 @@ pub const AssessmentRun = struct {
     rules_package_arns: []const []const u8,
 
     /// The time when StartAssessmentRun was called.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The state of the assessment run.
     state: AssessmentRunState,

@@ -18,7 +18,7 @@ pub const MongoDbAtlasConfiguration = struct {
 
     /// The name of the VPC endpoint service in your account that is connected to
     /// your MongoDB Atlas cluster.
-    endpoint_service_name: ?[]const u8,
+    endpoint_service_name: ?[]const u8 = null,
 
     /// Contains the names of the fields to which to map information about the
     /// vector store.
@@ -26,7 +26,7 @@ pub const MongoDbAtlasConfiguration = struct {
 
     /// The name of the text search index in the MongoDB collection. This is
     /// required for using the hybrid search feature.
-    text_index_name: ?[]const u8,
+    text_index_name: ?[]const u8 = null,
 
     /// The name of the MongoDB Atlas vector search index.
     vector_index_name: []const u8,

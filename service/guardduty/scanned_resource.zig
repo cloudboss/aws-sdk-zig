@@ -7,19 +7,19 @@ const ScanStatusReason = @import("scan_status_reason.zig").ScanStatusReason;
 /// malware scan operation.
 pub const ScannedResource = struct {
     /// Information about the scanned resource.
-    resource_details: ?ScannedResourceDetails,
+    resource_details: ?ScannedResourceDetails = null,
 
     /// Amazon Resource Name (ARN) of the scanned resource.
-    scanned_resource_arn: ?[]const u8,
+    scanned_resource_arn: ?[]const u8 = null,
 
     /// The status of the scanned resource.
-    scanned_resource_status: ?MalwareProtectionScanStatus,
+    scanned_resource_status: ?MalwareProtectionScanStatus = null,
 
     /// The resource type of the scanned resource.
-    scanned_resource_type: ?MalwareProtectionResourceType,
+    scanned_resource_type: ?MalwareProtectionResourceType = null,
 
     /// The reason for the scan status of this particular resource, if applicable.
-    scan_status_reason: ?ScanStatusReason,
+    scan_status_reason: ?ScanStatusReason = null,
 
     pub const json_field_names = .{
         .resource_details = "ResourceDetails",

@@ -7,13 +7,13 @@ const VirtualInterfaceState = @import("virtual_interface_state.zig").VirtualInte
 /// Information about a virtual interface.
 pub const VirtualInterface = struct {
     /// The address family for the BGP peer.
-    address_family: ?AddressFamily,
+    address_family: ?AddressFamily = null,
 
     /// The IP address assigned to the Amazon interface.
-    amazon_address: ?[]const u8,
+    amazon_address: ?[]const u8 = null,
 
     /// The autonomous system number (AS) for the Amazon side of the connection.
-    amazon_side_asn: ?i64,
+    amazon_side_asn: ?i64 = null,
 
     /// The autonomous system number (ASN). The valid range is from 1 to 2147483646
     /// for Border Gateway Protocol (BGP) configuration. If you provide a number
@@ -42,72 +42,72 @@ pub const VirtualInterface = struct {
     /// * If you provide a value in the same API call for both `asn`
     /// and `asnLong`, the API will only accept the value for
     /// `asnLong`.
-    asn_long: ?i64,
+    asn_long: ?i64 = null,
 
     /// The authentication key for BGP configuration. This string has a minimum
     /// length of 6 characters and and a maximun lenth of 80 characters.
-    auth_key: ?[]const u8,
+    auth_key: ?[]const u8 = null,
 
     /// The Direct Connect endpoint that terminates the physical connection.
-    aws_device_v2: ?[]const u8,
+    aws_device_v2: ?[]const u8 = null,
 
     /// The Direct Connect endpoint that terminates the logical connection. This
     /// device might be
     /// different than the device that terminates the physical connection.
-    aws_logical_device_id: ?[]const u8,
+    aws_logical_device_id: ?[]const u8 = null,
 
     /// The BGP peers configured on this virtual interface.
-    bgp_peers: ?[]const BGPPeer,
+    bgp_peers: ?[]const BGPPeer = null,
 
     /// The ID of the connection.
-    connection_id: ?[]const u8,
+    connection_id: ?[]const u8 = null,
 
     /// The IP address assigned to the customer interface.
-    customer_address: ?[]const u8,
+    customer_address: ?[]const u8 = null,
 
     /// The customer router configuration.
-    customer_router_config: ?[]const u8,
+    customer_router_config: ?[]const u8 = null,
 
     /// The ID of the Direct Connect gateway.
-    direct_connect_gateway_id: ?[]const u8,
+    direct_connect_gateway_id: ?[]const u8 = null,
 
     /// Indicates whether jumbo frames are supported.
-    jumbo_frame_capable: ?bool,
+    jumbo_frame_capable: ?bool = null,
 
     /// The location of the connection.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The maximum transmission unit (MTU), in bytes. The supported values are 1500
     /// and 8500. The default value is 1500
-    mtu: ?i32,
+    mtu: ?i32 = null,
 
     /// The ID of the Amazon Web Services account that owns the virtual interface.
-    owner_account: ?[]const u8,
+    owner_account: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the virtual interface is located.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The routes to be advertised to the Amazon Web Services network in this
     /// Region. Applies to public virtual interfaces.
-    route_filter_prefixes: ?[]const RouteFilterPrefix,
+    route_filter_prefixes: ?[]const RouteFilterPrefix = null,
 
     /// Indicates whether SiteLink is enabled.
-    site_link_enabled: ?bool,
+    site_link_enabled: ?bool = null,
 
     /// The tags associated with the virtual interface.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the virtual private gateway. Applies only to private virtual
     /// interfaces.
-    virtual_gateway_id: ?[]const u8,
+    virtual_gateway_id: ?[]const u8 = null,
 
     /// The ID of the virtual interface.
-    virtual_interface_id: ?[]const u8,
+    virtual_interface_id: ?[]const u8 = null,
 
     /// The name of the virtual interface assigned by the customer network. The name
     /// has a maximum of 100 characters. The following are valid characters: a-z,
     /// 0-9 and a hyphen (-).
-    virtual_interface_name: ?[]const u8,
+    virtual_interface_name: ?[]const u8 = null,
 
     /// The state of the virtual interface. The following are the possible values:
     ///
@@ -143,11 +143,11 @@ pub const VirtualInterface = struct {
     ///   `Rejected` state.
     ///
     /// * `unknown`: The state of the virtual interface is not available.
-    virtual_interface_state: ?VirtualInterfaceState,
+    virtual_interface_state: ?VirtualInterfaceState = null,
 
     /// The type of virtual interface. The possible values are `private`, `public`
     /// and `transit`.
-    virtual_interface_type: ?[]const u8,
+    virtual_interface_type: ?[]const u8 = null,
 
     /// The ID of the VLAN.
     vlan: i32 = 0,

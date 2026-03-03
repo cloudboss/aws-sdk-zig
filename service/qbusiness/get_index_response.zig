@@ -8,50 +8,50 @@ const IndexType = @import("index_type.zig").IndexType;
 pub const GetIndexResponse = struct {
     /// The identifier of the Amazon Q Business application associated with the
     /// index.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The storage capacity units chosen for your Amazon Q Business index.
-    capacity_configuration: ?IndexCapacityConfiguration,
+    capacity_configuration: ?IndexCapacityConfiguration = null,
 
     /// The Unix timestamp when the Amazon Q Business index was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description for the Amazon Q Business index.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the Amazon Q Business index.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// Configuration information for document attributes or metadata. Document
     /// metadata are fields associated with your documents. For example, the company
     /// department name associated with each document. For more information, see
     /// [Understanding document
     /// attributes](https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes).
-    document_attribute_configurations: ?[]const DocumentAttributeConfiguration,
+    document_attribute_configurations: ?[]const DocumentAttributeConfiguration = null,
 
     /// When the `Status` field value is `FAILED`, the `ErrorMessage` field contains
     /// a message that explains why.
-    @"error": ?ErrorDetail,
+    @"error": ?ErrorDetail = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Q Business index.
-    index_arn: ?[]const u8,
+    index_arn: ?[]const u8 = null,
 
     /// The identifier of the Amazon Q Business index.
-    index_id: ?[]const u8,
+    index_id: ?[]const u8 = null,
 
     /// Provides information about the number of documents indexed.
-    index_statistics: ?IndexStatistics,
+    index_statistics: ?IndexStatistics = null,
 
     /// The current status of the index. When the value is `ACTIVE`, the index is
     /// ready for use. If the `Status` field value is `FAILED`, the `ErrorMessage`
     /// field contains a message that explains why.
-    status: ?IndexStatus,
+    status: ?IndexStatus = null,
 
     /// The type of index attached to your Amazon Q Business application.
-    @"type": ?IndexType,
+    @"type": ?IndexType = null,
 
     /// The Unix timestamp when the Amazon Q Business index was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .application_id = "applicationId",

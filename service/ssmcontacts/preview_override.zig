@@ -1,13 +1,13 @@
 /// Information about contacts and times that an on-call override replaces.
 pub const PreviewOverride = struct {
     /// Information about the time a rotation override would end.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// Information about contacts to add to an on-call rotation override.
-    new_members: ?[]const []const u8,
+    new_members: ?[]const []const u8 = null,
 
     /// Information about the time a rotation override would begin.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .end_time = "EndTime",

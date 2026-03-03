@@ -6,28 +6,28 @@ const CoreNetworkPolicyError = @import("core_network_policy_error.zig").CoreNetw
 pub const CoreNetworkPolicy = struct {
     /// Whether a core network policy is the current LIVE policy or the most
     /// recently submitted policy.
-    alias: ?CoreNetworkPolicyAlias,
+    alias: ?CoreNetworkPolicyAlias = null,
 
     /// The state of a core network policy.
-    change_set_state: ?ChangeSetState,
+    change_set_state: ?ChangeSetState = null,
 
     /// The ID of a core network.
-    core_network_id: ?[]const u8,
+    core_network_id: ?[]const u8 = null,
 
     /// The timestamp when a core network policy was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of a core network policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Describes a core network policy.
-    policy_document: ?[]const u8,
+    policy_document: ?[]const u8 = null,
 
     /// Describes any errors in a core network policy.
-    policy_errors: ?[]const CoreNetworkPolicyError,
+    policy_errors: ?[]const CoreNetworkPolicyError = null,
 
     /// The ID of the policy version.
-    policy_version_id: ?i32,
+    policy_version_id: ?i32 = null,
 
     pub const json_field_names = .{
         .alias = "Alias",

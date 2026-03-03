@@ -7,11 +7,11 @@ const MetricConfiguration = @import("metric_configuration.zig").MetricConfigurat
 pub const LinkConfiguration = struct {
     /// Use this structure to filter which log groups are to send log events from
     /// the source account to the monitoring account.
-    log_group_configuration: ?LogGroupConfiguration,
+    log_group_configuration: ?LogGroupConfiguration = null,
 
     /// Use this structure to filter which metric namespaces are to be shared from
     /// the source account to the monitoring account.
-    metric_configuration: ?MetricConfiguration,
+    metric_configuration: ?MetricConfiguration = null,
 
     pub const json_field_names = .{
         .log_group_configuration = "LogGroupConfiguration",

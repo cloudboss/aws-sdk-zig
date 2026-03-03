@@ -7,28 +7,28 @@ pub const EC2ResourceUtilization = struct {
     /// The field that contains a list of disk (local storage) metrics that are
     /// associated
     /// with the current instance.
-    disk_resource_utilization: ?DiskResourceUtilization,
+    disk_resource_utilization: ?DiskResourceUtilization = null,
 
     /// The EBS field that contains a list of EBS metrics that are associated with
     /// the current
     /// instance.
-    ebs_resource_utilization: ?EBSResourceUtilization,
+    ebs_resource_utilization: ?EBSResourceUtilization = null,
 
     /// The maximum observed or expected CPU utilization of the instance.
-    max_cpu_utilization_percentage: ?[]const u8,
+    max_cpu_utilization_percentage: ?[]const u8 = null,
 
     /// The maximum observed or expected memory utilization of the instance.
-    max_memory_utilization_percentage: ?[]const u8,
+    max_memory_utilization_percentage: ?[]const u8 = null,
 
     /// The maximum observed or expected storage utilization of the instance. This
     /// doesn't
     /// include EBS storage.
-    max_storage_utilization_percentage: ?[]const u8,
+    max_storage_utilization_percentage: ?[]const u8 = null,
 
     /// The network field that contains a list of network metrics that are
     /// associated with the
     /// current instance.
-    network_resource_utilization: ?NetworkResourceUtilization,
+    network_resource_utilization: ?NetworkResourceUtilization = null,
 
     pub const json_field_names = .{
         .disk_resource_utilization = "DiskResourceUtilization",

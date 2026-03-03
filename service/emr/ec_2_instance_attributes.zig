@@ -3,36 +3,36 @@
 /// on.
 pub const Ec2InstanceAttributes = struct {
     /// A list of additional Amazon EC2 security group IDs for the master node.
-    additional_master_security_groups: ?[]const []const u8,
+    additional_master_security_groups: ?[]const []const u8 = null,
 
     /// A list of additional Amazon EC2 security group IDs for the core and task
     /// nodes.
-    additional_slave_security_groups: ?[]const []const u8,
+    additional_slave_security_groups: ?[]const []const u8 = null,
 
     /// The Availability Zone in which the cluster will run.
-    ec_2_availability_zone: ?[]const u8,
+    ec_2_availability_zone: ?[]const u8 = null,
 
     /// The name of the Amazon EC2 key pair to use when connecting with SSH into the
     /// master node as a user named "hadoop".
-    ec_2_key_name: ?[]const u8,
+    ec_2_key_name: ?[]const u8 = null,
 
     /// Set this parameter to the identifier of the Amazon VPC subnet where you want
     /// the
     /// cluster to launch. If you do not specify this value, and your account
     /// supports EC2-Classic,
     /// the cluster launches in EC2-Classic.
-    ec_2_subnet_id: ?[]const u8,
+    ec_2_subnet_id: ?[]const u8 = null,
 
     /// The identifier of the Amazon EC2 security group for the master node.
-    emr_managed_master_security_group: ?[]const u8,
+    emr_managed_master_security_group: ?[]const u8 = null,
 
     /// The identifier of the Amazon EC2 security group for the core and task
     /// nodes.
-    emr_managed_slave_security_group: ?[]const u8,
+    emr_managed_slave_security_group: ?[]const u8 = null,
 
     /// The IAM role that was specified when the cluster was launched. The
     /// Amazon EC2 instances of the cluster assume this role.
-    iam_instance_profile: ?[]const u8,
+    iam_instance_profile: ?[]const u8 = null,
 
     /// Applies to clusters configured with the instance fleets option. Specifies
     /// one or more
@@ -46,7 +46,7 @@ pub const Ec2InstanceAttributes = struct {
     /// specify this value, Amazon EMR chooses the Availability Zone for you.
     /// `RequestedEc2SubnetIDs` and `RequestedEc2AvailabilityZones` cannot
     /// be specified together.
-    requested_ec_2_availability_zones: ?[]const []const u8,
+    requested_ec_2_availability_zones: ?[]const []const u8 = null,
 
     /// Applies to clusters configured with the instance fleets option. Specifies
     /// the unique
@@ -63,11 +63,11 @@ pub const Ec2InstanceAttributes = struct {
     /// you.
     /// `RequestedEc2SubnetIDs` and `RequestedEc2AvailabilityZones` cannot
     /// be specified together.
-    requested_ec_2_subnet_ids: ?[]const []const u8,
+    requested_ec_2_subnet_ids: ?[]const []const u8 = null,
 
     /// The identifier of the Amazon EC2 security group for the Amazon EMR
     /// service to access clusters in VPC private subnets.
-    service_access_security_group: ?[]const u8,
+    service_access_security_group: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .additional_master_security_groups = "AdditionalMasterSecurityGroups",

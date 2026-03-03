@@ -4,16 +4,16 @@ const Route = @import("route.zig").Route;
 /// customer subnet route table or Network Firewall subnet route table.
 pub const NetworkFirewallBlackHoleRouteDetectedViolation = struct {
     /// Information about the route table ID.
-    route_table_id: ?[]const u8,
+    route_table_id: ?[]const u8 = null,
 
     /// Information about the route or routes that are in violation.
-    violating_routes: ?[]const Route,
+    violating_routes: ?[]const Route = null,
 
     /// The subnet that has an inactive state.
-    violation_target: ?[]const u8,
+    violation_target: ?[]const u8 = null,
 
     /// Information about the VPC ID.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .route_table_id = "RouteTableId",

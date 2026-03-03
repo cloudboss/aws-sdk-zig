@@ -9,7 +9,7 @@ pub const ResultReuseByAgeConfiguration = struct {
 
     /// Specifies, in minutes, the maximum age of a previous query result that
     /// Athena should consider for reuse. The default is 60.
-    max_age_in_minutes: ?i32,
+    max_age_in_minutes: ?i32 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

@@ -7,7 +7,7 @@ pub const ModelAlias = struct {
     latest_model_id: []const u8,
 
     /// The resolved model ID after alias resolution.
-    resolved_model_id: ?[]const u8,
+    resolved_model_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alias_name = "aliasName",

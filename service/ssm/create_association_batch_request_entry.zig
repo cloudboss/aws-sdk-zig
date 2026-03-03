@@ -10,7 +10,7 @@ const Target = @import("target.zig").Target;
 /// Describes the association of a Amazon Web Services Systems Manager document
 /// (SSM document) and a managed node.
 pub const CreateAssociationBatchRequestEntry = struct {
-    alarm_configuration: ?AlarmConfiguration,
+    alarm_configuration: ?AlarmConfiguration = null,
 
     /// By default, when you create a new association, the system runs it
     /// immediately after it is
@@ -29,14 +29,14 @@ pub const CreateAssociationBatchRequestEntry = struct {
     apply_only_at_cron_interval: bool = false,
 
     /// Specify a descriptive name for the association.
-    association_name: ?[]const u8,
+    association_name: ?[]const u8 = null,
 
     /// Specify the target for the association. This target is required for
     /// associations that use an
     /// Automation runbook and target resources by using rate controls. Automation
     /// is a tool in
     /// Amazon Web Services Systems Manager.
-    automation_target_parameter_name: ?[]const u8,
+    automation_target_parameter_name: ?[]const u8 = null,
 
     /// The names or Amazon Resource Names (ARNs) of the Change Calendar type
     /// documents your
@@ -44,13 +44,13 @@ pub const CreateAssociationBatchRequestEntry = struct {
     /// Calendar is open. For
     /// more information, see [Amazon Web Services Systems Manager Change
     /// Calendar](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar) in the *Amazon Web Services Systems Manager User Guide*.
-    calendar_names: ?[]const []const u8,
+    calendar_names: ?[]const []const u8 = null,
 
     /// The severity level to assign to the association.
-    compliance_severity: ?AssociationComplianceSeverity,
+    compliance_severity: ?AssociationComplianceSeverity = null,
 
     /// The document version.
-    document_version: ?[]const u8,
+    document_version: ?[]const u8 = null,
 
     /// The number of hours the association can run before it is canceled. Duration
     /// applies to
@@ -72,7 +72,7 @@ pub const CreateAssociationBatchRequestEntry = struct {
     /// ` parameter, which means that the association doesn't
     /// run immediately after it is created, but only according to the specified
     /// schedule.
-    duration: ?i32,
+    duration: ?i32 = null,
 
     /// The managed node ID.
     ///
@@ -85,7 +85,7 @@ pub const CreateAssociationBatchRequestEntry = struct {
     /// `DocumentVersion`, `MaxErrors`, `MaxConcurrency`,
     /// `OutputLocation`, or `ScheduleExpression`. To use these parameters, you
     /// must use the `Targets` parameter.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The maximum number of targets allowed to run the association at the same
     /// time. You can
@@ -100,7 +100,7 @@ pub const CreateAssociationBatchRequestEntry = struct {
     /// association interval, the new managed node will process its association
     /// within the limit
     /// specified for `MaxConcurrency`.
-    max_concurrency: ?[]const u8,
+    max_concurrency: ?[]const u8 = null,
 
     /// The number of errors that are allowed before the system stops sending
     /// requests to run the
@@ -123,7 +123,7 @@ pub const CreateAssociationBatchRequestEntry = struct {
     /// that there won't be more than max-errors failed executions, set
     /// `MaxConcurrency` to 1
     /// so that executions proceed one at a time.
-    max_errors: ?[]const u8,
+    max_errors: ?[]const u8 = null,
 
     /// The name of the SSM document that contains the configuration information for
     /// the managed
@@ -151,16 +151,16 @@ pub const CreateAssociationBatchRequestEntry = struct {
     name: []const u8,
 
     /// An S3 bucket where you want to store the results of this request.
-    output_location: ?InstanceAssociationOutputLocation,
+    output_location: ?InstanceAssociationOutputLocation = null,
 
     /// A description of the parameters for a document.
-    parameters: ?[]const aws.map.MapEntry([]const []const u8),
+    parameters: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// A cron expression that specifies a schedule when the association runs.
-    schedule_expression: ?[]const u8,
+    schedule_expression: ?[]const u8 = null,
 
     /// Number of days to wait after the scheduled day to run an association.
-    schedule_offset: ?i32,
+    schedule_offset: ?i32 = null,
 
     /// The mode for generating association compliance. You can specify `AUTO` or
     /// `MANUAL`. In `AUTO` mode, the system uses the status of the association
@@ -177,19 +177,19 @@ pub const CreateAssociationBatchRequestEntry = struct {
     /// is managed by your direct call to the PutComplianceItems API operation.
     ///
     /// By default, all associations use `AUTO` mode.
-    sync_compliance: ?AssociationSyncCompliance,
+    sync_compliance: ?AssociationSyncCompliance = null,
 
     /// Use this action to create an association in multiple Regions and multiple
     /// accounts.
-    target_locations: ?[]const TargetLocation,
+    target_locations: ?[]const TargetLocation = null,
 
     /// A key-value mapping of document parameters to target resources. Both Targets
     /// and TargetMaps
     /// can't be specified together.
-    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8),
+    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8) = null,
 
     /// The managed nodes targeted by the request.
-    targets: ?[]const Target,
+    targets: ?[]const Target = null,
 
     pub const json_field_names = .{
         .alarm_configuration = "AlarmConfiguration",

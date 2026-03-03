@@ -8,14 +8,14 @@ const CustomLineItemType = @import("custom_line_item_type.zig").CustomLineItemTy
 pub const CustomLineItemChargeDetails = struct {
     /// A `CustomLineItemFlatChargeDetails` that describes the charge details of a
     /// flat custom line item.
-    flat: ?CustomLineItemFlatChargeDetails,
+    flat: ?CustomLineItemFlatChargeDetails = null,
 
     /// A representation of the line item filter.
-    line_item_filters: ?[]const LineItemFilter,
+    line_item_filters: ?[]const LineItemFilter = null,
 
     /// A `CustomLineItemPercentageChargeDetails` that describes the charge details
     /// of a percentage custom line item.
-    percentage: ?CustomLineItemPercentageChargeDetails,
+    percentage: ?CustomLineItemPercentageChargeDetails = null,
 
     /// The type of the custom line item that indicates whether the charge is a fee
     /// or credit.

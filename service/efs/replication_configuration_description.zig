@@ -21,7 +21,7 @@ pub const ReplicationConfigurationDescription = struct {
 
     /// ID of the Amazon Web Services account in which the source file system
     /// resides.
-    source_file_system_owner_id: ?[]const u8,
+    source_file_system_owner_id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region in which the source EFS file system is
     /// located.

@@ -4,7 +4,7 @@ pub const NewCustomVocabularyItem = struct {
     /// The display as value assigned to the new custom vocabulary item from the
     /// custom
     /// vocabulary list.
-    display_as: ?[]const u8,
+    display_as: ?[]const u8 = null,
 
     /// The unique phrase for the new custom vocabulary item from the custom
     /// vocabulary list.
@@ -12,7 +12,7 @@ pub const NewCustomVocabularyItem = struct {
 
     /// The weight assigned to the new custom vocabulary item from the custom
     /// vocabulary list.
-    weight: ?i32,
+    weight: ?i32 = null,
 
     pub const json_field_names = .{
         .display_as = "displayAs",

@@ -6,7 +6,7 @@ pub const GeospatialSolidColor = struct {
     color: []const u8,
 
     /// Enables and disables the view state of the color.
-    state: ?GeospatialColorState,
+    state: ?GeospatialColorState = null,
 
     pub const json_field_names = .{
         .color = "Color",

@@ -5,11 +5,11 @@ const MeasureField = @import("measure_field.zig").MeasureField;
 pub const FunnelChartAggregatedFieldWells = struct {
     /// The category field wells of a funnel chart. Values are grouped by category
     /// fields.
-    category: ?[]const DimensionField,
+    category: ?[]const DimensionField = null,
 
     /// The value field wells of a funnel chart. Values are aggregated based on
     /// categories.
-    values: ?[]const MeasureField,
+    values: ?[]const MeasureField = null,
 
     pub const json_field_names = .{
         .category = "Category",

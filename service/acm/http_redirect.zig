@@ -5,11 +5,11 @@
 pub const HttpRedirect = struct {
     /// The URL including the domain to be validated. The certificate authority
     /// sends `GET` requests here during validation.
-    redirect_from: ?[]const u8,
+    redirect_from: ?[]const u8 = null,
 
     /// The URL hosting the validation token. `RedirectFrom` must return this
     /// content or redirect here.
-    redirect_to: ?[]const u8,
+    redirect_to: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .redirect_from = "RedirectFrom",

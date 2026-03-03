@@ -10,14 +10,14 @@ pub const PostgreSQLSettings = struct {
     /// keys and user triggers to reduce the time it takes to bulk load data.
     ///
     /// Example: `afterConnectScript=SET session_replication_role='replica'`
-    after_connect_script: ?[]const u8,
+    after_connect_script: ?[]const u8 = null,
 
     /// This attribute allows you to specify the authentication method as "iam
     /// auth".
-    authentication_method: ?PostgreSQLAuthenticationMethod,
+    authentication_method: ?PostgreSQLAuthenticationMethod = null,
 
     /// The Babelfish for Aurora PostgreSQL database name for the endpoint.
-    babelfish_database_name: ?[]const u8,
+    babelfish_database_name: ?[]const u8 = null,
 
     /// To capture DDL events, DMS creates various artifacts in the PostgreSQL
     /// database when
@@ -27,23 +27,23 @@ pub const PostgreSQLSettings = struct {
     ///
     /// If this value is set to `N`, you don't have to create tables or triggers on
     /// the source database.
-    capture_ddls: ?bool,
+    capture_ddls: ?bool = null,
 
     /// Specifies the default behavior of the replication's handling of PostgreSQL-
     /// compatible
     /// endpoints that require some additional configuration, such as Babelfish
     /// endpoints.
-    database_mode: ?DatabaseMode,
+    database_mode: ?DatabaseMode = null,
 
     /// Database name for the endpoint.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The schema in which the operational DDL database artifacts are created.
     ///
     /// The default value is `public`.
     ///
     /// Example: `ddlArtifactsSchema=xyzddlschema;`
-    ddl_artifacts_schema: ?[]const u8,
+    ddl_artifacts_schema: ?[]const u8 = null,
 
     /// Disables the Unicode source filter with PostgreSQL, for values passed into
     /// the Selection
@@ -56,14 +56,14 @@ pub const PostgreSQLSettings = struct {
     /// Unicode support should only be disabled when using a selection rule filter
     /// is on a text
     /// column in the Source database that is indexed.
-    disable_unicode_source_filter: ?bool,
+    disable_unicode_source_filter: ?bool = null,
 
     /// Sets the client statement timeout for the PostgreSQL instance, in seconds.
     /// The default
     /// value is 60 seconds.
     ///
     /// Example: `executeTimeout=100;`
-    execute_timeout: ?i32,
+    execute_timeout: ?i32 = null,
 
     /// When set to `true`, this value causes a task to fail if the actual size of a
     /// LOB column is greater than the specified `LobMaxSize`.
@@ -73,7 +73,7 @@ pub const PostgreSQLSettings = struct {
     /// If task is set to Limited LOB mode and this option is set to true, the task
     /// fails
     /// instead of truncating the LOB data.
-    fail_tasks_on_lob_truncation: ?bool,
+    fail_tasks_on_lob_truncation: ?bool = null,
 
     /// The write-ahead log (WAL) heartbeat feature mimics a dummy transaction. By
     /// doing this,
@@ -83,17 +83,17 @@ pub const PostgreSQLSettings = struct {
     /// moving and prevents storage full scenarios.
     ///
     /// The default value is `false`.
-    heartbeat_enable: ?bool,
+    heartbeat_enable: ?bool = null,
 
     /// Sets the WAL heartbeat frequency (in minutes).
     ///
     /// The default value is 5 minutes.
-    heartbeat_frequency: ?i32,
+    heartbeat_frequency: ?i32 = null,
 
     /// Sets the schema in which the heartbeat artifacts are created.
     ///
     /// The default value is `public`.
-    heartbeat_schema: ?[]const u8,
+    heartbeat_schema: ?[]const u8 = null,
 
     /// When true, lets PostgreSQL migrate the boolean type as boolean. By default,
     /// PostgreSQL
@@ -102,17 +102,17 @@ pub const PostgreSQLSettings = struct {
     /// and target endpoints for it to take effect.
     ///
     /// The default value is `false`.
-    map_boolean_as_boolean: ?bool,
+    map_boolean_as_boolean: ?bool = null,
 
     /// When true, DMS migrates JSONB values as CLOB.
     ///
     /// The default value is `false`.
-    map_jsonb_as_clob: ?bool,
+    map_jsonb_as_clob: ?bool = null,
 
     /// Sets what datatype to map LONG values as.
     ///
     /// The default value is `wstring`.
-    map_long_varchar_as: ?LongVarcharMappingType,
+    map_long_varchar_as: ?LongVarcharMappingType = null,
 
     /// Specifies the maximum size (in KB) of any .csv file used to transfer data to
     /// PostgreSQL.
@@ -120,18 +120,18 @@ pub const PostgreSQLSettings = struct {
     /// The default value is 32,768 KB (32 MB).
     ///
     /// Example: `maxFileSize=512`
-    max_file_size: ?i32,
+    max_file_size: ?i32 = null,
 
     /// Endpoint connection password.
-    password: ?[]const u8,
+    password: ?[]const u8 = null,
 
     /// Specifies the plugin to use to create a replication slot.
     ///
     /// The default value is `pglogical`.
-    plugin_name: ?PluginNameValue,
+    plugin_name: ?PluginNameValue = null,
 
     /// Endpoint TCP port. The default is 5432.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as
     /// the trusted
@@ -152,11 +152,11 @@ pub const PostgreSQLSettings = struct {
     /// Service
     /// resources](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager) in the
     /// *Database Migration Service User Guide*.
-    secrets_manager_access_role_arn: ?[]const u8,
+    secrets_manager_access_role_arn: ?[]const u8 = null,
 
     /// The full ARN, partial ARN, or friendly name of the `SecretsManagerSecret`
     /// that contains the PostgreSQL endpoint connection details.
-    secrets_manager_secret_id: ?[]const u8,
+    secrets_manager_secret_id: ?[]const u8 = null,
 
     /// The host name of the endpoint database.
     ///
@@ -166,12 +166,12 @@ pub const PostgreSQLSettings = struct {
     ///
     /// For an Aurora PostgreSQL instance, this is the output of
     /// [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html), in the `Endpoint` field.
-    server_name: ?[]const u8,
+    server_name: ?[]const u8 = null,
 
     /// The IAM role arn you can use to authenticate the connection to your
     /// endpoint. Ensure to include `iam:PassRole` and `rds-db:connect` actions in
     /// permission policy.
-    service_access_role_arn: ?[]const u8,
+    service_access_role_arn: ?[]const u8 = null,
 
     /// Sets the name of a previously created logical replication slot for a change
     /// data capture
@@ -192,14 +192,14 @@ pub const PostgreSQLSettings = struct {
     /// point](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Task.CDC.html#CHAP_Task.CDC.StartPoint.Native) in the *Database Migration Service User
     /// Guide*. For more information about using `CdcStartPosition`, see
     /// [CreateReplicationTask](https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html), [StartReplicationTask](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html), and [ModifyReplicationTask](https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html).
-    slot_name: ?[]const u8,
+    slot_name: ?[]const u8 = null,
 
     /// Use the `TrimSpaceInChar` source endpoint setting to trim data on CHAR and
     /// NCHAR data types during migration. The default value is `true`.
-    trim_space_in_char: ?bool,
+    trim_space_in_char: ?bool = null,
 
     /// Endpoint connection user name.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .after_connect_script = "AfterConnectScript",

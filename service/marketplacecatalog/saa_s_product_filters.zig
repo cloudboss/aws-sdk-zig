@@ -8,16 +8,16 @@ const SaaSProductVisibilityFilter = @import("saa_s_product_visibility_filter.zig
 /// `ListEntities` request.
 pub const SaaSProductFilters = struct {
     /// Unique identifier for the SaaS product.
-    entity_id: ?SaaSProductEntityIdFilter,
+    entity_id: ?SaaSProductEntityIdFilter = null,
 
     /// The last date on which the SaaS product was modified.
-    last_modified_date: ?SaaSProductLastModifiedDateFilter,
+    last_modified_date: ?SaaSProductLastModifiedDateFilter = null,
 
     /// The title of the SaaS product.
-    product_title: ?SaaSProductTitleFilter,
+    product_title: ?SaaSProductTitleFilter = null,
 
     /// The visibility of the SaaS product.
-    visibility: ?SaaSProductVisibilityFilter,
+    visibility: ?SaaSProductVisibilityFilter = null,
 
     pub const json_field_names = .{
         .entity_id = "EntityId",

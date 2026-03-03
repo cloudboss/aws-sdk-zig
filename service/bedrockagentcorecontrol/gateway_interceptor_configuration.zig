@@ -8,7 +8,7 @@ const InterceptorConfiguration = @import("interceptor_configuration.zig").Interc
 pub const GatewayInterceptorConfiguration = struct {
     /// The configuration for the input of the interceptor. This field specifies how
     /// the input to the interceptor is constructed
-    input_configuration: ?InterceptorInputConfiguration,
+    input_configuration: ?InterceptorInputConfiguration = null,
 
     /// The supported points of interception. This field specifies which points
     /// during the gateway invocation to invoke the interceptor

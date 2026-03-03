@@ -7,13 +7,13 @@
 /// unsupported instance family.
 pub const GetRecommendationError = struct {
     /// The error code.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The ID of the error.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// The message, or reason, for the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

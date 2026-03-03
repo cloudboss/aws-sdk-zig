@@ -5,14 +5,14 @@ const ManualEvidence = @import("manual_evidence.zig").ManualEvidence;
 pub const BatchImportEvidenceToAssessmentControlError = struct {
     /// The error code that the `BatchImportEvidenceToAssessmentControl` API
     /// returned.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message that the `BatchImportEvidenceToAssessmentControl` API
     /// returned.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// Manual evidence that can't be collected automatically by Audit Manager.
-    manual_evidence: ?ManualEvidence,
+    manual_evidence: ?ManualEvidence = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

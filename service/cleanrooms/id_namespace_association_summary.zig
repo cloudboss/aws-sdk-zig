@@ -18,7 +18,7 @@ pub const IdNamespaceAssociationSummary = struct {
     create_time: i64,
 
     /// The description of the ID namespace association.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of this ID namespace association.
     id: []const u8,

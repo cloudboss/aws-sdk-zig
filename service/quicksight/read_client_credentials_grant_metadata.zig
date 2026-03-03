@@ -9,10 +9,10 @@ pub const ReadClientCredentialsGrantMetadata = struct {
 
     /// The source of client credentials for the OAuth2 client credentials grant
     /// flow.
-    client_credentials_source: ?ClientCredentialsSource,
+    client_credentials_source: ?ClientCredentialsSource = null,
 
     /// The read-only client credentials configuration details.
-    read_client_credentials_details: ?ReadClientCredentialsDetails,
+    read_client_credentials_details: ?ReadClientCredentialsDetails = null,
 
     pub const json_field_names = .{
         .base_endpoint = "BaseEndpoint",

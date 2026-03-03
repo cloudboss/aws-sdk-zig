@@ -32,7 +32,7 @@ pub const Rule = struct {
     /// List of column selectors. Selectors can be used to select columns using a
     /// name or regular
     /// expression from the dataset. Rule will be applied to selected columns.
-    column_selectors: ?[]const ColumnSelector,
+    column_selectors: ?[]const ColumnSelector = null,
 
     /// A value that specifies whether the rule is disabled. Once a rule is
     /// disabled, a profile job will not validate it during a job run. Default
@@ -48,14 +48,14 @@ pub const Rule = struct {
     /// be actual values or column names. To differentiate between the two, column
     /// names
     /// should be enclosed in backticks, for example, `":col1": "`Column A`".`
-    substitution_map: ?[]const aws.map.StringMapEntry,
+    substitution_map: ?[]const aws.map.StringMapEntry = null,
 
     /// The threshold used with a non-aggregate check expression. Non-aggregate
     /// check expressions
     /// will be applied to each row in a specific column, and the threshold will be
     /// used to determine
     /// whether the validation succeeds.
-    threshold: ?Threshold,
+    threshold: ?Threshold = null,
 
     pub const json_field_names = .{
         .check_expression = "CheckExpression",

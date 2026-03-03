@@ -6,7 +6,7 @@ pub const SchemaConfiguration = struct {
     /// The ID of the Amazon Web Services Glue Data Catalog. If you don't supply
     /// this, the
     /// Amazon Web Services account ID is used by default.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// Specifies the name of the Amazon Web Services Glue database that contains
     /// the schema for
@@ -15,12 +15,12 @@ pub const SchemaConfiguration = struct {
     /// If the `SchemaConfiguration` request parameter is used as part of invoking
     /// the `CreateDeliveryStream` API, then the `DatabaseName` property
     /// is required and its value must be specified.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// If you don't specify an Amazon Web Services Region, the default is the
     /// current
     /// Region.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The role that Firehose can use to access Amazon Web Services Glue. This
     /// role must be in the same account you use for Firehose. Cross-account roles
@@ -29,7 +29,7 @@ pub const SchemaConfiguration = struct {
     /// If the `SchemaConfiguration` request parameter is used as part of invoking
     /// the `CreateDeliveryStream` API, then the `RoleARN` property is
     /// required and its value must be specified.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Specifies the Amazon Web Services Glue table that contains the column
     /// information that
@@ -38,7 +38,7 @@ pub const SchemaConfiguration = struct {
     /// If the `SchemaConfiguration` request parameter is used as part of invoking
     /// the `CreateDeliveryStream` API, then the `TableName` property is
     /// required and its value must be specified.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// Specifies the table version for the output data schema. If you don't specify
     /// this
@@ -46,7 +46,7 @@ pub const SchemaConfiguration = struct {
     /// recent version. This means that any updates to the table are automatically
     /// picked
     /// up.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .catalog_id = "CatalogId",

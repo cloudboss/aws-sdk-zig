@@ -14,7 +14,7 @@ pub const Tag = struct {
     key: []const u8,
 
     /// The value of the key-value tag. The value is optional.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

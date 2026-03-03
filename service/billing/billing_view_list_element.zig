@@ -5,26 +5,26 @@ const BillingViewHealthStatus = @import("billing_view_health_status.zig").Billin
 pub const BillingViewListElement = struct {
     /// The Amazon Resource Name (ARN) that can be used to uniquely identify the
     /// billing view.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The type of billing view.
-    billing_view_type: ?BillingViewType,
+    billing_view_type: ?BillingViewType = null,
 
     /// The description of the billing view.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The current health status of the billing view.
-    health_status: ?BillingViewHealthStatus,
+    health_status: ?BillingViewHealthStatus = null,
 
     /// A list of names of the Billing view.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The list of owners of the Billing view.
-    owner_account_id: ?[]const u8,
+    owner_account_id: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID that owns the source billing view, if
     /// this is a derived billing view.
-    source_account_id: ?[]const u8,
+    source_account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

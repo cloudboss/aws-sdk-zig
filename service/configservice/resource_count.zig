@@ -8,7 +8,7 @@ pub const ResourceCount = struct {
 
     /// The resource type (for example,
     /// `"AWS::EC2::Instance"`).
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .count = "count",

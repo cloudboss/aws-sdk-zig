@@ -4,5 +4,5 @@ const Progress = @import("progress.zig").Progress;
 /// operation.
 pub const ProgressEvent = struct {
     /// The Progress event details.
-    details: ?Progress,
+    details: ?Progress = null,
 };

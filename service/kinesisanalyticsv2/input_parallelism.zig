@@ -2,7 +2,7 @@
 /// in-application streams to create for a given streaming source.
 pub const InputParallelism = struct {
     /// The number of in-application streams to create.
-    count: ?i32,
+    count: ?i32 = null,
 
     pub const json_field_names = .{
         .count = "Count",

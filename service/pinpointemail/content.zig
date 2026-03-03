@@ -8,7 +8,7 @@ pub const Content = struct {
     /// outside of the ASCII
     /// range, you have to specify a character set. For example, you could specify
     /// `UTF-8`, `ISO-8859-1`, or `Shift_JIS`.
-    charset: ?[]const u8,
+    charset: ?[]const u8 = null,
 
     /// The content of the message itself.
     data: []const u8,

@@ -9,14 +9,14 @@ pub const OAuthConfig = struct {
 
     /// The URL where users are redirected after completing the OAuth authorization
     /// process.
-    o_auth_complete_redirect_url: ?[]const u8,
+    o_auth_complete_redirect_url: ?[]const u8 = null,
 
     /// Configuration for proactively refreshing OAuth tokens before they expire.
-    proactive_refresh_token_renewal: ?ProactiveRefreshTokenRenewal,
+    proactive_refresh_token_renewal: ?ProactiveRefreshTokenRenewal = null,
 
     /// The OAuth scopes requested during authorization, which define the
     /// permissions granted to the application.
-    scope: ?[]const u8,
+    scope: ?[]const u8 = null,
 
     /// The authentication scheme used when requesting tokens from the token
     /// endpoint.

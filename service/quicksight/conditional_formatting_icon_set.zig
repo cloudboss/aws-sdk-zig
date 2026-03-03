@@ -7,7 +7,7 @@ pub const ConditionalFormattingIconSet = struct {
     expression: []const u8,
 
     /// Determines the icon set type.
-    icon_set_type: ?ConditionalFormattingIconSetType,
+    icon_set_type: ?ConditionalFormattingIconSetType = null,
 
     pub const json_field_names = .{
         .expression = "Expression",

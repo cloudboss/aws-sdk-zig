@@ -20,10 +20,10 @@ pub const TaskContainerDependency = struct {
     /// requires that the container exits with a zero status. This condition can't
     /// be set on an
     /// essential container.
-    condition: ?[]const u8,
+    condition: ?[]const u8 = null,
 
     /// A unique identifier for the container.
-    container_name: ?[]const u8,
+    container_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .condition = "condition",

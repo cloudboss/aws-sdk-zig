@@ -4,9 +4,9 @@ const StringFilter = @import("string_filter.zig").StringFilter;
 /// Enables filtering of security findings based on string field values in OCSF.
 pub const OcsfStringFilter = struct {
     /// The name of the field.
-    field_name: ?OcsfStringField,
+    field_name: ?OcsfStringField = null,
 
-    filter: ?StringFilter,
+    filter: ?StringFilter = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

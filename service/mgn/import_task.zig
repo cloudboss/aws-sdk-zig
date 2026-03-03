@@ -7,31 +7,31 @@ const ImportTaskSummary = @import("import_task_summary.zig").ImportTaskSummary;
 /// Import task.
 pub const ImportTask = struct {
     /// ImportTask arn.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Import task creation datetime.
-    creation_date_time: ?[]const u8,
+    creation_date_time: ?[]const u8 = null,
 
     /// Import task end datetime.
-    end_date_time: ?[]const u8,
+    end_date_time: ?[]const u8 = null,
 
     /// Import task id.
-    import_id: ?[]const u8,
+    import_id: ?[]const u8 = null,
 
     /// Import task progress percentage.
-    progress_percentage: ?f32,
+    progress_percentage: ?f32 = null,
 
     /// Import task s3 bucket source.
-    s_3_bucket_source: ?S3BucketSource,
+    s_3_bucket_source: ?S3BucketSource = null,
 
     /// Import task status.
-    status: ?ImportStatus,
+    status: ?ImportStatus = null,
 
     /// Import task summary.
-    summary: ?ImportTaskSummary,
+    summary: ?ImportTaskSummary = null,
 
     /// Import task tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

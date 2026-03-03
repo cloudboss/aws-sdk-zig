@@ -3,8 +3,8 @@ const CancelCapacityReservationFleetError = @import("cancel_capacity_reservation
 /// Describes a Capacity Reservation Fleet that could not be cancelled.
 pub const FailedCapacityReservationFleetCancellationResult = struct {
     /// Information about the Capacity Reservation Fleet cancellation error.
-    cancel_capacity_reservation_fleet_error: ?CancelCapacityReservationFleetError,
+    cancel_capacity_reservation_fleet_error: ?CancelCapacityReservationFleetError = null,
 
     /// The ID of the Capacity Reservation Fleet that could not be cancelled.
-    capacity_reservation_fleet_id: ?[]const u8,
+    capacity_reservation_fleet_id: ?[]const u8 = null,
 };

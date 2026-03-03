@@ -6,49 +6,49 @@ const GranularAccessControlConfiguration = @import("granular_access_control_conf
 pub const SecurityProfile = struct {
     /// The identifier of the hierarchy group that a security profile uses to
     /// restrict access to resources in Amazon Connect.
-    allowed_access_control_hierarchy_group_id: ?[]const u8,
+    allowed_access_control_hierarchy_group_id: ?[]const u8 = null,
 
     /// The list of tags that a security profile uses to restrict access to
     /// resources in Amazon Connect.
-    allowed_access_control_tags: ?[]const aws.map.StringMapEntry,
+    allowed_access_control_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Resource Name (ARN) for the security profile.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The description of the security profile.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The granular access control configuration for the security profile,
     /// including data table permissions.
-    granular_access_control_configuration: ?GranularAccessControlConfiguration,
+    granular_access_control_configuration: ?GranularAccessControlConfiguration = null,
 
     /// The list of resources that a security profile applies hierarchy restrictions
     /// to in Amazon Connect. Following
     /// are acceptable ResourceNames: `User`.
-    hierarchy_restricted_resources: ?[]const []const u8,
+    hierarchy_restricted_resources: ?[]const []const u8 = null,
 
     /// The identifier for the security profile.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where this resource was last modified.
-    last_modified_region: ?[]const u8,
+    last_modified_region: ?[]const u8 = null,
 
     /// The timestamp when this resource was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The organization resource identifier for the security profile.
-    organization_resource_id: ?[]const u8,
+    organization_resource_id: ?[]const u8 = null,
 
     /// The name for the security profile.
-    security_profile_name: ?[]const u8,
+    security_profile_name: ?[]const u8 = null,
 
     /// The list of resources that a security profile applies tag restrictions to in
     /// Amazon Connect.
-    tag_restricted_resources: ?[]const []const u8,
+    tag_restricted_resources: ?[]const []const u8 = null,
 
     /// The tags used to organize, track, or control access for this resource. For
     /// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .allowed_access_control_hierarchy_group_id = "AllowedAccessControlHierarchyGroupId",

@@ -4,22 +4,22 @@ const PackageImportJobStatus = @import("package_import_job_status.zig").PackageI
 /// A job to import a package version.
 pub const PackageImportJob = struct {
     /// When the job was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The job's ID.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The job's type.
-    job_type: ?PackageImportJobType,
+    job_type: ?PackageImportJobType = null,
 
     /// When the job was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The job's status.
-    status: ?PackageImportJobStatus,
+    status: ?PackageImportJobStatus = null,
 
     /// The job's status message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_time = "CreatedTime",

@@ -7,10 +7,10 @@ pub const DataSetReference = struct {
     /// of the dataset.
     /// The format is
     /// `arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}`.
-    dataset_arn: ?[]const u8,
+    dataset_arn: ?[]const u8 = null,
 
     /// The data source for the dataset.
-    source: ?Source,
+    source: ?Source = null,
 
     pub const json_field_names = .{
         .dataset_arn = "datasetArn",

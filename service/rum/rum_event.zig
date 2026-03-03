@@ -11,7 +11,7 @@ pub const RumEvent = struct {
     /// identity of the user for this session. The user information comes from
     /// information such as the HTTP user-agent request header and document
     /// interface.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     /// The exact time that this event occurred.
     timestamp: i64,

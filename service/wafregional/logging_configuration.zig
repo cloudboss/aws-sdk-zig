@@ -19,7 +19,7 @@ pub const LoggingConfiguration = struct {
     /// example,
     /// if you redact the cookie field, the cookie field in the firehose will be
     /// `xxx`.
-    redacted_fields: ?[]const FieldToMatch,
+    redacted_fields: ?[]const FieldToMatch = null,
 
     /// The Amazon Resource Name (ARN) of the web ACL that you want to associate
     /// with

@@ -2,7 +2,7 @@
 pub const EndpointConfigStepMetadata = struct {
     /// The Amazon Resource Name (ARN) of the endpoint configuration used in the
     /// step.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

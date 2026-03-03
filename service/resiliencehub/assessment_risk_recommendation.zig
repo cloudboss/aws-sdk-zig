@@ -16,20 +16,20 @@ pub const AssessmentRiskRecommendation = struct {
     /// assessment and are associated with the identified risk and recommendation.
     ///
     /// This property is available only in the US East (N. Virginia) Region.
-    app_components: ?[]const []const u8,
+    app_components: ?[]const []const u8 = null,
 
     /// Indicates the recommendation provided by the Resilience Hub to address the
     /// identified
     /// risks in the application.
     ///
     /// This property is available only in the US East (N. Virginia) Region.
-    recommendation: ?[]const u8,
+    recommendation: ?[]const u8 = null,
 
     /// Indicates the description of the potential risk identified in the
     /// application as part of the Resilience Hub assessment.
     ///
     /// This property is available only in the US East (N. Virginia) Region.
-    risk: ?[]const u8,
+    risk: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .app_components = "appComponents",

@@ -7,7 +7,7 @@ const MessageTemplateSourceConfigurationSummary = @import("message_template_sour
 /// The result of message template search.
 pub const MessageTemplateSearchResultData = struct {
     /// The channel of the message template.
-    channel: ?[]const u8,
+    channel: ?[]const u8 = null,
 
     /// The channel subtype this message template applies to.
     channel_subtype: ChannelSubtype,
@@ -16,12 +16,12 @@ pub const MessageTemplateSearchResultData = struct {
     created_time: i64,
 
     /// The description of the message template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
-    grouping_configuration: ?GroupingConfiguration,
+    grouping_configuration: ?GroupingConfiguration = null,
 
     /// Whether the version of the message template is activated.
-    is_active: ?bool,
+    is_active: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the knowledge base.
     knowledge_base_arn: []const u8,
@@ -32,7 +32,7 @@ pub const MessageTemplateSearchResultData = struct {
     /// The language code value for the language in which the quick response is
     /// written. The supported language codes include `de_DE`, `en_US`, `es_ES`,
     /// `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`, `zh_CN`, `zh_TW`
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the user who last updated the message
     /// template data.
@@ -51,13 +51,13 @@ pub const MessageTemplateSearchResultData = struct {
     name: []const u8,
 
     /// The source configuration summary of the message template.
-    source_configuration_summary: ?MessageTemplateSourceConfigurationSummary,
+    source_configuration_summary: ?MessageTemplateSourceConfigurationSummary = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The version number of the message template version.
-    version_number: ?i64,
+    version_number: ?i64 = null,
 
     pub const json_field_names = .{
         .channel = "channel",

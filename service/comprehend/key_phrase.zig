@@ -3,19 +3,19 @@ pub const KeyPhrase = struct {
     /// The zero-based offset from the beginning of the source text to the first
     /// character in the
     /// key phrase.
-    begin_offset: ?i32,
+    begin_offset: ?i32 = null,
 
     /// The zero-based offset from the beginning of the source text to the last
     /// character in the
     /// key phrase.
-    end_offset: ?i32,
+    end_offset: ?i32 = null,
 
     /// The level of confidence that Amazon Comprehend has in the accuracy of the
     /// detection.
-    score: ?f32,
+    score: ?f32 = null,
 
     /// The text of a key noun phrase.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",

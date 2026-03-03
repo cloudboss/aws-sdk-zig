@@ -5,7 +5,7 @@ pub const Bucket = struct {
     count: i64 = 0,
 
     /// The facet value being counted.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .count = "count",

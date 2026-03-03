@@ -19,14 +19,14 @@ pub const ConditionCheck = struct {
     /// information, see [Expression attribute
     /// names](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_names: ?[]const aws.map.StringMapEntry,
+    expression_attribute_names: ?[]const aws.map.StringMapEntry = null,
 
     /// One or more values that can be substituted in an expression. For more
     /// information, see
     /// [Condition
     /// expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_values: ?[]const aws.map.MapEntry(AttributeValue),
+    expression_attribute_values: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// The primary key of the item to be checked. Each element consists of an
     /// attribute name
@@ -37,7 +37,7 @@ pub const ConditionCheck = struct {
     /// `ConditionCheck` condition fails. For
     /// `ReturnValuesOnConditionCheckFailure`, the valid values are: NONE and
     /// ALL_OLD.
-    return_values_on_condition_check_failure: ?ReturnValuesOnConditionCheckFailure,
+    return_values_on_condition_check_failure: ?ReturnValuesOnConditionCheckFailure = null,
 
     /// Name of the table for the check item request. You can also provide the
     /// Amazon Resource Name (ARN) of

@@ -6,14 +6,14 @@ pub const CalculateRouteCarModeOptions = struct {
     /// Default Value: `false`
     ///
     /// Valid Values: `false` | `true`
-    avoid_ferries: ?bool,
+    avoid_ferries: ?bool = null,
 
     /// Avoids tolls when calculating routes.
     ///
     /// Default Value: `false`
     ///
     /// Valid Values: `false` | `true`
-    avoid_tolls: ?bool,
+    avoid_tolls: ?bool = null,
 
     pub const json_field_names = .{
         .avoid_ferries = "AvoidFerries",

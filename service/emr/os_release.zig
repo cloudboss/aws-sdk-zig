@@ -7,7 +7,7 @@ pub const OSRelease = struct {
     /// ](https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-20220218.html).
     /// For example,
     /// 2.0.20220218.1.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .label = "Label",

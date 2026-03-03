@@ -10,25 +10,25 @@ pub const AssetPropertySummary = struct {
     /// [Mapping industrial data streams to asset
     /// properties](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html) in the
     /// *IoT SiteWise User Guide*.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The ID of the composite model that contains the asset property.
-    asset_composite_model_id: ?[]const u8,
+    asset_composite_model_id: ?[]const u8 = null,
 
     /// The external ID of the property. For more information, see [Using external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ID of the property.
     id: []const u8,
 
-    notification: ?PropertyNotification,
+    notification: ?PropertyNotification = null,
 
     /// The structured path to the property from the root of the asset.
-    path: ?[]const AssetPropertyPathSegment,
+    path: ?[]const AssetPropertyPathSegment = null,
 
     /// The unit of measure (such as Newtons or RPM) of the asset property.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alias = "alias",

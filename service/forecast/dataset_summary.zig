@@ -8,19 +8,19 @@ const Domain = @import("domain.zig").Domain;
 /// provide the `DatasetArn`.
 pub const DatasetSummary = struct {
     /// When the dataset was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset.
-    dataset_arn: ?[]const u8,
+    dataset_arn: ?[]const u8 = null,
 
     /// The name of the dataset.
-    dataset_name: ?[]const u8,
+    dataset_name: ?[]const u8 = null,
 
     /// The dataset type.
-    dataset_type: ?DatasetType,
+    dataset_type: ?DatasetType = null,
 
     /// The domain associated with the dataset.
-    domain: ?Domain,
+    domain: ?Domain = null,
 
     /// When you create a dataset, `LastModificationTime` is the same as
     /// `CreationTime`. While data is being imported to the dataset,
@@ -28,7 +28,7 @@ pub const DatasetSummary = struct {
     /// After a
     /// [CreateDatasetImportJob](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html) operation has finished, `LastModificationTime` is
     /// when the import job completed or failed.
-    last_modification_time: ?i64,
+    last_modification_time: ?i64 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

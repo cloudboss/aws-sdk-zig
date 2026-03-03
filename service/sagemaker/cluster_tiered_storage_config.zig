@@ -8,7 +8,7 @@ const ClusterConfigMode = @import("cluster_config_mode.zig").ClusterConfigMode;
 /// to durable storage, like Amazon S3.
 pub const ClusterTieredStorageConfig = struct {
     /// The percentage (int) of cluster memory to allocate for checkpointing.
-    instance_memory_allocation_percentage: ?i32,
+    instance_memory_allocation_percentage: ?i32 = null,
 
     /// Specifies whether managed tier checkpointing is enabled or disabled for the
     /// HyperPod cluster. When set to `Enable`, the system installs a memory

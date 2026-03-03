@@ -12,7 +12,7 @@ pub const EventMetadataFilterExpression = struct {
     operator: OperatorType,
 
     /// Right operand of the event metadata filter expression.
-    right: ?RightExpression,
+    right: ?RightExpression = null,
 
     pub const json_field_names = .{
         .left = "left",

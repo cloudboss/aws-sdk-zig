@@ -2,10 +2,10 @@
 /// request.
 pub const BatchUserErrorResponseItem = struct {
     /// The field that caused the error.
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// A description of why the user operation failed.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The user ID associated with the failed operation.
     user_id: []const u8,

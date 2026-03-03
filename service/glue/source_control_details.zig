@@ -6,28 +6,28 @@ const SourceControlProvider = @import("source_control_provider.zig").SourceContr
 pub const SourceControlDetails = struct {
     /// The type of authentication, which can be an authentication token stored in
     /// Amazon Web Services Secrets Manager, or a personal access token.
-    auth_strategy: ?SourceControlAuthStrategy,
+    auth_strategy: ?SourceControlAuthStrategy = null,
 
     /// The value of an authorization token.
-    auth_token: ?[]const u8,
+    auth_token: ?[]const u8 = null,
 
     /// An optional branch in the remote repository.
-    branch: ?[]const u8,
+    branch: ?[]const u8 = null,
 
     /// An optional folder in the remote repository.
-    folder: ?[]const u8,
+    folder: ?[]const u8 = null,
 
     /// The last commit ID for a commit in the remote repository.
-    last_commit_id: ?[]const u8,
+    last_commit_id: ?[]const u8 = null,
 
     /// The owner of the remote repository that contains the job artifacts.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The provider for the remote repository.
-    provider: ?SourceControlProvider,
+    provider: ?SourceControlProvider = null,
 
     /// The name of the remote repository that contains the job artifacts.
-    repository: ?[]const u8,
+    repository: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auth_strategy = "AuthStrategy",

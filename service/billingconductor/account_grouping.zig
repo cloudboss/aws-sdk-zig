@@ -3,7 +3,7 @@
 pub const AccountGrouping = struct {
     /// Specifies if this billing group will automatically associate newly added
     /// Amazon Web Services accounts that join your consolidated billing family.
-    auto_associate: ?bool,
+    auto_associate: ?bool = null,
 
     /// The account IDs that make up the billing group. Account IDs must be a part
     /// of the consolidated billing family, and not associated with another billing
@@ -13,7 +13,7 @@ pub const AccountGrouping = struct {
     /// The Amazon Resource Name (ARN) that identifies the transfer relationship
     /// owned by the Bill Transfer account (caller account). When specified, the
     /// PrimaryAccountId is no longer required.
-    responsibility_transfer_arn: ?[]const u8,
+    responsibility_transfer_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_associate = "AutoAssociate",

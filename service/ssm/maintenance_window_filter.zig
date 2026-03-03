@@ -16,10 +16,10 @@
 /// * DescribeMaintenanceWindowTasks
 pub const MaintenanceWindowFilter = struct {
     /// The name of the filter.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The filter values.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

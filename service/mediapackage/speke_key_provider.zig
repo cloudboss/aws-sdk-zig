@@ -6,9 +6,9 @@ pub const SpekeKeyProvider = struct {
     /// An Amazon Resource Name (ARN) of a Certificate Manager certificate
     /// that MediaPackage will use for enforcing secure end-to-end data
     /// transfer with the key provider service.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
-    encryption_contract_configuration: ?EncryptionContractConfiguration,
+    encryption_contract_configuration: ?EncryptionContractConfiguration = null,
 
     /// The resource ID to include in key requests.
     resource_id: []const u8,

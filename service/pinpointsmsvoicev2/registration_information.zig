@@ -6,10 +6,10 @@ const RegistrationStatus = @import("registration_status.zig").RegistrationStatus
 pub const RegistrationInformation = struct {
     /// Metadata about a given registration which is specific to that registration
     /// type.
-    additional_attributes: ?[]const aws.map.StringMapEntry,
+    additional_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The version number of the registration that was approved.
-    approved_version_number: ?i64,
+    approved_version_number: ?i64 = null,
 
     /// The time when the registration was created, in [UNIX epoch
     /// time](https://www.epochconverter.com/) format.
@@ -19,7 +19,7 @@ pub const RegistrationInformation = struct {
     current_version_number: i64,
 
     /// The latest version number of the registration that was denied.
-    latest_denied_version_number: ?i64,
+    latest_denied_version_number: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) for the registration.
     registration_arn: []const u8,

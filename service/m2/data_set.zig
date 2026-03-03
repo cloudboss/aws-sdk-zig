@@ -13,14 +13,14 @@ pub const DataSet = struct {
     record_length: RecordLength,
 
     /// The relative location of the data set in the database or file system.
-    relative_path: ?[]const u8,
+    relative_path: ?[]const u8 = null,
 
     /// The storage type of the data set: database or file system. For Micro Focus,
     /// database
     /// corresponds to datastore and file system corresponds to EFS/FSX. For Blu
     /// Age, there is no
     /// support of file system and database corresponds to Blusam.
-    storage_type: ?[]const u8,
+    storage_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dataset_name = "datasetName",

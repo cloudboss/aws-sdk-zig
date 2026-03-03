@@ -7,10 +7,10 @@
 /// equal to, Min top rendition size.
 pub const MinBottomRenditionSize = struct {
     /// Use Height to define the video resolution height, in pixels, for this rule.
-    height: ?i32,
+    height: ?i32 = null,
 
     /// Use Width to define the video resolution width, in pixels, for this rule.
-    width: ?i32,
+    width: ?i32 = null,
 
     pub const json_field_names = .{
         .height = "Height",

@@ -9,7 +9,7 @@ pub const Nameserver = struct {
     /// the IP address for ns.example.com.
     ///
     /// Constraints: The list can contain only one IPv4 and one IPv6 address.
-    glue_ips: ?[]const []const u8,
+    glue_ips: ?[]const []const u8 = null,
 
     /// The fully qualified host name of the name server.
     ///

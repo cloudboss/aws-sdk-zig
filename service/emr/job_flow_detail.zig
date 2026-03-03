@@ -9,17 +9,17 @@ pub const JobFlowDetail = struct {
     /// Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR
     /// releases 4.0 and later, `ReleaseLabel` is used. To specify a custom AMI, use
     /// `CustomAmiID`.
-    ami_version: ?[]const u8,
+    ami_version: ?[]const u8 = null,
 
     /// An IAM role for automatic scaling policies. The default role is
     /// `EMR_AutoScaling_DefaultRole`. The IAM role provides a way for
     /// the automatic scaling feature to get the required permissions it needs to
     /// launch and
     /// terminate Amazon EC2 instances in an instance group.
-    auto_scaling_role: ?[]const u8,
+    auto_scaling_role: ?[]const u8 = null,
 
     /// A list of the bootstrap actions run by the job flow.
-    bootstrap_actions: ?[]const BootstrapActionDetail,
+    bootstrap_actions: ?[]const BootstrapActionDetail = null,
 
     /// Describes the execution status of the job flow.
     execution_status_detail: JobFlowExecutionStatusDetail,
@@ -32,14 +32,14 @@ pub const JobFlowDetail = struct {
 
     /// The IAM role that was specified when the job flow was launched. The
     /// Amazon EC2 instances of the job flow assume this role.
-    job_flow_role: ?[]const u8,
+    job_flow_role: ?[]const u8 = null,
 
     /// The KMS key used for encrypting log files. This attribute is only
     /// available with Amazon EMR 5.30.0 and later, excluding 6.0.0.
-    log_encryption_kms_key_id: ?[]const u8,
+    log_encryption_kms_key_id: ?[]const u8 = null,
 
     /// The location in Amazon S3 where log files for the job are stored.
-    log_uri: ?[]const u8,
+    log_uri: ?[]const u8 = null,
 
     /// The name of the job flow.
     name: []const u8,
@@ -60,19 +60,19 @@ pub const JobFlowDetail = struct {
     /// HDFS corruption. `TERMINATE_AT_TASK_COMPLETION` available only in Amazon EMR
     /// releases 4.1.0 and later, and is the default for releases of Amazon EMR
     /// earlier than 5.1.0.
-    scale_down_behavior: ?ScaleDownBehavior,
+    scale_down_behavior: ?ScaleDownBehavior = null,
 
     /// The IAM role that is assumed by the Amazon EMR service to access
     /// Amazon Web Services resources on your behalf.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
     /// A list of steps run by the job flow.
-    steps: ?[]const StepDetail,
+    steps: ?[]const StepDetail = null,
 
     /// A list of strings set by third-party software when the job flow is launched.
     /// If you are
     /// not using third-party software to manage the job flow, this value is empty.
-    supported_products: ?[]const []const u8,
+    supported_products: ?[]const []const u8 = null,
 
     /// Indicates whether the cluster is visible to IAM principals in the Amazon Web
     /// Services account associated with the cluster. When `true`, IAM principals in
@@ -85,7 +85,7 @@ pub const JobFlowDetail = struct {
     /// The default value is `true` if a value is not provided when creating a
     /// cluster using the Amazon EMR API RunJobFlow command, the CLI
     /// [create-cluster](https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) command, or the Amazon Web Services Management Console.
-    visible_to_all_users: ?bool,
+    visible_to_all_users: ?bool = null,
 
     pub const json_field_names = .{
         .ami_version = "AmiVersion",

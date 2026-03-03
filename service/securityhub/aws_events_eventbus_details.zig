@@ -8,13 +8,13 @@
 pub const AwsEventsEventbusDetails = struct {
     /// The Amazon Resource Name (ARN) of the account permitted to write events to
     /// the current account.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the event bus.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The policy that enables the external account to send events to your account.
-    policy: ?[]const u8,
+    policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

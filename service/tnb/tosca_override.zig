@@ -1,10 +1,10 @@
 /// Overrides of the TOSCA node.
 pub const ToscaOverride = struct {
     /// Default value for the override.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// Name of the TOSCA override.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .default_value = "defaultValue",

@@ -6,12 +6,12 @@ const ComplianceStatus = @import("compliance_status.zig").ComplianceStatus;
 /// Information about a compliance item.
 pub const ComplianceItemEntry = struct {
     /// A "Key": "Value" tag combination for the compliance item.
-    details: ?[]const aws.map.StringMapEntry,
+    details: ?[]const aws.map.StringMapEntry = null,
 
     /// The compliance item ID. For example, if the compliance item is a Windows
     /// patch, the ID could
     /// be the number of the KB article.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The severity of the compliance status. Severity can be one of the following:
     /// Critical, High,
@@ -27,7 +27,7 @@ pub const ComplianceItemEntry = struct {
     /// the title could be the title of the KB article for the patch; for example:
     /// Security Update for
     /// Active Directory Federation Services.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .details = "Details",

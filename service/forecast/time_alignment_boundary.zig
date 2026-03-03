@@ -15,18 +15,18 @@ const Month = @import("month.zig").Month;
 /// Boundary](https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#specifying-time-boundary).
 pub const TimeAlignmentBoundary = struct {
     /// The day of the month to use for time alignment during aggregation.
-    day_of_month: ?i32,
+    day_of_month: ?i32 = null,
 
     /// The day of week to use for time alignment during aggregation. The day must
     /// be in uppercase.
-    day_of_week: ?DayOfWeek,
+    day_of_week: ?DayOfWeek = null,
 
     /// The hour of day to use for time alignment during aggregation.
-    hour: ?i32,
+    hour: ?i32 = null,
 
     /// The month to use for time alignment during aggregation. The month must be in
     /// uppercase.
-    month: ?Month,
+    month: ?Month = null,
 
     pub const json_field_names = .{
         .day_of_month = "DayOfMonth",

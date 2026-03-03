@@ -4,17 +4,17 @@ const IamInstanceProfileAssociationState = @import("iam_instance_profile_associa
 /// Describes an association between an IAM instance profile and an instance.
 pub const IamInstanceProfileAssociation = struct {
     /// The ID of the association.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The IAM instance profile.
-    iam_instance_profile: ?IamInstanceProfile,
+    iam_instance_profile: ?IamInstanceProfile = null,
 
     /// The ID of the instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The state of the association.
-    state: ?IamInstanceProfileAssociationState,
+    state: ?IamInstanceProfileAssociationState = null,
 
     /// The time the IAM instance profile was associated with the instance.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 };

@@ -8,7 +8,7 @@ pub const CampaignSummary = struct {
 
     channel_subtypes: []const ChannelSubtype,
 
-    connect_campaign_flow_arn: ?[]const u8,
+    connect_campaign_flow_arn: ?[]const u8 = null,
 
     connect_instance_id: []const u8,
 
@@ -16,9 +16,9 @@ pub const CampaignSummary = struct {
 
     name: []const u8,
 
-    schedule: ?Schedule,
+    schedule: ?Schedule = null,
 
-    @"type": ?ExternalCampaignType,
+    @"type": ?ExternalCampaignType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

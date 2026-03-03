@@ -18,7 +18,7 @@ pub const ServiceNowConfiguration = struct {
     /// a
     /// ServiceNow data
     /// source](https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html).
-    authentication_type: ?ServiceNowAuthenticationType,
+    authentication_type: ?ServiceNowAuthenticationType = null,
 
     /// The ServiceNow instance that the data source connects to. The host endpoint
     /// should
@@ -27,7 +27,7 @@ pub const ServiceNowConfiguration = struct {
 
     /// Configuration information for crawling knowledge articles in the ServiceNow
     /// site.
-    knowledge_article_configuration: ?ServiceNowKnowledgeArticleConfiguration,
+    knowledge_article_configuration: ?ServiceNowKnowledgeArticleConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the Secrets Manager secret that contains
     /// the
@@ -41,7 +41,7 @@ pub const ServiceNowConfiguration = struct {
 
     /// Configuration information for crawling service catalogs in the ServiceNow
     /// site.
-    service_catalog_configuration: ?ServiceNowServiceCatalogConfiguration,
+    service_catalog_configuration: ?ServiceNowServiceCatalogConfiguration = null,
 
     /// The identifier of the release that the ServiceNow host is running. If the
     /// host is not

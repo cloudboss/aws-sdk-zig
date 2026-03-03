@@ -5,16 +5,16 @@ const ConfigurableUpfrontRateCardItem = @import("configurable_upfront_rate_card_
 /// entitlements they want to purchase and the duration.
 pub const ConfigurableUpfrontPricingTerm = struct {
     /// Additional parameters specified by the acceptor while accepting the term.
-    configuration: ?ConfigurableUpfrontPricingTermConfiguration,
+    configuration: ?ConfigurableUpfrontPricingTermConfiguration = null,
 
     /// Defines the currency for the prices mentioned in the term.
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// A rate card defines the per unit rates for product dimensions.
-    rate_cards: ?[]const ConfigurableUpfrontRateCardItem,
+    rate_cards: ?[]const ConfigurableUpfrontRateCardItem = null,
 
     /// Category of selector.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

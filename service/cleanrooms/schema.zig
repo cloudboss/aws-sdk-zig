@@ -16,7 +16,7 @@ pub const Schema = struct {
     ///
     /// `MULTIPLE` allows both SQL queries and PySpark jobs to be run directly on
     /// this table.
-    analysis_method: ?AnalysisMethod,
+    analysis_method: ?AnalysisMethod = null,
 
     /// The analysis rule types that are associated with the schema. Currently, only
     /// one entry is present.
@@ -50,17 +50,17 @@ pub const Schema = struct {
     partition_keys: []const Column,
 
     /// The Amazon Resource Name (ARN) of the schema resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// Details about the status of the schema. Currently, only one entry is
     /// present.
     schema_status_details: []const SchemaStatusDetail = &.{},
 
     /// The schema type properties.
-    schema_type_properties: ?SchemaTypeProperties,
+    schema_type_properties: ?SchemaTypeProperties = null,
 
     /// The selected analysis methods for the schema.
-    selected_analysis_methods: ?[]const SelectedAnalysisMethod,
+    selected_analysis_methods: ?[]const SelectedAnalysisMethod = null,
 
     /// The type of schema.
     @"type": SchemaType,

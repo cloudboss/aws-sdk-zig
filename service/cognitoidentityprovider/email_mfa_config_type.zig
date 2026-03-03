@@ -14,12 +14,12 @@ pub const EmailMfaConfigType = struct {
     /// the code. If you
     /// don't provide this parameter, Amazon Cognito sends messages in the default
     /// format.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The subject of the email messages that your user pool sends to users with
     /// codes for
     /// MFA and email OTP sign-in.
-    subject: ?[]const u8,
+    subject: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .message = "Message",

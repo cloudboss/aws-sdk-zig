@@ -4,11 +4,11 @@ const ShardFilterType = @import("shard_filter_type.zig").ShardFilterType;
 pub const ShardFilter = struct {
     /// The identifier of a specific shard used to filter results based on the
     /// specified filter type.
-    shard_id: ?[]const u8,
+    shard_id: ?[]const u8 = null,
 
     /// The type of shard filter to use, which determines how the shardId parameter
     /// is interpreted.
-    @"type": ?ShardFilterType,
+    @"type": ?ShardFilterType = null,
 
     pub const json_field_names = .{
         .shard_id = "shardId",

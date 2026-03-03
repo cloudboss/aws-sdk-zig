@@ -6,13 +6,13 @@ const QuickResponseQueryField = @import("quick_response_query_field.zig").QuickR
 pub const QuickResponseSearchExpression = struct {
     /// The configuration of filtering rules applied to quick response query
     /// results.
-    filters: ?[]const QuickResponseFilterField,
+    filters: ?[]const QuickResponseFilterField = null,
 
     /// The quick response attribute fields on which the query results are ordered.
-    order_on_field: ?QuickResponseOrderField,
+    order_on_field: ?QuickResponseOrderField = null,
 
     /// The quick response query expressions.
-    queries: ?[]const QuickResponseQueryField,
+    queries: ?[]const QuickResponseQueryField = null,
 
     pub const json_field_names = .{
         .filters = "filters",

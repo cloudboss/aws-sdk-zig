@@ -4,10 +4,10 @@ const AwsProductInsights = @import("aws_product_insights.zig").AwsProductInsight
 /// recommendations and partner estimates.
 pub const AwsProductsSpendInsightsBySource = struct {
     /// AI-generated insights including recommended products from AWS.
-    aws: ?AwsProductInsights,
+    aws: ?AwsProductInsights = null,
 
     /// Partner-sourced insights derived from Pricing Calculator URLs.
-    partner: ?AwsProductInsights,
+    partner: ?AwsProductInsights = null,
 
     pub const json_field_names = .{
         .aws = "AWS",

@@ -5,7 +5,7 @@ const PostCallAnalyticsSettings = @import("post_call_analytics_settings.zig").Po
 /// settings.
 pub const ConfigurationEvent = struct {
     /// Indicates which speaker is on which audio channel.
-    channel_definitions: ?[]const ChannelDefinition,
+    channel_definitions: ?[]const ChannelDefinition = null,
 
     /// Provides additional optional settings for your Call Analytics post-call
     /// request, including
@@ -15,7 +15,7 @@ pub const ConfigurationEvent = struct {
     /// Call Analytics post-call transcription. Refer to [Post-call
     /// analytics](https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html) for more information
     /// on this feature.
-    post_call_analytics_settings: ?PostCallAnalyticsSettings,
+    post_call_analytics_settings: ?PostCallAnalyticsSettings = null,
 
     pub const json_field_names = .{
         .channel_definitions = "ChannelDefinitions",

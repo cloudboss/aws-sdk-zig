@@ -3,13 +3,13 @@
 /// action.
 pub const AttachedFileError = struct {
     /// Status code describing the failure.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// Why the attached file couldn't be retrieved.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The unique identifier of the attached file resource.
-    file_id: ?[]const u8,
+    file_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

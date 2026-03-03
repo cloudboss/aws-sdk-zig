@@ -11,30 +11,30 @@ const EventResource = @import("event_resource.zig").EventResource;
 pub const Event = struct {
     /// The source, `AWS_CLOUD_TRAIL` or `AWS_CODE_DEPLOY`, where DevOps Guru
     /// analysis found the event.
-    data_source: ?EventDataSource,
+    data_source: ?EventDataSource = null,
 
     /// The class of the event. The class specifies what the event is related to,
     /// such as an
     /// infrastructure change, a deployment, or a schema change.
-    event_class: ?EventClass,
+    event_class: ?EventClass = null,
 
     /// The Amazon Web Services source that emitted the event.
-    event_source: ?[]const u8,
+    event_source: ?[]const u8 = null,
 
     /// The ID of the event.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the event.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    resource_collection: ?ResourceCollection,
+    resource_collection: ?ResourceCollection = null,
 
     /// An `EventResource` object that contains information about the resource
     /// that emitted the event.
-    resources: ?[]const EventResource,
+    resources: ?[]const EventResource = null,
 
     /// A `Timestamp` that specifies the time the event occurred.
-    time: ?i64,
+    time: ?i64 = null,
 
     pub const json_field_names = .{
         .data_source = "DataSource",

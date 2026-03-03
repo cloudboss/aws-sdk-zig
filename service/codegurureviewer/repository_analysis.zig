@@ -10,9 +10,9 @@ pub const RepositoryAnalysis = struct {
     /// A
     /// [SourceCodeType](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType) that specifies the tip of a branch in an associated
     /// repository.
-    repository_head: ?RepositoryHeadSourceCodeType,
+    repository_head: ?RepositoryHeadSourceCodeType = null,
 
-    source_code_type: ?SourceCodeType,
+    source_code_type: ?SourceCodeType = null,
 
     pub const json_field_names = .{
         .repository_head = "RepositoryHead",

@@ -8,22 +8,22 @@ const ProjectStatus = @import("project_status.zig").ProjectStatus;
 pub const ProjectDescription = struct {
     /// Indicates whether automatic retraining will be attempted for the versions of
     /// the project. Applies only to adapters.
-    auto_update: ?ProjectAutoUpdate,
+    auto_update: ?ProjectAutoUpdate = null,
 
     /// The Unix timestamp for the date and time that the project was created.
-    creation_timestamp: ?i64,
+    creation_timestamp: ?i64 = null,
 
     /// Information about the training and test datasets in the project.
-    datasets: ?[]const DatasetMetadata,
+    datasets: ?[]const DatasetMetadata = null,
 
     /// Specifies the project that is being customized.
-    feature: ?CustomizationFeature,
+    feature: ?CustomizationFeature = null,
 
     /// The Amazon Resource Name (ARN) of the project.
-    project_arn: ?[]const u8,
+    project_arn: ?[]const u8 = null,
 
     /// The current status of the project.
-    status: ?ProjectStatus,
+    status: ?ProjectStatus = null,
 
     pub const json_field_names = .{
         .auto_update = "AutoUpdate",

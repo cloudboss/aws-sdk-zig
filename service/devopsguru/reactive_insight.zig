@@ -7,31 +7,31 @@ const InsightStatus = @import("insight_status.zig").InsightStatus;
 /// `ListInsights`.
 pub const ReactiveInsight = struct {
     /// Describes the reactive insight.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of a reactive insight.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
-    insight_time_range: ?InsightTimeRange,
+    insight_time_range: ?InsightTimeRange = null,
 
     /// The name of a reactive insight.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    resource_collection: ?ResourceCollection,
+    resource_collection: ?ResourceCollection = null,
 
     /// The severity of the insight. For more information, see
     /// [Understanding
     /// insight
     /// severities](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities) in the *Amazon DevOps Guru User Guide*.
-    severity: ?InsightSeverity,
+    severity: ?InsightSeverity = null,
 
     /// The ID of the Amazon Web Services System Manager OpsItem created for this
     /// insight. You must enable
     /// the creation of OpstItems insights before they are created for each insight.
-    ssm_ops_item_id: ?[]const u8,
+    ssm_ops_item_id: ?[]const u8 = null,
 
     /// The status of a reactive insight.
-    status: ?InsightStatus,
+    status: ?InsightStatus = null,
 
     pub const json_field_names = .{
         .description = "Description",

@@ -7,10 +7,10 @@ const SheetControlDateTimePickerType = @import("sheet_control_date_time_picker_t
 pub const DefaultDateTimePickerControlOptions = struct {
     /// The visibility configuration of the Apply button on a
     /// `DateTimePickerControl`.
-    commit_mode: ?CommitMode,
+    commit_mode: ?CommitMode = null,
 
     /// The display options of a control.
-    display_options: ?DateTimePickerControlDisplayOptions,
+    display_options: ?DateTimePickerControlDisplayOptions = null,
 
     /// The date time picker type of the `DefaultDateTimePickerControlOptions`.
     /// Choose one of the following options:
@@ -18,7 +18,7 @@ pub const DefaultDateTimePickerControlOptions = struct {
     /// * `SINGLE_VALUED`: The filter condition is a fixed date.
     ///
     /// * `DATE_RANGE`: The filter condition is a date time range.
-    @"type": ?SheetControlDateTimePickerType,
+    @"type": ?SheetControlDateTimePickerType = null,
 
     pub const json_field_names = .{
         .commit_mode = "CommitMode",

@@ -2,11 +2,11 @@
 pub const ListBillingGroupAccountGrouping = struct {
     /// Specifies if this billing group will automatically associate newly added
     /// Amazon Web Services accounts that join your consolidated billing family.
-    auto_associate: ?bool,
+    auto_associate: ?bool = null,
 
     /// The Amazon Resource Name (ARN) that identifies the transfer relationship for
     /// the billing group.
-    responsibility_transfer_arn: ?[]const u8,
+    responsibility_transfer_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_associate = "AutoAssociate",

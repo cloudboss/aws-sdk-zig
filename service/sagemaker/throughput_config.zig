@@ -19,13 +19,13 @@ pub const ThroughputConfig = struct {
     /// read throughput you are billed for and can consume without throttling.
     ///
     /// This field is not applicable for on-demand feature groups.
-    provisioned_read_capacity_units: ?i32,
+    provisioned_read_capacity_units: ?i32 = null,
 
     /// For provisioned feature groups, this indicates the write throughput you are
     /// billed for and can consume without throttling.
     ///
     /// This field is not applicable for on-demand feature groups.
-    provisioned_write_capacity_units: ?i32,
+    provisioned_write_capacity_units: ?i32 = null,
 
     /// The mode used for your feature group throughput: `ON_DEMAND` or
     /// `PROVISIONED`.

@@ -6,20 +6,20 @@ pub const AccountSettings = struct {
     /// The Amazon Resource Name (ARN) of the service role that Proton uses for
     /// provisioning pipelines. Proton assumes this role for CodeBuild-based
     /// provisioning.
-    pipeline_codebuild_role_arn: ?[]const u8,
+    pipeline_codebuild_role_arn: ?[]const u8 = null,
 
     /// The linked repository for pipeline provisioning. Required if you have
     /// environments configured for self-managed provisioning with services that
     /// include
     /// pipelines. A linked repository is a repository that has been registered with
     /// Proton. For more information, see CreateRepository.
-    pipeline_provisioning_repository: ?RepositoryBranch,
+    pipeline_provisioning_repository: ?RepositoryBranch = null,
 
     /// The Amazon Resource Name (ARN) of the service role you want to use for
     /// provisioning pipelines. Assumed by Proton for Amazon Web Services-managed
     /// provisioning, and by
     /// customer-owned automation for self-managed provisioning.
-    pipeline_service_role_arn: ?[]const u8,
+    pipeline_service_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .pipeline_codebuild_role_arn = "pipelineCodebuildRoleArn",

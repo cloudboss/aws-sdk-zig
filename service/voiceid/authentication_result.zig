@@ -7,11 +7,11 @@ const AuthenticationDecision = @import("authentication_decision.zig").Authentica
 pub const AuthenticationResult = struct {
     /// A timestamp of when audio aggregation ended for this authentication
     /// result.
-    audio_aggregation_ended_at: ?i64,
+    audio_aggregation_ended_at: ?i64 = null,
 
     /// A timestamp of when audio aggregation started for this authentication
     /// result.
-    audio_aggregation_started_at: ?i64,
+    audio_aggregation_started_at: ?i64 = null,
 
     /// The unique identifier for this authentication result. Because there can be
     /// multiple
@@ -21,32 +21,32 @@ pub const AuthenticationResult = struct {
     /// of any new
     /// streaming activity, `AcceptanceThreshold` changes, or `SpeakerId`
     /// changes, Voice ID always returns cached Authentication Result for this API.
-    authentication_result_id: ?[]const u8,
+    authentication_result_id: ?[]const u8 = null,
 
     /// The `AuthenticationConfiguration` used to generate this authentication
     /// result.
-    configuration: ?AuthenticationConfiguration,
+    configuration: ?AuthenticationConfiguration = null,
 
     /// The client-provided identifier for the speaker whose authentication result
     /// is
     /// produced. Only present if a `SpeakerId` is provided for the session.
-    customer_speaker_id: ?[]const u8,
+    customer_speaker_id: ?[]const u8 = null,
 
     /// The authentication decision produced by Voice ID, processed against the
     /// current
     /// session state and streamed audio of the speaker.
-    decision: ?AuthenticationDecision,
+    decision: ?AuthenticationDecision = null,
 
     /// The service-generated identifier for the speaker whose authentication result
     /// is
     /// produced.
-    generated_speaker_id: ?[]const u8,
+    generated_speaker_id: ?[]const u8 = null,
 
     /// The authentication score for the speaker whose authentication result is
     /// produced. This
     /// value is only present if the authentication decision is either `ACCEPT` or
     /// `REJECT`.
-    score: ?i32,
+    score: ?i32 = null,
 
     pub const json_field_names = .{
         .audio_aggregation_ended_at = "AudioAggregationEndedAt",

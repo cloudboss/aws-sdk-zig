@@ -10,7 +10,7 @@ pub const BillOfMaterialsImportJob = struct {
 
     /// When the BillOfMaterialsImportJob has reached a terminal state, there will
     /// be a message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The S3 URI from which the CSV is read.
     s_3_uri: []const u8,

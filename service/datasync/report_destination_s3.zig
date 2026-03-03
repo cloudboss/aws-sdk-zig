@@ -13,7 +13,7 @@ pub const ReportDestinationS3 = struct {
     s3_bucket_arn: []const u8,
 
     /// Specifies a bucket prefix for your report.
-    subdirectory: ?[]const u8,
+    subdirectory: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_access_role_arn = "BucketAccessRoleArn",

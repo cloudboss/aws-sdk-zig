@@ -6,7 +6,7 @@ const IamIdentityCenterUserAttribute = @import("iam_identity_center_user_attribu
 pub const CreateIamIdentityCenterConfigOptions = struct {
     /// The group attribute for this IAM Identity Center integration. Defaults to
     /// `GroupId`.
-    group_attribute: ?IamIdentityCenterGroupAttribute,
+    group_attribute: ?IamIdentityCenterGroupAttribute = null,
 
     /// The ARN of the IAM Identity Center instance used to integrate with
     /// OpenSearch Serverless.
@@ -14,7 +14,7 @@ pub const CreateIamIdentityCenterConfigOptions = struct {
 
     /// The user attribute for this IAM Identity Center integration. Defaults to
     /// `UserId`.
-    user_attribute: ?IamIdentityCenterUserAttribute,
+    user_attribute: ?IamIdentityCenterUserAttribute = null,
 
     pub const json_field_names = .{
         .group_attribute = "groupAttribute",

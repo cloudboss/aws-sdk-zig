@@ -17,7 +17,7 @@ pub const ScheduledSplit = struct {
     /// not add up to 100,000, then the remaining traffic that matches this segment
     /// is not assigned by this segment override, and instead moves on to the next
     /// segment override or the default traffic split.
-    group_weights: ?[]const aws.map.MapEntry(i64),
+    group_weights: ?[]const aws.map.MapEntry(i64) = null,
 
     /// Use this parameter to specify different traffic splits for one or more
     /// audience *segments*. A segment is a portion of your audience that share one
@@ -28,7 +28,7 @@ pub const ScheduledSplit = struct {
     /// This parameter is an array of up to six segment override objects. Each of
     /// these objects specifies a segment that you have already created, and defines
     /// the traffic split for that segment.
-    segment_overrides: ?[]const SegmentOverride,
+    segment_overrides: ?[]const SegmentOverride = null,
 
     /// The date and time that this step of the launch starts.
     start_time: i64,

@@ -7,7 +7,7 @@ pub const KeyspaceSummary = struct {
 
     /// If the `replicationStrategy` of the keyspace is `MULTI_REGION`, a list of
     /// replication Regions is returned.
-    replication_regions: ?[]const []const u8,
+    replication_regions: ?[]const []const u8 = null,
 
     /// This property specifies if a keyspace is a single Region keyspace or a
     /// multi-Region keyspace. The available values are `SINGLE_REGION` or

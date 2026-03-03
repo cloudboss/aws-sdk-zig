@@ -5,7 +5,7 @@ pub const ResourceDetails = struct {
     /// An object that contains details about the Amazon ECR container image
     /// involved in the
     /// finding.
-    aws_ecr_container_image: ?AwsEcrContainerImageDetails,
+    aws_ecr_container_image: ?AwsEcrContainerImageDetails = null,
 
     pub const json_field_names = .{
         .aws_ecr_container_image = "awsEcrContainerImage",

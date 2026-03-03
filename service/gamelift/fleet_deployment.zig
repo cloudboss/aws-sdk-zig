@@ -6,15 +6,15 @@ pub const FleetDeployment = struct {
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Instructions for how to deploy updates to a container fleet and what actions
     /// to take
     /// if the deployment fails.
-    deployment_configuration: ?DeploymentConfiguration,
+    deployment_configuration: ?DeploymentConfiguration = null,
 
     /// A unique identifier for the deployment.
-    deployment_id: ?[]const u8,
+    deployment_id: ?[]const u8 = null,
 
     /// The status of fleet deployment activity in the location.
     ///
@@ -32,34 +32,34 @@ pub const FleetDeployment = struct {
     /// been completed.
     ///
     /// * `CANCELLED` -- The deployment was cancelled.
-    deployment_status: ?DeploymentStatus,
+    deployment_status: ?DeploymentStatus = null,
 
     /// A unique identifier for the container fleet.
-    fleet_id: ?[]const u8,
+    fleet_id: ?[]const u8 = null,
 
     /// The unique identifier for the version of the game server container group
     /// definition
     /// that is being deployed.
-    game_server_binary_arn: ?[]const u8,
+    game_server_binary_arn: ?[]const u8 = null,
 
     /// The unique identifier for the version of the per-instance container group
     /// definition
     /// that is being deployed.
-    per_instance_binary_arn: ?[]const u8,
+    per_instance_binary_arn: ?[]const u8 = null,
 
     /// The unique identifier for the version of the game server container group
     /// definition to
     /// roll back to if deployment fails. Amazon GameLift Servers sets this property
     /// to the container group definition
     /// version that the fleet used when it was last active.
-    rollback_game_server_binary_arn: ?[]const u8,
+    rollback_game_server_binary_arn: ?[]const u8 = null,
 
     /// The unique identifier for the version of the per-instance container group
     /// definition
     /// to roll back to if deployment fails. Amazon GameLift Servers sets this
     /// property to the container group definition
     /// version that the fleet used when it was last active.
-    rollback_per_instance_binary_arn: ?[]const u8,
+    rollback_per_instance_binary_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

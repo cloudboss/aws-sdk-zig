@@ -20,100 +20,100 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 /// Defines comprehensive configuration for a managed WorkSpace Instance.
 pub const ManagedInstanceRequest = struct {
     /// Configures block device mappings for storage.
-    block_device_mappings: ?[]const BlockDeviceMappingRequest,
+    block_device_mappings: ?[]const BlockDeviceMappingRequest = null,
 
     /// Specifies capacity reservation preferences.
-    capacity_reservation_specification: ?CapacityReservationSpecification,
+    capacity_reservation_specification: ?CapacityReservationSpecification = null,
 
     /// Configures CPU-specific settings.
-    cpu_options: ?CpuOptionsRequest,
+    cpu_options: ?CpuOptionsRequest = null,
 
     /// Defines CPU credit configuration for burstable instances.
-    credit_specification: ?CreditSpecificationRequest,
+    credit_specification: ?CreditSpecificationRequest = null,
 
     /// Prevents API-initiated instance stop.
-    disable_api_stop: ?bool,
+    disable_api_stop: ?bool = null,
 
     /// Enables optimized EBS performance.
-    ebs_optimized: ?bool,
+    ebs_optimized: ?bool = null,
 
     /// Enables primary IPv6 address configuration.
-    enable_primary_ipv_6: ?bool,
+    enable_primary_ipv_6: ?bool = null,
 
     /// Configures AWS Nitro Enclave settings.
-    enclave_options: ?EnclaveOptionsRequest,
+    enclave_options: ?EnclaveOptionsRequest = null,
 
     /// Configures instance hibernation capabilities.
-    hibernation_options: ?HibernationOptionsRequest,
+    hibernation_options: ?HibernationOptionsRequest = null,
 
     /// Specifies IAM instance profile configuration.
-    iam_instance_profile: ?IamInstanceProfileSpecification,
+    iam_instance_profile: ?IamInstanceProfileSpecification = null,
 
     /// Identifies the Amazon Machine Image (AMI) for the instance.
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// Configures marketplace-specific deployment options.
-    instance_market_options: ?InstanceMarketOptionsRequest,
+    instance_market_options: ?InstanceMarketOptionsRequest = null,
 
     /// Specifies the WorkSpace Instance type.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// Specifies number of IPv6 addresses to assign.
-    ipv_6_address_count: ?i32,
+    ipv_6_address_count: ?i32 = null,
 
     /// Configures specific IPv6 addresses.
-    ipv_6_addresses: ?[]const InstanceIpv6Address,
+    ipv_6_addresses: ?[]const InstanceIpv6Address = null,
 
     /// Identifies the kernel for the instance.
-    kernel_id: ?[]const u8,
+    kernel_id: ?[]const u8 = null,
 
     /// Specifies the key pair for instance access.
-    key_name: ?[]const u8,
+    key_name: ?[]const u8 = null,
 
     /// Configures license-related settings.
-    license_specifications: ?[]const LicenseConfigurationRequest,
+    license_specifications: ?[]const LicenseConfigurationRequest = null,
 
     /// Defines automatic maintenance settings.
-    maintenance_options: ?InstanceMaintenanceOptionsRequest,
+    maintenance_options: ?InstanceMaintenanceOptionsRequest = null,
 
     /// Configures instance metadata service settings.
-    metadata_options: ?InstanceMetadataOptionsRequest,
+    metadata_options: ?InstanceMetadataOptionsRequest = null,
 
     /// Enables or disables detailed instance monitoring.
-    monitoring: ?RunInstancesMonitoringEnabled,
+    monitoring: ?RunInstancesMonitoringEnabled = null,
 
     /// Configures network interface settings.
-    network_interfaces: ?[]const InstanceNetworkInterfaceSpecification,
+    network_interfaces: ?[]const InstanceNetworkInterfaceSpecification = null,
 
     /// Defines network performance configuration.
-    network_performance_options: ?InstanceNetworkPerformanceOptionsRequest,
+    network_performance_options: ?InstanceNetworkPerformanceOptionsRequest = null,
 
     /// Specifies instance placement preferences.
-    placement: ?Placement,
+    placement: ?Placement = null,
 
     /// Configures private DNS name settings.
-    private_dns_name_options: ?PrivateDnsNameOptionsRequest,
+    private_dns_name_options: ?PrivateDnsNameOptionsRequest = null,
 
     /// Specifies the primary private IP address.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// Identifies the ramdisk for the instance.
-    ramdisk_id: ?[]const u8,
+    ramdisk_id: ?[]const u8 = null,
 
     /// Specifies security group identifiers.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// Configures security group settings.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// Identifies the subnet for the instance.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// Configures resource tagging specifications.
-    tag_specifications: ?[]const TagSpecification,
+    tag_specifications: ?[]const TagSpecification = null,
 
     /// Provides custom initialization data for the instance.
-    user_data: ?[]const u8,
+    user_data: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .block_device_mappings = "BlockDeviceMappings",

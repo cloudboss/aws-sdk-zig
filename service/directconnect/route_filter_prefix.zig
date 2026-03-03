@@ -4,7 +4,7 @@
 pub const RouteFilterPrefix = struct {
     /// The CIDR block for the advertised route. Separate multiple routes using
     /// commas. An IPv6 CIDR must use /64 or shorter.
-    cidr: ?[]const u8,
+    cidr: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cidr = "cidr",

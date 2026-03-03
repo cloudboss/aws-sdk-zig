@@ -13,7 +13,7 @@
 pub const RegexPatternSet = struct {
     /// A friendly name or description of the RegexPatternSet. You can't change
     /// `Name` after you create a `RegexPatternSet`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The identifier for the `RegexPatternSet`. You use `RegexPatternSetId` to get
     /// information about a `RegexPatternSet`,

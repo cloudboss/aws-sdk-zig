@@ -7,7 +7,7 @@ pub const EndpointIdentifier = struct {
     /// If the value is set to true, the client's IP address is preserved in the
     /// `X-Forwarded-For` request header as
     /// traffic travels to applications on the endpoint fronted by the accelerator.
-    client_ip_preservation_enabled: ?bool,
+    client_ip_preservation_enabled: ?bool = null,
 
     /// An ID for the endpoint. If the endpoint is a Network Load Balancer or
     /// Application Load Balancer, this is the Amazon

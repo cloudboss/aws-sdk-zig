@@ -10,10 +10,10 @@ pub const ProfilingGroupDescription = struct {
     /// `AgentOrchestrationConfig`
     /// ](https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentOrchestrationConfig.html)
     /// object that indicates if the profiling group is enabled for profiled or not.
-    agent_orchestration_config: ?AgentOrchestrationConfig,
+    agent_orchestration_config: ?AgentOrchestrationConfig = null,
 
     /// The Amazon Resource Name (ARN) identifying the profiling group resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The compute platform of the profiling group. If it is set to `AWSLambda`,
     /// then
@@ -22,16 +22,16 @@ pub const ProfilingGroupDescription = struct {
     /// profiled application runs on a compute platform that is not AWS Lambda, such
     /// an Amazon EC2 instance,
     /// an on-premises server, or a different platform. The default is `Default`.
-    compute_platform: ?ComputePlatform,
+    compute_platform: ?ComputePlatform = null,
 
     /// The time when the profiling group was created. Specify using
     /// the ISO 8601 format. For example,
     /// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02
     /// PM UTC.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The name of the profiling group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A [
     /// `ProfilingStatus`
@@ -40,16 +40,16 @@ pub const ProfilingGroupDescription = struct {
     /// the last time a profile was received, and the aggregation period and start
     /// time for the
     /// most recent aggregated profile.
-    profiling_status: ?ProfilingStatus,
+    profiling_status: ?ProfilingStatus = null,
 
     /// A list of the tags that belong to this profiling group.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The date and time when the profiling group was last updated. Specify using
     /// the ISO 8601 format. For example,
     /// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02
     /// PM UTC.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .agent_orchestration_config = "agentOrchestrationConfig",

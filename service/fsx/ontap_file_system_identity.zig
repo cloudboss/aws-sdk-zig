@@ -11,10 +11,10 @@ pub const OntapFileSystemIdentity = struct {
     @"type": OntapFileSystemUserType,
 
     /// Specifies the UNIX user identity for file system operations.
-    unix_user: ?OntapUnixFileSystemUser,
+    unix_user: ?OntapUnixFileSystemUser = null,
 
     /// Specifies the Windows user identity for file system operations.
-    windows_user: ?OntapWindowsFileSystemUser,
+    windows_user: ?OntapWindowsFileSystemUser = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

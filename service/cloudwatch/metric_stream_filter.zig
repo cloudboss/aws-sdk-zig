@@ -22,14 +22,14 @@ pub const MetricStreamFilter = struct {
     /// Each metric name can contain only ASCII printable characters (ASCII range 32
     /// through
     /// 126). Each metric name must contain at least one non-whitespace character.
-    metric_names: ?[]const []const u8,
+    metric_names: ?[]const []const u8 = null,
 
     /// The name of the metric namespace for this filter.
     ///
     /// The namespace can contain only ASCII printable characters (ASCII range 32
     /// through
     /// 126). It must contain at least one non-whitespace character.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metric_names = "MetricNames",

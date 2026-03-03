@@ -28,7 +28,7 @@ pub const ManagedCapacityConfiguration = struct {
     /// scaling in your MinSize and
     /// DesiredInstances to 0 after a period with no game session activity. Default:
     /// 30 minutes.
-    scale_in_after_inactivity_minutes: ?i32,
+    scale_in_after_inactivity_minutes: ?i32 = null,
 
     /// The strategy Amazon GameLift Servers will use to automatically scale your
     /// capacity to and from zero
@@ -47,7 +47,7 @@ pub const ManagedCapacityConfiguration = struct {
     /// in MinSize and DesiredInstances to 0 after a period with no game session
     /// activity. The duration of
     /// this scale in period can be configured using ScaleInAfterInactivityMinutes.
-    zero_capacity_strategy: ?ZeroCapacityStrategy,
+    zero_capacity_strategy: ?ZeroCapacityStrategy = null,
 
     pub const json_field_names = .{
         .scale_in_after_inactivity_minutes = "ScaleInAfterInactivityMinutes",

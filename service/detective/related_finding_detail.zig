@@ -3,13 +3,13 @@
 /// the finding group.
 pub const RelatedFindingDetail = struct {
     /// The Amazon Resource Name (ARN) of the related finding.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The IP address of the finding.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The type of finding.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

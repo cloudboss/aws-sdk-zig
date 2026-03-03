@@ -15,10 +15,10 @@ pub const TableBucketSummary = struct {
     owner_account_id: []const u8,
 
     /// The system-assigned unique identifier for the table bucket.
-    table_bucket_id: ?[]const u8,
+    table_bucket_id: ?[]const u8 = null,
 
     /// The type of the table bucket.
-    @"type": ?TableBucketType,
+    @"type": ?TableBucketType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

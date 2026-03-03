@@ -10,7 +10,7 @@ const IamPolicyConstraints = @import("iam_policy_constraints.zig").IamPolicyCons
 pub const S3Presign = struct {
     /// Use this parameter to specify the allowed request source. Possible sources
     /// are either `SourceIp` or `VpcSourceIp`.
-    iam_policy_constraints: ?IamPolicyConstraints,
+    iam_policy_constraints: ?IamPolicyConstraints = null,
 
     pub const json_field_names = .{
         .iam_policy_constraints = "IamPolicyConstraints",

@@ -8,20 +8,20 @@ const NetworkInterface = @import("network_interface.zig").NetworkInterface;
 /// Amazon EVS supports 4-16 hosts per environment.
 pub const Host = struct {
     /// The date and time that the host was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The unique ID of the Amazon EC2 Dedicated Host.
-    dedicated_host_id: ?[]const u8,
+    dedicated_host_id: ?[]const u8 = null,
 
     /// The unique ID of the EC2 instance that represents the host.
-    ec_2_instance_id: ?[]const u8,
+    ec_2_instance_id: ?[]const u8 = null,
 
     /// The DNS hostname of the host. DNS hostnames for hosts must be unique across
     /// Amazon EVS environments and within VCF.
-    host_name: ?[]const u8,
+    host_name: ?[]const u8 = null,
 
     /// The state of the host.
-    host_state: ?HostState,
+    host_state: ?HostState = null,
 
     /// The EC2 instance type of the host.
     ///
@@ -29,25 +29,25 @@ pub const Host = struct {
     ///
     /// EC2 instances created through Amazon EVS do not support associating an IAM
     /// instance profile.
-    instance_type: ?InstanceType,
+    instance_type: ?InstanceType = null,
 
     /// The IP address of the host.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The name of the SSH key that is used to access the host.
-    key_name: ?[]const u8,
+    key_name: ?[]const u8 = null,
 
     /// The date and time that the host was modified.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// The elastic network interfaces that are attached to the host.
-    network_interfaces: ?[]const NetworkInterface,
+    network_interfaces: ?[]const NetworkInterface = null,
 
     /// The unique ID of the placement group where the host is placed.
-    placement_group_id: ?[]const u8,
+    placement_group_id: ?[]const u8 = null,
 
     /// A detailed description of the `hostState` of a host.
-    state_details: ?[]const u8,
+    state_details: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

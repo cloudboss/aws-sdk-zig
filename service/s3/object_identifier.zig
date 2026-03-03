@@ -7,7 +7,7 @@ pub const ObjectIdentifier = struct {
     ///
     /// Entity tags (ETags) for S3 Express One Zone are random alphanumeric strings
     /// unique to the object.
-    e_tag: ?[]const u8,
+    e_tag: ?[]const u8 = null,
 
     /// Key name of the object.
     ///
@@ -23,16 +23,16 @@ pub const ObjectIdentifier = struct {
     /// `Timestamp`.
     ///
     /// This functionality is only supported for directory buckets.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// If present, the objects are deleted only if its size matches the provided
     /// size in bytes.
     ///
     /// This functionality is only supported for directory buckets.
-    size: ?i64,
+    size: ?i64 = null,
 
     /// Version ID for the specific version of the object to delete.
     ///
     /// This functionality is not supported for directory buckets.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 };

@@ -13,28 +13,28 @@ pub const InputUpdate = struct {
 
     /// Describes the parallelism updates (the number of in-application streams
     /// Kinesis Data Analytics creates for the specific streaming source).
-    input_parallelism_update: ?InputParallelismUpdate,
+    input_parallelism_update: ?InputParallelismUpdate = null,
 
     /// Describes updates to an InputProcessingConfiguration.
-    input_processing_configuration_update: ?InputProcessingConfigurationUpdate,
+    input_processing_configuration_update: ?InputProcessingConfigurationUpdate = null,
 
     /// Describes the data format on the streaming source, and
     /// how record elements on the streaming source map to columns of the
     /// in-application stream that is created.
-    input_schema_update: ?InputSchemaUpdate,
+    input_schema_update: ?InputSchemaUpdate = null,
 
     /// If a Kinesis Data Firehose delivery stream is the streaming source to be
     /// updated, provides an updated stream ARN.
-    kinesis_firehose_input_update: ?KinesisFirehoseInputUpdate,
+    kinesis_firehose_input_update: ?KinesisFirehoseInputUpdate = null,
 
     /// If a Kinesis data stream is the streaming source to be updated, provides an
     /// updated stream Amazon Resource Name (ARN).
-    kinesis_streams_input_update: ?KinesisStreamsInputUpdate,
+    kinesis_streams_input_update: ?KinesisStreamsInputUpdate = null,
 
     /// The name prefix for in-application streams that Kinesis Data Analytics
     /// creates for the
     /// specific streaming source.
-    name_prefix_update: ?[]const u8,
+    name_prefix_update: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .input_id = "InputId",

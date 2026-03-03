@@ -7,11 +7,11 @@ pub const DukptDerivationAttributes = struct {
     /// Serial Number (KSN). This must be less than or equal to the strength of the
     /// BDK. For example, you can't use `AES_128` as a derivation type for a BDK of
     /// `AES_128` or `TDES_2KEY`
-    dukpt_key_derivation_type: ?DukptDerivationType,
+    dukpt_key_derivation_type: ?DukptDerivationType = null,
 
     /// The type of use of DUKPT, which can be for incoming data decryption,
     /// outgoing data encryption, or both.
-    dukpt_key_variant: ?DukptKeyVariant,
+    dukpt_key_variant: ?DukptKeyVariant = null,
 
     /// The unique identifier known as Key Serial Number (KSN) that comes from an
     /// encrypting device using DUKPT encryption method. The KSN is derived from the

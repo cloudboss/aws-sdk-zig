@@ -11,13 +11,13 @@
 /// Amazon Rekognition Developer Guide.
 pub const S3Object = struct {
     /// Name of the S3 bucket.
-    bucket: ?[]const u8,
+    bucket: ?[]const u8 = null,
 
     /// S3 object key name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// If the bucket is versioning enabled, you can specify the object version.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "Bucket",

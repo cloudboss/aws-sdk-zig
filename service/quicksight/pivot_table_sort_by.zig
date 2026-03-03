@@ -5,14 +5,14 @@ const FieldSort = @import("field_sort.zig").FieldSort;
 /// The sort by field for the field sort options.
 pub const PivotTableSortBy = struct {
     /// The column sort (field id, direction) for the pivot table sort by options.
-    column: ?ColumnSort,
+    column: ?ColumnSort = null,
 
     /// The data path sort (data path value, direction) for the pivot table sort by
     /// options.
-    data_path: ?DataPathSort,
+    data_path: ?DataPathSort = null,
 
     /// The field sort (field id, direction) for the pivot table sort by options.
-    field: ?FieldSort,
+    field: ?FieldSort = null,
 
     pub const json_field_names = .{
         .column = "Column",

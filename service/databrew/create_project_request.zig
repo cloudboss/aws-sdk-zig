@@ -19,10 +19,10 @@ pub const CreateProjectRequest = struct {
     /// be assumed for this request.
     role_arn: []const u8,
 
-    sample: ?Sample,
+    sample: ?Sample = null,
 
     /// Metadata tags to apply to this project.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .dataset_name = "DatasetName",

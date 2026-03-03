@@ -5,7 +5,7 @@ const ParameterValueType = @import("parameter_value_type.zig").ParameterValueTyp
 /// and identifies whether it has been customized.
 pub const ParameterConfiguration = struct {
     /// The current value of a control parameter.
-    value: ?ParameterValue,
+    value: ?ParameterValue = null,
 
     /// Identifies whether a control parameter uses a custom user-defined value or
     /// subscribes to the default

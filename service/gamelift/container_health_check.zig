@@ -29,22 +29,22 @@ pub const ContainerHealthCheck = struct {
     command: []const []const u8,
 
     /// The time period (in seconds) between each health check.
-    interval: ?i32,
+    interval: ?i32 = null,
 
     /// The number of times to retry a failed health check before flagging the
     /// container
     /// unhealthy. The first run of the command does not count as a retry.
-    retries: ?i32,
+    retries: ?i32 = null,
 
     /// The optional grace period (in seconds) to give a container time to bootstrap
     /// before the
     /// first failed health check counts toward the number of retries.
-    start_period: ?i32,
+    start_period: ?i32 = null,
 
     /// The time period (in seconds) to wait for a health check to succeed before
     /// counting a
     /// failed health check.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 
     pub const json_field_names = .{
         .command = "Command",

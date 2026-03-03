@@ -8,10 +8,10 @@ pub const CustomerManagedFleetConfiguration = struct {
     mode: AutoScalingMode,
 
     /// The storage profile ID for the customer managed fleet.
-    storage_profile_id: ?[]const u8,
+    storage_profile_id: ?[]const u8 = null,
 
     /// The tag propagation mode for the customer managed fleet.
-    tag_propagation_mode: ?TagPropagationMode,
+    tag_propagation_mode: ?TagPropagationMode = null,
 
     /// The worker capabilities for the customer managed fleet.
     worker_capabilities: CustomerManagedWorkerCapabilities,

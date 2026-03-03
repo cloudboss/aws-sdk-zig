@@ -2,7 +2,7 @@
 /// query parameter identification.
 pub const SingleHeader = struct {
     /// The name value, limited to 64 characters.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

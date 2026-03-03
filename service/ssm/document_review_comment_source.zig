@@ -5,11 +5,11 @@ pub const DocumentReviewCommentSource = struct {
     /// The content of a comment entered by a user who requests a review of a new
     /// document version,
     /// or who reviews the new version.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The type of information added to a review request. Currently, only the value
     /// `Comment` is supported.
-    @"type": ?DocumentReviewCommentType,
+    @"type": ?DocumentReviewCommentType = null,
 
     pub const json_field_names = .{
         .content = "Content",

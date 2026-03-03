@@ -38,14 +38,14 @@ pub const DataRepositoryConfiguration = struct {
     /// existing objects that are changed in the S3 bucket, and any objects that
     /// were deleted
     /// in the S3 bucket.
-    auto_import_policy: ?AutoImportPolicyType,
+    auto_import_policy: ?AutoImportPolicyType = null,
 
     /// The export path to the Amazon S3 bucket (and prefix) that you are using to
     /// store new and
     /// changed Lustre file system files in S3.
-    export_path: ?[]const u8,
+    export_path: ?[]const u8 = null,
 
-    failure_details: ?DataRepositoryFailureDetails,
+    failure_details: ?DataRepositoryFailureDetails = null,
 
     /// For files imported from a data repository, this value determines the stripe
     /// count and
@@ -58,7 +58,7 @@ pub const DataRepositoryConfiguration = struct {
     /// The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000
     /// MiB (500
     /// GiB). Amazon S3 objects have a maximum size of 5 TB.
-    imported_file_chunk_size: ?i32,
+    imported_file_chunk_size: ?i32 = null,
 
     /// The import path to the Amazon S3 bucket (and optional prefix) that you're
     /// using
@@ -67,7 +67,7 @@ pub const DataRepositoryConfiguration = struct {
     /// Amazon S3 bucket name, only object keys with that prefix are loaded into the
     /// file
     /// system.
-    import_path: ?[]const u8,
+    import_path: ?[]const u8 = null,
 
     /// Describes the state of the file system's S3 durable data repository, if it
     /// is configured with an S3 repository.
@@ -91,7 +91,7 @@ pub const DataRepositoryConfiguration = struct {
     ///
     /// * `FAILED` - The data repository is in a terminal state that
     /// cannot be recovered.
-    lifecycle: ?DataRepositoryLifecycle,
+    lifecycle: ?DataRepositoryLifecycle = null,
 
     pub const json_field_names = .{
         .auto_import_policy = "AutoImportPolicy",

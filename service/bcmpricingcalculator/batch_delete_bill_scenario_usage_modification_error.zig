@@ -3,13 +3,13 @@ const BatchDeleteBillScenarioUsageModificationErrorCode = @import("batch_delete_
 /// Represents an error that occurred when deleting usage in a Bill Scenario.
 pub const BatchDeleteBillScenarioUsageModificationError = struct {
     /// The code associated with the error.
-    error_code: ?BatchDeleteBillScenarioUsageModificationErrorCode,
+    error_code: ?BatchDeleteBillScenarioUsageModificationErrorCode = null,
 
     /// The message that describes the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The ID of the error.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

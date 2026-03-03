@@ -2,16 +2,16 @@ const FirewallDomainListStatus = @import("firewall_domain_list_status.zig").Fire
 
 pub const UpdateFirewallDomainsResponse = struct {
     /// The ID of the firewall domain list that DNS Firewall just updated.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the domain list.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Status of the `UpdateFirewallDomains` request.
-    status: ?FirewallDomainListStatus,
+    status: ?FirewallDomainListStatus = null,
 
     /// Additional information about the status of the list, if available.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

@@ -6,7 +6,7 @@ pub const ReplacementTemplate = struct {
     /// object, typically consisting of key-value pairs in which the keys correspond
     /// to
     /// replacement tags in the email template.
-    replacement_template_data: ?[]const u8,
+    replacement_template_data: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .replacement_template_data = "ReplacementTemplateData",

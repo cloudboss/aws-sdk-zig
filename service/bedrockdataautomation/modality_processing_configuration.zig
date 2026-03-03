@@ -2,7 +2,7 @@ const State = @import("state.zig").State;
 
 /// Configuration to enable/disable processing of modality
 pub const ModalityProcessingConfiguration = struct {
-    state: ?State,
+    state: ?State = null,
 
     pub const json_field_names = .{
         .state = "state",

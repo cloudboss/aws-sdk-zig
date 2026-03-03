@@ -2,10 +2,10 @@
 /// balancer.
 pub const AwsElbLoadBalancerBackendServerDescription = struct {
     /// The port on which the EC2 instance is listening.
-    instance_port: ?i32,
+    instance_port: ?i32 = null,
 
     /// The names of the policies that are enabled for the EC2 instance.
-    policy_names: ?[]const []const u8,
+    policy_names: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .instance_port = "InstancePort",

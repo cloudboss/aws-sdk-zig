@@ -4,7 +4,7 @@ const ConditionalFormattingColor = @import("conditional_formatting_color.zig").C
 /// `GaugeChartVisual`.
 pub const GaugeChartArcConditionalFormatting = struct {
     /// The conditional formatting of the arc foreground color.
-    foreground_color: ?ConditionalFormattingColor,
+    foreground_color: ?ConditionalFormattingColor = null,
 
     pub const json_field_names = .{
         .foreground_color = "ForegroundColor",

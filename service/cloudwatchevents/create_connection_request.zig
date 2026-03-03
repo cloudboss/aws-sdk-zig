@@ -10,7 +10,7 @@ pub const CreateConnectionRequest = struct {
     auth_parameters: CreateConnectionAuthRequestParameters,
 
     /// A description for the connection to create.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name for the connection to create.
     name: []const u8,

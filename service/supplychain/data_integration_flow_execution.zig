@@ -5,7 +5,7 @@ const DataIntegrationFlowExecutionStatus = @import("data_integration_flow_execut
 /// The flow execution details.
 pub const DataIntegrationFlowExecution = struct {
     /// The flow execution end timestamp.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The flow executionId.
     execution_id: []const u8,
@@ -17,19 +17,19 @@ pub const DataIntegrationFlowExecution = struct {
     instance_id: []const u8,
 
     /// The failure message (if any) of failed flow execution.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The flow execution output metadata.
-    output_metadata: ?DataIntegrationFlowExecutionOutputMetadata,
+    output_metadata: ?DataIntegrationFlowExecutionOutputMetadata = null,
 
     /// The source information for a flow execution.
-    source_info: ?DataIntegrationFlowExecutionSourceInfo,
+    source_info: ?DataIntegrationFlowExecutionSourceInfo = null,
 
     /// The flow execution start timestamp.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of flow execution.
-    status: ?DataIntegrationFlowExecutionStatus,
+    status: ?DataIntegrationFlowExecutionStatus = null,
 
     pub const json_field_names = .{
         .end_time = "endTime",

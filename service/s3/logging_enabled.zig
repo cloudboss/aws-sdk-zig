@@ -25,10 +25,10 @@ pub const LoggingEnabled = struct {
     /// For more information, see [Permissions for server access log
     /// delivery](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general) in the
     /// *Amazon S3 User Guide*.
-    target_grants: ?[]const TargetGrant,
+    target_grants: ?[]const TargetGrant = null,
 
     /// Amazon S3 key format for log objects.
-    target_object_key_format: ?TargetObjectKeyFormat,
+    target_object_key_format: ?TargetObjectKeyFormat = null,
 
     /// A prefix for all log object keys. If you store log files from multiple
     /// Amazon S3 buckets in a single

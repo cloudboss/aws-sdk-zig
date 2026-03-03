@@ -9,21 +9,21 @@ const EvidenceInsights = @import("evidence_insights.zig").EvidenceInsights;
 /// non-compliant evidence.
 pub const ControlInsightsMetadataByAssessmentItem = struct {
     /// The name of the control set that the assessment control belongs to.
-    control_set_name: ?[]const u8,
+    control_set_name: ?[]const u8 = null,
 
     /// A breakdown of the compliance check status for the evidence that’s
     /// associated with the
     /// assessment control.
-    evidence_insights: ?EvidenceInsights,
+    evidence_insights: ?EvidenceInsights = null,
 
     /// The unique identifier for the assessment control.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The time when the assessment control insights were last updated.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The name of the assessment control.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .control_set_name = "controlSetName",

@@ -4,20 +4,20 @@ pub const LoRaWANServiceProfile = struct {
     add_gw_metadata: bool = false,
 
     /// The DrMax value.
-    dr_max: ?i32,
+    dr_max: ?i32 = null,
 
     /// The DrMin value.
-    dr_min: ?i32,
+    dr_min: ?i32 = null,
 
     /// The maximum number of transmissions.
     ///
     /// Default: `3`
-    nb_trans_max: ?i32,
+    nb_trans_max: ?i32 = null,
 
     /// The minimum number of transmissions.
     ///
     /// Default: `0`
-    nb_trans_min: ?i32,
+    nb_trans_min: ?i32 = null,
 
     /// The PRAllowed value that describes whether passive roaming is allowed.
     pr_allowed: bool = false,
@@ -28,12 +28,12 @@ pub const LoRaWANServiceProfile = struct {
     /// The Transmit Power Index maximum.
     ///
     /// Default: `15`
-    tx_power_index_max: ?i32,
+    tx_power_index_max: ?i32 = null,
 
     /// The Transmit Power Index minimum.
     ///
     /// Default: `0`
-    tx_power_index_min: ?i32,
+    tx_power_index_min: ?i32 = null,
 
     pub const json_field_names = .{
         .add_gw_metadata = "AddGwMetadata",

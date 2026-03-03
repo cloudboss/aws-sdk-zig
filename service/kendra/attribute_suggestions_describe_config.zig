@@ -13,11 +13,11 @@ pub const AttributeSuggestionsDescribeConfig = struct {
     /// and you haven't set your `SuggestionTypes` preference to
     /// `DOCUMENT_ATTRIBUTES`,
     /// then Amazon Kendra uses the query history.
-    attribute_suggestions_mode: ?AttributeSuggestionsMode,
+    attribute_suggestions_mode: ?AttributeSuggestionsMode = null,
 
     /// The list of fields/attributes that you want to set as suggestible for query
     /// suggestions.
-    suggestable_config_list: ?[]const SuggestableConfig,
+    suggestable_config_list: ?[]const SuggestableConfig = null,
 
     pub const json_field_names = .{
         .attribute_suggestions_mode = "AttributeSuggestionsMode",

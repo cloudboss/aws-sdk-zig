@@ -5,5 +5,5 @@ const LoadBalancerDescription = @import("load_balancer_description.zig").LoadBal
 /// data.
 pub const EnvironmentResourcesDescription = struct {
     /// Describes the LoadBalancer.
-    load_balancer: ?LoadBalancerDescription,
+    load_balancer: ?LoadBalancerDescription = null,
 };

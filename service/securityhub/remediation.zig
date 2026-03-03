@@ -4,7 +4,7 @@ const Recommendation = @import("recommendation.zig").Recommendation;
 pub const Remediation = struct {
     /// A recommendation on the steps to take to remediate the issue identified by a
     /// finding.
-    recommendation: ?Recommendation,
+    recommendation: ?Recommendation = null,
 
     pub const json_field_names = .{
         .recommendation = "Recommendation",

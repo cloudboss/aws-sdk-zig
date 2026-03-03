@@ -5,10 +5,10 @@ const MatchedUser = @import("matched_user.zig").MatchedUser;
 /// input face.
 pub const UserMatch = struct {
     /// Describes the UserID metadata.
-    similarity: ?f32,
+    similarity: ?f32 = null,
 
     /// Confidence in the match of this UserID with the input face.
-    user: ?MatchedUser,
+    user: ?MatchedUser = null,
 
     pub const json_field_names = .{
         .similarity = "Similarity",

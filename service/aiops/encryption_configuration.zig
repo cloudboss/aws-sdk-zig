@@ -5,11 +5,11 @@ const EncryptionConfigurationType = @import("encryption_configuration_type.zig")
 pub const EncryptionConfiguration = struct {
     /// If the investigation group uses a customer managed key for encryption, this
     /// field displays the ID of that key.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Displays whether investigation data is encrypted by a customer managed key
     /// or an Amazon Web Services owned key.
-    @"type": ?EncryptionConfigurationType,
+    @"type": ?EncryptionConfigurationType = null,
 
     pub const json_field_names = .{
         .kms_key_id = "kmsKeyId",

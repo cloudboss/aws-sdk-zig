@@ -18,7 +18,7 @@ pub const EcsCapacityIncreaseConfiguration = struct {
     timeout_minutes: i32 = 60,
 
     /// The settings for ungraceful execution.
-    ungraceful: ?EcsUngraceful,
+    ungraceful: ?EcsUngraceful = null,
 
     pub const json_field_names = .{
         .capacity_monitoring_approach = "capacityMonitoringApproach",

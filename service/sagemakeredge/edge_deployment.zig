@@ -6,17 +6,17 @@ const DeploymentType = @import("deployment_type.zig").DeploymentType;
 /// SageMaker Edge Manager.
 pub const EdgeDeployment = struct {
     /// Returns a list of Definition objects.
-    definitions: ?[]const Definition,
+    definitions: ?[]const Definition = null,
 
     /// The name and unique ID of the deployment.
-    deployment_name: ?[]const u8,
+    deployment_name: ?[]const u8 = null,
 
     /// Determines whether to rollback to previous configuration if deployment
     /// fails.
-    failure_handling_policy: ?FailureHandlingPolicy,
+    failure_handling_policy: ?FailureHandlingPolicy = null,
 
     /// The type of the deployment.
-    @"type": ?DeploymentType,
+    @"type": ?DeploymentType = null,
 
     pub const json_field_names = .{
         .definitions = "Definitions",

@@ -5,23 +5,23 @@ const Tag = @import("tag.zig").Tag;
 /// snapshots of a cluster. You can also schedule snapshots for specific dates.
 pub const SnapshotSchedule = struct {
     /// The number of clusters associated with the schedule.
-    associated_cluster_count: ?i32,
+    associated_cluster_count: ?i32 = null,
 
     /// A list of clusters associated with the schedule. A maximum of 100 clusters
     /// is returned.
-    associated_clusters: ?[]const ClusterAssociatedToSchedule,
+    associated_clusters: ?[]const ClusterAssociatedToSchedule = null,
 
-    next_invocations: ?[]const i64,
+    next_invocations: ?[]const i64 = null,
 
     /// A list of ScheduleDefinitions.
-    schedule_definitions: ?[]const []const u8,
+    schedule_definitions: ?[]const []const u8 = null,
 
     /// The description of the schedule.
-    schedule_description: ?[]const u8,
+    schedule_description: ?[]const u8 = null,
 
     /// A unique identifier for the schedule.
-    schedule_identifier: ?[]const u8,
+    schedule_identifier: ?[]const u8 = null,
 
     /// An optional set of tags describing the schedule.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

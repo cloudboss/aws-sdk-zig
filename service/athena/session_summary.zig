@@ -4,20 +4,20 @@ const SessionStatus = @import("session_status.zig").SessionStatus;
 /// Contains summary information about a session.
 pub const SessionSummary = struct {
     /// The session description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The engine version used by the session (for example, `PySpark engine version
     /// 3`).
-    engine_version: ?EngineVersion,
+    engine_version: ?EngineVersion = null,
 
     /// The notebook version.
-    notebook_version: ?[]const u8,
+    notebook_version: ?[]const u8 = null,
 
     /// The session ID.
-    session_id: ?[]const u8,
+    session_id: ?[]const u8 = null,
 
     /// Contains information about the session status.
-    status: ?SessionStatus,
+    status: ?SessionStatus = null,
 
     pub const json_field_names = .{
         .description = "Description",

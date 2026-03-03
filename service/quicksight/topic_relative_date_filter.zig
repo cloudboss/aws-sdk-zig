@@ -6,15 +6,15 @@ const TopicTimeGranularity = @import("topic_time_granularity.zig").TopicTimeGran
 pub const TopicRelativeDateFilter = struct {
     /// The constant used in a
     /// relative date filter.
-    constant: ?TopicSingularFilterConstant,
+    constant: ?TopicSingularFilterConstant = null,
 
     /// The function to be used in a relative date filter to determine the range of
     /// dates to include in the results. Valid values for this structure are
     /// `BEFORE`, `AFTER`, and `BETWEEN`.
-    relative_date_filter_function: ?TopicRelativeDateFilterFunction,
+    relative_date_filter_function: ?TopicRelativeDateFilterFunction = null,
 
     /// The level of time precision that is used to aggregate `DateTime` values.
-    time_granularity: ?TopicTimeGranularity,
+    time_granularity: ?TopicTimeGranularity = null,
 
     pub const json_field_names = .{
         .constant = "Constant",

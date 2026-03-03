@@ -34,156 +34,156 @@ pub const Visual = struct {
     /// For more information, see [Using bar
     /// charts](https://docs.aws.amazon.com/quicksight/latest/user/bar-charts.html)
     /// in the *Amazon Quick Suite User Guide*.
-    bar_chart_visual: ?BarChartVisual,
+    bar_chart_visual: ?BarChartVisual = null,
 
     /// A box plot.
     ///
     /// For more information, see [Using box
     /// plots](https://docs.aws.amazon.com/quicksight/latest/user/box-plots.html) in
     /// the *Amazon Quick Suite User Guide*.
-    box_plot_visual: ?BoxPlotVisual,
+    box_plot_visual: ?BoxPlotVisual = null,
 
     /// A combo chart.
     ///
     /// For more information, see [Using combo
     /// charts](https://docs.aws.amazon.com/quicksight/latest/user/combo-charts.html) in the *Amazon Quick Suite User Guide*.
-    combo_chart_visual: ?ComboChartVisual,
+    combo_chart_visual: ?ComboChartVisual = null,
 
     /// A visual that contains custom content.
     ///
     /// For more information, see [Using custom visual
     /// content](https://docs.aws.amazon.com/quicksight/latest/user/custom-visual-content.html) in the *Amazon Quick Suite User Guide*.
-    custom_content_visual: ?CustomContentVisual,
+    custom_content_visual: ?CustomContentVisual = null,
 
     /// An empty visual.
-    empty_visual: ?EmptyVisual,
+    empty_visual: ?EmptyVisual = null,
 
     /// A filled map.
     ///
     /// For more information, see [Creating filled
     /// maps](https://docs.aws.amazon.com/quicksight/latest/user/filled-maps.html)
     /// in the *Amazon Quick Suite User Guide*.
-    filled_map_visual: ?FilledMapVisual,
+    filled_map_visual: ?FilledMapVisual = null,
 
     /// A funnel chart.
     ///
     /// For more information, see [Using funnel
     /// charts](https://docs.aws.amazon.com/quicksight/latest/user/funnel-visual-content.html) in the *Amazon Quick Suite User Guide*.
-    funnel_chart_visual: ?FunnelChartVisual,
+    funnel_chart_visual: ?FunnelChartVisual = null,
 
     /// A gauge chart.
     ///
     /// For more information, see [Using gauge
     /// charts](https://docs.aws.amazon.com/quicksight/latest/user/gauge-chart.html)
     /// in the *Amazon Quick Suite User Guide*.
-    gauge_chart_visual: ?GaugeChartVisual,
+    gauge_chart_visual: ?GaugeChartVisual = null,
 
     /// A geospatial map or a points on map visual.
     ///
     /// For more information, see [Creating point
     /// maps](https://docs.aws.amazon.com/quicksight/latest/user/point-maps.html) in
     /// the *Amazon Quick Suite User Guide*.
-    geospatial_map_visual: ?GeospatialMapVisual,
+    geospatial_map_visual: ?GeospatialMapVisual = null,
 
     /// A heat map.
     ///
     /// For more information, see [Using heat
     /// maps](https://docs.aws.amazon.com/quicksight/latest/user/heat-map.html) in
     /// the *Amazon Quick Suite User Guide*.
-    heat_map_visual: ?HeatMapVisual,
+    heat_map_visual: ?HeatMapVisual = null,
 
     /// A histogram.
     ///
     /// For more information, see [Using
     /// histograms](https://docs.aws.amazon.com/quicksight/latest/user/histogram-charts.html) in the *Amazon Quick Suite User Guide*.
-    histogram_visual: ?HistogramVisual,
+    histogram_visual: ?HistogramVisual = null,
 
     /// An insight visual.
     ///
     /// For more information, see [Working with
     /// insights](https://docs.aws.amazon.com/quicksight/latest/user/computational-insights.html) in the *Amazon Quick Suite User Guide*.
-    insight_visual: ?InsightVisual,
+    insight_visual: ?InsightVisual = null,
 
     /// A key performance indicator (KPI).
     ///
     /// For more information, see [Using
     /// KPIs](https://docs.aws.amazon.com/quicksight/latest/user/kpi.html) in the
     /// *Amazon Quick Suite User Guide*.
-    kpi_visual: ?KPIVisual,
+    kpi_visual: ?KPIVisual = null,
 
     /// The properties for a layer map visual
-    layer_map_visual: ?LayerMapVisual,
+    layer_map_visual: ?LayerMapVisual = null,
 
     /// A line chart.
     ///
     /// For more information, see [Using line
     /// charts](https://docs.aws.amazon.com/quicksight/latest/user/line-charts.html)
     /// in the *Amazon Quick Suite User Guide*.
-    line_chart_visual: ?LineChartVisual,
+    line_chart_visual: ?LineChartVisual = null,
 
     /// A pie or donut chart.
     ///
     /// For more information, see [Using pie
     /// charts](https://docs.aws.amazon.com/quicksight/latest/user/pie-chart.html)
     /// in the *Amazon Quick Suite User Guide*.
-    pie_chart_visual: ?PieChartVisual,
+    pie_chart_visual: ?PieChartVisual = null,
 
     /// A pivot table.
     ///
     /// For more information, see [Using pivot
     /// tables](https://docs.aws.amazon.com/quicksight/latest/user/pivot-table.html)
     /// in the *Amazon Quick Suite User Guide*.
-    pivot_table_visual: ?PivotTableVisual,
+    pivot_table_visual: ?PivotTableVisual = null,
 
     /// The custom plugin visual type.
-    plugin_visual: ?PluginVisual,
+    plugin_visual: ?PluginVisual = null,
 
     /// A radar chart visual.
     ///
     /// For more information, see [Using radar
     /// charts](https://docs.aws.amazon.com/quicksight/latest/user/radar-chart.html)
     /// in the *Amazon Quick Suite User Guide*.
-    radar_chart_visual: ?RadarChartVisual,
+    radar_chart_visual: ?RadarChartVisual = null,
 
     /// A sankey diagram.
     ///
     /// For more information, see [Using Sankey
     /// diagrams](https://docs.aws.amazon.com/quicksight/latest/user/sankey-diagram.html) in the *Amazon Quick Suite User Guide*.
-    sankey_diagram_visual: ?SankeyDiagramVisual,
+    sankey_diagram_visual: ?SankeyDiagramVisual = null,
 
     /// A scatter plot.
     ///
     /// For more information, see [Using scatter
     /// plots](https://docs.aws.amazon.com/quicksight/latest/user/scatter-plot.html)
     /// in the *Amazon Quick Suite User Guide*.
-    scatter_plot_visual: ?ScatterPlotVisual,
+    scatter_plot_visual: ?ScatterPlotVisual = null,
 
     /// A table visual.
     ///
     /// For more information, see [Using tables as
     /// visuals](https://docs.aws.amazon.com/quicksight/latest/user/tabular.html) in
     /// the *Amazon Quick Suite User Guide*.
-    table_visual: ?TableVisual,
+    table_visual: ?TableVisual = null,
 
     /// A tree map.
     ///
     /// For more information, see [Using tree
     /// maps](https://docs.aws.amazon.com/quicksight/latest/user/tree-map.html) in
     /// the *Amazon Quick Suite User Guide*.
-    tree_map_visual: ?TreeMapVisual,
+    tree_map_visual: ?TreeMapVisual = null,
 
     /// A waterfall chart.
     ///
     /// For more information, see [Using waterfall
     /// charts](https://docs.aws.amazon.com/quicksight/latest/user/waterfall-chart.html) in the *Amazon Quick Suite User Guide*.
-    waterfall_visual: ?WaterfallVisual,
+    waterfall_visual: ?WaterfallVisual = null,
 
     /// A word cloud.
     ///
     /// For more information, see [Using word
     /// clouds](https://docs.aws.amazon.com/quicksight/latest/user/word-cloud.html)
     /// in the *Amazon Quick Suite User Guide*.
-    word_cloud_visual: ?WordCloudVisual,
+    word_cloud_visual: ?WordCloudVisual = null,
 
     pub const json_field_names = .{
         .bar_chart_visual = "BarChartVisual",

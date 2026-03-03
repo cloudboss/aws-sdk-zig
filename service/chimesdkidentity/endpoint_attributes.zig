@@ -4,7 +4,7 @@ pub const EndpointAttributes = struct {
     device_token: []const u8,
 
     /// The VOIP device token for the APNS and APNS_SANDBOX endpoint types.
-    voip_device_token: ?[]const u8,
+    voip_device_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .device_token = "DeviceToken",

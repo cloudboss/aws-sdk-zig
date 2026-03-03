@@ -12,7 +12,7 @@ pub const DefaultContinuousHyperParameterRange = struct {
     min_value: f64 = 0,
 
     /// The name of the hyperparameter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .is_tunable = "isTunable",

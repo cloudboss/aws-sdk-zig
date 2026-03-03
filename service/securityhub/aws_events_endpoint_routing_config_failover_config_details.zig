@@ -5,11 +5,11 @@ const AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails = @import("aw
 /// failover and what happens when it's triggered.
 pub const AwsEventsEndpointRoutingConfigFailoverConfigDetails = struct {
     /// The main Region of the endpoint.
-    primary: ?AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails,
+    primary: ?AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails = null,
 
     /// The Region that events are routed to when failover is triggered or event
     /// replication is enabled.
-    secondary: ?AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails,
+    secondary: ?AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails = null,
 
     pub const json_field_names = .{
         .primary = "Primary",

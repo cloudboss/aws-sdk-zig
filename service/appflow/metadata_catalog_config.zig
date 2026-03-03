@@ -7,7 +7,7 @@ pub const MetadataCatalogConfig = struct {
     /// Specifies the configuration that Amazon AppFlow uses when it catalogs your
     /// data with
     /// the Glue Data Catalog.
-    glue_data_catalog: ?GlueDataCatalogConfig,
+    glue_data_catalog: ?GlueDataCatalogConfig = null,
 
     pub const json_field_names = .{
         .glue_data_catalog = "glueDataCatalog",

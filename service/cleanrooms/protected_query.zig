@@ -10,17 +10,17 @@ const ProtectedQueryStatus = @import("protected_query_status.zig").ProtectedQuer
 /// The parameters for an Clean Rooms protected query.
 pub const ProtectedQuery = struct {
     /// The compute configuration for the protected query.
-    compute_configuration: ?ComputeConfiguration,
+    compute_configuration: ?ComputeConfiguration = null,
 
     /// The time at which the protected query was created.
     create_time: i64,
 
     /// The sensitivity parameters of the differential privacy results of the
     /// protected query.
-    differential_privacy: ?DifferentialPrivacyParameters,
+    differential_privacy: ?DifferentialPrivacyParameters = null,
 
     /// An error thrown by the protected query.
-    @"error": ?ProtectedQueryError,
+    @"error": ?ProtectedQueryError = null,
 
     /// The identifier for a protected query instance.
     id: []const u8,
@@ -32,16 +32,16 @@ pub const ProtectedQuery = struct {
     membership_id: []const u8,
 
     /// The result of the protected query.
-    result: ?ProtectedQueryResult,
+    result: ?ProtectedQueryResult = null,
 
     /// Contains any details needed to write the query results.
-    result_configuration: ?ProtectedQueryResultConfiguration,
+    result_configuration: ?ProtectedQueryResultConfiguration = null,
 
     /// The protected query SQL parameters.
-    sql_parameters: ?ProtectedQuerySQLParameters,
+    sql_parameters: ?ProtectedQuerySQLParameters = null,
 
     /// Statistics about protected query execution.
-    statistics: ?ProtectedQueryStatistics,
+    statistics: ?ProtectedQueryStatistics = null,
 
     /// The status of the query.
     status: ProtectedQueryStatus,

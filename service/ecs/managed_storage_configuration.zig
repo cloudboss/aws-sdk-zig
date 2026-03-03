@@ -13,7 +13,7 @@ pub const ManagedStorageConfiguration = struct {
     /// Developer Guide*.
     ///
     /// The key must be a single Region key.
-    fargate_ephemeral_storage_kms_key_id: ?[]const u8,
+    fargate_ephemeral_storage_kms_key_id: ?[]const u8 = null,
 
     /// Specify a Key
     /// Management Service key ID to encrypt Amazon ECS managed storage.
@@ -29,7 +29,7 @@ pub const ManagedStorageConfiguration = struct {
     /// *Amazon Elastic Container Service Developer Guide*.
     ///
     /// The key must be a single Region key.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .fargate_ephemeral_storage_kms_key_id = "fargateEphemeralStorageKmsKeyId",

@@ -1,7 +1,7 @@
 /// The rolling date configuration of a date time filter.
 pub const RollingDateConfiguration = struct {
     /// The data set that is used in the rolling date configuration.
-    data_set_identifier: ?[]const u8,
+    data_set_identifier: ?[]const u8 = null,
 
     /// The expression of the rolling date configuration.
     expression: []const u8,

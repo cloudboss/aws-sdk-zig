@@ -16,32 +16,32 @@ pub const Task = struct {
     /// The Elastic Network Adapter that's associated with the task if the task uses
     /// the
     /// `awsvpc` network mode.
-    attachments: ?[]const Attachment,
+    attachments: ?[]const Attachment = null,
 
     /// The attributes of the task
-    attributes: ?[]const Attribute,
+    attributes: ?[]const Attribute = null,
 
     /// The Availability Zone for the task.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The capacity provider that's associated with the task.
-    capacity_provider_name: ?[]const u8,
+    capacity_provider_name: ?[]const u8 = null,
 
     /// The ARN of the cluster that hosts the task.
-    cluster_arn: ?[]const u8,
+    cluster_arn: ?[]const u8 = null,
 
     /// The connectivity status of a task.
-    connectivity: ?Connectivity,
+    connectivity: ?Connectivity = null,
 
     /// The Unix timestamp for the time when the task last went into `CONNECTED`
     /// status.
-    connectivity_at: ?i64,
+    connectivity_at: ?i64 = null,
 
     /// The ARN of the container instances that host the task.
-    container_instance_arn: ?[]const u8,
+    container_instance_arn: ?[]const u8 = null,
 
     /// The containers that's associated with the task.
-    containers: ?[]const Container,
+    containers: ?[]const Container = null,
 
     /// The number of CPU units used by the task as expressed in a task definition.
     /// It can be
@@ -62,16 +62,16 @@ pub const Task = struct {
     /// see [Task
     /// size](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    cpu: ?[]const u8,
+    cpu: ?[]const u8 = null,
 
     /// The Unix timestamp for the time when the task was created. More
     /// specifically, it's for
     /// the time when the task entered the `PENDING` state.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The desired status of the task. For more information, see [Task
     /// Lifecycle](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html).
-    desired_status: ?[]const u8,
+    desired_status: ?[]const u8 = null,
 
     /// Determines whether execute command functionality is turned on for this task.
     /// If
@@ -80,16 +80,16 @@ pub const Task = struct {
     enable_execute_command: bool = false,
 
     /// The ephemeral storage settings for the task.
-    ephemeral_storage: ?EphemeralStorage,
+    ephemeral_storage: ?EphemeralStorage = null,
 
     /// The Unix timestamp for the time when the task execution stopped.
-    execution_stopped_at: ?i64,
+    execution_stopped_at: ?i64 = null,
 
     /// The Fargate ephemeral storage settings for the task.
-    fargate_ephemeral_storage: ?TaskEphemeralStorage,
+    fargate_ephemeral_storage: ?TaskEphemeralStorage = null,
 
     /// The name of the task group that's associated with the task.
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// The health status for the task. It's determined by the health of the
     /// essential
@@ -109,21 +109,21 @@ pub const Task = struct {
     /// container
     /// definition override any Docker health checks that are found in the container
     /// image.
-    health_status: ?HealthStatus,
+    health_status: ?HealthStatus = null,
 
     /// The Elastic Inference accelerator that's associated with the task.
-    inference_accelerators: ?[]const InferenceAccelerator,
+    inference_accelerators: ?[]const InferenceAccelerator = null,
 
     /// The last known status for the task. For more information, see [Task
     /// Lifecycle](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html).
-    last_status: ?[]const u8,
+    last_status: ?[]const u8 = null,
 
     /// The infrastructure where your task runs on. For more information, see
     /// [Amazon
     /// ECS launch
     /// types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    launch_type: ?LaunchType,
+    launch_type: ?LaunchType = null,
 
     /// The amount of memory (in MiB) that the task uses as expressed in a task
     /// definition. It
@@ -167,10 +167,10 @@ pub const Task = struct {
     /// values: 16384 (16 vCPU)
     ///
     /// This option requires Linux platform `1.4.0` or later.
-    memory: ?[]const u8,
+    memory: ?[]const u8 = null,
 
     /// One or more container overrides.
-    overrides: ?TaskOverride,
+    overrides: ?TaskOverride = null,
 
     /// The operating system that your tasks are running on. A platform family is
     /// specified
@@ -179,7 +179,7 @@ pub const Task = struct {
     /// All tasks that run as part of this service must use the same
     /// `platformFamily` value as the service (for example,
     /// `LINUX.`).
-    platform_family: ?[]const u8,
+    platform_family: ?[]const u8 = null,
 
     /// The platform version where your task runs on. A platform version is only
     /// specified for
@@ -188,24 +188,24 @@ pub const Task = struct {
     /// Platform
     /// Versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic
     /// Container Service Developer Guide*.
-    platform_version: ?[]const u8,
+    platform_version: ?[]const u8 = null,
 
     /// The Unix timestamp for the time when the container image pull began.
-    pull_started_at: ?i64,
+    pull_started_at: ?i64 = null,
 
     /// The Unix timestamp for the time when the container image pull completed.
-    pull_stopped_at: ?i64,
+    pull_stopped_at: ?i64 = null,
 
     /// The Unix timestamp for the time when the task started. More specifically,
     /// it's for the
     /// time when the task transitioned from the `PENDING` state to the
     /// `RUNNING` state.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The tag specified when a task is started. If an Amazon ECS service started
     /// the task,
     /// the `startedBy` parameter contains the deployment ID of that service.
-    started_by: ?[]const u8,
+    started_by: ?[]const u8 = null,
 
     /// The stop code indicating why a task was stopped. The `stoppedReason` might
     /// contain additional details.
@@ -213,22 +213,22 @@ pub const Task = struct {
     /// For more information about stop code, see [Stopped tasks
     /// error
     /// codes](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/stopped-task-error-codes.html) in the *Amazon ECS Developer Guide*.
-    stop_code: ?TaskStopCode,
+    stop_code: ?TaskStopCode = null,
 
     /// The Unix timestamp for the time when the task was stopped. More
     /// specifically, it's for
     /// the time when the task transitioned from the `RUNNING` state to the
     /// `STOPPED` state.
-    stopped_at: ?i64,
+    stopped_at: ?i64 = null,
 
     /// The reason that the task was stopped.
-    stopped_reason: ?[]const u8,
+    stopped_reason: ?[]const u8 = null,
 
     /// The Unix timestamp for the time when the task stops. More specifically, it's
     /// for the
     /// time when the task transitions from the `RUNNING` state to
     /// `STOPPING`.
-    stopping_at: ?i64,
+    stopping_at: ?i64 = null,
 
     /// The metadata that you apply to the task to help you categorize and organize
     /// the task.
@@ -264,13 +264,13 @@ pub const Task = struct {
     /// this prefix. Tags with this prefix do not count against your tags per
     /// resource
     /// limit.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The Amazon Resource Name (ARN) of the task.
-    task_arn: ?[]const u8,
+    task_arn: ?[]const u8 = null,
 
     /// The ARN of the task definition that creates the task.
-    task_definition_arn: ?[]const u8,
+    task_definition_arn: ?[]const u8 = null,
 
     /// The version counter for the task. Every time a task experiences a change
     /// that starts a

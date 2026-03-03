@@ -5,10 +5,10 @@ const EvaluationFormSingleSelectQuestionOption = @import("evaluation_form_single
 /// Information about the options in single select questions.
 pub const EvaluationFormSingleSelectQuestionProperties = struct {
     /// The display mode of the single select question.
-    automation: ?EvaluationFormSingleSelectQuestionAutomation,
+    automation: ?EvaluationFormSingleSelectQuestionAutomation = null,
 
     /// The display mode of the single select question.
-    display_as: ?EvaluationFormSingleSelectQuestionDisplayMode,
+    display_as: ?EvaluationFormSingleSelectQuestionDisplayMode = null,
 
     /// The answer options of the single select question.
     options: []const EvaluationFormSingleSelectQuestionOption,

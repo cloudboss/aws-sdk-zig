@@ -13,28 +13,28 @@ pub const IcebergTableUpdate = struct {
     /// The type of update action to be performed on the Iceberg table. Defines the
     /// specific operation such as adding schema, setting current schema, adding
     /// partition spec, or managing encryption keys.
-    action: ?IcebergUpdateAction,
+    action: ?IcebergUpdateAction = null,
 
     /// Encryption key information associated with an Iceberg table update
     /// operation. Used when adding or removing encryption keys from the table
     /// metadata during table evolution.
-    encryption_key: ?IcebergEncryptedKey,
+    encryption_key: ?IcebergEncryptedKey = null,
 
     /// Identifier of the encryption key involved in an Iceberg table update
     /// operation. References the specific key being added to or removed from the
     /// table's encryption configuration.
-    key_id: ?[]const u8,
+    key_id: ?[]const u8 = null,
 
     /// The updated S3 location where the Iceberg table data will be stored.
     location: []const u8,
 
     /// The updated partitioning specification that defines how the table data
     /// should be reorganized and partitioned.
-    partition_spec: ?IcebergPartitionSpec,
+    partition_spec: ?IcebergPartitionSpec = null,
 
     /// Updated key-value pairs of table properties and configuration settings for
     /// the Iceberg table.
-    properties: ?[]const aws.map.StringMapEntry,
+    properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The updated schema definition for the Iceberg table, specifying any changes
     /// to field structure, data types, or schema metadata.
@@ -42,7 +42,7 @@ pub const IcebergTableUpdate = struct {
 
     /// The updated sort order specification that defines how data should be ordered
     /// within partitions for optimal query performance.
-    sort_order: ?IcebergSortOrder,
+    sort_order: ?IcebergSortOrder = null,
 
     pub const json_field_names = .{
         .action = "Action",

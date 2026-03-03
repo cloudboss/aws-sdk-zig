@@ -3,19 +3,19 @@ const ShareStatus = @import("share_status.zig").ShareStatus;
 
 /// A workload share return object.
 pub const WorkloadShare = struct {
-    permission_type: ?PermissionType,
+    permission_type: ?PermissionType = null,
 
-    shared_by: ?[]const u8,
+    shared_by: ?[]const u8 = null,
 
-    shared_with: ?[]const u8,
+    shared_with: ?[]const u8 = null,
 
-    share_id: ?[]const u8,
+    share_id: ?[]const u8 = null,
 
-    status: ?ShareStatus,
+    status: ?ShareStatus = null,
 
-    workload_id: ?[]const u8,
+    workload_id: ?[]const u8 = null,
 
-    workload_name: ?[]const u8,
+    workload_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .permission_type = "PermissionType",

@@ -1,10 +1,10 @@
 /// Contains a subset of information about a job execution.
 pub const JobExecutionSummary = struct {
     /// A number that identifies a particular job execution on a particular device.
-    execution_number: ?i64,
+    execution_number: ?i64 = null,
 
     /// The unique identifier you assigned to this job when it was created.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The time, in seconds since the epoch, when the job execution was last
     /// updated.
@@ -14,7 +14,7 @@ pub const JobExecutionSummary = struct {
     queued_at: i64 = 0,
 
     /// The time, in seconds since the epoch, when the job execution started.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The version of the job execution. Job execution versions are incremented
     /// each time

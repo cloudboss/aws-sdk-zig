@@ -5,11 +5,11 @@ const FleetProxyRule = @import("fleet_proxy_rule.zig").FleetProxyRule;
 /// to your reserved capacity instances.
 pub const ProxyConfiguration = struct {
     /// The default behavior of outgoing traffic.
-    default_behavior: ?FleetProxyRuleBehavior,
+    default_behavior: ?FleetProxyRuleBehavior = null,
 
     /// An array of `FleetProxyRule` objects that represent the specified
     /// destination domains or IPs to allow or deny network access control to.
-    ordered_proxy_rules: ?[]const FleetProxyRule,
+    ordered_proxy_rules: ?[]const FleetProxyRule = null,
 
     pub const json_field_names = .{
         .default_behavior = "defaultBehavior",

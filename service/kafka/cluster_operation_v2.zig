@@ -6,34 +6,34 @@ const ClusterOperationV2Serverless = @import("cluster_operation_v2_serverless.zi
 /// Returns information about a cluster operation.
 pub const ClusterOperationV2 = struct {
     /// ARN of the cluster.
-    cluster_arn: ?[]const u8,
+    cluster_arn: ?[]const u8 = null,
 
     /// Type of the backend cluster.
-    cluster_type: ?ClusterType,
+    cluster_type: ?ClusterType = null,
 
     /// The time at which the operation finished.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// If cluster operation failed from an error, it describes the error.
-    error_info: ?ErrorInfo,
+    error_info: ?ErrorInfo = null,
 
     /// ARN of the cluster operation.
-    operation_arn: ?[]const u8,
+    operation_arn: ?[]const u8 = null,
 
     /// State of the cluster operation.
-    operation_state: ?[]const u8,
+    operation_state: ?[]const u8 = null,
 
     /// Type of the cluster operation.
-    operation_type: ?[]const u8,
+    operation_type: ?[]const u8 = null,
 
     /// Properties of a provisioned cluster.
-    provisioned: ?ClusterOperationV2Provisioned,
+    provisioned: ?ClusterOperationV2Provisioned = null,
 
     /// Properties of a serverless cluster.
-    serverless: ?ClusterOperationV2Serverless,
+    serverless: ?ClusterOperationV2Serverless = null,
 
     /// The time at which operation was started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .cluster_arn = "ClusterArn",

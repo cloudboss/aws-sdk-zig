@@ -1,7 +1,7 @@
 /// Summary information about a platform branch.
 pub const PlatformBranchSummary = struct {
     /// The name of the platform branch.
-    branch_name: ?[]const u8,
+    branch_name: ?[]const u8 = null,
 
     /// An ordinal number that designates the order in which platform branches have
     /// been added to
@@ -17,13 +17,13 @@ pub const PlatformBranchSummary = struct {
     ///
     /// Possible values: `beta` | `supported` | `deprecated` |
     /// `retired`
-    lifecycle_state: ?[]const u8,
+    lifecycle_state: ?[]const u8 = null,
 
     /// The name of the platform to which this platform branch belongs.
-    platform_name: ?[]const u8,
+    platform_name: ?[]const u8 = null,
 
     /// The environment tiers that platform versions in this branch support.
     ///
     /// Possible values: `WebServer/Standard` | `Worker/SQS/HTTP`
-    supported_tier_list: ?[]const []const u8,
+    supported_tier_list: ?[]const []const u8 = null,
 };

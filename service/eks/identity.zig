@@ -4,7 +4,7 @@ const OIDC = @import("oidc.zig").OIDC;
 pub const Identity = struct {
     /// An object representing the [OpenID Connect](https://openid.net/connect/)
     /// identity provider information.
-    oidc: ?OIDC,
+    oidc: ?OIDC = null,
 
     pub const json_field_names = .{
         .oidc = "oidc",

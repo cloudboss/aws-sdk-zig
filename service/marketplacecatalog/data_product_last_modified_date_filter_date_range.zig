@@ -3,10 +3,10 @@
 /// inclusive.
 pub const DataProductLastModifiedDateFilterDateRange = struct {
     /// Date after which the data product was last modified.
-    after_value: ?[]const u8,
+    after_value: ?[]const u8 = null,
 
     /// Date before which the data product was last modified.
-    before_value: ?[]const u8,
+    before_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .after_value = "AfterValue",

@@ -6,26 +6,26 @@ const StarburstProductType = @import("starburst_product_type.zig").StarburstProd
 pub const StarburstParameters = struct {
     /// The authentication type that you want to use for your connection. This
     /// parameter accepts OAuth and non-OAuth authentication types.
-    authentication_type: ?AuthenticationType,
+    authentication_type: ?AuthenticationType = null,
 
     /// The catalog name for the Starburst data source.
     catalog: []const u8,
 
     /// The database access control role.
-    database_access_control_role: ?[]const u8,
+    database_access_control_role: ?[]const u8 = null,
 
     /// The host name of the Starburst data source.
     host: []const u8,
 
     /// An object that contains information needed to create a data source
     /// connection between an Quick Sight account and Starburst.
-    o_auth_parameters: ?OAuthParameters,
+    o_auth_parameters: ?OAuthParameters = null,
 
     /// The port for the Starburst data source.
     port: i32,
 
     /// The product type for the Starburst data source.
-    product_type: ?StarburstProductType,
+    product_type: ?StarburstProductType = null,
 
     pub const json_field_names = .{
         .authentication_type = "AuthenticationType",

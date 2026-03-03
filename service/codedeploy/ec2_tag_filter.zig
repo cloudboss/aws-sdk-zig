@@ -3,7 +3,7 @@ const EC2TagFilterType = @import("ec2_tag_filter_type.zig").EC2TagFilterType;
 /// Information about an EC2 tag filter.
 pub const EC2TagFilter = struct {
     /// The tag filter key.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The tag filter type:
     ///
@@ -12,10 +12,10 @@ pub const EC2TagFilter = struct {
     /// * `VALUE_ONLY`: Value only.
     ///
     /// * `KEY_AND_VALUE`: Key and value.
-    @"type": ?EC2TagFilterType,
+    @"type": ?EC2TagFilterType = null,
 
     /// The tag filter value.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

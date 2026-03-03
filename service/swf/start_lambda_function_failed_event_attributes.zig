@@ -12,10 +12,10 @@ pub const StartLambdaFunctionFailedEventAttributes = struct {
     /// details and example IAM policies, see [Lambda
     /// Tasks](https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html) in the
     /// *Amazon SWF Developer Guide*.
-    cause: ?StartLambdaFunctionFailedCause,
+    cause: ?StartLambdaFunctionFailedCause = null,
 
     /// A description that can help diagnose the cause of the fault.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The ID of the `ActivityTaskScheduled` event that was recorded when this
     /// activity task was scheduled. To help diagnose issues, use this information

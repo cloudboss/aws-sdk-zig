@@ -33,9 +33,9 @@ pub const CapacityReservationSpecification = struct {
     ///
     /// * `none` - The instance doesn't run in a Capacity Reservation even if
     /// one is available. The instance runs as an On-Demand Instance.
-    capacity_reservation_preference: ?CapacityReservationPreference,
+    capacity_reservation_preference: ?CapacityReservationPreference = null,
 
     /// Information about the target Capacity Reservation or Capacity Reservation
     /// group.
-    capacity_reservation_target: ?CapacityReservationTarget,
+    capacity_reservation_target: ?CapacityReservationTarget = null,
 };

@@ -1,19 +1,19 @@
 /// Represents contact information for a partner representative.
 pub const Contact = struct {
     /// The business title or role of the contact person within the organization.
-    business_title: ?[]const u8,
+    business_title: ?[]const u8 = null,
 
     /// The email address of the contact person.
-    email: ?[]const u8,
+    email: ?[]const u8 = null,
 
     /// The first name of the contact person.
-    first_name: ?[]const u8,
+    first_name: ?[]const u8 = null,
 
     /// The last name of the contact person.
-    last_name: ?[]const u8,
+    last_name: ?[]const u8 = null,
 
     /// The phone number of the contact person.
-    phone: ?[]const u8,
+    phone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .business_title = "BusinessTitle",

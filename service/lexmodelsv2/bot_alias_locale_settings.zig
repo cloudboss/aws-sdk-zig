@@ -5,7 +5,7 @@ const CodeHookSpecification = @import("code_hook_specification.zig").CodeHookSpe
 pub const BotAliasLocaleSettings = struct {
     /// Specifies the Lambda function that should be used in the
     /// locale.
-    code_hook_specification: ?CodeHookSpecification,
+    code_hook_specification: ?CodeHookSpecification = null,
 
     /// Determines whether the locale is enabled for the bot. If the value
     /// is `false`, the locale isn't available for use.

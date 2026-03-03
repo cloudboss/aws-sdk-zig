@@ -5,10 +5,10 @@ const MetadataGenerationRunType = @import("metadata_generation_run_type.zig").Me
 /// The metadata generation run.
 pub const MetadataGenerationRunItem = struct {
     /// The timestamp at which the metadata generation run was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The user who created the metadata generation run.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The ID of the Amazon DataZone domain in which the metadata generation run
     /// was created.
@@ -22,16 +22,16 @@ pub const MetadataGenerationRunItem = struct {
     owning_project_id: []const u8,
 
     /// The status of the metadata generation run.
-    status: ?MetadataGenerationRunStatus,
+    status: ?MetadataGenerationRunStatus = null,
 
     /// The asset for which metadata was generated.
-    target: ?MetadataGenerationRunTarget,
+    target: ?MetadataGenerationRunTarget = null,
 
     /// The type of the metadata generation run.
-    @"type": ?MetadataGenerationRunType,
+    @"type": ?MetadataGenerationRunType = null,
 
     /// The types of the metadata generation run.
-    types: ?[]const MetadataGenerationRunType,
+    types: ?[]const MetadataGenerationRunType = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

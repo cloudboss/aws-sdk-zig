@@ -3,7 +3,7 @@
 pub const RejectChoice = struct {
     /// Specifies the the automatically generated business metadata that can be
     /// rejected.
-    prediction_choices: ?[]const i32,
+    prediction_choices: ?[]const i32 = null,
 
     /// Specifies the target (for example, a column name) where a prediction can be
     /// rejected.

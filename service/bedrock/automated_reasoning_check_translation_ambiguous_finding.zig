@@ -5,11 +5,11 @@ const AutomatedReasoningCheckTranslationOption = @import("automated_reasoning_ch
 /// requiring additional context or clarification.
 pub const AutomatedReasoningCheckTranslationAmbiguousFinding = struct {
     /// Scenarios showing how the different translation options differ in meaning.
-    difference_scenarios: ?[]const AutomatedReasoningCheckScenario,
+    difference_scenarios: ?[]const AutomatedReasoningCheckScenario = null,
 
     /// Different logical interpretations that were detected during translation of
     /// the input.
-    options: ?[]const AutomatedReasoningCheckTranslationOption,
+    options: ?[]const AutomatedReasoningCheckTranslationOption = null,
 
     pub const json_field_names = .{
         .difference_scenarios = "differenceScenarios",

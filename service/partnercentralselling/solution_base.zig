@@ -4,7 +4,7 @@ const SolutionStatus = @import("solution_status.zig").SolutionStatus;
 /// customer's business problem.
 pub const SolutionBase = struct {
     /// The SolutionBase structure provides essential information about a solution.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Specifies the catalog in which the solution is hosted, either `AWS` or
     /// `Sandbox`. This helps partners differentiate between live solutions and

@@ -5,7 +5,7 @@ pub const PresignedUrlConfig = struct {
     /// default value is 3600 seconds. Pre-signed URLs are generated when Jobs
     /// receives an MQTT
     /// request for the job document.
-    expires_in_sec: ?i64,
+    expires_in_sec: ?i64 = null,
 
     /// The ARN of an IAM role that grants permission to download files from the S3
     /// bucket
@@ -17,7 +17,7 @@ pub const PresignedUrlConfig = struct {
     /// [cross-service confused deputy
     /// prevention](https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html) in the *Amazon Web Services IoT Core
     /// developer guide*.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .expires_in_sec = "expiresInSec",

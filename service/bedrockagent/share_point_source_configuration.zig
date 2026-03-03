@@ -24,7 +24,7 @@ pub const SharePointSourceConfiguration = struct {
     site_urls: []const []const u8,
 
     /// The identifier of your Microsoft 365 tenant.
-    tenant_id: ?[]const u8,
+    tenant_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auth_type = "authType",

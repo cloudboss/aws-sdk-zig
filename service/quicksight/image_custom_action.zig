@@ -17,7 +17,7 @@ pub const ImageCustomAction = struct {
     name: []const u8,
 
     /// The status of the custom action.
-    status: ?WidgetStatus,
+    status: ?WidgetStatus = null,
 
     /// The trigger of the `VisualCustomAction`.
     ///

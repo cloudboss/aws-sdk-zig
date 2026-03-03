@@ -5,7 +5,7 @@ pub const Cvss2 = struct {
     base_score: f64 = 0,
 
     /// The scoring vector associated with the CVSS v2 score.
-    scoring_vector: ?[]const u8,
+    scoring_vector: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .base_score = "baseScore",

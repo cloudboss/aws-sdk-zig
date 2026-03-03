@@ -5,7 +5,7 @@ pub const Certificate = struct {
     /// cluster. Add
     /// this to the `certificate-authority-data` section of the
     /// `kubeconfig` file for your cluster.
-    data: ?[]const u8,
+    data: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data = "data",

@@ -9,22 +9,22 @@ const ContactFlowType = @import("contact_flow_type.zig").ContactFlowType;
 /// language](https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html).
 pub const ContactFlowSummary = struct {
     /// The Amazon Resource Name (ARN) of the flow.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The type of flow.
-    contact_flow_state: ?ContactFlowState,
+    contact_flow_state: ?ContactFlowState = null,
 
     /// The status of the flow.
-    contact_flow_status: ?ContactFlowStatus,
+    contact_flow_status: ?ContactFlowStatus = null,
 
     /// The type of flow.
-    contact_flow_type: ?ContactFlowType,
+    contact_flow_type: ?ContactFlowType = null,
 
     /// The identifier of the flow.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the flow.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

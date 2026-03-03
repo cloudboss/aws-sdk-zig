@@ -7,12 +7,12 @@ pub const TruckWeight = struct {
     /// The total weight of the truck.
     ///
     /// * For example, `3500`.
-    total: ?f64,
+    total: ?f64 = null,
 
     /// The unit of measurement to use for the truck weight.
     ///
     /// Default Value: `Kilograms`
-    unit: ?VehicleWeightUnit,
+    unit: ?VehicleWeightUnit = null,
 
     pub const json_field_names = .{
         .total = "Total",

@@ -3,31 +3,31 @@
 pub const CrlDetail = struct {
     /// The ISO-8601 timestamp when the certificate revocation list (CRL) was
     /// created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The ARN of the certificate revocation list (CRL).
-    crl_arn: ?[]const u8,
+    crl_arn: ?[]const u8 = null,
 
     /// The state of the certificate revocation list (CRL) after a read or write
     /// operation.
-    crl_data: ?[]const u8,
+    crl_data: ?[]const u8 = null,
 
     /// The unique identifier of the certificate revocation list (CRL).
-    crl_id: ?[]const u8,
+    crl_id: ?[]const u8 = null,
 
     /// Indicates whether the certificate revocation list (CRL) is enabled.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The name of the certificate revocation list (CRL).
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN of the TrustAnchor the certificate revocation list (CRL) will
     /// provide revocation for.
-    trust_anchor_arn: ?[]const u8,
+    trust_anchor_arn: ?[]const u8 = null,
 
     /// The ISO-8601 timestamp when the certificate revocation list (CRL) was last
     /// updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

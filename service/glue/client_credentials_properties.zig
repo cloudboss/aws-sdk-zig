@@ -6,28 +6,28 @@ const HTTPMethod = @import("http_method.zig").HTTPMethod;
 /// for the Client Credentials grant type flow.
 pub const ClientCredentialsProperties = struct {
     /// The OAuth2 client identifier provided by the authorization server.
-    client_id: ?ConnectorProperty,
+    client_id: ?ConnectorProperty = null,
 
     /// The OAuth2 client secret provided by the authorization server.
-    client_secret: ?ConnectorProperty,
+    client_secret: ?ConnectorProperty = null,
 
     /// The content type to use for token requests, such as
     /// application/x-www-form-urlencoded or application/json.
-    content_type: ?ContentType,
+    content_type: ?ContentType = null,
 
     /// The HTTP method to use when making token requests, typically POST.
-    request_method: ?HTTPMethod,
+    request_method: ?HTTPMethod = null,
 
     /// The OAuth2 scope that defines the level of access requested for the client
     /// credentials flow.
-    scope: ?ConnectorProperty,
+    scope: ?ConnectorProperty = null,
 
     /// The token endpoint URL where the client will request access tokens using
     /// client credentials.
-    token_url: ?ConnectorProperty,
+    token_url: ?ConnectorProperty = null,
 
     /// Additional parameters to include in token URL requests as key-value pairs.
-    token_url_parameters: ?[]const ConnectorProperty,
+    token_url_parameters: ?[]const ConnectorProperty = null,
 
     pub const json_field_names = .{
         .client_id = "ClientId",

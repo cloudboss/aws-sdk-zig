@@ -1,9 +1,9 @@
 pub const ListTagsForResourceRequest = struct {
     /// The maximum number of tags to return.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// A pagination token to resume pagination.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The Timestream resource with tags to be listed. This value is an Amazon
     /// Resource Name

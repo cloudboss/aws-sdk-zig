@@ -2,11 +2,11 @@ const FailureCode = @import("failure_code.zig").FailureCode;
 
 /// A failed request identified by the unique client token.
 pub const FailedRequest = struct {
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
-    failure_code: ?FailureCode,
+    failure_code: ?FailureCode = null,
 
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_token = "clientToken",

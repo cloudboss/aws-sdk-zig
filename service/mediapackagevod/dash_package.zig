@@ -8,17 +8,17 @@ pub const DashPackage = struct {
     /// A list of DASH manifest configurations.
     dash_manifests: []const DashManifest,
 
-    encryption: ?DashEncryption,
+    encryption: ?DashEncryption = null,
 
     /// When includeEncoderConfigurationInSegments is set to true, MediaPackage
     /// places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set
     /// (PPS), and Video Parameter Set (VPS) metadata in every video segment instead
     /// of in the init fragment. This lets you use different SPS/PPS/VPS settings
     /// for your assets during content playback.
-    include_encoder_configuration_in_segments: ?bool,
+    include_encoder_configuration_in_segments: ?bool = null,
 
     /// When enabled, an I-Frame only stream will be included in the output.
-    include_iframe_only_stream: ?bool,
+    include_iframe_only_stream: ?bool = null,
 
     /// A list of triggers that controls when the outgoing Dynamic Adaptive
     /// Streaming over HTTP (DASH)
@@ -27,11 +27,11 @@ pub const DashPackage = struct {
     /// be partitioned into more than one period. If the list contains "ADS", new
     /// periods will be created where
     /// the Asset contains SCTE-35 ad markers.
-    period_triggers: ?[]const __PeriodTriggersElement,
+    period_triggers: ?[]const __PeriodTriggersElement = null,
 
     /// Duration (in seconds) of each segment. Actual segments will be
     /// rounded to the nearest multiple of the source segment duration.
-    segment_duration_seconds: ?i32,
+    segment_duration_seconds: ?i32 = null,
 
     /// Determines the type of SegmentTemplate included in the Media Presentation
     /// Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is
@@ -39,7 +39,7 @@ pub const DashPackage = struct {
     /// TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate,
     /// with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is
     /// included in each SegmentTemplate, with $Number$ media URLs.
-    segment_template_format: ?SegmentTemplateFormat,
+    segment_template_format: ?SegmentTemplateFormat = null,
 
     pub const json_field_names = .{
         .dash_manifests = "DashManifests",

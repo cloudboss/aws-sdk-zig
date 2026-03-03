@@ -13,7 +13,7 @@ pub const VisaAttributes = struct {
     authorization_request_key_identifier: []const u8,
 
     /// The encrypted pinblock of the old pin stored on the chip card.
-    current_pin_attributes: ?CurrentPinAttributes,
+    current_pin_attributes: ?CurrentPinAttributes = null,
 
     /// The method to use when deriving the master key for the payment card.
     major_key_derivation_mode: MajorKeyDerivationMode,

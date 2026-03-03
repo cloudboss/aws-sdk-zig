@@ -6,7 +6,7 @@ pub const AppDefinitionInput = struct {
     cards: []const CardInput,
 
     /// The initial prompt displayed when the Q App is started.
-    initial_prompt: ?[]const u8,
+    initial_prompt: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cards = "cards",

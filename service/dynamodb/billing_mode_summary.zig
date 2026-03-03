@@ -19,11 +19,11 @@ pub const BillingModeSummary = struct {
     /// * `PAY_PER_REQUEST` - Sets the read/write capacity mode to
     /// `PAY_PER_REQUEST`. We recommend using
     /// `PAY_PER_REQUEST` for unpredictable workloads.
-    billing_mode: ?BillingMode,
+    billing_mode: ?BillingMode = null,
 
     /// Represents the time when `PAY_PER_REQUEST` was last set as the read/write
     /// capacity mode.
-    last_update_to_pay_per_request_date_time: ?i64,
+    last_update_to_pay_per_request_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .billing_mode = "BillingMode",

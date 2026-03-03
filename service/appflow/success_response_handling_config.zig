@@ -7,10 +7,10 @@
 /// connector upon a successful insert operation.
 pub const SuccessResponseHandlingConfig = struct {
     /// The name of the Amazon S3 bucket.
-    bucket_name: ?[]const u8,
+    bucket_name: ?[]const u8 = null,
 
     /// The Amazon S3 bucket prefix.
-    bucket_prefix: ?[]const u8,
+    bucket_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_name = "bucketName",

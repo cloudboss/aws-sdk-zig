@@ -4,16 +4,16 @@ const LicenseServerEndpointProvisioningStatus = @import("license_server_endpoint
 /// Information about a Remote Desktop Services (RDS) license server.
 pub const LicenseServer = struct {
     /// The health status of the RDS license server.
-    health_status: ?LicenseServerHealthStatus,
+    health_status: ?LicenseServerHealthStatus = null,
 
     /// A list of domain IPv4 addresses that are used for the RDS license server.
-    ipv_4_address: ?[]const u8,
+    ipv_4_address: ?[]const u8 = null,
 
     /// A list of domain IPv6 addresses that are used for the RDS license server.
-    ipv_6_address: ?[]const u8,
+    ipv_6_address: ?[]const u8 = null,
 
     /// The current state of the provisioning process for the RDS license server.
-    provisioning_status: ?LicenseServerEndpointProvisioningStatus,
+    provisioning_status: ?LicenseServerEndpointProvisioningStatus = null,
 
     pub const json_field_names = .{
         .health_status = "HealthStatus",

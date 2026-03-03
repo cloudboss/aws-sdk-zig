@@ -1,7 +1,7 @@
 /// Identifier for a hours of operations resource: ARN, ID, Name
 pub const HoursOfOperationsIdentifier = struct {
     /// Amazon Resource Name (ARN) of the hours of operations.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Unique identifier of the hours of operation.
     id: []const u8,

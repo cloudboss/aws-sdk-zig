@@ -10,34 +10,34 @@ const ResourceTagsCriteriaCondition = @import("resource_tags_criteria_condition.
 /// condition.
 pub const Criteria = struct {
     /// Filter criteria for EBS volume sizes in gibibytes (GiB).
-    ebs_volume_size_in_gib: ?[]const IntegerCriteriaCondition,
+    ebs_volume_size_in_gib: ?[]const IntegerCriteriaCondition = null,
 
     /// Filter criteria for EBS volume types, such as gp2, gp3, io1, io2, st1, or
     /// sc1.
-    ebs_volume_type: ?[]const StringCriteriaCondition,
+    ebs_volume_type: ?[]const StringCriteriaCondition = null,
 
     /// Filter criteria for estimated monthly cost savings from the recommended
     /// action.
-    estimated_monthly_savings: ?[]const DoubleCriteriaCondition,
+    estimated_monthly_savings: ?[]const DoubleCriteriaCondition = null,
 
     /// Filter criteria for the lookback period in days used to analyze resource
     /// utilization.
-    look_back_period_in_days: ?[]const IntegerCriteriaCondition,
+    look_back_period_in_days: ?[]const IntegerCriteriaCondition = null,
 
     /// Filter criteria for Amazon Web Services regions where resources must be
     /// located.
-    region: ?[]const StringCriteriaCondition,
+    region: ?[]const StringCriteriaCondition = null,
 
     /// Filter criteria for specific resource ARNs to include or exclude.
-    resource_arn: ?[]const StringCriteriaCondition,
+    resource_arn: ?[]const StringCriteriaCondition = null,
 
     /// Filter criteria for resource tags, allowing filtering by tag key and value
     /// combinations.
-    resource_tag: ?[]const ResourceTagsCriteriaCondition,
+    resource_tag: ?[]const ResourceTagsCriteriaCondition = null,
 
     /// Filter criteria indicating whether the recommended action requires a
     /// resource restart.
-    restart_needed: ?[]const StringCriteriaCondition,
+    restart_needed: ?[]const StringCriteriaCondition = null,
 
     pub const json_field_names = .{
         .ebs_volume_size_in_gib = "ebsVolumeSizeInGib",

@@ -3,7 +3,7 @@
 /// metadata to retrieve and manage a VPC endpoint association.
 pub const VpcEndpointAssociationMetadata = struct {
     /// The Amazon Resource Name (ARN) of a VPC endpoint association.
-    vpc_endpoint_association_arn: ?[]const u8,
+    vpc_endpoint_association_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .vpc_endpoint_association_arn = "VpcEndpointAssociationArn",

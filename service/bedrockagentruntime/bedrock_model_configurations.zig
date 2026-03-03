@@ -3,7 +3,7 @@ const PerformanceConfiguration = @import("performance_configuration.zig").Perfor
 /// Settings for a model called with InvokeAgent.
 pub const BedrockModelConfigurations = struct {
     /// The performance configuration for the model.
-    performance_config: ?PerformanceConfiguration,
+    performance_config: ?PerformanceConfiguration = null,
 
     pub const json_field_names = .{
         .performance_config = "performanceConfig",

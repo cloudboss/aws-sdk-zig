@@ -16,10 +16,10 @@ pub const ApiGatewayProxyInput = struct {
     /// endpoint (Amazon Web Services PrivateLink) availability, see [Access
     /// Refactor Spaces using an interface endpoint (Amazon Web Services
     /// PrivateLink)](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/vpc-interface-endpoints.html).
-    endpoint_type: ?ApiGatewayEndpointType,
+    endpoint_type: ?ApiGatewayEndpointType = null,
 
     /// The name of the API Gateway stage. The name defaults to `prod`.
-    stage_name: ?[]const u8,
+    stage_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .endpoint_type = "EndpointType",

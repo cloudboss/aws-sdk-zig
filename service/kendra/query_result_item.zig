@@ -16,51 +16,51 @@ const QueryResultType = @import("query_result_type.zig").QueryResultType;
 /// document, and relevant text from the document that satisfies the query.
 pub const QueryResultItem = struct {
     /// One or more additional fields/attributes associated with the query result.
-    additional_attributes: ?[]const AdditionalResultAttribute,
+    additional_attributes: ?[]const AdditionalResultAttribute = null,
 
     /// Provides details about a collapsed group of search results.
-    collapsed_result_detail: ?CollapsedResultDetail,
+    collapsed_result_detail: ?CollapsedResultDetail = null,
 
     /// An array of document fields/attributes assigned to a document in the search
     /// results. For
     /// example, the document author (`_author`) or the source URI
     /// (`_source_uri`) of the document.
-    document_attributes: ?[]const DocumentAttribute,
+    document_attributes: ?[]const DocumentAttribute = null,
 
     /// An extract of the text in the document. Contains information about
     /// highlighting the
     /// relevant terms in the excerpt.
-    document_excerpt: ?TextWithHighlights,
+    document_excerpt: ?TextWithHighlights = null,
 
     /// The identifier for the document.
-    document_id: ?[]const u8,
+    document_id: ?[]const u8 = null,
 
     /// The title of the document. Contains the text of the title and information
     /// for
     /// highlighting the relevant terms in the title.
-    document_title: ?TextWithHighlights,
+    document_title: ?TextWithHighlights = null,
 
     /// The URI of the original location of the document.
-    document_uri: ?[]const u8,
+    document_uri: ?[]const u8 = null,
 
     /// A token that identifies a particular result from a particular query. Use
     /// this token to
     /// provide click-through feedback for the result. For more information, see
     /// [Submitting
     /// feedback](https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html).
-    feedback_token: ?[]const u8,
+    feedback_token: ?[]const u8 = null,
 
     /// If the `Type` of document within the response is `ANSWER`, then it
     /// is either a `TABLE` answer or `TEXT` answer. If it's a table answer,
     /// a table excerpt is returned in `TableExcerpt`. If it's a text answer, a text
     /// excerpt is returned in `DocumentExcerpt`.
-    format: ?QueryResultFormat,
+    format: ?QueryResultFormat = null,
 
     /// The unique identifier for the query result item id (`Id`) and the query
     /// result item document id (`DocumentId`) combined. The value of this field
     /// changes
     /// with every request, even when you have the same documents.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Indicates the confidence level of Amazon Kendra providing a relevant result
     /// for the
@@ -73,15 +73,15 @@ pub const QueryResultItem = struct {
     /// The field is only set to `LOW` when the `Type` field is set to
     /// `DOCUMENT` and Amazon Kendra is not confident that the result is
     /// relevant to the query.
-    score_attributes: ?ScoreAttributes,
+    score_attributes: ?ScoreAttributes = null,
 
     /// An excerpt from a table within a document.
-    table_excerpt: ?TableExcerpt,
+    table_excerpt: ?TableExcerpt = null,
 
     /// The type of document within the response. For example, a response could
     /// include a
     /// question-answer that's relevant to the query.
-    @"type": ?QueryResultType,
+    @"type": ?QueryResultType = null,
 
     pub const json_field_names = .{
         .additional_attributes = "AdditionalAttributes",

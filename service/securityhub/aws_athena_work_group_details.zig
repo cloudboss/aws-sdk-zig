@@ -9,16 +9,16 @@ pub const AwsAthenaWorkGroupDetails = struct {
     /// Amazon CloudWatch metrics are enabled for the workgroup, and the limit for
     /// the amount of bytes scanned
     /// (cutoff) per query, if it is specified.
-    configuration: ?AwsAthenaWorkGroupConfigurationDetails,
+    configuration: ?AwsAthenaWorkGroupConfigurationDetails = null,
 
     /// The workgroup description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The workgroup name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Whether the workgroup is enabled or disabled.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration = "Configuration",

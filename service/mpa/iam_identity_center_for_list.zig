@@ -3,14 +3,14 @@
 pub const IamIdentityCenterForList = struct {
     /// URL for the approval portal associated with the IAM Identity Center
     /// instance.
-    approval_portal_url: ?[]const u8,
+    approval_portal_url: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) for the IAM Identity Center instance.
-    instance_arn: ?[]const u8,
+    instance_arn: ?[]const u8 = null,
 
     /// Amazon Web Services Region where the IAM Identity Center instance is
     /// located.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .approval_portal_url = "ApprovalPortalUrl",

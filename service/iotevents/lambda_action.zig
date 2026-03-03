@@ -9,7 +9,7 @@ pub const LambdaAction = struct {
 
     /// You can configure the action payload when you send a message to a Lambda
     /// function.
-    payload: ?Payload,
+    payload: ?Payload = null,
 
     pub const json_field_names = .{
         .function_arn = "functionArn",

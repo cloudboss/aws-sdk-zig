@@ -6,19 +6,19 @@ const DatastoreStatus = @import("datastore_status.zig").DatastoreStatus;
 /// A summary of information about a data store.
 pub const DatastoreSummary = struct {
     /// When the data store was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The name of the data store.
-    datastore_name: ?[]const u8,
+    datastore_name: ?[]const u8 = null,
 
     /// Contains information about the partition dimensions in a data store.
-    datastore_partitions: ?DatastorePartitions,
+    datastore_partitions: ?DatastorePartitions = null,
 
     /// Where data in a data store is stored.
-    datastore_storage: ?DatastoreStorageSummary,
+    datastore_storage: ?DatastoreStorageSummary = null,
 
     /// The file format of the data in the data store.
-    file_format_type: ?FileFormatType,
+    file_format_type: ?FileFormatType = null,
 
     /// The last time when a new message arrived in the data store.
     ///
@@ -28,13 +28,13 @@ pub const DatastoreSummary = struct {
     ///
     /// This feature only applies to messages that arrived in the data store after
     /// October 23, 2020.
-    last_message_arrival_time: ?i64,
+    last_message_arrival_time: ?i64 = null,
 
     /// The last time the data store was updated.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The status of the data store.
-    status: ?DatastoreStatus,
+    status: ?DatastoreStatus = null,
 
     pub const json_field_names = .{
         .creation_time = "creationTime",

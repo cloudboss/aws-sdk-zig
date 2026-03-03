@@ -15,7 +15,7 @@ pub const TranscriptEvent = struct {
     /// identification, partial
     /// result stabilization, language identification, and other
     /// transcription-related data.
-    transcript: ?Transcript,
+    transcript: ?Transcript = null,
 
     pub const json_field_names = .{
         .transcript = "Transcript",

@@ -6,22 +6,22 @@ pub const EmailAddressMetadata = struct {
     /// addresses forward to this primary
     /// address. Each configuration contains the email address ID of an alias that
     /// forwards emails to this address.
-    alias_configurations: ?[]const AliasConfiguration,
+    alias_configurations: ?[]const AliasConfiguration = null,
 
     /// The description of the email address.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The display name of email address.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The email address, including the domain.
-    email_address: ?[]const u8,
+    email_address: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the email address.
-    email_address_arn: ?[]const u8,
+    email_address_arn: ?[]const u8 = null,
 
     /// The identifier of the email address.
-    email_address_id: ?[]const u8,
+    email_address_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alias_configurations = "AliasConfigurations",

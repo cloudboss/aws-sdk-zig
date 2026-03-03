@@ -6,7 +6,7 @@ const PaperSize = @import("paper_size.zig").PaperSize;
 pub const SectionBasedLayoutPaperCanvasSizeOptions = struct {
     /// Defines the spacing between the canvas content and the top, bottom, left,
     /// and right edges.
-    paper_margin: ?Spacing,
+    paper_margin: ?Spacing = null,
 
     /// The paper orientation that
     /// is used to define canvas dimensions. Choose one of the following
@@ -15,10 +15,10 @@ pub const SectionBasedLayoutPaperCanvasSizeOptions = struct {
     /// * PORTRAIT
     ///
     /// * LANDSCAPE
-    paper_orientation: ?PaperOrientation,
+    paper_orientation: ?PaperOrientation = null,
 
     /// The paper size that is used to define canvas dimensions.
-    paper_size: ?PaperSize,
+    paper_size: ?PaperSize = null,
 
     pub const json_field_names = .{
         .paper_margin = "PaperMargin",

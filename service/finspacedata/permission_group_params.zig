@@ -17,10 +17,10 @@ const ResourcePermission = @import("resource_permission.zig").ResourcePermission
 /// `
 pub const PermissionGroupParams = struct {
     /// List of resource permissions.
-    dataset_permissions: ?[]const ResourcePermission,
+    dataset_permissions: ?[]const ResourcePermission = null,
 
     /// The unique identifier for the `PermissionGroup`.
-    permission_group_id: ?[]const u8,
+    permission_group_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dataset_permissions = "datasetPermissions",

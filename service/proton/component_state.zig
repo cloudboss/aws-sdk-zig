@@ -2,18 +2,18 @@
 pub const ComponentState = struct {
     /// The name of the service instance that this component is attached to.
     /// Provided when a component is attached to a service instance.
-    service_instance_name: ?[]const u8,
+    service_instance_name: ?[]const u8 = null,
 
     /// The name of the service that `serviceInstanceName` is associated with.
     /// Provided when a component is attached to a service instance.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// The service spec that the component uses to access service inputs. Provided
     /// when a component is attached to a service instance.
-    service_spec: ?[]const u8,
+    service_spec: ?[]const u8 = null,
 
     /// The template file used.
-    template_file: ?[]const u8,
+    template_file: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .service_instance_name = "serviceInstanceName",

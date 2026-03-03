@@ -3,21 +3,21 @@ const ContactFilter = @import("contact_filter.zig").ContactFilter;
 /// A filter for the user data.
 pub const UserDataFilters = struct {
     /// A list of up to 100 agent IDs or ARNs.
-    agents: ?[]const []const u8,
+    agents: ?[]const []const u8 = null,
 
     /// A filter for the user data based on the contact information that is
     /// associated to the user. It contains a list
     /// of contact states.
-    contact_filter: ?ContactFilter,
+    contact_filter: ?ContactFilter = null,
 
     /// A list of up to 100 queues or ARNs.
-    queues: ?[]const []const u8,
+    queues: ?[]const []const u8 = null,
 
     /// A list of up to 100 routing profile IDs or ARNs.
-    routing_profiles: ?[]const []const u8,
+    routing_profiles: ?[]const []const u8 = null,
 
     /// A UserHierarchyGroup ID or ARN.
-    user_hierarchy_groups: ?[]const []const u8,
+    user_hierarchy_groups: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .agents = "Agents",

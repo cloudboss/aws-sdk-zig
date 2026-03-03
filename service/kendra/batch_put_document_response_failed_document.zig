@@ -4,16 +4,16 @@ const ErrorCode = @import("error_code.zig").ErrorCode;
 pub const BatchPutDocumentResponseFailedDocument = struct {
     /// The identifier of the data source connector that the failed document belongs
     /// to.
-    data_source_id: ?[]const u8,
+    data_source_id: ?[]const u8 = null,
 
     /// The type of error that caused the document to fail to be indexed.
-    error_code: ?ErrorCode,
+    error_code: ?ErrorCode = null,
 
     /// A description of the reason why the document could not be indexed.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The identifier of the document.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_source_id = "DataSourceId",

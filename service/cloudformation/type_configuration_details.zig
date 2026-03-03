@@ -9,10 +9,10 @@ pub const TypeConfigurationDetails = struct {
     /// The alias specified for this configuration, if one was specified when the
     /// configuration was
     /// set.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The ARN for the configuration data, in this account and Region.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A JSON string specifying the configuration data for the extension, in this
     /// account and
@@ -21,18 +21,18 @@ pub const TypeConfigurationDetails = struct {
     /// If a configuration hasn't been set for a specified extension, CloudFormation
     /// returns
     /// `{}`.
-    configuration: ?[]const u8,
+    configuration: ?[]const u8 = null,
 
     /// Whether this configuration data is the default configuration for the
     /// extension.
-    is_default_configuration: ?bool,
+    is_default_configuration: ?bool = null,
 
     /// When the configuration data was last updated for this extension.
     ///
     /// If a configuration hasn't been set for a specified extension, CloudFormation
     /// returns
     /// `null`.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The ARN for the extension, in this account and Region.
     ///
@@ -41,8 +41,8 @@ pub const TypeConfigurationDetails = struct {
     /// will be the ARN assigned when you call the
     /// [RegisterType](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html) API
     /// operation in this account and Region.
-    type_arn: ?[]const u8,
+    type_arn: ?[]const u8 = null,
 
     /// The name of the extension.
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 };

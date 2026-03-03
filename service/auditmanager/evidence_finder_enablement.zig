@@ -21,7 +21,7 @@ pub const EvidenceFinderEnablement = struct {
     ///
     /// * `COMPLETED` means that the backfill is complete. All of your past
     /// evidence is now queryable.
-    backfill_status: ?EvidenceFinderBackfillStatus,
+    backfill_status: ?EvidenceFinderBackfillStatus = null,
 
     /// The current status of the evidence finder feature and the related event data
     /// store.
@@ -48,18 +48,18 @@ pub const EvidenceFinderEnablement = struct {
     ///   the event
     /// data store has been deleted. You can't re-enable evidence finder after this
     /// point.
-    enablement_status: ?EvidenceFinderEnablementStatus,
+    enablement_status: ?EvidenceFinderEnablementStatus = null,
 
     /// Represents any errors that occurred when enabling or disabling evidence
     /// finder.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the CloudTrail Lake event data store
     /// that’s
     /// used by evidence finder. The event data store is the lake of evidence data
     /// that evidence
     /// finder runs queries against.
-    event_data_store_arn: ?[]const u8,
+    event_data_store_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .backfill_status = "backfillStatus",

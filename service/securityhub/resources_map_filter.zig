@@ -5,9 +5,9 @@ const MapFilter = @import("map_filter.zig").MapFilter;
 /// attributes.
 pub const ResourcesMapFilter = struct {
     /// The name of the field.
-    field_name: ?ResourcesMapField,
+    field_name: ?ResourcesMapField = null,
 
-    filter: ?MapFilter,
+    filter: ?MapFilter = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

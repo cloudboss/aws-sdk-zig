@@ -13,10 +13,10 @@ const VpcLatticeConfiguration = @import("vpc_lattice_configuration.zig").VpcLatt
 /// the `ECS` deployment controller type.
 pub const Deployment = struct {
     /// The capacity provider strategy that the deployment is using.
-    capacity_provider_strategy: ?[]const CapacityProviderStrategyItem,
+    capacity_provider_strategy: ?[]const CapacityProviderStrategyItem = null,
 
     /// The Unix timestamp for the time when the service deployment was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The most recent desired count of tasks that was specified for the service to
     /// deploy or
@@ -36,22 +36,22 @@ pub const Deployment = struct {
     failed_tasks: i32 = 0,
 
     /// The Fargate ephemeral storage settings for the deployment.
-    fargate_ephemeral_storage: ?DeploymentEphemeralStorage,
+    fargate_ephemeral_storage: ?DeploymentEphemeralStorage = null,
 
     /// The ID of the deployment.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The launch type the tasks in the service are using. For more information,
     /// see [Amazon
     /// ECS Launch
     /// Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    launch_type: ?LaunchType,
+    launch_type: ?LaunchType = null,
 
     /// The VPC subnet and security group configuration for tasks that receive their
     /// own
     /// elastic network interface by using the `awsvpc` networking mode.
-    network_configuration: ?NetworkConfiguration,
+    network_configuration: ?NetworkConfiguration = null,
 
     /// The number of tasks in the deployment that are in the `PENDING`
     /// status.
@@ -64,7 +64,7 @@ pub const Deployment = struct {
     /// All tasks that run as part of this service must use the same
     /// `platformFamily` value as the service, for example, `
     /// LINUX.`.
-    platform_family: ?[]const u8,
+    platform_family: ?[]const u8 = null,
 
     /// The platform version that your tasks in the service run on. A platform
     /// version is only
@@ -74,7 +74,7 @@ pub const Deployment = struct {
     /// Platform
     /// Versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic
     /// Container Service Developer Guide*.
-    platform_version: ?[]const u8,
+    platform_version: ?[]const u8 = null,
 
     /// The `rolloutState` of a service is only returned for services that use
     /// the rolling update (`ECS`) deployment type that aren't behind a Classic
@@ -89,10 +89,10 @@ pub const Deployment = struct {
     /// `FAILED` state. A deployment in `FAILED` state doesn't launch
     /// any new tasks. For more information, see
     /// [DeploymentCircuitBreaker](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentCircuitBreaker.html).
-    rollout_state: ?DeploymentRolloutState,
+    rollout_state: ?DeploymentRolloutState = null,
 
     /// A description of the rollout state of a deployment.
-    rollout_state_reason: ?[]const u8,
+    rollout_state_reason: ?[]const u8 = null,
 
     /// The number of tasks in the deployment that are in the `RUNNING`
     /// status.
@@ -119,12 +119,12 @@ pub const Deployment = struct {
     /// Service Connect. For more information, see [Service
     /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    service_connect_configuration: ?ServiceConnectConfiguration,
+    service_connect_configuration: ?ServiceConnectConfiguration = null,
 
     /// The list of Service Connect resources that are associated with this
     /// deployment. Each
     /// list entry maps a discovery name to a Cloud Map service name.
-    service_connect_resources: ?[]const ServiceConnectServiceResource,
+    service_connect_resources: ?[]const ServiceConnectServiceResource = null,
 
     /// The status of the deployment. The following describes each state.
     ///
@@ -140,25 +140,25 @@ pub const Deployment = struct {
     /// **INACTIVE**
     ///
     /// A deployment that has been completely replaced.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The most recent task definition that was specified for the tasks in the
     /// service to
     /// use.
-    task_definition: ?[]const u8,
+    task_definition: ?[]const u8 = null,
 
     /// The Unix timestamp for the time when the service deployment was last
     /// updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The details of the volume that was `configuredAtLaunch`. You can configure
     /// different settings like the size, throughput, volumeType, and ecryption in
     /// [ServiceManagedEBSVolumeConfiguration](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html). The `name` of the volume
     /// must match the `name` from the task definition.
-    volume_configurations: ?[]const ServiceVolumeConfiguration,
+    volume_configurations: ?[]const ServiceVolumeConfiguration = null,
 
     /// The VPC Lattice configuration for the service deployment.
-    vpc_lattice_configurations: ?[]const VpcLatticeConfiguration,
+    vpc_lattice_configurations: ?[]const VpcLatticeConfiguration = null,
 
     pub const json_field_names = .{
         .capacity_provider_strategy = "capacityProviderStrategy",

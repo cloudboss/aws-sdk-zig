@@ -2,13 +2,13 @@
 /// action when executed on a provisioned product.
 pub const ExecutionParameter = struct {
     /// The default values for the execution parameter.
-    default_values: ?[]const []const u8,
+    default_values: ?[]const []const u8 = null,
 
     /// The name of the execution parameter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The execution parameter type.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .default_values = "DefaultValues",

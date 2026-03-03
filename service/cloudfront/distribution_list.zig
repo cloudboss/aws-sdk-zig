@@ -10,7 +10,7 @@ pub const DistributionList = struct {
 
     /// A complex type that contains one `DistributionSummary` element for each
     /// distribution that was created by the current Amazon Web Services account.
-    items: ?[]const DistributionSummary,
+    items: ?[]const DistributionSummary = null,
 
     /// The value you provided for the `Marker` request parameter.
     marker: []const u8,
@@ -21,7 +21,7 @@ pub const DistributionList = struct {
     /// If `IsTruncated` is `true`, this element is present and contains the value
     /// you can use for the `Marker` request parameter to continue listing your
     /// distributions where they left off.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The number of distributions that were created by the current Amazon Web
     /// Services account.

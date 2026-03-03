@@ -4,14 +4,14 @@ const CountryCode = @import("country_code.zig").CountryCode;
 /// `Opportunity`.
 pub const Address = struct {
     /// Specifies the end `Customer`'s city associated with the `Opportunity`.
-    city: ?[]const u8,
+    city: ?[]const u8 = null,
 
     /// Specifies the end `Customer`'s country associated with the `Opportunity`.
-    country_code: ?CountryCode,
+    country_code: ?CountryCode = null,
 
     /// Specifies the end `Customer`'s postal code associated with the
     /// `Opportunity`.
-    postal_code: ?[]const u8,
+    postal_code: ?[]const u8 = null,
 
     /// Specifies the end `Customer`'s state or region associated with the
     /// `Opportunity`.
@@ -27,11 +27,11 @@ pub const Address = struct {
     /// Island | South Carolina | South Dakota | Tennessee | Texas | Utah | Vermont
     /// | Virginia | Virgin Islands | Washington | West Virginia | Wisconsin |
     /// Wyoming | APO/AE | AFO/FPO | FPO, AP`
-    state_or_region: ?[]const u8,
+    state_or_region: ?[]const u8 = null,
 
     /// Specifies the end `Customer`'s street address associated with the
     /// `Opportunity`.
-    street_address: ?[]const u8,
+    street_address: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .city = "City",

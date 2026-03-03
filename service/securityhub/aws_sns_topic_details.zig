@@ -5,45 +5,45 @@ const AwsSnsTopicSubscription = @import("aws_sns_topic_subscription.zig").AwsSns
 pub const AwsSnsTopicDetails = struct {
     /// Indicates failed message delivery status for an Amazon SNS topic that is
     /// subscribed to a platform application endpoint.
-    application_success_feedback_role_arn: ?[]const u8,
+    application_success_feedback_role_arn: ?[]const u8 = null,
 
     /// Indicates failed message delivery status for an Amazon SNS topic that is
     /// subscribed to an Amazon Kinesis Data Firehose endpoint.
-    firehose_failure_feedback_role_arn: ?[]const u8,
+    firehose_failure_feedback_role_arn: ?[]const u8 = null,
 
     /// Indicates successful message delivery status for an Amazon SNS topic that is
     /// subscribed to an Amazon Kinesis Data Firehose endpoint.
-    firehose_success_feedback_role_arn: ?[]const u8,
+    firehose_success_feedback_role_arn: ?[]const u8 = null,
 
     /// Indicates failed message delivery status for an Amazon SNS topic that is
     /// subscribed to an HTTP endpoint.
-    http_failure_feedback_role_arn: ?[]const u8,
+    http_failure_feedback_role_arn: ?[]const u8 = null,
 
     /// Indicates successful message delivery status for an Amazon SNS topic that is
     /// subscribed to an HTTP endpoint.
-    http_success_feedback_role_arn: ?[]const u8,
+    http_success_feedback_role_arn: ?[]const u8 = null,
 
     /// The ID of an Amazon Web Services managed key for Amazon SNS or a customer
     /// managed key.
-    kms_master_key_id: ?[]const u8,
+    kms_master_key_id: ?[]const u8 = null,
 
     /// The subscription's owner.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// Indicates failed message delivery status for an Amazon SNS topic that is
     /// subscribed to an Amazon SQS endpoint.
-    sqs_failure_feedback_role_arn: ?[]const u8,
+    sqs_failure_feedback_role_arn: ?[]const u8 = null,
 
     /// Indicates successful message delivery status for an Amazon SNS topic that is
     /// subscribed to an Amazon SQS endpoint.
-    sqs_success_feedback_role_arn: ?[]const u8,
+    sqs_success_feedback_role_arn: ?[]const u8 = null,
 
     /// Subscription is an embedded property that describes the subscription
     /// endpoints of an Amazon SNS topic.
-    subscription: ?[]const AwsSnsTopicSubscription,
+    subscription: ?[]const AwsSnsTopicSubscription = null,
 
     /// The name of the Amazon SNS topic.
-    topic_name: ?[]const u8,
+    topic_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_success_feedback_role_arn = "ApplicationSuccessFeedbackRoleArn",

@@ -2,17 +2,17 @@
 pub const ReportContext = struct {
     /// Amazon Resource Names (ARNs) of the license asset groups to include in the
     /// report.
-    license_asset_group_arns: ?[]const []const u8,
+    license_asset_group_arns: ?[]const []const u8 = null,
 
     /// Amazon Resource Name (ARN) of the license configuration that this generator
     /// reports on.
     license_configuration_arns: []const []const u8 = &.{},
 
     /// End date for the report data collection period.
-    report_end_date: ?i64,
+    report_end_date: ?i64 = null,
 
     /// Start date for the report data collection period.
-    report_start_date: ?i64,
+    report_start_date: ?i64 = null,
 
     pub const json_field_names = .{
         .license_asset_group_arns = "licenseAssetGroupArns",

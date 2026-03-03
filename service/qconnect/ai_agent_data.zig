@@ -25,10 +25,10 @@ pub const AIAgentData = struct {
     configuration: AIAgentConfiguration,
 
     /// The description of the AI Agent.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time the AI Agent was last modified.
-    modified_time: ?i64,
+    modified_time: ?i64 = null,
 
     /// The name of the AI Agent.
     name: []const u8,
@@ -36,13 +36,13 @@ pub const AIAgentData = struct {
     /// Specifies the origin of the AI Agent. `SYSTEM` for a default AI Agent
     /// created by Q in Connect or `CUSTOMER` for an AI Agent created by calling AI
     /// Agent creation APIs.
-    origin: ?Origin,
+    origin: ?Origin = null,
 
     /// The status of the AI Agent.
-    status: ?Status,
+    status: ?Status = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the AI Agent.
     @"type": AIAgentType,

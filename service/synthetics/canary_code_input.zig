@@ -39,12 +39,12 @@ pub const CanaryCodeInput = struct {
     ///
     /// `BlueprintTypes` is supported only on canaries for syn-nodejs-3.0 runtime or
     /// later.
-    blueprint_types: ?[]const []const u8,
+    blueprint_types: ?[]const []const u8 = null,
 
     /// A list of dependencies that should be used for running this canary. Specify
     /// the dependencies as a key-value pair, where the key is the type of
     /// dependency and the value is the dependency reference.
-    dependencies: ?[]const Dependency,
+    dependencies: ?[]const Dependency = null,
 
     /// The entry point to use for the source code when running the canary. For
     /// canaries that use the
@@ -69,15 +69,15 @@ pub const CanaryCodeInput = struct {
     /// If your canary script is located in Amazon S3, specify the bucket name here.
     /// Do not include `s3://` as the
     /// start of the bucket name.
-    s3_bucket: ?[]const u8,
+    s3_bucket: ?[]const u8 = null,
 
     /// The Amazon S3 key of your script. For more information, see [Working with
     /// Amazon S3
     /// Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html).
-    s3_key: ?[]const u8,
+    s3_key: ?[]const u8 = null,
 
     /// The Amazon S3 version ID of your script.
-    s3_version: ?[]const u8,
+    s3_version: ?[]const u8 = null,
 
     /// If you input your canary script directly into the canary instead of
     /// referring to an Amazon S3
@@ -88,7 +88,7 @@ pub const CanaryCodeInput = struct {
     /// For large canary scripts, we recommend that you use an Amazon S3 location
     /// instead of inputting it
     /// directly with this parameter.
-    zip_file: ?[]const u8,
+    zip_file: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .blueprint_types = "BlueprintTypes",

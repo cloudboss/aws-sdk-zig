@@ -13,7 +13,7 @@ pub const Av1QvbrSettings = struct {
     /// numbers, also provide a value for the setting qvbrQualityLevelFineTune. For
     /// example, if you want your QVBR quality level to be 7.33, set
     /// qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
-    qvbr_quality_level: ?i32,
+    qvbr_quality_level: ?i32 = null,
 
     /// Optional. Specify a value here to set the QVBR quality to a level that is
     /// between whole numbers. For example, if you want your QVBR quality level to
@@ -21,7 +21,7 @@ pub const Av1QvbrSettings = struct {
     /// MediaConvert rounds your QVBR quality level to the nearest third of a whole
     /// number. For example, if you set qvbrQualityLevel to 7 and you set
     /// qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.
-    qvbr_quality_level_fine_tune: ?f64,
+    qvbr_quality_level_fine_tune: ?f64 = null,
 
     pub const json_field_names = .{
         .qvbr_quality_level = "QvbrQualityLevel",

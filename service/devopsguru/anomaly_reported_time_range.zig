@@ -4,7 +4,7 @@
 /// DevOps Guru actually observes the anomalous behavior.
 pub const AnomalyReportedTimeRange = struct {
     /// The time when an anomaly is closed.
-    close_time: ?i64,
+    close_time: ?i64 = null,
 
     /// The time when an anomaly is opened.
     open_time: i64,

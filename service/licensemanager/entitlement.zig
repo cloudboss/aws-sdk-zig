@@ -3,22 +3,22 @@ const EntitlementUnit = @import("entitlement_unit.zig").EntitlementUnit;
 /// Describes a resource entitled for use with a license.
 pub const Entitlement = struct {
     /// Indicates whether check-ins are allowed.
-    allow_check_in: ?bool,
+    allow_check_in: ?bool = null,
 
     /// Maximum entitlement count. Use if the unit is not None.
-    max_count: ?i64,
+    max_count: ?i64 = null,
 
     /// Entitlement name.
     name: []const u8,
 
     /// Indicates whether overages are allowed.
-    overage: ?bool,
+    overage: ?bool = null,
 
     /// Entitlement unit.
     unit: EntitlementUnit,
 
     /// Entitlement resource. Use only if the unit is None.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allow_check_in = "AllowCheckIn",

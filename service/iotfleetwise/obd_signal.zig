@@ -5,7 +5,7 @@ const SignalValueType = @import("signal_value_type.zig").SignalValueType;
 /// a vehicle.
 pub const ObdSignal = struct {
     /// The number of bits to mask in a message.
-    bit_mask_length: ?i32,
+    bit_mask_length: ?i32 = null,
 
     /// The number of positions to shift bits in the message.
     bit_right_shift: i32 = 0,
@@ -18,7 +18,7 @@ pub const ObdSignal = struct {
     /// `isSigned` parameter only applies to the `INTEGER` raw signal type, and it
     /// doesn't affect the `FLOATING_POINT` raw signal type. The default value is
     /// `false`.
-    is_signed: ?bool,
+    is_signed: ?bool = null,
 
     /// The offset used to calculate the signal value. Combined with scaling, the
     /// calculation
@@ -38,7 +38,7 @@ pub const ObdSignal = struct {
     service_mode: i32 = 0,
 
     /// The value type of the signal. The default value is `INTEGER`.
-    signal_value_type: ?SignalValueType,
+    signal_value_type: ?SignalValueType = null,
 
     /// Indicates the beginning of the message.
     start_byte: i32 = 0,

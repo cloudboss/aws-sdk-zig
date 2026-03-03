@@ -24,7 +24,7 @@ pub const ListPlaceIndexesResponseEntry = struct {
     index_name: []const u8,
 
     /// No longer used. Always returns `RequestBasedUsage`.
-    pricing_plan: ?PricingPlan,
+    pricing_plan: ?PricingPlan = null,
 
     /// The timestamp for when the place index resource was last updated in [ISO
     /// 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format:

@@ -3,16 +3,16 @@ const KxDataviewSegmentConfiguration = @import("kx_dataview_segment_configuratio
 /// The structure that stores the configuration details of a dataview.
 pub const KxDataviewConfiguration = struct {
     /// A unique identifier for the changeset.
-    changeset_id: ?[]const u8,
+    changeset_id: ?[]const u8 = null,
 
     /// The unique identifier of the dataview.
-    dataview_name: ?[]const u8,
+    dataview_name: ?[]const u8 = null,
 
     /// The version of the dataview corresponding to a given changeset.
-    dataview_version_id: ?[]const u8,
+    dataview_version_id: ?[]const u8 = null,
 
     /// The db path and volume configuration for the segmented database.
-    segment_configurations: ?[]const KxDataviewSegmentConfiguration,
+    segment_configurations: ?[]const KxDataviewSegmentConfiguration = null,
 
     pub const json_field_names = .{
         .changeset_id = "changesetId",

@@ -12,7 +12,7 @@ pub const RdsDbSnapshotConfiguration = struct {
     /// attributes are used to authorize other Amazon Web Services accounts to
     /// restore a manual DB snapshot. The only valid value for `attributeName` for
     /// the attribute map is restore.
-    attributes: ?[]const aws.map.MapEntry(RdsDbSnapshotAttributeValue),
+    attributes: ?[]const aws.map.MapEntry(RdsDbSnapshotAttributeValue) = null,
 
     /// The KMS key identifier for an encrypted Amazon RDS DB snapshot. The KMS key
     /// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
@@ -23,7 +23,7 @@ pub const RdsDbSnapshotConfiguration = struct {
     /// * If the access preview is for a new resource and you do not specify the
     ///   specify the `kmsKeyId`, then the access preview considers the snapshot as
     ///   unencrypted.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "attributes",

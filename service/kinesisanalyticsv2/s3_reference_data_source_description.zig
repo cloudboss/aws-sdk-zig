@@ -17,7 +17,7 @@ pub const S3ReferenceDataSourceDescription = struct {
     /// version have an application-level service execution role rather than a
     /// resource-level
     /// role.
-    reference_role_arn: ?[]const u8,
+    reference_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_arn = "BucketARN",

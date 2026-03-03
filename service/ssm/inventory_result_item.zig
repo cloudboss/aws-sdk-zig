@@ -3,7 +3,7 @@ const aws = @import("aws");
 /// The inventory result item.
 pub const InventoryResultItem = struct {
     /// The time inventory item data was captured.
-    capture_time: ?[]const u8,
+    capture_time: ?[]const u8 = null,
 
     /// Contains all the inventory data of the item type. Results include attribute
     /// names and
@@ -15,7 +15,7 @@ pub const InventoryResultItem = struct {
     /// to update inventory information. The PutInventory API doesn't update the
     /// inventory item type
     /// contents if the MD5 hash hasn't changed since last update.
-    content_hash: ?[]const u8,
+    content_hash: ?[]const u8 = null,
 
     /// The schema version for the inventory result item/
     schema_version: []const u8,

@@ -5,7 +5,7 @@ const EnabledBaselineDriftStatus = @import("enabled_baseline_drift_status.zig").
 /// configuration defined on that OU.
 pub const EnabledBaselineInheritanceDrift = struct {
     /// The inheritance drift status for enabled baselines.
-    status: ?EnabledBaselineDriftStatus,
+    status: ?EnabledBaselineDriftStatus = null,
 
     pub const json_field_names = .{
         .status = "status",

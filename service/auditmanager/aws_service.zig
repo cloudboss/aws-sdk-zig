@@ -11,7 +11,7 @@
 ///   scope](https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_3)
 pub const AWSService = struct {
     /// The name of the Amazon Web Services service.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .service_name = "serviceName",

@@ -10,9 +10,9 @@ const DirectSchemaChangePolicy = @import("direct_schema_change_policy.zig").Dire
 pub const S3IcebergDirectTarget = struct {
     /// Provides additional configuration options for customizing the Iceberg table
     /// behavior.
-    additional_options: ?[]const aws.map.StringMapEntry,
+    additional_options: ?[]const aws.map.StringMapEntry = null,
 
-    auto_data_quality: ?AutoDataQuality,
+    auto_data_quality: ?AutoDataQuality = null,
 
     /// Specifies the compression codec used for Iceberg table files in S3.
     compression: IcebergTargetCompressionType,
@@ -30,20 +30,20 @@ pub const S3IcebergDirectTarget = struct {
 
     /// Sets the number of target partitions for distributing Iceberg table files
     /// across S3.
-    number_target_partitions: ?[]const u8,
+    number_target_partitions: ?[]const u8 = null,
 
     /// Specifies the data schema for the S3 Iceberg direct target.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// Specifies the columns used to partition the Iceberg table data in S3.
-    partition_keys: ?[]const []const []const u8,
+    partition_keys: ?[]const []const []const u8 = null,
 
     /// Defines the S3 location where the Iceberg table data will be stored.
     path: []const u8,
 
     /// Defines how schema changes are handled when writing data to the Iceberg
     /// table.
-    schema_change_policy: ?DirectSchemaChangePolicy,
+    schema_change_policy: ?DirectSchemaChangePolicy = null,
 
     pub const json_field_names = .{
         .additional_options = "AdditionalOptions",

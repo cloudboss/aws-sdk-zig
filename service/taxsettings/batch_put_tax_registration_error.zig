@@ -8,7 +8,7 @@ pub const BatchPutTaxRegistrationError = struct {
 
     /// The error code for an individual failure in the `BatchPutTaxRegistration`
     /// operation.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The error message for an individual failure in the `BatchPutTaxRegistration`
     /// operation.

@@ -10,7 +10,7 @@ pub const EvaluationFormItemEnablementConfiguration = struct {
     condition: EvaluationFormItemEnablementCondition,
 
     /// An enablement action that if condition is not satisfied.
-    default_action: ?EvaluationFormItemEnablementAction,
+    default_action: ?EvaluationFormItemEnablementAction = null,
 
     pub const json_field_names = .{
         .action = "Action",

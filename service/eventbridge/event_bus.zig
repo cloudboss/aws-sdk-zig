@@ -11,24 +11,24 @@
 /// or applications.
 pub const EventBus = struct {
     /// The ARN of the event bus.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time the event bus was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The event bus description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time the event bus was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the event bus.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The permissions policy of the event bus, describing which other Amazon Web
     /// Services
     /// accounts can write events to this event bus.
-    policy: ?[]const u8,
+    policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

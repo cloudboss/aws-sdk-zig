@@ -3,17 +3,17 @@ const RecorderStatus = @import("recorder_status.zig").RecorderStatus;
 /// The latest status of a stream's edge recording job.
 pub const LastRecorderStatus = struct {
     /// A description of a recorder job’s latest status.
-    job_status_details: ?[]const u8,
+    job_status_details: ?[]const u8 = null,
 
     /// The timestamp at which the recorder job was last executed and media stored
     /// to local disk.
-    last_collected_time: ?i64,
+    last_collected_time: ?i64 = null,
 
     /// The timestamp at which the recorder status was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The status of the latest recorder job.
-    recorder_status: ?RecorderStatus,
+    recorder_status: ?RecorderStatus = null,
 
     pub const json_field_names = .{
         .job_status_details = "JobStatusDetails",

@@ -17,20 +17,20 @@ pub const DirectoryConfig = struct {
     /// authentication, but does not allow users to log in using their AD domain
     /// password. Users
     /// will be disconnected to re-authenticate using certificates.
-    certificate_based_auth_properties: ?CertificateBasedAuthProperties,
+    certificate_based_auth_properties: ?CertificateBasedAuthProperties = null,
 
     /// The time the directory configuration was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The fully qualified name of the directory (for example, corp.example.com).
     directory_name: []const u8,
 
     /// The distinguished names of the organizational units for computer accounts.
-    organizational_unit_distinguished_names: ?[]const []const u8,
+    organizational_unit_distinguished_names: ?[]const []const u8 = null,
 
     /// The credentials for the service account used by the fleet or image builder
     /// to connect to the directory.
-    service_account_credentials: ?ServiceAccountCredentials,
+    service_account_credentials: ?ServiceAccountCredentials = null,
 
     pub const json_field_names = .{
         .certificate_based_auth_properties = "CertificateBasedAuthProperties",

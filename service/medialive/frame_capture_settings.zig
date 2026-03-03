@@ -6,13 +6,13 @@ pub const FrameCaptureSettings = struct {
     /// The frequency at which to capture frames for inclusion in the output. May be
     /// specified in either seconds or milliseconds, as specified by
     /// captureIntervalUnits.
-    capture_interval: ?i32,
+    capture_interval: ?i32 = null,
 
     /// Unit for the frame capture interval.
-    capture_interval_units: ?FrameCaptureIntervalUnit,
+    capture_interval_units: ?FrameCaptureIntervalUnit = null,
 
     /// Timecode burn-in settings
-    timecode_burnin_settings: ?TimecodeBurninSettings,
+    timecode_burnin_settings: ?TimecodeBurninSettings = null,
 
     pub const json_field_names = .{
         .capture_interval = "CaptureInterval",

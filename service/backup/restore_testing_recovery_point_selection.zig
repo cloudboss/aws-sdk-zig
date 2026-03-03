@@ -40,17 +40,17 @@ const RestoreTestingRecoveryPointType = @import("restore_testing_recovery_point_
 pub const RestoreTestingRecoveryPointSelection = struct {
     /// Acceptable values include "LATEST_WITHIN_WINDOW" or
     /// "RANDOM_WITHIN_WINDOW"
-    algorithm: ?RestoreTestingRecoveryPointSelectionAlgorithm,
+    algorithm: ?RestoreTestingRecoveryPointSelectionAlgorithm = null,
 
     /// Accepted values include specific ARNs or list of selectors.
     /// Defaults to empty list if not listed.
-    exclude_vaults: ?[]const []const u8,
+    exclude_vaults: ?[]const []const u8 = null,
 
     /// Accepted values include wildcard ["*"] or by specific ARNs or
     /// ARN wilcard replacement
     /// ["arn:aws:backup:us-west-2:123456789012:backup-vault:asdf", ...]
     /// ["arn:aws:backup:*:*:backup-vault:asdf-*", ...]
-    include_vaults: ?[]const []const u8,
+    include_vaults: ?[]const []const u8 = null,
 
     /// These are the types of recovery points.
     ///
@@ -61,7 +61,7 @@ pub const RestoreTestingRecoveryPointSelection = struct {
     /// snapshot or a continuous recovery point. The recovery point will be
     /// determined by the value
     /// for `Algorithm`.
-    recovery_point_types: ?[]const RestoreTestingRecoveryPointType,
+    recovery_point_types: ?[]const RestoreTestingRecoveryPointType = null,
 
     /// Accepted values are integers from 1 to 365.
     selection_window_days: i32 = 0,

@@ -17,17 +17,17 @@ pub const FirewallConfig = struct {
     ///
     /// This behavior is only enforced for VPCs that have at least one DNS Firewall
     /// rule group association.
-    firewall_fail_open: ?FirewallFailOpenStatus,
+    firewall_fail_open: ?FirewallFailOpenStatus = null,
 
     /// The ID of the firewall configuration.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID of the owner of the VPC that this
     /// firewall configuration applies to.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The ID of the VPC that this firewall configuration applies to.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .firewall_fail_open = "FirewallFailOpen",

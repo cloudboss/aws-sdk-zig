@@ -13,7 +13,7 @@ pub const StatelessRulesAndCustomActions = struct {
     /// your StatelessRule
     /// RuleDefinition
     /// `Actions` specification.
-    custom_actions: ?[]const CustomAction,
+    custom_actions: ?[]const CustomAction = null,
 
     /// Defines the set of stateless rules for use in a stateless rule group.
     stateless_rules: []const StatelessRule,

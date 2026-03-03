@@ -9,7 +9,7 @@ pub const DataPrepSimpleAggregationFunction = struct {
     function_type: DataPrepSimpleAggregationFunctionType,
 
     /// The name of the column on which to perform the aggregation function.
-    input_column_name: ?[]const u8,
+    input_column_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .function_type = "FunctionType",

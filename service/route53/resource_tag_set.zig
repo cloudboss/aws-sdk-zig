@@ -4,15 +4,15 @@ const Tag = @import("tag.zig").Tag;
 /// A complex type containing a resource and its associated tags.
 pub const ResourceTagSet = struct {
     /// The ID for the specified resource.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The type of the resource.
     ///
     /// * The resource type for health checks is `healthcheck`.
     ///
     /// * The resource type for hosted zones is `hostedzone`.
-    resource_type: ?TagResourceType,
+    resource_type: ?TagResourceType = null,
 
     /// The tags associated with the specified resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

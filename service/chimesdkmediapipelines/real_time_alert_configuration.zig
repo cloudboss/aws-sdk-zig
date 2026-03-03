@@ -7,7 +7,7 @@ pub const RealTimeAlertConfiguration = struct {
 
     /// The rules in the alert. Rules specify the words or phrases that you want to
     /// be notified about.
-    rules: ?[]const RealTimeAlertRule,
+    rules: ?[]const RealTimeAlertRule = null,
 
     pub const json_field_names = .{
         .disabled = "Disabled",

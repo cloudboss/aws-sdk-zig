@@ -6,10 +6,10 @@ const InstanceFleetStateChangeReasonCode = @import("instance_fleet_state_change_
 /// 4.8.0 and later, excluding 5.0.x versions.
 pub const InstanceFleetStateChangeReason = struct {
     /// A code corresponding to the reason the state change occurred.
-    code: ?InstanceFleetStateChangeReasonCode,
+    code: ?InstanceFleetStateChangeReasonCode = null,
 
     /// An explanatory message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

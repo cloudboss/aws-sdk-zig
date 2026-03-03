@@ -10,7 +10,7 @@ pub const DICOMImportJobProperties = struct {
     datastore_id: []const u8,
 
     /// The timestamp for when the import job was ended.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The input prefix path for the S3 bucket that contains the DICOM P10 files to
     /// be imported.
@@ -26,14 +26,14 @@ pub const DICOMImportJobProperties = struct {
     job_status: JobStatus,
 
     /// The error message thrown if an import job fails.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The output prefix of the S3 bucket to upload the results of the DICOM import
     /// job.
     output_s3_uri: []const u8,
 
     /// The timestamp for when the import job was submitted.
-    submitted_at: ?i64,
+    submitted_at: ?i64 = null,
 
     pub const json_field_names = .{
         .data_access_role_arn = "dataAccessRoleArn",

@@ -21,60 +21,60 @@ pub const Resource = struct {
     /// The IAM access key details (user information) of a user that engaged in the
     /// activity that
     /// prompted GuardDuty to generate a finding.
-    access_key_details: ?AccessKeyDetails,
+    access_key_details: ?AccessKeyDetails = null,
 
-    container_details: ?Container,
+    container_details: ?Container = null,
 
     /// Contains details about the EBS snapshot that was scanned.
-    ebs_snapshot_details: ?EbsSnapshotDetails,
+    ebs_snapshot_details: ?EbsSnapshotDetails = null,
 
     /// Contains list of scanned and skipped EBS volumes with details.
-    ebs_volume_details: ?EbsVolumeDetails,
+    ebs_volume_details: ?EbsVolumeDetails = null,
 
     /// Contains details about the EC2 image that was scanned.
-    ec_2_image_details: ?Ec2ImageDetails,
+    ec_2_image_details: ?Ec2ImageDetails = null,
 
     /// Contains information about the details of the ECS Cluster.
-    ecs_cluster_details: ?EcsClusterDetails,
+    ecs_cluster_details: ?EcsClusterDetails = null,
 
     /// Details about the EKS cluster involved in a Kubernetes finding.
-    eks_cluster_details: ?EksClusterDetails,
+    eks_cluster_details: ?EksClusterDetails = null,
 
     /// The information about the EC2 instance associated with the activity that
     /// prompted
     /// GuardDuty to generate a finding.
-    instance_details: ?InstanceDetails,
+    instance_details: ?InstanceDetails = null,
 
     /// Details about the Kubernetes user and workload involved in a Kubernetes
     /// finding.
-    kubernetes_details: ?KubernetesDetails,
+    kubernetes_details: ?KubernetesDetails = null,
 
     /// Contains information about the Lambda function that was involved in a
     /// finding.
-    lambda_details: ?LambdaDetails,
+    lambda_details: ?LambdaDetails = null,
 
     /// Contains information about the database instance to which an anomalous login
     /// attempt was
     /// made.
-    rds_db_instance_details: ?RdsDbInstanceDetails,
+    rds_db_instance_details: ?RdsDbInstanceDetails = null,
 
     /// Contains information about the user details through which anomalous login
     /// attempt was
     /// made.
-    rds_db_user_details: ?RdsDbUserDetails,
+    rds_db_user_details: ?RdsDbUserDetails = null,
 
     /// Contains information about the RDS Limitless database that was involved in a
     /// GuardDuty finding.
-    rds_limitless_db_details: ?RdsLimitlessDbDetails,
+    rds_limitless_db_details: ?RdsLimitlessDbDetails = null,
 
     /// Contains details about the backup recovery point that was scanned.
-    recovery_point_details: ?RecoveryPointDetails,
+    recovery_point_details: ?RecoveryPointDetails = null,
 
     /// The type of Amazon Web Services resource.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// Contains information on the S3 bucket.
-    s3_bucket_details: ?[]const S3BucketDetail,
+    s3_bucket_details: ?[]const S3BucketDetail = null,
 
     pub const json_field_names = .{
         .access_key_details = "AccessKeyDetails",

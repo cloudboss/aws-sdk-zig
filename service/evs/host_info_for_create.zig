@@ -6,7 +6,7 @@ const InstanceType = @import("instance_type.zig").InstanceType;
 /// `HostInfoForCreate`object. This results in a `ValidationException` response.
 pub const HostInfoForCreate = struct {
     /// The unique ID of the Amazon EC2 Dedicated Host.
-    dedicated_host_id: ?[]const u8,
+    dedicated_host_id: ?[]const u8 = null,
 
     /// The DNS hostname of the host. DNS hostnames for hosts must be unique across
     /// Amazon EVS environments and within VCF.
@@ -21,7 +21,7 @@ pub const HostInfoForCreate = struct {
     key_name: []const u8,
 
     /// The unique ID of the placement group where the host is placed.
-    placement_group_id: ?[]const u8,
+    placement_group_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dedicated_host_id = "dedicatedHostId",

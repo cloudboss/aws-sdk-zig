@@ -4,13 +4,13 @@ const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator
 pub const SimpleRuleEvaluation = struct {
     /// The value of the input property, on the left side of the comparison
     /// operator.
-    input_property_value: ?[]const u8,
+    input_property_value: ?[]const u8 = null,
 
     /// The comparison operator.
-    operator: ?ComparisonOperator,
+    operator: ?ComparisonOperator = null,
 
     /// The threshold value, on the right side of the comparison operator.
-    threshold_value: ?[]const u8,
+    threshold_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .input_property_value = "inputPropertyValue",

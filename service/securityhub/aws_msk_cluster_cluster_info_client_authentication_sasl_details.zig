@@ -4,10 +4,10 @@ const AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails = @import("aw
 /// Provides details for client authentication using SASL.
 pub const AwsMskClusterClusterInfoClientAuthenticationSaslDetails = struct {
     /// Provides details for SASL client authentication using IAM.
-    iam: ?AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails,
+    iam: ?AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails = null,
 
     /// Details for SASL client authentication using SCRAM.
-    scram: ?AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails,
+    scram: ?AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails = null,
 
     pub const json_field_names = .{
         .iam = "Iam",

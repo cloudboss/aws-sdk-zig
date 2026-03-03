@@ -9,24 +9,24 @@ pub const KinesisSettings = struct {
     /// Shows detailed control information for table definition, column definition,
     /// and table
     /// and column changes in the Kinesis message output. The default is `false`.
-    include_control_details: ?bool,
+    include_control_details: ?bool = null,
 
     /// Include NULL and empty columns for records migrated to the endpoint. The
     /// default is
     /// `false`.
-    include_null_and_empty: ?bool,
+    include_null_and_empty: ?bool = null,
 
     /// Shows the partition value within the Kinesis message output, unless the
     /// partition type
     /// is `schema-table-type`. The default is `false`.
-    include_partition_value: ?bool,
+    include_partition_value: ?bool = null,
 
     /// Includes any data definition language (DDL) operations that change the table
     /// in the
     /// control data, such as `rename-table`, `drop-table`,
     /// `add-column`, `drop-column`, and `rename-column`. The
     /// default is `false`.
-    include_table_alter_operations: ?bool,
+    include_table_alter_operations: ?bool = null,
 
     /// Provides detailed transaction information from the source database. This
     /// information
@@ -34,13 +34,13 @@ pub const KinesisSettings = struct {
     /// `transaction_id`,
     /// previous `transaction_id`, and `transaction_record_id` (the record
     /// offset within a transaction). The default is `false`.
-    include_transaction_details: ?bool,
+    include_transaction_details: ?bool = null,
 
     /// The output format for the records created on the endpoint. The message
     /// format is
     /// `JSON` (default) or `JSON_UNFORMATTED` (a single line with no
     /// tab).
-    message_format: ?MessageFormatValue,
+    message_format: ?MessageFormatValue = null,
 
     /// Set this optional parameter to `true` to avoid adding a '0x' prefix
     /// to raw data in hexadecimal format. For example, by default, DMS adds a '0x'
@@ -48,7 +48,7 @@ pub const KinesisSettings = struct {
     /// source to an
     /// Amazon Kinesis target. Use the `NoHexPrefix` endpoint setting to enable
     /// migration of RAW data type columns without adding the '0x' prefix.
-    no_hex_prefix: ?bool,
+    no_hex_prefix: ?bool = null,
 
     /// Prefixes schema and table names to partition values, when the partition type
     /// is
@@ -60,18 +60,18 @@ pub const KinesisSettings = struct {
     /// thousands of tables to the same shard, which causes throttling. The default
     /// is
     /// `false`.
-    partition_include_schema_table: ?bool,
+    partition_include_schema_table: ?bool = null,
 
     /// The Amazon Resource Name (ARN) for the IAM role that DMS uses to write to
     /// the Kinesis
     /// data stream. The role must allow the `iam:PassRole` action.
-    service_access_role_arn: ?[]const u8,
+    service_access_role_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.
-    stream_arn: ?[]const u8,
+    stream_arn: ?[]const u8 = null,
 
     /// Specifies using the large integer value with Kinesis.
-    use_large_integer_value: ?bool,
+    use_large_integer_value: ?bool = null,
 
     pub const json_field_names = .{
         .include_control_details = "IncludeControlDetails",

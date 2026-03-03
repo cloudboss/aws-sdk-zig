@@ -12,18 +12,18 @@ pub const RestoreRequest = struct {
     /// The Days element is required for regular restores, and must not be provided
     /// for select
     /// requests.
-    days: ?i32,
+    days: ?i32 = null,
 
     /// The optional description for the job.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// S3 Glacier related parameters pertaining to this job. Do not use with
     /// restores that specify
     /// `OutputLocation`.
-    glacier_job_parameters: ?GlacierJobParameters,
+    glacier_job_parameters: ?GlacierJobParameters = null,
 
     /// Describes the location where the restore job's output is stored.
-    output_location: ?OutputLocation,
+    output_location: ?OutputLocation = null,
 
     /// Amazon S3 Select is no longer available to new customers. Existing customers
     /// of Amazon S3 Select can
@@ -31,10 +31,10 @@ pub const RestoreRequest = struct {
     /// more](http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/)
     ///
     /// Describes the parameters for Select job types.
-    select_parameters: ?SelectParameters,
+    select_parameters: ?SelectParameters = null,
 
     /// Retrieval tier at which the restore will be processed.
-    tier: ?Tier,
+    tier: ?Tier = null,
 
     /// Amazon S3 Select is no longer available to new customers. Existing customers
     /// of Amazon S3 Select can
@@ -42,5 +42,5 @@ pub const RestoreRequest = struct {
     /// more](http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/)
     ///
     /// Type of restore request.
-    @"type": ?RestoreRequestType,
+    @"type": ?RestoreRequestType = null,
 };

@@ -7,7 +7,7 @@ pub const ListExecutionsResponse = struct {
     /// `ListExecutions` returns the `NextToken` parameter in the output. You can
     /// then pass the `NextToken` parameter in a subsequent command to continue
     /// listing additional executions.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// A unique identifier for the workflow.
     workflow_id: []const u8,

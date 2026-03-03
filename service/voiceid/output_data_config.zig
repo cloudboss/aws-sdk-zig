@@ -2,7 +2,7 @@
 pub const OutputDataConfig = struct {
     /// The identifier of the KMS key you want Voice ID to use to encrypt the
     /// output file of a speaker enrollment job/fraudster registration job.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The S3 path of the folder where Voice ID writes the job output file. It has
     /// a

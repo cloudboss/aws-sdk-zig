@@ -14,13 +14,13 @@ const ContainerServiceDeploymentState = @import("container_service_deployment_st
 pub const ContainerServiceDeployment = struct {
     /// An object that describes the configuration for the containers of the
     /// deployment.
-    containers: ?[]const aws.map.MapEntry(Container),
+    containers: ?[]const aws.map.MapEntry(Container) = null,
 
     /// The timestamp when the deployment was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// An object that describes the endpoint of the deployment.
-    public_endpoint: ?ContainerServiceEndpoint,
+    public_endpoint: ?ContainerServiceEndpoint = null,
 
     /// The state of the deployment.
     ///
@@ -40,10 +40,10 @@ pub const ContainerServiceDeployment = struct {
     /// action to view the log events for the containers in the deployment to try to
     /// determine the
     /// reason for the failure.
-    state: ?ContainerServiceDeploymentState,
+    state: ?ContainerServiceDeploymentState = null,
 
     /// The version number of the deployment.
-    version: ?i32,
+    version: ?i32 = null,
 
     pub const json_field_names = .{
         .containers = "containers",

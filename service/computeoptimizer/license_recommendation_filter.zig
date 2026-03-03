@@ -31,7 +31,7 @@ pub const LicenseRecommendationFilter = struct {
     /// your license recommendations with a tag key value of `Owner` or without any
     /// tag
     /// keys assigned.
-    name: ?LicenseRecommendationFilterName,
+    name: ?LicenseRecommendationFilterName = null,
 
     /// The value of the filter.
     ///
@@ -47,7 +47,7 @@ pub const LicenseRecommendationFilter = struct {
     /// `FindingReasonCode`, then specify `Optimized`,
     /// `LicenseOverprovisioned`, `InvalidCloudwatchApplicationInsights`, or
     /// `CloudwatchApplicationInsightsError`.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

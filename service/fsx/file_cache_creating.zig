@@ -9,29 +9,29 @@ const Tag = @import("tag.zig").Tag;
 pub const FileCacheCreating = struct {
     /// A boolean flag indicating whether tags for the cache should be copied to
     /// data repository associations.
-    copy_tags_to_data_repository_associations: ?bool,
+    copy_tags_to_data_repository_associations: ?bool = null,
 
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A list of IDs of data repository associations that are associated with this
     /// cache.
-    data_repository_association_ids: ?[]const []const u8,
+    data_repository_association_ids: ?[]const []const u8 = null,
 
     /// The Domain Name System (DNS) name for the cache.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// A structure providing details of any failures that occurred in creating a
     /// cache.
-    failure_details: ?FileCacheFailureDetails,
+    failure_details: ?FileCacheFailureDetails = null,
 
     /// The system-generated, unique ID of the cache.
-    file_cache_id: ?[]const u8,
+    file_cache_id: ?[]const u8 = null,
 
     /// The type of cache, which must be `LUSTRE`.
-    file_cache_type: ?FileCacheType,
+    file_cache_type: ?FileCacheType = null,
 
     /// The Lustre version of the cache, which must be `2.12`.
-    file_cache_type_version: ?[]const u8,
+    file_cache_type_version: ?[]const u8 = null,
 
     /// Specifies the ID of the Key Management Service (KMS) key to use for
     /// encrypting data on
@@ -41,7 +41,7 @@ pub const FileCacheCreating = struct {
     /// see
     /// [Encrypt](https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html) in the
     /// *Key Management Service API Reference*.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The lifecycle status of the cache. The following are the possible values and
     /// what they mean:
@@ -57,25 +57,25 @@ pub const FileCacheCreating = struct {
     ///
     /// * `FAILED` - An existing cache has experienced an unrecoverable failure.
     /// When creating a new cache, the cache was unable to be created.
-    lifecycle: ?FileCacheLifecycle,
+    lifecycle: ?FileCacheLifecycle = null,
 
     /// The configuration for the Amazon File Cache resource.
-    lustre_configuration: ?FileCacheLustreConfiguration,
+    lustre_configuration: ?FileCacheLustreConfiguration = null,
 
-    network_interface_ids: ?[]const []const u8,
+    network_interface_ids: ?[]const []const u8 = null,
 
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The storage capacity of the cache in gibibytes (GiB).
-    storage_capacity: ?i32,
+    storage_capacity: ?i32 = null,
 
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .copy_tags_to_data_repository_associations = "CopyTagsToDataRepositoryAssociations",

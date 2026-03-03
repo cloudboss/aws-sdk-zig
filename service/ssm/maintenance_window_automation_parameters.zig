@@ -3,7 +3,7 @@ const aws = @import("aws");
 /// The parameters for an `AUTOMATION` task type.
 pub const MaintenanceWindowAutomationParameters = struct {
     /// The version of an Automation runbook to use during task execution.
-    document_version: ?[]const u8,
+    document_version: ?[]const u8 = null,
 
     /// The parameters for the `AUTOMATION` task.
     ///
@@ -29,7 +29,7 @@ pub const MaintenanceWindowAutomationParameters = struct {
     /// For `AUTOMATION` task types, Amazon Web Services Systems Manager ignores any
     /// values specified for these
     /// parameters.
-    parameters: ?[]const aws.map.MapEntry([]const []const u8),
+    parameters: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     pub const json_field_names = .{
         .document_version = "DocumentVersion",

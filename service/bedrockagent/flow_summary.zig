@@ -9,7 +9,7 @@ pub const FlowSummary = struct {
     created_at: i64,
 
     /// A description of the flow.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the flow.
     id: []const u8,

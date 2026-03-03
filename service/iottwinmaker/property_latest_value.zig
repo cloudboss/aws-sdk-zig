@@ -7,7 +7,7 @@ pub const PropertyLatestValue = struct {
     property_reference: EntityPropertyReference,
 
     /// The value of the property.
-    property_value: ?DataValue,
+    property_value: ?DataValue = null,
 
     pub const json_field_names = .{
         .property_reference = "propertyReference",

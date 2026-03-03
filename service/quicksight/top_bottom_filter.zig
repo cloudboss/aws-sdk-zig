@@ -13,20 +13,20 @@ pub const TopBottomFilter = struct {
 
     /// The default configurations for the associated controls. This applies only
     /// for filters that are scoped to multiple sheets.
-    default_filter_control_configuration: ?DefaultFilterControlConfiguration,
+    default_filter_control_configuration: ?DefaultFilterControlConfiguration = null,
 
     /// An identifier that uniquely identifies a filter within a dashboard,
     /// analysis, or template.
     filter_id: []const u8,
 
     /// The number of items to include in the top bottom filter results.
-    limit: ?i32,
+    limit: ?i32 = null,
 
     /// The parameter whose value should be used for the filter value.
-    parameter_name: ?[]const u8,
+    parameter_name: ?[]const u8 = null,
 
     /// The level of time precision that is used to aggregate `DateTime` values.
-    time_granularity: ?TimeGranularity,
+    time_granularity: ?TimeGranularity = null,
 
     pub const json_field_names = .{
         .aggregation_sort_configurations = "AggregationSortConfigurations",

@@ -10,8 +10,8 @@ pub const AvailabilityZoneImpairmentPolicy = struct {
     /// [Auto Scaling group zonal
     /// shift](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html)
     /// in the *Amazon EC2 Auto Scaling User Guide*.
-    impaired_zone_health_check_behavior: ?ImpairedZoneHealthCheckBehavior,
+    impaired_zone_health_check_behavior: ?ImpairedZoneHealthCheckBehavior = null,
 
     /// If `true`, enable zonal shift for your Auto Scaling group.
-    zonal_shift_enabled: ?bool,
+    zonal_shift_enabled: ?bool = null,
 };

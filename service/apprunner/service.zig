@@ -26,18 +26,18 @@ pub const Service = struct {
 
     /// The time when the App Runner service was deleted. It's in the Unix time
     /// stamp format.
-    deleted_at: ?i64,
+    deleted_at: ?i64 = null,
 
     /// The encryption key that App Runner uses to encrypt the service logs and the
     /// copy of the source repository that App Runner maintains for the service. It
     /// can be
     /// either a customer-provided encryption key or an Amazon Web Services managed
     /// key.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// The settings for the health check that App Runner performs to monitor the
     /// health of this service.
-    health_check_configuration: ?HealthCheckConfiguration,
+    health_check_configuration: ?HealthCheckConfiguration = null,
 
     /// The runtime configuration of instances (scaling units) of this service.
     instance_configuration: InstanceConfiguration,
@@ -47,7 +47,7 @@ pub const Service = struct {
     network_configuration: NetworkConfiguration,
 
     /// The observability configuration of this service.
-    observability_configuration: ?ServiceObservabilityConfiguration,
+    observability_configuration: ?ServiceObservabilityConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of this service.
     service_arn: []const u8,
@@ -61,7 +61,7 @@ pub const Service = struct {
 
     /// A subdomain URL that App Runner generated for this service. You can use this
     /// URL to access your service web application.
-    service_url: ?[]const u8,
+    service_url: ?[]const u8 = null,
 
     /// The source deployed to the App Runner service. It can be a code or an image
     /// repository.

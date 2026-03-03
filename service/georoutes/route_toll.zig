@@ -6,7 +6,7 @@ const RouteTollRate = @import("route_toll_rate.zig").RouteTollRate;
 /// the toll collection.
 pub const RouteToll = struct {
     /// The alpha-2 or alpha-3 character code for the country.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// Locations or sites where the toll fare is collected.
     payment_sites: []const RouteTollPaymentSite,

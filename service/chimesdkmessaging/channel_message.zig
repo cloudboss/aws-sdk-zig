@@ -10,7 +10,7 @@ const ChannelMessageType = @import("channel_message_type.zig").ChannelMessageTyp
 /// The details of a message in a channel.
 pub const ChannelMessage = struct {
     /// The ARN of the channel.
-    channel_arn: ?[]const u8,
+    channel_arn: ?[]const u8 = null,
 
     /// The content of the channel message. For Amazon Lex V2 bot responses, this
     /// field holds a list of messages originating from the bot. For more
@@ -18,7 +18,7 @@ pub const ChannelMessage = struct {
     /// [Processing responses from an
     /// AppInstanceBot](https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html) in the
     /// *Amazon Chime SDK Messaging Developer Guide*.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The content type of the channel message. For Amazon Lex V2 bot responses,
     /// the content type is `application/amz-chime-lex-msgs` for success responses
@@ -28,16 +28,16 @@ pub const ChannelMessage = struct {
     /// [Processing responses from an
     /// AppInstanceBot](https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html) in the
     /// *Amazon Chime SDK Messaging Developer Guide*.
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// The time at which the message was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The time at which a message was edited.
-    last_edited_timestamp: ?i64,
+    last_edited_timestamp: ?i64 = null,
 
     /// The time at which a message was updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     /// The attributes for the channel message. For Amazon Lex V2 bot responses, the
     /// attributes are mapped to specific fields from the bot. For more information,
@@ -45,37 +45,37 @@ pub const ChannelMessage = struct {
     /// [Processing responses from an
     /// AppInstanceBot](https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html) in the
     /// *Amazon Chime SDK Messaging Developer Guide*.
-    message_attributes: ?[]const aws.map.MapEntry(MessageAttributeValue),
+    message_attributes: ?[]const aws.map.MapEntry(MessageAttributeValue) = null,
 
     /// The ID of a message.
-    message_id: ?[]const u8,
+    message_id: ?[]const u8 = null,
 
     /// The message metadata.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     /// The persistence setting for a channel message.
-    persistence: ?ChannelMessagePersistenceType,
+    persistence: ?ChannelMessagePersistenceType = null,
 
     /// Hides the content of a message.
     redacted: bool = false,
 
     /// The message sender.
-    sender: ?Identity,
+    sender: ?Identity = null,
 
     /// The status of the channel message.
-    status: ?ChannelMessageStatusStructure,
+    status: ?ChannelMessageStatusStructure = null,
 
     /// The ID of the SubChannel.
-    sub_channel_id: ?[]const u8,
+    sub_channel_id: ?[]const u8 = null,
 
     /// The target of a message, a sender, a user, or a bot. Only the target and the
     /// sender can view targeted messages.
     /// Only users who can see targeted messages can take actions on them. However,
     /// administrators can delete targeted messages that they can’t see.
-    target: ?[]const Target,
+    target: ?[]const Target = null,
 
     /// The message type.
-    @"type": ?ChannelMessageType,
+    @"type": ?ChannelMessageType = null,
 
     pub const json_field_names = .{
         .channel_arn = "ChannelArn",

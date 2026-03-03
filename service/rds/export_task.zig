@@ -19,44 +19,44 @@ pub const ExportTask = struct {
     /// * `database.schema.table` *table-name* - Export a table of the database
     ///   schema. This format is valid only for RDS for PostgreSQL and Aurora
     ///   PostgreSQL.
-    export_only: ?[]const []const u8,
+    export_only: ?[]const []const u8 = null,
 
     /// A unique identifier for the snapshot or cluster export task. This ID isn't
     /// an identifier for the Amazon S3 bucket where the data is exported.
-    export_task_identifier: ?[]const u8,
+    export_task_identifier: ?[]const u8 = null,
 
     /// The reason the export failed, if it failed.
-    failure_cause: ?[]const u8,
+    failure_cause: ?[]const u8 = null,
 
     /// The name of the IAM role that is used to write to Amazon S3 when exporting a
     /// snapshot or cluster.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// The key identifier of the Amazon Web Services KMS key that is used to
     /// encrypt the data when it's exported to Amazon S3. The KMS key identifier is
     /// its key ARN, key ID, alias ARN, or alias name. The IAM role used for the
     /// export must have encryption and decryption permissions to use this KMS key.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The progress of the snapshot or cluster export task as a percentage.
-    percent_progress: ?i32,
+    percent_progress: ?i32 = null,
 
     /// The Amazon S3 bucket where the snapshot or cluster is exported to.
-    s3_bucket: ?[]const u8,
+    s3_bucket: ?[]const u8 = null,
 
     /// The Amazon S3 bucket prefix that is the file name and path of the exported
     /// data.
-    s3_prefix: ?[]const u8,
+    s3_prefix: ?[]const u8 = null,
 
     /// The time when the snapshot was created.
-    snapshot_time: ?i64,
+    snapshot_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the snapshot or cluster exported to Amazon
     /// S3.
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     /// The type of source for the export.
-    source_type: ?ExportSourceType,
+    source_type: ?ExportSourceType = null,
 
     /// The progress status of the export task. The status can be one of the
     /// following:
@@ -67,17 +67,17 @@ pub const ExportTask = struct {
     /// * `FAILED`
     /// * `IN_PROGRESS`
     /// * `STARTING`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The time when the snapshot or cluster export task ended.
-    task_end_time: ?i64,
+    task_end_time: ?i64 = null,
 
     /// The time when the snapshot or cluster export task started.
-    task_start_time: ?i64,
+    task_start_time: ?i64 = null,
 
     /// The total amount of data exported, in gigabytes.
-    total_extracted_data_in_gb: ?i32,
+    total_extracted_data_in_gb: ?i32 = null,
 
     /// A warning about the snapshot or cluster export task.
-    warning_message: ?[]const u8,
+    warning_message: ?[]const u8 = null,
 };

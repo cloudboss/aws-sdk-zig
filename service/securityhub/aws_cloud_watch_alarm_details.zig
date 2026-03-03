@@ -5,37 +5,37 @@ const AwsCloudWatchAlarmDimensionsDetails = @import("aws_cloud_watch_alarm_dimen
 pub const AwsCloudWatchAlarmDetails = struct {
     /// Indicates whether actions should be executed during any changes to the alarm
     /// state.
-    actions_enabled: ?bool,
+    actions_enabled: ?bool = null,
 
     /// The list of actions, specified as Amazon Resource Names (ARNs) to execute
     /// when this alarm transitions into an `ALARM` state from any other
     /// state.
-    alarm_actions: ?[]const []const u8,
+    alarm_actions: ?[]const []const u8 = null,
 
     /// The ARN of the alarm.
-    alarm_arn: ?[]const u8,
+    alarm_arn: ?[]const u8 = null,
 
     /// The time stamp of the last update to the alarm configuration.
-    alarm_configuration_updated_timestamp: ?[]const u8,
+    alarm_configuration_updated_timestamp: ?[]const u8 = null,
 
     /// The description of the alarm.
-    alarm_description: ?[]const u8,
+    alarm_description: ?[]const u8 = null,
 
     /// The name of the alarm. If you don't specify a name, CloudFront generates a
     /// unique physical ID
     /// and uses that ID for the alarm name.
-    alarm_name: ?[]const u8,
+    alarm_name: ?[]const u8 = null,
 
     /// The arithmetic operation to use when comparing the specified statistic and
     /// threshold. The specified
     /// statistic value is used as the first operand.
-    comparison_operator: ?[]const u8,
+    comparison_operator: ?[]const u8 = null,
 
     /// The number of datapoints that must be breaching to trigger the alarm.
-    datapoints_to_alarm: ?i32,
+    datapoints_to_alarm: ?i32 = null,
 
     /// The dimensions for the metric associated with the alarm.
-    dimensions: ?[]const AwsCloudWatchAlarmDimensionsDetails,
+    dimensions: ?[]const AwsCloudWatchAlarmDimensionsDetails = null,
 
     /// Used only for alarms based on percentiles. If `ignore`, the alarm state does
     /// not change during
@@ -43,42 +43,42 @@ pub const AwsCloudWatchAlarmDetails = struct {
     /// `evaluate` or this parameter is not used,
     /// the alarm is always evaluated and possibly changes state no matter how many
     /// data points are available.
-    evaluate_low_sample_count_percentile: ?[]const u8,
+    evaluate_low_sample_count_percentile: ?[]const u8 = null,
 
     /// The number of periods over which data is compared to the specified
     /// threshold.
-    evaluation_periods: ?i32,
+    evaluation_periods: ?i32 = null,
 
     /// The percentile statistic for the metric associated with the alarm.
-    extended_statistic: ?[]const u8,
+    extended_statistic: ?[]const u8 = null,
 
     /// The actions to execute when this alarm transitions to the
     /// `INSUFFICIENT_DATA` state from
     /// any other state. Each action is specified as an ARN.
-    insufficient_data_actions: ?[]const []const u8,
+    insufficient_data_actions: ?[]const []const u8 = null,
 
     /// The name of the metric associated with the alarm. This is required for an
     /// alarm based on a metric.
     /// For an alarm based on a math expression, you use `Metrics` instead and you
     /// can't specify `MetricName`.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The namespace of the metric associated with the alarm. This is required for
     /// an alarm based on a
     /// metric. For an alarm based on a math expression, you can't specify
     /// `Namespace` and you use
     /// `Metrics` instead.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The actions to execute when this alarm transitions to the `OK` state from
     /// any other state.
     /// Each action is specified as an ARN.
-    ok_actions: ?[]const []const u8,
+    ok_actions: ?[]const []const u8 = null,
 
     /// The period, in seconds, over which the statistic is applied. This is
     /// required for an alarm based on a
     /// metric.
-    period: ?i32,
+    period: ?i32 = null,
 
     /// The statistic for the metric associated with the alarm, other than
     /// percentile. For percentile statistics, use `ExtendedStatistic`.
@@ -88,20 +88,20 @@ pub const AwsCloudWatchAlarmDetails = struct {
     ///
     /// For an alarm based on a math expression, you can't specify `Statistic`.
     /// Instead, you use `Metrics`.
-    statistic: ?[]const u8,
+    statistic: ?[]const u8 = null,
 
     /// The value to compare with the specified statistic.
-    threshold: ?f64,
+    threshold: ?f64 = null,
 
     /// n an alarm based on an anomaly detection model, this is the ID of the
     /// `ANOMALY_DETECTION_BAND` function used as the threshold for the alarm.
-    threshold_metric_id: ?[]const u8,
+    threshold_metric_id: ?[]const u8 = null,
 
     /// Sets how this alarm is to handle missing data points.
-    treat_missing_data: ?[]const u8,
+    treat_missing_data: ?[]const u8 = null,
 
     /// The unit of the metric associated with the alarm.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .actions_enabled = "ActionsEnabled",

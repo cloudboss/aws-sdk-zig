@@ -32,7 +32,7 @@ pub const Condition = struct {
     ///
     /// For Binary, DynamoDB treats each byte of the binary data as unsigned when it
     /// compares binary values.
-    attribute_value_list: ?[]const AttributeValue,
+    attribute_value_list: ?[]const AttributeValue = null,
 
     /// A comparator for evaluating attributes. For example, equals, greater than,
     /// less than,

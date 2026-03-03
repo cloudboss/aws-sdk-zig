@@ -38,7 +38,7 @@ pub const ExclusionByResourceTypes = struct {
     /// A comma-separated list of resource types to exclude from recording by the
     /// configuration
     /// recorder.
-    resource_types: ?[]const ResourceType,
+    resource_types: ?[]const ResourceType = null,
 
     pub const json_field_names = .{
         .resource_types = "resourceTypes",

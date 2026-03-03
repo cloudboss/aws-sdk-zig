@@ -3,8 +3,8 @@ pub const PrivateIpAddressSpecification = struct {
     /// Indicates whether the private IPv4 address is the primary private IPv4
     /// address. Only
     /// one IPv4 address can be designated as primary.
-    primary: ?bool,
+    primary: ?bool = null,
 
     /// The private IPv4 address.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 };

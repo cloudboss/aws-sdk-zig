@@ -17,69 +17,69 @@ const VpcOutputSettingsDescription = @import("vpc_output_settings_description.zi
 /// Placeholder documentation for ChannelSummary
 pub const ChannelSummary = struct {
     /// AnywhereSettings settings for this channel.
-    anywhere_settings: ?DescribeAnywhereSettings,
+    anywhere_settings: ?DescribeAnywhereSettings = null,
 
     /// The unique arn of the channel.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Specification of CDI inputs for this channel
-    cdi_input_specification: ?CdiInputSpecification,
+    cdi_input_specification: ?CdiInputSpecification = null,
 
     /// The class for this channel. STANDARD for a channel with two pipelines or
     /// SINGLE_PIPELINE for a channel with one pipeline.
-    channel_class: ?ChannelClass,
+    channel_class: ?ChannelClass = null,
 
     /// The engine version that you requested for this channel.
-    channel_engine_version: ?ChannelEngineVersionResponse,
+    channel_engine_version: ?ChannelEngineVersionResponse = null,
 
     /// A list of IDs for all the Input Security Groups attached to the channel.
-    channel_security_groups: ?[]const []const u8,
+    channel_security_groups: ?[]const []const u8 = null,
 
     /// A list of destinations of the channel. For UDP outputs, there is one
     /// destination per output. For other types (HLS, for example), there is
     /// one destination per packager.
-    destinations: ?[]const OutputDestination,
+    destinations: ?[]const OutputDestination = null,
 
     /// The endpoints where outgoing connections initiate from
-    egress_endpoints: ?[]const ChannelEgressEndpoint,
+    egress_endpoints: ?[]const ChannelEgressEndpoint = null,
 
     /// The unique id of the channel.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// List of input attachments for channel.
-    input_attachments: ?[]const InputAttachment,
+    input_attachments: ?[]const InputAttachment = null,
 
     /// Specification of network and file inputs for this channel
-    input_specification: ?InputSpecification,
+    input_specification: ?InputSpecification = null,
 
     /// Linked Channel Settings for this channel.
-    linked_channel_settings: ?DescribeLinkedChannelSettings,
+    linked_channel_settings: ?DescribeLinkedChannelSettings = null,
 
     /// The log level being written to CloudWatch Logs.
-    log_level: ?LogLevel,
+    log_level: ?LogLevel = null,
 
     /// Maintenance settings for this channel.
-    maintenance: ?MaintenanceStatus,
+    maintenance: ?MaintenanceStatus = null,
 
     /// The name of the channel. (user-mutable)
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The number of currently healthy pipelines.
-    pipelines_running_count: ?i32,
+    pipelines_running_count: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the role assumed when running the Channel.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
-    state: ?ChannelState,
+    state: ?ChannelState = null,
 
     /// A collection of key-value pairs.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The engine version that the running pipelines are using.
-    used_channel_engine_versions: ?[]const ChannelEngineVersionResponse,
+    used_channel_engine_versions: ?[]const ChannelEngineVersionResponse = null,
 
     /// Settings for any VPC outputs.
-    vpc: ?VpcOutputSettingsDescription,
+    vpc: ?VpcOutputSettingsDescription = null,
 
     pub const json_field_names = .{
         .anywhere_settings = "AnywhereSettings",

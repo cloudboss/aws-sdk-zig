@@ -8,28 +8,28 @@ const MetricAttributionOutput = @import("metric_attribution_output.zig").MetricA
 /// recommendations](https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
 pub const MetricAttribution = struct {
     /// The metric attribution's creation date time.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The metric attribution's dataset group Amazon Resource Name (ARN).
-    dataset_group_arn: ?[]const u8,
+    dataset_group_arn: ?[]const u8 = null,
 
     /// The metric attribution's failure reason.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The metric attribution's last updated date time.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The metric attribution's Amazon Resource Name (ARN).
-    metric_attribution_arn: ?[]const u8,
+    metric_attribution_arn: ?[]const u8 = null,
 
     /// The metric attribution's output configuration.
-    metrics_output_config: ?MetricAttributionOutput,
+    metrics_output_config: ?MetricAttributionOutput = null,
 
     /// The metric attribution's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The metric attribution's status.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

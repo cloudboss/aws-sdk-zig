@@ -6,10 +6,10 @@ pub const DataSourceIntrospectionModelField = struct {
     length: i64 = 0,
 
     /// The name of the field that was retrieved from the introspected data.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The `DataSourceIntrospectionModelFieldType` object data.
-    @"type": ?DataSourceIntrospectionModelFieldType,
+    @"type": ?DataSourceIntrospectionModelFieldType = null,
 
     pub const json_field_names = .{
         .length = "length",

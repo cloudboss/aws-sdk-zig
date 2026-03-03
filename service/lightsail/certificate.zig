@@ -12,47 +12,47 @@ const Tag = @import("tag.zig").Tag;
 /// and tags.
 pub const Certificate = struct {
     /// The Amazon Resource Name (ARN) of the certificate.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The timestamp when the certificate was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The domain name of the certificate.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// An array of objects that describe the domain validation records of the
     /// certificate.
-    domain_validation_records: ?[]const DomainValidationRecord,
+    domain_validation_records: ?[]const DomainValidationRecord = null,
 
     /// The renewal eligibility of the certificate.
-    eligible_to_renew: ?[]const u8,
+    eligible_to_renew: ?[]const u8 = null,
 
     /// The number of Lightsail resources that the certificate is attached to.
     in_use_resource_count: i32 = 0,
 
     /// The timestamp when the certificate was issued.
-    issued_at: ?i64,
+    issued_at: ?i64 = null,
 
     /// The certificate authority that issued the certificate.
-    issuer_ca: ?[]const u8,
+    issuer_ca: ?[]const u8 = null,
 
     /// The algorithm used to generate the key pair (the public and private key) of
     /// the
     /// certificate.
-    key_algorithm: ?[]const u8,
+    key_algorithm: ?[]const u8 = null,
 
     /// The name of the certificate (`my-certificate`).
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The timestamp when the certificate expires.
-    not_after: ?i64,
+    not_after: ?i64 = null,
 
     /// The timestamp when the certificate is first valid.
-    not_before: ?i64,
+    not_before: ?i64 = null,
 
     /// An object that describes the status of the certificate renewal managed by
     /// Lightsail.
-    renewal_summary: ?RenewalSummary,
+    renewal_summary: ?RenewalSummary = null,
 
     /// The validation failure reason, if any, of the certificate.
     ///
@@ -128,40 +128,40 @@ pub const Certificate = struct {
     /// request. Try to request a certificate again, correcting any spelling errors
     /// or typos that
     /// were in the failed request.
-    request_failure_reason: ?[]const u8,
+    request_failure_reason: ?[]const u8 = null,
 
     /// The reason the certificate was revoked. This value is present only when the
     /// certificate
     /// status is `REVOKED`.
-    revocation_reason: ?[]const u8,
+    revocation_reason: ?[]const u8 = null,
 
     /// The timestamp when the certificate was revoked. This value is present only
     /// when the
     /// certificate status is `REVOKED`.
-    revoked_at: ?i64,
+    revoked_at: ?i64 = null,
 
     /// The serial number of the certificate.
-    serial_number: ?[]const u8,
+    serial_number: ?[]const u8 = null,
 
     /// The validation status of the certificate.
-    status: ?CertificateStatus,
+    status: ?CertificateStatus = null,
 
     /// An array of strings that specify the alternate domains (`example2.com`) and
     /// subdomains (`blog.example.com`) of the certificate.
-    subject_alternative_names: ?[]const []const u8,
+    subject_alternative_names: ?[]const []const u8 = null,
 
     /// The support code. Include this code in your email to support when you have
     /// questions about
     /// your Lightsail certificate. This code enables our support team to look up
     /// your Lightsail
     /// information more easily.
-    support_code: ?[]const u8,
+    support_code: ?[]const u8 = null,
 
     /// The tag keys and optional values for the resource. For more information
     /// about tags in
     /// Lightsail, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .arn = "arn",

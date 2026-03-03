@@ -21,7 +21,7 @@ pub const ListVectorEnrichmentJobOutputConfig = struct {
     status: VectorEnrichmentJobStatus,
 
     /// Each tag consists of a key and a value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the list of Vector Enrichment jobs.
     @"type": VectorEnrichmentJobType,

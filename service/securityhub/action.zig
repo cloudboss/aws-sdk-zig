@@ -23,23 +23,23 @@ pub const Action = struct {
     /// * `DNS_REQUEST`
     ///
     /// * `PORT_PROBE`
-    action_type: ?[]const u8,
+    action_type: ?[]const u8 = null,
 
     /// Included if `ActionType` is `AWS_API_CALL`. Provides details about
     /// the API call that was detected.
-    aws_api_call_action: ?AwsApiCallAction,
+    aws_api_call_action: ?AwsApiCallAction = null,
 
     /// Included if `ActionType` is `DNS_REQUEST`. Provides details about
     /// the DNS request that was detected.
-    dns_request_action: ?DnsRequestAction,
+    dns_request_action: ?DnsRequestAction = null,
 
     /// Included if `ActionType` is `NETWORK_CONNECTION`. Provides details
     /// about the network connection that was detected.
-    network_connection_action: ?NetworkConnectionAction,
+    network_connection_action: ?NetworkConnectionAction = null,
 
     /// Included if `ActionType` is `PORT_PROBE`. Provides details about
     /// the port probe that was detected.
-    port_probe_action: ?PortProbeAction,
+    port_probe_action: ?PortProbeAction = null,
 
     pub const json_field_names = .{
         .action_type = "ActionType",

@@ -6,12 +6,12 @@
 /// set with the correct data for Jobs to report to the thing shadow.
 pub const VersionUpdateByJobsConfig = struct {
     /// Indicates whether the Job is enabled or not.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the role that grants permission to the IoT
     /// jobs service to update the reserved named shadow when the job successfully
     /// completes.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

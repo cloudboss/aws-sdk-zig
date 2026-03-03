@@ -5,13 +5,13 @@ pub const ListGroupsRequest = struct {
     aws_account_id: []const u8,
 
     /// The maximum number of results to return.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The namespace that you want a list of groups from.
     namespace: []const u8,
 
     /// A pagination token that can be used in a subsequent request.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_account_id = "AwsAccountId",

@@ -13,10 +13,10 @@ pub const GovernedCatalogTarget = struct {
     name: []const u8,
 
     /// Specifies native partitioning using a sequence of keys.
-    partition_keys: ?[]const []const []const u8,
+    partition_keys: ?[]const []const []const u8 = null,
 
     /// A policy that specifies update behavior for the governed catalog.
-    schema_change_policy: ?CatalogSchemaChangePolicy,
+    schema_change_policy: ?CatalogSchemaChangePolicy = null,
 
     /// The name of the table in the database to write to.
     table: []const u8,

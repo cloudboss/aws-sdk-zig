@@ -11,7 +11,7 @@ pub const ActiveTrustedSigners = struct {
     /// A list of Amazon Web Services accounts and the identifiers of active
     /// CloudFront key pairs in each account that CloudFront can use to verify the
     /// signatures of signed URLs and signed cookies.
-    items: ?[]const Signer,
+    items: ?[]const Signer = null,
 
     /// The number of Amazon Web Services accounts in the list.
     quantity: i32,

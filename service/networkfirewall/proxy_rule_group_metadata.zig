@@ -6,11 +6,11 @@
 /// calling DescribeProxyRuleGroup.
 pub const ProxyRuleGroupMetadata = struct {
     /// The Amazon Resource Name (ARN) of a proxy rule group.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The descriptive name of the proxy rule group. You can't change the name of a
     /// proxy rule group after you create it.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

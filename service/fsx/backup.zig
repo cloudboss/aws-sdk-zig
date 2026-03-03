@@ -20,10 +20,10 @@ pub const Backup = struct {
     /// The configuration of the self-managed Microsoft Active Directory directory
     /// to which
     /// the Windows File Server instance is joined.
-    directory_information: ?ActiveDirectoryBackupAttributes,
+    directory_information: ?ActiveDirectoryBackupAttributes = null,
 
     /// Details explaining any failures that occurred when creating a backup.
-    failure_details: ?BackupFailureDetails,
+    failure_details: ?BackupFailureDetails = null,
 
     /// The metadata of the file system associated with the backup. This metadata is
     /// persisted
@@ -32,7 +32,7 @@ pub const Backup = struct {
 
     /// The ID of the Key Management Service (KMS) key used to encrypt the
     /// backup of the Amazon FSx file system's data at rest.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The lifecycle status of the backup.
     ///
@@ -54,33 +54,33 @@ pub const Backup = struct {
     /// * `FAILED` - Amazon FSx couldn't finish the backup.
     lifecycle: BackupLifecycle,
 
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
-    progress_percent: ?i32,
+    progress_percent: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) for the backup resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// Specifies the resource type that's backed up.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The size of the backup in bytes. This represents the amount of data that the
     /// file system would contain if you restore this backup.
-    size_in_bytes: ?i64,
+    size_in_bytes: ?i64 = null,
 
-    source_backup_id: ?[]const u8,
+    source_backup_id: ?[]const u8 = null,
 
     /// The source Region of the backup. Specifies the Region from where this backup
     /// is copied.
-    source_backup_region: ?[]const u8,
+    source_backup_region: ?[]const u8 = null,
 
     /// The tags associated with a particular file system.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The type of the file-system backup.
     @"type": BackupType,
 
-    volume: ?Volume,
+    volume: ?Volume = null,
 
     pub const json_field_names = .{
         .backup_id = "BackupId",

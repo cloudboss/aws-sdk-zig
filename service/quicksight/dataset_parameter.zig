@@ -7,16 +7,16 @@ const StringDatasetParameter = @import("string_dataset_parameter.zig").StringDat
 /// integer, decimal, or datetime data type.
 pub const DatasetParameter = struct {
     /// A date time parameter that is created in the dataset.
-    date_time_dataset_parameter: ?DateTimeDatasetParameter,
+    date_time_dataset_parameter: ?DateTimeDatasetParameter = null,
 
     /// A decimal parameter that is created in the dataset.
-    decimal_dataset_parameter: ?DecimalDatasetParameter,
+    decimal_dataset_parameter: ?DecimalDatasetParameter = null,
 
     /// An integer parameter that is created in the dataset.
-    integer_dataset_parameter: ?IntegerDatasetParameter,
+    integer_dataset_parameter: ?IntegerDatasetParameter = null,
 
     /// A string parameter that is created in the dataset.
-    string_dataset_parameter: ?StringDatasetParameter,
+    string_dataset_parameter: ?StringDatasetParameter = null,
 
     pub const json_field_names = .{
         .date_time_dataset_parameter = "DateTimeDatasetParameter",

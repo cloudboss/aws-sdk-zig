@@ -5,7 +5,7 @@ const UDPEndpoint = @import("udp_endpoint.zig").UDPEndpoint;
 /// between a player device and an Amazon GameLift Servers hosting location.
 pub const PingBeacon = struct {
     /// The domain name and port of the UDP ping beacon.
-    udp_endpoint: ?UDPEndpoint,
+    udp_endpoint: ?UDPEndpoint = null,
 
     pub const json_field_names = .{
         .udp_endpoint = "UDPEndpoint",

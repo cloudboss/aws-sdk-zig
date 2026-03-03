@@ -4,7 +4,7 @@ const RateCardItem = @import("rate_card_item.zig").RateCardItem;
 /// `UsageBasedRateCardItem` defines an individual rate for a product dimension.
 pub const UsageBasedRateCardItem = struct {
     /// Defines the per unit rates for product dimensions.
-    rate_card: ?[]const RateCardItem,
+    rate_card: ?[]const RateCardItem = null,
 
     pub const json_field_names = .{
         .rate_card = "rateCard",

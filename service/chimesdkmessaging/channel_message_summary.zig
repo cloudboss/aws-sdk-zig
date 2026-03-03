@@ -14,7 +14,7 @@ pub const ChannelMessageSummary = struct {
     /// [Processing responses from an
     /// AppInstanceBot](https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html) in the
     /// *Amazon Chime SDK Messaging Developer Guide*.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The content type of the channel message listed in the summary. For Amazon
     /// Lex V2 bot responses, the content type is `application/amz-chime-lex-msgs`
@@ -24,16 +24,16 @@ pub const ChannelMessageSummary = struct {
     /// [Processing responses from an
     /// AppInstanceBot](https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html) in the
     /// *Amazon Chime SDK Messaging Developer Guide*.
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// The time at which the message summary was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The time at which a message was last edited.
-    last_edited_timestamp: ?i64,
+    last_edited_timestamp: ?i64 = null,
 
     /// The time at which a message was last updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     /// The attributes for the channel message. For Amazon Lex V2 bot responses, the
     /// attributes are mapped to specific fields from the bot. For more information,
@@ -41,34 +41,34 @@ pub const ChannelMessageSummary = struct {
     /// [Processing responses from an
     /// AppInstanceBot](https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html) in the
     /// *Amazon Chime SDK Messaging Developer Guide*.
-    message_attributes: ?[]const aws.map.MapEntry(MessageAttributeValue),
+    message_attributes: ?[]const aws.map.MapEntry(MessageAttributeValue) = null,
 
     /// The ID of the message.
-    message_id: ?[]const u8,
+    message_id: ?[]const u8 = null,
 
     /// The metadata of the message.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     /// Indicates whether a message was redacted.
     redacted: bool = false,
 
     /// The message sender.
-    sender: ?Identity,
+    sender: ?Identity = null,
 
     /// The message status. The status value is `SENT` for messages sent to a
     /// channel without a channel flow. For channels associated with channel flow,
     /// the value determines the
     /// processing stage.
-    status: ?ChannelMessageStatusStructure,
+    status: ?ChannelMessageStatusStructure = null,
 
     /// The target of a message, a sender, a user, or a bot. Only the target and the
     /// sender can view targeted messages.
     /// Only users who can see targeted messages can take actions on them. However,
     /// administrators can delete targeted messages that they can’t see.
-    target: ?[]const Target,
+    target: ?[]const Target = null,
 
     /// The type of message.
-    @"type": ?ChannelMessageType,
+    @"type": ?ChannelMessageType = null,
 
     pub const json_field_names = .{
         .content = "Content",

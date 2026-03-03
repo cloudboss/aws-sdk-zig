@@ -5,45 +5,45 @@
 /// terms are used interchangeably.
 pub const MemoryDbReservedInstancesConfiguration = struct {
     /// The account scope for which you want recommendations.
-    account_scope: ?[]const u8,
+    account_scope: ?[]const u8 = null,
 
     /// Determines whether the recommendation is for a current generation instance.
-    current_generation: ?[]const u8,
+    current_generation: ?[]const u8 = null,
 
     /// The instance family of the recommended reservation.
-    instance_family: ?[]const u8,
+    instance_family: ?[]const u8 = null,
 
     /// The type of instance that Amazon Web Services recommends.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// How much purchasing these reserved instances costs you on a monthly basis.
-    monthly_recurring_cost: ?[]const u8,
+    monthly_recurring_cost: ?[]const u8 = null,
 
     /// The number of normalized units that Amazon Web Services recommends that you
     /// purchase.
-    normalized_units_to_purchase: ?[]const u8,
+    normalized_units_to_purchase: ?[]const u8 = null,
 
     /// The number of instances that Amazon Web Services recommends that you
     /// purchase.
-    number_of_instances_to_purchase: ?[]const u8,
+    number_of_instances_to_purchase: ?[]const u8 = null,
 
     /// The payment option for the commitment.
-    payment_option: ?[]const u8,
+    payment_option: ?[]const u8 = null,
 
     /// The Amazon Web Services Region of the commitment.
-    reserved_instances_region: ?[]const u8,
+    reserved_instances_region: ?[]const u8 = null,
 
     /// The service for which you want recommendations.
-    service: ?[]const u8,
+    service: ?[]const u8 = null,
 
     /// Determines whether the recommendation is size flexible.
-    size_flex_eligible: ?bool,
+    size_flex_eligible: ?bool = null,
 
     /// The reserved instances recommendation term in years.
-    term: ?[]const u8,
+    term: ?[]const u8 = null,
 
     /// How much purchasing these reserved instances costs you upfront.
-    upfront_cost: ?[]const u8,
+    upfront_cost: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_scope = "accountScope",

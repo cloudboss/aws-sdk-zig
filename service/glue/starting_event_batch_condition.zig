@@ -5,10 +5,10 @@
 /// member is non-zero.
 pub const StartingEventBatchCondition = struct {
     /// Number of events in the batch.
-    batch_size: ?i32,
+    batch_size: ?i32 = null,
 
     /// Duration of the batch window in seconds.
-    batch_window: ?i32,
+    batch_window: ?i32 = null,
 
     pub const json_field_names = .{
         .batch_size = "BatchSize",

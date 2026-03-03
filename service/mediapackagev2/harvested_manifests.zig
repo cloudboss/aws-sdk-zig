@@ -5,13 +5,13 @@ const HarvestedLowLatencyHlsManifest = @import("harvested_low_latency_hls_manife
 /// A collection of harvested manifests of different types.
 pub const HarvestedManifests = struct {
     /// A list of harvested DASH manifests.
-    dash_manifests: ?[]const HarvestedDashManifest,
+    dash_manifests: ?[]const HarvestedDashManifest = null,
 
     /// A list of harvested HLS manifests.
-    hls_manifests: ?[]const HarvestedHlsManifest,
+    hls_manifests: ?[]const HarvestedHlsManifest = null,
 
     /// A list of harvested Low-Latency HLS manifests.
-    low_latency_hls_manifests: ?[]const HarvestedLowLatencyHlsManifest,
+    low_latency_hls_manifests: ?[]const HarvestedLowLatencyHlsManifest = null,
 
     pub const json_field_names = .{
         .dash_manifests = "DashManifests",

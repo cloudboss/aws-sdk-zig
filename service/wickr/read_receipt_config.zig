@@ -4,7 +4,7 @@ const Status = @import("status.zig").Status;
 /// senders can see when their messages have been read.
 pub const ReadReceiptConfig = struct {
     /// The read receipt status mode for the network.
-    status: ?Status,
+    status: ?Status = null,
 
     pub const json_field_names = .{
         .status = "status",

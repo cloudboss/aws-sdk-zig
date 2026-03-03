@@ -6,7 +6,7 @@ const ContactState = @import("contact_state.zig").ContactState;
 pub const ContactFilter = struct {
     /// A list of up to 9 [contact
     /// states](https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html).
-    contact_states: ?[]const ContactState,
+    contact_states: ?[]const ContactState = null,
 
     pub const json_field_names = .{
         .contact_states = "ContactStates",

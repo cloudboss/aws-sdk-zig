@@ -12,7 +12,7 @@ pub const GroupConfigurationParameter = struct {
     /// values you
     /// can use with each parameter, see [Supported resource types and
     /// parameters](https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types).
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

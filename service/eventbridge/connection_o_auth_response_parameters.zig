@@ -5,17 +5,17 @@ const ConnectionHttpParameters = @import("connection_http_parameters.zig").Conne
 /// The response parameters when OAuth is specified as the authorization type.
 pub const ConnectionOAuthResponseParameters = struct {
     /// The URL to the HTTP endpoint that authorized the request.
-    authorization_endpoint: ?[]const u8,
+    authorization_endpoint: ?[]const u8 = null,
 
     /// Details about the client parameters returned when OAuth is specified as the
     /// authorization type.
-    client_parameters: ?ConnectionOAuthClientResponseParameters,
+    client_parameters: ?ConnectionOAuthClientResponseParameters = null,
 
     /// The method used to connect to the HTTP endpoint.
-    http_method: ?ConnectionOAuthHttpMethod,
+    http_method: ?ConnectionOAuthHttpMethod = null,
 
     /// The additional HTTP parameters used for the OAuth authorization request.
-    o_auth_http_parameters: ?ConnectionHttpParameters,
+    o_auth_http_parameters: ?ConnectionHttpParameters = null,
 
     pub const json_field_names = .{
         .authorization_endpoint = "AuthorizationEndpoint",

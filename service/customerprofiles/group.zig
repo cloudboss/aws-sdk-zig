@@ -5,10 +5,10 @@ const IncludeOptions = @import("include_options.zig").IncludeOptions;
 /// Contains dimensions that determine what to segment on.
 pub const Group = struct {
     /// Defines the attributes to segment on.
-    dimensions: ?[]const Dimension,
+    dimensions: ?[]const Dimension = null,
 
     /// Defines the starting source of data.
-    source_segments: ?[]const SourceSegment,
+    source_segments: ?[]const SourceSegment = null,
 
     /// Defines how to interact with the source data.
     source_type: IncludeOptions = "ALL",

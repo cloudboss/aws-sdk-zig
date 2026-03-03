@@ -2,7 +2,7 @@ const FirewallDomainList = @import("firewall_domain_list.zig").FirewallDomainLis
 
 pub const GetFirewallDomainListResponse = struct {
     /// The domain list that you requested.
-    firewall_domain_list: ?FirewallDomainList,
+    firewall_domain_list: ?FirewallDomainList = null,
 
     pub const json_field_names = .{
         .firewall_domain_list = "FirewallDomainList",

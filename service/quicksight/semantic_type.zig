@@ -3,25 +3,25 @@ const aws = @import("aws");
 /// A structure that represents a semantic type.
 pub const SemanticType = struct {
     /// The semantic type falsey cell value.
-    falsey_cell_value: ?[]const u8,
+    falsey_cell_value: ?[]const u8 = null,
 
     /// The other names or aliases for the false cell value.
-    falsey_cell_value_synonyms: ?[]const []const u8,
+    falsey_cell_value_synonyms: ?[]const []const u8 = null,
 
     /// The semantic type sub type name.
-    sub_type_name: ?[]const u8,
+    sub_type_name: ?[]const u8 = null,
 
     /// The semantic type truthy cell value.
-    truthy_cell_value: ?[]const u8,
+    truthy_cell_value: ?[]const u8 = null,
 
     /// The other names or aliases for the true cell value.
-    truthy_cell_value_synonyms: ?[]const []const u8,
+    truthy_cell_value_synonyms: ?[]const []const u8 = null,
 
     /// The semantic type name.
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 
     /// The semantic type parameters.
-    type_parameters: ?[]const aws.map.StringMapEntry,
+    type_parameters: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .falsey_cell_value = "FalseyCellValue",

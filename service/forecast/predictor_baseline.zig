@@ -8,7 +8,7 @@ pub const PredictorBaseline = struct {
     /// the predictor. Use these metrics as a baseline for comparison purposes as
     /// you
     /// use your predictor and the metrics change.
-    baseline_metrics: ?[]const BaselineMetric,
+    baseline_metrics: ?[]const BaselineMetric = null,
 
     pub const json_field_names = .{
         .baseline_metrics = "BaselineMetrics",

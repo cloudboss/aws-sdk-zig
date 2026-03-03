@@ -73,40 +73,40 @@ pub const CaseDetails = struct {
     /// alphanumeric
     /// string formatted as shown in this example:
     /// case-*12345678910-2013-c4c1d2bf33c5cf47*
-    case_id: ?[]const u8,
+    case_id: ?[]const u8 = null,
 
     /// The category of problem for the support case.
-    category_code: ?[]const u8,
+    category_code: ?[]const u8 = null,
 
     /// The email addresses that receive copies of communication about the case.
-    cc_email_addresses: ?[]const []const u8,
+    cc_email_addresses: ?[]const []const u8 = null,
 
     /// The ID displayed for the case in the Amazon Web Services Support Center.
     /// This is a numeric
     /// string.
-    display_id: ?[]const u8,
+    display_id: ?[]const u8 = null,
 
     /// The language in which Amazon Web Services Support handles the case. Amazon
     /// Web Services Support
     /// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and
     /// Korean (“ko”). You must specify the ISO 639-1
     /// code for the `language` parameter if you want support in that language.
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// The five most recent communications between you and Amazon Web Services
     /// Support Center, including the
     /// IDs of any attachments to the communications. Also includes a `nextToken`
     /// that you can use to retrieve earlier communications.
-    recent_communications: ?RecentCaseCommunications,
+    recent_communications: ?RecentCaseCommunications = null,
 
     /// The code for the Amazon Web Services service. You can get a list of codes
     /// and the corresponding
     /// service names by calling DescribeServices.
-    service_code: ?[]const u8,
+    service_code: ?[]const u8 = null,
 
     /// The code for the severity level returned by the call to
     /// DescribeSeverityLevels.
-    severity_code: ?[]const u8,
+    severity_code: ?[]const u8 = null,
 
     /// The status of the case.
     ///
@@ -127,17 +127,17 @@ pub const CaseDetails = struct {
     /// * `unassigned`
     ///
     /// * `work-in-progress`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The subject line for the case in the Amazon Web Services Support Center.
-    subject: ?[]const u8,
+    subject: ?[]const u8 = null,
 
     /// The email address of the account that submitted the case.
-    submitted_by: ?[]const u8,
+    submitted_by: ?[]const u8 = null,
 
     /// The time that the case was created in the Amazon Web Services Support
     /// Center.
-    time_created: ?[]const u8,
+    time_created: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .case_id = "caseId",

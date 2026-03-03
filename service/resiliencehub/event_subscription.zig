@@ -23,7 +23,7 @@ pub const EventSubscription = struct {
     /// Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the
     /// *Amazon Web Services General Reference* guide.
-    sns_topic_arn: ?[]const u8,
+    sns_topic_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .event_type = "eventType",

@@ -5,7 +5,7 @@ const ConfigurableActionParameter = @import("configurable_action_parameter.zig")
 pub const ConfigurableEnvironmentAction = struct {
     /// The authentication type of a configurable action of a Amazon DataZone
     /// environment.
-    auth: ?ConfigurableActionTypeAuthorization,
+    auth: ?ConfigurableActionTypeAuthorization = null,
 
     /// The parameters of a configurable action in a Amazon DataZone environment.
     parameters: []const ConfigurableActionParameter,

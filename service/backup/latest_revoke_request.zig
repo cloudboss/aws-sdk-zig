@@ -4,19 +4,19 @@ const MpaRevokeSessionStatus = @import("mpa_revoke_session_status.zig").MpaRevok
 /// vault.
 pub const LatestRevokeRequest = struct {
     /// The date and time when the revoke request will expire.
-    expiry_date: ?i64,
+    expiry_date: ?i64 = null,
 
     /// The date and time when the revoke request was initiated.
-    initiation_date: ?i64,
+    initiation_date: ?i64 = null,
 
     /// The ARN of the MPA session associated with this revoke request.
-    mpa_session_arn: ?[]const u8,
+    mpa_session_arn: ?[]const u8 = null,
 
     /// The current status of the revoke request.
-    status: ?MpaRevokeSessionStatus,
+    status: ?MpaRevokeSessionStatus = null,
 
     /// A message describing the current status of the revoke request.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .expiry_date = "ExpiryDate",

@@ -7,10 +7,10 @@ pub const FraudDetectionConfiguration = struct {
     /// risk score calculated by Voice ID is higher than the threshold, the speaker
     /// is
     /// considered a fraudster.
-    risk_threshold: ?i32,
+    risk_threshold: ?i32 = null,
 
     /// The identifier of the watchlist against which fraud detection is performed.
-    watchlist_id: ?[]const u8,
+    watchlist_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .risk_threshold = "RiskThreshold",

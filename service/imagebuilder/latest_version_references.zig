@@ -2,18 +2,18 @@
 pub const LatestVersionReferences = struct {
     /// The latest version Amazon Resource Name (ARN) with the same `major` version
     /// of the Image Builder resource.
-    latest_major_version_arn: ?[]const u8,
+    latest_major_version_arn: ?[]const u8 = null,
 
     /// The latest version Amazon Resource Name (ARN) with the same `minor` version
     /// of the Image Builder resource.
-    latest_minor_version_arn: ?[]const u8,
+    latest_minor_version_arn: ?[]const u8 = null,
 
     /// The latest version Amazon Resource Name (ARN) with the same `patch` version
     /// of the Image Builder resource.
-    latest_patch_version_arn: ?[]const u8,
+    latest_patch_version_arn: ?[]const u8 = null,
 
     /// The latest version Amazon Resource Name (ARN) of the Image Builder resource.
-    latest_version_arn: ?[]const u8,
+    latest_version_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .latest_major_version_arn = "latestMajorVersionArn",

@@ -14,7 +14,7 @@ pub const RtpRouterOutputConfiguration = struct {
 
     /// The state of forward error correction for the RTP protocol in the router
     /// output configuration.
-    forward_error_correction: ?ForwardErrorCorrectionState,
+    forward_error_correction: ?ForwardErrorCorrectionState = null,
 
     pub const json_field_names = .{
         .destination_address = "DestinationAddress",

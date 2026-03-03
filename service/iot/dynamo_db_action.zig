@@ -26,7 +26,7 @@ pub const DynamoDBAction = struct {
     hash_key_field: []const u8,
 
     /// The hash key type. Valid values are "STRING" or "NUMBER"
-    hash_key_type: ?DynamoKeyType,
+    hash_key_type: ?DynamoKeyType = null,
 
     /// The hash key value.
     hash_key_value: []const u8,
@@ -36,19 +36,19 @@ pub const DynamoDBAction = struct {
     /// can be `${operation}`, but the substitution must result in one of the
     /// following:
     /// `INSERT`, `UPDATE`, or `DELETE`.
-    operation: ?[]const u8,
+    operation: ?[]const u8 = null,
 
     /// The action payload. This name can be customized.
-    payload_field: ?[]const u8,
+    payload_field: ?[]const u8 = null,
 
     /// The range key name.
-    range_key_field: ?[]const u8,
+    range_key_field: ?[]const u8 = null,
 
     /// The range key type. Valid values are "STRING" or "NUMBER"
-    range_key_type: ?DynamoKeyType,
+    range_key_type: ?DynamoKeyType = null,
 
     /// The range key value.
-    range_key_value: ?[]const u8,
+    range_key_value: ?[]const u8 = null,
 
     /// The ARN of the IAM role that grants access to the DynamoDB table.
     role_arn: []const u8,

@@ -3,10 +3,10 @@ const ExportTaskStatusCode = @import("export_task_status_code.zig").ExportTaskSt
 /// Represents the status of an export task.
 pub const ExportTaskStatus = struct {
     /// The status code of the export task.
-    code: ?ExportTaskStatusCode,
+    code: ?ExportTaskStatusCode = null,
 
     /// The status message related to the status code.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

@@ -10,10 +10,10 @@ pub const Configuration = struct {
     classification: []const u8,
 
     /// A list of additional configurations to apply within a configuration object.
-    configurations: ?[]const Configuration,
+    configurations: ?[]const Configuration = null,
 
     /// A set of properties specified within a configuration classification.
-    properties: ?[]const aws.map.StringMapEntry,
+    properties: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .classification = "classification",

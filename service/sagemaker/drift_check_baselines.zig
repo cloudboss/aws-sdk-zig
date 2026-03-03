@@ -8,19 +8,19 @@ const DriftCheckModelQuality = @import("drift_check_model_quality.zig").DriftChe
 pub const DriftCheckBaselines = struct {
     /// Represents the drift check bias baselines that can be used when the model
     /// monitor is set using the model package.
-    bias: ?DriftCheckBias,
+    bias: ?DriftCheckBias = null,
 
     /// Represents the drift check explainability baselines that can be used when
     /// the model monitor is set using the model package.
-    explainability: ?DriftCheckExplainability,
+    explainability: ?DriftCheckExplainability = null,
 
     /// Represents the drift check model data quality baselines that can be used
     /// when the model monitor is set using the model package.
-    model_data_quality: ?DriftCheckModelDataQuality,
+    model_data_quality: ?DriftCheckModelDataQuality = null,
 
     /// Represents the drift check model quality baselines that can be used when the
     /// model monitor is set using the model package.
-    model_quality: ?DriftCheckModelQuality,
+    model_quality: ?DriftCheckModelQuality = null,
 
     pub const json_field_names = .{
         .bias = "Bias",

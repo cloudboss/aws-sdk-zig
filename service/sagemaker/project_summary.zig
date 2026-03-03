@@ -9,7 +9,7 @@ pub const ProjectSummary = struct {
     project_arn: []const u8,
 
     /// The description of the project.
-    project_description: ?[]const u8,
+    project_description: ?[]const u8 = null,
 
     /// The ID of the project.
     project_id: []const u8,

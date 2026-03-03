@@ -7,22 +7,22 @@ const VisualTitleLabelOptions = @import("visual_title_label_options.zig").Visual
 /// A radar chart visual.
 pub const RadarChartVisual = struct {
     /// The list of custom actions that are configured for a visual.
-    actions: ?[]const VisualCustomAction,
+    actions: ?[]const VisualCustomAction = null,
 
     /// The configuration settings of the visual.
-    chart_configuration: ?RadarChartConfiguration,
+    chart_configuration: ?RadarChartConfiguration = null,
 
     /// The column hierarchy that is used during drill-downs and drill-ups.
-    column_hierarchies: ?[]const ColumnHierarchy,
+    column_hierarchies: ?[]const ColumnHierarchy = null,
 
     /// The subtitle that is displayed on the visual.
-    subtitle: ?VisualSubtitleLabelOptions,
+    subtitle: ?VisualSubtitleLabelOptions = null,
 
     /// The title that is displayed on the visual.
-    title: ?VisualTitleLabelOptions,
+    title: ?VisualTitleLabelOptions = null,
 
     /// The alt text for the visual.
-    visual_content_alt_text: ?[]const u8,
+    visual_content_alt_text: ?[]const u8 = null,
 
     /// The unique identifier of a visual. This identifier must be unique within the
     /// context of a dashboard, template, or analysis. Two dashboards, analyses, or

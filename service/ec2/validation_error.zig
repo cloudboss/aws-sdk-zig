@@ -8,11 +8,11 @@ pub const ValidationError = struct {
     /// not valid.
     /// For more information about error codes, see [Error
     /// codes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The error message that describes why the parameter or parameter combination
     /// is not
     /// valid. For more information about error messages, see [Error
     /// codes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

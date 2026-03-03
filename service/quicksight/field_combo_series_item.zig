@@ -6,7 +6,7 @@ pub const FieldComboSeriesItem = struct {
     field_id: []const u8,
 
     /// Options that determine the presentation of series associated to the field.
-    settings: ?ComboChartSeriesSettings,
+    settings: ?ComboChartSeriesSettings = null,
 
     pub const json_field_names = .{
         .field_id = "FieldId",

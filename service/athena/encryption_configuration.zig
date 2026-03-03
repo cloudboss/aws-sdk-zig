@@ -18,7 +18,7 @@ pub const EncryptionConfiguration = struct {
 
     /// For `SSE_KMS` and `CSE_KMS`, this is the KMS key ARN or
     /// ID.
-    kms_key: ?[]const u8,
+    kms_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .encryption_option = "EncryptionOption",

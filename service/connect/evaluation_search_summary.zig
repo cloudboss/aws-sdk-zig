@@ -13,10 +13,10 @@ pub const EvaluationSearchSummary = struct {
     evaluation_arn: []const u8,
 
     /// The unique identifier for the evaluation form.
-    evaluation_form_id: ?[]const u8,
+    evaluation_form_id: ?[]const u8 = null,
 
     /// Title of the evaluation form.
-    evaluation_form_title: ?[]const u8,
+    evaluation_form_title: ?[]const u8 = null,
 
     /// A version of the evaluation form.
     evaluation_form_version: i32,
@@ -25,7 +25,7 @@ pub const EvaluationSearchSummary = struct {
     evaluation_id: []const u8,
 
     /// Type of the evaluation.
-    evaluation_type: ?EvaluationType,
+    evaluation_type: ?EvaluationType = null,
 
     /// The date and time when the evaluation was modified last time, in UTC time.
     last_modified_time: i64,
@@ -38,7 +38,7 @@ pub const EvaluationSearchSummary = struct {
 
     /// The tags used to organize, track, or control access for this resource. For
     /// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .created_time = "CreatedTime",

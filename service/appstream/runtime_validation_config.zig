@@ -5,7 +5,7 @@ pub const RuntimeValidationConfig = struct {
     /// The instance type to use for runtime validation testing. It's recommended to
     /// use the same instance type you plan to use for your fleet to ensure accurate
     /// validation results.
-    intended_instance_type: ?[]const u8,
+    intended_instance_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .intended_instance_type = "IntendedInstanceType",

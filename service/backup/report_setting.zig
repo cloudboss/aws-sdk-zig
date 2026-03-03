@@ -3,21 +3,21 @@ pub const ReportSetting = struct {
     /// These are the accounts to be included in the report.
     ///
     /// Use string value of `ROOT` to include all organizational units.
-    accounts: ?[]const []const u8,
+    accounts: ?[]const []const u8 = null,
 
     /// The Amazon Resource Names (ARNs) of the frameworks a report covers.
-    framework_arns: ?[]const []const u8,
+    framework_arns: ?[]const []const u8 = null,
 
     /// The number of frameworks a report covers.
     number_of_frameworks: i32 = 0,
 
     /// These are the Organizational Units to be included in the report.
-    organization_units: ?[]const []const u8,
+    organization_units: ?[]const []const u8 = null,
 
     /// These are the Regions to be included in the report.
     ///
     /// Use the wildcard as the string value to include all Regions.
-    regions: ?[]const []const u8,
+    regions: ?[]const []const u8 = null,
 
     /// Identifies the report template for the report. Reports are built using a
     /// report

@@ -6,12 +6,12 @@ pub const DvbSubSourceSettings = struct {
     /// caption selector, use this field to
     /// provide the language to consider when translating the image-based source to
     /// text.
-    ocr_language: ?DvbSubOcrLanguage,
+    ocr_language: ?DvbSubOcrLanguage = null,
 
     /// When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source
     /// content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed
     /// through, regardless of selectors.
-    pid: ?i32,
+    pid: ?i32 = null,
 
     pub const json_field_names = .{
         .ocr_language = "OcrLanguage",

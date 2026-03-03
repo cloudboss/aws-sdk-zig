@@ -14,13 +14,13 @@ pub const ResultSetOptions = struct {
     /// loss.
     /// We recommend converting to String, especially when working with currency
     /// values.
-    decimal_return_type: ?DecimalReturnType,
+    decimal_return_type: ?DecimalReturnType = null,
 
     /// A value that indicates how a field of `LONG` type is represented.
     /// Allowed values are `LONG` and `STRING`. The default
     /// is `LONG`. Specify `STRING` if the length or
     /// precision of numeric values might cause truncation or rounding errors.
-    long_return_type: ?LongReturnType,
+    long_return_type: ?LongReturnType = null,
 
     pub const json_field_names = .{
         .decimal_return_type = "decimalReturnType",

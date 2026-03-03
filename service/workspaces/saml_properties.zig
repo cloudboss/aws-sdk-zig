@@ -14,7 +14,7 @@ pub const SamlProperties = struct {
     /// To use SAML 2.0 authentication with WorkSpaces, the IdP must support
     /// IdP-initiated deep linking for the relay state
     /// URL. Consult your IdP documentation for more information.
-    relay_state_parameter_name: ?[]const u8,
+    relay_state_parameter_name: ?[]const u8 = null,
 
     /// Indicates the status of SAML 2.0 authentication. These statuses include the
     /// following.
@@ -33,14 +33,14 @@ pub const SamlProperties = struct {
     /// access URL on supported client applications, but will not prevent clients
     /// that do not support SAML 2.0 authentication
     /// from connecting as if SAML 2.0 authentication was disabled.
-    status: ?SamlStatusEnum,
+    status: ?SamlStatusEnum = null,
 
     /// The SAML 2.0 identity provider (IdP) user access URL is the URL a user would
     /// navigate to in their web browser in
     /// order to federate from the IdP and directly access the application, without
     /// any SAML 2.0 service provider (SP)
     /// bindings.
-    user_access_url: ?[]const u8,
+    user_access_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .relay_state_parameter_name = "RelayStateParameterName",

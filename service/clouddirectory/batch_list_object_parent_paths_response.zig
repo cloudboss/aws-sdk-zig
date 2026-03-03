@@ -3,11 +3,11 @@ const PathToObjectIdentifiers = @import("path_to_object_identifiers.zig").PathTo
 /// Represents the output of a ListObjectParentPaths response operation.
 pub const BatchListObjectParentPathsResponse = struct {
     /// The pagination token.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// Returns the path to the `ObjectIdentifiers` that are associated with the
     /// directory.
-    path_to_object_identifiers_list: ?[]const PathToObjectIdentifiers,
+    path_to_object_identifiers_list: ?[]const PathToObjectIdentifiers = null,
 
     pub const json_field_names = .{
         .next_token = "NextToken",

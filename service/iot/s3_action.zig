@@ -9,7 +9,7 @@ pub const S3Action = struct {
     /// the object
     /// key. For more information, see [S3 canned
     /// ACLs](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl).
-    canned_acl: ?CannedAccessControlList,
+    canned_acl: ?CannedAccessControlList = null,
 
     /// The object key. For more information, see [Actions, resources, and condition
     /// keys for Amazon

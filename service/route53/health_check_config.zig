@@ -9,12 +9,12 @@ pub const HealthCheckConfig = struct {
     /// Route 53
     /// health checkers to use to determine whether the specified health check is
     /// healthy.
-    alarm_identifier: ?AlarmIdentifier,
+    alarm_identifier: ?AlarmIdentifier = null,
 
     /// (CALCULATED Health Checks Only) A complex type that contains one
     /// `ChildHealthCheck` element for each health check that you want to
     /// associate with a `CALCULATED` health check.
-    child_health_checks: ?[]const []const u8,
+    child_health_checks: ?[]const []const u8 = null,
 
     /// Stops Route 53 from performing health checks. When you disable a health
     /// check, here's
@@ -43,7 +43,7 @@ pub const HealthCheckConfig = struct {
     /// For more
     /// information, see [Amazon Route 53
     /// Pricing](http://aws.amazon.com/route53/pricing/).
-    disabled: ?bool,
+    disabled: ?bool = null,
 
     /// Specify whether you want Amazon Route 53 to send the value of
     /// `FullyQualifiedDomainName` to the endpoint in the
@@ -71,7 +71,7 @@ pub const HealthCheckConfig = struct {
     /// checker will
     /// omit `FullyQualifiedDomainName` from the `client_hello`
     /// message.
-    enable_sni: ?bool,
+    enable_sni: ?bool = null,
 
     /// The number of consecutive health checks that an endpoint must pass or fail
     /// for Amazon
@@ -88,7 +88,7 @@ pub const HealthCheckConfig = struct {
     /// Otherwise, if you don't specify a value for `FailureThreshold`, the default
     /// value is
     /// three health checks.
-    failure_threshold: ?i32,
+    failure_threshold: ?i32 = null,
 
     /// Amazon Route 53 behavior depends on whether you specify a value for
     /// `IPAddress`.
@@ -167,7 +167,7 @@ pub const HealthCheckConfig = struct {
     /// `Host` header, as it does when you specify a value for
     /// `IPAddress`. If the value of `Type` is `TCP`, Route
     /// 53 doesn't pass a `Host` header.
-    fully_qualified_domain_name: ?[]const u8,
+    fully_qualified_domain_name: ?[]const u8 = null,
 
     /// The number of child health checks that are associated with a `CALCULATED`
     /// health check that Amazon Route 53 must consider healthy for the `CALCULATED`
@@ -184,7 +184,7 @@ pub const HealthCheckConfig = struct {
     ///
     /// * If you specify `0`, Route 53 always considers this health check to
     /// be healthy.
-    health_threshold: ?i32,
+    health_threshold: ?i32 = null,
 
     /// When CloudWatch has insufficient data about the metric to determine the
     /// alarm state,
@@ -202,14 +202,14 @@ pub const HealthCheckConfig = struct {
     /// state. For new health checks that have no last known status, the default
     /// status
     /// for the health check is healthy.
-    insufficient_data_health_status: ?InsufficientDataHealthStatus,
+    insufficient_data_health_status: ?InsufficientDataHealthStatus = null,
 
     /// Specify whether you want Amazon Route 53 to invert the status of a health
     /// check, for
     /// example, to consider a health check unhealthy when it otherwise would be
     /// considered
     /// healthy.
-    inverted: ?bool,
+    inverted: ?bool = null,
 
     /// The IPv4 or IPv6 IP address of the endpoint that you want Amazon Route 53 to
     /// perform
@@ -258,7 +258,7 @@ pub const HealthCheckConfig = struct {
     ///
     /// When the value of `Type` is `CALCULATED` or
     /// `CLOUDWATCH_METRIC`, omit `IPAddress`.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// Specify whether you want Amazon Route 53 to measure the latency between
     /// health
@@ -272,7 +272,7 @@ pub const HealthCheckConfig = struct {
     ///
     /// You can't change the value of `MeasureLatency` after you create a
     /// health check.
-    measure_latency: ?bool,
+    measure_latency: ?bool = null,
 
     /// The port on the endpoint that you want Amazon Route 53 to perform health
     /// checks
@@ -281,7 +281,7 @@ pub const HealthCheckConfig = struct {
     /// Don't specify a value for `Port` when you specify a value for
     /// `Type` of `CLOUDWATCH_METRIC` or
     /// `CALCULATED`.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// A complex type that contains one `Region` element for each region from
     /// which you want Amazon Route 53 health checkers to check the specified
@@ -299,7 +299,7 @@ pub const HealthCheckConfig = struct {
     /// some health checkers are always checking the endpoint (for example, if you
     /// replace three
     /// regions with four different regions).
-    regions: ?[]const HealthCheckRegion,
+    regions: ?[]const HealthCheckRegion = null,
 
     /// The number of seconds between the time that Amazon Route 53 gets a response
     /// from your
@@ -315,7 +315,7 @@ pub const HealthCheckConfig = struct {
     ///
     /// If you don't specify a value for `RequestInterval`, the default value is
     /// `30` seconds.
-    request_interval: ?i32,
+    request_interval: ?i32 = null,
 
     /// The path, if any, that you want Amazon Route 53 to request when performing
     /// health
@@ -325,7 +325,7 @@ pub const HealthCheckConfig = struct {
     /// /docs/route53-health-check.html. You can also include query string
     /// parameters, for
     /// example, `/welcome.html?language=jp&login=y`.
-    resource_path: ?[]const u8,
+    resource_path: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the Route 53 Application Recovery
     /// Controller
@@ -334,7 +334,7 @@ pub const HealthCheckConfig = struct {
     /// For more information about Route 53 Application Recovery Controller, see
     /// [Route 53 Application Recovery Controller Developer
     /// Guide.](https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route-53-recovery.html).
-    routing_control_arn: ?[]const u8,
+    routing_control_arn: ?[]const u8 = null,
 
     /// If the value of Type is `HTTP_STR_MATCH` or `HTTPS_STR_MATCH`,
     /// the string that you want Amazon Route 53 to search for in the response body
@@ -345,7 +345,7 @@ pub const HealthCheckConfig = struct {
     ///
     /// Route 53 considers case when searching for `SearchString` in the response
     /// body.
-    search_string: ?[]const u8,
+    search_string: ?[]const u8 = null,
 
     /// The type of health check that you want to create, which indicates how Amazon
     /// Route 53

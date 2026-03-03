@@ -24,7 +24,7 @@ pub const GatewayInstance = struct {
     instance_id: []const u8,
 
     /// Messages with information about the gateway.
-    instance_messages: ?[]const MessageDetail,
+    instance_messages: ?[]const MessageDetail = null,
 
     /// The status of the instance.
     instance_state: InstanceState,

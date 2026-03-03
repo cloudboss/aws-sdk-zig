@@ -6,16 +6,16 @@ const VideoFeatures = @import("video_features.zig").VideoFeatures;
 /// The configuration settings of the features available to a meeting.
 pub const MeetingFeaturesConfiguration = struct {
     /// The configuration settings for the attendee features available to a meeting.
-    attendee: ?AttendeeFeatures,
+    attendee: ?AttendeeFeatures = null,
 
     /// The configuration settings for the audio features available to a meeting.
-    audio: ?AudioFeatures,
+    audio: ?AudioFeatures = null,
 
     /// The configuration settings for the content features available to a meeting.
-    content: ?ContentFeatures,
+    content: ?ContentFeatures = null,
 
     /// The configuration settings for the video features available to a meeting.
-    video: ?VideoFeatures,
+    video: ?VideoFeatures = null,
 
     pub const json_field_names = .{
         .attendee = "Attendee",

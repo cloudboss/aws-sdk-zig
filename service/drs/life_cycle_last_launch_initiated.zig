@@ -4,13 +4,13 @@ const LastLaunchType = @import("last_launch_type.zig").LastLaunchType;
 /// of a Source Server.
 pub const LifeCycleLastLaunchInitiated = struct {
     /// The date and time the last Source Server launch was initiated.
-    api_call_date_time: ?[]const u8,
+    api_call_date_time: ?[]const u8 = null,
 
     /// The ID of the Job that was used to last launch the Source Server.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The Job type that was used to last launch the Source Server.
-    @"type": ?LastLaunchType,
+    @"type": ?LastLaunchType = null,
 
     pub const json_field_names = .{
         .api_call_date_time = "apiCallDateTime",

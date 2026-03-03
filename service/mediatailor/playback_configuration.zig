@@ -19,42 +19,42 @@ pub const PlaybackConfiguration = struct {
     /// The setting that indicates what conditioning MediaTailor will perform on ads
     /// that the ad decision server (ADS) returns, and what priority MediaTailor
     /// uses when inserting ads.
-    ad_conditioning_configuration: ?AdConditioningConfiguration,
+    ad_conditioning_configuration: ?AdConditioningConfiguration = null,
 
-    ad_decision_server_configuration: ?AdDecisionServerConfiguration,
+    ad_decision_server_configuration: ?AdDecisionServerConfiguration = null,
 
     /// The URL for the ad decision server (ADS). This includes the specification of
     /// static parameters and placeholders for dynamic parameters. AWS Elemental
     /// MediaTailor substitutes player-specific and session-specific parameters as
     /// needed when calling the ADS. Alternately, for testing you can provide a
     /// static VAST URL. The maximum length is 25,000 characters.
-    ad_decision_server_url: ?[]const u8,
+    ad_decision_server_url: ?[]const u8 = null,
 
     /// The configuration for avail suppression, also known as ad suppression. For
     /// more information about ad suppression, see [Ad
     /// Suppression](https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
-    avail_suppression: ?AvailSuppression,
+    avail_suppression: ?AvailSuppression = null,
 
     /// The configuration for bumpers. Bumpers are short audio or video clips that
     /// play at the start or before the end of an ad break. To learn more about
     /// bumpers, see
     /// [Bumpers](https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html).
-    bumper: ?Bumper,
+    bumper: ?Bumper = null,
 
     /// The configuration for using a content delivery network (CDN), like Amazon
     /// CloudFront, for content and ad segment management.
-    cdn_configuration: ?CdnConfiguration,
+    cdn_configuration: ?CdnConfiguration = null,
 
     /// The player parameters and aliases used as dynamic variables during session
     /// initialization. For more information, see [Domain
     /// Variables](https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domains.html).
-    configuration_aliases: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry),
+    configuration_aliases: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry) = null,
 
     /// The configuration for a DASH source.
-    dash_configuration: ?DashConfiguration,
+    dash_configuration: ?DashConfiguration = null,
 
     /// The configuration for HLS content.
-    hls_configuration: ?HlsConfiguration,
+    hls_configuration: ?HlsConfiguration = null,
 
     /// The setting that controls whether players can use stitched or guided ad
     /// insertion. The default, `STITCHED_ONLY`, forces all player sessions to use
@@ -65,18 +65,18 @@ pub const PlaybackConfiguration = struct {
     insertion_mode: InsertionMode = "STITCHED_ONLY",
 
     /// The configuration for pre-roll ad insertion.
-    live_pre_roll_configuration: ?LivePreRollConfiguration,
+    live_pre_roll_configuration: ?LivePreRollConfiguration = null,
 
     /// Defines where AWS Elemental MediaTailor sends logs for the playback
     /// configuration.
-    log_configuration: ?LogConfiguration,
+    log_configuration: ?LogConfiguration = null,
 
     /// The configuration for manifest processing rules. Manifest processing rules
     /// enable customization of the personalized manifests created by MediaTailor.
-    manifest_processing_rules: ?ManifestProcessingRules,
+    manifest_processing_rules: ?ManifestProcessingRules = null,
 
     /// The identifier for the playback configuration.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Defines the maximum duration of underfilled ad time (in seconds) allowed in
     /// an ad break. If the duration of underfilled ad time exceeds the
@@ -87,18 +87,18 @@ pub const PlaybackConfiguration = struct {
     /// behavior, including ad replacement and insertion, see [Ad Behavior in AWS
     /// Elemental
     /// MediaTailor](https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
-    personalization_threshold_seconds: ?i32,
+    personalization_threshold_seconds: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) for the playback configuration.
-    playback_configuration_arn: ?[]const u8,
+    playback_configuration_arn: ?[]const u8 = null,
 
     /// The URL that the player accesses to get a manifest from AWS Elemental
     /// MediaTailor.
-    playback_endpoint_prefix: ?[]const u8,
+    playback_endpoint_prefix: ?[]const u8 = null,
 
     /// The URL that the player uses to initialize a session that uses client-side
     /// reporting.
-    session_initialization_endpoint_prefix: ?[]const u8,
+    session_initialization_endpoint_prefix: ?[]const u8 = null,
 
     /// The URL for a video asset to transcode and use to fill in time that's not
     /// used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in
@@ -106,24 +106,24 @@ pub const PlaybackConfiguration = struct {
     /// configurations. For VPAID, the slate is required because MediaTailor
     /// provides it in the slots designated for dynamic ad content. The slate must
     /// be a high-quality asset that contains both audio and video.
-    slate_ad_url: ?[]const u8,
+    slate_ad_url: ?[]const u8 = null,
 
     /// The tags to assign to the playback configuration. Tags are key-value pairs
     /// that you can associate with Amazon resources to help with organization,
     /// access control, and cost tracking. For more information, see [Tagging AWS
     /// Elemental MediaTailor
     /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The name that is used to associate this playback configuration with a custom
     /// transcode profile. This overrides the dynamic transcoding defaults of
     /// MediaTailor. Use this only if you have already set up custom profiles with
     /// the help of AWS Support.
-    transcode_profile_name: ?[]const u8,
+    transcode_profile_name: ?[]const u8 = null,
 
     /// The URL prefix for the parent manifest for the stream, minus the asset ID.
     /// The maximum length is 512 characters.
-    video_content_source_url: ?[]const u8,
+    video_content_source_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ad_conditioning_configuration = "AdConditioningConfiguration",

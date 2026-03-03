@@ -19,7 +19,7 @@
 pub const NotebookInstanceLifecycleHook = struct {
     /// A base64-encoded string that contains a shell script for a notebook instance
     /// lifecycle configuration.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content = "Content",

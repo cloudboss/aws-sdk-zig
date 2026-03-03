@@ -5,16 +5,16 @@ const VpcDestinationProperties = @import("vpc_destination_properties.zig").VpcDe
 /// A topic rule destination.
 pub const TopicRuleDestination = struct {
     /// The topic rule destination URL.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time when the topic rule destination was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Properties of the HTTP URL.
-    http_url_properties: ?HttpUrlDestinationProperties,
+    http_url_properties: ?HttpUrlDestinationProperties = null,
 
     /// The date and time when the topic rule destination was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The status of the topic rule destination. Valid values are:
     ///
@@ -49,15 +49,15 @@ pub const TopicRuleDestination = struct {
     /// `UpdateTopicRuleDestination`. Calling
     /// `UpdateTopicRuleDestination` causes a new confirmation challenge to
     /// be sent to your confirmation endpoint.
-    status: ?TopicRuleDestinationStatus,
+    status: ?TopicRuleDestinationStatus = null,
 
     /// Additional details or reason why the topic rule destination is in the
     /// current
     /// status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// Properties of the virtual private cloud (VPC) connection.
-    vpc_properties: ?VpcDestinationProperties,
+    vpc_properties: ?VpcDestinationProperties = null,
 
     pub const json_field_names = .{
         .arn = "arn",

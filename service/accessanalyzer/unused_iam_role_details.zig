@@ -5,7 +5,7 @@
 /// pricing](https://aws.amazon.com/iam/access-analyzer/pricing).
 pub const UnusedIamRoleDetails = struct {
     /// The time at which the role was last accessed.
-    last_accessed: ?i64,
+    last_accessed: ?i64 = null,
 
     pub const json_field_names = .{
         .last_accessed = "lastAccessed",

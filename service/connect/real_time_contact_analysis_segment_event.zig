@@ -4,7 +4,7 @@ const RealTimeContactAnalysisTimeData = @import("real_time_contact_analysis_time
 /// Segment type describing a contact event.
 pub const RealTimeContactAnalysisSegmentEvent = struct {
     /// The display name of the participant. Can be redacted.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// Type of the event. For example,
     /// `application/vnd.amazonaws.connect.event.participant.left`.
@@ -14,11 +14,11 @@ pub const RealTimeContactAnalysisSegmentEvent = struct {
     id: []const u8,
 
     /// The identifier of the participant.
-    participant_id: ?[]const u8,
+    participant_id: ?[]const u8 = null,
 
     /// The role of the participant. For example, is it a customer, agent, or
     /// system.
-    participant_role: ?ParticipantRole,
+    participant_role: ?ParticipantRole = null,
 
     /// Field describing the time of the event. It can have different
     /// representations of time.

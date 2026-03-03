@@ -6,31 +6,31 @@ const PhoneNumberOrderStatus = @import("phone_number_order_status.zig").PhoneNum
 /// The details of an Amazon Chime SDK phone number order.
 pub const PhoneNumberOrder = struct {
     /// The phone number order creation time stamp, in ISO 8601 format.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The Firm Order Commitment (FOC) date for phone number porting orders. This
     /// field is null
     /// if a phone number order is not a porting order.
-    foc_date: ?i64,
+    foc_date: ?i64 = null,
 
     /// The ordered phone number details, such as the phone number in E.164 format
     /// and the phone number status.
-    ordered_phone_numbers: ?[]const OrderedPhoneNumber,
+    ordered_phone_numbers: ?[]const OrderedPhoneNumber = null,
 
     /// The type of phone number being ordered, local or toll-free.
-    order_type: ?PhoneNumberOrderType,
+    order_type: ?PhoneNumberOrderType = null,
 
     /// The ID of the phone order.
-    phone_number_order_id: ?[]const u8,
+    phone_number_order_id: ?[]const u8 = null,
 
     /// The phone number order product type.
-    product_type: ?PhoneNumberProductType,
+    product_type: ?PhoneNumberProductType = null,
 
     /// The status of the phone number order.
-    status: ?PhoneNumberOrderStatus,
+    status: ?PhoneNumberOrderStatus = null,
 
     /// The updated phone number order time stamp, in ISO 8601 format.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

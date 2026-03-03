@@ -6,13 +6,13 @@ pub const ModelImportJobSummary = struct {
     creation_time: i64,
 
     /// The time when import job ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The Amazon resource Name (ARN) of the imported model.
-    imported_model_arn: ?[]const u8,
+    imported_model_arn: ?[]const u8 = null,
 
     /// The name of the imported model.
-    imported_model_name: ?[]const u8,
+    imported_model_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the import job.
     job_arn: []const u8,
@@ -21,7 +21,7 @@ pub const ModelImportJobSummary = struct {
     job_name: []const u8,
 
     /// The time when the import job was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The status of the imported job.
     status: ModelImportJobStatus,

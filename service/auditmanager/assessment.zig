@@ -10,19 +10,19 @@ const AssessmentMetadata = @import("assessment_metadata.zig").AssessmentMetadata
 /// framework.
 pub const Assessment = struct {
     /// The Amazon Resource Name (ARN) of the assessment.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Amazon Web Services account that's associated with the assessment.
-    aws_account: ?AWSAccount,
+    aws_account: ?AWSAccount = null,
 
     /// The framework that the assessment was created from.
-    framework: ?AssessmentFramework,
+    framework: ?AssessmentFramework = null,
 
     /// The metadata for the assessment.
-    metadata: ?AssessmentMetadata,
+    metadata: ?AssessmentMetadata = null,
 
     /// The tags that are associated with the assessment.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

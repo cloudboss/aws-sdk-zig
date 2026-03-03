@@ -14,13 +14,13 @@ pub const Record = struct {
     /// beginning of the name. If the resulting full path exceeds 250 characters,
     /// Macie also truncates the path, starting with the first element in the path,
     /// until the path contains 250 or fewer characters.
-    json_path: ?[]const u8,
+    json_path: ?[]const u8 = null,
 
     /// For an Avro object container or Parquet file, the record index, starting
     /// from 0, for the record that contains the sensitive data. For a JSON Lines
     /// file, the line index, starting from 0, for the line that contains the
     /// sensitive data. This value is always 0 for JSON files.
-    record_index: ?i64,
+    record_index: ?i64 = null,
 
     pub const json_field_names = .{
         .json_path = "jsonPath",

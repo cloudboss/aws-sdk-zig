@@ -14,14 +14,14 @@ pub const AnalysisRuleAggregation = struct {
     /// The `additionalAnalyses` parameter is currently supported for the list
     /// analysis rule (`AnalysisRuleList`) and the custom analysis rule
     /// (`AnalysisRuleCustom`).
-    additional_analyses: ?AdditionalAnalyses,
+    additional_analyses: ?AdditionalAnalyses = null,
 
     /// The columns that query runners are allowed to use in aggregation queries.
     aggregate_columns: []const AggregateColumn,
 
     /// Which logical operators (if any) are to be used in an INNER JOIN match
     /// condition. Default is `AND`.
-    allowed_join_operators: ?[]const JoinOperator,
+    allowed_join_operators: ?[]const JoinOperator = null,
 
     /// The columns that query runners are allowed to select, group by, or filter
     /// by.
@@ -33,7 +33,7 @@ pub const AnalysisRuleAggregation = struct {
 
     /// Control that requires member who runs query to do a join with their
     /// configured table and/or other configured table in query.
-    join_required: ?JoinRequiredOption,
+    join_required: ?JoinRequiredOption = null,
 
     /// Columns that must meet a specific threshold value (after an aggregation
     /// function is applied to it) for each output row to be returned.

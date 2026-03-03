@@ -5,8 +5,8 @@ const DeleteQueuedReservedInstancesErrorCode = @import("delete_queued_reserved_i
 /// deleted.
 pub const DeleteQueuedReservedInstancesError = struct {
     /// The error code.
-    code: ?DeleteQueuedReservedInstancesErrorCode,
+    code: ?DeleteQueuedReservedInstancesErrorCode = null,
 
     /// The error message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

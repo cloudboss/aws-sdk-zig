@@ -10,7 +10,7 @@ pub const BackendStoragePermissions = struct {
 
     /// Lists all unauthenticated user read, write, and delete permissions for your
     /// S3 bucket.
-    un_authenticated: ?[]const UnAuthenticatedElement,
+    un_authenticated: ?[]const UnAuthenticatedElement = null,
 
     pub const json_field_names = .{
         .authenticated = "Authenticated",

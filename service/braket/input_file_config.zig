@@ -7,7 +7,7 @@ pub const InputFileConfig = struct {
     channel_name: []const u8,
 
     /// The MIME type of the data.
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// The location of the input data.
     data_source: DataSource,

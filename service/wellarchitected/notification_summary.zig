@@ -4,10 +4,10 @@ const NotificationType = @import("notification_type.zig").NotificationType;
 /// A notification summary return object.
 pub const NotificationSummary = struct {
     /// Summary of lens upgrade.
-    lens_upgrade_summary: ?LensUpgradeSummary,
+    lens_upgrade_summary: ?LensUpgradeSummary = null,
 
     /// The type of notification.
-    @"type": ?NotificationType,
+    @"type": ?NotificationType = null,
 
     pub const json_field_names = .{
         .lens_upgrade_summary = "LensUpgradeSummary",

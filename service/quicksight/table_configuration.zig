@@ -12,31 +12,31 @@ const TotalOptions = @import("total_options.zig").TotalOptions;
 pub const TableConfiguration = struct {
     /// The options that define customizations available to dashboard readers for a
     /// specific visual
-    dashboard_customization_visual_options: ?DashboardCustomizationVisualOptions,
+    dashboard_customization_visual_options: ?DashboardCustomizationVisualOptions = null,
 
     /// The field options for a table visual.
-    field_options: ?TableFieldOptions,
+    field_options: ?TableFieldOptions = null,
 
     /// The field wells of the visual.
-    field_wells: ?TableFieldWells,
+    field_wells: ?TableFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The paginated report options for a table visual.
-    paginated_report_options: ?TablePaginatedReportOptions,
+    paginated_report_options: ?TablePaginatedReportOptions = null,
 
     /// The sort configuration for a `TableVisual`.
-    sort_configuration: ?TableSortConfiguration,
+    sort_configuration: ?TableSortConfiguration = null,
 
     /// A collection of inline visualizations to display within a chart.
-    table_inline_visualizations: ?[]const TableInlineVisualization,
+    table_inline_visualizations: ?[]const TableInlineVisualization = null,
 
     /// The table options for a table visual.
-    table_options: ?TableOptions,
+    table_options: ?TableOptions = null,
 
     /// The total options for a table visual.
-    total_options: ?TotalOptions,
+    total_options: ?TotalOptions = null,
 
     pub const json_field_names = .{
         .dashboard_customization_visual_options = "DashboardCustomizationVisualOptions",

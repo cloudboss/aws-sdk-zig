@@ -9,7 +9,7 @@ pub const PredictiveScalingPolicyConfiguration = struct {
     /// approaches or
     /// exceeds the maximum capacity. Defaults to
     /// `HonorMaxCapacity` if not specified.
-    max_capacity_breach_behavior: ?PredictiveScalingMaxCapacityBreachBehavior,
+    max_capacity_breach_behavior: ?PredictiveScalingMaxCapacityBreachBehavior = null,
 
     /// The size of the capacity buffer to use when the forecast capacity is close
     /// to or
@@ -23,7 +23,7 @@ pub const PredictiveScalingPolicyConfiguration = struct {
     ///
     /// Required if the `MaxCapacityBreachBehavior` property is set to
     /// `IncreaseMaxCapacity`, and cannot be used otherwise.
-    max_capacity_buffer: ?i32,
+    max_capacity_buffer: ?i32 = null,
 
     /// This structure includes the metrics and target utilization to use for
     /// predictive scaling.
@@ -36,14 +36,14 @@ pub const PredictiveScalingPolicyConfiguration = struct {
     metric_specifications: []const PredictiveScalingMetricSpecification,
 
     /// The predictive scaling mode. Defaults to `ForecastOnly` if not specified.
-    mode: ?PredictiveScalingMode,
+    mode: ?PredictiveScalingMode = null,
 
     /// The amount of time, in seconds, that the start time can be advanced.
     ///
     /// The value must be less than the forecast interval duration of 3600 seconds
     /// (60
     /// minutes). Defaults to 300 seconds if not specified.
-    scheduling_buffer_time: ?i32,
+    scheduling_buffer_time: ?i32 = null,
 
     pub const json_field_names = .{
         .max_capacity_breach_behavior = "MaxCapacityBreachBehavior",

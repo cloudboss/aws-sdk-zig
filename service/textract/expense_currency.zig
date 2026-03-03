@@ -25,10 +25,10 @@ pub const ExpenseCurrency = struct {
     /// * SEK
     ///
     /// * HKD
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// Percentage confideence in the detected currency.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     pub const json_field_names = .{
         .code = "Code",

@@ -25,10 +25,10 @@ pub const PersistentChat = struct {
     ///
     /// The actual contactId used for rehydration is provided in the response of
     /// this API.
-    rehydration_type: ?RehydrationType,
+    rehydration_type: ?RehydrationType = null,
 
     /// The contactId from which a persistent chat session must be started.
-    source_contact_id: ?[]const u8,
+    source_contact_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .rehydration_type = "RehydrationType",

@@ -11,20 +11,20 @@ const SecretsManagerSecretResourceData = @import("secrets_manager_secret_resourc
 /// ''SecretsManagerSecretResourceData''.
 pub const ResourceDataContainer = struct {
     /// Attributes that define the local device resource.
-    local_device_resource_data: ?LocalDeviceResourceData,
+    local_device_resource_data: ?LocalDeviceResourceData = null,
 
     /// Attributes that define the local volume resource.
-    local_volume_resource_data: ?LocalVolumeResourceData,
+    local_volume_resource_data: ?LocalVolumeResourceData = null,
 
     /// Attributes that define an Amazon S3 machine learning resource.
-    s3_machine_learning_model_resource_data: ?S3MachineLearningModelResourceData,
+    s3_machine_learning_model_resource_data: ?S3MachineLearningModelResourceData = null,
 
     /// Attributes that define an Amazon SageMaker machine learning resource.
-    sage_maker_machine_learning_model_resource_data: ?SageMakerMachineLearningModelResourceData,
+    sage_maker_machine_learning_model_resource_data: ?SageMakerMachineLearningModelResourceData = null,
 
     /// Attributes that define a secret resource, which references a secret from AWS
     /// Secrets Manager.
-    secrets_manager_secret_resource_data: ?SecretsManagerSecretResourceData,
+    secrets_manager_secret_resource_data: ?SecretsManagerSecretResourceData = null,
 
     pub const json_field_names = .{
         .local_device_resource_data = "LocalDeviceResourceData",

@@ -8,17 +8,17 @@ const AnonymousUserQSearchBarEmbeddingConfiguration = @import("anonymous_user_q_
 pub const AnonymousUserEmbeddingExperienceConfiguration = struct {
     /// The type of embedding experience. In this case, Amazon Quick Sight
     /// dashboards.
-    dashboard: ?AnonymousUserDashboardEmbeddingConfiguration,
+    dashboard: ?AnonymousUserDashboardEmbeddingConfiguration = null,
 
     /// The type of embedding experience. In this case, Amazon Quick Sight visuals.
-    dashboard_visual: ?AnonymousUserDashboardVisualEmbeddingConfiguration,
+    dashboard_visual: ?AnonymousUserDashboardVisualEmbeddingConfiguration = null,
 
     /// The Generative Q&A experience that you want to use for anonymous user
     /// embedding.
-    generative_qn_a: ?AnonymousUserGenerativeQnAEmbeddingConfiguration,
+    generative_qn_a: ?AnonymousUserGenerativeQnAEmbeddingConfiguration = null,
 
     /// The Q search bar that you want to use for anonymous user embedding.
-    q_search_bar: ?AnonymousUserQSearchBarEmbeddingConfiguration,
+    q_search_bar: ?AnonymousUserQSearchBarEmbeddingConfiguration = null,
 
     pub const json_field_names = .{
         .dashboard = "Dashboard",

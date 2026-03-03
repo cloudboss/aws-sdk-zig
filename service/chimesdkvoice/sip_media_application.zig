@@ -4,27 +4,27 @@ const SipMediaApplicationEndpoint = @import("sip_media_application_endpoint.zig"
 /// An AWS account can have multiple SIP media applications.
 pub const SipMediaApplication = struct {
     /// The AWS Region in which the SIP media application is created.
-    aws_region: ?[]const u8,
+    aws_region: ?[]const u8 = null,
 
     /// The SIP media application creation timestamp, in ISO 8601 format.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// List of endpoints for a SIP media application. Currently, only one endpoint
     /// per
     /// SIP media application is permitted.
-    endpoints: ?[]const SipMediaApplicationEndpoint,
+    endpoints: ?[]const SipMediaApplicationEndpoint = null,
 
     /// The SIP media application's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN of the SIP media application.
-    sip_media_application_arn: ?[]const u8,
+    sip_media_application_arn: ?[]const u8 = null,
 
     /// A SIP media application's ID.
-    sip_media_application_id: ?[]const u8,
+    sip_media_application_id: ?[]const u8 = null,
 
     /// The time at which the SIP media application was updated.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .aws_region = "AwsRegion",

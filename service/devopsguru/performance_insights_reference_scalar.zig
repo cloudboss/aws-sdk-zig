@@ -3,7 +3,7 @@
 /// demonstrate anomalous behavior.
 pub const PerformanceInsightsReferenceScalar = struct {
     /// The reference value.
-    value: ?f64,
+    value: ?f64 = null,
 
     pub const json_field_names = .{
         .value = "Value",

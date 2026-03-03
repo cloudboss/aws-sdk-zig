@@ -5,13 +5,13 @@ const ProfileType = @import("profile_type.zig").ProfileType;
 /// Contains information about the unusual anomalies.
 pub const AnomalyObject = struct {
     /// The recorded value.
-    observations: ?Observations,
+    observations: ?Observations = null,
 
     /// The frequency of the anomaly.
-    profile_subtype: ?ProfileSubtype,
+    profile_subtype: ?ProfileSubtype = null,
 
     /// The type of behavior of the profile.
-    profile_type: ?ProfileType,
+    profile_type: ?ProfileType = null,
 
     pub const json_field_names = .{
         .observations = "Observations",

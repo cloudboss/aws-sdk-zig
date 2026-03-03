@@ -17,56 +17,56 @@ const BatchUpdateObjectAttributesResponse = @import("batch_update_object_attribu
 /// Represents the output of a `BatchWrite` response operation.
 pub const BatchWriteOperationResponse = struct {
     /// The result of an add facet to object batch operation.
-    add_facet_to_object: ?BatchAddFacetToObjectResponse,
+    add_facet_to_object: ?BatchAddFacetToObjectResponse = null,
 
     /// Attaches an object to a Directory.
-    attach_object: ?BatchAttachObjectResponse,
+    attach_object: ?BatchAttachObjectResponse = null,
 
     /// Attaches a policy object to a regular object. An object can have a limited
     /// number of attached
     /// policies.
-    attach_policy: ?BatchAttachPolicyResponse,
+    attach_policy: ?BatchAttachPolicyResponse = null,
 
     /// Attaches the specified object to the specified index.
-    attach_to_index: ?BatchAttachToIndexResponse,
+    attach_to_index: ?BatchAttachToIndexResponse = null,
 
     /// Attaches a typed link to a specified source and target object. For more
     /// information, see [Typed
     /// Links](https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
-    attach_typed_link: ?BatchAttachTypedLinkResponse,
+    attach_typed_link: ?BatchAttachTypedLinkResponse = null,
 
     /// Creates an index object. See [Indexing and
     /// search](https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm) for more information.
-    create_index: ?BatchCreateIndexResponse,
+    create_index: ?BatchCreateIndexResponse = null,
 
     /// Creates an object in a Directory.
-    create_object: ?BatchCreateObjectResponse,
+    create_object: ?BatchCreateObjectResponse = null,
 
     /// Deletes an object in a Directory.
-    delete_object: ?BatchDeleteObjectResponse,
+    delete_object: ?BatchDeleteObjectResponse = null,
 
     /// Detaches the specified object from the specified index.
-    detach_from_index: ?BatchDetachFromIndexResponse,
+    detach_from_index: ?BatchDetachFromIndexResponse = null,
 
     /// Detaches an object from a Directory.
-    detach_object: ?BatchDetachObjectResponse,
+    detach_object: ?BatchDetachObjectResponse = null,
 
     /// Detaches a policy from a Directory.
-    detach_policy: ?BatchDetachPolicyResponse,
+    detach_policy: ?BatchDetachPolicyResponse = null,
 
     /// Detaches a typed link from a specified source and target object. For more
     /// information, see [Typed
     /// Links](https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
-    detach_typed_link: ?BatchDetachTypedLinkResponse,
+    detach_typed_link: ?BatchDetachTypedLinkResponse = null,
 
     /// The result of a batch remove facet from object operation.
-    remove_facet_from_object: ?BatchRemoveFacetFromObjectResponse,
+    remove_facet_from_object: ?BatchRemoveFacetFromObjectResponse = null,
 
     /// Represents the output of a `BatchWrite` response operation.
-    update_link_attributes: ?BatchUpdateLinkAttributesResponse,
+    update_link_attributes: ?BatchUpdateLinkAttributesResponse = null,
 
     /// Updates a given object’s attributes.
-    update_object_attributes: ?BatchUpdateObjectAttributesResponse,
+    update_object_attributes: ?BatchUpdateObjectAttributesResponse = null,
 
     pub const json_field_names = .{
         .add_facet_to_object = "AddFacetToObject",

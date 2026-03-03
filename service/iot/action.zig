@@ -25,23 +25,23 @@ const TimestreamAction = @import("timestream_action.zig").TimestreamAction;
 /// Describes the actions associated with a rule.
 pub const Action = struct {
     /// Change the state of a CloudWatch alarm.
-    cloudwatch_alarm: ?CloudwatchAlarmAction,
+    cloudwatch_alarm: ?CloudwatchAlarmAction = null,
 
     /// Send data to CloudWatch Logs.
-    cloudwatch_logs: ?CloudwatchLogsAction,
+    cloudwatch_logs: ?CloudwatchLogsAction = null,
 
     /// Capture a CloudWatch metric.
-    cloudwatch_metric: ?CloudwatchMetricAction,
+    cloudwatch_metric: ?CloudwatchMetricAction = null,
 
     /// Write to a DynamoDB table.
-    dynamo_db: ?DynamoDBAction,
+    dynamo_db: ?DynamoDBAction = null,
 
     /// Write to a DynamoDB table. This is a new version of the DynamoDB action. It
     /// allows
     /// you to write each attribute in an MQTT message payload into a separate
     /// DynamoDB
     /// column.
-    dynamo_d_bv_2: ?DynamoDBv2Action,
+    dynamo_d_bv_2: ?DynamoDBv2Action = null,
 
     /// Write data to an Amazon OpenSearch Service domain.
     ///
@@ -49,65 +49,65 @@ pub const Action = struct {
     /// To create a new rule action or to update an existing rule action, use the
     /// `OpenSearch` rule action instead. For more information, see
     /// [OpenSearchAction](https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html).
-    elasticsearch: ?ElasticsearchAction,
+    elasticsearch: ?ElasticsearchAction = null,
 
     /// Write to an Amazon Kinesis Firehose stream.
-    firehose: ?FirehoseAction,
+    firehose: ?FirehoseAction = null,
 
     /// Send data to an HTTPS endpoint.
-    http: ?HttpAction,
+    http: ?HttpAction = null,
 
     /// Sends message data to an IoT Analytics channel.
-    iot_analytics: ?IotAnalyticsAction,
+    iot_analytics: ?IotAnalyticsAction = null,
 
     /// Sends an input to an IoT Events detector.
-    iot_events: ?IotEventsAction,
+    iot_events: ?IotEventsAction = null,
 
     /// Sends data from the MQTT message that triggered the rule to IoT SiteWise
     /// asset
     /// properties.
-    iot_site_wise: ?IotSiteWiseAction,
+    iot_site_wise: ?IotSiteWiseAction = null,
 
     /// Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK)
     /// or self-managed Apache Kafka cluster.
-    kafka: ?KafkaAction,
+    kafka: ?KafkaAction = null,
 
     /// Write data to an Amazon Kinesis stream.
-    kinesis: ?KinesisAction,
+    kinesis: ?KinesisAction = null,
 
     /// Invoke a Lambda function.
-    lambda: ?LambdaAction,
+    lambda: ?LambdaAction = null,
 
     /// The Amazon Location Service rule action sends device location updates from
     /// an MQTT message to an Amazon Location tracker resource.
-    location: ?LocationAction,
+    location: ?LocationAction = null,
 
     /// Write data to an Amazon OpenSearch Service domain.
-    open_search: ?OpenSearchAction,
+    open_search: ?OpenSearchAction = null,
 
     /// Publish to another MQTT topic.
-    republish: ?RepublishAction,
+    republish: ?RepublishAction = null,
 
     /// Write to an Amazon S3 bucket.
-    s_3: ?S3Action,
+    s_3: ?S3Action = null,
 
     /// Send a message to a Salesforce IoT Cloud Input Stream.
-    salesforce: ?SalesforceAction,
+    salesforce: ?SalesforceAction = null,
 
     /// Publish to an Amazon SNS topic.
-    sns: ?SnsAction,
+    sns: ?SnsAction = null,
 
     /// Publish to an Amazon SQS queue.
-    sqs: ?SqsAction,
+    sqs: ?SqsAction = null,
 
     /// Starts execution of a Step Functions state machine.
-    step_functions: ?StepFunctionsAction,
+    step_functions: ?StepFunctionsAction = null,
 
     /// The Timestream rule action writes attributes (measures) from an MQTT message
     /// into an Amazon Timestream table. For more information, see the
     /// [Timestream](https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html)
     /// topic rule action documentation.
-    timestream: ?TimestreamAction,
+    timestream: ?TimestreamAction = null,
 
     pub const json_field_names = .{
         .cloudwatch_alarm = "cloudwatchAlarm",

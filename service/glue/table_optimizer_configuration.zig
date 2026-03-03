@@ -9,27 +9,27 @@ pub const TableOptimizerConfiguration = struct {
     /// The configuration for a compaction optimizer. This configuration defines how
     /// data files in your table will be compacted to
     /// improve query performance and reduce storage costs.
-    compaction_configuration: ?CompactionConfiguration,
+    compaction_configuration: ?CompactionConfiguration = null,
 
     /// Whether table optimization is enabled.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The configuration for an orphan file deletion optimizer.
-    orphan_file_deletion_configuration: ?OrphanFileDeletionConfiguration,
+    orphan_file_deletion_configuration: ?OrphanFileDeletionConfiguration = null,
 
     /// The configuration for a snapshot retention optimizer.
-    retention_configuration: ?RetentionConfiguration,
+    retention_configuration: ?RetentionConfiguration = null,
 
     /// A role passed by the caller which gives the service permission to update the
     /// resources associated with the optimizer on the caller's behalf.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// A `TableOptimizerVpcConfiguration` object representing the VPC configuration
     /// for a table optimizer.
     ///
     /// This configuration is necessary to perform optimization on tables that are
     /// in a customer VPC.
-    vpc_configuration: ?TableOptimizerVpcConfiguration,
+    vpc_configuration: ?TableOptimizerVpcConfiguration = null,
 
     pub const json_field_names = .{
         .compaction_configuration = "compactionConfiguration",

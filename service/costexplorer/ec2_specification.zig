@@ -6,7 +6,7 @@ const OfferingClass = @import("offering_class.zig").OfferingClass;
 pub const EC2Specification = struct {
     /// Indicates whether you want a recommendation for standard or convertible
     /// reservations.
-    offering_class: ?OfferingClass,
+    offering_class: ?OfferingClass = null,
 
     pub const json_field_names = .{
         .offering_class = "OfferingClass",

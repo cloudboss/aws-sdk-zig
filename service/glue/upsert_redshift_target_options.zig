@@ -2,13 +2,13 @@
 /// target .
 pub const UpsertRedshiftTargetOptions = struct {
     /// The name of the connection to use to write to Redshift.
-    connection_name: ?[]const u8,
+    connection_name: ?[]const u8 = null,
 
     /// The physical location of the Redshift table.
-    table_location: ?[]const u8,
+    table_location: ?[]const u8 = null,
 
     /// The keys used to determine whether to perform an update or insert.
-    upsert_keys: ?[]const []const u8,
+    upsert_keys: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .connection_name = "ConnectionName",

@@ -5,7 +5,7 @@
 pub const TrafficShapingRetrievalWindow = struct {
     /// The amount of time, in seconds, that MediaTailor spreads prefetch requests
     /// to the ADS.
-    retrieval_window_duration_seconds: ?i32,
+    retrieval_window_duration_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .retrieval_window_duration_seconds = "RetrievalWindowDurationSeconds",

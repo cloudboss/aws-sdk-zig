@@ -11,33 +11,33 @@ pub const AmazonOpenSearchServerlessDestinationUpdate = struct {
     /// The buffering options. If no value is specified,
     /// AmazonopensearchBufferingHints object
     /// default values are used.
-    buffering_hints: ?AmazonOpenSearchServerlessBufferingHints,
+    buffering_hints: ?AmazonOpenSearchServerlessBufferingHints = null,
 
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The endpoint to use when communicating with the collection in the Serverless
     /// offering
     /// for Amazon OpenSearch Service.
-    collection_endpoint: ?[]const u8,
+    collection_endpoint: ?[]const u8 = null,
 
     /// The Serverless offering for Amazon OpenSearch Service index name.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The retry behavior in case Firehose is unable to deliver documents to the
     /// Serverless offering for Amazon OpenSearch Service. The default value is 300
     /// (5
     /// minutes).
-    retry_options: ?AmazonOpenSearchServerlessRetryOptions,
+    retry_options: ?AmazonOpenSearchServerlessRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose
     /// for calling the Serverless offering for Amazon OpenSearch Service
     /// Configuration API and for
     /// indexing documents.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
-    s3_update: ?S3DestinationUpdate,
+    s3_update: ?S3DestinationUpdate = null,
 
     pub const json_field_names = .{
         .buffering_hints = "BufferingHints",

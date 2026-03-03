@@ -104,7 +104,7 @@ pub const Instance = struct {
     ///
     /// This value is required if you specified settings for an `SRV` record or a
     /// Route 53 health check when you created the service.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The ID of the Amazon Web Services account that registered the instance. If
     /// this isn't your account ID,
@@ -115,7 +115,7 @@ pub const Instance = struct {
     /// see [Cross-account
     /// Cloud Map namespace
     /// sharing](https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html) in the *Cloud Map Developer Guide*.
-    created_by_account: ?[]const u8,
+    created_by_account: ?[]const u8 = null,
 
     /// A unique string that identifies the request and that allows failed
     /// `RegisterInstance` requests to be retried without the risk of executing the
@@ -127,7 +127,7 @@ pub const Instance = struct {
     /// namespace and service. `CreatorRequestId` can be any unique string (for
     /// example, a
     /// date/time stamp).
-    creator_request_id: ?[]const u8,
+    creator_request_id: ?[]const u8 = null,
 
     /// An identifier that you want to associate with the instance. Note the
     /// following:

@@ -23,18 +23,18 @@ pub const ClusterRestrictedInstanceGroupSpecification = struct {
 
     /// Specifies the additional storage configurations for the instances in the
     /// SageMaker HyperPod cluster restricted instance group.
-    instance_storage_configs: ?[]const ClusterInstanceStorageConfig,
+    instance_storage_configs: ?[]const ClusterInstanceStorageConfig = null,
 
     /// Specifies the instance type of the restricted instance group.
     instance_type: ClusterInstanceType,
 
     /// A flag indicating whether deep health checks should be performed when the
     /// cluster restricted instance group is created or updated.
-    on_start_deep_health_checks: ?[]const DeepHealthCheckType,
+    on_start_deep_health_checks: ?[]const DeepHealthCheckType = null,
 
-    override_vpc_config: ?VpcConfig,
+    override_vpc_config: ?VpcConfig = null,
 
-    scheduled_update_config: ?ScheduledUpdateConfig,
+    scheduled_update_config: ?ScheduledUpdateConfig = null,
 
     /// The number you specified to `TreadsPerCore` in `CreateCluster` for enabling
     /// or disabling multithreading. For instance types that support multithreading,
@@ -42,13 +42,13 @@ pub const ClusterRestrictedInstanceGroupSpecification = struct {
     /// multithreading. For more information, see the reference table of [CPU cores
     /// and threads per CPU core per instance
     /// type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html) in the *Amazon Elastic Compute Cloud User Guide*.
-    threads_per_core: ?i32,
+    threads_per_core: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the training plan to filter clusters by.
     /// For more information about reserving GPU capacity for your SageMaker
     /// HyperPod clusters using Amazon SageMaker Training Plan, see `
     /// [CreateTrainingPlan](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html) `.
-    training_plan_arn: ?[]const u8,
+    training_plan_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .environment_config = "EnvironmentConfig",

@@ -5,10 +5,10 @@ const RetrieveAndGenerateOutput = @import("retrieve_and_generate_output.zig").Re
 pub const RetrieveAndGenerateResponse = struct {
     /// A list of segments of the generated response that are based on sources in
     /// the knowledge base, alongside information about the sources.
-    citations: ?[]const Citation,
+    citations: ?[]const Citation = null,
 
     /// Specifies if there is a guardrail intervention in the response.
-    guardrail_action: ?GuadrailAction,
+    guardrail_action: ?GuadrailAction = null,
 
     /// Contains the response generated from querying the knowledge base.
     output: RetrieveAndGenerateOutput,

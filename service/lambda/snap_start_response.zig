@@ -7,11 +7,11 @@ const SnapStartOptimizationStatus = @import("snap_start_optimization_status.zig"
 pub const SnapStartResponse = struct {
     /// When set to `PublishedVersions`, Lambda creates a snapshot of the execution
     /// environment when you publish a function version.
-    apply_on: ?SnapStartApplyOn,
+    apply_on: ?SnapStartApplyOn = null,
 
     /// When you provide a [qualified Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using), this response element indicates whether SnapStart is activated for the specified function version.
-    optimization_status: ?SnapStartOptimizationStatus,
+    optimization_status: ?SnapStartOptimizationStatus = null,
 
     pub const json_field_names = .{
         .apply_on = "ApplyOn",

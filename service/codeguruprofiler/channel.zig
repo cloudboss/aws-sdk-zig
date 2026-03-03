@@ -11,7 +11,7 @@ pub const Channel = struct {
     /// Unique identifier for each `Channel` in the notification configuration of a
     /// Profiling Group. A random UUID for channelId is used when adding a channel
     /// to the notification configuration if not specified in the request.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Unique arn of the resource to be used for notifications. We support a valid
     /// SNS topic arn as a channel uri.

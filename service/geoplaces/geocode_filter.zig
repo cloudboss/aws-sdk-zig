@@ -5,10 +5,10 @@ const GeocodeFilterPlaceType = @import("geocode_filter_place_type.zig").GeocodeF
 pub const GeocodeFilter = struct {
     /// A list of countries that all results must be in. Countries are represented
     /// by either their alpha-2 or alpha-3 character codes.
-    include_countries: ?[]const []const u8,
+    include_countries: ?[]const []const u8 = null,
 
     /// The included place types.
-    include_place_types: ?[]const GeocodeFilterPlaceType,
+    include_place_types: ?[]const GeocodeFilterPlaceType = null,
 
     pub const json_field_names = .{
         .include_countries = "IncludeCountries",

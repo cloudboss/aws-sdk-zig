@@ -3,7 +3,7 @@ const ContinuousDeploymentPolicySummary = @import("continuous_deployment_policy_
 /// Contains a list of continuous deployment policies.
 pub const ContinuousDeploymentPolicyList = struct {
     /// A list of continuous deployment policy items.
-    items: ?[]const ContinuousDeploymentPolicySummary,
+    items: ?[]const ContinuousDeploymentPolicySummary = null,
 
     /// The maximum number of continuous deployment policies that were specified in
     /// your request.
@@ -11,7 +11,7 @@ pub const ContinuousDeploymentPolicyList = struct {
 
     /// Indicates the next page of continuous deployment policies. To get the next
     /// page of the list, use this value in the `Marker` field of your request.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The total number of continuous deployment policies in your Amazon Web
     /// Services account, regardless of the `MaxItems` value.

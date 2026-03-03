@@ -4,8 +4,8 @@ const LaunchTemplateSpotMarketOptionsRequest = @import("launch_template_spot_mar
 /// The market (purchasing) option for the instances.
 pub const LaunchTemplateInstanceMarketOptionsRequest = struct {
     /// The market type.
-    market_type: ?MarketType,
+    market_type: ?MarketType = null,
 
     /// The options for Spot Instances.
-    spot_options: ?LaunchTemplateSpotMarketOptionsRequest,
+    spot_options: ?LaunchTemplateSpotMarketOptionsRequest = null,
 };

@@ -12,7 +12,7 @@ pub const RecoveryGroupOutput = struct {
     recovery_group_name: []const u8,
 
     /// The tags associated with the recovery group.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .cells = "Cells",

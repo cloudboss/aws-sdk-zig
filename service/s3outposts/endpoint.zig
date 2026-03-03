@@ -12,40 +12,40 @@ const EndpointStatus = @import("endpoint_status.zig").EndpointStatus;
 /// points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/WorkingWithS3Outposts.html) in the *Amazon Simple Storage Service User Guide*.
 pub const Endpoint = struct {
     /// The type of connectivity used to access the Amazon S3 on Outposts endpoint.
-    access_type: ?EndpointAccessType,
+    access_type: ?EndpointAccessType = null,
 
     /// The VPC CIDR committed by this endpoint.
-    cidr_block: ?[]const u8,
+    cidr_block: ?[]const u8 = null,
 
     /// The time the endpoint was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The ID of the customer-owned IPv4 address pool used for the endpoint.
-    customer_owned_ipv_4_pool: ?[]const u8,
+    customer_owned_ipv_4_pool: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the endpoint.
-    endpoint_arn: ?[]const u8,
+    endpoint_arn: ?[]const u8 = null,
 
     /// The failure reason, if any, for a create or delete endpoint operation.
-    failed_reason: ?FailedReason,
+    failed_reason: ?FailedReason = null,
 
     /// The network interface of the endpoint.
-    network_interfaces: ?[]const NetworkInterface,
+    network_interfaces: ?[]const NetworkInterface = null,
 
     /// The ID of the Outposts.
-    outposts_id: ?[]const u8,
+    outposts_id: ?[]const u8 = null,
 
     /// The ID of the security group used for the endpoint.
-    security_group_id: ?[]const u8,
+    security_group_id: ?[]const u8 = null,
 
     /// The status of the endpoint.
-    status: ?EndpointStatus,
+    status: ?EndpointStatus = null,
 
     /// The ID of the subnet used for the endpoint.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The ID of the VPC used for the endpoint.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_type = "AccessType",

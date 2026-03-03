@@ -4,11 +4,11 @@ const UzbekistanTaxRegistrationNumberType = @import("uzbekistan_tax_registration
 pub const UzbekistanAdditionalInfo = struct {
     /// The tax registration number type. The tax registration number type valid
     /// values are `Business` and `Individual`.
-    tax_registration_number_type: ?UzbekistanTaxRegistrationNumberType,
+    tax_registration_number_type: ?UzbekistanTaxRegistrationNumberType = null,
 
     /// The unique 12-digit number issued to identify VAT-registered identities in
     /// Uzbekistan.
-    vat_registration_number: ?[]const u8,
+    vat_registration_number: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .tax_registration_number_type = "taxRegistrationNumberType",

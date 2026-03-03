@@ -11,31 +11,31 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 /// Represents information about the remote access session.
 pub const RemoteAccessSession = struct {
     /// The ARN for the app to be installed onto your device.
-    app_upload: ?[]const u8,
+    app_upload: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the remote access session.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The billing method of the remote access session. Possible values include
     /// `METERED` or
     /// `UNMETERED`. For more information about metered devices, see [AWS Device
     /// Farm
     /// terminology](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology).
-    billing_method: ?BillingMethod,
+    billing_method: ?BillingMethod = null,
 
     /// The date and time the remote access session was created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The device (phone or tablet) used in the remote access session.
-    device: ?Device,
+    device: ?Device = null,
 
     /// The number of minutes a device is used in a remote access session (including
     /// setup
     /// and teardown minutes).
-    device_minutes: ?DeviceMinutes,
+    device_minutes: ?DeviceMinutes = null,
 
     /// The device proxy configured for the remote access session.
-    device_proxy: ?DeviceProxy,
+    device_proxy: ?DeviceProxy = null,
 
     /// Unique device identifier for the remote device. Only returned if remote
     /// debugging
@@ -44,26 +44,26 @@ pub const RemoteAccessSession = struct {
     /// Remote debugging is [no
     /// longer
     /// supported](https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
-    device_udid: ?[]const u8,
+    device_udid: ?[]const u8 = null,
 
     /// The endpoint for the remote access session. This field is deprecated, and is
     /// replaced by the new `endpoints.interactiveEndpoint` field.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
-    endpoints: ?RemoteAccessEndpoints,
+    endpoints: ?RemoteAccessEndpoints = null,
 
     /// The ARN of the instance.
-    instance_arn: ?[]const u8,
+    instance_arn: ?[]const u8 = null,
 
     /// The interaction mode of the remote access session. Changing the interactive
     /// mode of remote access sessions is no longer available.
-    interaction_mode: ?InteractionMode,
+    interaction_mode: ?InteractionMode = null,
 
     /// A message about the remote access session.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The name of the remote access session.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The result of the remote access session. Can be any of the following:
     ///
@@ -80,7 +80,7 @@ pub const RemoteAccessSession = struct {
     /// * ERRORED.
     ///
     /// * STOPPED.
-    result: ?ExecutionResult,
+    result: ?ExecutionResult = null,
 
     /// When set to `true`, for private devices, Device Farm does not sign your app
     /// again. For public
@@ -89,10 +89,10 @@ pub const RemoteAccessSession = struct {
     /// For more information about how Device Farm re-signs your apps, see [Do you
     /// modify my app?](http://aws.amazon.com/device-farm/faqs/) in the *AWS Device
     /// Farm FAQs*.
-    skip_app_resign: ?bool,
+    skip_app_resign: ?bool = null,
 
     /// The date and time the remote access session was started.
-    started: ?i64,
+    started: ?i64 = null,
 
     /// The status of the remote access session. Can be any of the following:
     ///
@@ -113,13 +113,13 @@ pub const RemoteAccessSession = struct {
     /// * COMPLETED.
     ///
     /// * STOPPING.
-    status: ?ExecutionStatus,
+    status: ?ExecutionStatus = null,
 
     /// The date and time the remote access session was stopped.
-    stopped: ?i64,
+    stopped: ?i64 = null,
 
     /// The VPC security groups and subnets that are attached to a project.
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .app_upload = "appUpload",

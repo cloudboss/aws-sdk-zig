@@ -6,7 +6,7 @@ pub const CollaborationChangeSpecification = struct {
     /// Defines requested updates to properties of the collaboration. Currently,
     /// this only supports modifying which change types are auto-approved for the
     /// collaboration.
-    auto_approved_change_types: ?[]const AutoApprovedChangeType,
+    auto_approved_change_types: ?[]const AutoApprovedChangeType = null,
 
     pub const json_field_names = .{
         .auto_approved_change_types = "autoApprovedChangeTypes",

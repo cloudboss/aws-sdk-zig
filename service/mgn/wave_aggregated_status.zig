@@ -4,17 +4,17 @@ const WaveProgressStatus = @import("wave_progress_status.zig").WaveProgressStatu
 /// Wave aggregated status.
 pub const WaveAggregatedStatus = struct {
     /// Wave aggregated status health status.
-    health_status: ?WaveHealthStatus,
+    health_status: ?WaveHealthStatus = null,
 
     /// Wave aggregated status last update dateTime.
-    last_update_date_time: ?[]const u8,
+    last_update_date_time: ?[]const u8 = null,
 
     /// Wave aggregated status progress status.
-    progress_status: ?WaveProgressStatus,
+    progress_status: ?WaveProgressStatus = null,
 
     /// DateTime marking when the first source server in the wave started
     /// replication.
-    replication_started_date_time: ?[]const u8,
+    replication_started_date_time: ?[]const u8 = null,
 
     /// Wave aggregated status total applications amount.
     total_applications: i64 = 0,

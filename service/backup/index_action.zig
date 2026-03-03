@@ -9,7 +9,7 @@ pub const IndexAction = struct {
     /// * `EBS` for Amazon Elastic Block Store
     ///
     /// * `S3` for Amazon Simple Storage Service (Amazon S3)
-    resource_types: ?[]const []const u8,
+    resource_types: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .resource_types = "ResourceTypes",

@@ -6,37 +6,37 @@ const ExportTaskSummary = @import("export_task_summary.zig").ExportTaskSummary;
 /// Export task.
 pub const ExportTask = struct {
     /// ExportTask arn.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Export task creation datetime.
-    creation_date_time: ?[]const u8,
+    creation_date_time: ?[]const u8 = null,
 
     /// Export task end datetime.
-    end_date_time: ?[]const u8,
+    end_date_time: ?[]const u8 = null,
 
     /// Export task id.
-    export_id: ?[]const u8,
+    export_id: ?[]const u8 = null,
 
     /// Export task progress percentage.
-    progress_percentage: ?f32,
+    progress_percentage: ?f32 = null,
 
     /// Export task s3 bucket.
-    s_3_bucket: ?[]const u8,
+    s_3_bucket: ?[]const u8 = null,
 
     /// Export task s3 bucket owner.
-    s_3_bucket_owner: ?[]const u8,
+    s_3_bucket_owner: ?[]const u8 = null,
 
     /// Export task s3 key.
-    s_3_key: ?[]const u8,
+    s_3_key: ?[]const u8 = null,
 
     /// Export task status.
-    status: ?ExportStatus,
+    status: ?ExportStatus = null,
 
     /// Export task summary.
-    summary: ?ExportTaskSummary,
+    summary: ?ExportTaskSummary = null,
 
     /// Export task tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

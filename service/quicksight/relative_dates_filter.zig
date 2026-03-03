@@ -16,17 +16,17 @@ pub const RelativeDatesFilter = struct {
 
     /// The default configurations for the associated controls. This applies only
     /// for filters that are scoped to multiple sheets.
-    default_filter_control_configuration: ?DefaultFilterControlConfiguration,
+    default_filter_control_configuration: ?DefaultFilterControlConfiguration = null,
 
     /// The configuration for the exclude period of the filter.
-    exclude_period_configuration: ?ExcludePeriodConfiguration,
+    exclude_period_configuration: ?ExcludePeriodConfiguration = null,
 
     /// An identifier that uniquely identifies a filter within a dashboard,
     /// analysis, or template.
     filter_id: []const u8,
 
     /// The minimum granularity (period granularity) of the relative dates filter.
-    minimum_granularity: ?TimeGranularity,
+    minimum_granularity: ?TimeGranularity = null,
 
     /// This option determines how null values should be treated when filtering
     /// data.
@@ -39,7 +39,7 @@ pub const RelativeDatesFilter = struct {
     null_option: FilterNullOption,
 
     /// The parameter whose value should be used for the filter value.
-    parameter_name: ?[]const u8,
+    parameter_name: ?[]const u8 = null,
 
     /// The range date type of the filter. Choose one of the options below:
     ///
@@ -55,7 +55,7 @@ pub const RelativeDatesFilter = struct {
     relative_date_type: RelativeDateType,
 
     /// The date value of the filter.
-    relative_date_value: ?i32,
+    relative_date_value: ?i32 = null,
 
     /// The level of time precision that is used to aggregate `DateTime` values.
     time_granularity: TimeGranularity,

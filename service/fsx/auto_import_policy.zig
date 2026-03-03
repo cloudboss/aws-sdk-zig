@@ -26,7 +26,7 @@ pub const AutoImportPolicy = struct {
     /// repository.
     ///
     /// You can define any combination of event types for your `AutoImportPolicy`.
-    events: ?[]const EventType,
+    events: ?[]const EventType = null,
 
     pub const json_field_names = .{
         .events = "Events",

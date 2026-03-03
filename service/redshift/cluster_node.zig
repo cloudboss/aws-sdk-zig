@@ -1,11 +1,11 @@
 /// The identifier of a node in a cluster.
 pub const ClusterNode = struct {
     /// Whether the node is a leader node or a compute node.
-    node_role: ?[]const u8,
+    node_role: ?[]const u8 = null,
 
     /// The private IP address of a node within a cluster.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// The public IP address of a node within a cluster.
-    public_ip_address: ?[]const u8,
+    public_ip_address: ?[]const u8 = null,
 };

@@ -6,10 +6,10 @@ const SampleUtteranceGenerationSpecification = @import("sample_utterance_generat
 pub const BuildtimeSettings = struct {
     /// An object containing specifications for the descriptive bot building
     /// feature.
-    descriptive_bot_builder: ?DescriptiveBotBuilderSpecification,
+    descriptive_bot_builder: ?DescriptiveBotBuilderSpecification = null,
 
     /// Contains specifications for the sample utterance generation feature.
-    sample_utterance_generation: ?SampleUtteranceGenerationSpecification,
+    sample_utterance_generation: ?SampleUtteranceGenerationSpecification = null,
 
     pub const json_field_names = .{
         .descriptive_bot_builder = "descriptiveBotBuilder",

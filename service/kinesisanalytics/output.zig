@@ -18,14 +18,14 @@ pub const Output = struct {
     destination_schema: DestinationSchema,
 
     /// Identifies an Amazon Kinesis Firehose delivery stream as the destination.
-    kinesis_firehose_output: ?KinesisFirehoseOutput,
+    kinesis_firehose_output: ?KinesisFirehoseOutput = null,
 
     /// Identifies an Amazon Kinesis stream
     /// as the destination.
-    kinesis_streams_output: ?KinesisStreamsOutput,
+    kinesis_streams_output: ?KinesisStreamsOutput = null,
 
     /// Identifies an AWS Lambda function as the destination.
-    lambda_output: ?LambdaOutput,
+    lambda_output: ?LambdaOutput = null,
 
     /// Name of the in-application stream.
     name: []const u8,

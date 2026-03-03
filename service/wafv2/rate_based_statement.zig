@@ -143,7 +143,7 @@ pub const RateBasedStatement = struct {
     aggregate_key_type: RateBasedStatementAggregateKeyType,
 
     /// Specifies the aggregate keys to use in a rate-base rule.
-    custom_keys: ?[]const RateBasedStatementCustomKey,
+    custom_keys: ?[]const RateBasedStatementCustomKey = null,
 
     /// The amount of time, in seconds, that WAF
     /// should include in its request counts, looking back from the current time.
@@ -169,7 +169,7 @@ pub const RateBasedStatement = struct {
     ///
     /// This is required if you specify a forwarded IP in the rule's aggregate key
     /// settings.
-    forwarded_ip_config: ?ForwardedIPConfig,
+    forwarded_ip_config: ?ForwardedIPConfig = null,
 
     /// The limit on requests during the specified evaluation window for a single
     /// aggregation instance for the rate-based rule.

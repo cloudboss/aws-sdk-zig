@@ -4,7 +4,7 @@ const PortalTheme = @import("portal_theme.zig").PortalTheme;
 /// themes, display names, and description.
 pub const PortalContent = struct {
     /// A description of the portal.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The display name for the portal.
     display_name: []const u8,

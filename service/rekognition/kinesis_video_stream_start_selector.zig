@@ -9,12 +9,12 @@
 pub const KinesisVideoStreamStartSelector = struct {
     /// The unique identifier of the fragment. This value monotonically increases
     /// based on the ingestion order.
-    fragment_number: ?[]const u8,
+    fragment_number: ?[]const u8 = null,
 
     /// The timestamp from the producer corresponding to the fragment, in
     /// milliseconds,
     /// expressed in unix time format.
-    producer_timestamp: ?i64,
+    producer_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .fragment_number = "FragmentNumber",

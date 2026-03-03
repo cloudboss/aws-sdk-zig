@@ -7,5 +7,5 @@ pub const ReplicationTimeValue = struct {
     /// Contains an integer that specifies the time period in minutes.
     ///
     /// Valid value: 15
-    minutes: ?i32,
+    minutes: ?i32 = null,
 };

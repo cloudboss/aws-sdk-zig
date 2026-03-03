@@ -9,13 +9,13 @@ pub const AbbreviatedExecution = struct {
     /// Actual recovery time includes the time for the plan to run added to the time
     /// elapsed until the application health alarms that you've specified are
     /// healthy again.
-    actual_recovery_time: ?[]const u8,
+    actual_recovery_time: ?[]const u8 = null,
 
     /// An optional comment about the plan execution.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The timestamp when the plan execution was ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The plan execution action. Valid values are `activate`, to activate an
     /// Amazon Web Services Region, or `deactivate`, to deactivate a Region.
@@ -42,10 +42,10 @@ pub const AbbreviatedExecution = struct {
     start_time: i64,
 
     /// The timestamp when the plan execution was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The version for the plan.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .actual_recovery_time = "actualRecoveryTime",

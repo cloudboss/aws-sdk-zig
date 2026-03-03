@@ -7,10 +7,10 @@ const FieldComboSeriesItem = @import("field_combo_series_item.zig").FieldComboSe
 /// the attributes can be defined.
 pub const ComboSeriesItem = struct {
     /// The data field series item configuration of a `ComboChartVisual`.
-    data_field_combo_series_item: ?DataFieldComboSeriesItem,
+    data_field_combo_series_item: ?DataFieldComboSeriesItem = null,
 
     /// The field series item configuration of a `ComboChartVisual`.
-    field_combo_series_item: ?FieldComboSeriesItem,
+    field_combo_series_item: ?FieldComboSeriesItem = null,
 
     pub const json_field_names = .{
         .data_field_combo_series_item = "DataFieldComboSeriesItem",

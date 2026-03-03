@@ -9,7 +9,7 @@ pub const UserTurnIntentOutput = struct {
     name: []const u8,
 
     /// The slots associated with the intent.
-    slots: ?[]const aws.map.MapEntry(UserTurnSlotOutput),
+    slots: ?[]const aws.map.MapEntry(UserTurnSlotOutput) = null,
 
     pub const json_field_names = .{
         .name = "name",

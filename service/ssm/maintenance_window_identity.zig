@@ -6,10 +6,10 @@ pub const MaintenanceWindowIdentity = struct {
     cutoff: i32 = 0,
 
     /// A description of the maintenance window.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The duration of the maintenance window in hours.
-    duration: ?i32,
+    duration: ?i32 = null,
 
     /// Indicates whether the maintenance window is enabled.
     enabled: bool = false,
@@ -17,37 +17,37 @@ pub const MaintenanceWindowIdentity = struct {
     /// The date and time, in ISO-8601 Extended format, for when the maintenance
     /// window is scheduled
     /// to become inactive.
-    end_date: ?[]const u8,
+    end_date: ?[]const u8 = null,
 
     /// The name of the maintenance window.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The next time the maintenance window will actually run, taking into account
     /// any specified
     /// times for the maintenance window to become active or inactive.
-    next_execution_time: ?[]const u8,
+    next_execution_time: ?[]const u8 = null,
 
     /// The schedule of the maintenance window in the form of a cron or rate
     /// expression.
-    schedule: ?[]const u8,
+    schedule: ?[]const u8 = null,
 
     /// The number of days to wait to run a maintenance window after the scheduled
     /// cron expression
     /// date and time.
-    schedule_offset: ?i32,
+    schedule_offset: ?i32 = null,
 
     /// The time zone that the scheduled maintenance window executions are based on,
     /// in Internet
     /// Assigned Numbers Authority (IANA) format.
-    schedule_timezone: ?[]const u8,
+    schedule_timezone: ?[]const u8 = null,
 
     /// The date and time, in ISO-8601 Extended format, for when the maintenance
     /// window is scheduled
     /// to become active.
-    start_date: ?[]const u8,
+    start_date: ?[]const u8 = null,
 
     /// The ID of the maintenance window.
-    window_id: ?[]const u8,
+    window_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cutoff = "Cutoff",

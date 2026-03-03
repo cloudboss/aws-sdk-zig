@@ -11,14 +11,14 @@ pub const EnabledBaselineSummary = struct {
     baseline_identifier: []const u8,
 
     /// The enabled version of the baseline.
-    baseline_version: ?[]const u8,
+    baseline_version: ?[]const u8 = null,
 
     /// The drift status of the enabled baseline.
-    drift_status_summary: ?EnabledBaselineDriftStatusSummary,
+    drift_status_summary: ?EnabledBaselineDriftStatusSummary = null,
 
     /// An ARN that represents an object returned by `ListEnabledBaseline`, to
     /// describe an enabled baseline.
-    parent_identifier: ?[]const u8,
+    parent_identifier: ?[]const u8 = null,
 
     status_summary: EnablementStatusSummary,
 

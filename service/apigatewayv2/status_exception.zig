@@ -1,10 +1,10 @@
 /// Represents a StatusException.
 pub const StatusException = struct {
     /// The exception.
-    exception: ?[]const u8,
+    exception: ?[]const u8 = null,
 
     /// The error message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .exception = "Exception",

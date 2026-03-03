@@ -32,16 +32,16 @@ pub const RouterOutput = struct {
     id: []const u8,
 
     /// The IP address of the router output.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The maintenance configuration settings applied to this router output.
     maintenance_configuration: MaintenanceConfiguration,
 
     /// The current maintenance schedule details for this router output.
-    maintenance_schedule: ?MaintenanceSchedule,
+    maintenance_schedule: ?MaintenanceSchedule = null,
 
     /// The type of maintenance schedule currently in effect for this router output.
-    maintenance_schedule_type: ?MaintenanceScheduleType,
+    maintenance_schedule_type: ?MaintenanceScheduleType = null,
 
     /// The type of maintenance configuration applied to this router output.
     maintenance_type: MaintenanceType,
@@ -63,7 +63,7 @@ pub const RouterOutput = struct {
 
     /// The Amazon Resource Name (ARN) of the router input associated with the
     /// output.
-    routed_input_arn: ?[]const u8,
+    routed_input_arn: ?[]const u8 = null,
 
     /// The current state of the association between the router output and its
     /// input.

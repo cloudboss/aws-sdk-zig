@@ -14,38 +14,38 @@ pub const ProvisionedRequest = struct {
     broker_node_group_info: BrokerNodeGroupInfo,
 
     /// Includes all client authentication information.
-    client_authentication: ?ClientAuthentication,
+    client_authentication: ?ClientAuthentication = null,
 
     /// Represents the configuration that you want Amazon MSK to use for the brokers
     /// in a cluster.
-    configuration_info: ?ConfigurationInfo,
+    configuration_info: ?ConfigurationInfo = null,
 
     /// Includes all encryption-related information.
-    encryption_info: ?EncryptionInfo,
+    encryption_info: ?EncryptionInfo = null,
 
     /// Specifies the level of monitoring for the MSK cluster. The possible values
     /// are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.
-    enhanced_monitoring: ?EnhancedMonitoring,
+    enhanced_monitoring: ?EnhancedMonitoring = null,
 
     /// The Apache Kafka version that you want for the cluster.
     kafka_version: []const u8,
 
     /// Log delivery information for the cluster.
-    logging_info: ?LoggingInfo,
+    logging_info: ?LoggingInfo = null,
 
     /// The number of broker nodes in the cluster.
     number_of_broker_nodes: i32,
 
     /// The settings for open monitoring.
-    open_monitoring: ?OpenMonitoringInfo,
+    open_monitoring: ?OpenMonitoringInfo = null,
 
     /// Specifies if intelligent rebalancing is turned on for your MSK Provisioned
     /// cluster with Express brokers. For all new Express-based clusters that you
     /// create, intelligent rebalancing is turned on by default.
-    rebalancing: ?Rebalancing,
+    rebalancing: ?Rebalancing = null,
 
     /// This controls storage mode for supported storage tiers.
-    storage_mode: ?StorageMode,
+    storage_mode: ?StorageMode = null,
 
     pub const json_field_names = .{
         .broker_node_group_info = "BrokerNodeGroupInfo",

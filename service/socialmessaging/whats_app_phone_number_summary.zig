@@ -5,7 +5,7 @@ pub const WhatsAppPhoneNumberSummary = struct {
 
     /// The geographic region where the WhatsApp phone number's data is stored and
     /// processed.
-    data_localization_region: ?[]const u8,
+    data_localization_region: ?[]const u8 = null,
 
     /// The phone number that appears in the recipients display.
     display_phone_number: []const u8,

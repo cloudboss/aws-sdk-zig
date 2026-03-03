@@ -12,10 +12,10 @@ pub const TopicNumericEqualityFilter = struct {
     /// `MEDIAN`, `MIN`, `STDEV`, `STDEVP`,
     /// `VAR`,
     /// and `VARP`.
-    aggregation: ?NamedFilterAggType,
+    aggregation: ?NamedFilterAggType = null,
 
     /// The constant used in a numeric equality filter.
-    constant: ?TopicSingularFilterConstant,
+    constant: ?TopicSingularFilterConstant = null,
 
     pub const json_field_names = .{
         .aggregation = "Aggregation",

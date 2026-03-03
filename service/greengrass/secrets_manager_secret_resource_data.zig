@@ -5,12 +5,12 @@
 pub const SecretsManagerSecretResourceData = struct {
     /// Optional. The staging labels whose values you want to make available on the
     /// core, in addition to ''AWSCURRENT''.
-    additional_staging_labels_to_download: ?[]const []const u8,
+    additional_staging_labels_to_download: ?[]const []const u8 = null,
 
     /// The ARN of the Secrets Manager secret to make available on the core. The
     /// value of the secret's latest version (represented by the ''AWSCURRENT''
     /// staging label) is included by default.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .additional_staging_labels_to_download = "AdditionalStagingLabelsToDownload",

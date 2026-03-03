@@ -8,27 +8,27 @@ const ComponentPlatform = @import("component_platform.zig").ComponentPlatform;
 /// component.
 pub const LambdaFunctionRecipeSource = struct {
     /// The component versions on which this Lambda function component depends.
-    component_dependencies: ?[]const aws.map.MapEntry(ComponentDependencyRequirement),
+    component_dependencies: ?[]const aws.map.MapEntry(ComponentDependencyRequirement) = null,
 
     /// The system and runtime parameters for the Lambda function as it runs on the
     /// Greengrass core
     /// device.
-    component_lambda_parameters: ?LambdaExecutionParameters,
+    component_lambda_parameters: ?LambdaExecutionParameters = null,
 
     /// The name of the component.
     ///
     /// Defaults to the name of the Lambda function.
-    component_name: ?[]const u8,
+    component_name: ?[]const u8 = null,
 
     /// The platforms that the component version supports.
-    component_platforms: ?[]const ComponentPlatform,
+    component_platforms: ?[]const ComponentPlatform = null,
 
     /// The version of the component.
     ///
     /// Defaults to the version of the Lambda function as a semantic version. For
     /// example, if your
     /// function version is `3`, the component version becomes `3.0.0`.
-    component_version: ?[]const u8,
+    component_version: ?[]const u8 = null,
 
     /// The
     /// [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the Lambda function. The ARN must include the version of the function to

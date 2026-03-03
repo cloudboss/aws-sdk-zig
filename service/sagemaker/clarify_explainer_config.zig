@@ -6,10 +6,10 @@ pub const ClarifyExplainerConfig = struct {
     /// A JMESPath boolean expression used to filter which records to explain.
     /// Explanations are activated by default. See [ `EnableExplanations`
     /// ](https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable)for additional information.
-    enable_explanations: ?[]const u8,
+    enable_explanations: ?[]const u8 = null,
 
     /// The inference configuration parameter for the model container.
-    inference_config: ?ClarifyInferenceConfig,
+    inference_config: ?ClarifyInferenceConfig = null,
 
     /// The configuration for SHAP analysis.
     shap_config: ClarifyShapConfig,

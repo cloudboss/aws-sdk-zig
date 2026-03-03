@@ -7,30 +7,30 @@ const ComplianceStatus = @import("compliance_status.zig").ComplianceStatus;
 /// Compliance summary information for a specific resource.
 pub const ResourceComplianceSummaryItem = struct {
     /// The compliance type.
-    compliance_type: ?[]const u8,
+    compliance_type: ?[]const u8 = null,
 
     /// A list of items that are compliant for the resource.
-    compliant_summary: ?CompliantSummary,
+    compliant_summary: ?CompliantSummary = null,
 
     /// Information about the execution.
-    execution_summary: ?ComplianceExecutionSummary,
+    execution_summary: ?ComplianceExecutionSummary = null,
 
     /// A list of items that aren't compliant for the resource.
-    non_compliant_summary: ?NonCompliantSummary,
+    non_compliant_summary: ?NonCompliantSummary = null,
 
     /// The highest severity item found for the resource. The resource is compliant
     /// for this
     /// item.
-    overall_severity: ?ComplianceSeverity,
+    overall_severity: ?ComplianceSeverity = null,
 
     /// The resource ID.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The resource type.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The compliance status for the resource.
-    status: ?ComplianceStatus,
+    status: ?ComplianceStatus = null,
 
     pub const json_field_names = .{
         .compliance_type = "ComplianceType",

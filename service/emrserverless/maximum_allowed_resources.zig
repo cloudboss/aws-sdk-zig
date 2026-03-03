@@ -5,7 +5,7 @@ pub const MaximumAllowedResources = struct {
     cpu: []const u8,
 
     /// The maximum allowed disk for an application.
-    disk: ?[]const u8,
+    disk: ?[]const u8 = null,
 
     /// The maximum allowed resources for an application.
     memory: []const u8,

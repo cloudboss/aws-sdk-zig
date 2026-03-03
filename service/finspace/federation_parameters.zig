@@ -5,7 +5,7 @@ pub const FederationParameters = struct {
     /// The redirect or sign-in URL that should be entered into the SAML 2.0
     /// compliant identity provider configuration
     /// (IdP).
-    application_call_back_url: ?[]const u8,
+    application_call_back_url: ?[]const u8 = null,
 
     /// SAML attribute name and value. The name must always be `Email` and the value
     /// should be set to
@@ -14,21 +14,21 @@ pub const FederationParameters = struct {
     /// value `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`.
     /// Please check your SAML 2.0 compliant identity provider (IdP) documentation
     /// for details.
-    attribute_map: ?[]const aws.map.StringMapEntry,
+    attribute_map: ?[]const aws.map.StringMapEntry = null,
 
     /// Name of the identity provider (IdP).
-    federation_provider_name: ?[]const u8,
+    federation_provider_name: ?[]const u8 = null,
 
     /// The Uniform Resource Name (URN). Also referred as Service Provider URN or
     /// Audience URI or Service Provider Entity ID.
-    federation_urn: ?[]const u8,
+    federation_urn: ?[]const u8 = null,
 
     /// SAML 2.0 Metadata document from identity provider (IdP).
-    saml_metadata_document: ?[]const u8,
+    saml_metadata_document: ?[]const u8 = null,
 
     /// Provide the metadata URL from your SAML 2.0 compliant identity provider
     /// (IdP).
-    saml_metadata_url: ?[]const u8,
+    saml_metadata_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_call_back_url = "applicationCallBackURL",

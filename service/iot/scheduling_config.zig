@@ -11,7 +11,7 @@ pub const SchedulingConfig = struct {
     /// selected
     /// `endTime`. If `endTime` is not selected when creating the job,
     /// then `endBehavior` does not apply.
-    end_behavior: ?JobEndBehavior,
+    end_behavior: ?JobEndBehavior = null,
 
     /// The time a job will stop rollout of the job document to all devices in the
     /// target
@@ -26,13 +26,13 @@ pub const SchedulingConfig = struct {
     /// For more information on the syntax for `endTime` when using an API command
     /// or the Command Line Interface, see
     /// [Timestamp](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp).
-    end_time: ?[]const u8,
+    end_time: ?[]const u8 = null,
 
     /// An optional configuration within the `SchedulingConfig` to setup a
     /// recurring maintenance window with a predetermined start time and duration
     /// for the
     /// rollout of a job document to all devices in a target group for a job.
-    maintenance_windows: ?[]const MaintenanceWindow,
+    maintenance_windows: ?[]const MaintenanceWindow = null,
 
     /// The time a job will begin rollout of the job document to all devices in the
     /// target
@@ -46,7 +46,7 @@ pub const SchedulingConfig = struct {
     /// For more information on the syntax for `startTime` when using an API
     /// command or the Command Line Interface, see
     /// [Timestamp](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp).
-    start_time: ?[]const u8,
+    start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .end_behavior = "endBehavior",

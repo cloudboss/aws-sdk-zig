@@ -9,13 +9,13 @@ pub const DashIsoEncryptionSettings = struct {
     /// older devices. Otherwise, keep the default setting CENC v1. If you choose
     /// Unencrypted SEI, for that output, the service will exclude the access unit
     /// delimiter and will leave the SEI NAL units unencrypted.
-    playback_device_compatibility: ?DashIsoPlaybackDeviceCompatibility,
+    playback_device_compatibility: ?DashIsoPlaybackDeviceCompatibility = null,
 
     /// If your output group type is HLS, DASH, or Microsoft Smooth, use these
     /// settings when doing DRM encryption with a SPEKE-compliant key provider. If
     /// your output group type is CMAF, use the SpekeKeyProviderCmaf settings
     /// instead.
-    speke_key_provider: ?SpekeKeyProvider,
+    speke_key_provider: ?SpekeKeyProvider = null,
 
     pub const json_field_names = .{
         .playback_device_compatibility = "PlaybackDeviceCompatibility",

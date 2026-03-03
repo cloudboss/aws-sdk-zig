@@ -5,19 +5,19 @@ const ReplicationMode = @import("replication_mode.zig").ReplicationMode;
 /// Details of the SAP HANA system replication for the instance.
 pub const Resilience = struct {
     /// The cluster status of the component.
-    cluster_status: ?ClusterStatus,
+    cluster_status: ?ClusterStatus = null,
 
     /// Indicates if or not enqueue replication is enabled for the ASCS component.
-    enqueue_replication: ?bool,
+    enqueue_replication: ?bool = null,
 
     /// The operation mode of the component.
-    hsr_operation_mode: ?OperationMode,
+    hsr_operation_mode: ?OperationMode = null,
 
     /// The replication mode of the component.
-    hsr_replication_mode: ?ReplicationMode,
+    hsr_replication_mode: ?ReplicationMode = null,
 
     /// The tier of the component.
-    hsr_tier: ?[]const u8,
+    hsr_tier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cluster_status = "ClusterStatus",

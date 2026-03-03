@@ -5,7 +5,7 @@ pub const Destination = struct {
     bucket_name: []const u8,
 
     /// The prefix that the findings will be written under.
-    key_prefix: ?[]const u8,
+    key_prefix: ?[]const u8 = null,
 
     /// The ARN of the KMS key used to encrypt data when exporting findings.
     kms_key_arn: []const u8,

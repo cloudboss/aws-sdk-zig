@@ -3,11 +3,11 @@ const RouteServerRouteInstallationStatus = @import("route_server_route_installat
 /// Describes the installation status of a route in a route table.
 pub const RouteServerRouteInstallationDetail = struct {
     /// The current installation status of the route in the route table.
-    route_installation_status: ?RouteServerRouteInstallationStatus,
+    route_installation_status: ?RouteServerRouteInstallationStatus = null,
 
     /// The reason for the current installation status of the route.
-    route_installation_status_reason: ?[]const u8,
+    route_installation_status_reason: ?[]const u8 = null,
 
     /// The ID of the route table where the route is being installed.
-    route_table_id: ?[]const u8,
+    route_table_id: ?[]const u8 = null,
 };

@@ -7,7 +7,7 @@ pub const Metrics = struct {
     /// `s3:Replication:OperationMissedThreshold` event.
     ///
     /// This is not supported by Amazon S3 on Outposts buckets.
-    event_threshold: ?ReplicationTimeValue,
+    event_threshold: ?ReplicationTimeValue = null,
 
     /// Specifies whether replication metrics are enabled.
     status: MetricsStatus,

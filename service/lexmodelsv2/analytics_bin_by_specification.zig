@@ -14,7 +14,7 @@ pub const AnalyticsBinBySpecification = struct {
     /// Specifies whether to bin the analytics data in ascending or descending
     /// order. If this field is left blank, the default order is by the key of the
     /// bin in descending order.
-    order: ?AnalyticsSortOrder,
+    order: ?AnalyticsSortOrder = null,
 
     pub const json_field_names = .{
         .interval = "interval",

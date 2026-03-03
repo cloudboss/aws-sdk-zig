@@ -16,13 +16,13 @@ pub const AssetBundleImportSource = struct {
     /// setting of the zip file's bytes. If you are using an SDK for a different
     /// language or
     /// receiving related errors, try to base64 encode your data.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// The Amazon S3 URI for an asset bundle import file that exists in an Amazon
     /// S3 bucket that the caller has read access to. The file must be a zip format
     /// file
     /// and can't exceed 1 GB.
-    s3_uri: ?[]const u8,
+    s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .body = "Body",

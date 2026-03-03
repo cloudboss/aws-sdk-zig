@@ -8,7 +8,7 @@ pub const EvaluationFormNumericQuestionOption = struct {
     automatic_fail: bool = false,
 
     /// A configuration for automatic fail.
-    automatic_fail_configuration: ?AutomaticFailConfiguration,
+    automatic_fail_configuration: ?AutomaticFailConfiguration = null,
 
     /// The maximum answer value of the range option.
     max_value: i32 = 0,

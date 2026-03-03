@@ -5,29 +5,29 @@
 /// guide](https://docs.aws.amazon.com/iot/latest/developerguide/fleet-indexing-troubleshooting.html).
 pub const Statistics = struct {
     /// The average of the aggregated field values.
-    average: ?f64,
+    average: ?f64 = null,
 
     /// The count of things that match the query string criteria and contain a valid
     /// aggregation field value.
     count: i32 = 0,
 
     /// The maximum aggregated field value.
-    maximum: ?f64,
+    maximum: ?f64 = null,
 
     /// The minimum aggregated field value.
-    minimum: ?f64,
+    minimum: ?f64 = null,
 
     /// The standard deviation of the aggregated field values.
-    std_deviation: ?f64,
+    std_deviation: ?f64 = null,
 
     /// The sum of the aggregated field values.
-    sum: ?f64,
+    sum: ?f64 = null,
 
     /// The sum of the squares of the aggregated field values.
-    sum_of_squares: ?f64,
+    sum_of_squares: ?f64 = null,
 
     /// The variance of the aggregated field values.
-    variance: ?f64,
+    variance: ?f64 = null,
 
     pub const json_field_names = .{
         .average = "average",

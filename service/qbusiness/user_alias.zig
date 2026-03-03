@@ -1,10 +1,10 @@
 /// Aliases attached to a user id within an Amazon Q Business application.
 pub const UserAlias = struct {
     /// The identifier of the data source that the user aliases are associated with.
-    data_source_id: ?[]const u8,
+    data_source_id: ?[]const u8 = null,
 
     /// The identifier of the index that the user aliases are associated with.
-    index_id: ?[]const u8,
+    index_id: ?[]const u8 = null,
 
     /// The identifier of the user id associated with the user aliases.
     user_id: []const u8,

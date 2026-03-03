@@ -6,7 +6,7 @@ pub const TrainingDatasetSummary = struct {
     create_time: i64,
 
     /// The description of the training dataset.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the training dataset.
     name: []const u8,

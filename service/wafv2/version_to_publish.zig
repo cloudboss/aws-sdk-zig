@@ -13,12 +13,12 @@ pub const VersionToPublish = struct {
     /// The Amazon Resource Name (ARN) of the vendor's rule group that's used in the
     /// published
     /// managed rule group version.
-    associated_rule_group_arn: ?[]const u8,
+    associated_rule_group_arn: ?[]const u8 = null,
 
     /// The amount of time the vendor expects this version of the managed rule group
     /// to last, in
     /// days.
-    forecasted_lifetime: ?i32,
+    forecasted_lifetime: ?i32 = null,
 
     pub const json_field_names = .{
         .associated_rule_group_arn = "AssociatedRuleGroupArn",

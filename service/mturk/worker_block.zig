@@ -3,10 +3,10 @@
 /// the block.
 pub const WorkerBlock = struct {
     /// A message explaining the reason the Worker was blocked.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The ID of the Worker who accepted the HIT.
-    worker_id: ?[]const u8,
+    worker_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .reason = "Reason",

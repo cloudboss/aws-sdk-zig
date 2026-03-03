@@ -12,7 +12,7 @@ pub const AccessEndpoint = struct {
     endpoint_type: AccessEndpointType,
 
     /// The identifier (ID) of the VPC in which the interface endpoint is used.
-    vpce_id: ?[]const u8,
+    vpce_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .endpoint_type = "EndpointType",

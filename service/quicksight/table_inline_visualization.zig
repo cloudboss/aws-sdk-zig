@@ -4,7 +4,7 @@ const DataBarsOptions = @import("data_bars_options.zig").DataBarsOptions;
 pub const TableInlineVisualization = struct {
     /// The configuration of the inline visualization of the data bars within a
     /// chart.
-    data_bars: ?DataBarsOptions,
+    data_bars: ?DataBarsOptions = null,
 
     pub const json_field_names = .{
         .data_bars = "DataBars",

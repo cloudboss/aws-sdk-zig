@@ -5,12 +5,12 @@ const AutoScalingGroup = @import("auto_scaling_group.zig").AutoScalingGroup;
 /// Scaling groups and security groups for remote access.
 pub const NodegroupResources = struct {
     /// The Auto Scaling groups associated with the node group.
-    auto_scaling_groups: ?[]const AutoScalingGroup,
+    auto_scaling_groups: ?[]const AutoScalingGroup = null,
 
     /// The remote access security group associated with the node group. This
     /// security group
     /// controls SSH access to the nodes.
-    remote_access_security_group: ?[]const u8,
+    remote_access_security_group: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_scaling_groups = "autoScalingGroups",

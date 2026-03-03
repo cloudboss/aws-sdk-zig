@@ -6,7 +6,7 @@ pub const RouteServerBgpOptions = struct {
     /// appliance. Valid values are from 1 to 4294967295. We recommend using a
     /// private ASN in the 64512–65534 (16-bit ASN) or 4200000000–4294967294 (32-bit
     /// ASN) range.
-    peer_asn: ?i64,
+    peer_asn: ?i64 = null,
 
     /// The liveness detection protocol used for the BGP peer.
     ///
@@ -22,5 +22,5 @@ pub const RouteServerBgpOptions = struct {
     ///   failover by using more sensitive liveness detection.
     ///
     /// Defaults to `bgp-keepalive`.
-    peer_liveness_detection: ?RouteServerPeerLivenessMode,
+    peer_liveness_detection: ?RouteServerPeerLivenessMode = null,
 };

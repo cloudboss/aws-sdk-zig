@@ -9,7 +9,7 @@ pub const InventoryFilter = struct {
     name: []const u8,
 
     /// Value of the filter.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .condition = "Condition",

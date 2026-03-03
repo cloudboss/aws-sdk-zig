@@ -2,7 +2,7 @@
 pub const MemberGroup = struct {
     /// The identifier of the data source for the sub group you want to map to a
     /// group.
-    data_source_id: ?[]const u8,
+    data_source_id: ?[]const u8 = null,
 
     /// The identifier of the sub group you want to map to a group.
     group_id: []const u8,

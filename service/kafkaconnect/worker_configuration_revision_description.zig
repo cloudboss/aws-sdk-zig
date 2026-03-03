@@ -1,13 +1,13 @@
 /// The description of the worker configuration revision.
 pub const WorkerConfigurationRevisionDescription = struct {
     /// The time that the worker configuration was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The description of the worker configuration revision.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Base64 encoded contents of the connect-distributed.properties file.
-    properties_file_content: ?[]const u8,
+    properties_file_content: ?[]const u8 = null,
 
     /// The description of a revision of the worker configuration.
     revision: i64 = 0,

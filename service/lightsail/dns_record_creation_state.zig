@@ -30,10 +30,10 @@ pub const DnsRecordCreationState = struct {
     /// * `STARTED` - The automatic DNS record creation has started.
     ///
     /// * `FAILED` - The validation records failed to be added to the domain.
-    code: ?DnsRecordCreationStateCode,
+    code: ?DnsRecordCreationStateCode = null,
 
     /// The message that describes the reason for the status code.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

@@ -5,16 +5,16 @@ const SubResourceType = @import("sub_resource_type.zig").SubResourceType;
 /// The attack information for the specified SubResource.
 pub const SubResourceSummary = struct {
     /// The list of attack types and associated counters.
-    attack_vectors: ?[]const SummarizedAttackVector,
+    attack_vectors: ?[]const SummarizedAttackVector = null,
 
     /// The counters that describe the details of the attack.
-    counters: ?[]const SummarizedCounter,
+    counters: ?[]const SummarizedCounter = null,
 
     /// The unique identifier (ID) of the `SubResource`.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The `SubResource` type.
-    @"type": ?SubResourceType,
+    @"type": ?SubResourceType = null,
 
     pub const json_field_names = .{
         .attack_vectors = "AttackVectors",

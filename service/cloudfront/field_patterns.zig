@@ -2,7 +2,7 @@
 /// field-level encryption.
 pub const FieldPatterns = struct {
     /// An array of the field-level encryption field patterns.
-    items: ?[]const []const u8,
+    items: ?[]const []const u8 = null,
 
     /// The number of field-level encryption field patterns.
     quantity: i32,

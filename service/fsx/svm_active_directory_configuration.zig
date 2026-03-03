@@ -5,9 +5,9 @@ const SelfManagedActiveDirectoryAttributes = @import("self_managed_active_direct
 /// Note that account credentials are not returned in the response payload.
 pub const SvmActiveDirectoryConfiguration = struct {
     /// The NetBIOS name of the AD computer object to which the SVM is joined.
-    net_bios_name: ?[]const u8,
+    net_bios_name: ?[]const u8 = null,
 
-    self_managed_active_directory_configuration: ?SelfManagedActiveDirectoryAttributes,
+    self_managed_active_directory_configuration: ?SelfManagedActiveDirectoryAttributes = null,
 
     pub const json_field_names = .{
         .net_bios_name = "NetBiosName",

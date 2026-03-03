@@ -14,7 +14,7 @@ pub const FrameCaptureGroupSettings = struct {
     destination: OutputLocationRef,
 
     /// Parameters that control interactions with the CDN.
-    frame_capture_cdn_settings: ?FrameCaptureCdnSettings,
+    frame_capture_cdn_settings: ?FrameCaptureCdnSettings = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

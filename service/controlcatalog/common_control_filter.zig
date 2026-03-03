@@ -6,7 +6,7 @@ pub const CommonControlFilter = struct {
     ///
     /// You can use this parameter to specify one objective ARN at a time. Passing
     /// multiple ARNs in the `CommonControlFilter` isn’t supported.
-    objectives: ?[]const ObjectiveResourceFilter,
+    objectives: ?[]const ObjectiveResourceFilter = null,
 
     pub const json_field_names = .{
         .objectives = "Objectives",

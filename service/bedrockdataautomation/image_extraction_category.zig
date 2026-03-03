@@ -5,7 +5,7 @@ const ImageExtractionCategoryType = @import("image_extraction_category_type.zig"
 pub const ImageExtractionCategory = struct {
     state: State,
 
-    types: ?[]const ImageExtractionCategoryType,
+    types: ?[]const ImageExtractionCategoryType = null,
 
     pub const json_field_names = .{
         .state = "state",

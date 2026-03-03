@@ -16,7 +16,7 @@ pub const CollaborationTrainedModelExportJobSummary = struct {
     creator_account_id: []const u8,
 
     /// The description of the trained model.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The membership ID of the member that created the trained model export job.
     membership_identifier: []const u8,
@@ -29,13 +29,13 @@ pub const CollaborationTrainedModelExportJobSummary = struct {
     /// The status of the trained model.
     status: TrainedModelExportJobStatus,
 
-    status_details: ?StatusDetails,
+    status_details: ?StatusDetails = null,
 
     /// The Amazon Resource Name (ARN) of the trained model that is being exported.
     trained_model_arn: []const u8,
 
     /// The version identifier of the trained model that was exported in this job.
-    trained_model_version_identifier: ?[]const u8,
+    trained_model_version_identifier: ?[]const u8 = null,
 
     /// The most recent time at which the trained model export job was updated.
     update_time: i64,

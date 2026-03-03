@@ -18,14 +18,14 @@ pub const MemoryRecordSummary = struct {
     memory_strategy_id: []const u8,
 
     /// A map of metadata key-value pairs associated with a memory record.
-    metadata: ?[]const aws.map.MapEntry(MetadataValue),
+    metadata: ?[]const aws.map.MapEntry(MetadataValue) = null,
 
     /// The namespaces associated with this memory record.
     namespaces: []const []const u8,
 
     /// The relevance score of the memory record when returned as part of a search
     /// result. Higher values indicate greater relevance to the search query.
-    score: ?f64,
+    score: ?f64 = null,
 
     pub const json_field_names = .{
         .content = "content",

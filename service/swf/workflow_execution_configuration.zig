@@ -30,7 +30,7 @@ pub const WorkflowExecutionConfiguration = struct {
     execution_start_to_close_timeout: []const u8,
 
     /// The IAM role attached to the child workflow execution.
-    lambda_role: ?[]const u8,
+    lambda_role: ?[]const u8 = null,
 
     /// The task list used for the decision tasks generated for this workflow
     /// execution.
@@ -43,7 +43,7 @@ pub const WorkflowExecutionConfiguration = struct {
     ///
     /// For more information about setting task priority, see [Setting Task
     /// Priority](https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html) in the *Amazon SWF Developer Guide*.
-    task_priority: ?[]const u8,
+    task_priority: ?[]const u8 = null,
 
     /// The maximum duration allowed for decision tasks for this workflow execution.
     ///

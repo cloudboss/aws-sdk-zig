@@ -2,7 +2,7 @@ const ListApplicationsFilter = @import("list_applications_filter.zig").ListAppli
 
 pub const ListApplicationsRequest = struct {
     /// Filters response results.
-    filter: ?ListApplicationsFilter,
+    filter: ?ListApplicationsFilter = null,
 
     /// The ARN of the IAM Identity Center application under which the operation
     /// will run. For more information about ARNs, see [Amazon Resource Names (ARNs)
@@ -19,14 +19,14 @@ pub const ListApplicationsRequest = struct {
     /// return fewer results than the maximum even when there are more results
     /// available. You should check `NextToken` after every operation to ensure that
     /// you receive all of the results.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// Specifies that you want to receive the next page of results. Valid only if
     /// you received a `NextToken` response in the previous request. If you did, it
     /// indicates that more output is available. Set this parameter to the value
     /// provided by the previous call's `NextToken` response to request the next
     /// page of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .filter = "Filter",

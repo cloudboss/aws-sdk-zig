@@ -12,14 +12,14 @@ pub const ServiceLevelObjectiveSummary = struct {
 
     /// The date and time that this service level objective was created. It is
     /// expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// Identifies the dependency using the `DependencyKeyAttributes` and
     /// `DependencyOperationName`.
-    dependency_config: ?DependencyConfig,
+    dependency_config: ?DependencyConfig = null,
 
     /// Displays whether this is a period-based SLO or a request-based SLO.
-    evaluation_type: ?EvaluationType,
+    evaluation_type: ?EvaluationType = null,
 
     /// This is a string-to-string map. It can include the following fields.
     ///
@@ -33,21 +33,21 @@ pub const ServiceLevelObjectiveSummary = struct {
     ///   `AWS::Resource`.
     /// * `Environment` specifies the location where this object is hosted, or what
     ///   it belongs to.
-    key_attributes: ?[]const aws.map.StringMapEntry,
+    key_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// Displays the SLI metric source type for this SLO. Supported types are:
     ///
     /// * Service operation
     /// * Service dependency
     /// * CloudWatch metric
-    metric_source_type: ?MetricSourceType,
+    metric_source_type: ?MetricSourceType = null,
 
     /// The name of the service level objective.
     name: []const u8,
 
     /// If this service level objective is specific to a single operation, this
     /// field displays the name of that operation.
-    operation_name: ?[]const u8,
+    operation_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

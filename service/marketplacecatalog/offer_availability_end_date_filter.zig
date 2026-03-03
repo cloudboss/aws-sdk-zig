@@ -4,7 +4,7 @@ const OfferAvailabilityEndDateFilterDateRange = @import("offer_availability_end_
 pub const OfferAvailabilityEndDateFilter = struct {
     /// Allows filtering on the `AvailabilityEndDate` of an offer with date range as
     /// input.
-    date_range: ?OfferAvailabilityEndDateFilterDateRange,
+    date_range: ?OfferAvailabilityEndDateFilterDateRange = null,
 
     pub const json_field_names = .{
         .date_range = "DateRange",

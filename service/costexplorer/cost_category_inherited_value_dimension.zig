@@ -13,14 +13,14 @@ const CostCategoryInheritedValueDimensionName = @import("cost_category_inherited
 /// tag key to use.
 pub const CostCategoryInheritedValueDimension = struct {
     /// The key to extract cost category values.
-    dimension_key: ?[]const u8,
+    dimension_key: ?[]const u8 = null,
 
     /// The name of the dimension that's used to group costs.
     ///
     /// If you specify `LINKED_ACCOUNT_NAME`, the cost category value is based on
     /// account name. If you specify `TAG`, the cost category value is based on the
     /// value of the specified tag key.
-    dimension_name: ?CostCategoryInheritedValueDimensionName,
+    dimension_name: ?CostCategoryInheritedValueDimensionName = null,
 
     pub const json_field_names = .{
         .dimension_key = "DimensionKey",

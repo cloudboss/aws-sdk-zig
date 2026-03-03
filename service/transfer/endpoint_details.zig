@@ -48,7 +48,7 @@ pub const EndpointDetails = struct {
     /// * You can't set address allocation IDs for servers that have an
     ///   `IpAddressType` set to `DUALSTACK` You can only set this property if
     ///   `IpAddressType` is set to `IPV4`.
-    address_allocation_ids: ?[]const []const u8,
+    address_allocation_ids: ?[]const []const u8 = null,
 
     /// A list of security groups IDs that are available to attach to your server's
     /// endpoint.
@@ -65,13 +65,13 @@ pub const EndpointDetails = struct {
     ///
     /// You can edit the `SecurityGroupIds` property in the
     /// [UpdateServer](https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateServer.html) API only if you are changing the `EndpointType` from `PUBLIC` or `VPC_ENDPOINT` to `VPC`. To change security groups associated with your server's VPC endpoint after creation, use the Amazon EC2 [ModifyVpcEndpoint](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcEndpoint.html) API.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// A list of subnet IDs that are required to host your server endpoint in your
     /// VPC.
     ///
     /// This property can only be set when `EndpointType` is set to `VPC`.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     /// The identifier of the VPC endpoint.
     ///
@@ -79,12 +79,12 @@ pub const EndpointDetails = struct {
     ///
     /// For more information, see
     /// https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
-    vpc_endpoint_id: ?[]const u8,
+    vpc_endpoint_id: ?[]const u8 = null,
 
     /// The VPC identifier of the VPC in which a server's endpoint will be hosted.
     ///
     /// This property can only be set when `EndpointType` is set to `VPC`.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .address_allocation_ids = "AddressAllocationIds",

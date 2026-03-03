@@ -7,13 +7,13 @@ const SetFileModeEntry = @import("set_file_mode_entry.zig").SetFileModeEntry;
 /// resolving conflicts during a merge.
 pub const ConflictResolution = struct {
     /// Files to be deleted as part of the merge conflict resolution.
-    delete_files: ?[]const DeleteFileEntry,
+    delete_files: ?[]const DeleteFileEntry = null,
 
     /// Files to have content replaced as part of the merge conflict resolution.
-    replace_contents: ?[]const ReplaceContentEntry,
+    replace_contents: ?[]const ReplaceContentEntry = null,
 
     /// File modes that are set as part of the merge conflict resolution.
-    set_file_modes: ?[]const SetFileModeEntry,
+    set_file_modes: ?[]const SetFileModeEntry = null,
 
     pub const json_field_names = .{
         .delete_files = "deleteFiles",

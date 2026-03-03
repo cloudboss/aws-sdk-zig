@@ -20,10 +20,10 @@ const StatusType = @import("status_type.zig").StatusType;
 /// secret access key, you must create a new access key.
 pub const AccessKey = struct {
     /// The ID of the access key.
-    access_key_id: ?[]const u8,
+    access_key_id: ?[]const u8 = null,
 
     /// The timestamp when the access key was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// An object that describes the last time the access key was used.
     ///
@@ -31,20 +31,20 @@ pub const AccessKey = struct {
     /// [CreateBucketAccessKey](https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html) action. If the access key has not been used, the
     /// `region` and `serviceName` values are `N/A`, and the
     /// `lastUsedDate` value is null.
-    last_used: ?AccessKeyLastUsed,
+    last_used: ?AccessKeyLastUsed = null,
 
     /// The secret access key used to sign requests.
     ///
     /// You should store the secret access key in a safe location. We recommend that
     /// you delete
     /// the access key if the secret access key is compromised.
-    secret_access_key: ?[]const u8,
+    secret_access_key: ?[]const u8 = null,
 
     /// The status of the access key.
     ///
     /// A status of `Active` means that the key is valid, while `Inactive`
     /// means it is not.
-    status: ?StatusType,
+    status: ?StatusType = null,
 
     pub const json_field_names = .{
         .access_key_id = "accessKeyId",

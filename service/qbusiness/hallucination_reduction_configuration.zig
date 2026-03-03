@@ -9,7 +9,7 @@ const HallucinationReductionControl = @import("hallucination_reduction_control.z
 pub const HallucinationReductionConfiguration = struct {
     /// Controls whether hallucination reduction has been enabled or disabled for
     /// your application. The default status is `DISABLED`.
-    hallucination_reduction_control: ?HallucinationReductionControl,
+    hallucination_reduction_control: ?HallucinationReductionControl = null,
 
     pub const json_field_names = .{
         .hallucination_reduction_control = "hallucinationReductionControl",

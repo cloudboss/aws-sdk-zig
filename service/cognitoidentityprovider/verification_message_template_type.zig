@@ -12,27 +12,27 @@ pub const VerificationMessageTemplateType = struct {
     /// here##}`. "Click here" in the example is a customizable string. For code,
     /// your
     /// template body must contain a code placeholder in the format `{####}`.
-    default_email_option: ?DefaultEmailOptionType,
+    default_email_option: ?DefaultEmailOptionType = null,
 
     /// The template for email messages that Amazon Cognito sends to your users. You
     /// can set an
     /// `EmailMessage` template only if the value of [
     /// EmailSendingAccount](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount) is `DEVELOPER`. When your [EmailSendingAccount](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount) is `DEVELOPER`, your user pool sends email
     /// messages with your own Amazon SES configuration.
-    email_message: ?[]const u8,
+    email_message: ?[]const u8 = null,
 
     /// The email message template for sending a confirmation link to the user. You
     /// can set an
     /// `EmailMessageByLink` template only if the value of [
     /// EmailSendingAccount](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount) is `DEVELOPER`. When your [EmailSendingAccount](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount) is `DEVELOPER`, your user pool sends email
     /// messages with your own Amazon SES configuration.
-    email_message_by_link: ?[]const u8,
+    email_message_by_link: ?[]const u8 = null,
 
     /// The subject line for the email message template. You can set an
     /// `EmailSubject` template only if the value of [
     /// EmailSendingAccount](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount) is `DEVELOPER`. When your [EmailSendingAccount](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount) is `DEVELOPER`, your user pool sends email
     /// messages with your own Amazon SES configuration.
-    email_subject: ?[]const u8,
+    email_subject: ?[]const u8 = null,
 
     /// The subject line for the email message template for sending a confirmation
     /// link to the
@@ -40,10 +40,10 @@ pub const VerificationMessageTemplateType = struct {
     /// [
     /// EmailSendingAccount](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount) is `DEVELOPER`. When your [EmailSendingAccount](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount) is `DEVELOPER`, your user pool sends email
     /// messages with your own Amazon SES configuration.
-    email_subject_by_link: ?[]const u8,
+    email_subject_by_link: ?[]const u8 = null,
 
     /// The template for SMS messages that Amazon Cognito sends to your users.
-    sms_message: ?[]const u8,
+    sms_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .default_email_option = "DefaultEmailOption",

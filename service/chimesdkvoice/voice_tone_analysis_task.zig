@@ -4,27 +4,27 @@ const CallDetails = @import("call_details.zig").CallDetails;
 /// on a Voice Connector call.
 pub const VoiceToneAnalysisTask = struct {
     /// The call details of a voice tone analysis task.
-    call_details: ?CallDetails,
+    call_details: ?CallDetails = null,
 
     /// The time at which a voice tone analysis task was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The time at which a voice tone analysis task started.
-    started_timestamp: ?i64,
+    started_timestamp: ?i64 = null,
 
     /// The status of a voice tone analysis task.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The time at which a voice tone analysis task was updated.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     /// The ID of the voice tone analysis task.
-    voice_tone_analysis_task_id: ?[]const u8,
+    voice_tone_analysis_task_id: ?[]const u8 = null,
 
     /// The status of a voice tone analysis task, `IN_QUEUE`, `IN_PROGRESS`,
     /// `PARTIAL_SUCCESS`, `SUCCEEDED`,
     /// `FAILED`, or `STOPPED`.
-    voice_tone_analysis_task_status: ?[]const u8,
+    voice_tone_analysis_task_status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .call_details = "CallDetails",

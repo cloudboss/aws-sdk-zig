@@ -1,10 +1,10 @@
 /// The model on the edge device.
 pub const EdgeModel = struct {
     /// The timestamp of the last inference that was made.
-    latest_inference: ?i64,
+    latest_inference: ?i64 = null,
 
     /// The timestamp of the last data sample taken.
-    latest_sample_time: ?i64,
+    latest_sample_time: ?i64 = null,
 
     /// The name of the model.
     model_name: []const u8,

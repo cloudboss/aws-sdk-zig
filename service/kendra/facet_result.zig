@@ -5,17 +5,17 @@ const DocumentAttributeValueType = @import("document_attribute_value_type.zig").
 pub const FacetResult = struct {
     /// The key for the facet values. This is the same as the `DocumentAttributeKey`
     /// provided in the query.
-    document_attribute_key: ?[]const u8,
+    document_attribute_key: ?[]const u8 = null,
 
     /// An array of key/value pairs, where the key is the value of the attribute and
     /// the count
     /// is the number of documents that share the key value.
-    document_attribute_value_count_pairs: ?[]const DocumentAttributeValueCountPair,
+    document_attribute_value_count_pairs: ?[]const DocumentAttributeValueCountPair = null,
 
     /// The data type of the facet value. This is the same as the type defined for
     /// the index
     /// field when it was created.
-    document_attribute_value_type: ?DocumentAttributeValueType,
+    document_attribute_value_type: ?DocumentAttributeValueType = null,
 
     pub const json_field_names = .{
         .document_attribute_key = "DocumentAttributeKey",

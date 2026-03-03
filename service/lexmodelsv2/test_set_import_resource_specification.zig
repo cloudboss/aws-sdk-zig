@@ -7,7 +7,7 @@ const TestSetStorageLocation = @import("test_set_storage_location.zig").TestSetS
 /// Contains information about the test set that is imported.
 pub const TestSetImportResourceSpecification = struct {
     /// The description of the test set.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Contains information about the input location from where test-set should be
     /// imported.
@@ -31,7 +31,7 @@ pub const TestSetImportResourceSpecification = struct {
     /// A list of tags to add to the test set. You can only add tags when you
     /// import/generate a new test set. You can't use the `UpdateTestSet` operation
     /// to update tags. To update tags, use the `TagResource` operation.
-    test_set_tags: ?[]const aws.map.StringMapEntry,
+    test_set_tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .description = "description",

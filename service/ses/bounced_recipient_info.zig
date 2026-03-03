@@ -11,7 +11,7 @@ const RecipientDsnFields = @import("recipient_dsn_fields.zig").RecipientDsnField
 pub const BouncedRecipientInfo = struct {
     /// The reason for the bounce. You must provide either this parameter or
     /// `RecipientDsnFields`.
-    bounce_type: ?BounceType,
+    bounce_type: ?BounceType = null,
 
     /// The email address of the recipient of the bounced email.
     recipient: []const u8,
@@ -24,11 +24,11 @@ pub const BouncedRecipientInfo = struct {
     /// sending
     /// authorization, see the [Amazon SES Developer
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html).
-    recipient_arn: ?[]const u8,
+    recipient_arn: ?[]const u8 = null,
 
     /// Recipient-related DSN fields, most of which would normally be filled in
     /// automatically
     /// when provided with a `BounceType`. You must provide either this parameter or
     /// `BounceType`.
-    recipient_dsn_fields: ?RecipientDsnFields,
+    recipient_dsn_fields: ?RecipientDsnFields = null,
 };

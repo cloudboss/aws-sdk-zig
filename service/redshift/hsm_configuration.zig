@@ -7,19 +7,19 @@ const Tag = @import("tag.zig").Tag;
 /// store database encryption keys.
 pub const HsmConfiguration = struct {
     /// A text description of the HSM configuration.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the Amazon Redshift HSM configuration.
-    hsm_configuration_identifier: ?[]const u8,
+    hsm_configuration_identifier: ?[]const u8 = null,
 
     /// The IP address that the Amazon Redshift cluster must use to access the HSM.
-    hsm_ip_address: ?[]const u8,
+    hsm_ip_address: ?[]const u8 = null,
 
     /// The name of the partition in the HSM where the Amazon Redshift clusters will
     /// store their
     /// database encryption keys.
-    hsm_partition_name: ?[]const u8,
+    hsm_partition_name: ?[]const u8 = null,
 
     /// The list of tags for the HSM configuration.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

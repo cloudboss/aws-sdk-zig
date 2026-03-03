@@ -19,7 +19,7 @@ pub const ConfiguredAudienceModelAssociationSummary = struct {
     create_time: i64,
 
     /// The description of the configured audience model association.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier of the configured audience model association.
     id: []const u8,

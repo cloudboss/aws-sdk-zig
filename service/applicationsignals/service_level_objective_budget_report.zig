@@ -19,7 +19,7 @@ pub const ServiceLevelObjectiveBudgetReport = struct {
     /// If this is a request-based SLO, the number is the number of successful
     /// requests divided by the number of total requests, multiplied by 100, during
     /// the time range that you specified in your request.
-    attainment: ?f64,
+    attainment: ?f64 = null,
 
     /// This field is displayed only for request-based SLOs. It displays the number
     /// of failed requests that can be tolerated before any more successful requests
@@ -27,14 +27,14 @@ pub const ServiceLevelObjectiveBudgetReport = struct {
     ///
     /// This number can go up and down between different reports, based on both how
     /// many successful requests and how many failed requests occur in that time.
-    budget_requests_remaining: ?i32,
+    budget_requests_remaining: ?i32 = null,
 
     /// The budget amount remaining before the SLO status becomes `BREACHING`, at
     /// the time specified in the `Timestemp` parameter of the request. If this
     /// value is negative, then the SLO is already in `BREACHING` status.
     ///
     /// This field is included only if the SLO is a period-based SLO.
-    budget_seconds_remaining: ?i32,
+    budget_seconds_remaining: ?i32 = null,
 
     /// The status of this SLO, as it relates to the error budget for the entire
     /// time interval.
@@ -51,18 +51,18 @@ pub const ServiceLevelObjectiveBudgetReport = struct {
 
     /// Displays whether this budget report is for a period-based SLO or a
     /// request-based SLO.
-    evaluation_type: ?EvaluationType,
+    evaluation_type: ?EvaluationType = null,
 
-    goal: ?Goal,
+    goal: ?Goal = null,
 
     /// The name of the SLO that this report is for.
     name: []const u8,
 
-    request_based_sli: ?RequestBasedServiceLevelIndicator,
+    request_based_sli: ?RequestBasedServiceLevelIndicator = null,
 
     /// A structure that contains information about the performance metric that this
     /// SLO monitors.
-    sli: ?ServiceLevelIndicator,
+    sli: ?ServiceLevelIndicator = null,
 
     /// This field is displayed only for request-based SLOs. It displays the total
     /// number of failed requests that can be tolerated during the time range
@@ -74,11 +74,11 @@ pub const ServiceLevelObjectiveBudgetReport = struct {
     ///
     /// This number can go up and down between reports with different time stamps,
     /// based on both how many total requests occur.
-    total_budget_requests: ?i32,
+    total_budget_requests: ?i32 = null,
 
     /// The total number of seconds in the error budget for the interval. This field
     /// is included only if the SLO is a period-based SLO.
-    total_budget_seconds: ?i32,
+    total_budget_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

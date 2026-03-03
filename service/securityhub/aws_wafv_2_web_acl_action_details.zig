@@ -5,10 +5,10 @@ const AwsWafv2ActionBlockDetails = @import("aws_wafv_2_action_block_details.zig"
 /// matches the conditions in the rule.
 pub const AwsWafv2WebAclActionDetails = struct {
     /// Specifies that WAF should allow requests by default.
-    allow: ?AwsWafv2ActionAllowDetails,
+    allow: ?AwsWafv2ActionAllowDetails = null,
 
     /// Specifies that WAF should block requests by default.
-    block: ?AwsWafv2ActionBlockDetails,
+    block: ?AwsWafv2ActionBlockDetails = null,
 
     pub const json_field_names = .{
         .allow = "Allow",

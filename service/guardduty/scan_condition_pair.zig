@@ -7,7 +7,7 @@ pub const ScanConditionPair = struct {
     /// Represents optional **value** in the map
     /// condition. If not specified, only the **key** will be
     /// matched.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

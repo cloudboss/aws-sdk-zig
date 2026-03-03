@@ -7,16 +7,16 @@ pub const ThumbnailDetails = struct {
     flow_arn: []const u8,
 
     /// Thumbnail Base64 string.
-    thumbnail: ?[]const u8,
+    thumbnail: ?[]const u8 = null,
 
     /// Status code and messages about the flow source thumbnail.
     thumbnail_messages: []const MessageDetail,
 
     /// Timecode of thumbnail.
-    timecode: ?[]const u8,
+    timecode: ?[]const u8 = null,
 
     /// The timestamp of when thumbnail was generated.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .flow_arn = "FlowArn",

@@ -4,7 +4,7 @@ const FlowControlNodeType = @import("flow_control_node_type.zig").FlowControlNod
 /// tracking.
 pub const FlowTraceNodeInputExecutionChainItem = struct {
     /// The index position of this item in the execution chain.
-    index: ?i32,
+    index: ?i32 = null,
 
     /// The name of the node in the execution chain.
     node_name: []const u8,

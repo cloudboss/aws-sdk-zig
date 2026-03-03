@@ -8,24 +8,24 @@ const OriginationRouteProtocol = @import("origination_route_protocol.zig").Origi
 /// The parameters listed below are not required, but you must use at least one.
 pub const OriginationRoute = struct {
     /// The FQDN or IP address to contact for origination traffic.
-    host: ?[]const u8,
+    host: ?[]const u8 = null,
 
     /// The designated origination route port. Defaults to 5060.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The priority associated with the host, with 1 being the highest priority.
     /// Higher
     /// priority hosts are attempted first.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The protocol to use for the origination route. Encryption-enabled Amazon
     /// Chime SDK Voice Connectors use
     /// TCP protocol by default.
-    protocol: ?OriginationRouteProtocol,
+    protocol: ?OriginationRouteProtocol = null,
 
     /// The weight assigned to an origination route. When hosts have equal priority,
     /// calls are distributed between them based on their relative weights.
-    weight: ?i32,
+    weight: ?i32 = null,
 
     pub const json_field_names = .{
         .host = "Host",

@@ -8,7 +8,7 @@ pub const TriggerConfig = struct {
     /// Specifies the configuration details of a schedule-triggered flow as defined
     /// by the user.
     /// Currently, these settings only apply to the `Scheduled` trigger type.
-    trigger_properties: ?TriggerProperties,
+    trigger_properties: ?TriggerProperties = null,
 
     /// Specifies the type of flow trigger. This can be `OnDemand`,
     /// `Scheduled`, or `Event`.

@@ -4,7 +4,7 @@ const RouteAvoidanceAreaGeometry = @import("route_avoidance_area_geometry.zig").
 pub const RouteAvoidanceArea = struct {
     /// Exceptions to the provided avoidance geometry, to be included while
     /// calculating the route.
-    except: ?[]const RouteAvoidanceAreaGeometry,
+    except: ?[]const RouteAvoidanceAreaGeometry = null,
 
     geometry: RouteAvoidanceAreaGeometry,
 

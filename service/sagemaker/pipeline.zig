@@ -5,42 +5,42 @@ const Tag = @import("tag.zig").Tag;
 
 /// A SageMaker Model Building Pipeline instance.
 pub const Pipeline = struct {
-    created_by: ?UserContext,
+    created_by: ?UserContext = null,
 
     /// The creation time of the pipeline.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
-    last_modified_by: ?UserContext,
+    last_modified_by: ?UserContext = null,
 
     /// The time that the pipeline was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The time when the pipeline was last run.
-    last_run_time: ?i64,
+    last_run_time: ?i64 = null,
 
     /// The parallelism configuration applied to the pipeline.
-    parallelism_configuration: ?ParallelismConfiguration,
+    parallelism_configuration: ?ParallelismConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the pipeline.
-    pipeline_arn: ?[]const u8,
+    pipeline_arn: ?[]const u8 = null,
 
     /// The description of the pipeline.
-    pipeline_description: ?[]const u8,
+    pipeline_description: ?[]const u8 = null,
 
     /// The display name of the pipeline.
-    pipeline_display_name: ?[]const u8,
+    pipeline_display_name: ?[]const u8 = null,
 
     /// The name of the pipeline.
-    pipeline_name: ?[]const u8,
+    pipeline_name: ?[]const u8 = null,
 
     /// The status of the pipeline.
-    pipeline_status: ?PipelineStatus,
+    pipeline_status: ?PipelineStatus = null,
 
     /// The Amazon Resource Name (ARN) of the role that created the pipeline.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// A list of tags that apply to the pipeline.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .created_by = "CreatedBy",

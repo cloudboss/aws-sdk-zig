@@ -1,16 +1,16 @@
 /// Parsed components in the provided QueryText.
 pub const ParsedQueryComponent = struct {
     /// End index of the parsed query component.
-    end_index: ?i32,
+    end_index: ?i32 = null,
 
     /// The address component that the parsed query component corresponds to.
-    query_component: ?[]const u8,
+    query_component: ?[]const u8 = null,
 
     /// Start index of the parsed query component.
-    start_index: ?i32,
+    start_index: ?i32 = null,
 
     /// Value of the parsed query component.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .end_index = "EndIndex",

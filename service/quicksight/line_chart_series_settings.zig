@@ -5,13 +5,13 @@ const LineChartMarkerStyleSettings = @import("line_chart_marker_style_settings.z
 /// The options that determine the presentation of a line series in the visual
 pub const LineChartSeriesSettings = struct {
     /// Decal settings for a line series in `LineChartVisual`.
-    decal_settings: ?DecalSettings,
+    decal_settings: ?DecalSettings = null,
 
     /// Line styles options for a line series in `LineChartVisual`.
-    line_style_settings: ?LineChartLineStyleSettings,
+    line_style_settings: ?LineChartLineStyleSettings = null,
 
     /// Marker styles options for a line series in `LineChartVisual`.
-    marker_style_settings: ?LineChartMarkerStyleSettings,
+    marker_style_settings: ?LineChartMarkerStyleSettings = null,
 
     pub const json_field_names = .{
         .decal_settings = "DecalSettings",

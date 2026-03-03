@@ -3,28 +3,28 @@ const ActionTarget = @import("action_target.zig").ActionTarget;
 /// Information about the CreateRoute action in Amazon EC2.
 pub const EC2CreateRouteAction = struct {
     /// A description of CreateRoute action in Amazon EC2.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about the IPv4 CIDR address block used for the destination
     /// match.
-    destination_cidr_block: ?[]const u8,
+    destination_cidr_block: ?[]const u8 = null,
 
     /// Information about the IPv6 CIDR block destination.
-    destination_ipv_6_cidr_block: ?[]const u8,
+    destination_ipv_6_cidr_block: ?[]const u8 = null,
 
     /// Information about the ID of a prefix list used for the destination match.
-    destination_prefix_list_id: ?[]const u8,
+    destination_prefix_list_id: ?[]const u8 = null,
 
     /// Information about the ID of an internet gateway or virtual private gateway
     /// attached to your VPC.
-    gateway_id: ?ActionTarget,
+    gateway_id: ?ActionTarget = null,
 
     /// Information about the ID of the route table for the route.
     route_table_id: ActionTarget,
 
     /// Information about the ID of a VPC endpoint. Supported for Gateway Load
     /// Balancer endpoints only.
-    vpc_endpoint_id: ?ActionTarget,
+    vpc_endpoint_id: ?ActionTarget = null,
 
     pub const json_field_names = .{
         .description = "Description",

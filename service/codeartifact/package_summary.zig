@@ -4,7 +4,7 @@ const PackageOriginConfiguration = @import("package_origin_configuration.zig").P
 /// Details about a package, including its format, namespace, and name.
 pub const PackageSummary = struct {
     /// The format of the package.
-    format: ?PackageFormat,
+    format: ?PackageFormat = null,
 
     /// The namespace of the package. The package component that specifies its
     /// namespace depends on its type. For example:
@@ -18,7 +18,7 @@ pub const PackageSummary = struct {
     /// * Python, NuGet, Ruby, and Cargo package versions do not contain a
     ///   corresponding component, package versions
     /// of those formats do not have a namespace.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// A
     /// [PackageOriginConfiguration](https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html)
@@ -26,10 +26,10 @@ pub const PackageSummary = struct {
     /// [PackageOriginRestrictions](https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html) object
     /// that contains information about the upstream and publish package origin
     /// restrictions.
-    origin_configuration: ?PackageOriginConfiguration,
+    origin_configuration: ?PackageOriginConfiguration = null,
 
     /// The name of the package.
-    package: ?[]const u8,
+    package: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .format = "format",

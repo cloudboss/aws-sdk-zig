@@ -4,7 +4,7 @@ const ReplicationStartingPositionType = @import("replication_starting_position_t
 /// from.
 pub const ReplicationStartingPosition = struct {
     /// The type of replication starting position.
-    @"type": ?ReplicationStartingPositionType,
+    @"type": ?ReplicationStartingPositionType = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

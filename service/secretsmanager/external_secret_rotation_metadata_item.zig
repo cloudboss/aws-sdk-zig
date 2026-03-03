@@ -6,10 +6,10 @@
 /// partners](https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html).
 pub const ExternalSecretRotationMetadataItem = struct {
     /// The key that identifies the item.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value of the specified item.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

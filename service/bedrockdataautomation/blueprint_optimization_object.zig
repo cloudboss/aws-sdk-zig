@@ -6,7 +6,7 @@ pub const BlueprintOptimizationObject = struct {
     blueprint_arn: []const u8,
 
     /// Stage of blueprint.
-    stage: ?BlueprintStage,
+    stage: ?BlueprintStage = null,
 
     pub const json_field_names = .{
         .blueprint_arn = "blueprintArn",

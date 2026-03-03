@@ -6,7 +6,7 @@ pub const ElasticsearchSettings = struct {
 
     /// The maximum number of seconds for which DMS retries failed API requests to
     /// the OpenSearch cluster.
-    error_retry_duration: ?i32,
+    error_retry_duration: ?i32 = null,
 
     /// The maximum percentage of records that can fail to be written before a full
     /// load
@@ -18,7 +18,7 @@ pub const ElasticsearchSettings = struct {
     /// last 10 minutes of an Observation Window. If transfer of all records fail in
     /// the last 10
     /// minutes, the full load operation stops.
-    full_load_error_percentage: ?i32,
+    full_load_error_percentage: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) used by the service to access the IAM role.
     /// The role must
@@ -30,7 +30,7 @@ pub const ElasticsearchSettings = struct {
     /// support
     /// the _doc documentation type in versions 7. x and later. The default value is
     /// `false`.
-    use_new_mapping_type: ?bool,
+    use_new_mapping_type: ?bool = null,
 
     pub const json_field_names = .{
         .endpoint_uri = "EndpointUri",

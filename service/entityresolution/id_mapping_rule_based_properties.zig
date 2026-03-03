@@ -36,7 +36,7 @@ pub const IdMappingRuleBasedProperties = struct {
     rule_definition_type: IdMappingWorkflowRuleDefinitionType,
 
     /// The rules that can be used for ID mapping.
-    rules: ?[]const Rule,
+    rules: ?[]const Rule = null,
 
     pub const json_field_names = .{
         .attribute_matching_model = "attributeMatchingModel",

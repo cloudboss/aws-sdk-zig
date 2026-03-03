@@ -6,18 +6,18 @@ const VerifiedAccessEndpointProtocol = @import("verified_access_endpoint_protoco
 /// `load-balancer` type.
 pub const CreateVerifiedAccessEndpointLoadBalancerOptions = struct {
     /// The ARN of the load balancer.
-    load_balancer_arn: ?[]const u8,
+    load_balancer_arn: ?[]const u8 = null,
 
     /// The IP port number.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The port ranges.
-    port_ranges: ?[]const CreateVerifiedAccessEndpointPortRange,
+    port_ranges: ?[]const CreateVerifiedAccessEndpointPortRange = null,
 
     /// The IP protocol.
-    protocol: ?VerifiedAccessEndpointProtocol,
+    protocol: ?VerifiedAccessEndpointProtocol = null,
 
     /// The IDs of the subnets. You can specify only one subnet per Availability
     /// Zone.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 };

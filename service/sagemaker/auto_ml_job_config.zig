@@ -7,16 +7,16 @@ const AutoMLSecurityConfig = @import("auto_ml_security_config.zig").AutoMLSecuri
 /// A collection of settings used for an AutoML job.
 pub const AutoMLJobConfig = struct {
     /// The configuration for generating a candidate for an AutoML job (optional).
-    candidate_generation_config: ?AutoMLCandidateGenerationConfig,
+    candidate_generation_config: ?AutoMLCandidateGenerationConfig = null,
 
     /// How long an AutoML job is allowed to run, or how many candidates a job is
     /// allowed to generate.
-    completion_criteria: ?AutoMLJobCompletionCriteria,
+    completion_criteria: ?AutoMLJobCompletionCriteria = null,
 
     /// The configuration for splitting the input training dataset.
     ///
     /// Type: AutoMLDataSplitConfig
-    data_split_config: ?AutoMLDataSplitConfig,
+    data_split_config: ?AutoMLDataSplitConfig = null,
 
     /// The method that Autopilot uses to train the data. You can either specify the
     /// mode manually or let Autopilot choose for you based on the dataset size by
@@ -37,10 +37,10 @@ pub const AutoMLJobConfig = struct {
     /// for the type of problem you want to solve. Then HPO finds the best
     /// hyperparameters according to your objective metric. See [Autopilot algorithm
     /// support](https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support) for a list of algorithms supported by `HYPERPARAMETER_TUNING` mode.
-    mode: ?AutoMLMode,
+    mode: ?AutoMLMode = null,
 
     /// The security configuration for traffic encryption or Amazon VPC settings.
-    security_config: ?AutoMLSecurityConfig,
+    security_config: ?AutoMLSecurityConfig = null,
 
     pub const json_field_names = .{
         .candidate_generation_config = "CandidateGenerationConfig",

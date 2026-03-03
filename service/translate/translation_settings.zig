@@ -26,7 +26,7 @@ pub const TranslationSettings = struct {
     /// For the language pairs that brevity supports, see [Using
     /// brevity](https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-brevity) in the
     /// Amazon Translate Developer Guide.
-    brevity: ?Brevity,
+    brevity: ?Brevity = null,
 
     /// You can specify the desired level of formality for translations
     /// to supported target languages. The formality
@@ -45,7 +45,7 @@ pub const TranslationSettings = struct {
     /// For a list of target languages that support formality, see [Supported
     /// languages](https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html#customizing-translations-formality-languages)
     /// in the Amazon Translate Developer Guide.
-    formality: ?Formality,
+    formality: ?Formality = null,
 
     /// You can enable the profanity setting if you want to mask profane words and
     /// phrases in your translation output.
@@ -66,7 +66,7 @@ pub const TranslationSettings = struct {
     /// target languages don't support profanity masking, the
     /// translation job won't mask profanity for any target
     /// language.
-    profanity: ?Profanity,
+    profanity: ?Profanity = null,
 
     pub const json_field_names = .{
         .brevity = "Brevity",

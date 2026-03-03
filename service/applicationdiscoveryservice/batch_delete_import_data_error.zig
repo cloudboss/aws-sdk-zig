@@ -5,13 +5,13 @@ const BatchDeleteImportDataErrorCode = @import("batch_delete_import_data_error_c
 /// command.
 pub const BatchDeleteImportDataError = struct {
     /// The type of error that occurred for a specific import task.
-    error_code: ?BatchDeleteImportDataErrorCode,
+    error_code: ?BatchDeleteImportDataErrorCode = null,
 
     /// The description of the error that occurred for a specific import task.
-    error_description: ?[]const u8,
+    error_description: ?[]const u8 = null,
 
     /// The unique import ID associated with the error that occurred.
-    import_task_id: ?[]const u8,
+    import_task_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

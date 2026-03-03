@@ -6,7 +6,7 @@ const ManagedNotificationEventSummary = @import("managed_notification_event_summ
 pub const ManagedNotificationEventOverview = struct {
     /// The list of the regions where the aggregated notifications in this
     /// `NotificationEvent` originated.
-    aggregated_notification_regions: ?[]const []const u8,
+    aggregated_notification_regions: ?[]const []const u8 = null,
 
     /// The notifications aggregation type.
     ///
@@ -25,9 +25,9 @@ pub const ManagedNotificationEventOverview = struct {
     /// * `NONE`
     ///
     /// * The notification isn't aggregated.
-    aggregation_event_type: ?AggregationEventType,
+    aggregation_event_type: ?AggregationEventType = null,
 
-    aggregation_summary: ?AggregationSummary,
+    aggregation_summary: ?AggregationSummary = null,
 
     /// The Amazon Resource Name (ARN) of the ManagedNotificationEvent.
     arn: []const u8,
@@ -41,7 +41,7 @@ pub const ManagedNotificationEventOverview = struct {
     notification_event: ManagedNotificationEventSummary,
 
     /// The Organizational Unit Id that an Amazon Web Services account belongs to.
-    organizational_unit_id: ?[]const u8,
+    organizational_unit_id: ?[]const u8 = null,
 
     /// The account that related to the `ManagedNotificationEvent`.
     related_account: []const u8,

@@ -9,7 +9,7 @@ const OAuth2Credentials = @import("o_auth_2_credentials.zig").OAuth2Credentials;
 /// connector.
 pub const CustomConnectorProfileCredentials = struct {
     /// The API keys required for the authentication of the user.
-    api_key: ?ApiKeyCredentials,
+    api_key: ?ApiKeyCredentials = null,
 
     /// The authentication type that the custom connector uses for authenticating
     /// while creating a
@@ -17,15 +17,15 @@ pub const CustomConnectorProfileCredentials = struct {
     authentication_type: AuthenticationType,
 
     /// The basic credentials that are required for the authentication of the user.
-    basic: ?BasicAuthCredentials,
+    basic: ?BasicAuthCredentials = null,
 
     /// If the connector uses the custom authentication mechanism, this holds the
     /// required
     /// credentials.
-    custom: ?CustomAuthCredentials,
+    custom: ?CustomAuthCredentials = null,
 
     /// The OAuth 2.0 credentials required for the authentication of the user.
-    oauth_2: ?OAuth2Credentials,
+    oauth_2: ?OAuth2Credentials = null,
 
     pub const json_field_names = .{
         .api_key = "apiKey",

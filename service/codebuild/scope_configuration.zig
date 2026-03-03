@@ -5,7 +5,7 @@ pub const ScopeConfiguration = struct {
     /// The domain of the GitHub Enterprise organization or the GitLab Self Managed
     /// group. Note that this parameter is only required if your project's source
     /// type is GITHUB_ENTERPRISE or GITLAB_SELF_MANAGED.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// The name of either the group, enterprise, or organization that will send
     /// webhook events to CodeBuild, depending on the type of webhook.

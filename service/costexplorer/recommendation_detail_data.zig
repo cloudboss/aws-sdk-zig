@@ -8,7 +8,7 @@ const TermInYears = @import("term_in_years.zig").TermInYears;
 /// The details and metrics for the given recommendation.
 pub const RecommendationDetailData = struct {
     /// The AccountID that the recommendation is generated for.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The account scope that you want your recommendations for. Amazon Web
     /// Services
@@ -17,113 +17,113 @@ pub const RecommendationDetailData = struct {
     /// value is set to PAYER. If the value is LINKED, recommendations are
     /// calculated for
     /// individual member accounts only.
-    account_scope: ?AccountScope,
+    account_scope: ?AccountScope = null,
 
     /// The currency code that Amazon Web Services used to generate the
     /// recommendation and
     /// present potential savings.
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// The average value of hourly coverage over the lookback period.
-    current_average_coverage: ?[]const u8,
+    current_average_coverage: ?[]const u8 = null,
 
     /// The average value of hourly On-Demand spend over the lookback period of the
     /// applicable
     /// usage type.
-    current_average_hourly_on_demand_spend: ?[]const u8,
+    current_average_hourly_on_demand_spend: ?[]const u8 = null,
 
     /// The highest value of hourly On-Demand spend over the lookback period of the
     /// applicable
     /// usage type.
-    current_maximum_hourly_on_demand_spend: ?[]const u8,
+    current_maximum_hourly_on_demand_spend: ?[]const u8 = null,
 
     /// The lowest value of hourly On-Demand spend over the lookback period of the
     /// applicable
     /// usage type.
-    current_minimum_hourly_on_demand_spend: ?[]const u8,
+    current_minimum_hourly_on_demand_spend: ?[]const u8 = null,
 
     /// The estimated coverage of the recommended Savings Plan.
-    estimated_average_coverage: ?[]const u8,
+    estimated_average_coverage: ?[]const u8 = null,
 
     /// The estimated utilization of the recommended Savings Plan.
-    estimated_average_utilization: ?[]const u8,
+    estimated_average_utilization: ?[]const u8 = null,
 
     /// The estimated monthly savings amount based on the recommended Savings Plan.
-    estimated_monthly_savings_amount: ?[]const u8,
+    estimated_monthly_savings_amount: ?[]const u8 = null,
 
     /// The remaining On-Demand cost estimated to not be covered by the recommended
     /// Savings
     /// Plan, over the length of the lookback period.
-    estimated_on_demand_cost: ?[]const u8,
+    estimated_on_demand_cost: ?[]const u8 = null,
 
     /// The estimated On-Demand costs you expect with no additional commitment,
     /// based on your
     /// usage of the selected time period and the Savings Plan you own.
-    estimated_on_demand_cost_with_current_commitment: ?[]const u8,
+    estimated_on_demand_cost_with_current_commitment: ?[]const u8 = null,
 
     /// The estimated return on investment that's based on the recommended Savings
     /// Plan that
     /// you purchased. This is calculated as
     /// estimatedSavingsAmount/estimatedSPCost*100.
-    estimated_roi: ?[]const u8,
+    estimated_roi: ?[]const u8 = null,
 
     /// The estimated savings amount that's based on the recommended Savings Plan
     /// over the
     /// length of the lookback period.
-    estimated_savings_amount: ?[]const u8,
+    estimated_savings_amount: ?[]const u8 = null,
 
     /// The estimated savings percentage relative to the total cost of applicable
     /// On-Demand
     /// usage over the lookback period.
-    estimated_savings_percentage: ?[]const u8,
+    estimated_savings_percentage: ?[]const u8 = null,
 
     /// The cost of the recommended Savings Plan over the length of the lookback
     /// period.
-    estimated_sp_cost: ?[]const u8,
+    estimated_sp_cost: ?[]const u8 = null,
 
     /// The existing hourly commitment for the Savings Plan type.
-    existing_hourly_commitment: ?[]const u8,
+    existing_hourly_commitment: ?[]const u8 = null,
 
-    generation_timestamp: ?[]const u8,
+    generation_timestamp: ?[]const u8 = null,
 
     /// The recommended hourly commitment level for the Savings Plan type and the
     /// configuration that's based on the usage during the lookback period.
-    hourly_commitment_to_purchase: ?[]const u8,
+    hourly_commitment_to_purchase: ?[]const u8 = null,
 
     /// The instance family of the recommended Savings Plan.
-    instance_family: ?[]const u8,
+    instance_family: ?[]const u8 = null,
 
-    latest_usage_timestamp: ?[]const u8,
+    latest_usage_timestamp: ?[]const u8 = null,
 
     /// How many days of previous usage that Amazon Web Services considers when
     /// making this
     /// recommendation.
-    lookback_period_in_days: ?LookbackPeriodInDays,
+    lookback_period_in_days: ?LookbackPeriodInDays = null,
 
     /// The related hourly cost, coverage, and utilization metrics over the lookback
     /// period.
-    metrics_over_lookback_period: ?[]const RecommendationDetailHourlyMetrics,
+    metrics_over_lookback_period: ?[]const RecommendationDetailHourlyMetrics = null,
 
     /// The unique ID that's used to distinguish Savings Plans from one another.
-    offering_id: ?[]const u8,
+    offering_id: ?[]const u8 = null,
 
     /// The payment option for the commitment (for example, All Upfront or No
     /// Upfront).
-    payment_option: ?PaymentOption,
+    payment_option: ?PaymentOption = null,
 
     /// The region the recommendation is generated for.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The requested Savings Plan recommendation type.
-    savings_plans_type: ?SupportedSavingsPlansType,
+    savings_plans_type: ?SupportedSavingsPlansType = null,
 
     /// The term of the commitment in years.
-    term_in_years: ?TermInYears,
+    term_in_years: ?TermInYears = null,
 
     /// The upfront cost of the recommended Savings Plan, based on the selected
     /// payment
     /// option.
-    upfront_cost: ?[]const u8,
+    upfront_cost: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

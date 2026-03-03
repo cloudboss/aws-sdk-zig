@@ -8,22 +8,22 @@ const RuleStatus = @import("rule_status.zig").RuleStatus;
 /// schedule, and execution settings.
 pub const AutomationRule = struct {
     /// The 12-digit Amazon Web Services account ID that owns this automation rule.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The timestamp when the automation rule was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// A description of the automation rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The timestamp when the automation rule was last updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     /// The name of the automation rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Configuration settings for organization-wide rules.
-    organization_configuration: ?OrganizationConfiguration,
+    organization_configuration: ?OrganizationConfiguration = null,
 
     /// A string representation of a decimal number between 0 and 1 (having up to 30
     /// digits after the decimal point) that determines the priority of the rule.
@@ -31,28 +31,28 @@ pub const AutomationRule = struct {
     /// assigns the action to the rule with the lowest priority value (highest
     /// priority), even if that rule is scheduled to run later than other matching
     /// rules.
-    priority: ?[]const u8,
+    priority: ?[]const u8 = null,
 
     /// List of recommended action types that this rule can execute.
-    recommended_action_types: ?[]const RecommendedActionType,
+    recommended_action_types: ?[]const RecommendedActionType = null,
 
     /// The Amazon Resource Name (ARN) of the automation rule.
-    rule_arn: ?[]const u8,
+    rule_arn: ?[]const u8 = null,
 
     /// The unique identifier of the automation rule.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     /// The revision number of the automation rule.
-    rule_revision: ?i64,
+    rule_revision: ?i64 = null,
 
     /// The type of automation rule (OrganizationRule or AccountRule).
-    rule_type: ?RuleType,
+    rule_type: ?RuleType = null,
 
     /// The schedule configuration for when the automation rule should execute.
-    schedule: ?Schedule,
+    schedule: ?Schedule = null,
 
     /// The current status of the automation rule (Active or Inactive).
-    status: ?RuleStatus,
+    status: ?RuleStatus = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

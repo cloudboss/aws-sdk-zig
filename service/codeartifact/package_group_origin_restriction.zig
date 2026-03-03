@@ -10,11 +10,11 @@ pub const PackageGroupOriginRestriction = struct {
     /// is the same. Otherwise, when the value of `mode` is `INHERIT`, then the
     /// value of `effectiveMode` is the value of
     /// `mode` of the first parent group which does not have a value of `INHERIT`.
-    effective_mode: ?PackageGroupOriginRestrictionMode,
+    effective_mode: ?PackageGroupOriginRestrictionMode = null,
 
     /// The parent package group that the package group origin restrictions are
     /// inherited from.
-    inherited_from: ?PackageGroupReference,
+    inherited_from: ?PackageGroupReference = null,
 
     /// The package group origin restriction setting. If the value of `mode` is
     /// `ALLOW`,
@@ -22,10 +22,10 @@ pub const PackageGroupOriginRestriction = struct {
     /// is the same. Otherwise, when the value is `INHERIT`, then the value of
     /// `effectiveMode` is the value of
     /// `mode` of the first parent group which does not have a value of `INHERIT`.
-    mode: ?PackageGroupOriginRestrictionMode,
+    mode: ?PackageGroupOriginRestrictionMode = null,
 
     /// The number of repositories in the allowed repository list.
-    repositories_count: ?i64,
+    repositories_count: ?i64 = null,
 
     pub const json_field_names = .{
         .effective_mode = "effectiveMode",

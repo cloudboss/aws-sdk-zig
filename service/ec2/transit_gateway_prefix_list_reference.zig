@@ -4,20 +4,20 @@ const TransitGatewayPrefixListAttachment = @import("transit_gateway_prefix_list_
 /// Describes a prefix list reference.
 pub const TransitGatewayPrefixListReference = struct {
     /// Indicates whether traffic that matches this route is dropped.
-    blackhole: ?bool,
+    blackhole: ?bool = null,
 
     /// The ID of the prefix list.
-    prefix_list_id: ?[]const u8,
+    prefix_list_id: ?[]const u8 = null,
 
     /// The ID of the prefix list owner.
-    prefix_list_owner_id: ?[]const u8,
+    prefix_list_owner_id: ?[]const u8 = null,
 
     /// The state of the prefix list reference.
-    state: ?TransitGatewayPrefixListReferenceState,
+    state: ?TransitGatewayPrefixListReferenceState = null,
 
     /// Information about the transit gateway attachment.
-    transit_gateway_attachment: ?TransitGatewayPrefixListAttachment,
+    transit_gateway_attachment: ?TransitGatewayPrefixListAttachment = null,
 
     /// The ID of the transit gateway route table.
-    transit_gateway_route_table_id: ?[]const u8,
+    transit_gateway_route_table_id: ?[]const u8 = null,
 };

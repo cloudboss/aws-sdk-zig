@@ -6,19 +6,19 @@ const RelationalFilterConfiguration = @import("relational_filter_configuration.z
 pub const RedshiftRunConfigurationOutput = struct {
     /// The ID of the Amazon Web Services account included in the configuration
     /// details of the Amazon Redshift data source.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The data access role included in the configuration details of the Amazon
     /// Redshift data source.
-    data_access_role: ?[]const u8,
+    data_access_role: ?[]const u8 = null,
 
-    redshift_credential_configuration: ?RedshiftCredentialConfiguration,
+    redshift_credential_configuration: ?RedshiftCredentialConfiguration = null,
 
     redshift_storage: RedshiftStorage,
 
     /// The Amazon Web Services region included in the configuration details of the
     /// Amazon Redshift data source.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The relational filger configurations included in the configuration details
     /// of the Amazon Redshift data source.

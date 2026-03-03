@@ -1,26 +1,26 @@
 /// Summary information about a listener rule.
 pub const RuleSummary = struct {
     /// The Amazon Resource Name (ARN) of the rule.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the listener rule was created, in ISO-8601 format.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The ID of the rule.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Indicates whether this is the default listener rule.
-    is_default: ?bool,
+    is_default: ?bool = null,
 
     /// The date and time that the listener rule was last updated, in ISO-8601
     /// format.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The name of the rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The priority of the rule.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

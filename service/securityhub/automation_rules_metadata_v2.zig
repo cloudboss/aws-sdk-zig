@@ -4,31 +4,31 @@ const RuleStatusV2 = @import("rule_status_v2.zig").RuleStatusV2;
 /// Includes essential metadata information about automation rules.
 pub const AutomationRulesMetadataV2 = struct {
     /// The list of action to be performed when the rule criteria is met.
-    actions: ?[]const AutomationRulesActionTypeObjectV2,
+    actions: ?[]const AutomationRulesActionTypeObjectV2 = null,
 
     /// The timestamp for when the automation rule was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// An explanation for the purpose and funcitonality of the automation rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ARN of the automation rule.
-    rule_arn: ?[]const u8,
+    rule_arn: ?[]const u8 = null,
 
     /// The ID of the automation rule.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     /// The name of the automation rule.
-    rule_name: ?[]const u8,
+    rule_name: ?[]const u8 = null,
 
     /// The value for the rule priority.
-    rule_order: ?f32,
+    rule_order: ?f32 = null,
 
     /// The status of the automation rule.
-    rule_status: ?RuleStatusV2,
+    rule_status: ?RuleStatusV2 = null,
 
     /// The timestamp for the most recent modification to the automation rule.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

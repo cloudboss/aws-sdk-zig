@@ -19,7 +19,7 @@ pub const AttributeDimension = struct {
     ///   included in the segment. Time is ignored in this comparison.
     /// * BETWEEN - endpoints with attributes read as ISO_INSTANT datetimes between
     ///   the values are included in the segment.
-    attribute_type: ?AttributeType,
+    attribute_type: ?AttributeType = null,
 
     /// The criteria values to use for the segment dimension. Depending on the value
     /// of the AttributeType property, endpoints are included or excluded from the

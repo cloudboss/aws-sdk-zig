@@ -4,11 +4,11 @@ const SplitterConfiguration = @import("splitter_configuration.zig").SplitterConf
 
 /// Override Configuration of Document
 pub const DocumentOverrideConfiguration = struct {
-    modality_processing: ?ModalityProcessingConfiguration,
+    modality_processing: ?ModalityProcessingConfiguration = null,
 
-    sensitive_data_configuration: ?SensitiveDataConfiguration,
+    sensitive_data_configuration: ?SensitiveDataConfiguration = null,
 
-    splitter: ?SplitterConfiguration,
+    splitter: ?SplitterConfiguration = null,
 
     pub const json_field_names = .{
         .modality_processing = "modalityProcessing",

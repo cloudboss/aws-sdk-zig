@@ -6,13 +6,13 @@ const TimePeriod = @import("time_period.zig").TimePeriod;
 /// costs or usage.
 pub const BudgetedAndActualAmounts = struct {
     /// Your actual costs or usage for a budget period.
-    actual_amount: ?Spend,
+    actual_amount: ?Spend = null,
 
     /// The amount of cost or usage that you created the budget for.
-    budgeted_amount: ?Spend,
+    budgeted_amount: ?Spend = null,
 
     /// The time period that's covered by this budget comparison.
-    time_period: ?TimePeriod,
+    time_period: ?TimePeriod = null,
 
     pub const json_field_names = .{
         .actual_amount = "ActualAmount",

@@ -3,7 +3,7 @@
 pub const GuardrailAutomatedReasoningPolicyConfig = struct {
     /// The confidence threshold for triggering guardrail actions based on Automated
     /// Reasoning policy violations.
-    confidence_threshold: ?f64,
+    confidence_threshold: ?f64 = null,
 
     /// The list of Automated Reasoning policy ARNs to include in the guardrail
     /// configuration.

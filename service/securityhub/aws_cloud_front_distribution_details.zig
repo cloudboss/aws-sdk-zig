@@ -8,52 +8,52 @@ const AwsCloudFrontDistributionViewerCertificate = @import("aws_cloud_front_dist
 /// A CloudFront distribution configuration.
 pub const AwsCloudFrontDistributionDetails = struct {
     /// Provides information about the cache configuration for the distribution.
-    cache_behaviors: ?AwsCloudFrontDistributionCacheBehaviors,
+    cache_behaviors: ?AwsCloudFrontDistributionCacheBehaviors = null,
 
     /// The default cache behavior for the configuration.
-    default_cache_behavior: ?AwsCloudFrontDistributionDefaultCacheBehavior,
+    default_cache_behavior: ?AwsCloudFrontDistributionDefaultCacheBehavior = null,
 
     /// The object that CloudFront sends in response to requests from the origin
     /// (for example,
     /// index.html) when a viewer requests the root URL for the distribution
     /// (http://www.example.com) instead of an object in your distribution
     /// (http://www.example.com/product-description.html).
-    default_root_object: ?[]const u8,
+    default_root_object: ?[]const u8 = null,
 
     /// The domain name corresponding to the distribution.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// The entity tag is a hash of the object.
-    e_tag: ?[]const u8,
+    e_tag: ?[]const u8 = null,
 
     /// Indicates when that the distribution was last modified.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    last_modified_time: ?[]const u8,
+    last_modified_time: ?[]const u8 = null,
 
     /// A complex type that controls whether access logs are written for the
     /// distribution.
-    logging: ?AwsCloudFrontDistributionLogging,
+    logging: ?AwsCloudFrontDistributionLogging = null,
 
     /// Provides information about the origin groups in the distribution.
-    origin_groups: ?AwsCloudFrontDistributionOriginGroups,
+    origin_groups: ?AwsCloudFrontDistributionOriginGroups = null,
 
     /// A complex type that contains information about origins for this
     /// distribution.
-    origins: ?AwsCloudFrontDistributionOrigins,
+    origins: ?AwsCloudFrontDistributionOrigins = null,
 
     /// Indicates the current status of the distribution.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// Provides information about the TLS/SSL configuration that the distribution
     /// uses to communicate with viewers.
-    viewer_certificate: ?AwsCloudFrontDistributionViewerCertificate,
+    viewer_certificate: ?AwsCloudFrontDistributionViewerCertificate = null,
 
     /// A unique identifier that specifies the WAF web ACL, if any, to associate
     /// with this distribution.
-    web_acl_id: ?[]const u8,
+    web_acl_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cache_behaviors = "CacheBehaviors",

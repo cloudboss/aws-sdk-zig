@@ -13,7 +13,7 @@ pub const WebvttDestinationSettings = struct {
     /// or DASH manifest. For HLS manifests, MediaConvert adds the following
     /// accessibility attributes under EXT-X-MEDIA for this track:
     /// CHARACTERISTICS="public.accessibility.transcribes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES". For DASH manifests, MediaConvert adds the following in the adaptation set for this track: . If the captions track is not intended to provide such accessibility: Keep the default value, Disabled. When you do, for DASH manifests, MediaConvert instead adds the following in the adaptation set for this track: .
-    accessibility: ?WebvttAccessibilitySubs,
+    accessibility: ?WebvttAccessibilitySubs = null,
 
     /// Specify how MediaConvert writes style information in your output WebVTT
     /// captions. To use the available style, color, and position information from
@@ -28,7 +28,7 @@ pub const WebvttDestinationSettings = struct {
     /// information from your input captions, while merging cues with identical time
     /// ranges: Choose merge. This setting can help prevent positioning overlaps for
     /// certain players that expect a single single cue for any given time range.
-    style_passthrough: ?WebvttStylePassthrough,
+    style_passthrough: ?WebvttStylePassthrough = null,
 
     pub const json_field_names = .{
         .accessibility = "Accessibility",

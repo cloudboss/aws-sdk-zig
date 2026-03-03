@@ -5,18 +5,18 @@ pub const DateStatistics = struct {
     ///
     /// For example, `Date` would look like `"2024-09-05T17:00:00-07:00"`
     /// whereas `LastGeneratedAt` would look like 2024-09-05T17:12:29-07:00".
-    date: ?i64,
+    date: ?i64 = null,
 
     /// The timestamp at which the last finding in the findings count, was
     /// generated.
-    last_generated_at: ?i64,
+    last_generated_at: ?i64 = null,
 
     /// The severity of the findings generated on each date.
-    severity: ?f64,
+    severity: ?f64 = null,
 
     /// The total number of findings that were generated per severity level on each
     /// date.
-    total_findings: ?i32,
+    total_findings: ?i32 = null,
 
     pub const json_field_names = .{
         .date = "Date",

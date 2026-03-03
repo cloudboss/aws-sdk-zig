@@ -11,7 +11,7 @@ pub const Repository = struct {
     connection_arn: []const u8,
 
     /// Your customer Amazon Web Services KMS encryption key.
-    encryption_key: ?[]const u8,
+    encryption_key: ?[]const u8 = null,
 
     /// The repository name.
     name: []const u8,

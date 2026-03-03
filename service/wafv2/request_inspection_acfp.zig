@@ -44,7 +44,7 @@ pub const RequestInspectionACFP = struct {
     /// named `primaryaddressline1`, `primaryaddressline2`, and
     /// `primaryaddressline3`, the address fields identifiers are
     /// `primaryaddressline1`, `primaryaddressline2`, and `primaryaddressline3`.
-    address_fields: ?[]const AddressField,
+    address_fields: ?[]const AddressField = null,
 
     /// The name of the field in the request payload that contains your customer's
     /// email.
@@ -64,7 +64,7 @@ pub const RequestInspectionACFP = struct {
     ///
     /// For example, for an HTML form with the input element
     /// named `email1`, the email field specification is `email1`.
-    email_field: ?EmailField,
+    email_field: ?EmailField = null,
 
     /// The name of the field in the request payload that contains your customer's
     /// password.
@@ -85,7 +85,7 @@ pub const RequestInspectionACFP = struct {
     ///
     /// For example, for an HTML form with the input element
     /// named `password1`, the password field specification is `password1`.
-    password_field: ?PasswordField,
+    password_field: ?PasswordField = null,
 
     /// The payload type for your account creation endpoint, either JSON or form
     /// encoded.
@@ -118,7 +118,7 @@ pub const RequestInspectionACFP = struct {
     /// named `primaryphoneline1`, `primaryphoneline2`, and `primaryphoneline3`, the
     /// phone number field identifiers are `primaryphoneline1`, `primaryphoneline2`,
     /// and `primaryphoneline3`.
-    phone_number_fields: ?[]const PhoneNumberField,
+    phone_number_fields: ?[]const PhoneNumberField = null,
 
     /// The name of the field in the request payload that contains your customer's
     /// username.
@@ -140,7 +140,7 @@ pub const RequestInspectionACFP = struct {
     /// For example, for an HTML form with the input element
     /// named `username1`, the username field specification is
     /// `username1`
-    username_field: ?UsernameField,
+    username_field: ?UsernameField = null,
 
     pub const json_field_names = .{
         .address_fields = "AddressFields",

@@ -21,31 +21,31 @@ pub const PhysicalResource = struct {
     /// Key: `"failover-regions"`
     ///
     /// Value: `"[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
-    additional_info: ?[]const aws.map.MapEntry([]const []const u8),
+    additional_info: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The application components that belong to this resource.
-    app_components: ?[]const AppComponent,
+    app_components: ?[]const AppComponent = null,
 
     /// Indicates if a resource is included or excluded from the assessment.
-    excluded: ?bool,
+    excluded: ?bool = null,
 
     /// Logical identifier of the resource.
     logical_resource_id: LogicalResourceId,
 
     /// Name of the parent resource.
-    parent_resource_name: ?[]const u8,
+    parent_resource_name: ?[]const u8 = null,
 
     /// Identifier of the physical resource.
     physical_resource_id: PhysicalResourceId,
 
     /// The name of the resource.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// Type of resource.
     resource_type: []const u8,
 
     /// Type of input source.
-    source_type: ?ResourceSourceType,
+    source_type: ?ResourceSourceType = null,
 
     pub const json_field_names = .{
         .additional_info = "additionalInfo",

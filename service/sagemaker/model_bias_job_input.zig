@@ -5,9 +5,9 @@ const MonitoringGroundTruthS3Input = @import("monitoring_ground_truth_s3_input.z
 /// Inputs for the model bias job.
 pub const ModelBiasJobInput = struct {
     /// Input object for the batch transform job.
-    batch_transform_input: ?BatchTransformInput,
+    batch_transform_input: ?BatchTransformInput = null,
 
-    endpoint_input: ?EndpointInput,
+    endpoint_input: ?EndpointInput = null,
 
     /// Location of ground truth labels to use in model bias job.
     ground_truth_s3_input: MonitoringGroundTruthS3Input,

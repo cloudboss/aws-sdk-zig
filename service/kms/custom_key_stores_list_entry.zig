@@ -10,7 +10,7 @@ pub const CustomKeyStoresListEntry = struct {
     /// CloudHSM key store. This
     /// field appears only when the `CustomKeyStoreType` is
     /// `AWS_CLOUDHSM`.
-    cloud_hsm_cluster_id: ?[]const u8,
+    cloud_hsm_cluster_id: ?[]const u8 = null,
 
     /// Describes the connection error. This field appears in the response only when
     /// the
@@ -182,7 +182,7 @@ pub const CustomKeyStoresListEntry = struct {
     /// that the `XksProxyVpcEndpointServiceName` is correct and the KMS service
     /// principal has service consumer permissions on the Amazon VPC endpoint
     /// service.
-    connection_error_code: ?ConnectionErrorCodeType,
+    connection_error_code: ?ConnectionErrorCodeType = null,
 
     /// Indicates whether the custom key store is connected to its backing key
     /// store. For an CloudHSM
@@ -216,16 +216,16 @@ pub const CustomKeyStoresListEntry = struct {
     /// For help resolving a connection failure, see [Troubleshooting a custom key
     /// store](https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) in the
     /// *Key Management Service Developer Guide*.
-    connection_state: ?ConnectionStateType,
+    connection_state: ?ConnectionStateType = null,
 
     /// The date and time when the custom key store was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// A unique identifier for the custom key store.
-    custom_key_store_id: ?[]const u8,
+    custom_key_store_id: ?[]const u8 = null,
 
     /// The user-specified friendly name for the custom key store.
-    custom_key_store_name: ?[]const u8,
+    custom_key_store_name: ?[]const u8 = null,
 
     /// Indicates the type of the custom key store. `AWS_CLOUDHSM` indicates a
     /// custom
@@ -233,7 +233,7 @@ pub const CustomKeyStoresListEntry = struct {
     /// custom key
     /// store backed by an external key store proxy and external key manager outside
     /// of Amazon Web Services.
-    custom_key_store_type: ?CustomKeyStoreType,
+    custom_key_store_type: ?CustomKeyStoreType = null,
 
     /// The trust anchor certificate of the CloudHSM cluster associated with an
     /// CloudHSM key store. When
@@ -244,7 +244,7 @@ pub const CustomKeyStoresListEntry = struct {
     ///
     /// This field appears only when the `CustomKeyStoreType` is
     /// `AWS_CLOUDHSM`.
-    trust_anchor_certificate: ?[]const u8,
+    trust_anchor_certificate: ?[]const u8 = null,
 
     /// Configuration settings for the external key store proxy (XKS proxy). The
     /// external key
@@ -255,7 +255,7 @@ pub const CustomKeyStoresListEntry = struct {
     ///
     /// This field appears only when the `CustomKeyStoreType` is
     /// `EXTERNAL_KEY_STORE`.
-    xks_proxy_configuration: ?XksProxyConfigurationType,
+    xks_proxy_configuration: ?XksProxyConfigurationType = null,
 
     pub const json_field_names = .{
         .cloud_hsm_cluster_id = "CloudHsmClusterId",

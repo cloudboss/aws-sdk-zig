@@ -4,7 +4,7 @@ const UpdateArgoCdConfig = @import("update_argo_cd_config.zig").UpdateArgoCdConf
 /// the capability type.
 pub const UpdateCapabilityConfiguration = struct {
     /// Configuration updates specific to Argo CD capabilities.
-    argo_cd: ?UpdateArgoCdConfig,
+    argo_cd: ?UpdateArgoCdConfig = null,
 
     pub const json_field_names = .{
         .argo_cd = "argoCd",

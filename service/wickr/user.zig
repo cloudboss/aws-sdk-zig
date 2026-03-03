@@ -5,69 +5,69 @@
 /// under preview only.
 pub const User = struct {
     /// The phone number minus country code, used for cloud deployments.
-    cell: ?[]const u8,
+    cell: ?[]const u8 = null,
 
     /// The number of failed password attempts for enterprise deployments, used for
     /// account lockout policies.
-    challenge_failures: ?i32,
+    challenge_failures: ?i32 = null,
 
     /// Indicates whether the user can be verified through a custom invite code.
-    code_validation: ?bool,
+    code_validation: ?bool = null,
 
     /// The country code for the user's phone number, used for cloud deployments.
-    country_code: ?[]const u8,
+    country_code: ?[]const u8 = null,
 
     /// The first name of the user.
-    first_name: ?[]const u8,
+    first_name: ?[]const u8 = null,
 
     /// The invitation code for this user, used during registration to join the
     /// network.
-    invite_code: ?[]const u8,
+    invite_code: ?[]const u8 = null,
 
     /// Indicates whether the user has administrator privileges in the network.
-    is_admin: ?bool,
+    is_admin: ?bool = null,
 
     /// Indicates whether the user's email invitation code has expired, applicable
     /// to cloud deployments.
-    is_invite_expired: ?bool,
+    is_invite_expired: ?bool = null,
 
     /// Indicates whether this account is a user (as opposed to a bot or other
     /// account type).
-    is_user: ?bool,
+    is_user: ?bool = null,
 
     /// The last name of the user.
-    last_name: ?[]const u8,
+    last_name: ?[]const u8 = null,
 
     /// Indicates whether one-time password (OTP) authentication is enabled for the
     /// user.
-    otp_enabled: ?bool,
+    otp_enabled: ?bool = null,
 
     /// The SCIM (System for Cross-domain Identity Management) identifier for the
     /// user, used for identity synchronization. Currently not used.
-    scim_id: ?[]const u8,
+    scim_id: ?[]const u8 = null,
 
     /// A list of security group IDs to which the user is assigned, determining
     /// their permissions and feature access.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// The current status of the user (1 for pending invitation, 2 for active).
-    status: ?i32,
+    status: ?i32 = null,
 
     /// Indicates whether the user is currently suspended and unable to access the
     /// network.
-    suspended: ?bool,
+    suspended: ?bool = null,
 
     /// The descriptive type of the user account (e.g., 'user').
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The unique identifier for the user.
-    uname: ?[]const u8,
+    uname: ?[]const u8 = null,
 
     /// The unique identifier for the user within the network.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     /// The email address or username of the user. For bots, this must end in 'bot'.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cell = "cell",

@@ -2,7 +2,7 @@
 /// for other event types.
 pub const LambdaFunctionCompletedEventAttributes = struct {
     /// The results of the Lambda task.
-    result: ?[]const u8,
+    result: ?[]const u8 = null,
 
     /// The ID of the `LambdaFunctionScheduled` event that was recorded when this
     /// Lambda task was scheduled. To help diagnose issues, use this information to

@@ -6,14 +6,14 @@ const MessageTemplateQueryField = @import("message_template_query_field.zig").Me
 pub const MessageTemplateSearchExpression = struct {
     /// The configuration of filtering rules applied to message template query
     /// results.
-    filters: ?[]const MessageTemplateFilterField,
+    filters: ?[]const MessageTemplateFilterField = null,
 
     /// The message template attribute fields on which the query results are
     /// ordered.
-    order_on_field: ?MessageTemplateOrderField,
+    order_on_field: ?MessageTemplateOrderField = null,
 
     /// The message template query expressions.
-    queries: ?[]const MessageTemplateQueryField,
+    queries: ?[]const MessageTemplateQueryField = null,
 
     pub const json_field_names = .{
         .filters = "filters",

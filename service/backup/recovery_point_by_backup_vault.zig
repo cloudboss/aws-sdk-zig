@@ -13,25 +13,25 @@ pub const RecoveryPointByBackupVault = struct {
     /// Contains the latest scanning results against the recovery point and
     /// currently include
     /// `FailedScan`, `Findings`, `LastComputed`.
-    aggregated_scan_result: ?AggregatedScanResult,
+    aggregated_scan_result: ?AggregatedScanResult = null,
 
     /// The size, in bytes, of a backup.
-    backup_size_in_bytes: ?i64,
+    backup_size_in_bytes: ?i64 = null,
 
     /// An ARN that uniquely identifies a backup vault; for example,
     /// `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
-    backup_vault_arn: ?[]const u8,
+    backup_vault_arn: ?[]const u8 = null,
 
     /// The name of a logical container where backups are stored. Backup vaults are
     /// identified
     /// by names that are unique to the account used to create them and the Amazon
     /// Web Services
     /// Region where they are created.
-    backup_vault_name: ?[]const u8,
+    backup_vault_name: ?[]const u8 = null,
 
     /// A `CalculatedLifecycle` object containing `DeleteAt` and
     /// `MoveToColdStorageAt` timestamps.
-    calculated_lifecycle: ?CalculatedLifecycle,
+    calculated_lifecycle: ?CalculatedLifecycle = null,
 
     /// The date and time a job to restore a recovery point is completed, in Unix
     /// format and
@@ -40,7 +40,7 @@ pub const RecoveryPointByBackupVault = struct {
     /// milliseconds. For example, the value 1516925490.087 represents Friday,
     /// January 26, 2018
     /// 12:11:30.087 AM.
-    completion_date: ?i64,
+    completion_date: ?i64 = null,
 
     /// The identifier of a resource within a composite group, such as
     /// nested (child) recovery point belonging to a composite (parent) stack. The
@@ -48,13 +48,13 @@ pub const RecoveryPointByBackupVault = struct {
     /// the [
     /// logical
     /// ID](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax) within a stack.
-    composite_member_identifier: ?[]const u8,
+    composite_member_identifier: ?[]const u8 = null,
 
     /// Contains identifying information about the creation of a recovery point,
     /// including the
     /// `BackupPlanArn`, `BackupPlanId`, `BackupPlanVersion`,
     /// and `BackupRuleId` of the backup plan that is used to create it.
-    created_by: ?RecoveryPointCreator,
+    created_by: ?RecoveryPointCreator = null,
 
     /// The date and time a recovery point is created, in Unix format and
     /// Coordinated Universal
@@ -62,22 +62,22 @@ pub const RecoveryPointByBackupVault = struct {
     /// example, the value 1516925490.087 represents Friday, January 26, 2018
     /// 12:11:30.087
     /// AM.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The server-side encryption key that is used to protect your backups; for
     /// example,
     /// `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The type of encryption key used for the recovery point. Valid values are
     /// CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web
     /// Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.
-    encryption_key_type: ?EncryptionKeyType,
+    encryption_key_type: ?EncryptionKeyType = null,
 
     /// Specifies the IAM role ARN used to create the target recovery point; for
     /// example,
     /// `arn:aws:iam::123456789012:role/S3Access`.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// This is the current status for the backup index associated
     /// with the specified recovery point.
@@ -87,17 +87,17 @@ pub const RecoveryPointByBackupVault = struct {
     ///
     /// A recovery point with an index that has the status of `ACTIVE`
     /// can be included in a search.
-    index_status: ?IndexStatus,
+    index_status: ?IndexStatus = null,
 
     /// A string in the form of a detailed message explaining the status of a backup
     /// index associated
     /// with the recovery point.
-    index_status_message: ?[]const u8,
+    index_status_message: ?[]const u8 = null,
 
     /// The date and time when the backup job that created this recovery point was
     /// initiated, in
     /// Unix format and Coordinated Universal Time (UTC).
-    initiation_date: ?i64,
+    initiation_date: ?i64 = null,
 
     /// A Boolean value that is returned as `TRUE` if the specified recovery point
     /// is
@@ -114,7 +114,7 @@ pub const RecoveryPointByBackupVault = struct {
     /// milliseconds. For example, the value 1516925490.087 represents Friday,
     /// January 26, 2018
     /// 12:11:30.087 AM.
-    last_restore_time: ?i64,
+    last_restore_time: ?i64 = null,
 
     /// The lifecycle defines when a protected resource is transitioned to cold
     /// storage and when
@@ -135,25 +135,25 @@ pub const RecoveryPointByBackupVault = struct {
     /// availability by
     /// resource](https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource) table. Backup ignores this expression for
     /// other resource types.
-    lifecycle: ?Lifecycle,
+    lifecycle: ?Lifecycle = null,
 
     /// The Amazon Resource Name (ARN) of the parent (composite)
     /// recovery point.
-    parent_recovery_point_arn: ?[]const u8,
+    parent_recovery_point_arn: ?[]const u8 = null,
 
     /// An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for
     /// example,
     /// `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-    recovery_point_arn: ?[]const u8,
+    recovery_point_arn: ?[]const u8 = null,
 
     /// An ARN that uniquely identifies a resource. The format of the ARN depends on
     /// the
     /// resource type.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The non-unique name of the resource that
     /// belongs to the specified backup.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// The type of Amazon Web Services resource saved as a recovery point; for
     /// example, an
@@ -161,21 +161,21 @@ pub const RecoveryPointByBackupVault = struct {
     /// Database Service (Amazon RDS) database. For Windows Volume Shadow Copy
     /// Service (VSS) backups, the only
     /// supported resource type is Amazon EC2.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The backup vault where the recovery point was originally copied from. If the
     /// recovery
     /// point is restored to the same account this value will be `null`.
-    source_backup_vault_arn: ?[]const u8,
+    source_backup_vault_arn: ?[]const u8 = null,
 
     /// A status code specifying the state of the recovery point.
-    status: ?RecoveryPointStatus,
+    status: ?RecoveryPointStatus = null,
 
     /// A message explaining the current status of the recovery point.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The type of vault in which the described recovery point is stored.
-    vault_type: ?VaultType,
+    vault_type: ?VaultType = null,
 
     pub const json_field_names = .{
         .aggregated_scan_result = "AggregatedScanResult",

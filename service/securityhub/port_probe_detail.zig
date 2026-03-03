@@ -9,13 +9,13 @@ const ActionRemoteIpDetails = @import("action_remote_ip_details.zig").ActionRemo
 /// address that the scan originated from.
 pub const PortProbeDetail = struct {
     /// Provides information about the IP address where the scanned port is located.
-    local_ip_details: ?ActionLocalIpDetails,
+    local_ip_details: ?ActionLocalIpDetails = null,
 
     /// Provides information about the port that was scanned.
-    local_port_details: ?ActionLocalPortDetails,
+    local_port_details: ?ActionLocalPortDetails = null,
 
     /// Provides information about the remote IP address that performed the scan.
-    remote_ip_details: ?ActionRemoteIpDetails,
+    remote_ip_details: ?ActionRemoteIpDetails = null,
 
     pub const json_field_names = .{
         .local_ip_details = "LocalIpDetails",

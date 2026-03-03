@@ -11,7 +11,7 @@ pub const UsageAllocation = struct {
     /// The set of tags that define the bucket of usage. For the bucket of items
     /// with no tags,
     /// this parameter can be left out.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .allocated_usage_quantity = "AllocatedUsageQuantity",

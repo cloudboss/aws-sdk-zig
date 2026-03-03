@@ -14,7 +14,7 @@ pub const ResourceChangeDetail = struct {
     ///
     /// If the `ChangeSource` value is `DirectModification`, no value is given
     /// for `CausingEntity`.
-    causing_entity: ?[]const u8,
+    causing_entity: ?[]const u8 = null,
 
     /// The group to which the `CausingEntity` value belongs. There are five entity
     /// groups:
@@ -44,7 +44,7 @@ pub const ResourceChangeDetail = struct {
     /// * `NoModification` entities are changes made to the template that matches
     ///   the actual
     /// state of the resource.
-    change_source: ?ChangeSource,
+    change_source: ?ChangeSource = null,
 
     /// Indicates whether CloudFormation can determine the target value, and whether
     /// the target value
@@ -69,10 +69,10 @@ pub const ResourceChangeDetail = struct {
     /// resource is recreated,
     /// it will have a new physical ID, so all references to that resource will also
     /// be updated.
-    evaluation: ?EvaluationType,
+    evaluation: ?EvaluationType = null,
 
     /// A `ResourceTargetDefinition` structure that describes the field that
     /// CloudFormation
     /// will change and whether the resource will be recreated.
-    target: ?ResourceTargetDefinition,
+    target: ?ResourceTargetDefinition = null,
 };

@@ -27,7 +27,7 @@ pub const SyncState = struct {
     /// For each configured subnet, Network Firewall creates the attachment by
     /// instantiating the firewall
     /// endpoint in the subnet so that it's ready to take traffic.
-    attachment: ?Attachment,
+    attachment: ?Attachment = null,
 
     /// The configuration status of the firewall endpoint in a single VPC subnet.
     /// Network Firewall
@@ -36,7 +36,7 @@ pub const SyncState = struct {
     /// you add a subnet or modify the associated firewall policy, Network Firewall
     /// synchronizes the
     /// rules in the endpoint, so it can properly filter network traffic.
-    config: ?[]const aws.map.MapEntry(PerObjectStatus),
+    config: ?[]const aws.map.MapEntry(PerObjectStatus) = null,
 
     pub const json_field_names = .{
         .attachment = "Attachment",

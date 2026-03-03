@@ -21,11 +21,11 @@
 /// 3492](http://tools.ietf.org/html/rfc3492).
 pub const Destination = struct {
     /// The recipients to place on the BCC: line of the message.
-    bcc_addresses: ?[]const []const u8,
+    bcc_addresses: ?[]const []const u8 = null,
 
     /// The recipients to place on the CC: line of the message.
-    cc_addresses: ?[]const []const u8,
+    cc_addresses: ?[]const []const u8 = null,
 
     /// The recipients to place on the To: line of the message.
-    to_addresses: ?[]const []const u8,
+    to_addresses: ?[]const []const u8 = null,
 };

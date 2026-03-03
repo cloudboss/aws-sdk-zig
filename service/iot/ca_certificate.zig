@@ -3,18 +3,18 @@ const CACertificateStatus = @import("ca_certificate_status.zig").CACertificateSt
 /// A CA certificate.
 pub const CACertificate = struct {
     /// The ARN of the CA certificate.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The ID of the CA certificate.
-    certificate_id: ?[]const u8,
+    certificate_id: ?[]const u8 = null,
 
     /// The date the CA certificate was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The status of the CA certificate.
     ///
     /// The status value REGISTER_INACTIVE is deprecated and should not be used.
-    status: ?CACertificateStatus,
+    status: ?CACertificateStatus = null,
 
     pub const json_field_names = .{
         .certificate_arn = "certificateArn",

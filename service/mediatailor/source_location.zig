@@ -10,25 +10,25 @@ const SegmentDeliveryConfiguration = @import("segment_delivery_configuration.zig
 /// locations](https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html) in the *MediaTailor User Guide*.
 pub const SourceLocation = struct {
     /// The access configuration for the source location.
-    access_configuration: ?AccessConfiguration,
+    access_configuration: ?AccessConfiguration = null,
 
     /// The ARN of the SourceLocation.
     arn: []const u8,
 
     /// The timestamp that indicates when the source location was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The default segment delivery configuration.
-    default_segment_delivery_configuration: ?DefaultSegmentDeliveryConfiguration,
+    default_segment_delivery_configuration: ?DefaultSegmentDeliveryConfiguration = null,
 
     /// The HTTP configuration for the source location.
     http_configuration: HttpConfiguration,
 
     /// The timestamp that indicates when the source location was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The segment delivery configurations for the source location.
-    segment_delivery_configurations: ?[]const SegmentDeliveryConfiguration,
+    segment_delivery_configurations: ?[]const SegmentDeliveryConfiguration = null,
 
     /// The name of the source location.
     source_location_name: []const u8,
@@ -38,7 +38,7 @@ pub const SourceLocation = struct {
     /// control, and cost tracking. For more information, see [Tagging AWS Elemental
     /// MediaTailor
     /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .access_configuration = "AccessConfiguration",

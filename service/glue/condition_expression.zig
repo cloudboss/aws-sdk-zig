@@ -8,7 +8,7 @@ pub const ConditionExpression = struct {
     target_column: []const u8,
 
     /// The value of the condition expression.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .condition = "Condition",

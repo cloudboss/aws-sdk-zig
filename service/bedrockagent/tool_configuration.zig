@@ -7,7 +7,7 @@ const Tool = @import("tool.zig").Tool;
 /// response](https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html).
 pub const ToolConfiguration = struct {
     /// Defines which tools the model should request when invoked.
-    tool_choice: ?ToolChoice,
+    tool_choice: ?ToolChoice = null,
 
     /// An array of tools to pass to a model.
     tools: []const Tool,

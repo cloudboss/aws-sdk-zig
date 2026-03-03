@@ -3,7 +3,7 @@ const ResourceEvaluationStatus = @import("resource_evaluation_status.zig").Resou
 /// Returns status details of an evaluation.
 pub const EvaluationStatus = struct {
     /// An explanation for failed execution status.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The status of an execution. The valid values are In_Progress, Succeeded or
     /// Failed.

@@ -8,11 +8,11 @@ pub const ProjectContinuousIntegrationScanConfiguration = struct {
     /// The categories of security rules applied during continuous integration scans
     /// for the
     /// project.
-    rule_set_categories: ?[]const RuleSetCategory,
+    rule_set_categories: ?[]const RuleSetCategory = null,
 
     /// The repository event that triggers continuous integration scans for the
     /// project.
-    supported_event: ?ContinuousIntegrationScanEvent,
+    supported_event: ?ContinuousIntegrationScanEvent = null,
 
     pub const json_field_names = .{
         .rule_set_categories = "ruleSetCategories",

@@ -7,41 +7,41 @@ const EntityStatus = @import("entity_status.zig").EntityStatus;
 /// the current status of the
 /// `Evaluation`.
 pub const Evaluation = struct {
-    compute_time: ?i64,
+    compute_time: ?i64 = null,
 
     /// The time that the `Evaluation` was created. The time is expressed in epoch
     /// time.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The AWS user account that invoked the evaluation. The account type can be
     /// either an AWS root account or an AWS Identity and Access Management (IAM)
     /// user account.
-    created_by_iam_user: ?[]const u8,
+    created_by_iam_user: ?[]const u8 = null,
 
     /// The ID of the `DataSource` that is used to evaluate the `MLModel`.
-    evaluation_data_source_id: ?[]const u8,
+    evaluation_data_source_id: ?[]const u8 = null,
 
     /// The ID that is assigned to the `Evaluation` at creation.
-    evaluation_id: ?[]const u8,
+    evaluation_id: ?[]const u8 = null,
 
-    finished_at: ?i64,
+    finished_at: ?i64 = null,
 
     /// The location and name of the data in Amazon Simple Storage Server (Amazon
     /// S3) that is used in the evaluation.
-    input_data_location_s3: ?[]const u8,
+    input_data_location_s3: ?[]const u8 = null,
 
     /// The time of the most recent edit to the `Evaluation`. The time is expressed
     /// in epoch time.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// A description of the most recent details about evaluating the `MLModel`.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The ID of the `MLModel` that is the focus of the evaluation.
-    ml_model_id: ?[]const u8,
+    ml_model_id: ?[]const u8 = null,
 
     /// A user-supplied name or description of the `Evaluation`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Measurements of how well the `MLModel` performed, using observations
     /// referenced
@@ -61,9 +61,9 @@ pub const Evaluation = struct {
     /// For more information about performance metrics, please see the [Amazon
     /// Machine Learning Developer
     /// Guide](https://docs.aws.amazon.com/machine-learning/latest/dg).
-    performance_metrics: ?PerformanceMetrics,
+    performance_metrics: ?PerformanceMetrics = null,
 
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The status of the evaluation. This element can have one of the following
     /// values:
@@ -79,7 +79,7 @@ pub const Evaluation = struct {
     /// * `COMPLETED` - The evaluation process completed successfully.
     ///
     /// * `DELETED` - The `Evaluation` is marked as deleted. It is not usable.
-    status: ?EntityStatus,
+    status: ?EntityStatus = null,
 
     pub const json_field_names = .{
         .compute_time = "ComputeTime",

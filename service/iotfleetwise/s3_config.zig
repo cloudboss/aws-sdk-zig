@@ -21,7 +21,7 @@ pub const S3Config = struct {
     /// default.
     ///
     /// * JSON - Store data in a standard text-based JSON file format.
-    data_format: ?DataFormat,
+    data_format: ?DataFormat = null,
 
     /// Enter an S3 bucket prefix. The prefix is the string of characters after the
     /// bucket name and before the object name. You can use the prefix to organize
@@ -35,12 +35,12 @@ pub const S3Config = struct {
     /// prefix. For
     /// example, if you enter the prefix `vehicles`, the prefix will be
     /// `vehicles/processed-data/year=YY/month=MM/date=DD/hour=HH/`.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// By default, stored data is compressed as a .gzip file. Compressed files have
     /// a reduced
     /// file size, which can optimize the cost of data storage.
-    storage_compression_format: ?StorageCompressionFormat,
+    storage_compression_format: ?StorageCompressionFormat = null,
 
     pub const json_field_names = .{
         .bucket_arn = "bucketArn",

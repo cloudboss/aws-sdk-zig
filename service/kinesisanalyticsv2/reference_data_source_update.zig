@@ -17,16 +17,16 @@ pub const ReferenceDataSourceUpdate = struct {
     /// Describes the format of the data in the streaming source, and how each data
     /// element maps to
     /// corresponding columns created in the in-application stream.
-    reference_schema_update: ?SourceSchema,
+    reference_schema_update: ?SourceSchema = null,
 
     /// Describes the S3 bucket name, object key name, and IAM role that Kinesis
     /// Data Analytics can assume to read the
     /// Amazon S3 object on your behalf and populate the in-application reference
     /// table.
-    s3_reference_data_source_update: ?S3ReferenceDataSourceUpdate,
+    s3_reference_data_source_update: ?S3ReferenceDataSourceUpdate = null,
 
     /// The in-application table name that is created by this update.
-    table_name_update: ?[]const u8,
+    table_name_update: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .reference_id = "ReferenceId",

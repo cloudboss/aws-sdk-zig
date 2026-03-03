@@ -12,12 +12,12 @@ pub const ListedServer = struct {
     /// Specifies the domain of the storage system that is used for file transfers.
     /// There are two domains available: Amazon Simple Storage Service (Amazon S3)
     /// and Amazon Elastic File System (Amazon EFS). The default value is S3.
-    domain: ?Domain,
+    domain: ?Domain = null,
 
     /// Specifies the type of VPC endpoint that your server is connected to. If your
     /// server is connected to a VPC endpoint, your server isn't accessible over the
     /// public internet.
-    endpoint_type: ?EndpointType,
+    endpoint_type: ?EndpointType = null,
 
     /// The mode of authentication for a server. The default value is
     /// `SERVICE_MANAGED`, which allows you to store and access user credentials
@@ -38,17 +38,17 @@ pub const ListedServer = struct {
     /// identity provider. If you choose this value, you must specify the ARN for
     /// the Lambda function in the `Function` parameter for the
     /// `IdentityProviderDetails` data type.
-    identity_provider_type: ?IdentityProviderType,
+    identity_provider_type: ?IdentityProviderType = null,
 
     /// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
     /// role that allows a server to turn on Amazon CloudWatch logging for Amazon S3
     /// or Amazon EFS events. When set, you can view user activity in your
     /// CloudWatch logs.
-    logging_role: ?[]const u8,
+    logging_role: ?[]const u8 = null,
 
     /// Specifies the unique system assigned identifier for the servers that were
     /// listed.
-    server_id: ?[]const u8,
+    server_id: ?[]const u8 = null,
 
     /// The condition of the server that was described. A value of `ONLINE`
     /// indicates that the server can accept jobs and transfer files. A `State`
@@ -59,11 +59,11 @@ pub const ListedServer = struct {
     /// intermediate state, either not fully able to respond, or not fully offline.
     /// The values of `START_FAILED` or `STOP_FAILED` can indicate an error
     /// condition.
-    state: ?State,
+    state: ?State = null,
 
     /// Specifies the number of users that are assigned to a server you specified
     /// with the `ServerId`.
-    user_count: ?i32,
+    user_count: ?i32 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

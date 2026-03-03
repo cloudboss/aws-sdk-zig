@@ -44,12 +44,12 @@ pub const ThrottlingReason = struct {
     /// This helps identify exactly what resource is being throttled, what type of
     /// operation
     /// caused it, and why the throttling occurred.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the DynamoDB table or index that
     /// experienced the
     /// throttling event.
-    resource: ?[]const u8,
+    resource: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .reason = "reason",

@@ -3,11 +3,11 @@
 pub const SessionContextAttributes = struct {
     /// The date and time, in UTC and ISO 8601 format, when the credentials were
     /// issued.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// Specifies whether the credentials were authenticated with a multi-factor
     /// authentication (MFA) device.
-    mfa_authenticated: ?bool,
+    mfa_authenticated: ?bool = null,
 
     pub const json_field_names = .{
         .creation_date = "creationDate",

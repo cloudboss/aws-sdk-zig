@@ -9,9 +9,9 @@ pub const ReplicaAutoScalingUpdate = struct {
     /// Represents the auto scaling settings of global secondary indexes that will
     /// be
     /// modified.
-    replica_global_secondary_index_updates: ?[]const ReplicaGlobalSecondaryIndexAutoScalingUpdate,
+    replica_global_secondary_index_updates: ?[]const ReplicaGlobalSecondaryIndexAutoScalingUpdate = null,
 
-    replica_provisioned_read_capacity_auto_scaling_update: ?AutoScalingSettingsUpdate,
+    replica_provisioned_read_capacity_auto_scaling_update: ?AutoScalingSettingsUpdate = null,
 
     pub const json_field_names = .{
         .region_name = "RegionName",

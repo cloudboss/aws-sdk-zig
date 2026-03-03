@@ -4,7 +4,7 @@ pub const VpcConfigResponse = struct {
     /// Managed node
     /// groups use this security group for control-plane-to-data-plane
     /// communication.
-    cluster_security_group_id: ?[]const u8,
+    cluster_security_group_id: ?[]const u8 = null,
 
     /// This parameter indicates whether the Amazon EKS private API server endpoint
     /// is enabled. If
@@ -45,19 +45,19 @@ pub const VpcConfigResponse = struct {
     /// are made after October 2024. You can't add `IPv6` CIDR blocks to
     /// `IPv4` clusters or `IPv6` clusters that were made before
     /// October 2024.
-    public_access_cidrs: ?[]const []const u8,
+    public_access_cidrs: ?[]const []const u8 = null,
 
     /// The security groups associated with the cross-account elastic network
     /// interfaces that
     /// are used to allow communication between your nodes and the Kubernetes
     /// control plane.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The subnets associated with your cluster.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     /// The VPC associated with your cluster.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cluster_security_group_id = "clusterSecurityGroupId",

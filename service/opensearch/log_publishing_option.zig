@@ -10,10 +10,10 @@
 pub const LogPublishingOption = struct {
     /// The Amazon Resource Name (ARN) of the CloudWatch Logs group to publish logs
     /// to.
-    cloud_watch_logs_log_group_arn: ?[]const u8,
+    cloud_watch_logs_log_group_arn: ?[]const u8 = null,
 
     /// Whether the log should be published.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs_log_group_arn = "CloudWatchLogsLogGroupArn",

@@ -6,7 +6,7 @@ const AwsLogSourceName = @import("aws_log_source_name.zig").AwsLogSourceName;
 pub const AwsLogSourceConfiguration = struct {
     /// Specify the Amazon Web Services account information where you want to enable
     /// Security Lake.
-    accounts: ?[]const []const u8,
+    accounts: ?[]const []const u8 = null,
 
     /// Specify the Regions where you want to enable Security Lake.
     regions: []const []const u8,

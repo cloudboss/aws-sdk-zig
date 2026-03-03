@@ -8,7 +8,7 @@ pub const ThingGroupIndexingConfiguration = struct {
     /// the GetIndexingConfiguration API to get a list of managed fields.
     ///
     /// Contains custom field names and their data type.
-    custom_fields: ?[]const Field,
+    custom_fields: ?[]const Field = null,
 
     /// Contains fields that are indexed and whose types are already known by the
     /// Fleet Indexing
@@ -16,7 +16,7 @@ pub const ThingGroupIndexingConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html#managed-field) in the *Amazon Web Services IoT Core Developer Guide*.
     ///
     /// You can't modify managed fields by updating fleet indexing configuration.
-    managed_fields: ?[]const Field,
+    managed_fields: ?[]const Field = null,
 
     /// Thing group indexing mode.
     thing_group_indexing_mode: ThingGroupIndexingMode,

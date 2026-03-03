@@ -7,7 +7,7 @@ const EC2TagFilter = @import("ec2_tag_filter.zig").EC2TagFilter;
 pub const TargetInstances = struct {
     /// The names of one or more Auto Scaling groups to identify a replacement
     /// environment for a blue/green deployment.
-    auto_scaling_groups: ?[]const []const u8,
+    auto_scaling_groups: ?[]const []const u8 = null,
 
     /// Information about the groups of Amazon EC2 instance tags that an instance
     /// must
@@ -15,14 +15,14 @@ pub const TargetInstances = struct {
     /// environment for a
     /// blue/green deployment. Cannot be used in the same call as
     /// `tagFilters`.
-    ec_2_tag_set: ?EC2TagSet,
+    ec_2_tag_set: ?EC2TagSet = null,
 
     /// The tag filter key, type, and value used to identify Amazon EC2 instances in
     /// a
     /// replacement environment for a blue/green deployment. Cannot be used in the
     /// same call as
     /// `ec2TagSet`.
-    tag_filters: ?[]const EC2TagFilter,
+    tag_filters: ?[]const EC2TagFilter = null,
 
     pub const json_field_names = .{
         .auto_scaling_groups = "autoScalingGroups",

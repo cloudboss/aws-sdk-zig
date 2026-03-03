@@ -12,7 +12,7 @@ pub const CodeDeployDeployment = struct {
 
     /// The timestamp for when the CodeDeploy deployment ended. Not reported for
     /// deployments that are still in progress.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The timestamp for when the CodeDeploy deployment began.
     start_time: i64,

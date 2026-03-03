@@ -1,13 +1,13 @@
 /// Input for creating a user preference memory strategy.
 pub const UserPreferenceMemoryStrategyInput = struct {
     /// The description of the user preference memory strategy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the user preference memory strategy.
     name: []const u8,
 
     /// The namespaces associated with the user preference memory strategy.
-    namespaces: ?[]const []const u8,
+    namespaces: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .description = "description",

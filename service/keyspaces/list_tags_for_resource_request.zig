@@ -3,11 +3,11 @@ pub const ListTagsForResourceRequest = struct {
     /// tags available is more than the value specified, a `NextToken` is provided
     /// in the output. To resume pagination, provide the `NextToken` value as an
     /// argument of a subsequent API invocation.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The pagination token. To resume pagination, provide the `NextToken` value as
     /// argument of a subsequent API invocation.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Keyspaces resource.
     resource_arn: []const u8,

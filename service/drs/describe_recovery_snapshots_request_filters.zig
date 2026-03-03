@@ -1,10 +1,10 @@
 /// A set of filters by which to return Recovery Snapshots.
 pub const DescribeRecoverySnapshotsRequestFilters = struct {
     /// The start date in a date range query.
-    from_date_time: ?[]const u8,
+    from_date_time: ?[]const u8 = null,
 
     /// The end date in a date range query.
-    to_date_time: ?[]const u8,
+    to_date_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .from_date_time = "fromDateTime",

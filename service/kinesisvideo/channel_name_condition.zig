@@ -8,10 +8,10 @@ pub const ChannelNameCondition = struct {
     /// A comparison operator. Currently, you can only specify the `BEGINS_WITH`
     /// operator, which finds signaling channels whose names begin with a given
     /// prefix.
-    comparison_operator: ?ComparisonOperator,
+    comparison_operator: ?ComparisonOperator = null,
 
     /// A value to compare.
-    comparison_value: ?[]const u8,
+    comparison_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comparison_operator = "ComparisonOperator",

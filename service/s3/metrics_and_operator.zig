@@ -7,11 +7,11 @@ const Tag = @import("tag.zig").Tag;
 /// the filter to apply.
 pub const MetricsAndOperator = struct {
     /// The access point ARN used when evaluating an `AND` predicate.
-    access_point_arn: ?[]const u8,
+    access_point_arn: ?[]const u8 = null,
 
     /// The prefix used when evaluating an AND predicate.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The list of tags used when evaluating an AND predicate.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

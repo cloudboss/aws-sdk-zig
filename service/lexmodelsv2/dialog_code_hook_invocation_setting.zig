@@ -13,7 +13,7 @@ pub const DialogCodeHookInvocationSetting = struct {
 
     /// A label that indicates the dialog step from which the dialog code
     /// hook is happening.
-    invocation_label: ?[]const u8,
+    invocation_label: ?[]const u8 = null,
 
     /// Contains the responses and actions that Amazon Lex takes
     /// after the Lambda function is complete.

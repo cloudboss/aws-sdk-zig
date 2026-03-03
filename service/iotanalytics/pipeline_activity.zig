@@ -12,38 +12,38 @@ const SelectAttributesActivity = @import("select_attributes_activity.zig").Selec
 /// An activity that performs a transformation on a message.
 pub const PipelineActivity = struct {
     /// Adds other attributes based on existing attributes in the message.
-    add_attributes: ?AddAttributesActivity,
+    add_attributes: ?AddAttributesActivity = null,
 
     /// Determines the source of the messages to be processed.
-    channel: ?ChannelActivity,
+    channel: ?ChannelActivity = null,
 
     /// Specifies where to store the processed message data.
-    datastore: ?DatastoreActivity,
+    datastore: ?DatastoreActivity = null,
 
     /// Adds data from the IoT device registry to your message.
-    device_registry_enrich: ?DeviceRegistryEnrichActivity,
+    device_registry_enrich: ?DeviceRegistryEnrichActivity = null,
 
     /// Adds information from the IoT Device Shadow service to a message.
-    device_shadow_enrich: ?DeviceShadowEnrichActivity,
+    device_shadow_enrich: ?DeviceShadowEnrichActivity = null,
 
     /// Filters a message based on its attributes.
-    filter: ?FilterActivity,
+    filter: ?FilterActivity = null,
 
     /// Runs a Lambda function to modify the message.
-    lambda: ?LambdaActivity,
+    lambda: ?LambdaActivity = null,
 
     /// Computes an arithmetic expression using the message's attributes and adds it
     /// to the
     /// message.
-    math: ?MathActivity,
+    math: ?MathActivity = null,
 
     /// Removes attributes from a message.
-    remove_attributes: ?RemoveAttributesActivity,
+    remove_attributes: ?RemoveAttributesActivity = null,
 
     /// Used to create a new message using only the specified attributes from the
     /// original
     /// message.
-    select_attributes: ?SelectAttributesActivity,
+    select_attributes: ?SelectAttributesActivity = null,
 
     pub const json_field_names = .{
         .add_attributes = "addAttributes",

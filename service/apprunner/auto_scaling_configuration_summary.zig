@@ -11,11 +11,11 @@ const AutoScalingConfigurationStatus = @import("auto_scaling_configuration_statu
 /// actions using the AutoScalingConfiguration type.
 pub const AutoScalingConfigurationSummary = struct {
     /// The Amazon Resource Name (ARN) of this auto scaling configuration.
-    auto_scaling_configuration_arn: ?[]const u8,
+    auto_scaling_configuration_arn: ?[]const u8 = null,
 
     /// The customer-provided auto scaling configuration name. It can be used in
     /// multiple revisions of a configuration.
-    auto_scaling_configuration_name: ?[]const u8,
+    auto_scaling_configuration_name: ?[]const u8 = null,
 
     /// The revision of this auto scaling configuration. It's unique among all the
     /// active configurations (`"Status": "ACTIVE"`) with the same
@@ -24,12 +24,12 @@ pub const AutoScalingConfigurationSummary = struct {
 
     /// The time when the auto scaling configuration was created. It's in Unix time
     /// stamp format.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Indicates if this auto scaling configuration has an App Runner service
     /// associated with it. A value of `true` indicates one or more services are
     /// associated. A value of `false` indicates no services are associated.
-    has_associated_service: ?bool,
+    has_associated_service: ?bool = null,
 
     /// Indicates if this auto scaling configuration should be used as the default
     /// for a new App Runner service that does not have an
@@ -38,13 +38,13 @@ pub const AutoScalingConfigurationSummary = struct {
     /// default `AutoScalingConfiguration` per region. The default
     /// `AutoScalingConfiguration` can be any revision under
     /// the same `AutoScalingConfigurationName`.
-    is_default: ?bool,
+    is_default: ?bool = null,
 
     /// The current state of the auto scaling configuration. If the status of a
     /// configuration revision is `INACTIVE`, it was deleted and can't be
     /// used. Inactive configuration revisions are permanently removed some time
     /// after they are deleted.
-    status: ?AutoScalingConfigurationStatus,
+    status: ?AutoScalingConfigurationStatus = null,
 
     pub const json_field_names = .{
         .auto_scaling_configuration_arn = "AutoScalingConfigurationArn",

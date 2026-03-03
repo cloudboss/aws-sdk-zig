@@ -12,12 +12,12 @@ pub const AnalyticsS3BucketDestination = struct {
     /// Although this value is optional, we strongly recommend that you set it to
     /// help prevent problems
     /// if the destination bucket ownership changes.
-    bucket_account_id: ?[]const u8,
+    bucket_account_id: ?[]const u8 = null,
 
     /// Specifies the file format used when exporting data to Amazon S3.
     format: AnalyticsS3ExportFileFormat,
 
     /// The prefix to use when exporting data. The prefix is prepended to all
     /// results.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 };

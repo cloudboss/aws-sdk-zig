@@ -10,7 +10,7 @@ pub const UpdateSettings = struct {
 
     /// A security group ID that allows inbound TCP port 1688 communication between
     /// resources in your VPC and the VPC endpoints for activation servers.
-    security_group_id: ?[]const u8,
+    security_group_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .add_subnets = "AddSubnets",

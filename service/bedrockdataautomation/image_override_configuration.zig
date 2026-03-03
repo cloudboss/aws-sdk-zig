@@ -3,9 +3,9 @@ const SensitiveDataConfiguration = @import("sensitive_data_configuration.zig").S
 
 /// Override Configuration of Image
 pub const ImageOverrideConfiguration = struct {
-    modality_processing: ?ModalityProcessingConfiguration,
+    modality_processing: ?ModalityProcessingConfiguration = null,
 
-    sensitive_data_configuration: ?SensitiveDataConfiguration,
+    sensitive_data_configuration: ?SensitiveDataConfiguration = null,
 
     pub const json_field_names = .{
         .modality_processing = "modalityProcessing",

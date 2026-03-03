@@ -5,9 +5,9 @@ const InterruptionType = @import("interruption_type.zig").InterruptionType;
 pub const InterruptionInfo = struct {
     /// The interruption type that determines how instances are terminated when
     /// capacity is reclaimed.
-    interruption_type: ?InterruptionType,
+    interruption_type: ?InterruptionType = null,
 
     /// The ID of the source Capacity Reservation from which the interruptible
     /// reservation was created.
-    source_capacity_reservation_id: ?[]const u8,
+    source_capacity_reservation_id: ?[]const u8 = null,
 };

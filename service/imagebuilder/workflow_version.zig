@@ -3,28 +3,28 @@ const WorkflowType = @import("workflow_type.zig").WorkflowType;
 /// Contains details about this version of the workflow.
 pub const WorkflowVersion = struct {
     /// The Amazon Resource Name (ARN) of the workflow resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The timestamp when Image Builder created the workflow version.
-    date_created: ?[]const u8,
+    date_created: ?[]const u8 = null,
 
     /// Describes the workflow.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the workflow.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The owner of the workflow resource.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The image creation stage that this workflow applies to. Image Builder
     /// currently
     /// supports build and test stage workflows.
-    @"type": ?WorkflowType,
+    @"type": ?WorkflowType = null,
 
     /// The semantic version of the workflow resource. The format includes three
     /// nodes: ...
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

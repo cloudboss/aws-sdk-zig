@@ -4,14 +4,14 @@ const ManagedResourceStatus = @import("managed_resource_status.zig").ManagedReso
 /// Balancer.
 pub const ManagedListenerRule = struct {
     /// The Amazon Resource Name (ARN) of the load balancer listener rule.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The status of the load balancer listener rule.
     status: ManagedResourceStatus,
 
     /// Information about why the load balancer listener rule is in the current
     /// status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The Unix timestamp for when this listener rule was most recently updated.
     updated_at: i64,

@@ -4,7 +4,7 @@ const BlockPublicAccess = @import("block_public_access.zig").BlockPublicAccess;
 pub const AccountLevelPermissions = struct {
     /// Describes the S3 Block Public Access settings of the bucket's parent
     /// account.
-    block_public_access: ?BlockPublicAccess,
+    block_public_access: ?BlockPublicAccess = null,
 
     pub const json_field_names = .{
         .block_public_access = "BlockPublicAccess",

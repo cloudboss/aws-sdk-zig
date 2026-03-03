@@ -2,14 +2,14 @@
 /// pending updates or patches to the broker.
 pub const AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails = struct {
     /// The day of the week on which the maintenance window falls.
-    day_of_week: ?[]const u8,
+    day_of_week: ?[]const u8 = null,
 
     /// The time, in 24-hour format, on which the maintenance window falls.
-    time_of_day: ?[]const u8,
+    time_of_day: ?[]const u8 = null,
 
     /// The time zone in either the Country/City format or the UTC offset format.
     /// UTC is the default format.
-    time_zone: ?[]const u8,
+    time_zone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .day_of_week = "DayOfWeek",

@@ -10,16 +10,16 @@ const PlaybackInterruptionReason = @import("playback_interruption_reason.zig").P
 pub const PlaybackInterruptionEvent = struct {
     /// The identifier of the event that contained the audio, DTMF, or text
     /// that caused the interruption.
-    caused_by_event_id: ?[]const u8,
+    caused_by_event_id: ?[]const u8 = null,
 
     /// A unique identifier of the event sent by Amazon Lex V2. The identifier is in
     /// the form `RESPONSE-N`, where N is a number starting with one
     /// and incremented for each event sent by Amazon Lex V2 in the current
     /// session.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// Indicates the type of user input that Amazon Lex V2 detected.
-    event_reason: ?PlaybackInterruptionReason,
+    event_reason: ?PlaybackInterruptionReason = null,
 
     pub const json_field_names = .{
         .caused_by_event_id = "causedByEventId",

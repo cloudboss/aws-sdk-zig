@@ -16,7 +16,7 @@ const WaitAndContinueSpecification = @import("wait_and_continue_specification.zi
 /// slot value from the user.
 /// This is similar to `PromptSpecification` for slots.
 pub const SubSlotValueElicitationSetting = struct {
-    default_value_specification: ?SlotDefaultValueSpecification,
+    default_value_specification: ?SlotDefaultValueSpecification = null,
 
     prompt_specification: PromptSpecification,
 
@@ -26,9 +26,9 @@ pub const SubSlotValueElicitationSetting = struct {
     /// most cases Amazon Lex is capable
     /// of understanding user utterances. This is similar to `SampleUtterances` for
     /// slots.
-    sample_utterances: ?[]const SampleUtterance,
+    sample_utterances: ?[]const SampleUtterance = null,
 
-    wait_and_continue_specification: ?WaitAndContinueSpecification,
+    wait_and_continue_specification: ?WaitAndContinueSpecification = null,
 
     pub const json_field_names = .{
         .default_value_specification = "defaultValueSpecification",

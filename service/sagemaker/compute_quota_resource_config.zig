@@ -4,18 +4,18 @@ const ClusterInstanceType = @import("cluster_instance_type.zig").ClusterInstance
 /// Configuration of the resources used for the compute allocation definition.
 pub const ComputeQuotaResourceConfig = struct {
     /// The accelerator partition configuration for fractional GPU allocation.
-    accelerator_partition: ?AcceleratorPartitionConfig,
+    accelerator_partition: ?AcceleratorPartitionConfig = null,
 
     /// The number of accelerators to allocate. If you don't specify a value for
     /// vCPU and MemoryInGiB, SageMaker AI automatically allocates ratio-based
     /// values for those parameters based on the number of accelerators you provide.
     /// For example, if you allocate 16 out of 32 total accelerators, SageMaker AI
     /// uses the ratio of 0.5 and allocates values to vCPU and MemoryInGiB.
-    accelerators: ?i32,
+    accelerators: ?i32 = null,
 
     /// The number of instances to add to the instance group of a SageMaker HyperPod
     /// cluster.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// The instance type of the instance group for the cluster.
     instance_type: ClusterInstanceType,
@@ -25,14 +25,14 @@ pub const ComputeQuotaResourceConfig = struct {
     /// vCPU based on this memory that you provide. For example, if you allocate 200
     /// out of 400 total memory in GiB, SageMaker AI uses the ratio of 0.5 and
     /// allocates values to vCPU. Accelerators are set to 0.
-    memory_in_gi_b: ?f32,
+    memory_in_gi_b: ?f32 = null,
 
     /// The number of vCPU to allocate. If you specify a value only for vCPU,
     /// SageMaker AI automatically allocates ratio-based values for MemoryInGiB
     /// based on this vCPU parameter. For example, if you allocate 20 out of 40
     /// total vCPU, SageMaker AI uses the ratio of 0.5 and allocates values to
     /// MemoryInGiB. Accelerators are set to 0.
-    v_cpu: ?f32,
+    v_cpu: ?f32 = null,
 
     pub const json_field_names = .{
         .accelerator_partition = "AcceleratorPartition",

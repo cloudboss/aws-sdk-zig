@@ -17,7 +17,7 @@ pub const DataSourceToIndexFieldMapping = struct {
     /// The format for date fields in the data source. If the field specified in
     /// `DataSourceFieldName` is a date field, you must specify the date
     /// format. If the field is not a date field, an exception is thrown.
-    date_field_format: ?[]const u8,
+    date_field_format: ?[]const u8 = null,
 
     /// The name of the index field to map to the data source field. The index field
     /// type

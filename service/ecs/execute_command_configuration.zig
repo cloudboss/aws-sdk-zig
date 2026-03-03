@@ -6,13 +6,13 @@ pub const ExecuteCommandConfiguration = struct {
     /// Specify an Key
     /// Management Service key ID to encrypt the data between the local client and
     /// the container.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The log configuration for the results of the execute command actions. The
     /// logs can be
     /// sent to CloudWatch Logs or an Amazon S3 bucket. When `logging=OVERRIDE` is
     /// specified, a `logConfiguration` must be provided.
-    log_configuration: ?ExecuteCommandLogConfiguration,
+    log_configuration: ?ExecuteCommandLogConfiguration = null,
 
     /// The log setting to use for redirecting logs for your execute command
     /// results. The
@@ -29,7 +29,7 @@ pub const ExecuteCommandConfiguration = struct {
     /// * `OVERRIDE`: Specify the logging details as a part of
     /// `logConfiguration`. If the `OVERRIDE` logging option
     /// is specified, the `logConfiguration` is required.
-    logging: ?ExecuteCommandLogging,
+    logging: ?ExecuteCommandLogging = null,
 
     pub const json_field_names = .{
         .kms_key_id = "kmsKeyId",

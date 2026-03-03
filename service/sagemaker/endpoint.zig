@@ -9,7 +9,7 @@ pub const Endpoint = struct {
     /// The time that the endpoint was created.
     creation_time: i64,
 
-    data_capture_config: ?DataCaptureConfigSummary,
+    data_capture_config: ?DataCaptureConfigSummary = null,
 
     /// The Amazon Resource Name (ARN) of the endpoint.
     endpoint_arn: []const u8,
@@ -24,7 +24,7 @@ pub const Endpoint = struct {
     endpoint_status: EndpointStatus,
 
     /// If the endpoint failed, the reason it failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The last time the endpoint was modified.
     last_modified_time: i64,
@@ -32,22 +32,22 @@ pub const Endpoint = struct {
     /// A list of monitoring schedules for the endpoint. For information about model
     /// monitoring, see [Amazon SageMaker Model
     /// Monitor](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html).
-    monitoring_schedules: ?[]const MonitoringSchedule,
+    monitoring_schedules: ?[]const MonitoringSchedule = null,
 
     /// A list of the production variants hosted on the endpoint. Each production
     /// variant is a model.
-    production_variants: ?[]const ProductionVariantSummary,
+    production_variants: ?[]const ProductionVariantSummary = null,
 
     /// A list of the shadow variants hosted on the endpoint. Each shadow variant is
     /// a model in shadow mode with production traffic replicated from the
     /// production variant.
-    shadow_production_variants: ?[]const ProductionVariantSummary,
+    shadow_production_variants: ?[]const ProductionVariantSummary = null,
 
     /// A list of the tags associated with the endpoint. For more information, see
     /// [Tagging Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
     /// in the *Amazon Web Services General Reference Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

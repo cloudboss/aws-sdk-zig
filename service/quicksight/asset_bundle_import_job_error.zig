@@ -1,13 +1,13 @@
 /// Describes an error that occurred within an Asset Bundle import execution.
 pub const AssetBundleImportJobError = struct {
     /// The ARN of the resource whose processing caused an error.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A description of the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The specific error type or the error that occurred.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

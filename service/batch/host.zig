@@ -21,7 +21,7 @@ pub const Host = struct {
     /// This parameter isn't applicable to jobs that run on Fargate resources. Don't
     /// provide this
     /// for these jobs.
-    source_path: ?[]const u8,
+    source_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_path = "sourcePath",

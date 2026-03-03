@@ -25,20 +25,20 @@ pub const XavcSettings = struct {
     /// that you choose here applies to the following settings: Flicker adaptive
     /// quantization (flickerAdaptiveQuantization), Spatial adaptive quantization,
     /// and Temporal adaptive quantization.
-    adaptive_quantization: ?XavcAdaptiveQuantization,
+    adaptive_quantization: ?XavcAdaptiveQuantization = null,
 
     /// Optional. Choose a specific entropy encoding mode only when you want to
     /// override XAVC recommendations. If you choose the value auto, MediaConvert
     /// uses the mode that the XAVC file format specifies given this output's
     /// operating point.
-    entropy_encoding: ?XavcEntropyEncoding,
+    entropy_encoding: ?XavcEntropyEncoding = null,
 
     /// If you are using the console, use the Frame rate setting to specify the
     /// frame rate for this output. If you want to keep the same frame rate as the
     /// input video, choose Follow source. If you want to do frame rate conversion,
     /// choose a frame rate from the dropdown list. The framerates shown in the
     /// dropdown list are decimal approximations of fractions.
-    framerate_control: ?XavcFramerateControl,
+    framerate_control: ?XavcFramerateControl = null,
 
     /// Choose the method that you want MediaConvert to use when increasing or
     /// decreasing your video's frame rate. For numerically simple conversions, such
@@ -56,7 +56,7 @@ pub const XavcSettings = struct {
     /// add, or otherwise change the frame count from your input to your output.
     /// Note that since the frame count is maintained, the duration of your output
     /// will become shorter at higher frame rates and longer at lower frame rates.
-    framerate_conversion_algorithm: ?XavcFramerateConversionAlgorithm,
+    framerate_conversion_algorithm: ?XavcFramerateConversionAlgorithm = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -65,7 +65,7 @@ pub const XavcSettings = struct {
     /// use the console for transcode jobs that use frame rate conversion, provide
     /// the value as a decimal number for Frame rate. In this example, specify
     /// 23.976.
-    framerate_denominator: ?i32,
+    framerate_denominator: ?i32 = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -73,7 +73,7 @@ pub const XavcSettings = struct {
     /// this example, use 24000 for the value of FramerateNumerator. When you use
     /// the console for transcode jobs that use frame rate conversion, provide the
     /// value as a decimal number for Framerate. In this example, specify 23.976.
-    framerate_numerator: ?i32,
+    framerate_numerator: ?i32 = null,
 
     /// Optionally choose one or more per frame metric reports to generate along
     /// with your output. You can use these metrics to analyze your video output
@@ -93,20 +93,20 @@ pub const XavcSettings = struct {
     /// Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     /// Quality-Defined Variable Bitrate. This option is only available when your
     /// output uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
-    per_frame_metrics: ?[]const FrameMetricType,
+    per_frame_metrics: ?[]const FrameMetricType = null,
 
     /// Specify the XAVC profile for this output. For more information, see the Sony
     /// documentation at https://www.xavc-info.org/. Note that MediaConvert doesn't
     /// support the interlaced video XAVC operating points for XAVC_HD_INTRA_CBG. To
     /// create an interlaced XAVC output, choose the profile XAVC_HD.
-    profile: ?XavcProfile,
+    profile: ?XavcProfile = null,
 
     /// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
     /// second (fps). Enable slow PAL to create a 25 fps output by relabeling the
     /// video frames and resampling your audio. Note that enabling this setting will
     /// slightly reduce the duration of your video. Related settings: You must also
     /// set Frame rate to 25.
-    slow_pal: ?XavcSlowPal,
+    slow_pal: ?XavcSlowPal = null,
 
     /// Ignore this setting unless your downstream workflow requires that you
     /// specify it explicitly. Otherwise, we recommend that you adjust the softness
@@ -118,7 +118,7 @@ pub const XavcSettings = struct {
     /// to 128 to use planar interpolation. Increasing values from 17 to 128 result
     /// in increasing reduction of high-frequency data. The value 128 results in the
     /// softest video.
-    softness: ?i32,
+    softness: ?i32 = null,
 
     /// The best way to set up adaptive quantization is to keep the default value,
     /// Auto, for the setting Adaptive quantization. When you do so, MediaConvert
@@ -140,7 +140,7 @@ pub const XavcSettings = struct {
     /// your content. For homogeneous content, such as cartoons and video games, set
     /// it to Low. For content with a wider variety of textures, set it to High or
     /// Higher.
-    spatial_adaptive_quantization: ?XavcSpatialAdaptiveQuantization,
+    spatial_adaptive_quantization: ?XavcSpatialAdaptiveQuantization = null,
 
     /// The best way to set up adaptive quantization is to keep the default value,
     /// Auto, for the setting Adaptive quantization. When you do so, MediaConvert
@@ -160,22 +160,22 @@ pub const XavcSettings = struct {
     /// might choose to disable this feature. Related setting: When you enable
     /// temporal adaptive quantization, adjust the strength of the filter with the
     /// setting Adaptive quantization.
-    temporal_adaptive_quantization: ?XavcTemporalAdaptiveQuantization,
+    temporal_adaptive_quantization: ?XavcTemporalAdaptiveQuantization = null,
 
     /// Required when you set Profile to the value XAVC_4K_INTRA_CBG.
-    xavc_4_k_intra_cbg_profile_settings: ?Xavc4kIntraCbgProfileSettings,
+    xavc_4_k_intra_cbg_profile_settings: ?Xavc4kIntraCbgProfileSettings = null,
 
     /// Required when you set Profile to the value XAVC_4K_INTRA_VBR.
-    xavc_4_k_intra_vbr_profile_settings: ?Xavc4kIntraVbrProfileSettings,
+    xavc_4_k_intra_vbr_profile_settings: ?Xavc4kIntraVbrProfileSettings = null,
 
     /// Required when you set Profile to the value XAVC_4K.
-    xavc_4_k_profile_settings: ?Xavc4kProfileSettings,
+    xavc_4_k_profile_settings: ?Xavc4kProfileSettings = null,
 
     /// Required when you set Profile to the value XAVC_HD_INTRA_CBG.
-    xavc_hd_intra_cbg_profile_settings: ?XavcHdIntraCbgProfileSettings,
+    xavc_hd_intra_cbg_profile_settings: ?XavcHdIntraCbgProfileSettings = null,
 
     /// Required when you set Profile to the value XAVC_HD.
-    xavc_hd_profile_settings: ?XavcHdProfileSettings,
+    xavc_hd_profile_settings: ?XavcHdProfileSettings = null,
 
     pub const json_field_names = .{
         .adaptive_quantization = "AdaptiveQuantization",

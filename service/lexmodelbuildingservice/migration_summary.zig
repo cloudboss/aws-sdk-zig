@@ -6,34 +6,34 @@ const Locale = @import("locale.zig").Locale;
 /// V2.
 pub const MigrationSummary = struct {
     /// The unique identifier that Amazon Lex assigned to the migration.
-    migration_id: ?[]const u8,
+    migration_id: ?[]const u8 = null,
 
     /// The status of the operation. When the status is `COMPLETE`
     /// the bot is available in Amazon Lex V2. There may be alerts and warnings that
     /// need to be resolved to complete the migration.
-    migration_status: ?MigrationStatus,
+    migration_status: ?MigrationStatus = null,
 
     /// The strategy used to conduct the migration.
-    migration_strategy: ?MigrationStrategy,
+    migration_strategy: ?MigrationStrategy = null,
 
     /// The date and time that the migration started.
-    migration_timestamp: ?i64,
+    migration_timestamp: ?i64 = null,
 
     /// The locale of the Amazon Lex V1 bot that is the source of the migration.
-    v_1_bot_locale: ?Locale,
+    v_1_bot_locale: ?Locale = null,
 
     /// The name of the Amazon Lex V1 bot that is the source of the migration.
-    v_1_bot_name: ?[]const u8,
+    v_1_bot_name: ?[]const u8 = null,
 
     /// The version of the Amazon Lex V1 bot that is the source of the migration.
-    v_1_bot_version: ?[]const u8,
+    v_1_bot_version: ?[]const u8 = null,
 
     /// The unique identifier of the Amazon Lex V2 that is the destination of the
     /// migration.
-    v_2_bot_id: ?[]const u8,
+    v_2_bot_id: ?[]const u8 = null,
 
     /// The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
-    v_2_bot_role: ?[]const u8,
+    v_2_bot_role: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .migration_id = "migrationId",

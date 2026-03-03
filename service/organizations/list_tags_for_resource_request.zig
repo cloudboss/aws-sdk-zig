@@ -5,7 +5,7 @@ pub const ListTagsForResourceRequest = struct {
     /// the previous
     /// call's `NextToken` response to indicate where the output should continue
     /// from.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The ID of the resource with the tags to list.
     ///

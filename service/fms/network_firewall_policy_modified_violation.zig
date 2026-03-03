@@ -6,14 +6,14 @@ const NetworkFirewallPolicyDescription = @import("network_firewall_policy_descri
 /// policy.
 pub const NetworkFirewallPolicyModifiedViolation = struct {
     /// The policy that's currently in use in the individual account.
-    current_policy_description: ?NetworkFirewallPolicyDescription,
+    current_policy_description: ?NetworkFirewallPolicyDescription = null,
 
     /// The policy that should be in use in the individual account in order to be
     /// compliant.
-    expected_policy_description: ?NetworkFirewallPolicyDescription,
+    expected_policy_description: ?NetworkFirewallPolicyDescription = null,
 
     /// The ID of the Network Firewall or VPC resource that's in violation.
-    violation_target: ?[]const u8,
+    violation_target: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .current_policy_description = "CurrentPolicyDescription",

@@ -15,10 +15,10 @@ pub const R53HostedZoneDeletionState = struct {
     /// * `FAILED` - The hosted zone deletion failed.
     ///
     /// * `STARTED` - The hosted zone deletion started.
-    code: ?R53HostedZoneDeletionStateCode,
+    code: ?R53HostedZoneDeletionStateCode = null,
 
     /// The message that describes the reason for the status code.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

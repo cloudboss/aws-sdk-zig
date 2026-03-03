@@ -3,10 +3,10 @@
 /// `DataSetName`.
 pub const AnalyticsDataSetsResult = struct {
     /// The identifier of the dataset.
-    data_set_id: ?[]const u8,
+    data_set_id: ?[]const u8 = null,
 
     /// The name of the dataset.
-    data_set_name: ?[]const u8,
+    data_set_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_set_id = "DataSetId",

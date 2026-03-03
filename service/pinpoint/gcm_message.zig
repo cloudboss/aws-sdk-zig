@@ -16,10 +16,10 @@ pub const GCMMessage = struct {
     ///   app. This action uses the deep-linking features of the Android platform.
     /// * URL - The default mobile browser on the recipient's device opens and loads
     ///   the web page at a URL that you specify.
-    action: ?Action,
+    action: ?Action = null,
 
     /// The body of the notification message.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// An arbitrary string that identifies a group of messages that can be
     /// collapsed to ensure that only the last message is sent when delivery can
@@ -28,26 +28,26 @@ pub const GCMMessage = struct {
     ///
     /// Amazon Pinpoint specifies this value in the Firebase Cloud Messaging (FCM)
     /// collapse_key parameter when it sends the notification message to FCM.
-    collapse_key: ?[]const u8,
+    collapse_key: ?[]const u8 = null,
 
     /// The JSON data payload to use for the push notification, if the notification
     /// is a silent push notification. This payload is added to the
     /// data.pinpoint.jsonBody object of the notification.
-    data: ?[]const aws.map.StringMapEntry,
+    data: ?[]const aws.map.StringMapEntry = null,
 
     /// The icon image name of the asset saved in your app.
-    icon_reference: ?[]const u8,
+    icon_reference: ?[]const u8 = null,
 
     /// The URL of the large icon image to display in the content view of the push
     /// notification.
-    image_icon_url: ?[]const u8,
+    image_icon_url: ?[]const u8 = null,
 
     /// The URL of an image to display in the push notification.
-    image_url: ?[]const u8,
+    image_url: ?[]const u8 = null,
 
     /// The preferred authentication method, with valid values "KEY" or "TOKEN". If
     /// a value isn't provided then the **DefaultAuthenticationMethod** is used.
-    preferred_authentication_method: ?[]const u8,
+    preferred_authentication_method: ?[]const u8 = null,
 
     /// para>normal – The notification might be delayed. Delivery is optimized for
     /// battery usage on the recipient's device. Use this value unless immediate
@@ -62,36 +62,36 @@ pub const GCMMessage = struct {
     /// normal, and 10, for high. If you specify an APNs value for this property,
     /// Amazon Pinpoint accepts and converts the value to the corresponding FCM
     /// value.
-    priority: ?[]const u8,
+    priority: ?[]const u8 = null,
 
     /// The raw, JSON-formatted string to use as the payload for the notification
     /// message. If specified, this value overrides all other content for the
     /// message.
-    raw_content: ?[]const u8,
+    raw_content: ?[]const u8 = null,
 
     /// The package name of the application where registration tokens must match in
     /// order for the recipient to receive the message.
-    restricted_package_name: ?[]const u8,
+    restricted_package_name: ?[]const u8 = null,
 
     /// Specifies whether the notification is a silent push notification, which is a
     /// push notification that doesn't display on a recipient's device. Silent push
     /// notifications can be used for cases such as updating an app's configuration
     /// or supporting phone home functionality.
-    silent_push: ?bool,
+    silent_push: ?bool = null,
 
     /// The URL of the small icon image to display in the status bar and the content
     /// view of the push notification.
-    small_image_icon_url: ?[]const u8,
+    small_image_icon_url: ?[]const u8 = null,
 
     /// The sound to play when the recipient receives the push notification. You can
     /// use the default stream or specify the file name of a sound resource that's
     /// bundled in your app. On an Android platform, the sound file must reside in
     /// /res/raw/.
-    sound: ?[]const u8,
+    sound: ?[]const u8 = null,
 
     /// The default message variables to use in the notification message. You can
     /// override the default variables with individual address variables.
-    substitutions: ?[]const aws.map.MapEntry([]const []const u8),
+    substitutions: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The amount of time, in seconds, that FCM should store and attempt to deliver
     /// the push notification, if the service is unable to deliver the notification
@@ -100,15 +100,15 @@ pub const GCMMessage = struct {
     ///
     /// Amazon Pinpoint specifies this value in the FCM time_to_live parameter when
     /// it sends the notification message to FCM.
-    time_to_live: ?i32,
+    time_to_live: ?i32 = null,
 
     /// The title to display above the notification message on the recipient's
     /// device.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The URL to open in the recipient's default mobile browser, if a recipient
     /// taps the push notification and the value of the Action property is URL.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

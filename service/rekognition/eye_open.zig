@@ -3,7 +3,7 @@
 /// determination.
 pub const EyeOpen = struct {
     /// Level of confidence in the determination.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// Boolean value that indicates whether the eyes on the face are open.
     value: bool = false,

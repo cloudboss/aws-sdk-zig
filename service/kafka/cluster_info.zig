@@ -16,73 +16,73 @@ const StorageMode = @import("storage_mode.zig").StorageMode;
 /// Returns information about a cluster.
 pub const ClusterInfo = struct {
     /// Arn of active cluster operation.
-    active_operation_arn: ?[]const u8,
+    active_operation_arn: ?[]const u8 = null,
 
     /// Information about the broker nodes.
-    broker_node_group_info: ?BrokerNodeGroupInfo,
+    broker_node_group_info: ?BrokerNodeGroupInfo = null,
 
     /// Includes all client authentication information.
-    client_authentication: ?ClientAuthentication,
+    client_authentication: ?ClientAuthentication = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-    cluster_arn: ?[]const u8,
+    cluster_arn: ?[]const u8 = null,
 
     /// The name of the cluster.
-    cluster_name: ?[]const u8,
+    cluster_name: ?[]const u8 = null,
 
     /// The time when the cluster was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Information about the version of software currently deployed on the Apache
     /// Kafka brokers in the cluster.
-    current_broker_software_info: ?BrokerSoftwareInfo,
+    current_broker_software_info: ?BrokerSoftwareInfo = null,
 
     /// The current version of the MSK cluster.
-    current_version: ?[]const u8,
+    current_version: ?[]const u8 = null,
 
     /// Determines if there is an action required from the customer.
-    customer_action_status: ?CustomerActionStatus,
+    customer_action_status: ?CustomerActionStatus = null,
 
     /// Includes all encryption-related information.
-    encryption_info: ?EncryptionInfo,
+    encryption_info: ?EncryptionInfo = null,
 
     /// Specifies which metrics are gathered for the MSK cluster. This property has
     /// the following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER,
     /// and PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each
     /// of these levels of monitoring, see
     /// [Monitoring](https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html).
-    enhanced_monitoring: ?EnhancedMonitoring,
+    enhanced_monitoring: ?EnhancedMonitoring = null,
 
-    logging_info: ?LoggingInfo,
+    logging_info: ?LoggingInfo = null,
 
     /// The number of broker nodes in the cluster.
-    number_of_broker_nodes: ?i32,
+    number_of_broker_nodes: ?i32 = null,
 
     /// Settings for open monitoring using Prometheus.
-    open_monitoring: ?OpenMonitoring,
+    open_monitoring: ?OpenMonitoring = null,
 
     /// Contains information about intelligent rebalancing for new MSK Provisioned
     /// clusters with Express brokers. By default, intelligent rebalancing status is
     /// ACTIVE.
-    rebalancing: ?Rebalancing,
+    rebalancing: ?Rebalancing = null,
 
     /// The state of the cluster. The possible states are ACTIVE, CREATING,
     /// DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
-    state: ?ClusterState,
+    state: ?ClusterState = null,
 
-    state_info: ?StateInfo,
+    state_info: ?StateInfo = null,
 
     /// This controls storage mode for supported storage tiers.
-    storage_mode: ?StorageMode,
+    storage_mode: ?StorageMode = null,
 
     /// Tags attached to the cluster.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The connection string to use to connect to the Apache ZooKeeper cluster.
-    zookeeper_connect_string: ?[]const u8,
+    zookeeper_connect_string: ?[]const u8 = null,
 
     /// The connection string to use to connect to zookeeper cluster on Tls port.
-    zookeeper_connect_string_tls: ?[]const u8,
+    zookeeper_connect_string_tls: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active_operation_arn = "ActiveOperationArn",

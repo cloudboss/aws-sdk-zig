@@ -6,10 +6,10 @@ pub const DataQualityRulesetEvaluationRunFilter = struct {
     data_source: DataSource,
 
     /// Filter results by runs that started after this time.
-    started_after: ?i64,
+    started_after: ?i64 = null,
 
     /// Filter results by runs that started before this time.
-    started_before: ?i64,
+    started_before: ?i64 = null,
 
     pub const json_field_names = .{
         .data_source = "DataSource",

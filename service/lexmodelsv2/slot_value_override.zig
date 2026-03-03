@@ -8,15 +8,15 @@ pub const SlotValueOverride = struct {
     /// `values` field contains a list of slot values. When the
     /// value is `Scalar`, it indicates that the `value`
     /// field contains a single value.
-    shape: ?SlotShape,
+    shape: ?SlotShape = null,
 
     /// The current value of the slot.
-    value: ?SlotValue,
+    value: ?SlotValue = null,
 
     /// A list of one or more values that the user provided for the slot.
     /// For example, for a slot that elicits pizza toppings, the values
     /// might be "pepperoni" and "pineapple."
-    values: ?[]const SlotValueOverride,
+    values: ?[]const SlotValueOverride = null,
 
     pub const json_field_names = .{
         .shape = "shape",

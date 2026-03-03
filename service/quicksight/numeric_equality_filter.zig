@@ -9,14 +9,14 @@ const NumericFilterSelectAllOptions = @import("numeric_filter_select_all_options
 /// value.
 pub const NumericEqualityFilter = struct {
     /// The aggregation function of the filter.
-    aggregation_function: ?AggregationFunction,
+    aggregation_function: ?AggregationFunction = null,
 
     /// The column that the filter is applied to.
     column: ColumnIdentifier,
 
     /// The default configurations for the associated controls. This applies only
     /// for filters that are scoped to multiple sheets.
-    default_filter_control_configuration: ?DefaultFilterControlConfiguration,
+    default_filter_control_configuration: ?DefaultFilterControlConfiguration = null,
 
     /// An identifier that uniquely identifies a filter within a dashboard,
     /// analysis, or template.
@@ -36,15 +36,15 @@ pub const NumericEqualityFilter = struct {
     null_option: FilterNullOption,
 
     /// The parameter whose value should be used for the filter value.
-    parameter_name: ?[]const u8,
+    parameter_name: ?[]const u8 = null,
 
     /// Select all of the values. Null is not the assigned value of select all.
     ///
     /// * `FILTER_ALL_VALUES`
-    select_all_options: ?NumericFilterSelectAllOptions,
+    select_all_options: ?NumericFilterSelectAllOptions = null,
 
     /// The input value.
-    value: ?f64,
+    value: ?f64 = null,
 
     pub const json_field_names = .{
         .aggregation_function = "AggregationFunction",

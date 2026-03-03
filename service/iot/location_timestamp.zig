@@ -8,7 +8,7 @@ pub const LocationTimestamp = struct {
     /// Valid values: `SECONDS` | `MILLISECONDS` |
     /// `MICROSECONDS` | `NANOSECONDS`. The default is
     /// `MILLISECONDS`.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     /// An expression that returns a long epoch time value.
     value: []const u8,

@@ -7,7 +7,7 @@ pub const OriginAccessControlList = struct {
     is_truncated: bool,
 
     /// Contains the origin access controls in the list.
-    items: ?[]const OriginAccessControlSummary,
+    items: ?[]const OriginAccessControlSummary = null,
 
     /// The value of the `Marker` field that was provided in the request.
     marker: []const u8,
@@ -18,7 +18,7 @@ pub const OriginAccessControlList = struct {
     /// If there are more items in the list than are in this response, this element
     /// is present. It contains the value to use in the `Marker` field of another
     /// request to continue listing origin access controls.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The number of origin access controls returned in the response.
     quantity: i32,

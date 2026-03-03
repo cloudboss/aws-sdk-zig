@@ -11,16 +11,16 @@ pub const CreateTopicReviewedAnswer = struct {
     dataset_arn: []const u8,
 
     /// The Mir for the `CreateTopicReviewedAnswer`.
-    mir: ?TopicIR,
+    mir: ?TopicIR = null,
 
     /// The `PrimaryVisual` for the `CreateTopicReviewedAnswer`.
-    primary_visual: ?TopicVisual,
+    primary_visual: ?TopicVisual = null,
 
     /// The Question to be created.
     question: []const u8,
 
     /// The template for the `CreateTopicReviewedAnswer`.
-    template: ?TopicTemplate,
+    template: ?TopicTemplate = null,
 
     pub const json_field_names = .{
         .answer_id = "AnswerId",

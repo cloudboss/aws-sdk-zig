@@ -7,13 +7,13 @@ const JsonOptions = @import("json_options.zig").JsonOptions;
 /// Excel, or JSON input.
 pub const FormatOptions = struct {
     /// Options that define how CSV input is to be interpreted by DataBrew.
-    csv: ?CsvOptions,
+    csv: ?CsvOptions = null,
 
     /// Options that define how Excel input is to be interpreted by DataBrew.
-    excel: ?ExcelOptions,
+    excel: ?ExcelOptions = null,
 
     /// Options that define how JSON input is to be interpreted by DataBrew.
-    json: ?JsonOptions,
+    json: ?JsonOptions = null,
 
     pub const json_field_names = .{
         .csv = "Csv",

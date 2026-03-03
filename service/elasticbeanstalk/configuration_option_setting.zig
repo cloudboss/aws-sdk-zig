@@ -5,15 +5,15 @@
 /// *AWS Elastic Beanstalk Developer Guide*.
 pub const ConfigurationOptionSetting = struct {
     /// A unique namespace that identifies the option's associated AWS resource.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The name of the configuration option.
-    option_name: ?[]const u8,
+    option_name: ?[]const u8 = null,
 
     /// A unique resource name for the option setting. Use it for a time–based
     /// scaling configuration option.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// The current value for the configuration option.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

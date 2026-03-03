@@ -30,7 +30,7 @@ pub const AssessmentTemplate = struct {
     /// assessment template. This value exists only when the value of
     /// assessmentRunCount is
     /// greaterpa than zero.
-    last_assessment_run_arn: ?[]const u8,
+    last_assessment_run_arn: ?[]const u8 = null,
 
     /// The name of the assessment template.
     name: []const u8,

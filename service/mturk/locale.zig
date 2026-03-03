@@ -8,7 +8,7 @@ pub const Locale = struct {
     /// The state or subdivision of the locale. A valid ISO 3166-2
     /// subdivision code. For example, the code WA refers to the state of
     /// Washington.
-    subdivision: ?[]const u8,
+    subdivision: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .country = "Country",

@@ -7,7 +7,7 @@ pub const SuggestAddressHighlights = struct {
     /// were identified to match the textQuery. This result is useful for providing
     /// emphasis to results where the user query directly matched to make selecting
     /// the correct result from a list easier for an end user.
-    label: ?[]const Highlight,
+    label: ?[]const Highlight = null,
 
     pub const json_field_names = .{
         .label = "Label",

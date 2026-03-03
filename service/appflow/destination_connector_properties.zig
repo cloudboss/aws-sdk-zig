@@ -16,43 +16,43 @@ const ZendeskDestinationProperties = @import("zendesk_destination_properties.zig
 /// connector.
 pub const DestinationConnectorProperties = struct {
     /// The properties that are required to query the custom Connector.
-    custom_connector: ?CustomConnectorDestinationProperties,
+    custom_connector: ?CustomConnectorDestinationProperties = null,
 
     /// The properties required to query Amazon Connect Customer Profiles.
-    customer_profiles: ?CustomerProfilesDestinationProperties,
+    customer_profiles: ?CustomerProfilesDestinationProperties = null,
 
     /// The properties required to query Amazon EventBridge.
-    event_bridge: ?EventBridgeDestinationProperties,
+    event_bridge: ?EventBridgeDestinationProperties = null,
 
     /// The properties required to query Amazon Honeycode.
-    honeycode: ?HoneycodeDestinationProperties,
+    honeycode: ?HoneycodeDestinationProperties = null,
 
     /// The properties required to query Amazon Lookout for Metrics.
-    lookout_metrics: ?LookoutMetricsDestinationProperties,
+    lookout_metrics: ?LookoutMetricsDestinationProperties = null,
 
     /// The properties required to query Marketo.
-    marketo: ?MarketoDestinationProperties,
+    marketo: ?MarketoDestinationProperties = null,
 
     /// The properties required to query Amazon Redshift.
-    redshift: ?RedshiftDestinationProperties,
+    redshift: ?RedshiftDestinationProperties = null,
 
     /// The properties required to query Amazon S3.
-    s3: ?S3DestinationProperties,
+    s3: ?S3DestinationProperties = null,
 
     /// The properties required to query Salesforce.
-    salesforce: ?SalesforceDestinationProperties,
+    salesforce: ?SalesforceDestinationProperties = null,
 
     /// The properties required to query SAPOData.
-    sapo_data: ?SAPODataDestinationProperties,
+    sapo_data: ?SAPODataDestinationProperties = null,
 
     /// The properties required to query Snowflake.
-    snowflake: ?SnowflakeDestinationProperties,
+    snowflake: ?SnowflakeDestinationProperties = null,
 
     /// The properties required to query Upsolver.
-    upsolver: ?UpsolverDestinationProperties,
+    upsolver: ?UpsolverDestinationProperties = null,
 
     /// The properties required to query Zendesk.
-    zendesk: ?ZendeskDestinationProperties,
+    zendesk: ?ZendeskDestinationProperties = null,
 
     pub const json_field_names = .{
         .custom_connector = "CustomConnector",

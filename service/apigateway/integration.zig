@@ -12,23 +12,23 @@ pub const Integration = struct {
     /// A list of request parameters whose values API Gateway caches. To be valid
     /// values for `cacheKeyParameters`, these parameters must also be specified for
     /// Method `requestParameters`.
-    cache_key_parameters: ?[]const []const u8,
+    cache_key_parameters: ?[]const []const u8 = null,
 
     /// Specifies a group of related cached parameters. By default, API Gateway uses
     /// the resource ID as the `cacheNamespace`. You can specify the same
     /// `cacheNamespace` across resources to return the same cached data for
     /// requests to different resources.
-    cache_namespace: ?[]const u8,
+    cache_namespace: ?[]const u8 = null,
 
     /// The ID of the VpcLink used for the integration when
     /// `connectionType=VPC_LINK` and undefined, otherwise.
-    connection_id: ?[]const u8,
+    connection_id: ?[]const u8 = null,
 
     /// The type of the network connection to the integration endpoint. The valid
     /// value is `INTERNET` for connections through the public routable internet or
     /// `VPC_LINK` for private connections between API Gateway and a network load
     /// balancer in a VPC. The default value is `INTERNET`.
-    connection_type: ?ConnectionType,
+    connection_type: ?ConnectionType = null,
 
     /// Specifies how to handle request payload content type conversions. Supported
     /// values are `CONVERT_TO_BINARY` and `CONVERT_TO_TEXT`, with the following
@@ -38,7 +38,7 @@ pub const Integration = struct {
     /// from the method request to integration request without modification,
     /// provided that the `passthroughBehavior` is configured to support payload
     /// pass-through.
-    content_handling: ?ContentHandlingStrategy,
+    content_handling: ?ContentHandlingStrategy = null,
 
     /// Specifies the credentials required for the integration, if any. For AWS
     /// integrations, three options are available. To specify an IAM Role for API
@@ -46,19 +46,19 @@ pub const Integration = struct {
     /// that the caller's identity be passed through from the request, specify the
     /// string `arn:aws:iam::\*:user/\*`. To use resource-based permissions on
     /// supported Amazon Web Services services, specify null.
-    credentials: ?[]const u8,
+    credentials: ?[]const u8 = null,
 
     /// Specifies the integration's HTTP method type. For the Type property, if you
     /// specify `MOCK`, this property is optional. For Lambda integrations, you must
     /// set the integration method to `POST`. For all other types, you must specify
     /// this property.
-    http_method: ?[]const u8,
+    http_method: ?[]const u8 = null,
 
     /// Specifies the integration's responses.
-    integration_responses: ?[]const aws.map.MapEntry(IntegrationResponse),
+    integration_responses: ?[]const aws.map.MapEntry(IntegrationResponse) = null,
 
     /// The ALB or NLB listener to send the request to.
-    integration_target: ?[]const u8,
+    integration_target: ?[]const u8 = null,
 
     /// Specifies how the method request body of an unmapped content type will be
     /// passed through
@@ -89,7 +89,7 @@ pub const Integration = struct {
     /// defined in the integration request or no mapping template is defined in the
     /// integration
     /// request.
-    passthrough_behavior: ?[]const u8,
+    passthrough_behavior: ?[]const u8 = null,
 
     /// A key-value map specifying request parameters that are passed from the
     /// method request to the back end. The key is an integration request parameter
@@ -99,16 +99,16 @@ pub const Integration = struct {
     /// of `method.request.{location}.{name}`, where `location` is `querystring`,
     /// `path`, or `header` and `name` must be a valid and unique method request
     /// parameter name.
-    request_parameters: ?[]const aws.map.StringMapEntry,
+    request_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// Represents a map of Velocity templates that are applied on the request
     /// payload based on the value of the Content-Type header sent by the client.
     /// The content type value is the key in this map, and the template (as a
     /// String) is the value.
-    request_templates: ?[]const aws.map.StringMapEntry,
+    request_templates: ?[]const aws.map.StringMapEntry = null,
 
     /// The response transfer mode of the integration.
-    response_transfer_mode: ?ResponseTransferMode,
+    response_transfer_mode: ?ResponseTransferMode = null,
 
     /// Custom timeout between 50 and 29,000 milliseconds. The default value is
     /// 29,000 milliseconds or 29 seconds. You can increase the default value to
@@ -116,7 +116,7 @@ pub const Integration = struct {
     timeout_in_millis: i32 = 0,
 
     /// Specifies the TLS configuration for an integration.
-    tls_config: ?TlsConfig,
+    tls_config: ?TlsConfig = null,
 
     /// Specifies an API method integration type. The valid value is one of the
     /// following:
@@ -127,7 +127,7 @@ pub const Integration = struct {
     /// integration with a `connectionType` of `VPC_LINK` is referred to as a
     /// private integration and uses a VpcLink to connect API Gateway to a network
     /// load balancer of a VPC.
-    @"type": ?IntegrationType,
+    @"type": ?IntegrationType = null,
 
     /// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
     ///
@@ -158,7 +158,7 @@ pub const Integration = struct {
     /// `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}`
     /// or
     /// `arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}`
-    uri: ?[]const u8,
+    uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cache_key_parameters = "cacheKeyParameters",

@@ -5,7 +5,7 @@ const CompressionType = @import("compression_type.zig").CompressionType;
 pub const ScriptModeConfig = struct {
     /// The type of compression used to store the algorithm scripts in Amazon S3
     /// storage.
-    compression_type: ?CompressionType,
+    compression_type: ?CompressionType = null,
 
     /// The entry point in the algorithm scripts from where the execution begins in
     /// the hybrid job.

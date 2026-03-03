@@ -4,10 +4,10 @@ const WorkspaceThemeConfig = @import("workspace_theme_config.zig").WorkspaceThem
 /// modes.
 pub const WorkspaceTheme = struct {
     /// The theme configuration for dark mode.
-    dark: ?WorkspaceThemeConfig,
+    dark: ?WorkspaceThemeConfig = null,
 
     /// The theme configuration for light mode.
-    light: ?WorkspaceThemeConfig,
+    light: ?WorkspaceThemeConfig = null,
 
     pub const json_field_names = .{
         .dark = "Dark",

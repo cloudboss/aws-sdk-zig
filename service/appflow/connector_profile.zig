@@ -13,35 +13,35 @@ const PrivateConnectionProvisioningState = @import("private_connection_provision
 /// `connectorProfileProperties` field.
 pub const ConnectorProfile = struct {
     /// Indicates the connection mode and if it is public or private.
-    connection_mode: ?ConnectionMode,
+    connection_mode: ?ConnectionMode = null,
 
     /// The label for the connector profile being created.
-    connector_label: ?[]const u8,
+    connector_label: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the connector profile.
-    connector_profile_arn: ?[]const u8,
+    connector_profile_arn: ?[]const u8 = null,
 
     /// The name of the connector profile. The name is unique for each
     /// `ConnectorProfile` in the Amazon Web Services account.
-    connector_profile_name: ?[]const u8,
+    connector_profile_name: ?[]const u8 = null,
 
     /// The connector-specific properties of the profile configuration.
-    connector_profile_properties: ?ConnectorProfileProperties,
+    connector_profile_properties: ?ConnectorProfileProperties = null,
 
     /// The type of connector, such as Salesforce, Amplitude, and so on.
-    connector_type: ?ConnectorType,
+    connector_type: ?ConnectorType = null,
 
     /// Specifies when the connector profile was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the connector profile credentials.
-    credentials_arn: ?[]const u8,
+    credentials_arn: ?[]const u8 = null,
 
     /// Specifies when the connector profile was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// Specifies the private connection provisioning state.
-    private_connection_provisioning_state: ?PrivateConnectionProvisioningState,
+    private_connection_provisioning_state: ?PrivateConnectionProvisioningState = null,
 
     pub const json_field_names = .{
         .connection_mode = "connectionMode",

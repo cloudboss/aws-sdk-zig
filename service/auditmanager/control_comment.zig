@@ -3,13 +3,13 @@
 /// comment text, and a timestamp.
 pub const ControlComment = struct {
     /// The name of the user who authored the comment.
-    author_name: ?[]const u8,
+    author_name: ?[]const u8 = null,
 
     /// The body text of a control comment.
-    comment_body: ?[]const u8,
+    comment_body: ?[]const u8 = null,
 
     /// The time when the comment was posted.
-    posted_date: ?i64,
+    posted_date: ?i64 = null,
 
     pub const json_field_names = .{
         .author_name = "authorName",

@@ -4,8 +4,8 @@ pub const InstanceCreditSpecification = struct {
     /// The credit option for CPU usage of the instance.
     ///
     /// Valid values: `standard` | `unlimited`
-    cpu_credits: ?[]const u8,
+    cpu_credits: ?[]const u8 = null,
 
     /// The ID of the instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 };

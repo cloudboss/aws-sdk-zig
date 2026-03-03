@@ -11,7 +11,7 @@ pub const TrafficRoutingConfig = struct {
     /// or ECS task set to another in two increments. The original and target Lambda
     /// function versions or ECS task sets are specified in the deployment's AppSpec
     /// file.
-    time_based_canary: ?TimeBasedCanary,
+    time_based_canary: ?TimeBasedCanary = null,
 
     /// A configuration that shifts traffic from one version of a Lambda function
     /// or Amazon ECS task set to another in equal increments, with an equal number
@@ -19,11 +19,11 @@ pub const TrafficRoutingConfig = struct {
     /// minutes between each increment. The original and target Lambda function
     /// versions or Amazon ECS task sets are specified in the deployment's AppSpec
     /// file.
-    time_based_linear: ?TimeBasedLinear,
+    time_based_linear: ?TimeBasedLinear = null,
 
     /// The type of traffic shifting (`TimeBasedCanary` or
     /// `TimeBasedLinear`) used by a deployment configuration.
-    @"type": ?TrafficRoutingType,
+    @"type": ?TrafficRoutingType = null,
 
     pub const json_field_names = .{
         .time_based_canary = "timeBasedCanary",

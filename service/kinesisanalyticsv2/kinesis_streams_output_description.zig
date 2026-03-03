@@ -13,7 +13,7 @@ pub const KinesisStreamsOutputDescription = struct {
     /// version have an application-level service execution role rather than a
     /// resource-level
     /// role.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resource_arn = "ResourceARN",

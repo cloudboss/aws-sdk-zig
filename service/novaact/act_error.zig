@@ -4,7 +4,7 @@ pub const ActError = struct {
     message: []const u8,
 
     /// The type or category of error that occurred.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .message = "message",

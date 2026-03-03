@@ -7,13 +7,13 @@ const FieldToMatch = @import("field_to_match.zig").FieldToMatch;
 pub const WAFLoggingParameters = struct {
     /// A filter configuration that determines which WAF log records to include or
     /// exclude.
-    logging_filter: ?LoggingFilter,
+    logging_filter: ?LoggingFilter = null,
 
     /// The type of WAF logs to collect (currently supports WAF_LOGS).
-    log_type: ?WAFLogType,
+    log_type: ?WAFLogType = null,
 
     /// The fields to redact from WAF logs to protect sensitive information.
-    redacted_fields: ?[]const FieldToMatch,
+    redacted_fields: ?[]const FieldToMatch = null,
 
     pub const json_field_names = .{
         .logging_filter = "LoggingFilter",

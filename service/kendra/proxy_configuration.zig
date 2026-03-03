@@ -10,7 +10,7 @@ pub const ProxyConfiguration = struct {
     /// to connect to a website host. Amazon Kendra currently support basic
     /// authentication
     /// to connect to a web proxy server. The secret stores your credentials.
-    credentials: ?[]const u8,
+    credentials: ?[]const u8 = null,
 
     /// The name of the website host you want to connect to via a web proxy server.
     ///

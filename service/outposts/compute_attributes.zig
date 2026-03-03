@@ -4,20 +4,20 @@ const ComputeAssetState = @import("compute_asset_state.zig").ComputeAssetState;
 /// Information about compute hardware assets.
 pub const ComputeAttributes = struct {
     /// The host ID of the Dedicated Host on the asset.
-    host_id: ?[]const u8,
+    host_id: ?[]const u8 = null,
 
     /// A list of the names of instance families that are currently associated with
     /// a given
     /// asset.
-    instance_families: ?[]const []const u8,
+    instance_families: ?[]const []const u8 = null,
 
     /// The instance type capacities configured for this asset. This can be changed
     /// through a
     /// capacity task.
-    instance_type_capacities: ?[]const AssetInstanceTypeCapacity,
+    instance_type_capacities: ?[]const AssetInstanceTypeCapacity = null,
 
     /// The maximum number of vCPUs possible for the specified asset.
-    max_vcpus: ?i32,
+    max_vcpus: ?i32 = null,
 
     /// The state.
     ///
@@ -33,7 +33,7 @@ pub const ComputeAttributes = struct {
     /// resources is reduced. Amazon Web Services sends notifications for resources
     /// that must be stopped before
     /// the asset can be replaced.
-    state: ?ComputeAssetState,
+    state: ?ComputeAssetState = null,
 
     pub const json_field_names = .{
         .host_id = "HostId",

@@ -12,13 +12,13 @@ pub const BotImportSpecification = struct {
     /// import a bot. You can't use the `UpdateBot` operation to
     /// update tags. To update tags, use the `TagResource`
     /// operation.
-    bot_tags: ?[]const aws.map.StringMapEntry,
+    bot_tags: ?[]const aws.map.StringMapEntry = null,
 
     data_privacy: DataPrivacy,
 
     /// Allows you to configure destinations where error logs will be published
     /// during the bot import process.
-    error_log_settings: ?ErrorLogSettings,
+    error_log_settings: ?ErrorLogSettings = null,
 
     /// The time, in seconds, that Amazon Lex should keep information about a
     /// user's conversation with the bot.
@@ -29,7 +29,7 @@ pub const BotImportSpecification = struct {
     ///
     /// You can specify between 60 (1 minute) and 86,400 (24 hours)
     /// seconds.
-    idle_session_ttl_in_seconds: ?i32,
+    idle_session_ttl_in_seconds: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role used to build and run
     /// the bot.
@@ -39,7 +39,7 @@ pub const BotImportSpecification = struct {
     /// tags when you import a bot. You can't use the `UpdateAlias`
     /// operation to update tags. To update tags on the test alias, use the
     /// `TagResource` operation.
-    test_bot_alias_tags: ?[]const aws.map.StringMapEntry,
+    test_bot_alias_tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .bot_name = "botName",

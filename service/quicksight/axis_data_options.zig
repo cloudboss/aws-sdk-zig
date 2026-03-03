@@ -7,10 +7,10 @@ const NumericAxisOptions = @import("numeric_axis_options.zig").NumericAxisOption
 /// the attributes can be defined.
 pub const AxisDataOptions = struct {
     /// The options for an axis with a date field.
-    date_axis_options: ?DateAxisOptions,
+    date_axis_options: ?DateAxisOptions = null,
 
     /// The options for an axis with a numeric field.
-    numeric_axis_options: ?NumericAxisOptions,
+    numeric_axis_options: ?NumericAxisOptions = null,
 
     pub const json_field_names = .{
         .date_axis_options = "DateAxisOptions",

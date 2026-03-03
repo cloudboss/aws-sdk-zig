@@ -18,28 +18,28 @@ pub const IndicatorDetail = struct {
     /// Suspicious IP addresses that are flagged, which indicates critical or severe
     /// threats based on threat intelligence by Detective. This indicator is derived
     /// from Amazon Web Services threat intelligence.
-    flagged_ip_address_detail: ?FlaggedIpAddressDetail,
+    flagged_ip_address_detail: ?FlaggedIpAddressDetail = null,
 
     /// Identifies unusual and impossible user activity for an account.
-    impossible_travel_detail: ?ImpossibleTravelDetail,
+    impossible_travel_detail: ?ImpossibleTravelDetail = null,
 
     /// Contains details about the new Autonomous System Organization (ASO).
-    new_aso_detail: ?NewAsoDetail,
+    new_aso_detail: ?NewAsoDetail = null,
 
     /// Contains details about the new geographic location.
-    new_geolocation_detail: ?NewGeolocationDetail,
+    new_geolocation_detail: ?NewGeolocationDetail = null,
 
     /// Contains details about the new user agent.
-    new_user_agent_detail: ?NewUserAgentDetail,
+    new_user_agent_detail: ?NewUserAgentDetail = null,
 
     /// Contains details about related findings.
-    related_finding_detail: ?RelatedFindingDetail,
+    related_finding_detail: ?RelatedFindingDetail = null,
 
     /// Contains details about related finding groups.
-    related_finding_group_detail: ?RelatedFindingGroupDetail,
+    related_finding_group_detail: ?RelatedFindingGroupDetail = null,
 
     /// Details about the indicator of compromise.
-    tt_ps_observed_detail: ?TTPsObservedDetail,
+    tt_ps_observed_detail: ?TTPsObservedDetail = null,
 
     pub const json_field_names = .{
         .flagged_ip_address_detail = "FlaggedIpAddressDetail",

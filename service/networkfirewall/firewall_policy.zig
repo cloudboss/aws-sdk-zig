@@ -17,11 +17,11 @@ pub const FirewallPolicy = struct {
     /// When true, prevents TCP and TLS packets from reaching destination servers
     /// until TLS Inspection has evaluated Server Name Indication (SNI) rules.
     /// Requires an associated TLS Inspection configuration.
-    enable_tls_session_holding: ?bool,
+    enable_tls_session_holding: ?bool = null,
 
     /// Contains variables that you can use to override default Suricata settings in
     /// your firewall policy.
-    policy_variables: ?PolicyVariables,
+    policy_variables: ?PolicyVariables = null,
 
     /// The default actions to take on a packet that doesn't match any stateful
     /// rules. The stateful default action is optional,
@@ -40,25 +40,25 @@ pub const FirewallPolicy = struct {
     /// For more information, see
     /// [Strict evaluation
     /// order](https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html#suricata-strict-rule-evaluation-order.html) in the *Network Firewall Developer Guide*.
-    stateful_default_actions: ?[]const []const u8,
+    stateful_default_actions: ?[]const []const u8 = null,
 
     /// Additional options governing how Network Firewall handles stateful rules.
     /// The stateful
     /// rule groups that you use in your policy must have stateful rule options
     /// settings that are compatible with these settings.
-    stateful_engine_options: ?StatefulEngineOptions,
+    stateful_engine_options: ?StatefulEngineOptions = null,
 
     /// References to the stateful rule groups that are used in the policy. These
     /// define the
     /// inspection criteria in stateful rules.
-    stateful_rule_group_references: ?[]const StatefulRuleGroupReference,
+    stateful_rule_group_references: ?[]const StatefulRuleGroupReference = null,
 
     /// The custom action definitions that are available for use in the firewall
     /// policy's
     /// `StatelessDefaultActions` setting. You name each custom action that you
     /// define, and then you can use it by name in your default actions
     /// specifications.
-    stateless_custom_actions: ?[]const CustomAction,
+    stateless_custom_actions: ?[]const CustomAction = null,
 
     /// The actions to take on a packet if it doesn't match any of the stateless
     /// rules in the
@@ -94,10 +94,10 @@ pub const FirewallPolicy = struct {
     /// References to the stateless rule groups that are used in the policy. These
     /// define the
     /// matching criteria in stateless rules.
-    stateless_rule_group_references: ?[]const StatelessRuleGroupReference,
+    stateless_rule_group_references: ?[]const StatelessRuleGroupReference = null,
 
     /// The Amazon Resource Name (ARN) of the TLS inspection configuration.
-    tls_inspection_configuration_arn: ?[]const u8,
+    tls_inspection_configuration_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enable_tls_session_holding = "EnableTLSSessionHolding",

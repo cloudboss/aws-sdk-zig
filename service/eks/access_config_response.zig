@@ -3,12 +3,12 @@ const AuthenticationMode = @import("authentication_mode.zig").AuthenticationMode
 /// The access configuration for the cluster.
 pub const AccessConfigResponse = struct {
     /// The current authentication mode of the cluster.
-    authentication_mode: ?AuthenticationMode,
+    authentication_mode: ?AuthenticationMode = null,
 
     /// Specifies whether or not the cluster creator IAM principal was set as a
     /// cluster
     /// admin access entry during cluster creation time.
-    bootstrap_cluster_creator_admin_permissions: ?bool,
+    bootstrap_cluster_creator_admin_permissions: ?bool = null,
 
     pub const json_field_names = .{
         .authentication_mode = "authenticationMode",

@@ -4,14 +4,14 @@ pub const ListTagsForResourceRequest = struct {
     /// objects are available, in the response, WAF provides a
     /// `NextMarker` value that you can use in a subsequent call to get the next
     /// batch of objects.
-    limit: ?i32,
+    limit: ?i32 = null,
 
     /// When you request a list of objects with a `Limit` setting, if the number of
     /// objects that are still available
     /// for retrieval exceeds the limit, WAF returns a `NextMarker`
     /// value in the response. To retrieve the next batch of objects, provide the
     /// marker from the prior call in your next request.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the resource.
     resource_arn: []const u8,

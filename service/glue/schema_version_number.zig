@@ -4,7 +4,7 @@ pub const SchemaVersionNumber = struct {
     latest_version: bool = false,
 
     /// The version number of the schema.
-    version_number: ?i64,
+    version_number: ?i64 = null,
 
     pub const json_field_names = .{
         .latest_version = "LatestVersion",

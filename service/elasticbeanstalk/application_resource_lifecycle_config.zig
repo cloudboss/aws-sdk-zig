@@ -19,8 +19,8 @@ pub const ApplicationResourceLifecycleConfig = struct {
     /// application, and you don't need to specify it again in subsequent
     /// `UpdateApplicationResourceLifecycle` calls. You can, however, specify it in
     /// subsequent calls to change the Service Role to another value.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
     /// Defines lifecycle settings for application versions.
-    version_lifecycle_config: ?ApplicationVersionLifecycleConfig,
+    version_lifecycle_config: ?ApplicationVersionLifecycleConfig = null,
 };

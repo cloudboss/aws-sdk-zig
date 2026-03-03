@@ -27,10 +27,10 @@ pub const IdleRecommendationFilter = struct {
     /// your idle resource service recommendations with a tag key value of `Owner`
     /// or without any tag
     /// keys assigned.
-    name: ?IdleRecommendationFilterName,
+    name: ?IdleRecommendationFilterName = null,
 
     /// The value of the filter.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

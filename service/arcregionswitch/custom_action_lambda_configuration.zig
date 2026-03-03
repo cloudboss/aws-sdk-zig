@@ -18,7 +18,7 @@ pub const CustomActionLambdaConfiguration = struct {
     timeout_minutes: i32 = 60,
 
     /// The settings for ungraceful execution.
-    ungraceful: ?LambdaUngraceful,
+    ungraceful: ?LambdaUngraceful = null,
 
     pub const json_field_names = .{
         .lambdas = "lambdas",

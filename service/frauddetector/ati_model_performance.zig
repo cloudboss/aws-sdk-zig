@@ -8,7 +8,7 @@ pub const ATIModelPerformance = struct {
     /// have the lowest possible
     /// ASI score of 0.5, whereas the a model with a high separability power will
     /// have the highest possible ASI score of 1.0
-    asi: ?f32,
+    asi: ?f32 = null,
 
     pub const json_field_names = .{
         .asi = "asi",

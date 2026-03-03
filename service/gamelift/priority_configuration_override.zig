@@ -40,7 +40,7 @@ pub const PriorityConfigurationOverride = struct {
     ///
     /// * `NONE` -- Limit placements to locations on the priority override list
     ///   only.
-    placement_fallback_strategy: ?PlacementFallbackStrategy,
+    placement_fallback_strategy: ?PlacementFallbackStrategy = null,
 
     pub const json_field_names = .{
         .location_order = "LocationOrder",

@@ -15,7 +15,7 @@ pub const Destination = struct {
     /// bucket. If this is not specified in the replication configuration, the
     /// replicas are owned by same
     /// Amazon Web Services account that owns the source object.
-    access_control_translation: ?AccessControlTranslation,
+    access_control_translation: ?AccessControlTranslation = null,
 
     /// Destination bucket owner account ID. In a cross-account scenario, if you
     /// direct Amazon S3 to change
@@ -27,7 +27,7 @@ pub const Destination = struct {
     /// Changing
     /// the Replica
     /// Owner](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-change-owner.html) in the *Amazon S3 User Guide*.
-    account: ?[]const u8,
+    account: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to
     /// store the results.
@@ -36,19 +36,19 @@ pub const Destination = struct {
     /// A container that provides information about encryption. If
     /// `SourceSelectionCriteria` is
     /// specified, you must specify this element.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// A container specifying replication metrics-related settings enabling
     /// replication metrics and
     /// events.
-    metrics: ?Metrics,
+    metrics: ?Metrics = null,
 
     /// A container specifying S3 Replication Time Control (S3 RTC), including
     /// whether S3 RTC is enabled and the time when all
     /// objects and operations on objects must be replicated. Must be specified
     /// together with a
     /// `Metrics` block.
-    replication_time: ?ReplicationTime,
+    replication_time: ?ReplicationTime = null,
 
     /// The storage class to use when replicating objects, such as S3 Standard or
     /// reduced redundancy. By
@@ -60,5 +60,5 @@ pub const Destination = struct {
     /// *Amazon S3 API Reference*.
     ///
     /// `FSX_OPENZFS` is not an accepted value when replicating objects.
-    storage_class: ?StorageClass,
+    storage_class: ?StorageClass = null,
 };

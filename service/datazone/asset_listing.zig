@@ -4,36 +4,36 @@ const TimeSeriesDataPointSummaryFormOutput = @import("time_series_data_point_sum
 /// An asset published in an Amazon DataZone catalog.
 pub const AssetListing = struct {
     /// The identifier of an asset published in an Amazon DataZone catalog.
-    asset_id: ?[]const u8,
+    asset_id: ?[]const u8 = null,
 
     /// The revision of an asset published in an Amazon DataZone catalog.
-    asset_revision: ?[]const u8,
+    asset_revision: ?[]const u8 = null,
 
     /// The type of an asset published in an Amazon DataZone catalog.
-    asset_type: ?[]const u8,
+    asset_type: ?[]const u8 = null,
 
     /// The timestamp of when an asset published in an Amazon DataZone catalog was
     /// created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The metadata forms attached to an asset published in an Amazon DataZone
     /// catalog.
-    forms: ?[]const u8,
+    forms: ?[]const u8 = null,
 
     /// The glossary terms attached to an asset published in an Amazon DataZone
     /// catalog.
-    glossary_terms: ?[]const DetailedGlossaryTerm,
+    glossary_terms: ?[]const DetailedGlossaryTerm = null,
 
     /// The restricted glossary terms associated with an asset.
-    governed_glossary_terms: ?[]const DetailedGlossaryTerm,
+    governed_glossary_terms: ?[]const DetailedGlossaryTerm = null,
 
     /// The latest time series data points forms included in the additional
     /// attributes of an asset.
-    latest_time_series_data_point_forms: ?[]const TimeSeriesDataPointSummaryFormOutput,
+    latest_time_series_data_point_forms: ?[]const TimeSeriesDataPointSummaryFormOutput = null,
 
     /// The identifier of the project where an asset published in an Amazon DataZone
     /// catalog exists.
-    owning_project_id: ?[]const u8,
+    owning_project_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .asset_id = "assetId",

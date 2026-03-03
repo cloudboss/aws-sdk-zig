@@ -4,7 +4,7 @@ const PostContactSummaryStatus = @import("post_contact_summary_status.zig").Post
 /// Information about the post-contact summary.
 pub const PostContactSummary = struct {
     /// The content of the summary.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// If the summary failed to be generated, one of the following failure codes
     /// occurs:
@@ -25,7 +25,7 @@ pub const PostContactSummary = struct {
     /// that isn't supported by generative AI-powered post-contact summaries.
     ///
     /// * `INTERNAL_ERROR`: Internal system error.
-    failure_code: ?PostContactSummaryFailureCode,
+    failure_code: ?PostContactSummaryFailureCode = null,
 
     /// Whether the summary was successfully COMPLETED or FAILED to be generated.
     status: PostContactSummaryStatus,

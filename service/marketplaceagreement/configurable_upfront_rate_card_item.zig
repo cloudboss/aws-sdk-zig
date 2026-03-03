@@ -7,14 +7,14 @@ const Selector = @import("selector.zig").Selector;
 /// rate cards (including pricing and dimensions) that have been proposed.
 pub const ConfigurableUpfrontRateCardItem = struct {
     /// Defines limits on how the term can be configured by acceptors.
-    constraints: ?Constraints,
+    constraints: ?Constraints = null,
 
     /// Defines the per unit rates for product dimensions.
-    rate_card: ?[]const RateCardItem,
+    rate_card: ?[]const RateCardItem = null,
 
     /// Differentiates between the mutually exclusive rate cards in the same pricing
     /// term to be selected by the buyer.
-    selector: ?Selector,
+    selector: ?Selector = null,
 
     pub const json_field_names = .{
         .constraints = "constraints",

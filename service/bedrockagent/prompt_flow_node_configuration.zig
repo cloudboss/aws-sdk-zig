@@ -11,7 +11,7 @@ const PromptFlowNodeSourceConfiguration = @import("prompt_flow_node_source_confi
 pub const PromptFlowNodeConfiguration = struct {
     /// Contains configurations for a guardrail to apply to the prompt in this node
     /// and the response generated from it.
-    guardrail_configuration: ?GuardrailConfiguration,
+    guardrail_configuration: ?GuardrailConfiguration = null,
 
     /// Specifies whether the prompt is from Prompt management or defined inline.
     source_configuration: PromptFlowNodeSourceConfiguration,

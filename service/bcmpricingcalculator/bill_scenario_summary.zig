@@ -5,33 +5,33 @@ const BillScenarioStatus = @import("bill_scenario_status.zig").BillScenarioStatu
 /// Provides a summary of a bill scenario.
 pub const BillScenarioSummary = struct {
     /// The time period covered by the bill scenario.
-    bill_interval: ?BillInterval,
+    bill_interval: ?BillInterval = null,
 
     /// The arn of the cost category used in the reserved and prioritized group
     /// sharing.
-    cost_category_group_sharing_preference_arn: ?[]const u8,
+    cost_category_group_sharing_preference_arn: ?[]const u8 = null,
 
     /// The timestamp when the bill scenario was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The timestamp when the bill scenario will expire.
-    expires_at: ?i64,
+    expires_at: ?i64 = null,
 
     /// An error message if the bill scenario creation or processing failed.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// The setting for the reserved instance and savings plan group sharing used in
     /// this estimate.
-    group_sharing_preference: ?GroupSharingPreferenceEnum,
+    group_sharing_preference: ?GroupSharingPreferenceEnum = null,
 
     /// The unique identifier of the bill scenario.
     id: []const u8,
 
     /// The name of the bill scenario.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the bill scenario.
-    status: ?BillScenarioStatus,
+    status: ?BillScenarioStatus = null,
 
     pub const json_field_names = .{
         .bill_interval = "billInterval",

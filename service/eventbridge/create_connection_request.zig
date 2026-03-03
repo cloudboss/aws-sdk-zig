@@ -16,7 +16,7 @@ pub const CreateConnectionRequest = struct {
     auth_parameters: CreateConnectionAuthRequestParameters,
 
     /// A description for the connection to create.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// For connections to private APIs, the parameters to use for invoking the API.
     ///
@@ -24,7 +24,7 @@ pub const CreateConnectionRequest = struct {
     /// APIs](https://docs.aws.amazon.com/eventbridge/latest/userguide/connection-private.html) in the *
     /// Amazon EventBridge User Guide*
     /// .
-    invocation_connectivity_parameters: ?ConnectivityResourceParameters,
+    invocation_connectivity_parameters: ?ConnectivityResourceParameters = null,
 
     /// The identifier of the KMS
     /// customer managed key for EventBridge to use, if you choose to use a customer
@@ -37,7 +37,7 @@ pub const CreateConnectionRequest = struct {
     /// For more information, see [Identify and view
     /// keys](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html) in the *Key Management Service
     /// Developer Guide*.
-    kms_key_identifier: ?[]const u8,
+    kms_key_identifier: ?[]const u8 = null,
 
     /// The name for the connection to create.
     name: []const u8,

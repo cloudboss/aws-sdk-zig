@@ -1,10 +1,10 @@
 /// Contains information about the security group for the load balancer.
 pub const AwsElbLoadBalancerSourceSecurityGroup = struct {
     /// The name of the security group.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// The owner of the security group.
-    owner_alias: ?[]const u8,
+    owner_alias: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .group_name = "GroupName",

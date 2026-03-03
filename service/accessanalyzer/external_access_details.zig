@@ -7,18 +7,18 @@ const FindingSource = @import("finding_source.zig").FindingSource;
 pub const ExternalAccessDetails = struct {
     /// The action in the analyzed policy statement that an external principal has
     /// permission to use.
-    action: ?[]const []const u8,
+    action: ?[]const []const u8 = null,
 
     /// The condition in the analyzed policy statement that resulted in an external
     /// access finding.
     condition: []const aws.map.StringMapEntry,
 
     /// Specifies whether the external access finding is public.
-    is_public: ?bool,
+    is_public: ?bool = null,
 
     /// The external principal that has access to a resource within the zone of
     /// trust.
-    principal: ?[]const aws.map.StringMapEntry,
+    principal: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of restriction applied to the finding by the resource owner with an
     /// Organizations resource control policy (RCP).
@@ -35,12 +35,12 @@ pub const ExternalAccessDetails = struct {
     ///   organization, but the RCP only impacts Amazon S3 buckets.
     /// * `APPLIED`: This restriction is not currently available for external access
     ///   findings.
-    resource_control_policy_restriction: ?ResourceControlPolicyRestriction,
+    resource_control_policy_restriction: ?ResourceControlPolicyRestriction = null,
 
     /// The sources of the external access finding. This indicates how the access
     /// that generated the finding is granted. It is populated for Amazon S3 bucket
     /// findings.
-    sources: ?[]const FindingSource,
+    sources: ?[]const FindingSource = null,
 
     pub const json_field_names = .{
         .action = "action",

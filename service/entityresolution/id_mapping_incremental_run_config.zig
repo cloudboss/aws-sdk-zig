@@ -6,7 +6,7 @@ pub const IdMappingIncrementalRunConfig = struct {
     ///
     /// It takes only one value: `ON_DEMAND`. This setting runs the ID mapping
     /// workflow when it's manually triggered through the `StartIdMappingJob` API.
-    incremental_run_type: ?IdMappingIncrementalRunType,
+    incremental_run_type: ?IdMappingIncrementalRunType = null,
 
     pub const json_field_names = .{
         .incremental_run_type = "incrementalRunType",

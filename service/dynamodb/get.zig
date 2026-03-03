@@ -8,7 +8,7 @@ pub const Get = struct {
     /// One or more substitution tokens for attribute names in the
     /// ProjectionExpression
     /// parameter.
-    expression_attribute_names: ?[]const aws.map.StringMapEntry,
+    expression_attribute_names: ?[]const aws.map.StringMapEntry = null,
 
     /// A map of attribute names to `AttributeValue` objects that specifies the
     /// primary key of the item to retrieve.
@@ -21,7 +21,7 @@ pub const Get = struct {
     /// names are specified, then all attributes of the specified item are returned.
     /// If any of
     /// the requested attributes are not found, they do not appear in the result.
-    projection_expression: ?[]const u8,
+    projection_expression: ?[]const u8 = null,
 
     /// The name of the table from which to retrieve the specified item. You can
     /// also provide

@@ -8,24 +8,24 @@ const OutputDataConfig = @import("output_data_config.zig").OutputDataConfig;
 /// Contains all the information about a speaker enrollment job.
 pub const SpeakerEnrollmentJob = struct {
     /// A timestamp of when the speaker enrollment job was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to
     /// access
     /// customer's buckets to read the input manifest file and write the job output
     /// file.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     /// The identifier of the domain that contains the speaker enrollment job.
-    domain_id: ?[]const u8,
+    domain_id: ?[]const u8 = null,
 
     /// A timestamp of when the speaker enrollment job ended.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The configuration that defines the action to take when the speaker is
     /// already enrolled
     /// in Voice ID, and the `FraudDetectionConfig` to use.
-    enrollment_config: ?EnrollmentConfig,
+    enrollment_config: ?EnrollmentConfig = null,
 
     /// Contains details that are populated when an entire batch job fails. In cases
     /// of
@@ -35,32 +35,32 @@ pub const SpeakerEnrollmentJob = struct {
     /// use the job output file to identify the individual registration requests
     /// that
     /// failed.
-    failure_details: ?FailureDetails,
+    failure_details: ?FailureDetails = null,
 
     /// The input data config containing an S3 URI for the input manifest file that
     /// contains
     /// the list of speaker enrollment job requests.
-    input_data_config: ?InputDataConfig,
+    input_data_config: ?InputDataConfig = null,
 
     /// The service-generated identifier for the speaker enrollment job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The client-provided name for the speaker enrollment job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// Provides details on job progress. This field shows the completed percentage
     /// of
     /// registration requests listed in the input file.
-    job_progress: ?JobProgress,
+    job_progress: ?JobProgress = null,
 
     /// The current status of the speaker enrollment job.
-    job_status: ?SpeakerEnrollmentJobStatus,
+    job_status: ?SpeakerEnrollmentJobStatus = null,
 
     /// The output data config containing the S3 location where Voice ID writes the
     /// job
     /// output file; you must also include a KMS key ID to encrypt the
     /// file.
-    output_data_config: ?OutputDataConfig,
+    output_data_config: ?OutputDataConfig = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

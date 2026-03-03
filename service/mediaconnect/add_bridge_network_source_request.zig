@@ -7,7 +7,7 @@ pub const AddBridgeNetworkSourceRequest = struct {
     multicast_ip: []const u8,
 
     /// The settings related to the multicast source.
-    multicast_source_settings: ?MulticastSourceSettings,
+    multicast_source_settings: ?MulticastSourceSettings = null,
 
     /// The name of the network source. This name is used to reference the source
     /// and must be unique among sources in this bridge.

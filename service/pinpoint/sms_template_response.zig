@@ -6,11 +6,11 @@ const TemplateType = @import("template_type.zig").TemplateType;
 /// that can be used in text messages that are sent through the SMS channel.
 pub const SMSTemplateResponse = struct {
     /// The Amazon Resource Name (ARN) of the message template.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The message body that's used in text messages that are based on the message
     /// template.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// The date, in ISO 8601 format, when the message template was created.
     creation_date: []const u8,
@@ -19,22 +19,22 @@ pub const SMSTemplateResponse = struct {
     /// variables in the message template. This object is a set of key-value pairs.
     /// Each key defines a message variable in the template. The corresponding value
     /// defines the default value for that variable.
-    default_substitutions: ?[]const u8,
+    default_substitutions: ?[]const u8 = null,
 
     /// The date, in ISO 8601 format, when the message template was last modified.
     last_modified_date: []const u8,
 
     /// The unique identifier for the recommender model that's used by the message
     /// template.
-    recommender_id: ?[]const u8,
+    recommender_id: ?[]const u8 = null,
 
     /// A string-to-string map of key-value pairs that identifies the tags that are
     /// associated with the message template. Each tag consists of a required tag
     /// key and an associated tag value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The custom description of the message template.
-    template_description: ?[]const u8,
+    template_description: ?[]const u8 = null,
 
     /// The name of the message template.
     template_name: []const u8,
@@ -46,7 +46,7 @@ pub const SMSTemplateResponse = struct {
     /// The unique identifier, as an integer, for the active version of the message
     /// template, or the version of the template that you specified by using the
     /// version parameter in your request.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

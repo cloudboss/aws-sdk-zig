@@ -5,27 +5,27 @@ pub const RdsRequirements = struct {
     /// include
     /// `"MULTI_AZ"` for Multi-AZ deployments and `"SINGLE_AZ"` for
     /// Single-AZ deployments.
-    deployment_option: ?[]const u8,
+    deployment_option: ?[]const u8 = null,
 
     /// The required target Amazon RDS engine edition.
-    engine_edition: ?[]const u8,
+    engine_edition: ?[]const u8 = null,
 
     /// The required target Amazon RDS engine version.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// The required memory on the Amazon RDS DB instance.
-    instance_memory: ?f64,
+    instance_memory: ?f64 = null,
 
     /// The required number of virtual CPUs (vCPU) on the Amazon RDS DB instance.
-    instance_vcpu: ?f64,
+    instance_vcpu: ?f64 = null,
 
     /// The required number of I/O operations completed each second (IOPS) on your
     /// Amazon RDS DB
     /// instance.
-    storage_iops: ?i32,
+    storage_iops: ?i32 = null,
 
     /// The required Amazon RDS DB instance storage size.
-    storage_size: ?i32,
+    storage_size: ?i32 = null,
 
     pub const json_field_names = .{
         .deployment_option = "DeploymentOption",

@@ -6,7 +6,7 @@ const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator
 /// eg. landsat-8 (Landsat-8), sentinel-2a.
 pub const PlatformInput = struct {
     /// The ComparisonOperator to use with PlatformInput.
-    comparison_operator: ?ComparisonOperator,
+    comparison_operator: ?ComparisonOperator = null,
 
     /// The value of the platform.
     value: []const u8,

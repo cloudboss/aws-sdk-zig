@@ -6,10 +6,10 @@
 /// operation.
 pub const Filter = struct {
     /// The name of the filter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// One or more values for the filter.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

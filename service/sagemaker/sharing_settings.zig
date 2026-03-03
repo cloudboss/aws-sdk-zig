@@ -8,16 +8,16 @@ const NotebookOutputOption = @import("notebook_output_option.zig").NotebookOutpu
 pub const SharingSettings = struct {
     /// Whether to include the notebook cell output when sharing the notebook. The
     /// default is `Disabled`.
-    notebook_output_option: ?NotebookOutputOption,
+    notebook_output_option: ?NotebookOutputOption = null,
 
     /// When `NotebookOutputOption` is `Allowed`, the Amazon Web Services Key
     /// Management Service (KMS) encryption key ID used to encrypt the notebook cell
     /// output in the Amazon S3 bucket.
-    s3_kms_key_id: ?[]const u8,
+    s3_kms_key_id: ?[]const u8 = null,
 
     /// When `NotebookOutputOption` is `Allowed`, the Amazon S3 bucket used to store
     /// the shared notebook snapshots.
-    s3_output_path: ?[]const u8,
+    s3_output_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .notebook_output_option = "NotebookOutputOption",

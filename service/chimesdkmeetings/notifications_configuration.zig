@@ -3,13 +3,13 @@
 pub const NotificationsConfiguration = struct {
     /// The ARN of the Amazon Web Services Lambda function in the notifications
     /// configuration.
-    lambda_function_arn: ?[]const u8,
+    lambda_function_arn: ?[]const u8 = null,
 
     /// The ARN of the SNS topic.
-    sns_topic_arn: ?[]const u8,
+    sns_topic_arn: ?[]const u8 = null,
 
     /// The ARN of the SQS queue.
-    sqs_queue_arn: ?[]const u8,
+    sqs_queue_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .lambda_function_arn = "LambdaFunctionArn",

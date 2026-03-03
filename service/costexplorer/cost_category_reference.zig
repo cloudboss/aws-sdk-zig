@@ -9,17 +9,17 @@ const CostCategoryProcessingStatus = @import("cost_category_processing_status.zi
 /// `DescribeCostCategory`.
 pub const CostCategoryReference = struct {
     /// The unique identifier for your cost category.
-    cost_category_arn: ?[]const u8,
+    cost_category_arn: ?[]const u8 = null,
 
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// The cost category's effective end date.
-    effective_end: ?[]const u8,
+    effective_end: ?[]const u8 = null,
 
     /// The cost category's effective start date.
-    effective_start: ?[]const u8,
+    effective_start: ?[]const u8 = null,
 
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The number of rules that are associated with a specific cost category.
     number_of_rules: i32 = 0,
@@ -27,13 +27,13 @@ pub const CostCategoryReference = struct {
     /// The list of processing statuses for Cost Management products for a specific
     /// cost
     /// category.
-    processing_status: ?[]const CostCategoryProcessingStatus,
+    processing_status: ?[]const CostCategoryProcessingStatus = null,
 
     /// The resource types supported by a specific cost category.
-    supported_resource_types: ?[]const []const u8,
+    supported_resource_types: ?[]const []const u8 = null,
 
     /// A list of unique cost category values in a specific cost category.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .cost_category_arn = "CostCategoryArn",

@@ -4,7 +4,7 @@ const X12AcknowledgmentOptions = @import("x12_acknowledgment_options.zig").X12Ac
 pub const X12InboundEdiOptions = struct {
     /// Specifies acknowledgment options for inbound X12 EDI files. These options
     /// control how functional and technical acknowledgments are handled.
-    acknowledgment_options: ?X12AcknowledgmentOptions,
+    acknowledgment_options: ?X12AcknowledgmentOptions = null,
 
     pub const json_field_names = .{
         .acknowledgment_options = "acknowledgmentOptions",

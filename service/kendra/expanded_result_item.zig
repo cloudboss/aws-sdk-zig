@@ -16,20 +16,20 @@ pub const ExpandedResultItem = struct {
     /// example, the document author ("_author") or the source URI ("_source_uri")
     /// of the
     /// document.
-    document_attributes: ?[]const DocumentAttribute,
+    document_attributes: ?[]const DocumentAttribute = null,
 
-    document_excerpt: ?TextWithHighlights,
+    document_excerpt: ?TextWithHighlights = null,
 
     /// The idenitifier of the document.
-    document_id: ?[]const u8,
+    document_id: ?[]const u8 = null,
 
-    document_title: ?TextWithHighlights,
+    document_title: ?TextWithHighlights = null,
 
     /// The URI of the original location of the document.
-    document_uri: ?[]const u8,
+    document_uri: ?[]const u8 = null,
 
     /// The identifier for the expanded result.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .document_attributes = "DocumentAttributes",

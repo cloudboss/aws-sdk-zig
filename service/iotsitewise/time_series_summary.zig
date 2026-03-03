@@ -3,10 +3,10 @@ const PropertyDataType = @import("property_data_type.zig").PropertyDataType;
 /// Contains a summary of a time series (data stream).
 pub const TimeSeriesSummary = struct {
     /// The alias that identifies the time series.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The ID of the asset in which the asset property was created.
-    asset_id: ?[]const u8,
+    asset_id: ?[]const u8 = null,
 
     /// The data type of the time series.
     ///
@@ -22,10 +22,10 @@ pub const TimeSeriesSummary = struct {
     /// in which you created the asset property that is associated with your time
     /// series.
     /// Use `AWS/ALARM_STATE` for alarm state in alarm composite models.
-    data_type_spec: ?[]const u8,
+    data_type_spec: ?[]const u8 = null,
 
     /// The ID of the asset property, in UUID format.
-    property_id: ?[]const u8,
+    property_id: ?[]const u8 = null,
 
     /// The
     /// [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the time series, which has the following format.

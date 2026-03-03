@@ -10,32 +10,32 @@ const Origination = @import("origination.zig").Origination;
 /// An OriginEndpoint resource configuration.
 pub const OriginEndpoint = struct {
     /// The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
-    authorization: ?Authorization,
+    authorization: ?Authorization = null,
 
     /// The ID of the Channel the OriginEndpoint is associated with.
-    channel_id: ?[]const u8,
+    channel_id: ?[]const u8 = null,
 
-    cmaf_package: ?CmafPackage,
+    cmaf_package: ?CmafPackage = null,
 
     /// The date and time the OriginEndpoint was created.
-    created_at: ?[]const u8,
+    created_at: ?[]const u8 = null,
 
-    dash_package: ?DashPackage,
+    dash_package: ?DashPackage = null,
 
     /// A short text description of the OriginEndpoint.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
-    hls_package: ?HlsPackage,
+    hls_package: ?HlsPackage = null,
 
     /// The ID of the OriginEndpoint.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A short string appended to the end of the OriginEndpoint URL.
-    manifest_name: ?[]const u8,
+    manifest_name: ?[]const u8 = null,
 
-    mss_package: ?MssPackage,
+    mss_package: ?MssPackage = null,
 
     /// Control whether origination of video is allowed for this OriginEndpoint. If
     /// set to ALLOW, the OriginEndpoint
@@ -43,26 +43,26 @@ pub const OriginEndpoint = struct {
     /// DENY, the OriginEndpoint may not be
     /// requested. This can be helpful for Live to VOD harvesting, or for
     /// temporarily disabling origination
-    origination: ?Origination,
+    origination: ?Origination = null,
 
     /// Maximum duration (seconds) of content to retain for startover playback.
     /// If not specified, startover playback will be disabled for the
     /// OriginEndpoint.
-    startover_window_seconds: ?i32,
+    startover_window_seconds: ?i32 = null,
 
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Amount of delay (seconds) to enforce on the playback of live content.
     /// If not specified, there will be no time delay in effect for the
     /// OriginEndpoint.
-    time_delay_seconds: ?i32,
+    time_delay_seconds: ?i32 = null,
 
     /// The URL of the packaged OriginEndpoint for consumption.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     /// A list of source IP CIDR blocks that will be allowed to access the
     /// OriginEndpoint.
-    whitelist: ?[]const []const u8,
+    whitelist: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

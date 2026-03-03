@@ -3,7 +3,7 @@ const ResizeOption = @import("resize_option.zig").ResizeOption;
 /// The options that determine the sizing of the canvas used in a grid layout.
 pub const GridLayoutScreenCanvasSizeOptions = struct {
     /// The width that the view port will be optimized for when the layout renders.
-    optimized_view_port_width: ?[]const u8,
+    optimized_view_port_width: ?[]const u8 = null,
 
     /// This value determines the layout behavior when the viewport is resized.
     ///

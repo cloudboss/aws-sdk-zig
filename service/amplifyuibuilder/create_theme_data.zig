@@ -10,10 +10,10 @@ pub const CreateThemeData = struct {
     /// Describes the properties that can be overriden to customize an instance of
     /// the
     /// theme.
-    overrides: ?[]const ThemeValues,
+    overrides: ?[]const ThemeValues = null,
 
     /// One or more key-value pairs to use when tagging the theme data.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of key-value pairs that deﬁnes the properties of the theme.
     values: []const ThemeValues,

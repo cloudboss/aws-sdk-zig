@@ -4,12 +4,12 @@ const SettingType = @import("setting_type.zig").SettingType;
 /// The current account setting for a resource.
 pub const Setting = struct {
     /// The Amazon ECS resource name.
-    name: ?SettingName,
+    name: ?SettingName = null,
 
     /// The ARN of the principal. It can be a user, role, or the root user. If this
     /// field is
     /// omitted, the authenticated user is assumed.
-    principal_arn: ?[]const u8,
+    principal_arn: ?[]const u8 = null,
 
     /// Indicates whether Amazon Web Services manages the account setting, or if the
     /// user manages
@@ -20,11 +20,11 @@ pub const Setting = struct {
     /// on the customer's behalf. Currently, the `guardDutyActivate` account setting
     /// is the only one Amazon
     /// Web Services manages.
-    @"type": ?SettingType,
+    @"type": ?SettingType = null,
 
     /// Determines whether the account setting is on or off for the specified
     /// resource.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

@@ -5,7 +5,7 @@ const RealTimeContactAnalysisTranscriptItemWithCharacterOffsets = @import("real_
 pub const RealTimeContactAnalysisPointOfInterest = struct {
     /// List of the transcript items (segments) that are associated with a given
     /// point of interest.
-    transcript_items: ?[]const RealTimeContactAnalysisTranscriptItemWithCharacterOffsets,
+    transcript_items: ?[]const RealTimeContactAnalysisTranscriptItemWithCharacterOffsets = null,
 
     pub const json_field_names = .{
         .transcript_items = "TranscriptItems",

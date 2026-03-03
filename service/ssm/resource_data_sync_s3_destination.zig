@@ -6,16 +6,16 @@ pub const ResourceDataSyncS3Destination = struct {
     /// The ARN of an encryption key for a destination in Amazon S3. Must belong to
     /// the same
     /// Region as the destination S3 bucket.
-    awskms_key_arn: ?[]const u8,
+    awskms_key_arn: ?[]const u8 = null,
 
     /// The name of the S3 bucket where the aggregated data is stored.
     bucket_name: []const u8,
 
     /// Enables destination data sharing. By default, this field is `null`.
-    destination_data_sharing: ?ResourceDataSyncDestinationDataSharing,
+    destination_data_sharing: ?ResourceDataSyncDestinationDataSharing = null,
 
     /// An Amazon S3 prefix for the bucket.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The Amazon Web Services Region with the S3 bucket targeted by the resource
     /// data sync.

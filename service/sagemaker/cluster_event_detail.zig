@@ -11,10 +11,10 @@ pub const ClusterEventDetail = struct {
     cluster_name: []const u8,
 
     /// A human-readable description of the event.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Additional details about the event, including event-specific metadata.
-    event_details: ?EventDetails,
+    event_details: ?EventDetails = null,
 
     /// The unique identifier (UUID) of the event.
     event_id: []const u8,
@@ -23,10 +23,10 @@ pub const ClusterEventDetail = struct {
     event_time: i64,
 
     /// The name of the instance group associated with the event, if applicable.
-    instance_group_name: ?[]const u8,
+    instance_group_name: ?[]const u8 = null,
 
     /// The EC2 instance ID associated with the event, if applicable.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The type of resource associated with the event. Valid values are `Cluster`,
     /// `InstanceGroup`, or `Instance`.

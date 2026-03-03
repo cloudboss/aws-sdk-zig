@@ -2,7 +2,7 @@
 /// messages for an Amazon Chime Enterprise account.
 pub const ConversationRetentionSettings = struct {
     /// The number of days for which to retain conversation messages.
-    retention_days: ?i32,
+    retention_days: ?i32 = null,
 
     pub const json_field_names = .{
         .retention_days = "RetentionDays",

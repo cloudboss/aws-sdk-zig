@@ -7,5 +7,5 @@ pub const LaunchTemplateHibernationOptionsRequest = struct {
     /// hibernation.
     ///
     /// Default: `false`
-    configured: ?bool,
+    configured: ?bool = null,
 };

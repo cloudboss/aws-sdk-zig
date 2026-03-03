@@ -17,23 +17,23 @@ pub const ProjectBuildBatchConfig = struct {
     /// **REPORT_INDIVIDUAL_BUILDS**
     ///
     /// Send a separate status report for each individual build.
-    batch_report_mode: ?BatchReportModeType,
+    batch_report_mode: ?BatchReportModeType = null,
 
     /// Specifies if the build artifacts for the batch build should be combined into
     /// a single
     /// artifact location.
-    combine_artifacts: ?bool,
+    combine_artifacts: ?bool = null,
 
     /// A `BatchRestrictions` object that specifies the restrictions for the batch
     /// build.
-    restrictions: ?BatchRestrictions,
+    restrictions: ?BatchRestrictions = null,
 
     /// Specifies the service role ARN for the batch build project.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
     /// Specifies the maximum amount of time, in minutes, that the batch build must
     /// be completed in.
-    timeout_in_mins: ?i32,
+    timeout_in_mins: ?i32 = null,
 
     pub const json_field_names = .{
         .batch_report_mode = "batchReportMode",

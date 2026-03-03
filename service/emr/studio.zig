@@ -7,86 +7,86 @@ const Tag = @import("tag.zig").Tag;
 pub const Studio = struct {
     /// Specifies whether the Amazon EMR Studio authenticates users with IAM or IAM
     /// Identity Center.
-    auth_mode: ?AuthMode,
+    auth_mode: ?AuthMode = null,
 
     /// The time the Amazon EMR Studio was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon S3 location to back up Amazon EMR Studio Workspaces and
     /// notebook files.
-    default_s3_location: ?[]const u8,
+    default_s3_location: ?[]const u8 = null,
 
     /// The detailed description of the Amazon EMR Studio.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The KMS key identifier (ARN) used to encrypt Amazon EMR Studio workspace and
     /// notebook files when backed up to Amazon S3.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The ID of the Engine security group associated with the Amazon EMR Studio.
     /// The
     /// Engine security group allows inbound network traffic from resources in the
     /// Workspace
     /// security group.
-    engine_security_group_id: ?[]const u8,
+    engine_security_group_id: ?[]const u8 = null,
 
     /// The ARN of the IAM Identity Center instance the Studio application belongs
     /// to.
-    idc_instance_arn: ?[]const u8,
+    idc_instance_arn: ?[]const u8 = null,
 
     /// Indicates whether the Studio has `REQUIRED` or `OPTIONAL` IAM Identity
     /// Center user assignment. If the value is set to `REQUIRED`, users must be
     /// explicitly assigned to the Studio application to access the Studio.
-    idc_user_assignment: ?IdcUserAssignment,
+    idc_user_assignment: ?IdcUserAssignment = null,
 
     /// Your identity provider's authentication endpoint. Amazon EMR Studio
     /// redirects
     /// federated users to this endpoint for authentication when logging in to a
     /// Studio with the
     /// Studio URL.
-    idp_auth_url: ?[]const u8,
+    idp_auth_url: ?[]const u8 = null,
 
     /// The name of your identity provider's `RelayState` parameter.
-    idp_relay_state_parameter_name: ?[]const u8,
+    idp_relay_state_parameter_name: ?[]const u8 = null,
 
     /// The name of the Amazon EMR Studio.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The name of the IAM role assumed by the Amazon EMR Studio.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon EMR Studio.
-    studio_arn: ?[]const u8,
+    studio_arn: ?[]const u8 = null,
 
     /// The ID of the Amazon EMR Studio.
-    studio_id: ?[]const u8,
+    studio_id: ?[]const u8 = null,
 
     /// The list of IDs of the subnets associated with the Amazon EMR Studio.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     /// A list of tags associated with the Amazon EMR Studio.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// Indicates whether the Studio has Trusted identity propagation enabled. The
     /// default value is `false`.
-    trusted_identity_propagation_enabled: ?bool,
+    trusted_identity_propagation_enabled: ?bool = null,
 
     /// The unique access URL of the Amazon EMR Studio.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     /// The name of the IAM role assumed by users logged in to the Amazon EMR
     /// Studio. A Studio only requires a `UserRole` when you use IAM authentication.
-    user_role: ?[]const u8,
+    user_role: ?[]const u8 = null,
 
     /// The ID of the VPC associated with the Amazon EMR Studio.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     /// The ID of the Workspace security group associated with the Amazon EMR
     /// Studio.
     /// The Workspace security group allows outbound network traffic to resources in
     /// the Engine
     /// security group and to the internet.
-    workspace_security_group_id: ?[]const u8,
+    workspace_security_group_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auth_mode = "AuthMode",

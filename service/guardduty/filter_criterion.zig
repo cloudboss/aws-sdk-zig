@@ -11,10 +11,10 @@ const FilterCondition = @import("filter_condition.zig").FilterCondition;
 pub const FilterCriterion = struct {
     /// An enum value representing possible scan properties to match with given scan
     /// entries.
-    criterion_key: ?CriterionKey,
+    criterion_key: ?CriterionKey = null,
 
     /// Contains information about the condition.
-    filter_condition: ?FilterCondition,
+    filter_condition: ?FilterCondition = null,
 
     pub const json_field_names = .{
         .criterion_key = "CriterionKey",

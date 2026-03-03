@@ -5,7 +5,7 @@
 /// background task and this one isn't completed yet.
 pub const PendingResource = struct {
     /// The Amazon resource name (ARN) of the resource that's in a pending state.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resource_arn = "ResourceArn",

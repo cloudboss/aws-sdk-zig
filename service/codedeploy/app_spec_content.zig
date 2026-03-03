@@ -18,10 +18,10 @@ pub const AppSpecContent = struct {
     ///
     /// For both types of deployments, the content can specify Lambda functions
     /// that run at specified hooks, such as `BeforeInstall`, during a deployment.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The SHA256 hash value of the revision content.
-    sha_256: ?[]const u8,
+    sha_256: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content = "content",

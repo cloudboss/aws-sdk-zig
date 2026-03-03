@@ -5,14 +5,14 @@ const TerminologyDataFormat = @import("terminology_data_format.zig").Terminology
 /// The properties of the custom terminology.
 pub const TerminologyProperties = struct {
     /// The Amazon Resource Name (ARN) of the custom terminology.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time at which the custom terminology was created, based on the
     /// timestamp.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of the custom terminology properties.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The directionality of your terminology resource indicates whether it has one
     /// source
@@ -27,44 +27,44 @@ pub const TerminologyProperties = struct {
     /// **MULTI**
     ///
     /// Any language in the terminology resource can be the source language.
-    directionality: ?Directionality,
+    directionality: ?Directionality = null,
 
     /// The encryption key for the custom terminology.
-    encryption_key: ?EncryptionKey,
+    encryption_key: ?EncryptionKey = null,
 
     /// The format of the custom terminology input file.
-    format: ?TerminologyDataFormat,
+    format: ?TerminologyDataFormat = null,
 
     /// The time at which the custom terminology was last update, based on the
     /// timestamp.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// Additional information from Amazon Translate about the terminology resource.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The name of the custom terminology.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The size of the file used when importing a custom terminology.
-    size_bytes: ?i32,
+    size_bytes: ?i32 = null,
 
     /// The number of terms in the input file that Amazon Translate skipped when you
     /// created or
     /// updated the terminology resource.
-    skipped_term_count: ?i32,
+    skipped_term_count: ?i32 = null,
 
     /// The language code for the source text of the translation request for which
     /// the custom
     /// terminology is being used.
-    source_language_code: ?[]const u8,
+    source_language_code: ?[]const u8 = null,
 
     /// The language codes for the target languages available with the custom
     /// terminology
     /// resource. All possible target languages are returned in array.
-    target_language_codes: ?[]const []const u8,
+    target_language_codes: ?[]const []const u8 = null,
 
     /// The number of terms included in the custom terminology.
-    term_count: ?i32,
+    term_count: ?i32 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

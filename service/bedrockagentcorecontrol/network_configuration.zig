@@ -7,7 +7,7 @@ pub const NetworkConfiguration = struct {
     network_mode: NetworkMode,
 
     /// The network mode configuration for the AgentCore Runtime.
-    network_mode_config: ?VpcConfig,
+    network_mode_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .network_mode = "networkMode",

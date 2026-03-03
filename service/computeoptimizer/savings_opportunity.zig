@@ -28,7 +28,7 @@ pub const SavingsOpportunity = struct {
     /// An object that describes the estimated monthly savings amount possible by
     /// adopting Compute Optimizer recommendations for a given
     /// resource. This is based on the On-Demand instance pricing..
-    estimated_monthly_savings: ?EstimatedMonthlySavings,
+    estimated_monthly_savings: ?EstimatedMonthlySavings = null,
 
     /// The estimated monthly savings possible as a percentage of monthly cost by
     /// adopting

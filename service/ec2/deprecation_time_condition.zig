@@ -3,5 +3,5 @@ pub const DeprecationTimeCondition = struct {
     /// The maximum number of days that have elapsed since the image was deprecated.
     /// When set to
     /// `0`, no deprecated images are allowed.
-    maximum_days_since_deprecated: ?i32,
+    maximum_days_since_deprecated: ?i32 = null,
 };

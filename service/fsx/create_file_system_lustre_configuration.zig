@@ -57,12 +57,12 @@ pub const CreateFileSystemLustreConfiguration = struct {
     ///
     /// This parameter is not supported for file systems with a data repository
     /// association.
-    auto_import_policy: ?AutoImportPolicyType,
+    auto_import_policy: ?AutoImportPolicyType = null,
 
     /// The number of days to retain automatic backups. Setting this property to
     /// `0` disables automatic backups. You can retain automatic backups for a
     /// maximum of 90 days. The default is `0`.
-    automatic_backup_retention_days: ?i32,
+    automatic_backup_retention_days: ?i32 = null,
 
     /// (Optional) Not available for use with file systems that are linked to a data
     /// repository. A boolean flag indicating whether tags for the file system
@@ -83,9 +83,9 @@ pub const CreateFileSystemLustreConfiguration = struct {
     /// For more information, see [
     /// Working with
     /// backups](https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html) in the *Amazon FSx for Lustre User Guide*.
-    copy_tags_to_backups: ?bool,
+    copy_tags_to_backups: ?bool = null,
 
-    daily_automatic_backup_start_time: ?[]const u8,
+    daily_automatic_backup_start_time: ?[]const u8 = null,
 
     /// Sets the data compression configuration for the file system.
     /// `DataCompressionType`
@@ -100,14 +100,14 @@ pub const CreateFileSystemLustreConfiguration = struct {
     /// For more information, see [Lustre data
     /// compression](https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html)
     /// in the *Amazon FSx for Lustre User Guide*.
-    data_compression_type: ?DataCompressionType,
+    data_compression_type: ?DataCompressionType = null,
 
     /// Specifies the optional provisioned SSD read cache on FSx for Lustre file
     /// systems that
     /// use the Intelligent-Tiering storage class. Required when `StorageType` is
     /// set
     /// to `INTELLIGENT_TIERING`.
-    data_read_cache_configuration: ?LustreReadCacheConfiguration,
+    data_read_cache_configuration: ?LustreReadCacheConfiguration = null,
 
     /// (Optional) Choose `SCRATCH_1` and `SCRATCH_2` deployment
     /// types when you need temporary storage and shorter-term processing of data.
@@ -149,7 +149,7 @@ pub const CreateFileSystemLustreConfiguration = struct {
     /// transit](https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html) in the *Amazon FSx for Lustre User Guide*.
     ///
     /// (Default = `SCRATCH_1`)
-    deployment_type: ?LustreDeploymentType,
+    deployment_type: ?LustreDeploymentType = null,
 
     /// The type of drive cache used by `PERSISTENT_1` file systems that are
     /// provisioned with
@@ -160,14 +160,14 @@ pub const CreateFileSystemLustreConfiguration = struct {
     /// of the total storage capacity of the file system.
     ///
     /// This parameter is required when `StorageType` is set to `HDD`.
-    drive_cache_type: ?DriveCacheType,
+    drive_cache_type: ?DriveCacheType = null,
 
     /// (Optional) Specifies whether Elastic Fabric Adapter (EFA) and GPUDirect
     /// Storage (GDS)
     /// support is enabled for the Amazon FSx for Lustre file system.
     ///
     /// (Default = `false`)
-    efa_enabled: ?bool,
+    efa_enabled: ?bool = null,
 
     /// (Optional) Specifies the path in the Amazon S3 bucket where the root of your
     /// Amazon FSx file system is exported. The path must use the same Amazon S3
@@ -194,7 +194,7 @@ pub const CreateFileSystemLustreConfiguration = struct {
     ///
     /// This parameter is not supported for file systems with a data repository
     /// association.
-    export_path: ?[]const u8,
+    export_path: ?[]const u8 = null,
 
     /// (Optional) For files imported from a data repository, this value determines
     /// the stripe
@@ -210,7 +210,7 @@ pub const CreateFileSystemLustreConfiguration = struct {
     ///
     /// This parameter is not supported for file systems with a data repository
     /// association.
-    imported_file_chunk_size: ?i32,
+    imported_file_chunk_size: ?i32 = null,
 
     /// (Optional) The path to the Amazon S3 bucket (including the optional prefix)
     /// that
@@ -225,18 +225,18 @@ pub const CreateFileSystemLustreConfiguration = struct {
     ///
     /// This parameter is not supported for file systems with a data repository
     /// association.
-    import_path: ?[]const u8,
+    import_path: ?[]const u8 = null,
 
     /// The Lustre logging configuration used when creating an Amazon FSx for Lustre
     /// file system. When logging is enabled, Lustre logs error and warning events
     /// for data repositories
     /// associated with your file system to Amazon CloudWatch Logs.
-    log_configuration: ?LustreLogCreateConfiguration,
+    log_configuration: ?LustreLogCreateConfiguration = null,
 
     /// The Lustre metadata performance configuration for the creation of an
     /// FSx for Lustre file system using a `PERSISTENT_2`
     /// deployment type.
-    metadata_configuration: ?CreateFileSystemLustreMetadataConfiguration,
+    metadata_configuration: ?CreateFileSystemLustreMetadataConfiguration = null,
 
     /// Required with `PERSISTENT_1` and `PERSISTENT_2` deployment
     /// types using an SSD or HDD storage class, provisions the amount of read and
@@ -256,27 +256,27 @@ pub const CreateFileSystemLustreConfiguration = struct {
     /// * For `PERSISTENT_1` HDD storage: 12, 40 MB/s/TiB.
     ///
     /// * For `PERSISTENT_2` SSD storage: 125, 250, 500, 1000 MB/s/TiB.
-    per_unit_storage_throughput: ?i32,
+    per_unit_storage_throughput: ?i32 = null,
 
     /// The Lustre root squash configuration used when creating an Amazon FSx for
     /// Lustre
     /// file system. When enabled, root squash restricts root-level access from
     /// clients that
     /// try to access your file system as a root user.
-    root_squash_configuration: ?LustreRootSquashConfiguration,
+    root_squash_configuration: ?LustreRootSquashConfiguration = null,
 
     /// Specifies the throughput of an FSx for Lustre file system using the
     /// Intelligent-Tiering storage class,
     /// measured in megabytes per second (MBps). Valid values are 4000 MBps or
     /// multiples of 4000 MBps. You pay for the amount of throughput that you
     /// provision.
-    throughput_capacity: ?i32,
+    throughput_capacity: ?i32 = null,
 
     /// (Optional) The preferred start time to perform weekly maintenance, formatted
     /// d:HH:MM in the UTC
     /// time zone, where d is the weekday number, from 1 through 7, beginning with
     /// Monday and ending with Sunday.
-    weekly_maintenance_start_time: ?[]const u8,
+    weekly_maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_import_policy = "AutoImportPolicy",

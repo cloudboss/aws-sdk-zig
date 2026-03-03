@@ -9,7 +9,7 @@ pub const Rule = struct {
     /// be that at least one routing control state is On after the transaction so
     /// that traffic continues to flow to at least one cell for the application.
     /// This ensures that you avoid a fail-open scenario.
-    assertion: ?AssertionRule,
+    assertion: ?AssertionRule = null,
 
     /// A gating rule verifies that a gating routing control or set of gating
     /// routing controls, evaluates as true, based on a rule configuration that you
@@ -21,7 +21,7 @@ pub const Rule = struct {
     /// gating control "switch" to be "On". When you do that, then you can update
     /// the routing control states for the target routing controls that you specify
     /// in the gating rule.
-    gating: ?GatingRule,
+    gating: ?GatingRule = null,
 
     pub const json_field_names = .{
         .assertion = "ASSERTION",

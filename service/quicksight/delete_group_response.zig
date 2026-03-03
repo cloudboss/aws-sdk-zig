@@ -1,6 +1,6 @@
 pub const DeleteGroupResponse = struct {
     /// The Amazon Web Services request ID for this operation.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
     status: i32 = 0,

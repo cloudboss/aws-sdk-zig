@@ -16,7 +16,7 @@ const AttendeeCapabilities = @import("attendee_capabilities.zig").AttendeeCapabi
 /// authorized to represent the attendee.
 pub const Attendee = struct {
     /// The Amazon Chime SDK attendee ID.
-    attendee_id: ?[]const u8,
+    attendee_id: ?[]const u8 = null,
 
     /// The capabilities assigned to an attendee: audio, video, or content.
     ///
@@ -62,7 +62,7 @@ pub const Attendee = struct {
     /// and if the attendee turned on their video or content streams, remote
     /// attendees can receive those streams, but only after media renegotiation
     /// between the client and the Amazon Chime back-end server.
-    capabilities: ?AttendeeCapabilities,
+    capabilities: ?AttendeeCapabilities = null,
 
     /// The Amazon Chime SDK external user ID. An idempotency token. Links the
     /// attendee to an identity managed by a builder application.
@@ -72,10 +72,10 @@ pub const Attendee = struct {
     /// Values that begin with `aws:` are reserved. You can't configure a value that
     /// uses this prefix.
     /// Case insensitive.
-    external_user_id: ?[]const u8,
+    external_user_id: ?[]const u8 = null,
 
     /// The join token used by the Amazon Chime SDK attendee.
-    join_token: ?[]const u8,
+    join_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attendee_id = "AttendeeId",

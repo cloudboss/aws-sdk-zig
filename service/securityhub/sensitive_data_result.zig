@@ -6,13 +6,13 @@ pub const SensitiveDataResult = struct {
     /// The category of sensitive data that was detected. For example, the category
     /// can indicate that the sensitive data involved credentials, financial
     /// information, or personal information.
-    category: ?[]const u8,
+    category: ?[]const u8 = null,
 
     /// The list of detected instances of sensitive data.
-    detections: ?[]const SensitiveDataDetections,
+    detections: ?[]const SensitiveDataDetections = null,
 
     /// The total number of occurrences of sensitive data.
-    total_count: ?i64,
+    total_count: ?i64 = null,
 
     pub const json_field_names = .{
         .category = "Category",

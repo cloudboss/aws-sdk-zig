@@ -8,7 +8,7 @@ const AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationD
 pub const AwsAthenaWorkGroupConfigurationResultConfigurationDetails = struct {
     /// Specifies the method used to encrypt the user’s data stores in the Athena
     /// workgroup.
-    encryption_configuration: ?AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails,
+    encryption_configuration: ?AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails = null,
 
     pub const json_field_names = .{
         .encryption_configuration = "EncryptionConfiguration",

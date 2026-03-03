@@ -4,7 +4,7 @@ const OfferLastModifiedDateFilterDateRange = @import("offer_last_modified_date_f
 pub const OfferLastModifiedDateFilter = struct {
     /// Allows filtering on the `LastModifiedDate` of an offer with date range as
     /// input.
-    date_range: ?OfferLastModifiedDateFilterDateRange,
+    date_range: ?OfferLastModifiedDateFilterDateRange = null,
 
     pub const json_field_names = .{
         .date_range = "DateRange",

@@ -10,15 +10,15 @@ const OpenSearchResourceStatus = @import("open_search_resource_status.zig").Open
 /// collections](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-collections.html).
 pub const OpenSearchCollection = struct {
     /// The ARN of the collection.
-    collection_arn: ?[]const u8,
+    collection_arn: ?[]const u8 = null,
 
     /// The endpoint of the collection.
-    collection_endpoint: ?[]const u8,
+    collection_endpoint: ?[]const u8 = null,
 
     /// This structure contains information about the status of this OpenSearch
     /// Service
     /// resource.
-    status: ?OpenSearchResourceStatus,
+    status: ?OpenSearchResourceStatus = null,
 
     pub const json_field_names = .{
         .collection_arn = "collectionArn",

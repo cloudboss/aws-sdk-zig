@@ -4,10 +4,10 @@ pub const DataBarsOptions = struct {
     field_id: []const u8,
 
     /// The color of the negative data bar.
-    negative_color: ?[]const u8,
+    negative_color: ?[]const u8 = null,
 
     /// The color of the positive data bar.
-    positive_color: ?[]const u8,
+    positive_color: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .field_id = "FieldId",

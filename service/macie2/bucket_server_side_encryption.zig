@@ -9,7 +9,7 @@ pub const BucketServerSideEncryption = struct {
     /// that's used by default to encrypt objects that are added to the bucket. This
     /// value is null if the bucket is configured to use an Amazon S3 managed key to
     /// encrypt new objects.
-    kms_master_key_id: ?[]const u8,
+    kms_master_key_id: ?[]const u8 = null,
 
     /// The server-side encryption algorithm that's used by default to encrypt
     /// objects that are added to the bucket. Possible values are:
@@ -24,7 +24,7 @@ pub const BucketServerSideEncryption = struct {
     ///   a customer managed key.
     /// * NONE - The bucket's default encryption settings don't specify server-side
     ///   encryption behavior for new objects.
-    @"type": ?Type,
+    @"type": ?Type = null,
 
     pub const json_field_names = .{
         .kms_master_key_id = "kmsMasterKeyId",

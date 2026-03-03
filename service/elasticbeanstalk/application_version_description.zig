@@ -5,31 +5,31 @@ const ApplicationVersionStatus = @import("application_version_status.zig").Appli
 /// Describes the properties of an application version.
 pub const ApplicationVersionDescription = struct {
     /// The name of the application to which the application version belongs.
-    application_name: ?[]const u8,
+    application_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the application version.
-    application_version_arn: ?[]const u8,
+    application_version_arn: ?[]const u8 = null,
 
     /// Reference to the artifact from the AWS CodeBuild build.
-    build_arn: ?[]const u8,
+    build_arn: ?[]const u8 = null,
 
     /// The creation date of the application version.
-    date_created: ?i64,
+    date_created: ?i64 = null,
 
     /// The last modified date of the application version.
-    date_updated: ?i64,
+    date_updated: ?i64 = null,
 
     /// The description of the application version.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// If the version's source code was retrieved from AWS CodeCommit, the location
     /// of the
     /// source code for the application version.
-    source_build_information: ?SourceBuildInformation,
+    source_build_information: ?SourceBuildInformation = null,
 
     /// The storage location of the application version's source bundle in Amazon
     /// S3.
-    source_bundle: ?S3Location,
+    source_bundle: ?S3Location = null,
 
     /// The processing status of the application version. Reflects the state of the
     /// application
@@ -56,8 +56,8 @@ pub const ApplicationVersionDescription = struct {
     /// * `Failed` – Either the AWS CodeBuild build failed or configuration files
     ///   didn't
     /// pass validation. This application version isn't usable.
-    status: ?ApplicationVersionStatus,
+    status: ?ApplicationVersionStatus = null,
 
     /// A unique identifier for the application version.
-    version_label: ?[]const u8,
+    version_label: ?[]const u8 = null,
 };

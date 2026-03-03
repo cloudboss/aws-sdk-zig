@@ -6,19 +6,19 @@ const ImageScanFinding = @import("image_scan_finding.zig").ImageScanFinding;
 /// The details of an image scan.
 pub const ImageScanFindings = struct {
     /// Details about the enhanced scan findings from Amazon Inspector.
-    enhanced_findings: ?[]const EnhancedImageScanFinding,
+    enhanced_findings: ?[]const EnhancedImageScanFinding = null,
 
     /// The findings from the image scan.
-    findings: ?[]const ImageScanFinding,
+    findings: ?[]const ImageScanFinding = null,
 
     /// The image vulnerability counts, sorted by severity.
-    finding_severity_counts: ?[]const aws.map.MapEntry(i32),
+    finding_severity_counts: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The time of the last completed image scan.
-    image_scan_completed_at: ?i64,
+    image_scan_completed_at: ?i64 = null,
 
     /// The time when the vulnerability data was last scanned.
-    vulnerability_source_updated_at: ?i64,
+    vulnerability_source_updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .enhanced_findings = "enhancedFindings",

@@ -19,7 +19,7 @@ pub const NotificationConfigurationStructure = struct {
     /// * `NONE`
     ///
     /// * Don't aggregate notifications.
-    aggregation_duration: ?AggregationDuration,
+    aggregation_duration: ?AggregationDuration = null,
 
     /// The Amazon Resource Name (ARN) of the `NotificationConfiguration` resource.
     arn: []const u8,
@@ -38,7 +38,7 @@ pub const NotificationConfigurationStructure = struct {
     status: NotificationConfigurationStatus,
 
     /// The subtype of the notification configuration.
-    subtype: ?NotificationConfigurationSubtype,
+    subtype: ?NotificationConfigurationSubtype = null,
 
     pub const json_field_names = .{
         .aggregation_duration = "aggregationDuration",

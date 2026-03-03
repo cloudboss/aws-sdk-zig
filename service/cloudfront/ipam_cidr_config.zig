@@ -5,7 +5,7 @@ const IpamCidrStatus = @import("ipam_cidr_status.zig").IpamCidrStatus;
 pub const IpamCidrConfig = struct {
     /// The specified Anycast IP address allocated from the IPAM pool for this CIDR
     /// configuration.
-    anycast_ip: ?[]const u8,
+    anycast_ip: ?[]const u8 = null,
 
     /// The CIDR that specifies the IP address range for this IPAM configuration.
     cidr: []const u8,
@@ -15,5 +15,5 @@ pub const IpamCidrConfig = struct {
     ipam_pool_arn: []const u8,
 
     /// The current status of the IPAM CIDR configuration.
-    status: ?IpamCidrStatus,
+    status: ?IpamCidrStatus = null,
 };

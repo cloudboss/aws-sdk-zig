@@ -12,12 +12,12 @@ pub const PortOverride = struct {
     /// The endpoint port that you want a listener port to be mapped to. This is the
     /// port on the endpoint,
     /// such as the Application Load Balancer or Amazon EC2 instance.
-    endpoint_port: ?i32,
+    endpoint_port: ?i32 = null,
 
     /// The listener port that you want to map to a specific endpoint port. This is
     /// the port that user traffic
     /// arrives to the Global Accelerator on.
-    listener_port: ?i32,
+    listener_port: ?i32 = null,
 
     pub const json_field_names = .{
         .endpoint_port = "EndpointPort",

@@ -1,7 +1,7 @@
 /// Information about scores of a contact evaluation item (section or question).
 pub const EvaluationScore = struct {
     /// Weight applied to this evaluation score.
-    applied_weight: ?f64,
+    applied_weight: ?f64 = null,
 
     /// The flag that marks the item as automatic fail. If the item or a child item
     /// gets an automatic fail answer, this

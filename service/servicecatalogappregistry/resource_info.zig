@@ -5,22 +5,22 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// The information about the resource.
 pub const ResourceInfo = struct {
     /// The Amazon resource name (ARN) that specifies the resource across services.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Determines whether an application tag is applied or skipped.
-    options: ?[]const AssociationOption,
+    options: ?[]const AssociationOption = null,
 
     /// The details related
     /// to
     /// the resource.
-    resource_details: ?ResourceDetails,
+    resource_details: ?ResourceDetails = null,
 
     /// Provides information
     /// about the Service Catalog App Registry resource type.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

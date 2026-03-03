@@ -5,9 +5,9 @@ const MetricsDataSource = @import("metrics_data_source.zig").MetricsDataSource;
 /// can only
 /// contain one of `MetricsDataSource` or `MessageInsightsDataSource` object.
 pub const ExportDataSource = struct {
-    message_insights_data_source: ?MessageInsightsDataSource,
+    message_insights_data_source: ?MessageInsightsDataSource = null,
 
-    metrics_data_source: ?MetricsDataSource,
+    metrics_data_source: ?MetricsDataSource = null,
 
     pub const json_field_names = .{
         .message_insights_data_source = "MessageInsightsDataSource",

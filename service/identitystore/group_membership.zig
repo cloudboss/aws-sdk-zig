@@ -4,13 +4,13 @@ const MemberId = @import("member_id.zig").MemberId;
 /// `GroupMembership` object in the identity store.
 pub const GroupMembership = struct {
     /// The date and time the group membership was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of the user or system that created the group membership.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The identifier for a group in the identity store.
-    group_id: ?[]const u8,
+    group_id: ?[]const u8 = null,
 
     /// The globally unique identifier for the identity store.
     identity_store_id: []const u8,
@@ -18,16 +18,16 @@ pub const GroupMembership = struct {
     /// An object that contains the identifier of a group member. Setting the
     /// `UserID` field to the specific identifier for a user indicates that the user
     /// is a member of the group.
-    member_id: ?MemberId,
+    member_id: ?MemberId = null,
 
     /// The identifier for a `GroupMembership` object in an identity store.
-    membership_id: ?[]const u8,
+    membership_id: ?[]const u8 = null,
 
     /// The date and time the group membership was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The identifier of the user or system that last updated the group membership.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

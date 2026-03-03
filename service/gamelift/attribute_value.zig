@@ -7,22 +7,22 @@ const aws = @import("aws");
 /// available properties.
 pub const AttributeValue = struct {
     /// For number values, expressed as double.
-    n: ?f64,
+    n: ?f64 = null,
 
     /// For single string values. Maximum string length is 100 characters.
-    s: ?[]const u8,
+    s: ?[]const u8 = null,
 
     /// For a map of up to 10 data type:value pairs. Maximum length for each string
     /// value is
     /// 100 characters.
-    sdm: ?[]const aws.map.MapEntry(f64),
+    sdm: ?[]const aws.map.MapEntry(f64) = null,
 
     /// For a list of up to 100 strings. Maximum length for each string is 100
     /// characters.
     /// Duplicate values are not recognized; all occurrences of the repeated value
     /// after the
     /// first of a repeated value are ignored.
-    sl: ?[]const []const u8,
+    sl: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .n = "N",

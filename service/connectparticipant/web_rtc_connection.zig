@@ -5,10 +5,10 @@ const WebRTCMeeting = @import("web_rtc_meeting.zig").WebRTCMeeting;
 /// application
 /// (mobile or web) to connect to the call.
 pub const WebRTCConnection = struct {
-    attendee: ?Attendee,
+    attendee: ?Attendee = null,
 
     /// A meeting created using the Amazon Chime SDK.
-    meeting: ?WebRTCMeeting,
+    meeting: ?WebRTCMeeting = null,
 
     pub const json_field_names = .{
         .attendee = "Attendee",

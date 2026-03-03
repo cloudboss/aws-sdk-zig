@@ -11,7 +11,7 @@ pub const SccDestinationSettings = struct {
     /// associated video. If the video frame rate is 29.97, choose 29.97 dropframe
     /// only if the video has video_insertion=true and drop_frame_timecode=true;
     /// otherwise, choose 29.97 non-dropframe.
-    framerate: ?SccDestinationFramerate,
+    framerate: ?SccDestinationFramerate = null,
 
     pub const json_field_names = .{
         .framerate = "Framerate",

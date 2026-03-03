@@ -17,12 +17,12 @@ pub const ControlScope = struct {
     /// The ID of the only Amazon Web Services resource that you want your control
     /// scope to
     /// contain.
-    compliance_resource_ids: ?[]const []const u8,
+    compliance_resource_ids: ?[]const []const u8 = null,
 
     /// Describes whether the control scope includes one or more types of resources,
     /// such as
     /// `EFS` or `RDS`.
-    compliance_resource_types: ?[]const []const u8,
+    compliance_resource_types: ?[]const []const u8 = null,
 
     /// The tag key-value pair applied to those Amazon Web Services resources that
     /// you want to
@@ -36,7 +36,7 @@ pub const ControlScope = struct {
     ///
     /// The structure to assign a tag is:
     /// `[{"Key":"string","Value":"string"}]`.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .compliance_resource_ids = "ComplianceResourceIds",

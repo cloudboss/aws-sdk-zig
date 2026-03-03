@@ -35,7 +35,7 @@ pub const ProtectionGroup = struct {
     pattern: ProtectionGroupPattern,
 
     /// The ARN (Amazon Resource Name) of the protection group.
-    protection_group_arn: ?[]const u8,
+    protection_group_arn: ?[]const u8 = null,
 
     /// The name of the protection group. You use this to identify the protection
     /// group in lists and to manage the protection group, for example to update,
@@ -46,7 +46,7 @@ pub const ProtectionGroup = struct {
     /// resources of this type are included in the protection group.
     /// You must set this when you set `Pattern` to `BY_RESOURCE_TYPE` and you must
     /// not set it for any other `Pattern` setting.
-    resource_type: ?ProtectedResourceType,
+    resource_type: ?ProtectedResourceType = null,
 
     pub const json_field_names = .{
         .aggregation = "Aggregation",

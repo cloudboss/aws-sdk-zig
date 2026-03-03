@@ -3,19 +3,19 @@ const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 /// The theme version.
 pub const ThemeVersionSummary = struct {
     /// The Amazon Resource Name (ARN) of the theme version.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that this theme version was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The description of the theme version.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The status of the theme version.
-    status: ?ResourceStatus,
+    status: ?ResourceStatus = null,
 
     /// The version number of the theme version.
-    version_number: ?i64,
+    version_number: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

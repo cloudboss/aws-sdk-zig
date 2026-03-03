@@ -8,12 +8,12 @@ pub const SetTimerAction = struct {
     /// is 60 seconds.
     /// The evaluated result of the duration is rounded down to the nearest whole
     /// number.
-    duration_expression: ?[]const u8,
+    duration_expression: ?[]const u8 = null,
 
     /// The number of seconds until the timer expires. The minimum value is 60
     /// seconds to ensure
     /// accuracy. The maximum value is 31622400 seconds.
-    seconds: ?i32,
+    seconds: ?i32 = null,
 
     /// The name of the timer.
     timer_name: []const u8,

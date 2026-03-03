@@ -1,10 +1,10 @@
 /// Describes the mounting of a volume in a container.
 pub const VolumeMount = struct {
     /// The path in the container at which the volume should be mounted.
-    mount_path: ?[]const u8,
+    mount_path: ?[]const u8 = null,
 
     /// The name of the volume.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .mount_path = "MountPath",

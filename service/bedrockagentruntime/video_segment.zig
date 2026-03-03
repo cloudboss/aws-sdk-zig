@@ -11,7 +11,7 @@ pub const VideoSegment = struct {
     s_3_uri: []const u8,
 
     /// A text summary describing the content of the video segment.
-    summary: ?[]const u8,
+    summary: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s_3_uri = "s3Uri",

@@ -3,15 +3,15 @@
 /// to encrypt the associated metadata.
 pub const EncryptionSetting = struct {
     /// The password used to encrypt the associated transcript file.
-    associated_transcripts_password: ?[]const u8,
+    associated_transcripts_password: ?[]const u8 = null,
 
     /// The password used to encrypt the recommended bot recommendation
     /// file.
-    bot_locale_export_password: ?[]const u8,
+    bot_locale_export_password: ?[]const u8 = null,
 
     /// The KMS key ARN used to encrypt the metadata associated with the bot
     /// recommendation.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .associated_transcripts_password = "associatedTranscriptsPassword",

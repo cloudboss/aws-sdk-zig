@@ -17,7 +17,7 @@ pub const StatisticalThreshold = struct {
     /// then the device is considered to be in compliance with the behavior,
     /// otherwise a violation
     /// occurs.
-    statistic: ?[]const u8,
+    statistic: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .statistic = "statistic",

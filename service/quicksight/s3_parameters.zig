@@ -13,7 +13,7 @@ pub const S3Parameters = struct {
     /// `RoleArn` to bypass the account-wide role and allow S3 access for the single
     /// S3 data source that is specified in the structure, even if the account-wide
     /// role forbidding S3 access is still active.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .manifest_file_location = "ManifestFileLocation",

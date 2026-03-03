@@ -12,7 +12,7 @@ pub const EBSItemFilter = struct {
     ///
     /// If more than one is included, the results will return all items that match
     /// any of the included values.
-    creation_times: ?[]const TimeCondition,
+    creation_times: ?[]const TimeCondition = null,
 
     /// You can include 1 to 10 values.
     ///
@@ -21,7 +21,7 @@ pub const EBSItemFilter = struct {
     ///
     /// If more than one file path is included, the results will return all items
     /// that match any of the file paths.
-    file_paths: ?[]const StringCondition,
+    file_paths: ?[]const StringCondition = null,
 
     /// You can include 1 to 10 values.
     ///
@@ -29,7 +29,7 @@ pub const EBSItemFilter = struct {
     ///
     /// If more than one is included, the results will return all items that match
     /// any of the included values.
-    last_modification_times: ?[]const TimeCondition,
+    last_modification_times: ?[]const TimeCondition = null,
 
     /// You can include 1 to 10 values.
     ///
@@ -37,7 +37,7 @@ pub const EBSItemFilter = struct {
     ///
     /// If more than one is included, the results will return all items that match
     /// any of the included values.
-    sizes: ?[]const LongCondition,
+    sizes: ?[]const LongCondition = null,
 
     pub const json_field_names = .{
         .creation_times = "CreationTimes",

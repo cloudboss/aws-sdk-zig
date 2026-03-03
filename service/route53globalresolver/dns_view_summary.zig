@@ -15,7 +15,7 @@ pub const DNSViewSummary = struct {
     created_at: i64,
 
     /// A description of the DNS view.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether DNSSEC validation is enabled for the DNS view.
     dnssec_validation: DnsSecValidationType,

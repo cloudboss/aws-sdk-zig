@@ -166,11 +166,11 @@ pub const ChallengeResponseType = struct {
     /// The type of challenge that your previous authentication request returned in
     /// the
     /// parameter `ChallengeName`, for example `SMS_MFA`.
-    challenge_name: ?ChallengeName,
+    challenge_name: ?ChallengeName = null,
 
     /// The set of key-value pairs that provides a response to the requested
     /// challenge.
-    challenge_response: ?ChallengeResponse,
+    challenge_response: ?ChallengeResponse = null,
 
     pub const json_field_names = .{
         .challenge_name = "ChallengeName",

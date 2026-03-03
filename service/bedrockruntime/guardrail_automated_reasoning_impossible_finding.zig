@@ -7,14 +7,14 @@ const GuardrailAutomatedReasoningTranslation = @import("guardrail_automated_reas
 pub const GuardrailAutomatedReasoningImpossibleFinding = struct {
     /// The automated reasoning policy rules that contradict the claims and/or
     /// premises in the input.
-    contradicting_rules: ?[]const GuardrailAutomatedReasoningRule,
+    contradicting_rules: ?[]const GuardrailAutomatedReasoningRule = null,
 
     /// Indication of a logic issue with the translation without needing to consider
     /// the automated reasoning policy rules.
-    logic_warning: ?GuardrailAutomatedReasoningLogicWarning,
+    logic_warning: ?GuardrailAutomatedReasoningLogicWarning = null,
 
     /// The logical translation of the input that this finding evaluates.
-    translation: ?GuardrailAutomatedReasoningTranslation,
+    translation: ?GuardrailAutomatedReasoningTranslation = null,
 
     pub const json_field_names = .{
         .contradicting_rules = "contradictingRules",

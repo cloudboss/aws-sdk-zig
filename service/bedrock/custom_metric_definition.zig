@@ -25,7 +25,7 @@ pub const CustomMetricDefinition = struct {
     /// numerical scores. For more information on specifying a rating scale, see
     /// [Specifying an output schema (rating
     /// scale)](https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-custom-metrics-prompt-formats.html#model-evaluation-custom-metrics-prompt-formats-schema).
-    rating_scale: ?[]const RatingScaleItem,
+    rating_scale: ?[]const RatingScaleItem = null,
 
     pub const json_field_names = .{
         .instructions = "instructions",

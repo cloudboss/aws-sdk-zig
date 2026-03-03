@@ -14,16 +14,16 @@ pub const DeletionConfig = struct {
     /// such
     /// that the media files are not being deleted before they are initially
     /// uploaded to the Amazon Web Services cloud.
-    delete_after_upload: ?bool,
+    delete_after_upload: ?bool = null,
 
     /// The number of hours that you want to retain the data in the stream on the
     /// Edge Agent. The default value of the retention
     /// time is 720 hours, which translates to 30 days.
-    edge_retention_in_hours: ?i32,
+    edge_retention_in_hours: ?i32 = null,
 
     /// The value of the local size required in order to delete the edge
     /// configuration.
-    local_size_config: ?LocalSizeConfig,
+    local_size_config: ?LocalSizeConfig = null,
 
     pub const json_field_names = .{
         .delete_after_upload = "DeleteAfterUpload",

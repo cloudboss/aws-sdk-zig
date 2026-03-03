@@ -8,10 +8,10 @@ pub const NodeActionEvent = struct {
     operation_name: []const u8,
 
     /// The request payload sent to the downstream service.
-    operation_request: ?[]const u8,
+    operation_request: ?[]const u8 = null,
 
     /// The response payload received from the downstream service.
-    operation_response: ?[]const u8,
+    operation_response: ?[]const u8 = null,
 
     /// The ID of the request that the node made to the operation.
     request_id: []const u8,

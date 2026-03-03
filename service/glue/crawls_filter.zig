@@ -15,10 +15,10 @@ pub const CrawlsFilter = struct {
     ///
     /// * `DPU_HOUR`: The number of data processing unit (DPU) hours used for the
     ///   crawl.
-    field_name: ?FieldName,
+    field_name: ?FieldName = null,
 
     /// The value provided for comparison on the crawl field.
-    field_value: ?[]const u8,
+    field_value: ?[]const u8 = null,
 
     /// A defined comparator that operates on the value. The available operators
     /// are:
@@ -34,7 +34,7 @@ pub const CrawlsFilter = struct {
     /// * `EQ`: Equal to.
     ///
     /// * `NE`: Not equal to.
-    filter_operator: ?FilterOperator,
+    filter_operator: ?FilterOperator = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

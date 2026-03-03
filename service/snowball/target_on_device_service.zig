@@ -10,12 +10,12 @@ pub const TargetOnDeviceService = struct {
     /// Specifies the name of the service on the Snow Family device that your
     /// transferred data
     /// will be exported from or imported into.
-    service_name: ?DeviceServiceName,
+    service_name: ?DeviceServiceName = null,
 
     /// Specifies whether the data is being imported or exported. You can import or
     /// export the
     /// data, or use it locally on the device.
-    transfer_option: ?TransferOption,
+    transfer_option: ?TransferOption = null,
 
     pub const json_field_names = .{
         .service_name = "ServiceName",

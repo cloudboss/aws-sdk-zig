@@ -4,21 +4,21 @@ const InputRequestDestinationRoute = @import("input_request_destination_route.zi
 pub const InputDestinationRequest = struct {
     /// If the push input has an input location of ON-PREM, ID the ID of the
     /// attached network.
-    network: ?[]const u8,
+    network: ?[]const u8 = null,
 
     /// If the push input has an input location of ON-PREM it's a requirement to
     /// specify what the route of the input
     /// is going to be on the customer local network.
-    network_routes: ?[]const InputRequestDestinationRoute,
+    network_routes: ?[]const InputRequestDestinationRoute = null,
 
     /// If the push input has an input location of ON-PREM it's optional to specify
     /// what the ip address
     /// of the input is going to be on the customer local network.
-    static_ip_address: ?[]const u8,
+    static_ip_address: ?[]const u8 = null,
 
     /// A unique name for the location the RTMP stream is being pushed
     /// to.
-    stream_name: ?[]const u8,
+    stream_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .network = "Network",

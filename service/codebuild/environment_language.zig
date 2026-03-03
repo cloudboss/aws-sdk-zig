@@ -7,10 +7,10 @@ const LanguageType = @import("language_type.zig").LanguageType;
 pub const EnvironmentLanguage = struct {
     /// The list of Docker images that are related by the specified programming
     /// language.
-    images: ?[]const EnvironmentImage,
+    images: ?[]const EnvironmentImage = null,
 
     /// The programming language for the Docker images.
-    language: ?LanguageType,
+    language: ?LanguageType = null,
 
     pub const json_field_names = .{
         .images = "images",

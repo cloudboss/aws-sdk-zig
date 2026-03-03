@@ -10,28 +10,28 @@ const ReservationVideoQuality = @import("reservation_video_quality.zig").Reserva
 /// Resource configuration (codec, resolution, bitrate, ...)
 pub const ReservationResourceSpecification = struct {
     /// Channel class, e.g. 'STANDARD'
-    channel_class: ?ChannelClass,
+    channel_class: ?ChannelClass = null,
 
     /// Codec, e.g. 'AVC'
-    codec: ?ReservationCodec,
+    codec: ?ReservationCodec = null,
 
     /// Maximum bitrate, e.g. 'MAX_20_MBPS'
-    maximum_bitrate: ?ReservationMaximumBitrate,
+    maximum_bitrate: ?ReservationMaximumBitrate = null,
 
     /// Maximum framerate, e.g. 'MAX_30_FPS' (Outputs only)
-    maximum_framerate: ?ReservationMaximumFramerate,
+    maximum_framerate: ?ReservationMaximumFramerate = null,
 
     /// Resolution, e.g. 'HD'
-    resolution: ?ReservationResolution,
+    resolution: ?ReservationResolution = null,
 
     /// Resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
-    resource_type: ?ReservationResourceType,
+    resource_type: ?ReservationResourceType = null,
 
     /// Special feature, e.g. 'AUDIO_NORMALIZATION' (Channels only)
-    special_feature: ?ReservationSpecialFeature,
+    special_feature: ?ReservationSpecialFeature = null,
 
     /// Video quality, e.g. 'STANDARD' (Outputs only)
-    video_quality: ?ReservationVideoQuality,
+    video_quality: ?ReservationVideoQuality = null,
 
     pub const json_field_names = .{
         .channel_class = "ChannelClass",

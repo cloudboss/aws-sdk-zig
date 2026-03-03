@@ -2,25 +2,25 @@
 pub const ApplicationSummary = struct {
     /// The Amazon resource name (ARN) that specifies the application across
     /// services.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The ISO-8601 formatted timestamp of the moment when the application was
     /// created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The description of the application.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the application.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The ISO-8601 formatted timestamp of the moment when the application was last
     /// updated.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The name of the application. The name must be unique in the region in which
     /// you are creating the application.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

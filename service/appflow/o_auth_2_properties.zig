@@ -15,7 +15,7 @@ pub const OAuth2Properties = struct {
     /// provide any additional details that the connector requires to authenticate
     /// your
     /// request.
-    token_url_custom_properties: ?[]const aws.map.StringMapEntry,
+    token_url_custom_properties: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .o_auth_2_grant_type = "oAuth2GrantType",

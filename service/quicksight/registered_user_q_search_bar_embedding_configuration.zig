@@ -14,7 +14,7 @@ pub const RegisteredUserQSearchBarEmbeddingConfiguration = struct {
     /// If you don't specify an initial topic or if you specify a new reader
     /// experience topic,
     /// a list of all shared legacy topics is shown in the Q bar.
-    initial_topic_id: ?[]const u8,
+    initial_topic_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .initial_topic_id = "InitialTopicId",

@@ -6,7 +6,7 @@ const UpdateTagCollectionFilter = @import("update_tag_collection_filter.zig").Up
 pub const UpdateResourceCollectionFilter = struct {
     /// A collection of Amazon Web Services CloudFormation stacks. You can specify
     /// up to 500 Amazon Web Services CloudFormation stacks.
-    cloud_formation: ?UpdateCloudFormationCollectionFilter,
+    cloud_formation: ?UpdateCloudFormationCollectionFilter = null,
 
     /// The updated Amazon Web Services tags used to filter the resources in the
     /// resource collection.
@@ -50,7 +50,7 @@ pub const UpdateResourceCollectionFilter = struct {
     /// *key*/*value* pairs in your
     /// application might be `Devops-Guru-production-application/RDS` or
     /// `Devops-Guru-production-application/containers`.
-    tags: ?[]const UpdateTagCollectionFilter,
+    tags: ?[]const UpdateTagCollectionFilter = null,
 
     pub const json_field_names = .{
         .cloud_formation = "CloudFormation",

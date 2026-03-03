@@ -11,10 +11,10 @@ pub const BucketPublicAccess = struct {
     /// * PUBLIC - The bucket is publicly accessible.
     /// * UNKNOWN - Amazon Macie can't determine whether the bucket is publicly
     ///   accessible.
-    effective_permission: ?EffectivePermission,
+    effective_permission: ?EffectivePermission = null,
 
     /// The account-level and bucket-level permissions settings for the bucket.
-    permission_configuration: ?BucketPermissionConfiguration,
+    permission_configuration: ?BucketPermissionConfiguration = null,
 
     pub const json_field_names = .{
         .effective_permission = "effectivePermission",

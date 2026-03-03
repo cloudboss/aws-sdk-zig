@@ -17,7 +17,7 @@ pub const VideoSelector = struct {
     /// setting at the default value DISCARD to delete the alpha channel and
     /// preserve the video. Set it to REMAP_TO_LUMA to delete the video and map the
     /// alpha channel to the luma channel of your outputs.
-    alpha_behavior: ?AlphaBehavior,
+    alpha_behavior: ?AlphaBehavior = null,
 
     /// If your input video has accurate color space metadata, or if you don't know
     /// about color space: Keep the default value, Follow. MediaConvert will
@@ -37,7 +37,7 @@ pub const VideoSelector = struct {
     /// * P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
     /// * P3D65 (SDR): Display P3, sRGB, BT.709
     /// * P3D65 (HDR): Display P3, PQ, BT.709
-    color_space: ?ColorSpace,
+    color_space: ?ColorSpace = null,
 
     /// There are two sources for color metadata, the input file and the job input
     /// settings Color space and HDR master display information settings. The Color
@@ -47,14 +47,14 @@ pub const VideoSelector = struct {
     /// FALLBACK - Choose Fallback to use color metadata from the source when it is
     /// present. If there's no color metadata in your input file, the service
     /// defaults to using values you specify in the input settings.
-    color_space_usage: ?ColorSpaceUsage,
+    color_space_usage: ?ColorSpaceUsage = null,
 
     /// Set Embedded timecode override to Use MDPM when your AVCHD input contains
     /// timecode tag data in the Modified Digital Video Pack Metadata. When you do,
     /// we recommend you also set Timecode source to Embedded. Leave Embedded
     /// timecode override blank, or set to None, when your input does not contain
     /// MDPM timecode.
-    embedded_timecode_override: ?EmbeddedTimecodeOverride,
+    embedded_timecode_override: ?EmbeddedTimecodeOverride = null,
 
     /// Use these settings to provide HDR 10 metadata that is missing or inaccurate
     /// in your input video. Appropriate values vary depending on the input video
@@ -67,12 +67,12 @@ pub const VideoSelector = struct {
     /// file, set Color space usage. To specify whether color metadata is included
     /// in an output, set Color metadata. For more information about MediaConvert
     /// HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.
-    hdr_10_metadata: ?Hdr10Metadata,
+    hdr_10_metadata: ?Hdr10Metadata = null,
 
     /// Specify the maximum mastering display luminance. Enter an integer from 0 to
     /// 2147483647, in units of 0.0001 nits. For example, enter 10000000 for 1000
     /// nits.
-    max_luminance: ?i32,
+    max_luminance: ?i32 = null,
 
     /// Use this setting if your input has video and audio durations that don't
     /// align, and your output or player has strict alignment requirements.
@@ -82,17 +82,17 @@ pub const VideoSelector = struct {
     /// video frames are added at the beginning or end, depending on your input. To
     /// keep the default behavior and not generate black video, set Pad video to
     /// Disabled or leave blank.
-    pad_video: ?PadVideo,
+    pad_video: ?PadVideo = null,
 
     /// Use PID to select specific video data from an input file. Specify this value
     /// as an integer; the system automatically converts it to the hexidecimal
     /// value. For example, 257 selects PID 0x101. A PID, or packet identifier, is
     /// an identifier for a set of data in an MPEG-2 transport stream container.
-    pid: ?i32,
+    pid: ?i32 = null,
 
     /// Selects a specific program from within a multi-program transport stream.
     /// Note that Quad 4K is not currently supported.
-    program_number: ?i32,
+    program_number: ?i32 = null,
 
     /// Use Rotate to specify how the service rotates your video. You can choose
     /// automatic rotation or specify a rotation. You can specify a clockwise
@@ -104,7 +104,7 @@ pub const VideoSelector = struct {
     /// will default to no rotation. By default, the service does no rotation, even
     /// if your input video has rotation metadata. The service doesn't pass through
     /// rotation metadata.
-    rotate: ?InputRotate,
+    rotate: ?InputRotate = null,
 
     /// If the sample range metadata in your input video is accurate, or if you
     /// don't know about sample range, keep the default value, Follow, for this
@@ -115,7 +115,7 @@ pub const VideoSelector = struct {
     /// MediaConvert uses the input sample range or the sample range that you
     /// specify, MediaConvert uses the sample range for transcoding and also writes
     /// it to the output metadata.
-    sample_range: ?InputSampleRange,
+    sample_range: ?InputSampleRange = null,
 
     /// Choose the video selector type for your HLS input. Use to specify which
     /// video rendition MediaConvert uses from your HLS input. To have MediaConvert
@@ -123,7 +123,7 @@ pub const VideoSelector = struct {
     /// the default value, Auto. To manually specify a rendition: Choose Stream.
     /// Then enter the unique stream number in the Streams array, starting at 1,
     /// corresponding to the stream order in the manifest.
-    selector_type: ?VideoSelectorType,
+    selector_type: ?VideoSelectorType = null,
 
     /// Specify one or more video streams for MediaConvert to use from your HLS
     /// input. Enter an integer corresponding to the stream number, with the first
@@ -132,7 +132,7 @@ pub const VideoSelector = struct {
     /// highest bitrate as the input. For video passthrough workflows, you specify
     /// whether to passthrough a single video stream or multiple video streams under
     /// Video selector source in the output video encoding settings.
-    streams: ?[]const i32,
+    streams: ?[]const i32 = null,
 
     pub const json_field_names = .{
         .alpha_behavior = "AlphaBehavior",

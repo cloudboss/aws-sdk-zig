@@ -4,42 +4,42 @@ const OutpostResolverStatus = @import("outpost_resolver_status.zig").OutpostReso
 /// Outpost.
 pub const OutpostResolver = struct {
     /// The ARN (Amazon Resource Name) for the Resolver on an Outpost.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the Outpost Resolver was created, in Unix time format
     /// and Coordinated Universal Time (UTC).
-    creation_time: ?[]const u8,
+    creation_time: ?[]const u8 = null,
 
     /// A unique string that identifies the request that created the Resolver
     /// endpoint.
     /// The `CreatorRequestId` allows failed requests to be retried without the risk
     /// of running the operation twice.
-    creator_request_id: ?[]const u8,
+    creator_request_id: ?[]const u8 = null,
 
     /// The ID of the Resolver on Outpost.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Amazon EC2 instance count for the Resolver on the Outpost.
-    instance_count: ?i32,
+    instance_count: ?i32 = null,
 
     /// The date and time that the Outpost Resolver was modified, in Unix time
     /// format and Coordinated Universal Time (UTC).
-    modification_time: ?[]const u8,
+    modification_time: ?[]const u8 = null,
 
     /// Name of the Resolver.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN (Amazon Resource Name) for the Outpost.
-    outpost_arn: ?[]const u8,
+    outpost_arn: ?[]const u8 = null,
 
     /// The Amazon EC2 instance type.
-    preferred_instance_type: ?[]const u8,
+    preferred_instance_type: ?[]const u8 = null,
 
     /// Status of the Resolver.
-    status: ?OutpostResolverStatus,
+    status: ?OutpostResolverStatus = null,
 
     /// A detailed description of the Resolver.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

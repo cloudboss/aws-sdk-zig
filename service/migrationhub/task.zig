@@ -3,7 +3,7 @@ const Status = @import("status.zig").Status;
 /// Task object encapsulating task information.
 pub const Task = struct {
     /// Indication of the percentage completion of the task.
-    progress_percent: ?i32,
+    progress_percent: ?i32 = null,
 
     /// Status of the task - Not Started, In-Progress, Complete.
     status: Status,
@@ -13,7 +13,7 @@ pub const Task = struct {
     /// provide clarifying information about the status that is unique to that tool
     /// or that
     /// explains an error state.
-    status_detail: ?[]const u8,
+    status_detail: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .progress_percent = "ProgressPercent",

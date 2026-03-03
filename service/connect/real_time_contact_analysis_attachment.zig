@@ -12,10 +12,10 @@ pub const RealTimeContactAnalysisAttachment = struct {
     /// types, see [Feature
     /// specifications](https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html) in the
     /// *Amazon Connect Administrator Guide*.
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// Status of the attachment.
-    status: ?ArtifactStatus,
+    status: ?ArtifactStatus = null,
 
     pub const json_field_names = .{
         .attachment_id = "AttachmentId",

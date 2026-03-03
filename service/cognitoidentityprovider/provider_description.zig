@@ -5,22 +5,22 @@ pub const ProviderDescription = struct {
     /// The date and time when the item was created. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The date and time when the item was modified. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The name of the IdP, for example `MySAMLProvider`.
-    provider_name: ?[]const u8,
+    provider_name: ?[]const u8 = null,
 
     /// The type of the provider, for example `SAML`. Amazon Cognito supports SAML
     /// 2.0,
     /// OIDC, and social IdPs. User pools list supported social IdPs by name in this
     /// response
     /// parameter: Facebook, Google, Login with Amazon, and Sign in with Apple.
-    provider_type: ?IdentityProviderTypeType,
+    provider_type: ?IdentityProviderTypeType = null,
 
     pub const json_field_names = .{
         .creation_date = "CreationDate",

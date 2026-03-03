@@ -6,7 +6,7 @@ const FunnelChartAggregatedFieldWells = @import("funnel_chart_aggregated_field_w
 /// the attributes can be defined.
 pub const FunnelChartFieldWells = struct {
     /// The field well configuration of a `FunnelChartVisual`.
-    funnel_chart_aggregated_field_wells: ?FunnelChartAggregatedFieldWells,
+    funnel_chart_aggregated_field_wells: ?FunnelChartAggregatedFieldWells = null,
 
     pub const json_field_names = .{
         .funnel_chart_aggregated_field_wells = "FunnelChartAggregatedFieldWells",

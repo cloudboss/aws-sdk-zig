@@ -6,15 +6,15 @@ pub const StepDetails = struct {
     attempt: i32 = 0,
 
     /// Details about the step failure.
-    @"error": ?ErrorObject,
+    @"error": ?ErrorObject = null,
 
     /// The date and time when the next attempt is scheduled, in [ISO-8601
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
     /// Only populated when the step is in a pending state.
-    next_attempt_timestamp: ?i64,
+    next_attempt_timestamp: ?i64 = null,
 
     /// The JSON response payload from the step operation.
-    result: ?[]const u8,
+    result: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attempt = "Attempt",

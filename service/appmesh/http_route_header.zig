@@ -4,10 +4,10 @@ const HeaderMatchMethod = @import("header_match_method.zig").HeaderMatchMethod;
 pub const HttpRouteHeader = struct {
     /// Specify `True` to match anything except the match criteria. The default
     /// value is `False`.
-    invert: ?bool,
+    invert: ?bool = null,
 
     /// The `HeaderMatchMethod` object.
-    match: ?HeaderMatchMethod,
+    match: ?HeaderMatchMethod = null,
 
     /// A name for the HTTP header in the client request that will be matched on.
     name: []const u8,

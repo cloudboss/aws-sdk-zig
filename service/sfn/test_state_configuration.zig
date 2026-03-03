@@ -2,19 +2,19 @@
 pub const TestStateConfiguration = struct {
     /// The name of the state from which an error originates when an error is mocked
     /// for a Map or Parallel state.
-    error_caused_by_state: ?[]const u8,
+    error_caused_by_state: ?[]const u8 = null,
 
     /// The data read by ItemReader in Distributed Map states as found in its
     /// original source.
-    map_item_reader_data: ?[]const u8,
+    map_item_reader_data: ?[]const u8 = null,
 
     /// The number of Map state iterations that failed during the Map state
     /// invocation.
-    map_iteration_failure_count: ?i32,
+    map_iteration_failure_count: ?i32 = null,
 
     /// The number of retry attempts that have occurred for the state's Retry that
     /// applies to the mocked error.
-    retrier_retry_count: ?i32,
+    retrier_retry_count: ?i32 = null,
 
     pub const json_field_names = .{
         .error_caused_by_state = "errorCausedByState",

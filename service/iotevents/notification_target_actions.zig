@@ -4,7 +4,7 @@ const LambdaAction = @import("lambda_action.zig").LambdaAction;
 /// You can create one or use the [AWS Lambda function provided by AWS IoT
 /// Events](https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html).
 pub const NotificationTargetActions = struct {
-    lambda_action: ?LambdaAction,
+    lambda_action: ?LambdaAction = null,
 
     pub const json_field_names = .{
         .lambda_action = "lambdaAction",

@@ -4,7 +4,7 @@ pub const AssetScope = struct {
     asset_id: []const u8,
 
     /// The error message of the asset scope.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The filter IDs of the asset scope.
     filter_ids: []const []const u8,

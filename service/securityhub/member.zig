@@ -1,24 +1,24 @@
 /// The details about a member account.
 pub const Member = struct {
     /// The Amazon Web Services account ID of the member account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID of the Security Hub administrator account
     /// associated with this member account.
-    administrator_id: ?[]const u8,
+    administrator_id: ?[]const u8 = null,
 
     /// The email address of the member account.
-    email: ?[]const u8,
+    email: ?[]const u8 = null,
 
     /// A timestamp for the date and time when the invitation was sent to the member
     /// account.
-    invited_at: ?i64,
+    invited_at: ?i64 = null,
 
     /// This is replaced by `AdministratorID`.
     ///
     /// The Amazon Web Services account ID of the Security Hub administrator account
     /// associated with this member account.
-    master_id: ?[]const u8,
+    master_id: ?[]const u8 = null,
 
     /// The status of the relationship between the member account and its
     /// administrator account.
@@ -50,10 +50,10 @@ pub const Member = struct {
     /// * `AccountSuspended` - Indicates that an organization account was suspended
     ///   from Amazon Web Services at the same time that the administrator account
     ///   tried to enable the organization account as a member account.
-    member_status: ?[]const u8,
+    member_status: ?[]const u8 = null,
 
     /// The timestamp for the date and time when the member account was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

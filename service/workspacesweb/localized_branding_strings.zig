@@ -6,27 +6,27 @@ pub const LocalizedBrandingStrings = struct {
 
     /// The text displayed on the contact button. This field is optional and
     /// defaults to "Contact us".
-    contact_button_text: ?[]const u8,
+    contact_button_text: ?[]const u8 = null,
 
     /// A contact link URL. The URL must start with `https://` or `mailto:`. If not
     /// provided, the contact button will be hidden from the web portal screen.
-    contact_link: ?[]const u8,
+    contact_link: ?[]const u8 = null,
 
     /// The text displayed during session loading. This field is optional and
     /// defaults to "Loading your session".
-    loading_text: ?[]const u8,
+    loading_text: ?[]const u8 = null,
 
     /// The text displayed on the login button. This field is optional and defaults
     /// to "Sign In".
-    login_button_text: ?[]const u8,
+    login_button_text: ?[]const u8 = null,
 
     /// The description text for the login section. This field is optional and
     /// defaults to "Sign in to your session".
-    login_description: ?[]const u8,
+    login_description: ?[]const u8 = null,
 
     /// The title text for the login section. This field is optional and defaults to
     /// "Sign In".
-    login_title: ?[]const u8,
+    login_title: ?[]const u8 = null,
 
     /// The welcome text displayed on the sign-in page.
     welcome_text: []const u8,

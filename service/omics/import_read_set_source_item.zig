@@ -7,19 +7,19 @@ const ReadSetImportJobItemStatus = @import("read_set_import_job_item_status.zig"
 /// A source for an import read set job.
 pub const ImportReadSetSourceItem = struct {
     /// The source's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Where the source originated.
-    generated_from: ?[]const u8,
+    generated_from: ?[]const u8 = null,
 
     /// The source's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The source's read set ID.
-    read_set_id: ?[]const u8,
+    read_set_id: ?[]const u8 = null,
 
     /// The source's genome reference ARN.
-    reference_arn: ?[]const u8,
+    reference_arn: ?[]const u8 = null,
 
     /// The source's sample ID.
     sample_id: []const u8,
@@ -34,13 +34,13 @@ pub const ImportReadSetSourceItem = struct {
     status: ReadSetImportJobItemStatus,
 
     /// The source's status message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The source's subject ID.
     subject_id: []const u8,
 
     /// The source's tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .description = "description",

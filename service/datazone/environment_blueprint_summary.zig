@@ -3,10 +3,10 @@ const ProvisioningProperties = @import("provisioning_properties.zig").Provisioni
 /// The details of an environment blueprint summary.
 pub const EnvironmentBlueprintSummary = struct {
     /// The timestamp of when an environment blueprint was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of a blueprint.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the blueprint.
     id: []const u8,
@@ -21,7 +21,7 @@ pub const EnvironmentBlueprintSummary = struct {
     provisioning_properties: ProvisioningProperties,
 
     /// The timestamp of when the blueprint was enabled.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

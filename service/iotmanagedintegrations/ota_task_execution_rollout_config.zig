@@ -4,11 +4,11 @@ const ExponentialRolloutRate = @import("exponential_rollout_rate.zig").Exponenti
 pub const OtaTaskExecutionRolloutConfig = struct {
     /// Structure representing exponential rate of rollout for an over-the-air (OTA)
     /// task.
-    exponential_rollout_rate: ?ExponentialRolloutRate,
+    exponential_rollout_rate: ?ExponentialRolloutRate = null,
 
     /// The maximum number of things that will be notified of a pending task, per
     /// minute.
-    maximum_per_minute: ?i32,
+    maximum_per_minute: ?i32 = null,
 
     pub const json_field_names = .{
         .exponential_rollout_rate = "ExponentialRolloutRate",

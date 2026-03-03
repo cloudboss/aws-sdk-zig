@@ -4,7 +4,7 @@ const EksPodProperties = @import("eks_pod_properties.zig").EksPodProperties;
 /// job.
 pub const EksProperties = struct {
     /// The properties for the Kubernetes pod resources of a job.
-    pod_properties: ?EksPodProperties,
+    pod_properties: ?EksPodProperties = null,
 
     pub const json_field_names = .{
         .pod_properties = "podProperties",

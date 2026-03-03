@@ -5,10 +5,10 @@ const ProvisionedCapacityUpdate = @import("provisioned_capacity_update.zig").Pro
 /// provisioned.
 pub const CapacityUpdate = struct {
     /// The target auto scaling setting.
-    auto_scaling: ?AutoScalingUpdate,
+    auto_scaling: ?AutoScalingUpdate = null,
 
     /// The target settings for provisioned capacity.
-    provisioned_capacity: ?ProvisionedCapacityUpdate,
+    provisioned_capacity: ?ProvisionedCapacityUpdate = null,
 
     pub const json_field_names = .{
         .auto_scaling = "autoScaling",

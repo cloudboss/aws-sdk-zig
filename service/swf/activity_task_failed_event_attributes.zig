@@ -1,10 +1,10 @@
 /// Provides the details of the `ActivityTaskFailed` event.
 pub const ActivityTaskFailedEventAttributes = struct {
     /// The details of the failure.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// The reason provided for the failure.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The ID of the `ActivityTaskScheduled` event that was recorded when this
     /// activity task was scheduled. This information can be useful for diagnosing

@@ -11,13 +11,13 @@ const VectorIngestionConfiguration = @import("vector_ingestion_configuration.zig
 /// Information about the knowledge base.
 pub const KnowledgeBaseData = struct {
     /// The description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// List of failure reasons on ingestion per file.
-    ingestion_failure_reasons: ?[]const []const u8,
+    ingestion_failure_reasons: ?[]const []const u8 = null,
 
     /// Status of ingestion on data source.
-    ingestion_status: ?SyncStatus,
+    ingestion_status: ?SyncStatus = null,
 
     /// The Amazon Resource Name (ARN) of the knowledge base.
     knowledge_base_arn: []const u8,
@@ -31,13 +31,13 @@ pub const KnowledgeBaseData = struct {
     /// An epoch timestamp indicating the most recent content modification inside
     /// the knowledge base. If no content exists in a knowledge base, this value is
     /// unset.
-    last_content_modification_time: ?i64,
+    last_content_modification_time: ?i64 = null,
 
     /// The name of the knowledge base.
     name: []const u8,
 
     /// Information about how to render the content.
-    rendering_configuration: ?RenderingConfiguration,
+    rendering_configuration: ?RenderingConfiguration = null,
 
     /// The configuration information for the customer managed key used for
     /// encryption.
@@ -49,19 +49,19 @@ pub const KnowledgeBaseData = struct {
     /// For more information about setting up a customer managed key for Amazon Q in
     /// Connect, see [Enable Amazon Q in Connect for your
     /// instance](https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html).
-    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration,
+    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration = null,
 
     /// Source configuration information about the knowledge base.
-    source_configuration: ?SourceConfiguration,
+    source_configuration: ?SourceConfiguration = null,
 
     /// The status of the knowledge base.
     status: KnowledgeBaseStatus,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Contains details about how to ingest the documents in a data source.
-    vector_ingestion_configuration: ?VectorIngestionConfiguration,
+    vector_ingestion_configuration: ?VectorIngestionConfiguration = null,
 
     pub const json_field_names = .{
         .description = "description",

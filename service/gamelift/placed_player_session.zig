@@ -5,10 +5,10 @@
 pub const PlacedPlayerSession = struct {
     /// A unique identifier for a player that is associated with this player
     /// session.
-    player_id: ?[]const u8,
+    player_id: ?[]const u8 = null,
 
     /// A unique identifier for a player session.
-    player_session_id: ?[]const u8,
+    player_session_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .player_id = "PlayerId",

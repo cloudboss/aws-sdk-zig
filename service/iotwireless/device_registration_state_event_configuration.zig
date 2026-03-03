@@ -8,12 +8,12 @@ pub const DeviceRegistrationStateEventConfiguration = struct {
     /// Device registration state event configuration object for enabling or
     /// disabling
     /// Sidewalk related event topics.
-    sidewalk: ?SidewalkEventNotificationConfigurations,
+    sidewalk: ?SidewalkEventNotificationConfigurations = null,
 
     /// Denotes whether the wireless device ID device registration state event topic
     /// is
     /// enabled or disabled.
-    wireless_device_id_event_topic: ?EventNotificationTopicStatus,
+    wireless_device_id_event_topic: ?EventNotificationTopicStatus = null,
 
     pub const json_field_names = .{
         .sidewalk = "Sidewalk",

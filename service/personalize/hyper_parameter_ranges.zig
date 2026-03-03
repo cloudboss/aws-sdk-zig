@@ -6,13 +6,13 @@ const IntegerHyperParameterRange = @import("integer_hyper_parameter_range.zig").
 /// Hyperparameters can be categorical, continuous, or integer-valued.
 pub const HyperParameterRanges = struct {
     /// The categorical hyperparameters and their ranges.
-    categorical_hyper_parameter_ranges: ?[]const CategoricalHyperParameterRange,
+    categorical_hyper_parameter_ranges: ?[]const CategoricalHyperParameterRange = null,
 
     /// The continuous hyperparameters and their ranges.
-    continuous_hyper_parameter_ranges: ?[]const ContinuousHyperParameterRange,
+    continuous_hyper_parameter_ranges: ?[]const ContinuousHyperParameterRange = null,
 
     /// The integer-valued hyperparameters and their ranges.
-    integer_hyper_parameter_ranges: ?[]const IntegerHyperParameterRange,
+    integer_hyper_parameter_ranges: ?[]const IntegerHyperParameterRange = null,
 
     pub const json_field_names = .{
         .categorical_hyper_parameter_ranges = "categoricalHyperParameterRanges",

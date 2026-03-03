@@ -3,10 +3,10 @@ pub const ManagedRuleGroupVersion = struct {
     /// The date and time that the managed rule group owner updated the rule group
     /// version
     /// information.
-    last_update_timestamp: ?i64,
+    last_update_timestamp: ?i64 = null,
 
     /// The version name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .last_update_timestamp = "LastUpdateTimestamp",

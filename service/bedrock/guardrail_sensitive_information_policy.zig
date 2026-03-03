@@ -5,10 +5,10 @@ const GuardrailRegex = @import("guardrail_regex.zig").GuardrailRegex;
 /// the guardrail.
 pub const GuardrailSensitiveInformationPolicy = struct {
     /// The list of PII entities configured for the guardrail.
-    pii_entities: ?[]const GuardrailPiiEntity,
+    pii_entities: ?[]const GuardrailPiiEntity = null,
 
     /// The list of regular expressions configured for the guardrail.
-    regexes: ?[]const GuardrailRegex,
+    regexes: ?[]const GuardrailRegex = null,
 
     pub const json_field_names = .{
         .pii_entities = "piiEntities",

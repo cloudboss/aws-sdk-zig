@@ -9,7 +9,7 @@ pub const VariantImportItemDetail = struct {
     source: []const u8,
 
     /// A message that provides additional context about a job
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .job_status = "jobStatus",

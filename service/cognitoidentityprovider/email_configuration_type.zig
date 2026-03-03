@@ -38,7 +38,7 @@ pub const EmailConfigurationType = struct {
     /// can create groups
     /// of IP addresses, called dedicated IP pools. You can then associate the
     /// dedicated IP pools with configuration sets.
-    configuration_set: ?[]const u8,
+    configuration_set: ?[]const u8 = null,
 
     /// Specifies whether Amazon Cognito uses its built-in functionality to send
     /// your users email
@@ -92,17 +92,17 @@ pub const EmailConfigurationType = struct {
     /// creates, see [Using Service-Linked Roles for Amazon
     /// Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/using-service-linked-roles.html) in the
     /// *Amazon Cognito Developer Guide*.
-    email_sending_account: ?EmailSendingAccountType,
+    email_sending_account: ?EmailSendingAccountType = null,
 
     /// Either the sender’s email address or the sender’s name with their email
     /// address. For
     /// example, `testuser@example.com` or `Test User
     /// `. This address appears before the body of the
     /// email.
-    from: ?[]const u8,
+    from: ?[]const u8 = null,
 
     /// The destination to which the receiver of the email should reply.
-    reply_to_email_address: ?[]const u8,
+    reply_to_email_address: ?[]const u8 = null,
 
     /// The ARN of a verified email address or an address from a verified domain in
     /// Amazon SES. You
@@ -128,7 +128,7 @@ pub const EmailConfigurationType = struct {
     /// email configuration
     /// regions](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-email.html#user-pool-email-developer-region-mapping) in the [Amazon Cognito Developer
     /// Guide](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration_set = "ConfigurationSet",

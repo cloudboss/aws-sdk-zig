@@ -21,11 +21,11 @@
 /// resource](https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource) table. Backup ignores this expression for other resource types.
 pub const CalculatedLifecycle = struct {
     /// A timestamp that specifies when to delete a recovery point.
-    delete_at: ?i64,
+    delete_at: ?i64 = null,
 
     /// A timestamp that specifies when to transition a recovery point to cold
     /// storage.
-    move_to_cold_storage_at: ?i64,
+    move_to_cold_storage_at: ?i64 = null,
 
     pub const json_field_names = .{
         .delete_at = "DeleteAt",

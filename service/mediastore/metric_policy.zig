@@ -19,7 +19,7 @@ pub const MetricPolicy = struct {
     /// also include at least one rule. By default, you can include up to five
     /// rules. You can also [request a quota
     /// increase](https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas) to allow up to 300 rules per policy.
-    metric_policy_rules: ?[]const MetricPolicyRule,
+    metric_policy_rules: ?[]const MetricPolicyRule = null,
 
     pub const json_field_names = .{
         .container_level_metrics = "ContainerLevelMetrics",

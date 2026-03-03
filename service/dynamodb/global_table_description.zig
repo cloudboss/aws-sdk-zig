@@ -4,13 +4,13 @@ const ReplicaDescription = @import("replica_description.zig").ReplicaDescription
 /// Contains details about the global table.
 pub const GlobalTableDescription = struct {
     /// The creation time of the global table.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The unique identifier of the global table.
-    global_table_arn: ?[]const u8,
+    global_table_arn: ?[]const u8 = null,
 
     /// The global table name.
-    global_table_name: ?[]const u8,
+    global_table_name: ?[]const u8 = null,
 
     /// The current state of the global table:
     ///
@@ -21,10 +21,10 @@ pub const GlobalTableDescription = struct {
     /// * `DELETING` - The global table is being deleted.
     ///
     /// * `ACTIVE` - The global table is ready for use.
-    global_table_status: ?GlobalTableStatus,
+    global_table_status: ?GlobalTableStatus = null,
 
     /// The Regions where the global table has replicas.
-    replication_group: ?[]const ReplicaDescription,
+    replication_group: ?[]const ReplicaDescription = null,
 
     pub const json_field_names = .{
         .creation_date_time = "CreationDateTime",

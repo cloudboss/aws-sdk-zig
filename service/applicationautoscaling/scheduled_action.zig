@@ -8,7 +8,7 @@ pub const ScheduledAction = struct {
     creation_time: i64,
 
     /// The date and time that the action is scheduled to end, in UTC.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The identifier of the resource associated with the scaling policy.
     /// This string consists of the resource type and unique identifier.
@@ -175,7 +175,7 @@ pub const ScheduledAction = struct {
     ///
     /// * `workspaces:workspacespool:DesiredUserSessions` - The number of user
     ///   sessions for the WorkSpaces in the pool.
-    scalable_dimension: ?ScalableDimension,
+    scalable_dimension: ?ScalableDimension = null,
 
     /// The new minimum and maximum capacity. You can set both values or just one.
     /// At the
@@ -184,7 +184,7 @@ pub const ScheduledAction = struct {
     /// to the minimum capacity. If the current capacity is above the maximum
     /// capacity, Application Auto Scaling
     /// scales in to the maximum capacity.
-    scalable_target_action: ?ScalableTargetAction,
+    scalable_target_action: ?ScalableTargetAction = null,
 
     /// The schedule for this action. The following formats are supported:
     ///
@@ -226,12 +226,12 @@ pub const ScheduledAction = struct {
     service_namespace: ServiceNamespace,
 
     /// The date and time that the action is scheduled to begin, in UTC.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The time zone used when referring to the date and time of a scheduled
     /// action, when the
     /// scheduled action uses an at or cron expression.
-    timezone: ?[]const u8,
+    timezone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

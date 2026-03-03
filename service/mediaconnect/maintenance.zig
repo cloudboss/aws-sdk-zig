@@ -4,19 +4,19 @@ const MaintenanceDay = @import("maintenance_day.zig").MaintenanceDay;
 pub const Maintenance = struct {
     /// A day of a week when the maintenance will happen. Use
     /// Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
-    maintenance_day: ?MaintenanceDay,
+    maintenance_day: ?MaintenanceDay = null,
 
     /// The Maintenance has to be performed before this deadline in ISO UTC format.
     /// Example: 2021-01-30T08:30:00Z.
-    maintenance_deadline: ?[]const u8,
+    maintenance_deadline: ?[]const u8 = null,
 
     /// A scheduled date in ISO UTC format when the maintenance will happen. Use
     /// YYYY-MM-DD format. Example: 2021-01-30.
-    maintenance_scheduled_date: ?[]const u8,
+    maintenance_scheduled_date: ?[]const u8 = null,
 
     /// UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes
     /// must be 00. Example: 13:00. The default value is 02:00.
-    maintenance_start_hour: ?[]const u8,
+    maintenance_start_hour: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .maintenance_day = "MaintenanceDay",

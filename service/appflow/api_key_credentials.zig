@@ -4,7 +4,7 @@ pub const ApiKeyCredentials = struct {
     api_key: []const u8,
 
     /// The API secret key required for API key authentication.
-    api_secret_key: ?[]const u8,
+    api_secret_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_key = "apiKey",

@@ -5,7 +5,7 @@ pub const ListTagsForResourceResponse = struct {
     /// the tag key to the tag value: `"TagKey" : "TagValue"`.
     ///
     /// * Format example: `{"tag1" : "value1", "tag2" : "value2"} `
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .tags = "Tags",

@@ -5,19 +5,19 @@ const ParallelDataConfig = @import("parallel_data_config.zig").ParallelDataConfi
 /// The properties of a parallel data resource.
 pub const ParallelDataProperties = struct {
     /// The Amazon Resource Name (ARN) of the parallel data resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time at which the parallel data resource was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description assigned to the parallel data resource.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
-    encryption_key: ?EncryptionKey,
+    encryption_key: ?EncryptionKey = null,
 
     /// The number of records unsuccessfully imported from the parallel data input
     /// file.
-    failed_record_count: ?i64,
+    failed_record_count: ?i64 = null,
 
     /// The number of UTF-8 characters that Amazon Translate imported from the
     /// parallel data input
@@ -27,50 +27,50 @@ pub const ParallelDataProperties = struct {
     /// provided a
     /// Translation Memory Exchange (.tmx) file, this number does not include the
     /// tags.
-    imported_data_size: ?i64,
+    imported_data_size: ?i64 = null,
 
     /// The number of records successfully imported from the parallel data input
     /// file.
-    imported_record_count: ?i64,
+    imported_record_count: ?i64 = null,
 
     /// The time at which the parallel data resource was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The time that the most recent update was attempted.
-    latest_update_attempt_at: ?i64,
+    latest_update_attempt_at: ?i64 = null,
 
     /// The status of the most recent update attempt for the parallel data resource.
-    latest_update_attempt_status: ?ParallelDataStatus,
+    latest_update_attempt_status: ?ParallelDataStatus = null,
 
     /// Additional information from Amazon Translate about the parallel data
     /// resource.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The custom name assigned to the parallel data resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Specifies the format and S3 location of the parallel data input file.
-    parallel_data_config: ?ParallelDataConfig,
+    parallel_data_config: ?ParallelDataConfig = null,
 
     /// The number of items in the input file that Amazon Translate skipped when you
     /// created or
     /// updated the parallel data resource. For example, Amazon Translate skips
     /// empty records, empty
     /// target texts, and empty lines.
-    skipped_record_count: ?i64,
+    skipped_record_count: ?i64 = null,
 
     /// The source language of the translations in the parallel data file.
-    source_language_code: ?[]const u8,
+    source_language_code: ?[]const u8 = null,
 
     /// The status of the parallel data resource. When the parallel data is ready
     /// for you to use,
     /// the status is `ACTIVE`.
-    status: ?ParallelDataStatus,
+    status: ?ParallelDataStatus = null,
 
     /// The language codes for the target languages available in the parallel data
     /// file. All
     /// possible target languages are returned as an array.
-    target_language_codes: ?[]const []const u8,
+    target_language_codes: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

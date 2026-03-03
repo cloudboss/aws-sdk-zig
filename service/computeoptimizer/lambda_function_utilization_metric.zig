@@ -11,7 +11,7 @@ pub const LambdaFunctionUtilizationMetric = struct {
     /// processing an event.
     ///
     /// * `Memory` - The amount of memory used per invocation.
-    name: ?LambdaFunctionMetricName,
+    name: ?LambdaFunctionMetricName = null,
 
     /// The statistic of the utilization metric.
     ///
@@ -29,7 +29,7 @@ pub const LambdaFunctionUtilizationMetric = struct {
     /// using Amazon CloudWatch. For more information, see the [Amazon CloudWatch
     /// User
     /// Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
-    statistic: ?LambdaFunctionMetricStatistic,
+    statistic: ?LambdaFunctionMetricStatistic = null,
 
     /// The value of the utilization metric.
     value: f64 = 0,

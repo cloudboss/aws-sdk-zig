@@ -13,7 +13,7 @@ pub const CampaignConfig = struct {
     /// If you enable metadata in recommendations, you will incur additional costs.
     /// For more information, see [Amazon Personalize
     /// pricing](https://aws.amazon.com/personalize/pricing/).
-    enable_metadata_with_recommendations: ?bool,
+    enable_metadata_with_recommendations: ?bool = null,
 
     /// Specifies the exploration configuration hyperparameters, including
     /// `explorationWeight` and
@@ -22,14 +22,14 @@ pub const CampaignConfig = struct {
     /// recommending items. Provide `itemExplorationConfig` data only if your
     /// solution uses the
     /// [User-Personalization](https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html) recipe.
-    item_exploration_config: ?[]const aws.map.StringMapEntry,
+    item_exploration_config: ?[]const aws.map.StringMapEntry = null,
 
     /// A map of ranking influence values for POPULARITY and FRESHNESS. For each
     /// key, specify a numerical value between 0.0 and 1.0 that determines how much
     /// influence that ranking factor has on the final recommendations. A value
     /// closer to 1.0 gives more weight to the factor, while a value closer to 0.0
     /// reduces its influence.
-    ranking_influence: ?[]const aws.map.MapEntry(f64),
+    ranking_influence: ?[]const aws.map.MapEntry(f64) = null,
 
     /// Whether the campaign automatically updates to use the latest solution
     /// version (trained model) of a solution. If you specify `True`,
@@ -41,7 +41,7 @@ pub const CampaignConfig = struct {
     /// For more information about automatic campaign updates, see
     /// [Enabling automatic campaign
     /// updates](https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update).
-    sync_with_latest_solution_version: ?bool,
+    sync_with_latest_solution_version: ?bool = null,
 
     pub const json_field_names = .{
         .enable_metadata_with_recommendations = "enableMetadataWithRecommendations",

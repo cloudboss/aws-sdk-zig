@@ -8,7 +8,7 @@ pub const CSVInput = struct {
     /// such records should be
     /// allowed. Default value is FALSE. Setting this value to TRUE may lower
     /// performance.
-    allow_quoted_record_delimiter: ?bool,
+    allow_quoted_record_delimiter: ?bool = null,
 
     /// A single character used to indicate that a row should be ignored when the
     /// character is present at
@@ -17,12 +17,12 @@ pub const CSVInput = struct {
     /// is `#`.
     ///
     /// Default: `#`
-    comments: ?[]const u8,
+    comments: ?[]const u8 = null,
 
     /// A single character used to separate individual fields in a record. You can
     /// specify an arbitrary
     /// delimiter.
-    field_delimiter: ?[]const u8,
+    field_delimiter: ?[]const u8 = null,
 
     /// Describes the first line of input. Valid values are:
     ///
@@ -37,7 +37,7 @@ pub const CSVInput = struct {
     /// * `Use`: First line is a header, and you can use the header value to
     ///   identify a column
     /// in an expression (`SELECT "name" FROM OBJECT`).
-    file_header_info: ?FileHeaderInfo,
+    file_header_info: ?FileHeaderInfo = null,
 
     /// A single character used for escaping when the field delimiter is part of the
     /// value. For example, if
@@ -50,15 +50,15 @@ pub const CSVInput = struct {
     /// Default: `"`
     ///
     /// Ancestors: `CSV`
-    quote_character: ?[]const u8,
+    quote_character: ?[]const u8 = null,
 
     /// A single character used for escaping the quotation mark character inside an
     /// already escaped value.
     /// For example, the value `""" a , b """` is parsed as `" a , b "`.
-    quote_escape_character: ?[]const u8,
+    quote_escape_character: ?[]const u8 = null,
 
     /// A single character used to separate individual records in the input. Instead
     /// of the default value,
     /// you can specify an arbitrary delimiter.
-    record_delimiter: ?[]const u8,
+    record_delimiter: ?[]const u8 = null,
 };

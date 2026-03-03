@@ -12,7 +12,7 @@ pub const EFSAuthorizationConfig = struct {
     /// with Amazon EFS access
     /// points](https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html) in
     /// the *Amazon Elastic File System User Guide*.
-    access_point_id: ?[]const u8,
+    access_point_id: ?[]const u8 = null,
 
     /// Whether or not to use the Batch job IAM role defined in a job definition
     /// when mounting the
@@ -24,7 +24,7 @@ pub const EFSAuthorizationConfig = struct {
     /// the *Batch User Guide*. EFS IAM authorization requires that
     /// `TransitEncryption` be `ENABLED` and that a `JobRoleArn` is
     /// specified.
-    iam: ?EFSAuthorizationConfigIAM,
+    iam: ?EFSAuthorizationConfigIAM = null,
 
     pub const json_field_names = .{
         .access_point_id = "accessPointId",

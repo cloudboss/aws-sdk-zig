@@ -14,5 +14,5 @@ pub const SendDataPoint = struct {
     rejects: i64 = 0,
 
     /// Time of the data point.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 };

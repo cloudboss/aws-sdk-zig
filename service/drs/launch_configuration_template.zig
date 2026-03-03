@@ -7,39 +7,39 @@ const TargetInstanceTypeRightSizingMethod = @import("target_instance_type_right_
 /// Account level Launch Configuration Template.
 pub const LaunchConfigurationTemplate = struct {
     /// ARN of the Launch Configuration Template.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Copy private IP.
-    copy_private_ip: ?bool,
+    copy_private_ip: ?bool = null,
 
     /// Copy tags.
-    copy_tags: ?bool,
+    copy_tags: ?bool = null,
 
     /// S3 bucket ARN to export Source Network templates.
-    export_bucket_arn: ?[]const u8,
+    export_bucket_arn: ?[]const u8 = null,
 
     /// ID of the Launch Configuration Template.
-    launch_configuration_template_id: ?[]const u8,
+    launch_configuration_template_id: ?[]const u8 = null,
 
     /// Launch disposition.
-    launch_disposition: ?LaunchDisposition,
+    launch_disposition: ?LaunchDisposition = null,
 
     /// DRS will set the 'launch into instance ID' of any source server when
     /// performing a drill, recovery or failback to the previous region or
     /// availability zone, using the instance ID of the source instance.
-    launch_into_source_instance: ?bool,
+    launch_into_source_instance: ?bool = null,
 
     /// Licensing.
-    licensing: ?Licensing,
+    licensing: ?Licensing = null,
 
     /// Post-launch actions activated.
-    post_launch_enabled: ?bool,
+    post_launch_enabled: ?bool = null,
 
     /// Tags of the Launch Configuration Template.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Target instance type right-sizing method.
-    target_instance_type_right_sizing_method: ?TargetInstanceTypeRightSizingMethod,
+    target_instance_type_right_sizing_method: ?TargetInstanceTypeRightSizingMethod = null,
 
     pub const json_field_names = .{
         .arn = "arn",

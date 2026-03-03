@@ -3,11 +3,11 @@
 pub const RegistryId = struct {
     /// Arn of the registry to be updated. One of `RegistryArn` or `RegistryName`
     /// has to be provided.
-    registry_arn: ?[]const u8,
+    registry_arn: ?[]const u8 = null,
 
     /// Name of the registry. Used only for lookup. One of `RegistryArn` or
     /// `RegistryName` has to be provided.
-    registry_name: ?[]const u8,
+    registry_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .registry_arn = "RegistryArn",

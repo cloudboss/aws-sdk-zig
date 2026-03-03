@@ -8,7 +8,7 @@ const GlobalConfigurationLowFramerateInputs = @import("global_configuration_low_
 /// Global Configuration
 pub const GlobalConfiguration = struct {
     /// Value to set the initial audio gain for the Live Event.
-    initial_audio_gain: ?i32,
+    initial_audio_gain: ?i32 = null,
 
     /// Indicates the action to take when the current input completes (e.g.
     /// end-of-file). When switchAndLoopInputs is configured the encoder will
@@ -16,10 +16,10 @@ pub const GlobalConfiguration = struct {
     /// encoder will transcode either black, a solid color, or a user specified
     /// slate images per the "Input Loss Behavior" configuration until the next
     /// input switch occurs (which is controlled through the Channel Schedule API).
-    input_end_action: ?GlobalConfigurationInputEndAction,
+    input_end_action: ?GlobalConfigurationInputEndAction = null,
 
     /// Settings for system actions when input is lost.
-    input_loss_behavior: ?InputLossBehavior,
+    input_loss_behavior: ?InputLossBehavior = null,
 
     /// Indicates how MediaLive pipelines are synchronized.
     ///
@@ -31,21 +31,21 @@ pub const GlobalConfiguration = struct {
     /// pipelines. We advise against disabling output locking because it has
     /// negative side effects in most workflows. For more information, see the
     /// section about output locking (pipeline locking) in the Medialive user guide.
-    output_locking_mode: ?GlobalConfigurationOutputLockingMode,
+    output_locking_mode: ?GlobalConfigurationOutputLockingMode = null,
 
     /// Advanced output locking settings
-    output_locking_settings: ?OutputLockingSettings,
+    output_locking_settings: ?OutputLockingSettings = null,
 
     /// Indicates whether the rate of frames emitted by the Live encoder should be
     /// paced by its system clock (which optionally may be locked to another source
     /// via NTP) or should be locked to the clock of the source that is providing
     /// the input stream.
-    output_timing_source: ?GlobalConfigurationOutputTimingSource,
+    output_timing_source: ?GlobalConfigurationOutputTimingSource = null,
 
     /// Adjusts video input buffer for streams with very low video framerates. This
     /// is commonly set to enabled for music channels with less than one video frame
     /// per second.
-    support_low_framerate_inputs: ?GlobalConfigurationLowFramerateInputs,
+    support_low_framerate_inputs: ?GlobalConfigurationLowFramerateInputs = null,
 
     pub const json_field_names = .{
         .initial_audio_gain = "InitialAudioGain",

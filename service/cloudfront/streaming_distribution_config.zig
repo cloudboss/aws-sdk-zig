@@ -8,7 +8,7 @@ const TrustedSigners = @import("trusted_signers.zig").TrustedSigners;
 pub const StreamingDistributionConfig = struct {
     /// A complex type that contains information about CNAMEs (alternate domain
     /// names), if any, for this streaming distribution.
-    aliases: ?Aliases,
+    aliases: ?Aliases = null,
 
     /// A unique value (for example, a date-time stamp) that ensures that the
     /// request can't be replayed.
@@ -31,11 +31,11 @@ pub const StreamingDistributionConfig = struct {
 
     /// A complex type that controls whether access logs are written for the
     /// streaming distribution.
-    logging: ?StreamingLoggingConfig,
+    logging: ?StreamingLoggingConfig = null,
 
     /// A complex type that contains information about price class for this
     /// streaming distribution.
-    price_class: ?PriceClass,
+    price_class: ?PriceClass = null,
 
     /// A complex type that contains information about the Amazon S3 bucket from
     /// which you want CloudFront to get your media files for distribution.

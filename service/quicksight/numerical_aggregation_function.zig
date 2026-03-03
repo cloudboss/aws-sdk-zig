@@ -4,7 +4,7 @@ const SimpleNumericalAggregationFunction = @import("simple_numerical_aggregation
 /// Aggregation for numerical values.
 pub const NumericalAggregationFunction = struct {
     /// An aggregation based on the percentile of values in a dimension or measure.
-    percentile_aggregation: ?PercentileAggregation,
+    percentile_aggregation: ?PercentileAggregation = null,
 
     /// Built-in aggregation functions for numerical values.
     ///
@@ -29,7 +29,7 @@ pub const NumericalAggregationFunction = struct {
     /// * `STDEVP`: The partitioned standard deviation of a dimension or measure.
     ///
     /// * `MEDIAN`: The median value of a dimension or measure.
-    simple_numerical_aggregation: ?SimpleNumericalAggregationFunction,
+    simple_numerical_aggregation: ?SimpleNumericalAggregationFunction = null,
 
     pub const json_field_names = .{
         .percentile_aggregation = "PercentileAggregation",

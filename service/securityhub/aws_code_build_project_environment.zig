@@ -4,11 +4,11 @@ const AwsCodeBuildProjectEnvironmentRegistryCredential = @import("aws_code_build
 /// Information about the build environment for this build project.
 pub const AwsCodeBuildProjectEnvironment = struct {
     /// The certificate to use with this build project.
-    certificate: ?[]const u8,
+    certificate: ?[]const u8 = null,
 
     /// A set of environment variables to make available to builds for the build
     /// project.
-    environment_variables: ?[]const AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails,
+    environment_variables: ?[]const AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails = null,
 
     /// The type of credentials CodeBuild uses to pull images in your build.
     ///
@@ -24,14 +24,14 @@ pub const AwsCodeBuildProjectEnvironment = struct {
     /// When you use a cross-account or private registry image, you must use
     /// `SERVICE_ROLE` credentials. When you use an CodeBuild curated image, you
     /// must use `CODEBUILD` credentials.
-    image_pull_credentials_type: ?[]const u8,
+    image_pull_credentials_type: ?[]const u8 = null,
 
     /// Whether to allow the Docker daemon to run inside a Docker container. Set to
     /// `true` if the build project is used to build Docker images.
-    privileged_mode: ?bool,
+    privileged_mode: ?bool = null,
 
     /// The credentials for access to a private registry.
-    registry_credential: ?AwsCodeBuildProjectEnvironmentRegistryCredential,
+    registry_credential: ?AwsCodeBuildProjectEnvironmentRegistryCredential = null,
 
     /// The type of build environment to use for related builds.
     ///
@@ -60,7 +60,7 @@ pub const AwsCodeBuildProjectEnvironment = struct {
     ///
     /// Valid values: `WINDOWS_CONTAINER` | `LINUX_CONTAINER` |
     /// `LINUX_GPU_CONTAINER` | `ARM_CONTAINER`
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .certificate = "Certificate",

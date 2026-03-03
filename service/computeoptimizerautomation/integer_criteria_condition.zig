@@ -5,11 +5,11 @@ const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator
 pub const IntegerCriteriaCondition = struct {
     /// The comparison operator to use, such as equals, greater than, less than,
     /// etc.
-    comparison: ?ComparisonOperator,
+    comparison: ?ComparisonOperator = null,
 
     /// The list of integer values to compare against using the specified comparison
     /// operator.
-    values: ?[]const i32,
+    values: ?[]const i32 = null,
 
     pub const json_field_names = .{
         .comparison = "comparison",

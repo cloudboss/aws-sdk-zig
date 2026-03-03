@@ -6,7 +6,7 @@ const UserIdentity = @import("user_identity.zig").UserIdentity;
 /// Information about an entry in an event log of Amazon CodeCatalyst activity.
 pub const EventLogEntry = struct {
     /// The code of the error, if any.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The category for the event.
     event_category: []const u8,
@@ -32,22 +32,22 @@ pub const EventLogEntry = struct {
     operation_type: OperationType,
 
     /// Information about the project where the event occurred.
-    project_information: ?ProjectInformation,
+    project_information: ?ProjectInformation = null,
 
     /// The system-generated unique ID of the request.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// Information about the payload of the request.
-    request_payload: ?EventPayload,
+    request_payload: ?EventPayload = null,
 
     /// Information about the payload of the response, if any.
-    response_payload: ?EventPayload,
+    response_payload: ?EventPayload = null,
 
     /// The IP address of the user whose actions are recorded in the event.
-    source_ip_address: ?[]const u8,
+    source_ip_address: ?[]const u8 = null,
 
     /// The user agent whose actions are recorded in the event.
-    user_agent: ?[]const u8,
+    user_agent: ?[]const u8 = null,
 
     /// The system-generated unique ID of the user whose actions are recorded in the
     /// event.

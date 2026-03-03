@@ -12,7 +12,7 @@ pub const EFSAuthorizationConfig = struct {
     /// points](https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html) in
     /// the *Amazon Elastic File System User
     /// Guide*.
-    access_point_id: ?[]const u8,
+    access_point_id: ?[]const u8 = null,
 
     /// Determines whether to use the Amazon ECS task role defined in a task
     /// definition when
@@ -23,7 +23,7 @@ pub const EFSAuthorizationConfig = struct {
     /// Amazon EFS access
     /// points](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints) in the *Amazon Elastic Container Service
     /// Developer Guide*.
-    iam: ?EFSAuthorizationConfigIAM,
+    iam: ?EFSAuthorizationConfigIAM = null,
 
     pub const json_field_names = .{
         .access_point_id = "accessPointId",

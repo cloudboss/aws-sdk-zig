@@ -6,7 +6,7 @@ const S3Object = @import("s3_object.zig").S3Object;
 /// .avi.
 pub const Video = struct {
     /// The Amazon S3 bucket name and file name for the video.
-    s3_object: ?S3Object,
+    s3_object: ?S3Object = null,
 
     pub const json_field_names = .{
         .s3_object = "S3Object",

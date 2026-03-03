@@ -9,11 +9,11 @@ pub const InstanceIdentity = struct {
     /// A description of an EC2 instance that is generated when the instance is
     /// launched and exposed to the instance via the instance metadata service in
     /// the form of a JSON representation of an object.
-    document: ?[]const u8,
+    document: ?[]const u8 = null,
 
     /// A signature which can be used to verify the accuracy and authenticity of the
     /// information provided in the instance identity document.
-    signature: ?[]const u8,
+    signature: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .document = "document",

@@ -1,17 +1,17 @@
 /// Information about the MediaConnect flow attached to the device.
 pub const InputDeviceMediaConnectSettings = struct {
     /// The ARN of the MediaConnect flow.
-    flow_arn: ?[]const u8,
+    flow_arn: ?[]const u8 = null,
 
     /// The ARN for the role that MediaLive assumes to access the attached flow and
     /// secret.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The ARN of the secret used to encrypt the stream.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     /// The name of the MediaConnect flow source.
-    source_name: ?[]const u8,
+    source_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .flow_arn = "FlowArn",

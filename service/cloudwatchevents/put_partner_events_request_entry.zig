@@ -3,21 +3,21 @@ pub const PutPartnerEventsRequestEntry = struct {
     /// A valid JSON string. There is no other schema imposed. The JSON string may
     /// contain fields
     /// and nested subobjects.
-    detail: ?[]const u8,
+    detail: ?[]const u8 = null,
 
     /// A free-form string used to decide what fields to expect in the event detail.
-    detail_type: ?[]const u8,
+    detail_type: ?[]const u8 = null,
 
     /// Amazon Web Services resources, identified by Amazon Resource Name (ARN),
     /// which the event primarily
     /// concerns. Any number, including zero, may be present.
-    resources: ?[]const []const u8,
+    resources: ?[]const []const u8 = null,
 
     /// The event source that is generating the entry.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     /// The date and time of the event.
-    time: ?i64,
+    time: ?i64 = null,
 
     pub const json_field_names = .{
         .detail = "Detail",

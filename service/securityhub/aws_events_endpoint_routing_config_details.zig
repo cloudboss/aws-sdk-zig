@@ -4,7 +4,7 @@ const AwsEventsEndpointRoutingConfigFailoverConfigDetails = @import("aws_events_
 pub const AwsEventsEndpointRoutingConfigDetails = struct {
     /// The failover configuration for an endpoint. This includes what triggers
     /// failover and what happens when it's triggered.
-    failover_config: ?AwsEventsEndpointRoutingConfigFailoverConfigDetails,
+    failover_config: ?AwsEventsEndpointRoutingConfigFailoverConfigDetails = null,
 
     pub const json_field_names = .{
         .failover_config = "FailoverConfig",

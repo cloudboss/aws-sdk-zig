@@ -10,7 +10,7 @@ pub const ExportAssetsToS3ResponseDetails = struct {
     data_set_id: []const u8,
 
     /// Encryption configuration of the export job.
-    encryption: ?ExportServerSideEncryption,
+    encryption: ?ExportServerSideEncryption = null,
 
     /// The unique identifier for the revision associated with this export response.
     revision_id: []const u8,

@@ -32,7 +32,7 @@ pub const LustreLogCreateConfiguration = struct {
     ///
     /// * If `Level` is set to `DISABLED`, you cannot specify
     /// a destination in `Destination`.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// Sets which data repository events are logged by Amazon FSx.
     ///

@@ -8,16 +8,16 @@ const StringCondition = @import("string_condition.zig").StringCondition;
 /// outside of this range will throw invalid results.
 pub const RoutingProfileSearchCriteria = struct {
     /// A list of conditions which would be applied together with an AND condition.
-    and_conditions: ?[]const RoutingProfileSearchCriteria,
+    and_conditions: ?[]const RoutingProfileSearchCriteria = null,
 
     /// A list of conditions which would be applied together with an OR condition.
-    or_conditions: ?[]const RoutingProfileSearchCriteria,
+    or_conditions: ?[]const RoutingProfileSearchCriteria = null,
 
     /// A leaf node condition which can be used to specify a string condition.
     ///
     /// The currently supported values for `FieldName` are `associatedQueueIds`,
     /// `name`, `description`, and `resourceID`.
-    string_condition: ?StringCondition,
+    string_condition: ?StringCondition = null,
 
     pub const json_field_names = .{
         .and_conditions = "AndConditions",

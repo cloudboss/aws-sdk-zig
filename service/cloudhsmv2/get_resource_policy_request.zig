@@ -1,6 +1,6 @@
 pub const GetResourcePolicyRequest = struct {
     /// Amazon Resource Name (ARN) of the resource to which a policy is attached.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resource_arn = "ResourceArn",

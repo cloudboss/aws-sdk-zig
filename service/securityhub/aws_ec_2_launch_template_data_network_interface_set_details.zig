@@ -15,80 +15,80 @@ pub const AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails = struct {
     /// information, see
     /// [Carrier IP
     /// address](https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip) in the *Wavelength Developer Guide*.
-    associate_carrier_ip_address: ?bool,
+    associate_carrier_ip_address: ?bool = null,
 
     /// Associates a public IPv4 address with eth0 for a new network interface.
-    associate_public_ip_address: ?bool,
+    associate_public_ip_address: ?bool = null,
 
     /// Indicates whether the network interface is deleted when the instance is
     /// terminated.
-    delete_on_termination: ?bool,
+    delete_on_termination: ?bool = null,
 
     /// A description for the network interface.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The device index for the network interface attachment.
-    device_index: ?i32,
+    device_index: ?i32 = null,
 
     /// The IDs of one or more security groups.
-    groups: ?[]const []const u8,
+    groups: ?[]const []const u8 = null,
 
     /// The type of network interface.
-    interface_type: ?[]const u8,
+    interface_type: ?[]const u8 = null,
 
     /// The number of IPv4 prefixes to be automatically assigned to the network
     /// interface.
     /// You cannot use this option if you use the `Ipv4Prefixes` option.
-    ipv_4_prefix_count: ?i32,
+    ipv_4_prefix_count: ?i32 = null,
 
     /// One or more IPv4 prefixes to be assigned to the network interface. You
     /// cannot use
     /// this option if you use the `Ipv4PrefixCount` option.
-    ipv_4_prefixes: ?[]const AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails,
+    ipv_4_prefixes: ?[]const AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails = null,
 
     /// The number of IPv6 addresses to assign to a network interface. Amazon EC2
     /// automatically selects the IPv6 addresses from the subnet range. You can't
     /// use this
     /// option if you use `Ipv6Addresses`.
-    ipv_6_address_count: ?i32,
+    ipv_6_address_count: ?i32 = null,
 
     /// One or more specific IPv6 addresses from the IPv6 CIDR block range of your
     /// subnet.
     /// You can't use this option if you use `Ipv6AddressCount`.
-    ipv_6_addresses: ?[]const AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails,
+    ipv_6_addresses: ?[]const AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails = null,
 
     /// The number of IPv6 prefixes to be automatically assigned to the network
     /// interface.
     /// You cannot use this option if you use the `Ipv6Prefix` option.
-    ipv_6_prefix_count: ?i32,
+    ipv_6_prefix_count: ?i32 = null,
 
     /// One or more IPv6 prefixes to be assigned to the network interface. You
     /// cannot use
     /// this option if you use the `Ipv6PrefixCount` option.
-    ipv_6_prefixes: ?[]const AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails,
+    ipv_6_prefixes: ?[]const AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails = null,
 
     /// The index of the network card. Some instance types support multiple network
     /// cards.
     /// The primary network interface must be assigned to network card index `0`.
     /// The default
     /// is network card index `0`.
-    network_card_index: ?i32,
+    network_card_index: ?i32 = null,
 
     /// The ID of the network interface.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// The primary private IPv4 address of the network interface.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// One or more private IPv4 addresses.
-    private_ip_addresses: ?[]const AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails,
+    private_ip_addresses: ?[]const AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails = null,
 
     /// The number of secondary private IPv4 addresses to assign to a network
     /// interface.
-    secondary_private_ip_address_count: ?i32,
+    secondary_private_ip_address_count: ?i32 = null,
 
     /// The ID of the subnet for the network interface.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .associate_carrier_ip_address = "AssociateCarrierIpAddress",

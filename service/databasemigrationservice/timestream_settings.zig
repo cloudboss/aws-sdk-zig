@@ -5,7 +5,7 @@ pub const TimestreamSettings = struct {
     /// so if this
     /// value is `false`, DMS nulls out the corresponding record in the Timestream
     /// database rather than deleting it.
-    cdc_inserts_and_updates: ?bool,
+    cdc_inserts_and_updates: ?bool = null,
 
     /// Database name for the endpoint.
     database_name: []const u8,
@@ -17,7 +17,7 @@ pub const TimestreamSettings = struct {
     /// writes by default. For more information, see
     /// [Storage](https://docs.aws.amazon.com/timestream/latest/developerguide/storage.html) in the [Amazon Timestream Developer
     /// Guide](https://docs.aws.amazon.com/timestream/latest/developerguide/).
-    enable_magnetic_store_writes: ?bool,
+    enable_magnetic_store_writes: ?bool = null,
 
     /// Set this attribute to specify the default magnetic duration applied to the
     /// Amazon

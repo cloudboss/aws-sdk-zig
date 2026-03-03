@@ -7,11 +7,11 @@ const BodySectionDynamicNumericDimensionConfiguration = @import("body_section_dy
 pub const BodySectionRepeatDimensionConfiguration = struct {
     /// Describes the **Category** dataset column and constraints around the dynamic
     /// values that will be used in repeating the section contents.
-    dynamic_category_dimension_configuration: ?BodySectionDynamicCategoryDimensionConfiguration,
+    dynamic_category_dimension_configuration: ?BodySectionDynamicCategoryDimensionConfiguration = null,
 
     /// Describes the **Numeric** dataset column and constraints around the dynamic
     /// values used to repeat the contents of a section.
-    dynamic_numeric_dimension_configuration: ?BodySectionDynamicNumericDimensionConfiguration,
+    dynamic_numeric_dimension_configuration: ?BodySectionDynamicNumericDimensionConfiguration = null,
 
     pub const json_field_names = .{
         .dynamic_category_dimension_configuration = "DynamicCategoryDimensionConfiguration",

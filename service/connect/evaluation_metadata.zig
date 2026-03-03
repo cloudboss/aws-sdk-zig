@@ -7,34 +7,34 @@ const EvaluationScore = @import("evaluation_score.zig").EvaluationScore;
 /// Metadata information about a contact evaluation.
 pub const EvaluationMetadata = struct {
     /// Information related to evaluation acknowledgement.
-    acknowledgement: ?EvaluationAcknowledgement,
+    acknowledgement: ?EvaluationAcknowledgement = null,
 
     /// Information related to automated evaluation.
-    auto_evaluation: ?AutoEvaluationDetails,
+    auto_evaluation: ?AutoEvaluationDetails = null,
 
     /// The calibration session ID that this evaluation belongs to.
-    calibration_session_id: ?[]const u8,
+    calibration_session_id: ?[]const u8 = null,
 
     /// The identifier of the agent who performed the contact.
-    contact_agent_id: ?[]const u8,
+    contact_agent_id: ?[]const u8 = null,
 
     /// The identifier of the contact in this instance of Amazon Connect.
     contact_id: []const u8,
 
     /// Information about a contact participant in this evaluation.
-    contact_participant: ?EvaluationContactParticipant,
+    contact_participant: ?EvaluationContactParticipant = null,
 
     /// The Amazon Resource Name (ARN) of the user who last updated the evaluation.
     evaluator_arn: []const u8,
 
     /// Information about reviews of this evaluation.
-    review: ?EvaluationReviewMetadata,
+    review: ?EvaluationReviewMetadata = null,
 
     /// Identifier of the sampling job.
-    sampling_job_id: ?[]const u8,
+    sampling_job_id: ?[]const u8 = null,
 
     /// The overall score of the contact evaluation.
-    score: ?EvaluationScore,
+    score: ?EvaluationScore = null,
 
     pub const json_field_names = .{
         .acknowledgement = "Acknowledgement",

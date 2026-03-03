@@ -12,33 +12,33 @@ const FormStyle = @import("form_style.zig").FormStyle;
 pub const UpdateFormData = struct {
     /// The `FormCTA` object that stores the call to action configuration for the
     /// form.
-    cta: ?FormCTA,
+    cta: ?FormCTA = null,
 
     /// The type of data source to use to create the form.
-    data_type: ?FormDataTypeConfig,
+    data_type: ?FormDataTypeConfig = null,
 
     /// The configuration information for the form's fields.
-    fields: ?[]const aws.map.MapEntry(FieldConfig),
+    fields: ?[]const aws.map.MapEntry(FieldConfig) = null,
 
     /// Specifies whether to perform a create or update action on the form.
-    form_action_type: ?FormActionType,
+    form_action_type: ?FormActionType = null,
 
     /// Specifies an icon or decoration to display on the form.
-    label_decorator: ?LabelDecorator,
+    label_decorator: ?LabelDecorator = null,
 
     /// The name of the form.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The schema version of the form.
-    schema_version: ?[]const u8,
+    schema_version: ?[]const u8 = null,
 
     /// The configuration information for the visual helper elements for the form.
     /// These elements
     /// are not associated with any data.
-    sectional_elements: ?[]const aws.map.MapEntry(SectionalElement),
+    sectional_elements: ?[]const aws.map.MapEntry(SectionalElement) = null,
 
     /// The configuration for the form's style.
-    style: ?FormStyle,
+    style: ?FormStyle = null,
 
     pub const json_field_names = .{
         .cta = "cta",

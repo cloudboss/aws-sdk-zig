@@ -13,19 +13,19 @@ pub const ApplicationSettingsResource = struct {
     /// The settings for the AWS Lambda function to invoke by default as a code hook
     /// for campaigns in the application. You can use this hook to customize
     /// segments that are used by campaigns in the application.
-    campaign_hook: ?CampaignHook,
+    campaign_hook: ?CampaignHook = null,
 
     /// The default sending limits for journeys in the application. These limits
     /// apply to each journey for the application but can be overridden, on a per
     /// journey basis, with the JourneyLimits resource.
-    journey_limits: ?ApplicationSettingsJourneyLimits,
+    journey_limits: ?ApplicationSettingsJourneyLimits = null,
 
     /// The date and time, in ISO 8601 format, when the application's settings were
     /// last modified.
-    last_modified_date: ?[]const u8,
+    last_modified_date: ?[]const u8 = null,
 
     /// The default sending limits for campaigns in the application.
-    limits: ?CampaignLimits,
+    limits: ?CampaignLimits = null,
 
     /// The default quiet time for campaigns in the application. Quiet time is a
     /// specific time range when messages aren't sent to endpoints, if all the
@@ -42,7 +42,7 @@ pub const ApplicationSettingsResource = struct {
     ///
     /// If any of the preceding conditions isn't met, the endpoint will receive
     /// messages from a campaign or journey, even if quiet time is enabled.
-    quiet_time: ?QuietTime,
+    quiet_time: ?QuietTime = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

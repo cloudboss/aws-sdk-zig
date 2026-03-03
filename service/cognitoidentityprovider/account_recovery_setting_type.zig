@@ -13,7 +13,7 @@ pub const AccountRecoverySettingType = struct {
     /// whether users should fall back to a second delivery method, and whether
     /// passwords should
     /// only be reset by administrators.
-    recovery_mechanisms: ?[]const RecoveryOptionType,
+    recovery_mechanisms: ?[]const RecoveryOptionType = null,
 
     pub const json_field_names = .{
         .recovery_mechanisms = "RecoveryMechanisms",

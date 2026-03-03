@@ -13,19 +13,19 @@ const GroupConfigurationStatus = @import("group_configuration_status.zig").Group
 /// groups](https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html).
 pub const GroupConfiguration = struct {
     /// The configuration currently associated with the group and in effect.
-    configuration: ?[]const GroupConfigurationItem,
+    configuration: ?[]const GroupConfigurationItem = null,
 
     /// If present, the reason why a request to update the group configuration
     /// failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// If present, the new configuration that is in the process of being applied to
     /// the
     /// group.
-    proposed_configuration: ?[]const GroupConfigurationItem,
+    proposed_configuration: ?[]const GroupConfigurationItem = null,
 
     /// The current status of an attempt to update the group configuration.
-    status: ?GroupConfigurationStatus,
+    status: ?GroupConfigurationStatus = null,
 
     pub const json_field_names = .{
         .configuration = "Configuration",

@@ -5,10 +5,10 @@ const CustomRoutingAcceleratorStatus = @import("custom_routing_accelerator_statu
 /// Attributes of a custom routing accelerator.
 pub const CustomRoutingAccelerator = struct {
     /// The Amazon Resource Name (ARN) of the custom routing accelerator.
-    accelerator_arn: ?[]const u8,
+    accelerator_arn: ?[]const u8 = null,
 
     /// The date and time that the accelerator was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The Domain Name System (DNS) name that Global Accelerator creates that
     /// points to an accelerator's static IPv4 addresses.
@@ -27,33 +27,33 @@ pub const CustomRoutingAccelerator = struct {
     /// For more information about the default DNS name, see [
     /// Support for DNS addressing in Global
     /// Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/dns-addressing-custom-domains.dns-addressing.html) in the *Global Accelerator Developer Guide*.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// Indicates whether the accelerator is enabled. The value is true or false.
     /// The default value is true.
     ///
     /// If the value is set to true, the accelerator cannot be deleted. If set to
     /// false, accelerator can be deleted.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The IP address type that an accelerator supports. For a custom routing
     /// accelerator, the value must be IPV4.
-    ip_address_type: ?IpAddressType,
+    ip_address_type: ?IpAddressType = null,
 
     /// The static IP addresses that Global Accelerator associates with the
     /// accelerator.
-    ip_sets: ?[]const IpSet,
+    ip_sets: ?[]const IpSet = null,
 
     /// The date and time that the accelerator was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the accelerator. The name must contain only alphanumeric
     /// characters or
     /// hyphens (-), and must not begin or end with a hyphen.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Describes the deployment status of the accelerator.
-    status: ?CustomRoutingAcceleratorStatus,
+    status: ?CustomRoutingAcceleratorStatus = null,
 
     pub const json_field_names = .{
         .accelerator_arn = "AcceleratorArn",

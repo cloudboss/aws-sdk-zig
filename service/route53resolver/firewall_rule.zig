@@ -18,21 +18,21 @@ pub const FirewallRule = struct {
     ///
     /// * `BLOCK` - Disallow the request. If this is specified, additional handling
     ///   details are provided in the rule's `BlockResponse` setting.
-    action: ?Action,
+    action: ?Action = null,
 
     /// The DNS record's type. This determines the format of the record value that
     /// you provided in `BlockOverrideDomain`. Used for the rule action `BLOCK` with
     /// a `BlockResponse` setting of `OVERRIDE`.
-    block_override_dns_type: ?BlockOverrideDnsType,
+    block_override_dns_type: ?BlockOverrideDnsType = null,
 
     /// The custom DNS record to send back in response to the query. Used for the
     /// rule action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
-    block_override_domain: ?[]const u8,
+    block_override_domain: ?[]const u8 = null,
 
     /// The recommended amount of time, in seconds, for the DNS resolver or web
     /// browser to cache the provided override record. Used for the rule action
     /// `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
-    block_override_ttl: ?i32,
+    block_override_ttl: ?i32 = null,
 
     /// The way that you want DNS Firewall to block the request. Used for the rule
     /// action setting `BLOCK`.
@@ -45,7 +45,7 @@ pub const FirewallRule = struct {
     ///
     /// * `OVERRIDE` - Provide a custom override in the response. This option
     ///   requires custom handling details in the rule's `BlockOverride*` settings.
-    block_response: ?BlockResponse,
+    block_response: ?BlockResponse = null,
 
     /// The confidence threshold for DNS Firewall Advanced. You must provide this
     /// value when you create a DNS Firewall Advanced rule. The confidence
@@ -59,17 +59,17 @@ pub const FirewallRule = struct {
     ///
     /// * `HIGH`: Detects only the most well corroborated threats with a low rate of
     ///   false positives.
-    confidence_threshold: ?ConfidenceThreshold,
+    confidence_threshold: ?ConfidenceThreshold = null,
 
     /// The date and time that the rule was created, in Unix time format and
     /// Coordinated Universal Time (UTC).
-    creation_time: ?[]const u8,
+    creation_time: ?[]const u8 = null,
 
     /// A unique string defined by you to identify the request. This allows you to
     /// retry failed requests
     /// without the risk of executing the operation twice. This can be any unique
     /// string, for example, a timestamp.
-    creator_request_id: ?[]const u8,
+    creator_request_id: ?[]const u8 = null,
 
     /// The type of the DNS Firewall Advanced rule. Valid values are:
     ///
@@ -81,10 +81,10 @@ pub const FirewallRule = struct {
     ///   attackers to exfiltrate data from the client by using the DNS tunnel
     ///   without
     /// making a network connection to the client.
-    dns_threat_protection: ?DnsThreatProtection,
+    dns_threat_protection: ?DnsThreatProtection = null,
 
     /// The ID of the domain list that's used in the rule.
-    firewall_domain_list_id: ?[]const u8,
+    firewall_domain_list_id: ?[]const u8 = null,
 
     /// How you want the the rule to evaluate DNS redirection in the DNS redirection
     /// chain, such as CNAME or DNAME.
@@ -97,25 +97,25 @@ pub const FirewallRule = struct {
     /// redirection chain. You don't need to add the subsequent domains in the
     /// domain in the redirection list to
     /// the domain list.
-    firewall_domain_redirection_action: ?FirewallDomainRedirectionAction,
+    firewall_domain_redirection_action: ?FirewallDomainRedirectionAction = null,
 
     /// The unique identifier of the Firewall rule group of the rule.
-    firewall_rule_group_id: ?[]const u8,
+    firewall_rule_group_id: ?[]const u8 = null,
 
     /// ID of the DNS Firewall Advanced rule.
-    firewall_threat_protection_id: ?[]const u8,
+    firewall_threat_protection_id: ?[]const u8 = null,
 
     /// The date and time that the rule was last modified, in Unix time format and
     /// Coordinated Universal Time (UTC).
-    modification_time: ?[]const u8,
+    modification_time: ?[]const u8 = null,
 
     /// The name of the rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The priority of the rule in the rule group. This value must be unique within
     /// the rule group. DNS Firewall processes the rules in a rule group by order of
     /// priority, starting from the lowest setting.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The DNS query type you want the rule to evaluate. Allowed values are;
     ///
@@ -152,7 +152,7 @@ pub const FirewallRule = struct {
     /// example, TYPE28. For more information, see
     /// [List of DNS record
     /// types](https://en.wikipedia.org/wiki/List_of_DNS_record_types).
-    qtype: ?[]const u8,
+    qtype: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

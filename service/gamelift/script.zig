@@ -10,17 +10,17 @@ pub const Script = struct {
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A descriptive label that is associated with a script. Script names do not
     /// need to be unique.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Node.js version used for execution of your Realtime script. The valid
     /// values are
     /// `10.x | 24.x`. By default, `NodeJsVersion` is `10.x`.
     /// This value cannot be updated later.
-    node_js_version: ?[]const u8,
+    node_js_version: ?[]const u8 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
@@ -28,15 +28,15 @@ pub const Script = struct {
     /// identifies it. ARNs are unique across all Regions. In a GameLift script ARN,
     /// the resource ID matches the
     /// *ScriptId* value.
-    script_arn: ?[]const u8,
+    script_arn: ?[]const u8 = null,
 
     /// A unique identifier for the Realtime script
-    script_id: ?[]const u8,
+    script_id: ?[]const u8 = null,
 
     /// The file size of the uploaded Realtime script, expressed in bytes. When
     /// files are
     /// uploaded from an S3 location, this value remains at "0".
-    size_on_disk: ?i64,
+    size_on_disk: ?i64 = null,
 
     /// The location of the Amazon S3 bucket where a zipped file containing your
     /// Realtime scripts is
@@ -50,11 +50,11 @@ pub const Script = struct {
     /// have S3 object versioning
     /// turned on, you can use the `ObjectVersion` parameter to specify an earlier
     /// version.
-    storage_location: ?S3Location,
+    storage_location: ?S3Location = null,
 
     /// Version information that is associated with a build or script. Version
     /// strings do not need to be unique.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

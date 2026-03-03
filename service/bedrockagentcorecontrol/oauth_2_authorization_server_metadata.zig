@@ -7,7 +7,7 @@ pub const Oauth2AuthorizationServerMetadata = struct {
     issuer: []const u8,
 
     /// The supported response types for the OAuth2 authorization server.
-    response_types: ?[]const []const u8,
+    response_types: ?[]const []const u8 = null,
 
     /// The token endpoint URL for the OAuth2 authorization server.
     token_endpoint: []const u8,
@@ -15,7 +15,7 @@ pub const Oauth2AuthorizationServerMetadata = struct {
     /// The authentication methods supported by the token endpoint. This specifies
     /// how clients can authenticate when requesting tokens from the authorization
     /// server.
-    token_endpoint_auth_methods: ?[]const []const u8,
+    token_endpoint_auth_methods: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .authorization_endpoint = "authorizationEndpoint",

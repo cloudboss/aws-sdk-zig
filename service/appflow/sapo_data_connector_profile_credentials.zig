@@ -4,10 +4,10 @@ const OAuthCredentials = @import("o_auth_credentials.zig").OAuthCredentials;
 /// The connector-specific profile credentials required when using SAPOData.
 pub const SAPODataConnectorProfileCredentials = struct {
     /// The SAPOData basic authentication credentials.
-    basic_auth_credentials: ?BasicAuthCredentials,
+    basic_auth_credentials: ?BasicAuthCredentials = null,
 
     /// The SAPOData OAuth type authentication credentials.
-    o_auth_credentials: ?OAuthCredentials,
+    o_auth_credentials: ?OAuthCredentials = null,
 
     pub const json_field_names = .{
         .basic_auth_credentials = "basicAuthCredentials",

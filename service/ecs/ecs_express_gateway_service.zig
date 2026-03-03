@@ -19,36 +19,36 @@ const Tag = @import("tag.zig").Tag;
 /// underlying Amazon Web Services resources.
 pub const ECSExpressGatewayService = struct {
     /// The list of active service configurations for the Express service.
-    active_configurations: ?[]const ExpressGatewayServiceConfiguration,
+    active_configurations: ?[]const ExpressGatewayServiceConfiguration = null,
 
     /// The short name or full ARN of the cluster that hosts the Express service.
-    cluster: ?[]const u8,
+    cluster: ?[]const u8 = null,
 
     /// The Unix timestamp for when the Express service was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The current deployment configuration for the Express service.
-    current_deployment: ?[]const u8,
+    current_deployment: ?[]const u8 = null,
 
     /// The ARN of the infrastructure role that manages Amazon Web Services
     /// resources for the Express
     /// service.
-    infrastructure_role_arn: ?[]const u8,
+    infrastructure_role_arn: ?[]const u8 = null,
 
     /// The ARN that identifies the Express service.
-    service_arn: ?[]const u8,
+    service_arn: ?[]const u8 = null,
 
     /// The name of the Express service.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// The current status of the Express service.
-    status: ?ExpressGatewayServiceStatus,
+    status: ?ExpressGatewayServiceStatus = null,
 
     /// The metadata applied to the Express service.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The Unix timestamp for when the Express service was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .active_configurations = "activeConfigurations",

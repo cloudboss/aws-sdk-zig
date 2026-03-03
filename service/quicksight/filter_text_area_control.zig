@@ -3,10 +3,10 @@ const TextAreaControlDisplayOptions = @import("text_area_control_display_options
 /// A control to display a text box that is used to enter multiple entries.
 pub const FilterTextAreaControl = struct {
     /// The delimiter that is used to separate the lines in text.
-    delimiter: ?[]const u8,
+    delimiter: ?[]const u8 = null,
 
     /// The display options of a control.
-    display_options: ?TextAreaControlDisplayOptions,
+    display_options: ?TextAreaControlDisplayOptions = null,
 
     /// The ID of the `FilterTextAreaControl`.
     filter_control_id: []const u8,

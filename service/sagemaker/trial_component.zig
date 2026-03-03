@@ -15,68 +15,68 @@ const Tag = @import("tag.zig").Tag;
 /// [Search](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html) API.
 pub const TrialComponent = struct {
     /// Who created the trial component.
-    created_by: ?UserContext,
+    created_by: ?UserContext = null,
 
     /// When the component was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The name of the component as displayed. If `DisplayName` isn't specified,
     /// `TrialComponentName` is displayed.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// When the component ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The input artifacts of the component.
-    input_artifacts: ?[]const aws.map.MapEntry(TrialComponentArtifact),
+    input_artifacts: ?[]const aws.map.MapEntry(TrialComponentArtifact) = null,
 
-    last_modified_by: ?UserContext,
+    last_modified_by: ?UserContext = null,
 
     /// When the component was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the lineage group resource.
-    lineage_group_arn: ?[]const u8,
+    lineage_group_arn: ?[]const u8 = null,
 
-    metadata_properties: ?MetadataProperties,
+    metadata_properties: ?MetadataProperties = null,
 
     /// The metrics for the component.
-    metrics: ?[]const TrialComponentMetricSummary,
+    metrics: ?[]const TrialComponentMetricSummary = null,
 
     /// The output artifacts of the component.
-    output_artifacts: ?[]const aws.map.MapEntry(TrialComponentArtifact),
+    output_artifacts: ?[]const aws.map.MapEntry(TrialComponentArtifact) = null,
 
     /// The hyperparameters of the component.
-    parameters: ?[]const aws.map.MapEntry(TrialComponentParameterValue),
+    parameters: ?[]const aws.map.MapEntry(TrialComponentParameterValue) = null,
 
     /// An array of the parents of the component. A parent is a trial the component
     /// is associated with and the experiment the trial is part of. A component
     /// might not have any parents.
-    parents: ?[]const Parent,
+    parents: ?[]const Parent = null,
 
     /// The name of the experiment run.
-    run_name: ?[]const u8,
+    run_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) and job type of the source of the component.
-    source: ?TrialComponentSource,
+    source: ?TrialComponentSource = null,
 
     /// Details of the source of the component.
-    source_detail: ?TrialComponentSourceDetail,
+    source_detail: ?TrialComponentSourceDetail = null,
 
     /// When the component started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
-    status: ?TrialComponentStatus,
+    status: ?TrialComponentStatus = null,
 
     /// The list of tags that are associated with the component. You can use
     /// [Search](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html) API to search on the tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The Amazon Resource Name (ARN) of the trial component.
-    trial_component_arn: ?[]const u8,
+    trial_component_arn: ?[]const u8 = null,
 
     /// The name of the trial component.
-    trial_component_name: ?[]const u8,
+    trial_component_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_by = "CreatedBy",

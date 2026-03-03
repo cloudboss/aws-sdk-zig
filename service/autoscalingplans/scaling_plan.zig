@@ -10,7 +10,7 @@ pub const ScalingPlan = struct {
     application_source: ApplicationSource,
 
     /// The Unix time stamp when the scaling plan was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The scaling instructions.
     scaling_instructions: []const ScalingInstruction,
@@ -42,10 +42,10 @@ pub const ScalingPlan = struct {
     status_code: ScalingPlanStatusCode,
 
     /// A simple message about the current status of the scaling plan.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The Unix time stamp when the scaling plan entered the current status.
-    status_start_time: ?i64,
+    status_start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .application_source = "ApplicationSource",

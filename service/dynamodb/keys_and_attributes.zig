@@ -17,11 +17,11 @@ pub const KeysAndAttributes = struct {
     /// Conditional
     /// Parameters](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    attributes_to_get: ?[]const []const u8,
+    attributes_to_get: ?[]const []const u8 = null,
 
     /// The consistency of a read operation. If set to `true`, then a strongly
     /// consistent read is used; otherwise, an eventually consistent read is used.
-    consistent_read: ?bool,
+    consistent_read: ?bool = null,
 
     /// One or more substitution tokens for attribute names in an expression. The
     /// following
@@ -64,7 +64,7 @@ pub const KeysAndAttributes = struct {
     /// For more information on expression attribute names, see [Accessing Item
     /// Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_names: ?[]const aws.map.StringMapEntry,
+    expression_attribute_names: ?[]const aws.map.StringMapEntry = null,
 
     /// The primary key attribute values that define the items and the attributes
     /// associated
@@ -84,7 +84,7 @@ pub const KeysAndAttributes = struct {
     /// For more information, see [Accessing Item
     /// Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    projection_expression: ?[]const u8,
+    projection_expression: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes_to_get = "AttributesToGet",

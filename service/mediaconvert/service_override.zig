@@ -3,17 +3,17 @@
 /// Support.
 pub const ServiceOverride = struct {
     /// Details about the service override that MediaConvert has applied.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The name of the setting that MediaConvert has applied an override to.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current value of the service override that MediaConvert has applied.
-    override_value: ?[]const u8,
+    override_value: ?[]const u8 = null,
 
     /// The value of the setting that you configured, prior to any overrides that
     /// MediaConvert has applied.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .message = "Message",

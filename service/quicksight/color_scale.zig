@@ -10,7 +10,7 @@ pub const ColorScale = struct {
     colors: []const DataColor,
 
     /// Determines the color that is applied to null values.
-    null_value_color: ?DataColor,
+    null_value_color: ?DataColor = null,
 
     pub const json_field_names = .{
         .color_fill_type = "ColorFillType",

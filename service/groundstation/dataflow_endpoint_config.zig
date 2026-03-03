@@ -4,7 +4,7 @@ pub const DataflowEndpointConfig = struct {
     dataflow_endpoint_name: []const u8,
 
     /// Region of a dataflow endpoint.
-    dataflow_endpoint_region: ?[]const u8,
+    dataflow_endpoint_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dataflow_endpoint_name = "dataflowEndpointName",

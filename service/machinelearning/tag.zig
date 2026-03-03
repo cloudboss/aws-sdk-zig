@@ -2,12 +2,12 @@
 pub const Tag = struct {
     /// A unique identifier for the tag. Valid characters include Unicode letters,
     /// digits, white space, _, ., /, =, +, -, %, and @.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// An optional string, typically used to describe or define the tag. Valid
     /// characters include Unicode letters, digits, white space, _, ., /, =, +, -,
     /// %, and @.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

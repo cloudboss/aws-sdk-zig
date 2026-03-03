@@ -6,7 +6,7 @@ const ManagementType = @import("management_type.zig").ManagementType;
 pub const FargateDetails = struct {
     /// Runtime coverage issues identified for the resource running on Amazon Web
     /// Services Fargate.
-    issues: ?[]const []const u8,
+    issues: ?[]const []const u8 = null,
 
     /// Indicates how the GuardDuty security agent is managed for this resource.
     ///
@@ -18,7 +18,7 @@ pub const FargateDetails = struct {
     ///
     /// The `MANUAL` status doesn't apply to the Amazon Web Services Fargate (Amazon
     /// ECS only) woprkloads.
-    management_type: ?ManagementType,
+    management_type: ?ManagementType = null,
 
     pub const json_field_names = .{
         .issues = "Issues",

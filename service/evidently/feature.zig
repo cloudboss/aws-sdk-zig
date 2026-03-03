@@ -23,10 +23,10 @@ pub const Feature = struct {
     ///
     /// If you omit `defaultVariation`, the first variation listed in the
     /// `variations` structure is used as the default variation.
-    default_variation: ?[]const u8,
+    default_variation: ?[]const u8 = null,
 
     /// The description of the feature.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A set of key-value pairs that specify users who should always be served a
     /// specific variation of a feature. Each key specifies a user using their user
@@ -36,10 +36,10 @@ pub const Feature = struct {
     /// For the override to be successful, the value of the key must match the
     /// `entityId` used in the
     /// [EvaluateFeature](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html) operation.
-    entity_overrides: ?[]const aws.map.StringMapEntry,
+    entity_overrides: ?[]const aws.map.StringMapEntry = null,
 
     /// An array of structures that define the evaluation rules for the feature.
-    evaluation_rules: ?[]const EvaluationRule,
+    evaluation_rules: ?[]const EvaluationRule = null,
 
     /// If this value is `ALL_RULES`, the traffic allocation specified by any
     /// ongoing launches or experiments is being used. If this is
@@ -53,13 +53,13 @@ pub const Feature = struct {
     name: []const u8,
 
     /// The name or ARN of the project that contains the feature.
-    project: ?[]const u8,
+    project: ?[]const u8 = null,
 
     /// The current state of the feature.
     status: FeatureStatus,
 
     /// The list of tag keys and values associated with this feature.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Defines the type of value used to define the different feature variations.
     /// For more information, see [Variation

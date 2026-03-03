@@ -17,7 +17,7 @@ pub const S3ManifestConfig = struct {
     /// Specifies the object version ID of the manifest that you want DataSync to
     /// use.
     /// If you don't set this, DataSync uses the latest version of the object.
-    manifest_object_version_id: ?[]const u8,
+    manifest_object_version_id: ?[]const u8 = null,
 
     /// Specifies the Amazon Resource Name (ARN) of the S3 bucket where you're
     /// hosting your

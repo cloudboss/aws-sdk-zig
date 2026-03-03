@@ -23,17 +23,17 @@ pub const DistributionConfig = struct {
     ///
     /// A complex type that contains information about CNAMEs (alternate domain
     /// names), if any, for this distribution.
-    aliases: ?Aliases,
+    aliases: ?Aliases = null,
 
     /// To use this field for a multi-tenant distribution, use a connection group
     /// instead. For more information, see
     /// [ConnectionGroup](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ConnectionGroup.html).
     ///
     /// ID of the Anycast static IP list that is associated with the distribution.
-    anycast_ip_list_id: ?[]const u8,
+    anycast_ip_list_id: ?[]const u8 = null,
 
     /// A complex type that contains zero or more `CacheBehavior` elements.
-    cache_behaviors: ?CacheBehaviors,
+    cache_behaviors: ?CacheBehaviors = null,
 
     /// A unique value (for example, a date-time stamp) that ensures that the
     /// request can't be replayed.
@@ -51,12 +51,12 @@ pub const DistributionConfig = struct {
     comment: []const u8,
 
     /// The distribution's connection function association.
-    connection_function_association: ?ConnectionFunctionAssociation,
+    connection_function_association: ?ConnectionFunctionAssociation = null,
 
     /// This field specifies whether the connection mode is through a standard
     /// distribution (direct) or a multi-tenant distribution with distribution
     /// tenants (tenant-only).
-    connection_mode: ?ConnectionMode,
+    connection_mode: ?ConnectionMode = null,
 
     /// This field only supports standard distributions. You can't specify this
     /// field for multi-tenant distributions. For more information, see [Unsupported
@@ -65,7 +65,7 @@ pub const DistributionConfig = struct {
     ///
     /// The identifier of a continuous deployment policy. For more information, see
     /// `CreateContinuousDeploymentPolicy`.
-    continuous_deployment_policy_id: ?[]const u8,
+    continuous_deployment_policy_id: ?[]const u8 = null,
 
     /// A complex type that controls the following:
     ///
@@ -75,7 +75,7 @@ pub const DistributionConfig = struct {
     ///
     /// For more information about custom error pages, see [Customizing Error
     /// Responses](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html) in the *Amazon CloudFront Developer Guide*.
-    custom_error_responses: ?CustomErrorResponses,
+    custom_error_responses: ?CustomErrorResponses = null,
 
     /// A complex type that describes the default cache behavior if you don't
     /// specify a `CacheBehavior` element or if files don't match any of the values
@@ -109,7 +109,7 @@ pub const DistributionConfig = struct {
     /// For more information about the default root object, see [Specify a default
     /// root
     /// object](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html) in the *Amazon CloudFront Developer Guide*.
-    default_root_object: ?[]const u8,
+    default_root_object: ?[]const u8 = null,
 
     /// From this field, you can enable or disable the selected distribution.
     enabled: bool,
@@ -127,7 +127,7 @@ pub const DistributionConfig = struct {
     /// migration to allow the viewer to switch networks without losing connection.
     /// For more information about connection migration, see [Connection
     /// Migration](https://www.rfc-editor.org/rfc/rfc9000.html#name-connection-migration) at RFC 9000. For more information about supported TLSv1.3 ciphers, see [Supported protocols and ciphers between viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html).
-    http_version: ?HttpVersion,
+    http_version: ?HttpVersion = null,
 
     /// To use this field for a multi-tenant distribution, use a connection group
     /// instead. For more information, see
@@ -166,18 +166,18 @@ pub const DistributionConfig = struct {
     /// Services Integration or with another DNS service, you don't need to make any
     /// changes. A CNAME record will route traffic to your distribution regardless
     /// of the IP address format of the viewer request.
-    is_ipv6_enabled: ?bool,
+    is_ipv6_enabled: ?bool = null,
 
     /// A complex type that controls whether access logs are written for the
     /// distribution.
     ///
     /// For more information about logging, see [Access
     /// Logs](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html) in the *Amazon CloudFront Developer Guide*.
-    logging: ?LoggingConfig,
+    logging: ?LoggingConfig = null,
 
     /// A complex type that contains information about origin groups for this
     /// distribution.
-    origin_groups: ?OriginGroups,
+    origin_groups: ?OriginGroups = null,
 
     /// A complex type that contains information about origins for this
     /// distribution.
@@ -201,11 +201,11 @@ pub const DistributionConfig = struct {
     /// For more information about price classes, see [Choosing the Price Class for
     /// a CloudFront
     /// Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html) in the *Amazon CloudFront Developer Guide*. For information about CloudFront pricing, including how price classes (such as Price Class 100) map to CloudFront regions, see [Amazon CloudFront Pricing](http://aws.amazon.com/cloudfront/pricing/).
-    price_class: ?PriceClass,
+    price_class: ?PriceClass = null,
 
     /// A complex type that identifies ways in which you want to restrict
     /// distribution of your content.
-    restrictions: ?Restrictions,
+    restrictions: ?Restrictions = null,
 
     /// This field only supports standard distributions. You can't specify this
     /// field for multi-tenant distributions. For more information, see [Unsupported
@@ -215,7 +215,7 @@ pub const DistributionConfig = struct {
     /// A Boolean that indicates whether this is a staging distribution. When this
     /// value is `true`, this is a staging distribution. When this value is `false`,
     /// this is not a staging distribution.
-    staging: ?bool,
+    staging: ?bool = null,
 
     /// This field only supports multi-tenant distributions. You can't specify this
     /// field for standard distributions. For more information, see [Unsupported
@@ -223,14 +223,14 @@ pub const DistributionConfig = struct {
     /// CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas) in the *Amazon CloudFront Developer Guide*.
     ///
     /// A distribution tenant configuration.
-    tenant_config: ?TenantConfig,
+    tenant_config: ?TenantConfig = null,
 
     /// A complex type that determines the distribution's SSL/TLS configuration for
     /// communicating with viewers.
-    viewer_certificate: ?ViewerCertificate,
+    viewer_certificate: ?ViewerCertificate = null,
 
     /// The distribution's viewer mTLS configuration.
-    viewer_mtls_config: ?ViewerMtlsConfig,
+    viewer_mtls_config: ?ViewerMtlsConfig = null,
 
     /// Multi-tenant distributions only support WAF V2 web ACLs.
     ///
@@ -248,5 +248,5 @@ pub const DistributionConfig = struct {
     /// custom error page when a request is blocked. For more information about WAF,
     /// see the [WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).
-    web_acl_id: ?[]const u8,
+    web_acl_id: ?[]const u8 = null,
 };

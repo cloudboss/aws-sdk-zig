@@ -10,12 +10,12 @@ pub const GitConfiguration = struct {
     /// The field where the repository event that will start the pipeline is
     /// specified as
     /// pull requests.
-    pull_request: ?[]const GitPullRequestFilter,
+    pull_request: ?[]const GitPullRequestFilter = null,
 
     /// The field where the repository event that will start the pipeline, such as
     /// pushing
     /// Git tags, is specified with details.
-    push: ?[]const GitPushFilter,
+    push: ?[]const GitPushFilter = null,
 
     /// The name of the pipeline source action where the trigger configuration, such
     /// as Git

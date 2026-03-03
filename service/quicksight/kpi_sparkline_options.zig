@@ -5,16 +5,16 @@ const KPISparklineType = @import("kpi_sparkline_type.zig").KPISparklineType;
 /// visibility of the sparkline of a KPI visual.
 pub const KPISparklineOptions = struct {
     /// The color of the sparkline.
-    color: ?[]const u8,
+    color: ?[]const u8 = null,
 
     /// The tooltip visibility of the sparkline.
-    tooltip_visibility: ?Visibility,
+    tooltip_visibility: ?Visibility = null,
 
     /// The type of the sparkline.
     @"type": KPISparklineType,
 
     /// The visibility of the sparkline.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .color = "Color",

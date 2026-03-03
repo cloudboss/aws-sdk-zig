@@ -5,7 +5,7 @@ pub const PlacementSpecification = struct {
     instance_count: i32,
 
     /// The unique identifier of the UltraServer where instances should be placed.
-    ultra_server_id: ?[]const u8,
+    ultra_server_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .instance_count = "InstanceCount",

@@ -4,9 +4,9 @@ const ResourceCostCalculation = @import("resource_cost_calculation.zig").Resourc
 /// Contains the details of an Aurora DB cluster storage.
 pub const AuroraDbClusterStorage = struct {
     /// The Aurora DB cluster storage configuration used for recommendations.
-    configuration: ?AuroraDbClusterStorageConfiguration,
+    configuration: ?AuroraDbClusterStorageConfiguration = null,
 
-    cost_calculation: ?ResourceCostCalculation,
+    cost_calculation: ?ResourceCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

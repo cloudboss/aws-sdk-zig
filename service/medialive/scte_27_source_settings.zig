@@ -6,7 +6,7 @@ pub const Scte27SourceSettings = struct {
     /// caption selector, use this field to
     /// provide the language to consider when translating the image-based source to
     /// text.
-    ocr_language: ?Scte27OcrLanguage,
+    ocr_language: ?Scte27OcrLanguage = null,
 
     /// The pid field is used in conjunction with the caption selector languageCode
     /// field as follows:
@@ -17,7 +17,7 @@ pub const Scte27SourceSettings = struct {
     /// PID that happens to be.
     /// - Omit PID and omit Language: Valid only if source is DVB-Sub that is being
     /// passed through; all languages will be passed through.
-    pid: ?i32,
+    pid: ?i32 = null,
 
     pub const json_field_names = .{
         .ocr_language = "OcrLanguage",

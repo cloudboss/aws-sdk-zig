@@ -14,7 +14,7 @@ pub const StreamDescription = struct {
     ///
     /// * `KMS`: Use server-side encryption on the records in the stream
     /// using a customer-managed Amazon Web Services KMS key.
-    encryption_type: ?EncryptionType,
+    encryption_type: ?EncryptionType = null,
 
     /// Represents the current enhanced monitoring settings of the stream.
     enhanced_monitoring: []const EnhancedMetrics,
@@ -44,7 +44,7 @@ pub const StreamDescription = struct {
     ///
     /// * Master key owned by Kinesis Data Streams:
     /// `alias/aws/kinesis`
-    key_id: ?[]const u8,
+    key_id: ?[]const u8 = null,
 
     /// The current retention period, in hours. Minimum value of 24. Maximum value
     /// of
@@ -64,7 +64,7 @@ pub const StreamDescription = struct {
     /// Currently, in
     /// Kinesis Data Streams, you can choose between an **on-demand** capacity mode
     /// and a **provisioned** capacity mode for your data streams.
-    stream_mode_details: ?StreamModeDetails,
+    stream_mode_details: ?StreamModeDetails = null,
 
     /// The name of the stream being described.
     stream_name: []const u8,

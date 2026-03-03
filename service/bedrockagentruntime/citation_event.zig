@@ -5,13 +5,13 @@ const RetrievedReference = @import("retrieved_reference.zig").RetrievedReference
 /// A citation event.
 pub const CitationEvent = struct {
     /// The citation.
-    citation: ?Citation,
+    citation: ?Citation = null,
 
     /// The generated response to the citation event.
-    generated_response_part: ?GeneratedResponsePart,
+    generated_response_part: ?GeneratedResponsePart = null,
 
     /// The retrieved references of the citation event.
-    retrieved_references: ?[]const RetrievedReference,
+    retrieved_references: ?[]const RetrievedReference = null,
 
     pub const json_field_names = .{
         .citation = "citation",

@@ -22,7 +22,7 @@ pub const OffPeakWindow = struct {
     /// you specify 11:00 P.M. UTC as a start time, the end time will automatically
     /// be set to
     /// 9:00 A.M.
-    window_start_time: ?WindowStartTime,
+    window_start_time: ?WindowStartTime = null,
 
     pub const json_field_names = .{
         .window_start_time = "WindowStartTime",

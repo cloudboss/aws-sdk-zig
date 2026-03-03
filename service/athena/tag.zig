@@ -22,14 +22,14 @@ pub const Tag = struct {
     /// use letters and numbers representable in UTF-8, and the following
     /// characters: + - = . _
     /// : / @. Tag keys are case-sensitive and must be unique per resource.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// A tag value. The tag value length is from 0 to 256 Unicode characters in
     /// UTF-8. You
     /// can use letters and numbers representable in UTF-8, and the following
     /// characters: + - =
     /// . _ : / @. Tag values are case-sensitive.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

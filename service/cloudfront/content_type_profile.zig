@@ -9,5 +9,5 @@ pub const ContentTypeProfile = struct {
     format: Format,
 
     /// The profile ID for a field-level encryption content type-profile mapping.
-    profile_id: ?[]const u8,
+    profile_id: ?[]const u8 = null,
 };

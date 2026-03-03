@@ -7,48 +7,48 @@ const Elevation = @import("elevation.zig").Elevation;
 /// Data describing a contact.
 pub const ContactData = struct {
     /// UUID of a contact.
-    contact_id: ?[]const u8,
+    contact_id: ?[]const u8 = null,
 
     /// Status of a contact.
-    contact_status: ?ContactStatus,
+    contact_status: ?ContactStatus = null,
 
     /// End time of a contact in UTC.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The ephemeris that determines antenna pointing for the contact.
-    ephemeris: ?EphemerisResponseData,
+    ephemeris: ?EphemerisResponseData = null,
 
     /// Error message of a contact.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// Name of a ground station.
-    ground_station: ?[]const u8,
+    ground_station: ?[]const u8 = null,
 
     /// Maximum elevation angle of a contact.
-    maximum_elevation: ?Elevation,
+    maximum_elevation: ?Elevation = null,
 
     /// ARN of a mission profile.
-    mission_profile_arn: ?[]const u8,
+    mission_profile_arn: ?[]const u8 = null,
 
     /// Amount of time after a contact ends that you’d like to receive a CloudWatch
     /// event indicating the pass has finished.
-    post_pass_end_time: ?i64,
+    post_pass_end_time: ?i64 = null,
 
     /// Amount of time prior to contact start you’d like to receive a CloudWatch
     /// event indicating an upcoming pass.
-    pre_pass_start_time: ?i64,
+    pre_pass_start_time: ?i64 = null,
 
     /// Region of a contact.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// ARN of a satellite.
-    satellite_arn: ?[]const u8,
+    satellite_arn: ?[]const u8 = null,
 
     /// Start time of a contact in UTC.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Tags assigned to a contact.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Projected time in UTC your satellite will set below the [receive
     /// mask](https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html).
@@ -56,7 +56,7 @@ pub const ContactData = struct {
     /// contacts and the ephemeris that was active during contact execution for
     /// completed contacts. *This field is not present for contacts with a
     /// `SCHEDULING` or `SCHEDULED` status.*
-    visibility_end_time: ?i64,
+    visibility_end_time: ?i64 = null,
 
     /// Projected time in UTC your satellite will rise above the [receive
     /// mask](https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html).
@@ -64,7 +64,7 @@ pub const ContactData = struct {
     /// contacts and the ephemeris that was active during contact execution for
     /// completed contacts. *This field is not present for contacts with a
     /// `SCHEDULING` or `SCHEDULED` status.*
-    visibility_start_time: ?i64,
+    visibility_start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .contact_id = "contactId",

@@ -10,7 +10,7 @@ pub const SnsAction = struct {
     /// if there are configuration errors. For example, specified SNS topic has been
     /// deleted or the role lacks necessary permissions to call the `sns:Publish`
     /// API.
-    action_failure_policy: ?ActionFailurePolicy,
+    action_failure_policy: ?ActionFailurePolicy = null,
 
     /// The encoding to use for the email within the Amazon SNS notification. The
     /// default value is `UTF-8`. Use `BASE64` if you need to preserve all special

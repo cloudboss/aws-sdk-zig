@@ -7,21 +7,21 @@ const Regex = @import("regex.zig").Regex;
 /// RegexPatternSetReferenceStatement.
 pub const RegexPatternSet = struct {
     /// The Amazon Resource Name (ARN) of the entity.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A description of the set that helps with identification.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier for the set. This ID is returned in the responses to
     /// create and list commands. You provide it to operations like update and
     /// delete.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the set. You cannot change the name after you create the set.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The regular expression patterns in the set.
-    regular_expression_list: ?[]const Regex,
+    regular_expression_list: ?[]const Regex = null,
 
     pub const json_field_names = .{
         .arn = "ARN",

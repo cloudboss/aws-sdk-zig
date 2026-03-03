@@ -5,7 +5,7 @@ const ExecutionEngineType = @import("execution_engine_type.zig").ExecutionEngine
 /// execution, for example, an Amazon EMR cluster.
 pub const ExecutionEngineConfig = struct {
     /// The execution role ARN required for the notebook execution.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The unique identifier of the execution engine. For an Amazon EMR cluster,
     /// this
@@ -19,11 +19,11 @@ pub const ExecutionEngineConfig = struct {
     /// Amazon EC2 Security Groups for Amazon EMR
     /// Notebooks](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html) in the
     /// *EMR Management Guide*.
-    master_instance_security_group_id: ?[]const u8,
+    master_instance_security_group_id: ?[]const u8 = null,
 
     /// The type of execution engine. A value of `EMR` specifies an Amazon EMR
     /// cluster.
-    @"type": ?ExecutionEngineType,
+    @"type": ?ExecutionEngineType = null,
 
     pub const json_field_names = .{
         .execution_role_arn = "ExecutionRoleArn",

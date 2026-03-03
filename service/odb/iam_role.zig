@@ -6,19 +6,19 @@ const IamRoleStatus = @import("iam_role_status.zig").IamRoleStatus;
 pub const IamRole = struct {
     /// The Amazon Web Services integration configuration settings for the Amazon
     /// Web Services Identity and Access Management (IAM) service role.
-    aws_integration: ?SupportedAwsIntegration,
+    aws_integration: ?SupportedAwsIntegration = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and
     /// Access Management (IAM) service role.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// The current status of the Amazon Web Services Identity and Access Management
     /// (IAM) service role.
-    status: ?IamRoleStatus,
+    status: ?IamRoleStatus = null,
 
     /// Additional information about the current status of the Amazon Web Services
     /// Identity and Access Management (IAM) service role, if applicable.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_integration = "awsIntegration",

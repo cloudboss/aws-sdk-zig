@@ -15,33 +15,33 @@ pub const LogGroup = struct {
     /// and
     /// [ListTagsForResource](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html). The permissions for those three actions require the ARN
     /// version that doesn't include a trailing `:*`.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The creation time of the log group, expressed as the number of milliseconds
     /// after Jan
     /// 1, 1970 00:00:00 UTC.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Displays whether this log group has a protection policy, or whether it had
     /// one in the
     /// past. For more information, see
     /// [PutDataProtectionPolicy](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html).
-    data_protection_status: ?DataProtectionStatus,
+    data_protection_status: ?DataProtectionStatus = null,
 
     /// Indicates whether deletion protection is enabled for this log group. When
     /// enabled,
     /// deletion protection blocks all deletion operations until it is explicitly
     /// disabled.
-    deletion_protection_enabled: ?bool,
+    deletion_protection_enabled: ?bool = null,
 
     /// Displays all the properties that this log group has inherited from
     /// account-level
     /// settings.
-    inherited_properties: ?[]const InheritedProperty,
+    inherited_properties: ?[]const InheritedProperty = null,
 
     /// The Amazon Resource Name (ARN) of the KMS key to use when
     /// encrypting log data.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the log group. This version of the ARN
     /// doesn't
@@ -56,7 +56,7 @@ pub const LogGroup = struct {
     ///
     /// * In IAM policies, when specifying permissions for
     ///   [TagResource](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html), [UntagResource](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html), and [ListTagsForResource](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html).
-    log_group_arn: ?[]const u8,
+    log_group_arn: ?[]const u8 = null,
 
     /// This specifies the log group class for this log group. There are three
     /// classes:
@@ -78,18 +78,18 @@ pub const LogGroup = struct {
     /// Access classes,
     /// see [Log
     /// classes](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)
-    log_group_class: ?LogGroupClass,
+    log_group_class: ?LogGroupClass = null,
 
     /// The name of the log group.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     /// The number of metric filters.
-    metric_filter_count: ?i32,
+    metric_filter_count: ?i32 = null,
 
-    retention_in_days: ?i32,
+    retention_in_days: ?i32 = null,
 
     /// The number of bytes stored.
-    stored_bytes: ?i64,
+    stored_bytes: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

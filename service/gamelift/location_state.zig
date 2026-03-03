@@ -33,10 +33,10 @@ const FleetStatus = @import("fleet_status.zig").FleetStatus;
 pub const LocationState = struct {
     /// The fleet location, expressed as an Amazon Web Services Region code such as
     /// `us-west-2`.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The life-cycle status of a fleet location.
-    status: ?FleetStatus,
+    status: ?FleetStatus = null,
 
     pub const json_field_names = .{
         .location = "Location",

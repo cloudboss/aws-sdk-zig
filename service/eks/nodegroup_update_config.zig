@@ -10,13 +10,13 @@ pub const NodegroupUpdateConfig = struct {
     /// Nodes are
     /// updated in parallel. This value or `maxUnavailablePercentage` is required to
     /// have a value.The maximum number is 100.
-    max_unavailable: ?i32,
+    max_unavailable: ?i32 = null,
 
     /// The maximum percentage of nodes unavailable during a version update. This
     /// percentage
     /// of nodes are updated in parallel, up to 100 nodes at once. This value or
     /// `maxUnavailable` is required to have a value.
-    max_unavailable_percentage: ?i32,
+    max_unavailable_percentage: ?i32 = null,
 
     /// The configuration for the behavior to follow during a node group version
     /// update of
@@ -39,7 +39,7 @@ pub const NodegroupUpdateConfig = struct {
     /// is useful in scenarios where you are constrained to resources or costs (for
     /// example,
     /// with hardware accelerators such as GPUs).
-    update_strategy: ?NodegroupUpdateStrategies,
+    update_strategy: ?NodegroupUpdateStrategies = null,
 
     pub const json_field_names = .{
         .max_unavailable = "maxUnavailable",

@@ -14,42 +14,42 @@ const AssetBundleImportJobVPCConnectionOverrideParameters = @import("asset_bundl
 pub const AssetBundleImportJobOverrideParameters = struct {
     /// A list of overrides for any `Analysis` resources that are present in the
     /// asset bundle that is imported.
-    analyses: ?[]const AssetBundleImportJobAnalysisOverrideParameters,
+    analyses: ?[]const AssetBundleImportJobAnalysisOverrideParameters = null,
 
     /// A list of overrides for any `Dashboard` resources that are present in the
     /// asset bundle that is imported.
-    dashboards: ?[]const AssetBundleImportJobDashboardOverrideParameters,
+    dashboards: ?[]const AssetBundleImportJobDashboardOverrideParameters = null,
 
     /// A list of overrides for any `DataSet` resources that are present in the
     /// asset
     /// bundle that is imported.
-    data_sets: ?[]const AssetBundleImportJobDataSetOverrideParameters,
+    data_sets: ?[]const AssetBundleImportJobDataSetOverrideParameters = null,
 
     /// A list of overrides for any `DataSource` resources that are present in the
     /// asset bundle that is imported.
-    data_sources: ?[]const AssetBundleImportJobDataSourceOverrideParameters,
+    data_sources: ?[]const AssetBundleImportJobDataSourceOverrideParameters = null,
 
     /// A list of overrides for any `Folder` resources that are present in the asset
     /// bundle that is imported.
-    folders: ?[]const AssetBundleImportJobFolderOverrideParameters,
+    folders: ?[]const AssetBundleImportJobFolderOverrideParameters = null,
 
     /// A list of overrides for any `RefreshSchedule` resources that are present in
     /// the asset bundle that is imported.
-    refresh_schedules: ?[]const AssetBundleImportJobRefreshScheduleOverrideParameters,
+    refresh_schedules: ?[]const AssetBundleImportJobRefreshScheduleOverrideParameters = null,
 
     /// An optional structure that configures resource ID overrides to be applied
     /// within the
     /// import job.
-    resource_id_override_configuration: ?AssetBundleImportJobResourceIdOverrideConfiguration,
+    resource_id_override_configuration: ?AssetBundleImportJobResourceIdOverrideConfiguration = null,
 
     /// A list of overrides for any `Theme` resources that are present in the asset
     /// bundle that is imported.
-    themes: ?[]const AssetBundleImportJobThemeOverrideParameters,
+    themes: ?[]const AssetBundleImportJobThemeOverrideParameters = null,
 
     /// A list of overrides for any `VPCConnection` resources that are present in
     /// the
     /// asset bundle that is imported.
-    vpc_connections: ?[]const AssetBundleImportJobVPCConnectionOverrideParameters,
+    vpc_connections: ?[]const AssetBundleImportJobVPCConnectionOverrideParameters = null,
 
     pub const json_field_names = .{
         .analyses = "Analyses",

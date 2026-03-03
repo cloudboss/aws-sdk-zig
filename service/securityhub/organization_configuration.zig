@@ -24,19 +24,19 @@ pub const OrganizationConfiguration = struct {
     /// configuration policy and associate it with the root or specific
     /// organizational units (OUs). New accounts will
     /// inherit the policy from the root or their assigned OU.
-    configuration_type: ?OrganizationConfigurationConfigurationType,
+    configuration_type: ?OrganizationConfigurationConfigurationType = null,
 
     /// Describes whether central configuration could be enabled as the
     /// `ConfigurationType` for the
     /// organization. If your `ConfigurationType` is local configuration, then the
     /// value of `Status`
     /// is always `ENABLED`.
-    status: ?OrganizationConfigurationStatus,
+    status: ?OrganizationConfigurationStatus = null,
 
     /// Provides an explanation if the value of `Status` is equal to `FAILED` when
     /// `ConfigurationType`
     /// is equal to `CENTRAL`.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration_type = "ConfigurationType",

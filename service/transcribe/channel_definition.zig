@@ -12,7 +12,7 @@ pub const ChannelDefinition = struct {
     /// Specify the speaker you want to define. Omitting this parameter is
     /// equivalent to
     /// specifying both participants.
-    participant_role: ?ParticipantRole,
+    participant_role: ?ParticipantRole = null,
 
     pub const json_field_names = .{
         .channel_id = "ChannelId",

@@ -8,7 +8,7 @@ const DataLakeUpdateStatus = @import("data_lake_update_status.zig").DataLakeUpda
 pub const DataLakeResource = struct {
     /// Retrieves the status of the `CreateDatalake` API call for an account in
     /// Amazon Security Lake.
-    create_status: ?DataLakeStatus,
+    create_status: ?DataLakeStatus = null,
 
     /// The Amazon Resource Name (ARN) created by you to provide to the subscriber.
     /// For more information about ARNs and how to use them in policies, see the
@@ -17,23 +17,23 @@ pub const DataLakeResource = struct {
     data_lake_arn: []const u8,
 
     /// Provides encryption details of Amazon Security Lake object.
-    encryption_configuration: ?DataLakeEncryptionConfiguration,
+    encryption_configuration: ?DataLakeEncryptionConfiguration = null,
 
     /// Provides lifecycle details of Amazon Security Lake object.
-    lifecycle_configuration: ?DataLakeLifecycleConfiguration,
+    lifecycle_configuration: ?DataLakeLifecycleConfiguration = null,
 
     /// The Amazon Web Services Regions where Security Lake is enabled.
     region: []const u8,
 
     /// Provides replication details of Amazon Security Lake object.
-    replication_configuration: ?DataLakeReplicationConfiguration,
+    replication_configuration: ?DataLakeReplicationConfiguration = null,
 
     /// The ARN for the Amazon Security Lake Amazon S3 bucket.
-    s_3_bucket_arn: ?[]const u8,
+    s_3_bucket_arn: ?[]const u8 = null,
 
     /// The status of the last `UpdateDataLake `or `DeleteDataLake` API
     /// request.
-    update_status: ?DataLakeUpdateStatus,
+    update_status: ?DataLakeUpdateStatus = null,
 
     pub const json_field_names = .{
         .create_status = "createStatus",

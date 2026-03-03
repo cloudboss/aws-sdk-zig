@@ -3,13 +3,13 @@
 /// proactive customer support.
 pub const EmergencyContact = struct {
     /// Additional notes regarding the contact.
-    contact_notes: ?[]const u8,
+    contact_notes: ?[]const u8 = null,
 
     /// The email address for the contact.
     email_address: []const u8,
 
     /// The phone number for the contact.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .contact_notes = "ContactNotes",

@@ -9,31 +9,31 @@ const ElicitationCodeHookInvocationSetting = @import("elicitation_code_hook_invo
 pub const SlotCaptureSetting = struct {
     /// A list of conditional branches to evaluate after the slot value is
     /// captured.
-    capture_conditional: ?ConditionalSpecification,
+    capture_conditional: ?ConditionalSpecification = null,
 
     /// Specifies the next step that the bot runs when the slot value is
     /// captured before the code hook times out.
-    capture_next_step: ?DialogState,
+    capture_next_step: ?DialogState = null,
 
-    capture_response: ?ResponseSpecification,
+    capture_response: ?ResponseSpecification = null,
 
     /// Code hook called after Amazon Lex successfully captures a
     /// slot value.
-    code_hook: ?DialogCodeHookInvocationSetting,
+    code_hook: ?DialogCodeHookInvocationSetting = null,
 
     /// Code hook called when Amazon Lex doesn't capture a slot
     /// value.
-    elicitation_code_hook: ?ElicitationCodeHookInvocationSetting,
+    elicitation_code_hook: ?ElicitationCodeHookInvocationSetting = null,
 
     /// A list of conditional branches to evaluate when the slot value isn't
     /// captured.
-    failure_conditional: ?ConditionalSpecification,
+    failure_conditional: ?ConditionalSpecification = null,
 
     /// Specifies the next step that the bot runs when the slot value code
     /// is not recognized.
-    failure_next_step: ?DialogState,
+    failure_next_step: ?DialogState = null,
 
-    failure_response: ?ResponseSpecification,
+    failure_response: ?ResponseSpecification = null,
 
     pub const json_field_names = .{
         .capture_conditional = "captureConditional",

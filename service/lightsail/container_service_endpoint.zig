@@ -7,13 +7,13 @@ pub const ContainerServiceEndpoint = struct {
     /// The name of the container entry of the deployment that the endpoint
     /// configuration applies
     /// to.
-    container_name: ?[]const u8,
+    container_name: ?[]const u8 = null,
 
     /// The port of the specified container to which traffic is forwarded to.
-    container_port: ?i32,
+    container_port: ?i32 = null,
 
     /// An object that describes the health check configuration of the container.
-    health_check: ?ContainerServiceHealthCheckConfig,
+    health_check: ?ContainerServiceHealthCheckConfig = null,
 
     pub const json_field_names = .{
         .container_name = "containerName",

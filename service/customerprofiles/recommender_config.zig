@@ -7,7 +7,7 @@ pub const RecommenderConfig = struct {
     events_config: EventsConfig,
 
     /// How often the recommender should retrain its model with new data.
-    training_frequency: ?i32,
+    training_frequency: ?i32 = null,
 
     pub const json_field_names = .{
         .events_config = "EventsConfig",

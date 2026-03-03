@@ -10,7 +10,7 @@ const UncompressedTelecine = @import("uncompressed_telecine.zig").UncompressedTe
 /// value UNCOMPRESSED.
 pub const UncompressedSettings = struct {
     /// The four character code for the uncompressed video.
-    fourcc: ?UncompressedFourcc,
+    fourcc: ?UncompressedFourcc = null,
 
     /// Use the Framerate setting to specify the frame rate for this output. If you
     /// want to keep the same frame rate as the input video, choose Follow source.
@@ -18,7 +18,7 @@ pub const UncompressedSettings = struct {
     /// dropdown list or choose Custom. The framerates shown in the dropdown list
     /// are decimal approximations of fractions. If you choose Custom, specify your
     /// frame rate as a fraction.
-    framerate_control: ?UncompressedFramerateControl,
+    framerate_control: ?UncompressedFramerateControl = null,
 
     /// Choose the method that you want MediaConvert to use when increasing or
     /// decreasing your video's frame rate. For numerically simple conversions, such
@@ -36,7 +36,7 @@ pub const UncompressedSettings = struct {
     /// add, or otherwise change the frame count from your input to your output.
     /// Note that since the frame count is maintained, the duration of your output
     /// will become shorter at higher frame rates and longer at lower frame rates.
-    framerate_conversion_algorithm: ?UncompressedFramerateConversionAlgorithm,
+    framerate_conversion_algorithm: ?UncompressedFramerateConversionAlgorithm = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -45,7 +45,7 @@ pub const UncompressedSettings = struct {
     /// use the console for transcode jobs that use frame rate conversion, provide
     /// the value as a decimal number for Framerate. In this example, specify
     /// 23.976.
-    framerate_denominator: ?i32,
+    framerate_denominator: ?i32 = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -53,11 +53,11 @@ pub const UncompressedSettings = struct {
     /// this example, use 24000 for the value of FramerateNumerator. When you use
     /// the console for transcode jobs that use frame rate conversion, provide the
     /// value as a decimal number for Framerate. In this example, specify 23.976.
-    framerate_numerator: ?i32,
+    framerate_numerator: ?i32 = null,
 
     /// Optional. Choose the scan line type for this output. If you don't specify a
     /// value, MediaConvert will create a progressive output.
-    interlace_mode: ?UncompressedInterlaceMode,
+    interlace_mode: ?UncompressedInterlaceMode = null,
 
     /// Use this setting for interlaced outputs, when your output frame rate is half
     /// of your input frame rate. In this situation, choose Optimized interlacing to
@@ -71,21 +71,21 @@ pub const UncompressedSettings = struct {
     /// Required settings: To use optimized interlacing, you must set Telecine to
     /// None or Soft. You can't use optimized interlacing for hard telecine outputs.
     /// You must also set Interlace mode to a value other than Progressive.
-    scan_type_conversion_mode: ?UncompressedScanTypeConversionMode,
+    scan_type_conversion_mode: ?UncompressedScanTypeConversionMode = null,
 
     /// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
     /// second (fps). Enable slow PAL to create a 25 fps output by relabeling the
     /// video frames and resampling your audio. Note that enabling this setting will
     /// slightly reduce the duration of your video. Related settings: You must also
     /// set Framerate to 25.
-    slow_pal: ?UncompressedSlowPal,
+    slow_pal: ?UncompressedSlowPal = null,
 
     /// When you do frame rate conversion from 23.976 frames per second (fps) to
     /// 29.97 fps, and your output scan type is interlaced, you can optionally
     /// enable hard telecine to create a smoother picture. When you keep the default
     /// value, None, MediaConvert does a standard frame rate conversion to 29.97
     /// without doing anything with the field polarity to create a smoother picture.
-    telecine: ?UncompressedTelecine,
+    telecine: ?UncompressedTelecine = null,
 
     pub const json_field_names = .{
         .fourcc = "Fourcc",

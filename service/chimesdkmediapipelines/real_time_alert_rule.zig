@@ -6,13 +6,13 @@ const RealTimeAlertRuleType = @import("real_time_alert_rule_type.zig").RealTimeA
 /// Specifies the words or phrases that trigger an alert.
 pub const RealTimeAlertRule = struct {
     /// Specifies the issue detection settings for a real-time alert rule.
-    issue_detection_configuration: ?IssueDetectionConfiguration,
+    issue_detection_configuration: ?IssueDetectionConfiguration = null,
 
     /// Specifies the settings for matching the keywords in a real-time alert rule.
-    keyword_match_configuration: ?KeywordMatchConfiguration,
+    keyword_match_configuration: ?KeywordMatchConfiguration = null,
 
     /// Specifies the settings for predicting sentiment in a real-time alert rule.
-    sentiment_configuration: ?SentimentConfiguration,
+    sentiment_configuration: ?SentimentConfiguration = null,
 
     /// The type of alert rule.
     @"type": RealTimeAlertRuleType,

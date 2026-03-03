@@ -3,15 +3,15 @@ const ResourceSetStatus = @import("resource_set_status.zig").ResourceSetStatus;
 /// A set of resources to include in a policy.
 pub const ResourceSet = struct {
     /// A description of the resource set.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier for the resource set. This ID is returned in the
     /// responses to create and list commands. You provide it to operations like
     /// update and delete.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The last time that the resource set was changed.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The descriptive name of the resource set. You can't change the name of a
     /// resource set after you create it.
@@ -25,7 +25,7 @@ pub const ResourceSet = struct {
     ///   they can't edit or delete the resource set. Existing protections stay in
     ///   place. Any new resource that come into scope of the resource set won't be
     ///   protected.
-    resource_set_status: ?ResourceSetStatus,
+    resource_set_status: ?ResourceSetStatus = null,
 
     /// Determines the resources that can be associated to the resource set.
     /// Depending on
@@ -51,7 +51,7 @@ pub const ResourceSet = struct {
     /// operation fails with an `InvalidTokenException`. If this happens, retrieve
     /// the resource set again to get a current copy of it with a new token. Reapply
     /// your changes as needed, then try the operation again using the new token.
-    update_token: ?[]const u8,
+    update_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

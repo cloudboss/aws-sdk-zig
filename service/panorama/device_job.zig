@@ -3,19 +3,19 @@ const JobType = @import("job_type.zig").JobType;
 /// A job that runs on a device.
 pub const DeviceJob = struct {
     /// When the job was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The ID of the target device.
-    device_id: ?[]const u8,
+    device_id: ?[]const u8 = null,
 
     /// The name of the target device
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// The job's ID.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The job's type.
-    job_type: ?JobType,
+    job_type: ?JobType = null,
 
     pub const json_field_names = .{
         .created_time = "CreatedTime",

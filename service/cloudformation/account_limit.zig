@@ -15,8 +15,8 @@ pub const AccountLimit = struct {
     ///
     /// Values: `ConcurrentResourcesLimit` | `StackLimit` |
     /// `StackOutputsLimit`
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The value that's associated with the account limit name.
-    value: ?i32,
+    value: ?i32 = null,
 };

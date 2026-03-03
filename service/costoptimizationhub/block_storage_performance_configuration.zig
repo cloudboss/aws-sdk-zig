@@ -2,10 +2,10 @@
 /// current and recommended resource configuration for a recommendation.
 pub const BlockStoragePerformanceConfiguration = struct {
     /// The number of I/O operations per second.
-    iops: ?f64,
+    iops: ?f64 = null,
 
     /// The throughput that the volume supports.
-    throughput: ?f64,
+    throughput: ?f64 = null,
 
     pub const json_field_names = .{
         .iops = "iops",

@@ -6,21 +6,21 @@ const Tag = @import("tag.zig").Tag;
 pub const ClusterSecurityGroup = struct {
     /// The name of the cluster security group to which the operation was
     /// applied.
-    cluster_security_group_name: ?[]const u8,
+    cluster_security_group_name: ?[]const u8 = null,
 
     /// A description of the security group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A list of EC2 security groups that are permitted to access clusters
     /// associated with
     /// this cluster security group.
-    ec2_security_groups: ?[]const EC2SecurityGroup,
+    ec2_security_groups: ?[]const EC2SecurityGroup = null,
 
     /// A list of IP ranges (CIDR blocks) that are permitted to access clusters
     /// associated
     /// with this cluster security group.
-    ip_ranges: ?[]const IPRange,
+    ip_ranges: ?[]const IPRange = null,
 
     /// The list of tags for the cluster security group.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

@@ -14,7 +14,7 @@ pub const ActionGroupSummary = struct {
     action_group_state: ActionGroupState,
 
     /// The description of the action group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time at which the action group was last updated.
     updated_at: i64,

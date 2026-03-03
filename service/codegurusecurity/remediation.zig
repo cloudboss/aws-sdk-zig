@@ -5,11 +5,11 @@ const SuggestedFix = @import("suggested_fix.zig").SuggestedFix;
 pub const Remediation = struct {
     /// An object that contains information about the recommended course of action
     /// to remediate a finding.
-    recommendation: ?Recommendation,
+    recommendation: ?Recommendation = null,
 
     /// A list of `SuggestedFix` objects. Each object contains information about a
     /// suggested code fix to remediate the finding.
-    suggested_fixes: ?[]const SuggestedFix,
+    suggested_fixes: ?[]const SuggestedFix = null,
 
     pub const json_field_names = .{
         .recommendation = "recommendation",

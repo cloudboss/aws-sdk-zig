@@ -10,7 +10,7 @@ pub const EventBridgeRuleTemplateSummary = struct {
     created_at: i64,
 
     /// A resource's optional description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The number of targets configured to send matching events.
     event_target_count: i32,
@@ -25,13 +25,13 @@ pub const EventBridgeRuleTemplateSummary = struct {
     /// start with `aws-`
     id: []const u8,
 
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// A resource's name. Names must be unique within the scope of a resource type
     /// in a specific region.
     name: []const u8,
 
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

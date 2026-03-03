@@ -5,10 +5,10 @@ const LambdaFunctionMemoryMetricStatistic = @import("lambda_function_memory_metr
 /// recommendation option.
 pub const LambdaFunctionMemoryProjectedMetric = struct {
     /// The name of the projected utilization metric.
-    name: ?LambdaFunctionMemoryMetricName,
+    name: ?LambdaFunctionMemoryMetricName = null,
 
     /// The statistic of the projected utilization metric.
-    statistic: ?LambdaFunctionMemoryMetricStatistic,
+    statistic: ?LambdaFunctionMemoryMetricStatistic = null,
 
     /// The values of the projected utilization metrics.
     value: f64 = 0,

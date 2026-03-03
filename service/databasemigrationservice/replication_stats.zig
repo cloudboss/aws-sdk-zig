@@ -6,22 +6,22 @@ pub const ReplicationStats = struct {
 
     /// The date the replication was started either with a fresh start or a target
     /// reload.
-    fresh_start_date: ?i64,
+    fresh_start_date: ?i64 = null,
 
     /// The date the replication full load was finished.
-    full_load_finish_date: ?i64,
+    full_load_finish_date: ?i64 = null,
 
     /// The percent complete for the full load serverless replication.
     full_load_progress_percent: i32 = 0,
 
     /// The date the replication full load was started.
-    full_load_start_date: ?i64,
+    full_load_start_date: ?i64 = null,
 
     /// The date the replication is scheduled to start.
-    start_date: ?i64,
+    start_date: ?i64 = null,
 
     /// The date the replication was stopped.
-    stop_date: ?i64,
+    stop_date: ?i64 = null,
 
     /// The number of errors that have occured for this replication.
     tables_errored: i32 = 0,

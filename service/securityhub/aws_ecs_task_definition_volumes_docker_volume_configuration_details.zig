@@ -4,23 +4,23 @@ const aws = @import("aws");
 pub const AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails = struct {
     /// Whether to create the Docker volume automatically if it does not already
     /// exist.
-    autoprovision: ?bool,
+    autoprovision: ?bool = null,
 
     /// The Docker volume driver to use.
-    driver: ?[]const u8,
+    driver: ?[]const u8 = null,
 
     /// A map of Docker driver-specific options that are passed through.
-    driver_opts: ?[]const aws.map.StringMapEntry,
+    driver_opts: ?[]const aws.map.StringMapEntry = null,
 
     /// Custom metadata to add to the Docker volume.
-    labels: ?[]const aws.map.StringMapEntry,
+    labels: ?[]const aws.map.StringMapEntry = null,
 
     /// The scope for the Docker volume that determines its lifecycle. Docker
     /// volumes that are scoped to a task are provisioned
     /// automatically when the task starts and destroyed when the task stops. Docker
     /// volumes that are shared persist after the task stops. Valid values are
     /// `shared` or `task`.
-    scope: ?[]const u8,
+    scope: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .autoprovision = "Autoprovision",

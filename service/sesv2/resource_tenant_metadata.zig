@@ -2,16 +2,16 @@
 /// resource.
 pub const ResourceTenantMetadata = struct {
     /// The date and time when the resource was associated with the tenant.
-    associated_timestamp: ?i64,
+    associated_timestamp: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// A unique identifier for the tenant associated with the resource.
-    tenant_id: ?[]const u8,
+    tenant_id: ?[]const u8 = null,
 
     /// The name of the tenant associated with the resource.
-    tenant_name: ?[]const u8,
+    tenant_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .associated_timestamp = "AssociatedTimestamp",

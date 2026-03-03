@@ -8,7 +8,7 @@ const FacetAttributeType = @import("facet_attribute_type.zig").FacetAttributeTyp
 /// A typed link attribute definition.
 pub const TypedLinkAttributeDefinition = struct {
     /// The default value of the attribute (if configured).
-    default_value: ?TypedAttributeValue,
+    default_value: ?TypedAttributeValue = null,
 
     /// Whether the attribute is mutable or not.
     is_immutable: bool = false,
@@ -20,7 +20,7 @@ pub const TypedLinkAttributeDefinition = struct {
     required_behavior: RequiredAttributeBehavior,
 
     /// Validation rules that are attached to the attribute definition.
-    rules: ?[]const aws.map.MapEntry(Rule),
+    rules: ?[]const aws.map.MapEntry(Rule) = null,
 
     /// The type of the attribute.
     @"type": FacetAttributeType,

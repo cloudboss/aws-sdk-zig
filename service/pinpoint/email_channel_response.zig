@@ -2,51 +2,51 @@
 /// an application.
 pub const EmailChannelResponse = struct {
     /// The unique identifier for the application that the email channel applies to.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The [Amazon SES configuration
     /// set](https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html) that's applied to messages that are sent through the channel.
-    configuration_set: ?[]const u8,
+    configuration_set: ?[]const u8 = null,
 
     /// The date and time, in ISO 8601 format, when the email channel was enabled.
-    creation_date: ?[]const u8,
+    creation_date: ?[]const u8 = null,
 
     /// Specifies whether the email channel is enabled for the application.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The verified email address that email is sent from when you send email
     /// through the channel.
-    from_address: ?[]const u8,
+    from_address: ?[]const u8 = null,
 
     /// (Not used) This property is retained only for backward compatibility.
-    has_credential: ?bool,
+    has_credential: ?bool = null,
 
     /// (Deprecated) An identifier for the email channel. This property is retained
     /// only for backward compatibility.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the identity, verified with Amazon Simple
     /// Email Service (Amazon SES), that's used when you send email through the
     /// channel.
-    identity: ?[]const u8,
+    identity: ?[]const u8 = null,
 
     /// Specifies whether the email channel is archived.
-    is_archived: ?bool,
+    is_archived: ?bool = null,
 
     /// The user who last modified the email channel.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The date and time, in ISO 8601 format, when the email channel was last
     /// modified.
-    last_modified_date: ?[]const u8,
+    last_modified_date: ?[]const u8 = null,
 
     /// The maximum number of emails that can be sent through the channel each
     /// second.
-    messages_per_second: ?i32,
+    messages_per_second: ?i32 = null,
 
     /// The ARN of an IAM role for Amazon Pinpoint to use to send email from your
     /// campaigns or journeys through Amazon SES.
-    orchestration_sending_role_arn: ?[]const u8,
+    orchestration_sending_role_arn: ?[]const u8 = null,
 
     /// The type of messaging or notification platform for the channel. For the
     /// email channel, this value is EMAIL.
@@ -54,10 +54,10 @@ pub const EmailChannelResponse = struct {
 
     /// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
     /// Pinpoint uses to submit email-related event data for the channel.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The current version of the email channel.
-    version: ?i32,
+    version: ?i32 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

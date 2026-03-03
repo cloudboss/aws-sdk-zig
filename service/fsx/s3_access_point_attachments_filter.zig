@@ -4,10 +4,10 @@ const S3AccessPointAttachmentsFilterName = @import("s3_access_point_attachments_
 /// attachments.
 pub const S3AccessPointAttachmentsFilter = struct {
     /// The name of the filter.
-    name: ?S3AccessPointAttachmentsFilterName,
+    name: ?S3AccessPointAttachmentsFilterName = null,
 
     /// The values of the filter.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

@@ -23,7 +23,7 @@ pub const ReplicationStatusType = struct {
     /// This field contains details about any issues or progress updates related to
     /// key replication operations. It may include information about replication
     /// failures, synchronization status, or other operational details.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status = "Status",

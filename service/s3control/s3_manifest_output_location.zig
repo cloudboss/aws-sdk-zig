@@ -10,16 +10,16 @@ pub const S3ManifestOutputLocation = struct {
     bucket: []const u8,
 
     /// The Account ID that owns the bucket the generated manifest is written to.
-    expected_manifest_bucket_owner: ?[]const u8,
+    expected_manifest_bucket_owner: ?[]const u8 = null,
 
     /// Specifies what encryption should be used when the generated manifest objects
     /// are
     /// written.
-    manifest_encryption: ?GeneratedManifestEncryption,
+    manifest_encryption: ?GeneratedManifestEncryption = null,
 
     /// The format of the generated manifest.
     manifest_format: GeneratedManifestFormat,
 
     /// Prefix identifying one or more objects to which the manifest applies.
-    manifest_prefix: ?[]const u8,
+    manifest_prefix: ?[]const u8 = null,
 };

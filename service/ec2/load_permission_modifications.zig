@@ -4,8 +4,8 @@ const LoadPermissionRequest = @import("load_permission_request.zig").LoadPermiss
 /// (AFI).
 pub const LoadPermissionModifications = struct {
     /// The load permissions to add.
-    add: ?[]const LoadPermissionRequest,
+    add: ?[]const LoadPermissionRequest = null,
 
     /// The load permissions to remove.
-    remove: ?[]const LoadPermissionRequest,
+    remove: ?[]const LoadPermissionRequest = null,
 };

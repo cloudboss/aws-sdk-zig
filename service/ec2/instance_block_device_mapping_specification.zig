@@ -4,15 +4,15 @@ const EbsInstanceBlockDeviceSpecification = @import("ebs_instance_block_device_s
 pub const InstanceBlockDeviceMappingSpecification = struct {
     /// The device name. For available device names, see [Device names for
     /// volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html).
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// Parameters used to automatically set up EBS volumes when the instance is
     /// launched.
-    ebs: ?EbsInstanceBlockDeviceSpecification,
+    ebs: ?EbsInstanceBlockDeviceSpecification = null,
 
     /// Suppresses the specified device included in the block device mapping.
-    no_device: ?[]const u8,
+    no_device: ?[]const u8 = null,
 
     /// The virtual device name.
-    virtual_name: ?[]const u8,
+    virtual_name: ?[]const u8 = null,
 };

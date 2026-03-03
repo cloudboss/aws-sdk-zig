@@ -5,13 +5,13 @@ const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator
 pub const ResourceTagsCriteriaCondition = struct {
     /// The comparison operator used to evaluate the tag criteria, such as equals,
     /// not equals, or contains.
-    comparison: ?ComparisonOperator,
+    comparison: ?ComparisonOperator = null,
 
     /// The tag key to use for comparison when filtering resources.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// List of tag values to compare against when filtering resources.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .comparison = "comparison",

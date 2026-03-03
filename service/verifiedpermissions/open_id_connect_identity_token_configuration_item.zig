@@ -9,7 +9,7 @@ pub const OpenIdConnectIdentityTokenConfigurationItem = struct {
     /// The ID token audience, or client ID, claim values that you want to accept in
     /// your policy store from an OIDC identity provider. For example,
     /// `1example23456789, 2example10111213`.
-    client_ids: ?[]const []const u8,
+    client_ids: ?[]const []const u8 = null,
 
     /// The claim that determines the principal in OIDC access tokens. For example,
     /// `sub`.

@@ -10,7 +10,7 @@ const FirewallStatusValue = @import("firewall_status_value.zig").FirewallStatusV
 pub const VpcEndpointAssociationStatus = struct {
     /// The list of the Availability Zone sync states for all subnets that are
     /// defined by the firewall.
-    association_sync_state: ?[]const aws.map.MapEntry(AZSyncState),
+    association_sync_state: ?[]const aws.map.MapEntry(AZSyncState) = null,
 
     /// The readiness of the configured firewall endpoint to handle network traffic.
     status: FirewallStatusValue,

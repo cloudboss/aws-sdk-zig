@@ -7,7 +7,7 @@ pub const StateCapability = struct {
     name: []const u8,
 
     /// Describe the command capability with the properties it supports.
-    properties: ?[]const u8,
+    properties: ?[]const u8 = null,
 
     /// Version for the Amazon Web Services capability.
     version: []const u8,

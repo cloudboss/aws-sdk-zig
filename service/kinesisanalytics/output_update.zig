@@ -9,23 +9,23 @@ pub const OutputUpdate = struct {
     /// Describes the data format when records are written to the destination. For
     /// more information, see [Configuring Application
     /// Output](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
-    destination_schema_update: ?DestinationSchema,
+    destination_schema_update: ?DestinationSchema = null,
 
     /// Describes an Amazon Kinesis Firehose delivery stream as the destination for
     /// the
     /// output.
-    kinesis_firehose_output_update: ?KinesisFirehoseOutputUpdate,
+    kinesis_firehose_output_update: ?KinesisFirehoseOutputUpdate = null,
 
     /// Describes an Amazon Kinesis stream as the destination for the output.
-    kinesis_streams_output_update: ?KinesisStreamsOutputUpdate,
+    kinesis_streams_output_update: ?KinesisStreamsOutputUpdate = null,
 
     /// Describes an AWS Lambda function as the destination for the output.
-    lambda_output_update: ?LambdaOutputUpdate,
+    lambda_output_update: ?LambdaOutputUpdate = null,
 
     /// If you want to specify a different in-application stream
     /// for this output configuration, use this field to
     /// specify the new in-application stream name.
-    name_update: ?[]const u8,
+    name_update: ?[]const u8 = null,
 
     /// Identifies the specific output configuration that you want to update.
     output_id: []const u8,

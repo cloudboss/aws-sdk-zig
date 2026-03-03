@@ -6,10 +6,10 @@ const SheetControlDateTimePickerType = @import("sheet_control_date_time_picker_t
 pub const FilterDateTimePickerControl = struct {
     /// The visibility configurationof the Apply button on a
     /// `DateTimePickerControl`.
-    commit_mode: ?CommitMode,
+    commit_mode: ?CommitMode = null,
 
     /// The display options of a control.
-    display_options: ?DateTimePickerControlDisplayOptions,
+    display_options: ?DateTimePickerControlDisplayOptions = null,
 
     /// The ID of the `FilterDateTimePickerControl`.
     filter_control_id: []const u8,
@@ -26,7 +26,7 @@ pub const FilterDateTimePickerControl = struct {
     /// * `MULTI_SELECT`: The user can select multiple entries from a dropdown menu.
     ///
     /// * `SINGLE_SELECT`: The user can select a single entry from a dropdown menu.
-    @"type": ?SheetControlDateTimePickerType,
+    @"type": ?SheetControlDateTimePickerType = null,
 
     pub const json_field_names = .{
         .commit_mode = "CommitMode",

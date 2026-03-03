@@ -14,7 +14,7 @@ const SegmentationDescriptor = @import("segmentation_descriptor.zig").Segmentati
 pub const TimeSignalMessage = struct {
     /// The configurations for the SCTE-35 `segmentation_descriptor` message(s) sent
     /// with the `time_signal` message.
-    segmentation_descriptors: ?[]const SegmentationDescriptor,
+    segmentation_descriptors: ?[]const SegmentationDescriptor = null,
 
     pub const json_field_names = .{
         .segmentation_descriptors = "SegmentationDescriptors",

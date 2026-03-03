@@ -8,10 +8,10 @@ const TaxDocumentMetadata = @import("tax_document_metadata.zig").TaxDocumentMeta
 /// Your TRN information.
 pub const TaxRegistration = struct {
     /// Additional tax information associated with your TRN.
-    additional_tax_information: ?AdditionalInfoResponse,
+    additional_tax_information: ?AdditionalInfoResponse = null,
 
     /// The email address to receive VAT invoices.
-    certified_email_id: ?[]const u8,
+    certified_email_id: ?[]const u8 = null,
 
     /// The legal address associated with your TRN registration.
     legal_address: Address,
@@ -30,14 +30,14 @@ pub const TaxRegistration = struct {
     /// specify Individual. For business-to-government (B2G), specify Government.
     /// Note that certain values may not applicable for the request country. Please
     /// refer to country specific information in API document.
-    sector: ?Sector,
+    sector: ?Sector = null,
 
     /// The status of your TRN. This can be either `Verified`, `Pending`,
     /// `Deleted`, or `Rejected`.
     status: TaxRegistrationStatus,
 
     /// The metadata for your tax document.
-    tax_document_metadatas: ?[]const TaxDocumentMetadata,
+    tax_document_metadatas: ?[]const TaxDocumentMetadata = null,
 
     pub const json_field_names = .{
         .additional_tax_information = "additionalTaxInformation",

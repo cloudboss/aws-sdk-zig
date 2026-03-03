@@ -6,10 +6,10 @@ const LastStatus = @import("last_status.zig").LastStatus;
 /// definition.
 pub const ReportStatus = struct {
     /// A timestamp that gives the date of a report delivery.
-    last_delivery: ?[]const u8,
+    last_delivery: ?[]const u8 = null,
 
     /// An enum that gives the status of a report delivery.
-    last_status: ?LastStatus,
+    last_status: ?LastStatus = null,
 
     pub const json_field_names = .{
         .last_delivery = "lastDelivery",

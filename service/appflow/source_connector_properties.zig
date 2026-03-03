@@ -19,53 +19,53 @@ const ZendeskSourceProperties = @import("zendesk_source_properties.zig").Zendesk
 /// Specifies the information that is required to query a particular connector.
 pub const SourceConnectorProperties = struct {
     /// Specifies the information that is required for querying Amplitude.
-    amplitude: ?AmplitudeSourceProperties,
+    amplitude: ?AmplitudeSourceProperties = null,
 
-    custom_connector: ?CustomConnectorSourceProperties,
+    custom_connector: ?CustomConnectorSourceProperties = null,
 
     /// Specifies the information that is required for querying Datadog.
-    datadog: ?DatadogSourceProperties,
+    datadog: ?DatadogSourceProperties = null,
 
     /// Specifies the information that is required for querying Dynatrace.
-    dynatrace: ?DynatraceSourceProperties,
+    dynatrace: ?DynatraceSourceProperties = null,
 
     /// Specifies the information that is required for querying Google Analytics.
-    google_analytics: ?GoogleAnalyticsSourceProperties,
+    google_analytics: ?GoogleAnalyticsSourceProperties = null,
 
     /// Specifies the information that is required for querying Infor Nexus.
-    infor_nexus: ?InforNexusSourceProperties,
+    infor_nexus: ?InforNexusSourceProperties = null,
 
     /// Specifies the information that is required for querying Marketo.
-    marketo: ?MarketoSourceProperties,
+    marketo: ?MarketoSourceProperties = null,
 
     /// Specifies the information that is required for querying Salesforce Pardot.
-    pardot: ?PardotSourceProperties,
+    pardot: ?PardotSourceProperties = null,
 
     /// Specifies the information that is required for querying Amazon S3.
-    s3: ?S3SourceProperties,
+    s3: ?S3SourceProperties = null,
 
     /// Specifies the information that is required for querying Salesforce.
-    salesforce: ?SalesforceSourceProperties,
+    salesforce: ?SalesforceSourceProperties = null,
 
-    sapo_data: ?SAPODataSourceProperties,
+    sapo_data: ?SAPODataSourceProperties = null,
 
     /// Specifies the information that is required for querying ServiceNow.
-    service_now: ?ServiceNowSourceProperties,
+    service_now: ?ServiceNowSourceProperties = null,
 
     /// Specifies the information that is required for querying Singular.
-    singular: ?SingularSourceProperties,
+    singular: ?SingularSourceProperties = null,
 
     /// Specifies the information that is required for querying Slack.
-    slack: ?SlackSourceProperties,
+    slack: ?SlackSourceProperties = null,
 
     /// Specifies the information that is required for querying Trend Micro.
-    trendmicro: ?TrendmicroSourceProperties,
+    trendmicro: ?TrendmicroSourceProperties = null,
 
     /// Specifies the information that is required for querying Veeva.
-    veeva: ?VeevaSourceProperties,
+    veeva: ?VeevaSourceProperties = null,
 
     /// Specifies the information that is required for querying Zendesk.
-    zendesk: ?ZendeskSourceProperties,
+    zendesk: ?ZendeskSourceProperties = null,
 
     pub const json_field_names = .{
         .amplitude = "Amplitude",

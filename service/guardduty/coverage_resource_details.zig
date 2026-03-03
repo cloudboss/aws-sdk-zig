@@ -7,17 +7,17 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 pub const CoverageResourceDetails = struct {
     /// Information about the Amazon EC2 instance assessed
     /// for runtime coverage.
-    ec_2_instance_details: ?CoverageEc2InstanceDetails,
+    ec_2_instance_details: ?CoverageEc2InstanceDetails = null,
 
     /// Information about the Amazon ECS cluster that is assessed for
     /// runtime coverage.
-    ecs_cluster_details: ?CoverageEcsClusterDetails,
+    ecs_cluster_details: ?CoverageEcsClusterDetails = null,
 
     /// EKS cluster details involved in the coverage statistics.
-    eks_cluster_details: ?CoverageEksClusterDetails,
+    eks_cluster_details: ?CoverageEksClusterDetails = null,
 
     /// The type of Amazon Web Services resource.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .ec_2_instance_details = "Ec2InstanceDetails",

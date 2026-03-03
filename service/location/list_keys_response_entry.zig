@@ -8,7 +8,7 @@ pub const ListKeysResponseEntry = struct {
     create_time: i64,
 
     /// The optional description for the API key resource.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The timestamp for when the API key resource will expire, in [ ISO
     /// 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format:

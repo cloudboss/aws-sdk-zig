@@ -7,12 +7,12 @@ pub const ConnectionStatusEventConfiguration = struct {
     /// Connection status event configuration object for enabling or disabling
     /// LoRaWAN related
     /// event topics.
-    lo_ra_wan: ?LoRaWANConnectionStatusEventNotificationConfigurations,
+    lo_ra_wan: ?LoRaWANConnectionStatusEventNotificationConfigurations = null,
 
     /// Denotes whether the wireless gateway ID connection status event topic is
     /// enabled or
     /// disabled.
-    wireless_gateway_id_event_topic: ?EventNotificationTopicStatus,
+    wireless_gateway_id_event_topic: ?EventNotificationTopicStatus = null,
 
     pub const json_field_names = .{
         .lo_ra_wan = "LoRaWAN",

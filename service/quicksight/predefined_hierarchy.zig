@@ -10,7 +10,7 @@ pub const PredefinedHierarchy = struct {
 
     /// The option that determines the drill down filters for the predefined
     /// hierarchy.
-    drill_down_filters: ?[]const DrillDownFilter,
+    drill_down_filters: ?[]const DrillDownFilter = null,
 
     /// The hierarchy ID of the predefined hierarchy.
     hierarchy_id: []const u8,

@@ -13,10 +13,10 @@ const VideoConfiguration = @import("video_configuration.zig").VideoConfiguration
 /// IngestConfigurations contains data for all tracks.
 pub const IngestConfiguration = struct {
     /// Encoder settings for audio.
-    audio: ?AudioConfiguration,
+    audio: ?AudioConfiguration = null,
 
     /// Encoder settings for video.
-    video: ?VideoConfiguration,
+    video: ?VideoConfiguration = null,
 
     pub const json_field_names = .{
         .audio = "audio",

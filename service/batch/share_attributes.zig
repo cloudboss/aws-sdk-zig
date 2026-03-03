@@ -28,7 +28,7 @@ pub const ShareAttributes = struct {
     ///
     /// The smallest supported value is 0.0001, and the largest supported value is
     /// 999.9999.
-    weight_factor: ?f32,
+    weight_factor: ?f32 = null,
 
     pub const json_field_names = .{
         .share_identifier = "shareIdentifier",

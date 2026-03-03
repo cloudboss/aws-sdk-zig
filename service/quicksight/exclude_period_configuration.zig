@@ -14,7 +14,7 @@ pub const ExcludePeriodConfiguration = struct {
     /// * `ENABLED`
     ///
     /// * `DISABLED`
-    status: ?WidgetStatus,
+    status: ?WidgetStatus = null,
 
     pub const json_field_names = .{
         .amount = "Amount",

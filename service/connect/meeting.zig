@@ -4,16 +4,16 @@ const MeetingFeaturesConfiguration = @import("meeting_features_configuration.zig
 /// A meeting created using the Amazon Chime SDK.
 pub const Meeting = struct {
     /// The media placement for the meeting.
-    media_placement: ?MediaPlacement,
+    media_placement: ?MediaPlacement = null,
 
     /// The Amazon Web Services Region in which you create the meeting.
-    media_region: ?[]const u8,
+    media_region: ?[]const u8 = null,
 
     /// The configuration settings of the features available to a meeting.
-    meeting_features: ?MeetingFeaturesConfiguration,
+    meeting_features: ?MeetingFeaturesConfiguration = null,
 
     /// The Amazon Chime SDK meeting ID.
-    meeting_id: ?[]const u8,
+    meeting_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .media_placement = "MediaPlacement",

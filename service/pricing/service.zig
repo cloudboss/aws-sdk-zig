@@ -2,7 +2,7 @@
 /// names.
 pub const Service = struct {
     /// The attributes that are available for this service.
-    attribute_names: ?[]const []const u8,
+    attribute_names: ?[]const []const u8 = null,
 
     /// The code for the Amazon Web Services service.
     service_code: []const u8,

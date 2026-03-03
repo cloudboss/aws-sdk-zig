@@ -17,7 +17,7 @@ pub const ReplicationTask = struct {
     /// "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
     ///
     /// LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
-    cdc_start_position: ?[]const u8,
+    cdc_start_position: ?[]const u8 = null,
 
     /// Indicates when you want a change data capture (CDC) operation to stop. The
     /// value can be
@@ -26,28 +26,28 @@ pub const ReplicationTask = struct {
     /// Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”
     ///
     /// Commit time example: --cdc-stop-position “commit_time:2018-02-09T12:12:12“
-    cdc_stop_position: ?[]const u8,
+    cdc_stop_position: ?[]const u8 = null,
 
     /// The last error (failure) message generated for the replication task.
-    last_failure_message: ?[]const u8,
+    last_failure_message: ?[]const u8 = null,
 
     /// The type of migration.
-    migration_type: ?MigrationTypeValue,
+    migration_type: ?MigrationTypeValue = null,
 
     /// Indicates the last checkpoint that occurred during a change data capture
     /// (CDC)
     /// operation. You can provide this value to the `CdcStartPosition` parameter to
     /// start a CDC operation that begins at that checkpoint.
-    recovery_checkpoint: ?[]const u8,
+    recovery_checkpoint: ?[]const u8 = null,
 
     /// The ARN of the replication instance.
-    replication_instance_arn: ?[]const u8,
+    replication_instance_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the replication task.
-    replication_task_arn: ?[]const u8,
+    replication_task_arn: ?[]const u8 = null,
 
     /// The date the replication task was created.
-    replication_task_creation_date: ?i64,
+    replication_task_creation_date: ?i64 = null,
 
     /// The user-assigned replication task identifier or name.
     ///
@@ -58,21 +58,21 @@ pub const ReplicationTask = struct {
     /// * First character must be a letter.
     ///
     /// * Cannot end with a hyphen or contain two consecutive hyphens.
-    replication_task_identifier: ?[]const u8,
+    replication_task_identifier: ?[]const u8 = null,
 
     /// The settings for the replication task.
-    replication_task_settings: ?[]const u8,
+    replication_task_settings: ?[]const u8 = null,
 
     /// The date the replication task is scheduled to start.
-    replication_task_start_date: ?i64,
+    replication_task_start_date: ?i64 = null,
 
     /// The statistics for the task, including elapsed time, tables loaded, and
     /// table
     /// errors.
-    replication_task_stats: ?ReplicationTaskStats,
+    replication_task_stats: ?ReplicationTaskStats = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the endpoint.
-    source_endpoint_arn: ?[]const u8,
+    source_endpoint_arn: ?[]const u8 = null,
 
     /// The status of the replication task. This response parameter can return one
     /// of the
@@ -161,7 +161,7 @@ pub const ReplicationTask = struct {
     /// primary key definitions and likely issues with database migration
     /// performance,
     /// among others.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The reason the replication task was stopped. This response parameter can
     /// return one of
@@ -202,13 +202,13 @@ pub const ReplicationTask = struct {
     /// * `"Stop Reason RECONFIGURATION_RESTART"`
     ///
     /// * `"Stop Reason RECYCLE_TASK"`
-    stop_reason: ?[]const u8,
+    stop_reason: ?[]const u8 = null,
 
     /// Table mappings specified in the task.
-    table_mappings: ?[]const u8,
+    table_mappings: ?[]const u8 = null,
 
     /// The ARN that uniquely identifies the endpoint.
-    target_endpoint_arn: ?[]const u8,
+    target_endpoint_arn: ?[]const u8 = null,
 
     /// The ARN of the replication instance to which this task is moved in response
     /// to running
@@ -216,7 +216,7 @@ pub const ReplicationTask = struct {
     /// `MoveReplicationTask`
     /// ](https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html) operation. Otherwise, this response
     /// parameter isn't a member of the `ReplicationTask` object.
-    target_replication_instance_arn: ?[]const u8,
+    target_replication_instance_arn: ?[]const u8 = null,
 
     /// Supplemental information that the task requires to migrate the data for
     /// certain source
@@ -224,7 +224,7 @@ pub const ReplicationTask = struct {
     /// Data for
     /// Task
     /// Settings](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html) in the *Database Migration Service User Guide.*
-    task_data: ?[]const u8,
+    task_data: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cdc_start_position = "CdcStartPosition",

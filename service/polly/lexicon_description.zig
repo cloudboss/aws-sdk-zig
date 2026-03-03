@@ -3,10 +3,10 @@ const LexiconAttributes = @import("lexicon_attributes.zig").LexiconAttributes;
 /// Describes the content of the lexicon.
 pub const LexiconDescription = struct {
     /// Provides lexicon metadata.
-    attributes: ?LexiconAttributes,
+    attributes: ?LexiconAttributes = null,
 
     /// Name of the lexicon.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

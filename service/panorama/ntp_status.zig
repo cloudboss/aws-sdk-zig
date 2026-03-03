@@ -3,13 +3,13 @@ const NetworkConnectionStatus = @import("network_connection_status.zig").Network
 /// Details about an NTP server connection.
 pub const NtpStatus = struct {
     /// The connection's status.
-    connection_status: ?NetworkConnectionStatus,
+    connection_status: ?NetworkConnectionStatus = null,
 
     /// The IP address of the server.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The domain name of the server.
-    ntp_server_name: ?[]const u8,
+    ntp_server_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connection_status = "ConnectionStatus",

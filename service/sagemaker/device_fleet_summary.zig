@@ -1,7 +1,7 @@
 /// Summary of the device fleet.
 pub const DeviceFleetSummary = struct {
     /// Timestamp of when the device fleet was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Amazon Resource Name (ARN) of the device fleet.
     device_fleet_arn: []const u8,
@@ -10,7 +10,7 @@ pub const DeviceFleetSummary = struct {
     device_fleet_name: []const u8,
 
     /// Timestamp of when the device fleet was last updated.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

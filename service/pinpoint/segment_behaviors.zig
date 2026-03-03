@@ -5,7 +5,7 @@ const RecencyDimension = @import("recency_dimension.zig").RecencyDimension;
 pub const SegmentBehaviors = struct {
     /// The dimension settings that are based on how recently an endpoint was
     /// active.
-    recency: ?RecencyDimension,
+    recency: ?RecencyDimension = null,
 
     pub const json_field_names = .{
         .recency = "Recency",

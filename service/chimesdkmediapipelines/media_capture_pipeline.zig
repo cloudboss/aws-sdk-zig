@@ -9,48 +9,48 @@ const MediaPipelineStatus = @import("media_pipeline_status.zig").MediaPipelineSt
 pub const MediaCapturePipeline = struct {
     /// The configuration for a specified media pipeline. `SourceType` must
     /// be `ChimeSdkMeeting`.
-    chime_sdk_meeting_configuration: ?ChimeSdkMeetingConfiguration,
+    chime_sdk_meeting_configuration: ?ChimeSdkMeetingConfiguration = null,
 
     /// The time at which the pipeline was created, in ISO 8601 format.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The ARN of the media capture pipeline
-    media_pipeline_arn: ?[]const u8,
+    media_pipeline_arn: ?[]const u8 = null,
 
     /// The ID of a media pipeline.
-    media_pipeline_id: ?[]const u8,
+    media_pipeline_id: ?[]const u8 = null,
 
     /// ARN of the destination to which the media artifacts are saved.
-    sink_arn: ?[]const u8,
+    sink_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the sink role to be used with
     /// `AwsKmsKeyId`
     /// in `SseAwsKeyManagementParams`.
-    sink_iam_role_arn: ?[]const u8,
+    sink_iam_role_arn: ?[]const u8 = null,
 
     /// Destination type to which the media artifacts are saved. You must use an S3
     /// Bucket.
-    sink_type: ?MediaPipelineSinkType,
+    sink_type: ?MediaPipelineSinkType = null,
 
     /// ARN of the source from which the media artifacts are saved.
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     /// Source type from which media artifacts are saved. You must use
     /// `ChimeMeeting`.
-    source_type: ?MediaPipelineSourceType,
+    source_type: ?MediaPipelineSourceType = null,
 
     /// An object that contains server side encryption parameters to be used by
     /// media capture
     /// pipeline. The parameters can also be used by media concatenation pipeline
     /// taking media
     /// capture pipeline as a media source.
-    sse_aws_key_management_params: ?SseAwsKeyManagementParams,
+    sse_aws_key_management_params: ?SseAwsKeyManagementParams = null,
 
     /// The status of the media pipeline.
-    status: ?MediaPipelineStatus,
+    status: ?MediaPipelineStatus = null,
 
     /// The time at which the pipeline was updated, in ISO 8601 format.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .chime_sdk_meeting_configuration = "ChimeSdkMeetingConfiguration",

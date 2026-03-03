@@ -17,7 +17,7 @@ pub const PrincipalThingObject = struct {
     /// * `NON_EXCLUSIVE_THING` - Attaches the specified principal to the specified
     ///   thing.
     /// Multiple things can be attached to the principal.
-    thing_principal_type: ?ThingPrincipalType,
+    thing_principal_type: ?ThingPrincipalType = null,
 
     pub const json_field_names = .{
         .thing_name = "thingName",

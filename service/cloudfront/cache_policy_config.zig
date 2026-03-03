@@ -23,7 +23,7 @@ const ParametersInCacheKeyAndForwardedToOrigin = @import("parameters_in_cache_ke
 pub const CachePolicyConfig = struct {
     /// A comment to describe the cache policy. The comment cannot be longer than
     /// 128 characters.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The default amount of time, in seconds, that you want objects to stay in the
     /// CloudFront cache before CloudFront sends another request to the origin to
@@ -36,7 +36,7 @@ pub const CachePolicyConfig = struct {
     /// The default value for this field is 86400 seconds (one day). If the value of
     /// `MinTTL` is more than 86400 seconds, then the default value for this field
     /// is the same as the value of `MinTTL`.
-    default_ttl: ?i64,
+    default_ttl: ?i64 = null,
 
     /// The maximum amount of time, in seconds, that objects stay in the CloudFront
     /// cache before CloudFront sends another request to the origin to see if the
@@ -48,7 +48,7 @@ pub const CachePolicyConfig = struct {
     /// The default value for this field is 31536000 seconds (one year). If the
     /// value of `MinTTL` or `DefaultTTL` is more than 31536000 seconds, then the
     /// default value for this field is the same as the value of `DefaultTTL`.
-    max_ttl: ?i64,
+    max_ttl: ?i64 = null,
 
     /// The minimum amount of time, in seconds, that you want objects to stay in the
     /// CloudFront cache before CloudFront sends another request to the origin to
@@ -63,5 +63,5 @@ pub const CachePolicyConfig = struct {
     /// The HTTP headers, cookies, and URL query strings to include in the cache
     /// key. The values included in the cache key are also included in requests that
     /// CloudFront sends to the origin.
-    parameters_in_cache_key_and_forwarded_to_origin: ?ParametersInCacheKeyAndForwardedToOrigin,
+    parameters_in_cache_key_and_forwarded_to_origin: ?ParametersInCacheKeyAndForwardedToOrigin = null,
 };

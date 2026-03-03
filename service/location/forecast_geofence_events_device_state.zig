@@ -4,7 +4,7 @@ pub const ForecastGeofenceEventsDeviceState = struct {
     position: []const f64,
 
     /// The device's speed.
-    speed: ?f64,
+    speed: ?f64 = null,
 
     pub const json_field_names = .{
         .position = "Position",

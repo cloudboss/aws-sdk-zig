@@ -31,7 +31,7 @@ pub const ECSServiceRecommendationFilter = struct {
     /// your Amazon ECS service recommendations with a tag key value of `Owner` or
     /// without any tag
     /// keys assigned.
-    name: ?ECSServiceRecommendationFilterName,
+    name: ?ECSServiceRecommendationFilterName = null,
 
     /// The value of the filter.
     ///
@@ -43,7 +43,7 @@ pub const ECSServiceRecommendationFilter = struct {
     /// * If you specify the `name` parameter as `FindingReasonCode`, specify
     /// `CPUUnderprovisioned`, `CPUOverprovisioned`,
     /// `MemoryUnderprovisioned`, or `MemoryOverprovisioned`.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

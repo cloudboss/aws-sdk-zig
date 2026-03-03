@@ -6,20 +6,20 @@ const WorkerReplacementStrategy = @import("worker_replacement_strategy.zig").Wor
 /// that were encountered.
 pub const LastUpdate = struct {
     /// The day and time of the last update on the environment.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The error that was encountered during the last update of the environment.
-    @"error": ?UpdateError,
+    @"error": ?UpdateError = null,
 
     /// The source of the last update to the environment. Includes internal
     /// processes by Amazon MWAA, such as an environment maintenance update.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     /// The status of the last update on the environment.
-    status: ?UpdateStatus,
+    status: ?UpdateStatus = null,
 
     /// The worker replacement strategy used in the last update of the environment.
-    worker_replacement_strategy: ?WorkerReplacementStrategy,
+    worker_replacement_strategy: ?WorkerReplacementStrategy = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

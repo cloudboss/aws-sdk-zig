@@ -35,14 +35,14 @@ pub const EmailContent = struct {
     /// * The length of any single line of text in the message can't exceed 1,000
     /// characters. This restriction is defined in [RFC
     /// 5321](https://tools.ietf.org/html/rfc5321).
-    raw: ?RawMessage,
+    raw: ?RawMessage = null,
 
     /// The simple email message. The message consists of a subject and a message
     /// body.
-    simple: ?Message,
+    simple: ?Message = null,
 
     /// The template to use for the email message.
-    template: ?Template,
+    template: ?Template = null,
 
     pub const json_field_names = .{
         .raw = "Raw",

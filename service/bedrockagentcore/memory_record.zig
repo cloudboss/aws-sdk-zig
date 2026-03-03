@@ -18,7 +18,7 @@ pub const MemoryRecord = struct {
     memory_strategy_id: []const u8,
 
     /// A map of metadata key-value pairs associated with a memory record.
-    metadata: ?[]const aws.map.MapEntry(MetadataValue),
+    metadata: ?[]const aws.map.MapEntry(MetadataValue) = null,
 
     /// The namespaces associated with this memory record. Namespaces help organize
     /// and categorize memory records.

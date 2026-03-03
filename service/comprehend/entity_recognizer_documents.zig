@@ -12,7 +12,7 @@ pub const EntityRecognizerDocuments = struct {
     /// separate document.
     /// Use this option when you are processing many short documents, such as text
     /// messages.
-    input_format: ?InputFormat,
+    input_format: ?InputFormat = null,
 
     /// Specifies the Amazon S3 location where the training documents for an entity
     /// recognizer
@@ -26,7 +26,7 @@ pub const EntityRecognizerDocuments = struct {
     /// located. The URI must be in the same Amazon Web Services Region as the API
     /// endpoint that you are
     /// calling.
-    test_s3_uri: ?[]const u8,
+    test_s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .input_format = "InputFormat",

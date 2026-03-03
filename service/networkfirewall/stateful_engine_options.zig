@@ -7,7 +7,7 @@ const StreamExceptionPolicy = @import("stream_exception_policy.zig").StreamExcep
 pub const StatefulEngineOptions = struct {
     /// Configures the amount of time that can pass without any traffic sent through
     /// the firewall before the firewall determines that the connection is idle.
-    flow_timeouts: ?FlowTimeouts,
+    flow_timeouts: ?FlowTimeouts = null,
 
     /// Indicates how to manage the order of stateful rule evaluation for the
     /// policy. `STRICT_ORDER` is the
@@ -25,7 +25,7 @@ pub const StatefulEngineOptions = struct {
     /// For more information, see
     /// [Evaluation order for stateful
     /// rules](https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html) in the *Network Firewall Developer Guide*.
-    rule_order: ?RuleOrder,
+    rule_order: ?RuleOrder = null,
 
     /// Configures how Network Firewall processes traffic when a network connection
     /// breaks midstream. Network connections can break due to disruptions in
@@ -49,7 +49,7 @@ pub const StatefulEngineOptions = struct {
     ///   back to your client so that the client can immediately establish a new
     ///   session. Network Firewall will have context about the new session and will
     ///   apply rules to the subsequent traffic.
-    stream_exception_policy: ?StreamExceptionPolicy,
+    stream_exception_policy: ?StreamExceptionPolicy = null,
 
     pub const json_field_names = .{
         .flow_timeouts = "FlowTimeouts",

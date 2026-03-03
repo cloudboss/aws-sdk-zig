@@ -12,7 +12,7 @@ pub const IntegrationResponse = struct {
     ///
     /// If this property is not defined, the response payload will be passed through
     /// from the integration response to the method response without modification.
-    content_handling: ?ContentHandlingStrategy,
+    content_handling: ?ContentHandlingStrategy = null,
 
     /// A key-value map specifying response parameters that are passed to the method
     /// response from the back end.
@@ -25,12 +25,12 @@ pub const IntegrationResponse = struct {
     /// `integration.response.body.{JSON-expression}`, where `name` is a valid and
     /// unique response header name and `JSON-expression` is a valid JSON expression
     /// without the `$` prefix.
-    response_parameters: ?[]const aws.map.StringMapEntry,
+    response_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies the templates used to transform the integration response body.
     /// Response templates are represented as a key/value map, with a content-type
     /// as the key and a template as the value.
-    response_templates: ?[]const aws.map.StringMapEntry,
+    response_templates: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies the regular expression (regex) pattern used to choose an
     /// integration response based on the response from the back end. For example,
@@ -40,11 +40,11 @@ pub const IntegrationResponse = struct {
     /// in such cases. If the back end is an Lambda function, the Lambda function
     /// error header is matched. For all other HTTP and Amazon Web Services back
     /// ends, the HTTP status code is matched.
-    selection_pattern: ?[]const u8,
+    selection_pattern: ?[]const u8 = null,
 
     /// Specifies the status code that is used to map the integration response to an
     /// existing MethodResponse.
-    status_code: ?[]const u8,
+    status_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content_handling = "contentHandling",

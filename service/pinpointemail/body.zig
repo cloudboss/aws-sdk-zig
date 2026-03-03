@@ -7,14 +7,14 @@ pub const Body = struct {
     /// clients that support HTML. HTML messages can include formatted text,
     /// hyperlinks, images,
     /// and more.
-    html: ?Content,
+    html: ?Content = null,
 
     /// An object that represents the version of the message that is displayed in
     /// email
     /// clients that don't support HTML, or clients where the recipient has disabled
     /// HTML
     /// rendering.
-    text: ?Content,
+    text: ?Content = null,
 
     pub const json_field_names = .{
         .html = "Html",

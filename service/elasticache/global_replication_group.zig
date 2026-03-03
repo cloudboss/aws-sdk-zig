@@ -13,7 +13,7 @@ const GlobalReplicationGroupMember = @import("global_replication_group_member.zi
 /// cluster.
 pub const GlobalReplicationGroup = struct {
     /// The ARN (Amazon Resource Name) of the global replication group.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A flag that enables encryption at rest when set to `true`.
     ///
@@ -26,46 +26,46 @@ pub const GlobalReplicationGroup = struct {
     /// **Required:** Only available when creating a replication
     /// group in an Amazon VPC using Redis OSS version `3.2.6`, `4.x` or
     /// later.
-    at_rest_encryption_enabled: ?bool,
+    at_rest_encryption_enabled: ?bool = null,
 
     /// A flag that enables using an `AuthToken` (password) when issuing Valkey or
     /// Redis OSS
     /// commands.
     ///
     /// Default: `false`
-    auth_token_enabled: ?bool,
+    auth_token_enabled: ?bool = null,
 
     /// The cache node type of the Global datastore
-    cache_node_type: ?[]const u8,
+    cache_node_type: ?[]const u8 = null,
 
     /// A flag that indicates whether the Global datastore is cluster enabled.
-    cluster_enabled: ?bool,
+    cluster_enabled: ?bool = null,
 
     /// The ElastiCache engine. For Valkey or Redis OSS only.
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// The ElastiCache engine version.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// Indicates the slot configuration and global identifier for each slice group.
-    global_node_groups: ?[]const GlobalNodeGroup,
+    global_node_groups: ?[]const GlobalNodeGroup = null,
 
     /// The optional description of the Global datastore
-    global_replication_group_description: ?[]const u8,
+    global_replication_group_description: ?[]const u8 = null,
 
     /// The name of the Global datastore
-    global_replication_group_id: ?[]const u8,
+    global_replication_group_id: ?[]const u8 = null,
 
     /// The replication groups that comprise the Global datastore.
-    members: ?[]const GlobalReplicationGroupMember,
+    members: ?[]const GlobalReplicationGroupMember = null,
 
     /// The status of the Global datastore
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// A flag that enables in-transit encryption when set to true.
     ///
     /// **Required:** Only available when creating a replication
     /// group in an Amazon VPC using Redis OSS version `3.2.6`, `4.x` or
     /// later.
-    transit_encryption_enabled: ?bool,
+    transit_encryption_enabled: ?bool = null,
 };

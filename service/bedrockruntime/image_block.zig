@@ -6,7 +6,7 @@ const ImageSource = @import("image_source.zig").ImageSource;
 pub const ImageBlock = struct {
     /// Error information if the image block could not be processed or contains
     /// invalid data.
-    @"error": ?ErrorBlock,
+    @"error": ?ErrorBlock = null,
 
     /// The format of the image.
     format: ImageFormat,

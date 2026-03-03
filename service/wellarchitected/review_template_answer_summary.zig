@@ -7,29 +7,29 @@ const AnswerReason = @import("answer_reason.zig").AnswerReason;
 /// The summary of review template answers.
 pub const ReviewTemplateAnswerSummary = struct {
     /// The status of whether or not this question has been answered.
-    answer_status: ?ReviewTemplateAnswerStatus,
+    answer_status: ?ReviewTemplateAnswerStatus = null,
 
     /// A list of selected choices to a question in the review template.
-    choice_answer_summaries: ?[]const ChoiceAnswerSummary,
+    choice_answer_summaries: ?[]const ChoiceAnswerSummary = null,
 
-    choices: ?[]const Choice,
+    choices: ?[]const Choice = null,
 
-    is_applicable: ?bool,
+    is_applicable: ?bool = null,
 
-    pillar_id: ?[]const u8,
+    pillar_id: ?[]const u8 = null,
 
-    question_id: ?[]const u8,
+    question_id: ?[]const u8 = null,
 
-    question_title: ?[]const u8,
+    question_title: ?[]const u8 = null,
 
     /// The type of question.
-    question_type: ?QuestionType,
+    question_type: ?QuestionType = null,
 
     /// The reason why a choice is not-applicable to a question in the review
     /// template.
-    reason: ?AnswerReason,
+    reason: ?AnswerReason = null,
 
-    selected_choices: ?[]const []const u8,
+    selected_choices: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .answer_status = "AnswerStatus",

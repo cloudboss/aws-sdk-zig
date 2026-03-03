@@ -7,14 +7,14 @@ const ObjectStorageClass = @import("object_storage_class.zig").ObjectStorageClas
 /// An object consists of data and its descriptive metadata.
 pub const Object = struct {
     /// The algorithm that was used to create a checksum of the object.
-    checksum_algorithm: ?[]const ChecksumAlgorithm,
+    checksum_algorithm: ?[]const ChecksumAlgorithm = null,
 
     /// The checksum type that is used to calculate the object’s checksum value. For
     /// more information, see
     /// [Checking
     /// object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
-    checksum_type: ?ChecksumType,
+    checksum_type: ?ChecksumType = null,
 
     /// The entity tag is a hash of the object. The ETag reflects changes only to
     /// the contents of an object,
@@ -44,20 +44,20 @@ pub const Object = struct {
     /// will not be an MD5 digest.
     ///
     /// **Directory buckets** - MD5 is not supported by directory buckets.
-    e_tag: ?[]const u8,
+    e_tag: ?[]const u8 = null,
 
     /// The name that you assign to an object. You use the object key to retrieve
     /// the object.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// Creation date of the object.
-    last_modified: ?i64,
+    last_modified: ?i64 = null,
 
     /// The owner of the object
     ///
     /// **Directory buckets** - The bucket owner is returned as the
     /// object owner.
-    owner: ?Owner,
+    owner: ?Owner = null,
 
     /// Specifies the restoration status of an object. Objects in certain storage
     /// classes must be restored
@@ -71,10 +71,10 @@ pub const Object = struct {
     /// only support `EXPRESS_ONEZONE` (the S3 Express One Zone storage class) in
     /// Availability Zones and `ONEZONE_IA` (the S3 One Zone-Infrequent Access
     /// storage class) in Dedicated Local Zones.
-    restore_status: ?RestoreStatus,
+    restore_status: ?RestoreStatus = null,
 
     /// Size in bytes of the object
-    size: ?i64,
+    size: ?i64 = null,
 
     /// The class of storage used to store the object.
     ///
@@ -82,5 +82,5 @@ pub const Object = struct {
     /// Directory buckets only support `EXPRESS_ONEZONE` (the S3 Express One Zone
     /// storage class) in Availability Zones and `ONEZONE_IA` (the S3 One
     /// Zone-Infrequent Access storage class) in Dedicated Local Zones.
-    storage_class: ?ObjectStorageClass,
+    storage_class: ?ObjectStorageClass = null,
 };

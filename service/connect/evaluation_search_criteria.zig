@@ -7,23 +7,23 @@ const StringCondition = @import("string_condition.zig").StringCondition;
 /// The search criteria to be used to return evaluations.
 pub const EvaluationSearchCriteria = struct {
     /// A list of conditions which would be applied together with an AND condition.
-    and_conditions: ?[]const EvaluationSearchCriteria,
+    and_conditions: ?[]const EvaluationSearchCriteria = null,
 
     /// The boolean condition search criteria for searching evaluations.
-    boolean_condition: ?BooleanCondition,
+    boolean_condition: ?BooleanCondition = null,
 
     /// The datetime condition search criteria for searching evaluations.
-    date_time_condition: ?DateTimeCondition,
+    date_time_condition: ?DateTimeCondition = null,
 
     /// The decimal condition search criteria for searching evaluations.
-    decimal_condition: ?DecimalCondition,
+    decimal_condition: ?DecimalCondition = null,
 
-    number_condition: ?NumberCondition,
+    number_condition: ?NumberCondition = null,
 
     /// A list of conditions which would be applied together with an OR condition.
-    or_conditions: ?[]const EvaluationSearchCriteria,
+    or_conditions: ?[]const EvaluationSearchCriteria = null,
 
-    string_condition: ?StringCondition,
+    string_condition: ?StringCondition = null,
 
     pub const json_field_names = .{
         .and_conditions = "AndConditions",

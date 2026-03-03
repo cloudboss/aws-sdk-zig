@@ -14,7 +14,7 @@ pub const QueryStringCacheKeys = struct {
     /// A list that contains the query string parameters that you want CloudFront to
     /// use as a basis for caching for a cache behavior. If `Quantity` is 0, you can
     /// omit `Items`.
-    items: ?[]const []const u8,
+    items: ?[]const []const u8 = null,
 
     /// The number of `whitelisted` query string parameters for a cache behavior.
     quantity: i32,

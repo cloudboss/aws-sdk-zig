@@ -13,7 +13,7 @@ pub const UpdateGlobalSecondaryIndexAction = struct {
     /// secondary
     /// index. If you use this parameter, you must specify `MaxReadRequestUnits`,
     /// `MaxWriteRequestUnits`, or both.
-    on_demand_throughput: ?OnDemandThroughput,
+    on_demand_throughput: ?OnDemandThroughput = null,
 
     /// Represents the provisioned throughput settings for the specified global
     /// secondary
@@ -23,12 +23,12 @@ pub const UpdateGlobalSecondaryIndexAction = struct {
     /// Account, and Table
     /// Quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    provisioned_throughput: ?ProvisionedThroughput,
+    provisioned_throughput: ?ProvisionedThroughput = null,
 
     /// Represents the warm throughput value of the new provisioned throughput
     /// settings to be
     /// applied to a global secondary index.
-    warm_throughput: ?WarmThroughput,
+    warm_throughput: ?WarmThroughput = null,
 
     pub const json_field_names = .{
         .index_name = "IndexName",

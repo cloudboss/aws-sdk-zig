@@ -6,25 +6,25 @@ const ServicePrincipalNameStatusReason = @import("service_principal_name_status_
 pub const ServicePrincipalName = struct {
     /// The Amazon Resource Name (ARN) that was returned when you called
     /// [CreateConnector.html](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
-    connector_arn: ?[]const u8,
+    connector_arn: ?[]const u8 = null,
 
     /// The date and time that the service principal name was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) that was returned when you called
     /// [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).
-    directory_registration_arn: ?[]const u8,
+    directory_registration_arn: ?[]const u8 = null,
 
     /// The status of a service principal name.
-    status: ?ServicePrincipalNameStatus,
+    status: ?ServicePrincipalNameStatus = null,
 
     /// Additional information for the status of a service principal name if the
     /// status is
     /// failed.
-    status_reason: ?ServicePrincipalNameStatusReason,
+    status_reason: ?ServicePrincipalNameStatusReason = null,
 
     /// The date and time that the service principal name was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .connector_arn = "ConnectorArn",

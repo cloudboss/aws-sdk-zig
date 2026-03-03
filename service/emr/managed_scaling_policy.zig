@@ -14,18 +14,18 @@ pub const ManagedScalingPolicy = struct {
     /// applies to the core and task nodes. The master node cannot be scaled after
     /// initial
     /// configuration.
-    compute_limits: ?ComputeLimits,
+    compute_limits: ?ComputeLimits = null,
 
     /// Determines whether a custom scaling utilization performance index can be
     /// set. Possible values include *ADVANCED* or *DEFAULT*.
-    scaling_strategy: ?ScalingStrategy,
+    scaling_strategy: ?ScalingStrategy = null,
 
     /// An integer value that represents an advanced scaling strategy. Setting a
     /// higher value optimizes for performance. Setting a lower value optimizes for
     /// resource conservation. Setting the value
     /// to 50 balances performance and resource conservation. Possible values are 1,
     /// 25, 50, 75, and 100.
-    utilization_performance_index: ?i32,
+    utilization_performance_index: ?i32 = null,
 
     pub const json_field_names = .{
         .compute_limits = "ComputeLimits",

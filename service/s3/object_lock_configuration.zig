@@ -6,7 +6,7 @@ pub const ObjectLockConfiguration = struct {
     /// Indicates whether this bucket has an Object Lock configuration enabled.
     /// Enable
     /// `ObjectLockEnabled` when you apply `ObjectLockConfiguration` to a bucket.
-    object_lock_enabled: ?ObjectLockEnabled,
+    object_lock_enabled: ?ObjectLockEnabled = null,
 
     /// Specifies the Object Lock rule for the specified object. Enable the this
     /// rule when you apply
@@ -15,5 +15,5 @@ pub const ObjectLockConfiguration = struct {
     /// The period can be either `Days` or `Years` but you must select one. You
     /// cannot
     /// specify `Days` and `Years` at the same time.
-    rule: ?ObjectLockRule,
+    rule: ?ObjectLockRule = null,
 };

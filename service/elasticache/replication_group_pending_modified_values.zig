@@ -11,11 +11,11 @@ const UserGroupsUpdateStatus = @import("user_groups_update_status.zig").UserGrou
 /// during the next maintenance window.
 pub const ReplicationGroupPendingModifiedValues = struct {
     /// The auth token status
-    auth_token_status: ?AuthTokenUpdateStatus,
+    auth_token_status: ?AuthTokenUpdateStatus = null,
 
     /// Indicates the status of automatic failover for this Valkey or Redis OSS
     /// replication group.
-    automatic_failover_status: ?PendingAutomaticFailoverStatus,
+    automatic_failover_status: ?PendingAutomaticFailoverStatus = null,
 
     /// Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you
     /// must first
@@ -26,27 +26,27 @@ pub const ReplicationGroupPendingModifiedValues = struct {
     /// clients to use cluster mode enabled, you can then complete cluster mode
     /// configuration
     /// and set the cluster mode to Enabled.
-    cluster_mode: ?ClusterMode,
+    cluster_mode: ?ClusterMode = null,
 
     /// The log delivery configurations being modified
-    log_delivery_configurations: ?[]const PendingLogDeliveryConfiguration,
+    log_delivery_configurations: ?[]const PendingLogDeliveryConfiguration = null,
 
     /// The primary cluster ID that is applied immediately (if
     /// `--apply-immediately` was specified), or during the next maintenance
     /// window.
-    primary_cluster_id: ?[]const u8,
+    primary_cluster_id: ?[]const u8 = null,
 
     /// The status of an online resharding operation.
-    resharding: ?ReshardingStatus,
+    resharding: ?ReshardingStatus = null,
 
     /// A flag that enables in-transit encryption when set to true.
-    transit_encryption_enabled: ?bool,
+    transit_encryption_enabled: ?bool = null,
 
     /// A setting that allows you to migrate your clients to use in-transit
     /// encryption, with
     /// no downtime.
-    transit_encryption_mode: ?TransitEncryptionMode,
+    transit_encryption_mode: ?TransitEncryptionMode = null,
 
     /// The user group being modified.
-    user_groups: ?UserGroupsUpdateStatus,
+    user_groups: ?UserGroupsUpdateStatus = null,
 };

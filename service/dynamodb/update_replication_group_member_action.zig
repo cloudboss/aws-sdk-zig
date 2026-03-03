@@ -6,7 +6,7 @@ const TableClass = @import("table_class.zig").TableClass;
 /// Represents a replica to be modified.
 pub const UpdateReplicationGroupMemberAction = struct {
     /// Replica-specific global secondary index settings.
-    global_secondary_indexes: ?[]const ReplicaGlobalSecondaryIndex,
+    global_secondary_indexes: ?[]const ReplicaGlobalSecondaryIndex = null,
 
     /// The KMS key of the replica that should be used for KMS
     /// encryption. To specify a key, use its key ID, Amazon Resource Name (ARN),
@@ -14,15 +14,15 @@ pub const UpdateReplicationGroupMemberAction = struct {
     /// alias ARN. Note that you should only provide this parameter if the key is
     /// different from
     /// the default DynamoDB KMS key `alias/aws/dynamodb`.
-    kms_master_key_id: ?[]const u8,
+    kms_master_key_id: ?[]const u8 = null,
 
     /// Overrides the maximum on-demand throughput for the replica table.
-    on_demand_throughput_override: ?OnDemandThroughputOverride,
+    on_demand_throughput_override: ?OnDemandThroughputOverride = null,
 
     /// Replica-specific provisioned throughput. If not specified, uses the source
     /// table's
     /// provisioned throughput settings.
-    provisioned_throughput_override: ?ProvisionedThroughputOverride,
+    provisioned_throughput_override: ?ProvisionedThroughputOverride = null,
 
     /// The Region where the replica exists.
     region_name: []const u8,
@@ -30,7 +30,7 @@ pub const UpdateReplicationGroupMemberAction = struct {
     /// Replica-specific table class. If not specified, uses the source table's
     /// table
     /// class.
-    table_class_override: ?TableClass,
+    table_class_override: ?TableClass = null,
 
     pub const json_field_names = .{
         .global_secondary_indexes = "GlobalSecondaryIndexes",

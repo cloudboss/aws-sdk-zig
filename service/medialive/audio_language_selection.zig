@@ -11,7 +11,7 @@ pub const AudioLanguageSelection = struct {
     /// then mute will be encoded until the language returns. If "loose", then on a
     /// PMT update the demux will choose another audio stream in the program with
     /// the same stream type if it can't find one with the same language.
-    language_selection_policy: ?AudioLanguageSelectionPolicy,
+    language_selection_policy: ?AudioLanguageSelectionPolicy = null,
 
     pub const json_field_names = .{
         .language_code = "LanguageCode",

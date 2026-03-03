@@ -53,7 +53,7 @@ const UriPath = @import("uri_path.zig").UriPath;
 /// or by configuring data protection for the web ACL.
 pub const FieldToMatch = struct {
     /// Inspect all query arguments.
-    all_query_arguments: ?AllQueryArguments,
+    all_query_arguments: ?AllQueryArguments = null,
 
     /// Inspect the request body as plain text. The request body immediately follows
     /// the request
@@ -79,7 +79,7 @@ pub const FieldToMatch = struct {
     ///
     /// For information about how to handle oversized
     /// request bodies, see the `Body` object configuration.
-    body: ?Body,
+    body: ?Body = null,
 
     /// Inspect the request cookies. You must configure scope and pattern matching
     /// filters in
@@ -94,7 +94,7 @@ pub const FieldToMatch = struct {
     /// WAF applies the pattern matching filters to the cookies that it receives
     /// from the
     /// underlying host service.
-    cookies: ?Cookies,
+    cookies: ?Cookies = null,
 
     /// Inspect a string containing the list of the request's header names, ordered
     /// as they appear in the web request
@@ -103,7 +103,7 @@ pub const FieldToMatch = struct {
     /// in its inspection.
     /// WAF separates the header names in the string using colons and no added
     /// spaces, for example `host:user-agent:accept:authorization:referer`.
-    header_order: ?HeaderOrder,
+    header_order: ?HeaderOrder = null,
 
     /// Inspect the request headers. You must configure scope and pattern matching
     /// filters in
@@ -117,7 +117,7 @@ pub const FieldToMatch = struct {
     /// WAF applies the pattern matching filters to the headers that it receives
     /// from the
     /// underlying host service.
-    headers: ?Headers,
+    headers: ?Headers = null,
 
     /// Available for use with Amazon CloudFront distributions and Application Load
     /// Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint
@@ -143,7 +143,7 @@ pub const FieldToMatch = struct {
     /// statement
     /// specification, to match with any future requests that have the same TLS
     /// configuration.
-    ja3_fingerprint: ?JA3Fingerprint,
+    ja3_fingerprint: ?JA3Fingerprint = null,
 
     /// Available for use with Amazon CloudFront distributions and Application Load
     /// Balancers. Match against the request's JA4 fingerprint. The JA4 fingerprint
@@ -169,7 +169,7 @@ pub const FieldToMatch = struct {
     /// statement
     /// specification, to match with any future requests that have the same TLS
     /// configuration.
-    ja4_fingerprint: ?JA4Fingerprint,
+    ja4_fingerprint: ?JA4Fingerprint = null,
 
     /// Inspect the request body as JSON. The request body immediately follows the
     /// request
@@ -195,16 +195,16 @@ pub const FieldToMatch = struct {
     ///
     /// For information about how to handle oversized
     /// request bodies, see the `JsonBody` object configuration.
-    json_body: ?JsonBody,
+    json_body: ?JsonBody = null,
 
     /// Inspect the HTTP method. The method indicates the type of operation that the
     /// request is
     /// asking the origin to perform.
-    method: ?Method,
+    method: ?Method = null,
 
     /// Inspect the query string. This is the part of a URL that appears after a `?`
     /// character, if any.
-    query_string: ?QueryString,
+    query_string: ?QueryString = null,
 
     /// Inspect a single header. Provide the name of the header to inspect, for
     /// example,
@@ -215,7 +215,7 @@ pub const FieldToMatch = struct {
     ///
     /// Alternately, you can filter and inspect all headers with the `Headers`
     /// `FieldToMatch` setting.
-    single_header: ?SingleHeader,
+    single_header: ?SingleHeader = null,
 
     /// Inspect a single query argument. Provide the name of the query argument to
     /// inspect, such
@@ -223,7 +223,7 @@ pub const FieldToMatch = struct {
     /// 30 characters long and isn't case sensitive.
     ///
     /// Example JSON: `"SingleQueryArgument": { "Name": "myArgument" }`
-    single_query_argument: ?SingleQueryArgument,
+    single_query_argument: ?SingleQueryArgument = null,
 
     /// Inspect fragments of the request URI. You must configure scope and pattern
     /// matching filters in
@@ -237,12 +237,12 @@ pub const FieldToMatch = struct {
     /// WAF applies the pattern matching filters to the cookies that it receives
     /// from the
     /// underlying host service.
-    uri_fragment: ?UriFragment,
+    uri_fragment: ?UriFragment = null,
 
     /// Inspect the request URI path. This is the part of the web request that
     /// identifies a
     /// resource, for example, `/images/daily-ad.jpg`.
-    uri_path: ?UriPath,
+    uri_path: ?UriPath = null,
 
     pub const json_field_names = .{
         .all_query_arguments = "AllQueryArguments",

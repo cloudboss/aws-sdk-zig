@@ -4,9 +4,9 @@ pub const AccountWithRestoreAccess = struct {
     /// restore a
     /// snapshot. For Amazon Web Services Support, the identifier is
     /// `amazon-redshift-support`.
-    account_alias: ?[]const u8,
+    account_alias: ?[]const u8 = null,
 
     /// The identifier of an Amazon Web Services account authorized to restore a
     /// snapshot.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 };

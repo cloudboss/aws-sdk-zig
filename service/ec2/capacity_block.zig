@@ -14,34 +14,34 @@ const Tag = @import("tag.zig").Tag;
 /// UltraServers.
 pub const CapacityBlock = struct {
     /// The Availability Zone of the Capacity Block.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The Availability Zone ID of the Capacity Block.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The ID of the Capacity Block.
-    capacity_block_id: ?[]const u8,
+    capacity_block_id: ?[]const u8 = null,
 
     /// The ID of the Capacity Reservation.
-    capacity_reservation_ids: ?[]const []const u8,
+    capacity_reservation_ids: ?[]const []const u8 = null,
 
     /// The date and time at which the Capacity Block was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The date and time at which the Capacity Block expires. When a Capacity Block
     /// expires,
     /// all instances in the Capacity Block are terminated.
-    end_date: ?i64,
+    end_date: ?i64 = null,
 
     /// The date and time at which the Capacity Block was started.
-    start_date: ?i64,
+    start_date: ?i64 = null,
 
     /// The state of the Capacity Block.
-    state: ?CapacityBlockResourceState,
+    state: ?CapacityBlockResourceState = null,
 
     /// The tags assigned to the Capacity Block.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The EC2 UltraServer type of the Capacity Block.
-    ultraserver_type: ?[]const u8,
+    ultraserver_type: ?[]const u8 = null,
 };

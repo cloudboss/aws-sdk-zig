@@ -6,7 +6,7 @@ pub const TranscriptFilter = struct {
     /// The object representing the filter that Amazon Lex will use to select the
     /// appropriate transcript when the transcript format is the Amazon Lex
     /// format.
-    lex_transcript_filter: ?LexTranscriptFilter,
+    lex_transcript_filter: ?LexTranscriptFilter = null,
 
     pub const json_field_names = .{
         .lex_transcript_filter = "lexTranscriptFilter",

@@ -21,15 +21,15 @@ pub const GameSession = struct {
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A unique identifier for a player. This ID is used to enforce a resource
     /// protection policy (if one exists),
     /// that limits the number of game sessions a player can create.
-    creator_id: ?[]const u8,
+    creator_id: ?[]const u8 = null,
 
     /// Number of players currently in the game session.
-    current_player_session_count: ?i32,
+    current_player_session_count: ?i32 = null,
 
     /// The DNS identifier assigned to the instance that is running the game
     /// session. Values have
@@ -43,15 +43,15 @@ pub const GameSession = struct {
     ///
     /// When connecting to a game session that is running on a TLS-enabled fleet,
     /// you must use the DNS name, not the IP address.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
     /// associated with the GameLift fleet that this game session is running on.
-    fleet_arn: ?[]const u8,
+    fleet_arn: ?[]const u8 = null,
 
     /// A unique identifier for the fleet that the game session is running on.
-    fleet_id: ?[]const u8,
+    fleet_id: ?[]const u8 = null,
 
     /// A set of key-value pairs that can store custom data in a game session.
     /// For example: `{"Key": "difficulty", "Value": "novice"}`.
@@ -60,29 +60,29 @@ pub const GameSession = struct {
     /// sessions by properties. Property keys containing periods cannot be searched
     /// and will be filtered out from search results due to search index
     /// limitations.
-    game_properties: ?[]const GameProperty,
+    game_properties: ?[]const GameProperty = null,
 
     /// A set of custom game session properties, formatted as a single string value.
     /// This data is passed to a game server process with a request to start a new
     /// game session. For more information, see [Start a game
     /// session](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession).
-    game_session_data: ?[]const u8,
+    game_session_data: ?[]const u8 = null,
 
     /// A unique identifier for the game session. A game session ARN has the
     /// following format:
     /// `arn:aws:gamelift:::gamesession//`.
-    game_session_id: ?[]const u8,
+    game_session_id: ?[]const u8 = null,
 
     /// The IP address of the game session. To connect to a Amazon GameLift Servers
     /// game server, an app needs both the IP address and port number.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The fleet location where the game session is running. This value might
     /// specify the
     /// fleet's home Region or a remote location. Location is expressed as an Amazon
     /// Web Services Region code
     /// such as `us-west-2`.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// Information about the matchmaking process that resulted in the game session,
     /// if
@@ -94,26 +94,26 @@ pub const GameSession = struct {
     /// Data](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data). Matchmaker data is updated whenever new players are added during a
     /// successful backfill (see
     /// [StartMatchBackfill](https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchBackfill.html)).
-    matchmaker_data: ?[]const u8,
+    matchmaker_data: ?[]const u8 = null,
 
     /// The maximum number of players that can be connected simultaneously to the
     /// game session.
-    maximum_player_session_count: ?i32,
+    maximum_player_session_count: ?i32 = null,
 
     /// A descriptive label that is associated with a game session. Session names do
     /// not need to be unique.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Indicates whether the game session is accepting new players.
-    player_session_creation_policy: ?PlayerSessionCreationPolicy,
+    player_session_creation_policy: ?PlayerSessionCreationPolicy = null,
 
     /// The port number for the game session. To connect to a Amazon GameLift
     /// Servers game server, an app needs both the IP address and port number.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// Current status of the game session. A game session must have an `ACTIVE`
     /// status to have player sessions.
-    status: ?GameSessionStatus,
+    status: ?GameSessionStatus = null,
 
     /// Provides additional information about game session status.
     ///
@@ -128,12 +128,12 @@ pub const GameSession = struct {
     /// * `FORCE_TERMINATED` – The game session was stopped by calling
     /// `TerminateGameSession` with the termination mode
     /// `FORCE_TERMINATE`.
-    status_reason: ?GameSessionStatusReason,
+    status_reason: ?GameSessionStatusReason = null,
 
     /// A time stamp indicating when this data object was terminated. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    termination_time: ?i64,
+    termination_time: ?i64 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

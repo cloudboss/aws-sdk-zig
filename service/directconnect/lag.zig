@@ -10,41 +10,41 @@ pub const Lag = struct {
     allows_hosted_connections: bool = false,
 
     /// The Direct Connect endpoint that hosts the LAG.
-    aws_device: ?[]const u8,
+    aws_device: ?[]const u8 = null,
 
     /// The Direct Connect endpoint that hosts the LAG.
-    aws_device_v2: ?[]const u8,
+    aws_device_v2: ?[]const u8 = null,
 
     /// The Direct Connect endpoint that terminates the logical connection. This
     /// device might be
     /// different than the device that terminates the physical connection.
-    aws_logical_device_id: ?[]const u8,
+    aws_logical_device_id: ?[]const u8 = null,
 
     /// The connections bundled by the LAG.
-    connections: ?[]const Connection,
+    connections: ?[]const Connection = null,
 
     /// The individual bandwidth of the physical connections bundled by the LAG. The
     /// possible
     /// values are 1Gbps, 10Gbps, 100Gbps, or 400 Gbps..
-    connections_bandwidth: ?[]const u8,
+    connections_bandwidth: ?[]const u8 = null,
 
     /// The LAG MAC Security (MACsec) encryption mode.
     ///
     /// The valid values are `no_encrypt`, `should_encrypt`, and `must_encrypt`.
-    encryption_mode: ?[]const u8,
+    encryption_mode: ?[]const u8 = null,
 
     /// Indicates whether the LAG supports a secondary BGP peer in the same address
     /// family (IPv4/IPv6).
-    has_logical_redundancy: ?HasLogicalRedundancy,
+    has_logical_redundancy: ?HasLogicalRedundancy = null,
 
     /// Indicates whether jumbo frames are supported.
-    jumbo_frame_capable: ?bool,
+    jumbo_frame_capable: ?bool = null,
 
     /// The ID of the LAG.
-    lag_id: ?[]const u8,
+    lag_id: ?[]const u8 = null,
 
     /// The name of the LAG.
-    lag_name: ?[]const u8,
+    lag_name: ?[]const u8 = null,
 
     /// The state of the LAG. The following are the possible values:
     ///
@@ -62,16 +62,16 @@ pub const Lag = struct {
     /// * `deleted`: The LAG is deleted.
     ///
     /// * `unknown`: The state of the LAG is not available.
-    lag_state: ?LagState,
+    lag_state: ?LagState = null,
 
     /// The location of the LAG.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// Indicates whether the LAG supports MAC Security (MACsec).
-    mac_sec_capable: ?bool,
+    mac_sec_capable: ?bool = null,
 
     /// The MAC Security (MACsec) security keys associated with the LAG.
-    mac_sec_keys: ?[]const MacSecKey,
+    mac_sec_keys: ?[]const MacSecKey = null,
 
     /// The minimum number of physical dedicated connections that must be
     /// operational for the LAG itself to be operational.
@@ -85,16 +85,16 @@ pub const Lag = struct {
     number_of_connections: i32 = 0,
 
     /// The ID of the Amazon Web Services account that owns the LAG.
-    owner_account: ?[]const u8,
+    owner_account: ?[]const u8 = null,
 
     /// The name of the service provider associated with the LAG.
-    provider_name: ?[]const u8,
+    provider_name: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the connection is located.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The tags associated with the LAG.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .allows_hosted_connections = "allowsHostedConnections",

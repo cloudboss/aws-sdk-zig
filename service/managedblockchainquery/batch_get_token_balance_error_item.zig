@@ -5,7 +5,7 @@ const TokenIdentifier = @import("token_identifier.zig").TokenIdentifier;
 
 /// Error generated from a failed `BatchGetTokenBalance` request.
 pub const BatchGetTokenBalanceErrorItem = struct {
-    at_blockchain_instant: ?BlockchainInstant,
+    at_blockchain_instant: ?BlockchainInstant = null,
 
     /// The error code associated with the error.
     error_code: []const u8,
@@ -16,9 +16,9 @@ pub const BatchGetTokenBalanceErrorItem = struct {
     /// The type of error.
     error_type: ErrorType,
 
-    owner_identifier: ?OwnerIdentifier,
+    owner_identifier: ?OwnerIdentifier = null,
 
-    token_identifier: ?TokenIdentifier,
+    token_identifier: ?TokenIdentifier = null,
 
     pub const json_field_names = .{
         .at_blockchain_instant = "atBlockchainInstant",

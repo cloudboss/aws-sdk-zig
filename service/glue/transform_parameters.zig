@@ -6,7 +6,7 @@ const TransformType = @import("transform_type.zig").TransformType;
 /// transform.
 pub const TransformParameters = struct {
     /// The parameters for the find matches algorithm.
-    find_matches_parameters: ?FindMatchesParameters,
+    find_matches_parameters: ?FindMatchesParameters = null,
 
     /// The type of machine learning transform.
     ///

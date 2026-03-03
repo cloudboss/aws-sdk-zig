@@ -34,17 +34,17 @@ pub const TranscriptionJob = struct {
     /// Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     /// example, `2022-05-04T12:33:13.922000-07:00` represents a transcription job
     /// that started processing at 12:33 PM UTC-7 on May 4, 2022.
-    completion_time: ?i64,
+    completion_time: ?i64 = null,
 
     /// Indicates whether redaction was enabled in your transcript.
-    content_redaction: ?ContentRedaction,
+    content_redaction: ?ContentRedaction = null,
 
     /// The date and time the specified transcription job request was made.
     ///
     /// Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     /// example, `2022-05-04T12:32:58.761000-07:00` represents a transcription job
     /// that started processing at 12:32 PM UTC-7 on May 4, 2022.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// If `TranscriptionJobStatus` is `FAILED`,
     /// `FailureReason` contains information about why the transcription job
@@ -90,7 +90,7 @@ pub const TranscriptionJob = struct {
     /// Your audio contains more channels than Amazon Transcribe is able to process.
     /// For more information, refer to [Service
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe).
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The confidence score associated with the language identified in your media
     /// file.
@@ -100,90 +100,90 @@ pub const TranscriptionJob = struct {
     /// probability that the identified language correctly matches the language
     /// spoken in your
     /// media.
-    identified_language_score: ?f32,
+    identified_language_score: ?f32 = null,
 
     /// Indicates whether automatic language identification was enabled (`TRUE`)
     /// for the specified transcription job.
-    identify_language: ?bool,
+    identify_language: ?bool = null,
 
     /// Indicates whether automatic multi-language identification was enabled
     /// (`TRUE`) for the specified transcription job.
-    identify_multiple_languages: ?bool,
+    identify_multiple_languages: ?bool = null,
 
     /// Provides information about how your transcription job was processed. This
     /// parameter
     /// shows if your request was queued and what data access role was used.
-    job_execution_settings: ?JobExecutionSettings,
+    job_execution_settings: ?JobExecutionSettings = null,
 
     /// The language code used to create your transcription job. This parameter is
     /// used with
     /// single-language identification. For multi-language identification requests,
     /// refer to the
     /// plural version of this parameter, `LanguageCodes`.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// The language codes used to create your transcription job. This parameter is
     /// used with
     /// multi-language identification. For single-language identification requests,
     /// refer to the
     /// singular version of this parameter, `LanguageCode`.
-    language_codes: ?[]const LanguageCodeItem,
+    language_codes: ?[]const LanguageCodeItem = null,
 
     /// Provides the name and language of all custom language models, custom
     /// vocabularies, and
     /// custom vocabulary filters that you included in your request.
-    language_id_settings: ?[]const aws.map.MapEntry(LanguageIdSettings),
+    language_id_settings: ?[]const aws.map.MapEntry(LanguageIdSettings) = null,
 
     /// Provides the language codes you specified in your request.
-    language_options: ?[]const LanguageCode,
+    language_options: ?[]const LanguageCode = null,
 
     /// Provides the Amazon S3 location of the media file you used in your
     /// request.
-    media: ?Media,
+    media: ?Media = null,
 
     /// The format of the input media file.
-    media_format: ?MediaFormat,
+    media_format: ?MediaFormat = null,
 
     /// The sample rate, in hertz, of the audio track in your input media file.
-    media_sample_rate_hertz: ?i32,
+    media_sample_rate_hertz: ?i32 = null,
 
     /// Provides information on the custom language model you included in your
     /// request.
-    model_settings: ?ModelSettings,
+    model_settings: ?ModelSettings = null,
 
     /// Provides information on any additional settings that were included in your
     /// request.
     /// Additional settings include channel identification, alternative
     /// transcriptions, speaker
     /// partitioning, custom vocabularies, and custom vocabulary filters.
-    settings: ?Settings,
+    settings: ?Settings = null,
 
     /// The date and time the specified transcription job began processing.
     ///
     /// Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     /// example, `2022-05-04T12:32:58.789000-07:00` represents a transcription job
     /// that started processing at 12:32 PM UTC-7 on May 4, 2022.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Indicates whether subtitles were generated with your transcription.
-    subtitles: ?SubtitlesOutput,
+    subtitles: ?SubtitlesOutput = null,
 
     /// The tags, each in the form of a key:value pair, assigned to the specified
     /// transcription job.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// Provides information about the toxicity detection settings applied to your
     /// transcription.
-    toxicity_detection: ?[]const ToxicityDetectionSettings,
+    toxicity_detection: ?[]const ToxicityDetectionSettings = null,
 
     /// Provides you with the Amazon S3 URI you can use to access your
     /// transcript.
-    transcript: ?Transcript,
+    transcript: ?Transcript = null,
 
     /// The name of the transcription job. Job names are case sensitive and must be
     /// unique
     /// within an Amazon Web Services account.
-    transcription_job_name: ?[]const u8,
+    transcription_job_name: ?[]const u8 = null,
 
     /// Provides the status of the specified transcription job.
     ///
@@ -192,7 +192,7 @@ pub const TranscriptionJob = struct {
     /// `RedactedTranscriptFileUri`, if you requested transcript redaction). If
     /// the status is `FAILED`, `FailureReason` provides details on why
     /// your transcription job failed.
-    transcription_job_status: ?TranscriptionJobStatus,
+    transcription_job_status: ?TranscriptionJobStatus = null,
 
     pub const json_field_names = .{
         .completion_time = "CompletionTime",

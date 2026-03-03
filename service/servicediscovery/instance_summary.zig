@@ -57,7 +57,7 @@ pub const InstanceSummary = struct {
     /// if the service includes `HealthCheckConfig`, the port on the endpoint that
     /// Route 53
     /// sends requests to.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The ID of the Amazon Web Services account that registered the instance. If
     /// this isn't your account ID,
@@ -68,10 +68,10 @@ pub const InstanceSummary = struct {
     /// see [Cross-account
     /// Cloud Map namespace
     /// sharing](https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html) in the *Cloud Map Developer Guide*.
-    created_by_account: ?[]const u8,
+    created_by_account: ?[]const u8 = null,
 
     /// The ID for an instance that you created by using a specified service.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

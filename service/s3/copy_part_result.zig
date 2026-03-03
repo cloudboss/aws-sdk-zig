@@ -7,7 +7,7 @@ pub const CopyPartResult = struct {
     /// of the part. For more information, see [Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
     /// the *Amazon S3 User Guide*.
-    checksum_crc32: ?[]const u8,
+    checksum_crc32: ?[]const u8 = null,
 
     /// This header can be used as a data integrity check to verify that the data
     /// received is the same data
@@ -16,7 +16,7 @@ pub const CopyPartResult = struct {
     /// of the part. For more information, see [Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
     /// the *Amazon S3 User Guide*.
-    checksum_crc32_c: ?[]const u8,
+    checksum_crc32_c: ?[]const u8 = null,
 
     /// The Base64 encoded, 64-bit `CRC64NVME` checksum of the part. This checksum
     /// is present if
@@ -25,7 +25,7 @@ pub const CopyPartResult = struct {
     /// uploaded object). For more information, see [Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
     /// the *Amazon S3 User Guide*.
-    checksum_crc64_nvme: ?[]const u8,
+    checksum_crc64_nvme: ?[]const u8 = null,
 
     /// This header can be used as a data integrity check to verify that the data
     /// received is the same data
@@ -34,7 +34,7 @@ pub const CopyPartResult = struct {
     /// of the part. For more information, see [Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
     /// the *Amazon S3 User Guide*.
-    checksum_sha1: ?[]const u8,
+    checksum_sha1: ?[]const u8 = null,
 
     /// This header can be used as a data integrity check to verify that the data
     /// received is the same data
@@ -43,11 +43,11 @@ pub const CopyPartResult = struct {
     /// of the part. For more information, see [Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
     /// the *Amazon S3 User Guide*.
-    checksum_sha256: ?[]const u8,
+    checksum_sha256: ?[]const u8 = null,
 
     /// Entity tag of the object.
-    e_tag: ?[]const u8,
+    e_tag: ?[]const u8 = null,
 
     /// Date and time at which the object was uploaded.
-    last_modified: ?i64,
+    last_modified: ?i64 = null,
 };

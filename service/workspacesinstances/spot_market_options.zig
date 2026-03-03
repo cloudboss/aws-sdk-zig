@@ -4,19 +4,19 @@ const SpotInstanceTypeEnum = @import("spot_instance_type_enum.zig").SpotInstance
 /// Defines configuration for spot instance deployment.
 pub const SpotMarketOptions = struct {
     /// Duration of spot instance block reservation.
-    block_duration_minutes: ?i32,
+    block_duration_minutes: ?i32 = null,
 
     /// Specifies behavior when spot instance is interrupted.
-    instance_interruption_behavior: ?InstanceInterruptionBehaviorEnum,
+    instance_interruption_behavior: ?InstanceInterruptionBehaviorEnum = null,
 
     /// Maximum hourly price for spot instance.
-    max_price: ?[]const u8,
+    max_price: ?[]const u8 = null,
 
     /// Defines the type of spot instance request.
-    spot_instance_type: ?SpotInstanceTypeEnum,
+    spot_instance_type: ?SpotInstanceTypeEnum = null,
 
     /// Timestamp until which spot instance request is valid.
-    valid_until_utc: ?i64,
+    valid_until_utc: ?i64 = null,
 
     pub const json_field_names = .{
         .block_duration_minutes = "BlockDurationMinutes",

@@ -4,10 +4,10 @@ pub const RegionsInfo = struct {
     /// Lists the Regions where the directory has been replicated, excluding the
     /// primary
     /// Region.
-    additional_regions: ?[]const []const u8,
+    additional_regions: ?[]const []const u8 = null,
 
     /// The Region where the Managed Microsoft AD directory was originally created.
-    primary_region: ?[]const u8,
+    primary_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .additional_regions = "AdditionalRegions",

@@ -23,7 +23,7 @@ pub const NfsMountOptions = struct {
     ///
     /// DataSync currently only supports NFS version 3 with Amazon FSx for NetApp
     /// ONTAP locations.
-    version: ?NfsVersion,
+    version: ?NfsVersion = null,
 
     pub const json_field_names = .{
         .version = "Version",

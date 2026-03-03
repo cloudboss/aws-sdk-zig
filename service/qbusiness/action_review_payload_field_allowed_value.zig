@@ -3,10 +3,10 @@
 /// action.
 pub const ActionReviewPayloadFieldAllowedValue = struct {
     /// The name of the field.
-    display_value: ?[]const u8,
+    display_value: ?[]const u8 = null,
 
     /// The field value.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .display_value = "displayValue",

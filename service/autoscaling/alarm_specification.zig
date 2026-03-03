@@ -3,5 +3,5 @@ pub const AlarmSpecification = struct {
     /// The names of one or more CloudWatch alarms to monitor for the instance
     /// refresh. You can
     /// specify up to 10 alarms.
-    alarms: ?[]const []const u8,
+    alarms: ?[]const []const u8 = null,
 };

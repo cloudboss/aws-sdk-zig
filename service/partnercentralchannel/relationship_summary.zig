@@ -4,40 +4,40 @@ const Sector = @import("sector.zig").Sector;
 /// Summary information about a partner relationship.
 pub const RelationshipSummary = struct {
     /// The Amazon Resource Name (ARN) of the relationship.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The AWS account ID associated in this relationship.
-    associated_account_id: ?[]const u8,
+    associated_account_id: ?[]const u8 = null,
 
     /// The type of association for the relationship.
-    association_type: ?AssociationType,
+    association_type: ?AssociationType = null,
 
     /// The catalog identifier associated with the relationship.
-    catalog: ?[]const u8,
+    catalog: ?[]const u8 = null,
 
     /// The timestamp when the relationship was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The display name of the relationship.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The unique identifier of the relationship.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The identifier of the program management account.
-    program_management_account_id: ?[]const u8,
+    program_management_account_id: ?[]const u8 = null,
 
     /// The current revision number of the relationship.
-    revision: ?[]const u8,
+    revision: ?[]const u8 = null,
 
     /// The business sector for the relationship.
-    sector: ?Sector,
+    sector: ?Sector = null,
 
     /// The start date of the relationship.
-    start_date: ?i64,
+    start_date: ?i64 = null,
 
     /// The timestamp when the relationship was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -9,7 +9,7 @@ pub const AvailSuppression = struct {
     /// `BEHIND_LIVE_EDGE` will always use the full avail suppression policy.
     /// `AFTER_LIVE_EDGE` mode can be used to invoke partial ad break fills when a
     /// session starts mid-break.
-    fill_policy: ?FillPolicy,
+    fill_policy: ?FillPolicy = null,
 
     /// Sets the ad suppression mode. By default, ad suppression is off and all ad
     /// breaks are filled with ads or slate. When Mode is set to `BEHIND_LIVE_EDGE`,
@@ -18,7 +18,7 @@ pub const AvailSuppression = struct {
     /// set to `AFTER_LIVE_EDGE`, ad suppression is active and MediaTailor won't
     /// fill ad breaks that are within the live edge plus the avail suppression
     /// value.
-    mode: ?Mode,
+    mode: ?Mode = null,
 
     /// A live edge offset time in HH:MM:SS. MediaTailor won't fill ad breaks on or
     /// behind this time in the manifest lookback window. If Value is set to
@@ -28,7 +28,7 @@ pub const AvailSuppression = struct {
     /// window. For example, if you set 00:45:00, then MediaTailor will fill ad
     /// breaks that occur within 45 minutes behind the live edge, but won't fill ad
     /// breaks on or behind 45 minutes behind the live edge.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .fill_policy = "FillPolicy",

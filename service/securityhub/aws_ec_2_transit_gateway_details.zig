@@ -4,42 +4,42 @@
 pub const AwsEc2TransitGatewayDetails = struct {
     /// A private Autonomous System Number (ASN) for the Amazon side of a BGP
     /// session.
-    amazon_side_asn: ?i32,
+    amazon_side_asn: ?i32 = null,
 
     /// The ID of the default association route table.
-    association_default_route_table_id: ?[]const u8,
+    association_default_route_table_id: ?[]const u8 = null,
 
     /// Turn on or turn off automatic acceptance of attachment requests.
-    auto_accept_shared_attachments: ?[]const u8,
+    auto_accept_shared_attachments: ?[]const u8 = null,
 
     /// Turn on or turn off automatic association with the default association route
     /// table.
-    default_route_table_association: ?[]const u8,
+    default_route_table_association: ?[]const u8 = null,
 
     /// Turn on or turn off automatic propagation of routes to the default
     /// propagation route table.
-    default_route_table_propagation: ?[]const u8,
+    default_route_table_propagation: ?[]const u8 = null,
 
     /// The description of the transit gateway.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Turn on or turn off DNS support.
-    dns_support: ?[]const u8,
+    dns_support: ?[]const u8 = null,
 
     /// The ID of the transit gateway.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Indicates whether multicast is supported on the transit gateway.
-    multicast_support: ?[]const u8,
+    multicast_support: ?[]const u8 = null,
 
     /// The ID of the default propagation route table.
-    propagation_default_route_table_id: ?[]const u8,
+    propagation_default_route_table_id: ?[]const u8 = null,
 
     /// The transit gateway Classless Inter-Domain Routing (CIDR) blocks.
-    transit_gateway_cidr_blocks: ?[]const []const u8,
+    transit_gateway_cidr_blocks: ?[]const []const u8 = null,
 
     /// Turn on or turn off Equal Cost Multipath Protocol (ECMP) support.
-    vpn_ecmp_support: ?[]const u8,
+    vpn_ecmp_support: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .amazon_side_asn = "AmazonSideAsn",

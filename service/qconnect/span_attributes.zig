@@ -7,106 +7,106 @@ const SpanMessageValue = @import("span_message_value.zig").SpanMessageValue;
 /// metrics, and conversation data
 pub const SpanAttributes = struct {
     /// Amazon Connect agent ID
-    agent_id: ?[]const u8,
+    agent_id: ?[]const u8 = null,
 
     /// AI agent ARN
-    ai_agent_arn: ?[]const u8,
+    ai_agent_arn: ?[]const u8 = null,
 
     /// AI agent identifier
-    ai_agent_id: ?[]const u8,
+    ai_agent_id: ?[]const u8 = null,
 
     /// Entity that invoked the AI agent
-    ai_agent_invoker: ?[]const u8,
+    ai_agent_invoker: ?[]const u8 = null,
 
     /// AI agent name
-    ai_agent_name: ?[]const u8,
+    ai_agent_name: ?[]const u8 = null,
 
     /// AI agent orchestrator use case
-    ai_agent_orchestrator_use_case: ?[]const u8,
+    ai_agent_orchestrator_use_case: ?[]const u8 = null,
 
     /// AI agent type
-    ai_agent_type: ?AIAgentType,
+    ai_agent_type: ?AIAgentType = null,
 
     /// AI agent version number
-    ai_agent_version: ?i32,
+    ai_agent_version: ?i32 = null,
 
     /// Number of input tokens that were retrieved from cache
-    cache_read_input_tokens: ?i32,
+    cache_read_input_tokens: ?i32 = null,
 
     /// Number of input tokens that were written to cache in this request
-    cache_write_input_tokens: ?i32,
+    cache_write_input_tokens: ?i32 = null,
 
     /// Amazon Connect contact identifier
-    contact_id: ?[]const u8,
+    contact_id: ?[]const u8 = null,
 
     /// Error classification if span failed (e.g., throttle, timeout)
-    error_type: ?[]const u8,
+    error_type: ?[]const u8 = null,
 
     /// Amazon Connect contact identifier
-    initial_contact_id: ?[]const u8,
+    initial_contact_id: ?[]const u8 = null,
 
     /// Input message collection sent to LLM
-    input_messages: ?[]const SpanMessage,
+    input_messages: ?[]const SpanMessage = null,
 
     /// Amazon Connect instance ARN
-    instance_arn: ?[]const u8,
+    instance_arn: ?[]const u8 = null,
 
     /// Action being performed
-    operation_name: ?[]const u8,
+    operation_name: ?[]const u8 = null,
 
     /// Output message collection received from LLM
-    output_messages: ?[]const SpanMessage,
+    output_messages: ?[]const SpanMessage = null,
 
     /// AI prompt ARN
-    prompt_arn: ?[]const u8,
+    prompt_arn: ?[]const u8 = null,
 
     /// AI prompt identifier
-    prompt_id: ?[]const u8,
+    prompt_id: ?[]const u8 = null,
 
     /// AI prompt name
-    prompt_name: ?[]const u8,
+    prompt_name: ?[]const u8 = null,
 
     /// AI prompt type
-    prompt_type: ?AIPromptType,
+    prompt_type: ?AIPromptType = null,
 
     /// AI prompt version number
-    prompt_version: ?i32,
+    prompt_version: ?i32 = null,
 
     /// Model provider identifier (e.g., aws.bedrock)
-    provider_name: ?[]const u8,
+    provider_name: ?[]const u8 = null,
 
     /// Maximum tokens configured for generation
-    request_max_tokens: ?i32,
+    request_max_tokens: ?i32 = null,
 
     /// LLM model ID for request (e.g., anthropic.claude-3-sonnet)
-    request_model: ?[]const u8,
+    request_model: ?[]const u8 = null,
 
     /// Generation termination reasons (e.g., stop, max_tokens)
-    response_finish_reasons: ?[]const []const u8,
+    response_finish_reasons: ?[]const []const u8 = null,
 
     /// Actual model used for response (usually matches requestModel)
-    response_model: ?[]const u8,
+    response_model: ?[]const u8 = null,
 
     /// Session name
-    session_name: ?[]const u8,
+    session_name: ?[]const u8 = null,
 
     /// System prompt instructions
-    system_instructions: ?[]const SpanMessageValue,
+    system_instructions: ?[]const SpanMessageValue = null,
 
     /// Sampling temperature for generation
-    temperature: ?f32,
+    temperature: ?f32 = null,
 
     /// Top-p sampling parameter for generation
-    top_p: ?f32,
+    top_p: ?f32 = null,
 
     /// Number of input tokens in prompt
-    usage_input_tokens: ?i32,
+    usage_input_tokens: ?i32 = null,
 
     /// Number of output tokens in response
-    usage_output_tokens: ?i32,
+    usage_output_tokens: ?i32 = null,
 
     /// Total tokens consumed (input + output)
-    usage_total_tokens: ?i32,
+    usage_total_tokens: ?i32 = null,
 
     pub const json_field_names = .{
         .agent_id = "agentId",

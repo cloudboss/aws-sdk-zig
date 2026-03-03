@@ -9,7 +9,7 @@ pub const ResponseHeadersPolicyXSSProtection = struct {
     ///
     /// For more information about this directive, see
     /// [X-XSS-Protection](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.
-    mode_block: ?bool,
+    mode_block: ?bool = null,
 
     /// A Boolean that determines whether CloudFront overrides the
     /// `X-XSS-Protection` HTTP response header received from the origin with the
@@ -32,5 +32,5 @@ pub const ResponseHeadersPolicyXSSProtection = struct {
     ///
     /// For more information about using a reporting URL, see
     /// [X-XSS-Protection](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.
-    report_uri: ?[]const u8,
+    report_uri: ?[]const u8 = null,
 };

@@ -66,7 +66,7 @@ pub const RecordingGroup = struct {
     ///
     /// To use this option, you must set the `useOnly` field of
     /// [RecordingStrategy](https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html) to `EXCLUSION_BY_RESOURCE_TYPES`.
-    exclusion_by_resource_types: ?ExclusionByResourceTypes,
+    exclusion_by_resource_types: ?ExclusionByResourceTypes = null,
 
     /// This option is a bundle which only applies to the global IAM resource types:
     /// IAM users, groups, roles, and customer managed policies. These global IAM
@@ -200,7 +200,7 @@ pub const RecordingGroup = struct {
     /// Config after February 2022. For a list of those Regions,
     /// see [Recording Amazon Web Services Resources | Global
     /// Resources](https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all).
-    recording_strategy: ?RecordingStrategy,
+    recording_strategy: ?RecordingStrategy = null,
 
     /// A comma-separated list that specifies which resource types Config
     /// records.
@@ -237,7 +237,7 @@ pub const RecordingGroup = struct {
     /// by Config,
     /// even if the specified resource type is not supported in the Amazon Web
     /// Services Region where you set up Config.
-    resource_types: ?[]const ResourceType,
+    resource_types: ?[]const ResourceType = null,
 
     pub const json_field_names = .{
         .all_supported = "allSupported",

@@ -50,7 +50,7 @@ pub const ManagedRuleGroupConfig = struct {
     /// and [WAF Fraud Control account creation fraud prevention
     /// (ACFP)](https://docs.aws.amazon.com/waf/latest/developerguide/waf-acfp.html)
     /// in the *WAF Developer Guide*.
-    aws_managed_rules_acfp_rule_set: ?AWSManagedRulesACFPRuleSet,
+    aws_managed_rules_acfp_rule_set: ?AWSManagedRulesACFPRuleSet = null,
 
     /// Additional configuration for using the anti-DDoS managed rule group,
     /// `AWSManagedRulesAntiDDoSRuleSet`.
@@ -62,7 +62,7 @@ pub const ManagedRuleGroupConfig = struct {
     /// and [Distributed Denial of Service (DDoS)
     /// prevention](https://docs.aws.amazon.com/waf/latest/developerguide/waf-anti-ddos.html)
     /// in the *WAF Developer Guide*.
-    aws_managed_rules_anti_d_do_s_rule_set: ?AWSManagedRulesAntiDDoSRuleSet,
+    aws_managed_rules_anti_d_do_s_rule_set: ?AWSManagedRulesAntiDDoSRuleSet = null,
 
     /// Additional configuration for using the account takeover prevention (ATP)
     /// managed rule group, `AWSManagedRulesATPRuleSet`.
@@ -80,7 +80,7 @@ pub const ManagedRuleGroupConfig = struct {
     /// and [WAF Fraud Control account takeover prevention
     /// (ATP)](https://docs.aws.amazon.com/waf/latest/developerguide/waf-atp.html)
     /// in the *WAF Developer Guide*.
-    aws_managed_rules_atp_rule_set: ?AWSManagedRulesATPRuleSet,
+    aws_managed_rules_atp_rule_set: ?AWSManagedRulesATPRuleSet = null,
 
     /// Additional configuration for using the Bot Control managed rule group. Use
     /// this to specify the
@@ -90,26 +90,26 @@ pub const ManagedRuleGroupConfig = struct {
     /// and [WAF Bot
     /// Control](https://docs.aws.amazon.com/waf/latest/developerguide/waf-bot-control.html)
     /// in the *WAF Developer Guide*.
-    aws_managed_rules_bot_control_rule_set: ?AWSManagedRulesBotControlRuleSet,
+    aws_managed_rules_bot_control_rule_set: ?AWSManagedRulesBotControlRuleSet = null,
 
     /// Instead of this setting, provide your configuration under
     /// `AWSManagedRulesATPRuleSet`.
-    login_path: ?[]const u8,
+    login_path: ?[]const u8 = null,
 
     /// Instead of this setting, provide your configuration under the request
     /// inspection configuration for `AWSManagedRulesATPRuleSet` or
     /// `AWSManagedRulesACFPRuleSet`.
-    password_field: ?PasswordField,
+    password_field: ?PasswordField = null,
 
     /// Instead of this setting, provide your configuration under the request
     /// inspection configuration for `AWSManagedRulesATPRuleSet` or
     /// `AWSManagedRulesACFPRuleSet`.
-    payload_type: ?PayloadType,
+    payload_type: ?PayloadType = null,
 
     /// Instead of this setting, provide your configuration under the request
     /// inspection configuration for `AWSManagedRulesATPRuleSet` or
     /// `AWSManagedRulesACFPRuleSet`.
-    username_field: ?UsernameField,
+    username_field: ?UsernameField = null,
 
     pub const json_field_names = .{
         .aws_managed_rules_acfp_rule_set = "AWSManagedRulesACFPRuleSet",

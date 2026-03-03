@@ -5,7 +5,7 @@ const Id3Insertion = @import("id_3_insertion.zig").Id3Insertion;
 /// metadata to Passthrough.
 pub const TimedMetadataInsertion = struct {
     /// Id3Insertions contains the array of Id3Insertion instances.
-    id_3_insertions: ?[]const Id3Insertion,
+    id_3_insertions: ?[]const Id3Insertion = null,
 
     pub const json_field_names = .{
         .id_3_insertions = "Id3Insertions",

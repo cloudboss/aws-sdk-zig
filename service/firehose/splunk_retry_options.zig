@@ -7,7 +7,7 @@ pub const SplunkRetryOptions = struct {
     /// periods during which Firehose waits for acknowledgment from Splunk after
     /// each
     /// attempt.
-    duration_in_seconds: ?i32,
+    duration_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .duration_in_seconds = "DurationInSeconds",

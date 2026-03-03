@@ -6,13 +6,13 @@ const ListJobsFilterKey = @import("list_jobs_filter_key.zig").ListJobsFilterKey;
 /// operator, and one or more values.
 pub const ListJobsFilterTerm = struct {
     /// The operator to use to filter the results.
-    comparator: ?JobComparator,
+    comparator: ?JobComparator = null,
 
     /// The property to use to filter the results.
-    key: ?ListJobsFilterKey,
+    key: ?ListJobsFilterKey = null,
 
     /// An array that lists one or more values to use to filter the results.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .comparator = "comparator",

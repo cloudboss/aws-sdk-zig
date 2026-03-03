@@ -6,26 +6,26 @@ pub const KeyUsageFlags = struct {
     /// directly
     /// enciphering raw user data without the use of an intermediate symmetric
     /// cipher.
-    data_encipherment: ?bool,
+    data_encipherment: ?bool = null,
 
     /// The digitalSignature is asserted when the subject public key is used for
     /// verifying
     /// digital signatures.
-    digital_signature: ?bool,
+    digital_signature: ?bool = null,
 
     /// KeyAgreement is asserted when the subject public key is used for key
     /// agreement.
-    key_agreement: ?bool,
+    key_agreement: ?bool = null,
 
     /// KeyEncipherment is asserted when the subject public key is used for
     /// enciphering private
     /// or secret keys, i.e., for key transport.
-    key_encipherment: ?bool,
+    key_encipherment: ?bool = null,
 
     /// NonRepudiation is asserted when the subject public key is used to verify
     /// digital
     /// signatures.
-    non_repudiation: ?bool,
+    non_repudiation: ?bool = null,
 
     pub const json_field_names = .{
         .data_encipherment = "DataEncipherment",

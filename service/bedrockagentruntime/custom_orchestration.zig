@@ -3,7 +3,7 @@ const OrchestrationExecutor = @import("orchestration_executor.zig").Orchestratio
 /// Contains details of the custom orchestration configured for the agent.
 pub const CustomOrchestration = struct {
     /// The structure of the executor invoking the actions in custom orchestration.
-    executor: ?OrchestrationExecutor,
+    executor: ?OrchestrationExecutor = null,
 
     pub const json_field_names = .{
         .executor = "executor",

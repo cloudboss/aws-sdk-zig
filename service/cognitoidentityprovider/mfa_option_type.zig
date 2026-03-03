@@ -7,12 +7,12 @@ const DeliveryMediumType = @import("delivery_medium_type.zig").DeliveryMediumTyp
 pub const MFAOptionType = struct {
     /// The attribute name of the MFA option type. The only valid value is
     /// `phone_number`.
-    attribute_name: ?[]const u8,
+    attribute_name: ?[]const u8 = null,
 
     /// The delivery medium to send the MFA code. You can use this parameter to set
     /// only the
     /// `SMS` delivery medium value.
-    delivery_medium: ?DeliveryMediumType,
+    delivery_medium: ?DeliveryMediumType = null,
 
     pub const json_field_names = .{
         .attribute_name = "AttributeName",

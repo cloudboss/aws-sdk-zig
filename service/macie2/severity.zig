@@ -5,11 +5,11 @@ const SeverityDescription = @import("severity_description.zig").SeverityDescript
 pub const Severity = struct {
     /// The qualitative representation of the finding's severity, ranging from Low
     /// (least severe) to High (most severe).
-    description: ?SeverityDescription,
+    description: ?SeverityDescription = null,
 
     /// The numerical representation of the finding's severity, ranging from 1
     /// (least severe) to 3 (most severe).
-    score: ?i64,
+    score: ?i64 = null,
 
     pub const json_field_names = .{
         .description = "description",

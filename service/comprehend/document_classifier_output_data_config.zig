@@ -3,7 +3,7 @@
 /// if you are training a native document model.
 pub const DocumentClassifierOutputDataConfig = struct {
     /// The Amazon S3 prefix for the data lake location of the flywheel statistics.
-    flywheel_stats_s3_prefix: ?[]const u8,
+    flywheel_stats_s3_prefix: ?[]const u8 = null,
 
     /// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
     /// Comprehend uses to encrypt the
@@ -19,7 +19,7 @@ pub const DocumentClassifierOutputDataConfig = struct {
     ///
     /// * ARN of a KMS Key Alias:
     /// `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// When you use the `OutputDataConfig` object while creating a custom
     /// classifier, you specify the Amazon S3 location where you want to write the
@@ -36,7 +36,7 @@ pub const DocumentClassifierOutputDataConfig = struct {
     /// output file, called `output.tar.gz`. It is a compressed archive that
     /// contains the
     /// confusion matrix.
-    s3_uri: ?[]const u8,
+    s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .flywheel_stats_s3_prefix = "FlywheelStatsS3Prefix",

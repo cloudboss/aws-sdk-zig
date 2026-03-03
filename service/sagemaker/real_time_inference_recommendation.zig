@@ -6,7 +6,7 @@ const ProductionVariantInstanceType = @import("production_variant_instance_type.
 pub const RealTimeInferenceRecommendation = struct {
     /// The recommended environment variables to set in the model container for
     /// Real-Time Inference.
-    environment: ?[]const aws.map.StringMapEntry,
+    environment: ?[]const aws.map.StringMapEntry = null,
 
     /// The recommended instance type for Real-Time Inference.
     instance_type: ProductionVariantInstanceType,

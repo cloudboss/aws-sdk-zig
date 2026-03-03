@@ -1,13 +1,13 @@
 pub const DeleteFirewallRuleRequest = struct {
     /// The ID of the domain list that's used in the rule.
-    firewall_domain_list_id: ?[]const u8,
+    firewall_domain_list_id: ?[]const u8 = null,
 
     /// The unique identifier of the firewall rule group that you want to delete the
     /// rule from.
     firewall_rule_group_id: []const u8,
 
     /// The ID that is created for a DNS Firewall Advanced rule.
-    firewall_threat_protection_id: ?[]const u8,
+    firewall_threat_protection_id: ?[]const u8 = null,
 
     /// The DNS query type that the rule you are deleting evaluates. Allowed values
     /// are;
@@ -45,7 +45,7 @@ pub const DeleteFirewallRuleRequest = struct {
     /// example, TYPE28. For more information, see
     /// [List of DNS record
     /// types](https://en.wikipedia.org/wiki/List_of_DNS_record_types).
-    qtype: ?[]const u8,
+    qtype: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .firewall_domain_list_id = "FirewallDomainListId",

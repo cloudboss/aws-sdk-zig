@@ -5,16 +5,16 @@ const ServiceName = @import("service_name.zig").ServiceName;
 pub const ServiceHealth = struct {
     /// Number of resources that DevOps Guru is monitoring in an analyzed Amazon Web
     /// Services service.
-    analyzed_resource_count: ?i64,
+    analyzed_resource_count: ?i64 = null,
 
     /// Represents the health of an Amazon Web Services service. This is a
     /// `ServiceInsightHealth`
     /// that contains the number of open proactive and reactive insights for this
     /// service.
-    insight: ?ServiceInsightHealth,
+    insight: ?ServiceInsightHealth = null,
 
     /// The name of the Amazon Web Services service.
-    service_name: ?ServiceName,
+    service_name: ?ServiceName = null,
 
     pub const json_field_names = .{
         .analyzed_resource_count = "AnalyzedResourceCount",

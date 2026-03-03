@@ -12,7 +12,7 @@ pub const RoadSnapTracePoint = struct {
     speed: f64 = 0,
 
     /// Timestamp of the event.
-    timestamp: ?[]const u8,
+    timestamp: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .heading = "Heading",

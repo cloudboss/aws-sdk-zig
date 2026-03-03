@@ -9,8 +9,8 @@ pub const AnalyticsAndOperator = struct {
     /// The prefix to use when evaluating an AND predicate: The prefix that an
     /// object must have to be
     /// included in the metrics results.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The list of tags to use when evaluating an AND predicate.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

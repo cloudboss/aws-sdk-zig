@@ -1,10 +1,10 @@
 /// Information about the updated vehicle.
 pub const UpdateVehicleResponseItem = struct {
     /// The Amazon Resource Name (ARN) of the updated vehicle.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The unique ID of the updated vehicle.
-    vehicle_name: ?[]const u8,
+    vehicle_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

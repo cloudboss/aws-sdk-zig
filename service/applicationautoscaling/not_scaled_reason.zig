@@ -20,13 +20,13 @@ pub const NotScaledReason = struct {
     code: []const u8,
 
     /// The current capacity.
-    current_capacity: ?i32,
+    current_capacity: ?i32 = null,
 
     /// The maximum capacity.
-    max_capacity: ?i32,
+    max_capacity: ?i32 = null,
 
     /// The minimum capacity.
-    min_capacity: ?i32,
+    min_capacity: ?i32 = null,
 
     pub const json_field_names = .{
         .code = "Code",

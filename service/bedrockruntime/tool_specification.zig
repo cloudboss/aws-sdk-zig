@@ -6,7 +6,7 @@ const ToolInputSchema = @import("tool_input_schema.zig").ToolInputSchema;
 /// the Amazon Bedrock User Guide.
 pub const ToolSpecification = struct {
     /// The description for the tool.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The input schema for the tool in JSON format.
     input_schema: ToolInputSchema,
@@ -15,7 +15,7 @@ pub const ToolSpecification = struct {
     name: []const u8,
 
     /// Flag to enable structured output enforcement on a tool usage response.
-    strict: ?bool,
+    strict: ?bool = null,
 
     pub const json_field_names = .{
         .description = "description",

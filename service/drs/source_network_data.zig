@@ -1,17 +1,17 @@
 /// Properties of Source Network related to a job event.
 pub const SourceNetworkData = struct {
     /// Source Network ID.
-    source_network_id: ?[]const u8,
+    source_network_id: ?[]const u8 = null,
 
     /// VPC ID protected by the Source Network.
-    source_vpc: ?[]const u8,
+    source_vpc: ?[]const u8 = null,
 
     /// CloudFormation stack name that was deployed for recovering the Source
     /// Network.
-    stack_name: ?[]const u8,
+    stack_name: ?[]const u8 = null,
 
     /// ID of the recovered VPC following Source Network recovery.
-    target_vpc: ?[]const u8,
+    target_vpc: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_network_id = "sourceNetworkID",

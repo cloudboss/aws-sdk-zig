@@ -12,7 +12,7 @@ pub const X12ValidationOptions = struct {
     /// Specifies a list of validation rules to apply during EDI document
     /// processing. These rules can include code list modifications, element length
     /// constraints, and element requirement changes.
-    validation_rules: ?[]const X12ValidationRule,
+    validation_rules: ?[]const X12ValidationRule = null,
 
     pub const json_field_names = .{
         .validation_rules = "validationRules",

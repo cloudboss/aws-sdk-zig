@@ -15,14 +15,14 @@ pub const MemberSpecification = struct {
     member_abilities: []const MemberAbility,
 
     /// The ML abilities granted to the collaboration member.
-    ml_member_abilities: ?MLMemberAbilities,
+    ml_member_abilities: ?MLMemberAbilities = null,
 
     /// The collaboration member's payment responsibilities set by the collaboration
     /// creator.
     ///
     /// If the collaboration creator hasn't speciﬁed anyone as the member paying for
     /// query compute costs, then the member who can query is the default payer.
-    payment_configuration: ?PaymentConfiguration,
+    payment_configuration: ?PaymentConfiguration = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

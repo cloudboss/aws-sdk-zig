@@ -5,17 +5,17 @@ const ScheduledAutoTuneSeverityType = @import("scheduled_auto_tune_severity_type
 /// Guide](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html) for more information.
 pub const ScheduledAutoTuneDetails = struct {
     /// Specifies Auto-Tune action description.
-    action: ?[]const u8,
+    action: ?[]const u8 = null,
 
     /// Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and
     /// JVM_YOUNG_GEN_TUNING.
-    action_type: ?ScheduledAutoTuneActionType,
+    action_type: ?ScheduledAutoTuneActionType = null,
 
     /// Specifies timestamp for the Auto-Tune action scheduled for the domain.
-    date: ?i64,
+    date: ?i64 = null,
 
     /// Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH.
-    severity: ?ScheduledAutoTuneSeverityType,
+    severity: ?ScheduledAutoTuneSeverityType = null,
 
     pub const json_field_names = .{
         .action = "Action",

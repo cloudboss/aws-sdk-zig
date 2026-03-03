@@ -14,7 +14,7 @@ pub const HiveJsonSerDe = struct {
     /// DateTimeFormat](https://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html). You can also use the special value `millis` to
     /// parse timestamps in epoch milliseconds. If you don't specify a format,
     /// Firehose uses `java.sql.Timestamp::valueOf` by default.
-    timestamp_formats: ?[]const []const u8,
+    timestamp_formats: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .timestamp_formats = "TimestampFormats",

@@ -7,10 +7,10 @@ pub const CloudWatchMetricsDataSummary = struct {
     /// This is an enum of the status showing whether the metric value pair list has
     /// partial
     /// or complete data, or if there was an error.
-    status_code: ?CloudWatchMetricDataStatusCode,
+    status_code: ?CloudWatchMetricDataStatusCode = null,
 
     /// This is a list of Amazon CloudWatch metric values at given timestamp.
-    timestamp_metric_value_pair_list: ?[]const TimestampMetricValuePair,
+    timestamp_metric_value_pair_list: ?[]const TimestampMetricValuePair = null,
 
     pub const json_field_names = .{
         .status_code = "StatusCode",

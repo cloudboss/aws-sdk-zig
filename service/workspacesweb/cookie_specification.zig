@@ -4,10 +4,10 @@ pub const CookieSpecification = struct {
     domain: []const u8,
 
     /// The name of the cookie.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The path of the cookie.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domain = "domain",

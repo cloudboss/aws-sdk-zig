@@ -16,14 +16,14 @@ pub const FunctionResult = struct {
     action_group: []const u8,
 
     /// The agent's ID.
-    agent_id: ?[]const u8,
+    agent_id: ?[]const u8 = null,
 
     /// Contains the user confirmation information about the function that was
     /// called.
-    confirmation_state: ?ConfirmationState,
+    confirmation_state: ?ConfirmationState = null,
 
     /// The name of the function that was called.
-    function: ?[]const u8,
+    function: ?[]const u8 = null,
 
     /// The response from the function call using the parameters. The response might
     /// be returned directly or from the Lambda function. Specify `TEXT` or
@@ -34,13 +34,13 @@ pub const FunctionResult = struct {
     /// information, see [Configure an Amazon Bedrock Agent to complete tasks with
     /// computer use
     /// tools](https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html).
-    response_body: ?[]const aws.map.MapEntry(ContentBody),
+    response_body: ?[]const aws.map.MapEntry(ContentBody) = null,
 
     /// Controls the final response state returned to end user when API/Function
     /// execution failed. When this state is FAILURE, the request would fail with
     /// dependency failure exception. When this state is REPROMPT, the API/function
     /// response will be sent to model for re-prompt
-    response_state: ?ResponseState,
+    response_state: ?ResponseState = null,
 
     pub const json_field_names = .{
         .action_group = "actionGroup",

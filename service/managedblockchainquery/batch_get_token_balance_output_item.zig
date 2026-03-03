@@ -9,11 +9,11 @@ pub const BatchGetTokenBalanceOutputItem = struct {
     /// The container for the token balance.
     balance: []const u8,
 
-    last_updated_time: ?BlockchainInstant,
+    last_updated_time: ?BlockchainInstant = null,
 
-    owner_identifier: ?OwnerIdentifier,
+    owner_identifier: ?OwnerIdentifier = null,
 
-    token_identifier: ?TokenIdentifier,
+    token_identifier: ?TokenIdentifier = null,
 
     pub const json_field_names = .{
         .at_blockchain_instant = "atBlockchainInstant",

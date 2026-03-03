@@ -12,7 +12,7 @@ pub const Metric = struct {
     /// Conditional: If you published your metric with dimensions, you must specify
     /// the same
     /// dimensions in your scaling policy.
-    dimensions: ?[]const MetricDimension,
+    dimensions: ?[]const MetricDimension = null,
 
     /// The name of the metric.
     metric_name: []const u8,

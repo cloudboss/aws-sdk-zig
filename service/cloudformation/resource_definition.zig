@@ -5,7 +5,7 @@ const aws = @import("aws");
 /// actions.
 pub const ResourceDefinition = struct {
     /// The logical resource id for this resource in the generated template.
-    logical_resource_id: ?[]const u8,
+    logical_resource_id: ?[]const u8 = null,
 
     /// A list of up to 256 key-value pairs that identifies the scanned resource.
     /// The key is the

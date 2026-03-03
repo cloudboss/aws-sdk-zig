@@ -4,10 +4,10 @@ const ReservedInstancesCostCalculation = @import("reserved_instances_cost_calcul
 /// The OpenSearch reserved instances recommendation details.
 pub const OpenSearchReservedInstances = struct {
     /// The OpenSearch reserved instances configuration used for recommendations.
-    configuration: ?OpenSearchReservedInstancesConfiguration,
+    configuration: ?OpenSearchReservedInstancesConfiguration = null,
 
     /// Cost impact of the purchase recommendation.
-    cost_calculation: ?ReservedInstancesCostCalculation,
+    cost_calculation: ?ReservedInstancesCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

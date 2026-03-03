@@ -6,7 +6,7 @@ pub const CachePointBlock = struct {
     /// Optional TTL duration for cache entries. When specified, enables extended
     /// TTL caching with the specified duration. When omitted, uses `type` value for
     /// caching behavior.
-    ttl: ?CacheTTL,
+    ttl: ?CacheTTL = null,
 
     /// Specifies the type of cache point within the CachePointBlock.
     @"type": CachePointType,

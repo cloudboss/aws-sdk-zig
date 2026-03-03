@@ -2,7 +2,7 @@
 pub const TimeSeriesConfig = struct {
     /// A set of columns names that can be grouped with the item identifier column
     /// to create a composite key for which a target value is predicted.
-    grouping_attribute_names: ?[]const []const u8,
+    grouping_attribute_names: ?[]const []const u8 = null,
 
     /// The name of the column that represents the set of item identifiers for which
     /// you want to predict the target value.

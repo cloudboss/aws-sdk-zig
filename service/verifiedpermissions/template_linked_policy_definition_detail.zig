@@ -9,12 +9,12 @@ pub const TemplateLinkedPolicyDefinitionDetail = struct {
     /// The principal associated with this template-linked policy. Verified
     /// Permissions substitutes this principal for the `?principal` placeholder in
     /// the policy template when it evaluates an authorization request.
-    principal: ?EntityIdentifier,
+    principal: ?EntityIdentifier = null,
 
     /// The resource associated with this template-linked policy. Verified
     /// Permissions substitutes this resource for the `?resource` placeholder in the
     /// policy template when it evaluates an authorization request.
-    resource: ?EntityIdentifier,
+    resource: ?EntityIdentifier = null,
 
     pub const json_field_names = .{
         .policy_template_id = "policyTemplateId",

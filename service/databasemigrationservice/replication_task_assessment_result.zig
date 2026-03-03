@@ -5,30 +5,30 @@ pub const ReplicationTaskAssessmentResult = struct {
     /// The response object only contains this field if you provide
     /// DescribeReplicationTaskAssessmentResultsMessage$ReplicationTaskArn in the
     /// request.
-    assessment_results: ?[]const u8,
+    assessment_results: ?[]const u8 = null,
 
     /// The file containing the results of the task assessment.
-    assessment_results_file: ?[]const u8,
+    assessment_results_file: ?[]const u8 = null,
 
     /// The status of the task assessment.
-    assessment_status: ?[]const u8,
+    assessment_status: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the replication task.
-    replication_task_arn: ?[]const u8,
+    replication_task_arn: ?[]const u8 = null,
 
     /// The replication task identifier of the task on which the task assessment was
     /// run.
-    replication_task_identifier: ?[]const u8,
+    replication_task_identifier: ?[]const u8 = null,
 
     /// The date the task assessment was completed.
-    replication_task_last_assessment_date: ?i64,
+    replication_task_last_assessment_date: ?i64 = null,
 
     /// The URL of the S3 object containing the task assessment results.
     ///
     /// The response object only contains this field if you provide
     /// DescribeReplicationTaskAssessmentResultsMessage$ReplicationTaskArn in the
     /// request.
-    s3_object_url: ?[]const u8,
+    s3_object_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .assessment_results = "AssessmentResults",

@@ -6,12 +6,12 @@ pub const ListDatabasesRequest = struct {
     /// resume pagination, provide the NextToken value as argument of a subsequent
     /// API
     /// invocation.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The pagination token. To resume pagination, provide the NextToken value as
     /// argument of a
     /// subsequent API invocation.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",

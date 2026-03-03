@@ -2,10 +2,10 @@
 /// to integrate Alexa for Business with a device.
 pub const AlexaForBusinessMetadata = struct {
     /// The ARN of the room resource.
-    alexa_for_business_room_arn: ?[]const u8,
+    alexa_for_business_room_arn: ?[]const u8 = null,
 
     /// Starts or stops Alexa for Business.
-    is_alexa_for_business_enabled: ?bool,
+    is_alexa_for_business_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .alexa_for_business_room_arn = "AlexaForBusinessRoomArn",

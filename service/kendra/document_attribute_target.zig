@@ -29,14 +29,14 @@ pub const DocumentAttributeTarget = struct {
     /// For example, 'Department' could be an identifier for the target attribute or
     /// metadata
     /// field that includes the department names associated with the documents.
-    target_document_attribute_key: ?[]const u8,
+    target_document_attribute_key: ?[]const u8 = null,
 
     /// The target value you want to create for the target attribute.
     ///
     /// For example, 'Finance' could be the target value for the target attribute
     /// key
     /// 'Department'.
-    target_document_attribute_value: ?DocumentAttributeValue,
+    target_document_attribute_value: ?DocumentAttributeValue = null,
 
     /// `TRUE` to delete the existing target value for your specified target
     /// attribute key. You cannot create a target value and set this to `TRUE`. To

@@ -4,8 +4,8 @@ const VerifiedAccessLogs = @import("verified_access_logs.zig").VerifiedAccessLog
 /// instance.
 pub const VerifiedAccessInstanceLoggingConfiguration = struct {
     /// Details about the logging options.
-    access_logs: ?VerifiedAccessLogs,
+    access_logs: ?VerifiedAccessLogs = null,
 
     /// The ID of the Amazon Web Services Verified Access instance.
-    verified_access_instance_id: ?[]const u8,
+    verified_access_instance_id: ?[]const u8 = null,
 };

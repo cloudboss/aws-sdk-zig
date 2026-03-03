@@ -23,7 +23,7 @@
 pub const SnowflakeRetryOptions = struct {
     /// the time period where Firehose will retry sending data to the chosen HTTP
     /// endpoint.
-    duration_in_seconds: ?i32,
+    duration_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .duration_in_seconds = "DurationInSeconds",

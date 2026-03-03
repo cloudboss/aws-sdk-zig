@@ -7,7 +7,7 @@ const DevEnvironmentStatus = @import("dev_environment_status.zig").DevEnvironmen
 /// Information about a Dev Environment.
 pub const DevEnvironmentSummary = struct {
     /// The user-specified alias for the Dev Environment.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The system-generated unique ID of the user who created the Dev Environment.
     creator_id: []const u8,
@@ -17,7 +17,7 @@ pub const DevEnvironmentSummary = struct {
 
     /// Information about the integrated development environment (IDE) configured
     /// for a Dev Environment.
-    ides: ?[]const Ide,
+    ides: ?[]const Ide = null,
 
     /// The amount of time the Dev Environment will run without any activity
     /// detected before stopping, in minutes. Dev Environments consume compute
@@ -37,24 +37,24 @@ pub const DevEnvironmentSummary = struct {
     persistent_storage: PersistentStorage,
 
     /// The name of the project in the space.
-    project_name: ?[]const u8,
+    project_name: ?[]const u8 = null,
 
     /// Information about the repositories that will be cloned into the Dev
     /// Environment. If no rvalue is specified, no repository is cloned.
     repositories: []const DevEnvironmentRepositorySummary,
 
     /// The name of the space.
-    space_name: ?[]const u8,
+    space_name: ?[]const u8 = null,
 
     /// The status of the Dev Environment.
     status: DevEnvironmentStatus,
 
     /// The reason for the status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The name of the connection used to connect to Amazon VPC used when the Dev
     /// Environment was created, if any.
-    vpc_connection_name: ?[]const u8,
+    vpc_connection_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alias = "alias",

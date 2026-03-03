@@ -8,10 +8,10 @@ pub const BucketState = struct {
     ///
     /// * `Unknown` - Creation of the bucket might have timed-out. You might want to
     /// delete the bucket and create a new one.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// A message that describes the state of the bucket.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

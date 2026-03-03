@@ -4,10 +4,10 @@ const CatalogItem = @import("catalog_item.zig").CatalogItem;
 pub const Recommendation = struct {
     /// The catalog item being recommended, including its complete details and
     /// attributes.
-    catalog_item: ?CatalogItem,
+    catalog_item: ?CatalogItem = null,
 
     /// Recommendation Score between 0 and 1.
-    score: ?f64,
+    score: ?f64 = null,
 
     pub const json_field_names = .{
         .catalog_item = "CatalogItem",

@@ -9,7 +9,7 @@ const aws = @import("aws");
 /// [EncryptionSettings](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EncryptionSettings.html) type.
 pub const KmsEncryptionSettings = struct {
     /// User-defined, additional context to be added to encryption processes.
-    encryption_context: ?[]const aws.map.StringMapEntry,
+    encryption_context: ?[]const aws.map.StringMapEntry = null,
 
     /// The customer-managed KMS key [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html), alias or ID to be used for encryption processes.

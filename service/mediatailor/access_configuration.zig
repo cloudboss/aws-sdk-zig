@@ -64,10 +64,10 @@ pub const AccessConfiguration = struct {
     /// • The caller of the API must have `s3:GetObject` IAM permissions to read all
     /// top level manifests referenced by your MediaTailor `VodSource` packaging
     /// configurations.
-    access_type: ?AccessType,
+    access_type: ?AccessType = null,
 
     /// AWS Secrets Manager access token configuration parameters.
-    secrets_manager_access_token_configuration: ?SecretsManagerAccessTokenConfiguration,
+    secrets_manager_access_token_configuration: ?SecretsManagerAccessTokenConfiguration = null,
 
     pub const json_field_names = .{
         .access_type = "AccessType",

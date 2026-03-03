@@ -15,15 +15,15 @@ const SecurityControlsConfiguration = @import("security_controls_configuration.z
 pub const SecurityHubPolicy = struct {
     /// A list that defines which security standards are enabled in the
     /// configuration policy.
-    enabled_standard_identifiers: ?[]const []const u8,
+    enabled_standard_identifiers: ?[]const []const u8 = null,
 
     /// An object that defines which security controls are enabled in the
     /// configuration policy. The enablement status
     /// of a control is aligned across all of the enabled standards in an account.
-    security_controls_configuration: ?SecurityControlsConfiguration,
+    security_controls_configuration: ?SecurityControlsConfiguration = null,
 
     /// Indicates whether Security Hub is enabled in the policy.
-    service_enabled: ?bool,
+    service_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .enabled_standard_identifiers = "EnabledStandardIdentifiers",

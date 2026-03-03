@@ -10,7 +10,7 @@ pub const HistoricalUsageEntity = struct {
     filter_expression: Expression,
 
     /// The location associated with the usage.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The specific operation associated with the usage.
     operation: []const u8,

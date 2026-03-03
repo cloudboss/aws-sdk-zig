@@ -21,12 +21,12 @@ pub const SourceSelectionCriteria = struct {
     /// replication
     /// configuration is the earlier version, V1. In the earlier version, this
     /// element is not allowed
-    replica_modifications: ?ReplicaModifications,
+    replica_modifications: ?ReplicaModifications = null,
 
     /// A container for filter information for the selection of Amazon S3 objects
     /// encrypted with Amazon Web Services KMS. If
     /// you include `SourceSelectionCriteria` in the replication configuration, this
     /// element is
     /// required.
-    sse_kms_encrypted_objects: ?SseKmsEncryptedObjects,
+    sse_kms_encrypted_objects: ?SseKmsEncryptedObjects = null,
 };

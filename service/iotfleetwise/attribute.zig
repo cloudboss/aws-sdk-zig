@@ -5,26 +5,26 @@ const NodeDataType = @import("node_data_type.zig").NodeDataType;
 /// manufacturing date.
 pub const Attribute = struct {
     /// A list of possible values an attribute can be assigned.
-    allowed_values: ?[]const []const u8,
+    allowed_values: ?[]const []const u8 = null,
 
     /// A specified value for the attribute.
-    assigned_value: ?[]const u8,
+    assigned_value: ?[]const u8 = null,
 
     /// A comment in addition to the description.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The specified data type of the attribute.
     data_type: NodeDataType,
 
     /// The default value of the attribute.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// The deprecation message for the node or the branch that was moved or
     /// deleted.
-    deprecation_message: ?[]const u8,
+    deprecation_message: ?[]const u8 = null,
 
     /// A brief description of the attribute.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The fully qualified name of the attribute. For example, the fully qualified
     /// name of an
@@ -32,13 +32,13 @@ pub const Attribute = struct {
     fully_qualified_name: []const u8,
 
     /// The specified possible maximum value of the attribute.
-    max: ?f64,
+    max: ?f64 = null,
 
     /// The specified possible minimum value of the attribute.
-    min: ?f64,
+    min: ?f64 = null,
 
     /// The scientific unit for the attribute.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allowed_values = "allowedValues",

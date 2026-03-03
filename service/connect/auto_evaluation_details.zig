@@ -6,7 +6,7 @@ pub const AutoEvaluationDetails = struct {
     auto_evaluation_enabled: bool = false,
 
     /// The status of the contact auto-evaluation.
-    auto_evaluation_status: ?AutoEvaluationStatus,
+    auto_evaluation_status: ?AutoEvaluationStatus = null,
 
     pub const json_field_names = .{
         .auto_evaluation_enabled = "AutoEvaluationEnabled",

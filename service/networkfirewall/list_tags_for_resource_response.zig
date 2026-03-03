@@ -7,10 +7,10 @@ pub const ListTagsForResourceResponse = struct {
     /// `NextToken`
     /// value in the response. To retrieve the next batch of objects, use the token
     /// returned from the prior request in your next request.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The tags that are associated with the resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .next_token = "NextToken",

@@ -6,25 +6,25 @@ const NotebookExecutionStatus = @import("notebook_execution_status.zig").Noteboo
 /// and status of the notebook execution.
 pub const NotebookExecutionSummary = struct {
     /// The unique identifier of the editor associated with the notebook execution.
-    editor_id: ?[]const u8,
+    editor_id: ?[]const u8 = null,
 
     /// The timestamp when notebook execution started.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The unique ID of the execution engine for the notebook execution.
-    execution_engine_id: ?[]const u8,
+    execution_engine_id: ?[]const u8 = null,
 
     /// The unique identifier of the notebook execution.
-    notebook_execution_id: ?[]const u8,
+    notebook_execution_id: ?[]const u8 = null,
 
     /// The name of the notebook execution.
-    notebook_execution_name: ?[]const u8,
+    notebook_execution_name: ?[]const u8 = null,
 
     /// The Amazon S3 location that stores the notebook execution input.
-    notebook_s3_location: ?NotebookS3LocationForOutput,
+    notebook_s3_location: ?NotebookS3LocationForOutput = null,
 
     /// The timestamp when notebook execution started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of the notebook execution.
     ///
@@ -56,7 +56,7 @@ pub const NotebookExecutionSummary = struct {
     ///
     /// * `STOPPED` indicates that the execution stopped because of a
     /// `StopNotebookExecution` request.
-    status: ?NotebookExecutionStatus,
+    status: ?NotebookExecutionStatus = null,
 
     pub const json_field_names = .{
         .editor_id = "EditorId",

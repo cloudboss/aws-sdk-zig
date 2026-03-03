@@ -21,7 +21,7 @@ pub const RenewalSummary = struct {
     renewal_status: RenewalStatus,
 
     /// The reason that a renewal request was unsuccessful.
-    renewal_status_reason: ?FailureReason,
+    renewal_status_reason: ?FailureReason = null,
 
     /// The time at which the renewal summary was last updated.
     updated_at: i64,

@@ -10,16 +10,16 @@ pub const ResolverRuleConfig = struct {
     /// The name can be up to 64 characters long and can contain letters (a-z, A-Z),
     /// numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot
     /// consist of only numbers.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the new outbound Resolver endpoint that you want to use to route
     /// DNS queries to the IP addresses that you specify in
     /// `TargetIps`.
-    resolver_endpoint_id: ?[]const u8,
+    resolver_endpoint_id: ?[]const u8 = null,
 
     /// For DNS queries that originate in your VPC, the new IP addresses that you
     /// want to route outbound DNS queries to.
-    target_ips: ?[]const TargetAddress,
+    target_ips: ?[]const TargetAddress = null,
 
     pub const json_field_names = .{
         .name = "Name",

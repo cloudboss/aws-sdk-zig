@@ -4,7 +4,7 @@ const RRType = @import("rr_type.zig").RRType;
 pub const TrafficPolicy = struct {
     /// The comment that you specify in the `CreateTrafficPolicy` request, if
     /// any.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The definition of a traffic policy in JSON format. You specify the JSON
     /// document to

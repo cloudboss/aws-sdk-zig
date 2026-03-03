@@ -5,7 +5,7 @@ const AttributeDimensionType = @import("attribute_dimension_type.zig").Attribute
 pub const CalculatedAttributeDimension = struct {
     /// Applies the given condition over the initial Calculated Attribute's
     /// definition.
-    condition_overrides: ?ConditionOverrides,
+    condition_overrides: ?ConditionOverrides = null,
 
     /// The action to segment with.
     dimension_type: AttributeDimensionType,

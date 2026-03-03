@@ -7,18 +7,18 @@ pub const ProcessingOutput = struct {
     /// When `True`, output operations such as data upload are managed natively by
     /// the processing job application. When `False` (default), output operations
     /// are managed by Amazon SageMaker.
-    app_managed: ?bool,
+    app_managed: ?bool = null,
 
     /// Configuration for processing job outputs in Amazon SageMaker Feature Store.
     /// This processing output type is only supported when `AppManaged` is
     /// specified.
-    feature_store_output: ?ProcessingFeatureStoreOutput,
+    feature_store_output: ?ProcessingFeatureStoreOutput = null,
 
     /// The name for the processing job output.
     output_name: []const u8,
 
     /// Configuration for processing job outputs in Amazon S3.
-    s3_output: ?ProcessingS3Output,
+    s3_output: ?ProcessingS3Output = null,
 
     pub const json_field_names = .{
         .app_managed = "AppManaged",

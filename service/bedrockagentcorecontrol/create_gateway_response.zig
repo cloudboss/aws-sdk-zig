@@ -10,7 +10,7 @@ const WorkloadIdentityDetails = @import("workload_identity_details.zig").Workloa
 
 pub const CreateGatewayResponse = struct {
     /// The authorizer configuration for the created gateway.
-    authorizer_configuration: ?AuthorizerConfiguration,
+    authorizer_configuration: ?AuthorizerConfiguration = null,
 
     /// The type of authorizer used by the gateway.
     authorizer_type: AuthorizerType,
@@ -19,7 +19,7 @@ pub const CreateGatewayResponse = struct {
     created_at: i64,
 
     /// The description of the gateway.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The level of detail in error messages returned when invoking the gateway.
     ///
@@ -27,7 +27,7 @@ pub const CreateGatewayResponse = struct {
     ///   a user debug the gateway.
     /// * If the value is omitted, a generic error message is returned to the end
     ///   user.
-    exception_level: ?ExceptionLevel,
+    exception_level: ?ExceptionLevel = null,
 
     /// The Amazon Resource Name (ARN) of the created gateway.
     gateway_arn: []const u8,
@@ -36,41 +36,41 @@ pub const CreateGatewayResponse = struct {
     gateway_id: []const u8,
 
     /// The URL endpoint for the created gateway.
-    gateway_url: ?[]const u8,
+    gateway_url: ?[]const u8 = null,
 
     /// The list of interceptor configurations for the created gateway.
-    interceptor_configurations: ?[]const GatewayInterceptorConfiguration,
+    interceptor_configurations: ?[]const GatewayInterceptorConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the KMS key used to encrypt data
     /// associated with the gateway.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The name of the gateway.
     name: []const u8,
 
     /// The policy engine configuration for the created gateway.
-    policy_engine_configuration: ?GatewayPolicyEngineConfiguration,
+    policy_engine_configuration: ?GatewayPolicyEngineConfiguration = null,
 
     /// The configuration settings for the protocol used by the gateway.
-    protocol_configuration: ?GatewayProtocolConfiguration,
+    protocol_configuration: ?GatewayProtocolConfiguration = null,
 
     /// The protocol type of the gateway.
     protocol_type: GatewayProtocolType,
 
     /// The Amazon Resource Name (ARN) of the IAM role associated with the gateway.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The current status of the gateway.
     status: GatewayStatus,
 
     /// The reasons for the current status of the gateway.
-    status_reasons: ?[]const []const u8,
+    status_reasons: ?[]const []const u8 = null,
 
     /// The timestamp when the gateway was last updated.
     updated_at: i64,
 
     /// The workload identity details for the created gateway.
-    workload_identity_details: ?WorkloadIdentityDetails,
+    workload_identity_details: ?WorkloadIdentityDetails = null,
 
     pub const json_field_names = .{
         .authorizer_configuration = "authorizerConfiguration",

@@ -6,10 +6,10 @@ pub const CommandPlugin = struct {
     /// `aws:domainjoin`, `aws:applications`,
     /// `aws:runPowerShellScript`, `aws:psmodule`, `aws:cloudWatch`,
     /// `aws:runShellScript`, or `aws:updateSSMAgent`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Output of the plugin execution.
-    output: ?[]const u8,
+    output: ?[]const u8 = null,
 
     /// The S3 bucket where the responses to the command executions should be
     /// stored. This was
@@ -24,7 +24,7 @@ pub const CommandPlugin = struct {
     /// `i-02573cafcfEXAMPLE` is the managed node ID;
     ///
     /// `awsrunShellScript` is the name of the plugin.
-    output_s3_bucket_name: ?[]const u8,
+    output_s3_bucket_name: ?[]const u8 = null,
 
     /// The S3 directory path inside the bucket where the responses to the command
     /// executions should
@@ -41,13 +41,13 @@ pub const CommandPlugin = struct {
     /// `i-02573cafcfEXAMPLE` is the managed node ID;
     ///
     /// `awsrunShellScript` is the name of the plugin.
-    output_s3_key_prefix: ?[]const u8,
+    output_s3_key_prefix: ?[]const u8 = null,
 
     /// (Deprecated) You can no longer specify this parameter. The system ignores
     /// it. Instead,
     /// Amazon Web Services Systems Manager automatically determines the S3 bucket
     /// region.
-    output_s3_region: ?[]const u8,
+    output_s3_region: ?[]const u8 = null,
 
     /// A numeric response code generated after running the plugin.
     response_code: i32 = 0,
@@ -55,23 +55,23 @@ pub const CommandPlugin = struct {
     /// The time the plugin stopped running. Could stop prematurely if, for example,
     /// a cancel
     /// command was sent.
-    response_finish_date_time: ?i64,
+    response_finish_date_time: ?i64 = null,
 
     /// The time the plugin started running.
-    response_start_date_time: ?i64,
+    response_start_date_time: ?i64 = null,
 
     /// The URL for the complete text written by the plugin to stderr. If execution
     /// isn't yet
     /// complete, then this string is empty.
-    standard_error_url: ?[]const u8,
+    standard_error_url: ?[]const u8 = null,
 
     /// The URL for the complete text written by the plugin to stdout in Amazon S3.
     /// If the
     /// S3 bucket for the command wasn't specified, then this string is empty.
-    standard_output_url: ?[]const u8,
+    standard_output_url: ?[]const u8 = null,
 
     /// The status of this plugin. You can run a document with multiple plugins.
-    status: ?CommandPluginStatus,
+    status: ?CommandPluginStatus = null,
 
     /// A detailed status of the plugin execution. `StatusDetails` includes more
     /// information than Status because it includes states resulting from error and
@@ -128,7 +128,7 @@ pub const CommandPlugin = struct {
     /// * Terminated: The parent command exceeded its MaxErrors limit and subsequent
     ///   command
     /// invocations were canceled by the system. This is a terminal state.
-    status_details: ?[]const u8,
+    status_details: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

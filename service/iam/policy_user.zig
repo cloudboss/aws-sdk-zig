@@ -11,8 +11,8 @@ pub const PolicyUser = struct {
     /// about IDs, see
     /// [IAM
     /// identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in the *IAM User Guide*.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     /// The name (friendly name, not ARN) identifying the user.
-    user_name: ?[]const u8,
+    user_name: ?[]const u8 = null,
 };

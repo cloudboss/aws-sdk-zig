@@ -7,5 +7,5 @@ pub const StorageClassAnalysis = struct {
     /// Specifies how data related to the storage class analysis for an Amazon S3
     /// bucket should be
     /// exported.
-    data_export: ?StorageClassAnalysisDataExport,
+    data_export: ?StorageClassAnalysisDataExport = null,
 };

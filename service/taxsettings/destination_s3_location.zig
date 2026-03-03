@@ -6,7 +6,7 @@ pub const DestinationS3Location = struct {
     bucket: []const u8,
 
     /// The Amazon S3 object prefix that you specify for your tax document file.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

@@ -7,22 +7,22 @@ const StringFilter = @import("string_filter.zig").StringFilter;
 /// The details that define an aggregation based on finding title.
 pub const TitleAggregation = struct {
     /// The type of finding to aggregate on.
-    finding_type: ?AggregationFindingType,
+    finding_type: ?AggregationFindingType = null,
 
     /// The resource type to aggregate on.
-    resource_type: ?AggregationResourceType,
+    resource_type: ?AggregationResourceType = null,
 
     /// The value to sort results by.
-    sort_by: ?TitleSortBy,
+    sort_by: ?TitleSortBy = null,
 
     /// The order to sort results by.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     /// The finding titles to aggregate on.
-    titles: ?[]const StringFilter,
+    titles: ?[]const StringFilter = null,
 
     /// The vulnerability IDs of the findings.
-    vulnerability_ids: ?[]const StringFilter,
+    vulnerability_ids: ?[]const StringFilter = null,
 
     pub const json_field_names = .{
         .finding_type = "findingType",

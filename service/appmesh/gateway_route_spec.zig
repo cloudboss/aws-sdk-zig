@@ -6,16 +6,16 @@ const HttpGatewayRoute = @import("http_gateway_route.zig").HttpGatewayRoute;
 /// type.
 pub const GatewayRouteSpec = struct {
     /// An object that represents the specification of a gRPC gateway route.
-    grpc_route: ?GrpcGatewayRoute,
+    grpc_route: ?GrpcGatewayRoute = null,
 
     /// An object that represents the specification of an HTTP/2 gateway route.
-    http_2_route: ?HttpGatewayRoute,
+    http_2_route: ?HttpGatewayRoute = null,
 
     /// An object that represents the specification of an HTTP gateway route.
-    http_route: ?HttpGatewayRoute,
+    http_route: ?HttpGatewayRoute = null,
 
     /// The ordering of the gateway routes spec.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     pub const json_field_names = .{
         .grpc_route = "grpcRoute",

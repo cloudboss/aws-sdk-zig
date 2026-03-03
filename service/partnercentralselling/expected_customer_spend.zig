@@ -15,7 +15,7 @@ pub const ExpectedCustomerSpend = struct {
 
     /// A URL providing additional information or context about the spend
     /// estimation.
-    estimation_url: ?[]const u8,
+    estimation_url: ?[]const u8 = null,
 
     /// Indicates how frequently the customer is expected to spend the projected
     /// amount. Only the value `Monthly` is allowed for the `Frequency` field,

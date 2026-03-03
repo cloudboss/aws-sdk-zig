@@ -3,21 +3,21 @@ const AlarmStateName = @import("alarm_state_name.zig").AlarmStateName;
 /// Contains a summary of an alarm.
 pub const AlarmSummary = struct {
     /// The name of the alarm model.
-    alarm_model_name: ?[]const u8,
+    alarm_model_name: ?[]const u8 = null,
 
     /// The version of the alarm model.
-    alarm_model_version: ?[]const u8,
+    alarm_model_version: ?[]const u8 = null,
 
     /// The time the alarm was created, in the Unix epoch format.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The value of the key used as a filter to select only the alarms associated
     /// with the
     /// [key](https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).
-    key_value: ?[]const u8,
+    key_value: ?[]const u8 = null,
 
     /// The time the alarm was last updated, in the Unix epoch format.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The name of the alarm state. The state name can be one of the following
     /// values:
@@ -43,7 +43,7 @@ pub const AlarmSummary = struct {
     /// the alarm was invoked. However, the data that the alarm is currently
     /// evaluating is within the specified range.
     /// To change the alarm to the `NORMAL` state, you must acknowledge the alarm.
-    state_name: ?AlarmStateName,
+    state_name: ?AlarmStateName = null,
 
     pub const json_field_names = .{
         .alarm_model_name = "alarmModelName",

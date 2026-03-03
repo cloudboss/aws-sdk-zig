@@ -4,13 +4,13 @@
 /// at this time.
 pub const HPOObjective = struct {
     /// The name of the metric.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// A regular expression for finding the metric in the training job logs.
-    metric_regex: ?[]const u8,
+    metric_regex: ?[]const u8 = null,
 
     /// The type of the metric. Valid values are `Maximize` and `Minimize`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metric_name = "metricName",

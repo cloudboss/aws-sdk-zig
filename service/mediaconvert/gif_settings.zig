@@ -16,13 +16,13 @@ pub const GifSettings = struct {
     /// use the frame rate from the input. Choose SPECIFIED if you want the service
     /// to use the frame rate you specify in the settings FramerateNumerator and
     /// FramerateDenominator.
-    framerate_control: ?GifFramerateControl,
+    framerate_control: ?GifFramerateControl = null,
 
     /// Optional. Specify how the transcoder performs framerate conversion. The
     /// default behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When
     /// you choose Interpolate (INTERPOLATE) instead, the conversion produces
     /// smoother motion.
-    framerate_conversion_algorithm: ?GifFramerateConversionAlgorithm,
+    framerate_conversion_algorithm: ?GifFramerateConversionAlgorithm = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -31,7 +31,7 @@ pub const GifSettings = struct {
     /// use the console for transcode jobs that use frame rate conversion, provide
     /// the value as a decimal number for Framerate. In this example, specify
     /// 23.976.
-    framerate_denominator: ?i32,
+    framerate_denominator: ?i32 = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -39,7 +39,7 @@ pub const GifSettings = struct {
     /// this example, use 24000 for the value of FramerateNumerator. When you use
     /// the console for transcode jobs that use frame rate conversion, provide the
     /// value as a decimal number for Framerate. In this example, specify 23.976.
-    framerate_numerator: ?i32,
+    framerate_numerator: ?i32 = null,
 
     pub const json_field_names = .{
         .framerate_control = "FramerateControl",

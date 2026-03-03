@@ -5,13 +5,13 @@ const TemporalStatistics = @import("temporal_statistics.zig").TemporalStatistics
 /// operation.
 pub const TemporalStatisticsConfigInput = struct {
     /// The input for the temporal statistics grouping by time frequency option.
-    group_by: ?GroupBy,
+    group_by: ?GroupBy = null,
 
     /// The list of the statistics method options.
     statistics: []const TemporalStatistics,
 
     /// The list of target band names for the temporal statistic to calculate.
-    target_bands: ?[]const []const u8,
+    target_bands: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .group_by = "GroupBy",

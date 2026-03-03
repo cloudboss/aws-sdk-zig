@@ -4,10 +4,10 @@ const AttributeKey = @import("attribute_key.zig").AttributeKey;
 /// Structure that contains attribute update information.
 pub const LinkAttributeUpdate = struct {
     /// The action to perform as part of the attribute update.
-    attribute_action: ?LinkAttributeAction,
+    attribute_action: ?LinkAttributeAction = null,
 
     /// The key of the attribute being updated.
-    attribute_key: ?AttributeKey,
+    attribute_key: ?AttributeKey = null,
 
     pub const json_field_names = .{
         .attribute_action = "AttributeAction",

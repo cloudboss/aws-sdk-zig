@@ -8,27 +8,27 @@ const SageMakerResourceName = @import("sage_maker_resource_name.zig").SageMakerR
 /// [CreateTrainingPlan](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html) `.
 pub const TrainingPlanOffering = struct {
     /// The currency code for the upfront fee (e.g., USD).
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// The number of whole hours in the total duration for this training plan
     /// offering.
-    duration_hours: ?i64,
+    duration_hours: ?i64 = null,
 
     /// The additional minutes beyond whole hours in the total duration for this
     /// training plan offering.
-    duration_minutes: ?i64,
+    duration_minutes: ?i64 = null,
 
     /// The requested end time that the user specified when searching for the
     /// training plan offering.
-    requested_end_time_before: ?i64,
+    requested_end_time_before: ?i64 = null,
 
     /// The requested start time that the user specified when searching for the
     /// training plan offering.
-    requested_start_time_after: ?i64,
+    requested_start_time_after: ?i64 = null,
 
     /// A list of reserved capacity offerings associated with this training plan
     /// offering.
-    reserved_capacity_offerings: ?[]const ReservedCapacityOffering,
+    reserved_capacity_offerings: ?[]const ReservedCapacityOffering = null,
 
     /// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod,
     /// SageMaker Endpoints) for this training plan offering.
@@ -47,7 +47,7 @@ pub const TrainingPlanOffering = struct {
     training_plan_offering_id: []const u8,
 
     /// The upfront fee for this training plan offering.
-    upfront_fee: ?[]const u8,
+    upfront_fee: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .currency_code = "CurrencyCode",

@@ -34,7 +34,7 @@ pub const MembershipSummary = struct {
     member_abilities: []const MemberAbility,
 
     /// Provides a summary of the ML abilities for the collaboration member.
-    ml_member_abilities: ?MLMemberAbilities,
+    ml_member_abilities: ?MLMemberAbilities = null,
 
     /// The payment responsibilities accepted by the collaboration member.
     payment_configuration: MembershipPaymentConfiguration,

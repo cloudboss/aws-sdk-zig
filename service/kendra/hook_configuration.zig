@@ -20,7 +20,7 @@ pub const HookConfiguration = struct {
     /// values,
     /// then Amazon Kendra should invoke a function that inserts the current
     /// date-time.
-    invocation_condition: ?DocumentAttributeCondition,
+    invocation_condition: ?DocumentAttributeCondition = null,
 
     /// The Amazon Resource Name (ARN) of an IAM role with permission to run a
     /// Lambda function

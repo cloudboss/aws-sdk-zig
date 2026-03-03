@@ -4,7 +4,7 @@ const AttendeeCapabilities = @import("attendee_capabilities.zig").AttendeeCapabi
 /// BatchCreateAttendee action.
 pub const CreateAttendeeRequestItem = struct {
     /// A list of one or more capabilities.
-    capabilities: ?AttendeeCapabilities,
+    capabilities: ?AttendeeCapabilities = null,
 
     /// The Amazon Chime SDK external user ID. An idempotency token. Links the
     /// attendee to an identity managed by a builder application.

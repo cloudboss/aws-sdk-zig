@@ -11,10 +11,10 @@ pub const ConfigParameter = struct {
     /// For more information about query monitoring rules and available metrics, see
     /// [Query monitoring metrics for Amazon Redshift
     /// Serverless](https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless).
-    parameter_key: ?[]const u8,
+    parameter_key: ?[]const u8 = null,
 
     /// The value of the parameter to set.
-    parameter_value: ?[]const u8,
+    parameter_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .parameter_key = "parameterKey",

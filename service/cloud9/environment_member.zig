@@ -9,7 +9,7 @@ pub const EnvironmentMember = struct {
     /// The time, expressed in epoch time format, when the environment member last
     /// opened the
     /// environment.
-    last_access: ?i64,
+    last_access: ?i64 = null,
 
     /// The type of environment member permissions associated with this environment
     /// member.

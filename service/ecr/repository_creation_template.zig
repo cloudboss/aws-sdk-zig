@@ -11,51 +11,51 @@ pub const RepositoryCreationTemplate = struct {
     /// template will apply towards. The supported scenarios are PULL_THROUGH_CACHE,
     /// REPLICATION, and
     /// CREATE_ON_PUSH
-    applied_for: ?[]const RCTAppliedFor,
+    applied_for: ?[]const RCTAppliedFor = null,
 
     /// The date and time, in JavaScript date format, when the repository creation
     /// template
     /// was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your
     /// supplied role
     /// when the customRoleArn is specified. When this field isn't specified, Amazon
     /// ECR will use the
     /// service-linked role for the repository creation template.
-    custom_role_arn: ?[]const u8,
+    custom_role_arn: ?[]const u8 = null,
 
     /// The description associated with the repository creation template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The encryption configuration associated with the repository creation
     /// template.
-    encryption_configuration: ?EncryptionConfigurationForRepositoryCreationTemplate,
+    encryption_configuration: ?EncryptionConfigurationForRepositoryCreationTemplate = null,
 
     /// The tag mutability setting for the repository. If this parameter is omitted,
     /// the
     /// default setting of `MUTABLE` will be used which will allow image tags to be
     /// overwritten. If `IMMUTABLE` is specified, all image tags within the
     /// repository will be immutable which will prevent them from being overwritten.
-    image_tag_mutability: ?ImageTagMutability,
+    image_tag_mutability: ?ImageTagMutability = null,
 
     /// A list of filters that specify which image tags are excluded from the
     /// repository
     /// creation template's image tag mutability setting.
-    image_tag_mutability_exclusion_filters: ?[]const ImageTagMutabilityExclusionFilter,
+    image_tag_mutability_exclusion_filters: ?[]const ImageTagMutabilityExclusionFilter = null,
 
     /// The lifecycle policy to use for repositories created using the template.
-    lifecycle_policy: ?[]const u8,
+    lifecycle_policy: ?[]const u8 = null,
 
     /// The repository namespace prefix associated with the repository creation
     /// template.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The repository policy to apply to repositories created using the template. A
     /// repository policy is a permissions policy associated with a repository to
     /// control access
     /// permissions.
-    repository_policy: ?[]const u8,
+    repository_policy: ?[]const u8 = null,
 
     /// The metadata to apply to the repository to help you categorize and organize.
     /// Each tag
@@ -63,12 +63,12 @@ pub const RepositoryCreationTemplate = struct {
     /// can have a maximum character length of 128 characters, and tag values can
     /// have
     /// a maximum length of 256 characters.
-    resource_tags: ?[]const Tag,
+    resource_tags: ?[]const Tag = null,
 
     /// The date and time, in JavaScript date format, when the repository creation
     /// template
     /// was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .applied_for = "appliedFor",

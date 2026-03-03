@@ -3,7 +3,7 @@ const IotSiteWiseSourceConfigurationFilter = @import("iot_site_wise_source_confi
 /// The metadata transfer job AWS IoT SiteWise source configuration.
 pub const IotSiteWiseSourceConfiguration = struct {
     /// The AWS IoT SiteWise soucre configuration filters.
-    filters: ?[]const IotSiteWiseSourceConfigurationFilter,
+    filters: ?[]const IotSiteWiseSourceConfigurationFilter = null,
 
     pub const json_field_names = .{
         .filters = "filters",

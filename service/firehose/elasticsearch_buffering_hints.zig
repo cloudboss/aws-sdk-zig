@@ -5,7 +5,7 @@ pub const ElasticsearchBufferingHints = struct {
     /// Buffer incoming data for the specified period of time, in seconds, before
     /// delivering
     /// it to the destination. The default value is 300 (5 minutes).
-    interval_in_seconds: ?i32,
+    interval_in_seconds: ?i32 = null,
 
     /// Buffer incoming data to the specified size, in MBs, before delivering it to
     /// the
@@ -16,7 +16,7 @@ pub const ElasticsearchBufferingHints = struct {
     /// typically ingest into the Firehose stream in 10 seconds. For example, if you
     /// typically
     /// ingest data at 1 MB/sec, the value should be 10 MB or higher.
-    size_in_m_bs: ?i32,
+    size_in_m_bs: ?i32 = null,
 
     pub const json_field_names = .{
         .interval_in_seconds = "IntervalInSeconds",

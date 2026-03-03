@@ -7,12 +7,12 @@ const ImportTaskFilterName = @import("import_task_filter_name.zig").ImportTaskFi
 /// When filtering by import status, all other filter values are ignored.
 pub const ImportTaskFilter = struct {
     /// The name, status, or import task ID for a specific import task.
-    name: ?ImportTaskFilterName,
+    name: ?ImportTaskFilterName = null,
 
     /// An array of strings that you can provide to match against a specific name,
     /// status, or
     /// import task ID to filter the results for your import task queries.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

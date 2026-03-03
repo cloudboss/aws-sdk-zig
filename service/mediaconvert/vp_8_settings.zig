@@ -8,7 +8,7 @@ const Vp8RateControlMode = @import("vp_8_rate_control_mode.zig").Vp8RateControlM
 pub const Vp8Settings = struct {
     /// Target bitrate in bits/second. For example, enter five megabits per second
     /// as 5000000.
-    bitrate: ?i32,
+    bitrate: ?i32 = null,
 
     /// If you are using the console, use the Framerate setting to specify the frame
     /// rate for this output. If you want to keep the same frame rate as the input
@@ -16,7 +16,7 @@ pub const Vp8Settings = struct {
     /// a frame rate from the dropdown list or choose Custom. The framerates shown
     /// in the dropdown list are decimal approximations of fractions. If you choose
     /// Custom, specify your frame rate as a fraction.
-    framerate_control: ?Vp8FramerateControl,
+    framerate_control: ?Vp8FramerateControl = null,
 
     /// Choose the method that you want MediaConvert to use when increasing or
     /// decreasing your video's frame rate. For numerically simple conversions, such
@@ -34,7 +34,7 @@ pub const Vp8Settings = struct {
     /// add, or otherwise change the frame count from your input to your output.
     /// Note that since the frame count is maintained, the duration of your output
     /// will become shorter at higher frame rates and longer at lower frame rates.
-    framerate_conversion_algorithm: ?Vp8FramerateConversionAlgorithm,
+    framerate_conversion_algorithm: ?Vp8FramerateConversionAlgorithm = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -43,7 +43,7 @@ pub const Vp8Settings = struct {
     /// use the console for transcode jobs that use frame rate conversion, provide
     /// the value as a decimal number for Framerate. In this example, specify
     /// 23.976.
-    framerate_denominator: ?i32,
+    framerate_denominator: ?i32 = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -51,20 +51,20 @@ pub const Vp8Settings = struct {
     /// this example, use 24000 for the value of FramerateNumerator. When you use
     /// the console for transcode jobs that use frame rate conversion, provide the
     /// value as a decimal number for Framerate. In this example, specify 23.976.
-    framerate_numerator: ?i32,
+    framerate_numerator: ?i32 = null,
 
     /// GOP Length (keyframe interval) in frames. Must be greater than zero.
-    gop_size: ?f64,
+    gop_size: ?f64 = null,
 
     /// Optional. Size of buffer (HRD buffer model) in bits. For example, enter five
     /// megabits as 5000000.
-    hrd_buffer_size: ?i32,
+    hrd_buffer_size: ?i32 = null,
 
     /// Ignore this setting unless you set qualityTuningLevel to MULTI_PASS.
     /// Optional. Specify the maximum bitrate in bits/second. For example, enter
     /// five megabits per second as 5000000. The default behavior uses twice the
     /// target bitrate as the maximum bitrate.
-    max_bitrate: ?i32,
+    max_bitrate: ?i32 = null,
 
     /// Optional. Specify how the service determines the pixel aspect ratio (PAR)
     /// for this output. The default behavior, Follow source, uses the PAR from your
@@ -72,7 +72,7 @@ pub const Vp8Settings = struct {
     /// choose any value other than Follow source. When you choose SPECIFIED for
     /// this setting, you must also specify values for the parNumerator and
     /// parDenominator settings.
-    par_control: ?Vp8ParControl,
+    par_control: ?Vp8ParControl = null,
 
     /// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
     /// corresponds to any value other than Follow source. When you specify an
@@ -80,7 +80,7 @@ pub const Vp8Settings = struct {
     /// provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen,
     /// you would specify the ratio 40:33. In this example, the value for
     /// parDenominator is 33.
-    par_denominator: ?i32,
+    par_denominator: ?i32 = null,
 
     /// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
     /// corresponds to any value other than Follow source. When you specify an
@@ -88,16 +88,16 @@ pub const Vp8Settings = struct {
     /// provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen,
     /// you would specify the ratio 40:33. In this example, the value for
     /// parNumerator is 40.
-    par_numerator: ?i32,
+    par_numerator: ?i32 = null,
 
     /// Optional. Use Quality tuning level to choose how you want to trade off
     /// encoding speed for output video quality. The default behavior is faster,
     /// lower quality, multi-pass encoding.
-    quality_tuning_level: ?Vp8QualityTuningLevel,
+    quality_tuning_level: ?Vp8QualityTuningLevel = null,
 
     /// With the VP8 codec, you can use only the variable bitrate (VBR) rate control
     /// mode.
-    rate_control_mode: ?Vp8RateControlMode,
+    rate_control_mode: ?Vp8RateControlMode = null,
 
     pub const json_field_names = .{
         .bitrate = "Bitrate",

@@ -3,28 +3,28 @@ const DeploymentStatus = @import("deployment_status.zig").DeploymentStatus;
 
 pub const DeploymentModel = struct {
     /// The desired state of the model.
-    desired_state: ?ModelState,
+    desired_state: ?ModelState = null,
 
     /// The unique handle of the model.
-    model_handle: ?[]const u8,
+    model_handle: ?[]const u8 = null,
 
     /// The name of the model.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     /// The version of the model.
-    model_version: ?[]const u8,
+    model_version: ?[]const u8 = null,
 
     /// Returns the error message if there is a rollback.
-    rollback_failure_reason: ?[]const u8,
+    rollback_failure_reason: ?[]const u8 = null,
 
     /// Returns the current state of the model.
-    state: ?ModelState,
+    state: ?ModelState = null,
 
     /// Returns the deployment status of the model.
-    status: ?DeploymentStatus,
+    status: ?DeploymentStatus = null,
 
     /// Returns the error message for the deployment status result.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .desired_state = "DesiredState",

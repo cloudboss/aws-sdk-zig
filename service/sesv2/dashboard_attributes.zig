@@ -13,7 +13,7 @@ pub const DashboardAttributes = struct {
     ///
     /// * `DISABLED` – Amazon SES disables engagement metrics for your
     /// account.
-    engagement_metrics: ?FeatureStatus,
+    engagement_metrics: ?FeatureStatus = null,
 
     pub const json_field_names = .{
         .engagement_metrics = "EngagementMetrics",

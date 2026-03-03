@@ -5,7 +5,7 @@ pub const AuthorizationCodeGrant = struct {
     /// the user is authorized.
     ///
     /// RedirectUris is required when the grant type is `authorization_code`.
-    redirect_uris: ?[]const []const u8,
+    redirect_uris: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .redirect_uris = "RedirectUris",

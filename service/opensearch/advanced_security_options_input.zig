@@ -13,29 +13,29 @@ pub const AdvancedSecurityOptionsInput = struct {
     /// mappings. Only necessary when [enabling fine-grained access control on an
     /// existing
     /// domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing).
-    anonymous_auth_enabled: ?bool,
+    anonymous_auth_enabled: ?bool = null,
 
     /// True to enable fine-grained access control.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// Input configuration for IAM identity federation within advanced security
     /// options.
-    iam_federation_options: ?IAMFederationOptionsInput,
+    iam_federation_options: ?IAMFederationOptionsInput = null,
 
     /// True to enable the internal user database.
-    internal_user_database_enabled: ?bool,
+    internal_user_database_enabled: ?bool = null,
 
     /// Container for information about the JWT configuration of the Amazon
     /// OpenSearch
     /// Service.
-    jwt_options: ?JWTOptionsInput,
+    jwt_options: ?JWTOptionsInput = null,
 
     /// Container for information about the master user.
-    master_user_options: ?MasterUserOptions,
+    master_user_options: ?MasterUserOptions = null,
 
     /// Container for information about the SAML configuration for OpenSearch
     /// Dashboards.
-    saml_options: ?SAMLOptionsInput,
+    saml_options: ?SAMLOptionsInput = null,
 
     pub const json_field_names = .{
         .anonymous_auth_enabled = "AnonymousAuthEnabled",

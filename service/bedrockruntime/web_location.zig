@@ -2,10 +2,10 @@
 /// performing a web search.
 pub const WebLocation = struct {
     /// The domain that was cited when performing a web search.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// The URL that was cited when performing a web search.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domain = "domain",

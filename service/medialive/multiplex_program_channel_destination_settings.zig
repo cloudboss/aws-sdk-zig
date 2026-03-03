@@ -6,11 +6,11 @@ pub const MultiplexProgramChannelDestinationSettings = struct {
     /// handle the connection of the two MediaLive pipelines to the two Multiplex
     /// instances.
     /// The Multiplex must be in the same region as the Channel.
-    multiplex_id: ?[]const u8,
+    multiplex_id: ?[]const u8 = null,
 
     /// The program name of the Multiplex program that the encoder is providing
     /// output to.
-    program_name: ?[]const u8,
+    program_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .multiplex_id = "MultiplexId",

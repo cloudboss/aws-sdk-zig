@@ -1,13 +1,13 @@
 /// Provides information about the CloudFormation stack output.
 pub const AwsCloudFormationStackOutputsDetails = struct {
     /// A user-defined description associated with the output.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The key associated with the output.
-    output_key: ?[]const u8,
+    output_key: ?[]const u8 = null,
 
     /// The value associated with the output.
-    output_value: ?[]const u8,
+    output_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

@@ -11,7 +11,7 @@ pub const LineChartLineStyleSettings = struct {
     /// * `SMOOTH`: Show as a smooth curve.
     ///
     /// * `STEPPED`: Show steps in line.
-    line_interpolation: ?LineInterpolation,
+    line_interpolation: ?LineInterpolation = null,
 
     /// Line style for line series.
     ///
@@ -20,14 +20,14 @@ pub const LineChartLineStyleSettings = struct {
     /// * `DOTTED`: Show as a dotted line.
     ///
     /// * `DASHED`: Show as a dashed line.
-    line_style: ?LineChartLineStyle,
+    line_style: ?LineChartLineStyle = null,
 
     /// Configuration option that determines whether to show the line for the
     /// series.
-    line_visibility: ?Visibility,
+    line_visibility: ?Visibility = null,
 
     /// Width that determines the line thickness.
-    line_width: ?[]const u8,
+    line_width: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .line_interpolation = "LineInterpolation",

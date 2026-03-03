@@ -3,7 +3,7 @@
 /// it can be used or launched by your customer.
 pub const Entity = struct {
     /// The identifier for the entity.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// The type of entity.
     @"type": []const u8,

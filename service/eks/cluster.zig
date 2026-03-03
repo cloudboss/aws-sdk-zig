@@ -21,17 +21,17 @@ const ZonalShiftConfigResponse = @import("zonal_shift_config_response.zig").Zona
 /// An object representing an Amazon EKS cluster.
 pub const Cluster = struct {
     /// The access configuration for the cluster.
-    access_config: ?AccessConfigResponse,
+    access_config: ?AccessConfigResponse = null,
 
     /// The Amazon Resource Name (ARN) of the cluster.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The `certificate-authority-data` for your cluster.
-    certificate_authority: ?Certificate,
+    certificate_authority: ?Certificate = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure
     /// the idempotency of the request.
-    client_request_token: ?[]const u8,
+    client_request_token: ?[]const u8 = null,
 
     /// Indicates the current configuration of the compute capability on your EKS
     /// Auto Mode
@@ -42,56 +42,56 @@ pub const Cluster = struct {
     /// your Amazon Web Services account. For more information, see EKS Auto Mode
     /// compute capability in the
     /// *Amazon EKS User Guide*.
-    compute_config: ?ComputeConfigResponse,
+    compute_config: ?ComputeConfigResponse = null,
 
     /// The configuration used to connect to a cluster for registration.
-    connector_config: ?ConnectorConfigResponse,
+    connector_config: ?ConnectorConfigResponse = null,
 
     /// The control plane scaling tier configuration. For more information, see EKS
     /// Provisioned Control Plane in the Amazon EKS User Guide.
-    control_plane_scaling_config: ?ControlPlaneScalingConfig,
+    control_plane_scaling_config: ?ControlPlaneScalingConfig = null,
 
     /// The Unix epoch timestamp at object creation.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The current deletion protection setting for the cluster. When `true`,
     /// deletion protection is enabled and the cluster cannot be deleted until
     /// protection is
     /// disabled. When `false`, the cluster can be deleted normally. This setting
     /// only applies to clusters in an active state.
-    deletion_protection: ?bool,
+    deletion_protection: ?bool = null,
 
     /// The encryption configuration for the cluster.
-    encryption_config: ?[]const EncryptionConfig,
+    encryption_config: ?[]const EncryptionConfig = null,
 
     /// The endpoint for your Kubernetes API server.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// An object representing the health of your Amazon EKS cluster.
-    health: ?ClusterHealth,
+    health: ?ClusterHealth = null,
 
     /// The ID of your local Amazon EKS cluster on an Amazon Web Services Outpost.
     /// This property isn't available
     /// for an Amazon EKS cluster on the Amazon Web Services cloud.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The identity provider information for the cluster.
-    identity: ?Identity,
+    identity: ?Identity = null,
 
     /// The Kubernetes network configuration for the cluster.
-    kubernetes_network_config: ?KubernetesNetworkConfigResponse,
+    kubernetes_network_config: ?KubernetesNetworkConfigResponse = null,
 
     /// The logging configuration for your cluster.
-    logging: ?Logging,
+    logging: ?Logging = null,
 
     /// The name of your cluster.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// An object representing the configuration of your local Amazon EKS cluster on
     /// an Amazon Web Services
     /// Outpost. This object isn't available for clusters on the Amazon Web Services
     /// cloud.
-    outpost_config: ?OutpostConfigResponse,
+    outpost_config: ?OutpostConfigResponse = null,
 
     /// The platform version of your Amazon EKS cluster. For more information about
     /// clusters
@@ -105,12 +105,12 @@ pub const Cluster = struct {
     /// *
     /// Amazon EKS User Guide*
     /// .
-    platform_version: ?[]const u8,
+    platform_version: ?[]const u8 = null,
 
     /// The configuration in the cluster for EKS Hybrid Nodes. You can add, change,
     /// or remove this
     /// configuration after the cluster is created.
-    remote_network_config: ?RemoteNetworkConfigResponse,
+    remote_network_config: ?RemoteNetworkConfigResponse = null,
 
     /// The VPC configuration used by the cluster control plane. Amazon EKS VPC
     /// resources have
@@ -118,15 +118,15 @@ pub const Cluster = struct {
     /// information, see [Cluster VPC
     /// considerations](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html) and [Cluster security group considerations](https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html) in the
     /// *Amazon EKS User Guide*.
-    resources_vpc_config: ?VpcConfigResponse,
+    resources_vpc_config: ?VpcConfigResponse = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
     /// the Kubernetes control plane
     /// to make calls to Amazon Web Services API operations on your behalf.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The current status of the cluster.
-    status: ?ClusterStatus,
+    status: ?ClusterStatus = null,
 
     /// Indicates the current configuration of the block storage capability on your
     /// EKS Auto
@@ -137,26 +137,26 @@ pub const Cluster = struct {
     /// Amazon Web Services account. For more information, see EKS Auto Mode block
     /// storage capability in the
     /// *Amazon EKS User Guide*.
-    storage_config: ?StorageConfigResponse,
+    storage_config: ?StorageConfigResponse = null,
 
     /// Metadata that assists with categorization and organization.
     /// Each tag consists of a key and an optional value. You define both. Tags
     /// don't
     /// propagate to any other cluster or Amazon Web Services resources.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// This value indicates if extended support is enabled or disabled for the
     /// cluster.
     ///
     /// [Learn more about EKS Extended Support in the *Amazon EKS User
     /// Guide*.](https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html)
-    upgrade_policy: ?UpgradePolicyResponse,
+    upgrade_policy: ?UpgradePolicyResponse = null,
 
     /// The Kubernetes server version for the cluster.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     /// The configuration for zonal shift for the cluster.
-    zonal_shift_config: ?ZonalShiftConfigResponse,
+    zonal_shift_config: ?ZonalShiftConfigResponse = null,
 
     pub const json_field_names = .{
         .access_config = "accessConfig",

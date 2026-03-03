@@ -28,7 +28,7 @@ pub const S3ExportConfiguration = struct {
     /// The Amazon S3 path for the bucket where the output disk images for your VM
     /// are
     /// stored.
-    s_3_prefix: ?[]const u8,
+    s_3_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .disk_image_format = "diskImageFormat",

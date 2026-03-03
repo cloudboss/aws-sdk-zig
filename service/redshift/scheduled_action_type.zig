@@ -6,11 +6,11 @@ const ResumeClusterMessage = @import("resume_cluster_message.zig").ResumeCluster
 /// supported by the Amazon Redshift scheduler.
 pub const ScheduledActionType = struct {
     /// An action that runs a `PauseCluster` API operation.
-    pause_cluster: ?PauseClusterMessage,
+    pause_cluster: ?PauseClusterMessage = null,
 
     /// An action that runs a `ResizeCluster` API operation.
-    resize_cluster: ?ResizeClusterMessage,
+    resize_cluster: ?ResizeClusterMessage = null,
 
     /// An action that runs a `ResumeCluster` API operation.
-    resume_cluster: ?ResumeClusterMessage,
+    resume_cluster: ?ResumeClusterMessage = null,
 };

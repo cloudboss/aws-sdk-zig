@@ -7,7 +7,7 @@ pub const CollaborationSummary = struct {
     ///
     /// After July 16, 2025, the `CLEAN_ROOMS_SQL` parameter will no longer be
     /// available.
-    analytics_engine: ?AnalyticsEngine,
+    analytics_engine: ?AnalyticsEngine = null,
 
     /// The ARN of the collaboration.
     arn: []const u8,
@@ -26,10 +26,10 @@ pub const CollaborationSummary = struct {
     id: []const u8,
 
     /// The ARN of a member in a collaboration.
-    membership_arn: ?[]const u8,
+    membership_arn: ?[]const u8 = null,
 
     /// The identifier of a member in a collaboration.
-    membership_id: ?[]const u8,
+    membership_id: ?[]const u8 = null,
 
     /// The status of a member in a collaboration.
     member_status: MemberStatus,

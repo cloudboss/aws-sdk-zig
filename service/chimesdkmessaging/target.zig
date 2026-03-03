@@ -4,7 +4,7 @@
 /// administrators can delete targeted messages that they can’t see.
 pub const Target = struct {
     /// The ARN of the target channel member.
-    member_arn: ?[]const u8,
+    member_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .member_arn = "MemberArn",

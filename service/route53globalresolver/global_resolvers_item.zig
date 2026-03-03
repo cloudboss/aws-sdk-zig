@@ -12,7 +12,7 @@ pub const GlobalResolversItem = struct {
     created_at: i64,
 
     /// A description of the global resolver.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The DNS name of the global resolver.
     dns_name: []const u8,
@@ -28,7 +28,7 @@ pub const GlobalResolversItem = struct {
 
     /// The AWS Region where observability data is collected for the global
     /// resolver.
-    observability_region: ?[]const u8,
+    observability_region: ?[]const u8 = null,
 
     /// The AWS Regions where the global resolver is deployed.
     regions: []const []const u8,

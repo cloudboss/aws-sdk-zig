@@ -17,7 +17,7 @@ pub const Transcript = struct {
     /// minutes. If you get an `AccesDenied` error, you can get a new temporary
     /// URI by running a `GetTranscriptionJob` or
     /// `ListTranscriptionJob` request.
-    redacted_transcript_file_uri: ?[]const u8,
+    redacted_transcript_file_uri: ?[]const u8 = null,
 
     /// The Amazon S3 location of your transcript. You can use this URI to access or
     /// download your transcript.
@@ -35,7 +35,7 @@ pub const Transcript = struct {
     /// minutes. If you get an `AccesDenied` error, you can get a new temporary
     /// URI by running a `GetTranscriptionJob` or
     /// `ListTranscriptionJob` request.
-    transcript_file_uri: ?[]const u8,
+    transcript_file_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .redacted_transcript_file_uri = "RedactedTranscriptFileUri",

@@ -90,7 +90,7 @@ pub const AttributeValueUpdate = struct {
     /// number (or set) for the attribute value. The only data types allowed are
     /// number,
     /// number set, string set or binary set.
-    action: ?AttributeAction,
+    action: ?AttributeAction = null,
 
     /// Represents the data for an attribute.
     ///
@@ -100,7 +100,7 @@ pub const AttributeValueUpdate = struct {
     ///
     /// For more information, see [Data
     /// Types](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes) in the *Amazon DynamoDB Developer Guide*.
-    value: ?AttributeValue,
+    value: ?AttributeValue = null,
 
     pub const json_field_names = .{
         .action = "Action",

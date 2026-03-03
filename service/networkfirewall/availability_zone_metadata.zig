@@ -5,7 +5,7 @@ const IPAddressType = @import("ip_address_type.zig").IPAddressType;
 pub const AvailabilityZoneMetadata = struct {
     /// The IP address type of the Firewall subnet in the Availability Zone. You
     /// can't change the IP address type after you create the subnet.
-    ip_address_type: ?IPAddressType,
+    ip_address_type: ?IPAddressType = null,
 
     pub const json_field_names = .{
         .ip_address_type = "IPAddressType",

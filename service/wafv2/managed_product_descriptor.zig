@@ -11,23 +11,23 @@ pub const ManagedProductDescriptor = struct {
 
     /// The name of the managed rule group. For example,
     /// `AWSManagedRulesAnonymousIpList` or `AWSManagedRulesATPRuleSet`.
-    managed_rule_set_name: ?[]const u8,
+    managed_rule_set_name: ?[]const u8 = null,
 
     /// A short description of the managed rule group.
-    product_description: ?[]const u8,
+    product_description: ?[]const u8 = null,
 
     /// A unique identifier for the rule group. This ID is returned in the responses
     /// to create and list commands. You provide it to operations like update and
     /// delete.
-    product_id: ?[]const u8,
+    product_id: ?[]const u8 = null,
 
     /// For Amazon Web Services Marketplace managed rule groups only, the link to
     /// the rule group product page.
-    product_link: ?[]const u8,
+    product_link: ?[]const u8 = null,
 
     /// The display name for the managed rule group. For example, `Anonymous IP
     /// list` or `Account takeover prevention`.
-    product_title: ?[]const u8,
+    product_title: ?[]const u8 = null,
 
     /// The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS
     /// topic that's used to provide notification of changes
@@ -37,11 +37,11 @@ pub const ManagedProductDescriptor = struct {
     /// expiration.
     /// For more information, see the [Amazon Simple Notification Service Developer
     /// Guide](https://docs.aws.amazon.com/sns/latest/dg/welcome.html).
-    sns_topic_arn: ?[]const u8,
+    sns_topic_arn: ?[]const u8 = null,
 
     /// The name of the managed rule group vendor. You use this, along with the rule
     /// group name, to identify a rule group.
-    vendor_name: ?[]const u8,
+    vendor_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .is_advanced_managed_rule_set = "IsAdvancedManagedRuleSet",

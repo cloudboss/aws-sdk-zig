@@ -4,16 +4,16 @@ const WiFiAccessPoint = @import("wi_fi_access_point.zig").WiFiAccessPoint;
 
 /// The device's position, IP address, and Wi-Fi access points.
 pub const DeviceState = struct {
-    accuracy: ?PositionalAccuracy,
+    accuracy: ?PositionalAccuracy = null,
 
     /// The cellular network infrastructure that the device is connected to.
-    cell_signals: ?CellSignals,
+    cell_signals: ?CellSignals = null,
 
     /// The device identifier.
     device_id: []const u8,
 
     /// The device's Ipv4 address.
-    ipv_4_address: ?[]const u8,
+    ipv_4_address: ?[]const u8 = null,
 
     /// The last known device position.
     position: []const f64,
@@ -24,7 +24,7 @@ pub const DeviceState = struct {
     sample_time: i64,
 
     /// The Wi-Fi access points the device is using.
-    wi_fi_access_points: ?[]const WiFiAccessPoint,
+    wi_fi_access_points: ?[]const WiFiAccessPoint = null,
 
     pub const json_field_names = .{
         .accuracy = "Accuracy",

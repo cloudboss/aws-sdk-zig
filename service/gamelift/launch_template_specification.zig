@@ -6,17 +6,17 @@
 /// game server group.
 pub const LaunchTemplateSpecification = struct {
     /// A unique identifier for an existing Amazon EC2 launch template.
-    launch_template_id: ?[]const u8,
+    launch_template_id: ?[]const u8 = null,
 
     /// A readable identifier for an existing Amazon EC2 launch template.
-    launch_template_name: ?[]const u8,
+    launch_template_name: ?[]const u8 = null,
 
     /// The version of the Amazon EC2 launch template to use. If no version is
     /// specified, the
     /// default version will be used. With Amazon EC2, you can specify a default
     /// version for a launch
     /// template. If none is set, the default is the first version created.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .launch_template_id = "LaunchTemplateId",

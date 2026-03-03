@@ -10,10 +10,10 @@ pub const CategoricalDimensionField = struct {
     field_id: []const u8,
 
     /// The format configuration of the field.
-    format_configuration: ?StringFormatConfiguration,
+    format_configuration: ?StringFormatConfiguration = null,
 
     /// The custom hierarchy ID.
-    hierarchy_id: ?[]const u8,
+    hierarchy_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .column = "Column",

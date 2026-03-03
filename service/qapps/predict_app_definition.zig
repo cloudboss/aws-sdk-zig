@@ -7,7 +7,7 @@ pub const PredictAppDefinition = struct {
     app_definition: AppDefinitionInput,
 
     /// The description of the generated Q App definition.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The title of the generated Q App definition.
     title: []const u8,

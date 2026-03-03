@@ -15,16 +15,16 @@ const CertificateAuthorityUsageMode = @import("certificate_authority_usage_mode.
 pub const CertificateAuthority = struct {
     /// Amazon Resource Name (ARN) for your private certificate authority (CA). The
     /// format is ` *12345678-1234-1234-1234-123456789012* `.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Your private CA configuration.
-    certificate_authority_configuration: ?CertificateAuthorityConfiguration,
+    certificate_authority_configuration: ?CertificateAuthorityConfiguration = null,
 
     /// Date and time at which your private CA was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Reason the request to create your private CA failed.
-    failure_reason: ?FailureReason,
+    failure_reason: ?FailureReason = null,
 
     /// Defines a cryptographic key management compliance standard for handling and
     /// protecting CA keys.
@@ -39,38 +39,38 @@ pub const CertificateAuthority = struct {
     /// Services Regions, see [Storage and security compliance of Amazon Web
     /// Services Private CA private
     /// keys](https://docs.aws.amazon.com/privateca/latest/userguide/data-protection.html#private-keys).
-    key_storage_security_standard: ?KeyStorageSecurityStandard,
+    key_storage_security_standard: ?KeyStorageSecurityStandard = null,
 
     /// Date and time at which your private CA was last updated.
-    last_state_change_at: ?i64,
+    last_state_change_at: ?i64 = null,
 
     /// Date and time after which your private CA certificate is not valid.
-    not_after: ?i64,
+    not_after: ?i64 = null,
 
     /// Date and time before which your private CA certificate is not valid.
-    not_before: ?i64,
+    not_before: ?i64 = null,
 
     /// The Amazon Web Services account ID that owns the certificate authority.
-    owner_account: ?[]const u8,
+    owner_account: ?[]const u8 = null,
 
     /// The period during which a deleted CA can be restored. For more information,
     /// see the `PermanentDeletionTimeInDays` parameter of the
     /// [DeleteCertificateAuthorityRequest](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html) action.
-    restorable_until: ?i64,
+    restorable_until: ?i64 = null,
 
     /// Information about the Online Certificate Status Protocol (OCSP)
     /// configuration or certificate revocation list (CRL) created and maintained by
     /// your private CA.
-    revocation_configuration: ?RevocationConfiguration,
+    revocation_configuration: ?RevocationConfiguration = null,
 
     /// Serial number of your private CA.
-    serial: ?[]const u8,
+    serial: ?[]const u8 = null,
 
     /// Status of your private CA.
-    status: ?CertificateAuthorityStatus,
+    status: ?CertificateAuthorityStatus = null,
 
     /// Type of your private CA.
-    @"type": ?CertificateAuthorityType,
+    @"type": ?CertificateAuthorityType = null,
 
     /// Specifies whether the CA issues general-purpose certificates that typically
     /// require a revocation mechanism, or short-lived certificates that may
@@ -78,7 +78,7 @@ pub const CertificateAuthority = struct {
     /// certificate validity is limited to seven days.
     ///
     /// The default value is GENERAL_PURPOSE.
-    usage_mode: ?CertificateAuthorityUsageMode,
+    usage_mode: ?CertificateAuthorityUsageMode = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

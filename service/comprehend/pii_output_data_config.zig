@@ -4,7 +4,7 @@ pub const PiiOutputDataConfig = struct {
     /// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
     /// Comprehend uses to encrypt the
     /// output results from an analysis job.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// When you use the `PiiOutputDataConfig` object with asynchronous operations,
     /// you specify the Amazon S3 location where you want to write the output data.

@@ -21,11 +21,11 @@ pub const OverrideAction = struct {
     /// count
     /// matches, do not use this and instead use the rule action override option,
     /// with `Count` action, in your rule group reference statement settings.
-    count: ?CountAction,
+    count: ?CountAction = null,
 
     /// Don't override the rule group evaluation result. This is the most common
     /// setting.
-    none: ?NoneAction,
+    none: ?NoneAction = null,
 
     pub const json_field_names = .{
         .count = "Count",

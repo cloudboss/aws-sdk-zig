@@ -19,7 +19,7 @@ const XssMatchTuple = @import("xss_match_tuple.zig").XssMatchTuple;
 /// the request to be considered a match.
 pub const XssMatchSet = struct {
     /// The name, if any, of the `XssMatchSet`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A unique identifier for an `XssMatchSet`. You use `XssMatchSetId` to get
     /// information about an

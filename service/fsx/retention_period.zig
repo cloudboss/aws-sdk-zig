@@ -36,7 +36,7 @@ pub const RetentionPeriod = struct {
     /// * `Months`: 0 - 12
     ///
     /// * `Years`: 0 - 100
-    value: ?i32,
+    value: ?i32 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

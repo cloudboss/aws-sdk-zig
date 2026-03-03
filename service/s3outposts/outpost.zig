@@ -4,18 +4,18 @@ pub const Outpost = struct {
     capacity_in_bytes: i64 = 0,
 
     /// Specifies the unique Amazon Resource Name (ARN) for the outpost.
-    outpost_arn: ?[]const u8,
+    outpost_arn: ?[]const u8 = null,
 
     /// Specifies the unique identifier for the outpost.
-    outpost_id: ?[]const u8,
+    outpost_id: ?[]const u8 = null,
 
     /// Returns the Amazon Web Services account ID of the outpost owner. Useful for
     /// comparing owned versus shared outposts.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// Specifies the unique S3 on Outposts ARN for use with Resource Access Manager
     /// (RAM).
-    s3_outpost_arn: ?[]const u8,
+    s3_outpost_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .capacity_in_bytes = "CapacityInBytes",

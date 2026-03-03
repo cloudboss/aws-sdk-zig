@@ -5,10 +5,10 @@
 /// communicated as a fleet event.
 pub const VpcPeeringConnectionStatus = struct {
     /// Code indicating the status of a VPC peering connection.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// Additional messaging associated with the connection status.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

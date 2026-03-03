@@ -6,16 +6,16 @@ const StandbyWorkspaceRelationshipType = @import("standby_workspace_relationship
 /// primary WorkSpace related to the specified WorkSpace.
 pub const RelatedWorkspaceProperties = struct {
     /// The Region of the related WorkSpace.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// Indicates the state of the WorkSpace.
-    state: ?WorkspaceState,
+    state: ?WorkspaceState = null,
 
     /// Indicates the type of WorkSpace.
-    @"type": ?StandbyWorkspaceRelationshipType,
+    @"type": ?StandbyWorkspaceRelationshipType = null,
 
     /// The identifier of the related WorkSpace.
-    workspace_id: ?[]const u8,
+    workspace_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .region = "Region",

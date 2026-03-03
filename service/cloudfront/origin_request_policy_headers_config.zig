@@ -24,5 +24,5 @@ pub const OriginRequestPolicyHeadersConfig = struct {
     ///   the `Headers` type, which are not included.
     header_behavior: OriginRequestPolicyHeaderBehavior,
 
-    headers: ?Headers,
+    headers: ?Headers = null,
 };

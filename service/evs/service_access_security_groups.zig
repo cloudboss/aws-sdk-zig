@@ -4,7 +4,7 @@
 /// service access.
 pub const ServiceAccessSecurityGroups = struct {
     /// The security groups that allow service access.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .security_groups = "securityGroups",

@@ -5,9 +5,9 @@ const Total = @import("total.zig").Total;
 /// feature.
 pub const UsageFeatureResult = struct {
     /// The feature that generated the usage cost.
-    feature: ?UsageFeature,
+    feature: ?UsageFeature = null,
 
-    total: ?Total,
+    total: ?Total = null,
 
     pub const json_field_names = .{
         .feature = "Feature",

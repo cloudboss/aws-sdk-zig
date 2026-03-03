@@ -9,17 +9,17 @@
 pub const ConfigRuleEvaluationStatus = struct {
     /// The Amazon Resource Name (ARN) of the Config
     /// rule.
-    config_rule_arn: ?[]const u8,
+    config_rule_arn: ?[]const u8 = null,
 
     /// The ID of the Config rule.
-    config_rule_id: ?[]const u8,
+    config_rule_id: ?[]const u8 = null,
 
     /// The name of the Config rule.
-    config_rule_name: ?[]const u8,
+    config_rule_name: ?[]const u8 = null,
 
     /// The time that you first activated the Config
     /// rule.
-    first_activated_time: ?i64,
+    first_activated_time: ?i64 = null,
 
     /// Indicates whether Config has evaluated your resources
     /// against the rule at least once.
@@ -34,43 +34,43 @@ pub const ConfigRuleEvaluationStatus = struct {
     first_evaluation_started: bool = false,
 
     /// The time that you last turned off the Config rule.
-    last_deactivated_time: ?i64,
+    last_deactivated_time: ?i64 = null,
 
     /// The status of the last attempted delivery of a debug log for your Config
     /// Custom Policy rules. Either `Successful` or `Failed`.
-    last_debug_log_delivery_status: ?[]const u8,
+    last_debug_log_delivery_status: ?[]const u8 = null,
 
     /// The reason Config was not able to deliver a debug log. This is for the last
     /// failed attempt to retrieve a debug log for your Config Custom Policy rules.
-    last_debug_log_delivery_status_reason: ?[]const u8,
+    last_debug_log_delivery_status_reason: ?[]const u8 = null,
 
     /// The time Config last attempted to deliver a debug log for your Config Custom
     /// Policy rules.
-    last_debug_log_delivery_time: ?i64,
+    last_debug_log_delivery_time: ?i64 = null,
 
     /// The error code that Config returned when the rule last
     /// failed.
-    last_error_code: ?[]const u8,
+    last_error_code: ?[]const u8 = null,
 
     /// The error message that Config returned when the rule last
     /// failed.
-    last_error_message: ?[]const u8,
+    last_error_message: ?[]const u8 = null,
 
     /// The time that Config last failed to evaluate your Amazon Web Services
     /// resources against the rule.
-    last_failed_evaluation_time: ?i64,
+    last_failed_evaluation_time: ?i64 = null,
 
     /// The time that Config last failed to invoke the Config
     /// rule to evaluate your Amazon Web Services resources.
-    last_failed_invocation_time: ?i64,
+    last_failed_invocation_time: ?i64 = null,
 
     /// The time that Config last successfully evaluated your Amazon Web Services
     /// resources against the rule.
-    last_successful_evaluation_time: ?i64,
+    last_successful_evaluation_time: ?i64 = null,
 
     /// The time that Config last successfully invoked the Config rule to evaluate
     /// your Amazon Web Services resources.
-    last_successful_invocation_time: ?i64,
+    last_successful_invocation_time: ?i64 = null,
 
     pub const json_field_names = .{
         .config_rule_arn = "ConfigRuleArn",

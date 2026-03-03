@@ -13,7 +13,7 @@ pub const ChannelGroupListConfiguration = struct {
 
     /// Any descriptive information that you want to add to the channel group for
     /// future identification purposes.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The date and time the channel group was modified.
     modified_at: i64,

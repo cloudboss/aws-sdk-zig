@@ -9,25 +9,25 @@ pub const ScalingConfigurationInfo = struct {
     ///
     /// When the value is set to false for an Aurora Serverless v1 DB cluster, the
     /// DB cluster automatically resumes.
-    auto_pause: ?bool,
+    auto_pause: ?bool = null,
 
     /// The maximum capacity for an Aurora DB cluster in `serverless` DB engine
     /// mode.
-    max_capacity: ?i32,
+    max_capacity: ?i32 = null,
 
     /// The minimum capacity for an Aurora DB cluster in `serverless` DB engine
     /// mode.
-    min_capacity: ?i32,
+    min_capacity: ?i32 = null,
 
     /// The number of seconds before scaling times out. What happens when an
     /// attempted scaling action times out is determined by the `TimeoutAction`
     /// setting.
-    seconds_before_timeout: ?i32,
+    seconds_before_timeout: ?i32 = null,
 
     /// The remaining amount of time, in seconds, before the Aurora DB cluster in
     /// `serverless` mode is paused. A DB cluster can be paused only when it's idle
     /// (it has no connections).
-    seconds_until_auto_pause: ?i32,
+    seconds_until_auto_pause: ?i32 = null,
 
     /// The action that occurs when Aurora times out while attempting to change the
     /// capacity of an Aurora Serverless v1 cluster. The value is either
@@ -38,5 +38,5 @@ pub const ScalingConfigurationInfo = struct {
     ///
     /// `RollbackCapacityChange` ignores the capacity change if a scaling point
     /// isn't found in the timeout period.
-    timeout_action: ?[]const u8,
+    timeout_action: ?[]const u8 = null,
 };

@@ -6,13 +6,13 @@ const WorkspaceThemeTypography = @import("workspace_theme_typography.zig").Works
 /// images, and typography.
 pub const WorkspaceThemeConfig = struct {
     /// The image assets used in the workspace theme.
-    images: ?WorkspaceThemeImages,
+    images: ?WorkspaceThemeImages = null,
 
     /// The color palette configuration for the workspace theme.
-    palette: ?WorkspaceThemePalette,
+    palette: ?WorkspaceThemePalette = null,
 
     /// The typography configuration for the workspace theme.
-    typography: ?WorkspaceThemeTypography,
+    typography: ?WorkspaceThemeTypography = null,
 
     pub const json_field_names = .{
         .images = "Images",

@@ -2,10 +2,10 @@
 /// email data and the applicable character set.
 pub const SimpleEmailPart = struct {
     /// The applicable character set for the message content.
-    charset: ?[]const u8,
+    charset: ?[]const u8 = null,
 
     /// The textual data of the message content.
-    data: ?[]const u8,
+    data: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .charset = "Charset",

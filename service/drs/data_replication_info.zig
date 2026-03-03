@@ -6,28 +6,28 @@ const DataReplicationInfoReplicatedDisk = @import("data_replication_info_replica
 /// Information about Data Replication
 pub const DataReplicationInfo = struct {
     /// Error in data replication.
-    data_replication_error: ?DataReplicationError,
+    data_replication_error: ?DataReplicationError = null,
 
     /// Information about whether the data replication has been initiated.
-    data_replication_initiation: ?DataReplicationInitiation,
+    data_replication_initiation: ?DataReplicationInitiation = null,
 
     /// The state of the data replication.
-    data_replication_state: ?DataReplicationState,
+    data_replication_state: ?DataReplicationState = null,
 
     /// An estimate of when the data replication will be completed.
-    eta_date_time: ?[]const u8,
+    eta_date_time: ?[]const u8 = null,
 
     /// Data replication lag duration.
-    lag_duration: ?[]const u8,
+    lag_duration: ?[]const u8 = null,
 
     /// The disks that should be replicated.
-    replicated_disks: ?[]const DataReplicationInfoReplicatedDisk,
+    replicated_disks: ?[]const DataReplicationInfoReplicatedDisk = null,
 
     /// AWS Availability zone into which data is being replicated.
-    staging_availability_zone: ?[]const u8,
+    staging_availability_zone: ?[]const u8 = null,
 
     /// The ARN of the staging Outpost
-    staging_outpost_arn: ?[]const u8,
+    staging_outpost_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_replication_error = "dataReplicationError",

@@ -5,7 +5,7 @@ pub const ListLowLatencyHlsManifestConfiguration = struct {
     /// MediaPackage uses the default child manifest name, index_1. The manifestName
     /// on the HLSManifest object overrides the manifestName you provided on the
     /// originEndpoint object.
-    child_manifest_name: ?[]const u8,
+    child_manifest_name: ?[]const u8 = null,
 
     /// A short short string that's appended to the endpoint URL. The manifest name
     /// creates a unique path to this endpoint. If you don't enter a value,
@@ -17,7 +17,7 @@ pub const ListLowLatencyHlsManifestConfiguration = struct {
     manifest_name: []const u8,
 
     /// The egress domain URL for stream delivery from MediaPackage.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .child_manifest_name = "ChildManifestName",

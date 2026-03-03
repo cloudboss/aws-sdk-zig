@@ -3,7 +3,7 @@ const MetricQueryResultStatus = @import("metric_query_result_status.zig").Metric
 /// The result of a query to retrieve training metrics from SageMaker.
 pub const MetricQueryResult = struct {
     /// A message describing the status of the metric query.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The metric values retrieved by the query.
     metric_values: []const f64,

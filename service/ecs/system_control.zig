@@ -40,7 +40,7 @@
 /// supported for Windows containers on Fargate.
 pub const SystemControl = struct {
     /// The namespaced kernel parameter to set a `value` for.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The namespaced kernel parameter to set a `value` for.
     ///
@@ -55,7 +55,7 @@ pub const SystemControl = struct {
     /// container starting with "net.* are accepted.
     ///
     /// All of these values are supported by Fargate.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .namespace = "namespace",

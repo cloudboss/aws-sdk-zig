@@ -9,13 +9,13 @@ pub const MultipartReadSetUploadListItem = struct {
     creation_time: i64,
 
     /// The description of a read set.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The source of an uploaded part.
     generated_from: []const u8,
 
     /// The name of a read set.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The source's reference ARN.
     reference_arn: []const u8,
@@ -33,7 +33,7 @@ pub const MultipartReadSetUploadListItem = struct {
     subject_id: []const u8,
 
     /// Any tags you wish to add to a read set.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The ID for the initiated multipart upload.
     upload_id: []const u8,

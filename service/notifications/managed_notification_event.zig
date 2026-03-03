@@ -13,12 +13,12 @@ const TextPartValue = @import("text_part_value.zig").TextPartValue;
 /// end-user notifications.
 pub const ManagedNotificationEvent = struct {
     /// The notifications aggregation type.
-    aggregation_event_type: ?AggregationEventType,
+    aggregation_event_type: ?AggregationEventType = null,
 
-    aggregation_summary: ?AggregationSummary,
+    aggregation_summary: ?AggregationSummary = null,
 
     /// The end time of the notification event.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The status of an event.
     ///
@@ -31,7 +31,7 @@ pub const ManagedNotificationEvent = struct {
     /// * `UNHEALTHY`
     ///
     /// * Some EventRules are `ACTIVE` and some are `INACTIVE`. Any call can be run.
-    event_status: ?EventStatus,
+    event_status: ?EventStatus = null,
 
     /// Unique identifier for a `ManagedNotificationEvent`.
     id: []const u8,
@@ -64,21 +64,21 @@ pub const ManagedNotificationEvent = struct {
     notification_type: NotificationType,
 
     /// The Organizational Unit Id that an Amazon Web Services account belongs to.
-    organizational_unit_id: ?[]const u8,
+    organizational_unit_id: ?[]const u8 = null,
 
     /// Version of the `ManagedNotificationEvent` schema.
     schema_version: SchemaVersion,
 
     /// URL defined by Source Service to be used by notification consumers to get
     /// additional information about event.
-    source_event_detail_url: ?[]const u8,
+    source_event_detail_url: ?[]const u8 = null,
 
     /// Text that needs to be hyperlinked with the sourceEventDetailUrl. For
     /// example, the description of the sourceEventDetailUrl.
-    source_event_detail_url_display_text: ?[]const u8,
+    source_event_detail_url_display_text: ?[]const u8 = null,
 
     /// The earliest time of events to return from this call.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// A list of text values.
     text_parts: []const aws.map.MapEntry(TextPartValue),

@@ -27,15 +27,15 @@ const AssetPropertyVariant = @import("asset_property_variant.zig").AssetProperty
 pub const AssetPropertyValue = struct {
     /// The quality of the asset property value. The value must be `'GOOD'`,
     /// `'BAD'`, or `'UNCERTAIN'`.
-    quality: ?[]const u8,
+    quality: ?[]const u8 = null,
 
     /// The timestamp associated with the asset property value. The default is the
     /// current event
     /// time.
-    timestamp: ?AssetPropertyTimestamp,
+    timestamp: ?AssetPropertyTimestamp = null,
 
     /// The value to send to an asset property.
-    value: ?AssetPropertyVariant,
+    value: ?AssetPropertyVariant = null,
 
     pub const json_field_names = .{
         .quality = "quality",

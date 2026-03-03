@@ -5,22 +5,22 @@ const CisSecurityLevelFilter = @import("cis_security_level_filter.zig").CisSecur
 /// The scan results aggregated by checks filter criteria.
 pub const CisScanResultsAggregatedByChecksFilterCriteria = struct {
     /// The criteria's account ID filters.
-    account_id_filters: ?[]const CisStringFilter,
+    account_id_filters: ?[]const CisStringFilter = null,
 
     /// The criteria's check ID filters.
-    check_id_filters: ?[]const CisStringFilter,
+    check_id_filters: ?[]const CisStringFilter = null,
 
     /// The criteria's failed resources filters.
-    failed_resources_filters: ?[]const CisNumberFilter,
+    failed_resources_filters: ?[]const CisNumberFilter = null,
 
     /// The criteria's platform filters.
-    platform_filters: ?[]const CisStringFilter,
+    platform_filters: ?[]const CisStringFilter = null,
 
     /// The criteria's security level filters.
-    security_level_filters: ?[]const CisSecurityLevelFilter,
+    security_level_filters: ?[]const CisSecurityLevelFilter = null,
 
     /// The criteria's title filters.
-    title_filters: ?[]const CisStringFilter,
+    title_filters: ?[]const CisStringFilter = null,
 
     pub const json_field_names = .{
         .account_id_filters = "accountIdFilters",

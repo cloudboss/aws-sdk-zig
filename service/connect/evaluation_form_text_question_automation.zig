@@ -3,7 +3,7 @@ const EvaluationFormQuestionAutomationAnswerSource = @import("evaluation_form_qu
 /// Information about the automation configuration in text questions.
 pub const EvaluationFormTextQuestionAutomation = struct {
     /// Automation answer source.
-    answer_source: ?EvaluationFormQuestionAutomationAnswerSource,
+    answer_source: ?EvaluationFormQuestionAutomationAnswerSource = null,
 
     pub const json_field_names = .{
         .answer_source = "AnswerSource",

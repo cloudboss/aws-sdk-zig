@@ -9,21 +9,21 @@ const RecommendationDisruptionCompliance = @import("recommendation_disruption_co
 /// Defines a recommendation configuration.
 pub const ConfigRecommendation = struct {
     /// Name of the Application Component.
-    app_component_name: ?[]const u8,
+    app_component_name: ?[]const u8 = null,
 
     /// The current compliance against the resiliency policy before applying the
     /// configuration
     /// change.
-    compliance: ?[]const aws.map.MapEntry(DisruptionCompliance),
+    compliance: ?[]const aws.map.MapEntry(DisruptionCompliance) = null,
 
     /// The cost for the application.
-    cost: ?Cost,
+    cost: ?Cost = null,
 
     /// The optional description for an app.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The architecture type.
-    ha_architecture: ?HaArchitecture,
+    ha_architecture: ?HaArchitecture = null,
 
     /// The name of the recommendation configuration.
     name: []const u8,
@@ -34,13 +34,13 @@ pub const ConfigRecommendation = struct {
     /// The expected compliance against the resiliency policy after applying the
     /// configuration
     /// change.
-    recommendation_compliance: ?[]const aws.map.MapEntry(RecommendationDisruptionCompliance),
+    recommendation_compliance: ?[]const aws.map.MapEntry(RecommendationDisruptionCompliance) = null,
 
     /// Reference identifier for the recommendation configuration.
     reference_id: []const u8,
 
     /// List of the suggested configuration changes.
-    suggested_changes: ?[]const []const u8,
+    suggested_changes: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .app_component_name = "appComponentName",

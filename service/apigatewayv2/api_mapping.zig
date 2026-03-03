@@ -4,10 +4,10 @@ pub const ApiMapping = struct {
     api_id: []const u8,
 
     /// The API mapping identifier.
-    api_mapping_id: ?[]const u8,
+    api_mapping_id: ?[]const u8 = null,
 
     /// The API mapping key.
-    api_mapping_key: ?[]const u8,
+    api_mapping_key: ?[]const u8 = null,
 
     /// The API stage.
     stage: []const u8,

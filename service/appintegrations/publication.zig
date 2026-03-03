@@ -1,7 +1,7 @@
 /// The configuration of an event that the application publishes.
 pub const Publication = struct {
     /// The description of the publication.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the publication.
     event: []const u8,

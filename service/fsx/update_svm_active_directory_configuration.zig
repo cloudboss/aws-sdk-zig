@@ -6,9 +6,9 @@ const SelfManagedActiveDirectoryConfigurationUpdates = @import("self_managed_act
 pub const UpdateSvmActiveDirectoryConfiguration = struct {
     /// Specifies an updated NetBIOS name of the AD computer object `NetBiosName` to
     /// which an SVM is joined.
-    net_bios_name: ?[]const u8,
+    net_bios_name: ?[]const u8 = null,
 
-    self_managed_active_directory_configuration: ?SelfManagedActiveDirectoryConfigurationUpdates,
+    self_managed_active_directory_configuration: ?SelfManagedActiveDirectoryConfigurationUpdates = null,
 
     pub const json_field_names = .{
         .net_bios_name = "NetBiosName",

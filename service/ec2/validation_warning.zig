@@ -7,5 +7,5 @@ const ValidationError = @import("validation_error.zig").ValidationError;
 /// template is created.
 pub const ValidationWarning = struct {
     /// The error codes and error messages.
-    errors: ?[]const ValidationError,
+    errors: ?[]const ValidationError = null,
 };

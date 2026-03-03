@@ -15,28 +15,28 @@ const UtilizationMetric = @import("utilization_metric.zig").UtilizationMetric;
 /// Describes an Amazon EC2 instance recommendation.
 pub const InstanceRecommendation = struct {
     /// The Amazon Web Services account ID of the instance.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Describes the GPU accelerator settings for the current instance type.
-    current_instance_gpu_info: ?GpuInfo,
+    current_instance_gpu_info: ?GpuInfo = null,
 
     /// The instance type of the current instance.
-    current_instance_type: ?[]const u8,
+    current_instance_type: ?[]const u8 = null,
 
     /// The risk of the current instance not meeting the performance needs of its
     /// workloads.
     /// The higher the risk, the more likely the current instance cannot meet the
     /// performance
     /// requirements of its workload.
-    current_performance_risk: ?CurrentPerformanceRisk,
+    current_performance_risk: ?CurrentPerformanceRisk = null,
 
     /// An object that describes the effective recommendation preferences for the
     /// instance.
-    effective_recommendation_preferences: ?EffectiveRecommendationPreferences,
+    effective_recommendation_preferences: ?EffectiveRecommendationPreferences = null,
 
     /// An object that describes Compute Optimizer's integration status with your
     /// external metrics provider.
-    external_metric_status: ?ExternalMetricStatus,
+    external_metric_status: ?ExternalMetricStatus = null,
 
     /// The finding classification of the instance.
     ///
@@ -73,7 +73,7 @@ pub const InstanceRecommendation = struct {
     ///
     /// The valid values in your API responses appear as OVER_PROVISIONED,
     /// UNDER_PROVISIONED, or OPTIMIZED.
-    finding: ?Finding,
+    finding: ?Finding = null,
 
     /// The reason for the finding classification of the instance.
     ///
@@ -252,10 +252,10 @@ pub const InstanceRecommendation = struct {
     /// metrics for Amazon
     /// EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html) in the *Amazon Elastic Compute Cloud
     /// User Guide*.
-    finding_reason_codes: ?[]const InstanceRecommendationFindingReasonCode,
+    finding_reason_codes: ?[]const InstanceRecommendationFindingReasonCode = null,
 
     /// Describes if an Amazon EC2 instance is idle.
-    idle: ?InstanceIdle,
+    idle: ?InstanceIdle = null,
 
     /// The applications that might be running on the instance as inferred by
     /// Compute Optimizer.
@@ -290,19 +290,19 @@ pub const InstanceRecommendation = struct {
     ///
     /// * `SQLServer` - Infers that SQLServer might be running on the
     /// instance.
-    inferred_workload_types: ?[]const InferredWorkloadType,
+    inferred_workload_types: ?[]const InferredWorkloadType = null,
 
     /// The Amazon Resource Name (ARN) of the current instance.
-    instance_arn: ?[]const u8,
+    instance_arn: ?[]const u8 = null,
 
     /// The name of the current instance.
-    instance_name: ?[]const u8,
+    instance_name: ?[]const u8 = null,
 
     /// The state of the instance when the recommendation was generated.
-    instance_state: ?InstanceState,
+    instance_state: ?InstanceState = null,
 
     /// The timestamp of when the instance recommendation was last generated.
-    last_refresh_timestamp: ?i64,
+    last_refresh_timestamp: ?i64 = null,
 
     /// The number of days for which utilization metrics were analyzed for the
     /// instance.
@@ -310,16 +310,16 @@ pub const InstanceRecommendation = struct {
 
     /// An array of objects that describe the recommendation options for the
     /// instance.
-    recommendation_options: ?[]const InstanceRecommendationOption,
+    recommendation_options: ?[]const InstanceRecommendationOption = null,
 
     /// An array of objects that describe the source resource of the recommendation.
-    recommendation_sources: ?[]const RecommendationSource,
+    recommendation_sources: ?[]const RecommendationSource = null,
 
     /// A list of tags assigned to your Amazon EC2 instance recommendations.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// An array of objects that describe the utilization metrics of the instance.
-    utilization_metrics: ?[]const UtilizationMetric,
+    utilization_metrics: ?[]const UtilizationMetric = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

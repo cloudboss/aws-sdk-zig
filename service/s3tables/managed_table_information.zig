@@ -5,7 +5,7 @@ const ReplicationInformation = @import("replication_information.zig").Replicatio
 pub const ManagedTableInformation = struct {
     /// If this table is a replica, contains information about the source table from
     /// which it is replicated.
-    replication_information: ?ReplicationInformation,
+    replication_information: ?ReplicationInformation = null,
 
     pub const json_field_names = .{
         .replication_information = "replicationInformation",

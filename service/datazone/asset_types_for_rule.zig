@@ -6,7 +6,7 @@ pub const AssetTypesForRule = struct {
     selection_mode: RuleScopeSelectionMode,
 
     /// The specific asset types that are included in the rule.
-    specific_asset_types: ?[]const []const u8,
+    specific_asset_types: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .selection_mode = "selectionMode",

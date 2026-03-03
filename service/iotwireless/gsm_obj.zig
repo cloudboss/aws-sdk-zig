@@ -7,15 +7,15 @@ pub const GsmObj = struct {
     geran_cid: i32,
 
     /// GSM local identification (local ID) information.
-    gsm_local_id: ?GsmLocalId,
+    gsm_local_id: ?GsmLocalId = null,
 
     /// GSM object for network measurement reports.
-    gsm_nmr: ?[]const GsmNmrObj,
+    gsm_nmr: ?[]const GsmNmrObj = null,
 
     /// Timing advance value, which corresponds to the length of time a signal takes
     /// to reach
     /// the base station from a mobile phone.
-    gsm_timing_advance: ?i32,
+    gsm_timing_advance: ?i32 = null,
 
     /// Location area code.
     lac: i32,
@@ -28,7 +28,7 @@ pub const GsmObj = struct {
 
     /// Rx level, which is the received signal power, measured in dBm
     /// (decibel-milliwatts).
-    rx_level: ?i32,
+    rx_level: ?i32 = null,
 
     pub const json_field_names = .{
         .geran_cid = "GeranCid",

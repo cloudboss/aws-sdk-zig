@@ -12,12 +12,12 @@ pub const FailedMemberAccountEc2DeepInspectionStatusState = struct {
     /// The status of EC2 scanning in the account that failed to activate Amazon
     /// Inspector deep
     /// inspection.
-    ec_2_scan_status: ?Status,
+    ec_2_scan_status: ?Status = null,
 
     /// The error message explaining why the account failed to activate Amazon
     /// Inspector deep
     /// inspection.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

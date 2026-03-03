@@ -8,13 +8,13 @@ pub const LteObj = struct {
     eutran_cid: i32,
 
     /// LTE local identification (local ID) information.
-    lte_local_id: ?LteLocalId,
+    lte_local_id: ?LteLocalId = null,
 
     /// LTE object for network measurement reports.
-    lte_nmr: ?[]const LteNmrObj,
+    lte_nmr: ?[]const LteNmrObj = null,
 
     /// LTE timing advance.
-    lte_timing_advance: ?i32,
+    lte_timing_advance: ?i32 = null,
 
     /// Mobile Country Code.
     mcc: i32,
@@ -29,13 +29,13 @@ pub const LteObj = struct {
 
     /// Signal power of the reference signal received, measured in dBm
     /// (decibel-milliwatts).
-    rsrp: ?i32,
+    rsrp: ?i32 = null,
 
     /// Signal quality of the reference Signal received, measured in decibels (dB).
-    rsrq: ?f32,
+    rsrq: ?f32 = null,
 
     /// LTE tracking area code.
-    tac: ?i32,
+    tac: ?i32 = null,
 
     pub const json_field_names = .{
         .eutran_cid = "EutranCid",

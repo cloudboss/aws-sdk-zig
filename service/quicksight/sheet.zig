@@ -9,15 +9,15 @@ const SheetImage = @import("sheet_image.zig").SheetImage;
 /// components, such as controls, filters, and so on.
 pub const Sheet = struct {
     /// A list of images on a sheet.
-    images: ?[]const SheetImage,
+    images: ?[]const SheetImage = null,
 
     /// The name of a sheet. This name is displayed on the sheet's tab in the Quick
     /// Sight
     /// console.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The unique identifier associated with a sheet.
-    sheet_id: ?[]const u8,
+    sheet_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .images = "Images",

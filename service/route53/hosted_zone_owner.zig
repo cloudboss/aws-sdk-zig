@@ -11,7 +11,7 @@ pub const HostedZoneOwner = struct {
     /// `OwningAccount` contains the account ID of that account. For example,
     /// when you use Cloud Map to create a hosted zone, Cloud Map creates the hosted
     /// zone using the current Amazon Web Services account.
-    owning_account: ?[]const u8,
+    owning_account: ?[]const u8 = null,
 
     /// If an Amazon Web Services service uses its own account to create a hosted
     /// zone and
@@ -21,5 +21,5 @@ pub const HostedZoneOwner = struct {
     /// (Amazon EFS) created a hosted zone and associated a VPC with the hosted
     /// zone, the value
     /// of `OwningService` is `efs.amazonaws.com`.
-    owning_service: ?[]const u8,
+    owning_service: ?[]const u8 = null,
 };

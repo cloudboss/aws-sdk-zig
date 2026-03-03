@@ -7,7 +7,7 @@ pub const TrafficRoute = struct {
     /// between a target group and a load balancer. This is an array of strings with
     /// a maximum
     /// size of one.
-    listener_arns: ?[]const []const u8,
+    listener_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .listener_arns = "listenerArns",

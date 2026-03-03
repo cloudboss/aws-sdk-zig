@@ -15,12 +15,12 @@ pub const ReplicationInstance = struct {
     auto_minor_version_upgrade: bool = false,
 
     /// The Availability Zone for the instance.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The DNS name servers supported for the replication instance to access your
     /// on-premise
     /// source or target database.
-    dns_name_servers: ?[]const u8,
+    dns_name_servers: ?[]const u8 = null,
 
     /// The engine version number of the replication instance.
     ///
@@ -30,20 +30,20 @@ pub const ReplicationInstance = struct {
     ///
     /// When modifying a major engine version of an instance, also set
     /// `AllowMajorVersionUpgrade` to `true`.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// The expiration date of the free replication instance that is part of the
     /// Free DMS
     /// program.
-    free_until: ?i64,
+    free_until: ?i64 = null,
 
     /// The time the replication instance was created.
-    instance_create_time: ?i64,
+    instance_create_time: ?i64 = null,
 
     /// Specifies the settings required for kerberos authentication when replicating
     /// an
     /// instance.
-    kerberos_authentication_settings: ?KerberosAuthenticationSettings,
+    kerberos_authentication_settings: ?KerberosAuthenticationSettings = null,
 
     /// An KMS key identifier that is used to encrypt the data on the replication
     /// instance.
@@ -54,7 +54,7 @@ pub const ReplicationInstance = struct {
     /// KMS creates the default encryption key for your Amazon Web Services account.
     /// Your Amazon Web Services account has
     /// a different default encryption key for each Amazon Web Services Region.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Specifies whether the replication instance is a Multi-AZ deployment. You
     /// can't set
@@ -66,15 +66,15 @@ pub const ReplicationInstance = struct {
     /// only or
     /// Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet
     /// supported.
-    network_type: ?[]const u8,
+    network_type: ?[]const u8 = null,
 
     /// The pending modification values.
-    pending_modified_values: ?ReplicationPendingModifiedValues,
+    pending_modified_values: ?ReplicationPendingModifiedValues = null,
 
     /// The maintenance window times for the replication instance. Any pending
     /// upgrades to the
     /// replication instance are performed during this time.
-    preferred_maintenance_window: ?[]const u8,
+    preferred_maintenance_window: ?[]const u8 = null,
 
     /// Specifies the accessibility options for the replication instance. A value of
     /// `true` represents an instance with a public IP address. A value of
@@ -83,7 +83,7 @@ pub const ReplicationInstance = struct {
     publicly_accessible: bool = false,
 
     /// The Amazon Resource Name (ARN) of the replication instance.
-    replication_instance_arn: ?[]const u8,
+    replication_instance_arn: ?[]const u8 = null,
 
     /// The compute and memory capacity of the replication instance as defined for
     /// the specified
@@ -96,7 +96,7 @@ pub const ReplicationInstance = struct {
     /// instance classes, see [ Selecting the right DMS replication instance for
     /// your
     /// migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
-    replication_instance_class: ?[]const u8,
+    replication_instance_class: ?[]const u8 = null,
 
     /// The replication instance identifier is a required parameter. This parameter
     /// is stored as
@@ -111,22 +111,22 @@ pub const ReplicationInstance = struct {
     /// * Cannot end with a hyphen or contain two consecutive hyphens.
     ///
     /// Example: `myrepinstance`
-    replication_instance_identifier: ?[]const u8,
+    replication_instance_identifier: ?[]const u8 = null,
 
     /// One or more IPv6 addresses for the replication instance.
-    replication_instance_ipv_6_addresses: ?[]const []const u8,
+    replication_instance_ipv_6_addresses: ?[]const []const u8 = null,
 
     /// The private IP address of the replication instance.
-    replication_instance_private_ip_address: ?[]const u8,
+    replication_instance_private_ip_address: ?[]const u8 = null,
 
     /// One or more private IP addresses for the replication instance.
-    replication_instance_private_ip_addresses: ?[]const []const u8,
+    replication_instance_private_ip_addresses: ?[]const []const u8 = null,
 
     /// The public IP address of the replication instance.
-    replication_instance_public_ip_address: ?[]const u8,
+    replication_instance_public_ip_address: ?[]const u8 = null,
 
     /// One or more public IP addresses for the replication instance.
-    replication_instance_public_ip_addresses: ?[]const []const u8,
+    replication_instance_public_ip_addresses: ?[]const []const u8 = null,
 
     /// The status of the replication instance. The possible return values include:
     ///
@@ -155,17 +155,17 @@ pub const ReplicationInstance = struct {
     /// * `"incompatible-network"`
     ///
     /// * `"maintenance"`
-    replication_instance_status: ?[]const u8,
+    replication_instance_status: ?[]const u8 = null,
 
     /// The subnet group for the replication instance.
-    replication_subnet_group: ?ReplicationSubnetGroup,
+    replication_subnet_group: ?ReplicationSubnetGroup = null,
 
     /// The Availability Zone of the standby replication instance in a Multi-AZ
     /// deployment.
-    secondary_availability_zone: ?[]const u8,
+    secondary_availability_zone: ?[]const u8 = null,
 
     /// The VPC security group for the instance.
-    vpc_security_groups: ?[]const VpcSecurityGroupMembership,
+    vpc_security_groups: ?[]const VpcSecurityGroupMembership = null,
 
     pub const json_field_names = .{
         .allocated_storage = "AllocatedStorage",

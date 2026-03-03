@@ -16,57 +16,57 @@ const BatchLookupPolicy = @import("batch_lookup_policy.zig").BatchLookupPolicy;
 /// Represents the output of a `BatchRead` operation.
 pub const BatchReadOperation = struct {
     /// Retrieves attributes that are associated with a typed link.
-    get_link_attributes: ?BatchGetLinkAttributes,
+    get_link_attributes: ?BatchGetLinkAttributes = null,
 
     /// Retrieves attributes within a facet that are associated with an object.
-    get_object_attributes: ?BatchGetObjectAttributes,
+    get_object_attributes: ?BatchGetObjectAttributes = null,
 
     /// Retrieves metadata about an object.
-    get_object_information: ?BatchGetObjectInformation,
+    get_object_information: ?BatchGetObjectInformation = null,
 
     /// Lists indices attached to an object.
-    list_attached_indices: ?BatchListAttachedIndices,
+    list_attached_indices: ?BatchListAttachedIndices = null,
 
     /// Returns a paginated list of all the incoming TypedLinkSpecifier
     /// information for an object. It also supports filtering by typed link facet
     /// and identity
     /// attributes. For more information, see [Typed
     /// Links](https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
-    list_incoming_typed_links: ?BatchListIncomingTypedLinks,
+    list_incoming_typed_links: ?BatchListIncomingTypedLinks = null,
 
     /// Lists objects attached to the specified index.
-    list_index: ?BatchListIndex,
+    list_index: ?BatchListIndex = null,
 
     /// Lists all attributes that are associated with an object.
-    list_object_attributes: ?BatchListObjectAttributes,
+    list_object_attributes: ?BatchListObjectAttributes = null,
 
     /// Returns a paginated list of child objects that are associated with a given
     /// object.
-    list_object_children: ?BatchListObjectChildren,
+    list_object_children: ?BatchListObjectChildren = null,
 
     /// Retrieves all available parent paths for any object type such as node, leaf
     /// node,
     /// policy node, and index node objects. For more information about objects, see
     /// [Directory
     /// Structure](https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
-    list_object_parent_paths: ?BatchListObjectParentPaths,
+    list_object_parent_paths: ?BatchListObjectParentPaths = null,
 
     /// Lists parent objects that are associated with a given object in pagination
     /// fashion.
-    list_object_parents: ?BatchListObjectParents,
+    list_object_parents: ?BatchListObjectParents = null,
 
     /// Returns policies attached to an object in pagination fashion.
-    list_object_policies: ?BatchListObjectPolicies,
+    list_object_policies: ?BatchListObjectPolicies = null,
 
     /// Returns a paginated list of all the outgoing TypedLinkSpecifier
     /// information for an object. It also supports filtering by typed link facet
     /// and identity
     /// attributes. For more information, see [Typed
     /// Links](https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
-    list_outgoing_typed_links: ?BatchListOutgoingTypedLinks,
+    list_outgoing_typed_links: ?BatchListOutgoingTypedLinks = null,
 
     /// Returns all of the `ObjectIdentifiers` to which a given policy is attached.
-    list_policy_attachments: ?BatchListPolicyAttachments,
+    list_policy_attachments: ?BatchListPolicyAttachments = null,
 
     /// Lists all policies from the root of the Directory to the object
     /// specified. If there are no policies present, an empty list is returned. If
@@ -79,7 +79,7 @@ pub const BatchReadOperation = struct {
     /// ignored. For more
     /// information, see
     /// [Policies](https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
-    lookup_policy: ?BatchLookupPolicy,
+    lookup_policy: ?BatchLookupPolicy = null,
 
     pub const json_field_names = .{
         .get_link_attributes = "GetLinkAttributes",

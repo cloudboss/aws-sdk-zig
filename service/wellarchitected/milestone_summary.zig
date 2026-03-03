@@ -2,13 +2,13 @@ const WorkloadSummary = @import("workload_summary.zig").WorkloadSummary;
 
 /// A milestone summary return object.
 pub const MilestoneSummary = struct {
-    milestone_name: ?[]const u8,
+    milestone_name: ?[]const u8 = null,
 
-    milestone_number: ?i32,
+    milestone_number: ?i32 = null,
 
-    recorded_at: ?i64,
+    recorded_at: ?i64 = null,
 
-    workload_summary: ?WorkloadSummary,
+    workload_summary: ?WorkloadSummary = null,
 
     pub const json_field_names = .{
         .milestone_name = "MilestoneName",

@@ -11,40 +11,40 @@ const KnowledgeBaseStorageType = @import("knowledge_base_storage_type.zig").Know
 /// Contains the storage configuration of the knowledge base.
 pub const StorageConfiguration = struct {
     /// Contains the storage configuration of the knowledge base in MongoDB Atlas.
-    mongo_db_atlas_configuration: ?MongoDbAtlasConfiguration,
+    mongo_db_atlas_configuration: ?MongoDbAtlasConfiguration = null,
 
     /// Contains details about the Neptune Analytics configuration of the knowledge
     /// base in Amazon Neptune. For more information, see [Create a vector index in
     /// Amazon Neptune
     /// Analytics.](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html).
-    neptune_analytics_configuration: ?NeptuneAnalyticsConfiguration,
+    neptune_analytics_configuration: ?NeptuneAnalyticsConfiguration = null,
 
     /// Contains details about the storage configuration of the knowledge base in
     /// OpenSearch Managed Cluster. For more information, see [Create a vector index
     /// in Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-osm.html).
-    opensearch_managed_cluster_configuration: ?OpenSearchManagedClusterConfiguration,
+    opensearch_managed_cluster_configuration: ?OpenSearchManagedClusterConfiguration = null,
 
     /// Contains the storage configuration of the knowledge base in Amazon
     /// OpenSearch Service.
-    opensearch_serverless_configuration: ?OpenSearchServerlessConfiguration,
+    opensearch_serverless_configuration: ?OpenSearchServerlessConfiguration = null,
 
     /// Contains the storage configuration of the knowledge base in Pinecone.
-    pinecone_configuration: ?PineconeConfiguration,
+    pinecone_configuration: ?PineconeConfiguration = null,
 
     /// Contains details about the storage configuration of the knowledge base in
     /// Amazon RDS. For more information, see [Create a vector index in Amazon
     /// RDS](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html).
-    rds_configuration: ?RdsConfiguration,
+    rds_configuration: ?RdsConfiguration = null,
 
     /// Contains the storage configuration of the knowledge base in Redis Enterprise
     /// Cloud.
-    redis_enterprise_cloud_configuration: ?RedisEnterpriseCloudConfiguration,
+    redis_enterprise_cloud_configuration: ?RedisEnterpriseCloudConfiguration = null,
 
     /// The configuration settings for storing knowledge base data using S3 vectors.
     /// This includes vector index information and S3 bucket details for vector
     /// storage.
-    s_3_vectors_configuration: ?S3VectorsConfiguration,
+    s_3_vectors_configuration: ?S3VectorsConfiguration = null,
 
     /// The vector store service in which the knowledge base is stored.
     @"type": KnowledgeBaseStorageType,

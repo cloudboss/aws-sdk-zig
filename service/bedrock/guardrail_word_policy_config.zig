@@ -4,10 +4,10 @@ const GuardrailWordConfig = @import("guardrail_word_config.zig").GuardrailWordCo
 /// Contains details about the word policy to configured for the guardrail.
 pub const GuardrailWordPolicyConfig = struct {
     /// A list of managed words to configure for the guardrail.
-    managed_word_lists_config: ?[]const GuardrailManagedWordsConfig,
+    managed_word_lists_config: ?[]const GuardrailManagedWordsConfig = null,
 
     /// A list of words to configure for the guardrail.
-    words_config: ?[]const GuardrailWordConfig,
+    words_config: ?[]const GuardrailWordConfig = null,
 
     pub const json_field_names = .{
         .managed_word_lists_config = "managedWordListsConfig",

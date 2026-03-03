@@ -5,28 +5,28 @@ const UpdateStatus = @import("update_status.zig").UpdateStatus;
 pub const UpdateInfoEntry = struct {
     /// This specifies if the update was initiated by the customer or by the service
     /// team.
-    initiated_by: ?[]const u8,
+    initiated_by: ?[]const u8 = null,
 
     /// The last updated date and time of a particular directory setting.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The new value of the target setting.
-    new_value: ?UpdateValue,
+    new_value: ?UpdateValue = null,
 
     /// The old value of the target setting.
-    previous_value: ?UpdateValue,
+    previous_value: ?UpdateValue = null,
 
     /// The name of the Region.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The start time of the `UpdateDirectorySetup` for the particular type.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of the update performed on the directory.
-    status: ?UpdateStatus,
+    status: ?UpdateStatus = null,
 
     /// The reason for the current status of the update type activity.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .initiated_by = "InitiatedBy",

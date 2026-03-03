@@ -6,36 +6,36 @@ const StatusSummary = @import("status_summary.zig").StatusSummary;
 pub const ConfigurationSummary = struct {
     /// The ID of the Amazon Web Services account where the configuration was
     /// deployed.
-    account: ?[]const u8,
+    account: ?[]const u8 = null,
 
     /// The ID of the configuration definition.
-    configuration_definition_id: ?[]const u8,
+    configuration_definition_id: ?[]const u8 = null,
 
     /// The datetime stamp when the configuration was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The common parameters and values for the configuration definition.
-    first_class_parameters: ?[]const aws.map.StringMapEntry,
+    first_class_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// A service generated identifier for the configuration.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The ARN of the configuration manager.
-    manager_arn: ?[]const u8,
+    manager_arn: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the configuration was deployed.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// A summary of the state of the configuration manager. This includes
     /// deployment
     /// statuses, association statuses, drift statuses, health checks, and more.
-    status_summaries: ?[]const StatusSummary,
+    status_summaries: ?[]const StatusSummary = null,
 
     /// The type of the Quick Setup configuration.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The version of the Quick Setup type used.
-    type_version: ?[]const u8,
+    type_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account = "Account",

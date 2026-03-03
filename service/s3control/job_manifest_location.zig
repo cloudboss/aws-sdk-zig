@@ -18,5 +18,5 @@ pub const JobManifestLocation = struct {
 
     /// The optional version ID to identify a specific version of the manifest
     /// object.
-    object_version_id: ?[]const u8,
+    object_version_id: ?[]const u8 = null,
 };

@@ -4,10 +4,10 @@ const ErrorDetails = @import("error_details.zig").ErrorDetails;
 /// the related error message.
 pub const ErrorInfo = struct {
     /// Specifies the error message that appears if a flow fails.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// Specifies the type of error.
-    error_type: ?ErrorDetails,
+    error_type: ?ErrorDetails = null,
 
     pub const json_field_names = .{
         .error_message = "errorMessage",

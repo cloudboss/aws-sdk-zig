@@ -8,7 +8,7 @@ const SnapshotAnonymousUser = @import("snapshot_anonymous_user.zig").SnapshotAno
 pub const SnapshotUserConfiguration = struct {
     /// An array of records that describe the anonymous users that the dashboard
     /// snapshot is generated for.
-    anonymous_users: ?[]const SnapshotAnonymousUser,
+    anonymous_users: ?[]const SnapshotAnonymousUser = null,
 
     pub const json_field_names = .{
         .anonymous_users = "AnonymousUsers",

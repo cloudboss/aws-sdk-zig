@@ -11,7 +11,7 @@ pub const RDSInstanceSavingsOpportunityAfterDiscounts = struct {
     /// The estimated monthly savings possible by adopting Compute Optimizer’s DB
     /// instance recommendations.
     /// This includes any applicable Savings Plans discounts.
-    estimated_monthly_savings: ?RDSInstanceEstimatedMonthlySavings,
+    estimated_monthly_savings: ?RDSInstanceEstimatedMonthlySavings = null,
 
     /// The estimated monthly savings possible as a percentage of monthly cost by
     /// adopting Compute Optimizer’s

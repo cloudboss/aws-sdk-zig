@@ -16,31 +16,31 @@ pub const ApiResult = struct {
     action_group: []const u8,
 
     /// The agent's ID.
-    agent_id: ?[]const u8,
+    agent_id: ?[]const u8 = null,
 
     /// The path to the API operation.
-    api_path: ?[]const u8,
+    api_path: ?[]const u8 = null,
 
     /// Controls the API operations or functions to invoke based on the user
     /// confirmation.
-    confirmation_state: ?ConfirmationState,
+    confirmation_state: ?ConfirmationState = null,
 
     /// The HTTP method for the API operation.
-    http_method: ?[]const u8,
+    http_method: ?[]const u8 = null,
 
     /// http status code from API execution response (for example: 200, 400, 500).
-    http_status_code: ?i32,
+    http_status_code: ?i32 = null,
 
     /// The response body from the API operation. The key of the object is the
     /// content type (currently, only `TEXT` is supported). The response may be
     /// returned directly or from the Lambda function.
-    response_body: ?[]const aws.map.MapEntry(ContentBody),
+    response_body: ?[]const aws.map.MapEntry(ContentBody) = null,
 
     /// Controls the final response state returned to end user when API/Function
     /// execution failed. When this state is FAILURE, the request would fail with
     /// dependency failure exception. When this state is REPROMPT, the API/function
     /// response will be sent to model for re-prompt
-    response_state: ?ResponseState,
+    response_state: ?ResponseState = null,
 
     pub const json_field_names = .{
         .action_group = "actionGroup",

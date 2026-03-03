@@ -2,10 +2,10 @@
 /// gateway.
 pub const AssociationStateDetails = struct {
     /// The state of the association.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// The status message, if applicable.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .state = "State",

@@ -3,20 +3,20 @@ const ComputePlatform = @import("compute_platform.zig").ComputePlatform;
 /// Information about an application.
 pub const ApplicationInfo = struct {
     /// The application ID.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The application name.
-    application_name: ?[]const u8,
+    application_name: ?[]const u8 = null,
 
     /// The destination platform type for deployment of the application (`Lambda` or
     /// `Server`).
-    compute_platform: ?ComputePlatform,
+    compute_platform: ?ComputePlatform = null,
 
     /// The time at which the application was created.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The name for a connection to a GitHub account.
-    git_hub_account_name: ?[]const u8,
+    git_hub_account_name: ?[]const u8 = null,
 
     /// True if the user has authenticated with GitHub for the specified
     /// application.

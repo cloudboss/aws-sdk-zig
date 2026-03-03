@@ -4,10 +4,10 @@ const CfnStackCreateParameter = @import("cfn_stack_create_parameter.zig").CfnSta
 /// infrastructure resources.
 pub const CfnCreateTemplateProvider = struct {
     /// An array of CloudFormation stack parameters.
-    parameters: ?[]const CfnStackCreateParameter,
+    parameters: ?[]const CfnStackCreateParameter = null,
 
     /// The IAM role that CloudFormation assumes when creating the stack.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// A unique identifier for the template within the project.
     template_name: []const u8,

@@ -14,7 +14,7 @@ pub const ServiceLastAccessed = struct {
     /// the
     /// [tracking
     /// period](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
-    last_authenticated: ?i64,
+    last_authenticated: ?i64 = null,
 
     /// The ARN of the authenticated entity (user or role) that last attempted to
     /// access the
@@ -24,7 +24,7 @@ pub const ServiceLastAccessed = struct {
     /// the
     /// [tracking
     /// period](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
-    last_authenticated_entity: ?[]const u8,
+    last_authenticated_entity: ?[]const u8 = null,
 
     /// The Region from which the authenticated entity (user or role) last attempted
     /// to access
@@ -34,7 +34,7 @@ pub const ServiceLastAccessed = struct {
     /// the
     /// [tracking
     /// period](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
-    last_authenticated_region: ?[]const u8,
+    last_authenticated_region: ?[]const u8 = null,
 
     /// The name of the service in which access was attempted.
     service_name: []const u8,
@@ -61,7 +61,7 @@ pub const ServiceLastAccessed = struct {
     /// This field is null if no principals attempted to access the service within
     /// the [tracking
     /// period](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
-    total_authenticated_entities: ?i32,
+    total_authenticated_entities: ?i32 = null,
 
     /// An object that contains details about the most recent attempt to access a
     /// tracked action
@@ -74,5 +74,5 @@ pub const ServiceLastAccessed = struct {
     /// service level and not the action level. For more information, see the
     /// `Granularity` field in
     /// [GenerateServiceLastAccessedDetails](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateServiceLastAccessedDetails.html).
-    tracked_actions_last_accessed: ?[]const TrackedActionLastAccessed,
+    tracked_actions_last_accessed: ?[]const TrackedActionLastAccessed = null,
 };

@@ -9,7 +9,7 @@ pub const MetricGoal = struct {
     ///
     /// `DECREASE` means that a variation with a lower number for this metric is
     /// performing better.
-    desired_change: ?ChangeDirectionEnum,
+    desired_change: ?ChangeDirectionEnum = null,
 
     /// A structure that contains details about the metric.
     metric_definition: MetricDefinition,

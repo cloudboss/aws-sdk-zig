@@ -6,21 +6,21 @@ const QueryTemporalRange = @import("query_temporal_range.zig").QueryTemporalRang
 pub const QueryInsightsResponse = struct {
     /// Indicates the size of query result set in bytes. You can use this data to
     /// validate if the result set has changed as part of the query tuning exercise.
-    output_bytes: ?i64,
+    output_bytes: ?i64 = null,
 
     /// Indicates the total number of rows returned as part of the query result set.
     /// You can use this data to validate if the number of rows in the result set
     /// have changed as part of the query tuning exercise.
-    output_rows: ?i64,
+    output_rows: ?i64 = null,
 
     /// Provides insights into the spatial coverage of the query, including the
     /// table with sub-optimal (max) spatial pruning. This information can help you
     /// identify areas for improvement in your partitioning strategy to enhance
     /// spatial pruning.
-    query_spatial_coverage: ?QuerySpatialCoverage,
+    query_spatial_coverage: ?QuerySpatialCoverage = null,
 
     /// Indicates the number of tables in the query.
-    query_table_count: ?i64,
+    query_table_count: ?i64 = null,
 
     /// Provides insights into the temporal range of the query, including the table
     /// with the largest (max) time range. Following are some of the potential
@@ -31,16 +31,16 @@ pub const QueryInsightsResponse = struct {
     /// * Remove functions around the time predicates.
     ///
     /// * Add time predicates to all the sub-queries.
-    query_temporal_range: ?QueryTemporalRange,
+    query_temporal_range: ?QueryTemporalRange = null,
 
     /// Indicates the partitions created by the `Unload` operation.
-    unload_partition_count: ?i64,
+    unload_partition_count: ?i64 = null,
 
     /// Indicates the size, in bytes, written by the `Unload` operation.
-    unload_written_bytes: ?i64,
+    unload_written_bytes: ?i64 = null,
 
     /// Indicates the rows written by the `Unload` query.
-    unload_written_rows: ?i64,
+    unload_written_rows: ?i64 = null,
 
     pub const json_field_names = .{
         .output_bytes = "OutputBytes",

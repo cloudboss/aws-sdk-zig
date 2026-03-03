@@ -2,5 +2,5 @@
 pub const JobTimers = struct {
     /// Indicates the elapsed time in seconds the job has been in the Active job
     /// state.
-    elapsed_time_in_active_seconds: ?i64,
+    elapsed_time_in_active_seconds: ?i64 = null,
 };

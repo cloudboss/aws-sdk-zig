@@ -3,17 +3,17 @@ const GatewayType = @import("gateway_type.zig").GatewayType;
 /// Information about the associated gateway.
 pub const AssociatedGateway = struct {
     /// The ID of the associated gateway.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the associated virtual
     /// private gateway or transit gateway.
-    owner_account: ?[]const u8,
+    owner_account: ?[]const u8 = null,
 
     /// The Region where the associated gateway is located.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The type of associated gateway.
-    @"type": ?GatewayType,
+    @"type": ?GatewayType = null,
 
     pub const json_field_names = .{
         .id = "id",

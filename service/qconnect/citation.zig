@@ -6,19 +6,19 @@ pub const Citation = struct {
     citation_span: CitationSpan,
 
     /// The identifier of the content being cited.
-    content_id: ?[]const u8,
+    content_id: ?[]const u8 = null,
 
     /// The identifier of the knowledge base containing the cited content.
-    knowledge_base_id: ?[]const u8,
+    knowledge_base_id: ?[]const u8 = null,
 
     /// A type to define the KB origin of a cited content
     reference_type: ReferenceType,
 
     /// The source URL for the citation.
-    source_url: ?[]const u8,
+    source_url: ?[]const u8 = null,
 
     /// The title of the cited content.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .citation_span = "citationSpan",

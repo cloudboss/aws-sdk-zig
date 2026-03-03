@@ -9,22 +9,22 @@ pub const UpdateDomainResponse = struct {
     created_at: i64,
 
     /// The data store.
-    data_store: ?DataStoreResponse,
+    data_store: ?DataStoreResponse = null,
 
     /// The URL of the SQS dead letter queue, which is used for reporting errors
     /// associated with
     /// ingesting data from third party applications.
-    dead_letter_queue_url: ?[]const u8,
+    dead_letter_queue_url: ?[]const u8 = null,
 
     /// The default encryption key, which is an AWS managed key, is used when no
     /// specific type
     /// of encryption key is specified. It is used to encrypt all data before it is
     /// placed in
     /// permanent or semi-permanent storage.
-    default_encryption_key: ?[]const u8,
+    default_encryption_key: ?[]const u8 = null,
 
     /// The default number of days until the data within the domain expires.
-    default_expiration_days: ?i32,
+    default_expiration_days: ?i32 = null,
 
     /// The unique name of the domain.
     domain_name: []const u8,
@@ -44,7 +44,7 @@ pub const UpdateDomainResponse = struct {
     /// `ExportingConfig` in the `MatchingRequest`, you can download the results
     /// from
     /// S3.
-    matching: ?MatchingResponse,
+    matching: ?MatchingResponse = null,
 
     /// The process of matching duplicate profiles using the rule-Based matching. If
     /// `RuleBasedMatching` = true, Amazon Connect Customer Profiles will start
@@ -54,10 +54,10 @@ pub const UpdateDomainResponse = struct {
     /// have
     /// configured `ExportingConfig` in the `RuleBasedMatchingRequest`, you
     /// can download the results from S3.
-    rule_based_matching: ?RuleBasedMatchingResponse,
+    rule_based_matching: ?RuleBasedMatchingResponse = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

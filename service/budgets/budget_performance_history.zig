@@ -19,31 +19,31 @@ pub const BudgetPerformanceHistory = struct {
     /// Management features. The BillingViewArn can be retrieved by calling the
     /// ListBillingViews
     /// API.
-    billing_view_arn: ?[]const u8,
+    billing_view_arn: ?[]const u8 = null,
 
     /// A list of amounts of cost or usage that you created budgets for, which are
     /// compared to
     /// your actual costs or usage.
-    budgeted_and_actual_amounts_list: ?[]const BudgetedAndActualAmounts,
+    budgeted_and_actual_amounts_list: ?[]const BudgetedAndActualAmounts = null,
 
-    budget_name: ?[]const u8,
+    budget_name: ?[]const u8 = null,
 
-    budget_type: ?BudgetType,
+    budget_type: ?BudgetType = null,
 
     /// The history of the cost filters for a budget during the specified time
     /// period.
-    cost_filters: ?[]const aws.map.MapEntry([]const []const u8),
+    cost_filters: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The history of the cost types for a budget during the specified time period.
-    cost_types: ?CostTypes,
+    cost_types: ?CostTypes = null,
 
     /// The filtering dimensions for the budget and their corresponding values.
-    filter_expression: ?Expression,
+    filter_expression: ?Expression = null,
 
     /// The definition for how the budget data is aggregated.
-    metrics: ?[]const Metric,
+    metrics: ?[]const Metric = null,
 
-    time_unit: ?TimeUnit,
+    time_unit: ?TimeUnit = null,
 
     pub const json_field_names = .{
         .billing_view_arn = "BillingViewArn",

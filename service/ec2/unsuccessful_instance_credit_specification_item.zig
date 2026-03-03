@@ -7,8 +7,8 @@ pub const UnsuccessfulInstanceCreditSpecificationItem = struct {
     /// The applicable error for the burstable performance instance whose credit
     /// option for
     /// CPU usage was not modified.
-    @"error": ?UnsuccessfulInstanceCreditSpecificationItemError,
+    @"error": ?UnsuccessfulInstanceCreditSpecificationItemError = null,
 
     /// The ID of the instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 };

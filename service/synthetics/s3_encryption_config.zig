@@ -16,11 +16,11 @@ pub const S3EncryptionConfig = struct {
     ///
     /// If you omit this parameter, an
     /// Amazon Web Services-managed KMS key is used.
-    encryption_mode: ?EncryptionMode,
+    encryption_mode: ?EncryptionMode = null,
 
     /// The ARN of the customer-managed KMS key to use, if you specify `SSE-KMS`
     /// for `EncryptionMode`
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .encryption_mode = "EncryptionMode",

@@ -2,10 +2,10 @@
 pub const AuthorizerConfig = struct {
     /// A Boolean that specifies whether the domain configuration's authorization
     /// service can be overridden.
-    allow_authorizer_override: ?bool,
+    allow_authorizer_override: ?bool = null,
 
     /// The name of the authorization service for a domain configuration.
-    default_authorizer_name: ?[]const u8,
+    default_authorizer_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allow_authorizer_override = "allowAuthorizerOverride",

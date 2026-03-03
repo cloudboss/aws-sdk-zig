@@ -6,7 +6,7 @@ pub const ListManagementOptions = struct {
     contact_list_name: []const u8,
 
     /// The name of the topic.
-    topic_name: ?[]const u8,
+    topic_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .contact_list_name = "ContactListName",

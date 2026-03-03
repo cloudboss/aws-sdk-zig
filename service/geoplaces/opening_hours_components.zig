@@ -2,15 +2,15 @@
 pub const OpeningHoursComponents = struct {
     /// String which represents the duration of the opening period, such as
     /// `"PT12H00M"`.
-    open_duration: ?[]const u8,
+    open_duration: ?[]const u8 = null,
 
     /// String which represents the opening hours, such as `"T070000"`.
-    open_time: ?[]const u8,
+    open_time: ?[]const u8 = null,
 
     /// Days or periods when the provided opening hours are in affect.
     ///
     /// Example: `FREQ:DAILY;BYDAY:MO,TU,WE,TH,SU`
-    recurrence: ?[]const u8,
+    recurrence: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .open_duration = "OpenDuration",

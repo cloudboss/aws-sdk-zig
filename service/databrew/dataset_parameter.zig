@@ -13,11 +13,11 @@ pub const DatasetParameter = struct {
 
     /// Additional parameter options such as a format and a timezone. Required for
     /// datetime parameters.
-    datetime_options: ?DatetimeOptions,
+    datetime_options: ?DatetimeOptions = null,
 
     /// The optional filter expression structure to apply additional matching
     /// criteria to the parameter.
-    filter: ?FilterExpression,
+    filter: ?FilterExpression = null,
 
     /// The name of the parameter that is used in the dataset's Amazon S3 path.
     name: []const u8,

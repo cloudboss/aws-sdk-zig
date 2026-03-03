@@ -17,20 +17,20 @@ pub const AnalyticsConfigurationType = struct {
     /// pass an endpoint ID in the `AnalyticsMetadata` parameter of sign-in
     /// operations. The endpoint ID is information about the destination for push
     /// notifications
-    application_arn: ?[]const u8,
+    application_arn: ?[]const u8 = null,
 
     /// Your Amazon Pinpoint project ID.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The [external
     /// ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) of the role that Amazon Cognito assumes to send
     /// analytics data to Amazon Pinpoint.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ARN of an Identity and Access Management role that has the permissions
     /// required for Amazon Cognito to publish
     /// events to Amazon Pinpoint analytics.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// If `UserDataShared` is `true`, Amazon Cognito includes user data in the
     /// events that it publishes to Amazon Pinpoint analytics.

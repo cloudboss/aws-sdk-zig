@@ -4,7 +4,7 @@ const ReferenceLineValueLabelRelativePosition = @import("reference_line_value_la
 /// The value label configuration of the label in a reference line.
 pub const ReferenceLineValueLabelConfiguration = struct {
     /// The format configuration of the value label.
-    format_configuration: ?NumericFormatConfiguration,
+    format_configuration: ?NumericFormatConfiguration = null,
 
     /// The relative position of the value label. Choose one of the following
     /// options:
@@ -12,7 +12,7 @@ pub const ReferenceLineValueLabelConfiguration = struct {
     /// * `BEFORE_CUSTOM_LABEL`
     ///
     /// * `AFTER_CUSTOM_LABEL`
-    relative_position: ?ReferenceLineValueLabelRelativePosition,
+    relative_position: ?ReferenceLineValueLabelRelativePosition = null,
 
     pub const json_field_names = .{
         .format_configuration = "FormatConfiguration",

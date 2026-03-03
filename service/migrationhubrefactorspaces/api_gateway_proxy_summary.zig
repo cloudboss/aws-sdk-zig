@@ -3,27 +3,27 @@ const ApiGatewayEndpointType = @import("api_gateway_endpoint_type.zig").ApiGatew
 /// A wrapper object holding the Amazon API Gateway proxy summary.
 pub const ApiGatewayProxySummary = struct {
     /// The resource ID of the API Gateway for the proxy.
-    api_gateway_id: ?[]const u8,
+    api_gateway_id: ?[]const u8 = null,
 
     /// The type of API Gateway endpoint created.
-    endpoint_type: ?ApiGatewayEndpointType,
+    endpoint_type: ?ApiGatewayEndpointType = null,
 
     /// The Amazon Resource Name (ARN) of the Network Load Balancer configured by
     /// the API Gateway proxy.
-    nlb_arn: ?[]const u8,
+    nlb_arn: ?[]const u8 = null,
 
     /// The name of the Network Load Balancer that is configured by the API Gateway
     /// proxy.
-    nlb_name: ?[]const u8,
+    nlb_name: ?[]const u8 = null,
 
     /// The endpoint URL of the API Gateway proxy.
-    proxy_url: ?[]const u8,
+    proxy_url: ?[]const u8 = null,
 
     /// The name of the API Gateway stage. The name defaults to `prod`.
-    stage_name: ?[]const u8,
+    stage_name: ?[]const u8 = null,
 
     /// The `VpcLink` ID of the API Gateway proxy.
-    vpc_link_id: ?[]const u8,
+    vpc_link_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_gateway_id = "ApiGatewayId",

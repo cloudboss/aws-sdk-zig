@@ -6,10 +6,10 @@ pub const Blueprint = struct {
     blueprint_arn: []const u8,
 
     /// Stage of blueprint.
-    stage: ?BlueprintStage,
+    stage: ?BlueprintStage = null,
 
     /// Version of blueprint.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .blueprint_arn = "blueprintArn",

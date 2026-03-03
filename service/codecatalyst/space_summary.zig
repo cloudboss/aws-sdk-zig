@@ -1,10 +1,10 @@
 /// Information about an space.
 pub const SpaceSummary = struct {
     /// The description of the space.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The friendly name of the space displayed to users.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The name of the space.
     name: []const u8,

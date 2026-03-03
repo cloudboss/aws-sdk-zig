@@ -4,10 +4,10 @@ const ValueType = @import("value_type.zig").ValueType;
 /// of value, and the value.
 pub const NormalizedValue = struct {
     /// The value of the date, written as Year-Month-DayTHour:Minute:Second.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     /// The normalized type of the value detected. In this case, DATE.
-    value_type: ?ValueType,
+    value_type: ?ValueType = null,
 
     pub const json_field_names = .{
         .value = "Value",

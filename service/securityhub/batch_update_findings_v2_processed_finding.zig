@@ -3,10 +3,10 @@ const OcsfFindingIdentifier = @import("ocsf_finding_identifier.zig").OcsfFinding
 /// The list of findings that were updated.
 pub const BatchUpdateFindingsV2ProcessedFinding = struct {
     /// The finding identifier of a processed finding.
-    finding_identifier: ?OcsfFindingIdentifier,
+    finding_identifier: ?OcsfFindingIdentifier = null,
 
     /// The metadata.uid of a processed finding.
-    metadata_uid: ?[]const u8,
+    metadata_uid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .finding_identifier = "FindingIdentifier",

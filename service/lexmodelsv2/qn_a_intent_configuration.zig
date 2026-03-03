@@ -3,11 +3,11 @@ const DataSourceConfiguration = @import("data_source_configuration.zig").DataSou
 
 /// Details about the the configuration of the built-in `Amazon.QnAIntent`.
 pub const QnAIntentConfiguration = struct {
-    bedrock_model_configuration: ?BedrockModelSpecification,
+    bedrock_model_configuration: ?BedrockModelSpecification = null,
 
     /// Contains details about the configuration of the data source used for the
     /// `AMAZON.QnAIntent`.
-    data_source_configuration: ?DataSourceConfiguration,
+    data_source_configuration: ?DataSourceConfiguration = null,
 
     pub const json_field_names = .{
         .bedrock_model_configuration = "bedrockModelConfiguration",

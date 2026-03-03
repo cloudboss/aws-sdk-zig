@@ -5,12 +5,12 @@ pub const SavingsPlansSavings = struct {
     /// The savings amount that you're accumulating for the usage that's covered by
     /// a Savings
     /// Plans, when compared to the On-Demand equivalent of the same usage.
-    net_savings: ?[]const u8,
+    net_savings: ?[]const u8 = null,
 
     /// How much the amount that the usage would have cost if it was accrued at the
     /// On-Demand
     /// rate.
-    on_demand_cost_equivalent: ?[]const u8,
+    on_demand_cost_equivalent: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .net_savings = "NetSavings",

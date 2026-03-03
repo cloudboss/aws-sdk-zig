@@ -37,12 +37,12 @@ pub const Document = struct {
     /// If you're using an AWS SDK to call Amazon Textract, you might not need to
     /// base64-encode
     /// image bytes passed using the `Bytes` field.
-    bytes: ?[]const u8,
+    bytes: ?[]const u8 = null,
 
     /// Identifies an S3 object as the document source. The maximum size of a
     /// document that's
     /// stored in an S3 bucket is 5 MB.
-    s3_object: ?S3Object,
+    s3_object: ?S3Object = null,
 
     pub const json_field_names = .{
         .bytes = "Bytes",

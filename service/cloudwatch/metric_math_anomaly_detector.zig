@@ -15,7 +15,7 @@ pub const MetricMathAnomalyDetector = struct {
     /// `ReturnData` to `true` for this object in the array. For all
     /// other expressions and metrics, set `ReturnData` to `false`. The
     /// designated expression must return a single time series.
-    metric_data_queries: ?[]const MetricDataQuery,
+    metric_data_queries: ?[]const MetricDataQuery = null,
 
     pub const json_field_names = .{
         .metric_data_queries = "MetricDataQueries",

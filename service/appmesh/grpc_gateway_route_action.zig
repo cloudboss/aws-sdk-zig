@@ -4,7 +4,7 @@ const GatewayRouteTarget = @import("gateway_route_target.zig").GatewayRouteTarge
 /// An object that represents the action to take if a match is determined.
 pub const GrpcGatewayRouteAction = struct {
     /// The gateway route action to rewrite.
-    rewrite: ?GrpcGatewayRouteRewrite,
+    rewrite: ?GrpcGatewayRouteRewrite = null,
 
     /// An object that represents the target that traffic is routed to when a
     /// request matches the gateway route.

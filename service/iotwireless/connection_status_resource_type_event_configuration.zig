@@ -7,7 +7,7 @@ pub const ConnectionStatusResourceTypeEventConfiguration = struct {
     /// Connection status resource type event configuration object for enabling or
     /// disabling
     /// LoRaWAN related event topics.
-    lo_ra_wan: ?LoRaWANConnectionStatusResourceTypeEventConfiguration,
+    lo_ra_wan: ?LoRaWANConnectionStatusResourceTypeEventConfiguration = null,
 
     pub const json_field_names = .{
         .lo_ra_wan = "LoRaWAN",

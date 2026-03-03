@@ -6,29 +6,29 @@ const RecommendationRelatedEvent = @import("recommendation_related_event.zig").R
 /// generated an insight.
 pub const Recommendation = struct {
     /// The category type of the recommendation.
-    category: ?[]const u8,
+    category: ?[]const u8 = null,
 
     /// A description of the problem.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A hyperlink to information to help you address the problem.
-    link: ?[]const u8,
+    link: ?[]const u8 = null,
 
     /// The name of the recommendation.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The reason DevOps Guru flagged the anomalous behavior as a problem.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// Anomalies that are related to the problem. Use these Anomalies to learn more
     /// about
     /// what's happening and to help address the issue.
-    related_anomalies: ?[]const RecommendationRelatedAnomaly,
+    related_anomalies: ?[]const RecommendationRelatedAnomaly = null,
 
     /// Events that are related to the problem. Use these events to learn more about
     /// what's
     /// happening and to help address the issue.
-    related_events: ?[]const RecommendationRelatedEvent,
+    related_events: ?[]const RecommendationRelatedEvent = null,
 
     pub const json_field_names = .{
         .category = "Category",

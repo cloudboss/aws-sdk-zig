@@ -6,29 +6,29 @@ pub const UICustomizationType = struct {
     /// customization applies to all user pool app clients that don't have
     /// client-level
     /// settings..
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     /// The date and time when the item was created. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The CSS values in the UI customization.
-    css: ?[]const u8,
+    css: ?[]const u8 = null,
 
     /// The CSS version number.
-    css_version: ?[]const u8,
+    css_version: ?[]const u8 = null,
 
     /// A URL path to the hosted logo image of your UI customization.
-    image_url: ?[]const u8,
+    image_url: ?[]const u8 = null,
 
     /// The date and time when the item was modified. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The ID of the user pool with hosted UI customizations.
-    user_pool_id: ?[]const u8,
+    user_pool_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_id = "ClientId",

@@ -1,22 +1,22 @@
 /// Information about a connection.
 pub const ConnectionDetails = struct {
     /// The allowed IP addresses.
-    allowed_ips: ?[]const []const u8,
+    allowed_ips: ?[]const []const u8 = null,
 
     /// The public key of the client.
-    client_public_key: ?[]const u8,
+    client_public_key: ?[]const u8 = null,
 
     /// The client tunnel address.
-    client_tunnel_address: ?[]const u8,
+    client_tunnel_address: ?[]const u8 = null,
 
     /// The endpoint for the server.
-    server_endpoint: ?[]const u8,
+    server_endpoint: ?[]const u8 = null,
 
     /// The public key of the server.
-    server_public_key: ?[]const u8,
+    server_public_key: ?[]const u8 = null,
 
     /// The server tunnel address.
-    server_tunnel_address: ?[]const u8,
+    server_tunnel_address: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allowed_ips = "AllowedIps",

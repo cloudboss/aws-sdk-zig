@@ -5,7 +5,7 @@ pub const HttpAuthorization = struct {
     /// Use Sig V4 authorization. For more information, see [Signature
     /// Version 4 Signing
     /// Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    sigv_4: ?SigV4Authorization,
+    sigv_4: ?SigV4Authorization = null,
 
     pub const json_field_names = .{
         .sigv_4 = "sigv4",

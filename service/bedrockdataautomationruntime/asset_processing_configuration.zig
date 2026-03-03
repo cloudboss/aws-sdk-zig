@@ -3,7 +3,7 @@ const VideoAssetProcessingConfiguration = @import("video_asset_processing_config
 /// Config containing asset processing related knobs for all modalities
 pub const AssetProcessingConfiguration = struct {
     /// Video asset processing configuration
-    video: ?VideoAssetProcessingConfiguration,
+    video: ?VideoAssetProcessingConfiguration = null,
 
     pub const json_field_names = .{
         .video = "video",

@@ -8,7 +8,7 @@ pub const LabelingJobAlgorithmsConfig = struct {
     /// (ARN) of the final model used for auto-labeling. You can use this model as
     /// the starting point for subsequent similar jobs by providing the ARN of the
     /// model here.
-    initial_active_learning_model_arn: ?[]const u8,
+    initial_active_learning_model_arn: ?[]const u8 = null,
 
     /// Specifies the Amazon Resource Name (ARN) of the algorithm used for
     /// auto-labeling. You must select one of the following ARNs:
@@ -28,7 +28,7 @@ pub const LabelingJobAlgorithmsConfig = struct {
     labeling_job_algorithm_specification_arn: []const u8,
 
     /// Provides configuration information for a labeling job.
-    labeling_job_resource_config: ?LabelingJobResourceConfig,
+    labeling_job_resource_config: ?LabelingJobResourceConfig = null,
 
     pub const json_field_names = .{
         .initial_active_learning_model_arn = "InitialActiveLearningModelArn",

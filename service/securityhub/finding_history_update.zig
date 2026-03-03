@@ -9,13 +9,13 @@ pub const FindingHistoryUpdate = struct {
     /// if [
     /// `FindingHistoryRecord`
     /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_FindingHistoryRecord.html) exceeds database limits.
-    new_value: ?[]const u8,
+    new_value: ?[]const u8 = null,
 
     /// The value of the ASFF field before the finding change event.
-    old_value: ?[]const u8,
+    old_value: ?[]const u8 = null,
 
     /// The ASFF field that changed during the finding change event.
-    updated_field: ?[]const u8,
+    updated_field: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .new_value = "NewValue",

@@ -42,10 +42,10 @@ pub const FailureInfo = struct {
     /// any valid error code returned by the Amazon Web Services service that hosts
     /// the resource that you want
     /// to tag.
-    error_code: ?ErrorCode,
+    error_code: ?ErrorCode = null,
 
     /// The message of the common error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The HTTP status code of the common error.
     status_code: i32 = 0,

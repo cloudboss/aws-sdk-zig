@@ -20,7 +20,7 @@ pub const Tag = struct {
     /// “Department” as the initial (key) portion of the pair, with a value of
     /// “sales” to indicate the
     /// sales department.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

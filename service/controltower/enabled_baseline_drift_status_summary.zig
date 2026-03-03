@@ -13,7 +13,7 @@ pub const EnabledBaselineDriftStatusSummary = struct {
     /// The types of drift that can be detected for an enabled baseline. Amazon Web
     /// Services Control Tower detects inheritance drift on enabled baselines that
     /// apply at the OU level.
-    types: ?EnabledBaselineDriftTypes,
+    types: ?EnabledBaselineDriftTypes = null,
 
     pub const json_field_names = .{
         .types = "types",

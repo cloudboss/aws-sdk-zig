@@ -13,16 +13,16 @@ pub const MetricDatum = struct {
     /// If you omit the `Counts` array, the default of 1 is used as the value for
     /// each count. If you include a `Counts` array, it must include the same amount
     /// of values as the `Values` array.
-    counts: ?[]const f64,
+    counts: ?[]const f64 = null,
 
     /// The dimensions associated with the metric.
-    dimensions: ?[]const Dimension,
+    dimensions: ?[]const Dimension = null,
 
     /// The name of the metric.
     metric_name: []const u8,
 
     /// The statistical values for the metric.
-    statistic_values: ?StatisticSet,
+    statistic_values: ?StatisticSet = null,
 
     /// Valid values are 1 and 60. Setting this to 1 specifies this metric as a
     /// high-resolution metric, so that CloudWatch stores the metric with sub-minute
@@ -39,19 +39,19 @@ pub const MetricDatum = struct {
     ///
     /// This field is optional, if you do not specify it the default of 60 is
     /// used.
-    storage_resolution: ?i32,
+    storage_resolution: ?i32 = null,
 
     /// The time the metric data was received, expressed as the number of
     /// milliseconds
     /// since Jan 1, 1970 00:00:00 UTC.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     /// When you are using a `Put` operation, this defines what unit you want to
     /// use when storing the metric.
     ///
     /// In a `Get` operation, this displays the unit that is used for the
     /// metric.
-    unit: ?StandardUnit,
+    unit: ?StandardUnit = null,
 
     /// The value for the metric.
     ///
@@ -61,7 +61,7 @@ pub const MetricDatum = struct {
     /// -2^360 to 2^360.
     /// In addition, special values (for example, NaN, +Infinity, -Infinity) are not
     /// supported.
-    value: ?f64,
+    value: ?f64 = null,
 
     /// Array of numbers representing the values for the metric during the period.
     /// Each unique
@@ -76,7 +76,7 @@ pub const MetricDatum = struct {
     /// range of -2^360 to 2^360. In addition, special values (for example, NaN,
     /// +Infinity,
     /// -Infinity) are not supported.
-    values: ?[]const f64,
+    values: ?[]const f64 = null,
 
     pub const json_field_names = .{
         .counts = "Counts",

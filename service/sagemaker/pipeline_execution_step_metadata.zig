@@ -24,26 +24,26 @@ const TuningJobStepMetaData = @import("tuning_job_step_meta_data.zig").TuningJob
 /// Metadata for a step execution.
 pub const PipelineExecutionStepMetadata = struct {
     /// The Amazon Resource Name (ARN) of the AutoML job that was run by this step.
-    auto_ml_job: ?AutoMLJobStepMetadata,
+    auto_ml_job: ?AutoMLJobStepMetadata = null,
 
     /// The metadata of the Amazon Bedrock custom model used in the pipeline
     /// execution step.
-    bedrock_custom_model: ?BedrockCustomModelMetadata,
+    bedrock_custom_model: ?BedrockCustomModelMetadata = null,
 
     /// The metadata of the Amazon Bedrock custom model deployment used in pipeline
     /// execution step.
-    bedrock_custom_model_deployment: ?BedrockCustomModelDeploymentMetadata,
+    bedrock_custom_model_deployment: ?BedrockCustomModelDeploymentMetadata = null,
 
     /// The metadata of Amazon Bedrock model import used in pipeline execution step.
-    bedrock_model_import: ?BedrockModelImportMetadata,
+    bedrock_model_import: ?BedrockModelImportMetadata = null,
 
     /// The metadata of the Amazon Bedrock provisioned model throughput used in the
     /// pipeline execution step.
-    bedrock_provisioned_model_throughput: ?BedrockProvisionedModelThroughputMetadata,
+    bedrock_provisioned_model_throughput: ?BedrockProvisionedModelThroughputMetadata = null,
 
     /// The URL of the Amazon SQS queue used by this step execution, the pipeline
     /// generated token, and a list of output parameters.
-    callback: ?CallbackStepMetadata,
+    callback: ?CallbackStepMetadata = null,
 
     /// Container for the metadata for a Clarify check step. The configurations and
     /// outcomes of the check step execution. This includes:
@@ -60,41 +60,41 @@ pub const PipelineExecutionStepMetadata = struct {
     /// * The boolean flags indicating if the drift check is skipped.
     /// * If step property `BaselineUsedForDriftCheck` is set the same as
     ///   `CalculatedBaseline`.
-    clarify_check: ?ClarifyCheckStepMetadata,
+    clarify_check: ?ClarifyCheckStepMetadata = null,
 
     /// The outcome of the condition evaluation that was run by this step execution.
-    condition: ?ConditionStepMetadata,
+    condition: ?ConditionStepMetadata = null,
 
     /// The configurations and outcomes of an Amazon EMR step execution.
-    emr: ?EMRStepMetadata,
+    emr: ?EMRStepMetadata = null,
 
     /// The endpoint that was invoked during this step execution.
-    endpoint: ?EndpointStepMetadata,
+    endpoint: ?EndpointStepMetadata = null,
 
     /// The endpoint configuration used to create an endpoint during this step
     /// execution.
-    endpoint_config: ?EndpointConfigStepMetadata,
+    endpoint_config: ?EndpointConfigStepMetadata = null,
 
     /// The configurations and outcomes of a Fail step execution.
-    fail: ?FailStepMetadata,
+    fail: ?FailStepMetadata = null,
 
     /// The metadata of the inference component used in pipeline execution step.
-    inference_component: ?InferenceComponentMetadata,
+    inference_component: ?InferenceComponentMetadata = null,
 
     /// The Amazon Resource Name (ARN) of the Lambda function that was run by this
     /// step execution and a list of output parameters.
-    lambda: ?LambdaStepMetadata,
+    lambda: ?LambdaStepMetadata = null,
 
     /// The metadata of the lineage used in pipeline execution step.
-    lineage: ?LineageMetadata,
+    lineage: ?LineageMetadata = null,
 
     /// The Amazon Resource Name (ARN) of the model that was created by this step
     /// execution.
-    model: ?ModelStepMetadata,
+    model: ?ModelStepMetadata = null,
 
     /// The Amazon Resource Name (ARN) of the processing job that was run by this
     /// step execution.
-    processing_job: ?ProcessingJobStepMetadata,
+    processing_job: ?ProcessingJobStepMetadata = null,
 
     /// The configurations and outcomes of the check step execution. This includes:
     ///
@@ -110,23 +110,23 @@ pub const PipelineExecutionStepMetadata = struct {
     /// * The Boolean flags indicating if the drift check is skipped.
     /// * If step property `BaselineUsedForDriftCheck` is set the same as
     ///   `CalculatedBaseline`.
-    quality_check: ?QualityCheckStepMetadata,
+    quality_check: ?QualityCheckStepMetadata = null,
 
     /// The Amazon Resource Name (ARN) of the model package that the model was
     /// registered to by this step execution.
-    register_model: ?RegisterModelStepMetadata,
+    register_model: ?RegisterModelStepMetadata = null,
 
     /// The Amazon Resource Name (ARN) of the training job that was run by this step
     /// execution.
-    training_job: ?TrainingJobStepMetadata,
+    training_job: ?TrainingJobStepMetadata = null,
 
     /// The Amazon Resource Name (ARN) of the transform job that was run by this
     /// step execution.
-    transform_job: ?TransformJobStepMetadata,
+    transform_job: ?TransformJobStepMetadata = null,
 
     /// The Amazon Resource Name (ARN) of the tuning job that was run by this step
     /// execution.
-    tuning_job: ?TuningJobStepMetaData,
+    tuning_job: ?TuningJobStepMetaData = null,
 
     pub const json_field_names = .{
         .auto_ml_job = "AutoMLJob",

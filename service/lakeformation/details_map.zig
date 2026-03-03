@@ -5,7 +5,7 @@
 /// there will exist a corresponding RAM resource share ARN.
 pub const DetailsMap = struct {
     /// A resource share ARN for a catalog resource shared through RAM.
-    resource_share: ?[]const []const u8,
+    resource_share: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .resource_share = "ResourceShare",

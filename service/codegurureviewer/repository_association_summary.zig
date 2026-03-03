@@ -7,23 +7,23 @@ const RepositoryAssociationState = @import("repository_association_state.zig").R
 pub const RepositoryAssociationSummary = struct {
     /// The Amazon Resource Name (ARN) of the
     /// [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object. You can retrieve this ARN by calling [ListRepositoryAssociations](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html).
-    association_arn: ?[]const u8,
+    association_arn: ?[]const u8 = null,
 
     /// The repository association ID.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar
     /// Connections connection. Its format is
     /// `arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id`. For more information, see [Connection](https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html) in the *Amazon Web Services CodeStar Connections API Reference*.
-    connection_arn: ?[]const u8,
+    connection_arn: ?[]const u8 = null,
 
     /// The time, in milliseconds since the epoch, since the repository association
     /// was last
     /// updated.
-    last_updated_time_stamp: ?i64,
+    last_updated_time_stamp: ?i64 = null,
 
     /// The name of the repository association.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The owner of the repository. For an Amazon Web Services CodeCommit
     /// repository, this is the Amazon Web Services account ID of the
@@ -32,10 +32,10 @@ pub const RepositoryAssociationSummary = struct {
     /// repository.
     /// For an S3 repository, it can be the username or Amazon Web Services account
     /// ID.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The provider type of the repository association.
-    provider_type: ?ProviderType,
+    provider_type: ?ProviderType = null,
 
     /// The state of the repository association.
     ///
@@ -68,7 +68,7 @@ pub const RepositoryAssociationSummary = struct {
     ///   disassociated. For more information, see [Using tags to control access to
     ///   associated
     ///   repositories](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html) in the *Amazon CodeGuru Reviewer User Guide*.
-    state: ?RepositoryAssociationState,
+    state: ?RepositoryAssociationState = null,
 
     pub const json_field_names = .{
         .association_arn = "AssociationArn",

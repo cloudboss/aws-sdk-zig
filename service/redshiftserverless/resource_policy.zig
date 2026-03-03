@@ -2,10 +2,10 @@
 /// snapshots across Amazon Web Services accounts.
 pub const ResourcePolicy = struct {
     /// The resource policy.
-    policy: ?[]const u8,
+    policy: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the policy.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .policy = "policy",

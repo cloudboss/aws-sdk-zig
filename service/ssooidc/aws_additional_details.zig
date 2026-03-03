@@ -10,7 +10,7 @@ pub const AwsAdditionalDetails = struct {
     /// Identity context comprises information that Amazon Web Services services use
     /// to make authorization
     /// decisions when they receive requests.
-    identity_context: ?[]const u8,
+    identity_context: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .identity_context = "identityContext",

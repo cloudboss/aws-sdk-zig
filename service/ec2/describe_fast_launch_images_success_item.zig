@@ -10,38 +10,38 @@ const FastLaunchStateCode = @import("fast_launch_state_code.zig").FastLaunchStat
 /// filters.
 pub const DescribeFastLaunchImagesSuccessItem = struct {
     /// The image ID that identifies the Windows fast launch enabled image.
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// The launch template that the Windows fast launch enabled AMI uses when it
     /// launches Windows
     /// instances from pre-provisioned snapshots.
-    launch_template: ?FastLaunchLaunchTemplateSpecificationResponse,
+    launch_template: ?FastLaunchLaunchTemplateSpecificationResponse = null,
 
     /// The maximum number of instances that Amazon EC2 can launch at the same time
     /// to create
     /// pre-provisioned snapshots for Windows fast launch.
-    max_parallel_launches: ?i32,
+    max_parallel_launches: ?i32 = null,
 
     /// The owner ID for the Windows fast launch enabled AMI.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The resource type that Amazon EC2 uses for pre-provisioning the Windows AMI.
     /// Supported values
     /// include: `snapshot`.
-    resource_type: ?FastLaunchResourceType,
+    resource_type: ?FastLaunchResourceType = null,
 
     /// A group of parameters that are used for pre-provisioning the associated
     /// Windows AMI using
     /// snapshots.
-    snapshot_configuration: ?FastLaunchSnapshotConfigurationResponse,
+    snapshot_configuration: ?FastLaunchSnapshotConfigurationResponse = null,
 
     /// The current state of Windows fast launch for the specified Windows AMI.
-    state: ?FastLaunchStateCode,
+    state: ?FastLaunchStateCode = null,
 
     /// The reason that Windows fast launch for the AMI changed to the current
     /// state.
-    state_transition_reason: ?[]const u8,
+    state_transition_reason: ?[]const u8 = null,
 
     /// The time that Windows fast launch for the AMI changed to the current state.
-    state_transition_time: ?i64,
+    state_transition_time: ?i64 = null,
 };

@@ -15,13 +15,13 @@ pub const AutoScalingPolicyDescription = struct {
     /// Automatic scaling activity will not cause an instance group to grow above or
     /// below these
     /// limits.
-    constraints: ?ScalingConstraints,
+    constraints: ?ScalingConstraints = null,
 
     /// The scale-in and scale-out rules that comprise the automatic scaling policy.
-    rules: ?[]const ScalingRule,
+    rules: ?[]const ScalingRule = null,
 
     /// The status of an automatic scaling policy.
-    status: ?AutoScalingPolicyStatus,
+    status: ?AutoScalingPolicyStatus = null,
 
     pub const json_field_names = .{
         .constraints = "Constraints",

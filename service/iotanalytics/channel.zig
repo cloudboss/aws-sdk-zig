@@ -7,10 +7,10 @@ const ChannelStorage = @import("channel_storage.zig").ChannelStorage;
 /// before publishing the data to a pipeline.
 pub const Channel = struct {
     /// The ARN of the channel.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// When the channel was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The last time when a new message arrived in the channel.
     ///
@@ -19,26 +19,26 @@ pub const Channel = struct {
     ///
     /// This feature only applies to messages that arrived in the data store after
     /// October 23, 2020.
-    last_message_arrival_time: ?i64,
+    last_message_arrival_time: ?i64 = null,
 
     /// When the channel was last updated.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The name of the channel.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// How long, in days, message data is kept for the channel.
-    retention_period: ?RetentionPeriod,
+    retention_period: ?RetentionPeriod = null,
 
     /// The status of the channel.
-    status: ?ChannelStatus,
+    status: ?ChannelStatus = null,
 
     /// Where channel data is stored. You can choose one of `serviceManagedS3` or
     /// `customerManagedS3` storage. If not specified, the default is
     /// `serviceManagedS3`. You can't change this storage option after the channel
     /// is
     /// created.
-    storage: ?ChannelStorage,
+    storage: ?ChannelStorage = null,
 
     pub const json_field_names = .{
         .arn = "arn",

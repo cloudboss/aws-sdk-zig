@@ -18,19 +18,19 @@ pub const DisruptionCompliance = struct {
     current_rto_in_secs: i32 = 0,
 
     /// The disruption compliance message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The RPO description.
-    rpo_description: ?[]const u8,
+    rpo_description: ?[]const u8 = null,
 
     /// Reference identifier of the RPO .
-    rpo_reference_id: ?[]const u8,
+    rpo_reference_id: ?[]const u8 = null,
 
     /// The RTO description.
-    rto_description: ?[]const u8,
+    rto_description: ?[]const u8 = null,
 
     /// Reference identifier of the RTO.
-    rto_reference_id: ?[]const u8,
+    rto_reference_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .achievable_rpo_in_secs = "achievableRpoInSecs",

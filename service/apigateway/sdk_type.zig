@@ -3,16 +3,16 @@ const SdkConfigurationProperty = @import("sdk_configuration_property.zig").SdkCo
 /// A type of SDK that API Gateway can generate.
 pub const SdkType = struct {
     /// A list of configuration properties of an SdkType.
-    configuration_properties: ?[]const SdkConfigurationProperty,
+    configuration_properties: ?[]const SdkConfigurationProperty = null,
 
     /// The description of an SdkType.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The user-friendly name of an SdkType instance.
-    friendly_name: ?[]const u8,
+    friendly_name: ?[]const u8 = null,
 
     /// The identifier of an SdkType instance.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration_properties = "configurationProperties",

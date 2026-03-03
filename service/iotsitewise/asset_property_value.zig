@@ -5,7 +5,7 @@ const Variant = @import("variant.zig").Variant;
 /// Contains asset property value information.
 pub const AssetPropertyValue = struct {
     /// The quality of the asset property value.
-    quality: ?Quality,
+    quality: ?Quality = null,
 
     /// The timestamp of the asset property value.
     timestamp: TimeInNanos,

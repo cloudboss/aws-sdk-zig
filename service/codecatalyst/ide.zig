@@ -2,10 +2,10 @@
 /// Environment.
 pub const Ide = struct {
     /// The name of the IDE.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A link to the IDE runtime image.
-    runtime: ?[]const u8,
+    runtime: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

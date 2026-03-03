@@ -7,13 +7,13 @@ pub const ResourceSharingConfig = struct {
     /// compute. When specified, these limits define the maximum amount of specific
     /// resource types (such as accelerators, vCPU, or memory) that an entity can
     /// borrow, regardless of the percentage-based `BorrowLimit`.
-    absolute_borrow_limits: ?[]const ComputeQuotaResourceConfig,
+    absolute_borrow_limits: ?[]const ComputeQuotaResourceConfig = null,
 
     /// The limit on how much idle compute can be borrowed.The values can be 1 - 500
     /// percent of idle compute that the team is allowed to borrow.
     ///
     /// Default is `50`.
-    borrow_limit: ?i32,
+    borrow_limit: ?i32 = null,
 
     /// The strategy of how idle compute is shared within the cluster. The following
     /// are the options of strategies.

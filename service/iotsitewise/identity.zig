@@ -12,16 +12,16 @@ const UserIdentity = @import("user_identity.zig").UserIdentity;
 /// console](https://console.aws.amazon.com/singlesignon).
 pub const Identity = struct {
     /// An IAM Identity Center group identity.
-    group: ?GroupIdentity,
+    group: ?GroupIdentity = null,
 
     /// An IAM role identity.
-    iam_role: ?IAMRoleIdentity,
+    iam_role: ?IAMRoleIdentity = null,
 
     /// An IAM user identity.
-    iam_user: ?IAMUserIdentity,
+    iam_user: ?IAMUserIdentity = null,
 
     /// An IAM Identity Center user identity.
-    user: ?UserIdentity,
+    user: ?UserIdentity = null,
 
     pub const json_field_names = .{
         .group = "group",

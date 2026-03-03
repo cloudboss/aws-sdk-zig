@@ -11,30 +11,30 @@ const IncludedProperty = @import("included_property.zig").IncludedProperty;
 pub const View = struct {
     /// An array of SearchFilter objects that specify which resources can be
     /// included in the results of queries made using this view.
-    filters: ?SearchFilter,
+    filters: ?SearchFilter = null,
 
     /// A structure that contains additional information about the view.
-    included_properties: ?[]const IncludedProperty,
+    included_properties: ?[]const IncludedProperty = null,
 
     /// The date and time when this view was last modified.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The Amazon Web Services account that owns this view.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// An [Amazon resource name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of an Amazon Web Services account, an organization, or an organizational unit (OU) that specifies whether this view includes resources from only the specified Amazon Web Services account, all accounts in the specified organization, or all accounts in the specified OU.
     ///
     /// If not specified, the value defaults to the Amazon Web Services account used
     /// to call this operation.
-    scope: ?[]const u8,
+    scope: ?[]const u8 = null,
 
     /// The [Amazon resource name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the view.
-    view_arn: ?[]const u8,
+    view_arn: ?[]const u8 = null,
 
     /// The name of the view.
-    view_name: ?[]const u8,
+    view_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .filters = "Filters",

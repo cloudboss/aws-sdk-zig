@@ -6,11 +6,11 @@ const RangeConstant = @import("range_constant.zig").RangeConstant;
 pub const TopicRangeFilterConstant = struct {
     /// The data type of the constant value that is used in a range filter. Valid
     /// values for this structure are `RANGE`.
-    constant_type: ?ConstantType,
+    constant_type: ?ConstantType = null,
 
     /// The value of the constant that is used to specify the endpoints of a range
     /// filter.
-    range_constant: ?RangeConstant,
+    range_constant: ?RangeConstant = null,
 
     pub const json_field_names = .{
         .constant_type = "ConstantType",

@@ -17,17 +17,17 @@ pub const QueryExecutionStatistics = struct {
     /// Results, Output Files, and Query
     /// History](https://docs.aws.amazon.com/athena/latest/ug/querying.html) in the
     /// *Amazon Athena User Guide*.
-    data_manifest_location: ?[]const u8,
+    data_manifest_location: ?[]const u8 = null,
 
     /// The number of bytes in the data that was queried.
-    data_scanned_in_bytes: ?i64,
+    data_scanned_in_bytes: ?i64 = null,
 
     /// The number of Data Processing Units (DPUs) that Athena used to run the
     /// query.
-    dpu_count: ?f64,
+    dpu_count: ?f64 = null,
 
     /// The number of milliseconds that the query took to execute.
-    engine_execution_time_in_millis: ?i64,
+    engine_execution_time_in_millis: ?i64 = null,
 
     /// The number of milliseconds that Athena took to plan the query processing
     /// flow. This includes the time spent retrieving table partitions from the data
@@ -35,29 +35,29 @@ pub const QueryExecutionStatistics = struct {
     /// Note that because the query engine performs the query planning, query
     /// planning time is a
     /// subset of engine processing time.
-    query_planning_time_in_millis: ?i64,
+    query_planning_time_in_millis: ?i64 = null,
 
     /// The number of milliseconds that the query was in your query queue waiting
     /// for
     /// resources. Note that if transient errors occur, Athena might automatically
     /// add the query back to the queue.
-    query_queue_time_in_millis: ?i64,
+    query_queue_time_in_millis: ?i64 = null,
 
     /// Contains information about whether previous query results were reused for
     /// the
     /// query.
-    result_reuse_information: ?ResultReuseInformation,
+    result_reuse_information: ?ResultReuseInformation = null,
 
     /// The number of milliseconds that Athena took to preprocess the query before
     /// submitting the query to the query engine.
-    service_pre_processing_time_in_millis: ?i64,
+    service_pre_processing_time_in_millis: ?i64 = null,
 
     /// The number of milliseconds that Athena took to finalize and publish the
     /// query results after the query engine finished running the query.
-    service_processing_time_in_millis: ?i64,
+    service_processing_time_in_millis: ?i64 = null,
 
     /// The number of milliseconds that Athena took to run the query.
-    total_execution_time_in_millis: ?i64,
+    total_execution_time_in_millis: ?i64 = null,
 
     pub const json_field_names = .{
         .data_manifest_location = "DataManifestLocation",

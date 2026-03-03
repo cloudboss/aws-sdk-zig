@@ -5,10 +5,10 @@ pub const AddOn = struct {
     /// stop.
     ///
     /// This add-on only applies to Lightsail for Research resources.
-    duration: ?[]const u8,
+    duration: ?[]const u8 = null,
 
     /// The name of the add-on.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The next daily time an automatic snapshot will be created.
     ///
@@ -18,7 +18,7 @@ pub const AddOn = struct {
     /// The snapshot is automatically created between the time shown and up to 45
     /// minutes
     /// after.
-    next_snapshot_time_of_day: ?[]const u8,
+    next_snapshot_time_of_day: ?[]const u8 = null,
 
     /// The daily time when an automatic snapshot is created.
     ///
@@ -28,15 +28,15 @@ pub const AddOn = struct {
     /// The snapshot is automatically created between the time shown and up to 45
     /// minutes
     /// after.
-    snapshot_time_of_day: ?[]const u8,
+    snapshot_time_of_day: ?[]const u8 = null,
 
     /// The status of the add-on.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The trigger threshold of the action.
     ///
     /// This add-on only applies to Lightsail for Research resources.
-    threshold: ?[]const u8,
+    threshold: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .duration = "duration",

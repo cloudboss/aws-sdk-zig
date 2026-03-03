@@ -5,13 +5,13 @@ const Category = @import("category.zig").Category;
 /// enhanced security.
 pub const WebContentFilteringPolicy = struct {
     /// URLs and domains that are always accessible to end users.
-    allowed_urls: ?[]const []const u8,
+    allowed_urls: ?[]const []const u8 = null,
 
     /// Categories of websites that are blocked on the end user’s browsers.
-    blocked_categories: ?[]const Category,
+    blocked_categories: ?[]const Category = null,
 
     /// URLs and domains that end users cannot access.
-    blocked_urls: ?[]const []const u8,
+    blocked_urls: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .allowed_urls = "allowedUrls",

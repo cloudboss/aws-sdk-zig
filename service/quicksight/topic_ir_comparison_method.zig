@@ -4,10 +4,10 @@ const ComparisonMethodType = @import("comparison_method_type.zig").ComparisonMet
 /// The definition of a `TopicIRComparisonMethod`.
 pub const TopicIRComparisonMethod = struct {
     /// The period for the `TopicIRComparisonMethod`.
-    period: ?TopicTimeGranularity,
+    period: ?TopicTimeGranularity = null,
 
     /// The type for the `TopicIRComparisonMethod`.
-    @"type": ?ComparisonMethodType,
+    @"type": ?ComparisonMethodType = null,
 
     /// The window size for the `TopicIRComparisonMethod`.
     window_size: i32 = 0,

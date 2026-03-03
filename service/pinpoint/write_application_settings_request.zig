@@ -11,22 +11,22 @@ pub const WriteApplicationSettingsRequest = struct {
     ///
     /// To override these settings and define custom settings for a specific
     /// campaign, use the CampaignHook object of the Campaign resource.
-    campaign_hook: ?CampaignHook,
+    campaign_hook: ?CampaignHook = null,
 
     /// Specifies whether to enable application-related alarms in Amazon CloudWatch.
-    cloud_watch_metrics_enabled: ?bool,
+    cloud_watch_metrics_enabled: ?bool = null,
 
-    event_tagging_enabled: ?bool,
+    event_tagging_enabled: ?bool = null,
 
     /// The default sending limits for journeys in the application. These limits
     /// apply to each journey for the application but can be overridden, on a per
     /// journey basis, with the JourneyLimits resource.
-    journey_limits: ?ApplicationSettingsJourneyLimits,
+    journey_limits: ?ApplicationSettingsJourneyLimits = null,
 
     /// The default sending limits for campaigns in the application. To override
     /// these limits and define custom limits for a specific campaign or journey,
     /// use the Campaign resource or the Journey resource, respectively.
-    limits: ?CampaignLimits,
+    limits: ?CampaignLimits = null,
 
     /// The default quiet time for campaigns in the application. Quiet time is a
     /// specific time range when messages aren't sent to endpoints, if all the
@@ -47,7 +47,7 @@ pub const WriteApplicationSettingsRequest = struct {
     /// To override the default quiet time settings for a specific campaign or
     /// journey, use the Campaign resource or the Journey resource to define a
     /// custom quiet time for the campaign or journey.
-    quiet_time: ?QuietTime,
+    quiet_time: ?QuietTime = null,
 
     pub const json_field_names = .{
         .campaign_hook = "CampaignHook",

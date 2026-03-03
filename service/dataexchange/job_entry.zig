@@ -23,7 +23,7 @@ pub const JobEntry = struct {
     details: ResponseDetails,
 
     /// Errors for jobs.
-    errors: ?[]const JobError,
+    errors: ?[]const JobError = null,
 
     /// The unique identifier for the job.
     id: []const u8,

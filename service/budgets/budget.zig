@@ -22,7 +22,7 @@ const TimeUnit = @import("time_unit.zig").TimeUnit;
 pub const Budget = struct {
     /// The parameters that determine the budget amount for an auto-adjusting
     /// budget.
-    auto_adjust_data: ?AutoAdjustData,
+    auto_adjust_data: ?AutoAdjustData = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies a specific billing
     /// view. The ARN is
@@ -33,7 +33,7 @@ pub const Budget = struct {
     /// Management features. The BillingViewArn can be retrieved by calling the
     /// ListBillingViews
     /// API.
-    billing_view_arn: ?[]const u8,
+    billing_view_arn: ?[]const u8 = null,
 
     /// The total amount of cost, usage, RI utilization, RI coverage, Savings Plans
     /// utilization, or Savings Plans coverage that you want to track with your
@@ -46,7 +46,7 @@ pub const Budget = struct {
     /// Savings Plans utilization or coverage budgets. You can't use `BudgetLimit`
     /// with `PlannedBudgetLimits` for `CreateBudget` and
     /// `UpdateBudget` actions.
-    budget_limit: ?Spend,
+    budget_limit: ?Spend = null,
 
     /// The name of a budget. The name must be unique within an account. The `:`
     /// and `\` characters, and the "/action/" substring, aren't allowed in
@@ -59,7 +59,7 @@ pub const Budget = struct {
     budget_type: BudgetType,
 
     /// The actual and forecasted cost or usage that the budget tracks.
-    calculated_spend: ?CalculatedSpend,
+    calculated_spend: ?CalculatedSpend = null,
 
     /// The cost filters, such as `Region`, `Service`,
     /// `LinkedAccount`, `Tag`, or `CostCategory`, that are
@@ -77,26 +77,26 @@ pub const Budget = struct {
     /// * Amazon ElastiCache
     ///
     /// * Amazon OpenSearch Service
-    cost_filters: ?[]const aws.map.MapEntry([]const []const u8),
+    cost_filters: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The types of costs that are included in this `COST` budget.
     ///
     /// `USAGE`, `RI_UTILIZATION`, `RI_COVERAGE`,
     /// `SAVINGS_PLANS_UTILIZATION`, and `SAVINGS_PLANS_COVERAGE`
     /// budgets do not have `CostTypes`.
-    cost_types: ?CostTypes,
+    cost_types: ?CostTypes = null,
 
     /// The filtering dimensions for the budget and their corresponding values.
-    filter_expression: ?Expression,
+    filter_expression: ?Expression = null,
 
     /// The current operational state of a Billing View derived resource.
-    health_status: ?HealthStatus,
+    health_status: ?HealthStatus = null,
 
     /// The last time that you updated this budget.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The definition for how the budget data is aggregated.
-    metrics: ?[]const Metric,
+    metrics: ?[]const Metric = null,
 
     /// A map containing multiple `BudgetLimit`, including current or future
     /// limits.
@@ -135,7 +135,7 @@ pub const Budget = struct {
     /// that are created without `PlannedBudgetLimits` only contain
     /// `BudgetLimit`. They don't contain
     /// `PlannedBudgetLimits`.
-    planned_budget_limits: ?[]const aws.map.MapEntry(Spend),
+    planned_budget_limits: ?[]const aws.map.MapEntry(Spend) = null,
 
     /// The period of time that's covered by a budget. You set the start date and
     /// end date. The
@@ -160,7 +160,7 @@ pub const Budget = struct {
     /// After the end date, Amazon Web Services deletes the budget and all the
     /// associated
     /// notifications and subscribers.
-    time_period: ?TimePeriod,
+    time_period: ?TimePeriod = null,
 
     /// The length of time until a budget resets the actual and forecasted spend.
     time_unit: TimeUnit,

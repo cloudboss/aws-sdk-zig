@@ -6,16 +6,16 @@ const ClusterKubernetesTaint = @import("cluster_kubernetes_taint.zig").ClusterKu
 /// state of labels and taints for an individual cluster node.
 pub const ClusterKubernetesConfigNodeDetails = struct {
     /// The current labels applied to the cluster node.
-    current_labels: ?[]const aws.map.StringMapEntry,
+    current_labels: ?[]const aws.map.StringMapEntry = null,
 
     /// The current taints applied to the cluster node.
-    current_taints: ?[]const ClusterKubernetesTaint,
+    current_taints: ?[]const ClusterKubernetesTaint = null,
 
     /// The desired labels to be applied to the cluster node.
-    desired_labels: ?[]const aws.map.StringMapEntry,
+    desired_labels: ?[]const aws.map.StringMapEntry = null,
 
     /// The desired taints to be applied to the cluster node.
-    desired_taints: ?[]const ClusterKubernetesTaint,
+    desired_taints: ?[]const ClusterKubernetesTaint = null,
 
     pub const json_field_names = .{
         .current_labels = "CurrentLabels",

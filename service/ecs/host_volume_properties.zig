@@ -15,7 +15,7 @@ pub const HostVolumeProperties = struct {
     ///
     /// If you're using the Fargate launch type, the `sourcePath` parameter is not
     /// supported.
-    source_path: ?[]const u8,
+    source_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_path = "sourcePath",

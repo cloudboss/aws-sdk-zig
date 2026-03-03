@@ -7,7 +7,7 @@ const S3DestinationConfiguration = @import("s3_destination_configuration.zig").S
 /// type of destination configuration.
 pub const DestinationConfiguration = struct {
     /// An S3 destination configuration where recorded videos will be stored.
-    s_3: ?S3DestinationConfiguration,
+    s_3: ?S3DestinationConfiguration = null,
 
     pub const json_field_names = .{
         .s_3 = "s3",

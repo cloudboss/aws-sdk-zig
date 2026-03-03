@@ -5,13 +5,13 @@ const ReservationAggregates = @import("reservation_aggregates.zig").ReservationA
 /// The amount of utilization, in hours.
 pub const UtilizationByTime = struct {
     /// The groups that this utilization result uses.
-    groups: ?[]const ReservationUtilizationGroup,
+    groups: ?[]const ReservationUtilizationGroup = null,
 
     /// The period of time that this utilization was used for.
-    time_period: ?DateInterval,
+    time_period: ?DateInterval = null,
 
     /// The total number of reservation hours that were used.
-    total: ?ReservationAggregates,
+    total: ?ReservationAggregates = null,
 
     pub const json_field_names = .{
         .groups = "Groups",

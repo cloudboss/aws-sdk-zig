@@ -4,19 +4,19 @@ const TunnelProtocol = @import("tunnel_protocol.zig").TunnelProtocol;
 /// Describes a core network Connect peer configuration.
 pub const ConnectPeerConfiguration = struct {
     /// The Connect peer BGP configurations.
-    bgp_configurations: ?[]const ConnectPeerBgpConfiguration,
+    bgp_configurations: ?[]const ConnectPeerBgpConfiguration = null,
 
     /// The IP address of a core network.
-    core_network_address: ?[]const u8,
+    core_network_address: ?[]const u8 = null,
 
     /// The inside IP addresses used for a Connect peer configuration.
-    inside_cidr_blocks: ?[]const []const u8,
+    inside_cidr_blocks: ?[]const []const u8 = null,
 
     /// The IP address of the Connect peer.
-    peer_address: ?[]const u8,
+    peer_address: ?[]const u8 = null,
 
     /// The protocol used for a Connect peer configuration.
-    protocol: ?TunnelProtocol,
+    protocol: ?TunnelProtocol = null,
 
     pub const json_field_names = .{
         .bgp_configurations = "BgpConfigurations",

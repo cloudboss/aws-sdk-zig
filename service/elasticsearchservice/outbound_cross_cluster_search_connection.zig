@@ -5,21 +5,21 @@ const DomainInformation = @import("domain_information.zig").DomainInformation;
 pub const OutboundCrossClusterSearchConnection = struct {
     /// Specifies the connection alias for the outbound cross-cluster search
     /// connection.
-    connection_alias: ?[]const u8,
+    connection_alias: ?[]const u8 = null,
 
     /// Specifies the `OutboundCrossClusterSearchConnectionStatus` for the outbound
     /// connection.
-    connection_status: ?OutboundCrossClusterSearchConnectionStatus,
+    connection_status: ?OutboundCrossClusterSearchConnectionStatus = null,
 
     /// Specifies the connection id for the outbound cross-cluster search
     /// connection.
-    cross_cluster_search_connection_id: ?[]const u8,
+    cross_cluster_search_connection_id: ?[]const u8 = null,
 
     /// Specifies the `DomainInformation` for the destination Elasticsearch domain.
-    destination_domain_info: ?DomainInformation,
+    destination_domain_info: ?DomainInformation = null,
 
     /// Specifies the `DomainInformation` for the source Elasticsearch domain.
-    source_domain_info: ?DomainInformation,
+    source_domain_info: ?DomainInformation = null,
 
     pub const json_field_names = .{
         .connection_alias = "ConnectionAlias",

@@ -8,10 +8,10 @@
 /// Fields](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html).
 pub const ResultField = struct {
     /// The log event field.
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// The value of this field.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .field = "field",

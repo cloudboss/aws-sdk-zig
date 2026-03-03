@@ -3,15 +3,15 @@
 pub const InternalAccessResourceTypeDetails = struct {
     /// The total number of active findings for the resource type in the internal
     /// access analyzer.
-    total_active_findings: ?i32,
+    total_active_findings: ?i32 = null,
 
     /// The total number of archived findings for the resource type in the internal
     /// access analyzer.
-    total_archived_findings: ?i32,
+    total_archived_findings: ?i32 = null,
 
     /// The total number of resolved findings for the resource type in the internal
     /// access analyzer.
-    total_resolved_findings: ?i32,
+    total_resolved_findings: ?i32 = null,
 
     pub const json_field_names = .{
         .total_active_findings = "totalActiveFindings",

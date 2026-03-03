@@ -28,7 +28,7 @@ pub const Notification = struct {
     /// Specifies whether this notification is in alarm. If a budget notification is
     /// in the
     /// `ALARM` state, you passed the set threshold for the budget.
-    notification_state: ?NotificationState,
+    notification_state: ?NotificationState = null,
 
     /// Specifies whether the notification is for how much you have spent
     /// (`ACTUAL`) or for how much that you're forecasted to spend
@@ -53,7 +53,7 @@ pub const Notification = struct {
     /// if you have a budget for 200 dollars and you have a `PERCENTAGE` threshold
     /// of
     /// 80%, Amazon Web Services notifies you when you go over 160 dollars.
-    threshold_type: ?ThresholdType,
+    threshold_type: ?ThresholdType = null,
 
     pub const json_field_names = .{
         .comparison_operator = "ComparisonOperator",

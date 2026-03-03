@@ -1,10 +1,10 @@
 /// An Lambda layer.
 pub const AwsLambdaFunctionLayer = struct {
     /// The ARN of the function layer.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The size of the layer archive in bytes.
-    code_size: ?i32,
+    code_size: ?i32 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

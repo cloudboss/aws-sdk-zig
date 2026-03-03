@@ -4,10 +4,10 @@ const FeatureStatus = @import("feature_status.zig").FeatureStatus;
 /// Information about the additional configuration for the member account.
 pub const MemberAdditionalConfiguration = struct {
     /// Name of the additional configuration.
-    name: ?OrgFeatureAdditionalConfiguration,
+    name: ?OrgFeatureAdditionalConfiguration = null,
 
     /// Status of the additional configuration.
-    status: ?FeatureStatus,
+    status: ?FeatureStatus = null,
 
     pub const json_field_names = .{
         .name = "Name",

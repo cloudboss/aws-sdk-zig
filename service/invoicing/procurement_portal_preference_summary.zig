@@ -25,11 +25,11 @@ pub const ProcurementPortalPreferenceSummary = struct {
     einvoice_delivery_enabled: bool,
 
     /// The current status of the e-invoice delivery preference in this summary.
-    einvoice_delivery_preference_status: ?ProcurementPortalPreferenceStatus,
+    einvoice_delivery_preference_status: ?ProcurementPortalPreferenceStatus = null,
 
     /// The reason for the current e-invoice delivery preference status in this
     /// summary.
-    einvoice_delivery_preference_status_reason: ?[]const u8,
+    einvoice_delivery_preference_status_reason: ?[]const u8 = null,
 
     /// The date and time when the procurement portal preference was last updated.
     last_update_date: i64,
@@ -46,13 +46,13 @@ pub const ProcurementPortalPreferenceSummary = struct {
 
     /// The current status of the purchase order retrieval preference in this
     /// summary.
-    purchase_order_retrieval_preference_status: ?ProcurementPortalPreferenceStatus,
+    purchase_order_retrieval_preference_status: ?ProcurementPortalPreferenceStatus = null,
 
     /// The reason for the current purchase order retrieval preference status in
     /// this summary.
-    purchase_order_retrieval_preference_status_reason: ?[]const u8,
+    purchase_order_retrieval_preference_status_reason: ?[]const u8 = null,
 
-    selector: ?ProcurementPortalPreferenceSelector,
+    selector: ?ProcurementPortalPreferenceSelector = null,
 
     /// The domain identifier for the supplier in the procurement portal.
     supplier_domain: SupplierDomain,

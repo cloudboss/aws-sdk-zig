@@ -7,7 +7,7 @@ const SalesforceStandardObjectConfiguration = @import("salesforce_standard_objec
 /// source.
 pub const SalesforceConfiguration = struct {
     /// Configuration information for Salesforce chatter feeds.
-    chatter_feed_configuration: ?SalesforceChatterFeedConfiguration,
+    chatter_feed_configuration: ?SalesforceChatterFeedConfiguration = null,
 
     /// Indicates whether Amazon Kendra should index attachments to Salesforce
     /// objects.
@@ -24,7 +24,7 @@ pub const SalesforceConfiguration = struct {
     /// included in the index.
     ///
     /// The pattern is applied to the name of the attached file.
-    exclude_attachment_file_patterns: ?[]const []const u8,
+    exclude_attachment_file_patterns: ?[]const []const u8 = null,
 
     /// A list of regular expression patterns to include certain documents in your
     /// Salesforce.
@@ -37,7 +37,7 @@ pub const SalesforceConfiguration = struct {
     /// included in the index.
     ///
     /// The pattern is applied to the name of the attached file.
-    include_attachment_file_patterns: ?[]const []const u8,
+    include_attachment_file_patterns: ?[]const []const u8 = null,
 
     /// Configuration information for the knowledge article types that Amazon Kendra
     /// indexes. Amazon Kendra indexes standard knowledge articles and the standard
@@ -45,7 +45,7 @@ pub const SalesforceConfiguration = struct {
     /// of knowledge articles, or the custom fields of custom knowledge articles,
     /// but not
     /// both.
-    knowledge_article_configuration: ?SalesforceKnowledgeArticleConfiguration,
+    knowledge_article_configuration: ?SalesforceKnowledgeArticleConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the
     /// key/value pairs required to connect to your Salesforce instance. The secret
@@ -78,11 +78,11 @@ pub const SalesforceConfiguration = struct {
 
     /// Configuration information for processing attachments to Salesforce standard
     /// objects.
-    standard_object_attachment_configuration: ?SalesforceStandardObjectAttachmentConfiguration,
+    standard_object_attachment_configuration: ?SalesforceStandardObjectAttachmentConfiguration = null,
 
     /// Configuration of the Salesforce standard objects that Amazon Kendra
     /// indexes.
-    standard_object_configurations: ?[]const SalesforceStandardObjectConfiguration,
+    standard_object_configurations: ?[]const SalesforceStandardObjectConfiguration = null,
 
     pub const json_field_names = .{
         .chatter_feed_configuration = "ChatterFeedConfiguration",

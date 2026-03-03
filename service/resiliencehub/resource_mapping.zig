@@ -5,18 +5,18 @@ const PhysicalResourceId = @import("physical_resource_id.zig").PhysicalResourceI
 pub const ResourceMapping = struct {
     /// Name of the application this resource is mapped to when the `mappingType` is
     /// `AppRegistryApp`.
-    app_registry_app_name: ?[]const u8,
+    app_registry_app_name: ?[]const u8 = null,
 
     /// Name of the Amazon Elastic Kubernetes Service cluster and namespace that
     /// this resource is mapped to when the `mappingType` is
     /// `EKS`.
     ///
     /// This parameter accepts values in "eks-cluster/namespace" format.
-    eks_source_name: ?[]const u8,
+    eks_source_name: ?[]const u8 = null,
 
     /// Name of the CloudFormation stack this resource is mapped to when the
     /// `mappingType` is `CfnStack`.
-    logical_stack_name: ?[]const u8,
+    logical_stack_name: ?[]const u8 = null,
 
     /// Specifies the type of resource mapping.
     mapping_type: ResourceMappingType,
@@ -26,15 +26,15 @@ pub const ResourceMapping = struct {
 
     /// Name of the Resource Groups that this resource is mapped to when the
     /// `mappingType` is `ResourceGroup`.
-    resource_group_name: ?[]const u8,
+    resource_group_name: ?[]const u8 = null,
 
     /// Name of the resource that this resource is mapped to when the `mappingType`
     /// is `Resource`.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// Name of the Terraform source that this resource is mapped to when the
     /// `mappingType` is `Terraform`.
-    terraform_source_name: ?[]const u8,
+    terraform_source_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .app_registry_app_name = "appRegistryAppName",

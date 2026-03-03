@@ -13,13 +13,13 @@ pub const DataCatalog = struct {
     /// `REDSHIFT`, `MYSQL`, or `SQLSERVER`). For
     /// information about individual connectors, see [Available data source
     /// connectors](https://docs.aws.amazon.com/athena/latest/ug/connectors-available.html).
-    connection_type: ?ConnectionType,
+    connection_type: ?ConnectionType = null,
 
     /// An optional description of the data catalog.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Text of the error that occurred during data catalog creation or deletion.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// The name of the data catalog. The catalog name must be unique for the Amazon
     /// Web Services account and can use a maximum of 127 alphanumeric, underscore,
@@ -91,7 +91,7 @@ pub const DataCatalog = struct {
     /// JSON text, as in the following example.
     ///
     /// `"{\"spill_bucket\":\"my_spill\",\"spill_prefix\":\"athena-spill\",\"host\":\"abc12345.snowflakecomputing.com\",\"port\":\"1234\",\"warehouse\":\"DEV_WH\",\"database\":\"TEST\",\"schema\":\"PUBLIC\",\"SecretArn\":\"arn:aws:secretsmanager:ap-south-1:111122223333:secret:snowflake-XHb67j\"}"`
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The status of the creation or deletion of the data catalog.
     ///
@@ -128,7 +128,7 @@ pub const DataCatalog = struct {
     ///
     /// * `DELETE_FAILED`: Federated data catalog could not be
     /// deleted.
-    status: ?DataCatalogStatus,
+    status: ?DataCatalogStatus = null,
 
     /// The type of data catalog to create: `LAMBDA` for a federated catalog,
     /// `GLUE` for an Glue Data Catalog, and `HIVE` for an

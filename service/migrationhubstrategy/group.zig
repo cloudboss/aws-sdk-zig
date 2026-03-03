@@ -4,10 +4,10 @@ const GroupName = @import("group_name.zig").GroupName;
 /// Strategy Recommendations.
 pub const Group = struct {
     /// The key of the specific import group.
-    name: ?GroupName,
+    name: ?GroupName = null,
 
     /// The value of the specific import group.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

@@ -20,28 +20,28 @@ pub const DirectoryDescription = struct {
     /// `http://.awsapps.com`. If no alias exists,
     /// `` is the directory identifier, such as
     /// `d-XXXXXXXXXX`.
-    access_url: ?[]const u8,
+    access_url: ?[]const u8 = null,
 
     /// The alias for the directory. If no alias exists, the alias is the directory
     /// identifier,
     /// such as `d-XXXXXXXXXX`.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// DirectoryConnectSettingsDescription object that contains additional
     /// information about an AD Connector directory. Present only for AD Connector
     /// directories.
-    connect_settings: ?DirectoryConnectSettingsDescription,
+    connect_settings: ?DirectoryConnectSettingsDescription = null,
 
     /// The description for the directory.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The desired number of domain controllers in the directory if the directory
     /// is Microsoft
     /// AD.
-    desired_number_of_domain_controllers: ?i32,
+    desired_number_of_domain_controllers: ?i32 = null,
 
     /// The directory identifier.
-    directory_id: ?[]const u8,
+    directory_id: ?[]const u8 = null,
 
     /// The IP addresses of the DNS servers for the directory. For a Simple AD or
     /// Microsoft AD
@@ -50,7 +50,7 @@ pub const DirectoryDescription = struct {
     /// For an AD Connector directory, these are the IP addresses of self-managed
     /// directory to which
     /// the AD Connector is connected.
-    dns_ip_addrs: ?[]const []const u8,
+    dns_ip_addrs: ?[]const []const u8 = null,
 
     /// The IPv6 addresses of the DNS servers for the directory. For a Simple AD or
     /// Microsoft AD
@@ -60,64 +60,64 @@ pub const DirectoryDescription = struct {
     /// servers or domain
     /// controllers in your self-managed directory to which the AD Connector is
     /// connected.
-    dns_ipv_6_addrs: ?[]const []const u8,
+    dns_ipv_6_addrs: ?[]const []const u8 = null,
 
     /// The edition associated with this directory.
-    edition: ?DirectoryEdition,
+    edition: ?DirectoryEdition = null,
 
     /// Contains information about the hybrid directory configuration for the
     /// directory,
     /// including Amazon Web Services System Manager managed node identifiers and
     /// DNS IPs.
-    hybrid_settings: ?HybridSettingsDescription,
+    hybrid_settings: ?HybridSettingsDescription = null,
 
     /// The date and time when the directory was created.
-    launch_time: ?i64,
+    launch_time: ?i64 = null,
 
     /// The fully qualified name of the directory.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The network type of the directory.
-    network_type: ?NetworkType,
+    network_type: ?NetworkType = null,
 
     /// The operating system (OS) version of the directory.
-    os_version: ?OSVersion,
+    os_version: ?OSVersion = null,
 
     /// Describes the Managed Microsoft AD directory in the directory owner account.
-    owner_directory_description: ?OwnerDirectoryDescription,
+    owner_directory_description: ?OwnerDirectoryDescription = null,
 
     /// Information about the RadiusSettings object configured for this
     /// directory.
-    radius_settings: ?RadiusSettings,
+    radius_settings: ?RadiusSettings = null,
 
     /// The status of the RADIUS MFA server connection.
-    radius_status: ?RadiusStatus,
+    radius_status: ?RadiusStatus = null,
 
     /// Lists the Regions where the directory has replicated.
-    regions_info: ?RegionsInfo,
+    regions_info: ?RegionsInfo = null,
 
     /// The method used when sharing a directory to determine whether the directory
     /// should be
     /// shared within your Amazon Web Services organization (`ORGANIZATIONS`) or
     /// with any Amazon Web Services account
     /// by sending a shared directory request (`HANDSHAKE`).
-    share_method: ?ShareMethod,
+    share_method: ?ShareMethod = null,
 
     /// A directory share request that is sent by the directory owner to the
     /// directory consumer.
     /// The request includes a typed message to help the directory consumer
     /// administrator determine
     /// whether to approve or reject the share invitation.
-    share_notes: ?[]const u8,
+    share_notes: ?[]const u8 = null,
 
     /// Current directory status of the shared Managed Microsoft AD directory.
-    share_status: ?ShareStatus,
+    share_status: ?ShareStatus = null,
 
     /// The short name of the directory.
-    short_name: ?[]const u8,
+    short_name: ?[]const u8 = null,
 
     /// The directory size.
-    size: ?DirectorySize,
+    size: ?DirectorySize = null,
 
     /// Indicates whether single sign-on is enabled for the directory. For more
     /// information, see
@@ -125,22 +125,22 @@ pub const DirectoryDescription = struct {
     sso_enabled: bool = false,
 
     /// The current stage of the directory.
-    stage: ?DirectoryStage,
+    stage: ?DirectoryStage = null,
 
     /// The date and time when the stage was last updated.
-    stage_last_updated_date_time: ?i64,
+    stage_last_updated_date_time: ?i64 = null,
 
     /// Additional information about the directory stage.
-    stage_reason: ?[]const u8,
+    stage_reason: ?[]const u8 = null,
 
     /// The directory type.
-    @"type": ?DirectoryType,
+    @"type": ?DirectoryType = null,
 
     /// A DirectoryVpcSettingsDescription object that contains additional
     /// information about a directory. Present only for Simple AD and Managed
     /// Microsoft AD
     /// directories.
-    vpc_settings: ?DirectoryVpcSettingsDescription,
+    vpc_settings: ?DirectoryVpcSettingsDescription = null,
 
     pub const json_field_names = .{
         .access_url = "AccessUrl",

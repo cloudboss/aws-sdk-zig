@@ -6,18 +6,18 @@ const ExperimentTemplateReportConfigurationOutputs = @import("experiment_templat
 /// FIS](https://docs.aws.amazon.com/fis/latest/userguide/experiment-report-configuration).
 pub const ExperimentTemplateReportConfiguration = struct {
     /// The data sources for the experiment report.
-    data_sources: ?ExperimentTemplateReportConfigurationDataSources,
+    data_sources: ?ExperimentTemplateReportConfigurationDataSources = null,
 
     /// Describes the output destinations of the experiment report.
-    outputs: ?ExperimentTemplateReportConfigurationOutputs,
+    outputs: ?ExperimentTemplateReportConfigurationOutputs = null,
 
     /// The duration after the experiment end time for the data sources to include
     /// in the report.
-    post_experiment_duration: ?[]const u8,
+    post_experiment_duration: ?[]const u8 = null,
 
     /// The duration before the experiment start time for the data sources to
     /// include in the report.
-    pre_experiment_duration: ?[]const u8,
+    pre_experiment_duration: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_sources = "dataSources",

@@ -97,7 +97,7 @@ class StructureGenerator(
                 } else {
                     baseZigType
                 }
-                val defaultSuffix = if (isInputStruct && hasMemberDefault) " = null" else if (defaultValue != null) " = ${defaultValue.literal}" else if (zigType.startsWith("?*")) " = null" else ""
+                val defaultSuffix = if (isInputStruct && hasMemberDefault) " = null" else if (defaultValue != null) " = ${defaultValue.literal}" else if (zigType.startsWith("?")) " = null" else ""
 
                 if (!firstField) {
                     writer.blankLine()

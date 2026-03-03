@@ -10,7 +10,7 @@ pub const ClusterKubernetesTaint = struct {
     key: []const u8,
 
     /// The value of the taint.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .effect = "Effect",

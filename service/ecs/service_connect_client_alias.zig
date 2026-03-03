@@ -40,7 +40,7 @@ pub const ServiceConnectClientAlias = struct {
     /// `mysql` or `redis`. For more information, see [Service
     /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// The listening port number for the Service Connect proxy. This port is
     /// available inside
@@ -58,7 +58,7 @@ pub const ServiceConnectClientAlias = struct {
     /// deployments with Amazon ECS Service Connect. This allows you to route a
     /// portion of traffic to the new service revision of your service for testing
     /// before shifting all production traffic.
-    test_traffic_rules: ?ServiceConnectTestTrafficRules,
+    test_traffic_rules: ?ServiceConnectTestTrafficRules = null,
 
     pub const json_field_names = .{
         .dns_name = "dnsName",

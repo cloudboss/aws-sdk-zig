@@ -13,7 +13,7 @@ pub const ContentFeatures = struct {
     /// Defaults to `FHD`. To use `UHD`, you must also provide a
     /// `MeetingFeatures:Attendee:MaxCount`
     /// value and override the default size limit of 250 attendees.
-    max_resolution: ?ContentResolution,
+    max_resolution: ?ContentResolution = null,
 
     pub const json_field_names = .{
         .max_resolution = "MaxResolution",

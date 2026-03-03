@@ -1,10 +1,10 @@
 /// Information about a policy attribute type.
 pub const PolicyAttributeTypeDescription = struct {
     /// The name of the attribute.
-    attribute_name: ?[]const u8,
+    attribute_name: ?[]const u8 = null,
 
     /// The type of the attribute. For example, `Boolean` or `Integer`.
-    attribute_type: ?[]const u8,
+    attribute_type: ?[]const u8 = null,
 
     /// The cardinality of the attribute.
     ///
@@ -17,11 +17,11 @@ pub const PolicyAttributeTypeDescription = struct {
     /// * ZERO_OR_MORE(0..*) : Optional. Multiple values are allowed
     ///
     /// * ONE_OR_MORE(1..*0) : Required. Multiple values are allowed
-    cardinality: ?[]const u8,
+    cardinality: ?[]const u8 = null,
 
     /// The default value of the attribute, if applicable.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// A description of the attribute.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 };

@@ -2,7 +2,7 @@
 /// account.
 pub const Limit = struct {
     /// The maximum value of the limit.
-    max: ?[]const u8,
+    max: ?[]const u8 = null,
 
     /// The name of the limit. The possible values are:
     ///
@@ -11,5 +11,5 @@ pub const Limit = struct {
     /// * classic-load-balancers
     ///
     /// * classic-registered-instances
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 };

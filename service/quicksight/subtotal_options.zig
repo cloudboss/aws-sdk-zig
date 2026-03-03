@@ -7,28 +7,28 @@ const Visibility = @import("visibility.zig").Visibility;
 /// The subtotal options.
 pub const SubtotalOptions = struct {
     /// The custom label string for the subtotal cells.
-    custom_label: ?[]const u8,
+    custom_label: ?[]const u8 = null,
 
     /// The field level (all, custom, last) for the subtotal cells.
-    field_level: ?PivotTableSubtotalLevel,
+    field_level: ?PivotTableSubtotalLevel = null,
 
     /// The optional configuration of subtotal cells.
-    field_level_options: ?[]const PivotTableFieldSubtotalOptions,
+    field_level_options: ?[]const PivotTableFieldSubtotalOptions = null,
 
     /// The cell styling options for the subtotals of header cells.
-    metric_header_cell_style: ?TableCellStyle,
+    metric_header_cell_style: ?TableCellStyle = null,
 
     /// The style targets options for subtotals.
-    style_targets: ?[]const TableStyleTarget,
+    style_targets: ?[]const TableStyleTarget = null,
 
     /// The cell styling options for the subtotal cells.
-    total_cell_style: ?TableCellStyle,
+    total_cell_style: ?TableCellStyle = null,
 
     /// The visibility configuration for the subtotal cells.
-    totals_visibility: ?Visibility,
+    totals_visibility: ?Visibility = null,
 
     /// The cell styling options for the subtotals of value cells.
-    value_cell_style: ?TableCellStyle,
+    value_cell_style: ?TableCellStyle = null,
 
     pub const json_field_names = .{
         .custom_label = "CustomLabel",

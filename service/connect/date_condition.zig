@@ -4,13 +4,13 @@ const DateComparisonType = @import("date_comparison_type.zig").DateComparisonTyp
 pub const DateCondition = struct {
     /// An object to specify the hours of operation override date condition
     /// `comparisonType`.
-    comparison_type: ?DateComparisonType,
+    comparison_type: ?DateComparisonType = null,
 
     /// An object to specify the hours of operation override date field.
-    field_name: ?[]const u8,
+    field_name: ?[]const u8 = null,
 
     /// An object to specify the hours of operation override date value.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comparison_type = "ComparisonType",

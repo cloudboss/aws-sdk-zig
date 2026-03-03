@@ -7,29 +7,29 @@ const OutboundStrategy = @import("outbound_strategy.zig").OutboundStrategy;
 /// Request object with information to create a contact.
 pub const ContactDataRequest = struct {
     /// List of attributes to be stored in a contact.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// Structure to store information associated with a campaign.
-    campaign: ?Campaign,
+    campaign: ?Campaign = null,
 
     /// Endpoint of the customer for which contact will be initiated.
-    customer_endpoint: ?Endpoint,
+    customer_endpoint: ?Endpoint = null,
 
     /// Information about the outbound strategy.
-    outbound_strategy: ?OutboundStrategy,
+    outbound_strategy: ?OutboundStrategy = null,
 
     /// The identifier of the queue associated with the Amazon Connect instance in
     /// which contacts that are created
     /// will be queued.
-    queue_id: ?[]const u8,
+    queue_id: ?[]const u8 = null,
 
     /// Identifier to uniquely identify individual requests in the batch.
-    request_identifier: ?[]const u8,
+    request_identifier: ?[]const u8 = null,
 
     /// Endpoint associated with the Amazon Connect instance from which outbound
     /// contact will be initiated for the
     /// campaign.
-    system_endpoint: ?Endpoint,
+    system_endpoint: ?Endpoint = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

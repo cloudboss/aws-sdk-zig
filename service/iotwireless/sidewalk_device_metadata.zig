@@ -5,16 +5,16 @@ const Event = @import("event.zig").Event;
 /// MetaData for Sidewalk device.
 pub const SidewalkDeviceMetadata = struct {
     /// Sidewalk device battery level.
-    battery_level: ?BatteryLevel,
+    battery_level: ?BatteryLevel = null,
 
     /// Device state defines the device status of sidewalk device.
-    device_state: ?DeviceState,
+    device_state: ?DeviceState = null,
 
     /// Sidewalk device status notification.
-    event: ?Event,
+    event: ?Event = null,
 
     /// The RSSI value.
-    rssi: ?i32,
+    rssi: ?i32 = null,
 
     pub const json_field_names = .{
         .battery_level = "BatteryLevel",

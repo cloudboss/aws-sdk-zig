@@ -1,29 +1,29 @@
 /// Contains directory limit information for a Region.
 pub const DirectoryLimits = struct {
     /// The current number of cloud directories in the Region.
-    cloud_only_directories_current_count: ?i32,
+    cloud_only_directories_current_count: ?i32 = null,
 
     /// The maximum number of cloud directories allowed in the Region.
-    cloud_only_directories_limit: ?i32,
+    cloud_only_directories_limit: ?i32 = null,
 
     /// Indicates if the cloud directory limit has been reached.
     cloud_only_directories_limit_reached: bool = false,
 
     /// The current number of Managed Microsoft AD directories in the region.
-    cloud_only_microsoft_ad_current_count: ?i32,
+    cloud_only_microsoft_ad_current_count: ?i32 = null,
 
     /// The maximum number of Managed Microsoft AD directories allowed in the
     /// region.
-    cloud_only_microsoft_ad_limit: ?i32,
+    cloud_only_microsoft_ad_limit: ?i32 = null,
 
     /// Indicates if the Managed Microsoft AD directory limit has been reached.
     cloud_only_microsoft_ad_limit_reached: bool = false,
 
     /// The current number of connected directories in the Region.
-    connected_directories_current_count: ?i32,
+    connected_directories_current_count: ?i32 = null,
 
     /// The maximum number of connected directories allowed in the Region.
-    connected_directories_limit: ?i32,
+    connected_directories_limit: ?i32 = null,
 
     /// Indicates if the connected directory limit has been reached.
     connected_directories_limit_reached: bool = false,

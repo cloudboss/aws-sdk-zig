@@ -15,11 +15,11 @@ const TraceConfiguration = @import("trace_configuration.zig").TraceConfiguration
 pub const ObservabilityConfiguration = struct {
     /// The time when the observability configuration was created. It's in Unix time
     /// stamp format.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The time when the observability configuration was deleted. It's in Unix time
     /// stamp format.
-    deleted_at: ?i64,
+    deleted_at: ?i64 = null,
 
     /// It's set to `true` for the configuration with the highest `Revision` among
     /// all configurations that share the same
@@ -27,11 +27,11 @@ pub const ObservabilityConfiguration = struct {
     latest: bool = false,
 
     /// The Amazon Resource Name (ARN) of this observability configuration.
-    observability_configuration_arn: ?[]const u8,
+    observability_configuration_arn: ?[]const u8 = null,
 
     /// The customer-provided observability configuration name. It can be used in
     /// multiple revisions of a configuration.
-    observability_configuration_name: ?[]const u8,
+    observability_configuration_name: ?[]const u8 = null,
 
     /// The revision of this observability configuration. It's unique among all the
     /// active configurations (`"Status": "ACTIVE"`) that share the
@@ -42,11 +42,11 @@ pub const ObservabilityConfiguration = struct {
     /// configuration revision is `INACTIVE`, it was deleted and can't be
     /// used. Inactive configuration revisions are permanently removed some time
     /// after they are deleted.
-    status: ?ObservabilityConfigurationStatus,
+    status: ?ObservabilityConfigurationStatus = null,
 
     /// The configuration of the tracing feature within this observability
     /// configuration. If not specified, tracing isn't enabled.
-    trace_configuration: ?TraceConfiguration,
+    trace_configuration: ?TraceConfiguration = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

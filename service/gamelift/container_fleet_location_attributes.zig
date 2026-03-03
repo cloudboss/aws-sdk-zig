@@ -3,7 +3,7 @@ const ContainerFleetLocationStatus = @import("container_fleet_location_status.zi
 /// Details about a location in a multi-location container fleet.
 pub const ContainerFleetLocationAttributes = struct {
     /// A location identifier.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The status of fleet activity in the location.
     ///
@@ -22,7 +22,7 @@ pub const ContainerFleetLocationAttributes = struct {
     ///
     /// * `UPDATING` -- Updates to the container fleet is being updated. A
     /// deployment is in progress.
-    status: ?ContainerFleetLocationStatus,
+    status: ?ContainerFleetLocationStatus = null,
 
     pub const json_field_names = .{
         .location = "Location",

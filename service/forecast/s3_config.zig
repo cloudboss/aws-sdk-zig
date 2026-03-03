@@ -6,7 +6,7 @@
 /// CreateDatasetImportJob request, and part of the DataDestination object.
 pub const S3Config = struct {
     /// The Amazon Resource Name (ARN) of an Key Management Service (KMS) key.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The path to an Amazon Simple Storage Service (Amazon S3) bucket or file(s)
     /// in an Amazon S3 bucket.

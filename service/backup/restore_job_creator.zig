@@ -3,7 +3,7 @@
 pub const RestoreJobCreator = struct {
     /// An Amazon Resource Name (ARN) that uniquely identifies
     /// a restore testing plan.
-    restore_testing_plan_arn: ?[]const u8,
+    restore_testing_plan_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .restore_testing_plan_arn = "RestoreTestingPlanArn",

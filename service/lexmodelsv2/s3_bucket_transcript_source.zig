@@ -8,13 +8,13 @@ pub const S3BucketTranscriptSource = struct {
     /// The ARN of the KMS key that customer use to encrypt their Amazon S3
     /// bucket. Only use this field if your bucket is encrypted using a
     /// customer managed KMS key.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The object that contains a path format that will be applied when
     /// Amazon Lex reads the transcript file in the bucket you provide. Specify this
     /// object if you only want Lex to read a subset of files in your Amazon S3
     /// bucket.
-    path_format: ?PathFormat,
+    path_format: ?PathFormat = null,
 
     /// The name of the bucket containing the transcript and the associated
     /// metadata.
@@ -25,7 +25,7 @@ pub const S3BucketTranscriptSource = struct {
     /// Lex to
     /// read only a subset of the Amazon S3 bucket based on the filter you
     /// provide.
-    transcript_filter: ?TranscriptFilter,
+    transcript_filter: ?TranscriptFilter = null,
 
     /// The format of the transcript content. Currently, Genie only supports
     /// the Amazon Lex transcript format.

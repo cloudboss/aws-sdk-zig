@@ -7,7 +7,7 @@ const LocalNavigationConfiguration = @import("local_navigation_configuration.zig
 /// the attributes can be defined.
 pub const CustomActionNavigationOperation = struct {
     /// The configuration that chooses the navigation target.
-    local_navigation_configuration: ?LocalNavigationConfiguration,
+    local_navigation_configuration: ?LocalNavigationConfiguration = null,
 
     pub const json_field_names = .{
         .local_navigation_configuration = "LocalNavigationConfiguration",

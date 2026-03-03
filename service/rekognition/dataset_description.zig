@@ -8,26 +8,26 @@ const DatasetStatusMessageCode = @import("dataset_status_message_code.zig").Data
 /// reflect the last operation on the dataset.
 pub const DatasetDescription = struct {
     /// The Unix timestamp for the time and date that the dataset was created.
-    creation_timestamp: ?i64,
+    creation_timestamp: ?i64 = null,
 
     /// The status message code for the dataset.
-    dataset_stats: ?DatasetStats,
+    dataset_stats: ?DatasetStats = null,
 
     /// The Unix timestamp for the date and time that the dataset was last updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     /// The status of the dataset.
-    status: ?DatasetStatus,
+    status: ?DatasetStatus = null,
 
     /// The status message for the dataset.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The status message code for the dataset operation. If a service error
     /// occurs, try the
     /// API call again later. If a client error occurs, check the input parameters
     /// to the dataset
     /// API call that failed.
-    status_message_code: ?DatasetStatusMessageCode,
+    status_message_code: ?DatasetStatusMessageCode = null,
 
     pub const json_field_names = .{
         .creation_timestamp = "CreationTimestamp",

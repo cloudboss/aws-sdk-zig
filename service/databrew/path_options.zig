@@ -10,16 +10,16 @@ const DatasetParameter = @import("dataset_parameter.zig").DatasetParameter;
 pub const PathOptions = struct {
     /// If provided, this structure imposes a limit on a number of files that should
     /// be selected.
-    files_limit: ?FilesLimit,
+    files_limit: ?FilesLimit = null,
 
     /// If provided, this structure defines a date range for matching Amazon S3
     /// objects based on their
     /// LastModifiedDate attribute in Amazon S3.
-    last_modified_date_condition: ?FilterExpression,
+    last_modified_date_condition: ?FilterExpression = null,
 
     /// A structure that maps names of parameters used in the Amazon S3 path of a
     /// dataset to their definitions.
-    parameters: ?[]const aws.map.MapEntry(DatasetParameter),
+    parameters: ?[]const aws.map.MapEntry(DatasetParameter) = null,
 
     pub const json_field_names = .{
         .files_limit = "FilesLimit",

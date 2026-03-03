@@ -4,43 +4,43 @@ const CommandType = @import("command_type.zig").CommandType;
 /// Contains command execution information.
 pub const CommandExecution = struct {
     /// The command that needs to be executed.
-    command: ?[]const u8,
+    command: ?[]const u8 = null,
 
     /// When the command execution process ended, expressed in Unix time format.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The exit code to return upon completion.
-    exit_code: ?[]const u8,
+    exit_code: ?[]const u8 = null,
 
     /// The ID of the command execution.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
-    logs: ?LogsLocation,
+    logs: ?LogsLocation = null,
 
     /// A `sandboxArn`.
-    sandbox_arn: ?[]const u8,
+    sandbox_arn: ?[]const u8 = null,
 
     /// A `sandboxId`.
-    sandbox_id: ?[]const u8,
+    sandbox_id: ?[]const u8 = null,
 
     /// The text written by the command to stderr.
-    standard_err_content: ?[]const u8,
+    standard_err_content: ?[]const u8 = null,
 
     /// The text written by the command to stdout.
-    standard_output_content: ?[]const u8,
+    standard_output_content: ?[]const u8 = null,
 
     /// When the command execution process started, expressed in Unix time format.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of the command execution.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// When the command execution process was initially submitted, expressed in
     /// Unix time format.
-    submit_time: ?i64,
+    submit_time: ?i64 = null,
 
     /// The command type.
-    @"type": ?CommandType,
+    @"type": ?CommandType = null,
 
     pub const json_field_names = .{
         .command = "command",

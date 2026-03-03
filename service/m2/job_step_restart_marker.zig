@@ -1,24 +1,24 @@
 /// Provides step/procedure step information for a restart batch job operation.
 pub const JobStepRestartMarker = struct {
     /// The procedure step name that a batch job was restarted from.
-    from_proc_step: ?[]const u8,
+    from_proc_step: ?[]const u8 = null,
 
     /// The step name that a batch job was restarted from.
     from_step: []const u8,
 
     /// The step-level checkpoint timestamp (creation or last modification) for an
     /// Amazon Web Services Blu Age application batch job.
-    skip: ?bool,
+    skip: ?bool = null,
 
     /// Skip selected step and issue a restart from immediate successor step for an
     /// Amazon Web Services Blu Age application batch job.
-    step_checkpoint: ?i32,
+    step_checkpoint: ?i32 = null,
 
     /// The procedure step name that a batch job was restarted to.
-    to_proc_step: ?[]const u8,
+    to_proc_step: ?[]const u8 = null,
 
     /// The step name that a batch job was restarted to.
-    to_step: ?[]const u8,
+    to_step: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .from_proc_step = "fromProcStep",

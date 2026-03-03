@@ -14,15 +14,15 @@ const WaitTime = @import("wait_time.zig").WaitTime;
 pub const MultiConditionalSplitActivity = struct {
     /// The paths for the activity, including the conditions for entering each path
     /// and the activity to perform for each path.
-    branches: ?[]const MultiConditionalBranch,
+    branches: ?[]const MultiConditionalBranch = null,
 
     /// The unique identifier for the activity to perform for participants who don't
     /// meet any of the conditions specified for other paths in the activity.
-    default_activity: ?[]const u8,
+    default_activity: ?[]const u8 = null,
 
     /// The amount of time to wait or the date and time when Amazon Pinpoint
     /// determines whether the conditions are met.
-    evaluation_wait_time: ?WaitTime,
+    evaluation_wait_time: ?WaitTime = null,
 
     pub const json_field_names = .{
         .branches = "Branches",

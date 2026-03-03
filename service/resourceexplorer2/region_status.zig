@@ -5,13 +5,13 @@ const ViewStatus = @import("view_status.zig").ViewStatus;
 /// a specific Amazon Web Services Region.
 pub const RegionStatus = struct {
     /// The status information for the Resource Explorer index in this Region.
-    index: ?IndexStatus,
+    index: ?IndexStatus = null,
 
     /// The Amazon Web Services Region for which this status information applies.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The status information for the Resource Explorer view in this Region.
-    view: ?ViewStatus,
+    view: ?ViewStatus = null,
 
     pub const json_field_names = .{
         .index = "Index",

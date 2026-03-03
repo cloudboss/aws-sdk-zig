@@ -3,7 +3,7 @@
 pub const UpdateWebAppVpcConfig = struct {
     /// The list of subnet IDs within the VPC where the web app endpoint should be
     /// deployed during the update operation.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .subnet_ids = "SubnetIds",

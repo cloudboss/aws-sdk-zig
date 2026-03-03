@@ -4,22 +4,22 @@ const TemplateType = @import("template_type.zig").TemplateType;
 /// A job to create a camera stream node.
 pub const NodeFromTemplateJob = struct {
     /// When the job was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The job's ID.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The node's name.
-    node_name: ?[]const u8,
+    node_name: ?[]const u8 = null,
 
     /// The job's status.
-    status: ?NodeFromTemplateJobStatus,
+    status: ?NodeFromTemplateJobStatus = null,
 
     /// The job's status message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The job's template type.
-    template_type: ?TemplateType,
+    template_type: ?TemplateType = null,
 
     pub const json_field_names = .{
         .created_time = "CreatedTime",

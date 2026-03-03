@@ -8,10 +8,10 @@ const WeightPerAxleGroup = @import("weight_per_axle_group.zig").WeightPerAxleGro
 /// Travel mode options when the provided travel mode is "Truck"
 pub const IsolineTruckOptions = struct {
     /// Total number of axles of the vehicle.
-    axle_count: ?i32,
+    axle_count: ?i32 = null,
 
     /// Engine type of the vehicle.
-    engine_type: ?IsolineEngineType,
+    engine_type: ?IsolineEngineType = null,
 
     /// Gross weight of the vehicle including trailers, and goods at capacity.
     ///
@@ -19,7 +19,7 @@ pub const IsolineTruckOptions = struct {
     gross_weight: i64 = 0,
 
     /// List of Hazardous cargo contained in the vehicle.
-    hazardous_cargos: ?[]const IsolineHazardousCargoType,
+    hazardous_cargos: ?[]const IsolineHazardousCargoType = null,
 
     /// Height of the vehicle.
     ///
@@ -42,17 +42,17 @@ pub const IsolineTruckOptions = struct {
     length: i64 = 0,
 
     /// The vehicle License Plate.
-    license_plate: ?IsolineVehicleLicensePlate,
+    license_plate: ?IsolineVehicleLicensePlate = null,
 
     /// Maximum speed specified.
     ///
     /// **Unit**: `KilometersPerHour`
-    max_speed: ?f64,
+    max_speed: ?f64 = null,
 
     /// The number of occupants in the vehicle.
     ///
     /// Default Value: `1`
-    occupancy: ?i32,
+    occupancy: ?i32 = null,
 
     /// Payload capacity of the vehicle and trailers attached.
     ///
@@ -60,13 +60,13 @@ pub const IsolineTruckOptions = struct {
     payload_capacity: i64 = 0,
 
     /// Number of tires on the vehicle.
-    tire_count: ?i32,
+    tire_count: ?i32 = null,
 
     /// Trailer options corresponding to the vehicle.
-    trailer: ?IsolineTrailerOptions,
+    trailer: ?IsolineTrailerOptions = null,
 
     /// Type of the truck.
-    truck_type: ?IsolineTruckType,
+    truck_type: ?IsolineTruckType = null,
 
     /// The tunnel restriction code.
     ///
@@ -93,7 +93,7 @@ pub const IsolineTruckOptions = struct {
     ///
     /// * *Risk Level*: Very high risk
     /// * *Restrictions*: Restricted tunnel
-    tunnel_restriction_code: ?[]const u8,
+    tunnel_restriction_code: ?[]const u8 = null,
 
     /// Heaviest weight per axle irrespective of the axle type or the axle group.
     /// Meant for usage in countries where the differences in axle types or axle
@@ -106,7 +106,7 @@ pub const IsolineTruckOptions = struct {
     /// countries that have different regulations based on the axle group type.
     ///
     /// **Unit**: `Kilograms`
-    weight_per_axle_group: ?WeightPerAxleGroup,
+    weight_per_axle_group: ?WeightPerAxleGroup = null,
 
     /// Width of the vehicle.
     ///

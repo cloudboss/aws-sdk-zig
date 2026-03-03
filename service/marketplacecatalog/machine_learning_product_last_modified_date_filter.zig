@@ -4,7 +4,7 @@ const MachineLearningProductLastModifiedDateFilterDateRange = @import("machine_l
 pub const MachineLearningProductLastModifiedDateFilter = struct {
     /// A date range to filter by. The operation returns machine learning products
     /// with last modified dates that fall within this range.
-    date_range: ?MachineLearningProductLastModifiedDateFilterDateRange,
+    date_range: ?MachineLearningProductLastModifiedDateFilterDateRange = null,
 
     pub const json_field_names = .{
         .date_range = "DateRange",

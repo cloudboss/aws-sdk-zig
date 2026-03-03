@@ -9,10 +9,10 @@ pub const LogSetup = struct {
     /// log type isn't enabled, that log type doesn't export its control plane logs.
     /// Each
     /// individual log type can be enabled or disabled independently.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The available cluster control plane log types.
-    types: ?[]const LogType,
+    types: ?[]const LogType = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

@@ -5,16 +5,16 @@ const HistoricalUsageEntity = @import("historical_usage_entity.zig").HistoricalU
 /// modifications.
 pub const BatchCreateBillScenarioUsageModificationEntry = struct {
     /// The amount of usage you want to create for the service use you are modeling.
-    amounts: ?[]const UsageAmount,
+    amounts: ?[]const UsageAmount = null,
 
     /// The Availability Zone that this usage line uses.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// An optional group identifier for the usage modification.
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// Historical usage data associated with this modification, if available.
-    historical_usage: ?HistoricalUsageEntity,
+    historical_usage: ?HistoricalUsageEntity = null,
 
     /// A unique identifier for this entry in the batch operation. This can be any
     /// valid string. This key is useful to identify errors associated with any

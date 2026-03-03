@@ -10,17 +10,17 @@ const ClientVpnAuthenticationType = @import("client_vpn_authentication_type.zig"
 pub const ClientVpnAuthenticationRequest = struct {
     /// Information about the Active Directory to be used, if applicable. You must
     /// provide this information if **Type** is `directory-service-authentication`.
-    active_directory: ?DirectoryServiceAuthenticationRequest,
+    active_directory: ?DirectoryServiceAuthenticationRequest = null,
 
     /// Information about the IAM SAML identity provider to be used, if applicable.
     /// You must provide this information if **Type** is `federated-authentication`.
-    federated_authentication: ?FederatedAuthenticationRequest,
+    federated_authentication: ?FederatedAuthenticationRequest = null,
 
     /// Information about the authentication certificates to be used, if applicable.
     /// You must provide this information if **Type** is
     /// `certificate-authentication`.
-    mutual_authentication: ?CertificateAuthenticationRequest,
+    mutual_authentication: ?CertificateAuthenticationRequest = null,
 
     /// The type of client authentication to be used.
-    @"type": ?ClientVpnAuthenticationType,
+    @"type": ?ClientVpnAuthenticationType = null,
 };

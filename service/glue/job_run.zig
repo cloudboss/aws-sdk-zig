@@ -46,13 +46,13 @@ pub const JobRun = struct {
     /// jobs, see [Using
     /// job parameters in Ray
     /// jobs](https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html) in the developer guide.
-    arguments: ?[]const aws.map.StringMapEntry,
+    arguments: ?[]const aws.map.StringMapEntry = null,
 
     /// The number of the attempt to run this job.
     attempt: i32 = 0,
 
     /// The date and time that this job run completed.
-    completed_on: ?i64,
+    completed_on: ?i64 = null,
 
     /// This field can be set for either job runs with execution class `FLEX` or
     /// when Auto Scaling is enabled, and represents the total time each executor
@@ -62,10 +62,10 @@ pub const JobRun = struct {
     /// case of Auto Scaling jobs, as the number of executors running at a given
     /// time may be less than the `MaxCapacity`. Therefore, it is possible that the
     /// value of `DPUSeconds` is less than `executionEngineRuntime` * `MaxCapacity`.
-    dpu_seconds: ?f64,
+    dpu_seconds: ?f64 = null,
 
     /// An error message associated with this job run.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// Indicates whether the job is run with a standard or flexible execution
     /// class. The standard execution-class is ideal for time-sensitive workloads
@@ -77,13 +77,13 @@ pub const JobRun = struct {
     /// Only jobs with Glue version 3.0 and above and command type `glueetl` will be
     /// allowed to set `ExecutionClass` to `FLEX`. The flexible execution class is
     /// available for Spark jobs.
-    execution_class: ?ExecutionClass,
+    execution_class: ?ExecutionClass = null,
 
     /// This inline session policy to the StartJobRun API allows you to dynamically
     /// restrict the permissions of the specified
     /// execution role for the scope of the job, without requiring the creation of
     /// additional IAM roles.
-    execution_role_session_policy: ?[]const u8,
+    execution_role_session_policy: ?[]const u8 = null,
 
     /// The amount of time (in seconds) that the job run consumed resources.
     execution_time: i32 = 0,
@@ -105,10 +105,10 @@ pub const JobRun = struct {
     /// guide.
     ///
     /// Jobs that are created without specifying a Glue version default to Glue 0.9.
-    glue_version: ?[]const u8,
+    glue_version: ?[]const u8 = null,
 
     /// The ID of this job run.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A mode that describes how a job was created. Valid values are:
     ///
@@ -120,24 +120,24 @@ pub const JobRun = struct {
     ///
     /// When the `JobMode` field is missing or null, `SCRIPT` is assigned as the
     /// default value.
-    job_mode: ?JobMode,
+    job_mode: ?JobMode = null,
 
     /// The name of the job definition being used in this run.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// Specifies whether job run queuing is enabled for the job run.
     ///
     /// A value of true means job run queuing is enabled for the job run. If false
     /// or not populated, the job run will not be considered for queueing.
-    job_run_queuing_enabled: ?bool,
+    job_run_queuing_enabled: ?bool = null,
 
     /// The current state of the job run. For more information about the statuses of
     /// jobs that have terminated abnormally, see [Glue Job Run
     /// Statuses](https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html).
-    job_run_state: ?JobRunState,
+    job_run_state: ?JobRunState = null,
 
     /// The last time that this job run was modified.
-    last_modified_on: ?i64,
+    last_modified_on: ?i64 = null,
 
     /// The name of the log group for secure logging that can be server-side
     /// encrypted in Amazon
@@ -147,7 +147,7 @@ pub const JobRun = struct {
     /// `/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/`), then that
     /// security
     /// configuration is used to encrypt the log group.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     /// This field specifies a day of the week and hour for a maintenance window for
     /// streaming jobs. Glue periodically performs maintenance activities. During
@@ -156,7 +156,7 @@ pub const JobRun = struct {
     /// Glue will restart the job within 3 hours of the specified maintenance
     /// window. For instance, if you set up the maintenance window for Monday at
     /// 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
-    maintenance_window: ?[]const u8,
+    maintenance_window: ?[]const u8 = null,
 
     /// For Glue version 1.0 or earlier jobs, using the standard worker type, the
     /// number of
@@ -187,39 +187,39 @@ pub const JobRun = struct {
     /// allocate from 2 to 100 DPUs.
     /// The default is 10 DPUs. This job type cannot have a fractional DPU
     /// allocation.
-    max_capacity: ?f64,
+    max_capacity: ?f64 = null,
 
     /// Specifies configuration properties of a job run notification.
-    notification_property: ?NotificationProperty,
+    notification_property: ?NotificationProperty = null,
 
     /// The number of workers of a defined `workerType` that are allocated when a
     /// job runs.
-    number_of_workers: ?i32,
+    number_of_workers: ?i32 = null,
 
     /// A list of predecessors to this job run.
-    predecessor_runs: ?[]const Predecessor,
+    predecessor_runs: ?[]const Predecessor = null,
 
     /// The ID of the previous run of this job. For example, the `JobRunId`
     /// specified
     /// in the `StartJobRun` action.
-    previous_run_id: ?[]const u8,
+    previous_run_id: ?[]const u8 = null,
 
     /// The name of an Glue usage profile associated with the job run.
-    profile_name: ?[]const u8,
+    profile_name: ?[]const u8 = null,
 
     /// The name of the `SecurityConfiguration` structure to be used with this job
     /// run.
-    security_configuration: ?[]const u8,
+    security_configuration: ?[]const u8 = null,
 
     /// The date and time at which this job run was started.
-    started_on: ?i64,
+    started_on: ?i64 = null,
 
     /// This field holds details that pertain to the state of a job run. The field
     /// is nullable.
     ///
     /// For example, when a job run is in a WAITING state as a result of job run
     /// queuing, the field has the reason why the job run is in that state.
-    state_detail: ?[]const u8,
+    state_detail: ?[]const u8 = null,
 
     /// The `JobRun` timeout in minutes. This is the maximum time that a job run can
     /// consume resources before it is terminated and enters `TIMEOUT` status. This
@@ -236,10 +236,10 @@ pub const JobRun = struct {
     ///
     /// For streaming jobs, if you have set up a maintenance window, it will be
     /// restarted during the maintenance window after 7 days.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 
     /// The name of the trigger that started this job run.
-    trigger_name: ?[]const u8,
+    trigger_name: ?[]const u8 = null,
 
     /// The type of predefined worker that is allocated when a job runs. Accepts a
     /// value of
@@ -281,7 +281,7 @@ pub const JobRun = struct {
     /// * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs, 64 GB of
     ///   memory) with 128 GB disk, and provides up to 8 Ray workers based on the
     ///   autoscaler.
-    worker_type: ?WorkerType,
+    worker_type: ?WorkerType = null,
 
     pub const json_field_names = .{
         .allocated_capacity = "AllocatedCapacity",

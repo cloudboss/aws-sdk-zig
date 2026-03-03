@@ -8,7 +8,7 @@ const DocumentAttributeBoostingLevel = @import("document_attribute_boosting_leve
 pub const DateAttributeBoostingConfiguration = struct {
     /// Specifies the duration, in seconds, of a boost applies to a `DATE` type
     /// document attribute.
-    boosting_duration_in_seconds: ?i64,
+    boosting_duration_in_seconds: ?i64 = null,
 
     /// Specifies the priority tier ranking of boosting applied to document
     /// attributes. For version 2, this parameter indicates the relative ranking

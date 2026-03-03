@@ -5,7 +5,7 @@ const TextDetection = @import("text_detection.zig").TextDetection;
 /// detected, and where it was detected on the screen.
 pub const TextDetectionResult = struct {
     /// Details about text detected in a video.
-    text_detection: ?TextDetection,
+    text_detection: ?TextDetection = null,
 
     /// The time, in milliseconds from the start of the video, that the text was
     /// detected.

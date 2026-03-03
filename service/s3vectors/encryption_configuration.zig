@@ -16,7 +16,7 @@ pub const EncryptionConfiguration = struct {
     ///
     /// For example, specify Key ARN in the following format:
     /// `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The server-side encryption type to use for the encryption configuration of
     /// the vector bucket. By default, if you don't specify, all new vectors in

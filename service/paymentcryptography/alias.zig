@@ -8,7 +8,7 @@ pub const Alias = struct {
     alias_name: []const u8,
 
     /// The `KeyARN` of the key associated with the alias.
-    key_arn: ?[]const u8,
+    key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alias_name = "AliasName",

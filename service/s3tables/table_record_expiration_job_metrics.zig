@@ -3,14 +3,14 @@
 /// when the job ran.
 pub const TableRecordExpirationJobMetrics = struct {
     /// The total number of data files that were removed when the job ran.
-    deleted_data_files: ?i64,
+    deleted_data_files: ?i64 = null,
 
     /// The total number of records that were removed when the job ran.
-    deleted_records: ?i64,
+    deleted_records: ?i64 = null,
 
     /// The total size (in bytes) of the data files that were removed when the job
     /// ran.
-    removed_files_size: ?i64,
+    removed_files_size: ?i64 = null,
 
     pub const json_field_names = .{
         .deleted_data_files = "deletedDataFiles",

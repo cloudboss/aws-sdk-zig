@@ -4,7 +4,7 @@ const LoggingFormat = @import("logging_format.zig").LoggingFormat;
 pub const FileAccessLog = struct {
     /// The specified format for the logs. The format is either `json_format` or
     /// `text_format`.
-    format: ?LoggingFormat,
+    format: ?LoggingFormat = null,
 
     /// The file path to write access logs to. You can use `/dev/stdout` to send
     /// access logs to standard out and configure your Envoy container to use a log

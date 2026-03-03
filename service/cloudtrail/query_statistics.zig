@@ -5,13 +5,13 @@ pub const QueryStatistics = struct {
     /// number of bytes for which your account is billed for the query, unless the
     /// query is still
     /// running.
-    bytes_scanned: ?i64,
+    bytes_scanned: ?i64 = null,
 
     /// The number of results returned.
-    results_count: ?i32,
+    results_count: ?i32 = null,
 
     /// The total number of results returned by a query.
-    total_results_count: ?i32,
+    total_results_count: ?i32 = null,
 
     pub const json_field_names = .{
         .bytes_scanned = "BytesScanned",

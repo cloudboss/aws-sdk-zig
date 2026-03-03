@@ -5,17 +5,17 @@ const OcsfFindingIdentifier = @import("ocsf_finding_identifier.zig").OcsfFinding
 pub const BatchUpdateFindingsV2UnprocessedFinding = struct {
     /// Indicates the specific type of error preventing successful processing of a
     /// finding during a batch update operation.
-    error_code: ?BatchUpdateFindingsV2UnprocessedFindingErrorCode,
+    error_code: ?BatchUpdateFindingsV2UnprocessedFindingErrorCode = null,
 
     /// A detailed description of why a finding could not be processed during a
     /// batch update operation.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The finding identifier of an unprocessed finding.
-    finding_identifier: ?OcsfFindingIdentifier,
+    finding_identifier: ?OcsfFindingIdentifier = null,
 
     /// The metadata.uid of an unprocessed finding.
-    metadata_uid: ?[]const u8,
+    metadata_uid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

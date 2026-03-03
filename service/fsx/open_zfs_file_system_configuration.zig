@@ -4,7 +4,7 @@ const OpenZFSReadCacheConfiguration = @import("open_zfs_read_cache_configuration
 
 /// The configuration for the Amazon FSx for OpenZFS file system.
 pub const OpenZFSFileSystemConfiguration = struct {
-    automatic_backup_retention_days: ?i32,
+    automatic_backup_retention_days: ?i32 = null,
 
     /// A Boolean value indicating whether tags on the file system should be copied
     /// to
@@ -18,7 +18,7 @@ pub const OpenZFSFileSystemConfiguration = struct {
     /// user-initiated backup, no tags are copied from the file system, regardless
     /// of this
     /// value.
-    copy_tags_to_backups: ?bool,
+    copy_tags_to_backups: ?bool = null,
 
     /// A Boolean value indicating whether tags for the volume should be copied to
     /// snapshots.
@@ -30,20 +30,20 @@ pub const OpenZFSFileSystemConfiguration = struct {
     /// copied to snapshots. If you specify one or more tags when creating the
     /// snapshot, no tags
     /// are copied from the volume, regardless of this value.
-    copy_tags_to_volumes: ?bool,
+    copy_tags_to_volumes: ?bool = null,
 
-    daily_automatic_backup_start_time: ?[]const u8,
+    daily_automatic_backup_start_time: ?[]const u8 = null,
 
     /// Specifies the file-system deployment type. Amazon FSx for OpenZFS supports 
     /// `MULTI_AZ_1`, `SINGLE_AZ_HA_2`, `SINGLE_AZ_HA_1`, `SINGLE_AZ_2`, and
     /// `SINGLE_AZ_1`.
-    deployment_type: ?OpenZFSDeploymentType,
+    deployment_type: ?OpenZFSDeploymentType = null,
 
-    disk_iops_configuration: ?DiskIopsConfiguration,
+    disk_iops_configuration: ?DiskIopsConfiguration = null,
 
     /// The IPv4 address of the endpoint
     /// that is used to access data or to manage the file system.
-    endpoint_ip_address: ?[]const u8,
+    endpoint_ip_address: ?[]const u8 = null,
 
     /// (Multi-AZ only) Specifies the IPv4 address range in which the endpoints to
     /// access your
@@ -54,11 +54,11 @@ pub const OpenZFSFileSystemConfiguration = struct {
     /// You can have overlapping endpoint IP addresses for file systems deployed in
     /// the
     /// same VPC/route tables.
-    endpoint_ip_address_range: ?[]const u8,
+    endpoint_ip_address_range: ?[]const u8 = null,
 
     /// The IPv6 address of the endpoint that is used to access data or to manage
     /// the file system.
-    endpoint_ipv_6_address: ?[]const u8,
+    endpoint_ipv_6_address: ?[]const u8 = null,
 
     /// (Multi-AZ only) Specifies the IPv6 address range in which the endpoints to
     /// access your
@@ -68,30 +68,30 @@ pub const OpenZFSFileSystemConfiguration = struct {
     /// VPC's CIDR ranges. You can have overlapping endpoint IP addresses for file
     /// systems deployed
     /// in the same VPC/route tables, as long as they don't overlap with any subnet.
-    endpoint_ipv_6_address_range: ?[]const u8,
+    endpoint_ipv_6_address_range: ?[]const u8 = null,
 
     /// Required when `DeploymentType` is set to `MULTI_AZ_1`. This
     /// specifies the subnet in which you want the preferred file server to be
     /// located.
-    preferred_subnet_id: ?[]const u8,
+    preferred_subnet_id: ?[]const u8 = null,
 
     /// Required when `StorageType` is set to `INTELLIGENT_TIERING`. Specifies the
     /// optional provisioned SSD read cache.
-    read_cache_configuration: ?OpenZFSReadCacheConfiguration,
+    read_cache_configuration: ?OpenZFSReadCacheConfiguration = null,
 
     /// The ID of the root volume of the OpenZFS file system.
-    root_volume_id: ?[]const u8,
+    root_volume_id: ?[]const u8 = null,
 
     /// (Multi-AZ only) The VPC route tables in which your file system's endpoints
     /// are
     /// created.
-    route_table_ids: ?[]const []const u8,
+    route_table_ids: ?[]const []const u8 = null,
 
     /// The throughput of an Amazon FSx file system, measured in megabytes per
     /// second (MBps).
-    throughput_capacity: ?i32,
+    throughput_capacity: ?i32 = null,
 
-    weekly_maintenance_start_time: ?[]const u8,
+    weekly_maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .automatic_backup_retention_days = "AutomaticBackupRetentionDays",

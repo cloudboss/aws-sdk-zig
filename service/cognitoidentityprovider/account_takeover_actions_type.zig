@@ -5,13 +5,13 @@ const AccountTakeoverActionType = @import("account_takeover_action_type.zig").Ac
 /// threat protection features.
 pub const AccountTakeoverActionsType = struct {
     /// The action that you assign to a high-risk assessment by threat protection.
-    high_action: ?AccountTakeoverActionType,
+    high_action: ?AccountTakeoverActionType = null,
 
     /// The action that you assign to a low-risk assessment by threat protection.
-    low_action: ?AccountTakeoverActionType,
+    low_action: ?AccountTakeoverActionType = null,
 
     /// The action that you assign to a medium-risk assessment by threat protection.
-    medium_action: ?AccountTakeoverActionType,
+    medium_action: ?AccountTakeoverActionType = null,
 
     pub const json_field_names = .{
         .high_action = "HighAction",

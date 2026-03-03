@@ -22,20 +22,20 @@ const BooleanOperator = @import("boolean_operator.zig").BooleanOperator;
 /// * A Boolean operator: `And` or `Or`.
 pub const SearchExpression = struct {
     /// A list of filter objects.
-    filters: ?[]const Filter,
+    filters: ?[]const Filter = null,
 
     /// A list of nested filter objects.
-    nested_filters: ?[]const NestedFilters,
+    nested_filters: ?[]const NestedFilters = null,
 
     /// A Boolean operator used to evaluate the search expression. If you want every
     /// conditional statement in all lists to be satisfied for the entire search
     /// expression to be true, specify `And`. If only a single conditional statement
     /// needs to be true for the entire search expression to be true, specify `Or`.
     /// The default value is `And`.
-    operator: ?BooleanOperator,
+    operator: ?BooleanOperator = null,
 
     /// A list of search expression objects.
-    sub_expressions: ?[]const SearchExpression,
+    sub_expressions: ?[]const SearchExpression = null,
 
     pub const json_field_names = .{
         .filters = "Filters",

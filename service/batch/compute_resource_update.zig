@@ -67,7 +67,7 @@ pub const ComputeResourceUpdate = struct {
     /// `maxvCpus` to meet your capacity requirements. In this event, Batch never
     /// exceeds
     /// `maxvCpus` by more than a single instance.
-    allocation_strategy: ?CRUpdateAllocationStrategy,
+    allocation_strategy: ?CRUpdateAllocationStrategy = null,
 
     /// The maximum percentage that a Spot Instance price can be when compared with
     /// the On-Demand
@@ -88,7 +88,7 @@ pub const ComputeResourceUpdate = struct {
     ///
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't specify it.
-    bid_percentage: ?i32,
+    bid_percentage: ?i32 = null,
 
     /// The desired number of vCPUS in the compute environment. Batch modifies this
     /// value between
@@ -109,7 +109,7 @@ pub const ComputeResourceUpdate = struct {
     /// to
     /// the current `desiredvCpus` value. For more information, see [Troubleshooting
     /// Batch](https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#error-desired-vcpus-update) in the *Batch User Guide*.
-    desiredv_cpus: ?i32,
+    desiredv_cpus: ?i32 = null,
 
     /// Provides information used to select Amazon Machine Images (AMIs) for Amazon
     /// EC2 instances in the
@@ -128,7 +128,7 @@ pub const ComputeResourceUpdate = struct {
     ///
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't specify it.
-    ec_2_configuration: ?[]const Ec2Configuration,
+    ec_2_configuration: ?[]const Ec2Configuration = null,
 
     /// The Amazon EC2 key pair that's used for instances launched in the compute
     /// environment. You can
@@ -145,7 +145,7 @@ pub const ComputeResourceUpdate = struct {
     ///
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't specify it.
-    ec_2_key_pair: ?[]const u8,
+    ec_2_key_pair: ?[]const u8 = null,
 
     /// The Amazon Machine Image (AMI) ID used for instances launched in the compute
     /// environment.
@@ -174,7 +174,7 @@ pub const ComputeResourceUpdate = struct {
     /// Amazon Linux 2
     /// AMI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// The Amazon ECS instance profile applied to Amazon EC2 instances in a compute
     /// environment.
@@ -196,7 +196,7 @@ pub const ComputeResourceUpdate = struct {
     ///
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't specify it.
-    instance_role: ?[]const u8,
+    instance_role: ?[]const u8 = null,
 
     /// The instances types that can be launched. You can specify instance families
     /// to launch any
@@ -264,7 +264,7 @@ pub const ComputeResourceUpdate = struct {
     /// share the same architecture. For example, you can't mix x86 and ARM
     /// instances in the same compute
     /// environment.
-    instance_types: ?[]const []const u8,
+    instance_types: ?[]const []const u8 = null,
 
     /// The updated launch template to use for your compute resources. You must
     /// specify either the
@@ -290,7 +290,7 @@ pub const ComputeResourceUpdate = struct {
     ///
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't specify it.
-    launch_template: ?LaunchTemplateSpecification,
+    launch_template: ?LaunchTemplateSpecification = null,
 
     /// The maximum number of Amazon EC2 vCPUs that an environment can reach.
     ///
@@ -302,7 +302,7 @@ pub const ComputeResourceUpdate = struct {
     /// exceed `maxvCpus` to meet your capacity requirements. In this event, Batch
     /// never
     /// exceeds `maxvCpus` by more than a single instance.
-    maxv_cpus: ?i32,
+    maxv_cpus: ?i32 = null,
 
     /// The minimum number of vCPUs that an environment should maintain (even if the
     /// compute environment
@@ -310,7 +310,7 @@ pub const ComputeResourceUpdate = struct {
     ///
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't specify it.
-    minv_cpus: ?i32,
+    minv_cpus: ?i32 = null,
 
     /// The Amazon EC2 placement group to associate with your compute resources. If
     /// you intend to submit
@@ -333,7 +333,7 @@ pub const ComputeResourceUpdate = struct {
     ///
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't specify it.
-    placement_group: ?[]const u8,
+    placement_group: ?[]const u8 = null,
 
     /// The Amazon EC2 security groups that are associated with instances launched
     /// in the compute
@@ -350,7 +350,7 @@ pub const ComputeResourceUpdate = struct {
     /// infrastructure update of the compute environment. For more information, see
     /// [Updating compute
     /// environments](https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html) in the *Batch User Guide*.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The VPC subnets where the compute resources are launched. Fargate compute
     /// resources can
@@ -381,7 +381,7 @@ pub const ComputeResourceUpdate = struct {
     /// Developer Guide*.
     ///
     /// Batch on Fargate doesn't currently support Local Zones.
-    subnets: ?[]const []const u8,
+    subnets: ?[]const []const u8 = null,
 
     /// Key-value pair tags to be applied to Amazon EC2 resources that are launched
     /// in the compute
@@ -401,7 +401,7 @@ pub const ComputeResourceUpdate = struct {
     ///
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't specify it.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of compute environment: `EC2`, `SPOT`, `FARGATE`,
     /// or `FARGATE_SPOT`. For more information, see [Compute
@@ -420,7 +420,7 @@ pub const ComputeResourceUpdate = struct {
     /// infrastructure update of the compute environment. For more information, see
     /// [Updating compute
     /// environments](https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html) in the *Batch User Guide*.
-    @"type": ?CRType,
+    @"type": ?CRType = null,
 
     /// Specifies whether the AMI ID is updated to the latest one that's supported
     /// by Batch when
@@ -442,7 +442,7 @@ pub const ComputeResourceUpdate = struct {
     /// of the compute environment. For more information, see [Updating compute
     /// environments](https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html) in the
     /// *Batch User Guide*.
-    update_to_latest_image_version: ?bool,
+    update_to_latest_image_version: ?bool = null,
 
     pub const json_field_names = .{
         .allocation_strategy = "allocationStrategy",

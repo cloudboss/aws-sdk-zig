@@ -6,19 +6,19 @@ const TopicReplication = @import("topic_replication.zig").TopicReplication;
 /// cluster (sourceKafkaClusterAlias -> targetKafkaClusterAlias)
 pub const ReplicationInfoDescription = struct {
     /// Configuration relating to consumer group replication.
-    consumer_group_replication: ?ConsumerGroupReplication,
+    consumer_group_replication: ?ConsumerGroupReplication = null,
 
     /// The alias of the source Kafka cluster.
-    source_kafka_cluster_alias: ?[]const u8,
+    source_kafka_cluster_alias: ?[]const u8 = null,
 
     /// The compression type to use when producing records to target cluster.
-    target_compression_type: ?TargetCompressionType,
+    target_compression_type: ?TargetCompressionType = null,
 
     /// The alias of the target Kafka cluster.
-    target_kafka_cluster_alias: ?[]const u8,
+    target_kafka_cluster_alias: ?[]const u8 = null,
 
     /// Configuration relating to topic replication.
-    topic_replication: ?TopicReplication,
+    topic_replication: ?TopicReplication = null,
 
     pub const json_field_names = .{
         .consumer_group_replication = "ConsumerGroupReplication",

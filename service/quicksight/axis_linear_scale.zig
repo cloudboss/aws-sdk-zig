@@ -4,10 +4,10 @@
 /// the attributes can be defined.
 pub const AxisLinearScale = struct {
     /// The step count setup of a linear axis.
-    step_count: ?i32,
+    step_count: ?i32 = null,
 
     /// The step size setup of a linear axis.
-    step_size: ?f64,
+    step_size: ?f64 = null,
 
     pub const json_field_names = .{
         .step_count = "StepCount",

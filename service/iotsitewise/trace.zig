@@ -2,7 +2,7 @@
 /// access.
 pub const Trace = struct {
     /// The cited text from the data source.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .text = "text",

@@ -11,7 +11,7 @@ pub const FlowExecutionSummary = struct {
 
     /// The timestamp when the flow execution ended. This field is only populated
     /// when the execution has completed, failed, timed out, or been aborted.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the flow execution.
     execution_arn: []const u8,

@@ -4,34 +4,34 @@ const PolicyVersionIdentifier = @import("policy_version_identifier.zig").PolicyV
 /// Information that identifies the noncompliant resource.
 pub const ResourceIdentifier = struct {
     /// The account with which the resource is associated.
-    account: ?[]const u8,
+    account: ?[]const u8 = null,
 
     /// The ID of the CA certificate used to authorize the certificate.
-    ca_certificate_id: ?[]const u8,
+    ca_certificate_id: ?[]const u8 = null,
 
     /// The client ID.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     /// The ID of the Amazon Cognito identity pool.
-    cognito_identity_pool_id: ?[]const u8,
+    cognito_identity_pool_id: ?[]const u8 = null,
 
     /// The ARN of the identified device certificate.
-    device_certificate_arn: ?[]const u8,
+    device_certificate_arn: ?[]const u8 = null,
 
     /// The ID of the certificate attached to the resource.
-    device_certificate_id: ?[]const u8,
+    device_certificate_id: ?[]const u8 = null,
 
     /// The ARN of the IAM role that has overly permissive actions.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// The issuer certificate identifier.
-    issuer_certificate_identifier: ?IssuerCertificateIdentifier,
+    issuer_certificate_identifier: ?IssuerCertificateIdentifier = null,
 
     /// The version of the policy associated with the resource.
-    policy_version_identifier: ?PolicyVersionIdentifier,
+    policy_version_identifier: ?PolicyVersionIdentifier = null,
 
     /// The ARN of the role alias that has overly permissive actions.
-    role_alias_arn: ?[]const u8,
+    role_alias_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account = "account",

@@ -17,7 +17,7 @@ pub const Action = struct {
     /// include multiple categories for a single action,
     /// separate each category with a pipe separator (`|`). For example,
     /// `\"Deluxe|Premium\"`.
-    properties: ?[]const u8,
+    properties: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action_id = "actionId",

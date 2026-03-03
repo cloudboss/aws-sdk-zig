@@ -5,7 +5,7 @@ const ResponseHeadersPolicyCustomHeader = @import("response_headers_policy_custo
 /// cache behavior that's associated with this response headers policy.
 pub const ResponseHeadersPolicyCustomHeadersConfig = struct {
     /// The list of HTTP response headers and their values.
-    items: ?[]const ResponseHeadersPolicyCustomHeader,
+    items: ?[]const ResponseHeadersPolicyCustomHeader = null,
 
     /// The number of HTTP response headers in the list.
     quantity: i32,

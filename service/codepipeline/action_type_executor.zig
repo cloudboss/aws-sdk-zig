@@ -17,7 +17,7 @@ pub const ActionTypeExecutor = struct {
     /// The timeout in seconds for the job. An action execution can have multiple
     /// jobs. This
     /// is the timeout for a single job, not the entire action execution.
-    job_timeout: ?i32,
+    job_timeout: ?i32 = null,
 
     /// The policy statement that specifies the permissions in the CodePipeline
     /// customer
@@ -29,7 +29,7 @@ pub const ActionTypeExecutor = struct {
     /// `codepipeline.amazonaws.com`.
     ///
     /// The size of the passed JSON policy document cannot exceed 2048 characters.
-    policy_statements_template: ?[]const u8,
+    policy_statements_template: ?[]const u8 = null,
 
     /// The integration model used to create and update the action type, `Lambda`
     /// or `JobWorker`.

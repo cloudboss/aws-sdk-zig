@@ -20,16 +20,16 @@ pub const DomainVerificationSummary = struct {
 
     /// The date and time that the domain was last successfully verified, in
     /// ISO-8601 format.
-    last_verified_time: ?i64,
+    last_verified_time: ?i64 = null,
 
     /// The current status of the domain verification process.
     status: VerificationStatus,
 
     /// The tags associated with the domain verification.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The TXT record configuration used for domain verification.
-    txt_method_config: ?TxtMethodConfig,
+    txt_method_config: ?TxtMethodConfig = null,
 
     pub const json_field_names = .{
         .arn = "arn",

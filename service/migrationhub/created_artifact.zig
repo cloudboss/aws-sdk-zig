@@ -5,7 +5,7 @@ pub const CreatedArtifact = struct {
     /// A description that can be free-form text to record additional detail about
     /// the artifact
     /// for clarity or for later reference.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// An ARN that uniquely identifies the result of a migration task.
     name: []const u8,

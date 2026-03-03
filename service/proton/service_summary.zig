@@ -9,7 +9,7 @@ pub const ServiceSummary = struct {
     created_at: i64,
 
     /// A description of the service.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time when the service was last modified.
     last_modified_at: i64,
@@ -21,7 +21,7 @@ pub const ServiceSummary = struct {
     status: ServiceStatus,
 
     /// A service status message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The name of the service template.
     template_name: []const u8,

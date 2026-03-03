@@ -3,8 +3,8 @@ const TransitGatewayAssociationState = @import("transit_gateway_association_stat
 /// Describes an association.
 pub const TransitGatewayAttachmentAssociation = struct {
     /// The state of the association.
-    state: ?TransitGatewayAssociationState,
+    state: ?TransitGatewayAssociationState = null,
 
     /// The ID of the route table for the transit gateway.
-    transit_gateway_route_table_id: ?[]const u8,
+    transit_gateway_route_table_id: ?[]const u8 = null,
 };

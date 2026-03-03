@@ -4,7 +4,7 @@ pub const EpochLockingSettings = struct {
     /// epoch (which started at 1970-01-01T00:00:00 UTC). Specify the start time of
     /// the custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be
     /// 2000-01-01T00:00:00 or later. Always set the MM:SS portion to 00:00.
-    custom_epoch: ?[]const u8,
+    custom_epoch: ?[]const u8 = null,
 
     /// Optional. Enter a time for the jam sync. The default is midnight UTC. When
     /// epoch locking is enabled, MediaLive performs a daily jam sync on every
@@ -12,7 +12,7 @@ pub const EpochLockingSettings = struct {
     /// sync applies only to encodes with frame rate of 29.97 or 59.94 FPS. To
     /// override, enter a time in HH:MM:SS in UTC. Always set the MM:SS portion to
     /// 00:00.
-    jam_sync_time: ?[]const u8,
+    jam_sync_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .custom_epoch = "CustomEpoch",

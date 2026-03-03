@@ -13,13 +13,13 @@ pub const Type = struct {
     array_column_info: ?*ColumnInfo = null,
 
     /// Indicates if the column is a row.
-    row_column_info: ?[]const ColumnInfo,
+    row_column_info: ?[]const ColumnInfo = null,
 
     /// Indicates if the column is of type string, integer, Boolean, double,
     /// timestamp, date,
     /// time. For more information, see [Supported data
     /// types](https://docs.aws.amazon.com/timestream/latest/developerguide/supported-data-types.html).
-    scalar_type: ?ScalarType,
+    scalar_type: ?ScalarType = null,
 
     /// Indicates if the column is a timeseries data type.
     time_series_measure_value_column_info: ?*ColumnInfo = null,

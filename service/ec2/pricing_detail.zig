@@ -1,8 +1,8 @@
 /// Describes a Reserved Instance offering.
 pub const PricingDetail = struct {
     /// The number of reservations available for the price.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// The price per instance.
-    price: ?f64,
+    price: ?f64 = null,
 };

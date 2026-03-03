@@ -13,38 +13,38 @@ const ValidationConfiguration = @import("validation_configuration.zig").Validati
 /// Represents all of the attributes of a DataBrew job.
 pub const Job = struct {
     /// The ID of the Amazon Web Services account that owns the job.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The date and time that the job was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the user who created the job.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// Represents a list of JDBC database output objects which defines the output
     /// destination for a DataBrew recipe job to write into.
-    database_outputs: ?[]const DatabaseOutput,
+    database_outputs: ?[]const DatabaseOutput = null,
 
     /// One or more artifacts that represent the Glue Data Catalog output
     /// from running the job.
-    data_catalog_outputs: ?[]const DataCatalogOutput,
+    data_catalog_outputs: ?[]const DataCatalogOutput = null,
 
     /// A dataset that the job is to process.
-    dataset_name: ?[]const u8,
+    dataset_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an encryption key that is used to protect
     /// the job
     /// output. For more information, see [Encrypting data
     /// written by DataBrew
     /// jobs](https://docs.aws.amazon.com/databrew/latest/dg/encryption-security-configuration.html)
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The encryption mode for the job, which can be one of the following:
     ///
     /// * `SSE-KMS` - Server-side encryption with keys managed by KMS.
     ///
     /// * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
-    encryption_mode: ?EncryptionMode,
+    encryption_mode: ?EncryptionMode = null,
 
     /// A sample configuration for profile jobs only, which determines the number of
     /// rows on which the
@@ -52,16 +52,16 @@ pub const Job = struct {
     /// is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000
     /// for the
     /// size parameter.
-    job_sample: ?JobSample,
+    job_sample: ?JobSample = null,
 
     /// The Amazon Resource Name (ARN) of the user who last modified the job.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The modification date and time of the job.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The current status of Amazon CloudWatch logging for the job.
-    log_subscription: ?LogSubscription,
+    log_subscription: ?LogSubscription = null,
 
     /// The maximum number of nodes that can be consumed when the job processes
     /// data.
@@ -74,22 +74,22 @@ pub const Job = struct {
     name: []const u8,
 
     /// One or more artifacts that represent output from running the job.
-    outputs: ?[]const Output,
+    outputs: ?[]const Output = null,
 
     /// The name of the project that the job is associated with.
-    project_name: ?[]const u8,
+    project_name: ?[]const u8 = null,
 
     /// A set of steps that the job runs.
-    recipe_reference: ?RecipeReference,
+    recipe_reference: ?RecipeReference = null,
 
     /// The unique Amazon Resource Name (ARN) for the job.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the role to be assumed for this job.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Metadata tags that have been applied to the job.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The job's timeout in minutes. A job that attempts to run longer than this
     /// timeout
@@ -103,10 +103,10 @@ pub const Job = struct {
     ///
     /// * `RECIPE` - A job to apply one or more transformations to a
     /// dataset.
-    @"type": ?JobType,
+    @"type": ?JobType = null,
 
     /// List of validation configurations that are applied to the profile job.
-    validation_configurations: ?[]const ValidationConfiguration,
+    validation_configurations: ?[]const ValidationConfiguration = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

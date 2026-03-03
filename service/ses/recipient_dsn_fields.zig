@@ -19,10 +19,10 @@ pub const RecipientDsnFields = struct {
     /// response. See
     /// [RFC 3463](https://tools.ietf.org/html/rfc3463) for the correct
     /// formatting of this parameter.
-    diagnostic_code: ?[]const u8,
+    diagnostic_code: ?[]const u8 = null,
 
     /// Additional X-headers to include in the DSN.
-    extension_fields: ?[]const ExtensionField,
+    extension_fields: ?[]const ExtensionField = null,
 
     /// The email address that the message was ultimately delivered to. This
     /// corresponds to
@@ -34,18 +34,18 @@ pub const RecipientDsnFields = struct {
     ///
     /// Do not prepend the `FinalRecipient` email address with `rfc
     /// 822;`, as described in [RFC 3798](https://tools.ietf.org/html/rfc3798).
-    final_recipient: ?[]const u8,
+    final_recipient: ?[]const u8 = null,
 
     /// The time the final delivery attempt was made, in [RFC
     /// 822](https://www.ietf.org/rfc/rfc0822.txt) date-time format.
-    last_attempt_date: ?i64,
+    last_attempt_date: ?i64 = null,
 
     /// The MTA to which the remote MTA attempted to deliver the message, formatted
     /// as
     /// specified in [RFC 3464](https://tools.ietf.org/html/rfc3464)
     /// (`mta-name-type; mta-name`). This parameter typically applies only to
     /// propagating synchronous bounces.
-    remote_mta: ?[]const u8,
+    remote_mta: ?[]const u8 = null,
 
     /// The status code that indicates what went wrong. This is required by [RFC
     /// 3464](https://tools.ietf.org/html/rfc3464).

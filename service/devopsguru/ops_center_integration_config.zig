@@ -8,7 +8,7 @@ pub const OpsCenterIntegrationConfig = struct {
     /// Specifies if DevOps Guru is enabled to create an Amazon Web Services Systems
     /// Manager OpsItem for each created
     /// insight.
-    opt_in_status: ?OptInStatus,
+    opt_in_status: ?OptInStatus = null,
 
     pub const json_field_names = .{
         .opt_in_status = "OptInStatus",

@@ -12,17 +12,17 @@ const DataSourceVpcConfiguration = @import("data_source_vpc_configuration.zig").
 pub const ConfluenceConfiguration = struct {
     /// Configuration information for indexing attachments to Confluence blogs and
     /// pages.
-    attachment_configuration: ?ConfluenceAttachmentConfiguration,
+    attachment_configuration: ?ConfluenceAttachmentConfiguration = null,
 
     /// Whether you want to connect to Confluence using basic authentication of user
     /// name and
     /// password, or a personal access token. You can use a personal access token
     /// for Confluence
     /// Server.
-    authentication_type: ?ConfluenceAuthenticationType,
+    authentication_type: ?ConfluenceAuthenticationType = null,
 
     /// Configuration information for indexing Confluence blogs.
-    blog_configuration: ?ConfluenceBlogConfiguration,
+    blog_configuration: ?ConfluenceBlogConfiguration = null,
 
     /// A list of regular expression patterns to exclude certain blog posts, pages,
     /// spaces, or
@@ -33,7 +33,7 @@ pub const ConfluenceConfiguration = struct {
     /// matches both an inclusion and exclusion pattern, the exclusion pattern takes
     /// precedence
     /// and the content isn't included in the index.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of regular expression patterns to include certain blog posts, pages,
     /// spaces, or
@@ -44,10 +44,10 @@ pub const ConfluenceConfiguration = struct {
     /// matches both an inclusion and exclusion pattern, the exclusion pattern takes
     /// precedence
     /// and the content isn't included in the index.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// Configuration information for indexing Confluence pages.
-    page_configuration: ?ConfluencePageConfiguration,
+    page_configuration: ?ConfluencePageConfiguration = null,
 
     /// Configuration information to connect to your Confluence URL instance via a
     /// web proxy.
@@ -75,7 +75,7 @@ pub const ConfluenceConfiguration = struct {
     /// It is recommended you prepare your proxy beforehand for any security and
     /// load
     /// requirements.
-    proxy_configuration: ?ProxyConfiguration,
+    proxy_configuration: ?ProxyConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains
     /// the
@@ -96,7 +96,7 @@ pub const ConfluenceConfiguration = struct {
     server_url: []const u8,
 
     /// Configuration information for indexing Confluence spaces.
-    space_configuration: ?ConfluenceSpaceConfiguration,
+    space_configuration: ?ConfluenceSpaceConfiguration = null,
 
     /// The version or the type of Confluence installation to connect to.
     version: ConfluenceVersion,
@@ -105,7 +105,7 @@ pub const ConfluenceConfiguration = struct {
     /// your Confluence.
     /// For more information, see [Configuring a
     /// VPC](https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
-    vpc_configuration: ?DataSourceVpcConfiguration,
+    vpc_configuration: ?DataSourceVpcConfiguration = null,
 
     pub const json_field_names = .{
         .attachment_configuration = "AttachmentConfiguration",

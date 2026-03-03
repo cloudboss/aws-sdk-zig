@@ -12,10 +12,10 @@ pub const ActionConnectorSummary = struct {
     arn: []const u8,
 
     /// The date and time when the action connector was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// Error information if the action connector is in an error state.
-    @"error": ?ActionConnectorError,
+    @"error": ?ActionConnectorError = null,
 
     /// The date and time when the action connector was last updated.
     last_updated_time: i64,
@@ -24,7 +24,7 @@ pub const ActionConnectorSummary = struct {
     name: []const u8,
 
     /// The current status of the action connector.
-    status: ?ResourceStatus,
+    status: ?ResourceStatus = null,
 
     /// The type of action connector (e.g., SALESFORCE, JIRA, CUSTOM, BEDROCK).
     @"type": ActionConnectorType,

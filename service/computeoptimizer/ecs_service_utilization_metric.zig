@@ -15,7 +15,7 @@ pub const ECSServiceUtilizationMetric = struct {
     /// * `Cpu` — The amount of CPU capacity that's used in the service.
     ///
     /// * `Memory` — The amount of memory that's used in the service.
-    name: ?ECSServiceMetricName,
+    name: ?ECSServiceMetricName = null,
 
     /// The statistic of the utilization metric.
     ///
@@ -33,7 +33,7 @@ pub const ECSServiceUtilizationMetric = struct {
     /// using Amazon CloudWatch. For more information, see the [Amazon CloudWatch
     /// User
     /// Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
-    statistic: ?ECSServiceMetricStatistic,
+    statistic: ?ECSServiceMetricStatistic = null,
 
     /// The value of the utilization metric.
     value: f64 = 0,

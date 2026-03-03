@@ -8,11 +8,11 @@ pub const ManagedCertificateRequest = struct {
     /// `disabled` option. Opt in by specifying `enabled`. For more information, see
     /// [Certificate Transparency Logging
     /// ](https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency) in the *Certificate Manager User Guide*.
-    certificate_transparency_logging_preference: ?CertificateTransparencyLoggingPreference,
+    certificate_transparency_logging_preference: ?CertificateTransparencyLoggingPreference = null,
 
     /// The primary domain name associated with the CloudFront managed ACM
     /// certificate.
-    primary_domain_name: ?[]const u8,
+    primary_domain_name: ?[]const u8 = null,
 
     /// Specify how the HTTP validation token will be served when requesting the
     /// CloudFront managed ACM certificate.

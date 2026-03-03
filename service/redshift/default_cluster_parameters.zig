@@ -9,12 +9,12 @@ pub const DefaultClusterParameters = struct {
     /// of records by providing this returned marker value in the `Marker` parameter
     /// and retrying the command. If the `Marker` field is empty, all response
     /// records have been retrieved for the request.
-    marker: ?[]const u8,
+    marker: ?[]const u8 = null,
 
     /// The name of the cluster parameter group family to which the engine default
     /// parameters apply.
-    parameter_group_family: ?[]const u8,
+    parameter_group_family: ?[]const u8 = null,
 
     /// The list of cluster default parameters.
-    parameters: ?[]const Parameter,
+    parameters: ?[]const Parameter = null,
 };

@@ -8,7 +8,7 @@ pub const CaptionDescription = struct {
     /// input when generating captions. The name should be of the format "Caption
     /// Selector ", which denotes that the Nth Caption Selector will be used from
     /// each input.
-    caption_selector_name: ?[]const u8,
+    caption_selector_name: ?[]const u8 = null,
 
     /// Specify the language for this captions output track. For most captions
     /// output formats, the encoder puts this language information in the output
@@ -19,28 +19,28 @@ pub const CaptionDescription = struct {
     /// code in the full RFC-5646 specification. Streaming outputs are those that
     /// are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or
     /// Microsoft Smooth Streaming.
-    custom_language_code: ?[]const u8,
+    custom_language_code: ?[]const u8 = null,
 
     /// Settings related to one captions tab on the MediaConvert console. Usually,
     /// one captions tab corresponds to one output captions track. Depending on your
     /// output captions format, one tab might correspond to a set of output captions
     /// tracks. For more information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/including-captions.html.
-    destination_settings: ?CaptionDestinationSettings,
+    destination_settings: ?CaptionDestinationSettings = null,
 
     /// Specify the language of this captions output track. For most captions output
     /// formats, the encoder puts this language information in the output captions
     /// metadata. If your output captions format is DVB-Sub or Burn in, the encoder
     /// uses this language information to choose the font language for rendering the
     /// captions text.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// Specify a label for this set of output captions. For example, "English",
     /// "Director commentary", or "track_2". For streaming outputs, MediaConvert
     /// passes this information into destination manifests for display on the
     /// end-viewer's player device. For outputs in other output groups, the service
     /// ignores this setting.
-    language_description: ?[]const u8,
+    language_description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .caption_selector_name = "CaptionSelectorName",

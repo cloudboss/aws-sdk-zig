@@ -8,10 +8,10 @@ pub const DataIntegrationFlowTarget = struct {
     /// dataset under **asc** namespace, it has a connection_id internal field that
     /// is not allowed to be provided by client directly, they will be auto
     /// populated.
-    dataset_target: ?DataIntegrationFlowDatasetTargetConfiguration,
+    dataset_target: ?DataIntegrationFlowDatasetTargetConfiguration = null,
 
     /// The S3 DataIntegrationFlow target.
-    s_3_target: ?DataIntegrationFlowS3TargetConfiguration,
+    s_3_target: ?DataIntegrationFlowS3TargetConfiguration = null,
 
     /// The DataIntegrationFlow target type.
     target_type: DataIntegrationFlowTargetType,

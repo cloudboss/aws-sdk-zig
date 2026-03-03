@@ -21,13 +21,13 @@ pub const SearchFilter = struct {
     /// The result attribute to which the filter values are applied. Valid values
     /// vary by API
     /// action.
-    attribute: ?[]const u8,
+    attribute: ?[]const u8 = null,
 
     /// The operator to apply to the `Attribute` with each of the `Values`.
     /// Valid values vary by `Attribute`.
-    operator: ?[]const u8,
+    operator: ?[]const u8 = null,
 
     /// The list of values applied to the `Attribute` and `Operator`
     /// attributes. Number of values and valid values vary by `Attribute`.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 };

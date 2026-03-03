@@ -3,7 +3,7 @@
 /// *instance*).
 pub const MonthlyTransfer = struct {
     /// The amount allocated per month (in GB).
-    gb_per_month_allocated: ?i32,
+    gb_per_month_allocated: ?i32 = null,
 
     pub const json_field_names = .{
         .gb_per_month_allocated = "gbPerMonthAllocated",

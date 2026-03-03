@@ -9,7 +9,7 @@ pub const SSESpecification = struct {
     /// is set to `KMS` and an Amazon Web Services managed key is used (KMS charges
     /// apply). If disabled (false) or not specified, server-side
     /// encryption is set to Amazon Web Services owned key.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The KMS key that should be used for the KMS encryption.
     /// To specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or
@@ -17,13 +17,13 @@ pub const SSESpecification = struct {
     /// Note that you should only provide this parameter if the key is different
     /// from the
     /// default DynamoDB key `alias/aws/dynamodb`.
-    kms_master_key_id: ?[]const u8,
+    kms_master_key_id: ?[]const u8 = null,
 
     /// Server-side encryption type. The only supported value is:
     ///
     /// * `KMS` - Server-side encryption that uses Key Management Service. The
     /// key is stored in your account and is managed by KMS (KMS charges apply).
-    sse_type: ?SSEType,
+    sse_type: ?SSEType = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

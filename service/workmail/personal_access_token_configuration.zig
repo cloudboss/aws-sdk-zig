@@ -3,7 +3,7 @@ const PersonalAccessTokenConfigurationStatus = @import("personal_access_token_co
 /// Displays the Personal Access Token status.
 pub const PersonalAccessTokenConfiguration = struct {
     /// The validity of the Personal Access Token status in days.
-    lifetime_in_days: ?i32,
+    lifetime_in_days: ?i32 = null,
 
     /// The status of the Personal Access Token allowed for the organization.
     ///

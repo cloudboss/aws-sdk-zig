@@ -6,7 +6,7 @@ pub const AssessmentTargetFilter = struct {
     /// wildcard that is specified for this data type property must match the value
     /// of the
     /// **assessmentTargetName** property of the AssessmentTarget data type.
-    assessment_target_name_pattern: ?[]const u8,
+    assessment_target_name_pattern: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .assessment_target_name_pattern = "assessmentTargetNamePattern",

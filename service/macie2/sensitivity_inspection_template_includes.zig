@@ -7,11 +7,11 @@
 /// identifiers](https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html) in the *Amazon Macie User Guide*.
 pub const SensitivityInspectionTemplateIncludes = struct {
     /// An array of unique identifiers, one for each allow list to include.
-    allow_list_ids: ?[]const []const u8,
+    allow_list_ids: ?[]const []const u8 = null,
 
     /// An array of unique identifiers, one for each custom data identifier to
     /// include.
-    custom_data_identifier_ids: ?[]const []const u8,
+    custom_data_identifier_ids: ?[]const []const u8 = null,
 
     /// An array of unique identifiers, one for each managed data identifier to
     /// include.
@@ -21,7 +21,7 @@ pub const SensitivityInspectionTemplateIncludes = struct {
     /// sensitive data discovery. To retrieve a list of valid values for the managed
     /// data identifiers that are currently available, use the
     /// ListManagedDataIdentifiers operation.
-    managed_data_identifier_ids: ?[]const []const u8,
+    managed_data_identifier_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .allow_list_ids = "allowListIds",

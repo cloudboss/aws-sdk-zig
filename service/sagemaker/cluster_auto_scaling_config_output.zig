@@ -5,11 +5,11 @@ const ClusterAutoScalingStatus = @import("cluster_auto_scaling_status.zig").Clus
 /// The autoscaling configuration and status information for a HyperPod cluster.
 pub const ClusterAutoScalingConfigOutput = struct {
     /// The type of autoscaler configured for the cluster.
-    auto_scaler_type: ?ClusterAutoScalerType,
+    auto_scaler_type: ?ClusterAutoScalerType = null,
 
     /// If the autoscaling status is `Failed`, this field contains a message
     /// describing the failure.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// Describes whether autoscaling is enabled or disabled for the cluster.
     mode: ClusterAutoScalingMode,

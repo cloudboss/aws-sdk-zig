@@ -6,13 +6,13 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// (AMIs).
 pub const AmiAggregation = struct {
     /// The IDs of AMIs to aggregate findings for.
-    amis: ?[]const StringFilter,
+    amis: ?[]const StringFilter = null,
 
     /// The value to sort results by.
-    sort_by: ?AmiSortBy,
+    sort_by: ?AmiSortBy = null,
 
     /// The order to sort results by.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .amis = "amis",

@@ -10,7 +10,7 @@ pub const RemoteAccessConfig = struct {
     /// EC2 key
     /// pairs and Windows
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-key-pairs.html) in the *Amazon Elastic Compute Cloud User Guide for Windows Instances*.
-    ec_2_ssh_key: ?[]const u8,
+    ec_2_ssh_key: ?[]const u8 = null,
 
     /// The security group IDs that are allowed SSH access (port 22) to the nodes.
     /// For
@@ -21,7 +21,7 @@ pub const RemoteAccessConfig = struct {
     /// opened to the internet (`0.0.0.0/0`). For more information, see [Security
     /// Groups for Your
     /// VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*.
-    source_security_groups: ?[]const []const u8,
+    source_security_groups: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .ec_2_ssh_key = "ec2SshKey",

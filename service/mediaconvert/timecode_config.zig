@@ -13,7 +13,7 @@ pub const TimecodeConfig = struct {
     /// timecode. * If Source is set to Start at 0 the first frame is 00:00:00:00. *
     /// If Source is set to Embedded, the first frame is the timecode value on the
     /// first input frame of the input.
-    anchor: ?[]const u8,
+    anchor: ?[]const u8 = null,
 
     /// Use Source to set how timecodes are handled within this job. To make sure
     /// that your video, audio, captions, and markers are synchronized and that
@@ -25,12 +25,12 @@ pub const TimecodeConfig = struct {
     /// timecode of the initial frame to 00:00:00:00. * Specified Start - Set the
     /// timecode of the initial frame to a value other than zero. You use Start
     /// timecode to provide this value.
-    source: ?TimecodeSource,
+    source: ?TimecodeSource = null,
 
     /// Only use when you set Source to Specified start. Use Start timecode to
     /// specify the timecode for the initial frame. Use 24-hour format with frame
     /// number, (HH:MM:SS:FF) or (HH:MM:SS;FF).
-    start: ?[]const u8,
+    start: ?[]const u8 = null,
 
     /// Only applies to outputs that support program-date-time stamp. Use Timestamp
     /// offset to overwrite the timecode date without affecting the time and frame
@@ -39,7 +39,7 @@ pub const TimecodeConfig = struct {
     /// output settings. For example, if the date part of your timecodes is
     /// 2002-1-25 and you want to change it to one year later, set Timestamp offset
     /// to 2003-1-25.
-    timestamp_offset: ?[]const u8,
+    timestamp_offset: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .anchor = "Anchor",

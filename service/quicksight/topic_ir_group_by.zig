@@ -8,21 +8,21 @@ const TopicTimeGranularity = @import("topic_time_granularity.zig").TopicTimeGran
 /// The definition for a `TopicIRGroupBy`.
 pub const TopicIRGroupBy = struct {
     /// The display format for the `TopicIRGroupBy`.
-    display_format: ?DisplayFormat,
+    display_format: ?DisplayFormat = null,
 
-    display_format_options: ?DisplayFormatOptions,
+    display_format_options: ?DisplayFormatOptions = null,
 
     /// The field name for the `TopicIRGroupBy`.
-    field_name: ?Identifier,
+    field_name: ?Identifier = null,
 
     /// The named entity for the `TopicIRGroupBy`.
-    named_entity: ?NamedEntityRef,
+    named_entity: ?NamedEntityRef = null,
 
     /// The sort for the `TopicIRGroupBy`.
-    sort: ?TopicSortClause,
+    sort: ?TopicSortClause = null,
 
     /// The time granularity for the `TopicIRGroupBy`.
-    time_granularity: ?TopicTimeGranularity,
+    time_granularity: ?TopicTimeGranularity = null,
 
     pub const json_field_names = .{
         .display_format = "DisplayFormat",

@@ -38,7 +38,7 @@ pub const LambdaAction = struct {
     /// should use `Event` invocation in most cases. Use
     /// `RequestResponse` only to make a mail flow decision, such as whether
     /// to stop the receipt rule or the receipt rule set.
-    invocation_type: ?InvocationType,
+    invocation_type: ?InvocationType = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the
     /// Lambda action is
@@ -49,5 +49,5 @@ pub const LambdaAction = struct {
     ///
     /// For more information about Amazon SNS topics, see the [Amazon SNS Developer
     /// Guide](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
-    topic_arn: ?[]const u8,
+    topic_arn: ?[]const u8 = null,
 };

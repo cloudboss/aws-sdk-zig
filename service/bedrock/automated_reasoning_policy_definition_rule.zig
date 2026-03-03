@@ -4,7 +4,7 @@
 pub const AutomatedReasoningPolicyDefinitionRule = struct {
     /// The human-readable form of the rule expression, often in natural language or
     /// simplified notation.
-    alternate_expression: ?[]const u8,
+    alternate_expression: ?[]const u8 = null,
 
     /// The formal logic expression of the rule.
     expression: []const u8,

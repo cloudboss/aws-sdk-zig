@@ -19,7 +19,7 @@ pub const FirewallStatus = struct {
     /// reference sets. Network Firewall calculates the capacity usage by taking an
     /// aggregated count of all of the resources used by all of the reference sets
     /// in a firewall.
-    capacity_usage_summary: ?CapacityUsageSummary,
+    capacity_usage_summary: ?CapacityUsageSummary = null,
 
     /// The configuration sync state for the firewall. This summarizes the `Config`
     /// settings in the `SyncStates` for this firewall status object.
@@ -53,13 +53,13 @@ pub const FirewallStatus = struct {
     ///
     /// These objects provide detailed information for the settings
     /// `ConfigurationSyncStateSummary` and `Status`.
-    sync_states: ?[]const aws.map.MapEntry(SyncState),
+    sync_states: ?[]const aws.map.MapEntry(SyncState) = null,
 
     /// The synchronization state of the transit gateway attachment. This indicates
     /// whether the firewall's transit gateway configuration is properly
     /// synchronized and operational. Use this to verify that your transit gateway
     /// configuration changes have been applied.
-    transit_gateway_attachment_sync_state: ?TransitGatewayAttachmentSyncState,
+    transit_gateway_attachment_sync_state: ?TransitGatewayAttachmentSyncState = null,
 
     pub const json_field_names = .{
         .capacity_usage_summary = "CapacityUsageSummary",

@@ -8,7 +8,7 @@ const RootCause = @import("root_cause.zig").RootCause;
 /// of the anomaly object.
 pub const Anomaly = struct {
     /// The last day the anomaly is detected.
-    anomaly_end_date: ?[]const u8,
+    anomaly_end_date: ?[]const u8 = null,
 
     /// The unique identifier for the anomaly.
     anomaly_id: []const u8,
@@ -17,15 +17,15 @@ pub const Anomaly = struct {
     anomaly_score: AnomalyScore,
 
     /// The first day the anomaly is detected.
-    anomaly_start_date: ?[]const u8,
+    anomaly_start_date: ?[]const u8 = null,
 
     /// The dimension for the anomaly (for example, an Amazon Web Services service
     /// in a service
     /// monitor).
-    dimension_value: ?[]const u8,
+    dimension_value: ?[]const u8 = null,
 
     /// The feedback value.
-    feedback: ?AnomalyFeedbackType,
+    feedback: ?AnomalyFeedbackType = null,
 
     /// The dollar impact for the anomaly.
     impact: Impact,
@@ -35,7 +35,7 @@ pub const Anomaly = struct {
     monitor_arn: []const u8,
 
     /// The list of identified root causes for the anomaly.
-    root_causes: ?[]const RootCause,
+    root_causes: ?[]const RootCause = null,
 
     pub const json_field_names = .{
         .anomaly_end_date = "AnomalyEndDate",

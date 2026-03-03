@@ -3,12 +3,12 @@ const AssetModelCompositeModelPathSegment = @import("asset_model_composite_model
 /// Contains a summary of the composite model.
 pub const AssetModelCompositeModelSummary = struct {
     /// The description of the composite model that this summary describes..
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The external ID of a composite model on this asset model. For more
     /// information, see [Using external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ID of the composite model that this summary describes..
     id: []const u8,
@@ -17,7 +17,7 @@ pub const AssetModelCompositeModelSummary = struct {
     name: []const u8,
 
     /// The path that includes all the pieces that make up the composite model.
-    path: ?[]const AssetModelCompositeModelPathSegment,
+    path: ?[]const AssetModelCompositeModelPathSegment = null,
 
     /// The composite model type. Valid values are `AWS/ALARM`, `CUSTOM`, or `
     /// AWS/L4E_ANOMALY`.

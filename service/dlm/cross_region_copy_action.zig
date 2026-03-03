@@ -10,7 +10,7 @@ pub const CrossRegionCopyAction = struct {
     /// The encryption settings for the copied snapshot.
     encryption_configuration: EncryptionConfiguration,
 
-    retain_rule: ?CrossRegionCopyRetainRule,
+    retain_rule: ?CrossRegionCopyRetainRule = null,
 
     /// The target Region.
     target: []const u8,

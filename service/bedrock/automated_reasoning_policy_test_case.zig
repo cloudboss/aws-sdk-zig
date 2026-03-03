@@ -5,13 +5,13 @@ const AutomatedReasoningCheckResult = @import("automated_reasoning_check_result.
 pub const AutomatedReasoningPolicyTestCase = struct {
     /// The minimum confidence level for logic validation. Content meeting this
     /// threshold is considered high-confidence and can be validated.
-    confidence_threshold: ?f64,
+    confidence_threshold: ?f64 = null,
 
     /// The timestamp when the test was created.
     created_at: i64,
 
     /// The expected result of the Automated Reasoning check for this test.
-    expected_aggregated_findings_result: ?AutomatedReasoningCheckResult,
+    expected_aggregated_findings_result: ?AutomatedReasoningCheckResult = null,
 
     /// The output content to be validated by the policy, typically representing a
     /// foundation model response.
@@ -19,7 +19,7 @@ pub const AutomatedReasoningPolicyTestCase = struct {
 
     /// The input query or prompt that generated the content. This provides context
     /// for the validation.
-    query_content: ?[]const u8,
+    query_content: ?[]const u8 = null,
 
     /// The unique identifier of the test.
     test_case_id: []const u8,

@@ -3,24 +3,24 @@ const Tier = @import("tier.zig").Tier;
 /// Describes the workloads on a component.
 pub const Workload = struct {
     /// The name of the component.
-    component_name: ?[]const u8,
+    component_name: ?[]const u8 = null,
 
     /// Indicates whether all of the component configurations required to monitor a
     /// workload were provided.
-    missing_workload_config: ?bool,
+    missing_workload_config: ?bool = null,
 
     /// The tier of the workload.
-    tier: ?Tier,
+    tier: ?Tier = null,
 
     /// The ID of the workload.
-    workload_id: ?[]const u8,
+    workload_id: ?[]const u8 = null,
 
     /// The name of the workload.
-    workload_name: ?[]const u8,
+    workload_name: ?[]const u8 = null,
 
     /// If logging is supported for the resource type, shows whether the component
     /// has configured logs to be monitored.
-    workload_remarks: ?[]const u8,
+    workload_remarks: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .component_name = "ComponentName",

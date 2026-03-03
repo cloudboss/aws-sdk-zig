@@ -21,5 +21,5 @@ pub const DeleteMarkerReplication = struct {
     /// Indicates whether to replicate delete markers.
     ///
     /// Indicates whether to replicate delete markers.
-    status: ?DeleteMarkerReplicationStatus,
+    status: ?DeleteMarkerReplicationStatus = null,
 };

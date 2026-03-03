@@ -7,7 +7,7 @@ const CrawlFilterConfigurationType = @import("crawl_filter_configuration_type.zi
 pub const CrawlFilterConfiguration = struct {
     /// The configuration of filtering certain objects or content types of the data
     /// source.
-    pattern_object_filter: ?PatternObjectFilterConfiguration,
+    pattern_object_filter: ?PatternObjectFilterConfiguration = null,
 
     /// The type of filtering that you want to apply to certain objects or content
     /// of the data source. For example, the `PATTERN` type is regular expression

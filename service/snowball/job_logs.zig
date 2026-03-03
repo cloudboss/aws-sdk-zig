@@ -29,13 +29,13 @@
 pub const JobLogs = struct {
     /// A link to an Amazon S3 presigned URL where the job completion report is
     /// located.
-    job_completion_report_uri: ?[]const u8,
+    job_completion_report_uri: ?[]const u8 = null,
 
     /// A link to an Amazon S3 presigned URL where the job failure log is located.
-    job_failure_log_uri: ?[]const u8,
+    job_failure_log_uri: ?[]const u8 = null,
 
     /// A link to an Amazon S3 presigned URL where the job success log is located.
-    job_success_log_uri: ?[]const u8,
+    job_success_log_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .job_completion_report_uri = "JobCompletionReportURI",

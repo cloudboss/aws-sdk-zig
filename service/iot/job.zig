@@ -14,19 +14,19 @@ const TimeoutConfig = @import("timeout_config.zig").TimeoutConfig;
 /// The `Job` object contains details about a job.
 pub const Job = struct {
     /// Configuration for criteria to abort the job.
-    abort_config: ?AbortConfig,
+    abort_config: ?AbortConfig = null,
 
     /// If the job was updated, describes the reason for the update.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The time, in seconds since the epoch, when the job was completed.
-    completed_at: ?i64,
+    completed_at: ?i64 = null,
 
     /// The time, in seconds since the epoch, when the job was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// A short text description of the job.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The package version Amazon Resource Names (ARNs) that are installed on the
     /// device when the job
@@ -41,7 +41,7 @@ pub const Job = struct {
     ///
     /// **Note:**The following Length Constraints relates to a
     /// single ARN. Up to 25 package version ARNs are allowed.
-    destination_package_versions: ?[]const []const u8,
+    destination_package_versions: ?[]const []const u8 = null,
 
     /// A key-value map that pairs the patterns that need to be replaced in a
     /// managed
@@ -54,38 +54,38 @@ pub const Job = struct {
     /// managed templates. This parameter can't be used with custom job templates or
     /// to
     /// create jobs from them.
-    document_parameters: ?[]const aws.map.StringMapEntry,
+    document_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// Will be `true` if the job was canceled with the optional
     /// `force` parameter set to `true`.
-    force_canceled: ?bool,
+    force_canceled: ?bool = null,
 
     /// Indicates whether a job is concurrent. Will be true when a job is rolling
     /// out new job
     /// executions or canceling previously created executions, otherwise false.
-    is_concurrent: ?bool,
+    is_concurrent: ?bool = null,
 
     /// An ARN identifying the job with format
     /// "arn:aws:iot:region:account:job/jobId".
-    job_arn: ?[]const u8,
+    job_arn: ?[]const u8 = null,
 
     /// The configuration for the criteria to retry the job.
-    job_executions_retry_config: ?JobExecutionsRetryConfig,
+    job_executions_retry_config: ?JobExecutionsRetryConfig = null,
 
     /// Allows you to create a staged rollout of a job.
-    job_executions_rollout_config: ?JobExecutionsRolloutConfig,
+    job_executions_rollout_config: ?JobExecutionsRolloutConfig = null,
 
     /// The unique identifier you assigned to this job when it was created.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// Details about the job process.
-    job_process_details: ?JobProcessDetails,
+    job_process_details: ?JobProcessDetails = null,
 
     /// The ARN of the job template used to create the job.
-    job_template_arn: ?[]const u8,
+    job_template_arn: ?[]const u8 = null,
 
     /// The time, in seconds since the epoch, when the job was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The namespace used to indicate that a job is a customer-managed job.
     ///
@@ -99,29 +99,29 @@ pub const Job = struct {
     /// For
     /// more information, see [Setting up IoT Greengrass core
     /// devices.](https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html)
-    namespace_id: ?[]const u8,
+    namespace_id: ?[]const u8 = null,
 
     /// Configuration for pre-signed S3 URLs.
-    presigned_url_config: ?PresignedUrlConfig,
+    presigned_url_config: ?PresignedUrlConfig = null,
 
     /// If the job was updated, provides the reason code for the update.
-    reason_code: ?[]const u8,
+    reason_code: ?[]const u8 = null,
 
     /// Displays the next seven maintenance window occurrences and their start
     /// times.
-    scheduled_job_rollouts: ?[]const ScheduledJobRollout,
+    scheduled_job_rollouts: ?[]const ScheduledJobRollout = null,
 
     /// The configuration that allows you to schedule a job for a future date and
     /// time in
     /// addition to specifying the end behavior for each job execution.
-    scheduling_config: ?SchedulingConfig,
+    scheduling_config: ?SchedulingConfig = null,
 
     /// The status of the job, one of `IN_PROGRESS`, `CANCELED`,
     /// `DELETION_IN_PROGRESS` or `COMPLETED`.
-    status: ?JobStatus,
+    status: ?JobStatus = null,
 
     /// A list of IoT things and thing groups to which the job should be sent.
-    targets: ?[]const []const u8,
+    targets: ?[]const []const u8 = null,
 
     /// Specifies whether the job will continue to run (CONTINUOUS), or will be
     /// complete
@@ -140,7 +140,7 @@ pub const Job = struct {
     /// thing group targets. By using continuous jobs, devices that join the group
     /// receive
     /// the job execution even after the job has been created.
-    target_selection: ?TargetSelection,
+    target_selection: ?TargetSelection = null,
 
     /// Specifies the amount of time each device has to finish its execution of the
     /// job. A
@@ -148,7 +148,7 @@ pub const Job = struct {
     /// the job execution status is not set to another terminal state before the
     /// timer expires,
     /// it will be automatically set to `TIMED_OUT`.
-    timeout_config: ?TimeoutConfig,
+    timeout_config: ?TimeoutConfig = null,
 
     pub const json_field_names = .{
         .abort_config = "abortConfig",

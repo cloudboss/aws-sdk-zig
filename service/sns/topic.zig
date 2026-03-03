@@ -3,5 +3,5 @@
 /// attributes, use `GetTopicAttributes`.
 pub const Topic = struct {
     /// The topic's ARN.
-    topic_arn: ?[]const u8,
+    topic_arn: ?[]const u8 = null,
 };

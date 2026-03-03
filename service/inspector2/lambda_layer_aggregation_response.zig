@@ -19,7 +19,7 @@ pub const LambdaLayerAggregationResponse = struct {
     resource_id: []const u8,
 
     /// An object that contains the counts of aggregated finding per severity.
-    severity_counts: ?SeverityCounts,
+    severity_counts: ?SeverityCounts = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

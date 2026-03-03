@@ -29,7 +29,7 @@ pub const DeploymentComponentUpdatePolicy = struct {
     /// or wait for them to be safe to update.
     ///
     /// Default: `NOTIFY_COMPONENTS`
-    action: ?DeploymentComponentUpdatePolicyAction,
+    action: ?DeploymentComponentUpdatePolicyAction = null,
 
     /// The amount of time in seconds that each component on a device has to report
     /// that it's safe
@@ -38,7 +38,7 @@ pub const DeploymentComponentUpdatePolicy = struct {
     /// on the device.
     ///
     /// Default: `60`
-    timeout_in_seconds: ?i32,
+    timeout_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .action = "action",

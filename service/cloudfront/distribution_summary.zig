@@ -27,10 +27,10 @@ pub const DistributionSummary = struct {
     ///
     /// For more information about ICP recordals, see [ Signup, Accounts, and
     /// Credentials](https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html) in *Getting Started with Amazon Web Services services in China*.
-    alias_icp_recordals: ?[]const AliasICPRecordal,
+    alias_icp_recordals: ?[]const AliasICPRecordal = null,
 
     /// ID of the Anycast static IP list that is associated with the distribution.
-    anycast_ip_list_id: ?[]const u8,
+    anycast_ip_list_id: ?[]const u8 = null,
 
     /// The ARN (Amazon Resource Name) for the distribution. For example:
     /// `arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5`, where
@@ -44,12 +44,12 @@ pub const DistributionSummary = struct {
     comment: []const u8,
 
     /// The distribution's connection function association.
-    connection_function_association: ?ConnectionFunctionAssociation,
+    connection_function_association: ?ConnectionFunctionAssociation = null,
 
     /// This field specifies whether the connection mode is through a standard
     /// distribution (direct) or a multi-tenant distribution with distribution
     /// tenants (tenant-only).
-    connection_mode: ?ConnectionMode,
+    connection_mode: ?ConnectionMode = null,
 
     /// A complex type that contains zero or more `CustomErrorResponses` elements.
     custom_error_responses: CustomErrorResponses,
@@ -68,7 +68,7 @@ pub const DistributionSummary = struct {
     enabled: bool,
 
     /// The current version of the distribution.
-    e_tag: ?[]const u8,
+    e_tag: ?[]const u8 = null,
 
     /// Specify the maximum HTTP version that you want viewers to use to communicate
     /// with CloudFront. The default value for new web distributions is `http2`.
@@ -88,7 +88,7 @@ pub const DistributionSummary = struct {
 
     /// A complex type that contains information about origin groups for this
     /// distribution.
-    origin_groups: ?OriginGroups,
+    origin_groups: ?OriginGroups = null,
 
     /// A complex type that contains information about origins for this
     /// distribution.
@@ -121,7 +121,7 @@ pub const DistributionSummary = struct {
     viewer_certificate: ViewerCertificate,
 
     /// The distribution's viewer mTLS configuration.
-    viewer_mtls_config: ?ViewerMtlsConfig,
+    viewer_mtls_config: ?ViewerMtlsConfig = null,
 
     /// The Web ACL Id (if any) associated with the distribution.
     web_acl_id: []const u8,

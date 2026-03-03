@@ -2,7 +2,7 @@ const DocumentExtractionGranularityType = @import("document_extraction_granulari
 
 /// Granularity of Document Extraction
 pub const DocumentExtractionGranularity = struct {
-    types: ?[]const DocumentExtractionGranularityType,
+    types: ?[]const DocumentExtractionGranularityType = null,
 
     pub const json_field_names = .{
         .types = "types",

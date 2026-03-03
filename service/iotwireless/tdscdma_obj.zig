@@ -4,7 +4,7 @@ const TdscdmaNmrObj = @import("tdscdma_nmr_obj.zig").TdscdmaNmrObj;
 /// TD-SCDMA object.
 pub const TdscdmaObj = struct {
     /// Location Area Code.
-    lac: ?i32,
+    lac: ?i32 = null,
 
     /// Mobile Country Code.
     mcc: i32,
@@ -14,21 +14,21 @@ pub const TdscdmaObj = struct {
 
     /// Path loss, or path attenuation, is the reduction in power density of an
     /// electromagnetic wave as it propagates through space.
-    path_loss: ?i32,
+    path_loss: ?i32 = null,
 
     /// Signal power of the received signal (Received Signal Code Power), measured
     /// in
     /// decibel-milliwatts (dBm).
-    rscp: ?i32,
+    rscp: ?i32 = null,
 
     /// TD-SCDMA local identification (local ID) information.
-    tdscdma_local_id: ?TdscdmaLocalId,
+    tdscdma_local_id: ?TdscdmaLocalId = null,
 
     /// TD-SCDMA object for network measurement reports.
-    tdscdma_nmr: ?[]const TdscdmaNmrObj,
+    tdscdma_nmr: ?[]const TdscdmaNmrObj = null,
 
     /// TD-SCDMA Timing advance.
-    tdscdma_timing_advance: ?i32,
+    tdscdma_timing_advance: ?i32 = null,
 
     /// UTRAN (UMTS Terrestrial Radio Access Network) Cell Global Identifier.
     utran_cid: i32,

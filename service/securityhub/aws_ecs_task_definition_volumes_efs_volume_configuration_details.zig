@@ -4,22 +4,22 @@ const AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetail
 /// for task storage.
 pub const AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails = struct {
     /// The authorization configuration details for the Amazon EFS file system.
-    authorization_config: ?AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails,
+    authorization_config: ?AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails = null,
 
     /// The Amazon EFS file system identifier to use.
-    filesystem_id: ?[]const u8,
+    filesystem_id: ?[]const u8 = null,
 
     /// The directory within the Amazon EFS file system to mount as the root
     /// directory inside the host.
-    root_directory: ?[]const u8,
+    root_directory: ?[]const u8 = null,
 
     /// Whether to enable encryption for Amazon EFS data in transit between the
     /// Amazon ECS host and the Amazon EFS server.
-    transit_encryption: ?[]const u8,
+    transit_encryption: ?[]const u8 = null,
 
     /// The port to use when sending encrypted data between the Amazon ECS host and
     /// the Amazon EFS server.
-    transit_encryption_port: ?i32,
+    transit_encryption_port: ?i32 = null,
 
     pub const json_field_names = .{
         .authorization_config = "AuthorizationConfig",

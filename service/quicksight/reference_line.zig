@@ -9,17 +9,17 @@ pub const ReferenceLine = struct {
     data_configuration: ReferenceLineDataConfiguration,
 
     /// The label configuration of the reference line.
-    label_configuration: ?ReferenceLineLabelConfiguration,
+    label_configuration: ?ReferenceLineLabelConfiguration = null,
 
     /// The status of the reference line. Choose one of the following options:
     ///
     /// * `ENABLE`
     ///
     /// * `DISABLE`
-    status: ?WidgetStatus,
+    status: ?WidgetStatus = null,
 
     /// The style configuration of the reference line.
-    style_configuration: ?ReferenceLineStyleConfiguration,
+    style_configuration: ?ReferenceLineStyleConfiguration = null,
 
     pub const json_field_names = .{
         .data_configuration = "DataConfiguration",

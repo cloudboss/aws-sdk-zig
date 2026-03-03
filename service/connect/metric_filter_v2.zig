@@ -22,7 +22,7 @@ pub const MetricFilterV2 = struct {
     /// * FLOWS_RESOURCE_TYPE
     ///
     /// * INITIATION_METHOD
-    metric_filter_key: ?[]const u8,
+    metric_filter_key: ?[]const u8 = null,
 
     /// The values to use for filtering data. Values for metric-level filters can be
     /// either a fixed set of values or a
@@ -49,7 +49,7 @@ pub const MetricFilterV2 = struct {
     /// [Bot
     /// intents
     /// completed](https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed-metric) metric in the *Amazon Connect Administrator Guide*.
-    metric_filter_values: ?[]const []const u8,
+    metric_filter_values: ?[]const []const u8 = null,
 
     /// If set to `true`, the API response contains results that filter out the
     /// results matched by the

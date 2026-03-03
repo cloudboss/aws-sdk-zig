@@ -16,7 +16,7 @@ pub const WindowsFsrmConfiguration = struct {
     /// partition,
     /// Amazon Web Services Region, and Amazon Web Services account as your Amazon
     /// FSx file system.
-    event_log_destination: ?[]const u8,
+    event_log_destination: ?[]const u8 = null,
 
     /// Specifies whether FSRM is enabled or disabled on the file system. When
     /// `TRUE`, the FSRM service is enabled and monitor file operations according to

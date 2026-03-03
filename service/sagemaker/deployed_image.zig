@@ -12,13 +12,13 @@
 pub const DeployedImage = struct {
     /// The date and time when the image path for the model resolved to the
     /// `ResolvedImage`
-    resolution_time: ?i64,
+    resolution_time: ?i64 = null,
 
     /// The specific digest path of the image hosted in this `ProductionVariant`.
-    resolved_image: ?[]const u8,
+    resolved_image: ?[]const u8 = null,
 
     /// The image path you specified when you created the model.
-    specified_image: ?[]const u8,
+    specified_image: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resolution_time = "ResolutionTime",

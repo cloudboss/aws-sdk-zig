@@ -13,24 +13,24 @@ pub const SourceTableFeatureDetails = struct {
     /// the IndexName, KeySchema, Projection, and ProvisionedThroughput for the GSIs
     /// on the
     /// table at the time of backup.
-    global_secondary_indexes: ?[]const GlobalSecondaryIndexInfo,
+    global_secondary_indexes: ?[]const GlobalSecondaryIndexInfo = null,
 
     /// Represents the LSI properties for the table when the backup was created. It
     /// includes
     /// the IndexName, KeySchema and Projection for the LSIs on the table at the
     /// time of backup.
-    local_secondary_indexes: ?[]const LocalSecondaryIndexInfo,
+    local_secondary_indexes: ?[]const LocalSecondaryIndexInfo = null,
 
     /// The description of the server-side encryption status on the table when the
     /// backup was
     /// created.
-    sse_description: ?SSEDescription,
+    sse_description: ?SSEDescription = null,
 
     /// Stream settings on the table when the backup was created.
-    stream_description: ?StreamSpecification,
+    stream_description: ?StreamSpecification = null,
 
     /// Time to Live settings on the table when the backup was created.
-    time_to_live_description: ?TimeToLiveDescription,
+    time_to_live_description: ?TimeToLiveDescription = null,
 
     pub const json_field_names = .{
         .global_secondary_indexes = "GlobalSecondaryIndexes",

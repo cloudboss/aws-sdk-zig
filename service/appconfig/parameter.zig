@@ -6,7 +6,7 @@
 /// workflows](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html) in the *AppConfig User Guide*.
 pub const Parameter = struct {
     /// Information about the parameter.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether this parameter's value can be supplied at the extension's
     /// action point

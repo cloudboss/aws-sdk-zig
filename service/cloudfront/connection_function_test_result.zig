@@ -3,17 +3,17 @@ const ConnectionFunctionSummary = @import("connection_function_summary.zig").Con
 /// A connection function test result.
 pub const ConnectionFunctionTestResult = struct {
     /// The connection function compute utilization.
-    compute_utilization: ?[]const u8,
+    compute_utilization: ?[]const u8 = null,
 
     /// The connection function error message.
-    connection_function_error_message: ?[]const u8,
+    connection_function_error_message: ?[]const u8 = null,
 
     /// The connection function execution logs.
-    connection_function_execution_logs: ?[]const []const u8,
+    connection_function_execution_logs: ?[]const []const u8 = null,
 
     /// The connection function output.
-    connection_function_output: ?[]const u8,
+    connection_function_output: ?[]const u8 = null,
 
     /// The connection function summary.
-    connection_function_summary: ?ConnectionFunctionSummary,
+    connection_function_summary: ?ConnectionFunctionSummary = null,
 };

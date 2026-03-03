@@ -5,13 +5,13 @@ const AccessMethodType = @import("access_method_type.zig").AccessMethodType;
 /// both results in `InvalidArgsException`.
 pub const AccessMethod = struct {
     /// Specifies the `AccessMethod`.
-    access_method_type: ?AccessMethodType,
+    access_method_type: ?AccessMethodType = null,
 
     /// An object identifier (OID) specifying the `AccessMethod`. The OID must
     /// satisfy the regular expression shown below. For more information, see NIST's
     /// definition of [Object Identifier
     /// (OID)](https://csrc.nist.gov/glossary/term/Object_Identifier).
-    custom_object_identifier: ?[]const u8,
+    custom_object_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_method_type = "AccessMethodType",

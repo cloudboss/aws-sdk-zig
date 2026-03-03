@@ -10,10 +10,10 @@ const FeaturedResultsSetStatus = @import("featured_results_set_status.zig").Feat
 /// search results.
 pub const FeaturedResultsSet = struct {
     /// The Unix timestamp when the set of featured results was created.
-    creation_timestamp: ?i64,
+    creation_timestamp: ?i64 = null,
 
     /// The description for the set of featured results.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The list of document IDs for the documents you want to feature at the
     /// top of the search results page. You can use the
@@ -32,16 +32,16 @@ pub const FeaturedResultsSet = struct {
     /// kendra semantically rank results?' will not render the featured results.
     /// Featured results are designed for specific queries, rather than queries
     /// that are too broad in scope.
-    featured_documents: ?[]const FeaturedDocument,
+    featured_documents: ?[]const FeaturedDocument = null,
 
     /// The identifier of the set of featured results.
-    featured_results_set_id: ?[]const u8,
+    featured_results_set_id: ?[]const u8 = null,
 
     /// The name for the set of featured results.
-    featured_results_set_name: ?[]const u8,
+    featured_results_set_name: ?[]const u8 = null,
 
     /// The Unix timestamp when the set of featured results was last updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     /// The list of queries for featuring results.
     ///
@@ -52,7 +52,7 @@ pub const FeaturedResultsSet = struct {
     /// such as 'How does kendra semantically rank results?' will not render the
     /// featured results. Featured results are designed for specific queries,
     /// rather than queries that are too broad in scope.
-    query_texts: ?[]const []const u8,
+    query_texts: ?[]const []const u8 = null,
 
     /// The current status of the set of featured results. When the value is
     /// `ACTIVE`, featured results are ready for use. You can still
@@ -62,7 +62,7 @@ pub const FeaturedResultsSet = struct {
     /// [UpdateFeaturedResultsSet](https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html) API. The queries you specify for
     /// featured results must be unique per featured results set for each index,
     /// whether the status is `ACTIVE` or `INACTIVE`.
-    status: ?FeaturedResultsSetStatus,
+    status: ?FeaturedResultsSetStatus = null,
 
     pub const json_field_names = .{
         .creation_timestamp = "CreationTimestamp",

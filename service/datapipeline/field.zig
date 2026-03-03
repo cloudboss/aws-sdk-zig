@@ -6,10 +6,10 @@ pub const Field = struct {
     key: []const u8,
 
     /// The field value, expressed as the identifier of another object.
-    ref_value: ?[]const u8,
+    ref_value: ?[]const u8 = null,
 
     /// The field value, expressed as a String.
-    string_value: ?[]const u8,
+    string_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "key",

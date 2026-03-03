@@ -10,14 +10,14 @@ pub const ManagedDataIdentifierSummary = struct {
     /// as credit card numbers; or, PERSONAL_INFORMATION, for personal health
     /// information, such as health insurance identification numbers, or personally
     /// identifiable information, such as passport numbers.
-    category: ?SensitiveDataItemCategory,
+    category: ?SensitiveDataItemCategory = null,
 
     /// The unique identifier for the managed data identifier. This is a string that
     /// describes the type of sensitive data that the managed data identifier
     /// detects. For example: OPENSSH_PRIVATE_KEY for OpenSSH private keys,
     /// CREDIT_CARD_NUMBER for credit card numbers, or USA_PASSPORT_NUMBER for US
     /// passport numbers.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .category = "category",

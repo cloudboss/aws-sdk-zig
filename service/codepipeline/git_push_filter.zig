@@ -10,15 +10,15 @@ const GitTagFilterCriteria = @import("git_tag_filter_criteria.zig").GitTagFilter
 pub const GitPushFilter = struct {
     /// The field that specifies to filter on branches for the push trigger
     /// configuration.
-    branches: ?GitBranchFilterCriteria,
+    branches: ?GitBranchFilterCriteria = null,
 
     /// The field that specifies to filter on file paths for the push trigger
     /// configuration.
-    file_paths: ?GitFilePathFilterCriteria,
+    file_paths: ?GitFilePathFilterCriteria = null,
 
     /// The field that contains the details for the Git tags trigger
     /// configuration.
-    tags: ?GitTagFilterCriteria,
+    tags: ?GitTagFilterCriteria = null,
 
     pub const json_field_names = .{
         .branches = "branches",

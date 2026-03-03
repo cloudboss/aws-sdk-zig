@@ -5,7 +5,7 @@ const NetworkFirewallStatefulRuleGroupOverride = @import("network_firewall_state
 pub const StatefulRuleGroup = struct {
     /// The action that allows the policy owner to override the behavior of the rule
     /// group within a policy.
-    override: ?NetworkFirewallStatefulRuleGroupOverride,
+    override: ?NetworkFirewallStatefulRuleGroupOverride = null,
 
     /// An integer setting that indicates the order in which to run the stateful
     /// rule groups in a single
@@ -22,13 +22,13 @@ pub const StatefulRuleGroup = struct {
     /// make it easier to insert rule
     /// groups later, number them so there's a wide range in between, for example
     /// use 100, 200, and so on.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The resource ID of the rule group.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The name of the rule group.
-    rule_group_name: ?[]const u8,
+    rule_group_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .override = "Override",

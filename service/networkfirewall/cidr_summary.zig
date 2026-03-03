@@ -8,13 +8,13 @@ const IPSetMetadata = @import("ip_set_metadata.zig").IPSetMetadata;
 pub const CIDRSummary = struct {
     /// The number of CIDR blocks available for use by the IP set references in a
     /// firewall.
-    available_cidr_count: ?i32,
+    available_cidr_count: ?i32 = null,
 
     /// The list of the IP set references used by a firewall.
-    ip_set_references: ?[]const aws.map.MapEntry(IPSetMetadata),
+    ip_set_references: ?[]const aws.map.MapEntry(IPSetMetadata) = null,
 
     /// The number of CIDR blocks used by the IP set references in a firewall.
-    utilized_cidr_count: ?i32,
+    utilized_cidr_count: ?i32 = null,
 
     pub const json_field_names = .{
         .available_cidr_count = "AvailableCIDRCount",

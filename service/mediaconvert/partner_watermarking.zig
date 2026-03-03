@@ -7,7 +7,7 @@ pub const PartnerWatermarking = struct {
     /// For forensic video watermarking, MediaConvert supports Nagra NexGuard File
     /// Marker watermarking. MediaConvert supports both PreRelease Content (NGPR/G2)
     /// and OTT Streaming workflows.
-    nexguard_file_marker_settings: ?NexGuardFileMarkerSettings,
+    nexguard_file_marker_settings: ?NexGuardFileMarkerSettings = null,
 
     pub const json_field_names = .{
         .nexguard_file_marker_settings = "NexguardFileMarkerSettings",

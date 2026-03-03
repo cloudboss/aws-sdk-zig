@@ -3,13 +3,13 @@ const BatchUpdateBillScenarioUsageModificationErrorCode = @import("batch_update_
 /// Represents an error that occurred when updating usage in a Bill Scenario.
 pub const BatchUpdateBillScenarioUsageModificationError = struct {
     /// The code associated with the error.
-    error_code: ?BatchUpdateBillScenarioUsageModificationErrorCode,
+    error_code: ?BatchUpdateBillScenarioUsageModificationErrorCode = null,
 
     /// The message that describes the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The ID of the error.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

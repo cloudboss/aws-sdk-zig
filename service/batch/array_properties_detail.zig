@@ -5,19 +5,19 @@ pub const ArrayPropertiesDetail = struct {
     /// The job index within the array that's associated with this job. This
     /// parameter is returned
     /// for array job children.
-    index: ?i32,
+    index: ?i32 = null,
 
     /// The size of the array job. This parameter is returned for parent array jobs.
-    size: ?i32,
+    size: ?i32 = null,
 
     /// A summary of the number of array job children in each available job status.
     /// This parameter
     /// is returned for parent array jobs.
-    status_summary: ?[]const aws.map.MapEntry(i32),
+    status_summary: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The Unix timestamp (in milliseconds) for when the `statusSummary` was last
     /// updated.
-    status_summary_last_updated_at: ?i64,
+    status_summary_last_updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .index = "index",

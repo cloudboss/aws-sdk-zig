@@ -68,7 +68,7 @@ pub const ScalingPlanResource = struct {
     scaling_plan_version: i64,
 
     /// The scaling policies.
-    scaling_policies: ?[]const ScalingPolicy,
+    scaling_policies: ?[]const ScalingPolicy = null,
 
     /// The scaling status of the resource.
     ///
@@ -86,7 +86,7 @@ pub const ScalingPlanResource = struct {
     scaling_status_code: ScalingStatusCode,
 
     /// A simple message about the current scaling status of the resource.
-    scaling_status_message: ?[]const u8,
+    scaling_status_message: ?[]const u8 = null,
 
     /// The namespace of the AWS service.
     service_namespace: ServiceNamespace,

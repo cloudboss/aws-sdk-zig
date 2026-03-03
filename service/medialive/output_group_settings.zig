@@ -11,25 +11,25 @@ const UdpGroupSettings = @import("udp_group_settings.zig").UdpGroupSettings;
 
 /// Output Group Settings
 pub const OutputGroupSettings = struct {
-    archive_group_settings: ?ArchiveGroupSettings,
+    archive_group_settings: ?ArchiveGroupSettings = null,
 
-    cmaf_ingest_group_settings: ?CmafIngestGroupSettings,
+    cmaf_ingest_group_settings: ?CmafIngestGroupSettings = null,
 
-    frame_capture_group_settings: ?FrameCaptureGroupSettings,
+    frame_capture_group_settings: ?FrameCaptureGroupSettings = null,
 
-    hls_group_settings: ?HlsGroupSettings,
+    hls_group_settings: ?HlsGroupSettings = null,
 
-    media_package_group_settings: ?MediaPackageGroupSettings,
+    media_package_group_settings: ?MediaPackageGroupSettings = null,
 
-    ms_smooth_group_settings: ?MsSmoothGroupSettings,
+    ms_smooth_group_settings: ?MsSmoothGroupSettings = null,
 
-    multiplex_group_settings: ?MultiplexGroupSettings,
+    multiplex_group_settings: ?MultiplexGroupSettings = null,
 
-    rtmp_group_settings: ?RtmpGroupSettings,
+    rtmp_group_settings: ?RtmpGroupSettings = null,
 
-    srt_group_settings: ?SrtGroupSettings,
+    srt_group_settings: ?SrtGroupSettings = null,
 
-    udp_group_settings: ?UdpGroupSettings,
+    udp_group_settings: ?UdpGroupSettings = null,
 
     pub const json_field_names = .{
         .archive_group_settings = "ArchiveGroupSettings",

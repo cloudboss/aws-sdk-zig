@@ -6,23 +6,23 @@ const InstanceEventWindowTimeRange = @import("instance_event_window_time_range.z
 /// The event window.
 pub const InstanceEventWindow = struct {
     /// One or more targets associated with the event window.
-    association_target: ?InstanceEventWindowAssociationTarget,
+    association_target: ?InstanceEventWindowAssociationTarget = null,
 
     /// The cron expression defined for the event window.
-    cron_expression: ?[]const u8,
+    cron_expression: ?[]const u8 = null,
 
     /// The ID of the event window.
-    instance_event_window_id: ?[]const u8,
+    instance_event_window_id: ?[]const u8 = null,
 
     /// The name of the event window.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current state of the event window.
-    state: ?InstanceEventWindowState,
+    state: ?InstanceEventWindowState = null,
 
     /// The instance tags associated with the event window.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// One or more time ranges defined for the event window.
-    time_ranges: ?[]const InstanceEventWindowTimeRange,
+    time_ranges: ?[]const InstanceEventWindowTimeRange = null,
 };

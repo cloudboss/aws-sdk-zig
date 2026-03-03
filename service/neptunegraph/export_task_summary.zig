@@ -17,7 +17,7 @@ pub const ExportTaskSummary = struct {
     kms_key_identifier: []const u8,
 
     /// The parquet type of the export task.
-    parquet_type: ?ParquetType,
+    parquet_type: ?ParquetType = null,
 
     /// The ARN of the IAM role that will allow the data to be exported to the
     /// destination.
@@ -27,7 +27,7 @@ pub const ExportTaskSummary = struct {
     status: ExportTaskStatus,
 
     /// The reason that the export task has this status value.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The unique identifier of the export task.
     task_id: []const u8,

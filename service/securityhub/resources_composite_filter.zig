@@ -8,10 +8,10 @@ const ResourcesStringFilter = @import("resources_string_filter.zig").ResourcesSt
 /// Security Hub.
 pub const ResourcesCompositeFilter = struct {
     /// Enables filtering based on date and timestamp field values.
-    date_filters: ?[]const ResourcesDateFilter,
+    date_filters: ?[]const ResourcesDateFilter = null,
 
     /// Enables filtering based on map-based field values.
-    map_filters: ?[]const ResourcesMapFilter,
+    map_filters: ?[]const ResourcesMapFilter = null,
 
     /// Provides an additional level of filtering, creating a three-layer nested
     /// structure.
@@ -21,16 +21,16 @@ pub const ResourcesCompositeFilter = struct {
     /// and `NestedCompositeFilters`.
     /// The third layer is `NestedCompositeFilters`, which contains additional
     /// filter conditions.
-    nested_composite_filters: ?[]const ResourcesCompositeFilter,
+    nested_composite_filters: ?[]const ResourcesCompositeFilter = null,
 
     /// Enables filtering based on numerical field values.
-    number_filters: ?[]const ResourcesNumberFilter,
+    number_filters: ?[]const ResourcesNumberFilter = null,
 
     /// The logical operator used to combine multiple filter conditions.
-    operator: ?AllowedOperators,
+    operator: ?AllowedOperators = null,
 
     /// Enables filtering based on string field values.
-    string_filters: ?[]const ResourcesStringFilter,
+    string_filters: ?[]const ResourcesStringFilter = null,
 
     pub const json_field_names = .{
         .date_filters = "DateFilters",

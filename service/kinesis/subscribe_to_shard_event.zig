@@ -7,7 +7,7 @@ pub const SubscribeToShardEvent = struct {
     /// The list of the child shards of the current shard, returned only at the end
     /// of the
     /// current shard.
-    child_shards: ?[]const ChildShard,
+    child_shards: ?[]const ChildShard = null,
 
     /// Use this as `SequenceNumber` in the next call to SubscribeToShard, with
     /// `StartingPosition` set to

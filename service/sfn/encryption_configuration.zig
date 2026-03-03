@@ -21,12 +21,12 @@ pub const EncryptionConfiguration = struct {
     /// Maximum duration that Step Functions will reuse data keys. When the period
     /// expires, Step Functions will call `GenerateDataKey`. Only applies to
     /// customer managed keys.
-    kms_data_key_reuse_period_seconds: ?i32,
+    kms_data_key_reuse_period_seconds: ?i32 = null,
 
     /// An alias, alias ARN, key ID, or key ARN of a symmetric encryption KMS key to
     /// encrypt data. To specify a KMS key in a different Amazon Web Services
     /// account, you must use the key ARN or alias ARN.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Encryption type
     @"type": EncryptionType,

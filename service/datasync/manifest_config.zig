@@ -8,12 +8,12 @@ const SourceManifestConfig = @import("source_manifest_config.zig").SourceManifes
 /// manifest](https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html).
 pub const ManifestConfig = struct {
     /// Specifies what DataSync uses the manifest for.
-    action: ?ManifestAction,
+    action: ?ManifestAction = null,
 
     /// Specifies the file format of your manifest. For more information, see
     /// [Creating a
     /// manifest](https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html#transferring-with-manifest-create).
-    format: ?ManifestFormat,
+    format: ?ManifestFormat = null,
 
     /// Specifies the manifest that you want DataSync to use and where it's
     /// hosted.
@@ -27,7 +27,7 @@ pub const ManifestConfig = struct {
     /// S3 bucket where you're hosting your manifest. For more information, see
     /// [Providing DataSync access to your
     /// manifest](https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html#transferring-with-manifest-access).
-    source: ?SourceManifestConfig,
+    source: ?SourceManifestConfig = null,
 
     pub const json_field_names = .{
         .action = "Action",

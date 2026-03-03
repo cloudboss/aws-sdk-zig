@@ -4,7 +4,7 @@ pub const NetworkEthereumAttributes = struct {
     /// as follows:
     ///
     /// * mainnet = `1`
-    chain_id: ?[]const u8,
+    chain_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .chain_id = "ChainId",

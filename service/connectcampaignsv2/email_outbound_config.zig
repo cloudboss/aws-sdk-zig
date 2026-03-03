@@ -2,7 +2,7 @@
 pub const EmailOutboundConfig = struct {
     connect_source_email_address: []const u8,
 
-    source_email_address_display_name: ?[]const u8,
+    source_email_address_display_name: ?[]const u8 = null,
 
     wisdom_template_arn: []const u8,
 

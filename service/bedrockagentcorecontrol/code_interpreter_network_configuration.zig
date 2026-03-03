@@ -8,7 +8,7 @@ pub const CodeInterpreterNetworkConfiguration = struct {
     /// interpreter connects to the network.
     network_mode: CodeInterpreterNetworkMode = "SANDBOX",
 
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .network_mode = "networkMode",

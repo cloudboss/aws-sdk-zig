@@ -5,7 +5,7 @@ pub const AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute = struct {
     /// `restore` refers to the list of
     /// Amazon Web Services accounts that have permission to copy or restore the
     /// manual DB cluster snapshot.
-    attribute_name: ?[]const u8,
+    attribute_name: ?[]const u8 = null,
 
     /// The value(s) for the manual DB cluster snapshot attribute. If the
     /// `AttributeName` field is set to
@@ -15,7 +15,7 @@ pub const AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute = struct {
     /// the list, then the manual
     /// DB cluster snapshot is public and available for any Amazon Web Services
     /// account to copy or restore.
-    attribute_values: ?[]const []const u8,
+    attribute_values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .attribute_name = "AttributeName",

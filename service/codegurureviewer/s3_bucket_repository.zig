@@ -9,7 +9,7 @@ pub const S3BucketRepository = struct {
     /// An `S3RepositoryDetails` object that specifies the name of an S3 bucket and
     /// a `CodeArtifacts` object. The `CodeArtifacts` object includes the S3 object
     /// keys for a source code .zip file and for a build artifacts .zip file.
-    details: ?S3RepositoryDetails,
+    details: ?S3RepositoryDetails = null,
 
     /// The name of the repository when the `ProviderType` is
     /// `S3Bucket`.

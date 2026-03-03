@@ -4,7 +4,7 @@ const ObjectReference = @import("object_reference.zig").ObjectReference;
 pub const BatchDetachObject = struct {
     /// The batch reference name. See [Transaction
     /// Support](https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html) for more information.
-    batch_reference_name: ?[]const u8,
+    batch_reference_name: ?[]const u8 = null,
 
     /// The name of the link.
     link_name: []const u8,

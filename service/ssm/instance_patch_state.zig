@@ -14,7 +14,7 @@ pub const InstancePatchState = struct {
     /// have been released before the specified auto-approval period was over.
     ///
     /// Applies to Windows Server managed nodes only.
-    available_security_update_count: ?i32,
+    available_security_update_count: ?i32 = null,
 
     /// The ID of the patch baseline used to patch the managed node.
     baseline_id: []const u8,
@@ -26,7 +26,7 @@ pub const InstancePatchState = struct {
     /// installation, were rejected, or were installed but awaiting a required
     /// managed node reboot. The
     /// status of these managed nodes is `NON_COMPLIANT`.
-    critical_non_compliant_count: ?i32,
+    critical_non_compliant_count: ?i32 = null,
 
     /// The number of patches from the patch baseline that were attempted to be
     /// installed during the
@@ -45,7 +45,7 @@ pub const InstancePatchState = struct {
     /// The number of patches installed by Patch Manager since the last time the
     /// managed node was
     /// rebooted.
-    installed_pending_reboot_count: ?i32,
+    installed_pending_reboot_count: ?i32 = null,
 
     /// The number of patches installed on a managed node that are specified in a
     /// `RejectedPatches` list. Patches with a status of `InstalledRejected` were
@@ -54,7 +54,7 @@ pub const InstancePatchState = struct {
     /// If `ALLOW_AS_DEPENDENCY` is the specified option for
     /// `RejectedPatchesAction`, the value of `InstalledRejectedCount` will
     /// always be `0` (zero).
-    installed_rejected_count: ?i32,
+    installed_rejected_count: ?i32 = null,
 
     /// An https URL or an Amazon Simple Storage Service (Amazon S3) path-style URL
     /// to a list of
@@ -69,7 +69,7 @@ pub const InstancePatchState = struct {
     /// document for patching: `AWS-RunPatchBaseline`
     /// ](https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-about-aws-runpatchbaseline.html) in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    install_override_list: ?[]const u8,
+    install_override_list: ?[]const u8 = null,
 
     /// The ID of the managed node the high-level patch compliance information was
     /// collected
@@ -79,7 +79,7 @@ pub const InstancePatchState = struct {
     /// The time of the last attempt to patch the managed node with `NoReboot`
     /// specified
     /// as the reboot option.
-    last_no_reboot_install_operation_time: ?i64,
+    last_no_reboot_install_operation_time: ?i64 = null,
 
     /// The number of patches from the patch baseline that are applicable for the
     /// managed node but
@@ -112,12 +112,12 @@ pub const InstancePatchState = struct {
     /// `Security` but aren't compliant with the patch baseline. The status of these
     /// managed
     /// nodes is `NON_COMPLIANT`.
-    other_non_compliant_count: ?i32,
+    other_non_compliant_count: ?i32 = null,
 
     /// Placeholder information. This field will always be empty in the current
     /// release of the
     /// service.
-    owner_information: ?[]const u8,
+    owner_information: ?[]const u8 = null,
 
     /// The name of the patch group the managed node belongs to.
     patch_group: []const u8,
@@ -139,7 +139,7 @@ pub const InstancePatchState = struct {
     /// `InstalledPendingReboot`. These patches might not be in effect until a
     /// reboot is
     /// performed.
-    reboot_option: ?RebootOption,
+    reboot_option: ?RebootOption = null,
 
     /// The number of patches per node that are specified as `Security` in a patch
     /// advisory aren't installed. These patches might be missing, have failed
@@ -147,18 +147,18 @@ pub const InstancePatchState = struct {
     /// rejected, or were installed but awaiting a required managed node reboot. The
     /// status of these
     /// managed nodes is `NON_COMPLIANT`.
-    security_non_compliant_count: ?i32,
+    security_non_compliant_count: ?i32 = null,
 
     /// The ID of the patch baseline snapshot used during the patching operation
     /// when this
     /// compliance data was collected.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
     /// The number of patches beyond the supported limit of `NotApplicableCount`
     /// that
     /// aren't reported by name to Inventory. Inventory is a tool in Amazon Web
     /// Services Systems Manager.
-    unreported_not_applicable_count: ?i32,
+    unreported_not_applicable_count: ?i32 = null,
 
     pub const json_field_names = .{
         .available_security_update_count = "AvailableSecurityUpdateCount",

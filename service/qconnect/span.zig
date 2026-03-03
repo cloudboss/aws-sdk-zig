@@ -15,7 +15,7 @@ pub const Span = struct {
     end_timestamp: i64,
 
     /// Parent span identifier for hierarchy. Null for root spans.
-    parent_span_id: ?[]const u8,
+    parent_span_id: ?[]const u8 = null,
 
     /// The service request ID that initiated the operation
     request_id: []const u8,

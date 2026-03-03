@@ -14,10 +14,10 @@ pub const AutoScalingDescription = struct {
     min_worker_count: i32 = 0,
 
     /// The sacle-in policy for the connector.
-    scale_in_policy: ?ScaleInPolicyDescription,
+    scale_in_policy: ?ScaleInPolicyDescription = null,
 
     /// The sacle-out policy for the connector.>
-    scale_out_policy: ?ScaleOutPolicyDescription,
+    scale_out_policy: ?ScaleOutPolicyDescription = null,
 
     pub const json_field_names = .{
         .max_worker_count = "maxWorkerCount",

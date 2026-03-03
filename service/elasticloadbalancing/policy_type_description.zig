@@ -3,12 +3,12 @@ const PolicyAttributeTypeDescription = @import("policy_attribute_type_descriptio
 /// Information about a policy type.
 pub const PolicyTypeDescription = struct {
     /// A description of the policy type.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The description of the policy attributes associated with the policies
     /// defined by Elastic Load Balancing.
-    policy_attribute_type_descriptions: ?[]const PolicyAttributeTypeDescription,
+    policy_attribute_type_descriptions: ?[]const PolicyAttributeTypeDescription = null,
 
     /// The name of the policy type.
-    policy_type_name: ?[]const u8,
+    policy_type_name: ?[]const u8 = null,
 };

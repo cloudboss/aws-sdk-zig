@@ -4,10 +4,10 @@ const AnalyticsSessionField = @import("analytics_session_field.zig").AnalyticsSe
 /// member of that category.
 pub const AnalyticsSessionGroupByKey = struct {
     /// The category by which the session analytics were grouped.
-    name: ?AnalyticsSessionField,
+    name: ?AnalyticsSessionField = null,
 
     /// A member of the category by which the session analytics were grouped.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

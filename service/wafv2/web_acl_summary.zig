@@ -4,15 +4,15 @@
 /// like AssociateWebACL.
 pub const WebACLSummary = struct {
     /// The Amazon Resource Name (ARN) of the entity.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A description of the web ACL that helps with identification.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier for the web ACL. This ID is returned in the responses
     /// to create and list commands. You provide it to operations like update and
     /// delete.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A token used for optimistic locking. WAF returns a token to your `get` and
     /// `list` requests, to mark the state of the entity at the time of the request.
@@ -22,11 +22,11 @@ pub const WebACLSummary = struct {
     /// a change has been made, the update fails with a
     /// `WAFOptimisticLockException`. If this happens, perform another `get`, and
     /// use the new token returned by that operation.
-    lock_token: ?[]const u8,
+    lock_token: ?[]const u8 = null,
 
     /// The name of the web ACL. You cannot change the name of a web ACL after you
     /// create it.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "ARN",

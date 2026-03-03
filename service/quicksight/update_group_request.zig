@@ -5,7 +5,7 @@ pub const UpdateGroupRequest = struct {
     aws_account_id: []const u8,
 
     /// The description for the group that you want to update.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the group that you want to update.
     group_name: []const u8,

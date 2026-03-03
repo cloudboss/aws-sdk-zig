@@ -8,13 +8,13 @@ const OpsCenterIntegrationConfig = @import("ops_center_integration_config.zig").
 pub const UpdateServiceIntegrationConfig = struct {
     /// Information about whether DevOps Guru is configured to encrypt server-side
     /// data using KMS.
-    kms_server_side_encryption: ?KMSServerSideEncryptionIntegrationConfig,
+    kms_server_side_encryption: ?KMSServerSideEncryptionIntegrationConfig = null,
 
     /// Information about whether DevOps Guru is configured to perform log anomaly
     /// detection on Amazon CloudWatch log groups.
-    logs_anomaly_detection: ?LogsAnomalyDetectionIntegrationConfig,
+    logs_anomaly_detection: ?LogsAnomalyDetectionIntegrationConfig = null,
 
-    ops_center: ?OpsCenterIntegrationConfig,
+    ops_center: ?OpsCenterIntegrationConfig = null,
 
     pub const json_field_names = .{
         .kms_server_side_encryption = "KMSServerSideEncryption",

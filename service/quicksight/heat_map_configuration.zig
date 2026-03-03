@@ -11,37 +11,37 @@ const TooltipOptions = @import("tooltip_options.zig").TooltipOptions;
 /// The configuration of a heat map.
 pub const HeatMapConfiguration = struct {
     /// The color options (gradient color, point of divergence) in a heat map.
-    color_scale: ?ColorScale,
+    color_scale: ?ColorScale = null,
 
     /// The options that determine the presentation of the row axis label.
-    column_axis_display_options: ?AxisDisplayOptions,
+    column_axis_display_options: ?AxisDisplayOptions = null,
 
     /// The label options of the column that is displayed in a heat map.
-    column_label_options: ?ChartAxisLabelOptions,
+    column_label_options: ?ChartAxisLabelOptions = null,
 
     /// The options that determine if visual data labels are displayed.
-    data_labels: ?DataLabelOptions,
+    data_labels: ?DataLabelOptions = null,
 
     /// The field wells of the visual.
-    field_wells: ?HeatMapFieldWells,
+    field_wells: ?HeatMapFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The legend display setup of the visual.
-    legend: ?LegendOptions,
+    legend: ?LegendOptions = null,
 
     /// The options that determine the presentation of the row axis label.
-    row_axis_display_options: ?AxisDisplayOptions,
+    row_axis_display_options: ?AxisDisplayOptions = null,
 
     /// The label options of the row that is displayed in a `heat map`.
-    row_label_options: ?ChartAxisLabelOptions,
+    row_label_options: ?ChartAxisLabelOptions = null,
 
     /// The sort configuration of a heat map.
-    sort_configuration: ?HeatMapSortConfiguration,
+    sort_configuration: ?HeatMapSortConfiguration = null,
 
     /// The tooltip display setup of the visual.
-    tooltip: ?TooltipOptions,
+    tooltip: ?TooltipOptions = null,
 
     pub const json_field_names = .{
         .color_scale = "ColorScale",

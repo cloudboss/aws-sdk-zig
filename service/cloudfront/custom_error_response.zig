@@ -15,7 +15,7 @@ pub const CustomErrorResponse = struct {
     ///
     /// For more information, see [Customizing Error
     /// Responses](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html) in the *Amazon CloudFront Developer Guide*.
-    error_caching_min_ttl: ?i64,
+    error_caching_min_ttl: ?i64 = null,
 
     /// The HTTP status code for which you want to specify a custom error page
     /// and/or a caching duration.
@@ -38,7 +38,7 @@ pub const CustomErrorResponse = struct {
     ///
     /// If you specify a value for `ResponseCode`, you must also specify a value for
     /// `ResponsePagePath`.
-    response_code: ?[]const u8,
+    response_code: ?[]const u8 = null,
 
     /// The path to the custom error page that you want CloudFront to return to a
     /// viewer when your origin returns the HTTP status code specified by
@@ -62,5 +62,5 @@ pub const CustomErrorResponse = struct {
     /// you store custom error pages on an HTTP server and the server starts to
     /// return 5xx errors, CloudFront can't get the files that you want to return to
     /// viewers because the origin server is unavailable.
-    response_page_path: ?[]const u8,
+    response_page_path: ?[]const u8 = null,
 };

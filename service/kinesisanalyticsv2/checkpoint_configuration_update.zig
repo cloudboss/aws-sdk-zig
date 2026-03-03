@@ -9,7 +9,7 @@ pub const CheckpointConfigurationUpdate = struct {
     /// the application will use a `CheckpointingEnabled` value of `true`, even if
     /// this value is set to
     /// another value using this API or in application code.
-    checkpointing_enabled_update: ?bool,
+    checkpointing_enabled_update: ?bool = null,
 
     /// Describes updates to the interval in milliseconds between checkpoint
     /// operations.
@@ -18,7 +18,7 @@ pub const CheckpointConfigurationUpdate = struct {
     /// the application will use a `CheckpointInterval` value of 60000, even if this
     /// value is set to another value
     /// using this API or in application code.
-    checkpoint_interval_update: ?i64,
+    checkpoint_interval_update: ?i64 = null,
 
     /// Describes updates to whether the application uses the default checkpointing
     /// behavior of
@@ -37,7 +37,7 @@ pub const CheckpointConfigurationUpdate = struct {
     /// * **CheckpointInterval:** 60000
     ///
     /// * **MinPauseBetweenCheckpoints:** 5000
-    configuration_type_update: ?ConfigurationType,
+    configuration_type_update: ?ConfigurationType = null,
 
     /// Describes updates to the minimum time in milliseconds after a checkpoint
     /// operation completes that a new checkpoint operation
@@ -47,7 +47,7 @@ pub const CheckpointConfigurationUpdate = struct {
     /// the application will use a `MinPauseBetweenCheckpoints` value of 5000, even
     /// if this value is set using this API or
     /// in application code.
-    min_pause_between_checkpoints_update: ?i64,
+    min_pause_between_checkpoints_update: ?i64 = null,
 
     pub const json_field_names = .{
         .checkpointing_enabled_update = "CheckpointingEnabledUpdate",

@@ -6,12 +6,12 @@ pub const AcceleratorCountRequest = struct {
     /// The maximum number of accelerators. Instance types with more accelerators
     /// are excluded
     /// from selection.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// The minimum number of accelerators. Instance types with fewer accelerators
     /// are
     /// excluded from selection.
-    min: ?i32,
+    min: ?i32 = null,
 
     pub const json_field_names = .{
         .max = "max",

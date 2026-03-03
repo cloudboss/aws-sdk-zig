@@ -4,38 +4,38 @@ pub const KafkaStreamingSourceOptions = struct {
     /// additional column named "__src_timestamp" that indicates the time when the
     /// corresponding record received by the topic. The default value is 'false'.
     /// This option is supported in Glue version 4.0 or later.
-    add_record_timestamp: ?[]const u8,
+    add_record_timestamp: ?[]const u8 = null,
 
     /// The specific `TopicPartitions` to consume. You must specify at least one of
     /// `"topicName"`, `"assign"` or `"subscribePattern"`.
-    assign: ?[]const u8,
+    assign: ?[]const u8 = null,
 
     /// A list of bootstrap server URLs, for example, as
     /// `b-1.vpc-test-2.o4q88o.c6.kafka.us-east-1.amazonaws.com:9094`. This option
     /// must be specified in the API call or defined in the table metadata in the
     /// Data Catalog.
-    bootstrap_servers: ?[]const u8,
+    bootstrap_servers: ?[]const u8 = null,
 
     /// An optional classification.
-    classification: ?[]const u8,
+    classification: ?[]const u8 = null,
 
     /// The name of the connection.
-    connection_name: ?[]const u8,
+    connection_name: ?[]const u8 = null,
 
     /// Specifies the delimiter character.
-    delimiter: ?[]const u8,
+    delimiter: ?[]const u8 = null,
 
     /// When this option is set to 'true', for each batch, it will emit the metrics
     /// for the duration between the oldest record received by the topic and the
     /// time it arrives in Glue to CloudWatch. The metric's name is
     /// "glue.driver.streaming.maxConsumerLagInMs". The default value is 'false'.
     /// This option is supported in Glue version 4.0 or later.
-    emit_consumer_lag_metrics: ?[]const u8,
+    emit_consumer_lag_metrics: ?[]const u8 = null,
 
     /// The end point when a batch query is ended. Possible values are either
     /// `"latest"` or a JSON string that specifies an ending offset for each
     /// `TopicPartition`.
-    ending_offsets: ?[]const u8,
+    ending_offsets: ?[]const u8 = null,
 
     /// Whether to include the Kafka headers. When the option is set to "true", the
     /// data output will contain an additional column named
@@ -43,39 +43,39 @@ pub const KafkaStreamingSourceOptions = struct {
     /// with type `Array[Struct(key: String, value: String)]`. The default value is
     /// "false".
     /// This option is available in Glue version 3.0 or later only.
-    include_headers: ?bool,
+    include_headers: ?bool = null,
 
     /// The rate limit on the maximum number of offsets that are processed per
     /// trigger interval. The specified total number of offsets is proportionally
     /// split across `topicPartitions` of different volumes. The default value is
     /// null, which means that the consumer reads all offsets until the known latest
     /// offset.
-    max_offsets_per_trigger: ?i64,
+    max_offsets_per_trigger: ?i64 = null,
 
     /// The desired minimum number of partitions to read from Kafka. The default
     /// value is null, which means that the number of spark partitions is equal to
     /// the number of Kafka partitions.
-    min_partitions: ?i32,
+    min_partitions: ?i32 = null,
 
     /// The number of times to retry before failing to fetch Kafka offsets. The
     /// default value is `3`.
-    num_retries: ?i32,
+    num_retries: ?i32 = null,
 
     /// The timeout in milliseconds to poll data from Kafka in Spark job executors.
     /// The default value is `512`.
-    poll_timeout_ms: ?i64,
+    poll_timeout_ms: ?i64 = null,
 
     /// The time in milliseconds to wait before retrying to fetch Kafka offsets. The
     /// default value is `10`.
-    retry_interval_ms: ?i64,
+    retry_interval_ms: ?i64 = null,
 
     /// The protocol used to communicate with brokers. The possible values are
     /// `"SSL"` or `"PLAINTEXT"`.
-    security_protocol: ?[]const u8,
+    security_protocol: ?[]const u8 = null,
 
     /// The starting position in the Kafka topic to read data from. The possible
     /// values are `"earliest"` or `"latest"`. The default value is `"latest"`.
-    starting_offsets: ?[]const u8,
+    starting_offsets: ?[]const u8 = null,
 
     /// The timestamp of the record in the Kafka topic to start reading data from.
     /// The possible values are a timestamp string in UTC format of the pattern
@@ -83,15 +83,15 @@ pub const KafkaStreamingSourceOptions = struct {
     /// For example: "2023-04-04T08:00:00+08:00").
     ///
     /// Only one of `StartingTimestamp` or `StartingOffsets` must be set.
-    starting_timestamp: ?i64,
+    starting_timestamp: ?i64 = null,
 
     /// A Java regex string that identifies the topic list to subscribe to. You must
     /// specify at least one of `"topicName"`, `"assign"` or `"subscribePattern"`.
-    subscribe_pattern: ?[]const u8,
+    subscribe_pattern: ?[]const u8 = null,
 
     /// The topic name as specified in Apache Kafka. You must specify at least one
     /// of `"topicName"`, `"assign"` or `"subscribePattern"`.
-    topic_name: ?[]const u8,
+    topic_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .add_record_timestamp = "AddRecordTimestamp",

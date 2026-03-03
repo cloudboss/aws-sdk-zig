@@ -30,7 +30,7 @@ pub const LambdaAuthorizerConfig = struct {
 
     /// A regular expression for validation of tokens before the Lambda function is
     /// called.
-    identity_validation_expression: ?[]const u8,
+    identity_validation_expression: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authorizer_result_ttl_in_seconds = "authorizerResultTtlInSeconds",

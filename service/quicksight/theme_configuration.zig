@@ -8,17 +8,17 @@ const UIColorPalette = @import("ui_color_palette.zig").UIColorPalette;
 /// a theme.
 pub const ThemeConfiguration = struct {
     /// Color properties that apply to chart data colors.
-    data_color_palette: ?DataColorPalette,
+    data_color_palette: ?DataColorPalette = null,
 
     /// Display options related to sheets.
-    sheet: ?SheetStyle,
+    sheet: ?SheetStyle = null,
 
-    typography: ?Typography,
+    typography: ?Typography = null,
 
     /// Color properties that apply to the UI and to charts, excluding the colors
     /// that apply
     /// to data.
-    ui_color_palette: ?UIColorPalette,
+    ui_color_palette: ?UIColorPalette = null,
 
     pub const json_field_names = .{
         .data_color_palette = "DataColorPalette",

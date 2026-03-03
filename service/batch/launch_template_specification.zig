@@ -16,10 +16,10 @@ const UserdataType = @import("userdata_type.zig").UserdataType;
 /// This object isn't applicable to jobs that are running on Fargate resources.
 pub const LaunchTemplateSpecification = struct {
     /// The ID of the launch template.
-    launch_template_id: ?[]const u8,
+    launch_template_id: ?[]const u8 = null,
 
     /// The name of the launch template.
-    launch_template_name: ?[]const u8,
+    launch_template_name: ?[]const u8 = null,
 
     /// A launch template to use in place of the default launch template. You must
     /// specify either the launch template ID or launch template name in the
@@ -31,7 +31,7 @@ pub const LaunchTemplateSpecification = struct {
     /// To unset all override templates for a compute environment, you can pass an
     /// empty array to the
     /// [UpdateComputeEnvironment.overrides](https://docs.aws.amazon.com/batch/latest/APIReference/API_UpdateComputeEnvironment.html) parameter, or not include the `overrides` parameter when submitting the `UpdateComputeEnvironment` API operation.
-    overrides: ?[]const LaunchTemplateSpecificationOverride,
+    overrides: ?[]const LaunchTemplateSpecificationOverride = null,
 
     /// The EKS node initialization process to use. You only need to specify this
     /// value if you are
@@ -39,7 +39,7 @@ pub const LaunchTemplateSpecification = struct {
     /// *imageType* is a custom AMI based on EKS_AL2023 or EKS_AL2023_NVIDIA then
     /// you
     /// must choose `EKS_NODEADM`.
-    userdata_type: ?UserdataType,
+    userdata_type: ?UserdataType = null,
 
     /// The version number of the launch template,
     /// `$Default`, or `$Latest`.
@@ -68,7 +68,7 @@ pub const LaunchTemplateSpecification = struct {
     /// Default: `$Default`
     ///
     /// Latest: `$Latest`
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .launch_template_id = "launchTemplateId",

@@ -6,7 +6,7 @@ pub const AutoRollbackConfig = struct {
     /// List of CloudWatch alarms in your account that are configured to monitor
     /// metrics on an endpoint. If any alarms are tripped during a deployment,
     /// SageMaker rolls back the deployment.
-    alarms: ?[]const Alarm,
+    alarms: ?[]const Alarm = null,
 
     pub const json_field_names = .{
         .alarms = "Alarms",

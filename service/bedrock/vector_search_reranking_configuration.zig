@@ -7,7 +7,7 @@ const VectorSearchRerankingConfigurationType = @import("vector_search_reranking_
 pub const VectorSearchRerankingConfiguration = struct {
     /// Configuration for using Amazon Bedrock foundation models to rerank search
     /// results. This is required when the reranking type is set to BEDROCK.
-    bedrock_reranking_configuration: ?VectorSearchBedrockRerankingConfiguration,
+    bedrock_reranking_configuration: ?VectorSearchBedrockRerankingConfiguration = null,
 
     /// The type of reranking to apply to vector search results. Currently, the only
     /// supported value is BEDROCK, which uses Amazon Bedrock foundation models for

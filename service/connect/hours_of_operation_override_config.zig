@@ -5,13 +5,13 @@ const OverrideTimeSlice = @import("override_time_slice.zig").OverrideTimeSlice;
 /// and end time.
 pub const HoursOfOperationOverrideConfig = struct {
     /// The day that the hours of operation override applies to.
-    day: ?OverrideDays,
+    day: ?OverrideDays = null,
 
     /// The end time that your contact center closes if overrides are applied.
-    end_time: ?OverrideTimeSlice,
+    end_time: ?OverrideTimeSlice = null,
 
     /// The start time when your contact center opens if overrides are applied.
-    start_time: ?OverrideTimeSlice,
+    start_time: ?OverrideTimeSlice = null,
 
     pub const json_field_names = .{
         .day = "Day",

@@ -13,12 +13,12 @@ pub const CreateComponentData = struct {
     binding_properties: []const aws.map.MapEntry(ComponentBindingPropertiesValue),
 
     /// A list of child components that are instances of the main component.
-    children: ?[]const ComponentChild,
+    children: ?[]const ComponentChild = null,
 
     /// The data binding configuration for customizing a component's properties. Use
     /// this for a
     /// collection component.
-    collection_properties: ?[]const aws.map.MapEntry(ComponentDataConfiguration),
+    collection_properties: ?[]const aws.map.MapEntry(ComponentDataConfiguration) = null,
 
     /// The component type. This can be an Amplify custom UI component or another
     /// custom component.
@@ -26,7 +26,7 @@ pub const CreateComponentData = struct {
 
     /// The event configuration for the component. Use for the workflow feature in
     /// Amplify Studio that allows you to bind events and actions to components.
-    events: ?[]const aws.map.MapEntry(ComponentEvent),
+    events: ?[]const aws.map.MapEntry(ComponentEvent) = null,
 
     /// The name of the component
     name: []const u8,
@@ -40,13 +40,13 @@ pub const CreateComponentData = struct {
     properties: []const aws.map.MapEntry(ComponentProperty),
 
     /// The schema version of the component when it was imported.
-    schema_version: ?[]const u8,
+    schema_version: ?[]const u8 = null,
 
     /// The unique ID of the component in its original source system, such as Figma.
-    source_id: ?[]const u8,
+    source_id: ?[]const u8 = null,
 
     /// One or more key-value pairs to use when tagging the component data.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of the unique variants of this component.
     variants: []const ComponentVariant,

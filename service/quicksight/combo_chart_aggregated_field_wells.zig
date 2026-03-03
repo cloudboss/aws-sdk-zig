@@ -4,16 +4,16 @@ const DimensionField = @import("dimension_field.zig").DimensionField;
 /// The aggregated field wells of a combo chart.
 pub const ComboChartAggregatedFieldWells = struct {
     /// The aggregated `BarValues` field well of a combo chart.
-    bar_values: ?[]const MeasureField,
+    bar_values: ?[]const MeasureField = null,
 
     /// The aggregated category field wells of a combo chart.
-    category: ?[]const DimensionField,
+    category: ?[]const DimensionField = null,
 
     /// The aggregated colors field well of a combo chart.
-    colors: ?[]const DimensionField,
+    colors: ?[]const DimensionField = null,
 
     /// The aggregated `LineValues` field well of a combo chart.
-    line_values: ?[]const MeasureField,
+    line_values: ?[]const MeasureField = null,
 
     pub const json_field_names = .{
         .bar_values = "BarValues",

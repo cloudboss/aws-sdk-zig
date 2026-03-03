@@ -1,19 +1,19 @@
 /// Details about the usage.
 pub const Usage = struct {
     /// The operation value.
-    operation: ?[]const u8,
+    operation: ?[]const u8 = null,
 
     /// The product code.
-    product_code: ?[]const u8,
+    product_code: ?[]const u8 = null,
 
     /// The usage unit.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     /// The usage amount.
-    usage_amount: ?f64,
+    usage_amount: ?f64 = null,
 
     /// The usage type.
-    usage_type: ?[]const u8,
+    usage_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .operation = "operation",

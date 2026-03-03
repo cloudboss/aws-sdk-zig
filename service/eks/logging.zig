@@ -4,7 +4,7 @@ const LogSetup = @import("log_setup.zig").LogSetup;
 /// cluster.
 pub const Logging = struct {
     /// The cluster control plane logging configuration for your cluster.
-    cluster_logging: ?[]const LogSetup,
+    cluster_logging: ?[]const LogSetup = null,
 
     pub const json_field_names = .{
         .cluster_logging = "clusterLogging",

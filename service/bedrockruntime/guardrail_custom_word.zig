@@ -7,7 +7,7 @@ pub const GuardrailCustomWord = struct {
 
     /// Indicates whether custom word content that breaches the guardrail
     /// configuration is detected.
-    detected: ?bool,
+    detected: ?bool = null,
 
     /// The match for the custom word.
     match: []const u8,

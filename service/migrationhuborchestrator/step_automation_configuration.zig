@@ -6,19 +6,19 @@ const TargetType = @import("target_type.zig").TargetType;
 /// The custom script to run tests on source or target environments.
 pub const StepAutomationConfiguration = struct {
     /// The command to run the script.
-    command: ?PlatformCommand,
+    command: ?PlatformCommand = null,
 
     /// The source or target environment.
-    run_environment: ?RunEnvironment,
+    run_environment: ?RunEnvironment = null,
 
     /// The Amazon S3 bucket where the script is located.
-    script_location_s3_bucket: ?[]const u8,
+    script_location_s3_bucket: ?[]const u8 = null,
 
     /// The Amazon S3 key for the script location.
-    script_location_s3_key: ?PlatformScriptKey,
+    script_location_s3_key: ?PlatformScriptKey = null,
 
     /// The servers on which to run the script.
-    target_type: ?TargetType,
+    target_type: ?TargetType = null,
 
     pub const json_field_names = .{
         .command = "command",

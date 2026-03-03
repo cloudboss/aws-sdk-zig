@@ -22,10 +22,10 @@ pub const MedicalScribeSettings = struct {
     ///
     /// For more information, see [Transcribing multi-channel
     /// audio](https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html).
-    channel_identification: ?bool,
+    channel_identification: ?bool = null,
 
     /// Specify settings for the clinical note generation.
-    clinical_note_generation_settings: ?ClinicalNoteGenerationSettings,
+    clinical_note_generation_settings: ?ClinicalNoteGenerationSettings = null,
 
     /// Specify the maximum number of speakers you want to partition in your media.
     ///
@@ -35,7 +35,7 @@ pub const MedicalScribeSettings = struct {
     ///
     /// If you specify the `MaxSpeakerLabels` field, you must set the
     /// `ShowSpeakerLabels` field to true.
-    max_speaker_labels: ?i32,
+    max_speaker_labels: ?i32 = null,
 
     /// Enables speaker partitioning (diarization) in your Medical Scribe output.
     /// Speaker
@@ -46,7 +46,7 @@ pub const MedicalScribeSettings = struct {
     ///
     /// For more information, see [Partitioning speakers
     /// (diarization)](https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
-    show_speaker_labels: ?bool,
+    show_speaker_labels: ?bool = null,
 
     /// Specify how you want your custom vocabulary filter applied to your
     /// transcript.
@@ -56,7 +56,7 @@ pub const MedicalScribeSettings = struct {
     /// To delete words, choose `remove`.
     ///
     /// To flag words without changing them, choose `tag`.
-    vocabulary_filter_method: ?VocabularyFilterMethod,
+    vocabulary_filter_method: ?VocabularyFilterMethod = null,
 
     /// The name of the custom vocabulary filter you want to include in your Medical
     /// Scribe
@@ -64,11 +64,11 @@ pub const MedicalScribeSettings = struct {
     ///
     /// Note that if you include `VocabularyFilterName` in your request, you must
     /// also include `VocabularyFilterMethod`.
-    vocabulary_filter_name: ?[]const u8,
+    vocabulary_filter_name: ?[]const u8 = null,
 
     /// The name of the custom vocabulary you want to include in your Medical Scribe
     /// request. Custom vocabulary names are case sensitive.
-    vocabulary_name: ?[]const u8,
+    vocabulary_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channel_identification = "ChannelIdentification",

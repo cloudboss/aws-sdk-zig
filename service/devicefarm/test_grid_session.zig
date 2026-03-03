@@ -5,22 +5,22 @@ const TestGridSessionStatus = @import("test_grid_session_status.zig").TestGridSe
 /// call to CreateTestGridUrl.
 pub const TestGridSession = struct {
     /// The ARN of the session.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The number of billed minutes that were used for this session.
-    billing_minutes: ?f64,
+    billing_minutes: ?f64 = null,
 
     /// The time that the session was started.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The time the session ended.
-    ended: ?i64,
+    ended: ?i64 = null,
 
     /// A JSON object of options and parameters passed to the Selenium WebDriver.
-    selenium_properties: ?[]const u8,
+    selenium_properties: ?[]const u8 = null,
 
     /// The state of the session.
-    status: ?TestGridSessionStatus,
+    status: ?TestGridSessionStatus = null,
 
     pub const json_field_names = .{
         .arn = "arn",

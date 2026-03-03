@@ -10,70 +10,70 @@ const ProfileTypeDimension = @import("profile_type_dimension.zig").ProfileTypeDi
 /// The object used to segment on attributes within the customer profile.
 pub const ProfileAttributes = struct {
     /// A field to describe values to segment on within account number.
-    account_number: ?ProfileDimension,
+    account_number: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within additional information.
-    additional_information: ?ExtraLengthValueProfileDimension,
+    additional_information: ?ExtraLengthValueProfileDimension = null,
 
     /// A field to describe values to segment on within address.
-    address: ?AddressDimension,
+    address: ?AddressDimension = null,
 
     /// A field to describe values to segment on within attributes.
-    attributes: ?[]const aws.map.MapEntry(AttributeDimension),
+    attributes: ?[]const aws.map.MapEntry(AttributeDimension) = null,
 
     /// A field to describe values to segment on within billing address.
-    billing_address: ?AddressDimension,
+    billing_address: ?AddressDimension = null,
 
     /// A field to describe values to segment on within birthDate.
-    birth_date: ?DateDimension,
+    birth_date: ?DateDimension = null,
 
     /// A field to describe values to segment on within business email address.
-    business_email_address: ?ProfileDimension,
+    business_email_address: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within business name.
-    business_name: ?ProfileDimension,
+    business_name: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within business phone number.
-    business_phone_number: ?ProfileDimension,
+    business_phone_number: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within email address.
-    email_address: ?ProfileDimension,
+    email_address: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within first name.
-    first_name: ?ProfileDimension,
+    first_name: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within genderString.
-    gender_string: ?ProfileDimension,
+    gender_string: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within home phone number.
-    home_phone_number: ?ProfileDimension,
+    home_phone_number: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within last name.
-    last_name: ?ProfileDimension,
+    last_name: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within mailing address.
-    mailing_address: ?AddressDimension,
+    mailing_address: ?AddressDimension = null,
 
     /// A field to describe values to segment on within middle name.
-    middle_name: ?ProfileDimension,
+    middle_name: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within mobile phone number.
-    mobile_phone_number: ?ProfileDimension,
+    mobile_phone_number: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within partyTypeString.
-    party_type_string: ?ProfileDimension,
+    party_type_string: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within personal email address.
-    personal_email_address: ?ProfileDimension,
+    personal_email_address: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within phone number.
-    phone_number: ?ProfileDimension,
+    phone_number: ?ProfileDimension = null,
 
     /// A field to describe values to segment on within profile type.
-    profile_type: ?ProfileTypeDimension,
+    profile_type: ?ProfileTypeDimension = null,
 
     /// A field to describe values to segment on within shipping address.
-    shipping_address: ?AddressDimension,
+    shipping_address: ?AddressDimension = null,
 
     pub const json_field_names = .{
         .account_number = "AccountNumber",

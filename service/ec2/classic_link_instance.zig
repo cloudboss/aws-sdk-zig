@@ -6,14 +6,14 @@ const Tag = @import("tag.zig").Tag;
 /// Describes a linked EC2-Classic instance.
 pub const ClassicLinkInstance = struct {
     /// The security groups.
-    groups: ?[]const GroupIdentifier,
+    groups: ?[]const GroupIdentifier = null,
 
     /// The ID of the instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// Any tags assigned to the instance.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

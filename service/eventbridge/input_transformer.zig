@@ -16,7 +16,7 @@ pub const InputTransformer = struct {
     /// notation.
     ///
     /// The keys cannot start with "Amazon Web Services."
-    input_paths_map: ?[]const aws.map.StringMapEntry,
+    input_paths_map: ?[]const aws.map.StringMapEntry = null,
 
     /// Input template where you specify placeholders that will be filled with the
     /// values of the

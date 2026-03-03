@@ -5,15 +5,15 @@ const SearchType = @import("search_type.zig").SearchType;
 pub const MCPGatewayConfiguration = struct {
     /// The instructions for using the Model Context Protocol gateway. These
     /// instructions provide guidance on how to interact with the gateway.
-    instructions: ?[]const u8,
+    instructions: ?[]const u8 = null,
 
     /// The search type for the Model Context Protocol gateway. This field specifies
     /// how the gateway handles search operations.
-    search_type: ?SearchType,
+    search_type: ?SearchType = null,
 
     /// The supported versions of the Model Context Protocol. This field specifies
     /// which versions of the protocol the gateway can use.
-    supported_versions: ?[]const []const u8,
+    supported_versions: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .instructions = "instructions",

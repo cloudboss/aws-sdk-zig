@@ -2,10 +2,10 @@
 /// could not be retrieved.
 pub const RuntimeVersionError = struct {
     /// The error code.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

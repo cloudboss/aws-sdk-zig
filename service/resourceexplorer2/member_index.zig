@@ -5,14 +5,14 @@ const IndexType = @import("index_type.zig").IndexType;
 /// discovers.
 pub const MemberIndex = struct {
     /// The account ID for the index.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The [Amazon resource name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the index.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Amazon Web Services Region in which the index exists.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The type of index. It can be one of the following values:
     ///
@@ -23,7 +23,7 @@ pub const MemberIndex = struct {
     ///   the aggregator index. This lets search results in the Region with the
     ///   aggregator index to include resources from all Regions in the account
     ///   where Resource Explorer is turned on.
-    @"type": ?IndexType,
+    @"type": ?IndexType = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

@@ -12,7 +12,7 @@ pub const BufferingHints = struct {
     /// specify a value for it, you must also specify a value for `SizeInMBs`, and
     /// vice
     /// versa.
-    interval_in_seconds: ?i32,
+    interval_in_seconds: ?i32 = null,
 
     /// Buffer incoming data to the specified size, in MiBs, before delivering it to
     /// the
@@ -26,7 +26,7 @@ pub const BufferingHints = struct {
     /// typically ingest into the Firehose stream in 10 seconds. For example, if you
     /// typically
     /// ingest data at 1 MiB/sec, the value should be 10 MiB or higher.
-    size_in_m_bs: ?i32,
+    size_in_m_bs: ?i32 = null,
 
     pub const json_field_names = .{
         .interval_in_seconds = "IntervalInSeconds",

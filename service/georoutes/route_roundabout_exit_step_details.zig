@@ -7,13 +7,13 @@ pub const RouteRoundaboutExitStepDetails = struct {
     intersection: []const LocalizedString,
 
     /// Exit to be taken.
-    relative_exit: ?i32,
+    relative_exit: ?i32 = null,
 
     /// Angle of the roundabout.
     roundabout_angle: f64 = 0,
 
     /// Steering direction for the step.
-    steering_direction: ?RouteSteeringDirection,
+    steering_direction: ?RouteSteeringDirection = null,
 
     pub const json_field_names = .{
         .intersection = "Intersection",

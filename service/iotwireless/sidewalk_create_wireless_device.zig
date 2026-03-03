@@ -3,13 +3,13 @@ const SidewalkPositioning = @import("sidewalk_positioning.zig").SidewalkPosition
 /// Sidewalk object for creating a wireless device.
 pub const SidewalkCreateWirelessDevice = struct {
     /// The ID of the Sidewalk device profile.
-    device_profile_id: ?[]const u8,
+    device_profile_id: ?[]const u8 = null,
 
     /// The Positioning object of the Sidewalk device.
-    positioning: ?SidewalkPositioning,
+    positioning: ?SidewalkPositioning = null,
 
     /// The Sidewalk manufacturing serial number.
-    sidewalk_manufacturing_sn: ?[]const u8,
+    sidewalk_manufacturing_sn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .device_profile_id = "DeviceProfileId",

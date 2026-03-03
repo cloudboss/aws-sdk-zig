@@ -22,7 +22,7 @@ pub const DnsConfig = struct {
     /// instead.*
     ///
     /// The ID of the namespace to use for DNS configuration.
-    namespace_id: ?[]const u8,
+    namespace_id: ?[]const u8 = null,
 
     /// The routing policy that you want to apply to all Route 53 DNS records that
     /// Cloud Map creates
@@ -80,7 +80,7 @@ pub const DnsConfig = struct {
     ///
     /// For more information about the weighted routing policy, see [Weighted
     /// Routing](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted) in the *Route 53 Developer Guide*.
-    routing_policy: ?RoutingPolicy,
+    routing_policy: ?RoutingPolicy = null,
 
     pub const json_field_names = .{
         .dns_records = "DnsRecords",

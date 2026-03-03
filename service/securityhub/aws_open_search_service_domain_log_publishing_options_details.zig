@@ -3,13 +3,13 @@ const AwsOpenSearchServiceDomainLogPublishingOption = @import("aws_open_search_s
 /// Configures the CloudWatch Logs to publish for the OpenSearch domain.
 pub const AwsOpenSearchServiceDomainLogPublishingOptionsDetails = struct {
     /// Configures the OpenSearch audit logs publishing.
-    audit_logs: ?AwsOpenSearchServiceDomainLogPublishingOption,
+    audit_logs: ?AwsOpenSearchServiceDomainLogPublishingOption = null,
 
     /// Configures the OpenSearch index logs publishing.
-    index_slow_logs: ?AwsOpenSearchServiceDomainLogPublishingOption,
+    index_slow_logs: ?AwsOpenSearchServiceDomainLogPublishingOption = null,
 
     /// Configures the OpenSearch search slow log publishing.
-    search_slow_logs: ?AwsOpenSearchServiceDomainLogPublishingOption,
+    search_slow_logs: ?AwsOpenSearchServiceDomainLogPublishingOption = null,
 
     pub const json_field_names = .{
         .audit_logs = "AuditLogs",

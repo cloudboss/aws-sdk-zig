@@ -6,11 +6,11 @@ pub const LifecycleConfiguration = struct {
     /// Timeout in seconds for idle runtime sessions. When a session remains idle
     /// for this duration, it will be automatically terminated. Default: 900 seconds
     /// (15 minutes).
-    idle_runtime_session_timeout: ?i32,
+    idle_runtime_session_timeout: ?i32 = null,
 
     /// Maximum lifetime for the instance in seconds. Once reached, instances will
     /// be automatically terminated and replaced. Default: 28800 seconds (8 hours).
-    max_lifetime: ?i32,
+    max_lifetime: ?i32 = null,
 
     pub const json_field_names = .{
         .idle_runtime_session_timeout = "idleRuntimeSessionTimeout",

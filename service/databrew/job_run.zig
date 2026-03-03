@@ -13,28 +13,28 @@ pub const JobRun = struct {
     attempt: i32 = 0,
 
     /// The date and time when the job completed processing.
-    completed_on: ?i64,
+    completed_on: ?i64 = null,
 
     /// Represents a list of JDBC database output objects which defines the output
     /// destination for a DataBrew recipe job to write into.
-    database_outputs: ?[]const DatabaseOutput,
+    database_outputs: ?[]const DatabaseOutput = null,
 
     /// One or more artifacts that represent the Glue Data Catalog output
     /// from running the job.
-    data_catalog_outputs: ?[]const DataCatalogOutput,
+    data_catalog_outputs: ?[]const DataCatalogOutput = null,
 
     /// The name of the dataset for the job to process.
-    dataset_name: ?[]const u8,
+    dataset_name: ?[]const u8 = null,
 
     /// A message indicating an error (if any) that was encountered when the job
     /// ran.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The amount of time, in seconds, during which a job run consumed resources.
     execution_time: i32 = 0,
 
     /// The name of the job being processed during this run.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// A sample configuration for profile jobs only, which determines the number of
     /// rows on which the
@@ -42,36 +42,36 @@ pub const JobRun = struct {
     /// is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000
     /// for the
     /// size parameter.
-    job_sample: ?JobSample,
+    job_sample: ?JobSample = null,
 
     /// The name of an Amazon CloudWatch log group, where the job writes diagnostic
     /// messages
     /// when it runs.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     /// The current status of Amazon CloudWatch logging for the job run.
-    log_subscription: ?LogSubscription,
+    log_subscription: ?LogSubscription = null,
 
     /// One or more output artifacts from a job run.
-    outputs: ?[]const Output,
+    outputs: ?[]const Output = null,
 
     /// The set of steps processed by the job.
-    recipe_reference: ?RecipeReference,
+    recipe_reference: ?RecipeReference = null,
 
     /// The unique identifier of the job run.
-    run_id: ?[]const u8,
+    run_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the user who initiated the job run.
-    started_by: ?[]const u8,
+    started_by: ?[]const u8 = null,
 
     /// The date and time when the job run began.
-    started_on: ?i64,
+    started_on: ?i64 = null,
 
     /// The current state of the job run entity itself.
-    state: ?JobRunState,
+    state: ?JobRunState = null,
 
     /// List of validation configurations that are applied to the profile job run.
-    validation_configurations: ?[]const ValidationConfiguration,
+    validation_configurations: ?[]const ValidationConfiguration = null,
 
     pub const json_field_names = .{
         .attempt = "Attempt",

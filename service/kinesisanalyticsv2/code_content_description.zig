@@ -4,19 +4,19 @@ const S3ApplicationCodeLocationDescription = @import("s3_application_code_locati
 /// application.
 pub const CodeContentDescription = struct {
     /// The checksum that can be used to validate zip-format code.
-    code_md5: ?[]const u8,
+    code_md5: ?[]const u8 = null,
 
     /// The size in bytes of the application code. Can be used to validate
     /// zip-format code.
-    code_size: ?i64,
+    code_size: ?i64 = null,
 
     /// The S3 bucket Amazon Resource Name (ARN), file key, and object version of
     /// the application
     /// code stored in Amazon S3.
-    s3_application_code_location_description: ?S3ApplicationCodeLocationDescription,
+    s3_application_code_location_description: ?S3ApplicationCodeLocationDescription = null,
 
     /// The text-format code
-    text_content: ?[]const u8,
+    text_content: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code_md5 = "CodeMD5",

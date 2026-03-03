@@ -1,13 +1,13 @@
 /// The VPC security groups and subnets that are attached to a Lambda function.
 pub const AwsLambdaFunctionVpcConfig = struct {
     /// A list of VPC security groups IDs.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// A list of VPC subnet IDs.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     /// The ID of the VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .security_group_ids = "SecurityGroupIds",

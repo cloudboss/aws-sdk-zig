@@ -3,10 +3,10 @@ const SignalMapMonitorDeploymentStatus = @import("signal_map_monitor_deployment_
 /// Represents the latest monitor deployment of a signal map.
 pub const MonitorDeployment = struct {
     /// URI associated with a signal map's monitor deployment.
-    details_uri: ?[]const u8,
+    details_uri: ?[]const u8 = null,
 
     /// Error message associated with a failed monitor deployment of a signal map.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     status: SignalMapMonitorDeploymentStatus,
 

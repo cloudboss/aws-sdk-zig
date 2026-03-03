@@ -7,12 +7,12 @@
 pub const UpdateResult = struct {
     /// A description of whether updates for the WorkSpace image are pending or
     /// available.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether updated drivers or other components are available for the
     /// specified
     /// WorkSpace image.
-    update_available: ?bool,
+    update_available: ?bool = null,
 
     pub const json_field_names = .{
         .description = "Description",

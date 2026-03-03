@@ -5,7 +5,7 @@ const SuppressionUnit = @import("suppression_unit.zig").SuppressionUnit;
 /// suppression period is to be.
 pub const SuppressionPeriod = struct {
     /// Specifies whether the value of `value` is in seconds, minutes, or hours.
-    suppression_unit: ?SuppressionUnit,
+    suppression_unit: ?SuppressionUnit = null,
 
     /// Specifies the number of seconds, minutes or hours to suppress this anomaly.
     /// There is no

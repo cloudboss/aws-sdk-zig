@@ -1,10 +1,10 @@
 /// Defines column statistics supported for timestamp data columns.
 pub const DateColumnStatisticsData = struct {
     /// The highest value in the column.
-    maximum_value: ?i64,
+    maximum_value: ?i64 = null,
 
     /// The lowest value in the column.
-    minimum_value: ?i64,
+    minimum_value: ?i64 = null,
 
     /// The number of distinct values in a column.
     number_of_distinct_values: i64 = 0,

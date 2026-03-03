@@ -5,7 +5,7 @@ pub const RoutingRuleActionInvokeApi = struct {
     stage: []const u8,
 
     /// The strip base path setting.
-    strip_base_path: ?bool,
+    strip_base_path: ?bool = null,
 
     pub const json_field_names = .{
         .api_id = "ApiId",

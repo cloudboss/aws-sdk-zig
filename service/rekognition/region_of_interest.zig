@@ -12,11 +12,11 @@ const Point = @import("point.zig").Point;
 /// is kept in the results.
 pub const RegionOfInterest = struct {
     /// The box representing a region of interest on screen.
-    bounding_box: ?BoundingBox,
+    bounding_box: ?BoundingBox = null,
 
     /// Specifies a shape made up of up to 10 `Point` objects to define a region of
     /// interest.
-    polygon: ?[]const Point,
+    polygon: ?[]const Point = null,
 
     pub const json_field_names = .{
         .bounding_box = "BoundingBox",

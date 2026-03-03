@@ -7,10 +7,10 @@ pub const CentralizationRuleSource = struct {
 
     /// The organizational scope from which telemetry data should be centralized,
     /// specified using organization id, accounts or organizational unit ids.
-    scope: ?[]const u8,
+    scope: ?[]const u8 = null,
 
     /// Log specific configuration for centralization source log groups.
-    source_logs_configuration: ?SourceLogsConfiguration,
+    source_logs_configuration: ?SourceLogsConfiguration = null,
 
     pub const json_field_names = .{
         .regions = "Regions",

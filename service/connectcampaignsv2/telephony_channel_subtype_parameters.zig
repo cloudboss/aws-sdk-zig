@@ -4,15 +4,15 @@ const AnswerMachineDetectionConfig = @import("answer_machine_detection_config.zi
 
 /// Parameters for the Telephony Channel Subtype
 pub const TelephonyChannelSubtypeParameters = struct {
-    answer_machine_detection_config: ?AnswerMachineDetectionConfig,
+    answer_machine_detection_config: ?AnswerMachineDetectionConfig = null,
 
     attributes: []const aws.map.StringMapEntry,
 
-    connect_source_phone_number: ?[]const u8,
+    connect_source_phone_number: ?[]const u8 = null,
 
     destination_phone_number: []const u8,
 
-    ring_timeout: ?i32,
+    ring_timeout: ?i32 = null,
 
     pub const json_field_names = .{
         .answer_machine_detection_config = "answerMachineDetectionConfig",

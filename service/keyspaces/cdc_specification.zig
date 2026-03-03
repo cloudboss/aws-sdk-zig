@@ -9,14 +9,14 @@ const ViewType = @import("view_type.zig").ViewType;
 /// in the *Amazon Keyspaces Developer Guide*.
 pub const CdcSpecification = struct {
     /// Specifies that the stream inherits the tags from the table.
-    propagate_tags: ?CdcPropagateTags,
+    propagate_tags: ?CdcPropagateTags = null,
 
     /// The status of the CDC stream. You can enable or disable a stream for a
     /// table.
     status: CdcStatus,
 
     /// The tags (key-value pairs) that you want to apply to the stream.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The view type specifies the changes Amazon Keyspaces records for each
     /// changed row in the stream. After you create the stream, you can't make
@@ -30,7 +30,7 @@ pub const CdcSpecification = struct {
     /// * `OLD_IMAGE` - the version of the row before the change.
     /// * `KEYS_ONLY` - the partition and clustering keys of the row that was
     ///   changed.
-    view_type: ?ViewType,
+    view_type: ?ViewType = null,
 
     pub const json_field_names = .{
         .propagate_tags = "propagateTags",

@@ -40,38 +40,38 @@ pub const Service = struct {
     /// existing service’s `AvailabilityZoneRebalancing` value. If the
     /// service never had an `AvailabilityZoneRebalancing` value set, Amazon
     /// ECS treats this as `DISABLED`.
-    availability_zone_rebalancing: ?AvailabilityZoneRebalancing,
+    availability_zone_rebalancing: ?AvailabilityZoneRebalancing = null,
 
     /// The capacity provider strategy the service uses. When using the
     /// DescribeServices API,
     /// this field is omitted if the service was created using a launch type.
-    capacity_provider_strategy: ?[]const CapacityProviderStrategyItem,
+    capacity_provider_strategy: ?[]const CapacityProviderStrategyItem = null,
 
     /// The Amazon Resource Name (ARN) of the cluster that hosts the service.
-    cluster_arn: ?[]const u8,
+    cluster_arn: ?[]const u8 = null,
 
     /// The Unix timestamp for the time when the service was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The principal that created the service.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The ARN of the current service deployment.
-    current_service_deployment: ?[]const u8,
+    current_service_deployment: ?[]const u8 = null,
 
     /// The list of the service revisions.
-    current_service_revisions: ?[]const ServiceCurrentRevisionSummary,
+    current_service_revisions: ?[]const ServiceCurrentRevisionSummary = null,
 
     /// Optional deployment parameters that control how many tasks run during the
     /// deployment
     /// and the ordering of stopping and starting tasks.
-    deployment_configuration: ?DeploymentConfiguration,
+    deployment_configuration: ?DeploymentConfiguration = null,
 
     /// The deployment controller type the service is using.
-    deployment_controller: ?DeploymentController,
+    deployment_controller: ?DeploymentController = null,
 
     /// The current state of deployments for the service.
-    deployments: ?[]const Deployment,
+    deployments: ?[]const Deployment = null,
 
     /// The desired number of instantiations of the task definition to keep running
     /// on the
@@ -94,7 +94,7 @@ pub const Service = struct {
 
     /// The event stream for your service. A maximum of 100 of the latest events are
     /// displayed.
-    events: ?[]const ServiceEvent,
+    events: ?[]const ServiceEvent = null,
 
     /// The period of time, in seconds, that the Amazon ECS service scheduler
     /// ignores
@@ -105,33 +105,33 @@ pub const Service = struct {
     /// If your service has more running tasks than desired, unhealthy tasks in the
     /// grace
     /// period might be stopped to reach the desired count.
-    health_check_grace_period_seconds: ?i32,
+    health_check_grace_period_seconds: ?i32 = null,
 
     /// The launch type the service is using. When using the DescribeServices API,
     /// this field
     /// is omitted if the service was created using a capacity provider strategy.
-    launch_type: ?LaunchType,
+    launch_type: ?LaunchType = null,
 
     /// A list of Elastic Load Balancing load balancer objects. It contains the load
     /// balancer
     /// name, the container name, and the container port to access from the load
     /// balancer. The
     /// container name is as it appears in a container definition.
-    load_balancers: ?[]const LoadBalancer,
+    load_balancers: ?[]const LoadBalancer = null,
 
     /// The VPC subnet and security group configuration for tasks that receive their
     /// own
     /// elastic network interface by using the `awsvpc` networking mode.
-    network_configuration: ?NetworkConfiguration,
+    network_configuration: ?NetworkConfiguration = null,
 
     /// The number of tasks in the cluster that are in the `PENDING` state.
     pending_count: i32 = 0,
 
     /// The placement constraints for the tasks in the service.
-    placement_constraints: ?[]const PlacementConstraint,
+    placement_constraints: ?[]const PlacementConstraint = null,
 
     /// The placement strategy that determines how tasks for the service are placed.
-    placement_strategy: ?[]const PlacementStrategy,
+    placement_strategy: ?[]const PlacementStrategy = null,
 
     /// The operating system that your tasks in the service run on. A platform
     /// family is
@@ -140,7 +140,7 @@ pub const Service = struct {
     /// All tasks that run as part of this service must use the same
     /// `platformFamily` value as the service (for example,
     /// `LINUX`).
-    platform_family: ?[]const u8,
+    platform_family: ?[]const u8 = null,
 
     /// The platform version to run your service on. A platform version is only
     /// specified for
@@ -150,24 +150,24 @@ pub const Service = struct {
     /// Platform
     /// Versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic Container Service
     /// Developer Guide*.
-    platform_version: ?[]const u8,
+    platform_version: ?[]const u8 = null,
 
     /// Determines whether to propagate the tags from the task definition or the
     /// service to
     /// the task. If no value is specified, the tags aren't propagated.
-    propagate_tags: ?PropagateTags,
+    propagate_tags: ?PropagateTags = null,
 
     /// Identifies whether an ECS Service is an Express Service managed by ECS, or
     /// managed by the customer. The
     /// valid values are `ECS` and `CUSTOMER`
-    resource_management_type: ?ResourceManagementType,
+    resource_management_type: ?ResourceManagementType = null,
 
     /// The ARN of the IAM role that's associated with the service. It allows the
     /// Amazon ECS
     /// container agent to register container instances with an Elastic Load
     /// Balancing load
     /// balancer.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The number of tasks in the cluster that are in the `RUNNING` state.
     running_count: i32 = 0,
@@ -193,14 +193,14 @@ pub const Service = struct {
     ///
     /// Fargate tasks don't support the `DAEMON` scheduling
     /// strategy.
-    scheduling_strategy: ?SchedulingStrategy,
+    scheduling_strategy: ?SchedulingStrategy = null,
 
     /// The ARN that identifies the service. For more information about the ARN
     /// format, see
     /// [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids) in the *Amazon ECS Developer
     /// Guide*.
-    service_arn: ?[]const u8,
+    service_arn: ?[]const u8 = null,
 
     /// The name of your service. Up to 255 letters (uppercase and lowercase),
     /// numbers,
@@ -209,17 +209,17 @@ pub const Service = struct {
     /// However, you can have similarly named services in multiple clusters within a
     /// Region or
     /// across multiple Regions.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// The details for the service discovery registries to assign to this service.
     /// For more
     /// information, see [Service
     /// Discovery](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
-    service_registries: ?[]const ServiceRegistry,
+    service_registries: ?[]const ServiceRegistry = null,
 
     /// The status of the service. The valid values are `ACTIVE`,
     /// `DRAINING`, or `INACTIVE`.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The metadata that you apply to the service to help you categorize and
     /// organize them.
@@ -254,7 +254,7 @@ pub const Service = struct {
     /// this prefix. Tags with this prefix do not count against your tags per
     /// resource
     /// limit.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The task definition to use for tasks in the service. This value is specified
     /// when the
@@ -262,14 +262,14 @@ pub const Service = struct {
     /// [CreateService](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html),
     /// and it can be modified with
     /// [UpdateService](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html).
-    task_definition: ?[]const u8,
+    task_definition: ?[]const u8 = null,
 
     /// Information about a set of Amazon ECS tasks in either an CodeDeploy or an
     /// `EXTERNAL` deployment. An Amazon ECS task set includes details such as
     /// the desired number of tasks, how many tasks are running, and whether the
     /// task set serves
     /// production traffic.
-    task_sets: ?[]const TaskSet,
+    task_sets: ?[]const TaskSet = null,
 
     pub const json_field_names = .{
         .availability_zone_rebalancing = "availabilityZoneRebalancing",

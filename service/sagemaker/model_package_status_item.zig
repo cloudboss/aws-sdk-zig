@@ -3,7 +3,7 @@ const DetailedModelPackageStatus = @import("detailed_model_package_status.zig").
 /// Represents the overall status of a model package.
 pub const ModelPackageStatusItem = struct {
     /// if the overall status is `Failed`, the reason for the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The name of the model package for which the overall status is being
     /// reported.

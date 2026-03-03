@@ -2,12 +2,12 @@
 /// bucket.
 pub const AwsS3BucketServerSideEncryptionByDefault = struct {
     /// KMS key ID to use for the default encryption.
-    kms_master_key_id: ?[]const u8,
+    kms_master_key_id: ?[]const u8 = null,
 
     /// Server-side encryption algorithm to use for the default encryption. Valid
     /// values are
     /// `aws: kms` or `AES256`.
-    sse_algorithm: ?[]const u8,
+    sse_algorithm: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .kms_master_key_id = "KMSMasterKeyID",

@@ -7,7 +7,7 @@ pub const ConsumableResourceSummary = struct {
     consumable_resource_name: []const u8,
 
     /// The amount of the consumable resource that is currently in use.
-    in_use_quantity: ?i64,
+    in_use_quantity: ?i64 = null,
 
     /// Indicates whether the resource is available to be re-used after a job
     /// completes. Can be
@@ -16,10 +16,10 @@ pub const ConsumableResourceSummary = struct {
     /// * `REPLENISHABLE`
     ///
     /// * `NON_REPLENISHABLE`
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The total amount of the consumable resource that is available.
-    total_quantity: ?i64,
+    total_quantity: ?i64 = null,
 
     pub const json_field_names = .{
         .consumable_resource_arn = "consumableResourceArn",

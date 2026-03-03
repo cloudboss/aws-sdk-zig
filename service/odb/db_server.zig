@@ -6,67 +6,67 @@ const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 pub const DbServer = struct {
     /// The list of unique identifiers for the Autonomous VMs associated with this
     /// database server.
-    autonomous_virtual_machine_ids: ?[]const []const u8,
+    autonomous_virtual_machine_ids: ?[]const []const u8 = null,
 
     /// The list of identifiers for the Autonomous VM clusters associated with this
     /// database server.
-    autonomous_vm_cluster_ids: ?[]const []const u8,
+    autonomous_vm_cluster_ids: ?[]const []const u8 = null,
 
     /// The compute model of the database server (ECPU or OCPU).
-    compute_model: ?ComputeModel,
+    compute_model: ?ComputeModel = null,
 
     /// The number of CPU cores enabled on the database server.
-    cpu_core_count: ?i32,
+    cpu_core_count: ?i32 = null,
 
     /// The date and time when the database server was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The allocated local node storage in GBs on the database server.
-    db_node_storage_size_in_g_bs: ?i32,
+    db_node_storage_size_in_g_bs: ?i32 = null,
 
     /// The unique identifier for the database server.
-    db_server_id: ?[]const u8,
+    db_server_id: ?[]const u8 = null,
 
     /// The scheduling details for the quarterly maintenance window. Patching and
     /// system updates take place during the maintenance window.
-    db_server_patching_details: ?DbServerPatchingDetails,
+    db_server_patching_details: ?DbServerPatchingDetails = null,
 
     /// The user-friendly name of the database server.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The ID of the Exadata infrastructure the database server belongs to.
-    exadata_infrastructure_id: ?[]const u8,
+    exadata_infrastructure_id: ?[]const u8 = null,
 
     /// The total number of CPU cores available.
-    max_cpu_count: ?i32,
+    max_cpu_count: ?i32 = null,
 
     /// The total local node storage available in GBs.
-    max_db_node_storage_in_g_bs: ?i32,
+    max_db_node_storage_in_g_bs: ?i32 = null,
 
     /// The total memory available in GBs.
-    max_memory_in_g_bs: ?i32,
+    max_memory_in_g_bs: ?i32 = null,
 
     /// The allocated memory in GBs on the database server.
-    memory_size_in_g_bs: ?i32,
+    memory_size_in_g_bs: ?i32 = null,
 
     /// The OCID of the database server.
-    ocid: ?[]const u8,
+    ocid: ?[]const u8 = null,
 
     /// The name of the OCI resource anchor for the database server.
-    oci_resource_anchor_name: ?[]const u8,
+    oci_resource_anchor_name: ?[]const u8 = null,
 
     /// The shape of the database server. The shape determines the amount of CPU,
     /// storage, and memory resources available.
-    shape: ?[]const u8,
+    shape: ?[]const u8 = null,
 
     /// The current status of the database server.
-    status: ?ResourceStatus,
+    status: ?ResourceStatus = null,
 
     /// Additional information about the current status of the database server.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The OCID of the VM clusters that are associated with the database server.
-    vm_cluster_ids: ?[]const []const u8,
+    vm_cluster_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .autonomous_virtual_machine_ids = "autonomousVirtualMachineIds",

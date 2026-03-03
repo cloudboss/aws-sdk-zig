@@ -22,5 +22,5 @@ pub const EncryptionConfiguration = struct {
     /// KMS
     /// keys](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks) in the *Amazon Web Services Key Management Service Developer
     /// Guide*.
-    replica_kms_key_id: ?[]const u8,
+    replica_kms_key_id: ?[]const u8 = null,
 };

@@ -18,7 +18,7 @@ pub const AssetModelHierarchy = struct {
     /// operation. You can assign an external ID by specifying
     /// this value as part of a call to
     /// [UpdateAssetModel](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html). However, you can't change the external ID if one is already assigned. For more information, see [Using external IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ID of the asset model hierarchy. This ID is a `hierarchyId`.
     ///
@@ -36,7 +36,7 @@ pub const AssetModelHierarchy = struct {
     /// `externalId:` followed by the external ID, if it has one.
     /// For more information, see [Referencing objects with external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references) in the *IoT SiteWise User Guide*.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the asset model hierarchy that you specify by using the
     /// [CreateAssetModel](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html) or

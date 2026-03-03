@@ -9,7 +9,7 @@ pub const AnalyticsConfiguration = struct {
     /// one tag, or one conjunction (AnalyticsAndOperator). If no filter is
     /// provided, all objects will be
     /// considered in any analysis.
-    filter: ?AnalyticsFilter,
+    filter: ?AnalyticsFilter = null,
 
     /// The ID that identifies the analytics configuration.
     id: []const u8,

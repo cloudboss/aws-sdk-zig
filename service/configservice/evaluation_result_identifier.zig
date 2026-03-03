@@ -4,7 +4,7 @@ const EvaluationResultQualifier = @import("evaluation_result_qualifier.zig").Eva
 pub const EvaluationResultIdentifier = struct {
     /// Identifies an Config rule used to evaluate an Amazon Web Services resource,
     /// and provides the type and ID of the evaluated resource.
-    evaluation_result_qualifier: ?EvaluationResultQualifier,
+    evaluation_result_qualifier: ?EvaluationResultQualifier = null,
 
     /// The time of the event that triggered the evaluation of your Amazon Web
     /// Services
@@ -12,10 +12,10 @@ pub const EvaluationResultIdentifier = struct {
     /// configuration item change notification, or it can indicate when Config
     /// delivered the configuration snapshot, depending on which
     /// event triggered the evaluation.
-    ordering_timestamp: ?i64,
+    ordering_timestamp: ?i64 = null,
 
     /// A Unique ID for an evaluation result.
-    resource_evaluation_id: ?[]const u8,
+    resource_evaluation_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .evaluation_result_qualifier = "EvaluationResultQualifier",

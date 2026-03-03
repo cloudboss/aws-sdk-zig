@@ -16,7 +16,7 @@ pub const ResolutionContact = struct {
     contact_arn: []const u8,
 
     /// The stage in the escalation plan that resolves to this contact.
-    stage_index: ?i32,
+    stage_index: ?i32 = null,
 
     /// The type of contact for a resolution step.
     @"type": ContactType,

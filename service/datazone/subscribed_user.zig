@@ -3,10 +3,10 @@ const UserProfileDetails = @import("user_profile_details.zig").UserProfileDetail
 /// The subscribed user.
 pub const SubscribedUser = struct {
     /// The subscribed user details.
-    details: ?UserProfileDetails,
+    details: ?UserProfileDetails = null,
 
     /// The ID of the subscribed user.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .details = "details",

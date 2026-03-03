@@ -10,15 +10,15 @@ const All = @import("all.zig").All;
 /// "KeyToExclude2" ] }`
 pub const HeaderMatchPattern = struct {
     /// Inspect all headers.
-    all: ?All,
+    all: ?All = null,
 
     /// Inspect only the headers whose keys don't match any of the strings specified
     /// here.
-    excluded_headers: ?[]const []const u8,
+    excluded_headers: ?[]const []const u8 = null,
 
     /// Inspect only the headers that have a key that matches one of the strings
     /// specified here.
-    included_headers: ?[]const []const u8,
+    included_headers: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .all = "All",

@@ -11,7 +11,7 @@
 pub const ClarifyShapBaselineConfig = struct {
     /// The MIME type of the baseline data. Choose from `'text/csv'` or
     /// `'application/jsonlines'`. Defaults to `'text/csv'`.
-    mime_type: ?[]const u8,
+    mime_type: ?[]const u8 = null,
 
     /// The inline SHAP baseline data in string format. `ShapBaseline` can have one
     /// or multiple records to be used as the baseline dataset. The format of the
@@ -24,7 +24,7 @@ pub const ClarifyShapBaselineConfig = struct {
     /// `TextConfig` parameter. The size limit for `ShapBasline` is 4 KB. Use the
     /// `ShapBaselineUri` parameter if you want to provide more than 4 KB of
     /// baseline data.
-    shap_baseline: ?[]const u8,
+    shap_baseline: ?[]const u8 = null,
 
     /// The uniform resource identifier (URI) of the S3 bucket where the SHAP
     /// baseline file is stored. The format of the SHAP baseline file should be the
@@ -37,7 +37,7 @@ pub const ClarifyShapBaselineConfig = struct {
     /// about setting up endpoints with Amazon Virtual Private Cloud, see [Give
     /// SageMaker access to Resources in your Amazon Virtual Private
     /// Cloud](https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html).
-    shap_baseline_uri: ?[]const u8,
+    shap_baseline_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .mime_type = "MimeType",

@@ -45,7 +45,7 @@ pub const FindingProviderFields = struct {
     /// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means
     /// zero percent
     /// confidence and 100 means 100 percent confidence.
-    confidence: ?i32,
+    confidence: ?i32 = null,
 
     /// The level of importance assigned to the resources associated with the
     /// finding.
@@ -53,13 +53,13 @@ pub const FindingProviderFields = struct {
     /// A score of 0 means that the underlying resources have no criticality, and a
     /// score of 100
     /// is reserved for the most critical resources.
-    criticality: ?i32,
+    criticality: ?i32 = null,
 
     /// A list of findings that are related to the current finding.
-    related_findings: ?[]const RelatedFinding,
+    related_findings: ?[]const RelatedFinding = null,
 
     /// The severity of a finding.
-    severity: ?FindingProviderSeverity,
+    severity: ?FindingProviderSeverity = null,
 
     /// One or more finding types in the format of `namespace/category/classifier`
     /// that classify a finding.
@@ -67,7 +67,7 @@ pub const FindingProviderFields = struct {
     /// Valid namespace values are: Software and Configuration Checks | TTPs |
     /// Effects | Unusual
     /// Behaviors | Sensitive Data Identifications
-    types: ?[]const []const u8,
+    types: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",

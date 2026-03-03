@@ -11,7 +11,7 @@ pub const GatewaySummary = struct {
     created_at: i64,
 
     /// The description of the gateway.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the gateway.
     gateway_id: []const u8,

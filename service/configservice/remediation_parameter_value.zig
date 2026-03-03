@@ -5,10 +5,10 @@ const StaticValue = @import("static_value.zig").StaticValue;
 /// select either a dynamic value or a static value.
 pub const RemediationParameterValue = struct {
     /// The value is dynamic and changes at run-time.
-    resource_value: ?ResourceValue,
+    resource_value: ?ResourceValue = null,
 
     /// The value is static and does not change at run-time.
-    static_value: ?StaticValue,
+    static_value: ?StaticValue = null,
 
     pub const json_field_names = .{
         .resource_value = "ResourceValue",

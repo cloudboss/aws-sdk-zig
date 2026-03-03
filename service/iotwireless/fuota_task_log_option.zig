@@ -6,7 +6,7 @@ const FuotaTaskType = @import("fuota_task_type.zig").FuotaTaskType;
 /// specific type
 /// of FUOTA task.
 pub const FuotaTaskLogOption = struct {
-    events: ?[]const FuotaTaskEventLogOption,
+    events: ?[]const FuotaTaskEventLogOption = null,
 
     log_level: LogLevel,
 

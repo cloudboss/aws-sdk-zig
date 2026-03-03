@@ -8,7 +8,7 @@ pub const EvaluationRequest = struct {
     /// A JSON block of attributes that you can optionally pass in. This JSON block
     /// is included in the evaluation events sent to Evidently from the user
     /// session.
-    evaluation_context: ?[]const u8,
+    evaluation_context: ?[]const u8 = null,
 
     /// The name of the feature being evaluated.
     feature: []const u8,

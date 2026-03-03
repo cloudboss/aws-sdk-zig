@@ -6,10 +6,10 @@ pub const CustomColor = struct {
     color: []const u8,
 
     /// The data value that the color is applied to.
-    field_value: ?[]const u8,
+    field_value: ?[]const u8 = null,
 
     /// The value of a special data value.
-    special_value: ?SpecialValue,
+    special_value: ?SpecialValue = null,
 
     pub const json_field_names = .{
         .color = "Color",

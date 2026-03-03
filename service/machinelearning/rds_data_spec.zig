@@ -116,7 +116,7 @@ pub const RDSDataSpec = struct {
     /// Datasource for training: `{"splitting":{"percentBegin":70, "percentEnd":100,
     /// "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv",
     /// "complement":"true"}}`
-    data_rearrangement: ?[]const u8,
+    data_rearrangement: ?[]const u8 = null,
 
     /// A JSON string that represents the schema for an Amazon RDS
     /// `DataSource`. The `DataSchema`
@@ -152,10 +152,10 @@ pub const RDSDataSpec = struct {
     /// "F8", "fieldType": "WEIGHTED_STRING_SEQUENCE" } ],
     ///
     /// "excludedVariableNames": [ "F6" ] }
-    data_schema: ?[]const u8,
+    data_schema: ?[]const u8 = null,
 
     /// The Amazon S3 location of the `DataSchema`.
-    data_schema_uri: ?[]const u8,
+    data_schema_uri: ?[]const u8 = null,
 
     /// The role (DataPipelineDefaultResourceRole) assumed by an Amazon Elastic
     /// Compute Cloud (Amazon EC2) instance to carry out the copy operation from

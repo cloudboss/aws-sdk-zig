@@ -12,7 +12,7 @@ pub const SourceDetail = struct {
     /// The source of the event, such as an Amazon Web Services service, that
     /// triggers
     /// Config to evaluate your Amazon Web Services resources.
-    event_source: ?EventSource,
+    event_source: ?EventSource = null,
 
     /// The frequency at which you want Config to run evaluations
     /// for a custom rule with a periodic trigger. If you specify a value
@@ -30,7 +30,7 @@ pub const SourceDetail = struct {
     /// choose `Three_Hours`, Config runs evaluations
     /// once every three hours. In this case, `Three_Hours`
     /// is the frequency of this rule.
-    maximum_execution_frequency: ?MaximumExecutionFrequency,
+    maximum_execution_frequency: ?MaximumExecutionFrequency = null,
 
     /// The type of notification that triggers Config to run an
     /// evaluation for a rule. You can specify the following notification
@@ -59,7 +59,7 @@ pub const SourceDetail = struct {
     /// changes, specify two SourceDetail objects, one for
     /// `ConfigurationItemChangeNotification` and one for
     /// `OversizedConfigurationItemChangeNotification`.
-    message_type: ?MessageType,
+    message_type: ?MessageType = null,
 
     pub const json_field_names = .{
         .event_source = "EventSource",

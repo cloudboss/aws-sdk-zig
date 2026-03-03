@@ -10,17 +10,17 @@ const PluginType = @import("plugin_type.zig").PluginType;
 pub const ActionReview = struct {
     /// Field values that an end user needs to provide to Amazon Q Business for
     /// Amazon Q Business to perform the requested plugin action.
-    payload: ?[]const aws.map.MapEntry(ActionReviewPayloadField),
+    payload: ?[]const aws.map.MapEntry(ActionReviewPayloadField) = null,
 
     /// A string used to retain information about the hierarchical contexts within
     /// an action review payload.
-    payload_field_name_separator: ?[]const u8,
+    payload_field_name_separator: ?[]const u8 = null,
 
     /// The identifier of the plugin associated with the action review.
-    plugin_id: ?[]const u8,
+    plugin_id: ?[]const u8 = null,
 
     /// The type of plugin.
-    plugin_type: ?PluginType,
+    plugin_type: ?PluginType = null,
 
     pub const json_field_names = .{
         .payload = "payload",

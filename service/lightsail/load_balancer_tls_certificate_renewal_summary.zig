@@ -46,7 +46,7 @@ pub const LoadBalancerTlsCertificateRenewalSummary = struct {
     /// pertains to Lightsail's managed renewal. This is different from the initial
     /// validation that
     /// occurs as a result of the RequestCertificate request.
-    domain_validation_options: ?[]const LoadBalancerTlsCertificateDomainValidationOption,
+    domain_validation_options: ?[]const LoadBalancerTlsCertificateDomainValidationOption = null,
 
     /// The renewal status of the certificate.
     ///
@@ -84,7 +84,7 @@ pub const LoadBalancerTlsCertificateRenewalSummary = struct {
     /// the
     /// certificate. You can request a new certificate using the `CreateCertificate`
     /// action.
-    renewal_status: ?LoadBalancerTlsCertificateRenewalStatus,
+    renewal_status: ?LoadBalancerTlsCertificateRenewalStatus = null,
 
     pub const json_field_names = .{
         .domain_validation_options = "domainValidationOptions",

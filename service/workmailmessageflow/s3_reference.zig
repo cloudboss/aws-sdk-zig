@@ -15,7 +15,7 @@ pub const S3Reference = struct {
     key: []const u8,
 
     /// If you enable versioning for the bucket, you can specify the object version.
-    object_version: ?[]const u8,
+    object_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

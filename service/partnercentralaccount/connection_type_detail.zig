@@ -4,10 +4,10 @@ const ConnectionTypeStatus = @import("connection_type_status.zig").ConnectionTyp
 /// Detailed information about a specific connection type within a connection.
 pub const ConnectionTypeDetail = struct {
     /// The timestamp when this connection type was cancelled, if applicable.
-    canceled_at: ?i64,
+    canceled_at: ?i64 = null,
 
     /// The AWS account ID of the participant who cancelled this connection type.
-    canceled_by: ?[]const u8,
+    canceled_by: ?[]const u8 = null,
 
     /// The timestamp when this connection type was created.
     created_at: i64,

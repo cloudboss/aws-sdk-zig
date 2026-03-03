@@ -5,7 +5,7 @@ pub const ResourceTags = struct {
     /// your AppConfig resources. Each tag consists of a key and an optional value,
     /// both
     /// of which you define.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .tags = "Tags",

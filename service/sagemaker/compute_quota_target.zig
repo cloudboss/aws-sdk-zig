@@ -6,7 +6,7 @@ pub const ComputeQuotaTarget = struct {
     ///
     /// A weight of 0 is the lowest priority and 100 is the highest. Weight 0 is the
     /// default.
-    fair_share_weight: ?i32,
+    fair_share_weight: ?i32 = null,
 
     /// Name of the team to allocate compute resources to.
     team_name: []const u8,

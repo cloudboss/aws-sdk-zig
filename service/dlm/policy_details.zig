@@ -15,7 +15,7 @@ pub const PolicyDetails = struct {
     /// **[Event-based policies only]** The actions to be performed when the
     /// event-based policy is activated. You can specify
     /// only one action per policy.
-    actions: ?[]const Action,
+    actions: ?[]const Action = null,
 
     /// **[Default policies only]** Indicates whether the policy should copy tags
     /// from the source resource
@@ -23,7 +23,7 @@ pub const PolicyDetails = struct {
     /// `false`.
     ///
     /// Default: false
-    copy_tags: ?bool,
+    copy_tags: ?bool = null,
 
     /// **[Default policies only]** Specifies how often the policy should run and
     /// create snapshots or AMIs.
@@ -32,25 +32,25 @@ pub const PolicyDetails = struct {
     /// default is 1.
     ///
     /// Default: 1
-    create_interval: ?i32,
+    create_interval: ?i32 = null,
 
     /// **[Default policies only]** Specifies destination Regions for snapshot or
     /// AMI copies. You can specify
     /// up to 3 destination Regions. If you do not want to create cross-Region
     /// copies, omit this
     /// parameter.
-    cross_region_copy_targets: ?[]const CrossRegionCopyTarget,
+    cross_region_copy_targets: ?[]const CrossRegionCopyTarget = null,
 
     /// **[Event-based policies only]** The event that activates the event-based
     /// policy.
-    event_source: ?EventSource,
+    event_source: ?EventSource = null,
 
     /// **[Default policies only]** Specifies exclusion parameters for volumes or
     /// instances for which you
     /// do not want to create snapshots or AMIs. The policy will not create
     /// snapshots or AMIs
     /// for target resources that match any of the specified exclusion parameters.
-    exclusions: ?Exclusions,
+    exclusions: ?Exclusions = null,
 
     /// **[Default policies only]** Defines the snapshot or AMI retention behavior
     /// for the policy if the
@@ -81,7 +81,7 @@ pub const PolicyDetails = struct {
     /// If you do not specify a value, the default is `false`.
     ///
     /// Default: false
-    extend_deletion: ?bool,
+    extend_deletion: ?bool = null,
 
     /// **[Custom snapshot and AMI policies only]** A set of optional parameters for
     /// snapshot and AMI lifecycle policies.
@@ -93,14 +93,14 @@ pub const PolicyDetails = struct {
     /// the default values or the new values that you require. You can't omit this
     /// parameter or
     /// set its values to null.
-    parameters: ?Parameters,
+    parameters: ?Parameters = null,
 
     /// The type of policy to create. Specify one of the following:
     ///
     /// * `SIMPLIFIED` To create a default policy.
     ///
     /// * `STANDARD` To create a custom policy.
-    policy_language: ?PolicyLanguageValues,
+    policy_language: ?PolicyLanguageValues = null,
 
     /// The type of policy. Specify `EBS_SNAPSHOT_MANAGEMENT`
     /// to create a lifecycle policy that manages the lifecycle of Amazon EBS
@@ -111,7 +111,7 @@ pub const PolicyDetails = struct {
     /// defined event occurs in your Amazon Web Services account.
     ///
     /// The default is `EBS_SNAPSHOT_MANAGEMENT`.
-    policy_type: ?PolicyTypeValues,
+    policy_type: ?PolicyTypeValues = null,
 
     /// **[Custom snapshot and AMI policies only]** The location of the resources to
     /// backup.
@@ -133,7 +133,7 @@ pub const PolicyDetails = struct {
     /// In this case, the policy targets all resources of the specified type with
     /// matching target
     /// tags across all of the Outposts in your account.
-    resource_locations: ?[]const ResourceLocationValues,
+    resource_locations: ?[]const ResourceLocationValues = null,
 
     /// **[Default policies only]** Specify the type of default policy to create.
     ///
@@ -145,14 +145,14 @@ pub const PolicyDetails = struct {
     /// AMIs from all instances in the Region that do not have recent backups,
     /// specify
     /// `INSTANCE`.
-    resource_type: ?ResourceTypeValues,
+    resource_type: ?ResourceTypeValues = null,
 
     /// **[Custom snapshot policies only]** The target resource type for snapshot
     /// and AMI lifecycle policies. Use `VOLUME `to
     /// create snapshots of individual volumes or use `INSTANCE` to create
     /// multi-volume
     /// snapshots from the volumes for an instance.
-    resource_types: ?[]const ResourceTypeValues,
+    resource_types: ?[]const ResourceTypeValues = null,
 
     /// **[Default policies only]** Specifies how long the policy should retain
     /// snapshots or AMIs before
@@ -163,17 +163,17 @@ pub const PolicyDetails = struct {
     /// AMI at any given time. If you do not specify a value, the default is 7.
     ///
     /// Default: 7
-    retain_interval: ?i32,
+    retain_interval: ?i32 = null,
 
     /// **[Custom snapshot and AMI policies only]** The schedules of policy-defined
     /// actions for snapshot and AMI lifecycle policies. A policy
     /// can have up to four schedules—one mandatory schedule and up to three
     /// optional schedules.
-    schedules: ?[]const Schedule,
+    schedules: ?[]const Schedule = null,
 
     /// **[Custom snapshot and AMI policies only]** The single tag that identifies
     /// targeted resources for this policy.
-    target_tags: ?[]const Tag,
+    target_tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

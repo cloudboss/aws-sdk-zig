@@ -8,10 +8,10 @@ pub const DocumentAttributeValueCountPair = struct {
     /// The number of documents in the response that have the attribute/field value
     /// for the
     /// key.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// The value of the attribute/field. For example, "HR".
-    document_attribute_value: ?DocumentAttributeValue,
+    document_attribute_value: ?DocumentAttributeValue = null,
 
     /// Contains the results of a document attribute/field that is a nested facet. A
     /// `FacetResult` contains the counts for each facet nested within a
@@ -29,7 +29,7 @@ pub const DocumentAttributeValueCountPair = struct {
     /// documents that
     /// belong to "Frontend" and "Backend" within "Engineering" are returned for a
     /// query.
-    facet_results: ?[]const FacetResult,
+    facet_results: ?[]const FacetResult = null,
 
     pub const json_field_names = .{
         .count = "Count",

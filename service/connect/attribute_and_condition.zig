@@ -4,10 +4,10 @@ const TagCondition = @import("tag_condition.zig").TagCondition;
 /// A list of conditions which would be applied together with an `AND`
 /// condition.
 pub const AttributeAndCondition = struct {
-    hierarchy_group_condition: ?HierarchyGroupCondition,
+    hierarchy_group_condition: ?HierarchyGroupCondition = null,
 
     /// A leaf node condition which can be used to specify a tag condition.
-    tag_conditions: ?[]const TagCondition,
+    tag_conditions: ?[]const TagCondition = null,
 
     pub const json_field_names = .{
         .hierarchy_group_condition = "HierarchyGroupCondition",

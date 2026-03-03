@@ -4,7 +4,7 @@ pub const AccountInfo = struct {
     aws_account_id: []const u8,
 
     /// The account name.
-    aws_account_name: ?[]const u8,
+    aws_account_name: ?[]const u8 = null,
 
     /// The regions supported for an account within an account pool.
     supported_regions: []const []const u8,

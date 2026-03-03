@@ -10,7 +10,7 @@ pub const AttackStatisticsDataItem = struct {
 
     /// Information about the volume of attacks during the time period. If the
     /// accompanying `AttackCount` is zero, this setting might be empty.
-    attack_volume: ?AttackVolume,
+    attack_volume: ?AttackVolume = null,
 
     pub const json_field_names = .{
         .attack_count = "AttackCount",

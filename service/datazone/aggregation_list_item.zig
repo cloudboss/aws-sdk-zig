@@ -5,7 +5,7 @@ pub const AggregationListItem = struct {
 
     /// The display value of the aggregation list item. Supported values include
     /// `value` and `glossaryTerm.name`.
-    display_value: ?[]const u8,
+    display_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attribute = "attribute",

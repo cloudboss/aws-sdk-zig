@@ -4,7 +4,7 @@ const RefreshFrequency = @import("refresh_frequency.zig").RefreshFrequency;
 /// The refresh schedule of a dataset.
 pub const RefreshSchedule = struct {
     /// The Amazon Resource Name (ARN) for the refresh schedule.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The type of refresh that a datset undergoes. Valid values are as follows:
     ///
@@ -26,7 +26,7 @@ pub const RefreshSchedule = struct {
 
     /// Time after which the refresh schedule can be started, expressed in
     /// `YYYY-MM-DDTHH:MM:SS` format.
-    start_after_date_time: ?i64,
+    start_after_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

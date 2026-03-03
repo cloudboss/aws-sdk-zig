@@ -8,8 +8,8 @@ pub const MetadataConfigurationResult = struct {
     destination_result: DestinationResult,
 
     /// The inventory table configuration for a metadata configuration.
-    inventory_table_configuration_result: ?InventoryTableConfigurationResult,
+    inventory_table_configuration_result: ?InventoryTableConfigurationResult = null,
 
     /// The journal table configuration for a metadata configuration.
-    journal_table_configuration_result: ?JournalTableConfigurationResult,
+    journal_table_configuration_result: ?JournalTableConfigurationResult = null,
 };

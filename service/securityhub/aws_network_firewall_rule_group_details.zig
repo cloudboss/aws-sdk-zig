@@ -8,25 +8,25 @@ const RuleGroupDetails = @import("rule_group_details.zig").RuleGroupDetails;
 /// Rule groups are referenced in firewall policies.
 pub const AwsNetworkFirewallRuleGroupDetails = struct {
     /// The maximum number of operating resources that this rule group can use.
-    capacity: ?i32,
+    capacity: ?i32 = null,
 
     /// A description of the rule group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Details about the rule group.
-    rule_group: ?RuleGroupDetails,
+    rule_group: ?RuleGroupDetails = null,
 
     /// The ARN of the rule group.
-    rule_group_arn: ?[]const u8,
+    rule_group_arn: ?[]const u8 = null,
 
     /// The identifier of the rule group.
-    rule_group_id: ?[]const u8,
+    rule_group_id: ?[]const u8 = null,
 
     /// The descriptive name of the rule group.
-    rule_group_name: ?[]const u8,
+    rule_group_name: ?[]const u8 = null,
 
     /// The type of rule group. A rule group can be stateful or stateless.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .capacity = "Capacity",

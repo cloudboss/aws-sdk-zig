@@ -11,52 +11,52 @@ const TargetSelection = @import("target_selection.zig").TargetSelection;
 /// Information about an OTA update.
 pub const OTAUpdateInfo = struct {
     /// A collection of name/value pairs
-    additional_parameters: ?[]const aws.map.StringMapEntry,
+    additional_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The IoT job ARN associated with the OTA update.
-    aws_iot_job_arn: ?[]const u8,
+    aws_iot_job_arn: ?[]const u8 = null,
 
     /// The IoT job ID associated with the OTA update.
-    aws_iot_job_id: ?[]const u8,
+    aws_iot_job_id: ?[]const u8 = null,
 
     /// Configuration for the rollout of OTA updates.
-    aws_job_executions_rollout_config: ?AwsJobExecutionsRolloutConfig,
+    aws_job_executions_rollout_config: ?AwsJobExecutionsRolloutConfig = null,
 
     /// Configuration information for pre-signed URLs. Valid when `protocols`
     /// contains HTTP.
-    aws_job_presigned_url_config: ?AwsJobPresignedUrlConfig,
+    aws_job_presigned_url_config: ?AwsJobPresignedUrlConfig = null,
 
     /// The date when the OTA update was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// A description of the OTA update.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Error information associated with the OTA update.
-    error_info: ?ErrorInfo,
+    error_info: ?ErrorInfo = null,
 
     /// The date when the OTA update was last updated.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The OTA update ARN.
-    ota_update_arn: ?[]const u8,
+    ota_update_arn: ?[]const u8 = null,
 
     /// A list of files associated with the OTA update.
-    ota_update_files: ?[]const OTAUpdateFile,
+    ota_update_files: ?[]const OTAUpdateFile = null,
 
     /// The OTA update ID.
-    ota_update_id: ?[]const u8,
+    ota_update_id: ?[]const u8 = null,
 
     /// The status of the OTA update.
-    ota_update_status: ?OTAUpdateStatus,
+    ota_update_status: ?OTAUpdateStatus = null,
 
     /// The protocol used to transfer the OTA update image. Valid values are [HTTP],
     /// [MQTT], [HTTP, MQTT]. When both
     /// HTTP and MQTT are specified, the target device can choose the protocol.
-    protocols: ?[]const Protocol,
+    protocols: ?[]const Protocol = null,
 
     /// The targets of the OTA update.
-    targets: ?[]const []const u8,
+    targets: ?[]const []const u8 = null,
 
     /// Specifies whether the OTA update will continue to run (CONTINUOUS), or will
     /// be complete after all those
@@ -67,7 +67,7 @@ pub const OTAUpdateInfo = struct {
     /// the thing is added to a target group, even after the OTA update was
     /// completed by all things originally in
     /// the group.
-    target_selection: ?TargetSelection,
+    target_selection: ?TargetSelection = null,
 
     pub const json_field_names = .{
         .additional_parameters = "additionalParameters",

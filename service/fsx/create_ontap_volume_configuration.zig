@@ -9,7 +9,7 @@ const VolumeStyle = @import("volume_style.zig").VolumeStyle;
 pub const CreateOntapVolumeConfiguration = struct {
     /// Use to specify configuration options for a volume’s storage aggregate or
     /// aggregates.
-    aggregate_configuration: ?CreateAggregateConfiguration,
+    aggregate_configuration: ?CreateAggregateConfiguration = null,
 
     /// A boolean flag indicating whether tags for the volume should be copied to
     /// backups. This value defaults to
@@ -20,12 +20,12 @@ pub const CreateOntapVolumeConfiguration = struct {
     /// specified tags are copied to backups. If you specify one or more tags when
     /// creating a user-initiated
     /// backup, no tags are copied from the volume, regardless of this value.
-    copy_tags_to_backups: ?bool,
+    copy_tags_to_backups: ?bool = null,
 
     /// Specifies the location in the SVM's namespace where the volume is mounted.
     /// This parameter is required. The `JunctionPath` must have a leading
     /// forward slash, such as `/vol3`.
-    junction_path: ?[]const u8,
+    junction_path: ?[]const u8 = null,
 
     /// Specifies the type of volume you are creating. Valid values are the
     /// following:
@@ -39,7 +39,7 @@ pub const CreateOntapVolumeConfiguration = struct {
     /// For more information, see [Volume
     /// types](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-types)
     /// in the Amazon FSx for NetApp ONTAP User Guide.
-    ontap_volume_type: ?InputOntapVolumeType,
+    ontap_volume_type: ?InputOntapVolumeType = null,
 
     /// Specifies the security style for the volume. If a volume's security style is
     /// not specified,
@@ -64,17 +64,17 @@ pub const CreateOntapVolumeConfiguration = struct {
     /// For more information, see [Volume security
     /// style](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-security-style) in the
     /// FSx for ONTAP User Guide.
-    security_style: ?SecurityStyle,
+    security_style: ?SecurityStyle = null,
 
     /// Specifies the configured size of the volume, in bytes.
-    size_in_bytes: ?i64,
+    size_in_bytes: ?i64 = null,
 
     /// Use `SizeInBytes` instead. Specifies the size of the volume, in megabytes
     /// (MB), that you are creating.
-    size_in_megabytes: ?i32,
+    size_in_megabytes: ?i32 = null,
 
     /// Specifies the SnapLock configuration for an FSx for ONTAP volume.
-    snaplock_configuration: ?CreateSnaplockConfiguration,
+    snaplock_configuration: ?CreateSnaplockConfiguration = null,
 
     /// Specifies the snapshot policy for the volume. There are three built-in
     /// snapshot policies:
@@ -99,26 +99,26 @@ pub const CreateOntapVolumeConfiguration = struct {
     /// For more information, see [Snapshot
     /// policies](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies)
     /// in the Amazon FSx for NetApp ONTAP User Guide.
-    snapshot_policy: ?[]const u8,
+    snapshot_policy: ?[]const u8 = null,
 
     /// Set to true to enable deduplication, compression, and compaction storage
     /// efficiency features on the volume, or set to false to disable them.
     ///
     /// `StorageEfficiencyEnabled` is required when creating a `RW` volume
     /// (`OntapVolumeType` set to `RW`).
-    storage_efficiency_enabled: ?bool,
+    storage_efficiency_enabled: ?bool = null,
 
     /// Specifies the ONTAP SVM in which to create the volume.
     storage_virtual_machine_id: []const u8,
 
-    tiering_policy: ?TieringPolicy,
+    tiering_policy: ?TieringPolicy = null,
 
     /// Use to specify the style of an ONTAP volume. FSx for ONTAP offers two styles
     /// of volumes that you can use for different purposes,
     /// FlexVol and FlexGroup volumes. For more information, see
     /// [Volume
     /// styles](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-styles) in the Amazon FSx for NetApp ONTAP User Guide.
-    volume_style: ?VolumeStyle,
+    volume_style: ?VolumeStyle = null,
 
     pub const json_field_names = .{
         .aggregate_configuration = "AggregateConfiguration",

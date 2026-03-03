@@ -15,7 +15,7 @@ const ZonalShiftConfigRequest = @import("zonal_shift_config_request.zig").ZonalS
 
 pub const CreateClusterRequest = struct {
     /// The access configuration for the cluster.
-    access_config: ?CreateAccessConfigRequest,
+    access_config: ?CreateAccessConfigRequest = null,
 
     /// If you set this value to `False` when creating a cluster, the default
     /// networking add-ons will not be installed.
@@ -25,35 +25,35 @@ pub const CreateClusterRequest = struct {
     ///
     /// Use this option when you plan to install third-party alternative add-ons or
     /// self-manage the default networking add-ons.
-    bootstrap_self_managed_addons: ?bool,
+    bootstrap_self_managed_addons: ?bool = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure
     /// the idempotency of the request.
-    client_request_token: ?[]const u8,
+    client_request_token: ?[]const u8 = null,
 
     /// Enable or disable the compute capability of EKS Auto Mode when creating your
     /// EKS Auto
     /// Mode cluster. If the compute capability is enabled, EKS Auto Mode will
     /// create and delete
     /// EC2 Managed Instances in your Amazon Web Services account
-    compute_config: ?ComputeConfigRequest,
+    compute_config: ?ComputeConfigRequest = null,
 
     /// The control plane scaling tier configuration. For more information, see EKS
     /// Provisioned Control Plane in the Amazon EKS User Guide.
-    control_plane_scaling_config: ?ControlPlaneScalingConfig,
+    control_plane_scaling_config: ?ControlPlaneScalingConfig = null,
 
     /// Indicates whether to enable deletion protection for the cluster. When
     /// enabled, the cluster
     /// cannot be deleted unless deletion protection is first disabled. This helps
     /// prevent
     /// accidental cluster deletion. Default value is `false`.
-    deletion_protection: ?bool,
+    deletion_protection: ?bool = null,
 
     /// The encryption configuration for the cluster.
-    encryption_config: ?[]const EncryptionConfig,
+    encryption_config: ?[]const EncryptionConfig = null,
 
     /// The Kubernetes network configuration for the cluster.
-    kubernetes_network_config: ?KubernetesNetworkConfigRequest,
+    kubernetes_network_config: ?KubernetesNetworkConfigRequest = null,
 
     /// Enable or disable exporting the Kubernetes control plane logs for your
     /// cluster to CloudWatch Logs .
@@ -70,7 +70,7 @@ pub const CreateClusterRequest = struct {
     /// exported
     /// control plane logs. For more information, see [CloudWatch
     /// Pricing](http://aws.amazon.com/cloudwatch/pricing/).
-    logging: ?Logging,
+    logging: ?Logging = null,
 
     /// The unique name to give to your cluster. The name can contain only
     /// alphanumeric characters (case-sensitive),
@@ -88,12 +88,12 @@ pub const CreateClusterRequest = struct {
     /// for Amazon EKS on Amazon Web Services
     /// Outposts](https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-overview.html) in the *Amazon EKS User Guide*. This object isn't
     /// available for creating Amazon EKS clusters on the Amazon Web Services cloud.
-    outpost_config: ?OutpostConfigRequest,
+    outpost_config: ?OutpostConfigRequest = null,
 
     /// The configuration in the cluster for EKS Hybrid Nodes. You can add, change,
     /// or remove this
     /// configuration after the cluster is created.
-    remote_network_config: ?RemoteNetworkConfigRequest,
+    remote_network_config: ?RemoteNetworkConfigRequest = null,
 
     /// The VPC configuration that's used by the cluster control plane. Amazon EKS
     /// VPC resources
@@ -122,25 +122,25 @@ pub const CreateClusterRequest = struct {
     /// Auto Mode cluster. If the block storage capability is enabled, EKS Auto Mode
     /// will create
     /// and delete EBS volumes in your Amazon Web Services account.
-    storage_config: ?StorageConfigRequest,
+    storage_config: ?StorageConfigRequest = null,
 
     /// Metadata that assists with categorization and organization.
     /// Each tag consists of a key and an optional value. You define both. Tags
     /// don't
     /// propagate to any other cluster or Amazon Web Services resources.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// New clusters, by default, have extended support enabled. You can disable
     /// extended
     /// support when creating a cluster by setting this value to `STANDARD`.
-    upgrade_policy: ?UpgradePolicyRequest,
+    upgrade_policy: ?UpgradePolicyRequest = null,
 
     /// The desired Kubernetes version for your cluster. If you don't specify a
     /// value here, the
     /// default version available in Amazon EKS is used.
     ///
     /// The default version might not be the latest version available.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     /// Enable or disable ARC zonal shift for the cluster. If zonal shift is
     /// enabled, Amazon Web Services
@@ -171,7 +171,7 @@ pub const CreateClusterRequest = struct {
     /// *
     /// Amazon EKS User Guide*
     /// .
-    zonal_shift_config: ?ZonalShiftConfigRequest,
+    zonal_shift_config: ?ZonalShiftConfigRequest = null,
 
     pub const json_field_names = .{
         .access_config = "accessConfig",

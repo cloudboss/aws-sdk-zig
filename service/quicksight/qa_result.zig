@@ -5,13 +5,13 @@ const QAResultType = @import("qa_result_type.zig").QAResultType;
 /// The QA result that is made from the `DashboardVisual` or `GeneratedAnswer`.
 pub const QAResult = struct {
     /// The representation of a dashboard visual result.
-    dashboard_visual: ?DashboardVisualResult,
+    dashboard_visual: ?DashboardVisualResult = null,
 
     /// The representation of a generated answer result.
-    generated_answer: ?GeneratedAnswerResult,
+    generated_answer: ?GeneratedAnswerResult = null,
 
     /// The type of QA result.
-    result_type: ?QAResultType,
+    result_type: ?QAResultType = null,
 
     pub const json_field_names = .{
         .dashboard_visual = "DashboardVisual",

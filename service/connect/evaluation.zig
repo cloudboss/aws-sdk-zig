@@ -22,7 +22,7 @@ pub const Evaluation = struct {
     evaluation_id: []const u8,
 
     /// Type of the evaluation.
-    evaluation_type: ?EvaluationType,
+    evaluation_type: ?EvaluationType = null,
 
     /// The timestamp for when the evaluation was last updated.
     last_modified_time: i64,
@@ -34,14 +34,14 @@ pub const Evaluation = struct {
     notes: []const aws.map.MapEntry(EvaluationNote),
 
     /// A map of item (section or question) identifiers to score value.
-    scores: ?[]const aws.map.MapEntry(EvaluationScore),
+    scores: ?[]const aws.map.MapEntry(EvaluationScore) = null,
 
     /// The status of the contact evaluation.
     status: EvaluationStatus,
 
     /// The tags used to organize, track, or control access for this resource. For
     /// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .answers = "Answers",

@@ -7,29 +7,29 @@ const OtherName = @import("other_name.zig").OtherName;
 /// following naming options should be provided. Providing more than one option
 /// results in an `InvalidArgsException` error.
 pub const GeneralName = struct {
-    directory_name: ?ASN1Subject,
+    directory_name: ?ASN1Subject = null,
 
     /// Represents `GeneralName` as a DNS name.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// Represents `GeneralName` as an `EdiPartyName` object.
-    edi_party_name: ?EdiPartyName,
+    edi_party_name: ?EdiPartyName = null,
 
     /// Represents `GeneralName` as an IPv4 or IPv6 address.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// Represents `GeneralName` using an `OtherName` object.
-    other_name: ?OtherName,
+    other_name: ?OtherName = null,
 
     /// Represents `GeneralName` as an object identifier (OID).
-    registered_id: ?[]const u8,
+    registered_id: ?[]const u8 = null,
 
     /// Represents `GeneralName` as an [RFC
     /// 822](https://datatracker.ietf.org/doc/html/rfc822) email address.
-    rfc_822_name: ?[]const u8,
+    rfc_822_name: ?[]const u8 = null,
 
     /// Represents `GeneralName` as a URI.
-    uniform_resource_identifier: ?[]const u8,
+    uniform_resource_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .directory_name = "DirectoryName",

@@ -4,30 +4,30 @@ const MetricStreamOutputFormat = @import("metric_stream_output_format.zig").Metr
 /// stream.
 pub const MetricStreamEntry = struct {
     /// The ARN of the metric stream.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date that the metric stream was originally created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The ARN of the Kinesis Firehose devlivery stream that is used for this
     /// metric
     /// stream.
-    firehose_arn: ?[]const u8,
+    firehose_arn: ?[]const u8 = null,
 
     /// The date that the configuration of this metric stream was most recently
     /// updated.
-    last_update_date: ?i64,
+    last_update_date: ?i64 = null,
 
     /// The name of the metric stream.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The output format of this metric stream. Valid values are `json`,
     /// `opentelemetry1.0`, and `opentelemetry0.7`.
-    output_format: ?MetricStreamOutputFormat,
+    output_format: ?MetricStreamOutputFormat = null,
 
     /// The current state of this stream. Valid values are `running` and
     /// `stopped`.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

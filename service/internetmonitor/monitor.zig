@@ -11,7 +11,7 @@ pub const Monitor = struct {
     monitor_name: []const u8,
 
     /// The health of data processing for the monitor.
-    processing_status: ?MonitorProcessingStatusCode,
+    processing_status: ?MonitorProcessingStatusCode = null,
 
     /// The status of a monitor.
     status: MonitorConfigState,

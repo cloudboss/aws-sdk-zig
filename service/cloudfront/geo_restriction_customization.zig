@@ -4,7 +4,7 @@ const GeoRestrictionType = @import("geo_restriction_type.zig").GeoRestrictionTyp
 /// geographic restrictions.
 pub const GeoRestrictionCustomization = struct {
     /// The locations for geographic restrictions.
-    locations: ?[]const []const u8,
+    locations: ?[]const []const u8 = null,
 
     /// The method that you want to use to restrict distribution of your content by
     /// country:

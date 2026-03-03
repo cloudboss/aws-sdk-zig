@@ -9,14 +9,14 @@ pub const UnprocessedConfigurationPolicyAssociation = struct {
     /// Configuration policy association identifiers that were specified in a
     /// `BatchGetConfigurationPolicyAssociations`
     /// request but couldn’t be processed due to an error.
-    configuration_policy_association_identifiers: ?ConfigurationPolicyAssociation,
+    configuration_policy_association_identifiers: ?ConfigurationPolicyAssociation = null,
 
     /// An HTTP status code that identifies why the configuration policy association
     /// failed.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// A string that identifies why the configuration policy association failed.
-    error_reason: ?[]const u8,
+    error_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration_policy_association_identifiers = "ConfigurationPolicyAssociationIdentifiers",

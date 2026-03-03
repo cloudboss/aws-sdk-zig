@@ -7,14 +7,14 @@ const UpdateCustomLineItemPercentageChargeDetails = @import("update_custom_line_
 pub const UpdateCustomLineItemChargeDetails = struct {
     /// An `UpdateCustomLineItemFlatChargeDetails` that describes the new charge
     /// details of a flat custom line item.
-    flat: ?UpdateCustomLineItemFlatChargeDetails,
+    flat: ?UpdateCustomLineItemFlatChargeDetails = null,
 
     /// A representation of the line item filter.
-    line_item_filters: ?[]const LineItemFilter,
+    line_item_filters: ?[]const LineItemFilter = null,
 
     /// An `UpdateCustomLineItemPercentageChargeDetails` that describes the new
     /// charge details of a percentage custom line item.
-    percentage: ?UpdateCustomLineItemPercentageChargeDetails,
+    percentage: ?UpdateCustomLineItemPercentageChargeDetails = null,
 
     pub const json_field_names = .{
         .flat = "Flat",

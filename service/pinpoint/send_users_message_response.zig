@@ -8,13 +8,13 @@ pub const SendUsersMessageResponse = struct {
     application_id: []const u8,
 
     /// The unique identifier that was assigned to the message request.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// An object that indicates which endpoints the message was sent to, for each
     /// user. The object lists user IDs and, for each user ID, provides the endpoint
     /// IDs that the message was sent to. For each endpoint ID, it provides an
     /// EndpointMessageResult object.
-    result: ?[]const aws.map.MapEntry([]const aws.map.MapEntry(EndpointMessageResult)),
+    result: ?[]const aws.map.MapEntry([]const aws.map.MapEntry(EndpointMessageResult)) = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

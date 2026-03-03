@@ -5,19 +5,19 @@
 pub const PrivateLinkConfig = struct {
     /// Specifies the VPC endpoint provided by [Amazon Web Services
     /// PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/privatelink-share-your-services.html) that your agent connects to.
-    private_link_endpoint: ?[]const u8,
+    private_link_endpoint: ?[]const u8 = null,
 
     /// Specifies the Amazon Resource Names (ARN) of the security group that
     /// provides DataSync access to your VPC endpoint. You can only specify one ARN.
-    security_group_arns: ?[]const []const u8,
+    security_group_arns: ?[]const []const u8 = null,
 
     /// Specifies the ARN of the subnet where your VPC endpoint is located. You can
     /// only specify
     /// one ARN.
-    subnet_arns: ?[]const []const u8,
+    subnet_arns: ?[]const []const u8 = null,
 
     /// Specifies the ID of the VPC endpoint that your agent connects to.
-    vpc_endpoint_id: ?[]const u8,
+    vpc_endpoint_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .private_link_endpoint = "PrivateLinkEndpoint",

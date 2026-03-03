@@ -9,18 +9,18 @@ pub const ChangesetSummary = struct {
     /// Beginning time from which the Changeset is active. The value is determined
     /// as epoch time in milliseconds. For example, the value for Monday, November
     /// 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
-    active_from_timestamp: ?i64,
+    active_from_timestamp: ?i64 = null,
 
     /// Time until which the Changeset is active. The value is determined as epoch
     /// time in milliseconds. For example, the value for Monday, November 1, 2021
     /// 12:00:00 PM UTC is specified as 1635768000000.
-    active_until_timestamp: ?i64,
+    active_until_timestamp: ?i64 = null,
 
     /// The ARN identifier of the Changeset.
-    changeset_arn: ?[]const u8,
+    changeset_arn: ?[]const u8 = null,
 
     /// The unique identifier for a Changeset.
-    changeset_id: ?[]const u8,
+    changeset_id: ?[]const u8 = null,
 
     /// Type that indicates how a Changeset is applied to a Dataset.
     ///
@@ -32,7 +32,7 @@ pub const ChangesetSummary = struct {
     ///
     /// * `MODIFY` – Changeset is considered as a replacement to a specific prior
     /// ingested Changeset.
-    change_type: ?ChangeType,
+    change_type: ?ChangeType = null,
 
     /// The timestamp at which the Changeset was created in FinSpace. The value is
     /// determined as epoch time in milliseconds. For example, the value for Monday,
@@ -41,16 +41,16 @@ pub const ChangesetSummary = struct {
 
     /// The unique identifier for the FinSpace Dataset in which the Changeset is
     /// created.
-    dataset_id: ?[]const u8,
+    dataset_id: ?[]const u8 = null,
 
     /// The structure with error messages.
-    error_info: ?ChangesetErrorInfo,
+    error_info: ?ChangesetErrorInfo = null,
 
     /// Options that define the structure of the source file(s).
-    format_params: ?[]const aws.map.StringMapEntry,
+    format_params: ?[]const aws.map.StringMapEntry = null,
 
     /// Options that define the location of the data being ingested.
-    source_params: ?[]const aws.map.StringMapEntry,
+    source_params: ?[]const aws.map.StringMapEntry = null,
 
     /// Status of the Changeset ingestion.
     ///
@@ -63,13 +63,13 @@ pub const ChangesetSummary = struct {
     /// * `RUNNING` – Changeset creation is running.
     ///
     /// * `STOP_REQUESTED` – User requested Changeset creation to stop.
-    status: ?IngestionStatus,
+    status: ?IngestionStatus = null,
 
     /// The unique identifier of the updated Changeset.
-    updated_by_changeset_id: ?[]const u8,
+    updated_by_changeset_id: ?[]const u8 = null,
 
     /// The unique identifier of the Changeset that is updated.
-    updates_changeset_id: ?[]const u8,
+    updates_changeset_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active_from_timestamp = "activeFromTimestamp",

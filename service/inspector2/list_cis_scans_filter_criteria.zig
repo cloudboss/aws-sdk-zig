@@ -7,34 +7,34 @@ const TagFilter = @import("tag_filter.zig").TagFilter;
 /// A list of CIS scans filter criteria.
 pub const ListCisScansFilterCriteria = struct {
     /// The list of failed checks filters.
-    failed_checks_filters: ?[]const CisNumberFilter,
+    failed_checks_filters: ?[]const CisNumberFilter = null,
 
     /// The list of scan ARN filters.
-    scan_arn_filters: ?[]const CisStringFilter,
+    scan_arn_filters: ?[]const CisStringFilter = null,
 
     /// The list of scan at filters.
-    scan_at_filters: ?[]const CisDateFilter,
+    scan_at_filters: ?[]const CisDateFilter = null,
 
     /// The list of scan configuration ARN filters.
-    scan_configuration_arn_filters: ?[]const CisStringFilter,
+    scan_configuration_arn_filters: ?[]const CisStringFilter = null,
 
     /// The list of scan name filters.
-    scan_name_filters: ?[]const CisStringFilter,
+    scan_name_filters: ?[]const CisStringFilter = null,
 
     /// The list of scan status filters.
-    scan_status_filters: ?[]const CisScanStatusFilter,
+    scan_status_filters: ?[]const CisScanStatusFilter = null,
 
     /// The list of scheduled by filters.
-    scheduled_by_filters: ?[]const CisStringFilter,
+    scheduled_by_filters: ?[]const CisStringFilter = null,
 
     /// The list of target account ID filters.
-    target_account_id_filters: ?[]const CisStringFilter,
+    target_account_id_filters: ?[]const CisStringFilter = null,
 
     /// The list of target resource ID filters.
-    target_resource_id_filters: ?[]const CisStringFilter,
+    target_resource_id_filters: ?[]const CisStringFilter = null,
 
     /// The list of target resource tag filters.
-    target_resource_tag_filters: ?[]const TagFilter,
+    target_resource_tag_filters: ?[]const TagFilter = null,
 
     pub const json_field_names = .{
         .failed_checks_filters = "failedChecksFilters",

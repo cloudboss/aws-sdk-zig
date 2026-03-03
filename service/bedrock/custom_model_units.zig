@@ -9,11 +9,11 @@
 /// model in the Amazon Bedrock user guide.
 pub const CustomModelUnits = struct {
     /// The number of custom model units used to host a model copy.
-    custom_model_units_per_model_copy: ?i32,
+    custom_model_units_per_model_copy: ?i32 = null,
 
     /// The version of the custom model unit. Use to determine the billing rate for
     /// the custom model unit.
-    custom_model_units_version: ?[]const u8,
+    custom_model_units_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .custom_model_units_per_model_copy = "customModelUnitsPerModelCopy",

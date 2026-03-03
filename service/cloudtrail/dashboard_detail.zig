@@ -3,10 +3,10 @@ const DashboardType = @import("dashboard_type.zig").DashboardType;
 /// Provides information about a CloudTrail Lake dashboard.
 pub const DashboardDetail = struct {
     /// The ARN for the dashboard.
-    dashboard_arn: ?[]const u8,
+    dashboard_arn: ?[]const u8 = null,
 
     /// The type of dashboard.
-    @"type": ?DashboardType,
+    @"type": ?DashboardType = null,
 
     pub const json_field_names = .{
         .dashboard_arn = "DashboardArn",

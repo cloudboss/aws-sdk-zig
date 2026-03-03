@@ -7,7 +7,7 @@ pub const WebvttDestinationSettings = struct {
     /// source captions are EMBEDDED or TELETEXT. NO_STYLE_DATA - Don't pass through
     /// the style. The output captions will not contain any font styling
     /// information.
-    style_control: ?WebvttDestinationStyleControl,
+    style_control: ?WebvttDestinationStyleControl = null,
 
     pub const json_field_names = .{
         .style_control = "StyleControl",

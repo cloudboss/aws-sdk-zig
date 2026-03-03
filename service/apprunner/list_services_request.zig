@@ -4,7 +4,7 @@ pub const ListServicesRequest = struct {
     ///
     /// If you don't specify `MaxResults`, the request retrieves all available
     /// results in a single response.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// A token from a previous result page. Used for a paginated request. The
     /// request retrieves the next result page. All other parameter values must be
@@ -12,7 +12,7 @@ pub const ListServicesRequest = struct {
     ///
     /// If you don't specify `NextToken`, the request retrieves the first result
     /// page.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",

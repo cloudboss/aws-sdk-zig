@@ -8,22 +8,22 @@ const VisualOptions = @import("visual_options.zig").VisualOptions;
 /// The definition for a `TopicIR`.
 pub const TopicIR = struct {
     /// The contribution analysis for the `TopicIR`.
-    contribution_analysis: ?TopicIRContributionAnalysis,
+    contribution_analysis: ?TopicIRContributionAnalysis = null,
 
     /// The filters for the `TopicIR`.
-    filters: ?[]const []const TopicIRFilterOption,
+    filters: ?[]const []const TopicIRFilterOption = null,
 
     /// The GroupBy list for the `TopicIR`.
-    group_by_list: ?[]const TopicIRGroupBy,
+    group_by_list: ?[]const TopicIRGroupBy = null,
 
     /// The metrics for the `TopicIR`.
-    metrics: ?[]const TopicIRMetric,
+    metrics: ?[]const TopicIRMetric = null,
 
     /// The sort for the `TopicIR`.
-    sort: ?TopicSortClause,
+    sort: ?TopicSortClause = null,
 
     /// The visual for the `TopicIR`.
-    visual: ?VisualOptions,
+    visual: ?VisualOptions = null,
 
     pub const json_field_names = .{
         .contribution_analysis = "ContributionAnalysis",

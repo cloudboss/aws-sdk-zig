@@ -16,7 +16,7 @@ pub const TlsValidationContext = struct {
     /// configuration. Since SPIRE vended certificates have a SPIFFE ID as a name,
     /// you must set the
     /// SAN since the name doesn't match the service discovery name.
-    subject_alternative_names: ?SubjectAlternativeNames,
+    subject_alternative_names: ?SubjectAlternativeNames = null,
 
     /// A reference to where to retrieve the trust chain when validating a peer’s
     /// Transport Layer Security (TLS)

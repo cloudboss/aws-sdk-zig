@@ -5,17 +5,17 @@ const DataLakeReplicationConfiguration = @import("data_lake_replication_configur
 /// Provides details of Amazon Security Lake object.
 pub const DataLakeConfiguration = struct {
     /// Provides encryption details of Amazon Security Lake object.
-    encryption_configuration: ?DataLakeEncryptionConfiguration,
+    encryption_configuration: ?DataLakeEncryptionConfiguration = null,
 
     /// Provides lifecycle details of Amazon Security Lake object.
-    lifecycle_configuration: ?DataLakeLifecycleConfiguration,
+    lifecycle_configuration: ?DataLakeLifecycleConfiguration = null,
 
     /// The Amazon Web Services Regions where Security Lake is automatically
     /// enabled.
     region: []const u8,
 
     /// Provides replication details of Amazon Security Lake object.
-    replication_configuration: ?DataLakeReplicationConfiguration,
+    replication_configuration: ?DataLakeReplicationConfiguration = null,
 
     pub const json_field_names = .{
         .encryption_configuration = "encryptionConfiguration",

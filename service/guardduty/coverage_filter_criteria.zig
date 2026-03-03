@@ -5,7 +5,7 @@ pub const CoverageFilterCriteria = struct {
     /// Represents a condition that when matched will be added to the response of
     /// the
     /// operation.
-    filter_criterion: ?[]const CoverageFilterCriterion,
+    filter_criterion: ?[]const CoverageFilterCriterion = null,
 
     pub const json_field_names = .{
         .filter_criterion = "FilterCriterion",

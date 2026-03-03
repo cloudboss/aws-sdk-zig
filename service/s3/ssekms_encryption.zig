@@ -16,7 +16,7 @@ pub const SSEKMSEncryption = struct {
     /// in the *Amazon S3 User Guide*.
     ///
     /// Valid Values: `true` | `false`
-    bucket_key_enabled: ?bool,
+    bucket_key_enabled: ?bool = null,
 
     /// Specifies the Amazon Web Services KMS key Amazon Resource Name (ARN) to use
     /// for the updated server-side encryption

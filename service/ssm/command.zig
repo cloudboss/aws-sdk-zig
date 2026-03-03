@@ -10,20 +10,20 @@ const AlarmStateInformation = @import("alarm_state_information.zig").AlarmStateI
 /// Describes a command request.
 pub const Command = struct {
     /// The details for the CloudWatch alarm applied to your command.
-    alarm_configuration: ?AlarmConfiguration,
+    alarm_configuration: ?AlarmConfiguration = null,
 
     /// Amazon CloudWatch Logs information where you want Amazon Web Services
     /// Systems Manager to send the command
     /// output.
-    cloud_watch_output_config: ?CloudWatchOutputConfig,
+    cloud_watch_output_config: ?CloudWatchOutputConfig = null,
 
     /// A unique identifier for this command.
-    command_id: ?[]const u8,
+    command_id: ?[]const u8 = null,
 
     /// User-specified information about the command, such as a brief description of
     /// what the
     /// command should do.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The number of targets for which the command invocation reached a terminal
     /// state. Terminal
@@ -36,10 +36,10 @@ pub const Command = struct {
     delivery_timed_out_count: i32 = 0,
 
     /// The name of the document requested for execution.
-    document_name: ?[]const u8,
+    document_name: ?[]const u8 = null,
 
     /// The Systems Manager document (SSM document) version.
-    document_version: ?[]const u8,
+    document_version: ?[]const u8 = null,
 
     /// The number of targets for which the status is Failed or Execution Timed Out.
     error_count: i32 = 0,
@@ -52,10 +52,10 @@ pub const Command = struct {
     /// more information, see [Understanding command timeout
     /// values](https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html?icmpid=docs_ec2_console#monitor-about-status-timeouts) in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    expires_after: ?i64,
+    expires_after: ?i64 = null,
 
     /// The managed node IDs against which this command was requested.
-    instance_ids: ?[]const []const u8,
+    instance_ids: ?[]const []const u8 = null,
 
     /// The maximum number of managed nodes that are allowed to run the command at
     /// the same time.
@@ -66,7 +66,7 @@ pub const Command = struct {
     /// [Amazon Web Services Systems Manager
     /// Run
     /// Command](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html) in the *Amazon Web Services Systems Manager User Guide*.
-    max_concurrency: ?[]const u8,
+    max_concurrency: ?[]const u8 = null,
 
     /// The maximum number of errors allowed before the system stops sending the
     /// command to
@@ -76,41 +76,41 @@ pub const Command = struct {
     /// `MaxErrors`, see [Amazon Web Services Systems Manager Run
     /// Command](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html) in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    max_errors: ?[]const u8,
+    max_errors: ?[]const u8 = null,
 
     /// Configurations for sending notifications about command status changes.
-    notification_config: ?NotificationConfig,
+    notification_config: ?NotificationConfig = null,
 
     /// The S3 bucket where the responses to the command executions should be
     /// stored. This was
     /// requested when issuing the command.
-    output_s3_bucket_name: ?[]const u8,
+    output_s3_bucket_name: ?[]const u8 = null,
 
     /// The S3 directory path inside the bucket where the responses to the command
     /// executions should
     /// be stored. This was requested when issuing the command.
-    output_s3_key_prefix: ?[]const u8,
+    output_s3_key_prefix: ?[]const u8 = null,
 
     /// (Deprecated) You can no longer specify this parameter. The system ignores
     /// it. Instead, Systems Manager
     /// automatically determines the Amazon Web Services Region of the S3 bucket.
-    output_s3_region: ?[]const u8,
+    output_s3_region: ?[]const u8 = null,
 
     /// The parameter values to be inserted in the document when running the
     /// command.
-    parameters: ?[]const aws.map.MapEntry([]const []const u8),
+    parameters: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The date and time the command was requested.
-    requested_date_time: ?i64,
+    requested_date_time: ?i64 = null,
 
     /// The Identity and Access Management (IAM) service role that Run Command, a
     /// tool in
     /// Amazon Web Services Systems Manager, uses to act on your behalf when sending
     /// notifications about command status changes.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
     /// The status of the command.
-    status: ?CommandStatus,
+    status: ?CommandStatus = null,
 
     /// A detailed status of the command execution. `StatusDetails` includes more
     /// information than `Status` because it includes states resulting from error
@@ -162,7 +162,7 @@ pub const Command = struct {
     /// * Delayed: The system attempted to send the command to the managed node but
     ///   wasn't
     /// successful. The system retries again.
-    status_details: ?[]const u8,
+    status_details: ?[]const u8 = null,
 
     /// The number of targets for the command.
     target_count: i32 = 0,
@@ -172,13 +172,13 @@ pub const Command = struct {
     /// you specify. Targets is required if you don't provide one or more managed
     /// node IDs in the
     /// call.
-    targets: ?[]const Target,
+    targets: ?[]const Target = null,
 
     /// The `TimeoutSeconds` value specified for a command.
-    timeout_seconds: ?i32,
+    timeout_seconds: ?i32 = null,
 
     /// The CloudWatch alarm that was invoked by the command.
-    triggered_alarms: ?[]const AlarmStateInformation,
+    triggered_alarms: ?[]const AlarmStateInformation = null,
 
     pub const json_field_names = .{
         .alarm_configuration = "AlarmConfiguration",

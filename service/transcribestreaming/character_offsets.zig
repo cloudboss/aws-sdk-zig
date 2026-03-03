@@ -6,13 +6,13 @@ pub const CharacterOffsets = struct {
     /// identified. For example, the first
     /// character associated with an issue or a category match in a segment
     /// transcript.
-    begin: ?i32,
+    begin: ?i32 = null,
 
     /// Provides the character count of the last character where a match is
     /// identified. For example, the last
     /// character associated with an issue or a category match in a segment
     /// transcript.
-    end: ?i32,
+    end: ?i32 = null,
 
     pub const json_field_names = .{
         .begin = "Begin",

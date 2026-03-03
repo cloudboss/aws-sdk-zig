@@ -4,10 +4,10 @@
 pub const EventInfo = struct {
     /// The name of the event. The possible names are `pull_request`,
     /// `workflow_dispatch`, `schedule`, and `push`
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The state of an event. The state might be open, closed, or another state.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

@@ -7,7 +7,7 @@ const RDSSavingsEstimationMode = @import("rds_savings_estimation_mode.zig").RDSS
 /// databases.
 pub const RDSEffectiveRecommendationPreferences = struct {
     /// Describes the CPU vendor and architecture for DB instance recommendations.
-    cpu_vendor_architectures: ?[]const CpuVendorArchitecture,
+    cpu_vendor_architectures: ?[]const CpuVendorArchitecture = null,
 
     /// Describes the activation status of the enhanced infrastructure metrics
     /// preference.
@@ -21,14 +21,14 @@ pub const RDSEffectiveRecommendationPreferences = struct {
     /// infrastructure
     /// metrics](https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html) in the *Compute Optimizer User
     /// Guide*.
-    enhanced_infrastructure_metrics: ?EnhancedInfrastructureMetrics,
+    enhanced_infrastructure_metrics: ?EnhancedInfrastructureMetrics = null,
 
     /// The number of days the utilization metrics of the DB instance are analyzed.
-    look_back_period: ?LookBackPeriodPreference,
+    look_back_period: ?LookBackPeriodPreference = null,
 
     /// Describes the savings estimation mode preference applied for calculating
     /// savings opportunity for DB instances.
-    savings_estimation_mode: ?RDSSavingsEstimationMode,
+    savings_estimation_mode: ?RDSSavingsEstimationMode = null,
 
     pub const json_field_names = .{
         .cpu_vendor_architectures = "cpuVendorArchitectures",

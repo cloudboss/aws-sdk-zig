@@ -4,7 +4,7 @@ const SpaceIdleSettings = @import("space_idle_settings.zig").SpaceIdleSettings;
 /// SageMaker Studio applications in a space.
 pub const SpaceAppLifecycleManagement = struct {
     /// Settings related to idle shutdown of Studio applications.
-    idle_settings: ?SpaceIdleSettings,
+    idle_settings: ?SpaceIdleSettings = null,
 
     pub const json_field_names = .{
         .idle_settings = "IdleSettings",

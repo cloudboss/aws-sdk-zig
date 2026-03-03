@@ -51,7 +51,7 @@ pub const EncryptionConfiguration = struct {
     /// must exist in the same Region as the repository. If no key is specified, the
     /// default
     /// Amazon Web Services managed KMS key for Amazon ECR will be used.
-    kms_key: ?[]const u8,
+    kms_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .encryption_type = "encryptionType",

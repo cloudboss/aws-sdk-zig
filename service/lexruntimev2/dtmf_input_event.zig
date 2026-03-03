@@ -10,7 +10,7 @@ pub const DTMFInputEvent = struct {
 
     /// A unique identifier that your application assigns to the event. You
     /// can use this to identify events in logs.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The DTMF character that the user pressed. The allowed characters are
     /// A - D, 0 - 9, # and *.

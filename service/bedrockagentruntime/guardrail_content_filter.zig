@@ -5,14 +5,14 @@ const GuardrailContentFilterType = @import("guardrail_content_filter_type.zig").
 /// Details of the content filter used in the Guardrail.
 pub const GuardrailContentFilter = struct {
     /// The action placed on the content by the Guardrail filter.
-    action: ?GuardrailContentPolicyAction,
+    action: ?GuardrailContentPolicyAction = null,
 
     /// The confidence level regarding the content detected in the filter by the
     /// Guardrail.
-    confidence: ?GuardrailContentFilterConfidence,
+    confidence: ?GuardrailContentFilterConfidence = null,
 
     /// The type of content detected in the filter by the Guardrail.
-    @"type": ?GuardrailContentFilterType,
+    @"type": ?GuardrailContentFilterType = null,
 
     pub const json_field_names = .{
         .action = "action",

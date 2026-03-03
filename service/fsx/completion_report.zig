@@ -23,7 +23,7 @@ pub const CompletionReport = struct {
     /// When `Format` is set to `REPORT_CSV_20191124`, the `CompletionReport` is
     /// provided in CSV format, and is delivered to
     /// `{path}/task-{id}/failures.csv`.
-    format: ?ReportFormat,
+    format: ?ReportFormat = null,
 
     /// Required if `Enabled` is set to `true`. Specifies the location of the report
     /// on the file system's
@@ -34,7 +34,7 @@ pub const CompletionReport = struct {
     /// "s3://amzn-s3-demo-bucket/myExportPath/optionalPrefix".
     /// The report provides the following information for each file in the report:
     /// FilePath, FileStatus, and ErrorCode.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// Required if `Enabled` is set to `true`. Specifies the scope of the
     /// `CompletionReport`; `FAILED_FILES_ONLY` is the only scope currently
@@ -42,7 +42,7 @@ pub const CompletionReport = struct {
     /// When `Scope` is set to `FAILED_FILES_ONLY`, the `CompletionReport` only
     /// contains information about files that the data repository task failed to
     /// process.
-    scope: ?ReportScope,
+    scope: ?ReportScope = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

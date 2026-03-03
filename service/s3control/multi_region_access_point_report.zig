@@ -10,19 +10,19 @@ pub const MultiRegionAccessPointReport = struct {
     /// and the alias of an Multi-Region Access Point, see [Rules for naming Amazon
     /// S3 Multi-Region Access
     /// Points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming).
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// When the Multi-Region Access Point create request was received.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The name of the Multi-Region Access Point.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    public_access_block: ?PublicAccessBlockConfiguration,
+    public_access_block: ?PublicAccessBlockConfiguration = null,
 
     /// A collection of the Regions and buckets associated with the Multi-Region
     /// Access Point.
-    regions: ?[]const RegionReport,
+    regions: ?[]const RegionReport = null,
 
     /// The current status of the Multi-Region Access Point.
     ///
@@ -33,5 +33,5 @@ pub const MultiRegionAccessPointReport = struct {
     /// Multi-Region Access Point. If a Multi-Region Access Point has a status of
     /// `PARTIALLY_DELETED`, you can retry a delete
     /// request to finish the deletion of the Multi-Region Access Point.
-    status: ?MultiRegionAccessPointStatus,
+    status: ?MultiRegionAccessPointStatus = null,
 };

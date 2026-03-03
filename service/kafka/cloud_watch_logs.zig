@@ -1,7 +1,7 @@
 pub const CloudWatchLogs = struct {
     enabled: bool,
 
-    log_group: ?[]const u8,
+    log_group: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

@@ -4,10 +4,10 @@ const RoutingRuleMatchHeaders = @import("routing_rule_match_headers.zig").Routin
 /// Represents a routing rule condition.
 pub const RoutingRuleCondition = struct {
     /// The base path to be matched.
-    match_base_paths: ?RoutingRuleMatchBasePaths,
+    match_base_paths: ?RoutingRuleMatchBasePaths = null,
 
     /// The headers to be matched.
-    match_headers: ?RoutingRuleMatchHeaders,
+    match_headers: ?RoutingRuleMatchHeaders = null,
 
     pub const json_field_names = .{
         .match_base_paths = "MatchBasePaths",

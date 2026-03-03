@@ -14,19 +14,19 @@ pub const TransformJobDefinition = struct {
     /// `SingleRecord` means only one record is used per mini-batch. `MultiRecord`
     /// means a mini-batch is set to contain as many records that can fit within the
     /// `MaxPayloadInMB` limit.
-    batch_strategy: ?BatchStrategy,
+    batch_strategy: ?BatchStrategy = null,
 
     /// The environment variables to set in the Docker container. We support up to
     /// 16 key and values entries in the map.
-    environment: ?[]const aws.map.StringMapEntry,
+    environment: ?[]const aws.map.StringMapEntry = null,
 
     /// The maximum number of parallel requests that can be sent to each instance in
     /// a transform job. The default value is 1.
-    max_concurrent_transforms: ?i32,
+    max_concurrent_transforms: ?i32 = null,
 
     /// The maximum payload size allowed, in MB. A payload is the data portion of a
     /// record (without metadata).
-    max_payload_in_mb: ?i32,
+    max_payload_in_mb: ?i32 = null,
 
     /// A description of the input source and the way the transform job consumes it.
     transform_input: TransformInput,

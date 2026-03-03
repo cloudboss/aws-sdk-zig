@@ -6,24 +6,24 @@ const ModelStatus = @import("model_status.zig").ModelStatus;
 /// `ListDocumentClassifiers` operation.
 pub const DocumentClassifierFilter = struct {
     /// The name that you assigned to the document classifier
-    document_classifier_name: ?[]const u8,
+    document_classifier_name: ?[]const u8 = null,
 
     /// Filters the list of classifiers based on status.
-    status: ?ModelStatus,
+    status: ?ModelStatus = null,
 
     /// Filters the list of classifiers based on the time that the classifier was
     /// submitted for
     /// processing. Returns only classifiers submitted after the specified time.
     /// Classifiers are
     /// returned in descending order, newest to oldest.
-    submit_time_after: ?i64,
+    submit_time_after: ?i64 = null,
 
     /// Filters the list of classifiers based on the time that the classifier was
     /// submitted for
     /// processing. Returns only classifiers submitted before the specified time.
     /// Classifiers are
     /// returned in ascending order, oldest to newest.
-    submit_time_before: ?i64,
+    submit_time_before: ?i64 = null,
 
     pub const json_field_names = .{
         .document_classifier_name = "DocumentClassifierName",

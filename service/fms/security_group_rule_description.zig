@@ -2,23 +2,23 @@
 pub const SecurityGroupRuleDescription = struct {
     /// The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6
     /// type number. A value of `-1` indicates all ICMP/ICMPv6 types.
-    from_port: ?i64,
+    from_port: ?i64 = null,
 
     /// The IPv4 ranges for the security group rule.
-    ipv4_range: ?[]const u8,
+    ipv4_range: ?[]const u8 = null,
 
     /// The IPv6 ranges for the security group rule.
-    ipv6_range: ?[]const u8,
+    ipv6_range: ?[]const u8 = null,
 
     /// The ID of the prefix list for the security group rule.
-    prefix_list_id: ?[]const u8,
+    prefix_list_id: ?[]const u8 = null,
 
     /// The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number.
-    protocol: ?[]const u8,
+    protocol: ?[]const u8 = null,
 
     /// The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6
     /// code. A value of `-1` indicates all ICMP/ICMPv6 codes.
-    to_port: ?i64,
+    to_port: ?i64 = null,
 
     pub const json_field_names = .{
         .from_port = "FromPort",

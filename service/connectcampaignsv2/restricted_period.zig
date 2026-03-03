@@ -2,7 +2,7 @@
 pub const RestrictedPeriod = struct {
     end_date: []const u8,
 
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     start_date: []const u8,
 

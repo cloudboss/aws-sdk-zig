@@ -15,7 +15,7 @@ pub const CodeReviewType = struct {
     /// They types of analysis performed during a repository analysis or a pull
     /// request review.
     /// You can specify either `Security`, `CodeQuality`, or both.
-    analysis_types: ?[]const AnalysisType,
+    analysis_types: ?[]const AnalysisType = null,
 
     /// A code review that analyzes all code under a specified branch in an
     /// associated

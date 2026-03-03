@@ -13,8 +13,8 @@ const Tag = @import("tag.zig").Tag;
 /// you'll get an error.
 pub const TagSpecification = struct {
     /// The type of resource to tag on creation.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The tags to apply to the resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

@@ -10,7 +10,7 @@ pub const BedrockKnowledgeStoreConfiguration = struct {
     exact_response: bool = false,
 
     /// Contains the names of the fields used for an exact response to the user.
-    exact_response_fields: ?BedrockKnowledgeStoreExactResponseFields,
+    exact_response_fields: ?BedrockKnowledgeStoreExactResponseFields = null,
 
     pub const json_field_names = .{
         .bedrock_knowledge_base_arn = "bedrockKnowledgeBaseArn",

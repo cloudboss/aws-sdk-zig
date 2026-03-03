@@ -13,7 +13,7 @@ pub const AccountingRequest = struct {
     /// the cluster exists.
     ///
     /// `0` isn't a valid value.
-    default_purge_time_in_days: ?i32,
+    default_purge_time_in_days: ?i32 = null,
 
     /// The default value for `mode` is `NONE`. A value of `STANDARD` means Slurm
     /// accounting is enabled.

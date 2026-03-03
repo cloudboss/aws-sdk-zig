@@ -3,7 +3,7 @@ pub const LifecycleExpiration = struct {
     /// Indicates at what date the object is to be deleted. Should be in GMT ISO
     /// 8601
     /// format.
-    date: ?i64,
+    date: ?i64 = null,
 
     /// Indicates the lifetime, in days, of the objects that are subject to the
     /// rule. The value

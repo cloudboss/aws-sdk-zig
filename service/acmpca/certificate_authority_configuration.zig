@@ -13,7 +13,7 @@ const ASN1Subject = @import("asn1_subject.zig").ASN1Subject;
 pub const CertificateAuthorityConfiguration = struct {
     /// Specifies information to be added to the extension section of the
     /// certificate signing request (CSR).
-    csr_extensions: ?CsrExtensions,
+    csr_extensions: ?CsrExtensions = null,
 
     /// Type of the public key algorithm and size, in bits, of the key pair that
     /// your CA creates when it issues a certificate. When you create a subordinate

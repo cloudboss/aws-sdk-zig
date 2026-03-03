@@ -5,24 +5,24 @@ const DifferentialPrivacyConfiguration = @import("differential_privacy_configura
 /// table.
 pub const ConsolidatedPolicyCustom = struct {
     /// Additional analyses for the consolidated policy.
-    additional_analyses: ?AdditionalAnalyses,
+    additional_analyses: ?AdditionalAnalyses = null,
 
     /// The additional analyses allowed by the consolidated policy.
-    allowed_additional_analyses: ?[]const []const u8,
+    allowed_additional_analyses: ?[]const []const u8 = null,
 
     /// The allowed analyses.
     allowed_analyses: []const []const u8,
 
     /// The allowed analysis providers.
-    allowed_analysis_providers: ?[]const []const u8,
+    allowed_analysis_providers: ?[]const []const u8 = null,
 
     /// The allowed result receivers.
-    allowed_result_receivers: ?[]const []const u8,
+    allowed_result_receivers: ?[]const []const u8 = null,
 
-    differential_privacy: ?DifferentialPrivacyConfiguration,
+    differential_privacy: ?DifferentialPrivacyConfiguration = null,
 
     /// Disallowed output columns
-    disallowed_output_columns: ?[]const []const u8,
+    disallowed_output_columns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .additional_analyses = "additionalAnalyses",

@@ -1,7 +1,7 @@
 /// An entry that appears when a `KeyRegistration` update to Quick Sight fails.
 pub const FailedKeyRegistrationEntry = struct {
     /// The ARN of the KMS key that failed to update.
-    key_arn: ?[]const u8,
+    key_arn: ?[]const u8 = null,
 
     /// A message that provides information about why a `FailedKeyRegistrationEntry`
     /// error occurred.

@@ -8,10 +8,10 @@ pub const LogsConfigurationPolicy = struct {
 
     /// A regular expression pattern that is used to parse the logs and return
     /// information that matches the pattern.
-    filter_pattern: ?[]const u8,
+    filter_pattern: ?[]const u8 = null,
 
     /// Specifies the log redaction configuration for this policy.
-    log_redaction_configuration: ?LogRedactionConfiguration,
+    log_redaction_configuration: ?LogRedactionConfiguration = null,
 
     /// Specifies the type of log this policy applies to. The currently supported
     /// policies are ALL or ERROR_SUMMARY.

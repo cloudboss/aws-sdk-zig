@@ -19,7 +19,7 @@ pub const MembershipAccountsConfigurations = struct {
     /// the organization. When set to `false`, the configuration will only apply to
     /// specifically designated accounts under the AWS Organizational Units
     /// specificied.
-    cover_entire_organization: ?bool,
+    cover_entire_organization: ?bool = null,
 
     /// A list of organizational unit IDs that follow the pattern
     /// `ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}`. These IDs represent the organizational
@@ -31,7 +31,7 @@ pub const MembershipAccountsConfigurations = struct {
     /// * Begin with the prefix 'ou-'
     /// * Contain between 4 and 32 alphanumeric characters in the first segment
     /// * Contain between 8 and 32 alphanumeric characters in the second segment
-    organizational_units: ?[]const []const u8,
+    organizational_units: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .cover_entire_organization = "coverEntireOrganization",

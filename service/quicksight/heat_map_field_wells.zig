@@ -6,7 +6,7 @@ const HeatMapAggregatedFieldWells = @import("heat_map_aggregated_field_wells.zig
 /// the attributes can be defined.
 pub const HeatMapFieldWells = struct {
     /// The aggregated field wells of a heat map.
-    heat_map_aggregated_field_wells: ?HeatMapAggregatedFieldWells,
+    heat_map_aggregated_field_wells: ?HeatMapAggregatedFieldWells = null,
 
     pub const json_field_names = .{
         .heat_map_aggregated_field_wells = "HeatMapAggregatedFieldWells",

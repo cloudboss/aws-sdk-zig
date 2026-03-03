@@ -6,7 +6,7 @@ pub const InstancePropertyStringFilter = struct {
     key: []const u8,
 
     /// The operator used by the filter call.
-    operator: ?InstancePropertyFilterOperator,
+    operator: ?InstancePropertyFilterOperator = null,
 
     /// The filter key name to describe your managed nodes.
     values: []const []const u8,

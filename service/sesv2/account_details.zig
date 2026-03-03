@@ -6,12 +6,12 @@ const ReviewDetails = @import("review_details.zig").ReviewDetails;
 pub const AccountDetails = struct {
     /// Additional email addresses where updates are sent about your account review
     /// process.
-    additional_contact_email_addresses: ?[]const []const u8,
+    additional_contact_email_addresses: ?[]const []const u8 = null,
 
     /// The language you would prefer for the case. The contact language can be one
     /// of
     /// `ENGLISH` or `JAPANESE`.
-    contact_language: ?ContactLanguage,
+    contact_language: ?ContactLanguage = null,
 
     /// The type of email your account is sending. The mail type can be one of the
     /// following:
@@ -21,18 +21,18 @@ pub const AccountDetails = struct {
     ///
     /// * `TRANSACTIONAL` – Most of your sending traffic is to
     /// communicate during a transaction with a customer.
-    mail_type: ?MailType,
+    mail_type: ?MailType = null,
 
     /// Information about the review of the latest details you submitted.
-    review_details: ?ReviewDetails,
+    review_details: ?ReviewDetails = null,
 
     /// A description of the types of email that you plan to send.
-    use_case_description: ?[]const u8,
+    use_case_description: ?[]const u8 = null,
 
     /// The URL of your website. This information helps us better understand the
     /// type of
     /// content that you plan to send.
-    website_url: ?[]const u8,
+    website_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .additional_contact_email_addresses = "AdditionalContactEmailAddresses",

@@ -7,20 +7,20 @@ const JobStatus = @import("job_status.zig").JobStatus;
 /// a job list.
 pub const JobListDescriptor = struct {
     /// A timestamp indicating when the specified job was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The user-specified description that was included in the specified job's
     /// `Create
     /// Job` request.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID for the specified job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The operation that the specified job is configured to run on every object
     /// listed in the
     /// manifest.
-    operation: ?OperationName,
+    operation: ?OperationName = null,
 
     /// The current priority for the specified job.
     priority: i32 = 0,
@@ -28,13 +28,13 @@ pub const JobListDescriptor = struct {
     /// Describes the total number of tasks that the specified job has run, the
     /// number of tasks
     /// that succeeded, and the number of tasks that failed.
-    progress_summary: ?JobProgressSummary,
+    progress_summary: ?JobProgressSummary = null,
 
     /// The specified job's current status.
-    status: ?JobStatus,
+    status: ?JobStatus = null,
 
     /// A timestamp indicating when the specified job terminated. A job's
     /// termination date is
     /// the date and time when it succeeded, failed, or was canceled.
-    termination_date: ?i64,
+    termination_date: ?i64 = null,
 };

@@ -4,7 +4,7 @@ pub const DataReplicationInfoReplicatedDisk = struct {
     backlogged_storage_bytes: i64 = 0,
 
     /// Request to query device name.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// Request to query amount of data replicated in bytes.
     replicated_storage_bytes: i64 = 0,

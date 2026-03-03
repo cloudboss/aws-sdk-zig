@@ -2,19 +2,19 @@
 /// historical data.
 pub const DataQualityMetricValues = struct {
     /// The actual value of the data quality metric.
-    actual_value: ?f64,
+    actual_value: ?f64 = null,
 
     /// The expected value of the data quality metric according to the analysis of
     /// historical data.
-    expected_value: ?f64,
+    expected_value: ?f64 = null,
 
     /// The lower limit of the data quality metric value according to the analysis
     /// of historical data.
-    lower_limit: ?f64,
+    lower_limit: ?f64 = null,
 
     /// The upper limit of the data quality metric value according to the analysis
     /// of historical data.
-    upper_limit: ?f64,
+    upper_limit: ?f64 = null,
 
     pub const json_field_names = .{
         .actual_value = "ActualValue",

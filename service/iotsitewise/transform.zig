@@ -27,7 +27,7 @@ pub const Transform = struct {
     /// Amazon Web Services Cloud.
     /// You can also configure transforms to be computed at the edge or in the
     /// cloud.
-    processing_config: ?TransformProcessingConfig,
+    processing_config: ?TransformProcessingConfig = null,
 
     /// The list of variables used in the expression.
     variables: []const ExpressionVariable,

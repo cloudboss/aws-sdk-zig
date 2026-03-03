@@ -10,13 +10,13 @@
 /// defense Amazon Web Services managed rule groups.
 pub const RuleSummary = struct {
     /// The contents of the rule's metadata.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     /// The contents taken from the rule's msg field.
-    msg: ?[]const u8,
+    msg: ?[]const u8 = null,
 
     /// The unique identifier (Signature ID) of the Suricata rule.
-    sid: ?[]const u8,
+    sid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metadata = "Metadata",

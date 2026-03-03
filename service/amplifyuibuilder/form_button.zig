@@ -4,13 +4,13 @@ const FieldPosition = @import("field_position.zig").FieldPosition;
 /// form.
 pub const FormButton = struct {
     /// Describes the button's properties.
-    children: ?[]const u8,
+    children: ?[]const u8 = null,
 
     /// Specifies whether the button is visible on the form.
-    excluded: ?bool,
+    excluded: ?bool = null,
 
     /// The position of the button.
-    position: ?FieldPosition,
+    position: ?FieldPosition = null,
 
     pub const json_field_names = .{
         .children = "children",

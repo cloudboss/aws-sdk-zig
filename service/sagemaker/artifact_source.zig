@@ -3,7 +3,7 @@ const ArtifactSourceType = @import("artifact_source_type.zig").ArtifactSourceTyp
 /// A structure describing the source of an artifact.
 pub const ArtifactSource = struct {
     /// A list of source types.
-    source_types: ?[]const ArtifactSourceType,
+    source_types: ?[]const ArtifactSourceType = null,
 
     /// The URI of the source.
     source_uri: []const u8,

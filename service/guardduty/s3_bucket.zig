@@ -5,43 +5,43 @@ const PublicAccessStatus = @import("public_access_status.zig").PublicAccessStatu
 pub const S3Bucket = struct {
     /// Contains information about the public access policies that apply to the
     /// Amazon S3 bucket at the account level.
-    account_public_access: ?PublicAccessConfiguration,
+    account_public_access: ?PublicAccessConfiguration = null,
 
     /// Contains information about public access policies that apply to the Amazon
     /// S3 bucket.
-    bucket_public_access: ?PublicAccessConfiguration,
+    bucket_public_access: ?PublicAccessConfiguration = null,
 
     /// The timestamp at which the Amazon S3 bucket was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Describes the effective permissions on this S3 bucket, after factoring all
     /// the attached policies.
-    effective_permission: ?[]const u8,
+    effective_permission: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the encryption key that is used to encrypt
     /// the Amazon S3 bucket and its objects.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The type of encryption used for the Amazon S3 buckets and its objects. For
     /// more information,
     /// see [Protecting data with server-side
     /// encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html)
     /// in the *Amazon S3 User Guide*.
-    encryption_type: ?[]const u8,
+    encryption_type: ?[]const u8 = null,
 
     /// The owner ID of the associated S3Amazon S3bucket.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// Indicates whether or not the public read access is allowed for an Amazon S3
     /// bucket.
-    public_read_access: ?PublicAccessStatus,
+    public_read_access: ?PublicAccessStatus = null,
 
     /// Indicates whether or not the public write access is allowed for an Amazon S3
     /// bucket.
-    public_write_access: ?PublicAccessStatus,
+    public_write_access: ?PublicAccessStatus = null,
 
     /// Represents a list of Amazon S3 object identifiers.
-    s3_object_uids: ?[]const []const u8,
+    s3_object_uids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .account_public_access = "AccountPublicAccess",

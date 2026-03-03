@@ -10,7 +10,7 @@ pub const SMBLocalGroups = struct {
     /// Gateway Admins can use the Shared Folders Microsoft Management Console
     /// snap-in to
     /// force-close files that are open and locked.
-    gateway_admins: ?[]const []const u8,
+    gateway_admins: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .gateway_admins = "GatewayAdmins",

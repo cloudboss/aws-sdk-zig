@@ -21,7 +21,7 @@ pub const HttpRetryPolicy = struct {
     ///
     /// * **stream-error** – Retry on refused
     /// stream
-    http_retry_events: ?[]const []const u8,
+    http_retry_events: ?[]const []const u8 = null,
 
     /// The maximum number of retry attempts.
     max_retries: i64,
@@ -32,7 +32,7 @@ pub const HttpRetryPolicy = struct {
     /// Specify a valid value. The event occurs before any processing of a request
     /// has started and is encountered when the upstream is temporarily or
     /// permanently unavailable.
-    tcp_retry_events: ?[]const TcpRetryPolicyEvent,
+    tcp_retry_events: ?[]const TcpRetryPolicyEvent = null,
 
     pub const json_field_names = .{
         .http_retry_events = "httpRetryEvents",

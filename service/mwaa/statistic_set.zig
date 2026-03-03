@@ -4,16 +4,16 @@
 /// CloudWatch](https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html).
 pub const StatisticSet = struct {
     /// **Internal only**. The maximum value of the sample set.
-    maximum: ?f64,
+    maximum: ?f64 = null,
 
     /// **Internal only**. The minimum value of the sample set.
-    minimum: ?f64,
+    minimum: ?f64 = null,
 
     /// **Internal only**. The number of samples used for the statistic set.
-    sample_count: ?i32,
+    sample_count: ?i32 = null,
 
     /// **Internal only**. The sum of values for the sample set.
-    sum: ?f64,
+    sum: ?f64 = null,
 
     pub const json_field_names = .{
         .maximum = "Maximum",

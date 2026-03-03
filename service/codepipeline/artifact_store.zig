@@ -13,7 +13,7 @@ pub const ArtifactStore = struct {
     /// Amazon Web Services Key Management Service key. If this is undefined, the
     /// default key
     /// for Amazon S3 is used.
-    encryption_key: ?EncryptionKey,
+    encryption_key: ?EncryptionKey = null,
 
     /// The S3 bucket used for storing the artifacts for a pipeline. You can specify
     /// the

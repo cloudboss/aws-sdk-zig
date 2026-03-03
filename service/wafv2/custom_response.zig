@@ -19,7 +19,7 @@ pub const CustomResponse = struct {
     /// default action `BlockAction` setting, you reference the response body using
     /// this
     /// key.
-    custom_response_body_key: ?[]const u8,
+    custom_response_body_key: ?[]const u8 = null,
 
     /// The HTTP status code to return to the client.
     ///
@@ -36,7 +36,7 @@ pub const CustomResponse = struct {
     /// response settings, see [WAF
     /// quotas](https://docs.aws.amazon.com/waf/latest/developerguide/limits.html)
     /// in the *WAF Developer Guide*.
-    response_headers: ?[]const CustomHTTPHeader,
+    response_headers: ?[]const CustomHTTPHeader = null,
 
     pub const json_field_names = .{
         .custom_response_body_key = "CustomResponseBodyKey",

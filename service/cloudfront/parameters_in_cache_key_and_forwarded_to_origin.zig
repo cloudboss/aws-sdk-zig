@@ -45,7 +45,7 @@ pub const ParametersInCacheKeyAndForwardedToOrigin = struct {
     /// request. By default, it's not included in the cache key and it's not
     /// included in origin requests. In this case, you can manually add
     /// `Accept-Encoding` to the headers whitelist like any other HTTP header.
-    enable_accept_encoding_brotli: ?bool,
+    enable_accept_encoding_brotli: ?bool = null,
 
     /// A flag that can affect whether the `Accept-Encoding` HTTP header is included
     /// in the cache key and included in requests that CloudFront sends to the

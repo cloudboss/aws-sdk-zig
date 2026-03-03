@@ -6,7 +6,7 @@ const RenewalStatus = @import("renewal_status.zig").RenewalStatus;
 pub const RenewalSummary = struct {
     /// An array of objects that describe the domain validation records of the
     /// certificate.
-    domain_validation_records: ?[]const DomainValidationRecord,
+    domain_validation_records: ?[]const DomainValidationRecord = null,
 
     /// The renewal status of the certificate.
     ///
@@ -44,13 +44,13 @@ pub const RenewalSummary = struct {
     /// the
     /// certificate. You can request a new certificate using the `CreateCertificate`
     /// action.
-    renewal_status: ?RenewalStatus,
+    renewal_status: ?RenewalStatus = null,
 
     /// The reason for the renewal status of the certificate.
-    renewal_status_reason: ?[]const u8,
+    renewal_status_reason: ?[]const u8 = null,
 
     /// The timestamp when the certificate was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .domain_validation_records = "domainValidationRecords",

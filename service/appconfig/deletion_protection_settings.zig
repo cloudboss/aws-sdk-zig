@@ -10,7 +10,7 @@
 /// were created in the past hour.
 pub const DeletionProtectionSettings = struct {
     /// A parameter that indicates if deletion protection is enabled or not.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The time interval during which AppConfig monitors for calls to
     /// [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html) or for a
@@ -21,7 +21,7 @@ pub const DeletionProtectionSettings = struct {
     /// environment,
     /// specify `BYPASS` for the `DeletionProtectionCheck` parameter for
     /// either or .
-    protection_period_in_minutes: ?i32,
+    protection_period_in_minutes: ?i32 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

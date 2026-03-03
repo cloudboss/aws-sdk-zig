@@ -20,7 +20,7 @@ const ParameterRanges = @import("parameter_ranges.zig").ParameterRanges;
 /// algorithm, the training data, and the specified metric objective.
 pub const HyperParameterTuningJobConfig = struct {
     /// Specifies the ranges of valid values for the hyperparameters.
-    parameter_ranges: ?ParameterRanges,
+    parameter_ranges: ?ParameterRanges = null,
 
     pub const json_field_names = .{
         .parameter_ranges = "ParameterRanges",

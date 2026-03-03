@@ -7,7 +7,7 @@
 /// *Amazon Web Services CloudFormation User Guide*.
 pub const CloudFormationCollection = struct {
     /// An array of CloudFormation stack names.
-    stack_names: ?[]const []const u8,
+    stack_names: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .stack_names = "StackNames",

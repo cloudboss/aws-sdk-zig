@@ -2,7 +2,7 @@
 /// SSH session begins.
 pub const ExecuteCommandSessionConfiguration = struct {
     /// An array of arguments containing arguments and members.
-    arguments: ?[]const []const u8,
+    arguments: ?[]const []const u8 = null,
 
     /// The command used at the beginning of the SSH session to a Dev Environment.
     command: []const u8,

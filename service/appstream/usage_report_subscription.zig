@@ -4,7 +4,7 @@ const LastReportGenerationExecutionError = @import("last_report_generation_execu
 /// Describes information about the usage report subscription.
 pub const UsageReportSubscription = struct {
     /// The time when the last usage report was generated.
-    last_generated_report_date: ?i64,
+    last_generated_report_date: ?i64 = null,
 
     /// The Amazon S3 bucket where generated reports are stored.
     ///
@@ -18,13 +18,13 @@ pub const UsageReportSubscription = struct {
     /// enabled on-instance session scripts,
     /// when you enable usage reports, WorkSpaces Applications creates a new S3
     /// bucket.
-    s3_bucket_name: ?[]const u8,
+    s3_bucket_name: ?[]const u8 = null,
 
     /// The schedule for generating usage reports.
-    schedule: ?UsageReportSchedule,
+    schedule: ?UsageReportSchedule = null,
 
     /// The errors that were returned if usage reports couldn't be generated.
-    subscription_errors: ?[]const LastReportGenerationExecutionError,
+    subscription_errors: ?[]const LastReportGenerationExecutionError = null,
 
     pub const json_field_names = .{
         .last_generated_report_date = "LastGeneratedReportDate",

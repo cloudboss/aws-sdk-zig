@@ -4,7 +4,7 @@ pub const RawMetricData = struct {
     metric_name: []const u8,
 
     /// The metric step (epoch).
-    step: ?i32,
+    step: ?i32 = null,
 
     /// The time that the metric was recorded.
     timestamp: i64,

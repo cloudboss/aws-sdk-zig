@@ -8,7 +8,7 @@ pub const MembershipProtectedQueryResultConfiguration = struct {
     /// The unique ARN for an IAM role that is used by Clean Rooms to write
     /// protected query results to the result location, given by the member who can
     /// receive results.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .output_configuration = "outputConfiguration",

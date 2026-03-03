@@ -6,40 +6,40 @@ const Tag = @import("tag.zig").Tag;
 /// The model card for a model displayed in the Amazon SageMaker Model
 /// Dashboard.
 pub const ModelDashboardModelCard = struct {
-    created_by: ?UserContext,
+    created_by: ?UserContext = null,
 
     /// A timestamp that indicates when the model card was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
-    last_modified_by: ?UserContext,
+    last_modified_by: ?UserContext = null,
 
     /// A timestamp that indicates when the model card was last updated.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) for a model card.
-    model_card_arn: ?[]const u8,
+    model_card_arn: ?[]const u8 = null,
 
     /// The name of a model card.
-    model_card_name: ?[]const u8,
+    model_card_name: ?[]const u8 = null,
 
     /// The model card status.
-    model_card_status: ?ModelCardStatus,
+    model_card_status: ?ModelCardStatus = null,
 
     /// The model card version.
-    model_card_version: ?i32,
+    model_card_version: ?i32 = null,
 
     /// For models created in SageMaker, this is the model ARN. For models created
     /// outside of SageMaker, this is a user-customized string.
-    model_id: ?[]const u8,
+    model_id: ?[]const u8 = null,
 
     /// A model card's risk rating. Can be low, medium, or high.
-    risk_rating: ?[]const u8,
+    risk_rating: ?[]const u8 = null,
 
     /// The KMS Key ID (`KMSKeyId`) for encryption of model card information.
-    security_config: ?ModelCardSecurityConfig,
+    security_config: ?ModelCardSecurityConfig = null,
 
     /// The tags associated with a model card.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .created_by = "CreatedBy",

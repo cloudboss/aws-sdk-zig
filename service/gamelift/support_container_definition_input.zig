@@ -41,12 +41,12 @@ pub const SupportContainerDefinitionInput = struct {
     /// started. This dependency is reversed on shutdown, which means that
     /// *ContainerB* must shut down before *ContainerA* can
     /// shut down.
-    depends_on: ?[]const ContainerDependency,
+    depends_on: ?[]const ContainerDependency = null,
 
     /// A set of environment variables to pass to the container on startup. See the
     /// [ContainerDefinition::environment](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-environment) parameter in the *Amazon Elastic Container Service API
     /// Reference*.
-    environment_override: ?[]const ContainerEnvironment,
+    environment_override: ?[]const ContainerEnvironment = null,
 
     /// Flags the container as vital for the container group to function properly.
     /// If an essential
@@ -55,7 +55,7 @@ pub const SupportContainerDefinitionInput = struct {
     /// per-instance container group must be essential. When flagging a container as
     /// essential, also
     /// configure a health check so that the container can signal that it's healthy.
-    essential: ?bool,
+    essential: ?bool = null,
 
     /// Configuration for a non-terminal health check. A container automatically
     /// restarts if it
@@ -64,7 +64,7 @@ pub const SupportContainerDefinitionInput = struct {
     /// as unhealthy and restart it. If an essential container fails a health check,
     /// the entire
     /// container group restarts.
-    health_check: ?ContainerHealthCheck,
+    health_check: ?ContainerHealthCheck = null,
 
     /// The location of the container image to deploy to a container fleet. Provide
     /// an image in an
@@ -96,12 +96,12 @@ pub const SupportContainerDefinitionInput = struct {
     ///
     /// **Related data type: **
     /// [ContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html)TotalMemoryLimitMebibytes``
-    memory_hard_limit_mebibytes: ?i32,
+    memory_hard_limit_mebibytes: ?i32 = null,
 
     /// A mount point that binds a path inside the container to a file or directory
     /// on the host
     /// system and lets it access the file or directory.
-    mount_points: ?[]const ContainerMountPoint,
+    mount_points: ?[]const ContainerMountPoint = null,
 
     /// A set of ports that Amazon GameLift Servers can assign to processes in a
     /// container. The container port
@@ -118,7 +118,7 @@ pub const SupportContainerDefinitionInput = struct {
     /// port to an externally accessible connection port (see the container fleet
     /// property
     /// `ConnectionPortRange`).
-    port_configuration: ?ContainerPortConfiguration,
+    port_configuration: ?ContainerPortConfiguration = null,
 
     /// The number of vCPU units to reserve for this container. The container can
     /// use more
@@ -128,7 +128,7 @@ pub const SupportContainerDefinitionInput = struct {
     ///
     /// **Related data type: **
     /// [ContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html) TotalCpuLimit
-    vcpu: ?f64,
+    vcpu: ?f64 = null,
 
     pub const json_field_names = .{
         .container_name = "ContainerName",

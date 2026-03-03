@@ -10,7 +10,7 @@ pub const GcpMySQLSettings = struct {
     /// For this parameter, provide the code of the script itself, not the name of a
     /// file
     /// containing the script.
-    after_connect_script: ?[]const u8,
+    after_connect_script: ?[]const u8 = null,
 
     /// Cleans and recreates table metadata information on the replication instance
     /// when a
@@ -18,7 +18,7 @@ pub const GcpMySQLSettings = struct {
     /// the table could
     /// result in different information about the table cached in the replication
     /// instance.
-    clean_source_metadata_on_mismatch: ?bool,
+    clean_source_metadata_on_mismatch: ?bool = null,
 
     /// Database name for the endpoint. For a MySQL source or target endpoint, don't
     /// explicitly
@@ -29,7 +29,7 @@ pub const GcpMySQLSettings = struct {
     /// task tables to this single database. For MySQL endpoints, you specify the
     /// database only
     /// when you specify the schema in the table-mapping rules of the DMS task.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// Specifies how often to check the binary log for new changes/events when the
     /// database is
@@ -39,14 +39,14 @@ pub const GcpMySQLSettings = struct {
     ///
     /// In the example, DMS checks for changes in the binary logs every five
     /// seconds.
-    events_poll_interval: ?i32,
+    events_poll_interval: ?i32 = null,
 
     /// Specifies the maximum size (in KB) of any .csv file used to transfer data to
     /// a
     /// MySQL-compatible database.
     ///
     /// Example: `maxFileSize=512`
-    max_file_size: ?i32,
+    max_file_size: ?i32 = null,
 
     /// Improves performance when loading data into the MySQL-compatible target
     /// database.
@@ -59,13 +59,13 @@ pub const GcpMySQLSettings = struct {
     /// one.
     ///
     /// Example: `parallelLoadThreads=1`
-    parallel_load_threads: ?i32,
+    parallel_load_threads: ?i32 = null,
 
     /// Endpoint connection password.
-    password: ?[]const u8,
+    password: ?[]const u8 = null,
 
     /// Endpoint TCP port.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as
     /// the trusted entity and grants the required permissions to access the value
@@ -86,31 +86,31 @@ pub const GcpMySQLSettings = struct {
     /// Service
     /// resources](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
     /// in the Database Migration Service User Guide.
-    secrets_manager_access_role_arn: ?[]const u8,
+    secrets_manager_access_role_arn: ?[]const u8 = null,
 
     /// The full ARN, partial ARN, or friendly name of the `SecretsManagerSecret`
     /// that contains the MySQL endpoint connection details.
-    secrets_manager_secret_id: ?[]const u8,
+    secrets_manager_secret_id: ?[]const u8 = null,
 
     /// The MySQL host name.
-    server_name: ?[]const u8,
+    server_name: ?[]const u8 = null,
 
     /// Specifies the time zone for the source MySQL database.
     ///
     /// Example: `serverTimezone=US/Pacific;`
     ///
     /// Note: Do not enclose time zones in single quotes.
-    server_timezone: ?[]const u8,
+    server_timezone: ?[]const u8 = null,
 
     /// Specifies where to migrate source tables on the target, either to a single
     /// database or
     /// multiple databases.
     ///
     /// Example: `targetDbType=MULTIPLE_DATABASES`
-    target_db_type: ?TargetDbType,
+    target_db_type: ?TargetDbType = null,
 
     /// Endpoint connection user name.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .after_connect_script = "AfterConnectScript",

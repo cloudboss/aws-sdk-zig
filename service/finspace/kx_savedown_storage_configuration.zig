@@ -5,17 +5,17 @@ const KxSavedownStorageType = @import("kx_savedown_storage_type.zig").KxSavedown
 /// the cluster node is restarted.
 pub const KxSavedownStorageConfiguration = struct {
     /// The size of temporary storage in gibibytes.
-    size: ?i32,
+    size: ?i32 = null,
 
     /// The type of writeable storage space for temporarily storing your savedown
     /// data. The valid values are:
     ///
     /// * SDS01 – This type represents 3000 IOPS and io2 ebs volume type.
-    @"type": ?KxSavedownStorageType,
+    @"type": ?KxSavedownStorageType = null,
 
     /// The name of the kdb volume that you want to use as writeable save-down
     /// storage for clusters.
-    volume_name: ?[]const u8,
+    volume_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .size = "size",

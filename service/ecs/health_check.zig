@@ -212,14 +212,14 @@ pub const HealthCheck = struct {
     /// between 5 and 300 seconds. The default value is 30 seconds. This value
     /// applies only when
     /// you specify a `command`.
-    interval: ?i32,
+    interval: ?i32 = null,
 
     /// The number of times to retry a failed health check before the container is
     /// considered
     /// unhealthy. You may specify between 1 and 10 retries. The default value is 3.
     /// This value
     /// applies only when you specify a `command`.
-    retries: ?i32,
+    retries: ?i32 = null,
 
     /// The optional grace period to provide containers time to bootstrap before
     /// failed health
@@ -232,14 +232,14 @@ pub const HealthCheck = struct {
     /// is considered healthy and any subsequent failures count toward the maximum
     /// number of
     /// retries.
-    start_period: ?i32,
+    start_period: ?i32 = null,
 
     /// The time period in seconds to wait for a health check to succeed before it
     /// is
     /// considered a failure. You may specify between 2 and 60 seconds. The default
     /// value is 5.
     /// This value applies only when you specify a `command`.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 
     pub const json_field_names = .{
         .command = "command",

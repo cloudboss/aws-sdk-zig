@@ -3,26 +3,26 @@
 pub const DomainMembership = struct {
     /// The ARN for the Secrets Manager secret with the credentials for the user
     /// that's a member of the domain.
-    auth_secret_arn: ?[]const u8,
+    auth_secret_arn: ?[]const u8 = null,
 
     /// The IPv4 DNS IP addresses of the primary and secondary Active Directory
     /// domain controllers.
-    dns_ips: ?[]const []const u8,
+    dns_ips: ?[]const []const u8 = null,
 
     /// The identifier of the Active Directory Domain.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// The fully qualified domain name (FQDN) of the Active Directory Domain.
-    fqdn: ?[]const u8,
+    fqdn: ?[]const u8 = null,
 
     /// The name of the IAM role used when making API calls to the Directory
     /// Service.
-    iam_role_name: ?[]const u8,
+    iam_role_name: ?[]const u8 = null,
 
     /// The Active Directory organizational unit for the DB instance or cluster.
-    ou: ?[]const u8,
+    ou: ?[]const u8 = null,
 
     /// The status of the Active Directory Domain membership for the DB instance or
     /// cluster. Values include `joined`, `pending-join`, `failed`, and so on.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 };

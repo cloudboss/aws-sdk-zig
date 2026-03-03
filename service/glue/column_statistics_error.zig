@@ -5,10 +5,10 @@ const ErrorDetail = @import("error_detail.zig").ErrorDetail;
 /// failure.
 pub const ColumnStatisticsError = struct {
     /// The `ColumnStatistics` of the column.
-    column_statistics: ?ColumnStatistics,
+    column_statistics: ?ColumnStatistics = null,
 
     /// An error message with the reason for the failure of an operation.
-    @"error": ?ErrorDetail,
+    @"error": ?ErrorDetail = null,
 
     pub const json_field_names = .{
         .column_statistics = "ColumnStatistics",

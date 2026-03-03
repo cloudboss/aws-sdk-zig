@@ -7,7 +7,7 @@ const EBSSavingsOpportunityAfterDiscounts = @import("ebs_savings_opportunity_aft
 /// instance.
 pub const VolumeRecommendationOption = struct {
     /// An array of objects that describe a volume configuration.
-    configuration: ?VolumeConfiguration,
+    configuration: ?VolumeConfiguration = null,
 
     /// The performance risk of the volume recommendation option.
     ///
@@ -35,12 +35,12 @@ pub const VolumeRecommendationOption = struct {
     /// option. Savings opportunity includes the estimated monthly savings amount
     /// and
     /// percentage.
-    savings_opportunity: ?SavingsOpportunity,
+    savings_opportunity: ?SavingsOpportunity = null,
 
     /// An object that describes the savings opportunity for the Amazon EBS volume
     /// recommendation option with specific discounts. Savings
     /// opportunity includes the estimated monthly savings and percentage.
-    savings_opportunity_after_discounts: ?EBSSavingsOpportunityAfterDiscounts,
+    savings_opportunity_after_discounts: ?EBSSavingsOpportunityAfterDiscounts = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

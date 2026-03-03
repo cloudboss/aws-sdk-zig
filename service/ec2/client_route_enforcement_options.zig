@@ -20,5 +20,5 @@ pub const ClientRouteEnforcementOptions = struct {
     /// Valid values: `true | false`
     ///
     /// Default value: `false`
-    enforced: ?bool,
+    enforced: ?bool = null,
 };

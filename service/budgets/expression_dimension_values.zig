@@ -9,7 +9,7 @@ pub const ExpressionDimensionValues = struct {
     /// The match options that you can use to filter your results. You can specify
     /// only one of these
     /// values in the array.
-    match_options: ?[]const MatchOption,
+    match_options: ?[]const MatchOption = null,
 
     /// The metadata values you can specify to filter upon, so that the results all
     /// match at least

@@ -15,7 +15,7 @@ pub const TaskDetails = struct {
     industry_segments: []const IndustrySegment,
 
     /// The updated localized content for the partner profile.
-    localized_contents: ?[]const LocalizedContent,
+    localized_contents: ?[]const LocalizedContent = null,
 
     /// The updated logo URL for the partner profile.
     logo_url: []const u8,

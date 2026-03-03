@@ -7,7 +7,7 @@ const Finding = @import("finding.zig").Finding;
 /// associated metadata and analysis findings to help users evaluate and select
 /// the most appropriate policy option.
 pub const PolicyGenerationAsset = struct {
-    definition: ?PolicyDefinition,
+    definition: ?PolicyDefinition = null,
 
     /// Analysis findings and insights related to this specific generated policy
     /// asset. These findings may include validation results, potential issues, or

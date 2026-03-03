@@ -38,7 +38,7 @@ pub const InitialVlans = struct {
 
     /// A unique ID for a network access control list that the HCX VLAN uses.
     /// Required when `isHcxPublic` is set to `true`.
-    hcx_network_acl_id: ?[]const u8,
+    hcx_network_acl_id: ?[]const u8 = null,
 
     /// Determines if the HCX VLAN that Amazon EVS provisions is public or private.
     is_hcx_public: bool = false,

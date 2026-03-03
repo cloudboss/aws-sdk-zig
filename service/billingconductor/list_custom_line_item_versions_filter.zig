@@ -4,7 +4,7 @@ const ListCustomLineItemVersionsBillingPeriodRangeFilter = @import("list_custom_
 /// versions reside.
 pub const ListCustomLineItemVersionsFilter = struct {
     /// The billing period range in which the custom line item version is applied.
-    billing_period_range: ?ListCustomLineItemVersionsBillingPeriodRangeFilter,
+    billing_period_range: ?ListCustomLineItemVersionsBillingPeriodRangeFilter = null,
 
     pub const json_field_names = .{
         .billing_period_range = "BillingPeriodRange",

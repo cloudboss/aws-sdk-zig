@@ -7,7 +7,7 @@ pub const EnvironmentTier = struct {
     /// * For *Web server tier* – `WebServer`
     ///
     /// * For *Worker tier* – `Worker`
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of this environment tier.
     ///
@@ -16,7 +16,7 @@ pub const EnvironmentTier = struct {
     /// * For *Web server tier* – `Standard`
     ///
     /// * For *Worker tier* – `SQS/HTTP`
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The version of this environment tier. When you don't set a value to it,
     /// Elastic Beanstalk uses the
@@ -25,5 +25,5 @@ pub const EnvironmentTier = struct {
     /// This member is deprecated. Any specific version that you set may become out
     /// of date.
     /// We recommend leaving it unspecified.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 };

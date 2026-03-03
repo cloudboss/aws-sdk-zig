@@ -8,10 +8,10 @@ const TLEData = @import("tle_data.zig").TLEData;
 /// section](https://docs.aws.amazon.com/ground-station/latest/ug/providing-tle-ephemeris-data.html) of the AWS Ground Station user guide.
 pub const TLEEphemeris = struct {
     /// The Amazon S3 object that contains the ephemeris data.
-    s_3_object: ?S3Object,
+    s_3_object: ?S3Object = null,
 
     /// TLE data that you provide directly instead of using an Amazon S3 object.
-    tle_data: ?[]const TLEData,
+    tle_data: ?[]const TLEData = null,
 
     pub const json_field_names = .{
         .s_3_object = "s3Object",

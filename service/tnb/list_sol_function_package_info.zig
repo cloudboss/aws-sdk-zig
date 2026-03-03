@@ -17,7 +17,7 @@ pub const ListSolFunctionPackageInfo = struct {
     id: []const u8,
 
     /// The metadata of the function package.
-    metadata: ?ListSolFunctionPackageMetadata,
+    metadata: ?ListSolFunctionPackageMetadata = null,
 
     /// Onboarding state of the function package.
     onboarding_state: OnboardingState,
@@ -29,16 +29,16 @@ pub const ListSolFunctionPackageInfo = struct {
     usage_state: UsageState,
 
     /// Identifies the function package and the function package descriptor.
-    vnfd_id: ?[]const u8,
+    vnfd_id: ?[]const u8 = null,
 
     /// Identifies the version of the function package descriptor.
-    vnfd_version: ?[]const u8,
+    vnfd_version: ?[]const u8 = null,
 
     /// The product name for the network function.
-    vnf_product_name: ?[]const u8,
+    vnf_product_name: ?[]const u8 = null,
 
     /// Provider of the function package and the function package descriptor.
-    vnf_provider: ?[]const u8,
+    vnf_provider: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

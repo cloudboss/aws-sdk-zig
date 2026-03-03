@@ -1,17 +1,17 @@
 /// The credentials used when the authentication type is OAuth2 authentication.
 pub const OAuth2Credentials = struct {
     /// The access token used when the authentication type is OAuth2.
-    access_token: ?[]const u8,
+    access_token: ?[]const u8 = null,
 
     /// The JSON Web Token (JWT) used when the authentication type is OAuth2.
-    jwt_token: ?[]const u8,
+    jwt_token: ?[]const u8 = null,
 
     /// The refresh token used when the authentication type is OAuth2.
-    refresh_token: ?[]const u8,
+    refresh_token: ?[]const u8 = null,
 
     /// The client application client secret if the client application is user
     /// managed.
-    user_managed_client_application_client_secret: ?[]const u8,
+    user_managed_client_application_client_secret: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_token = "AccessToken",

@@ -14,7 +14,7 @@ pub const DedicatedIp = struct {
     ip: []const u8,
 
     /// The name of the dedicated IP pool that the IP address is associated with.
-    pool_name: ?[]const u8,
+    pool_name: ?[]const u8 = null,
 
     /// Indicates the progress of your dedicated IP warm-up:
     ///

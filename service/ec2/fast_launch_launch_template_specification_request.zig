@@ -6,12 +6,12 @@ pub const FastLaunchLaunchTemplateSpecificationRequest = struct {
     /// Specify the ID of the launch template that the AMI should use for Windows
     /// fast
     /// launch.
-    launch_template_id: ?[]const u8,
+    launch_template_id: ?[]const u8 = null,
 
     /// Specify the name of the launch template that the AMI should use for Windows
     /// fast
     /// launch.
-    launch_template_name: ?[]const u8,
+    launch_template_name: ?[]const u8 = null,
 
     /// Specify the version of the launch template that the AMI should use for
     /// Windows fast

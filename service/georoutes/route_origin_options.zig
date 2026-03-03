@@ -9,16 +9,16 @@ pub const RouteOriginOptions = struct {
     avoid_actions_for_distance: i64 = 0,
 
     /// Avoid U-turns for calculation on highways and motorways.
-    avoid_u_turns: ?bool,
+    avoid_u_turns: ?bool = null,
 
     /// GPS Heading at the position.
     heading: f64 = 0,
 
     /// Options to configure matching the provided position to the road network.
-    matching: ?RouteMatchingOptions,
+    matching: ?RouteMatchingOptions = null,
 
     /// Options to configure matching the provided position to a side of the street.
-    side_of_street: ?RouteSideOfStreetOptions,
+    side_of_street: ?RouteSideOfStreetOptions = null,
 
     pub const json_field_names = .{
         .avoid_actions_for_distance = "AvoidActionsForDistance",

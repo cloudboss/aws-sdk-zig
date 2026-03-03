@@ -11,29 +11,29 @@ pub const TrainedModelInferenceJobSummary = struct {
 
     /// The Amazon Resource Name (ARN) of the configured model algorithm association
     /// that is used for the trained model inference job.
-    configured_model_algorithm_association_arn: ?[]const u8,
+    configured_model_algorithm_association_arn: ?[]const u8 = null,
 
     /// The time at which the trained model inference job was created.
     create_time: i64,
 
     /// The description of the trained model inference job.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The log status of the trained model inference job.
-    logs_status: ?LogsStatus,
+    logs_status: ?LogsStatus = null,
 
     /// Details about the log status for the trained model inference job.
-    logs_status_details: ?[]const u8,
+    logs_status_details: ?[]const u8 = null,
 
     /// The membership ID of the membership that contains the trained model
     /// inference job.
     membership_identifier: []const u8,
 
     /// The metric status of the trained model inference job.
-    metrics_status: ?MetricsStatus,
+    metrics_status: ?MetricsStatus = null,
 
     /// Details about the metrics status for the trained model inference job.
-    metrics_status_details: ?[]const u8,
+    metrics_status_details: ?[]const u8 = null,
 
     /// The name of the trained model inference job.
     name: []const u8,
@@ -53,7 +53,7 @@ pub const TrainedModelInferenceJobSummary = struct {
 
     /// The version identifier of the trained model that was used for inference in
     /// this job.
-    trained_model_version_identifier: ?[]const u8,
+    trained_model_version_identifier: ?[]const u8 = null,
 
     /// The most recent time at which the trained model inference job was updated.
     update_time: i64,

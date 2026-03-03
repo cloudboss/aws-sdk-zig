@@ -12,7 +12,7 @@ pub const QuotaSettings = struct {
 
     /// The time period in which the limit applies. Valid values are "DAY", "WEEK"
     /// or "MONTH".
-    period: ?QuotaPeriodType,
+    period: ?QuotaPeriodType = null,
 
     pub const json_field_names = .{
         .limit = "limit",

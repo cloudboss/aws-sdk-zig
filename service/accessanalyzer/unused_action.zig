@@ -8,7 +8,7 @@ pub const UnusedAction = struct {
     action: []const u8,
 
     /// The time at which the action was last accessed.
-    last_accessed: ?i64,
+    last_accessed: ?i64 = null,
 
     pub const json_field_names = .{
         .action = "action",

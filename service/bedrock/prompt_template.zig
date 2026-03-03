@@ -9,7 +9,7 @@ pub const PromptTemplate = struct {
     ///
     /// For more information, see [Knowledge base prompt
     /// template](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html) and [Use XML tags with Anthropic Claude models](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags).
-    text_prompt_template: ?[]const u8,
+    text_prompt_template: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .text_prompt_template = "textPromptTemplate",

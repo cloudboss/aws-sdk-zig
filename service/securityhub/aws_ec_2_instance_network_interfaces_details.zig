@@ -2,7 +2,7 @@
 pub const AwsEc2InstanceNetworkInterfacesDetails = struct {
     /// The identifier of the network interface. The details are in a corresponding
     /// `AwsEc2NetworkInterfacesDetails` object.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .network_interface_id = "NetworkInterfaceId",

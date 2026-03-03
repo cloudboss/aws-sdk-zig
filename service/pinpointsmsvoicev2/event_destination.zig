@@ -10,7 +10,7 @@ const SnsDestination = @import("sns_destination.zig").SnsDestination;
 pub const EventDestination = struct {
     /// An object that contains information about an event destination that sends
     /// logging events to Amazon CloudWatch logs.
-    cloud_watch_logs_destination: ?CloudWatchLogsDestination,
+    cloud_watch_logs_destination: ?CloudWatchLogsDestination = null,
 
     /// When set to true events will be logged.
     enabled: bool,
@@ -20,7 +20,7 @@ pub const EventDestination = struct {
 
     /// An object that contains information about an event destination for logging
     /// to Amazon Data Firehose.
-    kinesis_firehose_destination: ?KinesisFirehoseDestination,
+    kinesis_firehose_destination: ?KinesisFirehoseDestination = null,
 
     /// An array of event types that determine which events to log.
     ///
@@ -29,7 +29,7 @@ pub const EventDestination = struct {
 
     /// An object that contains information about an event destination that sends
     /// logging events to Amazon SNS.
-    sns_destination: ?SnsDestination,
+    sns_destination: ?SnsDestination = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs_destination = "CloudWatchLogsDestination",

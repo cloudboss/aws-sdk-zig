@@ -16,7 +16,7 @@ const MessageTemplateFilterOperator = @import("message_template_filter_operator.
 /// * groupingConfiguration.values
 pub const MessageTemplateFilterField = struct {
     /// Whether to treat null value as a match for the attribute field.
-    include_no_existence: ?bool,
+    include_no_existence: ?bool = null,
 
     /// The name of the attribute field to filter the message templates by.
     name: []const u8,
@@ -25,7 +25,7 @@ pub const MessageTemplateFilterField = struct {
     operator: MessageTemplateFilterOperator,
 
     /// The values of attribute field to filter the message template by.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .include_no_existence = "includeNoExistence",

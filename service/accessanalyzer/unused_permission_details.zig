@@ -7,10 +7,10 @@ const UnusedAction = @import("unused_action.zig").UnusedAction;
 /// pricing](https://aws.amazon.com/iam/access-analyzer/pricing).
 pub const UnusedPermissionDetails = struct {
     /// A list of unused actions for which the unused access finding was generated.
-    actions: ?[]const UnusedAction,
+    actions: ?[]const UnusedAction = null,
 
     /// The time at which the permission was last accessed.
-    last_accessed: ?i64,
+    last_accessed: ?i64 = null,
 
     /// The namespace of the Amazon Web Services service that contains the unused
     /// actions.

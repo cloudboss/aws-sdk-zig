@@ -4,9 +4,9 @@ const StringFilter = @import("string_filter.zig").StringFilter;
 /// A filter for string-based fields in findings trend data.
 pub const FindingsTrendsStringFilter = struct {
     /// The name of the findings field to filter on.
-    field_name: ?FindingsTrendsStringField,
+    field_name: ?FindingsTrendsStringField = null,
 
-    filter: ?StringFilter,
+    filter: ?StringFilter = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

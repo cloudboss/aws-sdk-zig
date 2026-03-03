@@ -10,7 +10,7 @@ pub const DashboardReference = struct {
     created_at: i64,
 
     /// The description of the referenced dashboard.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the referenced dashboard.
     name: []const u8,

@@ -26,7 +26,7 @@ pub const AccessLogSubscriptionSummary = struct {
     resource_id: []const u8,
 
     /// Log type of the service network.
-    service_network_log_type: ?ServiceNetworkLogType,
+    service_network_log_type: ?ServiceNetworkLogType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

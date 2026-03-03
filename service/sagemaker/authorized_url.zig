@@ -3,11 +3,11 @@
 pub const AuthorizedUrl = struct {
     /// The recommended local file path where the downloaded file should be stored
     /// to maintain proper directory structure and file organization.
-    local_path: ?[]const u8,
+    local_path: ?[]const u8 = null,
 
     /// The presigned S3 URL that provides temporary, secure access to download the
     /// file. URLs expire within 15 minutes for security purposes.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .local_path = "LocalPath",

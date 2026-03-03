@@ -11,7 +11,7 @@ pub const MultiMeasureAttributeMapping = struct {
     /// Custom name to be used for attribute name in derived table. If not provided,
     /// source
     /// column name would be used.
-    target_multi_measure_attribute_name: ?[]const u8,
+    target_multi_measure_attribute_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .measure_value_type = "MeasureValueType",

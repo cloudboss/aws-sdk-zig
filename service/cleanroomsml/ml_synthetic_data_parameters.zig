@@ -5,7 +5,7 @@ const ColumnClassificationDetails = @import("column_classification_details.zig")
 pub const MLSyntheticDataParameters = struct {
     /// Classification details for data columns that specify how each column should
     /// be treated during synthetic data generation.
-    column_classification: ?ColumnClassificationDetails,
+    column_classification: ?ColumnClassificationDetails = null,
 
     /// The epsilon value for differential privacy, which controls the
     /// privacy-utility tradeoff in synthetic data generation. Lower values provide

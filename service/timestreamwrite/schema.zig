@@ -10,7 +10,7 @@ pub const Schema = struct {
     /// table is
     /// created. However, the enforcement level of each partition key can be
     /// changed.
-    composite_partition_key: ?[]const PartitionKey,
+    composite_partition_key: ?[]const PartitionKey = null,
 
     pub const json_field_names = .{
         .composite_partition_key = "CompositePartitionKey",

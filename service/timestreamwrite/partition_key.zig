@@ -13,10 +13,10 @@ pub const PartitionKey = struct {
     /// Options are REQUIRED (dimension key must be specified) and OPTIONAL
     /// (dimension key does not
     /// have to be specified).
-    enforcement_in_record: ?PartitionKeyEnforcementLevel,
+    enforcement_in_record: ?PartitionKeyEnforcementLevel = null,
 
     /// The name of the attribute used for a dimension key.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of the partition key. Options are DIMENSION (dimension key) and
     /// MEASURE

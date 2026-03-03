@@ -3,7 +3,7 @@
 /// determination.
 pub const Mustache = struct {
     /// Level of confidence in the determination.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// Boolean value that indicates whether the face has mustache or not.
     value: bool = false,

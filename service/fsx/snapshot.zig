@@ -9,9 +9,9 @@ pub const Snapshot = struct {
     /// waiting to
     /// be processed. Administrative actions describe changes to the Amazon FSx
     /// system.
-    administrative_actions: ?[]const AdministrativeAction,
+    administrative_actions: ?[]const AdministrativeAction = null,
 
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The lifecycle status of the snapshot.
     ///
@@ -23,22 +23,22 @@ pub const Snapshot = struct {
     /// * `DELETING` - Amazon FSx is deleting the snapshot.
     ///
     /// * `AVAILABLE` - The snapshot is fully available.
-    lifecycle: ?SnapshotLifecycle,
+    lifecycle: ?SnapshotLifecycle = null,
 
-    lifecycle_transition_reason: ?LifecycleTransitionReason,
+    lifecycle_transition_reason: ?LifecycleTransitionReason = null,
 
     /// The name of the snapshot.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The ID of the snapshot.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the volume that the snapshot is of.
-    volume_id: ?[]const u8,
+    volume_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .administrative_actions = "AdministrativeActions",

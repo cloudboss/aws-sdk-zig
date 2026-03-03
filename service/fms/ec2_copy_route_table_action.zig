@@ -4,7 +4,7 @@ const ActionTarget = @import("action_target.zig").ActionTarget;
 pub const EC2CopyRouteTableAction = struct {
     /// A description of the copied EC2 route table that is associated with the
     /// remediation action.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the copied EC2 route table that is associated with the remediation
     /// action.

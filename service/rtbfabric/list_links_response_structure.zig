@@ -8,16 +8,16 @@ const LinkStatus = @import("link_status.zig").LinkStatus;
 /// Describes a link.
 pub const ListLinksResponseStructure = struct {
     /// Describes attributes of a link.
-    attributes: ?LinkAttributes,
+    attributes: ?LinkAttributes = null,
 
     /// The timestamp of when the link was created.
     created_at: i64,
 
     /// The direction of the link.
-    direction: ?LinkDirection,
+    direction: ?LinkDirection = null,
 
     /// Describes the configuration of flow modules.
-    flow_modules: ?[]const ModuleConfiguration,
+    flow_modules: ?[]const ModuleConfiguration = null,
 
     /// The unique identifier of the gateway.
     gateway_id: []const u8,
@@ -29,13 +29,13 @@ pub const ListLinksResponseStructure = struct {
     peer_gateway_id: []const u8,
 
     /// Describes the configuration of pending flow modules.
-    pending_flow_modules: ?[]const ModuleConfiguration,
+    pending_flow_modules: ?[]const ModuleConfiguration = null,
 
     /// The status of the link.
     status: LinkStatus,
 
     /// A map of the key-value pairs of the tag or tags to assign to the resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The timestamp of when the link was updated.
     updated_at: i64,

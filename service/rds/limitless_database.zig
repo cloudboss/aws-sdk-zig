@@ -4,8 +4,8 @@ const LimitlessDatabaseStatus = @import("limitless_database_status.zig").Limitle
 pub const LimitlessDatabase = struct {
     /// The minimum required capacity for Aurora Limitless Database in Aurora
     /// capacity units (ACUs).
-    min_required_acu: ?f64,
+    min_required_acu: ?f64 = null,
 
     /// The status of Aurora Limitless Database.
-    status: ?LimitlessDatabaseStatus,
+    status: ?LimitlessDatabaseStatus = null,
 };

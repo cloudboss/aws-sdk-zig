@@ -3,14 +3,14 @@ const LaunchTemplateEbsBlockDeviceRequest = @import("launch_template_ebs_block_d
 /// Describes a block device mapping.
 pub const LaunchTemplateBlockDeviceMappingRequest = struct {
     /// The device name (for example, /dev/sdh or xvdh).
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// Parameters used to automatically set up EBS volumes when the instance is
     /// launched.
-    ebs: ?LaunchTemplateEbsBlockDeviceRequest,
+    ebs: ?LaunchTemplateEbsBlockDeviceRequest = null,
 
     /// To omit the device from the block device mapping, specify an empty string.
-    no_device: ?[]const u8,
+    no_device: ?[]const u8 = null,
 
     /// The virtual device name (ephemeralN). Instance store volumes are numbered
     /// starting
@@ -20,5 +20,5 @@ pub const LaunchTemplateBlockDeviceMappingRequest = struct {
     /// volumes depends on
     /// the instance type. After you connect to the instance, you must mount the
     /// volume.
-    virtual_name: ?[]const u8,
+    virtual_name: ?[]const u8 = null,
 };

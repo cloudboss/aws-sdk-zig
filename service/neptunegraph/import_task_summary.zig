@@ -7,13 +7,13 @@ pub const ImportTaskSummary = struct {
     /// Specifies the format of S3 data to be imported. Valid values are `CSV`,
     /// which identifies the [Gremlin CSV
     /// format](https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html) or `OPENCYPHER`, which identies the [openCypher load format](https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html).
-    format: ?Format,
+    format: ?Format = null,
 
     /// The unique identifier of the Neptune Analytics graph.
-    graph_id: ?[]const u8,
+    graph_id: ?[]const u8 = null,
 
     /// The parquet type of the import task.
-    parquet_type: ?ParquetType,
+    parquet_type: ?ParquetType = null,
 
     /// The ARN of the IAM role that will allow access to the data that is to be
     /// imported.

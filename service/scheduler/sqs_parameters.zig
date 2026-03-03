@@ -9,7 +9,7 @@
 /// *Amazon SQS Developer Guide*.
 pub const SqsParameters = struct {
     /// The FIFO message group ID to use as the target.
-    message_group_id: ?[]const u8,
+    message_group_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .message_group_id = "MessageGroupId",

@@ -21,7 +21,7 @@ pub const DataSourceConfiguration = struct {
     /// * `Storage` specifies that the result can be cached or stored in a database.
     ///
     /// Default value: `SingleUse`
-    intended_use: ?IntendedUse,
+    intended_use: ?IntendedUse = null,
 
     pub const json_field_names = .{
         .intended_use = "IntendedUse",

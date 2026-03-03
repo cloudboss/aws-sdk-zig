@@ -6,10 +6,10 @@ pub const BatchListObjectParents = struct {
     /// The maximum number of items to be retrieved in a single call. This is an
     /// approximate
     /// number.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The pagination token.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     object_reference: ObjectReference,
 

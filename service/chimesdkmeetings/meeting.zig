@@ -10,10 +10,10 @@ pub const Meeting = struct {
     /// Values that begin with `aws:` are reserved. You can't configure a value that
     /// uses this prefix.
     /// Case insensitive.
-    external_meeting_id: ?[]const u8,
+    external_meeting_id: ?[]const u8 = null,
 
     /// The media placement for the meeting.
-    media_placement: ?MediaPlacement,
+    media_placement: ?MediaPlacement = null,
 
     /// The Region in which you create the meeting. Available values: `af-south-1`,
     /// `ap-northeast-1`,
@@ -26,26 +26,26 @@ pub const Meeting = struct {
     ///
     /// Available values in Amazon Web Services GovCloud (US) Regions:
     /// `us-gov-east-1`, `us-gov-west-1`.
-    media_region: ?[]const u8,
+    media_region: ?[]const u8 = null,
 
     /// The ARN of the meeting.
-    meeting_arn: ?[]const u8,
+    meeting_arn: ?[]const u8 = null,
 
     /// The features available to a meeting, such as echo reduction.
-    meeting_features: ?MeetingFeaturesConfiguration,
+    meeting_features: ?MeetingFeaturesConfiguration = null,
 
     /// Reserved.
-    meeting_host_id: ?[]const u8,
+    meeting_host_id: ?[]const u8 = null,
 
     /// The Amazon Chime SDK meeting ID.
-    meeting_id: ?[]const u8,
+    meeting_id: ?[]const u8 = null,
 
     /// When specified, replicates the media from the primary meeting to this
     /// meeting.
-    primary_meeting_id: ?[]const u8,
+    primary_meeting_id: ?[]const u8 = null,
 
     /// Array of strings.
-    tenant_ids: ?[]const []const u8,
+    tenant_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .external_meeting_id = "ExternalMeetingId",

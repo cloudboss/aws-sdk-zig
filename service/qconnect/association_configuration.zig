@@ -5,13 +5,13 @@ const AIAgentAssociationConfigurationType = @import("ai_agent_association_config
 pub const AssociationConfiguration = struct {
     /// The data of the configuration for an Amazon Q in Connect Assistant
     /// Association.
-    association_configuration_data: ?AssociationConfigurationData,
+    association_configuration_data: ?AssociationConfigurationData = null,
 
     /// The identifier of the association for this Association Configuration.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The type of the association for this Association Configuration.
-    association_type: ?AIAgentAssociationConfigurationType,
+    association_type: ?AIAgentAssociationConfigurationType = null,
 
     pub const json_field_names = .{
         .association_configuration_data = "associationConfigurationData",

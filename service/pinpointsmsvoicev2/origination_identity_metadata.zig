@@ -17,7 +17,7 @@ pub const OriginationIdentityMetadata = struct {
     origination_identity_arn: []const u8,
 
     /// The phone number in E.164 format.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .iso_country_code = "IsoCountryCode",

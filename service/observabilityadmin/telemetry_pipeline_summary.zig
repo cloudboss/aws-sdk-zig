@@ -7,25 +7,25 @@ const TelemetryPipelineStatus = @import("telemetry_pipeline_status.zig").Telemet
 /// operations.
 pub const TelemetryPipelineSummary = struct {
     /// The Amazon Resource Name (ARN) of the telemetry pipeline.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A summary of the pipeline configuration components.
-    configuration_summary: ?ConfigurationSummary,
+    configuration_summary: ?ConfigurationSummary = null,
 
     /// The timestamp when the telemetry pipeline was created.
-    created_time_stamp: ?i64,
+    created_time_stamp: ?i64 = null,
 
     /// The timestamp when the telemetry pipeline was last updated.
-    last_update_time_stamp: ?i64,
+    last_update_time_stamp: ?i64 = null,
 
     /// The name of the telemetry pipeline.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the telemetry pipeline.
-    status: ?TelemetryPipelineStatus,
+    status: ?TelemetryPipelineStatus = null,
 
     /// The key-value pairs associated with the telemetry pipeline resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

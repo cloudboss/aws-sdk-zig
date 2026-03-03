@@ -4,25 +4,25 @@ const ScanType = @import("scan_type.zig").ScanType;
 /// Contains details from the malware scan that created a finding.
 pub const EbsVolumeScanDetails = struct {
     /// Returns the completion date and time of the malware scan.
-    scan_completed_at: ?i64,
+    scan_completed_at: ?i64 = null,
 
     /// Contains a complete view providing malware scan result details.
-    scan_detections: ?ScanDetections,
+    scan_detections: ?ScanDetections = null,
 
     /// Unique Id of the malware scan that generated the finding.
-    scan_id: ?[]const u8,
+    scan_id: ?[]const u8 = null,
 
     /// Returns the start date and time of the malware scan.
-    scan_started_at: ?i64,
+    scan_started_at: ?i64 = null,
 
     /// Specifies the scan type that invoked the malware scan.
-    scan_type: ?ScanType,
+    scan_type: ?ScanType = null,
 
     /// Contains list of threat intelligence sources used to detect threats.
-    sources: ?[]const []const u8,
+    sources: ?[]const []const u8 = null,
 
     /// GuardDuty finding ID that triggered a malware scan.
-    trigger_finding_id: ?[]const u8,
+    trigger_finding_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .scan_completed_at = "ScanCompletedAt",

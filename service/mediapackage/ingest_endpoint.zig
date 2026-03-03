@@ -1,16 +1,16 @@
 /// An endpoint for ingesting source content for a Channel.
 pub const IngestEndpoint = struct {
     /// The system generated unique identifier for the IngestEndpoint
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The system generated password for ingest authentication.
-    password: ?[]const u8,
+    password: ?[]const u8 = null,
 
     /// The ingest URL to which the source stream should be sent.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     /// The system generated username for ingest authentication.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

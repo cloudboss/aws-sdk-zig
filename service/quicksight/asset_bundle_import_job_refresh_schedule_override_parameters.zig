@@ -15,7 +15,7 @@ pub const AssetBundleImportJobRefreshScheduleOverrideParameters = struct {
     /// Make sure that the `StartAfterDateTime` is set to a time that takes place in
     /// the
     /// future.
-    start_after_date_time: ?i64,
+    start_after_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .data_set_id = "DataSetId",

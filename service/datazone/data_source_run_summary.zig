@@ -12,27 +12,27 @@ pub const DataSourceRunSummary = struct {
     /// The identifier of the data source of the data source run.
     data_source_id: []const u8,
 
-    error_message: ?DataSourceErrorMessage,
+    error_message: ?DataSourceErrorMessage = null,
 
     /// The identifier of the data source run.
     id: []const u8,
 
     /// The run lineage summary of a data source.
-    lineage_summary: ?DataSourceRunLineageSummary,
+    lineage_summary: ?DataSourceRunLineageSummary = null,
 
     /// The project ID of the data source run.
     project_id: []const u8,
 
-    run_statistics_for_assets: ?RunStatisticsForAssets,
+    run_statistics_for_assets: ?RunStatisticsForAssets = null,
 
     /// The timestamp of when a data source run was started.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The status of the data source run.
     status: DataSourceRunStatus,
 
     /// The timestamp of when a data source run was stopped.
-    stopped_at: ?i64,
+    stopped_at: ?i64 = null,
 
     /// The type of the data source run.
     @"type": DataSourceRunType,

@@ -5,13 +5,13 @@ pub const EventStreamDestinationDetails = struct {
     /// The human-readable string that corresponds to the error or success while
     /// enabling the
     /// streaming destination.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status of enabling the Kinesis stream as a destination for export.
     status: EventStreamDestinationStatus,
 
     /// The timestamp when the status last changed to `UNHEALHY`.
-    unhealthy_since: ?i64,
+    unhealthy_since: ?i64 = null,
 
     /// The StreamARN of the destination to deliver profile events to. For example,
     /// arn:aws:kinesis:region:account-id:stream/stream-name.

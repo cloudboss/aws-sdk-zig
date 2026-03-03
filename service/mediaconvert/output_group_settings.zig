@@ -10,25 +10,25 @@ const OutputGroupType = @import("output_group_type.zig").OutputGroupType;
 pub const OutputGroupSettings = struct {
     /// Settings related to your CMAF output package. For more information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html.
-    cmaf_group_settings: ?CmafGroupSettings,
+    cmaf_group_settings: ?CmafGroupSettings = null,
 
     /// Settings related to your DASH output package. For more information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html.
-    dash_iso_group_settings: ?DashIsoGroupSettings,
+    dash_iso_group_settings: ?DashIsoGroupSettings = null,
 
     /// Settings related to your File output group. MediaConvert uses this group of
     /// settings to generate a single standalone file, rather than a streaming
     /// package.
-    file_group_settings: ?FileGroupSettings,
+    file_group_settings: ?FileGroupSettings = null,
 
     /// Settings related to your HLS output package. For more information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html.
-    hls_group_settings: ?HlsGroupSettings,
+    hls_group_settings: ?HlsGroupSettings = null,
 
     /// Settings related to your Microsoft Smooth Streaming output package. For more
     /// information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html.
-    ms_smooth_group_settings: ?MsSmoothGroupSettings,
+    ms_smooth_group_settings: ?MsSmoothGroupSettings = null,
 
     /// Optionally choose one or more per frame metric reports to generate along
     /// with your output. You can use these metrics to analyze your video output
@@ -48,11 +48,11 @@ pub const OutputGroupSettings = struct {
     /// Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     /// Quality-Defined Variable Bitrate. This option is only available when your
     /// output uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
-    per_frame_metrics: ?[]const FrameMetricType,
+    per_frame_metrics: ?[]const FrameMetricType = null,
 
     /// Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth
     /// Streaming, CMAF)
-    @"type": ?OutputGroupType,
+    @"type": ?OutputGroupType = null,
 
     pub const json_field_names = .{
         .cmaf_group_settings = "CmafGroupSettings",

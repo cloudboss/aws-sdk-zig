@@ -13,13 +13,13 @@ pub const MonitoringConfiguration = struct {
     configuration_type: ConfigurationType,
 
     /// Describes the verbosity of the CloudWatch Logs for an application.
-    log_level: ?LogLevel,
+    log_level: ?LogLevel = null,
 
     /// Describes the granularity of the CloudWatch Logs for an application. The
     /// `Parallelism`
     /// level is not recommended for applications with a Parallelism over 64 due to
     /// excessive costs.
-    metrics_level: ?MetricsLevel,
+    metrics_level: ?MetricsLevel = null,
 
     pub const json_field_names = .{
         .configuration_type = "ConfigurationType",

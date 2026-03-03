@@ -13,21 +13,21 @@ pub const StorageLensConfiguration = struct {
 
     /// A container for the Amazon Web Services organization for this S3 Storage
     /// Lens configuration.
-    aws_org: ?StorageLensAwsOrg,
+    aws_org: ?StorageLensAwsOrg = null,
 
     /// A container to specify the properties of your S3 Storage Lens metrics export
     /// including, the
     /// destination, schema and format.
-    data_export: ?StorageLensDataExport,
+    data_export: ?StorageLensDataExport = null,
 
     /// A container for what is excluded in this configuration. This container can
     /// only be valid
     /// if there is no `Include` container submitted, and it's not empty.
-    exclude: ?Exclude,
+    exclude: ?Exclude = null,
 
     /// A container that configures your S3 Storage Lens expanded prefixes metrics
     /// report.
-    expanded_prefixes_data_export: ?StorageLensExpandedPrefixesDataExport,
+    expanded_prefixes_data_export: ?StorageLensExpandedPrefixesDataExport = null,
 
     /// A container for the Amazon S3 Storage Lens configuration ID.
     id: []const u8,
@@ -35,7 +35,7 @@ pub const StorageLensConfiguration = struct {
     /// A container for what is included in this configuration. This container can
     /// only be valid
     /// if there is no `Exclude` container submitted, and it's not empty.
-    include: ?Include,
+    include: ?Include = null,
 
     /// A container for whether the S3 Storage Lens configuration is enabled.
     is_enabled: bool = false,
@@ -58,12 +58,12 @@ pub const StorageLensConfiguration = struct {
     /// delimiter must specify the same special character. Otherwise, your request
     /// results
     /// in an error.
-    prefix_delimiter: ?[]const u8,
+    prefix_delimiter: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the S3 Storage Lens configuration. This
     /// property is read-only
     /// and follows the following format: `
     /// arn:aws:s3:*us-east-1*:*example-account-id*:storage-lens/*your-dashboard-name*
     /// `
-    storage_lens_arn: ?[]const u8,
+    storage_lens_arn: ?[]const u8 = null,
 };

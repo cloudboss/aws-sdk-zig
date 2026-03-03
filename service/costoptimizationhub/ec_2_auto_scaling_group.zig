@@ -4,10 +4,10 @@ const ResourceCostCalculation = @import("resource_cost_calculation.zig").Resourc
 /// The EC2 Auto Scaling group recommendation details.
 pub const Ec2AutoScalingGroup = struct {
     /// The EC2 Auto Scaling group configuration used for recommendations.
-    configuration: ?Ec2AutoScalingGroupConfiguration,
+    configuration: ?Ec2AutoScalingGroupConfiguration = null,
 
     /// Cost impact of the recommendation.
-    cost_calculation: ?ResourceCostCalculation,
+    cost_calculation: ?ResourceCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

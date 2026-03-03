@@ -7,17 +7,17 @@
 pub const GeneralLabelsSettings = struct {
     /// The label categories that should be excluded from the return from
     /// DetectLabels.
-    label_category_exclusion_filters: ?[]const []const u8,
+    label_category_exclusion_filters: ?[]const []const u8 = null,
 
     /// The label categories that should be included in the return from
     /// DetectLabels.
-    label_category_inclusion_filters: ?[]const []const u8,
+    label_category_inclusion_filters: ?[]const []const u8 = null,
 
     /// The labels that should be excluded from the return from DetectLabels.
-    label_exclusion_filters: ?[]const []const u8,
+    label_exclusion_filters: ?[]const []const u8 = null,
 
     /// The labels that should be included in the return from DetectLabels.
-    label_inclusion_filters: ?[]const []const u8,
+    label_inclusion_filters: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .label_category_exclusion_filters = "LabelCategoryExclusionFilters",

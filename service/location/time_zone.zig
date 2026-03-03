@@ -7,7 +7,7 @@ pub const TimeZone = struct {
     name: []const u8,
 
     /// The time zone's offset, in seconds, from UTC.
-    offset: ?i32,
+    offset: ?i32 = null,
 
     pub const json_field_names = .{
         .name = "Name",

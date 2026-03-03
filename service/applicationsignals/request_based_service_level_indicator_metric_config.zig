@@ -10,7 +10,7 @@ const MetricDataQuery = @import("metric_data_query.zig").MetricDataQuery;
 pub const RequestBasedServiceLevelIndicatorMetricConfig = struct {
     /// Identifies the dependency using the `DependencyKeyAttributes` and
     /// `DependencyOperationName`.
-    dependency_config: ?DependencyConfig,
+    dependency_config: ?DependencyConfig = null,
 
     /// If this SLO is related to a metric collected by Application Signals, you
     /// must use this field to specify which service the SLO metric is related to.
@@ -29,29 +29,29 @@ pub const RequestBasedServiceLevelIndicatorMetricConfig = struct {
     ///   `AWS::Resource`.
     /// * `Environment` specifies the location where this object is hosted, or what
     ///   it belongs to.
-    key_attributes: ?[]const aws.map.StringMapEntry,
+    key_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// If the SLO is to monitor either the `LATENCY` or `AVAILABILITY` metric that
     /// Application Signals collects, use this field to specify which of those
     /// metrics is used.
-    metric_type: ?ServiceLevelIndicatorMetricType,
+    metric_type: ?ServiceLevelIndicatorMetricType = null,
 
     /// Use this structure to define the metric that you want to use as the "good
     /// request" or "bad request" value for a request-based SLO. This value observed
     /// for the metric defined in `TotalRequestCountMetric` will be divided by the
     /// number found for `MonitoredRequestCountMetric` to determine the percentage
     /// of successful requests that this SLO tracks.
-    monitored_request_count_metric: ?MonitoredRequestCountMetricDataQueries,
+    monitored_request_count_metric: ?MonitoredRequestCountMetricDataQueries = null,
 
     /// If the SLO is to monitor a specific operation of the service, use this field
     /// to specify the name of that operation.
-    operation_name: ?[]const u8,
+    operation_name: ?[]const u8 = null,
 
     /// Use this structure to define the metric that you want to use as the "total
     /// requests" number for a request-based SLO. This result will be divided by the
     /// "good request" or "bad request" value defined in
     /// `MonitoredRequestCountMetric`.
-    total_request_count_metric: ?[]const MetricDataQuery,
+    total_request_count_metric: ?[]const MetricDataQuery = null,
 
     pub const json_field_names = .{
         .dependency_config = "DependencyConfig",

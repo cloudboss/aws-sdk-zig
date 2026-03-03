@@ -4,8 +4,8 @@ const VolumeStatusInfoStatus = @import("volume_status_info_status.zig").VolumeSt
 /// Describes the status of a volume.
 pub const VolumeStatusInfo = struct {
     /// The details of the volume status.
-    details: ?[]const VolumeStatusDetails,
+    details: ?[]const VolumeStatusDetails = null,
 
     /// The status of the volume.
-    status: ?VolumeStatusInfoStatus,
+    status: ?VolumeStatusInfoStatus = null,
 };

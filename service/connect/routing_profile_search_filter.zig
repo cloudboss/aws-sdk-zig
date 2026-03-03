@@ -2,7 +2,7 @@ const ControlPlaneTagFilter = @import("control_plane_tag_filter.zig").ControlPla
 
 /// Filters to be applied to search results.
 pub const RoutingProfileSearchFilter = struct {
-    tag_filter: ?ControlPlaneTagFilter,
+    tag_filter: ?ControlPlaneTagFilter = null,
 
     pub const json_field_names = .{
         .tag_filter = "TagFilter",

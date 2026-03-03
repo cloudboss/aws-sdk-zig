@@ -33,19 +33,19 @@ pub const WorkflowExecutionContinuedAsNewEventAttributes = struct {
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    execution_start_to_close_timeout: ?[]const u8,
+    execution_start_to_close_timeout: ?[]const u8 = null,
 
     /// The input provided to the new workflow execution.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The IAM role to attach to the new (continued) workflow execution.
-    lambda_role: ?[]const u8,
+    lambda_role: ?[]const u8 = null,
 
     /// The `runId` of the new workflow execution.
     new_execution_run_id: []const u8,
 
     /// The list of tags associated with the new workflow execution.
-    tag_list: ?[]const []const u8,
+    tag_list: ?[]const []const u8 = null,
 
     /// The task list to use for the decisions of the new (continued) workflow
     /// execution.
@@ -54,13 +54,13 @@ pub const WorkflowExecutionContinuedAsNewEventAttributes = struct {
     /// The priority of the task to use for the decisions of the new (continued)
     /// workflow
     /// execution.
-    task_priority: ?[]const u8,
+    task_priority: ?[]const u8 = null,
 
     /// The maximum duration of decision tasks for the new workflow execution.
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    task_start_to_close_timeout: ?[]const u8,
+    task_start_to_close_timeout: ?[]const u8 = null,
 
     /// The workflow type of this execution.
     workflow_type: WorkflowType,

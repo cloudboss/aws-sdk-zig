@@ -6,7 +6,7 @@ pub const ListDomainsResponse = struct {
 
     /// The token for the next set of results. This is null if there are no more
     /// results to return.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domains = "domains",

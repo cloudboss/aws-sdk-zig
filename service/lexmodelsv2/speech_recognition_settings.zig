@@ -5,10 +5,10 @@ const SpeechModelPreference = @import("speech_model_preference.zig").SpeechModel
 /// from users.
 pub const SpeechRecognitionSettings = struct {
     /// Configuration settings for the selected speech-to-text model.
-    speech_model_config: ?SpeechModelConfig,
+    speech_model_config: ?SpeechModelConfig = null,
 
     /// The speech-to-text model to use.
-    speech_model_preference: ?SpeechModelPreference,
+    speech_model_preference: ?SpeechModelPreference = null,
 
     pub const json_field_names = .{
         .speech_model_config = "speechModelConfig",

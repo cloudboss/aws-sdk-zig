@@ -6,23 +6,23 @@ pub const ListJobRunsRequest = struct {
     application_id: []const u8,
 
     /// The lower bound of the option to filter by creation date and time.
-    created_at_after: ?i64,
+    created_at_after: ?i64 = null,
 
     /// The upper bound of the option to filter by creation date and time.
-    created_at_before: ?i64,
+    created_at_before: ?i64 = null,
 
     /// The maximum number of job runs that can be listed.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The mode of the job runs to list.
-    mode: ?JobRunMode,
+    mode: ?JobRunMode = null,
 
     /// The token for the next set of job run results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// An optional filter for job run states. Note that if this filter contains
     /// multiple states, the resulting list will be grouped by the state.
-    states: ?[]const JobRunState,
+    states: ?[]const JobRunState = null,
 
     pub const json_field_names = .{
         .application_id = "applicationId",

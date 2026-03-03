@@ -7,7 +7,7 @@ pub const PolicyTemplateItem = struct {
     created_date: i64,
 
     /// The description attached to the policy template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The date and time that the policy template was most recently updated.
     last_updated_date: i64,

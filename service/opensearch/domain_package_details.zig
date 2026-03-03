@@ -12,41 +12,41 @@ pub const DomainPackageDetails = struct {
     /// The configuration for associating a package with an Amazon OpenSearch
     /// Service
     /// domain.
-    association_configuration: ?PackageAssociationConfiguration,
+    association_configuration: ?PackageAssociationConfiguration = null,
 
     /// Name of the domain that the package is associated with.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// State of the association.
-    domain_package_status: ?DomainPackageStatus,
+    domain_package_status: ?DomainPackageStatus = null,
 
     /// Additional information if the package is in an error state. Null otherwise.
-    error_details: ?ErrorDetails,
+    error_details: ?ErrorDetails = null,
 
     /// Timestamp of the most recent update to the package association status.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// Internal ID of the package.
-    package_id: ?[]const u8,
+    package_id: ?[]const u8 = null,
 
     /// User-specified name of the package.
-    package_name: ?[]const u8,
+    package_name: ?[]const u8 = null,
 
     /// The type of package.
-    package_type: ?PackageType,
+    package_type: ?PackageType = null,
 
     /// The current version of the package.
-    package_version: ?[]const u8,
+    package_version: ?[]const u8 = null,
 
     /// A list of package IDs that must be associated with the domain before or with
     /// the
     /// package can be associated.
-    prerequisite_package_id_list: ?[]const []const u8,
+    prerequisite_package_id_list: ?[]const []const u8 = null,
 
     /// The relative path of the package on the OpenSearch Service cluster nodes.
     /// This is
     /// `synonym_path` when the package is for synonym files.
-    reference_path: ?[]const u8,
+    reference_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_configuration = "AssociationConfiguration",

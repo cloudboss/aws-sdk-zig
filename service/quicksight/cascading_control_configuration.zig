@@ -5,7 +5,7 @@ const CascadingControlSource = @import("cascading_control_source.zig").Cascading
 pub const CascadingControlConfiguration = struct {
     /// A list of source controls that determine the values that are used in the
     /// current control.
-    source_controls: ?[]const CascadingControlSource,
+    source_controls: ?[]const CascadingControlSource = null,
 
     pub const json_field_names = .{
         .source_controls = "SourceControls",

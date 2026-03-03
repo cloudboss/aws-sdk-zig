@@ -4,10 +4,10 @@ const Visibility = @import("visibility.zig").Visibility;
 /// is only applicable when `RowsLayout` is set to `HIERARCHY`.
 pub const PivotTableRowsLabelOptions = struct {
     /// The custom label string for the rows label.
-    custom_label: ?[]const u8,
+    custom_label: ?[]const u8 = null,
 
     /// The visibility of the rows label.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .custom_label = "CustomLabel",

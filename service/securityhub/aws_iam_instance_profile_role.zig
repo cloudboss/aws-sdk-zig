@@ -1,26 +1,26 @@
 /// Information about a role associated with an instance profile.
 pub const AwsIamInstanceProfileRole = struct {
     /// The ARN of the role.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The policy that grants an entity permission to assume the role.
-    assume_role_policy_document: ?[]const u8,
+    assume_role_policy_document: ?[]const u8 = null,
 
     /// Indicates when the role was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    create_date: ?[]const u8,
+    create_date: ?[]const u8 = null,
 
     /// The path to the role.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// The identifier of the role.
-    role_id: ?[]const u8,
+    role_id: ?[]const u8 = null,
 
     /// The name of the role.
-    role_name: ?[]const u8,
+    role_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

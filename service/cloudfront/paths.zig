@@ -4,7 +4,7 @@
 pub const Paths = struct {
     /// A complex type that contains a list of the paths that you want to
     /// invalidate.
-    items: ?[]const []const u8,
+    items: ?[]const []const u8 = null,
 
     /// The number of invalidation paths specified for the objects that you want to
     /// invalidate.

@@ -1,10 +1,10 @@
 /// Describes a storage volume recovery point object.
 pub const VolumeRecoveryPointInfo = struct {
     /// The Amazon Resource Name (ARN) of the volume target.
-    volume_arn: ?[]const u8,
+    volume_arn: ?[]const u8 = null,
 
     /// The time the recovery point was taken.
-    volume_recovery_point_time: ?[]const u8,
+    volume_recovery_point_time: ?[]const u8 = null,
 
     /// The size of the volume in bytes.
     volume_size_in_bytes: i64 = 0,

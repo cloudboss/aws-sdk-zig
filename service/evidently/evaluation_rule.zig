@@ -2,7 +2,7 @@
 /// feature, if it is used in a launch or experiment.
 pub const EvaluationRule = struct {
     /// The name of the experiment or launch.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// This value is `aws.evidently.splits` if this is an evaluation rule for a
     /// launch, and it is `aws.evidently.onlineab` if this is an evaluation rule for

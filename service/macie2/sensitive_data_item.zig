@@ -10,16 +10,16 @@ pub const SensitiveDataItem = struct {
     /// numbers; or, PERSONAL_INFORMATION, for personal health information, such as
     /// health insurance identification numbers, or personally identifiable
     /// information, such as passport numbers.
-    category: ?SensitiveDataItemCategory,
+    category: ?SensitiveDataItemCategory = null,
 
     /// An array of objects, one for each type of sensitive data that was detected.
     /// Each object reports the number of occurrences of a specific type of
     /// sensitive data that was detected, and the location of up to 15 of those
     /// occurrences.
-    detections: ?[]const DefaultDetection,
+    detections: ?[]const DefaultDetection = null,
 
     /// The total number of occurrences of the sensitive data that was detected.
-    total_count: ?i64,
+    total_count: ?i64 = null,
 
     pub const json_field_names = .{
         .category = "category",

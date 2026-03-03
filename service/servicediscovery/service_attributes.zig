@@ -13,7 +13,7 @@ pub const ServiceAttributes = struct {
     /// * For each attribute, the applicable value.
     ///
     /// You can specify a total of 30 attributes.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The ID of the Amazon Web Services account that created the namespace with
     /// which the service is associated.
@@ -23,10 +23,10 @@ pub const ServiceAttributes = struct {
     /// Cloud Map
     /// namespace
     /// sharing](https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html) in the *Cloud Map Developer Guide*.
-    resource_owner: ?[]const u8,
+    resource_owner: ?[]const u8 = null,
 
     /// The ARN of the service that the attributes are associated with.
-    service_arn: ?[]const u8,
+    service_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

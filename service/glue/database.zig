@@ -9,24 +9,24 @@ const DatabaseIdentifier = @import("database_identifier.zig").DatabaseIdentifier
 /// in a Hive metastore or an RDBMS.
 pub const Database = struct {
     /// The ID of the Data Catalog in which the database resides.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// Creates a set of default permissions on the table for principals. Used by
     /// Lake Formation. Not used in the normal course of Glue operations.
-    create_table_default_permissions: ?[]const PrincipalPermissions,
+    create_table_default_permissions: ?[]const PrincipalPermissions = null,
 
     /// The time at which the metadata database was created in the catalog.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// A description of the database.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A `FederatedDatabase` structure that references an entity outside the Glue
     /// Data Catalog.
-    federated_database: ?FederatedDatabase,
+    federated_database: ?FederatedDatabase = null,
 
     /// The location of the database (for example, an HDFS path).
-    location_uri: ?[]const u8,
+    location_uri: ?[]const u8 = null,
 
     /// The name of the database. For Hive compatibility, this is folded to
     /// lowercase when it is
@@ -35,11 +35,11 @@ pub const Database = struct {
 
     /// These key-value pairs define parameters and properties
     /// of the database.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// A `DatabaseIdentifier` structure that describes a target database for
     /// resource linking.
-    target_database: ?DatabaseIdentifier,
+    target_database: ?DatabaseIdentifier = null,
 
     pub const json_field_names = .{
         .catalog_id = "CatalogId",

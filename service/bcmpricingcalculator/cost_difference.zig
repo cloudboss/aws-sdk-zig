@@ -3,10 +3,10 @@ const CostAmount = @import("cost_amount.zig").CostAmount;
 /// Represents the difference between historical and estimated costs.
 pub const CostDifference = struct {
     /// The estimated cost amount.
-    estimated_cost: ?CostAmount,
+    estimated_cost: ?CostAmount = null,
 
     /// The historical cost amount.
-    historical_cost: ?CostAmount,
+    historical_cost: ?CostAmount = null,
 
     pub const json_field_names = .{
         .estimated_cost = "estimatedCost",

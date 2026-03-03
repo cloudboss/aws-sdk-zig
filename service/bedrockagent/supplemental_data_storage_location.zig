@@ -5,7 +5,7 @@ const SupplementalDataStorageLocationType = @import("supplemental_data_storage_l
 /// multimodal documents in your data source.
 pub const SupplementalDataStorageLocation = struct {
     /// Contains information about the Amazon S3 location for the extracted images.
-    s_3_location: ?S3Location,
+    s_3_location: ?S3Location = null,
 
     /// Specifies the storage service used for this location.
     @"type": SupplementalDataStorageLocationType,

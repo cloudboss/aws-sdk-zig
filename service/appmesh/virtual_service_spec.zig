@@ -5,7 +5,7 @@ pub const VirtualServiceSpec = struct {
     /// The App Mesh object that is acting as the provider for a virtual service.
     /// You
     /// can specify a single virtual node or virtual router.
-    provider: ?VirtualServiceProvider,
+    provider: ?VirtualServiceProvider = null,
 
     pub const json_field_names = .{
         .provider = "provider",

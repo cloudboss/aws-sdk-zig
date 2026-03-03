@@ -13,7 +13,7 @@ pub const InvalidationList = struct {
 
     /// A complex type that contains one `InvalidationSummary` element for each
     /// invalidation batch created by the current Amazon Web Services account.
-    items: ?[]const InvalidationSummary,
+    items: ?[]const InvalidationSummary = null,
 
     /// The value that you provided for the `Marker` request parameter.
     marker: []const u8,
@@ -24,7 +24,7 @@ pub const InvalidationList = struct {
     /// If `IsTruncated` is `true`, this element is present and contains the value
     /// that you can use for the `Marker` request parameter to continue listing your
     /// invalidation batches where they left off.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The number of invalidation batches that were created by the current Amazon
     /// Web Services account.

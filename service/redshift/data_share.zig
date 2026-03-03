@@ -4,22 +4,22 @@ const DataShareType = @import("data_share_type.zig").DataShareType;
 pub const DataShare = struct {
     /// A value that specifies whether the datashare can be shared to a publicly
     /// accessible cluster.
-    allow_publicly_accessible_consumers: ?bool,
+    allow_publicly_accessible_consumers: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the datashare that the consumer is to use.
-    data_share_arn: ?[]const u8,
+    data_share_arn: ?[]const u8 = null,
 
     /// A value that specifies when the datashare has an association between
     /// producer and data
     /// consumers.
-    data_share_associations: ?[]const DataShareAssociation,
+    data_share_associations: ?[]const DataShareAssociation = null,
 
     /// The type of the datashare created by RegisterNamespace.
-    data_share_type: ?DataShareType,
+    data_share_type: ?DataShareType = null,
 
     /// The identifier of a datashare to show its managing entity.
-    managed_by: ?[]const u8,
+    managed_by: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the producer namespace.
-    producer_arn: ?[]const u8,
+    producer_arn: ?[]const u8 = null,
 };

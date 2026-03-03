@@ -3,7 +3,7 @@ const VirtualGatewayClientPolicy = @import("virtual_gateway_client_policy.zig").
 /// An object that represents the default properties for a backend.
 pub const VirtualGatewayBackendDefaults = struct {
     /// A reference to an object that represents a client policy.
-    client_policy: ?VirtualGatewayClientPolicy,
+    client_policy: ?VirtualGatewayClientPolicy = null,
 
     pub const json_field_names = .{
         .client_policy = "clientPolicy",

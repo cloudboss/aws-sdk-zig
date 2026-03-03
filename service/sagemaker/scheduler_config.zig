@@ -13,16 +13,16 @@ pub const SchedulerConfig = struct {
     /// first-serve basis.
     ///
     /// Default is `Enabled`.
-    fair_share: ?FairShare,
+    fair_share: ?FairShare = null,
 
     /// Configuration for sharing idle compute resources across entities in the
     /// cluster. When enabled, unallocated resources are automatically calculated
     /// and made available for entities to borrow.
-    idle_resource_sharing: ?IdleResourceSharing,
+    idle_resource_sharing: ?IdleResourceSharing = null,
 
     /// List of the priority classes, `PriorityClass`, of the cluster policy. When
     /// specified, these class configurations define how tasks are queued.
-    priority_classes: ?[]const PriorityClass,
+    priority_classes: ?[]const PriorityClass = null,
 
     pub const json_field_names = .{
         .fair_share = "FairShare",

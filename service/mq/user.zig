@@ -5,13 +5,13 @@
 pub const User = struct {
     /// Enables access to the ActiveMQ Web Console for the ActiveMQ user. Does not
     /// apply to RabbitMQ brokers.
-    console_access: ?bool,
+    console_access: ?bool = null,
 
     /// The list of groups (20 maximum) to which the ActiveMQ user belongs. This
     /// value can contain only alphanumeric characters, dashes, periods,
     /// underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
     /// Does not apply to RabbitMQ brokers.
-    groups: ?[]const []const u8,
+    groups: ?[]const []const u8 = null,
 
     /// Required. The password of the user. This value must be at least 12
     /// characters long, must contain at least 4 unique characters, and must not
@@ -19,7 +19,7 @@ pub const User = struct {
     password: []const u8,
 
     /// Defines if this user is intended for CRDR replication purposes.
-    replication_user: ?bool,
+    replication_user: ?bool = null,
 
     /// The username of the broker user. The following restrictions apply to broker
     /// usernames:

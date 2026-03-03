@@ -11,13 +11,13 @@ pub const FlowTraceNodeOutputField = struct {
     content: FlowTraceNodeOutputContent,
 
     /// The next node that receives output data from this field.
-    next: ?[]const FlowTraceNodeOutputNext,
+    next: ?[]const FlowTraceNodeOutputNext = null,
 
     /// The name of the node output.
     node_output_name: []const u8,
 
     /// The data type of the output field for compatibility validation.
-    @"type": ?FlowNodeIODataType,
+    @"type": ?FlowNodeIODataType = null,
 
     pub const json_field_names = .{
         .content = "content",

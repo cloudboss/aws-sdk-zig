@@ -3,7 +3,7 @@ const ReadSetImportJobStatus = @import("read_set_import_job_status.zig").ReadSet
 /// An import read set job.
 pub const ImportReadSetJobItem = struct {
     /// When the job completed.
-    completion_time: ?i64,
+    completion_time: ?i64 = null,
 
     /// When the job was created.
     creation_time: i64,

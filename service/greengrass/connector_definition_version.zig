@@ -5,7 +5,7 @@ const Connector = @import("connector.zig").Connector;
 pub const ConnectorDefinitionVersion = struct {
     /// A list of references to connectors in this version, with their corresponding
     /// configuration settings.
-    connectors: ?[]const Connector,
+    connectors: ?[]const Connector = null,
 
     pub const json_field_names = .{
         .connectors = "Connectors",

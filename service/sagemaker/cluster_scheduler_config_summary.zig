@@ -3,7 +3,7 @@ const SchedulerResourceStatus = @import("scheduler_resource_status.zig").Schedul
 /// Summary of the cluster policy.
 pub const ClusterSchedulerConfigSummary = struct {
     /// ARN of the cluster.
-    cluster_arn: ?[]const u8,
+    cluster_arn: ?[]const u8 = null,
 
     /// ARN of the cluster policy.
     cluster_scheduler_config_arn: []const u8,
@@ -12,13 +12,13 @@ pub const ClusterSchedulerConfigSummary = struct {
     cluster_scheduler_config_id: []const u8,
 
     /// Version of the cluster policy.
-    cluster_scheduler_config_version: ?i32,
+    cluster_scheduler_config_version: ?i32 = null,
 
     /// Creation time of the cluster policy.
     creation_time: i64,
 
     /// Last modified time of the cluster policy.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// Name of the cluster policy.
     name: []const u8,

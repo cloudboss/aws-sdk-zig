@@ -10,7 +10,7 @@ pub const PutEventsRequestEntry = struct {
     /// properties, EventBridge fails that entry.
     /// If you submit a request in which *none* of the entries have each of these
     /// properties, EventBridge fails the entire request.
-    detail: ?[]const u8,
+    detail: ?[]const u8 = null,
 
     /// Free-form string, with a maximum of 128 characters, used to decide what
     /// fields to expect
@@ -22,7 +22,7 @@ pub const PutEventsRequestEntry = struct {
     /// properties, EventBridge fails that entry.
     /// If you submit a request in which *none* of the entries have each of these
     /// properties, EventBridge fails the entire request.
-    detail_type: ?[]const u8,
+    detail_type: ?[]const u8 = null,
 
     /// The name or ARN of the event bus to receive the event. Only the rules that
     /// are associated
@@ -37,12 +37,12 @@ pub const PutEventsRequestEntry = struct {
     /// determines the corresponding event bus in the other Region based on the
     /// endpoint referenced
     /// by the `EndpointId`. Specifying the event bus ARN is preferred.
-    event_bus_name: ?[]const u8,
+    event_bus_name: ?[]const u8 = null,
 
     /// Amazon Web Services resources, identified by Amazon Resource Name (ARN),
     /// which the event primarily concerns.
     /// Any number, including zero, may be present.
-    resources: ?[]const []const u8,
+    resources: ?[]const []const u8 = null,
 
     /// The source of the event.
     ///
@@ -52,20 +52,20 @@ pub const PutEventsRequestEntry = struct {
     /// properties, EventBridge fails that entry.
     /// If you submit a request in which *none* of the entries have each of these
     /// properties, EventBridge fails the entire request.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     /// The time stamp of the event, per
     /// [RFC3339](https://www.rfc-editor.org/rfc/rfc3339.txt). If no time stamp is
     /// provided, the time stamp of the
     /// [PutEvents](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html) call is used.
-    time: ?i64,
+    time: ?i64 = null,
 
     /// An X-Ray trace header, which is an http header (X-Amzn-Trace-Id) that
     /// contains the trace-id associated with the event.
     ///
     /// To learn more about X-Ray trace headers, see [Tracing
     /// header](https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader) in the X-Ray Developer Guide.
-    trace_header: ?[]const u8,
+    trace_header: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .detail = "Detail",

@@ -7,16 +7,16 @@ pub const AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails = struct 
     /// The type of security configuration for your GraphQL API: API key, Identity
     /// and Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user
     /// pools, or Lambda.
-    authentication_type: ?[]const u8,
+    authentication_type: ?[]const u8 = null,
 
     /// The configuration for Lambda function authorization.
-    lambda_authorizer_config: ?AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails,
+    lambda_authorizer_config: ?AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails = null,
 
     /// The OpenID Connect configuration.
-    open_id_connect_config: ?AwsAppSyncGraphQlApiOpenIdConnectConfigDetails,
+    open_id_connect_config: ?AwsAppSyncGraphQlApiOpenIdConnectConfigDetails = null,
 
     /// The Amazon Cognito user pools configuration.
-    user_pool_config: ?AwsAppSyncGraphQlApiUserPoolConfigDetails,
+    user_pool_config: ?AwsAppSyncGraphQlApiUserPoolConfigDetails = null,
 
     pub const json_field_names = .{
         .authentication_type = "AuthenticationType",

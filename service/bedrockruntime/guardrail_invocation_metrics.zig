@@ -4,13 +4,13 @@ const GuardrailUsage = @import("guardrail_usage.zig").GuardrailUsage;
 /// The invocation metrics for the guardrail.
 pub const GuardrailInvocationMetrics = struct {
     /// The coverage details for the guardrail invocation metrics.
-    guardrail_coverage: ?GuardrailCoverage,
+    guardrail_coverage: ?GuardrailCoverage = null,
 
     /// The processing latency details for the guardrail invocation metrics.
-    guardrail_processing_latency: ?i64,
+    guardrail_processing_latency: ?i64 = null,
 
     /// The usage details for the guardrail invocation metrics.
-    usage: ?GuardrailUsage,
+    usage: ?GuardrailUsage = null,
 
     pub const json_field_names = .{
         .guardrail_coverage = "guardrailCoverage",

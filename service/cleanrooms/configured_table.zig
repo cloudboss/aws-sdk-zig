@@ -30,7 +30,7 @@ pub const ConfiguredTable = struct {
     create_time: i64,
 
     /// A description for the configured table.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique ID for the configured table.
     id: []const u8,
@@ -39,7 +39,7 @@ pub const ConfiguredTable = struct {
     name: []const u8,
 
     /// The selected analysis methods for the configured table.
-    selected_analysis_methods: ?[]const SelectedAnalysisMethod,
+    selected_analysis_methods: ?[]const SelectedAnalysisMethod = null,
 
     /// The table that this configured table represents.
     table_reference: TableReference,

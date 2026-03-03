@@ -14,7 +14,7 @@ const DashUtcTiming = @import("dash_utc_timing.zig").DashUtcTiming;
 /// Create a DASH manifest configuration.
 pub const CreateDashManifestConfiguration = struct {
     /// The base URLs to use for retrieving segments.
-    base_urls: ?[]const DashBaseUrl,
+    base_urls: ?[]const DashBaseUrl = null,
 
     /// The layout of the DASH manifest that MediaPackage produces. `STANDARD`
     /// indicates a default manifest, which is compacted. `NONE` indicates a full
@@ -22,32 +22,32 @@ pub const CreateDashManifestConfiguration = struct {
     ///
     /// For information about compactness, see [DASH manifest
     /// compactness](https://docs.aws.amazon.com/mediapackage/latest/userguide/compacted.html) in the *Elemental MediaPackage v2 User Guide*.
-    compactness: ?DashCompactness,
+    compactness: ?DashCompactness = null,
 
     /// Determines how the DASH manifest signals the DRM content.
-    drm_signaling: ?DashDrmSignaling,
+    drm_signaling: ?DashDrmSignaling = null,
 
     /// For endpoints that use the DVB-DASH profile only. The font download and
     /// error reporting information that you want MediaPackage to pass through to
     /// the manifest.
-    dvb_settings: ?DashDvbSettings,
+    dvb_settings: ?DashDvbSettings = null,
 
-    filter_configuration: ?FilterConfiguration,
+    filter_configuration: ?FilterConfiguration = null,
 
     /// A short string that's appended to the endpoint URL. The child manifest name
     /// creates a unique path to this endpoint.
     manifest_name: []const u8,
 
     /// The total duration (in seconds) of the manifest's content.
-    manifest_window_seconds: ?i32,
+    manifest_window_seconds: ?i32 = null,
 
     /// Minimum amount of content (in seconds) that a player must keep available in
     /// the buffer.
-    min_buffer_time_seconds: ?i32,
+    min_buffer_time_seconds: ?i32 = null,
 
     /// Minimum amount of time (in seconds) that the player should wait before
     /// requesting updates to the manifest.
-    min_update_period_seconds: ?i32,
+    min_update_period_seconds: ?i32 = null,
 
     /// A list of triggers that controls when AWS Elemental MediaPackage separates
     /// the MPEG-DASH manifest into multiple periods. Type `ADS` to indicate that
@@ -57,17 +57,17 @@ pub const CreateDashManifestConfiguration = struct {
     /// information about periods in the DASH manifest, see [Multi-period DASH in
     /// AWS Elemental
     /// MediaPackage](https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html).
-    period_triggers: ?[]const DashPeriodTrigger,
+    period_triggers: ?[]const DashPeriodTrigger = null,
 
     /// The profile that the output is compliant with.
-    profiles: ?[]const DashProfile,
+    profiles: ?[]const DashProfile = null,
 
     /// Details about the content that you want MediaPackage to pass through in the
     /// manifest to the playback device.
-    program_information: ?DashProgramInformation,
+    program_information: ?DashProgramInformation = null,
 
     /// The SCTE configuration.
-    scte_dash: ?ScteDash,
+    scte_dash: ?ScteDash = null,
 
     /// Determines the type of variable used in the `media` URL of the
     /// `SegmentTemplate` tag in the manifest. Also specifies if segment timeline
@@ -78,18 +78,18 @@ pub const CreateDashManifestConfiguration = struct {
     /// * `NUMBER_WITH_TIMELINE` - The `$Number$` variable is used in the `media`
     ///   URL. The value of this variable is the sequential number of the segment. A
     ///   full `SegmentTimeline` object is presented in each `SegmentTemplate`.
-    segment_template_format: ?DashSegmentTemplateFormat,
+    segment_template_format: ?DashSegmentTemplateFormat = null,
 
     /// The configuration for DASH subtitles.
-    subtitle_configuration: ?DashSubtitleConfiguration,
+    subtitle_configuration: ?DashSubtitleConfiguration = null,
 
     /// The amount of time (in seconds) that the player should be from the end of
     /// the manifest.
-    suggested_presentation_delay_seconds: ?i32,
+    suggested_presentation_delay_seconds: ?i32 = null,
 
     /// Determines the type of UTC timing included in the DASH Media Presentation
     /// Description (MPD).
-    utc_timing: ?DashUtcTiming,
+    utc_timing: ?DashUtcTiming = null,
 
     pub const json_field_names = .{
         .base_urls = "BaseUrls",

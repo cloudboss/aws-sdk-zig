@@ -1,7 +1,7 @@
 pub const ThreatActorIp = struct {
     ip_address: []const u8,
 
-    user_agent: ?[]const u8,
+    user_agent: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ip_address = "ipAddress",

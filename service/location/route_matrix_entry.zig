@@ -4,14 +4,14 @@ const RouteMatrixEntryError = @import("route_matrix_entry_error.zig").RouteMatri
 /// `DestinationPosition` pair.
 pub const RouteMatrixEntry = struct {
     /// The total distance of travel for the route.
-    distance: ?f64,
+    distance: ?f64 = null,
 
     /// The expected duration of travel for the route.
-    duration_seconds: ?f64,
+    duration_seconds: ?f64 = null,
 
     /// An error corresponding to the calculation of a route between the
     /// `DeparturePosition` and `DestinationPosition`.
-    @"error": ?RouteMatrixEntryError,
+    @"error": ?RouteMatrixEntryError = null,
 
     pub const json_field_names = .{
         .distance = "Distance",

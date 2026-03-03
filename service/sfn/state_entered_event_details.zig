@@ -5,10 +5,10 @@ pub const StateEnteredEventDetails = struct {
     /// The string that contains the JSON input data for the state. Length
     /// constraints apply to the payload size, and are expressed as bytes in UTF-8
     /// encoding.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// Contains details about the input for an execution history event.
-    input_details: ?HistoryEventExecutionDataDetails,
+    input_details: ?HistoryEventExecutionDataDetails = null,
 
     /// The name of the state.
     name: []const u8,

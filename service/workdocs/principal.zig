@@ -4,13 +4,13 @@ const PrincipalType = @import("principal_type.zig").PrincipalType;
 /// Describes a resource.
 pub const Principal = struct {
     /// The ID of the resource.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The permission information for the resource.
-    roles: ?[]const PermissionInfo,
+    roles: ?[]const PermissionInfo = null,
 
     /// The type of resource.
-    @"type": ?PrincipalType,
+    @"type": ?PrincipalType = null,
 
     pub const json_field_names = .{
         .id = "Id",

@@ -2,23 +2,23 @@
 /// an Firewall Manager managed route table.
 pub const ThirdPartyFirewallMissingExpectedRouteTableViolation = struct {
     /// The Availability Zone of the firewall subnet that's causing the violation.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The resource ID of the current route table that's associated with the
     /// subnet, if one is available.
-    current_route_table: ?[]const u8,
+    current_route_table: ?[]const u8 = null,
 
     /// The resource ID of the route table that should be associated with the
     /// subnet.
-    expected_route_table: ?[]const u8,
+    expected_route_table: ?[]const u8 = null,
 
     /// The ID of the third-party firewall or VPC resource that's causing the
     /// violation.
-    violation_target: ?[]const u8,
+    violation_target: ?[]const u8 = null,
 
     /// The resource ID of the VPC associated with a fireawll subnet that's causing
     /// the violation.
-    vpc: ?[]const u8,
+    vpc: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .availability_zone = "AvailabilityZone",

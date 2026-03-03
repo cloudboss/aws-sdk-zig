@@ -4,25 +4,25 @@ const Tag = @import("tag.zig").Tag;
 /// Describes a subnet group.
 pub const ClusterSubnetGroup = struct {
     /// The name of the cluster subnet group.
-    cluster_subnet_group_name: ?[]const u8,
+    cluster_subnet_group_name: ?[]const u8 = null,
 
     /// The description of the cluster subnet group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The status of the cluster subnet group. Possible values are `Complete`,
     /// `Incomplete` and `Invalid`.
-    subnet_group_status: ?[]const u8,
+    subnet_group_status: ?[]const u8 = null,
 
     /// A list of the VPC Subnet elements.
-    subnets: ?[]const Subnet,
+    subnets: ?[]const Subnet = null,
 
     /// The IP address types supported by this cluster subnet group. Possible values
     /// are `ipv4` and `dualstack`.
-    supported_cluster_ip_address_types: ?[]const []const u8,
+    supported_cluster_ip_address_types: ?[]const []const u8 = null,
 
     /// The list of tags for the cluster subnet group.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The VPC ID of the cluster subnet group.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

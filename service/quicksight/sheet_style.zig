@@ -5,13 +5,13 @@ const TileLayoutStyle = @import("tile_layout_style.zig").TileLayoutStyle;
 /// The theme display options for sheets.
 pub const SheetStyle = struct {
     /// The background for sheets.
-    background: ?SheetBackgroundStyle,
+    background: ?SheetBackgroundStyle = null,
 
     /// The display options for tiles.
-    tile: ?TileStyle,
+    tile: ?TileStyle = null,
 
     /// The layout options for tiles.
-    tile_layout: ?TileLayoutStyle,
+    tile_layout: ?TileLayoutStyle = null,
 
     pub const json_field_names = .{
         .background = "Background",

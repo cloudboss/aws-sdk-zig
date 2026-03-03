@@ -7,10 +7,10 @@ const LambdaExecutorConfiguration = @import("lambda_executor_configuration.zig")
 /// and `JobWorker`.
 pub const ExecutorConfiguration = struct {
     /// Details about the `JobWorker` executor of the action type.
-    job_worker_executor_configuration: ?JobWorkerExecutorConfiguration,
+    job_worker_executor_configuration: ?JobWorkerExecutorConfiguration = null,
 
     /// Details about the `Lambda` executor of the action type.
-    lambda_executor_configuration: ?LambdaExecutorConfiguration,
+    lambda_executor_configuration: ?LambdaExecutorConfiguration = null,
 
     pub const json_field_names = .{
         .job_worker_executor_configuration = "jobWorkerExecutorConfiguration",

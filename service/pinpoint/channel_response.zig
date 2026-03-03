@@ -2,32 +2,32 @@
 /// an application.
 pub const ChannelResponse = struct {
     /// The unique identifier for the application.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The date and time, in ISO 8601 format, when the channel was enabled.
-    creation_date: ?[]const u8,
+    creation_date: ?[]const u8 = null,
 
     /// Specifies whether the channel is enabled for the application.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// (Not used) This property is retained only for backward compatibility.
-    has_credential: ?bool,
+    has_credential: ?bool = null,
 
     /// (Deprecated) An identifier for the channel. This property is retained only
     /// for backward compatibility.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Specifies whether the channel is archived.
-    is_archived: ?bool,
+    is_archived: ?bool = null,
 
     /// The user who last modified the channel.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The date and time, in ISO 8601 format, when the channel was last modified.
-    last_modified_date: ?[]const u8,
+    last_modified_date: ?[]const u8 = null,
 
     /// The current version of the channel.
-    version: ?i32,
+    version: ?i32 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

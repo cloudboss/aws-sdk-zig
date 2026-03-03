@@ -3,11 +3,11 @@ const Firehose = @import("firehose.zig").Firehose;
 const S3 = @import("s3.zig").S3;
 
 pub const BrokerLogs = struct {
-    cloud_watch_logs: ?CloudWatchLogs,
+    cloud_watch_logs: ?CloudWatchLogs = null,
 
-    firehose: ?Firehose,
+    firehose: ?Firehose = null,
 
-    s3: ?S3,
+    s3: ?S3 = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs = "CloudWatchLogs",

@@ -7,31 +7,31 @@ const ResourceDataSyncSourceWithState = @import("resource_data_sync_source_with_
 /// successful sync.
 pub const ResourceDataSyncItem = struct {
     /// The status reported by the last sync.
-    last_status: ?LastResourceDataSyncStatus,
+    last_status: ?LastResourceDataSyncStatus = null,
 
     /// The last time the sync operations returned a status of `SUCCESSFUL` (UTC).
-    last_successful_sync_time: ?i64,
+    last_successful_sync_time: ?i64 = null,
 
     /// The status message details reported by the last sync.
-    last_sync_status_message: ?[]const u8,
+    last_sync_status_message: ?[]const u8 = null,
 
     /// The last time the configuration attempted to sync (UTC).
-    last_sync_time: ?i64,
+    last_sync_time: ?i64 = null,
 
     /// Configuration information for the target S3 bucket.
-    s3_destination: ?ResourceDataSyncS3Destination,
+    s3_destination: ?ResourceDataSyncS3Destination = null,
 
     /// The date and time the configuration was created (UTC).
-    sync_created_time: ?i64,
+    sync_created_time: ?i64 = null,
 
     /// The date and time the resource data sync was changed.
-    sync_last_modified_time: ?i64,
+    sync_last_modified_time: ?i64 = null,
 
     /// The name of the resource data sync.
-    sync_name: ?[]const u8,
+    sync_name: ?[]const u8 = null,
 
     /// Information about the source where the data was synchronized.
-    sync_source: ?ResourceDataSyncSourceWithState,
+    sync_source: ?ResourceDataSyncSourceWithState = null,
 
     /// The type of resource data sync. If `SyncType` is `SyncToDestination`,
     /// then the resource data sync synchronizes data to an S3 bucket. If the
@@ -39,7 +39,7 @@ pub const ResourceDataSyncItem = struct {
     /// `SyncFromSource` then the resource data sync synchronizes data from
     /// Organizations or from
     /// multiple Amazon Web Services Regions.
-    sync_type: ?[]const u8,
+    sync_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .last_status = "LastStatus",

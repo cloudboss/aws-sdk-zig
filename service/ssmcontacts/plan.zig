@@ -6,12 +6,12 @@ const Stage = @import("stage.zig").Stage;
 pub const Plan = struct {
     /// The Amazon Resource Names (ARNs) of the on-call rotations associated with
     /// the plan.
-    rotation_ids: ?[]const []const u8,
+    rotation_ids: ?[]const []const u8 = null,
 
     /// A list of stages that the escalation plan or engagement plan uses to engage
     /// contacts and
     /// contact methods.
-    stages: ?[]const Stage,
+    stages: ?[]const Stage = null,
 
     pub const json_field_names = .{
         .rotation_ids = "RotationIds",

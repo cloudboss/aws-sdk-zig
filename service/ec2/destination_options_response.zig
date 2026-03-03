@@ -3,12 +3,12 @@ const DestinationFileFormat = @import("destination_file_format.zig").Destination
 /// Describes the destination options for a flow log.
 pub const DestinationOptionsResponse = struct {
     /// The format for the flow log.
-    file_format: ?DestinationFileFormat,
+    file_format: ?DestinationFileFormat = null,
 
     /// Indicates whether to use Hive-compatible prefixes for flow logs stored in
     /// Amazon S3.
-    hive_compatible_partitions: ?bool,
+    hive_compatible_partitions: ?bool = null,
 
     /// Indicates whether to partition the flow log per hour.
-    per_hour_partition: ?bool,
+    per_hour_partition: ?bool = null,
 };

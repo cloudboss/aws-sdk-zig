@@ -5,10 +5,10 @@ const TagStatus = @import("tag_status.zig").TagStatus;
 pub const ListImagesFilter = struct {
     /// The image status with which to filter your ListImages results. Valid values
     /// are `ACTIVE`, `ARCHIVED`, and `ACTIVATING`.
-    image_status: ?ImageStatusFilter,
+    image_status: ?ImageStatusFilter = null,
 
     /// The tag status with which to filter your ListImages results.
-    tag_status: ?TagStatus,
+    tag_status: ?TagStatus = null,
 
     pub const json_field_names = .{
         .image_status = "imageStatus",

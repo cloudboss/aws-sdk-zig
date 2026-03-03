@@ -5,13 +5,13 @@ const VpcEndpointErrorCode = @import("vpc_endpoint_error_code.zig").VpcEndpointE
 /// endpoint.
 pub const VpcEndpointError = struct {
     /// The code associated with the error.
-    error_code: ?VpcEndpointErrorCode,
+    error_code: ?VpcEndpointErrorCode = null,
 
     /// A message describing the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The unique identifier of the endpoint.
-    vpc_endpoint_id: ?[]const u8,
+    vpc_endpoint_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

@@ -4,7 +4,7 @@
 /// contact.
 pub const AgentsCriteria = struct {
     /// An object to specify a list of agents, by user ID.
-    agent_ids: ?[]const []const u8,
+    agent_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .agent_ids = "AgentIds",

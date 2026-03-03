@@ -4,10 +4,10 @@ pub const SparkSubmitJobDriver = struct {
     entry_point: []const u8,
 
     /// The arguments for job application.
-    entry_point_arguments: ?[]const []const u8,
+    entry_point_arguments: ?[]const []const u8 = null,
 
     /// The Spark submit parameters that are used for job runs.
-    spark_submit_parameters: ?[]const u8,
+    spark_submit_parameters: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .entry_point = "entryPoint",

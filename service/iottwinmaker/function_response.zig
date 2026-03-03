@@ -4,16 +4,16 @@ const Scope = @import("scope.zig").Scope;
 /// The function response.
 pub const FunctionResponse = struct {
     /// The data connector.
-    implemented_by: ?DataConnector,
+    implemented_by: ?DataConnector = null,
 
     /// Indicates whether this function is inherited.
-    is_inherited: ?bool,
+    is_inherited: ?bool = null,
 
     /// The required properties of the function.
-    required_properties: ?[]const []const u8,
+    required_properties: ?[]const []const u8 = null,
 
     /// The scope of the function.
-    scope: ?Scope,
+    scope: ?Scope = null,
 
     pub const json_field_names = .{
         .implemented_by = "implementedBy",

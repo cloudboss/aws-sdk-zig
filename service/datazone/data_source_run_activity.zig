@@ -8,7 +8,7 @@ pub const DataSourceRunActivity = struct {
     created_at: i64,
 
     /// The identifier of the asset included in the data source run activity.
-    data_asset_id: ?[]const u8,
+    data_asset_id: ?[]const u8 = null,
 
     /// The status of the asset included in the data source run activity.
     data_asset_status: DataAssetActivityStatus,
@@ -19,16 +19,16 @@ pub const DataSourceRunActivity = struct {
     /// The identifier of the data source for the data source run activity.
     data_source_run_id: []const u8,
 
-    error_message: ?DataSourceErrorMessage,
+    error_message: ?DataSourceErrorMessage = null,
 
     /// The data lineage summary.
-    lineage_summary: ?LineageInfo,
+    lineage_summary: ?LineageInfo = null,
 
     /// The project ID included in the data source run activity.
     project_id: []const u8,
 
     /// The technical description included in the data source run activity.
-    technical_description: ?[]const u8,
+    technical_description: ?[]const u8 = null,
 
     /// The technical name included in the data source run activity.
     technical_name: []const u8,

@@ -8,22 +8,22 @@ pub const AwsEc2VpnConnectionDetails = struct {
     /// The category of the VPN connection. `VPN` indicates an Amazon Web Services
     /// VPN connection. `VPN-Classic`
     /// indicates an Amazon Web Services Classic VPN connection.
-    category: ?[]const u8,
+    category: ?[]const u8 = null,
 
     /// The configuration information for the VPN connection's customer gateway, in
     /// the native XML
     /// format.
-    customer_gateway_configuration: ?[]const u8,
+    customer_gateway_configuration: ?[]const u8 = null,
 
     /// The identifier of the customer gateway that is at your end of the VPN
     /// connection.
-    customer_gateway_id: ?[]const u8,
+    customer_gateway_id: ?[]const u8 = null,
 
     /// The VPN connection options.
-    options: ?AwsEc2VpnConnectionOptionsDetails,
+    options: ?AwsEc2VpnConnectionOptionsDetails = null,
 
     /// The static routes that are associated with the VPN connection.
-    routes: ?[]const AwsEc2VpnConnectionRoutesDetails,
+    routes: ?[]const AwsEc2VpnConnectionRoutesDetails = null,
 
     /// The current state of the VPN connection. Valid values are as follows:
     ///
@@ -34,25 +34,25 @@ pub const AwsEc2VpnConnectionDetails = struct {
     /// * `deleting`
     ///
     /// * `pending`
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// The identifier of the transit gateway that is associated with the VPN
     /// connection.
-    transit_gateway_id: ?[]const u8,
+    transit_gateway_id: ?[]const u8 = null,
 
     /// The type of VPN connection.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// Information about the VPN tunnel.
-    vgw_telemetry: ?[]const AwsEc2VpnConnectionVgwTelemetryDetails,
+    vgw_telemetry: ?[]const AwsEc2VpnConnectionVgwTelemetryDetails = null,
 
     /// The identifier of the VPN connection.
-    vpn_connection_id: ?[]const u8,
+    vpn_connection_id: ?[]const u8 = null,
 
     /// The identifier of the virtual private gateway that is at the Amazon Web
     /// Services side of the VPN
     /// connection.
-    vpn_gateway_id: ?[]const u8,
+    vpn_gateway_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .category = "Category",

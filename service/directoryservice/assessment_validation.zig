@@ -3,29 +3,29 @@
 /// assessment.
 pub const AssessmentValidation = struct {
     /// The category of the validation test.
-    category: ?[]const u8,
+    category: ?[]const u8 = null,
 
     /// The date and time when the validation test was completed or last updated.
-    last_update_date_time: ?i64,
+    last_update_date_time: ?i64 = null,
 
     /// The name of the specific validation test performed within the category.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The date and time when the validation test was started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The result status of the validation test. Valid values include `SUCCESS`,
     /// `FAILED`, `PENDING`, and `IN_PROGRESS`.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// A detailed status code providing additional information about the validation
     /// result.
-    status_code: ?[]const u8,
+    status_code: ?[]const u8 = null,
 
     /// A human-readable description of the validation result, including any error
     /// details or
     /// recommendations.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .category = "Category",

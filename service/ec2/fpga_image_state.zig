@@ -12,8 +12,8 @@ pub const FpgaImageState = struct {
     /// * `failed` - AFI bitstream generation failed.
     ///
     /// * `unavailable` - The AFI is no longer available for use.
-    code: ?FpgaImageStateCode,
+    code: ?FpgaImageStateCode = null,
 
     /// If the state is `failed`, this is the error message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

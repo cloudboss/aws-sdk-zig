@@ -3,16 +3,16 @@
 /// keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html).
 pub const Criterion = struct {
     /// A "contains" operator to match for the filter used to create the rule.
-    contains: ?[]const []const u8,
+    contains: ?[]const []const u8 = null,
 
     /// An "equals" operator to match for the filter used to create the rule.
-    eq: ?[]const []const u8,
+    eq: ?[]const []const u8 = null,
 
     /// An "exists" operator to match for the filter used to create the rule.
-    exists: ?bool,
+    exists: ?bool = null,
 
     /// A "not equals" operator to match for the filter used to create the rule.
-    neq: ?[]const []const u8,
+    neq: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .contains = "contains",

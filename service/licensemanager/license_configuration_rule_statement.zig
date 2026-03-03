@@ -5,13 +5,13 @@ const OrRuleStatement = @import("or_rule_statement.zig").OrRuleStatement;
 /// License configuration rule statement.
 pub const LicenseConfigurationRuleStatement = struct {
     /// AND rule statement.
-    and_rule_statement: ?AndRuleStatement,
+    and_rule_statement: ?AndRuleStatement = null,
 
     /// Matching rule statement.
-    matching_rule_statement: ?MatchingRuleStatement,
+    matching_rule_statement: ?MatchingRuleStatement = null,
 
     /// OR rule statement.
-    or_rule_statement: ?OrRuleStatement,
+    or_rule_statement: ?OrRuleStatement = null,
 
     pub const json_field_names = .{
         .and_rule_statement = "AndRuleStatement",

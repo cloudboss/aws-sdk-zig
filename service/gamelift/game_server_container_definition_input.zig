@@ -37,12 +37,12 @@ pub const GameServerContainerDefinitionInput = struct {
     /// started. This dependency is reversed on shutdown, which means that
     /// *ContainerB* must shut down before *ContainerA* can
     /// shut down.
-    depends_on: ?[]const ContainerDependency,
+    depends_on: ?[]const ContainerDependency = null,
 
     /// A set of environment variables to pass to the container on startup. See the
     /// [ContainerDefinition::environment](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-environment) parameter in the *Amazon Elastic Container Service API
     /// Reference*.
-    environment_override: ?[]const ContainerEnvironment,
+    environment_override: ?[]const ContainerEnvironment = null,
 
     /// The location of the container image to deploy to a container fleet. Provide
     /// an image in an
@@ -69,7 +69,7 @@ pub const GameServerContainerDefinitionInput = struct {
     /// A mount point that binds a path inside the container to a file or directory
     /// on the host
     /// system and lets it access the file or directory.
-    mount_points: ?[]const ContainerMountPoint,
+    mount_points: ?[]const ContainerMountPoint = null,
 
     /// A set of ports that Amazon GameLift Servers can assign to processes in a
     /// container. The container port

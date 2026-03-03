@@ -23,7 +23,7 @@ pub const Alias = struct {
     ///
     /// * DELETE_FAILED - Amazon FSx was unable to disassociate the DNS alias from
     ///   the file system.
-    lifecycle: ?AliasLifecycle,
+    lifecycle: ?AliasLifecycle = null,
 
     /// The name of the DNS alias. The alias name has to meet the following
     /// requirements:
@@ -42,7 +42,7 @@ pub const Alias = struct {
     /// (a-z), regardless of how you specify them:
     /// as uppercase letters, lowercase letters, or the corresponding letters in
     /// escape codes.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .lifecycle = "Lifecycle",

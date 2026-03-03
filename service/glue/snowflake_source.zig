@@ -10,7 +10,7 @@ pub const SnowflakeSource = struct {
     name: []const u8,
 
     /// Specifies user-defined schemas for your output data.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     pub const json_field_names = .{
         .data = "Data",

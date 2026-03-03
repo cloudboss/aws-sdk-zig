@@ -14,168 +14,168 @@ const TransitGatewayRouteTableRoute = @import("transit_gateway_route_table_route
 /// codes](https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html).
 pub const Explanation = struct {
     /// The network ACL.
-    acl: ?AnalysisComponent,
+    acl: ?AnalysisComponent = null,
 
     /// The network ACL rule.
-    acl_rule: ?AnalysisAclRule,
+    acl_rule: ?AnalysisAclRule = null,
 
     /// The IPv4 address, in CIDR notation.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// The IPv4 addresses, in CIDR notation.
-    addresses: ?[]const []const u8,
+    addresses: ?[]const []const u8 = null,
 
     /// The resource to which the component is attached.
-    attached_to: ?AnalysisComponent,
+    attached_to: ?AnalysisComponent = null,
 
     /// The IDs of the Availability Zones.
-    availability_zone_ids: ?[]const []const u8,
+    availability_zone_ids: ?[]const []const u8 = null,
 
     /// The Availability Zones.
-    availability_zones: ?[]const []const u8,
+    availability_zones: ?[]const []const u8 = null,
 
     /// The CIDR ranges.
-    cidrs: ?[]const []const u8,
+    cidrs: ?[]const []const u8 = null,
 
     /// The listener for a Classic Load Balancer.
-    classic_load_balancer_listener: ?AnalysisLoadBalancerListener,
+    classic_load_balancer_listener: ?AnalysisLoadBalancerListener = null,
 
     /// The component.
-    component: ?AnalysisComponent,
+    component: ?AnalysisComponent = null,
 
     /// The Amazon Web Services account for the component.
-    component_account: ?[]const u8,
+    component_account: ?[]const u8 = null,
 
     /// The Region for the component.
-    component_region: ?[]const u8,
+    component_region: ?[]const u8 = null,
 
     /// The customer gateway.
-    customer_gateway: ?AnalysisComponent,
+    customer_gateway: ?AnalysisComponent = null,
 
     /// The destination.
-    destination: ?AnalysisComponent,
+    destination: ?AnalysisComponent = null,
 
     /// The destination VPC.
-    destination_vpc: ?AnalysisComponent,
+    destination_vpc: ?AnalysisComponent = null,
 
     /// The direction. The following are the possible values:
     ///
     /// * egress
     ///
     /// * ingress
-    direction: ?[]const u8,
+    direction: ?[]const u8 = null,
 
     /// The load balancer listener.
-    elastic_load_balancer_listener: ?AnalysisComponent,
+    elastic_load_balancer_listener: ?AnalysisComponent = null,
 
     /// The explanation code.
-    explanation_code: ?[]const u8,
+    explanation_code: ?[]const u8 = null,
 
     /// The Network Firewall stateful rule.
-    firewall_stateful_rule: ?FirewallStatefulRule,
+    firewall_stateful_rule: ?FirewallStatefulRule = null,
 
     /// The Network Firewall stateless rule.
-    firewall_stateless_rule: ?FirewallStatelessRule,
+    firewall_stateless_rule: ?FirewallStatelessRule = null,
 
     /// The route table.
-    ingress_route_table: ?AnalysisComponent,
+    ingress_route_table: ?AnalysisComponent = null,
 
     /// The internet gateway.
-    internet_gateway: ?AnalysisComponent,
+    internet_gateway: ?AnalysisComponent = null,
 
     /// The Amazon Resource Name (ARN) of the load balancer.
-    load_balancer_arn: ?[]const u8,
+    load_balancer_arn: ?[]const u8 = null,
 
     /// The listener port of the load balancer.
-    load_balancer_listener_port: ?i32,
+    load_balancer_listener_port: ?i32 = null,
 
     /// The target.
-    load_balancer_target: ?AnalysisLoadBalancerTarget,
+    load_balancer_target: ?AnalysisLoadBalancerTarget = null,
 
     /// The target group.
-    load_balancer_target_group: ?AnalysisComponent,
+    load_balancer_target_group: ?AnalysisComponent = null,
 
     /// The target groups.
-    load_balancer_target_groups: ?[]const AnalysisComponent,
+    load_balancer_target_groups: ?[]const AnalysisComponent = null,
 
     /// The target port.
-    load_balancer_target_port: ?i32,
+    load_balancer_target_port: ?i32 = null,
 
     /// The missing component.
-    missing_component: ?[]const u8,
+    missing_component: ?[]const u8 = null,
 
     /// The NAT gateway.
-    nat_gateway: ?AnalysisComponent,
+    nat_gateway: ?AnalysisComponent = null,
 
     /// The network interface.
-    network_interface: ?AnalysisComponent,
+    network_interface: ?AnalysisComponent = null,
 
     /// The packet field.
-    packet_field: ?[]const u8,
+    packet_field: ?[]const u8 = null,
 
     /// The port.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The port ranges.
-    port_ranges: ?[]const PortRange,
+    port_ranges: ?[]const PortRange = null,
 
     /// The prefix list.
-    prefix_list: ?AnalysisComponent,
+    prefix_list: ?AnalysisComponent = null,
 
     /// The protocols.
-    protocols: ?[]const []const u8,
+    protocols: ?[]const []const u8 = null,
 
     /// The route table.
-    route_table: ?AnalysisComponent,
+    route_table: ?AnalysisComponent = null,
 
     /// The route table route.
-    route_table_route: ?AnalysisRouteTableRoute,
+    route_table_route: ?AnalysisRouteTableRoute = null,
 
     /// The security group.
-    security_group: ?AnalysisComponent,
+    security_group: ?AnalysisComponent = null,
 
     /// The security group rule.
-    security_group_rule: ?AnalysisSecurityGroupRule,
+    security_group_rule: ?AnalysisSecurityGroupRule = null,
 
     /// The security groups.
-    security_groups: ?[]const AnalysisComponent,
+    security_groups: ?[]const AnalysisComponent = null,
 
     /// The source VPC.
-    source_vpc: ?AnalysisComponent,
+    source_vpc: ?AnalysisComponent = null,
 
     /// The state.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// The subnet.
-    subnet: ?AnalysisComponent,
+    subnet: ?AnalysisComponent = null,
 
     /// The route table for the subnet.
-    subnet_route_table: ?AnalysisComponent,
+    subnet_route_table: ?AnalysisComponent = null,
 
     /// The transit gateway.
-    transit_gateway: ?AnalysisComponent,
+    transit_gateway: ?AnalysisComponent = null,
 
     /// The transit gateway attachment.
-    transit_gateway_attachment: ?AnalysisComponent,
+    transit_gateway_attachment: ?AnalysisComponent = null,
 
     /// The transit gateway route table.
-    transit_gateway_route_table: ?AnalysisComponent,
+    transit_gateway_route_table: ?AnalysisComponent = null,
 
     /// The transit gateway route table route.
-    transit_gateway_route_table_route: ?TransitGatewayRouteTableRoute,
+    transit_gateway_route_table_route: ?TransitGatewayRouteTableRoute = null,
 
     /// The component VPC.
-    vpc: ?AnalysisComponent,
+    vpc: ?AnalysisComponent = null,
 
     /// The VPC endpoint.
-    vpc_endpoint: ?AnalysisComponent,
+    vpc_endpoint: ?AnalysisComponent = null,
 
     /// The VPC peering connection.
-    vpc_peering_connection: ?AnalysisComponent,
+    vpc_peering_connection: ?AnalysisComponent = null,
 
     /// The VPN connection.
-    vpn_connection: ?AnalysisComponent,
+    vpn_connection: ?AnalysisComponent = null,
 
     /// The VPN gateway.
-    vpn_gateway: ?AnalysisComponent,
+    vpn_gateway: ?AnalysisComponent = null,
 };

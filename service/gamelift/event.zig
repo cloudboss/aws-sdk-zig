@@ -7,7 +7,7 @@ const EventCode = @import("event_code.zig").EventCode;
 /// information for troubleshooting and debugging problems.
 pub const Event = struct {
     /// The number of times that this event occurred.
-    count: ?i64,
+    count: ?i64 = null,
 
     /// The type of event being logged.
     ///
@@ -221,27 +221,27 @@ pub const Event = struct {
     /// * FLEET_DELETED -- A request to delete a fleet was initiated.
     ///
     /// * GENERIC_EVENT -- An unspecified event has occurred.
-    event_code: ?EventCode,
+    event_code: ?EventCode = null,
 
     /// A unique identifier for a fleet event.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// Time stamp indicating when this event occurred. Format is a number expressed
     /// in Unix time as milliseconds (for example `"1469498468.057"`).
-    event_time: ?i64,
+    event_time: ?i64 = null,
 
     /// Additional information related to the event.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Location of stored logs with additional detail that is related to the event.
     /// This is
     /// useful for debugging issues. The URL is valid for 15 minutes. You can also
     /// access fleet
     /// creation logs through the Amazon GameLift Servers console.
-    pre_signed_log_url: ?[]const u8,
+    pre_signed_log_url: ?[]const u8 = null,
 
     /// A unique identifier for an event resource, such as a fleet ID.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .count = "Count",

@@ -20,20 +20,20 @@ pub const VocabularyFilterInfo = struct {
     /// to the
     /// [Supported
     /// languages](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html) table.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// The date and time the specified custom vocabulary filter was last modified.
     ///
     /// Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     /// example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM UTC-7 on May
     /// 4, 2022.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// A unique name, chosen by you, for your custom vocabulary filter. This name
     /// is case
     /// sensitive, cannot contain spaces, and must be unique within an Amazon Web
     /// Services account.
-    vocabulary_filter_name: ?[]const u8,
+    vocabulary_filter_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .language_code = "LanguageCode",

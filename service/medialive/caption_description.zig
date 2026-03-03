@@ -8,11 +8,11 @@ pub const CaptionDescription = struct {
     /// Indicates whether the caption track implements accessibility features such
     /// as written descriptions of spoken dialog, music, and sounds. This signaling
     /// is added to HLS output group and MediaPackage output group.
-    accessibility: ?AccessibilityType,
+    accessibility: ?AccessibilityType = null,
 
     /// Identifies the DASH roles to assign to this captions output. Applies only
     /// when the captions output is configured for DVB DASH accessibility signaling.
-    caption_dash_roles: ?[]const DashRoleCaption,
+    caption_dash_roles: ?[]const DashRoleCaption = null,
 
     /// Specifies which input caption selector to use as a caption source when
     /// generating output captions. This field should match a captionSelector name.
@@ -20,19 +20,19 @@ pub const CaptionDescription = struct {
 
     /// Additional settings for captions destination that depend on the destination
     /// type.
-    destination_settings: ?CaptionDestinationSettings,
+    destination_settings: ?CaptionDestinationSettings = null,
 
     /// Identifies DVB DASH accessibility signaling in this captions output. Used in
     /// Microsoft Smooth Streaming outputs to signal accessibility information to
     /// packagers.
-    dvb_dash_accessibility: ?DvbDashAccessibility,
+    dvb_dash_accessibility: ?DvbDashAccessibility = null,
 
     /// ISO 639-2 three-digit code: http://www.loc.gov/standards/iso639-2/
-    language_code: ?[]const u8,
+    language_code: ?[]const u8 = null,
 
     /// Human readable information to indicate captions available for players (eg.
     /// English, or Spanish).
-    language_description: ?[]const u8,
+    language_description: ?[]const u8 = null,
 
     /// Name of the caption description. Used to associate a caption description
     /// with an output. Names must be unique within an event.

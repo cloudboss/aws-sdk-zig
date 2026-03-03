@@ -5,15 +5,15 @@ const SecureNamespaceInfo = @import("secure_namespace_info.zig").SecureNamespace
 pub const LakeFormationConfiguration = struct {
     /// The session tag to authorize Amazon EMR on EKS for API calls to Lake
     /// Formation.
-    authorized_session_tag_value: ?[]const u8,
+    authorized_session_tag_value: ?[]const u8 = null,
 
     /// The query engine IAM role ARN that is tied to the secure Spark job. The
     /// `QueryEngine` role assumes the `JobExecutionRole` to execute all
     /// the Lake Formation calls.
-    query_engine_role_arn: ?[]const u8,
+    query_engine_role_arn: ?[]const u8 = null,
 
     /// The namespace input of the system job.
-    secure_namespace_info: ?SecureNamespaceInfo,
+    secure_namespace_info: ?SecureNamespaceInfo = null,
 
     pub const json_field_names = .{
         .authorized_session_tag_value = "authorizedSessionTagValue",

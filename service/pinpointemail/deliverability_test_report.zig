@@ -5,7 +5,7 @@ const DeliverabilityTestStatus = @import("deliverability_test_status.zig").Deliv
 pub const DeliverabilityTestReport = struct {
     /// The date and time when the predictive inbox placement test was created, in
     /// Unix time format.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The status of the predictive inbox placement test. If the status is
     /// `IN_PROGRESS`, then the predictive inbox placement test
@@ -14,21 +14,21 @@ pub const DeliverabilityTestReport = struct {
     /// test. If the status is `COMPLETE`, then the test is finished, and you can
     /// use
     /// the `GetDeliverabilityTestReport` to view the results of the test.
-    deliverability_test_status: ?DeliverabilityTestStatus,
+    deliverability_test_status: ?DeliverabilityTestStatus = null,
 
     /// The sender address that you specified for the predictive inbox placement
     /// test.
-    from_email_address: ?[]const u8,
+    from_email_address: ?[]const u8 = null,
 
     /// A unique string that identifies the predictive inbox placement test.
-    report_id: ?[]const u8,
+    report_id: ?[]const u8 = null,
 
     /// A name that helps you identify a predictive inbox placement test report.
-    report_name: ?[]const u8,
+    report_name: ?[]const u8 = null,
 
     /// The subject line for an email that you submitted in a predictive inbox
     /// placement test.
-    subject: ?[]const u8,
+    subject: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .create_date = "CreateDate",

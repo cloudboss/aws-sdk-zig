@@ -5,10 +5,10 @@
 /// .text
 pub const Attachment = struct {
     /// The content of the attachment file.
-    data: ?[]const u8,
+    data: ?[]const u8 = null,
 
     /// The name of the attachment file.
-    file_name: ?[]const u8,
+    file_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data = "data",

@@ -3,7 +3,7 @@ const RecommendationJobCompiledOutputConfig = @import("recommendation_job_compil
 /// Provides information about the output configuration for the compiled model.
 pub const RecommendationJobOutputConfig = struct {
     /// Provides information about the output configuration for the compiled model.
-    compiled_output_config: ?RecommendationJobCompiledOutputConfig,
+    compiled_output_config: ?RecommendationJobCompiledOutputConfig = null,
 
     /// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management
     /// Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt
@@ -27,7 +27,7 @@ pub const RecommendationJobOutputConfig = struct {
     ///
     /// For more information about key identifiers, see [Key identifiers
     /// (KeyID)](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id) in the Amazon Web Services Key Management Service (Amazon Web Services KMS) documentation.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .compiled_output_config = "CompiledOutputConfig",

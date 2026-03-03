@@ -4,7 +4,7 @@ const VersionStatus = @import("version_status.zig").VersionStatus;
 /// parameter, such as the status of the annotation store.
 pub const ListAnnotationStoreVersionsFilter = struct {
     /// The status of an annotation store version.
-    status: ?VersionStatus,
+    status: ?VersionStatus = null,
 
     pub const json_field_names = .{
         .status = "status",

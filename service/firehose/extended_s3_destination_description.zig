@@ -20,26 +20,26 @@ pub const ExtendedS3DestinationDescription = struct {
     buffering_hints: BufferingHints,
 
     /// The Amazon CloudWatch logging options for your Firehose stream.
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The compression format. If no value is specified, the default is
     /// `UNCOMPRESSED`.
     compression_format: CompressionFormat,
 
     /// The time zone you prefer. UTC is the default.
-    custom_time_zone: ?[]const u8,
+    custom_time_zone: ?[]const u8 = null,
 
     /// The serializer, deserializer, and schema for converting data from the JSON
     /// format to
     /// the Parquet or ORC format before writing it to Amazon S3.
-    data_format_conversion_configuration: ?DataFormatConversionConfiguration,
+    data_format_conversion_configuration: ?DataFormatConversionConfiguration = null,
 
     /// The configuration of the dynamic partitioning mechanism that creates smaller
     /// data sets
     /// from the streaming data by partitioning it based on partition keys.
     /// Currently, dynamic
     /// partitioning is only supported for Amazon S3 destinations.
-    dynamic_partitioning_configuration: ?DynamicPartitioningConfiguration,
+    dynamic_partitioning_configuration: ?DynamicPartitioningConfiguration = null,
 
     /// The encryption configuration. If no value is specified, the default is no
     /// encryption.
@@ -50,20 +50,20 @@ pub const ExtendedS3DestinationDescription = struct {
     /// information
     /// about how to specify this prefix, see [Custom Prefixes for Amazon S3
     /// Objects](https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
-    error_output_prefix: ?[]const u8,
+    error_output_prefix: ?[]const u8 = null,
 
     /// Specify a file extension. It will override the default file extension
-    file_extension: ?[]const u8,
+    file_extension: ?[]const u8 = null,
 
     /// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
     /// Amazon S3
     /// files. You can also specify a custom prefix, as described in [Custom
     /// Prefixes for Amazon S3
     /// Objects](https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The data processing configuration.
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
     /// more
@@ -73,10 +73,10 @@ pub const ExtendedS3DestinationDescription = struct {
     role_arn: []const u8,
 
     /// The configuration for backup in Amazon S3.
-    s3_backup_description: ?S3DestinationDescription,
+    s3_backup_description: ?S3DestinationDescription = null,
 
     /// The Amazon S3 backup mode.
-    s3_backup_mode: ?S3BackupMode,
+    s3_backup_mode: ?S3BackupMode = null,
 
     pub const json_field_names = .{
         .bucket_arn = "BucketARN",

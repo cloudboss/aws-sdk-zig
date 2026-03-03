@@ -1,7 +1,7 @@
 /// A list of resources ARNs corresponding to the segments in a trace.
 pub const ResourceARNDetail = struct {
     /// The ARN of a corresponding resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "ARN",

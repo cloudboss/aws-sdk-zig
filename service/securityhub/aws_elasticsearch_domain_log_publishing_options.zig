@@ -3,15 +3,15 @@ const AwsElasticsearchDomainLogPublishingOptionsLogConfig = @import("aws_elastic
 /// configures the CloudWatch Logs to publish for the
 /// Elasticsearch domain.
 pub const AwsElasticsearchDomainLogPublishingOptions = struct {
-    audit_logs: ?AwsElasticsearchDomainLogPublishingOptionsLogConfig,
+    audit_logs: ?AwsElasticsearchDomainLogPublishingOptionsLogConfig = null,
 
     /// Configures the OpenSearch index logs
     /// publishing.
-    index_slow_logs: ?AwsElasticsearchDomainLogPublishingOptionsLogConfig,
+    index_slow_logs: ?AwsElasticsearchDomainLogPublishingOptionsLogConfig = null,
 
     /// Configures the OpenSearch search slow log
     /// publishing.
-    search_slow_logs: ?AwsElasticsearchDomainLogPublishingOptionsLogConfig,
+    search_slow_logs: ?AwsElasticsearchDomainLogPublishingOptionsLogConfig = null,
 
     pub const json_field_names = .{
         .audit_logs = "AuditLogs",

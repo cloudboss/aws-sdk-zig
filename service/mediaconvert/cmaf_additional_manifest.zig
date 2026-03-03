@@ -11,11 +11,11 @@ pub const CmafAdditionalManifest = struct {
     /// manifestNameModifier that is different from the nameModifier of the output.
     /// The service uses the output name modifier to create unique names for the
     /// individual variant manifests.
-    manifest_name_modifier: ?[]const u8,
+    manifest_name_modifier: ?[]const u8 = null,
 
     /// Specify the outputs that you want this additional top-level manifest to
     /// reference.
-    selected_outputs: ?[]const []const u8,
+    selected_outputs: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .manifest_name_modifier = "ManifestNameModifier",

@@ -26,33 +26,33 @@ pub const S3Bucket = struct {
     /// Valid server-side encryption headers are: x-amz-server-side-encryption with
     /// a value of AES256 or aws:kms, and
     /// x-amz-server-side-encryption-customer-algorithm with a value of AES256.
-    allows_unencrypted_object_uploads: ?AllowsUnencryptedObjectUploads,
+    allows_unencrypted_object_uploads: ?AllowsUnencryptedObjectUploads = null,
 
     /// The Amazon Resource Name (ARN) of the bucket.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time, in UTC and extended ISO 8601 format, when the bucket was
     /// created. This value can also indicate when changes such as edits to the
     /// bucket's policy were most recently made to the bucket, relative to when the
     /// finding was created or last updated.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The default server-side encryption settings for the bucket.
-    default_server_side_encryption: ?ServerSideEncryption,
+    default_server_side_encryption: ?ServerSideEncryption = null,
 
     /// The name of the bucket.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The display name and canonical user ID for the Amazon Web Services account
     /// that owns the bucket.
-    owner: ?S3BucketOwner,
+    owner: ?S3BucketOwner = null,
 
     /// The permissions settings that determine whether the bucket is publicly
     /// accessible.
-    public_access: ?BucketPublicAccess,
+    public_access: ?BucketPublicAccess = null,
 
     /// The tags that are associated with the bucket.
-    tags: ?[]const KeyValuePair,
+    tags: ?[]const KeyValuePair = null,
 
     pub const json_field_names = .{
         .allows_unencrypted_object_uploads = "allowsUnencryptedObjectUploads",

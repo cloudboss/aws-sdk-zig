@@ -7,7 +7,7 @@ pub const DataSetImportTask = struct {
     status: DataSetTaskLifecycle,
 
     /// If dataset import failed, the failure reason will show here.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// A summary of the data set import task.
     summary: DataSetImportSummary,

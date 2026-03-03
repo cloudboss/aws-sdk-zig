@@ -5,11 +5,11 @@ const AvailBlankingState = @import("avail_blanking_state.zig").AvailBlankingStat
 pub const AvailBlanking = struct {
     /// Blanking image to be used. Leave empty for solid black. Only bmp and png
     /// images are supported.
-    avail_blanking_image: ?InputLocation,
+    avail_blanking_image: ?InputLocation = null,
 
     /// When set to enabled, causes video, audio and captions to be blanked when
     /// insertion metadata is added.
-    state: ?AvailBlankingState,
+    state: ?AvailBlankingState = null,
 
     pub const json_field_names = .{
         .avail_blanking_image = "AvailBlankingImage",

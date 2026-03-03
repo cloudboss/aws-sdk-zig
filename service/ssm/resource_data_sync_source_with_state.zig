@@ -21,7 +21,7 @@ const ResourceDataSyncAwsOrganizationsSource = @import("resource_data_sync_aws_o
 pub const ResourceDataSyncSourceWithState = struct {
     /// The field name in `SyncSource` for the
     /// `ResourceDataSyncAwsOrganizationsSource` type.
-    aws_organizations_source: ?ResourceDataSyncAwsOrganizationsSource,
+    aws_organizations_source: ?ResourceDataSyncAwsOrganizationsSource = null,
 
     /// When you create a resource data sync, if you choose one of the Organizations
     /// options, then Systems Manager
@@ -41,12 +41,12 @@ pub const ResourceDataSyncSourceWithState = struct {
 
     /// The `SyncSource` Amazon Web Services Regions included in the resource data
     /// sync.
-    source_regions: ?[]const []const u8,
+    source_regions: ?[]const []const u8 = null,
 
     /// The type of data source for the resource data sync. `SourceType` is either
     /// `AwsOrganizations` (if an organization is present in Organizations) or
     /// `singleAccountMultiRegions`.
-    source_type: ?[]const u8,
+    source_type: ?[]const u8 = null,
 
     /// The data type name for including resource data sync state. There are four
     /// sync
@@ -65,7 +65,7 @@ pub const ResourceDataSyncSourceWithState = struct {
     /// `TrustedAccessDisabled`: You disabled Systems Manager access in the
     /// organization in
     /// Organizations.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_organizations_source = "AwsOrganizationsSource",

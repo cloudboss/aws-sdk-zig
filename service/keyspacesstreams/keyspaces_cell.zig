@@ -6,11 +6,11 @@ const KeyspacesCellValue = @import("keyspaces_cell_value.zig").KeyspacesCellValu
 pub const KeyspacesCell = struct {
     /// Metadata associated with this cell, such as time-to-live (TTL) expiration
     /// time and write timestamp.
-    metadata: ?KeyspacesMetadata,
+    metadata: ?KeyspacesMetadata = null,
 
     /// The value stored in this cell, which can be of various data types supported
     /// by Amazon Keyspaces.
-    value: ?KeyspacesCellValue,
+    value: ?KeyspacesCellValue = null,
 
     pub const json_field_names = .{
         .metadata = "metadata",

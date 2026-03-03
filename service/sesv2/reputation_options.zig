@@ -7,7 +7,7 @@ pub const ReputationOptions = struct {
     /// start. When your account is given a fresh start, your reputation metrics are
     /// calculated
     /// starting from the date of the fresh start.
-    last_fresh_start: ?i64,
+    last_fresh_start: ?i64 = null,
 
     /// If `true`, tracking of reputation metrics is enabled for the configuration
     /// set. If `false`, tracking of reputation metrics is disabled for the

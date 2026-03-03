@@ -15,67 +15,67 @@ pub const SnowflakeDestinationDescription = struct {
     /// [account
     /// identifier](https://docs.snowflake.com/en/user-guide/admin-account-identifier).
     /// Note that the protocol (https://) and port number are optional.
-    account_url: ?[]const u8,
+    account_url: ?[]const u8 = null,
 
     /// Describes the buffering to perform before delivering data to the Snowflake
     /// destination. If you do not specify any value, Firehose uses the default
     /// values.
-    buffering_hints: ?SnowflakeBufferingHints,
+    buffering_hints: ?SnowflakeBufferingHints = null,
 
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The name of the record content column
-    content_column_name: ?[]const u8,
+    content_column_name: ?[]const u8 = null,
 
     /// All data in Snowflake is maintained in databases.
-    database: ?[]const u8,
+    database: ?[]const u8 = null,
 
     /// Choose to load JSON keys mapped to table column names or choose to split the
     /// JSON payload where content is mapped to a record content column and source
     /// metadata is mapped to a record metadata column.
-    data_loading_option: ?SnowflakeDataLoadingOption,
+    data_loading_option: ?SnowflakeDataLoadingOption = null,
 
     /// The name of the record metadata column
-    meta_data_column_name: ?[]const u8,
+    meta_data_column_name: ?[]const u8 = null,
 
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The time period where Firehose will retry sending data to the chosen HTTP
     /// endpoint.
-    retry_options: ?SnowflakeRetryOptions,
+    retry_options: ?SnowflakeRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the Snowflake role
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Choose an S3 backup mode
-    s3_backup_mode: ?SnowflakeS3BackupMode,
+    s3_backup_mode: ?SnowflakeS3BackupMode = null,
 
-    s3_destination_description: ?S3DestinationDescription,
+    s3_destination_description: ?S3DestinationDescription = null,
 
     /// Each database consists of one or more schemas, which are logical groupings
     /// of database objects, such as tables and views
-    schema: ?[]const u8,
+    schema: ?[]const u8 = null,
 
     /// The configuration that defines how you access secrets for Snowflake.
-    secrets_manager_configuration: ?SecretsManagerConfiguration,
+    secrets_manager_configuration: ?SecretsManagerConfiguration = null,
 
     /// Optionally configure a Snowflake role. Otherwise the default user role will
     /// be used.
-    snowflake_role_configuration: ?SnowflakeRoleConfiguration,
+    snowflake_role_configuration: ?SnowflakeRoleConfiguration = null,
 
     /// The VPCE ID for Firehose to privately connect with Snowflake. The ID format
     /// is
     /// com.amazonaws.vpce.[region].vpce-svc-. For more information, see [Amazon
     /// PrivateLink &
     /// Snowflake](https://docs.snowflake.com/en/user-guide/admin-security-privatelink)
-    snowflake_vpc_configuration: ?SnowflakeVpcConfiguration,
+    snowflake_vpc_configuration: ?SnowflakeVpcConfiguration = null,
 
     /// All data in Snowflake is stored in database tables, logically structured as
     /// collections of columns and rows.
-    table: ?[]const u8,
+    table: ?[]const u8 = null,
 
     /// User login name for the Snowflake account.
-    user: ?[]const u8,
+    user: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_url = "AccountUrl",

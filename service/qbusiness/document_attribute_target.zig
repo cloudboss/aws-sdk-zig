@@ -21,7 +21,7 @@ const DocumentAttributeValue = @import("document_attribute_value.zig").DocumentA
 pub const DocumentAttributeTarget = struct {
     /// `TRUE` to delete the existing target value for your specified target
     /// attribute key. You cannot create a target value and set this to `TRUE`.
-    attribute_value_operator: ?AttributeValueOperator,
+    attribute_value_operator: ?AttributeValueOperator = null,
 
     /// The identifier of the target document attribute or metadata field. For
     /// example, 'Department' could be an identifier for the target attribute or
@@ -29,7 +29,7 @@ pub const DocumentAttributeTarget = struct {
     /// documents.
     key: []const u8,
 
-    value: ?DocumentAttributeValue,
+    value: ?DocumentAttributeValue = null,
 
     pub const json_field_names = .{
         .attribute_value_operator = "attributeValueOperator",

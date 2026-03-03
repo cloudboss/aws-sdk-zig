@@ -20,7 +20,7 @@ pub const GeoLocation = struct {
     ///
     /// Constraint: Specifying `ContinentCode` with either `CountryCode`
     /// or `SubdivisionCode` returns an `InvalidInput` error.
-    continent_code: ?[]const u8,
+    continent_code: ?[]const u8 = null,
 
     /// For geolocation resource record sets, the two-letter code for a country.
     ///
@@ -30,7 +30,7 @@ pub const GeoLocation = struct {
     ///
     /// Route 53 also supports the country code **UA** for
     /// Ukraine.
-    country_code: ?[]const u8,
+    country_code: ?[]const u8 = null,
 
     /// For geolocation resource record sets, the two-letter code for a state of the
     /// United
@@ -42,5 +42,5 @@ pub const GeoLocation = struct {
     ///
     /// If you specify `subdivisioncode`, you must also specify `US` for
     /// `CountryCode`.
-    subdivision_code: ?[]const u8,
+    subdivision_code: ?[]const u8 = null,
 };

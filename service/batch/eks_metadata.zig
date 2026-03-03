@@ -30,7 +30,7 @@ pub const EksMetadata = struct {
     ///
     /// Annotations can be added or modified at any time. Each resource can have
     /// multiple annotations.
-    annotations: ?[]const aws.map.StringMapEntry,
+    annotations: ?[]const aws.map.StringMapEntry = null,
 
     /// Key-value pairs used to identify, sort, and organize cube resources. Can
     /// contain up to 63
@@ -39,7 +39,7 @@ pub const EksMetadata = struct {
     /// added or modified at any time. Each resource can have multiple labels, but
     /// each key must be
     /// unique for a given object.
-    labels: ?[]const aws.map.StringMapEntry,
+    labels: ?[]const aws.map.StringMapEntry = null,
 
     /// The namespace of the Amazon EKS cluster. In Kubernetes, namespaces provide a
     /// mechanism for isolating
@@ -66,7 +66,7 @@ pub const EksMetadata = struct {
     /// the compute environment's `kubernetesNamespace`. For multi-node parallel
     /// jobs,
     /// the same value must be provided across all the node ranges.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .annotations = "annotations",

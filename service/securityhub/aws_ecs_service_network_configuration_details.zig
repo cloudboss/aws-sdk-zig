@@ -4,7 +4,7 @@ const AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails = @import("aws
 /// group configuration.
 pub const AwsEcsServiceNetworkConfigurationDetails = struct {
     /// The VPC subnet and security group configuration.
-    aws_vpc_configuration: ?AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails,
+    aws_vpc_configuration: ?AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails = null,
 
     pub const json_field_names = .{
         .aws_vpc_configuration = "AwsVpcConfiguration",

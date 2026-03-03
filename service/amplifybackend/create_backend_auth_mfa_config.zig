@@ -10,7 +10,7 @@ pub const CreateBackendAuthMFAConfig = struct {
 
     /// Describes the configuration settings and methods for your Amplify app users
     /// to use MFA.
-    settings: ?Settings,
+    settings: ?Settings = null,
 
     pub const json_field_names = .{
         .mfa_mode = "MFAMode",

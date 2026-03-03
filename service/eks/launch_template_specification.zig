@@ -28,7 +28,7 @@ pub const LaunchTemplateSpecification = struct {
     /// in the
     /// request, but not both. After node group creation, you cannot use a different
     /// ID.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the launch template.
     ///
@@ -36,14 +36,14 @@ pub const LaunchTemplateSpecification = struct {
     /// in the
     /// request, but not both. After node group creation, you cannot use a different
     /// name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The version number of the launch template to use. If no version is
     /// specified, then the
     /// template's default version is used. You can use a different version for node
     /// group
     /// updates.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",

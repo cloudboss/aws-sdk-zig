@@ -9,13 +9,13 @@ const MediaAnalysisJobStatus = @import("media_analysis_job_status.zig").MediaAna
 /// Description for a media analysis job.
 pub const MediaAnalysisJobDescription = struct {
     /// The Unix date and time when the job finished.
-    completion_timestamp: ?i64,
+    completion_timestamp: ?i64 = null,
 
     /// The Unix date and time when the job was started.
     creation_timestamp: i64,
 
     /// Details about the error that resulted in failure of the job.
-    failure_details: ?MediaAnalysisJobFailureDetails,
+    failure_details: ?MediaAnalysisJobFailureDetails = null,
 
     /// Reference to the input manifest that was provided in the job creation
     /// request.
@@ -25,14 +25,14 @@ pub const MediaAnalysisJobDescription = struct {
     job_id: []const u8,
 
     /// The name of a media analysis job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// KMS Key that was provided in the creation request.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Provides statistics on input manifest and errors identified in the input
     /// manifest.
-    manifest_summary: ?MediaAnalysisManifestSummary,
+    manifest_summary: ?MediaAnalysisManifestSummary = null,
 
     /// Operation configurations that were provided during job creation.
     operations_config: MediaAnalysisOperationsConfig,
@@ -41,7 +41,7 @@ pub const MediaAnalysisJobDescription = struct {
     output_config: MediaAnalysisOutputConfig,
 
     /// Output manifest that contains prediction results.
-    results: ?MediaAnalysisResults,
+    results: ?MediaAnalysisResults = null,
 
     /// The status of the media analysis job being retrieved.
     status: MediaAnalysisJobStatus,

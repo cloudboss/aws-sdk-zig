@@ -17,7 +17,7 @@ pub const S3BucketDestination = struct {
     arn: []const u8,
 
     /// The container for the type encryption of the metrics exports in this bucket.
-    encryption: ?StorageLensDataExportEncryption,
+    encryption: ?StorageLensDataExportEncryption = null,
 
     format: Format,
 
@@ -26,5 +26,5 @@ pub const S3BucketDestination = struct {
 
     /// The prefix of the destination bucket where the metrics export will be
     /// delivered.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 };

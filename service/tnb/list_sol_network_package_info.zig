@@ -19,16 +19,16 @@ pub const ListSolNetworkPackageInfo = struct {
     metadata: ListSolNetworkPackageMetadata,
 
     /// Designer of the onboarded network service descriptor in the network package.
-    nsd_designer: ?[]const u8,
+    nsd_designer: ?[]const u8 = null,
 
     /// ID of the network service descriptor on which the network package is based.
-    nsd_id: ?[]const u8,
+    nsd_id: ?[]const u8 = null,
 
     /// Identifies a network service descriptor in a version independent manner.
-    nsd_invariant_id: ?[]const u8,
+    nsd_invariant_id: ?[]const u8 = null,
 
     /// Name of the onboarded network service descriptor in the network package.
-    nsd_name: ?[]const u8,
+    nsd_name: ?[]const u8 = null,
 
     /// Onboarding state of the network service descriptor in the network package.
     nsd_onboarding_state: NsdOnboardingState,
@@ -40,12 +40,12 @@ pub const ListSolNetworkPackageInfo = struct {
     nsd_usage_state: NsdUsageState,
 
     /// Version of the onboarded network service descriptor in the network package.
-    nsd_version: ?[]const u8,
+    nsd_version: ?[]const u8 = null,
 
     /// Identifies the function package for the function package descriptor
     /// referenced by the
     /// onboarded network package.
-    vnf_pkg_ids: ?[]const []const u8,
+    vnf_pkg_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

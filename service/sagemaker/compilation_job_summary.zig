@@ -7,7 +7,7 @@ const TargetPlatformOs = @import("target_platform_os.zig").TargetPlatformOs;
 /// A summary of a model compilation job.
 pub const CompilationJobSummary = struct {
     /// The time when the model compilation job completed.
-    compilation_end_time: ?i64,
+    compilation_end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the model compilation job.
     compilation_job_arn: []const u8,
@@ -19,29 +19,29 @@ pub const CompilationJobSummary = struct {
     compilation_job_status: CompilationJobStatus,
 
     /// The time when the model compilation job started.
-    compilation_start_time: ?i64,
+    compilation_start_time: ?i64 = null,
 
     /// The type of device that the model will run on after the compilation job has
     /// completed.
-    compilation_target_device: ?TargetDevice,
+    compilation_target_device: ?TargetDevice = null,
 
     /// The type of accelerator that the model will run on after the compilation job
     /// has completed.
-    compilation_target_platform_accelerator: ?TargetPlatformAccelerator,
+    compilation_target_platform_accelerator: ?TargetPlatformAccelerator = null,
 
     /// The type of architecture that the model will run on after the compilation
     /// job has completed.
-    compilation_target_platform_arch: ?TargetPlatformArch,
+    compilation_target_platform_arch: ?TargetPlatformArch = null,
 
     /// The type of OS that the model will run on after the compilation job has
     /// completed.
-    compilation_target_platform_os: ?TargetPlatformOs,
+    compilation_target_platform_os: ?TargetPlatformOs = null,
 
     /// The time when the model compilation job was created.
     creation_time: i64,
 
     /// The time when the model compilation job was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     pub const json_field_names = .{
         .compilation_end_time = "CompilationEndTime",

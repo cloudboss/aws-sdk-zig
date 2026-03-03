@@ -5,14 +5,14 @@ const VirtualGatewayLogging = @import("virtual_gateway_logging.zig").VirtualGate
 /// An object that represents the specification of a service mesh resource.
 pub const VirtualGatewaySpec = struct {
     /// A reference to an object that represents the defaults for backends.
-    backend_defaults: ?VirtualGatewayBackendDefaults,
+    backend_defaults: ?VirtualGatewayBackendDefaults = null,
 
     /// The listeners that the mesh endpoint is expected to receive inbound traffic
     /// from. You
     /// can specify one listener.
     listeners: []const VirtualGatewayListener,
 
-    logging: ?VirtualGatewayLogging,
+    logging: ?VirtualGatewayLogging = null,
 
     pub const json_field_names = .{
         .backend_defaults = "backendDefaults",

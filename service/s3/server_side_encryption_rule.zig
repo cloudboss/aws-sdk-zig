@@ -20,7 +20,7 @@ pub const ServerSideEncryptionRule = struct {
     /// bucket. If a PUT Object
     /// request doesn't specify any server-side encryption, this default encryption
     /// will be applied.
-    apply_server_side_encryption_by_default: ?ServerSideEncryptionByDefault,
+    apply_server_side_encryption_by_default: ?ServerSideEncryptionByDefault = null,
 
     /// A bucket-level setting for Amazon S3 general purpose buckets used to prevent
     /// the upload of new objects encrypted with the specified server-side
@@ -36,7 +36,7 @@ pub const ServerSideEncryptionRule = struct {
     /// encryption with customer-provided keys (SSE-C). For more information about
     /// SSE-C, see [Using server-side encryption with customer-provided keys
     /// (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html).
-    blocked_encryption_types: ?BlockedEncryptionTypes,
+    blocked_encryption_types: ?BlockedEncryptionTypes = null,
 
     /// Specifies whether Amazon S3 should use an S3 Bucket Key with server-side
     /// encryption using KMS (SSE-KMS)
@@ -60,5 +60,5 @@ pub const ServerSideEncryptionRule = struct {
     /// [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html), [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html), [the Copy operation in Batch Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops), or
     /// [the import
     /// jobs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-import-job). In this case, Amazon S3 makes a call to KMS every time a copy request is made for a KMS-encrypted object.
-    bucket_key_enabled: ?bool,
+    bucket_key_enabled: ?bool = null,
 };

@@ -4,10 +4,10 @@ const ResourceCostCalculation = @import("resource_cost_calculation.zig").Resourc
 /// The ECS service recommendation details.
 pub const EcsService = struct {
     /// The ECS service configuration used for recommendations.
-    configuration: ?EcsServiceConfiguration,
+    configuration: ?EcsServiceConfiguration = null,
 
     /// Cost impact of the recommendation.
-    cost_calculation: ?ResourceCostCalculation,
+    cost_calculation: ?ResourceCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

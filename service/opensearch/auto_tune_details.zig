@@ -5,7 +5,7 @@ const ScheduledAutoTuneDetails = @import("scheduled_auto_tune_details.zig").Sche
 /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
 pub const AutoTuneDetails = struct {
     /// Container for details about a scheduled Auto-Tune action.
-    scheduled_auto_tune_details: ?ScheduledAutoTuneDetails,
+    scheduled_auto_tune_details: ?ScheduledAutoTuneDetails = null,
 
     pub const json_field_names = .{
         .scheduled_auto_tune_details = "ScheduledAutoTuneDetails",

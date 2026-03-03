@@ -6,17 +6,17 @@ const InstanceHealthCheckType = @import("instance_health_check_type.zig").Instan
 pub const InstanceHealthCheckResult = struct {
     /// The Unix timestamp for when the container instance health status last
     /// changed.
-    last_status_change: ?i64,
+    last_status_change: ?i64 = null,
 
     /// The Unix timestamp for when the container instance health status was last
     /// updated.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The container instance health status.
-    status: ?InstanceHealthCheckState,
+    status: ?InstanceHealthCheckState = null,
 
     /// The type of container instance health status that was verified.
-    @"type": ?InstanceHealthCheckType,
+    @"type": ?InstanceHealthCheckType = null,
 
     pub const json_field_names = .{
         .last_status_change = "lastStatusChange",

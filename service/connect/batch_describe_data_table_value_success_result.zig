@@ -10,10 +10,10 @@ pub const BatchDescribeDataTableValueSuccessResult = struct {
     attribute_name: []const u8,
 
     /// The result's last modified region.
-    last_modified_region: ?[]const u8,
+    last_modified_region: ?[]const u8 = null,
 
     /// The result's last modified time.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The result's lock version.
     lock_version: DataTableLockVersion,
@@ -25,7 +25,7 @@ pub const BatchDescribeDataTableValueSuccessResult = struct {
     record_id: []const u8,
 
     /// The result's value.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attribute_id = "AttributeId",

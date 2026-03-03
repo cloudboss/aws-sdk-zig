@@ -6,7 +6,7 @@ pub const AthenaConnectorSource = struct {
     connection_name: []const u8,
 
     /// The name of the table in the data source.
-    connection_table: ?[]const u8,
+    connection_table: ?[]const u8 = null,
 
     /// The type of connection, such as marketplace.athena or custom.athena,
     /// designating a connection to an Amazon Athena data store.
@@ -20,7 +20,7 @@ pub const AthenaConnectorSource = struct {
     name: []const u8,
 
     /// Specifies the data schema for the custom Athena source.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// The name of the Cloudwatch log group to read from. For example,
     /// `/aws-glue/jobs/output`.

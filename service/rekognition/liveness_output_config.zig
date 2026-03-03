@@ -12,7 +12,7 @@ pub const LivenessOutputConfig = struct {
 
     /// The prefix prepended to the output files for the Face Liveness session
     /// results.
-    s3_key_prefix: ?[]const u8,
+    s3_key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s3_bucket = "S3Bucket",

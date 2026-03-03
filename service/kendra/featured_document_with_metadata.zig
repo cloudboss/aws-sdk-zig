@@ -11,13 +11,13 @@ pub const FeaturedDocumentWithMetadata = struct {
     /// to search for
     /// specific documents with their document IDs included in the result items,
     /// or you can use the console.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The main title of the featured document.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The source URI location of the featured document.
-    uri: ?[]const u8,
+    uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

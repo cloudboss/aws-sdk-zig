@@ -8,14 +8,14 @@ pub const ChimeSdkMeetingLiveConnectorConfiguration = struct {
     arn: []const u8,
 
     /// The media pipeline's composited video.
-    composited_video: ?CompositedVideoArtifactsConfiguration,
+    composited_video: ?CompositedVideoArtifactsConfiguration = null,
 
     /// The configuration object's multiplex type.
     mux_type: LiveConnectorMuxType,
 
     /// The source configuration settings of the media pipeline's configuration
     /// object.
-    source_configuration: ?SourceConfiguration,
+    source_configuration: ?SourceConfiguration = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

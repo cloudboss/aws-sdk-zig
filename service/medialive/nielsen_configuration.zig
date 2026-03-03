@@ -3,10 +3,10 @@ const NielsenPcmToId3TaggingState = @import("nielsen_pcm_to_id_3_tagging_state.z
 /// Nielsen Configuration
 pub const NielsenConfiguration = struct {
     /// Enter the Distributor ID assigned to your organization by Nielsen.
-    distributor_id: ?[]const u8,
+    distributor_id: ?[]const u8 = null,
 
     /// Enables Nielsen PCM to ID3 tagging
-    nielsen_pcm_to_id_3_tagging: ?NielsenPcmToId3TaggingState,
+    nielsen_pcm_to_id_3_tagging: ?NielsenPcmToId3TaggingState = null,
 
     pub const json_field_names = .{
         .distributor_id = "DistributorId",

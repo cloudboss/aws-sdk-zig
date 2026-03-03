@@ -6,20 +6,20 @@ const StageEndpoints = @import("stage_endpoints.zig").StageEndpoints;
 /// Object specifying a stage.
 pub const Stage = struct {
     /// ID of the active session within the stage.
-    active_session_id: ?[]const u8,
+    active_session_id: ?[]const u8 = null,
 
     /// Stage ARN.
     arn: []const u8,
 
     /// Configuration object for individual participant recording, attached to the
     /// stage.
-    auto_participant_recording_configuration: ?AutoParticipantRecordingConfiguration,
+    auto_participant_recording_configuration: ?AutoParticipantRecordingConfiguration = null,
 
     /// Summary information about various endpoints for a stage.
-    endpoints: ?StageEndpoints,
+    endpoints: ?StageEndpoints = null,
 
     /// Stage name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Tags attached to the resource. Array of maps, each of the form
     /// `string:string
@@ -30,7 +30,7 @@ pub const Stage = struct {
     /// limits and requirements"; Amazon IVS has no constraints on tags beyond what
     /// is documented
     /// there.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .active_session_id = "activeSessionId",

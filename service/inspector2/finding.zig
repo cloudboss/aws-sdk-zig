@@ -20,20 +20,20 @@ pub const Finding = struct {
     /// Details about the code vulnerability identified in a Lambda function used to
     /// filter
     /// findings.
-    code_vulnerability_details: ?CodeVulnerabilityDetails,
+    code_vulnerability_details: ?CodeVulnerabilityDetails = null,
 
     /// The description of the finding.
     description: []const u8,
 
     /// The finding's EPSS score.
-    epss: ?EpssDetails,
+    epss: ?EpssDetails = null,
 
     /// The details of an exploit available for a finding discovered in your
     /// environment.
-    exploitability_details: ?ExploitabilityDetails,
+    exploitability_details: ?ExploitabilityDetails = null,
 
     /// If a finding discovered in your environment has an exploit available.
-    exploit_available: ?ExploitAvailable,
+    exploit_available: ?ExploitAvailable = null,
 
     /// The Amazon Resource Number (ARN) of the finding.
     finding_arn: []const u8,
@@ -47,13 +47,13 @@ pub const Finding = struct {
     /// means that some, but not all, of the packages identified in the finding have
     /// fixes
     /// available through updated versions.
-    fix_available: ?FixAvailable,
+    fix_available: ?FixAvailable = null,
 
     /// The Amazon Inspector score given to the finding.
-    inspector_score: ?f64,
+    inspector_score: ?f64 = null,
 
     /// An object that contains details of the Amazon Inspector score.
-    inspector_score_details: ?InspectorScoreDetails,
+    inspector_score_details: ?InspectorScoreDetails = null,
 
     /// The date and time the finding was last observed. This timestamp for this
     /// field remains
@@ -61,10 +61,10 @@ pub const Finding = struct {
     last_observed_at: i64,
 
     /// An object that contains the details of a network reachability finding.
-    network_reachability_details: ?NetworkReachabilityDetails,
+    network_reachability_details: ?NetworkReachabilityDetails = null,
 
     /// An object that contains the details of a package vulnerability finding.
-    package_vulnerability_details: ?PackageVulnerabilityDetails,
+    package_vulnerability_details: ?PackageVulnerabilityDetails = null,
 
     /// An object that contains the details about how to remediate a finding.
     remediation: Remediation,
@@ -85,7 +85,7 @@ pub const Finding = struct {
     status: FindingStatus,
 
     /// The title of the finding.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The type of the finding. The `type` value determines the valid values for
     /// `resource` in your request. For more information, see [Finding
@@ -93,7 +93,7 @@ pub const Finding = struct {
     @"type": FindingType,
 
     /// The date and time the finding was last updated at.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .aws_account_id = "awsAccountId",

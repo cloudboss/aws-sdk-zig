@@ -4,20 +4,20 @@ const Progress = @import("progress.zig").Progress;
 
 /// Provides information about a schema conversion action.
 pub const SchemaConversionRequest = struct {
-    @"error": ?ErrorDetails,
+    @"error": ?ErrorDetails = null,
 
-    export_sql_details: ?ExportSqlDetails,
+    export_sql_details: ?ExportSqlDetails = null,
 
     /// The migration project ARN.
-    migration_project_arn: ?[]const u8,
+    migration_project_arn: ?[]const u8 = null,
 
-    progress: ?Progress,
+    progress: ?Progress = null,
 
     /// The identifier for the schema conversion action.
-    request_identifier: ?[]const u8,
+    request_identifier: ?[]const u8 = null,
 
     /// The schema conversion action status.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"error" = "Error",

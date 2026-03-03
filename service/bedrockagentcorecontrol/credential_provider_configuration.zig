@@ -6,7 +6,7 @@ const CredentialProviderType = @import("credential_provider_type.zig").Credentia
 pub const CredentialProviderConfiguration = struct {
     /// The credential provider. This field contains the specific configuration for
     /// the credential provider type.
-    credential_provider: ?CredentialProvider,
+    credential_provider: ?CredentialProvider = null,
 
     /// The type of credential provider. This field specifies which authentication
     /// method the gateway uses.

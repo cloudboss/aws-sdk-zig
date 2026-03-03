@@ -6,7 +6,7 @@ pub const BatchRetryStrategy = struct {
     /// `attempts` is greater than one, the job is retried on failure the same
     /// number
     /// of attempts as the value.
-    attempts: ?i32,
+    attempts: ?i32 = null,
 
     pub const json_field_names = .{
         .attempts = "Attempts",

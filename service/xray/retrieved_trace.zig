@@ -4,13 +4,13 @@ const Span = @import("span.zig").Span;
 pub const RetrievedTrace = struct {
     /// The length of time in seconds between the start time of the root span and
     /// the end time of the last span that completed.
-    duration: ?f64,
+    duration: ?f64 = null,
 
     /// The unique identifier for the span.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Spans that comprise the trace.
-    spans: ?[]const Span,
+    spans: ?[]const Span = null,
 
     pub const json_field_names = .{
         .duration = "Duration",

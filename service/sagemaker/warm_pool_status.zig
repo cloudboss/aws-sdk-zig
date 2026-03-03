@@ -9,10 +9,10 @@ pub const WarmPoolStatus = struct {
     /// (`InstanceCount`) in your training cluster to get the total compute time
     /// SageMaker bills you if you run warm pool training. The formula is as
     /// follows: `ResourceRetainedBillableTimeInSeconds * InstanceCount`.
-    resource_retained_billable_time_in_seconds: ?i32,
+    resource_retained_billable_time_in_seconds: ?i32 = null,
 
     /// The name of the matching training job that reused the warm pool.
-    reused_by_job: ?[]const u8,
+    reused_by_job: ?[]const u8 = null,
 
     /// The status of the warm pool.
     ///

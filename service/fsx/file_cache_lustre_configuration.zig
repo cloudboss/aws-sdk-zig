@@ -6,20 +6,20 @@ const FileCacheLustreMetadataConfiguration = @import("file_cache_lustre_metadata
 pub const FileCacheLustreConfiguration = struct {
     /// The deployment type of the Amazon File Cache resource, which must
     /// be `CACHE_1`.
-    deployment_type: ?FileCacheLustreDeploymentType,
+    deployment_type: ?FileCacheLustreDeploymentType = null,
 
     /// The configuration for Lustre logging used to write the enabled
     /// logging events for your Amazon File Cache resource to Amazon CloudWatch
     /// Logs.
-    log_configuration: ?LustreLogConfiguration,
+    log_configuration: ?LustreLogConfiguration = null,
 
     /// The configuration for a Lustre MDT (Metadata Target) storage volume.
-    metadata_configuration: ?FileCacheLustreMetadataConfiguration,
+    metadata_configuration: ?FileCacheLustreMetadataConfiguration = null,
 
     /// You use the `MountName` value when mounting the cache. If you pass
     /// a cache ID to the `DescribeFileCaches` operation, it returns the
     /// the `MountName` value as part of the cache's description.
-    mount_name: ?[]const u8,
+    mount_name: ?[]const u8 = null,
 
     /// Per unit storage throughput represents the megabytes per second of read or
     /// write
@@ -28,9 +28,9 @@ pub const FileCacheLustreConfiguration = struct {
     /// equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB). The
     /// only
     /// supported value is `1000`.
-    per_unit_storage_throughput: ?i32,
+    per_unit_storage_throughput: ?i32 = null,
 
-    weekly_maintenance_start_time: ?[]const u8,
+    weekly_maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .deployment_type = "DeploymentType",

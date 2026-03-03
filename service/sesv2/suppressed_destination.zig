@@ -8,7 +8,7 @@ pub const SuppressedDestination = struct {
     /// An optional value that can contain additional information about the reasons
     /// that the
     /// address was added to the suppression list for your account.
-    attributes: ?SuppressedDestinationAttributes,
+    attributes: ?SuppressedDestinationAttributes = null,
 
     /// The email address that is on the suppression list for your account.
     email_address: []const u8,

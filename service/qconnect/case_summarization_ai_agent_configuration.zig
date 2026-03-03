@@ -1,13 +1,13 @@
 /// The configuration for AI Agents of type `CASE_SUMMARIZATION`.
 pub const CaseSummarizationAIAgentConfiguration = struct {
     /// The AI Guardrail identifier used by the Case Summarization AI Agent.
-    case_summarization_ai_guardrail_id: ?[]const u8,
+    case_summarization_ai_guardrail_id: ?[]const u8 = null,
 
     /// The AI Prompt identifier used by the Case Summarization AI Agent.
-    case_summarization_ai_prompt_id: ?[]const u8,
+    case_summarization_ai_prompt_id: ?[]const u8 = null,
 
     /// The locale setting for the Case Summarization AI Agent.
-    locale: ?[]const u8,
+    locale: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .case_summarization_ai_guardrail_id = "caseSummarizationAIGuardrailId",

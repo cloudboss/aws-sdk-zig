@@ -9,7 +9,7 @@
 /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules).
 pub const ReceiptRuleSetMetadata = struct {
     /// The date and time the receipt rule set was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The name of the receipt rule set. The name must meet the following
     /// requirements:
@@ -20,5 +20,5 @@ pub const ReceiptRuleSetMetadata = struct {
     /// * Start and end with a letter or number.
     ///
     /// * Contain 64 characters or fewer.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 };

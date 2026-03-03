@@ -8,7 +8,7 @@ const RebalancingStatus = @import("rebalancing_status.zig").RebalancingStatus;
 pub const Rebalancing = struct {
     /// Intelligent rebalancing status. The default intelligent rebalancing status
     /// is ACTIVE for all new Express-based clusters.
-    status: ?RebalancingStatus,
+    status: ?RebalancingStatus = null,
 
     pub const json_field_names = .{
         .status = "Status",

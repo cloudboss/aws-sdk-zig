@@ -5,7 +5,7 @@ const AwsWafv2CustomHttpHeader = @import("aws_wafv_2_custom_http_header.zig").Aw
 /// the request.
 pub const AwsWafv2CustomRequestHandlingDetails = struct {
     /// The HTTP headers to insert into the request.
-    insert_headers: ?[]const AwsWafv2CustomHttpHeader,
+    insert_headers: ?[]const AwsWafv2CustomHttpHeader = null,
 
     pub const json_field_names = .{
         .insert_headers = "InsertHeaders",

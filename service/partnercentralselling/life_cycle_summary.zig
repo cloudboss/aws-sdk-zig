@@ -8,16 +8,16 @@ pub const LifeCycleSummary = struct {
     /// When you select an appropriate reason code, you communicate the context for
     /// closing the `Opportunity`, and aid in accurate reports and analysis of
     /// opportunity outcomes.
-    closed_lost_reason: ?ClosedLostReason,
+    closed_lost_reason: ?ClosedLostReason = null,
 
     /// Specifies the upcoming actions or tasks for the `Opportunity`. This field is
     /// utilized to communicate to Amazon Web Services the next actions required for
     /// the `Opportunity`.
-    next_steps: ?[]const u8,
+    next_steps: ?[]const u8 = null,
 
     /// Indicates why an opportunity was sent back for further details. Partners
     /// must take corrective action based on the `ReviewComments`.
-    review_comments: ?[]const u8,
+    review_comments: ?[]const u8 = null,
 
     /// Indicates the review status of a partner referred opportunity. This field is
     /// read-only and only applicable for partner referrals. Valid values:
@@ -49,13 +49,13 @@ pub const LifeCycleSummary = struct {
     /// * Approved: Validated and converted into the Amazon Web Services seller's
     ///   pipeline (editable).
     /// * Rejected: Disqualified (read-only).
-    review_status: ?ReviewStatus,
+    review_status: ?ReviewStatus = null,
 
     /// Indicates the reason a specific decision was taken during the opportunity
     /// review process. This field combines the reasons for both disqualified and
     /// action required statuses, and provides clarity for why an opportunity was
     /// disqualified or required further action.
-    review_status_reason: ?[]const u8,
+    review_status_reason: ?[]const u8 = null,
 
     /// Specifies the current stage of the `Opportunity`'s lifecycle as it maps to
     /// Amazon Web Services stages from the current stage in the partner CRM. This
@@ -85,7 +85,7 @@ pub const LifeCycleSummary = struct {
     ///   billing.
     /// * Closed Lost: The opportunity is lost, and there are no steps to move
     ///   forward.
-    stage: ?Stage,
+    stage: ?Stage = null,
 
     /// Specifies the date when Amazon Web Services expects to start significant
     /// billing, when the project finishes, and when it moves into production. This
@@ -93,7 +93,7 @@ pub const LifeCycleSummary = struct {
     /// launches and starts to incur Amazon Web Services usage.
     ///
     /// Ensure the `Target Close Date` isn't in the past.
-    target_close_date: ?[]const u8,
+    target_close_date: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .closed_lost_reason = "ClosedLostReason",

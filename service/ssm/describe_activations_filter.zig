@@ -3,10 +3,10 @@ const DescribeActivationsFilterKeys = @import("describe_activations_filter_keys.
 /// Filter for the DescribeActivation API.
 pub const DescribeActivationsFilter = struct {
     /// The name of the filter.
-    filter_key: ?DescribeActivationsFilterKeys,
+    filter_key: ?DescribeActivationsFilterKeys = null,
 
     /// The filter values.
-    filter_values: ?[]const []const u8,
+    filter_values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .filter_key = "FilterKey",

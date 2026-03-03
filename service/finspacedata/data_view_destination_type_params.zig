@@ -16,7 +16,7 @@ pub const DataViewDestinationTypeParams = struct {
     /// * `PARQUET` – Parquet export file format.
     ///
     /// * `DELIMITED_TEXT` – Delimited text export file format.
-    s_3_destination_export_file_format: ?ExportFileFormat,
+    s_3_destination_export_file_format: ?ExportFileFormat = null,
 
     /// Format Options for S3 Destination type.
     ///
@@ -29,7 +29,7 @@ pub const DataViewDestinationTypeParams = struct {
     /// "delimiter": ",",
     /// "compression": "gzip"
     /// }`
-    s_3_destination_export_file_format_options: ?[]const aws.map.StringMapEntry,
+    s_3_destination_export_file_format_options: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .destination_type = "destinationType",

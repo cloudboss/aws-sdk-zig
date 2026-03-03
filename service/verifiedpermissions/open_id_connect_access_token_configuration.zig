@@ -8,7 +8,7 @@
 pub const OpenIdConnectAccessTokenConfiguration = struct {
     /// The access token `aud` claim values that you want to accept in your policy
     /// store. For example, `https://myapp.example.com, https://myapp2.example.com`.
-    audiences: ?[]const []const u8,
+    audiences: ?[]const []const u8 = null,
 
     /// The claim that determines the principal in OIDC access tokens. For example,
     /// `sub`.

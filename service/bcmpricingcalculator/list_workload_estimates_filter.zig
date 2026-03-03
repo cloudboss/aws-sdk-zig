@@ -4,7 +4,7 @@ const ListWorkloadEstimatesFilterName = @import("list_workload_estimates_filter_
 /// Represents a filter for listing workload estimates.
 pub const ListWorkloadEstimatesFilter = struct {
     /// The match option for the filter (e.g., equals, contains).
-    match_option: ?MatchOption,
+    match_option: ?MatchOption = null,
 
     /// The name of the filter attribute.
     name: ListWorkloadEstimatesFilterName,

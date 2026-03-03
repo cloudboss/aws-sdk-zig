@@ -7,7 +7,7 @@ pub const ComputeConfig = struct {
     /// configuration's Amazon Web Services Region, for example, `"us-west-2"`. You
     /// can't set this
     /// parameter if the `MultiAZ` parameter is set to `true`.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// A list of custom DNS name servers supported for the DMS Serverless
     /// replication to
@@ -17,7 +17,7 @@ pub const ComputeConfig = struct {
     /// comma-separated list of
     /// internet addresses for up to four DNS name servers. For example:
     /// `"1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"`
-    dns_name_servers: ?[]const u8,
+    dns_name_servers: ?[]const u8 = null,
 
     /// An Key Management Service (KMS) key Amazon Resource Name (ARN) that is used
     /// to encrypt the data
@@ -29,7 +29,7 @@ pub const ComputeConfig = struct {
     /// KMS creates the default encryption key for your Amazon Web Services account.
     /// Your Amazon Web Services account
     /// has a different default encryption key for each Amazon Web Services Region.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Specifies the maximum value of the DMS capacity units (DCUs) for which a
     /// given DMS
@@ -42,7 +42,7 @@ pub const ComputeConfig = struct {
     /// The `MaxCapacityUnits` parameter is the only DCU parameter you are required
     /// to
     /// specify.
-    max_capacity_units: ?i32,
+    max_capacity_units: ?i32 = null,
 
     /// Specifies the minimum value of the DMS capacity units (DCUs) for which a
     /// given DMS
@@ -57,13 +57,13 @@ pub const ComputeConfig = struct {
     /// 1. If there is no current source activity, DMS scales down your replication
     /// until it
     /// reaches the value specified in `MinCapacityUnits`.
-    min_capacity_units: ?i32,
+    min_capacity_units: ?i32 = null,
 
     /// Specifies whether the DMS Serverless replication is a Multi-AZ deployment.
     /// You can't
     /// set the `AvailabilityZone` parameter if the `MultiAZ` parameter is
     /// set to `true`.
-    multi_az: ?bool,
+    multi_az: ?bool = null,
 
     /// The weekly time range during which system maintenance can occur for the DMS
     /// Serverless
@@ -78,17 +78,17 @@ pub const ComputeConfig = struct {
     /// `Fri`, `Sat`, and `Sun`.
     ///
     /// Constraints include a minimum 30-minute window.
-    preferred_maintenance_window: ?[]const u8,
+    preferred_maintenance_window: ?[]const u8 = null,
 
     /// Specifies a subnet group identifier to associate with the DMS Serverless
     /// replication.
-    replication_subnet_group_id: ?[]const u8,
+    replication_subnet_group_id: ?[]const u8 = null,
 
     /// Specifies the virtual private cloud (VPC) security group to use with the DMS
     /// Serverless replication. The VPC security group must work with the VPC
     /// containing the
     /// replication.
-    vpc_security_group_ids: ?[]const []const u8,
+    vpc_security_group_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .availability_zone = "AvailabilityZone",

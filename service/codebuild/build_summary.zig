@@ -4,7 +4,7 @@ const ResolvedArtifact = @import("resolved_artifact.zig").ResolvedArtifact;
 /// Contains summary information about a batch build group.
 pub const BuildSummary = struct {
     /// The batch build ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The status of the build group.
     ///
@@ -31,19 +31,19 @@ pub const BuildSummary = struct {
     /// **TIMED_OUT**
     ///
     /// The build group timed out.
-    build_status: ?StatusType,
+    build_status: ?StatusType = null,
 
     /// A `ResolvedArtifact` object that represents the primary build artifacts for
     /// the
     /// build group.
-    primary_artifact: ?ResolvedArtifact,
+    primary_artifact: ?ResolvedArtifact = null,
 
     /// When the build was started, expressed in Unix time format.
-    requested_on: ?i64,
+    requested_on: ?i64 = null,
 
     /// An array of `ResolvedArtifact` objects that represents the secondary build
     /// artifacts for the build group.
-    secondary_artifacts: ?[]const ResolvedArtifact,
+    secondary_artifacts: ?[]const ResolvedArtifact = null,
 
     pub const json_field_names = .{
         .arn = "arn",

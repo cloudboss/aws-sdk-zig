@@ -4,25 +4,25 @@ const PendingAction = @import("pending_action.zig").PendingAction;
 const ResolverType = @import("resolver_type.zig").ResolverType;
 
 pub const ListCasesItem = struct {
-    case_arn: ?[]const u8,
+    case_arn: ?[]const u8 = null,
 
     case_id: []const u8,
 
-    case_status: ?CaseStatus,
+    case_status: ?CaseStatus = null,
 
-    closed_date: ?i64,
+    closed_date: ?i64 = null,
 
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
-    engagement_type: ?EngagementType,
+    engagement_type: ?EngagementType = null,
 
-    last_updated_date: ?i64,
+    last_updated_date: ?i64 = null,
 
-    pending_action: ?PendingAction,
+    pending_action: ?PendingAction = null,
 
-    resolver_type: ?ResolverType,
+    resolver_type: ?ResolverType = null,
 
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .case_arn = "caseArn",

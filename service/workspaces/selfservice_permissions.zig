@@ -7,22 +7,22 @@ const ReconnectEnum = @import("reconnect_enum.zig").ReconnectEnum;
 pub const SelfservicePermissions = struct {
     /// Specifies whether users can change the compute type (bundle) for their
     /// WorkSpace.
-    change_compute_type: ?ReconnectEnum,
+    change_compute_type: ?ReconnectEnum = null,
 
     /// Specifies whether users can increase the volume size of the drives on their
     /// WorkSpace.
-    increase_volume_size: ?ReconnectEnum,
+    increase_volume_size: ?ReconnectEnum = null,
 
     /// Specifies whether users can rebuild the operating system of a WorkSpace to
     /// its original
     /// state.
-    rebuild_workspace: ?ReconnectEnum,
+    rebuild_workspace: ?ReconnectEnum = null,
 
     /// Specifies whether users can restart their WorkSpace.
-    restart_workspace: ?ReconnectEnum,
+    restart_workspace: ?ReconnectEnum = null,
 
     /// Specifies whether users can switch the running mode of their WorkSpace.
-    switch_running_mode: ?ReconnectEnum,
+    switch_running_mode: ?ReconnectEnum = null,
 
     pub const json_field_names = .{
         .change_compute_type = "ChangeComputeType",

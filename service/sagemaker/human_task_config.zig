@@ -5,14 +5,14 @@ const UiConfig = @import("ui_config.zig").UiConfig;
 /// Information required for human workers to complete a labeling task.
 pub const HumanTaskConfig = struct {
     /// Configures how labels are consolidated across human workers.
-    annotation_consolidation_config: ?AnnotationConsolidationConfig,
+    annotation_consolidation_config: ?AnnotationConsolidationConfig = null,
 
     /// Defines the maximum number of data objects that can be labeled by human
     /// workers at the same time. Also referred to as batch size. Each object may
     /// have more than one worker at one time. The default value is 1000 objects. To
     /// increase the maximum value to 5000 objects, contact Amazon Web Services
     /// Support.
-    max_concurrent_task_count: ?i32,
+    max_concurrent_task_count: ?i32 = null,
 
     /// The number of human workers that will label an object.
     number_of_human_workers_per_data_object: i32,
@@ -625,11 +625,11 @@ pub const HumanTaskConfig = struct {
     /// * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-PassThrough`
     /// * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-PassThrough`
     /// * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-PassThrough`
-    pre_human_task_lambda_arn: ?[]const u8,
+    pre_human_task_lambda_arn: ?[]const u8 = null,
 
     /// The price that you pay for each task performed by an Amazon Mechanical Turk
     /// worker.
-    public_workforce_task_price: ?PublicWorkforceTaskPrice,
+    public_workforce_task_price: ?PublicWorkforceTaskPrice = null,
 
     /// The length of time that a task remains available for labeling by human
     /// workers. The default and maximum values for this parameter depend on the
@@ -640,14 +640,14 @@ pub const HumanTaskConfig = struct {
     /// * If you choose a private or vendor workforce, the default value is 30 days
     ///   (2592,000 seconds) for non-AL mode. For most users, the maximum is also 30
     ///   days.
-    task_availability_lifetime_in_seconds: ?i32,
+    task_availability_lifetime_in_seconds: ?i32 = null,
 
     /// A description of the task for your human workers.
     task_description: []const u8,
 
     /// Keywords used to describe the task so that workers on Amazon Mechanical Turk
     /// can discover the task.
-    task_keywords: ?[]const []const u8,
+    task_keywords: ?[]const []const u8 = null,
 
     /// The amount of time that a worker has to complete a task.
     ///

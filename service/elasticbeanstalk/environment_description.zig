@@ -14,40 +14,40 @@ pub const EnvironmentDescription = struct {
     /// `true:` There is an update in progress.
     ///
     /// `false:` There are no updates currently in progress.
-    abortable_operation_in_progress: ?bool,
+    abortable_operation_in_progress: ?bool = null,
 
     /// The name of the application associated with this environment.
-    application_name: ?[]const u8,
+    application_name: ?[]const u8 = null,
 
     /// The URL to the CNAME for this environment.
-    cname: ?[]const u8,
+    cname: ?[]const u8 = null,
 
     /// The creation date for this environment.
-    date_created: ?i64,
+    date_created: ?i64 = null,
 
     /// The last modified date for this environment.
-    date_updated: ?i64,
+    date_updated: ?i64 = null,
 
     /// Describes this environment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// For load-balanced, autoscaling environments, the URL to the LoadBalancer.
     /// For
     /// single-instance environments, the IP address of the instance.
-    endpoint_url: ?[]const u8,
+    endpoint_url: ?[]const u8 = null,
 
     /// The environment's Amazon Resource Name (ARN), which can be used in other API
     /// requests that require an ARN.
-    environment_arn: ?[]const u8,
+    environment_arn: ?[]const u8 = null,
 
     /// The ID of this environment.
-    environment_id: ?[]const u8,
+    environment_id: ?[]const u8 = null,
 
     /// A list of links to other environments in the same group.
-    environment_links: ?[]const EnvironmentLink,
+    environment_links: ?[]const EnvironmentLink = null,
 
     /// The name of this environment.
-    environment_name: ?[]const u8,
+    environment_name: ?[]const u8 = null,
 
     /// Describes the health status of the environment. AWS Elastic Beanstalk
     /// indicates the
@@ -68,28 +68,28 @@ pub const EnvironmentDescription = struct {
     /// `UpdateEnvironment` or `RestartEnvironment` request.
     ///
     /// Default: `Grey`
-    health: ?EnvironmentHealth,
+    health: ?EnvironmentHealth = null,
 
     /// Returns the health status of the application running in your environment.
     /// For more
     /// information, see [Health Colors and
     /// Statuses](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
-    health_status: ?EnvironmentHealthStatus,
+    health_status: ?EnvironmentHealthStatus = null,
 
     /// The Amazon Resource Name (ARN) of the environment's operations role. For
     /// more information,
     /// see [Operations
     /// roles](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html) in the *AWS Elastic Beanstalk Developer Guide*.
-    operations_role: ?[]const u8,
+    operations_role: ?[]const u8 = null,
 
     /// The ARN of the platform version.
-    platform_arn: ?[]const u8,
+    platform_arn: ?[]const u8 = null,
 
     /// The description of the AWS resources used by this environment.
-    resources: ?EnvironmentResourcesDescription,
+    resources: ?EnvironmentResourcesDescription = null,
 
     /// The name of the `SolutionStack` deployed with this environment.
-    solution_stack_name: ?[]const u8,
+    solution_stack_name: ?[]const u8 = null,
 
     /// The current operational status of the environment:
     ///
@@ -105,15 +105,15 @@ pub const EnvironmentDescription = struct {
     /// * `Terminating`: Environment is in the shut-down process.
     ///
     /// * `Terminated`: Environment is not running.
-    status: ?EnvironmentStatus,
+    status: ?EnvironmentStatus = null,
 
     /// The name of the configuration template used to originally launch this
     /// environment.
-    template_name: ?[]const u8,
+    template_name: ?[]const u8 = null,
 
     /// Describes the current tier of this environment.
-    tier: ?EnvironmentTier,
+    tier: ?EnvironmentTier = null,
 
     /// The application version deployed in this environment.
-    version_label: ?[]const u8,
+    version_label: ?[]const u8 = null,
 };

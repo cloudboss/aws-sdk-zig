@@ -6,7 +6,7 @@ pub const ListTagsForResourceResponse = struct {
     resource_arn: []const u8,
 
     /// A list of tags associated with the specified resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .resource_arn = "ResourceArn",

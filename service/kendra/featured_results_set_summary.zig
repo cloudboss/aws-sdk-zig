@@ -7,16 +7,16 @@ const FeaturedResultsSetStatus = @import("featured_results_set_status.zig").Feat
 /// then one or more specific documents are featured in the search results.
 pub const FeaturedResultsSetSummary = struct {
     /// The Unix timestamp when the set of featured results was created.
-    creation_timestamp: ?i64,
+    creation_timestamp: ?i64 = null,
 
     /// The identifier of the set of featured results.
-    featured_results_set_id: ?[]const u8,
+    featured_results_set_id: ?[]const u8 = null,
 
     /// The name for the set of featured results.
-    featured_results_set_name: ?[]const u8,
+    featured_results_set_name: ?[]const u8 = null,
 
     /// The Unix timestamp when the set of featured results was last updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     /// The current status of the set of featured results. When the value is
     /// `ACTIVE`, featured results are ready for use. You can still
@@ -26,7 +26,7 @@ pub const FeaturedResultsSetSummary = struct {
     /// [UpdateFeaturedResultsSet](https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html) API. The queries you specify for
     /// featured results must be unique per featured results set for each index,
     /// whether the status is `ACTIVE` or `INACTIVE`.
-    status: ?FeaturedResultsSetStatus,
+    status: ?FeaturedResultsSetStatus = null,
 
     pub const json_field_names = .{
         .creation_timestamp = "CreationTimestamp",

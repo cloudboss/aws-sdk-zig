@@ -3,180 +3,180 @@ const aws = @import("aws");
 /// The customer profile attributes that are used with the message template.
 pub const CustomerProfileAttributes = struct {
     /// A unique account number that you have given to the customer.
-    account_number: ?[]const u8,
+    account_number: ?[]const u8 = null,
 
     /// Any additional information relevant to the customer's profile.
-    additional_information: ?[]const u8,
+    additional_information: ?[]const u8 = null,
 
     /// The first line of a customer address.
-    address_1: ?[]const u8,
+    address_1: ?[]const u8 = null,
 
     /// The second line of a customer address.
-    address_2: ?[]const u8,
+    address_2: ?[]const u8 = null,
 
     /// The third line of a customer address.
-    address_3: ?[]const u8,
+    address_3: ?[]const u8 = null,
 
     /// The fourth line of a customer address.
-    address_4: ?[]const u8,
+    address_4: ?[]const u8 = null,
 
     /// The first line of a customer’s billing address.
-    billing_address_1: ?[]const u8,
+    billing_address_1: ?[]const u8 = null,
 
     /// The second line of a customer’s billing address.
-    billing_address_2: ?[]const u8,
+    billing_address_2: ?[]const u8 = null,
 
     /// The third line of a customer’s billing address.
-    billing_address_3: ?[]const u8,
+    billing_address_3: ?[]const u8 = null,
 
     /// The fourth line of a customer’s billing address.
-    billing_address_4: ?[]const u8,
+    billing_address_4: ?[]const u8 = null,
 
     /// The city of a customer’s billing address.
-    billing_city: ?[]const u8,
+    billing_city: ?[]const u8 = null,
 
     /// The country of a customer’s billing address.
-    billing_country: ?[]const u8,
+    billing_country: ?[]const u8 = null,
 
     /// The county of a customer’s billing address.
-    billing_county: ?[]const u8,
+    billing_county: ?[]const u8 = null,
 
     /// The postal code of a customer’s billing address.
-    billing_postal_code: ?[]const u8,
+    billing_postal_code: ?[]const u8 = null,
 
     /// The province of a customer’s billing address.
-    billing_province: ?[]const u8,
+    billing_province: ?[]const u8 = null,
 
     /// The state of a customer’s billing address.
-    billing_state: ?[]const u8,
+    billing_state: ?[]const u8 = null,
 
     /// The customer's birth date.
-    birth_date: ?[]const u8,
+    birth_date: ?[]const u8 = null,
 
     /// The customer's business email address.
-    business_email_address: ?[]const u8,
+    business_email_address: ?[]const u8 = null,
 
     /// The name of the customer's business.
-    business_name: ?[]const u8,
+    business_name: ?[]const u8 = null,
 
     /// The customer's business phone number.
-    business_phone_number: ?[]const u8,
+    business_phone_number: ?[]const u8 = null,
 
     /// The city in which a customer lives.
-    city: ?[]const u8,
+    city: ?[]const u8 = null,
 
     /// The country in which a customer lives.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// The county in which a customer lives.
-    county: ?[]const u8,
+    county: ?[]const u8 = null,
 
     /// The custom attributes in customer profile attributes.
-    custom: ?[]const aws.map.StringMapEntry,
+    custom: ?[]const aws.map.StringMapEntry = null,
 
     /// The customer's email address, which has not been specified as a personal or
     /// business address.
-    email_address: ?[]const u8,
+    email_address: ?[]const u8 = null,
 
     /// The customer's first name.
-    first_name: ?[]const u8,
+    first_name: ?[]const u8 = null,
 
     /// The customer's gender.
-    gender: ?[]const u8,
+    gender: ?[]const u8 = null,
 
     /// The customer's mobile phone number.
-    home_phone_number: ?[]const u8,
+    home_phone_number: ?[]const u8 = null,
 
     /// The customer's last name.
-    last_name: ?[]const u8,
+    last_name: ?[]const u8 = null,
 
     /// The first line of a customer’s mailing address.
-    mailing_address_1: ?[]const u8,
+    mailing_address_1: ?[]const u8 = null,
 
     /// The second line of a customer’s mailing address.
-    mailing_address_2: ?[]const u8,
+    mailing_address_2: ?[]const u8 = null,
 
     /// The third line of a customer’s mailing address.
-    mailing_address_3: ?[]const u8,
+    mailing_address_3: ?[]const u8 = null,
 
     /// The fourth line of a customer’s mailing address.
-    mailing_address_4: ?[]const u8,
+    mailing_address_4: ?[]const u8 = null,
 
     /// The city of a customer’s mailing address.
-    mailing_city: ?[]const u8,
+    mailing_city: ?[]const u8 = null,
 
     /// The country of a customer’s mailing address.
-    mailing_country: ?[]const u8,
+    mailing_country: ?[]const u8 = null,
 
     /// The county of a customer’s mailing address.
-    mailing_county: ?[]const u8,
+    mailing_county: ?[]const u8 = null,
 
     /// The postal code of a customer’s mailing address.
-    mailing_postal_code: ?[]const u8,
+    mailing_postal_code: ?[]const u8 = null,
 
     /// The province of a customer’s mailing address.
-    mailing_province: ?[]const u8,
+    mailing_province: ?[]const u8 = null,
 
     /// The state of a customer’s mailing address.
-    mailing_state: ?[]const u8,
+    mailing_state: ?[]const u8 = null,
 
     /// The customer's middle name.
-    middle_name: ?[]const u8,
+    middle_name: ?[]const u8 = null,
 
     /// The customer's mobile phone number.
-    mobile_phone_number: ?[]const u8,
+    mobile_phone_number: ?[]const u8 = null,
 
     /// The customer's party type.
-    party_type: ?[]const u8,
+    party_type: ?[]const u8 = null,
 
     /// The customer's phone number, which has not been specified as a mobile, home,
     /// or business number.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     /// The postal code of a customer address.
-    postal_code: ?[]const u8,
+    postal_code: ?[]const u8 = null,
 
     /// The ARN of a customer profile.
-    profile_arn: ?[]const u8,
+    profile_arn: ?[]const u8 = null,
 
     /// The unique identifier of a customer profile.
-    profile_id: ?[]const u8,
+    profile_id: ?[]const u8 = null,
 
     /// The province in which a customer lives.
-    province: ?[]const u8,
+    province: ?[]const u8 = null,
 
     /// The first line of a customer’s shipping address.
-    shipping_address_1: ?[]const u8,
+    shipping_address_1: ?[]const u8 = null,
 
     /// The second line of a customer’s shipping address.
-    shipping_address_2: ?[]const u8,
+    shipping_address_2: ?[]const u8 = null,
 
     /// The third line of a customer’s shipping address.
-    shipping_address_3: ?[]const u8,
+    shipping_address_3: ?[]const u8 = null,
 
     /// The fourth line of a customer’s shipping address.
-    shipping_address_4: ?[]const u8,
+    shipping_address_4: ?[]const u8 = null,
 
     /// The city of a customer’s shipping address.
-    shipping_city: ?[]const u8,
+    shipping_city: ?[]const u8 = null,
 
     /// The country of a customer’s shipping address.
-    shipping_country: ?[]const u8,
+    shipping_country: ?[]const u8 = null,
 
     /// The county of a customer’s shipping address.
-    shipping_county: ?[]const u8,
+    shipping_county: ?[]const u8 = null,
 
     /// The postal code of a customer’s shipping address.
-    shipping_postal_code: ?[]const u8,
+    shipping_postal_code: ?[]const u8 = null,
 
     /// The province of a customer’s shipping address.
-    shipping_province: ?[]const u8,
+    shipping_province: ?[]const u8 = null,
 
     /// The state of a customer’s shipping address.
-    shipping_state: ?[]const u8,
+    shipping_state: ?[]const u8 = null,
 
     /// The state in which a customer lives.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_number = "accountNumber",

@@ -4,28 +4,28 @@ const SharingModel = @import("sharing_model.zig").SharingModel;
 /// A folder in Quick Sight.
 pub const Folder = struct {
     /// The Amazon Resource Name (ARN) for the folder.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time that the folder was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The ID of the folder.
-    folder_id: ?[]const u8,
+    folder_id: ?[]const u8 = null,
 
     /// An array of ancestor ARN strings for the folder.
-    folder_path: ?[]const []const u8,
+    folder_path: ?[]const []const u8 = null,
 
     /// The type of folder it is.
-    folder_type: ?FolderType,
+    folder_type: ?FolderType = null,
 
     /// The time that the folder was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// A display name for the folder.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The sharing scope of the folder.
-    sharing_model: ?SharingModel,
+    sharing_model: ?SharingModel = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

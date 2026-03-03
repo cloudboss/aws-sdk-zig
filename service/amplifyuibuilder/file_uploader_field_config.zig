@@ -24,22 +24,22 @@ pub const FileUploaderFieldConfig = struct {
     /// multipart upload to break the files into chunks before upload. The progress
     /// of the upload
     /// isn't continuous, because the file uploader uploads a chunk at a time.
-    is_resumable: ?bool,
+    is_resumable: ?bool = null,
 
     /// Specifies the maximum number of files that can be selected to upload. The
     /// default value is
     /// an unlimited number of files.
-    max_file_count: ?i32,
+    max_file_count: ?i32 = null,
 
     /// The maximum file size in bytes that the file uploader will accept. The
     /// default value is an
     /// unlimited file size.
-    max_size: ?i32,
+    max_size: ?i32 = null,
 
     /// Specifies whether to display or hide the image preview after selecting a
     /// file for upload.
     /// The default value is `true` to display the image preview.
-    show_thumbnails: ?bool,
+    show_thumbnails: ?bool = null,
 
     pub const json_field_names = .{
         .accepted_file_types = "acceptedFileTypes",

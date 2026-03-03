@@ -5,10 +5,10 @@ const CostAllocationTagType = @import("cost_allocation_tag_type.zig").CostAlloca
 /// `CostAllocationTag` object.
 pub const CostAllocationTag = struct {
     /// The last date that the tag was either activated or deactivated.
-    last_updated_date: ?[]const u8,
+    last_updated_date: ?[]const u8 = null,
 
     /// The last month that the tag was used on an Amazon Web Services resource.
-    last_used_date: ?[]const u8,
+    last_used_date: ?[]const u8 = null,
 
     /// The status of a cost allocation tag.
     status: CostAllocationTagStatus,

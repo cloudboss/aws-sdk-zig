@@ -13,7 +13,7 @@ pub const Message = struct {
     /// is assigned to a message, Amazon Lex returns one message from each group in
     /// the
     /// response.
-    group_number: ?i32,
+    group_number: ?i32 = null,
 
     pub const json_field_names = .{
         .content = "content",

@@ -10,7 +10,7 @@ pub const DBClusterSnapshotAttribute = struct {
     /// accounts that have permission to copy or restore the manual DB cluster
     /// snapshot. For more information, see the `ModifyDBClusterSnapshotAttribute`
     /// API action.
-    attribute_name: ?[]const u8,
+    attribute_name: ?[]const u8 = null,
 
     /// The value(s) for the manual DB cluster snapshot attribute.
     ///
@@ -19,5 +19,5 @@ pub const DBClusterSnapshotAttribute = struct {
     /// copy or restore the manual DB cluster snapshot. If a value of `all` is in
     /// the list, then the manual DB cluster snapshot is public and available for
     /// any Amazon Web Services account to copy or restore.
-    attribute_values: ?[]const []const u8,
+    attribute_values: ?[]const []const u8 = null,
 };

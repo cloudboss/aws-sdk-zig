@@ -3,7 +3,7 @@ const AwsS3BucketBucketLifecycleConfigurationRulesDetails = @import("aws_s3_buck
 /// The lifecycle configuration for the objects in the S3 bucket.
 pub const AwsS3BucketBucketLifecycleConfigurationDetails = struct {
     /// The lifecycle rules.
-    rules: ?[]const AwsS3BucketBucketLifecycleConfigurationRulesDetails,
+    rules: ?[]const AwsS3BucketBucketLifecycleConfigurationRulesDetails = null,
 
     pub const json_field_names = .{
         .rules = "Rules",

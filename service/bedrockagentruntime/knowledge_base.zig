@@ -11,7 +11,7 @@ pub const KnowledgeBase = struct {
     /// The configurations to apply to the knowledge base during query. For more
     /// information, see [Query
     /// configurations](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html).
-    retrieval_configuration: ?KnowledgeBaseRetrievalConfiguration,
+    retrieval_configuration: ?KnowledgeBaseRetrievalConfiguration = null,
 
     pub const json_field_names = .{
         .description = "description",

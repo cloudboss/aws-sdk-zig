@@ -4,10 +4,10 @@ const ServiceUpdateStatus = @import("service_update_status.zig").ServiceUpdateSt
 /// request
 pub const PendingModifiedServiceUpdate = struct {
     /// The unique ID of the service update
-    service_update_name: ?[]const u8,
+    service_update_name: ?[]const u8 = null,
 
     /// The status of the service update
-    status: ?ServiceUpdateStatus,
+    status: ?ServiceUpdateStatus = null,
 
     pub const json_field_names = .{
         .service_update_name = "ServiceUpdateName",

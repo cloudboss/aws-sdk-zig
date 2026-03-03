@@ -2,10 +2,10 @@
 /// uname lookup request.
 pub const BatchUnameErrorResponseItem = struct {
     /// The field that caused the error.
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// A description of why the username hash lookup failed.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The username hash that failed to be looked up.
     uname: []const u8,

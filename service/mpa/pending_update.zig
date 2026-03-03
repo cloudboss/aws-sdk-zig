@@ -8,36 +8,36 @@ const ApprovalTeamStatusCode = @import("approval_team_status_code.zig").Approval
 pub const PendingUpdate = struct {
     /// An `ApprovalStrategyResponse` object. Contains details for how the team
     /// grants approval.
-    approval_strategy: ?ApprovalStrategyResponse,
+    approval_strategy: ?ApprovalStrategyResponse = null,
 
     /// An array of `GetApprovalTeamResponseApprover ` objects. Contains details for
     /// the approvers in the team.
-    approvers: ?[]const GetApprovalTeamResponseApprover,
+    approvers: ?[]const GetApprovalTeamResponseApprover = null,
 
     /// Description for the team.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Total number of approvers in the team.
-    number_of_approvers: ?i32,
+    number_of_approvers: ?i32 = null,
 
     /// Status for the team. For more information, see [Team
     /// health](https://docs.aws.amazon.com/mpa/latest/userguide/mpa-health.html) in
     /// the *Multi-party approval User Guide*.
-    status: ?ApprovalTeamStatus,
+    status: ?ApprovalTeamStatus = null,
 
     /// Status code for the update. For more information, see [Team
     /// health](https://docs.aws.amazon.com/mpa/latest/userguide/mpa-health.html) in
     /// the *Multi-party approval User Guide*.
-    status_code: ?ApprovalTeamStatusCode,
+    status_code: ?ApprovalTeamStatusCode = null,
 
     /// Message describing the status for the team.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// Timestamp when the update request was initiated.
-    update_initiation_time: ?i64,
+    update_initiation_time: ?i64 = null,
 
     /// Version ID for the team.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .approval_strategy = "ApprovalStrategy",

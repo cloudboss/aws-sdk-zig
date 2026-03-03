@@ -8,16 +8,16 @@ const DataProductVisibilityFilter = @import("data_product_visibility_filter.zig"
 /// `ListEntities` request.
 pub const DataProductFilters = struct {
     /// Unique identifier for the data product.
-    entity_id: ?DataProductEntityIdFilter,
+    entity_id: ?DataProductEntityIdFilter = null,
 
     /// The last date on which the data product was modified.
-    last_modified_date: ?DataProductLastModifiedDateFilter,
+    last_modified_date: ?DataProductLastModifiedDateFilter = null,
 
     /// The title of the data product.
-    product_title: ?DataProductTitleFilter,
+    product_title: ?DataProductTitleFilter = null,
 
     /// The visibility of the data product.
-    visibility: ?DataProductVisibilityFilter,
+    visibility: ?DataProductVisibilityFilter = null,
 
     pub const json_field_names = .{
         .entity_id = "EntityId",

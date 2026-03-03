@@ -8,7 +8,7 @@ pub const ChannelDestinationConfiguration = struct {
 
     /// ARN of the EncoderConfiguration resource. The encoder configuration
     /// and stage resources must be in the same AWS account and region.
-    encoder_configuration_arn: ?[]const u8,
+    encoder_configuration_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channel_arn = "channelArn",

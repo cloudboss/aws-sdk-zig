@@ -12,7 +12,7 @@ pub const TargetPlatform = struct {
     ///   `trt-ver`, `cuda-ver` compiler options
     /// * `MALI`: ARM Mali graphics processor
     /// * `INTEL_GRAPHICS`: Integrated Intel graphics
-    accelerator: ?TargetPlatformAccelerator,
+    accelerator: ?TargetPlatformAccelerator = null,
 
     /// Specifies a target platform architecture.
     ///

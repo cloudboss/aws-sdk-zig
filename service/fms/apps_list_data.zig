@@ -8,13 +8,13 @@ pub const AppsListData = struct {
     apps_list: []const App,
 
     /// The time that the Firewall Manager applications list was created.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The time that the Firewall Manager applications list was last updated.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The ID of the Firewall Manager applications list.
-    list_id: ?[]const u8,
+    list_id: ?[]const u8 = null,
 
     /// The name of the Firewall Manager applications list.
     list_name: []const u8,
@@ -23,11 +23,11 @@ pub const AppsListData = struct {
     /// the list, the update token must match the token of the current version of
     /// the application list.
     /// You can retrieve the update token by getting the list.
-    list_update_token: ?[]const u8,
+    list_update_token: ?[]const u8 = null,
 
     /// A map of previous version numbers to their corresponding `App` object
     /// arrays.
-    previous_apps_list: ?[]const aws.map.MapEntry([]const App),
+    previous_apps_list: ?[]const aws.map.MapEntry([]const App) = null,
 
     pub const json_field_names = .{
         .apps_list = "AppsList",

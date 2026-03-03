@@ -16,7 +16,7 @@ pub const AppSummary = struct {
     app_arn: []const u8,
 
     /// Assessment execution schedule with 'Daily' or 'Disabled' values.
-    assessment_schedule: ?AppAssessmentScheduleType,
+    assessment_schedule: ?AppAssessmentScheduleType = null,
 
     /// Amazon Resource Name (ARN) of Resource Groups group that is integrated with
     /// an AppRegistry application. For more information about ARNs,
@@ -24,24 +24,24 @@ pub const AppSummary = struct {
     /// Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the
     /// *Amazon Web Services General Reference* guide.
-    aws_application_arn: ?[]const u8,
+    aws_application_arn: ?[]const u8 = null,
 
     /// The current status of compliance for the resiliency policy.
-    compliance_status: ?AppComplianceStatusType,
+    compliance_status: ?AppComplianceStatusType = null,
 
     /// Date and time when the app was created.
     creation_time: i64,
 
     /// The optional description for an app.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates if compliance drifts (deviations) were detected while running an
     /// assessment for
     /// your application.
-    drift_status: ?AppDriftStatusType,
+    drift_status: ?AppDriftStatusType = null,
 
     /// Date and time of the most recent compliance evaluation.
-    last_app_compliance_evaluation_time: ?i64,
+    last_app_compliance_evaluation_time: ?i64 = null,
 
     /// The name of the application.
     name: []const u8,
@@ -50,13 +50,13 @@ pub const AppSummary = struct {
     resiliency_score: f64 = 0,
 
     /// Recovery Point Objective (RPO) in seconds.
-    rpo_in_secs: ?i32,
+    rpo_in_secs: ?i32 = null,
 
     /// Recovery Time Objective (RTO) in seconds.
-    rto_in_secs: ?i32,
+    rto_in_secs: ?i32 = null,
 
     /// Status of the application.
-    status: ?AppStatusType,
+    status: ?AppStatusType = null,
 
     pub const json_field_names = .{
         .app_arn = "appArn",

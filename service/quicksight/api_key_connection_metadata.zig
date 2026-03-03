@@ -7,7 +7,7 @@ pub const APIKeyConnectionMetadata = struct {
     base_endpoint: []const u8,
 
     /// The email address associated with the API key, if required.
-    email: ?[]const u8,
+    email: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_key = "ApiKey",

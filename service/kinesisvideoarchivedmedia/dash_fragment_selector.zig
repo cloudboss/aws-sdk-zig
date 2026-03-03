@@ -40,13 +40,13 @@ pub const DASHFragmentSelector = struct {
     /// timestamps with values now, they are not included in the HLS media playlist.
     ///
     /// The default is `SERVER_TIMESTAMP`.
-    fragment_selector_type: ?DASHFragmentSelectorType,
+    fragment_selector_type: ?DASHFragmentSelectorType = null,
 
     /// The start and end of the timestamp range for the requested media.
     ///
     /// This value should not be present if `PlaybackType` is
     /// `LIVE`.
-    timestamp_range: ?DASHTimestampRange,
+    timestamp_range: ?DASHTimestampRange = null,
 
     pub const json_field_names = .{
         .fragment_selector_type = "FragmentSelectorType",

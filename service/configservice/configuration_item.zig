@@ -10,25 +10,25 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 pub const ConfigurationItem = struct {
     /// The 12-digit Amazon Web Services account ID associated with the
     /// resource.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) associated with the resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Availability Zone associated with the resource.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The region where the resource resides.
-    aws_region: ?[]const u8,
+    aws_region: ?[]const u8 = null,
 
     /// A JSON-encoded string that contains the contents for the resource
     /// configuration. This string needs to be deserialized using `json.loads()`
     /// before you can access the contents.
-    configuration: ?[]const u8,
+    configuration: ?[]const u8 = null,
 
     /// The time when the recording of configuration changes was
     /// initiated for the resource.
-    configuration_item_capture_time: ?i64,
+    configuration_item_capture_time: ?i64 = null,
 
     /// The time when configuration changes for the resource were delivered.
     ///
@@ -43,7 +43,7 @@ pub const ConfigurationItem = struct {
     /// [Recording
     /// Frequency](https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency) in the *Config
     /// Developer Guide*.
-    configuration_item_delivery_time: ?i64,
+    configuration_item_delivery_time: ?i64 = null,
 
     /// Unique MD5 hash that represents the configuration item's
     /// state.
@@ -51,7 +51,7 @@ pub const ConfigurationItem = struct {
     /// You can use MD5 hash to compare the states of two or more
     /// configuration items that are associated with the same
     /// resource.
-    configuration_item_md5_hash: ?[]const u8,
+    configuration_item_md5_hash: ?[]const u8 = null,
 
     /// The configuration item status. Valid values include:
     ///
@@ -67,11 +67,11 @@ pub const ConfigurationItem = struct {
     /// * ResourceDeletedNotRecorded – The resource was deleted but its
     ///   configuration was not recorded since the recorder doesn't record resources
     ///   of this type
-    configuration_item_status: ?ConfigurationItemStatus,
+    configuration_item_status: ?ConfigurationItemStatus = null,
 
     /// An identifier that indicates the ordering of the configuration
     /// items of a resource.
-    configuration_state_id: ?[]const u8,
+    configuration_state_id: ?[]const u8 = null,
 
     /// The recording frequency that Config uses to record configuration changes for
     /// the resource.
@@ -83,7 +83,7 @@ pub const ConfigurationItem = struct {
     /// recording, see [Recording
     /// Frequency](https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency) in the *Config
     /// Developer Guide*.
-    recording_frequency: ?RecordingFrequency,
+    recording_frequency: ?RecordingFrequency = null,
 
     /// A list of CloudTrail event IDs.
     ///
@@ -96,23 +96,23 @@ pub const ConfigurationItem = struct {
     /// initiated by any event. As of Version 1.3, the relatedEvents field is empty.
     /// You can access the [LookupEvents
     /// API](https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_LookupEvents.html) in the *CloudTrail API Reference* to retrieve the events for the resource.
-    related_events: ?[]const []const u8,
+    related_events: ?[]const []const u8 = null,
 
     /// A list of related Amazon Web Services resources.
-    relationships: ?[]const Relationship,
+    relationships: ?[]const Relationship = null,
 
     /// The time stamp when the resource was created.
-    resource_creation_time: ?i64,
+    resource_creation_time: ?i64 = null,
 
     /// The ID of the resource (for example,
     /// `sg-xxxxxx`).
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The custom name of the resource, if available.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// The type of Amazon Web Services resource.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// A string to string map that contains additional contents for the resource
     /// configuration.Config returns this field for certain
@@ -121,14 +121,14 @@ pub const ConfigurationItem = struct {
     ///
     /// This string to string map needs to be deserialized using `json.loads()`
     /// before you can accessing the contents.
-    supplementary_configuration: ?[]const aws.map.StringMapEntry,
+    supplementary_configuration: ?[]const aws.map.StringMapEntry = null,
 
     /// A mapping of key value tags associated with the
     /// resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The version number of the resource configuration.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

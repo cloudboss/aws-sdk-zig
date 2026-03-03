@@ -17,7 +17,7 @@ const ViewerProtocolPolicy = @import("viewer_protocol_policy.zig").ViewerProtoco
 /// `Cache-Control: no-cache`, `no-store`, or `private` directives are present
 /// in the origin headers.
 pub const DefaultCacheBehavior = struct {
-    allowed_methods: ?AllowedMethods,
+    allowed_methods: ?AllowedMethods = null,
 
     /// The unique identifier of the cache policy that is attached to the default
     /// cache behavior. For more information, see [Creating cache
@@ -25,13 +25,13 @@ pub const DefaultCacheBehavior = struct {
     ///
     /// A `DefaultCacheBehavior` must include either a `CachePolicyId` or
     /// `ForwardedValues`. We recommend that you use a `CachePolicyId`.
-    cache_policy_id: ?[]const u8,
+    cache_policy_id: ?[]const u8 = null,
 
     /// Whether you want CloudFront to automatically compress certain files for this
     /// cache behavior. If so, specify `true`; if not, specify `false`. For more
     /// information, see [Serving Compressed
     /// Files](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html) in the *Amazon CloudFront Developer Guide*.
-    compress: ?bool,
+    compress: ?bool = null,
 
     /// This field only supports standard distributions. You can't specify this
     /// field for multi-tenant distributions. For more information, see [Unsupported
@@ -50,12 +50,12 @@ pub const DefaultCacheBehavior = struct {
     /// `Cache-Control max-age`, `Cache-Control s-maxage`, and `Expires` to objects.
     /// For more information, see [Managing How Long Content Stays in an Edge Cache
     /// (Expiration)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.
-    default_ttl: ?i64,
+    default_ttl: ?i64 = null,
 
     /// The value of `ID` for the field-level encryption configuration that you want
     /// CloudFront to use for encrypting specific fields of data for the default
     /// cache behavior.
-    field_level_encryption_id: ?[]const u8,
+    field_level_encryption_id: ?[]const u8 = null,
 
     /// This field is deprecated. We recommend that you use a cache policy or an
     /// origin request policy instead of this field. For more information, see
@@ -76,19 +76,19 @@ pub const DefaultCacheBehavior = struct {
     ///
     /// A complex type that specifies how CloudFront handles query strings, cookies,
     /// and HTTP headers.
-    forwarded_values: ?ForwardedValues,
+    forwarded_values: ?ForwardedValues = null,
 
     /// A list of CloudFront functions that are associated with this cache behavior.
     /// Your functions must be published to the `LIVE` stage to associate them with
     /// a cache behavior.
-    function_associations: ?FunctionAssociations,
+    function_associations: ?FunctionAssociations = null,
 
     /// The gRPC configuration for your cache behavior.
-    grpc_config: ?GrpcConfig,
+    grpc_config: ?GrpcConfig = null,
 
     /// A complex type that contains zero or more Lambda@Edge function associations
     /// for a cache behavior.
-    lambda_function_associations: ?LambdaFunctionAssociations,
+    lambda_function_associations: ?LambdaFunctionAssociations = null,
 
     /// This field only supports standard distributions. You can't specify this
     /// field for multi-tenant distributions. For more information, see [Unsupported
@@ -107,7 +107,7 @@ pub const DefaultCacheBehavior = struct {
     /// max-age`, `Cache-Control s-maxage`, and `Expires` to objects. For more
     /// information, see [Managing How Long Content Stays in an Edge Cache
     /// (Expiration)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.
-    max_ttl: ?i64,
+    max_ttl: ?i64 = null,
 
     /// This field only supports standard distributions. You can't specify this
     /// field for multi-tenant distributions. For more information, see [Unsupported
@@ -128,20 +128,20 @@ pub const DefaultCacheBehavior = struct {
     /// You must specify `0` for `MinTTL` if you configure CloudFront to forward all
     /// headers to your origin (under `Headers`, if you specify `1` for `Quantity`
     /// and `*` for `Name`).
-    min_ttl: ?i64,
+    min_ttl: ?i64 = null,
 
     /// The unique identifier of the origin request policy that is attached to the
     /// default cache behavior. For more information, see [Creating origin request
     /// policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) or [Using the managed origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html) in the *Amazon CloudFront Developer Guide*.
-    origin_request_policy_id: ?[]const u8,
+    origin_request_policy_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the real-time log configuration that is
     /// attached to this cache behavior. For more information, see [Real-time
     /// logs](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html) in the *Amazon CloudFront Developer Guide*.
-    realtime_log_config_arn: ?[]const u8,
+    realtime_log_config_arn: ?[]const u8 = null,
 
     /// The identifier for a response headers policy.
-    response_headers_policy_id: ?[]const u8,
+    response_headers_policy_id: ?[]const u8 = null,
 
     /// This field only supports standard distributions. You can't specify this
     /// field for multi-tenant distributions. For more information, see [Unsupported
@@ -153,7 +153,7 @@ pub const DefaultCacheBehavior = struct {
     /// behavior. If so, specify `true`; if not, specify `false`. If you specify
     /// `true` for `SmoothStreaming`, you can still distribute other content using
     /// this cache behavior if the content matches the value of `PathPattern`.
-    smooth_streaming: ?bool,
+    smooth_streaming: ?bool = null,
 
     /// The value of `ID` for the origin that you want CloudFront to route requests
     /// to when they use the default cache behavior.
@@ -169,7 +169,7 @@ pub const DefaultCacheBehavior = struct {
     /// contains information about which public key CloudFront should use to verify
     /// the signature. For more information, see [Serving private
     /// content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.
-    trusted_key_groups: ?TrustedKeyGroups,
+    trusted_key_groups: ?TrustedKeyGroups = null,
 
     /// We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     ///
@@ -188,7 +188,7 @@ pub const DefaultCacheBehavior = struct {
     /// contains information about which public key CloudFront should use to verify
     /// the signature. For more information, see [Serving private
     /// content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.
-    trusted_signers: ?TrustedSigners,
+    trusted_signers: ?TrustedSigners = null,
 
     /// The protocol that viewers can use to access the files in the origin
     /// specified by `TargetOriginId` when a request matches the path pattern in

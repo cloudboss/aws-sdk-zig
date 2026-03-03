@@ -9,7 +9,7 @@ pub const BucketCountPolicyAllowsUnencryptedObjectUploads = struct {
     /// x-amz-server-side-encryption header with a value of AES256 or aws:kms, or
     /// the x-amz-server-side-encryption-customer-algorithm header with a value of
     /// AES256.
-    allows_unencrypted_object_uploads: ?i64,
+    allows_unencrypted_object_uploads: ?i64 = null,
 
     /// The total number of buckets whose bucket policies require server-side
     /// encryption of new objects. PutObject requests for these buckets must include
@@ -17,14 +17,14 @@ pub const BucketCountPolicyAllowsUnencryptedObjectUploads = struct {
     /// header with a value of AES256 or aws:kms, or the
     /// x-amz-server-side-encryption-customer-algorithm header with a value of
     /// AES256.
-    denies_unencrypted_object_uploads: ?i64,
+    denies_unencrypted_object_uploads: ?i64 = null,
 
     /// The total number of buckets that Amazon Macie wasn't able to evaluate
     /// server-side encryption requirements for. For example, the buckets'
     /// permissions settings or a quota prevented Macie from retrieving the
     /// requisite data. Macie can't determine whether bucket policies for the
     /// buckets require server-side encryption of new objects.
-    unknown: ?i64,
+    unknown: ?i64 = null,
 
     pub const json_field_names = .{
         .allows_unencrypted_object_uploads = "allowsUnencryptedObjectUploads",

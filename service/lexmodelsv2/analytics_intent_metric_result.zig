@@ -15,7 +15,7 @@ pub const AnalyticsIntentMetricResult = struct {
     /// * `Switched` – The number of times there was a switch to a different intent.
     ///
     /// * `Dropped` – The number of times the user dropped the intent.
-    name: ?AnalyticsIntentMetricName,
+    name: ?AnalyticsIntentMetricName = null,
 
     /// The statistic that you requested to calculate.
     ///
@@ -25,10 +25,10 @@ pub const AnalyticsIntentMetricResult = struct {
     ///   category you provide in `name`.
     ///
     /// * `Max` – The highest count in the category you provide in `name`.
-    statistic: ?AnalyticsMetricStatistic,
+    statistic: ?AnalyticsMetricStatistic = null,
 
     /// The value of the summary statistic for the metric that you requested.
-    value: ?f64,
+    value: ?f64 = null,
 
     pub const json_field_names = .{
         .name = "name",

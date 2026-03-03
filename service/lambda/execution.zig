@@ -13,7 +13,7 @@ pub const Execution = struct {
 
     /// The date and time when the durable execution ended, in [ISO-8601
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
-    end_timestamp: ?i64,
+    end_timestamp: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the Lambda function.
     function_arn: []const u8,

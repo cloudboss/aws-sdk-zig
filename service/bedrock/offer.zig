@@ -3,7 +3,7 @@ const TermDetails = @import("term_details.zig").TermDetails;
 /// An offer dictates usage terms for the model.
 pub const Offer = struct {
     /// Offer Id for a model offer.
-    offer_id: ?[]const u8,
+    offer_id: ?[]const u8 = null,
 
     /// Offer token.
     offer_token: []const u8,

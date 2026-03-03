@@ -6,7 +6,7 @@ const MarketingSource = @import("marketing_source.zig").MarketingSource;
 pub const Marketing = struct {
     /// Indicates if the `Opportunity` is a marketing development fund (MDF) funded
     /// activity.
-    aws_funding_used: ?AwsFundingUsed,
+    aws_funding_used: ?AwsFundingUsed = null,
 
     /// Specifies the `Opportunity` marketing campaign code. The Amazon Web Services
     /// campaign code is a reference to specific marketing initiatives, promotions,
@@ -14,20 +14,20 @@ pub const Marketing = struct {
     /// categorize the `Opportunity` within marketing campaigns. If you don't have a
     /// campaign code, contact your Amazon Web Services point of contact to obtain
     /// one.
-    campaign_name: ?[]const u8,
+    campaign_name: ?[]const u8 = null,
 
     /// Specifies the `Opportunity`'s channel that the marketing activity is
     /// associated with or was contacted through. This field provides information
     /// about the specific marketing channel that contributed to the generation of
     /// the lead or contact.
-    channels: ?[]const Channel,
+    channels: ?[]const Channel = null,
 
     /// Indicates if the `Opportunity` was sourced from an Amazon Web Services
     /// marketing activity. Use the value `Marketing Activity`. Use `None` if it's
     /// not associated with an Amazon Web Services marketing activity. This field
     /// helps Amazon Web Services track the return on marketing investments and
     /// enables better distribution of marketing budgets among partners.
-    source: ?MarketingSource,
+    source: ?MarketingSource = null,
 
     /// Specifies the marketing activity use case or purpose that led to the
     /// `Opportunity`'s creation or contact. This field captures the context or
@@ -42,7 +42,7 @@ pub const Marketing = struct {
     /// Services | Migration & Transfer | Networking & Content Delivery | Quantum
     /// Technologies | Robotics | Satellite | Security | Serverless | Storage | VR &
     /// AR`
-    use_cases: ?[]const []const u8,
+    use_cases: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .aws_funding_used = "AwsFundingUsed",

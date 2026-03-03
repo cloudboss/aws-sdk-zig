@@ -6,11 +6,11 @@ pub const JoinEventConfiguration = struct {
     /// Join event configuration object for enabling or disabling LoRaWAN related
     /// event
     /// topics.
-    lo_ra_wan: ?LoRaWANJoinEventNotificationConfigurations,
+    lo_ra_wan: ?LoRaWANJoinEventNotificationConfigurations = null,
 
     /// Denotes whether the wireless device ID join event topic is enabled or
     /// disabled.
-    wireless_device_id_event_topic: ?EventNotificationTopicStatus,
+    wireless_device_id_event_topic: ?EventNotificationTopicStatus = null,
 
     pub const json_field_names = .{
         .lo_ra_wan = "LoRaWAN",

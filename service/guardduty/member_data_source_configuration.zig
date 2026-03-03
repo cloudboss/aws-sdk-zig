@@ -7,11 +7,11 @@ pub const MemberDataSourceConfiguration = struct {
     account_id: []const u8,
 
     /// Contains information on the status of data sources for the account.
-    data_sources: ?DataSourceConfigurationsResult,
+    data_sources: ?DataSourceConfigurationsResult = null,
 
     /// Contains information about the status of the features for the member
     /// account.
-    features: ?[]const MemberFeaturesConfigurationResult,
+    features: ?[]const MemberFeaturesConfigurationResult = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

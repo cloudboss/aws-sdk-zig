@@ -17,7 +17,7 @@ pub const ToolDefinition = struct {
 
     /// The output schema for the tool. This schema defines the structure of the
     /// output that the tool produces.
-    output_schema: ?SchemaDefinition,
+    output_schema: ?SchemaDefinition = null,
 
     pub const json_field_names = .{
         .description = "description",

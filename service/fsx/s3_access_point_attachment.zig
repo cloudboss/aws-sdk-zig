@@ -7,7 +7,7 @@ const S3AccessPointAttachmentType = @import("s3_access_point_attachment_type.zig
 
 /// An S3 access point attached to an Amazon FSx volume.
 pub const S3AccessPointAttachment = struct {
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The lifecycle status of the S3 access point attachment. The lifecycle can
     /// have the following values:
@@ -23,25 +23,25 @@ pub const S3AccessPointAttachment = struct {
     /// point attachment, and create a new one.
     ///
     /// * UPDATING - Amazon FSx is updating the S3 access point attachment
-    lifecycle: ?S3AccessPointAttachmentLifecycle,
+    lifecycle: ?S3AccessPointAttachmentLifecycle = null,
 
-    lifecycle_transition_reason: ?LifecycleTransitionReason,
+    lifecycle_transition_reason: ?LifecycleTransitionReason = null,
 
     /// The name of the S3 access point attachment; also used for the name of the S3
     /// access point.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ONTAP configuration of the S3 access point attachment.
-    ontap_configuration: ?S3AccessPointOntapConfiguration,
+    ontap_configuration: ?S3AccessPointOntapConfiguration = null,
 
     /// The OpenZFSConfiguration of the S3 access point attachment.
-    open_zfs_configuration: ?S3AccessPointOpenZFSConfiguration,
+    open_zfs_configuration: ?S3AccessPointOpenZFSConfiguration = null,
 
     /// The S3 access point configuration of the S3 access point attachment.
-    s3_access_point: ?S3AccessPoint,
+    s3_access_point: ?S3AccessPoint = null,
 
     /// The type of Amazon FSx volume that the S3 access point is attached to.
-    @"type": ?S3AccessPointAttachmentType,
+    @"type": ?S3AccessPointAttachmentType = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

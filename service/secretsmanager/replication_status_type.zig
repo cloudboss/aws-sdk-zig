@@ -4,23 +4,23 @@ const StatusType = @import("status_type.zig").StatusType;
 /// includes a Region, KMSKeyId, status, and status message.
 pub const ReplicationStatusType = struct {
     /// Can be an `ARN`, `Key ID`, or `Alias`.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The date that the secret was last accessed in the Region. This field is
     /// omitted if the
     /// secret has never been retrieved in the Region.
-    last_accessed_date: ?i64,
+    last_accessed_date: ?i64 = null,
 
     /// The Region where replication occurs.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The status can be `InProgress`, `Failed`, or
     /// `InSync`.
-    status: ?StatusType,
+    status: ?StatusType = null,
 
     /// Status message such as "*Secret with this name already exists in this
     /// region*".
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .kms_key_id = "KmsKeyId",

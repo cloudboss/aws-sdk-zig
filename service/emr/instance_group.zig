@@ -17,13 +17,13 @@ pub const InstanceGroup = struct {
     /// dynamically adds and terminates Amazon EC2 instances in response to the
     /// value of a
     /// CloudWatch metric. See PutAutoScalingPolicy.
-    auto_scaling_policy: ?AutoScalingPolicyDescription,
+    auto_scaling_policy: ?AutoScalingPolicyDescription = null,
 
     /// The bid price for each Amazon EC2 Spot Instance type as defined by
     /// `InstanceType`. Expressed in USD. If neither `BidPrice` nor
     /// `BidPriceAsPercentageOfOnDemandPrice` is provided,
     /// `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
-    bid_price: ?[]const u8,
+    bid_price: ?[]const u8 = null,
 
     /// Amazon EMR releases 4.x or later.
     ///
@@ -32,63 +32,63 @@ pub const InstanceGroup = struct {
     /// You can specify a separate configuration for each instance group (master,
     /// core, and
     /// task).
-    configurations: ?[]const Configuration,
+    configurations: ?[]const Configuration = null,
 
     /// The version number of the requested configuration specification for this
     /// instance
     /// group.
-    configurations_version: ?i64,
+    configurations_version: ?i64 = null,
 
     /// The custom AMI ID to use for the provisioned instance group.
-    custom_ami_id: ?[]const u8,
+    custom_ami_id: ?[]const u8 = null,
 
     /// The EBS block devices that are mapped to this instance group.
-    ebs_block_devices: ?[]const EbsBlockDevice,
+    ebs_block_devices: ?[]const EbsBlockDevice = null,
 
     /// If the instance group is EBS-optimized. An Amazon EBS-optimized instance
     /// uses an
     /// optimized configuration stack and provides additional, dedicated capacity
     /// for Amazon EBS I/O.
-    ebs_optimized: ?bool,
+    ebs_optimized: ?bool = null,
 
     /// The identifier of the instance group.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The type of the instance group. Valid values are MASTER, CORE or TASK.
-    instance_group_type: ?InstanceGroupType,
+    instance_group_type: ?InstanceGroupType = null,
 
     /// The Amazon EC2 instance type for all instances in the instance group.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// A list of configurations that were successfully applied for an instance
     /// group last
     /// time.
-    last_successfully_applied_configurations: ?[]const Configuration,
+    last_successfully_applied_configurations: ?[]const Configuration = null,
 
     /// The version number of a configuration specification that was successfully
     /// applied for an
     /// instance group last time.
-    last_successfully_applied_configurations_version: ?i64,
+    last_successfully_applied_configurations_version: ?i64 = null,
 
     /// The marketplace to provision instances for this group. Valid values are
     /// ON_DEMAND or
     /// SPOT.
-    market: ?MarketType,
+    market: ?MarketType = null,
 
     /// The name of the instance group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The target number of instances for the instance group.
-    requested_instance_count: ?i32,
+    requested_instance_count: ?i32 = null,
 
     /// The number of instances currently running in this instance group.
-    running_instance_count: ?i32,
+    running_instance_count: ?i32 = null,
 
     /// Policy for customizing shrink operations.
-    shrink_policy: ?ShrinkPolicy,
+    shrink_policy: ?ShrinkPolicy = null,
 
     /// The current status of the instance group.
-    status: ?InstanceGroupStatus,
+    status: ?InstanceGroupStatus = null,
 
     pub const json_field_names = .{
         .auto_scaling_policy = "AutoScalingPolicy",

@@ -7,10 +7,10 @@ const PercentageDisplayFormatConfiguration = @import("percentage_display_format_
 /// the attributes can be defined.
 pub const ComparisonFormatConfiguration = struct {
     /// The number display format.
-    number_display_format_configuration: ?NumberDisplayFormatConfiguration,
+    number_display_format_configuration: ?NumberDisplayFormatConfiguration = null,
 
     /// The percentage display format.
-    percentage_display_format_configuration: ?PercentageDisplayFormatConfiguration,
+    percentage_display_format_configuration: ?PercentageDisplayFormatConfiguration = null,
 
     pub const json_field_names = .{
         .number_display_format_configuration = "NumberDisplayFormatConfiguration",

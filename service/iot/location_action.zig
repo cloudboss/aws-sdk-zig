@@ -20,7 +20,7 @@ pub const LocationAction = struct {
 
     /// The time that the location data was sampled. The default value is
     /// the time the MQTT message was processed.
-    timestamp: ?LocationTimestamp,
+    timestamp: ?LocationTimestamp = null,
 
     /// The name of the tracker resource in Amazon Location in which the location is
     /// updated.

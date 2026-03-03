@@ -6,7 +6,7 @@ const TlsSessionResumptionMode = @import("tls_session_resumption_mode.zig").TlsS
 pub const ProtocolDetails = struct {
     /// Indicates the transport method for the AS2 messages. Currently, only HTTP is
     /// supported.
-    as_2_transports: ?[]const As2Transport,
+    as_2_transports: ?[]const As2Transport = null,
 
     /// Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4
     /// address, such as the public IP address of a firewall, router, or load
@@ -51,7 +51,7 @@ pub const ProtocolDetails = struct {
     /// response. FileZilla and WinSCP do support it. If you are using other
     /// clients, check to see if your client supports the `PassiveIp=0.0.0.0`
     /// response.
-    passive_ip: ?[]const u8,
+    passive_ip: ?[]const u8 = null,
 
     /// Use the `SetStatOption` to ignore the error that is generated when the
     /// client attempts to use `SETSTAT` on a file you are uploading to an S3
@@ -73,7 +73,7 @@ pub const ProtocolDetails = struct {
     /// If you want to preserve the original timestamp for your file, and modify
     /// other file attributes using `SETSTAT`, you can use Amazon EFS as backend
     /// storage with Transfer Family.
-    set_stat_option: ?SetStatOption,
+    set_stat_option: ?SetStatOption = null,
 
     /// A property used with Transfer Family servers that use the FTPS protocol. TLS
     /// Session Resumption provides a mechanism to resume or share a negotiated
@@ -98,7 +98,7 @@ pub const ProtocolDetails = struct {
     /// enforce TLS session resumption, you prevent any connections from FTPS
     /// clients that don't perform the protocol negotiation. To determine whether or
     /// not you can use the `ENFORCED` value, you need to test your clients.
-    tls_session_resumption_mode: ?TlsSessionResumptionMode,
+    tls_session_resumption_mode: ?TlsSessionResumptionMode = null,
 
     pub const json_field_names = .{
         .as_2_transports = "As2Transports",

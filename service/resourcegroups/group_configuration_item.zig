@@ -13,7 +13,7 @@ pub const GroupConfigurationItem = struct {
     /// [Supported
     /// resource types and
     /// parameters](https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types).
-    parameters: ?[]const GroupConfigurationParameter,
+    parameters: ?[]const GroupConfigurationParameter = null,
 
     /// Specifies the type of group configuration item. Each item must have a unique
     /// value for

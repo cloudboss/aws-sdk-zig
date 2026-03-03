@@ -5,26 +5,26 @@ const TaskInstanceStatus = @import("task_instance_status.zig").TaskInstanceStatu
 pub const TaskInstanceSummary = struct {
     /// The duration of the task instance execution in seconds. This value is null
     /// if the task is not complete.
-    duration_in_seconds: ?i32,
+    duration_in_seconds: ?i32 = null,
 
     /// The name of the Apache Airflow operator used for this task instance.
-    operator_name: ?[]const u8,
+    operator_name: ?[]const u8 = null,
 
     /// The unique identifier of the workflow run that contains this task instance.
-    run_id: ?[]const u8,
+    run_id: ?[]const u8 = null,
 
     /// The current status of the task instance.
-    status: ?TaskInstanceStatus,
+    status: ?TaskInstanceStatus = null,
 
     /// The unique identifier of this task instance.
-    task_instance_id: ?[]const u8,
+    task_instance_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the workflow that contains this task
     /// instance.
-    workflow_arn: ?[]const u8,
+    workflow_arn: ?[]const u8 = null,
 
     /// The version of the workflow that contains this task instance.
-    workflow_version: ?[]const u8,
+    workflow_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .duration_in_seconds = "DurationInSeconds",

@@ -7,17 +7,17 @@ pub const OidcJwtUpdateConfiguration = struct {
     /// The attribute mapped by this JMESPath expression is compared against the
     /// attribute mapped by `IdentityStoreAttributePath` when a trusted token issuer
     /// token is exchanged for an IAM Identity Center token.
-    claim_attribute_path: ?[]const u8,
+    claim_attribute_path: ?[]const u8 = null,
 
     /// The path of the destination attribute in a JWT from IAM Identity Center. The
     /// attribute mapped by this JMESPath expression is compared against the
     /// attribute mapped by `ClaimAttributePath` when a trusted token issuer token
     /// is exchanged for an IAM Identity Center token.
-    identity_store_attribute_path: ?[]const u8,
+    identity_store_attribute_path: ?[]const u8 = null,
 
     /// The method that the trusted token issuer can use to retrieve the JSON Web
     /// Key Set used to verify a JWT.
-    jwks_retrieval_option: ?JwksRetrievalOption,
+    jwks_retrieval_option: ?JwksRetrievalOption = null,
 
     pub const json_field_names = .{
         .claim_attribute_path = "ClaimAttributePath",

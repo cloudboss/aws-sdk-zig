@@ -26,7 +26,7 @@ pub const SubscriptionTargetSummary = struct {
     id: []const u8,
 
     /// The manage access role specified in the subscription target.
-    manage_access_role: ?[]const u8,
+    manage_access_role: ?[]const u8 = null,
 
     /// The name of the subscription target.
     name: []const u8,
@@ -39,7 +39,7 @@ pub const SubscriptionTargetSummary = struct {
 
     /// Determines the subscription grant creation mode for this target, defining if
     /// grants are auto-created upon subscription approval or managed manually.
-    subscription_grant_creation_mode: ?SubscriptionGrantCreationMode,
+    subscription_grant_creation_mode: ?SubscriptionGrantCreationMode = null,
 
     /// The configuration of the subscription target.
     subscription_target_config: []const SubscriptionTargetForm,
@@ -48,10 +48,10 @@ pub const SubscriptionTargetSummary = struct {
     @"type": []const u8,
 
     /// The timestamp of when the subscription target was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The Amazon DataZone user who updated the subscription target.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .applicable_asset_types = "applicableAssetTypes",

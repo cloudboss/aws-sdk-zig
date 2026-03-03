@@ -4,15 +4,15 @@ const BlueprintStage = @import("blueprint_stage.zig").BlueprintStage;
 pub const BlueprintSummary = struct {
     blueprint_arn: []const u8,
 
-    blueprint_name: ?[]const u8,
+    blueprint_name: ?[]const u8 = null,
 
-    blueprint_stage: ?BlueprintStage,
+    blueprint_stage: ?BlueprintStage = null,
 
-    blueprint_version: ?[]const u8,
+    blueprint_version: ?[]const u8 = null,
 
     creation_time: i64,
 
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     pub const json_field_names = .{
         .blueprint_arn = "blueprintArn",

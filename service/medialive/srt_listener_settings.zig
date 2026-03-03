@@ -2,14 +2,14 @@ const SrtListenerDecryption = @import("srt_listener_decryption.zig").SrtListener
 
 /// Settings for SRT Listener input.
 pub const SrtListenerSettings = struct {
-    decryption: ?SrtListenerDecryption,
+    decryption: ?SrtListenerDecryption = null,
 
     /// The preferred latency (in milliseconds) for implementing packet loss and
     /// recovery. Range 120-15000.
-    minimum_latency: ?i32,
+    minimum_latency: ?i32 = null,
 
     /// The stream ID, if the upstream system uses this identifier.
-    stream_id: ?[]const u8,
+    stream_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .decryption = "Decryption",

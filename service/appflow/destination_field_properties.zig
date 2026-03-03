@@ -27,7 +27,7 @@ pub const DestinationFieldProperties = struct {
     /// field can be
     /// used in `idFieldNames` when that write operation is present as a destination
     /// option.
-    supported_write_operations: ?[]const WriteOperationType,
+    supported_write_operations: ?[]const WriteOperationType = null,
 
     pub const json_field_names = .{
         .is_creatable = "isCreatable",

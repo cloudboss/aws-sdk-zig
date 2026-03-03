@@ -9,7 +9,7 @@
 /// *Amazon Web Services CloudFormation User Guide*.
 pub const CloudFormationCostEstimationResourceCollectionFilter = struct {
     /// An array of CloudFormation stack names. Its size is fixed at 1 item.
-    stack_names: ?[]const []const u8,
+    stack_names: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .stack_names = "StackNames",

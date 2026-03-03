@@ -8,11 +8,11 @@ const ChannelProtocol = @import("channel_protocol.zig").ChannelProtocol;
 pub const ResourceEndpointListItem = struct {
     /// The protocol of the signaling channel returned by the
     /// `GetSignalingChannelEndpoint` API.
-    protocol: ?ChannelProtocol,
+    protocol: ?ChannelProtocol = null,
 
     /// The endpoint of the signaling channel returned by the
     /// `GetSignalingChannelEndpoint` API.
-    resource_endpoint: ?[]const u8,
+    resource_endpoint: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .protocol = "Protocol",

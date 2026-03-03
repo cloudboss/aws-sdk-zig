@@ -13,14 +13,14 @@ pub const OidcIdentityProviderConfigRequest = struct {
     client_id: []const u8,
 
     /// The JWT claim that the provider uses to return your groups.
-    groups_claim: ?[]const u8,
+    groups_claim: ?[]const u8 = null,
 
     /// The prefix that is prepended to group claims to prevent clashes with
     /// existing names
     /// (such as `system:` groups). For example, the value` oidc:` will
     /// create group names like `oidc:engineering` and
     /// `oidc:infra`.
-    groups_prefix: ?[]const u8,
+    groups_prefix: ?[]const u8 = null,
 
     /// The name of the OIDC provider configuration.
     identity_provider_config_name: []const u8,
@@ -44,14 +44,14 @@ pub const OidcIdentityProviderConfigRequest = struct {
     /// number of claims that you can require, see [Amazon EKS service
     /// quotas](https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html) in the
     /// *Amazon EKS User Guide*.
-    required_claims: ?[]const aws.map.StringMapEntry,
+    required_claims: ?[]const aws.map.StringMapEntry = null,
 
     /// The JSON Web Token (JWT) claim to use as the username. The default is
     /// `sub`, which is expected to be a unique identifier of the end user. You can
     /// choose other claims, such as `email` or `name`, depending on the
     /// OIDC identity provider. Claims other than `email` are prefixed with the
     /// issuer URL to prevent naming clashes with other plug-ins.
-    username_claim: ?[]const u8,
+    username_claim: ?[]const u8 = null,
 
     /// The prefix that is prepended to username claims to prevent clashes with
     /// existing
@@ -59,7 +59,7 @@ pub const OidcIdentityProviderConfigRequest = struct {
     /// than
     /// `email`, the prefix defaults to `issuerurl#`. You can use the
     /// value `-` to disable all prefixing.
-    username_prefix: ?[]const u8,
+    username_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_id = "clientId",

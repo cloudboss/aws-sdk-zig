@@ -5,11 +5,11 @@ const UserDefined = @import("user_defined.zig").UserDefined;
 pub const OutputResolutionStackInput = struct {
     /// A string value representing Predefined Output Resolution for a stacking
     /// operation. Allowed values are `HIGHEST`, `LOWEST`, and `AVERAGE`.
-    predefined: ?PredefinedResolution,
+    predefined: ?PredefinedResolution = null,
 
     /// The structure representing User Output Resolution for a Stacking operation
     /// defined as a value and unit.
-    user_defined: ?UserDefined,
+    user_defined: ?UserDefined = null,
 
     pub const json_field_names = .{
         .predefined = "Predefined",

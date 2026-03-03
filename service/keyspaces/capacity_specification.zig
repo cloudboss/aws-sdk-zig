@@ -14,7 +14,7 @@ const ThroughputMode = @import("throughput_mode.zig").ThroughputMode;
 pub const CapacitySpecification = struct {
     /// The throughput capacity specified for `read` operations defined in `read
     /// capacity units` `(RCUs)`.
-    read_capacity_units: ?i64,
+    read_capacity_units: ?i64 = null,
 
     /// The read/write throughput capacity mode for a table. The options are:
     ///
@@ -30,7 +30,7 @@ pub const CapacitySpecification = struct {
 
     /// The throughput capacity specified for `write` operations defined in `write
     /// capacity units` `(WCUs)`.
-    write_capacity_units: ?i64,
+    write_capacity_units: ?i64 = null,
 
     pub const json_field_names = .{
         .read_capacity_units = "readCapacityUnits",

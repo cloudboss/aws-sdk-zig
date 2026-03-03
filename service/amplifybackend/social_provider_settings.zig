@@ -4,13 +4,13 @@ const BackendAuthAppleProviderConfig = @import("backend_auth_apple_provider_conf
 /// The settings for using the social identity providers for access to your
 /// Amplify app.
 pub const SocialProviderSettings = struct {
-    facebook: ?BackendAuthSocialProviderConfig,
+    facebook: ?BackendAuthSocialProviderConfig = null,
 
-    google: ?BackendAuthSocialProviderConfig,
+    google: ?BackendAuthSocialProviderConfig = null,
 
-    login_with_amazon: ?BackendAuthSocialProviderConfig,
+    login_with_amazon: ?BackendAuthSocialProviderConfig = null,
 
-    sign_in_with_apple: ?BackendAuthAppleProviderConfig,
+    sign_in_with_apple: ?BackendAuthAppleProviderConfig = null,
 
     pub const json_field_names = .{
         .facebook = "Facebook",

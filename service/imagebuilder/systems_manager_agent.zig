@@ -10,7 +10,7 @@ pub const SystemsManagerAgent = struct {
     ///
     /// The default behavior of uninstallAfterBuild is to remove the SSM Agent if it
     /// was installed by EC2 Image Builder
-    uninstall_after_build: ?bool,
+    uninstall_after_build: ?bool = null,
 
     pub const json_field_names = .{
         .uninstall_after_build = "uninstallAfterBuild",

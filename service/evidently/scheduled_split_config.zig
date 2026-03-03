@@ -28,7 +28,7 @@ pub const ScheduledSplitConfig = struct {
     /// This parameter is an array of up to six segment override objects. Each of
     /// these objects specifies a segment that you have already created, and defines
     /// the traffic split for that segment.
-    segment_overrides: ?[]const SegmentOverride,
+    segment_overrides: ?[]const SegmentOverride = null,
 
     /// The date and time that this step of the launch starts.
     start_time: i64,

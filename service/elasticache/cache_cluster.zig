@@ -13,7 +13,7 @@ const TransitEncryptionMode = @import("transit_encryption_mode.zig").TransitEncr
 /// Contains all of the attributes of a specific cluster.
 pub const CacheCluster = struct {
     /// The ARN (Amazon Resource Name) of the cache cluster.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A flag that enables encryption at-rest when set to `true`.
     ///
@@ -27,42 +27,42 @@ pub const CacheCluster = struct {
     /// later.
     ///
     /// Default: `false`
-    at_rest_encryption_enabled: ?bool,
+    at_rest_encryption_enabled: ?bool = null,
 
     /// A flag that enables using an `AuthToken` (password) when issuing Valkey or
     /// Redis OSS
     /// commands.
     ///
     /// Default: `false`
-    auth_token_enabled: ?bool,
+    auth_token_enabled: ?bool = null,
 
     /// The date the auth token was last modified
-    auth_token_last_modified_date: ?i64,
+    auth_token_last_modified_date: ?i64 = null,
 
     /// If you are running Valkey or Redis OSS engine version 6.0 or later, set this
     /// parameter to yes if
     /// you want to opt-in to the next auto minor version upgrade campaign. This
     /// parameter is
     /// disabled for previous versions.
-    auto_minor_version_upgrade: ?bool,
+    auto_minor_version_upgrade: ?bool = null,
 
     /// The date and time when the cluster was created.
-    cache_cluster_create_time: ?i64,
+    cache_cluster_create_time: ?i64 = null,
 
     /// The user-supplied identifier of the cluster. This identifier is a unique key
     /// that
     /// identifies a cluster.
-    cache_cluster_id: ?[]const u8,
+    cache_cluster_id: ?[]const u8 = null,
 
     /// The current state of this cluster, one of the following values:
     /// `available`, `creating`, `deleted`,
     /// `deleting`, `incompatible-network`, `modifying`,
     /// `rebooting cluster nodes`, `restore-failed`, or
     /// `snapshotting`.
-    cache_cluster_status: ?[]const u8,
+    cache_cluster_status: ?[]const u8 = null,
 
     /// A list of cache nodes that are members of the cluster.
-    cache_nodes: ?[]const CacheNode,
+    cache_nodes: ?[]const CacheNode = null,
 
     /// The name of the compute and memory capacity node type for the cluster.
     ///
@@ -229,21 +229,21 @@ pub const CacheCluster = struct {
     /// `appendfsync` are not supported on Valkey, or on Redis OSS version 2.8.22
     /// and
     /// later.
-    cache_node_type: ?[]const u8,
+    cache_node_type: ?[]const u8 = null,
 
     /// Status of the cache parameter group.
-    cache_parameter_group: ?CacheParameterGroupStatus,
+    cache_parameter_group: ?CacheParameterGroupStatus = null,
 
     /// A list of cache security group elements, composed of name and status
     /// sub-elements.
-    cache_security_groups: ?[]const CacheSecurityGroupMembership,
+    cache_security_groups: ?[]const CacheSecurityGroupMembership = null,
 
     /// The name of the cache subnet group associated with the cluster.
-    cache_subnet_group_name: ?[]const u8,
+    cache_subnet_group_name: ?[]const u8 = null,
 
     /// The URL of the web page where you can download the latest ElastiCache client
     /// library.
-    client_download_landing_page: ?[]const u8,
+    client_download_landing_page: ?[]const u8 = null,
 
     /// Represents a Memcached cluster endpoint which can be used by an application
     /// to connect
@@ -251,52 +251,52 @@ pub const CacheCluster = struct {
     /// `.cfg` in it.
     ///
     /// Example: `mem-3.9dvc4r.cfg.usw2.cache.amazonaws.com:11211`
-    configuration_endpoint: ?Endpoint,
+    configuration_endpoint: ?Endpoint = null,
 
     /// The name of the cache engine (`memcached` or `redis`) to be used
     /// for this cluster.
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// The version of the cache engine that is used in this cluster.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// The network type associated with the cluster, either `ipv4` |
     /// `ipv6`. IPv6 is supported for workloads using Valkey 7.2 and above, Redis
     /// OSS engine version 6.2
     /// to 7.1 or Memcached engine version 1.6.6 and above on all instances built on
     /// the [Nitro system](http://aws.amazon.com/ec2/nitro/).
-    ip_discovery: ?IpDiscovery,
+    ip_discovery: ?IpDiscovery = null,
 
     /// Returns the destination, format and type of the logs.
-    log_delivery_configurations: ?[]const LogDeliveryConfiguration,
+    log_delivery_configurations: ?[]const LogDeliveryConfiguration = null,
 
     /// Must be either `ipv4` | `ipv6` | `dual_stack`. IPv6
     /// is supported for workloads using Valkey 7.2 and above, Redis OSS engine
     /// version 6.2
     /// 7.1 or Memcached engine version 1.6.6 and above on all instances built on
     /// the [Nitro system](http://aws.amazon.com/ec2/nitro/).
-    network_type: ?NetworkType,
+    network_type: ?NetworkType = null,
 
     /// Describes a notification topic and its status. Notification topics are used
     /// for
     /// publishing ElastiCache events to subscribers using Amazon Simple
     /// Notification Service
     /// (SNS).
-    notification_configuration: ?NotificationConfiguration,
+    notification_configuration: ?NotificationConfiguration = null,
 
     /// The number of cache nodes in the cluster.
     ///
     /// For clusters running Valkey or Redis OSS, this value must be 1. For clusters
     /// running Memcached, this
     /// value must be between 1 and 40.
-    num_cache_nodes: ?i32,
+    num_cache_nodes: ?i32 = null,
 
-    pending_modified_values: ?PendingModifiedValues,
+    pending_modified_values: ?PendingModifiedValues = null,
 
     /// The name of the Availability Zone in which the cluster is located or
     /// "Multiple" if the
     /// cache nodes are located in different Availability Zones.
-    preferred_availability_zone: ?[]const u8,
+    preferred_availability_zone: ?[]const u8 = null,
 
     /// Specifies the weekly time range during which maintenance on the cluster is
     /// performed.
@@ -321,23 +321,23 @@ pub const CacheCluster = struct {
     /// * `sat`
     ///
     /// Example: `sun:23:00-mon:01:30`
-    preferred_maintenance_window: ?[]const u8,
+    preferred_maintenance_window: ?[]const u8 = null,
 
     /// The outpost ARN in which the cache cluster is created.
-    preferred_outpost_arn: ?[]const u8,
+    preferred_outpost_arn: ?[]const u8 = null,
 
     /// The replication group to which this cluster belongs. If this field is empty,
     /// the
     /// cluster is not associated with any replication group.
-    replication_group_id: ?[]const u8,
+    replication_group_id: ?[]const u8 = null,
 
     /// A boolean value indicating whether log delivery is enabled for the
     /// replication
     /// group.
-    replication_group_log_delivery_enabled: ?bool,
+    replication_group_log_delivery_enabled: ?bool = null,
 
     /// A list of VPC Security Groups associated with the cluster.
-    security_groups: ?[]const SecurityGroupMembership,
+    security_groups: ?[]const SecurityGroupMembership = null,
 
     /// The number of days for which ElastiCache retains automatic cluster snapshots
     /// before
@@ -347,14 +347,14 @@ pub const CacheCluster = struct {
     /// If the value of SnapshotRetentionLimit is set to zero (0), backups are
     /// turned
     /// off.
-    snapshot_retention_limit: ?i32,
+    snapshot_retention_limit: ?i32 = null,
 
     /// The daily time range (in UTC) during which ElastiCache begins taking a daily
     /// snapshot
     /// of your cluster.
     ///
     /// Example: `05:00-09:00`
-    snapshot_window: ?[]const u8,
+    snapshot_window: ?[]const u8 = null,
 
     /// A flag that enables in-transit encryption when set to `true`.
     ///
@@ -363,10 +363,10 @@ pub const CacheCluster = struct {
     /// later.
     ///
     /// Default: `false`
-    transit_encryption_enabled: ?bool,
+    transit_encryption_enabled: ?bool = null,
 
     /// A setting that allows you to migrate your clients to use in-transit
     /// encryption, with
     /// no downtime.
-    transit_encryption_mode: ?TransitEncryptionMode,
+    transit_encryption_mode: ?TransitEncryptionMode = null,
 };

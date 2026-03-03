@@ -15,10 +15,10 @@ pub const Tag = struct {
     /// can only have one tag with the same key. If you try to add an existing tag
     /// (same key),
     /// the existing tag value will be updated to the new value.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value of the tag. Tag values are case-sensitive and can be null.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

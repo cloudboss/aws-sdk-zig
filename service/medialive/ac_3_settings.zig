@@ -9,35 +9,35 @@ const Ac3MetadataControl = @import("ac_3_metadata_control.zig").Ac3MetadataContr
 pub const Ac3Settings = struct {
     /// Applies a 3 dB attenuation to the surround channels. Applies only when the
     /// coding mode parameter is CODING_MODE_3_2_LFE.
-    attenuation_control: ?Ac3AttenuationControl,
+    attenuation_control: ?Ac3AttenuationControl = null,
 
     /// Average bitrate in bits/second. Valid bitrates depend on the coding mode.
-    bitrate: ?f64,
+    bitrate: ?f64 = null,
 
     /// Specifies the bitstream mode (bsmod) for the emitted AC-3 stream. See ATSC
     /// A/52-2012 for background on these values.
-    bitstream_mode: ?Ac3BitstreamMode,
+    bitstream_mode: ?Ac3BitstreamMode = null,
 
     /// Dolby Digital coding mode. Determines number of channels.
-    coding_mode: ?Ac3CodingMode,
+    coding_mode: ?Ac3CodingMode = null,
 
     /// Sets the dialnorm for the output. If excluded and input audio is Dolby
     /// Digital, dialnorm will be passed through.
-    dialnorm: ?i32,
+    dialnorm: ?i32 = null,
 
     /// If set to filmStandard, adds dynamic range compression signaling to the
     /// output bitstream as defined in the Dolby Digital specification.
-    drc_profile: ?Ac3DrcProfile,
+    drc_profile: ?Ac3DrcProfile = null,
 
     /// When set to enabled, applies a 120Hz lowpass filter to the LFE channel prior
     /// to encoding. Only valid in codingMode32Lfe mode.
-    lfe_filter: ?Ac3LfeFilter,
+    lfe_filter: ?Ac3LfeFilter = null,
 
     /// When set to "followInput", encoder metadata will be sourced from the DD,
     /// DD+, or DolbyE decoder that supplied this audio data. If audio was not
     /// supplied from one of these streams, then the static metadata settings will
     /// be used.
-    metadata_control: ?Ac3MetadataControl,
+    metadata_control: ?Ac3MetadataControl = null,
 
     pub const json_field_names = .{
         .attenuation_control = "AttenuationControl",

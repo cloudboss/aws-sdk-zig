@@ -2,7 +2,7 @@
 /// in a given job.
 pub const MediaAnalysisModelVersions = struct {
     /// The Moderation base model version.
-    moderation: ?[]const u8,
+    moderation: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .moderation = "Moderation",

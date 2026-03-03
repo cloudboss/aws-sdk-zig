@@ -1,16 +1,16 @@
 /// Details of the Firewall Manager protocols list.
 pub const ProtocolsListDataSummary = struct {
     /// The Amazon Resource Name (ARN) of the specified protocols list.
-    list_arn: ?[]const u8,
+    list_arn: ?[]const u8 = null,
 
     /// The ID of the specified protocols list.
-    list_id: ?[]const u8,
+    list_id: ?[]const u8 = null,
 
     /// The name of the specified protocols list.
-    list_name: ?[]const u8,
+    list_name: ?[]const u8 = null,
 
     /// An array of protocols in the Firewall Manager protocols list.
-    protocols_list: ?[]const []const u8,
+    protocols_list: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .list_arn = "ListArn",

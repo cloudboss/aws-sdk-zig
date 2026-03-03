@@ -13,10 +13,10 @@ pub const AppComponent = struct {
     /// Key: `"failover-regions"`
     ///
     /// Value: `"[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
-    additional_info: ?[]const aws.map.MapEntry([]const []const u8),
+    additional_info: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// Identifier of the Application Component.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Name of the Application Component.
     name: []const u8,

@@ -9,7 +9,7 @@ pub const CreateSecurityConfigurationRequest = struct {
     client_token: []const u8,
 
     /// The container provider associated with the security configuration.
-    container_provider: ?ContainerProvider,
+    container_provider: ?ContainerProvider = null,
 
     /// The name of the security configuration.
     name: []const u8,
@@ -18,7 +18,7 @@ pub const CreateSecurityConfigurationRequest = struct {
     security_configuration_data: SecurityConfigurationData,
 
     /// The tags to add to the security configuration.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .client_token = "clientToken",

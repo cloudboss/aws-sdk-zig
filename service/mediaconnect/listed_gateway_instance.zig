@@ -13,7 +13,7 @@ pub const ListedGatewayInstance = struct {
     instance_id: []const u8,
 
     /// The status of the instance.
-    instance_state: ?InstanceState,
+    instance_state: ?InstanceState = null,
 
     pub const json_field_names = .{
         .gateway_arn = "GatewayArn",

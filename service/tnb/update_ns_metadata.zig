@@ -2,7 +2,7 @@
 /// network instance.
 pub const UpdateNsMetadata = struct {
     /// The configurable properties used during update.
-    additional_params_for_ns: ?[]const u8,
+    additional_params_for_ns: ?[]const u8 = null,
 
     /// The network service descriptor used for updating the network instance.
     nsd_info_id: []const u8,

@@ -14,30 +14,30 @@ pub const ImageBuilder = struct {
     /// The list of virtual private cloud (VPC) interface endpoint objects.
     /// Administrators can connect to the image builder only through the specified
     /// endpoints.
-    access_endpoints: ?[]const AccessEndpoint,
+    access_endpoints: ?[]const AccessEndpoint = null,
 
     /// The version of the WorkSpaces Applications agent that is currently being
     /// used by the image builder.
-    appstream_agent_version: ?[]const u8,
+    appstream_agent_version: ?[]const u8 = null,
 
     /// The ARN for the image builder.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time stamp when the image builder was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The description to display.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The image builder name to display.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The name of the directory and organizational unit (OU) to use to join the
     /// image builder to a Microsoft Active Directory domain.
-    domain_join_info: ?DomainJoinInfo,
+    domain_join_info: ?DomainJoinInfo = null,
 
     /// Enables or disables default internet access for the image builder.
-    enable_default_internet_access: ?bool,
+    enable_default_internet_access: ?bool = null,
 
     /// The ARN of the IAM role that is applied to the image builder. To assume a
     /// role, the image builder calls the AWS Security Token Service (STS)
@@ -49,13 +49,13 @@ pub const ImageBuilder = struct {
     /// For more information, see [Using an IAM Role to Grant Permissions to
     /// Applications and Scripts Running on WorkSpaces Applications Streaming
     /// Instances](https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html) in the *Amazon WorkSpaces Applications Administration Guide*.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// The ARN of the image from which this builder was created.
-    image_arn: ?[]const u8,
+    image_arn: ?[]const u8 = null,
 
     /// The image builder errors.
-    image_builder_errors: ?[]const ResourceError,
+    image_builder_errors: ?[]const ResourceError = null,
 
     /// The instance type for the image builder. The following instance types are
     /// available:
@@ -151,32 +151,32 @@ pub const ImageBuilder = struct {
     /// * stream.graphics.g6f.4xlarge
     ///
     /// * stream.graphics.gr6f.4xlarge
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// Indicates whether the image builder is using the latest WorkSpaces
     /// Applications agent version or not.
-    latest_appstream_agent_version: ?LatestAppstreamAgentVersion,
+    latest_appstream_agent_version: ?LatestAppstreamAgentVersion = null,
 
     /// The name of the image builder.
     name: []const u8,
 
-    network_access_configuration: ?NetworkAccessConfiguration,
+    network_access_configuration: ?NetworkAccessConfiguration = null,
 
     /// The operating system platform of the image builder.
-    platform: ?PlatformType,
+    platform: ?PlatformType = null,
 
     /// The current configuration of the root volume for the image builder,
     /// including the storage size in GB.
-    root_volume_config: ?VolumeConfig,
+    root_volume_config: ?VolumeConfig = null,
 
     /// The state of the image builder.
-    state: ?ImageBuilderState,
+    state: ?ImageBuilderState = null,
 
     /// The reason why the last state change occurred.
-    state_change_reason: ?ImageBuilderStateChangeReason,
+    state_change_reason: ?ImageBuilderStateChangeReason = null,
 
     /// The VPC configuration of the image builder.
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .access_endpoints = "AccessEndpoints",

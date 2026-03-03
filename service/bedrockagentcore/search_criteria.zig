@@ -3,10 +3,10 @@ const MemoryMetadataFilterExpression = @import("memory_metadata_filter_expressio
 /// Contains search criteria for retrieving memory records.
 pub const SearchCriteria = struct {
     /// The memory strategy identifier to filter memory records by.
-    memory_strategy_id: ?[]const u8,
+    memory_strategy_id: ?[]const u8 = null,
 
     /// Filters to apply to metadata associated with a memory.
-    metadata_filters: ?[]const MemoryMetadataFilterExpression,
+    metadata_filters: ?[]const MemoryMetadataFilterExpression = null,
 
     /// The search query to use for finding relevant memory records.
     search_query: []const u8,

@@ -7,22 +7,22 @@ pub const S3OnDeviceServiceConfiguration = struct {
     /// additional input helps when the specified `StorageLimit` matches more than
     /// one Amazon S3 compatible storage on Snow family devices service
     /// configuration.
-    fault_tolerance: ?i32,
+    fault_tolerance: ?i32 = null,
 
     /// Applicable when creating a cluster. Specifies how many nodes are needed for
     /// Amazon S3 compatible storage on Snow family devices. If specified, the other
     /// input can be omitted.
-    service_size: ?i32,
+    service_size: ?i32 = null,
 
     /// If the specified storage limit value matches storage limit of one of the
     /// defined configurations, that configuration will be used.
     /// If the specified storage limit value does not match any defined
     /// configuration, the request will fail. If more than one configuration has
     /// the same storage limit as specified, the other input need to be provided.
-    storage_limit: ?f64,
+    storage_limit: ?f64 = null,
 
     /// Storage unit. Currently the only supported unit is TB.
-    storage_unit: ?StorageUnit,
+    storage_unit: ?StorageUnit = null,
 
     pub const json_field_names = .{
         .fault_tolerance = "FaultTolerance",

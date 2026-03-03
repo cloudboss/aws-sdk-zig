@@ -8,25 +8,25 @@ const SourceType = @import("source_type.zig").SourceType;
 /// the control.
 pub const ControlMappingSource = struct {
     /// The description of the source.
-    source_description: ?[]const u8,
+    source_description: ?[]const u8 = null,
 
     /// Specifies how often evidence is collected from the control mapping source.
-    source_frequency: ?SourceFrequency,
+    source_frequency: ?SourceFrequency = null,
 
     /// The unique identifier for the source.
-    source_id: ?[]const u8,
+    source_id: ?[]const u8 = null,
 
-    source_keyword: ?SourceKeyword,
+    source_keyword: ?SourceKeyword = null,
 
     /// The name of the source.
-    source_name: ?[]const u8,
+    source_name: ?[]const u8 = null,
 
     /// The setup option for the data source. This option reflects if the evidence
     /// collection
     /// method is automated or manual. If you don’t provide a value for
     /// `sourceSetUpOption`, Audit Manager automatically infers and populates
     /// the correct value based on the `sourceType` that you specify.
-    source_set_up_option: ?SourceSetUpOption,
+    source_set_up_option: ?SourceSetUpOption = null,
 
     /// Specifies which type of data source is used to collect evidence.
     ///
@@ -36,10 +36,10 @@ pub const ControlMappingSource = struct {
     ///
     /// * The source can also be a managed grouping of data sources, such as a
     /// `Core_Control` or a `Common_Control`.
-    source_type: ?SourceType,
+    source_type: ?SourceType = null,
 
     /// The instructions for troubleshooting the control.
-    troubleshooting_text: ?[]const u8,
+    troubleshooting_text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_description = "sourceDescription",

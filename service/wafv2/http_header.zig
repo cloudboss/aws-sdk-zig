@@ -4,10 +4,10 @@
 /// the web requests.
 pub const HTTPHeader = struct {
     /// The name of the HTTP header.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The value of the HTTP header.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

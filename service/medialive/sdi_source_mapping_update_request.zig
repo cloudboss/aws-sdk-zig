@@ -6,15 +6,15 @@ pub const SdiSourceMappingUpdateRequest = struct {
     /// information about how physical cards are identified on your node hardware,
     /// see the documentation for your node hardware. The numbering always starts at
     /// 1.
-    card_number: ?i32,
+    card_number: ?i32 = null,
 
     /// A number that uniquely identifies a port on the card. This must be an SDI
     /// port (not a timecode port, for example). For information about how ports are
     /// identified on physical cards, see the documentation for your node hardware.
-    channel_number: ?i32,
+    channel_number: ?i32 = null,
 
     /// The ID of a SDI source streaming on the given SDI capture card port.
-    sdi_source: ?[]const u8,
+    sdi_source: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .card_number = "CardNumber",

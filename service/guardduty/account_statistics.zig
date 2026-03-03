@@ -2,13 +2,13 @@
 /// with each account.
 pub const AccountStatistics = struct {
     /// The ID of the Amazon Web Services account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The timestamp at which the finding for this account was last generated.
-    last_generated_at: ?i64,
+    last_generated_at: ?i64 = null,
 
     /// The total number of findings associated with an account.
-    total_findings: ?i32,
+    total_findings: ?i32 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

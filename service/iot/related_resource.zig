@@ -6,13 +6,13 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// Information about a related resource.
 pub const RelatedResource = struct {
     /// Other information about the resource.
-    additional_info: ?[]const aws.map.StringMapEntry,
+    additional_info: ?[]const aws.map.StringMapEntry = null,
 
     /// Information that identifies the resource.
-    resource_identifier: ?ResourceIdentifier,
+    resource_identifier: ?ResourceIdentifier = null,
 
     /// The type of resource.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .additional_info = "additionalInfo",

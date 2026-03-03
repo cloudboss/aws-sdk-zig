@@ -5,7 +5,7 @@ pub const AlarmEventActions = struct {
     /// Specifies one or more supported actions to receive notifications when the
     /// alarm state
     /// changes.
-    alarm_actions: ?[]const AlarmAction,
+    alarm_actions: ?[]const AlarmAction = null,
 
     pub const json_field_names = .{
         .alarm_actions = "alarmActions",

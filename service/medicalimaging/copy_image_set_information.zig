@@ -4,7 +4,7 @@ const CopySourceImageSetInformation = @import("copy_source_image_set_information
 /// Copy image set information.
 pub const CopyImageSetInformation = struct {
     /// The destination image set.
-    destination_image_set: ?CopyDestinationImageSet,
+    destination_image_set: ?CopyDestinationImageSet = null,
 
     /// The source image set.
     source_image_set: CopySourceImageSetInformation,

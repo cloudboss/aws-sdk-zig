@@ -24,7 +24,7 @@ pub const AutoExportPolicy = struct {
     /// on the data repository when they are deleted on the file system.
     ///
     /// You can define any combination of event types for your `AutoExportPolicy`.
-    events: ?[]const EventType,
+    events: ?[]const EventType = null,
 
     pub const json_field_names = .{
         .events = "Events",

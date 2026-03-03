@@ -10,13 +10,13 @@ pub const SummarizedCounter = struct {
     n: i32 = 0,
 
     /// The counter name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The total of counter values for a specified time period.
     sum: f64 = 0,
 
     /// The unit of the counters.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .average = "Average",

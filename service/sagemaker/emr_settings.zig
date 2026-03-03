@@ -13,7 +13,7 @@ pub const EmrSettings = struct {
     /// typically used in cross-account access scenarios, where the Amazon EMR
     /// resources (clusters or serverless applications) are located in a different
     /// Amazon Web Services account than the SageMaker domain.
-    assumable_role_arns: ?[]const []const u8,
+    assumable_role_arns: ?[]const []const u8 = null,
 
     /// An array of Amazon Resource Names (ARNs) of the IAM roles used by the Amazon
     /// EMR cluster instances or job execution environments to access other Amazon
@@ -21,7 +21,7 @@ pub const EmrSettings = struct {
     /// EMR or Amazon EMR Serverless workloads, such as Amazon S3 for data access,
     /// Amazon CloudWatch for logging, or other Amazon Web Services services based
     /// on the particular workload requirements.
-    execution_role_arns: ?[]const []const u8,
+    execution_role_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .assumable_role_arns = "AssumableRoleArns",

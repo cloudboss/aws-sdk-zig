@@ -7,11 +7,11 @@ const DataPrepSimpleAggregationFunction = @import("data_prep_simple_aggregation_
 pub const DataPrepAggregationFunction = struct {
     /// A list aggregation function that concatenates values from multiple rows into
     /// a single delimited string.
-    list_aggregation: ?DataPrepListAggregationFunction,
+    list_aggregation: ?DataPrepListAggregationFunction = null,
 
     /// A simple aggregation function such as `SUM`, `COUNT`, `AVERAGE`,
     /// `MIN`, `MAX`, `MEDIAN`, `VARIANCE`, or `STANDARD_DEVIATION`.
-    simple_aggregation: ?DataPrepSimpleAggregationFunction,
+    simple_aggregation: ?DataPrepSimpleAggregationFunction = null,
 
     pub const json_field_names = .{
         .list_aggregation = "ListAggregation",

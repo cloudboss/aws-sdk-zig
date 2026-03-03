@@ -9,5 +9,5 @@ pub const WebAclCustomization = struct {
     action: CustomizationActionType,
 
     /// The Amazon Resource Name (ARN) of the WAF web ACL.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 };

@@ -8,18 +8,18 @@ pub const Bucket = struct {
     /// information, see [Using tags with
     /// directory
     /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html).
-    bucket_arn: ?[]const u8,
+    bucket_arn: ?[]const u8 = null,
 
     /// `BucketRegion` indicates the Amazon Web Services region where the bucket is
     /// located. If the request
     /// contains at least one valid parameter, it is included in the response.
-    bucket_region: ?[]const u8,
+    bucket_region: ?[]const u8 = null,
 
     /// Date the bucket was created. This date can change when making changes to
     /// your bucket, such as
     /// editing its bucket policy.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The name of the bucket.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 };

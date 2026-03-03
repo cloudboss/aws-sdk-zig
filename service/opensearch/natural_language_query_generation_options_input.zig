@@ -7,7 +7,7 @@ pub const NaturalLanguageQueryGenerationOptionsInput = struct {
     /// The desired state of the natural language query generation feature. Valid
     /// values are
     /// ENABLED and DISABLED.
-    desired_state: ?NaturalLanguageQueryGenerationDesiredState,
+    desired_state: ?NaturalLanguageQueryGenerationDesiredState = null,
 
     pub const json_field_names = .{
         .desired_state = "DesiredState",

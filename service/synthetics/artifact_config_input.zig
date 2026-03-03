@@ -13,7 +13,7 @@ pub const ArtifactConfigInput = struct {
     /// syn-nodejs-puppeteer-3.3 or later. For more information, see
     /// [Encrypting canary
     /// artifacts](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html)
-    s3_encryption: ?S3EncryptionConfig,
+    s3_encryption: ?S3EncryptionConfig = null,
 
     pub const json_field_names = .{
         .s3_encryption = "S3Encryption",

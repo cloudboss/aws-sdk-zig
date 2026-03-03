@@ -8,7 +8,7 @@ pub const CodegenGenericDataModel = struct {
     fields: []const aws.map.MapEntry(CodegenGenericDataField),
 
     /// Specifies whether the generic data model is a join table.
-    is_join_table: ?bool,
+    is_join_table: ?bool = null,
 
     /// The primary keys of the generic data model.
     primary_keys: []const []const u8,

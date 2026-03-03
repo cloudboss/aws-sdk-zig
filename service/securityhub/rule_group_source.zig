@@ -6,17 +6,17 @@ const RuleGroupSourceStatelessRulesAndCustomActionsDetails = @import("rule_group
 pub const RuleGroupSource = struct {
     /// Stateful inspection criteria for a domain list rule group. A domain list
     /// rule group determines access by specific protocols to specific domains.
-    rules_source_list: ?RuleGroupSourceListDetails,
+    rules_source_list: ?RuleGroupSourceListDetails = null,
 
     /// Stateful inspection criteria, provided in Suricata compatible intrusion
     /// prevention system (IPS) rules.
-    rules_string: ?[]const u8,
+    rules_string: ?[]const u8 = null,
 
     /// Suricata rule specifications.
-    stateful_rules: ?[]const RuleGroupSourceStatefulRulesDetails,
+    stateful_rules: ?[]const RuleGroupSourceStatefulRulesDetails = null,
 
     /// The stateless rules and custom actions used by a stateless rule group.
-    stateless_rules_and_custom_actions: ?RuleGroupSourceStatelessRulesAndCustomActionsDetails,
+    stateless_rules_and_custom_actions: ?RuleGroupSourceStatelessRulesAndCustomActionsDetails = null,
 
     pub const json_field_names = .{
         .rules_source_list = "RulesSourceList",

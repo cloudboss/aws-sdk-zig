@@ -1,7 +1,7 @@
 /// Describes a state change.
 pub const StateReason = struct {
     /// The reason code for the state change.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The message for the state change.
     ///
@@ -49,5 +49,5 @@ pub const StateReason = struct {
     /// volumes or total storage was exceeded. Decrease usage or request an increase
     /// in
     /// your account limits.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

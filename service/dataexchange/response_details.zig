@@ -11,31 +11,31 @@ const ImportAssetsFromS3ResponseDetails = @import("import_assets_from_s3_respons
 /// Details for the response.
 pub const ResponseDetails = struct {
     /// Response details from the CreateS3DataAccessFromS3Bucket job.
-    create_s3_data_access_from_s3_bucket: ?CreateS3DataAccessFromS3BucketResponseDetails,
+    create_s3_data_access_from_s3_bucket: ?CreateS3DataAccessFromS3BucketResponseDetails = null,
 
     /// Details for the export to Amazon S3 response.
-    export_assets_to_s3: ?ExportAssetsToS3ResponseDetails,
+    export_assets_to_s3: ?ExportAssetsToS3ResponseDetails = null,
 
     /// Details for the export to signed URL response.
-    export_asset_to_signed_url: ?ExportAssetToSignedUrlResponseDetails,
+    export_asset_to_signed_url: ?ExportAssetToSignedUrlResponseDetails = null,
 
     /// Details for the export revisions to Amazon S3 response.
-    export_revisions_to_s3: ?ExportRevisionsToS3ResponseDetails,
+    export_revisions_to_s3: ?ExportRevisionsToS3ResponseDetails = null,
 
     /// The response details.
-    import_asset_from_api_gateway_api: ?ImportAssetFromApiGatewayApiResponseDetails,
+    import_asset_from_api_gateway_api: ?ImportAssetFromApiGatewayApiResponseDetails = null,
 
     /// Details for the import from signed URL response.
-    import_asset_from_signed_url: ?ImportAssetFromSignedUrlResponseDetails,
+    import_asset_from_signed_url: ?ImportAssetFromSignedUrlResponseDetails = null,
 
     /// Response details from the ImportAssetsFromLakeFormationTagPolicy job.
-    import_assets_from_lake_formation_tag_policy: ?ImportAssetsFromLakeFormationTagPolicyResponseDetails,
+    import_assets_from_lake_formation_tag_policy: ?ImportAssetsFromLakeFormationTagPolicyResponseDetails = null,
 
     /// Details from an import from Amazon Redshift datashare response.
-    import_assets_from_redshift_data_shares: ?ImportAssetsFromRedshiftDataSharesResponseDetails,
+    import_assets_from_redshift_data_shares: ?ImportAssetsFromRedshiftDataSharesResponseDetails = null,
 
     /// Details for the import from Amazon S3 response.
-    import_assets_from_s3: ?ImportAssetsFromS3ResponseDetails,
+    import_assets_from_s3: ?ImportAssetsFromS3ResponseDetails = null,
 
     pub const json_field_names = .{
         .create_s3_data_access_from_s3_bucket = "CreateS3DataAccessFromS3Bucket",

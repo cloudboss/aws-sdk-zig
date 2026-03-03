@@ -16,10 +16,10 @@ pub const PackageVersionError = struct {
     /// * `NOT_FOUND`
     ///
     /// * `SKIPPED`
-    error_code: ?PackageVersionErrorCode,
+    error_code: ?PackageVersionErrorCode = null,
 
     /// The error message associated with the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

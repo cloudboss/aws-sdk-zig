@@ -16,7 +16,7 @@ pub const InstanceMaintenancePolicy = struct {
     /// specified, and the difference between them cannot be greater than 100. A
     /// large range
     /// increases the number of instances that can be replaced at the same time.
-    max_healthy_percentage: ?i32,
+    max_healthy_percentage: ?i32 = null,
 
     /// Specifies the lower threshold as a percentage of the desired capacity of the
     /// Auto Scaling
@@ -25,5 +25,5 @@ pub const InstanceMaintenancePolicy = struct {
     /// and ready to use to support your workload when replacing instances. Value
     /// range is 0 to
     /// 100. To clear a previously set value, specify a value of `-1`.
-    min_healthy_percentage: ?i32,
+    min_healthy_percentage: ?i32 = null,
 };

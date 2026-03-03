@@ -11,7 +11,7 @@ pub const AdditionalInferenceSpecificationDefinition = struct {
     containers: []const ModelPackageContainerDefinition,
 
     /// A description of the additional Inference specification
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique name to identify the additional inference specification. The name
     /// must be unique within the list of your additional inference specifications
@@ -19,18 +19,18 @@ pub const AdditionalInferenceSpecificationDefinition = struct {
     name: []const u8,
 
     /// The supported MIME types for the input data.
-    supported_content_types: ?[]const []const u8,
+    supported_content_types: ?[]const []const u8 = null,
 
     /// A list of the instance types that are used to generate inferences in
     /// real-time.
-    supported_realtime_inference_instance_types: ?[]const ProductionVariantInstanceType,
+    supported_realtime_inference_instance_types: ?[]const ProductionVariantInstanceType = null,
 
     /// The supported MIME types for the output data.
-    supported_response_mime_types: ?[]const []const u8,
+    supported_response_mime_types: ?[]const []const u8 = null,
 
     /// A list of the instance types on which a transformation job can be run or on
     /// which an endpoint can be deployed.
-    supported_transform_instance_types: ?[]const TransformInstanceType,
+    supported_transform_instance_types: ?[]const TransformInstanceType = null,
 
     pub const json_field_names = .{
         .containers = "Containers",

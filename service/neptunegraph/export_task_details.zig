@@ -1,10 +1,10 @@
 /// Contains details about the specified export task.
 pub const ExportTaskDetails = struct {
     /// The number of exported edges.
-    num_edges_written: ?i64,
+    num_edges_written: ?i64 = null,
 
     /// The number of exported vertices.
-    num_vertices_written: ?i64,
+    num_vertices_written: ?i64 = null,
 
     /// The number of progress percentage of the export task.
     progress_percentage: i32,

@@ -1,6 +1,6 @@
 pub const DeleteProjectResponse = struct {
     /// The friendly name displayed to users of the project in Amazon CodeCatalyst.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The name of the project in the space.
     name: []const u8,

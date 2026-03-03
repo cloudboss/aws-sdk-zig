@@ -9,26 +9,26 @@ const Tag = @import("tag.zig").Tag;
 /// Monitor](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html).
 pub const MonitoringSchedule = struct {
     /// The time that the monitoring schedule was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The endpoint that hosts the model being monitored.
-    endpoint_name: ?[]const u8,
+    endpoint_name: ?[]const u8 = null,
 
     /// If the monitoring schedule failed, the reason it failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The last time the monitoring schedule was changed.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
-    last_monitoring_execution_summary: ?MonitoringExecutionSummary,
+    last_monitoring_execution_summary: ?MonitoringExecutionSummary = null,
 
     /// The Amazon Resource Name (ARN) of the monitoring schedule.
-    monitoring_schedule_arn: ?[]const u8,
+    monitoring_schedule_arn: ?[]const u8 = null,
 
-    monitoring_schedule_config: ?MonitoringScheduleConfig,
+    monitoring_schedule_config: ?MonitoringScheduleConfig = null,
 
     /// The name of the monitoring schedule.
-    monitoring_schedule_name: ?[]const u8,
+    monitoring_schedule_name: ?[]const u8 = null,
 
     /// The status of the monitoring schedule. This can be one of the following
     /// values.
@@ -37,16 +37,16 @@ pub const MonitoringSchedule = struct {
     /// * `FAILED` - The schedule failed.
     /// * `SCHEDULED` - The schedule was successfully created.
     /// * `STOPPED` - The schedule was stopped.
-    monitoring_schedule_status: ?ScheduleStatus,
+    monitoring_schedule_status: ?ScheduleStatus = null,
 
     /// The type of the monitoring job definition to schedule.
-    monitoring_type: ?MonitoringType,
+    monitoring_type: ?MonitoringType = null,
 
     /// A list of the tags associated with the monitoring schedlue. For more
     /// information, see [Tagging Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
     /// in the *Amazon Web Services General Reference Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

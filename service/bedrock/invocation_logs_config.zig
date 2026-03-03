@@ -7,7 +7,7 @@ pub const InvocationLogsConfig = struct {
     invocation_log_source: InvocationLogSource,
 
     /// Rules for filtering invocation logs based on request metadata.
-    request_metadata_filters: ?RequestMetadataFilters,
+    request_metadata_filters: ?RequestMetadataFilters = null,
 
     /// Whether to use the model's response for training, or just the prompt. The
     /// default value is `False`.

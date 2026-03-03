@@ -9,7 +9,7 @@ pub const MapFilter = struct {
     key: []const u8,
 
     /// The tag value used in the filter.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comparison = "comparison",

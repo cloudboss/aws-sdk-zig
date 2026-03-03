@@ -7,17 +7,17 @@ pub const HyperParameterAlgorithmSpecification = struct {
     /// The name of the resource algorithm to use for the hyperparameter tuning job.
     /// If you specify a value for this parameter, do not specify a value for
     /// `TrainingImage`.
-    algorithm_name: ?[]const u8,
+    algorithm_name: ?[]const u8 = null,
 
     /// An array of
     /// [MetricDefinition](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_MetricDefinition.html) objects that specify the metrics that the algorithm emits.
-    metric_definitions: ?[]const MetricDefinition,
+    metric_definitions: ?[]const MetricDefinition = null,
 
     /// The registry path of the Docker image that contains the training algorithm.
     /// For information about Docker registry paths for built-in algorithms, see
     /// [Algorithms Provided by Amazon SageMaker: Common
     /// Parameters](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html). SageMaker supports both `registry/repository[:tag]` and `registry/repository[@digest]` image path formats. For more information, see [Using Your Own Algorithms with Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
-    training_image: ?[]const u8,
+    training_image: ?[]const u8 = null,
 
     training_input_mode: TrainingInputMode,
 

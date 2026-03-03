@@ -6,12 +6,12 @@ const RouterEncryptionType = @import("router_encryption_type.zig").RouterEncrypt
 pub const RouterSettings = struct {
     /// Destinations for the input from MediaConnect Router. Provide one for a
     /// single-pipeline input and two for a standard input.
-    destinations: ?[]const RouterDestinationSettings,
+    destinations: ?[]const RouterDestinationSettings = null,
 
-    encryption_type: ?RouterEncryptionType,
+    encryption_type: ?RouterEncryptionType = null,
 
     /// ARN of the secret used to encrypt this input.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destinations = "Destinations",

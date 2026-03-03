@@ -21,7 +21,7 @@ pub const EndpointDescription = struct {
     /// For more information, see [
     /// Preserve client IP addresses in Global
     /// Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html) in the *Global Accelerator Developer Guide*.
-    client_ip_preservation_enabled: ?bool,
+    client_ip_preservation_enabled: ?bool = null,
 
     /// An ID for the endpoint. If the endpoint is a Network Load Balancer or
     /// Application Load Balancer, this is the Amazon
@@ -30,13 +30,13 @@ pub const EndpointDescription = struct {
     /// allocation ID. For Amazon EC2 instances, this is the EC2 instance ID.
     ///
     /// An Application Load Balancer can be either internal or internet-facing.
-    endpoint_id: ?[]const u8,
+    endpoint_id: ?[]const u8 = null,
 
     /// Returns a null result.
-    health_reason: ?[]const u8,
+    health_reason: ?[]const u8 = null,
 
     /// The health status of the endpoint.
-    health_state: ?HealthState,
+    health_state: ?HealthState = null,
 
     /// The weight associated with the endpoint. When you add weights to endpoints,
     /// you configure Global Accelerator to route traffic
@@ -48,7 +48,7 @@ pub const EndpointDescription = struct {
     /// information, see [Endpoint
     /// weights](https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html) in the
     /// *Global Accelerator Developer Guide*.
-    weight: ?i32,
+    weight: ?i32 = null,
 
     pub const json_field_names = .{
         .client_ip_preservation_enabled = "ClientIPPreservationEnabled",

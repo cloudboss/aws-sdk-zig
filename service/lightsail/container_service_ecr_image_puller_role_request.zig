@@ -17,7 +17,7 @@
 /// service](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-container-service-ecr-private-repo-access) in the *Amazon Lightsail Developer Guide*.
 pub const ContainerServiceECRImagePullerRoleRequest = struct {
     /// A Boolean value that indicates whether to activate the role.
-    is_active: ?bool,
+    is_active: ?bool = null,
 
     pub const json_field_names = .{
         .is_active = "isActive",

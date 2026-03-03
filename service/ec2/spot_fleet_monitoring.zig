@@ -3,5 +3,5 @@ pub const SpotFleetMonitoring = struct {
     /// Enables monitoring for the instance.
     ///
     /// Default: `false`
-    enabled: ?bool,
+    enabled: ?bool = null,
 };

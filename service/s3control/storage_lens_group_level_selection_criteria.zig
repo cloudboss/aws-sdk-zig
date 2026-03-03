@@ -9,9 +9,9 @@ pub const StorageLensGroupLevelSelectionCriteria = struct {
     /// Indicates which Storage Lens group ARNs to exclude from the Storage Lens
     /// group
     /// aggregation.
-    exclude: ?[]const []const u8,
+    exclude: ?[]const []const u8 = null,
 
     /// Indicates which Storage Lens group ARNs to include in the Storage Lens group
     /// aggregation.
-    include: ?[]const []const u8,
+    include: ?[]const []const u8 = null,
 };

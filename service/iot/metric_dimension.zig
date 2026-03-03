@@ -11,7 +11,7 @@ pub const MetricDimension = struct {
     /// operator, a message will be counted only if it doesn't match any of the
     /// topic filters. The operator is optional: if it's not provided (is `null`),
     /// it will be interpreted as `IN`.
-    operator: ?DimensionValueOperator,
+    operator: ?DimensionValueOperator = null,
 
     pub const json_field_names = .{
         .dimension_name = "dimensionName",

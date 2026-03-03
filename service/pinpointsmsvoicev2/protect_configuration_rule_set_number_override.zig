@@ -15,11 +15,11 @@ pub const ProtectConfigurationRuleSetNumberOverride = struct {
 
     /// The time the rule will expire at. If `ExpirationTimestamp` is not set then
     /// the rule will not expire.
-    expiration_timestamp: ?i64,
+    expiration_timestamp: ?i64 = null,
 
     /// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
     /// region.
-    iso_country_code: ?[]const u8,
+    iso_country_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

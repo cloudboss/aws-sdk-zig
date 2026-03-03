@@ -19,13 +19,13 @@ pub const MemberSummary = struct {
     display_name: []const u8,
 
     /// The unique ARN for the member's associated membership, if present.
-    membership_arn: ?[]const u8,
+    membership_arn: ?[]const u8 = null,
 
     /// The unique ID for the member's associated membership, if present.
-    membership_id: ?[]const u8,
+    membership_id: ?[]const u8 = null,
 
     /// Provides a summary of the ML abilities for the collaboration member.
-    ml_abilities: ?MLMemberAbilities,
+    ml_abilities: ?MLMemberAbilities = null,
 
     /// The collaboration member's payment responsibilities set by the collaboration
     /// creator.

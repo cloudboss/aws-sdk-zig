@@ -4,7 +4,7 @@ pub const RepositorySyncEvent = struct {
     event: []const u8,
 
     /// The external ID of the sync event.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The time that the sync event occurred.
     time: i64,

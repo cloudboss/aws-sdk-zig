@@ -5,18 +5,18 @@ const SuggestionValue = @import("suggestion_value.zig").SuggestionValue;
 pub const Suggestion = struct {
     /// The UUID (universally unique identifier) of a single
     /// query suggestion.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The list of document IDs and their fields/attributes that are used for a
     /// single query suggestion, if document fields set to use for query
     /// suggestions.
-    source_documents: ?[]const SourceDocument,
+    source_documents: ?[]const SourceDocument = null,
 
     /// The value for the UUID (universally unique identifier)
     /// of a single query suggestion.
     ///
     /// The value is the text string of a suggestion.
-    value: ?SuggestionValue,
+    value: ?SuggestionValue = null,
 
     pub const json_field_names = .{
         .id = "Id",

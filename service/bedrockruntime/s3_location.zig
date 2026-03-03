@@ -1,7 +1,7 @@
 /// A storage location in an Amazon S3 bucket.
 pub const S3Location = struct {
     /// If the bucket belongs to another AWS account, specify that account's ID.
-    bucket_owner: ?[]const u8,
+    bucket_owner: ?[]const u8 = null,
 
     /// An object URI starting with `s3://`.
     uri: []const u8,

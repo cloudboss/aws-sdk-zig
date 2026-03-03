@@ -125,7 +125,7 @@ pub const ErrorDetails = struct {
     /// metadata configuration.
     ///
     /// * `NoSuchBucket` - The specified general purpose bucket does not exist.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// If the V1 `CreateBucketMetadataTableConfiguration` request succeeds, but S3
     /// Metadata was
@@ -243,5 +243,5 @@ pub const ErrorDetails = struct {
     /// metadata configuration.
     ///
     /// * `NoSuchBucket` - The specified general purpose bucket does not exist.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 };

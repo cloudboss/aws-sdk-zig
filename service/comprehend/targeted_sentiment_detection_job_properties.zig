@@ -8,12 +8,12 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 pub const TargetedSentimentDetectionJobProperties = struct {
     /// The Amazon Resource Name (ARN) of the IAM role that
     /// grants Amazon Comprehend read access to your input data.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     /// The time that the targeted sentiment detection job ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
-    input_data_config: ?InputDataConfig,
+    input_data_config: ?InputDataConfig = null,
 
     /// The Amazon Resource Name (ARN) of the targeted sentiment detection job. It
     /// is a unique, fully
@@ -26,30 +26,30 @@ pub const TargetedSentimentDetectionJobProperties = struct {
     /// The following is an example job ARN:
     ///
     /// `arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab`
-    job_arn: ?[]const u8,
+    job_arn: ?[]const u8 = null,
 
     /// The identifier assigned to the targeted sentiment detection job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The name that you assigned to the targeted sentiment detection job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The current status of the targeted sentiment detection job. If the status is
     /// `FAILED`,
     /// the `Messages` field shows the reason for the failure.
-    job_status: ?JobStatus,
+    job_status: ?JobStatus = null,
 
     /// The language code of the input documents.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// A description of the status of a job.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
-    output_data_config: ?OutputDataConfig,
+    output_data_config: ?OutputDataConfig = null,
 
     /// The time that the targeted sentiment detection job was submitted for
     /// processing.
-    submit_time: ?i64,
+    submit_time: ?i64 = null,
 
     /// ID for the KMS key that Amazon Comprehend uses to encrypt the
     /// data on the storage volume attached to the ML compute instance(s) that
@@ -61,9 +61,9 @@ pub const TargetedSentimentDetectionJobProperties = struct {
     ///
     /// * Amazon Resource Name (ARN) of a KMS Key:
     /// `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
-    volume_kms_key_id: ?[]const u8,
+    volume_kms_key_id: ?[]const u8 = null,
 
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .data_access_role_arn = "DataAccessRoleArn",

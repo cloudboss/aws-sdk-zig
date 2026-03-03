@@ -4,13 +4,13 @@ const Entity = @import("entity.zig").Entity;
 /// Analysis error.
 pub const AnalysisError = struct {
     /// The message associated with the analysis error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The type of the analysis error.
-    @"type": ?AnalysisErrorType,
+    @"type": ?AnalysisErrorType = null,
 
     /// Lists the violated entities that caused the analysis error
-    violated_entities: ?[]const Entity,
+    violated_entities: ?[]const Entity = null,
 
     pub const json_field_names = .{
         .message = "Message",

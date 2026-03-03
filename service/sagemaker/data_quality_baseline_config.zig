@@ -7,11 +7,11 @@ const MonitoringStatisticsResource = @import("monitoring_statistics_resource.zig
 pub const DataQualityBaselineConfig = struct {
     /// The name of the job that performs baselining for the data quality monitoring
     /// job.
-    baselining_job_name: ?[]const u8,
+    baselining_job_name: ?[]const u8 = null,
 
-    constraints_resource: ?MonitoringConstraintsResource,
+    constraints_resource: ?MonitoringConstraintsResource = null,
 
-    statistics_resource: ?MonitoringStatisticsResource,
+    statistics_resource: ?MonitoringStatisticsResource = null,
 
     pub const json_field_names = .{
         .baselining_job_name = "BaseliningJobName",

@@ -20,7 +20,7 @@ pub const SqlConfiguration = struct {
     ///
     /// For MySQL databases, you must enable the `ansi_quotes` option when you set
     /// this field to `DOUBLE_QUOTES`.
-    query_identifiers_enclosing_option: ?QueryIdentifiersEnclosingOption,
+    query_identifiers_enclosing_option: ?QueryIdentifiersEnclosingOption = null,
 
     pub const json_field_names = .{
         .query_identifiers_enclosing_option = "QueryIdentifiersEnclosingOption",

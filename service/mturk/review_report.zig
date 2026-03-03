@@ -6,11 +6,11 @@ const ReviewResultDetail = @import("review_result_detail.zig").ReviewResultDetai
 pub const ReviewReport = struct {
     /// A list of ReviewAction objects for each action specified in
     /// the Review Policy.
-    review_actions: ?[]const ReviewActionDetail,
+    review_actions: ?[]const ReviewActionDetail = null,
 
     /// A list of ReviewResults objects for each action specified in
     /// the Review Policy.
-    review_results: ?[]const ReviewResultDetail,
+    review_results: ?[]const ReviewResultDetail = null,
 
     pub const json_field_names = .{
         .review_actions = "ReviewActions",

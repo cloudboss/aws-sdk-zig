@@ -5,7 +5,7 @@ const SqlParameter = @import("sql_parameter.zig").SqlParameter;
 /// data.
 pub const BatchExecuteStatementRequest = struct {
     /// The name of the database.
-    database: ?[]const u8,
+    database: ?[]const u8 = null,
 
     /// The parameter set for the batch operation.
     ///
@@ -20,7 +20,7 @@ pub const BatchExecuteStatementRequest = struct {
     ///   `BatchExecuteStatement` operation.
     ///
     /// Array parameters are not supported.
-    parameter_sets: ?[]const []const SqlParameter,
+    parameter_sets: ?[]const []const SqlParameter = null,
 
     /// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
     resource_arn: []const u8,
@@ -28,7 +28,7 @@ pub const BatchExecuteStatementRequest = struct {
     /// The name of the database schema.
     ///
     /// Currently, the `schema` parameter isn't supported.
-    schema: ?[]const u8,
+    schema: ?[]const u8 = null,
 
     /// The ARN of the secret that enables access to the DB cluster. Enter the
     /// database user name and password for the credentials in
@@ -48,7 +48,7 @@ pub const BatchExecuteStatementRequest = struct {
     ///
     /// If the SQL statement is not part of a transaction, don't set this
     /// parameter.
-    transaction_id: ?[]const u8,
+    transaction_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .database = "database",

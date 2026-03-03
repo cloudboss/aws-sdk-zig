@@ -5,10 +5,10 @@ const ExternalSourceType = @import("external_source_type.zig").ExternalSourceTyp
 /// The unique external source of the content contained in the wrapper object.
 pub const ExternalSource = struct {
     /// The identifier, contentType, and data of the external source wrapper object.
-    byte_content: ?ByteContentDoc,
+    byte_content: ?ByteContentDoc = null,
 
     /// The S3 location of the external source wrapper object.
-    s_3_location: ?S3ObjectDoc,
+    s_3_location: ?S3ObjectDoc = null,
 
     /// The source type of the external source wrapper object.
     source_type: ExternalSourceType,

@@ -18,16 +18,16 @@ const XMLClassifier = @import("xml_classifier.zig").XMLClassifier;
 /// of the fields in the `Classifier` object.
 pub const Classifier = struct {
     /// A classifier for comma-separated values (CSV).
-    csv_classifier: ?CsvClassifier,
+    csv_classifier: ?CsvClassifier = null,
 
     /// A classifier that uses `grok`.
-    grok_classifier: ?GrokClassifier,
+    grok_classifier: ?GrokClassifier = null,
 
     /// A classifier for JSON content.
-    json_classifier: ?JsonClassifier,
+    json_classifier: ?JsonClassifier = null,
 
     /// A classifier for XML content.
-    xml_classifier: ?XMLClassifier,
+    xml_classifier: ?XMLClassifier = null,
 
     pub const json_field_names = .{
         .csv_classifier = "CsvClassifier",

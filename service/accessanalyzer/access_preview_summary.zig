@@ -20,7 +20,7 @@ pub const AccessPreviewSummary = struct {
     /// * `Failed` - The access preview creation has failed.
     status: AccessPreviewStatus,
 
-    status_reason: ?AccessPreviewStatusReason,
+    status_reason: ?AccessPreviewStatusReason = null,
 
     pub const json_field_names = .{
         .analyzer_arn = "analyzerArn",

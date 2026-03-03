@@ -4,10 +4,10 @@ const ConditionalFormattingSolidColor = @import("conditional_formatting_solid_co
 /// The formatting configuration for the color.
 pub const ConditionalFormattingColor = struct {
     /// Formatting configuration for gradient color.
-    gradient: ?ConditionalFormattingGradientColor,
+    gradient: ?ConditionalFormattingGradientColor = null,
 
     /// Formatting configuration for solid color.
-    solid: ?ConditionalFormattingSolidColor,
+    solid: ?ConditionalFormattingSolidColor = null,
 
     pub const json_field_names = .{
         .gradient = "Gradient",

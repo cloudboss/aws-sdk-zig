@@ -3,9 +3,9 @@ const TemporalFilterSettings = @import("temporal_filter_settings.zig").TemporalF
 
 /// H264 Filter Settings
 pub const H264FilterSettings = struct {
-    bandwidth_reduction_filter_settings: ?BandwidthReductionFilterSettings,
+    bandwidth_reduction_filter_settings: ?BandwidthReductionFilterSettings = null,
 
-    temporal_filter_settings: ?TemporalFilterSettings,
+    temporal_filter_settings: ?TemporalFilterSettings = null,
 
     pub const json_field_names = .{
         .bandwidth_reduction_filter_settings = "BandwidthReductionFilterSettings",

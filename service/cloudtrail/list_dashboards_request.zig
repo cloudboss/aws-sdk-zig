@@ -2,16 +2,16 @@ const DashboardType = @import("dashboard_type.zig").DashboardType;
 
 pub const ListDashboardsRequest = struct {
     /// The maximum number of dashboards to display on a single page.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// Specify a name prefix to filter on.
-    name_prefix: ?[]const u8,
+    name_prefix: ?[]const u8 = null,
 
     /// A token you can use to get the next page of dashboard results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// Specify a dashboard type to filter on: `CUSTOM` or `MANAGED`.
-    @"type": ?DashboardType,
+    @"type": ?DashboardType = null,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",

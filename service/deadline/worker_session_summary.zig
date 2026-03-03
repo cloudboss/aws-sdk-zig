@@ -4,7 +4,7 @@ const SessionLifecycleTargetStatus = @import("session_lifecycle_target_status.zi
 /// Summarizes the session for a particular worker.
 pub const WorkerSessionSummary = struct {
     /// The date and time the resource ended running.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The job ID for the job associated with the worker's session.
     job_id: []const u8,
@@ -22,7 +22,7 @@ pub const WorkerSessionSummary = struct {
     started_at: i64,
 
     /// The life cycle status
-    target_lifecycle_status: ?SessionLifecycleTargetStatus,
+    target_lifecycle_status: ?SessionLifecycleTargetStatus = null,
 
     pub const json_field_names = .{
         .ended_at = "endedAt",

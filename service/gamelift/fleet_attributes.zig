@@ -28,7 +28,7 @@ const FleetAction = @import("fleet_action.zig").FleetAction;
 /// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetAttributes](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetAttributes)
 pub const FleetAttributes = struct {
     /// A set of attributes that are specific to an Anywhere fleet.
-    anywhere_configuration: ?AnywhereConfiguration,
+    anywhere_configuration: ?AnywhereConfiguration = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
@@ -36,32 +36,32 @@ pub const FleetAttributes = struct {
     /// on instances in
     /// this fleet. In a GameLift build ARN, the resource ID matches the `BuildId`
     /// value. This attribute is used with fleets where `ComputeType` is "EC2".
-    build_arn: ?[]const u8,
+    build_arn: ?[]const u8 = null,
 
     /// A unique identifier for the build resource that is deployed on instances in
     /// this fleet. This attribute is used with
     /// fleets where `ComputeType` is "EC2".
-    build_id: ?[]const u8,
+    build_id: ?[]const u8 = null,
 
     /// Determines whether a TLS/SSL certificate is generated for a fleet. This
     /// feature must be enabled when creating the fleet.
     /// All instances in a fleet share the same certificate.
-    certificate_configuration: ?CertificateConfiguration,
+    certificate_configuration: ?CertificateConfiguration = null,
 
     /// The type of compute resource used to host your game servers. You can use
     /// your own
     /// compute resources with Amazon GameLift Servers Anywhere or use Amazon EC2
     /// instances with managed
     /// Amazon GameLift Servers.
-    compute_type: ?ComputeType,
+    compute_type: ?ComputeType = null,
 
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A human-readable description of the fleet.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
@@ -70,16 +70,16 @@ pub const FleetAttributes = struct {
     /// `arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`. In a
     /// GameLift fleet ARN, the resource ID matches the `FleetId`
     /// value.
-    fleet_arn: ?[]const u8,
+    fleet_arn: ?[]const u8 = null,
 
     /// A unique identifier for the fleet.
-    fleet_id: ?[]const u8,
+    fleet_id: ?[]const u8 = null,
 
     /// Indicates whether the fleet uses On-Demand or Spot instances. For more
     /// information,
     /// see [ On-Demand versus Spot
     /// Instances](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot). This fleet property can't be changed after the fleet is created.
-    fleet_type: ?FleetType,
+    fleet_type: ?FleetType = null,
 
     /// A unique identifier for an IAM role that manages access to your Amazon Web
     /// Services services.
@@ -94,7 +94,7 @@ pub const FleetAttributes = struct {
     /// Access external resources from a game
     /// server](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html). This attribute is used with fleets where `ComputeType` is
     /// `EC2`.
-    instance_role_arn: ?[]const u8,
+    instance_role_arn: ?[]const u8 = null,
 
     /// Indicates that fleet instances maintain a shared credentials file for the
     /// IAM role defined in `InstanceRoleArn`. Shared credentials allow
@@ -107,7 +107,7 @@ pub const FleetAttributes = struct {
     /// with other Amazon Web Services resources from your
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html). This attribute is used with
     /// fleets where `ComputeType` is `EC2`.
-    instance_role_credentials_provider: ?InstanceRoleCredentialsProvider,
+    instance_role_credentials_provider: ?InstanceRoleCredentialsProvider = null,
 
     /// The Amazon EC2 instance type that the fleet uses. Instance type determines
     /// the computing
@@ -117,14 +117,14 @@ pub const FleetAttributes = struct {
     /// Types](http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
     /// This attribute is used with fleets where
     /// `ComputeType` is `EC2`.
-    instance_type: ?EC2InstanceType,
+    instance_type: ?EC2InstanceType = null,
 
     /// **This parameter is no longer used.** Game session log
     /// paths are now defined using the Amazon GameLift Servers server API
     /// `ProcessReady()`
     /// `logParameters`. See more information in the [Server API
     /// Reference](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api-ref.html#gamelift-sdk-server-api-ref-dataypes-process).
-    log_paths: ?[]const []const u8,
+    log_paths: ?[]const []const u8 = null,
 
     /// Name of a metric group that metrics for this fleet are added to. In Amazon
     /// CloudWatch,
@@ -133,11 +133,11 @@ pub const FleetAttributes = struct {
     /// included in only one metric group at a time. This attribute is used with
     /// fleets where
     /// `ComputeType` is `EC2`.
-    metric_groups: ?[]const []const u8,
+    metric_groups: ?[]const []const u8 = null,
 
     /// A descriptive label that is associated with a fleet. Fleet names do not need
     /// to be unique.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of game session protection to set on all new instances that are
     /// started in
@@ -150,7 +150,7 @@ pub const FleetAttributes = struct {
     /// * **FullProtection** -- If the game session is in an
     /// `ACTIVE` status, it cannot be terminated during a scale-down
     /// event.
-    new_game_session_protection_policy: ?ProtectionPolicy,
+    new_game_session_protection_policy: ?ProtectionPolicy = null,
 
     /// The operating system of the fleet's computing resources. A fleet's operating
     /// system is
@@ -171,33 +171,33 @@ pub const FleetAttributes = struct {
     /// [
     /// Migrate to server SDK version
     /// 5.](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html)
-    operating_system: ?OperatingSystem,
+    operating_system: ?OperatingSystem = null,
 
-    resource_creation_limit_policy: ?ResourceCreationLimitPolicy,
+    resource_creation_limit_policy: ?ResourceCreationLimitPolicy = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
     /// associated with the GameLift script resource that is deployed on instances
     /// in this fleet. In a GameLift script ARN, the resource ID matches the
     /// `ScriptId` value.
-    script_arn: ?[]const u8,
+    script_arn: ?[]const u8 = null,
 
     /// A unique identifier for the Realtime script resource that is deployed on
     /// instances in this fleet.
     /// This attribute is used with fleets where `ComputeType` is "EC2".
-    script_id: ?[]const u8,
+    script_id: ?[]const u8 = null,
 
     /// **This parameter is no longer used.** Server launch
     /// parameters are now defined using the fleet's runtime configuration. Requests
     /// that use
     /// this parameter continue to be valid.
-    server_launch_parameters: ?[]const u8,
+    server_launch_parameters: ?[]const u8 = null,
 
     /// **This parameter is no longer used.** Server launch paths
     /// are now defined using the fleet's
     /// [RuntimeConfiguration](https://docs.aws.amazon.com/gamelift/latest/apireference/RuntimeConfiguration.html). Requests that use this parameter continue to be
     /// valid.
-    server_launch_path: ?[]const u8,
+    server_launch_path: ?[]const u8 = null,
 
     /// Current status of the fleet. Possible fleet statuses include the following:
     ///
@@ -222,17 +222,17 @@ pub const FleetAttributes = struct {
     /// * DELETING -- Hosts are responding to a delete fleet request.
     ///
     /// * TERMINATED -- The fleet no longer exists.
-    status: ?FleetStatus,
+    status: ?FleetStatus = null,
 
     /// A list of fleet activity that has been suspended using
     /// [StopFleetActions](https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopFleetActions.html). This includes fleet auto-scaling. This attribute is used
     /// with fleets where `ComputeType` is `EC2`.
-    stopped_actions: ?[]const FleetAction,
+    stopped_actions: ?[]const FleetAction = null,
 
     /// A time stamp indicating when this data object was terminated. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    termination_time: ?i64,
+    termination_time: ?i64 = null,
 
     pub const json_field_names = .{
         .anywhere_configuration = "AnywhereConfiguration",

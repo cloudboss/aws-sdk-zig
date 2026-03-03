@@ -14,7 +14,7 @@ pub const APNSMessage = struct {
     ///   app. This setting uses the deep-linking features of the iOS platform.
     /// * URL - The default mobile browser on the recipient's device opens and loads
     ///   the web page at a URL that you specify.
-    action: ?Action,
+    action: ?Action = null,
 
     /// The type of push notification to send. Valid values are:
     ///
@@ -40,21 +40,21 @@ pub const APNSMessage = struct {
     /// For more information about the apns-push-type request header, see [Sending
     /// Notification Requests to
     /// APNs](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns) on the Apple Developer website.
-    apns_push_type: ?[]const u8,
+    apns_push_type: ?[]const u8 = null,
 
     /// The key that indicates whether and how to modify the badge of your app's
     /// icon when the recipient receives the push notification. If this key isn't
     /// included in the dictionary, the badge doesn't change. To remove the badge,
     /// set this value to 0.
-    badge: ?i32,
+    badge: ?i32 = null,
 
     /// The body of the notification message.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// The key that indicates the notification type for the push notification. This
     /// key is a value that's defined by the identifier property of one of your
     /// app's registered categories.
-    category: ?[]const u8,
+    category: ?[]const u8 = null,
 
     /// An arbitrary identifier that, if assigned to multiple messages, APNs uses to
     /// coalesce the messages into a single push notification instead of delivering
@@ -62,18 +62,18 @@ pub const APNSMessage = struct {
     ///
     /// Amazon Pinpoint specifies this value in the apns-collapse-id request header
     /// when it sends the notification message to APNs.
-    collapse_id: ?[]const u8,
+    collapse_id: ?[]const u8 = null,
 
     /// The JSON payload to use for a silent push notification. This payload is
     /// added to the data.pinpoint.jsonBody object of the notification.
-    data: ?[]const aws.map.StringMapEntry,
+    data: ?[]const aws.map.StringMapEntry = null,
 
     /// The URL of an image or video to display in the push notification.
-    media_url: ?[]const u8,
+    media_url: ?[]const u8 = null,
 
     /// The authentication method that you want Amazon Pinpoint to use when
     /// authenticating with APNs, CERTIFICATE or TOKEN.
-    preferred_authentication_method: ?[]const u8,
+    preferred_authentication_method: ?[]const u8 = null,
 
     /// para>5 - Low priority, the notification might be delayed, delivered as part
     /// of a group, or throttled./listitem>
@@ -88,7 +88,7 @@ pub const APNSMessage = struct {
     /// Cloud Messaging (GCM), are normal, for 5, and high, for 10. If you specify
     /// an FCM value for this property, Amazon Pinpoint accepts and converts the
     /// value to the corresponding APNs value.
-    priority: ?[]const u8,
+    priority: ?[]const u8 = null,
 
     /// The raw, JSON-formatted string to use as the payload for the notification
     /// message. If specified, this value overrides all other content for the
@@ -103,7 +103,7 @@ pub const APNSMessage = struct {
     /// include the alert, badge, or sound keys. For more information, see
     /// [Generating a Remote
     /// Notification](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification) and [Pushing Background Updates to Your App](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app) on the Apple Developer website.
-    raw_content: ?[]const u8,
+    raw_content: ?[]const u8 = null,
 
     /// Specifies whether the notification is a silent push notification. A silent
     /// (or background) push notification isn't displayed on recipients' devices.
@@ -126,23 +126,23 @@ pub const APNSMessage = struct {
     /// notifications based on current traffic volumes. To prevent your
     /// notifications being throttled, Apple recommends that you send no more than 3
     /// silent push notifications to each recipient per hour.
-    silent_push: ?bool,
+    silent_push: ?bool = null,
 
     /// The key for the sound to play when the recipient receives the push
     /// notification. The value for this key is the name of a sound file in your
     /// app's main bundle or the Library/Sounds folder in your app's data container.
     /// If the sound file can't be found or you specify default for the value, the
     /// system plays the default alert sound.
-    sound: ?[]const u8,
+    sound: ?[]const u8 = null,
 
     /// The default message variables to use in the notification message. You can
     /// override these default variables with individual address variables.
-    substitutions: ?[]const aws.map.MapEntry([]const []const u8),
+    substitutions: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The key that represents your app-specific identifier for grouping
     /// notifications. If you provide a Notification Content app extension, you can
     /// use this value to group your notifications together.
-    thread_id: ?[]const u8,
+    thread_id: ?[]const u8 = null,
 
     /// The amount of time, in seconds, that APNs should store and attempt to
     /// deliver the push notification, if the service is unable to deliver the
@@ -152,15 +152,15 @@ pub const APNSMessage = struct {
     ///
     /// Amazon Pinpoint specifies this value in the apns-expiration request header
     /// when it sends the notification message to APNs.
-    time_to_live: ?i32,
+    time_to_live: ?i32 = null,
 
     /// The title to display above the notification message on the recipient's
     /// device.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The URL to open in the recipient's default mobile browser, if a recipient
     /// taps the push notification and the value of the Action property is URL.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

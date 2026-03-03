@@ -7,7 +7,7 @@ pub const ChannelDefinition = struct {
 
     /// Specifies whether the audio in a channel belongs to the `AGENT` or
     /// `CUSTOMER`.
-    participant_role: ?ParticipantRole,
+    participant_role: ?ParticipantRole = null,
 
     pub const json_field_names = .{
         .channel_id = "ChannelId",

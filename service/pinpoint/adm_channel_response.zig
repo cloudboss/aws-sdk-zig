@@ -2,36 +2,36 @@
 /// Messaging) channel for an application.
 pub const ADMChannelResponse = struct {
     /// The unique identifier for the application that the ADM channel applies to.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The date and time when the ADM channel was enabled.
-    creation_date: ?[]const u8,
+    creation_date: ?[]const u8 = null,
 
     /// Specifies whether the ADM channel is enabled for the application.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// (Not used) This property is retained only for backward compatibility.
-    has_credential: ?bool,
+    has_credential: ?bool = null,
 
     /// (Deprecated) An identifier for the ADM channel. This property is retained
     /// only for backward compatibility.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Specifies whether the ADM channel is archived.
-    is_archived: ?bool,
+    is_archived: ?bool = null,
 
     /// The user who last modified the ADM channel.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The date and time when the ADM channel was last modified.
-    last_modified_date: ?[]const u8,
+    last_modified_date: ?[]const u8 = null,
 
     /// The type of messaging or notification platform for the channel. For the ADM
     /// channel, this value is ADM.
     platform: []const u8,
 
     /// The current version of the ADM channel.
-    version: ?i32,
+    version: ?i32 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

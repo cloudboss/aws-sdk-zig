@@ -13,7 +13,7 @@ pub const AwsSubmission = struct {
     /// Determines who can view AWS involvement in the opportunity. Typically, this
     /// field is set to `Full` for most cases, but it may be restricted based on
     /// special program requirements or confidentiality needs.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .involvement_type = "InvolvementType",

@@ -8,7 +8,7 @@ pub const CrossClusterSearchConnectionProperties = struct {
     /// cross-cluster queries return partial results despite failures on one or more
     /// remote
     /// clusters.
-    skip_unavailable: ?SkipUnavailableStatus,
+    skip_unavailable: ?SkipUnavailableStatus = null,
 
     pub const json_field_names = .{
         .skip_unavailable = "SkipUnavailable",

@@ -7,43 +7,43 @@ const BenefitApplicationStatus = @import("benefit_application_status.zig").Benef
 /// operations.
 pub const BenefitApplicationSummary = struct {
     /// The Amazon Resource Name (ARN) of the benefit application.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// AWS resources that are associated with this benefit application.
-    associated_resources: ?[]const []const u8,
+    associated_resources: ?[]const []const u8 = null,
 
     /// Additional attributes and metadata associated with the benefit application.
-    benefit_application_details: ?[]const aws.map.StringMapEntry,
+    benefit_application_details: ?[]const aws.map.StringMapEntry = null,
 
     /// The identifier of the benefit being requested in this application.
-    benefit_id: ?[]const u8,
+    benefit_id: ?[]const u8 = null,
 
     /// The catalog identifier that the benefit application belongs to.
-    catalog: ?[]const u8,
+    catalog: ?[]const u8 = null,
 
     /// The timestamp when the benefit application was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The fulfillment types requested for this benefit application.
-    fulfillment_types: ?[]const FulfillmentType,
+    fulfillment_types: ?[]const FulfillmentType = null,
 
     /// The unique identifier of the benefit application.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The human-readable name of the benefit application.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The AWS partner programs associated with this benefit application.
-    programs: ?[]const []const u8,
+    programs: ?[]const []const u8 = null,
 
     /// The current stage in the benefit application processing workflow..
-    stage: ?[]const u8,
+    stage: ?[]const u8 = null,
 
     /// The current processing status of the benefit application.
-    status: ?BenefitApplicationStatus,
+    status: ?BenefitApplicationStatus = null,
 
     /// The timestamp when the benefit application was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

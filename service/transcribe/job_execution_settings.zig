@@ -18,7 +18,7 @@ pub const JobExecutionSettings = struct {
     ///
     /// If you include `AllowDeferredExecution` in your request, you must also
     /// include `DataAccessRoleArn`.
-    allow_deferred_execution: ?bool,
+    allow_deferred_execution: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of an IAM role that has permissions to
     /// access the Amazon S3 bucket that contains your input files. If the role that
@@ -34,7 +34,7 @@ pub const JobExecutionSettings = struct {
     ///
     /// Note that if you include `DataAccessRoleArn` in your request, you must also
     /// include `AllowDeferredExecution`.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allow_deferred_execution = "AllowDeferredExecution",

@@ -7,20 +7,20 @@ pub const InventoryItem = struct {
     capture_time: []const u8,
 
     /// The inventory data of the inventory type.
-    content: ?[]const []const aws.map.StringMapEntry,
+    content: ?[]const []const aws.map.StringMapEntry = null,
 
     /// MD5 hash of the inventory item type contents. The content hash is used to
     /// determine whether
     /// to update inventory information. The PutInventory API doesn't update the
     /// inventory item type
     /// contents if the MD5 hash hasn't changed since last update.
-    content_hash: ?[]const u8,
+    content_hash: ?[]const u8 = null,
 
     /// A map of associated properties for a specified inventory type. For example,
     /// with this
     /// attribute, you can specify the `ExecutionId`, `ExecutionType`,
     /// `ComplianceType` properties of the `AWS:ComplianceItem` type.
-    context: ?[]const aws.map.StringMapEntry,
+    context: ?[]const aws.map.StringMapEntry = null,
 
     /// The schema version for the inventory item.
     schema_version: []const u8,

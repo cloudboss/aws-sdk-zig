@@ -8,7 +8,7 @@ const CopyJobStatus = @import("copy_job_status.zig").CopyJobStatus;
 /// StartTime, EndTime, and Count of included jobs.
 pub const CopyJobSummary = struct {
     /// The account ID that owns the jobs within the summary.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The value as a number of jobs in a job summary.
     count: i32 = 0,
@@ -20,7 +20,7 @@ pub const CopyJobSummary = struct {
     /// milliseconds. For example, the value 1516925490.087 represents Friday,
     /// January 26, 2018
     /// 12:11:30.087 AM.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// This parameter is the job count for the specified
     /// message category.
@@ -34,15 +34,15 @@ pub const CopyJobSummary = struct {
     ///
     /// `AGGREGATE_ALL` aggregates job counts
     /// for all message categories and returns the sum.
-    message_category: ?[]const u8,
+    message_category: ?[]const u8 = null,
 
     /// The Amazon Web Services Regions within the job summary.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// This value is the job count for the specified resource type.
     /// The request `GetSupportedResourceTypes` returns
     /// strings for supported resource types
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The value of time in number format of a job start time.
     ///
@@ -51,11 +51,11 @@ pub const CopyJobSummary = struct {
     /// milliseconds. For example, the value 1516925490.087 represents Friday,
     /// January 26, 2018
     /// 12:11:30.087 AM.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// This value is job count for jobs
     /// with the specified state.
-    state: ?CopyJobStatus,
+    state: ?CopyJobStatus = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

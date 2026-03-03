@@ -19,7 +19,7 @@ pub const ResultConfiguration = struct {
     /// WorkGroupConfiguration$EnforceWorkGroupConfiguration and [Workgroup Settings
     /// Override Client-Side
     /// Settings](https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
-    acl_configuration: ?AclConfiguration,
+    acl_configuration: ?AclConfiguration = null,
 
     /// If query and calculation results are encrypted in Amazon S3, indicates the
     /// encryption option used (for example, `SSE_KMS` or `CSE_KMS`) and
@@ -32,7 +32,7 @@ pub const ResultConfiguration = struct {
     /// workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration
     /// and [Workgroup Settings Override Client-Side
     /// Settings](https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// The Amazon Web Services account ID that you expect to be the owner of the
     /// Amazon S3 bucket specified by ResultConfiguration$OutputLocation.
@@ -51,7 +51,7 @@ pub const ResultConfiguration = struct {
     /// workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration
     /// and [Workgroup Settings Override Client-Side
     /// Settings](https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
-    expected_bucket_owner: ?[]const u8,
+    expected_bucket_owner: ?[]const u8 = null,
 
     /// The location in Amazon S3 where your query and calculation results are
     /// stored,
@@ -65,7 +65,7 @@ pub const ResultConfiguration = struct {
     /// client-side settings, then the query uses the settings specified for the
     /// workgroup. See
     /// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
-    output_location: ?[]const u8,
+    output_location: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .acl_configuration = "AclConfiguration",

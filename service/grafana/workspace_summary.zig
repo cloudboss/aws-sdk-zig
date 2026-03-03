@@ -17,7 +17,7 @@ pub const WorkspaceSummary = struct {
     created: i64,
 
     /// The customer-entered description of the workspace.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The URL endpoint to use to access the Grafana console in the workspace.
     endpoint: []const u8,
@@ -26,7 +26,7 @@ pub const WorkspaceSummary = struct {
     /// information,
     /// see [Link your account with Grafana
     /// Labs](https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise).
-    grafana_token: ?[]const u8,
+    grafana_token: ?[]const u8 = null,
 
     /// The Grafana version that the workspace is running.
     grafana_version: []const u8,
@@ -38,25 +38,25 @@ pub const WorkspaceSummary = struct {
     ///
     /// Amazon Managed Grafana workspaces no longer support Grafana Enterprise free
     /// trials.
-    license_type: ?LicenseType,
+    license_type: ?LicenseType = null,
 
     /// The most recent date that the workspace was modified.
     modified: i64,
 
     /// The name of the workspace.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Web Services notification channels that Amazon Managed Grafana
     /// can automatically
     /// create IAM roles and permissions for, which allows Amazon Managed Grafana to
     /// use these channels.
-    notification_destinations: ?[]const NotificationDestinationType,
+    notification_destinations: ?[]const NotificationDestinationType = null,
 
     /// The current status of the workspace.
     status: WorkspaceStatus,
 
     /// The list of tags associated with the workspace.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .authentication = "authentication",

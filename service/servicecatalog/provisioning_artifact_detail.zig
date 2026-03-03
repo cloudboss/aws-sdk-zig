@@ -5,23 +5,23 @@ const ProvisioningArtifactType = @import("provisioning_artifact_type.zig").Provi
 /// product.
 pub const ProvisioningArtifactDetail = struct {
     /// Indicates whether the product version is active.
-    active: ?bool,
+    active: ?bool = null,
 
     /// The UTC time stamp of the creation time.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The description of the provisioning artifact.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information set by the administrator to provide guidance to end users about
     /// which provisioning artifacts to use.
-    guidance: ?ProvisioningArtifactGuidance,
+    guidance: ?ProvisioningArtifactGuidance = null,
 
     /// The identifier of the provisioning artifact.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the provisioning artifact.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Specifies the revision of the external artifact that was used to
     /// automatically sync the Service Catalog product
@@ -34,7 +34,7 @@ pub const ProvisioningArtifactDetail = struct {
     /// and `UpdateProvisioningArticat` APIs.
     ///
     /// This field only exists for Repo-Synced products.
-    source_revision: ?[]const u8,
+    source_revision: ?[]const u8 = null,
 
     /// The type of provisioning artifact.
     ///
@@ -45,7 +45,7 @@ pub const ProvisioningArtifactDetail = struct {
     /// * `TERRAFORM_CLOUD` - Terraform Cloud configuration file
     ///
     /// * `EXTERNAL` - External configuration file
-    @"type": ?ProvisioningArtifactType,
+    @"type": ?ProvisioningArtifactType = null,
 
     pub const json_field_names = .{
         .active = "Active",

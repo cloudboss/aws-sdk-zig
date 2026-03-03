@@ -6,13 +6,13 @@ const SourceType = @import("source_type.zig").SourceType;
 /// The source configuration.
 pub const SourceConfiguration = struct {
     /// The source configuration IoT SiteWise configuration.
-    iot_site_wise_configuration: ?IotSiteWiseSourceConfiguration,
+    iot_site_wise_configuration: ?IotSiteWiseSourceConfiguration = null,
 
     /// The source configuration IoT TwinMaker configuration.
-    iot_twin_maker_configuration: ?IotTwinMakerSourceConfiguration,
+    iot_twin_maker_configuration: ?IotTwinMakerSourceConfiguration = null,
 
     /// The source configuration S3 configuration.
-    s_3_configuration: ?S3SourceConfiguration,
+    s_3_configuration: ?S3SourceConfiguration = null,
 
     /// The source configuration type.
     @"type": SourceType,

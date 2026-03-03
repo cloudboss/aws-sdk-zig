@@ -7,7 +7,7 @@ pub const FeatureValue = struct {
     /// `CollectionType` is `None`. Note that features types can be
     /// `String`, `Integral`, or `Fractional`. This value
     /// represents all three types as a string.
-    value_as_string: ?[]const u8,
+    value_as_string: ?[]const u8 = null,
 
     /// The list of values in string format associated with a feature. Used when
     /// your
@@ -15,7 +15,7 @@ pub const FeatureValue = struct {
     /// `Vector`. Note that features types can be `String`,
     /// `Integral`, or `Fractional`. These values represents all three
     /// types as a string.
-    value_as_string_list: ?[]const []const u8,
+    value_as_string_list: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .feature_name = "FeatureName",

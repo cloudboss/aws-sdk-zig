@@ -27,52 +27,52 @@ const WisdomInfo = @import("wisdom_info.zig").WisdomInfo;
 /// Contains information about a contact.
 pub const Contact = struct {
     /// List of additional email addresses for an email contact.
-    additional_email_recipients: ?AdditionalEmailRecipients,
+    additional_email_recipients: ?AdditionalEmailRecipients = null,
 
     /// Information about the agent who accepted the contact.
-    agent_info: ?AgentInfo,
+    agent_info: ?AgentInfo = null,
 
     /// Indicates how an [outbound
     /// campaign](https://docs.aws.amazon.com/connect/latest/adminguide/how-to-create-campaigns.html) call is actually disposed if the contact is connected to Amazon Connect.
-    answering_machine_detection_status: ?AnsweringMachineDetectionStatus,
+    answering_machine_detection_status: ?AnsweringMachineDetectionStatus = null,
 
     /// The Amazon Resource Name (ARN) for the contact.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The attributes of the contact.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
-    campaign: ?Campaign,
+    campaign: ?Campaign = null,
 
     /// How the contact reached your contact center.
-    channel: ?Channel,
+    channel: ?Channel = null,
 
     /// Information about how agent, bot, and customer interact in a chat contact.
-    chat_metrics: ?ChatMetrics,
+    chat_metrics: ?ChatMetrics = null,
 
     /// The timestamp when customer endpoint connected to Amazon Connect.
-    connected_to_system_timestamp: ?i64,
+    connected_to_system_timestamp: ?i64 = null,
 
     /// This is the root contactId which is used as a unique identifier for all
     /// subsequent contacts in a contact
     /// tree.
-    contact_association_id: ?[]const u8,
+    contact_association_id: ?[]const u8 = null,
 
     /// A map of string key/value pairs that contain user-defined attributes which
     /// are lightly typed within the contact.
     /// This object is used only for task contacts.
-    contact_details: ?ContactDetails,
+    contact_details: ?ContactDetails = null,
 
     /// Information about the contact evaluations where the key is the FormId, which
     /// is a unique identifier for the
     /// form.
-    contact_evaluations: ?[]const aws.map.MapEntry(ContactEvaluation),
+    contact_evaluations: ?[]const aws.map.MapEntry(ContactEvaluation) = null,
 
     /// Information about the Customer on the contact.
-    customer: ?Customer,
+    customer: ?Customer = null,
 
     /// The customer or external third party participant endpoint.
-    customer_endpoint: ?EndpointInfo,
+    customer_endpoint: ?EndpointInfo = null,
 
     /// The customer's identification number. For example, the `CustomerId` may be a
     /// customer number from
@@ -81,44 +81,44 @@ pub const Contact = struct {
     /// enable Amazon Connect Voice ID capability, this attribute is populated with
     /// the `CustomerSpeakerId` of
     /// the caller.
-    customer_id: ?[]const u8,
+    customer_id: ?[]const u8 = null,
 
     /// Information about customer’s voice activity.
-    customer_voice_activity: ?CustomerVoiceActivity,
+    customer_voice_activity: ?CustomerVoiceActivity = null,
 
     /// The description of the contact.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about the call disconnect experience.
-    disconnect_details: ?DisconnectDetails,
+    disconnect_details: ?DisconnectDetails = null,
 
     /// The disconnect reason for the contact. For a list and description of all the
     /// possible disconnect reasons by
     /// channel, see DisconnectReason under
     /// [ContactTraceRecord](https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord) in the
     /// *Amazon Connect Administrator Guide*.
-    disconnect_reason: ?[]const u8,
+    disconnect_reason: ?[]const u8 = null,
 
     /// The date and time that the customer endpoint disconnected from the current
     /// contact, in UTC time. In transfer
     /// scenarios, the DisconnectTimestamp of the previous contact indicates the
     /// date and time when that contact
     /// ended.
-    disconnect_timestamp: ?i64,
+    disconnect_timestamp: ?i64 = null,
 
     /// Information about the global resiliency configuration for the contact,
     /// including traffic distribution details.
-    global_resiliency_metadata: ?GlobalResiliencyMetadata,
+    global_resiliency_metadata: ?GlobalResiliencyMetadata = null,
 
     /// The identifier for the contact.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// If this contact is related to other contacts, this is the ID of the initial
     /// contact.
-    initial_contact_id: ?[]const u8,
+    initial_contact_id: ?[]const u8 = null,
 
     /// Indicates how the contact was initiated.
-    initiation_method: ?ContactInitiationMethod,
+    initiation_method: ?ContactInitiationMethod = null,
 
     /// The date and time this contact was initiated, in UTC time. For `INBOUND`,
     /// this is when the contact
@@ -131,66 +131,66 @@ pub const Contact = struct {
     /// when the agent started dialing the external participant. For `MONITOR`, this
     /// is when the supervisor
     /// started listening to a contact.
-    initiation_timestamp: ?i64,
+    initiation_timestamp: ?i64 = null,
 
     /// The timestamp when the contact was last paused.
-    last_paused_timestamp: ?i64,
+    last_paused_timestamp: ?i64 = null,
 
     /// The timestamp when the contact was last resumed.
-    last_resumed_timestamp: ?i64,
+    last_resumed_timestamp: ?i64 = null,
 
     /// The timestamp when contact was last updated.
-    last_update_timestamp: ?i64,
+    last_update_timestamp: ?i64 = null,
 
     /// The name of the contact.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// List of next contact entries for the contact.
-    next_contacts: ?[]const NextContactEntry,
+    next_contacts: ?[]const NextContactEntry = null,
 
     /// Information about the outbound strategy.
-    outbound_strategy: ?OutboundStrategy,
+    outbound_strategy: ?OutboundStrategy = null,
 
     /// If this contact is not the first contact, this is the ID of the previous
     /// contact.
-    previous_contact_id: ?[]const u8,
+    previous_contact_id: ?[]const u8 = null,
 
     /// Information about the quality of the participant's media connection.
-    quality_metrics: ?QualityMetrics,
+    quality_metrics: ?QualityMetrics = null,
 
     /// If this contact was queued, this contains information about the queue.
-    queue_info: ?QueueInfo,
+    queue_info: ?QueueInfo = null,
 
     /// An integer that represents the queue priority to be applied to the contact
     /// (lower priorities are routed
     /// preferentially). Cannot be specified if the QueueTimeAdjustmentSeconds is
     /// specified. Must be statically defined, must
     /// be larger than zero, and a valid integer value. Default Value is 5.
-    queue_priority: ?i64,
+    queue_priority: ?i64 = null,
 
     /// An integer that represents the queue time adjust to be applied to the
     /// contact, in seconds (longer / larger queue
     /// time are routed preferentially). Cannot be specified if the QueuePriority is
     /// specified. Must be statically defined
     /// and a valid integer value.
-    queue_time_adjustment_seconds: ?i32,
+    queue_time_adjustment_seconds: ?i32 = null,
 
     /// If recording was enabled, this is information about the recordings.
-    recordings: ?[]const RecordingInfo,
+    recordings: ?[]const RecordingInfo = null,
 
     /// The contactId that is
     /// [related](https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html#relatedcontactid) to this contact.
-    related_contact_id: ?[]const u8,
+    related_contact_id: ?[]const u8 = null,
 
     /// The timestamp when ringing started for a campaign call.
-    ring_start_timestamp: ?i64,
+    ring_start_timestamp: ?i64 = null,
 
     /// Latest routing criteria on the contact.
-    routing_criteria: ?RoutingCriteria,
+    routing_criteria: ?RoutingCriteria = null,
 
     /// The timestamp, in Unix epoch time format, at which to start running the
     /// inbound flow.
-    scheduled_timestamp: ?i64,
+    scheduled_timestamp: ?i64 = null,
 
     /// A set of system defined key-value pairs stored on individual contact
     /// segments using an attribute map. The
@@ -199,7 +199,7 @@ pub const Contact = struct {
     /// alphanumeric, -, and _ characters. This field can be used to show channel
     /// subtype. For example,
     /// `connect:Guide` or `connect:SMS`.
-    segment_attributes: ?[]const aws.map.MapEntry(SegmentAttributeValue),
+    segment_attributes: ?[]const aws.map.MapEntry(SegmentAttributeValue) = null,
 
     /// The system endpoint. For `INBOUND`, this is the phone number or email
     /// address that the customer
@@ -208,24 +208,24 @@ pub const Contact = struct {
     /// to the outbound queue that is used to dial the customer. For callback, this
     /// shows up as Softphone for calls handled
     /// by agents with softphone.
-    system_endpoint: ?EndpointInfo,
+    system_endpoint: ?EndpointInfo = null,
 
     /// Tags associated with the contact. This contains both Amazon Web Services
     /// generated and user-defined tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// If this contact was created using a task template, this contains information
     /// about the task template.
-    task_template_info: ?TaskTemplateInfoV2,
+    task_template_info: ?TaskTemplateInfoV2 = null,
 
     /// Total pause count for a contact.
-    total_pause_count: ?i32,
+    total_pause_count: ?i32 = null,
 
     /// Total pause duration for a contact in seconds.
-    total_pause_duration_in_seconds: ?i32,
+    total_pause_duration_in_seconds: ?i32 = null,
 
     /// Information about Amazon Connect Wisdom.
-    wisdom_info: ?WisdomInfo,
+    wisdom_info: ?WisdomInfo = null,
 
     pub const json_field_names = .{
         .additional_email_recipients = "AdditionalEmailRecipients",

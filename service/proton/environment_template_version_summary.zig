@@ -9,7 +9,7 @@ pub const EnvironmentTemplateVersionSummary = struct {
     created_at: i64,
 
     /// A description of the version of an environment template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time when the version of an environment template was last modified.
     last_modified_at: i64,
@@ -22,13 +22,13 @@ pub const EnvironmentTemplateVersionSummary = struct {
     minor_version: []const u8,
 
     /// The recommended minor version of the environment template.
-    recommended_minor_version: ?[]const u8,
+    recommended_minor_version: ?[]const u8 = null,
 
     /// The status of the version of an environment template.
     status: TemplateVersionStatus,
 
     /// The status message of the version of an environment template.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The name of the environment template.
     template_name: []const u8,

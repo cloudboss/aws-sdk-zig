@@ -23,24 +23,24 @@ pub const HookConfiguration = struct {
     /// For example, you can specify a condition that if there are empty date-time
     /// values, then Amazon Q Business should invoke a function that inserts the
     /// current date-time.
-    invocation_condition: ?DocumentAttributeCondition,
+    invocation_condition: ?DocumentAttributeCondition = null,
 
     /// The Amazon Resource Name (ARN) of the Lambda function during ingestion. For
     /// more information, see [Using Lambda functions for Amazon Q Business document
     /// enrichment](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/cde-lambda-operations.html).
-    lambda_arn: ?[]const u8,
+    lambda_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of a role with permission to run
     /// `PreExtractionHookConfiguration` and `PostExtractionHookConfiguration` for
     /// altering document metadata and content during the document ingestion
     /// process.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Stores the original, raw documents or the structured, parsed documents
     /// before and after altering them. For more information, see [Data contracts
     /// for Lambda
     /// functions](https://docs.aws.amazon.com/amazonq/latest/business-use-dg/cde-lambda-operations.html#cde-lambda-operations-data-contracts).
-    s_3_bucket_name: ?[]const u8,
+    s_3_bucket_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .invocation_condition = "invocationCondition",

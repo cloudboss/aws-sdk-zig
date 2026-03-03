@@ -6,13 +6,13 @@ const ResourceSpec = @import("resource_spec.zig").ResourceSpec;
 pub const SpaceJupyterLabAppSettings = struct {
     /// Settings that are used to configure and manage the lifecycle of JupyterLab
     /// applications in a space.
-    app_lifecycle_management: ?SpaceAppLifecycleManagement,
+    app_lifecycle_management: ?SpaceAppLifecycleManagement = null,
 
     /// A list of Git repositories that SageMaker automatically displays to users
     /// for cloning in the JupyterLab application.
-    code_repositories: ?[]const CodeRepository,
+    code_repositories: ?[]const CodeRepository = null,
 
-    default_resource_spec: ?ResourceSpec,
+    default_resource_spec: ?ResourceSpec = null,
 
     pub const json_field_names = .{
         .app_lifecycle_management = "AppLifecycleManagement",

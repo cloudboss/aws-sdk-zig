@@ -4,10 +4,10 @@ const BatchReadExceptionType = @import("batch_read_exception_type.zig").BatchRea
 /// message.
 pub const BatchReadException = struct {
     /// An exception message that is associated with the failure.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// A type of exception, such as `InvalidArnException`.
-    @"type": ?BatchReadExceptionType,
+    @"type": ?BatchReadExceptionType = null,
 
     pub const json_field_names = .{
         .message = "Message",

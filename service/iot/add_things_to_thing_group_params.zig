@@ -3,7 +3,7 @@
 pub const AddThingsToThingGroupParams = struct {
     /// Specifies if this mitigation action can move the things that triggered the
     /// mitigation action even if they are part of one or more dynamic thing groups.
-    override_dynamic_groups: ?bool,
+    override_dynamic_groups: ?bool = null,
 
     /// The list of groups to which you want to add the things that triggered the
     /// mitigation action. You can add a thing to a maximum of 10 groups, but you

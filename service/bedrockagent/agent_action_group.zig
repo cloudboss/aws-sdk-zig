@@ -11,7 +11,7 @@ pub const AgentActionGroup = struct {
     /// The Amazon Resource Name (ARN) of the Lambda function containing the
     /// business logic that is carried out upon invoking the action or the custom
     /// control method for handling the information elicited from the user.
-    action_group_executor: ?ActionGroupExecutor,
+    action_group_executor: ?ActionGroupExecutor = null,
 
     /// The unique identifier of the action group.
     action_group_id: []const u8,
@@ -34,24 +34,24 @@ pub const AgentActionGroup = struct {
     /// for the action group or the JSON or YAML-formatted payload defining the
     /// schema. For more information, see [Action group OpenAPI
     /// schemas](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html).
-    api_schema: ?APISchema,
+    api_schema: ?APISchema = null,
 
     /// A unique, case-sensitive identifier to ensure that the API request completes
     /// no more than one time. If this token matches a previous request, Amazon
     /// Bedrock ignores the request, but does not return an error. For more
     /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The time at which the action group was created.
     created_at: i64,
 
     /// The description of the action group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Defines functions that each define parameters that the agent needs to invoke
     /// from the user. Each function represents an action in an action group.
-    function_schema: ?FunctionSchema,
+    function_schema: ?FunctionSchema = null,
 
     /// The configuration settings for a computer use action.
     ///
@@ -59,7 +59,7 @@ pub const AgentActionGroup = struct {
     /// with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information,
     /// see [Configure an Amazon Bedrock Agent to complete tasks with computer use
     /// tools](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html).
-    parent_action_group_signature_params: ?[]const aws.map.StringMapEntry,
+    parent_action_group_signature_params: ?[]const aws.map.StringMapEntry = null,
 
     /// If this field is set as `AMAZON.UserInput`, the agent can request the user
     /// for additional information when trying to complete a task. The
@@ -70,7 +70,7 @@ pub const AgentActionGroup = struct {
     /// in an action group, but doesn't have enough information to complete the API
     /// request, it will invoke this action group instead and return an
     /// [Observation](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html) reprompting the user for more information.
-    parent_action_signature: ?ActionGroupSignature,
+    parent_action_signature: ?ActionGroupSignature = null,
 
     /// The time at which the action group was last updated.
     updated_at: i64,

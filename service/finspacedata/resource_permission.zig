@@ -21,7 +21,7 @@
 /// Permissions](https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions) in the FinSpace User Guide.
 pub const ResourcePermission = struct {
     /// Permission for a resource.
-    permission: ?[]const u8,
+    permission: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .permission = "permission",

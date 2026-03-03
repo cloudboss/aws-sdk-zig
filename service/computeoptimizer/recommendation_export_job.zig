@@ -12,25 +12,25 @@ const JobStatus = @import("job_status.zig").JobStatus;
 /// recommendations.
 pub const RecommendationExportJob = struct {
     /// The timestamp of when the export job was created.
-    creation_timestamp: ?i64,
+    creation_timestamp: ?i64 = null,
 
     /// An object that describes the destination of the export file.
-    destination: ?ExportDestination,
+    destination: ?ExportDestination = null,
 
     /// The reason for an export job failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The identification number of the export job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The timestamp of when the export job was last updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     /// The resource type of the exported recommendations.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The status of the export job.
-    status: ?JobStatus,
+    status: ?JobStatus = null,
 
     pub const json_field_names = .{
         .creation_timestamp = "creationTimestamp",

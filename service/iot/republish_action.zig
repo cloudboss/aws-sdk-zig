@@ -5,12 +5,12 @@ pub const RepublishAction = struct {
     /// MQTT Version 5.0 headers information. For more information, see [
     /// MQTT](https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html) from
     /// the Amazon Web Services IoT Core Developer Guide.
-    headers: ?MqttHeaders,
+    headers: ?MqttHeaders = null,
 
     /// The Quality of Service (QoS) level to use when republishing messages. The
     /// default value
     /// is 0.
-    qos: ?i32,
+    qos: ?i32 = null,
 
     /// The ARN of the IAM role that grants access.
     role_arn: []const u8,

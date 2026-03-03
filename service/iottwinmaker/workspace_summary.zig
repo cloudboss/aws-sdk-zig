@@ -7,10 +7,10 @@ pub const WorkspaceSummary = struct {
     creation_date_time: i64,
 
     /// The description of the workspace.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A list of services that are linked to the workspace.
-    linked_services: ?[]const []const u8,
+    linked_services: ?[]const []const u8 = null,
 
     /// The date and time when the workspace was last updated.
     update_date_time: i64,

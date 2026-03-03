@@ -7,7 +7,7 @@ pub const MedicalTranscript = struct {
     /// Note that this is the Amazon S3 location you specified in your request using
     /// the
     /// `OutputBucketName` parameter.
-    transcript_file_uri: ?[]const u8,
+    transcript_file_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .transcript_file_uri = "TranscriptFileUri",

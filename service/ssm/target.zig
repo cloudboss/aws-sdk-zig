@@ -63,7 +63,7 @@ pub const Target = struct {
     /// User-defined criteria for sending commands that target managed nodes that
     /// meet the
     /// criteria.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// User-defined criteria that maps to `Key`. For example, if you specified
     /// `tag:ServerRole`, you could specify `value:WebServer` to run a command on
@@ -72,7 +72,7 @@ pub const Target = struct {
     /// Depending on the type of target, the maximum number of values for a key
     /// might be lower than
     /// the global maximum of 50.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

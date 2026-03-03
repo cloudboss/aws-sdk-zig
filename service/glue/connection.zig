@@ -9,13 +9,13 @@ const ConnectionStatus = @import("connection_status.zig").ConnectionStatus;
 /// Defines a connection to a data source.
 pub const Connection = struct {
     /// Connection properties specific to the Athena compute environment.
-    athena_properties: ?[]const aws.map.StringMapEntry,
+    athena_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The authentication properties of the connection.
-    authentication_configuration: ?AuthenticationConfiguration,
+    authentication_configuration: ?AuthenticationConfiguration = null,
 
     /// A list of compute environments compatible with the connection.
-    compatible_compute_environments: ?[]const ComputeEnvironment,
+    compatible_compute_environments: ?[]const ComputeEnvironment = null,
 
     /// These key-value pairs define parameters for the connection when using the
     /// version 1 Connection schema:
@@ -183,52 +183,52 @@ pub const Connection = struct {
     ///   cluster in which queries will run.
     ///
     /// * `DATABASE` - The Amazon Redshift database that you are connecting to.
-    connection_properties: ?[]const aws.map.StringMapEntry,
+    connection_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The version of the connection schema for this connection. Version 2 supports
     /// properties for specific compute environments.
-    connection_schema_version: ?i32,
+    connection_schema_version: ?i32 = null,
 
     /// The type of the connection. Currently, SFTP is not supported.
-    connection_type: ?ConnectionType,
+    connection_type: ?ConnectionType = null,
 
     /// The timestamp of the time that this connection definition was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The description of the connection.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A timestamp of the time this connection was last validated.
-    last_connection_validation_time: ?i64,
+    last_connection_validation_time: ?i64 = null,
 
     /// The user, group, or role that last updated this connection definition.
-    last_updated_by: ?[]const u8,
+    last_updated_by: ?[]const u8 = null,
 
     /// The timestamp of the last time the connection definition was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// A list of criteria that can be used in selecting this connection.
-    match_criteria: ?[]const []const u8,
+    match_criteria: ?[]const []const u8 = null,
 
     /// The name of the connection definition.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The physical connection requirements, such as virtual private cloud (VPC)
     /// and `SecurityGroup`, that are needed to make this connection successfully.
-    physical_connection_requirements: ?PhysicalConnectionRequirements,
+    physical_connection_requirements: ?PhysicalConnectionRequirements = null,
 
     /// Connection properties specific to the Python compute environment.
-    python_properties: ?[]const aws.map.StringMapEntry,
+    python_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// Connection properties specific to the Spark compute environment.
-    spark_properties: ?[]const aws.map.StringMapEntry,
+    spark_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The status of the connection. Can be one of: `READY`, `IN_PROGRESS`, or
     /// `FAILED`.
-    status: ?ConnectionStatus,
+    status: ?ConnectionStatus = null,
 
     /// The reason for the connection status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .athena_properties = "AthenaProperties",

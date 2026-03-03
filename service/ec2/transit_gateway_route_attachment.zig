@@ -3,12 +3,12 @@ const TransitGatewayAttachmentResourceType = @import("transit_gateway_attachment
 /// Describes a route attachment.
 pub const TransitGatewayRouteAttachment = struct {
     /// The ID of the resource.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The resource type. Note that the `tgw-peering` resource type has been
     /// deprecated.
-    resource_type: ?TransitGatewayAttachmentResourceType,
+    resource_type: ?TransitGatewayAttachmentResourceType = null,
 
     /// The ID of the attachment.
-    transit_gateway_attachment_id: ?[]const u8,
+    transit_gateway_attachment_id: ?[]const u8 = null,
 };

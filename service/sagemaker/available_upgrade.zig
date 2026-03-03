@@ -3,11 +3,11 @@
 pub const AvailableUpgrade = struct {
     /// A list of release notes describing the changes and improvements included in
     /// the available upgrade version.
-    release_notes: ?[]const []const u8,
+    release_notes: ?[]const []const u8 = null,
 
     /// The semantic version number of the available upgrade for the SageMaker
     /// Partner AI App.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .release_notes = "ReleaseNotes",

@@ -7,25 +7,25 @@ pub const ReplicationTaskStats = struct {
     /// The date the replication task was started either with a fresh start or a
     /// target
     /// reload.
-    fresh_start_date: ?i64,
+    fresh_start_date: ?i64 = null,
 
     /// The date the replication task full load was completed.
-    full_load_finish_date: ?i64,
+    full_load_finish_date: ?i64 = null,
 
     /// The percent complete for the full load migration task.
     full_load_progress_percent: i32 = 0,
 
     /// The date the replication task full load was started.
-    full_load_start_date: ?i64,
+    full_load_start_date: ?i64 = null,
 
     /// The date the replication task was started either with a fresh start or a
     /// resume. For
     /// more information, see
     /// [StartReplicationTaskType](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html#DMS-StartReplicationTask-request-StartReplicationTaskType).
-    start_date: ?i64,
+    start_date: ?i64 = null,
 
     /// The date the replication task was stopped.
-    stop_date: ?i64,
+    stop_date: ?i64 = null,
 
     /// The number of errors that have occurred during this task.
     tables_errored: i32 = 0,

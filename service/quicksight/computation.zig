@@ -15,34 +15,34 @@ const UniqueValuesComputation = @import("unique_values_computation.zig").UniqueV
 /// the attributes can be defined.
 pub const Computation = struct {
     /// The forecast computation configuration.
-    forecast: ?ForecastComputation,
+    forecast: ?ForecastComputation = null,
 
     /// The growth rate computation configuration.
-    growth_rate: ?GrowthRateComputation,
+    growth_rate: ?GrowthRateComputation = null,
 
     /// The maximum and minimum computation configuration.
-    maximum_minimum: ?MaximumMinimumComputation,
+    maximum_minimum: ?MaximumMinimumComputation = null,
 
     /// The metric comparison computation configuration.
-    metric_comparison: ?MetricComparisonComputation,
+    metric_comparison: ?MetricComparisonComputation = null,
 
     /// The period over period computation configuration.
-    period_over_period: ?PeriodOverPeriodComputation,
+    period_over_period: ?PeriodOverPeriodComputation = null,
 
     /// The period to `DataSetIdentifier` computation configuration.
-    period_to_date: ?PeriodToDateComputation,
+    period_to_date: ?PeriodToDateComputation = null,
 
     /// The top movers and bottom movers computation configuration.
-    top_bottom_movers: ?TopBottomMoversComputation,
+    top_bottom_movers: ?TopBottomMoversComputation = null,
 
     /// The top ranked and bottom ranked computation configuration.
-    top_bottom_ranked: ?TopBottomRankedComputation,
+    top_bottom_ranked: ?TopBottomRankedComputation = null,
 
     /// The total aggregation computation configuration.
-    total_aggregation: ?TotalAggregationComputation,
+    total_aggregation: ?TotalAggregationComputation = null,
 
     /// The unique values computation configuration.
-    unique_values: ?UniqueValuesComputation,
+    unique_values: ?UniqueValuesComputation = null,
 
     pub const json_field_names = .{
         .forecast = "Forecast",

@@ -17,16 +17,16 @@ pub const QuotaContextInfo = struct {
     /// field. The quota value applies to all resources for which you haven’t
     /// previously applied a quota value, and any new resources you create in your
     /// Amazon Web Services account.
-    context_id: ?[]const u8,
+    context_id: ?[]const u8 = null,
 
     /// Specifies the scope to which the quota value is applied. If the scope is
     /// `RESOURCE`, the quota value is applied to each resource in the Amazon Web
     /// Services account. If the scope is `ACCOUNT`, the quota value is applied to
     /// the Amazon Web Services account.
-    context_scope: ?QuotaContextScope,
+    context_scope: ?QuotaContextScope = null,
 
     /// Specifies the resource type to which the quota can be applied.
-    context_scope_type: ?[]const u8,
+    context_scope_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .context_id = "ContextId",

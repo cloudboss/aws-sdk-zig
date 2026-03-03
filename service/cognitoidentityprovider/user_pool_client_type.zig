@@ -22,7 +22,7 @@ pub const UserPoolClientType = struct {
     /// If you don't specify otherwise in the configuration of your app client, your
     /// access
     /// tokens are valid for one hour.
-    access_token_validity: ?i32,
+    access_token_validity: ?i32 = null,
 
     /// The OAuth grant types that you want your app client to generate. To create
     /// an app
@@ -45,7 +45,7 @@ pub const UserPoolClientType = struct {
     /// Issue the access token from the `/oauth2/token` endpoint
     /// directly to a non-person user using a combination of the client ID and
     /// client secret.
-    allowed_o_auth_flows: ?[]const OAuthFlowType,
+    allowed_o_auth_flows: ?[]const OAuthFlowType = null,
 
     /// Set to `true` to use OAuth 2.0 authorization server features in your app
     /// client.
@@ -69,7 +69,7 @@ pub const UserPoolClientType = struct {
     /// `AllowedOAuthFlowsUserPoolClient` in a request with the CLI or SDKs, it
     /// defaults
     /// to `false`. When `false`, only SDK-based API sign-in is permitted.
-    allowed_o_auth_flows_user_pool_client: ?bool,
+    allowed_o_auth_flows_user_pool_client: ?bool = null,
 
     /// The OAuth 2.0 scopes that you want your app client to support. Can include
     /// standard
@@ -77,7 +77,7 @@ pub const UserPoolClientType = struct {
     /// `profile`. Can also include the
     /// `aws.cognito.signin.user.admin` scope that authorizes user profile
     /// self-service operations and custom scopes from resource servers.
-    allowed_o_auth_scopes: ?[]const []const u8,
+    allowed_o_auth_scopes: ?[]const []const u8 = null,
 
     /// The user pool analytics configuration for collecting metrics and sending
     /// them to your
@@ -90,13 +90,13 @@ pub const UserPoolClientType = struct {
     /// available, user pools support sending events to Amazon Pinpoint projects
     /// within that same
     /// Region.
-    analytics_configuration: ?AnalyticsConfigurationType,
+    analytics_configuration: ?AnalyticsConfigurationType = null,
 
     /// Amazon Cognito creates a session token for each API request in an
     /// authentication flow. `AuthSessionValidity` is the duration,
     /// in minutes, of that session token. Your user pool native user must respond
     /// to each authentication challenge before the session expires.
-    auth_session_validity: ?i32,
+    auth_session_validity: ?i32 = null,
 
     /// A list of allowed redirect (callback) URLs for the IdPs.
     ///
@@ -116,21 +116,21 @@ pub const UserPoolClientType = struct {
     /// only.
     ///
     /// App callback URLs such as myapp://example are also supported.
-    callback_ur_ls: ?[]const []const u8,
+    callback_ur_ls: ?[]const []const u8 = null,
 
     /// The ID of the app client.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     /// The name of the app client.
-    client_name: ?[]const u8,
+    client_name: ?[]const u8 = null,
 
     /// The app client secret.
-    client_secret: ?[]const u8,
+    client_secret: ?[]const u8 = null,
 
     /// The date and time when the item was created. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The default redirect URI. Must be in the `CallbackURLs` list.
     ///
@@ -150,7 +150,7 @@ pub const UserPoolClientType = struct {
     /// only.
     ///
     /// App callback URLs such as myapp://example are also supported.
-    default_redirect_uri: ?[]const u8,
+    default_redirect_uri: ?[]const u8 = null,
 
     /// When `EnablePropagateAdditionalUserContextData` is true, Amazon Cognito
     /// accepts an
@@ -176,12 +176,12 @@ pub const UserPoolClientType = struct {
     /// user context
     /// data, see [Adding user device and session data to API
     /// requests](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint).
-    enable_propagate_additional_user_context_data: ?bool,
+    enable_propagate_additional_user_context_data: ?bool = null,
 
     /// Indicates whether token revocation is activated for the user pool client.
     /// When you
     /// create a new user pool client, token revocation is activated by default.
-    enable_token_revocation: ?bool,
+    enable_token_revocation: ?bool = null,
 
     /// The [authentication
     /// flows](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html) that you want your user pool client to support. For each app
@@ -235,7 +235,7 @@ pub const UserPoolClientType = struct {
     /// You can't assign these legacy `ExplicitAuthFlows` values to user pool
     /// clients at the same time as values that begin with `ALLOW_`,
     /// like `ALLOW_USER_SRP_AUTH`.
-    explicit_auth_flows: ?[]const ExplicitAuthFlowsType,
+    explicit_auth_flows: ?[]const ExplicitAuthFlowsType = null,
 
     /// The ID token time limit. After this limit expires, your user can't use
     /// their ID token. To specify the time unit for `IdTokenValidity` as
@@ -252,15 +252,15 @@ pub const UserPoolClientType = struct {
     /// If you don't specify otherwise in the configuration of your app client, your
     /// ID
     /// tokens are valid for one hour.
-    id_token_validity: ?i32,
+    id_token_validity: ?i32 = null,
 
     /// The date and time when the item was modified. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// A list of allowed logout URLs for the IdPs.
-    logout_ur_ls: ?[]const []const u8,
+    logout_ur_ls: ?[]const []const u8 = null,
 
     /// When `ENABLED`, suppresses messages that might indicate a valid user exists
     /// when someone attempts sign-in. This parameters sets your preference for the
@@ -279,7 +279,7 @@ pub const UserPoolClientType = struct {
     /// pool.
     ///
     /// Defaults to `LEGACY`.
-    prevent_user_existence_errors: ?PreventUserExistenceErrorTypes,
+    prevent_user_existence_errors: ?PreventUserExistenceErrorTypes = null,
 
     /// The list of user attributes that you want your app client to have read
     /// access to.
@@ -295,7 +295,7 @@ pub const UserPoolClientType = struct {
     /// populates `ReadAttributes` in the API response if you have specified your
     /// own
     /// custom set of read attributes.
-    read_attributes: ?[]const []const u8,
+    read_attributes: ?[]const []const u8 = null,
 
     /// The configuration of your app client for refresh token rotation. When
     /// enabled, your
@@ -303,7 +303,7 @@ pub const UserPoolClientType = struct {
     /// sessions
     /// with refresh tokens. When disabled, token refresh issues only ID and access
     /// tokens.
-    refresh_token_rotation: ?RefreshTokenRotationType,
+    refresh_token_rotation: ?RefreshTokenRotationType = null,
 
     /// The refresh token time limit. After this limit expires, your user can't use
     /// their refresh token. To specify the time unit for `RefreshTokenValidity` as
@@ -340,17 +340,17 @@ pub const UserPoolClientType = struct {
     /// only way to prevent
     /// SDK-based authentication is to block access with a [WAF
     /// rule](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-waf.html).
-    supported_identity_providers: ?[]const []const u8,
+    supported_identity_providers: ?[]const []const u8 = null,
 
     /// The time units that, with `IdTokenValidity`,
     /// `AccessTokenValidity`, and `RefreshTokenValidity`, set and
     /// display the duration of ID, access, and refresh tokens for an app client.
     /// You can assign
     /// a separate token validity unit to each type of token.
-    token_validity_units: ?TokenValidityUnitsType,
+    token_validity_units: ?TokenValidityUnitsType = null,
 
     /// The ID of the user pool associated with the app client.
-    user_pool_id: ?[]const u8,
+    user_pool_id: ?[]const u8 = null,
 
     /// The list of user attributes that you want your app client to have write
     /// access to.
@@ -377,7 +377,7 @@ pub const UserPoolClientType = struct {
     /// attribute. For more information, see [Specifying IdP Attribute Mappings for
     /// Your user
     /// pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
-    write_attributes: ?[]const []const u8,
+    write_attributes: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .access_token_validity = "AccessTokenValidity",

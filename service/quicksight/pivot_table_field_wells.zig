@@ -6,7 +6,7 @@ const PivotTableAggregatedFieldWells = @import("pivot_table_aggregated_field_wel
 /// the attributes can be defined.
 pub const PivotTableFieldWells = struct {
     /// The aggregated field well for the pivot table.
-    pivot_table_aggregated_field_wells: ?PivotTableAggregatedFieldWells,
+    pivot_table_aggregated_field_wells: ?PivotTableAggregatedFieldWells = null,
 
     pub const json_field_names = .{
         .pivot_table_aggregated_field_wells = "PivotTableAggregatedFieldWells",

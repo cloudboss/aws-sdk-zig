@@ -1,7 +1,7 @@
 /// Describes a webhook that connects repository events to an Amplify app.
 pub const Webhook = struct {
     /// The unique ID of an Amplify app.
-    app_id: ?[]const u8,
+    app_id: ?[]const u8 = null,
 
     /// The name for a branch that is part of an Amplify app.
     branch_name: []const u8,

@@ -6,7 +6,7 @@ const Asset = @import("asset.zig").Asset;
 /// training dataset.
 pub const TestingData = struct {
     /// The assets used for testing.
-    assets: ?[]const Asset,
+    assets: ?[]const Asset = null,
 
     /// If specified, Rekognition splits training dataset to create a test dataset
     /// for

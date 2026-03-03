@@ -3,14 +3,14 @@ const IdentityProvider = @import("identity_provider.zig").IdentityProvider;
 /// Describes users of an EC2 instance providing user-based subscriptions.
 pub const InstanceUserSummary = struct {
     /// The date a user was associated with an EC2 instance.
-    association_date: ?[]const u8,
+    association_date: ?[]const u8 = null,
 
     /// The date a user was disassociated from an EC2 instance.
-    disassociation_date: ?[]const u8,
+    disassociation_date: ?[]const u8 = null,
 
     /// The domain name of the Active Directory that contains the user information
     /// for the product subscription.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// The `IdentityProvider` resource specifies details about the identity
     /// provider.
@@ -20,13 +20,13 @@ pub const InstanceUserSummary = struct {
     instance_id: []const u8,
 
     /// The Amazon Resource Name (ARN) that identifies the instance user.
-    instance_user_arn: ?[]const u8,
+    instance_user_arn: ?[]const u8 = null,
 
     /// The status of a user associated with an EC2 instance.
     status: []const u8,
 
     /// The status message for users of an EC2 instance.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The user name from the identity provider for the user.
     username: []const u8,

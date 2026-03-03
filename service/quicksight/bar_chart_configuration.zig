@@ -19,38 +19,38 @@ const VisualPalette = @import("visual_palette.zig").VisualPalette;
 pub const BarChartConfiguration = struct {
     /// Determines the arrangement of the bars. The orientation and arrangement of
     /// bars determine the type of bar that is used in the visual.
-    bars_arrangement: ?BarsArrangement,
+    bars_arrangement: ?BarsArrangement = null,
 
     /// The label display options (grid line, range, scale, axis step) for bar chart
     /// category.
-    category_axis: ?AxisDisplayOptions,
+    category_axis: ?AxisDisplayOptions = null,
 
     /// The label options (label text, label visibility and sort icon visibility)
     /// for a bar chart.
-    category_label_options: ?ChartAxisLabelOptions,
+    category_label_options: ?ChartAxisLabelOptions = null,
 
     /// The label options (label text, label visibility and sort icon visibility)
     /// for a color that is used in a bar chart.
-    color_label_options: ?ChartAxisLabelOptions,
+    color_label_options: ?ChartAxisLabelOptions = null,
 
     /// The contribution analysis (anomaly configuration) setup of the visual.
-    contribution_analysis_defaults: ?[]const ContributionAnalysisDefault,
+    contribution_analysis_defaults: ?[]const ContributionAnalysisDefault = null,
 
     /// The options that determine if visual data labels are displayed.
-    data_labels: ?DataLabelOptions,
+    data_labels: ?DataLabelOptions = null,
 
     /// The options that determine the default presentation of all bar series in
     /// `BarChartVisual`.
-    default_series_settings: ?BarChartDefaultSeriesSettings,
+    default_series_settings: ?BarChartDefaultSeriesSettings = null,
 
     /// The field wells of the visual.
-    field_wells: ?BarChartFieldWells,
+    field_wells: ?BarChartFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The legend display setup of the visual.
-    legend: ?LegendOptions,
+    legend: ?LegendOptions = null,
 
     /// The orientation of the bars in a bar chart visual. There are two valid
     /// values in this structure:
@@ -62,33 +62,33 @@ pub const BarChartConfiguration = struct {
     /// * `VERTICAL`: Used for charts that have vertical bars. Visuals that use this
     ///   value are vertical bar charts, vertical stacked bar charts, and vertical
     ///   stacked 100% bar charts.
-    orientation: ?BarChartOrientation,
+    orientation: ?BarChartOrientation = null,
 
     /// The reference line setup of the visual.
-    reference_lines: ?[]const ReferenceLine,
+    reference_lines: ?[]const ReferenceLine = null,
 
     /// The series item configuration of a `BarChartVisual`.
-    series: ?[]const BarSeriesItem,
+    series: ?[]const BarSeriesItem = null,
 
     /// The small multiples setup for the visual.
-    small_multiples_options: ?SmallMultiplesOptions,
+    small_multiples_options: ?SmallMultiplesOptions = null,
 
     /// The sort configuration of a `BarChartVisual`.
-    sort_configuration: ?BarChartSortConfiguration,
+    sort_configuration: ?BarChartSortConfiguration = null,
 
     /// The tooltip display setup of the visual.
-    tooltip: ?TooltipOptions,
+    tooltip: ?TooltipOptions = null,
 
     /// The label display options (grid line, range, scale, axis step) for a bar
     /// chart value.
-    value_axis: ?AxisDisplayOptions,
+    value_axis: ?AxisDisplayOptions = null,
 
     /// The label options (label text, label visibility and sort icon visibility)
     /// for a bar chart value.
-    value_label_options: ?ChartAxisLabelOptions,
+    value_label_options: ?ChartAxisLabelOptions = null,
 
     /// The palette (chart color) display setup of the visual.
-    visual_palette: ?VisualPalette,
+    visual_palette: ?VisualPalette = null,
 
     pub const json_field_names = .{
         .bars_arrangement = "BarsArrangement",

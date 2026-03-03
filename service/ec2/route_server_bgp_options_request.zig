@@ -20,5 +20,5 @@ pub const RouteServerBgpOptionsRequest = struct {
     ///   failover by using more sensitive liveness detection.
     ///
     /// Defaults to `bgp-keepalive`.
-    peer_liveness_detection: ?RouteServerPeerLivenessMode,
+    peer_liveness_detection: ?RouteServerPeerLivenessMode = null,
 };

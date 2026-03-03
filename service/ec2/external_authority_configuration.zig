@@ -10,8 +10,8 @@ pub const ExternalAuthorityConfiguration = struct {
     /// The identifier for the external resource managing this scope. For Infoblox
     /// integrations, this is the Infoblox resource identifier in the format
     /// `.identity.account..`.
-    external_resource_identifier: ?[]const u8,
+    external_resource_identifier: ?[]const u8 = null,
 
     /// The type of external authority.
-    @"type": ?IpamScopeExternalAuthorityType,
+    @"type": ?IpamScopeExternalAuthorityType = null,
 };

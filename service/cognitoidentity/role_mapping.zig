@@ -12,13 +12,13 @@ pub const RoleMapping = struct {
     /// `Rules` type, or there is no `cognito:preferred_role` claim and
     /// there are multiple `cognito:roles` matches for the `Token`
     /// type.
-    ambiguous_role_resolution: ?AmbiguousRoleResolutionType,
+    ambiguous_role_resolution: ?AmbiguousRoleResolutionType = null,
 
     /// The rules to be used for mapping users to roles.
     ///
     /// If you specify Rules as the role mapping type, `RulesConfiguration` is
     /// required.
-    rules_configuration: ?RulesConfigurationType,
+    rules_configuration: ?RulesConfigurationType = null,
 
     /// The role mapping type. Token will use `cognito:roles` and
     /// `cognito:preferred_role` claims from the Cognito identity provider token to

@@ -4,7 +4,7 @@ const QueryConstraint = @import("query_constraint.zig").QueryConstraint;
 pub const AnalysisRuleIdMappingTable = struct {
     /// The columns that query runners are allowed to select, group by, or filter
     /// by.
-    dimension_columns: ?[]const []const u8,
+    dimension_columns: ?[]const []const u8 = null,
 
     /// The columns that query runners are allowed to use in an INNER JOIN
     /// statement.

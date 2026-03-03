@@ -7,17 +7,17 @@ const ThroughputMode = @import("throughput_mode.zig").ThroughputMode;
 pub const ThroughputConfigUpdate = struct {
     /// For provisioned feature groups with online store enabled, this indicates the
     /// read throughput you are billed for and can consume without throttling.
-    provisioned_read_capacity_units: ?i32,
+    provisioned_read_capacity_units: ?i32 = null,
 
     /// For provisioned feature groups, this indicates the write throughput you are
     /// billed for and can consume without throttling.
-    provisioned_write_capacity_units: ?i32,
+    provisioned_write_capacity_units: ?i32 = null,
 
     /// Target throughput mode of the feature group. Throughput update is an
     /// asynchronous operation, and the outcome should be monitored by polling
     /// `LastUpdateStatus` field in `DescribeFeatureGroup` response. You cannot
     /// update a feature group's throughput while another update is in progress.
-    throughput_mode: ?ThroughputMode,
+    throughput_mode: ?ThroughputMode = null,
 
     pub const json_field_names = .{
         .provisioned_read_capacity_units = "ProvisionedReadCapacityUnits",

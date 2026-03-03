@@ -13,13 +13,13 @@ pub const InsightsFilter = struct {
     /// * `MISCONFIGURATION`: Amazon EKS identifies misconfiguration in your EKS
     /// Hybrid Nodes setup that could impair functionality of your cluster or
     /// workloads. These are called configuration insights.
-    categories: ?[]const Category,
+    categories: ?[]const Category = null,
 
     /// The Kubernetes versions to use to filter the insights.
-    kubernetes_versions: ?[]const []const u8,
+    kubernetes_versions: ?[]const []const u8 = null,
 
     /// The statuses to use to filter the insights.
-    statuses: ?[]const InsightStatusValue,
+    statuses: ?[]const InsightStatusValue = null,
 
     pub const json_field_names = .{
         .categories = "categories",

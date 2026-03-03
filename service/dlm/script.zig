@@ -22,7 +22,7 @@ pub const Script = struct {
     /// script only, omit this parameter.
     ///
     /// Default: true
-    execute_operation_on_script_failure: ?bool,
+    execute_operation_on_script_failure: ?bool = null,
 
     /// The SSM document that includes the pre and/or post scripts to run.
     ///
@@ -48,7 +48,7 @@ pub const Script = struct {
     /// * If you are automating VSS Backups, omit this parameter.
     ///
     /// Default: AWS_SYSTEMS_MANAGER
-    execution_handler_service: ?ExecutionHandlerServiceValues,
+    execution_handler_service: ?ExecutionHandlerServiceValues = null,
 
     /// Specifies a timeout period, in seconds, after which Amazon Data Lifecycle
     /// Manager fails the script
@@ -61,7 +61,7 @@ pub const Script = struct {
     /// If you are automating VSS Backups, omit this parameter.
     ///
     /// Default: 10
-    execution_timeout: ?i32,
+    execution_timeout: ?i32 = null,
 
     /// Specifies the number of times Amazon Data Lifecycle Manager should retry
     /// scripts that fail.
@@ -79,7 +79,7 @@ pub const Script = struct {
     /// specify `0`.
     ///
     /// Default: 0
-    maximum_retry_count: ?i32,
+    maximum_retry_count: ?i32 = null,
 
     /// Indicate which scripts Amazon Data Lifecycle Manager should run on target
     /// instances. Pre scripts
@@ -107,7 +107,7 @@ pub const Script = struct {
     /// If you are automating VSS Backups, omit this parameter.
     ///
     /// Default: PRE and POST
-    stages: ?[]const StageValues,
+    stages: ?[]const StageValues = null,
 
     pub const json_field_names = .{
         .execute_operation_on_script_failure = "ExecuteOperationOnScriptFailure",

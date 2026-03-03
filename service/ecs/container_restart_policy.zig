@@ -17,7 +17,7 @@ pub const ContainerRestartPolicy = struct {
     /// specify a maximum of 50 container exit codes. By default, Amazon ECS does
     /// not ignore any
     /// exit codes.
-    ignored_exit_codes: ?[]const i32,
+    ignored_exit_codes: ?[]const i32 = null,
 
     /// A period of time (in seconds) that the container must run for before a
     /// restart can be
@@ -27,7 +27,7 @@ pub const ContainerRestartPolicy = struct {
     /// `restartAttemptPeriod` of 60 seconds and a maximum
     /// `restartAttemptPeriod` of 1800 seconds. By default, a container must run
     /// for 300 seconds before it can be restarted.
-    restart_attempt_period: ?i32,
+    restart_attempt_period: ?i32 = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

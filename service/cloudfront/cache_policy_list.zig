@@ -3,7 +3,7 @@ const CachePolicySummary = @import("cache_policy_summary.zig").CachePolicySummar
 /// A list of cache policies.
 pub const CachePolicyList = struct {
     /// Contains the cache policies in the list.
-    items: ?[]const CachePolicySummary,
+    items: ?[]const CachePolicySummary = null,
 
     /// The maximum number of cache policies requested.
     max_items: i32,
@@ -12,7 +12,7 @@ pub const CachePolicyList = struct {
     /// is present. It contains the value that you should use in the `Marker` field
     /// of a subsequent request to continue listing cache policies where you left
     /// off.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The total number of cache policies returned in the response.
     quantity: i32,

@@ -6,10 +6,10 @@
 /// becomes available.
 pub const MetricDimension = struct {
     /// The dimension name.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The dimension value.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

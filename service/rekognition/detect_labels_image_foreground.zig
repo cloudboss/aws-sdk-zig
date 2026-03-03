@@ -9,10 +9,10 @@ pub const DetectLabelsImageForeground = struct {
     /// color name, simplified color name, and PixelPercentage (the percentage of
     /// image pixels that
     /// have a particular color).
-    dominant_colors: ?[]const DominantColor,
+    dominant_colors: ?[]const DominantColor = null,
 
     /// The quality of the image foreground as defined by brightness and sharpness.
-    quality: ?DetectLabelsImageQuality,
+    quality: ?DetectLabelsImageQuality = null,
 
     pub const json_field_names = .{
         .dominant_colors = "DominantColors",

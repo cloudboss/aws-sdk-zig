@@ -4,7 +4,7 @@
 pub const UpdateCloudFormationCollectionFilter = struct {
     /// An array of the names of the Amazon Web Services CloudFormation stacks to
     /// update. You can specify up to 500 Amazon Web Services CloudFormation stacks.
-    stack_names: ?[]const []const u8,
+    stack_names: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .stack_names = "StackNames",

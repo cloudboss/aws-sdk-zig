@@ -5,22 +5,22 @@ const Resource = @import("resource.zig").Resource;
 
 /// A permission to a resource granted by batch operation to the principal.
 pub const BatchPermissionsRequestEntry = struct {
-    condition: ?Condition,
+    condition: ?Condition = null,
 
     /// A unique identifier for the batch permissions request entry.
     id: []const u8,
 
     /// The permissions to be granted.
-    permissions: ?[]const Permission,
+    permissions: ?[]const Permission = null,
 
     /// Indicates if the option to pass permissions is granted.
-    permissions_with_grant_option: ?[]const Permission,
+    permissions_with_grant_option: ?[]const Permission = null,
 
     /// The principal to be granted a permission.
-    principal: ?DataLakePrincipal,
+    principal: ?DataLakePrincipal = null,
 
     /// The resource to which the principal is to be granted a permission.
-    resource: ?Resource,
+    resource: ?Resource = null,
 
     pub const json_field_names = .{
         .condition = "Condition",

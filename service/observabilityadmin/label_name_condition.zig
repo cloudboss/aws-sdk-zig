@@ -3,7 +3,7 @@
 pub const LabelNameCondition = struct {
     /// The label name to match, supporting alphanumeric characters, underscores,
     /// hyphens, and colons.
-    label_name: ?[]const u8,
+    label_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .label_name = "LabelName",

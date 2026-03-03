@@ -7,16 +7,16 @@ pub const DataTableValue = struct {
     attribute_name: []const u8,
 
     /// The value's last modified region.
-    last_modified_region: ?[]const u8,
+    last_modified_region: ?[]const u8 = null,
 
     /// The value's last modified time.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The value's lock version.
-    lock_version: ?DataTableLockVersion,
+    lock_version: ?DataTableLockVersion = null,
 
     /// The value's primary values.
-    primary_values: ?[]const PrimaryValue,
+    primary_values: ?[]const PrimaryValue = null,
 
     /// The value's value.
     value: []const u8,

@@ -6,13 +6,13 @@ const ErrorCode = @import("error_code.zig").ErrorCode;
 /// messages.
 pub const UserError = struct {
     /// The error code.
-    error_code: ?ErrorCode,
+    error_code: ?ErrorCode = null,
 
     /// The error message.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The user ID for which the action failed.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

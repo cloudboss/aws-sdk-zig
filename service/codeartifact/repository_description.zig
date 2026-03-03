@@ -15,30 +15,30 @@ const UpstreamRepositoryInfo = @import("upstream_repository_info.zig").UpstreamR
 pub const RepositoryDescription = struct {
     /// The 12-digit account number of the Amazon Web Services account that manages
     /// the repository.
-    administrator_account: ?[]const u8,
+    administrator_account: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the repository.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A timestamp that represents the date and time the repository was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// A text description of the repository.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the domain that contains the repository.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// The 12-digit account number of the Amazon Web Services account that owns the
     /// domain that contains the repository. It does not include
     /// dashes or spaces.
-    domain_owner: ?[]const u8,
+    domain_owner: ?[]const u8 = null,
 
     /// An array of external connections associated with the repository.
-    external_connections: ?[]const RepositoryExternalConnectionInfo,
+    external_connections: ?[]const RepositoryExternalConnectionInfo = null,
 
     /// The name of the repository.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A list of upstream repositories to associate with the repository. The order
     /// of the upstream repositories
@@ -46,7 +46,7 @@ pub const RepositoryDescription = struct {
     /// requested package version. For more
     /// information, see [Working with upstream
     /// repositories](https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
-    upstreams: ?[]const UpstreamRepositoryInfo,
+    upstreams: ?[]const UpstreamRepositoryInfo = null,
 
     pub const json_field_names = .{
         .administrator_account = "administratorAccount",

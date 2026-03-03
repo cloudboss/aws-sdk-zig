@@ -7,10 +7,10 @@ const VectorKnowledgeBaseConfiguration = @import("vector_knowledge_base_configur
 /// base.
 pub const KnowledgeBaseConfiguration = struct {
     /// Settings for an Amazon Kendra knowledge base.
-    kendra_knowledge_base_configuration: ?KendraKnowledgeBaseConfiguration,
+    kendra_knowledge_base_configuration: ?KendraKnowledgeBaseConfiguration = null,
 
     /// Specifies configurations for a knowledge base connected to an SQL database.
-    sql_knowledge_base_configuration: ?SqlKnowledgeBaseConfiguration,
+    sql_knowledge_base_configuration: ?SqlKnowledgeBaseConfiguration = null,
 
     /// The type of data that the data source is converted into for the knowledge
     /// base.
@@ -18,7 +18,7 @@ pub const KnowledgeBaseConfiguration = struct {
 
     /// Contains details about the model that's used to convert the data source into
     /// vector embeddings.
-    vector_knowledge_base_configuration: ?VectorKnowledgeBaseConfiguration,
+    vector_knowledge_base_configuration: ?VectorKnowledgeBaseConfiguration = null,
 
     pub const json_field_names = .{
         .kendra_knowledge_base_configuration = "kendraKnowledgeBaseConfiguration",

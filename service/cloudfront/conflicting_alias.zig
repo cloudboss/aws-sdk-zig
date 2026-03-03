@@ -6,12 +6,12 @@
 pub const ConflictingAlias = struct {
     /// The (partially hidden) ID of the Amazon Web Services account that owns the
     /// standard distribution that's associated with the alias.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// An alias (also called a CNAME).
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The (partially hidden) ID of the CloudFront standard distribution associated
     /// with the alias.
-    distribution_id: ?[]const u8,
+    distribution_id: ?[]const u8 = null,
 };

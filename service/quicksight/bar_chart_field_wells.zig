@@ -6,7 +6,7 @@ const BarChartAggregatedFieldWells = @import("bar_chart_aggregated_field_wells.z
 /// the attributes can be defined.
 pub const BarChartFieldWells = struct {
     /// The aggregated field wells of a bar chart.
-    bar_chart_aggregated_field_wells: ?BarChartAggregatedFieldWells,
+    bar_chart_aggregated_field_wells: ?BarChartAggregatedFieldWells = null,
 
     pub const json_field_names = .{
         .bar_chart_aggregated_field_wells = "BarChartAggregatedFieldWells",

@@ -7,13 +7,13 @@ pub const PivotTableCellConditionalFormatting = struct {
     field_id: []const u8,
 
     /// The scope of the cell for conditional formatting.
-    scope: ?PivotTableConditionalFormattingScope,
+    scope: ?PivotTableConditionalFormattingScope = null,
 
     /// A list of cell scopes for conditional formatting.
-    scopes: ?[]const PivotTableConditionalFormattingScope,
+    scopes: ?[]const PivotTableConditionalFormattingScope = null,
 
     /// The text format of the cell for conditional formatting.
-    text_format: ?TextConditionalFormat,
+    text_format: ?TextConditionalFormat = null,
 
     pub const json_field_names = .{
         .field_id = "FieldId",

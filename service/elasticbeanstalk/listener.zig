@@ -4,5 +4,5 @@ pub const Listener = struct {
     port: i32 = 0,
 
     /// The protocol that is used by the Listener.
-    protocol: ?[]const u8,
+    protocol: ?[]const u8 = null,
 };

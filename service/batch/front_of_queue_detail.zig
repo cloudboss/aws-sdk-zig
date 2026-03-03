@@ -7,11 +7,11 @@ pub const FrontOfQueueDetail = struct {
     /// job queue. For first-in-first-out (FIFO) job queues, jobs are ordered based
     /// on their submission time. For fair-share scheduling (FSS) job queues, jobs
     /// are ordered based on their job priority and share usage.
-    jobs: ?[]const FrontOfQueueJobSummary,
+    jobs: ?[]const FrontOfQueueJobSummary = null,
 
     /// The Unix timestamp (in milliseconds) for when each of the first 100
     /// `RUNNABLE` jobs were last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .jobs = "jobs",

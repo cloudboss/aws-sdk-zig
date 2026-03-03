@@ -8,45 +8,45 @@ const AwsAppSyncGraphQlApiUserPoolConfigDetails = @import("aws_app_sync_graph_ql
 /// multiple databases, microservices, and APIs from a single GraphQL endpoint.
 pub const AwsAppSyncGraphQlApiDetails = struct {
     /// A list of additional authentication providers for the GraphQL API.
-    additional_authentication_providers: ?[]const AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails,
+    additional_authentication_providers: ?[]const AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails = null,
 
     /// The unique identifier for the API.
-    api_id: ?[]const u8,
+    api_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the API.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The type of security configuration for your GraphQL API: API key, Identity
     /// and Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user
     /// pools, or Lambda.
-    authentication_type: ?[]const u8,
+    authentication_type: ?[]const u8 = null,
 
     /// The unique identifier for the API.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Specifies the configuration for Lambda function authorization.
-    lambda_authorizer_config: ?AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails,
+    lambda_authorizer_config: ?AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails = null,
 
     /// The Amazon CloudWatch Logs configuration.
-    log_config: ?AwsAppSyncGraphQlApiLogConfigDetails,
+    log_config: ?AwsAppSyncGraphQlApiLogConfigDetails = null,
 
     /// The API name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Specifies the authorization configuration for using an OpenID Connect
     /// compliant service with an AppSync GraphQL API endpoint.
-    open_id_connect_config: ?AwsAppSyncGraphQlApiOpenIdConnectConfigDetails,
+    open_id_connect_config: ?AwsAppSyncGraphQlApiOpenIdConnectConfigDetails = null,
 
     /// The Amazon Cognito user pools configuration.
-    user_pool_config: ?AwsAppSyncGraphQlApiUserPoolConfigDetails,
+    user_pool_config: ?AwsAppSyncGraphQlApiUserPoolConfigDetails = null,
 
     /// The Amazon Resource Name (ARN) of the WAF web access control list (web ACL)
     /// associated with this
     /// GraphQL API, if one exists.
-    waf_web_acl_arn: ?[]const u8,
+    waf_web_acl_arn: ?[]const u8 = null,
 
     /// Indicates whether to use X-Ray tracing for the GraphQL API.
-    xray_enabled: ?bool,
+    xray_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .additional_authentication_providers = "AdditionalAuthenticationProviders",

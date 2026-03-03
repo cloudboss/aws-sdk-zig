@@ -6,9 +6,9 @@ const AudioExtractionCategoryType = @import("audio_extraction_category_type.zig"
 pub const AudioExtractionCategory = struct {
     state: State,
 
-    type_configuration: ?AudioExtractionCategoryTypeConfiguration,
+    type_configuration: ?AudioExtractionCategoryTypeConfiguration = null,
 
-    types: ?[]const AudioExtractionCategoryType,
+    types: ?[]const AudioExtractionCategoryType = null,
 
     pub const json_field_names = .{
         .state = "state",

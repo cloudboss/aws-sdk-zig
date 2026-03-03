@@ -6,13 +6,13 @@ const TaintEffect = @import("taint_effect.zig").TaintEffect;
 /// groups](https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html) in the *Amazon EKS User Guide*.
 pub const Taint = struct {
     /// The effect of the taint.
-    effect: ?TaintEffect,
+    effect: ?TaintEffect = null,
 
     /// The key of the taint.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value of the taint.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .effect = "effect",

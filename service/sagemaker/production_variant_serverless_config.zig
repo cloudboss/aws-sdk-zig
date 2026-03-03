@@ -15,7 +15,7 @@ pub const ProductionVariantServerlessConfig = struct {
     /// Inference Recommender jobs. For more information about creating an Inference
     /// Recommender job, see
     /// [CreateInferenceRecommendationsJobs](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html).
-    provisioned_concurrency: ?i32,
+    provisioned_concurrency: ?i32 = null,
 
     pub const json_field_names = .{
         .max_concurrency = "MaxConcurrency",

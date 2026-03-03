@@ -4,18 +4,18 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// The Lightsail resource that `SetupHistory` was ran on.
 pub const SetupHistoryResource = struct {
     /// The Amazon Resource Name (ARN) of the Lightsail resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The timestamp for when the resource was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
-    location: ?ResourceLocation,
+    location: ?ResourceLocation = null,
 
     /// The name of the Lightsail resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Lightsail resource type. For example, `Instance`.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

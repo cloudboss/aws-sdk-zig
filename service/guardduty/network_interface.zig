@@ -5,34 +5,34 @@ const SecurityGroup = @import("security_group.zig").SecurityGroup;
 /// instance.
 pub const NetworkInterface = struct {
     /// A list of IPv6 addresses for the EC2 instance.
-    ipv_6_addresses: ?[]const []const u8,
+    ipv_6_addresses: ?[]const []const u8 = null,
 
     /// The ID of the network interface.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// The private DNS name of the EC2 instance.
-    private_dns_name: ?[]const u8,
+    private_dns_name: ?[]const u8 = null,
 
     /// The private IP address of the EC2 instance.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// Other private IP address information of the EC2 instance.
-    private_ip_addresses: ?[]const PrivateIpAddressDetails,
+    private_ip_addresses: ?[]const PrivateIpAddressDetails = null,
 
     /// The public DNS name of the EC2 instance.
-    public_dns_name: ?[]const u8,
+    public_dns_name: ?[]const u8 = null,
 
     /// The public IP address of the EC2 instance.
-    public_ip: ?[]const u8,
+    public_ip: ?[]const u8 = null,
 
     /// The security groups associated with the EC2 instance.
-    security_groups: ?[]const SecurityGroup,
+    security_groups: ?[]const SecurityGroup = null,
 
     /// The subnet ID of the EC2 instance.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The VPC ID of the EC2 instance.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ipv_6_addresses = "Ipv6Addresses",

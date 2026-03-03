@@ -10,7 +10,7 @@ pub const Filter = struct {
     ///
     /// The supported filters for ListSessions are: `ActionName`, `SessionStatus`,
     /// and `InitationTime`.
-    field_name: ?FilterField,
+    field_name: ?FilterField = null,
 
     /// Operator to use for filtering.
     ///
@@ -29,11 +29,11 @@ pub const Filter = struct {
     /// * `ActionName`: `EQ` | `NE` | `CONTAINS` | `NOT_CONTAINS`
     /// * `SessionStatus`: `EQ` | `NE`
     /// * `InitiationTime`: `GT` | `LT` | `GTE` | `LTE` | `BETWEEN`
-    operator: ?Operator,
+    operator: ?Operator = null,
 
     /// Value to use for filtering. For the `BETWEEN` operator, specify values in
     /// the format `a AND b` (`AND` is case-insensitive).
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

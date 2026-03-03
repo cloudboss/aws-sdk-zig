@@ -6,13 +6,13 @@ const RollingDateConfiguration = @import("rolling_date_configuration.zig").Rolli
 /// the attributes can be defined.
 pub const TimeRangeFilterValue = struct {
     /// The parameter type input value.
-    parameter: ?[]const u8,
+    parameter: ?[]const u8 = null,
 
     /// The rolling date input value.
-    rolling_date: ?RollingDateConfiguration,
+    rolling_date: ?RollingDateConfiguration = null,
 
     /// The static input value.
-    static_value: ?i64,
+    static_value: ?i64 = null,
 
     pub const json_field_names = .{
         .parameter = "Parameter",

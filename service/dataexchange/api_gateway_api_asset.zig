@@ -3,31 +3,31 @@ const ProtocolType = @import("protocol_type.zig").ProtocolType;
 /// The API Gateway API that is the asset.
 pub const ApiGatewayApiAsset = struct {
     /// The API description of the API asset.
-    api_description: ?[]const u8,
+    api_description: ?[]const u8 = null,
 
     /// The API endpoint of the API asset.
-    api_endpoint: ?[]const u8,
+    api_endpoint: ?[]const u8 = null,
 
     /// The unique identifier of the API asset.
-    api_id: ?[]const u8,
+    api_id: ?[]const u8 = null,
 
     /// The API key of the API asset.
-    api_key: ?[]const u8,
+    api_key: ?[]const u8 = null,
 
     /// The API name of the API asset.
-    api_name: ?[]const u8,
+    api_name: ?[]const u8 = null,
 
     /// The download URL of the API specification of the API asset.
-    api_specification_download_url: ?[]const u8,
+    api_specification_download_url: ?[]const u8 = null,
 
     /// The date and time that the upload URL expires, in ISO 8601 format.
-    api_specification_download_url_expires_at: ?i64,
+    api_specification_download_url_expires_at: ?i64 = null,
 
     /// The protocol type of the API asset.
-    protocol_type: ?ProtocolType,
+    protocol_type: ?ProtocolType = null,
 
     /// The stage of the API asset.
-    stage: ?[]const u8,
+    stage: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_description = "ApiDescription",

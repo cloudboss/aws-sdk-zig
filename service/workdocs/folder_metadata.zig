@@ -3,38 +3,38 @@ const ResourceStateType = @import("resource_state_type.zig").ResourceStateType;
 /// Describes a folder.
 pub const FolderMetadata = struct {
     /// The time when the folder was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The ID of the creator.
-    creator_id: ?[]const u8,
+    creator_id: ?[]const u8 = null,
 
     /// The ID of the folder.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// List of labels on the folder.
-    labels: ?[]const []const u8,
+    labels: ?[]const []const u8 = null,
 
     /// The size of the latest version of the folder metadata.
-    latest_version_size: ?i64,
+    latest_version_size: ?i64 = null,
 
     /// The time when the folder was updated.
-    modified_timestamp: ?i64,
+    modified_timestamp: ?i64 = null,
 
     /// The name of the folder.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the parent folder.
-    parent_folder_id: ?[]const u8,
+    parent_folder_id: ?[]const u8 = null,
 
     /// The resource state of the folder.
-    resource_state: ?ResourceStateType,
+    resource_state: ?ResourceStateType = null,
 
     /// The unique identifier created from the subfolders and documents of the
     /// folder.
-    signature: ?[]const u8,
+    signature: ?[]const u8 = null,
 
     /// The size of the folder metadata.
-    size: ?i64,
+    size: ?i64 = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

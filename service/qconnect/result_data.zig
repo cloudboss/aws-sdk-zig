@@ -5,10 +5,10 @@ const QueryResultType = @import("query_result_type.zig").QueryResultType;
 /// Information about the result.
 pub const ResultData = struct {
     /// Summary of the recommended content.
-    data: ?DataSummary,
+    data: ?DataSummary = null,
 
     /// The document.
-    document: ?Document,
+    document: ?Document = null,
 
     /// The relevance score of the results.
     relevance_score: f64 = 0,
@@ -17,7 +17,7 @@ pub const ResultData = struct {
     result_id: []const u8,
 
     /// The type of the query result.
-    @"type": ?QueryResultType,
+    @"type": ?QueryResultType = null,
 
     pub const json_field_names = .{
         .data = "data",

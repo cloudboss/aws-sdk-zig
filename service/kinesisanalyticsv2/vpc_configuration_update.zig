@@ -2,13 +2,13 @@
 pub const VpcConfigurationUpdate = struct {
     /// Describes updates to the array of
     /// [SecurityGroup](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html) IDs used by the VPC configuration.
-    security_group_id_updates: ?[]const []const u8,
+    security_group_id_updates: ?[]const []const u8 = null,
 
     /// Describes updates to the array of
     /// [Subnet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html)
     /// IDs
     /// used by the VPC configuration.
-    subnet_id_updates: ?[]const []const u8,
+    subnet_id_updates: ?[]const []const u8 = null,
 
     /// Describes an update to the ID of the VPC configuration.
     vpc_configuration_id: []const u8,

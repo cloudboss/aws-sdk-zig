@@ -5,7 +5,7 @@ pub const S3DeliveryConfiguration = struct {
     /// This parameter causes the S3 objects that contain delivered logs to use a
     /// prefix structure
     /// that allows for integration with Apache Hive.
-    enable_hive_compatible_path: ?bool,
+    enable_hive_compatible_path: ?bool = null,
 
     /// This string allows re-configuring the S3 object prefix to contain either
     /// static or
@@ -15,7 +15,7 @@ pub const S3DeliveryConfiguration = struct {
     /// the
     /// [DescribeConfigurationTemplates](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeConfigurationTemplates.html) operation and check the
     /// `allowedSuffixPathFields` field in the response.
-    suffix_path: ?[]const u8,
+    suffix_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enable_hive_compatible_path = "enableHiveCompatiblePath",

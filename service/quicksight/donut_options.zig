@@ -13,11 +13,11 @@ pub const DonutOptions = struct {
     /// * `MEDIUM`- A medium-sized donut chart
     ///
     /// * `LARGE`- A large-sized donut chart
-    arc_options: ?ArcOptions,
+    arc_options: ?ArcOptions = null,
 
     /// The label options of the label that is displayed in the center of a donut
     /// chart. This option isn't available for pie charts.
-    donut_center_options: ?DonutCenterOptions,
+    donut_center_options: ?DonutCenterOptions = null,
 
     pub const json_field_names = .{
         .arc_options = "ArcOptions",

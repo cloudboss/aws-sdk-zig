@@ -8,7 +8,7 @@ pub const EngineWorkflowResourceIdentifier = struct {
     /// The unique key-value pair
     /// for a tag
     /// that identifies provisioned product resources.
-    unique_tag: ?UniqueTagResourceIdentifier,
+    unique_tag: ?UniqueTagResourceIdentifier = null,
 
     pub const json_field_names = .{
         .unique_tag = "UniqueTag",

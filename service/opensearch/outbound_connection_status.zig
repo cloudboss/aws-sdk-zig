@@ -3,7 +3,7 @@ const OutboundConnectionStatusCode = @import("outbound_connection_status_code.zi
 /// The status of an outbound cross-cluster connection.
 pub const OutboundConnectionStatus = struct {
     /// Verbose information for the outbound connection.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status code for the outbound connection. Can be one of the following:
     ///
@@ -36,7 +36,7 @@ pub const OutboundConnectionStatus = struct {
     ///
     /// * **DELETED** - Outbound connection is deleted and
     /// can no longer be used.
-    status_code: ?OutboundConnectionStatusCode,
+    status_code: ?OutboundConnectionStatusCode = null,
 
     pub const json_field_names = .{
         .message = "Message",

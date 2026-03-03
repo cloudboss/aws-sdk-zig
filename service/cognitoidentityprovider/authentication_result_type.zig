@@ -5,22 +5,22 @@ const NewDeviceMetadataType = @import("new_device_metadata_type.zig").NewDeviceM
 /// information for device authentication.
 pub const AuthenticationResultType = struct {
     /// Your user's access token.
-    access_token: ?[]const u8,
+    access_token: ?[]const u8 = null,
 
     /// The expiration period of the authentication result in seconds.
     expires_in: i32 = 0,
 
     /// Your user's ID token.
-    id_token: ?[]const u8,
+    id_token: ?[]const u8 = null,
 
     /// The new device metadata from an authentication result.
-    new_device_metadata: ?NewDeviceMetadataType,
+    new_device_metadata: ?NewDeviceMetadataType = null,
 
     /// Your user's refresh token.
-    refresh_token: ?[]const u8,
+    refresh_token: ?[]const u8 = null,
 
     /// The intended use of the token, for example `Bearer`.
-    token_type: ?[]const u8,
+    token_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_token = "AccessToken",

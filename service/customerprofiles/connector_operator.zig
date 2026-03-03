@@ -7,19 +7,19 @@ const ZendeskConnectorOperator = @import("zendesk_connector_operator.zig").Zende
 /// The operation to be performed on the provided source fields.
 pub const ConnectorOperator = struct {
     /// The operation to be performed on the provided Marketo source fields.
-    marketo: ?MarketoConnectorOperator,
+    marketo: ?MarketoConnectorOperator = null,
 
     /// The operation to be performed on the provided Amazon S3 source fields.
-    s3: ?S3ConnectorOperator,
+    s3: ?S3ConnectorOperator = null,
 
     /// The operation to be performed on the provided Salesforce source fields.
-    salesforce: ?SalesforceConnectorOperator,
+    salesforce: ?SalesforceConnectorOperator = null,
 
     /// The operation to be performed on the provided ServiceNow source fields.
-    service_now: ?ServiceNowConnectorOperator,
+    service_now: ?ServiceNowConnectorOperator = null,
 
     /// The operation to be performed on the provided Zendesk source fields.
-    zendesk: ?ZendeskConnectorOperator,
+    zendesk: ?ZendeskConnectorOperator = null,
 
     pub const json_field_names = .{
         .marketo = "Marketo",

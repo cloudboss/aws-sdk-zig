@@ -4,10 +4,10 @@ const CustomDataIdentifiersDetections = @import("custom_data_identifiers_detecti
 /// customer-defined identifier.
 pub const CustomDataIdentifiersResult = struct {
     /// The list of detected instances of sensitive data.
-    detections: ?[]const CustomDataIdentifiersDetections,
+    detections: ?[]const CustomDataIdentifiersDetections = null,
 
     /// The total number of occurrences of sensitive data.
-    total_count: ?i64,
+    total_count: ?i64 = null,
 
     pub const json_field_names = .{
         .detections = "Detections",

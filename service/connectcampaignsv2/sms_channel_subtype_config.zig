@@ -3,7 +3,7 @@ const SmsOutboundMode = @import("sms_outbound_mode.zig").SmsOutboundMode;
 
 /// SMS Channel Subtype config
 pub const SmsChannelSubtypeConfig = struct {
-    capacity: ?f64,
+    capacity: ?f64 = null,
 
     default_outbound_config: SmsOutboundConfig,
 

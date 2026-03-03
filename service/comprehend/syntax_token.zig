@@ -7,25 +7,25 @@ pub const SyntaxToken = struct {
     /// The zero-based offset from the beginning of the source text to the first
     /// character in the
     /// word.
-    begin_offset: ?i32,
+    begin_offset: ?i32 = null,
 
     /// The zero-based offset from the beginning of the source text to the last
     /// character in the
     /// word.
-    end_offset: ?i32,
+    end_offset: ?i32 = null,
 
     /// Provides the part of speech label and the confidence level that Amazon
     /// Comprehend has that
     /// the part of speech was correctly identified. For more information, see
     /// [Syntax](https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html)
     /// in the Comprehend Developer Guide.
-    part_of_speech: ?PartOfSpeechTag,
+    part_of_speech: ?PartOfSpeechTag = null,
 
     /// The word that was recognized in the source text.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// A unique identifier for a token.
-    token_id: ?i32,
+    token_id: ?i32 = null,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",

@@ -5,11 +5,11 @@ const BulkEmailStatus = @import("bulk_email_status.zig").BulkEmailStatus;
 pub const BulkEmailDestinationStatus = struct {
     /// A description of an error that prevented a message being sent using the
     /// `SendBulkTemplatedEmail` operation.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// The unique message identifier returned from the `SendBulkTemplatedEmail`
     /// operation.
-    message_id: ?[]const u8,
+    message_id: ?[]const u8 = null,
 
     /// The status of a message sent using the `SendBulkTemplatedEmail`
     /// operation.
@@ -61,5 +61,5 @@ pub const BulkEmailDestinationStatus = struct {
     ///
     /// * `Failed`: Amazon SES was unable to process your request. See the error
     /// message for additional information.
-    status: ?BulkEmailStatus,
+    status: ?BulkEmailStatus = null,
 };

@@ -4,7 +4,7 @@ const CfnStackUpdateParameter = @import("cfn_stack_update_parameter.zig").CfnSta
 /// template provider in the project.
 pub const CfnUpdateTemplateProvider = struct {
     /// An array of CloudFormation stack parameters.
-    parameters: ?[]const CfnStackUpdateParameter,
+    parameters: ?[]const CfnStackUpdateParameter = null,
 
     /// The unique identifier of the template to update within the project.
     template_name: []const u8,

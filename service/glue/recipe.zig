@@ -10,10 +10,10 @@ pub const Recipe = struct {
     name: []const u8,
 
     /// A reference to the DataBrew recipe used by the node.
-    recipe_reference: ?RecipeReference,
+    recipe_reference: ?RecipeReference = null,
 
     /// Transform steps used in the recipe node.
-    recipe_steps: ?[]const RecipeStep,
+    recipe_steps: ?[]const RecipeStep = null,
 
     pub const json_field_names = .{
         .inputs = "Inputs",

@@ -10,7 +10,7 @@ pub const LambdaVolumeMount = struct {
     /// volume.
     ///
     /// Default: `false`
-    add_group_owner: ?bool,
+    add_group_owner: ?bool = null,
 
     /// The path to the logical volume in the file system.
     destination_path: []const u8,
@@ -19,7 +19,7 @@ pub const LambdaVolumeMount = struct {
     /// (`rw`).
     ///
     /// Default: `ro`
-    permission: ?LambdaFilesystemPermission,
+    permission: ?LambdaFilesystemPermission = null,
 
     /// The path to the physical volume in the file system.
     source_path: []const u8,

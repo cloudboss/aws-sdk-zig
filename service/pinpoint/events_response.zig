@@ -10,7 +10,7 @@ pub const EventsResponse = struct {
     /// If no item response exists, the value can also be one of the following: 202,
     /// the request was processed successfully; or 400, the payload wasn't valid or
     /// required fields were missing.
-    results: ?[]const aws.map.MapEntry(ItemResponse),
+    results: ?[]const aws.map.MapEntry(ItemResponse) = null,
 
     pub const json_field_names = .{
         .results = "Results",

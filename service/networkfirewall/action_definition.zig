@@ -15,7 +15,7 @@ pub const ActionDefinition = struct {
     /// packet for stateful inspection. Then, when a packet matches the rule,
     /// Network Firewall
     /// publishes metrics for the packet and forwards it.
-    publish_metric_action: ?PublishMetricAction,
+    publish_metric_action: ?PublishMetricAction = null,
 
     pub const json_field_names = .{
         .publish_metric_action = "PublishMetricAction",

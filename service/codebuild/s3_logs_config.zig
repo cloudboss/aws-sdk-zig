@@ -3,19 +3,19 @@ const LogsConfigStatusType = @import("logs_config_status_type.zig").LogsConfigSt
 
 /// Information about S3 logs for a build project.
 pub const S3LogsConfig = struct {
-    bucket_owner_access: ?BucketOwnerAccess,
+    bucket_owner_access: ?BucketOwnerAccess = null,
 
     /// Set to true if you do not want your S3 build log output encrypted. By
     /// default S3
     /// build logs are encrypted.
-    encryption_disabled: ?bool,
+    encryption_disabled: ?bool = null,
 
     /// The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3
     /// bucket
     /// name is `my-bucket`, and your path prefix is `build-log`, then
     /// acceptable formats are `my-bucket/build-log` or
     /// `arn:aws:s3:::my-bucket/build-log`.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The current status of the S3 build logs. Valid values are:
     ///

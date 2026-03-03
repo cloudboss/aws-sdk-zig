@@ -3,21 +3,21 @@ pub const SavingsPlansUtilization = struct {
     /// The total amount of Savings Plans commitment that's been purchased in an
     /// account (or
     /// set of accounts).
-    total_commitment: ?[]const u8,
+    total_commitment: ?[]const u8 = null,
 
     /// The amount of your Savings Plans commitment that wasn't consumed from
     /// Savings Plans
     /// eligible usage in a specific period.
-    unused_commitment: ?[]const u8,
+    unused_commitment: ?[]const u8 = null,
 
     /// The amount of your Savings Plans commitment that was consumed from Savings
     /// Plans
     /// eligible usage in a specific period.
-    used_commitment: ?[]const u8,
+    used_commitment: ?[]const u8 = null,
 
     /// The amount of `UsedCommitment` divided by the `TotalCommitment`
     /// for your Savings Plans.
-    utilization_percentage: ?[]const u8,
+    utilization_percentage: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .total_commitment = "TotalCommitment",

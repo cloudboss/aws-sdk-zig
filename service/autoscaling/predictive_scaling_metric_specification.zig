@@ -60,24 +60,24 @@ const PredictiveScalingPredefinedScalingMetric = @import("predictive_scaling_pre
 /// the *Amazon EC2 Auto Scaling User Guide*.
 pub const PredictiveScalingMetricSpecification = struct {
     /// The customized capacity metric specification.
-    customized_capacity_metric_specification: ?PredictiveScalingCustomizedCapacityMetric,
+    customized_capacity_metric_specification: ?PredictiveScalingCustomizedCapacityMetric = null,
 
     /// The customized load metric specification.
-    customized_load_metric_specification: ?PredictiveScalingCustomizedLoadMetric,
+    customized_load_metric_specification: ?PredictiveScalingCustomizedLoadMetric = null,
 
     /// The customized scaling metric specification.
-    customized_scaling_metric_specification: ?PredictiveScalingCustomizedScalingMetric,
+    customized_scaling_metric_specification: ?PredictiveScalingCustomizedScalingMetric = null,
 
     /// The predefined load metric specification.
-    predefined_load_metric_specification: ?PredictiveScalingPredefinedLoadMetric,
+    predefined_load_metric_specification: ?PredictiveScalingPredefinedLoadMetric = null,
 
     /// The predefined metric pair specification from which Amazon EC2 Auto Scaling
     /// determines the
     /// appropriate scaling metric and load metric to use.
-    predefined_metric_pair_specification: ?PredictiveScalingPredefinedMetricPair,
+    predefined_metric_pair_specification: ?PredictiveScalingPredefinedMetricPair = null,
 
     /// The predefined scaling metric specification.
-    predefined_scaling_metric_specification: ?PredictiveScalingPredefinedScalingMetric,
+    predefined_scaling_metric_specification: ?PredictiveScalingPredefinedScalingMetric = null,
 
     /// Specifies the target utilization.
     ///

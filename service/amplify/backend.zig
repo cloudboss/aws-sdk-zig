@@ -7,7 +7,7 @@
 /// Typescript code.
 pub const Backend = struct {
     /// The Amazon Resource Name (ARN) for the CloudFormation stack.
-    stack_arn: ?[]const u8,
+    stack_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .stack_arn = "stackArn",

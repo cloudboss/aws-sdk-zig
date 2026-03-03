@@ -15,7 +15,7 @@ pub const ServiceConnectServiceResource = struct {
     /// integrations with Cloud
     /// Map. However, Service Connect can't ensure connectivity outside of Amazon
     /// ECS.
-    discovery_arn: ?[]const u8,
+    discovery_arn: ?[]const u8 = null,
 
     /// The discovery name of this Service Connect resource.
     ///
@@ -28,7 +28,7 @@ pub const ServiceConnectServiceResource = struct {
     ///
     /// If the `discoveryName` isn't specified, the port mapping name from the task
     /// definition is used in `portName.namespace`.
-    discovery_name: ?[]const u8,
+    discovery_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .discovery_arn = "discoveryArn",

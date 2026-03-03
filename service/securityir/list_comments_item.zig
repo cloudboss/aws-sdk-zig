@@ -1,15 +1,15 @@
 pub const ListCommentsItem = struct {
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     comment_id: []const u8,
 
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
-    creator: ?[]const u8,
+    creator: ?[]const u8 = null,
 
-    last_updated_by: ?[]const u8,
+    last_updated_by: ?[]const u8 = null,
 
-    last_updated_date: ?i64,
+    last_updated_date: ?i64 = null,
 
     pub const json_field_names = .{
         .body = "body",

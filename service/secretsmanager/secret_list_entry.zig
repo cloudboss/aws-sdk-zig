@@ -11,10 +11,10 @@ const Tag = @import("tag.zig").Tag;
 /// [GetSecretValue](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html) .
 pub const SecretListEntry = struct {
     /// The Amazon Resource Name (ARN) of the secret.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time when a secret was created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// The date and time the deletion of the secret occurred. Not present on active
     /// secrets.
@@ -23,10 +23,10 @@ pub const SecretListEntry = struct {
     /// as specified in the `RecoveryWindowInDays` parameter of the [
     /// `DeleteSecret`
     /// ](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_DeleteSecret.html) operation.
-    deleted_date: ?i64,
+    deleted_date: ?i64 = null,
 
     /// The user-provided description of the secret.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The metadata needed to successfully rotate a managed external secret. A list
     /// of key
@@ -34,62 +34,62 @@ pub const SecretListEntry = struct {
     /// about the
     /// required information, see [Managed external secrets
     /// partners](https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html).
-    external_secret_rotation_metadata: ?[]const ExternalSecretRotationMetadataItem,
+    external_secret_rotation_metadata: ?[]const ExternalSecretRotationMetadataItem = null,
 
     /// The role that Secrets Manager assumes to call APIs required to perform the
     /// rotation. For more
     /// information about the required information, see [Managed
     /// external secrets
     /// partners](https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html).
-    external_secret_rotation_role_arn: ?[]const u8,
+    external_secret_rotation_role_arn: ?[]const u8 = null,
 
     /// The ARN of the KMS key that Secrets Manager uses to encrypt the secret
     /// value. If the secret is
     /// encrypted with the Amazon Web Services managed key `aws/secretsmanager`,
     /// this
     /// field is omitted.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The date that the secret was last accessed in the Region. This field is
     /// omitted if the
     /// secret has never been retrieved in the Region.
-    last_accessed_date: ?i64,
+    last_accessed_date: ?i64 = null,
 
     /// The last date and time that this secret was modified in any way.
-    last_changed_date: ?i64,
+    last_changed_date: ?i64 = null,
 
     /// The most recent date and time that the Secrets Manager rotation process was
     /// successfully completed. This value is null if the secret hasn't ever
     /// rotated.
-    last_rotated_date: ?i64,
+    last_rotated_date: ?i64 = null,
 
     /// The friendly name of the secret.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The next rotation is scheduled to occur on or before this date. If the
     /// secret isn't
     /// configured for rotation or rotation has been disabled, Secrets Manager
     /// returns null.
-    next_rotation_date: ?i64,
+    next_rotation_date: ?i64 = null,
 
     /// Returns the name of the service that created the secret.
-    owning_service: ?[]const u8,
+    owning_service: ?[]const u8 = null,
 
     /// The Region where Secrets Manager originated the secret.
-    primary_region: ?[]const u8,
+    primary_region: ?[]const u8 = null,
 
     /// Indicates whether automatic, scheduled rotation is enabled for this secret.
-    rotation_enabled: ?bool,
+    rotation_enabled: ?bool = null,
 
     /// The ARN of an Amazon Web Services Lambda function invoked by Secrets Manager
     /// to rotate and expire the secret
     /// either automatically per the schedule or manually by a call to [
     /// `RotateSecret`
     /// ](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_RotateSecret.html).
-    rotation_lambda_arn: ?[]const u8,
+    rotation_lambda_arn: ?[]const u8 = null,
 
     /// A structure that defines the rotation configuration for the secret.
-    rotation_rules: ?RotationRulesType,
+    rotation_rules: ?RotationRulesType = null,
 
     /// A list of all of the currently assigned `SecretVersionStage` staging labels
     /// and the `SecretVersionId` attached to each one. Staging labels are used to
@@ -98,7 +98,7 @@ pub const SecretListEntry = struct {
     /// A version that does not have any `SecretVersionStage` is considered
     /// deprecated and subject to deletion. Such versions are not included in this
     /// list.
-    secret_versions_to_stages: ?[]const aws.map.MapEntry([]const []const u8),
+    secret_versions_to_stages: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The list of user-defined tags associated with the secret. To add tags to a
     /// secret, use
@@ -107,13 +107,13 @@ pub const SecretListEntry = struct {
     /// ](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_TagResource.html). To remove tags, use [
     /// `UntagResource`
     /// ](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_UntagResource.html).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The exact string that identifies the third-party partner that holds the
     /// external
     /// secret. For more information, see [Managed external secret
     /// partners](https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html).
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "ARN",

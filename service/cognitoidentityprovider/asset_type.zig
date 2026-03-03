@@ -5,7 +5,7 @@ const AssetExtensionType = @import("asset_extension_type.zig").AssetExtensionTyp
 /// An image file from a managed login branding style in a user pool.
 pub const AssetType = struct {
     /// The image file, in Base64-encoded binary.
-    bytes: ?[]const u8,
+    bytes: ?[]const u8 = null,
 
     /// The category that the image corresponds to in your managed login
     /// configuration.
@@ -25,7 +25,7 @@ pub const AssetType = struct {
     extension: AssetExtensionType,
 
     /// The ID of the asset.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bytes = "Bytes",

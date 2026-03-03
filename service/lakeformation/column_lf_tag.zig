@@ -4,10 +4,10 @@ const LFTagPair = @import("lf_tag_pair.zig").LFTagPair;
 /// attached to it.
 pub const ColumnLFTag = struct {
     /// The LF-tags attached to a column resource.
-    lf_tags: ?[]const LFTagPair,
+    lf_tags: ?[]const LFTagPair = null,
 
     /// The name of a column resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .lf_tags = "LFTags",

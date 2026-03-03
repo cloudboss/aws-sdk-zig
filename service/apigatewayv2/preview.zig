@@ -7,10 +7,10 @@ pub const Preview = struct {
     preview_status: PreviewStatus,
 
     /// The URL of the preview.
-    preview_url: ?[]const u8,
+    preview_url: ?[]const u8 = null,
 
     /// The status exception information.
-    status_exception: ?StatusException,
+    status_exception: ?StatusException = null,
 
     pub const json_field_names = .{
         .preview_status = "PreviewStatus",

@@ -12,7 +12,7 @@ pub const Checksum = struct {
     /// with multipart uploads, see [
     /// Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
-    checksum_crc32: ?[]const u8,
+    checksum_crc32: ?[]const u8 = null,
 
     /// The Base64 encoded, 32-bit `CRC32C` checksum of the object. This checksum is
     /// only present if the checksum was uploaded
@@ -24,7 +24,7 @@ pub const Checksum = struct {
     /// with multipart uploads, see [
     /// Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
-    checksum_crc32_c: ?[]const u8,
+    checksum_crc32_c: ?[]const u8 = null,
 
     /// The Base64 encoded, 64-bit `CRC64NVME` checksum of the object. This checksum
     /// is present
@@ -35,7 +35,7 @@ pub const Checksum = struct {
     /// uploaded object). For more information, see [Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
     /// the *Amazon S3 User Guide*.
-    checksum_crc64_nvme: ?[]const u8,
+    checksum_crc64_nvme: ?[]const u8 = null,
 
     /// The Base64 encoded, 160-bit `SHA1` digest of the object. This checksum is
     /// only present if the checksum was uploaded
@@ -47,7 +47,7 @@ pub const Checksum = struct {
     /// with multipart uploads, see [
     /// Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
-    checksum_sha1: ?[]const u8,
+    checksum_sha1: ?[]const u8 = null,
 
     /// The Base64 encoded, 256-bit `SHA256` digest of the object. This checksum is
     /// only present if the checksum was uploaded
@@ -59,12 +59,12 @@ pub const Checksum = struct {
     /// with multipart uploads, see [
     /// Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
-    checksum_sha256: ?[]const u8,
+    checksum_sha256: ?[]const u8 = null,
 
     /// The checksum type that is used to calculate the object’s checksum value. For
     /// more information, see
     /// [Checking
     /// object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
-    checksum_type: ?ChecksumType,
+    checksum_type: ?ChecksumType = null,
 };

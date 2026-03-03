@@ -4,20 +4,20 @@ const Tag = @import("tag.zig").Tag;
 /// Describes a transit gateway metering policy.
 pub const TransitGatewayMeteringPolicy = struct {
     /// The IDs of the middlebox attachments associated with the metering policy.
-    middlebox_attachment_ids: ?[]const []const u8,
+    middlebox_attachment_ids: ?[]const []const u8 = null,
 
     /// The state of the transit gateway metering policy.
-    state: ?TransitGatewayMeteringPolicyState,
+    state: ?TransitGatewayMeteringPolicyState = null,
 
     /// The tags assigned to the transit gateway metering policy.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the transit gateway associated with the metering policy.
-    transit_gateway_id: ?[]const u8,
+    transit_gateway_id: ?[]const u8 = null,
 
     /// The ID of the transit gateway metering policy.
-    transit_gateway_metering_policy_id: ?[]const u8,
+    transit_gateway_metering_policy_id: ?[]const u8 = null,
 
     /// The date and time when the metering policy update becomes effective.
-    update_effective_at: ?i64,
+    update_effective_at: ?i64 = null,
 };

@@ -7,14 +7,14 @@ const CopyJobState = @import("copy_job_state.zig").CopyJobState;
 /// Contains detailed information about a copy job.
 pub const CopyJob = struct {
     /// The account ID that owns the copy job.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The size, in bytes, of a copy job.
-    backup_size_in_bytes: ?i64,
+    backup_size_in_bytes: ?i64 = null,
 
     /// This returns the statistics of the included
     /// child (nested) copy jobs.
-    child_jobs_in_state: ?[]const aws.map.MapEntry(i64),
+    child_jobs_in_state: ?[]const aws.map.MapEntry(i64) = null,
 
     /// The date and time a copy job is completed, in Unix format and Coordinated
     /// Universal Time
@@ -22,7 +22,7 @@ pub const CopyJob = struct {
     /// example,
     /// the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087
     /// AM.
-    completion_date: ?i64,
+    completion_date: ?i64 = null,
 
     /// The identifier of a resource within a composite group, such as
     /// nested (child) recovery point belonging to a composite (parent) stack. The
@@ -30,55 +30,55 @@ pub const CopyJob = struct {
     /// the [
     /// logical
     /// ID](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax) within a stack.
-    composite_member_identifier: ?[]const u8,
+    composite_member_identifier: ?[]const u8 = null,
 
     /// Uniquely identifies a copy job.
-    copy_job_id: ?[]const u8,
+    copy_job_id: ?[]const u8 = null,
 
-    created_by: ?RecoveryPointCreator,
+    created_by: ?RecoveryPointCreator = null,
 
     /// The backup job ID that initiated this copy job. Only applicable to scheduled
     /// copy
     /// jobs and automatic copy jobs to logically air-gapped vault.
-    created_by_backup_job_id: ?[]const u8,
+    created_by_backup_job_id: ?[]const u8 = null,
 
     /// The date and time a copy job is created, in Unix format and Coordinated
     /// Universal Time
     /// (UTC). The value of `CreationDate` is accurate to milliseconds. For example,
     /// the
     /// value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// An Amazon Resource Name (ARN) that uniquely identifies a destination copy
     /// vault; for
     /// example, `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
-    destination_backup_vault_arn: ?[]const u8,
+    destination_backup_vault_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the KMS key used to encrypt the copied
     /// backup in the destination vault. This can be a customer-managed key or an
     /// Amazon Web Services managed key.
-    destination_encryption_key_arn: ?[]const u8,
+    destination_encryption_key_arn: ?[]const u8 = null,
 
     /// An ARN that uniquely identifies a destination recovery point; for example,
     /// `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-    destination_recovery_point_arn: ?[]const u8,
+    destination_recovery_point_arn: ?[]const u8 = null,
 
-    destination_recovery_point_lifecycle: ?Lifecycle,
+    destination_recovery_point_lifecycle: ?Lifecycle = null,
 
     /// The lock state of the destination backup vault. For logically air-gapped
     /// vaults, this indicates whether the vault is locked in compliance mode. Valid
     /// values include `LOCKED` and `UNLOCKED`.
-    destination_vault_lock_state: ?[]const u8,
+    destination_vault_lock_state: ?[]const u8 = null,
 
     /// The type of destination backup vault where the copied recovery point is
     /// stored. Valid values are `BACKUP_VAULT` for standard backup vaults and
     /// `LOGICALLY_AIR_GAPPED_BACKUP_VAULT` for logically air-gapped vaults.
-    destination_vault_type: ?[]const u8,
+    destination_vault_type: ?[]const u8 = null,
 
     /// Specifies the IAM role ARN used to copy the target recovery point; for
     /// example,
     /// `arn:aws:iam::123456789012:role/S3Access`.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// This is a boolean value indicating this is
     /// a parent (composite) copy job.
@@ -97,45 +97,45 @@ pub const CopyJob = struct {
     ///
     /// `AGGREGATE_ALL` aggregates job counts
     /// for all message categories and returns the sum
-    message_category: ?[]const u8,
+    message_category: ?[]const u8 = null,
 
     /// The number of child (nested) copy jobs.
-    number_of_child_jobs: ?i64,
+    number_of_child_jobs: ?i64 = null,
 
     /// This uniquely identifies a request to Backup
     /// to copy a resource. The return will be the
     /// parent (composite) job ID.
-    parent_job_id: ?[]const u8,
+    parent_job_id: ?[]const u8 = null,
 
     /// The Amazon Web Services resource to be copied; for example, an Amazon
     /// Elastic Block Store
     /// (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
     /// database.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The non-unique name of the resource that
     /// belongs to the specified backup.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// The type of Amazon Web Services resource to be copied; for example, an
     /// Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational
     /// Database Service (Amazon RDS) database.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// An Amazon Resource Name (ARN) that uniquely identifies a source copy vault;
     /// for example,
     /// `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
-    source_backup_vault_arn: ?[]const u8,
+    source_backup_vault_arn: ?[]const u8 = null,
 
     /// An ARN that uniquely identifies a source recovery point; for example,
     /// `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-    source_recovery_point_arn: ?[]const u8,
+    source_recovery_point_arn: ?[]const u8 = null,
 
     /// The current state of a copy job.
-    state: ?CopyJobState,
+    state: ?CopyJobState = null,
 
     /// A detailed message explaining the status of the job to copy a resource.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

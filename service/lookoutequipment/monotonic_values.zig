@@ -5,7 +5,7 @@ const StatisticalIssueStatus = @import("statistical_issue_status.zig").Statistic
 pub const MonotonicValues = struct {
     /// Indicates the monotonicity of values. Can be INCREASING, DECREASING, or
     /// STATIC.
-    monotonicity: ?Monotonicity,
+    monotonicity: ?Monotonicity = null,
 
     /// Indicates whether there is a potential data issue related to having
     /// monotonic values.

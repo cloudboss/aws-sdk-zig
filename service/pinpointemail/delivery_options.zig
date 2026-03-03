@@ -5,7 +5,7 @@ pub const DeliveryOptions = struct {
     /// The name of the dedicated IP pool that you want to associate with the
     /// configuration
     /// set.
-    sending_pool_name: ?[]const u8,
+    sending_pool_name: ?[]const u8 = null,
 
     /// Specifies whether messages that use the configuration set are required to
     /// use
@@ -14,7 +14,7 @@ pub const DeliveryOptions = struct {
     /// `Optional`,
     /// messages can be delivered in plain text if a TLS connection can't be
     /// established.
-    tls_policy: ?TlsPolicy,
+    tls_policy: ?TlsPolicy = null,
 
     pub const json_field_names = .{
         .sending_pool_name = "SendingPoolName",

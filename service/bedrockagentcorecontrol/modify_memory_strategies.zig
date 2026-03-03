@@ -5,13 +5,13 @@ const ModifyMemoryStrategyInput = @import("modify_memory_strategy_input.zig").Mo
 /// Contains information for modifying memory strategies.
 pub const ModifyMemoryStrategies = struct {
     /// The list of memory strategies to add.
-    add_memory_strategies: ?[]const MemoryStrategyInput,
+    add_memory_strategies: ?[]const MemoryStrategyInput = null,
 
     /// The list of memory strategies to delete.
-    delete_memory_strategies: ?[]const DeleteMemoryStrategyInput,
+    delete_memory_strategies: ?[]const DeleteMemoryStrategyInput = null,
 
     /// The list of memory strategies to modify.
-    modify_memory_strategies: ?[]const ModifyMemoryStrategyInput,
+    modify_memory_strategies: ?[]const ModifyMemoryStrategyInput = null,
 
     pub const json_field_names = .{
         .add_memory_strategies = "addMemoryStrategies",

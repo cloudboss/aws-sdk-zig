@@ -7,7 +7,7 @@ pub const RefreshPreferences = struct {
     /// (Optional) The CloudWatch alarm specification. CloudWatch alarms can be used
     /// to identify any
     /// issues and fail the operation if an alarm threshold is met.
-    alarm_specification: ?AlarmSpecification,
+    alarm_specification: ?AlarmSpecification = null,
 
     /// (Optional) Indicates whether to roll back the Auto Scaling group to its
     /// previous configuration
@@ -28,11 +28,11 @@ pub const RefreshPreferences = struct {
     ///
     /// For more information, see [Undo changes with a
     /// rollback](https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-refresh-rollback.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    auto_rollback: ?bool,
+    auto_rollback: ?bool = null,
 
     /// The amount of time, in seconds, to wait at the end of an instance refresh
     /// before the instance refresh is considered complete.
-    bake_time: ?i32,
+    bake_time: ?i32 = null,
 
     /// (Optional) The amount of time, in seconds, to wait after a checkpoint before
     /// continuing. This property is optional, but if you specify a value for it,
@@ -40,7 +40,7 @@ pub const RefreshPreferences = struct {
     /// specify a value for `CheckpointPercentages`. If you specify a value for
     /// `CheckpointPercentages` and not for `CheckpointDelay`, the
     /// `CheckpointDelay` defaults to `3600` (1 hour).
-    checkpoint_delay: ?i32,
+    checkpoint_delay: ?i32 = null,
 
     /// (Optional) Threshold values for each checkpoint in ascending order. Each
     /// number must
@@ -51,7 +51,7 @@ pub const RefreshPreferences = struct {
     /// For usage examples, see [Add checkpoints to an instance
     /// refresh](https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-adding-checkpoints-instance-refresh.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    checkpoint_percentages: ?[]const i32,
+    checkpoint_percentages: ?[]const i32 = null,
 
     /// A time period, in seconds, during which an instance refresh waits before
     /// moving on to
@@ -69,7 +69,7 @@ pub const RefreshPreferences = struct {
     /// the `DefaultInstanceWarmup` property, if defined (which is recommended in
     /// all
     /// cases), or the `HealthCheckGracePeriod` property otherwise.
-    instance_warmup: ?i32,
+    instance_warmup: ?i32 = null,
 
     /// Specifies the maximum percentage of the group that can be in service and
     /// healthy, or
@@ -87,7 +87,7 @@ pub const RefreshPreferences = struct {
     /// If you do not specify this property, the default is 100 percent, or the
     /// percentage set
     /// in the instance maintenance policy for the Auto Scaling group, if defined.
-    max_healthy_percentage: ?i32,
+    max_healthy_percentage: ?i32 = null,
 
     /// Specifies the minimum percentage of the group to keep in service, healthy,
     /// and ready
@@ -100,7 +100,7 @@ pub const RefreshPreferences = struct {
     /// If you do not specify this property, the default is 90 percent, or the
     /// percentage set
     /// in the instance maintenance policy for the Auto Scaling group, if defined.
-    min_healthy_percentage: ?i32,
+    min_healthy_percentage: ?i32 = null,
 
     /// Choose the behavior that you want Amazon EC2 Auto Scaling to use if
     /// instances protected from scale in
@@ -123,7 +123,7 @@ pub const RefreshPreferences = struct {
     /// Amazon EC2 Auto Scaling waits one hour for you to remove scale-in
     /// protection. Otherwise,
     /// the instance refresh will fail.
-    scale_in_protected_instances: ?ScaleInProtectedInstances,
+    scale_in_protected_instances: ?ScaleInProtectedInstances = null,
 
     /// (Optional) Indicates whether skip matching is enabled. If enabled (`true`),
     /// then Amazon EC2 Auto Scaling skips replacing instances that match the
@@ -138,7 +138,7 @@ pub const RefreshPreferences = struct {
     /// instance refresh with skip
     /// matching](https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh-skip-matching.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    skip_matching: ?bool,
+    skip_matching: ?bool = null,
 
     /// Choose the behavior that you want Amazon EC2 Auto Scaling to use if
     /// instances in `Standby`
@@ -161,5 +161,5 @@ pub const RefreshPreferences = struct {
     /// Amazon EC2 Auto Scaling waits one hour for you to return the instances to
     /// service.
     /// Otherwise, the instance refresh will fail.
-    standby_instances: ?StandbyInstances,
+    standby_instances: ?StandbyInstances = null,
 };

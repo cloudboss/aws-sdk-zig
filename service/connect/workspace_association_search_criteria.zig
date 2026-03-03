@@ -3,13 +3,13 @@ const StringCondition = @import("string_condition.zig").StringCondition;
 /// Defines the search criteria for filtering workspace associations.
 pub const WorkspaceAssociationSearchCriteria = struct {
     /// A list of conditions that must all be satisfied.
-    and_conditions: ?[]const WorkspaceAssociationSearchCriteria,
+    and_conditions: ?[]const WorkspaceAssociationSearchCriteria = null,
 
     /// A list of conditions to be met, where at least one condition must be
     /// satisfied.
-    or_conditions: ?[]const WorkspaceAssociationSearchCriteria,
+    or_conditions: ?[]const WorkspaceAssociationSearchCriteria = null,
 
-    string_condition: ?StringCondition,
+    string_condition: ?StringCondition = null,
 
     pub const json_field_names = .{
         .and_conditions = "AndConditions",

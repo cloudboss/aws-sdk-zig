@@ -9,7 +9,7 @@ pub const SlotResolutionTestResultItemCounts = struct {
 
     /// The number of matched, mismatched and execution error results for speech
     /// transcription for the slot.
-    speech_transcription_result_counts: ?[]const aws.map.MapEntry(i32),
+    speech_transcription_result_counts: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The total number of results.
     total_result_count: i32,

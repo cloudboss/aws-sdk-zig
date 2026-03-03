@@ -5,19 +5,19 @@ const StopCisSessionStatus = @import("stop_cis_session_status.zig").StopCisSessi
 /// The stop CIS session message.
 pub const StopCisSessionMessage = struct {
     /// The message benchmark profile.
-    benchmark_profile: ?[]const u8,
+    benchmark_profile: ?[]const u8 = null,
 
     /// The message benchmark version.
-    benchmark_version: ?[]const u8,
+    benchmark_version: ?[]const u8 = null,
 
     /// The message compute platform.
-    compute_platform: ?ComputePlatform,
+    compute_platform: ?ComputePlatform = null,
 
     /// The progress of the message.
     progress: StopCisMessageProgress,
 
     /// The reason for the message.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The status of the message.
     status: StopCisSessionStatus,

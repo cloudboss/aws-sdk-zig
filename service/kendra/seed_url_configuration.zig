@@ -31,7 +31,7 @@ pub const SeedUrlConfiguration = struct {
     /// and other domains that the web pages link to.
     ///
     /// The default mode is set to `HOST_ONLY`.
-    web_crawler_mode: ?WebCrawlerMode,
+    web_crawler_mode: ?WebCrawlerMode = null,
 
     pub const json_field_names = .{
         .seed_urls = "SeedUrls",

@@ -11,7 +11,7 @@ pub const ForceEndpointErrorConfiguration = struct {
     ///   key for the current key period.
     /// * `SLATE_INPUT` - The segments which contain slate content are considered to
     ///   be missing content.
-    endpoint_error_conditions: ?[]const EndpointErrorCondition,
+    endpoint_error_conditions: ?[]const EndpointErrorCondition = null,
 
     pub const json_field_names = .{
         .endpoint_error_conditions = "EndpointErrorConditions",

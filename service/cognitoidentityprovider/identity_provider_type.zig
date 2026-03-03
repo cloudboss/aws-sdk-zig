@@ -9,12 +9,12 @@ const IdentityProviderTypeType = @import("identity_provider_type_type.zig").Iden
 /// between the IdP and your user pool.
 pub const IdentityProviderType = struct {
     /// A mapping of IdP attributes to standard and custom user pool attributes.
-    attribute_mapping: ?[]const aws.map.StringMapEntry,
+    attribute_mapping: ?[]const aws.map.StringMapEntry = null,
 
     /// The date and time when the item was created. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// A list of IdP identifiers. IdP identifiers are strings that represent
     /// friendly names
@@ -24,12 +24,12 @@ pub const IdentityProviderType = struct {
     /// information, see
     /// `identity_provider` and `idp_identifier` at [Authorize
     /// endpoint](https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html#get-authorize-request-parameters).
-    idp_identifiers: ?[]const []const u8,
+    idp_identifiers: ?[]const []const u8 = null,
 
     /// The date and time when the item was modified. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The scopes, URLs, and identifiers for your external identity provider. The
     /// following
@@ -156,16 +156,16 @@ pub const IdentityProviderType = struct {
     /// "1example23456789", "client_secret": "provider-app-client-secret",
     /// "token_request_method":
     /// "GET", "token_url": "https://graph.facebook.com/v17.0/oauth/access_token" }`
-    provider_details: ?[]const aws.map.StringMapEntry,
+    provider_details: ?[]const aws.map.StringMapEntry = null,
 
     /// A friendly name for the IdP.
-    provider_name: ?[]const u8,
+    provider_name: ?[]const u8 = null,
 
     /// The type of IdP. Either SAML, OIDC, or a named social identity provider.
-    provider_type: ?IdentityProviderTypeType,
+    provider_type: ?IdentityProviderTypeType = null,
 
     /// The ID of the user pool associated with the IdP.
-    user_pool_id: ?[]const u8,
+    user_pool_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attribute_mapping = "AttributeMapping",

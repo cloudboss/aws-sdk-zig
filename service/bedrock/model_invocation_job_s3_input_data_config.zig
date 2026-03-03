@@ -4,10 +4,10 @@ const S3InputFormat = @import("s3_input_format.zig").S3InputFormat;
 pub const ModelInvocationJobS3InputDataConfig = struct {
     /// The ID of the Amazon Web Services account that owns the S3 bucket containing
     /// the input data.
-    s_3_bucket_owner: ?[]const u8,
+    s_3_bucket_owner: ?[]const u8 = null,
 
     /// The format of the input data.
-    s_3_input_format: ?S3InputFormat,
+    s_3_input_format: ?S3InputFormat = null,
 
     /// The S3 location of the input data.
     s_3_uri: []const u8,

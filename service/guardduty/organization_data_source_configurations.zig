@@ -9,15 +9,15 @@ pub const OrganizationDataSourceConfigurations = struct {
     /// Describes the configuration of Kubernetes data sources for new members of
     /// the
     /// organization.
-    kubernetes: ?OrganizationKubernetesConfiguration,
+    kubernetes: ?OrganizationKubernetesConfiguration = null,
 
     /// Describes the configuration of Malware Protection for new members of the
     /// organization.
-    malware_protection: ?OrganizationMalwareProtectionConfiguration,
+    malware_protection: ?OrganizationMalwareProtectionConfiguration = null,
 
     /// Describes whether S3 data event logs are enabled for new members of the
     /// organization.
-    s3_logs: ?OrganizationS3LogsConfiguration,
+    s3_logs: ?OrganizationS3LogsConfiguration = null,
 
     pub const json_field_names = .{
         .kubernetes = "Kubernetes",

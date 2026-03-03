@@ -3,7 +3,7 @@ const ValidationExceptionErrorCode = @import("validation_exception_error_code.zi
 /// Represents a field-specific validation error with detailed information.
 pub const ValidationExceptionField = struct {
     /// An error code explaining why the field validation failed.
-    code: ?ValidationExceptionErrorCode,
+    code: ?ValidationExceptionErrorCode = null,
 
     /// A detailed message explaining why the field validation failed.
     message: []const u8,

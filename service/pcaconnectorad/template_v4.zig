@@ -32,7 +32,7 @@ pub const TemplateV4 = struct {
     /// Specifies the hash algorithm used to hash the private key. Hash algorithm
     /// can only be
     /// specified when using Key Storage Providers.
-    hash_algorithm: ?HashAlgorithm,
+    hash_algorithm: ?HashAlgorithm = null,
 
     /// Private key attributes allow you to specify the minimal key length, key
     /// spec, key usage,
@@ -59,7 +59,7 @@ pub const TemplateV4 = struct {
     subject_name_flags: SubjectNameFlagsV4,
 
     /// List of templates in Active Directory that are superseded by this template.
-    superseded_templates: ?[]const []const u8,
+    superseded_templates: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .certificate_validity = "CertificateValidity",

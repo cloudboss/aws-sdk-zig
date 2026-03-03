@@ -6,7 +6,7 @@ pub const OptionStatus = struct {
     creation_date: i64,
 
     /// Indicates whether the Elasticsearch domain is being deleted.
-    pending_deletion: ?bool,
+    pending_deletion: ?bool = null,
 
     /// Provides the `OptionState` for the Elasticsearch domain.
     state: OptionState,

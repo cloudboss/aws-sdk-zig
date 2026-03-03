@@ -9,7 +9,7 @@ pub const ListDeploymentsRequest = struct {
     /// this operation. This specifies the next item to return. To return to the
     /// beginning of the
     /// list, exclude this parameter.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_id = "applicationId",

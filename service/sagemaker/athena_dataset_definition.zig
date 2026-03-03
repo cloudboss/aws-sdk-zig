@@ -10,9 +10,9 @@ pub const AthenaDatasetDefinition = struct {
     /// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
     /// that Amazon SageMaker uses to encrypt data generated from an Athena query
     /// execution.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
-    output_compression: ?AthenaResultCompressionType,
+    output_compression: ?AthenaResultCompressionType = null,
 
     output_format: AthenaResultFormat,
 
@@ -21,7 +21,7 @@ pub const AthenaDatasetDefinition = struct {
 
     query_string: []const u8,
 
-    work_group: ?[]const u8,
+    work_group: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .catalog = "Catalog",

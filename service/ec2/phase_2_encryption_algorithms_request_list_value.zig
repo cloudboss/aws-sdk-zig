@@ -2,5 +2,5 @@
 /// negotiations.
 pub const Phase2EncryptionAlgorithmsRequestListValue = struct {
     /// The encryption algorithm.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

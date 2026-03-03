@@ -34,7 +34,7 @@ pub const OutputConfig = struct {
     /// The prefix of the object key that the output will be saved to. When not
     /// enabled, the
     /// prefix will be “textract_output".
-    s3_prefix: ?[]const u8,
+    s3_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s3_bucket = "S3Bucket",

@@ -21,7 +21,7 @@ pub const PolicyEngine = struct {
     /// A human-readable description of the policy engine's purpose and scope.
     /// Limited to 4,096 characters, this helps administrators understand the policy
     /// engine's role in the overall governance strategy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The customer-assigned immutable name for the policy engine. This
     /// human-readable identifier must be unique within the account and cannot

@@ -6,19 +6,19 @@ const CampaignUpdateSummary = @import("campaign_update_summary.zig").CampaignUpd
 /// [CreateCampaign](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html).
 pub const Campaign = struct {
     /// The Amazon Resource Name (ARN) of the campaign.
-    campaign_arn: ?[]const u8,
+    campaign_arn: ?[]const u8 = null,
 
     /// The configuration details of a campaign.
-    campaign_config: ?CampaignConfig,
+    campaign_config: ?CampaignConfig = null,
 
     /// The date and time (in Unix format) that the campaign was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// If a campaign fails, the reason behind the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The date and time (in Unix format) that the campaign was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// Provides a summary of the properties of a campaign update. For a complete
     /// listing, call the
@@ -26,7 +26,7 @@ pub const Campaign = struct {
     ///
     /// The `latestCampaignUpdate` field is only returned when the campaign has had
     /// at least one `UpdateCampaign` call.
-    latest_campaign_update: ?CampaignUpdateSummary,
+    latest_campaign_update: ?CampaignUpdateSummary = null,
 
     /// Specifies the requested minimum provisioned transactions (recommendations)
     /// per second. A high `minProvisionedTPS` will increase your bill. We recommend
@@ -34,13 +34,13 @@ pub const Campaign = struct {
     /// your usage using Amazon CloudWatch metrics, and increase the
     /// `minProvisionedTPS`
     /// as necessary.
-    min_provisioned_tps: ?i32,
+    min_provisioned_tps: ?i32 = null,
 
     /// The name of the campaign.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the solution version the campaign uses.
-    solution_version_arn: ?[]const u8,
+    solution_version_arn: ?[]const u8 = null,
 
     /// The status of the campaign.
     ///
@@ -49,7 +49,7 @@ pub const Campaign = struct {
     /// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
     ///
     /// * DELETE PENDING > DELETE IN_PROGRESS
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .campaign_arn = "campaignArn",

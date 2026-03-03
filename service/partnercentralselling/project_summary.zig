@@ -21,11 +21,11 @@ pub const ProjectSummary = struct {
     /// * Resell: Amazon Web Services accounts and billing management for your
     ///   customers.
     /// * Other: Delivery model not described above.
-    delivery_models: ?[]const DeliveryModel,
+    delivery_models: ?[]const DeliveryModel = null,
 
     /// Provides a summary of the expected customer spend for the project, offering
     /// a high-level view of the potential financial impact.
-    expected_customer_spend: ?[]const ExpectedCustomerSpend,
+    expected_customer_spend: ?[]const ExpectedCustomerSpend = null,
 
     pub const json_field_names = .{
         .delivery_models = "DeliveryModels",

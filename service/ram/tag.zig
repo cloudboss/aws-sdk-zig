@@ -15,12 +15,12 @@ pub const Tag = struct {
     /// The key, or name, attached to the tag. Every tag must have a key. Key names
     /// are case
     /// sensitive.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The string value attached to the tag. The value can be an empty string. Key
     /// values are
     /// case sensitive.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "key",

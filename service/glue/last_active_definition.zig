@@ -4,20 +4,20 @@
 pub const LastActiveDefinition = struct {
     /// Specifies a path in Amazon S3 where the blueprint is published by the Glue
     /// developer.
-    blueprint_location: ?[]const u8,
+    blueprint_location: ?[]const u8 = null,
 
     /// Specifies a path in Amazon S3 where the blueprint is copied when you create
     /// or update the blueprint.
-    blueprint_service_location: ?[]const u8,
+    blueprint_service_location: ?[]const u8 = null,
 
     /// The description of the blueprint.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The date and time the blueprint was last modified.
-    last_modified_on: ?i64,
+    last_modified_on: ?i64 = null,
 
     /// A JSON string specifying the parameters for the blueprint.
-    parameter_spec: ?[]const u8,
+    parameter_spec: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .blueprint_location = "BlueprintLocation",

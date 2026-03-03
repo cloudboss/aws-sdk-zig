@@ -30,7 +30,7 @@ pub const WindowsAuditLogCreateConfiguration = struct {
     /// * If `FileAccessAuditLogLevel` and `FileShareAccessAuditLogLevel`
     /// are both set to `DISABLED`, you cannot specify a destination in
     /// `AuditLogDestination`.
-    audit_log_destination: ?[]const u8,
+    audit_log_destination: ?[]const u8 = null,
 
     /// Sets which attempt type is logged by Amazon FSx for file and folder
     /// accesses.

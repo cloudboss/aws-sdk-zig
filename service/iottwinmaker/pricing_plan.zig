@@ -5,10 +5,10 @@ const UpdateReason = @import("update_reason.zig").UpdateReason;
 /// The pricing plan.
 pub const PricingPlan = struct {
     /// The billable entity count.
-    billable_entity_count: ?i64,
+    billable_entity_count: ?i64 = null,
 
     /// The pricing plan's bundle information.
-    bundle_information: ?BundleInformation,
+    bundle_information: ?BundleInformation = null,
 
     /// The effective date and time of the pricing plan.
     effective_date_time: i64,

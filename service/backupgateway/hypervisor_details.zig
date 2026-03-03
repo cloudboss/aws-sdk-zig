@@ -8,37 +8,37 @@ const HypervisorState = @import("hypervisor_state.zig").HypervisorState;
 pub const HypervisorDetails = struct {
     /// The server host of the hypervisor. This can be either an IP address or
     /// a fully-qualified domain name (FQDN).
-    host: ?[]const u8,
+    host: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the hypervisor.
-    hypervisor_arn: ?[]const u8,
+    hypervisor_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the KMS
     /// used to encrypt the hypervisor.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// This is the time when the most recent successful sync
     /// of metadata occurred.
-    last_successful_metadata_sync_time: ?i64,
+    last_successful_metadata_sync_time: ?i64 = null,
 
     /// This is the most recent status for the indicated metadata sync.
-    latest_metadata_sync_status: ?SyncMetadataStatus,
+    latest_metadata_sync_status: ?SyncMetadataStatus = null,
 
     /// This is the most recent status for the indicated metadata sync.
-    latest_metadata_sync_status_message: ?[]const u8,
+    latest_metadata_sync_status_message: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the group of gateways within
     /// the requested log.
-    log_group_arn: ?[]const u8,
+    log_group_arn: ?[]const u8 = null,
 
     /// This is the name of the specified hypervisor.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// This is the current state of the specified hypervisor.
     ///
     /// The possible states are `PENDING`, `ONLINE`,
     /// `OFFLINE`, or `ERROR`.
-    state: ?HypervisorState,
+    state: ?HypervisorState = null,
 
     pub const json_field_names = .{
         .host = "Host",

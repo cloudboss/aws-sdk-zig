@@ -4,11 +4,11 @@ const MissingDataConfiguration = @import("missing_data_configuration.zig").Missi
 /// The series axis configuration of a line chart.
 pub const LineSeriesAxisDisplayOptions = struct {
     /// The options that determine the presentation of the line series axis.
-    axis_options: ?AxisDisplayOptions,
+    axis_options: ?AxisDisplayOptions = null,
 
     /// The configuration options that determine how missing data is treated during
     /// the rendering of a line chart.
-    missing_data_configurations: ?[]const MissingDataConfiguration,
+    missing_data_configurations: ?[]const MissingDataConfiguration = null,
 
     pub const json_field_names = .{
         .axis_options = "AxisOptions",

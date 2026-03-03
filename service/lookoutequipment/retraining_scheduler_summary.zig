@@ -5,26 +5,26 @@ const RetrainingSchedulerStatus = @import("retraining_scheduler_status.zig").Ret
 /// status, start date, frequency, and lookback window.
 pub const RetrainingSchedulerSummary = struct {
     /// The number of past days of data used for retraining.
-    lookback_window: ?[]const u8,
+    lookback_window: ?[]const u8 = null,
 
     /// The ARN of the model that the retraining scheduler is attached to.
-    model_arn: ?[]const u8,
+    model_arn: ?[]const u8 = null,
 
     /// The name of the model that the retraining scheduler is attached to.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     /// The frequency at which the model retraining is set. This follows the [ISO
     /// 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations)
     /// guidelines.
-    retraining_frequency: ?[]const u8,
+    retraining_frequency: ?[]const u8 = null,
 
     /// The start date for the retraining scheduler. Lookout for Equipment truncates
     /// the time you provide to the
     /// nearest UTC day.
-    retraining_start_date: ?i64,
+    retraining_start_date: ?i64 = null,
 
     /// The status of the retraining scheduler.
-    status: ?RetrainingSchedulerStatus,
+    status: ?RetrainingSchedulerStatus = null,
 
     pub const json_field_names = .{
         .lookback_window = "LookbackWindow",

@@ -1,7 +1,7 @@
 /// The detailed data about the current state of the service pipeline.
 pub const ServicePipelineState = struct {
     /// The service spec that was used to create the service pipeline.
-    spec: ?[]const u8,
+    spec: ?[]const u8 = null,
 
     /// The major version of the service template that was used to create the
     /// service

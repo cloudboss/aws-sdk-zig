@@ -2,10 +2,10 @@
 /// about an Amazon VPC.
 pub const AwsRoute53HostedZoneVpcDetails = struct {
     /// The identifier of an Amazon VPC.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region that an Amazon VPC was created in.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

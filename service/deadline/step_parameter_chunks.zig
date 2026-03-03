@@ -10,7 +10,7 @@ pub const StepParameterChunks = struct {
     range_constraint: RangeConstraint,
 
     /// The number of seconds to aim for when forming chunks.
-    target_runtime_seconds: ?i32,
+    target_runtime_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .default_task_count = "defaultTaskCount",

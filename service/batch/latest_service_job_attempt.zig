@@ -5,7 +5,7 @@ const ServiceResourceId = @import("service_resource_id.zig").ServiceResourceId;
 /// capacity constraints.
 pub const LatestServiceJobAttempt = struct {
     /// The service resource identifier associated with the service job attempt.
-    service_resource_id: ?ServiceResourceId,
+    service_resource_id: ?ServiceResourceId = null,
 
     pub const json_field_names = .{
         .service_resource_id = "serviceResourceId",

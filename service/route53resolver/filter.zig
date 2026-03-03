@@ -190,14 +190,14 @@ pub const Filter = struct {
     /// specify the applicable status code for `Values`: `CREATING`, `CREATED`,
     /// `DELETING`, or `FAILED`. For more information, see
     /// [Status](https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status).
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// When you're using a `List` operation and you want the operation to return a
     /// subset of objects, such as Resolver endpoints or Resolver rules,
     /// the value of the parameter that you want to use to filter objects. For
     /// example, to list only inbound Resolver endpoints, specify `Direction` for
     /// `Name` and specify `INBOUND` for `Values`.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

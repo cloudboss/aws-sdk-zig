@@ -5,7 +5,7 @@ const ProvisioningConfiguration = @import("provisioning_configuration.zig").Prov
 /// The configuration details of an environment blueprint.
 pub const EnvironmentBlueprintConfigurationItem = struct {
     /// The timestamp of when an environment blueprint was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of the Amazon DataZone domain in which an environment
     /// blueprint exists.
@@ -13,30 +13,30 @@ pub const EnvironmentBlueprintConfigurationItem = struct {
 
     /// The enabled Amazon Web Services Regions specified in a blueprint
     /// configuration.
-    enabled_regions: ?[]const []const u8,
+    enabled_regions: ?[]const []const u8 = null,
 
     /// The identifier of the environment blueprint.
     environment_blueprint_id: []const u8,
 
     /// The environment role permission boundary.
-    environment_role_permission_boundary: ?[]const u8,
+    environment_role_permission_boundary: ?[]const u8 = null,
 
     /// The ARN of the manage access role specified in the environment blueprint
     /// configuration.
-    manage_access_role_arn: ?[]const u8,
+    manage_access_role_arn: ?[]const u8 = null,
 
     /// The provisioning configuration of a blueprint.
-    provisioning_configurations: ?[]const ProvisioningConfiguration,
+    provisioning_configurations: ?[]const ProvisioningConfiguration = null,
 
     /// The ARN of the provisioning role specified in the environment blueprint
     /// configuration.
-    provisioning_role_arn: ?[]const u8,
+    provisioning_role_arn: ?[]const u8 = null,
 
     /// The regional parameters of the environment blueprint.
-    regional_parameters: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry),
+    regional_parameters: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry) = null,
 
     /// The timestamp of when the environment blueprint was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

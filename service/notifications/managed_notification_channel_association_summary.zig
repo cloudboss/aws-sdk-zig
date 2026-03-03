@@ -45,7 +45,7 @@ pub const ManagedNotificationChannelAssociationSummary = struct {
     ///
     /// * Users cannot associate or disassociate channels with the notification
     ///   configuration.
-    override_option: ?ChannelAssociationOverrideOption,
+    override_option: ?ChannelAssociationOverrideOption = null,
 
     pub const json_field_names = .{
         .channel_identifier = "channelIdentifier",

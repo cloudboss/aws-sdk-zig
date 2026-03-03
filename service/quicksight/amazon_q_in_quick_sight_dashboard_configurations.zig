@@ -4,7 +4,7 @@ const ExecutiveSummaryConfigurations = @import("executive_summary_configurations
 /// dashboard.
 pub const AmazonQInQuickSightDashboardConfigurations = struct {
     /// A generated executive summary of an embedded Quick Sight dashboard.
-    executive_summary: ?ExecutiveSummaryConfigurations,
+    executive_summary: ?ExecutiveSummaryConfigurations = null,
 
     pub const json_field_names = .{
         .executive_summary = "ExecutiveSummary",

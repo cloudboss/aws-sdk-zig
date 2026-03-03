@@ -15,7 +15,7 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     /// Valid Values: `clear` | `none` | `restart`
     ///
     /// Default: `clear`
-    dpd_timeout_action: ?[]const u8,
+    dpd_timeout_action: ?[]const u8 = null,
 
     /// The number of seconds after which a DPD timeout occurs. A DPD timeout of 40
     /// seconds means that the VPN endpoint will consider the peer dead 30 seconds
@@ -24,18 +24,18 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     /// Constraints: A value greater than or equal to 30.
     ///
     /// Default: `40`
-    dpd_timeout_seconds: ?i32,
+    dpd_timeout_seconds: ?i32 = null,
 
     /// Turn on or off tunnel endpoint lifecycle control feature.
-    enable_tunnel_lifecycle_control: ?bool,
+    enable_tunnel_lifecycle_control: ?bool = null,
 
     /// The IKE versions that are permitted for the VPN tunnel.
     ///
     /// Valid values: `ikev1` | `ikev2`
-    ike_versions: ?[]const IKEVersionsRequestListValue,
+    ike_versions: ?[]const IKEVersionsRequestListValue = null,
 
     /// Options for logging VPN tunnel activity.
-    log_options: ?VpnTunnelLogOptionsSpecification,
+    log_options: ?VpnTunnelLogOptionsSpecification = null,
 
     /// One or more Diffie-Hellman group numbers that are permitted for the VPN
     /// tunnel for
@@ -44,7 +44,7 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     /// Valid values: `2` | `14` | `15` | `16` |
     /// `17` | `18` | `19` | `20` |
     /// `21` | `22` | `23` | `24`
-    phase_1_dh_group_numbers: ?[]const Phase1DHGroupNumbersRequestListValue,
+    phase_1_dh_group_numbers: ?[]const Phase1DHGroupNumbersRequestListValue = null,
 
     /// One or more encryption algorithms that are permitted for the VPN tunnel for
     /// phase 1
@@ -52,7 +52,7 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     ///
     /// Valid values: `AES128` | `AES256` | `AES128-GCM-16` |
     /// `AES256-GCM-16`
-    phase_1_encryption_algorithms: ?[]const Phase1EncryptionAlgorithmsRequestListValue,
+    phase_1_encryption_algorithms: ?[]const Phase1EncryptionAlgorithmsRequestListValue = null,
 
     /// One or more integrity algorithms that are permitted for the VPN tunnel for
     /// phase 1 IKE
@@ -60,14 +60,14 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     ///
     /// Valid values: `SHA1` | `SHA2-256` | `SHA2-384` |
     /// `SHA2-512`
-    phase_1_integrity_algorithms: ?[]const Phase1IntegrityAlgorithmsRequestListValue,
+    phase_1_integrity_algorithms: ?[]const Phase1IntegrityAlgorithmsRequestListValue = null,
 
     /// The lifetime for phase 1 of the IKE negotiation, in seconds.
     ///
     /// Constraints: A value between 900 and 28,800.
     ///
     /// Default: `28800`
-    phase_1_lifetime_seconds: ?i32,
+    phase_1_lifetime_seconds: ?i32 = null,
 
     /// One or more Diffie-Hellman group numbers that are permitted for the VPN
     /// tunnel for
@@ -77,7 +77,7 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     /// `16` | `17` | `18` | `19` |
     /// `20` | `21` | `22` | `23` |
     /// `24`
-    phase_2_dh_group_numbers: ?[]const Phase2DHGroupNumbersRequestListValue,
+    phase_2_dh_group_numbers: ?[]const Phase2DHGroupNumbersRequestListValue = null,
 
     /// One or more encryption algorithms that are permitted for the VPN tunnel for
     /// phase 2
@@ -85,7 +85,7 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     ///
     /// Valid values: `AES128` | `AES256` | `AES128-GCM-16` |
     /// `AES256-GCM-16`
-    phase_2_encryption_algorithms: ?[]const Phase2EncryptionAlgorithmsRequestListValue,
+    phase_2_encryption_algorithms: ?[]const Phase2EncryptionAlgorithmsRequestListValue = null,
 
     /// One or more integrity algorithms that are permitted for the VPN tunnel for
     /// phase 2 IKE
@@ -93,7 +93,7 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     ///
     /// Valid values: `SHA1` | `SHA2-256` | `SHA2-384` |
     /// `SHA2-512`
-    phase_2_integrity_algorithms: ?[]const Phase2IntegrityAlgorithmsRequestListValue,
+    phase_2_integrity_algorithms: ?[]const Phase2IntegrityAlgorithmsRequestListValue = null,
 
     /// The lifetime for phase 2 of the IKE negotiation, in seconds.
     ///
@@ -102,7 +102,7 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     /// `Phase1LifetimeSeconds`.
     ///
     /// Default: `3600`
-    phase_2_lifetime_seconds: ?i32,
+    phase_2_lifetime_seconds: ?i32 = null,
 
     /// The pre-shared key (PSK) to establish initial authentication between the
     /// virtual
@@ -113,7 +113,7 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     /// underscores (_). Must be between 8 and 64 characters in length and cannot
     /// start with
     /// zero (0).
-    pre_shared_key: ?[]const u8,
+    pre_shared_key: ?[]const u8 = null,
 
     /// The percentage of the rekey window (determined by `RekeyMarginTimeSeconds`)
     /// during which the rekey time is randomly selected.
@@ -121,7 +121,7 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     /// Constraints: A value between 0 and 100.
     ///
     /// Default: `100`
-    rekey_fuzz_percentage: ?i32,
+    rekey_fuzz_percentage: ?i32 = null,
 
     /// The margin time, in seconds, before the phase 2 lifetime expires, during
     /// which the
@@ -133,14 +133,14 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     /// Constraints: A value between 60 and half of `Phase2LifetimeSeconds`.
     ///
     /// Default: `270`
-    rekey_margin_time_seconds: ?i32,
+    rekey_margin_time_seconds: ?i32 = null,
 
     /// The number of packets in an IKE replay window.
     ///
     /// Constraints: A value between 64 and 2048.
     ///
     /// Default: `1024`
-    replay_window_size: ?i32,
+    replay_window_size: ?i32 = null,
 
     /// The action to take when the establishing the tunnel for the VPN connection.
     /// By
@@ -152,7 +152,7 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     /// Valid Values: `add` | `start`
     ///
     /// Default: `add`
-    startup_action: ?[]const u8,
+    startup_action: ?[]const u8 = null,
 
     /// The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks
     /// must be
@@ -174,12 +174,12 @@ pub const ModifyVpnTunnelOptionsSpecification = struct {
     /// * `169.254.5.0/30`
     ///
     /// * `169.254.169.252/30`
-    tunnel_inside_cidr: ?[]const u8,
+    tunnel_inside_cidr: ?[]const u8 = null,
 
     /// The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks
     /// must be
     /// unique across all VPN connections that use the same transit gateway.
     ///
     /// Constraints: A size /126 CIDR block from the local `fd00::/8` range.
-    tunnel_inside_ipv_6_cidr: ?[]const u8,
+    tunnel_inside_ipv_6_cidr: ?[]const u8 = null,
 };

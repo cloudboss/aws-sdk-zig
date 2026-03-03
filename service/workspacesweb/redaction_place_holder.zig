@@ -4,7 +4,7 @@ const RedactionPlaceHolderType = @import("redaction_place_holder_type.zig").Reda
 pub const RedactionPlaceHolder = struct {
     /// The redaction placeholder text that will replace the redacted text in
     /// session for the custom text redaction placeholder type.
-    redaction_place_holder_text: ?[]const u8,
+    redaction_place_holder_text: ?[]const u8 = null,
 
     /// The redaction placeholder type that will replace the redacted text in
     /// session.

@@ -7,7 +7,7 @@ const MetricNamespace = @import("metric_namespace.zig").MetricNamespace;
 pub const BatchGetMetricDataQuery = struct {
     /// An object that contains mapping between `MetricDimensionName`
     /// and `MetricDimensionValue` to filter metrics by.
-    dimensions: ?[]const aws.map.StringMapEntry,
+    dimensions: ?[]const aws.map.StringMapEntry = null,
 
     /// Represents the end date for the query interval.
     end_date: i64,

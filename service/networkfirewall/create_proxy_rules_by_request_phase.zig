@@ -12,13 +12,13 @@ const CreateProxyRule = @import("create_proxy_rule.zig").CreateProxyRule;
 /// Post-Response - after receiving response.
 pub const CreateProxyRulesByRequestPhase = struct {
     /// After receiving response.
-    post_response: ?[]const CreateProxyRule,
+    post_response: ?[]const CreateProxyRule = null,
 
     /// Before domain resolution.
-    pre_dns: ?[]const CreateProxyRule,
+    pre_dns: ?[]const CreateProxyRule = null,
 
     /// After DNS, before request.
-    pre_request: ?[]const CreateProxyRule,
+    pre_request: ?[]const CreateProxyRule = null,
 
     pub const json_field_names = .{
         .post_response = "PostRESPONSE",

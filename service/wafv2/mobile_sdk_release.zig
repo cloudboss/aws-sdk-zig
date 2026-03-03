@@ -10,16 +10,16 @@ const Tag = @import("tag.zig").Tag;
 /// integration](https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html) in the *WAF Developer Guide*.
 pub const MobileSdkRelease = struct {
     /// Notes describing the release.
-    release_notes: ?[]const u8,
+    release_notes: ?[]const u8 = null,
 
     /// The release version.
-    release_version: ?[]const u8,
+    release_version: ?[]const u8 = null,
 
     /// Tags that are associated with the release.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The timestamp of the release.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .release_notes = "ReleaseNotes",

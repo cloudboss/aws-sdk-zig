@@ -6,12 +6,12 @@ const MssManifestLayout = @import("mss_manifest_layout.zig").MssManifestLayout;
 /// delivers adaptive bitrate streaming content to compatible players and
 /// devices.
 pub const CreateMssManifestConfiguration = struct {
-    filter_configuration: ?FilterConfiguration,
+    filter_configuration: ?FilterConfiguration = null,
 
     /// Determines the layout format of the MSS manifest. This controls how the
     /// manifest is structured and presented to client players, affecting
     /// compatibility with different MSS-compatible devices and applications.
-    manifest_layout: ?MssManifestLayout,
+    manifest_layout: ?MssManifestLayout = null,
 
     /// A short string that's appended to the endpoint URL to create a unique path
     /// to this MSS manifest. The manifest name must be unique within the origin
@@ -22,7 +22,7 @@ pub const CreateMssManifestConfiguration = struct {
     /// much content is available in the manifest at any given time. The manifest
     /// window slides forward as new segments become available, maintaining a
     /// consistent duration of content. The minimum value is 30 seconds.
-    manifest_window_seconds: ?i32,
+    manifest_window_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .filter_configuration = "FilterConfiguration",

@@ -12,54 +12,54 @@ const HyperParameterTuningJobWarmStartConfig = @import("hyper_parameter_tuning_j
 /// An entity returned by the
 /// [SearchRecord](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SearchRecord.html) API containing the properties of a hyperparameter tuning job.
 pub const HyperParameterTuningJobSearchEntity = struct {
-    best_training_job: ?HyperParameterTrainingJobSummary,
+    best_training_job: ?HyperParameterTrainingJobSummary = null,
 
     /// The total amount of resources consumed by a hyperparameter tuning job.
-    consumed_resources: ?HyperParameterTuningJobConsumedResources,
+    consumed_resources: ?HyperParameterTuningJobConsumedResources = null,
 
     /// The time that a hyperparameter tuning job was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The error that was created when a hyperparameter tuning job failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The time that a hyperparameter tuning job ended.
-    hyper_parameter_tuning_end_time: ?i64,
+    hyper_parameter_tuning_end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of a hyperparameter tuning job.
-    hyper_parameter_tuning_job_arn: ?[]const u8,
+    hyper_parameter_tuning_job_arn: ?[]const u8 = null,
 
-    hyper_parameter_tuning_job_config: ?HyperParameterTuningJobConfig,
+    hyper_parameter_tuning_job_config: ?HyperParameterTuningJobConfig = null,
 
     /// The name of a hyperparameter tuning job.
-    hyper_parameter_tuning_job_name: ?[]const u8,
+    hyper_parameter_tuning_job_name: ?[]const u8 = null,
 
     /// The status of a hyperparameter tuning job.
-    hyper_parameter_tuning_job_status: ?HyperParameterTuningJobStatus,
+    hyper_parameter_tuning_job_status: ?HyperParameterTuningJobStatus = null,
 
     /// The time that a hyperparameter tuning job was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
-    objective_status_counters: ?ObjectiveStatusCounters,
+    objective_status_counters: ?ObjectiveStatusCounters = null,
 
-    overall_best_training_job: ?HyperParameterTrainingJobSummary,
+    overall_best_training_job: ?HyperParameterTrainingJobSummary = null,
 
     /// The tags associated with a hyperparameter tuning job. For more information
     /// see [Tagging Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
-    training_job_definition: ?HyperParameterTrainingJobDefinition,
+    training_job_definition: ?HyperParameterTrainingJobDefinition = null,
 
     /// The job definitions included in a hyperparameter tuning job.
-    training_job_definitions: ?[]const HyperParameterTrainingJobDefinition,
+    training_job_definitions: ?[]const HyperParameterTrainingJobDefinition = null,
 
-    training_job_status_counters: ?TrainingJobStatusCounters,
+    training_job_status_counters: ?TrainingJobStatusCounters = null,
 
     /// Information about either a current or completed hyperparameter tuning job.
-    tuning_job_completion_details: ?HyperParameterTuningJobCompletionDetails,
+    tuning_job_completion_details: ?HyperParameterTuningJobCompletionDetails = null,
 
-    warm_start_config: ?HyperParameterTuningJobWarmStartConfig,
+    warm_start_config: ?HyperParameterTuningJobWarmStartConfig = null,
 
     pub const json_field_names = .{
         .best_training_job = "BestTrainingJob",

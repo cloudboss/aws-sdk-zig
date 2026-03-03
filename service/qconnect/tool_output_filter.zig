@@ -6,7 +6,7 @@ pub const ToolOutputFilter = struct {
     json_path: []const u8,
 
     /// The output configuration for the filter.
-    output_configuration: ?ToolOutputConfiguration,
+    output_configuration: ?ToolOutputConfiguration = null,
 
     pub const json_field_names = .{
         .json_path = "jsonPath",

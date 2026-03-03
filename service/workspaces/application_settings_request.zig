@@ -7,7 +7,7 @@ pub const ApplicationSettingsRequest = struct {
     /// You can allow the same persistent application settings to be used across
     /// multiple pools by specifying
     /// the same settings group for each pool.
-    settings_group: ?[]const u8,
+    settings_group: ?[]const u8 = null,
 
     /// Enables or disables persistent application settings for users during their
     /// pool sessions.

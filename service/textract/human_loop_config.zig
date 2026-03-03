@@ -5,7 +5,7 @@ const HumanLoopDataAttributes = @import("human_loop_data_attributes.zig").HumanL
 /// is met. You can also set certain attributes of the image before review.
 pub const HumanLoopConfig = struct {
     /// Sets attributes of the input data.
-    data_attributes: ?HumanLoopDataAttributes,
+    data_attributes: ?HumanLoopDataAttributes = null,
 
     /// The Amazon Resource Name (ARN) of the flow definition.
     flow_definition_arn: []const u8,

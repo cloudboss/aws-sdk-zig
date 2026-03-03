@@ -10,8 +10,8 @@
 /// logs](https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html).
 pub const CloudwatchLogsExportConfiguration = struct {
     /// The list of log types to disable.
-    disable_log_types: ?[]const []const u8,
+    disable_log_types: ?[]const []const u8 = null,
 
     /// The list of log types to enable.
-    enable_log_types: ?[]const []const u8,
+    enable_log_types: ?[]const []const u8 = null,
 };

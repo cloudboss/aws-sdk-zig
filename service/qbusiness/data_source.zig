@@ -3,22 +3,22 @@ const DataSourceStatus = @import("data_source_status.zig").DataSourceStatus;
 /// A data source in an Amazon Q Business application.
 pub const DataSource = struct {
     /// The Unix timestamp when the Amazon Q Business data source was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of the Amazon Q Business data source.
-    data_source_id: ?[]const u8,
+    data_source_id: ?[]const u8 = null,
 
     /// The name of the Amazon Q Business data source.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The status of the Amazon Q Business data source.
-    status: ?DataSourceStatus,
+    status: ?DataSourceStatus = null,
 
     /// The type of the Amazon Q Business data source.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The Unix timestamp when the Amazon Q Business data source was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

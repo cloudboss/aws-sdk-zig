@@ -5,16 +5,16 @@ const JoinOperator = @import("join_operator.zig").JoinOperator;
 /// table.
 pub const ConsolidatedPolicyList = struct {
     /// Additional analyses for the consolidated policy list.
-    additional_analyses: ?AdditionalAnalyses,
+    additional_analyses: ?AdditionalAnalyses = null,
 
     /// The additional analyses allowed by the consolidated policy list.
-    allowed_additional_analyses: ?[]const []const u8,
+    allowed_additional_analyses: ?[]const []const u8 = null,
 
     /// The allowed join operators in the consolidated policy list.
-    allowed_join_operators: ?[]const JoinOperator,
+    allowed_join_operators: ?[]const JoinOperator = null,
 
     /// The allowed result receivers.
-    allowed_result_receivers: ?[]const []const u8,
+    allowed_result_receivers: ?[]const []const u8 = null,
 
     /// The columns to join on.
     join_columns: []const []const u8,

@@ -4,10 +4,10 @@ const SnapshotJobS3Result = @import("snapshot_job_s3_result.zig").SnapshotJobS3R
 /// A structure that contains information on the generated snapshot file groups.
 pub const SnapshotJobResultFileGroup = struct {
     /// A list of `SnapshotFile` objects.
-    files: ?[]const SnapshotFile,
+    files: ?[]const SnapshotFile = null,
 
     /// A list of `SnapshotJobS3Result` objects.
-    s3_results: ?[]const SnapshotJobS3Result,
+    s3_results: ?[]const SnapshotJobS3Result = null,
 
     pub const json_field_names = .{
         .files = "Files",

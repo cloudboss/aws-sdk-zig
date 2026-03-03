@@ -7,23 +7,23 @@ const DataLakeSourceStatus = @import("data_lake_source_status.zig").DataLakeSour
 /// Guide](https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html).
 pub const DataLakeSource = struct {
     /// The ID of the Security Lake account for which logs are collected.
-    account: ?[]const u8,
+    account: ?[]const u8 = null,
 
     /// The Open Cybersecurity Schema Framework (OCSF) event classes describes the
     /// type of
     /// data that the custom source will send to Security Lake. For the list of
     /// supported event classes, see [Supported OCSF Event
     /// classes](https://docs.aws.amazon.com/security-lake/latest/userguide/adding-custom-sources.html#ocsf-eventclass.html) in the Amazon Security Lake User Guide.
-    event_classes: ?[]const []const u8,
+    event_classes: ?[]const []const u8 = null,
 
     /// The supported Amazon Web Services services from which logs and events are
     /// collected.
     /// Amazon Security Lake supports log and event collection for natively
     /// supported Amazon Web Services services.
-    source_name: ?[]const u8,
+    source_name: ?[]const u8 = null,
 
     /// The log status for the Security Lake account.
-    source_statuses: ?[]const DataLakeSourceStatus,
+    source_statuses: ?[]const DataLakeSourceStatus = null,
 
     pub const json_field_names = .{
         .account = "account",

@@ -17,7 +17,7 @@ pub const CollaborationMLInputChannelSummary = struct {
     creator_account_id: []const u8,
 
     /// The description of the ML input channel.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The membership ID of the membership that contains the ML input channel.
     membership_identifier: []const u8,

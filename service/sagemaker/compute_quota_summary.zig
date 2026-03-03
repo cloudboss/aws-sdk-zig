@@ -9,17 +9,17 @@ pub const ComputeQuotaSummary = struct {
     /// disable compute allocation.
     ///
     /// Default is `Enabled`.
-    activation_state: ?ActivationState,
+    activation_state: ?ActivationState = null,
 
     /// ARN of the cluster.
-    cluster_arn: ?[]const u8,
+    cluster_arn: ?[]const u8 = null,
 
     /// ARN of the compute allocation definition.
     compute_quota_arn: []const u8,
 
     /// Configuration of the compute allocation definition. This includes the
     /// resource sharing option, and the setting to preempt low priority tasks.
-    compute_quota_config: ?ComputeQuotaConfig,
+    compute_quota_config: ?ComputeQuotaConfig = null,
 
     /// ID of the compute allocation definition.
     compute_quota_id: []const u8,
@@ -28,13 +28,13 @@ pub const ComputeQuotaSummary = struct {
     compute_quota_target: ComputeQuotaTarget,
 
     /// Version of the compute allocation definition.
-    compute_quota_version: ?i32,
+    compute_quota_version: ?i32 = null,
 
     /// Creation time of the compute allocation definition.
     creation_time: i64,
 
     /// Last modified time of the compute allocation definition.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// Name of the compute allocation definition.
     name: []const u8,

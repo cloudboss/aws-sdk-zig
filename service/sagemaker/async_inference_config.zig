@@ -5,7 +5,7 @@ const AsyncInferenceOutputConfig = @import("async_inference_output_config.zig").
 pub const AsyncInferenceConfig = struct {
     /// Configures the behavior of the client used by SageMaker to interact with the
     /// model container during asynchronous inference.
-    client_config: ?AsyncInferenceClientConfig,
+    client_config: ?AsyncInferenceClientConfig = null,
 
     /// Specifies the configuration for asynchronous inference invocation outputs.
     output_config: AsyncInferenceOutputConfig,

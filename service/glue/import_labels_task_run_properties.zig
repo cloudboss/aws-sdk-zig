@@ -3,7 +3,7 @@ pub const ImportLabelsTaskRunProperties = struct {
     /// The Amazon Simple Storage Service (Amazon S3) path from where you will
     /// import the
     /// labels.
-    input_s3_path: ?[]const u8,
+    input_s3_path: ?[]const u8 = null,
 
     /// Indicates whether to overwrite your existing labels.
     replace: bool = false,

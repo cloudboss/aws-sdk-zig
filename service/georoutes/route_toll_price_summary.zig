@@ -14,7 +14,7 @@ pub const RouteTollPriceSummary = struct {
     range: bool,
 
     /// Price range with a minimum and maximum value, if a range.
-    range_value: ?RouteTollPriceValueRange,
+    range_value: ?RouteTollPriceValueRange = null,
 
     /// Exact price, if not a range.
     value: f64,

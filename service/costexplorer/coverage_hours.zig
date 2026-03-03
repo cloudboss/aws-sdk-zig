@@ -1,16 +1,16 @@
 /// How long a running instance either used a reservation or was On-Demand.
 pub const CoverageHours = struct {
     /// The percentage of instance hours that a reservation covered.
-    coverage_hours_percentage: ?[]const u8,
+    coverage_hours_percentage: ?[]const u8 = null,
 
     /// The number of instance running hours that On-Demand Instances covered.
-    on_demand_hours: ?[]const u8,
+    on_demand_hours: ?[]const u8 = null,
 
     /// The number of instance running hours that reservations covered.
-    reserved_hours: ?[]const u8,
+    reserved_hours: ?[]const u8 = null,
 
     /// The total instance usage, in hours.
-    total_running_hours: ?[]const u8,
+    total_running_hours: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .coverage_hours_percentage = "CoverageHoursPercentage",

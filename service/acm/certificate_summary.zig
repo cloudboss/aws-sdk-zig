@@ -16,70 +16,70 @@ pub const CertificateSummary = struct {
     ///
     /// For more information about ARNs, see [Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The time at which the certificate was requested.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Fully qualified domain name (FQDN), such as www.example.com or example.com,
     /// for the certificate.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// Indicates whether the certificate has been exported. This value exists only
     /// when the certificate type is `PRIVATE`.
-    exported: ?bool,
+    exported: ?bool = null,
 
     /// Indicates if export is enabled for the certificate.
-    export_option: ?CertificateExport,
+    export_option: ?CertificateExport = null,
 
     /// Contains a list of Extended Key Usage X.509 v3 extension objects. Each
     /// object specifies a purpose for which the certificate public key can be used
     /// and consists of a name and an object identifier (OID).
-    extended_key_usages: ?[]const ExtendedKeyUsageName,
+    extended_key_usages: ?[]const ExtendedKeyUsageName = null,
 
     /// When called by
     /// [ListCertificates](https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html), indicates whether the full list of subject alternative names has been included in the response. If false, the response includes all of the subject alternative names included in the certificate. If true, the response only includes the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use [DescribeCertificate](https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html).
-    has_additional_subject_alternative_names: ?bool,
+    has_additional_subject_alternative_names: ?bool = null,
 
     /// The date and time when the certificate was imported. This value exists only
     /// when the certificate type is `IMPORTED`.
-    imported_at: ?i64,
+    imported_at: ?i64 = null,
 
     /// Indicates whether the certificate is currently in use by any Amazon Web
     /// Services resources.
-    in_use: ?bool,
+    in_use: ?bool = null,
 
     /// The time at which the certificate was issued. This value exists only when
     /// the certificate type is `AMAZON_ISSUED`.
-    issued_at: ?i64,
+    issued_at: ?i64 = null,
 
     /// The algorithm that was used to generate the public-private key pair.
-    key_algorithm: ?KeyAlgorithm,
+    key_algorithm: ?KeyAlgorithm = null,
 
     /// A list of Key Usage X.509 v3 extension objects. Each object is a string
     /// value that identifies the purpose of the public key contained in the
     /// certificate. Possible extension values include DIGITAL_SIGNATURE,
     /// KEY_ENCHIPHERMENT, NON_REPUDIATION, and more.
-    key_usages: ?[]const KeyUsageName,
+    key_usages: ?[]const KeyUsageName = null,
 
     /// Identifies the Amazon Web Services service that manages the certificate
     /// issued by ACM.
-    managed_by: ?CertificateManagedBy,
+    managed_by: ?CertificateManagedBy = null,
 
     /// The time after which the certificate is not valid.
-    not_after: ?i64,
+    not_after: ?i64 = null,
 
     /// The time before which the certificate is not valid.
-    not_before: ?i64,
+    not_before: ?i64 = null,
 
     /// Specifies whether the certificate is eligible for renewal. At this time,
     /// only exported private certificates can be renewed with the RenewCertificate
     /// command.
-    renewal_eligibility: ?RenewalEligibility,
+    renewal_eligibility: ?RenewalEligibility = null,
 
     /// The time at which the certificate was revoked. This value exists only when
     /// the certificate status is `REVOKED`.
-    revoked_at: ?i64,
+    revoked_at: ?i64 = null,
 
     /// The status of the certificate.
     ///
@@ -87,7 +87,7 @@ pub const CertificateSummary = struct {
     /// it fails for any of the reasons given in the troubleshooting topic
     /// [Certificate request
     /// fails](https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html). ACM makes repeated attempts to validate a certificate for 72 hours and then times out. If a certificate shows status FAILED or VALIDATION_TIMED_OUT, delete the request, correct the issue with [DNS validation](https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html) or [Email validation](https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html), and try again. If validation succeeds, the certificate enters status ISSUED.
-    status: ?CertificateStatus,
+    status: ?CertificateStatus = null,
 
     /// One or more domain names (subject alternative names) included in the
     /// certificate. This list contains the domain names that are bound to the
@@ -97,7 +97,7 @@ pub const CertificateSummary = struct {
     ///
     /// When called by
     /// [ListCertificates](https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html), this parameter will only return the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use [DescribeCertificate](https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html).
-    subject_alternative_name_summaries: ?[]const []const u8,
+    subject_alternative_name_summaries: ?[]const []const u8 = null,
 
     /// The source of the certificate. For certificates provided by ACM, this value
     /// is `AMAZON_ISSUED`. For certificates that you imported with
@@ -107,7 +107,7 @@ pub const CertificateSummary = struct {
     /// between certificates that you import and those that ACM provides, see
     /// [Importing
     /// Certificates](https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in the *Certificate Manager User Guide*.
-    @"type": ?CertificateType,
+    @"type": ?CertificateType = null,
 
     pub const json_field_names = .{
         .certificate_arn = "CertificateArn",

@@ -15,7 +15,7 @@ pub const EncryptionConfiguration = struct {
     /// a key managed by another account, then specify the key ARN. For more
     /// information, see [Key
     /// ID](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id) in the *Amazon Web Services KMS Developer Guide*.
-    key_id: ?[]const u8,
+    key_id: ?[]const u8 = null,
 
     /// The type of Amazon Web Services KMS key to use for encryption of your
     /// Network Firewall resources.

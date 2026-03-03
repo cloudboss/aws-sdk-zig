@@ -5,10 +5,10 @@ const ImageScanStatus = @import("image_scan_status.zig").ImageScanStatus;
 /// status.
 pub const ImageScanState = struct {
     /// The reason for the scan status for the image.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The current state of vulnerability scans for the image.
-    status: ?ImageScanStatus,
+    status: ?ImageScanStatus = null,
 
     pub const json_field_names = .{
         .reason = "reason",

@@ -11,7 +11,7 @@ pub const Cluster = struct {
     auth_type: Auth,
 
     /// The number of days for which automatic snapshots are retained.
-    backup_retention_period: ?i32,
+    backup_retention_period: ?i32 = null,
 
     /// The ARN identifier of the elastic cluster.
     cluster_arn: []const u8,
@@ -31,7 +31,7 @@ pub const Cluster = struct {
 
     /// The daily time range during which automated backups are created if automated
     /// backups are enabled, as determined by `backupRetentionPeriod`.
-    preferred_backup_window: ?[]const u8,
+    preferred_backup_window: ?[]const u8 = null,
 
     /// The weekly time range during which system maintenance can occur, in
     /// Universal Coordinated Time (UTC).
@@ -50,10 +50,10 @@ pub const Cluster = struct {
     /// A `shardInstanceCount` value of 1 means there is one writer instance, and
     /// any additional instances are replicas that can be used for reads and to
     /// improve availability.
-    shard_instance_count: ?i32,
+    shard_instance_count: ?i32 = null,
 
     /// The total number of shards in the cluster.
-    shards: ?[]const Shard,
+    shards: ?[]const Shard = null,
 
     /// The status of the elastic cluster.
     status: Status,

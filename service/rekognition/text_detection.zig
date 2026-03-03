@@ -20,30 +20,30 @@ pub const TextDetection = struct {
     /// The confidence that Amazon Rekognition has in the accuracy of the detected
     /// text and the accuracy
     /// of the geometry points around the detected text.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// The word or line of text recognized by Amazon Rekognition.
-    detected_text: ?[]const u8,
+    detected_text: ?[]const u8 = null,
 
     /// The location of the detected text on the image. Includes an axis aligned
     /// coarse
     /// bounding box surrounding the text and a finer grain polygon for more
     /// accurate spatial
     /// information.
-    geometry: ?Geometry,
+    geometry: ?Geometry = null,
 
     /// The identifier for the detected text. The identifier is only unique for a
     /// single call
     /// to `DetectText`.
-    id: ?i32,
+    id: ?i32 = null,
 
     /// The Parent identifier for the detected text identified by the value of `ID`.
     /// If the type of detected text is `LINE`, the value of `ParentId` is
     /// `Null`.
-    parent_id: ?i32,
+    parent_id: ?i32 = null,
 
     /// The type of text that was detected.
-    @"type": ?TextTypes,
+    @"type": ?TextTypes = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",

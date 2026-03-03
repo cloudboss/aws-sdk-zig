@@ -7,7 +7,7 @@ const LanguageCode = @import("language_code.zig").LanguageCode;
 /// different language, you will have more than one `LanguageWithScore` result.
 pub const LanguageWithScore = struct {
     /// The language code of the identified language.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// The confidence score associated with the identified language code.
     /// Confidence scores are values

@@ -17,28 +17,28 @@ pub const FileSystem = struct {
     /// be processed. Administrative actions describe changes to the Amazon FSx
     /// system
     /// that you have initiated using the `UpdateFileSystem` operation.
-    administrative_actions: ?[]const AdministrativeAction,
+    administrative_actions: ?[]const AdministrativeAction = null,
 
     /// The time that the file system was created, in seconds (since
     /// 1970-01-01T00:00:00Z),
     /// also known as Unix time.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Domain Name System (DNS) name for the file system.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
-    failure_details: ?FileSystemFailureDetails,
+    failure_details: ?FileSystemFailureDetails = null,
 
     /// The system-generated, unique 17-digit ID of the file system.
-    file_system_id: ?[]const u8,
+    file_system_id: ?[]const u8 = null,
 
     /// The type of Amazon FSx file system, which can be `LUSTRE`,
     /// `WINDOWS`, `ONTAP`, or `OPENZFS`.
-    file_system_type: ?FileSystemType,
+    file_system_type: ?FileSystemType = null,
 
     /// The Lustre version of the Amazon FSx for Lustre file system, which
     /// can be `2.10`, `2.12`, or `2.15`.
-    file_system_type_version: ?[]const u8,
+    file_system_type_version: ?[]const u8 = null,
 
     /// The ID of the Key Management Service (KMS) key used to encrypt Amazon FSx
     /// file
@@ -55,7 +55,7 @@ pub const FileSystem = struct {
     /// * Amazon FSx for OpenZFS
     ///
     /// * Amazon FSx for Windows File Server
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The lifecycle status of the file system. The following are the possible
     /// values and
@@ -81,9 +81,9 @@ pub const FileSystem = struct {
     /// configuration.
     ///
     /// * `UPDATING` - The file system is undergoing a customer-initiated update.
-    lifecycle: ?FileSystemLifecycle,
+    lifecycle: ?FileSystemLifecycle = null,
 
-    lustre_configuration: ?LustreFileSystemConfiguration,
+    lustre_configuration: ?LustreFileSystemConfiguration = null,
 
     /// The IDs of the elastic network interfaces from which a specific file system
     /// is
@@ -97,31 +97,31 @@ pub const FileSystem = struct {
     /// For an Amazon FSx for Windows File Server file system, you can have one
     /// network interface ID. For an Amazon FSx for Lustre file system, you can have
     /// more than one.
-    network_interface_ids: ?[]const []const u8,
+    network_interface_ids: ?[]const []const u8 = null,
 
     /// The network type of the file system.
-    network_type: ?NetworkType,
+    network_type: ?NetworkType = null,
 
     /// The configuration for this Amazon FSx for NetApp ONTAP file system.
-    ontap_configuration: ?OntapFileSystemConfiguration,
+    ontap_configuration: ?OntapFileSystemConfiguration = null,
 
     /// The configuration for this Amazon FSx for OpenZFS file system.
-    open_zfs_configuration: ?OpenZFSFileSystemConfiguration,
+    open_zfs_configuration: ?OpenZFSFileSystemConfiguration = null,
 
     /// The Amazon Web Services account that created the file system. If the file
     /// system was created by a
     /// user in IAM Identity Center, the Amazon Web Services account to which the
     /// IAM user belongs is the owner.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the file system resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The storage capacity of the file system in gibibytes (GiB).
     ///
     /// Amazon FSx responds with an HTTP status code 400 (Bad Request) if the value
     /// of `StorageCapacity` is outside of the minimum or maximum values.
-    storage_capacity: ?i32,
+    storage_capacity: ?i32 = null,
 
     /// The type of storage the file system is using.
     ///
@@ -131,7 +131,7 @@ pub const FileSystem = struct {
     ///
     /// * If set to `INTELLIGENT_TIERING`, the file system uses fully elastic,
     /// intelligently-tiered storage.
-    storage_type: ?StorageType,
+    storage_type: ?StorageType = null,
 
     /// Specifies the IDs of the subnets that the file system is accessible from.
     /// For the Amazon FSx Windows and
@@ -148,20 +148,20 @@ pub const FileSystem = struct {
     /// Windows and
     /// ONTAP file systems, the file system endpoint is available in the
     /// `PreferredSubnetID`.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     /// The tags to associate with the file system. For more information, see
     /// [Tagging your
     /// Amazon FSx
     /// resources](https://docs.aws.amazon.com/fsx/latest/LustreGuide/tag-resources.html) in the *Amazon FSx for Lustre User
     /// Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the primary virtual private cloud (VPC) for the file system.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     /// The configuration for this Amazon FSx for Windows File Server file system.
-    windows_configuration: ?WindowsFileSystemConfiguration,
+    windows_configuration: ?WindowsFileSystemConfiguration = null,
 
     pub const json_field_names = .{
         .administrative_actions = "AdministrativeActions",

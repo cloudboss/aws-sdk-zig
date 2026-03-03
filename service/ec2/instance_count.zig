@@ -4,8 +4,8 @@ const ListingState = @import("listing_state.zig").ListingState;
 pub const InstanceCount = struct {
     /// The number of listed Reserved Instances in the state specified by the
     /// `state`.
-    instance_count: ?i32,
+    instance_count: ?i32 = null,
 
     /// The states of the listed Reserved Instances.
-    state: ?ListingState,
+    state: ?ListingState = null,
 };

@@ -2,7 +2,7 @@
 /// instance.
 pub const AwsEc2LaunchTemplateDataCreditSpecificationDetails = struct {
     /// The credit option for CPU usage of a T instance.
-    cpu_credits: ?[]const u8,
+    cpu_credits: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cpu_credits = "CpuCredits",

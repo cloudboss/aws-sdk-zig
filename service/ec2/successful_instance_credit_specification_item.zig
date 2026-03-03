@@ -3,5 +3,5 @@
 /// successfully modified.
 pub const SuccessfulInstanceCreditSpecificationItem = struct {
     /// The ID of the instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 };

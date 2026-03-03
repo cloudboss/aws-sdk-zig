@@ -2,15 +2,15 @@
 pub const AwsAutoScalingLaunchConfigurationMetadataOptions = struct {
     /// Enables or disables the HTTP metadata endpoint on your instances. By
     /// default, the metadata endpoint is enabled.
-    http_endpoint: ?[]const u8,
+    http_endpoint: ?[]const u8 = null,
 
     /// The HTTP `PUT` response hop limit for instance metadata requests. The larger
     /// the number, the further instance metadata requests can travel.
-    http_put_response_hop_limit: ?i32,
+    http_put_response_hop_limit: ?i32 = null,
 
     /// Indicates whether token usage is `required` or `optional` for metadata
     /// requests. By default, token usage is `optional`.
-    http_tokens: ?[]const u8,
+    http_tokens: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .http_endpoint = "HttpEndpoint",

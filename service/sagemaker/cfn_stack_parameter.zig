@@ -4,7 +4,7 @@ pub const CfnStackParameter = struct {
     key: []const u8,
 
     /// The value of the CloudFormation parameter.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

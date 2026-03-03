@@ -6,7 +6,7 @@ pub const RuleGroupsNamespaceStatus = struct {
     status_code: RuleGroupsNamespaceStatusCode,
 
     /// The reason for the failure, if any.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status_code = "statusCode",

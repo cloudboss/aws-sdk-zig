@@ -12,22 +12,22 @@ pub const DescribedProfile = struct {
     /// For outbound connectors, this is the `AS2-To` header for the AS2 messages
     /// sent to the partner using the `StartFileTransfer` API operation. This ID
     /// cannot include spaces.
-    as_2_id: ?[]const u8,
+    as_2_id: ?[]const u8 = null,
 
     /// An array of identifiers for the imported certificates. You use this
     /// identifier for working with profiles and partner profiles.
-    certificate_ids: ?[]const []const u8,
+    certificate_ids: ?[]const []const u8 = null,
 
     /// A unique identifier for the local or partner AS2 profile.
-    profile_id: ?[]const u8,
+    profile_id: ?[]const u8 = null,
 
     /// Indicates whether to list only `LOCAL` type profiles or only `PARTNER` type
     /// profiles. If not supplied in the request, the command lists all types of
     /// profiles.
-    profile_type: ?ProfileType,
+    profile_type: ?ProfileType = null,
 
     /// Key-value pairs that can be used to group and search for profiles.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

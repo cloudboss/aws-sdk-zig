@@ -4,23 +4,23 @@ const TagSyncTaskStatus = @import("tag_sync_task_status.zig").TagSyncTaskStatus;
 /// The Amazon resource name (ARN) of the tag-sync task.
 pub const TagSyncTaskItem = struct {
     /// The timestamp of when the tag-sync task was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The specific error message in cases where the tag-sync task status
     /// is `Error`.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The Amazon resource name (ARN) of the application group.
-    group_arn: ?[]const u8,
+    group_arn: ?[]const u8 = null,
 
     /// The name of the application group.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
-    resource_query: ?ResourceQuery,
+    resource_query: ?ResourceQuery = null,
 
     /// The Amazon resource name (ARN) of the role assumed by the service to tag and
     /// untag resources on your behalf.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The status of the tag-sync task.
     ///
@@ -34,16 +34,16 @@ pub const TagSyncTaskItem = struct {
     /// * `ERROR` - The tag-sync task is not actively managing resources
     /// in the application. Review the `ErrorMessage` for more information about
     /// resolving the error.
-    status: ?TagSyncTaskStatus,
+    status: ?TagSyncTaskStatus = null,
 
     /// The tag key.
-    tag_key: ?[]const u8,
+    tag_key: ?[]const u8 = null,
 
     /// The tag value.
-    tag_value: ?[]const u8,
+    tag_value: ?[]const u8 = null,
 
     /// The Amazon resource name (ARN) of the tag-sync task.
-    task_arn: ?[]const u8,
+    task_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

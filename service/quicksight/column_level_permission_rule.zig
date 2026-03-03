@@ -6,10 +6,10 @@
 /// to a rule for that column.
 pub const ColumnLevelPermissionRule = struct {
     /// An array of column names.
-    column_names: ?[]const []const u8,
+    column_names: ?[]const []const u8 = null,
 
     /// An array of Amazon Resource Names (ARNs) for Quick Sight users or groups.
-    principals: ?[]const []const u8,
+    principals: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .column_names = "ColumnNames",

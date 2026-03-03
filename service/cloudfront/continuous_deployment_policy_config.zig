@@ -15,5 +15,5 @@ pub const ContinuousDeploymentPolicyConfig = struct {
 
     /// Contains the parameters for routing production traffic from your primary to
     /// staging distributions.
-    traffic_config: ?TrafficConfig,
+    traffic_config: ?TrafficConfig = null,
 };

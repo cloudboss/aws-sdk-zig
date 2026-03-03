@@ -23,7 +23,7 @@ pub const WorkflowTypeConfiguration = struct {
     /// event.
     ///
     /// * `ABANDON` – No action is taken. The child executions continue to run.
-    default_child_policy: ?ChildPolicy,
+    default_child_policy: ?ChildPolicy = null,
 
     /// The default maximum duration, specified when registering the workflow type,
     /// for executions of
@@ -34,7 +34,7 @@ pub const WorkflowTypeConfiguration = struct {
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    default_execution_start_to_close_timeout: ?[]const u8,
+    default_execution_start_to_close_timeout: ?[]const u8 = null,
 
     /// The default IAM role attached to this workflow type.
     ///
@@ -45,7 +45,7 @@ pub const WorkflowTypeConfiguration = struct {
     /// attached to the execution. For more information, see
     /// [https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html](https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html) in the
     /// *Amazon SWF Developer Guide*.
-    default_lambda_role: ?[]const u8,
+    default_lambda_role: ?[]const u8 = null,
 
     /// The default task list, specified when registering the workflow type, for
     /// decisions tasks
@@ -53,7 +53,7 @@ pub const WorkflowTypeConfiguration = struct {
     /// overridden when starting a workflow execution
     /// using the StartWorkflowExecution action or the `StartChildWorkflowExecution`
     /// Decision.
-    default_task_list: ?TaskList,
+    default_task_list: ?TaskList = null,
 
     /// The default task priority, specified when registering the workflow type, for
     /// all decision tasks
@@ -67,7 +67,7 @@ pub const WorkflowTypeConfiguration = struct {
     ///
     /// For more information about setting task priority, see [Setting Task
     /// Priority](https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html) in the *Amazon SWF Developer Guide*.
-    default_task_priority: ?[]const u8,
+    default_task_priority: ?[]const u8 = null,
 
     /// The default maximum duration, specified when registering the workflow type,
     /// that a decision task
@@ -82,7 +82,7 @@ pub const WorkflowTypeConfiguration = struct {
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    default_task_start_to_close_timeout: ?[]const u8,
+    default_task_start_to_close_timeout: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .default_child_policy = "defaultChildPolicy",

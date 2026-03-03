@@ -7,16 +7,16 @@ const AnalyticsSessionMetricResult = @import("analytics_session_metric_result.zi
 pub const AnalyticsSessionResult = struct {
     /// A list of objects containing the criteria you requested for binning results
     /// and the values of the bins.
-    bin_keys: ?[]const AnalyticsBinKey,
+    bin_keys: ?[]const AnalyticsBinKey = null,
 
     /// A list of objects containing the criteria you requested for grouping results
     /// and the values of the bins.
-    group_by_keys: ?[]const AnalyticsSessionGroupByKey,
+    group_by_keys: ?[]const AnalyticsSessionGroupByKey = null,
 
     /// A list of objects, each of which contains a metric you want to list, the
     /// statistic for the metric you want to return, and the method by which to
     /// organize the results.
-    metrics_results: ?[]const AnalyticsSessionMetricResult,
+    metrics_results: ?[]const AnalyticsSessionMetricResult = null,
 
     pub const json_field_names = .{
         .bin_keys = "binKeys",

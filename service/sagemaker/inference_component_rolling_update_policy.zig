@@ -12,13 +12,13 @@ pub const InferenceComponentRollingUpdatePolicy = struct {
 
     /// The time limit for the total deployment. Exceeding this limit causes a
     /// timeout.
-    maximum_execution_timeout_in_seconds: ?i32,
+    maximum_execution_timeout_in_seconds: ?i32 = null,
 
     /// The batch size for a rollback to the old endpoint fleet. If this field is
     /// absent, the value is set to the default, which is 100% of the total
     /// capacity. When the default is used, SageMaker AI provisions the entire
     /// capacity of the old fleet at once during rollback.
-    rollback_maximum_batch_size: ?InferenceComponentCapacitySize,
+    rollback_maximum_batch_size: ?InferenceComponentCapacitySize = null,
 
     /// The length of the baking period, during which SageMaker AI monitors alarms
     /// for each batch on the new fleet.

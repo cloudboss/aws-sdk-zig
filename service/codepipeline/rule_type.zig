@@ -13,10 +13,10 @@ pub const RuleType = struct {
     input_artifact_details: ArtifactDetails,
 
     /// The configuration properties for the rule type.
-    rule_configuration_properties: ?[]const RuleConfigurationProperty,
+    rule_configuration_properties: ?[]const RuleConfigurationProperty = null,
 
     /// Returns information about the settings for a rule type.
-    settings: ?RuleTypeSettings,
+    settings: ?RuleTypeSettings = null,
 
     pub const json_field_names = .{
         .id = "id",

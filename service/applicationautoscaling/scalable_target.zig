@@ -14,7 +14,7 @@ pub const ScalableTarget = struct {
     min_capacity: i32,
 
     /// The predicted capacity of the scalable target.
-    predicted_capacity: ?i32,
+    predicted_capacity: ?i32 = null,
 
     /// The identifier of the resource associated with the scalable target.
     /// This string consists of the resource type and unique identifier.
@@ -190,7 +190,7 @@ pub const ScalableTarget = struct {
     scalable_dimension: ScalableDimension,
 
     /// The ARN of the scalable target.
-    scalable_target_arn: ?[]const u8,
+    scalable_target_arn: ?[]const u8 = null,
 
     /// The namespace of the Amazon Web Services service that provides the resource,
     /// or a
@@ -200,7 +200,7 @@ pub const ScalableTarget = struct {
     /// Specifies whether the scaling activities for a scalable target are in a
     /// suspended
     /// state.
-    suspended_state: ?SuspendedState,
+    suspended_state: ?SuspendedState = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

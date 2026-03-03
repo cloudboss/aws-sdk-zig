@@ -1,10 +1,10 @@
 /// Reserved.
 pub const QueryCompileErrorLocation = struct {
     /// Reserved.
-    end_char_offset: ?i32,
+    end_char_offset: ?i32 = null,
 
     /// Reserved.
-    start_char_offset: ?i32,
+    start_char_offset: ?i32 = null,
 
     pub const json_field_names = .{
         .end_char_offset = "endCharOffset",

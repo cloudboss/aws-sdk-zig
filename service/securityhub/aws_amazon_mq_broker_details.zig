@@ -11,68 +11,68 @@ const AwsAmazonMqBrokerUsersDetails = @import("aws_amazon_mq_broker_users_detail
 pub const AwsAmazonMqBrokerDetails = struct {
     /// The authentication strategy used to secure the broker. The default is
     /// `SIMPLE`.
-    authentication_strategy: ?[]const u8,
+    authentication_strategy: ?[]const u8 = null,
 
     /// Whether automatically upgrade new minor versions for brokers, as new
     /// versions are released and supported by Amazon MQ.
     /// Automatic upgrades occur during the scheduled maintenance window of the
     /// broker or after a manual broker reboot.
-    auto_minor_version_upgrade: ?bool,
+    auto_minor_version_upgrade: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the broker.
-    broker_arn: ?[]const u8,
+    broker_arn: ?[]const u8 = null,
 
     /// The unique ID that Amazon MQ generates for the broker.
-    broker_id: ?[]const u8,
+    broker_id: ?[]const u8 = null,
 
     /// The broker's name.
-    broker_name: ?[]const u8,
+    broker_name: ?[]const u8 = null,
 
     /// The broker's deployment mode.
-    deployment_mode: ?[]const u8,
+    deployment_mode: ?[]const u8 = null,
 
     /// Encryption options for the broker. Doesn’t apply to RabbitMQ brokers.
-    encryption_options: ?AwsAmazonMqBrokerEncryptionOptionsDetails,
+    encryption_options: ?AwsAmazonMqBrokerEncryptionOptionsDetails = null,
 
     /// The type of broker engine.
-    engine_type: ?[]const u8,
+    engine_type: ?[]const u8 = null,
 
     /// The version of the broker engine.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// The broker's instance type.
-    host_instance_type: ?[]const u8,
+    host_instance_type: ?[]const u8 = null,
 
     /// The metadata of the Lightweight Directory Access Protocol (LDAP) server used
     /// to authenticate and authorize connections to the broker. This is an optional
     /// failover server.
-    ldap_server_metadata: ?AwsAmazonMqBrokerLdapServerMetadataDetails,
+    ldap_server_metadata: ?AwsAmazonMqBrokerLdapServerMetadataDetails = null,
 
     /// Turns on Amazon CloudWatch logging for brokers.
-    logs: ?AwsAmazonMqBrokerLogsDetails,
+    logs: ?AwsAmazonMqBrokerLogsDetails = null,
 
     /// The scheduled time period (UTC) during which Amazon MQ begins to apply
     /// pending updates or patches to the broker.
-    maintenance_window_start_time: ?AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails,
+    maintenance_window_start_time: ?AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails = null,
 
     /// Permits connections from applications outside of the VPC that hosts the
     /// broker's subnets.
-    publicly_accessible: ?bool,
+    publicly_accessible: ?bool = null,
 
     /// The list of rules (one minimum, 125 maximum) that authorize connections to
     /// brokers.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// The broker's storage type.
-    storage_type: ?[]const u8,
+    storage_type: ?[]const u8 = null,
 
     /// The list of groups that define which subnets and IP ranges the broker can
     /// use from different Availability Zones.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     /// The list of all broker usernames for the specified broker. Doesn't apply to
     /// RabbitMQ brokers.
-    users: ?[]const AwsAmazonMqBrokerUsersDetails,
+    users: ?[]const AwsAmazonMqBrokerUsersDetails = null,
 
     pub const json_field_names = .{
         .authentication_strategy = "AuthenticationStrategy",

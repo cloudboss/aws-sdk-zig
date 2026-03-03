@@ -8,14 +8,14 @@ const ConnectorOAuth2GrantType = @import("connector_o_auth_2_grant_type.zig").Co
 pub const ConnectorOAuth2Properties = struct {
     /// Configuration properties specific to the OAuth2 Authorization Code grant
     /// type flow.
-    authorization_code_properties: ?ConnectorAuthorizationCodeProperties,
+    authorization_code_properties: ?ConnectorAuthorizationCodeProperties = null,
 
     /// Configuration properties specific to the OAuth2 Client Credentials grant
     /// type flow.
-    client_credentials_properties: ?ClientCredentialsProperties,
+    client_credentials_properties: ?ClientCredentialsProperties = null,
 
     /// Configuration properties specific to the OAuth2 JWT Bearer grant type flow.
-    jwt_bearer_properties: ?JWTBearerProperties,
+    jwt_bearer_properties: ?JWTBearerProperties = null,
 
     /// The OAuth2 grant type to use for authentication, such as CLIENT_CREDENTIALS,
     /// JWT_BEARER, or AUTHORIZATION_CODE.

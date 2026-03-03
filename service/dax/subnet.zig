@@ -6,16 +6,16 @@ const NetworkType = @import("network_type.zig").NetworkType;
 /// DAX.
 pub const Subnet = struct {
     /// The Availability Zone (AZ) for the subnet.
-    subnet_availability_zone: ?[]const u8,
+    subnet_availability_zone: ?[]const u8 = null,
 
     /// The system-assigned identifier for the subnet.
-    subnet_identifier: ?[]const u8,
+    subnet_identifier: ?[]const u8 = null,
 
     /// The network types supported by this subnet. Returns an array of strings that
     /// can
     /// include `ipv4`, `ipv6`, or both, indicating whether the subnet
     /// supports IPv4 only, IPv6 only, or dual-stack deployments.
-    supported_network_types: ?[]const NetworkType,
+    supported_network_types: ?[]const NetworkType = null,
 
     pub const json_field_names = .{
         .subnet_availability_zone = "SubnetAvailabilityZone",

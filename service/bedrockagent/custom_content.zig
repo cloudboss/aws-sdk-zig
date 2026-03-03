@@ -12,11 +12,11 @@ pub const CustomContent = struct {
 
     /// Contains information about content defined inline to ingest into a knowledge
     /// base.
-    inline_content: ?InlineContent,
+    inline_content: ?InlineContent = null,
 
     /// Contains information about the Amazon S3 location of the file from which to
     /// ingest data.
-    s_3_location: ?CustomS3Location,
+    s_3_location: ?CustomS3Location = null,
 
     /// The source of the data to ingest.
     source_type: CustomSourceType,

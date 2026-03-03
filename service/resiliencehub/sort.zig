@@ -2,7 +2,7 @@
 pub const Sort = struct {
     /// Indicates the name or identifier of the field or attribute that should be
     /// used as the basis for sorting the metrics.
-    ascending: ?bool,
+    ascending: ?bool = null,
 
     /// Indicates the order in which you want to sort the metrics. By default, the
     /// list is sorted in ascending order. To sort the list in descending order, set

@@ -4,13 +4,13 @@
 pub const BatchStartRecommendationsErrorEntry = struct {
     /// The code of an error that occurred during the analysis of the source
     /// database.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The identifier of the source database.
-    database_id: ?[]const u8,
+    database_id: ?[]const u8 = null,
 
     /// The information about the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

@@ -13,7 +13,7 @@ pub const SourceConnection = struct {
     connection_parameters: SourceConnectionParameters,
 
     /// The only supported `SourceConnection` type is Codestar.
-    @"type": ?SourceType,
+    @"type": ?SourceType = null,
 
     pub const json_field_names = .{
         .connection_parameters = "ConnectionParameters",

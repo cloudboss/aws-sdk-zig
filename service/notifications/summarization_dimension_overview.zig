@@ -7,7 +7,7 @@ pub const SummarizationDimensionOverview = struct {
     name: []const u8,
 
     /// Indicates the sample values found within the dimension.
-    sample_values: ?[]const []const u8,
+    sample_values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .count = "count",

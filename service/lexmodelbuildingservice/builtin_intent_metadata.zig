@@ -6,11 +6,11 @@ pub const BuiltinIntentMetadata = struct {
     /// for an intent, see [Standard Built-in
     /// Intents](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents) in the *Alexa Skills
     /// Kit*.
-    signature: ?[]const u8,
+    signature: ?[]const u8 = null,
 
     /// A list of identifiers for the locales that the intent
     /// supports.
-    supported_locales: ?[]const Locale,
+    supported_locales: ?[]const Locale = null,
 
     pub const json_field_names = .{
         .signature = "signature",

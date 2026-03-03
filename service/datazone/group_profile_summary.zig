@@ -3,16 +3,16 @@ const GroupProfileStatus = @import("group_profile_status.zig").GroupProfileStatu
 /// The details of a group profile.
 pub const GroupProfileSummary = struct {
     /// The ID of the Amazon DataZone domain of a group profile.
-    domain_id: ?[]const u8,
+    domain_id: ?[]const u8 = null,
 
     /// The group name of a group profile.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// The ID of a group profile.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The status of a group profile.
-    status: ?GroupProfileStatus,
+    status: ?GroupProfileStatus = null,
 
     pub const json_field_names = .{
         .domain_id = "domainId",

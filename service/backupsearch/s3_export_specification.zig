@@ -6,7 +6,7 @@ pub const S3ExportSpecification = struct {
 
     /// This specifies the prefix for the destination Amazon S3 bucket for the
     /// export job.
-    destination_prefix: ?[]const u8,
+    destination_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_bucket = "DestinationBucket",

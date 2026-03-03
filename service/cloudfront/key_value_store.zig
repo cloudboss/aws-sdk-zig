@@ -18,5 +18,5 @@ pub const KeyValueStore = struct {
     name: []const u8,
 
     /// The status of the key value store.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 };

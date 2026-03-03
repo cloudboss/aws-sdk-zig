@@ -10,19 +10,19 @@ pub const AppInstanceUserEndpoint = struct {
     /// Boolean that controls whether the `AppInstanceUserEndpoint` is opted in to
     /// receive messages. `ALL` indicates the endpoint will receive all messages.
     /// `NONE` indicates the endpoint will receive no messages.
-    allow_messages: ?AllowMessages,
+    allow_messages: ?AllowMessages = null,
 
     /// The ARN of the `AppInstanceUser`.
-    app_instance_user_arn: ?[]const u8,
+    app_instance_user_arn: ?[]const u8 = null,
 
     /// The time at which an `AppInstanceUserEndpoint` was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The attributes of an `Endpoint`.
-    endpoint_attributes: ?EndpointAttributes,
+    endpoint_attributes: ?EndpointAttributes = null,
 
     /// The unique identifier of the `AppInstanceUserEndpoint`.
-    endpoint_id: ?[]const u8,
+    endpoint_id: ?[]const u8 = null,
 
     /// A read-only field that represents the state of an `AppInstanceUserEndpoint`.
     /// Supported values:
@@ -40,19 +40,19 @@ pub const AppInstanceUserEndpoint = struct {
     /// * `INVALID_PINPOINT_ARN` indicates that an `AppInstanceUserEndpoint` is
     ///   `INACTIVE` due to an invalid pinpoint ARN that was input
     /// through the `ResourceArn` field.
-    endpoint_state: ?EndpointState,
+    endpoint_state: ?EndpointState = null,
 
     /// The time at which an `AppInstanceUserEndpoint` was last updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     /// The name of the `AppInstanceUserEndpoint`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN of the resource to which the endpoint belongs.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The type of the `AppInstanceUserEndpoint`.
-    @"type": ?AppInstanceUserEndpointType,
+    @"type": ?AppInstanceUserEndpointType = null,
 
     pub const json_field_names = .{
         .allow_messages = "AllowMessages",

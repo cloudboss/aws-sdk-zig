@@ -13,21 +13,21 @@ pub const SensitivityAggregations = struct {
     /// size of the latest version of each applicable object in the buckets. This
     /// value doesn't reflect the storage size of all versions of all applicable
     /// objects in the buckets.
-    classifiable_size_in_bytes: ?i64,
+    classifiable_size_in_bytes: ?i64 = null,
 
     /// The total number of buckets that are publicly accessible due to a
     /// combination of permissions settings for each bucket.
-    publicly_accessible_count: ?i64,
+    publicly_accessible_count: ?i64 = null,
 
     /// The total number of buckets.
-    total_count: ?i64,
+    total_count: ?i64 = null,
 
     /// The total storage size, in bytes, of the buckets.
     ///
     /// If versioning is enabled for any of the buckets, this value is based on the
     /// size of the latest version of each object in the buckets. This value doesn't
     /// reflect the storage size of all versions of the objects in the buckets.
-    total_size_in_bytes: ?i64,
+    total_size_in_bytes: ?i64 = null,
 
     pub const json_field_names = .{
         .classifiable_size_in_bytes = "classifiableSizeInBytes",

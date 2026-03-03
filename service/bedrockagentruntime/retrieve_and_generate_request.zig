@@ -9,10 +9,10 @@ pub const RetrieveAndGenerateRequest = struct {
     /// Contains configurations for the knowledge base query and retrieval process.
     /// For more information, see [Query
     /// configurations](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html).
-    retrieve_and_generate_configuration: ?RetrieveAndGenerateConfiguration,
+    retrieve_and_generate_configuration: ?RetrieveAndGenerateConfiguration = null,
 
     /// Contains details about the session with the knowledge base.
-    session_configuration: ?RetrieveAndGenerateSessionConfiguration,
+    session_configuration: ?RetrieveAndGenerateSessionConfiguration = null,
 
     /// The unique identifier of the session. When you first make a
     /// `RetrieveAndGenerate` request, Amazon Bedrock automatically generates this
@@ -20,7 +20,7 @@ pub const RetrieveAndGenerateRequest = struct {
     /// conversational session. This value allows Amazon Bedrock to maintain context
     /// and knowledge from previous interactions. You can't explicitly set the
     /// `sessionId` yourself.
-    session_id: ?[]const u8,
+    session_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .input = "input",

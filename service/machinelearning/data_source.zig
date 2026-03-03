@@ -11,55 +11,55 @@ pub const DataSource = struct {
     /// observation data.
     compute_statistics: bool = false,
 
-    compute_time: ?i64,
+    compute_time: ?i64 = null,
 
     /// The time that the `DataSource` was created. The time is expressed in epoch
     /// time.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The AWS user account from which the `DataSource` was created. The account
     /// type can be either an AWS root account or an AWS Identity and Access
     /// Management (IAM) user account.
-    created_by_iam_user: ?[]const u8,
+    created_by_iam_user: ?[]const u8 = null,
 
     /// The location and name of the data in Amazon Simple Storage Service (Amazon
     /// S3) that is used by a `DataSource`.
-    data_location_s3: ?[]const u8,
+    data_location_s3: ?[]const u8 = null,
 
     /// A JSON string that represents the splitting and rearrangement requirement
     /// used when this `DataSource`
     /// was created.
-    data_rearrangement: ?[]const u8,
+    data_rearrangement: ?[]const u8 = null,
 
     /// The total number of observations contained in the data files that the
     /// `DataSource` references.
-    data_size_in_bytes: ?i64,
+    data_size_in_bytes: ?i64 = null,
 
     /// The ID that is assigned to the `DataSource` during creation.
-    data_source_id: ?[]const u8,
+    data_source_id: ?[]const u8 = null,
 
-    finished_at: ?i64,
+    finished_at: ?i64 = null,
 
     /// The time of the most recent edit to the
     /// `BatchPrediction`. The time is expressed in epoch time.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// A description of the most recent details about creating the `DataSource`.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// A user-supplied name or description of the `DataSource`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The number of data files referenced by the `DataSource`.
-    number_of_files: ?i64,
+    number_of_files: ?i64 = null,
 
-    rds_metadata: ?RDSMetadata,
+    rds_metadata: ?RDSMetadata = null,
 
-    redshift_metadata: ?RedshiftMetadata,
+    redshift_metadata: ?RedshiftMetadata = null,
 
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The current status of the `DataSource`. This element can have one of the
     /// following values:
@@ -75,7 +75,7 @@ pub const DataSource = struct {
     /// * COMPLETED - The creation process completed successfully.
     ///
     /// * DELETED - The `DataSource` is marked as deleted. It is not usable.
-    status: ?EntityStatus,
+    status: ?EntityStatus = null,
 
     pub const json_field_names = .{
         .compute_statistics = "ComputeStatistics",

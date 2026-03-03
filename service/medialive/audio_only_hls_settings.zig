@@ -5,7 +5,7 @@ const AudioOnlyHlsSegmentType = @import("audio_only_hls_segment_type.zig").Audio
 /// Audio Only Hls Settings
 pub const AudioOnlyHlsSettings = struct {
     /// Specifies the group to which the audio Rendition belongs.
-    audio_group_id: ?[]const u8,
+    audio_group_id: ?[]const u8 = null,
 
     /// Optional. Specifies the .jpg or .png image to use as the cover art for an
     /// audio-only output. We recommend a low bit-size file because the image
@@ -13,7 +13,7 @@ pub const AudioOnlyHlsSettings = struct {
     ///
     /// The image is attached to the audio as an ID3 tag, frame type APIC, picture
     /// type 0x10, as per the "ID3 tag version 2.4.0 - Native Frames" standard.
-    audio_only_image: ?InputLocation,
+    audio_only_image: ?InputLocation = null,
 
     /// Four types of audio-only tracks are supported:
     ///
@@ -36,10 +36,10 @@ pub const AudioOnlyHlsSettings = struct {
     /// Alternate rendition that the client will not try to play back by default.
     /// Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO,
     /// AUTOSELECT=NO
-    audio_track_type: ?AudioOnlyHlsTrackType,
+    audio_track_type: ?AudioOnlyHlsTrackType = null,
 
     /// Specifies the segment type.
-    segment_type: ?AudioOnlyHlsSegmentType,
+    segment_type: ?AudioOnlyHlsSegmentType = null,
 
     pub const json_field_names = .{
         .audio_group_id = "AudioGroupId",

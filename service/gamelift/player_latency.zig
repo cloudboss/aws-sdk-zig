@@ -11,13 +11,13 @@ pub const PlayerLatency = struct {
     /// Amount of time that represents the time lag experienced by the player when
     /// connected
     /// to the specified Region.
-    latency_in_milliseconds: ?f32,
+    latency_in_milliseconds: ?f32 = null,
 
     /// A unique identifier for a player associated with the latency data.
-    player_id: ?[]const u8,
+    player_id: ?[]const u8 = null,
 
     /// Name of the Region that is associated with the latency value.
-    region_identifier: ?[]const u8,
+    region_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .latency_in_milliseconds = "LatencyInMilliseconds",

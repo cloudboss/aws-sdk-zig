@@ -6,11 +6,11 @@ pub const ListTagsForResourceResponse = struct {
     /// for retrieval exceeds the limit, WAF returns a `NextMarker`
     /// value in the response. To retrieve the next batch of objects, provide the
     /// marker from the prior call in your next request.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The collection of tagging definitions for the resource. If you specified a
     /// `Limit` in your request, this might not be the full list.
-    tag_info_for_resource: ?TagInfoForResource,
+    tag_info_for_resource: ?TagInfoForResource = null,
 
     pub const json_field_names = .{
         .next_marker = "NextMarker",

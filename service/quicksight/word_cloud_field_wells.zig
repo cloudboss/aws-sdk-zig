@@ -6,7 +6,7 @@ const WordCloudAggregatedFieldWells = @import("word_cloud_aggregated_field_wells
 /// the attributes can be defined.
 pub const WordCloudFieldWells = struct {
     /// The aggregated field wells of a word cloud.
-    word_cloud_aggregated_field_wells: ?WordCloudAggregatedFieldWells,
+    word_cloud_aggregated_field_wells: ?WordCloudAggregatedFieldWells = null,
 
     pub const json_field_names = .{
         .word_cloud_aggregated_field_wells = "WordCloudAggregatedFieldWells",

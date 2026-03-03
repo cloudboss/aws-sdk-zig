@@ -5,13 +5,13 @@ const OtaTaskTimeoutConfig = @import("ota_task_timeout_config.zig").OtaTaskTimeo
 /// Structure representing a push config.
 pub const PushConfig = struct {
     /// Structure representing one abort config.
-    abort_config: ?OtaTaskAbortConfig,
+    abort_config: ?OtaTaskAbortConfig = null,
 
     /// Structure representing one rollout config.
-    rollout_config: ?OtaTaskExecutionRolloutConfig,
+    rollout_config: ?OtaTaskExecutionRolloutConfig = null,
 
     /// Structure representing one timeout config.
-    timeout_config: ?OtaTaskTimeoutConfig,
+    timeout_config: ?OtaTaskTimeoutConfig = null,
 
     pub const json_field_names = .{
         .abort_config = "AbortConfig",

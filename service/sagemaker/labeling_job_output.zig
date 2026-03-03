@@ -2,7 +2,7 @@
 pub const LabelingJobOutput = struct {
     /// The Amazon Resource Name (ARN) for the most recent SageMaker model trained
     /// as part of automated data labeling.
-    final_active_learning_model_arn: ?[]const u8,
+    final_active_learning_model_arn: ?[]const u8 = null,
 
     /// The Amazon S3 bucket location of the manifest file for labeled data.
     output_dataset_s3_uri: []const u8,

@@ -5,7 +5,7 @@ const AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails = @import("aws_g
 pub const AwsGuardDutyDetectorDataSourcesKubernetesDetails = struct {
     /// Describes whether Kubernetes audit logs are activated as a data source for
     /// the detector.
-    audit_logs: ?AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails,
+    audit_logs: ?AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails = null,
 
     pub const json_field_names = .{
         .audit_logs = "AuditLogs",

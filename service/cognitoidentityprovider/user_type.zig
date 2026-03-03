@@ -5,26 +5,26 @@ const UserStatusType = @import("user_status_type.zig").UserStatusType;
 /// A user profile in a Amazon Cognito user pool.
 pub const UserType = struct {
     /// Names and values of a user's attributes, for example `email`.
-    attributes: ?[]const AttributeType,
+    attributes: ?[]const AttributeType = null,
 
     /// Indicates whether the user's account is enabled or disabled.
     enabled: bool = false,
 
     /// The user's MFA configuration.
-    mfa_options: ?[]const MFAOptionType,
+    mfa_options: ?[]const MFAOptionType = null,
 
     /// The date and time when the item was created. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    user_create_date: ?i64,
+    user_create_date: ?i64 = null,
 
     /// The date and time when the item was modified. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    user_last_modified_date: ?i64,
+    user_last_modified_date: ?i64 = null,
 
     /// The user's username.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     /// The user status. This can be one of the following:
     ///
@@ -44,7 +44,7 @@ pub const UserType = struct {
     ///
     /// The statuses `ARCHIVED`, `UNKNOWN`, and `COMPROMISED`
     /// are no longer used.
-    user_status: ?UserStatusType,
+    user_status: ?UserStatusType = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

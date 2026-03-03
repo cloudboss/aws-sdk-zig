@@ -4,10 +4,10 @@ const ScopeType = @import("scope_type.zig").ScopeType;
 /// resources.
 pub const Scope = struct {
     /// The type of the scope.
-    key: ?ScopeType,
+    key: ?ScopeType = null,
 
     /// The resource identifier for the specified scope type.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "key",

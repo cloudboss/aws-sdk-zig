@@ -3,13 +3,13 @@ const ManagedResourceStatus = @import("managed_resource_status.zig").ManagedReso
 /// A security group associated with the Express service.
 pub const ManagedSecurityGroup = struct {
     /// The ARN of the security group.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The status of the security group.
     status: ManagedResourceStatus,
 
     /// Information about why the security group is in the current status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The Unix timestamp for when the security group was last updated.
     updated_at: i64,

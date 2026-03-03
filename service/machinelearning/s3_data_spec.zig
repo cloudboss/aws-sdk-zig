@@ -110,7 +110,7 @@ pub const S3DataSpec = struct {
     /// Datasource for training: `{"splitting":{"percentBegin":70, "percentEnd":100,
     /// "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv",
     /// "complement":"true"}}`
-    data_rearrangement: ?[]const u8,
+    data_rearrangement: ?[]const u8 = null,
 
     /// A JSON string that represents the schema for an Amazon S3
     /// `DataSource`. The `DataSchema`
@@ -145,11 +145,11 @@ pub const S3DataSpec = struct {
     /// "F8", "fieldType": "WEIGHTED_STRING_SEQUENCE" } ],
     ///
     /// "excludedVariableNames": [ "F6" ] }
-    data_schema: ?[]const u8,
+    data_schema: ?[]const u8 = null,
 
     /// Describes the schema location in Amazon S3. You must provide either the
     /// `DataSchema` or the `DataSchemaLocationS3`.
-    data_schema_location_s3: ?[]const u8,
+    data_schema_location_s3: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_location_s3 = "DataLocationS3",

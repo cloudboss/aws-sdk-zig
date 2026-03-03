@@ -24,7 +24,7 @@ pub const RuntimeHints = struct {
     /// accuracy](https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html).
     ///
     /// The intent name and slot name must exist.
-    slot_hints: ?[]const aws.map.MapEntry([]const aws.map.MapEntry(RuntimeHintDetails)),
+    slot_hints: ?[]const aws.map.MapEntry([]const aws.map.MapEntry(RuntimeHintDetails)) = null,
 
     pub const json_field_names = .{
         .slot_hints = "slotHints",

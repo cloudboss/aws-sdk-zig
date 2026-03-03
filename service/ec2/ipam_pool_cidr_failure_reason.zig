@@ -3,8 +3,8 @@ const IpamPoolCidrFailureCode = @import("ipam_pool_cidr_failure_code.zig").IpamP
 /// Details related to why an IPAM pool CIDR failed to be provisioned.
 pub const IpamPoolCidrFailureReason = struct {
     /// An error code related to why an IPAM pool CIDR failed to be provisioned.
-    code: ?IpamPoolCidrFailureCode,
+    code: ?IpamPoolCidrFailureCode = null,
 
     /// A message related to why an IPAM pool CIDR failed to be provisioned.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

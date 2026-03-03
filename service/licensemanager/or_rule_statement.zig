@@ -4,10 +4,10 @@ const ScriptRuleStatement = @import("script_rule_statement.zig").ScriptRuleState
 /// OR rule statement.
 pub const OrRuleStatement = struct {
     /// Matching rule statements.
-    matching_rule_statements: ?[]const MatchingRuleStatement,
+    matching_rule_statements: ?[]const MatchingRuleStatement = null,
 
     /// Script rule statements.
-    script_rule_statements: ?[]const ScriptRuleStatement,
+    script_rule_statements: ?[]const ScriptRuleStatement = null,
 
     pub const json_field_names = .{
         .matching_rule_statements = "MatchingRuleStatements",

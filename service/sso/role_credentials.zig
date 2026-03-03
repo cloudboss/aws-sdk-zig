@@ -6,7 +6,7 @@ pub const RoleCredentials = struct {
     /// [Using Temporary Security Credentials to Request Access to AWS
     /// Resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html) in the
     /// *AWS IAM User Guide*.
-    access_key_id: ?[]const u8,
+    access_key_id: ?[]const u8 = null,
 
     /// The date on which temporary security credentials expire.
     expiration: i64 = 0,
@@ -15,13 +15,13 @@ pub const RoleCredentials = struct {
     /// Temporary Security Credentials to Request Access to AWS
     /// Resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html) in the
     /// *AWS IAM User Guide*.
-    secret_access_key: ?[]const u8,
+    secret_access_key: ?[]const u8 = null,
 
     /// The token used for temporary credentials. For more information, see [Using
     /// Temporary Security Credentials to Request Access to AWS
     /// Resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html) in the
     /// *AWS IAM User Guide*.
-    session_token: ?[]const u8,
+    session_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_key_id = "accessKeyId",

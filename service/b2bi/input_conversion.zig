@@ -8,10 +8,10 @@ pub const InputConversion = struct {
     /// Specifies advanced options for the input conversion process. These options
     /// provide additional control over how EDI files are processed during
     /// transformation.
-    advanced_options: ?AdvancedOptions,
+    advanced_options: ?AdvancedOptions = null,
 
     /// A structure that contains the formatting options for an inbound transformer.
-    format_options: ?FormatOptions,
+    format_options: ?FormatOptions = null,
 
     /// The format for the transformer input: currently on `X12` is supported.
     from_format: FromFormat,

@@ -16,7 +16,7 @@ pub const CodegenGenericDataField = struct {
     read_only: bool,
 
     /// The relationship of the generic data schema.
-    relationship: ?CodegenGenericDataRelationshipType,
+    relationship: ?CodegenGenericDataRelationshipType = null,
 
     /// Specifies whether the generic data field is required.
     required: bool,

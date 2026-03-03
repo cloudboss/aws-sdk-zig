@@ -6,7 +6,7 @@ pub const InventoryDeletionSummary = struct {
     remaining_count: i32 = 0,
 
     /// A list of counts and versions for deleted items.
-    summary_items: ?[]const InventoryDeletionSummaryItem,
+    summary_items: ?[]const InventoryDeletionSummaryItem = null,
 
     /// The total number of items to delete. This count doesn't change during the
     /// delete

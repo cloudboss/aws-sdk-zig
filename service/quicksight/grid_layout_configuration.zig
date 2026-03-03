@@ -6,7 +6,7 @@ const GridLayoutElement = @import("grid_layout_element.zig").GridLayoutElement;
 /// Visuals snap to a grid with standard spacing and alignment. Dashboards are
 /// displayed as designed, with options to fit to screen or view at actual size.
 pub const GridLayoutConfiguration = struct {
-    canvas_size_options: ?GridLayoutCanvasSizeOptions,
+    canvas_size_options: ?GridLayoutCanvasSizeOptions = null,
 
     /// The elements that are included in a grid layout.
     elements: []const GridLayoutElement,

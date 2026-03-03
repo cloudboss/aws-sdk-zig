@@ -10,29 +10,29 @@ pub const AppBlockBuilder = struct {
     /// The list of interface VPC endpoint (interface endpoint) objects.
     /// Administrators can connect to the app block builder only through the
     /// specified endpoints.
-    access_endpoints: ?[]const AccessEndpoint,
+    access_endpoints: ?[]const AccessEndpoint = null,
 
     /// The app block builder errors.
-    app_block_builder_errors: ?[]const ResourceError,
+    app_block_builder_errors: ?[]const ResourceError = null,
 
     /// The ARN of the app block builder.
     arn: []const u8,
 
     /// The creation time of the app block builder.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The description of the app block builder.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The display name of the app block builder.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// Indicates whether default internet access is enabled for the app block
     /// builder.
-    enable_default_internet_access: ?bool,
+    enable_default_internet_access: ?bool = null,
 
     /// The ARN of the IAM role that is applied to the app block builder.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// The instance type of the app block builder.
     instance_type: []const u8,
@@ -49,7 +49,7 @@ pub const AppBlockBuilder = struct {
     state: AppBlockBuilderState,
 
     /// The state change reason.
-    state_change_reason: ?AppBlockBuilderStateChangeReason,
+    state_change_reason: ?AppBlockBuilderStateChangeReason = null,
 
     /// The VPC configuration for the app block builder.
     vpc_config: VpcConfig,

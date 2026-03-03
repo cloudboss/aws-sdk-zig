@@ -18,8 +18,8 @@ const EnaSrdUdpSpecification = @import("ena_srd_udp_specification.zig").EnaSrdUd
 /// is enabled, you can specify whether UDP network traffic uses it.
 pub const EnaSrdSpecification = struct {
     /// Indicates whether ENA Express is enabled for the network interface.
-    ena_srd_enabled: ?bool,
+    ena_srd_enabled: ?bool = null,
 
     /// Configures ENA Express for UDP network traffic.
-    ena_srd_udp_specification: ?EnaSrdUdpSpecification,
+    ena_srd_udp_specification: ?EnaSrdUdpSpecification = null,
 };

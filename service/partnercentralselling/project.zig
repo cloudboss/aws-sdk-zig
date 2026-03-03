@@ -8,7 +8,7 @@ const SalesActivity = @import("sales_activity.zig").SalesActivity;
 pub const Project = struct {
     /// Captures additional comments or information for the `Opportunity` that
     /// weren't captured in other fields.
-    additional_comments: ?[]const u8,
+    additional_comments: ?[]const u8 = null,
 
     /// Specifies the Amazon Partner Network (APN) program that influenced the
     /// `Opportunity`. APN programs refer to specific partner programs or
@@ -20,16 +20,16 @@ pub const Project = struct {
     /// Initiative | Partner Opportunity Acceleration Funded | The Next Smart |
     /// VMware Cloud on AWS | Well-Architected | Windows | Workspaces/AppStream
     /// Accelerator Program | WWPS NDPP`
-    apn_programs: ?[]const []const u8,
+    apn_programs: ?[]const []const u8 = null,
 
     /// AWS partition where the opportunity will be deployed. Possible values:
     /// `aws-eusc` for AWS European Sovereign Cloud, `null` for all other
     /// partitions.
-    aws_partition: ?AwsPartition,
+    aws_partition: ?AwsPartition = null,
 
     /// Name of the `Opportunity`'s competitor (if any). Use `Other` to submit a
     /// value not in the picklist.
-    competitor_name: ?CompetitorName,
+    competitor_name: ?CompetitorName = null,
 
     /// Describes the problem the end customer has, and how the partner is helping.
     /// Utilize this field to provide a concise narrative that outlines the
@@ -42,7 +42,7 @@ pub const Project = struct {
     /// the `Opportunity`. The content in this field helps Amazon Web Services
     /// understand the nature of the `Opportunity` and the strategic fit of the
     /// partner's solution.
-    customer_business_problem: ?[]const u8,
+    customer_business_problem: ?[]const u8 = null,
 
     /// Specifies the proposed solution focus or type of workload for the
     /// Opportunity. This field captures the primary use case or objective of the
@@ -65,7 +65,7 @@ pub const Project = struct {
     /// performance | Monitoring & Observability | Networking | Outpost | SAP |
     /// Security & Compliance | Storage & Backup | Training | VMC | VMWare | Web
     /// development & DevOps`
-    customer_use_case: ?[]const u8,
+    customer_use_case: ?[]const u8 = null,
 
     /// Specifies the deployment or consumption model for your solution or service
     /// in the `Opportunity`'s context. You can select multiple options.
@@ -85,22 +85,22 @@ pub const Project = struct {
     /// * Resell: Amazon Web Services accounts and billing management for your
     ///   customers.
     /// * Other: Delivery model not described above.
-    delivery_models: ?[]const DeliveryModel,
+    delivery_models: ?[]const DeliveryModel = null,
 
     /// Represents the estimated amount that the customer is expected to spend on
     /// AWS services related to the opportunity. This helps in evaluating the
     /// potential financial value of the opportunity for AWS.
-    expected_customer_spend: ?[]const ExpectedCustomerSpend,
+    expected_customer_spend: ?[]const ExpectedCustomerSpend = null,
 
     /// Only allowed when `CompetitorNames` has `Other` selected.
-    other_competitor_names: ?[]const u8,
+    other_competitor_names: ?[]const u8 = null,
 
     /// Specifies the offered solution for the customer's business problem when the
     /// ` RelatedEntityIdentifiers.Solutions` field value is `Other`.
-    other_solution_description: ?[]const u8,
+    other_solution_description: ?[]const u8 = null,
 
     /// Specifies the current opportunity's parent opportunity identifier.
-    related_opportunity_identifier: ?[]const u8,
+    related_opportunity_identifier: ?[]const u8 = null,
 
     /// Specifies the `Opportunity`'s sales activities conducted with the end
     /// customer. These activities help drive Amazon Web Services assignment
@@ -124,10 +124,10 @@ pub const Project = struct {
     ///   deployment needs.
     /// * SOW Signed: Both parties signed a statement of work (SOW), and formalize
     ///   the agreement and detail the project scope and deliverables.
-    sales_activities: ?[]const SalesActivity,
+    sales_activities: ?[]const SalesActivity = null,
 
     /// Specifies the `Opportunity`'s title or name.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .additional_comments = "AdditionalComments",

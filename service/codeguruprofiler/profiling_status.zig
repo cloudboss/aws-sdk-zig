@@ -11,20 +11,20 @@ pub const ProfilingStatus = struct {
     /// the ISO 8601 format. For example,
     /// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02
     /// PM UTC.
-    latest_agent_orchestrated_at: ?i64,
+    latest_agent_orchestrated_at: ?i64 = null,
 
     /// The date and time when the most recent profile was received. Specify using
     /// the ISO 8601 format. For example,
     /// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02
     /// PM UTC.
-    latest_agent_profile_reported_at: ?i64,
+    latest_agent_profile_reported_at: ?i64 = null,
 
     /// An [
     /// `AggregatedProfileTime`
     /// ](https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AggregatedProfileTime.html)
     /// object that contains the aggregation period and start time for an aggregated
     /// profile.
-    latest_aggregated_profile: ?AggregatedProfileTime,
+    latest_aggregated_profile: ?AggregatedProfileTime = null,
 
     pub const json_field_names = .{
         .latest_agent_orchestrated_at = "latestAgentOrchestratedAt",

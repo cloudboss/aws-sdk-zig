@@ -44,7 +44,7 @@ pub const ChangeEvent = struct {
     event_id: []const u8,
 
     /// The name or description of this change event.
-    event_name: ?[]const u8,
+    event_name: ?[]const u8 = null,
 
     /// The Amazon Web Services region where this change event occurred.
     region: []const u8,
@@ -54,7 +54,7 @@ pub const ChangeEvent = struct {
     timestamp: i64,
 
     /// The name of the user who initiated this change event, if available.
-    user_name: ?[]const u8,
+    user_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

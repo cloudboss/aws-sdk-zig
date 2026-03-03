@@ -4,7 +4,7 @@ const ClusterAutoScalingMode = @import("cluster_auto_scaling_mode.zig").ClusterA
 /// Specifies the autoscaling configuration for a HyperPod cluster.
 pub const ClusterAutoScalingConfig = struct {
     /// The type of autoscaler to use. Currently supported value is `Karpenter`.
-    auto_scaler_type: ?ClusterAutoScalerType,
+    auto_scaler_type: ?ClusterAutoScalerType = null,
 
     /// Describes whether autoscaling is enabled or disabled for the cluster. Valid
     /// values are `Enable` and `Disable`.

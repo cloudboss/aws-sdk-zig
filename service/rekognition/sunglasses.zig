@@ -3,7 +3,7 @@
 /// the determination.
 pub const Sunglasses = struct {
     /// Level of confidence in the determination.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// Boolean value that indicates whether the face is wearing sunglasses or not.
     value: bool = false,

@@ -9,7 +9,7 @@ pub const LeadInvitationCustomer = struct {
     /// Indicates the customer's level of experience and adoption with AWS services.
     /// This assessment helps partners understand the customer's cloud maturity and
     /// tailor their engagement approach accordingly.
-    aws_maturity: ?[]const u8,
+    aws_maturity: ?[]const u8 = null,
 
     /// The name of the customer company associated with the lead invitation. This
     /// field identifies the target organization for the lead engagement
@@ -24,17 +24,17 @@ pub const LeadInvitationCustomer = struct {
     /// Specifies the industry sector of the customer company associated with the
     /// lead invitation. This categorization helps partners understand the
     /// customer's business context and assess solution fit.
-    industry: ?Industry,
+    industry: ?Industry = null,
 
     /// Specifies the market segment classification of the customer, such as
     /// enterprise, mid-market, or small business. This segmentation helps partners
     /// determine the appropriate solution complexity and engagement strategy.
-    market_segment: ?MarketSegment,
+    market_segment: ?MarketSegment = null,
 
     /// The website URL of the customer company. This provides additional context
     /// about the customer organization and helps partners verify company details
     /// and assess business size and legitimacy.
-    website_url: ?[]const u8,
+    website_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_maturity = "AwsMaturity",

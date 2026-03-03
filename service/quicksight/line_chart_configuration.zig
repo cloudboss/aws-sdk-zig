@@ -20,67 +20,67 @@ const AxisDisplayOptions = @import("axis_display_options.zig").AxisDisplayOption
 /// The configuration of a line chart.
 pub const LineChartConfiguration = struct {
     /// The default configuration of a line chart's contribution analysis.
-    contribution_analysis_defaults: ?[]const ContributionAnalysisDefault,
+    contribution_analysis_defaults: ?[]const ContributionAnalysisDefault = null,
 
     /// The data label configuration of a line chart.
-    data_labels: ?DataLabelOptions,
+    data_labels: ?DataLabelOptions = null,
 
     /// The options that determine the default presentation of all line series in
     /// `LineChartVisual`.
-    default_series_settings: ?LineChartDefaultSeriesSettings,
+    default_series_settings: ?LineChartDefaultSeriesSettings = null,
 
     /// The field well configuration of a line chart.
-    field_wells: ?LineChartFieldWells,
+    field_wells: ?LineChartFieldWells = null,
 
     /// The forecast configuration of a line chart.
-    forecast_configurations: ?[]const ForecastConfiguration,
+    forecast_configurations: ?[]const ForecastConfiguration = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The legend configuration of a line chart.
-    legend: ?LegendOptions,
+    legend: ?LegendOptions = null,
 
     /// The series axis configuration of a line chart.
-    primary_y_axis_display_options: ?LineSeriesAxisDisplayOptions,
+    primary_y_axis_display_options: ?LineSeriesAxisDisplayOptions = null,
 
     /// The options that determine the presentation of the y-axis label.
-    primary_y_axis_label_options: ?ChartAxisLabelOptions,
+    primary_y_axis_label_options: ?ChartAxisLabelOptions = null,
 
     /// The reference lines configuration of a line chart.
-    reference_lines: ?[]const ReferenceLine,
+    reference_lines: ?[]const ReferenceLine = null,
 
     /// The series axis configuration of a line chart.
-    secondary_y_axis_display_options: ?LineSeriesAxisDisplayOptions,
+    secondary_y_axis_display_options: ?LineSeriesAxisDisplayOptions = null,
 
     /// The options that determine the presentation of the secondary y-axis label.
-    secondary_y_axis_label_options: ?ChartAxisLabelOptions,
+    secondary_y_axis_label_options: ?ChartAxisLabelOptions = null,
 
     /// The series item configuration of a line chart.
-    series: ?[]const SeriesItem,
+    series: ?[]const SeriesItem = null,
 
-    single_axis_options: ?SingleAxisOptions,
+    single_axis_options: ?SingleAxisOptions = null,
 
     /// The small multiples setup for the visual.
-    small_multiples_options: ?SmallMultiplesOptions,
+    small_multiples_options: ?SmallMultiplesOptions = null,
 
     /// The sort configuration of a line chart.
-    sort_configuration: ?LineChartSortConfiguration,
+    sort_configuration: ?LineChartSortConfiguration = null,
 
     /// The tooltip configuration of a line chart.
-    tooltip: ?TooltipOptions,
+    tooltip: ?TooltipOptions = null,
 
     /// Determines the type of the line chart.
-    @"type": ?LineChartType,
+    @"type": ?LineChartType = null,
 
     /// The visual palette configuration of a line chart.
-    visual_palette: ?VisualPalette,
+    visual_palette: ?VisualPalette = null,
 
     /// The options that determine the presentation of the x-axis.
-    x_axis_display_options: ?AxisDisplayOptions,
+    x_axis_display_options: ?AxisDisplayOptions = null,
 
     /// The options that determine the presentation of the x-axis label.
-    x_axis_label_options: ?ChartAxisLabelOptions,
+    x_axis_label_options: ?ChartAxisLabelOptions = null,
 
     pub const json_field_names = .{
         .contribution_analysis_defaults = "ContributionAnalysisDefaults",

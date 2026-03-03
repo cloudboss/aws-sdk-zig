@@ -9,14 +9,14 @@ pub const CastColumnTypeOperation = struct {
     /// When casting a column from string to datetime type, you can supply a string
     /// in a
     /// format supported by Quick Sight to denote the source data format.
-    format: ?[]const u8,
+    format: ?[]const u8 = null,
 
     /// New column data type.
     new_column_type: ColumnDataType,
 
     /// The sub data type of the new column. Sub types are only available for
     /// decimal columns that are part of a SPICE dataset.
-    sub_type: ?ColumnDataSubType,
+    sub_type: ?ColumnDataSubType = null,
 
     pub const json_field_names = .{
         .column_name = "ColumnName",

@@ -11,26 +11,26 @@ const CustomRoutingProtocol = @import("custom_routing_protocol.zig").CustomRouti
 /// specific instances and ports within one or more subnets.
 pub const PortMapping = struct {
     /// The accelerator port.
-    accelerator_port: ?i32,
+    accelerator_port: ?i32 = null,
 
     /// The EC2 instance IP address and port number in the virtual private cloud
     /// (VPC) subnet.
-    destination_socket_address: ?SocketAddress,
+    destination_socket_address: ?SocketAddress = null,
 
     /// Indicates whether or not a port mapping destination can receive traffic. The
     /// value is either ALLOW, if
     /// traffic is allowed to the destination, or DENY, if traffic is not allowed to
     /// the destination.
-    destination_traffic_state: ?CustomRoutingDestinationTrafficState,
+    destination_traffic_state: ?CustomRoutingDestinationTrafficState = null,
 
     /// The Amazon Resource Name (ARN) of the endpoint group.
-    endpoint_group_arn: ?[]const u8,
+    endpoint_group_arn: ?[]const u8 = null,
 
     /// The IP address of the VPC subnet (the subnet ID).
-    endpoint_id: ?[]const u8,
+    endpoint_id: ?[]const u8 = null,
 
     /// The protocols supported by the endpoint group.
-    protocols: ?[]const CustomRoutingProtocol,
+    protocols: ?[]const CustomRoutingProtocol = null,
 
     pub const json_field_names = .{
         .accelerator_port = "AcceleratorPort",

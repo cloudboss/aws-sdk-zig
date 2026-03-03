@@ -3,10 +3,10 @@
 pub const SupportTerm = struct {
     /// Free-text field about the refund policy description that will be shown to
     /// customers as is on the website and console.
-    refund_policy: ?[]const u8,
+    refund_policy: ?[]const u8 = null,
 
     /// Category of the term being updated.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .refund_policy = "refundPolicy",

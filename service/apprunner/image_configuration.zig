@@ -6,7 +6,7 @@ pub const ImageConfiguration = struct {
     /// The port that your application listens to in the container.
     ///
     /// Default: `8080`
-    port: ?[]const u8,
+    port: ?[]const u8 = null,
 
     /// An array of key-value pairs representing the secrets and parameters that get
     /// referenced to your service as an environment variable. The supported
@@ -23,17 +23,17 @@ pub const ImageConfiguration = struct {
     ///
     /// * Currently, cross account referencing of Amazon Web Services Systems
     ///   Manager Parameter Store parameter is not supported.
-    runtime_environment_secrets: ?[]const aws.map.StringMapEntry,
+    runtime_environment_secrets: ?[]const aws.map.StringMapEntry = null,
 
     /// Environment variables that are available to your running App Runner service.
     /// An array of key-value pairs.
-    runtime_environment_variables: ?[]const aws.map.StringMapEntry,
+    runtime_environment_variables: ?[]const aws.map.StringMapEntry = null,
 
     /// An optional command that App Runner runs to start the application in the
     /// source image. If specified, this command overrides the Docker image’s
     /// default start
     /// command.
-    start_command: ?[]const u8,
+    start_command: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .port = "Port",

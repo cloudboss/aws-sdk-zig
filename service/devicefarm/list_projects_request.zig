@@ -5,12 +5,12 @@ pub const ListProjectsRequest = struct {
     /// returns a list of all projects for the AWS account. You can also specify a
     /// project
     /// ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// An identifier that was returned from the previous call to this operation,
     /// which can
     /// be used to return the next set of items in the list.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

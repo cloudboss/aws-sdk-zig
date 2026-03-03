@@ -29,14 +29,14 @@ pub const PermissionGroup = struct {
     ///
     /// * `GetTemporaryCredentials` – Group members can get temporary API
     ///   credentials.
-    application_permissions: ?[]const ApplicationPermission,
+    application_permissions: ?[]const ApplicationPermission = null,
 
     /// The timestamp at which the group was created in FinSpace. The value is
     /// determined as epoch time in milliseconds.
     create_time: i64 = 0,
 
     /// A brief description for the permission group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Describes the last time the permission group was updated. The value is
     /// determined as epoch time in milliseconds.
@@ -52,13 +52,13 @@ pub const PermissionGroup = struct {
     ///
     /// * `REMOVAL_IN_PROGRESS` – The user is currently being removed from the
     ///   permission group.
-    membership_status: ?PermissionGroupMembershipStatus,
+    membership_status: ?PermissionGroupMembershipStatus = null,
 
     /// The name of the permission group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The unique identifier for the permission group.
-    permission_group_id: ?[]const u8,
+    permission_group_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_permissions = "applicationPermissions",

@@ -4,10 +4,10 @@ const EndpointInput = @import("endpoint_input.zig").EndpointInput;
 /// The inputs for a monitoring job.
 pub const MonitoringInput = struct {
     /// Input object for the batch transform job.
-    batch_transform_input: ?BatchTransformInput,
+    batch_transform_input: ?BatchTransformInput = null,
 
     /// The endpoint for a monitoring job.
-    endpoint_input: ?EndpointInput,
+    endpoint_input: ?EndpointInput = null,
 
     pub const json_field_names = .{
         .batch_transform_input = "BatchTransformInput",

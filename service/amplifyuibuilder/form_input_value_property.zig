@@ -5,15 +5,15 @@ const FormInputValuePropertyBindingProperties = @import("form_input_value_proper
 /// default.
 pub const FormInputValueProperty = struct {
     /// The information to bind fields to data at runtime.
-    binding_properties: ?FormInputValuePropertyBindingProperties,
+    binding_properties: ?FormInputValuePropertyBindingProperties = null,
 
     /// A list of form properties to concatenate to create the value to assign to
     /// this field
     /// property.
-    concat: ?[]const FormInputValueProperty,
+    concat: ?[]const FormInputValueProperty = null,
 
     /// The value to assign to the input field.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .binding_properties = "bindingProperties",

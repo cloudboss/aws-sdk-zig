@@ -4,19 +4,19 @@ const EntityState = @import("entity_state.zig").EntityState;
 /// Operation.
 pub const ListUsersFilters = struct {
     /// Filters only users with the provided display name prefix.
-    display_name_prefix: ?[]const u8,
+    display_name_prefix: ?[]const u8 = null,
 
     /// Filters only users with the ID from the IAM Identity Center.
-    identity_provider_user_id_prefix: ?[]const u8,
+    identity_provider_user_id_prefix: ?[]const u8 = null,
 
     /// Filters only users with the provided email prefix.
-    primary_email_prefix: ?[]const u8,
+    primary_email_prefix: ?[]const u8 = null,
 
     /// Filters only users with the provided state.
-    state: ?EntityState,
+    state: ?EntityState = null,
 
     /// Filters only users with the provided username prefix.
-    username_prefix: ?[]const u8,
+    username_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .display_name_prefix = "DisplayNamePrefix",

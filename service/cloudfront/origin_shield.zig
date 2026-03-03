@@ -23,5 +23,5 @@ pub const OriginShield = struct {
     /// Regions that you can specify, and for help choosing the best Region for your
     /// origin, see [Choosing the Amazon Web Services Region for Origin
     /// Shield](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region) in the *Amazon CloudFront Developer Guide*.
-    origin_shield_region: ?[]const u8,
+    origin_shield_region: ?[]const u8 = null,
 };

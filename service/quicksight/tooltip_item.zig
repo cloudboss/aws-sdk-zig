@@ -7,10 +7,10 @@ const FieldTooltipItem = @import("field_tooltip_item.zig").FieldTooltipItem;
 /// the attributes can be defined.
 pub const TooltipItem = struct {
     /// The tooltip item for the columns that are not part of a field well.
-    column_tooltip_item: ?ColumnTooltipItem,
+    column_tooltip_item: ?ColumnTooltipItem = null,
 
     /// The tooltip item for the fields.
-    field_tooltip_item: ?FieldTooltipItem,
+    field_tooltip_item: ?FieldTooltipItem = null,
 
     pub const json_field_names = .{
         .column_tooltip_item = "ColumnTooltipItem",

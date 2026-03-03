@@ -7,7 +7,7 @@ pub const DeliveryStreamEncryptionConfigurationInput = struct {
     /// If you set `KeyType` to `CUSTOMER_MANAGED_CMK`, you must specify
     /// the Amazon Resource Name (ARN) of the CMK. If you set `KeyType` to `Amazon
     /// Web Services_OWNED_CMK`, Firehose uses a service-account CMK.
-    key_arn: ?[]const u8,
+    key_arn: ?[]const u8 = null,
 
     /// Indicates the type of customer master key (CMK) to use for encryption. The
     /// default

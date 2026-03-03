@@ -8,7 +8,7 @@ const RuleSummary = @import("rule_summary.zig").RuleSummary;
 pub const Summary = struct {
     /// An array of RuleSummary objects containing individual rule details that had
     /// been configured by the rulegroup's SummaryConfiguration.
-    rule_summaries: ?[]const RuleSummary,
+    rule_summaries: ?[]const RuleSummary = null,
 
     pub const json_field_names = .{
         .rule_summaries = "RuleSummaries",

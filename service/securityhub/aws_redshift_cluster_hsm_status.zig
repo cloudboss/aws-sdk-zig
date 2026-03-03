@@ -7,12 +7,12 @@ pub const AwsRedshiftClusterHsmStatus = struct {
     /// The name of the HSM client certificate that the Amazon Redshift cluster uses
     /// to retrieve
     /// the data encryption keys that are stored in an HSM.
-    hsm_client_certificate_identifier: ?[]const u8,
+    hsm_client_certificate_identifier: ?[]const u8 = null,
 
     /// The name of the HSM configuration that contains the information that the
     /// Amazon Redshift
     /// cluster can use to retrieve and store keys in an HSM.
-    hsm_configuration_identifier: ?[]const u8,
+    hsm_configuration_identifier: ?[]const u8 = null,
 
     /// Indicates whether the Amazon Redshift cluster has finished applying any HSM
     /// settings
@@ -21,7 +21,7 @@ pub const AwsRedshiftClusterHsmStatus = struct {
     /// Type: String
     ///
     /// Valid values: `active` | `applying`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .hsm_client_certificate_identifier = "HsmClientCertificateIdentifier",

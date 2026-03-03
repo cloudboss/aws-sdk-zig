@@ -6,9 +6,9 @@ const MonitoringGroundTruthS3Input = @import("monitoring_ground_truth_s3_input.z
 /// supported for input for model quality monitoring jobs.
 pub const ModelQualityJobInput = struct {
     /// Input object for the batch transform job.
-    batch_transform_input: ?BatchTransformInput,
+    batch_transform_input: ?BatchTransformInput = null,
 
-    endpoint_input: ?EndpointInput,
+    endpoint_input: ?EndpointInput = null,
 
     /// The ground truth label provided for the model.
     ground_truth_s3_input: MonitoringGroundTruthS3Input,

@@ -5,28 +5,28 @@ const TlogAccessMode = @import("tlog_access_mode.zig").TlogAccessMode;
 /// Provides information that defines a Microsoft SQL Server endpoint.
 pub const MicrosoftSQLServerSettings = struct {
     /// Specifies the authentication method to be used with Microsoft SQL Server.
-    authentication_method: ?SqlServerAuthenticationMethod,
+    authentication_method: ?SqlServerAuthenticationMethod = null,
 
     /// The maximum size of the packets (in bytes) used to transfer data using BCP.
-    bcp_packet_size: ?i32,
+    bcp_packet_size: ?i32 = null,
 
     /// Specifies a file group for the DMS internal tables. When the replication
     /// task starts,
     /// all the internal DMS control tables (awsdms_ apply_exception, awsdms_apply,
     /// awsdms_changes) are created for the specified file group.
-    control_tables_file_group: ?[]const u8,
+    control_tables_file_group: ?[]const u8 = null,
 
     /// Database name for the endpoint.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// Forces LOB lookup on inline LOB.
-    force_lob_lookup: ?bool,
+    force_lob_lookup: ?bool = null,
 
     /// Endpoint connection password.
-    password: ?[]const u8,
+    password: ?[]const u8 = null,
 
     /// Endpoint TCP port.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// Cleans and recreates table metadata information on the replication instance
     /// when a
@@ -35,7 +35,7 @@ pub const MicrosoftSQLServerSettings = struct {
     /// might result in different information about the table cached in the
     /// replication
     /// instance.
-    query_single_always_on_node: ?bool,
+    query_single_always_on_node: ?bool = null,
 
     /// When this attribute is set to `Y`, DMS only reads changes from transaction
     /// log backups and doesn't read from the active transaction log file during
@@ -44,7 +44,7 @@ pub const MicrosoftSQLServerSettings = struct {
     /// transaction log file growth during full load and ongoing replication tasks.
     /// However, it can
     /// add some source latency to ongoing replication.
-    read_backup_only: ?bool,
+    read_backup_only: ?bool = null,
 
     /// Use this attribute to minimize the need to access the backup log and enable
     /// DMS to
@@ -69,7 +69,7 @@ pub const MicrosoftSQLServerSettings = struct {
     /// only one DMS task can access the database at any given time. Therefore, if
     /// you need to
     /// run parallel DMS tasks against the same database, use the default method.
-    safeguard_policy: ?SafeguardPolicy,
+    safeguard_policy: ?SafeguardPolicy = null,
 
     /// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as
     /// the trusted
@@ -90,40 +90,40 @@ pub const MicrosoftSQLServerSettings = struct {
     /// Service
     /// resources](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager) in the
     /// *Database Migration Service User Guide*.
-    secrets_manager_access_role_arn: ?[]const u8,
+    secrets_manager_access_role_arn: ?[]const u8 = null,
 
     /// The full ARN, partial ARN, or friendly name of the `SecretsManagerSecret`
     /// that contains the SQL Server endpoint connection details.
-    secrets_manager_secret_id: ?[]const u8,
+    secrets_manager_secret_id: ?[]const u8 = null,
 
     /// Fully qualified domain name of the endpoint. For an Amazon RDS SQL Server
     /// instance, this is
     /// the output of
     /// [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html), in the `
     /// [Endpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html).Address` field.
-    server_name: ?[]const u8,
+    server_name: ?[]const u8 = null,
 
     /// Indicates the mode used to fetch CDC data.
-    tlog_access_mode: ?TlogAccessMode,
+    tlog_access_mode: ?TlogAccessMode = null,
 
     /// Use the `TrimSpaceInChar` source endpoint setting to right-trim data on CHAR
     /// and NCHAR data types during migration. Setting `TrimSpaceInChar` does not
     /// left-trim data. The default value is `true`.
-    trim_space_in_char: ?bool,
+    trim_space_in_char: ?bool = null,
 
     /// Use this to attribute to transfer data for full-load operations using BCP.
     /// When the
     /// target table contains an identity column that does not exist in the source
     /// table, you must
     /// disable the use BCP for loading table option.
-    use_bcp_full_load: ?bool,
+    use_bcp_full_load: ?bool = null,
 
     /// Endpoint connection user name.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     /// When this attribute is set to `Y`, DMS processes third-party transaction log
     /// backups if they are created in native format.
-    use_third_party_backup_device: ?bool,
+    use_third_party_backup_device: ?bool = null,
 
     pub const json_field_names = .{
         .authentication_method = "AuthenticationMethod",

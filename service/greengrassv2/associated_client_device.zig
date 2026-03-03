@@ -4,10 +4,10 @@
 pub const AssociatedClientDevice = struct {
     /// The time that the client device was associated, expressed in ISO 8601
     /// format.
-    association_timestamp: ?i64,
+    association_timestamp: ?i64 = null,
 
     /// The name of the IoT thing that represents the associated client device.
-    thing_name: ?[]const u8,
+    thing_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_timestamp = "associationTimestamp",

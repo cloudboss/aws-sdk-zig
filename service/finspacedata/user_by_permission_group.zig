@@ -10,20 +10,20 @@ pub const UserByPermissionGroup = struct {
     /// * `ENABLED` – The user has permissions to use the API operations.
     ///
     /// * `DISABLED` – The user does not have permissions to use any API operations.
-    api_access: ?ApiAccess,
+    api_access: ?ApiAccess = null,
 
     /// The IAM ARN identifier that is attached to FinSpace API calls.
-    api_access_principal_arn: ?[]const u8,
+    api_access_principal_arn: ?[]const u8 = null,
 
     /// The email address of the user. The email address serves as a unique
     /// identifier for each user and cannot be changed after it's created.
-    email_address: ?[]const u8,
+    email_address: ?[]const u8 = null,
 
     /// The first name of the user.
-    first_name: ?[]const u8,
+    first_name: ?[]const u8 = null,
 
     /// The last name of the user.
-    last_name: ?[]const u8,
+    last_name: ?[]const u8 = null,
 
     /// Indicates the status of the user within a permission group.
     ///
@@ -35,7 +35,7 @@ pub const UserByPermissionGroup = struct {
     ///
     /// * `REMOVAL_IN_PROGRESS` – The user is currently being removed from the
     ///   permission group.
-    membership_status: ?PermissionGroupMembershipStatus,
+    membership_status: ?PermissionGroupMembershipStatus = null,
 
     /// The current status of the user.
     ///
@@ -44,7 +44,7 @@ pub const UserByPermissionGroup = struct {
     /// * `ENABLED` – The user is created and is currently active.
     ///
     /// * `DISABLED` – The user is currently inactive.
-    status: ?UserStatus,
+    status: ?UserStatus = null,
 
     /// Indicates the type of user.
     ///
@@ -53,10 +53,10 @@ pub const UserByPermissionGroup = struct {
     ///
     /// * `APP_USER` – A user with specific permissions in FinSpace. The users are
     ///   assigned permissions by adding them to a permission group.
-    @"type": ?UserType,
+    @"type": ?UserType = null,
 
     /// The unique identifier for the user.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_access = "apiAccess",

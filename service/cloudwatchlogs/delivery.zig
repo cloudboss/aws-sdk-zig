@@ -16,36 +16,36 @@ const S3DeliveryConfiguration = @import("s3_delivery_configuration.zig").S3Deliv
 /// [UpdateDeliveryConfiguration](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html).
 pub const Delivery = struct {
     /// The Amazon Resource Name (ARN) that uniquely identifies this delivery.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The ARN of the delivery destination that is associated with this delivery.
-    delivery_destination_arn: ?[]const u8,
+    delivery_destination_arn: ?[]const u8 = null,
 
     /// Displays whether the delivery destination associated with this delivery is
     /// CloudWatch Logs, Amazon S3, Firehose, or X-Ray.
-    delivery_destination_type: ?DeliveryDestinationType,
+    delivery_destination_type: ?DeliveryDestinationType = null,
 
     /// The name of the delivery source that is associated with this delivery.
-    delivery_source_name: ?[]const u8,
+    delivery_source_name: ?[]const u8 = null,
 
     /// The field delimiter that is used between record fields when the final output
     /// format of a
     /// delivery is in `Plain`, `W3C`, or `Raw` format.
-    field_delimiter: ?[]const u8,
+    field_delimiter: ?[]const u8 = null,
 
     /// The unique ID that identifies this delivery in your account.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The record fields used in this delivery.
-    record_fields: ?[]const []const u8,
+    record_fields: ?[]const []const u8 = null,
 
     /// This structure contains delivery configurations that apply only when the
     /// delivery
     /// destination resource is an S3 bucket.
-    s_3_delivery_configuration: ?S3DeliveryConfiguration,
+    s_3_delivery_configuration: ?S3DeliveryConfiguration = null,
 
     /// The tags that have been assigned to this delivery.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

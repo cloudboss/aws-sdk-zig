@@ -4,7 +4,7 @@ const aws = @import("aws");
 pub const RequestWidget = struct {
     /// The optional query parameters. The following query parameters are valid:
     /// `$StartTime$`, `$EndTime$`, and `$Period$`.
-    query_parameters: ?[]const []const u8,
+    query_parameters: ?[]const []const u8 = null,
 
     /// The query statement for the widget. For custom dashboard widgets, you can
     /// query across multiple event data stores as long as all event data stores

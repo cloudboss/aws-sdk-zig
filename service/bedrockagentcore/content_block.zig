@@ -4,31 +4,31 @@ const ContentBlockType = @import("content_block_type.zig").ContentBlockType;
 /// A block of content in a response.
 pub const ContentBlock = struct {
     /// The binary data content of the block.
-    data: ?[]const u8,
+    data: ?[]const u8 = null,
 
     /// The description of the content block.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The MIME type of the content.
-    mime_type: ?[]const u8,
+    mime_type: ?[]const u8 = null,
 
     /// The name of the content block.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The resource associated with the content block.
-    resource: ?ResourceContent,
+    resource: ?ResourceContent = null,
 
     /// The size of the content in bytes.
-    size: ?i64,
+    size: ?i64 = null,
 
     /// The text content of the block.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// The type of content in the block.
     @"type": ContentBlockType,
 
     /// The URI of the content.
-    uri: ?[]const u8,
+    uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data = "data",

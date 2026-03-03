@@ -14,7 +14,7 @@ pub const EinvoiceDeliveryPreference = struct {
     einvoice_delivery_activation_date: i64,
 
     /// The types of attachments to include with the e-invoice delivery.
-    einvoice_delivery_attachment_types: ?[]const EinvoiceDeliveryAttachmentType,
+    einvoice_delivery_attachment_types: ?[]const EinvoiceDeliveryAttachmentType = null,
 
     /// The types of e-invoice documents to be delivered.
     einvoice_delivery_document_types: []const EinvoiceDeliveryDocumentType,

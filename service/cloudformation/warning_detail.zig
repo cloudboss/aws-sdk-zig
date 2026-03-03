@@ -4,7 +4,7 @@ const WarningType = @import("warning_type.zig").WarningType;
 /// The warnings generated for a specific resource for this generated template.
 pub const WarningDetail = struct {
     /// The properties of the resource that are impacted by this warning.
-    properties: ?[]const WarningProperty,
+    properties: ?[]const WarningProperty = null,
 
     /// The type of this warning. For more information, see [Resolve
     /// write-only
@@ -36,5 +36,5 @@ pub const WarningDetail = struct {
     /// indicate if a property
     /// uses a type of `oneOf` or `anyOf`. You need to look at the resource
     /// provider schema.
-    @"type": ?WarningType,
+    @"type": ?WarningType = null,
 };

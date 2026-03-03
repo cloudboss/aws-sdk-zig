@@ -3,13 +3,13 @@ const aws = @import("aws");
 /// Summary information about a stage.
 pub const StageSummary = struct {
     /// ID of the active session within the stage.
-    active_session_id: ?[]const u8,
+    active_session_id: ?[]const u8 = null,
 
     /// Stage ARN.
     arn: []const u8,
 
     /// Stage name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Tags attached to the resource. Array of maps, each of the form
     /// `string:string
@@ -20,7 +20,7 @@ pub const StageSummary = struct {
     /// limits and requirements"; Amazon IVS has no constraints on tags beyond what
     /// is documented
     /// there.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .active_session_id = "activeSessionId",

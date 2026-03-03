@@ -5,17 +5,17 @@ const BotVersionReplicationStatus = @import("bot_version_replication_status.zig"
 pub const BotVersionReplicaSummary = struct {
     /// The bot version for the summary information for all the version replication
     /// statuses.
-    bot_version: ?[]const u8,
+    bot_version: ?[]const u8 = null,
 
     /// The version replication status for all the replicated bots.
-    bot_version_replication_status: ?BotVersionReplicationStatus,
+    bot_version_replication_status: ?BotVersionReplicationStatus = null,
 
     /// The creation date and time of the replication status for all the replicated
     /// bots.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The reasons for replication failure for all the replicated bots.
-    failure_reasons: ?[]const []const u8,
+    failure_reasons: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .bot_version = "botVersion",

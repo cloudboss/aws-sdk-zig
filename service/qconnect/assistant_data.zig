@@ -12,7 +12,7 @@ const AssistantType = @import("assistant_type.zig").AssistantType;
 pub const AssistantData = struct {
     /// The configuration of the AI Agents (mapped by AI Agent Type to AI Agent
     /// version) that is set on the Amazon Q in Connect Assistant.
-    ai_agent_configuration: ?[]const aws.map.MapEntry(AIAgentConfigurationData),
+    ai_agent_configuration: ?[]const aws.map.MapEntry(AIAgentConfigurationData) = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
     assistant_arn: []const u8,
@@ -22,20 +22,20 @@ pub const AssistantData = struct {
 
     /// The configuration information for the Amazon Q in Connect assistant
     /// capability.
-    capability_configuration: ?AssistantCapabilityConfiguration,
+    capability_configuration: ?AssistantCapabilityConfiguration = null,
 
     /// The description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The configuration information for the Amazon Q in Connect assistant
     /// integration.
-    integration_configuration: ?AssistantIntegrationConfiguration,
+    integration_configuration: ?AssistantIntegrationConfiguration = null,
 
     /// The name.
     name: []const u8,
 
     /// The list of orchestrator configurations for the assistant.
-    orchestrator_configuration_list: ?[]const OrchestratorConfigurationEntry,
+    orchestrator_configuration_list: ?[]const OrchestratorConfigurationEntry = null,
 
     /// The configuration information for the customer managed key used for
     /// encryption.
@@ -50,13 +50,13 @@ pub const AssistantData = struct {
     /// For more information about setting up a customer managed key for Amazon Q in
     /// Connect, see [Enable Amazon Q in Connect for your
     /// instance](https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html).
-    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration,
+    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration = null,
 
     /// The status of the assistant.
     status: AssistantStatus,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of assistant.
     @"type": AssistantType,

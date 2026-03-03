@@ -10,50 +10,50 @@ pub const ActivityResponse = struct {
 
     /// The actual time, in ISO 8601 format, when the activity was marked CANCELLED
     /// or COMPLETED.
-    end: ?[]const u8,
+    end: ?[]const u8 = null,
 
     /// A JSON object that contains metrics relating to the campaign execution for
     /// this campaign activity. For information about the structure and contents of
     /// the results, see [Standard Amazon Pinpoint analytics
     /// metrics](https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html) in the *Amazon Pinpoint Developer Guide*.
-    execution_metrics: ?[]const aws.map.StringMapEntry,
+    execution_metrics: ?[]const aws.map.StringMapEntry = null,
 
     /// The unique identifier for the activity.
     id: []const u8,
 
     /// Specifies whether the activity succeeded. Possible values are SUCCESS and
     /// FAIL.
-    result: ?[]const u8,
+    result: ?[]const u8 = null,
 
     /// The scheduled start time, in ISO 8601 format, for the activity.
-    scheduled_start: ?[]const u8,
+    scheduled_start: ?[]const u8 = null,
 
     /// The actual start time, in ISO 8601 format, of the activity.
-    start: ?[]const u8,
+    start: ?[]const u8 = null,
 
     /// The current status of the activity. Possible values are: PENDING,
     /// INITIALIZING, RUNNING, PAUSED, CANCELLED, and COMPLETED.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// The total number of endpoints that the campaign successfully delivered
     /// messages to.
-    successful_endpoint_count: ?i32,
+    successful_endpoint_count: ?i32 = null,
 
     /// The total number of time zones that were completed.
-    timezones_completed_count: ?i32,
+    timezones_completed_count: ?i32 = null,
 
     /// The total number of unique time zones that are in the segment for the
     /// campaign.
-    timezones_total_count: ?i32,
+    timezones_total_count: ?i32 = null,
 
     /// The total number of endpoints that the campaign attempted to deliver
     /// messages to.
-    total_endpoint_count: ?i32,
+    total_endpoint_count: ?i32 = null,
 
     /// The unique identifier for the campaign treatment that the activity applies
     /// to. A treatment is a variation of a campaign that's used for A/B testing of
     /// a campaign.
-    treatment_id: ?[]const u8,
+    treatment_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

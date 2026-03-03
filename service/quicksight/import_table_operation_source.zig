@@ -5,7 +5,7 @@ const DataSetColumnIdMapping = @import("data_set_column_id_mapping.zig").DataSet
 pub const ImportTableOperationSource = struct {
     /// The mappings between source column identifiers and target column identifiers
     /// during the import.
-    column_id_mappings: ?[]const DataSetColumnIdMapping,
+    column_id_mappings: ?[]const DataSetColumnIdMapping = null,
 
     /// The identifier of the source table to import data from.
     source_table_id: []const u8,

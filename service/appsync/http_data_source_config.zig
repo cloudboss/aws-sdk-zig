@@ -4,7 +4,7 @@ const AuthorizationConfig = @import("authorization_config.zig").AuthorizationCon
 pub const HttpDataSourceConfig = struct {
     /// The authorization configuration in case the HTTP endpoint requires
     /// authorization.
-    authorization_config: ?AuthorizationConfig,
+    authorization_config: ?AuthorizationConfig = null,
 
     /// The HTTP URL endpoint. You can specify either the domain name or IP, and
     /// port
@@ -12,7 +12,7 @@ pub const HttpDataSourceConfig = struct {
     /// the port,
     /// AppSync uses the default port 80 for the HTTP endpoint and port 443 for
     /// HTTPS endpoints.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authorization_config = "authorizationConfig",

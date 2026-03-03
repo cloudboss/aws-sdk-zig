@@ -13,12 +13,12 @@ pub const EvaluationResultContent = struct {
     /// The error code indicating the type of failure that occurred during
     /// evaluation. Used to programmatically identify and handle different
     /// categories of evaluation errors.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message describing what went wrong if the evaluation failed.
     /// Provides detailed information about evaluation failures to help diagnose and
     /// resolve issues with evaluator configuration or input data.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the evaluator used to generate this
     /// result. For custom evaluators, this is the full ARN; for built-in
@@ -39,7 +39,7 @@ pub const EvaluationResultContent = struct {
     /// behind the assigned score. This qualitative feedback helps understand why
     /// specific ratings were given and provides actionable insights for
     /// improvement.
-    explanation: ?[]const u8,
+    explanation: ?[]const u8 = null,
 
     /// The categorical label assigned by the evaluator when using a categorical
     /// rating scale. This provides a human-readable description of the evaluation
@@ -47,17 +47,17 @@ pub const EvaluationResultContent = struct {
     /// value. For numerical scales, this field is optional and provides a natural
     /// language explanation of what the value means (e.g., value 0.5 = "Somewhat
     /// Helpful").
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// The token consumption statistics for this evaluation, including input
     /// tokens, output tokens, and total tokens used by the underlying language
     /// model during the evaluation process.
-    token_usage: ?TokenUsage,
+    token_usage: ?TokenUsage = null,
 
     /// The numerical score assigned by the evaluator according to its configured
     /// rating scale. For numerical scales, this is a decimal value within the
     /// defined range. This field is not allowed for categorical scales.
-    value: ?f64,
+    value: ?f64 = null,
 
     pub const json_field_names = .{
         .context = "context",

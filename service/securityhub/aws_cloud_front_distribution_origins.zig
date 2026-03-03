@@ -4,7 +4,7 @@ const AwsCloudFrontDistributionOriginItem = @import("aws_cloud_front_distributio
 /// this CloudFront distribution.
 pub const AwsCloudFrontDistributionOrigins = struct {
     /// A complex type that contains origins or origin groups for this distribution.
-    items: ?[]const AwsCloudFrontDistributionOriginItem,
+    items: ?[]const AwsCloudFrontDistributionOriginItem = null,
 
     pub const json_field_names = .{
         .items = "Items",

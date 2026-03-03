@@ -13,7 +13,7 @@ pub const AwsVpcConfiguration = struct {
     ///
     /// * When the service `deploymentController` is `ECS`, the
     /// value must be `DISABLED`.
-    assign_public_ip: ?AssignPublicIp,
+    assign_public_ip: ?AssignPublicIp = null,
 
     /// The IDs of the security groups associated with the task or service. If you
     /// don't
@@ -22,7 +22,7 @@ pub const AwsVpcConfiguration = struct {
     /// limit of 5 security groups that can be specified.
     ///
     /// All specified security groups must be from the same VPC.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// The IDs of the subnets associated with the task or service. There's a limit
     /// of 16

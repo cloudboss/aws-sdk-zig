@@ -3,10 +3,10 @@ const LoRaWANGatewayVersion = @import("lo_ra_wan_gateway_version.zig").LoRaWANGa
 /// LoRaWANUpdateGatewayTaskEntry object.
 pub const LoRaWANUpdateGatewayTaskEntry = struct {
     /// The version of the gateways that should receive the update.
-    current_version: ?LoRaWANGatewayVersion,
+    current_version: ?LoRaWANGatewayVersion = null,
 
     /// The firmware version to update the gateway to.
-    update_version: ?LoRaWANGatewayVersion,
+    update_version: ?LoRaWANGatewayVersion = null,
 
     pub const json_field_names = .{
         .current_version = "CurrentVersion",

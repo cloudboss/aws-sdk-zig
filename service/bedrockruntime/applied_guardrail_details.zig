@@ -6,23 +6,23 @@ const GuardrailOwnership = @import("guardrail_ownership.zig").GuardrailOwnership
 /// information.
 pub const AppliedGuardrailDetails = struct {
     /// The ARN of the guardrail that was applied.
-    guardrail_arn: ?[]const u8,
+    guardrail_arn: ?[]const u8 = null,
 
     /// The unique ID of the guardrail that was applied.
-    guardrail_id: ?[]const u8,
+    guardrail_id: ?[]const u8 = null,
 
     /// The origin of how the guardrail was applied. This can be either requested at
     /// the API level or enforced at the account or organization level as a default
     /// guardrail.
-    guardrail_origin: ?[]const GuardrailOrigin,
+    guardrail_origin: ?[]const GuardrailOrigin = null,
 
     /// The ownership type of the guardrail, indicating whether it is owned by the
     /// requesting account or is a cross-account guardrail shared from another AWS
     /// account.
-    guardrail_ownership: ?GuardrailOwnership,
+    guardrail_ownership: ?GuardrailOwnership = null,
 
     /// The version of the guardrail that was applied.
-    guardrail_version: ?[]const u8,
+    guardrail_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .guardrail_arn = "guardrailArn",

@@ -5,7 +5,7 @@ const CapacityAllocationStatus = @import("capacity_allocation_status.zig").Capac
 /// and the most recent status of the attempted allocation.
 pub const CapacityAllocation = struct {
     /// The time when the capacity allocation request was completed.
-    request_completion_time: ?i64,
+    request_completion_time: ?i64 = null,
 
     /// The time when the capacity allocation was requested.
     request_time: i64,
@@ -14,7 +14,7 @@ pub const CapacityAllocation = struct {
     status: CapacityAllocationStatus,
 
     /// The status message of the capacity allocation.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .request_completion_time = "RequestCompletionTime",

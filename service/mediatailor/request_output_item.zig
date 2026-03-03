@@ -4,10 +4,10 @@ const HlsPlaylistSettings = @import("hls_playlist_settings.zig").HlsPlaylistSett
 /// The output configuration for this channel.
 pub const RequestOutputItem = struct {
     /// DASH manifest configuration parameters.
-    dash_playlist_settings: ?DashPlaylistSettings,
+    dash_playlist_settings: ?DashPlaylistSettings = null,
 
     /// HLS playlist configuration parameters.
-    hls_playlist_settings: ?HlsPlaylistSettings,
+    hls_playlist_settings: ?HlsPlaylistSettings = null,
 
     /// The name of the manifest for the channel. The name appears in the
     /// `PlaybackUrl`.

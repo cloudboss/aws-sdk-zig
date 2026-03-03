@@ -15,12 +15,12 @@ pub const Finding = struct {
     /// A human-readable description of the finding. This provides detailed
     /// information about the issue, recommendation, or validation result to help
     /// users understand and address the finding.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The type or category of the finding. This classifies the finding as an
     /// error, warning, recommendation, or informational message to help users
     /// understand the severity and nature of the issue.
-    @"type": ?FindingType,
+    @"type": ?FindingType = null,
 
     pub const json_field_names = .{
         .description = "description",

@@ -7,10 +7,10 @@ const RuleType = @import("rule_type.zig").RuleType;
 /// rule.
 pub const Rule = struct {
     /// The minimum and maximum parameters that are associated with the rule.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of attribute validation rule.
-    @"type": ?RuleType,
+    @"type": ?RuleType = null,
 
     pub const json_field_names = .{
         .parameters = "Parameters",

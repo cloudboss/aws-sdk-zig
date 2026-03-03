@@ -6,19 +6,19 @@ const ResourceScanStatus = @import("resource_scan_status.zig").ResourceScanStatu
 /// action.
 pub const ResourceScanSummary = struct {
     /// The time that the resource scan was finished.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The percentage of the resource scan that has been completed.
-    percentage_completed: ?f64,
+    percentage_completed: ?f64 = null,
 
     /// The Amazon Resource Name (ARN) of the resource scan.
-    resource_scan_id: ?[]const u8,
+    resource_scan_id: ?[]const u8 = null,
 
     /// The scan type that has been completed.
-    scan_type: ?ScanType,
+    scan_type: ?ScanType = null,
 
     /// The time that the resource scan was started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Status of the resource scan.
     ///
@@ -53,10 +53,10 @@ pub const ResourceScanSummary = struct {
     /// **
     ///
     /// The resource scan has failed.
-    status: ?ResourceScanStatus,
+    status: ?ResourceScanStatus = null,
 
     /// The reason for the resource scan status, providing more information if a
     /// failure
     /// happened.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 };

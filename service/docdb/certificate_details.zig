@@ -9,8 +9,8 @@
 pub const CertificateDetails = struct {
     /// The CA identifier of the CA certificate used for the DB instance's server
     /// certificate.
-    ca_identifier: ?[]const u8,
+    ca_identifier: ?[]const u8 = null,
 
     /// The expiration date of the DB instance’s server certificate.
-    valid_till: ?i64,
+    valid_till: ?i64 = null,
 };

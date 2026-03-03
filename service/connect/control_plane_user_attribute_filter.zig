@@ -20,14 +20,14 @@ const TagCondition = @import("tag_condition.zig").TagCondition;
 pub const ControlPlaneUserAttributeFilter = struct {
     /// A list of conditions which would be applied together with an `AND`
     /// condition.
-    and_condition: ?AttributeAndCondition,
+    and_condition: ?AttributeAndCondition = null,
 
-    hierarchy_group_condition: ?HierarchyGroupCondition,
+    hierarchy_group_condition: ?HierarchyGroupCondition = null,
 
     /// A list of conditions which would be applied together with an `OR` condition.
-    or_conditions: ?[]const AttributeAndCondition,
+    or_conditions: ?[]const AttributeAndCondition = null,
 
-    tag_condition: ?TagCondition,
+    tag_condition: ?TagCondition = null,
 
     pub const json_field_names = .{
         .and_condition = "AndCondition",

@@ -4,7 +4,7 @@
 pub const HumanEvaluationCustomMetric = struct {
     /// An optional description of the metric. Use this parameter to provide more
     /// details about the metric.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the metric. Your human evaluators will see this name in the
     /// evaluation UI.

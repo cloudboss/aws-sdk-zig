@@ -4,13 +4,13 @@ const CancelStepsRequestStatus = @import("cancel_steps_request_status.zig").Canc
 /// Amazon EMR version 4.8.0 and later, excluding version 5.0.0.
 pub const CancelStepsInfo = struct {
     /// The reason for the failure if the CancelSteps request fails.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The status of a CancelSteps Request. The value may be SUBMITTED or FAILED.
-    status: ?CancelStepsRequestStatus,
+    status: ?CancelStepsRequestStatus = null,
 
     /// The encrypted StepId of a step.
-    step_id: ?[]const u8,
+    step_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .reason = "Reason",

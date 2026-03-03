@@ -7,11 +7,11 @@ const Node = @import("node.zig").Node;
 pub const DependencyGraph = struct {
     /// An array of edges representing the connections and relationships between the
     /// nodes in the dependency graph.
-    edges: ?[]const Edge,
+    edges: ?[]const Edge = null,
 
     /// An array of nodes representing the services, resources, or other entities in
     /// the dependency graph.
-    nodes: ?[]const Node,
+    nodes: ?[]const Node = null,
 
     pub const json_field_names = .{
         .edges = "Edges",

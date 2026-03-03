@@ -11,58 +11,58 @@ const Tag = @import("tag.zig").Tag;
 /// Notebook is run using the `StartNotebookExecution` action.
 pub const NotebookExecution = struct {
     /// The Amazon Resource Name (ARN) of the notebook execution.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The unique identifier of the Amazon EMR Notebook that is used for the
     /// notebook
     /// execution.
-    editor_id: ?[]const u8,
+    editor_id: ?[]const u8 = null,
 
     /// The timestamp when notebook execution ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The environment variables associated with the notebook execution.
-    environment_variables: ?[]const aws.map.StringMapEntry,
+    environment_variables: ?[]const aws.map.StringMapEntry = null,
 
     /// The execution engine, such as an Amazon EMR cluster, used to run the Amazon
     /// EMR notebook and perform the notebook execution.
-    execution_engine: ?ExecutionEngineConfig,
+    execution_engine: ?ExecutionEngineConfig = null,
 
     /// The reason for the latest status change of the notebook execution.
-    last_state_change_reason: ?[]const u8,
+    last_state_change_reason: ?[]const u8 = null,
 
     /// The unique identifier of a notebook execution.
-    notebook_execution_id: ?[]const u8,
+    notebook_execution_id: ?[]const u8 = null,
 
     /// A name for the notebook execution.
-    notebook_execution_name: ?[]const u8,
+    notebook_execution_name: ?[]const u8 = null,
 
     /// The unique identifier of the Amazon EC2 security group associated with the
     /// Amazon EMR Notebook instance. For more information see [Specifying
     /// Amazon EC2 Security Groups for Amazon EMR
     /// Notebooks](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html) in the
     /// *Amazon EMR Management Guide*.
-    notebook_instance_security_group_id: ?[]const u8,
+    notebook_instance_security_group_id: ?[]const u8 = null,
 
     /// Input parameters in JSON format passed to the Amazon EMR Notebook at runtime
     /// for
     /// execution.
-    notebook_params: ?[]const u8,
+    notebook_params: ?[]const u8 = null,
 
     /// The Amazon S3 location that stores the notebook execution input.
-    notebook_s3_location: ?NotebookS3LocationForOutput,
+    notebook_s3_location: ?NotebookS3LocationForOutput = null,
 
     /// The output format for the notebook execution.
-    output_notebook_format: ?OutputNotebookFormat,
+    output_notebook_format: ?OutputNotebookFormat = null,
 
     /// The Amazon S3 location for the notebook execution output.
-    output_notebook_s3_location: ?OutputNotebookS3LocationForOutput,
+    output_notebook_s3_location: ?OutputNotebookS3LocationForOutput = null,
 
     /// The location of the notebook execution's output file in Amazon S3.
-    output_notebook_uri: ?[]const u8,
+    output_notebook_uri: ?[]const u8 = null,
 
     /// The timestamp when notebook execution started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of the notebook execution.
     ///
@@ -94,14 +94,14 @@ pub const NotebookExecution = struct {
     ///
     /// * `STOPPED` indicates that the execution stopped because of a
     /// `StopNotebookExecution` request.
-    status: ?NotebookExecutionStatus,
+    status: ?NotebookExecutionStatus = null,
 
     /// A list of tags associated with a notebook execution. Tags are user-defined
     /// key-value
     /// pairs that consist of a required key string with a maximum of 128 characters
     /// and an
     /// optional value string with a maximum of 256 characters.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

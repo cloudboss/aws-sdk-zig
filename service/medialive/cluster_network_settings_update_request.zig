@@ -8,7 +8,7 @@ pub const ClusterNetworkSettingsUpdateRequest = struct {
     /// for the traffic isn't covered by the route table for any of the networks.
     /// Specify the value of the appropriate logicalInterfaceName parameter that you
     /// create in the interfaceMappings.
-    default_route: ?[]const u8,
+    default_route: ?[]const u8 = null,
 
     /// An array of interfaceMapping objects for this Cluster. Include this
     /// parameter only if you want to change the interface mappings for the Cluster.
@@ -23,7 +23,7 @@ pub const ClusterNetworkSettingsUpdateRequest = struct {
     /// The networkID parameter refers to the ID of the network. When you create the
     /// Nodes in this Cluster, you will associate the logicalInterfaceName with the
     /// appropriate physical interface.
-    interface_mappings: ?[]const InterfaceMappingUpdateRequest,
+    interface_mappings: ?[]const InterfaceMappingUpdateRequest = null,
 
     pub const json_field_names = .{
         .default_route = "DefaultRoute",

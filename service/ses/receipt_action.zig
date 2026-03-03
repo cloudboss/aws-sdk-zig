@@ -18,34 +18,34 @@ const WorkmailAction = @import("workmail_action.zig").WorkmailAction;
 /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html).
 pub const ReceiptAction = struct {
     /// Adds a header to the received email.
-    add_header_action: ?AddHeaderAction,
+    add_header_action: ?AddHeaderAction = null,
 
     /// Rejects the received email by returning a bounce response to the sender and,
     /// optionally, publishes a notification to Amazon Simple Notification Service
     /// (Amazon SNS).
-    bounce_action: ?BounceAction,
+    bounce_action: ?BounceAction = null,
 
     /// Parses the received message and starts an email contact in Amazon Connect on
     /// your behalf.
-    connect_action: ?ConnectAction,
+    connect_action: ?ConnectAction = null,
 
     /// Calls an Amazon Web Services Lambda function, and optionally, publishes a
     /// notification to Amazon SNS.
-    lambda_action: ?LambdaAction,
+    lambda_action: ?LambdaAction = null,
 
     /// Saves the received message to an Amazon Simple Storage Service (Amazon S3)
     /// bucket and, optionally, publishes a
     /// notification to Amazon SNS.
-    s3_action: ?S3Action,
+    s3_action: ?S3Action = null,
 
     /// Publishes the email content within a notification to Amazon SNS.
-    sns_action: ?SNSAction,
+    sns_action: ?SNSAction = null,
 
     /// Terminates the evaluation of the receipt rule set and optionally publishes a
     /// notification to Amazon SNS.
-    stop_action: ?StopAction,
+    stop_action: ?StopAction = null,
 
     /// Calls Amazon WorkMail and, optionally, publishes a notification to Amazon
     /// Amazon SNS.
-    workmail_action: ?WorkmailAction,
+    workmail_action: ?WorkmailAction = null,
 };

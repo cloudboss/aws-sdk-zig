@@ -3,7 +3,7 @@ const TaskTemplateFieldIdentifier = @import("task_template_field_identifier.zig"
 /// A field that is invisible to an agent.
 pub const InvisibleFieldInfo = struct {
     /// Identifier of the invisible field.
-    id: ?TaskTemplateFieldIdentifier,
+    id: ?TaskTemplateFieldIdentifier = null,
 
     pub const json_field_names = .{
         .id = "Id",

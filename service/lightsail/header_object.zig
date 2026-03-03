@@ -17,7 +17,7 @@ const ForwardValues = @import("forward_values.zig").ForwardValues;
 /// once for each header value.
 pub const HeaderObject = struct {
     /// The specific headers to forward to your distribution's origin.
-    headers_allow_list: ?[]const HeaderEnum,
+    headers_allow_list: ?[]const HeaderEnum = null,
 
     /// The headers that you want your distribution to forward to your origin and
     /// base caching
@@ -39,7 +39,7 @@ pub const HeaderObject = struct {
     /// `allow-list`
     /// ** - Forward only the headers
     /// you specify using the `headersAllowList` parameter.
-    option: ?ForwardValues,
+    option: ?ForwardValues = null,
 
     pub const json_field_names = .{
         .headers_allow_list = "headersAllowList",

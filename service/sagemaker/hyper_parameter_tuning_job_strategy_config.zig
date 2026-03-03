@@ -10,7 +10,7 @@ pub const HyperParameterTuningJobStrategyConfig = struct {
     /// The configuration for the object that specifies the `Hyperband` strategy.
     /// This parameter is only supported for the `Hyperband` selection for
     /// `Strategy` within the `HyperParameterTuningJobConfig` API.
-    hyperband_strategy_config: ?HyperbandStrategyConfig,
+    hyperband_strategy_config: ?HyperbandStrategyConfig = null,
 
     pub const json_field_names = .{
         .hyperband_strategy_config = "HyperbandStrategyConfig",

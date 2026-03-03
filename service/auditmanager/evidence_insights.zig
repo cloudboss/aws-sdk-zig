@@ -6,7 +6,7 @@ pub const EvidenceInsights = struct {
     /// This includes evidence that was collected from Security Hub with a
     /// *Pass* ruling, or collected from Config with a
     /// *Compliant* ruling.
-    compliant_evidence_count: ?i32,
+    compliant_evidence_count: ?i32 = null,
 
     /// The number of evidence that a compliance check ruling isn't available for.
     /// Evidence is
@@ -20,14 +20,14 @@ pub const EvidenceInsights = struct {
     /// If evidence has a compliance check status of *not applicable* in
     /// the console, it's classified as *inconclusive* in
     /// `EvidenceInsights` data.
-    inconclusive_evidence_count: ?i32,
+    inconclusive_evidence_count: ?i32 = null,
 
     /// The number of compliance check evidence that Audit Manager classified as
     /// non-compliant. This includes evidence that was collected from Security Hub
     /// with a
     /// *Fail* ruling, or collected from Config with a
     /// *Non-compliant* ruling.
-    noncompliant_evidence_count: ?i32,
+    noncompliant_evidence_count: ?i32 = null,
 
     pub const json_field_names = .{
         .compliant_evidence_count = "compliantEvidenceCount",

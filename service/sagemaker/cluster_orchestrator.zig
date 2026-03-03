@@ -4,7 +4,7 @@ const ClusterOrchestratorEksConfig = @import("cluster_orchestrator_eks_config.zi
 pub const ClusterOrchestrator = struct {
     /// The Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod
     /// cluster.
-    eks: ?ClusterOrchestratorEksConfig,
+    eks: ?ClusterOrchestratorEksConfig = null,
 
     pub const json_field_names = .{
         .eks = "Eks",

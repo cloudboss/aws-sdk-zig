@@ -5,7 +5,7 @@ const ExecutionBlockType = @import("execution_block_type.zig").ExecutionBlockTyp
 /// specific action during the Region switch process.
 pub const Step = struct {
     /// The description of a step in a workflow.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The configuration for an execution block in a workflow.
     execution_block_configuration: ExecutionBlockConfiguration,

@@ -6,7 +6,7 @@ const WirelessDeviceType = @import("wireless_device_type.zig").WirelessDeviceTyp
 /// specific
 /// type of wireless device.
 pub const WirelessDeviceLogOption = struct {
-    events: ?[]const WirelessDeviceEventLogOption,
+    events: ?[]const WirelessDeviceEventLogOption = null,
 
     log_level: LogLevel,
 

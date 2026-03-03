@@ -10,19 +10,19 @@ pub const PriceList = struct {
     /// The three alphabetical character ISO-4217 currency code the Price List files
     /// are
     /// denominated in.
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// The format you want to retrieve your Price List files. The `FileFormat` can
     /// be obtained from the [
     /// `ListPriceList`
     /// ](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html) response.
-    file_formats: ?[]const []const u8,
+    file_formats: ?[]const []const u8 = null,
 
     /// The unique identifier that maps to where your Price List files are located.
     /// `PriceListArn` can be obtained from the [
     /// `ListPriceList`
     /// ](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html) response.
-    price_list_arn: ?[]const u8,
+    price_list_arn: ?[]const u8 = null,
 
     /// This is used to filter the Price List by Amazon Web Services Region. For
     /// example, to get
@@ -31,7 +31,7 @@ pub const PriceList = struct {
     /// applicable Regions. The available `RegionCode` list can be retrieved from [
     /// `GetAttributeValues`
     /// ](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html) API.
-    region_code: ?[]const u8,
+    region_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .currency_code = "CurrencyCode",

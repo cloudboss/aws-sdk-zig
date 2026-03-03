@@ -10,35 +10,35 @@ const TableStatus = @import("table_status.zig").TableStatus;
 /// store for a table.
 pub const Table = struct {
     /// The Amazon Resource Name that uniquely identifies this table.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time when the Timestream table was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The name of the Timestream database that contains this table.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The time when the Timestream table was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// Contains properties to set on the table when enabling magnetic store writes.
-    magnetic_store_write_properties: ?MagneticStoreWriteProperties,
+    magnetic_store_write_properties: ?MagneticStoreWriteProperties = null,
 
     /// The retention duration for the memory store and magnetic store.
-    retention_properties: ?RetentionProperties,
+    retention_properties: ?RetentionProperties = null,
 
     /// The schema of the table.
-    schema: ?Schema,
+    schema: ?Schema = null,
 
     /// The name of the Timestream table.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The current state of the table:
     ///
     /// * `DELETING` - The table is being deleted.
     ///
     /// * `ACTIVE` - The table is ready for use.
-    table_status: ?TableStatus,
+    table_status: ?TableStatus = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -3,13 +3,13 @@ const ReferenceImportJobStatus = @import("reference_import_job_status.zig").Refe
 /// A filter for import references.
 pub const ImportReferenceFilter = struct {
     /// The filter's start date.
-    created_after: ?i64,
+    created_after: ?i64 = null,
 
     /// The filter's end date.
-    created_before: ?i64,
+    created_before: ?i64 = null,
 
     /// A status to filter on.
-    status: ?ReferenceImportJobStatus,
+    status: ?ReferenceImportJobStatus = null,
 
     pub const json_field_names = .{
         .created_after = "createdAfter",

@@ -9,7 +9,7 @@ const SamplingRateBoost = @import("sampling_rate_boost.zig").SamplingRateBoost;
 /// rules that don't match its properties.
 pub const SamplingRule = struct {
     /// Matches attributes derived from the request.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The percentage of matching requests to instrument, after the reservoir is
     /// exhausted.
@@ -36,16 +36,16 @@ pub const SamplingRule = struct {
 
     /// The ARN of the sampling rule. Specify a rule by either name or ARN, but not
     /// both.
-    rule_arn: ?[]const u8,
+    rule_arn: ?[]const u8 = null,
 
     /// The name of the sampling rule. Specify a rule by either name or ARN, but not
     /// both.
-    rule_name: ?[]const u8,
+    rule_name: ?[]const u8 = null,
 
     /// Specifies the multiplier applied to the base sampling rate.
     /// This boost allows you to temporarily increase sampling without changing the
     /// rule's configuration.
-    sampling_rate_boost: ?SamplingRateBoost,
+    sampling_rate_boost: ?SamplingRateBoost = null,
 
     /// Matches the `name` that the service uses to identify itself in segments.
     service_name: []const u8,

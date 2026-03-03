@@ -19,7 +19,7 @@ pub const BatchGetAssetPropertyAggregatesEntry = struct {
     aggregate_types: []const AggregateType,
 
     /// The ID of the asset in which the asset property was created.
-    asset_id: ?[]const u8,
+    asset_id: ?[]const u8 = null,
 
     /// The inclusive end of the range from which to query historical data,
     /// expressed in seconds in Unix epoch time.
@@ -35,13 +35,13 @@ pub const BatchGetAssetPropertyAggregatesEntry = struct {
     /// [Mapping industrial data streams to asset
     /// properties](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html) in the
     /// *IoT SiteWise User Guide*.
-    property_alias: ?[]const u8,
+    property_alias: ?[]const u8 = null,
 
     /// The ID of the asset property, in UUID format.
-    property_id: ?[]const u8,
+    property_id: ?[]const u8 = null,
 
     /// The quality by which to filter asset data.
-    qualities: ?[]const Quality,
+    qualities: ?[]const Quality = null,
 
     /// The time interval over which to aggregate data.
     resolution: []const u8,
@@ -53,7 +53,7 @@ pub const BatchGetAssetPropertyAggregatesEntry = struct {
     /// The chronological sorting order of the requested information.
     ///
     /// Default: `ASCENDING`
-    time_ordering: ?TimeOrdering,
+    time_ordering: ?TimeOrdering = null,
 
     pub const json_field_names = .{
         .aggregate_types = "aggregateTypes",

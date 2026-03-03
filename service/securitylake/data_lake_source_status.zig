@@ -5,10 +5,10 @@ pub const DataLakeSourceStatus = struct {
     /// Defines path the stored logs are available which has information on your
     /// systems,
     /// applications, and services.
-    resource: ?[]const u8,
+    resource: ?[]const u8 = null,
 
     /// The health status of services, including error codes and patterns.
-    status: ?SourceCollectionStatus,
+    status: ?SourceCollectionStatus = null,
 
     pub const json_field_names = .{
         .resource = "resource",

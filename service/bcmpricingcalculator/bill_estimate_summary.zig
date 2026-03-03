@@ -4,22 +4,22 @@ const BillEstimateStatus = @import("bill_estimate_status.zig").BillEstimateStatu
 /// Provides a summary of a bill estimate.
 pub const BillEstimateSummary = struct {
     /// The time period covered by the bill estimate.
-    bill_interval: ?BillInterval,
+    bill_interval: ?BillInterval = null,
 
     /// The timestamp when the bill estimate was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The timestamp when the bill estimate will expire.
-    expires_at: ?i64,
+    expires_at: ?i64 = null,
 
     /// The unique identifier of the bill estimate.
     id: []const u8,
 
     /// The name of the bill estimate.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the bill estimate.
-    status: ?BillEstimateStatus,
+    status: ?BillEstimateStatus = null,
 
     pub const json_field_names = .{
         .bill_interval = "billInterval",

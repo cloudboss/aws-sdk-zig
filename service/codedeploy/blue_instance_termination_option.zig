@@ -16,7 +16,7 @@ pub const BlueInstanceTerminationOption = struct {
     /// * `KEEP_ALIVE`: Instances are left running after they are
     /// deregistered from the load balancer and removed from the deployment
     /// group.
-    action: ?InstanceAction,
+    action: ?InstanceAction = null,
 
     /// For an Amazon EC2 deployment, the number of minutes to wait after a
     /// successful

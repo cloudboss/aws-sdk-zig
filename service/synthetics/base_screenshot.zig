@@ -9,7 +9,7 @@ pub const BaseScreenshot = struct {
     /// [
     /// Editing or deleting a
     /// canary](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/synthetics_canaries_deletion.html)
-    ignore_coordinates: ?[]const []const u8,
+    ignore_coordinates: ?[]const []const u8 = null,
 
     /// The name of the screenshot. This is generated the first time the canary is
     /// run after the `UpdateCanary` operation that

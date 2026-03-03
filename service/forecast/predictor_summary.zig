@@ -6,15 +6,15 @@ const ReferencePredictorSummary = @import("reference_predictor_summary.zig").Ref
 /// `PredictorArn`.
 pub const PredictorSummary = struct {
     /// When the model training task was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset group that contains the data
     /// used to train
     /// the predictor.
-    dataset_group_arn: ?[]const u8,
+    dataset_group_arn: ?[]const u8 = null,
 
     /// Whether AutoPredictor was used to create the predictor.
-    is_auto_predictor: ?bool,
+    is_auto_predictor: ?bool = null,
 
     /// The last time the resource was modified. The timestamp depends on the status
     /// of the
@@ -30,20 +30,20 @@ pub const PredictorSummary = struct {
     ///
     /// * `ACTIVE` or `CREATE_FAILED` - When the job finished or
     /// failed.
-    last_modification_time: ?i64,
+    last_modification_time: ?i64 = null,
 
     /// If an error occurred, an informational message about the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The ARN of the predictor.
-    predictor_arn: ?[]const u8,
+    predictor_arn: ?[]const u8 = null,
 
     /// The name of the predictor.
-    predictor_name: ?[]const u8,
+    predictor_name: ?[]const u8 = null,
 
     /// A summary of the reference predictor used if the predictor was retrained or
     /// upgraded.
-    reference_predictor_summary: ?ReferencePredictorSummary,
+    reference_predictor_summary: ?ReferencePredictorSummary = null,
 
     /// The status of the predictor. States include:
     ///
@@ -59,7 +59,7 @@ pub const PredictorSummary = struct {
     ///
     /// The `Status` of the predictor must be `ACTIVE` before you can use
     /// the predictor to create a forecast.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

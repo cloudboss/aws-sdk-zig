@@ -7,11 +7,11 @@
 pub const NewDeviceMetadataType = struct {
     /// The device group key, an identifier used in generating the
     /// `DEVICE_PASSWORD_VERIFIER` for device SRP authentication.
-    device_group_key: ?[]const u8,
+    device_group_key: ?[]const u8 = null,
 
     /// The device key, an identifier used in generating the
     /// `DEVICE_PASSWORD_VERIFIER` for device SRP authentication.
-    device_key: ?[]const u8,
+    device_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .device_group_key = "DeviceGroupKey",

@@ -6,16 +6,16 @@ const ModifySelfManagedConfiguration = @import("modify_self_managed_configuratio
 /// Contains information for modifying a strategy configuration.
 pub const ModifyStrategyConfiguration = struct {
     /// The updated consolidation configuration.
-    consolidation: ?ModifyConsolidationConfiguration,
+    consolidation: ?ModifyConsolidationConfiguration = null,
 
     /// The updated extraction configuration.
-    extraction: ?ModifyExtractionConfiguration,
+    extraction: ?ModifyExtractionConfiguration = null,
 
     /// The updated reflection configuration.
-    reflection: ?ModifyReflectionConfiguration,
+    reflection: ?ModifyReflectionConfiguration = null,
 
     /// The updated self-managed configuration.
-    self_managed_configuration: ?ModifySelfManagedConfiguration,
+    self_managed_configuration: ?ModifySelfManagedConfiguration = null,
 
     pub const json_field_names = .{
         .consolidation = "consolidation",

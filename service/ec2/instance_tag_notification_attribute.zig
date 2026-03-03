@@ -5,8 +5,8 @@ pub const InstanceTagNotificationAttribute = struct {
     /// scheduled event notifications. `true` indicates that all tag keys in the
     /// current
     /// Region are registered.
-    include_all_tags_of_instance: ?bool,
+    include_all_tags_of_instance: ?bool = null,
 
     /// The registered tag keys.
-    instance_tag_keys: ?[]const []const u8,
+    instance_tag_keys: ?[]const []const u8 = null,
 };

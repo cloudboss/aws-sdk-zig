@@ -4,22 +4,22 @@ const BotStatus = @import("bot_status.zig").BotStatus;
 /// [ListBotVersions](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotVersions.html) operation.
 pub const BotVersionSummary = struct {
     /// The name of the bot associated with the version.
-    bot_name: ?[]const u8,
+    bot_name: ?[]const u8 = null,
 
     /// The status of the bot. When the status is available, the version of
     /// the bot is ready for use.
-    bot_status: ?BotStatus,
+    bot_status: ?BotStatus = null,
 
     /// The numeric version of the bot, or `DRAFT` to indicate
     /// that this is the version of the bot that can be updated..
-    bot_version: ?[]const u8,
+    bot_version: ?[]const u8 = null,
 
     /// A timestamp of the date and time that the version was
     /// created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The description of the version.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bot_name = "botName",

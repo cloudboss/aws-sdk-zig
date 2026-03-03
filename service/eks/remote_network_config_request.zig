@@ -42,7 +42,7 @@ pub const RemoteNetworkConfigRequest = struct {
     ///   hosts
     /// that are running `CoreDNS` on UDP port `53` for service and pod DNS
     /// names.
-    remote_node_networks: ?[]const RemoteNodeNetwork,
+    remote_node_networks: ?[]const RemoteNodeNetwork = null,
 
     /// The list of network CIDRs that can contain pods that run Kubernetes webhooks
     /// on hybrid
@@ -67,7 +67,7 @@ pub const RemoteNetworkConfigRequest = struct {
     /// * Each block cannot overlap with the range of the VPC CIDR blocks for your
     ///   EKS
     /// resources, or the block of the Kubernetes service IP range.
-    remote_pod_networks: ?[]const RemotePodNetwork,
+    remote_pod_networks: ?[]const RemotePodNetwork = null,
 
     pub const json_field_names = .{
         .remote_node_networks = "remoteNodeNetworks",

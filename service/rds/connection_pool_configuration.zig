@@ -11,7 +11,7 @@ pub const ConnectionPoolConfiguration = struct {
     /// Constraints:
     ///
     /// * Must be between 0 and 300.
-    connection_borrow_timeout: ?i32,
+    connection_borrow_timeout: ?i32 = null,
 
     /// Add an initialization query, or modify the current one. You can specify one
     /// or more SQL statements for the proxy to run when opening each new database
@@ -31,7 +31,7 @@ pub const ConnectionPoolConfiguration = struct {
     /// configuration can view the initialization query. You should not add
     /// sensitive data, such as passwords or long-lived encryption keys, to this
     /// option.
-    init_query: ?[]const u8,
+    init_query: ?[]const u8 = null,
 
     /// The maximum size of the connection pool for each target in a target group.
     /// The value is expressed as a percentage of the `max_connections` setting for
@@ -46,7 +46,7 @@ pub const ConnectionPoolConfiguration = struct {
     /// Constraints:
     ///
     /// * Must be between 1 and 100.
-    max_connections_percent: ?i32,
+    max_connections_percent: ?i32 = null,
 
     /// A value that controls how actively the proxy closes idle database
     /// connections in the connection pool. The value is expressed as a percentage
@@ -67,7 +67,7 @@ pub const ConnectionPoolConfiguration = struct {
     /// Constraints:
     ///
     /// * Must be between 0 and the value of `MaxConnectionsPercent`.
-    max_idle_connections_percent: ?i32,
+    max_idle_connections_percent: ?i32 = null,
 
     /// Each item in the list represents a class of SQL operations that normally
     /// cause all later statements in a session using a proxy to be pinned to the
@@ -75,5 +75,5 @@ pub const ConnectionPoolConfiguration = struct {
     /// that class of SQL operations from the pinning behavior.
     ///
     /// Default: no session pinning filters
-    session_pinning_filters: ?[]const []const u8,
+    session_pinning_filters: ?[]const []const u8 = null,
 };

@@ -8,66 +8,66 @@ const QualificationRequirement = @import("qualification_requirement.zig").Qualif
 pub const HIT = struct {
     /// The length of time, in seconds, that a Worker has to
     /// complete the HIT after accepting it.
-    assignment_duration_in_seconds: ?i64,
+    assignment_duration_in_seconds: ?i64 = null,
 
     /// The amount of time, in seconds, after the Worker submits an
     /// assignment for the HIT that the results are automatically approved by
     /// Amazon Mechanical Turk. This is the amount of time the Requester has
     /// to reject an assignment submitted by a Worker before the assignment
     /// is auto-approved and the Worker is paid.
-    auto_approval_delay_in_seconds: ?i64,
+    auto_approval_delay_in_seconds: ?i64 = null,
 
     /// The date and time the HIT was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A general description of the HIT.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The date and time the HIT expires.
-    expiration: ?i64,
+    expiration: ?i64 = null,
 
     /// The ID of the HIT Group of this HIT.
-    hit_group_id: ?[]const u8,
+    hit_group_id: ?[]const u8 = null,
 
     /// A unique identifier for the HIT.
-    hit_id: ?[]const u8,
+    hit_id: ?[]const u8 = null,
 
     /// The ID of the HIT Layout of this HIT.
-    hit_layout_id: ?[]const u8,
+    hit_layout_id: ?[]const u8 = null,
 
     /// Indicates the review status of the HIT. Valid Values are
     /// NotReviewed | MarkedForReview | ReviewedAppropriate |
     /// ReviewedInappropriate.
-    hit_review_status: ?HITReviewStatus,
+    hit_review_status: ?HITReviewStatus = null,
 
     /// The status of the HIT and its assignments. Valid Values are
     /// Assignable | Unassignable | Reviewable | Reviewing | Disposed.
-    hit_status: ?HITStatus,
+    hit_status: ?HITStatus = null,
 
     /// The ID of the HIT type of this HIT
-    hit_type_id: ?[]const u8,
+    hit_type_id: ?[]const u8 = null,
 
     /// One or more words or phrases that describe the HIT,
     /// separated by commas. Search terms similar to the keywords of a HIT
     /// are more likely to have the HIT in the search results.
-    keywords: ?[]const u8,
+    keywords: ?[]const u8 = null,
 
     /// The number of times the HIT can be accepted and completed
     /// before the HIT becomes unavailable.
-    max_assignments: ?i32,
+    max_assignments: ?i32 = null,
 
     /// The number of assignments for this HIT that are available
     /// for Workers to accept.
-    number_of_assignments_available: ?i32,
+    number_of_assignments_available: ?i32 = null,
 
     /// The number of assignments for this HIT that have been
     /// approved or rejected.
-    number_of_assignments_completed: ?i32,
+    number_of_assignments_completed: ?i32 = null,
 
     /// The number of assignments for this HIT that are being
     /// previewed or have been accepted by Workers, but have not yet been
     /// submitted, returned, or abandoned.
-    number_of_assignments_pending: ?i32,
+    number_of_assignments_pending: ?i32 = null,
 
     /// Conditions that a Worker's Qualifications must meet in order
     /// to accept the HIT. A HIT can have between zero and ten
@@ -75,21 +75,21 @@ pub const HIT = struct {
     /// order for a Worker to accept the HIT. Additionally, other
     /// actions can be restricted using the `ActionsGuarded`
     /// field on each `QualificationRequirement` structure.
-    qualification_requirements: ?[]const QualificationRequirement,
+    qualification_requirements: ?[]const QualificationRequirement = null,
 
     /// The data the Worker completing the HIT uses produce the
     /// results. This is either either a QuestionForm, HTMLQuestion or an
     /// ExternalQuestion data structure.
-    question: ?[]const u8,
+    question: ?[]const u8 = null,
 
     /// An arbitrary data field the Requester who created the HIT
     /// can use. This field is visible only to the creator of the HIT.
-    requester_annotation: ?[]const u8,
+    requester_annotation: ?[]const u8 = null,
 
-    reward: ?[]const u8,
+    reward: ?[]const u8 = null,
 
     /// The title of the HIT.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .assignment_duration_in_seconds = "AssignmentDurationInSeconds",

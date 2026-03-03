@@ -17,7 +17,7 @@ pub const AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDet
     /// `"SYS_PACCT"` | `"SYS_PTRACE"` | `"SYS_RAWIO"` |
     /// `"SYS_RESOURCE"` | `"SYS_TIME"` | `"SYS_TTY_CONFIG"` |
     /// `"SYSLOG"` | `"WAKE_ALARM"`
-    add: ?[]const []const u8,
+    add: ?[]const []const u8 = null,
 
     /// The Linux capabilities for the container that are dropped from the default
     /// configuration provided by Docker.
@@ -35,7 +35,7 @@ pub const AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDet
     /// `"SYS_PACCT"` | `"SYS_PTRACE"` | `"SYS_RAWIO"` |
     /// `"SYS_RESOURCE"` | `"SYS_TIME"` | `"SYS_TTY_CONFIG"` |
     /// `"SYSLOG"` | `"WAKE_ALARM"`
-    drop: ?[]const []const u8,
+    drop: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .add = "Add",

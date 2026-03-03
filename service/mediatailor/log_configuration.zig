@@ -7,7 +7,7 @@ const ManifestServiceInteractionLog = @import("manifest_service_interaction_log.
 pub const LogConfiguration = struct {
     /// Settings for customizing what events are included in logs for interactions
     /// with the ad decision server (ADS).
-    ads_interaction_log: ?AdsInteractionLog,
+    ads_interaction_log: ?AdsInteractionLog = null,
 
     /// The method used for collecting logs from AWS Elemental MediaTailor.
     /// `LEGACY_CLOUDWATCH` indicates that MediaTailor is sending logs directly to
@@ -19,7 +19,7 @@ pub const LogConfiguration = struct {
 
     /// Settings for customizing what events are included in logs for interactions
     /// with the origin server.
-    manifest_service_interaction_log: ?ManifestServiceInteractionLog,
+    manifest_service_interaction_log: ?ManifestServiceInteractionLog = null,
 
     /// The percentage of session logs that MediaTailor sends to your configured log
     /// destination. For example, if your playback configuration has 1000 sessions

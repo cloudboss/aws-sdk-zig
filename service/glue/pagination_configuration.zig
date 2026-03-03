@@ -6,11 +6,11 @@ const OffsetConfiguration = @import("offset_configuration.zig").OffsetConfigurat
 pub const PaginationConfiguration = struct {
     /// Configuration for cursor-based pagination, where the API provides a cursor
     /// or token to retrieve the next page of results.
-    cursor_configuration: ?CursorConfiguration,
+    cursor_configuration: ?CursorConfiguration = null,
 
     /// Configuration for offset-based pagination, where the API uses numeric
     /// offsets and limits to control which results are returned.
-    offset_configuration: ?OffsetConfiguration,
+    offset_configuration: ?OffsetConfiguration = null,
 
     pub const json_field_names = .{
         .cursor_configuration = "CursorConfiguration",

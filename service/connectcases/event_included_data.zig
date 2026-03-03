@@ -5,11 +5,11 @@ const RelatedItemEventIncludedData = @import("related_item_event_included_data.z
 /// event stream.
 pub const EventIncludedData = struct {
     /// Details of what case data is published through the case event stream.
-    case_data: ?CaseEventIncludedData,
+    case_data: ?CaseEventIncludedData = null,
 
     /// Details of what related item data is published through the case event
     /// stream.
-    related_item_data: ?RelatedItemEventIncludedData,
+    related_item_data: ?RelatedItemEventIncludedData = null,
 
     pub const json_field_names = .{
         .case_data = "caseData",

@@ -12,13 +12,13 @@ pub const AuditEvent = struct {
     fields: []const AuditEventField,
 
     /// Information of the user which performed the audit.
-    performed_by: ?AuditEventPerformedBy,
+    performed_by: ?AuditEventPerformedBy = null,
 
     /// Time at which an Audit History event took place.
     performed_time: i64,
 
     /// The Type of the related item.
-    related_item_type: ?RelatedItemType,
+    related_item_type: ?RelatedItemType = null,
 
     /// The Type of an audit history event.
     @"type": AuditEventType,

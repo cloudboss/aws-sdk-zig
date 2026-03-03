@@ -5,8 +5,8 @@ const Owner = @import("owner.zig").Owner;
 /// grantee.
 pub const AccessControlPolicy = struct {
     /// A list of grants.
-    grants: ?[]const Grant,
+    grants: ?[]const Grant = null,
 
     /// Container for the bucket owner's display name and ID.
-    owner: ?Owner,
+    owner: ?Owner = null,
 };

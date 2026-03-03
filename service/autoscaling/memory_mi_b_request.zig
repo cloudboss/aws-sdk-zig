@@ -3,7 +3,7 @@
 /// [InstanceRequirements](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html) for an Auto Scaling group.
 pub const MemoryMiBRequest = struct {
     /// The memory maximum in MiB.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// The memory minimum in MiB.
     min: i32,

@@ -7,12 +7,12 @@ pub const FipsEndpoints = struct {
     /// upload requests to an OpenSearch Serverless collection. This endpoint uses
     /// FIPS 140-3 validated cryptography and is required for federal government
     /// workloads.
-    collection_endpoint: ?[]const u8,
+    collection_endpoint: ?[]const u8 = null,
 
     /// FIPS-compliant endpoint used to access OpenSearch Dashboards. This endpoint
     /// uses FIPS 140-3 validated cryptography and is required for federal
     /// government workloads that need dashboard visualization capabilities.
-    dashboard_endpoint: ?[]const u8,
+    dashboard_endpoint: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .collection_endpoint = "collectionEndpoint",

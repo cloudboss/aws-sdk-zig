@@ -11,18 +11,18 @@ pub const SendUsersMessageRequest = struct {
     /// Pinpoint adds these attributes to the data.pinpoint object in the body of
     /// the notification payload. Amazon Pinpoint also provides these attributes in
     /// the events that it generates for users-messages deliveries.
-    context: ?[]const aws.map.StringMapEntry,
+    context: ?[]const aws.map.StringMapEntry = null,
 
     /// The settings and content for the default message and any default messages
     /// that you defined for specific channels.
     message_configuration: DirectMessageConfiguration,
 
     /// The message template to use for the message.
-    template_configuration: ?TemplateConfiguration,
+    template_configuration: ?TemplateConfiguration = null,
 
     /// The unique identifier for tracing the message. This identifier is visible to
     /// message recipients.
-    trace_id: ?[]const u8,
+    trace_id: ?[]const u8 = null,
 
     /// A map that associates user IDs with
     /// [EndpointSendConfiguration](https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration) objects. You can use an [EndpointSendConfiguration](https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration) object to tailor the message for a user by specifying settings such as content overrides and message variables.

@@ -1,6 +1,6 @@
 /// A multicast group that is associated with a FUOTA task.
 pub const MulticastGroupByFuotaTask = struct {
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

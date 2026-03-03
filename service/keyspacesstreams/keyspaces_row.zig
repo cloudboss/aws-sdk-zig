@@ -8,15 +8,15 @@ const KeyspacesCell = @import("keyspaces_cell.zig").KeyspacesCell;
 pub const KeyspacesRow = struct {
     /// Metadata that applies to the entire row, such as timestamps and TTL
     /// information.
-    row_metadata: ?KeyspacesMetadata,
+    row_metadata: ?KeyspacesMetadata = null,
 
     /// A map of static column cells shared by all rows with the same partition key,
     /// where keys are column names and values are the corresponding cells.
-    static_cells: ?[]const aws.map.MapEntry(KeyspacesCell),
+    static_cells: ?[]const aws.map.MapEntry(KeyspacesCell) = null,
 
     /// A map of regular (non-static) column cells in the row, where keys are column
     /// names and values are the corresponding cells.
-    value_cells: ?[]const aws.map.MapEntry(KeyspacesCell),
+    value_cells: ?[]const aws.map.MapEntry(KeyspacesCell) = null,
 
     pub const json_field_names = .{
         .row_metadata = "rowMetadata",

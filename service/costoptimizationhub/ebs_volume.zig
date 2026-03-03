@@ -6,10 +6,10 @@ const ResourceCostCalculation = @import("resource_cost_calculation.zig").Resourc
 pub const EbsVolume = struct {
     /// The Amazon Elastic Block Store volume configuration used for
     /// recommendations.
-    configuration: ?EbsVolumeConfiguration,
+    configuration: ?EbsVolumeConfiguration = null,
 
     /// Cost impact of the recommendation.
-    cost_calculation: ?ResourceCostCalculation,
+    cost_calculation: ?ResourceCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

@@ -4,7 +4,7 @@ const FlexibleTimeWindowMode = @import("flexible_time_window_mode.zig").Flexible
 /// invokes the schedule.
 pub const FlexibleTimeWindow = struct {
     /// The maximum time window during which a schedule can be invoked.
-    maximum_window_in_minutes: ?i32,
+    maximum_window_in_minutes: ?i32 = null,
 
     /// Determines whether the schedule is invoked within a flexible time window.
     mode: FlexibleTimeWindowMode,

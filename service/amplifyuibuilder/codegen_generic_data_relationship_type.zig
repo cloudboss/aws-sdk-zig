@@ -3,26 +3,26 @@ const GenericDataRelationshipType = @import("generic_data_relationship_type.zig"
 /// Describes the relationship between generic data models.
 pub const CodegenGenericDataRelationshipType = struct {
     /// The associated fields of the data relationship.
-    associated_fields: ?[]const []const u8,
+    associated_fields: ?[]const []const u8 = null,
 
     /// The value of the `belongsTo` field on the related data model.
-    belongs_to_field_on_related_model: ?[]const u8,
+    belongs_to_field_on_related_model: ?[]const u8 = null,
 
     /// Specifies whether the relationship can unlink the associated model.
-    can_unlink_associated_model: ?bool,
+    can_unlink_associated_model: ?bool = null,
 
     /// Specifies whether the `@index` directive is supported for a `hasMany` data
     /// relationship.
-    is_has_many_index: ?bool,
+    is_has_many_index: ?bool = null,
 
     /// The name of the related join field in the data relationship.
-    related_join_field_name: ?[]const u8,
+    related_join_field_name: ?[]const u8 = null,
 
     /// The name of the related join table in the data relationship.
-    related_join_table_name: ?[]const u8,
+    related_join_table_name: ?[]const u8 = null,
 
     /// The related model fields in the data relationship.
-    related_model_fields: ?[]const []const u8,
+    related_model_fields: ?[]const []const u8 = null,
 
     /// The name of the related model in the data relationship.
     related_model_name: []const u8,

@@ -5,11 +5,11 @@ const RouteVehicleTravelOnlySummary = @import("route_vehicle_travel_only_summary
 pub const RouteVehicleSummary = struct {
     /// Summarized details for the leg including before travel, travel and after
     /// travel steps.
-    overview: ?RouteVehicleOverviewSummary,
+    overview: ?RouteVehicleOverviewSummary = null,
 
     /// Summarized details for the leg including travel steps only. The Distance for
     /// the travel only portion of the journey is in meters
-    travel_only: ?RouteVehicleTravelOnlySummary,
+    travel_only: ?RouteVehicleTravelOnlySummary = null,
 
     pub const json_field_names = .{
         .overview = "Overview",

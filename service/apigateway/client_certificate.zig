@@ -4,24 +4,24 @@ const aws = @import("aws");
 /// authentication while sending requests to the integration endpoint.
 pub const ClientCertificate = struct {
     /// The identifier of the client certificate.
-    client_certificate_id: ?[]const u8,
+    client_certificate_id: ?[]const u8 = null,
 
     /// The timestamp when the client certificate was created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// The description of the client certificate.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The timestamp when the client certificate will expire.
-    expiration_date: ?i64,
+    expiration_date: ?i64 = null,
 
     /// The PEM-encoded public key of the client certificate, which can be used to
     /// configure certificate authentication in the integration endpoint .
-    pem_encoded_certificate: ?[]const u8,
+    pem_encoded_certificate: ?[]const u8 = null,
 
     /// The collection of tags. Each tag element is associated with a given
     /// resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .client_certificate_id = "clientCertificateId",

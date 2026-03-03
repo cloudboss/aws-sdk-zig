@@ -22,70 +22,70 @@ pub const M3u8Settings = struct {
     /// adds padding only to the end of the file. When you keep the default value,
     /// any minor discrepancies between audio and video duration will depend on your
     /// output audio codec.
-    audio_duration: ?M3u8AudioDuration,
+    audio_duration: ?M3u8AudioDuration = null,
 
     /// The number of audio frames to insert for each PES packet.
-    audio_frames_per_pes: ?i32,
+    audio_frames_per_pes: ?i32 = null,
 
     /// Packet Identifier (PID) of the elementary audio stream(s) in the transport
     /// stream. Multiple values are accepted, and can be entered in ranges and/or by
     /// comma separation.
-    audio_pids: ?[]const i32,
+    audio_pids: ?[]const i32 = null,
 
     /// Manually specify the difference in PTS offset that will be applied to the
     /// audio track, in seconds or milliseconds, when you set PTS offset to Seconds
     /// or Milliseconds. Enter an integer from -10000 to 10000. Leave blank to keep
     /// the default value 0.
-    audio_pts_offset_delta: ?i32,
+    audio_pts_offset_delta: ?i32 = null,
 
     /// If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets
     /// with Presentation Timestamp (PTS) values greater than or equal to the first
     /// video packet PTS (MediaConvert drops captions and data packets with lesser
     /// PTS values). Keep the default value AUTO to allow all PTS values.
-    data_pts_control: ?M3u8DataPtsControl,
+    data_pts_control: ?M3u8DataPtsControl = null,
 
     /// Specify the maximum time, in milliseconds, between Program Clock References
     /// (PCRs) inserted into the transport stream.
-    max_pcr_interval: ?i32,
+    max_pcr_interval: ?i32 = null,
 
     /// If INSERT, Nielsen inaudible tones for media tracking will be detected in
     /// the input audio and an equivalent ID3 tag will be inserted in the output.
-    nielsen_id_3: ?M3u8NielsenId3,
+    nielsen_id_3: ?M3u8NielsenId3 = null,
 
     /// The number of milliseconds between instances of this table in the output
     /// transport stream.
-    pat_interval: ?i32,
+    pat_interval: ?i32 = null,
 
     /// When set to PCR_EVERY_PES_PACKET a Program Clock Reference value is inserted
     /// for every Packetized Elementary Stream (PES) header. This parameter is
     /// effective only when the PCR PID is the same as the video or audio elementary
     /// stream.
-    pcr_control: ?M3u8PcrControl,
+    pcr_control: ?M3u8PcrControl = null,
 
     /// Packet Identifier (PID) of the Program Clock Reference (PCR) in the
     /// transport stream. When no value is given, the encoder will assign the same
     /// value as the Video PID.
-    pcr_pid: ?i32,
+    pcr_pid: ?i32 = null,
 
     /// The number of milliseconds between instances of this table in the output
     /// transport stream.
-    pmt_interval: ?i32,
+    pmt_interval: ?i32 = null,
 
     /// Packet Identifier (PID) for the Program Map Table (PMT) in the transport
     /// stream.
-    pmt_pid: ?i32,
+    pmt_pid: ?i32 = null,
 
     /// Packet Identifier (PID) of the private metadata stream in the transport
     /// stream.
-    private_metadata_pid: ?i32,
+    private_metadata_pid: ?i32 = null,
 
     /// The value of the program number field in the Program Map Table.
-    program_number: ?i32,
+    program_number: ?i32 = null,
 
     /// Manually specify the initial PTS offset, in seconds, when you set PTS offset
     /// to Seconds. Enter an integer from 0 to 3600. Leave blank to keep the default
     /// value 2.
-    pts_offset: ?i32,
+    pts_offset: ?i32 = null,
 
     /// Specify the initial presentation timestamp (PTS) offset for your transport
     /// stream output. To let MediaConvert automatically determine the initial PTS
@@ -95,10 +95,10 @@ pub const M3u8Settings = struct {
     /// buffer initial fill percentage. To manually specify an initial PTS offset:
     /// Choose Seconds or Milliseconds. Then specify the number of seconds or
     /// milliseconds with PTS offset.
-    pts_offset_mode: ?TsPtsOffset,
+    pts_offset_mode: ?TsPtsOffset = null,
 
     /// Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
-    scte_35_pid: ?i32,
+    scte_35_pid: ?i32 = null,
 
     /// For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35
     /// markers that appear in your input to also appear in this output. Choose None
@@ -107,23 +107,23 @@ pub const M3u8Settings = struct {
     /// Choose Passthrough and choose Ad markers if you do want manifest
     /// conditioning. In both cases, also provide the ESAM XML as a string in the
     /// setting Signal processing notification XML.
-    scte_35_source: ?M3u8Scte35Source,
+    scte_35_source: ?M3u8Scte35Source = null,
 
     /// Set ID3 metadata to Passthrough to include ID3 metadata in this output. This
     /// includes ID3 metadata from the following features: ID3 timestamp period, and
     /// Custom ID3 metadata inserter. To exclude this ID3 metadata in this output:
     /// set ID3 metadata to None or leave blank.
-    timed_metadata: ?TimedMetadata,
+    timed_metadata: ?TimedMetadata = null,
 
     /// Packet Identifier (PID) of the ID3 metadata stream in the transport stream.
-    timed_metadata_pid: ?i32,
+    timed_metadata_pid: ?i32 = null,
 
     /// The value of the transport stream ID field in the Program Map Table.
-    transport_stream_id: ?i32,
+    transport_stream_id: ?i32 = null,
 
     /// Packet Identifier (PID) of the elementary video stream in the transport
     /// stream.
-    video_pid: ?i32,
+    video_pid: ?i32 = null,
 
     pub const json_field_names = .{
         .audio_duration = "AudioDuration",

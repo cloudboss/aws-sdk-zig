@@ -6,7 +6,7 @@ const SrtEncryptionConfiguration = @import("srt_encryption_configuration.zig").S
 pub const SrtListenerRouterOutputConfiguration = struct {
     /// Defines the encryption settings for an SRT listener output, including the
     /// encryption key configuration and associated parameters.
-    encryption_configuration: ?SrtEncryptionConfiguration,
+    encryption_configuration: ?SrtEncryptionConfiguration = null,
 
     /// The minimum latency in milliseconds for the SRT protocol in listener mode.
     minimum_latency_milliseconds: i64,

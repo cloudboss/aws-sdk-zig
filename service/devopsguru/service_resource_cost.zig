@@ -22,10 +22,10 @@ pub const ServiceResourceCost = struct {
     /// number of active Amazon Web Services resource hours analyzed for each
     /// resource. Inactive resources are
     /// not charged.
-    state: ?CostEstimationServiceResourceState,
+    state: ?CostEstimationServiceResourceState = null,
 
     /// The type of the Amazon Web Services resource.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The price per hour to analyze the resources in the service.
     /// For more information,

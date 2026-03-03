@@ -16,7 +16,7 @@ pub const KeyPairInfo = struct {
     /// 8601 date-time
     /// format](https://www.iso.org/iso-8601-date-and-time-format.html), in the UTC
     /// time zone.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// If you used CreateKeyPair to create the key pair:
     ///
@@ -36,20 +36,20 @@ pub const KeyPairInfo = struct {
     /// * For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256
     /// digest, which is the default for OpenSSH, starting with [OpenSSH
     /// 6.8](http://www.openssh.com/txt/release-6.8).
-    key_fingerprint: ?[]const u8,
+    key_fingerprint: ?[]const u8 = null,
 
     /// The name of the key pair.
-    key_name: ?[]const u8,
+    key_name: ?[]const u8 = null,
 
     /// The ID of the key pair.
-    key_pair_id: ?[]const u8,
+    key_pair_id: ?[]const u8 = null,
 
     /// The type of key pair.
-    key_type: ?KeyType,
+    key_type: ?KeyType = null,
 
     /// The public key material.
-    public_key: ?[]const u8,
+    public_key: ?[]const u8 = null,
 
     /// Any tags applied to the key pair.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

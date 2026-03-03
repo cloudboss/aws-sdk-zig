@@ -4,10 +4,10 @@ const EventType = @import("event_type.zig").EventType;
 /// An object containing details about a specific event.
 pub const InsightsEvent = struct {
     /// Details about bounce or complaint events.
-    details: ?EventDetails,
+    details: ?EventDetails = null,
 
     /// The timestamp of the event.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     /// The type of event:
     ///
@@ -38,7 +38,7 @@ pub const InsightsEvent = struct {
     ///
     /// * `CLICK` - Click event for emails including wrapped links.
     /// Excludes clicks for emails addressed to more than one recipient.
-    @"type": ?EventType,
+    @"type": ?EventType = null,
 
     pub const json_field_names = .{
         .details = "Details",

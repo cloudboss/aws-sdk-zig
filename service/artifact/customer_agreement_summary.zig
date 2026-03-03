@@ -4,43 +4,43 @@ const AgreementType = @import("agreement_type.zig").AgreementType;
 /// Summary for customer-agreement resource.
 pub const CustomerAgreementSummary = struct {
     /// Terms required to accept the agreement resource.
-    acceptance_terms: ?[]const []const u8,
+    acceptance_terms: ?[]const []const u8 = null,
 
     /// ARN of the agreement resource the customer-agreement resource represents.
-    agreement_arn: ?[]const u8,
+    agreement_arn: ?[]const u8 = null,
 
     /// ARN of the customer-agreement resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// AWS account Id that owns the resource.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
     /// Description of the resource.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Timestamp indicating when the agreement was terminated.
-    effective_end: ?i64,
+    effective_end: ?i64 = null,
 
     /// Timestamp indicating when the agreement became effective.
-    effective_start: ?i64,
+    effective_start: ?i64 = null,
 
     /// Identifier of the customer-agreement resource.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Name of the customer-agreement resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// ARN of the organization that owns the resource.
-    organization_arn: ?[]const u8,
+    organization_arn: ?[]const u8 = null,
 
     /// State of the resource.
-    state: ?CustomerAgreementState,
+    state: ?CustomerAgreementState = null,
 
     /// Terms required to terminate the customer-agreement resource.
-    terminate_terms: ?[]const []const u8,
+    terminate_terms: ?[]const []const u8 = null,
 
     /// Type of the customer-agreement resource.
-    @"type": ?AgreementType,
+    @"type": ?AgreementType = null,
 
     pub const json_field_names = .{
         .acceptance_terms = "acceptanceTerms",

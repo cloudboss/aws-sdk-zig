@@ -10,7 +10,7 @@ const SalesforceStandardKnowledgeArticleTypeConfiguration = @import("salesforce_
 /// articles, but not both
 pub const SalesforceKnowledgeArticleConfiguration = struct {
     /// Configuration information for custom Salesforce knowledge articles.
-    custom_knowledge_article_type_configurations: ?[]const SalesforceCustomKnowledgeArticleTypeConfiguration,
+    custom_knowledge_article_type_configurations: ?[]const SalesforceCustomKnowledgeArticleTypeConfiguration = null,
 
     /// Specifies the document states that should be included when Amazon Kendra
     /// indexes
@@ -18,7 +18,7 @@ pub const SalesforceKnowledgeArticleConfiguration = struct {
     included_states: []const SalesforceKnowledgeArticleState,
 
     /// Configuration information for standard Salesforce knowledge articles.
-    standard_knowledge_article_type_configuration: ?SalesforceStandardKnowledgeArticleTypeConfiguration,
+    standard_knowledge_article_type_configuration: ?SalesforceStandardKnowledgeArticleTypeConfiguration = null,
 
     pub const json_field_names = .{
         .custom_knowledge_article_type_configurations = "CustomKnowledgeArticleTypeConfigurations",

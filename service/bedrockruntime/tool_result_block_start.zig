@@ -6,13 +6,13 @@ const ToolResultStatus = @import("tool_result_status.zig").ToolResultStatus;
 /// the Amazon Bedrock User Guide.
 pub const ToolResultBlockStart = struct {
     /// The status of the tool result block.
-    status: ?ToolResultStatus,
+    status: ?ToolResultStatus = null,
 
     /// The ID of the tool that was used to generate this tool result block.
     tool_use_id: []const u8,
 
     /// The type for the tool that was used to generate this tool result block.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status = "status",

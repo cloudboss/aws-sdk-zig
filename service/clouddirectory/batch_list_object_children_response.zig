@@ -4,10 +4,10 @@ const aws = @import("aws");
 pub const BatchListObjectChildrenResponse = struct {
     /// The children structure, which is a map with the key as the `LinkName` and
     /// `ObjectIdentifier` as the value.
-    children: ?[]const aws.map.StringMapEntry,
+    children: ?[]const aws.map.StringMapEntry = null,
 
     /// The pagination token.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .children = "Children",

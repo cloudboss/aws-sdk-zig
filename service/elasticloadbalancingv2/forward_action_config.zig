@@ -4,8 +4,8 @@ const TargetGroupStickinessConfig = @import("target_group_stickiness_config.zig"
 /// Information about a forward action.
 pub const ForwardActionConfig = struct {
     /// The target groups.
-    target_groups: ?[]const TargetGroupTuple,
+    target_groups: ?[]const TargetGroupTuple = null,
 
     /// The target group stickiness for the rule.
-    target_group_stickiness_config: ?TargetGroupStickinessConfig,
+    target_group_stickiness_config: ?TargetGroupStickinessConfig = null,
 };

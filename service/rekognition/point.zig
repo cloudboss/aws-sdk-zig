@@ -12,10 +12,10 @@
 /// information, see Geometry in the Amazon Rekognition Developer Guide.
 pub const Point = struct {
     /// The value of the X coordinate for a point on a `Polygon`.
-    x: ?f32,
+    x: ?f32 = null,
 
     /// The value of the Y coordinate for a point on a `Polygon`.
-    y: ?f32,
+    y: ?f32 = null,
 
     pub const json_field_names = .{
         .x = "X",

@@ -4,7 +4,7 @@ const EvaluationMode = @import("evaluation_mode.zig").EvaluationMode;
 /// valid values are Detective or Proactive.
 pub const EvaluationModeConfiguration = struct {
     /// The mode of an evaluation. The valid values are Detective or Proactive.
-    mode: ?EvaluationMode,
+    mode: ?EvaluationMode = null,
 
     pub const json_field_names = .{
         .mode = "Mode",

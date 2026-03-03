@@ -11,10 +11,10 @@ pub const MemberAccountEc2DeepInspectionStatusState = struct {
     /// The error message explaining why the account failed to activate Amazon
     /// Inspector deep
     /// inspection.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The state of Amazon Inspector deep inspection in the member account.
-    status: ?Ec2DeepInspectionStatus,
+    status: ?Ec2DeepInspectionStatus = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

@@ -22,5 +22,5 @@ pub const CachePolicyCookiesConfig = struct {
     ///   in requests that CloudFront sends to the origin.
     cookie_behavior: CachePolicyCookieBehavior,
 
-    cookies: ?CookieNames,
+    cookies: ?CookieNames = null,
 };

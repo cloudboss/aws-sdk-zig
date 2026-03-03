@@ -20,17 +20,17 @@ const RequireConfirmation = @import("require_confirmation.zig").RequireConfirmat
 ///   response](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax)
 pub const Function = struct {
     /// A description of the function and its purpose.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A name for the function.
     name: []const u8,
 
     /// The parameters that the agent elicits from the user to fulfill the function.
-    parameters: ?[]const aws.map.MapEntry(ParameterDetail),
+    parameters: ?[]const aws.map.MapEntry(ParameterDetail) = null,
 
     /// Contains information if user confirmation is required to invoke the
     /// function.
-    require_confirmation: ?RequireConfirmation,
+    require_confirmation: ?RequireConfirmation = null,
 
     pub const json_field_names = .{
         .description = "description",

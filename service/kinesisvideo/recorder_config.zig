@@ -16,7 +16,7 @@ pub const RecorderConfig = struct {
     /// local media file, onto the Edge Agent. If the `ScheduleExpression` attribute
     /// is not provided,
     /// then the Edge Agent will always be set to recording mode.
-    schedule_config: ?ScheduleConfig,
+    schedule_config: ?ScheduleConfig = null,
 
     pub const json_field_names = .{
         .media_source_config = "MediaSourceConfig",

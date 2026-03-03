@@ -6,16 +6,16 @@ const NielsenNaesIiNw = @import("nielsen_naes_ii_nw.zig").NielsenNaesIiNw;
 pub const NielsenWatermarksSettings = struct {
     /// Complete these fields only if you want to insert watermarks of type Nielsen
     /// CBET
-    nielsen_cbet_settings: ?NielsenCBET,
+    nielsen_cbet_settings: ?NielsenCBET = null,
 
     /// Choose the distribution types that you want to assign to the watermarks:
     /// - PROGRAM_CONTENT
     /// - FINAL_DISTRIBUTOR
-    nielsen_distribution_type: ?NielsenWatermarksDistributionTypes,
+    nielsen_distribution_type: ?NielsenWatermarksDistributionTypes = null,
 
     /// Complete these fields only if you want to insert watermarks of type Nielsen
     /// NAES II (N2) and Nielsen NAES VI (NW).
-    nielsen_naes_ii_nw_settings: ?NielsenNaesIiNw,
+    nielsen_naes_ii_nw_settings: ?NielsenNaesIiNw = null,
 
     pub const json_field_names = .{
         .nielsen_cbet_settings = "NielsenCbetSettings",

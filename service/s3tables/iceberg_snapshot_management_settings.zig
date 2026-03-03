@@ -4,10 +4,10 @@
 /// for the minimum number of snapshots to keep `minSnapshotsToKeep`.
 pub const IcebergSnapshotManagementSettings = struct {
     /// The maximum age of a snapshot before it can be expired.
-    max_snapshot_age_hours: ?i32,
+    max_snapshot_age_hours: ?i32 = null,
 
     /// The minimum number of snapshots to keep.
-    min_snapshots_to_keep: ?i32,
+    min_snapshots_to_keep: ?i32 = null,
 
     pub const json_field_names = .{
         .max_snapshot_age_hours = "maxSnapshotAgeHours",

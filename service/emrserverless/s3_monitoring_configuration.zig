@@ -3,10 +3,10 @@
 pub const S3MonitoringConfiguration = struct {
     /// The KMS key ARN to encrypt the logs published to the given Amazon S3
     /// destination.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The Amazon S3 destination URI for log publishing.
-    log_uri: ?[]const u8,
+    log_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .encryption_key_arn = "encryptionKeyArn",

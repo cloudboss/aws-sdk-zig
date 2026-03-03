@@ -6,15 +6,15 @@ const HlsWebdavSettings = @import("hls_webdav_settings.zig").HlsWebdavSettings;
 
 /// Hls Cdn Settings
 pub const HlsCdnSettings = struct {
-    hls_akamai_settings: ?HlsAkamaiSettings,
+    hls_akamai_settings: ?HlsAkamaiSettings = null,
 
-    hls_basic_put_settings: ?HlsBasicPutSettings,
+    hls_basic_put_settings: ?HlsBasicPutSettings = null,
 
-    hls_media_store_settings: ?HlsMediaStoreSettings,
+    hls_media_store_settings: ?HlsMediaStoreSettings = null,
 
-    hls_s3_settings: ?HlsS3Settings,
+    hls_s3_settings: ?HlsS3Settings = null,
 
-    hls_webdav_settings: ?HlsWebdavSettings,
+    hls_webdav_settings: ?HlsWebdavSettings = null,
 
     pub const json_field_names = .{
         .hls_akamai_settings = "HlsAkamaiSettings",

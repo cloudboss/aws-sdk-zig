@@ -9,7 +9,7 @@ pub const ArtifactsConfiguration = struct {
     audio: AudioArtifactsConfiguration,
 
     /// Enables video compositing.
-    composited_video: ?CompositedVideoArtifactsConfiguration,
+    composited_video: ?CompositedVideoArtifactsConfiguration = null,
 
     /// The configuration for the content artifacts.
     content: ContentArtifactsConfiguration,

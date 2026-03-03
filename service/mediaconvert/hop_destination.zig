@@ -5,19 +5,19 @@ pub const HopDestination = struct {
     /// different relative priority for the job in the destination queue. If you
     /// don't specify, the relative priority will remain the same as in the previous
     /// queue.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// Optional unless the job is submitted on the default queue. When you set up a
     /// job to use queue hopping, you can specify a destination queue. This queue
     /// cannot be the original queue to which the job is submitted. If the original
     /// queue isn't the default queue and you don't specify the destination queue,
     /// the job will move to the default queue.
-    queue: ?[]const u8,
+    queue: ?[]const u8 = null,
 
     /// Required for setting up a job to use queue hopping. Minimum wait time in
     /// minutes until the job can hop to the destination queue. Valid range is 1 to
     /// 4320 minutes, inclusive.
-    wait_minutes: ?i32,
+    wait_minutes: ?i32 = null,
 
     pub const json_field_names = .{
         .priority = "Priority",

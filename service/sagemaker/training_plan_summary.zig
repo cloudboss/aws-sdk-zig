@@ -9,30 +9,30 @@ const SageMakerResourceName = @import("sage_maker_resource_name.zig").SageMakerR
 /// [CreateTrainingPlan](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html) `.
 pub const TrainingPlanSummary = struct {
     /// The number of instances currently available for use in this training plan.
-    available_instance_count: ?i32,
+    available_instance_count: ?i32 = null,
 
     /// The currency code for the upfront fee (e.g., USD).
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// The number of whole hours in the total duration for this training plan.
-    duration_hours: ?i64,
+    duration_hours: ?i64 = null,
 
     /// The additional minutes beyond whole hours in the total duration for this
     /// training plan.
-    duration_minutes: ?i64,
+    duration_minutes: ?i64 = null,
 
     /// The end time of the training plan.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The number of instances currently in use from this training plan.
-    in_use_instance_count: ?i32,
+    in_use_instance_count: ?i32 = null,
 
     /// A list of reserved capacities associated with this training plan, including
     /// details such as instance types, counts, and availability zones.
-    reserved_capacity_summaries: ?[]const ReservedCapacitySummary,
+    reserved_capacity_summaries: ?[]const ReservedCapacitySummary = null,
 
     /// The start time of the training plan.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The current status of the training plan (e.g., Pending, Active, Expired). To
     /// see the complete list of status values available for a training plan, refer
@@ -42,7 +42,7 @@ pub const TrainingPlanSummary = struct {
 
     /// A message providing additional information about the current status of the
     /// training plan.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The target resources (e.g., training jobs, HyperPod clusters, Endpoints)
     /// that can use this training plan.
@@ -55,13 +55,13 @@ pub const TrainingPlanSummary = struct {
     ///   compute resources to a cluster's instance group.
     /// * A training plan for SageMaker endpoints can be used exclusively to provide
     ///   compute resources to SageMaker endpoints for model deployment.
-    target_resources: ?[]const SageMakerResourceName,
+    target_resources: ?[]const SageMakerResourceName = null,
 
     /// The total number of instances reserved in this training plan.
-    total_instance_count: ?i32,
+    total_instance_count: ?i32 = null,
 
     /// The total number of UltraServers allocated to this training plan.
-    total_ultra_server_count: ?i32,
+    total_ultra_server_count: ?i32 = null,
 
     /// The Amazon Resource Name (ARN); of the training plan.
     training_plan_arn: []const u8,
@@ -70,7 +70,7 @@ pub const TrainingPlanSummary = struct {
     training_plan_name: []const u8,
 
     /// The upfront fee for the training plan.
-    upfront_fee: ?[]const u8,
+    upfront_fee: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .available_instance_count = "AvailableInstanceCount",

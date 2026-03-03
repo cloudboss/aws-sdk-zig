@@ -24,7 +24,7 @@ pub const SqliMatchStatement = struct {
     /// false positives.
     ///
     /// Default: `LOW`
-    sensitivity_level: ?SensitivityLevel,
+    sensitivity_level: ?SensitivityLevel = null,
 
     /// Text transformations eliminate some of the unusual formatting that attackers
     /// use in web requests in an effort to bypass detection. Text transformations

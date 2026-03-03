@@ -8,7 +8,7 @@ pub const BuildConfiguration = struct {
     /// If not provided, Elastic Beanstalk stores the build artifact in the S3
     /// location
     /// *S3-bucket*/resources/*application-name*/codebuild/codebuild-*version-label*.zip.
-    artifact_name: ?[]const u8,
+    artifact_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
     /// (IAM) role that enables AWS CodeBuild to interact with dependent AWS
@@ -22,7 +22,7 @@ pub const BuildConfiguration = struct {
     /// * `BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds`
     ///
     /// * `BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds`
-    compute_type: ?ComputeType,
+    compute_type: ?ComputeType = null,
 
     /// The ID of the Docker image to use for this build project.
     image: []const u8,
@@ -30,5 +30,5 @@ pub const BuildConfiguration = struct {
     /// How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait
     /// until timing out any related build that does not get marked as completed.
     /// The default is 60 minutes.
-    timeout_in_minutes: ?i32,
+    timeout_in_minutes: ?i32 = null,
 };

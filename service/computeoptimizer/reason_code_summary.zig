@@ -3,7 +3,7 @@ const FindingReasonCode = @import("finding_reason_code.zig").FindingReasonCode;
 /// A summary of a finding reason code.
 pub const ReasonCodeSummary = struct {
     /// The name of the finding reason code.
-    name: ?FindingReasonCode,
+    name: ?FindingReasonCode = null,
 
     /// The value of the finding reason code summary.
     value: f64 = 0,

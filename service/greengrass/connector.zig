@@ -13,7 +13,7 @@ pub const Connector = struct {
     id: []const u8,
 
     /// The parameters or configuration that the connector uses.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .connector_arn = "ConnectorArn",

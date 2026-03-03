@@ -8,18 +8,18 @@ const Compliance = @import("compliance.zig").Compliance;
 /// resources do not comply.
 pub const AggregateComplianceByConfigRule = struct {
     /// The 12-digit account ID of the source account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The source region from where the data is aggregated.
-    aws_region: ?[]const u8,
+    aws_region: ?[]const u8 = null,
 
     /// Indicates whether an Amazon Web Services resource or Config rule is
     /// compliant and provides the number of contributors that affect the
     /// compliance.
-    compliance: ?Compliance,
+    compliance: ?Compliance = null,
 
     /// The name of the Config rule.
-    config_rule_name: ?[]const u8,
+    config_rule_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

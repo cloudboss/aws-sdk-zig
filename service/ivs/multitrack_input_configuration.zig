@@ -11,11 +11,11 @@ pub const MultitrackInputConfiguration = struct {
     enabled: bool = false,
 
     /// Maximum resolution for multitrack input. Required if `enabled` is `true`.
-    maximum_resolution: ?MultitrackMaximumResolution,
+    maximum_resolution: ?MultitrackMaximumResolution = null,
 
     /// Indicates whether multitrack input is allowed or required. Required if
     /// `enabled` is `true`.
-    policy: ?MultitrackPolicy,
+    policy: ?MultitrackPolicy = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

@@ -3,14 +3,14 @@
 pub const ReactionValueFormats = struct {
     /// The Emoji Version 1.0 graphic of the reaction. These graphics are
     /// interpreted slightly differently on different operating systems.
-    emoji: ?[]const u8,
+    emoji: ?[]const u8 = null,
 
     /// The emoji short code for the reaction. Short codes are interpreted slightly
     /// differently on different operating systems.
-    short_code: ?[]const u8,
+    short_code: ?[]const u8 = null,
 
     /// The Unicode codepoint for the reaction.
-    unicode: ?[]const u8,
+    unicode: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .emoji = "emoji",

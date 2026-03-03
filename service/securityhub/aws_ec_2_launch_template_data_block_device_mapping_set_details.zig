@@ -4,16 +4,16 @@ const AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails = @import("aws_ec_
 /// (Amazon EC2) launch template.
 pub const AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails = struct {
     /// The device name.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// Parameters used to automatically set up Amazon EBS volumes when the instance
     /// is
     /// launched.
-    ebs: ?AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails,
+    ebs: ?AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails = null,
 
     /// Omits the device from the block device mapping when an empty string is
     /// specified.
-    no_device: ?[]const u8,
+    no_device: ?[]const u8 = null,
 
     /// The virtual device name (ephemeralN). Instance store volumes are numbered
     /// starting
@@ -22,7 +22,7 @@ pub const AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails = struct {
     /// for `ephemeral0` and `ephemeral1`. The number of available instance store
     /// volumes depends
     /// on the instance type.
-    virtual_name: ?[]const u8,
+    virtual_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .device_name = "DeviceName",

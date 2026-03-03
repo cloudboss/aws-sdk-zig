@@ -2,11 +2,11 @@
 pub const ModelInvocationJobS3OutputDataConfig = struct {
     /// The ID of the Amazon Web Services account that owns the S3 bucket containing
     /// the output data.
-    s_3_bucket_owner: ?[]const u8,
+    s_3_bucket_owner: ?[]const u8 = null,
 
     /// The unique identifier of the key that encrypts the S3 location of the output
     /// data.
-    s_3_encryption_key_id: ?[]const u8,
+    s_3_encryption_key_id: ?[]const u8 = null,
 
     /// The S3 location of the output data.
     s_3_uri: []const u8,

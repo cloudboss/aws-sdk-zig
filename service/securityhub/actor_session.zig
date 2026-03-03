@@ -13,23 +13,23 @@ pub const ActorSession = struct {
     ///
     /// In CloudTrail, you can find this value as
     /// `userIdentity.sessionContext.attributes.creationDate`.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The issuer of the session.
     ///
     /// In CloudTrail, you can find this value as
     /// `userIdentity.sessionContext.sessionIssuer.arn`.
-    issuer: ?[]const u8,
+    issuer: ?[]const u8 = null,
 
     /// Indicates whether multi-factor authentication (MFA) was used for
     /// authentication during the session.
     ///
     /// In CloudTrail, you can find this value as
     /// `userIdentity.sessionContext.attributes.mfaAuthenticated`.
-    mfa_status: ?ActorSessionMfaStatus,
+    mfa_status: ?ActorSessionMfaStatus = null,
 
     /// Unique identifier of the session.
-    uid: ?[]const u8,
+    uid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_time = "CreatedTime",

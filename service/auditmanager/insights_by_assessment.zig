@@ -29,14 +29,14 @@ pub const InsightsByAssessment = struct {
     /// The number of assessment controls that collected non-compliant evidence on
     /// the
     /// `lastUpdated` date.
-    assessment_controls_count_by_noncompliant_evidence: ?i32,
+    assessment_controls_count_by_noncompliant_evidence: ?i32 = null,
 
     /// The number of compliance check evidence that Audit Manager classified as
     /// compliant.
     /// This includes evidence that was collected from Security Hub with a
     /// *Pass* ruling, or collected from Config with a
     /// *Compliant* ruling.
-    compliant_evidence_count: ?i32,
+    compliant_evidence_count: ?i32 = null,
 
     /// The amount of evidence without a compliance check ruling. Evidence is
     /// inconclusive if
@@ -50,20 +50,20 @@ pub const InsightsByAssessment = struct {
     /// If evidence has a compliance check status of *not applicable*,
     /// it's classified as *inconclusive* in
     /// `InsightsByAssessment` data.
-    inconclusive_evidence_count: ?i32,
+    inconclusive_evidence_count: ?i32 = null,
 
     /// The time when the assessment insights were last updated.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The number of compliance check evidence that Audit Manager classified as
     /// non-compliant. This includes evidence that was collected from Security Hub
     /// with a
     /// *Fail* ruling, or collected from Config with a
     /// *Non-compliant* ruling.
-    noncompliant_evidence_count: ?i32,
+    noncompliant_evidence_count: ?i32 = null,
 
     /// The total number of controls in the assessment.
-    total_assessment_controls_count: ?i32,
+    total_assessment_controls_count: ?i32 = null,
 
     pub const json_field_names = .{
         .assessment_controls_count_by_noncompliant_evidence = "assessmentControlsCountByNoncompliantEvidence",

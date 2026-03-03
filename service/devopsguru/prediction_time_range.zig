@@ -3,7 +3,7 @@
 /// is expected to occur.
 pub const PredictionTimeRange = struct {
     /// The time when the behavior in a proactive insight is expected to end.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The time range during which a metric limit is expected to be exceeded. This
     /// applies

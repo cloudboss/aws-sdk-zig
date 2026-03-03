@@ -3,10 +3,10 @@ const ConditionExecutionStatus = @import("condition_execution_status.zig").Condi
 /// Represents information about the run of a condition for a stage.
 pub const StageConditionsExecution = struct {
     /// The status of a run of a condition for a stage.
-    status: ?ConditionExecutionStatus,
+    status: ?ConditionExecutionStatus = null,
 
     /// A summary of the run of the condition for a stage.
-    summary: ?[]const u8,
+    summary: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status = "status",

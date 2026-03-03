@@ -7,7 +7,7 @@ pub const SalesforceStandardKnowledgeArticleTypeConfiguration = struct {
     document_data_field_name: []const u8,
 
     /// The name of the field that contains the document title.
-    document_title_field_name: ?[]const u8,
+    document_title_field_name: ?[]const u8 = null,
 
     /// Maps attributes or field names of the knowledge article to Amazon Kendra
     /// index
@@ -17,7 +17,7 @@ pub const SalesforceStandardKnowledgeArticleTypeConfiguration = struct {
     /// The
     /// Salesforce data source field names must exist in your Salesforce custom
     /// metadata.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     pub const json_field_names = .{
         .document_data_field_name = "DocumentDataFieldName",

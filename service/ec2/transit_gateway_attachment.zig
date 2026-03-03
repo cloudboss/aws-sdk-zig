@@ -6,33 +6,33 @@ const Tag = @import("tag.zig").Tag;
 /// Describes an attachment between a resource and a transit gateway.
 pub const TransitGatewayAttachment = struct {
     /// The association.
-    association: ?TransitGatewayAttachmentAssociation,
+    association: ?TransitGatewayAttachmentAssociation = null,
 
     /// The creation time.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The ID of the resource.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the resource.
-    resource_owner_id: ?[]const u8,
+    resource_owner_id: ?[]const u8 = null,
 
     /// The resource type. Note that the `tgw-peering` resource type has been
     /// deprecated.
-    resource_type: ?TransitGatewayAttachmentResourceType,
+    resource_type: ?TransitGatewayAttachmentResourceType = null,
 
     /// The attachment state. Note that the `initiating` state has been deprecated.
-    state: ?TransitGatewayAttachmentState,
+    state: ?TransitGatewayAttachmentState = null,
 
     /// The tags for the attachment.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the attachment.
-    transit_gateway_attachment_id: ?[]const u8,
+    transit_gateway_attachment_id: ?[]const u8 = null,
 
     /// The ID of the transit gateway.
-    transit_gateway_id: ?[]const u8,
+    transit_gateway_id: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the transit gateway.
-    transit_gateway_owner_id: ?[]const u8,
+    transit_gateway_owner_id: ?[]const u8 = null,
 };

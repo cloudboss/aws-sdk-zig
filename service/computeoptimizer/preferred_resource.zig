@@ -20,19 +20,19 @@ pub const PreferredResource = struct {
     /// candidates. If this isn’t specified, all supported
     /// resources are included by default. You can specify up to 1000 values in this
     /// list.
-    exclude_list: ?[]const []const u8,
+    exclude_list: ?[]const []const u8 = null,
 
     /// The preferred resource type values to include in the recommendation
     /// candidates. You can specify the exact resource type value,
     /// such as m5.large, or use wild card expressions, such as m5. If this isn’t
     /// specified, all supported resources are included by default.
     /// You can specify up to 1000 values in this list.
-    include_list: ?[]const []const u8,
+    include_list: ?[]const []const u8 = null,
 
     /// The type of preferred resource to customize.
     ///
     /// Compute Optimizer only supports the customization of `Ec2InstanceTypes`.
-    name: ?PreferredResourceName,
+    name: ?PreferredResourceName = null,
 
     pub const json_field_names = .{
         .exclude_list = "excludeList",

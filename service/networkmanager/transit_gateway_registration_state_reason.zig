@@ -3,10 +3,10 @@ const TransitGatewayRegistrationState = @import("transit_gateway_registration_st
 /// Describes the status of a transit gateway registration.
 pub const TransitGatewayRegistrationStateReason = struct {
     /// The code for the state reason.
-    code: ?TransitGatewayRegistrationState,
+    code: ?TransitGatewayRegistrationState = null,
 
     /// The message for the state reason.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

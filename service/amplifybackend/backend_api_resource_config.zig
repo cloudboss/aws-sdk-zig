@@ -5,25 +5,25 @@ const BackendAPIConflictResolution = @import("backend_api_conflict_resolution.zi
 /// project.
 pub const BackendAPIResourceConfig = struct {
     /// Additional authentication methods used to interact with your data models.
-    additional_auth_types: ?[]const BackendAPIAuthType,
+    additional_auth_types: ?[]const BackendAPIAuthType = null,
 
     /// The API name used to interact with the data model, configured as a part of
     /// your Amplify project.
-    api_name: ?[]const u8,
+    api_name: ?[]const u8 = null,
 
     /// The conflict resolution strategy for your data stored in the data models.
-    conflict_resolution: ?BackendAPIConflictResolution,
+    conflict_resolution: ?BackendAPIConflictResolution = null,
 
     /// The default authentication type for interacting with the configured data
     /// models in your Amplify project.
-    default_auth_type: ?BackendAPIAuthType,
+    default_auth_type: ?BackendAPIAuthType = null,
 
     /// The service used to provision and interact with the data model.
-    service: ?[]const u8,
+    service: ?[]const u8 = null,
 
     /// The definition of the data model in the annotated transform of the GraphQL
     /// schema.
-    transform_schema: ?[]const u8,
+    transform_schema: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .additional_auth_types = "AdditionalAuthTypes",

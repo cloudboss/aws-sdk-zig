@@ -9,17 +9,17 @@ pub const LabelingJobSummary = struct {
     /// the annotations from individual workers into a label for a data object. For
     /// more information, see [Annotation
     /// Consolidation](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
-    annotation_consolidation_lambda_arn: ?[]const u8,
+    annotation_consolidation_lambda_arn: ?[]const u8 = null,
 
     /// The date and time that the job was created (timestamp).
     creation_time: i64,
 
     /// If the `LabelingJobStatus` field is `Failed`, this field contains a
     /// description of the error.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// Input configuration for the labeling job.
-    input_config: ?LabelingJobInputConfig,
+    input_config: ?LabelingJobInputConfig = null,
 
     /// Counts showing the progress of the labeling job.
     label_counters: LabelCounters,
@@ -32,7 +32,7 @@ pub const LabelingJobSummary = struct {
     labeling_job_name: []const u8,
 
     /// The location of the output produced by the labeling job.
-    labeling_job_output: ?LabelingJobOutput,
+    labeling_job_output: ?LabelingJobOutput = null,
 
     /// The current status of the labeling job.
     labeling_job_status: LabelingJobStatus,
@@ -42,7 +42,7 @@ pub const LabelingJobSummary = struct {
 
     /// The Amazon Resource Name (ARN) of a Lambda function. The function is run
     /// before each data object is sent to a worker.
-    pre_human_task_lambda_arn: ?[]const u8,
+    pre_human_task_lambda_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the work team assigned to the job.
     workteam_arn: []const u8,

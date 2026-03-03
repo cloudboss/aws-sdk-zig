@@ -1,7 +1,7 @@
 /// Used for filtering by a specific topic preference.
 pub const TopicFilter = struct {
     /// The name of a topic on which you wish to apply the filter.
-    topic_name: ?[]const u8,
+    topic_name: ?[]const u8 = null,
 
     /// Notes that the default subscription status should be applied to a contact
     /// because the

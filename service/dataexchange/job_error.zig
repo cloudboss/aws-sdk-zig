@@ -9,10 +9,10 @@ pub const JobError = struct {
     code: Code,
 
     /// The details about the job error.
-    details: ?Details,
+    details: ?Details = null,
 
     /// The name of the limit that was reached.
-    limit_name: ?JobErrorLimitName,
+    limit_name: ?JobErrorLimitName = null,
 
     /// The value of the exceeded limit.
     limit_value: f64 = 0,
@@ -21,10 +21,10 @@ pub const JobError = struct {
     message: []const u8,
 
     /// The unique identifier for the resource related to the error.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The type of resource related to the error.
-    resource_type: ?JobErrorResourceTypes,
+    resource_type: ?JobErrorResourceTypes = null,
 
     pub const json_field_names = .{
         .code = "Code",

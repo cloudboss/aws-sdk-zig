@@ -24,7 +24,7 @@ pub const DataPreProcessingConfiguration = struct {
     /// prefix "PT" to the rate you want. The value for a 1 second rate is therefore
     /// *PT1S*, the value for a 15 minute rate is *PT15M*,
     /// and the value for a 1 hour rate is *PT1H*
-    target_sampling_rate: ?TargetSamplingRate,
+    target_sampling_rate: ?TargetSamplingRate = null,
 
     pub const json_field_names = .{
         .target_sampling_rate = "TargetSamplingRate",

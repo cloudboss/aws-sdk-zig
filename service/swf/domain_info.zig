@@ -3,10 +3,10 @@ const RegistrationStatus = @import("registration_status.zig").RegistrationStatus
 /// Contains general information about a domain.
 pub const DomainInfo = struct {
     /// The ARN of the domain.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The description of the domain provided through RegisterDomain.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the domain. This name is unique within the account.
     name: []const u8,

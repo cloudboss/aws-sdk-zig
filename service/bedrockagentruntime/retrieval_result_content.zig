@@ -17,24 +17,24 @@ const VideoSegment = @import("video_segment.zig").VideoSegment;
 ///   response](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax) – in the `content` field
 pub const RetrievalResultContent = struct {
     /// Audio segment information when the retrieval result contains audio content.
-    audio: ?AudioSegment,
+    audio: ?AudioSegment = null,
 
     /// A data URI with base64-encoded content from the data source. The URI is in
     /// the following format: returned in the following format:
     /// `data:image/jpeg;base64,${base64-encoded string}`.
-    byte_content: ?[]const u8,
+    byte_content: ?[]const u8 = null,
 
     /// Specifies information about the rows with the cells to return in retrieval.
-    row: ?[]const RetrievalResultContentColumn,
+    row: ?[]const RetrievalResultContentColumn = null,
 
     /// The cited text from the data source.
     text: []const u8 = "",
 
     /// The type of content in the retrieval result.
-    @"type": ?RetrievalResultContentType,
+    @"type": ?RetrievalResultContentType = null,
 
     /// Video segment information when the retrieval result contains video content.
-    video: ?VideoSegment,
+    video: ?VideoSegment = null,
 
     pub const json_field_names = .{
         .audio = "audio",

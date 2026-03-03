@@ -71,7 +71,7 @@ pub const CrlConfiguration = struct {
     /// certificates issued by your certificate authority. If this field is not
     /// provided, then the CRl Distribution Point Extension will be present and
     /// contain the default CRL URL.
-    crl_distribution_point_extension_configuration: ?CrlDistributionPointExtensionConfiguration,
+    crl_distribution_point_extension_configuration: ?CrlDistributionPointExtensionConfiguration = null,
 
     /// Specifies whether to create a complete or partitioned CRL. This setting
     /// determines the maximum number of certificates that the certificate authority
@@ -91,7 +91,7 @@ pub const CrlConfiguration = struct {
     /// issuing distribution point (IDP) URI matches the certiﬁcate's CDP URI to
     /// ensure the right CRL has been fetched. Amazon Web Services Private CA marks
     /// the IDP extension as critical, which your client must be able to process.
-    crl_type: ?CrlType,
+    crl_type: ?CrlType = null,
 
     /// Name inserted into the certificate **CRL Distribution Points** extension
     /// that enables the use of an alias for the CRL distribution point. Use this
@@ -101,11 +101,11 @@ pub const CrlConfiguration = struct {
     /// [RFC2396](https://www.ietf.org/rfc/rfc2396.txt) restrictions on the use of
     /// special characters in URIs. Additionally, the value of the CNAME must not
     /// include a protocol prefix such as "http://" or "https://".
-    custom_cname: ?[]const u8,
+    custom_cname: ?[]const u8 = null,
 
     /// Designates a custom ﬁle path in S3 for CRL(s). For example,
     /// `http://<CustomName>/ <CustomPath>/<CrlPartition_GUID>.crl`.
-    custom_path: ?[]const u8,
+    custom_path: ?[]const u8 = null,
 
     /// Boolean value that specifies whether certificate revocation lists (CRLs) are
     /// enabled. You can use this value to enable certificate revocation for a new
@@ -114,7 +114,7 @@ pub const CrlConfiguration = struct {
     enabled: bool,
 
     /// Validity period of the CRL in days.
-    expiration_in_days: ?i32,
+    expiration_in_days: ?i32 = null,
 
     /// Name of the S3 bucket that contains the CRL. If you do not provide a value
     /// for the **CustomCname** argument, the name of your S3 bucket is placed into
@@ -124,7 +124,7 @@ pub const CrlConfiguration = struct {
     ///
     /// The `S3BucketName` parameter must conform to the [S3 bucket naming
     /// rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
-    s3_bucket_name: ?[]const u8,
+    s3_bucket_name: ?[]const u8 = null,
 
     /// Determines whether the CRL will be publicly readable or privately held in
     /// the CRL Amazon S3 bucket. If you choose PUBLIC_READ, the CRL will be
@@ -143,7 +143,7 @@ pub const CrlConfiguration = struct {
     ///
     /// For more information, see [Blocking public access to the S3
     /// bucket](https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-bpa).
-    s3_object_acl: ?S3ObjectAcl,
+    s3_object_acl: ?S3ObjectAcl = null,
 
     pub const json_field_names = .{
         .crl_distribution_point_extension_configuration = "CrlDistributionPointExtensionConfiguration",

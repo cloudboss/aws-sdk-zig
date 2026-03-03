@@ -8,13 +8,13 @@ const ViewDefinitionInput = @import("view_definition_input.zig").ViewDefinitionI
 /// A structure used to define a table.
 pub const TableInput = struct {
     /// A description of the table.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The last time that the table was accessed.
-    last_access_time: ?i64,
+    last_access_time: ?i64 = null,
 
     /// The last time that column statistics were computed for this table.
-    last_analyzed_time: ?i64,
+    last_analyzed_time: ?i64 = null,
 
     /// The table name. For Hive compatibility, this is folded to
     /// lowercase when it is stored.
@@ -22,10 +22,10 @@ pub const TableInput = struct {
 
     /// The table owner. Included for Apache Hive compatibility. Not used in the
     /// normal course of Glue operations.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// These key-value pairs define properties associated with the table.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of columns by which the table is partitioned. Only primitive
     /// types are supported as partition keys.
@@ -35,14 +35,14 @@ pub const TableInput = struct {
     /// an empty list. For example:
     ///
     /// `"PartitionKeys": []`
-    partition_keys: ?[]const Column,
+    partition_keys: ?[]const Column = null,
 
     /// The retention time for this table.
     retention: i32 = 0,
 
     /// A storage descriptor containing information about the physical storage
     /// of this table.
-    storage_descriptor: ?StorageDescriptor,
+    storage_descriptor: ?StorageDescriptor = null,
 
     /// The type of this table.
     /// Glue will create tables with the `EXTERNAL_TABLE` type.
@@ -59,25 +59,25 @@ pub const TableInput = struct {
     ///
     /// Used by Lake Formation.
     /// The Glue Data Catalog understands `GOVERNED`.
-    table_type: ?[]const u8,
+    table_type: ?[]const u8 = null,
 
     /// A `TableIdentifier` structure that describes a target table for resource
     /// linking.
-    target_table: ?TableIdentifier,
+    target_table: ?TableIdentifier = null,
 
     /// A structure that contains all the information that defines the view,
     /// including the dialect or dialects for the view, and the query.
-    view_definition: ?ViewDefinitionInput,
+    view_definition: ?ViewDefinitionInput = null,
 
     /// Included for Apache Hive compatibility. Not used in the normal course of
     /// Glue operations.
-    view_expanded_text: ?[]const u8,
+    view_expanded_text: ?[]const u8 = null,
 
     /// Included for Apache Hive compatibility. Not used in the normal course of
     /// Glue operations.
     /// If the table is a `VIRTUAL_VIEW`, certain Athena configuration encoded in
     /// base64.
-    view_original_text: ?[]const u8,
+    view_original_text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

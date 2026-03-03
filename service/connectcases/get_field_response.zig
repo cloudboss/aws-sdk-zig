@@ -7,16 +7,16 @@ const FieldType = @import("field_type.zig").FieldType;
 /// Object to store detailed field information.
 pub const GetFieldResponse = struct {
     /// Union of field attributes.
-    attributes: ?FieldAttributes,
+    attributes: ?FieldAttributes = null,
 
     /// Timestamp at which the resource was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// Denotes whether or not the resource has been deleted.
     deleted: bool = false,
 
     /// Description of the field.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the field.
     field_arn: []const u8,
@@ -25,7 +25,7 @@ pub const GetFieldResponse = struct {
     field_id: []const u8,
 
     /// Timestamp at which the resource was created or last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// Name of the field.
     name: []const u8,
@@ -35,7 +35,7 @@ pub const GetFieldResponse = struct {
 
     /// A map of of key-value pairs that represent tags on a resource. Tags are used
     /// to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Type of the field.
     @"type": FieldType,

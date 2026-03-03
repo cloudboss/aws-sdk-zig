@@ -4,7 +4,7 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// An object for you to specify your overrides for the recording mode.
 pub const RecordingModeOverride = struct {
     /// A description that you provide for the override.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The recording frequency that will be applied to all the resource types
     /// specified in the override.

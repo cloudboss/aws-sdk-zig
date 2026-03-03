@@ -9,7 +9,7 @@ pub const CampaignState = struct {
     /// if all campaign treatments have a status of COMPLETED. If you delete the
     /// segment that's associated with a campaign, the campaign fails and has a
     /// status of DELETED.
-    campaign_status: ?CampaignStatus,
+    campaign_status: ?CampaignStatus = null,
 
     pub const json_field_names = .{
         .campaign_status = "CampaignStatus",

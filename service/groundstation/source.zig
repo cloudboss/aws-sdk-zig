@@ -5,16 +5,16 @@ const ConfigCapabilityType = @import("config_capability_type.zig").ConfigCapabil
 pub const Source = struct {
     /// Additional details for a `Config`, if type is `dataflow-endpoint` or
     /// `antenna-downlink-demod-decode`
-    config_details: ?ConfigDetails,
+    config_details: ?ConfigDetails = null,
 
     /// UUID of a `Config`.
-    config_id: ?[]const u8,
+    config_id: ?[]const u8 = null,
 
     /// Type of a `Config`.
-    config_type: ?ConfigCapabilityType,
+    config_type: ?ConfigCapabilityType = null,
 
     /// Region of a dataflow source.
-    dataflow_source_region: ?[]const u8,
+    dataflow_source_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .config_details = "configDetails",

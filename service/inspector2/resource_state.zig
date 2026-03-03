@@ -3,7 +3,7 @@ const State = @import("state.zig").State;
 /// Details the state of Amazon Inspector for each resource type Amazon
 /// Inspector scans.
 pub const ResourceState = struct {
-    code_repository: ?State,
+    code_repository: ?State = null,
 
     /// An object detailing the state of Amazon Inspector scanning for Amazon EC2
     /// resources.
@@ -14,10 +14,10 @@ pub const ResourceState = struct {
     ecr: State,
 
     /// An object that described the state of Amazon Inspector scans for an account.
-    lambda: ?State,
+    lambda: ?State = null,
 
     /// An object that described the state of Amazon Inspector scans for an account.
-    lambda_code: ?State,
+    lambda_code: ?State = null,
 
     pub const json_field_names = .{
         .code_repository = "codeRepository",

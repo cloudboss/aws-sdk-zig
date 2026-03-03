@@ -8,36 +8,36 @@ const RecommenderStatus = @import("recommender_status.zig").RecommenderStatus;
 /// Provides a summary of a recommender's configuration and current state.
 pub const RecommenderSummary = struct {
     /// The timestamp when the recommender was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// A description of the recommender's purpose and characteristics.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// If the recommender is in a failed state, provides the reason for the
     /// failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The timestamp of when the recommender was edited.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// Information about the most recent update performed on the recommender,
     /// including its status and timing.
-    latest_recommender_update: ?RecommenderUpdate,
+    latest_recommender_update: ?RecommenderUpdate = null,
 
     /// The name of the recipe used by this recommender.
-    recipe_name: ?RecommenderRecipeName,
+    recipe_name: ?RecommenderRecipeName = null,
 
     /// The configuration settings applied to this recommender.
-    recommender_config: ?RecommenderConfig,
+    recommender_config: ?RecommenderConfig = null,
 
     /// The name of the recommender.
-    recommender_name: ?[]const u8,
+    recommender_name: ?[]const u8 = null,
 
     /// The current operational status of the recommender.
-    status: ?RecommenderStatus,
+    status: ?RecommenderStatus = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

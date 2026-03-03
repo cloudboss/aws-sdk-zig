@@ -5,35 +5,35 @@ const ThingConnectivity = @import("thing_connectivity.zig").ThingConnectivity;
 /// The thing search index document.
 pub const ThingDocument = struct {
     /// The attributes.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// Indicates whether the thing is connected to the Amazon Web Services IoT Core
     /// service.
-    connectivity: ?ThingConnectivity,
+    connectivity: ?ThingConnectivity = null,
 
     /// Contains Device Defender data.
     ///
     /// For more information about Device Defender, see [Device
     /// Defender](https://docs.aws.amazon.com/iot/latest/developerguide/device-defender.html).
-    device_defender: ?[]const u8,
+    device_defender: ?[]const u8 = null,
 
     /// The unnamed shadow and named shadow.
     ///
     /// For more information about shadows, see [IoT Device Shadow
     /// service.](https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html)
-    shadow: ?[]const u8,
+    shadow: ?[]const u8 = null,
 
     /// Thing group and billing group names.
-    thing_group_names: ?[]const []const u8,
+    thing_group_names: ?[]const []const u8 = null,
 
     /// The thing ID.
-    thing_id: ?[]const u8,
+    thing_id: ?[]const u8 = null,
 
     /// The thing name.
-    thing_name: ?[]const u8,
+    thing_name: ?[]const u8 = null,
 
     /// The thing type name.
-    thing_type_name: ?[]const u8,
+    thing_type_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "attributes",

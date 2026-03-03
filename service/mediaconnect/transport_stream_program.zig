@@ -7,7 +7,7 @@ pub const TransportStreamProgram = struct {
     pcr_pid: i32,
 
     /// The program name as it is reported in the Program Association Table.
-    program_name: ?[]const u8,
+    program_name: ?[]const u8 = null,
 
     /// The program number as it is reported in the Program Association Table.
     program_number: i32,

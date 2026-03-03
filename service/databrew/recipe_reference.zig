@@ -4,7 +4,7 @@ pub const RecipeReference = struct {
     name: []const u8,
 
     /// The identifier for the version for the recipe.
-    recipe_version: ?[]const u8,
+    recipe_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

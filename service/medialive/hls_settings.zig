@@ -5,13 +5,13 @@ const StandardHlsSettings = @import("standard_hls_settings.zig").StandardHlsSett
 
 /// Hls Settings
 pub const HlsSettings = struct {
-    audio_only_hls_settings: ?AudioOnlyHlsSettings,
+    audio_only_hls_settings: ?AudioOnlyHlsSettings = null,
 
-    fmp_4_hls_settings: ?Fmp4HlsSettings,
+    fmp_4_hls_settings: ?Fmp4HlsSettings = null,
 
-    frame_capture_hls_settings: ?FrameCaptureHlsSettings,
+    frame_capture_hls_settings: ?FrameCaptureHlsSettings = null,
 
-    standard_hls_settings: ?StandardHlsSettings,
+    standard_hls_settings: ?StandardHlsSettings = null,
 
     pub const json_field_names = .{
         .audio_only_hls_settings = "AudioOnlyHlsSettings",

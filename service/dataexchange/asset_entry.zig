@@ -58,7 +58,7 @@ pub const AssetEntry = struct {
     /// parameter is returned when an asset owner is viewing the entitled copy of
     /// its owned
     /// asset.
-    source_id: ?[]const u8,
+    source_id: ?[]const u8 = null,
 
     /// The date and time that the asset was last updated, in ISO 8601 format.
     updated_at: i64,

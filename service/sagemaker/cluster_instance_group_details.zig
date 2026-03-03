@@ -17,60 +17,60 @@ pub const ClusterInstanceGroupDetails = struct {
     /// A map indicating active operations currently in progress for the instance
     /// group of a SageMaker HyperPod cluster. When there is a scaling operation in
     /// progress, this map contains a key `Scaling` with value 1.
-    active_operations: ?[]const aws.map.MapEntry(i32),
+    active_operations: ?[]const aws.map.MapEntry(i32) = null,
 
-    active_software_update_config: ?DeploymentConfiguration,
+    active_software_update_config: ?DeploymentConfiguration = null,
 
     /// The instance capacity requirements for the instance group.
-    capacity_requirements: ?ClusterCapacityRequirements,
+    capacity_requirements: ?ClusterCapacityRequirements = null,
 
     /// The number of instances that are currently in the instance group of a
     /// SageMaker HyperPod cluster.
-    current_count: ?i32,
+    current_count: ?i32 = null,
 
     /// The ID of the Amazon Machine Image (AMI) currently in use by the instance
     /// group.
-    current_image_id: ?[]const u8,
+    current_image_id: ?[]const u8 = null,
 
     /// The ID of the Amazon Machine Image (AMI) desired for the instance group.
-    desired_image_id: ?[]const u8,
+    desired_image_id: ?[]const u8 = null,
 
     /// The execution role for the instance group to assume.
-    execution_role: ?[]const u8,
+    execution_role: ?[]const u8 = null,
 
     /// The name of the instance group of a SageMaker HyperPod cluster.
-    instance_group_name: ?[]const u8,
+    instance_group_name: ?[]const u8 = null,
 
     /// The additional storage configurations for the instances in the SageMaker
     /// HyperPod cluster instance group.
-    instance_storage_configs: ?[]const ClusterInstanceStorageConfig,
+    instance_storage_configs: ?[]const ClusterInstanceStorageConfig = null,
 
     /// The instance type of the instance group of a SageMaker HyperPod cluster.
-    instance_type: ?ClusterInstanceType,
+    instance_type: ?ClusterInstanceType = null,
 
     /// The Kubernetes configuration for the instance group that contains labels and
     /// taints to be applied for the nodes in this instance group.
-    kubernetes_config: ?ClusterKubernetesConfigDetails,
+    kubernetes_config: ?ClusterKubernetesConfigDetails = null,
 
     /// Details of LifeCycle configuration for the instance group.
-    life_cycle_config: ?ClusterLifeCycleConfig,
+    life_cycle_config: ?ClusterLifeCycleConfig = null,
 
     /// The minimum number of instances that must be available in the instance group
     /// of a SageMaker HyperPod cluster before it transitions to `InService` status.
-    min_count: ?i32,
+    min_count: ?i32 = null,
 
     /// A flag indicating whether deep health checks should be performed when the
     /// cluster instance group is created or updated.
-    on_start_deep_health_checks: ?[]const DeepHealthCheckType,
+    on_start_deep_health_checks: ?[]const DeepHealthCheckType = null,
 
     /// The customized Amazon VPC configuration at the instance group level that
     /// overrides the default Amazon VPC configuration of the SageMaker HyperPod
     /// cluster.
-    override_vpc_config: ?VpcConfig,
+    override_vpc_config: ?VpcConfig = null,
 
     /// The configuration object of the schedule that SageMaker follows when
     /// updating the AMI.
-    scheduled_update_config: ?ScheduledUpdateConfig,
+    scheduled_update_config: ?ScheduledUpdateConfig = null,
 
     /// Status of the last software udpate request.
     ///
@@ -79,7 +79,7 @@ pub const ClusterInstanceGroupDetails = struct {
     /// * Pending -> InProgress -> Succeeded
     /// * Pending -> InProgress -> RollbackInProgress -> RollbackComplete
     /// * Pending -> InProgress -> RollbackInProgress -> Failed
-    software_update_status: ?SoftwareUpdateStatus,
+    software_update_status: ?SoftwareUpdateStatus = null,
 
     /// The current status of the cluster instance group.
     ///
@@ -91,11 +91,11 @@ pub const ClusterInstanceGroupDetails = struct {
     /// * `Degraded`: The instance group is degraded, meaning that some instances
     ///   have failed to provision or are no longer healthy.
     /// * `Deleting`: The instance group is being deleted.
-    status: ?InstanceGroupStatus,
+    status: ?InstanceGroupStatus = null,
 
     /// The number of instances you specified to add to the instance group of a
     /// SageMaker HyperPod cluster.
-    target_count: ?i32,
+    target_count: ?i32 = null,
 
     /// Represents the number of running nodes using the desired Image ID.
     ///
@@ -111,7 +111,7 @@ pub const ClusterInstanceGroupDetails = struct {
     ///   always created using the desired image ID, so TargetStateCount reflects
     ///   the total count of nodes running on the desired image ID, even during
     ///   rollback scenarios.
-    target_state_count: ?i32,
+    target_state_count: ?i32 = null,
 
     /// The number you specified to `TreadsPerCore` in `CreateCluster` for enabling
     /// or disabling multithreading. For instance types that support multithreading,
@@ -119,7 +119,7 @@ pub const ClusterInstanceGroupDetails = struct {
     /// multithreading. For more information, see the reference table of [CPU cores
     /// and threads per CPU core per instance
     /// type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html) in the *Amazon Elastic Compute Cloud User Guide*.
-    threads_per_core: ?i32,
+    threads_per_core: ?i32 = null,
 
     /// The Amazon Resource Name (ARN); of the training plan associated with this
     /// cluster instance group.
@@ -127,11 +127,11 @@ pub const ClusterInstanceGroupDetails = struct {
     /// For more information about how to reserve GPU capacity for your SageMaker
     /// HyperPod clusters using Amazon SageMaker Training Plan, see `
     /// [CreateTrainingPlan](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html) `.
-    training_plan_arn: ?[]const u8,
+    training_plan_arn: ?[]const u8 = null,
 
     /// The current status of the training plan associated with this cluster
     /// instance group.
-    training_plan_status: ?[]const u8,
+    training_plan_status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active_operations = "ActiveOperations",

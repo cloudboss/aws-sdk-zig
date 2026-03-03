@@ -9,7 +9,7 @@ pub const InboundRawMessage = struct {
     content_type: []const u8,
 
     /// Headers present in inbound email.
-    headers: ?[]const aws.map.StringMapEntry,
+    headers: ?[]const aws.map.StringMapEntry = null,
 
     /// The email subject.
     subject: []const u8,

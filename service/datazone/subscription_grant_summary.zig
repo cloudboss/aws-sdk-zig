@@ -5,7 +5,7 @@ const SubscriptionGrantOverallStatus = @import("subscription_grant_overall_statu
 /// The details of the subscription grant.
 pub const SubscriptionGrantSummary = struct {
     /// The assets included in the subscription grant.
-    assets: ?[]const SubscribedAsset,
+    assets: ?[]const SubscribedAsset = null,
 
     /// The timestamp of when a subscription grant was created.
     created_at: i64,
@@ -18,7 +18,7 @@ pub const SubscriptionGrantSummary = struct {
     domain_id: []const u8,
 
     /// The environment ID of the subscription grant.
-    environment_id: ?[]const u8,
+    environment_id: ?[]const u8 = null,
 
     /// The entity to which the subscription is granted.
     granted_entity: GrantedEntity,
@@ -30,7 +30,7 @@ pub const SubscriptionGrantSummary = struct {
     status: SubscriptionGrantOverallStatus,
 
     /// The ID of the subscription.
-    subscription_id: ?[]const u8,
+    subscription_id: ?[]const u8 = null,
 
     /// The identifier of the target of the subscription grant.
     subscription_target_id: []const u8,
@@ -39,7 +39,7 @@ pub const SubscriptionGrantSummary = struct {
     updated_at: i64,
 
     /// The Amazon DataZone user who updated the subscription grant.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .assets = "assets",

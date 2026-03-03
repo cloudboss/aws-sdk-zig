@@ -7,19 +7,19 @@ const WcdmaObj = @import("wcdma_obj.zig").WcdmaObj;
 /// The cell towers that were used to perform the measurements.
 pub const CellTowers = struct {
     /// CDMA object information.
-    cdma: ?[]const CdmaObj,
+    cdma: ?[]const CdmaObj = null,
 
     /// GSM object information.
-    gsm: ?[]const GsmObj,
+    gsm: ?[]const GsmObj = null,
 
     /// LTE object information.
-    lte: ?[]const LteObj,
+    lte: ?[]const LteObj = null,
 
     /// TD-SCDMA object information.
-    tdscdma: ?[]const TdscdmaObj,
+    tdscdma: ?[]const TdscdmaObj = null,
 
     /// WCDMA object information.
-    wcdma: ?[]const WcdmaObj,
+    wcdma: ?[]const WcdmaObj = null,
 
     pub const json_field_names = .{
         .cdma = "Cdma",

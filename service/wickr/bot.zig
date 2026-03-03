@@ -4,34 +4,34 @@ const BotStatus = @import("bot_status.zig").BotStatus;
 /// fields.
 pub const Bot = struct {
     /// The unique identifier of the bot.
-    bot_id: ?[]const u8,
+    bot_id: ?[]const u8 = null,
 
     /// The display name of the bot that is visible to users.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The ID of the security group to which the bot belongs.
-    group_id: ?[]const u8,
+    group_id: ?[]const u8 = null,
 
     /// Indicates whether the bot has a password set.
-    has_challenge: ?bool,
+    has_challenge: ?bool = null,
 
     /// The timestamp of the bot's last login.
-    last_login: ?[]const u8,
+    last_login: ?[]const u8 = null,
 
     /// The public key of the bot used for encryption.
-    pubkey: ?[]const u8,
+    pubkey: ?[]const u8 = null,
 
     /// The current status of the bot (1 for pending, 2 for active).
-    status: ?BotStatus,
+    status: ?BotStatus = null,
 
     /// Indicates whether the bot is currently suspended.
-    suspended: ?bool,
+    suspended: ?bool = null,
 
     /// The unique username hash identifier for the bot.
-    uname: ?[]const u8,
+    uname: ?[]const u8 = null,
 
     /// The username of the bot.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bot_id = "botId",

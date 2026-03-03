@@ -2,7 +2,7 @@
 /// (OIDC) identity provider information for the cluster.
 pub const OIDC = struct {
     /// The issuer URL for the OIDC identity provider.
-    issuer: ?[]const u8,
+    issuer: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .issuer = "issuer",

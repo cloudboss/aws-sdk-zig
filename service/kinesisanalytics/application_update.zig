@@ -7,19 +7,19 @@ const ReferenceDataSourceUpdate = @import("reference_data_source_update.zig").Re
 /// application.
 pub const ApplicationUpdate = struct {
     /// Describes application code updates.
-    application_code_update: ?[]const u8,
+    application_code_update: ?[]const u8 = null,
 
     /// Describes application CloudWatch logging option updates.
-    cloud_watch_logging_option_updates: ?[]const CloudWatchLoggingOptionUpdate,
+    cloud_watch_logging_option_updates: ?[]const CloudWatchLoggingOptionUpdate = null,
 
     /// Describes application input configuration updates.
-    input_updates: ?[]const InputUpdate,
+    input_updates: ?[]const InputUpdate = null,
 
     /// Describes application output configuration updates.
-    output_updates: ?[]const OutputUpdate,
+    output_updates: ?[]const OutputUpdate = null,
 
     /// Describes application reference data source updates.
-    reference_data_source_updates: ?[]const ReferenceDataSourceUpdate,
+    reference_data_source_updates: ?[]const ReferenceDataSourceUpdate = null,
 
     pub const json_field_names = .{
         .application_code_update = "ApplicationCodeUpdate",

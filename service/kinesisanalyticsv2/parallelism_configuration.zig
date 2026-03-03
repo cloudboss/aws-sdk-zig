@@ -9,7 +9,7 @@ const ConfigurationType = @import("configuration_type.zig").ConfigurationType;
 pub const ParallelismConfiguration = struct {
     /// Describes whether the Managed Service for Apache Flink service can increase
     /// the parallelism of the application in response to increased throughput.
-    auto_scaling_enabled: ?bool,
+    auto_scaling_enabled: ?bool = null,
 
     /// Describes whether the application uses the default parallelism for the
     /// Managed Service for Apache Flink service. You must set this property to
@@ -32,14 +32,14 @@ pub const ParallelismConfiguration = struct {
     /// application load is reduced, the service can reduce the `CurrentParallelism`
     /// value
     /// down to the `Parallelism` setting.
-    parallelism: ?i32,
+    parallelism: ?i32 = null,
 
     /// Describes the number of parallel tasks that a Managed Service for Apache
     /// Flink application can perform per Kinesis Processing Unit
     /// (KPU) used by the application. For more
     /// information about KPUs, see [Amazon Managed Service for Apache Flink
     /// Pricing](http://aws.amazon.com/kinesis/data-analytics/pricing/).
-    parallelism_per_kpu: ?i32,
+    parallelism_per_kpu: ?i32 = null,
 
     pub const json_field_names = .{
         .auto_scaling_enabled = "AutoScalingEnabled",

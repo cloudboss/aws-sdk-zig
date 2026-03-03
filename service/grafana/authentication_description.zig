@@ -8,7 +8,7 @@ const SamlAuthentication = @import("saml_authentication.zig").SamlAuthentication
 pub const AuthenticationDescription = struct {
     /// A structure containing information about how this workspace works with IAM
     /// Identity Center.
-    aws_sso: ?AwsSsoAuthentication,
+    aws_sso: ?AwsSsoAuthentication = null,
 
     /// Specifies whether this workspace uses IAM Identity Center, SAML, or both
     /// methods to
@@ -21,7 +21,7 @@ pub const AuthenticationDescription = struct {
     /// what attributes within the assertion are to be mapped to user information in
     /// the
     /// workspace.
-    saml: ?SamlAuthentication,
+    saml: ?SamlAuthentication = null,
 
     pub const json_field_names = .{
         .aws_sso = "awsSso",

@@ -10,12 +10,12 @@ pub const ChannelStorage = struct {
     /// selected, the `retentionPeriod` parameter is ignored. You can't change the
     /// choice
     /// of S3 storage after the data store is created.
-    customer_managed_s3: ?CustomerManagedChannelS3Storage,
+    customer_managed_s3: ?CustomerManagedChannelS3Storage = null,
 
     /// Used to store channel data in an S3 bucket managed by IoT Analytics. You
     /// can't change the choice
     /// of S3 storage after the data store is created.
-    service_managed_s3: ?ServiceManagedChannelS3Storage,
+    service_managed_s3: ?ServiceManagedChannelS3Storage = null,
 
     pub const json_field_names = .{
         .customer_managed_s3 = "customerManagedS3",

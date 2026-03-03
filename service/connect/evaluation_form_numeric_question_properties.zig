@@ -4,7 +4,7 @@ const EvaluationFormNumericQuestionOption = @import("evaluation_form_numeric_que
 /// Information about properties for a numeric question in an evaluation form.
 pub const EvaluationFormNumericQuestionProperties = struct {
     /// The automation properties of the numeric question.
-    automation: ?EvaluationFormNumericQuestionAutomation,
+    automation: ?EvaluationFormNumericQuestionAutomation = null,
 
     /// The maximum answer value.
     max_value: i32 = 0,
@@ -13,7 +13,7 @@ pub const EvaluationFormNumericQuestionProperties = struct {
     min_value: i32 = 0,
 
     /// The scoring options of the numeric question.
-    options: ?[]const EvaluationFormNumericQuestionOption,
+    options: ?[]const EvaluationFormNumericQuestionOption = null,
 
     pub const json_field_names = .{
         .automation = "Automation",

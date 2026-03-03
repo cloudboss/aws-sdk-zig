@@ -16,10 +16,10 @@ pub const ColumnMetadata = struct {
     is_signed: bool = false,
 
     /// The label for the column.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// The name of the column.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A value that indicates whether the column is nullable.
     nullable: i32 = 0,
@@ -31,16 +31,16 @@ pub const ColumnMetadata = struct {
     scale: i32 = 0,
 
     /// The name of the schema that owns the table that includes the column.
-    schema_name: ?[]const u8,
+    schema_name: ?[]const u8 = null,
 
     /// The name of the table that includes the column.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The type of the column.
     @"type": i32 = 0,
 
     /// The database-specific data type of the column.
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .array_base_column_type = "arrayBaseColumnType",

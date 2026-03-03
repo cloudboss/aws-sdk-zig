@@ -4,7 +4,7 @@ const MediaAnalysisDetectModerationLabelsConfig = @import("media_analysis_detect
 /// operation-specific.
 pub const MediaAnalysisOperationsConfig = struct {
     /// Contains configuration options for a DetectModerationLabels job.
-    detect_moderation_labels: ?MediaAnalysisDetectModerationLabelsConfig,
+    detect_moderation_labels: ?MediaAnalysisDetectModerationLabelsConfig = null,
 
     pub const json_field_names = .{
         .detect_moderation_labels = "DetectModerationLabels",

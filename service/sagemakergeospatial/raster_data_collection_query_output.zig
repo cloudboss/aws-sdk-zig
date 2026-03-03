@@ -6,10 +6,10 @@ const TimeRangeFilterOutput = @import("time_range_filter_output.zig").TimeRangeF
 /// input along with some additional metadata.
 pub const RasterDataCollectionQueryOutput = struct {
     /// The Area of Interest used in the search.
-    area_of_interest: ?AreaOfInterest,
+    area_of_interest: ?AreaOfInterest = null,
 
     /// Property filters used in the search.
-    property_filters: ?PropertyFilters,
+    property_filters: ?PropertyFilters = null,
 
     /// The ARN of the Raster Data Collection against which the search is done.
     raster_data_collection_arn: []const u8,

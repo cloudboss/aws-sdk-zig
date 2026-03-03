@@ -10,7 +10,7 @@ pub const MessageTemplateQueryField = struct {
     /// Whether the query expects only exact matches on the attribute field values.
     /// The results of the query will only include exact matches if this parameter
     /// is set to false.
-    allow_fuzziness: ?bool,
+    allow_fuzziness: ?bool = null,
 
     /// The name of the attribute to query the message templates by.
     name: []const u8,
@@ -21,7 +21,7 @@ pub const MessageTemplateQueryField = struct {
     /// The importance of the attribute field when calculating query result
     /// relevancy scores. The value set for this parameter affects the ordering of
     /// search results.
-    priority: ?Priority,
+    priority: ?Priority = null,
 
     /// The values of the attribute to query the message templates by.
     values: []const []const u8,

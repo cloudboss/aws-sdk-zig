@@ -4,7 +4,7 @@ pub const DeviceiSCSIAttributes = struct {
     chap_enabled: bool = false,
 
     /// The network interface identifier of the VTL device.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// The port used to communicate with iSCSI VTL device targets.
     network_interface_port: i32 = 0,
@@ -12,7 +12,7 @@ pub const DeviceiSCSIAttributes = struct {
     /// Specifies the unique Amazon Resource Name (ARN) that encodes the iSCSI
     /// qualified
     /// name(iqn) of a tape drive or media changer target.
-    target_arn: ?[]const u8,
+    target_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .chap_enabled = "ChapEnabled",

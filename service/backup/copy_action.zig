@@ -8,7 +8,7 @@ pub const CopyAction = struct {
     /// `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
     destination_backup_vault_arn: []const u8,
 
-    lifecycle: ?Lifecycle,
+    lifecycle: ?Lifecycle = null,
 
     pub const json_field_names = .{
         .destination_backup_vault_arn = "DestinationBackupVaultArn",

@@ -5,37 +5,37 @@ const SupportedDataTransferType = @import("supported_data_transfer_type.zig").Su
 /// Information about the registered connector.
 pub const ConnectorDetail = struct {
     /// The application type of the connector.
-    application_type: ?[]const u8,
+    application_type: ?[]const u8 = null,
 
     /// A description about the registered connector.
-    connector_description: ?[]const u8,
+    connector_description: ?[]const u8 = null,
 
     /// A label used for the connector.
-    connector_label: ?[]const u8,
+    connector_label: ?[]const u8 = null,
 
     /// The connection mode that the connector supports.
-    connector_modes: ?[]const []const u8,
+    connector_modes: ?[]const []const u8 = null,
 
     /// The name of the connector.
-    connector_name: ?[]const u8,
+    connector_name: ?[]const u8 = null,
 
     /// The owner of the connector.
-    connector_owner: ?[]const u8,
+    connector_owner: ?[]const u8 = null,
 
     /// The provisioning type that the connector uses.
-    connector_provisioning_type: ?ConnectorProvisioningType,
+    connector_provisioning_type: ?ConnectorProvisioningType = null,
 
     /// The connector type.
-    connector_type: ?ConnectorType,
+    connector_type: ?ConnectorType = null,
 
     /// The connector version.
-    connector_version: ?[]const u8,
+    connector_version: ?[]const u8 = null,
 
     /// The time at which the connector was registered.
-    registered_at: ?i64,
+    registered_at: ?i64 = null,
 
     /// The user who registered the connector.
-    registered_by: ?[]const u8,
+    registered_by: ?[]const u8 = null,
 
     /// The data transfer types that the connector supports.
     ///
@@ -46,7 +46,7 @@ pub const ConnectorDetail = struct {
     /// **FILE**
     ///
     /// Files or binary data.
-    supported_data_transfer_types: ?[]const SupportedDataTransferType,
+    supported_data_transfer_types: ?[]const SupportedDataTransferType = null,
 
     pub const json_field_names = .{
         .application_type = "applicationType",

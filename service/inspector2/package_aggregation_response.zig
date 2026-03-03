@@ -4,13 +4,13 @@ const SeverityCounts = @import("severity_counts.zig").SeverityCounts;
 /// layer.
 pub const PackageAggregationResponse = struct {
     /// The ID of the Amazon Web Services account associated with the findings.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The name of the operating system package.
     package_name: []const u8,
 
     /// An object that contains the count of matched findings per severity.
-    severity_counts: ?SeverityCounts,
+    severity_counts: ?SeverityCounts = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

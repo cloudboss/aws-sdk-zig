@@ -25,86 +25,86 @@ const VCpuInfo = @import("v_cpu_info.zig").VCpuInfo;
 /// Describes the instance type.
 pub const InstanceTypeInfo = struct {
     /// Indicates whether Amazon CloudWatch action based recovery is supported.
-    auto_recovery_supported: ?bool,
+    auto_recovery_supported: ?bool = null,
 
     /// Indicates whether the instance is a bare metal instance type.
-    bare_metal: ?bool,
+    bare_metal: ?bool = null,
 
     /// Indicates whether the instance type is a burstable performance T instance
     /// type. For more
     /// information, see [Burstable performance
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html).
-    burstable_performance_supported: ?bool,
+    burstable_performance_supported: ?bool = null,
 
     /// Indicates whether the instance type is current generation.
-    current_generation: ?bool,
+    current_generation: ?bool = null,
 
     /// Indicates whether Dedicated Hosts are supported on the instance type.
-    dedicated_hosts_supported: ?bool,
+    dedicated_hosts_supported: ?bool = null,
 
     /// Describes the Amazon EBS settings for the instance type.
-    ebs_info: ?EbsInfo,
+    ebs_info: ?EbsInfo = null,
 
     /// Describes the FPGA accelerator settings for the instance type.
-    fpga_info: ?FpgaInfo,
+    fpga_info: ?FpgaInfo = null,
 
     /// Indicates whether the instance type is eligible for the free tier.
-    free_tier_eligible: ?bool,
+    free_tier_eligible: ?bool = null,
 
     /// Describes the GPU accelerator settings for the instance type.
-    gpu_info: ?GpuInfo,
+    gpu_info: ?GpuInfo = null,
 
     /// Indicates whether On-Demand hibernation is supported.
-    hibernation_supported: ?bool,
+    hibernation_supported: ?bool = null,
 
     /// The hypervisor for the instance type.
-    hypervisor: ?InstanceTypeHypervisor,
+    hypervisor: ?InstanceTypeHypervisor = null,
 
     /// Describes the Inference accelerator settings for the instance type.
-    inference_accelerator_info: ?InferenceAcceleratorInfo,
+    inference_accelerator_info: ?InferenceAcceleratorInfo = null,
 
     /// Describes the instance storage for the instance type.
-    instance_storage_info: ?InstanceStorageInfo,
+    instance_storage_info: ?InstanceStorageInfo = null,
 
     /// Indicates whether instance storage is supported.
-    instance_storage_supported: ?bool,
+    instance_storage_supported: ?bool = null,
 
     /// The instance type. For more information, see [Instance
     /// types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2
     /// User Guide*.
-    instance_type: ?InstanceType,
+    instance_type: ?InstanceType = null,
 
     /// Describes the media accelerator settings for the instance type.
-    media_accelerator_info: ?MediaAcceleratorInfo,
+    media_accelerator_info: ?MediaAcceleratorInfo = null,
 
     /// Describes the memory for the instance type.
-    memory_info: ?MemoryInfo,
+    memory_info: ?MemoryInfo = null,
 
     /// Describes the network settings for the instance type.
-    network_info: ?NetworkInfo,
+    network_info: ?NetworkInfo = null,
 
     /// Describes the Neuron accelerator settings for the instance type.
-    neuron_info: ?NeuronInfo,
+    neuron_info: ?NeuronInfo = null,
 
     /// Indicates whether Nitro Enclaves is supported.
-    nitro_enclaves_support: ?NitroEnclavesSupport,
+    nitro_enclaves_support: ?NitroEnclavesSupport = null,
 
     /// Describes the supported NitroTPM versions for the instance type.
-    nitro_tpm_info: ?NitroTpmInfo,
+    nitro_tpm_info: ?NitroTpmInfo = null,
 
     /// Indicates whether NitroTPM is supported.
-    nitro_tpm_support: ?NitroTpmSupport,
+    nitro_tpm_support: ?NitroTpmSupport = null,
 
     /// Indicates whether a local Precision Time Protocol (PTP) hardware clock (PHC)
     /// is
     /// supported.
-    phc_support: ?PhcSupport,
+    phc_support: ?PhcSupport = null,
 
     /// Describes the placement group settings for the instance type.
-    placement_group_info: ?PlacementGroupInfo,
+    placement_group_info: ?PlacementGroupInfo = null,
 
     /// Describes the processor.
-    processor_info: ?ProcessorInfo,
+    processor_info: ?ProcessorInfo = null,
 
     /// Indicates whether reboot migration during a user-initiated reboot is
     /// supported for
@@ -112,25 +112,25 @@ pub const InstanceTypeInfo = struct {
     /// see [Enable or disable reboot
     /// migration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration) in the
     /// *Amazon EC2 User Guide*.
-    reboot_migration_support: ?RebootMigrationSupport,
+    reboot_migration_support: ?RebootMigrationSupport = null,
 
     /// The supported boot modes. For more information, see [Boot
     /// modes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in
     /// the *Amazon EC2 User
     /// Guide*.
-    supported_boot_modes: ?[]const BootModeType,
+    supported_boot_modes: ?[]const BootModeType = null,
 
     /// The supported root device types.
-    supported_root_device_types: ?[]const RootDeviceType,
+    supported_root_device_types: ?[]const RootDeviceType = null,
 
     /// Indicates whether the instance type is offered for spot, On-Demand, or
     /// Capacity
     /// Blocks.
-    supported_usage_classes: ?[]const UsageClassType,
+    supported_usage_classes: ?[]const UsageClassType = null,
 
     /// The supported virtualization types.
-    supported_virtualization_types: ?[]const VirtualizationType,
+    supported_virtualization_types: ?[]const VirtualizationType = null,
 
     /// Describes the vCPU configurations for the instance type.
-    v_cpu_info: ?VCpuInfo,
+    v_cpu_info: ?VCpuInfo = null,
 };

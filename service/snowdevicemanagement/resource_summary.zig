@@ -1,10 +1,10 @@
 /// A summary of a resource available on the device.
 pub const ResourceSummary = struct {
     /// The Amazon Resource Name (ARN) of the resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The ID of the resource.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The resource type.
     resource_type: []const u8,

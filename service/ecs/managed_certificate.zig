@@ -4,7 +4,7 @@ const ManagedResourceStatus = @import("managed_resource_status.zig").ManagedReso
 /// service.
 pub const ManagedCertificate = struct {
     /// The Amazon Resource Name (ARN) of the ACM certificate.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The fully qualified domain name (FQDN) that is secured with this ACM
     /// certificate.
@@ -14,7 +14,7 @@ pub const ManagedCertificate = struct {
     status: ManagedResourceStatus,
 
     /// Information about why the ACM certificate is in the current status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The Unix timestamp for when the ACM certificate was last updated
     updated_at: i64,

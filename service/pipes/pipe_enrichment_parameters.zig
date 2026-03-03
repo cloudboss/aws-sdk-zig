@@ -13,7 +13,7 @@ pub const PipeEnrichmentParameters = struct {
     /// corresponding Connection can also have these values configured. In case of
     /// any conflicting
     /// keys, values from the Connection take precedence.
-    http_parameters: ?PipeEnrichmentHttpParameters,
+    http_parameters: ?PipeEnrichmentHttpParameters = null,
 
     /// Valid JSON text passed to the enrichment. In this case, nothing from the
     /// event itself is
@@ -22,7 +22,7 @@ pub const PipeEnrichmentParameters = struct {
     /// Data Interchange Format](http://www.rfc-editor.org/rfc/rfc7159.txt).
     ///
     /// To remove an input template, specify an empty string.
-    input_template: ?[]const u8,
+    input_template: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .http_parameters = "HttpParameters",

@@ -4,12 +4,12 @@ const StringCondition = @import("string_condition.zig").StringCondition;
 pub const PredefinedAttributeSearchCriteria = struct {
     /// A list of conditions which would be applied together with an `AND`
     /// condition.
-    and_conditions: ?[]const PredefinedAttributeSearchCriteria,
+    and_conditions: ?[]const PredefinedAttributeSearchCriteria = null,
 
     /// A list of conditions which would be applied together with an `OR` condition.
-    or_conditions: ?[]const PredefinedAttributeSearchCriteria,
+    or_conditions: ?[]const PredefinedAttributeSearchCriteria = null,
 
-    string_condition: ?StringCondition,
+    string_condition: ?StringCondition = null,
 
     pub const json_field_names = .{
         .and_conditions = "AndConditions",

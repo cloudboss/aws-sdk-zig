@@ -65,7 +65,7 @@ pub const FeaturizationMethod = struct {
     /// backfilling to a value of 2, include the following: `"backfill": "value"`
     /// and
     /// `"backfill_value":"2"`.
-    featurization_method_parameters: ?[]const aws.map.StringMapEntry,
+    featurization_method_parameters: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .featurization_method_name = "FeaturizationMethodName",

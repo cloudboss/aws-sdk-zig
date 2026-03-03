@@ -4,7 +4,7 @@ const IdleSettings = @import("idle_settings.zig").IdleSettings;
 /// SageMaker Studio applications.
 pub const AppLifecycleManagement = struct {
     /// Settings related to idle shutdown of Studio applications.
-    idle_settings: ?IdleSettings,
+    idle_settings: ?IdleSettings = null,
 
     pub const json_field_names = .{
         .idle_settings = "IdleSettings",

@@ -2,9 +2,9 @@
 /// apply the action.
 pub const RecommendedActionParameter = struct {
     /// The key of the parameter to use with the `RecommendedAction` API operation.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value of the parameter to use with the `RecommendedAction` API
     /// operation.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

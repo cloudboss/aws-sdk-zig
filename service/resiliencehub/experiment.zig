@@ -1,10 +1,10 @@
 /// Indicates the FIS experiment detected while running an assessment.
 pub const Experiment = struct {
     /// Amazon Resource Name (ARN) of the FIS experiment.
-    experiment_arn: ?[]const u8,
+    experiment_arn: ?[]const u8 = null,
 
     /// Identifier of the FIS experiment template.
-    experiment_template_id: ?[]const u8,
+    experiment_template_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .experiment_arn = "experimentArn",

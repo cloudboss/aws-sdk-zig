@@ -4,11 +4,11 @@
 pub const ResourceReference = struct {
     /// The name of the resource that is using the resource that you are
     /// trying to delete.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The version of the resource that is using the resource that you are
     /// trying to delete.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

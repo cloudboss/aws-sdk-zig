@@ -8,10 +8,10 @@ pub const S3StorageConfig = struct {
     /// have below permissions to the `KmsKeyId`:
     ///
     /// * `"kms:GenerateDataKey"`
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The S3 path where offline records are written.
-    resolved_output_s3_uri: ?[]const u8,
+    resolved_output_s3_uri: ?[]const u8 = null,
 
     /// The S3 URI, or location in Amazon S3, of `OfflineStore`.
     ///

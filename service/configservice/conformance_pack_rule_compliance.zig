@@ -4,16 +4,16 @@ const ConformancePackComplianceType = @import("conformance_pack_compliance_type.
 /// pack. You can filter using Config rule names and compliance types.
 pub const ConformancePackRuleCompliance = struct {
     /// Compliance of the Config rule.
-    compliance_type: ?ConformancePackComplianceType,
+    compliance_type: ?ConformancePackComplianceType = null,
 
     /// Name of the Config rule.
-    config_rule_name: ?[]const u8,
+    config_rule_name: ?[]const u8 = null,
 
     /// Controls for the conformance pack. A control is a process to prevent or
     /// detect problems while meeting objectives.
     /// A control can align with a specific compliance regime or map to internal
     /// controls defined by an organization.
-    controls: ?[]const []const u8,
+    controls: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .compliance_type = "ComplianceType",

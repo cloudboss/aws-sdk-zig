@@ -5,7 +5,7 @@ const XAxisType = @import("x_axis_type.zig").XAxisType;
 /// Specifies a query to retrieve training metrics from SageMaker.
 pub const MetricQuery = struct {
     /// The end time of metrics to retrieve.
-    end: ?i64,
+    end: ?i64 = null,
 
     /// The name of the metric to retrieve.
     metric_name: []const u8,
@@ -20,7 +20,7 @@ pub const MetricQuery = struct {
     resource_arn: []const u8,
 
     /// The start time of metrics to retrieve.
-    start: ?i64,
+    start: ?i64 = null,
 
     /// The x-axis type of metrics to retrieve.
     x_axis_type: XAxisType,

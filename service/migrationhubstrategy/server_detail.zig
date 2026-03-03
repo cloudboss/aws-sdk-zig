@@ -10,48 +10,48 @@ const SystemInfo = @import("system_info.zig").SystemInfo;
 /// Detailed information about a server.
 pub const ServerDetail = struct {
     /// The S3 bucket name and Amazon S3 key name for anti-pattern report.
-    antipattern_report_s3_object: ?S3Object,
+    antipattern_report_s3_object: ?S3Object = null,
 
     /// The status of the anti-pattern report generation.
-    antipattern_report_status: ?AntipatternReportStatus,
+    antipattern_report_status: ?AntipatternReportStatus = null,
 
     /// A message about the status of the anti-pattern report generation.
-    antipattern_report_status_message: ?[]const u8,
+    antipattern_report_status_message: ?[]const u8 = null,
 
     /// A list of strategy summaries.
-    application_component_strategy_summary: ?[]const StrategySummary,
+    application_component_strategy_summary: ?[]const StrategySummary = null,
 
     /// The status of assessment for the server.
-    data_collection_status: ?RunTimeAssessmentStatus,
+    data_collection_status: ?RunTimeAssessmentStatus = null,
 
     /// The server ID.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The timestamp of when the server was assessed.
-    last_analyzed_timestamp: ?i64,
+    last_analyzed_timestamp: ?i64 = null,
 
     /// A list of anti-pattern severity summaries.
-    list_antipattern_severity_summary: ?[]const AntipatternSeveritySummary,
+    list_antipattern_severity_summary: ?[]const AntipatternSeveritySummary = null,
 
     /// The name of the server.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A set of recommendations.
-    recommendation_set: ?RecommendationSet,
+    recommendation_set: ?RecommendationSet = null,
 
     /// The error in server analysis.
-    server_error: ?ServerError,
+    server_error: ?ServerError = null,
 
     /// The type of server.
-    server_type: ?[]const u8,
+    server_type: ?[]const u8 = null,
 
     /// A message about the status of data collection, which contains detailed
     /// descriptions of
     /// any error messages.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// System information about the server.
-    system_info: ?SystemInfo,
+    system_info: ?SystemInfo = null,
 
     pub const json_field_names = .{
         .antipattern_report_s3_object = "antipatternReportS3Object",

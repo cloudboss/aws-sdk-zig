@@ -5,43 +5,43 @@ const GlueSchema = @import("glue_schema.zig").GlueSchema;
 /// Specifies an S3 Excel data source.
 pub const S3ExcelSource = struct {
     /// Additional configuration options for S3 direct source processing.
-    additional_options: ?S3DirectSourceAdditionalOptions,
+    additional_options: ?S3DirectSourceAdditionalOptions = null,
 
     /// The compression format used for the Excel files.
-    compression_type: ?ParquetCompressionType,
+    compression_type: ?ParquetCompressionType = null,
 
     /// Patterns to exclude specific files or paths from processing.
-    exclusions: ?[]const []const u8,
+    exclusions: ?[]const []const u8 = null,
 
     /// Specifies how files should be grouped for processing.
-    group_files: ?[]const u8,
+    group_files: ?[]const u8 = null,
 
     /// Defines the size of file groups for batch processing.
-    group_size: ?[]const u8,
+    group_size: ?[]const u8 = null,
 
     /// The maximum number of processing bands to use.
-    max_band: ?i32,
+    max_band: ?i32 = null,
 
     /// The maximum number of files to process in each band.
-    max_files_in_band: ?i32,
+    max_files_in_band: ?i32 = null,
 
     /// The name of the S3 Excel data source.
     name: []const u8,
 
     /// The number of rows to process from each Excel file.
-    number_rows: ?i64,
+    number_rows: ?i64 = null,
 
     /// The Glue schemas to apply to the processed data.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// The S3 paths where the Excel files are located.
     paths: []const []const u8,
 
     /// Indicates whether to recursively process subdirectories.
-    recurse: ?bool,
+    recurse: ?bool = null,
 
     /// The number of rows to skip at the end of each Excel file.
-    skip_footer: ?i32,
+    skip_footer: ?i32 = null,
 
     pub const json_field_names = .{
         .additional_options = "AdditionalOptions",

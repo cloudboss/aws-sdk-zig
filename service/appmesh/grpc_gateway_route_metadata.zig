@@ -5,10 +5,10 @@ pub const GrpcGatewayRouteMetadata = struct {
     /// Specify `True` to match anything except the match criteria. The default
     /// value
     /// is `False`.
-    invert: ?bool,
+    invert: ?bool = null,
 
     /// The criteria for determining a metadata match.
-    match: ?GrpcMetadataMatchMethod,
+    match: ?GrpcMetadataMatchMethod = null,
 
     /// A name for the gateway route metadata.
     name: []const u8,

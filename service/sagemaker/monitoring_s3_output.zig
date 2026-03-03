@@ -10,7 +10,7 @@ pub const MonitoringS3Output = struct {
 
     /// Whether to upload the results of the monitoring job continuously or after
     /// the job completes.
-    s3_upload_mode: ?ProcessingS3UploadMode,
+    s3_upload_mode: ?ProcessingS3UploadMode = null,
 
     /// A URI that identifies the Amazon S3 storage location where Amazon SageMaker
     /// AI saves the results of a monitoring job.

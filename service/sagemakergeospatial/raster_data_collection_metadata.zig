@@ -12,7 +12,7 @@ pub const RasterDataCollectionMetadata = struct {
     description: []const u8,
 
     /// The description URL of the raster data collection.
-    description_page_url: ?[]const u8,
+    description_page_url: ?[]const u8 = null,
 
     /// The name of the raster data collection.
     name: []const u8,
@@ -21,7 +21,7 @@ pub const RasterDataCollectionMetadata = struct {
     supported_filters: []const Filter,
 
     /// Each tag consists of a key and a value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of raster data collection.
     @"type": DataCollectionType,

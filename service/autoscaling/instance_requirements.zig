@@ -63,7 +63,7 @@ pub const InstanceRequirements = struct {
     /// `0`.
     ///
     /// Default: No minimum or maximum limits
-    accelerator_count: ?AcceleratorCountRequest,
+    accelerator_count: ?AcceleratorCountRequest = null,
 
     /// Indicates whether instance types must have accelerators by specific
     /// manufacturers.
@@ -78,7 +78,7 @@ pub const InstanceRequirements = struct {
     /// * For instance types with Xilinx devices, specify `xilinx`.
     ///
     /// Default: Any manufacturer
-    accelerator_manufacturers: ?[]const AcceleratorManufacturer,
+    accelerator_manufacturers: ?[]const AcceleratorManufacturer = null,
 
     /// Lists the accelerators that must be on an instance type.
     ///
@@ -98,14 +98,14 @@ pub const InstanceRequirements = struct {
     /// * For instance types with Xilinx VU9P FPGAs, specify `vu9p`.
     ///
     /// Default: Any accelerator
-    accelerator_names: ?[]const AcceleratorName,
+    accelerator_names: ?[]const AcceleratorName = null,
 
     /// The minimum and maximum total memory size for the accelerators on an
     /// instance type, in
     /// MiB.
     ///
     /// Default: No minimum or maximum limits
-    accelerator_total_memory_mi_b: ?AcceleratorTotalMemoryMiBRequest,
+    accelerator_total_memory_mi_b: ?AcceleratorTotalMemoryMiBRequest = null,
 
     /// Lists the accelerator types that must be on an instance type.
     ///
@@ -117,7 +117,7 @@ pub const InstanceRequirements = struct {
     /// `inference`.
     ///
     /// Default: Any accelerator type
-    accelerator_types: ?[]const AcceleratorType,
+    accelerator_types: ?[]const AcceleratorType = null,
 
     /// The instance types to apply your specified attributes against. All other
     /// instance
@@ -140,13 +140,13 @@ pub const InstanceRequirements = struct {
     /// `ExcludedInstanceTypes`.
     ///
     /// Default: All instance types
-    allowed_instance_types: ?[]const []const u8,
+    allowed_instance_types: ?[]const []const u8 = null,
 
     /// Indicates whether bare metal instance types are included, excluded, or
     /// required.
     ///
     /// Default: `excluded`
-    bare_metal: ?BareMetal,
+    bare_metal: ?BareMetal = null,
 
     /// The minimum and maximum baseline bandwidth performance for an instance type,
     /// in Mbps.
@@ -155,10 +155,10 @@ pub const InstanceRequirements = struct {
     /// in the *Amazon EC2 User Guide*.
     ///
     /// Default: No minimum or maximum limits
-    baseline_ebs_bandwidth_mbps: ?BaselineEbsBandwidthMbpsRequest,
+    baseline_ebs_bandwidth_mbps: ?BaselineEbsBandwidthMbpsRequest = null,
 
     /// The baseline performance factors for the instance requirements.
-    baseline_performance_factors: ?BaselinePerformanceFactorsRequest,
+    baseline_performance_factors: ?BaselinePerformanceFactorsRequest = null,
 
     /// Indicates whether burstable performance instance types are included,
     /// excluded, or
@@ -167,7 +167,7 @@ pub const InstanceRequirements = struct {
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.
     ///
     /// Default: `excluded`
-    burstable_performance: ?BurstablePerformance,
+    burstable_performance: ?BurstablePerformance = null,
 
     /// Lists which specific CPU manufacturers to include.
     ///
@@ -188,7 +188,7 @@ pub const InstanceRequirements = struct {
     /// Machine Image (AMI) that you specify in your launch template.
     ///
     /// Default: Any manufacturer
-    cpu_manufacturers: ?[]const CpuManufacturer,
+    cpu_manufacturers: ?[]const CpuManufacturer = null,
 
     /// The instance types to exclude. You can use strings with one or more wild
     /// cards,
@@ -206,7 +206,7 @@ pub const InstanceRequirements = struct {
     /// `AllowedInstanceTypes`.
     ///
     /// Default: No excluded instance types
-    excluded_instance_types: ?[]const []const u8,
+    excluded_instance_types: ?[]const []const u8 = null,
 
     /// Indicates whether current or previous generation instance types are
     /// included.
@@ -222,7 +222,7 @@ pub const InstanceRequirements = struct {
     /// * For previous generation instance types, specify `previous`.
     ///
     /// Default: Any current or previous generation
-    instance_generations: ?[]const InstanceGeneration,
+    instance_generations: ?[]const InstanceGeneration = null,
 
     /// Indicates whether instance types with instance store volumes are included,
     /// excluded,
@@ -231,7 +231,7 @@ pub const InstanceRequirements = struct {
     /// the *Amazon EC2 User Guide*.
     ///
     /// Default: `included`
-    local_storage: ?LocalStorage,
+    local_storage: ?LocalStorage = null,
 
     /// Indicates the type of local storage that is required.
     ///
@@ -242,7 +242,7 @@ pub const InstanceRequirements = struct {
     /// `ssd`.
     ///
     /// Default: Any local storage type
-    local_storage_types: ?[]const LocalStorageType,
+    local_storage_types: ?[]const LocalStorageType = null,
 
     /// [Price protection] The price protection threshold for Spot Instances, as a
     /// percentage
@@ -278,13 +278,13 @@ pub const InstanceRequirements = struct {
     /// types that match your attributes, include one of these parameters and
     /// specify a high
     /// value, such as `999999`.
-    max_spot_price_as_percentage_of_optimal_on_demand_price: ?i32,
+    max_spot_price_as_percentage_of_optimal_on_demand_price: ?i32 = null,
 
     /// The minimum and maximum amount of memory per vCPU for an instance type, in
     /// GiB.
     ///
     /// Default: No minimum or maximum limits
-    memory_gi_b_per_v_cpu: ?MemoryGiBPerVCpuRequest,
+    memory_gi_b_per_v_cpu: ?MemoryGiBPerVCpuRequest = null,
 
     /// The minimum and maximum instance memory size for an instance type, in MiB.
     memory_mi_b: MemoryMiBRequest,
@@ -293,12 +293,12 @@ pub const InstanceRequirements = struct {
     /// (Gbps).
     ///
     /// Default: No minimum or maximum limits
-    network_bandwidth_gbps: ?NetworkBandwidthGbpsRequest,
+    network_bandwidth_gbps: ?NetworkBandwidthGbpsRequest = null,
 
     /// The minimum and maximum number of network interfaces for an instance type.
     ///
     /// Default: No minimum or maximum limits
-    network_interface_count: ?NetworkInterfaceCountRequest,
+    network_interface_count: ?NetworkInterfaceCountRequest = null,
 
     /// [Price protection] The price protection threshold for On-Demand Instances,
     /// as a
@@ -328,13 +328,13 @@ pub const InstanceRequirements = struct {
     /// per-vCPU or per-memory price instead of the per instance price.
     ///
     /// Default: `20`
-    on_demand_max_price_percentage_over_lowest_price: ?i32,
+    on_demand_max_price_percentage_over_lowest_price: ?i32 = null,
 
     /// Indicates whether instance types must provide On-Demand Instance hibernation
     /// support.
     ///
     /// Default: `false`
-    require_hibernate_support: ?bool,
+    require_hibernate_support: ?bool = null,
 
     /// [Price protection] The price protection threshold for Spot Instances, as a
     /// percentage
@@ -370,13 +370,13 @@ pub const InstanceRequirements = struct {
     /// types that match your attributes, include one of these parameters and
     /// specify a high
     /// value, such as `999999`.
-    spot_max_price_percentage_over_lowest_price: ?i32,
+    spot_max_price_percentage_over_lowest_price: ?i32 = null,
 
     /// The minimum and maximum total local storage size for an instance type, in
     /// GB.
     ///
     /// Default: No minimum or maximum limits
-    total_local_storage_gb: ?TotalLocalStorageGBRequest,
+    total_local_storage_gb: ?TotalLocalStorageGBRequest = null,
 
     /// The minimum and maximum number of vCPUs for an instance type.
     v_cpu_count: VCpuCountRequest,

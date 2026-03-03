@@ -15,7 +15,7 @@ pub const InputStartingPositionConfiguration = struct {
     ///
     /// * `LAST_STOPPED_POINT` - Resume reading from where the application last
     ///   stopped reading.
-    input_starting_position: ?InputStartingPosition,
+    input_starting_position: ?InputStartingPosition = null,
 
     pub const json_field_names = .{
         .input_starting_position = "InputStartingPosition",

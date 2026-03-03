@@ -1,7 +1,7 @@
 /// The summary of the metadata form.
 pub const MetadataFormSummary = struct {
     /// The form name of the metadata form.
-    form_name: ?[]const u8,
+    form_name: ?[]const u8 = null,
 
     /// The type name of the metadata form.
     type_name: []const u8,

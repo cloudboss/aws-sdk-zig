@@ -13,7 +13,7 @@ pub const ArgoCdConfigRequest = struct {
 
     /// The Kubernetes namespace where Argo CD resources will be created. If not
     /// specified, the default namespace is used.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// Configuration for network access to the Argo CD capability's managed API
     /// server endpoint. By default, the Argo CD server is accessible via a public
@@ -21,13 +21,13 @@ pub const ArgoCdConfigRequest = struct {
     /// private connectivity from your VPCs. When VPC endpoints are configured,
     /// public access is blocked and the Argo CD server is only accessible through
     /// the specified VPC endpoints.
-    network_access: ?ArgoCdNetworkAccessConfigRequest,
+    network_access: ?ArgoCdNetworkAccessConfigRequest = null,
 
     /// A list of role mappings that define which IAM Identity CenterIAM; Identity
     /// Center users or groups have which Argo CD roles. Each mapping associates an
     /// Argo CD role (`ADMIN`, `EDITOR`, or `VIEWER`) with one or more IAM Identity
     /// CenterIAM; Identity Center identities.
-    rbac_role_mappings: ?[]const ArgoCdRoleMapping,
+    rbac_role_mappings: ?[]const ArgoCdRoleMapping = null,
 
     pub const json_field_names = .{
         .aws_idc = "awsIdc",

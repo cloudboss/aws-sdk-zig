@@ -13,7 +13,7 @@ pub const AwsEcsServiceDeploymentControllerDetails = struct {
     /// Amazon ECS service.
     ///
     /// Valid values: `ECS` | `CODE_DEPLOY` | `EXTERNAL`
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

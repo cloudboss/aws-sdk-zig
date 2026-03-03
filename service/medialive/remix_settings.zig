@@ -7,11 +7,11 @@ pub const RemixSettings = struct {
     channel_mappings: []const AudioChannelMapping,
 
     /// Number of input channels to be used.
-    channels_in: ?i32,
+    channels_in: ?i32 = null,
 
     /// Number of output channels to be produced.
     /// Valid values: 1, 2, 4, 6, 8
-    channels_out: ?i32,
+    channels_out: ?i32 = null,
 
     pub const json_field_names = .{
         .channel_mappings = "ChannelMappings",

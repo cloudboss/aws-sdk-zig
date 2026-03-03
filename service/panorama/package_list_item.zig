@@ -3,19 +3,19 @@ const aws = @import("aws");
 /// A package summary.
 pub const PackageListItem = struct {
     /// The package's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// When the package was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The package's ID.
-    package_id: ?[]const u8,
+    package_id: ?[]const u8 = null,
 
     /// The package's name.
-    package_name: ?[]const u8,
+    package_name: ?[]const u8 = null,
 
     /// The package's tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

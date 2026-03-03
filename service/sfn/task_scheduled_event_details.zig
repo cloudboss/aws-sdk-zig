@@ -3,7 +3,7 @@ const TaskCredentials = @import("task_credentials.zig").TaskCredentials;
 /// Contains details about a task scheduled during an execution.
 pub const TaskScheduledEventDetails = struct {
     /// The maximum allowed duration between two heartbeats for the task.
-    heartbeat_in_seconds: ?i64,
+    heartbeat_in_seconds: ?i64 = null,
 
     /// The JSON data passed to the resource referenced in a task state.
     /// Length constraints apply to the payload size, and are expressed as bytes in
@@ -20,10 +20,10 @@ pub const TaskScheduledEventDetails = struct {
     resource_type: []const u8,
 
     /// The credentials that Step Functions uses for the task.
-    task_credentials: ?TaskCredentials,
+    task_credentials: ?TaskCredentials = null,
 
     /// The maximum allowed duration of the task.
-    timeout_in_seconds: ?i64,
+    timeout_in_seconds: ?i64 = null,
 
     pub const json_field_names = .{
         .heartbeat_in_seconds = "heartbeatInSeconds",

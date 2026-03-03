@@ -4,19 +4,19 @@ const ReplicationType = @import("replication_type.zig").ReplicationType;
 /// Request to filter Source Servers list.
 pub const DescribeSourceServersRequestFilters = struct {
     /// Request to filter Source Servers list by application IDs.
-    application_i_ds: ?[]const []const u8,
+    application_i_ds: ?[]const []const u8 = null,
 
     /// Request to filter Source Servers list by archived.
-    is_archived: ?bool,
+    is_archived: ?bool = null,
 
     /// Request to filter Source Servers list by life cycle states.
-    life_cycle_states: ?[]const LifeCycleState,
+    life_cycle_states: ?[]const LifeCycleState = null,
 
     /// Request to filter Source Servers list by replication type.
-    replication_types: ?[]const ReplicationType,
+    replication_types: ?[]const ReplicationType = null,
 
     /// Request to filter Source Servers list by Source Server ID.
-    source_server_i_ds: ?[]const []const u8,
+    source_server_i_ds: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .application_i_ds = "applicationIDs",

@@ -4,10 +4,10 @@ const FleetAttributeCapability = @import("fleet_attribute_capability.zig").Fleet
 /// The amounts and attributes of fleets.
 pub const FleetCapabilities = struct {
     /// Amount capabilities of the fleet.
-    amounts: ?[]const FleetAmountCapability,
+    amounts: ?[]const FleetAmountCapability = null,
 
     /// Attribute capabilities of the fleet.
-    attributes: ?[]const FleetAttributeCapability,
+    attributes: ?[]const FleetAttributeCapability = null,
 
     pub const json_field_names = .{
         .amounts = "amounts",

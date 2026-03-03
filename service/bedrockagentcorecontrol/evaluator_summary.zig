@@ -9,7 +9,7 @@ pub const EvaluatorSummary = struct {
     created_at: i64,
 
     /// The description of the evaluator.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the evaluator.
     evaluator_arn: []const u8,
@@ -26,11 +26,11 @@ pub const EvaluatorSummary = struct {
 
     /// The evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that determines
     /// the scope of evaluation.
-    level: ?EvaluatorLevel,
+    level: ?EvaluatorLevel = null,
 
     /// Whether the evaluator is locked for modification due to being referenced by
     /// active online evaluation configurations.
-    locked_for_modification: ?bool,
+    locked_for_modification: ?bool = null,
 
     /// The current status of the evaluator.
     status: EvaluatorStatus,

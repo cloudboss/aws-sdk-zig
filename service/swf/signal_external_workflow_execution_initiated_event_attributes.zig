@@ -3,7 +3,7 @@
 pub const SignalExternalWorkflowExecutionInitiatedEventAttributes = struct {
     /// Data attached to the event that can be used by the decider in subsequent
     /// decision tasks.
-    control: ?[]const u8,
+    control: ?[]const u8 = null,
 
     /// The ID of the `DecisionTaskCompleted` event corresponding to the decision
     /// task that resulted in the
@@ -13,10 +13,10 @@ pub const SignalExternalWorkflowExecutionInitiatedEventAttributes = struct {
     decision_task_completed_event_id: i64 = 0,
 
     /// The input provided to the signal.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The `runId` of the external workflow execution to send the signal to.
-    run_id: ?[]const u8,
+    run_id: ?[]const u8 = null,
 
     /// The name of the signal.
     signal_name: []const u8,

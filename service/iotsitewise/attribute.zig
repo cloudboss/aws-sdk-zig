@@ -8,7 +8,7 @@ pub const Attribute = struct {
     /// create an asset. For more information, see [Updating attribute
     /// values](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-attribute-values.html) in the
     /// *IoT SiteWise User Guide*.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .default_value = "defaultValue",

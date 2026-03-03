@@ -6,7 +6,7 @@ pub const WhatsAppMessageTemplateSourceConfiguration = struct {
 
     /// The list of component mapping from WhatsApp template parameters to Message
     /// Template attributes.
-    components: ?[]const []const u8,
+    components: ?[]const []const u8 = null,
 
     /// The WhatsApp template ID.
     template_id: []const u8,

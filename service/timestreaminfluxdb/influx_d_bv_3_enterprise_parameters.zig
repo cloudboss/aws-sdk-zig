@@ -9,31 +9,31 @@ pub const InfluxDBv3EnterpriseParameters = struct {
     /// Defines how often the catalog synchronizes across cluster nodes.
     ///
     /// Default: 10s
-    catalog_sync_interval: ?Duration,
+    catalog_sync_interval: ?Duration = null,
 
     /// Specifies how often the compactor checks for new compaction work to perform.
     ///
     /// Default: 10s
-    compaction_check_interval: ?Duration,
+    compaction_check_interval: ?Duration = null,
 
     /// Specifies the amount of time that the compactor waits after finishing a
     /// compaction run to delete files marked as needing deletion during that
     /// compaction run.
     ///
     /// Default: 10m
-    compaction_cleanup_wait: ?Duration,
+    compaction_cleanup_wait: ?Duration = null,
 
     /// Specifies the duration of the first level of compaction (gen2). Later levels
     /// of compaction are multiples of this duration. This value should be equal to
     /// or greater than the gen1 duration.
     ///
     /// Default: 20m
-    compaction_gen_2_duration: ?Duration,
+    compaction_gen_2_duration: ?Duration = null,
 
     /// Sets the maximum number of files included in any compaction plan.
     ///
     /// Default: 500
-    compaction_max_num_files_per_plan: ?i32,
+    compaction_max_num_files_per_plan: ?i32 = null,
 
     /// Specifies a comma-separated list of multiples defining the duration of each
     /// level of compaction. The number of elements in the list determines the
@@ -41,63 +41,63 @@ pub const InfluxDBv3EnterpriseParameters = struct {
     /// first level (gen3); subsequent levels are multiples of the previous level.
     ///
     /// Default: 3,4,6,5
-    compaction_multipliers: ?[]const u8,
+    compaction_multipliers: ?[]const u8 = null,
 
     /// Specifies the soft limit for the number of rows per file that the compactor
     /// writes. The compactor may write more rows than this limit.
     ///
     /// Default: 1000000
-    compaction_row_limit: ?i32,
+    compaction_row_limit: ?i32 = null,
 
     /// Provides custom configuration to DataFusion as a comma-separated list of
     /// key:value pairs.
-    data_fusion_config: ?[]const u8,
+    data_fusion_config: ?[]const u8 = null,
 
     /// When multiple parquet files are required in a sorted way (deduplication for
     /// example), specifies the maximum fanout.
     ///
     /// Default: 1000
-    data_fusion_max_parquet_fanout: ?i32,
+    data_fusion_max_parquet_fanout: ?i32 = null,
 
     /// Sets the maximum number of DataFusion runtime threads to use.
-    data_fusion_num_threads: ?i32,
+    data_fusion_num_threads: ?i32 = null,
 
     /// Disables the LIFO slot of the DataFusion runtime.
-    data_fusion_runtime_disable_lifo_slot: ?bool,
+    data_fusion_runtime_disable_lifo_slot: ?bool = null,
 
     /// Sets the number of scheduler ticks after which the scheduler of the
     /// DataFusion tokio runtime polls for external events–for example: timers, I/O.
-    data_fusion_runtime_event_interval: ?i32,
+    data_fusion_runtime_event_interval: ?i32 = null,
 
     /// Sets the number of scheduler ticks after which the scheduler of the
     /// DataFusion runtime polls the global task queue.
-    data_fusion_runtime_global_queue_interval: ?i32,
+    data_fusion_runtime_global_queue_interval: ?i32 = null,
 
     /// Specifies the limit for additional threads spawned by the DataFusion
     /// runtime.
-    data_fusion_runtime_max_blocking_threads: ?i32,
+    data_fusion_runtime_max_blocking_threads: ?i32 = null,
 
     /// Configures the maximum number of events processed per tick by the tokio
     /// DataFusion runtime.
-    data_fusion_runtime_max_io_events_per_tick: ?i32,
+    data_fusion_runtime_max_io_events_per_tick: ?i32 = null,
 
     /// Sets a custom timeout for a thread in the blocking pool of the tokio
     /// DataFusion runtime.
-    data_fusion_runtime_thread_keep_alive: ?Duration,
+    data_fusion_runtime_thread_keep_alive: ?Duration = null,
 
     /// Sets the thread priority for tokio DataFusion runtime workers.
     ///
     /// Default: 10
-    data_fusion_runtime_thread_priority: ?i32,
+    data_fusion_runtime_thread_priority: ?i32 = null,
 
     /// Specifies the DataFusion tokio runtime type.
     ///
     /// Default: multi-thread
-    data_fusion_runtime_type: ?DataFusionRuntimeType,
+    data_fusion_runtime_type: ?DataFusionRuntimeType = null,
 
     /// Uses a cached parquet loader when reading parquet files from the object
     /// store.
-    data_fusion_use_cached_parquet_loader: ?bool,
+    data_fusion_use_cached_parquet_loader: ?bool = null,
 
     /// Specifies if the compactor instance should be a standalone instance or not.
     dedicated_compactor: bool,
@@ -105,35 +105,35 @@ pub const InfluxDBv3EnterpriseParameters = struct {
     /// Specifies the grace period before permanently deleting data.
     ///
     /// Default: 24h
-    delete_grace_period: ?Duration,
+    delete_grace_period: ?Duration = null,
 
     /// Disables the in-memory Parquet cache. By default, the cache is enabled.
-    disable_parquet_mem_cache: ?bool,
+    disable_parquet_mem_cache: ?bool = null,
 
     /// Specifies the interval to evict expired entries from the distinct value
     /// cache, expressed as a human-readable duration–for example: 20s, 1m, 1h.
     ///
     /// Default: 10s
-    distinct_cache_eviction_interval: ?Duration,
+    distinct_cache_eviction_interval: ?Duration = null,
 
     /// Disables populating the distinct value cache from historical data. If
     /// disabled, the cache is still populated with data from the write-ahead log
     /// (WAL).
-    distinct_value_cache_disable_from_history: ?bool,
+    distinct_value_cache_disable_from_history: ?bool = null,
 
     /// Specifies the size of memory pool used during query execution. Can be given
     /// as absolute value in bytes or as a percentage of the total available
     /// memory–for example: 8000000000 or 10%.
     ///
     /// Default: 20%
-    exec_mem_pool_bytes: ?PercentOrAbsoluteLong,
+    exec_mem_pool_bytes: ?PercentOrAbsoluteLong = null,
 
     /// Specifies the threshold for the internal memory buffer. Supports either a
     /// percentage (portion of available memory) or absolute value in MB–for
     /// example: 70% or 100
     ///
     /// Default: 70%
-    force_snapshot_mem_threshold: ?PercentOrAbsoluteLong,
+    force_snapshot_mem_threshold: ?PercentOrAbsoluteLong = null,
 
     /// Specifies the duration that Parquet files are arranged into. Data timestamps
     /// land each row into a file of this duration. Supported durations are 1m, 5m,
@@ -141,17 +141,17 @@ pub const InfluxDBv3EnterpriseParameters = struct {
     /// can merge into larger generations.
     ///
     /// Default: 10m
-    gen_1_duration: ?Duration,
+    gen_1_duration: ?Duration = null,
 
     /// Specifies how far back to look when creating generation 1 Parquet files.
     ///
     /// Default: 24h
-    gen_1_lookback_duration: ?Duration,
+    gen_1_lookback_duration: ?Duration = null,
 
     /// Sets the default duration for hard deletion of data.
     ///
     /// Default: 90d
-    hard_delete_default_duration: ?Duration,
+    hard_delete_default_duration: ?Duration = null,
 
     /// Specifies number of instances in the DbCluster which can both ingest and
     /// query.
@@ -161,65 +161,65 @@ pub const InfluxDBv3EnterpriseParameters = struct {
     /// expressed as a human-readable duration–for example: 20s, 1m, 1h.
     ///
     /// Default: 10s
-    last_cache_eviction_interval: ?Duration,
+    last_cache_eviction_interval: ?Duration = null,
 
     /// Disables populating the last-N-value cache from historical data. If
     /// disabled, the cache is still populated with data from the write-ahead log
     /// (WAL).
-    last_value_cache_disable_from_history: ?bool,
+    last_value_cache_disable_from_history: ?bool = null,
 
     /// Sets the filter directive for logs.
-    log_filter: ?[]const u8,
+    log_filter: ?[]const u8 = null,
 
     /// Defines the message format for logs.
     ///
     /// Default: full
-    log_format: ?LogFormats,
+    log_format: ?LogFormats = null,
 
     /// Specifies the maximum size of HTTP requests.
     ///
     /// Default: 10485760
-    max_http_request_size: ?i64,
+    max_http_request_size: ?i64 = null,
 
     /// Sets the interval to check if the in-memory Parquet cache needs to be
     /// pruned.
     ///
     /// Default: 1s
-    parquet_mem_cache_prune_interval: ?Duration,
+    parquet_mem_cache_prune_interval: ?Duration = null,
 
     /// Specifies the percentage of entries to prune during a prune operation on the
     /// in-memory Parquet cache.
     ///
     /// Default: 0.1
-    parquet_mem_cache_prune_percentage: ?f32,
+    parquet_mem_cache_prune_percentage: ?f32 = null,
 
     /// Specifies the time window for caching recent Parquet files in memory.
     ///
     /// Default: 5h
-    parquet_mem_cache_query_path_duration: ?Duration,
+    parquet_mem_cache_query_path_duration: ?Duration = null,
 
     /// Specifies the size of the in-memory Parquet cache in megabytes or percentage
     /// of total available memory.
     ///
     /// Default: 20%
-    parquet_mem_cache_size: ?PercentOrAbsoluteLong,
+    parquet_mem_cache_size: ?PercentOrAbsoluteLong = null,
 
     /// Specifies the interval to prefetch into the Parquet cache during compaction.
     ///
     /// Default: 3d
-    preemptive_cache_age: ?Duration,
+    preemptive_cache_age: ?Duration = null,
 
     /// Limits the number of Parquet files a query can access. If a query attempts
     /// to read more than this limit, InfluxDB 3 returns an error.
     ///
     /// Default: 432
-    query_file_limit: ?i32,
+    query_file_limit: ?i32 = null,
 
     /// Defines the size of the query log. Up to this many queries remain in the log
     /// before older queries are evicted to make room for new ones.
     ///
     /// Default: 1000
-    query_log_size: ?i32,
+    query_log_size: ?i32 = null,
 
     /// Specifies number of instances in the DbCluster which can only query.
     query_only_instances: i32,
@@ -228,53 +228,53 @@ pub const InfluxDBv3EnterpriseParameters = struct {
     /// nodes.
     ///
     /// Default: 250ms
-    replication_interval: ?Duration,
+    replication_interval: ?Duration = null,
 
     /// The interval at which retention policies are checked and enforced. Enter as
     /// a human-readable time–for example: 30m or 1h.
     ///
     /// Default: 30m
-    retention_check_interval: ?Duration,
+    retention_check_interval: ?Duration = null,
 
     /// Specifies the number of snapshotted WAL files to retain in the object store.
     /// Flushing the WAL files does not clear the WAL files immediately; they are
     /// deleted when the number of snapshotted WAL files exceeds this number.
     ///
     /// Default: 300
-    snapshotted_wal_files_to_keep: ?i32,
+    snapshotted_wal_files_to_keep: ?i32 = null,
 
     /// Limits the concurrency level for table index cache operations.
     ///
     /// Default: 8
-    table_index_cache_concurrency_limit: ?i32,
+    table_index_cache_concurrency_limit: ?i32 = null,
 
     /// Specifies the maximum number of entries in the table index cache.
     ///
     /// Default: 1000
-    table_index_cache_max_entries: ?i32,
+    table_index_cache_max_entries: ?i32 = null,
 
     /// Specifies the maximum number of write requests that can be buffered before a
     /// flush must be executed and succeed.
     ///
     /// Default: 100000
-    wal_max_write_buffer_size: ?i32,
+    wal_max_write_buffer_size: ?i32 = null,
 
     /// Concurrency limit during WAL replay. Setting this number too high can lead
     /// to OOM. The default is dynamically determined.
     ///
     /// Default: max(num_cpus, 10)
-    wal_replay_concurrency_limit: ?i32,
+    wal_replay_concurrency_limit: ?i32 = null,
 
     /// Determines whether WAL replay should fail when encountering errors.
     ///
     /// Default: false
-    wal_replay_fail_on_error: ?bool,
+    wal_replay_fail_on_error: ?bool = null,
 
     /// Defines the number of WAL files to attempt to remove in a snapshot. This,
     /// multiplied by the interval, determines how often snapshots are taken.
     ///
     /// Default: 600
-    wal_snapshot_size: ?i32,
+    wal_snapshot_size: ?i32 = null,
 
     pub const json_field_names = .{
         .catalog_sync_interval = "catalogSyncInterval",

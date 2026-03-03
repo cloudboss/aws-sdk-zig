@@ -11,7 +11,7 @@ pub const FieldSeriesItem = struct {
 
     /// The options that determine the presentation of line series associated to the
     /// field.
-    settings: ?LineChartSeriesSettings,
+    settings: ?LineChartSeriesSettings = null,
 
     pub const json_field_names = .{
         .axis_binding = "AxisBinding",

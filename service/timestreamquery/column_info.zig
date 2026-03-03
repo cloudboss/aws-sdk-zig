@@ -7,7 +7,7 @@ pub const ColumnInfo = struct {
     /// The name of the result set column. The name of the result set is available
     /// for
     /// columns of all data types except for arrays.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The data type of the result set column. The data type can be a scalar or
     /// complex.

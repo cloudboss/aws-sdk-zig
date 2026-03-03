@@ -8,10 +8,10 @@
 /// [Dimensions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension) in the *Amazon CloudWatch User Guide*.
 pub const CloudWatchMetricsDimension = struct {
     /// The name of the CloudWatch dimension.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The value of the CloudWatch dimension.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

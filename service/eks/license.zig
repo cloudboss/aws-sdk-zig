@@ -1,11 +1,11 @@
 /// An EKS Anywhere license associated with a subscription.
 pub const License = struct {
     /// An id associated with an EKS Anywhere subscription license.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// An optional license token that can be used for extended support
     /// verification.
-    token: ?[]const u8,
+    token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",

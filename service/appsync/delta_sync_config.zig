@@ -4,7 +4,7 @@ pub const DeltaSyncConfig = struct {
     base_table_ttl: i64 = 0,
 
     /// The Delta Sync table name.
-    delta_sync_table_name: ?[]const u8,
+    delta_sync_table_name: ?[]const u8 = null,
 
     /// The number of minutes that a Delta Sync log entry is stored in the Delta
     /// Sync

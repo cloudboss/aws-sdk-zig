@@ -7,18 +7,18 @@ pub const VpcConfiguration = struct {
     /// following type is available:
     ///
     /// * IP_V4 – IP address version 4
-    ip_address_type: ?IPAddressType,
+    ip_address_type: ?IPAddressType = null,
 
     /// The unique identifier of the VPC security group applied to the VPC endpoint
     /// ENI for the cluster.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The identifier of the subnet that the Privatelink VPC endpoint uses to
     /// connect to the cluster.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     /// The identifier of the VPC endpoint.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ip_address_type = "ipAddressType",

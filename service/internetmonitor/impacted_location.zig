@@ -20,10 +20,10 @@ pub const ImpactedLocation = struct {
     /// Amazon Web Services network issues
     /// or internet issues. Internet issues are typically a problem with a network
     /// provider, like an internet service provider (ISP).
-    caused_by: ?NetworkImpairment,
+    caused_by: ?NetworkImpairment = null,
 
     /// The name of the city where the health event is located.
-    city: ?[]const u8,
+    city: ?[]const u8 = null,
 
     /// The name of the country where the health event is located.
     country: []const u8,
@@ -31,20 +31,20 @@ pub const ImpactedLocation = struct {
     /// The country code where the health event is located. The ISO 3166-2 codes for
     /// the
     /// country is provided, when available.
-    country_code: ?[]const u8,
+    country_code: ?[]const u8 = null,
 
     /// The calculated health at a specific location.
-    internet_health: ?InternetHealth,
+    internet_health: ?InternetHealth = null,
 
     /// The IPv4 prefixes at the client location that was impacted by the health
     /// event.
-    ipv_4_prefixes: ?[]const []const u8,
+    ipv_4_prefixes: ?[]const []const u8 = null,
 
     /// The latitude where the health event is located.
-    latitude: ?f64,
+    latitude: ?f64 = null,
 
     /// The longitude where the health event is located.
-    longitude: ?f64,
+    longitude: ?f64 = null,
 
     /// The metro area where the health event is located.
     ///
@@ -53,10 +53,10 @@ pub const ImpactedLocation = struct {
     /// In non-US countries, this is a second-level subdivision. For example, in the
     /// United Kingdom, it could be
     /// a county, a London borough, a unitary authority, council area, and so on.
-    metro: ?[]const u8,
+    metro: ?[]const u8 = null,
 
     /// The service location where the health event is located.
-    service_location: ?[]const u8,
+    service_location: ?[]const u8 = null,
 
     /// The status of the health event at an impacted location.
     status: HealthEventStatus,
@@ -66,12 +66,12 @@ pub const ImpactedLocation = struct {
     /// states in most countries (including the United States). For United Kingdom,
     /// it maps to a country (England,
     /// Scotland, Wales) or province (Northern Ireland).
-    subdivision: ?[]const u8,
+    subdivision: ?[]const u8 = null,
 
     /// The subdivision code where the health event is located. The ISO 3166-2 codes
     /// for
     /// country subdivisions is provided, when available.
-    subdivision_code: ?[]const u8,
+    subdivision_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .as_name = "ASName",

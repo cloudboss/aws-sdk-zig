@@ -3,22 +3,22 @@
 /// inbound and outbound calling and text messaging.
 pub const PhoneNumberCapabilities = struct {
     /// Allows or denies inbound calling for the specified phone number.
-    inbound_call: ?bool,
+    inbound_call: ?bool = null,
 
     /// Allows or denies inbound MMS messaging for the specified phone number.
-    inbound_mms: ?bool,
+    inbound_mms: ?bool = null,
 
     /// Allows or denies inbound SMS messaging for the specified phone number.
-    inbound_sms: ?bool,
+    inbound_sms: ?bool = null,
 
     /// Allows or denies outbound calling for the specified phone number.
-    outbound_call: ?bool,
+    outbound_call: ?bool = null,
 
     /// Allows or denies outbound MMS messaging for the specified phone number.
-    outbound_mms: ?bool,
+    outbound_mms: ?bool = null,
 
     /// Allows or denies outbound SMS messaging for the specified phone number.
-    outbound_sms: ?bool,
+    outbound_sms: ?bool = null,
 
     pub const json_field_names = .{
         .inbound_call = "InboundCall",

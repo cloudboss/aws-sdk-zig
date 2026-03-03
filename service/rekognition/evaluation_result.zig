@@ -8,10 +8,10 @@ pub const EvaluationResult = struct {
     /// indicates better precision
     /// and recall performance. A lower score indicates that precision, recall, or
     /// both are performing poorly.
-    f1_score: ?f32,
+    f1_score: ?f32 = null,
 
     /// The S3 bucket that contains the training summary.
-    summary: ?Summary,
+    summary: ?Summary = null,
 
     pub const json_field_names = .{
         .f1_score = "F1Score",

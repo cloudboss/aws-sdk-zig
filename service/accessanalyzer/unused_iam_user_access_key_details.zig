@@ -8,7 +8,7 @@ pub const UnusedIamUserAccessKeyDetails = struct {
     access_key_id: []const u8,
 
     /// The time at which the access key was last accessed.
-    last_accessed: ?i64,
+    last_accessed: ?i64 = null,
 
     pub const json_field_names = .{
         .access_key_id = "accessKeyId",

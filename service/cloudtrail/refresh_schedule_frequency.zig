@@ -10,7 +10,7 @@ pub const RefreshScheduleFrequency = struct {
     /// For custom dashboards, the unit can be `HOURS` or `DAYS`.
     ///
     /// For the Highlights dashboard, the `Unit` must be `HOURS`.
-    unit: ?RefreshScheduleFrequencyUnit,
+    unit: ?RefreshScheduleFrequencyUnit = null,
 
     /// The value for the refresh schedule.
     ///
@@ -20,7 +20,7 @@ pub const RefreshScheduleFrequency = struct {
     /// For custom dashboards, the only valid value when the unit is `DAYS` is `1`.
     ///
     /// For the Highlights dashboard, the `Value` must be `6`.
-    value: ?i32,
+    value: ?i32 = null,
 
     pub const json_field_names = .{
         .unit = "Unit",

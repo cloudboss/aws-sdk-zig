@@ -30,7 +30,7 @@ pub const OrganizationalUnitScope = struct {
     /// `OrganizationalUnitScope$ExcludeSpecifiedOrganizationalUnits` is set to
     /// `false`, then the Firewall Manager administrator can only apply policies to
     /// the OUs in this list.
-    organizational_units: ?[]const []const u8,
+    organizational_units: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .all_organizational_units_enabled = "AllOrganizationalUnitsEnabled",

@@ -25,7 +25,7 @@ pub const Policy = struct {
     /// A human-readable description of the policy's purpose and functionality.
     /// Limited to 4,096 characters, this helps administrators understand and manage
     /// the policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The customer-assigned immutable name for the policy. This human-readable
     /// identifier must be unique within the account and cannot exceed 48

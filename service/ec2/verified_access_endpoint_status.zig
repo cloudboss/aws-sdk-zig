@@ -3,8 +3,8 @@ const VerifiedAccessEndpointStatusCode = @import("verified_access_endpoint_statu
 /// Describes the status of a Verified Access endpoint.
 pub const VerifiedAccessEndpointStatus = struct {
     /// The status code of the Verified Access endpoint.
-    code: ?VerifiedAccessEndpointStatusCode,
+    code: ?VerifiedAccessEndpointStatusCode = null,
 
     /// The status message of the Verified Access endpoint.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

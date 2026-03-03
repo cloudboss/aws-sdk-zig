@@ -9,7 +9,7 @@ const SnoozeActionConfiguration = @import("snooze_action_configuration.zig").Sno
 /// alarm.
 pub const CustomerAction = struct {
     /// Contains the configuration information of an acknowledge action.
-    acknowledge_action_configuration: ?AcknowledgeActionConfiguration,
+    acknowledge_action_configuration: ?AcknowledgeActionConfiguration = null,
 
     /// The name of the action. The action name can be one of the following values:
     ///
@@ -28,19 +28,19 @@ pub const CustomerAction = struct {
     ///
     /// For more information, see the
     /// [AlarmState](https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_AlarmState.html) API.
-    action_name: ?CustomerActionName,
+    action_name: ?CustomerActionName = null,
 
     /// Contains the configuration information of a disable action.
-    disable_action_configuration: ?DisableActionConfiguration,
+    disable_action_configuration: ?DisableActionConfiguration = null,
 
     /// Contains the configuration information of an enable action.
-    enable_action_configuration: ?EnableActionConfiguration,
+    enable_action_configuration: ?EnableActionConfiguration = null,
 
     /// Contains the configuration information of a reset action.
-    reset_action_configuration: ?ResetActionConfiguration,
+    reset_action_configuration: ?ResetActionConfiguration = null,
 
     /// Contains the configuration information of a snooze action.
-    snooze_action_configuration: ?SnoozeActionConfiguration,
+    snooze_action_configuration: ?SnoozeActionConfiguration = null,
 
     pub const json_field_names = .{
         .acknowledge_action_configuration = "acknowledgeActionConfiguration",

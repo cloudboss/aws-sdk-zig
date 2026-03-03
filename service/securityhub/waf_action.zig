@@ -17,7 +17,7 @@ pub const WafAction = struct {
     /// the web request based on the remaining rules in the web ACL. You can't
     /// specify
     /// `COUNT` for the default action for a web ACL.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

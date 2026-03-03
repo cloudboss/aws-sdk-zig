@@ -3,12 +3,12 @@ const Language = @import("language.zig").Language;
 
 /// Optional configuration for audio language settings
 pub const AudioLanguageConfiguration = struct {
-    generative_output_language: ?AudioGenerativeOutputLanguage,
+    generative_output_language: ?AudioGenerativeOutputLanguage = null,
 
     /// Enable multiple language identification in audio
-    identify_multiple_languages: ?bool,
+    identify_multiple_languages: ?bool = null,
 
-    input_languages: ?[]const Language,
+    input_languages: ?[]const Language = null,
 
     pub const json_field_names = .{
         .generative_output_language = "generativeOutputLanguage",

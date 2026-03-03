@@ -5,13 +5,13 @@ const InputResolution = @import("input_resolution.zig").InputResolution;
 /// Placeholder documentation for InputSpecification
 pub const InputSpecification = struct {
     /// Input codec
-    codec: ?InputCodec,
+    codec: ?InputCodec = null,
 
     /// Maximum input bitrate, categorized coarsely
-    maximum_bitrate: ?InputMaximumBitrate,
+    maximum_bitrate: ?InputMaximumBitrate = null,
 
     /// Input resolution, categorized coarsely
-    resolution: ?InputResolution,
+    resolution: ?InputResolution = null,
 
     pub const json_field_names = .{
         .codec = "Codec",

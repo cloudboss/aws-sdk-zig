@@ -11,13 +11,13 @@ pub const RecommendationData = struct {
     recommendation_id: []const u8,
 
     /// The relevance level of the recommendation.
-    relevance_level: ?RelevanceLevel,
+    relevance_level: ?RelevanceLevel = null,
 
     /// The relevance score of the recommendation.
     relevance_score: f64 = 0,
 
     /// The type of recommendation.
-    @"type": ?RecommendationType,
+    @"type": ?RecommendationType = null,
 
     pub const json_field_names = .{
         .document = "document",

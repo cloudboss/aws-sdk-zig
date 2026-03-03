@@ -39,13 +39,13 @@ pub const ContainerServiceStateDetail = struct {
     ///
     /// * `UNKNOWN_ERROR` - An error was experienced when your container service
     /// was being created.
-    code: ?ContainerServiceStateDetailCode,
+    code: ?ContainerServiceStateDetailCode = null,
 
     /// A message that provides more information for the state code.
     ///
     /// The state detail is populated only when a container service is in a
     /// `PENDING`, `DEPLOYING`, or `UPDATING` state.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

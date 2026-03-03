@@ -9,12 +9,12 @@
 /// (1 MiB or 1,048,576 bytes).
 pub const MessageAttributeValue = struct {
     /// Not implemented. Reserved for future use.
-    binary_list_values: ?[]const []const u8,
+    binary_list_values: ?[]const []const u8 = null,
 
     /// Binary type attributes can store any binary data, such as compressed data,
     /// encrypted
     /// data, or images.
-    binary_value: ?[]const u8,
+    binary_value: ?[]const u8 = null,
 
     /// Amazon SQS supports the following logical data types: `String`,
     /// `Number`, and `Binary`. For the `Number` data type,
@@ -27,12 +27,12 @@ pub const MessageAttributeValue = struct {
     data_type: []const u8,
 
     /// Not implemented. Reserved for future use.
-    string_list_values: ?[]const []const u8,
+    string_list_values: ?[]const []const u8 = null,
 
     /// Strings are Unicode with UTF-8 binary encoding. For a list of code values,
     /// see [ASCII Printable
     /// Characters](http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
-    string_value: ?[]const u8,
+    string_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .binary_list_values = "BinaryListValues",

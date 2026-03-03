@@ -8,23 +8,23 @@ const SegmentType = @import("segment_type.zig").SegmentType;
 /// is returned by GetSegmentDetection.
 pub const SegmentDetection = struct {
     /// The duration of a video segment, expressed in frames.
-    duration_frames: ?i64,
+    duration_frames: ?i64 = null,
 
     /// The duration of the detected segment in milliseconds.
-    duration_millis: ?i64,
+    duration_millis: ?i64 = null,
 
     /// The duration of the timecode for the detected segment in SMPTE format.
-    duration_smpte: ?[]const u8,
+    duration_smpte: ?[]const u8 = null,
 
     /// The frame number at the end of a video segment, using a frame index that
     /// starts with 0.
-    end_frame_number: ?i64,
+    end_frame_number: ?i64 = null,
 
     /// The frame-accurate SMPTE timecode, from the start of a video, for the end of
     /// a detected segment.
     /// `EndTimecode` is in *HH:MM:SS:fr* format
     /// (and *;fr* for drop frame-rates).
-    end_timecode_smpte: ?[]const u8,
+    end_timecode_smpte: ?[]const u8 = null,
 
     /// The end time of the detected segment, in milliseconds, from the start of the
     /// video.
@@ -33,17 +33,17 @@ pub const SegmentDetection = struct {
 
     /// If the segment is a shot detection, contains information about the shot
     /// detection.
-    shot_segment: ?ShotSegment,
+    shot_segment: ?ShotSegment = null,
 
     /// The frame number of the start of a video segment, using a frame index that
     /// starts with 0.
-    start_frame_number: ?i64,
+    start_frame_number: ?i64 = null,
 
     /// The frame-accurate SMPTE timecode, from the start of a video, for the start
     /// of a detected segment.
     /// `StartTimecode` is in *HH:MM:SS:fr* format
     /// (and *;fr* for drop frame-rates).
-    start_timecode_smpte: ?[]const u8,
+    start_timecode_smpte: ?[]const u8 = null,
 
     /// The start time of the detected segment in milliseconds from the start of the
     /// video. This value
@@ -54,10 +54,10 @@ pub const SegmentDetection = struct {
 
     /// If the segment is a technical cue, contains information about the technical
     /// cue.
-    technical_cue_segment: ?TechnicalCueSegment,
+    technical_cue_segment: ?TechnicalCueSegment = null,
 
     /// The type of the segment. Valid values are `TECHNICAL_CUE` and `SHOT`.
-    @"type": ?SegmentType,
+    @"type": ?SegmentType = null,
 
     pub const json_field_names = .{
         .duration_frames = "DurationFrames",

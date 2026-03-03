@@ -6,7 +6,7 @@ const QuickResponseStatus = @import("quick_response_status.zig").QuickResponseSt
 pub const QuickResponseSummary = struct {
     /// The Amazon Connect contact channels this quick response applies to. The
     /// supported contact channel types include `Chat`.
-    channels: ?[]const []const u8,
+    channels: ?[]const []const u8 = null,
 
     /// The media type of the quick response content.
     ///
@@ -20,10 +20,10 @@ pub const QuickResponseSummary = struct {
     created_time: i64,
 
     /// The description of the quick response.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether the quick response is active.
-    is_active: ?bool,
+    is_active: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the knowledge base.
     knowledge_base_arn: []const u8,
@@ -33,7 +33,7 @@ pub const QuickResponseSummary = struct {
 
     /// The Amazon Resource Name (ARN) of the user who last updated the quick
     /// response data.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The timestamp when the quick response summary was last modified.
     last_modified_time: i64,
@@ -51,7 +51,7 @@ pub const QuickResponseSummary = struct {
     status: QuickResponseStatus,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .channels = "channels",

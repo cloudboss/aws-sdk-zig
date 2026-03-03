@@ -19,47 +19,47 @@ pub const RxNormEntity = struct {
     /// InferRxNorm are `DOSAGE`, `DURATION`, `FORM`,
     /// `FREQUENCY`, `RATE`, `ROUTE_OR_MODE`, and
     /// `STRENGTH`.
-    attributes: ?[]const RxNormAttribute,
+    attributes: ?[]const RxNormAttribute = null,
 
     /// The 0-based character offset in the input text that shows where the entity
     /// begins. The
     /// offset returns the UTF-8 code point in the string.
-    begin_offset: ?i32,
+    begin_offset: ?i32 = null,
 
     /// The category of the entity. The recognized categories are `GENERIC` or
     /// `BRAND_NAME`.
-    category: ?RxNormEntityCategory,
+    category: ?RxNormEntityCategory = null,
 
     /// The 0-based character offset in the input text that shows where the entity
     /// ends. The
     /// offset returns the UTF-8 code point in the string.
-    end_offset: ?i32,
+    end_offset: ?i32 = null,
 
     /// The numeric identifier for the entity. This is a monotonically increasing id
     /// unique within
     /// this response rather than a global unique identifier.
-    id: ?i32,
+    id: ?i32 = null,
 
     /// The RxNorm concepts that the entity could refer to, along with a score
     /// indicating the
     /// likelihood of the match.
-    rx_norm_concepts: ?[]const RxNormConcept,
+    rx_norm_concepts: ?[]const RxNormConcept = null,
 
     /// The level of confidence that Amazon Comprehend Medical has in the accuracy
     /// of the detected
     /// entity.
-    score: ?f32,
+    score: ?f32 = null,
 
     /// The segment of input text extracted from which the entity was detected.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// Contextual information for the entity.
-    traits: ?[]const RxNormTrait,
+    traits: ?[]const RxNormTrait = null,
 
     /// Describes the specific type of entity. For InferRxNorm, the recognized
     /// entity type is
     /// `MEDICATION`.
-    @"type": ?RxNormEntityType,
+    @"type": ?RxNormEntityType = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

@@ -3,7 +3,7 @@
 /// output table, and whether the values of the column should be hashed.
 pub const OutputAttribute = struct {
     /// Enables the ability to hash the column values in the output.
-    hashed: ?bool,
+    hashed: ?bool = null,
 
     /// A name of a column to be written to the output. This must be an `InputField`
     /// name in the schema mapping.

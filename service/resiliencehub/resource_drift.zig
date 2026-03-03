@@ -12,19 +12,19 @@ pub const ResourceDrift = struct {
     /// Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the
     /// *Amazon Web Services General Reference* guide.
-    app_arn: ?[]const u8,
+    app_arn: ?[]const u8 = null,
 
     /// Version of the application whose resources have drifted.
-    app_version: ?[]const u8,
+    app_version: ?[]const u8 = null,
 
     /// Indicates if the resource was added or removed.
-    diff_type: ?DifferenceType,
+    diff_type: ?DifferenceType = null,
 
     /// Reference identifier of the resource drift.
-    reference_id: ?[]const u8,
+    reference_id: ?[]const u8 = null,
 
     /// Identifier of the drifted resource.
-    resource_identifier: ?ResourceIdentifier,
+    resource_identifier: ?ResourceIdentifier = null,
 
     pub const json_field_names = .{
         .app_arn = "appArn",

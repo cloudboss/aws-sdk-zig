@@ -7,7 +7,7 @@ pub const EsamSignalProcessingNotification = struct {
     /// SCTE-35 markers at the insertion points you specify in the XML document, you
     /// must also enable SCTE-35 ESAM. Note that you can either specify an ESAM XML
     /// document or enable SCTE-35 passthrough. You can't do both.
-    scc_xml: ?[]const u8,
+    scc_xml: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .scc_xml = "SccXml",

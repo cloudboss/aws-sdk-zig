@@ -11,8 +11,8 @@ pub const PolicyGroup = struct {
     /// about IDs, see
     /// [IAM
     /// identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in the *IAM User Guide*.
-    group_id: ?[]const u8,
+    group_id: ?[]const u8 = null,
 
     /// The name (friendly name, not ARN) identifying the group.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 };

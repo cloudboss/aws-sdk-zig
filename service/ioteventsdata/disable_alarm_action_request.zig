@@ -6,10 +6,10 @@ pub const DisableAlarmActionRequest = struct {
     /// The value of the key used as a filter to select only the alarms associated
     /// with the
     /// [key](https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).
-    key_value: ?[]const u8,
+    key_value: ?[]const u8 = null,
 
     /// The note that you can leave when you disable the alarm.
-    note: ?[]const u8,
+    note: ?[]const u8 = null,
 
     /// The request ID. Each ID must be unique within each batch.
     request_id: []const u8,

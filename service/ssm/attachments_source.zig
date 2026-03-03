@@ -7,10 +7,10 @@ pub const AttachmentsSource = struct {
     /// The key of a key-value pair that identifies the location of an attachment to
     /// a
     /// document.
-    key: ?AttachmentsSourceKey,
+    key: ?AttachmentsSourceKey = null,
 
     /// The name of the document attachment file.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The value of a key-value pair that identifies the location of an attachment
     /// to a document.
@@ -42,7 +42,7 @@ pub const AttachmentsSource = struct {
     /// `"Values": [
     /// "arn:aws:ssm:us-east-2:111122223333:document/OtherAccountDocument/3/their-file.py"
     /// ]`
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

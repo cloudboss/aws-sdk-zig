@@ -16,31 +16,31 @@ const TimeGranularity = @import("time_granularity.zig").TimeGranularity;
 /// The definition for a `TopicIRFilterOption`.
 pub const TopicIRFilterOption = struct {
     /// The agg metrics for the `TopicIRFilterOption`.
-    agg_metrics: ?[]const FilterAggMetrics,
+    agg_metrics: ?[]const FilterAggMetrics = null,
 
     /// The aggregation for the `TopicIRFilterOption`.
-    aggregation: ?AggType,
+    aggregation: ?AggType = null,
 
     /// The aggregation function parameters for the `TopicIRFilterOption`.
-    aggregation_function_parameters: ?[]const aws.map.StringMapEntry,
+    aggregation_function_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The `AggregationPartitionBy` for the `TopicIRFilterOption`.
-    aggregation_partition_by: ?[]const AggregationPartitionBy,
+    aggregation_partition_by: ?[]const AggregationPartitionBy = null,
 
     /// The anchor for the `TopicIRFilterOption`.
-    anchor: ?Anchor,
+    anchor: ?Anchor = null,
 
     /// The constant for the `TopicIRFilterOption`.
-    constant: ?TopicConstantValue,
+    constant: ?TopicConstantValue = null,
 
     /// The filter class for the `TopicIRFilterOption`.
-    filter_class: ?FilterClass,
+    filter_class: ?FilterClass = null,
 
     /// The filter type for the `TopicIRFilterOption`.
-    filter_type: ?TopicIRFilterType,
+    filter_type: ?TopicIRFilterType = null,
 
     /// The function for the `TopicIRFilterOption`.
-    function: ?TopicIRFilterFunction,
+    function: ?TopicIRFilterFunction = null,
 
     /// The inclusive for the `TopicIRFilterOption`.
     inclusive: bool = false,
@@ -49,25 +49,25 @@ pub const TopicIRFilterOption = struct {
     inverse: bool = false,
 
     /// The last next offset for the `TopicIRFilterOption`.
-    last_next_offset: ?TopicConstantValue,
+    last_next_offset: ?TopicConstantValue = null,
 
     /// The null filter for the `TopicIRFilterOption`.
-    null_filter: ?NullFilterOption,
+    null_filter: ?NullFilterOption = null,
 
     /// The operand field for the `TopicIRFilterOption`.
-    operand_field: ?Identifier,
+    operand_field: ?Identifier = null,
 
     /// The range for the `TopicIRFilterOption`.
-    range: ?TopicConstantValue,
+    range: ?TopicConstantValue = null,
 
     /// The sort direction for the `TopicIRFilterOption`.
-    sort_direction: ?TopicSortDirection,
+    sort_direction: ?TopicSortDirection = null,
 
     /// The time granularity for the `TopicIRFilterOption`.
-    time_granularity: ?TimeGranularity,
+    time_granularity: ?TimeGranularity = null,
 
     /// The `TopBottomLimit` for the `TopicIRFilterOption`.
-    top_bottom_limit: ?TopicConstantValue,
+    top_bottom_limit: ?TopicConstantValue = null,
 
     pub const json_field_names = .{
         .agg_metrics = "AggMetrics",

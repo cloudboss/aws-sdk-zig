@@ -30,7 +30,7 @@ pub const CacheSettings = struct {
     /// origin so users can't perform operations that you don't want them to. For
     /// example, you might
     /// not want users to have permission to delete objects from your origin.
-    allowed_http_methods: ?[]const u8,
+    allowed_http_methods: ?[]const u8 = null,
 
     /// The HTTP method responses that are cached by your distribution.
     ///
@@ -41,7 +41,7 @@ pub const CacheSettings = struct {
     ///
     /// * `GET,HEAD,OPTIONS` - The distribution caches responses to the
     /// `GET`, `HEAD`, and `OPTIONS` methods.
-    cached_http_methods: ?[]const u8,
+    cached_http_methods: ?[]const u8 = null,
 
     /// The default amount of time that objects stay in the distribution's cache
     /// before the
@@ -53,22 +53,22 @@ pub const CacheSettings = struct {
     /// such as
     /// `Cache-Control max-age`, `Cache-Control s-maxage`, and
     /// `Expires` to objects.
-    default_ttl: ?i64,
+    default_ttl: ?i64 = null,
 
     /// An object that describes the cookies that are forwarded to the origin. Your
     /// content is
     /// cached based on the cookies that are forwarded.
-    forwarded_cookies: ?CookieObject,
+    forwarded_cookies: ?CookieObject = null,
 
     /// An object that describes the headers that are forwarded to the origin. Your
     /// content is
     /// cached based on the headers that are forwarded.
-    forwarded_headers: ?HeaderObject,
+    forwarded_headers: ?HeaderObject = null,
 
     /// An object that describes the query strings that are forwarded to the origin.
     /// Your content
     /// is cached based on the query strings that are forwarded.
-    forwarded_query_strings: ?QueryStringObject,
+    forwarded_query_strings: ?QueryStringObject = null,
 
     /// The maximum amount of time that objects stay in the distribution's cache
     /// before the
@@ -79,7 +79,7 @@ pub const CacheSettings = struct {
     /// The value specified applies only when the origin adds HTTP headers such as
     /// `Cache-Control max-age`, `Cache-Control s-maxage`, and
     /// `Expires` to objects.
-    maximum_ttl: ?i64,
+    maximum_ttl: ?i64 = null,
 
     /// The minimum amount of time that objects stay in the distribution's cache
     /// before the
@@ -89,7 +89,7 @@ pub const CacheSettings = struct {
     ///
     /// A value of `0` must be specified for `minimumTTL` if the
     /// distribution is configured to forward all headers to the origin.
-    minimum_ttl: ?i64,
+    minimum_ttl: ?i64 = null,
 
     pub const json_field_names = .{
         .allowed_http_methods = "allowedHTTPMethods",

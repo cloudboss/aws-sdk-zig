@@ -4,18 +4,18 @@ const AbortCriteriaFailureType = @import("abort_criteria_failure_type.zig").Abor
 /// Structure representing one abort config criteria.
 pub const AbortConfigCriteria = struct {
     /// The action taken by the abort configuration.
-    action: ?AbortCriteriaAction,
+    action: ?AbortCriteriaAction = null,
 
     /// Over-the-air (OTA) task abort criteria failure type.
-    failure_type: ?AbortCriteriaFailureType,
+    failure_type: ?AbortCriteriaFailureType = null,
 
     /// The minimum number of things that must receive task execution notifications
     /// before the task can be aborted.
-    min_number_of_executed_things: ?i32,
+    min_number_of_executed_things: ?i32 = null,
 
     /// The minimum percentage of over-the-air (OTA) task execution failures that
     /// must occur to initiate the last abort.
-    threshold_percentage: ?f64,
+    threshold_percentage: ?f64 = null,
 
     pub const json_field_names = .{
         .action = "Action",

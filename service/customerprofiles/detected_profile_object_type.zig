@@ -6,14 +6,14 @@ const ObjectTypeKey = @import("object_type_key.zig").ObjectTypeKey;
 /// Contains `ProfileObjectType` mapping information from the model.
 pub const DetectedProfileObjectType = struct {
     /// A map of the name and the `ObjectType` field.
-    fields: ?[]const aws.map.MapEntry(ObjectTypeField),
+    fields: ?[]const aws.map.MapEntry(ObjectTypeField) = null,
 
     /// A list of unique keys that can be used to map data to a profile.
-    keys: ?[]const aws.map.MapEntry([]const ObjectTypeKey),
+    keys: ?[]const aws.map.MapEntry([]const ObjectTypeKey) = null,
 
     /// The format of `sourceLastUpdatedTimestamp` that was detected in
     /// fields.
-    source_last_updated_timestamp_format: ?[]const u8,
+    source_last_updated_timestamp_format: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .fields = "Fields",

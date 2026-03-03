@@ -10,7 +10,7 @@ pub const WaypointOptimizationTruckOptions = struct {
     gross_weight: i64 = 0,
 
     /// List of Hazardous cargo contained in the vehicle.
-    hazardous_cargos: ?[]const WaypointOptimizationHazardousCargoType,
+    hazardous_cargos: ?[]const WaypointOptimizationHazardousCargoType = null,
 
     /// Height of the vehicle.
     ///
@@ -23,10 +23,10 @@ pub const WaypointOptimizationTruckOptions = struct {
     length: i64 = 0,
 
     /// Trailer options corresponding to the vehicle.
-    trailer: ?WaypointOptimizationTrailerOptions,
+    trailer: ?WaypointOptimizationTrailerOptions = null,
 
     /// Type of the truck.
-    truck_type: ?WaypointOptimizationTruckType,
+    truck_type: ?WaypointOptimizationTruckType = null,
 
     /// The tunnel restriction code.
     ///
@@ -53,7 +53,7 @@ pub const WaypointOptimizationTruckOptions = struct {
     ///
     /// * *Risk Level*: Very high risk
     /// * *Restrictions*: Restricted tunnel
-    tunnel_restriction_code: ?[]const u8,
+    tunnel_restriction_code: ?[]const u8 = null,
 
     /// Heaviest weight per axle irrespective of the axle type or the axle group.
     /// Meant for usage in countries where the differences in axle types or axle

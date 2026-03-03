@@ -8,11 +8,11 @@ const ChangeType = @import("change_type.zig").ChangeType;
 /// larger `maxmemory` value than a `cache.m1.small` type.
 pub const CacheNodeTypeSpecificParameter = struct {
     /// The valid range of values for the parameter.
-    allowed_values: ?[]const u8,
+    allowed_values: ?[]const u8 = null,
 
     /// A list of cache node types and their corresponding values for this
     /// parameter.
-    cache_node_type_specific_values: ?[]const CacheNodeTypeSpecificValue,
+    cache_node_type_specific_values: ?[]const CacheNodeTypeSpecificValue = null,
 
     /// Indicates whether a change to the parameter is applied immediately or
     /// requires a
@@ -20,26 +20,26 @@ pub const CacheNodeTypeSpecificParameter = struct {
     /// the next
     /// maintenance window's reboot. For more information, see [Rebooting a
     /// Cluster](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.Rebooting.html).
-    change_type: ?ChangeType,
+    change_type: ?ChangeType = null,
 
     /// The valid data type for the parameter.
-    data_type: ?[]const u8,
+    data_type: ?[]const u8 = null,
 
     /// A description of the parameter.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether (`true`) or not (`false`) the parameter can be
     /// modified. Some parameters have security or operational implications that
     /// prevent them
     /// from being changed.
-    is_modifiable: ?bool,
+    is_modifiable: ?bool = null,
 
     /// The earliest cache engine version to which the parameter can apply.
-    minimum_engine_version: ?[]const u8,
+    minimum_engine_version: ?[]const u8 = null,
 
     /// The name of the parameter.
-    parameter_name: ?[]const u8,
+    parameter_name: ?[]const u8 = null,
 
     /// The source of the parameter value.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 };

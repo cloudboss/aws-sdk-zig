@@ -14,7 +14,7 @@ pub const GetSolFunctionPackageMetadata = struct {
     last_modified: i64,
 
     /// Metadata related to the function package descriptor of the function package.
-    vnfd: ?FunctionArtifactMeta,
+    vnfd: ?FunctionArtifactMeta = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

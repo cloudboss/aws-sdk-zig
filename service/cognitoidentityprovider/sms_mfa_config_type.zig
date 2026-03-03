@@ -10,7 +10,7 @@ pub const SmsMfaConfigType = struct {
     /// replaces the placeholder with the MFA code. If this parameter isn't
     /// provided, your user
     /// pool sends a default message.
-    sms_authentication_message: ?[]const u8,
+    sms_authentication_message: ?[]const u8 = null,
 
     /// User pool configuration for delivery of SMS messages with Amazon Simple
     /// Notification Service. To send SMS
@@ -21,7 +21,7 @@ pub const SmsMfaConfigType = struct {
     ///
     /// You can set `SmsConfiguration` in `CreateUserPool` and `
     /// UpdateUserPool`, or in `SetUserPoolMfaConfig`.
-    sms_configuration: ?SmsConfigurationType,
+    sms_configuration: ?SmsConfigurationType = null,
 
     pub const json_field_names = .{
         .sms_authentication_message = "SmsAuthenticationMessage",

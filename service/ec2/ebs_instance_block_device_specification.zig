@@ -3,8 +3,8 @@
 /// mapping.
 pub const EbsInstanceBlockDeviceSpecification = struct {
     /// Indicates whether the volume is deleted on instance termination.
-    delete_on_termination: ?bool,
+    delete_on_termination: ?bool = null,
 
     /// The ID of the EBS volume.
-    volume_id: ?[]const u8,
+    volume_id: ?[]const u8 = null,
 };

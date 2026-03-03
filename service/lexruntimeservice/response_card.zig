@@ -8,13 +8,13 @@ const GenericAttachment = @import("generic_attachment.zig").GenericAttachment;
 /// intent).
 pub const ResponseCard = struct {
     /// The content type of the response.
-    content_type: ?ContentType,
+    content_type: ?ContentType = null,
 
     /// An array of attachment objects representing options.
-    generic_attachments: ?[]const GenericAttachment,
+    generic_attachments: ?[]const GenericAttachment = null,
 
     /// The version of the response card format.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content_type = "contentType",

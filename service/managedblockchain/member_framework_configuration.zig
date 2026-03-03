@@ -5,7 +5,7 @@ const MemberFabricConfiguration = @import("member_fabric_configuration.zig").Mem
 pub const MemberFrameworkConfiguration = struct {
     /// Attributes of Hyperledger Fabric for a member on a Managed Blockchain
     /// network that uses Hyperledger Fabric.
-    fabric: ?MemberFabricConfiguration,
+    fabric: ?MemberFabricConfiguration = null,
 
     pub const json_field_names = .{
         .fabric = "Fabric",

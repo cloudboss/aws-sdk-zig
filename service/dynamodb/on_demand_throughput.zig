@@ -9,7 +9,7 @@ pub const OnDemandThroughput = struct {
     /// `MaxReadRequestUnits` as greater than or equal to 1. To remove the
     /// maximum `OnDemandThroughput` that is currently set on your table, set the
     /// value of `MaxReadRequestUnits` to -1.
-    max_read_request_units: ?i64,
+    max_read_request_units: ?i64 = null,
 
     /// Maximum number of write request units for the specified table.
     ///
@@ -17,7 +17,7 @@ pub const OnDemandThroughput = struct {
     /// `MaxWriteRequestUnits` as greater than or equal to 1. To remove the
     /// maximum `OnDemandThroughput` that is currently set on your table, set the
     /// value of `MaxWriteRequestUnits` to -1.
-    max_write_request_units: ?i64,
+    max_write_request_units: ?i64 = null,
 
     pub const json_field_names = .{
         .max_read_request_units = "MaxReadRequestUnits",

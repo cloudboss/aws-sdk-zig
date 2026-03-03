@@ -13,7 +13,7 @@ pub const LastRunErrorStatus = struct {
     ///   data specified for the job.
     /// * NONE - No errors occurred. Macie processed all the data specified for the
     ///   job.
-    code: ?LastRunErrorStatusCode,
+    code: ?LastRunErrorStatusCode = null,
 
     pub const json_field_names = .{
         .code = "code",

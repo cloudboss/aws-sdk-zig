@@ -170,34 +170,34 @@ const Endpoint = @import("endpoint.zig").Endpoint;
 /// later.
 pub const CacheNode = struct {
     /// The date and time when the cache node was created.
-    cache_node_create_time: ?i64,
+    cache_node_create_time: ?i64 = null,
 
     /// The cache node identifier. A node ID is a numeric identifier (0001, 0002,
     /// etc.). The
     /// combination of cluster ID and node ID uniquely identifies every cache node
     /// used in a
     /// customer's Amazon account.
-    cache_node_id: ?[]const u8,
+    cache_node_id: ?[]const u8 = null,
 
     /// The current state of this cache node, one of the following values:
     /// `available`, `creating`, `rebooting`, or
     /// `deleting`.
-    cache_node_status: ?[]const u8,
+    cache_node_status: ?[]const u8 = null,
 
     /// The Availability Zone where this node was created and now resides.
-    customer_availability_zone: ?[]const u8,
+    customer_availability_zone: ?[]const u8 = null,
 
     /// The customer outpost ARN of the cache node.
-    customer_outpost_arn: ?[]const u8,
+    customer_outpost_arn: ?[]const u8 = null,
 
     /// The hostname for connecting to this cache node.
-    endpoint: ?Endpoint,
+    endpoint: ?Endpoint = null,
 
     /// The status of the parameter group applied to this cache node.
-    parameter_group_status: ?[]const u8,
+    parameter_group_status: ?[]const u8 = null,
 
     /// The ID of the primary node to which this read replica node is synchronized.
     /// If this
     /// field is empty, this node is not associated with a primary cluster.
-    source_cache_node_id: ?[]const u8,
+    source_cache_node_id: ?[]const u8 = null,
 };

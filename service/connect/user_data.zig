@@ -11,42 +11,42 @@ pub const UserData = struct {
     /// A map of active slots by channel. The key is a channel name. The value is an
     /// integer: the number of active
     /// slots.
-    active_slots_by_channel: ?[]const aws.map.MapEntry(i32),
+    active_slots_by_channel: ?[]const aws.map.MapEntry(i32) = null,
 
     /// A map of available slots by channel. The key is a channel name. The value is
     /// an integer: the available number of
     /// slots.
-    available_slots_by_channel: ?[]const aws.map.MapEntry(i32),
+    available_slots_by_channel: ?[]const aws.map.MapEntry(i32) = null,
 
     /// A list of contact reference information.
-    contacts: ?[]const AgentContactReference,
+    contacts: ?[]const AgentContactReference = null,
 
     /// Contains information about the levels of a hierarchy group assigned to a
     /// user.
-    hierarchy_path: ?HierarchyPathReference,
+    hierarchy_path: ?HierarchyPathReference = null,
 
     /// A map of maximum slots by channel. The key is a channel name. The value is
     /// an integer: the maximum number of
     /// slots. This is calculated from
     /// [MediaConcurrency](https://docs.aws.amazon.com/connect/latest/APIReference/API_MediaConcurrency.html) of the
     /// `RoutingProfile` assigned to the agent.
-    max_slots_by_channel: ?[]const aws.map.MapEntry(i32),
+    max_slots_by_channel: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The Next status of the agent.
-    next_status: ?[]const u8,
+    next_status: ?[]const u8 = null,
 
     /// Information about the routing profile that is assigned to the user.
-    routing_profile: ?RoutingProfileReference,
+    routing_profile: ?RoutingProfileReference = null,
 
     /// The status of the agent that they manually set in their Contact Control
     /// Panel (CCP), or that the supervisor
     /// manually changes in the real-time metrics report.
-    status: ?AgentStatusReference,
+    status: ?AgentStatusReference = null,
 
     /// Information about the user for the data that is returned. It contains the
     /// `resourceId` and ARN of the
     /// user.
-    user: ?UserReference,
+    user: ?UserReference = null,
 
     pub const json_field_names = .{
         .active_slots_by_channel = "ActiveSlotsByChannel",

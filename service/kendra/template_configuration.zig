@@ -8,7 +8,7 @@ pub const TemplateConfiguration = struct {
     /// See [Data source
     /// template
     /// schemas](https://docs.aws.amazon.com/kendra/latest/dg/ds-schemas.html).
-    template: ?[]const u8,
+    template: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .template = "Template",

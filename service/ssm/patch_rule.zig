@@ -30,7 +30,7 @@ pub const PatchRule = struct {
     /// **Windows Server** tab in the topic [How security
     /// patches are
     /// selected](https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-selecting-patches.html) in the *Amazon Web Services Systems Manager User Guide*.
-    approve_after_days: ?i32,
+    approve_after_days: ?i32 = null,
 
     /// The cutoff date for auto approval of released patches. Any patches released
     /// on or before
@@ -60,17 +60,17 @@ pub const PatchRule = struct {
     /// **Windows Server** tab in the topic [How security
     /// patches are
     /// selected](https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-selecting-patches.html) in the *Amazon Web Services Systems Manager User Guide*.
-    approve_until_date: ?[]const u8,
+    approve_until_date: ?[]const u8 = null,
 
     /// A compliance severity level for all approved patches in a patch baseline.
-    compliance_level: ?PatchComplianceLevel,
+    compliance_level: ?PatchComplianceLevel = null,
 
     /// For managed nodes identified by the approval rule filters, enables a patch
     /// baseline to apply
     /// non-security updates available in the specified repository. The default
     /// value is
     /// `false`. Applies to Linux managed nodes only.
-    enable_non_security: ?bool,
+    enable_non_security: ?bool = null,
 
     /// The patch filter group that defines the criteria for the rule.
     patch_filter_group: PatchFilterGroup,

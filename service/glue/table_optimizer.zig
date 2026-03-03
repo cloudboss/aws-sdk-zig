@@ -7,16 +7,16 @@ const TableOptimizerType = @import("table_optimizer_type.zig").TableOptimizerTyp
 pub const TableOptimizer = struct {
     /// A `TableOptimizerConfiguration` object that was specified when creating or
     /// updating a table optimizer.
-    configuration: ?TableOptimizerConfiguration,
+    configuration: ?TableOptimizerConfiguration = null,
 
     /// Specifies the source of the optimizer configuration. This indicates how the
     /// table optimizer was configured and which entity or service
     /// initiated the configuration.
-    configuration_source: ?ConfigurationSource,
+    configuration_source: ?ConfigurationSource = null,
 
     /// A `TableOptimizerRun` object representing the last run of the table
     /// optimizer.
-    last_run: ?TableOptimizerRun,
+    last_run: ?TableOptimizerRun = null,
 
     /// The type of table optimizer. The valid values are:
     ///
@@ -27,7 +27,7 @@ pub const TableOptimizer = struct {
     ///
     /// * `orphan_file_deletion`: for managing the deletion of orphan files with a
     ///   table optimizer.
-    @"type": ?TableOptimizerType,
+    @"type": ?TableOptimizerType = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

@@ -6,16 +6,16 @@ const SnapshotStatus = @import("snapshot_status.zig").SnapshotStatus;
 pub const SnapshotDetails = struct {
     /// Specifies the encryption settings of data at rest for the application
     /// snapshot.
-    application_encryption_configuration_description: ?ApplicationEncryptionConfigurationDescription,
+    application_encryption_configuration_description: ?ApplicationEncryptionConfigurationDescription = null,
 
     /// The current application version ID when the snapshot was created.
     application_version_id: i64,
 
     /// The Flink Runtime for the application snapshot.
-    runtime_environment: ?RuntimeEnvironment,
+    runtime_environment: ?RuntimeEnvironment = null,
 
     /// The timestamp of the application snapshot.
-    snapshot_creation_timestamp: ?i64,
+    snapshot_creation_timestamp: ?i64 = null,
 
     /// The identifier for the application snapshot.
     snapshot_name: []const u8,

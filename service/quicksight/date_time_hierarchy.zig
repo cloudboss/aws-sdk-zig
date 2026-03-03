@@ -4,7 +4,7 @@ const DrillDownFilter = @import("drill_down_filter.zig").DrillDownFilter;
 pub const DateTimeHierarchy = struct {
     /// The option that determines the drill down filters for the
     /// `DateTime` hierarchy.
-    drill_down_filters: ?[]const DrillDownFilter,
+    drill_down_filters: ?[]const DrillDownFilter = null,
 
     /// The hierarchy ID of the `DateTime` hierarchy.
     hierarchy_id: []const u8,

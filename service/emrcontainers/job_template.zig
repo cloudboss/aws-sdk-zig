@@ -11,31 +11,31 @@ const JobTemplateData = @import("job_template_data.zig").JobTemplateData;
 /// in StartJobRun API request.
 pub const JobTemplate = struct {
     /// The ARN of the job template.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time when the job template was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The user who created the job template.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The error message in case the decryption of job template fails.
-    decryption_error: ?[]const u8,
+    decryption_error: ?[]const u8 = null,
 
     /// The ID of the job template.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The job template data which holds values of StartJobRun API request.
     job_template_data: JobTemplateData,
 
     /// The KMS key ARN used to encrypt the job template.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The name of the job template.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The tags assigned to the job template.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -4,10 +4,10 @@ pub const BatchGetVariableError = struct {
     code: i32 = 0,
 
     /// The error message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The error name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

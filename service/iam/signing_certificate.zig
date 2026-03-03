@@ -16,7 +16,7 @@ pub const SigningCertificate = struct {
     status: statusType,
 
     /// The date when the signing certificate was uploaded.
-    upload_date: ?i64,
+    upload_date: ?i64 = null,
 
     /// The name of the user the signing certificate is associated with.
     user_name: []const u8,

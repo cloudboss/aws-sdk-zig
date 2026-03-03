@@ -25,7 +25,7 @@ const Expression = @import("expression.zig").Expression;
 /// ](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetAnomalies.html) API.
 pub const AnomalySubscription = struct {
     /// Your unique account identifier.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The frequency that anomaly notifications are sent. Notifications are sent
     /// either over
@@ -43,7 +43,7 @@ pub const AnomalySubscription = struct {
     subscribers: []const Subscriber,
 
     /// The `AnomalySubscription` Amazon Resource Name (ARN).
-    subscription_arn: ?[]const u8,
+    subscription_arn: ?[]const u8 = null,
 
     /// The name for the subscription.
     subscription_name: []const u8,
@@ -63,7 +63,7 @@ pub const AnomalySubscription = struct {
     /// One of Threshold or ThresholdExpression is required for this resource. You
     /// cannot
     /// specify both.
-    threshold: ?f64,
+    threshold: ?f64 = null,
 
     /// An
     /// [Expression](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
@@ -103,7 +103,7 @@ pub const AnomalySubscription = struct {
     /// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key":
     /// "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL"
     /// ], "Values": [ "100" ] } } ] }`
-    threshold_expression: ?Expression,
+    threshold_expression: ?Expression = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

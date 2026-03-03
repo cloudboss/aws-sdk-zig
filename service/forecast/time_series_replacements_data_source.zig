@@ -12,14 +12,14 @@ const Schema = @import("schema.zig").Schema;
 /// forecast.
 pub const TimeSeriesReplacementsDataSource = struct {
     /// The format of the replacement data, CSV or PARQUET.
-    format: ?[]const u8,
+    format: ?[]const u8 = null,
 
     s3_config: S3Config,
 
     schema: Schema,
 
     /// The timestamp format of the replacement data.
-    timestamp_format: ?[]const u8,
+    timestamp_format: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .format = "Format",

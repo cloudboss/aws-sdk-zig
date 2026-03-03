@@ -7,7 +7,7 @@ pub const ConfiguredModelAlgorithmSummary = struct {
     create_time: i64,
 
     /// The description of the configured model algorithm.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the configured model algorithm.
     name: []const u8,

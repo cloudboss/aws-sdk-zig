@@ -8,7 +8,7 @@ pub const RouterInputTransitEncryption = struct {
     encryption_key_configuration: RouterInputTransitEncryptionKeyConfiguration,
 
     /// Specifies the type of encryption key to use for transit encryption.
-    encryption_key_type: ?RouterInputTransitEncryptionKeyType,
+    encryption_key_type: ?RouterInputTransitEncryptionKeyType = null,
 
     pub const json_field_names = .{
         .encryption_key_configuration = "EncryptionKeyConfiguration",

@@ -1,16 +1,16 @@
 /// A configuration property of an SDK type.
 pub const SdkConfigurationProperty = struct {
     /// The default value of an SdkType configuration property.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// The description of an SdkType configuration property.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The user-friendly name of an SdkType configuration property.
-    friendly_name: ?[]const u8,
+    friendly_name: ?[]const u8 = null,
 
     /// The name of a an SdkType configuration property.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A boolean flag of an SdkType configuration property to indicate if the
     /// associated SDK configuration property is required (`true`) or not (`false`).

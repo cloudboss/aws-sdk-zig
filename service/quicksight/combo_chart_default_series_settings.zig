@@ -7,16 +7,16 @@ const LineChartMarkerStyleSettings = @import("line_chart_marker_style_settings.z
 /// `ComboChartVisual`.
 pub const ComboChartDefaultSeriesSettings = struct {
     /// Border settings for all bar series in the visual.
-    border_settings: ?BorderSettings,
+    border_settings: ?BorderSettings = null,
 
     /// Decal settings for all series in the visual.
-    decal_settings: ?DecalSettings,
+    decal_settings: ?DecalSettings = null,
 
     /// Line styles options for all line series in the visual.
-    line_style_settings: ?LineChartLineStyleSettings,
+    line_style_settings: ?LineChartLineStyleSettings = null,
 
     /// Marker styles options for all line series in the visual.
-    marker_style_settings: ?LineChartMarkerStyleSettings,
+    marker_style_settings: ?LineChartMarkerStyleSettings = null,
 
     pub const json_field_names = .{
         .border_settings = "BorderSettings",

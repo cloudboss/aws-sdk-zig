@@ -10,42 +10,42 @@ pub const Instance = struct {
     /// The Amazon Machine Image (AMI) launch index, which you can use to find this
     /// instance in
     /// the launch group.
-    ami_launch_index: ?i32,
+    ami_launch_index: ?i32 = null,
 
     /// Any block device mapping entries for the instance.
-    block_device_mappings: ?[]const InstanceBlockDeviceMapping,
+    block_device_mappings: ?[]const InstanceBlockDeviceMapping = null,
 
     /// The CPU options for the instance.
-    cpu_options: ?CpuOptions,
+    cpu_options: ?CpuOptions = null,
 
     /// When the instance was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The ID of the AMI used to launch the instance.
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// The ID of the instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The instance type.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// The private IPv4 address assigned to the instance.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// The public IPv4 address assigned to the instance.
-    public_ip_address: ?[]const u8,
+    public_ip_address: ?[]const u8 = null,
 
     /// The device name of the root device volume (for example, `/dev/sda1`).
-    root_device_name: ?[]const u8,
+    root_device_name: ?[]const u8 = null,
 
     /// The security groups for the instance.
-    security_groups: ?[]const SecurityGroupIdentifier,
+    security_groups: ?[]const SecurityGroupIdentifier = null,
 
-    state: ?InstanceState,
+    state: ?InstanceState = null,
 
     /// When the instance was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .ami_launch_index = "amiLaunchIndex",

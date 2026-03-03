@@ -3,10 +3,10 @@ const AudioChannelsOption = @import("audio_channels_option.zig").AudioChannelsOp
 /// The media pipeline's RTMP configuration object.
 pub const LiveConnectorRTMPConfiguration = struct {
     /// The audio channels set for the RTMP configuration
-    audio_channels: ?AudioChannelsOption,
+    audio_channels: ?AudioChannelsOption = null,
 
     /// The audio sample rate set for the RTMP configuration. Default: 48000.
-    audio_sample_rate: ?[]const u8,
+    audio_sample_rate: ?[]const u8 = null,
 
     /// The URL of the RTMP configuration.
     url: []const u8,

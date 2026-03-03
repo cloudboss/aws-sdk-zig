@@ -4,5 +4,5 @@ pub const VerifiedAccessLogCloudWatchLogsDestinationOptions = struct {
     enabled: bool,
 
     /// The ID of the CloudWatch Logs log group.
-    log_group: ?[]const u8,
+    log_group: ?[]const u8 = null,
 };

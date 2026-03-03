@@ -10,20 +10,20 @@ const ReportType = @import("report_type.zig").ReportType;
 /// a build project using one or more paths to the test case files.
 pub const ReportGroup = struct {
     /// The ARN of the `ReportGroup`.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time this `ReportGroup` was created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// Information about the destination where the raw data of this `ReportGroup`
     /// is exported.
-    export_config: ?ReportExportConfig,
+    export_config: ?ReportExportConfig = null,
 
     /// The date and time this `ReportGroup` was last modified.
-    last_modified: ?i64,
+    last_modified: ?i64 = null,
 
     /// The name of the `ReportGroup`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The status of the report group. This property is read-only.
     ///
@@ -36,14 +36,14 @@ pub const ReportGroup = struct {
     /// **DELETING**
     ///
     /// The report group is in the process of being deleted.
-    status: ?ReportGroupStatusType,
+    status: ?ReportGroupStatusType = null,
 
     /// A list of tag key and value pairs associated with this report group.
     ///
     /// These tags are available for use by Amazon Web Services services that
     /// support CodeBuild report group
     /// tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The type of the `ReportGroup`. This can be one of the following
     /// values:
@@ -55,7 +55,7 @@ pub const ReportGroup = struct {
     /// **TEST**
     ///
     /// The report group contains test reports.
-    @"type": ?ReportType,
+    @"type": ?ReportType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

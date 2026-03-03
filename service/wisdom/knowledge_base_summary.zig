@@ -9,7 +9,7 @@ const KnowledgeBaseStatus = @import("knowledge_base_status.zig").KnowledgeBaseSt
 /// Summary information about the knowledge base.
 pub const KnowledgeBaseSummary = struct {
     /// The description of the knowledge base.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the knowledge base.
     knowledge_base_arn: []const u8,
@@ -26,7 +26,7 @@ pub const KnowledgeBaseSummary = struct {
     name: []const u8,
 
     /// Information about how to render the content.
-    rendering_configuration: ?RenderingConfiguration,
+    rendering_configuration: ?RenderingConfiguration = null,
 
     /// The configuration information for the customer managed key used for
     /// encryption.
@@ -40,16 +40,16 @@ pub const KnowledgeBaseSummary = struct {
     /// [Enable Amazon Connect Wisdom
     /// for your
     /// instance](https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html).
-    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration,
+    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration = null,
 
     /// Configuration information about the external data source.
-    source_configuration: ?SourceConfiguration,
+    source_configuration: ?SourceConfiguration = null,
 
     /// The status of the knowledge base summary.
     status: KnowledgeBaseStatus,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .description = "description",

@@ -7,7 +7,7 @@ const QueryNetwork = @import("query_network.zig").QueryNetwork;
 /// ERC-721, and ERC 1155 token standards are supported.
 pub const TokenIdentifier = struct {
     /// This is the token's contract address.
-    contract_address: ?[]const u8,
+    contract_address: ?[]const u8 = null,
 
     /// The blockchain network of the token.
     network: QueryNetwork,
@@ -19,7 +19,7 @@ pub const TokenIdentifier = struct {
     /// For example, btc for Bitcoin, eth for Ether, etc. For all other token types
     /// you must
     /// specify the `tokenId` in the 64 character hexadecimal `tokenid` format.
-    token_id: ?[]const u8,
+    token_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .contract_address = "contractAddress",

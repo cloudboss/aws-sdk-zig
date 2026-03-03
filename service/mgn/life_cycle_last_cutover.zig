@@ -5,13 +5,13 @@ const LifeCycleLastCutoverReverted = @import("life_cycle_last_cutover_reverted.z
 /// Lifecycle last Cutover .
 pub const LifeCycleLastCutover = struct {
     /// Lifecycle Cutover finalized date and time.
-    finalized: ?LifeCycleLastCutoverFinalized,
+    finalized: ?LifeCycleLastCutoverFinalized = null,
 
     /// Lifecycle last Cutover initiated.
-    initiated: ?LifeCycleLastCutoverInitiated,
+    initiated: ?LifeCycleLastCutoverInitiated = null,
 
     /// Lifecycle last Cutover reverted.
-    reverted: ?LifeCycleLastCutoverReverted,
+    reverted: ?LifeCycleLastCutoverReverted = null,
 
     pub const json_field_names = .{
         .finalized = "finalized",

@@ -8,19 +8,19 @@ const EvaluationStatus = @import("evaluation_status.zig").EvaluationStatus;
 /// Summary information about a contact evaluation.
 pub const EvaluationSummary = struct {
     /// Information related to evaluation acknowledgement.
-    acknowledgement: ?EvaluationAcknowledgementSummary,
+    acknowledgement: ?EvaluationAcknowledgementSummary = null,
 
     /// Whether automated evaluation is enabled.
     auto_evaluation_enabled: bool = false,
 
     /// The status of the contact auto evaluation.
-    auto_evaluation_status: ?AutoEvaluationStatus,
+    auto_evaluation_status: ?AutoEvaluationStatus = null,
 
     /// The calibration session ID that this evaluation belongs to.
-    calibration_session_id: ?[]const u8,
+    calibration_session_id: ?[]const u8 = null,
 
     /// Information about a contact participant in the evaluation.
-    contact_participant: ?EvaluationContactParticipant,
+    contact_participant: ?EvaluationContactParticipant = null,
 
     /// The timestamp for when the evaluation was created.
     created_time: i64,
@@ -38,7 +38,7 @@ pub const EvaluationSummary = struct {
     evaluation_id: []const u8,
 
     /// Type of the evaluation.
-    evaluation_type: ?EvaluationType,
+    evaluation_type: ?EvaluationType = null,
 
     /// The Amazon Resource Name (ARN) of the user who last updated the evaluation.
     evaluator_arn: []const u8,
@@ -47,7 +47,7 @@ pub const EvaluationSummary = struct {
     last_modified_time: i64,
 
     /// The overall score of the contact evaluation.
-    score: ?EvaluationScore,
+    score: ?EvaluationScore = null,
 
     /// The status of the contact evaluation.
     status: EvaluationStatus,

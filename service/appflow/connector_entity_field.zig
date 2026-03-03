@@ -9,17 +9,17 @@ const SupportedFieldTypeDetails = @import("supported_field_type_details.zig").Su
 /// *account ID*, and so on.
 pub const ConnectorEntityField = struct {
     /// A map that has specific properties related to the ConnectorEntityField.
-    custom_properties: ?[]const aws.map.StringMapEntry,
+    custom_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// Default value that can be assigned to this field.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// A description of the connector entity field.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The properties applied to a field when the connector is being used as a
     /// destination.
-    destination_properties: ?DestinationFieldProperties,
+    destination_properties: ?DestinationFieldProperties = null,
 
     /// The unique identifier of the connector field.
     identifier: []const u8,
@@ -32,19 +32,19 @@ pub const ConnectorEntityField = struct {
     is_primary_key: bool = false,
 
     /// The label applied to a connector entity field.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// The parent identifier of the connector field.
-    parent_identifier: ?[]const u8,
+    parent_identifier: ?[]const u8 = null,
 
     /// The properties that can be applied to a field when the connector is being
     /// used as a
     /// source.
-    source_properties: ?SourceFieldProperties,
+    source_properties: ?SourceFieldProperties = null,
 
     /// Contains details regarding the supported `FieldType`, including the
     /// corresponding `filterOperators` and `supportedValues`.
-    supported_field_type_details: ?SupportedFieldTypeDetails,
+    supported_field_type_details: ?SupportedFieldTypeDetails = null,
 
     pub const json_field_names = .{
         .custom_properties = "customProperties",

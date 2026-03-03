@@ -16,11 +16,11 @@ pub const AssetSummary = struct {
     creation_date: i64,
 
     /// A description for the asset.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The external ID of the asset. For more information, see [Using external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// A list of asset hierarchies that each contain a `hierarchyId`. A hierarchy
     /// specifies allowed parent/child asset relationships.

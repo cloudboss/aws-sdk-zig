@@ -9,27 +9,27 @@ pub const SolutionVersion = struct {
     /// The date and
     /// time
     /// (in Unix time) that this version of the solution was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset group providing the training
     /// data.
-    dataset_group_arn: ?[]const u8,
+    dataset_group_arn: ?[]const u8 = null,
 
     /// The event type (for example, 'click' or 'like') that is used for training
     /// the
     /// model.
-    event_type: ?[]const u8,
+    event_type: ?[]const u8 = null,
 
     /// If training a solution version fails, the reason for the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The date and time (in
     /// Unix
     /// time) that the solution was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The name of the solution version.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// When true, Amazon Personalize searches for the most optimal recipe according
     /// to the solution
@@ -49,19 +49,19 @@ pub const SolutionVersion = struct {
     /// to when trainingMode is set to UPDATE. This can only be used with solution
     /// versions that
     /// use the User-Personalization recipe.
-    perform_incremental_update: ?bool,
+    perform_incremental_update: ?bool = null,
 
     /// The ARN of the recipe used in the solution.
-    recipe_arn: ?[]const u8,
+    recipe_arn: ?[]const u8 = null,
 
     /// The ARN of the solution.
-    solution_arn: ?[]const u8,
+    solution_arn: ?[]const u8 = null,
 
     /// Describes the configuration properties for the solution.
-    solution_config: ?SolutionConfig,
+    solution_config: ?SolutionConfig = null,
 
     /// The ARN of the solution version.
-    solution_version_arn: ?[]const u8,
+    solution_version_arn: ?[]const u8 = null,
 
     /// The status of the solution version.
     ///
@@ -78,13 +78,13 @@ pub const SolutionVersion = struct {
     /// * CREATE STOPPING
     ///
     /// * CREATE STOPPED
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The time used to train the model. You are billed for the time it takes to
     /// train a model.
     /// This field is visible only after Amazon Personalize successfully trains a
     /// model.
-    training_hours: ?f64,
+    training_hours: ?f64 = null,
 
     /// The scope of training to be performed when creating the solution version. A
     /// `FULL` training considers all of the data in your dataset group.
@@ -92,15 +92,15 @@ pub const SolutionVersion = struct {
     /// has changed since the latest training. Only solution versions created with
     /// the User-Personalization
     /// recipe can use `UPDATE`.
-    training_mode: ?TrainingMode,
+    training_mode: ?TrainingMode = null,
 
     /// Whether the solution version was created automatically or manually.
-    training_type: ?TrainingType,
+    training_type: ?TrainingType = null,
 
     /// If hyperparameter optimization was performed, contains the hyperparameter
     /// values of the
     /// best performing model.
-    tuned_hpo_params: ?TunedHPOParams,
+    tuned_hpo_params: ?TunedHPOParams = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

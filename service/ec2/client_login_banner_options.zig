@@ -6,7 +6,7 @@ pub const ClientLoginBannerOptions = struct {
     /// clients when a VPN session is established. UTF-8 encoded characters only.
     /// Maximum of
     /// 1400 characters.
-    banner_text: ?[]const u8,
+    banner_text: ?[]const u8 = null,
 
     /// Enable or disable a customizable text banner that will be displayed on
     /// Amazon Web Services provided clients when a VPN session is established.
@@ -14,5 +14,5 @@ pub const ClientLoginBannerOptions = struct {
     /// Valid values: `true | false`
     ///
     /// Default value: `false`
-    enabled: ?bool,
+    enabled: ?bool = null,
 };

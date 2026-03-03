@@ -7,41 +7,41 @@ const ChannelPrivacy = @import("channel_privacy.zig").ChannelPrivacy;
 /// The details of a channel.
 pub const Channel = struct {
     /// The ARN of a channel.
-    channel_arn: ?[]const u8,
+    channel_arn: ?[]const u8 = null,
 
     /// The ARN of the channel flow.
-    channel_flow_arn: ?[]const u8,
+    channel_flow_arn: ?[]const u8 = null,
 
     /// The `AppInstanceUser` who created the channel.
-    created_by: ?Identity,
+    created_by: ?Identity = null,
 
     /// The time at which the `AppInstanceUser` created the channel.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The attributes required to configure and create an elastic channel. An
     /// elastic channel can support a maximum of 1-million members.
-    elastic_channel_configuration: ?ElasticChannelConfiguration,
+    elastic_channel_configuration: ?ElasticChannelConfiguration = null,
 
     /// Settings that control when a channel expires.
-    expiration_settings: ?ExpirationSettings,
+    expiration_settings: ?ExpirationSettings = null,
 
     /// The time at which a member sent the last message in the channel.
-    last_message_timestamp: ?i64,
+    last_message_timestamp: ?i64 = null,
 
     /// The time at which a channel was last updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     /// The channel's metadata.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     /// The mode of the channel.
-    mode: ?ChannelMode,
+    mode: ?ChannelMode = null,
 
     /// The name of a channel.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The channel's privacy setting.
-    privacy: ?ChannelPrivacy,
+    privacy: ?ChannelPrivacy = null,
 
     pub const json_field_names = .{
         .channel_arn = "ChannelArn",

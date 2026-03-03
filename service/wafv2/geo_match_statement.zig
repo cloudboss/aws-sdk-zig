@@ -39,7 +39,7 @@ pub const GeoMatchStatement = struct {
     /// any matches. You can reduce the logging and metrics that the rule produces
     /// by specifying a country that's unlikely to be a source of traffic to your
     /// site.
-    country_codes: ?[]const CountryCode,
+    country_codes: ?[]const CountryCode = null,
 
     /// The configuration for inspecting IP addresses in an HTTP header that you
     /// specify, instead of using the IP address that's reported by the web request
@@ -48,7 +48,7 @@ pub const GeoMatchStatement = struct {
     ///
     /// If the specified header isn't present in the request, WAF doesn't apply the
     /// rule to the web request at all.
-    forwarded_ip_config: ?ForwardedIPConfig,
+    forwarded_ip_config: ?ForwardedIPConfig = null,
 
     pub const json_field_names = .{
         .country_codes = "CountryCodes",

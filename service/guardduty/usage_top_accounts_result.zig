@@ -5,13 +5,13 @@ const UsageFeature = @import("usage_feature.zig").UsageFeature;
 /// by top accounts by feature.
 pub const UsageTopAccountsResult = struct {
     /// The accounts that contributed to the total usage cost.
-    accounts: ?[]const UsageTopAccountResult,
+    accounts: ?[]const UsageTopAccountResult = null,
 
     /// Features by which you can generate the usage statistics.
     ///
     /// `RDS_LOGIN_EVENTS` is currently not supported
     /// with `topAccountsByFeature`.
-    feature: ?UsageFeature,
+    feature: ?UsageFeature = null,
 
     pub const json_field_names = .{
         .accounts = "Accounts",

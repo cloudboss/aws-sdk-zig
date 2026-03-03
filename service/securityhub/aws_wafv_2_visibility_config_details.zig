@@ -5,15 +5,15 @@ pub const AwsWafv2VisibilityConfigDetails = struct {
     /// CloudWatch. For the list of available
     /// metrics, see [WAF metrics and
     /// dimensions](https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics) in the *WAF Developer Guide*.
-    cloud_watch_metrics_enabled: ?bool,
+    cloud_watch_metrics_enabled: ?bool = null,
 
     /// A name of the Amazon CloudWatch metric.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// A boolean indicating whether WAF should store a sampling of the web requests
     /// that match the rules.
     /// You can view the sampled requests through the WAF console.
-    sampled_requests_enabled: ?bool,
+    sampled_requests_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .cloud_watch_metrics_enabled = "CloudWatchMetricsEnabled",

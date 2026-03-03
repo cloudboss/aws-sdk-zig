@@ -42,22 +42,22 @@ pub const AssetPropertyVariant = struct {
     /// The asset property value is a Boolean value that must be `'TRUE'` or
     /// `'FALSE'`. You must use an expression, and the evaluated result should be a
     /// Boolean value.
-    boolean_value: ?[]const u8,
+    boolean_value: ?[]const u8 = null,
 
     /// The asset property value is a double. You must use an expression, and the
     /// evaluated result
     /// should be a double.
-    double_value: ?[]const u8,
+    double_value: ?[]const u8 = null,
 
     /// The asset property value is an integer. You must use an expression, and the
     /// evaluated
     /// result should be an integer.
-    integer_value: ?[]const u8,
+    integer_value: ?[]const u8 = null,
 
     /// The asset property value is a string. You must use an expression, and the
     /// evaluated result
     /// should be a string.
-    string_value: ?[]const u8,
+    string_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .boolean_value = "booleanValue",

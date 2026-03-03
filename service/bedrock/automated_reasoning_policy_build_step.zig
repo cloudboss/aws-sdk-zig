@@ -15,7 +15,7 @@ pub const AutomatedReasoningPolicyBuildStep = struct {
 
     /// Reference to the previous element or step in the build process, helping to
     /// trace the sequence of operations.
-    prior_element: ?AutomatedReasoningPolicyDefinitionElement,
+    prior_element: ?AutomatedReasoningPolicyDefinitionElement = null,
 
     pub const json_field_names = .{
         .context = "context",

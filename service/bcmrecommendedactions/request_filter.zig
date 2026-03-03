@@ -6,7 +6,7 @@ const ActionFilter = @import("action_filter.zig").ActionFilter;
 pub const RequestFilter = struct {
     /// A list of action filters that define criteria for filtering results. Each
     /// filter specifies a key, match option, and corresponding values to filter on.
-    actions: ?[]const ActionFilter,
+    actions: ?[]const ActionFilter = null,
 
     pub const json_field_names = .{
         .actions = "actions",

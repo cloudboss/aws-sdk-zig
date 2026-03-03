@@ -5,13 +5,13 @@ const Mqtt5Configuration = @import("mqtt_5_configuration.zig").Mqtt5Configuratio
 /// and a list of searchable thing attribute names.
 pub const ThingTypeProperties = struct {
     /// The configuration to add user-defined properties to enrich MQTT 5 messages.
-    mqtt_5_configuration: ?Mqtt5Configuration,
+    mqtt_5_configuration: ?Mqtt5Configuration = null,
 
     /// A list of searchable thing attribute names.
-    searchable_attributes: ?[]const []const u8,
+    searchable_attributes: ?[]const []const u8 = null,
 
     /// The description of the thing type.
-    thing_type_description: ?[]const u8,
+    thing_type_description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .mqtt_5_configuration = "mqtt5Configuration",

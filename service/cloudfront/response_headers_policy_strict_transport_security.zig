@@ -12,7 +12,7 @@ pub const ResponseHeadersPolicyStrictTransportSecurity = struct {
     /// A Boolean that determines whether CloudFront includes the
     /// `includeSubDomains` directive in the `Strict-Transport-Security` HTTP
     /// response header.
-    include_subdomains: ?bool,
+    include_subdomains: ?bool = null,
 
     /// A Boolean that determines whether CloudFront overrides the
     /// `Strict-Transport-Security` HTTP response header received from the origin
@@ -21,5 +21,5 @@ pub const ResponseHeadersPolicyStrictTransportSecurity = struct {
 
     /// A Boolean that determines whether CloudFront includes the `preload`
     /// directive in the `Strict-Transport-Security` HTTP response header.
-    preload: ?bool,
+    preload: ?bool = null,
 };

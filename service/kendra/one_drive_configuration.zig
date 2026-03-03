@@ -18,7 +18,7 @@ pub const OneDriveConfiguration = struct {
     /// included in the index.
     ///
     /// The pattern is applied to the file name.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map OneDrive data
     /// source attributes or field names to Amazon Kendra index field names. To
@@ -29,7 +29,7 @@ pub const OneDriveConfiguration = struct {
     /// The
     /// OneDrive data source field names must exist in your OneDrive custom
     /// metadata.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of regular expression patterns to include certain documents in your
     /// OneDrive.
@@ -42,7 +42,7 @@ pub const OneDriveConfiguration = struct {
     /// included in the index.
     ///
     /// The pattern is applied to the file name.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of user accounts whose documents should be indexed.
     one_drive_users: OneDriveUsers,

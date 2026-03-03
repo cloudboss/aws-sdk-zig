@@ -11,7 +11,7 @@ pub const Tag = struct {
     /// 256 characters. Valid characters: Unicode letters, digits, white space, _ .
     /// / = + - %
     /// @
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

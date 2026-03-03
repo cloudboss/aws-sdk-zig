@@ -5,7 +5,7 @@ pub const DataRetrievalPolicy = struct {
     /// The policy rule. Although this is a list type, currently there must be only
     /// one rule,
     /// which contains a Strategy field and optionally a BytesPerHour field.
-    rules: ?[]const DataRetrievalRule,
+    rules: ?[]const DataRetrievalRule = null,
 
     pub const json_field_names = .{
         .rules = "Rules",

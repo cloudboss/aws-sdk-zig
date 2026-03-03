@@ -4,7 +4,7 @@ pub const FlowCondition = struct {
     /// condition. For more information, expand the Condition node section in [Node
     /// types in prompt
     /// flows](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-how-it-works.html#flows-nodes).
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     /// A name for the condition that you can reference.
     name: []const u8,

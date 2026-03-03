@@ -10,7 +10,7 @@ pub const PolicyVariables = struct {
     /// to override the `HOME_NET` variable with the CIDRs of your home networks. If
     /// you don't override `HOME_NET` with your own CIDRs, Network Firewall by
     /// default uses the CIDR of your inspection VPC.
-    rule_variables: ?[]const aws.map.MapEntry(IPSet),
+    rule_variables: ?[]const aws.map.MapEntry(IPSet) = null,
 
     pub const json_field_names = .{
         .rule_variables = "RuleVariables",

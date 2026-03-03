@@ -34,7 +34,7 @@ pub const Event = struct {
     /// is needed to determine if action is required.
     /// Events with `INFORMATIONAL` actionability are provided for awareness and do
     /// not require immediate action.
-    actionability: ?EventActionability,
+    actionability: ?EventActionability = null,
 
     /// The unique identifier for the event. The event ARN has the
     /// `arn:aws:health:*event-region*::event/*SERVICE*/*EVENT_TYPE_CODE*/*EVENT_TYPE_PLUS_ID*
@@ -44,14 +44,14 @@ pub const Event = struct {
     /// For example, an event ARN might look like the following:
     ///
     /// `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Amazon Web Services Availability Zone of the event. For example,
     /// us-east-1a.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The date and time that the event ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// This parameter specifies if the Health event is a public Amazon Web Services
     /// service event or an account-specific event.
@@ -71,40 +71,40 @@ pub const Event = struct {
     /// * If the `eventScopeCode` value is `NONE`, then the
     /// `eventArn` that you specified in the request is invalid or doesn't
     /// exist.
-    event_scope_code: ?eventScopeCode,
+    event_scope_code: ?eventScopeCode = null,
 
     /// A list of event type category codes. Possible values are
     /// `issue`, `accountNotification`, or `scheduledChange`. Currently,
     /// the `investigation` value isn't supported at this time.
-    event_type_category: ?eventTypeCategory,
+    event_type_category: ?eventTypeCategory = null,
 
     /// The unique identifier for the event type. The format is
     /// `AWS_*SERVICE*_*DESCRIPTION*
     /// `; for example, `AWS_EC2_SYSTEM_MAINTENANCE_EVENT`.
-    event_type_code: ?[]const u8,
+    event_type_code: ?[]const u8 = null,
 
     /// The most recent date and time that the event was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// A list of persona classifications that indicate the target audience for the
     /// event. Possible values are `OPERATIONS`, `SECURITY`, and `BILLING`. Events
     /// can be associated with multiple personas to indicate relevance to different
     /// teams or roles within an organization.
-    personas: ?[]const EventPersona,
+    personas: ?[]const EventPersona = null,
 
     /// The Amazon Web Services Region name of the event.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The Amazon Web Services service that is affected by the event. For example,
     /// `EC2`, `RDS`.
-    service: ?[]const u8,
+    service: ?[]const u8 = null,
 
     /// The date and time that the event began.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The most recent status of the event. Possible values are `open`,
     /// `closed`, and `upcoming`.
-    status_code: ?eventStatusCode,
+    status_code: ?eventStatusCode = null,
 
     pub const json_field_names = .{
         .actionability = "actionability",

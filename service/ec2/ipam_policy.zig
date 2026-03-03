@@ -13,26 +13,26 @@ const Tag = @import("tag.zig").Tag;
 /// Amazon Web Services Organizations.
 pub const IpamPolicy = struct {
     /// The ID of the IPAM this policy belongs to.
-    ipam_id: ?[]const u8,
+    ipam_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IPAM policy.
-    ipam_policy_arn: ?[]const u8,
+    ipam_policy_arn: ?[]const u8 = null,
 
     /// The ID of the IPAM policy.
-    ipam_policy_id: ?[]const u8,
+    ipam_policy_id: ?[]const u8 = null,
 
     /// The Region of the IPAM policy.
-    ipam_policy_region: ?[]const u8,
+    ipam_policy_region: ?[]const u8 = null,
 
     /// The account ID that owns the IPAM policy.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The state of the IPAM policy.
-    state: ?IpamPolicyState,
+    state: ?IpamPolicyState = null,
 
     /// A message about the state of the IPAM policy.
-    state_message: ?[]const u8,
+    state_message: ?[]const u8 = null,
 
     /// The tags assigned to the IPAM policy.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

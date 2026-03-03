@@ -7,10 +7,10 @@ const CustomizableMetricParameters = @import("customizable_metric_parameters.zig
 /// This preference is only available for the Amazon EC2 instance resource type.
 pub const UtilizationPreference = struct {
     /// The name of the resource utilization metric name to customize.
-    metric_name: ?CustomizableMetricName,
+    metric_name: ?CustomizableMetricName = null,
 
     /// The parameters to set when customizing the resource utilization thresholds.
-    metric_parameters: ?CustomizableMetricParameters,
+    metric_parameters: ?CustomizableMetricParameters = null,
 
     pub const json_field_names = .{
         .metric_name = "metricName",

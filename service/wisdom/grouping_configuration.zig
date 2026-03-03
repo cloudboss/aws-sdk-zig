@@ -8,7 +8,7 @@ pub const GroupingConfiguration = struct {
     ///   profile
     ///   ARN](https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html). User should have [SearchRoutingProfile](https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchRoutingProfiles.html) and
     /// [DescribeRoutingProfile](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeRoutingProfile.html) permissions when setting criteria to this value.
-    criteria: ?[]const u8,
+    criteria: ?[]const u8 = null,
 
     /// The list of values that define different groups of Wisdom users.
     ///
@@ -16,7 +16,7 @@ pub const GroupingConfiguration = struct {
     ///   of
     /// ARNs of [Amazon Connect routing
     /// profiles](https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html) as values of this parameter.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .criteria = "criteria",

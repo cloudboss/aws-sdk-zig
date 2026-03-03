@@ -6,13 +6,13 @@ pub const ApplicationPolicyStatement = struct {
 
     /// An array of PrinciplalOrgIDs, which corresponds to AWS IAM
     /// [aws:PrincipalOrgID](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#principal-org-id) global condition key.
-    principal_org_i_ds: ?[]const []const u8,
+    principal_org_i_ds: ?[]const []const u8 = null,
 
     /// An array of AWS account IDs, or * to make the application public.
     principals: []const []const u8,
 
     /// A unique ID for the statement.
-    statement_id: ?[]const u8,
+    statement_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

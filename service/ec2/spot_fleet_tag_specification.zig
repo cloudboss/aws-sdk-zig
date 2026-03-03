@@ -8,8 +8,8 @@ pub const SpotFleetTagSpecification = struct {
     /// `TagSpecifications` parameter in `
     /// [SpotFleetRequestConfigData](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotFleetRequestConfigData.html)
     /// `.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

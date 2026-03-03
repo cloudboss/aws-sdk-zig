@@ -4,10 +4,10 @@ const AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails = @import(
 /// instance.
 pub const AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails = struct {
     /// The market type.
-    market_type: ?[]const u8,
+    market_type: ?[]const u8 = null,
 
     /// The options for Spot Instances.
-    spot_options: ?AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails,
+    spot_options: ?AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails = null,
 
     pub const json_field_names = .{
         .market_type = "MarketType",

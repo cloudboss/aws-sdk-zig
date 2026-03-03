@@ -10,7 +10,7 @@ pub const TimePeriod = struct {
     /// `2017-05-01`, Lightsail for Research retrieves cost and usage data from the
     /// start date up to, but
     /// not including, `2017-05-01`.
-    end: ?i64,
+    end: ?i64 = null,
 
     /// The beginning of the time period. The start date is inclusive. For example,
     /// if
@@ -19,7 +19,7 @@ pub const TimePeriod = struct {
     /// at `2017-01-01` up to the end date. The start date must be equal to or no
     /// later
     /// than the current date to avoid a validation error.
-    start: ?i64,
+    start: ?i64 = null,
 
     pub const json_field_names = .{
         .end = "end",

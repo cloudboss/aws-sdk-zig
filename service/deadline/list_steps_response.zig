@@ -8,7 +8,7 @@ pub const ListStepsResponse = struct {
     /// `nextToken` is set to `null`. Each pagination token expires after 24 hours.
     /// If you provide a token that isn't valid, then you receive an HTTP 400
     /// `ValidationException` error.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The steps on the list.
     steps: []const StepSummary,

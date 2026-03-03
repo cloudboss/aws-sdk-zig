@@ -6,11 +6,11 @@ pub const NetworkConfiguration = struct {
     /// A list of security group IDs. For more information, see [Security in your
     /// VPC on Amazon
     /// MWAA](https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html).
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// A list of subnet IDs. For more information, see [About networking on Amazon
     /// MWAA](https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html).
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .security_group_ids = "SecurityGroupIds",

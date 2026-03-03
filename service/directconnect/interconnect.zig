@@ -6,33 +6,33 @@ const Tag = @import("tag.zig").Tag;
 /// Information about an interconnect.
 pub const Interconnect = struct {
     /// The Direct Connect endpoint on which the physical connection terminates.
-    aws_device: ?[]const u8,
+    aws_device: ?[]const u8 = null,
 
     /// The Direct Connect endpoint that terminates the physical connection.
-    aws_device_v2: ?[]const u8,
+    aws_device_v2: ?[]const u8 = null,
 
     /// The Direct Connect endpoint that terminates the logical connection. This
     /// device might be
     /// different than the device that terminates the physical connection.
-    aws_logical_device_id: ?[]const u8,
+    aws_logical_device_id: ?[]const u8 = null,
 
     /// The bandwidth of the connection.
-    bandwidth: ?[]const u8,
+    bandwidth: ?[]const u8 = null,
 
     /// The MAC Security (MACsec) encryption mode.
     ///
     /// The valid values are `no_encrypt`, `should_encrypt`, and `must_encrypt`.
-    encryption_mode: ?[]const u8,
+    encryption_mode: ?[]const u8 = null,
 
     /// Indicates whether the interconnect supports a secondary BGP in the same
     /// address family (IPv4/IPv6).
-    has_logical_redundancy: ?HasLogicalRedundancy,
+    has_logical_redundancy: ?HasLogicalRedundancy = null,
 
     /// The ID of the interconnect.
-    interconnect_id: ?[]const u8,
+    interconnect_id: ?[]const u8 = null,
 
     /// The name of the interconnect.
-    interconnect_name: ?[]const u8,
+    interconnect_name: ?[]const u8 = null,
 
     /// The state of the interconnect. The following are the possible values:
     ///
@@ -53,40 +53,40 @@ pub const Interconnect = struct {
     /// * `deleted`: The interconnect is deleted.
     ///
     /// * `unknown`: The state of the interconnect is not available.
-    interconnect_state: ?InterconnectState,
+    interconnect_state: ?InterconnectState = null,
 
     /// Indicates whether jumbo frames are supported.
-    jumbo_frame_capable: ?bool,
+    jumbo_frame_capable: ?bool = null,
 
     /// The ID of the LAG.
-    lag_id: ?[]const u8,
+    lag_id: ?[]const u8 = null,
 
     /// The time of the most recent call to DescribeLoa for this connection.
-    loa_issue_time: ?i64,
+    loa_issue_time: ?i64 = null,
 
     /// The location of the connection.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// Indicates whether the interconnect supports MAC Security (MACsec).
-    mac_sec_capable: ?bool,
+    mac_sec_capable: ?bool = null,
 
     /// The MAC Security (MACsec) security keys.
-    mac_sec_keys: ?[]const MacSecKey,
+    mac_sec_keys: ?[]const MacSecKey = null,
 
     /// The MAC Security (MACsec) port link status.
     ///
     /// The valid values are `Encryption Up`, which means that there is an active
     /// Connection Key Name, or `Encryption Down`.
-    port_encryption_status: ?[]const u8,
+    port_encryption_status: ?[]const u8 = null,
 
     /// The name of the service provider associated with the interconnect.
-    provider_name: ?[]const u8,
+    provider_name: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the connection is located.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The tags associated with the interconnect.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .aws_device = "awsDevice",

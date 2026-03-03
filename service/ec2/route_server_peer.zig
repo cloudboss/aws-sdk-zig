@@ -18,46 +18,46 @@ const Tag = @import("tag.zig").Tag;
 /// * Can initiate BGP sessions
 pub const RouteServerPeer = struct {
     /// The current status of the BFD session with this peer.
-    bfd_status: ?RouteServerBfdStatus,
+    bfd_status: ?RouteServerBfdStatus = null,
 
     /// The BGP configuration options for this peer, including ASN (Autonomous
     /// System Number) and BFD (Bidrectional Forwarding Detection) settings.
-    bgp_options: ?RouteServerBgpOptions,
+    bgp_options: ?RouteServerBgpOptions = null,
 
     /// The current status of the BGP session with this peer.
-    bgp_status: ?RouteServerBgpStatus,
+    bgp_status: ?RouteServerBgpStatus = null,
 
     /// The IP address of the Elastic network interface for the route server
     /// endpoint.
-    endpoint_eni_address: ?[]const u8,
+    endpoint_eni_address: ?[]const u8 = null,
 
     /// The ID of the Elastic network interface for the route server endpoint.
-    endpoint_eni_id: ?[]const u8,
+    endpoint_eni_id: ?[]const u8 = null,
 
     /// The reason for any failure in peer creation or operation.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The IPv4 address of the peer device.
-    peer_address: ?[]const u8,
+    peer_address: ?[]const u8 = null,
 
     /// The ID of the route server endpoint associated with this peer.
-    route_server_endpoint_id: ?[]const u8,
+    route_server_endpoint_id: ?[]const u8 = null,
 
     /// The ID of the route server associated with this peer.
-    route_server_id: ?[]const u8,
+    route_server_id: ?[]const u8 = null,
 
     /// The unique identifier of the route server peer.
-    route_server_peer_id: ?[]const u8,
+    route_server_peer_id: ?[]const u8 = null,
 
     /// The current state of the route server peer.
-    state: ?RouteServerPeerState,
+    state: ?RouteServerPeerState = null,
 
     /// The ID of the subnet containing the route server peer.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// Any tags assigned to the route server peer.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the VPC containing the route server peer.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

@@ -7,10 +7,10 @@ const Specifications = @import("specifications.zig").Specifications;
 pub const SubSlotSetting = struct {
     /// The expression text for defining the constituent sub slots in the composite
     /// slot using logical AND and OR operators.
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     /// Specifications for the constituent sub slots of a composite slot.
-    slot_specifications: ?[]const aws.map.MapEntry(Specifications),
+    slot_specifications: ?[]const aws.map.MapEntry(Specifications) = null,
 
     pub const json_field_names = .{
         .expression = "expression",

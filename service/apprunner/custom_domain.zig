@@ -4,7 +4,7 @@ const CustomDomainAssociationStatus = @import("custom_domain_association_status.
 /// Describes a custom domain that's associated with an App Runner service.
 pub const CustomDomain = struct {
     /// A list of certificate CNAME records that's used for this domain name.
-    certificate_validation_records: ?[]const CertificateValidationRecord,
+    certificate_validation_records: ?[]const CertificateValidationRecord = null,
 
     /// An associated custom domain endpoint. It can be a root domain (for example,
     /// `example.com`), a subdomain (for example,

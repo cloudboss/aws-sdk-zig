@@ -7,7 +7,7 @@ pub const ListJobRunsResponse = struct {
     /// The output displays the token for the next set of job run results. This is
     /// required for pagination and is available as a response of the previous
     /// request.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .job_runs = "jobRuns",

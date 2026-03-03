@@ -7,12 +7,12 @@ pub const S3Configuration = struct {
 
     /// Encryption at rest options for the error reports. If no encryption option is
     /// specified, Timestream will choose SSE_S3 as default.
-    encryption_option: ?S3EncryptionOption,
+    encryption_option: ?S3EncryptionOption = null,
 
     /// Prefix for the error report key. Timestream by default adds the following
     /// prefix to
     /// the error report path.
-    object_key_prefix: ?[]const u8,
+    object_key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_name = "BucketName",

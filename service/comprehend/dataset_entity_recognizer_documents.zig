@@ -13,7 +13,7 @@ pub const DatasetEntityRecognizerDocuments = struct {
     /// separate document.
     /// Use this option when you are processing many short documents, such as text
     /// messages.
-    input_format: ?InputFormat,
+    input_format: ?InputFormat = null,
 
     /// Specifies the Amazon S3 location where the documents for the dataset
     /// are located.

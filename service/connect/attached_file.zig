@@ -11,10 +11,10 @@ pub const AttachedFile = struct {
     /// resource.
     ///
     /// This value must be a valid ARN.
-    associated_resource_arn: ?[]const u8,
+    associated_resource_arn: ?[]const u8 = null,
 
     /// Represents the identity that created the file.
-    created_by: ?CreatedByInfo,
+    created_by: ?CreatedByInfo = null,
 
     /// The time of Creation of the file resource as an ISO timestamp. It's
     /// specified in ISO 8601 format:
@@ -37,12 +37,12 @@ pub const AttachedFile = struct {
     file_status: FileStatusType,
 
     /// The use case for the file.
-    file_use_case_type: ?FileUseCaseType,
+    file_use_case_type: ?FileUseCaseType = null,
 
     /// The tags used to organize, track, or control access for this resource. For
     /// example, `{ "Tags":
     /// {"key1":"value1", "key2":"value2"} }`.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .associated_resource_arn = "AssociatedResourceArn",

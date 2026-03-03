@@ -13,30 +13,30 @@ const Capacity = @import("capacity.zig").Capacity;
 /// Guide*.
 pub const ConsumedCapacity = struct {
     /// The total number of capacity units consumed by the operation.
-    capacity_units: ?f64,
+    capacity_units: ?f64 = null,
 
     /// The amount of throughput consumed on each global index affected by the
     /// operation.
-    global_secondary_indexes: ?[]const aws.map.MapEntry(Capacity),
+    global_secondary_indexes: ?[]const aws.map.MapEntry(Capacity) = null,
 
     /// The amount of throughput consumed on each local index affected by the
     /// operation.
-    local_secondary_indexes: ?[]const aws.map.MapEntry(Capacity),
+    local_secondary_indexes: ?[]const aws.map.MapEntry(Capacity) = null,
 
     /// The total number of read capacity units consumed by the operation.
-    read_capacity_units: ?f64,
+    read_capacity_units: ?f64 = null,
 
     /// The amount of throughput consumed on the table affected by the operation.
-    table: ?Capacity,
+    table: ?Capacity = null,
 
     /// The name of the table that was affected by the operation. If you had
     /// specified the
     /// Amazon Resource Name (ARN) of a table in the input, you'll see the table ARN
     /// in the response.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The total number of write capacity units consumed by the operation.
-    write_capacity_units: ?f64,
+    write_capacity_units: ?f64 = null,
 
     pub const json_field_names = .{
         .capacity_units = "CapacityUnits",

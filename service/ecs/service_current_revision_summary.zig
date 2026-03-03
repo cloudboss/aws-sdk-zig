@@ -1,7 +1,7 @@
 /// The summary of the current service revision configuration
 pub const ServiceCurrentRevisionSummary = struct {
     /// The ARN of the current service revision.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The number of pending tasks in the current service revision
     pending_task_count: i32 = 0,

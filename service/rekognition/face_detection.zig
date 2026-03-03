@@ -4,7 +4,7 @@ const FaceDetail = @import("face_detail.zig").FaceDetail;
 /// the face was detected in the video.
 pub const FaceDetection = struct {
     /// The face properties for the detected face.
-    face: ?FaceDetail,
+    face: ?FaceDetail = null,
 
     /// Time, in milliseconds from the start of the video, that the face was
     /// detected.

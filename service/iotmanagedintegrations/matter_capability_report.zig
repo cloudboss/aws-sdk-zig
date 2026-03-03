@@ -6,7 +6,7 @@ pub const MatterCapabilityReport = struct {
     endpoints: []const MatterCapabilityReportEndpoint,
 
     /// The numeric identifier of the node.
-    node_id: ?[]const u8,
+    node_id: ?[]const u8 = null,
 
     /// The version of the capability report.
     version: []const u8,

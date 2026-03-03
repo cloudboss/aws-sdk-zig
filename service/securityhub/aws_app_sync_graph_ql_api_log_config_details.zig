@@ -5,15 +5,15 @@ pub const AwsAppSyncGraphQlApiLogConfigDetails = struct {
     /// The Amazon Resource Name (ARN) of the service role that AppSync assumes to
     /// publish to CloudWatch Logs
     /// in your account.
-    cloud_watch_logs_role_arn: ?[]const u8,
+    cloud_watch_logs_role_arn: ?[]const u8 = null,
 
     /// Set to `TRUE` to exclude sections that contain information such as headers,
     /// context, and evaluated mapping templates,
     /// regardless of logging level.
-    exclude_verbose_content: ?bool,
+    exclude_verbose_content: ?bool = null,
 
     /// The field logging level.
-    field_log_level: ?[]const u8,
+    field_log_level: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs_role_arn = "CloudWatchLogsRoleArn",

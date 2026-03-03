@@ -6,7 +6,7 @@ pub const TagResourceRequest = struct {
 
     /// Each tag consists of a tag key and a tag value. Tag keys and values are both
     /// required, but tag values can be empty strings.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .resource_arn = "resourceArn",

@@ -10,7 +10,7 @@ pub const ContactChannelAddress = struct {
     /// * VOICE - '+' followed by the country code and phone number
     ///
     /// * EMAIL - any standard email format
-    simple_address: ?[]const u8,
+    simple_address: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .simple_address = "SimpleAddress",

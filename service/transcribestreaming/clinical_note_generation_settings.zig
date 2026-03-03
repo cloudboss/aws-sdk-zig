@@ -29,7 +29,7 @@ pub const ClinicalNoteGenerationSettings = struct {
     ///
     /// * PHYSICAL_SOAP: Physical health focused documentation format. Examples of
     ///   sections include Subjective, Objective, Assessment, and Plan.
-    note_template: ?MedicalScribeNoteTemplate,
+    note_template: ?MedicalScribeNoteTemplate = null,
 
     /// The name of the Amazon S3 bucket where you want the output of Amazon Web
     /// Services HealthScribe post-stream analytics stored. Don't include the

@@ -19,7 +19,7 @@ pub const EntryDescription = struct {
     /// and the rules to run last, in the order
     /// that you want them to run. Firewall Manager assigns the rule numbers for you
     /// when you save the network ACL policy specification.
-    entry_detail: ?NetworkAclEntry,
+    entry_detail: ?NetworkAclEntry = null,
 
     /// The rule number for the entry. ACL entries are processed in ascending order
     /// by rule number. In a Firewall Manager network ACL policy, Firewall Manager
@@ -29,7 +29,7 @@ pub const EntryDescription = struct {
     /// Specifies whether the entry is managed by Firewall Manager or by a user,
     /// and, for Firewall Manager-managed entries, specifies whether the entry
     /// is among those that run first in the network ACL or those that run last.
-    entry_type: ?EntryType,
+    entry_type: ?EntryType = null,
 
     pub const json_field_names = .{
         .entry_detail = "EntryDetail",

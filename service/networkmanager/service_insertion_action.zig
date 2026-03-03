@@ -12,7 +12,7 @@ pub const ServiceInsertionAction = struct {
     /// security appliance, and then from that to either the Internet or to an
     /// on-premesis
     /// location.
-    action: ?SegmentActionServiceInsertion,
+    action: ?SegmentActionServiceInsertion = null,
 
     /// Describes the mode packets take for the `send-via` action. This is not used
     /// when the action is `send-to`. `dual-hop` packets traverse attachments in
@@ -21,16 +21,16 @@ pub const ServiceInsertionAction = struct {
     /// insertion-enabled segments.
     /// For `single-hop`, packets traverse a single intermediate inserted
     /// attachment. You can use `EdgeOverride` to specify a specific edge to use.
-    mode: ?SendViaMode,
+    mode: ?SendViaMode = null,
 
     /// The list of network function groups and any edge overrides for the chosen
     /// service
     /// insertion action. Used for both `send-to` or `send-via`.
-    via: ?Via,
+    via: ?Via = null,
 
     /// The list of destination segments if the service insertion action is
     /// `send-via`.
-    when_sent_to: ?WhenSentTo,
+    when_sent_to: ?WhenSentTo = null,
 
     pub const json_field_names = .{
         .action = "Action",

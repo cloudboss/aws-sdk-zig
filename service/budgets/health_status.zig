@@ -6,10 +6,10 @@ const HealthStatusReason = @import("health_status_reason.zig").HealthStatusReaso
 /// including its ability to access and update based on its associated billing
 /// view.
 pub const HealthStatus = struct {
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The current status of the billing view resource.
-    status: ?HealthStatusValue,
+    status: ?HealthStatusValue = null,
 
     /// The reason for the current status.
     ///
@@ -24,7 +24,7 @@ pub const HealthStatus = struct {
     ///
     /// * `MULTI_YEAR_HISTORICAL_DATA_DISABLED`: The budget is not being updated.
     ///   Enable multi-year historical data in your Cost Management preferences.
-    status_reason: ?HealthStatusReason,
+    status_reason: ?HealthStatusReason = null,
 
     pub const json_field_names = .{
         .last_updated_time = "LastUpdatedTime",

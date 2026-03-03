@@ -5,7 +5,7 @@ const EntityType = @import("entity_type.zig").EntityType;
 pub const LogRedactionConfiguration = struct {
     /// Specifies the configuration for custom entities in the context of log
     /// redaction.
-    custom_entity_config: ?CustomEntityConfig,
+    custom_entity_config: ?CustomEntityConfig = null,
 
     /// Specifies the entities to be redacted from logs. Entities to redact are
     /// "ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", "NUMBERS","CUSTOM". If CUSTOM is

@@ -15,7 +15,7 @@ pub const CategoryFilter = struct {
 
     /// The default configurations for the associated controls. This applies only
     /// for filters that are scoped to multiple sheets.
-    default_filter_control_configuration: ?DefaultFilterControlConfiguration,
+    default_filter_control_configuration: ?DefaultFilterControlConfiguration = null,
 
     /// An identifier that uniquely identifies a filter within a dashboard,
     /// analysis, or template.

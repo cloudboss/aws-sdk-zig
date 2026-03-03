@@ -4,10 +4,10 @@ const ScanType = @import("scan_type.zig").ScanType;
 /// The scanning configuration for a private registry.
 pub const RegistryScanningConfiguration = struct {
     /// The scanning rules associated with the registry.
-    rules: ?[]const RegistryScanningRule,
+    rules: ?[]const RegistryScanningRule = null,
 
     /// The type of scanning configured for the registry.
-    scan_type: ?ScanType,
+    scan_type: ?ScanType = null,
 
     pub const json_field_names = .{
         .rules = "rules",

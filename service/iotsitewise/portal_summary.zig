@@ -4,16 +4,16 @@ const PortalStatus = @import("portal_status.zig").PortalStatus;
 /// Contains a portal summary.
 pub const PortalSummary = struct {
     /// The date the portal was created, in Unix epoch time.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The portal's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the portal.
     id: []const u8,
 
     /// The date the portal was last updated, in Unix epoch time.
-    last_update_date: ?i64,
+    last_update_date: ?i64 = null,
 
     /// The name of the portal.
     name: []const u8,
@@ -21,7 +21,7 @@ pub const PortalSummary = struct {
     /// Define the type of portal. The value for IoT SiteWise Monitor (Classic) is
     /// `SITEWISE_PORTAL_V1`. The value for IoT SiteWise Monitor (AI-aware) is
     /// `SITEWISE_PORTAL_V2`.
-    portal_type: ?PortalType,
+    portal_type: ?PortalType = null,
 
     /// The
     /// [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the service role that allows the portal's users to access your IoT SiteWise
@@ -29,7 +29,7 @@ pub const PortalSummary = struct {
     /// IoT SiteWise
     /// Monitor](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html) in the
     /// *IoT SiteWise User Guide*.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The URL for the IoT SiteWise Monitor portal. You can use this URL to access
     /// portals that

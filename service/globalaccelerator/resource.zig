@@ -13,7 +13,7 @@ pub const Resource = struct {
     /// [Bring your own IP addresses
     /// (BYOIP)](https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
     /// the Global Accelerator Developer Guide.
-    cidr: ?[]const u8,
+    cidr: ?[]const u8 = null,
 
     /// The endpoint ID for the endpoint that is specified as a Amazon Web Services
     /// resource.
@@ -25,7 +25,7 @@ pub const Resource = struct {
     endpoint_id: []const u8 = "",
 
     /// The Amazon Web Services Region where a shared endpoint resource is located.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cidr = "Cidr",

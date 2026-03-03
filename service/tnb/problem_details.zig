@@ -4,7 +4,7 @@ pub const ProblemDetails = struct {
     detail: []const u8,
 
     /// A human-readable title of the problem type.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .detail = "detail",

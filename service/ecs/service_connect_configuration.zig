@@ -32,12 +32,12 @@ pub const ServiceConnectConfiguration = struct {
     ///
     /// To enable access logs, you must also specify a `logConfiguration` in the
     /// `serviceConnectConfiguration`.
-    access_log_configuration: ?ServiceConnectAccessLogConfiguration,
+    access_log_configuration: ?ServiceConnectAccessLogConfiguration = null,
 
     /// Specifies whether to use Service Connect with this service.
     enabled: bool = false,
 
-    log_configuration: ?LogConfiguration,
+    log_configuration: ?LogConfiguration = null,
 
     /// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map
     /// namespace for use
@@ -48,7 +48,7 @@ pub const ServiceConnectConfiguration = struct {
     /// For more information about Cloud Map, see [Working with
     /// Services](https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html)
     /// in the *Cloud Map Developer Guide*.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The list of Service Connect service objects. These are names and aliases
     /// (also known
@@ -68,7 +68,7 @@ pub const ServiceConnectConfiguration = struct {
     /// service, and a list of aliases (endpoints) and ports for client applications
     /// to refer to
     /// this service.
-    services: ?[]const ServiceConnectService,
+    services: ?[]const ServiceConnectService = null,
 
     pub const json_field_names = .{
         .access_log_configuration = "accessLogConfiguration",

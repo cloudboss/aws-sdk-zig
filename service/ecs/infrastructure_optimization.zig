@@ -17,7 +17,7 @@ pub const InfrastructureOptimization = struct {
     ///
     /// * A value between `0` and `3600` (inclusive) - Specifies the number of
     ///   seconds to wait before optimizing instances.
-    scale_in_after: ?i32,
+    scale_in_after: ?i32 = null,
 
     pub const json_field_names = .{
         .scale_in_after = "scaleInAfter",

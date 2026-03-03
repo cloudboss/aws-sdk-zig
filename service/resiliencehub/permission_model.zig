@@ -18,7 +18,7 @@ pub const PermissionModel = struct {
     ///
     /// * These roles must have a trust policy with `iam:AssumeRole` permission to
     /// the invoker role in the primary account.
-    cross_account_role_arns: ?[]const []const u8,
+    cross_account_role_arns: ?[]const []const u8 = null,
 
     /// Existing Amazon Web Services
     /// IAM role name in the primary Amazon Web Services account that will be
@@ -38,7 +38,7 @@ pub const PermissionModel = struct {
     ///
     /// * Currently, `invokerRoleName` accepts only `[A-Za-z0-9_+=,.@-]`
     /// characters.
-    invoker_role_name: ?[]const u8,
+    invoker_role_name: ?[]const u8 = null,
 
     /// Defines how Resilience Hub scans your resources. It can scan for the
     /// resources by

@@ -13,7 +13,7 @@ pub const BlockAction = struct {
     /// see [Customizing web requests and responses in
     /// WAF](https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
     /// in the *WAF Developer Guide*.
-    custom_response: ?CustomResponse,
+    custom_response: ?CustomResponse = null,
 
     pub const json_field_names = .{
         .custom_response = "CustomResponse",

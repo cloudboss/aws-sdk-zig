@@ -5,7 +5,7 @@ pub const CreateSiteRequest = struct {
     /// A description of your site.
     ///
     /// Constraints: Maximum length of 256 characters.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the global network.
     global_network_id: []const u8,
@@ -19,10 +19,10 @@ pub const CreateSiteRequest = struct {
     /// * `Latitude`: The latitude of the site.
     ///
     /// * `Longitude`: The longitude of the site.
-    location: ?Location,
+    location: ?Location = null,
 
     /// The tags to apply to the resource during creation.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .description = "Description",

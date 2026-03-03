@@ -19,26 +19,26 @@ pub const Av1Settings = struct {
     /// multiple AFD values are valid).
     /// FIXED: the AFD value will be the value configured in the fixedAfd parameter.
     /// NONE: MediaLive won't write AFD into the video
-    afd_signaling: ?AfdSignaling,
+    afd_signaling: ?AfdSignaling = null,
 
     /// Specifies the bit depth for the output encode. Choose a value. Or leave the
     /// field empty to use the default, which is 8 bit.
-    bit_depth: ?Av1BitDepth,
+    bit_depth: ?Av1BitDepth = null,
 
     /// Average bitrate in bits/second. Required when the rate control mode is CBR.
     /// Not used for QVBR.
-    bitrate: ?i32,
+    bitrate: ?i32 = null,
 
     /// The size of the buffer (HRD buffer model) in bits.
-    buf_size: ?i32,
+    buf_size: ?i32 = null,
 
     /// Specify the type of color space to apply or choose to pass through. The
     /// default is to pass through the color space that is in the source.
-    color_space_settings: ?Av1ColorSpaceSettings,
+    color_space_settings: ?Av1ColorSpaceSettings = null,
 
     /// Complete this property only if you set the afdSignaling property to FIXED.
     /// Choose the AFD value (4 bits) to write on all frames of the video encode.
-    fixed_afd: ?FixedAfd,
+    fixed_afd: ?FixedAfd = null,
 
     /// The denominator for the framerate. Framerate is a fraction, for example,
     /// 24000 / 1001.
@@ -53,30 +53,30 @@ pub const Av1Settings = struct {
     /// greater than or equal to 1.
     /// If GopSizeUnits is seconds, GopSize must be greater than 0, but it can be a
     /// decimal.
-    gop_size: ?f64,
+    gop_size: ?f64 = null,
 
     /// Choose the units for the GOP size: FRAMES or SECONDS. For SECONDS, MediaLive
     /// converts the size into a frame count at run time.
-    gop_size_units: ?Av1GopSizeUnits,
+    gop_size_units: ?Av1GopSizeUnits = null,
 
     /// Sets the level. This parameter is one of the properties of the encoding
     /// scheme for AV1.
-    level: ?Av1Level,
+    level: ?Av1Level = null,
 
     /// Sets the amount of lookahead. A value of LOW can decrease latency and memory
     /// usage. A value of HIGH can produce better quality for certain content.
-    look_ahead_rate_control: ?Av1LookAheadRateControl,
+    look_ahead_rate_control: ?Av1LookAheadRateControl = null,
 
     /// The maximum bitrate to assign.
     /// For recommendations, see the description for qvbrQualityLevel.
-    max_bitrate: ?i32,
+    max_bitrate: ?i32 = null,
 
     /// Used for QVBR rate control mode only.
     /// Optional.
     /// Enter a minimum bitrate if you want to keep the output bitrate about a
     /// threshold, in order to prevent the downstream system from de-allocating
     /// network bandwidth for this output.
-    min_bitrate: ?i32,
+    min_bitrate: ?i32 = null,
 
     /// Applies only if you enable SceneChangeDetect. Sets the interval between
     /// frames. This property ensures a minimum separation between repeated
@@ -88,13 +88,13 @@ pub const Av1Settings = struct {
     /// Then normal cadence resumes in the next GOP. For GOP stretch to succeed, you
     /// must enable LookAheadRateControl.
     /// Note that the maximum GOP stretch = (GOP size) + (Minimum I-interval) - 1
-    min_i_interval: ?i32,
+    min_i_interval: ?i32 = null,
 
     /// The denominator for the output pixel aspect ratio (PAR).
-    par_denominator: ?i32,
+    par_denominator: ?i32 = null,
 
     /// The numerator for the output pixel aspect ratio (PAR).
-    par_numerator: ?i32,
+    par_numerator: ?i32 = null,
 
     /// Controls the target quality for the video encode. With QVBR rate control
     /// mode, the final quality is the target quality, constrained by the
@@ -115,7 +115,7 @@ pub const Av1Settings = struct {
     /// 3,000,000
     /// Smartphone: qvbrQualityLevel: Leave empty. maxBitrate: 1,000,000 to
     /// 1,500,000
-    qvbr_quality_level: ?i32,
+    qvbr_quality_level: ?i32 = null,
 
     /// Rate control mode.
     ///
@@ -126,28 +126,28 @@ pub const Av1Settings = struct {
     /// CBR: Quality varies, depending on the video complexity. Recommended only if
     /// you distribute
     /// your assets to devices that cannot handle variable bitrates.
-    rate_control_mode: ?Av1RateControlMode,
+    rate_control_mode: ?Av1RateControlMode = null,
 
     /// Controls whether MediaLive inserts I-frames when it detects a scene change.
     /// ENABLED or DISABLED.
-    scene_change_detect: ?Av1SceneChangeDetect,
+    scene_change_detect: ?Av1SceneChangeDetect = null,
 
     /// Spatial AQ makes adjustments within each frame based on spatial variation of
     /// content complexity. Enabled: MediaLive will determine the appropriate level
     /// of spatial AQ to apply. Disabled: No spatial AQ. For more information, see
     /// the topic about video adaptive quantization in the MediaLive user guide.
-    spatial_aq: ?Av1SpatialAq,
+    spatial_aq: ?Av1SpatialAq = null,
 
     /// Temporal AQ makes adjustments within each frame based on variations in
     /// content complexity over time. Enabled: MediaLive will determine the
     /// appropriate level of temporal AQ to apply. Disabled: No temporal AQ. For
     /// more information, see the topic about video adaptive quantization in the
     /// MediaLive user guide.
-    temporal_aq: ?Av1TemporalAq,
+    temporal_aq: ?Av1TemporalAq = null,
 
     /// Configures the timecode burn-in feature. If you enable this feature, the
     /// timecode will become part of the video.
-    timecode_burnin_settings: ?TimecodeBurninSettings,
+    timecode_burnin_settings: ?TimecodeBurninSettings = null,
 
     /// Controls how MediaLive inserts timecodes into the video output encode.
     /// DISABLED: Do not insert timecodes.
@@ -156,7 +156,7 @@ pub const Av1Settings = struct {
     /// The timecode metadata is a metadata OBU (Open Bitstream Unit) of type
     /// METADATA_TYPE_TIMECODE, in accordance with
     /// https://aomediacodec.github.io/av1-spec/#metadata-timecode-syntax.
-    timecode_insertion: ?Av1TimecodeInsertionBehavior,
+    timecode_insertion: ?Av1TimecodeInsertionBehavior = null,
 
     pub const json_field_names = .{
         .afd_signaling = "AfdSignaling",

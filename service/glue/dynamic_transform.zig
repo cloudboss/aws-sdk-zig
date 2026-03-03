@@ -13,10 +13,10 @@ pub const DynamicTransform = struct {
     name: []const u8,
 
     /// Specifies the data schema for the dynamic transform.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// Specifies the parameters of the dynamic transform.
-    parameters: ?[]const TransformConfigParameter,
+    parameters: ?[]const TransformConfigParameter = null,
 
     /// Specifies the path of the dynamic transform source and config files.
     path: []const u8,
@@ -26,7 +26,7 @@ pub const DynamicTransform = struct {
     transform_name: []const u8,
 
     /// This field is not used and will be deprecated in future release.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .function_name = "FunctionName",

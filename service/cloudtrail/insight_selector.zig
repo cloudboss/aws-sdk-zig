@@ -14,7 +14,7 @@ pub const InsightSelector = struct {
     /// if a trail already has Insights enabled on management events, and then a
     /// PutInsightSelectors request is made with only data events specified in
     /// EventCategories, Insights on management events will be disabled.
-    event_categories: ?[]const SourceEventCategory,
+    event_categories: ?[]const SourceEventCategory = null,
 
     /// The type of Insights events to log on a trail or event data store.
     /// `ApiCallRateInsight` and
@@ -27,7 +27,7 @@ pub const InsightSelector = struct {
     /// The `ApiErrorRateInsight` Insights type analyzes management and data
     /// API calls that result in error codes. The error is shown if the API call is
     /// unsuccessful.
-    insight_type: ?InsightType,
+    insight_type: ?InsightType = null,
 
     pub const json_field_names = .{
         .event_categories = "EventCategories",

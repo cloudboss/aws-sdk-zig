@@ -4,13 +4,13 @@ const BatchCreateBillScenarioCommitmentModificationErrorCode = @import("batch_cr
 /// scenario commitment modifications.
 pub const BatchCreateBillScenarioCommitmentModificationError = struct {
     /// The error code associated with the failed operation.
-    error_code: ?BatchCreateBillScenarioCommitmentModificationErrorCode,
+    error_code: ?BatchCreateBillScenarioCommitmentModificationErrorCode = null,
 
     /// A descriptive message for the error that occurred.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The key of the entry that caused the error.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

@@ -9,14 +9,14 @@ const DateTimeRange = @import("date_time_range.zig").DateTimeRange;
 /// grouping dimensions, and filtering conditions.
 pub const CostAndUsageQuery = struct {
     /// The filter expression to be applied to the cost and usage data.
-    filter: ?Expression,
+    filter: ?Expression = null,
 
     /// The granularity of the retrieved data: `HOURLY`, `DAILY`, or `MONTHLY`.
     granularity: Granularity,
 
     /// Specifies how to group the retrieved data, such as by `SERVICE`, `ACCOUNT`,
     /// or `TAG`.
-    group_by: ?[]const GroupDefinition,
+    group_by: ?[]const GroupDefinition = null,
 
     /// The specific cost and usage metrics to retrieve.
     ///

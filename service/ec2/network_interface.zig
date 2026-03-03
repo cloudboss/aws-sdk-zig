@@ -15,21 +15,21 @@ const Tag = @import("tag.zig").Tag;
 /// Describes a network interface.
 pub const NetworkInterface = struct {
     /// The subnets associated with this network interface.
-    associated_subnets: ?[]const []const u8,
+    associated_subnets: ?[]const []const u8 = null,
 
     /// The association information for an Elastic IP address (IPv4) associated with
     /// the
     /// network interface.
-    association: ?NetworkInterfaceAssociation,
+    association: ?NetworkInterfaceAssociation = null,
 
     /// The network interface attachment.
-    attachment: ?NetworkInterfaceAttachment,
+    attachment: ?NetworkInterfaceAttachment = null,
 
     /// The Availability Zone.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the Availability Zone.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// A security group connection tracking configuration that enables you to set
     /// the timeout
@@ -38,7 +38,7 @@ pub const NetworkInterface = struct {
     /// [Connection tracking
     /// timeouts](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts) in the
     /// *Amazon EC2 User Guide*.
-    connection_tracking_configuration: ?ConnectionTrackingConfiguration,
+    connection_tracking_configuration: ?ConnectionTrackingConfiguration = null,
 
     /// Indicates whether a network interface with an IPv6 address is unreachable
     /// from the
@@ -49,89 +49,89 @@ pub const NetworkInterface = struct {
     /// network interface is reachable from peered VPCs and resources connected
     /// through a
     /// transit gateway, including on-premises networks.
-    deny_all_igw_traffic: ?bool,
+    deny_all_igw_traffic: ?bool = null,
 
     /// A description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Any security groups for the network interface.
-    groups: ?[]const GroupIdentifier,
+    groups: ?[]const GroupIdentifier = null,
 
     /// The type of network interface.
-    interface_type: ?NetworkInterfaceType,
+    interface_type: ?NetworkInterfaceType = null,
 
     /// The IPv4 prefixes that are assigned to the network interface.
-    ipv_4_prefixes: ?[]const Ipv4PrefixSpecification,
+    ipv_4_prefixes: ?[]const Ipv4PrefixSpecification = null,
 
     /// The IPv6 globally unique address associated with the network interface.
-    ipv_6_address: ?[]const u8,
+    ipv_6_address: ?[]const u8 = null,
 
     /// The IPv6 addresses associated with the network interface.
-    ipv_6_addresses: ?[]const NetworkInterfaceIpv6Address,
+    ipv_6_addresses: ?[]const NetworkInterfaceIpv6Address = null,
 
     /// Indicates whether this is an IPv6 only network interface.
-    ipv_6_native: ?bool,
+    ipv_6_native: ?bool = null,
 
     /// The IPv6 prefixes that are assigned to the network interface.
-    ipv_6_prefixes: ?[]const Ipv6PrefixSpecification,
+    ipv_6_prefixes: ?[]const Ipv6PrefixSpecification = null,
 
     /// The MAC address.
-    mac_address: ?[]const u8,
+    mac_address: ?[]const u8 = null,
 
     /// The ID of the network interface.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// The service provider that manages the network interface.
-    operator: ?OperatorResponse,
+    operator: ?OperatorResponse = null,
 
     /// The Amazon Resource Name (ARN) of the Outpost.
-    outpost_arn: ?[]const u8,
+    outpost_arn: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID of the owner of the network interface.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The private hostname. For more information, see [EC2 instance hostnames, DNS
     /// names, and
     /// domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *Amazon EC2 User Guide*.
-    private_dns_name: ?[]const u8,
+    private_dns_name: ?[]const u8 = null,
 
     /// The IPv4 address of the network interface within the subnet.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// The private IPv4 addresses associated with the network interface.
-    private_ip_addresses: ?[]const NetworkInterfacePrivateIpAddress,
+    private_ip_addresses: ?[]const NetworkInterfacePrivateIpAddress = null,
 
     /// A public hostname. For more information, see [EC2 instance hostnames, DNS
     /// names, and
     /// domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *Amazon EC2 User Guide*.
-    public_dns_name: ?[]const u8,
+    public_dns_name: ?[]const u8 = null,
 
     /// Public hostname type options. For more information, see [EC2 instance
     /// hostnames, DNS names, and
     /// domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *Amazon EC2 User Guide*.
-    public_ip_dns_name_options: ?PublicIpDnsNameOptions,
+    public_ip_dns_name_options: ?PublicIpDnsNameOptions = null,
 
     /// The alias or Amazon Web Services account ID of the principal or service that
     /// created
     /// the network interface.
-    requester_id: ?[]const u8,
+    requester_id: ?[]const u8 = null,
 
     /// Indicates whether the network interface is being managed by Amazon Web
     /// Services.
-    requester_managed: ?bool,
+    requester_managed: ?bool = null,
 
     /// Indicates whether source/destination checking is enabled.
-    source_dest_check: ?bool,
+    source_dest_check: ?bool = null,
 
     /// The status of the network interface.
-    status: ?NetworkInterfaceStatus,
+    status: ?NetworkInterfaceStatus = null,
 
     /// The ID of the subnet.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// Any tags assigned to the network interface.
-    tag_set: ?[]const Tag,
+    tag_set: ?[]const Tag = null,
 
     /// The ID of the VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

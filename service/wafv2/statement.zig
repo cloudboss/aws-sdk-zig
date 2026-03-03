@@ -29,7 +29,7 @@ pub const Statement = struct {
     ///
     /// For additional details, see [ASN match rule
     /// statement](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-asn-match.html) in the [WAF Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-    asn_match_statement: ?AsnMatchStatement,
+    asn_match_statement: ?AsnMatchStatement = null,
 
     /// A rule statement that defines a string match search for WAF to apply to web
     /// requests. The byte match statement provides the bytes to search for, the
@@ -37,7 +37,7 @@ pub const Statement = struct {
     /// bytes to search for are typically a string that corresponds with ASCII
     /// characters. In the WAF console and the developer guide, this is called a
     /// string match statement.
-    byte_match_statement: ?ByteMatchStatement,
+    byte_match_statement: ?ByteMatchStatement = null,
 
     /// A rule statement that labels web requests by country and region and that
     /// matches against web requests based on country code. A geo match rule labels
@@ -65,7 +65,7 @@ pub const Statement = struct {
     ///
     /// For additional details, see [Geographic match rule
     /// statement](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-geo-match.html) in the [WAF Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-    geo_match_statement: ?GeoMatchStatement,
+    geo_match_statement: ?GeoMatchStatement = null,
 
     /// A rule statement used to detect web requests coming from particular IP
     /// addresses or address ranges. To use this, create an IPSet that specifies the
@@ -76,7 +76,7 @@ pub const Statement = struct {
     /// set independent of your rules. This allows you to use the single set in
     /// multiple rules. When you update the referenced set, WAF automatically
     /// updates all rules that reference it.
-    ip_set_reference_statement: ?IPSetReferenceStatement,
+    ip_set_reference_statement: ?IPSetReferenceStatement = null,
 
     /// A rule statement to match against labels that have been added to the web
     /// request by rules that have already run in the web ACL.
@@ -89,7 +89,7 @@ pub const Statement = struct {
     /// do not provide the fully qualified name in your label match string, WAF
     /// performs the search for labels that were added in the same context as the
     /// label match statement.
-    label_match_statement: ?LabelMatchStatement,
+    label_match_statement: ?LabelMatchStatement = null,
 
     /// A rule statement used to run the rules that are defined in a managed rule
     /// group. To use this, provide the vendor name and the name of the rule group
@@ -216,7 +216,7 @@ pub const Statement = struct {
 
     /// A rule statement used to search web request components for a match against a
     /// single regular expression.
-    regex_match_statement: ?RegexMatchStatement,
+    regex_match_statement: ?RegexMatchStatement = null,
 
     /// A rule statement used to search web request components for matches with
     /// regular expressions. To use this, create a RegexPatternSet that specifies
@@ -229,7 +229,7 @@ pub const Statement = struct {
     /// create and maintain the set independent of your rules. This allows you to
     /// use the single set in multiple rules. When you update the referenced set,
     /// WAF automatically updates all rules that reference it.
-    regex_pattern_set_reference_statement: ?RegexPatternSetReferenceStatement,
+    regex_pattern_set_reference_statement: ?RegexPatternSetReferenceStatement = null,
 
     /// A rule statement used to run the rules that are defined in a RuleGroup. To
     /// use this, create a rule group with your rules, then provide the ARN of the
@@ -239,7 +239,7 @@ pub const Statement = struct {
     /// a `NotStatement` or `OrStatement`. You cannot use a rule group
     /// reference statement inside another rule group. You can only reference a rule
     /// group as a top-level statement within a rule that you define in a web ACL.
-    rule_group_reference_statement: ?RuleGroupReferenceStatement,
+    rule_group_reference_statement: ?RuleGroupReferenceStatement = null,
 
     /// A rule statement that compares a number of bytes against the size of a
     /// request component, using a comparison operator, such as greater than (>) or
@@ -257,18 +257,18 @@ pub const Statement = struct {
     /// If you choose URI for the value of Part of the request to filter on, the
     /// slash (/) in the URI counts as one character. For example, the URI
     /// `/logo.jpg` is nine characters long.
-    size_constraint_statement: ?SizeConstraintStatement,
+    size_constraint_statement: ?SizeConstraintStatement = null,
 
     /// A rule statement that inspects for malicious SQL code. Attackers insert
     /// malicious SQL code into web requests to do things like modify your database
     /// or extract data from it.
-    sqli_match_statement: ?SqliMatchStatement,
+    sqli_match_statement: ?SqliMatchStatement = null,
 
     /// A rule statement that inspects for cross-site scripting (XSS) attacks. In
     /// XSS attacks, the attacker
     /// uses vulnerabilities in a benign website as a vehicle to inject malicious
     /// client-site scripts into other legitimate web browsers.
-    xss_match_statement: ?XssMatchStatement,
+    xss_match_statement: ?XssMatchStatement = null,
 
     pub const json_field_names = .{
         .and_statement = "AndStatement",

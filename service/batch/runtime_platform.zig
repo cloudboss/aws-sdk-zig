@@ -13,7 +13,7 @@ pub const RuntimePlatform = struct {
     /// However, you can attach
     /// both `FARGATE` and `FARGATE_SPOT` compute environments to the same job
     /// queue.
-    cpu_architecture: ?[]const u8,
+    cpu_architecture: ?[]const u8 = null,
 
     /// The operating system for the compute environment. Valid values are:
     /// `LINUX` (default), `WINDOWS_SERVER_2019_CORE`,
@@ -40,7 +40,7 @@ pub const RuntimePlatform = struct {
     /// queue with only Fargate Spot compute environments. However, you can attach
     /// both `FARGATE` and
     /// `FARGATE_SPOT` compute environments to the same job queue.
-    operating_system_family: ?[]const u8,
+    operating_system_family: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cpu_architecture = "cpuArchitecture",

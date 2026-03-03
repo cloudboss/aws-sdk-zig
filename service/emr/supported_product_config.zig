@@ -4,10 +4,10 @@
 /// script as bootstrap action arguments.
 pub const SupportedProductConfig = struct {
     /// The list of user-supplied arguments.
-    args: ?[]const []const u8,
+    args: ?[]const []const u8 = null,
 
     /// The name of the product configuration.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .args = "Args",

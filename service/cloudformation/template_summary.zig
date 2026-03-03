@@ -3,25 +3,25 @@ const GeneratedTemplateStatus = @import("generated_template_status.zig").Generat
 /// The summary of a generated template.
 pub const TemplateSummary = struct {
     /// The time the generated template was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the generated template. The format is
     /// `arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}`. For
     /// example,
     /// `arn:aws:cloudformation:*us-east-1*:*123456789012*:generatedtemplate/*2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc*
     /// `.
-    generated_template_id: ?[]const u8,
+    generated_template_id: ?[]const u8 = null,
 
     /// The name of the generated template.
-    generated_template_name: ?[]const u8,
+    generated_template_name: ?[]const u8 = null,
 
     /// The time the generated template was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The number of resources in the generated template. This is a total of
     /// resources in pending,
     /// in-progress, completed, and failed states.
-    number_of_resources: ?i32,
+    number_of_resources: ?i32 = null,
 
     /// The status of the template generation. Supported values are:
     ///
@@ -40,10 +40,10 @@ pub const TemplateSummary = struct {
     /// * `Failed` - the template operation failed.
     ///
     /// * `Complete` - the template operation is complete.
-    status: ?GeneratedTemplateStatus,
+    status: ?GeneratedTemplateStatus = null,
 
     /// The reason for the current template generation status. This will provide
     /// more details if a
     /// failure happened.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 };

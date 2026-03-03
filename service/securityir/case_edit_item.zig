@@ -1,11 +1,11 @@
 pub const CaseEditItem = struct {
-    action: ?[]const u8,
+    action: ?[]const u8 = null,
 
-    event_timestamp: ?i64,
+    event_timestamp: ?i64 = null,
 
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
-    principal: ?[]const u8,
+    principal: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "action",

@@ -21,7 +21,7 @@ pub const IPSetReferenceStatement = struct {
     ///
     /// If the specified header isn't present in the request, WAF doesn't apply the
     /// rule to the web request at all.
-    ip_set_forwarded_ip_config: ?IPSetForwardedIPConfig,
+    ip_set_forwarded_ip_config: ?IPSetForwardedIPConfig = null,
 
     pub const json_field_names = .{
         .arn = "ARN",

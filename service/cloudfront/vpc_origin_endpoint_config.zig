@@ -21,5 +21,5 @@ pub const VpcOriginEndpointConfig = struct {
     /// configuration.
     origin_protocol_policy: OriginProtocolPolicy,
 
-    origin_ssl_protocols: ?OriginSslProtocols,
+    origin_ssl_protocols: ?OriginSslProtocols = null,
 };

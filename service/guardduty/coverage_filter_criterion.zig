@@ -9,10 +9,10 @@ pub const CoverageFilterCriterion = struct {
     ///
     /// Replace the enum value `CLUSTER_NAME` with `EKS_CLUSTER_NAME`.
     /// `CLUSTER_NAME` has been deprecated.
-    criterion_key: ?CoverageFilterCriterionKey,
+    criterion_key: ?CoverageFilterCriterionKey = null,
 
     /// Contains information about the condition.
-    filter_condition: ?CoverageFilterCondition,
+    filter_condition: ?CoverageFilterCondition = null,
 
     pub const json_field_names = .{
         .criterion_key = "CriterionKey",

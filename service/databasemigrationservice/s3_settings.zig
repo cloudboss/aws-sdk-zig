@@ -14,11 +14,11 @@ pub const S3Settings = struct {
     ///
     /// The default value is `false`. Valid values are `true`,
     /// `false`, `y`, and `n`.
-    add_column_name: ?bool,
+    add_column_name: ?bool = null,
 
     /// Use the S3 target endpoint setting `AddTrailingPaddingCharacter` to add
     /// padding on string data. The default value is `false`.
-    add_trailing_padding_character: ?bool,
+    add_trailing_padding_character: ?bool = null,
 
     /// An optional parameter to set a folder name in the S3 bucket. If provided,
     /// tables are
@@ -28,10 +28,10 @@ pub const S3Settings = struct {
     /// If this parameter isn't specified, then the path used is
     /// `
     /// *schema_name*/*table_name*/`.
-    bucket_folder: ?[]const u8,
+    bucket_folder: ?[]const u8 = null,
 
     /// The name of the S3 bucket.
-    bucket_name: ?[]const u8,
+    bucket_name: ?[]const u8 = null,
 
     /// A value that enables DMS to specify a predefined (canned) access control
     /// list for
@@ -43,7 +43,7 @@ pub const S3Settings = struct {
     /// The default value is NONE. Valid values include NONE, PRIVATE, PUBLIC_READ,
     /// PUBLIC_READ_WRITE, AUTHENTICATED_READ, AWS_EXEC_READ, BUCKET_OWNER_READ, and
     /// BUCKET_OWNER_FULL_CONTROL.
-    canned_acl_for_objects: ?CannedAclForObjectsValue,
+    canned_acl_for_objects: ?CannedAclForObjectsValue = null,
 
     /// A value that enables a change data capture (CDC) load to write INSERT and
     /// UPDATE
@@ -74,7 +74,7 @@ pub const S3Settings = struct {
     /// set to `true` for the same endpoint. Set either `CdcInsertsOnly`
     /// or `CdcInsertsAndUpdates` to `true` for the same endpoint, but not
     /// both.
-    cdc_inserts_and_updates: ?bool,
+    cdc_inserts_and_updates: ?bool = null,
 
     /// A value that enables a change data capture (CDC) load to write only INSERT
     /// operations to
@@ -107,7 +107,7 @@ pub const S3Settings = struct {
     /// set to `true` for the same endpoint. Set either `CdcInsertsOnly`
     /// or `CdcInsertsAndUpdates` to `true` for the same endpoint, but not
     /// both.
-    cdc_inserts_only: ?bool,
+    cdc_inserts_only: ?bool = null,
 
     /// Maximum length of the interval, defined in seconds, after which to output a
     /// file to
@@ -119,7 +119,7 @@ pub const S3Settings = struct {
     /// an DMS CloudFormation template.
     ///
     /// The default value is 60 seconds.
-    cdc_max_batch_interval: ?i32,
+    cdc_max_batch_interval: ?i32 = null,
 
     /// Minimum file size, defined in kilobytes, to reach for a file output to
     /// Amazon S3.
@@ -130,7 +130,7 @@ pub const S3Settings = struct {
     /// an DMS CloudFormation template.
     ///
     /// The default value is 32 MB.
-    cdc_min_file_size: ?i32,
+    cdc_min_file_size: ?i32 = null,
 
     /// Specifies the folder path of CDC files. For an S3 source, this setting is
     /// required if a
@@ -167,7 +167,7 @@ pub const S3Settings = struct {
     /// target](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath).
     ///
     /// This setting is supported in DMS versions 3.4.2 and later.
-    cdc_path: ?[]const u8,
+    cdc_path: ?[]const u8 = null,
 
     /// An optional parameter to use GZIP to compress the target files. Set to GZIP
     /// to compress
@@ -176,12 +176,12 @@ pub const S3Settings = struct {
     /// leave the files uncompressed. This parameter applies to both .csv and
     /// .parquet file
     /// formats.
-    compression_type: ?CompressionTypeValue,
+    compression_type: ?CompressionTypeValue = null,
 
     /// The delimiter used to separate columns in the .csv file for both source and
     /// target. The
     /// default is a comma.
-    csv_delimiter: ?[]const u8,
+    csv_delimiter: ?[]const u8 = null,
 
     /// This setting only applies if your Amazon S3 output files during a change
     /// data capture
@@ -195,7 +195,7 @@ pub const S3Settings = struct {
     /// regardless of the `UseCsvNoSupValue` setting.
     ///
     /// This setting is supported in DMS versions 3.4.1 and later.
-    csv_no_sup_value: ?[]const u8,
+    csv_no_sup_value: ?[]const u8 = null,
 
     /// An optional parameter that specifies how DMS treats null values. While
     /// handling the
@@ -210,12 +210,12 @@ pub const S3Settings = struct {
     /// value instead of `NULL`.
     ///
     /// The default value is `NULL`. Valid values include any valid string.
-    csv_null_value: ?[]const u8,
+    csv_null_value: ?[]const u8 = null,
 
     /// The delimiter used to separate rows in the .csv file for both source and
     /// target. The
     /// default is a carriage return (`\n`).
-    csv_row_delimiter: ?[]const u8,
+    csv_row_delimiter: ?[]const u8 = null,
 
     /// The format of the data that you want to use for output. You can choose one
     /// of the
@@ -226,30 +226,30 @@ pub const S3Settings = struct {
     ///
     /// * `parquet` : Apache Parquet (.parquet) is a columnar storage file format
     /// that features efficient compression and provides faster query response.
-    data_format: ?DataFormatValue,
+    data_format: ?DataFormatValue = null,
 
     /// The size of one data page in bytes. This parameter defaults to 1024 * 1024
     /// bytes (1
     /// MiB). This number is used for .parquet file format only.
-    data_page_size: ?i32,
+    data_page_size: ?i32 = null,
 
     /// Specifies a date separating delimiter to use during folder partitioning. The
     /// default
     /// value is `SLASH`. Use this parameter when `DatePartitionedEnabled` is
     /// set to `true`.
-    date_partition_delimiter: ?DatePartitionDelimiterValue,
+    date_partition_delimiter: ?DatePartitionDelimiterValue = null,
 
     /// When set to `true`, this parameter partitions S3 bucket folders based on
     /// transaction commit dates. The default value is `false`. For more information
     /// about date-based folder partitioning, see [Using date-based folder
     /// partitioning](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.DatePartitioning).
-    date_partition_enabled: ?bool,
+    date_partition_enabled: ?bool = null,
 
     /// Identifies the sequence of the date format to use during folder
     /// partitioning. The
     /// default value is `YYYYMMDD`. Use this parameter when
     /// `DatePartitionedEnabled` is set to `true`.
-    date_partition_sequence: ?DatePartitionSequenceValue,
+    date_partition_sequence: ?DatePartitionSequenceValue = null,
 
     /// When creating an S3 target endpoint, set `DatePartitionTimezone` to convert
     /// the current UTC time into a specified time zone. The conversion occurs when
@@ -260,7 +260,7 @@ pub const S3Settings = struct {
     /// `s3-settings='{"DatePartitionEnabled": true, "DatePartitionSequence":
     /// "YYYYMMDDHH", "DatePartitionDelimiter": "SLASH",
     /// "DatePartitionTimezone":"Asia/Seoul", "BucketName": "dms-nattarat-test"}'`
-    date_partition_timezone: ?[]const u8,
+    date_partition_timezone: ?[]const u8 = null,
 
     /// The maximum size of an encoded dictionary page of a column. If the
     /// dictionary page
@@ -269,7 +269,7 @@ pub const S3Settings = struct {
     /// dictionary page
     /// before it reverts to `PLAIN` encoding. This size is used for .parquet file
     /// format only.
-    dict_page_size_limit: ?i32,
+    dict_page_size_limit: ?i32 = null,
 
     /// A value that enables statistics for Parquet pages and row groups. Choose
     /// `true` to enable statistics, `false` to disable. Statistics
@@ -277,7 +277,7 @@ pub const S3Settings = struct {
     /// values. This parameter defaults to `true`. This value is used for .parquet
     /// file
     /// format only.
-    enable_statistics: ?bool,
+    enable_statistics: ?bool = null,
 
     /// The type of encoding you are using:
     ///
@@ -290,7 +290,7 @@ pub const S3Settings = struct {
     /// * `PLAIN_DICTIONARY` builds a dictionary of the values encountered in a
     /// given column. The dictionary is stored in a dictionary page for each column
     /// chunk.
-    encoding_type: ?EncodingTypeValue,
+    encoding_type: ?EncodingTypeValue = null,
 
     /// The type of server-side encryption that you want to use for your data. This
     /// encryption
@@ -328,7 +328,7 @@ pub const S3Settings = struct {
     /// * `s3:PutBucketPolicy`
     ///
     /// * `s3:DeleteBucketPolicy`
-    encryption_mode: ?EncryptionModeValue,
+    encryption_mode: ?EncryptionModeValue = null,
 
     /// To specify a bucket owner and prevent sniping, you can use the
     /// `ExpectedBucketOwner` endpoint setting.
@@ -339,22 +339,22 @@ pub const S3Settings = struct {
     /// When you make a request to test a connection or perform a migration, S3
     /// checks the
     /// account ID of the bucket owner against the specified parameter.
-    expected_bucket_owner: ?[]const u8,
+    expected_bucket_owner: ?[]const u8 = null,
 
     /// Specifies how tables are defined in the S3 source files only.
-    external_table_definition: ?[]const u8,
+    external_table_definition: ?[]const u8 = null,
 
     /// When true, allows Glue to catalog your S3 bucket. Creating an Glue catalog
     /// lets you
     /// use Athena to query your data.
-    glue_catalog_generation: ?bool,
+    glue_catalog_generation: ?bool = null,
 
     /// When this value is set to 1, DMS ignores the first row header in a .csv
     /// file. A value
     /// of 1 turns on the feature; a value of 0 turns off the feature.
     ///
     /// The default is 0.
-    ignore_header_rows: ?i32,
+    ignore_header_rows: ?i32 = null,
 
     /// A value that enables a full load to write INSERT operations to the
     /// comma-separated value
@@ -384,7 +384,7 @@ pub const S3Settings = struct {
     /// DB Operations in Migrated S3
     /// Data](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps) in the
     /// *Database Migration Service User Guide.*.
-    include_op_for_full_load: ?bool,
+    include_op_for_full_load: ?bool = null,
 
     /// A value that specifies the maximum size (in KB) of any .csv file to be
     /// created while
@@ -392,7 +392,7 @@ pub const S3Settings = struct {
     ///
     /// The default value is 1,048,576 KB (1 GB). Valid values include 1 to
     /// 1,048,576.
-    max_file_size: ?i32,
+    max_file_size: ?i32 = null,
 
     /// A value that specifies the precision of any `TIMESTAMP` column values that
     /// are written to an Amazon S3 object file in .parquet format.
@@ -417,11 +417,11 @@ pub const S3Settings = struct {
     /// Setting `ParquetTimestampInMillisecond` has no effect on the string format
     /// of the timestamp column value that is inserted by setting the
     /// `TimestampColumnName` parameter.
-    parquet_timestamp_in_millisecond: ?bool,
+    parquet_timestamp_in_millisecond: ?bool = null,
 
     /// The version of the Apache Parquet format that you want to use: `parquet_1_0`
     /// (the default) or `parquet_2_0`.
-    parquet_version: ?ParquetVersionValue,
+    parquet_version: ?ParquetVersionValue = null,
 
     /// If set to `true`, DMS saves the transaction order for a change data capture
     /// (CDC) load on the Amazon S3 target specified by [
@@ -430,7 +430,7 @@ pub const S3Settings = struct {
     /// target](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath).
     ///
     /// This setting is supported in DMS versions 3.4.2 and later.
-    preserve_transactions: ?bool,
+    preserve_transactions: ?bool = null,
 
     /// For an S3 source, when this value is set to `true` or `y`, each
     /// leading double quotation mark has to be followed by an ending double
@@ -454,7 +454,7 @@ pub const S3Settings = struct {
     ///
     /// The default value is `true`. Valid values include `true`,
     /// `false`, `y`, and `n`.
-    rfc_4180: ?bool,
+    rfc_4180: ?bool = null,
 
     /// The number of rows in a row group. A smaller row group size provides faster
     /// reads. But
@@ -465,7 +465,7 @@ pub const S3Settings = struct {
     /// If you choose a value larger than the maximum, `RowGroupLength` is set to
     /// the
     /// max row group length in bytes (64 * 1024 * 1024).
-    row_group_length: ?i32,
+    row_group_length: ?i32 = null,
 
     /// If you are using `SSE_KMS` for the `EncryptionMode`, provide the
     /// KMS key ID. The key that you use needs an attached policy that enables
@@ -476,14 +476,14 @@ pub const S3Settings = struct {
     /// *value* --endpoint-type target --engine-name s3 --s3-settings
     /// ServiceAccessRoleArn=*value*,BucketFolder=*value*,BucketName=*value*,EncryptionMode=SSE_KMS,ServerSideEncryptionKmsKeyId=*value*
     /// `
-    server_side_encryption_kms_key_id: ?[]const u8,
+    server_side_encryption_kms_key_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) used by the service to access the IAM role.
     /// The role
     /// must allow the `iam:PassRole` action. It is a required parameter that
     /// enables
     /// DMS to write and read objects from an S3 bucket.
-    service_access_role_arn: ?[]const u8,
+    service_access_role_arn: ?[]const u8 = null,
 
     /// A value that when nonblank causes DMS to add a column with timestamp
     /// information to
@@ -514,7 +514,7 @@ pub const S3Settings = struct {
     /// When the `AddColumnName` parameter is set to `true`, DMS also
     /// includes a name for the timestamp column that you set with
     /// `TimestampColumnName`.
-    timestamp_column_name: ?[]const u8,
+    timestamp_column_name: ?[]const u8 = null,
 
     /// This setting applies if the S3 output files during a change data capture
     /// (CDC) load are
@@ -525,7 +525,7 @@ pub const S3Settings = struct {
     /// `false`, DMS uses the null value for these columns.
     ///
     /// This setting is supported in DMS versions 3.4.1 and later.
-    use_csv_no_sup_value: ?bool,
+    use_csv_no_sup_value: ?bool = null,
 
     /// When set to true, this parameter uses the task start time as the timestamp
     /// column value
@@ -539,7 +539,7 @@ pub const S3Settings = struct {
     /// full load timestamp in the timestamp column increments with the time data
     /// arrives at the
     /// target.
-    use_task_start_time_for_full_load_timestamp: ?bool,
+    use_task_start_time_for_full_load_timestamp: ?bool = null,
 
     pub const json_field_names = .{
         .add_column_name = "AddColumnName",

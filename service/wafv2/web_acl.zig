@@ -25,7 +25,7 @@ const VisibilityConfig = @import("visibility_config.zig").VisibilityConfig;
 /// application, and Amazon Web Services Verified Access instance.
 pub const WebACL = struct {
     /// Returns a list of `ApplicationAttribute`s.
-    application_config: ?ApplicationConfig,
+    application_config: ?ApplicationConfig = null,
 
     /// The Amazon Resource Name (ARN) of the web ACL that you want to associate
     /// with the
@@ -47,7 +47,7 @@ pub const WebACL = struct {
     ///
     /// For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
     /// bytes).
-    association_config: ?AssociationConfig,
+    association_config: ?AssociationConfig = null,
 
     /// The web ACL capacity units (WCUs) currently being used by this web ACL.
     ///
@@ -67,13 +67,13 @@ pub const WebACL = struct {
     /// Specifies how WAF should handle `CAPTCHA` evaluations for rules that don't
     /// have their own `CaptchaConfig` settings. If you don't specify this, WAF uses
     /// its default settings for `CaptchaConfig`.
-    captcha_config: ?CaptchaConfig,
+    captcha_config: ?CaptchaConfig = null,
 
     /// Specifies how WAF should handle challenge evaluations for rules that don't
     /// have
     /// their own `ChallengeConfig` settings. If you don't specify this, WAF uses
     /// its default settings for `ChallengeConfig`.
-    challenge_config: ?ChallengeConfig,
+    challenge_config: ?ChallengeConfig = null,
 
     /// A map of custom response keys and content bodies. When you create a rule
     /// with a block action, you can send a custom response to the web request. You
@@ -89,7 +89,7 @@ pub const WebACL = struct {
     /// response settings, see [WAF
     /// quotas](https://docs.aws.amazon.com/waf/latest/developerguide/limits.html)
     /// in the *WAF Developer Guide*.
-    custom_response_bodies: ?[]const aws.map.MapEntry(CustomResponseBody),
+    custom_response_bodies: ?[]const aws.map.MapEntry(CustomResponseBody) = null,
 
     /// Specifies data protection to apply to the web request data for the web ACL.
     /// This is a web ACL level data protection option.
@@ -99,14 +99,14 @@ pub const WebACL = struct {
     /// including your WAF logging destinations, web ACL request sampling, and
     /// Amazon Security Lake data collection and management. Your other option for
     /// data protection is in the logging configuration, which only affects logging.
-    data_protection_config: ?DataProtectionConfig,
+    data_protection_config: ?DataProtectionConfig = null,
 
     /// The action to perform if none of the `Rules` contained in the `WebACL`
     /// match.
     default_action: DefaultAction,
 
     /// A description of the web ACL that helps with identification.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier for the `WebACL`. This ID is returned in the responses
     /// to
@@ -128,7 +128,7 @@ pub const WebACL = struct {
     ///   and the label from the rule, separated by a colon:
     ///
     /// `:`
-    label_namespace: ?[]const u8,
+    label_namespace: ?[]const u8 = null,
 
     /// Indicates whether this web ACL was created by Firewall Manager and is being
     /// managed by Firewall Manager. If true, then only Firewall Manager can
@@ -144,7 +144,7 @@ pub const WebACL = struct {
 
     /// Configures the level of DDoS protection that applies to web ACLs associated
     /// with Application Load Balancers.
-    on_source_d_do_s_protection_config: ?OnSourceDDoSProtectionConfig,
+    on_source_d_do_s_protection_config: ?OnSourceDDoSProtectionConfig = null,
 
     /// The last set of rules for WAF to process in the web ACL. This is defined in
     /// an
@@ -160,7 +160,7 @@ pub const WebACL = struct {
     /// administrator prioritizes the rule groups, to determine their relative
     /// processing
     /// order.
-    post_process_firewall_manager_rule_groups: ?[]const FirewallManagerRuleGroup,
+    post_process_firewall_manager_rule_groups: ?[]const FirewallManagerRuleGroup = null,
 
     /// The first set of rules for WAF to process in the web ACL. This is defined in
     /// an
@@ -176,7 +176,7 @@ pub const WebACL = struct {
     /// administrator prioritizes the rule groups, to determine their relative
     /// processing
     /// order.
-    pre_process_firewall_manager_rule_groups: ?[]const FirewallManagerRuleGroup,
+    pre_process_firewall_manager_rule_groups: ?[]const FirewallManagerRuleGroup = null,
 
     /// Indicates whether this web ACL was created by a customer account and then
     /// retrofitted by Firewall Manager. If true, then the web ACL is currently
@@ -192,7 +192,7 @@ pub const WebACL = struct {
     /// want to manage. Each rule includes one top-level statement that WAF uses to
     /// identify matching
     /// web requests, and parameters that govern how WAF handles them.
-    rules: ?[]const Rule,
+    rules: ?[]const Rule = null,
 
     /// Specifies the domains that WAF should accept in a web request token. This
     /// enables the use of tokens across multiple protected websites. When WAF
@@ -201,7 +201,7 @@ pub const WebACL = struct {
     /// domains, WAF accepts tokens only for the domain of the protected resource.
     /// With a token domain list, WAF accepts the resource's host domain plus all
     /// domains in the token domain list, including their prefixed subdomains.
-    token_domains: ?[]const []const u8,
+    token_domains: ?[]const []const u8 = null,
 
     /// Defines and enables Amazon CloudWatch metrics and web request sample
     /// collection.

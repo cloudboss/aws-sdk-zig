@@ -2,7 +2,7 @@
 /// string, headers).
 pub const ParameterConstraints = struct {
     /// Whether or not the parameter is required.
-    required: ?bool,
+    required: ?bool = null,
 
     pub const json_field_names = .{
         .required = "Required",

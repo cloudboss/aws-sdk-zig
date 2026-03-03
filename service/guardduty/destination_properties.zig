@@ -6,10 +6,10 @@ pub const DestinationProperties = struct {
     ///
     /// To specify an S3 bucket folder use the following format:
     /// `arn:aws:s3:::DOC-EXAMPLE-BUCKET/myFolder/`
-    destination_arn: ?[]const u8,
+    destination_arn: ?[]const u8 = null,
 
     /// The ARN of the KMS key to use for encryption.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_arn = "DestinationArn",

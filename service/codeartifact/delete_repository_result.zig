@@ -2,7 +2,7 @@ const RepositoryDescription = @import("repository_description.zig").RepositoryDe
 
 pub const DeleteRepositoryResult = struct {
     /// Information about the deleted repository after processing the request.
-    repository: ?RepositoryDescription,
+    repository: ?RepositoryDescription = null,
 
     pub const json_field_names = .{
         .repository = "repository",

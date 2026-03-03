@@ -6,7 +6,7 @@ const GlueSchema = @import("glue_schema.zig").GlueSchema;
 /// Catalog.
 pub const CatalogDeltaSource = struct {
     /// Specifies additional connection options.
-    additional_delta_options: ?[]const aws.map.StringMapEntry,
+    additional_delta_options: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the database to read from.
     database: []const u8,
@@ -15,7 +15,7 @@ pub const CatalogDeltaSource = struct {
     name: []const u8,
 
     /// Specifies the data schema for the Delta Lake source.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// The name of the table in the database to read from.
     table: []const u8,

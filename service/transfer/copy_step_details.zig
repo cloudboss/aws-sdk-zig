@@ -16,10 +16,10 @@ pub const CopyStepDetails = struct {
     ///
     /// The system resolves `UploadDate` to a date format of *YYYY-MM-DD*, based on
     /// the date the file is uploaded in UTC.
-    destination_file_location: ?InputFileLocation,
+    destination_file_location: ?InputFileLocation = null,
 
     /// The name of the step, used as an identifier.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A flag that indicates whether to overwrite an existing file of the same
     /// name. The default is `FALSE`.
@@ -31,7 +31,7 @@ pub const CopyStepDetails = struct {
     ///   file being processed.
     /// * If `OverwriteExisting` is `FALSE`, nothing happens, and the workflow
     ///   processing stops.
-    overwrite_existing: ?OverwriteExisting,
+    overwrite_existing: ?OverwriteExisting = null,
 
     /// Specifies which file to use as input to the workflow step: either the output
     /// from the previous step, or the originally uploaded file for the workflow.
@@ -41,7 +41,7 @@ pub const CopyStepDetails = struct {
     ///   step as input. This is the default value.
     /// * To use the originally uploaded file location as input for this step, enter
     ///   `${original.file}`.
-    source_file_location: ?[]const u8,
+    source_file_location: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_file_location = "DestinationFileLocation",

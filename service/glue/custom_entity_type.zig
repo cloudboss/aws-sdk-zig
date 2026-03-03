@@ -6,7 +6,7 @@ pub const CustomEntityType = struct {
     /// sensitive data.
     ///
     /// If no context words are passed only a regular expression is checked.
-    context_words: ?[]const []const u8,
+    context_words: ?[]const []const u8 = null,
 
     /// A name for the custom pattern that allows it to be retrieved or deleted
     /// later. This name must be unique per Amazon Web Services account.

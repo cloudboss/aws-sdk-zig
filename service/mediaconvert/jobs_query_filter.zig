@@ -17,10 +17,10 @@ pub const JobsQueryFilter = struct {
     /// OPUS | PASSTHROUGH | FLAC) * videoCodec - Your output's video codec. (AV1 |
     /// AVC_INTRA | FRAME_CAPTURE | H_264 | H_265 | MPEG2 | PASSTHROUGH | PRORES |
     /// UNCOMPRESSED | VC3 | VP8 | VP9 | XAVC)
-    key: ?JobsQueryFilterKey,
+    key: ?JobsQueryFilterKey = null,
 
     /// A list of values associated with a JobsQueryFilterKey.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

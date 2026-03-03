@@ -5,5 +5,5 @@ const ClassicLoadBalancer = @import("classic_load_balancer.zig").ClassicLoadBala
 /// the running Spot Instances with these Classic Load Balancers.
 pub const ClassicLoadBalancersConfig = struct {
     /// One or more Classic Load Balancers.
-    classic_load_balancers: ?[]const ClassicLoadBalancer,
+    classic_load_balancers: ?[]const ClassicLoadBalancer = null,
 };

@@ -8,11 +8,11 @@ pub const AcceleratorEvent = struct {
     /// A string that contains an `Event` message describing changes or errors
     /// when you update an accelerator in Global Accelerator from IPv4 to
     /// dual-stack, or dual-stack to IPv4.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// A timestamp for when you update an accelerator in Global Accelerator from
     /// IPv4 to dual-stack, or dual-stack to IPv4.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .message = "Message",

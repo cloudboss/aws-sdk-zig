@@ -11,16 +11,16 @@ pub const ImportAssetFromSignedUrlResponseDetails = struct {
     /// The Base64-encoded Md5 hash for the asset, used to ensure the integrity of
     /// the file at
     /// that location.
-    md_5_hash: ?[]const u8,
+    md_5_hash: ?[]const u8 = null,
 
     /// The unique identifier for the revision associated with this import response.
     revision_id: []const u8,
 
     /// The signed URL.
-    signed_url: ?[]const u8,
+    signed_url: ?[]const u8 = null,
 
     /// The time and date at which the signed URL expires, in ISO 8601 format.
-    signed_url_expires_at: ?i64,
+    signed_url_expires_at: ?i64 = null,
 
     pub const json_field_names = .{
         .asset_name = "AssetName",

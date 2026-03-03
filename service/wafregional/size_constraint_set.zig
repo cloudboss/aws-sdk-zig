@@ -17,7 +17,7 @@ const SizeConstraint = @import("size_constraint.zig").SizeConstraint;
 /// match.
 pub const SizeConstraintSet = struct {
     /// The name, if any, of the `SizeConstraintSet`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Specifies the parts of web requests that you want to inspect the size of.
     size_constraints: []const SizeConstraint,

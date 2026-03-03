@@ -5,19 +5,19 @@ const CustomPluginLocationDescription = @import("custom_plugin_location_descript
 /// Details about the revision of a custom plugin.
 pub const CustomPluginRevisionSummary = struct {
     /// The format of the plugin file.
-    content_type: ?CustomPluginContentType,
+    content_type: ?CustomPluginContentType = null,
 
     /// The time that the custom plugin was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The description of the custom plugin.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Details about the custom plugin file.
-    file_description: ?CustomPluginFileDescription,
+    file_description: ?CustomPluginFileDescription = null,
 
     /// Information about the location of the custom plugin.
-    location: ?CustomPluginLocationDescription,
+    location: ?CustomPluginLocationDescription = null,
 
     /// The revision of the custom plugin.
     revision: i64 = 0,

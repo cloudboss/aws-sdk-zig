@@ -46,7 +46,7 @@ pub const DocumentReaderConfig = struct {
     /// * `FORCE_DOCUMENT_READ_ACTION` - Amazon Comprehend uses the Textract API
     ///   specified by
     /// DocumentReadAction for all PDF files, including digital PDF files.
-    document_read_mode: ?DocumentReadMode,
+    document_read_mode: ?DocumentReadMode = null,
 
     /// Specifies the type of Amazon Textract features to apply. If you chose
     /// `TEXTRACT_ANALYZE_DOCUMENT`
@@ -57,7 +57,7 @@ pub const DocumentReaderConfig = struct {
     ///
     /// * `FORMS` - Returns additional information about any forms that are detected
     ///   in the input document.
-    feature_types: ?[]const DocumentReadFeatureTypes,
+    feature_types: ?[]const DocumentReadFeatureTypes = null,
 
     pub const json_field_names = .{
         .document_read_action = "DocumentReadAction",

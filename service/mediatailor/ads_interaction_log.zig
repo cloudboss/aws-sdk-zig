@@ -10,11 +10,11 @@ const AdsInteractionPublishOptInEventType = @import("ads_interaction_publish_opt
 pub const AdsInteractionLog = struct {
     /// Indicates that MediaTailor won't emit the selected events in the logs for
     /// playback sessions that are initialized with this configuration.
-    exclude_event_types: ?[]const AdsInteractionExcludeEventType,
+    exclude_event_types: ?[]const AdsInteractionExcludeEventType = null,
 
     /// Indicates that MediaTailor emits `RAW_ADS_RESPONSE` logs for playback
     /// sessions that are initialized with this configuration.
-    publish_opt_in_event_types: ?[]const AdsInteractionPublishOptInEventType,
+    publish_opt_in_event_types: ?[]const AdsInteractionPublishOptInEventType = null,
 
     pub const json_field_names = .{
         .exclude_event_types = "ExcludeEventTypes",

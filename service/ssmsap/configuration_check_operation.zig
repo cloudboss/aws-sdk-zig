@@ -7,35 +7,35 @@ const OperationStatus = @import("operation_status.zig").OperationStatus;
 pub const ConfigurationCheckOperation = struct {
     /// The ID of the application against which the configuration check was
     /// performed.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// A description of the configuration check that was performed.
-    configuration_check_description: ?[]const u8,
+    configuration_check_description: ?[]const u8 = null,
 
     /// The unique identifier of the configuration check that was performed.
-    configuration_check_id: ?ConfigurationCheckType,
+    configuration_check_id: ?ConfigurationCheckType = null,
 
     /// The name of the configuration check that was performed.
-    configuration_check_name: ?[]const u8,
+    configuration_check_name: ?[]const u8 = null,
 
     /// The time at which the configuration check operation completed.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The unique identifier of the configuration check operation.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A summary of all the rule results, showing counts for each status type.
-    rule_status_counts: ?RuleStatusCounts,
+    rule_status_counts: ?RuleStatusCounts = null,
 
     /// The time at which the configuration check operation started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The current status of the configuration check operation.
-    status: ?OperationStatus,
+    status: ?OperationStatus = null,
 
     /// A message providing additional details about the status of the configuration
     /// check operation.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

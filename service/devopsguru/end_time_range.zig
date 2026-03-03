@@ -3,10 +3,10 @@
 /// ended.
 pub const EndTimeRange = struct {
     /// The earliest end time in the time range.
-    from_time: ?i64,
+    from_time: ?i64 = null,
 
     /// The latest end time in the time range.
-    to_time: ?i64,
+    to_time: ?i64 = null,
 
     pub const json_field_names = .{
         .from_time = "FromTime",

@@ -4,16 +4,16 @@ const VisualRole = @import("visual_role.zig").VisualRole;
 /// The definition for a `TopicVisual`.
 pub const TopicVisual = struct {
     /// The ir for the `TopicVisual`.
-    ir: ?TopicIR,
+    ir: ?TopicIR = null,
 
     /// The role for the `TopicVisual`.
-    role: ?VisualRole,
+    role: ?VisualRole = null,
 
     /// The supporting visuals for the `TopicVisual`.
-    supporting_visuals: ?[]const TopicVisual,
+    supporting_visuals: ?[]const TopicVisual = null,
 
     /// The visual ID for the `TopicVisual`.
-    visual_id: ?[]const u8,
+    visual_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ir = "Ir",

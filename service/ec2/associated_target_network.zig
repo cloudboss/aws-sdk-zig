@@ -4,8 +4,8 @@ const AssociatedNetworkType = @import("associated_network_type.zig").AssociatedN
 /// target network is a subnet in a VPC.
 pub const AssociatedTargetNetwork = struct {
     /// The ID of the subnet.
-    network_id: ?[]const u8,
+    network_id: ?[]const u8 = null,
 
     /// The target network type.
-    network_type: ?AssociatedNetworkType,
+    network_type: ?AssociatedNetworkType = null,
 };

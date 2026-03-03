@@ -11,5 +11,5 @@ pub const DeliveryOptions = struct {
     /// `Optional`,
     /// messages can be delivered in plain text if a TLS connection can't be
     /// established.
-    tls_policy: ?TlsPolicy,
+    tls_policy: ?TlsPolicy = null,
 };

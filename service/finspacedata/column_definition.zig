@@ -3,10 +3,10 @@ const ColumnDataType = @import("column_data_type.zig").ColumnDataType;
 /// The definition of a column in a tabular Dataset.
 pub const ColumnDefinition = struct {
     /// Description for a column.
-    column_description: ?[]const u8,
+    column_description: ?[]const u8 = null,
 
     /// The name of a column.
-    column_name: ?[]const u8,
+    column_name: ?[]const u8 = null,
 
     /// Data type of a column.
     ///
@@ -33,7 +33,7 @@ pub const ColumnDefinition = struct {
     /// `BOOLEAN` – A boolean data type.
     ///
     /// `BINARY` – A binary data type.
-    data_type: ?ColumnDataType,
+    data_type: ?ColumnDataType = null,
 
     pub const json_field_names = .{
         .column_description = "columnDescription",

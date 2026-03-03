@@ -13,7 +13,7 @@ pub const CompromisedCredentialsRiskConfigurationType = struct {
     /// Settings for the sign-in activity where you want to configure
     /// compromised-credentials
     /// actions. Defaults to all events.
-    event_filter: ?[]const EventFilterType,
+    event_filter: ?[]const EventFilterType = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

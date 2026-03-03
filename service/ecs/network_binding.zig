@@ -8,10 +8,10 @@ const TransportProtocol = @import("transport_protocol.zig").TransportProtocol;
 /// responses.
 pub const NetworkBinding = struct {
     /// The IP address that the container is bound to on the container instance.
-    bind_ip: ?[]const u8,
+    bind_ip: ?[]const u8 = null,
 
     /// The port number on the container that's used with the network binding.
-    container_port: ?i32,
+    container_port: ?i32 = null,
 
     /// The port number range on the container that's bound to the dynamically
     /// mapped host
@@ -71,18 +71,18 @@ pub const NetworkBinding = struct {
     /// `DescribeTasks`
     /// ](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html) to view the `hostPortRange` which
     /// are the host ports that are bound to the container ports.
-    container_port_range: ?[]const u8,
+    container_port_range: ?[]const u8 = null,
 
     /// The port number on the host that's used with the network binding.
-    host_port: ?i32,
+    host_port: ?i32 = null,
 
     /// The port number range on the host that's used with the network binding. This
     /// is
     /// assigned is assigned by Docker and delivered by the Amazon ECS agent.
-    host_port_range: ?[]const u8,
+    host_port_range: ?[]const u8 = null,
 
     /// The protocol used for the network binding.
-    protocol: ?TransportProtocol,
+    protocol: ?TransportProtocol = null,
 
     pub const json_field_names = .{
         .bind_ip = "bindIP",

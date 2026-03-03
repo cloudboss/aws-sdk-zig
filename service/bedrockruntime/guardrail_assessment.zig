@@ -10,29 +10,29 @@ const GuardrailWordPolicyAssessment = @import("guardrail_word_policy_assessment.
 /// A behavior assessment of the guardrail policies used in a call to the
 /// Converse API.
 pub const GuardrailAssessment = struct {
-    applied_guardrail_details: ?AppliedGuardrailDetails,
+    applied_guardrail_details: ?AppliedGuardrailDetails = null,
 
     /// The automated reasoning policy assessment results, including logical
     /// validation findings for the input content.
-    automated_reasoning_policy: ?GuardrailAutomatedReasoningPolicyAssessment,
+    automated_reasoning_policy: ?GuardrailAutomatedReasoningPolicyAssessment = null,
 
     /// The content policy.
-    content_policy: ?GuardrailContentPolicyAssessment,
+    content_policy: ?GuardrailContentPolicyAssessment = null,
 
     /// The contextual grounding policy used for the guardrail assessment.
-    contextual_grounding_policy: ?GuardrailContextualGroundingPolicyAssessment,
+    contextual_grounding_policy: ?GuardrailContextualGroundingPolicyAssessment = null,
 
     /// The invocation metrics for the guardrail assessment.
-    invocation_metrics: ?GuardrailInvocationMetrics,
+    invocation_metrics: ?GuardrailInvocationMetrics = null,
 
     /// The sensitive information policy.
-    sensitive_information_policy: ?GuardrailSensitiveInformationPolicyAssessment,
+    sensitive_information_policy: ?GuardrailSensitiveInformationPolicyAssessment = null,
 
     /// The topic policy.
-    topic_policy: ?GuardrailTopicPolicyAssessment,
+    topic_policy: ?GuardrailTopicPolicyAssessment = null,
 
     /// The word policy.
-    word_policy: ?GuardrailWordPolicyAssessment,
+    word_policy: ?GuardrailWordPolicyAssessment = null,
 
     pub const json_field_names = .{
         .applied_guardrail_details = "appliedGuardrailDetails",

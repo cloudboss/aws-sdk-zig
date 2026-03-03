@@ -23,11 +23,11 @@ pub const SecurityControl = struct {
     /// reason for updating the enablement status of a control. This field accepts
     /// alphanumeric
     /// characters in addition to white spaces, dashes, and underscores.
-    last_update_reason: ?[]const u8,
+    last_update_reason: ?[]const u8 = null,
 
     /// An object that identifies the name of a control parameter, its current
     /// value, and whether it has been customized.
-    parameters: ?[]const aws.map.MapEntry(ParameterConfiguration),
+    parameters: ?[]const aws.map.MapEntry(ParameterConfiguration) = null,
 
     /// A link to Security Hub documentation that explains how to remediate a failed
     /// finding for a security control.
@@ -63,7 +63,7 @@ pub const SecurityControl = struct {
     /// values when running security checks of the control.
     /// A status of `UPDATING` indicates that all security checks might not use the
     /// current parameter values.
-    update_status: ?UpdateStatus,
+    update_status: ?UpdateStatus = null,
 
     pub const json_field_names = .{
         .description = "Description",

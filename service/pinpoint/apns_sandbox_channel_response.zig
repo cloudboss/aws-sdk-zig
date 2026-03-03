@@ -3,45 +3,45 @@
 pub const APNSSandboxChannelResponse = struct {
     /// The unique identifier for the application that the APNs sandbox channel
     /// applies to.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The date and time when the APNs sandbox channel was enabled.
-    creation_date: ?[]const u8,
+    creation_date: ?[]const u8 = null,
 
     /// The default authentication method that Amazon Pinpoint uses to authenticate
     /// with the APNs sandbox environment for this channel, key or certificate.
-    default_authentication_method: ?[]const u8,
+    default_authentication_method: ?[]const u8 = null,
 
     /// Specifies whether the APNs sandbox channel is enabled for the application.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// (Not used) This property is retained only for backward compatibility.
-    has_credential: ?bool,
+    has_credential: ?bool = null,
 
     /// Specifies whether the APNs sandbox channel is configured to communicate with
     /// APNs by using APNs tokens. To provide an authentication key for APNs tokens,
     /// set the TokenKey property of the channel.
-    has_token_key: ?bool,
+    has_token_key: ?bool = null,
 
     /// (Deprecated) An identifier for the APNs sandbox channel. This property is
     /// retained only for backward compatibility.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Specifies whether the APNs sandbox channel is archived.
-    is_archived: ?bool,
+    is_archived: ?bool = null,
 
     /// The user who last modified the APNs sandbox channel.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The date and time when the APNs sandbox channel was last modified.
-    last_modified_date: ?[]const u8,
+    last_modified_date: ?[]const u8 = null,
 
     /// The type of messaging or notification platform for the channel. For the APNs
     /// sandbox channel, this value is APNS_SANDBOX.
     platform: []const u8,
 
     /// The current version of the APNs sandbox channel.
-    version: ?i32,
+    version: ?i32 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

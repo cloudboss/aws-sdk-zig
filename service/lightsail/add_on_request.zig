@@ -17,14 +17,14 @@ pub const AddOnRequest = struct {
     /// An object that represents additional parameters when enabling or modifying
     /// the automatic
     /// snapshot add-on.
-    auto_snapshot_add_on_request: ?AutoSnapshotAddOnRequest,
+    auto_snapshot_add_on_request: ?AutoSnapshotAddOnRequest = null,
 
     /// An object that represents additional parameters when enabling or modifying
     /// the
     /// `StopInstanceOnIdle` add-on.
     ///
     /// This object only applies to Lightsail for Research resources.
-    stop_instance_on_idle_request: ?StopInstanceOnIdleRequest,
+    stop_instance_on_idle_request: ?StopInstanceOnIdleRequest = null,
 
     pub const json_field_names = .{
         .add_on_type = "addOnType",

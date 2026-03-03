@@ -27,5 +27,5 @@ pub const OriginGroup = struct {
     /// The selection criteria for the origin group. For more information, see
     /// [Create an origin
     /// group](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/high_availability_origin_failover.html#concept_origin_groups.creating) in the *Amazon CloudFront Developer Guide*.
-    selection_criteria: ?OriginGroupSelectionCriteria,
+    selection_criteria: ?OriginGroupSelectionCriteria = null,
 };

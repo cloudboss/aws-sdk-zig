@@ -14,21 +14,21 @@ const EcrRescanDurationStatus = @import("ecr_rescan_duration_status.zig").EcrRes
 /// `inactive` and all associated findings are scheduled for closure.
 pub const EcrRescanDurationState = struct {
     /// The rescan duration configured for image pull date.
-    pull_date_rescan_duration: ?EcrPullDateRescanDuration,
+    pull_date_rescan_duration: ?EcrPullDateRescanDuration = null,
 
     /// The pull date for the re-scan mode.
-    pull_date_rescan_mode: ?EcrPullDateRescanMode,
+    pull_date_rescan_mode: ?EcrPullDateRescanMode = null,
 
     /// The rescan duration configured for image push date.
-    rescan_duration: ?EcrRescanDuration,
+    rescan_duration: ?EcrRescanDuration = null,
 
     /// The status of changes to the ECR automated re-scan duration.
-    status: ?EcrRescanDurationStatus,
+    status: ?EcrRescanDurationStatus = null,
 
     /// A timestamp representing when the last time the ECR scan duration setting
     /// was
     /// changed.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .pull_date_rescan_duration = "pullDateRescanDuration",

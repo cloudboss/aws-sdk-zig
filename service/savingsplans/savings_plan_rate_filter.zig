@@ -3,10 +3,10 @@ const SavingsPlanRateFilterName = @import("savings_plan_rate_filter_name.zig").S
 /// Information about a Savings Plan rate filter.
 pub const SavingsPlanRateFilter = struct {
     /// The filter name.
-    name: ?SavingsPlanRateFilterName,
+    name: ?SavingsPlanRateFilterName = null,
 
     /// The filter values.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

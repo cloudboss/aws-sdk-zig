@@ -6,13 +6,13 @@
 ///   response](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax)
 pub const FunctionParameter = struct {
     /// The name of the parameter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The data type of the parameter.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The value of the parameter.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

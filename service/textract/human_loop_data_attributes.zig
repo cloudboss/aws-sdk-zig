@@ -7,7 +7,7 @@ pub const HumanLoopDataAttributes = struct {
     /// Sets whether the input image is free of personally identifiable information
     /// or adult
     /// content.
-    content_classifiers: ?[]const ContentClassifier,
+    content_classifiers: ?[]const ContentClassifier = null,
 
     pub const json_field_names = .{
         .content_classifiers = "ContentClassifiers",

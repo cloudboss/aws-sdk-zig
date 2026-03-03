@@ -19,16 +19,16 @@ const DataSetUseAs = @import("data_set_use_as.zig").DataSetUseAs;
 /// Dataset.
 pub const DataSet = struct {
     /// The Amazon Resource Name (ARN) of the resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Groupings of columns that work together in certain Quick Sight features.
     /// Currently, only geospatial hierarchy is supported.
-    column_groups: ?[]const ColumnGroup,
+    column_groups: ?[]const ColumnGroup = null,
 
     /// A set of one or more definitions of a `
     /// [ColumnLevelPermissionRule](https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html)
     /// `.
-    column_level_permission_rules: ?[]const ColumnLevelPermissionRule,
+    column_level_permission_rules: ?[]const ColumnLevelPermissionRule = null,
 
     /// The amount of SPICE capacity used by this dataset. This is 0 if the dataset
     /// isn't
@@ -36,60 +36,60 @@ pub const DataSet = struct {
     consumed_spice_capacity_in_bytes: i64 = 0,
 
     /// The time that this dataset was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The data preparation configuration associated with this dataset.
-    data_prep_configuration: ?DataPrepConfiguration,
+    data_prep_configuration: ?DataPrepConfiguration = null,
 
     /// The ID of the dataset. Limited to 96 characters.
-    data_set_id: ?[]const u8,
+    data_set_id: ?[]const u8 = null,
 
     /// The parameters that are declared in a dataset.
-    dataset_parameters: ?[]const DatasetParameter,
+    dataset_parameters: ?[]const DatasetParameter = null,
 
     /// The usage configuration to apply to child datasets that reference this
     /// dataset as a source.
-    data_set_usage_configuration: ?DataSetUsageConfiguration,
+    data_set_usage_configuration: ?DataSetUsageConfiguration = null,
 
     /// The folder that contains fields and nested subfolders for your dataset.
-    field_folders: ?[]const aws.map.MapEntry(FieldFolder),
+    field_folders: ?[]const aws.map.MapEntry(FieldFolder) = null,
 
     /// A value that indicates whether you want to import the data into SPICE.
-    import_mode: ?DataSetImportMode,
+    import_mode: ?DataSetImportMode = null,
 
     /// The last time that this dataset was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// Configures the combination and transformation of the data from the physical
     /// tables.
-    logical_table_map: ?[]const aws.map.MapEntry(LogicalTable),
+    logical_table_map: ?[]const aws.map.MapEntry(LogicalTable) = null,
 
     /// A display name for the dataset.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The list of columns after all transforms. These columns are available in
     /// templates,
     /// analyses, and dashboards.
-    output_columns: ?[]const OutputColumn,
+    output_columns: ?[]const OutputColumn = null,
 
     /// The performance optimization configuration of a dataset.
-    performance_configuration: ?PerformanceConfiguration,
+    performance_configuration: ?PerformanceConfiguration = null,
 
     /// Declares the physical tables that are available in the underlying data
     /// sources.
-    physical_table_map: ?[]const aws.map.MapEntry(PhysicalTable),
+    physical_table_map: ?[]const aws.map.MapEntry(PhysicalTable) = null,
 
     /// The row-level security configuration for the dataset.
-    row_level_permission_data_set: ?RowLevelPermissionDataSet,
+    row_level_permission_data_set: ?RowLevelPermissionDataSet = null,
 
     /// The element you can use to define tags for row-level security.
-    row_level_permission_tag_configuration: ?RowLevelPermissionTagConfiguration,
+    row_level_permission_tag_configuration: ?RowLevelPermissionTagConfiguration = null,
 
     /// The semantic model configuration associated with this dataset.
-    semantic_model_configuration: ?SemanticModelConfiguration,
+    semantic_model_configuration: ?SemanticModelConfiguration = null,
 
     /// The usage of the dataset.
-    use_as: ?DataSetUseAs,
+    use_as: ?DataSetUseAs = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

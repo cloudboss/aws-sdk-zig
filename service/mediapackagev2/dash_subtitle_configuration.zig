@@ -3,7 +3,7 @@ const DashTtmlConfiguration = @import("dash_ttml_configuration.zig").DashTtmlCon
 /// The configuration for DASH subtitles.
 pub const DashSubtitleConfiguration = struct {
     /// Settings for TTML subtitles.
-    ttml_configuration: ?DashTtmlConfiguration,
+    ttml_configuration: ?DashTtmlConfiguration = null,
 
     pub const json_field_names = .{
         .ttml_configuration = "TtmlConfiguration",

@@ -21,7 +21,7 @@ pub const ServiceConnectService = struct {
     ///
     /// For each `ServiceConnectService`, you must provide at least one
     /// `clientAlias` with one `port`.
-    client_aliases: ?[]const ServiceConnectClientAlias,
+    client_aliases: ?[]const ServiceConnectClientAlias = null,
 
     /// The `discoveryName` is the name of the new Cloud Map service that Amazon ECS
     /// creates for this Amazon ECS service. This must be unique within the Cloud
@@ -32,7 +32,7 @@ pub const ServiceConnectService = struct {
     ///
     /// If the `discoveryName` isn't specified, the port mapping name from the task
     /// definition is used in `portName.namespace`.
-    discovery_name: ?[]const u8,
+    discovery_name: ?[]const u8 = null,
 
     /// The port number for the Service Connect proxy to listen on.
     ///
@@ -48,7 +48,7 @@ pub const ServiceConnectService = struct {
     /// definition. In bridge mode, the default value is the ephemeral port of the
     /// Service
     /// Connect proxy.
-    ingress_port_override: ?i32,
+    ingress_port_override: ?i32 = null,
 
     /// The `portName` must match the name of one of the `portMappings`
     /// from all the containers in the task definition of this Amazon ECS service.
@@ -56,11 +56,11 @@ pub const ServiceConnectService = struct {
 
     /// A reference to an object that represents the configured timeouts for Service
     /// Connect.
-    timeout: ?TimeoutConfiguration,
+    timeout: ?TimeoutConfiguration = null,
 
     /// A reference to an object that represents a Transport Layer Security (TLS)
     /// configuration.
-    tls: ?ServiceConnectTlsConfiguration,
+    tls: ?ServiceConnectTlsConfiguration = null,
 
     pub const json_field_names = .{
         .client_aliases = "clientAliases",

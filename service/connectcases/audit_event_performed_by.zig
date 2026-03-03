@@ -5,7 +5,7 @@ pub const AuditEventPerformedBy = struct {
     /// Unique identifier of an IAM role.
     iam_principal_arn: []const u8,
 
-    user: ?UserUnion,
+    user: ?UserUnion = null,
 
     pub const json_field_names = .{
         .iam_principal_arn = "iamPrincipalArn",

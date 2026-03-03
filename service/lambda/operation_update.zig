@@ -12,40 +12,40 @@ pub const OperationUpdate = struct {
     /// The action to take on the operation.
     action: OperationAction,
 
-    callback_options: ?CallbackOptions,
+    callback_options: ?CallbackOptions = null,
 
-    chained_invoke_options: ?ChainedInvokeOptions,
+    chained_invoke_options: ?ChainedInvokeOptions = null,
 
     /// Options for context operations.
-    context_options: ?ContextOptions,
+    context_options: ?ContextOptions = null,
 
     /// The error information for failed operations.
-    @"error": ?ErrorObject,
+    @"error": ?ErrorObject = null,
 
     /// The unique identifier for this operation.
     id: []const u8,
 
     /// The customer-provided name for this operation.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The unique identifier of the parent operation, if this operation is running
     /// within a child context.
-    parent_id: ?[]const u8,
+    parent_id: ?[]const u8 = null,
 
     /// The payload for successful operations.
-    payload: ?[]const u8,
+    payload: ?[]const u8 = null,
 
     /// Options for step operations.
-    step_options: ?StepOptions,
+    step_options: ?StepOptions = null,
 
     /// The subtype of the operation, providing additional categorization.
-    sub_type: ?[]const u8,
+    sub_type: ?[]const u8 = null,
 
     /// The type of operation to update.
     @"type": OperationType,
 
     /// Options for wait operations.
-    wait_options: ?WaitOptions,
+    wait_options: ?WaitOptions = null,
 
     pub const json_field_names = .{
         .action = "Action",

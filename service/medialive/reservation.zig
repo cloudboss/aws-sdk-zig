@@ -10,65 +10,65 @@ const ReservationState = @import("reservation_state.zig").ReservationState;
 pub const Reservation = struct {
     /// Unique reservation ARN, e.g.
     /// 'arn:aws:medialive:us-west-2:123456789012:reservation:1234567'
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Number of reserved resources
-    count: ?i32,
+    count: ?i32 = null,
 
     /// Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// Lease duration, e.g. '12'
-    duration: ?i32,
+    duration: ?i32 = null,
 
     /// Units for duration, e.g. 'MONTHS'
-    duration_units: ?OfferingDurationUnits,
+    duration_units: ?OfferingDurationUnits = null,
 
     /// Reservation UTC end date and time in ISO-8601 format, e.g.
     /// '2019-03-01T00:00:00'
-    end: ?[]const u8,
+    end: ?[]const u8 = null,
 
     /// One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT
     /// offering
-    fixed_price: ?f64,
+    fixed_price: ?f64 = null,
 
     /// User specified reservation name
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and
     /// standard VQ in US West (Oregon)'
-    offering_description: ?[]const u8,
+    offering_description: ?[]const u8 = null,
 
     /// Unique offering ID, e.g. '87654321'
-    offering_id: ?[]const u8,
+    offering_id: ?[]const u8 = null,
 
     /// Offering type, e.g. 'NO_UPFRONT'
-    offering_type: ?OfferingType,
+    offering_type: ?OfferingType = null,
 
     /// AWS region, e.g. 'us-west-2'
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// Renewal settings for the reservation
-    renewal_settings: ?RenewalSettings,
+    renewal_settings: ?RenewalSettings = null,
 
     /// Unique reservation ID, e.g. '1234567'
-    reservation_id: ?[]const u8,
+    reservation_id: ?[]const u8 = null,
 
     /// Resource configuration details
-    resource_specification: ?ReservationResourceSpecification,
+    resource_specification: ?ReservationResourceSpecification = null,
 
     /// Reservation UTC start date and time in ISO-8601 format, e.g.
     /// '2018-03-01T00:00:00'
-    start: ?[]const u8,
+    start: ?[]const u8 = null,
 
     /// Current state of reservation, e.g. 'ACTIVE'
-    state: ?ReservationState,
+    state: ?ReservationState = null,
 
     /// A collection of key-value pairs
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Recurring usage charge for each reserved resource, e.g. '157.0'
-    usage_price: ?f64,
+    usage_price: ?f64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

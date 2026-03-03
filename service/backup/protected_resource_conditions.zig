@@ -6,12 +6,12 @@ pub const ProtectedResourceConditions = struct {
     /// Filters the values of your tagged resources for only
     /// those resources that you tagged with the same value.
     /// Also called "exact matching."
-    string_equals: ?[]const KeyValue,
+    string_equals: ?[]const KeyValue = null,
 
     /// Filters the values of your tagged resources for only
     /// those resources that you tagged that do not have the same value.
     /// Also called "negated matching."
-    string_not_equals: ?[]const KeyValue,
+    string_not_equals: ?[]const KeyValue = null,
 
     pub const json_field_names = .{
         .string_equals = "StringEquals",

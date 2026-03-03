@@ -13,10 +13,10 @@ const Av1SpatialAdaptiveQuantization = @import("av_1_spatial_adaptive_quantizati
 pub const Av1Settings = struct {
     /// Specify the strength of any adaptive quantization filters that you enable.
     /// The value that you choose here applies to Spatial adaptive quantization.
-    adaptive_quantization: ?Av1AdaptiveQuantization,
+    adaptive_quantization: ?Av1AdaptiveQuantization = null,
 
     /// Specify the Bit depth. You can choose 8-bit or 10-bit.
-    bit_depth: ?Av1BitDepth,
+    bit_depth: ?Av1BitDepth = null,
 
     /// Film grain synthesis replaces film grain present in your content with
     /// similar quality synthesized AV1 film grain. We recommend that you choose
@@ -24,7 +24,7 @@ pub const Av1Settings = struct {
     /// outputs. For QVBR quality level 9 or 10 outputs we recommend that you keep
     /// the default value, Disabled. When you include Film grain synthesis, you
     /// cannot include the Noise reducer preprocessor.
-    film_grain_synthesis: ?Av1FilmGrainSynthesis,
+    film_grain_synthesis: ?Av1FilmGrainSynthesis = null,
 
     /// Use the Framerate setting to specify the frame rate for this output. If you
     /// want to keep the same frame rate as the input video, choose Follow source.
@@ -32,7 +32,7 @@ pub const Av1Settings = struct {
     /// dropdown list or choose Custom. The framerates shown in the dropdown list
     /// are decimal approximations of fractions. If you choose Custom, specify your
     /// frame rate as a fraction.
-    framerate_control: ?Av1FramerateControl,
+    framerate_control: ?Av1FramerateControl = null,
 
     /// Choose the method that you want MediaConvert to use when increasing or
     /// decreasing your video's frame rate. For numerically simple conversions, such
@@ -50,7 +50,7 @@ pub const Av1Settings = struct {
     /// add, or otherwise change the frame count from your input to your output.
     /// Note that since the frame count is maintained, the duration of your output
     /// will become shorter at higher frame rates and longer at lower frame rates.
-    framerate_conversion_algorithm: ?Av1FramerateConversionAlgorithm,
+    framerate_conversion_algorithm: ?Av1FramerateConversionAlgorithm = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -59,7 +59,7 @@ pub const Av1Settings = struct {
     /// use the console for transcode jobs that use frame rate conversion, provide
     /// the value as a decimal number for Framerate. In this example, specify
     /// 23.976.
-    framerate_denominator: ?i32,
+    framerate_denominator: ?i32 = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -67,22 +67,22 @@ pub const Av1Settings = struct {
     /// this example, use 24000 for the value of FramerateNumerator. When you use
     /// the console for transcode jobs that use frame rate conversion, provide the
     /// value as a decimal number for Framerate. In this example, specify 23.976.
-    framerate_numerator: ?i32,
+    framerate_numerator: ?i32 = null,
 
     /// Specify the GOP length (keyframe interval) in frames. With AV1, MediaConvert
     /// doesn't support GOP length in seconds. This value must be greater than zero
     /// and preferably equal to 1 + ((numberBFrames + 1) * x), where x is an integer
     /// value.
-    gop_size: ?f64,
+    gop_size: ?f64 = null,
 
     /// Maximum bitrate in bits/second. For example, enter five megabits per second
     /// as 5000000. Required when Rate control mode is QVBR.
-    max_bitrate: ?i32,
+    max_bitrate: ?i32 = null,
 
     /// Specify from the number of B-frames, in the range of 0-15. For AV1 encoding,
     /// we recommend using 7 or 15. Choose a larger number for a lower bitrate and
     /// smaller file size; choose a smaller number for better video quality.
-    number_b_frames_between_reference_frames: ?i32,
+    number_b_frames_between_reference_frames: ?i32 = null,
 
     /// Optionally choose one or more per frame metric reports to generate along
     /// with your output. You can use these metrics to analyze your video output
@@ -102,21 +102,21 @@ pub const Av1Settings = struct {
     /// Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     /// Quality-Defined Variable Bitrate. This option is only available when your
     /// output uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
-    per_frame_metrics: ?[]const FrameMetricType,
+    per_frame_metrics: ?[]const FrameMetricType = null,
 
     /// Settings for quality-defined variable bitrate encoding with the H.265 codec.
     /// Use these settings only when you set QVBR for Rate control mode.
-    qvbr_settings: ?Av1QvbrSettings,
+    qvbr_settings: ?Av1QvbrSettings = null,
 
     /// 'With AV1 outputs, for rate control mode, MediaConvert supports only
     /// quality-defined variable bitrate (QVBR). You can''t use CBR or VBR.'
-    rate_control_mode: ?Av1RateControlMode,
+    rate_control_mode: ?Av1RateControlMode = null,
 
     /// Specify the number of slices per picture. This value must be 1, 2, 4, 8, 16,
     /// or 32. For progressive pictures, this value must be less than or equal to
     /// the number of macroblock rows. For interlaced pictures, this value must be
     /// less than or equal to half the number of macroblock rows.
-    slices: ?i32,
+    slices: ?i32 = null,
 
     /// Keep the default value, Enabled, to adjust quantization within each frame
     /// based on spatial variation of content complexity. When you enable this
@@ -133,7 +133,7 @@ pub const Av1Settings = struct {
     /// depending on your content. For homogeneous content, such as cartoons and
     /// video games, set it to Low. For content with a wider variety of textures,
     /// set it to High or Higher.
-    spatial_adaptive_quantization: ?Av1SpatialAdaptiveQuantization,
+    spatial_adaptive_quantization: ?Av1SpatialAdaptiveQuantization = null,
 
     pub const json_field_names = .{
         .adaptive_quantization = "AdaptiveQuantization",

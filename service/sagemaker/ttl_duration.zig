@@ -6,10 +6,10 @@ const TtlDurationUnit = @import("ttl_duration_unit.zig").TtlDurationUnit;
 /// [DeleteRecord](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html) API in the Amazon SageMaker API Reference guide.
 pub const TtlDuration = struct {
     /// `TtlDuration` time unit.
-    unit: ?TtlDurationUnit,
+    unit: ?TtlDurationUnit = null,
 
     /// `TtlDuration` time value.
-    value: ?i32,
+    value: ?i32 = null,
 
     pub const json_field_names = .{
         .unit = "Unit",

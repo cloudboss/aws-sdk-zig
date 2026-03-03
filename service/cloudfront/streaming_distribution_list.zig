@@ -11,7 +11,7 @@ pub const StreamingDistributionList = struct {
     /// A complex type that contains one `StreamingDistributionSummary` element for
     /// each distribution that was created by the current Amazon Web Services
     /// account.
-    items: ?[]const StreamingDistributionSummary,
+    items: ?[]const StreamingDistributionSummary = null,
 
     /// The value you provided for the `Marker` request parameter.
     marker: []const u8,
@@ -22,7 +22,7 @@ pub const StreamingDistributionList = struct {
     /// If `IsTruncated` is `true`, this element is present and contains the value
     /// you can use for the `Marker` request parameter to continue listing your RTMP
     /// distributions where they left off.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The number of streaming distributions that were created by the current
     /// Amazon Web Services account.

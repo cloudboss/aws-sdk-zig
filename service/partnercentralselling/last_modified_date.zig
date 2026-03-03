@@ -5,12 +5,12 @@ pub const LastModifiedDate = struct {
     /// Specifies the date after which the opportunities were modified. Use this
     /// filter to retrieve only those opportunities that were modified after a given
     /// timestamp.
-    after_last_modified_date: ?i64,
+    after_last_modified_date: ?i64 = null,
 
     /// Specifies the date before which the opportunities were modified. Use this
     /// filter to retrieve only those opportunities that were modified before a
     /// given timestamp.
-    before_last_modified_date: ?i64,
+    before_last_modified_date: ?i64 = null,
 
     pub const json_field_names = .{
         .after_last_modified_date = "AfterLastModifiedDate",

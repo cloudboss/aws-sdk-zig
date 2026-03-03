@@ -3,18 +3,18 @@ const Type = @import("type.zig").Type;
 /// Details of the column that is returned by the query.
 pub const SelectColumn = struct {
     /// True, if the column name was aliased by the query. False otherwise.
-    aliased: ?bool,
+    aliased: ?bool = null,
 
     /// Database that has this column.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// Name of the column.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Table within the database that has this column.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
-    @"type": ?Type,
+    @"type": ?Type = null,
 
     pub const json_field_names = .{
         .aliased = "Aliased",

@@ -12,5 +12,5 @@ pub const CpuPerformanceFactor = struct {
     /// architecture differences.
     ///
     /// Currently, only one instance family can be specified in the list.
-    references: ?[]const PerformanceFactorReference,
+    references: ?[]const PerformanceFactorReference = null,
 };

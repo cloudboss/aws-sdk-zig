@@ -14,10 +14,10 @@ pub const MarketplaceModelEndpointSummary = struct {
     model_source_identifier: []const u8,
 
     /// The overall status of the endpoint in Amazon Bedrock Marketplace.
-    status: ?Status,
+    status: ?Status = null,
 
     /// Additional information about the overall status, if available.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The timestamp when the endpoint was last updated.
     updated_at: i64,

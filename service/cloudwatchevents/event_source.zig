@@ -7,21 +7,21 @@ const EventSourceState = @import("event_source_state.zig").EventSourceState;
 /// partner's applications or services.
 pub const EventSource = struct {
     /// The ARN of the event source.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the partner that created the event source.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The date and time the event source was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The date and time that the event source will expire, if the Amazon Web
     /// Services account doesn't create a
     /// matching event bus for it.
-    expiration_time: ?i64,
+    expiration_time: ?i64 = null,
 
     /// The name of the event source.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The state of the event source. If it is ACTIVE, you have already created a
     /// matching event
@@ -30,7 +30,7 @@ pub const EventSource = struct {
     /// yet created a matching event bus, or that event bus is deactivated. If it is
     /// DELETED, you have
     /// created a matching event bus, but the event source has since been deleted.
-    state: ?EventSourceState,
+    state: ?EventSourceState = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

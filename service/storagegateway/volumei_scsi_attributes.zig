@@ -4,16 +4,16 @@ pub const VolumeiSCSIAttributes = struct {
     chap_enabled: bool = false,
 
     /// The logical disk number.
-    lun_number: ?i32,
+    lun_number: ?i32 = null,
 
     /// The network interface identifier.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// The port used to communicate with iSCSI targets.
     network_interface_port: i32 = 0,
 
     /// The Amazon Resource Name (ARN) of the volume target.
-    target_arn: ?[]const u8,
+    target_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .chap_enabled = "ChapEnabled",

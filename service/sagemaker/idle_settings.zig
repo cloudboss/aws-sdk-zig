@@ -4,18 +4,18 @@ const LifecycleManagement = @import("lifecycle_management.zig").LifecycleManagem
 pub const IdleSettings = struct {
     /// The time that SageMaker waits after the application becomes idle before
     /// shutting it down.
-    idle_timeout_in_minutes: ?i32,
+    idle_timeout_in_minutes: ?i32 = null,
 
     /// Indicates whether idle shutdown is activated for the application type.
-    lifecycle_management: ?LifecycleManagement,
+    lifecycle_management: ?LifecycleManagement = null,
 
     /// The maximum value in minutes that custom idle shutdown can be set to by the
     /// user.
-    max_idle_timeout_in_minutes: ?i32,
+    max_idle_timeout_in_minutes: ?i32 = null,
 
     /// The minimum value in minutes that custom idle shutdown can be set to by the
     /// user.
-    min_idle_timeout_in_minutes: ?i32,
+    min_idle_timeout_in_minutes: ?i32 = null,
 
     pub const json_field_names = .{
         .idle_timeout_in_minutes = "IdleTimeoutInMinutes",

@@ -4,18 +4,18 @@ const OAuth2Properties = @import("o_auth_2_properties.zig").OAuth2Properties;
 /// A structure containing the authentication configuration.
 pub const AuthenticationConfiguration = struct {
     /// A structure containing the authentication configuration.
-    authentication_type: ?AuthenticationType,
+    authentication_type: ?AuthenticationType = null,
 
     /// The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive
     /// authentication information. This key is used to protect credentials
     /// and other sensitive data stored within the authentication configuration.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The properties for OAuth2 authentication.
-    o_auth_2_properties: ?OAuth2Properties,
+    o_auth_2_properties: ?OAuth2Properties = null,
 
     /// The secret manager ARN to store credentials.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authentication_type = "AuthenticationType",

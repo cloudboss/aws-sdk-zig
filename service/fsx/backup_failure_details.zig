@@ -2,7 +2,7 @@
 /// failure.
 pub const BackupFailureDetails = struct {
     /// A message describing the backup-creation failure.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .message = "Message",

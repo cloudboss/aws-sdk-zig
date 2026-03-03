@@ -12,7 +12,7 @@ pub const ReputationOptions = struct {
     ///
     /// If email sending for the configuration set has never been disabled and later
     /// re-enabled, the value of this attribute is `null`.
-    last_fresh_start: ?i64,
+    last_fresh_start: ?i64 = null,
 
     /// Describes whether or not Amazon SES publishes reputation metrics for the
     /// configuration set,

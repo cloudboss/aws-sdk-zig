@@ -4,19 +4,19 @@
 pub const CustomizationConfiguration = struct {
     /// Provides the URL where the custom CSS file is hosted for an Amazon Q web
     /// experience.
-    custom_css_url: ?[]const u8,
+    custom_css_url: ?[]const u8 = null,
 
     /// Provides the URL where the custom favicon file is hosted for an Amazon Q web
     /// experience.
-    favicon_url: ?[]const u8,
+    favicon_url: ?[]const u8 = null,
 
     /// Provides the URL where the custom font file is hosted for an Amazon Q web
     /// experience.
-    font_url: ?[]const u8,
+    font_url: ?[]const u8 = null,
 
     /// Provides the URL where the custom logo file is hosted for an Amazon Q web
     /// experience.
-    logo_url: ?[]const u8,
+    logo_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .custom_css_url = "customCSSUrl",

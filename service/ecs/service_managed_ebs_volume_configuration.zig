@@ -24,7 +24,7 @@ pub const ServiceManagedEBSVolumeConfiguration = struct {
     /// of the [CreateVolume
     /// API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in
     /// the *Amazon EC2 API Reference*.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The filesystem type for the volume. For volumes created from a snapshot, you
     /// must
@@ -38,7 +38,7 @@ pub const ServiceManagedEBSVolumeConfiguration = struct {
     /// used by default.
     ///
     /// The available Windows filesystem types are `NTFS`.
-    filesystem_type: ?TaskFilesystemType,
+    filesystem_type: ?TaskFilesystemType = null,
 
     /// The number of I/O operations per second (IOPS). For `gp3`,
     /// `io1`, and `io2` volumes, this represents the number of IOPS that
@@ -63,7 +63,7 @@ pub const ServiceManagedEBSVolumeConfiguration = struct {
     /// This parameter maps 1:1 with the `Iops` parameter of the [CreateVolume
     /// API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API
     /// Reference*.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) identifier of the Amazon Web Services Key
     /// Management Service key
@@ -84,7 +84,7 @@ pub const ServiceManagedEBSVolumeConfiguration = struct {
     /// key asynchronously. Therefore, if you specify an ID, alias, or ARN that is
     /// invalid,
     /// the action can appear to complete, but eventually fails.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The ARN of the IAM role to associate with this volume. This is the Amazon
     /// ECS
@@ -117,7 +117,7 @@ pub const ServiceManagedEBSVolumeConfiguration = struct {
     /// * `st1` and `sc1`: 125-16,384
     ///
     /// * `standard`: 1-1,024
-    size_in_gi_b: ?i32,
+    size_in_gi_b: ?i32 = null,
 
     /// The snapshot that Amazon ECS uses to create volumes for attachment to tasks
     /// maintained
@@ -126,7 +126,7 @@ pub const ServiceManagedEBSVolumeConfiguration = struct {
     /// the `SnapshotId` parameter of the [CreateVolume
     /// API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in
     /// the *Amazon EC2 API Reference*.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
     /// The tags to apply to the volume. Amazon ECS applies service-managed tags by
     /// default.
@@ -134,7 +134,7 @@ pub const ServiceManagedEBSVolumeConfiguration = struct {
     /// [CreateVolume
     /// API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API
     /// Reference*.
-    tag_specifications: ?[]const EBSTagSpecification,
+    tag_specifications: ?[]const EBSTagSpecification = null,
 
     /// The throughput to provision for a volume, in MiB/s, with a maximum of 1,000
     /// MiB/s.
@@ -143,7 +143,7 @@ pub const ServiceManagedEBSVolumeConfiguration = struct {
     /// Reference*.
     ///
     /// This parameter is only supported for the `gp3` volume type.
-    throughput: ?i32,
+    throughput: ?i32 = null,
 
     /// The rate, in MiB/s, at which data is fetched from a snapshot of an existing
     /// EBS volume
@@ -152,7 +152,7 @@ pub const ServiceManagedEBSVolumeConfiguration = struct {
     /// property can be specified only if you specify a `snapshotId`. For more
     /// information, see [Initialize Amazon EBS
     /// volumes](https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html) in the *Amazon EBS User Guide*.
-    volume_initialization_rate: ?i32,
+    volume_initialization_rate: ?i32 = null,
 
     /// The volume type. This parameter maps 1:1 with the `VolumeType` parameter of
     /// the [CreateVolume
@@ -174,7 +174,7 @@ pub const ServiceManagedEBSVolumeConfiguration = struct {
     /// * Magnetic: `standard`
     ///
     /// The magnetic volume type is not supported on Fargate.
-    volume_type: ?[]const u8,
+    volume_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .encrypted = "encrypted",

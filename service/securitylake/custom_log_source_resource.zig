@@ -5,18 +5,18 @@ const CustomLogSourceProvider = @import("custom_log_source_provider.zig").Custom
 /// sources.
 pub const CustomLogSourceResource = struct {
     /// The attributes of a third-party custom source.
-    attributes: ?CustomLogSourceAttributes,
+    attributes: ?CustomLogSourceAttributes = null,
 
     /// The details of the log provider for a third-party custom source.
-    provider: ?CustomLogSourceProvider,
+    provider: ?CustomLogSourceProvider = null,
 
     /// The name for a third-party custom source. This must be a Regionally unique
     /// value.
-    source_name: ?[]const u8,
+    source_name: ?[]const u8 = null,
 
     /// The version for a third-party custom source. This must be a Regionally
     /// unique value.
-    source_version: ?[]const u8,
+    source_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "attributes",

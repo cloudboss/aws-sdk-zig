@@ -5,10 +5,10 @@ const ExternalModelSummary = @import("external_model_summary.zig").ExternalModel
 /// The fraud prediction scores from Amazon SageMaker model.
 pub const ExternalModelOutputs = struct {
     /// The Amazon SageMaker model.
-    external_model: ?ExternalModelSummary,
+    external_model: ?ExternalModelSummary = null,
 
     /// The fraud prediction scores from Amazon SageMaker model.
-    outputs: ?[]const aws.map.StringMapEntry,
+    outputs: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .external_model = "externalModel",

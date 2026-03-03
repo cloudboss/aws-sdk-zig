@@ -4,20 +4,20 @@ const ConnectionStatus = @import("connection_status.zig").ConnectionStatus;
 /// Describes an App Runner connection resource.
 pub const Connection = struct {
     /// The Amazon Resource Name (ARN) of this connection.
-    connection_arn: ?[]const u8,
+    connection_arn: ?[]const u8 = null,
 
     /// The customer-provided connection name.
-    connection_name: ?[]const u8,
+    connection_name: ?[]const u8 = null,
 
     /// The App Runner connection creation time, expressed as a Unix time stamp.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The source repository provider.
-    provider_type: ?ProviderType,
+    provider_type: ?ProviderType = null,
 
     /// The current state of the App Runner connection. When the state is
     /// `AVAILABLE`, you can use the connection to create an App Runner service.
-    status: ?ConnectionStatus,
+    status: ?ConnectionStatus = null,
 
     pub const json_field_names = .{
         .connection_arn = "ConnectionArn",

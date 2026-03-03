@@ -5,11 +5,11 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// sorting order.
 pub const DataProductSort = struct {
     /// Field to sort the data products by.
-    sort_by: ?DataProductSortBy,
+    sort_by: ?DataProductSortBy = null,
 
     /// The sorting order. Can be `ASCENDING` or `DESCENDING`. The default value is
     /// `DESCENDING`.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .sort_by = "SortBy",

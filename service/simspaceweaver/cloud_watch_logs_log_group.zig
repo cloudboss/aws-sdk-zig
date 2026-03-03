@@ -11,7 +11,7 @@ pub const CloudWatchLogsLogGroup = struct {
     /// log groups, see [Working with log
     /// groups and log
     /// streams](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html) in the *Amazon CloudWatch Logs User Guide*.
-    log_group_arn: ?[]const u8,
+    log_group_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .log_group_arn = "LogGroupArn",

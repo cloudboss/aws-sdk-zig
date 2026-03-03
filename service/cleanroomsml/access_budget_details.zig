@@ -6,7 +6,7 @@ const AccessBudgetType = @import("access_budget_type.zig").AccessBudgetType;
 pub const AccessBudgetDetails = struct {
     /// Specifies whether this budget automatically refreshes when the current
     /// period ends.
-    auto_refresh: ?AutoRefreshMode,
+    auto_refresh: ?AutoRefreshMode = null,
 
     /// The total budget amount allocated for this period.
     budget: i32,
@@ -17,7 +17,7 @@ pub const AccessBudgetDetails = struct {
 
     /// The end time of this budget period. If not specified, the budget period
     /// continues indefinitely.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The amount of budget remaining in this period.
     remaining_budget: i32,

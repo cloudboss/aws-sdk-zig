@@ -2,7 +2,7 @@
 pub const FileInput = struct {
     /// The business purpose or use case that this file supports in the benefit
     /// application.
-    business_use_case: ?[]const u8,
+    business_use_case: ?[]const u8 = null,
 
     /// The URI or location where the file should be stored or has been uploaded.
     file_uri: []const u8,

@@ -13,16 +13,16 @@ pub const ModelCustomizationJobSummary = struct {
     /// Specifies whether to carry out continued pre-training of a model or whether
     /// to fine-tune it. For more information, see [Custom
     /// models](https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html).
-    customization_type: ?CustomizationType,
+    customization_type: ?CustomizationType = null,
 
     /// Amazon Resource Name (ARN) of the custom model.
-    custom_model_arn: ?[]const u8,
+    custom_model_arn: ?[]const u8 = null,
 
     /// Name of the custom model.
-    custom_model_name: ?[]const u8,
+    custom_model_name: ?[]const u8 = null,
 
     /// Time that the customization job ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// Amazon Resource Name (ARN) of the customization job.
     job_arn: []const u8,
@@ -31,13 +31,13 @@ pub const ModelCustomizationJobSummary = struct {
     job_name: []const u8,
 
     /// Time that the customization job was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// Status of the customization job.
     status: ModelCustomizationJobStatus,
 
     /// Details about the status of the data processing sub-task of the job.
-    status_details: ?StatusDetails,
+    status_details: ?StatusDetails = null,
 
     pub const json_field_names = .{
         .base_model_arn = "baseModelArn",

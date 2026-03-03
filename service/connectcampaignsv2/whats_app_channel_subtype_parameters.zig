@@ -2,11 +2,11 @@ const aws = @import("aws");
 
 /// Parameters for the WhatsApp Channel Subtype
 pub const WhatsAppChannelSubtypeParameters = struct {
-    connect_source_phone_number_arn: ?[]const u8,
+    connect_source_phone_number_arn: ?[]const u8 = null,
 
     destination_phone_number: []const u8,
 
-    template_arn: ?[]const u8,
+    template_arn: ?[]const u8 = null,
 
     template_parameters: []const aws.map.StringMapEntry,
 

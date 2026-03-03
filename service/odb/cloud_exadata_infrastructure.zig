@@ -6,30 +6,30 @@ const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 /// Information about an Exadata infrastructure.
 pub const CloudExadataInfrastructure = struct {
     /// The number of storage servers requested for the Exadata infrastructure.
-    activated_storage_count: ?i32,
+    activated_storage_count: ?i32 = null,
 
     /// The number of storage servers requested for the Exadata infrastructure.
-    additional_storage_count: ?i32,
+    additional_storage_count: ?i32 = null,
 
     /// The name of the Availability Zone (AZ) where the Exadata infrastructure is
     /// located.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The AZ ID of the AZ where the Exadata infrastructure is located.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The amount of available storage, in gigabytes (GB), for the Exadata
     /// infrastructure.
-    available_storage_size_in_g_bs: ?i32,
+    available_storage_size_in_g_bs: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) for the Exadata infrastructure.
-    cloud_exadata_infrastructure_arn: ?[]const u8,
+    cloud_exadata_infrastructure_arn: ?[]const u8 = null,
 
     /// The unique identifier for the Exadata infrastructure.
     cloud_exadata_infrastructure_id: []const u8,
 
     /// The number of database servers for the Exadata infrastructure.
-    compute_count: ?i32,
+    compute_count: ?i32 = null,
 
     /// The OCI model compute model used when you create or clone an instance: ECPU
     /// or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are
@@ -37,111 +37,111 @@ pub const CloudExadataInfrastructure = struct {
     /// and storage servers. An OCPU is a legacy physical measure of compute
     /// resources. OCPUs are based on the physical core of a processor with
     /// hyper-threading enabled.
-    compute_model: ?ComputeModel,
+    compute_model: ?ComputeModel = null,
 
     /// The total number of CPU cores that are allocated to the Exadata
     /// infrastructure.
-    cpu_count: ?i32,
+    cpu_count: ?i32 = null,
 
     /// The date and time when the Exadata infrastructure was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The email addresses of contacts to receive notification from Oracle about
     /// maintenance updates for the Exadata infrastructure.
-    customer_contacts_to_send_to_oci: ?[]const CustomerContact,
+    customer_contacts_to_send_to_oci: ?[]const CustomerContact = null,
 
     /// The database server model type of the Exadata infrastructure. For the list
     /// of valid model names, use the `ListDbSystemShapes` operation.
-    database_server_type: ?[]const u8,
+    database_server_type: ?[]const u8 = null,
 
     /// The size of the Exadata infrastructure's data disk group, in terabytes (TB).
-    data_storage_size_in_t_bs: ?f64,
+    data_storage_size_in_t_bs: ?f64 = null,
 
     /// The size of the Exadata infrastructure's local node storage, in gigabytes
     /// (GB).
-    db_node_storage_size_in_g_bs: ?i32,
+    db_node_storage_size_in_g_bs: ?i32 = null,
 
     /// The software version of the database servers (dom0) in the Exadata
     /// infrastructure.
-    db_server_version: ?[]const u8,
+    db_server_version: ?[]const u8 = null,
 
     /// The user-friendly name for the Exadata infrastructure.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The Oracle Cloud Identifier (OCID) of the last maintenance run for the
     /// Exadata infrastructure.
-    last_maintenance_run_id: ?[]const u8,
+    last_maintenance_run_id: ?[]const u8 = null,
 
     /// The scheduling details for the maintenance window. Patching and system
     /// updates take place during the maintenance window.
-    maintenance_window: ?MaintenanceWindow,
+    maintenance_window: ?MaintenanceWindow = null,
 
     /// The total number of CPU cores available on the Exadata infrastructure.
-    max_cpu_count: ?i32,
+    max_cpu_count: ?i32 = null,
 
     /// The total amount of data disk group storage, in terabytes (TB), that's
     /// available on the Exadata infrastructure.
-    max_data_storage_in_t_bs: ?f64,
+    max_data_storage_in_t_bs: ?f64 = null,
 
     /// The total amount of local node storage, in gigabytes (GB), that's available
     /// on the Exadata infrastructure.
-    max_db_node_storage_size_in_g_bs: ?i32,
+    max_db_node_storage_size_in_g_bs: ?i32 = null,
 
     /// The total amount of memory, in gigabytes (GB), that's available on the
     /// Exadata infrastructure.
-    max_memory_in_g_bs: ?i32,
+    max_memory_in_g_bs: ?i32 = null,
 
     /// The amount of memory, in gigabytes (GB), that's allocated on the Exadata
     /// infrastructure.
-    memory_size_in_g_bs: ?i32,
+    memory_size_in_g_bs: ?i32 = null,
 
     /// The monthly software version of the database servers installed on the
     /// Exadata infrastructure.
-    monthly_db_server_version: ?[]const u8,
+    monthly_db_server_version: ?[]const u8 = null,
 
     /// The monthly software version of the storage servers installed on the Exadata
     /// infrastructure.
-    monthly_storage_server_version: ?[]const u8,
+    monthly_storage_server_version: ?[]const u8 = null,
 
     /// The OCID of the next maintenance run for the Exadata infrastructure.
-    next_maintenance_run_id: ?[]const u8,
+    next_maintenance_run_id: ?[]const u8 = null,
 
     /// The OCID of the Exadata infrastructure.
-    ocid: ?[]const u8,
+    ocid: ?[]const u8 = null,
 
     /// The name of the OCI resource anchor for the Exadata infrastructure.
-    oci_resource_anchor_name: ?[]const u8,
+    oci_resource_anchor_name: ?[]const u8 = null,
 
     /// The HTTPS link to the Exadata infrastructure in OCI.
-    oci_url: ?[]const u8,
+    oci_url: ?[]const u8 = null,
 
     /// The amount of progress made on the current operation on the Exadata
     /// infrastructure, expressed as a percentage.
-    percent_progress: ?f32,
+    percent_progress: ?f32 = null,
 
     /// The model name of the Exadata infrastructure.
-    shape: ?[]const u8,
+    shape: ?[]const u8 = null,
 
     /// The current status of the Exadata infrastructure.
-    status: ?ResourceStatus,
+    status: ?ResourceStatus = null,
 
     /// Additional information about the status of the Exadata infrastructure.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The number of storage servers that are activated for the Exadata
     /// infrastructure.
-    storage_count: ?i32,
+    storage_count: ?i32 = null,
 
     /// The storage server model type of the Exadata infrastructure. For the list of
     /// valid model names, use the `ListDbSystemShapes` operation.
-    storage_server_type: ?[]const u8,
+    storage_server_type: ?[]const u8 = null,
 
     /// The software version of the storage servers on the Exadata infrastructure.
-    storage_server_version: ?[]const u8,
+    storage_server_version: ?[]const u8 = null,
 
     /// The total amount of storage, in gigabytes (GB), on the the Exadata
     /// infrastructure.
-    total_storage_size_in_g_bs: ?i32,
+    total_storage_size_in_g_bs: ?i32 = null,
 
     pub const json_field_names = .{
         .activated_storage_count = "activatedStorageCount",

@@ -7,7 +7,7 @@ pub const AppMonitorConfiguration = struct {
     /// data relating to the number of users an application has and the behavior of
     /// the application across a sequence of events. Cookies are stored in the
     /// top-level domain of the current page.
-    allow_cookies: ?bool,
+    allow_cookies: ?bool = null,
 
     /// If you set this to `true`, RUM enables X-Ray tracing for the user sessions
     /// that RUM samples. RUM adds an X-Ray trace header to allowed HTTP requests.
@@ -15,18 +15,18 @@ pub const AppMonitorConfiguration = struct {
     /// traces and segments from these user sessions in the X-Ray console and the
     /// CloudWatch ServiceLens console. For more information, see [What is
     /// X-Ray?](https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html)
-    enable_x_ray: ?bool,
+    enable_x_ray: ?bool = null,
 
     /// A list of URLs in your website or application to exclude from RUM data
     /// collection.
     ///
     /// You can't include both `ExcludedPages` and `IncludedPages` in the same
     /// operation.
-    excluded_pages: ?[]const []const u8,
+    excluded_pages: ?[]const []const u8 = null,
 
     /// A list of pages in your application that are to be displayed with a
     /// "favorite" icon in the CloudWatch RUM console.
-    favorite_pages: ?[]const []const u8,
+    favorite_pages: ?[]const []const u8 = null,
 
     /// The ARN of the guest IAM role that is attached to the Amazon Cognito
     /// identity pool that is used to authorize the sending of data to RUM.
@@ -43,18 +43,18 @@ pub const AppMonitorConfiguration = struct {
     ///   associated IAM role, and use that for your app monitor.
     /// * Make a separate
     ///   [GetIdentityPoolRoles](https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetIdentityPoolRoles.html) call to Amazon Cognito to retrieve the `GuestRoleArn`.
-    guest_role_arn: ?[]const u8,
+    guest_role_arn: ?[]const u8 = null,
 
     /// The ID of the Amazon Cognito identity pool that is used to authorize the
     /// sending of data to RUM.
-    identity_pool_id: ?[]const u8,
+    identity_pool_id: ?[]const u8 = null,
 
     /// If this app monitor is to collect data from only certain pages in your
     /// application, this structure lists those pages.
     ///
     /// You can't include both `ExcludedPages` and `IncludedPages` in the same
     /// operation.
-    included_pages: ?[]const []const u8,
+    included_pages: ?[]const []const u8 = null,
 
     /// Specifies the portion of user sessions to use for RUM data collection.
     /// Choosing a higher portion gives you more data but also incurs more costs.
@@ -77,7 +77,7 @@ pub const AppMonitorConfiguration = struct {
     ///   Web Vitals.
     /// * `http` indicates that RUM collects data about HTTP errors thrown by your
     ///   application.
-    telemetries: ?[]const Telemetry,
+    telemetries: ?[]const Telemetry = null,
 
     pub const json_field_names = .{
         .allow_cookies = "AllowCookies",

@@ -5,14 +5,14 @@ const ManagedInstanceScalingStatus = @import("managed_instance_scaling_status.zi
 pub const ProductionVariantManagedInstanceScaling = struct {
     /// The maximum number of instances that the endpoint can provision when it
     /// scales up to accommodate an increase in traffic.
-    max_instance_count: ?i32,
+    max_instance_count: ?i32 = null,
 
     /// The minimum number of instances that the endpoint must retain when it scales
     /// down to accommodate a decrease in traffic.
-    min_instance_count: ?i32,
+    min_instance_count: ?i32 = null,
 
     /// Indicates whether managed instance scaling is enabled.
-    status: ?ManagedInstanceScalingStatus,
+    status: ?ManagedInstanceScalingStatus = null,
 
     pub const json_field_names = .{
         .max_instance_count = "MaxInstanceCount",

@@ -4,17 +4,17 @@ const EventNotificationPartnerType = @import("event_notification_partner_type.zi
 
 /// Event configuration object for a single resource.
 pub const EventConfigurationItem = struct {
-    events: ?EventNotificationItemConfigurations,
+    events: ?EventNotificationItemConfigurations = null,
 
     /// Resource identifier opted in for event messaging.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// Identifier type of the particular resource identifier for event
     /// configuration.
-    identifier_type: ?IdentifierType,
+    identifier_type: ?IdentifierType = null,
 
     /// Partner type of the resource if the identifier type is PartnerAccountId.
-    partner_type: ?EventNotificationPartnerType,
+    partner_type: ?EventNotificationPartnerType = null,
 
     pub const json_field_names = .{
         .events = "Events",

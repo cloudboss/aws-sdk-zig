@@ -13,5 +13,5 @@ pub const RecordsEvent = struct {
     /// by default. In those cases, you must aggregate the results on the client
     /// side and parse the
     /// response.
-    payload: ?[]const u8,
+    payload: ?[]const u8 = null,
 };

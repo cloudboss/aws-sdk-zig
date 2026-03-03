@@ -8,13 +8,13 @@ const S3Location = @import("s3_location.zig").S3Location;
 /// recipe jobs or profile jobs.
 pub const Output = struct {
     /// The compression algorithm used to compress the output text of the job.
-    compression_format: ?CompressionFormat,
+    compression_format: ?CompressionFormat = null,
 
     /// The data format of the output of the job.
-    format: ?OutputFormat,
+    format: ?OutputFormat = null,
 
     /// Represents options that define how DataBrew formats job output files.
-    format_options: ?OutputFormatOptions,
+    format_options: ?OutputFormatOptions = null,
 
     /// The location in Amazon S3 where the job writes its output.
     location: S3Location,
@@ -23,7 +23,7 @@ pub const Output = struct {
     /// folder. For output partitioned
     /// by column(s), the MaxOutputFiles value is the maximum number of files per
     /// partition.
-    max_output_files: ?i32,
+    max_output_files: ?i32 = null,
 
     /// A value that, if true, means that any data in the location specified for
     /// output is
@@ -31,7 +31,7 @@ pub const Output = struct {
     overwrite: bool = false,
 
     /// The names of one or more partition columns for the output of the job.
-    partition_columns: ?[]const []const u8,
+    partition_columns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .compression_format = "CompressionFormat",

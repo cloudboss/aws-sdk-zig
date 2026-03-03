@@ -8,7 +8,7 @@ pub const SchemaChangeDetails = struct {
     /// of what's changing about this
     /// field. This value
     /// can be up to 512 characters long.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Name
     /// of the changing

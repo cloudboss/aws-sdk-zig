@@ -3,7 +3,7 @@
 pub const Condition = struct {
     /// An expression written based on the Cedar Policy Language used to match the
     /// principal attributes.
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .expression = "Expression",

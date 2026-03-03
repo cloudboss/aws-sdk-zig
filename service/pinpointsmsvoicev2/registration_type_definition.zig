@@ -11,7 +11,7 @@ pub const RegistrationTypeDefinition = struct {
     registration_type: []const u8,
 
     /// The supported association behavior for the registration type.
-    supported_associations: ?[]const SupportedAssociation,
+    supported_associations: ?[]const SupportedAssociation = null,
 
     pub const json_field_names = .{
         .display_hints = "DisplayHints",

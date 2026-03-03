@@ -6,7 +6,7 @@
 /// key to encrypt this secret in Secrets Manager.
 pub const ManagedSecretConfig = struct {
     /// Specifies the ARN for an Secrets Manager secret.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .secret_arn = "SecretArn",

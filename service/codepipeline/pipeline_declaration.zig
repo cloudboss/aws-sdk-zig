@@ -18,7 +18,7 @@ pub const PipelineDeclaration = struct {
     /// `artifactStores` in your pipeline, but you cannot use both. If you
     /// create a cross-region action in your pipeline, you must use
     /// `artifactStores`.
-    artifact_store: ?ArtifactStore,
+    artifact_store: ?ArtifactStore = null,
 
     /// A mapping of `artifactStore` objects and their corresponding Amazon Web
     /// Services Regions. There must be an artifact store for the pipeline Region
@@ -29,12 +29,12 @@ pub const PipelineDeclaration = struct {
     /// `artifactStores` in your pipeline, but you cannot use both. If you
     /// create a cross-region action in your pipeline, you must use
     /// `artifactStores`.
-    artifact_stores: ?[]const aws.map.MapEntry(ArtifactStore),
+    artifact_stores: ?[]const aws.map.MapEntry(ArtifactStore) = null,
 
     /// The method that the pipeline will use to handle multiple executions. The
     /// default
     /// mode is SUPERSEDED.
-    execution_mode: ?ExecutionMode,
+    execution_mode: ?ExecutionMode = null,
 
     /// The name of the pipeline.
     name: []const u8,
@@ -63,7 +63,7 @@ pub const PipelineDeclaration = struct {
     /// For information about which type of pipeline to choose, see [What type of
     /// pipeline is right for
     /// me?](https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html).
-    pipeline_type: ?PipelineType,
+    pipeline_type: ?PipelineType = null,
 
     /// The Amazon Resource Name (ARN) for CodePipeline to use to either perform
     /// actions with no `actionRoleArn`, or to use to assume roles for actions with
@@ -79,18 +79,18 @@ pub const PipelineDeclaration = struct {
     ///
     /// When a trigger configuration is specified, default change detection for
     /// repository and branch commits is disabled.
-    triggers: ?[]const PipelineTriggerDeclaration,
+    triggers: ?[]const PipelineTriggerDeclaration = null,
 
     /// A list that defines the pipeline variables for a pipeline resource. Variable
     /// names can
     /// have alphanumeric and underscore characters, and the values must match
     /// `[A-Za-z0-9@\-_]+`.
-    variables: ?[]const PipelineVariableDeclaration,
+    variables: ?[]const PipelineVariableDeclaration = null,
 
     /// The version number of the pipeline. A new pipeline always has a version
     /// number of
     /// 1. This number is incremented when a pipeline is updated.
-    version: ?i32,
+    version: ?i32 = null,
 
     pub const json_field_names = .{
         .artifact_store = "artifactStore",

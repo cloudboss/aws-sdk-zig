@@ -13,18 +13,18 @@ const WarmThroughputSpecificationSummary = @import("warm_throughput_specificatio
 /// Amazon Web Services Regions to ensure that there is enough capacity to
 /// replicate write events across Regions.
 pub const ReplicaSpecificationSummary = struct {
-    capacity_specification: ?CapacitySpecificationSummary,
+    capacity_specification: ?CapacitySpecificationSummary = null,
 
     /// The Amazon Web Services Region.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The status of the multi-Region table in the specified Amazon Web Services
     /// Region.
-    status: ?TableStatus,
+    status: ?TableStatus = null,
 
     /// The warm throughput settings for this replica, including the current status
     /// and configured read and write capacity units.
-    warm_throughput_specification: ?WarmThroughputSpecificationSummary,
+    warm_throughput_specification: ?WarmThroughputSpecificationSummary = null,
 
     pub const json_field_names = .{
         .capacity_specification = "capacitySpecification",

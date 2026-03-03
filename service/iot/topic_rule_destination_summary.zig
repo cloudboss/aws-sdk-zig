@@ -5,16 +5,16 @@ const VpcDestinationSummary = @import("vpc_destination_summary.zig").VpcDestinat
 /// Information about the topic rule destination.
 pub const TopicRuleDestinationSummary = struct {
     /// The topic rule destination ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time when the topic rule destination was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Information about the HTTP URL.
-    http_url_summary: ?HttpUrlDestinationSummary,
+    http_url_summary: ?HttpUrlDestinationSummary = null,
 
     /// The date and time when the topic rule destination was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The status of the topic rule destination. Valid values are:
     ///
@@ -49,13 +49,13 @@ pub const TopicRuleDestinationSummary = struct {
     /// `UpdateTopicRuleDestination`. Calling
     /// `UpdateTopicRuleDestination` causes a new confirmation challenge to
     /// be sent to your confirmation endpoint.
-    status: ?TopicRuleDestinationStatus,
+    status: ?TopicRuleDestinationStatus = null,
 
     /// The reason the topic rule destination is in the current status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// Information about the virtual private cloud (VPC) connection.
-    vpc_destination_summary: ?VpcDestinationSummary,
+    vpc_destination_summary: ?VpcDestinationSummary = null,
 
     pub const json_field_names = .{
         .arn = "arn",

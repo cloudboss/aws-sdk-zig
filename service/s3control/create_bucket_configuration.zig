@@ -10,5 +10,5 @@ pub const CreateBucketConfiguration = struct {
     /// location.
     ///
     /// This is not supported by Amazon S3 on Outposts buckets.
-    location_constraint: ?BucketLocationConstraint,
+    location_constraint: ?BucketLocationConstraint = null,
 };

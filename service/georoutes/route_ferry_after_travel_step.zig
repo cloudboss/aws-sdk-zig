@@ -10,7 +10,7 @@ pub const RouteFerryAfterTravelStep = struct {
     /// Brief description of the step in the requested language.
     ///
     /// Only available when the TravelStepType is Default.
-    instruction: ?[]const u8,
+    instruction: ?[]const u8 = null,
 
     /// Type of the step.
     @"type": RouteFerryAfterTravelStepType,

@@ -3,9 +3,9 @@ const VideoStandardGenerativeField = @import("video_standard_generative_field.zi
 
 /// Standard Output Configuration of Video
 pub const VideoStandardOutputConfiguration = struct {
-    extraction: ?VideoStandardExtraction,
+    extraction: ?VideoStandardExtraction = null,
 
-    generative_field: ?VideoStandardGenerativeField,
+    generative_field: ?VideoStandardGenerativeField = null,
 
     pub const json_field_names = .{
         .extraction = "extraction",

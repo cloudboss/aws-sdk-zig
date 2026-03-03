@@ -14,7 +14,7 @@ pub const AssetCompositeModelSummary = struct {
     /// specifying the derived ID of the model or property from the created model
     /// it's a part
     /// of.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ID of the composite model that this summary describes.
     id: []const u8,

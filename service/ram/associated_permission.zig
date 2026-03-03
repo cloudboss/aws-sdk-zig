@@ -5,12 +5,12 @@ const PermissionFeatureSet = @import("permission_feature_set.zig").PermissionFea
 pub const AssociatedPermission = struct {
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the associated managed permission.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Indicates whether the associated resource share is using the default version
     /// of the
     /// permission.
-    default_version: ?bool,
+    default_version: ?bool = null,
 
     /// Indicates what features are available for this resource share. This
     /// parameter can have one of
@@ -41,22 +41,22 @@ pub const AssociatedPermission = struct {
     /// the PromoteResourceShareCreatedFromPolicy and that operation
     /// is still in progress. This value changes to `STANDARD` when
     /// complete.
-    feature_set: ?PermissionFeatureSet,
+    feature_set: ?PermissionFeatureSet = null,
 
     /// The date and time when the association between the permission and the
     /// resource share
     /// was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The version of the permission currently associated with the resource share.
-    permission_version: ?[]const u8,
+    permission_version: ?[]const u8 = null,
 
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of a resource share associated with this permission.
-    resource_share_arn: ?[]const u8,
+    resource_share_arn: ?[]const u8 = null,
 
     /// The resource type to which this permission applies.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The current status of the association between the permission and the
     /// resource share.
@@ -72,7 +72,7 @@ pub const AssociatedPermission = struct {
     /// being deleted.
     ///
     /// * `DELETED` – This permission or version is deleted.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -7,11 +7,11 @@
 pub const ConditionParameter = struct {
     /// The key in a key-value pair. For example, in the tag `Department:
     /// Accounting`, `Department` is the key.
-    condition_key: ?[]const u8,
+    condition_key: ?[]const u8 = null,
 
     /// The value in a key-value pair. For example, in the tag `Department:
     /// Accounting`, `Accounting` is the value.
-    condition_value: ?[]const u8,
+    condition_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .condition_key = "ConditionKey",

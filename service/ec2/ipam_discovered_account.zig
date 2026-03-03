@@ -6,23 +6,23 @@ const IpamDiscoveryFailureReason = @import("ipam_discovery_failure_reason.zig").
 /// organization are discovered accounts.
 pub const IpamDiscoveredAccount = struct {
     /// The account ID.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region that the account information is returned
     /// from.
     /// An account can be discovered in multiple regions and will have a separate
     /// discovered account for each Region.
-    discovery_region: ?[]const u8,
+    discovery_region: ?[]const u8 = null,
 
     /// The resource discovery failure reason.
-    failure_reason: ?IpamDiscoveryFailureReason,
+    failure_reason: ?IpamDiscoveryFailureReason = null,
 
     /// The last attempted resource discovery time.
-    last_attempted_discovery_time: ?i64,
+    last_attempted_discovery_time: ?i64 = null,
 
     /// The last successful resource discovery time.
-    last_successful_discovery_time: ?i64,
+    last_successful_discovery_time: ?i64 = null,
 
     /// The ID of an Organizational Unit in Amazon Web Services Organizations.
-    organizational_unit_id: ?[]const u8,
+    organizational_unit_id: ?[]const u8 = null,
 };

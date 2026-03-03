@@ -34,7 +34,7 @@ const WorkflowState = @import("workflow_state.zig").WorkflowState;
 pub const AwsSecurityFinding = struct {
     /// Provides details about an action that affects or that was taken on a
     /// resource.
-    action: ?Action,
+    action: ?Action = null,
 
     /// The Amazon Web Services account ID that a finding is generated in.
     ///
@@ -45,7 +45,7 @@ pub const AwsSecurityFinding = struct {
     /// generated.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 50.
-    aws_account_name: ?[]const u8,
+    aws_account_name: ?[]const u8 = null,
 
     /// The name of the company for the product that generated the finding.
     ///
@@ -57,14 +57,14 @@ pub const AwsSecurityFinding = struct {
     /// name, you use this attribute.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 128.
-    company_name: ?[]const u8,
+    company_name: ?[]const u8 = null,
 
     /// This data type is exclusive to findings that are generated as the result of
     /// a check run
     /// against a specific rule in a supported security standard, such as CIS Amazon
     /// Web Services Foundations.
     /// Contains security standard-related finding details.
-    compliance: ?Compliance,
+    compliance: ?Compliance = null,
 
     /// A finding's confidence. Confidence is defined as the likelihood that a
     /// finding
@@ -74,7 +74,7 @@ pub const AwsSecurityFinding = struct {
     /// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means
     /// zero percent
     /// confidence and 100 means 100 percent confidence.
-    confidence: ?i32,
+    confidence: ?i32 = null,
 
     /// Indicates when the security findings provider created the potential security
     /// issue that
@@ -91,7 +91,7 @@ pub const AwsSecurityFinding = struct {
     /// A score of 0 means that the underlying resources have no criticality, and a
     /// score of 100
     /// is reserved for the most critical resources.
-    criticality: ?i32,
+    criticality: ?i32 = null,
 
     /// A finding's description. `Description` is a required property.
     ///
@@ -105,12 +105,12 @@ pub const AwsSecurityFinding = struct {
     /// must have GuardDuty enabled. For more information, see [GuardDuty Extended
     /// Threat Detection
     /// ](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html) in the *Amazon GuardDuty User Guide*.
-    detection: ?Detection,
+    detection: ?Detection = null,
 
     /// In a `BatchImportFindings` request, finding providers use
     /// `FindingProviderFields` to provide and update their own values for
     /// confidence, criticality, related findings, severity, and types.
-    finding_provider_fields: ?FindingProviderFields,
+    finding_provider_fields: ?FindingProviderFields = null,
 
     /// Indicates when the security findings provider first observed the potential
     /// security
@@ -119,7 +119,7 @@ pub const AwsSecurityFinding = struct {
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    first_observed_at: ?[]const u8,
+    first_observed_at: ?[]const u8 = null,
 
     /// Provides metadata for the Amazon CodeGuru detector associated with a
     /// finding. This field pertains to
@@ -128,7 +128,7 @@ pub const AwsSecurityFinding = struct {
     /// vulnerabilities in Lambda function code based on internal detectors
     /// developed
     /// in collaboration with Amazon CodeGuru. Security Hub receives those findings.
-    generator_details: ?GeneratorDetails,
+    generator_details: ?GeneratorDetails = null,
 
     /// The identifier for the solution-specific component (a discrete unit of
     /// logic) that
@@ -150,31 +150,31 @@ pub const AwsSecurityFinding = struct {
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    last_observed_at: ?[]const u8,
+    last_observed_at: ?[]const u8 = null,
 
     /// A list of malware related to a finding.
     ///
     /// Array Members: Maximum number of 5 items.
-    malware: ?[]const Malware,
+    malware: ?[]const Malware = null,
 
     /// The details of network-related information about a finding.
-    network: ?Network,
+    network: ?Network = null,
 
     /// Provides information about a network path that is relevant to a finding.
     /// Each entry
     /// under `NetworkPath` represents a component of that path.
-    network_path: ?[]const NetworkPathComponent,
+    network_path: ?[]const NetworkPathComponent = null,
 
     /// A user-defined note added to a finding.
-    note: ?Note,
+    note: ?Note = null,
 
     /// Provides an overview of the patch compliance status for an instance against
     /// a selected
     /// compliance standard.
-    patch_summary: ?PatchSummary,
+    patch_summary: ?PatchSummary = null,
 
     /// The details of process-related information about a finding.
-    process: ?ProcessDetails,
+    process: ?ProcessDetails = null,
 
     /// A timestamp that indicates when Security Hub received a finding and begins
     /// to process it.
@@ -182,7 +182,7 @@ pub const AwsSecurityFinding = struct {
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    processed_at: ?[]const u8,
+    processed_at: ?[]const u8 = null,
 
     /// The ARN generated by Security Hub that uniquely identifies a product that
     /// generates findings.
@@ -200,7 +200,7 @@ pub const AwsSecurityFinding = struct {
     /// Can contain up to 50 key-value pairs. For each key-value pair, the key can
     /// contain up to 128 characters, and the value can contain up to 2048
     /// characters.
-    product_fields: ?[]const aws.map.StringMapEntry,
+    product_fields: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the product that generated the finding.
     ///
@@ -212,10 +212,10 @@ pub const AwsSecurityFinding = struct {
     /// name, you use this attribute.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 128.
-    product_name: ?[]const u8,
+    product_name: ?[]const u8 = null,
 
     /// The record state of a finding.
-    record_state: ?RecordState,
+    record_state: ?RecordState = null,
 
     /// The Region from which the finding was generated.
     ///
@@ -223,15 +223,15 @@ pub const AwsSecurityFinding = struct {
     /// cannot update it using `BatchImportFindings` or `BatchUpdateFindings`.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 16.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// A list of related findings.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 10 items.
-    related_findings: ?[]const RelatedFinding,
+    related_findings: ?[]const RelatedFinding = null,
 
     /// A data type that describes the remediation options for a finding.
-    remediation: ?Remediation,
+    remediation: ?Remediation = null,
 
     /// A set of resource data types that describe the resources that the finding
     /// refers
@@ -241,30 +241,30 @@ pub const AwsSecurityFinding = struct {
     resources: []const Resource,
 
     /// Indicates whether the finding is a sample finding.
-    sample: ?bool,
+    sample: ?bool = null,
 
     /// The schema version that a finding is formatted for. The value is
     /// `2018-10-08`.
     schema_version: []const u8,
 
     /// A finding's severity.
-    severity: ?Severity,
+    severity: ?Severity = null,
 
     /// A URL that links to a page about the current finding in the security
     /// findings provider's
     /// solution.
-    source_url: ?[]const u8,
+    source_url: ?[]const u8 = null,
 
     /// Threat intelligence details related to a finding.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 5 items.
-    threat_intel_indicators: ?[]const ThreatIntelIndicator,
+    threat_intel_indicators: ?[]const ThreatIntelIndicator = null,
 
     /// Details about the threat detected in a security finding and the file paths
     /// that were affected by the threat.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 32 items.
-    threats: ?[]const Threat,
+    threats: ?[]const Threat = null,
 
     /// A finding's title. `Title` is a required property.
     ///
@@ -279,7 +279,7 @@ pub const AwsSecurityFinding = struct {
     /// Behaviors | Sensitive Data Identifications
     ///
     /// Array Members: Maximum number of 50 items.
-    types: ?[]const []const u8,
+    types: ?[]const []const u8 = null,
 
     /// Indicates when the security findings provider last updated the finding
     /// record.
@@ -296,19 +296,19 @@ pub const AwsSecurityFinding = struct {
     /// Can contain up to 50 key-value pairs. For each key-value pair, the key can
     /// contain up to 128 characters, and the value can contain up to 1024
     /// characters.
-    user_defined_fields: ?[]const aws.map.StringMapEntry,
+    user_defined_fields: ?[]const aws.map.StringMapEntry = null,
 
     /// Indicates the veracity of a finding.
-    verification_state: ?VerificationState,
+    verification_state: ?VerificationState = null,
 
     /// Provides a list of vulnerabilities associated with the findings.
-    vulnerabilities: ?[]const Vulnerability,
+    vulnerabilities: ?[]const Vulnerability = null,
 
     /// Provides information about the status of the investigation into a finding.
-    workflow: ?Workflow,
+    workflow: ?Workflow = null,
 
     /// The workflow state of a finding.
-    workflow_state: ?WorkflowState,
+    workflow_state: ?WorkflowState = null,
 
     pub const json_field_names = .{
         .action = "Action",

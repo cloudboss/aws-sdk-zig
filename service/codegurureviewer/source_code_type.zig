@@ -11,14 +11,14 @@ pub const SourceCodeType = struct {
     /// specifies a source branch name and a destination branch name in an
     /// associated
     /// repository.
-    branch_diff: ?BranchDiffSourceCodeType,
+    branch_diff: ?BranchDiffSourceCodeType = null,
 
     /// A
     /// [SourceCodeType](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType) that specifies a commit diff created by a pull request on an
     /// associated repository.
-    commit_diff: ?CommitDiffSourceCodeType,
+    commit_diff: ?CommitDiffSourceCodeType = null,
 
-    repository_head: ?RepositoryHeadSourceCodeType,
+    repository_head: ?RepositoryHeadSourceCodeType = null,
 
     /// Metadata that is associated with a code review. This applies to any type of
     /// code review
@@ -27,7 +27,7 @@ pub const SourceCodeType = struct {
     /// example, it might capture metadata associated with an event trigger, such as
     /// a push or a
     /// pull request.
-    request_metadata: ?RequestMetadata,
+    request_metadata: ?RequestMetadata = null,
 
     /// Information about an associated repository in an S3 bucket that includes its
     /// name and an `S3RepositoryDetails` object. The `S3RepositoryDetails` object
@@ -35,7 +35,7 @@ pub const SourceCodeType = struct {
     /// and an S3 key for a build artifacts .zip file. `S3BucketRepository` is
     /// required in
     /// [SourceCodeType](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType) for `S3BucketRepository` based code reviews.
-    s3_bucket_repository: ?S3BucketRepository,
+    s3_bucket_repository: ?S3BucketRepository = null,
 
     pub const json_field_names = .{
         .branch_diff = "BranchDiff",

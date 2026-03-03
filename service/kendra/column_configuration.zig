@@ -15,13 +15,13 @@ pub const ColumnConfiguration = struct {
     document_id_column_name: []const u8,
 
     /// The column that contains the title of the document.
-    document_title_column_name: ?[]const u8,
+    document_title_column_name: ?[]const u8 = null,
 
     /// An array of objects that map database column names to the corresponding
     /// fields in an
     /// index. You must first create the fields in the index using the `UpdateIndex`
     /// API.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     pub const json_field_names = .{
         .change_detecting_columns = "ChangeDetectingColumns",

@@ -16,22 +16,22 @@ const OperationEventStatus = @import("operation_event_status.zig").OperationEven
 pub const OperationEvent = struct {
     /// A description of the operation event. For example, "Stop the EC2 instance
     /// i-abcdefgh987654321".
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The resource involved in the operations event.
     ///
     /// Contains `ResourceArn` ARN and `ResourceType`.
-    resource: ?Resource,
+    resource: ?Resource = null,
 
     /// The status of the operation event. The possible statuses are: `IN_PROGRESS`,
     /// `COMPLETED`, and `FAILED`.
-    status: ?OperationEventStatus,
+    status: ?OperationEventStatus = null,
 
     /// The status message relating to a specific operation event.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The timestamp of the specified operation event.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .description = "Description",

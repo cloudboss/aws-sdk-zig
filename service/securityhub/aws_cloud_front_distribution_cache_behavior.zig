@@ -13,7 +13,7 @@ pub const AwsCloudFrontDistributionCacheBehavior = struct {
     ///
     /// * `https-only` - CloudFront responds to HTTP request with an HTTP status
     /// code of 403 (Forbidden).
-    viewer_protocol_policy: ?[]const u8,
+    viewer_protocol_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .viewer_protocol_policy = "ViewerProtocolPolicy",

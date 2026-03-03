@@ -12,30 +12,30 @@ pub const SlotValueElicitationSetting = struct {
     /// Amazon Lex hasn't determined a value for a slot. You can specify default
     /// values from context variables, session attributes, and defined
     /// values.
-    default_value_specification: ?SlotDefaultValueSpecification,
+    default_value_specification: ?SlotDefaultValueSpecification = null,
 
     /// The prompt that Amazon Lex uses to elicit the slot value from the
     /// user.
-    prompt_specification: ?PromptSpecification,
+    prompt_specification: ?PromptSpecification = null,
 
     /// If you know a specific pattern that users might respond to an Amazon Lex
     /// request for a slot value, you can provide those utterances to improve
     /// accuracy. This is optional. In most cases, Amazon Lex is capable of
     /// understanding user utterances.
-    sample_utterances: ?[]const SampleUtterance,
+    sample_utterances: ?[]const SampleUtterance = null,
 
     /// Specifies the settings that Amazon Lex uses when a slot
     /// value is successfully entered by a user.
-    slot_capture_setting: ?SlotCaptureSetting,
+    slot_capture_setting: ?SlotCaptureSetting = null,
 
     /// Specifies whether the slot is required or optional.
     slot_constraint: SlotConstraint,
 
     /// An object containing information about whether assisted slot resolution is
     /// turned on for the slot or not.
-    slot_resolution_setting: ?SlotResolutionSetting,
+    slot_resolution_setting: ?SlotResolutionSetting = null,
 
-    wait_and_continue_specification: ?WaitAndContinueSpecification,
+    wait_and_continue_specification: ?WaitAndContinueSpecification = null,
 
     pub const json_field_names = .{
         .default_value_specification = "defaultValueSpecification",

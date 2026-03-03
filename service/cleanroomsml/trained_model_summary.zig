@@ -14,11 +14,11 @@ pub const TrainedModelSummary = struct {
     create_time: i64,
 
     /// The description of the trained model.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about the incremental training data channels used to create this
     /// version of the trained model.
-    incremental_training_data_channels: ?[]const IncrementalTrainingDataChannelOutput,
+    incremental_training_data_channels: ?[]const IncrementalTrainingDataChannelOutput = null,
 
     /// The membership ID of the member that created the trained model.
     membership_identifier: []const u8,
@@ -36,7 +36,7 @@ pub const TrainedModelSummary = struct {
     update_time: i64,
 
     /// The version identifier of this trained model version.
-    version_identifier: ?[]const u8,
+    version_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .collaboration_identifier = "collaborationIdentifier",

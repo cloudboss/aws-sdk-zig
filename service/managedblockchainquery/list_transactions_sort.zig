@@ -5,13 +5,13 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// be sorted.
 pub const ListTransactionsSort = struct {
     /// Defaults to the value `TRANSACTION_TIMESTAMP`.
-    sort_by: ?ListTransactionsSortBy,
+    sort_by: ?ListTransactionsSortBy = null,
 
     /// The container for the *sort order* for `ListTransactions`.
     /// The `SortOrder` field only accepts the values `ASCENDING`
     /// and `DESCENDING`. Not providing `SortOrder` will default
     /// to `ASCENDING`.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .sort_by = "sortBy",

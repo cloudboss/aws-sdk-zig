@@ -16,10 +16,10 @@ pub const CloudWatchAlarmTemplateSummary = struct {
 
     /// The number of datapoints within the evaluation period that must be breaching
     /// to trigger the alarm.
-    datapoints_to_alarm: ?i32,
+    datapoints_to_alarm: ?i32 = null,
 
     /// A resource's optional description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The number of periods over which data is compared to the specified
     /// threshold.
@@ -37,7 +37,7 @@ pub const CloudWatchAlarmTemplateSummary = struct {
     /// targetResourceType.
     metric_name: []const u8,
 
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// A resource's name. Names must be unique within the scope of a resource type
     /// in a specific region.
@@ -48,7 +48,7 @@ pub const CloudWatchAlarmTemplateSummary = struct {
 
     statistic: CloudWatchAlarmTemplateStatistic,
 
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     target_resource_type: CloudWatchAlarmTemplateTargetResourceType,
 

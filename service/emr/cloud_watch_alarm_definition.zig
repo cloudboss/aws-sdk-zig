@@ -14,14 +14,14 @@ pub const CloudWatchAlarmDefinition = struct {
     comparison_operator: ComparisonOperator,
 
     /// A CloudWatch metric dimension.
-    dimensions: ?[]const MetricDimension,
+    dimensions: ?[]const MetricDimension = null,
 
     /// The number of periods, in five-minute increments, during which the alarm
     /// condition must
     /// exist before the alarm triggers automatic scaling activity. The default
     /// value is
     /// `1`.
-    evaluation_periods: ?i32,
+    evaluation_periods: ?i32 = null,
 
     /// The name of the CloudWatch metric that is watched to determine an alarm
     /// condition.
@@ -29,7 +29,7 @@ pub const CloudWatchAlarmDefinition = struct {
 
     /// The namespace for the CloudWatch metric. The default is
     /// `AWS/ElasticMapReduce`.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The period, in seconds, over which the statistic is applied. CloudWatch
     /// metrics for
@@ -40,7 +40,7 @@ pub const CloudWatchAlarmDefinition = struct {
     /// The statistic to apply to the metric associated with the alarm. The default
     /// is
     /// `AVERAGE`.
-    statistic: ?Statistic,
+    statistic: ?Statistic = null,
 
     /// The value against which the specified statistic is compared.
     threshold: f64,
@@ -50,7 +50,7 @@ pub const CloudWatchAlarmDefinition = struct {
     /// specified for `Unit` must correspond to the units specified in the
     /// CloudWatch
     /// metric.
-    unit: ?Unit,
+    unit: ?Unit = null,
 
     pub const json_field_names = .{
         .comparison_operator = "ComparisonOperator",

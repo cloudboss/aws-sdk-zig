@@ -5,11 +5,11 @@ const MssManifestLayout = @import("mss_manifest_layout.zig").MssManifestLayout;
 /// associated with an origin endpoint. This includes all the settings and
 /// properties that define how the MSS content is packaged and delivered.
 pub const GetMssManifestConfiguration = struct {
-    filter_configuration: ?FilterConfiguration,
+    filter_configuration: ?FilterConfiguration = null,
 
     /// The layout format of the MSS manifest, which determines how the manifest is
     /// structured for client compatibility.
-    manifest_layout: ?MssManifestLayout,
+    manifest_layout: ?MssManifestLayout = null,
 
     /// The name of the MSS manifest. This name is appended to the origin endpoint
     /// URL to create the unique path for accessing this specific MSS manifest.
@@ -17,7 +17,7 @@ pub const GetMssManifestConfiguration = struct {
 
     /// The duration (in seconds) of the manifest window. This represents the total
     /// amount of content available in the manifest at any given time.
-    manifest_window_seconds: ?i32,
+    manifest_window_seconds: ?i32 = null,
 
     /// The complete URL for accessing the MSS manifest. Client players use this URL
     /// to retrieve the manifest and begin streaming the Microsoft Smooth Streaming

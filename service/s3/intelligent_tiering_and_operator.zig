@@ -7,9 +7,9 @@ pub const IntelligentTieringAndOperator = struct {
     /// An object key name prefix that identifies the subset of objects to which the
     /// configuration
     /// applies.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// All of these tags must exist in the object's tag set in order for the
     /// configuration to apply.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

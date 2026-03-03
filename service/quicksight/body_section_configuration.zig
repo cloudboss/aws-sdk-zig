@@ -9,17 +9,17 @@ pub const BodySectionConfiguration = struct {
     content: BodySectionContent,
 
     /// The configuration of a page break for a section.
-    page_break_configuration: ?SectionPageBreakConfiguration,
+    page_break_configuration: ?SectionPageBreakConfiguration = null,
 
     /// Describes the configurations that are required to declare a section as
     /// repeating.
-    repeat_configuration: ?BodySectionRepeatConfiguration,
+    repeat_configuration: ?BodySectionRepeatConfiguration = null,
 
     /// The unique identifier of a body section.
     section_id: []const u8,
 
     /// The style options of a body section.
-    style: ?SectionStyle,
+    style: ?SectionStyle = null,
 
     pub const json_field_names = .{
         .content = "Content",

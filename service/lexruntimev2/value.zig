@@ -9,11 +9,11 @@ pub const Value = struct {
 
     /// The part of the user's response to the slot elicitation that Amazon Lex V2
     /// determines is relevant to the slot value.
-    original_value: ?[]const u8,
+    original_value: ?[]const u8 = null,
 
     /// A list of values that Amazon Lex V2 determines are possible resolutions for
     /// the user input. The first value matches the `interpretedValue`.
-    resolved_values: ?[]const []const u8,
+    resolved_values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .interpreted_value = "interpretedValue",

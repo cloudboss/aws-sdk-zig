@@ -10,7 +10,7 @@ const ConnectionDirection = @import("connection_direction.zig").ConnectionDirect
 /// ](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html) in the *Amazon GuardDuty User Guide*.
 pub const NetworkConnection = struct {
     /// The direction in which the network traffic is flowing.
-    direction: ?ConnectionDirection,
+    direction: ?ConnectionDirection = null,
 
     pub const json_field_names = .{
         .direction = "Direction",

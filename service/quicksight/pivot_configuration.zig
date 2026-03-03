@@ -5,7 +5,7 @@ const PivotedLabel = @import("pivoted_label.zig").PivotedLabel;
 pub const PivotConfiguration = struct {
     /// The name of the column that contains the labels to be pivoted into separate
     /// columns.
-    label_column_name: ?[]const u8,
+    label_column_name: ?[]const u8 = null,
 
     /// The list of specific label values to pivot into separate columns.
     pivoted_labels: []const PivotedLabel,

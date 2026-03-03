@@ -15,7 +15,7 @@ pub const User = struct {
     /// to include multiple categories for a single user, separate each category
     /// with a pipe separator (`|`).
     /// For example, `\"Member|Frequent shopper\"`.
-    properties: ?[]const u8,
+    properties: ?[]const u8 = null,
 
     /// The ID associated with the user.
     user_id: []const u8,

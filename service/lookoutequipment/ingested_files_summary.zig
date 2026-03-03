@@ -7,7 +7,7 @@ pub const IngestedFilesSummary = struct {
     /// Indicates the number of files that were discarded. A file could be discarded
     /// because its
     /// format is invalid (for example, a jpg or pdf) or not readable.
-    discarded_files: ?[]const S3Object,
+    discarded_files: ?[]const S3Object = null,
 
     /// Indicates the number of files that were successfully ingested.
     ingested_number_of_files: i32,

@@ -24,7 +24,7 @@ pub const MethodSetting = struct {
     /// `INFO`. Choose `ERROR` to write only error-level entries to CloudWatch Logs,
     /// or choose `INFO` to include all `ERROR` events as well as extra
     /// informational events.
-    logging_level: ?[]const u8,
+    logging_level: ?[]const u8 = null,
 
     /// Specifies whether Amazon CloudWatch metrics are enabled for this method.
     metrics_enabled: bool = false,
@@ -40,7 +40,7 @@ pub const MethodSetting = struct {
     throttling_rate_limit: f64 = 0,
 
     /// Specifies how to handle unauthorized requests for cache invalidation.
-    unauthorized_cache_control_header_strategy: ?UnauthorizedCacheControlHeaderStrategy,
+    unauthorized_cache_control_header_strategy: ?UnauthorizedCacheControlHeaderStrategy = null,
 
     pub const json_field_names = .{
         .cache_data_encrypted = "cacheDataEncrypted",

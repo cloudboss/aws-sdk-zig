@@ -13,13 +13,13 @@ pub const EksResourceScalingConfiguration = struct {
     capacity_monitoring_approach: EksCapacityMonitoringApproach = "sampledMaxInLast24Hours",
 
     /// The clusters for the configuration.
-    eks_clusters: ?[]const EksCluster,
+    eks_clusters: ?[]const EksCluster = null,
 
     /// The Kubernetes resource type for the configuration.
     kubernetes_resource_type: KubernetesResourceType,
 
     /// The scaling resources for the configuration.
-    scaling_resources: ?[]const []const aws.map.MapEntry([]const aws.map.MapEntry(KubernetesScalingResource)),
+    scaling_resources: ?[]const []const aws.map.MapEntry([]const aws.map.MapEntry(KubernetesScalingResource)) = null,
 
     /// The target percentage for the configuration.
     target_percent: i32 = 100,
@@ -28,7 +28,7 @@ pub const EksResourceScalingConfiguration = struct {
     timeout_minutes: i32 = 60,
 
     /// The settings for ungraceful execution.
-    ungraceful: ?EksResourceScalingUngraceful,
+    ungraceful: ?EksResourceScalingUngraceful = null,
 
     pub const json_field_names = .{
         .capacity_monitoring_approach = "capacityMonitoringApproach",

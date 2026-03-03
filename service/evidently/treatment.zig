@@ -4,11 +4,11 @@ const aws = @import("aws");
 /// variation of the feature that you are including in the experiment.
 pub const Treatment = struct {
     /// The description of the treatment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The feature variation used for this treatment. This is a key-value pair. The
     /// key is the feature name, and the value is the variation name.
-    feature_variations: ?[]const aws.map.StringMapEntry,
+    feature_variations: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of this treatment.
     name: []const u8,

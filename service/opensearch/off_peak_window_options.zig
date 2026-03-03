@@ -13,10 +13,10 @@ pub const OffPeakWindowOptions = struct {
     /// off-peak window enabled by default. You can't disable the off-peak window
     /// after it's
     /// enabled for a domain.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// Off-peak window settings for the domain.
-    off_peak_window: ?OffPeakWindow,
+    off_peak_window: ?OffPeakWindow = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

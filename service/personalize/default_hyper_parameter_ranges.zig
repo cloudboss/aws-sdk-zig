@@ -6,13 +6,13 @@ const DefaultIntegerHyperParameterRange = @import("default_integer_hyper_paramet
 /// Hyperparameters can be categorical, continuous, or integer-valued.
 pub const DefaultHyperParameterRanges = struct {
     /// The categorical hyperparameters and their default ranges.
-    categorical_hyper_parameter_ranges: ?[]const DefaultCategoricalHyperParameterRange,
+    categorical_hyper_parameter_ranges: ?[]const DefaultCategoricalHyperParameterRange = null,
 
     /// The continuous hyperparameters and their default ranges.
-    continuous_hyper_parameter_ranges: ?[]const DefaultContinuousHyperParameterRange,
+    continuous_hyper_parameter_ranges: ?[]const DefaultContinuousHyperParameterRange = null,
 
     /// The integer-valued hyperparameters and their default ranges.
-    integer_hyper_parameter_ranges: ?[]const DefaultIntegerHyperParameterRange,
+    integer_hyper_parameter_ranges: ?[]const DefaultIntegerHyperParameterRange = null,
 
     pub const json_field_names = .{
         .categorical_hyper_parameter_ranges = "categoricalHyperParameterRanges",

@@ -6,16 +6,16 @@ const TopicTimeGranularity = @import("topic_time_granularity.zig").TopicTimeGran
 /// The definition of an Agg function.
 pub const AggFunction = struct {
     /// The aggregation of an Agg function.
-    aggregation: ?AggType,
+    aggregation: ?AggType = null,
 
     /// The aggregation parameters for an Agg function.
-    aggregation_function_parameters: ?[]const aws.map.StringMapEntry,
+    aggregation_function_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The period of an Agg function.
-    period: ?TopicTimeGranularity,
+    period: ?TopicTimeGranularity = null,
 
     /// The period field for an Agg function.
-    period_field: ?[]const u8,
+    period_field: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aggregation = "Aggregation",

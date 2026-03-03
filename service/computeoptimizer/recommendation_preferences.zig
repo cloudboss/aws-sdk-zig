@@ -21,7 +21,7 @@ pub const RecommendationPreferences = struct {
     /// * A ExportEC2InstanceRecommendations or
     ///   ExportAutoScalingGroupRecommendations request, Compute Optimizer
     /// exports recommendations that consist of Graviton instance types only.
-    cpu_vendor_architectures: ?[]const CpuVendorArchitecture,
+    cpu_vendor_architectures: ?[]const CpuVendorArchitecture = null,
 
     pub const json_field_names = .{
         .cpu_vendor_architectures = "cpuVendorArchitectures",

@@ -3,8 +3,8 @@ const EncryptionStateValue = @import("encryption_state_value.zig").EncryptionSta
 /// Describes the encryption support status for a transit gateway.
 pub const EncryptionSupport = struct {
     /// The current encryption state of the resource.
-    encryption_state: ?EncryptionStateValue,
+    encryption_state: ?EncryptionStateValue = null,
 
     /// A message describing the encryption state.
-    state_message: ?[]const u8,
+    state_message: ?[]const u8 = null,
 };

@@ -3,7 +3,7 @@
 pub const ScanConfigurationRecoveryPoint = struct {
     /// The name of the Amazon Web Services Backup vault that contains the recovery
     /// point for the scanned.
-    backup_vault_name: ?[]const u8,
+    backup_vault_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .backup_vault_name = "BackupVaultName",

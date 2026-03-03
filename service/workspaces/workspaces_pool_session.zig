@@ -6,19 +6,19 @@ const NetworkAccessConfiguration = @import("network_access_configuration.zig").N
 pub const WorkspacesPoolSession = struct {
     /// The authentication method. The user is authenticated using a
     /// WorkSpaces Pools URL (API) or SAML 2.0 federation (SAML).
-    authentication_type: ?AuthenticationType,
+    authentication_type: ?AuthenticationType = null,
 
     /// Specifies whether a user is connected to the pool session.
-    connection_state: ?SessionConnectionState,
+    connection_state: ?SessionConnectionState = null,
 
     /// The time that the pool session ended.
-    expiration_time: ?i64,
+    expiration_time: ?i64 = null,
 
     /// The identifier for the instance hosting the session.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// Describes the network details of the pool.
-    network_access_configuration: ?NetworkAccessConfiguration,
+    network_access_configuration: ?NetworkAccessConfiguration = null,
 
     /// The identifier of the pool.
     pool_id: []const u8,
@@ -27,7 +27,7 @@ pub const WorkspacesPoolSession = struct {
     session_id: []const u8,
 
     /// The time that the pool sission started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The identifier of the user.
     user_id: []const u8,

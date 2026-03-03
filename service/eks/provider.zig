@@ -10,7 +10,7 @@ pub const Provider = struct {
     /// users in other accounts to use a KMS
     /// key](https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html) in the *Key Management Service
     /// Developer Guide*.
-    key_arn: ?[]const u8,
+    key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key_arn = "keyArn",

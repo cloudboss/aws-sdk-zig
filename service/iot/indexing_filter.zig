@@ -24,13 +24,13 @@ pub const IndexingFilter = struct {
     /// Web Services IoT Device
     /// Management
     /// Quotas](https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits) in the *Amazon Web Services General Reference*.
-    geo_locations: ?[]const GeoLocationTarget,
+    geo_locations: ?[]const GeoLocationTarget = null,
 
     /// The shadow names that you select to index. The default maximum number of
     /// shadow names for indexing is 10. To increase
     /// the limit, see [Amazon Web Services IoT Device Management
     /// Quotas](https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits) in the *Amazon Web Services General Reference*.
-    named_shadow_names: ?[]const []const u8,
+    named_shadow_names: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .geo_locations = "geoLocations",

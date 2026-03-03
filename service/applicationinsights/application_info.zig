@@ -3,36 +3,36 @@ const DiscoveryType = @import("discovery_type.zig").DiscoveryType;
 /// Describes the status of the application.
 pub const ApplicationInfo = struct {
     /// The Amazon Web Services account ID for the owner of the application.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// If set to true, the managed policies for SSM and CW will be attached to the
     /// instance roles if they are missing.
-    attach_missing_permission: ?bool,
+    attach_missing_permission: ?bool = null,
 
     /// Indicates whether auto-configuration is turned on for this application.
-    auto_config_enabled: ?bool,
+    auto_config_enabled: ?bool = null,
 
     /// Indicates whether Application Insights can listen to CloudWatch events for
     /// the
     /// application resources, such as `instance terminated`, `failed
     /// deployment`, and others.
-    cwe_monitor_enabled: ?bool,
+    cwe_monitor_enabled: ?bool = null,
 
     /// The method used by Application Insights to onboard your resources.
-    discovery_type: ?DiscoveryType,
+    discovery_type: ?DiscoveryType = null,
 
     /// The lifecycle of the application.
-    life_cycle: ?[]const u8,
+    life_cycle: ?[]const u8 = null,
 
     /// Indicates whether Application Insights will create opsItems for any problem
     /// detected by
     /// Application Insights for an application.
-    ops_center_enabled: ?bool,
+    ops_center_enabled: ?bool = null,
 
     /// The SNS topic provided to Application Insights that is associated to the
     /// created
     /// opsItems to receive SNS notifications for opsItem updates.
-    ops_item_sns_topic_arn: ?[]const u8,
+    ops_item_sns_topic_arn: ?[]const u8 = null,
 
     /// The issues on the user side that block Application Insights from
     /// successfully monitoring
@@ -41,14 +41,14 @@ pub const ApplicationInfo = struct {
     /// * “Configuring application, detected 1 Errors, 3 Warnings”
     ///
     /// * “Configuring application, detected 1 Unconfigured Components”
-    remarks: ?[]const u8,
+    remarks: ?[]const u8 = null,
 
     /// The name of the resource group used for the application.
-    resource_group_name: ?[]const u8,
+    resource_group_name: ?[]const u8 = null,
 
     /// The SNS topic ARN that is associated with SNS notifications for updates or
     /// issues.
-    sns_notification_arn: ?[]const u8,
+    sns_notification_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

@@ -1,39 +1,39 @@
 /// Information about a software package.
 pub const SoftwarePackage = struct {
     /// The architecture used for the software package.
-    architecture: ?[]const u8,
+    architecture: ?[]const u8 = null,
 
     /// The epoch of the software package.
-    epoch: ?[]const u8,
+    epoch: ?[]const u8 = null,
 
     /// The file system path to the package manager inventory file.
-    file_path: ?[]const u8,
+    file_path: ?[]const u8 = null,
 
     /// The version of the software package in which the vulnerability has been
     /// resolved.
-    fixed_in_version: ?[]const u8,
+    fixed_in_version: ?[]const u8 = null,
 
     /// The name of the software package.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The source of the package.
-    package_manager: ?[]const u8,
+    package_manager: ?[]const u8 = null,
 
     /// The release of the software package.
-    release: ?[]const u8,
+    release: ?[]const u8 = null,
 
     /// Describes the actions a customer can take to resolve the vulnerability in
     /// the software package.
-    remediation: ?[]const u8,
+    remediation: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the source layer.
-    source_layer_arn: ?[]const u8,
+    source_layer_arn: ?[]const u8 = null,
 
     /// The source layer hash of the vulnerable package.
-    source_layer_hash: ?[]const u8,
+    source_layer_hash: ?[]const u8 = null,
 
     /// The version of the software package.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .architecture = "Architecture",

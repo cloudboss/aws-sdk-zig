@@ -6,7 +6,7 @@ pub const BundleInformation = struct {
     bundle_names: []const []const u8,
 
     /// The pricing tier.
-    pricing_tier: ?PricingTier,
+    pricing_tier: ?PricingTier = null,
 
     pub const json_field_names = .{
         .bundle_names = "bundleNames",

@@ -11,7 +11,7 @@ pub const ServiceJobRetryStrategy = struct {
 
     /// Array of `ServiceJobEvaluateOnExit` objects that specify conditions under
     /// which the service job should be retried or failed.
-    evaluate_on_exit: ?[]const ServiceJobEvaluateOnExit,
+    evaluate_on_exit: ?[]const ServiceJobEvaluateOnExit = null,
 
     pub const json_field_names = .{
         .attempts = "attempts",

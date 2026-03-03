@@ -10,21 +10,21 @@ const RegionScope = @import("region_scope.zig").RegionScope;
 pub const AdminScope = struct {
     /// Defines the accounts that the specified Firewall Manager administrator can
     /// apply policies to.
-    account_scope: ?AccountScope,
+    account_scope: ?AccountScope = null,
 
     /// Defines the Organizations organizational units that the specified Firewall
     /// Manager administrator can apply policies to. For more information about OUs
     /// in Organizations, see [Managing organizational units (OUs)
     /// ](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html) in the *Organizations User Guide*.
-    organizational_unit_scope: ?OrganizationalUnitScope,
+    organizational_unit_scope: ?OrganizationalUnitScope = null,
 
     /// Defines the Firewall Manager policy types that the specified Firewall
     /// Manager administrator can create and manage.
-    policy_type_scope: ?PolicyTypeScope,
+    policy_type_scope: ?PolicyTypeScope = null,
 
     /// Defines the Amazon Web Services Regions that the specified Firewall Manager
     /// administrator can perform actions in.
-    region_scope: ?RegionScope,
+    region_scope: ?RegionScope = null,
 
     pub const json_field_names = .{
         .account_scope = "AccountScope",

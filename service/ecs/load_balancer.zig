@@ -22,7 +22,7 @@ pub const LoadBalancer = struct {
     /// The advanced settings for the load balancer used in blue/green deployments.
     /// Specify the alternate target group, listener rules, and IAM role required
     /// for traffic shifting during blue/green deployments.
-    advanced_configuration: ?AdvancedConfiguration,
+    advanced_configuration: ?AdvancedConfiguration = null,
 
     /// The name of the container (as it appears in a container definition) to
     /// associate with
@@ -31,7 +31,7 @@ pub const LoadBalancer = struct {
     /// You need to specify the container name when configuring the target group for
     /// an Amazon
     /// ECS load balancer.
-    container_name: ?[]const u8,
+    container_name: ?[]const u8 = null,
 
     /// The port on the container to associate with the load balancer. This port
     /// must
@@ -40,7 +40,7 @@ pub const LoadBalancer = struct {
     /// instance
     /// they're launched on must allow ingress traffic on the `hostPort` of the port
     /// mapping.
-    container_port: ?i32,
+    container_port: ?i32 = null,
 
     /// The name of the load balancer to associate with the Amazon ECS service or
     /// task
@@ -49,7 +49,7 @@ pub const LoadBalancer = struct {
     /// If you are using an Application Load Balancer or a Network Load Balancer the
     /// load
     /// balancer name parameter should be omitted.
-    load_balancer_name: ?[]const u8,
+    load_balancer_name: ?[]const u8 = null,
 
     /// The full Amazon Resource Name (ARN) of the Elastic Load Balancing target
     /// group or
@@ -77,7 +77,7 @@ pub const LoadBalancer = struct {
     /// network mode are associated with an elastic network interface, not an Amazon
     /// EC2
     /// instance. This network mode is required for the Fargate launch type.
-    target_group_arn: ?[]const u8,
+    target_group_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .advanced_configuration = "advancedConfiguration",

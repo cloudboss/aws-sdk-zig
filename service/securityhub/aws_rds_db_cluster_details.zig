@@ -15,26 +15,26 @@ pub const AwsRdsDbClusterDetails = struct {
     /// * `stopped`
     ///
     /// * `stopping`
-    activity_stream_status: ?[]const u8,
+    activity_stream_status: ?[]const u8 = null,
 
     /// For all database engines except Aurora, specifies the allocated storage size
     /// in
     /// gibibytes (GiB).
-    allocated_storage: ?i32,
+    allocated_storage: ?i32 = null,
 
     /// A list of the IAM roles that are associated with the DB cluster.
-    associated_roles: ?[]const AwsRdsDbClusterAssociatedRole,
+    associated_roles: ?[]const AwsRdsDbClusterAssociatedRole = null,
 
     /// Indicates if minor version upgrades are automatically applied to the
     /// cluster.
-    auto_minor_version_upgrade: ?bool,
+    auto_minor_version_upgrade: ?bool = null,
 
     /// A list of Availability Zones (AZs) where instances in the DB cluster can be
     /// created.
-    availability_zones: ?[]const []const u8,
+    availability_zones: ?[]const []const u8 = null,
 
     /// The number of days for which automated backups are retained.
-    backup_retention_period: ?i32,
+    backup_retention_period: ?i32 = null,
 
     /// Indicates when the DB cluster was created, in Universal Coordinated Time
     /// (UTC).
@@ -42,60 +42,60 @@ pub const AwsRdsDbClusterDetails = struct {
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    cluster_create_time: ?[]const u8,
+    cluster_create_time: ?[]const u8 = null,
 
     /// Whether tags are copied from the DB cluster to snapshots of the DB cluster.
-    copy_tags_to_snapshot: ?bool,
+    copy_tags_to_snapshot: ?bool = null,
 
     /// Whether the DB cluster is a clone of a DB cluster owned by a different
     /// Amazon Web Services
     /// account.
-    cross_account_clone: ?bool,
+    cross_account_clone: ?bool = null,
 
     /// A list of custom endpoints for the DB cluster.
-    custom_endpoints: ?[]const []const u8,
+    custom_endpoints: ?[]const []const u8 = null,
 
     /// The name of the database.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The DB cluster identifier that the user assigned to the cluster. This
     /// identifier is the
     /// unique key that identifies a DB cluster.
-    db_cluster_identifier: ?[]const u8,
+    db_cluster_identifier: ?[]const u8 = null,
 
     /// The list of instances that make up the DB cluster.
-    db_cluster_members: ?[]const AwsRdsDbClusterMember,
+    db_cluster_members: ?[]const AwsRdsDbClusterMember = null,
 
     /// The list of option group memberships for this DB cluster.
-    db_cluster_option_group_memberships: ?[]const AwsRdsDbClusterOptionGroupMembership,
+    db_cluster_option_group_memberships: ?[]const AwsRdsDbClusterOptionGroupMembership = null,
 
     /// The name of the DB cluster parameter group for the DB cluster.
-    db_cluster_parameter_group: ?[]const u8,
+    db_cluster_parameter_group: ?[]const u8 = null,
 
     /// The identifier of the DB cluster. The identifier must be unique within each
     /// Amazon Web Services Region
     /// and is immutable.
-    db_cluster_resource_id: ?[]const u8,
+    db_cluster_resource_id: ?[]const u8 = null,
 
     /// The subnet group that is associated with the DB cluster, including the name,
     /// description, and subnets in the subnet group.
-    db_subnet_group: ?[]const u8,
+    db_subnet_group: ?[]const u8 = null,
 
     /// Whether the DB cluster has deletion protection enabled.
-    deletion_protection: ?bool,
+    deletion_protection: ?bool = null,
 
     /// The Active Directory domain membership records that are associated with the
     /// DB
     /// cluster.
-    domain_memberships: ?[]const AwsRdsDbDomainMembership,
+    domain_memberships: ?[]const AwsRdsDbDomainMembership = null,
 
     /// A list of log types that this DB cluster is configured to export to
     /// CloudWatch
     /// Logs.
-    enabled_cloud_watch_logs_exports: ?[]const []const u8,
+    enabled_cloud_watch_logs_exports: ?[]const []const u8 = null,
 
     /// The connection endpoint for the primary instance of the DB cluster.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// The name of the database engine to use for this DB cluster. Valid values are
     /// as follows:
@@ -105,7 +105,7 @@ pub const AwsRdsDbClusterDetails = struct {
     /// * `aurora-mysql`
     ///
     /// * `aurora-postgresql`
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// The database engine mode of the DB cluster.Valid values are as follows:
     ///
@@ -118,43 +118,43 @@ pub const AwsRdsDbClusterDetails = struct {
     /// * `provisioned`
     ///
     /// * `serverless`
-    engine_mode: ?[]const u8,
+    engine_mode: ?[]const u8 = null,
 
     /// The version number of the database engine to use.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// Specifies the identifier that Amazon Route 53 assigns when you create a
     /// hosted
     /// zone.
-    hosted_zone_id: ?[]const u8,
+    hosted_zone_id: ?[]const u8 = null,
 
     /// Whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled.
-    http_endpoint_enabled: ?bool,
+    http_endpoint_enabled: ?bool = null,
 
     /// Whether the mapping of IAM accounts to database accounts is enabled.
-    iam_database_authentication_enabled: ?bool,
+    iam_database_authentication_enabled: ?bool = null,
 
     /// The ARN of the KMS master key that is used to encrypt the database instances
     /// in the
     /// DB cluster.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The name of the master user for the DB cluster.
-    master_username: ?[]const u8,
+    master_username: ?[]const u8 = null,
 
     /// Whether the DB cluster has instances in multiple Availability Zones.
-    multi_az: ?bool,
+    multi_az: ?bool = null,
 
     /// The port number on which the DB instances in the DB cluster accept
     /// connections.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The range of time each day when automated backups are created, if automated
     /// backups are
     /// enabled.
     ///
     /// Uses the format `HH:MM-HH:MM`. For example, `04:52-05:22`.
-    preferred_backup_window: ?[]const u8,
+    preferred_backup_window: ?[]const u8 = null,
 
     /// The weekly time range during which system maintenance can occur, in
     /// Universal
@@ -166,23 +166,23 @@ pub const AwsRdsDbClusterDetails = struct {
     /// `mon`|`tue`|`wed`|`thu`|`fri`|`sat`|`sun`.
     ///
     /// For example, `sun:09:32-sun:10:02`.
-    preferred_maintenance_window: ?[]const u8,
+    preferred_maintenance_window: ?[]const u8 = null,
 
     /// The reader endpoint for the DB cluster.
-    reader_endpoint: ?[]const u8,
+    reader_endpoint: ?[]const u8 = null,
 
     /// The identifiers of the read replicas that are associated with this DB
     /// cluster.
-    read_replica_identifiers: ?[]const []const u8,
+    read_replica_identifiers: ?[]const []const u8 = null,
 
     /// The current status of this DB cluster.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// Whether the DB cluster is encrypted.
-    storage_encrypted: ?bool,
+    storage_encrypted: ?bool = null,
 
     /// A list of VPC security groups that the DB cluster belongs to.
-    vpc_security_groups: ?[]const AwsRdsDbInstanceVpcSecurityGroup,
+    vpc_security_groups: ?[]const AwsRdsDbInstanceVpcSecurityGroup = null,
 
     pub const json_field_names = .{
         .activity_stream_status = "ActivityStreamStatus",

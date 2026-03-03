@@ -9,11 +9,11 @@ pub const SlackWorkspace = struct {
     /// Either `ENABLED` or `DISABLED`. The resource returns `DISABLED` if the
     /// organization's AWS Chatbot policy has explicitly denied that configuration.
     /// For example, if Amazon Chime is disabled.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// Provided if State is `DISABLED`. Provides context as to why the resource is
     /// disabled.
-    state_reason: ?[]const u8,
+    state_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .slack_team_id = "SlackTeamId",

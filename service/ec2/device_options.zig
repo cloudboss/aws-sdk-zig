@@ -3,8 +3,8 @@
 pub const DeviceOptions = struct {
     /// The URL Amazon Web Services Verified Access will use to verify the
     /// authenticity of the device tokens.
-    public_signing_key_url: ?[]const u8,
+    public_signing_key_url: ?[]const u8 = null,
 
     /// The ID of the tenant application with the device-identity provider.
-    tenant_id: ?[]const u8,
+    tenant_id: ?[]const u8 = null,
 };

@@ -6,7 +6,7 @@ pub const DataTableValueEvaluationSet = struct {
     attribute_names: []const []const u8,
 
     /// The set's primary values.
-    primary_values: ?[]const PrimaryValue,
+    primary_values: ?[]const PrimaryValue = null,
 
     pub const json_field_names = .{
         .attribute_names = "AttributeNames",

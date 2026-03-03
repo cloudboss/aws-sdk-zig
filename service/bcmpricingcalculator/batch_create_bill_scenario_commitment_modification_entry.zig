@@ -8,7 +8,7 @@ pub const BatchCreateBillScenarioCommitmentModificationEntry = struct {
     commitment_action: BillScenarioCommitmentModificationAction,
 
     /// An optional group identifier for the commitment modification.
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// A unique identifier for this entry in the batch operation. This can be any
     /// valid string. This key is useful to identify errors associated with any

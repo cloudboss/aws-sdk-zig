@@ -6,10 +6,10 @@ pub const StringAttributeConstraintsType = struct {
     /// or equal to
     /// `2^1023`, represented as a string with a length of 131072 characters or
     /// fewer.
-    max_length: ?[]const u8,
+    max_length: ?[]const u8 = null,
 
     /// The minimum length of a string attribute value.
-    min_length: ?[]const u8,
+    min_length: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_length = "MaxLength",

@@ -24,7 +24,7 @@ pub const InternetHealth = struct {
     /// For more information, see [How Internet Monitor calculates performance and
     /// availability
     /// scores](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores) in the Amazon CloudWatch Internet Monitor section of the *CloudWatch User Guide*.
-    availability: ?AvailabilityMeasurement,
+    availability: ?AvailabilityMeasurement = null,
 
     /// Performance in Internet Monitor represents the estimated percentage of
     /// traffic that is not seeing a performance drop. For example, a performance
@@ -35,7 +35,7 @@ pub const InternetHealth = struct {
     /// For more information, see [How Internet Monitor calculates performance and
     /// availability
     /// scores](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores) in the Amazon CloudWatch Internet Monitor section of the *CloudWatch User Guide*.
-    performance: ?PerformanceMeasurement,
+    performance: ?PerformanceMeasurement = null,
 
     pub const json_field_names = .{
         .availability = "Availability",

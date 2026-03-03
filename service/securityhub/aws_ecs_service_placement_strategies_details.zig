@@ -10,7 +10,7 @@ pub const AwsEcsServicePlacementStrategiesDetails = struct {
     /// For the `binpack` placement strategy, valid values are `cpu` and `memory`.
     ///
     /// For the `random` placement strategy, this attribute is not used.
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// The type of placement strategy.
     ///
@@ -24,7 +24,7 @@ pub const AwsEcsServicePlacementStrategiesDetails = struct {
     /// least available amount of the resource that is specified in `Field`.
     ///
     /// Valid values: `random` | `spread` | `binpack`
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .field = "Field",

@@ -16,7 +16,7 @@ pub const GreengrassV2 = struct {
     /// `3`) and not applicable for Classic stream, V2 gateways
     /// (`gatewayVersion`
     /// `2`).
-    core_device_operating_system: ?CoreDeviceOperatingSystem,
+    core_device_operating_system: ?CoreDeviceOperatingSystem = null,
 
     /// The name of the IoT thing for your IoT Greengrass V2 core device.
     core_device_thing_name: []const u8,

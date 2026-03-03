@@ -2,13 +2,13 @@
 pub const GuardrailUsage = struct {
     /// The number of automated reasoning policies that were processed during the
     /// guardrail evaluation.
-    automated_reasoning_policies: ?i32,
+    automated_reasoning_policies: ?i32 = null,
 
     /// The number of text units processed by the automated reasoning policy.
-    automated_reasoning_policy_units: ?i32,
+    automated_reasoning_policy_units: ?i32 = null,
 
     /// The content policy image units processed by the guardrail.
-    content_policy_image_units: ?i32,
+    content_policy_image_units: ?i32 = null,
 
     /// The content policy units processed by the guardrail.
     content_policy_units: i32,

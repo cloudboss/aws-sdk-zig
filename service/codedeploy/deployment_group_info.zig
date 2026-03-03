@@ -18,78 +18,78 @@ const TriggerConfig = @import("trigger_config.zig").TriggerConfig;
 /// Information about a deployment group.
 pub const DeploymentGroupInfo = struct {
     /// A list of alarms associated with the deployment group.
-    alarm_configuration: ?AlarmConfiguration,
+    alarm_configuration: ?AlarmConfiguration = null,
 
     /// The application name.
-    application_name: ?[]const u8,
+    application_name: ?[]const u8 = null,
 
     /// Information about the automatic rollback configuration associated with the
     /// deployment
     /// group.
-    auto_rollback_configuration: ?AutoRollbackConfiguration,
+    auto_rollback_configuration: ?AutoRollbackConfiguration = null,
 
     /// A list of associated Auto Scaling groups.
-    auto_scaling_groups: ?[]const AutoScalingGroup,
+    auto_scaling_groups: ?[]const AutoScalingGroup = null,
 
     /// Information about blue/green deployment options for a deployment group.
-    blue_green_deployment_configuration: ?BlueGreenDeploymentConfiguration,
+    blue_green_deployment_configuration: ?BlueGreenDeploymentConfiguration = null,
 
     /// The destination platform type for the deployment (`Lambda`,
     /// `Server`, or `ECS`).
-    compute_platform: ?ComputePlatform,
+    compute_platform: ?ComputePlatform = null,
 
     /// The deployment configuration name.
-    deployment_config_name: ?[]const u8,
+    deployment_config_name: ?[]const u8 = null,
 
     /// The deployment group ID.
-    deployment_group_id: ?[]const u8,
+    deployment_group_id: ?[]const u8 = null,
 
     /// The deployment group name.
-    deployment_group_name: ?[]const u8,
+    deployment_group_name: ?[]const u8 = null,
 
     /// Information about the type of deployment, either in-place or blue/green, you
     /// want to
     /// run and whether to route deployment traffic behind a load balancer.
-    deployment_style: ?DeploymentStyle,
+    deployment_style: ?DeploymentStyle = null,
 
     /// The Amazon EC2 tags on which to filter. The deployment group includes EC2
     /// instances with any of the specified tags.
-    ec_2_tag_filters: ?[]const EC2TagFilter,
+    ec_2_tag_filters: ?[]const EC2TagFilter = null,
 
     /// Information about groups of tags applied to an Amazon EC2 instance. The
     /// deployment group includes only Amazon EC2 instances identified by all of the
     /// tag
     /// groups. Cannot be used in the same call as ec2TagFilters.
-    ec_2_tag_set: ?EC2TagSet,
+    ec_2_tag_set: ?EC2TagSet = null,
 
     /// The target Amazon ECS services in the deployment group. This applies only to
     /// deployment groups that use the Amazon ECS compute platform. A target Amazon
     /// ECS service is specified as an Amazon ECS cluster and service name
     /// pair using the format `:`.
-    ecs_services: ?[]const ECSService,
+    ecs_services: ?[]const ECSService = null,
 
     /// Information about the most recent attempted deployment to the deployment
     /// group.
-    last_attempted_deployment: ?LastDeploymentInfo,
+    last_attempted_deployment: ?LastDeploymentInfo = null,
 
     /// Information about the most recent successful deployment to the deployment
     /// group.
-    last_successful_deployment: ?LastDeploymentInfo,
+    last_successful_deployment: ?LastDeploymentInfo = null,
 
     /// Information about the load balancer to use in a deployment.
-    load_balancer_info: ?LoadBalancerInfo,
+    load_balancer_info: ?LoadBalancerInfo = null,
 
     /// The on-premises instance tags on which to filter. The deployment group
     /// includes
     /// on-premises instances with any of the specified tags.
-    on_premises_instance_tag_filters: ?[]const TagFilter,
+    on_premises_instance_tag_filters: ?[]const TagFilter = null,
 
     /// Information about groups of tags applied to an on-premises instance. The
     /// deployment
     /// group includes only on-premises instances identified by all the tag groups.
     /// Cannot be
     /// used in the same call as onPremisesInstanceTagFilters.
-    on_premises_tag_set: ?OnPremisesTagSet,
+    on_premises_tag_set: ?OnPremisesTagSet = null,
 
     /// Indicates what happens when new Amazon EC2 instances are launched
     /// mid-deployment and do not receive the deployed application revision.
@@ -103,7 +103,7 @@ pub const DeploymentGroupInfo = struct {
     /// deployment to update the new Amazon EC2 instances. This may result in
     /// instances
     /// having different revisions.
-    outdated_instances_strategy: ?OutdatedInstancesStrategy,
+    outdated_instances_strategy: ?OutdatedInstancesStrategy = null,
 
     /// A service role Amazon Resource Name (ARN) that grants CodeDeploy permission
     /// to make
@@ -111,11 +111,11 @@ pub const DeploymentGroupInfo = struct {
     /// see [Create a
     /// Service Role for
     /// CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html) in the *CodeDeploy User Guide*.
-    service_role_arn: ?[]const u8,
+    service_role_arn: ?[]const u8 = null,
 
     /// Information about the deployment group's target revision, including type and
     /// location.
-    target_revision: ?RevisionLocation,
+    target_revision: ?RevisionLocation = null,
 
     /// Indicates whether the deployment group was configured to have CodeDeploy
     /// install a termination hook into an Auto Scaling group.
@@ -127,7 +127,7 @@ pub const DeploymentGroupInfo = struct {
     termination_hook_enabled: bool = false,
 
     /// Information about triggers associated with the deployment group.
-    trigger_configurations: ?[]const TriggerConfig,
+    trigger_configurations: ?[]const TriggerConfig = null,
 
     pub const json_field_names = .{
         .alarm_configuration = "alarmConfiguration",

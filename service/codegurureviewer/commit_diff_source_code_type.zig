@@ -8,15 +8,15 @@ pub const CommitDiffSourceCodeType = struct {
     /// The SHA of the destination commit used to generate a commit diff. This field
     /// is required
     /// for a pull request code review.
-    destination_commit: ?[]const u8,
+    destination_commit: ?[]const u8 = null,
 
     /// The SHA of the merge base of a commit.
-    merge_base_commit: ?[]const u8,
+    merge_base_commit: ?[]const u8 = null,
 
     /// The SHA of the source commit used to generate a commit diff. This field is
     /// required for
     /// a pull request code review.
-    source_commit: ?[]const u8,
+    source_commit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_commit = "DestinationCommit",

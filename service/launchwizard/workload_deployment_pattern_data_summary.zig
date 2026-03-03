@@ -3,28 +3,28 @@ const WorkloadDeploymentPatternStatus = @import("workload_deployment_pattern_sta
 /// Describes a workload deployment pattern.
 pub const WorkloadDeploymentPatternDataSummary = struct {
     /// The name of a workload deployment pattern.
-    deployment_pattern_name: ?[]const u8,
+    deployment_pattern_name: ?[]const u8 = null,
 
     /// The version name of a workload deployment pattern.
-    deployment_pattern_version_name: ?[]const u8,
+    deployment_pattern_version_name: ?[]const u8 = null,
 
     /// The description of a workload deployment pattern.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The display name of a workload deployment pattern.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The status of a workload deployment pattern.
-    status: ?WorkloadDeploymentPatternStatus,
+    status: ?WorkloadDeploymentPatternStatus = null,
 
     /// A message about a workload deployment pattern's status.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The name of the workload.
-    workload_name: ?[]const u8,
+    workload_name: ?[]const u8 = null,
 
     /// The name of the workload deployment pattern version.
-    workload_version_name: ?[]const u8,
+    workload_version_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .deployment_pattern_name = "deploymentPatternName",

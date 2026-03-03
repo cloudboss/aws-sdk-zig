@@ -8,7 +8,7 @@ const Content = @import("content.zig").Content;
 pub const Message = struct {
     /// The List of attachments to include in your email. All recipients will
     /// receive the same attachments.
-    attachments: ?[]const Attachment,
+    attachments: ?[]const Attachment = null,
 
     /// The body of the message. You can specify an HTML version of the message, a
     /// text-only
@@ -16,7 +16,7 @@ pub const Message = struct {
     body: Body,
 
     /// The list of message headers that will be added to the email message.
-    headers: ?[]const MessageHeader,
+    headers: ?[]const MessageHeader = null,
 
     /// The subject line of the email. The subject line can only contain 7-bit ASCII
     /// characters. However, you can specify non-ASCII characters in the subject

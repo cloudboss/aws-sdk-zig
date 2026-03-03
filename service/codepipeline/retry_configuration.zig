@@ -8,7 +8,7 @@ pub const RetryConfiguration = struct {
     /// failure. You
     /// can specify to retry only failed action in the stage or all actions in the
     /// stage.
-    retry_mode: ?StageRetryMode,
+    retry_mode: ?StageRetryMode = null,
 
     pub const json_field_names = .{
         .retry_mode = "retryMode",

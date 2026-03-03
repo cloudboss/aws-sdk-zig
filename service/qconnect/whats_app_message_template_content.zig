@@ -2,7 +2,7 @@
 /// subtype.
 pub const WhatsAppMessageTemplateContent = struct {
     /// The data.
-    data: ?[]const u8,
+    data: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data = "data",

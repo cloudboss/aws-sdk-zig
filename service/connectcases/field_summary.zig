@@ -5,7 +5,7 @@ const FieldType = @import("field_type.zig").FieldType;
 /// Object for the summarized details of the field.
 pub const FieldSummary = struct {
     /// Union of field attributes.
-    attributes: ?FieldAttributes,
+    attributes: ?FieldAttributes = null,
 
     /// The Amazon Resource Name (ARN) of the field.
     field_arn: []const u8,

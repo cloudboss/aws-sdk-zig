@@ -4,10 +4,10 @@ const ConnectorProperty = @import("connector_property.zig").ConnectorProperty;
 /// properties for HTTP Basic authentication.
 pub const BasicAuthenticationProperties = struct {
     /// The password property name to use for Basic authentication credentials.
-    password: ?ConnectorProperty,
+    password: ?ConnectorProperty = null,
 
     /// The username property name to use for Basic authentication credentials.
-    username: ?ConnectorProperty,
+    username: ?ConnectorProperty = null,
 
     pub const json_field_names = .{
         .password = "Password",

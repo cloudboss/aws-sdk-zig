@@ -4,10 +4,10 @@ const EmptyTargetResolutionMode = @import("empty_target_resolution_mode.zig").Em
 /// Specifies experiment options for an experiment template.
 pub const CreateExperimentTemplateExperimentOptionsInput = struct {
     /// Specifies the account targeting setting for experiment options.
-    account_targeting: ?AccountTargeting,
+    account_targeting: ?AccountTargeting = null,
 
     /// Specifies the empty target resolution mode for experiment options.
-    empty_target_resolution_mode: ?EmptyTargetResolutionMode,
+    empty_target_resolution_mode: ?EmptyTargetResolutionMode = null,
 
     pub const json_field_names = .{
         .account_targeting = "accountTargeting",

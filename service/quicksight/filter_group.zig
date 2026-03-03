@@ -32,7 +32,7 @@ pub const FilterGroup = struct {
     scope_configuration: FilterScopeConfiguration,
 
     /// The status of the `FilterGroup`.
-    status: ?WidgetStatus,
+    status: ?WidgetStatus = null,
 
     pub const json_field_names = .{
         .cross_dataset = "CrossDataset",

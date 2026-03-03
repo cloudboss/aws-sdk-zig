@@ -3,26 +3,26 @@ const SchemaVersionVisibility = @import("schema_version_visibility.zig").SchemaV
 
 pub const ListSchemaVersionsRequest = struct {
     /// The maximum number of results to return at one time.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// Filter on the name of the schema version.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// A token that can be used to retrieve the next set of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// Filter on the id of the schema version.
-    schema_id: ?[]const u8,
+    schema_id: ?[]const u8 = null,
 
     /// The schema version. If this is left blank, it defaults to the latest
     /// version.
-    semantic_version: ?[]const u8,
+    semantic_version: ?[]const u8 = null,
 
     /// Filter on the type of schema version.
     @"type": SchemaVersionType,
 
     /// The visibility of the schema version.
-    visibility: ?SchemaVersionVisibility,
+    visibility: ?SchemaVersionVisibility = null,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",

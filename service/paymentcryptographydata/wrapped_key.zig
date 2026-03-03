@@ -12,7 +12,7 @@ pub const WrappedKey = struct {
     /// the encrypted result. For AES keys, the KCV is computed using a CMAC
     /// algorithm where the input data is 16 bytes of zero and retaining the 3
     /// highest order bytes of the encrypted result.
-    key_check_value_algorithm: ?KeyCheckValueAlgorithm,
+    key_check_value_algorithm: ?KeyCheckValueAlgorithm = null,
 
     /// Parameter information of a WrappedKeyBlock for encryption key exchange.
     wrapped_key_material: WrappedKeyMaterial,

@@ -10,22 +10,22 @@ pub const AwsCloudFrontDistributionOriginItem = struct {
     /// attribute.
     /// If the Amazon S3 bucket is not configured with static website hosting, use
     /// the `S3OriginConfig` type instead.
-    custom_origin_config: ?AwsCloudFrontDistributionOriginCustomOriginConfig,
+    custom_origin_config: ?AwsCloudFrontDistributionOriginCustomOriginConfig = null,
 
     /// Amazon S3 origins: The DNS name of the S3 bucket from which you want
     /// CloudFront to get objects for this origin.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// A unique identifier for the origin or origin group.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// An optional element that causes CloudFront to request your content from a
     /// directory in your Amazon S3 bucket or your custom origin.
-    origin_path: ?[]const u8,
+    origin_path: ?[]const u8 = null,
 
     /// An origin that is an S3 bucket that is not configured with static website
     /// hosting.
-    s3_origin_config: ?AwsCloudFrontDistributionOriginS3OriginConfig,
+    s3_origin_config: ?AwsCloudFrontDistributionOriginS3OriginConfig = null,
 
     pub const json_field_names = .{
         .custom_origin_config = "CustomOriginConfig",

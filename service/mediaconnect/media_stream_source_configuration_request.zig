@@ -11,7 +11,7 @@ pub const MediaStreamSourceConfigurationRequest = struct {
     encoding_name: EncodingName,
 
     /// The media streams that you want to associate with the source.
-    input_configurations: ?[]const InputConfigurationRequest,
+    input_configurations: ?[]const InputConfigurationRequest = null,
 
     /// The name of the media stream.
     media_stream_name: []const u8,

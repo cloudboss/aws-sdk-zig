@@ -5,7 +5,7 @@ pub const DevEndpointCustomLibraries = struct {
     /// in your `DevEndpoint`.
     ///
     /// You can only use pure Java/Scala libraries with a `DevEndpoint`.
-    extra_jars_s3_path: ?[]const u8,
+    extra_jars_s3_path: ?[]const u8 = null,
 
     /// The paths to one or more Python libraries in an Amazon Simple Storage
     /// Service (Amazon S3)
@@ -16,7 +16,7 @@ pub const DevEndpointCustomLibraries = struct {
     /// rely on
     /// C extensions, such as the [pandas](http://pandas.pydata.org/) Python data
     /// analysis library, are not currently supported.
-    extra_python_libs_s3_path: ?[]const u8,
+    extra_python_libs_s3_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .extra_jars_s3_path = "ExtraJarsS3Path",

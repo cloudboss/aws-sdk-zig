@@ -7,7 +7,7 @@ pub const EventSourcesConfig = struct {
     /// Information about whether DevOps Guru is configured to consume
     /// recommendations which
     /// are generated from AWS CodeGuru Profiler.
-    amazon_code_guru_profiler: ?AmazonCodeGuruProfilerIntegration,
+    amazon_code_guru_profiler: ?AmazonCodeGuruProfilerIntegration = null,
 
     pub const json_field_names = .{
         .amazon_code_guru_profiler = "AmazonCodeGuruProfiler",

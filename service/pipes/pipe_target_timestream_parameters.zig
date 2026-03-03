@@ -17,27 +17,27 @@ pub const PipeTargetTimestreamParameters = struct {
     /// The granularity of the time units used. Default is `MILLISECONDS`.
     ///
     /// Required if `TimeFieldType` is specified as `EPOCH`.
-    epoch_time_unit: ?EpochTimeUnit,
+    epoch_time_unit: ?EpochTimeUnit = null,
 
     /// Maps multiple measures from the source event to the same record in the
     /// specified Timestream for LiveAnalytics table.
-    multi_measure_mappings: ?[]const MultiMeasureMapping,
+    multi_measure_mappings: ?[]const MultiMeasureMapping = null,
 
     /// Mappings of single source data fields to individual records in the specified
     /// Timestream for LiveAnalytics table.
-    single_measure_mappings: ?[]const SingleMeasureMapping,
+    single_measure_mappings: ?[]const SingleMeasureMapping = null,
 
     /// The type of time value used.
     ///
     /// The default is `EPOCH`.
-    time_field_type: ?TimeFieldType,
+    time_field_type: ?TimeFieldType = null,
 
     /// How to format the timestamps. For example,
     /// `yyyy-MM-dd'T'HH:mm:ss'Z'`.
     ///
     /// Required if `TimeFieldType` is specified as
     /// `TIMESTAMP_FORMAT`.
-    timestamp_format: ?[]const u8,
+    timestamp_format: ?[]const u8 = null,
 
     /// Dynamic path to the source data field that represents the time value for
     /// your data.

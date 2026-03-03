@@ -7,7 +7,7 @@ pub const NexGuardFileMarkerSettings = struct {
     /// Use the base64 license string that Nagra provides you. Enter it directly in
     /// your JSON job specification or in the console. Required when you include
     /// Nagra NexGuard File Marker watermarking in your job.
-    license: ?[]const u8,
+    license: ?[]const u8 = null,
 
     /// Specify the payload ID that you want associated with this output. Valid
     /// values vary depending on your Nagra NexGuard forensic watermarking workflow.
@@ -20,17 +20,17 @@ pub const NexGuardFileMarkerSettings = struct {
     /// asset. Do this by setting up two output groups. For one output group, set
     /// the value of Payload ID to 0 in every output. For the other output group,
     /// set Payload ID to 1 in every output.
-    payload: ?i32,
+    payload: ?i32 = null,
 
     /// Enter one of the watermarking preset strings that Nagra provides you.
     /// Required when you include Nagra NexGuard File Marker watermarking in your
     /// job.
-    preset: ?[]const u8,
+    preset: ?[]const u8 = null,
 
     /// Optional. Ignore this setting unless Nagra support directs you to specify a
     /// value. When you don't specify a value here, the Nagra NexGuard library uses
     /// its default value.
-    strength: ?WatermarkingStrength,
+    strength: ?WatermarkingStrength = null,
 
     pub const json_field_names = .{
         .license = "License",

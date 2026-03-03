@@ -26,14 +26,14 @@ pub const Urls = struct {
     /// web pages link to.
     ///
     /// You can list up to 100 seed URLs.
-    seed_url_configuration: ?SeedUrlConfiguration,
+    seed_url_configuration: ?SeedUrlConfiguration = null,
 
     /// Configuration of the sitemap URLs of the websites you want to crawl.
     ///
     /// Only URLs belonging to the same website host names are crawled. You can list
     /// up to
     /// three sitemap URLs.
-    site_maps_configuration: ?SiteMapsConfiguration,
+    site_maps_configuration: ?SiteMapsConfiguration = null,
 
     pub const json_field_names = .{
         .seed_url_configuration = "SeedUrlConfiguration",

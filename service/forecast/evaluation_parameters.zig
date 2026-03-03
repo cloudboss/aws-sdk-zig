@@ -16,12 +16,12 @@ pub const EvaluationParameters = struct {
     ///
     /// `ForecastHorizon` <= `BackTestWindowOffset` < 1/2 *
     /// TARGET_TIME_SERIES dataset length
-    back_test_window_offset: ?i32,
+    back_test_window_offset: ?i32 = null,
 
     /// The number of times to split the input data. The default is 1. Valid values
     /// are 1 through
     /// 5.
-    number_of_backtest_windows: ?i32,
+    number_of_backtest_windows: ?i32 = null,
 
     pub const json_field_names = .{
         .back_test_window_offset = "BackTestWindowOffset",

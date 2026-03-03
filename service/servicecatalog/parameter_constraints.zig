@@ -2,10 +2,10 @@
 pub const ParameterConstraints = struct {
     /// A regular expression that represents the patterns that allow for `String`
     /// types. The pattern must match the entire parameter value provided.
-    allowed_pattern: ?[]const u8,
+    allowed_pattern: ?[]const u8 = null,
 
     /// The values that the administrator has allowed for the parameter.
-    allowed_values: ?[]const []const u8,
+    allowed_values: ?[]const []const u8 = null,
 
     /// A string that explains a constraint when the constraint is violated. For
     /// example, without a constraint description, a parameter that has an allowed
@@ -20,23 +20,23 @@ pub const ParameterConstraints = struct {
     ///
     /// `Malformed input-Parameter MyParameter must only contain uppercase and
     /// lowercase letters and numbers.`
-    constraint_description: ?[]const u8,
+    constraint_description: ?[]const u8 = null,
 
     /// An integer value that determines the largest number of characters you want
     /// to allow for `String` types.
-    max_length: ?[]const u8,
+    max_length: ?[]const u8 = null,
 
     /// A numeric value that determines the largest numeric value you want to allow
     /// for `Number` types.
-    max_value: ?[]const u8,
+    max_value: ?[]const u8 = null,
 
     /// An integer value that determines the smallest number of characters you want
     /// to allow for `String` types.
-    min_length: ?[]const u8,
+    min_length: ?[]const u8 = null,
 
     /// A numeric value that determines the smallest numeric value you want to allow
     /// for `Number` types.
-    min_value: ?[]const u8,
+    min_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allowed_pattern = "AllowedPattern",

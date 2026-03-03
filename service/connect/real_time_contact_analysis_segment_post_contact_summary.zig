@@ -4,7 +4,7 @@ const RealTimeContactAnalysisPostContactSummaryStatus = @import("real_time_conta
 /// Information about the post-contact summary for a real-time contact segment.
 pub const RealTimeContactAnalysisSegmentPostContactSummary = struct {
     /// The content of the summary.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// If the summary failed to be generated, one of the following failure codes
     /// occurs:
@@ -25,7 +25,7 @@ pub const RealTimeContactAnalysisSegmentPostContactSummary = struct {
     ///   [language](https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens) that isn't supported by generative AI-powered post-contact summaries.
     ///
     /// * `INTERNAL_ERROR`: Internal system error.
-    failure_code: ?RealTimeContactAnalysisPostContactSummaryFailureCode,
+    failure_code: ?RealTimeContactAnalysisPostContactSummaryFailureCode = null,
 
     /// Whether the summary was successfully COMPLETED or FAILED to be generated.
     status: RealTimeContactAnalysisPostContactSummaryStatus,

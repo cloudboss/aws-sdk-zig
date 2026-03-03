@@ -4,10 +4,10 @@ const FaceDetail = @import("face_detail.zig").FaceDetail;
 /// Details about a person detected in a video analysis request.
 pub const PersonDetail = struct {
     /// Bounding box around the detected person.
-    bounding_box: ?BoundingBox,
+    bounding_box: ?BoundingBox = null,
 
     /// Face details for the detected person.
-    face: ?FaceDetail,
+    face: ?FaceDetail = null,
 
     /// Identifier for the person detected person within a video. Use to keep track
     /// of the person throughout the video. The identifier is not stored by Amazon

@@ -10,14 +10,14 @@ pub const ConverseStreamMetadataEvent = struct {
     metrics: ConverseStreamMetrics,
 
     /// Model performance configuration metadata for the conversation stream event.
-    performance_config: ?PerformanceConfiguration,
+    performance_config: ?PerformanceConfiguration = null,
 
     /// Specifies the processing tier configuration used for serving the request.
-    service_tier: ?ServiceTier,
+    service_tier: ?ServiceTier = null,
 
     /// The trace object in the response from
     /// [ConverseStream](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html) that contains information about the guardrail behavior.
-    trace: ?ConverseStreamTrace,
+    trace: ?ConverseStreamTrace = null,
 
     /// Usage information for the conversation stream event.
     usage: TokenUsage,

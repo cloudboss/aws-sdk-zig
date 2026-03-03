@@ -4,10 +4,10 @@ const ConditionalFormattingCustomIconOptions = @import("conditional_formatting_c
 /// Determines the custom condition for an icon set.
 pub const ConditionalFormattingCustomIconCondition = struct {
     /// Determines the color of the icon.
-    color: ?[]const u8,
+    color: ?[]const u8 = null,
 
     /// Determines the icon display configuration.
-    display_configuration: ?ConditionalFormattingIconDisplayConfiguration,
+    display_configuration: ?ConditionalFormattingIconDisplayConfiguration = null,
 
     /// The expression that determines the condition of the icon set.
     expression: []const u8,

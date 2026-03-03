@@ -6,7 +6,7 @@
 pub const ReportDeliveryChannel = struct {
     /// The format of your reports: `CSV`, `JSON`, or both. If
     /// not specified, the default format is `CSV`.
-    formats: ?[]const []const u8,
+    formats: ?[]const []const u8 = null,
 
     /// The unique name of the S3 bucket that receives your reports.
     s3_bucket_name: []const u8,
@@ -15,7 +15,7 @@ pub const ReportDeliveryChannel = struct {
     /// S3. The prefix is this part of the following path:
     /// s3://your-bucket-name/`prefix`/Backup/us-west-2/year/month/day/report-name.
     /// If not specified, there is no prefix.
-    s3_key_prefix: ?[]const u8,
+    s3_key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .formats = "Formats",

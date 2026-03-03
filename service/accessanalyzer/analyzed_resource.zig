@@ -5,7 +5,7 @@ const FindingStatus = @import("finding_status.zig").FindingStatus;
 pub const AnalyzedResource = struct {
     /// The actions that an external principal is granted permission to use by the
     /// policy that generated the finding.
-    actions: ?[]const []const u8,
+    actions: ?[]const []const u8 = null,
 
     /// The time at which the resource was analyzed.
     analyzed_at: i64,
@@ -14,7 +14,7 @@ pub const AnalyzedResource = struct {
     created_at: i64,
 
     /// An error message.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// Indicates whether the policy that generated the finding grants public access
     /// to the resource.
@@ -31,10 +31,10 @@ pub const AnalyzedResource = struct {
 
     /// Indicates how the access that generated the finding is granted. This is
     /// populated for Amazon S3 bucket findings.
-    shared_via: ?[]const []const u8,
+    shared_via: ?[]const []const u8 = null,
 
     /// The current status of the finding generated from the analyzed resource.
-    status: ?FindingStatus,
+    status: ?FindingStatus = null,
 
     /// The time at which the finding was updated.
     updated_at: i64,

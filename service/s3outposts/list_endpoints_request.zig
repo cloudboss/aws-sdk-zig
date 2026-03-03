@@ -4,7 +4,7 @@ pub const ListEndpointsRequest = struct {
 
     /// If a previous response from this operation included a `NextToken` value,
     /// provide that value here to retrieve the next page of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",

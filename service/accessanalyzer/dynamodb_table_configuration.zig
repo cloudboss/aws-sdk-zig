@@ -14,7 +14,7 @@
 pub const DynamodbTableConfiguration = struct {
     /// The proposed resource policy defining who can access or manage the DynamoDB
     /// table.
-    table_policy: ?[]const u8,
+    table_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .table_policy = "tablePolicy",

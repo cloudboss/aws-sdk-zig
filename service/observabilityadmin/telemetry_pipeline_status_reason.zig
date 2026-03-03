@@ -3,7 +3,7 @@
 pub const TelemetryPipelineStatusReason = struct {
     /// A description of the pipeline status reason, providing additional context
     /// about the current state.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

@@ -9,13 +9,13 @@ pub const SourceDocument = struct {
     /// fields to provide extra information in the response. Additional fields are
     /// not used
     /// to based suggestions on.
-    additional_attributes: ?[]const DocumentAttribute,
+    additional_attributes: ?[]const DocumentAttribute = null,
 
     /// The identifier of the document used for a query suggestion.
-    document_id: ?[]const u8,
+    document_id: ?[]const u8 = null,
 
     /// The document fields/attributes used for a query suggestion.
-    suggestion_attributes: ?[]const []const u8,
+    suggestion_attributes: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .additional_attributes = "AdditionalAttributes",

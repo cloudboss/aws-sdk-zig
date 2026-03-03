@@ -4,35 +4,35 @@ const InstanceStatus = @import("instance_status.zig").InstanceStatus;
 /// Information about the instance.
 pub const InstanceSummary = struct {
     /// The Amazon Resource Name (ARN) of the instance.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// When the instance was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The identifier of the instance.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The identity management type of the instance.
-    identity_management_type: ?DirectoryType,
+    identity_management_type: ?DirectoryType = null,
 
     /// Whether inbound calls are enabled.
-    inbound_calls_enabled: ?bool,
+    inbound_calls_enabled: ?bool = null,
 
     /// This URL allows contact center users to access the Amazon Connect admin
     /// website.
-    instance_access_url: ?[]const u8,
+    instance_access_url: ?[]const u8 = null,
 
     /// The alias of the instance.
-    instance_alias: ?[]const u8,
+    instance_alias: ?[]const u8 = null,
 
     /// The state of the instance.
-    instance_status: ?InstanceStatus,
+    instance_status: ?InstanceStatus = null,
 
     /// Whether outbound calls are enabled.
-    outbound_calls_enabled: ?bool,
+    outbound_calls_enabled: ?bool = null,
 
     /// The service role of the instance.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -9,7 +9,7 @@ pub const DatabaseTableOutputOptions = struct {
     /// Represents an Amazon S3 location (bucket name and object key) where DataBrew
     /// can store
     /// intermediate results.
-    temp_directory: ?S3Location,
+    temp_directory: ?S3Location = null,
 
     pub const json_field_names = .{
         .table_name = "TableName",

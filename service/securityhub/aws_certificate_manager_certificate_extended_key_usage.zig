@@ -3,12 +3,12 @@ pub const AwsCertificateManagerCertificateExtendedKeyUsage = struct {
     /// The name of an extension value. Indicates the purpose for which the
     /// certificate public
     /// key can be used.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// An object identifier (OID) for the extension value.
     ///
     /// The format is numbers separated by periods.
-    o_id: ?[]const u8,
+    o_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

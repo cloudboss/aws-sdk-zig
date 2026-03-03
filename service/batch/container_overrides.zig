@@ -12,7 +12,7 @@ pub const ContainerOverrides = struct {
     /// image or the job definition.
     ///
     /// This parameter can't contain an empty string.
-    command: ?[]const []const u8,
+    command: ?[]const []const u8 = null,
 
     /// The environment variables to send to the container. You can add new
     /// environment variables,
@@ -22,14 +22,14 @@ pub const ContainerOverrides = struct {
     ///
     /// Environment variables cannot start with "`AWS_BATCH`". This naming
     /// convention is reserved for variables that Batch sets.
-    environment: ?[]const KeyValuePair,
+    environment: ?[]const KeyValuePair = null,
 
     /// The instance type to use for a multi-node parallel job.
     ///
     /// This parameter isn't applicable to single-node container jobs or jobs that
     /// run on Fargate
     /// resources, and shouldn't be provided.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// This parameter is deprecated, use `resourceRequirements` to override the
     /// memory
@@ -47,13 +47,13 @@ pub const ContainerOverrides = struct {
     /// value. For more information, see [Can't override job
     /// definition resource
     /// requirements](https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements) in the *Batch User Guide*.
-    memory: ?i32,
+    memory: ?i32 = null,
 
     /// The type and amount of resources to assign to a container. This overrides
     /// the settings in
     /// the job definition. The supported resources include `GPU`, `MEMORY`, and
     /// `VCPU`.
-    resource_requirements: ?[]const ResourceRequirement,
+    resource_requirements: ?[]const ResourceRequirement = null,
 
     /// This parameter is deprecated, use `resourceRequirements` to override the
     /// `vcpus` parameter that's set in the job definition. It's not supported for
@@ -71,7 +71,7 @@ pub const ContainerOverrides = struct {
     /// `value` set to the new value. For more information, see [Can't override job
     /// definition resource
     /// requirements](https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements) in the *Batch User Guide*.
-    vcpus: ?i32,
+    vcpus: ?i32 = null,
 
     pub const json_field_names = .{
         .command = "command",

@@ -8,16 +8,16 @@ const SheetControlListType = @import("sheet_control_list_type.zig").SheetControl
 pub const FilterListControl = struct {
     /// The values that are displayed in a control can be configured to only show
     /// values that are valid based on what's selected in other controls.
-    cascading_control_configuration: ?CascadingControlConfiguration,
+    cascading_control_configuration: ?CascadingControlConfiguration = null,
 
     /// The display options of a control.
-    display_options: ?ListControlDisplayOptions,
+    display_options: ?ListControlDisplayOptions = null,
 
     /// The ID of the `FilterListControl`.
     filter_control_id: []const u8,
 
     /// A list of selectable values that are used in a control.
-    selectable_values: ?FilterSelectableValues,
+    selectable_values: ?FilterSelectableValues = null,
 
     /// The source filter ID of the `FilterListControl`.
     source_filter_id: []const u8,
@@ -30,7 +30,7 @@ pub const FilterListControl = struct {
     /// * `MULTI_SELECT`: The user can select multiple entries from the list.
     ///
     /// * `SINGLE_SELECT`: The user can select a single entry from the list.
-    @"type": ?SheetControlListType,
+    @"type": ?SheetControlListType = null,
 
     pub const json_field_names = .{
         .cascading_control_configuration = "CascadingControlConfiguration",

@@ -10,7 +10,7 @@ pub const AudioLogSetting = struct {
     enabled: bool = false,
 
     /// The option to enable selective conversation log capture for audio.
-    selective_logging_enabled: ?bool,
+    selective_logging_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .destination = "destination",

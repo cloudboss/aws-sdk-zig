@@ -11,20 +11,20 @@ pub const Member = struct {
     /// The Amazon Resource Name (ARN) of the member. For more information about
     /// ARNs and their format, see [Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon Web Services General Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the member was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// An optional description for the member.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Attributes relevant to a member for the blockchain framework that the
     /// Managed Blockchain network uses.
-    framework_attributes: ?MemberFrameworkAttributes,
+    framework_attributes: ?MemberFrameworkAttributes = null,
 
     /// The unique identifier of the member.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the customer managed key in Key Management
     /// Service (KMS) that the member uses for encryption at rest. If the value of
@@ -34,16 +34,16 @@ pub const Member = struct {
     ///
     /// For more information, see [Encryption at
     /// Rest](https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html) in the *Amazon Managed Blockchain Hyperledger Fabric Developer Guide*.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// Configuration properties for logging events associated with a member.
-    log_publishing_configuration: ?MemberLogPublishingConfiguration,
+    log_publishing_configuration: ?MemberLogPublishingConfiguration = null,
 
     /// The name of the member.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The unique identifier of the network to which the member belongs.
-    network_id: ?[]const u8,
+    network_id: ?[]const u8 = null,
 
     /// The status of a member.
     ///
@@ -78,13 +78,13 @@ pub const Member = struct {
     /// immediate. It might take some time for the member resource to discover that
     /// the key is inaccessible. When a resource is in this state, we recommend
     /// deleting and recreating the resource.
-    status: ?MemberStatus,
+    status: ?MemberStatus = null,
 
     /// Tags assigned to the member. Tags consist of a key and optional value.
     ///
     /// For more information about tags, see [Tagging
     /// Resources](https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html) in the *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging Resources](https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html) in the *Amazon Managed Blockchain Hyperledger Fabric Developer Guide*.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -9,7 +9,7 @@ pub const ColumnStatisticsConfiguration = struct {
     /// dataset.
     /// When selectors are undefined, configuration will be applied to all supported
     /// columns.
-    selectors: ?[]const ColumnSelector,
+    selectors: ?[]const ColumnSelector = null,
 
     /// Configuration for evaluations. Statistics can be used to select evaluations
     /// and override

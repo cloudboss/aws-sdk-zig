@@ -6,18 +6,18 @@ const ThresholdV2 = @import("threshold_v2.zig").ThresholdV2;
 /// Only one of either the Name or MetricId is required.
 pub const MetricV2 = struct {
     /// Contains the filters to be used when returning data.
-    metric_filters: ?[]const MetricFilterV2,
+    metric_filters: ?[]const MetricFilterV2 = null,
 
     /// Historical metrics or custom metrics can be referenced via this field. This
     /// field is a valid Amazon Connect
     /// Arn or a UUID
-    metric_id: ?[]const u8,
+    metric_id: ?[]const u8 = null,
 
     /// The name of the metric.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Contains information about the threshold for service level metrics.
-    threshold: ?[]const ThresholdV2,
+    threshold: ?[]const ThresholdV2 = null,
 
     pub const json_field_names = .{
         .metric_filters = "MetricFilters",

@@ -4,10 +4,10 @@ const ManagedStorageConfiguration = @import("managed_storage_configuration.zig")
 /// The execute command and managed storage configuration for the cluster.
 pub const ClusterConfiguration = struct {
     /// The details of the execute command configuration.
-    execute_command_configuration: ?ExecuteCommandConfiguration,
+    execute_command_configuration: ?ExecuteCommandConfiguration = null,
 
     /// The details of the managed storage configuration.
-    managed_storage_configuration: ?ManagedStorageConfiguration,
+    managed_storage_configuration: ?ManagedStorageConfiguration = null,
 
     pub const json_field_names = .{
         .execute_command_configuration = "executeCommandConfiguration",

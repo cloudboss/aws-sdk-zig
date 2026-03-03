@@ -19,7 +19,7 @@ pub const FirelensConfiguration = struct {
     /// For more information, see [Creating a task definition that uses a FireLens
     /// configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-taskdef)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    options: ?[]const aws.map.StringMapEntry,
+    options: ?[]const aws.map.StringMapEntry = null,
 
     /// The log router to use. The valid values are `fluentd` or `fluentbit`.
     @"type": FirelensConfigurationType,

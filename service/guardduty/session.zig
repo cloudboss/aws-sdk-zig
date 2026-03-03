@@ -6,23 +6,23 @@ pub const Session = struct {
     ///
     /// In Amazon Web Services CloudTrail, you can find this value as
     /// `userIdentity.sessionContext.attributes.creationDate`.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// Identifier of the session issuer.
     ///
     /// In Amazon Web Services CloudTrail, you can find this value as
     /// `userIdentity.sessionContext.sessionIssuer.arn`.
-    issuer: ?[]const u8,
+    issuer: ?[]const u8 = null,
 
     /// Indicates whether or not multi-factor authencation (MFA) was used during
     /// authentication.
     ///
     /// In Amazon Web Services CloudTrail, you can find this value as
     /// `userIdentity.sessionContext.attributes.mfaAuthenticated`.
-    mfa_status: ?MfaStatus,
+    mfa_status: ?MfaStatus = null,
 
     /// The unique identifier of the session.
-    uid: ?[]const u8,
+    uid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_time = "CreatedTime",

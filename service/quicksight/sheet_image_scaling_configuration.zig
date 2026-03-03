@@ -17,7 +17,7 @@ pub const SheetImageScalingConfiguration = struct {
     ///
     /// * `SCALE_NONE`: The image is displayed in its original size and is not
     ///   scaled to the container.
-    scaling_type: ?SheetImageScalingType,
+    scaling_type: ?SheetImageScalingType = null,
 
     pub const json_field_names = .{
         .scaling_type = "ScalingType",

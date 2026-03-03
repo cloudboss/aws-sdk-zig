@@ -17,17 +17,17 @@ pub const AgentAliasSummary = struct {
     /// value is `ACCEPT_INVOCATIONS`. If the agent alias is paused, the value is
     /// `REJECT_INVOCATIONS`. Use the `UpdateAgentAlias` operation to change the
     /// invocation state.
-    alias_invocation_state: ?AliasInvocationState,
+    alias_invocation_state: ?AliasInvocationState = null,
 
     /// The time at which the alias of the agent was created.
     created_at: i64,
 
     /// The description of the alias.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Contains details about the version of the agent with which the alias is
     /// associated.
-    routing_configuration: ?[]const AgentAliasRoutingConfigurationListItem,
+    routing_configuration: ?[]const AgentAliasRoutingConfigurationListItem = null,
 
     /// The time at which the alias was last updated.
     updated_at: i64,

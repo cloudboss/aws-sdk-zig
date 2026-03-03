@@ -4,7 +4,7 @@ const TableCellImageScalingConfiguration = @import("table_cell_image_scaling_con
 pub const TableCellImageSizingConfiguration = struct {
     /// The cell scaling configuration of the sizing options for the table image
     /// configuration.
-    table_cell_image_scaling_configuration: ?TableCellImageScalingConfiguration,
+    table_cell_image_scaling_configuration: ?TableCellImageScalingConfiguration = null,
 
     pub const json_field_names = .{
         .table_cell_image_scaling_configuration = "TableCellImageScalingConfiguration",

@@ -20,23 +20,23 @@ pub const RelativeTimeRange = struct {
     /// specified
     /// criteria in your media file. If you include `EndPercentage` in your request,
     /// you must also include `StartPercentage`.
-    end_percentage: ?i32,
+    end_percentage: ?i32 = null,
 
     /// The time, in percentage, from the start of your media file until the
     /// specified value.
     /// Amazon Transcribe searches for your specified criteria in this time segment.
-    first: ?i32,
+    first: ?i32 = null,
 
     /// The time, in percentage, from the specified value until the end of your
     /// media file.
     /// Amazon Transcribe searches for your specified criteria in this time segment.
-    last: ?i32,
+    last: ?i32 = null,
 
     /// The time, in percentage, when Amazon Transcribe starts searching for the
     /// specified
     /// criteria in your media file. If you include `StartPercentage` in your
     /// request, you must also include `EndPercentage`.
-    start_percentage: ?i32,
+    start_percentage: ?i32 = null,
 
     pub const json_field_names = .{
         .end_percentage = "EndPercentage",

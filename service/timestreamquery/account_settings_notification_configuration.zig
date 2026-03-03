@@ -7,7 +7,7 @@ pub const AccountSettingsNotificationConfiguration = struct {
     /// updating the account settings.
     role_arn: []const u8,
 
-    sns_configuration: ?SnsConfiguration,
+    sns_configuration: ?SnsConfiguration = null,
 
     pub const json_field_names = .{
         .role_arn = "RoleArn",

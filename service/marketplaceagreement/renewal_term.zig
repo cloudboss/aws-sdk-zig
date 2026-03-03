@@ -10,10 +10,10 @@ const RenewalTermConfiguration = @import("renewal_term_configuration.zig").Renew
 /// during the agreement's lifecycle.
 pub const RenewalTerm = struct {
     /// Additional parameters specified by the acceptor while accepting the term.
-    configuration: ?RenewalTermConfiguration,
+    configuration: ?RenewalTermConfiguration = null,
 
     /// Category of the term being updated.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

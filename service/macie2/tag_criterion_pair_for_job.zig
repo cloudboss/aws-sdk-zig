@@ -5,10 +5,10 @@
 /// characters in tag-based conditions.
 pub const TagCriterionPairForJob = struct {
     /// The value for the tag key to use in the condition.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The tag value to use in the condition.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "key",

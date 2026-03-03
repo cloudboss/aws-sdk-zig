@@ -32,7 +32,7 @@ const M2tsSegmentationStyle = @import("m2_ts_segmentation_style.zig").M2tsSegmen
 /// locate specific data within the asset.
 pub const M2tsSettings = struct {
     /// Selects between the DVB and ATSC buffer models for Dolby Digital audio.
-    audio_buffer_model: ?M2tsAudioBufferModel,
+    audio_buffer_model: ?M2tsAudioBufferModel = null,
 
     /// Specify this setting only when your output will be consumed by a downstream
     /// repackaging workflow that is sensitive to very small duration differences
@@ -47,58 +47,58 @@ pub const M2tsSettings = struct {
     /// adds padding only to the end of the file. When you keep the default value,
     /// any minor discrepancies between audio and video duration will depend on your
     /// output audio codec.
-    audio_duration: ?M2tsAudioDuration,
+    audio_duration: ?M2tsAudioDuration = null,
 
     /// The number of audio frames to insert for each PES packet.
-    audio_frames_per_pes: ?i32,
+    audio_frames_per_pes: ?i32 = null,
 
     /// Specify the packet identifiers (PIDs) for any elementary audio streams you
     /// include in this output. Specify multiple PIDs as a JSON array. Default is
     /// the range 482-492.
-    audio_pids: ?[]const i32,
+    audio_pids: ?[]const i32 = null,
 
     /// Manually specify the difference in PTS offset that will be applied to the
     /// audio track, in seconds or milliseconds, when you set PTS offset to Seconds
     /// or Milliseconds. Enter an integer from -10000 to 10000. Leave blank to keep
     /// the default value 0.
-    audio_pts_offset_delta: ?i32,
+    audio_pts_offset_delta: ?i32 = null,
 
     /// Specify the output bitrate of the transport stream in bits per second.
     /// Setting to 0 lets the muxer automatically determine the appropriate bitrate.
     /// Other common values are 3750000, 7500000, and 15000000.
-    bitrate: ?i32,
+    bitrate: ?i32 = null,
 
     /// Controls what buffer model to use for accurate interleaving. If set to
     /// MULTIPLEX, use multiplex buffer model. If set to NONE, this can lead to
     /// lower latency, but low-memory devices may not be able to play back the
     /// stream without interruptions.
-    buffer_model: ?M2tsBufferModel,
+    buffer_model: ?M2tsBufferModel = null,
 
     /// If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets
     /// with Presentation Timestamp (PTS) values greater than or equal to the first
     /// video packet PTS (MediaConvert drops captions and data packets with lesser
     /// PTS values). Keep the default value to allow all PTS values.
-    data_pts_control: ?M2tsDataPtsControl,
+    data_pts_control: ?M2tsDataPtsControl = null,
 
     /// Use these settings to insert a DVB Network Information Table (NIT) in the
     /// transport stream of this output.
-    dvb_nit_settings: ?DvbNitSettings,
+    dvb_nit_settings: ?DvbNitSettings = null,
 
     /// Use these settings to insert a DVB Service Description Table (SDT) in the
     /// transport stream of this output.
-    dvb_sdt_settings: ?DvbSdtSettings,
+    dvb_sdt_settings: ?DvbSdtSettings = null,
 
     /// Specify the packet identifiers (PIDs) for DVB subtitle data included in this
     /// output. Specify multiple PIDs as a JSON array. Default is the range 460-479.
-    dvb_sub_pids: ?[]const i32,
+    dvb_sub_pids: ?[]const i32 = null,
 
     /// Use these settings to insert a DVB Time and Date Table (TDT) in the
     /// transport stream of this output.
-    dvb_tdt_settings: ?DvbTdtSettings,
+    dvb_tdt_settings: ?DvbTdtSettings = null,
 
     /// Specify the packet identifier (PID) for DVB teletext data you include in
     /// this output. Default is 499.
-    dvb_teletext_pid: ?i32,
+    dvb_teletext_pid: ?i32 = null,
 
     /// When set to VIDEO_AND_FIXED_INTERVALS, audio EBP markers will be added to
     /// partitions 3 and 4. The interval between these additional markers will be
@@ -106,34 +106,34 @@ pub const M2tsSettings = struct {
     /// set to VIDEO_INTERVAL, these additional markers will not be inserted. Only
     /// applicable when EBP segmentation markers are is selected
     /// (segmentationMarkers is EBP or EBP_LEGACY).
-    ebp_audio_interval: ?M2tsEbpAudioInterval,
+    ebp_audio_interval: ?M2tsEbpAudioInterval = null,
 
     /// Selects which PIDs to place EBP markers on. They can either be placed only
     /// on the video PID, or on both the video PID and all audio PIDs. Only
     /// applicable when EBP segmentation markers are is selected
     /// (segmentationMarkers is EBP or EBP_LEGACY).
-    ebp_placement: ?M2tsEbpPlacement,
+    ebp_placement: ?M2tsEbpPlacement = null,
 
     /// Controls whether to include the ES Rate field in the PES header.
-    es_rate_in_pes: ?M2tsEsRateInPes,
+    es_rate_in_pes: ?M2tsEsRateInPes = null,
 
     /// Keep the default value unless you know that your audio EBP markers are
     /// incorrectly appearing before your video EBP markers. To correct this
     /// problem, set this value to Force.
-    force_ts_video_ebp_order: ?M2tsForceTsVideoEbpOrder,
+    force_ts_video_ebp_order: ?M2tsForceTsVideoEbpOrder = null,
 
     /// The length, in seconds, of each fragment. Only used with EBP markers.
-    fragment_time: ?f64,
+    fragment_time: ?f64 = null,
 
     /// To include key-length-value metadata in this output: Set KLV metadata
     /// insertion to Passthrough. MediaConvert reads KLV metadata present in your
     /// input and passes it through to the output transport stream. To exclude this
     /// KLV metadata: Set KLV metadata insertion to None or leave blank.
-    klv_metadata: ?M2tsKlvMetadata,
+    klv_metadata: ?M2tsKlvMetadata = null,
 
     /// Specify the maximum time, in milliseconds, between Program Clock References
     /// (PCRs) inserted into the transport stream.
-    max_pcr_interval: ?i32,
+    max_pcr_interval: ?i32 = null,
 
     /// When set, enforces that Encoder Boundary Points do not come within the
     /// specified time interval of each other by looking ahead at input video. If
@@ -142,39 +142,39 @@ pub const M2tsSettings = struct {
     /// marker. The lookahead value does not add latency to the system. The Live
     /// Event must be configured elsewhere to create sufficient latency to make the
     /// lookahead accurate.
-    min_ebp_interval: ?i32,
+    min_ebp_interval: ?i32 = null,
 
     /// If INSERT, Nielsen inaudible tones for media tracking will be detected in
     /// the input audio and an equivalent ID3 tag will be inserted in the output.
-    nielsen_id_3: ?M2tsNielsenId3,
+    nielsen_id_3: ?M2tsNielsenId3 = null,
 
     /// Value in bits per second of extra null packets to insert into the transport
     /// stream. This can be used if a downstream encryption system requires periodic
     /// null packets.
-    null_packet_bitrate: ?f64,
+    null_packet_bitrate: ?f64 = null,
 
     /// The number of milliseconds between instances of this table in the output
     /// transport stream.
-    pat_interval: ?i32,
+    pat_interval: ?i32 = null,
 
     /// When set to PCR_EVERY_PES_PACKET, a Program Clock Reference value is
     /// inserted for every Packetized Elementary Stream (PES) header. This is
     /// effective only when the PCR PID is the same as the video or audio elementary
     /// stream.
-    pcr_control: ?M2tsPcrControl,
+    pcr_control: ?M2tsPcrControl = null,
 
     /// Specify the packet identifier (PID) for the program clock reference (PCR) in
     /// this output. If you do not specify a value, the service will use the value
     /// for Video PID.
-    pcr_pid: ?i32,
+    pcr_pid: ?i32 = null,
 
     /// Specify the number of milliseconds between instances of the program map
     /// table (PMT) in the output transport stream.
-    pmt_interval: ?i32,
+    pmt_interval: ?i32 = null,
 
     /// Specify the packet identifier (PID) for the program map table (PMT) itself.
     /// Default is 480.
-    pmt_pid: ?i32,
+    pmt_pid: ?i32 = null,
 
     /// Specify whether MediaConvert automatically attempts to prevent decoder
     /// buffer underflows in your transport stream output. Use if you are seeing
@@ -184,22 +184,22 @@ pub const M2tsSettings = struct {
     /// output, when possible: Choose Enabled. Note that if MediaConvert prevents a
     /// decoder buffer underflow in your output, output video quality is reduced and
     /// your job will take longer to complete.
-    prevent_buffer_underflow: ?M2tsPreventBufferUnderflow,
+    prevent_buffer_underflow: ?M2tsPreventBufferUnderflow = null,
 
     /// Specify the packet identifier (PID) of the private metadata stream. Default
     /// is 503.
-    private_metadata_pid: ?i32,
+    private_metadata_pid: ?i32 = null,
 
     /// Use Program number to specify the program number used in the program map
     /// table (PMT) for this output. Default is 1. Program numbers and program map
     /// tables are parts of MPEG-2 transport stream containers, used for organizing
     /// data.
-    program_number: ?i32,
+    program_number: ?i32 = null,
 
     /// Manually specify the initial PTS offset, in seconds, when you set PTS offset
     /// to Seconds. Enter an integer from 0 to 3600. Leave blank to keep the default
     /// value 2.
-    pts_offset: ?i32,
+    pts_offset: ?i32 = null,
 
     /// Specify the initial presentation timestamp (PTS) offset for your transport
     /// stream output. To let MediaConvert automatically determine the initial PTS
@@ -209,21 +209,21 @@ pub const M2tsSettings = struct {
     /// buffer initial fill percentage. To manually specify an initial PTS offset:
     /// Choose Seconds or Milliseconds. Then specify the number of seconds or
     /// milliseconds with PTS offset.
-    pts_offset_mode: ?TsPtsOffset,
+    pts_offset_mode: ?TsPtsOffset = null,
 
     /// When set to CBR, inserts null packets into transport stream to fill
     /// specified bitrate. When set to VBR, the bitrate setting acts as the maximum
     /// bitrate, but the output will not be padded up to that bitrate.
-    rate_mode: ?M2tsRateMode,
+    rate_mode: ?M2tsRateMode = null,
 
     /// Include this in your job settings to put SCTE-35 markers in your HLS and
     /// transport stream outputs at the insertion points that you specify in an ESAM
     /// XML document. Provide the document in the setting SCC XML.
-    scte_35_esam: ?M2tsScte35Esam,
+    scte_35_esam: ?M2tsScte35Esam = null,
 
     /// Specify the packet identifier (PID) of the SCTE-35 stream in the transport
     /// stream.
-    scte_35_pid: ?i32,
+    scte_35_pid: ?i32 = null,
 
     /// For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35
     /// markers that appear in your input to also appear in this output. Choose None
@@ -231,7 +231,7 @@ pub const M2tsSettings = struct {
     /// an ESAM XML document-- Choose None. Also provide the ESAM XML as a string in
     /// the setting Signal processing notification XML. Also enable ESAM SCTE-35
     /// (include the property scte35Esam).
-    scte_35_source: ?M2tsScte35Source,
+    scte_35_source: ?M2tsScte35Source = null,
 
     /// Inserts segmentation markers at each segmentation_time period. rai_segstart
     /// sets the Random Access Indicator bit in the adaptation field. rai_adapt sets
@@ -240,7 +240,7 @@ pub const M2tsSettings = struct {
     /// Encoder Boundary Point information to the adaptation field as per OpenCable
     /// specification OC-SP-EBP-I01-130118. ebp_legacy adds Encoder Boundary Point
     /// information to the adaptation field using a legacy proprietary format.
-    segmentation_markers: ?M2tsSegmentationMarkers,
+    segmentation_markers: ?M2tsSegmentationMarkers = null,
 
     /// The segmentation style parameter controls how segmentation markers are
     /// inserted into the transport stream. With avails, it is possible that
@@ -254,23 +254,23 @@ pub const M2tsSettings = struct {
     /// segment will likely be truncated as well. However, all segments after that
     /// will have a duration of $segmentation_time seconds. Note that EBP lookahead
     /// is a slight exception to this rule.
-    segmentation_style: ?M2tsSegmentationStyle,
+    segmentation_style: ?M2tsSegmentationStyle = null,
 
     /// Specify the length, in seconds, of each segment. Required unless markers is
     /// set to _none_.
-    segmentation_time: ?f64,
+    segmentation_time: ?f64 = null,
 
     /// Packet Identifier (PID) of the ID3 metadata stream in the transport stream.
-    timed_metadata_pid: ?i32,
+    timed_metadata_pid: ?i32 = null,
 
     /// Specify the ID for the transport stream itself in the program map table for
     /// this output. Transport stream IDs and program map tables are parts of MPEG-2
     /// transport stream containers, used for organizing data.
-    transport_stream_id: ?i32,
+    transport_stream_id: ?i32 = null,
 
     /// Specify the packet identifier (PID) of the elementary video stream in the
     /// transport stream.
-    video_pid: ?i32,
+    video_pid: ?i32 = null,
 
     pub const json_field_names = .{
         .audio_buffer_model = "AudioBufferModel",

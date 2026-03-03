@@ -7,7 +7,7 @@ pub const CustomerProfilesDestinationProperties = struct {
 
     /// The object specified in the Amazon Connect Customer Profiles flow
     /// destination.
-    object_type_name: ?[]const u8,
+    object_type_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domain_name = "domainName",

@@ -15,14 +15,14 @@ pub const RedshiftIAMParameters = struct {
     /// the cluster. These permissions are combined with the permissions granted to
     /// Quick Sight by the `DatabaseUser`. If you choose to include this parameter,
     /// the `RoleArn` must grant access to `redshift:JoinGroup`.
-    database_groups: ?[]const []const u8,
+    database_groups: ?[]const []const u8 = null,
 
     /// The user whose permissions and group memberships will be used by Quick Sight
     /// to access the cluster. If this user already exists in your database, Amazon
     /// Quick Sight is granted the same permissions that the user has. If the user
     /// doesn't exist, set the value of `AutoCreateDatabaseUser` to `True` to create
     /// a new user with PUBLIC permissions.
-    database_user: ?[]const u8,
+    database_user: ?[]const u8 = null,
 
     /// Use the `RoleArn` structure to allow Quick Sight to call
     /// `redshift:GetClusterCredentials` on your cluster. The calling principal must

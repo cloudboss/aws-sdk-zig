@@ -17,21 +17,21 @@ pub const UpdateFirewallRuleRequest = struct {
     ///
     /// * `BLOCK` - Disallow the request. This option requires additional details in
     ///   the rule's `BlockResponse`.
-    action: ?Action,
+    action: ?Action = null,
 
     /// The DNS record's type. This determines the format of the record value that
     /// you provided in `BlockOverrideDomain`. Used for the rule action `BLOCK` with
     /// a `BlockResponse` setting of `OVERRIDE`.
-    block_override_dns_type: ?BlockOverrideDnsType,
+    block_override_dns_type: ?BlockOverrideDnsType = null,
 
     /// The custom DNS record to send back in response to the query. Used for the
     /// rule action `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
-    block_override_domain: ?[]const u8,
+    block_override_domain: ?[]const u8 = null,
 
     /// The recommended amount of time, in seconds, for the DNS resolver or web
     /// browser to cache the provided override record. Used for the rule action
     /// `BLOCK` with a `BlockResponse` setting of `OVERRIDE`.
-    block_override_ttl: ?i32,
+    block_override_ttl: ?i32 = null,
 
     /// The way that you want DNS Firewall to block the request. Used for the rule
     /// action setting `BLOCK`.
@@ -44,7 +44,7 @@ pub const UpdateFirewallRuleRequest = struct {
     ///
     /// * `OVERRIDE` - Provide a custom override in the response. This option
     ///   requires custom handling details in the rule's `BlockOverride*` settings.
-    block_response: ?BlockResponse,
+    block_response: ?BlockResponse = null,
 
     /// The confidence threshold for DNS Firewall Advanced. You must provide this
     /// value when you create a DNS Firewall Advanced rule. The confidence
@@ -58,7 +58,7 @@ pub const UpdateFirewallRuleRequest = struct {
     ///
     /// * `HIGH`: Detects only the most well corroborated threats with a low rate of
     ///   false positives.
-    confidence_threshold: ?ConfidenceThreshold,
+    confidence_threshold: ?ConfidenceThreshold = null,
 
     /// The type of the DNS Firewall Advanced rule. Valid values are:
     ///
@@ -70,10 +70,10 @@ pub const UpdateFirewallRuleRequest = struct {
     ///   attackers to exfiltrate data from the client by using the DNS tunnel
     ///   without
     /// making a network connection to the client.
-    dns_threat_protection: ?DnsThreatProtection,
+    dns_threat_protection: ?DnsThreatProtection = null,
 
     /// The ID of the domain list to use in the rule.
-    firewall_domain_list_id: ?[]const u8,
+    firewall_domain_list_id: ?[]const u8 = null,
 
     /// How you want the the rule to evaluate DNS redirection in the DNS redirection
     /// chain, such as CNAME or DNAME.
@@ -86,16 +86,16 @@ pub const UpdateFirewallRuleRequest = struct {
     /// redirection chain. You don't need to add the subsequent domains in the
     /// domain in the redirection list to
     /// the domain list.
-    firewall_domain_redirection_action: ?FirewallDomainRedirectionAction,
+    firewall_domain_redirection_action: ?FirewallDomainRedirectionAction = null,
 
     /// The unique identifier of the firewall rule group for the rule.
     firewall_rule_group_id: []const u8,
 
     /// The DNS Firewall Advanced rule ID.
-    firewall_threat_protection_id: ?[]const u8,
+    firewall_threat_protection_id: ?[]const u8 = null,
 
     /// The name of the rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The setting that determines the processing order of the rule in the rule
     /// group. DNS Firewall
@@ -106,7 +106,7 @@ pub const UpdateFirewallRuleRequest = struct {
     /// To make it easier to insert rules later, leave space between the numbers,
     /// for example, use 100, 200, and so on. You
     /// can change the priority setting for the rules in a rule group at any time.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The DNS query type you want the rule to evaluate. Allowed values are;
     ///
@@ -148,7 +148,7 @@ pub const UpdateFirewallRuleRequest = struct {
     /// equals AAAA,
     /// this action will not be applied to synthetic IPv6 addresses generated when
     /// DNS64 is enabled.
-    qtype: ?[]const u8,
+    qtype: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

@@ -9,12 +9,12 @@ pub const FilterV2 = struct {
     /// `AGENT_HIERARCHY_LEVEL_THREE`, `AGENT_HIERARCHY_LEVEL_FOUR`,
     /// `AGENT_HIERARCHY_LEVEL_FIVE`. There must be at least 1 key and a maximum 5
     /// keys.
-    filter_key: ?[]const u8,
+    filter_key: ?[]const u8 = null,
 
     /// The identifiers to use for filtering data. For example, if you have a filter
     /// key of `QUEUE`, you
     /// would add queue IDs or ARNs in `FilterValues`.
-    filter_values: ?[]const []const u8,
+    filter_values: ?[]const []const u8 = null,
 
     /// System defined filtering condition. For example, the NOT_EXISTS
     /// StringCondition returns documents where the
@@ -22,7 +22,7 @@ pub const FilterV2 = struct {
     ///
     /// When the NOT_EXISTS StringCondition is added to a FilterV2 object,
     /// FilterValues must be null or empty.
-    string_condition: ?FilterV2StringCondition,
+    string_condition: ?FilterV2StringCondition = null,
 
     pub const json_field_names = .{
         .filter_key = "FilterKey",

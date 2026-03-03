@@ -8,7 +8,7 @@ pub const LeadInteraction = struct {
     /// Describes the business problem or challenge that the customer discussed
     /// during the interaction. This information helps qualify the lead and identify
     /// appropriate solutions.
-    business_problem: ?[]const u8,
+    business_problem: ?[]const u8 = null,
 
     /// Contains contact information for the customer representative involved in the
     /// lead interaction, including their name, title, and contact details.
@@ -22,7 +22,7 @@ pub const LeadInteraction = struct {
     /// The date and time when the lead interaction occurred, in ISO 8601 format
     /// (UTC). This timestamp helps track the chronology of lead engagement
     /// activities.
-    interaction_date: ?i64,
+    interaction_date: ?i64 = null,
 
     /// The unique identifier of the specific source that generated the lead
     /// interaction. This ID provides traceability back to the original lead
@@ -42,7 +42,7 @@ pub const LeadInteraction = struct {
     /// Describes the specific use case or business scenario discussed during the
     /// lead interaction. This helps categorize the customer's interests and
     /// potential solutions.
-    usecase: ?[]const u8,
+    usecase: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .business_problem = "BusinessProblem",

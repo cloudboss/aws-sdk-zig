@@ -6,7 +6,7 @@ const UsageRecord = @import("usage_record.zig").UsageRecord;
 pub const UsageRecordResult = struct {
     /// The `MeteringRecordId` is a unique identifier for this metering
     /// event.
-    metering_record_id: ?[]const u8,
+    metering_record_id: ?[]const u8 = null,
 
     /// The `UsageRecordResult`
     /// `Status` indicates the status of an individual `UsageRecord`
@@ -32,11 +32,11 @@ pub const UsageRecordResult = struct {
     /// `UsageRecord` was invalid and not honored. A previously metered
     /// `UsageRecord` had the same customer, dimension, and time, but a
     /// different quantity.
-    status: ?UsageRecordResultStatus,
+    status: ?UsageRecordResultStatus = null,
 
     /// The `UsageRecord` that was part of the `BatchMeterUsage`
     /// request.
-    usage_record: ?UsageRecord,
+    usage_record: ?UsageRecord = null,
 
     pub const json_field_names = .{
         .metering_record_id = "MeteringRecordId",

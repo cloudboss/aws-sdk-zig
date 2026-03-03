@@ -4,20 +4,20 @@ const EntityRecognizerEvaluationMetrics = @import("entity_recognizer_evaluation_
 /// Detailed information about an entity recognizer.
 pub const EntityRecognizerMetadata = struct {
     /// Entity types from the metadata of an entity recognizer.
-    entity_types: ?[]const EntityRecognizerMetadataEntityTypesListItem,
+    entity_types: ?[]const EntityRecognizerMetadataEntityTypesListItem = null,
 
     /// Detailed information about the accuracy of an entity recognizer.
-    evaluation_metrics: ?EntityRecognizerEvaluationMetrics,
+    evaluation_metrics: ?EntityRecognizerEvaluationMetrics = null,
 
     /// The number of documents in the input data that were used to test the entity
     /// recognizer.
     /// Typically this is 10 to 20 percent of the input documents.
-    number_of_test_documents: ?i32,
+    number_of_test_documents: ?i32 = null,
 
     /// The number of documents in the input data that were used to train the entity
     /// recognizer.
     /// Typically this is 80 to 90 percent of the input documents.
-    number_of_trained_documents: ?i32,
+    number_of_trained_documents: ?i32 = null,
 
     pub const json_field_names = .{
         .entity_types = "EntityTypes",

@@ -7,7 +7,7 @@ pub const ProtectedJobReceiverConfiguration = struct {
     analysis_type: ProtectedJobAnalysisType,
 
     /// The configuration details for the protected job receiver.
-    configuration_details: ?ProtectedJobConfigurationDetails,
+    configuration_details: ?ProtectedJobConfigurationDetails = null,
 
     pub const json_field_names = .{
         .analysis_type = "analysisType",

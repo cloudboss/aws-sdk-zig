@@ -7,7 +7,7 @@ pub const ElicitationCodeHookInvocationSetting = struct {
 
     /// A label that indicates the dialog step from which the dialog code
     /// hook is happening.
-    invocation_label: ?[]const u8,
+    invocation_label: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enable_code_hook_invocation = "enableCodeHookInvocation",

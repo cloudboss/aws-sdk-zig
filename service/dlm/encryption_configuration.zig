@@ -5,7 +5,7 @@ pub const EncryptionConfiguration = struct {
     /// The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If
     /// this parameter is not specified, the default KMS key for the account is
     /// used.
-    cmk_arn: ?[]const u8,
+    cmk_arn: ?[]const u8 = null,
 
     /// To encrypt a copy of an unencrypted snapshot when encryption by default is
     /// not enabled, enable

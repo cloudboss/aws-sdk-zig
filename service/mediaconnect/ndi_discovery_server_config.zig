@@ -6,7 +6,7 @@ pub const NdiDiscoveryServerConfig = struct {
 
     /// The port for the NDI discovery server. Defaults to 5959 if a custom port
     /// isn't specified.
-    discovery_server_port: ?i32,
+    discovery_server_port: ?i32 = null,
 
     /// The identifier for the Virtual Private Cloud (VPC) network interface used by
     /// the flow.

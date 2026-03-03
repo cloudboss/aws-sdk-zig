@@ -5,7 +5,7 @@ pub const ConversationLevelTestResultsFilterBy = struct {
     /// The selection of matched or mismatched end-to-end status to filter test set
     /// results data
     /// at the conversation level.
-    end_to_end_result: ?TestResultMatchStatus,
+    end_to_end_result: ?TestResultMatchStatus = null,
 
     pub const json_field_names = .{
         .end_to_end_result = "endToEndResult",

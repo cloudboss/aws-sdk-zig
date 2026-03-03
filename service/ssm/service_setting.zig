@@ -23,21 +23,21 @@
 /// back to the original value defined by the Amazon Web Services service team.
 pub const ServiceSetting = struct {
     /// The ARN of the service setting.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The last time the service setting was modified.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The ARN of the last modified user. This field is populated only if the
     /// setting value was
     /// overwritten.
-    last_modified_user: ?[]const u8,
+    last_modified_user: ?[]const u8 = null,
 
     /// The ID of the service setting.
-    setting_id: ?[]const u8,
+    setting_id: ?[]const u8 = null,
 
     /// The value of the service setting.
-    setting_value: ?[]const u8,
+    setting_value: ?[]const u8 = null,
 
     /// The status of the service setting. The value can be Default, Customized or
     /// PendingUpdate.
@@ -52,7 +52,7 @@ pub const ServiceSetting = struct {
     /// * PendingUpdate: The current setting uses a default or custom value, but a
     ///   setting change
     /// request is pending approval.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "ARN",

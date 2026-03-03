@@ -3,7 +3,7 @@ const AssociationStatusName = @import("association_status_name.zig").Association
 /// Describes an association status.
 pub const AssociationStatus = struct {
     /// A user-defined string.
-    additional_info: ?[]const u8,
+    additional_info: ?[]const u8 = null,
 
     /// The date when the status changed.
     date: i64,

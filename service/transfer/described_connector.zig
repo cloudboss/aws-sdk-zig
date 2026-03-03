@@ -37,16 +37,16 @@ pub const DescribedConnector = struct {
     /// directory of the file location that's used in the `StartFileTransfer`
     /// request. Additionally, make sure that the role provides
     /// `secretsmanager:GetSecretValue` permission to Secrets Manager.
-    access_role: ?[]const u8,
+    access_role: ?[]const u8 = null,
 
     /// The unique Amazon Resource Name (ARN) for the connector.
     arn: []const u8,
 
     /// A structure that contains the parameters for an AS2 connector object.
-    as_2_config: ?As2ConnectorConfig,
+    as_2_config: ?As2ConnectorConfig = null,
 
     /// The unique identifier for the connector.
-    connector_id: ?[]const u8,
+    connector_id: ?[]const u8 = null,
 
     /// Current egress configuration of the connector, showing how traffic is routed
     /// to the SFTP server. Contains VPC Lattice settings when using VPC_LATTICE
@@ -54,7 +54,7 @@ pub const DescribedConnector = struct {
     ///
     /// When using the VPC_LATTICE egress type, Transfer Family uses a managed
     /// Service Network to simplify the resource sharing process.
-    egress_config: ?DescribedConnectorEgressConfig,
+    egress_config: ?DescribedConnectorEgressConfig = null,
 
     /// Type of egress configuration for the connector. SERVICE_MANAGED uses
     /// Transfer Family managed NAT gateways, while VPC_LATTICE routes traffic
@@ -64,22 +64,22 @@ pub const DescribedConnector = struct {
     /// Error message providing details when the connector is in ERRORED status.
     /// Contains information to help troubleshoot connector creation or operation
     /// failures.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
     /// role that allows a connector to turn on CloudWatch logging for Amazon S3
     /// events. When set, you can view connector activity in your CloudWatch logs.
-    logging_role: ?[]const u8,
+    logging_role: ?[]const u8 = null,
 
     /// The text name of the security policy for the specified connector.
-    security_policy_name: ?[]const u8,
+    security_policy_name: ?[]const u8 = null,
 
     /// The list of egress IP addresses of this connector. These IP addresses are
     /// assigned automatically when you create the connector.
-    service_managed_egress_ip_addresses: ?[]const []const u8,
+    service_managed_egress_ip_addresses: ?[]const []const u8 = null,
 
     /// A structure that contains the parameters for an SFTP connector object.
-    sftp_config: ?SftpConnectorConfig,
+    sftp_config: ?SftpConnectorConfig = null,
 
     /// Current status of the connector. PENDING indicates creation/update in
     /// progress, ACTIVE means ready for operations, and ERRORED indicates a failure
@@ -87,14 +87,14 @@ pub const DescribedConnector = struct {
     status: ConnectorStatus = "ACTIVE",
 
     /// Key-value pairs that can be used to group and search for connectors.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The URL of the partner's AS2 or SFTP endpoint.
     ///
     /// When creating AS2 connectors or service-managed SFTP connectors (connectors
     /// without egress configuration), you must provide a URL to specify the remote
     /// server endpoint. For VPC Lattice type connectors, the URL must be null.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_role = "AccessRole",

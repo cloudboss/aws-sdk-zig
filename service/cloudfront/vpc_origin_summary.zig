@@ -1,7 +1,7 @@
 /// A summary of the CloudFront VPC origin.
 pub const VpcOriginSummary = struct {
     /// The account ID of the Amazon Web Services account that owns the VPC origin.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The VPC origin summary ARN.
     arn: []const u8,

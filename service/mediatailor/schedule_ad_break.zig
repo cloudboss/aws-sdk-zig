@@ -1,17 +1,17 @@
 /// The schedule's ad break properties.
 pub const ScheduleAdBreak = struct {
     /// The approximate duration of the ad break, in seconds.
-    approximate_duration_seconds: ?i64,
+    approximate_duration_seconds: ?i64 = null,
 
     /// The approximate time that the ad will start playing.
-    approximate_start_time: ?i64,
+    approximate_start_time: ?i64 = null,
 
     /// The name of the source location containing the VOD source used for the ad
     /// break.
-    source_location_name: ?[]const u8,
+    source_location_name: ?[]const u8 = null,
 
     /// The name of the VOD source used for the ad break.
-    vod_source_name: ?[]const u8,
+    vod_source_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .approximate_duration_seconds = "ApproximateDurationSeconds",

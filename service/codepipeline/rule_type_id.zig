@@ -13,7 +13,7 @@ pub const RuleTypeId = struct {
 
     /// The creator of the rule being called. The valid value for the `Owner` field
     /// in the rule category is `AWS`.
-    owner: ?RuleOwner,
+    owner: ?RuleOwner = null,
 
     /// The rule provider, such as the `DeploymentWindow` rule. For a list of rule
     /// provider names, see the rules listed in the [CodePipeline rule
@@ -21,7 +21,7 @@ pub const RuleTypeId = struct {
     provider: []const u8,
 
     /// A string that describes the rule version.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .category = "category",

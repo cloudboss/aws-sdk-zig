@@ -10,7 +10,7 @@ pub const DataSetStringComparisonFilterCondition = struct {
     operator: DataSetStringComparisonFilterOperator,
 
     /// The string value to compare against.
-    value: ?DataSetStringFilterValue,
+    value: ?DataSetStringFilterValue = null,
 
     pub const json_field_names = .{
         .operator = "Operator",

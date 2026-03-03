@@ -5,7 +5,7 @@ const PlaceType = @import("place_type.zig").PlaceType;
 /// A result matching the input query text.
 pub const AutocompleteResultItem = struct {
     /// The address associated with this result.
-    address: ?Address,
+    address: ?Address = null,
 
     /// The distance in meters between the center of the search area and this
     /// result. Useful to evaluate how far away from the original bias position the
@@ -14,13 +14,13 @@ pub const AutocompleteResultItem = struct {
 
     /// Indicates the starting and ending index of the place in the text query that
     /// match the found title.
-    highlights: ?AutocompleteHighlights,
+    highlights: ?AutocompleteHighlights = null,
 
     /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
     /// compliant language codes for the results to be rendered in. If there is no
     /// data for the result in the requested language, data will be returned in the
     /// default language for the entry.
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// The PlaceId of the place associated with this result. This can be used to
     /// look up additional details about the result via GetPlace.
@@ -33,7 +33,7 @@ pub const AutocompleteResultItem = struct {
     /// The political view applies to the results of the request to represent
     /// unresolved territorial claims through the point of view of the specified
     /// country.
-    political_view: ?[]const u8,
+    political_view: ?[]const u8 = null,
 
     /// A formatted string for display when presenting this result to an end user.
     title: []const u8,

@@ -6,13 +6,13 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// This operation is only supported on the Bitcoin blockchain networks.
 pub const ListFilteredTransactionEventsSort = struct {
     /// Container on how the results will be sorted by?
-    sort_by: ?ListFilteredTransactionEventsSortBy,
+    sort_by: ?ListFilteredTransactionEventsSortBy = null,
 
     /// The container for the *sort order* for `ListFilteredTransactionEvents`.
     /// The `SortOrder` field only accepts the values `ASCENDING`
     /// and `DESCENDING`. Not providing `SortOrder` will default
     /// to `ASCENDING`.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .sort_by = "sortBy",

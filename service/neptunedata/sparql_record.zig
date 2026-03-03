@@ -20,7 +20,7 @@ pub const SparqlRecord = struct {
     /// Only present if this operation is the last one in its transaction. If
     /// present, it is set to true. It is useful for ensuring that an entire
     /// transaction is consumed.
-    is_last_op: ?bool,
+    is_last_op: ?bool = null,
 
     /// The operation that created the change.
     op: []const u8,

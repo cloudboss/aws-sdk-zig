@@ -3,7 +3,7 @@
 pub const ScalingConfig = struct {
     /// Limits the number of concurrent instances that the Amazon SQS event source
     /// can invoke.
-    maximum_concurrency: ?i32,
+    maximum_concurrency: ?i32 = null,
 
     pub const json_field_names = .{
         .maximum_concurrency = "MaximumConcurrency",

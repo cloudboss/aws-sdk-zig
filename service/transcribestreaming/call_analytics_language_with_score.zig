@@ -5,7 +5,7 @@ const CallAnalyticsLanguageCode = @import("call_analytics_language_code.zig").Ca
 /// confidence score.
 pub const CallAnalyticsLanguageWithScore = struct {
     /// The language code of the identified language.
-    language_code: ?CallAnalyticsLanguageCode,
+    language_code: ?CallAnalyticsLanguageCode = null,
 
     /// The confidence score associated with the identified language code.
     /// Confidence scores are values between zero and one; larger values indicate a

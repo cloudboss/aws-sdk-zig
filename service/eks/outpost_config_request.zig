@@ -26,7 +26,7 @@ pub const OutpostConfigRequest = struct {
     /// of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more
     /// information, see [Capacity
     /// considerations](https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html) in the *Amazon EKS User Guide*.
-    control_plane_placement: ?ControlPlanePlacementRequest,
+    control_plane_placement: ?ControlPlanePlacementRequest = null,
 
     /// The ARN of the Outpost that you want to use for your local Amazon EKS
     /// cluster on

@@ -5,7 +5,7 @@ const AutomatedReasoningPolicyDefinitionTypeValue = @import("automated_reasoning
 /// predefined variable types.
 pub const AutomatedReasoningPolicyDefinitionType = struct {
     /// The description of what the custom type represents.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the custom type.
     name: []const u8,

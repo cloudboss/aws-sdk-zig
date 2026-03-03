@@ -6,7 +6,7 @@ pub const HandshakeFilter = struct {
     ///
     /// If you specify `ActionType`, you cannot also specify
     /// `ParentHandshakeId`.
-    action_type: ?ActionType,
+    action_type: ?ActionType = null,
 
     /// The parent handshake. Only used for handshake types that are a child of
     /// another
@@ -18,7 +18,7 @@ pub const HandshakeFilter = struct {
     /// The [regex pattern](http://wikipedia.org/wiki/regex) for handshake ID string
     /// requires "h-"
     /// followed by from 8 to 32 lowercase letters or digits.
-    parent_handshake_id: ?[]const u8,
+    parent_handshake_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action_type = "ActionType",

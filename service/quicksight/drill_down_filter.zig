@@ -9,14 +9,14 @@ const TimeRangeDrillDownFilter = @import("time_range_drill_down_filter.zig").Tim
 pub const DrillDownFilter = struct {
     /// The category type drill down filter. This filter is used for string type
     /// columns.
-    category_filter: ?CategoryDrillDownFilter,
+    category_filter: ?CategoryDrillDownFilter = null,
 
     /// The numeric equality type drill down filter. This filter is used for number
     /// type columns.
-    numeric_equality_filter: ?NumericEqualityDrillDownFilter,
+    numeric_equality_filter: ?NumericEqualityDrillDownFilter = null,
 
     /// The time range drill down filter. This filter is used for date time columns.
-    time_range_filter: ?TimeRangeDrillDownFilter,
+    time_range_filter: ?TimeRangeDrillDownFilter = null,
 
     pub const json_field_names = .{
         .category_filter = "CategoryFilter",

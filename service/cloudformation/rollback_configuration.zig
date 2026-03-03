@@ -34,7 +34,7 @@ pub const RollbackConfiguration = struct {
     /// triggers during stack creation and update operations. Then, for update
     /// operations, it begins
     /// disposing of old resources immediately once the operation completes.
-    monitoring_time_in_minutes: ?i32,
+    monitoring_time_in_minutes: ?i32 = null,
 
     /// The triggers to monitor during stack creation or update actions.
     ///
@@ -63,5 +63,5 @@ pub const RollbackConfiguration = struct {
     /// If a specified trigger is missing, the entire stack operation fails and is
     /// rolled
     /// back.
-    rollback_triggers: ?[]const RollbackTrigger,
+    rollback_triggers: ?[]const RollbackTrigger = null,
 };

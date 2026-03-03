@@ -8,13 +8,13 @@ pub const SavingsPlansUtilizationByTime = struct {
     /// The total amortized commitment for a Savings Plans. This includes the sum of
     /// the
     /// upfront and recurring Savings Plans fees.
-    amortized_commitment: ?SavingsPlansAmortizedCommitment,
+    amortized_commitment: ?SavingsPlansAmortizedCommitment = null,
 
     /// The amount that's saved by using existing Savings Plans. Savings returns
     /// both net
     /// savings from Savings Plans and also the `onDemandCostEquivalent` of the
     /// Savings Plans when considering the utilization rate.
-    savings: ?SavingsPlansSavings,
+    savings: ?SavingsPlansSavings = null,
 
     time_period: DateInterval,
 

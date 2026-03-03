@@ -7,7 +7,7 @@ pub const FunctionConfig = struct {
     comment: []const u8,
 
     /// The configuration for the key value store associations.
-    key_value_store_associations: ?KeyValueStoreAssociations,
+    key_value_store_associations: ?KeyValueStoreAssociations = null,
 
     /// The function's runtime environment version.
     runtime: FunctionRuntime,

@@ -20,16 +20,16 @@ pub const AutoMLJobSummary = struct {
     creation_time: i64,
 
     /// The end time of an AutoML job.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The failure reason of an AutoML job.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// When the AutoML job was last modified.
     last_modified_time: i64,
 
     /// The list of reasons for partial failures within an AutoML job.
-    partial_failure_reasons: ?[]const AutoMLPartialFailureReason,
+    partial_failure_reasons: ?[]const AutoMLPartialFailureReason = null,
 
     pub const json_field_names = .{
         .auto_ml_job_arn = "AutoMLJobArn",

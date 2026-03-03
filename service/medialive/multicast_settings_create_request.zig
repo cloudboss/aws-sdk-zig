@@ -3,7 +3,7 @@ const MulticastSourceCreateRequest = @import("multicast_source_create_request.zi
 /// Settings for a Multicast input. Contains a list of multicast Urls and
 /// optional source ip addresses.
 pub const MulticastSettingsCreateRequest = struct {
-    sources: ?[]const MulticastSourceCreateRequest,
+    sources: ?[]const MulticastSourceCreateRequest = null,
 
     pub const json_field_names = .{
         .sources = "Sources",

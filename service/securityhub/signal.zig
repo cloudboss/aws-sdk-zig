@@ -12,57 +12,57 @@ const Indicator = @import("indicator.zig").Indicator;
 /// an attack sequence finding.
 pub const Signal = struct {
     /// The IDs of the threat actors involved in the signal.
-    actor_ids: ?[]const []const u8,
+    actor_ids: ?[]const []const u8 = null,
 
     /// The number of times this signal was observed.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// The timestamp when the first finding or activity related to this signal was
     /// observed.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Information about the endpoint IDs associated with this signal.
-    endpoint_ids: ?[]const []const u8,
+    endpoint_ids: ?[]const []const u8 = null,
 
     /// The timestamp when the first finding or activity related to this signal was
     /// observed.
-    first_seen_at: ?i64,
+    first_seen_at: ?i64 = null,
 
     /// The identifier of the signal.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The timestamp when the last finding or activity related to this signal was
     /// observed.
-    last_seen_at: ?i64,
+    last_seen_at: ?i64 = null,
 
     /// The name of the GuardDuty signal. For example, when signal type is
     /// `FINDING`,
     /// the signal name is the name of the finding.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the product that generated the signal.
-    product_arn: ?[]const u8,
+    product_arn: ?[]const u8 = null,
 
     /// The ARN or ID of the Amazon Web Services resource associated with the
     /// signal.
-    resource_ids: ?[]const []const u8,
+    resource_ids: ?[]const []const u8 = null,
 
     /// The severity associated with the signal. For more information about
     /// severity, see
     /// [Severity levels for GuardDuty
     /// findings](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html)
     /// in the *Amazon GuardDuty User Guide*.
-    severity: ?f64,
+    severity: ?f64 = null,
 
     /// Contains information about the indicators associated with the signals in
     /// this attack sequence finding. The values for
     /// `SignalIndicators` are a subset of the values for
     /// [SequenceIndicators](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Sequence.html), but the values for
     /// these fields don't always match 1:1.
-    signal_indicators: ?[]const Indicator,
+    signal_indicators: ?[]const Indicator = null,
 
     /// The description of the GuardDuty finding.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The type of the signal used to identify an attack sequence.
     ///
@@ -91,10 +91,10 @@ pub const Signal = struct {
     /// steps to enable it, see [S3
     /// Protection](https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html) in the
     /// *Amazon GuardDuty User Guide*.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The timestamp when this signal was last observed.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .actor_ids = "ActorIds",

@@ -25,12 +25,12 @@ pub const ContainerProperties = struct {
     /// parameter to [docker run](https://docs.docker.com/engine/reference/run/).
     /// For more information, see
     /// [https://docs.docker.com/engine/reference/builder/#cmd](https://docs.docker.com/engine/reference/builder/#cmd).
-    command: ?[]const []const u8,
+    command: ?[]const []const u8 = null,
 
     /// Determines whether execute command functionality is turned on for this task.
     /// If `true`, execute
     /// command functionality is turned on all the containers in the task.
-    enable_execute_command: ?bool,
+    enable_execute_command: ?bool = null,
 
     /// The environment variables to pass to a container. This parameter maps to
     /// `Env` in
@@ -47,14 +47,14 @@ pub const ContainerProperties = struct {
     ///
     /// Environment variables cannot start with "`AWS_BATCH`". This naming
     /// convention is reserved for variables that Batch sets.
-    environment: ?[]const KeyValuePair,
+    environment: ?[]const KeyValuePair = null,
 
     /// The amount of ephemeral storage to allocate for the task. This parameter is
     /// used to expand
     /// the total amount of ephemeral storage available, beyond the default amount,
     /// for tasks hosted on
     /// Fargate.
-    ephemeral_storage: ?EphemeralStorage,
+    ephemeral_storage: ?EphemeralStorage = null,
 
     /// The Amazon Resource Name (ARN) of the execution role that Batch can assume.
     /// For jobs that run on Fargate
@@ -62,12 +62,12 @@ pub const ContainerProperties = struct {
     /// [Batch execution IAM
     /// role](https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html)
     /// in the *Batch User Guide*.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The platform configuration for jobs that are running on Fargate resources.
     /// Jobs that are
     /// running on Amazon EC2 resources must not specify this parameter.
-    fargate_platform_configuration: ?FargatePlatformConfiguration,
+    fargate_platform_configuration: ?FargatePlatformConfiguration = null,
 
     /// Required. The image used to start a container. This string is passed
     /// directly to the
@@ -114,7 +114,7 @@ pub const ContainerProperties = struct {
     /// * Images in other online repositories are qualified further by a domain name
     ///   (for example,
     /// `quay.io/assemblyline/ubuntu`).
-    image: ?[]const u8,
+    image: ?[]const u8 = null,
 
     /// The instance type to use for a multi-node parallel job. All node groups in a
     /// multi-node
@@ -123,19 +123,19 @@ pub const ContainerProperties = struct {
     /// This parameter isn't applicable to single-node container jobs or jobs that
     /// run on Fargate
     /// resources, and shouldn't be provided.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that the container can assume
     /// for Amazon Web Services permissions. For more
     /// information, see [IAM roles for
     /// tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) in the
     /// *Amazon Elastic Container Service Developer Guide*.
-    job_role_arn: ?[]const u8,
+    job_role_arn: ?[]const u8 = null,
 
     /// Linux-specific modifications that are applied to the container, such as
     /// details for device
     /// mappings.
-    linux_parameters: ?LinuxParameters,
+    linux_parameters: ?LinuxParameters = null,
 
     /// The log configuration specification for the container.
     ///
@@ -178,7 +178,7 @@ pub const ContainerProperties = struct {
     /// configuration options. For
     /// more information, see [Amazon ECS container agent
     /// configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.
-    log_configuration: ?LogConfiguration,
+    log_configuration: ?LogConfiguration = null,
 
     /// This parameter is deprecated, use `resourceRequirements` to specify the
     /// memory
@@ -192,7 +192,7 @@ pub const ContainerProperties = struct {
     /// hard limit can be
     /// specified in several places. It must be specified for each node at least
     /// once.
-    memory: ?i32,
+    memory: ?i32 = null,
 
     /// The mount points for data volumes in your container. This parameter maps to
     /// `Volumes` in the [Create a
@@ -201,12 +201,12 @@ pub const ContainerProperties = struct {
     /// API](https://docs.docker.com/engine/api/v1.23/)
     /// and the `--volume` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/).
-    mount_points: ?[]const MountPoint,
+    mount_points: ?[]const MountPoint = null,
 
     /// The network configuration for jobs that are running on Fargate resources.
     /// Jobs that are
     /// running on Amazon EC2 resources must not specify this parameter.
-    network_configuration: ?NetworkConfiguration,
+    network_configuration: ?NetworkConfiguration = null,
 
     /// When this parameter is true, the container is given elevated permissions on
     /// the host
@@ -222,7 +222,7 @@ pub const ContainerProperties = struct {
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources and
     /// shouldn't be provided, or specified as false.
-    privileged: ?bool,
+    privileged: ?bool = null,
 
     /// When this parameter is true, the container is given read-only access to its
     /// root file
@@ -232,26 +232,26 @@ pub const ContainerProperties = struct {
     /// section of the [Docker Remote
     /// API](https://docs.docker.com/engine/api/v1.23/) and the
     /// `--read-only` option to `docker run`.
-    readonly_root_filesystem: ?bool,
+    readonly_root_filesystem: ?bool = null,
 
     /// The private repository authentication credentials to use.
-    repository_credentials: ?RepositoryCredentials,
+    repository_credentials: ?RepositoryCredentials = null,
 
     /// The type and amount of resources to assign to a container. The supported
     /// resources include
     /// `GPU`, `MEMORY`, and `VCPU`.
-    resource_requirements: ?[]const ResourceRequirement,
+    resource_requirements: ?[]const ResourceRequirement = null,
 
     /// An object that represents the compute environment architecture for Batch
     /// jobs on
     /// Fargate.
-    runtime_platform: ?RuntimePlatform,
+    runtime_platform: ?RuntimePlatform = null,
 
     /// The secrets for the container. For more information, see [Specifying
     /// sensitive
     /// data](https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html) in the
     /// *Batch User Guide*.
-    secrets: ?[]const Secret,
+    secrets: ?[]const Secret = null,
 
     /// A list of `ulimits` to set in the container. This parameter maps to
     /// `Ulimits` in the [Create a
@@ -264,7 +264,7 @@ pub const ContainerProperties = struct {
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources and
     /// shouldn't be provided.
-    ulimits: ?[]const Ulimit,
+    ulimits: ?[]const Ulimit = null,
 
     /// The user name to use inside the container. This parameter maps to `User` in
     /// the
@@ -273,7 +273,7 @@ pub const ContainerProperties = struct {
     /// section of the [Docker Remote
     /// API](https://docs.docker.com/engine/api/v1.23/) and the `--user`
     /// option to [docker run](https://docs.docker.com/engine/reference/run/).
-    user: ?[]const u8,
+    user: ?[]const u8 = null,
 
     /// This parameter is deprecated, use `resourceRequirements` to specify the vCPU
     /// requirements for the job definition. It's not supported for jobs running on
@@ -293,10 +293,10 @@ pub const ContainerProperties = struct {
     /// number of vCPUs must be specified but can be specified in several places.
     /// You must specify it at
     /// least once for each node.
-    vcpus: ?i32,
+    vcpus: ?i32 = null,
 
     /// A list of data volumes used in a job.
-    volumes: ?[]const Volume,
+    volumes: ?[]const Volume = null,
 
     pub const json_field_names = .{
         .command = "command",

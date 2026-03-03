@@ -10,16 +10,16 @@ const S3DataType = @import("s3_data_type.zig").S3DataType;
 pub const S3DataSource = struct {
     /// A list of one or more attribute names to use that are found in a specified
     /// augmented manifest file.
-    attribute_names: ?[]const []const u8,
+    attribute_names: ?[]const []const u8 = null,
 
     /// The configuration for a private hub model reference that points to a
     /// SageMaker JumpStart public hub model.
-    hub_access_config: ?HubAccessConfig,
+    hub_access_config: ?HubAccessConfig = null,
 
     /// A list of names of instance groups that get data from the S3 data source.
-    instance_group_names: ?[]const []const u8,
+    instance_group_names: ?[]const []const u8 = null,
 
-    model_access_config: ?ModelAccessConfig,
+    model_access_config: ?ModelAccessConfig = null,
 
     /// If you want SageMaker to replicate the entire dataset on each ML compute
     /// instance that is launched for model training, specify `FullyReplicated`.
@@ -39,7 +39,7 @@ pub const S3DataSource = struct {
     /// you might choose `ShardedByS3Key`. If the algorithm requires copying
     /// training data to the ML storage volume (when `TrainingInputMode` is set to
     /// `File`), this copies 1/*n* of the number of objects.
-    s3_data_distribution_type: ?S3DataDistribution,
+    s3_data_distribution_type: ?S3DataDistribution = null,
 
     /// If you choose `S3Prefix`, `S3Uri` identifies a key name prefix. SageMaker
     /// uses all objects that match the specified key name prefix for model

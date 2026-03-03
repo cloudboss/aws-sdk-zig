@@ -4,12 +4,12 @@
 pub const GeneralFlagsV2 = struct {
     /// Allows certificate issuance using autoenrollment. Set to TRUE to allow
     /// autoenrollment.
-    auto_enrollment: ?bool,
+    auto_enrollment: ?bool = null,
 
     /// Defines if the template is for machines or users. Set to TRUE if the
     /// template is for
     /// machines. Set to FALSE if the template is for users.
-    machine_type: ?bool,
+    machine_type: ?bool = null,
 
     pub const json_field_names = .{
         .auto_enrollment = "AutoEnrollment",

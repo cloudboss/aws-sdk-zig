@@ -3,10 +3,10 @@
 /// version shared with that account.
 pub const AccountSharingInfo = struct {
     /// The Amazon Web Services account ID where the current document is shared.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The version of the current document shared with the account.
-    shared_document_version: ?[]const u8,
+    shared_document_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

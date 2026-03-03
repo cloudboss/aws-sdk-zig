@@ -10,7 +10,7 @@ pub const Device = struct {
 
     /// If true, the device's local shadow will be automatically synced with the
     /// cloud.
-    sync_shadow: ?bool,
+    sync_shadow: ?bool = null,
 
     /// The thing ARN of the device.
     thing_arn: []const u8,

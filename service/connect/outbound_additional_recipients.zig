@@ -6,7 +6,7 @@ pub const OutboundAdditionalRecipients = struct {
     /// recipients
     /// are limited to 50 total addresses: 1 required recipient in the
     /// [DestinationEmailAddress](https://docs.aws.amazon.com/connect/latest/APIReference/API_SendOutboundEmail.html#API_SendOutboundEmail_RequestBody) field and up to 49 recipients in the 'CcEmailAddresses' field.
-    cc_email_addresses: ?[]const EmailAddressInfo,
+    cc_email_addresses: ?[]const EmailAddressInfo = null,
 
     pub const json_field_names = .{
         .cc_email_addresses = "CcEmailAddresses",

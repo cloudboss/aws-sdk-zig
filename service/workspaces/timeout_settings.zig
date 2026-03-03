@@ -7,10 +7,10 @@ pub const TimeoutSettings = struct {
     /// within the time set, they are connected to their previous session.
     /// Otherwise, they are connected
     /// to a new session with a new streaming instance.
-    disconnect_timeout_in_seconds: ?i32,
+    disconnect_timeout_in_seconds: ?i32 = null,
 
     /// The amount of time in seconds a connection will stay active while idle.
-    idle_disconnect_timeout_in_seconds: ?i32,
+    idle_disconnect_timeout_in_seconds: ?i32 = null,
 
     /// Specifies the maximum amount of time, in seconds, that a streaming session
     /// can remain active.
@@ -19,7 +19,7 @@ pub const TimeoutSettings = struct {
     /// they are prompted to save any open documents before being disconnected.
     /// After this time elapses,
     /// the instance is terminated and replaced by a new instance.
-    max_user_duration_in_seconds: ?i32,
+    max_user_duration_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .disconnect_timeout_in_seconds = "DisconnectTimeoutInSeconds",

@@ -3,10 +3,10 @@
 /// contain the password of the endpoint.
 pub const RedactedEwsAvailabilityProvider = struct {
     /// The endpoint of the remote EWS server.
-    ews_endpoint: ?[]const u8,
+    ews_endpoint: ?[]const u8 = null,
 
     /// The username used to authenticate the remote EWS server.
-    ews_username: ?[]const u8,
+    ews_username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ews_endpoint = "EwsEndpoint",

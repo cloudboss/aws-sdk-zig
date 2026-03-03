@@ -8,10 +8,10 @@ const ComputeEnvironment = @import("compute_environment.zig").ComputeEnvironment
 /// A structure that is used to specify a connection to create or update.
 pub const ConnectionInput = struct {
     /// Connection properties specific to the Athena compute environment.
-    athena_properties: ?[]const aws.map.StringMapEntry,
+    athena_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The authentication properties of the connection.
-    authentication_configuration: ?AuthenticationConfigurationInput,
+    authentication_configuration: ?AuthenticationConfigurationInput = null,
 
     /// These key-value pairs define parameters for the connection.
     connection_properties: []const aws.map.StringMapEntry,
@@ -110,23 +110,23 @@ pub const ConnectionInput = struct {
     connection_type: ConnectionType,
 
     /// The description of the connection.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A list of criteria that can be used in selecting this connection.
-    match_criteria: ?[]const []const u8,
+    match_criteria: ?[]const []const u8 = null,
 
     /// The name of the connection.
     name: []const u8,
 
     /// The physical connection requirements, such as virtual private cloud (VPC)
     /// and `SecurityGroup`, that are needed to successfully make this connection.
-    physical_connection_requirements: ?PhysicalConnectionRequirements,
+    physical_connection_requirements: ?PhysicalConnectionRequirements = null,
 
     /// Connection properties specific to the Python compute environment.
-    python_properties: ?[]const aws.map.StringMapEntry,
+    python_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// Connection properties specific to the Spark compute environment.
-    spark_properties: ?[]const aws.map.StringMapEntry,
+    spark_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// A flag to validate the credentials during create connection. Default is
     /// true.
@@ -134,7 +134,7 @@ pub const ConnectionInput = struct {
 
     /// The compute environments that the specified connection properties are
     /// validated against.
-    validate_for_compute_environments: ?[]const ComputeEnvironment,
+    validate_for_compute_environments: ?[]const ComputeEnvironment = null,
 
     pub const json_field_names = .{
         .athena_properties = "AthenaProperties",

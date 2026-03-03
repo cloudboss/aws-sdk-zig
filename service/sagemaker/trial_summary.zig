@@ -5,22 +5,22 @@ const TrialSource = @import("trial_source.zig").TrialSource;
 /// [DescribeTrial](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrial.html) API and provide the `TrialName`.
 pub const TrialSummary = struct {
     /// When the trial was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The name of the trial as displayed. If `DisplayName` isn't specified,
     /// `TrialName` is displayed.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// When the trial was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the trial.
-    trial_arn: ?[]const u8,
+    trial_arn: ?[]const u8 = null,
 
     /// The name of the trial.
-    trial_name: ?[]const u8,
+    trial_name: ?[]const u8 = null,
 
-    trial_source: ?TrialSource,
+    trial_source: ?TrialSource = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

@@ -3,7 +3,7 @@ const FunctionDefaultExecutionConfig = @import("function_default_execution_confi
 /// The default configuration that applies to all Lambda functions in the group.
 /// Individual Lambda functions can override these settings.
 pub const FunctionDefaultConfig = struct {
-    execution: ?FunctionDefaultExecutionConfig,
+    execution: ?FunctionDefaultExecutionConfig = null,
 
     pub const json_field_names = .{
         .execution = "Execution",

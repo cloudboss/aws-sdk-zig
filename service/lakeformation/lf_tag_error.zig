@@ -5,10 +5,10 @@ const LFTagPair = @import("lf_tag_pair.zig").LFTagPair;
 /// `UnTagResource` operation.
 pub const LFTagError = struct {
     /// An error that occurred with the attachment or detachment of the LF-tag.
-    @"error": ?ErrorDetail,
+    @"error": ?ErrorDetail = null,
 
     /// The key-name of the LF-tag.
-    lf_tag: ?LFTagPair,
+    lf_tag: ?LFTagPair = null,
 
     pub const json_field_names = .{
         .@"error" = "Error",

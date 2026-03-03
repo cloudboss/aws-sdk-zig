@@ -10,7 +10,7 @@ pub const Operation = struct {
     name: []const u8,
 
     /// The type of the operation.
-    output_type: ?OutputType,
+    output_type: ?OutputType = null,
 
     pub const json_field_names = .{
         .equation = "Equation",

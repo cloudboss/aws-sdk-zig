@@ -40,7 +40,7 @@ pub const LaunchTemplateOverrides = struct {
     /// * The AMI must contain only a single root volume
     ///
     /// * Root volume replacement doesn't support multi-volume AMIs
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// The instance requirements. Amazon EC2 Auto Scaling uses your specified
     /// requirements to identify
@@ -59,7 +59,7 @@ pub const LaunchTemplateOverrides = struct {
     ///
     /// If you specify `InstanceRequirements`, you can't specify
     /// `InstanceType`.
-    instance_requirements: ?InstanceRequirements,
+    instance_requirements: ?InstanceRequirements = null,
 
     /// The instance type, such as `m3.xlarge`. You must specify an instance type
     /// that is supported in your requested Region and Availability Zones. For more
@@ -68,7 +68,7 @@ pub const LaunchTemplateOverrides = struct {
     /// types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.
     ///
     /// You can specify up to 40 instance types per Auto Scaling group.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// Provides a launch template for the specified instance type or set of
     /// instance
@@ -85,7 +85,7 @@ pub const LaunchTemplateOverrides = struct {
     /// templates
     /// specified in the overrides and in the `LaunchTemplate` definition count
     /// towards this limit.
-    launch_template_specification: ?LaunchTemplateSpecification,
+    launch_template_specification: ?LaunchTemplateSpecification = null,
 
     /// If you provide a list of instance types to use, you can specify the number
     /// of capacity
@@ -117,5 +117,5 @@ pub const LaunchTemplateOverrides = struct {
     /// policy that defines weights for the instance types, you must specify these
     /// sizes
     /// with the same units that you use for weighting instances.
-    weighted_capacity: ?[]const u8,
+    weighted_capacity: ?[]const u8 = null,
 };

@@ -6,11 +6,11 @@ const StorageVirtualMachineFilterName = @import("storage_virtual_machine_filter_
 /// filters to return results that meet all applied filter requirements.
 pub const StorageVirtualMachineFilter = struct {
     /// The name for this filter.
-    name: ?StorageVirtualMachineFilterName,
+    name: ?StorageVirtualMachineFilterName = null,
 
     /// The values of the filter. These are all the values for any of the applied
     /// filters.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

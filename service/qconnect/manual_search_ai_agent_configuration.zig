@@ -4,14 +4,14 @@ const AssociationConfiguration = @import("association_configuration.zig").Associ
 pub const ManualSearchAIAgentConfiguration = struct {
     /// The AI Guardrail identifier for the Answer Generation guardrail used by the
     /// MANUAL_SEARCH AI Agent.
-    answer_generation_ai_guardrail_id: ?[]const u8,
+    answer_generation_ai_guardrail_id: ?[]const u8 = null,
 
     /// The AI Prompt identifier for the Answer Generation prompt used by the
     /// MANUAL_SEARCH AI Agent.
-    answer_generation_ai_prompt_id: ?[]const u8,
+    answer_generation_ai_prompt_id: ?[]const u8 = null,
 
     /// The association configurations for overriding behavior on this AI Agent.
-    association_configurations: ?[]const AssociationConfiguration,
+    association_configurations: ?[]const AssociationConfiguration = null,
 
     /// The locale to which specifies the language and region settings that
     /// determine the response language for
@@ -20,7 +20,7 @@ pub const ManualSearchAIAgentConfiguration = struct {
     /// For more information on supported locales, see [Language support for Amazon
     /// Q in
     /// Connect](https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#qic-notes-languages).
-    locale: ?[]const u8,
+    locale: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .answer_generation_ai_guardrail_id = "answerGenerationAIGuardrailId",

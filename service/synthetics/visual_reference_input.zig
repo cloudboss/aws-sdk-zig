@@ -27,10 +27,10 @@ pub const VisualReferenceInput = struct {
     /// monitoring in future runs of this canary. If there is a screenshot that you
     /// don't want to be used for
     /// visual monitoring, remove it from this array.
-    base_screenshots: ?[]const BaseScreenshot,
+    base_screenshots: ?[]const BaseScreenshot = null,
 
     /// The browser type associated with this visual reference.
-    browser_type: ?BrowserType,
+    browser_type: ?BrowserType = null,
 
     pub const json_field_names = .{
         .base_canary_run_id = "BaseCanaryRunId",

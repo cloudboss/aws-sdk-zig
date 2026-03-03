@@ -5,7 +5,7 @@ const DriftStatus = @import("drift_status.zig").DriftStatus;
 pub const EnabledControlResourceDrift = struct {
     /// The status of resource drift for the enabled control, indicating whether the
     /// underlying resources match the expected configuration.
-    status: ?DriftStatus,
+    status: ?DriftStatus = null,
 
     pub const json_field_names = .{
         .status = "status",

@@ -5,7 +5,7 @@ const BlockerType = @import("blocker_type.zig").BlockerType;
 /// Detailed data of the sync blocker.
 pub const SyncBlocker = struct {
     /// The contexts for the sync blocker.
-    contexts: ?[]const SyncBlockerContext,
+    contexts: ?[]const SyncBlockerContext = null,
 
     /// The time when the sync blocker was created.
     created_at: i64,
@@ -17,10 +17,10 @@ pub const SyncBlocker = struct {
     id: []const u8,
 
     /// The time the sync blocker was resolved.
-    resolved_at: ?i64,
+    resolved_at: ?i64 = null,
 
     /// The reason the sync blocker was resolved.
-    resolved_reason: ?[]const u8,
+    resolved_reason: ?[]const u8 = null,
 
     /// The status of the sync blocker.
     status: BlockerStatus,

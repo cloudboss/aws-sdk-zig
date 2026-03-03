@@ -3,14 +3,14 @@ const FpgaDeviceMemoryInfo = @import("fpga_device_memory_info.zig").FpgaDeviceMe
 /// Describes the FPGA accelerator for the instance type.
 pub const FpgaDeviceInfo = struct {
     /// The count of FPGA accelerators for the instance type.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// The manufacturer of the FPGA accelerator.
-    manufacturer: ?[]const u8,
+    manufacturer: ?[]const u8 = null,
 
     /// Describes the memory for the FPGA accelerator for the instance type.
-    memory_info: ?FpgaDeviceMemoryInfo,
+    memory_info: ?FpgaDeviceMemoryInfo = null,
 
     /// The name of the FPGA accelerator.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 };

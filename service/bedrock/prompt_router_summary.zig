@@ -6,10 +6,10 @@ const PromptRouterType = @import("prompt_router_type.zig").PromptRouterType;
 /// Details about a prompt router.
 pub const PromptRouterSummary = struct {
     /// When the router was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The router's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The router's fallback model.
     fallback_model: PromptRouterTargetModel,
@@ -33,7 +33,7 @@ pub const PromptRouterSummary = struct {
     @"type": PromptRouterType,
 
     /// When the router was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

@@ -7,17 +7,17 @@ const AttachmentDetails = @import("attachment_details.zig").AttachmentDetails;
 /// the date and time of the communication.
 pub const Communication = struct {
     /// Information about the attachments to the case communication.
-    attachment_set: ?[]const AttachmentDetails,
+    attachment_set: ?[]const AttachmentDetails = null,
 
     /// The text of the communication between the customer and Amazon Web Services
     /// Support.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// The support case ID requested or returned in the call. The case ID is an
     /// alphanumeric
     /// string formatted as shown in this example:
     /// case-*12345678910-2013-c4c1d2bf33c5cf47*
-    case_id: ?[]const u8,
+    case_id: ?[]const u8 = null,
 
     /// The identity of the account that submitted, or responded to, the support
     /// case.
@@ -26,10 +26,10 @@ pub const Communication = struct {
     /// "AdminRole (Role) ). Entries from the Amazon Web Services Support team
     /// display
     /// "Amazon Web Services," and don't show an email address.
-    submitted_by: ?[]const u8,
+    submitted_by: ?[]const u8 = null,
 
     /// The time the communication was created.
-    time_created: ?[]const u8,
+    time_created: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attachment_set = "attachmentSet",

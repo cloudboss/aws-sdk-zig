@@ -9,7 +9,7 @@ pub const SeverityLevel = struct {
     ///
     /// Valid values: `low` | `normal` | `high` |
     /// `urgent` | `critical`
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The name of the severity level that corresponds to the severity level code.
     ///
@@ -33,7 +33,7 @@ pub const SeverityLevel = struct {
     ///
     /// For more information, see [Choosing a
     /// severity](https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity) in the *Amazon Web Services Support User Guide*.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

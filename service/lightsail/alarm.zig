@@ -17,51 +17,51 @@ const MetricUnit = @import("metric_unit.zig").MetricUnit;
 /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms).
 pub const Alarm = struct {
     /// The Amazon Resource Name (ARN) of the alarm.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The arithmetic operation used when comparing the specified statistic and
     /// threshold.
-    comparison_operator: ?ComparisonOperator,
+    comparison_operator: ?ComparisonOperator = null,
 
     /// The contact protocols for the alarm, such as `Email`, `SMS` (text
     /// messaging), or both.
-    contact_protocols: ?[]const ContactProtocol,
+    contact_protocols: ?[]const ContactProtocol = null,
 
     /// The timestamp when the alarm was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The number of data points that must not within the specified threshold to
     /// trigger the
     /// alarm.
-    datapoints_to_alarm: ?i32,
+    datapoints_to_alarm: ?i32 = null,
 
     /// The number of periods over which data is compared to the specified
     /// threshold.
-    evaluation_periods: ?i32,
+    evaluation_periods: ?i32 = null,
 
     /// An object that lists information about the location of the alarm.
-    location: ?ResourceLocation,
+    location: ?ResourceLocation = null,
 
     /// The name of the metric associated with the alarm.
-    metric_name: ?MetricName,
+    metric_name: ?MetricName = null,
 
     /// An object that lists information about the resource monitored by the alarm.
-    monitored_resource_info: ?MonitoredResourceInfo,
+    monitored_resource_info: ?MonitoredResourceInfo = null,
 
     /// The name of the alarm.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Indicates whether the alarm is enabled.
-    notification_enabled: ?bool,
+    notification_enabled: ?bool = null,
 
     /// The alarm states that trigger a notification.
-    notification_triggers: ?[]const AlarmState,
+    notification_triggers: ?[]const AlarmState = null,
 
     /// The period, in seconds, over which the statistic is applied.
-    period: ?i32,
+    period: ?i32 = null,
 
     /// The Lightsail resource type of the alarm.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The current state of the alarm.
     ///
@@ -75,7 +75,7 @@ pub const Alarm = struct {
     /// state.
     ///
     /// * `OK` - The metric is within the defined threshold.
-    state: ?AlarmState,
+    state: ?AlarmState = null,
 
     /// The statistic for the metric associated with the alarm.
     ///
@@ -100,17 +100,17 @@ pub const Alarm = struct {
     ///
     /// * `SampleCount` - The count, or number, of data points used for the
     /// statistical calculation.
-    statistic: ?MetricStatistic,
+    statistic: ?MetricStatistic = null,
 
     /// The support code. Include this code in your email to support when you have
     /// questions about
     /// your Lightsail alarm. This code enables our support team to look up your
     /// Lightsail
     /// information more easily.
-    support_code: ?[]const u8,
+    support_code: ?[]const u8 = null,
 
     /// The value against which the specified statistic is compared.
-    threshold: ?f64,
+    threshold: ?f64 = null,
 
     /// Specifies how the alarm handles missing data points.
     ///
@@ -128,10 +128,10 @@ pub const Alarm = struct {
     /// state.
     ///
     /// * `missing` - Missing data is treated as missing.
-    treat_missing_data: ?TreatMissingData,
+    treat_missing_data: ?TreatMissingData = null,
 
     /// The unit of the metric associated with the alarm.
-    unit: ?MetricUnit,
+    unit: ?MetricUnit = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -4,12 +4,12 @@ const Algorithm = @import("algorithm.zig").Algorithm;
 /// source has decryption enabled.
 pub const SrtCallerDecryption = struct {
     /// The algorithm used to encrypt content.
-    algorithm: ?Algorithm,
+    algorithm: ?Algorithm = null,
 
     /// The ARN for the secret in Secrets Manager. Someone in your organization must
     /// create a secret and provide you with its ARN. The secret holds the
     /// passphrase that MediaLive uses to decrypt the source content.
-    passphrase_secret_arn: ?[]const u8,
+    passphrase_secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .algorithm = "Algorithm",

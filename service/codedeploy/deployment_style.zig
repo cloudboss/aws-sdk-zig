@@ -6,10 +6,10 @@ const DeploymentType = @import("deployment_type.zig").DeploymentType;
 /// run and whether to route deployment traffic behind a load balancer.
 pub const DeploymentStyle = struct {
     /// Indicates whether to route deployment traffic behind a load balancer.
-    deployment_option: ?DeploymentOption,
+    deployment_option: ?DeploymentOption = null,
 
     /// Indicates whether to run an in-place deployment or a blue/green deployment.
-    deployment_type: ?DeploymentType,
+    deployment_type: ?DeploymentType = null,
 
     pub const json_field_names = .{
         .deployment_option = "deploymentOption",

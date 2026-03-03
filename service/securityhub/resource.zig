@@ -8,39 +8,39 @@ const Partition = @import("partition.zig").Partition;
 pub const Resource = struct {
     /// The Amazon Resource Name (ARN) of the application that is related to a
     /// finding.
-    application_arn: ?[]const u8,
+    application_arn: ?[]const u8 = null,
 
     /// The name of the application that is related to a finding.
-    application_name: ?[]const u8,
+    application_name: ?[]const u8 = null,
 
     /// Contains information about sensitive data that was detected on the resource.
-    data_classification: ?DataClassificationDetails,
+    data_classification: ?DataClassificationDetails = null,
 
     /// Additional details about the resource related to a finding.
-    details: ?ResourceDetails,
+    details: ?ResourceDetails = null,
 
     /// The canonical identifier for the given resource type.
     id: []const u8,
 
     /// The canonical Amazon Web Services partition name that the Region is assigned
     /// to.
-    partition: ?Partition,
+    partition: ?Partition = null,
 
     /// The canonical Amazon Web Services external Region name where this resource
     /// is located.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 16.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// Identifies the role of the resource in the finding. A resource is either the
     /// actor or target of the finding activity,
-    resource_role: ?[]const u8,
+    resource_role: ?[]const u8 = null,
 
     /// A list of Amazon Web Services tags associated with a resource at the time
     /// the finding was
     /// processed. Tags must follow [Amazon Web Services tag naming limits and
     /// requirements](https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html#tag-conventions).
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the resource that details are provided for. If possible, set
     /// `Type` to one of the supported resource types. For example, if the resource

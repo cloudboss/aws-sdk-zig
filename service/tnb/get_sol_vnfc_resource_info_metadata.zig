@@ -5,13 +5,13 @@
 /// update, and delete) can be performed.
 pub const GetSolVnfcResourceInfoMetadata = struct {
     /// Information about the cluster.
-    cluster: ?[]const u8,
+    cluster: ?[]const u8 = null,
 
     /// Information about the helm chart.
-    helm_chart: ?[]const u8,
+    helm_chart: ?[]const u8 = null,
 
     /// Information about the node group.
-    node_group: ?[]const u8,
+    node_group: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cluster = "cluster",

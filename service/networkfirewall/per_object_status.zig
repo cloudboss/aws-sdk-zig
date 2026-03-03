@@ -11,11 +11,11 @@ const PerObjectSyncStatus = @import("per_object_sync_status.zig").PerObjectSyncS
 pub const PerObjectStatus = struct {
     /// Indicates whether this object is in sync with the version indicated in the
     /// update token.
-    sync_status: ?PerObjectSyncStatus,
+    sync_status: ?PerObjectSyncStatus = null,
 
     /// The current version of the object that is either in sync or pending
     /// synchronization.
-    update_token: ?[]const u8,
+    update_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .sync_status = "SyncStatus",

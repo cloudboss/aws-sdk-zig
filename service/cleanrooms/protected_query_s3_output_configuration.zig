@@ -6,7 +6,7 @@ pub const ProtectedQueryS3OutputConfiguration = struct {
     bucket: []const u8,
 
     /// The S3 prefix to unload the protected query results.
-    key_prefix: ?[]const u8,
+    key_prefix: ?[]const u8 = null,
 
     /// Intended file format of the result.
     result_format: ResultFormat,
@@ -14,7 +14,7 @@ pub const ProtectedQueryS3OutputConfiguration = struct {
     /// Indicates whether files should be output as a single file (`TRUE`) or output
     /// as multiple files (`FALSE`). This parameter is only supported for analyses
     /// with the Spark analytics engine.
-    single_file_output: ?bool,
+    single_file_output: ?bool = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

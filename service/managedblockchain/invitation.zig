@@ -9,21 +9,21 @@ pub const Invitation = struct {
     /// The Amazon Resource Name (ARN) of the invitation. For more information about
     /// ARNs and their format, see [Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon Web Services General Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the invitation was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The date and time that the invitation expires. This is the `CreationDate`
     /// plus the `ProposalDurationInHours` that is specified in the
     /// `ProposalThresholdPolicy`. After this date and time, the invitee can no
     /// longer create a member and join the network using this `InvitationId`.
-    expiration_date: ?i64,
+    expiration_date: ?i64 = null,
 
     /// The unique identifier for the invitation.
-    invitation_id: ?[]const u8,
+    invitation_id: ?[]const u8 = null,
 
-    network_summary: ?NetworkSummary,
+    network_summary: ?NetworkSummary = null,
 
     /// The status of the invitation:
     ///
@@ -40,7 +40,7 @@ pub const Invitation = struct {
     ///
     /// * `EXPIRED` - The invitee neither created a member nor rejected the
     ///   invitation before the `ExpirationDate`.
-    status: ?InvitationStatus,
+    status: ?InvitationStatus = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -2,7 +2,7 @@
 /// you want to associate.
 pub const Query = struct {
     /// Alias attached to the query, for ease of location.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// Pages is a parameter that the user inputs to specify which pages to apply a
     /// query to. The following is a
@@ -22,7 +22,7 @@ pub const Query = struct {
     ///
     /// * Specified pages must be greater than 0 and less than or equal to the
     ///   number of pages in the document.
-    pages: ?[]const []const u8,
+    pages: ?[]const []const u8 = null,
 
     /// Question that Amazon Textract will apply to the document. An example would
     /// be "What is the customer's SSN?"

@@ -11,13 +11,13 @@ pub const QopConfiguration = struct {
     /// setting
     /// corresponds to your `dfs.data.transfer.protection` setting in the
     /// `hdfs-site.xml` file on your Hadoop cluster.
-    data_transfer_protection: ?HdfsDataTransferProtection,
+    data_transfer_protection: ?HdfsDataTransferProtection = null,
 
     /// The RPC protection setting configured on the HDFS cluster. This setting
     /// corresponds to
     /// your `hadoop.rpc.protection` setting in your `core-site.xml` file on
     /// your Hadoop cluster.
-    rpc_protection: ?HdfsRpcProtection,
+    rpc_protection: ?HdfsRpcProtection = null,
 
     pub const json_field_names = .{
         .data_transfer_protection = "DataTransferProtection",

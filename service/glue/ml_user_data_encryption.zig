@@ -4,7 +4,7 @@ const MLUserDataEncryptionModeString = @import("ml_user_data_encryption_mode_str
 /// user data.
 pub const MLUserDataEncryption = struct {
     /// The ID for the customer-provided KMS key.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The encryption mode applied to user data. Valid values are:
     ///

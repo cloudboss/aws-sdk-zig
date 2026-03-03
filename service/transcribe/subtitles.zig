@@ -13,7 +13,7 @@ pub const Subtitles = struct {
     /// Specify the output format for your subtitle file; if you select both WebVTT
     /// (`vtt`) and SubRip (`srt`) formats, two output files are
     /// generated.
-    formats: ?[]const SubtitleFormat,
+    formats: ?[]const SubtitleFormat = null,
 
     /// Specify the starting value that is assigned to the first subtitle segment.
     ///
@@ -22,7 +22,7 @@ pub const Subtitles = struct {
     /// use,
     /// we recommend choosing `1`, as this may improve compatibility with other
     /// services.
-    output_start_index: ?i32,
+    output_start_index: ?i32 = null,
 
     pub const json_field_names = .{
         .formats = "Formats",

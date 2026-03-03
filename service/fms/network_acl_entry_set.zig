@@ -12,7 +12,7 @@ pub const NetworkAclEntrySet = struct {
     ///
     /// You must specify at least one first entry or one last entry in any network
     /// ACL policy.
-    first_entries: ?[]const NetworkAclEntry,
+    first_entries: ?[]const NetworkAclEntry = null,
 
     /// Applies only when remediation is enabled for the policy as a whole. Firewall
     /// Manager uses this setting when it finds policy
@@ -49,7 +49,7 @@ pub const NetworkAclEntrySet = struct {
     ///
     /// You must specify at least one first entry or one last entry in any network
     /// ACL policy.
-    last_entries: ?[]const NetworkAclEntry,
+    last_entries: ?[]const NetworkAclEntry = null,
 
     pub const json_field_names = .{
         .first_entries = "FirstEntries",

@@ -1,7 +1,7 @@
 /// Trigger configuration based on time.
 pub const TimeBasedTrigger = struct {
     /// Idle session timeout (seconds) that triggers memory processing.
-    idle_session_timeout: ?i32,
+    idle_session_timeout: ?i32 = null,
 
     pub const json_field_names = .{
         .idle_session_timeout = "idleSessionTimeout",

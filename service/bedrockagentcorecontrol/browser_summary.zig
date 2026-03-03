@@ -13,13 +13,13 @@ pub const BrowserSummary = struct {
     created_at: i64,
 
     /// The description of the browser.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The timestamp when the browser was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The name of the browser.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the browser.
     status: BrowserStatus,

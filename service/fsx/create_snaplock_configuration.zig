@@ -17,11 +17,11 @@ pub const CreateSnaplockConfiguration = struct {
     /// [
     /// SnapLock audit log
     /// volumes](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume).
-    audit_log_volume: ?bool,
+    audit_log_volume: ?bool = null,
 
     /// The configuration object for setting the autocommit period of files in an
     /// FSx for ONTAP SnapLock volume.
-    autocommit_period: ?AutocommitPeriod,
+    autocommit_period: ?AutocommitPeriod = null,
 
     /// Enables, disables, or permanently disables privileged delete on an FSx for
     /// ONTAP SnapLock
@@ -36,11 +36,11 @@ pub const CreateSnaplockConfiguration = struct {
     /// For more information, see
     /// [Privileged
     /// delete](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete).
-    privileged_delete: ?PrivilegedDelete,
+    privileged_delete: ?PrivilegedDelete = null,
 
     /// Specifies the retention period of an FSx for ONTAP
     /// SnapLock volume.
-    retention_period: ?SnaplockRetentionPeriod,
+    retention_period: ?SnaplockRetentionPeriod = null,
 
     /// Specifies the retention mode of an FSx for ONTAP SnapLock volume. After it
     /// is set, it can't be changed.
@@ -71,7 +71,7 @@ pub const CreateSnaplockConfiguration = struct {
     ///
     /// For more information, see [Volume-append
     /// mode](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append).
-    volume_append_mode_enabled: ?bool,
+    volume_append_mode_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .audit_log_volume = "AuditLogVolume",

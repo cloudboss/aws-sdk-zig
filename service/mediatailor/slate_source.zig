@@ -1,11 +1,11 @@
 /// Slate VOD source configuration.
 pub const SlateSource = struct {
     /// The name of the source location where the slate VOD source is stored.
-    source_location_name: ?[]const u8,
+    source_location_name: ?[]const u8 = null,
 
     /// The slate VOD source name. The VOD source must already exist in a source
     /// location before it can be used for slate.
-    vod_source_name: ?[]const u8,
+    vod_source_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_location_name = "SourceLocationName",

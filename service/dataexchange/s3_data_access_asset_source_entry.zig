@@ -7,15 +7,15 @@ pub const S3DataAccessAssetSourceEntry = struct {
     bucket: []const u8,
 
     /// Organizes Amazon S3 asset key prefixes stored in an Amazon S3 bucket.
-    key_prefixes: ?[]const []const u8,
+    key_prefixes: ?[]const []const u8 = null,
 
     /// The keys used to create the Amazon S3 data access.
-    keys: ?[]const []const u8,
+    keys: ?[]const []const u8 = null,
 
     /// List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs
     /// used to
     /// encrypt S3 objects being shared in this S3 Data Access asset.
-    kms_keys_to_grant: ?[]const KmsKeyToGrant,
+    kms_keys_to_grant: ?[]const KmsKeyToGrant = null,
 
     pub const json_field_names = .{
         .bucket = "Bucket",

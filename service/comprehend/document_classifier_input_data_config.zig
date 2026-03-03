@@ -18,7 +18,7 @@ pub const DocumentClassifierInputDataConfig = struct {
     ///
     /// This parameter is required if you set `DataFormat` to
     /// `AUGMENTED_MANIFEST`.
-    augmented_manifests: ?[]const AugmentedManifestsListItem,
+    augmented_manifests: ?[]const AugmentedManifestsListItem = null,
 
     /// The format of your training data:
     ///
@@ -37,18 +37,18 @@ pub const DocumentClassifierInputDataConfig = struct {
     ///
     /// If you don't specify a value, Amazon Comprehend uses `COMPREHEND_CSV` as the
     /// default.
-    data_format: ?DocumentClassifierDataFormat,
+    data_format: ?DocumentClassifierDataFormat = null,
 
-    document_reader_config: ?DocumentReaderConfig,
+    document_reader_config: ?DocumentReaderConfig = null,
 
     /// The S3 location of the training documents.
     /// This parameter is required in a request to create a native document model.
-    documents: ?DocumentClassifierDocuments,
+    documents: ?DocumentClassifierDocuments = null,
 
     /// The type of input documents for training the model. Provide plain-text
     /// documents to create a plain-text model, and
     /// provide semi-structured documents to create a native document model.
-    document_type: ?DocumentClassifierDocumentTypeFormat,
+    document_type: ?DocumentClassifierDocumentTypeFormat = null,
 
     /// Indicates the delimiter used to separate each label for training a
     /// multi-label classifier.
@@ -60,7 +60,7 @@ pub const DocumentClassifierInputDataConfig = struct {
     /// you specify, the
     /// labels on that line will be combined to make a single unique label, such as
     /// LABELLABELLABEL.
-    label_delimiter: ?[]const u8,
+    label_delimiter: ?[]const u8 = null,
 
     /// The Amazon S3 URI for the input data. The S3 bucket must be in the same
     /// Region as the API
@@ -75,13 +75,13 @@ pub const DocumentClassifierInputDataConfig = struct {
     ///
     /// This parameter is required if you set `DataFormat` to
     /// `COMPREHEND_CSV`.
-    s3_uri: ?[]const u8,
+    s3_uri: ?[]const u8 = null,
 
     /// This specifies the Amazon S3 location that contains the test annotations for
     /// the document classifier.
     /// The URI must be in the same Amazon Web Services Region as the API endpoint
     /// that you are calling.
-    test_s3_uri: ?[]const u8,
+    test_s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .augmented_manifests = "AugmentedManifests",

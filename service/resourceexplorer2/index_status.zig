@@ -6,13 +6,13 @@ const OperationStatus = @import("operation_status.zig").OperationStatus;
 /// in a specific Region.
 pub const IndexStatus = struct {
     /// Details about any error that occurred during the index operation.
-    error_details: ?ErrorDetails,
+    error_details: ?ErrorDetails = null,
 
-    index: ?Index,
+    index: ?Index = null,
 
     /// The current status of the index operation. Valid values are `SUCCEEDED`,
     /// `FAILED`, `IN_PROGRESS`, or `SKIPPED`.
-    status: ?OperationStatus,
+    status: ?OperationStatus = null,
 
     pub const json_field_names = .{
         .error_details = "ErrorDetails",

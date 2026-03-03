@@ -10,7 +10,7 @@ pub const ApplicationSummary = struct {
 
     /// For a Managed Service for Apache Flink application, the mode is `STREAMING`.
     /// For a Managed Service for Apache Flink Studio notebook, it is `INTERACTIVE`.
-    application_mode: ?ApplicationMode,
+    application_mode: ?ApplicationMode = null,
 
     /// The name of the application.
     application_name: []const u8,

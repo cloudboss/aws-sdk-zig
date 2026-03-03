@@ -7,10 +7,10 @@
 ///
 /// * Enabled: Whether the log publishing for given log type is enabled or not
 pub const LogPublishingOption = struct {
-    cloud_watch_logs_log_group_arn: ?[]const u8,
+    cloud_watch_logs_log_group_arn: ?[]const u8 = null,
 
     /// Specifies whether given log publishing option is enabled or not.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs_log_group_arn = "CloudWatchLogsLogGroupArn",

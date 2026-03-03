@@ -9,10 +9,10 @@ pub const ClientCredentialsGrantMetadata = struct {
 
     /// The detailed client credentials configuration including client ID, client
     /// secret, and token endpoint.
-    client_credentials_details: ?ClientCredentialsDetails,
+    client_credentials_details: ?ClientCredentialsDetails = null,
 
     /// The source of the client credentials configuration.
-    client_credentials_source: ?ClientCredentialsSource,
+    client_credentials_source: ?ClientCredentialsSource = null,
 
     pub const json_field_names = .{
         .base_endpoint = "BaseEndpoint",

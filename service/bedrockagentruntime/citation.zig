@@ -12,10 +12,10 @@ const RetrievedReference = @import("retrieved_reference.zig").RetrievedReference
 ///   response](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax) – in the `citations` field
 pub const Citation = struct {
     /// Contains the generated response and metadata
-    generated_response_part: ?GeneratedResponsePart,
+    generated_response_part: ?GeneratedResponsePart = null,
 
     /// Contains metadata about the sources cited for the generated response.
-    retrieved_references: ?[]const RetrievedReference,
+    retrieved_references: ?[]const RetrievedReference = null,
 
     pub const json_field_names = .{
         .generated_response_part = "generatedResponsePart",

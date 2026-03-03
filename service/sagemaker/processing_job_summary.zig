@@ -7,17 +7,17 @@ pub const ProcessingJobSummary = struct {
 
     /// An optional string, up to one KB in size, that contains metadata from the
     /// processing container when the processing job exits.
-    exit_message: ?[]const u8,
+    exit_message: ?[]const u8 = null,
 
     /// A string, up to one KB in size, that contains the reason a processing job
     /// failed, if it failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// A timestamp that indicates the last time the processing job was modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The time at which the processing job completed.
-    processing_end_time: ?i64,
+    processing_end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the processing job..
     processing_job_arn: []const u8,

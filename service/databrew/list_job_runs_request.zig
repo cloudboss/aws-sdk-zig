@@ -1,12 +1,12 @@
 pub const ListJobRunsRequest = struct {
     /// The maximum number of results to return in this request.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The name of the job.
     name: []const u8,
 
     /// The token returned by a previous call to retrieve the next set of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",

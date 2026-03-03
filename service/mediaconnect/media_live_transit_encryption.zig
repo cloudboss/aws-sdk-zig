@@ -10,7 +10,7 @@ pub const MediaLiveTransitEncryption = struct {
     encryption_key_configuration: MediaLiveTransitEncryptionKeyConfiguration,
 
     /// The type of encryption key to use for MediaLive transit encryption.
-    encryption_key_type: ?MediaLiveTransitEncryptionKeyType,
+    encryption_key_type: ?MediaLiveTransitEncryptionKeyType = null,
 
     pub const json_field_names = .{
         .encryption_key_configuration = "EncryptionKeyConfiguration",

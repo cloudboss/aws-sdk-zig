@@ -4,13 +4,13 @@ const ProxyRule = @import("proxy_rule.zig").ProxyRule;
 /// three phases in a traffic where the rule match is applied.
 pub const ProxyRulesByRequestPhase = struct {
     /// After receiving response.
-    post_response: ?[]const ProxyRule,
+    post_response: ?[]const ProxyRule = null,
 
     /// Before domain resolution.
-    pre_dns: ?[]const ProxyRule,
+    pre_dns: ?[]const ProxyRule = null,
 
     /// After DNS, before request.
-    pre_request: ?[]const ProxyRule,
+    pre_request: ?[]const ProxyRule = null,
 
     pub const json_field_names = .{
         .post_response = "PostRESPONSE",

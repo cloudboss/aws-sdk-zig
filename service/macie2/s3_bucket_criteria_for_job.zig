@@ -6,11 +6,11 @@ const CriteriaBlockForJob = @import("criteria_block_for_job.zig").CriteriaBlockF
 pub const S3BucketCriteriaForJob = struct {
     /// The property- and tag-based conditions that determine which buckets to
     /// exclude from the job.
-    excludes: ?CriteriaBlockForJob,
+    excludes: ?CriteriaBlockForJob = null,
 
     /// The property- and tag-based conditions that determine which buckets to
     /// include in the job.
-    includes: ?CriteriaBlockForJob,
+    includes: ?CriteriaBlockForJob = null,
 
     pub const json_field_names = .{
         .excludes = "excludes",

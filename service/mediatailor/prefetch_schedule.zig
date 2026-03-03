@@ -16,7 +16,7 @@ pub const PrefetchSchedule = struct {
     /// occurs within a span of time that you define, called a *consumption window*.
     /// You can designate which ad breaks that MediaTailor fills with prefetch ads
     /// by setting avail matching criteria.
-    consumption: ?PrefetchConsumption,
+    consumption: ?PrefetchConsumption = null,
 
     /// The name of the prefetch schedule. The name must be unique among all
     /// prefetch schedules that are associated with the specified playback
@@ -28,11 +28,11 @@ pub const PrefetchSchedule = struct {
 
     /// The settings that determine how and when MediaTailor prefetches ads and
     /// inserts them into ad breaks.
-    recurring_prefetch_configuration: ?RecurringPrefetchConfiguration,
+    recurring_prefetch_configuration: ?RecurringPrefetchConfiguration = null,
 
     /// A complex type that contains settings for prefetch retrieval from the ad
     /// decision server (ADS).
-    retrieval: ?PrefetchRetrieval,
+    retrieval: ?PrefetchRetrieval = null,
 
     /// The frequency that MediaTailor creates prefetch schedules. `SINGLE`
     /// indicates that this schedule applies to one ad break. `RECURRING` indicates
@@ -42,11 +42,11 @@ pub const PrefetchSchedule = struct {
     /// For more information about the prefetch types and when you might use each,
     /// see [Prefetching ads in Elemental
     /// MediaTailor.](https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html)
-    schedule_type: ?PrefetchScheduleType,
+    schedule_type: ?PrefetchScheduleType = null,
 
     /// An optional stream identifier that you can specify in order to prefetch for
     /// multiple streams that use the same playback configuration.
-    stream_id: ?[]const u8,
+    stream_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

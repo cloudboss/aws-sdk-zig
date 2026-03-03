@@ -7,21 +7,21 @@ const ReasoningContentBlock = @import("reasoning_content_block.zig").ReasoningCo
 pub const PostProcessingModelInvocationOutput = struct {
     /// Contains information about the foundation model output from the
     /// post-processing step.
-    metadata: ?Metadata,
+    metadata: ?Metadata = null,
 
     /// Details about the response from the Lambda parsing of the output of the
     /// post-processing step.
-    parsed_response: ?PostProcessingParsedResponse,
+    parsed_response: ?PostProcessingParsedResponse = null,
 
     /// Details of the raw response from the foundation model output.
-    raw_response: ?RawResponse,
+    raw_response: ?RawResponse = null,
 
     /// Contains content about the reasoning that the model made during the
     /// post-processing step.
-    reasoning_content: ?ReasoningContentBlock,
+    reasoning_content: ?ReasoningContentBlock = null,
 
     /// The unique identifier of the trace.
-    trace_id: ?[]const u8,
+    trace_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metadata = "metadata",

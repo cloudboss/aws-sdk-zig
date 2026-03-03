@@ -5,22 +5,22 @@ const DeploymentStatus = @import("deployment_status.zig").DeploymentStatus;
 /// internet.
 pub const Deployment = struct {
     /// Specifies whether a deployment was automatically released.
-    auto_deployed: ?bool,
+    auto_deployed: ?bool = null,
 
     /// The date and time when the Deployment resource was created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// The identifier for the deployment.
-    deployment_id: ?[]const u8,
+    deployment_id: ?[]const u8 = null,
 
     /// The status of the deployment: PENDING, FAILED, or SUCCEEDED.
-    deployment_status: ?DeploymentStatus,
+    deployment_status: ?DeploymentStatus = null,
 
     /// May contain additional feedback on the status of an API deployment.
-    deployment_status_message: ?[]const u8,
+    deployment_status_message: ?[]const u8 = null,
 
     /// The description for the deployment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_deployed = "AutoDeployed",

@@ -20,23 +20,23 @@ pub const EngineConfiguration = struct {
     /// StartSessionRequest$NotebookVersion field, and then add a key named
     /// `NotebookId` to `AdditionalConfigs` that has the value of the
     /// Athena notebook ID.
-    additional_configs: ?[]const aws.map.StringMapEntry,
+    additional_configs: ?[]const aws.map.StringMapEntry = null,
 
     /// The configuration classifications that can be specified for the engine.
-    classifications: ?[]const Classification,
+    classifications: ?[]const Classification = null,
 
     /// The number of DPUs to use for the coordinator. A coordinator is a special
     /// executor
     /// that orchestrates processing work and manages other executors in a notebook
     /// session. The
     /// default is 1.
-    coordinator_dpu_size: ?i32,
+    coordinator_dpu_size: ?i32 = null,
 
     /// The default number of DPUs to use for executors. An executor is the smallest
     /// unit of
     /// compute that a notebook session can request from Athena. The default is
     /// 1.
-    default_executor_dpu_size: ?i32,
+    default_executor_dpu_size: ?i32 = null,
 
     /// The maximum number of DPUs that can run concurrently.
     max_concurrent_dpus: i32 = 20,
@@ -44,7 +44,7 @@ pub const EngineConfiguration = struct {
     /// Specifies custom jar files and Spark properties for use cases like cluster
     /// encryption,
     /// table formats, and general Spark tuning.
-    spark_properties: ?[]const aws.map.StringMapEntry,
+    spark_properties: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .additional_configs = "AdditionalConfigs",

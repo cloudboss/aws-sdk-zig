@@ -10,7 +10,7 @@
 /// * `RestoreDBInstanceFromDBSnapshot`
 pub const DBParameterGroupStatus = struct {
     /// The name of the DB parameter group.
-    db_parameter_group_name: ?[]const u8,
+    db_parameter_group_name: ?[]const u8 = null,
 
     /// The status of parameter updates. Valid values are:
     ///
@@ -21,5 +21,5 @@ pub const DBParameterGroupStatus = struct {
     ///   after the DB instance is upgraded.
     /// * `pending-reboot`: The parameter group change will be applied after the DB
     ///   instance reboots.
-    parameter_apply_status: ?[]const u8,
+    parameter_apply_status: ?[]const u8 = null,
 };

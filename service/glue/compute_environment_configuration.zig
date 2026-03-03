@@ -31,7 +31,7 @@ pub const ComputeEnvironmentConfiguration = struct {
 
     /// Indicates whether `PhysicalConnectionProperties` are required for the
     /// compute environment.
-    physical_connection_properties_required: ?bool,
+    physical_connection_properties_required: ?bool = null,
 
     /// The supported authentication types for the compute environment.
     supported_authentication_types: []const AuthenticationType,

@@ -11,12 +11,12 @@ pub const LifecycleExpiration = struct {
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket
     /// lifecycle configurations.
-    date: ?i64,
+    date: ?i64 = null,
 
     /// Indicates the lifetime, in days, of the objects that are subject to the
     /// rule. The value must be a
     /// non-zero positive integer.
-    days: ?i32,
+    days: ?i32 = null,
 
     /// Indicates whether Amazon S3 will remove a delete marker with no noncurrent
     /// versions. If set to true, the
@@ -27,5 +27,5 @@ pub const LifecycleExpiration = struct {
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket
     /// lifecycle configurations.
-    expired_object_delete_marker: ?bool,
+    expired_object_delete_marker: ?bool = null,
 };

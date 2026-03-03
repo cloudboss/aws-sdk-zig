@@ -28,23 +28,23 @@ pub const WorkGroup = struct {
     /// workgroup settings override is specified in `EnforceWorkGroupConfiguration`
     /// (true/false) in the `WorkGroupConfiguration`. See
     /// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
-    configuration: ?WorkGroupConfiguration,
+    configuration: ?WorkGroupConfiguration = null,
 
     /// The date and time the workgroup was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The workgroup description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ARN of the IAM Identity Center enabled application associated with the
     /// workgroup.
-    identity_center_application_arn: ?[]const u8,
+    identity_center_application_arn: ?[]const u8 = null,
 
     /// The workgroup name.
     name: []const u8,
 
     /// The state of the workgroup: ENABLED or DISABLED.
-    state: ?WorkGroupState,
+    state: ?WorkGroupState = null,
 
     pub const json_field_names = .{
         .configuration = "Configuration",

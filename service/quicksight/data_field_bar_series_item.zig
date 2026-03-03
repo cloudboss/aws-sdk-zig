@@ -6,11 +6,11 @@ pub const DataFieldBarSeriesItem = struct {
     field_id: []const u8,
 
     /// Field value of the field that you are setting the series configuration for.
-    field_value: ?[]const u8,
+    field_value: ?[]const u8 = null,
 
     /// Options that determine the presentation of bar series associated to the
     /// field.
-    settings: ?BarChartSeriesSettings,
+    settings: ?BarChartSeriesSettings = null,
 
     pub const json_field_names = .{
         .field_id = "FieldId",

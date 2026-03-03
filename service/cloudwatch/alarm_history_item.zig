@@ -8,29 +8,29 @@ pub const AlarmHistoryItem = struct {
     /// A map of attributes that describe the alarm contributor associated with this
     /// history item, providing context about the contributor's characteristics at
     /// the time of the event.
-    alarm_contributor_attributes: ?[]const aws.map.StringMapEntry,
+    alarm_contributor_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The unique identifier of the alarm contributor associated with this history
     /// item, if applicable.
-    alarm_contributor_id: ?[]const u8,
+    alarm_contributor_id: ?[]const u8 = null,
 
     /// The descriptive name for the alarm.
-    alarm_name: ?[]const u8,
+    alarm_name: ?[]const u8 = null,
 
     /// The type of alarm, either metric alarm or composite alarm.
-    alarm_type: ?AlarmType,
+    alarm_type: ?AlarmType = null,
 
     /// Data about the alarm, in JSON format.
-    history_data: ?[]const u8,
+    history_data: ?[]const u8 = null,
 
     /// The type of alarm history item.
-    history_item_type: ?HistoryItemType,
+    history_item_type: ?HistoryItemType = null,
 
     /// A summary of the alarm history, in text format.
-    history_summary: ?[]const u8,
+    history_summary: ?[]const u8 = null,
 
     /// The time stamp for the alarm history item.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .alarm_contributor_attributes = "AlarmContributorAttributes",

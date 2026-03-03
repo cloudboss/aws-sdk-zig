@@ -6,18 +6,18 @@ const AwsWafRuleGroupRulesActionDetails = @import("aws_waf_rule_group_rules_acti
 pub const AwsWafRuleGroupRulesDetails = struct {
     /// Provides information about what action WAF should take on a web request when
     /// it matches the criteria defined in the rule.
-    action: ?AwsWafRuleGroupRulesActionDetails,
+    action: ?AwsWafRuleGroupRulesActionDetails = null,
 
     /// If you define more than one rule in a web ACL, WAF evaluates each request
     /// against the rules in order
     /// based on the value of `Priority`.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The rule ID for a rule.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     /// The type of rule.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

@@ -4,7 +4,7 @@ const SignInOrigin = @import("sign_in_origin.zig").SignInOrigin;
 pub const SignInOptions = struct {
     /// The URL that accepts authentication requests for an application. This is a
     /// required parameter if the `Origin` parameter is `APPLICATION`.
-    application_url: ?[]const u8,
+    application_url: ?[]const u8 = null,
 
     /// This determines how IAM Identity Center navigates the user to the target
     /// application. It can be one of the following values:

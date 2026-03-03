@@ -12,7 +12,7 @@ pub const FileSystemLustreMetadataConfiguration = struct {
     ///
     /// * For Intelligent-Tiering file systems, valid values are `6000`
     /// and `12000`.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// The metadata configuration mode for provisioning Metadata IOPS for the
     /// file system.

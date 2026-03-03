@@ -2,11 +2,11 @@
 /// same metadata key.
 pub const OtherMetadataValueListItem = struct {
     /// The time at which the entry was created.
-    created_time: ?[]const u8,
+    created_time: ?[]const u8 = null,
 
     /// The metadata key’s corresponding value for the other metadata belonging to
     /// the same metadata key.
-    metadata_value: ?[]const u8,
+    metadata_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_time = "CreatedTime",

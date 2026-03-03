@@ -10,28 +10,28 @@ const ContactMethodStatus = @import("contact_method_status.zig").ContactMethodSt
 /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications).
 pub const ContactMethod = struct {
     /// The Amazon Resource Name (ARN) of the contact method.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The destination of the contact method, such as an email address or a mobile
     /// phone
     /// number.
-    contact_endpoint: ?[]const u8,
+    contact_endpoint: ?[]const u8 = null,
 
     /// The timestamp when the contact method was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// An object that describes the location of the contact method, such as the
     /// Amazon Web Services Region and Availability Zone.
-    location: ?ResourceLocation,
+    location: ?ResourceLocation = null,
 
     /// The name of the contact method.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The protocol of the contact method, such as email or SMS (text messaging).
-    protocol: ?ContactProtocol,
+    protocol: ?ContactProtocol = null,
 
     /// The Lightsail resource type of the contact method.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The current status of the contact method.
     ///
@@ -44,14 +44,14 @@ pub const ContactMethod = struct {
     ///
     /// * `InValid` - An attempt was made to verify the contact method, but the
     /// verification has expired.
-    status: ?ContactMethodStatus,
+    status: ?ContactMethodStatus = null,
 
     /// The support code. Include this code in your email to support when you have
     /// questions about
     /// your Lightsail contact method. This code enables our support team to look up
     /// your
     /// Lightsail information more easily.
-    support_code: ?[]const u8,
+    support_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

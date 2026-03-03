@@ -7,21 +7,21 @@ const FargateProfileStatus = @import("fargate_profile_status.zig").FargateProfil
 /// An object representing an Fargate profile.
 pub const FargateProfile = struct {
     /// The name of your cluster.
-    cluster_name: ?[]const u8,
+    cluster_name: ?[]const u8 = null,
 
     /// The Unix epoch timestamp at object creation.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The full Amazon Resource Name (ARN) of the Fargate profile.
-    fargate_profile_arn: ?[]const u8,
+    fargate_profile_arn: ?[]const u8 = null,
 
     /// The name of the Fargate profile.
-    fargate_profile_name: ?[]const u8,
+    fargate_profile_name: ?[]const u8 = null,
 
     /// The health status of the Fargate profile. If there are issues with your
     /// Fargate
     /// profile's health, they are listed here.
-    health: ?FargateProfileHealth,
+    health: ?FargateProfileHealth = null,
 
     /// The Amazon Resource Name (ARN) of the `Pod` execution role to use for any
     /// `Pod`
@@ -29,22 +29,22 @@ pub const FargateProfile = struct {
     /// [
     /// `Pod` execution
     /// role](https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html) in the *Amazon EKS User Guide*.
-    pod_execution_role_arn: ?[]const u8,
+    pod_execution_role_arn: ?[]const u8 = null,
 
     /// The selectors to match for a `Pod` to use this Fargate profile.
-    selectors: ?[]const FargateProfileSelector,
+    selectors: ?[]const FargateProfileSelector = null,
 
     /// The current status of the Fargate profile.
-    status: ?FargateProfileStatus,
+    status: ?FargateProfileStatus = null,
 
     /// The IDs of subnets to launch a `Pod` into.
-    subnets: ?[]const []const u8,
+    subnets: ?[]const []const u8 = null,
 
     /// Metadata that assists with categorization and organization.
     /// Each tag consists of a key and an optional value. You define both. Tags
     /// don't
     /// propagate to any other cluster or Amazon Web Services resources.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .cluster_name = "clusterName",

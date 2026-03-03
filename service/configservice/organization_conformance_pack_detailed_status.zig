@@ -14,15 +14,15 @@ pub const OrganizationConformancePackDetailedStatus = struct {
 
     /// An error code that is returned when conformance pack creation or
     /// deletion failed in the member account.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// An error message indicating that conformance pack account creation or
     /// deletion
     /// has failed due to an error in the member account.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The timestamp of the last status update.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// Indicates deployment status for conformance pack in a member account.
     /// When management account calls `PutOrganizationConformancePack` action for

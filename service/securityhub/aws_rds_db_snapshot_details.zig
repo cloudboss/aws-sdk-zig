@@ -4,23 +4,23 @@ const AwsRdsDbProcessorFeature = @import("aws_rds_db_processor_feature.zig").Aws
 pub const AwsRdsDbSnapshotDetails = struct {
     /// The amount of storage (in gigabytes) to be initially allocated for the
     /// database instance.
-    allocated_storage: ?i32,
+    allocated_storage: ?i32 = null,
 
     /// Specifies the name of the Availability Zone in which the DB instance was
     /// located at the time of the DB snapshot.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// A name for the DB instance.
-    db_instance_identifier: ?[]const u8,
+    db_instance_identifier: ?[]const u8 = null,
 
     /// The identifier for the source DB instance.
-    dbi_resource_id: ?[]const u8,
+    dbi_resource_id: ?[]const u8 = null,
 
     /// The name or ARN of the DB snapshot that is used to restore the DB instance.
-    db_snapshot_identifier: ?[]const u8,
+    db_snapshot_identifier: ?[]const u8 = null,
 
     /// Whether the DB snapshot is encrypted.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The name of the database engine to use for this DB instance. Valid values
     /// are as follows:
@@ -52,61 +52,61 @@ pub const AwsRdsDbSnapshotDetails = struct {
     /// * `sqlserver-se`
     ///
     /// * `sqlserver-web`
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// The version of the database engine.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// Whether mapping of IAM accounts to database accounts is enabled.
-    iam_database_authentication_enabled: ?bool,
+    iam_database_authentication_enabled: ?bool = null,
 
     /// Specifies the time in Coordinated Universal Time (UTC) when the DB instance,
     /// from which the snapshot was taken, was created.
-    instance_create_time: ?[]const u8,
+    instance_create_time: ?[]const u8 = null,
 
     /// The provisioned IOPS (I/O operations per second) value of the DB instance at
     /// the time of the snapshot.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// If `Encrypted` is `true`, the KMS key identifier for the encrypted DB
     /// snapshot.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// License model information for the restored DB instance.
-    license_model: ?[]const u8,
+    license_model: ?[]const u8 = null,
 
     /// The master user name for the DB snapshot.
-    master_username: ?[]const u8,
+    master_username: ?[]const u8 = null,
 
     /// The option group name for the DB snapshot.
-    option_group_name: ?[]const u8,
+    option_group_name: ?[]const u8 = null,
 
     /// The percentage of the estimated data that has been transferred.
-    percent_progress: ?i32,
+    percent_progress: ?i32 = null,
 
     /// The port that the database engine was listening on at the time of the
     /// snapshot.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The number of CPU cores and the number of threads per core for the DB
     /// instance class of the DB instance.
-    processor_features: ?[]const AwsRdsDbProcessorFeature,
+    processor_features: ?[]const AwsRdsDbProcessorFeature = null,
 
     /// When the snapshot was taken in Coordinated Universal Time (UTC).
-    snapshot_create_time: ?[]const u8,
+    snapshot_create_time: ?[]const u8 = null,
 
     /// The type of the DB snapshot.
-    snapshot_type: ?[]const u8,
+    snapshot_type: ?[]const u8 = null,
 
     /// The DB snapshot ARN that the DB snapshot was copied from.
-    source_db_snapshot_identifier: ?[]const u8,
+    source_db_snapshot_identifier: ?[]const u8 = null,
 
     /// The Amazon Web Services Region that the DB snapshot was created in or copied
     /// from.
-    source_region: ?[]const u8,
+    source_region: ?[]const u8 = null,
 
     /// The status of this DB snapshot.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The storage type associated with the DB snapshot. Valid values are as
     /// follows:
@@ -116,17 +116,17 @@ pub const AwsRdsDbSnapshotDetails = struct {
     /// * `io1`
     ///
     /// * `standard`
-    storage_type: ?[]const u8,
+    storage_type: ?[]const u8 = null,
 
     /// The ARN from the key store with which to associate the instance for TDE
     /// encryption.
-    tde_credential_arn: ?[]const u8,
+    tde_credential_arn: ?[]const u8 = null,
 
     /// The time zone of the DB snapshot.
-    timezone: ?[]const u8,
+    timezone: ?[]const u8 = null,
 
     /// The VPC ID associated with the DB snapshot.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allocated_storage = "AllocatedStorage",

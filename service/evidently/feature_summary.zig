@@ -16,10 +16,10 @@ pub const FeatureSummary = struct {
     /// The name of the variation that is used as the default variation. The default
     /// variation is served to users who are not allocated to any ongoing launches
     /// or experiments of this feature.
-    default_variation: ?[]const u8,
+    default_variation: ?[]const u8 = null,
 
     /// An array of structures that define
-    evaluation_rules: ?[]const EvaluationRule,
+    evaluation_rules: ?[]const EvaluationRule = null,
 
     /// If this value is `ALL_RULES`, the traffic allocation specified by any
     /// ongoing launches or experiments is being used. If this is
@@ -33,13 +33,13 @@ pub const FeatureSummary = struct {
     name: []const u8,
 
     /// The name or ARN of the project that contains the feature.
-    project: ?[]const u8,
+    project: ?[]const u8 = null,
 
     /// The current state of the feature.
     status: FeatureStatus,
 
     /// The list of tag keys and values associated with this feature.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -7,7 +7,7 @@ pub const ContinuousHyperParameterRange = struct {
     min_value: f64 = 0,
 
     /// The name of the hyperparameter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_value = "maxValue",

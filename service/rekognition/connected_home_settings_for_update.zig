@@ -5,10 +5,10 @@ pub const ConnectedHomeSettingsForUpdate = struct {
     /// Specifies what you want to detect in the video, such as people, packages, or
     /// pets. The current valid labels you can include in this list are: "PERSON",
     /// "PET", "PACKAGE", and "ALL".
-    labels: ?[]const []const u8,
+    labels: ?[]const []const u8 = null,
 
     /// The minimum confidence required to label an object in the video.
-    min_confidence: ?f32,
+    min_confidence: ?f32 = null,
 
     pub const json_field_names = .{
         .labels = "Labels",

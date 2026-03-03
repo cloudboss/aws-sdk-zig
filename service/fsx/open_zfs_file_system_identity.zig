@@ -5,7 +5,7 @@ const OpenZFSFileSystemUserType = @import("open_zfs_file_system_user_type.zig").
 /// all file access requests that are made using the S3 access point.
 pub const OpenZFSFileSystemIdentity = struct {
     /// Specifies the UID and GIDs of the file system POSIX user.
-    posix_user: ?OpenZFSPosixFileSystemUser,
+    posix_user: ?OpenZFSPosixFileSystemUser = null,
 
     /// Specifies the FSx for OpenZFS user identity type, accepts only `POSIX`.
     @"type": OpenZFSFileSystemUserType,

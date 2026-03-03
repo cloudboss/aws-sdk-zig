@@ -1,7 +1,7 @@
 /// The configuration of an event that the application subscribes.
 pub const Subscription = struct {
     /// The description of the subscription.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the subscription.
     event: []const u8,

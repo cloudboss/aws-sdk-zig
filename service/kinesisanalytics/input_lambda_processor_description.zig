@@ -6,10 +6,10 @@
 pub const InputLambdaProcessorDescription = struct {
     /// The ARN of the [AWS Lambda](https://docs.aws.amazon.com/lambda/) function
     /// that is used to preprocess the records in the stream.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The ARN of the IAM role that is used to access the AWS Lambda function.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resource_arn = "ResourceARN",

@@ -19,7 +19,7 @@ pub const LaunchConfiguration = struct {
     /// VPC](https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html)
     /// in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    associate_public_ip_address: ?bool,
+    associate_public_ip_address: ?bool = null,
 
     /// The block device mapping entries that define the block devices to attach to
     /// the
@@ -27,13 +27,13 @@ pub const LaunchConfiguration = struct {
     /// device mapping
     /// for the AMI are used. For more information, see [Block device
     /// mappings](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html) in the *Amazon EC2 User Guide*.
-    block_device_mappings: ?[]const BlockDeviceMapping,
+    block_device_mappings: ?[]const BlockDeviceMapping = null,
 
     /// Available for backward compatibility.
-    classic_link_vpc_id: ?[]const u8,
+    classic_link_vpc_id: ?[]const u8 = null,
 
     /// Available for backward compatibility.
-    classic_link_vpc_security_groups: ?[]const []const u8,
+    classic_link_vpc_security_groups: ?[]const []const u8 = null,
 
     /// The creation date and time for the launch configuration.
     created_time: i64,
@@ -42,7 +42,7 @@ pub const LaunchConfiguration = struct {
     /// (`true`) or not (`false`). For more information, see [Amazon EBS-optimized
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the
     /// *Amazon EC2 User Guide*.
-    ebs_optimized: ?bool,
+    ebs_optimized: ?bool = null,
 
     /// The name or the Amazon Resource Name (ARN) of the instance profile
     /// associated with the
@@ -51,7 +51,7 @@ pub const LaunchConfiguration = struct {
     /// information, see [IAM role for applications that run
     /// on Amazon EC2
     /// instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/us-iam-role.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    iam_instance_profile: ?[]const u8,
+    iam_instance_profile: ?[]const u8 = null,
 
     /// The ID of the Amazon Machine Image (AMI) to use to launch your EC2
     /// instances. For more
@@ -67,7 +67,7 @@ pub const LaunchConfiguration = struct {
     /// monitoring for Auto Scaling
     /// instances](https://docs.aws.amazon.com/autoscaling/latest/userguide/enable-as-instance-metrics.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    instance_monitoring: ?InstanceMonitoring,
+    instance_monitoring: ?InstanceMonitoring = null,
 
     /// The instance type for the instances. For information about available
     /// instance types,
@@ -77,16 +77,16 @@ pub const LaunchConfiguration = struct {
     instance_type: []const u8,
 
     /// The ID of the kernel associated with the AMI.
-    kernel_id: ?[]const u8,
+    kernel_id: ?[]const u8 = null,
 
     /// The name of the key pair.
     ///
     /// For more information, see [Amazon EC2 key pairs and Amazon EC2
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide*.
-    key_name: ?[]const u8,
+    key_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the launch configuration.
-    launch_configuration_arn: ?[]const u8,
+    launch_configuration_arn: ?[]const u8 = null,
 
     /// The name of the launch configuration.
     launch_configuration_name: []const u8,
@@ -95,15 +95,15 @@ pub const LaunchConfiguration = struct {
     /// the instance metadata
     /// options](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    metadata_options: ?InstanceMetadataOptions,
+    metadata_options: ?InstanceMetadataOptions = null,
 
     /// The tenancy of the instance, either `default` or `dedicated`. An
     /// instance with `dedicated` tenancy runs on isolated, single-tenant hardware
     /// and can only be launched into a VPC.
-    placement_tenancy: ?[]const u8,
+    placement_tenancy: ?[]const u8 = null,
 
     /// The ID of the RAM disk associated with the AMI.
-    ramdisk_id: ?[]const u8,
+    ramdisk_id: ?[]const u8 = null,
 
     /// A list that contains the security groups to assign to the instances in the
     /// Auto Scaling group.
@@ -111,7 +111,7 @@ pub const LaunchConfiguration = struct {
     /// resources using security
     /// groups](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) in the *Amazon Virtual Private
     /// Cloud User Guide*.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// The maximum hourly price to be paid for any Spot Instance launched to
     /// fulfill the
@@ -120,7 +120,7 @@ pub const LaunchConfiguration = struct {
     /// price. For more information, see [Requesting Spot
     /// Instances for fault-tolerant and flexible
     /// applications](https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-template-spot-instances.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    spot_price: ?[]const u8,
+    spot_price: ?[]const u8 = null,
 
     /// The user data to make available to the launched EC2 instances. For more
     /// information,
@@ -130,5 +130,5 @@ pub const LaunchConfiguration = struct {
     /// is performed for you, and you can load the text from a file. Otherwise, you
     /// must provide
     /// base64-encoded text. User data is limited to 16 KB.
-    user_data: ?[]const u8,
+    user_data: ?[]const u8 = null,
 };

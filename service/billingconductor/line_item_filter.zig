@@ -13,7 +13,7 @@ pub const LineItemFilter = struct {
     attribute: LineItemFilterAttributeName,
 
     /// The values of the line item filter. This specifies the values to filter on.
-    attribute_values: ?[]const []const u8,
+    attribute_values: ?[]const []const u8 = null,
 
     /// The match criteria of the line item filter. This parameter specifies whether
     /// not to include the resource value from the billing group total cost.

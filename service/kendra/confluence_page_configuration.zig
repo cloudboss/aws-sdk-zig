@@ -13,7 +13,7 @@ pub const ConfluencePageConfiguration = struct {
     ///
     /// If you specify the `PageFieldMappings` parameter, you must specify at least
     /// one field mapping.
-    page_field_mappings: ?[]const ConfluencePageToIndexFieldMapping,
+    page_field_mappings: ?[]const ConfluencePageToIndexFieldMapping = null,
 
     pub const json_field_names = .{
         .page_field_mappings = "PageFieldMappings",

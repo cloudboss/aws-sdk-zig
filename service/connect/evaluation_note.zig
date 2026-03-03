@@ -7,7 +7,7 @@ pub const EvaluationNote = struct {
     /// chars for all the notes in the evaluation combined. Assuming there are N
     /// questions in the evaluation being
     /// submitted, then the max char limit for all notes combined is N x 1024.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .value = "Value",

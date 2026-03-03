@@ -8,7 +8,7 @@ pub const KxDatabaseCacheConfiguration = struct {
     cache_type: []const u8,
 
     /// The name of the dataview to be used for caching historical data on disk.
-    dataview_name: ?[]const u8,
+    dataview_name: ?[]const u8 = null,
 
     /// Specifies the portions of database that will be loaded into the cache for
     /// access.

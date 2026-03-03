@@ -19,7 +19,7 @@ pub const MSKSourceConfiguration = struct {
     /// SDK or CLI,
     /// you need to set the `ReadFromTimestamp` parameter to Epoch
     /// (1970-01-01T00:00:00Z).
-    read_from_timestamp: ?i64,
+    read_from_timestamp: ?i64 = null,
 
     /// The topic name within the Amazon MSK cluster.
     topic_name: []const u8,

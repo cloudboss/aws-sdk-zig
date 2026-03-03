@@ -9,7 +9,7 @@ pub const ListTagsForResourceResponse = struct {
     /// * An optional tag value field. For example, `111122223333`, `Production`, or
     ///   a team name. Omitting the tag value is the same as using an empty string.
     ///   Tag values are case sensitive.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .tags = "tags",

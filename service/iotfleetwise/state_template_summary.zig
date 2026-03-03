@@ -5,28 +5,28 @@
 /// availability](https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html) in the *Amazon Web Services IoT FleetWise Developer Guide*.
 pub const StateTemplateSummary = struct {
     /// The Amazon Resource Name (ARN) of the state template.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time the state template was created, in seconds since epoch (January 1,
     /// 1970 at midnight UTC time).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A brief description of the state template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique ID of the state template.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The time the state template was last updated, in seconds since epoch
     /// (January 1, 1970 at midnight UTC time).
-    last_modification_time: ?i64,
+    last_modification_time: ?i64 = null,
 
     /// The name of the state template.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the signal catalog associated with the
     /// state template.
-    signal_catalog_arn: ?[]const u8,
+    signal_catalog_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

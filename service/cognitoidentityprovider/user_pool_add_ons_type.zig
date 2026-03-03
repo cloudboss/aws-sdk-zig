@@ -17,7 +17,7 @@ pub const UserPoolAddOnsType = struct {
     /// in your
     /// user pool, including custom
     /// authentication.
-    advanced_security_additional_flows: ?AdvancedSecurityAdditionalFlowsType,
+    advanced_security_additional_flows: ?AdvancedSecurityAdditionalFlowsType = null,
 
     /// The operating mode of threat protection for standard authentication types in
     /// your user

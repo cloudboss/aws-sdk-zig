@@ -13,7 +13,7 @@ pub const ParseToOCSF = struct {
     event_source: EventSource,
 
     /// The version of the OCSF mapping to use for parsing log data.
-    mapping_version: ?[]const u8,
+    mapping_version: ?[]const u8 = null,
 
     /// Specify which version of the OCSF schema to use for the transformed log
     /// events.
@@ -22,7 +22,7 @@ pub const ParseToOCSF = struct {
     /// The path to the field in the log event that you want to parse. If you omit
     /// this value, the
     /// whole log message is parsed.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .event_source = "eventSource",

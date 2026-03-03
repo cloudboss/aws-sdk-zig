@@ -7,7 +7,7 @@ pub const ManagedApplicationAutoScalingPolicy = struct {
     /// The Amazon Resource Name (ARN) of the Application Auto Scaling policy
     /// associated with
     /// the Express service.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The metric used for auto scaling decisions. The available metrics are
     /// `ECSServiceAverageCPUUtilization`,
@@ -26,7 +26,7 @@ pub const ManagedApplicationAutoScalingPolicy = struct {
 
     /// Information about why the Application Auto Scaling policy is in the current
     /// status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The target value for the auto scaling metric.
     target_value: f64 = 0,

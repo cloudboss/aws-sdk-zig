@@ -4,18 +4,18 @@ const ExperimentTemplateReportConfigurationOutputsInput = @import("experiment_te
 /// Specifies the input for the experiment report configuration.
 pub const UpdateExperimentTemplateReportConfigurationInput = struct {
     /// The data sources for the experiment report.
-    data_sources: ?ExperimentTemplateReportConfigurationDataSourcesInput,
+    data_sources: ?ExperimentTemplateReportConfigurationDataSourcesInput = null,
 
     /// Describes the output destinations of the experiment report.
-    outputs: ?ExperimentTemplateReportConfigurationOutputsInput,
+    outputs: ?ExperimentTemplateReportConfigurationOutputsInput = null,
 
     /// The duration after the experiment end time for the data sources to include
     /// in the report.
-    post_experiment_duration: ?[]const u8,
+    post_experiment_duration: ?[]const u8 = null,
 
     /// The duration before the experiment start time for the data sources to
     /// include in the report.
-    pre_experiment_duration: ?[]const u8,
+    pre_experiment_duration: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_sources = "dataSources",

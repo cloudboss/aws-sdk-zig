@@ -3,7 +3,7 @@ const TargetSelection = @import("target_selection.zig").TargetSelection;
 
 pub const ListJobsRequest = struct {
     /// The maximum number of results to return per request.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The namespace used to indicate that a job is a customer-managed job.
     ///
@@ -17,14 +17,14 @@ pub const ListJobsRequest = struct {
     /// For
     /// more information, see [Setting up IoT Greengrass core
     /// devices.](https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html)
-    namespace_id: ?[]const u8,
+    namespace_id: ?[]const u8 = null,
 
     /// The token to retrieve the next set of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// An optional filter that lets you search for jobs that have the specified
     /// status.
-    status: ?JobStatus,
+    status: ?JobStatus = null,
 
     /// Specifies whether the job will continue to run (CONTINUOUS), or will be
     /// complete
@@ -41,13 +41,13 @@ pub const ListJobsRequest = struct {
     /// thing group targets. By using continuous jobs, devices that join the group
     /// receive
     /// the job execution even after the job has been created.
-    target_selection: ?TargetSelection,
+    target_selection: ?TargetSelection = null,
 
     /// A filter that limits the returned jobs to those for the specified group.
-    thing_group_id: ?[]const u8,
+    thing_group_id: ?[]const u8 = null,
 
     /// A filter that limits the returned jobs to those for the specified group.
-    thing_group_name: ?[]const u8,
+    thing_group_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "maxResults",

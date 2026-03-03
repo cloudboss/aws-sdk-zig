@@ -43,5 +43,5 @@ pub const StackInstanceComprehensiveStatus = struct {
     ///
     /// * `SUCCEEDED`: The operation in the specified account and Region completed
     /// successfully.
-    detailed_status: ?StackInstanceDetailedStatus,
+    detailed_status: ?StackInstanceDetailedStatus = null,
 };

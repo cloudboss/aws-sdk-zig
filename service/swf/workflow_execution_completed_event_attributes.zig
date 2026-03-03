@@ -9,7 +9,7 @@ pub const WorkflowExecutionCompletedEventAttributes = struct {
     decision_task_completed_event_id: i64 = 0,
 
     /// The result produced by the workflow execution upon successful completion.
-    result: ?[]const u8,
+    result: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .decision_task_completed_event_id = "decisionTaskCompletedEventId",

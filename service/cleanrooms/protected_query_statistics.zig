@@ -3,11 +3,11 @@ const BilledResourceUtilization = @import("billed_resource_utilization.zig").Bil
 /// Contains statistics about the execution of the protected query.
 pub const ProtectedQueryStatistics = struct {
     /// The billed resource utilization.
-    billed_resource_utilization: ?BilledResourceUtilization,
+    billed_resource_utilization: ?BilledResourceUtilization = null,
 
     /// The duration of the protected query, from creation until query completion,
     /// in milliseconds.
-    total_duration_in_millis: ?i64,
+    total_duration_in_millis: ?i64 = null,
 
     pub const json_field_names = .{
         .billed_resource_utilization = "billedResourceUtilization",

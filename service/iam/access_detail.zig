@@ -19,7 +19,7 @@ pub const AccessDetail = struct {
     /// reported Organizations entity attempted to access the service within the
     /// [tracking
     /// period](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
-    entity_path: ?[]const u8,
+    entity_path: ?[]const u8 = null,
 
     /// The date and time, in [ISO 8601 date-time
     /// format](http://www.iso.org/iso/iso8601), when an authenticated principal
@@ -30,7 +30,7 @@ pub const AccessDetail = struct {
     /// attempted to access the
     /// service within the [tracking
     /// period](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
-    last_authenticated_time: ?i64,
+    last_authenticated_time: ?i64 = null,
 
     /// The Region where the last service access attempt occurred.
     ///
@@ -38,7 +38,7 @@ pub const AccessDetail = struct {
     /// attempted to access the
     /// service within the [tracking
     /// period](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The name of the service in which access was attempted.
     service_name: []const u8,
@@ -61,5 +61,5 @@ pub const AccessDetail = struct {
     /// The number of accounts with authenticated principals (root user, IAM users,
     /// and IAM
     /// roles) that attempted to access the service in the tracking period.
-    total_authenticated_entities: ?i32,
+    total_authenticated_entities: ?i32 = null,
 };

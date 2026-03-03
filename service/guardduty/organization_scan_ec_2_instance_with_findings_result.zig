@@ -5,7 +5,7 @@ const OrganizationEbsVolumesResult = @import("organization_ebs_volumes_result.zi
 /// for an organization.
 pub const OrganizationScanEc2InstanceWithFindingsResult = struct {
     /// Describes the configuration for scanning EBS volumes for an organization.
-    ebs_volumes: ?OrganizationEbsVolumesResult,
+    ebs_volumes: ?OrganizationEbsVolumesResult = null,
 
     pub const json_field_names = .{
         .ebs_volumes = "EbsVolumes",

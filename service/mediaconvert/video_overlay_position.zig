@@ -11,16 +11,16 @@ pub const VideoOverlayPosition = struct {
     /// video overlay will be rendered with a height of 540. To scale your overlay
     /// to a specific height while automatically maintaining its original aspect
     /// ratio, enter a value for Height and leave Width blank.
-    height: ?i32,
+    height: ?i32 = null,
 
     /// Use Opacity to specify how much of the underlying video shows through the
     /// overlay video. 0 is transparent and 100 is fully opaque. Default is 100.
-    opacity: ?i32,
+    opacity: ?i32 = null,
 
     /// Specify the Unit type to use when you enter a value for X position, Y
     /// position, Width, or Height. You can choose Pixels or Percentage. Leave blank
     /// to use the default value, Pixels.
-    unit: ?VideoOverlayUnit,
+    unit: ?VideoOverlayUnit = null,
 
     /// To scale your video overlay to the same width as the base input video: Leave
     /// blank. To scale the width of your video overlay to a different width: Enter
@@ -31,7 +31,7 @@ pub const VideoOverlayPosition = struct {
     /// overlay will scale to a width of 960. To scale your overlay to a specific
     /// width while automatically maintaining its original aspect ratio, enter a
     /// value for Width and leave Height blank.
-    width: ?i32,
+    width: ?i32 = null,
 
     /// To position the left edge of your video overlay along the left edge of the
     /// base input video's frame: Keep blank, or enter 0. To position the left edge
@@ -42,7 +42,7 @@ pub const VideoOverlayPosition = struct {
     /// edge of the base input video's frame. When you enter 10, choose Percentage,
     /// and your base input video is 1920x1080, your video overlay will be
     /// positioned 192 pixels from the left edge of the base input video's frame.
-    x_position: ?i32,
+    x_position: ?i32 = null,
 
     /// To position the top edge of your video overlay along the top edge of the
     /// base input video's frame: Keep blank, or enter 0. To position the top edge
@@ -53,7 +53,7 @@ pub const VideoOverlayPosition = struct {
     /// the base input video's frame. When you enter 10, choose Percentage, and your
     /// underlying video is 1920x1080, your video overlay will be positioned 108
     /// pixels from the top edge of the base input video's frame.
-    y_position: ?i32,
+    y_position: ?i32 = null,
 
     pub const json_field_names = .{
         .height = "Height",

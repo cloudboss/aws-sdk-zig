@@ -9,7 +9,7 @@ const SecretsManagerConfiguration = @import("secrets_manager_configuration.zig")
 /// Describes the configuration of a destination in Amazon Redshift.
 pub const RedshiftDestinationConfiguration = struct {
     /// The CloudWatch logging options for your Firehose stream.
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The database connection string.
     cluster_jdbcurl: []const u8,
@@ -18,14 +18,14 @@ pub const RedshiftDestinationConfiguration = struct {
     copy_command: CopyCommand,
 
     /// The user password.
-    password: ?[]const u8,
+    password: ?[]const u8 = null,
 
     /// The data processing configuration.
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The retry behavior in case Firehose is unable to deliver documents to
     /// Amazon Redshift. Default value is 3600 (60 minutes).
-    retry_options: ?RedshiftRetryOptions,
+    retry_options: ?RedshiftRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
     /// more
@@ -35,14 +35,14 @@ pub const RedshiftDestinationConfiguration = struct {
     role_arn: []const u8,
 
     /// The configuration for backup in Amazon S3.
-    s3_backup_configuration: ?S3DestinationConfiguration,
+    s3_backup_configuration: ?S3DestinationConfiguration = null,
 
     /// The Amazon S3 backup mode. After you create a Firehose stream, you can
     /// update it to
     /// enable Amazon S3 backup if it is disabled. If backup is enabled, you can't
     /// update the
     /// Firehose stream to disable it.
-    s3_backup_mode: ?RedshiftS3BackupMode,
+    s3_backup_mode: ?RedshiftS3BackupMode = null,
 
     /// The configuration for the intermediate Amazon S3 location from which Amazon
     /// Redshift
@@ -57,10 +57,10 @@ pub const RedshiftDestinationConfiguration = struct {
     s3_configuration: S3DestinationConfiguration,
 
     /// The configuration that defines how you access secrets for Amazon Redshift.
-    secrets_manager_configuration: ?SecretsManagerConfiguration,
+    secrets_manager_configuration: ?SecretsManagerConfiguration = null,
 
     /// The name of the user.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cloud_watch_logging_options = "CloudWatchLoggingOptions",

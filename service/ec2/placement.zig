@@ -6,7 +6,7 @@ pub const Placement = struct {
     ///
     /// This parameter is not supported for
     /// [CreateFleet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet) or [ImportInstance](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html).
-    affinity: ?[]const u8,
+    affinity: ?[]const u8 = null,
 
     /// The Availability Zone of the instance.
     ///
@@ -17,7 +17,7 @@ pub const Placement = struct {
     ///
     /// This parameter is not supported for
     /// [CreateFleet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the Availability Zone of the instance.
     ///
@@ -28,25 +28,25 @@ pub const Placement = struct {
     ///
     /// This parameter is not supported for
     /// [CreateFleet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The ID of the placement group that the instance is in.
     ///
     /// On input, you can specify `GroupId` or `GroupName`,
     /// but not both.
-    group_id: ?[]const u8,
+    group_id: ?[]const u8 = null,
 
     /// The name of the placement group that the instance is in.
     ///
     /// On input, you can specify `GroupId` or `GroupName`,
     /// but not both.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// The ID of the Dedicated Host on which the instance resides.
     ///
     /// This parameter is not supported for
     /// [CreateFleet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet) or [ImportInstance](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html).
-    host_id: ?[]const u8,
+    host_id: ?[]const u8 = null,
 
     /// The ARN of the host resource group in which to launch the instances.
     ///
@@ -55,7 +55,7 @@ pub const Placement = struct {
     ///
     /// This parameter is not supported for
     /// [CreateFleet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
-    host_resource_group_arn: ?[]const u8,
+    host_resource_group_arn: ?[]const u8 = null,
 
     /// The number of the partition that the instance is in. Valid only if the
     /// placement group
@@ -63,10 +63,10 @@ pub const Placement = struct {
     ///
     /// This parameter is not supported for
     /// [CreateFleet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
-    partition_number: ?i32,
+    partition_number: ?i32 = null,
 
     /// Reserved for future use.
-    spread_domain: ?[]const u8,
+    spread_domain: ?[]const u8 = null,
 
     /// The tenancy of the instance. An instance with a
     /// tenancy of `dedicated` runs on single-tenant hardware.
@@ -77,5 +77,5 @@ pub const Placement = struct {
     /// [ImportInstance](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html) or
     /// for T3 instances that are configured for the `unlimited` CPU credit
     /// option.
-    tenancy: ?Tenancy,
+    tenancy: ?Tenancy = null,
 };

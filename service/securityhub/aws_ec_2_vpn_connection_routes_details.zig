@@ -2,10 +2,10 @@
 /// the VPN connection.
 pub const AwsEc2VpnConnectionRoutesDetails = struct {
     /// The CIDR block associated with the local subnet of the customer data center.
-    destination_cidr_block: ?[]const u8,
+    destination_cidr_block: ?[]const u8 = null,
 
     /// The current state of the static route.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_cidr_block = "DestinationCidrBlock",

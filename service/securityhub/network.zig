@@ -6,46 +6,46 @@ pub const Network = struct {
     /// The destination domain of network-related information about a finding.
     ///
     /// Length Constraints: Minimum of 1. Maximum of 128.
-    destination_domain: ?[]const u8,
+    destination_domain: ?[]const u8 = null,
 
     /// The destination IPv4 address of network-related information about a finding.
-    destination_ip_v4: ?[]const u8,
+    destination_ip_v4: ?[]const u8 = null,
 
     /// The destination IPv6 address of network-related information about a finding.
-    destination_ip_v6: ?[]const u8,
+    destination_ip_v6: ?[]const u8 = null,
 
     /// The destination port of network-related information about a finding.
-    destination_port: ?i32,
+    destination_port: ?i32 = null,
 
     /// The direction of network traffic associated with a finding.
-    direction: ?NetworkDirection,
+    direction: ?NetworkDirection = null,
 
     /// The range of open ports that is present on the network.
-    open_port_range: ?PortRange,
+    open_port_range: ?PortRange = null,
 
     /// The protocol of network-related information about a finding.
     ///
     /// Length Constraints: Minimum of 1. Maximum of 16.
-    protocol: ?[]const u8,
+    protocol: ?[]const u8 = null,
 
     /// The source domain of network-related information about a finding.
     ///
     /// Length Constraints: Minimum of 1. Maximum of 128.
-    source_domain: ?[]const u8,
+    source_domain: ?[]const u8 = null,
 
     /// The source IPv4 address of network-related information about a finding.
-    source_ip_v4: ?[]const u8,
+    source_ip_v4: ?[]const u8 = null,
 
     /// The source IPv6 address of network-related information about a finding.
-    source_ip_v6: ?[]const u8,
+    source_ip_v6: ?[]const u8 = null,
 
     /// The source media access control (MAC) address of network-related information
     /// about a
     /// finding.
-    source_mac: ?[]const u8,
+    source_mac: ?[]const u8 = null,
 
     /// The source port of network-related information about a finding.
-    source_port: ?i32,
+    source_port: ?i32 = null,
 
     pub const json_field_names = .{
         .destination_domain = "DestinationDomain",

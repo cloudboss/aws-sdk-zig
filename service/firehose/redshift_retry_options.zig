@@ -8,7 +8,7 @@ pub const RedshiftRetryOptions = struct {
     /// `DurationInSeconds` is 0 (zero) or if the first delivery attempt takes
     /// longer
     /// than the current value.
-    duration_in_seconds: ?i32,
+    duration_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .duration_in_seconds = "DurationInSeconds",

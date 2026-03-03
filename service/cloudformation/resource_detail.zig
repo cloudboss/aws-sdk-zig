@@ -6,7 +6,7 @@ const WarningDetail = @import("warning_detail.zig").WarningDetail;
 /// Details about a resource in a generated template
 pub const ResourceDetail = struct {
     /// The logical id for this resource in the final generated template.
-    logical_resource_id: ?[]const u8,
+    logical_resource_id: ?[]const u8 = null,
 
     /// A list of up to 256 key-value pairs that identifies the resource in the
     /// generated template.
@@ -19,7 +19,7 @@ pub const ResourceDetail = struct {
     /// the primary identifiers is `TableName` so the key-value pair could be
     /// `"TableName": "MyDDBTable"`. For more information, see
     /// [primaryIdentifier](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier) in the *CloudFormation Command Line Interface (CLI) User Guide*.
-    resource_identifier: ?[]const aws.map.StringMapEntry,
+    resource_identifier: ?[]const aws.map.StringMapEntry = null,
 
     /// Status of the processing of a resource in a generated template.
     ///
@@ -54,19 +54,19 @@ pub const ResourceDetail = struct {
     /// **
     ///
     /// The resource processing has failed.
-    resource_status: ?GeneratedTemplateResourceStatus,
+    resource_status: ?GeneratedTemplateResourceStatus = null,
 
     /// The reason for the resource detail, providing more information if a failure
     /// happened.
-    resource_status_reason: ?[]const u8,
+    resource_status_reason: ?[]const u8 = null,
 
     /// The type of the resource, such as `AWS::DynamoDB::Table`. For the list of
     /// supported resources, see [Resource type
     /// support for imports and drift
     /// detection](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html) In the
     /// *CloudFormation User Guide*
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The warnings generated for this resource.
-    warnings: ?[]const WarningDetail,
+    warnings: ?[]const WarningDetail = null,
 };

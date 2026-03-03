@@ -9,24 +9,24 @@ pub const ConditionalForwarder = struct {
     /// The IP addresses of the remote DNS server associated with RemoteDomainName.
     /// This is the
     /// IP address of the DNS server that your conditional forwarder points to.
-    dns_ip_addrs: ?[]const []const u8,
+    dns_ip_addrs: ?[]const []const u8 = null,
 
     /// The IPv6 addresses of the remote DNS server associated with
     /// RemoteDomainName. This is the
     /// IPv6 address of the DNS server that your conditional forwarder points to.
-    dns_ipv_6_addrs: ?[]const []const u8,
+    dns_ipv_6_addrs: ?[]const []const u8 = null,
 
     /// The fully qualified domain name (FQDN) of the remote domains pointed to by
     /// the
     /// conditional forwarder.
-    remote_domain_name: ?[]const u8,
+    remote_domain_name: ?[]const u8 = null,
 
     /// The replication scope of the conditional forwarder. The only allowed value
     /// is
     /// `Domain`, which will replicate the conditional forwarder to all of the
     /// domain
     /// controllers for your Amazon Web Services directory.
-    replication_scope: ?ReplicationScope,
+    replication_scope: ?ReplicationScope = null,
 
     pub const json_field_names = .{
         .dns_ip_addrs = "DnsIpAddrs",

@@ -13,7 +13,7 @@ pub const GuardrailTopic = struct {
 
     /// A list of prompts, each of which is an example of a prompt that can be
     /// categorized as belonging to the topic.
-    examples: ?[]const []const u8,
+    examples: ?[]const []const u8 = null,
 
     /// The action to take when harmful content is detected in the input. Supported
     /// values include:
@@ -21,12 +21,12 @@ pub const GuardrailTopic = struct {
     /// * `BLOCK` – Block the content and replace it with blocked messaging.
     /// * `NONE` – Take no action but return detection information in the trace
     ///   response.
-    input_action: ?GuardrailTopicAction,
+    input_action: ?GuardrailTopicAction = null,
 
     /// Indicates whether guardrail evaluation is enabled on the input. When
     /// disabled, you aren't charged for the evaluation. The evaluation doesn't
     /// appear in the response.
-    input_enabled: ?bool,
+    input_enabled: ?bool = null,
 
     /// The name of the topic to deny.
     name: []const u8,
@@ -37,15 +37,15 @@ pub const GuardrailTopic = struct {
     /// * `BLOCK` – Block the content and replace it with blocked messaging.
     /// * `NONE` – Take no action but return detection information in the trace
     ///   response.
-    output_action: ?GuardrailTopicAction,
+    output_action: ?GuardrailTopicAction = null,
 
     /// Indicates whether guardrail evaluation is enabled on the output. When
     /// disabled, you aren't charged for the evaluation. The evaluation doesn't
     /// appear in the response.
-    output_enabled: ?bool,
+    output_enabled: ?bool = null,
 
     /// Specifies to deny the topic.
-    @"type": ?GuardrailTopicType,
+    @"type": ?GuardrailTopicType = null,
 
     pub const json_field_names = .{
         .definition = "definition",

@@ -54,7 +54,7 @@ pub const RestoreTestingPlanForCreate = struct {
     /// Optional. This is the timezone in which the schedule
     /// expression is set. By default, ScheduleExpressions are in UTC.
     /// You can modify this to a specified timezone.
-    schedule_expression_timezone: ?[]const u8,
+    schedule_expression_timezone: ?[]const u8 = null,
 
     /// Defaults to 24 hours.
     ///

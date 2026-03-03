@@ -7,19 +7,19 @@ const Severity = @import("severity.zig").Severity;
 /// severity level.
 pub const AuditorResult = struct {
     /// The name of the auditor algorithm that generated this result.
-    auditor: ?[]const u8,
+    auditor: ?[]const u8 = null,
 
     /// This is a string-to-string map. It contains additional data about the result
     /// of an automated audit analysis.
-    data: ?[]const aws.map.StringMapEntry,
+    data: ?[]const aws.map.StringMapEntry = null,
 
     /// A detailed description of the audit finding, explaining what was observed
     /// and potential implications.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The severity level of this audit finding, indicating the importance and
     /// potential impact of the issue.
-    severity: ?Severity,
+    severity: ?Severity = null,
 
     pub const json_field_names = .{
         .auditor = "Auditor",

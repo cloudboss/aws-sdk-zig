@@ -7,46 +7,46 @@ const NodeState = @import("node_state.zig").NodeState;
 /// Placeholder documentation for DescribeNodeSummary
 pub const DescribeNodeSummary = struct {
     /// The ARN of the Node. It is automatically assigned when the Node is created.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// An array of IDs. Each ID is one ChannelPlacementGroup that is associated
     /// with this Node. Empty if the Node is not yet associated with any groups.
-    channel_placement_groups: ?[]const []const u8,
+    channel_placement_groups: ?[]const []const u8 = null,
 
     /// The ID of the Cluster that the Node belongs to.
-    cluster_id: ?[]const u8,
+    cluster_id: ?[]const u8 = null,
 
     /// The current connection state of the Node.
-    connection_state: ?NodeConnectionState,
+    connection_state: ?NodeConnectionState = null,
 
     /// The unique ID of the Node. Unique in the Cluster. The ID is the resource-id
     /// portion of the ARN.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The EC2 ARN of the Instance associated with the Node.
-    instance_arn: ?[]const u8,
+    instance_arn: ?[]const u8 = null,
 
     /// At the routing layer will get it from the callerId/context for use with
     /// bring your own device.
-    managed_instance_id: ?[]const u8,
+    managed_instance_id: ?[]const u8 = null,
 
     /// The name that you specified for the Node.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Documentation update needed
-    node_interface_mappings: ?[]const NodeInterfaceMapping,
+    node_interface_mappings: ?[]const NodeInterfaceMapping = null,
 
     /// The initial role current role of the Node in the Cluster. ACTIVE means the
     /// Node is available for encoding. BACKUP means the Node is a redundant Node
     /// and might get used if an ACTIVE Node fails.
-    role: ?NodeRole,
+    role: ?NodeRole = null,
 
     /// An array of SDI source mappings. Each mapping connects one logical SdiSource
     /// to the physical SDI card and port that the physical SDI source uses.
-    sdi_source_mappings: ?[]const SdiSourceMapping,
+    sdi_source_mappings: ?[]const SdiSourceMapping = null,
 
     /// The current state of the Node.
-    state: ?NodeState,
+    state: ?NodeState = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

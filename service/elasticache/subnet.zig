@@ -8,18 +8,18 @@ const NetworkType = @import("network_type.zig").NetworkType;
 /// ElastiCache.
 pub const Subnet = struct {
     /// The Availability Zone associated with the subnet.
-    subnet_availability_zone: ?AvailabilityZone,
+    subnet_availability_zone: ?AvailabilityZone = null,
 
     /// The unique identifier for the subnet.
-    subnet_identifier: ?[]const u8,
+    subnet_identifier: ?[]const u8 = null,
 
     /// The outpost ARN of the subnet.
-    subnet_outpost: ?SubnetOutpost,
+    subnet_outpost: ?SubnetOutpost = null,
 
     /// Either `ipv4` | `ipv6` | `dual_stack`. IPv6 is
     /// supported for workloads using Valkey 7.2 and above, Redis OSS engine version
     /// 6.2
     /// to 7.1 or Memcached engine version 1.6.6 and above on all instances built on
     /// the [Nitro system](http://aws.amazon.com/ec2/nitro/).
-    supported_network_types: ?[]const NetworkType,
+    supported_network_types: ?[]const NetworkType = null,
 };

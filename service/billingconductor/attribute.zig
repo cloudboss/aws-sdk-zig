@@ -5,10 +5,10 @@
 /// and `"S3"`.
 pub const Attribute = struct {
     /// The key in a key-value pair that describes the margin summary.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value in a key-value pair that describes the margin summary.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

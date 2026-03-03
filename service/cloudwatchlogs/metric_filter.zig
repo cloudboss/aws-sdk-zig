@@ -17,31 +17,31 @@ pub const MetricFilter = struct {
     /// The creation time of the metric filter, expressed as the number of
     /// milliseconds after
     /// `Jan 1, 1970 00:00:00 UTC`.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The list of system fields that are emitted as additional dimensions in the
     /// generated
     /// metrics. Returns the `emitSystemFieldDimensions` value if it was specified
     /// when the
     /// metric filter was created.
-    emit_system_field_dimensions: ?[]const []const u8,
+    emit_system_field_dimensions: ?[]const []const u8 = null,
 
     /// The filter expression that specifies which log events are processed by this
     /// metric filter
     /// based on system fields. Returns the `fieldSelectionCriteria` value if it was
     /// specified when the metric filter was created.
-    field_selection_criteria: ?[]const u8,
+    field_selection_criteria: ?[]const u8 = null,
 
     /// The name of the metric filter.
-    filter_name: ?[]const u8,
+    filter_name: ?[]const u8 = null,
 
-    filter_pattern: ?[]const u8,
+    filter_pattern: ?[]const u8 = null,
 
     /// The name of the log group.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     /// The metric transformations.
-    metric_transformations: ?[]const MetricTransformation,
+    metric_transformations: ?[]const MetricTransformation = null,
 
     pub const json_field_names = .{
         .apply_on_transformed_logs = "applyOnTransformedLogs",

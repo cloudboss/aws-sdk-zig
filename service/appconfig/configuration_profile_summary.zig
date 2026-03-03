@@ -3,16 +3,16 @@ const ValidatorType = @import("validator_type.zig").ValidatorType;
 /// A summary of a configuration profile.
 pub const ConfigurationProfileSummary = struct {
     /// The application ID.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The ID of the configuration profile.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The URI location of the configuration.
-    location_uri: ?[]const u8,
+    location_uri: ?[]const u8 = null,
 
     /// The name of the configuration profile.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of configurations contained in the profile. AppConfig supports
     /// `feature flags` and `freeform` configurations. We recommend you
@@ -25,10 +25,10 @@ pub const ConfigurationProfileSummary = struct {
     /// `AWS.AppConfig.FeatureFlags`
     ///
     /// `AWS.Freeform`
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The types of validators in the configuration profile.
-    validator_types: ?[]const ValidatorType,
+    validator_types: ?[]const ValidatorType = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

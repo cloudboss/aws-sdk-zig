@@ -4,10 +4,10 @@ const NewDefaultValues = @import("new_default_values.zig").NewDefaultValues;
 /// defined in another dataset.
 pub const OverrideDatasetParameterOperation = struct {
     /// The new default values for the parameter.
-    new_default_values: ?NewDefaultValues,
+    new_default_values: ?NewDefaultValues = null,
 
     /// The new name for the parameter.
-    new_parameter_name: ?[]const u8,
+    new_parameter_name: ?[]const u8 = null,
 
     /// The name of the parameter to be overridden with different values.
     parameter_name: []const u8,

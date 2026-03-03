@@ -20,10 +20,10 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 /// on.
 pub const Run = struct {
     /// An app to upload or that has been uploaded.
-    app_upload: ?[]const u8,
+    app_upload: ?[]const u8 = null,
 
     /// The run's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Specifies the billing method for a test run: `metered` or
     /// `unmetered`. If the parameter is not specified, the default value is
@@ -32,67 +32,67 @@ pub const Run = struct {
     /// If you have unmetered device slots, you must set this to `unmetered` to use
     /// them.
     /// Otherwise, the run is counted toward metered device minutes.
-    billing_method: ?BillingMethod,
+    billing_method: ?BillingMethod = null,
 
     /// The total number of completed jobs.
-    completed_jobs: ?i32,
+    completed_jobs: ?i32 = null,
 
     /// The run's result counters.
-    counters: ?Counters,
+    counters: ?Counters = null,
 
     /// When the run was created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// Output `CustomerArtifactPaths` object for the test run.
-    customer_artifact_paths: ?CustomerArtifactPaths,
+    customer_artifact_paths: ?CustomerArtifactPaths = null,
 
     /// Represents the total (metered or unmetered) minutes used by the test run.
-    device_minutes: ?DeviceMinutes,
+    device_minutes: ?DeviceMinutes = null,
 
     /// The ARN of the device pool for the run.
-    device_pool_arn: ?[]const u8,
+    device_pool_arn: ?[]const u8 = null,
 
     /// The device proxy configured for the devices in the run.
-    device_proxy: ?DeviceProxy,
+    device_proxy: ?DeviceProxy = null,
 
     /// The results of a device filter used to select the devices for a test run.
-    device_selection_result: ?DeviceSelectionResult,
+    device_selection_result: ?DeviceSelectionResult = null,
 
     /// Environment variables associated with the run.
-    environment_variables: ?[]const EnvironmentVariable,
+    environment_variables: ?[]const EnvironmentVariable = null,
 
     /// For fuzz tests, this is the number of events, between 1 and 10000, that the
     /// UI fuzz
     /// test should perform.
-    event_count: ?i32,
+    event_count: ?i32 = null,
 
     /// The IAM role associated with the run.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The number of minutes the job executes before it times out.
-    job_timeout_minutes: ?i32,
+    job_timeout_minutes: ?i32 = null,
 
     /// Information about the locale that is used for the run.
-    locale: ?[]const u8,
+    locale: ?[]const u8 = null,
 
     /// Information about the location that is used for the run.
-    location: ?Location,
+    location: ?Location = null,
 
     /// A message about the run's result.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The run's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The network profile being used for a test run.
-    network_profile: ?NetworkProfile,
+    network_profile: ?NetworkProfile = null,
 
     /// Read-only URL for an object in an S3 bucket where you can get the parsing
     /// results of the test package.
     /// If the test package doesn't parse, the reason why it doesn't parse appears
     /// in the file that this URL points
     /// to.
-    parsing_result_url: ?[]const u8,
+    parsing_result_url: ?[]const u8 = null,
 
     /// The run's platform.
     ///
@@ -101,10 +101,10 @@ pub const Run = struct {
     /// * ANDROID
     ///
     /// * IOS
-    platform: ?DevicePlatform,
+    platform: ?DevicePlatform = null,
 
     /// Information about the radio states for the run.
-    radios: ?Radios,
+    radios: ?Radios = null,
 
     /// The run's result.
     ///
@@ -123,17 +123,17 @@ pub const Run = struct {
     /// * ERRORED
     ///
     /// * STOPPED
-    result: ?ExecutionResult,
+    result: ?ExecutionResult = null,
 
     /// Supporting field for the result field. Set only if `result` is `SKIPPED`.
     /// `PARSING_FAILED` if the result is skipped because of test package parsing
     /// failure.
-    result_code: ?ExecutionResultCode,
+    result_code: ?ExecutionResultCode = null,
 
     /// For fuzz tests, this is a seed to use for randomizing the UI fuzz test.
     /// Using the same
     /// seed value between tests ensures identical event sequences.
-    seed: ?i32,
+    seed: ?i32 = null,
 
     /// When set to `true`, for private devices, Device Farm does not sign your app
     /// again. For public
@@ -142,10 +142,10 @@ pub const Run = struct {
     /// For more information about how Device Farm re-signs your apps, see [Do you
     /// modify my app?](http://aws.amazon.com/device-farm/faqs/) in the *AWS Device
     /// Farm FAQs*.
-    skip_app_resign: ?bool,
+    skip_app_resign: ?bool = null,
 
     /// The run's start time.
-    started: ?i64,
+    started: ?i64 = null,
 
     /// The run's status.
     ///
@@ -168,16 +168,16 @@ pub const Run = struct {
     /// * COMPLETED
     ///
     /// * STOPPING
-    status: ?ExecutionStatus,
+    status: ?ExecutionStatus = null,
 
     /// The run's stop time.
-    stopped: ?i64,
+    stopped: ?i64 = null,
 
     /// The ARN of the YAML-formatted test specification for the run.
-    test_spec_arn: ?[]const u8,
+    test_spec_arn: ?[]const u8 = null,
 
     /// The total number of jobs for the run.
-    total_jobs: ?i32,
+    total_jobs: ?i32 = null,
 
     /// The run's type.
     ///
@@ -210,13 +210,13 @@ pub const Run = struct {
     /// * XCTEST
     ///
     /// * XCTEST_UI
-    @"type": ?TestType,
+    @"type": ?TestType = null,
 
     /// The VPC security groups and subnets that are attached to a project.
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     /// The Device Farm console URL for the recording of the run.
-    web_url: ?[]const u8,
+    web_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .app_upload = "appUpload",

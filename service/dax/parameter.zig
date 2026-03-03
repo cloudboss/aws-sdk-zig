@@ -7,40 +7,40 @@ const ParameterType = @import("parameter_type.zig").ParameterType;
 /// behavior.
 pub const Parameter = struct {
     /// A range of values within which the parameter can be set.
-    allowed_values: ?[]const u8,
+    allowed_values: ?[]const u8 = null,
 
     /// The conditions under which changes to this parameter can be applied. For
     /// example,
     /// `requires-reboot` indicates that a new value for this parameter will only
     /// take effect if a node is rebooted.
-    change_type: ?ChangeType,
+    change_type: ?ChangeType = null,
 
     /// The data type of the parameter. For example, `integer`:
-    data_type: ?[]const u8,
+    data_type: ?[]const u8 = null,
 
     /// A description of the parameter
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether the customer is allowed to modify the parameter.
-    is_modifiable: ?IsModifiable,
+    is_modifiable: ?IsModifiable = null,
 
     /// A list of node types, and specific parameter values for each node.
-    node_type_specific_values: ?[]const NodeTypeSpecificValue,
+    node_type_specific_values: ?[]const NodeTypeSpecificValue = null,
 
     /// The name of the parameter.
-    parameter_name: ?[]const u8,
+    parameter_name: ?[]const u8 = null,
 
     /// Determines whether the parameter can be applied to any nodes, or only nodes
     /// of a
     /// particular type.
-    parameter_type: ?ParameterType,
+    parameter_type: ?ParameterType = null,
 
     /// The value for the parameter.
-    parameter_value: ?[]const u8,
+    parameter_value: ?[]const u8 = null,
 
     /// How the parameter is defined. For example, `system` denotes a
     /// system-defined parameter.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allowed_values = "AllowedValues",

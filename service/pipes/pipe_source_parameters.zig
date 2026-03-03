@@ -10,10 +10,10 @@ const PipeSourceSqsQueueParameters = @import("pipe_source_sqs_queue_parameters.z
 /// The parameters required to set up a source for your pipe.
 pub const PipeSourceParameters = struct {
     /// The parameters for using an Active MQ broker as a source.
-    active_mq_broker_parameters: ?PipeSourceActiveMQBrokerParameters,
+    active_mq_broker_parameters: ?PipeSourceActiveMQBrokerParameters = null,
 
     /// The parameters for using a DynamoDB stream as a source.
-    dynamo_db_stream_parameters: ?PipeSourceDynamoDBStreamParameters,
+    dynamo_db_stream_parameters: ?PipeSourceDynamoDBStreamParameters = null,
 
     /// The collection of event patterns used to filter events.
     ///
@@ -22,16 +22,16 @@ pub const PipeSourceParameters = struct {
     ///
     /// For more information, see [Events and Event
     /// Patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html) in the *Amazon EventBridge User Guide*.
-    filter_criteria: ?FilterCriteria,
+    filter_criteria: ?FilterCriteria = null,
 
     /// The parameters for using a Kinesis stream as a source.
-    kinesis_stream_parameters: ?PipeSourceKinesisStreamParameters,
+    kinesis_stream_parameters: ?PipeSourceKinesisStreamParameters = null,
 
     /// The parameters for using an MSK stream as a source.
-    managed_streaming_kafka_parameters: ?PipeSourceManagedStreamingKafkaParameters,
+    managed_streaming_kafka_parameters: ?PipeSourceManagedStreamingKafkaParameters = null,
 
     /// The parameters for using a Rabbit MQ broker as a source.
-    rabbit_mq_broker_parameters: ?PipeSourceRabbitMQBrokerParameters,
+    rabbit_mq_broker_parameters: ?PipeSourceRabbitMQBrokerParameters = null,
 
     /// The parameters for using a self-managed Apache Kafka stream as a source.
     ///
@@ -45,10 +45,10 @@ pub const PipeSourceParameters = struct {
     /// [Redpanda](https://redpanda.com/). For more information, see [Apache Kafka
     /// streams as a
     /// source](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html) in the *Amazon EventBridge User Guide*.
-    self_managed_kafka_parameters: ?PipeSourceSelfManagedKafkaParameters,
+    self_managed_kafka_parameters: ?PipeSourceSelfManagedKafkaParameters = null,
 
     /// The parameters for using a Amazon SQS stream as a source.
-    sqs_queue_parameters: ?PipeSourceSqsQueueParameters,
+    sqs_queue_parameters: ?PipeSourceSqsQueueParameters = null,
 
     pub const json_field_names = .{
         .active_mq_broker_parameters = "ActiveMQBrokerParameters",

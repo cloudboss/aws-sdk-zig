@@ -5,7 +5,7 @@ pub const ListTagsForResourceResponse = struct {
     /// information, see [Tagging for cost allocation or attribute-based access
     /// control
     /// (ABAC)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html).
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .tags = "tags",

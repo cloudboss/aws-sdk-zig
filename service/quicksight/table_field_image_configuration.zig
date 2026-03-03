@@ -3,7 +3,7 @@ const TableCellImageSizingConfiguration = @import("table_cell_image_sizing_confi
 /// The image configuration of a table field URL.
 pub const TableFieldImageConfiguration = struct {
     /// The sizing options for the table image configuration.
-    sizing_options: ?TableCellImageSizingConfiguration,
+    sizing_options: ?TableCellImageSizingConfiguration = null,
 
     pub const json_field_names = .{
         .sizing_options = "SizingOptions",

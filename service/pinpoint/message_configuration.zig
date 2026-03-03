@@ -9,42 +9,42 @@ pub const MessageConfiguration = struct {
     /// The message that the campaign sends through the ADM (Amazon Device
     /// Messaging) channel. If specified, this message overrides the default
     /// message.
-    adm_message: ?Message,
+    adm_message: ?Message = null,
 
     /// The message that the campaign sends through the APNs (Apple Push
     /// Notification service) channel. If specified, this message overrides the
     /// default message.
-    apns_message: ?Message,
+    apns_message: ?Message = null,
 
     /// The message that the campaign sends through the Baidu (Baidu Cloud Push)
     /// channel. If specified, this message overrides the default message.
-    baidu_message: ?Message,
+    baidu_message: ?Message = null,
 
     /// The message that the campaign sends through a custom channel, as specified
     /// by the delivery configuration (CustomDeliveryConfiguration) settings for the
     /// campaign. If specified, this message overrides the default message.
-    custom_message: ?CampaignCustomMessage,
+    custom_message: ?CampaignCustomMessage = null,
 
     /// The default message that the campaign sends through all the channels that
     /// are configured for the campaign.
-    default_message: ?Message,
+    default_message: ?Message = null,
 
     /// The message that the campaign sends through the email channel. If specified,
     /// this message overrides the default message.
-    email_message: ?CampaignEmailMessage,
+    email_message: ?CampaignEmailMessage = null,
 
     /// The message that the campaign sends through the GCM channel, which enables
     /// Amazon Pinpoint to send push notifications through the Firebase Cloud
     /// Messaging (FCM), formerly Google Cloud Messaging (GCM), service. If
     /// specified, this message overrides the default message.
-    gcm_message: ?Message,
+    gcm_message: ?Message = null,
 
     /// The in-app message configuration.
-    in_app_message: ?CampaignInAppMessage,
+    in_app_message: ?CampaignInAppMessage = null,
 
     /// The message that the campaign sends through the SMS channel. If specified,
     /// this message overrides the default message.
-    sms_message: ?CampaignSmsMessage,
+    sms_message: ?CampaignSmsMessage = null,
 
     pub const json_field_names = .{
         .adm_message = "ADMMessage",

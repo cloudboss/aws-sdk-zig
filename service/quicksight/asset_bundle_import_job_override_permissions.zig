@@ -12,27 +12,27 @@ pub const AssetBundleImportJobOverridePermissions = struct {
     /// A list of permissions overrides for any `Analysis` resources that are
     /// present
     /// in the asset bundle that is imported.
-    analyses: ?[]const AssetBundleImportJobAnalysisOverridePermissions,
+    analyses: ?[]const AssetBundleImportJobAnalysisOverridePermissions = null,
 
     /// A list of permissions overrides for any `Dashboard` resources that are
     /// present in the asset bundle that is imported.
-    dashboards: ?[]const AssetBundleImportJobDashboardOverridePermissions,
+    dashboards: ?[]const AssetBundleImportJobDashboardOverridePermissions = null,
 
     /// A list of permissions overrides for any `DataSet` resources that are present
     /// in the asset bundle that is imported.
-    data_sets: ?[]const AssetBundleImportJobDataSetOverridePermissions,
+    data_sets: ?[]const AssetBundleImportJobDataSetOverridePermissions = null,
 
     /// A list of permissions overrides for any `DataSource` resources that are
     /// present in the asset bundle that is imported.
-    data_sources: ?[]const AssetBundleImportJobDataSourceOverridePermissions,
+    data_sources: ?[]const AssetBundleImportJobDataSourceOverridePermissions = null,
 
     /// A list of permissions for the folders that you want to apply overrides to.
-    folders: ?[]const AssetBundleImportJobFolderOverridePermissions,
+    folders: ?[]const AssetBundleImportJobFolderOverridePermissions = null,
 
     /// A list of permissions overrides for any `Theme` resources that are present
     /// in
     /// the asset bundle that is imported.
-    themes: ?[]const AssetBundleImportJobThemeOverridePermissions,
+    themes: ?[]const AssetBundleImportJobThemeOverridePermissions = null,
 
     pub const json_field_names = .{
         .analyses = "Analyses",

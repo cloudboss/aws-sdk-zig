@@ -4,7 +4,7 @@ const GroundTruthManifest = @import("ground_truth_manifest.zig").GroundTruthMani
 /// Assets can also contain validation information that you use to debug a
 /// failed model training.
 pub const Asset = struct {
-    ground_truth_manifest: ?GroundTruthManifest,
+    ground_truth_manifest: ?GroundTruthManifest = null,
 
     pub const json_field_names = .{
         .ground_truth_manifest = "GroundTruthManifest",

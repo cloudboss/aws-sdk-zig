@@ -1,13 +1,13 @@
 /// Connector SSM command config.
 pub const ConnectorSsmCommandConfig = struct {
     /// Connector SSM command config CloudWatch log group name.
-    cloud_watch_log_group_name: ?[]const u8,
+    cloud_watch_log_group_name: ?[]const u8 = null,
 
     /// Connector SSM command config CloudWatch output enabled.
     cloud_watch_output_enabled: bool,
 
     /// Connector SSM command config output S3 bucket name.
-    output_s3_bucket_name: ?[]const u8,
+    output_s3_bucket_name: ?[]const u8 = null,
 
     /// Connector SSM command config S3 output enabled.
     s_3_output_enabled: bool,

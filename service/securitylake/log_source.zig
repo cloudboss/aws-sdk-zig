@@ -4,13 +4,13 @@ const LogSourceResource = @import("log_source_resource.zig").LogSourceResource;
 /// Amazon Web Services services and custom sources.
 pub const LogSource = struct {
     /// Specify the account from which you want to collect logs.
-    account: ?[]const u8,
+    account: ?[]const u8 = null,
 
     /// Specify the Regions from which you want to collect logs.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// Specify the sources from which you want to collect logs.
-    sources: ?[]const LogSourceResource,
+    sources: ?[]const LogSourceResource = null,
 
     pub const json_field_names = .{
         .account = "account",

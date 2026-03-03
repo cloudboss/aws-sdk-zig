@@ -19,7 +19,7 @@ const EncryptionType = @import("encryption_type.zig").EncryptionType;
 pub const EncryptionSpecification = struct {
     /// The Amazon Resource Name (ARN) of the customer managed KMS key, for example
     /// `kms_key_identifier:ARN`.
-    kms_key_identifier: ?[]const u8,
+    kms_key_identifier: ?[]const u8 = null,
 
     /// The encryption option specified for the table. You can choose one of the
     /// following KMS keys (KMS keys):

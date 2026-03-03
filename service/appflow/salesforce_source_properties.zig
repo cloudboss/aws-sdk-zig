@@ -55,7 +55,7 @@ pub const SalesforceSourceProperties = struct {
     /// attempts to transfer a vary large set of data, it might fail wituh a timed
     /// out
     /// error.
-    data_transfer_api: ?SalesforceDataTransferApi,
+    data_transfer_api: ?SalesforceDataTransferApi = null,
 
     /// The flag that enables dynamic fetching of new (recently added) fields in the
     /// Salesforce

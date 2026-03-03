@@ -1,7 +1,7 @@
 /// The geospatial radius for a circle.
 pub const GeospatialCircleRadius = struct {
     /// The positive value for the radius of a circle.
-    radius: ?f64,
+    radius: ?f64 = null,
 
     pub const json_field_names = .{
         .radius = "Radius",

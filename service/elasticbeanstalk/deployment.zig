@@ -3,12 +3,12 @@ pub const Deployment = struct {
     /// The ID of the deployment. This number increases by one each time that you
     /// deploy source
     /// code or change instance configuration settings.
-    deployment_id: ?i64,
+    deployment_id: ?i64 = null,
 
     /// For in-progress deployments, the time that the deployment started.
     ///
     /// For completed deployments, the time that the deployment ended.
-    deployment_time: ?i64,
+    deployment_time: ?i64 = null,
 
     /// The status of the deployment:
     ///
@@ -17,8 +17,8 @@ pub const Deployment = struct {
     /// * `Deployed` : The deployment succeeded.
     ///
     /// * `Failed` : The deployment failed.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The version label of the application version in the deployment.
-    version_label: ?[]const u8,
+    version_label: ?[]const u8 = null,
 };

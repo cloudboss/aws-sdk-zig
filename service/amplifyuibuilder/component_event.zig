@@ -6,15 +6,15 @@ const ActionParameters = @import("action_parameters.zig").ActionParameters;
 /// an event.
 pub const ComponentEvent = struct {
     /// The action to perform when a specific event is raised.
-    action: ?[]const u8,
+    action: ?[]const u8 = null,
 
     /// Binds an event to an action on a component. When you specify a
     /// `bindingEvent`,
     /// the event is called when the action is performed.
-    binding_event: ?[]const u8,
+    binding_event: ?[]const u8 = null,
 
     /// Describes information about the action.
-    parameters: ?ActionParameters,
+    parameters: ?ActionParameters = null,
 
     pub const json_field_names = .{
         .action = "action",

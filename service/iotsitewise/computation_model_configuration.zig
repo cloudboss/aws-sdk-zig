@@ -3,7 +3,7 @@ const ComputationModelAnomalyDetectionConfiguration = @import("computation_model
 /// The configuration for the computation model.
 pub const ComputationModelConfiguration = struct {
     /// The configuration for the anomaly detection type of computation model.
-    anomaly_detection: ?ComputationModelAnomalyDetectionConfiguration,
+    anomaly_detection: ?ComputationModelAnomalyDetectionConfiguration = null,
 
     pub const json_field_names = .{
         .anomaly_detection = "anomalyDetection",

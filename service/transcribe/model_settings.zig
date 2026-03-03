@@ -18,7 +18,7 @@ pub const ModelSettings = struct {
     /// language model isn't applied. There are no errors or warnings associated
     /// with a language
     /// mismatch.
-    language_model_name: ?[]const u8,
+    language_model_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .language_model_name = "LanguageModelName",

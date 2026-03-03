@@ -8,10 +8,10 @@ pub const MediaConnectFlowRouterOutputConfiguration = struct {
     destination_transit_encryption: FlowTransitEncryption,
 
     /// The ARN of the flow to connect to this router output.
-    flow_arn: ?[]const u8,
+    flow_arn: ?[]const u8 = null,
 
     /// The ARN of the flow source to connect to this router output.
-    flow_source_arn: ?[]const u8,
+    flow_source_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_transit_encryption = "DestinationTransitEncryption",

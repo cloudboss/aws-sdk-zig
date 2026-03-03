@@ -3,25 +3,25 @@ const DmsSslModeValue = @import("dms_ssl_mode_value.zig").DmsSslModeValue;
 /// Provides information that defines an SAP ASE data provider.
 pub const SybaseAseDataProviderSettings = struct {
     /// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The database name on the SAP ASE data provider.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// Specifies whether to encrypt the password when connecting to the Sybase ASE
     /// database. When set to true, the connection password is encrypted during
     /// transmission. Default is true.
-    encrypt_password: ?bool,
+    encrypt_password: ?bool = null,
 
     /// The port value for the SAP ASE data provider.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The name of the SAP ASE server.
-    server_name: ?[]const u8,
+    server_name: ?[]const u8 = null,
 
     /// The SSL mode used to connect to the SAP ASE data provider.
     /// The default value is `none`.
-    ssl_mode: ?DmsSslModeValue,
+    ssl_mode: ?DmsSslModeValue = null,
 
     pub const json_field_names = .{
         .certificate_arn = "CertificateArn",

@@ -7,7 +7,7 @@ const TestType = @import("test_type.zig").TestType;
 /// example of the JSON request syntax, see ScheduleRun.
 pub const ScheduleRunTest = struct {
     /// The test's filter.
-    filter: ?[]const u8,
+    filter: ?[]const u8 = null,
 
     /// The test's parameters, such as test framework parameters and fixture
     /// settings.
@@ -68,13 +68,13 @@ pub const ScheduleRunTest = struct {
     ///
     /// * Running multiple tests:
     /// `LoginTests/testValid,LoginTests/testInvalid`
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The ARN of the uploaded test to be run.
-    test_package_arn: ?[]const u8,
+    test_package_arn: ?[]const u8 = null,
 
     /// The ARN of the YAML-formatted test specification.
-    test_spec_arn: ?[]const u8,
+    test_spec_arn: ?[]const u8 = null,
 
     /// The test's type.
     ///

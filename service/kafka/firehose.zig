@@ -1,5 +1,5 @@
 pub const Firehose = struct {
-    delivery_stream: ?[]const u8,
+    delivery_stream: ?[]const u8 = null,
 
     enabled: bool,
 

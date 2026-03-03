@@ -4,17 +4,17 @@ const ConnectorOAuthRequest = @import("connector_o_auth_request.zig").ConnectorO
 /// The connector-specific profile credentials required when using Salesforce.
 pub const SalesforceConnectorProfileCredentials = struct {
     /// The credentials used to access protected Salesforce resources.
-    access_token: ?[]const u8,
+    access_token: ?[]const u8 = null,
 
     /// The secret manager ARN, which contains the client ID and client secret of
     /// the connected
     /// app.
-    client_credentials_arn: ?[]const u8,
+    client_credentials_arn: ?[]const u8 = null,
 
     /// A JSON web token (JWT) that authorizes Amazon AppFlow to access your
     /// Salesforce
     /// records.
-    jwt_token: ?[]const u8,
+    jwt_token: ?[]const u8 = null,
 
     /// Specifies the OAuth 2.0 grant type that Amazon AppFlow uses when it requests
     /// an
@@ -45,14 +45,14 @@ pub const SalesforceConnectorProfileCredentials = struct {
     /// records.
     ///
     /// The CLIENT_CREDENTIALS value is not supported for Salesforce.
-    o_auth_2_grant_type: ?OAuth2GrantType,
+    o_auth_2_grant_type: ?OAuth2GrantType = null,
 
     /// The OAuth requirement needed to request security tokens from the connector
     /// endpoint.
-    o_auth_request: ?ConnectorOAuthRequest,
+    o_auth_request: ?ConnectorOAuthRequest = null,
 
     /// The credentials used to acquire new access tokens.
-    refresh_token: ?[]const u8,
+    refresh_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_token = "accessToken",

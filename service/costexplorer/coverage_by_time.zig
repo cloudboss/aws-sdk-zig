@@ -5,13 +5,13 @@ const Coverage = @import("coverage.zig").Coverage;
 /// Reservation coverage for a specified period, in hours.
 pub const CoverageByTime = struct {
     /// The groups of instances that the reservation covered.
-    groups: ?[]const ReservationCoverageGroup,
+    groups: ?[]const ReservationCoverageGroup = null,
 
     /// The period that this coverage was used over.
-    time_period: ?DateInterval,
+    time_period: ?DateInterval = null,
 
     /// The total reservation coverage, in hours.
-    total: ?Coverage,
+    total: ?Coverage = null,
 
     pub const json_field_names = .{
         .groups = "Groups",

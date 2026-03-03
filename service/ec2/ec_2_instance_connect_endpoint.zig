@@ -6,39 +6,39 @@ const Tag = @import("tag.zig").Tag;
 /// Describes an EC2 Instance Connect Endpoint.
 pub const Ec2InstanceConnectEndpoint = struct {
     /// The Availability Zone of the EC2 Instance Connect Endpoint.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the Availability Zone of the EC2 Instance Connect Endpoint.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The date and time that the EC2 Instance Connect Endpoint was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The DNS name of the EC2 Instance Connect Endpoint.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// The Federal Information Processing Standards (FIPS) compliant DNS name of
     /// the EC2
     /// Instance Connect Endpoint.
-    fips_dns_name: ?[]const u8,
+    fips_dns_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the EC2 Instance Connect Endpoint.
-    instance_connect_endpoint_arn: ?[]const u8,
+    instance_connect_endpoint_arn: ?[]const u8 = null,
 
     /// The ID of the EC2 Instance Connect Endpoint.
-    instance_connect_endpoint_id: ?[]const u8,
+    instance_connect_endpoint_id: ?[]const u8 = null,
 
     /// The IP address type of the endpoint.
-    ip_address_type: ?IpAddressType,
+    ip_address_type: ?IpAddressType = null,
 
     /// The ID of the elastic network interface that Amazon EC2 automatically
     /// created when creating the EC2
     /// Instance Connect Endpoint.
-    network_interface_ids: ?[]const []const u8,
+    network_interface_ids: ?[]const []const u8 = null,
 
     /// The ID of the Amazon Web Services account that created the EC2 Instance
     /// Connect Endpoint.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// Indicates whether your client's IP address is preserved as the source when
     /// you connect to a resource.
@@ -50,29 +50,29 @@ pub const Ec2InstanceConnectEndpoint = struct {
     /// * `false` - Use the IP address of the network interface.
     ///
     /// Default: `false`
-    preserve_client_ip: ?bool,
+    preserve_client_ip: ?bool = null,
 
     /// The public DNS names of the endpoint.
-    public_dns_names: ?InstanceConnectEndpointPublicDnsNames,
+    public_dns_names: ?InstanceConnectEndpointPublicDnsNames = null,
 
     /// The security groups associated with the endpoint. If you didn't specify a
     /// security group,
     /// the default security group for your VPC is associated with the endpoint.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The current state of the EC2 Instance Connect Endpoint.
-    state: ?Ec2InstanceConnectEndpointState,
+    state: ?Ec2InstanceConnectEndpointState = null,
 
     /// The message for the current state of the EC2 Instance Connect Endpoint.
     /// Can include a failure message.
-    state_message: ?[]const u8,
+    state_message: ?[]const u8 = null,
 
     /// The ID of the subnet in which the EC2 Instance Connect Endpoint was created.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The tags assigned to the EC2 Instance Connect Endpoint.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the VPC in which the EC2 Instance Connect Endpoint was created.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

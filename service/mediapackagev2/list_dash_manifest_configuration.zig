@@ -6,7 +6,7 @@ pub const ListDashManifestConfiguration = struct {
     manifest_name: []const u8,
 
     /// The egress domain URL for stream delivery from MediaPackage.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .manifest_name = "ManifestName",

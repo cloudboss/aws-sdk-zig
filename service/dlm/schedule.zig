@@ -21,15 +21,15 @@ pub const Schedule = struct {
     /// For more information about using snapshot archiving, see [Considerations for
     /// snapshot lifecycle
     /// policies](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive).
-    archive_rule: ?ArchiveRule,
+    archive_rule: ?ArchiveRule = null,
 
     /// Copy all user-defined tags on a source volume to snapshots of the volume
     /// created by
     /// this policy.
-    copy_tags: ?bool,
+    copy_tags: ?bool = null,
 
     /// The creation rule.
-    create_rule: ?CreateRule,
+    create_rule: ?CreateRule = null,
 
     /// Specifies a rule for copying snapshots or AMIs across Regions.
     ///
@@ -38,29 +38,29 @@ pub const Schedule = struct {
     /// Outpost or in a Local Zone. If the policy creates snapshots in a Region,
     /// then snapshots
     /// can be copied to up to three Regions or Outposts.
-    cross_region_copy_rules: ?[]const CrossRegionCopyRule,
+    cross_region_copy_rules: ?[]const CrossRegionCopyRule = null,
 
     /// **[Custom AMI policies only]** The AMI deprecation rule for the schedule.
-    deprecate_rule: ?DeprecateRule,
+    deprecate_rule: ?DeprecateRule = null,
 
     /// **[Custom snapshot policies only]** The rule for enabling fast snapshot
     /// restore.
-    fast_restore_rule: ?FastRestoreRule,
+    fast_restore_rule: ?FastRestoreRule = null,
 
     /// The name of the schedule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The retention rule for snapshots or AMIs created by the policy.
-    retain_rule: ?RetainRule,
+    retain_rule: ?RetainRule = null,
 
     /// **[Custom snapshot policies only]** The rule for sharing snapshots with
     /// other Amazon Web Services accounts.
-    share_rules: ?[]const ShareRule,
+    share_rules: ?[]const ShareRule = null,
 
     /// The tags to apply to policy-created resources. These user-defined tags are
     /// in addition
     /// to the Amazon Web Services-added lifecycle tags.
-    tags_to_add: ?[]const Tag,
+    tags_to_add: ?[]const Tag = null,
 
     /// **[AMI policies and snapshot policies that target instances only]**
     /// A collection of key/value pairs with values determined dynamically when the
@@ -69,7 +69,7 @@ pub const Schedule = struct {
     /// the two
     /// following formats: `$(instance-id)` or `$(timestamp)`. Variable
     /// tags are only valid for EBS Snapshot Management – Instance policies.
-    variable_tags: ?[]const Tag,
+    variable_tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .archive_rule = "ArchiveRule",

@@ -10,7 +10,7 @@ pub const JsonMatchPattern = struct {
     ///
     /// You must specify either this setting or the `IncludedPaths` setting, but not
     /// both.
-    all: ?All,
+    all: ?All = null,
 
     /// Match only the specified include paths. See also
     /// `MatchScope`
@@ -29,7 +29,7 @@ pub const JsonMatchPattern = struct {
     ///
     /// Don't use this option to include all paths. Instead, use the `All`
     /// setting.
-    included_paths: ?[]const []const u8,
+    included_paths: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .all = "All",

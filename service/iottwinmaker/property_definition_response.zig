@@ -6,16 +6,16 @@ const DataValue = @import("data_value.zig").DataValue;
 /// An object that contains response data from a property definition request.
 pub const PropertyDefinitionResponse = struct {
     /// A mapping that specifies configuration information about the property.
-    configuration: ?[]const aws.map.StringMapEntry,
+    configuration: ?[]const aws.map.StringMapEntry = null,
 
     /// An object that contains information about the data type.
     data_type: DataType,
 
     /// An object that contains the default value.
-    default_value: ?DataValue,
+    default_value: ?DataValue = null,
 
     /// A friendly name for the property.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// A Boolean value that specifies whether the property ID comes from an
     /// external data

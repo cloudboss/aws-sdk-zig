@@ -7,10 +7,10 @@
 pub const VisibilityConditions = struct {
     /// The key that specifies the tag that you're using to filter the search
     /// results. It must be in the following format: `Tags.<key>`.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value for the tag that you're using to filter the search results.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

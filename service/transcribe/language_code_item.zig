@@ -10,10 +10,10 @@ pub const LanguageCodeItem = struct {
     /// Provides the total time, in seconds, each identified language is spoken in
     /// your
     /// media.
-    duration_in_seconds: ?f32,
+    duration_in_seconds: ?f32 = null,
 
     /// Provides the language code for each language identified in your media.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     pub const json_field_names = .{
         .duration_in_seconds = "DurationInSeconds",

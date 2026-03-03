@@ -6,7 +6,7 @@ const Projection = @import("projection.zig").Projection;
 /// created.
 pub const LocalSecondaryIndexInfo = struct {
     /// Represents the name of the local secondary index.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
     /// The complete key schema for a local secondary index, which consists of one
     /// or more
@@ -27,14 +27,14 @@ pub const LocalSecondaryIndexInfo = struct {
     /// the same
     /// partition key physically close together, in sorted order by the sort key
     /// value.
-    key_schema: ?[]const KeySchemaElement,
+    key_schema: ?[]const KeySchemaElement = null,
 
     /// Represents attributes that are copied (projected) from the table into the
     /// global
     /// secondary index. These are in addition to the primary key attributes and
     /// index key
     /// attributes, which are automatically projected.
-    projection: ?Projection,
+    projection: ?Projection = null,
 
     pub const json_field_names = .{
         .index_name = "IndexName",

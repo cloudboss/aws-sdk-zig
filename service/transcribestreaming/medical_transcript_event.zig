@@ -15,7 +15,7 @@ pub const MedicalTranscriptEvent = struct {
     /// identification, partial result
     /// stabilization, language identification, and other transcription-related
     /// data.
-    transcript: ?MedicalTranscript,
+    transcript: ?MedicalTranscript = null,
 
     pub const json_field_names = .{
         .transcript = "Transcript",

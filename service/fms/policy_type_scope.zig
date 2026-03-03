@@ -11,7 +11,7 @@ pub const PolicyTypeScope = struct {
 
     /// The list of policy types that the specified Firewall Manager administrator
     /// can manage.
-    policy_types: ?[]const SecurityServiceType,
+    policy_types: ?[]const SecurityServiceType = null,
 
     pub const json_field_names = .{
         .all_policy_types_enabled = "AllPolicyTypesEnabled",

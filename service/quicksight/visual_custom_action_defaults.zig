@@ -4,7 +4,7 @@ const VisualHighlightOperation = @import("visual_highlight_operation.zig").Visua
 pub const VisualCustomActionDefaults = struct {
     /// A list of highlight operations available for visuals in an analysis or
     /// sheet.
-    highlight_operation: ?VisualHighlightOperation,
+    highlight_operation: ?VisualHighlightOperation = null,
 
     pub const json_field_names = .{
         .highlight_operation = "highlightOperation",

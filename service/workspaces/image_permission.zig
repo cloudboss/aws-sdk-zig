@@ -8,7 +8,7 @@ pub const ImagePermission = struct {
     /// The identifier of the Amazon Web Services account that an image has been
     /// shared
     /// with.
-    shared_account_id: ?[]const u8,
+    shared_account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .shared_account_id = "SharedAccountId",

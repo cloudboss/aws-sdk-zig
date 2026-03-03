@@ -5,16 +5,16 @@ const Stage = @import("stage.zig").Stage;
 /// snapshot.
 pub const LifeCycleForView = struct {
     /// Describes the next steps for the opportunity shared through a snapshot.
-    next_steps: ?[]const u8,
+    next_steps: ?[]const u8 = null,
 
     /// Defines the approval status of the opportunity shared through a snapshot.
-    review_status: ?ReviewStatus,
+    review_status: ?ReviewStatus = null,
 
     /// Defines the current stage of the opportunity shared through a snapshot.
-    stage: ?Stage,
+    stage: ?Stage = null,
 
     /// The projected launch date of the opportunity shared through a snapshot.
-    target_close_date: ?[]const u8,
+    target_close_date: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .next_steps = "NextSteps",

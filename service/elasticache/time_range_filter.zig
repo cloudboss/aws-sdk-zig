@@ -3,8 +3,8 @@
 /// the time range.
 pub const TimeRangeFilter = struct {
     /// The end time of the time range filter
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The start time of the time range filter
-    start_time: ?i64,
+    start_time: ?i64 = null,
 };

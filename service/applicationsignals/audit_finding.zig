@@ -11,12 +11,12 @@ pub const AuditFinding = struct {
     /// An array of auditor results that contain the specific findings,
     /// descriptions, and severity levels identified by different auditing
     /// algorithms.
-    auditor_results: ?[]const AuditorResult,
+    auditor_results: ?[]const AuditorResult = null,
 
     /// A structure containing nodes and edges that represent the dependency
     /// relationships relevant to this audit finding, helping to understand the
     /// context and potential impact.
-    dependency_graph: ?DependencyGraph,
+    dependency_graph: ?DependencyGraph = null,
 
     /// The key attributes that identify the service or entity this audit finding
     /// relates to. This is a string-to-string map that includes fields like Type,
@@ -25,14 +25,14 @@ pub const AuditFinding = struct {
 
     /// A structure containing metric data queries and time range information that
     /// provides context for the audit finding through relevant performance metrics.
-    metric_graph: ?MetricGraph,
+    metric_graph: ?MetricGraph = null,
 
     /// The name of the operation associated with this audit finding, if the finding
     /// is specific to a particular service operation.
-    operation: ?[]const u8,
+    operation: ?[]const u8 = null,
 
     /// The type of audit finding.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auditor_results = "AuditorResults",

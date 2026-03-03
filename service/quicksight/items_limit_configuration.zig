@@ -4,7 +4,7 @@ const OtherCategories = @import("other_categories.zig").OtherCategories;
 pub const ItemsLimitConfiguration = struct {
     /// The limit on how many items of a field are showed in the chart. For
     /// example, the number of slices that are displayed in a pie chart.
-    items_limit: ?i64,
+    items_limit: ?i64 = null,
 
     /// The `Show
     /// other` of an axis in the chart. Choose one of the following options:
@@ -12,7 +12,7 @@ pub const ItemsLimitConfiguration = struct {
     /// * `INCLUDE`
     ///
     /// * `EXCLUDE`
-    other_categories: ?OtherCategories,
+    other_categories: ?OtherCategories = null,
 
     pub const json_field_names = .{
         .items_limit = "ItemsLimit",

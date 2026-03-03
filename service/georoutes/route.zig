@@ -16,7 +16,7 @@ pub const Route = struct {
     major_road_labels: []const RouteMajorRoadLabel,
 
     /// Summarized details of the leg.
-    summary: ?RouteSummary,
+    summary: ?RouteSummary = null,
 
     pub const json_field_names = .{
         .legs = "Legs",

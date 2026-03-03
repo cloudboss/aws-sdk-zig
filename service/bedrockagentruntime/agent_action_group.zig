@@ -10,7 +10,7 @@ pub const AgentActionGroup = struct {
     /// The Amazon Resource Name (ARN) of the Lambda function containing the
     /// business logic that is carried out upon invoking the action or the custom
     /// control method for handling the information elicited from the user.
-    action_group_executor: ?ActionGroupExecutor,
+    action_group_executor: ?ActionGroupExecutor = null,
 
     /// The name of the action group.
     action_group_name: []const u8,
@@ -19,14 +19,14 @@ pub const AgentActionGroup = struct {
     /// for the action group or the JSON or YAML-formatted payload defining the
     /// schema. For more information, see [Action group OpenAPI
     /// schemas](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html).
-    api_schema: ?APISchema,
+    api_schema: ?APISchema = null,
 
     /// A description of the action group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Contains details about the function schema for the action group or the JSON
     /// or YAML-formatted payload defining the schema.
-    function_schema: ?FunctionSchema,
+    function_schema: ?FunctionSchema = null,
 
     /// Specify a built-in or computer use action for this action group. If you
     /// specify a value, you must leave the `description`, `apiSchema`, and
@@ -54,7 +54,7 @@ pub const AgentActionGroup = struct {
     ///   edit files.
     /// * `ANTHROPIC.Bash` - Gives the agent permission to run commands in a bash
     ///   shell.
-    parent_action_group_signature: ?ActionGroupSignature,
+    parent_action_group_signature: ?ActionGroupSignature = null,
 
     /// The configuration settings for a computer use action.
     ///
@@ -62,7 +62,7 @@ pub const AgentActionGroup = struct {
     /// with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information,
     /// see [Configure an Amazon Bedrock Agent to complete tasks with computer use
     /// tools](https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html).
-    parent_action_group_signature_params: ?[]const aws.map.StringMapEntry,
+    parent_action_group_signature_params: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .action_group_executor = "actionGroupExecutor",

@@ -24,7 +24,7 @@ pub const ManagedRule = struct {
     /// you specify in this parameter are ignored. To change the tags of an existing
     /// rule, use
     /// `TagResource`.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The template name for the managed Contributor Insights rule, as returned by
     /// `ListManagedInsightRules`.

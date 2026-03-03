@@ -18,25 +18,25 @@ pub const FindMatchesMetrics = struct {
     ///
     /// For more information, see [Precision and
     /// recall](https://en.wikipedia.org/wiki/Precision_and_recall) in Wikipedia.
-    area_under_pr_curve: ?f64,
+    area_under_pr_curve: ?f64 = null,
 
     /// A list of `ColumnImportance` structures containing column importance
     /// metrics, sorted in order of descending importance.
-    column_importances: ?[]const ColumnImportance,
+    column_importances: ?[]const ColumnImportance = null,
 
     /// The confusion matrix shows you what your transform is predicting accurately
     /// and what types of errors it is making.
     ///
     /// For more information, see [Confusion
     /// matrix](https://en.wikipedia.org/wiki/Confusion_matrix) in Wikipedia.
-    confusion_matrix: ?ConfusionMatrix,
+    confusion_matrix: ?ConfusionMatrix = null,
 
     /// The maximum F1 metric indicates the transform's accuracy between 0 and 1,
     /// where 1 is the best accuracy.
     ///
     /// For more information, see [F1 score](https://en.wikipedia.org/wiki/F1_score)
     /// in Wikipedia.
-    f1: ?f64,
+    f1: ?f64 = null,
 
     /// The precision metric indicates when often your transform is correct when it
     /// predicts a match. Specifically, it measures how well the transform finds
@@ -44,7 +44,7 @@ pub const FindMatchesMetrics = struct {
     ///
     /// For more information, see [Precision and
     /// recall](https://en.wikipedia.org/wiki/Precision_and_recall) in Wikipedia.
-    precision: ?f64,
+    precision: ?f64 = null,
 
     /// The recall metric indicates that for an actual match, how often your
     /// transform predicts
@@ -54,7 +54,7 @@ pub const FindMatchesMetrics = struct {
     ///
     /// For more information, see [Precision and
     /// recall](https://en.wikipedia.org/wiki/Precision_and_recall) in Wikipedia.
-    recall: ?f64,
+    recall: ?f64 = null,
 
     pub const json_field_names = .{
         .area_under_pr_curve = "AreaUnderPRCurve",

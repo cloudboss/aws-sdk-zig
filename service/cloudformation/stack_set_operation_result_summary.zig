@@ -7,21 +7,21 @@ const StackSetOperationResultStatus = @import("stack_set_operation_result_status
 pub const StackSetOperationResultSummary = struct {
     /// [Self-managed permissions] The name of the Amazon Web Services account for
     /// this operation result.
-    account: ?[]const u8,
+    account: ?[]const u8 = null,
 
     /// The results of the account gate function CloudFormation invokes, if present,
     /// before proceeding
     /// with StackSet operations in an account.
-    account_gate_result: ?AccountGateResult,
+    account_gate_result: ?AccountGateResult = null,
 
     /// [Service-managed permissions] The organization root ID or organizational
     /// unit (OU) IDs that
     /// you specified for
     /// [DeploymentTargets](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
-    organizational_unit_id: ?[]const u8,
+    organizational_unit_id: ?[]const u8 = null,
 
     /// The name of the Amazon Web Services Region for this operation result.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The result status of the StackSet operation for the given account in the
     /// given
@@ -47,8 +47,8 @@ pub const StackSetOperationResultSummary = struct {
     ///
     /// * `SUCCEEDED`: The operation in the specified account and Region completed
     /// successfully.
-    status: ?StackSetOperationResultStatus,
+    status: ?StackSetOperationResultStatus = null,
 
     /// The reason for the assigned result status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 };

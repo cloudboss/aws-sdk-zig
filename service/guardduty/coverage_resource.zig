@@ -4,29 +4,29 @@ const CoverageResourceDetails = @import("coverage_resource_details.zig").Coverag
 /// Information about the resource of the GuardDuty account.
 pub const CoverageResource = struct {
     /// The unique ID of the Amazon Web Services account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Represents the status of the EKS cluster coverage.
-    coverage_status: ?CoverageStatus,
+    coverage_status: ?CoverageStatus = null,
 
     /// The unique ID of the GuardDuty detector associated with the resource.
-    detector_id: ?[]const u8,
+    detector_id: ?[]const u8 = null,
 
     /// Represents the reason why a coverage status was `UNHEALTHY` for the EKS
     /// cluster.
-    issue: ?[]const u8,
+    issue: ?[]const u8 = null,
 
     /// Information about the resource for which the coverage statistics are
     /// retrieved.
-    resource_details: ?CoverageResourceDetails,
+    resource_details: ?CoverageResourceDetails = null,
 
     /// The unique ID of the resource.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The timestamp at which the coverage details for the resource were last
     /// updated. This is in
     /// UTC format.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

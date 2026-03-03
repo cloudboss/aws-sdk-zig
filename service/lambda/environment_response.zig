@@ -7,10 +7,10 @@ const EnvironmentError = @import("environment_error.zig").EnvironmentError;
 /// fails, the response contains details about the error.
 pub const EnvironmentResponse = struct {
     /// Error messages for environment variables that couldn't be applied.
-    @"error": ?EnvironmentError,
+    @"error": ?EnvironmentError = null,
 
     /// Environment variable key-value pairs. Omitted from CloudTrail logs.
-    variables: ?[]const aws.map.StringMapEntry,
+    variables: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .@"error" = "Error",

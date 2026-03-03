@@ -7,13 +7,13 @@ pub const PeriodOverPeriodComputation = struct {
     computation_id: []const u8,
 
     /// The name of a computation.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The time field that is used in a computation.
-    time: ?DimensionField,
+    time: ?DimensionField = null,
 
     /// The value field that is used in a computation.
-    value: ?MeasureField,
+    value: ?MeasureField = null,
 
     pub const json_field_names = .{
         .computation_id = "ComputationId",

@@ -4,7 +4,7 @@ const PolicyParameter = @import("policy_parameter.zig").PolicyParameter;
 /// policies, which you specify when you create a HIT.
 pub const ReviewPolicy = struct {
     /// Name of the parameter from the Review policy.
-    parameters: ?[]const PolicyParameter,
+    parameters: ?[]const PolicyParameter = null,
 
     /// Name of a Review Policy: SimplePlurality/2011-09-01 or
     /// ScoreMyKnownAnswers/2011-09-01

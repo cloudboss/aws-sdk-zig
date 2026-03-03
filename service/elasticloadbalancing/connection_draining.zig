@@ -5,5 +5,5 @@ pub const ConnectionDraining = struct {
 
     /// The maximum time, in seconds, to keep the existing connections open before
     /// deregistering the instances.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 };

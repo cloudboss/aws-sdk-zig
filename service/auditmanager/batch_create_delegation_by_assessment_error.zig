@@ -4,13 +4,13 @@ const CreateDelegationRequest = @import("create_delegation_request.zig").CreateD
 /// used to provide more meaningful errors than a simple string message.
 pub const BatchCreateDelegationByAssessmentError = struct {
     /// The API request to batch create delegations in Audit Manager.
-    create_delegation_request: ?CreateDelegationRequest,
+    create_delegation_request: ?CreateDelegationRequest = null,
 
     /// The error code that the `BatchCreateDelegationByAssessment` API returned.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message that the `BatchCreateDelegationByAssessment` API returned.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .create_delegation_request = "createDelegationRequest",

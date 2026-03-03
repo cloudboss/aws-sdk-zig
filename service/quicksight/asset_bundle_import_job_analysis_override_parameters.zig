@@ -4,7 +4,7 @@ pub const AssetBundleImportJobAnalysisOverrideParameters = struct {
     analysis_id: []const u8,
 
     /// A new name for the analysis.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .analysis_id = "AnalysisId",

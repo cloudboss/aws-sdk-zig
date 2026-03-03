@@ -5,7 +5,7 @@ pub const CognitoStreams = struct {
     /// The ARN of the role Amazon Cognito can assume in order to publish to the
     /// stream. This role must grant access to Amazon Cognito (cognito-sync) to
     /// invoke PutRecord on your Cognito stream.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Status of the Cognito streams. Valid values are:
     ///
@@ -13,11 +13,11 @@ pub const CognitoStreams = struct {
     ///
     /// DISABLED - Streaming of updates to identity pool is disabled. Bulk publish
     /// will also fail if StreamingStatus is DISABLED.
-    streaming_status: ?StreamingStatus,
+    streaming_status: ?StreamingStatus = null,
 
     /// The name of the Cognito stream to receive updates. This stream must be in
     /// the developers account and in the same region as the identity pool.
-    stream_name: ?[]const u8,
+    stream_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .role_arn = "RoleArn",

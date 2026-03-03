@@ -4,7 +4,7 @@ pub const AssetBundleImportJobDashboardOverrideParameters = struct {
     dashboard_id: []const u8,
 
     /// A new name for the dashboard.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dashboard_id = "DashboardId",

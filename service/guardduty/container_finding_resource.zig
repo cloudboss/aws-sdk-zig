@@ -10,7 +10,7 @@ pub const ContainerFindingResource = struct {
     image: []const u8,
 
     /// The unique ID associated with the container image.
-    image_uid: ?[]const u8,
+    image_uid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .image = "Image",

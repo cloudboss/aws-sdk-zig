@@ -8,7 +8,7 @@ pub const Validation = struct {
     /// Defines enumeration constraints for attribute values. Can specify a list of
     /// allowed values and whether custom
     /// values are permitted beyond the enumerated list.
-    @"enum": ?ValidationEnum,
+    @"enum": ?ValidationEnum = null,
 
     /// The largest exclusive numeric value for NUMBER value type. Can be provided
     /// alongside Maximum where both operate

@@ -6,16 +6,16 @@ const AssetBundleExportJobStatus = @import("asset_bundle_export_job_status.zig")
 /// its current status.
 pub const AssetBundleExportJobSummary = struct {
     /// The ARN of the export job.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The ID of the export job.
-    asset_bundle_export_job_id: ?[]const u8,
+    asset_bundle_export_job_id: ?[]const u8 = null,
 
     /// The time that the export job was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The format for the export job.
-    export_format: ?AssetBundleExportFormat,
+    export_format: ?AssetBundleExportFormat = null,
 
     /// The flag that determines the inclusion of resource dependencies in the
     /// returned asset
@@ -32,7 +32,7 @@ pub const AssetBundleExportJobSummary = struct {
     include_tags: bool = false,
 
     /// The current status of the export job.
-    job_status: ?AssetBundleExportJobStatus,
+    job_status: ?AssetBundleExportJobStatus = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

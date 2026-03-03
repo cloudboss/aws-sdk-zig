@@ -5,7 +5,7 @@ const KeyBlockHeaders = @import("key_block_headers.zig").KeyBlockHeaders;
 pub const ExportTr31KeyBlock = struct {
     /// Optional metadata for export associated with the key material. This data is
     /// signed but transmitted in clear text.
-    key_block_headers: ?KeyBlockHeaders,
+    key_block_headers: ?KeyBlockHeaders = null,
 
     /// The `KeyARN` of the the wrapping key. This key encrypts or wraps the key
     /// under export for TR-31 key block generation.

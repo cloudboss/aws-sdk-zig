@@ -1,16 +1,16 @@
 /// A configuration option setting for the environment.
 pub const AwsElasticBeanstalkEnvironmentOptionSetting = struct {
     /// The type of resource that the configuration option is associated with.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The name of the option.
-    option_name: ?[]const u8,
+    option_name: ?[]const u8 = null,
 
     /// The name of the resource.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// The value of the configuration setting.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .namespace = "Namespace",

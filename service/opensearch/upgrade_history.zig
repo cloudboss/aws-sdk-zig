@@ -6,15 +6,15 @@ const UpgradeStatus = @import("upgrade_status.zig").UpgradeStatus;
 pub const UpgradeHistory = struct {
     /// UTC timestamp at which the upgrade API call was made, in the format
     /// `yyyy-MM-ddTHH:mm:ssZ`.
-    start_timestamp: ?i64,
+    start_timestamp: ?i64 = null,
 
     /// A list of each step performed as part of a specific upgrade or upgrade
     /// eligibility
     /// check.
-    steps_list: ?[]const UpgradeStepItem,
+    steps_list: ?[]const UpgradeStepItem = null,
 
     /// A string that describes the upgrade.
-    upgrade_name: ?[]const u8,
+    upgrade_name: ?[]const u8 = null,
 
     /// The current status of the upgrade. The status can take one of the following
     /// values:
@@ -26,7 +26,7 @@ pub const UpgradeHistory = struct {
     /// * Succeeded with Issues
     ///
     /// * Failed
-    upgrade_status: ?UpgradeStatus,
+    upgrade_status: ?UpgradeStatus = null,
 
     pub const json_field_names = .{
         .start_timestamp = "StartTimestamp",

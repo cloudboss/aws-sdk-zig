@@ -9,7 +9,7 @@ const InstanceFleetResizingSpecifications = @import("instance_fleet_resizing_spe
 /// 4.8.0 and later, excluding 5.0.x versions.
 pub const InstanceFleetConfig = struct {
     /// Reserved.
-    context: ?[]const u8,
+    context: ?[]const u8 = null,
 
     /// The node type that the instance fleet hosts. Valid values are MASTER, CORE,
     /// and
@@ -18,16 +18,16 @@ pub const InstanceFleetConfig = struct {
 
     /// The instance type configurations that define the Amazon EC2 instances in the
     /// instance fleet.
-    instance_type_configs: ?[]const InstanceTypeConfig,
+    instance_type_configs: ?[]const InstanceTypeConfig = null,
 
     /// The launch specification for the instance fleet.
-    launch_specifications: ?InstanceFleetProvisioningSpecifications,
+    launch_specifications: ?InstanceFleetProvisioningSpecifications = null,
 
     /// The friendly name of the instance fleet.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The resize specification for the instance fleet.
-    resize_specifications: ?InstanceFleetResizingSpecifications,
+    resize_specifications: ?InstanceFleetResizingSpecifications = null,
 
     /// The target capacity of On-Demand units for the instance fleet, which
     /// determines how many
@@ -54,7 +54,7 @@ pub const InstanceFleetConfig = struct {
     /// `TargetSpotCapacity`
     /// and `TargetOnDemandCapacity` can be specified, and its value must be
     /// 1.
-    target_on_demand_capacity: ?i32,
+    target_on_demand_capacity: ?i32 = null,
 
     /// The target capacity of Spot units for the instance fleet, which determines
     /// how many Spot
@@ -79,7 +79,7 @@ pub const InstanceFleetConfig = struct {
     /// `TargetOnDemandCapacity` should be greater than 0. For a master instance
     /// fleet, only one of `TargetSpotCapacity` and
     /// `TargetOnDemandCapacity` can be specified, and its value must be 1.
-    target_spot_capacity: ?i32,
+    target_spot_capacity: ?i32 = null,
 
     pub const json_field_names = .{
         .context = "Context",

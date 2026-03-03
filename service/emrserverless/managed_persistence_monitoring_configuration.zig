@@ -2,10 +2,10 @@
 pub const ManagedPersistenceMonitoringConfiguration = struct {
     /// Enables managed logging and defaults to true. If set to false, managed
     /// logging will be turned off.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The KMS key ARN to encrypt the logs stored in managed log persistence.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

@@ -19,7 +19,7 @@ pub const MalaysiaAdditionalInfo = struct {
     /// Services registers your self-declaration that you’re an authorized business
     /// reseller registered with the Royal Malaysia Customs Department (RMCD), and
     /// have a valid SST number.
-    business_registration_number: ?[]const u8,
+    business_registration_number: ?[]const u8 = null,
 
     /// List of service tax codes for your TRN in Malaysia.
     service_tax_codes: []const MalaysiaServiceTaxCode = &.{},
@@ -39,7 +39,7 @@ pub const MalaysiaAdditionalInfo = struct {
     /// Services registers your self-declaration that you’re an authorized business
     /// reseller registered with the Royal Malaysia Customs Department (RMCD), and
     /// have a valid SST number.
-    tax_information_number: ?[]const u8,
+    tax_information_number: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .business_registration_number = "businessRegistrationNumber",

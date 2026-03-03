@@ -14,16 +14,16 @@ pub const AudienceGenerationJobDataSource = struct {
     /// `{"user_id": "222222"}`
     ///
     /// `...`
-    data_source: ?S3ConfigMap,
+    data_source: ?S3ConfigMap = null,
 
     /// The ARN of the IAM role that can read the Amazon S3 bucket where the seed
     /// audience is stored.
     role_arn: []const u8,
 
-    sql_compute_configuration: ?ComputeConfiguration,
+    sql_compute_configuration: ?ComputeConfiguration = null,
 
     /// The protected SQL query parameters.
-    sql_parameters: ?ProtectedQuerySQLParameters,
+    sql_parameters: ?ProtectedQuerySQLParameters = null,
 
     pub const json_field_names = .{
         .data_source = "dataSource",

@@ -1,7 +1,7 @@
 /// Provides additional context for the value of `Compliance.Status`.
 pub const StatusReason = struct {
     /// The corresponding description for the status reason code.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A code that represents a reason for the control status. For the list of
     /// status reason

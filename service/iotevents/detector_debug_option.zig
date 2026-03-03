@@ -8,7 +8,7 @@ pub const DetectorDebugOption = struct {
     /// The value of the input attribute key used to create the detector (the
     /// instance of the
     /// detector model).
-    key_value: ?[]const u8,
+    key_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .detector_model_name = "detectorModelName",

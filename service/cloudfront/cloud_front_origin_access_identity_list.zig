@@ -17,7 +17,7 @@ pub const CloudFrontOriginAccessIdentityList = struct {
     /// A complex type that contains one `CloudFrontOriginAccessIdentitySummary`
     /// element for each origin access identity that was created by the current
     /// Amazon Web Services account.
-    items: ?[]const CloudFrontOriginAccessIdentitySummary,
+    items: ?[]const CloudFrontOriginAccessIdentitySummary = null,
 
     /// Use this when paginating results to indicate where to begin in your list of
     /// origin access identities. The results include identities in the list that
@@ -33,7 +33,7 @@ pub const CloudFrontOriginAccessIdentityList = struct {
     /// If `IsTruncated` is `true`, this element is present and contains the value
     /// you can use for the `Marker` request parameter to continue listing your
     /// origin access identities where they left off.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The number of CloudFront origin access identities that were created by the
     /// current Amazon Web Services account.

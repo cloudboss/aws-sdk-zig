@@ -5,7 +5,7 @@ const ChangeStatus = @import("change_status.zig").ChangeStatus;
 /// zone.
 pub const ChangeInfo = struct {
     /// A comment you can provide.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// This element contains an ID that you use when performing a
     /// [GetChange](https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html) action to get

@@ -5,5 +5,5 @@ const TargetGroup = @import("target_group.zig").TargetGroup;
 /// running Spot Instances with these target groups.
 pub const TargetGroupsConfig = struct {
     /// One or more target groups.
-    target_groups: ?[]const TargetGroup,
+    target_groups: ?[]const TargetGroup = null,
 };

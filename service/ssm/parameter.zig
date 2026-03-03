@@ -3,18 +3,18 @@ const ParameterType = @import("parameter_type.zig").ParameterType;
 /// An Amazon Web Services Systems Manager parameter in Parameter Store.
 pub const Parameter = struct {
     /// The Amazon Resource Name (ARN) of the parameter.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The data type of the parameter, such as `text` or `aws:ec2:image`. The
     /// default is `text`.
-    data_type: ?[]const u8,
+    data_type: ?[]const u8 = null,
 
     /// Date the parameter was last changed or updated and the parameter version was
     /// created.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The name of the parameter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Either the version number or the label used to retrieve the parameter value.
     /// Specify
@@ -23,25 +23,25 @@ pub const Parameter = struct {
     /// parameter_name:version
     ///
     /// parameter_name:label
-    selector: ?[]const u8,
+    selector: ?[]const u8 = null,
 
     /// Applies to parameters that reference information in other Amazon Web
     /// Services services.
     /// `SourceResult` is the raw result or response from the source.
-    source_result: ?[]const u8,
+    source_result: ?[]const u8 = null,
 
     /// The type of parameter. Valid values include the following: `String`,
     /// `StringList`, and `SecureString`.
     ///
     /// If type is `StringList`, the system returns a comma-separated string with no
     /// spaces between commas in the `Value` field.
-    @"type": ?ParameterType,
+    @"type": ?ParameterType = null,
 
     /// The parameter value.
     ///
     /// If type is `StringList`, the system returns a comma-separated string with no
     /// spaces between commas in the `Value` field.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     /// The parameter version.
     version: i64 = 0,

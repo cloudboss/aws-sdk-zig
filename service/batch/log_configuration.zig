@@ -110,12 +110,12 @@ pub const LogConfiguration = struct {
     /// instance, log in to your
     /// container instance and run the following command: `sudo docker version |
     /// grep "Server API version"`
-    options: ?[]const aws.map.StringMapEntry,
+    options: ?[]const aws.map.StringMapEntry = null,
 
     /// The secrets to pass to the log configuration. For more information, see
     /// [Specifying sensitive
     /// data](https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html) in the *Batch User Guide*.
-    secret_options: ?[]const Secret,
+    secret_options: ?[]const Secret = null,
 
     pub const json_field_names = .{
         .log_driver = "logDriver",

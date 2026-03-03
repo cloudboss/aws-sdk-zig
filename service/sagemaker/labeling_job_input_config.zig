@@ -4,7 +4,7 @@ const LabelingJobDataSource = @import("labeling_job_data_source.zig").LabelingJo
 /// Input configuration information for a labeling job.
 pub const LabelingJobInputConfig = struct {
     /// Attributes of the data specified by the customer.
-    data_attributes: ?LabelingJobDataAttributes,
+    data_attributes: ?LabelingJobDataAttributes = null,
 
     /// The location of the input data.
     data_source: LabelingJobDataSource,

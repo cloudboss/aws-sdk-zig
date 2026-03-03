@@ -5,7 +5,7 @@ const ErrorHandlingConfig = @import("error_handling_config.zig").ErrorHandlingCo
 pub const RedshiftDestinationProperties = struct {
     /// The object key for the bucket in which Amazon AppFlow places the destination
     /// files.
-    bucket_prefix: ?[]const u8,
+    bucket_prefix: ?[]const u8 = null,
 
     /// The settings that determine how Amazon AppFlow handles an error when placing
     /// data in
@@ -15,7 +15,7 @@ pub const RedshiftDestinationProperties = struct {
     /// every record
     /// regardless of the initial failure. `ErrorHandlingConfig` is a part of the
     /// destination connector details.
-    error_handling_config: ?ErrorHandlingConfig,
+    error_handling_config: ?ErrorHandlingConfig = null,
 
     /// The intermediate bucket that Amazon AppFlow uses when moving data into
     /// Amazon Redshift.

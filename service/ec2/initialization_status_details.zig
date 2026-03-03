@@ -10,7 +10,7 @@ pub const InitializationStatusDetails = struct {
     ///
     /// Only available for volumes created with Amazon EBS Provisioned Rate for
     /// Volume Initialization.
-    estimated_time_to_complete_in_seconds: ?i64,
+    estimated_time_to_complete_in_seconds: ?i64 = null,
 
     /// The method used for volume initialization. Possible values include:
     ///
@@ -21,10 +21,10 @@ pub const InitializationStatusDetails = struct {
     /// Rate for Volume Initialization.
     ///
     /// * `volume-copy` - Volume copy initialized at the rate for volume copies.
-    initialization_type: ?InitializationType,
+    initialization_type: ?InitializationType = null,
 
     /// The current volume initialization progress as a percentage (0-100). Returns
     /// `100`
     /// when volume initialization has completed.
-    progress: ?i64,
+    progress: ?i64 = null,
 };

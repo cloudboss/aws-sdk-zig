@@ -1,7 +1,7 @@
 /// Provides the details of the `ActivityTaskCanceled` event.
 pub const ActivityTaskCanceledEventAttributes = struct {
     /// Details of the cancellation.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// If set, contains the ID of the last `ActivityTaskCancelRequested` event
     /// recorded for this activity task. This information can be useful for

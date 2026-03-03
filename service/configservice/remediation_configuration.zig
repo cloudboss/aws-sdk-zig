@@ -9,7 +9,7 @@ const RemediationTargetType = @import("remediation_target_type.zig").Remediation
 /// action.
 pub const RemediationConfiguration = struct {
     /// Amazon Resource Name (ARN) of remediation configuration.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The remediation is triggered automatically.
     automatic: bool = false,
@@ -18,10 +18,10 @@ pub const RemediationConfiguration = struct {
     config_rule_name: []const u8,
 
     /// Name of the service that owns the service-linked rule, if applicable.
-    created_by_service: ?[]const u8,
+    created_by_service: ?[]const u8 = null,
 
     /// An ExecutionControls object.
-    execution_controls: ?ExecutionControls,
+    execution_controls: ?ExecutionControls = null,
 
     /// The maximum number of failed attempts for auto-remediation. If you do not
     /// select a number, the default is 5.
@@ -31,13 +31,13 @@ pub const RemediationConfiguration = struct {
     ///
     /// Config will put a RemediationException on your behalf for the failing
     /// resource after the 5th failed attempt within 50 seconds.
-    maximum_automatic_attempts: ?i32,
+    maximum_automatic_attempts: ?i32 = null,
 
     /// An object of the RemediationParameterValue.
-    parameters: ?[]const aws.map.MapEntry(RemediationParameterValue),
+    parameters: ?[]const aws.map.MapEntry(RemediationParameterValue) = null,
 
     /// The type of a resource.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// Time window to determine whether or not to add a remediation exception to
     /// prevent infinite remediation attempts.
@@ -50,7 +50,7 @@ pub const RemediationConfiguration = struct {
     /// `MaximumAutomaticAttempts` as 5,
     /// Config will run auto-remediations 5 times within 50 seconds before adding a
     /// remediation exception to the resource.
-    retry_attempt_seconds: ?i64,
+    retry_attempt_seconds: ?i64 = null,
 
     /// Target ID is the name of the SSM document.
     target_id: []const u8,
@@ -64,7 +64,7 @@ pub const RemediationConfiguration = struct {
     /// If you make backward incompatible changes to the SSM document,
     /// you must call PutRemediationConfiguration API again to ensure the
     /// remediations can run.
-    target_version: ?[]const u8,
+    target_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

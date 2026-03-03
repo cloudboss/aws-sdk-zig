@@ -5,12 +5,12 @@ pub const LivePreRollConfiguration = struct {
     /// AWS Elemental MediaTailor substitutes player-specific and session-specific
     /// parameters as needed when calling the ADS. Alternately, for testing, you can
     /// provide a static VAST URL. The maximum length is 25,000 characters.
-    ad_decision_server_url: ?[]const u8,
+    ad_decision_server_url: ?[]const u8 = null,
 
     /// The maximum allowed duration for the pre-roll ad avail. AWS Elemental
     /// MediaTailor won't play pre-roll ads to exceed this duration, regardless of
     /// the total duration of ads that the ADS returns.
-    max_duration_seconds: ?i32,
+    max_duration_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .ad_decision_server_url = "AdDecisionServerUrl",

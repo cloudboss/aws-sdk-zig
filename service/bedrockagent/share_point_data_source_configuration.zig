@@ -5,7 +5,7 @@ const SharePointSourceConfiguration = @import("share_point_source_configuration.
 pub const SharePointDataSourceConfiguration = struct {
     /// The configuration of the SharePoint content. For example, configuring
     /// specific types of SharePoint content.
-    crawler_configuration: ?SharePointCrawlerConfiguration,
+    crawler_configuration: ?SharePointCrawlerConfiguration = null,
 
     /// The endpoint information to connect to your SharePoint data source.
     source_configuration: SharePointSourceConfiguration,

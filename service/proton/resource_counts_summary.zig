@@ -2,15 +2,15 @@
 pub const ResourceCountsSummary = struct {
     /// The number of resources of this type in the Amazon Web Services account that
     /// need a major template version update.
-    behind_major: ?i32,
+    behind_major: ?i32 = null,
 
     /// The number of resources of this type in the Amazon Web Services account that
     /// need a minor template version update.
-    behind_minor: ?i32,
+    behind_minor: ?i32 = null,
 
     /// The number of resources of this type in the Amazon Web Services account that
     /// failed to deploy.
-    failed: ?i32,
+    failed: ?i32 = null,
 
     /// The total number of resources of this type in the Amazon Web Services
     /// account.
@@ -18,7 +18,7 @@ pub const ResourceCountsSummary = struct {
 
     /// The number of resources of this type in the Amazon Web Services account that
     /// are up-to-date with their template.
-    up_to_date: ?i32,
+    up_to_date: ?i32 = null,
 
     pub const json_field_names = .{
         .behind_major = "behindMajor",

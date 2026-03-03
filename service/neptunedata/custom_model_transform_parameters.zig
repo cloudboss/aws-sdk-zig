@@ -12,7 +12,7 @@ pub const CustomModelTransformParameters = struct {
     /// after the best model from the hyperparameter search has been identified, to
     /// compute the model artifacts necessary for model deployment. It should be
     /// able to run with no command-line arguments. The default is `transform.py`.
-    transform_entry_point_script: ?[]const u8,
+    transform_entry_point_script: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_s3_directory_path = "sourceS3DirectoryPath",

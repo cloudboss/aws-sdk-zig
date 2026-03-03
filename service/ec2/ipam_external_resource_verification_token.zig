@@ -8,35 +8,35 @@ const Tag = @import("tag.zig").Tag;
 /// range when you bring an IP address range to Amazon Web Services (BYOIP).
 pub const IpamExternalResourceVerificationToken = struct {
     /// ARN of the IPAM that created the token.
-    ipam_arn: ?[]const u8,
+    ipam_arn: ?[]const u8 = null,
 
     /// Token ARN.
-    ipam_external_resource_verification_token_arn: ?[]const u8,
+    ipam_external_resource_verification_token_arn: ?[]const u8 = null,
 
     /// The ID of the token.
-    ipam_external_resource_verification_token_id: ?[]const u8,
+    ipam_external_resource_verification_token_id: ?[]const u8 = null,
 
     /// The ID of the IPAM that created the token.
-    ipam_id: ?[]const u8,
+    ipam_id: ?[]const u8 = null,
 
     /// Region of the IPAM that created the token.
-    ipam_region: ?[]const u8,
+    ipam_region: ?[]const u8 = null,
 
     /// Token expiration.
-    not_after: ?i64,
+    not_after: ?i64 = null,
 
     /// Token state.
-    state: ?IpamExternalResourceVerificationTokenState,
+    state: ?IpamExternalResourceVerificationTokenState = null,
 
     /// Token status.
-    status: ?TokenState,
+    status: ?TokenState = null,
 
     /// Token tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// Token name.
-    token_name: ?[]const u8,
+    token_name: ?[]const u8 = null,
 
     /// Token value.
-    token_value: ?[]const u8,
+    token_value: ?[]const u8 = null,
 };

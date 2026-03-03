@@ -118,348 +118,348 @@ pub const ResourceDetails = struct {
     /// software applications and
     /// components to communicate using various programming languages, operating
     /// systems, and formal messaging protocols.
-    aws_amazon_mq_broker: ?AwsAmazonMqBrokerDetails,
+    aws_amazon_mq_broker: ?AwsAmazonMqBrokerDetails = null,
 
     /// Provides information about a REST API in version 1 of Amazon API Gateway.
-    aws_api_gateway_rest_api: ?AwsApiGatewayRestApiDetails,
+    aws_api_gateway_rest_api: ?AwsApiGatewayRestApiDetails = null,
 
     /// Provides information about a version 1 Amazon API Gateway stage.
-    aws_api_gateway_stage: ?AwsApiGatewayStageDetails,
+    aws_api_gateway_stage: ?AwsApiGatewayStageDetails = null,
 
     /// Provides information about a version 2 API in Amazon API Gateway.
-    aws_api_gateway_v2_api: ?AwsApiGatewayV2ApiDetails,
+    aws_api_gateway_v2_api: ?AwsApiGatewayV2ApiDetails = null,
 
     /// Provides information about a version 2 stage for Amazon API Gateway.
-    aws_api_gateway_v2_stage: ?AwsApiGatewayV2StageDetails,
+    aws_api_gateway_v2_stage: ?AwsApiGatewayV2StageDetails = null,
 
     /// Provides details about an AppSync Graph QL API, which lets you query
     /// multiple databases, microservices,
     /// and APIs from a single GraphQL endpoint.
-    aws_app_sync_graph_ql_api: ?AwsAppSyncGraphQlApiDetails,
+    aws_app_sync_graph_ql_api: ?AwsAppSyncGraphQlApiDetails = null,
 
     /// Provides information about an Amazon Athena workgroup. A workgroup helps you
     /// separate users, teams,
     /// applications, or workloads. It also helps you set limits on data processing
     /// and track costs.
-    aws_athena_work_group: ?AwsAthenaWorkGroupDetails,
+    aws_athena_work_group: ?AwsAthenaWorkGroupDetails = null,
 
     /// Details for an autoscaling group.
-    aws_auto_scaling_auto_scaling_group: ?AwsAutoScalingAutoScalingGroupDetails,
+    aws_auto_scaling_auto_scaling_group: ?AwsAutoScalingAutoScalingGroupDetails = null,
 
     /// Provides details about a launch configuration.
-    aws_auto_scaling_launch_configuration: ?AwsAutoScalingLaunchConfigurationDetails,
+    aws_auto_scaling_launch_configuration: ?AwsAutoScalingLaunchConfigurationDetails = null,
 
     /// Provides details about an Backup backup plan.
-    aws_backup_backup_plan: ?AwsBackupBackupPlanDetails,
+    aws_backup_backup_plan: ?AwsBackupBackupPlanDetails = null,
 
     /// Provides details about an Backup backup vault.
-    aws_backup_backup_vault: ?AwsBackupBackupVaultDetails,
+    aws_backup_backup_vault: ?AwsBackupBackupVaultDetails = null,
 
     /// Provides details about an Backup backup, or recovery point.
-    aws_backup_recovery_point: ?AwsBackupRecoveryPointDetails,
+    aws_backup_recovery_point: ?AwsBackupRecoveryPointDetails = null,
 
     /// Provides details about an Certificate Manager certificate.
-    aws_certificate_manager_certificate: ?AwsCertificateManagerCertificateDetails,
+    aws_certificate_manager_certificate: ?AwsCertificateManagerCertificateDetails = null,
 
     /// Details about an CloudFormation stack. A stack is a collection of Amazon Web
     /// Services resources that you can manage as a single unit.
-    aws_cloud_formation_stack: ?AwsCloudFormationStackDetails,
+    aws_cloud_formation_stack: ?AwsCloudFormationStackDetails = null,
 
     /// Details about a CloudFront distribution.
-    aws_cloud_front_distribution: ?AwsCloudFrontDistributionDetails,
+    aws_cloud_front_distribution: ?AwsCloudFrontDistributionDetails = null,
 
     /// Provides details about a CloudTrail trail.
-    aws_cloud_trail_trail: ?AwsCloudTrailTrailDetails,
+    aws_cloud_trail_trail: ?AwsCloudTrailTrailDetails = null,
 
     /// Details about an Amazon CloudWatch alarm. An alarm allows you to monitor and
     /// receive alerts about your Amazon Web Services resources and applications
     /// across multiple Regions.
-    aws_cloud_watch_alarm: ?AwsCloudWatchAlarmDetails,
+    aws_cloud_watch_alarm: ?AwsCloudWatchAlarmDetails = null,
 
     /// Details for an CodeBuild project.
-    aws_code_build_project: ?AwsCodeBuildProjectDetails,
+    aws_code_build_project: ?AwsCodeBuildProjectDetails = null,
 
     /// Provides details about an Database Migration Service (DMS) endpoint. An
     /// endpoint provides connection, data
     /// store type, and location information about your data store.
-    aws_dms_endpoint: ?AwsDmsEndpointDetails,
+    aws_dms_endpoint: ?AwsDmsEndpointDetails = null,
 
     /// Provides details about an DMS replication instance. DMS uses a replication
     /// instance to connect to your
     /// source data store, read the source data, and format the data for consumption
     /// by the target data store.
-    aws_dms_replication_instance: ?AwsDmsReplicationInstanceDetails,
+    aws_dms_replication_instance: ?AwsDmsReplicationInstanceDetails = null,
 
     /// Provides details about an DMS replication task. A replication task moves a
     /// set of data from the source
     /// endpoint to the target endpoint.
-    aws_dms_replication_task: ?AwsDmsReplicationTaskDetails,
+    aws_dms_replication_task: ?AwsDmsReplicationTaskDetails = null,
 
     /// Details about a DynamoDB table.
-    aws_dynamo_db_table: ?AwsDynamoDbTableDetails,
+    aws_dynamo_db_table: ?AwsDynamoDbTableDetails = null,
 
     /// Provides details about an Client VPN endpoint. A Client VPN endpoint is the
     /// resource that you
     /// create and configure to enable and manage client VPN sessions. It's the
     /// termination point for all client VPN sessions.
-    aws_ec_2_client_vpn_endpoint: ?AwsEc2ClientVpnEndpointDetails,
+    aws_ec_2_client_vpn_endpoint: ?AwsEc2ClientVpnEndpointDetails = null,
 
     /// Details about an Elastic IP address.
-    aws_ec_2_eip: ?AwsEc2EipDetails,
+    aws_ec_2_eip: ?AwsEc2EipDetails = null,
 
     /// Details about an EC2 instance related to a finding.
-    aws_ec_2_instance: ?AwsEc2InstanceDetails,
+    aws_ec_2_instance: ?AwsEc2InstanceDetails = null,
 
-    aws_ec_2_launch_template: ?AwsEc2LaunchTemplateDetails,
+    aws_ec_2_launch_template: ?AwsEc2LaunchTemplateDetails = null,
 
     /// Details about an EC2 network access control list (ACL).
-    aws_ec_2_network_acl: ?AwsEc2NetworkAclDetails,
+    aws_ec_2_network_acl: ?AwsEc2NetworkAclDetails = null,
 
     /// Details for an EC2 network interface.
-    aws_ec_2_network_interface: ?AwsEc2NetworkInterfaceDetails,
+    aws_ec_2_network_interface: ?AwsEc2NetworkInterfaceDetails = null,
 
     /// Provides details about a route table. A route table contains a set of rules,
     /// called routes, that
     /// determine where to direct network traffic from your subnet or gateway.
-    aws_ec_2_route_table: ?AwsEc2RouteTableDetails,
+    aws_ec_2_route_table: ?AwsEc2RouteTableDetails = null,
 
     /// Details for an EC2 security group.
-    aws_ec_2_security_group: ?AwsEc2SecurityGroupDetails,
+    aws_ec_2_security_group: ?AwsEc2SecurityGroupDetails = null,
 
     /// Details about a subnet in Amazon EC2.
-    aws_ec_2_subnet: ?AwsEc2SubnetDetails,
+    aws_ec_2_subnet: ?AwsEc2SubnetDetails = null,
 
     /// Details about an Amazon EC2 transit gateway that interconnects your virtual
     /// private clouds (VPC) and on-premises networks.
-    aws_ec_2_transit_gateway: ?AwsEc2TransitGatewayDetails,
+    aws_ec_2_transit_gateway: ?AwsEc2TransitGatewayDetails = null,
 
     /// Details for an Amazon EC2 volume.
-    aws_ec_2_volume: ?AwsEc2VolumeDetails,
+    aws_ec_2_volume: ?AwsEc2VolumeDetails = null,
 
     /// Details for an Amazon EC2 VPC.
-    aws_ec_2_vpc: ?AwsEc2VpcDetails,
+    aws_ec_2_vpc: ?AwsEc2VpcDetails = null,
 
     /// Details about the service configuration for a VPC endpoint service.
-    aws_ec_2_vpc_endpoint_service: ?AwsEc2VpcEndpointServiceDetails,
+    aws_ec_2_vpc_endpoint_service: ?AwsEc2VpcEndpointServiceDetails = null,
 
     /// Details about an Amazon EC2 VPC peering connection. A VPC peering connection
     /// is
     /// a networking connection between two VPCs that enables you to route traffic
     /// between them
     /// privately.
-    aws_ec_2_vpc_peering_connection: ?AwsEc2VpcPeeringConnectionDetails,
+    aws_ec_2_vpc_peering_connection: ?AwsEc2VpcPeeringConnectionDetails = null,
 
     /// Details about an Amazon EC2 VPN connection.
-    aws_ec_2_vpn_connection: ?AwsEc2VpnConnectionDetails,
+    aws_ec_2_vpn_connection: ?AwsEc2VpnConnectionDetails = null,
 
     /// Information about an Amazon ECR image.
-    aws_ecr_container_image: ?AwsEcrContainerImageDetails,
+    aws_ecr_container_image: ?AwsEcrContainerImageDetails = null,
 
     /// Information about an Amazon Elastic Container Registry repository.
-    aws_ecr_repository: ?AwsEcrRepositoryDetails,
+    aws_ecr_repository: ?AwsEcrRepositoryDetails = null,
 
     /// Details about an Amazon ECS cluster.
-    aws_ecs_cluster: ?AwsEcsClusterDetails,
+    aws_ecs_cluster: ?AwsEcsClusterDetails = null,
 
     /// Provides information about a Docker container that's part of a task.
-    aws_ecs_container: ?AwsEcsContainerDetails,
+    aws_ecs_container: ?AwsEcsContainerDetails = null,
 
     /// Details about a service within an ECS cluster.
-    aws_ecs_service: ?AwsEcsServiceDetails,
+    aws_ecs_service: ?AwsEcsServiceDetails = null,
 
     /// Details about a task in a cluster.
-    aws_ecs_task: ?AwsEcsTaskDetails,
+    aws_ecs_task: ?AwsEcsTaskDetails = null,
 
     /// Details about a task definition. A task definition describes the container
     /// and volume definitions of an Amazon Elastic Container Service task.
-    aws_ecs_task_definition: ?AwsEcsTaskDefinitionDetails,
+    aws_ecs_task_definition: ?AwsEcsTaskDefinitionDetails = null,
 
     /// Details about an Amazon EFS access point. An access point is an
     /// application-specific view into an EFS file system that
     /// applies an operating system user and group, and a file system path, to any
     /// file system request made through the access point.
-    aws_efs_access_point: ?AwsEfsAccessPointDetails,
+    aws_efs_access_point: ?AwsEfsAccessPointDetails = null,
 
     /// Details about an Amazon EKS cluster.
-    aws_eks_cluster: ?AwsEksClusterDetails,
+    aws_eks_cluster: ?AwsEksClusterDetails = null,
 
     /// Details about an Elastic Beanstalk environment.
-    aws_elastic_beanstalk_environment: ?AwsElasticBeanstalkEnvironmentDetails,
+    aws_elastic_beanstalk_environment: ?AwsElasticBeanstalkEnvironmentDetails = null,
 
     /// Details for an Elasticsearch domain.
-    aws_elasticsearch_domain: ?AwsElasticsearchDomainDetails,
+    aws_elasticsearch_domain: ?AwsElasticsearchDomainDetails = null,
 
     /// Contains details about a Classic Load Balancer.
-    aws_elb_load_balancer: ?AwsElbLoadBalancerDetails,
+    aws_elb_load_balancer: ?AwsElbLoadBalancerDetails = null,
 
     /// Details about a load balancer.
-    aws_elbv_2_load_balancer: ?AwsElbv2LoadBalancerDetails,
+    aws_elbv_2_load_balancer: ?AwsElbv2LoadBalancerDetails = null,
 
     /// A schema defines the structure of events that are sent to Amazon
     /// EventBridge. Schema registries are containers for
     /// schemas. They collect and organize schemas so that your schemas are in
     /// logical groups.
-    aws_event_schemas_registry: ?AwsEventSchemasRegistryDetails,
+    aws_event_schemas_registry: ?AwsEventSchemasRegistryDetails = null,
 
     /// Provides details about an Amazon EventBridge global endpoint. The endpoint
     /// can improve your application’s
     /// availability by making it Regional-fault tolerant.
-    aws_events_endpoint: ?AwsEventsEndpointDetails,
+    aws_events_endpoint: ?AwsEventsEndpointDetails = null,
 
     /// Provides details about Amazon EventBridge event bus for an endpoint. An
     /// event bus is a router that receives events
     /// and delivers them to zero or more destinations, or targets.
-    aws_events_eventbus: ?AwsEventsEventbusDetails,
+    aws_events_eventbus: ?AwsEventsEventbusDetails = null,
 
     /// Provides details about an Amazon GuardDuty detector. A detector is an object
     /// that represents the GuardDuty
     /// service. A detector is required for GuardDuty to become operational.
-    aws_guard_duty_detector: ?AwsGuardDutyDetectorDetails,
+    aws_guard_duty_detector: ?AwsGuardDutyDetectorDetails = null,
 
     /// Details about an IAM access key related to a finding.
-    aws_iam_access_key: ?AwsIamAccessKeyDetails,
+    aws_iam_access_key: ?AwsIamAccessKeyDetails = null,
 
     /// Contains details about an IAM group.
-    aws_iam_group: ?AwsIamGroupDetails,
+    aws_iam_group: ?AwsIamGroupDetails = null,
 
     /// Details about an IAM permissions policy.
-    aws_iam_policy: ?AwsIamPolicyDetails,
+    aws_iam_policy: ?AwsIamPolicyDetails = null,
 
     /// Details about an IAM role.
-    aws_iam_role: ?AwsIamRoleDetails,
+    aws_iam_role: ?AwsIamRoleDetails = null,
 
     /// Details about an IAM user.
-    aws_iam_user: ?AwsIamUserDetails,
+    aws_iam_user: ?AwsIamUserDetails = null,
 
     /// Details about an Amazon Kinesis data stream.
-    aws_kinesis_stream: ?AwsKinesisStreamDetails,
+    aws_kinesis_stream: ?AwsKinesisStreamDetails = null,
 
     /// Details about an KMS key.
-    aws_kms_key: ?AwsKmsKeyDetails,
+    aws_kms_key: ?AwsKmsKeyDetails = null,
 
     /// Details about a Lambda function.
-    aws_lambda_function: ?AwsLambdaFunctionDetails,
+    aws_lambda_function: ?AwsLambdaFunctionDetails = null,
 
     /// Details for a Lambda layer version.
-    aws_lambda_layer_version: ?AwsLambdaLayerVersionDetails,
+    aws_lambda_layer_version: ?AwsLambdaLayerVersionDetails = null,
 
     /// Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon
     /// MSK) cluster.
-    aws_msk_cluster: ?AwsMskClusterDetails,
+    aws_msk_cluster: ?AwsMskClusterDetails = null,
 
     /// Details about an Network Firewall firewall.
-    aws_network_firewall_firewall: ?AwsNetworkFirewallFirewallDetails,
+    aws_network_firewall_firewall: ?AwsNetworkFirewallFirewallDetails = null,
 
     /// Details about an Network Firewall firewall policy.
-    aws_network_firewall_firewall_policy: ?AwsNetworkFirewallFirewallPolicyDetails,
+    aws_network_firewall_firewall_policy: ?AwsNetworkFirewallFirewallPolicyDetails = null,
 
     /// Details about an Network Firewall rule group.
-    aws_network_firewall_rule_group: ?AwsNetworkFirewallRuleGroupDetails,
+    aws_network_firewall_rule_group: ?AwsNetworkFirewallRuleGroupDetails = null,
 
     /// Details about an Amazon OpenSearch Service domain.
-    aws_open_search_service_domain: ?AwsOpenSearchServiceDomainDetails,
+    aws_open_search_service_domain: ?AwsOpenSearchServiceDomainDetails = null,
 
     /// Details about an Amazon RDS database cluster.
-    aws_rds_db_cluster: ?AwsRdsDbClusterDetails,
+    aws_rds_db_cluster: ?AwsRdsDbClusterDetails = null,
 
     /// Details about an Amazon RDS database cluster snapshot.
-    aws_rds_db_cluster_snapshot: ?AwsRdsDbClusterSnapshotDetails,
+    aws_rds_db_cluster_snapshot: ?AwsRdsDbClusterSnapshotDetails = null,
 
     /// Details about an Amazon RDS database instance.
-    aws_rds_db_instance: ?AwsRdsDbInstanceDetails,
+    aws_rds_db_instance: ?AwsRdsDbInstanceDetails = null,
 
     /// Details about an Amazon RDS DB security group.
-    aws_rds_db_security_group: ?AwsRdsDbSecurityGroupDetails,
+    aws_rds_db_security_group: ?AwsRdsDbSecurityGroupDetails = null,
 
     /// Details about an Amazon RDS database snapshot.
-    aws_rds_db_snapshot: ?AwsRdsDbSnapshotDetails,
+    aws_rds_db_snapshot: ?AwsRdsDbSnapshotDetails = null,
 
     /// Details about an RDS event notification subscription.
-    aws_rds_event_subscription: ?AwsRdsEventSubscriptionDetails,
+    aws_rds_event_subscription: ?AwsRdsEventSubscriptionDetails = null,
 
     /// Contains details about an Amazon Redshift cluster.
-    aws_redshift_cluster: ?AwsRedshiftClusterDetails,
+    aws_redshift_cluster: ?AwsRedshiftClusterDetails = null,
 
     /// Provides details about an Amazon Route 53 hosted zone, including the four
     /// name servers assigned to the hosted
     /// zone. A hosted zone represents a collection of records that can be managed
     /// together, belonging to a single parent domain name.
-    aws_route_53_hosted_zone: ?AwsRoute53HostedZoneDetails,
+    aws_route_53_hosted_zone: ?AwsRoute53HostedZoneDetails = null,
 
     /// Provides details about an Amazon Simple Storage Service (Amazon S3) access
     /// point. S3 access points are named network
     /// endpoints that are attached to S3 buckets that you can use to perform S3
     /// object operations.
-    aws_s3_access_point: ?AwsS3AccessPointDetails,
+    aws_s3_access_point: ?AwsS3AccessPointDetails = null,
 
     /// Details about the Amazon S3 Public Access Block configuration for an
     /// account.
-    aws_s3_account_public_access_block: ?AwsS3AccountPublicAccessBlockDetails,
+    aws_s3_account_public_access_block: ?AwsS3AccountPublicAccessBlockDetails = null,
 
     /// Details about an S3 bucket related to a finding.
-    aws_s3_bucket: ?AwsS3BucketDetails,
+    aws_s3_bucket: ?AwsS3BucketDetails = null,
 
     /// Details about an S3 object related to a finding.
-    aws_s3_object: ?AwsS3ObjectDetails,
+    aws_s3_object: ?AwsS3ObjectDetails = null,
 
-    aws_sage_maker_notebook_instance: ?AwsSageMakerNotebookInstanceDetails,
+    aws_sage_maker_notebook_instance: ?AwsSageMakerNotebookInstanceDetails = null,
 
     /// Details about a Secrets Manager secret.
-    aws_secrets_manager_secret: ?AwsSecretsManagerSecretDetails,
+    aws_secrets_manager_secret: ?AwsSecretsManagerSecretDetails = null,
 
     /// Details about an SNS topic.
-    aws_sns_topic: ?AwsSnsTopicDetails,
+    aws_sns_topic: ?AwsSnsTopicDetails = null,
 
     /// Details about an SQS queue.
-    aws_sqs_queue: ?AwsSqsQueueDetails,
+    aws_sqs_queue: ?AwsSqsQueueDetails = null,
 
     /// Provides information about the state of a patch on an instance based on the
     /// patch baseline that was used to patch the instance.
-    aws_ssm_patch_compliance: ?AwsSsmPatchComplianceDetails,
+    aws_ssm_patch_compliance: ?AwsSsmPatchComplianceDetails = null,
 
     /// Provides details about an Step Functions state machine, which is a workflow
     /// consisting of a series of event-driven steps.
-    aws_step_function_state_machine: ?AwsStepFunctionStateMachineDetails,
+    aws_step_function_state_machine: ?AwsStepFunctionStateMachineDetails = null,
 
     /// Details about a rate-based rule for global resources.
-    aws_waf_rate_based_rule: ?AwsWafRateBasedRuleDetails,
+    aws_waf_rate_based_rule: ?AwsWafRateBasedRuleDetails = null,
 
     /// Details about a rate-based rule for Regional resources.
-    aws_waf_regional_rate_based_rule: ?AwsWafRegionalRateBasedRuleDetails,
+    aws_waf_regional_rate_based_rule: ?AwsWafRegionalRateBasedRuleDetails = null,
 
     /// Details about an WAF rule for Regional resources.
-    aws_waf_regional_rule: ?AwsWafRegionalRuleDetails,
+    aws_waf_regional_rule: ?AwsWafRegionalRuleDetails = null,
 
     /// Details about an WAF rule group for Regional resources.
-    aws_waf_regional_rule_group: ?AwsWafRegionalRuleGroupDetails,
+    aws_waf_regional_rule_group: ?AwsWafRegionalRuleGroupDetails = null,
 
     /// Details about an WAF web access control list (web ACL) for Regional
     /// resources.
-    aws_waf_regional_web_acl: ?AwsWafRegionalWebAclDetails,
+    aws_waf_regional_web_acl: ?AwsWafRegionalWebAclDetails = null,
 
     /// Details about an WAF rule for global resources.
-    aws_waf_rule: ?AwsWafRuleDetails,
+    aws_waf_rule: ?AwsWafRuleDetails = null,
 
     /// Details about an WAF rule group for global resources.
-    aws_waf_rule_group: ?AwsWafRuleGroupDetails,
+    aws_waf_rule_group: ?AwsWafRuleGroupDetails = null,
 
-    aws_wafv_2_rule_group: ?AwsWafv2RuleGroupDetails,
+    aws_wafv_2_rule_group: ?AwsWafv2RuleGroupDetails = null,
 
-    aws_wafv_2_web_acl: ?AwsWafv2WebAclDetails,
+    aws_wafv_2_web_acl: ?AwsWafv2WebAclDetails = null,
 
     /// Details for an WAF web ACL.
-    aws_waf_web_acl: ?AwsWafWebAclDetails,
+    aws_waf_web_acl: ?AwsWafWebAclDetails = null,
 
     /// Information about the encryption configuration for X-Ray.
-    aws_xray_encryption_config: ?AwsXrayEncryptionConfigDetails,
+    aws_xray_encryption_config: ?AwsXrayEncryptionConfigDetails = null,
 
     /// Details about an external code repository with which you can connect your
     /// Amazon Web Services resources.
     /// The connection is established through Amazon Inspector.
-    code_repository: ?CodeRepositoryDetails,
+    code_repository: ?CodeRepositoryDetails = null,
 
     /// Details about a container resource related to a finding.
-    container: ?ContainerDetails,
+    container: ?ContainerDetails = null,
 
     /// Details about a resource that are not available in a type-specific details
     /// object. Use
@@ -475,7 +475,7 @@ pub const ResourceDetails = struct {
     /// * The resource type does not have a corresponding object. This includes
     ///   resources
     /// for which the type is `Other`.
-    other: ?[]const aws.map.StringMapEntry,
+    other: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .aws_amazon_mq_broker = "AwsAmazonMqBroker",

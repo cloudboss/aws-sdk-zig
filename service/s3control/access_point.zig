@@ -4,23 +4,23 @@ const VpcConfiguration = @import("vpc_configuration.zig").VpcConfiguration;
 /// An access point used to access a bucket.
 pub const AccessPoint = struct {
     /// The ARN for the access point.
-    access_point_arn: ?[]const u8,
+    access_point_arn: ?[]const u8 = null,
 
     /// The name or alias of the access point.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The name of the bucket associated with this access point.
     bucket: []const u8,
 
     /// The Amazon Web Services account ID associated with the S3 bucket associated
     /// with this access point.
-    bucket_account_id: ?[]const u8,
+    bucket_account_id: ?[]const u8 = null,
 
     /// A unique identifier for the data source of the access point.
-    data_source_id: ?[]const u8,
+    data_source_id: ?[]const u8 = null,
 
     /// The type of the data source that the access point is attached to.
-    data_source_type: ?[]const u8,
+    data_source_type: ?[]const u8 = null,
 
     /// The name of this access point.
     name: []const u8,
@@ -41,5 +41,5 @@ pub const AccessPoint = struct {
     /// This element is empty if this access point is an Amazon S3 on Outposts
     /// access point that is used by other
     /// Amazon Web Services services.
-    vpc_configuration: ?VpcConfiguration,
+    vpc_configuration: ?VpcConfiguration = null,
 };

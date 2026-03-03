@@ -2,10 +2,10 @@
 /// that triggered this job run.
 pub const Predecessor = struct {
     /// The name of the job definition used by the predecessor job run.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The job-run ID of the predecessor job run.
-    run_id: ?[]const u8,
+    run_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .job_name = "JobName",

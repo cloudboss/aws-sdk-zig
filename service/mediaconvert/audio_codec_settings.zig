@@ -20,48 +20,48 @@ pub const AudioCodecSettings = struct {
     /// mode, you control the audio quality with the setting VBR quality. In CBR
     /// mode, you use the setting Bitrate. Defaults and valid values depend on the
     /// rate control mode.
-    aac_settings: ?AacSettings,
+    aac_settings: ?AacSettings = null,
 
     /// Required when you set Codec to the value AC3.
-    ac_3_settings: ?Ac3Settings,
+    ac_3_settings: ?Ac3Settings = null,
 
     /// Required when you set Codec to the value AIFF.
-    aiff_settings: ?AiffSettings,
+    aiff_settings: ?AiffSettings = null,
 
     /// Choose the audio codec for this output. Note that the option Dolby Digital
     /// passthrough applies only to Dolby Digital and Dolby Digital Plus audio
     /// inputs. Make sure that you choose a codec that's supported with your output
     /// container:
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#reference-codecs-containers-output-audio For audio-only outputs, make sure that both your input audio codec and your output audio codec are supported for audio-only workflows. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers-input.html#reference-codecs-containers-input-audio-only and https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#audio-only-output
-    codec: ?AudioCodec,
+    codec: ?AudioCodec = null,
 
     /// Required when you set Codec to the value EAC3_ATMOS.
-    eac_3_atmos_settings: ?Eac3AtmosSettings,
+    eac_3_atmos_settings: ?Eac3AtmosSettings = null,
 
     /// Required when you set Codec to the value EAC3.
-    eac_3_settings: ?Eac3Settings,
+    eac_3_settings: ?Eac3Settings = null,
 
     /// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
     /// value FLAC.
-    flac_settings: ?FlacSettings,
+    flac_settings: ?FlacSettings = null,
 
     /// Required when you set Codec to the value MP2.
-    mp_2_settings: ?Mp2Settings,
+    mp_2_settings: ?Mp2Settings = null,
 
     /// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
     /// value MP3.
-    mp_3_settings: ?Mp3Settings,
+    mp_3_settings: ?Mp3Settings = null,
 
     /// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
     /// value OPUS.
-    opus_settings: ?OpusSettings,
+    opus_settings: ?OpusSettings = null,
 
     /// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
     /// value Vorbis.
-    vorbis_settings: ?VorbisSettings,
+    vorbis_settings: ?VorbisSettings = null,
 
     /// Required when you set Codec to the value WAV.
-    wav_settings: ?WavSettings,
+    wav_settings: ?WavSettings = null,
 
     pub const json_field_names = .{
         .aac_settings = "AacSettings",

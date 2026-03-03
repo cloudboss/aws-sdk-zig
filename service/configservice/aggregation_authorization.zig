@@ -3,18 +3,18 @@
 pub const AggregationAuthorization = struct {
     /// The Amazon Resource Name (ARN) of the aggregation
     /// object.
-    aggregation_authorization_arn: ?[]const u8,
+    aggregation_authorization_arn: ?[]const u8 = null,
 
     /// The 12-digit account ID of the account authorized to aggregate
     /// data.
-    authorized_account_id: ?[]const u8,
+    authorized_account_id: ?[]const u8 = null,
 
     /// The region authorized to collect aggregated data.
-    authorized_aws_region: ?[]const u8,
+    authorized_aws_region: ?[]const u8 = null,
 
     /// The time stamp when the aggregation authorization was
     /// created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     pub const json_field_names = .{
         .aggregation_authorization_arn = "AggregationAuthorizationArn",

@@ -7,25 +7,25 @@ const WordCloudWordScaling = @import("word_cloud_word_scaling.zig").WordCloudWor
 /// The word cloud options for a word cloud visual.
 pub const WordCloudOptions = struct {
     /// The cloud layout options (fluid, normal) of a word cloud.
-    cloud_layout: ?WordCloudCloudLayout,
+    cloud_layout: ?WordCloudCloudLayout = null,
 
     /// The length limit of each word from 1-100.
-    maximum_string_length: ?i32,
+    maximum_string_length: ?i32 = null,
 
     /// The word casing options (lower_case, existing_case) for the words in a word
     /// cloud.
-    word_casing: ?WordCloudWordCasing,
+    word_casing: ?WordCloudWordCasing = null,
 
     /// The word orientation options (horizontal, horizontal_and_vertical) for the
     /// words in a word cloud.
-    word_orientation: ?WordCloudWordOrientation,
+    word_orientation: ?WordCloudWordOrientation = null,
 
     /// The word padding options (none, small, medium, large) for the words in a
     /// word cloud.
-    word_padding: ?WordCloudWordPadding,
+    word_padding: ?WordCloudWordPadding = null,
 
     /// The word scaling options (emphasize, normal) for the words in a word cloud.
-    word_scaling: ?WordCloudWordScaling,
+    word_scaling: ?WordCloudWordScaling = null,
 
     pub const json_field_names = .{
         .cloud_layout = "CloudLayout",

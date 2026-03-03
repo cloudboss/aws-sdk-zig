@@ -7,35 +7,35 @@ pub const FlowSummary = struct {
     arn: []const u8,
 
     /// The identifier of the principal who created the flow.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The time this flow was created.
     created_time: i64,
 
     /// The description of the flow.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the flow.
     flow_id: []const u8,
 
     /// The last time this flow was published.
-    last_published_at: ?i64,
+    last_published_at: ?i64 = null,
 
     /// The identifier of the last principal who published the flow.
-    last_published_by: ?[]const u8,
+    last_published_by: ?[]const u8 = null,
 
     /// The identifier of the last principal who updated the flow.
-    last_updated_by: ?[]const u8,
+    last_updated_by: ?[]const u8 = null,
 
     /// The last time this flow was modified.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The display name of the flow.
     name: []const u8,
 
     /// The publish state for the flow. The valid values are `DRAFT`, `PUBLISHED`,
     /// or `PENDING_APPROVAL`.
-    publish_state: ?FlowPublishState,
+    publish_state: ?FlowPublishState = null,
 
     /// The number of runs done for the flow.
     run_count: i32 = 0,

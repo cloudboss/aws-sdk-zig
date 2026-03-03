@@ -11,34 +11,34 @@ const VpcInformation = @import("vpc_information.zig").VpcInformation;
 pub const Connector = struct {
     /// The Amazon Resource Name (ARN) that was returned when you called
     /// [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the certificate authority being used.
-    certificate_authority_arn: ?[]const u8,
+    certificate_authority_arn: ?[]const u8 = null,
 
     /// Certificate enrollment endpoint for Active Directory domain-joined objects
     /// reach out to when
     /// requesting certificates.
-    certificate_enrollment_policy_server_endpoint: ?[]const u8,
+    certificate_enrollment_policy_server_endpoint: ?[]const u8 = null,
 
     /// The date and time that the connector was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of the Active Directory.
-    directory_id: ?[]const u8,
+    directory_id: ?[]const u8 = null,
 
     /// Status of the connector. Status can be creating, active, deleting, or
     /// failed.
-    status: ?ConnectorStatus,
+    status: ?ConnectorStatus = null,
 
     /// Additional information about the connector status if the status is failed.
-    status_reason: ?ConnectorStatusReason,
+    status_reason: ?ConnectorStatusReason = null,
 
     /// The date and time that the connector was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// Information of the VPC and security group(s) used with the connector.
-    vpc_information: ?VpcInformation,
+    vpc_information: ?VpcInformation = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

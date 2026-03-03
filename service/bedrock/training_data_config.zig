@@ -3,10 +3,10 @@ const InvocationLogsConfig = @import("invocation_logs_config.zig").InvocationLog
 /// S3 Location of the training data.
 pub const TrainingDataConfig = struct {
     /// Settings for using invocation logs to customize a model.
-    invocation_logs_config: ?InvocationLogsConfig,
+    invocation_logs_config: ?InvocationLogsConfig = null,
 
     /// The S3 URI where the training data is stored.
-    s_3_uri: ?[]const u8,
+    s_3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .invocation_logs_config = "invocationLogsConfig",

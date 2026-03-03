@@ -4,10 +4,10 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// Allows to sort offer sets.
 pub const OfferSetSort = struct {
     /// Allows to sort offer sets.
-    sort_by: ?OfferSetSortBy,
+    sort_by: ?OfferSetSortBy = null,
 
     /// Allows to sort offer sets.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .sort_by = "SortBy",

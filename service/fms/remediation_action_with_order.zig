@@ -6,7 +6,7 @@ pub const RemediationActionWithOrder = struct {
     order: i32 = 0,
 
     /// Information about an action you can take to remediate a violation.
-    remediation_action: ?RemediationAction,
+    remediation_action: ?RemediationAction = null,
 
     pub const json_field_names = .{
         .order = "Order",

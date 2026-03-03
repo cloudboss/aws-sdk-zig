@@ -8,7 +8,7 @@ pub const AutoScalingPolicy = struct {
     /// Auto scaling scales up capacity automatically when traffic exceeds this
     /// target utilization rate, and then back down when it falls below the target.
     /// A `double` between 20 and 90.
-    target_tracking_scaling_policy_configuration: ?TargetTrackingScalingPolicyConfiguration,
+    target_tracking_scaling_policy_configuration: ?TargetTrackingScalingPolicyConfiguration = null,
 
     pub const json_field_names = .{
         .target_tracking_scaling_policy_configuration = "targetTrackingScalingPolicyConfiguration",

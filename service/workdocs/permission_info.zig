@@ -4,10 +4,10 @@ const RolePermissionType = @import("role_permission_type.zig").RolePermissionTyp
 /// Describes the permissions.
 pub const PermissionInfo = struct {
     /// The role of the user.
-    role: ?RoleType,
+    role: ?RoleType = null,
 
     /// The type of permissions.
-    @"type": ?RolePermissionType,
+    @"type": ?RolePermissionType = null,
 
     pub const json_field_names = .{
         .role = "Role",

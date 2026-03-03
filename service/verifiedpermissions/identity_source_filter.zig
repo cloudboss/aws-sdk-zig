@@ -6,7 +6,7 @@
 pub const IdentitySourceFilter = struct {
     /// The Cedar entity type of the principals returned by the identity provider
     /// (IdP) associated with this identity source.
-    principal_entity_type: ?[]const u8,
+    principal_entity_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .principal_entity_type = "principalEntityType",

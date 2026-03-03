@@ -9,7 +9,7 @@ pub const DestinationConfig = struct {
     services: []const []const u8,
 
     /// The name of the IoT thing to which you want to connect.
-    thing_name: ?[]const u8,
+    thing_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .services = "services",

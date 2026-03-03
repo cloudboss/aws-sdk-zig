@@ -13,7 +13,7 @@ pub const UnprocessedStandardsControlAssociation = struct {
     error_code: UnprocessedErrorCode,
 
     /// The reason why the standard and control association was unprocessed.
-    error_reason: ?[]const u8,
+    error_reason: ?[]const u8 = null,
 
     /// An array with one or more objects that includes a security control
     /// (identified with

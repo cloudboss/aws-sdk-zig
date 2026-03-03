@@ -4,22 +4,22 @@ const SnapshotType = @import("snapshot_type.zig").SnapshotType;
 /// Describes a directory snapshot.
 pub const Snapshot = struct {
     /// The directory identifier.
-    directory_id: ?[]const u8,
+    directory_id: ?[]const u8 = null,
 
     /// The descriptive name of the snapshot.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The snapshot identifier.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
     /// The date and time that the snapshot was taken.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The snapshot status.
-    status: ?SnapshotStatus,
+    status: ?SnapshotStatus = null,
 
     /// The snapshot type.
-    @"type": ?SnapshotType,
+    @"type": ?SnapshotType = null,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",

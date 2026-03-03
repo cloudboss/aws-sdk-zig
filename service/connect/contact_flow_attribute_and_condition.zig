@@ -4,10 +4,10 @@ const TagCondition = @import("tag_condition.zig").TagCondition;
 /// A list of conditions which would be applied together with an AND condition.
 pub const ContactFlowAttributeAndCondition = struct {
     /// Contact flow type condition.
-    contact_flow_type_condition: ?ContactFlowTypeCondition,
+    contact_flow_type_condition: ?ContactFlowTypeCondition = null,
 
     /// Tag-based conditions for contact flow filtering.
-    tag_conditions: ?[]const TagCondition,
+    tag_conditions: ?[]const TagCondition = null,
 
     pub const json_field_names = .{
         .contact_flow_type_condition = "ContactFlowTypeCondition",

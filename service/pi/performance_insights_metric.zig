@@ -4,19 +4,19 @@ const aws = @import("aws");
 /// the insight.
 pub const PerformanceInsightsMetric = struct {
     /// A dimension map that contains the dimensions for this partition.
-    dimensions: ?[]const aws.map.StringMapEntry,
+    dimensions: ?[]const aws.map.StringMapEntry = null,
 
     /// The Performance Insights metric name.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The filter for the Performance Insights metric.
-    filter: ?[]const aws.map.StringMapEntry,
+    filter: ?[]const aws.map.StringMapEntry = null,
 
     /// The Performance Insights metric.
-    metric: ?[]const u8,
+    metric: ?[]const u8 = null,
 
     /// The value of the metric. For example, `9` for `db.load.avg`.
-    value: ?f64,
+    value: ?f64 = null,
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",

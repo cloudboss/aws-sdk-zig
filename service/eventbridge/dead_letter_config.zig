@@ -6,7 +6,7 @@
 /// Guide*.
 pub const DeadLetterConfig = struct {
     /// The ARN of the SQS queue specified as the target for the dead-letter queue.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

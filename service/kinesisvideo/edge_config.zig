@@ -10,7 +10,7 @@ pub const EdgeConfig = struct {
     /// The deletion configuration is made up of the retention time
     /// (`EdgeRetentionInHours`) and local size configuration
     /// (`LocalSizeConfig`) details that are used to make the deletion.
-    deletion_config: ?DeletionConfig,
+    deletion_config: ?DeletionConfig = null,
 
     /// The "**Internet of Things (IoT) Thing**" Arn of the stream.
     hub_device_arn: []const u8,
@@ -24,7 +24,7 @@ pub const EdgeConfig = struct {
     /// are used to
     /// schedule upload jobs for the recorded media files from the Edge Agent to a
     /// Kinesis Video Stream.
-    uploader_config: ?UploaderConfig,
+    uploader_config: ?UploaderConfig = null,
 
     pub const json_field_names = .{
         .deletion_config = "DeletionConfig",

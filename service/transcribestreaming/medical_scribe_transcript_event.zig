@@ -6,7 +6,7 @@ const MedicalScribeTranscriptSegment = @import("medical_scribe_transcript_segmen
 /// information.
 pub const MedicalScribeTranscriptEvent = struct {
     /// The `TranscriptSegment` associated with a `MedicalScribeTranscriptEvent`.
-    transcript_segment: ?MedicalScribeTranscriptSegment,
+    transcript_segment: ?MedicalScribeTranscriptSegment = null,
 
     pub const json_field_names = .{
         .transcript_segment = "TranscriptSegment",

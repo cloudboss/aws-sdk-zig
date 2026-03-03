@@ -5,7 +5,7 @@ const Transcript = @import("transcript.zig").Transcript;
 /// Lens.
 pub const ContactAnalysis = struct {
     /// Search criteria based on transcript analyzed by Amazon Connect Contact Lens.
-    transcript: ?Transcript,
+    transcript: ?Transcript = null,
 
     pub const json_field_names = .{
         .transcript = "Transcript",

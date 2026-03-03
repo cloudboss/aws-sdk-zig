@@ -7,7 +7,7 @@ pub const NodeFilter = struct {
     key: NodeFilterKey,
 
     /// The type of filter operator.
-    @"type": ?NodeFilterOperatorType,
+    @"type": ?NodeFilterOperatorType = null,
 
     /// A filter value supported by the specified key. For example, for the key
     /// `PlatformType`, supported values include `Linux` and

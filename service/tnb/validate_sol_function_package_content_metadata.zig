@@ -7,7 +7,7 @@ const FunctionArtifactMeta = @import("function_artifact_meta.zig").FunctionArtif
 /// application) and function package descriptor that uses the TOSCA standard to
 /// describe how the network functions should run on your network.
 pub const ValidateSolFunctionPackageContentMetadata = struct {
-    vnfd: ?FunctionArtifactMeta,
+    vnfd: ?FunctionArtifactMeta = null,
 
     pub const json_field_names = .{
         .vnfd = "vnfd",

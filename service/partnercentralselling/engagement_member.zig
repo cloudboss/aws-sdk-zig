@@ -13,15 +13,15 @@ pub const EngagementMember = struct {
     /// This is the unique identifier for the AWS account associated with the member
     /// organization. It's used for AWS-related operations and identity
     /// verification.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The official name of the member's company or organization.
-    company_name: ?[]const u8,
+    company_name: ?[]const u8 = null,
 
     /// The URL of the member company's website. This offers a way to find more
     /// information about the member organization and serves as an additional
     /// identifier.
-    website_url: ?[]const u8,
+    website_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

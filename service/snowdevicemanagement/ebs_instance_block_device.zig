@@ -5,17 +5,17 @@ const AttachmentStatus = @import("attachment_status.zig").AttachmentStatus;
 /// in a block device mapping.
 pub const EbsInstanceBlockDevice = struct {
     /// When the attachment was initiated.
-    attach_time: ?i64,
+    attach_time: ?i64 = null,
 
     /// A value that indicates whether the volume is deleted on instance
     /// termination.
-    delete_on_termination: ?bool,
+    delete_on_termination: ?bool = null,
 
     /// The attachment state.
-    status: ?AttachmentStatus,
+    status: ?AttachmentStatus = null,
 
     /// The ID of the Amazon EBS volume.
-    volume_id: ?[]const u8,
+    volume_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attach_time = "attachTime",

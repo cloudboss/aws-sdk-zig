@@ -8,7 +8,7 @@ pub const CloudwatchMetricAction = struct {
 
     /// An optional [Unix
     /// timestamp](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp).
-    metric_timestamp: ?[]const u8,
+    metric_timestamp: ?[]const u8 = null,
 
     /// The [metric
     /// unit](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit) supported by CloudWatch.

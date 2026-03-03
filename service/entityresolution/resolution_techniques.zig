@@ -6,7 +6,7 @@ const RuleConditionProperties = @import("rule_condition_properties.zig").RuleCon
 /// An object which defines the `resolutionType` and the `ruleBasedProperties`.
 pub const ResolutionTechniques = struct {
     /// The properties of the provider service.
-    provider_properties: ?ProviderProperties,
+    provider_properties: ?ProviderProperties = null,
 
     /// The type of matching workflow to create. Specify one of the following types:
     ///
@@ -17,10 +17,10 @@ pub const ResolutionTechniques = struct {
 
     /// An object which defines the list of matching rules to run and has a field
     /// `rules`, which is a list of rule objects.
-    rule_based_properties: ?RuleBasedProperties,
+    rule_based_properties: ?RuleBasedProperties = null,
 
     /// An object containing the `rules` for a matching workflow.
-    rule_condition_properties: ?RuleConditionProperties,
+    rule_condition_properties: ?RuleConditionProperties = null,
 
     pub const json_field_names = .{
         .provider_properties = "providerProperties",

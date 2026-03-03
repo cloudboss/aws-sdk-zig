@@ -3,7 +3,7 @@
 /// for a DAX cluster.
 pub const Endpoint = struct {
     /// The DNS hostname of the endpoint.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// The port number that applications should use to connect to the endpoint.
     port: i32 = 0,
@@ -11,7 +11,7 @@ pub const Endpoint = struct {
     /// The URL that applications should use to connect to the endpoint. The default
     /// ports
     /// are 8111 for the "dax" protocol and 9111 for the "daxs" protocol.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .address = "Address",

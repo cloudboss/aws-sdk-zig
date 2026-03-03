@@ -16,7 +16,7 @@ pub const DatasetDocumentClassifierInputDataConfig = struct {
     /// you specify, the
     /// labels on that line will be combined to make a single unique label, such as
     /// LABELLABELLABEL.
-    label_delimiter: ?[]const u8,
+    label_delimiter: ?[]const u8 = null,
 
     /// The Amazon S3 URI for the input data. The S3 bucket must be in the same
     /// Region as the API

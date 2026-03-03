@@ -8,7 +8,7 @@ pub const ComplianceExecutionSummary = struct {
     /// example,
     /// `CommandID` is a valid execution ID. You can use this ID in subsequent
     /// calls.
-    execution_id: ?[]const u8,
+    execution_id: ?[]const u8 = null,
 
     /// The time the execution ran as a datetime object that is saved in the
     /// following format:
@@ -25,7 +25,7 @@ pub const ComplianceExecutionSummary = struct {
     execution_time: i64,
 
     /// The type of execution. For example, `Command` is a valid execution type.
-    execution_type: ?[]const u8,
+    execution_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .execution_id = "ExecutionId",

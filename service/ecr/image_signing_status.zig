@@ -5,15 +5,15 @@ const SigningStatus = @import("signing_status.zig").SigningStatus;
 pub const ImageSigningStatus = struct {
     /// The failure code, which is only present if `status`
     /// is `FAILED`.
-    failure_code: ?[]const u8,
+    failure_code: ?[]const u8 = null,
 
     /// A description of why signing the image failed. This field is only
     /// present if `status` is `FAILED`.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The ARN of the Amazon Web Services Signer signing profile used to sign the
     /// image.
-    signing_profile_arn: ?[]const u8,
+    signing_profile_arn: ?[]const u8 = null,
 
     /// The image's signing status. Possible values are:
     ///
@@ -23,7 +23,7 @@ pub const ImageSigningStatus = struct {
     ///
     /// * `FAILED` - Signing failed. See
     /// `failureCode` and `failureReason` for details.
-    status: ?SigningStatus,
+    status: ?SigningStatus = null,
 
     pub const json_field_names = .{
         .failure_code = "failureCode",

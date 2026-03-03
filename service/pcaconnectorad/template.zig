@@ -8,14 +8,14 @@ const TemplateStatus = @import("template_status.zig").TemplateStatus;
 pub const Template = struct {
     /// The Amazon Resource Name (ARN) that was returned when you called
     /// [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) that was returned when you called
     /// [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
-    connector_arn: ?[]const u8,
+    connector_arn: ?[]const u8 = null,
 
     /// The date and time that the template was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Template configuration to define the information included in certificates.
     /// Define
@@ -23,29 +23,29 @@ pub const Template = struct {
     /// enrollment
     /// options, key usage extensions, application policies, and cryptography
     /// settings.
-    definition: ?TemplateDefinition,
+    definition: ?TemplateDefinition = null,
 
     /// Name of the templates. Template names must be unique.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Object identifier of a template.
-    object_identifier: ?[]const u8,
+    object_identifier: ?[]const u8 = null,
 
     /// The template schema version. Template schema versions can be v2, v3, or v4.
     /// The template
     /// configuration options change based on the template schema version.
-    policy_schema: ?i32,
+    policy_schema: ?i32 = null,
 
     /// The version of the template. Template updates will increment the minor
     /// revision.
     /// Re-enrolling all certificate holders will increment the major revision.
-    revision: ?TemplateRevision,
+    revision: ?TemplateRevision = null,
 
     /// Status of the template. Status can be creating, active, deleting, or failed.
-    status: ?TemplateStatus,
+    status: ?TemplateStatus = null,
 
     /// The date and time that the template was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

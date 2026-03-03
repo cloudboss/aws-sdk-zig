@@ -6,50 +6,50 @@ const MaintenanceWindowTaskType = @import("maintenance_window_task_type.zig").Ma
 /// execution performed as part of a maintenance window execution.
 pub const MaintenanceWindowExecutionTaskInvocationIdentity = struct {
     /// The time the invocation finished.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The ID of the action performed in the service that actually handled the task
     /// invocation. If
     /// the task type is `RUN_COMMAND`, this value is the command ID.
-    execution_id: ?[]const u8,
+    execution_id: ?[]const u8 = null,
 
     /// The ID of the task invocation.
-    invocation_id: ?[]const u8,
+    invocation_id: ?[]const u8 = null,
 
     /// User-provided value that was specified when the target was registered with
     /// the maintenance
     /// window. This was also included in any Amazon CloudWatch Events events raised
     /// during the task
     /// invocation.
-    owner_information: ?[]const u8,
+    owner_information: ?[]const u8 = null,
 
     /// The parameters that were provided for the invocation when it was run.
-    parameters: ?[]const u8,
+    parameters: ?[]const u8 = null,
 
     /// The time the invocation started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of the task invocation.
-    status: ?MaintenanceWindowExecutionStatus,
+    status: ?MaintenanceWindowExecutionStatus = null,
 
     /// The details explaining the status of the task invocation. Not available for
     /// all status
     /// values.
-    status_details: ?[]const u8,
+    status_details: ?[]const u8 = null,
 
     /// The ID of the specific task execution in the maintenance window execution.
-    task_execution_id: ?[]const u8,
+    task_execution_id: ?[]const u8 = null,
 
     /// The task type.
-    task_type: ?MaintenanceWindowTaskType,
+    task_type: ?MaintenanceWindowTaskType = null,
 
     /// The ID of the maintenance window execution that ran the task.
-    window_execution_id: ?[]const u8,
+    window_execution_id: ?[]const u8 = null,
 
     /// The ID of the target definition in this maintenance window the invocation
     /// was performed
     /// for.
-    window_target_id: ?[]const u8,
+    window_target_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .end_time = "EndTime",

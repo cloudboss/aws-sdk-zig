@@ -5,14 +5,14 @@ const MeasureField = @import("measure_field.zig").MeasureField;
 pub const PivotTableAggregatedFieldWells = struct {
     /// The columns field well for a pivot table. Values are grouped by columns
     /// fields.
-    columns: ?[]const DimensionField,
+    columns: ?[]const DimensionField = null,
 
     /// The rows field well for a pivot table. Values are grouped by rows fields.
-    rows: ?[]const DimensionField,
+    rows: ?[]const DimensionField = null,
 
     /// The values field well for a pivot table. Values are aggregated based on rows
     /// and columns fields.
-    values: ?[]const MeasureField,
+    values: ?[]const MeasureField = null,
 
     pub const json_field_names = .{
         .columns = "Columns",

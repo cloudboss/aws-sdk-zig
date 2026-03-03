@@ -8,15 +8,15 @@ const QuickResponseStatus = @import("quick_response_status.zig").QuickResponseSt
 pub const QuickResponseSearchResultData = struct {
     /// The user defined contact attributes that are resolved when the search result
     /// is returned.
-    attributes_interpolated: ?[]const []const u8,
+    attributes_interpolated: ?[]const []const u8 = null,
 
     /// The user defined contact attributes that are not resolved when the search
     /// result is returned.
-    attributes_not_interpolated: ?[]const []const u8,
+    attributes_not_interpolated: ?[]const []const u8 = null,
 
     /// The Amazon Connect contact channels this quick response applies to. The
     /// supported contact channel types include `Chat`.
-    channels: ?[]const []const u8,
+    channels: ?[]const []const u8 = null,
 
     /// The contents of the quick response.
     contents: QuickResponseContents,
@@ -34,11 +34,11 @@ pub const QuickResponseSearchResultData = struct {
     created_time: i64,
 
     /// The description of the quick response.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The configuration information of the user groups that the quick response is
     /// accessible to.
-    grouping_configuration: ?GroupingConfiguration,
+    grouping_configuration: ?GroupingConfiguration = null,
 
     /// Whether the quick response is active.
     is_active: bool,
@@ -54,11 +54,11 @@ pub const QuickResponseSearchResultData = struct {
 
     /// The language code value for the language in which the quick response is
     /// written.
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the user who last updated the quick
     /// response search result data.
-    last_modified_by: ?[]const u8,
+    last_modified_by: ?[]const u8 = null,
 
     /// The timestamp when the quick response search result data was last modified.
     last_modified_time: i64,
@@ -75,13 +75,13 @@ pub const QuickResponseSearchResultData = struct {
     /// The shortcut key of the quick response. The value should be unique across
     /// the
     /// knowledge base.
-    shortcut_key: ?[]const u8,
+    shortcut_key: ?[]const u8 = null,
 
     /// The resource status of the quick response.
     status: QuickResponseStatus,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .attributes_interpolated = "attributesInterpolated",

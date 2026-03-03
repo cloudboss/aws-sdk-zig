@@ -3,7 +3,7 @@ const AttributeKeyAndValue = @import("attribute_key_and_value.zig").AttributeKey
 /// Represents the output of a GetLinkAttributes response operation.
 pub const BatchGetLinkAttributesResponse = struct {
     /// The attributes that are associated with the typed link.
-    attributes: ?[]const AttributeKeyAndValue,
+    attributes: ?[]const AttributeKeyAndValue = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

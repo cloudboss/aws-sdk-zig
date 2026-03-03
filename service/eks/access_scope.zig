@@ -6,10 +6,10 @@ pub const AccessScope = struct {
     /// A Kubernetes `namespace` that an access policy is scoped to. A value is
     /// required
     /// if you specified `namespace` for `Type`.
-    namespaces: ?[]const []const u8,
+    namespaces: ?[]const []const u8 = null,
 
     /// The scope type of an access policy.
-    @"type": ?AccessScopeType,
+    @"type": ?AccessScopeType = null,
 
     pub const json_field_names = .{
         .namespaces = "namespaces",

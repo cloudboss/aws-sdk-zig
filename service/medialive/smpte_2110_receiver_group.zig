@@ -5,7 +5,7 @@ const Smpte2110ReceiverGroupSdpSettings = @import("smpte_2110_receiver_group_sdp
 pub const Smpte2110ReceiverGroup = struct {
     /// The single Smpte2110ReceiverGroupSdpSettings that identify the video, audio,
     /// and ancillary streams for this receiver group.
-    sdp_settings: ?Smpte2110ReceiverGroupSdpSettings,
+    sdp_settings: ?Smpte2110ReceiverGroupSdpSettings = null,
 
     pub const json_field_names = .{
         .sdp_settings = "SdpSettings",

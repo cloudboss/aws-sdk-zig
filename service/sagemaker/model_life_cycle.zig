@@ -4,7 +4,7 @@ pub const ModelLifeCycle = struct {
     stage: []const u8,
 
     /// Describes the stage related details.
-    stage_description: ?[]const u8,
+    stage_description: ?[]const u8 = null,
 
     /// The current status of a stage in model life cycle.
     stage_status: []const u8,

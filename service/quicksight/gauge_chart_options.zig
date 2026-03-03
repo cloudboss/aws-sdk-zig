@@ -7,19 +7,19 @@ const FontConfiguration = @import("font_configuration.zig").FontConfiguration;
 /// The options that determine the presentation of the `GaugeChartVisual`.
 pub const GaugeChartOptions = struct {
     /// The arc configuration of a `GaugeChartVisual`.
-    arc: ?ArcConfiguration,
+    arc: ?ArcConfiguration = null,
 
     /// The arc axis configuration of a `GaugeChartVisual`.
-    arc_axis: ?ArcAxisConfiguration,
+    arc_axis: ?ArcAxisConfiguration = null,
 
     /// The comparison configuration of a `GaugeChartVisual`.
-    comparison: ?ComparisonConfiguration,
+    comparison: ?ComparisonConfiguration = null,
 
     /// The options that determine the primary value display type.
-    primary_value_display_type: ?PrimaryValueDisplayType,
+    primary_value_display_type: ?PrimaryValueDisplayType = null,
 
     /// The options that determine the primary value font configuration.
-    primary_value_font_configuration: ?FontConfiguration,
+    primary_value_font_configuration: ?FontConfiguration = null,
 
     pub const json_field_names = .{
         .arc = "Arc",

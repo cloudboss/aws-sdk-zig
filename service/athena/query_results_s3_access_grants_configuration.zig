@@ -9,7 +9,7 @@ pub const QueryResultsS3AccessGrantsConfiguration = struct {
 
     /// When enabled, appends the user ID as an Amazon S3 path prefix to the query
     /// result output location.
-    create_user_level_prefix: ?bool,
+    create_user_level_prefix: ?bool = null,
 
     /// Specifies whether Amazon S3 access grants are enabled for query
     /// results.

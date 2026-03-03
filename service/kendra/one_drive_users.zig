@@ -7,12 +7,12 @@ pub const OneDriveUsers = struct {
     /// format, for example, `username@tenantdomain`. If you need to index the
     /// documents of more than 10 users, use the `OneDriveUserS3Path` field to
     /// specify the location of a file containing a list of users.
-    one_drive_user_list: ?[]const []const u8,
+    one_drive_user_list: ?[]const []const u8 = null,
 
     /// The S3 bucket location of a file containing a list of users whose documents
     /// should be
     /// indexed.
-    one_drive_user_s3_path: ?S3Path,
+    one_drive_user_s3_path: ?S3Path = null,
 
     pub const json_field_names = .{
         .one_drive_user_list = "OneDriveUserList",

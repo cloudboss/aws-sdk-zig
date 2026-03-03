@@ -17,7 +17,7 @@ pub const AlgorithmValidationProfile = struct {
 
     /// The `TransformJobDefinition` object that describes the transform job that
     /// SageMaker runs to validate your algorithm.
-    transform_job_definition: ?TransformJobDefinition,
+    transform_job_definition: ?TransformJobDefinition = null,
 
     pub const json_field_names = .{
         .profile_name = "ProfileName",

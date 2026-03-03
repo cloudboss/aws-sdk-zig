@@ -6,7 +6,7 @@ pub const SearchSort = struct {
     attribute: []const u8,
 
     /// The order detail of the wya to sort search results.
-    order: ?SortOrder,
+    order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .attribute = "attribute",

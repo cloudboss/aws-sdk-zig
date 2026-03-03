@@ -5,18 +5,18 @@ const CertificateValidationRecordStatus = @import("certificate_validation_record
 /// [AssociateCustomDomain](https://docs.aws.amazon.com/apprunner/latest/api/API_AssociateCustomDomain.html).
 pub const CertificateValidationRecord = struct {
     /// The certificate CNAME record name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current state of the certificate CNAME record validation. It should
     /// change to `SUCCESS` after App Runner completes validation with your
     /// DNS.
-    status: ?CertificateValidationRecordStatus,
+    status: ?CertificateValidationRecordStatus = null,
 
     /// The record type, always `CNAME`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The certificate CNAME record value.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

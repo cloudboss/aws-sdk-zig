@@ -3,7 +3,7 @@ const ResourceTags = @import("resource_tags.zig").ResourceTags;
 pub const ListTagsForResourceResponse = struct {
     /// The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert
     /// resource.
-    resource_tags: ?ResourceTags,
+    resource_tags: ?ResourceTags = null,
 
     pub const json_field_names = .{
         .resource_tags = "ResourceTags",

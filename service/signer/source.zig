@@ -4,7 +4,7 @@ const S3Source = @import("s3_source.zig").S3Source;
 /// you saved your unsigned code.
 pub const Source = struct {
     /// The `S3Source` object.
-    s_3: ?S3Source,
+    s_3: ?S3Source = null,
 
     pub const json_field_names = .{
         .s_3 = "s3",

@@ -10,10 +10,10 @@ pub const NumericalDimensionField = struct {
     field_id: []const u8,
 
     /// The format configuration of the field.
-    format_configuration: ?NumberFormatConfiguration,
+    format_configuration: ?NumberFormatConfiguration = null,
 
     /// The custom hierarchy ID.
-    hierarchy_id: ?[]const u8,
+    hierarchy_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .column = "Column",

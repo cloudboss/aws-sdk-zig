@@ -16,7 +16,7 @@ pub const PineconeConfiguration = struct {
     field_mapping: PineconeFieldMapping,
 
     /// The namespace to be used to write new data to your database.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connection_string = "connectionString",

@@ -3,8 +3,8 @@ const StackInstanceFilterName = @import("stack_instance_filter_name.zig").StackI
 /// The filter to apply to stack instances
 pub const StackInstanceFilter = struct {
     /// The type of filter to apply.
-    name: ?StackInstanceFilterName,
+    name: ?StackInstanceFilterName = null,
 
     /// The status to filter by.
-    values: ?[]const u8,
+    values: ?[]const u8 = null,
 };

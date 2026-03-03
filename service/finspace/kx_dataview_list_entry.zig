@@ -6,7 +6,7 @@ const KxDataviewStatus = @import("kx_dataview_status.zig").KxDataviewStatus;
 /// A collection of kdb dataview entries.
 pub const KxDataviewListEntry = struct {
     /// The active changeset versions for the given dataview entry.
-    active_versions: ?[]const KxDataviewActiveVersion,
+    active_versions: ?[]const KxDataviewActiveVersion = null,
 
     /// The option to specify whether you want to apply all the future additions and
     /// corrections automatically to the dataview when you ingest new changesets.
@@ -14,37 +14,37 @@ pub const KxDataviewListEntry = struct {
     auto_update: bool = false,
 
     /// The identifier of the availability zones.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The number of availability zones you want to assign per volume. Currently,
     /// FinSpace only supports `SINGLE` for volumes. This places dataview in a
     /// single AZ.
-    az_mode: ?KxAzMode,
+    az_mode: ?KxAzMode = null,
 
     /// A unique identifier for the changeset.
-    changeset_id: ?[]const u8,
+    changeset_id: ?[]const u8 = null,
 
     /// The timestamp at which the dataview list entry was created in FinSpace. The
     /// value is determined as epoch time in milliseconds. For example, the value
     /// for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// A unique identifier of the database.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// A unique identifier of the dataview.
-    dataview_name: ?[]const u8,
+    dataview_name: ?[]const u8 = null,
 
     /// A description for the dataview list entry.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier for the kdb environment.
-    environment_id: ?[]const u8,
+    environment_id: ?[]const u8 = null,
 
     /// The last time that the dataview list was updated in FinSpace. The value is
     /// determined as epoch time in milliseconds. For example, the value for Monday,
     /// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
-    last_modified_timestamp: ?i64,
+    last_modified_timestamp: ?i64 = null,
 
     /// Returns True if the dataview is created as writeable and False otherwise.
     read_write: bool = false,
@@ -54,13 +54,13 @@ pub const KxDataviewListEntry = struct {
     /// path for each volume. If you do not explicitly specify any database path for
     /// a volume, they are accessible from the cluster through the default S3/object
     /// store segment.
-    segment_configurations: ?[]const KxDataviewSegmentConfiguration,
+    segment_configurations: ?[]const KxDataviewSegmentConfiguration = null,
 
     /// The status of a given dataview entry.
-    status: ?KxDataviewStatus,
+    status: ?KxDataviewStatus = null,
 
     /// The error message when a failed state occurs.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active_versions = "activeVersions",

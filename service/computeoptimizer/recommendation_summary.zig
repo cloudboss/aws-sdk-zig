@@ -8,36 +8,36 @@ const Summary = @import("summary.zig").Summary;
 /// A summary of a recommendation.
 pub const RecommendationSummary = struct {
     /// The Amazon Web Services account ID of the recommendation summary.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
-    aggregated_savings_opportunity: ?SavingsOpportunity,
+    aggregated_savings_opportunity: ?SavingsOpportunity = null,
 
     /// An object that describes the performance risk ratings for a given resource
     /// type.
-    current_performance_risk_ratings: ?CurrentPerformanceRiskRatings,
+    current_performance_risk_ratings: ?CurrentPerformanceRiskRatings = null,
 
-    idle_savings_opportunity: ?SavingsOpportunity,
+    idle_savings_opportunity: ?SavingsOpportunity = null,
 
     /// Describes the findings summary of the idle resources.
-    idle_summaries: ?[]const IdleSummary,
+    idle_summaries: ?[]const IdleSummary = null,
 
     /// An array of objects that describes the estimated monthly saving amounts for
     /// the instances running on the specified
     /// `inferredWorkloadTypes`. The array contains the top five savings
     /// opportunites for the instances that run
     /// inferred workload types.
-    inferred_workload_savings: ?[]const InferredWorkloadSaving,
+    inferred_workload_savings: ?[]const InferredWorkloadSaving = null,
 
     /// The resource type that the recommendation summary applies to.
-    recommendation_resource_type: ?RecommendationSourceType,
+    recommendation_resource_type: ?RecommendationSourceType = null,
 
     /// An object that describes the savings opportunity for a given resource type.
     /// Savings
     /// opportunity includes the estimated monthly savings amount and percentage.
-    savings_opportunity: ?SavingsOpportunity,
+    savings_opportunity: ?SavingsOpportunity = null,
 
     /// An array of objects that describe a recommendation summary.
-    summaries: ?[]const Summary,
+    summaries: ?[]const Summary = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

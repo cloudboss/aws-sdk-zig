@@ -7,7 +7,7 @@ const AnalysisSchemeLanguage = @import("analysis_scheme_language.zig").AnalysisS
 /// `Stopwords`, `StemmingDictionary`, `JapaneseTokenizationDictionary` and
 /// `AlgorithmicStemming`.
 pub const AnalysisScheme = struct {
-    analysis_options: ?AnalysisOptions,
+    analysis_options: ?AnalysisOptions = null,
 
     analysis_scheme_language: AnalysisSchemeLanguage,
 

@@ -26,7 +26,7 @@ pub const RoutePedestrianLegDetails = struct {
     spans: []const RoutePedestrianSpan,
 
     /// Summarized details of the leg.
-    summary: ?RoutePedestrianSummary,
+    summary: ?RoutePedestrianSummary = null,
 
     /// Steps of a leg that must be performed before the travel portion of the leg.
     travel_steps: []const RoutePedestrianTravelStep,

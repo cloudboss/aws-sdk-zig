@@ -4,23 +4,23 @@ const Reaction = @import("reaction.zig").Reaction;
 pub const RecommendationFeedback = struct {
     /// The Amazon Resource Name (ARN) of the
     /// [CodeReview](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html) object.
-    code_review_arn: ?[]const u8,
+    code_review_arn: ?[]const u8 = null,
 
     /// The time at which the feedback was created.
-    created_time_stamp: ?i64,
+    created_time_stamp: ?i64 = null,
 
     /// The time at which the feedback was last updated.
-    last_updated_time_stamp: ?i64,
+    last_updated_time_stamp: ?i64 = null,
 
     /// List for storing reactions. Reactions are utf-8 text code for emojis. You
     /// can send an
     /// empty list to clear off all your feedback.
-    reactions: ?[]const Reaction,
+    reactions: ?[]const Reaction = null,
 
     /// The recommendation ID that can be used to track the provided
     /// recommendations. Later on
     /// it can be used to collect the feedback.
-    recommendation_id: ?[]const u8,
+    recommendation_id: ?[]const u8 = null,
 
     /// The ID of the user that made the API call.
     ///
@@ -29,7 +29,7 @@ pub const RecommendationFeedback = struct {
     /// more information, see [
     /// Specifying a
     /// Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying) in the *Amazon Web Services Identity and Access Management User Guide*.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code_review_arn = "CodeReviewArn",

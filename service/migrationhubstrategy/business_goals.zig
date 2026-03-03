@@ -1,19 +1,19 @@
 /// Business goals that you specify.
 pub const BusinessGoals = struct {
     /// Business goal to reduce license costs.
-    license_cost_reduction: ?i32,
+    license_cost_reduction: ?i32 = null,
 
     /// Business goal to modernize infrastructure by moving to cloud native
     /// technologies.
-    modernize_infrastructure_with_cloud_native_technologies: ?i32,
+    modernize_infrastructure_with_cloud_native_technologies: ?i32 = null,
 
     /// Business goal to reduce the operational overhead on the team by moving into
     /// managed
     /// services.
-    reduce_operational_overhead_with_managed_services: ?i32,
+    reduce_operational_overhead_with_managed_services: ?i32 = null,
 
     /// Business goal to achieve migration at a fast pace.
-    speed_of_migration: ?i32,
+    speed_of_migration: ?i32 = null,
 
     pub const json_field_names = .{
         .license_cost_reduction = "licenseCostReduction",

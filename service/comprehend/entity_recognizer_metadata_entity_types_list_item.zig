@@ -6,15 +6,15 @@ pub const EntityRecognizerMetadataEntityTypesListItem = struct {
     /// Detailed information about the accuracy of the entity recognizer for a
     /// specific item on
     /// the list of entity types.
-    evaluation_metrics: ?EntityTypesEvaluationMetrics,
+    evaluation_metrics: ?EntityTypesEvaluationMetrics = null,
 
     /// Indicates the number of times the given entity type was seen in the training
     /// data.
-    number_of_train_mentions: ?i32,
+    number_of_train_mentions: ?i32 = null,
 
     /// Type of entity from the list of entity types in the metadata of an entity
     /// recognizer.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .evaluation_metrics = "EvaluationMetrics",

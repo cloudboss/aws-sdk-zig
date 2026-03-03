@@ -8,16 +8,16 @@ pub const RecommendationJobStoppingConditions = struct {
     /// which means that the instance has reached capacity. The default value is
     /// `Stop`. If you want the load test to continue after invocations have
     /// flattened, set the value to `Continue`.
-    flat_invocations: ?FlatInvocations,
+    flat_invocations: ?FlatInvocations = null,
 
     /// The maximum number of requests per minute expected for the endpoint.
-    max_invocations: ?i32,
+    max_invocations: ?i32 = null,
 
     /// The interval of time taken by a model to respond as viewed from SageMaker.
     /// The interval includes the local communication time taken to send the request
     /// and to fetch the response from the container of a model and the time taken
     /// to complete the inference in the container.
-    model_latency_thresholds: ?[]const ModelLatencyThreshold,
+    model_latency_thresholds: ?[]const ModelLatencyThreshold = null,
 
     pub const json_field_names = .{
         .flat_invocations = "FlatInvocations",

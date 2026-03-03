@@ -12,7 +12,7 @@ pub const IotTopicPublishAction = struct {
     /// You can configure the action payload when you publish a message to an AWS
     /// IoT Core
     /// topic.
-    payload: ?Payload,
+    payload: ?Payload = null,
 
     pub const json_field_names = .{
         .mqtt_topic = "mqttTopic",

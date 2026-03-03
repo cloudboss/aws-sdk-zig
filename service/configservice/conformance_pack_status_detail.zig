@@ -29,10 +29,10 @@ pub const ConformancePackStatusDetail = struct {
     conformance_pack_state: ConformancePackState,
 
     /// The reason of conformance pack creation failure.
-    conformance_pack_status_reason: ?[]const u8,
+    conformance_pack_status_reason: ?[]const u8 = null,
 
     /// Last time when conformation pack creation and update was successful.
-    last_update_completed_time: ?i64,
+    last_update_completed_time: ?i64 = null,
 
     /// Last time when conformation pack creation and update was requested.
     last_update_requested_time: i64,

@@ -10,7 +10,7 @@ pub const EventDimensions = struct {
     /// One or more custom attributes that your application reports to Amazon
     /// Pinpoint. You can use these attributes as selection criteria when you create
     /// an event filter.
-    attributes: ?[]const aws.map.MapEntry(AttributeDimension),
+    attributes: ?[]const aws.map.MapEntry(AttributeDimension) = null,
 
     /// The name of the event that causes the campaign to be sent or the journey
     /// activity to be performed. This can be a standard event that Amazon Pinpoint
@@ -18,12 +18,12 @@ pub const EventDimensions = struct {
     /// custom event that's specific to your application. For information about
     /// standard events, see [Streaming Amazon Pinpoint
     /// Events](https://docs.aws.amazon.com/pinpoint/latest/developerguide/event-streams.html) in the *Amazon Pinpoint Developer Guide*.
-    event_type: ?SetDimension,
+    event_type: ?SetDimension = null,
 
     /// One or more custom metrics that your application reports to Amazon Pinpoint.
     /// You can use these metrics as selection criteria when you create an event
     /// filter.
-    metrics: ?[]const aws.map.MapEntry(MetricDimension),
+    metrics: ?[]const aws.map.MapEntry(MetricDimension) = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

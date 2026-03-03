@@ -7,12 +7,12 @@ pub const FsxProtocol = struct {
     /// Specifies the Network File System (NFS) protocol configuration that DataSync
     /// uses to access your FSx for OpenZFS file system or FSx for ONTAP file
     /// system's storage virtual machine (SVM).
-    nfs: ?FsxProtocolNfs,
+    nfs: ?FsxProtocolNfs = null,
 
     /// Specifies the Server Message Block (SMB) protocol configuration that
     /// DataSync
     /// uses to access your FSx for ONTAP file system's SVM.
-    smb: ?FsxProtocolSmb,
+    smb: ?FsxProtocolSmb = null,
 
     pub const json_field_names = .{
         .nfs = "NFS",

@@ -6,5 +6,5 @@ pub const InstanceMaintenanceOptionsRequest = struct {
     /// default. For
     /// more information, see [Simplified automatic
     /// recovery](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-recover.html#instance-configuration-recovery).
-    auto_recovery: ?InstanceAutoRecoveryState,
+    auto_recovery: ?InstanceAutoRecoveryState = null,
 };

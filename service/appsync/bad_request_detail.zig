@@ -5,7 +5,7 @@ const CodeError = @import("code_error.zig").CodeError;
 /// `CODE_ERROR`, the detail will contain a list of code errors.
 pub const BadRequestDetail = struct {
     /// Contains the list of errors in the request.
-    code_errors: ?[]const CodeError,
+    code_errors: ?[]const CodeError = null,
 
     pub const json_field_names = .{
         .code_errors = "codeErrors",

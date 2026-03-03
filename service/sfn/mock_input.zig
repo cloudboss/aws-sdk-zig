@@ -6,7 +6,7 @@ pub const MockInput = struct {
     /// The mocked error output when calling TestState. When specified, the mocked
     /// response is returned as a JSON object that contains an `error` and `cause`
     /// field.
-    error_output: ?MockErrorOutput,
+    error_output: ?MockErrorOutput = null,
 
     /// Determines the level of strictness when validating mocked results against
     /// their respective API models. Values include:
@@ -19,10 +19,10 @@ pub const MockInput = struct {
     /// * `NONE`: No validation is performed.
     ///
     /// If no value is specified, the default value is `STRICT`.
-    field_validation_mode: ?MockResponseValidationMode,
+    field_validation_mode: ?MockResponseValidationMode = null,
 
     /// A JSON string containing the mocked result of the state invocation.
-    result: ?[]const u8,
+    result: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_output = "errorOutput",

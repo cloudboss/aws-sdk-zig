@@ -1,13 +1,13 @@
 /// Information about rows for a data set SPICE ingestion.
 pub const RowInfo = struct {
     /// The number of rows that were not ingested.
-    rows_dropped: ?i64,
+    rows_dropped: ?i64 = null,
 
     /// The number of rows that were ingested.
-    rows_ingested: ?i64,
+    rows_ingested: ?i64 = null,
 
     /// The total number of rows in the dataset.
-    total_rows_in_dataset: ?i64,
+    total_rows_in_dataset: ?i64 = null,
 
     pub const json_field_names = .{
         .rows_dropped = "RowsDropped",

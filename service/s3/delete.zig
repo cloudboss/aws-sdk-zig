@@ -15,5 +15,5 @@ pub const Delete = struct {
     /// Element to enable quiet mode for the request. When you add this element, you
     /// must set its value to
     /// `true`.
-    quiet: ?bool,
+    quiet: ?bool = null,
 };

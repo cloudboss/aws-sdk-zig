@@ -3,7 +3,7 @@
 /// and cluster network connectivity.
 pub const InfraCheckConfig = struct {
     /// Enables an infrastructure health check.
-    enable_infra_check: ?bool,
+    enable_infra_check: ?bool = null,
 
     pub const json_field_names = .{
         .enable_infra_check = "EnableInfraCheck",

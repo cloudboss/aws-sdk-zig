@@ -9,7 +9,7 @@ pub const DefinitionRepository = struct {
 
     /// A list of file patterns to exclude when retrieving the workflow definition
     /// from the repository.
-    exclude_file_patterns: ?[]const []const u8,
+    exclude_file_patterns: ?[]const []const u8 = null,
 
     /// The full repository identifier, including the repository owner and name. For
     /// example, 'repository-owner/repository-name'.
@@ -17,7 +17,7 @@ pub const DefinitionRepository = struct {
 
     /// The source reference for the repository, such as a branch name, tag, or
     /// commit ID.
-    source_reference: ?SourceReference,
+    source_reference: ?SourceReference = null,
 
     pub const json_field_names = .{
         .connection_arn = "connectionArn",

@@ -4,10 +4,10 @@ const StatelessCustomActionDefinition = @import("stateless_custom_action_definit
 /// action to use for stateless packet handling.
 pub const RuleGroupSourceCustomActionsDetails = struct {
     /// The definition of a custom action.
-    action_definition: ?StatelessCustomActionDefinition,
+    action_definition: ?StatelessCustomActionDefinition = null,
 
     /// A descriptive name of the custom action.
-    action_name: ?[]const u8,
+    action_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action_definition = "ActionDefinition",

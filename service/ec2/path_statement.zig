@@ -4,8 +4,8 @@ const ResourceStatement = @import("resource_statement.zig").ResourceStatement;
 /// Describes a path statement.
 pub const PathStatement = struct {
     /// The packet header statement.
-    packet_header_statement: ?PacketHeaderStatement,
+    packet_header_statement: ?PacketHeaderStatement = null,
 
     /// The resource statement.
-    resource_statement: ?ResourceStatement,
+    resource_statement: ?ResourceStatement = null,
 };

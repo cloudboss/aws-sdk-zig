@@ -13,5 +13,5 @@ pub const FunctionSummary = struct {
     name: []const u8,
 
     /// The status of the CloudFront function.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 };

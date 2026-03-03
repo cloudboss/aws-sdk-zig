@@ -13,19 +13,19 @@ pub const WindowSummary = struct {
     /// * `SUMMARY` - The average metrics across all windows.
     ///
     /// * `COMPUTED` - The metrics for the specified window.
-    evaluation_type: ?EvaluationType,
+    evaluation_type: ?EvaluationType = null,
 
     /// The number of data points within the window.
-    item_count: ?i32,
+    item_count: ?i32 = null,
 
     /// Provides metrics used to evaluate the performance of a predictor.
-    metrics: ?Metrics,
+    metrics: ?Metrics = null,
 
     /// The timestamp that defines the end of the window.
-    test_window_end: ?i64,
+    test_window_end: ?i64 = null,
 
     /// The timestamp that defines the start of the window.
-    test_window_start: ?i64,
+    test_window_start: ?i64 = null,
 
     pub const json_field_names = .{
         .evaluation_type = "EvaluationType",

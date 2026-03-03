@@ -17,7 +17,7 @@ const SystemsManagerAgent = @import("systems_manager_agent.zig").SystemsManagerA
 /// choose whether to keep it for the AMI that you create.
 pub const AdditionalInstanceConfiguration = struct {
     /// Contains settings for the Systems Manager agent on your build instance.
-    systems_manager_agent: ?SystemsManagerAgent,
+    systems_manager_agent: ?SystemsManagerAgent = null,
 
     /// Use this property to provide commands or a command script to run when you
     /// launch your
@@ -41,7 +41,7 @@ pub const AdditionalInstanceConfiguration = struct {
     /// mkdir -p /var/bb/
     ///
     /// touch /var
-    user_data_override: ?[]const u8,
+    user_data_override: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .systems_manager_agent = "systemsManagerAgent",

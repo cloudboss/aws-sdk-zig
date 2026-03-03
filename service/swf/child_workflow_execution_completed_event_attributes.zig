@@ -11,7 +11,7 @@ pub const ChildWorkflowExecutionCompletedEventAttributes = struct {
     initiated_event_id: i64 = 0,
 
     /// The result of the child workflow execution.
-    result: ?[]const u8,
+    result: ?[]const u8 = null,
 
     /// The ID of the `ChildWorkflowExecutionStarted` event recorded when this child
     /// workflow execution was

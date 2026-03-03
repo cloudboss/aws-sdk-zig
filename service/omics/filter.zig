@@ -6,14 +6,14 @@ const ShareResourceType = @import("share_resource_type.zig").ShareResourceType;
 pub const Filter = struct {
     /// Filter based on the Amazon Resource Number (ARN) of the resource. You can
     /// specify up to 10 values.
-    resource_arns: ?[]const []const u8,
+    resource_arns: ?[]const []const u8 = null,
 
     /// Filter based on the resource status. You can specify up to 10 values.
-    status: ?[]const ShareStatus,
+    status: ?[]const ShareStatus = null,
 
     /// The type of resources to be filtered. You can specify one or more of the
     /// resource types.
-    @"type": ?[]const ShareResourceType,
+    @"type": ?[]const ShareResourceType = null,
 
     pub const json_field_names = .{
         .resource_arns = "resourceArns",

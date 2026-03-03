@@ -8,10 +8,10 @@ pub const RestoreSummary = struct {
 
     /// The Amazon Resource Name (ARN) of the backup from which the table was
     /// restored.
-    source_backup_arn: ?[]const u8,
+    source_backup_arn: ?[]const u8 = null,
 
     /// The ARN of the source table of the backup that is being restored.
-    source_table_arn: ?[]const u8,
+    source_table_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .restore_date_time = "RestoreDateTime",

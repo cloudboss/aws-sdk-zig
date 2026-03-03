@@ -25,7 +25,7 @@ pub const ImageGenerationConfiguration = struct {
     /// less compression. If no value is provided, the default value of the
     /// `JPEGQuality`
     /// key will be set to 80.
-    format_config: ?[]const aws.map.StringMapEntry,
+    format_config: ?[]const aws.map.StringMapEntry = null,
 
     /// The height of the output image that is used in conjunction with the
     /// `WidthPixels` parameter. When both
@@ -34,7 +34,7 @@ pub const ImageGenerationConfiguration = struct {
     /// If only the `HeightPixels` parameter is provided, its original aspect ratio
     /// will be used to calculate the `WidthPixels` ratio.
     /// If neither parameter is provided, the original image size will be returned.
-    height_pixels: ?i32,
+    height_pixels: ?i32 = null,
 
     /// The origin of the Server or Producer timestamps to use to generate the
     /// images.
@@ -57,7 +57,7 @@ pub const ImageGenerationConfiguration = struct {
     /// provided, its original aspect ratio will be used to calculate the
     /// `HeightPixels` ratio. If neither parameter is provided, the original image
     /// size will be returned.
-    width_pixels: ?i32,
+    width_pixels: ?i32 = null,
 
     pub const json_field_names = .{
         .destination_config = "DestinationConfig",

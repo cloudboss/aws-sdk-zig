@@ -26,66 +26,66 @@ const VpcLatticeConfiguration = @import("vpc_lattice_configuration.zig").VpcLatt
 /// .
 pub const ServiceRevision = struct {
     /// The capacity provider strategy the service revision uses.
-    capacity_provider_strategy: ?[]const CapacityProviderStrategyItem,
+    capacity_provider_strategy: ?[]const CapacityProviderStrategyItem = null,
 
     /// The ARN of the cluster that hosts the service.
-    cluster_arn: ?[]const u8,
+    cluster_arn: ?[]const u8 = null,
 
     /// The container images the service revision uses.
-    container_images: ?[]const ContainerImage,
+    container_images: ?[]const ContainerImage = null,
 
     /// The time that the service revision was created. The format is yyyy-mm-dd
     /// HH:mm:ss.SSSSS.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The resources created and managed by Amazon ECS when you create an Express
     /// service for Amazon ECS.
-    ecs_managed_resources: ?ECSManagedResources,
+    ecs_managed_resources: ?ECSManagedResources = null,
 
-    fargate_ephemeral_storage: ?DeploymentEphemeralStorage,
+    fargate_ephemeral_storage: ?DeploymentEphemeralStorage = null,
 
     /// Indicates whether Runtime Monitoring is turned on.
     guard_duty_enabled: bool = false,
 
     /// The launch type the service revision uses.
-    launch_type: ?LaunchType,
+    launch_type: ?LaunchType = null,
 
     /// The load balancers the service revision uses.
-    load_balancers: ?[]const LoadBalancer,
+    load_balancers: ?[]const LoadBalancer = null,
 
-    network_configuration: ?NetworkConfiguration,
+    network_configuration: ?NetworkConfiguration = null,
 
     /// The platform family the service revision uses.
-    platform_family: ?[]const u8,
+    platform_family: ?[]const u8 = null,
 
     /// For the Fargate launch type, the platform version the service revision uses.
-    platform_version: ?[]const u8,
+    platform_version: ?[]const u8 = null,
 
     /// The resolved configuration for the service revision which contains the
     /// actual resources your service revision uses, such as which target groups
     /// serve traffic.
-    resolved_configuration: ?ResolvedConfiguration,
+    resolved_configuration: ?ResolvedConfiguration = null,
 
     /// The ARN of the service for the service revision.
-    service_arn: ?[]const u8,
+    service_arn: ?[]const u8 = null,
 
-    service_connect_configuration: ?ServiceConnectConfiguration,
+    service_connect_configuration: ?ServiceConnectConfiguration = null,
 
     /// The service registries (for Service Discovery) the service revision uses.
-    service_registries: ?[]const ServiceRegistry,
+    service_registries: ?[]const ServiceRegistry = null,
 
     /// The ARN of the service revision.
-    service_revision_arn: ?[]const u8,
+    service_revision_arn: ?[]const u8 = null,
 
     /// The task definition the service revision uses.
-    task_definition: ?[]const u8,
+    task_definition: ?[]const u8 = null,
 
     /// The volumes that are configured at deployment that the service revision
     /// uses.
-    volume_configurations: ?[]const ServiceVolumeConfiguration,
+    volume_configurations: ?[]const ServiceVolumeConfiguration = null,
 
     /// The VPC Lattice configuration for the service revision.
-    vpc_lattice_configurations: ?[]const VpcLatticeConfiguration,
+    vpc_lattice_configurations: ?[]const VpcLatticeConfiguration = null,
 
     pub const json_field_names = .{
         .capacity_provider_strategy = "capacityProviderStrategy",

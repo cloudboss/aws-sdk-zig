@@ -21,7 +21,7 @@ pub const ServiceLevelObjective = struct {
     /// calculate one burn rate metric for this SLO. The burn rate measures how fast
     /// the service is consuming the error budget, relative to the attainment goal
     /// of the SLO.
-    burn_rate_configurations: ?[]const BurnRateConfiguration,
+    burn_rate_configurations: ?[]const BurnRateConfiguration = null,
 
     /// The date and time that this SLO was created. When used in a raw HTTP Query
     /// API, it is formatted as `yyyy-MM-dd'T'HH:mm:ss`. For example,
@@ -29,10 +29,10 @@ pub const ServiceLevelObjective = struct {
     created_time: i64,
 
     /// The description that you created for this SLO.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Displays whether this is a period-based SLO or a request-based SLO.
-    evaluation_type: ?EvaluationType,
+    evaluation_type: ?EvaluationType = null,
 
     goal: Goal,
 
@@ -46,18 +46,18 @@ pub const ServiceLevelObjective = struct {
     /// * Service operation
     /// * Service dependency
     /// * CloudWatch metric
-    metric_source_type: ?MetricSourceType,
+    metric_source_type: ?MetricSourceType = null,
 
     /// The name of this SLO.
     name: []const u8,
 
     /// A structure containing information about the performance metric that this
     /// SLO monitors, if this is a request-based SLO.
-    request_based_sli: ?RequestBasedServiceLevelIndicator,
+    request_based_sli: ?RequestBasedServiceLevelIndicator = null,
 
     /// A structure containing information about the performance metric that this
     /// SLO monitors, if this is a period-based SLO.
-    sli: ?ServiceLevelIndicator,
+    sli: ?ServiceLevelIndicator = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

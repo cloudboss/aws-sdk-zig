@@ -11,25 +11,25 @@ const UdpOutputSettings = @import("udp_output_settings.zig").UdpOutputSettings;
 
 /// Output Settings
 pub const OutputSettings = struct {
-    archive_output_settings: ?ArchiveOutputSettings,
+    archive_output_settings: ?ArchiveOutputSettings = null,
 
-    cmaf_ingest_output_settings: ?CmafIngestOutputSettings,
+    cmaf_ingest_output_settings: ?CmafIngestOutputSettings = null,
 
-    frame_capture_output_settings: ?FrameCaptureOutputSettings,
+    frame_capture_output_settings: ?FrameCaptureOutputSettings = null,
 
-    hls_output_settings: ?HlsOutputSettings,
+    hls_output_settings: ?HlsOutputSettings = null,
 
-    media_package_output_settings: ?MediaPackageOutputSettings,
+    media_package_output_settings: ?MediaPackageOutputSettings = null,
 
-    ms_smooth_output_settings: ?MsSmoothOutputSettings,
+    ms_smooth_output_settings: ?MsSmoothOutputSettings = null,
 
-    multiplex_output_settings: ?MultiplexOutputSettings,
+    multiplex_output_settings: ?MultiplexOutputSettings = null,
 
-    rtmp_output_settings: ?RtmpOutputSettings,
+    rtmp_output_settings: ?RtmpOutputSettings = null,
 
-    srt_output_settings: ?SrtOutputSettings,
+    srt_output_settings: ?SrtOutputSettings = null,
 
-    udp_output_settings: ?UdpOutputSettings,
+    udp_output_settings: ?UdpOutputSettings = null,
 
     pub const json_field_names = .{
         .archive_output_settings = "ArchiveOutputSettings",

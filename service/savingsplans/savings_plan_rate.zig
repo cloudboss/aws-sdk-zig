@@ -7,29 +7,29 @@ const SavingsPlanRateUnit = @import("savings_plan_rate_unit.zig").SavingsPlanRat
 /// Information about a Savings Plan rate.
 pub const SavingsPlanRate = struct {
     /// The currency.
-    currency: ?CurrencyCode,
+    currency: ?CurrencyCode = null,
 
     /// The specific Amazon Web Services operation for the line item in the billing
     /// report.
-    operation: ?[]const u8,
+    operation: ?[]const u8 = null,
 
     /// The product type.
-    product_type: ?SavingsPlanProductType,
+    product_type: ?SavingsPlanProductType = null,
 
     /// The properties.
-    properties: ?[]const SavingsPlanRateProperty,
+    properties: ?[]const SavingsPlanRateProperty = null,
 
     /// The rate.
-    rate: ?[]const u8,
+    rate: ?[]const u8 = null,
 
     /// The service.
-    service_code: ?SavingsPlanRateServiceCode,
+    service_code: ?SavingsPlanRateServiceCode = null,
 
     /// The unit.
-    unit: ?SavingsPlanRateUnit,
+    unit: ?SavingsPlanRateUnit = null,
 
     /// The usage details of the line item in the billing report.
-    usage_type: ?[]const u8,
+    usage_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .currency = "currency",

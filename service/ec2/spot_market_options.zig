@@ -4,7 +4,7 @@ const SpotInstanceType = @import("spot_instance_type.zig").SpotInstanceType;
 /// The options for Spot Instances.
 pub const SpotMarketOptions = struct {
     /// Deprecated.
-    block_duration_minutes: ?i32,
+    block_duration_minutes: ?i32 = null,
 
     /// The behavior when a Spot Instance is interrupted.
     ///
@@ -24,7 +24,7 @@ pub const SpotMarketOptions = struct {
     ///
     /// For more information, see [Interruption
     /// behavior](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/interruption-behavior.html) in the *Amazon EC2 User Guide*.
-    instance_interruption_behavior: ?InstanceInterruptionBehavior,
+    instance_interruption_behavior: ?InstanceInterruptionBehavior = null,
 
     /// The maximum hourly price that you're willing to pay for a Spot Instance. We
     /// do not
@@ -39,14 +39,14 @@ pub const SpotMarketOptions = struct {
     /// a value
     /// below USD $0.001 will result in an `InvalidParameterValue` error
     /// message.
-    max_price: ?[]const u8,
+    max_price: ?[]const u8 = null,
 
     /// The Spot Instance request type. For
     /// [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances), persistent
     /// Spot Instance requests are only supported when the instance interruption
     /// behavior is
     /// either `hibernate` or `stop`.
-    spot_instance_type: ?SpotInstanceType,
+    spot_instance_type: ?SpotInstanceType = null,
 
     /// The end date of the request, in UTC format
     /// (*YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
@@ -58,5 +58,5 @@ pub const SpotMarketOptions = struct {
     ///
     /// * For a one-time request, `ValidUntil` is not supported. The request
     /// remains active until all instances launch or you cancel the request.
-    valid_until: ?i64,
+    valid_until: ?i64 = null,
 };

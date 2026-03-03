@@ -4,15 +4,15 @@ const ResolverDNSSECValidationStatus = @import("resolver_dnssec_validation_statu
 /// validation.
 pub const ResolverDnssecConfig = struct {
     /// The ID for a configuration for DNSSEC validation.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The owner account ID of the virtual private cloud (VPC) for a configuration
     /// for DNSSEC validation.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The ID of the virtual private cloud (VPC) that you're configuring the DNSSEC
     /// validation status for.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The validation status for a DNSSEC configuration. The status can be one of
     /// the following:
@@ -24,7 +24,7 @@ pub const ResolverDnssecConfig = struct {
     /// * **DISABLING:** DNSSEC validation is being disabled but is not complete.
     ///
     /// * **DISABLED** DNSSEC validation is disabled.
-    validation_status: ?ResolverDNSSECValidationStatus,
+    validation_status: ?ResolverDNSSECValidationStatus = null,
 
     pub const json_field_names = .{
         .id = "Id",

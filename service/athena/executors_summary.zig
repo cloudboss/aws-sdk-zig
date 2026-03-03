@@ -10,7 +10,7 @@ pub const ExecutorsSummary = struct {
     /// is measured in data processing unit (DPU) values, a relative measure of
     /// processing
     /// power.
-    executor_size: ?i64,
+    executor_size: ?i64 = null,
 
     /// The processing state of the executor. A description of each state follows.
     ///
@@ -26,17 +26,17 @@ pub const ExecutorsSummary = struct {
     /// `TERMINATED` - The executor is no longer running.
     ///
     /// `FAILED` - Due to a failure, the executor is no longer running.
-    executor_state: ?ExecutorState,
+    executor_state: ?ExecutorState = null,
 
     /// The type of executor used for the application (`COORDINATOR`,
     /// `GATEWAY`, or `WORKER`).
-    executor_type: ?ExecutorType,
+    executor_type: ?ExecutorType = null,
 
     /// The date and time that the executor started.
-    start_date_time: ?i64,
+    start_date_time: ?i64 = null,
 
     /// The date and time that the executor was terminated.
-    termination_date_time: ?i64,
+    termination_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .executor_id = "ExecutorId",

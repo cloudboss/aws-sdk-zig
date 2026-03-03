@@ -2,10 +2,10 @@
 /// for the containers in the task.
 pub const AwsEcsTaskDefinitionInferenceAcceleratorsDetails = struct {
     /// The Elastic Inference accelerator device name.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// The Elastic Inference accelerator type to use.
-    device_type: ?[]const u8,
+    device_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .device_name = "DeviceName",

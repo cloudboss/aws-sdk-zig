@@ -8,9 +8,9 @@ const EncryptionType = @import("encryption_type.zig").EncryptionType;
 pub const EncryptionConfig = struct {
     enabled: bool = false,
 
-    encryption_type: ?EncryptionType,
+    encryption_type: ?EncryptionType = null,
 
-    key_arn: ?[]const u8,
+    key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

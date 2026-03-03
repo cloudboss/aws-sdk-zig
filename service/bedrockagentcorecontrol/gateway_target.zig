@@ -12,17 +12,17 @@ pub const GatewayTarget = struct {
     credential_provider_configurations: []const CredentialProviderConfiguration,
 
     /// The description for the gateway target.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the gateway target.
     gateway_arn: []const u8,
 
     /// The last synchronization time.
-    last_synchronized_at: ?i64,
+    last_synchronized_at: ?i64 = null,
 
     /// The metadata configuration for HTTP header and query parameter propagation
     /// to and from this gateway target.
-    metadata_configuration: ?MetadataConfiguration,
+    metadata_configuration: ?MetadataConfiguration = null,
 
     /// The name of the gateway target.
     name: []const u8,
@@ -31,7 +31,7 @@ pub const GatewayTarget = struct {
     status: TargetStatus,
 
     /// The status reasons for the target status.
-    status_reasons: ?[]const []const u8,
+    status_reasons: ?[]const []const u8 = null,
 
     target_configuration: TargetConfiguration,
 

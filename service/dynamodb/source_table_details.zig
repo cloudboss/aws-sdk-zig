@@ -16,21 +16,21 @@ pub const SourceTableDetails = struct {
     /// * `PAY_PER_REQUEST` - Sets the read/write capacity mode to
     /// `PAY_PER_REQUEST`. We recommend using
     /// `PAY_PER_REQUEST` for unpredictable workloads.
-    billing_mode: ?BillingMode,
+    billing_mode: ?BillingMode = null,
 
     /// Number of items in the table. Note that this is an approximate value.
-    item_count: ?i64,
+    item_count: ?i64 = null,
 
     /// Schema of the table.
     key_schema: []const KeySchemaElement,
 
-    on_demand_throughput: ?OnDemandThroughput,
+    on_demand_throughput: ?OnDemandThroughput = null,
 
     /// Read IOPs and Write IOPS on the table when the backup was created.
     provisioned_throughput: ProvisionedThroughput,
 
     /// ARN of the table for which backup was created.
-    table_arn: ?[]const u8,
+    table_arn: ?[]const u8 = null,
 
     /// Time when the source table was created.
     table_creation_date_time: i64,
@@ -42,7 +42,7 @@ pub const SourceTableDetails = struct {
     table_name: []const u8,
 
     /// Size of the table in bytes. Note that this is an approximate value.
-    table_size_bytes: ?i64,
+    table_size_bytes: ?i64 = null,
 
     pub const json_field_names = .{
         .billing_mode = "BillingMode",

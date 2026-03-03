@@ -22,7 +22,7 @@ pub const WebhookFilterRule = struct {
     /// action configuration properties for built-in action types, see [Pipeline
     /// Structure Reference Action
     /// Requirements](https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements).
-    match_equals: ?[]const u8,
+    match_equals: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .json_path = "jsonPath",

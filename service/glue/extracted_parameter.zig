@@ -6,18 +6,18 @@ const ResponseExtractionMapping = @import("response_extraction_mapping.zig").Res
 pub const ExtractedParameter = struct {
     /// The default value to use if the parameter cannot be extracted from the
     /// response.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// The parameter key name that will be used in subsequent requests.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// Specifies where this extracted parameter should be placed in subsequent
     /// requests, such as in headers, query parameters, or request body.
-    property_location: ?PropertyLocation,
+    property_location: ?PropertyLocation = null,
 
     /// The JSON path or extraction mapping that defines how to extract the
     /// parameter value from API responses.
-    value: ?ResponseExtractionMapping,
+    value: ?ResponseExtractionMapping = null,
 
     pub const json_field_names = .{
         .default_value = "DefaultValue",

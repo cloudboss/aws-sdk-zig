@@ -4,7 +4,7 @@ pub const BlockchainInstant = struct {
     ///
     /// This `timestamp` will only be recorded up to
     /// the second.
-    time: ?i64,
+    time: ?i64 = null,
 
     pub const json_field_names = .{
         .time = "time",

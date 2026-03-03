@@ -30,10 +30,10 @@ pub const ParameterStringFilter = struct {
     /// For filters used with GetParametersByPath, valid options include
     /// `Equals` and `BeginsWith`. (Exception: For filters using
     /// `Label` as the Key name, the only valid option is `Equals`.)
-    option: ?[]const u8,
+    option: ?[]const u8 = null,
 
     /// The value you want to search for.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

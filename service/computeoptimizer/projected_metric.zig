@@ -63,13 +63,13 @@ pub const ProjectedMetric = struct {
     /// [Enabling NVIDIA GPU
     /// utilization with the CloudWatch
     /// Agent](https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent).
-    name: ?MetricName,
+    name: ?MetricName = null,
 
     /// The timestamps of the projected utilization metric.
-    timestamps: ?[]const i64,
+    timestamps: ?[]const i64 = null,
 
     /// The values of the projected utilization metrics.
-    values: ?[]const f64,
+    values: ?[]const f64 = null,
 
     pub const json_field_names = .{
         .name = "name",

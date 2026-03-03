@@ -6,7 +6,7 @@ const Volume = @import("volume.zig").Volume;
 /// The details of a kdb cluster.
 pub const KxCluster = struct {
     /// The availability zone identifiers for the requested regions.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The number of availability zones assigned per cluster. This can be one of
     /// the following:
@@ -14,13 +14,13 @@ pub const KxCluster = struct {
     /// * `SINGLE` – Assigns one availability zone per cluster.
     ///
     /// * `MULTI` – Assigns all the availability zones per cluster.
-    az_mode: ?KxAzMode,
+    az_mode: ?KxAzMode = null,
 
     /// A description of the cluster.
-    cluster_description: ?[]const u8,
+    cluster_description: ?[]const u8 = null,
 
     /// A unique name for the cluster.
-    cluster_name: ?[]const u8,
+    cluster_name: ?[]const u8 = null,
 
     /// Specifies the type of KDB database that is being created. The following
     /// types are available:
@@ -53,32 +53,32 @@ pub const KxCluster = struct {
     ///   Tickerplants, and real-time subscribers (RTS). Tickerplants can persist
     ///   messages to log, which is readable by any RDB environment. It supports
     ///   only single-node that is only one kdb process.
-    cluster_type: ?KxClusterType,
+    cluster_type: ?KxClusterType = null,
 
     /// The timestamp at which the cluster was created in FinSpace. The value is
     /// determined as epoch time in milliseconds. For example, the value for Monday,
     /// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// An IAM role that defines a set of permissions associated with a cluster.
     /// These permissions are assumed when a cluster attempts to access another
     /// cluster.
-    execution_role: ?[]const u8,
+    execution_role: ?[]const u8 = null,
 
     /// Specifies a Q program that will be run at launch of a cluster. It is a
     /// relative path within
     /// *.zip* file that contains the custom code, which will be loaded on
     /// the cluster. It must include the file name itself. For example,
     /// `somedir/init.q`.
-    initialization_script: ?[]const u8,
+    initialization_script: ?[]const u8 = null,
 
     /// The last time that the cluster was modified. The value is determined as
     /// epoch time in milliseconds. For example, the value for Monday, November 1,
     /// 2021 12:00:00 PM UTC is specified as 1635768000000.
-    last_modified_timestamp: ?i64,
+    last_modified_timestamp: ?i64 = null,
 
     /// A version of the FinSpace managed kdb to run.
-    release_label: ?[]const u8,
+    release_label: ?[]const u8 = null,
 
     /// The status of a cluster.
     ///
@@ -97,13 +97,13 @@ pub const KxCluster = struct {
     /// * DELETED – The cluster has been deleted.
     ///
     /// * DELETE_FAILED – The cluster failed to delete.
-    status: ?KxClusterStatus,
+    status: ?KxClusterStatus = null,
 
     /// The error message when a failed state occurs.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// A list of volumes attached to the cluster.
-    volumes: ?[]const Volume,
+    volumes: ?[]const Volume = null,
 
     pub const json_field_names = .{
         .availability_zone_id = "availabilityZoneId",

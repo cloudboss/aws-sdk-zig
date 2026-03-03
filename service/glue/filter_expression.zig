@@ -4,7 +4,7 @@ const FilterValue = @import("filter_value.zig").FilterValue;
 /// Specifies a filter expression.
 pub const FilterExpression = struct {
     /// Whether the expression is to be negated.
-    negated: ?bool,
+    negated: ?bool = null,
 
     /// The type of operation to perform in the expression.
     operation: FilterOperation,

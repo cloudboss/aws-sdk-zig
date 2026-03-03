@@ -8,7 +8,7 @@ pub const CanaryScheduleOutput = struct {
     /// it
     /// was created. The runs are performed according to the schedule in the
     /// `Expression` value.
-    duration_in_seconds: ?i64,
+    duration_in_seconds: ?i64 = null,
 
     /// A `rate` expression or a `cron` expression that defines how often the canary
     /// is to run.
@@ -31,10 +31,10 @@ pub const CanaryScheduleOutput = struct {
     /// [
     /// Scheduling canary runs using
     /// cron](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html).
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     /// A structure that contains the retry configuration for a canary
-    retry_config: ?RetryConfigOutput,
+    retry_config: ?RetryConfigOutput = null,
 
     pub const json_field_names = .{
         .duration_in_seconds = "DurationInSeconds",

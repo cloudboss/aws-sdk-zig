@@ -9,7 +9,7 @@ pub const AugmentedManifestsListItem = struct {
     /// The S3 prefix to the annotation files that are referred in the augmented
     /// manifest
     /// file.
-    annotation_data_s3_uri: ?[]const u8,
+    annotation_data_s3_uri: ?[]const u8 = null,
 
     /// The JSON attribute that contains the annotations for your training
     /// documents. The number
@@ -40,7 +40,7 @@ pub const AugmentedManifestsListItem = struct {
     /// context, like a PDF. For training with Amazon Comprehend, only PDFs are
     /// supported. For
     /// inference, Amazon Comprehend support PDFs, DOCX and TXT.
-    document_type: ?AugmentedManifestsDocumentTypeFormat,
+    document_type: ?AugmentedManifestsDocumentTypeFormat = null,
 
     /// The Amazon S3 location of the augmented manifest file.
     s3_uri: []const u8,
@@ -48,7 +48,7 @@ pub const AugmentedManifestsListItem = struct {
     /// The S3 prefix to the source files (PDFs) that are referred to in the
     /// augmented manifest
     /// file.
-    source_documents_s3_uri: ?[]const u8,
+    source_documents_s3_uri: ?[]const u8 = null,
 
     /// The purpose of the data you've provided in the augmented manifest. You can
     /// either train or
@@ -61,7 +61,7 @@ pub const AugmentedManifestsListItem = struct {
     /// documents for testing.
     ///
     /// TEST - all of the documents in the manifest will be used for testing.
-    split: ?Split,
+    split: ?Split = null,
 
     pub const json_field_names = .{
         .annotation_data_s3_uri = "AnnotationDataS3Uri",

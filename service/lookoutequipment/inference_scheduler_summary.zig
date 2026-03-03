@@ -19,7 +19,7 @@ pub const InferenceSchedulerSummary = struct {
     /// bucket. The customer can upload data at the same frequency and they don't
     /// need to stop and
     /// restart the scheduler when uploading new data.
-    data_delay_offset_in_minutes: ?i64,
+    data_delay_offset_in_minutes: ?i64 = null,
 
     /// How often data is uploaded to the source S3 bucket for the input data. This
     /// value is the
@@ -30,29 +30,29 @@ pub const InferenceSchedulerSummary = struct {
     /// This frequency also determines how often Amazon Lookout for Equipment starts
     /// a scheduled inference on your
     /// data. In this example, it starts once every 5 minutes.
-    data_upload_frequency: ?DataUploadFrequency,
+    data_upload_frequency: ?DataUploadFrequency = null,
 
     /// The Amazon Resource Name (ARN) of the inference scheduler.
-    inference_scheduler_arn: ?[]const u8,
+    inference_scheduler_arn: ?[]const u8 = null,
 
     /// The name of the inference scheduler.
-    inference_scheduler_name: ?[]const u8,
+    inference_scheduler_name: ?[]const u8 = null,
 
     /// Indicates whether the latest execution for the inference scheduler was
     /// Anomalous
     /// (anomalous events found) or Normal (no anomalous events found).
-    latest_inference_result: ?LatestInferenceResult,
+    latest_inference_result: ?LatestInferenceResult = null,
 
     /// The Amazon Resource Name (ARN) of the machine learning model used by the
     /// inference
     /// scheduler.
-    model_arn: ?[]const u8,
+    model_arn: ?[]const u8 = null,
 
     /// The name of the machine learning model used for the inference scheduler.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     /// Indicates the status of the inference scheduler.
-    status: ?InferenceSchedulerStatus,
+    status: ?InferenceSchedulerStatus = null,
 
     pub const json_field_names = .{
         .data_delay_offset_in_minutes = "DataDelayOffsetInMinutes",

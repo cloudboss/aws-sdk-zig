@@ -7,14 +7,14 @@ const TargetedSentimentMention = @import("targeted_sentiment_mention.zig").Targe
 pub const TargetedSentimentEntity = struct {
     /// One or more index into the Mentions array that provides the best name for
     /// the entity group.
-    descriptive_mention_index: ?[]const i32,
+    descriptive_mention_index: ?[]const i32 = null,
 
     /// An array of mentions of the entity in the document. The array represents a
     /// co-reference group.
     /// See [
     /// Co-reference
     /// group](https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html#how-targeted-sentiment-values) for an example.
-    mentions: ?[]const TargetedSentimentMention,
+    mentions: ?[]const TargetedSentimentMention = null,
 
     pub const json_field_names = .{
         .descriptive_mention_index = "DescriptiveMentionIndex",

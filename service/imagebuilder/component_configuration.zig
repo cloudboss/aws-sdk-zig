@@ -8,7 +8,7 @@ pub const ComponentConfiguration = struct {
     /// A group of parameter settings that Image Builder uses to configure the
     /// component for a specific
     /// recipe.
-    parameters: ?[]const ComponentParameter,
+    parameters: ?[]const ComponentParameter = null,
 
     pub const json_field_names = .{
         .component_arn = "componentArn",

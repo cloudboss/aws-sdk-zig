@@ -8,10 +8,10 @@ const CapacityProviderUpdateStatus = @import("capacity_provider_update_status.zi
 /// The details for a capacity provider.
 pub const CapacityProvider = struct {
     /// The Auto Scaling group settings for the capacity provider.
-    auto_scaling_group_provider: ?AutoScalingGroupProvider,
+    auto_scaling_group_provider: ?AutoScalingGroupProvider = null,
 
     /// The Amazon Resource Name (ARN) that identifies the capacity provider.
-    capacity_provider_arn: ?[]const u8,
+    capacity_provider_arn: ?[]const u8 = null,
 
     /// The cluster that this capacity provider is associated with. Managed
     /// instances capacity
@@ -20,21 +20,21 @@ pub const CapacityProvider = struct {
     /// cluster.
     ///
     /// This is required for Managed instances.
-    cluster: ?[]const u8,
+    cluster: ?[]const u8 = null,
 
     /// The configuration for the Amazon ECS Managed Instances provider. This
     /// includes the
     /// infrastructure role, the launch template configuration, and tag propagation
     /// settings.
-    managed_instances_provider: ?ManagedInstancesProvider,
+    managed_instances_provider: ?ManagedInstancesProvider = null,
 
     /// The name of the capacity provider.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the capacity provider. Only capacity providers in an
     /// `ACTIVE` state can be used in a cluster. When a capacity provider is
     /// successfully deleted, it has an `INACTIVE` status.
-    status: ?CapacityProviderStatus,
+    status: ?CapacityProviderStatus = null,
 
     /// The metadata that you apply to the capacity provider to help you categorize
     /// and
@@ -69,13 +69,13 @@ pub const CapacityProvider = struct {
     /// this prefix. Tags with this prefix do not count against your tags per
     /// resource
     /// limit.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The type of capacity provider. For Amazon ECS Managed Instances, this value
     /// is
     /// `MANAGED_INSTANCES`, indicating that Amazon ECS manages the underlying
     /// Amazon EC2 instances on your behalf.
-    @"type": ?CapacityProviderType,
+    @"type": ?CapacityProviderType = null,
 
     /// The update status of the capacity provider. The following are the possible
     /// states that
@@ -94,12 +94,12 @@ pub const CapacityProvider = struct {
     ///
     /// The capacity provider can't be deleted. The update status reason provides
     /// further details about why the delete failed.
-    update_status: ?CapacityProviderUpdateStatus,
+    update_status: ?CapacityProviderUpdateStatus = null,
 
     /// The update status reason. This provides further details about the update
     /// status for
     /// the capacity provider.
-    update_status_reason: ?[]const u8,
+    update_status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_scaling_group_provider = "autoScalingGroupProvider",

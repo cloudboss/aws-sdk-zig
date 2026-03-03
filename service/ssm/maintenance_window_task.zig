@@ -11,15 +11,15 @@ const MaintenanceWindowTaskType = @import("maintenance_window_task_type.zig").Ma
 pub const MaintenanceWindowTask = struct {
     /// The details for the CloudWatch alarm applied to your maintenance window
     /// task.
-    alarm_configuration: ?AlarmConfiguration,
+    alarm_configuration: ?AlarmConfiguration = null,
 
     /// The specification for whether tasks should continue to run after the cutoff
     /// time specified
     /// in the maintenance windows is reached.
-    cutoff_behavior: ?MaintenanceWindowTaskCutoffBehavior,
+    cutoff_behavior: ?MaintenanceWindowTaskCutoffBehavior = null,
 
     /// A description of the task.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about an S3 bucket to write task-level logs to.
     ///
@@ -30,7 +30,7 @@ pub const MaintenanceWindowTask = struct {
     /// For information about how Amazon Web Services Systems Manager handles these
     /// options for the supported maintenance
     /// window task types, see MaintenanceWindowTaskInvocationParameters.
-    logging_info: ?LoggingInfo,
+    logging_info: ?LoggingInfo = null,
 
     /// The maximum number of targets this task can be run for, in parallel.
     ///
@@ -44,7 +44,7 @@ pub const MaintenanceWindowTask = struct {
     /// option. Instead, the system inserts a placeholder value of `1`. This value
     /// doesn't
     /// affect the running of your task.
-    max_concurrency: ?[]const u8,
+    max_concurrency: ?[]const u8 = null,
 
     /// The maximum number of errors allowed before this task stops being scheduled.
     ///
@@ -58,10 +58,10 @@ pub const MaintenanceWindowTask = struct {
     /// option. Instead, the system inserts a placeholder value of `1`. This value
     /// doesn't
     /// affect the running of your task.
-    max_errors: ?[]const u8,
+    max_errors: ?[]const u8 = null,
 
     /// The task name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The priority of the task in the maintenance window. The lower the number,
     /// the higher the
@@ -85,20 +85,20 @@ pub const MaintenanceWindowTask = struct {
     /// maintenance window tasks. For more information, see [Setting up Maintenance
     /// Windows](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html) in the in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    service_role_arn: ?[]const u8,
+    service_role_arn: ?[]const u8 = null,
 
     /// The targets (either managed nodes or tags). Managed nodes are specified
     /// using
     /// `Key=instanceids,Values=,`. Tags are specified
     /// using `Key=,Values=`.
-    targets: ?[]const Target,
+    targets: ?[]const Target = null,
 
     /// The resource that the task uses during execution. For `RUN_COMMAND` and
     /// `AUTOMATION` task types, `TaskArn` is the Amazon Web Services Systems
     /// Manager (SSM document) name or
     /// ARN. For `LAMBDA` tasks, it's the function name or ARN. For
     /// `STEP_FUNCTIONS` tasks, it's the state machine ARN.
-    task_arn: ?[]const u8,
+    task_arn: ?[]const u8 = null,
 
     /// The parameters that should be passed to the task when it is run.
     ///
@@ -109,16 +109,16 @@ pub const MaintenanceWindowTask = struct {
     /// about how Systems Manager handles these options for the supported
     /// maintenance window task
     /// types, see MaintenanceWindowTaskInvocationParameters.
-    task_parameters: ?[]const aws.map.MapEntry(MaintenanceWindowTaskParameterValueExpression),
+    task_parameters: ?[]const aws.map.MapEntry(MaintenanceWindowTaskParameterValueExpression) = null,
 
     /// The type of task.
-    @"type": ?MaintenanceWindowTaskType,
+    @"type": ?MaintenanceWindowTaskType = null,
 
     /// The ID of the maintenance window where the task is registered.
-    window_id: ?[]const u8,
+    window_id: ?[]const u8 = null,
 
     /// The task ID.
-    window_task_id: ?[]const u8,
+    window_task_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alarm_configuration = "AlarmConfiguration",

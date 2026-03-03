@@ -3,30 +3,30 @@ const LockState = @import("lock_state.zig").LockState;
 /// Information about a locked snapshot.
 pub const LockedSnapshotsInfo = struct {
     /// The compliance mode cooling-off period, in hours.
-    cool_off_period: ?i32,
+    cool_off_period: ?i32 = null,
 
     /// The date and time at which the compliance mode cooling-off period expires,
     /// in the UTC time zone
     /// (`YYYY-MM-DDThh:mm:ss.sssZ`).
-    cool_off_period_expires_on: ?i64,
+    cool_off_period_expires_on: ?i64 = null,
 
     /// The date and time at which the snapshot was locked, in the UTC time zone
     /// (`YYYY-MM-DDThh:mm:ss.sssZ`).
-    lock_created_on: ?i64,
+    lock_created_on: ?i64 = null,
 
     /// The period of time for which the snapshot is locked, in days.
-    lock_duration: ?i32,
+    lock_duration: ?i32 = null,
 
     /// The date and time at which the lock duration started, in the UTC time zone
     /// (`YYYY-MM-DDThh:mm:ss.sssZ`).
     ///
     /// If you lock a snapshot that is in the `pending` state, the lock duration
     /// starts only once the snapshot enters the `completed` state.
-    lock_duration_start_time: ?i64,
+    lock_duration_start_time: ?i64 = null,
 
     /// The date and time at which the lock will expire, in the UTC time zone
     /// (`YYYY-MM-DDThh:mm:ss.sssZ`).
-    lock_expires_on: ?i64,
+    lock_expires_on: ?i64 = null,
 
     /// The state of the snapshot lock. Valid states include:
     ///
@@ -50,11 +50,11 @@ pub const LockedSnapshotsInfo = struct {
     /// * `expired` - The snapshot was locked in compliance or governance
     /// mode but the lock duration has expired. The snapshot is not locked and can
     /// be deleted.
-    lock_state: ?LockState,
+    lock_state: ?LockState = null,
 
     /// The account ID of the Amazon Web Services account that owns the snapshot.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The ID of the snapshot.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 };

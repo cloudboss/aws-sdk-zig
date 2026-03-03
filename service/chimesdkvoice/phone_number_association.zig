@@ -5,14 +5,14 @@ const PhoneNumberAssociationName = @import("phone_number_association_name.zig").
 /// Voice Connector ID, or Voice Connector group ID.
 pub const PhoneNumberAssociation = struct {
     /// The timestamp of the phone number association, in ISO 8601 format.
-    associated_timestamp: ?i64,
+    associated_timestamp: ?i64 = null,
 
     /// Defines the association with an Amazon Chime SDK account ID, user ID, Voice
     /// Connector ID, or Voice Connector group ID.
-    name: ?PhoneNumberAssociationName,
+    name: ?PhoneNumberAssociationName = null,
 
     /// Contains the ID for the entity specified in Name.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .associated_timestamp = "AssociatedTimestamp",

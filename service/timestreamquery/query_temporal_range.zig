@@ -11,7 +11,7 @@ pub const QueryTemporalRange = struct {
     ///
     /// * `TableArn` – The Amazon Resource Name (ARN) of the table which is queried
     ///   with the largest time range.
-    max: ?QueryTemporalRangeMax,
+    max: ?QueryTemporalRangeMax = null,
 
     pub const json_field_names = .{
         .max = "Max",

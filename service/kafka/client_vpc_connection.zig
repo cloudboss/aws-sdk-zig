@@ -3,16 +3,16 @@ const VpcConnectionState = @import("vpc_connection_state.zig").VpcConnectionStat
 /// The client VPC connection object.
 pub const ClientVpcConnection = struct {
     /// Information about the auth scheme of Vpc Connection.
-    authentication: ?[]const u8,
+    authentication: ?[]const u8 = null,
 
     /// Creation time of the Vpc Connection.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Owner of the Vpc Connection.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// State of the Vpc Connection.
-    state: ?VpcConnectionState,
+    state: ?VpcConnectionState = null,
 
     /// The ARN that identifies the Vpc Connection.
     vpc_connection_arn: []const u8,

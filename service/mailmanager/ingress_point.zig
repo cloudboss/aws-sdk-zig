@@ -5,7 +5,7 @@ const IngressPointType = @import("ingress_point_type.zig").IngressPointType;
 pub const IngressPoint = struct {
     /// The DNS A Record that identifies your ingress endpoint. Configure your DNS
     /// Mail Exchange (MX) record with this value to route emails to Mail Manager.
-    a_record: ?[]const u8,
+    a_record: ?[]const u8 = null,
 
     /// The identifier of the ingress endpoint resource.
     ingress_point_id: []const u8,

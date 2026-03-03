@@ -11,10 +11,10 @@ pub const AccountPreferences = struct {
     /// unauthorized access and misuse. AWS Chatbot does not store or use
     /// interactions in chat channels with Amazon Q for training AI technologies for
     /// AWS Chatbot.
-    training_data_collection_enabled: ?bool,
+    training_data_collection_enabled: ?bool = null,
 
     /// Enables use of a user role requirement in your chat configuration.
-    user_authorization_required: ?bool,
+    user_authorization_required: ?bool = null,
 
     pub const json_field_names = .{
         .training_data_collection_enabled = "TrainingDataCollectionEnabled",

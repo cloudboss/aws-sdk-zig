@@ -6,7 +6,7 @@ pub const DataTableValueIdentifier = struct {
     attribute_name: []const u8,
 
     /// The identifier's primary values.
-    primary_values: ?[]const PrimaryValue,
+    primary_values: ?[]const PrimaryValue = null,
 
     pub const json_field_names = .{
         .attribute_name = "AttributeName",

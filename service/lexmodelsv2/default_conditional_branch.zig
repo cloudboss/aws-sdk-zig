@@ -5,9 +5,9 @@ const ResponseSpecification = @import("response_specification.zig").ResponseSpec
 /// other conditions are met.
 pub const DefaultConditionalBranch = struct {
     /// The next step in the conversation.
-    next_step: ?DialogState,
+    next_step: ?DialogState = null,
 
-    response: ?ResponseSpecification,
+    response: ?ResponseSpecification = null,
 
     pub const json_field_names = .{
         .next_step = "nextStep",

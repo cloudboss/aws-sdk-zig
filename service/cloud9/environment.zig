@@ -11,16 +11,16 @@ pub const Environment = struct {
     /// The connection type used for connecting to an Amazon EC2 environment.
     /// `CONNECT_SSH`
     /// is selected by default.
-    connection_type: ?ConnectionType,
+    connection_type: ?ConnectionType = null,
 
     /// The description for the environment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the environment.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The state of the environment in its creation or deletion lifecycle.
-    lifecycle: ?EnvironmentLifecycle,
+    lifecycle: ?EnvironmentLifecycle = null,
 
     /// Describes the status of Amazon Web Services managed temporary credentials
     /// for the Cloud9 environment.
@@ -45,10 +45,10 @@ pub const Environment = struct {
     /// * `ENABLED_BY_OWNER`
     ///
     /// * `DISABLED_BY_DEFAULT`
-    managed_credentials_status: ?ManagedCredentialsStatus,
+    managed_credentials_status: ?ManagedCredentialsStatus = null,
 
     /// The name of the environment.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the environment owner.
     owner_arn: []const u8,

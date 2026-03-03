@@ -7,11 +7,11 @@ const RouteFerryTravelOnlySummary = @import("route_ferry_travel_only_summary.zig
 pub const RouteFerrySummary = struct {
     /// Summarized details for the leg including before travel, travel and after
     /// travel steps.
-    overview: ?RouteFerryOverviewSummary,
+    overview: ?RouteFerryOverviewSummary = null,
 
     /// Summarized details for the leg including travel steps only. The Distance for
     /// the travel only portion of the journey is in meters
-    travel_only: ?RouteFerryTravelOnlySummary,
+    travel_only: ?RouteFerryTravelOnlySummary = null,
 
     pub const json_field_names = .{
         .overview = "Overview",

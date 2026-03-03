@@ -42,7 +42,7 @@ pub const MetricDataQuery = struct {
     ///
     /// If you are performing a `PutMetricAlarm` operation, use this to specify
     /// which account contains the metric that the alarm is watching.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// This field can contain either a Metrics Insights query, or a metric math
     /// expression to
@@ -62,7 +62,7 @@ pub const MetricDataQuery = struct {
     ///
     /// Within each MetricDataQuery object, you must specify either `Expression` or
     /// `MetricStat` but not both.
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     /// A short name used to tie this object to the results in the response. This
     /// name must be
@@ -86,7 +86,7 @@ pub const MetricDataQuery = struct {
     /// descriptive. For more
     /// information, see [Using Dynamic
     /// Labels](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html).
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// The metric to be returned, along with statistics, period, and units. Use
     /// this
@@ -96,7 +96,7 @@ pub const MetricDataQuery = struct {
     ///
     /// Within one MetricDataQuery object, you must specify either `Expression` or
     /// `MetricStat` but not both.
-    metric_stat: ?MetricStat,
+    metric_stat: ?MetricStat = null,
 
     /// The granularity, in seconds, of the returned data points. For metrics with
     /// regular
@@ -109,7 +109,7 @@ pub const MetricDataQuery = struct {
     /// metrics are those metrics stored by a `PutMetricData` operation that
     /// includes
     /// a `StorageResolution of 1 second`.
-    period: ?i32,
+    period: ?i32 = null,
 
     /// When used in `GetMetricData`, this option indicates whether to return the
     /// timestamps and raw data values of this metric. If you are performing this
@@ -124,7 +124,7 @@ pub const MetricDataQuery = struct {
     /// in the same
     /// `PutMetricAlarm` operation, specify `ReturnData` as
     /// False.
-    return_data: ?bool,
+    return_data: ?bool = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

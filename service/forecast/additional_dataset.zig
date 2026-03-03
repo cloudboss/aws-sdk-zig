@@ -169,7 +169,7 @@ pub const AdditionalDataset = struct {
     /// * "UY" - URUGUAY
     ///
     /// * "VE" - VENEZUELA
-    configuration: ?[]const aws.map.MapEntry([]const []const u8),
+    configuration: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The name of the additional dataset. Valid names: `"holiday"` and
     /// `"weather"`.

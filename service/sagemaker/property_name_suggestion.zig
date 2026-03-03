@@ -3,7 +3,7 @@
 pub const PropertyNameSuggestion = struct {
     /// A suggested property name based on what you entered in the search textbox in
     /// the SageMaker console.
-    property_name: ?[]const u8,
+    property_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .property_name = "PropertyName",

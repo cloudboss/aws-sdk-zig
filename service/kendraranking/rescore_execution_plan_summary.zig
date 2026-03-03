@@ -6,22 +6,22 @@ const RescoreExecutionPlanStatus = @import("rescore_execution_plan_status.zig").
 pub const RescoreExecutionPlanSummary = struct {
     /// The Unix timestamp when the rescore execution plan
     /// was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of the rescore execution plan.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the rescore execution plan.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the rescore execution plan. When
     /// the value is `ACTIVE`, the rescore execution
     /// plan is ready for use.
-    status: ?RescoreExecutionPlanStatus,
+    status: ?RescoreExecutionPlanStatus = null,
 
     /// The Unix timestamp when the rescore execution plan
     /// was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

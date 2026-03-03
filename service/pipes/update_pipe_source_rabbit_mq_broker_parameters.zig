@@ -3,13 +3,13 @@ const MQBrokerAccessCredentials = @import("mq_broker_access_credentials.zig").MQ
 /// The parameters for using a Rabbit MQ broker as a source.
 pub const UpdatePipeSourceRabbitMQBrokerParameters = struct {
     /// The maximum number of records to include in each batch.
-    batch_size: ?i32,
+    batch_size: ?i32 = null,
 
     /// The credentials needed to access the resource.
     credentials: MQBrokerAccessCredentials,
 
     /// The maximum length of a time to wait for events.
-    maximum_batching_window_in_seconds: ?i32,
+    maximum_batching_window_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .batch_size = "BatchSize",

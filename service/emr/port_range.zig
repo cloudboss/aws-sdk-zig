@@ -4,7 +4,7 @@
 /// `MaxRange`.
 pub const PortRange = struct {
     /// The smallest port number in a specified range of port numbers.
-    max_range: ?i32,
+    max_range: ?i32 = null,
 
     /// The smallest port number in a specified range of port numbers.
     min_range: i32,

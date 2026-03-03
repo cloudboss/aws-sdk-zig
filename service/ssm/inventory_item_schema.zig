@@ -10,7 +10,7 @@ pub const InventoryItemSchema = struct {
 
     /// The alias name of the inventory type. The alias name is used for display
     /// purposes.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The name of the inventory type. Default inventory item type names start with
     /// Amazon Web Services. Custom
@@ -22,7 +22,7 @@ pub const InventoryItemSchema = struct {
     type_name: []const u8,
 
     /// The schema version for the inventory item.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

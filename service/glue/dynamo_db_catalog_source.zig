@@ -3,7 +3,7 @@ const DDBELTCatalogAdditionalOptions = @import("ddbelt_catalog_additional_option
 /// Specifies a DynamoDB data source in the Glue Data Catalog.
 pub const DynamoDBCatalogSource = struct {
     /// Specifies additional connection options for the DynamoDB data source.
-    additional_options: ?DDBELTCatalogAdditionalOptions,
+    additional_options: ?DDBELTCatalogAdditionalOptions = null,
 
     /// The name of the database to read from.
     database: []const u8,
@@ -14,7 +14,7 @@ pub const DynamoDBCatalogSource = struct {
     /// Specifies whether Point-in-Time Recovery (PITR) is enabled for the DynamoDB
     /// table. When set to `true`,
     /// allows reading from a specific point in time. The default value is `false`.
-    pitr_enabled: ?bool,
+    pitr_enabled: ?bool = null,
 
     /// The name of the table in the database to read from.
     table: []const u8,

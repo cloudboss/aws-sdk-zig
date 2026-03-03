@@ -4,10 +4,10 @@ const ExperimentReportState = @import("experiment_report_state.zig").ExperimentR
 /// Describes the experiment report.
 pub const ExperimentReport = struct {
     /// The S3 destination of the experiment report.
-    s_3_reports: ?[]const ExperimentReportS3Report,
+    s_3_reports: ?[]const ExperimentReportS3Report = null,
 
     /// The state of the experiment report.
-    state: ?ExperimentReportState,
+    state: ?ExperimentReportState = null,
 
     pub const json_field_names = .{
         .s_3_reports = "s3Reports",

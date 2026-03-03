@@ -4,7 +4,7 @@ const AggregationKey = @import("aggregation_key.zig").AggregationKey;
 /// Provides additional information about the aggregation key.
 pub const AggregationSummary = struct {
     /// List of additional dimensions used to group and summarize data.
-    additional_summarization_dimensions: ?[]const SummarizationDimensionOverview,
+    additional_summarization_dimensions: ?[]const SummarizationDimensionOverview = null,
 
     /// Indicates the Amazon Web Services accounts in the aggregation key.
     aggregated_accounts: SummarizationDimensionOverview,
@@ -15,7 +15,7 @@ pub const AggregationSummary = struct {
 
     /// Indicates the collection of organizational units that are involved in the
     /// aggregation key.
-    aggregated_organizational_units: ?SummarizationDimensionOverview,
+    aggregated_organizational_units: ?SummarizationDimensionOverview = null,
 
     /// Indicates the Amazon Web Services Regions in the aggregation key.
     aggregated_regions: SummarizationDimensionOverview,

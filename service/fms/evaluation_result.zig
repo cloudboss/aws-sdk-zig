@@ -8,7 +8,7 @@ const PolicyComplianceStatusType = @import("policy_compliance_status_type.zig").
 pub const EvaluationResult = struct {
     /// Describes an Amazon Web Services account's compliance with the Firewall
     /// Manager policy.
-    compliance_status: ?PolicyComplianceStatusType,
+    compliance_status: ?PolicyComplianceStatusType = null,
 
     /// Indicates that over 100 resources are noncompliant with the Firewall Manager
     /// policy.

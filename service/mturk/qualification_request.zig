@@ -5,31 +5,31 @@ pub const QualificationRequest = struct {
     /// contained in a QuestionFormAnswers document, if the type has a test
     /// and the Worker has submitted answers. If the Worker does not provide
     /// any answers, Answer may be empty.
-    answer: ?[]const u8,
+    answer: ?[]const u8 = null,
 
     /// The ID of the Qualification request, a unique identifier
     /// generated when the request was submitted.
-    qualification_request_id: ?[]const u8,
+    qualification_request_id: ?[]const u8 = null,
 
     /// The ID of the Qualification type the Worker is requesting,
     /// as returned by the CreateQualificationType operation.
-    qualification_type_id: ?[]const u8,
+    qualification_type_id: ?[]const u8 = null,
 
     /// The date and time the Qualification request had a status of
     /// Submitted. This is either the time the Worker submitted answers for a
     /// Qualification test, or the time the Worker requested the
     /// Qualification if the Qualification type does not have a test.
-    submit_time: ?i64,
+    submit_time: ?i64 = null,
 
     /// The contents of the Qualification test that was presented to
     /// the Worker, if the type has a test and the Worker has submitted
     /// answers. This value is identical to the QuestionForm associated with
     /// the Qualification type at the time the Worker requests the
     /// Qualification.
-    @"test": ?[]const u8,
+    @"test": ?[]const u8 = null,
 
     /// The ID of the Worker requesting the Qualification.
-    worker_id: ?[]const u8,
+    worker_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .answer = "Answer",

@@ -9,7 +9,7 @@ const QueryEngineType = @import("query_engine_type.zig").QueryEngineType;
 pub const SqlKnowledgeBaseConfiguration = struct {
     /// Specifies configurations for a knowledge base connected to an Amazon
     /// Redshift database.
-    redshift_configuration: ?RedshiftConfiguration,
+    redshift_configuration: ?RedshiftConfiguration = null,
 
     /// The type of SQL database to connect to the knowledge base.
     @"type": QueryEngineType,

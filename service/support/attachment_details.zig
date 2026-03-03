@@ -3,10 +3,10 @@
 /// retrieve the attachment with the DescribeAttachment operation.
 pub const AttachmentDetails = struct {
     /// The ID of the attachment.
-    attachment_id: ?[]const u8,
+    attachment_id: ?[]const u8 = null,
 
     /// The file name of the attachment.
-    file_name: ?[]const u8,
+    file_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attachment_id = "attachmentId",

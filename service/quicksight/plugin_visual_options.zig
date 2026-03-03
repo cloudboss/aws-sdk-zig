@@ -3,7 +3,7 @@ const PluginVisualProperty = @import("plugin_visual_property.zig").PluginVisualP
 /// The options and persisted properties for the plugin visual.
 pub const PluginVisualOptions = struct {
     /// The persisted properties and their values.
-    visual_properties: ?[]const PluginVisualProperty,
+    visual_properties: ?[]const PluginVisualProperty = null,
 
     pub const json_field_names = .{
         .visual_properties = "VisualProperties",

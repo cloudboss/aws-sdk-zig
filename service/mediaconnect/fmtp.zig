@@ -6,26 +6,26 @@ const Tcs = @import("tcs.zig").Tcs;
 /// A set of parameters that define the media stream.
 pub const Fmtp = struct {
     /// The format of the audio channel.
-    channel_order: ?[]const u8,
+    channel_order: ?[]const u8 = null,
 
     /// The format used for the representation of color.
-    colorimetry: ?Colorimetry,
+    colorimetry: ?Colorimetry = null,
 
     /// The frame rate for the video stream, in frames/second. For example:
     /// 60000/1001.
-    exact_framerate: ?[]const u8,
+    exact_framerate: ?[]const u8 = null,
 
     /// The pixel aspect ratio (PAR) of the video.
-    par: ?[]const u8,
+    par: ?[]const u8 = null,
 
     /// The encoding range of the video.
-    range: ?Range,
+    range: ?Range = null,
 
     /// The type of compression that was used to smooth the video’s appearance.
-    scan_mode: ?ScanMode,
+    scan_mode: ?ScanMode = null,
 
     /// The transfer characteristic system (TCS) that is used in the video.
-    tcs: ?Tcs,
+    tcs: ?Tcs = null,
 
     pub const json_field_names = .{
         .channel_order = "ChannelOrder",

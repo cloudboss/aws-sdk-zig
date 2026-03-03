@@ -9,45 +9,45 @@ const DeviceType = @import("device_type.zig").DeviceType;
 /// A device.
 pub const Device = struct {
     /// The device's maker.
-    brand: ?DeviceBrand,
+    brand: ?DeviceBrand = null,
 
     /// When the device was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// A device's current software.
-    current_software: ?[]const u8,
+    current_software: ?[]const u8 = null,
 
     /// A description for the device.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A device's aggregated status. Including the device's connection status,
     /// provisioning status, and lease status.
-    device_aggregated_status: ?DeviceAggregatedStatus,
+    device_aggregated_status: ?DeviceAggregatedStatus = null,
 
     /// The device's ID.
-    device_id: ?[]const u8,
+    device_id: ?[]const u8 = null,
 
     /// When the device was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// A device's latest job. Includes the target image version, and the update job
     /// status.
-    latest_device_job: ?LatestDeviceJob,
+    latest_device_job: ?LatestDeviceJob = null,
 
     /// The device's lease expiration time.
-    lease_expiration_time: ?i64,
+    lease_expiration_time: ?i64 = null,
 
     /// The device's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The device's provisioning status.
-    provisioning_status: ?DeviceStatus,
+    provisioning_status: ?DeviceStatus = null,
 
     /// The device's tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The device's type.
-    @"type": ?DeviceType,
+    @"type": ?DeviceType = null,
 
     pub const json_field_names = .{
         .brand = "Brand",

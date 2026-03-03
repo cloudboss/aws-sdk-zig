@@ -9,15 +9,15 @@ const DatasourcePackageUsageInfo = @import("datasource_package_usage_info.zig").
 /// Details about a member account in a behavior graph.
 pub const MemberDetail = struct {
     /// The Amazon Web Services account identifier for the member account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Web Services account identifier of the administrator account for
     /// the behavior
     /// graph.
-    administrator_id: ?[]const u8,
+    administrator_id: ?[]const u8 = null,
 
     /// The state of a data source package for the behavior graph.
-    datasource_package_ingest_states: ?[]const aws.map.MapEntry(DatasourcePackageIngestState),
+    datasource_package_ingest_states: ?[]const aws.map.MapEntry(DatasourcePackageIngestState) = null,
 
     /// For member accounts with a status of `ACCEPTED_BUT_DISABLED`, the reason
     /// that
@@ -32,14 +32,14 @@ pub const MemberDetail = struct {
     /// verify the data volume for the member account. This is usually because the
     /// member
     /// account is not enrolled in Amazon GuardDuty.
-    disabled_reason: ?MemberDisabledReason,
+    disabled_reason: ?MemberDisabledReason = null,
 
     /// The Amazon Web Services account root user email address for the member
     /// account.
-    email_address: ?[]const u8,
+    email_address: ?[]const u8 = null,
 
     /// The ARN of the behavior graph.
-    graph_arn: ?[]const u8,
+    graph_arn: ?[]const u8 = null,
 
     /// The type of behavior graph membership.
     ///
@@ -48,18 +48,18 @@ pub const MemberDetail = struct {
     ///
     /// For an account that was invited to a behavior graph, the type is
     /// `INVITATION`.
-    invitation_type: ?InvitationType,
+    invitation_type: ?InvitationType = null,
 
     /// For invited accounts, the date and time that Detective sent the invitation
     /// to
     /// the account. The value is an ISO8601 formatted string. For example,
     /// `2021-08-18T16:35:56.284Z`.
-    invited_time: ?i64,
+    invited_time: ?i64 = null,
 
     /// The Amazon Web Services account identifier of the administrator account for
     /// the behavior
     /// graph.
-    master_id: ?[]const u8,
+    master_id: ?[]const u8 = null,
 
     /// The member account data volume as a percentage of the maximum allowed data
     /// volume. 0
@@ -73,12 +73,12 @@ pub const MemberDetail = struct {
     /// per day, then
     /// `PercentOfGraphUtilization` is 25. It represents 25% of the maximum allowed
     /// data volume.
-    percent_of_graph_utilization: ?f64,
+    percent_of_graph_utilization: ?f64 = null,
 
     /// The date and time when the graph utilization percentage was last updated.
     /// The value is
     /// an ISO8601 formatted string. For example, `2021-08-18T16:35:56.284Z`.
-    percent_of_graph_utilization_updated_time: ?i64,
+    percent_of_graph_utilization_updated_time: ?i64 = null,
 
     /// The current membership status of the member account. The status can have one
     /// of the
@@ -120,24 +120,24 @@ pub const MemberDetail = struct {
     /// graph are not included. In the organization behavior graph, organization
     /// accounts that the
     /// Detective administrator account did not enable are not included.
-    status: ?MemberStatus,
+    status: ?MemberStatus = null,
 
     /// The date and time that the member account was last updated. The value is an
     /// ISO8601
     /// formatted string. For example, `2021-08-18T16:35:56.284Z`.
-    updated_time: ?i64,
+    updated_time: ?i64 = null,
 
     /// Details on the volume of usage for each data source package in a behavior
     /// graph.
-    volume_usage_by_datasource_package: ?[]const aws.map.MapEntry(DatasourcePackageUsageInfo),
+    volume_usage_by_datasource_package: ?[]const aws.map.MapEntry(DatasourcePackageUsageInfo) = null,
 
     /// The data volume in bytes per day for the member account.
-    volume_usage_in_bytes: ?i64,
+    volume_usage_in_bytes: ?i64 = null,
 
     /// The data and time when the member account data volume was last updated. The
     /// value is an
     /// ISO8601 formatted string. For example, `2021-08-18T16:35:56.284Z`.
-    volume_usage_updated_time: ?i64,
+    volume_usage_updated_time: ?i64 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

@@ -12,10 +12,10 @@ pub const AutoAdjustData = struct {
     /// The parameters that define or describe the historical data that your
     /// auto-adjusting
     /// budget is based on.
-    historical_options: ?HistoricalOptions,
+    historical_options: ?HistoricalOptions = null,
 
     /// The last time that your budget was auto-adjusted.
-    last_auto_adjust_time: ?i64,
+    last_auto_adjust_time: ?i64 = null,
 
     pub const json_field_names = .{
         .auto_adjust_type = "AutoAdjustType",

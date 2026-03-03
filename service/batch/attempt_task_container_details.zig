@@ -5,25 +5,25 @@ const NetworkInterface = @import("network_interface.zig").NetworkInterface;
 pub const AttemptTaskContainerDetails = struct {
     /// The exit code for the container’s attempt. A non-zero exit code is
     /// considered failed.
-    exit_code: ?i32,
+    exit_code: ?i32 = null,
 
     /// The name of the Amazon CloudWatch Logs log stream that's associated with the
     /// container. The log
     /// group for Batch jobs is `/aws/batch/job`. Each container attempt receives a
     /// log stream name
     /// when they reach the `RUNNING` status.
-    log_stream_name: ?[]const u8,
+    log_stream_name: ?[]const u8 = null,
 
     /// The name of a container.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The network interfaces that are associated with the job attempt.
-    network_interfaces: ?[]const NetworkInterface,
+    network_interfaces: ?[]const NetworkInterface = null,
 
     /// A short (255 max characters) string that's easy to understand and provides
     /// additional details for a
     /// running or stopped container.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .exit_code = "exitCode",

@@ -23,7 +23,7 @@ pub const QueryRequest = struct {
     ///
     /// * After 4 hours, any request with the same `ClientToken` is treated
     /// as a new request.
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The total number of rows to be returned in the `Query` output. The initial
     /// run of `Query` with a `MaxRows` value specified will return the
@@ -44,7 +44,7 @@ pub const QueryRequest = struct {
     /// fewer rows to keep the response size from exceeding the 1 MB limit. If
     /// `MaxRows` is not provided, Timestream will send the necessary
     /// number of rows to meet the 1 MB limit.
-    max_rows: ?i32,
+    max_rows: ?i32 = null,
 
     /// A pagination token used to return a set of results. When the `Query` API
     /// is invoked using `NextToken`, that particular invocation is assumed to be a
@@ -81,14 +81,14 @@ pub const QueryRequest = struct {
     /// query
     /// string in the query requests, the query will fail with an `Invalid
     /// pagination token` error.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// Encapsulates settings for enabling `QueryInsights`.
     ///
     /// Enabling `QueryInsights` returns insights and metrics in addition to query
     /// results for the query that you executed. You can use `QueryInsights` to tune
     /// your query performance.
-    query_insights: ?QueryInsights,
+    query_insights: ?QueryInsights = null,
 
     /// The query to be run by Timestream.
     query_string: []const u8,

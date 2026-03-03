@@ -13,7 +13,7 @@ pub const S3Source = struct {
     input_columns: []const InputColumn,
 
     /// Information about the format for the S3 source file or files.
-    upload_settings: ?UploadSettings,
+    upload_settings: ?UploadSettings = null,
 
     pub const json_field_names = .{
         .data_source_arn = "DataSourceArn",

@@ -5,27 +5,27 @@ const TargetStatus = @import("target_status.zig").TargetStatus;
 /// Information about the target Lambda function during an Lambda deployment.
 pub const LambdaTarget = struct {
     /// The unique ID of a deployment.
-    deployment_id: ?[]const u8,
+    deployment_id: ?[]const u8 = null,
 
     /// A `LambdaFunctionInfo` object that describes a target Lambda
     /// function.
-    lambda_function_info: ?LambdaFunctionInfo,
+    lambda_function_info: ?LambdaFunctionInfo = null,
 
     /// The date and time when the target Lambda function was updated by a
     /// deployment.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The lifecycle events of the deployment to this target Lambda function.
-    lifecycle_events: ?[]const LifecycleEvent,
+    lifecycle_events: ?[]const LifecycleEvent = null,
 
     /// The status an Lambda deployment's target Lambda function.
-    status: ?TargetStatus,
+    status: ?TargetStatus = null,
 
     /// The Amazon Resource Name (ARN) of the target.
-    target_arn: ?[]const u8,
+    target_arn: ?[]const u8 = null,
 
     /// The unique ID of a deployment target that has a type of `lambdaTarget`.
-    target_id: ?[]const u8,
+    target_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .deployment_id = "deploymentId",

@@ -6,7 +6,7 @@
 /// CAs, you should add the private CA certificate to the trust store.
 pub const TrustStore = struct {
     /// A list of web portal ARNs that this trust store is associated with.
-    associated_portal_arns: ?[]const []const u8,
+    associated_portal_arns: ?[]const []const u8 = null,
 
     /// The ARN of the trust store.
     trust_store_arn: []const u8,

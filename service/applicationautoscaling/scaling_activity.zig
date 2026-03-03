@@ -16,16 +16,16 @@ pub const ScalingActivity = struct {
     description: []const u8,
 
     /// The details about the scaling activity.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// The Unix timestamp for when the scaling activity ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// Machine-readable data that describes the reason for a not scaled activity.
     /// Only
     /// available when
     /// [DescribeScalingActivities](https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalingActivities.html) includes not scaled activities.
-    not_scaled_reasons: ?[]const NotScaledReason,
+    not_scaled_reasons: ?[]const NotScaledReason = null,
 
     /// The identifier of the resource associated with the scaling activity.
     /// This string consists of the resource type and unique identifier.
@@ -206,7 +206,7 @@ pub const ScalingActivity = struct {
     status_code: ScalingActivityStatusCode,
 
     /// A simple message about the current status of the scaling activity.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .activity_id = "ActivityId",

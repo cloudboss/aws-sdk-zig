@@ -8,7 +8,7 @@ pub const UpsolverDestinationProperties = struct {
 
     /// The object key for the destination Upsolver Amazon S3 bucket in which Amazon
     /// AppFlow places the files.
-    bucket_prefix: ?[]const u8,
+    bucket_prefix: ?[]const u8 = null,
 
     /// The configuration that determines how data is formatted when Upsolver is
     /// used as the flow

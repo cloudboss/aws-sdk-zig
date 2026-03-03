@@ -3,10 +3,10 @@ const InclusionAnnotationValue = @import("inclusion_annotation_value.zig").Inclu
 /// A timestamped inclusion annotation.
 pub const TimestampedInclusionAnnotation = struct {
     /// The timestamp when the inclusion annotation was last modified.
-    last_modified_on: ?i64,
+    last_modified_on: ?i64 = null,
 
     /// The inclusion annotation value.
-    value: ?InclusionAnnotationValue,
+    value: ?InclusionAnnotationValue = null,
 
     pub const json_field_names = .{
         .last_modified_on = "LastModifiedOn",

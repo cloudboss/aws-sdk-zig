@@ -5,10 +5,10 @@ const RecordingFileFormat = @import("recording_file_format.zig").RecordingFileFo
 /// `S3RecordingSinkRuntimeConfiguration` is not specified.
 pub const S3RecordingSinkConfiguration = struct {
     /// The default URI of the Amazon S3 bucket used as the recording sink.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// The default file format for the media files sent to the Amazon S3 bucket.
-    recording_file_format: ?RecordingFileFormat,
+    recording_file_format: ?RecordingFileFormat = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

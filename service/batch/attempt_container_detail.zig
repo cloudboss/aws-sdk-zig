@@ -5,31 +5,31 @@ const NetworkInterface = @import("network_interface.zig").NetworkInterface;
 pub const AttemptContainerDetail = struct {
     /// The Amazon Resource Name (ARN) of the Amazon ECS container instance that
     /// hosts the job attempt.
-    container_instance_arn: ?[]const u8,
+    container_instance_arn: ?[]const u8 = null,
 
     /// The exit code for the job attempt. A non-zero exit code is considered
     /// failed.
-    exit_code: ?i32,
+    exit_code: ?i32 = null,
 
     /// The name of the CloudWatch Logs log stream that's associated with the
     /// container. The log
     /// group for Batch jobs is `/aws/batch/job`. Each container attempt receives a
     /// log
     /// stream name when they reach the `RUNNING` status.
-    log_stream_name: ?[]const u8,
+    log_stream_name: ?[]const u8 = null,
 
     /// The network interfaces that are associated with the job attempt.
-    network_interfaces: ?[]const NetworkInterface,
+    network_interfaces: ?[]const NetworkInterface = null,
 
     /// A short (255 max characters) human-readable string to provide additional
     /// details for a
     /// running or stopped container.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon ECS task that's associated with
     /// the job attempt. Each container
     /// attempt receives a task ARN when they reach the `STARTING` status.
-    task_arn: ?[]const u8,
+    task_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .container_instance_arn = "containerInstanceArn",

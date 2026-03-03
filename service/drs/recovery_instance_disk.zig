@@ -4,11 +4,11 @@ pub const RecoveryInstanceDisk = struct {
     bytes: i64 = 0,
 
     /// The EBS Volume ID of this disk.
-    ebs_volume_id: ?[]const u8,
+    ebs_volume_id: ?[]const u8 = null,
 
     /// The internal device name of this disk. This is the name that is visible on
     /// the machine itself and not from the EC2 console.
-    internal_device_name: ?[]const u8,
+    internal_device_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bytes = "bytes",

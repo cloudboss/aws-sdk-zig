@@ -8,7 +8,7 @@ const UsageAllocation = @import("usage_allocation.zig").UsageAllocation;
 pub const UsageRecord = struct {
     /// The `CustomerAWSAccountID` parameter specifies the AWS account ID of the
     /// buyer.
-    customer_aws_account_id: ?[]const u8,
+    customer_aws_account_id: ?[]const u8 = null,
 
     /// The `CustomerIdentifier` is obtained through the
     /// `ResolveCustomer` operation and represents an individual buyer in your
@@ -23,7 +23,7 @@ pub const UsageRecord = struct {
     /// The quantity of usage consumed by the customer for the given dimension and
     /// time.
     /// Defaults to `0` if not specified.
-    quantity: ?i32,
+    quantity: ?i32 = null,
 
     /// Timestamp, in UTC, for which the usage is being reported.
     ///
@@ -35,7 +35,7 @@ pub const UsageRecord = struct {
     /// The set of `UsageAllocations` to submit. The sum of all
     /// `UsageAllocation` quantities must equal the Quantity of the
     /// `UsageRecord`.
-    usage_allocations: ?[]const UsageAllocation,
+    usage_allocations: ?[]const UsageAllocation = null,
 
     pub const json_field_names = .{
         .customer_aws_account_id = "CustomerAWSAccountId",

@@ -7,11 +7,11 @@ const EdgeOverride = @import("edge_override.zig").EdgeOverride;
 pub const Via = struct {
     /// The list of network function groups associated with the service insertion
     /// action.
-    network_function_groups: ?[]const NetworkFunctionGroup,
+    network_function_groups: ?[]const NetworkFunctionGroup = null,
 
     /// Describes any edge overrides. An edge override is a specific edge to be used
     /// for traffic.
-    with_edge_overrides: ?[]const EdgeOverride,
+    with_edge_overrides: ?[]const EdgeOverride = null,
 
     pub const json_field_names = .{
         .network_function_groups = "NetworkFunctionGroups",

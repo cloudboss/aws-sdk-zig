@@ -10,42 +10,42 @@ const MedicalScribeVocabularyFilterMethod = @import("medical_scribe_vocabulary_f
 /// Contains details about a Amazon Web Services HealthScribe streaming session.
 pub const MedicalScribeStreamDetails = struct {
     /// The Channel Definitions of the HealthScribe streaming session.
-    channel_definitions: ?[]const MedicalScribeChannelDefinition,
+    channel_definitions: ?[]const MedicalScribeChannelDefinition = null,
 
     /// The Encryption Settings of the HealthScribe streaming session.
-    encryption_settings: ?MedicalScribeEncryptionSettings,
+    encryption_settings: ?MedicalScribeEncryptionSettings = null,
 
     /// The Language Code of the HealthScribe streaming session.
-    language_code: ?MedicalScribeLanguageCode,
+    language_code: ?MedicalScribeLanguageCode = null,
 
     /// The Media Encoding of the HealthScribe streaming session.
-    media_encoding: ?MedicalScribeMediaEncoding,
+    media_encoding: ?MedicalScribeMediaEncoding = null,
 
     /// The sample rate (in hertz) of the HealthScribe streaming session.
-    media_sample_rate_hertz: ?i32,
+    media_sample_rate_hertz: ?i32 = null,
 
     /// Indicates whether the `MedicalScribeContext` object was provided when the
     /// stream was started.
-    medical_scribe_context_provided: ?bool,
+    medical_scribe_context_provided: ?bool = null,
 
     /// The result of post-stream analytics for the HealthScribe streaming session.
-    post_stream_analytics_result: ?MedicalScribePostStreamAnalyticsResult,
+    post_stream_analytics_result: ?MedicalScribePostStreamAnalyticsResult = null,
 
     /// The post-stream analytics settings of the HealthScribe streaming session.
-    post_stream_analytics_settings: ?MedicalScribePostStreamAnalyticsSettings,
+    post_stream_analytics_settings: ?MedicalScribePostStreamAnalyticsSettings = null,
 
     /// The Amazon Resource Name (ARN) of the role used in the HealthScribe
     /// streaming session.
-    resource_access_role_arn: ?[]const u8,
+    resource_access_role_arn: ?[]const u8 = null,
 
     /// The identifier of the HealthScribe streaming session.
-    session_id: ?[]const u8,
+    session_id: ?[]const u8 = null,
 
     /// The date and time when the HealthScribe streaming session was created.
-    stream_created_at: ?i64,
+    stream_created_at: ?i64 = null,
 
     /// The date and time when the HealthScribe streaming session was ended.
-    stream_ended_at: ?i64,
+    stream_ended_at: ?i64 = null,
 
     /// The streaming status of the HealthScribe streaming session.
     ///
@@ -67,17 +67,17 @@ pub const MedicalScribeStreamDetails = struct {
     /// `MedicalScribePostStreamAnalyticsResult`. For example, you can view the
     /// status of the
     /// `ClinicalNoteGenerationResult`.
-    stream_status: ?MedicalScribeStreamStatus,
+    stream_status: ?MedicalScribeStreamStatus = null,
 
     /// The method of the vocabulary filter for the HealthScribe streaming session.
-    vocabulary_filter_method: ?MedicalScribeVocabularyFilterMethod,
+    vocabulary_filter_method: ?MedicalScribeVocabularyFilterMethod = null,
 
     /// The name of the vocabulary filter used for the HealthScribe streaming
     /// session .
-    vocabulary_filter_name: ?[]const u8,
+    vocabulary_filter_name: ?[]const u8 = null,
 
     /// The vocabulary name of the HealthScribe streaming session.
-    vocabulary_name: ?[]const u8,
+    vocabulary_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channel_definitions = "ChannelDefinitions",

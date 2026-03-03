@@ -6,7 +6,7 @@ pub const ModelCardVersionSummary = struct {
     creation_time: i64,
 
     /// The time date and time that the model card version was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the model card.
     model_card_arn: []const u8,

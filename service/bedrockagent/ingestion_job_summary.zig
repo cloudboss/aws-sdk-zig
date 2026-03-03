@@ -7,7 +7,7 @@ pub const IngestionJobSummary = struct {
     data_source_id: []const u8,
 
     /// The description of the data ingestion job.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the data ingestion job.
     ingestion_job_id: []const u8,
@@ -19,7 +19,7 @@ pub const IngestionJobSummary = struct {
     started_at: i64,
 
     /// Contains statistics for the data ingestion job.
-    statistics: ?IngestionJobStatistics,
+    statistics: ?IngestionJobStatistics = null,
 
     /// The status of the data ingestion job.
     status: IngestionJobStatus,

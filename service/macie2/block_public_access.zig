@@ -6,17 +6,17 @@
 pub const BlockPublicAccess = struct {
     /// Specifies whether Amazon S3 blocks public access control lists (ACLs) for
     /// the bucket and objects in the bucket.
-    block_public_acls: ?bool,
+    block_public_acls: ?bool = null,
 
     /// Specifies whether Amazon S3 blocks public bucket policies for the bucket.
-    block_public_policy: ?bool,
+    block_public_policy: ?bool = null,
 
     /// Specifies whether Amazon S3 ignores public ACLs for the bucket and objects
     /// in the bucket.
-    ignore_public_acls: ?bool,
+    ignore_public_acls: ?bool = null,
 
     /// Specifies whether Amazon S3 restricts public bucket policies for the bucket.
-    restrict_public_buckets: ?bool,
+    restrict_public_buckets: ?bool = null,
 
     pub const json_field_names = .{
         .block_public_acls = "blockPublicAcls",

@@ -4,10 +4,10 @@ const UpdateProgramTransition = @import("update_program_transition.zig").UpdateP
 /// Schedule configuration parameters.
 pub const UpdateProgramScheduleConfiguration = struct {
     /// Program clip range configuration.
-    clip_range: ?ClipRange,
+    clip_range: ?ClipRange = null,
 
     /// Program transition configuration.
-    transition: ?UpdateProgramTransition,
+    transition: ?UpdateProgramTransition = null,
 
     pub const json_field_names = .{
         .clip_range = "ClipRange",

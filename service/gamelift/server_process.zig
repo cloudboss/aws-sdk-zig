@@ -30,7 +30,7 @@ pub const ServerProcess = struct {
     /// An optional list of parameters to pass to the server executable or Realtime
     /// script on
     /// launch.
-    parameters: ?[]const u8,
+    parameters: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .concurrent_executions = "ConcurrentExecutions",

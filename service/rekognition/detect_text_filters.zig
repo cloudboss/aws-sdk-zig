@@ -12,9 +12,9 @@ pub const DetectTextFilters = struct {
     /// A Filter focusing on a certain area of the image. Uses a `BoundingBox`
     /// object
     /// to set the region of the image.
-    regions_of_interest: ?[]const RegionOfInterest,
+    regions_of_interest: ?[]const RegionOfInterest = null,
 
-    word_filter: ?DetectionFilter,
+    word_filter: ?DetectionFilter = null,
 
     pub const json_field_names = .{
         .regions_of_interest = "RegionsOfInterest",

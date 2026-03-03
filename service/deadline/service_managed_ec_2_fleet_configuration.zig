@@ -11,10 +11,10 @@ pub const ServiceManagedEc2FleetConfiguration = struct {
     instance_market_options: ServiceManagedEc2InstanceMarketOptions,
 
     /// The storage profile ID for the service managed EC2 fleet.
-    storage_profile_id: ?[]const u8,
+    storage_profile_id: ?[]const u8 = null,
 
     /// The VPC configuration for the service managed EC2 fleet.
-    vpc_configuration: ?VpcConfiguration,
+    vpc_configuration: ?VpcConfiguration = null,
 
     pub const json_field_names = .{
         .instance_capabilities = "instanceCapabilities",

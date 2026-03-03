@@ -4,13 +4,13 @@ const Action = @import("action.zig").Action;
 /// evaluates to TRUE.
 pub const Event = struct {
     /// The actions to be performed.
-    actions: ?[]const Action,
+    actions: ?[]const Action = null,
 
     /// Optional. The Boolean expression that, when TRUE, causes the `actions` to be
     /// performed. If not present, the actions are performed (=TRUE). If the
     /// expression result is not
     /// a Boolean value, the actions are not performed (=FALSE).
-    condition: ?[]const u8,
+    condition: ?[]const u8 = null,
 
     /// The name of the event.
     event_name: []const u8,

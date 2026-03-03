@@ -16,7 +16,7 @@ pub const ManagedQueryResultsConfiguration = struct {
     /// field
     /// indicates the encryption option (for example, SSE_KMS or CSE_KMS) and key
     /// information.
-    encryption_configuration: ?ManagedQueryResultsEncryptionConfiguration,
+    encryption_configuration: ?ManagedQueryResultsEncryptionConfiguration = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

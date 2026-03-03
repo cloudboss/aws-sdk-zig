@@ -4,10 +4,10 @@ const ExportDestinationType = @import("export_destination_type.zig").ExportDesti
 /// from evidence finder.
 pub const DefaultExportDestination = struct {
     /// The destination bucket where Audit Manager stores exported files.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// The destination type, such as Amazon S3.
-    destination_type: ?ExportDestinationType,
+    destination_type: ?ExportDestinationType = null,
 
     pub const json_field_names = .{
         .destination = "destination",

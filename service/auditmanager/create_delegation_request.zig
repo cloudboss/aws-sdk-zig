@@ -5,13 +5,13 @@ const RoleType = @import("role_type.zig").RoleType;
 /// Audit Manager.
 pub const CreateDelegationRequest = struct {
     /// A comment that's related to the delegation request.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The unique identifier for the control set.
-    control_set_id: ?[]const u8,
+    control_set_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The type of customer persona.
     ///
@@ -23,7 +23,7 @@ pub const CreateDelegationRequest = struct {
     ///
     /// In `BatchCreateDelegationByAssessment`, `roleType` can only be
     /// `RESOURCE_OWNER`.
-    role_type: ?RoleType,
+    role_type: ?RoleType = null,
 
     pub const json_field_names = .{
         .comment = "comment",

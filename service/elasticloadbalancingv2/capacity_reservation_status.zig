@@ -3,8 +3,8 @@ const CapacityReservationStateEnum = @import("capacity_reservation_state_enum.zi
 /// The status of a capacity reservation.
 pub const CapacityReservationStatus = struct {
     /// The status code.
-    code: ?CapacityReservationStateEnum,
+    code: ?CapacityReservationStateEnum = null,
 
     /// The reason code for the status.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 };

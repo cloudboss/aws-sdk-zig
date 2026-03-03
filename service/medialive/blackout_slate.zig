@@ -6,7 +6,7 @@ const BlackoutSlateState = @import("blackout_slate_state.zig").BlackoutSlateStat
 pub const BlackoutSlate = struct {
     /// Blackout slate image to be used. Leave empty for solid black. Only bmp and
     /// png images are supported.
-    blackout_slate_image: ?InputLocation,
+    blackout_slate_image: ?InputLocation = null,
 
     /// Setting to enabled causes the encoder to blackout the video, audio, and
     /// captions, and raise the "Network Blackout Image" slate when an SCTE104/35
@@ -14,19 +14,19 @@ pub const BlackoutSlate = struct {
     /// lifted when the Network Start Segmentation Descriptor is encountered. The
     /// Network End and Network Start descriptors must contain a network ID that
     /// matches the value entered in "Network ID".
-    network_end_blackout: ?BlackoutSlateNetworkEndBlackout,
+    network_end_blackout: ?BlackoutSlateNetworkEndBlackout = null,
 
     /// Path to local file to use as Network End Blackout image. Image will be
     /// scaled to fill the entire output raster.
-    network_end_blackout_image: ?InputLocation,
+    network_end_blackout_image: ?InputLocation = null,
 
     /// Provides Network ID that matches EIDR ID format (e.g.,
     /// "10.XXXX/XXXX-XXXX-XXXX-XXXX-XXXX-C").
-    network_id: ?[]const u8,
+    network_id: ?[]const u8 = null,
 
     /// When set to enabled, causes video, audio and captions to be blanked when
     /// indicated by program metadata.
-    state: ?BlackoutSlateState,
+    state: ?BlackoutSlateState = null,
 
     pub const json_field_names = .{
         .blackout_slate_image = "BlackoutSlateImage",

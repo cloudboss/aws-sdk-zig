@@ -5,12 +5,12 @@ pub const LaunchTemplatePrivateDnsNameOptionsRequest = struct {
     /// Indicates whether to respond to DNS queries for instance hostnames with DNS
     /// AAAA
     /// records.
-    enable_resource_name_dns_aaaa_record: ?bool,
+    enable_resource_name_dns_aaaa_record: ?bool = null,
 
     /// Indicates whether to respond to DNS queries for instance hostnames with DNS
     /// A
     /// records.
-    enable_resource_name_dns_a_record: ?bool,
+    enable_resource_name_dns_a_record: ?bool = null,
 
     /// The type of hostname for Amazon EC2 instances. For IPv4 only subnets, an
     /// instance DNS name
@@ -19,5 +19,5 @@ pub const LaunchTemplatePrivateDnsNameOptionsRequest = struct {
     /// name must be based on the instance ID. For dual-stack subnets, you can
     /// specify whether
     /// DNS names use the instance IPv4 address or the instance ID.
-    hostname_type: ?HostnameType,
+    hostname_type: ?HostnameType = null,
 };

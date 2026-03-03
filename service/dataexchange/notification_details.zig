@@ -6,15 +6,15 @@ const SchemaChangeRequestDetails = @import("schema_change_request_details.zig").
 pub const NotificationDetails = struct {
     /// Extra
     /// details specific to a data update type notification.
-    data_update: ?DataUpdateRequestDetails,
+    data_update: ?DataUpdateRequestDetails = null,
 
     /// Extra
     /// details specific to a deprecation type notification.
-    deprecation: ?DeprecationRequestDetails,
+    deprecation: ?DeprecationRequestDetails = null,
 
     /// Extra
     /// details specific to a schema change type notification.
-    schema_change: ?SchemaChangeRequestDetails,
+    schema_change: ?SchemaChangeRequestDetails = null,
 
     pub const json_field_names = .{
         .data_update = "DataUpdate",

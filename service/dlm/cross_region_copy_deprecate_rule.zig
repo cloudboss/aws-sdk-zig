@@ -8,13 +8,13 @@ pub const CrossRegionCopyDeprecateRule = struct {
     /// equal to the cross-Region AMI copy retention period, and it can't be greater
     /// than 10 years. This is
     /// equivalent to 120 months, 520 weeks, or 3650 days.
-    interval: ?i32,
+    interval: ?i32 = null,
 
     /// The unit of time in which to measure the **Interval**. For example,
     /// to deprecate a cross-Region AMI copy after 3 months, specify `Interval=3`
     /// and
     /// `IntervalUnit=MONTHS`.
-    interval_unit: ?RetentionIntervalUnitValues,
+    interval_unit: ?RetentionIntervalUnitValues = null,
 
     pub const json_field_names = .{
         .interval = "Interval",

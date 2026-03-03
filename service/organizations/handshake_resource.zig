@@ -4,7 +4,7 @@ const HandshakeResourceType = @import("handshake_resource_type.zig").HandshakeRe
 pub const HandshakeResource = struct {
     /// An array of `HandshakeResource` objects. When needed, contains additional
     /// details for a handshake. For example, the email address for the sender.
-    resources: ?[]const HandshakeResource,
+    resources: ?[]const HandshakeResource = null,
 
     /// The type of information being passed, specifying how the value is to be
     /// interpreted by
@@ -24,12 +24,12 @@ pub const HandshakeResource = struct {
     ///
     /// * **NOTES**: Additional text included by the sender
     /// for the recipient.
-    @"type": ?HandshakeResourceType,
+    @"type": ?HandshakeResourceType = null,
 
     /// Additional information for the handshake. The format of the value string
     /// must match
     /// the requirements of the specified type.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resources = "Resources",

@@ -11,7 +11,7 @@ pub const SrtListenerSettingsRequest = struct {
     minimum_latency: i32,
 
     /// Optional. The stream ID if the upstream system uses this identifier.
-    stream_id: ?[]const u8,
+    stream_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .decryption = "Decryption",

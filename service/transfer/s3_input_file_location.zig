@@ -17,11 +17,11 @@
 /// *bob* file.
 pub const S3InputFileLocation = struct {
     /// Specifies the S3 bucket for the customer input file.
-    bucket: ?[]const u8,
+    bucket: ?[]const u8 = null,
 
     /// The name assigned to the file when it was created in Amazon S3. You use the
     /// object key to retrieve the object.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "Bucket",

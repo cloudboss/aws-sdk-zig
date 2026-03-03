@@ -23,7 +23,7 @@ pub const MetricDataQuery = struct {
     /// The ID of the account where this metric is located. If you are performing
     /// this operation in a monitoring account, use this to specify which source
     /// account to retrieve this metric from.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// This field can contain a metric math expression to be performed on the other
     /// metrics that you are retrieving within this `MetricDataQueries` structure.
@@ -36,7 +36,7 @@ pub const MetricDataQuery = struct {
     ///
     /// Within each `MetricDataQuery` object, you must specify either `Expression`
     /// or `MetricStat` but not both.
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     /// A short name used to tie this object to the results in the response. This
     /// `Id` must be unique within a `MetricDataQueries` array. If you are
@@ -54,14 +54,14 @@ pub const MetricDataQuery = struct {
     /// You can put dynamic expressions into a label, so that it is more
     /// descriptive. For more information, see [Using Dynamic
     /// Labels](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html).
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// A metric to be used directly for the SLO, or to be used in the math
     /// expression that will be used for the SLO.
     ///
     /// Within one `MetricDataQuery` object, you must specify either `Expression` or
     /// `MetricStat` but not both.
-    metric_stat: ?MetricStat,
+    metric_stat: ?MetricStat = null,
 
     /// The granularity, in seconds, of the returned data points for this metric.
     /// For metrics with regular resolution, a period can be as short as one minute
@@ -81,13 +81,13 @@ pub const MetricDataQuery = struct {
     ///   minutes).
     /// * Start time greater than 63 days ago - Use a multiple of 3600 seconds (1
     ///   hour).
-    period: ?i32,
+    period: ?i32 = null,
 
     /// Use this only if you are using a metric math expression for the SLO. Specify
     /// `true` for `ReturnData` for only the one expression result to use as the
     /// alarm. For all other metrics and expressions in the same
     /// `CreateServiceLevelObjective` operation, specify `ReturnData` as `false`.
-    return_data: ?bool,
+    return_data: ?bool = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

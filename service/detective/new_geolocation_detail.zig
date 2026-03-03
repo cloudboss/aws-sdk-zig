@@ -3,13 +3,13 @@
 /// location based on previous user activity.
 pub const NewGeolocationDetail = struct {
     /// IP address using which the resource was accessed.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// Checks if the geolocation is new for the entire account.
     is_new_for_entire_account: bool = false,
 
     /// Location where the resource was accessed.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ip_address = "IpAddress",

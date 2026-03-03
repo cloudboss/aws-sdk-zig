@@ -8,29 +8,29 @@ const Tier = @import("tier.zig").Tier;
 /// made up of.
 pub const ApplicationComponent = struct {
     /// The name of the component.
-    component_name: ?[]const u8,
+    component_name: ?[]const u8 = null,
 
     /// If logging is supported for the resource type, indicates whether the
     /// component has
     /// configured logs to be monitored.
-    component_remarks: ?[]const u8,
+    component_remarks: ?[]const u8 = null,
 
     /// Workloads detected in the application component.
-    detected_workload: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry),
+    detected_workload: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry) = null,
 
     /// Indicates whether the application component is monitored.
-    monitor: ?bool,
+    monitor: ?bool = null,
 
     /// The operating system of the component.
-    os_type: ?OsType,
+    os_type: ?OsType = null,
 
     /// The resource type. Supported resource types include EC2 instances, Auto
     /// Scaling group,
     /// Classic ELB, Application ELB, and SQS Queue.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The stack tier of the application component.
-    tier: ?Tier,
+    tier: ?Tier = null,
 
     pub const json_field_names = .{
         .component_name = "ComponentName",

@@ -8,18 +8,18 @@ const SyncConfig = @import("sync_config.zig").SyncConfig;
 /// Describes a resolver.
 pub const Resolver = struct {
     /// The caching configuration for the resolver.
-    caching_config: ?CachingConfig,
+    caching_config: ?CachingConfig = null,
 
     /// The `resolver` code that contains the request and response functions. When
     /// code is used, the `runtime` is required. The `runtime` value must be
     /// `APPSYNC_JS`.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The resolver data source name.
-    data_source_name: ?[]const u8,
+    data_source_name: ?[]const u8 = null,
 
     /// The resolver field name.
-    field_name: ?[]const u8,
+    field_name: ?[]const u8 = null,
 
     /// The resolver type.
     ///
@@ -33,7 +33,7 @@ pub const Resolver = struct {
     /// serial manner. You can use a pipeline resolver to run a GraphQL query
     /// against
     /// multiple data sources.
-    kind: ?ResolverKind,
+    kind: ?ResolverKind = null,
 
     /// The maximum batching size for a resolver.
     max_batch_size: i32 = 0,
@@ -47,27 +47,27 @@ pub const Resolver = struct {
     /// be ignored. However, you can still set its value.
     ///
     /// `metricsConfig` can be `ENABLED` or `DISABLED`.
-    metrics_config: ?ResolverLevelMetricsConfig,
+    metrics_config: ?ResolverLevelMetricsConfig = null,
 
     /// The `PipelineConfig`.
-    pipeline_config: ?PipelineConfig,
+    pipeline_config: ?PipelineConfig = null,
 
     /// The request mapping template.
-    request_mapping_template: ?[]const u8,
+    request_mapping_template: ?[]const u8 = null,
 
     /// The resolver Amazon Resource Name (ARN).
-    resolver_arn: ?[]const u8,
+    resolver_arn: ?[]const u8 = null,
 
     /// The response mapping template.
-    response_mapping_template: ?[]const u8,
+    response_mapping_template: ?[]const u8 = null,
 
-    runtime: ?AppSyncRuntime,
+    runtime: ?AppSyncRuntime = null,
 
     /// The `SyncConfig` for a resolver attached to a versioned data source.
-    sync_config: ?SyncConfig,
+    sync_config: ?SyncConfig = null,
 
     /// The resolver type name.
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .caching_config = "cachingConfig",

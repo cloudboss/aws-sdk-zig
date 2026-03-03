@@ -12,13 +12,13 @@ pub const PermissionGroupByUser = struct {
     ///
     /// * `REMOVAL_IN_PROGRESS` – The user is currently being removed from the
     ///   permission group.
-    membership_status: ?PermissionGroupMembershipStatus,
+    membership_status: ?PermissionGroupMembershipStatus = null,
 
     /// The name of the permission group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The unique identifier for the permission group.
-    permission_group_id: ?[]const u8,
+    permission_group_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .membership_status = "membershipStatus",

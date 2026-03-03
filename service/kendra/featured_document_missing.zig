@@ -8,7 +8,7 @@
 pub const FeaturedDocumentMissing = struct {
     /// The identifier of the document that doesn't exist but you have specified
     /// as a featured document.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

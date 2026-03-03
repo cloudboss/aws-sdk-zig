@@ -10,7 +10,7 @@ pub const IcebergSchema = struct {
 
     /// The list of field identifiers that uniquely identify records in the table,
     /// used for row-level operations and deduplication.
-    identifier_field_ids: ?[]const i32,
+    identifier_field_ids: ?[]const i32 = null,
 
     /// The unique identifier for this schema version within the Iceberg table's
     /// schema evolution history.
@@ -18,7 +18,7 @@ pub const IcebergSchema = struct {
 
     /// The root type of the schema structure, typically "struct" for Iceberg table
     /// schemas.
-    @"type": ?IcebergStructTypeEnum,
+    @"type": ?IcebergStructTypeEnum = null,
 
     pub const json_field_names = .{
         .fields = "Fields",

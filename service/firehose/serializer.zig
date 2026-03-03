@@ -9,13 +9,13 @@ pub const Serializer = struct {
     /// in Amazon
     /// S3. For more information, see [Apache
     /// ORC](https://orc.apache.org/docs/).
-    orc_ser_de: ?OrcSerDe,
+    orc_ser_de: ?OrcSerDe = null,
 
     /// A serializer to use for converting data to the Parquet format before storing
     /// it in
     /// Amazon S3. For more information, see [Apache
     /// Parquet](https://parquet.apache.org/docs/contribution-guidelines/).
-    parquet_ser_de: ?ParquetSerDe,
+    parquet_ser_de: ?ParquetSerDe = null,
 
     pub const json_field_names = .{
         .orc_ser_de = "OrcSerDe",

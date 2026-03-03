@@ -7,61 +7,61 @@ const PITPolicyRule = @import("pit_policy_rule.zig").PITPolicyRule;
 
 pub const ReplicationConfigurationTemplate = struct {
     /// The Replication Configuration Template ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Whether to associate the default Elastic Disaster Recovery Security group
     /// with the Replication Configuration Template.
-    associate_default_security_group: ?bool,
+    associate_default_security_group: ?bool = null,
 
     /// Whether to allow the AWS replication agent to automatically replicate newly
     /// added disks.
-    auto_replicate_new_disks: ?bool,
+    auto_replicate_new_disks: ?bool = null,
 
     /// Configure bandwidth throttling for the outbound data transfer rate of the
     /// Source Server in Mbps.
     bandwidth_throttling: i64 = 0,
 
     /// Whether to create a Public IP for the Recovery Instance by default.
-    create_public_ip: ?bool,
+    create_public_ip: ?bool = null,
 
     /// The data plane routing mechanism that will be used for replication.
-    data_plane_routing: ?ReplicationConfigurationDataPlaneRouting,
+    data_plane_routing: ?ReplicationConfigurationDataPlaneRouting = null,
 
     /// The Staging Disk EBS volume type to be used during replication.
-    default_large_staging_disk_type: ?ReplicationConfigurationDefaultLargeStagingDiskType,
+    default_large_staging_disk_type: ?ReplicationConfigurationDefaultLargeStagingDiskType = null,
 
     /// The type of EBS encryption to be used during replication.
-    ebs_encryption: ?ReplicationConfigurationEbsEncryption,
+    ebs_encryption: ?ReplicationConfigurationEbsEncryption = null,
 
     /// The ARN of the EBS encryption key to be used during replication.
-    ebs_encryption_key_arn: ?[]const u8,
+    ebs_encryption_key_arn: ?[]const u8 = null,
 
     /// The Point in time (PIT) policy to manage snapshots taken during replication.
-    pit_policy: ?[]const PITPolicyRule,
+    pit_policy: ?[]const PITPolicyRule = null,
 
     /// The Replication Configuration Template ID.
     replication_configuration_template_id: []const u8,
 
     /// The instance type to be used for the replication server.
-    replication_server_instance_type: ?[]const u8,
+    replication_server_instance_type: ?[]const u8 = null,
 
     /// The security group IDs that will be used by the replication server.
-    replication_servers_security_groups_i_ds: ?[]const []const u8,
+    replication_servers_security_groups_i_ds: ?[]const []const u8 = null,
 
     /// The subnet to be used by the replication staging area.
-    staging_area_subnet_id: ?[]const u8,
+    staging_area_subnet_id: ?[]const u8 = null,
 
     /// A set of tags to be associated with all resources created in the replication
     /// staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.
-    staging_area_tags: ?[]const aws.map.StringMapEntry,
+    staging_area_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// A set of tags to be associated with the Replication Configuration Template
     /// resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Whether to use a dedicated Replication Server in the replication staging
     /// area.
-    use_dedicated_replication_server: ?bool,
+    use_dedicated_replication_server: ?bool = null,
 
     pub const json_field_names = .{
         .arn = "arn",

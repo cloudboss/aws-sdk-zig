@@ -5,13 +5,13 @@ const LicenseRuleStatement = @import("license_rule_statement.zig").LicenseRuleSt
 /// Rule statement.
 pub const RuleStatement = struct {
     /// Instance rule statement.
-    instance_rule_statement: ?InstanceRuleStatement,
+    instance_rule_statement: ?InstanceRuleStatement = null,
 
     /// License configuration rule statement.
-    license_configuration_rule_statement: ?LicenseConfigurationRuleStatement,
+    license_configuration_rule_statement: ?LicenseConfigurationRuleStatement = null,
 
     /// License rule statement.
-    license_rule_statement: ?LicenseRuleStatement,
+    license_rule_statement: ?LicenseRuleStatement = null,
 
     pub const json_field_names = .{
         .instance_rule_statement = "InstanceRuleStatement",

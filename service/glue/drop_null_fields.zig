@@ -15,7 +15,7 @@ pub const DropNullFields = struct {
 
     /// A structure that represents whether certain values are recognized as null
     /// values for removal.
-    null_check_box_list: ?NullCheckBoxList,
+    null_check_box_list: ?NullCheckBoxList = null,
 
     /// A structure that specifies a list of NullValueField structures that
     /// represent a custom null value such as zero or other value being used as a
@@ -23,7 +23,7 @@ pub const DropNullFields = struct {
     ///
     /// The `DropNullFields` transform removes custom null values only if both the
     /// value of the null placeholder and the datatype match the data.
-    null_text_list: ?[]const NullValueField,
+    null_text_list: ?[]const NullValueField = null,
 
     pub const json_field_names = .{
         .inputs = "Inputs",

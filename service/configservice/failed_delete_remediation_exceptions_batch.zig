@@ -4,11 +4,11 @@ const RemediationExceptionResourceKey = @import("remediation_exception_resource_
 /// reasons.
 pub const FailedDeleteRemediationExceptionsBatch = struct {
     /// Returns remediation exception resource key object of the failed items.
-    failed_items: ?[]const RemediationExceptionResourceKey,
+    failed_items: ?[]const RemediationExceptionResourceKey = null,
 
     /// Returns a failure message for delete remediation exception. For example,
     /// Config creates an exception due to an internal error.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .failed_items = "FailedItems",

@@ -8,10 +8,10 @@ const StreamProcessorStatus = @import("stream_processor_status.zig").StreamProce
 /// stream the analysis resullts.
 pub const StreamProcessor = struct {
     /// Name of the Amazon Rekognition stream processor.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Current status of the Amazon Rekognition stream processor.
-    status: ?StreamProcessorStatus,
+    status: ?StreamProcessorStatus = null,
 
     pub const json_field_names = .{
         .name = "Name",

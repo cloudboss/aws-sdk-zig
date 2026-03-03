@@ -6,20 +6,20 @@ const InterruptibleCapacityReservationAllocationStatus = @import("interruptible_
 /// allocation management.
 pub const InterruptibleCapacityAllocation = struct {
     /// The current number of instances allocated to the interruptible reservation.
-    instance_count: ?i32,
+    instance_count: ?i32 = null,
 
     /// The ID of the interruptible Capacity Reservation created from the
     /// allocation.
-    interruptible_capacity_reservation_id: ?[]const u8,
+    interruptible_capacity_reservation_id: ?[]const u8 = null,
 
     /// The type of interruption policy applied to the interruptible reservation.
-    interruption_type: ?InterruptionType,
+    interruption_type: ?InterruptionType = null,
 
     /// The current status of the allocation (updating during reclamation, active
     /// when complete).
-    status: ?InterruptibleCapacityReservationAllocationStatus,
+    status: ?InterruptibleCapacityReservationAllocationStatus = null,
 
     /// After your modify request, the requested number of instances allocated to
     /// interruptible reservation.
-    target_instance_count: ?i32,
+    target_instance_count: ?i32 = null,
 };

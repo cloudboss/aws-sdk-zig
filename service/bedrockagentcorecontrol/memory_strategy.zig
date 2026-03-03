@@ -5,13 +5,13 @@ const MemoryStrategyType = @import("memory_strategy_type.zig").MemoryStrategyTyp
 /// Contains information about a memory strategy.
 pub const MemoryStrategy = struct {
     /// The configuration of the memory strategy.
-    configuration: ?StrategyConfiguration,
+    configuration: ?StrategyConfiguration = null,
 
     /// The timestamp when the memory strategy was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of the memory strategy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the memory strategy.
     name: []const u8,
@@ -20,7 +20,7 @@ pub const MemoryStrategy = struct {
     namespaces: []const []const u8,
 
     /// The current status of the memory strategy.
-    status: ?MemoryStrategyStatus,
+    status: ?MemoryStrategyStatus = null,
 
     /// The unique identifier of the memory strategy.
     strategy_id: []const u8,
@@ -29,7 +29,7 @@ pub const MemoryStrategy = struct {
     @"type": MemoryStrategyType,
 
     /// The timestamp when the memory strategy was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

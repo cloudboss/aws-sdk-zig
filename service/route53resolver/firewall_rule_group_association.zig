@@ -6,57 +6,57 @@ const FirewallRuleGroupAssociationStatus = @import("firewall_rule_group_associat
 /// the VPC.
 pub const FirewallRuleGroupAssociation = struct {
     /// The Amazon Resource Name (ARN) of the firewall rule group association.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the association was created, in Unix time format and
     /// Coordinated Universal Time (UTC).
-    creation_time: ?[]const u8,
+    creation_time: ?[]const u8 = null,
 
     /// A unique string defined by you to identify the request. This allows you to
     /// retry failed
     /// requests without the risk of running the operation twice. This can be any
     /// unique string,
     /// for example, a timestamp.
-    creator_request_id: ?[]const u8,
+    creator_request_id: ?[]const u8 = null,
 
     /// The unique identifier of the firewall rule group.
-    firewall_rule_group_id: ?[]const u8,
+    firewall_rule_group_id: ?[]const u8 = null,
 
     /// The identifier for the association.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The owner of the association, used only for associations that are not
     /// managed by you. If you use Firewall Manager to
     /// manage your DNS Firewalls, then this reports Firewall Manager as the managed
     /// owner.
-    managed_owner_name: ?[]const u8,
+    managed_owner_name: ?[]const u8 = null,
 
     /// The date and time that the association was last modified, in Unix time
     /// format and Coordinated Universal Time (UTC).
-    modification_time: ?[]const u8,
+    modification_time: ?[]const u8 = null,
 
     /// If enabled, this setting disallows modification or removal of the
     /// association, to help prevent against accidentally altering DNS firewall
     /// protections.
-    mutation_protection: ?MutationProtectionStatus,
+    mutation_protection: ?MutationProtectionStatus = null,
 
     /// The name of the association.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The setting that determines the processing order of the rule group among the
     /// rule groups that are associated with a single VPC. DNS Firewall
     /// filters VPC traffic starting from rule group with the lowest numeric
     /// priority setting.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The current status of the association.
-    status: ?FirewallRuleGroupAssociationStatus,
+    status: ?FirewallRuleGroupAssociationStatus = null,
 
     /// Additional information about the status of the response, if available.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The unique identifier of the VPC that is associated with the rule group.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

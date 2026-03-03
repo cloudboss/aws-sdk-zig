@@ -3,14 +3,14 @@ const ScheduledInstancesEbs = @import("scheduled_instances_ebs.zig").ScheduledIn
 /// Describes a block device mapping for a Scheduled Instance.
 pub const ScheduledInstancesBlockDeviceMapping = struct {
     /// The device name (for example, `/dev/sdh` or `xvdh`).
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// Parameters used to set up EBS volumes automatically when the instance is
     /// launched.
-    ebs: ?ScheduledInstancesEbs,
+    ebs: ?ScheduledInstancesEbs = null,
 
     /// To omit the device from the block device mapping, specify an empty string.
-    no_device: ?[]const u8,
+    no_device: ?[]const u8 = null,
 
     /// The virtual device name (`ephemeral`N). Instance store volumes are numbered
     /// starting from 0. An instance type with two available instance store volumes
@@ -25,5 +25,5 @@ pub const ScheduledInstancesBlockDeviceMapping = struct {
     /// mapping for the instance. When you launch an M3 instance, we ignore any
     /// instance store volumes
     /// specified in the block device mapping for the AMI.
-    virtual_name: ?[]const u8,
+    virtual_name: ?[]const u8 = null,
 };

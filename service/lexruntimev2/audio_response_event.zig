@@ -2,18 +2,18 @@
 /// to play to the user.
 pub const AudioResponseEvent = struct {
     /// A chunk of the audio to play.
-    audio_chunk: ?[]const u8,
+    audio_chunk: ?[]const u8 = null,
 
     /// The encoding of the audio chunk. This is the same as the encoding
     /// configure in the `contentType` field of the
     /// `ConfigurationEvent`.
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// A unique identifier of the event sent by Amazon Lex V2. The identifier is in
     /// the form `RESPONSE-N`, where N is a number starting with one
     /// and incremented for each event sent by Amazon Lex V2 in the current
     /// session.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .audio_chunk = "audioChunk",

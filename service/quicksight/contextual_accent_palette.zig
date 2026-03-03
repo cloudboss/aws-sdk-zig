@@ -2,13 +2,13 @@ const Palette = @import("palette.zig").Palette;
 
 /// The contextual accent palette.
 pub const ContextualAccentPalette = struct {
-    automation: ?Palette,
+    automation: ?Palette = null,
 
-    connection: ?Palette,
+    connection: ?Palette = null,
 
-    insight: ?Palette,
+    insight: ?Palette = null,
 
-    visualization: ?Palette,
+    visualization: ?Palette = null,
 
     pub const json_field_names = .{
         .automation = "Automation",

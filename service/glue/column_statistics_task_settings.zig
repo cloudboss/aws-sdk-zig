@@ -6,39 +6,39 @@ const SettingSource = @import("setting_source.zig").SettingSource;
 /// The settings for a column statistics task.
 pub const ColumnStatisticsTaskSettings = struct {
     /// The ID of the Data Catalog in which the database resides.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// A list of column names for which to run statistics.
-    column_name_list: ?[]const []const u8,
+    column_name_list: ?[]const []const u8 = null,
 
     /// The name of the database where the table resides.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The last `ExecutionAttempt` for the column statistics task run.
-    last_execution_attempt: ?ExecutionAttempt,
+    last_execution_attempt: ?ExecutionAttempt = null,
 
     /// The role used for running the column statistics.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     /// The percentage of data to sample.
     sample_size: f64 = 0,
 
     /// A schedule for running the column statistics, specified in CRON syntax.
-    schedule: ?Schedule,
+    schedule: ?Schedule = null,
 
     /// The type of schedule for a column statistics task. Possible values may be
     /// `CRON` or `AUTO`.
-    schedule_type: ?ScheduleType,
+    schedule_type: ?ScheduleType = null,
 
     /// Name of the security configuration that is used to encrypt CloudWatch logs.
-    security_configuration: ?[]const u8,
+    security_configuration: ?[]const u8 = null,
 
     /// The source of setting the column statistics task. Possible values may be
     /// `CATALOG` or `TABLE`.
-    setting_source: ?SettingSource,
+    setting_source: ?SettingSource = null,
 
     /// The name of the table for which to generate column statistics.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .catalog_id = "CatalogID",

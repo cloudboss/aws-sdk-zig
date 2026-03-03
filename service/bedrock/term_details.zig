@@ -14,7 +14,7 @@ pub const TermDetails = struct {
     usage_based_pricing_term: PricingTerm,
 
     /// Describes the validity terms.
-    validity_term: ?ValidityTerm,
+    validity_term: ?ValidityTerm = null,
 
     pub const json_field_names = .{
         .legal_term = "legalTerm",

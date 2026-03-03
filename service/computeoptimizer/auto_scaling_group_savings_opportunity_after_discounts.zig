@@ -11,7 +11,7 @@ pub const AutoScalingGroupSavingsOpportunityAfterDiscounts = struct {
     /// Compute Optimizer’s Amazon EC2 Auto Scaling group recommendations. This is
     /// based on the
     /// Savings Plans and Reserved Instances pricing discounts.
-    estimated_monthly_savings: ?AutoScalingGroupEstimatedMonthlySavings,
+    estimated_monthly_savings: ?AutoScalingGroupEstimatedMonthlySavings = null,
 
     /// The estimated monthly savings possible as a percentage of monthly cost after
     /// applying the Savings Plans and Reserved Instances discounts. This saving can

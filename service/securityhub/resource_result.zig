@@ -9,37 +9,37 @@ pub const ResourceResult = struct {
     account_id: []const u8,
 
     /// An aggregated view of security findings associated with a resource.
-    findings_summary: ?[]const ResourceFindingsSummary,
+    findings_summary: ?[]const ResourceFindingsSummary = null,
 
     /// The Amazon Web Services Region where the resource is located.
     region: []const u8,
 
     /// The grouping where the resource belongs.
-    resource_category: ?ResourceCategory,
+    resource_category: ?ResourceCategory = null,
 
     /// The configuration details of a resource.
     resource_config: []const u8,
 
     /// The time when the resource was created.
-    resource_creation_time_dt: ?[]const u8,
+    resource_creation_time_dt: ?[]const u8 = null,
 
     /// The timestamp when information about the resource was captured.
     resource_detail_capture_time_dt: []const u8,
 
     /// The global identifier used to identify a resource.
-    resource_guid: ?[]const u8,
+    resource_guid: ?[]const u8 = null,
 
     /// The unique identifier for a resource.
     resource_id: []const u8,
 
     /// The name of the resource.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// The key-value pairs associated with a resource.
-    resource_tags: ?[]const ResourceTag,
+    resource_tags: ?[]const ResourceTag = null,
 
     /// The type of resource.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

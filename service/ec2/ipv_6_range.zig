@@ -15,7 +15,7 @@ pub const Ipv6Range = struct {
     /// a rule for the canonicalized
     /// form of the CIDR block (such as 100.68.0.0/18), the API throws an duplicate
     /// rule error.
-    cidr_ipv_6: ?[]const u8,
+    cidr_ipv_6: ?[]const u8 = null,
 
     /// A description for the security group rule that references this IPv6 address
     /// range.
@@ -23,5 +23,5 @@ pub const Ipv6Range = struct {
     /// Constraints: Up to 255 characters in length. Allowed characters are a-z,
     /// A-Z, 0-9,
     /// spaces, and ._-:/()#,@[]+=&;{}!$*
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 };

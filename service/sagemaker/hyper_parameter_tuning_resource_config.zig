@@ -16,7 +16,7 @@ const TrainingInstanceType = @import("training_instance_type.zig").TrainingInsta
 pub const HyperParameterTuningResourceConfig = struct {
     /// The strategy that determines the order of preference for resources specified
     /// in `InstanceConfigs` used in hyperparameter optimization.
-    allocation_strategy: ?HyperParameterTuningAllocationStrategy,
+    allocation_strategy: ?HyperParameterTuningAllocationStrategy = null,
 
     /// A list containing the configuration(s) for one or more resources for
     /// processing hyperparameter jobs. These resources include compute instances
@@ -29,17 +29,17 @@ pub const HyperParameterTuningResourceConfig = struct {
     /// `InstanceConfigs`. Instead, use `InstanceType`, `VolumeSizeInGB` and
     /// `InstanceCount`. If you use `InstanceConfigs`, do not provide values for
     /// `InstanceType`, `VolumeSizeInGB` or `InstanceCount`.
-    instance_configs: ?[]const HyperParameterTuningInstanceConfig,
+    instance_configs: ?[]const HyperParameterTuningInstanceConfig = null,
 
     /// The number of compute instances of type `InstanceType` to use. For
     /// [distributed
     /// training](https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html), select a value greater than 1.
-    instance_count: ?i32,
+    instance_count: ?i32 = null,
 
     /// The instance type used to run hyperparameter optimization tuning jobs. See [
     /// descriptions of instance
     /// types](https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html) for more information.
-    instance_type: ?TrainingInstanceType,
+    instance_type: ?TrainingInstanceType = null,
 
     /// A key used by Amazon Web Services Key Management Service to encrypt data on
     /// the storage volume attached to the compute instances used to run the
@@ -55,7 +55,7 @@ pub const HyperParameterTuningResourceConfig = struct {
     ///
     /// Some instances use local storage, which use a [hardware module to
     /// encrypt](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html) storage volumes. If you choose one of these instance types, you cannot request a `VolumeKmsKeyId`. For a list of instance types that use local storage, see [instance store volumes](http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/). For more information about Amazon Web Services Key Management Service, see [KMS encryption](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-kms-permissions.html) for more information.
-    volume_kms_key_id: ?[]const u8,
+    volume_kms_key_id: ?[]const u8 = null,
 
     /// The volume size in GB for the storage volume to be used in processing
     /// hyperparameter optimization jobs (optional). These volumes store model
@@ -71,7 +71,7 @@ pub const HyperParameterTuningResourceConfig = struct {
     ///
     /// SageMaker supports only the [General Purpose SSD
     /// (gp2)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html) storage volume type.
-    volume_size_in_gb: ?i32,
+    volume_size_in_gb: ?i32 = null,
 
     pub const json_field_names = .{
         .allocation_strategy = "AllocationStrategy",

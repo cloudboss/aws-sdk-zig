@@ -6,7 +6,7 @@ const ActionTypeSettings = @import("action_type_settings.zig").ActionTypeSetting
 /// Returns information about the details of an action type.
 pub const ActionType = struct {
     /// The configuration properties for the action type.
-    action_configuration_properties: ?[]const ActionConfigurationProperty,
+    action_configuration_properties: ?[]const ActionConfigurationProperty = null,
 
     /// Represents information about an action type.
     id: ActionTypeId,
@@ -18,7 +18,7 @@ pub const ActionType = struct {
     output_artifact_details: ArtifactDetails,
 
     /// The settings for the action type.
-    settings: ?ActionTypeSettings,
+    settings: ?ActionTypeSettings = null,
 
     pub const json_field_names = .{
         .action_configuration_properties = "actionConfigurationProperties",

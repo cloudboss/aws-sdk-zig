@@ -6,7 +6,7 @@ pub const ParticipantRecordingHlsConfiguration = struct {
     /// Segments may have durations longer than the specified value when needed to
     /// ensure each segment begins with a keyframe.
     /// Default: 6.
-    target_segment_duration_seconds: ?i32,
+    target_segment_duration_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .target_segment_duration_seconds = "targetSegmentDurationSeconds",

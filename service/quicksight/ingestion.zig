@@ -14,29 +14,29 @@ pub const Ingestion = struct {
     created_time: i64,
 
     /// Error information for this ingestion.
-    error_info: ?ErrorInfo,
+    error_info: ?ErrorInfo = null,
 
     /// Ingestion ID.
-    ingestion_id: ?[]const u8,
+    ingestion_id: ?[]const u8 = null,
 
     /// The size of the data ingested, in bytes.
-    ingestion_size_in_bytes: ?i64,
+    ingestion_size_in_bytes: ?i64 = null,
 
     /// Ingestion status.
     ingestion_status: IngestionStatus,
 
     /// The time that this ingestion took, measured in seconds.
-    ingestion_time_in_seconds: ?i64,
+    ingestion_time_in_seconds: ?i64 = null,
 
-    queue_info: ?QueueInfo,
+    queue_info: ?QueueInfo = null,
 
     /// Event source for this ingestion.
-    request_source: ?IngestionRequestSource,
+    request_source: ?IngestionRequestSource = null,
 
     /// Type of this ingestion.
-    request_type: ?IngestionRequestType,
+    request_type: ?IngestionRequestType = null,
 
-    row_info: ?RowInfo,
+    row_info: ?RowInfo = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

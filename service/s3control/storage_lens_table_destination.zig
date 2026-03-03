@@ -10,7 +10,7 @@ const StorageLensDataExportEncryption = @import("storage_lens_data_export_encryp
 /// activity and usage with S3 Storage
 /// Lens](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html) in the *Amazon S3 User Guide*.
 pub const StorageLensTableDestination = struct {
-    encryption: ?StorageLensDataExportEncryption,
+    encryption: ?StorageLensDataExportEncryption = null,
 
     /// A container that indicates whether the export to read-only S3 table buckets
     /// is enabled

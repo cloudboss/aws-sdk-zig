@@ -17,7 +17,7 @@ pub const NamespaceFilter = struct {
     /// * `BEGINS_WITH`: When you specify `BEGINS_WITH` for
     /// `Condition`, you can specify only one value. `BEGINS_WITH` is supported
     /// for `TYPE`, `NAME`, and `HTTP_NAME`.
-    condition: ?FilterCondition,
+    condition: ?FilterCondition = null,
 
     /// Specify the namespaces that you want to get using one of the following.
     ///

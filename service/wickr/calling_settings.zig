@@ -3,15 +3,15 @@
 /// in.
 pub const CallingSettings = struct {
     /// Specifies whether users can start one-to-one calls.
-    can_start_11_call: ?bool,
+    can_start_11_call: ?bool = null,
 
     /// Specifies whether users can make video calls (as opposed to audio-only
     /// calls). Valid only when audio call(canStart11Call) is enabled.
-    can_video_call: ?bool,
+    can_video_call: ?bool = null,
 
     /// When enabled, forces all calls to use TCP protocol instead of UDP for
     /// network traversal.
-    force_tcp_call: ?bool,
+    force_tcp_call: ?bool = null,
 
     pub const json_field_names = .{
         .can_start_11_call = "canStart11Call",

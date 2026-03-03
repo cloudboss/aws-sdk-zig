@@ -12,7 +12,7 @@ pub const SalesforceStandardObjectConfiguration = struct {
     /// The name of the field in the standard object table that contains the
     /// document
     /// title.
-    document_title_field_name: ?[]const u8,
+    document_title_field_name: ?[]const u8 = null,
 
     /// Maps attributes or field names of the standard object to Amazon Kendra index
     /// field names. To create custom fields, use the `UpdateIndex` API before you
@@ -21,7 +21,7 @@ pub const SalesforceStandardObjectConfiguration = struct {
     /// The
     /// Salesforce data source field names must exist in your Salesforce custom
     /// metadata.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// The name of the standard object.
     name: SalesforceStandardObjectName,

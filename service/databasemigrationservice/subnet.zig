@@ -6,13 +6,13 @@ const AvailabilityZone = @import("availability_zone.zig").AvailabilityZone;
 /// status.
 pub const Subnet = struct {
     /// The Availability Zone of the subnet.
-    subnet_availability_zone: ?AvailabilityZone,
+    subnet_availability_zone: ?AvailabilityZone = null,
 
     /// The subnet identifier.
-    subnet_identifier: ?[]const u8,
+    subnet_identifier: ?[]const u8 = null,
 
     /// The status of the subnet.
-    subnet_status: ?[]const u8,
+    subnet_status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .subnet_availability_zone = "SubnetAvailabilityZone",

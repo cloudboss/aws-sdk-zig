@@ -2,7 +2,7 @@
 pub const ComputeCapacityStatus = struct {
     /// The number of user sessions currently being used for streaming sessions.
     /// This only applies to multi-session fleets.
-    active_user_sessions: ?i32,
+    active_user_sessions: ?i32 = null,
 
     /// The total number of session slots that are available for streaming or are
     /// currently streaming.
@@ -11,11 +11,11 @@ pub const ComputeCapacityStatus = struct {
     /// ActiveUserSessions
     ///
     /// This only applies to multi-session fleets.
-    actual_user_sessions: ?i32,
+    actual_user_sessions: ?i32 = null,
 
     /// The number of currently available instances that can be used to stream
     /// sessions.
-    available: ?i32,
+    available: ?i32 = null,
 
     /// The number of idle session slots currently available for user sessions.
     ///
@@ -23,7 +23,7 @@ pub const ComputeCapacityStatus = struct {
     /// ActiveUserSessions
     ///
     /// This only applies to multi-session fleets.
-    available_user_sessions: ?i32,
+    available_user_sessions: ?i32 = null,
 
     /// The desired number of streaming instances.
     desired: i32,
@@ -36,13 +36,13 @@ pub const ComputeCapacityStatus = struct {
     /// PendingUserSessionCapacity
     ///
     /// This only applies to multi-session fleets.
-    desired_user_sessions: ?i32,
+    desired_user_sessions: ?i32 = null,
 
     /// The number of instances in use for streaming.
-    in_use: ?i32,
+    in_use: ?i32 = null,
 
     /// The total number of simultaneous streaming instances that are running.
-    running: ?i32,
+    running: ?i32 = null,
 
     pub const json_field_names = .{
         .active_user_sessions = "ActiveUserSessions",

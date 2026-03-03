@@ -5,7 +5,7 @@ pub const Endpoint = struct {
     /// The endpoint's IPv6 address.
     ///
     /// Example: `2001:db8::1`
-    ipv_6_address: ?[]const u8,
+    ipv_6_address: ?[]const u8 = null,
 
     /// The endpoint's connection port number.
     ///
@@ -22,7 +22,7 @@ pub const Endpoint = struct {
     /// The endpoint's public IP address.
     ///
     /// Example: `192.0.2.1`
-    public_ip_address: ?[]const u8,
+    public_ip_address: ?[]const u8 = null,
 
     /// Indicates the type of endpoint running at the specific IP address.
     @"type": EndpointType,

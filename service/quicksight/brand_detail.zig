@@ -5,31 +5,31 @@ const BrandVersionStatus = @import("brand_version_status.zig").BrandVersionStatu
 /// The details of the brand.
 pub const BrandDetail = struct {
     /// The Amazon Resource Name (ARN) of the brand.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The ID of the Quick Suite brand.
     brand_id: []const u8,
 
     /// The status of the brand.
-    brand_status: ?BrandStatus,
+    brand_status: ?BrandStatus = null,
 
     /// The time that the brand was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// A list of errors that occurred during the most recent brand operation.
-    errors: ?[]const []const u8,
+    errors: ?[]const []const u8 = null,
 
     /// The last time the brand was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The logo details.
-    logo: ?Logo,
+    logo: ?Logo = null,
 
     /// The ID of the version.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     /// The status of the version.
-    version_status: ?BrandVersionStatus,
+    version_status: ?BrandVersionStatus = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -7,13 +7,13 @@ pub const FieldTooltipItem = struct {
     field_id: []const u8,
 
     /// The label of the tooltip item.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// Determines the target of the field tooltip item in a combo chart visual.
-    tooltip_target: ?TooltipTarget,
+    tooltip_target: ?TooltipTarget = null,
 
     /// The visibility of the tooltip item.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .field_id = "FieldId",

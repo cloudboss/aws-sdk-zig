@@ -5,7 +5,7 @@ const UniqueKey = @import("unique_key.zig").UniqueKey;
 /// `UniqueKey` configuration.
 pub const PerformanceConfiguration = struct {
     /// A `UniqueKey` configuration.
-    unique_keys: ?[]const UniqueKey,
+    unique_keys: ?[]const UniqueKey = null,
 
     pub const json_field_names = .{
         .unique_keys = "UniqueKeys",

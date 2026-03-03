@@ -12,7 +12,7 @@ pub const ModelPackageModelCard = struct {
     /// The content of the model card. The content must follow the schema described
     /// in [Model Package Model Card
     /// Schema](https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema).
-    model_card_content: ?[]const u8,
+    model_card_content: ?[]const u8 = null,
 
     /// The approval status of the model card within your organization. Different
     /// organizations might have different criteria for model card review and
@@ -24,7 +24,7 @@ pub const ModelPackageModelCard = struct {
     /// * `Archived`: The model card is archived. No more updates can be made to the
     ///   model card content. If you try to update the model card content, you will
     ///   receive the message `Model Card is in Archived state`.
-    model_card_status: ?ModelCardStatus,
+    model_card_status: ?ModelCardStatus = null,
 
     pub const json_field_names = .{
         .model_card_content = "ModelCardContent",

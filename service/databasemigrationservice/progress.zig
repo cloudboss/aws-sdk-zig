@@ -4,11 +4,11 @@ const ProcessedObject = @import("processed_object.zig").ProcessedObject;
 pub const Progress = struct {
     /// The name of the database object that the schema conversion operation
     /// currently uses.
-    processed_object: ?ProcessedObject,
+    processed_object: ?ProcessedObject = null,
 
     /// The percent complete for the current step of the schema conversion
     /// operation.
-    progress_percent: ?f64,
+    progress_percent: ?f64 = null,
 
     /// The step of the schema conversion operation. This parameter can store one of
     /// the following values:
@@ -28,7 +28,7 @@ pub const Progress = struct {
     /// * `APPLYING` – Applies the converted code to the target database.
     ///
     /// * `FINISHED` – The operation completed successfully.
-    progress_step: ?[]const u8,
+    progress_step: ?[]const u8 = null,
 
     /// The number of objects in this schema conversion operation.
     total_objects: i64 = 0,

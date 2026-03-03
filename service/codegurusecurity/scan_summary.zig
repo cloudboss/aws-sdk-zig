@@ -12,13 +12,13 @@ pub const ScanSummary = struct {
     scan_name: []const u8,
 
     /// The ARN for the scan name.
-    scan_name_arn: ?[]const u8,
+    scan_name_arn: ?[]const u8 = null,
 
     /// The state of the scan. A scan can be `In Progress`, `Complete`, or `Failed`.
     scan_state: ScanState,
 
     /// The time the scan was last updated. A scan is updated when it is re-run.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

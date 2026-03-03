@@ -19,57 +19,57 @@ const ZendeskConnectorOperator = @import("zendesk_connector_operator.zig").Zende
 /// The operation to be performed on the provided source fields.
 pub const ConnectorOperator = struct {
     /// The operation to be performed on the provided Amplitude source fields.
-    amplitude: ?AmplitudeConnectorOperator,
+    amplitude: ?AmplitudeConnectorOperator = null,
 
     /// Operators supported by the custom connector.
-    custom_connector: ?Operator,
+    custom_connector: ?Operator = null,
 
     /// The operation to be performed on the provided Datadog source fields.
-    datadog: ?DatadogConnectorOperator,
+    datadog: ?DatadogConnectorOperator = null,
 
     /// The operation to be performed on the provided Dynatrace source fields.
-    dynatrace: ?DynatraceConnectorOperator,
+    dynatrace: ?DynatraceConnectorOperator = null,
 
     /// The operation to be performed on the provided Google Analytics source
     /// fields.
-    google_analytics: ?GoogleAnalyticsConnectorOperator,
+    google_analytics: ?GoogleAnalyticsConnectorOperator = null,
 
     /// The operation to be performed on the provided Infor Nexus source fields.
-    infor_nexus: ?InforNexusConnectorOperator,
+    infor_nexus: ?InforNexusConnectorOperator = null,
 
     /// The operation to be performed on the provided Marketo source fields.
-    marketo: ?MarketoConnectorOperator,
+    marketo: ?MarketoConnectorOperator = null,
 
     /// The operation to be performed on the provided Salesforce Pardot source
     /// fields.
-    pardot: ?PardotConnectorOperator,
+    pardot: ?PardotConnectorOperator = null,
 
     /// The operation to be performed on the provided Amazon S3 source fields.
-    s3: ?S3ConnectorOperator,
+    s3: ?S3ConnectorOperator = null,
 
     /// The operation to be performed on the provided Salesforce source fields.
-    salesforce: ?SalesforceConnectorOperator,
+    salesforce: ?SalesforceConnectorOperator = null,
 
     /// The operation to be performed on the provided SAPOData source fields.
-    sapo_data: ?SAPODataConnectorOperator,
+    sapo_data: ?SAPODataConnectorOperator = null,
 
     /// The operation to be performed on the provided ServiceNow source fields.
-    service_now: ?ServiceNowConnectorOperator,
+    service_now: ?ServiceNowConnectorOperator = null,
 
     /// The operation to be performed on the provided Singular source fields.
-    singular: ?SingularConnectorOperator,
+    singular: ?SingularConnectorOperator = null,
 
     /// The operation to be performed on the provided Slack source fields.
-    slack: ?SlackConnectorOperator,
+    slack: ?SlackConnectorOperator = null,
 
     /// The operation to be performed on the provided Trend Micro source fields.
-    trendmicro: ?TrendmicroConnectorOperator,
+    trendmicro: ?TrendmicroConnectorOperator = null,
 
     /// The operation to be performed on the provided Veeva source fields.
-    veeva: ?VeevaConnectorOperator,
+    veeva: ?VeevaConnectorOperator = null,
 
     /// The operation to be performed on the provided Zendesk source fields.
-    zendesk: ?ZendeskConnectorOperator,
+    zendesk: ?ZendeskConnectorOperator = null,
 
     pub const json_field_names = .{
         .amplitude = "Amplitude",

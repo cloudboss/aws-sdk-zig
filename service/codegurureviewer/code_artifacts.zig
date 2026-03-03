@@ -15,7 +15,7 @@ pub const CodeArtifacts = struct {
     /// code reviews with GitHub
     /// Actions](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/working-with-cicd.html) in the *Amazon CodeGuru Reviewer User
     /// Guide*.
-    build_artifacts_object_key: ?[]const u8,
+    build_artifacts_object_key: ?[]const u8 = null,
 
     /// The S3 object key for a source code .zip file. This is required for all code
     /// reviews.

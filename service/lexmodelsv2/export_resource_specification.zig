@@ -8,16 +8,16 @@ const TestSetExportSpecification = @import("test_set_export_specification.zig").
 /// `botLocaleExportSpecification`, but not both.
 pub const ExportResourceSpecification = struct {
     /// Parameters for exporting a bot.
-    bot_export_specification: ?BotExportSpecification,
+    bot_export_specification: ?BotExportSpecification = null,
 
     /// Parameters for exporting a bot locale.
-    bot_locale_export_specification: ?BotLocaleExportSpecification,
+    bot_locale_export_specification: ?BotLocaleExportSpecification = null,
 
     /// The parameters required to export a custom vocabulary.
-    custom_vocabulary_export_specification: ?CustomVocabularyExportSpecification,
+    custom_vocabulary_export_specification: ?CustomVocabularyExportSpecification = null,
 
     /// Specifications for the test set that is exported as a resource.
-    test_set_export_specification: ?TestSetExportSpecification,
+    test_set_export_specification: ?TestSetExportSpecification = null,
 
     pub const json_field_names = .{
         .bot_export_specification = "botExportSpecification",

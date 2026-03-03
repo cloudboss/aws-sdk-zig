@@ -5,10 +5,10 @@ const SpekeKeyProvider = @import("speke_key_provider.zig").SpekeKeyProvider;
 pub const HlsEncryption = struct {
     /// A constant initialization vector for encryption (optional).
     /// When not specified the initialization vector will be periodically rotated.
-    constant_initialization_vector: ?[]const u8,
+    constant_initialization_vector: ?[]const u8 = null,
 
     /// The encryption method to use.
-    encryption_method: ?EncryptionMethod,
+    encryption_method: ?EncryptionMethod = null,
 
     speke_key_provider: SpekeKeyProvider,
 

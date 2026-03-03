@@ -15,7 +15,7 @@ pub const IpRange = struct {
     /// a rule for the canonicalized
     /// form of the CIDR block (such as 100.68.0.0/18), the API throws an duplicate
     /// rule error.
-    cidr_ip: ?[]const u8,
+    cidr_ip: ?[]const u8 = null,
 
     /// A description for the security group rule that references this IPv4 address
     /// range.
@@ -23,5 +23,5 @@ pub const IpRange = struct {
     /// Constraints: Up to 255 characters in length. Allowed characters are a-z,
     /// A-Z, 0-9,
     /// spaces, and ._-:/()#,@[]+=&;{}!$*
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 };

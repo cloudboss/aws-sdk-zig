@@ -5,29 +5,29 @@ const PricingRuleType = @import("pricing_rule_type.zig").PricingRuleType;
 /// A representation of a pricing rule.
 pub const PricingRuleListElement = struct {
     /// The Amazon Resource Name (ARN) used to uniquely identify a pricing rule.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The pricing plans count that this pricing rule is associated with.
     associated_pricing_plan_count: i64 = 0,
 
     /// The seller of services provided by Amazon Web Services, their affiliates, or
     /// third-party providers selling services via Amazon Web Services Marketplace.
-    billing_entity: ?[]const u8,
+    billing_entity: ?[]const u8 = null,
 
     /// The time when the pricing rule was created.
     creation_time: i64 = 0,
 
     /// The pricing rule description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The most recent time when the pricing rule was modified.
     last_modified_time: i64 = 0,
 
     /// A percentage modifier applied on the public pricing rates.
-    modifier_percentage: ?f64,
+    modifier_percentage: ?f64 = null,
 
     /// The name of a pricing rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Operation is the specific Amazon Web Services action covered by this line
     /// item. This describes the specific usage of the line item.
@@ -36,21 +36,21 @@ pub const PricingRuleListElement = struct {
     /// operation the `PricingRule` is modifying. For example, a value of
     /// `RunInstances:0202` indicates the operation of running an Amazon EC2
     /// instance.
-    operation: ?[]const u8,
+    operation: ?[]const u8 = null,
 
     /// The scope of pricing rule that indicates if it is globally applicable, or if
     /// it is service-specific.
-    scope: ?PricingRuleScope,
+    scope: ?PricingRuleScope = null,
 
     /// If the `Scope` attribute is `SERVICE`, this attribute indicates which
     /// service the `PricingRule` is applicable for.
-    service: ?[]const u8,
+    service: ?[]const u8 = null,
 
     /// The set of tiering configurations for the pricing rule.
-    tiering: ?Tiering,
+    tiering: ?Tiering = null,
 
     /// The type of pricing rule.
-    @"type": ?PricingRuleType,
+    @"type": ?PricingRuleType = null,
 
     /// Usage type is the unit that each service uses to measure the usage of a
     /// specific type of resource.
@@ -59,7 +59,7 @@ pub const PricingRuleListElement = struct {
     /// usage type the `PricingRule` is modifying. For example,
     /// `USW2-BoxUsage:m2.2xlarge` describes an` M2 High Memory Double Extra Large`
     /// instance in the US West (Oregon) Region.
-    usage_type: ?[]const u8,
+    usage_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -3,34 +3,34 @@ const Language = @import("language.zig").Language;
 /// The details of the rule.
 pub const RuleDetail = struct {
     /// The rule ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The timestamp of when the rule was created.
-    created_time: ?[]const u8,
+    created_time: ?[]const u8 = null,
 
     /// The rule description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The detector for which the rule is associated.
-    detector_id: ?[]const u8,
+    detector_id: ?[]const u8 = null,
 
     /// The rule expression.
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     /// The rule language.
-    language: ?Language,
+    language: ?Language = null,
 
     /// Timestamp of the last time the rule was updated.
-    last_updated_time: ?[]const u8,
+    last_updated_time: ?[]const u8 = null,
 
     /// The rule outcomes.
-    outcomes: ?[]const []const u8,
+    outcomes: ?[]const []const u8 = null,
 
     /// The rule ID.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     /// The rule version.
-    rule_version: ?[]const u8,
+    rule_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

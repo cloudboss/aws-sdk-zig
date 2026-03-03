@@ -1,7 +1,7 @@
 /// A snapshot of a Source Server used during recovery.
 pub const RecoverySnapshot = struct {
     /// A list of EBS snapshots.
-    ebs_snapshots: ?[]const []const u8,
+    ebs_snapshots: ?[]const []const u8 = null,
 
     /// The timestamp of when we expect the snapshot to be taken.
     expected_timestamp: []const u8,
@@ -13,7 +13,7 @@ pub const RecoverySnapshot = struct {
     source_server_id: []const u8,
 
     /// The actual timestamp that the snapshot was taken.
-    timestamp: ?[]const u8,
+    timestamp: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ebs_snapshots = "ebsSnapshots",

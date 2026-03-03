@@ -10,7 +10,7 @@ pub const AgentVersion = struct {
     agent_arn: []const u8,
 
     /// The agent's collaboration settings.
-    agent_collaboration: ?AgentCollaboration,
+    agent_collaboration: ?AgentCollaboration = null,
 
     /// The unique identifier of the agent that the version belongs to.
     agent_id: []const u8,
@@ -29,19 +29,19 @@ pub const AgentVersion = struct {
     created_at: i64,
 
     /// The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
-    customer_encryption_key_arn: ?[]const u8,
+    customer_encryption_key_arn: ?[]const u8 = null,
 
     /// The description of the version.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A list of reasons that the API operation on the version failed.
-    failure_reasons: ?[]const []const u8,
+    failure_reasons: ?[]const []const u8 = null,
 
     /// The foundation model that the version invokes.
-    foundation_model: ?[]const u8,
+    foundation_model: ?[]const u8 = null,
 
     /// Details about the guardrail associated with the agent.
-    guardrail_configuration: ?GuardrailConfiguration,
+    guardrail_configuration: ?GuardrailConfiguration = null,
 
     /// The number of seconds for which Amazon Bedrock keeps information about a
     /// user's conversation with the agent.
@@ -52,19 +52,19 @@ pub const AgentVersion = struct {
     idle_session_ttl_in_seconds: i32,
 
     /// The instructions provided to the agent.
-    instruction: ?[]const u8,
+    instruction: ?[]const u8 = null,
 
     /// Contains details of the memory configuration on the version of the agent.
-    memory_configuration: ?MemoryConfiguration,
+    memory_configuration: ?MemoryConfiguration = null,
 
     /// Contains configurations to override prompt templates in different parts of
     /// an agent sequence. For more information, see [Advanced
     /// prompts](https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html).
-    prompt_override_configuration: ?PromptOverrideConfiguration,
+    prompt_override_configuration: ?PromptOverrideConfiguration = null,
 
     /// A list of recommended actions to take for the failed API operation on the
     /// version to succeed.
-    recommended_actions: ?[]const []const u8,
+    recommended_actions: ?[]const []const u8 = null,
 
     /// The time at which the version was last updated.
     updated_at: i64,

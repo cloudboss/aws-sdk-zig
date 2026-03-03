@@ -15,36 +15,36 @@ pub const Workforce = struct {
     /// The configuration of an Amazon Cognito workforce. A single Cognito workforce
     /// is created using and corresponds to a single [ Amazon Cognito user
     /// pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
-    cognito_config: ?CognitoConfig,
+    cognito_config: ?CognitoConfig = null,
 
     /// The date that the workforce is created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The reason your workforce failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The IP address type you specify - either `IPv4` only or `dualstack` (`IPv4`
     /// and `IPv6`) - to support your labeling workforce.
-    ip_address_type: ?WorkforceIpAddressType,
+    ip_address_type: ?WorkforceIpAddressType = null,
 
     /// The most recent date that
     /// [UpdateWorkforce](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateWorkforce.html) was used to successfully add one or more IP address ranges ([CIDRs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)) to a private workforce's allow list.
-    last_updated_date: ?i64,
+    last_updated_date: ?i64 = null,
 
     /// The configuration of an OIDC Identity Provider (IdP) private workforce.
-    oidc_config: ?OidcConfigForResponse,
+    oidc_config: ?OidcConfigForResponse = null,
 
     /// A list of one to ten IP address ranges
     /// ([CIDRs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html))
     /// to be added to the workforce allow list. By default, a workforce isn't
     /// restricted to specific IP addresses.
-    source_ip_config: ?SourceIpConfig,
+    source_ip_config: ?SourceIpConfig = null,
 
     /// The status of your workforce.
-    status: ?WorkforceStatus,
+    status: ?WorkforceStatus = null,
 
     /// The subdomain for your OIDC Identity Provider.
-    sub_domain: ?[]const u8,
+    sub_domain: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the private workforce.
     workforce_arn: []const u8,
@@ -53,7 +53,7 @@ pub const Workforce = struct {
     workforce_name: []const u8,
 
     /// The configuration of a VPC workforce.
-    workforce_vpc_config: ?WorkforceVpcConfigResponse,
+    workforce_vpc_config: ?WorkforceVpcConfigResponse = null,
 
     pub const json_field_names = .{
         .cognito_config = "CognitoConfig",

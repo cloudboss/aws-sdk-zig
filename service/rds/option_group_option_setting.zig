@@ -5,29 +5,29 @@ const MinimumEngineVersionPerAllowedValue = @import("minimum_engine_version_per_
 /// used with the DescribeOptionGroupOptions action.
 pub const OptionGroupOptionSetting = struct {
     /// Indicates the acceptable values for the option group option.
-    allowed_values: ?[]const u8,
+    allowed_values: ?[]const u8 = null,
 
     /// The DB engine specific parameter type for the option group option.
-    apply_type: ?[]const u8,
+    apply_type: ?[]const u8 = null,
 
     /// The default value for the option group option.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// Indicates whether this option group option can be changed from the default
     /// value.
-    is_modifiable: ?bool,
+    is_modifiable: ?bool = null,
 
     /// Indicates whether a value must be specified for this option setting of the
     /// option group option.
-    is_required: ?bool,
+    is_required: ?bool = null,
 
     /// The minimum DB engine version required for the corresponding allowed value
     /// for this option setting.
-    minimum_engine_version_per_allowed_value: ?[]const MinimumEngineVersionPerAllowedValue,
+    minimum_engine_version_per_allowed_value: ?[]const MinimumEngineVersionPerAllowedValue = null,
 
     /// The description of the option group option.
-    setting_description: ?[]const u8,
+    setting_description: ?[]const u8 = null,
 
     /// The name of the option group option.
-    setting_name: ?[]const u8,
+    setting_name: ?[]const u8 = null,
 };

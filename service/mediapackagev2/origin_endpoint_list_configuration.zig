@@ -26,31 +26,31 @@ pub const OriginEndpointListConfiguration = struct {
     container_type: ContainerType,
 
     /// The date and time the origin endpoint was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// A DASH manifest configuration.
-    dash_manifests: ?[]const ListDashManifestConfiguration,
+    dash_manifests: ?[]const ListDashManifestConfiguration = null,
 
     /// Any descriptive information that you want to add to the origin endpoint for
     /// future identification purposes.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The failover settings for the endpoint.
-    force_endpoint_error_configuration: ?ForceEndpointErrorConfiguration,
+    force_endpoint_error_configuration: ?ForceEndpointErrorConfiguration = null,
 
     /// An HTTP live streaming (HLS) manifest configuration.
-    hls_manifests: ?[]const ListHlsManifestConfiguration,
+    hls_manifests: ?[]const ListHlsManifestConfiguration = null,
 
     /// A low-latency HLS manifest configuration.
-    low_latency_hls_manifests: ?[]const ListLowLatencyHlsManifestConfiguration,
+    low_latency_hls_manifests: ?[]const ListLowLatencyHlsManifestConfiguration = null,
 
     /// The date and time the origin endpoint was modified.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// A list of Microsoft Smooth Streaming (MSS) manifest configurations
     /// associated with the origin endpoint. Each configuration represents a
     /// different MSS streaming option available from this endpoint.
-    mss_manifests: ?[]const ListMssManifestConfiguration,
+    mss_manifests: ?[]const ListMssManifestConfiguration = null,
 
     /// The name that describes the origin endpoint. The name is the primary
     /// identifier for the origin endpoint, and and must be unique for your account

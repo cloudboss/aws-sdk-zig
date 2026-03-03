@@ -15,33 +15,33 @@ pub const Bridge = struct {
     bridge_arn: []const u8,
 
     /// Messages with details about the bridge.
-    bridge_messages: ?[]const MessageDetail,
+    bridge_messages: ?[]const MessageDetail = null,
 
     /// The state of the bridge.
     bridge_state: BridgeState,
 
     /// An egress bridge is a cloud-to-ground bridge. The content comes from an
     /// existing MediaConnect flow and is delivered to your premises.
-    egress_gateway_bridge: ?EgressGatewayBridge,
+    egress_gateway_bridge: ?EgressGatewayBridge = null,
 
     /// An ingress bridge is a ground-to-cloud bridge. The content originates at
     /// your premises and is delivered to the cloud.
-    ingress_gateway_bridge: ?IngressGatewayBridge,
+    ingress_gateway_bridge: ?IngressGatewayBridge = null,
 
     /// The name of the bridge.
     name: []const u8,
 
     /// The outputs on this bridge.
-    outputs: ?[]const BridgeOutput,
+    outputs: ?[]const BridgeOutput = null,
 
     /// The placement Amazon Resource Number (ARN) of the bridge.
     placement_arn: []const u8,
 
     /// The settings for source failover.
-    source_failover_config: ?FailoverConfig,
+    source_failover_config: ?FailoverConfig = null,
 
     /// The sources on this bridge.
-    sources: ?[]const BridgeSource,
+    sources: ?[]const BridgeSource = null,
 
     pub const json_field_names = .{
         .bridge_arn = "BridgeArn",

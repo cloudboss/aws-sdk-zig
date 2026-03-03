@@ -5,10 +5,10 @@ const StartTechnicalCueDetectionFilter = @import("start_technical_cue_detection_
 /// For more information, see StartSegmentDetection.
 pub const StartSegmentDetectionFilters = struct {
     /// Filters that are specific to shot detections.
-    shot_filter: ?StartShotDetectionFilter,
+    shot_filter: ?StartShotDetectionFilter = null,
 
     /// Filters that are specific to technical cues.
-    technical_cue_filter: ?StartTechnicalCueDetectionFilter,
+    technical_cue_filter: ?StartTechnicalCueDetectionFilter = null,
 
     pub const json_field_names = .{
         .shot_filter = "ShotFilter",

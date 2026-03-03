@@ -8,7 +8,7 @@ const EvaluationMode = @import("evaluation_mode.zig").EvaluationMode;
 /// ](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html) in the *Config Developer Guide*.
 pub const DescribeConfigRulesFilters = struct {
     /// The mode of an evaluation. The valid values are Detective or Proactive.
-    evaluation_mode: ?EvaluationMode,
+    evaluation_mode: ?EvaluationMode = null,
 
     pub const json_field_names = .{
         .evaluation_mode = "EvaluationMode",

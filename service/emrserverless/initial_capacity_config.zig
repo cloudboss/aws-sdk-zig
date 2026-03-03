@@ -3,7 +3,7 @@ const WorkerResourceConfig = @import("worker_resource_config.zig").WorkerResourc
 /// The initial capacity configuration per worker.
 pub const InitialCapacityConfig = struct {
     /// The resource configuration of the initial capacity configuration.
-    worker_configuration: ?WorkerResourceConfig,
+    worker_configuration: ?WorkerResourceConfig = null,
 
     /// The number of workers in the initial capacity configuration.
     worker_count: i64 = 0,

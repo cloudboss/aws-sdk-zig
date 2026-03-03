@@ -4,50 +4,50 @@ const AwsRdsDbProcessorFeature = @import("aws_rds_db_processor_feature.zig").Aws
 /// Changes to a DB instance that are currently pending.
 pub const AwsRdsDbPendingModifiedValues = struct {
     /// The new value of the allocated storage for the DB instance.
-    allocated_storage: ?i32,
+    allocated_storage: ?i32 = null,
 
     /// The new backup retention period for the DB instance.
-    backup_retention_period: ?i32,
+    backup_retention_period: ?i32 = null,
 
     /// The new CA certificate identifier for the DB instance.
-    ca_certificate_identifier: ?[]const u8,
+    ca_certificate_identifier: ?[]const u8 = null,
 
     /// The new DB instance class for the DB instance.
-    db_instance_class: ?[]const u8,
+    db_instance_class: ?[]const u8 = null,
 
     /// The new DB instance identifier for the DB instance.
-    db_instance_identifier: ?[]const u8,
+    db_instance_identifier: ?[]const u8 = null,
 
     /// The name of the new subnet group for the DB instance.
-    db_subnet_group_name: ?[]const u8,
+    db_subnet_group_name: ?[]const u8 = null,
 
     /// The new engine version for the DB instance.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// The new provisioned IOPS value for the DB instance.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// The new license model value for the DB instance.
-    license_model: ?[]const u8,
+    license_model: ?[]const u8 = null,
 
     /// The new master user password for the DB instance.
-    master_user_password: ?[]const u8,
+    master_user_password: ?[]const u8 = null,
 
     /// Indicates that a single Availability Zone DB instance is changing to a
     /// multiple Availability Zone deployment.
-    multi_az: ?bool,
+    multi_az: ?bool = null,
 
     /// A list of log types that are being enabled or disabled.
-    pending_cloud_watch_logs_exports: ?AwsRdsPendingCloudWatchLogsExports,
+    pending_cloud_watch_logs_exports: ?AwsRdsPendingCloudWatchLogsExports = null,
 
     /// The new port for the DB instance.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// Processor features that are being updated.
-    processor_features: ?[]const AwsRdsDbProcessorFeature,
+    processor_features: ?[]const AwsRdsDbProcessorFeature = null,
 
     /// The new storage type for the DB instance.
-    storage_type: ?[]const u8,
+    storage_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allocated_storage = "AllocatedStorage",

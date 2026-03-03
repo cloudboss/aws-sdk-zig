@@ -7,7 +7,7 @@ const EncodingParameters = @import("encoding_parameters.zig").EncodingParameters
 pub const MediaStreamOutputConfiguration = struct {
     /// The transport parameters that are associated with each outbound media
     /// stream.
-    destination_configurations: ?[]const DestinationConfiguration,
+    destination_configurations: ?[]const DestinationConfiguration = null,
 
     /// The format that was used to encode the data. For ancillary data streams, set
     /// the encoding name to smpte291. For audio streams, set the encoding name to
@@ -17,7 +17,7 @@ pub const MediaStreamOutputConfiguration = struct {
 
     /// A collection of parameters that determine how MediaConnect will convert the
     /// content. These fields only apply to outputs on flows that have a CDI source.
-    encoding_parameters: ?EncodingParameters,
+    encoding_parameters: ?EncodingParameters = null,
 
     /// The name of the media stream.
     media_stream_name: []const u8,

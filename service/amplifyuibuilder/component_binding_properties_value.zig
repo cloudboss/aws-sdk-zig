@@ -9,13 +9,13 @@ const ComponentBindingPropertiesValueProperties = @import("component_binding_pro
 /// app.
 pub const ComponentBindingPropertiesValue = struct {
     /// Describes the properties to customize with data at runtime.
-    binding_properties: ?ComponentBindingPropertiesValueProperties,
+    binding_properties: ?ComponentBindingPropertiesValueProperties = null,
 
     /// The default value of the property.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// The property type.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .binding_properties = "bindingProperties",

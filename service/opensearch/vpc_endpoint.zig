@@ -6,24 +6,24 @@ const VPCDerivedInfo = @import("vpc_derived_info.zig").VPCDerivedInfo;
 /// a proxy.
 pub const VpcEndpoint = struct {
     /// The Amazon Resource Name (ARN) of the domain associated with the endpoint.
-    domain_arn: ?[]const u8,
+    domain_arn: ?[]const u8 = null,
 
     /// The connection endpoint ID for connecting to the domain.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// The current status of the endpoint.
-    status: ?VpcEndpointStatus,
+    status: ?VpcEndpointStatus = null,
 
     /// The unique identifier of the endpoint.
-    vpc_endpoint_id: ?[]const u8,
+    vpc_endpoint_id: ?[]const u8 = null,
 
     /// The creator of the endpoint.
-    vpc_endpoint_owner: ?[]const u8,
+    vpc_endpoint_owner: ?[]const u8 = null,
 
     /// Options to specify the subnets and security groups for an Amazon OpenSearch
     /// Service
     /// VPC endpoint.
-    vpc_options: ?VPCDerivedInfo,
+    vpc_options: ?VPCDerivedInfo = null,
 
     pub const json_field_names = .{
         .domain_arn = "DomainArn",

@@ -6,15 +6,15 @@ const EpisodicOverrideReflectionConfigurationInput = @import("episodic_override_
 pub const EpisodicOverrideConfigurationInput = struct {
     /// Contains configurations for overriding the consolidation step of the
     /// episodic memory strategy.
-    consolidation: ?EpisodicOverrideConsolidationConfigurationInput,
+    consolidation: ?EpisodicOverrideConsolidationConfigurationInput = null,
 
     /// Contains configurations for overriding the extraction step of the episodic
     /// memory strategy.
-    extraction: ?EpisodicOverrideExtractionConfigurationInput,
+    extraction: ?EpisodicOverrideExtractionConfigurationInput = null,
 
     /// Contains configurations for overriding the reflection step of the episodic
     /// memory strategy.
-    reflection: ?EpisodicOverrideReflectionConfigurationInput,
+    reflection: ?EpisodicOverrideReflectionConfigurationInput = null,
 
     pub const json_field_names = .{
         .consolidation = "consolidation",

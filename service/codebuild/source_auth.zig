@@ -5,7 +5,7 @@ const SourceAuthType = @import("source_auth_type.zig").SourceAuthType;
 /// built.
 pub const SourceAuth = struct {
     /// The resource value that applies to the specified authorization type.
-    resource: ?[]const u8,
+    resource: ?[]const u8 = null,
 
     /// The authorization type to use. Valid options are OAUTH, CODECONNECTIONS, or
     /// SECRETS_MANAGER.

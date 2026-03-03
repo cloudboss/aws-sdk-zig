@@ -4,11 +4,11 @@ const PolicyParameterTypeEnum = @import("policy_parameter_type_enum.zig").Policy
 /// permissions.
 pub const PolicyParameter = struct {
     /// The name of the policy parameter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The data type of the policy parameter value.
-    @"type": ?PolicyParameterTypeEnum,
+    @"type": ?PolicyParameterTypeEnum = null,
 
     /// The allowed values for the policy parameter.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 };

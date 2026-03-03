@@ -9,34 +9,34 @@ const LanguageCodeType = @import("language_code_type.zig").LanguageCodeType;
 /// Filters results based on entity metadata.
 pub const Filters = struct {
     /// Filter based on resource’s path.
-    ancestor_ids: ?[]const []const u8,
+    ancestor_ids: ?[]const []const u8 = null,
 
     /// Filters by content category.
-    content_categories: ?[]const ContentCategoryType,
+    content_categories: ?[]const ContentCategoryType = null,
 
     /// Filter based on resource’s creation timestamp.
-    created_range: ?DateRangeType,
+    created_range: ?DateRangeType = null,
 
     /// Filter by labels using exact match.
-    labels: ?[]const []const u8,
+    labels: ?[]const []const u8 = null,
 
     /// Filter based on resource’s modified timestamp.
-    modified_range: ?DateRangeType,
+    modified_range: ?DateRangeType = null,
 
     /// Filter based on UserIds or GroupIds.
-    principals: ?[]const SearchPrincipalType,
+    principals: ?[]const SearchPrincipalType = null,
 
     /// Filters based on entity type.
-    resource_types: ?[]const SearchResourceType,
+    resource_types: ?[]const SearchResourceType = null,
 
     /// Filter based on file groupings.
-    search_collection_types: ?[]const SearchCollectionType,
+    search_collection_types: ?[]const SearchCollectionType = null,
 
     /// Filter based on size (in bytes).
-    size_range: ?LongRangeType,
+    size_range: ?LongRangeType = null,
 
     /// Filters by the locale of the content or comment.
-    text_locales: ?[]const LanguageCodeType,
+    text_locales: ?[]const LanguageCodeType = null,
 
     pub const json_field_names = .{
         .ancestor_ids = "AncestorIds",

@@ -5,10 +5,10 @@ pub const StopInstanceOnIdleRequest = struct {
     /// The amount of idle time in minutes after which your virtual computer will
     /// automatically
     /// stop.
-    duration: ?[]const u8,
+    duration: ?[]const u8 = null,
 
     /// The value to compare with the duration.
-    threshold: ?[]const u8,
+    threshold: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .duration = "duration",

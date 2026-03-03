@@ -6,9 +6,9 @@ const PlaceType = @import("place_type.zig").PlaceType;
 pub const RelatedPlace = struct {
     /// Position of the access point in World Geodetic System (WGS 84) format:
     /// [longitude, latitude].
-    access_points: ?[]const AccessPoint,
+    access_points: ?[]const AccessPoint = null,
 
-    address: ?Address,
+    address: ?Address = null,
 
     /// The `PlaceId` of the place result.
     place_id: []const u8,
@@ -18,7 +18,7 @@ pub const RelatedPlace = struct {
 
     /// The position in World Geodetic System (WGS 84) format: [longitude,
     /// latitude].
-    position: ?[]const f64,
+    position: ?[]const f64 = null,
 
     /// The localized display name of this result item based on request parameter
     /// `language`.

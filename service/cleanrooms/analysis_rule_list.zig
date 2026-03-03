@@ -5,11 +5,11 @@ const JoinOperator = @import("join_operator.zig").JoinOperator;
 pub const AnalysisRuleList = struct {
     /// An indicator as to whether additional analyses (such as Clean Rooms ML) can
     /// be applied to the output of the direct query.
-    additional_analyses: ?AdditionalAnalyses,
+    additional_analyses: ?AdditionalAnalyses = null,
 
     /// The logical operators (if any) that are to be used in an INNER JOIN match
     /// condition. Default is `AND`.
-    allowed_join_operators: ?[]const JoinOperator,
+    allowed_join_operators: ?[]const JoinOperator = null,
 
     /// Columns that can be used to join a configured table with the table of the
     /// member who can query and other members' configured tables.

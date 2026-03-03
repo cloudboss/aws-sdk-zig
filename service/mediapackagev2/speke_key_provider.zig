@@ -6,7 +6,7 @@ pub const SpekeKeyProvider = struct {
     /// The ARN for the certificate that you imported to AWS Certificate Manager to
     /// add content key encryption to this endpoint. For this feature to work, your
     /// DRM key provider must support content key encryption.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The DRM solution provider you're using to protect your content during
     /// distribution.

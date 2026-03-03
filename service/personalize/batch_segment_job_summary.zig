@@ -4,23 +4,23 @@
 /// summaries.
 pub const BatchSegmentJobSummary = struct {
     /// The Amazon Resource Name (ARN) of the batch segment job.
-    batch_segment_job_arn: ?[]const u8,
+    batch_segment_job_arn: ?[]const u8 = null,
 
     /// The time at which the batch segment job was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// If the batch segment job failed, the reason for the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The name of the batch segment job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The time at which the batch segment job was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the solution version used by the batch
     /// segment job to generate batch segments.
-    solution_version_arn: ?[]const u8,
+    solution_version_arn: ?[]const u8 = null,
 
     /// The status of the batch segment job. The status is one of the following
     /// values:
@@ -32,7 +32,7 @@ pub const BatchSegmentJobSummary = struct {
     /// * ACTIVE
     ///
     /// * CREATE FAILED
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .batch_segment_job_arn = "batchSegmentJobArn",

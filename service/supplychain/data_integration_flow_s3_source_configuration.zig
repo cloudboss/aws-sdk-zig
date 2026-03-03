@@ -6,7 +6,7 @@ pub const DataIntegrationFlowS3SourceConfiguration = struct {
     bucket_name: []const u8,
 
     /// The other options of the S3 DataIntegrationFlow source.
-    options: ?DataIntegrationFlowS3Options,
+    options: ?DataIntegrationFlowS3Options = null,
 
     /// The prefix of the S3 source objects. To trigger data ingestion, S3 files
     /// need to be put under `s3://*bucketName*/*prefix*/`.

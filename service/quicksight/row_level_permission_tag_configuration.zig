@@ -5,13 +5,13 @@ const RowLevelPermissionTagRule = @import("row_level_permission_tag_rule.zig").R
 pub const RowLevelPermissionTagConfiguration = struct {
     /// The status of row-level security tags. If enabled, the status is `ENABLED`.
     /// If disabled, the status is `DISABLED`.
-    status: ?Status,
+    status: ?Status = null,
 
     /// A list of tag configuration rules to apply to a dataset. All tag
     /// configurations have the OR condition. Tags within each tile will be joined
     /// (AND). At least one rule in this structure must have all tag values assigned
     /// to it to apply Row-level security (RLS) to the dataset.
-    tag_rule_configurations: ?[]const []const []const u8,
+    tag_rule_configurations: ?[]const []const []const u8 = null,
 
     /// A set of rules associated with row-level security, such as the tag names and
     /// columns that they are assigned to.

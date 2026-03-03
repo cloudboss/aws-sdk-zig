@@ -10,7 +10,7 @@ pub const DataPartitionUploadOptions = struct {
     /// The version of the condition language. Defaults to the most recent condition
     /// language
     /// version.
-    condition_language_version: ?i32,
+    condition_language_version: ?i32 = null,
 
     /// The logical expression used to recognize what data to collect. For example,
     /// `$variable.`Vehicle.OutsideAirTemperature` >= 105.0`.

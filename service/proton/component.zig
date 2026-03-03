@@ -17,46 +17,46 @@ pub const Component = struct {
     deployment_status: DeploymentStatus,
 
     /// The message associated with the component deployment status.
-    deployment_status_message: ?[]const u8,
+    deployment_status_message: ?[]const u8 = null,
 
     /// A description of the component.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the Proton environment that this component is associated with.
     environment_name: []const u8,
 
     /// The ID of the last attempted deployment of this component.
-    last_attempted_deployment_id: ?[]const u8,
+    last_attempted_deployment_id: ?[]const u8 = null,
 
     /// The last token the client requested.
-    last_client_request_token: ?[]const u8,
+    last_client_request_token: ?[]const u8 = null,
 
     /// The time when a deployment of the component was last attempted.
-    last_deployment_attempted_at: ?i64,
+    last_deployment_attempted_at: ?i64 = null,
 
     /// The time when the component was last deployed successfully.
-    last_deployment_succeeded_at: ?i64,
+    last_deployment_succeeded_at: ?i64 = null,
 
     /// The time when the component was last modified.
     last_modified_at: i64,
 
     /// The ID of the last successful deployment of this component.
-    last_succeeded_deployment_id: ?[]const u8,
+    last_succeeded_deployment_id: ?[]const u8 = null,
 
     /// The name of the component.
     name: []const u8,
 
     /// The name of the service instance that this component is attached to.
     /// Provided when a component is attached to a service instance.
-    service_instance_name: ?[]const u8,
+    service_instance_name: ?[]const u8 = null,
 
     /// The name of the service that `serviceInstanceName` is associated with.
     /// Provided when a component is attached to a service instance.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// The service spec that the component uses to access service inputs. Provided
     /// when a component is attached to a service instance.
-    service_spec: ?[]const u8,
+    service_spec: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

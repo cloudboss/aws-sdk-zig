@@ -5,7 +5,7 @@ const EncryptionType = @import("encryption_type.zig").EncryptionType;
 /// partition key, and a data blob.
 pub const Record = struct {
     /// The approximate time that the record was inserted into the stream.
-    approximate_arrival_timestamp: ?i64,
+    approximate_arrival_timestamp: ?i64 = null,
 
     /// The data blob. The data in the blob is both opaque and immutable to Kinesis
     /// Data
@@ -24,7 +24,7 @@ pub const Record = struct {
     ///
     /// * `KMS`: Use server-side encryption on the records in the stream
     /// using a customer-managed Amazon Web Services KMS key.
-    encryption_type: ?EncryptionType,
+    encryption_type: ?EncryptionType = null,
 
     /// Identifies which shard in the stream the data record is assigned to.
     partition_key: []const u8,

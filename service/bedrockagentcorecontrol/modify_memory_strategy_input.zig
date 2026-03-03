@@ -3,16 +3,16 @@ const ModifyStrategyConfiguration = @import("modify_strategy_configuration.zig")
 /// Input for modifying a memory strategy.
 pub const ModifyMemoryStrategyInput = struct {
     /// The updated configuration for the memory strategy.
-    configuration: ?ModifyStrategyConfiguration,
+    configuration: ?ModifyStrategyConfiguration = null,
 
     /// The updated description of the memory strategy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the memory strategy to modify.
     memory_strategy_id: []const u8,
 
     /// The updated namespaces for the memory strategy.
-    namespaces: ?[]const []const u8,
+    namespaces: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

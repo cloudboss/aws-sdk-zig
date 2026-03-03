@@ -15,14 +15,14 @@ pub const TextGenerationJobConfig = struct {
     /// variety of large language models. For information on the list of supported
     /// models, see [Text generation models supporting fine-tuning in
     /// Autopilot](https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-models.html#autopilot-llms-finetuning-supported-llms). If no `BaseModelName` is provided, the default model used is **Falcon7BInstruct**.
-    base_model_name: ?[]const u8,
+    base_model_name: ?[]const u8 = null,
 
     /// How long a fine-tuning job is allowed to run. For `TextGenerationJobConfig`
     /// problem types, the `MaxRuntimePerTrainingJobInSeconds` attribute of
     /// `AutoMLJobCompletionCriteria` defaults to 72h (259200s).
-    completion_criteria: ?AutoMLJobCompletionCriteria,
+    completion_criteria: ?AutoMLJobCompletionCriteria = null,
 
-    model_access_config: ?ModelAccessConfig,
+    model_access_config: ?ModelAccessConfig = null,
 
     /// The hyperparameters used to configure and optimize the learning process of
     /// the base model. You can set any combination of the following hyperparameters
@@ -48,7 +48,7 @@ pub const TextGenerationJobConfig = struct {
     ///
     /// `{ "epochCount":"5", "learningRate":"0.5", "batchSize": "32",
     /// "learningRateWarmupSteps": "10" }`
-    text_generation_hyper_parameters: ?[]const aws.map.StringMapEntry,
+    text_generation_hyper_parameters: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .base_model_name = "BaseModelName",

@@ -2,10 +2,10 @@
 /// monitoring results.
 pub const BaselineMetric = struct {
     /// The name of the metric.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The value for the metric.
-    value: ?f64,
+    value: ?f64 = null,
 
     pub const json_field_names = .{
         .name = "Name",

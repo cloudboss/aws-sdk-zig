@@ -14,7 +14,7 @@ pub const DatabaseSourceConfiguration = struct {
     /// from.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    columns: ?DatabaseColumnList,
+    columns: ?DatabaseColumnList = null,
 
     /// The list of database patterns in source database endpoint for Firehose to
     /// read from.
@@ -58,13 +58,13 @@ pub const DatabaseSourceConfiguration = struct {
     /// endpoint.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    ssl_mode: ?SSLMode,
+    ssl_mode: ?SSLMode = null,
 
     /// The optional list of table and column names used as unique key columns when
     /// taking snapshot if the tables don’t have primary keys configured.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    surrogate_keys: ?[]const []const u8,
+    surrogate_keys: ?[]const []const u8 = null,
 
     /// The list of table patterns in source database endpoint for Firehose to read
     /// from.

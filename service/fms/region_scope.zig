@@ -7,7 +7,7 @@ pub const RegionScope = struct {
 
     /// The Amazon Web Services Regions that the specified Firewall Manager
     /// administrator can perform actions in.
-    regions: ?[]const []const u8,
+    regions: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .all_regions_enabled = "AllRegionsEnabled",

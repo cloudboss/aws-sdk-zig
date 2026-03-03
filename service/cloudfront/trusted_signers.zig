@@ -6,7 +6,7 @@ pub const TrustedSigners = struct {
     enabled: bool,
 
     /// A list of Amazon Web Services account identifiers.
-    items: ?[]const []const u8,
+    items: ?[]const []const u8 = null,
 
     /// The number of Amazon Web Services accounts in the list.
     quantity: i32,

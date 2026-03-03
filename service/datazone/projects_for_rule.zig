@@ -6,7 +6,7 @@ pub const ProjectsForRule = struct {
     selection_mode: RuleScopeSelectionMode,
 
     /// The specific projects in which the rule is created.
-    specific_projects: ?[]const []const u8,
+    specific_projects: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .selection_mode = "selectionMode",

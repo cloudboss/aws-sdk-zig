@@ -8,10 +8,10 @@
 /// `to`.
 pub const DateTimeRange = struct {
     /// The starting date and time of a time range.
-    from: ?i64,
+    from: ?i64 = null,
 
     /// The ending date and time of a time range.
-    to: ?i64,
+    to: ?i64 = null,
 
     pub const json_field_names = .{
         .from = "from",

@@ -4,15 +4,15 @@ const AutoTuneState = @import("auto_tune_state.zig").AutoTuneState;
 /// Auto-Tune.
 pub const AutoTuneOptionsOutput = struct {
     /// Any errors that occurred while enabling or disabling Auto-Tune.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The current state of Auto-Tune on the domain.
-    state: ?AutoTuneState,
+    state: ?AutoTuneState = null,
 
     /// Whether the domain's off-peak window will be used to deploy Auto-Tune
     /// changes rather
     /// than a maintenance schedule.
-    use_off_peak_window: ?bool,
+    use_off_peak_window: ?bool = null,
 
     pub const json_field_names = .{
         .error_message = "ErrorMessage",

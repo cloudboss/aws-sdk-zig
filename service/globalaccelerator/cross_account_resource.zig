@@ -13,7 +13,7 @@ pub const CrossAccountResource = struct {
     /// specifies the resources (endpoints or
     /// CIDR range) that can be added to accelerators and principals that have
     /// permission to add them.
-    attachment_arn: ?[]const u8,
+    attachment_arn: ?[]const u8 = null,
 
     /// An IP address range, in CIDR format, that is specified as an Amazon Web
     /// Services resource. The address must
@@ -25,12 +25,12 @@ pub const CrossAccountResource = struct {
     /// [Bring your own IP addresses
     /// (BYOIP)](https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
     /// the Global Accelerator Developer Guide.
-    cidr: ?[]const u8,
+    cidr: ?[]const u8 = null,
 
     /// The endpoint ID for the endpoint that is listed in a cross-account
     /// attachment and
     /// can be added to an accelerator by specified principals.
-    endpoint_id: ?[]const u8,
+    endpoint_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attachment_arn = "AttachmentArn",

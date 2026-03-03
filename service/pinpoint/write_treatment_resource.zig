@@ -9,26 +9,26 @@ pub const WriteTreatmentResource = struct {
     /// The delivery configuration settings for sending the treatment through a
     /// custom channel. This object is required if the MessageConfiguration object
     /// for the treatment specifies a CustomMessage object.
-    custom_delivery_configuration: ?CustomDeliveryConfiguration,
+    custom_delivery_configuration: ?CustomDeliveryConfiguration = null,
 
     /// The message configuration settings for the treatment.
-    message_configuration: ?MessageConfiguration,
+    message_configuration: ?MessageConfiguration = null,
 
     /// The schedule settings for the treatment.
-    schedule: ?Schedule,
+    schedule: ?Schedule = null,
 
     /// The allocated percentage of users (segment members) to send the treatment
     /// to.
     size_percent: i32,
 
     /// The message template to use for the treatment.
-    template_configuration: ?TemplateConfiguration,
+    template_configuration: ?TemplateConfiguration = null,
 
     /// A custom description of the treatment.
-    treatment_description: ?[]const u8,
+    treatment_description: ?[]const u8 = null,
 
     /// A custom name for the treatment.
-    treatment_name: ?[]const u8,
+    treatment_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .custom_delivery_configuration = "CustomDeliveryConfiguration",

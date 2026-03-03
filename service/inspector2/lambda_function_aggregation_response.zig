@@ -9,28 +9,28 @@ pub const LambdaFunctionAggregationResponse = struct {
     /// The ID of the Amazon Web Services account that owns the Amazon Web Services
     /// Lambda
     /// function.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Web Services Lambda function names included in the aggregation
     /// results.
-    function_name: ?[]const u8,
+    function_name: ?[]const u8 = null,
 
     /// The tags included in the aggregation results.
-    lambda_tags: ?[]const aws.map.StringMapEntry,
+    lambda_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The date that the Amazon Web Services Lambda function included in the
     /// aggregation results
     /// was last changed.
-    last_modified_at: ?i64,
+    last_modified_at: ?i64 = null,
 
     /// The resource IDs included in the aggregation results.
     resource_id: []const u8,
 
     /// The runtimes included in the aggregation results.
-    runtime: ?[]const u8,
+    runtime: ?[]const u8 = null,
 
     /// An object that contains the counts of aggregated finding per severity.
-    severity_counts: ?SeverityCounts,
+    severity_counts: ?SeverityCounts = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

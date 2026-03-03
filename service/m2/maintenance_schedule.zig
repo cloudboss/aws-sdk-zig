@@ -1,10 +1,10 @@
 /// The information about the maintenance schedule.
 pub const MaintenanceSchedule = struct {
     /// The time the scheduled maintenance is to end.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The time the scheduled maintenance is to start.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .end_time = "endTime",

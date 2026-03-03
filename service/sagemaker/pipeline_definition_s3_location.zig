@@ -8,7 +8,7 @@ pub const PipelineDefinitionS3Location = struct {
 
     /// Version Id of the pipeline definition file. If not specified, Amazon
     /// SageMaker will retrieve the latest version.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "Bucket",

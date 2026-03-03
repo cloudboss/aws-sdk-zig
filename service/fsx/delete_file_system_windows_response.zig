@@ -4,10 +4,10 @@ const Tag = @import("tag.zig").Tag;
 /// `DeleteFileSystem` operation.
 pub const DeleteFileSystemWindowsResponse = struct {
     /// The ID of the final backup for this file system.
-    final_backup_id: ?[]const u8,
+    final_backup_id: ?[]const u8 = null,
 
     /// The set of tags applied to the final backup.
-    final_backup_tags: ?[]const Tag,
+    final_backup_tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .final_backup_id = "FinalBackupId",

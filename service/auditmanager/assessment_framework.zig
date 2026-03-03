@@ -6,15 +6,15 @@ const FrameworkMetadata = @import("framework_metadata.zig").FrameworkMetadata;
 /// compliance standard.
 pub const AssessmentFramework = struct {
     /// The Amazon Resource Name (ARN) of the framework.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The control sets that are associated with the framework.
-    control_sets: ?[]const AssessmentControlSet,
+    control_sets: ?[]const AssessmentControlSet = null,
 
     /// The unique identifier for the framework.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
-    metadata: ?FrameworkMetadata,
+    metadata: ?FrameworkMetadata = null,
 
     pub const json_field_names = .{
         .arn = "arn",

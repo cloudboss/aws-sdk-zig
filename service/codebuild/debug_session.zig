@@ -4,13 +4,13 @@
 /// Manager](https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html).
 pub const DebugSession = struct {
     /// Specifies if session debugging is enabled for this build.
-    session_enabled: ?bool,
+    session_enabled: ?bool = null,
 
     /// Contains the identifier of the Session Manager session used for the build.
     /// To work with
     /// the paused build, you open this session to examine, control, and resume the
     /// build.
-    session_target: ?[]const u8,
+    session_target: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .session_enabled = "sessionEnabled",

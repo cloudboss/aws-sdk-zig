@@ -22,7 +22,7 @@ pub const WindowsAuditLogConfiguration = struct {
     /// partition,
     /// Amazon Web Services Region, and Amazon Web Services account as your Amazon
     /// FSx file system.
-    audit_log_destination: ?[]const u8,
+    audit_log_destination: ?[]const u8 = null,
 
     /// Sets which attempt type is logged by Amazon FSx for file and folder
     /// accesses.

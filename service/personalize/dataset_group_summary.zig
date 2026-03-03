@@ -5,22 +5,22 @@ const Domain = @import("domain.zig").Domain;
 /// [DescribeDatasetGroup](https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html) API.
 pub const DatasetGroupSummary = struct {
     /// The date and time (in Unix time) that the dataset group was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset group.
-    dataset_group_arn: ?[]const u8,
+    dataset_group_arn: ?[]const u8 = null,
 
     /// The domain of a Domain dataset group.
-    domain: ?Domain,
+    domain: ?Domain = null,
 
     /// If creating a dataset group fails, the reason behind the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The date and time (in Unix time) that the dataset group was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The name of the dataset group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The status of the dataset group.
     ///
@@ -29,7 +29,7 @@ pub const DatasetGroupSummary = struct {
     /// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
     ///
     /// * DELETE PENDING
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

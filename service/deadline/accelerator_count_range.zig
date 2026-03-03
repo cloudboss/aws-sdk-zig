@@ -2,7 +2,7 @@
 /// worker instance..
 pub const AcceleratorCountRange = struct {
     /// The maximum number of GPU accelerators in the worker host.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// The minimum number of GPU accelerators in the worker host.
     min: i32,

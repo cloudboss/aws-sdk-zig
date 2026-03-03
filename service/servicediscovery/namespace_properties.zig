@@ -7,10 +7,10 @@ pub const NamespaceProperties = struct {
     /// A complex type that contains the ID for the Route 53 hosted zone that Cloud
     /// Map creates when
     /// you create a namespace.
-    dns_properties: ?DnsProperties,
+    dns_properties: ?DnsProperties = null,
 
     /// A complex type that contains the name of an HTTP namespace.
-    http_properties: ?HttpProperties,
+    http_properties: ?HttpProperties = null,
 
     pub const json_field_names = .{
         .dns_properties = "DnsProperties",

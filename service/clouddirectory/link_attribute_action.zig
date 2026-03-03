@@ -5,10 +5,10 @@ const TypedAttributeValue = @import("typed_attribute_value.zig").TypedAttributeV
 /// supported for attributes which don’t contribute to link identity.
 pub const LinkAttributeAction = struct {
     /// A type that can be either `UPDATE_OR_CREATE` or `DELETE`.
-    attribute_action_type: ?UpdateActionType,
+    attribute_action_type: ?UpdateActionType = null,
 
     /// The value that you want to update to.
-    attribute_update_value: ?TypedAttributeValue,
+    attribute_update_value: ?TypedAttributeValue = null,
 
     pub const json_field_names = .{
         .attribute_action_type = "AttributeActionType",

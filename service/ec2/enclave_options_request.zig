@@ -7,5 +7,5 @@ pub const EnclaveOptionsRequest = struct {
     /// To enable the instance for Amazon Web Services Nitro Enclaves, set this
     /// parameter to
     /// `true`.
-    enabled: ?bool,
+    enabled: ?bool = null,
 };

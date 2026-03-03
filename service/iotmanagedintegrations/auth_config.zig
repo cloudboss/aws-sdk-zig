@@ -5,11 +5,11 @@ const OAuthConfig = @import("o_auth_config.zig").OAuthConfig;
 /// including OAuth settings and other authentication parameters.
 pub const AuthConfig = struct {
     /// The authorization materials for General Authorization.
-    general_authorization: ?[]const AuthMaterial,
+    general_authorization: ?[]const AuthMaterial = null,
 
     /// The OAuth configuration settings used for authentication with the
     /// third-party service.
-    o_auth: ?OAuthConfig,
+    o_auth: ?OAuthConfig = null,
 
     pub const json_field_names = .{
         .general_authorization = "GeneralAuthorization",

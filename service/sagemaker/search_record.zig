@@ -18,47 +18,47 @@ const TrialComponent = @import("trial_component.zig").TrialComponent;
 /// A single resource returned as part of the
 /// [Search](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html) API response.
 pub const SearchRecord = struct {
-    endpoint: ?Endpoint,
+    endpoint: ?Endpoint = null,
 
     /// The properties of an experiment.
-    experiment: ?Experiment,
+    experiment: ?Experiment = null,
 
-    feature_group: ?FeatureGroup,
+    feature_group: ?FeatureGroup = null,
 
     /// The feature metadata used to search through the features.
-    feature_metadata: ?FeatureMetadata,
+    feature_metadata: ?FeatureMetadata = null,
 
     /// The properties of a hyperparameter tuning job.
-    hyper_parameter_tuning_job: ?HyperParameterTuningJobSearchEntity,
+    hyper_parameter_tuning_job: ?HyperParameterTuningJobSearchEntity = null,
 
-    model: ?ModelDashboardModel,
+    model: ?ModelDashboardModel = null,
 
     /// An Amazon SageMaker Model Card that documents details about a machine
     /// learning model.
-    model_card: ?ModelCard,
+    model_card: ?ModelCard = null,
 
-    model_package: ?ModelPackage,
+    model_package: ?ModelPackage = null,
 
-    model_package_group: ?ModelPackageGroup,
+    model_package_group: ?ModelPackageGroup = null,
 
-    pipeline: ?Pipeline,
+    pipeline: ?Pipeline = null,
 
-    pipeline_execution: ?PipelineExecution,
+    pipeline_execution: ?PipelineExecution = null,
 
     /// The version of the pipeline.
-    pipeline_version: ?PipelineVersion,
+    pipeline_version: ?PipelineVersion = null,
 
     /// The properties of a project.
-    project: ?Project,
+    project: ?Project = null,
 
     /// The properties of a training job.
-    training_job: ?TrainingJob,
+    training_job: ?TrainingJob = null,
 
     /// The properties of a trial.
-    trial: ?Trial,
+    trial: ?Trial = null,
 
     /// The properties of a trial component.
-    trial_component: ?TrialComponent,
+    trial_component: ?TrialComponent = null,
 
     pub const json_field_names = .{
         .endpoint = "Endpoint",

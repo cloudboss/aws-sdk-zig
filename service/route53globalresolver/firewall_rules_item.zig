@@ -11,35 +11,35 @@ pub const FirewallRulesItem = struct {
     action: FirewallRuleAction,
 
     /// The DNS record type configured for the firewall rule's custom response.
-    block_override_dns_type: ?BlockOverrideDnsQueryType,
+    block_override_dns_type: ?BlockOverrideDnsQueryType = null,
 
     /// The custom domain name configured for the firewall rule's BLOCK response.
-    block_override_domain: ?[]const u8,
+    block_override_domain: ?[]const u8 = null,
 
     /// The TTL value configured for the firewall rule's custom response.
-    block_override_ttl: ?i32,
+    block_override_ttl: ?i32 = null,
 
     /// The type of block response configured for the firewall rule.
-    block_response: ?FirewallBlockResponse,
+    block_response: ?FirewallBlockResponse = null,
 
     /// The confidence threshold configured for the firewall rule's advanced threat
     /// detection.
-    confidence_threshold: ?ConfidenceThreshold,
+    confidence_threshold: ?ConfidenceThreshold = null,
 
     /// The date and time when the firewall rule was created.
     created_at: i64,
 
     /// The description of the firewall rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether advanced DNS threat protection is enabled for the firewall rule.
-    dns_advanced_protection: ?DnsAdvancedProtection,
+    dns_advanced_protection: ?DnsAdvancedProtection = null,
 
     /// The ID of the DNS view associated with the firewall rule.
     dns_view_id: []const u8,
 
     /// The ID of the firewall domain list associated with the firewall rule.
-    firewall_domain_list_id: ?[]const u8,
+    firewall_domain_list_id: ?[]const u8 = null,
 
     /// The unique identifier of the firewall rule.
     id: []const u8,
@@ -51,7 +51,7 @@ pub const FirewallRulesItem = struct {
     priority: i64,
 
     /// The DNS query type that the firewall rule matches.
-    query_type: ?[]const u8,
+    query_type: ?[]const u8 = null,
 
     /// The current status of the firewall rule.
     status: CRResourceStatus,

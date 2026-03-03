@@ -3,10 +3,10 @@
 /// be associated again.
 pub const DnsDuplicateRuleGroupViolation = struct {
     /// Information about the VPC ID.
-    violation_target: ?[]const u8,
+    violation_target: ?[]const u8 = null,
 
     /// A description of the violation that specifies the rule group and VPC.
-    violation_target_description: ?[]const u8,
+    violation_target_description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .violation_target = "ViolationTarget",

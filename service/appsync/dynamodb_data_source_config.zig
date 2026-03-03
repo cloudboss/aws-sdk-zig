@@ -6,7 +6,7 @@ pub const DynamodbDataSourceConfig = struct {
     aws_region: []const u8,
 
     /// The `DeltaSyncConfig` for a versioned data source.
-    delta_sync_config: ?DeltaSyncConfig,
+    delta_sync_config: ?DeltaSyncConfig = null,
 
     /// The table name.
     table_name: []const u8,

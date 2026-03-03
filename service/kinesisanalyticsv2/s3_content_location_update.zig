@@ -3,13 +3,13 @@
 pub const S3ContentLocationUpdate = struct {
     /// The new Amazon Resource Name (ARN) for the S3 bucket containing the
     /// application code.
-    bucket_arn_update: ?[]const u8,
+    bucket_arn_update: ?[]const u8 = null,
 
     /// The new file key for the object containing the application code.
-    file_key_update: ?[]const u8,
+    file_key_update: ?[]const u8 = null,
 
     /// The new version of the object containing the application code.
-    object_version_update: ?[]const u8,
+    object_version_update: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_arn_update = "BucketARNUpdate",

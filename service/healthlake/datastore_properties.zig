@@ -8,7 +8,7 @@ const SseConfiguration = @import("sse_configuration.zig").SseConfiguration;
 /// The data store properties.
 pub const DatastoreProperties = struct {
     /// The time the data store was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) used in the creation of the data store.
     datastore_arn: []const u8,
@@ -20,7 +20,7 @@ pub const DatastoreProperties = struct {
     datastore_id: []const u8,
 
     /// The data store name.
-    datastore_name: ?[]const u8,
+    datastore_name: ?[]const u8 = null,
 
     /// The data store status.
     datastore_status: DatastoreStatus,
@@ -31,18 +31,18 @@ pub const DatastoreProperties = struct {
     datastore_type_version: FHIRVersion,
 
     /// The error cause for the current data store operation.
-    error_cause: ?ErrorCause,
+    error_cause: ?ErrorCause = null,
 
     /// The identity provider selected during data store creation.
-    identity_provider_configuration: ?IdentityProviderConfiguration,
+    identity_provider_configuration: ?IdentityProviderConfiguration = null,
 
     /// The preloaded Synthea data configuration for the data store.
-    preload_data_config: ?PreloadDataConfig,
+    preload_data_config: ?PreloadDataConfig = null,
 
     /// The server-side encryption key configuration for a customer provided
     /// encryption
     /// key.
-    sse_configuration: ?SseConfiguration,
+    sse_configuration: ?SseConfiguration = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

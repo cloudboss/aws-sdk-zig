@@ -10,25 +10,25 @@ const TagFilter = @import("tag_filter.zig").TagFilter;
 pub const SessionData = struct {
     /// The configuration of the AI Agents (mapped by AI Agent Type to AI Agent
     /// version) that should be used by Amazon Q in Connect for this Session.
-    ai_agent_configuration: ?[]const aws.map.MapEntry(AIAgentConfigurationData),
+    ai_agent_configuration: ?[]const aws.map.MapEntry(AIAgentConfigurationData) = null,
 
     /// The description of the session.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The configuration information for the session integration.
-    integration_configuration: ?SessionIntegrationConfiguration,
+    integration_configuration: ?SessionIntegrationConfiguration = null,
 
     /// The name of the session.
     name: []const u8,
 
     /// The list of orchestrator configurations for the session.
-    orchestrator_configuration_list: ?[]const OrchestratorConfigurationEntry,
+    orchestrator_configuration_list: ?[]const OrchestratorConfigurationEntry = null,
 
     /// The origin of the Session to be listed. `SYSTEM` for a default Session
     /// created by Amazon Q in Connect or `CUSTOMER` for a Session created by
     /// calling
     /// [CreateSession](https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_CreateSession.html) API.
-    origin: ?Origin,
+    origin: ?Origin = null,
 
     /// The Amazon Resource Name (ARN) of the session.
     session_arn: []const u8,
@@ -37,10 +37,10 @@ pub const SessionData = struct {
     session_id: []const u8,
 
     /// An object that can be used to specify Tag conditions.
-    tag_filter: ?TagFilter,
+    tag_filter: ?TagFilter = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .ai_agent_configuration = "aiAgentConfiguration",

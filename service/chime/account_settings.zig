@@ -9,13 +9,13 @@
 pub const AccountSettings = struct {
     /// Setting that stops or starts remote control of shared screens during
     /// meetings.
-    disable_remote_control: ?bool,
+    disable_remote_control: ?bool = null,
 
     /// Setting that allows meeting participants to choose the **Call me at a phone
     /// number** option. For more information, see
     /// [Join a Meeting without the Amazon Chime
     /// App](https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html).
-    enable_dial_out: ?bool,
+    enable_dial_out: ?bool = null,
 
     pub const json_field_names = .{
         .disable_remote_control = "DisableRemoteControl",

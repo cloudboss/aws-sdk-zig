@@ -12,9 +12,9 @@ pub const TopicConfiguration = struct {
     /// the *Amazon S3 User Guide*.
     events: []const Event,
 
-    filter: ?NotificationConfigurationFilter,
+    filter: ?NotificationConfigurationFilter = null,
 
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3
     /// publishes a message when it

@@ -3,22 +3,22 @@ const ErrorRootCauseEntity = @import("error_root_cause_entity.zig").ErrorRootCau
 /// A collection of fields identifying the services in a trace summary error.
 pub const ErrorRootCauseService = struct {
     /// The account ID associated to the service.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The path of root cause entities found on the service.
-    entity_path: ?[]const ErrorRootCauseEntity,
+    entity_path: ?[]const ErrorRootCauseEntity = null,
 
     /// A Boolean value indicating if the service is inferred from the trace.
-    inferred: ?bool,
+    inferred: ?bool = null,
 
     /// The service name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A collection of associated service names.
-    names: ?[]const []const u8,
+    names: ?[]const []const u8 = null,
 
     /// The type associated to the service.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

@@ -4,47 +4,47 @@ const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 /// cluster.
 pub const AutonomousVirtualMachineSummary = struct {
     /// The unique identifier of the Autonomous VM.
-    autonomous_virtual_machine_id: ?[]const u8,
+    autonomous_virtual_machine_id: ?[]const u8 = null,
 
     /// The IP address used by clients to connect to this Autonomous VM.
-    client_ip_address: ?[]const u8,
+    client_ip_address: ?[]const u8 = null,
 
     /// The unique identifier of the Autonomous VM cluster containing this
     /// Autonomous VM.
-    cloud_autonomous_vm_cluster_id: ?[]const u8,
+    cloud_autonomous_vm_cluster_id: ?[]const u8 = null,
 
     /// The number of CPU cores allocated to this Autonomous VM.
-    cpu_core_count: ?i32,
+    cpu_core_count: ?i32 = null,
 
     /// The amount of storage allocated to this Autonomous Virtual Machine, in
     /// gigabytes (GB).
-    db_node_storage_size_in_g_bs: ?i32,
+    db_node_storage_size_in_g_bs: ?i32 = null,
 
     /// The display name of the database server hosting this Autonomous VM.
-    db_server_display_name: ?[]const u8,
+    db_server_display_name: ?[]const u8 = null,
 
     /// The unique identifier of the database server hosting this Autonomous VM.
-    db_server_id: ?[]const u8,
+    db_server_id: ?[]const u8 = null,
 
     /// The amount of memory allocated to this Autonomous VM, in gigabytes (GB).
-    memory_size_in_g_bs: ?i32,
+    memory_size_in_g_bs: ?i32 = null,
 
     /// The Oracle Cloud Identifier (OCID) of the Autonomous VM.
-    ocid: ?[]const u8,
+    ocid: ?[]const u8 = null,
 
     /// The name of the Oracle Cloud Infrastructure (OCI) resource anchor associated
     /// with this Autonomous VM.
-    oci_resource_anchor_name: ?[]const u8,
+    oci_resource_anchor_name: ?[]const u8 = null,
 
     /// The current status of the Autonomous VM.
-    status: ?ResourceStatus,
+    status: ?ResourceStatus = null,
 
     /// Additional information about the current status of the Autonomous VM, if
     /// applicable.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The name of the Autonomous VM.
-    vm_name: ?[]const u8,
+    vm_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .autonomous_virtual_machine_id = "autonomousVirtualMachineId",

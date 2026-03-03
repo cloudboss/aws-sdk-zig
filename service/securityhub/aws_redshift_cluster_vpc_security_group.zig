@@ -2,10 +2,10 @@
 /// VPC.
 pub const AwsRedshiftClusterVpcSecurityGroup = struct {
     /// The status of the VPC security group.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The identifier of the VPC security group.
-    vpc_security_group_id: ?[]const u8,
+    vpc_security_group_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status = "Status",

@@ -4,22 +4,22 @@ const ConnectorSsmCommandConfig = @import("connector_ssm_command_config.zig").Co
 
 pub const Connector = struct {
     /// Connector arn.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Connector ID.
-    connector_id: ?[]const u8,
+    connector_id: ?[]const u8 = null,
 
     /// Connector name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Connector SSM command config.
-    ssm_command_config: ?ConnectorSsmCommandConfig,
+    ssm_command_config: ?ConnectorSsmCommandConfig = null,
 
     /// Connector SSM instance ID.
-    ssm_instance_id: ?[]const u8,
+    ssm_instance_id: ?[]const u8 = null,
 
     /// Connector tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -19,7 +19,7 @@ pub const Queue = struct {
     created_at: i64,
 
     /// The list of errors that occurred during queue provisioning.
-    error_info: ?[]const ErrorInfo,
+    error_info: ?[]const ErrorInfo = null,
 
     /// The generated unique ID of the queue.
     id: []const u8,
@@ -31,7 +31,7 @@ pub const Queue = struct {
     name: []const u8,
 
     /// Additional options related to the Slurm scheduler.
-    slurm_configuration: ?QueueSlurmConfiguration,
+    slurm_configuration: ?QueueSlurmConfiguration = null,
 
     /// The provisioning status of the queue.
     ///

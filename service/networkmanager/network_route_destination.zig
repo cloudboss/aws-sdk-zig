@@ -1,25 +1,25 @@
 /// Describes the destination of a network route.
 pub const NetworkRouteDestination = struct {
     /// The ID of a core network attachment.
-    core_network_attachment_id: ?[]const u8,
+    core_network_attachment_id: ?[]const u8 = null,
 
     /// The edge location for the network destination.
-    edge_location: ?[]const u8,
+    edge_location: ?[]const u8 = null,
 
     /// The network function group name associated with the destination.
-    network_function_group_name: ?[]const u8,
+    network_function_group_name: ?[]const u8 = null,
 
     /// The ID of the resource.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The resource type.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The name of the segment.
-    segment_name: ?[]const u8,
+    segment_name: ?[]const u8 = null,
 
     /// The ID of the transit gateway attachment.
-    transit_gateway_attachment_id: ?[]const u8,
+    transit_gateway_attachment_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .core_network_attachment_id = "CoreNetworkAttachmentId",

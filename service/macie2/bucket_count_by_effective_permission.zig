@@ -3,21 +3,21 @@
 pub const BucketCountByEffectivePermission = struct {
     /// The total number of buckets that allow the general public to have read or
     /// write access to the bucket.
-    publicly_accessible: ?i64,
+    publicly_accessible: ?i64 = null,
 
     /// The total number of buckets that allow the general public to have read
     /// access to the bucket.
-    publicly_readable: ?i64,
+    publicly_readable: ?i64 = null,
 
     /// The total number of buckets that allow the general public to have write
     /// access to the bucket.
-    publicly_writable: ?i64,
+    publicly_writable: ?i64 = null,
 
     /// The total number of buckets that Amazon Macie wasn't able to evaluate
     /// permissions settings for. For example, the buckets' policies or a quota
     /// prevented Macie from retrieving the requisite data. Macie can't determine
     /// whether the buckets are publicly accessible.
-    unknown: ?i64,
+    unknown: ?i64 = null,
 
     pub const json_field_names = .{
         .publicly_accessible = "publiclyAccessible",

@@ -3,7 +3,7 @@ const TransposedColumnType = @import("transposed_column_type.zig").TransposedCol
 /// The column option of the transposed table.
 pub const TransposedTableOption = struct {
     /// The index of a columns in a transposed table. The index range is 0-9999.
-    column_index: ?i32,
+    column_index: ?i32 = null,
 
     /// The column type of the column in a transposed table. Choose one of the
     /// following options:
@@ -15,7 +15,7 @@ pub const TransposedTableOption = struct {
     column_type: TransposedColumnType,
 
     /// The width of a column in a transposed table.
-    column_width: ?[]const u8,
+    column_width: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .column_index = "ColumnIndex",

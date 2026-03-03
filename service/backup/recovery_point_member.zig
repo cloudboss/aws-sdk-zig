@@ -5,19 +5,19 @@
 pub const RecoveryPointMember = struct {
     /// The name of the backup vault
     /// (the logical container in which backups are stored).
-    backup_vault_name: ?[]const u8,
+    backup_vault_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the parent (composite)
     /// recovery point.
-    recovery_point_arn: ?[]const u8,
+    recovery_point_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies
     /// a saved resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The Amazon Web Services resource type that is saved as
     /// a recovery point.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .backup_vault_name = "BackupVaultName",

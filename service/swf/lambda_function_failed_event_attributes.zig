@@ -2,10 +2,10 @@
 /// other event types.
 pub const LambdaFunctionFailedEventAttributes = struct {
     /// The details of the failure.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// The reason provided for the failure.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The ID of the `LambdaFunctionScheduled` event that was recorded when this
     /// activity task was scheduled. To help diagnose issues, use this information

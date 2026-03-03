@@ -5,7 +5,7 @@ const Industry = @import("industry.zig").Industry;
 pub const AccountSummary = struct {
     /// Specifies the end `Customer`'s address details associated with the
     /// `Opportunity`.
-    address: ?AddressSummary,
+    address: ?AddressSummary = null,
 
     /// Specifies the end `Customer`'s company name associated with the
     /// `Opportunity`.
@@ -19,18 +19,18 @@ pub const AccountSummary = struct {
     ///
     /// Conditionally mandatory if `Other` is selected for Industry Vertical in
     /// LOVs.
-    industry: ?Industry,
+    industry: ?Industry = null,
 
     /// Specifies the end `Customer`'s industry associated with the ` Opportunity`,
     /// when the selected value in the `Industry` field is `Other`. This field is
     /// relevant when the customer's industry doesn't fall under the predefined
     /// picklist values and requires a custom description.
-    other_industry: ?[]const u8,
+    other_industry: ?[]const u8 = null,
 
     /// Specifies the end customer's company website URL associated with the
     /// `Opportunity`. This value is crucial to map the customer within the Amazon
     /// Web Services CRM system.
-    website_url: ?[]const u8,
+    website_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .address = "Address",

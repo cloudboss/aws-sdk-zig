@@ -5,9 +5,9 @@ const FlinkRunConfiguration = @import("flink_run_configuration.zig").FlinkRunCon
 /// application.
 pub const RunConfigurationDescription = struct {
     /// Describes the restore behavior of a restarting application.
-    application_restore_configuration_description: ?ApplicationRestoreConfiguration,
+    application_restore_configuration_description: ?ApplicationRestoreConfiguration = null,
 
-    flink_run_configuration_description: ?FlinkRunConfiguration,
+    flink_run_configuration_description: ?FlinkRunConfiguration = null,
 
     pub const json_field_names = .{
         .application_restore_configuration_description = "ApplicationRestoreConfigurationDescription",

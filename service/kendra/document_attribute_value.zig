@@ -9,16 +9,16 @@ pub const DocumentAttributeValue = struct {
     /// example, 2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format for
     /// March 25th 2012
     /// at 12:30PM (plus 10 seconds) in Central European Time.
-    date_value: ?i64,
+    date_value: ?i64 = null,
 
     /// A long integer value.
-    long_value: ?i64,
+    long_value: ?i64 = null,
 
     /// A list of strings. The default maximum length or number of strings is 10.
-    string_list_value: ?[]const []const u8,
+    string_list_value: ?[]const []const u8 = null,
 
     /// A string, such as "department".
-    string_value: ?[]const u8,
+    string_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .date_value = "DateValue",

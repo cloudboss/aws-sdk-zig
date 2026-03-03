@@ -14,14 +14,14 @@ pub const EffectivePatch = struct {
     /// severity,
     /// classification and a URL for where more information can be obtained about
     /// the patch.
-    patch: ?Patch,
+    patch: ?Patch = null,
 
     /// The status of the patch in a patch baseline. This includes information about
     /// whether the
     /// patch is currently approved, due to be approved by a rule, explicitly
     /// approved, or explicitly
     /// rejected and the date the patch was or will be approved.
-    patch_status: ?PatchStatus,
+    patch_status: ?PatchStatus = null,
 
     pub const json_field_names = .{
         .patch = "Patch",

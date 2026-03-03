@@ -5,7 +5,7 @@ const CustomLineItemRelationship = @import("custom_line_item_relationship.zig").
 pub const ListResourcesAssociatedToCustomLineItemFilter = struct {
     /// The type of relationship between the custom line item and the associated
     /// resource.
-    relationship: ?CustomLineItemRelationship,
+    relationship: ?CustomLineItemRelationship = null,
 
     pub const json_field_names = .{
         .relationship = "Relationship",

@@ -5,10 +5,10 @@ const MessageUsefulness = @import("message_usefulness.zig").MessageUsefulness;
 pub const MessageUsefulnessFeedback = struct {
     /// A comment given by an end user on the usefulness of an AI-generated chat
     /// message.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The reason for a usefulness rating.
-    reason: ?MessageUsefulnessReason,
+    reason: ?MessageUsefulnessReason = null,
 
     /// The timestamp for when the feedback was submitted.
     submitted_at: i64,

@@ -4,7 +4,7 @@ const OutboundStrategyType = @import("outbound_strategy_type.zig").OutboundStrat
 /// Information about the outbound strategy.
 pub const OutboundStrategy = struct {
     /// Config of the outbound strategy.
-    config: ?OutboundStrategyConfig,
+    config: ?OutboundStrategyConfig = null,
 
     /// Type of the outbound strategy.
     @"type": OutboundStrategyType,

@@ -20,7 +20,7 @@ pub const CollapseConfiguration = struct {
     /// Provides configuration information to customize expansion options for a
     /// collapsed
     /// group.
-    expand_configuration: ?ExpandConfiguration,
+    expand_configuration: ?ExpandConfiguration = null,
 
     /// Specifies the behavior for documents without a value for the collapse
     /// attribute.
@@ -35,12 +35,12 @@ pub const CollapseConfiguration = struct {
     ///
     /// * Choose to `EXPAND` each document with a null or missing value into
     /// a group of its own.
-    missing_attribute_key_strategy: ?MissingAttributeKeyStrategy,
+    missing_attribute_key_strategy: ?MissingAttributeKeyStrategy = null,
 
     /// A prioritized list of document attributes/fields that determine the primary
     /// document
     /// among those in a collapsed group.
-    sorting_configurations: ?[]const SortingConfiguration,
+    sorting_configurations: ?[]const SortingConfiguration = null,
 
     pub const json_field_names = .{
         .document_attribute_key = "DocumentAttributeKey",

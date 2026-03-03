@@ -13,7 +13,7 @@ const TimeSeriesIdentifiers = @import("time_series_identifiers.zig").TimeSeriesI
 pub const TimeSeriesSelector = struct {
     /// Details about the import file that contains the time series for which you
     /// want to create forecasts.
-    time_series_identifiers: ?TimeSeriesIdentifiers,
+    time_series_identifiers: ?TimeSeriesIdentifiers = null,
 
     pub const json_field_names = .{
         .time_series_identifiers = "TimeSeriesIdentifiers",

@@ -5,7 +5,7 @@ const GroupByField = @import("group_by_field.zig").GroupByField;
 pub const GroupByRule = struct {
     /// The criteria used to select which security findings should be included in
     /// the grouping operation.
-    filters: ?OcsfFindingFilters,
+    filters: ?OcsfFindingFilters = null,
 
     /// The attribute by which filtered findings should be grouped.
     group_by_field: GroupByField,

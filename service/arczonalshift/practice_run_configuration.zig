@@ -25,7 +25,7 @@ pub const PracticeRunConfiguration = struct {
     ///
     /// The `allowedWindows` have to start and end on the same day. Windows that
     /// span multiple days aren't supported.
-    allowed_windows: ?[]const []const u8,
+    allowed_windows: ?[]const []const u8 = null,
 
     /// An array of one or more dates that you can specify when Amazon Web Services
     /// does not start practice runs for a resource.
@@ -42,12 +42,12 @@ pub const PracticeRunConfiguration = struct {
     ///
     /// The `blockedWindows` have to start and end on the same day. Windows that
     /// span multiple days aren't supported.
-    blocked_windows: ?[]const []const u8,
+    blocked_windows: ?[]const []const u8 = null,
 
     /// *Blocking alarms* for practice runs are optional alarms that you can specify
     /// that block practice runs when one or more of the alarms is in an `ALARM`
     /// state.
-    blocking_alarms: ?[]const ControlCondition,
+    blocking_alarms: ?[]const ControlCondition = null,
 
     /// *Outcome alarms* for practice runs are alarms that you specify that end a
     /// practice run when one or more of the alarms is in an `ALARM` state.

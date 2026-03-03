@@ -5,15 +5,15 @@ const ConvergenceDetected = @import("convergence_detected.zig").ConvergenceDetec
 pub const TuningJobCompletionCriteria = struct {
     /// A flag to stop your hyperparameter tuning job if model performance fails to
     /// improve as evaluated against an objective function.
-    best_objective_not_improving: ?BestObjectiveNotImproving,
+    best_objective_not_improving: ?BestObjectiveNotImproving = null,
 
     /// A flag to top your hyperparameter tuning job if automatic model tuning (AMT)
     /// has detected that your model has converged as evaluated against your
     /// objective function.
-    convergence_detected: ?ConvergenceDetected,
+    convergence_detected: ?ConvergenceDetected = null,
 
     /// The value of the objective metric.
-    target_objective_metric_value: ?f32,
+    target_objective_metric_value: ?f32 = null,
 
     pub const json_field_names = .{
         .best_objective_not_improving = "BestObjectiveNotImproving",

@@ -4,10 +4,10 @@ const VpcEndpointServiceName = @import("vpc_endpoint_service_name.zig").VpcEndpo
 /// services
 pub const ServiceVpcEndpoint = struct {
     /// The name of the service for which a VPC endpoint was created.
-    service_name: ?VpcEndpointServiceName,
+    service_name: ?VpcEndpointServiceName = null,
 
     /// The unique identifier of the VPC endpoint that was created.
-    vpc_endpoint_id: ?[]const u8,
+    vpc_endpoint_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .service_name = "ServiceName",

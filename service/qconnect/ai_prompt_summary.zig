@@ -26,14 +26,14 @@ pub const AIPromptSummary = struct {
     assistant_id: []const u8,
 
     /// The description of the AI Prompt.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the model used for this AI Prompt. Model Ids supported
     /// are: `anthropic.claude-3-haiku-20240307-v1:0`.
     model_id: []const u8,
 
     /// The time the AI Prompt was last modified.
-    modified_time: ?i64,
+    modified_time: ?i64 = null,
 
     /// The name of the AI Prompt.
     name: []const u8,
@@ -41,13 +41,13 @@ pub const AIPromptSummary = struct {
     /// The origin of the AI Prompt. `SYSTEM` for a default AI Prompt created by Q
     /// in Connect or `CUSTOMER` for an AI Prompt created by calling AI Prompt
     /// creation APIs.
-    origin: ?Origin,
+    origin: ?Origin = null,
 
     /// The status of the AI Prompt.
-    status: ?Status,
+    status: ?Status = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the prompt template for this AI Prompt.
     template_type: AIPromptTemplateType,

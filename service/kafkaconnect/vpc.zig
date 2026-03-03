@@ -1,7 +1,7 @@
 /// Information about the VPC in which the connector resides.
 pub const Vpc = struct {
     /// The security groups for the connector.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// The subnets for the connector.
     subnets: []const []const u8,

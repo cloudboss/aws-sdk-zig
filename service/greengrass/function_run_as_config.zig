@@ -7,10 +7,10 @@
 /// ''allowFunctionsToRunAsRoot'' to ''yes''.
 pub const FunctionRunAsConfig = struct {
     /// The group ID whose permissions are used to run a Lambda function.
-    gid: ?i32,
+    gid: ?i32 = null,
 
     /// The user ID whose permissions are used to run a Lambda function.
-    uid: ?i32,
+    uid: ?i32 = null,
 
     pub const json_field_names = .{
         .gid = "Gid",

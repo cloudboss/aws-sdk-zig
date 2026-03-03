@@ -9,12 +9,12 @@ pub const GuardrailContextualGroundingFilter = struct {
     /// * `BLOCK` – Block the content and replace it with blocked messaging.
     /// * `NONE` – Take no action but return detection information in the trace
     ///   response.
-    action: ?GuardrailContextualGroundingAction,
+    action: ?GuardrailContextualGroundingAction = null,
 
     /// Indicates whether contextual grounding is enabled for evaluation. When
     /// disabled, you aren't charged for the evaluation. The evaluation doesn't
     /// appear in the response.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The threshold details for the guardrails contextual grounding filter.
     threshold: f64,

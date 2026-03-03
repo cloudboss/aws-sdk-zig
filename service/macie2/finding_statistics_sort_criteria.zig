@@ -7,12 +7,12 @@ pub const FindingStatisticsSortCriteria = struct {
     /// The grouping to sort the results by. Valid values are: count, sort the
     /// results by the number of findings in each group of results; and, groupKey,
     /// sort the results by the name of each group of results.
-    attribute_name: ?FindingStatisticsSortAttributeName,
+    attribute_name: ?FindingStatisticsSortAttributeName = null,
 
     /// The sort order to apply to the results, based on the value for the property
     /// specified by the attributeName property. Valid values are: ASC, sort the
     /// results in ascending order; and, DESC, sort the results in descending order.
-    order_by: ?OrderBy,
+    order_by: ?OrderBy = null,
 
     pub const json_field_names = .{
         .attribute_name = "attributeName",

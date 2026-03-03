@@ -5,19 +5,19 @@ const ViewType = @import("view_type.zig").ViewType;
 /// Defines the search criteria for filtering views.
 pub const ViewSearchCriteria = struct {
     /// A list of conditions that must all be satisfied.
-    and_conditions: ?[]const ViewSearchCriteria,
+    and_conditions: ?[]const ViewSearchCriteria = null,
 
     /// A list of conditions to be met, where at least one condition must be
     /// satisfied.
-    or_conditions: ?[]const ViewSearchCriteria,
+    or_conditions: ?[]const ViewSearchCriteria = null,
 
-    string_condition: ?StringCondition,
+    string_condition: ?StringCondition = null,
 
     /// A condition that filters views by their status.
-    view_status_condition: ?ViewStatus,
+    view_status_condition: ?ViewStatus = null,
 
     /// A condition that filters views by their type.
-    view_type_condition: ?ViewType,
+    view_type_condition: ?ViewType = null,
 
     pub const json_field_names = .{
         .and_conditions = "AndConditions",

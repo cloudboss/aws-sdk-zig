@@ -9,7 +9,7 @@ pub const AvcIntraUhdSettings = struct {
     /// actual bitrate of your output is closer to the target bitrate defined in the
     /// specification. When you choose Single-pass, your encoding time is faster.
     /// The default behavior is Single-pass.
-    quality_tuning_level: ?AvcIntraUhdQualityTuningLevel,
+    quality_tuning_level: ?AvcIntraUhdQualityTuningLevel = null,
 
     pub const json_field_names = .{
         .quality_tuning_level = "QualityTuningLevel",

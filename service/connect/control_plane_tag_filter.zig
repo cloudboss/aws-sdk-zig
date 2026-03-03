@@ -12,13 +12,13 @@ const TagCondition = @import("tag_condition.zig").TagCondition;
 pub const ControlPlaneTagFilter = struct {
     /// A list of conditions which would be applied together with an `AND`
     /// condition.
-    and_conditions: ?[]const TagCondition,
+    and_conditions: ?[]const TagCondition = null,
 
     /// A list of conditions which would be applied together with an `OR` condition.
-    or_conditions: ?[]const []const TagCondition,
+    or_conditions: ?[]const []const TagCondition = null,
 
     /// A leaf node condition which can be used to specify a tag condition.
-    tag_condition: ?TagCondition,
+    tag_condition: ?TagCondition = null,
 
     pub const json_field_names = .{
         .and_conditions = "AndConditions",

@@ -19,14 +19,14 @@ const HumanWorkflowConfig = @import("human_workflow_config.zig").HumanWorkflowCo
 pub const HumanEvaluationConfig = struct {
     /// A `HumanEvaluationCustomMetric` object. It contains the names the metrics,
     /// how the metrics are to be evaluated, an optional description.
-    custom_metrics: ?[]const HumanEvaluationCustomMetric,
+    custom_metrics: ?[]const HumanEvaluationCustomMetric = null,
 
     /// Use to specify the metrics, task, and prompt dataset to be used in your
     /// model evaluation job.
     dataset_metric_configs: []const EvaluationDatasetMetricConfig,
 
     /// The parameters of the human workflow.
-    human_workflow_config: ?HumanWorkflowConfig,
+    human_workflow_config: ?HumanWorkflowConfig = null,
 
     pub const json_field_names = .{
         .custom_metrics = "customMetrics",

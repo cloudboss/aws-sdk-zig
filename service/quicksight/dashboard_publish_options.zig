@@ -17,52 +17,52 @@ const DashboardVisualPublishOptions = @import("dashboard_visual_publish_options.
 /// Dashboard publish options.
 pub const DashboardPublishOptions = struct {
     /// Ad hoc (one-time) filtering option.
-    ad_hoc_filtering_option: ?AdHocFilteringOption,
+    ad_hoc_filtering_option: ?AdHocFilteringOption = null,
 
     /// The drill-down options of data points in a dashboard.
-    data_point_drill_up_down_option: ?DataPointDrillUpDownOption,
+    data_point_drill_up_down_option: ?DataPointDrillUpDownOption = null,
 
     /// The data point menu label options of a dashboard.
-    data_point_menu_label_option: ?DataPointMenuLabelOption,
+    data_point_menu_label_option: ?DataPointMenuLabelOption = null,
 
     /// The data point tool tip options of a dashboard.
-    data_point_tooltip_option: ?DataPointTooltipOption,
+    data_point_tooltip_option: ?DataPointTooltipOption = null,
 
     /// Adds Q&A capabilities to an Quick Sight dashboard. If no topic is linked,
     /// Dashboard Q&A uses the data values that are rendered on the dashboard. End
     /// users can use Dashboard Q&A to ask for different slices of the data that
     /// they see on the dashboard. If a topic is linked, Topic Q&A is used.
-    data_qa_enabled_option: ?DataQAEnabledOption,
+    data_qa_enabled_option: ?DataQAEnabledOption = null,
 
     /// Data stories sharing option.
-    data_stories_sharing_option: ?DataStoriesSharingOption,
+    data_stories_sharing_option: ?DataStoriesSharingOption = null,
 
     /// Executive summary option.
-    executive_summary_option: ?ExecutiveSummaryOption,
+    executive_summary_option: ?ExecutiveSummaryOption = null,
 
     /// Export to .csv option.
-    export_to_csv_option: ?ExportToCSVOption,
+    export_to_csv_option: ?ExportToCSVOption = null,
 
     /// Determines if hidden fields are exported with a dashboard.
-    export_with_hidden_fields_option: ?ExportWithHiddenFieldsOption,
+    export_with_hidden_fields_option: ?ExportWithHiddenFieldsOption = null,
 
     /// Determines if Actions in Amazon Quick Suite are enabled in a dashboard.
-    quick_suite_actions_option: ?QuickSuiteActionsOption,
+    quick_suite_actions_option: ?QuickSuiteActionsOption = null,
 
     /// Sheet controls option.
-    sheet_controls_option: ?SheetControlsOption,
+    sheet_controls_option: ?SheetControlsOption = null,
 
     /// The sheet layout maximization options of a dashbaord.
-    sheet_layout_element_maximization_option: ?SheetLayoutElementMaximizationOption,
+    sheet_layout_element_maximization_option: ?SheetLayoutElementMaximizationOption = null,
 
     /// The axis sort options of a dashboard.
-    visual_axis_sort_option: ?VisualAxisSortOption,
+    visual_axis_sort_option: ?VisualAxisSortOption = null,
 
     /// The menu options of a visual in a dashboard.
-    visual_menu_option: ?VisualMenuOption,
+    visual_menu_option: ?VisualMenuOption = null,
 
     /// The visual publish options of a visual in a dashboard.
-    visual_publish_options: ?DashboardVisualPublishOptions,
+    visual_publish_options: ?DashboardVisualPublishOptions = null,
 
     pub const json_field_names = .{
         .ad_hoc_filtering_option = "AdHocFilteringOption",

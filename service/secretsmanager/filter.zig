@@ -26,13 +26,13 @@ pub const Filter = struct {
     ///
     /// * **all**: Breaks the filter value string into
     /// words and then searches all attributes for matches. Not case-sensitive.
-    key: ?FilterNameStringType,
+    key: ?FilterNameStringType = null,
 
     /// The keyword to filter for.
     ///
     /// You can prefix your search value with an exclamation mark (`!`) in order to
     /// perform negation filters.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

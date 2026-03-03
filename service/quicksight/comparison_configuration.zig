@@ -4,7 +4,7 @@ const ComparisonMethod = @import("comparison_method.zig").ComparisonMethod;
 /// The comparison display configuration of a KPI or gauge chart.
 pub const ComparisonConfiguration = struct {
     /// The format of the comparison.
-    comparison_format: ?ComparisonFormatConfiguration,
+    comparison_format: ?ComparisonFormatConfiguration = null,
 
     /// The method of the comparison. Choose from the following options:
     ///
@@ -13,7 +13,7 @@ pub const ComparisonConfiguration = struct {
     /// * `PERCENT_DIFFERENCE`
     ///
     /// * `PERCENT`
-    comparison_method: ?ComparisonMethod,
+    comparison_method: ?ComparisonMethod = null,
 
     pub const json_field_names = .{
         .comparison_format = "ComparisonFormat",

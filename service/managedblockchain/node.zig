@@ -10,22 +10,22 @@ pub const Node = struct {
     /// The Amazon Resource Name (ARN) of the node. For more information about ARNs
     /// and their format, see [Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon Web Services General Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Availability Zone in which the node exists. Required for Ethereum nodes.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The date and time that the node was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// Attributes of the blockchain framework being used.
-    framework_attributes: ?NodeFrameworkAttributes,
+    framework_attributes: ?NodeFrameworkAttributes = null,
 
     /// The unique identifier of the node.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The instance type of the node.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the customer managed key in Key Management
     /// Service (KMS) that the node uses for encryption at rest. If the value of
@@ -37,24 +37,24 @@ pub const Node = struct {
     /// Rest](https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html) in the *Amazon Managed Blockchain Hyperledger Fabric Developer Guide*.
     ///
     /// Applies only to Hyperledger Fabric.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// Configuration properties for logging events associated with a peer node on a
     /// Hyperledger Fabric network on Managed Blockchain.
-    log_publishing_configuration: ?NodeLogPublishingConfiguration,
+    log_publishing_configuration: ?NodeLogPublishingConfiguration = null,
 
     /// The unique identifier of the member to which the node belongs.
     ///
     /// Applies only to Hyperledger Fabric.
-    member_id: ?[]const u8,
+    member_id: ?[]const u8 = null,
 
     /// The unique identifier of the network that the node is on.
-    network_id: ?[]const u8,
+    network_id: ?[]const u8 = null,
 
     /// The state database that the node uses. Values are `LevelDB` or `CouchDB`.
     ///
     /// Applies only to Hyperledger Fabric.
-    state_db: ?StateDBType,
+    state_db: ?StateDBType = null,
 
     /// The status of the node.
     ///
@@ -90,13 +90,13 @@ pub const Node = struct {
     /// immediate. It might take some time for the node resource to discover that
     /// the key is inaccessible. When a resource is in this state, we recommend
     /// deleting and recreating the resource.
-    status: ?NodeStatus,
+    status: ?NodeStatus = null,
 
     /// Tags assigned to the node. Each tag consists of a key and optional value.
     ///
     /// For more information about tags, see [Tagging
     /// Resources](https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html) in the *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging Resources](https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html) in the *Amazon Managed Blockchain Hyperledger Fabric Developer Guide*.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

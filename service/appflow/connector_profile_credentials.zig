@@ -21,59 +21,59 @@ const ZendeskConnectorProfileCredentials = @import("zendesk_connector_profile_cr
 /// The connector-specific credentials required by a connector.
 pub const ConnectorProfileCredentials = struct {
     /// The connector-specific credentials required when using Amplitude.
-    amplitude: ?AmplitudeConnectorProfileCredentials,
+    amplitude: ?AmplitudeConnectorProfileCredentials = null,
 
-    custom_connector: ?CustomConnectorProfileCredentials,
+    custom_connector: ?CustomConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Datadog.
-    datadog: ?DatadogConnectorProfileCredentials,
+    datadog: ?DatadogConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Dynatrace.
-    dynatrace: ?DynatraceConnectorProfileCredentials,
+    dynatrace: ?DynatraceConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Google Analytics.
-    google_analytics: ?GoogleAnalyticsConnectorProfileCredentials,
+    google_analytics: ?GoogleAnalyticsConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Amazon Honeycode.
-    honeycode: ?HoneycodeConnectorProfileCredentials,
+    honeycode: ?HoneycodeConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Infor Nexus.
-    infor_nexus: ?InforNexusConnectorProfileCredentials,
+    infor_nexus: ?InforNexusConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Marketo.
-    marketo: ?MarketoConnectorProfileCredentials,
+    marketo: ?MarketoConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Salesforce Pardot.
-    pardot: ?PardotConnectorProfileCredentials,
+    pardot: ?PardotConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Amazon Redshift.
-    redshift: ?RedshiftConnectorProfileCredentials,
+    redshift: ?RedshiftConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Salesforce.
-    salesforce: ?SalesforceConnectorProfileCredentials,
+    salesforce: ?SalesforceConnectorProfileCredentials = null,
 
-    sapo_data: ?SAPODataConnectorProfileCredentials,
+    sapo_data: ?SAPODataConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using ServiceNow.
-    service_now: ?ServiceNowConnectorProfileCredentials,
+    service_now: ?ServiceNowConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Singular.
-    singular: ?SingularConnectorProfileCredentials,
+    singular: ?SingularConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Slack.
-    slack: ?SlackConnectorProfileCredentials,
+    slack: ?SlackConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Snowflake.
-    snowflake: ?SnowflakeConnectorProfileCredentials,
+    snowflake: ?SnowflakeConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Trend Micro.
-    trendmicro: ?TrendmicroConnectorProfileCredentials,
+    trendmicro: ?TrendmicroConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Veeva.
-    veeva: ?VeevaConnectorProfileCredentials,
+    veeva: ?VeevaConnectorProfileCredentials = null,
 
     /// The connector-specific credentials required when using Zendesk.
-    zendesk: ?ZendeskConnectorProfileCredentials,
+    zendesk: ?ZendeskConnectorProfileCredentials = null,
 
     pub const json_field_names = .{
         .amplitude = "Amplitude",

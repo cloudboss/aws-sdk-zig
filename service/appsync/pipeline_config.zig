@@ -1,7 +1,7 @@
 /// The pipeline configuration for a resolver of kind `PIPELINE`.
 pub const PipelineConfig = struct {
     /// A list of `Function` objects.
-    functions: ?[]const []const u8,
+    functions: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .functions = "functions",

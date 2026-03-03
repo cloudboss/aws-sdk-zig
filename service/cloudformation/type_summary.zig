@@ -15,17 +15,17 @@ pub const TypeSummary = struct {
     /// [RegisterType](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html).
     ///
     /// To set the default version of an extension, use SetTypeDefaultVersion.
-    default_version_id: ?[]const u8,
+    default_version_id: ?[]const u8 = null,
 
     /// The description of the extension.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether the extension is activated for this account and Region.
     ///
     /// This applies only to third-party public extensions. Extensions published by
     /// Amazon are
     /// activated by default.
-    is_activated: ?bool,
+    is_activated: ?bool = null,
 
     /// When the specified extension version was registered. This applies only to:
     ///
@@ -39,7 +39,7 @@ pub const TypeSummary = struct {
     /// [ActivateType](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html).
     ///
     /// For all other extension types, CloudFormation returns `null`.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// For public extensions that have been activated for this account and Region,
     /// the latest
@@ -53,7 +53,7 @@ pub const TypeSummary = struct {
     /// released. For more information, see [Automatically use new versions of
     /// extensions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto) in the
     /// *CloudFormation User Guide*.
-    latest_public_version: ?[]const u8,
+    latest_public_version: ?[]const u8 = null,
 
     /// For public extensions that have been activated for this account and Region,
     /// the type name of
@@ -67,7 +67,7 @@ pub const TypeSummary = struct {
     /// [Use
     /// aliases to refer to
     /// extensions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias) in the *CloudFormation User Guide*.
-    original_type_name: ?[]const u8,
+    original_type_name: ?[]const u8 = null,
 
     /// For public extensions that have been activated for this account and Region,
     /// the version of
@@ -80,30 +80,30 @@ pub const TypeSummary = struct {
     /// released. For more information, see [Automatically use new versions of
     /// extensions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto) in the
     /// *CloudFormation User Guide*.
-    public_version_number: ?[]const u8,
+    public_version_number: ?[]const u8 = null,
 
     /// The ID of the extension publisher, if the extension is published by a third
     /// party.
     /// Extensions published by Amazon don't return a publisher ID.
-    publisher_id: ?[]const u8,
+    publisher_id: ?[]const u8 = null,
 
     /// The service used to verify the publisher identity.
     ///
     /// For more information, see [Publishing extensions to make
     /// them available for public
     /// use](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html) in the *CloudFormation Command Line Interface (CLI) User Guide*.
-    publisher_identity: ?IdentityProvider,
+    publisher_identity: ?IdentityProvider = null,
 
     /// The publisher name, as defined in the public profile for that publisher in
     /// the service used
     /// to verify the publisher identity.
-    publisher_name: ?[]const u8,
+    publisher_name: ?[]const u8 = null,
 
     /// The kind of extension.
-    @"type": ?RegistryType,
+    @"type": ?RegistryType = null,
 
     /// The ARN of the extension.
-    type_arn: ?[]const u8,
+    type_arn: ?[]const u8 = null,
 
     /// The name of the extension.
     ///
@@ -111,5 +111,5 @@ pub const TypeSummary = struct {
     /// [ActivateType](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html) API
     /// operation in your account and Region, CloudFormation considers that alias as
     /// the type name.
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 };

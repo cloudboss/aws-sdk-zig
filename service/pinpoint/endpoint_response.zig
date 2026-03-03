@@ -15,37 +15,37 @@ pub const EndpointResponse = struct {
     /// device token or a Firebase Cloud Messaging (FCM) registration token. The
     /// address for the SMS channel is a phone number in E.164 format, such as
     /// +12065550100. The address for the email channel is an email address.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// The unique identifier for the application that's associated with the
     /// endpoint.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// One or more custom attributes that describe the endpoint by associating a
     /// name with an array of values. For example, the value of a custom attribute
     /// named Interests might be: ["Science", "Music", "Travel"]. You can use these
     /// attributes as filter criteria when you create segments.
-    attributes: ?[]const aws.map.MapEntry([]const []const u8),
+    attributes: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The channel that's used when sending messages or push notifications to the
     /// endpoint.
-    channel_type: ?ChannelType,
+    channel_type: ?ChannelType = null,
 
     /// A number from 0-99 that represents the cohort that the endpoint is assigned
     /// to. Endpoints are grouped into cohorts randomly, and each cohort contains
     /// approximately 1 percent of the endpoints for an application. Amazon Pinpoint
     /// assigns cohorts to the holdout or treatment allocations for campaigns.
-    cohort_id: ?[]const u8,
+    cohort_id: ?[]const u8 = null,
 
     /// The date and time, in ISO 8601 format, when the endpoint was created.
-    creation_date: ?[]const u8,
+    creation_date: ?[]const u8 = null,
 
     /// The demographic information for the endpoint, such as the time zone and
     /// platform.
-    demographic: ?EndpointDemographic,
+    demographic: ?EndpointDemographic = null,
 
     /// The date and time, in ISO 8601 format, when the endpoint was last updated.
-    effective_date: ?[]const u8,
+    effective_date: ?[]const u8 = null,
 
     /// Specifies whether messages or push notifications are sent to the endpoint.
     /// Possible values are: ACTIVE, messages are sent to the endpoint; and,
@@ -55,34 +55,34 @@ pub const EndpointResponse = struct {
     /// endpoint or update an existing endpoint. Amazon Pinpoint automatically sets
     /// this value to INACTIVE if you update another endpoint that has the same
     /// address specified by the Address property.
-    endpoint_status: ?[]const u8,
+    endpoint_status: ?[]const u8 = null,
 
     /// The unique identifier that you assigned to the endpoint. The identifier
     /// should be a globally unique identifier (GUID) to ensure that it doesn't
     /// conflict with other endpoint identifiers that are associated with the
     /// application.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The geographic information for the endpoint.
-    location: ?EndpointLocation,
+    location: ?EndpointLocation = null,
 
     /// One or more custom metrics that your app reports to Amazon Pinpoint for the
     /// endpoint.
-    metrics: ?[]const aws.map.MapEntry(f64),
+    metrics: ?[]const aws.map.MapEntry(f64) = null,
 
     /// Specifies whether the user who's associated with the endpoint has opted out
     /// of receiving messages and push notifications from you. Possible values are:
     /// ALL, the user has opted out and doesn't want to receive any messages or push
     /// notifications; and, NONE, the user hasn't opted out and wants to receive all
     /// messages and push notifications.
-    opt_out: ?[]const u8,
+    opt_out: ?[]const u8 = null,
 
     /// The unique identifier for the most recent request to update the endpoint.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// One or more custom user attributes that your app reports to Amazon Pinpoint
     /// for the user who's associated with the endpoint.
-    user: ?EndpointUser,
+    user: ?EndpointUser = null,
 
     pub const json_field_names = .{
         .address = "Address",

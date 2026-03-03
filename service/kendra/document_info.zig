@@ -22,7 +22,7 @@ pub const DocumentInfo = struct {
     ///
     /// * If `dataSourceId` and `jobExecutionId` are provided, but
     /// `version` is not, the version defaults to "0".
-    attributes: ?[]const DocumentAttribute,
+    attributes: ?[]const DocumentAttribute = null,
 
     /// The identifier of the document.
     document_id: []const u8,

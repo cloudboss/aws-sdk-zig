@@ -3,7 +3,7 @@
 pub const S3AccessPointVpcConfiguration = struct {
     /// Specifies the virtual private cloud (VPC) for the S3 access point VPC
     /// configuration, if one exists.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .vpc_id = "VpcId",

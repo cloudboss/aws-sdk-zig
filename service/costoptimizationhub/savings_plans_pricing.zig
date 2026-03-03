@@ -1,17 +1,17 @@
 /// Pricing information about a Savings Plans.
 pub const SavingsPlansPricing = struct {
     /// Estimated monthly commitment for the Savings Plans.
-    estimated_monthly_commitment: ?f64,
+    estimated_monthly_commitment: ?f64 = null,
 
     /// Estimated On-Demand cost you will pay after buying the Savings Plans.
-    estimated_on_demand_cost: ?f64,
+    estimated_on_demand_cost: ?f64 = null,
 
     /// The cost of paying for the recommended Savings Plans monthly.
-    monthly_savings_plans_eligible_cost: ?f64,
+    monthly_savings_plans_eligible_cost: ?f64 = null,
 
     /// Estimated savings as a percentage of your overall costs after buying the
     /// Savings Plans.
-    savings_percentage: ?f64,
+    savings_percentage: ?f64 = null,
 
     pub const json_field_names = .{
         .estimated_monthly_commitment = "estimatedMonthlyCommitment",

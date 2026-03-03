@@ -7,12 +7,12 @@ pub const KeyRange = struct {
     /// The key that starts an optional key range for an export job. Ranges are
     /// inclusive and
     /// UTF-8 binary sorted.
-    begin_marker: ?[]const u8,
+    begin_marker: ?[]const u8 = null,
 
     /// The key that ends an optional key range for an export job. Ranges are
     /// inclusive and
     /// UTF-8 binary sorted.
-    end_marker: ?[]const u8,
+    end_marker: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .begin_marker = "BeginMarker",

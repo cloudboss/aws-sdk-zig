@@ -8,10 +8,10 @@ const InstanceSavingsOpportunityAfterDiscounts = @import("instance_savings_oppor
 /// Describes a recommendation option for an Amazon EC2 instance.
 pub const InstanceRecommendationOption = struct {
     /// Describes the GPU accelerator settings for the recommended instance type.
-    instance_gpu_info: ?GpuInfo,
+    instance_gpu_info: ?GpuInfo = null,
 
     /// The instance type of the instance recommendation.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// The level of effort required to migrate from the current instance type to
     /// the
@@ -25,7 +25,7 @@ pub const InstanceRecommendationOption = struct {
     /// effort is
     /// `VeryLow` if both the current and recommended instance types are of the
     /// same CPU architecture.
-    migration_effort: ?MigrationEffort,
+    migration_effort: ?MigrationEffort = null,
 
     /// The performance risk of the instance recommendation option.
     ///
@@ -174,7 +174,7 @@ pub const InstanceRecommendationOption = struct {
     /// Machine Image (AMI) that supports the new architecture. For more information
     /// about the CPU architecture for each instance type, see [Amazon EC2 Instance
     /// Types](http://aws.amazon.com/ec2/instance-types/).
-    platform_differences: ?[]const PlatformDifference,
+    platform_differences: ?[]const PlatformDifference = null,
 
     /// An array of objects that describe the projected utilization metrics of the
     /// instance
@@ -186,7 +186,7 @@ pub const InstanceRecommendationOption = struct {
     /// on them. For more information, see [Enabling Memory
     /// Utilization with the CloudWatch
     /// Agent](https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
-    projected_utilization_metrics: ?[]const UtilizationMetric,
+    projected_utilization_metrics: ?[]const UtilizationMetric = null,
 
     /// The rank of the instance recommendation option.
     ///
@@ -198,13 +198,13 @@ pub const InstanceRecommendationOption = struct {
     /// option. Savings opportunity includes the estimated monthly savings amount
     /// and
     /// percentage.
-    savings_opportunity: ?SavingsOpportunity,
+    savings_opportunity: ?SavingsOpportunity = null,
 
     /// An object that describes the savings opportunity for the instance
     /// recommendation option that includes Savings Plans and Reserved Instances
     /// discounts. Savings opportunity includes the estimated monthly savings and
     /// percentage.
-    savings_opportunity_after_discounts: ?InstanceSavingsOpportunityAfterDiscounts,
+    savings_opportunity_after_discounts: ?InstanceSavingsOpportunityAfterDiscounts = null,
 
     pub const json_field_names = .{
         .instance_gpu_info = "instanceGpuInfo",

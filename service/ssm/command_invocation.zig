@@ -16,45 +16,45 @@ pub const CommandInvocation = struct {
     /// Amazon CloudWatch Logs information where you want Amazon Web Services
     /// Systems Manager to send the command
     /// output.
-    cloud_watch_output_config: ?CloudWatchOutputConfig,
+    cloud_watch_output_config: ?CloudWatchOutputConfig = null,
 
     /// The command against which this invocation was requested.
-    command_id: ?[]const u8,
+    command_id: ?[]const u8 = null,
 
     /// Plugins processed by the command.
-    command_plugins: ?[]const CommandPlugin,
+    command_plugins: ?[]const CommandPlugin = null,
 
     /// User-specified information about the command, such as a brief description of
     /// what the
     /// command should do.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The document name that was requested for execution.
-    document_name: ?[]const u8,
+    document_name: ?[]const u8 = null,
 
     /// The Systems Manager document (SSM document) version.
-    document_version: ?[]const u8,
+    document_version: ?[]const u8 = null,
 
     /// The managed node ID in which this invocation was requested.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The fully qualified host name of the managed node.
-    instance_name: ?[]const u8,
+    instance_name: ?[]const u8 = null,
 
     /// Configurations for sending notifications about command status changes on a
     /// per managed node
     /// basis.
-    notification_config: ?NotificationConfig,
+    notification_config: ?NotificationConfig = null,
 
     /// The time and date the request was sent to this managed node.
-    requested_date_time: ?i64,
+    requested_date_time: ?i64 = null,
 
     /// The Identity and Access Management (IAM) service role that Run Command, a
     /// tool in
     /// Amazon Web Services Systems Manager, uses to act on your behalf when sending
     /// notifications about command status changes on
     /// a per managed node basis.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
     /// The URL to the plugin's StdErr file in Amazon Simple Storage Service (Amazon
     /// S3), if the S3
@@ -63,7 +63,7 @@ pub const CommandInvocation = struct {
     /// populated if there is just one plugin defined for the command, and the S3
     /// bucket was defined for
     /// the command.
-    standard_error_url: ?[]const u8,
+    standard_error_url: ?[]const u8 = null,
 
     /// The URL to the plugin's StdOut file in Amazon Simple Storage Service (Amazon
     /// S3), if the S3
@@ -72,10 +72,10 @@ pub const CommandInvocation = struct {
     /// populated if there is just one plugin defined for the command, and the S3
     /// bucket was defined for
     /// the command.
-    standard_output_url: ?[]const u8,
+    standard_output_url: ?[]const u8 = null,
 
     /// Whether or not the invocation succeeded, failed, or is pending.
-    status: ?CommandInvocationStatus,
+    status: ?CommandInvocationStatus = null,
 
     /// A detailed status of the command execution for each invocation (each managed
     /// node targeted
@@ -137,10 +137,10 @@ pub const CommandInvocation = struct {
     /// * Delayed: The system attempted to send the command to the managed node but
     ///   wasn't
     /// successful. The system retries again.
-    status_details: ?[]const u8,
+    status_details: ?[]const u8 = null,
 
     /// Gets the trace output sent by the agent.
-    trace_output: ?[]const u8,
+    trace_output: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cloud_watch_output_config = "CloudWatchOutputConfig",

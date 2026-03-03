@@ -2,7 +2,7 @@
 pub const AwsEc2InstanceMonitoringDetails = struct {
     /// Indicates whether detailed monitoring is turned on. Otherwise, basic
     /// monitoring is turned on.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .state = "State",

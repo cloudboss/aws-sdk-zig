@@ -4,17 +4,17 @@ const RecommendationRelatedAnomalySourceDetail = @import("recommendation_related
 /// Information about an anomaly that is related to a recommendation.
 pub const RecommendationRelatedAnomaly = struct {
     /// The ID of an anomaly that generated the insight with this recommendation.
-    anomaly_id: ?[]const u8,
+    anomaly_id: ?[]const u8 = null,
 
     /// An array of objects that represent resources in which DevOps Guru detected
     /// anomalous
     /// behavior. Each object contains the name and type of the resource.
-    resources: ?[]const RecommendationRelatedAnomalyResource,
+    resources: ?[]const RecommendationRelatedAnomalyResource = null,
 
     /// Information about where the anomalous behavior related the recommendation
     /// was found.
     /// For example, details in Amazon CloudWatch metrics.
-    source_details: ?[]const RecommendationRelatedAnomalySourceDetail,
+    source_details: ?[]const RecommendationRelatedAnomalySourceDetail = null,
 
     pub const json_field_names = .{
         .anomaly_id = "AnomalyId",

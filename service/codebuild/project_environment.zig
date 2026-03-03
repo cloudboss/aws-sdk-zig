@@ -14,11 +14,11 @@ pub const ProjectEnvironment = struct {
     /// certificate for the build project. For more information, see
     /// [certificate](https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate) in the
     /// *CodeBuild User Guide*.
-    certificate: ?[]const u8,
+    certificate: ?[]const u8 = null,
 
     /// The compute configuration of the build project. This is only required if
     /// `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
-    compute_configuration: ?ComputeConfiguration,
+    compute_configuration: ?ComputeConfiguration = null,
 
     /// Information about the compute resources the build project uses. Available
     /// values
@@ -98,14 +98,14 @@ pub const ProjectEnvironment = struct {
     compute_type: ComputeType,
 
     /// A DockerServer object to use for this build project.
-    docker_server: ?DockerServer,
+    docker_server: ?DockerServer = null,
 
     /// A set of environment variables to make available to builds for this build
     /// project.
-    environment_variables: ?[]const EnvironmentVariable,
+    environment_variables: ?[]const EnvironmentVariable = null,
 
     /// A ProjectFleet object to use for this build project.
-    fleet: ?ProjectFleet,
+    fleet: ?ProjectFleet = null,
 
     /// The image tag or image digest that identifies the Docker image to use for
     /// this build
@@ -141,7 +141,7 @@ pub const ProjectEnvironment = struct {
     /// SERVICE_ROLE
     /// credentials. When you use an CodeBuild curated image, you must use CODEBUILD
     /// credentials.
-    image_pull_credentials_type: ?ImagePullCredentialsType,
+    image_pull_credentials_type: ?ImagePullCredentialsType = null,
 
     /// Enables running the Docker daemon inside a Docker container. Set to true
     /// only if the
@@ -169,10 +169,10 @@ pub const ProjectEnvironment = struct {
     /// --host=tcp://0.0.0.0:2375 --storage-driver=overlay&`
     ///
     /// `- timeout -t 15 sh -c "until docker info; do echo .; sleep 1; done"`
-    privileged_mode: ?bool,
+    privileged_mode: ?bool = null,
 
     /// The credentials for access to a private registry.
-    registry_credential: ?RegistryCredential,
+    registry_credential: ?RegistryCredential = null,
 
     /// The type of build environment to use for related builds.
     ///

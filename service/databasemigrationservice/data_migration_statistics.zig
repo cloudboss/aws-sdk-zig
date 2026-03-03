@@ -12,10 +12,10 @@ pub const DataMigrationStatistics = struct {
     full_load_percentage: i32 = 0,
 
     /// The time when the migration started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The time when the migration stopped or failed.
-    stop_time: ?i64,
+    stop_time: ?i64 = null,
 
     /// The number of tables that DMS failed to process.
     tables_errored: i32 = 0,

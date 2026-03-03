@@ -8,12 +8,12 @@ pub const VdmOptions = struct {
     /// Specifies additional settings for your VDM configuration as applicable to
     /// the
     /// Dashboard.
-    dashboard_options: ?DashboardOptions,
+    dashboard_options: ?DashboardOptions = null,
 
     /// Specifies additional settings for your VDM configuration as applicable to
     /// the
     /// Guardian.
-    guardian_options: ?GuardianOptions,
+    guardian_options: ?GuardianOptions = null,
 
     pub const json_field_names = .{
         .dashboard_options = "DashboardOptions",

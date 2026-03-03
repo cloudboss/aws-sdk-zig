@@ -4,7 +4,7 @@ const LiveTailSessionLogEvent = @import("live_tail_session_log_event.zig").LiveT
 /// This object contains the log events and metadata for a Live Tail session.
 pub const LiveTailSessionUpdate = struct {
     /// This object contains the session metadata for a Live Tail session.
-    session_metadata: ?LiveTailSessionMetadata,
+    session_metadata: ?LiveTailSessionMetadata = null,
 
     /// An array, where each member of the array includes the information for one
     /// log event in the
@@ -15,7 +15,7 @@ pub const LiveTailSessionUpdate = struct {
     /// of log events matching the request exceeds 500 per second, the log events
     /// are sampled down to
     /// 500 log events to be included in each `sessionUpdate` structure.
-    session_results: ?[]const LiveTailSessionLogEvent,
+    session_results: ?[]const LiveTailSessionLogEvent = null,
 
     pub const json_field_names = .{
         .session_metadata = "sessionMetadata",

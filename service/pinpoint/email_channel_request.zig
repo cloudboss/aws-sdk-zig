@@ -2,10 +2,10 @@
 pub const EmailChannelRequest = struct {
     /// The [Amazon SES configuration
     /// set](https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html) that you want to apply to messages that you send through the channel.
-    configuration_set: ?[]const u8,
+    configuration_set: ?[]const u8 = null,
 
     /// Specifies whether to enable the email channel for the application.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The verified email address that you want to send email from when you send
     /// email through the channel.
@@ -18,12 +18,12 @@ pub const EmailChannelRequest = struct {
 
     /// The ARN of an IAM role for Amazon Pinpoint to use to send email from your
     /// campaigns or journeys through Amazon SES.
-    orchestration_sending_role_arn: ?[]const u8,
+    orchestration_sending_role_arn: ?[]const u8 = null,
 
     /// The ARN of the AWS Identity and Access Management (IAM) role that you want
     /// Amazon Pinpoint to use when it submits email-related event data for the
     /// channel.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration_set = "ConfigurationSet",

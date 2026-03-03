@@ -5,7 +5,7 @@ const RegistrationStatus = @import("registration_status.zig").RegistrationStatus
 /// software can transfer your vehicle data to Amazon Timestream.
 pub const IamRegistrationResponse = struct {
     /// A message associated with a registration error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The status of registering your IAM resource. The status can be one of
     /// `REGISTRATION_SUCCESS`, `REGISTRATION_PENDING`,

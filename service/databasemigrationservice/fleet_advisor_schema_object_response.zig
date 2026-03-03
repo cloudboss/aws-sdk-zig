@@ -2,15 +2,15 @@
 pub const FleetAdvisorSchemaObjectResponse = struct {
     /// The number of lines of code in a schema object in a Fleet Advisor collector
     /// inventory.
-    code_line_count: ?i64,
+    code_line_count: ?i64 = null,
 
     /// The size level of the code in a schema object in a Fleet Advisor collector
     /// inventory.
-    code_size: ?i64,
+    code_size: ?i64 = null,
 
     /// The number of objects in a schema object in a Fleet Advisor collector
     /// inventory.
-    number_of_objects: ?i64,
+    number_of_objects: ?i64 = null,
 
     /// The type of the schema object, as reported by the database engine. Examples
     /// include
@@ -23,10 +23,10 @@ pub const FleetAdvisorSchemaObjectResponse = struct {
     /// * `SYSTEM_TABLE`
     ///
     /// * `QUEUE`
-    object_type: ?[]const u8,
+    object_type: ?[]const u8 = null,
 
     /// The ID of a schema object in a Fleet Advisor collector inventory.
-    schema_id: ?[]const u8,
+    schema_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code_line_count = "CodeLineCount",

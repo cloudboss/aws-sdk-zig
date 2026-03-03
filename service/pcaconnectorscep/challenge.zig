@@ -2,19 +2,19 @@
 /// about the specified connector's SCEP challenge passwords.
 pub const Challenge = struct {
     /// The Amazon Resource Name (ARN) of the challenge.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the connector.
-    connector_arn: ?[]const u8,
+    connector_arn: ?[]const u8 = null,
 
     /// The date and time that the challenge was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The SCEP challenge password, in UUID format.
-    password: ?[]const u8,
+    password: ?[]const u8 = null,
 
     /// The date and time that the challenge was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

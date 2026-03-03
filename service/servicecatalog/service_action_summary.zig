@@ -3,16 +3,16 @@ const ServiceActionDefinitionType = @import("service_action_definition_type.zig"
 /// Detailed information about the self-service action.
 pub const ServiceActionSummary = struct {
     /// The self-service action definition type. For example, `SSM_AUTOMATION`.
-    definition_type: ?ServiceActionDefinitionType,
+    definition_type: ?ServiceActionDefinitionType = null,
 
     /// The self-service action description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The self-service action identifier.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The self-service action name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .definition_type = "DefinitionType",

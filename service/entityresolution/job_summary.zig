@@ -4,7 +4,7 @@ const JobStatus = @import("job_status.zig").JobStatus;
 /// job.
 pub const JobSummary = struct {
     /// The time at which the job has finished.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The ID of the job.
     job_id: []const u8,

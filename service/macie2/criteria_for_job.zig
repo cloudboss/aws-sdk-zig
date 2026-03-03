@@ -6,11 +6,11 @@ const TagCriterionForJob = @import("tag_criterion_for_job.zig").TagCriterionForJ
 pub const CriteriaForJob = struct {
     /// A property-based condition that defines a property, operator, and one or
     /// more values for including or excluding buckets from the job.
-    simple_criterion: ?SimpleCriterionForJob,
+    simple_criterion: ?SimpleCriterionForJob = null,
 
     /// A tag-based condition that defines an operator and tag keys, tag values, or
     /// tag key and value pairs for including or excluding buckets from the job.
-    tag_criterion: ?TagCriterionForJob,
+    tag_criterion: ?TagCriterionForJob = null,
 
     pub const json_field_names = .{
         .simple_criterion = "simpleCriterion",

@@ -7,7 +7,7 @@ pub const RecipeStep = struct {
     action: RecipeAction,
 
     /// The condition expressions for the recipe step.
-    condition_expressions: ?[]const ConditionExpression,
+    condition_expressions: ?[]const ConditionExpression = null,
 
     pub const json_field_names = .{
         .action = "Action",

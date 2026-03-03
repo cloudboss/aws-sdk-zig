@@ -8,14 +8,14 @@ pub const CloudWatchLoggingConfiguration = struct {
 
     /// The Key Management Service (KMS) key ARN to encrypt the logs that you store
     /// in CloudWatch Logs.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The name of the log group in Amazon CloudWatch Logs where you want to
     /// publish your logs.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     /// Prefix for the CloudWatch log stream name.
-    log_stream_name_prefix: ?[]const u8,
+    log_stream_name_prefix: ?[]const u8 = null,
 
     /// The types of logs that you want to publish to CloudWatch. If you don't
     /// specify any log types, driver STDOUT and STDERR logs will be published to
@@ -27,7 +27,7 @@ pub const CloudWatchLoggingConfiguration = struct {
     ///   `TEZ_TASK`
     /// * **Array Members Valid Values**: `STDOUT`, `STDERR`, `HIVE_LOG`, `TEZ_AM`,
     ///   `SYSTEM_LOGS`
-    log_types: ?[]const aws.map.MapEntry([]const []const u8),
+    log_types: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

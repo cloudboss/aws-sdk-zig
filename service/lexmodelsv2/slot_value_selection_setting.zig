@@ -7,10 +7,10 @@ pub const SlotValueSelectionSetting = struct {
     /// Provides settings that enable advanced recognition settings for slot
     /// values. You can use this to enable using slot values as a custom
     /// vocabulary for recognizing user utterances.
-    advanced_recognition_setting: ?AdvancedRecognitionSetting,
+    advanced_recognition_setting: ?AdvancedRecognitionSetting = null,
 
     /// A regular expression used to validate the value of a slot.
-    regex_filter: ?SlotValueRegexFilter,
+    regex_filter: ?SlotValueRegexFilter = null,
 
     /// Determines the slot resolution strategy that Amazon Lex uses to
     /// return slot type values. The field can be set to one of the following

@@ -7,12 +7,12 @@ const PerformanceInsightsMetricsDetail = @import("performance_insights_metrics_d
 pub const AnomalySourceDetails = struct {
     /// An array of `CloudWatchMetricsDetail` objects that contain information
     /// about analyzed CloudWatch metrics that show anomalous behavior.
-    cloud_watch_metrics: ?[]const CloudWatchMetricsDetail,
+    cloud_watch_metrics: ?[]const CloudWatchMetricsDetail = null,
 
     /// An array of `PerformanceInsightsMetricsDetail` objects that contain
     /// information about analyzed Performance Insights metrics that show anomalous
     /// behavior.
-    performance_insights_metrics: ?[]const PerformanceInsightsMetricsDetail,
+    performance_insights_metrics: ?[]const PerformanceInsightsMetricsDetail = null,
 
     pub const json_field_names = .{
         .cloud_watch_metrics = "CloudWatchMetrics",

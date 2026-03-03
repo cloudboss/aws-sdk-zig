@@ -1,10 +1,10 @@
 /// A structure describing the source of a context.
 pub const ContextSource = struct {
     /// The ID of the source.
-    source_id: ?[]const u8,
+    source_id: ?[]const u8 = null,
 
     /// The type of the source.
-    source_type: ?[]const u8,
+    source_type: ?[]const u8 = null,
 
     /// The URI of the source.
     source_uri: []const u8,

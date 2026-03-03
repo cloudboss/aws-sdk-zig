@@ -3,10 +3,10 @@ const JobStatus = @import("job_status.zig").JobStatus;
 /// Details about the status of a maintenance job.
 pub const TableMaintenanceJobStatusValue = struct {
     /// The failure message of a failed job.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// The date and time that the maintenance job was last run.
-    last_run_timestamp: ?i64,
+    last_run_timestamp: ?i64 = null,
 
     /// The status of the job.
     status: JobStatus,

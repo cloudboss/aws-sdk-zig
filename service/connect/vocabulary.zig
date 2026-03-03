@@ -15,10 +15,10 @@ pub const Vocabulary = struct {
     /// characters. For more information, see [Create a custom
     /// vocabulary using a
     /// table](https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table).
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The reason why the custom vocabulary was not created.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The identifier of the custom vocabulary.
     id: []const u8,
@@ -40,7 +40,7 @@ pub const Vocabulary = struct {
 
     /// The tags used to organize, track, or control access for this resource. For
     /// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

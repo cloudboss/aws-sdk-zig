@@ -10,19 +10,19 @@ const RangeEndsLabelType = @import("range_ends_label_type.zig").RangeEndsLabelTy
 /// the attributes can be defined.
 pub const DataLabelType = struct {
     /// The option that specifies individual data values for labels.
-    data_path_label_type: ?DataPathLabelType,
+    data_path_label_type: ?DataPathLabelType = null,
 
     /// Determines the label configuration for the entire field.
-    field_label_type: ?FieldLabelType,
+    field_label_type: ?FieldLabelType = null,
 
     /// Determines the label configuration for the maximum value in a visual.
-    maximum_label_type: ?MaximumLabelType,
+    maximum_label_type: ?MaximumLabelType = null,
 
     /// Determines the label configuration for the minimum value in a visual.
-    minimum_label_type: ?MinimumLabelType,
+    minimum_label_type: ?MinimumLabelType = null,
 
     /// Determines the label configuration for range end value in a visual.
-    range_ends_label_type: ?RangeEndsLabelType,
+    range_ends_label_type: ?RangeEndsLabelType = null,
 
     pub const json_field_names = .{
         .data_path_label_type = "DataPathLabelType",

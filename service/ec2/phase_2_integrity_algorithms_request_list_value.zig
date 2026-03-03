@@ -2,5 +2,5 @@
 /// negotiations.
 pub const Phase2IntegrityAlgorithmsRequestListValue = struct {
     /// The integrity algorithm.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

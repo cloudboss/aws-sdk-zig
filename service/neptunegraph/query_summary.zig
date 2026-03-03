@@ -3,21 +3,21 @@ const QueryState = @import("query_state.zig").QueryState;
 /// Details of the query listed.
 pub const QuerySummary = struct {
     /// The running time of the query, in milliseconds.
-    elapsed: ?i32,
+    elapsed: ?i32 = null,
 
     /// A string representation of the id of the query.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The actual query text. The `queryString` may be truncated if the actual
     /// query string is too long.
-    query_string: ?[]const u8,
+    query_string: ?[]const u8 = null,
 
     /// State of the query.
-    state: ?QueryState,
+    state: ?QueryState = null,
 
     /// The amount of time, in milliseconds, the query has waited in the queue
     /// before being picked up by a worker thread.
-    waited: ?i32,
+    waited: ?i32 = null,
 
     pub const json_field_names = .{
         .elapsed = "elapsed",

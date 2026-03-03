@@ -22,7 +22,7 @@ pub const RuleGroupsNamespaceSummary = struct {
 
     /// The list of tag keys and values that are associated with the rule groups
     /// namespace.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

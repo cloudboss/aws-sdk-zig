@@ -10,15 +10,15 @@ const EntityType = @import("entity_type.zig").EntityType;
 /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
 pub const ExperienceEntitiesSummary = struct {
     /// Information about the user entity.
-    display_data: ?EntityDisplayData,
+    display_data: ?EntityDisplayData = null,
 
     /// The identifier of a user or group in your IAM Identity Center identity
     /// source.
     /// For example, a user ID could be an email.
-    entity_id: ?[]const u8,
+    entity_id: ?[]const u8 = null,
 
     /// Shows the type as `User` or `Group`.
-    entity_type: ?EntityType,
+    entity_type: ?EntityType = null,
 
     pub const json_field_names = .{
         .display_data = "DisplayData",

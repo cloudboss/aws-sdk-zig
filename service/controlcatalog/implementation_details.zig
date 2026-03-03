@@ -23,7 +23,7 @@ pub const ImplementationDetails = struct {
     /// A service-specific identifier for the control, assigned by the service that
     /// implemented the control. For example, this identifier could be an Amazon Web
     /// Services Config Rule ID or a Security Hub Control ID.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// A string that describes a control's implementation type.
     @"type": []const u8,

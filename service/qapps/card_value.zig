@@ -7,7 +7,7 @@ pub const CardValue = struct {
 
     /// The structure that describes how the current form card value is mutated.
     /// Only applies for form cards when multiple responses are allowed.
-    submission_mutation: ?SubmissionMutation,
+    submission_mutation: ?SubmissionMutation = null,
 
     /// The value or result associated with the card.
     value: []const u8,

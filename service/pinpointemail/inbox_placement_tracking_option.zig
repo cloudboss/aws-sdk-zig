@@ -11,7 +11,7 @@ pub const InboxPlacementTrackingOption = struct {
     /// An array of strings, one for each major email provider that the inbox
     /// placement data
     /// applies to.
-    tracked_isps: ?[]const []const u8,
+    tracked_isps: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .global = "Global",

@@ -40,7 +40,7 @@ pub const CustomizedMetricSpecification = struct {
     /// Conditional: If you published your metric with dimensions, you must specify
     /// the same
     /// dimensions in your scaling policy.
-    dimensions: ?[]const MetricDimension,
+    dimensions: ?[]const MetricDimension = null,
 
     /// The name of the metric. To get the exact metric name, namespace, and
     /// dimensions,
@@ -48,29 +48,29 @@ pub const CustomizedMetricSpecification = struct {
     /// [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object
     /// that is returned by a call to
     /// [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The metrics to include in the target tracking scaling policy, as a metric
     /// data query.
     /// This can include both raw metric and metric math expressions.
-    metrics: ?[]const TargetTrackingMetricDataQuery,
+    metrics: ?[]const TargetTrackingMetricDataQuery = null,
 
     /// The namespace of the metric.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The period of the metric in seconds. The default value is 60. Accepted
     /// values are 10, 30, and 60. For high resolution metric, set the value to less
     /// than 60. For more information, see
     /// [Create a target tracking policy using high-resolution metrics for faster
     /// response](https://docs.aws.amazon.com/autoscaling/ec2/userguide/policy-creating-high-resolution-metrics.html).
-    period: ?i32,
+    period: ?i32 = null,
 
     /// The statistic of the metric.
-    statistic: ?MetricStatistic,
+    statistic: ?MetricStatistic = null,
 
     /// The unit of the metric. For a complete list of the units that CloudWatch
     /// supports, see the
     /// [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html)
     /// data type in the *Amazon CloudWatch API Reference*.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 };

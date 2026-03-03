@@ -22,10 +22,10 @@ pub const PortalSummary = struct {
     last_modified: i64,
 
     /// The timestamp when the portal was last published.
-    last_published: ?i64,
+    last_published: ?i64 = null,
 
     /// The description of the portal the last time it was published.
-    last_published_description: ?[]const u8,
+    last_published_description: ?[]const u8 = null,
 
     /// The ARN of the portal.
     portal_arn: []const u8,
@@ -39,20 +39,20 @@ pub const PortalSummary = struct {
 
     /// Represents the preview endpoint and the any possible error messages during
     /// preview generation.
-    preview: ?Preview,
+    preview: ?Preview = null,
 
     /// The publish status.
-    publish_status: ?PublishStatus,
+    publish_status: ?PublishStatus = null,
 
     /// The CloudWatch RUM app monitor name.
-    rum_app_monitor_name: ?[]const u8,
+    rum_app_monitor_name: ?[]const u8 = null,
 
     /// The status exception information.
-    status_exception: ?StatusException,
+    status_exception: ?StatusException = null,
 
     /// The collection of tags. Each tag element is associated with a given
     /// resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .authorization = "Authorization",

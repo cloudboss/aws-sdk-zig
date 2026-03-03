@@ -8,12 +8,12 @@ pub const RedshiftDataParameters = struct {
 
     /// The database user name. Required when authenticating using temporary
     /// credentials.
-    db_user: ?[]const u8,
+    db_user: ?[]const u8 = null,
 
     /// The name or ARN of the secret that enables access to the database. Required
     /// when
     /// authenticating using Amazon Web Services Secrets Manager.
-    secret_manager_arn: ?[]const u8,
+    secret_manager_arn: ?[]const u8 = null,
 
     /// The SQL statement text to run.
     sql: []const u8,
@@ -21,7 +21,7 @@ pub const RedshiftDataParameters = struct {
     /// The name of the SQL statement. You can name the SQL statement when you
     /// create it to
     /// identify the query.
-    statement_name: ?[]const u8,
+    statement_name: ?[]const u8 = null,
 
     /// Indicates whether to send an event back to EventBridge after the SQL
     /// statement

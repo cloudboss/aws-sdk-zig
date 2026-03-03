@@ -4,11 +4,11 @@ const SecurityProfileTarget = @import("security_profile_target.zig").SecurityPro
 /// Information about a security profile and the target associated with it.
 pub const SecurityProfileTargetMapping = struct {
     /// Information that identifies the security profile.
-    security_profile_identifier: ?SecurityProfileIdentifier,
+    security_profile_identifier: ?SecurityProfileIdentifier = null,
 
     /// Information about the target (thing group) associated with the security
     /// profile.
-    target: ?SecurityProfileTarget,
+    target: ?SecurityProfileTarget = null,
 
     pub const json_field_names = .{
         .security_profile_identifier = "securityProfileIdentifier",

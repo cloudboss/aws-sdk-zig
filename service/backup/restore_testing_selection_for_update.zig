@@ -7,17 +7,17 @@ pub const RestoreTestingSelectionForUpdate = struct {
     /// The Amazon Resource Name (ARN) of the IAM role that
     /// Backup uses to create the target resource; for example:
     /// `arn:aws:iam::123456789012:role/S3Access`.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// You can include a list of specific ARNs, such as
     /// `ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]`
     /// or you can include a wildcard: `ProtectedResourceArns: ["*"]`,
     /// but not both.
-    protected_resource_arns: ?[]const []const u8,
+    protected_resource_arns: ?[]const []const u8 = null,
 
     /// The conditions that you define for resources in
     /// your restore testing plan using tags.
-    protected_resource_conditions: ?ProtectedResourceConditions,
+    protected_resource_conditions: ?ProtectedResourceConditions = null,
 
     /// You can override certain restore metadata keys by including the parameter
     /// `RestoreMetadataOverrides` in the body of
@@ -26,7 +26,7 @@ pub const RestoreTestingSelectionForUpdate = struct {
     /// See the complete list of [restore testing
     /// inferred
     /// metadata](https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html).
-    restore_metadata_overrides: ?[]const aws.map.StringMapEntry,
+    restore_metadata_overrides: ?[]const aws.map.StringMapEntry = null,
 
     /// This value represents the time, in hours, data is retained after
     /// a restore test so that optional validation can be completed.

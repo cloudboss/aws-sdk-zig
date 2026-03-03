@@ -11,7 +11,7 @@ pub const AutoDeployment = struct {
     /// When auto-deployment is triggered, operations will be sequenced to ensure
     /// all dependencies
     /// complete successfully before this StackSet's operation begins.
-    depends_on: ?[]const []const u8,
+    depends_on: ?[]const []const u8 = null,
 
     /// If set to `true`, StackSets automatically deploys additional stack instances
     /// to
@@ -20,12 +20,12 @@ pub const AutoDeployment = struct {
     /// (OU) in the specified Regions. If an account is removed from a target
     /// organization or OU,
     /// StackSets deletes stack instances from the account in the specified Regions.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// If set to `true`, stack resources are retained when an account is removed
     /// from a
     /// target organization or OU. If set to `false`, stack resources are deleted.
     /// Specify
     /// only if `Enabled` is set to `True`.
-    retain_stacks_on_account_removal: ?bool,
+    retain_stacks_on_account_removal: ?bool = null,
 };

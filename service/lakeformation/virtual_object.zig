@@ -3,7 +3,7 @@
 /// `VirtualPut` was called before writing the object.
 pub const VirtualObject = struct {
     /// The ETag of the Amazon S3 object.
-    e_tag: ?[]const u8,
+    e_tag: ?[]const u8 = null,
 
     /// The path to the Amazon S3 object. Must start with s3://
     uri: []const u8,

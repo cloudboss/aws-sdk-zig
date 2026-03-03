@@ -5,7 +5,7 @@ const CfnCreateTemplateProvider = @import("cfn_create_template_provider.zig").Cf
 pub const CreateTemplateProvider = struct {
     /// The CloudFormation template provider configuration for creating
     /// infrastructure resources.
-    cfn_template_provider: ?CfnCreateTemplateProvider,
+    cfn_template_provider: ?CfnCreateTemplateProvider = null,
 
     pub const json_field_names = .{
         .cfn_template_provider = "CfnTemplateProvider",

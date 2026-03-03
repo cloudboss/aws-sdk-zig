@@ -15,7 +15,7 @@ pub const UpdateAccountSettingsRequest = struct {
     /// The email address that you want Quick Sight to send notifications to
     /// regarding your
     /// Amazon Web Services account or Quick Sight subscription.
-    notification_email: ?[]const u8,
+    notification_email: ?[]const u8 = null,
 
     /// A boolean value that determines whether or not an Quick Sight account can be
     /// deleted. A `True` value doesn't allow the account to be deleted and results

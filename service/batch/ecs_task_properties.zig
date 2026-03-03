@@ -17,14 +17,14 @@ pub const EcsTaskProperties = struct {
     /// Determines whether execute command functionality is turned on for this task.
     /// If `true`, execute
     /// command functionality is turned on all the containers in the task.
-    enable_execute_command: ?bool,
+    enable_execute_command: ?bool = null,
 
     /// The amount of ephemeral storage to allocate for the task. This parameter is
     /// used to expand
     /// the total amount of ephemeral storage available, beyond the default amount,
     /// for tasks hosted on
     /// Fargate.
-    ephemeral_storage: ?EphemeralStorage,
+    ephemeral_storage: ?EphemeralStorage = null,
 
     /// The Amazon Resource Name (ARN) of the execution role that Batch can assume.
     /// For jobs that run on Fargate
@@ -32,7 +32,7 @@ pub const EcsTaskProperties = struct {
     /// [Batch execution IAM
     /// role](https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html)
     /// in the *Batch User Guide*.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The IPC resource namespace to use for the containers in the task. The valid
     /// values are
@@ -57,12 +57,12 @@ pub const EcsTaskProperties = struct {
     /// settings](https://docs.docker.com/engine/reference/run/#ipc-settings---ipc)
     /// in
     /// the Docker run reference.
-    ipc_mode: ?[]const u8,
+    ipc_mode: ?[]const u8 = null,
 
     /// The network configuration for jobs that are running on Fargate resources.
     /// Jobs that are
     /// running on Amazon EC2 resources must not specify this parameter.
-    network_configuration: ?NetworkConfiguration,
+    network_configuration: ?NetworkConfiguration = null,
 
     /// The process namespace to use for the containers in the task. The valid
     /// values are
@@ -84,7 +84,7 @@ pub const EcsTaskProperties = struct {
     /// information, see [PID
     /// settings](https://docs.docker.com/engine/reference/run/#pid-settings---pid)
     /// in the Docker run reference.
-    pid_mode: ?[]const u8,
+    pid_mode: ?[]const u8 = null,
 
     /// The Fargate platform version where the jobs are running. A platform version
     /// is specified
@@ -96,21 +96,21 @@ pub const EcsTaskProperties = struct {
     /// [Fargate
     /// platform
     /// versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic Container Service Developer Guide*.
-    platform_version: ?[]const u8,
+    platform_version: ?[]const u8 = null,
 
     /// An object that represents the compute environment architecture for Batch
     /// jobs on
     /// Fargate.
-    runtime_platform: ?RuntimePlatform,
+    runtime_platform: ?RuntimePlatform = null,
 
     /// The Amazon Resource Name (ARN) that's associated with the Amazon ECS task.
     ///
     /// This is object is comparable to
     /// [ContainerProperties:jobRoleArn](https://docs.aws.amazon.com/batch/latest/APIReference/API_ContainerProperties.html).
-    task_role_arn: ?[]const u8,
+    task_role_arn: ?[]const u8 = null,
 
     /// A list of volumes that are associated with the job.
-    volumes: ?[]const Volume,
+    volumes: ?[]const Volume = null,
 
     pub const json_field_names = .{
         .containers = "containers",

@@ -4,15 +4,15 @@ const PositionalAccuracy = @import("positional_accuracy.zig").PositionalAccuracy
 /// cellular signals, and Wi-Fi- access points.
 pub const InferredState = struct {
     /// The level of certainty of the inferred position.
-    accuracy: ?PositionalAccuracy,
+    accuracy: ?PositionalAccuracy = null,
 
     /// The distance between the inferred position and the device's self-reported
     /// position.
-    deviation_distance: ?f64,
+    deviation_distance: ?f64 = null,
 
     /// The device position inferred by the provided position, IP address, cellular
     /// signals, and Wi-Fi- access points.
-    position: ?[]const f64,
+    position: ?[]const f64 = null,
 
     /// Indicates if a proxy was used.
     proxy_detected: bool,

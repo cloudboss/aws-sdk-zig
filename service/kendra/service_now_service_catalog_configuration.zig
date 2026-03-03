@@ -14,7 +14,7 @@ pub const ServiceNowServiceCatalogConfiguration = struct {
 
     /// The name of the ServiceNow field that is mapped to the index document title
     /// field.
-    document_title_field_name: ?[]const u8,
+    document_title_field_name: ?[]const u8 = null,
 
     /// A list of regular expression patterns to exclude certain attachments of
     /// catalogs in
@@ -27,7 +27,7 @@ pub const ServiceNowServiceCatalogConfiguration = struct {
     /// included in the index.
     ///
     /// The regex is applied to the file name of the attachment.
-    exclude_attachment_file_patterns: ?[]const []const u8,
+    exclude_attachment_file_patterns: ?[]const []const u8 = null,
 
     /// Maps attributes or field names of catalogs to Amazon Kendra index field
     /// names. To
@@ -37,7 +37,7 @@ pub const ServiceNowServiceCatalogConfiguration = struct {
     /// The
     /// ServiceNow data source field names must exist in your ServiceNow custom
     /// metadata.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of regular expression patterns to include certain attachments of
     /// catalogs in
@@ -50,7 +50,7 @@ pub const ServiceNowServiceCatalogConfiguration = struct {
     /// isn't included in the index.
     ///
     /// The regex is applied to the file name of the attachment.
-    include_attachment_file_patterns: ?[]const []const u8,
+    include_attachment_file_patterns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .crawl_attachments = "CrawlAttachments",

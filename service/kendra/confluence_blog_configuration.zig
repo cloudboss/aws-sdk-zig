@@ -17,7 +17,7 @@ pub const ConfluenceBlogConfiguration = struct {
     ///
     /// If you specify the `BlogFieldMappings` parameter, you must specify at least
     /// one field mapping.
-    blog_field_mappings: ?[]const ConfluenceBlogToIndexFieldMapping,
+    blog_field_mappings: ?[]const ConfluenceBlogToIndexFieldMapping = null,
 
     pub const json_field_names = .{
         .blog_field_mappings = "BlogFieldMappings",

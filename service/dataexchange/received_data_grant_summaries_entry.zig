@@ -6,7 +6,7 @@ pub const ReceivedDataGrantSummariesEntry = struct {
     acceptance_state: DataGrantAcceptanceState,
 
     /// The timestamp of when the data grant was accepted.
-    accepted_at: ?i64,
+    accepted_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the data grant.
     arn: []const u8,
@@ -18,7 +18,7 @@ pub const ReceivedDataGrantSummariesEntry = struct {
     data_set_id: []const u8,
 
     /// The timestamp of when access to the associated data set ends.
-    ends_at: ?i64,
+    ends_at: ?i64 = null,
 
     /// The ID of the data grant.
     id: []const u8,

@@ -3,13 +3,13 @@
 /// a set of resources by specific criteria, such as tags, attributes, or IDs.
 pub const Filter = struct {
     /// The name of an attribute to use as a filter.
-    attribute: ?[]const u8,
+    attribute: ?[]const u8 = null,
 
     /// The type of search (For example, eq, geq, leq)
-    operation: ?[]const u8,
+    operation: ?[]const u8 = null,
 
     /// Value of the filter.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attribute = "Attribute",

@@ -6,10 +6,10 @@ pub const LaunchTemplateSpotMarketOptions = struct {
     /// The required duration for the Spot Instances (also known as Spot blocks), in
     /// minutes.
     /// This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-    block_duration_minutes: ?i32,
+    block_duration_minutes: ?i32 = null,
 
     /// The behavior when a Spot Instance is interrupted.
-    instance_interruption_behavior: ?InstanceInterruptionBehavior,
+    instance_interruption_behavior: ?InstanceInterruptionBehavior = null,
 
     /// The maximum hourly price you're willing to pay for a Spot Instance. We do
     /// not
@@ -21,10 +21,10 @@ pub const LaunchTemplateSpotMarketOptions = struct {
     /// $0.001 will
     /// result in an `InvalidParameterValue` error message when the launch template
     /// is used to launch an instance.
-    max_price: ?[]const u8,
+    max_price: ?[]const u8 = null,
 
     /// The Spot Instance request type.
-    spot_instance_type: ?SpotInstanceType,
+    spot_instance_type: ?SpotInstanceType = null,
 
     /// The end date of the request. For a one-time request, the request remains
     /// active until
@@ -33,5 +33,5 @@ pub const LaunchTemplateSpotMarketOptions = struct {
     /// is persistent, it remains active until it is canceled or this date and time
     /// is
     /// reached.
-    valid_until: ?i64,
+    valid_until: ?i64 = null,
 };

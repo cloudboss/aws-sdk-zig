@@ -5,14 +5,14 @@ const DeliveryMediumType = @import("delivery_medium_type.zig").DeliveryMediumTyp
 /// verification.
 pub const CodeDeliveryDetailsType = struct {
     /// The name of the attribute that Amazon Cognito verifies with the code.
-    attribute_name: ?[]const u8,
+    attribute_name: ?[]const u8 = null,
 
     /// The method that Amazon Cognito used to send the code.
-    delivery_medium: ?DeliveryMediumType,
+    delivery_medium: ?DeliveryMediumType = null,
 
     /// The email address or phone number destination where Amazon Cognito sent the
     /// code.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attribute_name = "AttributeName",

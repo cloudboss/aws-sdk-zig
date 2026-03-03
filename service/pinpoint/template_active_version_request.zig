@@ -7,7 +7,7 @@ pub const TemplateActiveVersionRequest = struct {
     /// template. If you specify an identifier, the value must match the identifier
     /// for an existing template version. To retrieve a list of versions and version
     /// identifiers for a template, use the Template Versions resource.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .version = "Version",

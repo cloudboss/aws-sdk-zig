@@ -12,7 +12,7 @@ pub const RuleOption = struct {
     /// depends on the `Keyword`. For more information about the settings for
     /// specific options, see [Rule
     /// options](https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options).
-    settings: ?[]const []const u8,
+    settings: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .keyword = "Keyword",

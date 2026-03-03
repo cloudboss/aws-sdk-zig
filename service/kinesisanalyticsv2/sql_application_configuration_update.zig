@@ -8,15 +8,15 @@ const ReferenceDataSourceUpdate = @import("reference_data_source_update.zig").Re
 pub const SqlApplicationConfigurationUpdate = struct {
     /// The array of InputUpdate objects describing the new input streams used
     /// by the application.
-    input_updates: ?[]const InputUpdate,
+    input_updates: ?[]const InputUpdate = null,
 
     /// The array of OutputUpdate objects describing the new destination streams
     /// used by the application.
-    output_updates: ?[]const OutputUpdate,
+    output_updates: ?[]const OutputUpdate = null,
 
     /// The array of ReferenceDataSourceUpdate objects describing the new
     /// reference data sources used by the application.
-    reference_data_source_updates: ?[]const ReferenceDataSourceUpdate,
+    reference_data_source_updates: ?[]const ReferenceDataSourceUpdate = null,
 
     pub const json_field_names = .{
         .input_updates = "InputUpdates",

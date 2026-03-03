@@ -5,5 +5,5 @@ pub const Monitoring = struct {
     /// Indicates whether detailed monitoring is enabled. Otherwise, basic
     /// monitoring is
     /// enabled.
-    state: ?MonitoringState,
+    state: ?MonitoringState = null,
 };

@@ -9,7 +9,7 @@ pub const EmbeddedDestinationSettings = struct {
     /// numbers that aren't in the same field. For example, choose 1 and 3. For more
     /// information, see
     /// https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
-    destination_608_channel_number: ?i32,
+    destination_608_channel_number: ?i32 = null,
 
     /// Ignore this setting unless your input captions are SCC format and you want
     /// both 608 and 708 captions embedded in your output stream. Optionally,
@@ -20,7 +20,7 @@ pub const EmbeddedDestinationSettings = struct {
     /// uses the number that you specify for CC channel number for the 708 service
     /// number. For more information, see
     /// https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
-    destination_708_service_number: ?i32,
+    destination_708_service_number: ?i32 = null,
 
     pub const json_field_names = .{
         .destination_608_channel_number = "Destination608ChannelNumber",

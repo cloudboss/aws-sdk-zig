@@ -6,10 +6,10 @@ pub const NumberAttributeConstraintsType = struct {
     /// or equal to
     /// `2^1023`, represented as a string with a length of 131072 characters or
     /// fewer.
-    max_value: ?[]const u8,
+    max_value: ?[]const u8 = null,
 
     /// The minimum value of an attribute that is of the number data type.
-    min_value: ?[]const u8,
+    min_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_value = "MaxValue",

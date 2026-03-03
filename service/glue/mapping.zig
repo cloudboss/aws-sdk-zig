@@ -34,23 +34,23 @@ pub const Mapping = struct {
     /// "Dropped": false,
     /// }]
     /// }`
-    children: ?[]const Mapping,
+    children: ?[]const Mapping = null,
 
     /// If true, then the column is removed.
-    dropped: ?bool,
+    dropped: ?bool = null,
 
     /// The table or column to be modified.
-    from_path: ?[]const []const u8,
+    from_path: ?[]const []const u8 = null,
 
     /// The type of the data to be modified.
-    from_type: ?[]const u8,
+    from_type: ?[]const u8 = null,
 
     /// After the apply mapping, what the name of the column should be. Can be the
     /// same as `FromPath`.
-    to_key: ?[]const u8,
+    to_key: ?[]const u8 = null,
 
     /// The data type that the data is to be modified to.
-    to_type: ?[]const u8,
+    to_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .children = "Children",

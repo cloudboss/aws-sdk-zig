@@ -5,13 +5,13 @@ pub const SearchResponse = struct {
     /// If the result of the previous `Search` request was truncated, the response
     /// includes a NextToken. To retrieve the next set of results, use the token in
     /// the next request.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// A list of `SearchRecord` objects.
-    results: ?[]const SearchRecord,
+    results: ?[]const SearchRecord = null,
 
     /// The total number of matching results.
-    total_hits: ?TotalHits,
+    total_hits: ?TotalHits = null,
 
     pub const json_field_names = .{
         .next_token = "NextToken",

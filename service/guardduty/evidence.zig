@@ -3,7 +3,7 @@ const ThreatIntelligenceDetail = @import("threat_intelligence_detail.zig").Threa
 /// Contains information about the reason that the finding was generated.
 pub const Evidence = struct {
     /// A list of threat intelligence details related to the evidence.
-    threat_intelligence_details: ?[]const ThreatIntelligenceDetail,
+    threat_intelligence_details: ?[]const ThreatIntelligenceDetail = null,
 
     pub const json_field_names = .{
         .threat_intelligence_details = "ThreatIntelligenceDetails",

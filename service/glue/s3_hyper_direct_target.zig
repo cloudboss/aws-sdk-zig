@@ -9,13 +9,13 @@ pub const S3HyperDirectTarget = struct {
     /// Specifies whether to automatically enable data quality evaluation for the S3
     /// Hyper direct target. When set to `true`, data quality checks are performed
     /// automatically during the write operation.
-    auto_data_quality: ?AutoDataQuality,
+    auto_data_quality: ?AutoDataQuality = null,
 
     /// The compression type to apply to the output data.
-    compression: ?HyperTargetCompressionType,
+    compression: ?HyperTargetCompressionType = null,
 
     /// Specifies the data output format for the HyperDirect target.
-    format: ?TargetFormat,
+    format: ?TargetFormat = null,
 
     /// Specifies the input source for the HyperDirect target.
     inputs: []const []const u8,
@@ -24,16 +24,16 @@ pub const S3HyperDirectTarget = struct {
     name: []const u8,
 
     /// Specifies the data schema for the S3 Hyper direct target.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// Defines the partitioning strategy for the output data.
-    partition_keys: ?[]const []const []const u8,
+    partition_keys: ?[]const []const []const u8 = null,
 
     /// The S3 location where the output data will be written.
     path: []const u8,
 
     /// Defines how schema changes are handled during write operations.
-    schema_change_policy: ?DirectSchemaChangePolicy,
+    schema_change_policy: ?DirectSchemaChangePolicy = null,
 
     pub const json_field_names = .{
         .auto_data_quality = "AutoDataQuality",

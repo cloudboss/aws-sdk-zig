@@ -17,25 +17,25 @@ pub const DirectConnectGatewayAttachment = struct {
     /// * `detached`: The virtual interface is detached from the Direct Connect
     ///   gateway. Traffic flow between the Direct Connect gateway and virtual
     ///   interface is stopped.
-    attachment_state: ?DirectConnectGatewayAttachmentState,
+    attachment_state: ?DirectConnectGatewayAttachmentState = null,
 
     /// The type of attachment.
-    attachment_type: ?DirectConnectGatewayAttachmentType,
+    attachment_type: ?DirectConnectGatewayAttachmentType = null,
 
     /// The ID of the Direct Connect gateway.
-    direct_connect_gateway_id: ?[]const u8,
+    direct_connect_gateway_id: ?[]const u8 = null,
 
     /// The error message if the state of an object failed to advance.
-    state_change_error: ?[]const u8,
+    state_change_error: ?[]const u8 = null,
 
     /// The ID of the virtual interface.
-    virtual_interface_id: ?[]const u8,
+    virtual_interface_id: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the virtual interface.
-    virtual_interface_owner_account: ?[]const u8,
+    virtual_interface_owner_account: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the virtual interface is located.
-    virtual_interface_region: ?[]const u8,
+    virtual_interface_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attachment_state = "attachmentState",

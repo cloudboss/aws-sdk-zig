@@ -5,11 +5,11 @@ const AvailMatchingCriteria = @import("avail_matching_criteria.zig").AvailMatchi
 pub const RecurringConsumption = struct {
     /// The configuration for the dynamic variables that determine which ad breaks
     /// that MediaTailor inserts prefetched ads in.
-    avail_matching_criteria: ?[]const AvailMatchingCriteria,
+    avail_matching_criteria: ?[]const AvailMatchingCriteria = null,
 
     /// The number of seconds that an ad is available for insertion after it was
     /// prefetched.
-    retrieved_ad_expiration_seconds: ?i32,
+    retrieved_ad_expiration_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .avail_matching_criteria = "AvailMatchingCriteria",

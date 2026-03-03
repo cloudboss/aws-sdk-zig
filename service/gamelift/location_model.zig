@@ -9,13 +9,13 @@ pub const LocationModel = struct {
     /// that is assigned to a custom location resource and uniquely identifies it.
     /// ARNs are unique across all Regions. Format is
     /// `arn:aws:gamelift:::location/location-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
-    location_arn: ?[]const u8,
+    location_arn: ?[]const u8 = null,
 
     /// The location's name.
-    location_name: ?[]const u8,
+    location_name: ?[]const u8 = null,
 
     /// Information about the UDP ping beacon for this location.
-    ping_beacon: ?PingBeacon,
+    ping_beacon: ?PingBeacon = null,
 
     pub const json_field_names = .{
         .location_arn = "LocationArn",

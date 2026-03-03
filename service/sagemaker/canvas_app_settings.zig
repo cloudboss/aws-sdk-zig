@@ -10,29 +10,29 @@ const WorkspaceSettings = @import("workspace_settings.zig").WorkspaceSettings;
 /// The SageMaker Canvas application settings.
 pub const CanvasAppSettings = struct {
     /// The model deployment settings for the SageMaker Canvas application.
-    direct_deploy_settings: ?DirectDeploySettings,
+    direct_deploy_settings: ?DirectDeploySettings = null,
 
     /// The settings for running Amazon EMR Serverless data processing jobs in
     /// SageMaker Canvas.
-    emr_serverless_settings: ?EmrServerlessSettings,
+    emr_serverless_settings: ?EmrServerlessSettings = null,
 
     /// The generative AI settings for the SageMaker Canvas application.
-    generative_ai_settings: ?GenerativeAiSettings,
+    generative_ai_settings: ?GenerativeAiSettings = null,
 
     /// The settings for connecting to an external data source with OAuth.
-    identity_provider_o_auth_settings: ?[]const IdentityProviderOAuthSetting,
+    identity_provider_o_auth_settings: ?[]const IdentityProviderOAuthSetting = null,
 
     /// The settings for document querying.
-    kendra_settings: ?KendraSettings,
+    kendra_settings: ?KendraSettings = null,
 
     /// The model registry settings for the SageMaker Canvas application.
-    model_register_settings: ?ModelRegisterSettings,
+    model_register_settings: ?ModelRegisterSettings = null,
 
     /// Time series forecast settings for the SageMaker Canvas application.
-    time_series_forecasting_settings: ?TimeSeriesForecastingSettings,
+    time_series_forecasting_settings: ?TimeSeriesForecastingSettings = null,
 
     /// The workspace settings for the SageMaker Canvas application.
-    workspace_settings: ?WorkspaceSettings,
+    workspace_settings: ?WorkspaceSettings = null,
 
     pub const json_field_names = .{
         .direct_deploy_settings = "DirectDeploySettings",

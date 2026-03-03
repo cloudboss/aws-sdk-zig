@@ -1,7 +1,7 @@
 /// Describes the state of a traffic source.
 pub const TrafficSourceState = struct {
     /// The unique identifier of the traffic source.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// Describes the current state of a traffic source.
     ///
@@ -28,10 +28,10 @@ pub const TrafficSourceState = struct {
     ///
     /// * `Removed` - All Auto Scaling instances are deregistered from the load
     /// balancer or target group.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// This is replaced by `Identifier`.
-    traffic_source: ?[]const u8,
+    traffic_source: ?[]const u8 = null,
 
     /// Provides additional context for the value of `Identifier`.
     ///
@@ -47,5 +47,5 @@ pub const TrafficSourceState = struct {
     /// target group.
     ///
     /// Required if the identifier is the name of a Classic Load Balancer.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 };

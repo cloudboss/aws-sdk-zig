@@ -14,10 +14,10 @@ pub const NodeOutputField = struct {
     name: []const u8,
 
     /// The next node that receives output data from this field.
-    next: ?[]const NodeOutputNext,
+    next: ?[]const NodeOutputNext = null,
 
     /// The data type of the output field for compatibility validation.
-    @"type": ?FlowNodeIODataType,
+    @"type": ?FlowNodeIODataType = null,
 
     pub const json_field_names = .{
         .content = "content",

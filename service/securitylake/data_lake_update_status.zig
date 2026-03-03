@@ -8,15 +8,15 @@ const DataLakeStatus = @import("data_lake_status.zig").DataLakeStatus;
 pub const DataLakeUpdateStatus = struct {
     /// The details of the last `UpdateDataLake`or `DeleteDataLake` API
     /// request which failed.
-    exception: ?DataLakeUpdateException,
+    exception: ?DataLakeUpdateException = null,
 
     /// The unique ID for the last `UpdateDataLake` or `DeleteDataLake` API
     /// request.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// The status of the last `UpdateDataLake` or `DeleteDataLake` API
     /// request that was requested.
-    status: ?DataLakeStatus,
+    status: ?DataLakeStatus = null,
 
     pub const json_field_names = .{
         .exception = "exception",

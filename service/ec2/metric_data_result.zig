@@ -7,13 +7,13 @@ const MetricValue = @import("metric_value.zig").MetricValue;
 pub const MetricDataResult = struct {
     /// The dimension values that identify this specific data point, such as account
     /// ID, region, and instance family.
-    dimension: ?CapacityManagerDimension,
+    dimension: ?CapacityManagerDimension = null,
 
     /// The metric values and statistics for this data point, containing the actual
     /// capacity usage numbers.
-    metric_values: ?[]const MetricValue,
+    metric_values: ?[]const MetricValue = null,
 
     /// The timestamp for this data point, indicating when the capacity usage
     /// occurred.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 };

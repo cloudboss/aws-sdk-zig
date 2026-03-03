@@ -5,44 +5,44 @@ const AwsElasticBeanstalkEnvironmentTier = @import("aws_elastic_beanstalk_enviro
 /// Contains details about an Elastic Beanstalk environment.
 pub const AwsElasticBeanstalkEnvironmentDetails = struct {
     /// The name of the application that is associated with the environment.
-    application_name: ?[]const u8,
+    application_name: ?[]const u8 = null,
 
     /// The URL to the CNAME for this environment.
-    cname: ?[]const u8,
+    cname: ?[]const u8 = null,
 
     /// The creation date for this environment.
-    date_created: ?[]const u8,
+    date_created: ?[]const u8 = null,
 
     /// The date when this environment was last modified.
-    date_updated: ?[]const u8,
+    date_updated: ?[]const u8 = null,
 
     /// A description of the environment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// For load-balanced, autoscaling environments, the URL to the load balancer.
     /// For single-instance environments, the IP address of the instance.
-    endpoint_url: ?[]const u8,
+    endpoint_url: ?[]const u8 = null,
 
     /// The ARN of the environment.
-    environment_arn: ?[]const u8,
+    environment_arn: ?[]const u8 = null,
 
     /// The identifier of the environment.
-    environment_id: ?[]const u8,
+    environment_id: ?[]const u8 = null,
 
     /// Links to other environments in the same group.
-    environment_links: ?[]const AwsElasticBeanstalkEnvironmentEnvironmentLink,
+    environment_links: ?[]const AwsElasticBeanstalkEnvironmentEnvironmentLink = null,
 
     /// The name of the environment.
-    environment_name: ?[]const u8,
+    environment_name: ?[]const u8 = null,
 
     /// The configuration setting for the environment.
-    option_settings: ?[]const AwsElasticBeanstalkEnvironmentOptionSetting,
+    option_settings: ?[]const AwsElasticBeanstalkEnvironmentOptionSetting = null,
 
     /// The ARN of the platform version for the environment.
-    platform_arn: ?[]const u8,
+    platform_arn: ?[]const u8 = null,
 
     /// The name of the solution stack that is deployed with the environment.
-    solution_stack_name: ?[]const u8,
+    solution_stack_name: ?[]const u8 = null,
 
     /// The current operational status of the environment. Valid values are as
     /// follows:
@@ -62,13 +62,13 @@ pub const AwsElasticBeanstalkEnvironmentDetails = struct {
     /// * `Terminating`
     ///
     /// * `Updating`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The tier of the environment.
-    tier: ?AwsElasticBeanstalkEnvironmentTier,
+    tier: ?AwsElasticBeanstalkEnvironmentTier = null,
 
     /// The application version of the environment.
-    version_label: ?[]const u8,
+    version_label: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_name = "ApplicationName",

@@ -9,7 +9,7 @@ const LustreRootSquashConfiguration = @import("lustre_root_squash_configuration.
 
 /// The configuration for the Amazon FSx for Lustre file system.
 pub const LustreFileSystemConfiguration = struct {
-    automatic_backup_retention_days: ?i32,
+    automatic_backup_retention_days: ?i32 = null,
 
     /// A boolean flag indicating whether tags on the file system are copied to
     /// backups.
@@ -22,9 +22,9 @@ pub const LustreFileSystemConfiguration = struct {
     /// tags when
     /// creating a user-initiated backup, no tags are copied from the file system,
     /// regardless of this value. (Default = false)
-    copy_tags_to_backups: ?bool,
+    copy_tags_to_backups: ?bool = null,
 
-    daily_automatic_backup_start_time: ?[]const u8,
+    daily_automatic_backup_start_time: ?[]const u8 = null,
 
     /// The data compression configuration for the file system.
     /// `DataCompressionType`
@@ -38,13 +38,13 @@ pub const LustreFileSystemConfiguration = struct {
     ///
     /// For more information, see [Lustre data
     /// compression](https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html).
-    data_compression_type: ?DataCompressionType,
+    data_compression_type: ?DataCompressionType = null,
 
     /// Required when `StorageType` is set to `INTELLIGENT_TIERING`.
     /// Specifies the optional provisioned SSD read cache.
-    data_read_cache_configuration: ?LustreReadCacheConfiguration,
+    data_read_cache_configuration: ?LustreReadCacheConfiguration = null,
 
-    data_repository_configuration: ?DataRepositoryConfiguration,
+    data_repository_configuration: ?DataRepositoryConfiguration = null,
 
     /// The deployment type of the FSx for Lustre file system.
     /// *Scratch deployment type* is designed for temporary storage
@@ -67,7 +67,7 @@ pub const LustreFileSystemConfiguration = struct {
     /// systems](https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html).
     ///
     /// The default is `SCRATCH_1`.
-    deployment_type: ?LustreDeploymentType,
+    deployment_type: ?LustreDeploymentType = null,
 
     /// The type of drive cache used by `PERSISTENT_1` file systems that are
     /// provisioned with
@@ -80,20 +80,20 @@ pub const LustreFileSystemConfiguration = struct {
     /// of the total storage capacity.
     ///
     /// This parameter is required when `StorageType` is set to HDD.
-    drive_cache_type: ?DriveCacheType,
+    drive_cache_type: ?DriveCacheType = null,
 
     /// Specifies whether Elastic Fabric Adapter (EFA) and GPUDirect Storage (GDS)
     /// support is enabled for the Amazon FSx for Lustre file system.
-    efa_enabled: ?bool,
+    efa_enabled: ?bool = null,
 
     /// The Lustre logging configuration. Lustre logging writes the enabled log
     /// events for your file system to Amazon CloudWatch Logs.
-    log_configuration: ?LustreLogConfiguration,
+    log_configuration: ?LustreLogConfiguration = null,
 
     /// The Lustre metadata performance configuration for an Amazon FSx for Lustre
     /// file system
     /// using a `PERSISTENT_2` deployment type.
-    metadata_configuration: ?FileSystemLustreMetadataConfiguration,
+    metadata_configuration: ?FileSystemLustreMetadataConfiguration = null,
 
     /// You use the `MountName` value when mounting the file system.
     ///
@@ -101,7 +101,7 @@ pub const LustreFileSystemConfiguration = struct {
     /// For `SCRATCH_2`, `PERSISTENT_1`, and `PERSISTENT_2` deployment
     /// types, this value is a string that is unique within an Amazon Web Services
     /// Region.
-    mount_name: ?[]const u8,
+    mount_name: ?[]const u8 = null,
 
     /// Per unit storage throughput represents the megabytes per second of read or
     /// write
@@ -118,25 +118,25 @@ pub const LustreFileSystemConfiguration = struct {
     /// * For `PERSISTENT_1` HDD storage: 12, 40.
     ///
     /// * For `PERSISTENT_2` SSD storage: 125, 250, 500, 1000.
-    per_unit_storage_throughput: ?i32,
+    per_unit_storage_throughput: ?i32 = null,
 
     /// The Lustre root squash configuration for an Amazon FSx for Lustre
     /// file system. When enabled, root squash restricts root-level access from
     /// clients that
     /// try to access your file system as a root user.
-    root_squash_configuration: ?LustreRootSquashConfiguration,
+    root_squash_configuration: ?LustreRootSquashConfiguration = null,
 
     /// The throughput of an Amazon FSx for Lustre file system using the
     /// Intelligent-Tiering
     /// storage class, measured in megabytes per second (MBps).
-    throughput_capacity: ?i32,
+    throughput_capacity: ?i32 = null,
 
     /// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
     /// the UTC
     /// time zone. Here, `d` is the weekday number, from 1 through 7, beginning with
     /// Monday and
     /// ending with Sunday.
-    weekly_maintenance_start_time: ?[]const u8,
+    weekly_maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .automatic_backup_retention_days = "AutomaticBackupRetentionDays",

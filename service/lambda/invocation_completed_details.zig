@@ -7,7 +7,7 @@ pub const InvocationCompletedDetails = struct {
     end_timestamp: i64,
 
     /// Details about the invocation failure.
-    @"error": ?EventError,
+    @"error": ?EventError = null,
 
     /// The request ID for the invocation.
     request_id: []const u8,

@@ -1,10 +1,10 @@
 /// Specifies the S3 destination for the experiment report.
 pub const ExperimentReportConfigurationOutputsS3Configuration = struct {
     /// The name of the S3 bucket where the experiment report will be stored.
-    bucket_name: ?[]const u8,
+    bucket_name: ?[]const u8 = null,
 
     /// The prefix of the S3 bucket where the experiment report will be stored.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_name = "bucketName",

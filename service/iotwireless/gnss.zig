@@ -3,24 +3,24 @@ pub const Gnss = struct {
     /// Optional assistance altitude, which is the altitude of the device at capture
     /// time,
     /// specified in meters above the WGS84 reference ellipsoid.
-    assist_altitude: ?f32,
+    assist_altitude: ?f32 = null,
 
     /// Optional assistance position information, specified using latitude and
     /// longitude
     /// values in degrees. The coordinates are inside the WGS84 reference frame.
-    assist_position: ?[]const f32,
+    assist_position: ?[]const f32 = null,
 
     /// Optional parameter that gives an estimate of the time when the GNSS scan
     /// information
     /// is taken, in seconds GPS time (GPST). If capture time is not specified, the
     /// local server
     /// time is used.
-    capture_time: ?f32,
+    capture_time: ?f32 = null,
 
     /// Optional value that gives the capture time estimate accuracy, in seconds. If
     /// capture
     /// time accuracy is not specified, default value of 300 is used.
-    capture_time_accuracy: ?f32,
+    capture_time_accuracy: ?f32 = null,
 
     /// Payload that contains the GNSS scan result, or NAV message, in hexadecimal
     /// notation.

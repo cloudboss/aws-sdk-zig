@@ -12,7 +12,7 @@ pub const Occurrences = struct {
     /// other types of files.
     ///
     /// Each Cell object specifies a cell or field that contains the sensitive data.
-    cells: ?[]const Cell,
+    cells: ?[]const Cell = null,
 
     /// An array of objects, one for each occurrence of sensitive data in an email
     /// message or a non-binary text file such as an HTML, TXT, or XML file. Each
@@ -24,17 +24,17 @@ pub const Occurrences = struct {
     /// unstructured sections of an otherwise structured file, such as a comment in
     /// a file; a malformed file that Amazon Macie analyzes as plain text; and, a
     /// CSV or TSV file that has any column names that contain sensitive data.
-    line_ranges: ?[]const Range,
+    line_ranges: ?[]const Range = null,
 
     /// Reserved for future use.
-    offset_ranges: ?[]const Range,
+    offset_ranges: ?[]const Range = null,
 
     /// An array of objects, one for each occurrence of sensitive data in an Adobe
     /// Portable Document Format file. This value is null for all other types of
     /// files.
     ///
     /// Each Page object specifies a page that contains the sensitive data.
-    pages: ?[]const Page,
+    pages: ?[]const Page = null,
 
     /// An array of objects, one for each occurrence of sensitive data in an Apache
     /// Avro object container, Apache Parquet file, JSON file, or JSON Lines file.
@@ -45,7 +45,7 @@ pub const Occurrences = struct {
     /// data. For a JSON or JSON Lines file, each Record object specifies the path
     /// to a field or array that contains the sensitive data. For a JSON Lines file,
     /// it also specifies the index of the line that contains the data.
-    records: ?[]const Record,
+    records: ?[]const Record = null,
 
     pub const json_field_names = .{
         .cells = "cells",

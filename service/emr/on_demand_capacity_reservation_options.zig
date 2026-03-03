@@ -14,11 +14,11 @@ pub const OnDemandCapacityReservationOptions = struct {
     ///
     /// * `none` - The instance avoids running in a Capacity Reservation even if
     /// one is available. The instance runs as an On-Demand Instance.
-    capacity_reservation_preference: ?OnDemandCapacityReservationPreference,
+    capacity_reservation_preference: ?OnDemandCapacityReservationPreference = null,
 
     /// The ARN of the Capacity Reservation resource group in which to run the
     /// instance.
-    capacity_reservation_resource_group_arn: ?[]const u8,
+    capacity_reservation_resource_group_arn: ?[]const u8 = null,
 
     /// Indicates whether to use unused Capacity Reservations for fulfilling
     /// On-Demand
@@ -38,7 +38,7 @@ pub const OnDemandCapacityReservationOptions = struct {
     /// If you do not specify a value, the fleet fulfills the On-Demand capacity
     /// according to
     /// the chosen On-Demand allocation strategy.
-    usage_strategy: ?OnDemandCapacityReservationUsageStrategy,
+    usage_strategy: ?OnDemandCapacityReservationUsageStrategy = null,
 
     pub const json_field_names = .{
         .capacity_reservation_preference = "CapacityReservationPreference",

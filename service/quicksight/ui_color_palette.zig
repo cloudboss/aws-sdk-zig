@@ -8,72 +8,72 @@
 /// Guide.*
 pub const UIColorPalette = struct {
     /// This color is that applies to selected states and buttons.
-    accent: ?[]const u8,
+    accent: ?[]const u8 = null,
 
     /// The foreground color that applies to any text or other elements that appear
     /// over the
     /// accent color.
-    accent_foreground: ?[]const u8,
+    accent_foreground: ?[]const u8 = null,
 
     /// The color that applies to error messages.
-    danger: ?[]const u8,
+    danger: ?[]const u8 = null,
 
     /// The foreground color that applies to any text or other elements that appear
     /// over the
     /// error color.
-    danger_foreground: ?[]const u8,
+    danger_foreground: ?[]const u8 = null,
 
     /// The color that applies to the names of fields that are identified as
     /// dimensions.
-    dimension: ?[]const u8,
+    dimension: ?[]const u8 = null,
 
     /// The foreground color that applies to any text or other elements that appear
     /// over the
     /// dimension color.
-    dimension_foreground: ?[]const u8,
+    dimension_foreground: ?[]const u8 = null,
 
     /// The color that applies to the names of fields that are identified as
     /// measures.
-    measure: ?[]const u8,
+    measure: ?[]const u8 = null,
 
     /// The foreground color that applies to any text or other elements that appear
     /// over the
     /// measure color.
-    measure_foreground: ?[]const u8,
+    measure_foreground: ?[]const u8 = null,
 
     /// The background color that applies to visuals and other high emphasis UI.
-    primary_background: ?[]const u8,
+    primary_background: ?[]const u8 = null,
 
     /// The color of text and other foreground elements that appear over the primary
     /// background regions, such as grid lines, borders, table banding, icons, and
     /// so on.
-    primary_foreground: ?[]const u8,
+    primary_foreground: ?[]const u8 = null,
 
     /// The background color that applies to the sheet background and sheet
     /// controls.
-    secondary_background: ?[]const u8,
+    secondary_background: ?[]const u8 = null,
 
     /// The foreground color that applies to any sheet title, sheet control text, or
     /// UI that
     /// appears over the secondary background.
-    secondary_foreground: ?[]const u8,
+    secondary_foreground: ?[]const u8 = null,
 
     /// The color that applies to success messages, for example the check mark for a
     /// successful download.
-    success: ?[]const u8,
+    success: ?[]const u8 = null,
 
     /// The foreground color that applies to any text or other elements that appear
     /// over the
     /// success color.
-    success_foreground: ?[]const u8,
+    success_foreground: ?[]const u8 = null,
 
     /// This color that applies to warning and informational messages.
-    warning: ?[]const u8,
+    warning: ?[]const u8 = null,
 
     /// The foreground color that applies to any text or other elements that appear
     /// over the
     /// warning color.
-    warning_foreground: ?[]const u8,
+    warning_foreground: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .accent = "Accent",

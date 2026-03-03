@@ -23,7 +23,7 @@ pub const SchemaAttributeType = struct {
     /// example
     /// `"custom:isMember" : "true"` or `"custom:YearsAsMember" :
     /// "12"`.
-    attribute_data_type: ?AttributeDataType,
+    attribute_data_type: ?AttributeDataType = null,
 
     /// You should use
     /// [WriteAttributes](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserPoolClientType.html#CognitoUserPools-Type-UserPoolClientType-WriteAttributes) in the user pool client to control how attributes can
@@ -36,7 +36,7 @@ pub const SchemaAttributeType = struct {
     /// using their
     /// access token. For example, `DeveloperOnlyAttribute` can be modified using
     /// AdminUpdateUserAttributes but can't be updated using UpdateUserAttributes.
-    developer_only_attribute: ?bool,
+    developer_only_attribute: ?bool = null,
 
     /// Specifies whether the value of the attribute can be changed.
     ///
@@ -49,7 +49,7 @@ pub const SchemaAttributeType = struct {
     /// an error when it attempts to update the attribute. For more information, see
     /// [Specifying Identity Provider Attribute Mappings for Your User
     /// Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
-    mutable: ?bool,
+    mutable: ?bool = null,
 
     /// The name of your user pool attribute. When you create or update a user pool,
     /// adding a
@@ -62,18 +62,18 @@ pub const SchemaAttributeType = struct {
     /// as `value`
     /// for standard attributes, `custom:value` for custom attributes, and
     /// `dev:value` for developer-only attributes..
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Specifies the constraints for an attribute of the number type.
-    number_attribute_constraints: ?NumberAttributeConstraintsType,
+    number_attribute_constraints: ?NumberAttributeConstraintsType = null,
 
     /// Specifies whether a user pool attribute is required. If the attribute is
     /// required and
     /// the user doesn't provide a value, registration or sign-in will fail.
-    required: ?bool,
+    required: ?bool = null,
 
     /// Specifies the constraints for an attribute of the string type.
-    string_attribute_constraints: ?StringAttributeConstraintsType,
+    string_attribute_constraints: ?StringAttributeConstraintsType = null,
 
     pub const json_field_names = .{
         .attribute_data_type = "AttributeDataType",

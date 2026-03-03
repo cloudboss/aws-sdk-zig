@@ -13,7 +13,7 @@ pub const JiraConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The
     /// Jira data source field names must exist in your Jira custom metadata.
-    attachment_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    attachment_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of Jira comments to Amazon Kendra index field names. To create
@@ -24,7 +24,7 @@ pub const JiraConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Jira data source field names must exist in
     /// your Jira custom metadata.
-    comment_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    comment_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of regular expression patterns to exclude certain file paths, file
     /// names, and
@@ -35,7 +35,7 @@ pub const JiraConfiguration = struct {
     /// both an inclusion pattern and an exclusion pattern, the exclusion pattern
     /// takes
     /// precedence and the file isn't included in the index.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of regular expression patterns to include certain file paths, file
     /// names, and
@@ -46,7 +46,7 @@ pub const JiraConfiguration = struct {
     /// matches both an inclusion pattern and an exclusion pattern, the exclusion
     /// pattern takes
     /// precedence and the file isn't included in the index.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of Jira issues to Amazon Kendra index field names. To create
@@ -57,17 +57,17 @@ pub const JiraConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Jira data source field names must exist in
     /// your Jira custom metadata.
-    issue_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    issue_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// Specify whether to crawl comments, attachments, and work logs. You can
     /// specify one or
     /// more of these options.
-    issue_sub_entity_filter: ?[]const IssueSubEntity,
+    issue_sub_entity_filter: ?[]const IssueSubEntity = null,
 
     /// Specify which issue types to crawl in your Jira data source. You can specify
     /// one or
     /// more of these options to crawl.
-    issue_type: ?[]const []const u8,
+    issue_type: ?[]const []const u8 = null,
 
     /// The URL of the Jira account. For example,
     /// *company.atlassian.net*.
@@ -76,7 +76,7 @@ pub const JiraConfiguration = struct {
     /// Specify which projects to crawl in your Jira data source. You can specify
     /// one or more
     /// Jira project IDs.
-    project: ?[]const []const u8,
+    project: ?[]const []const u8 = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of Jira projects to Amazon Kendra index field names. To create
@@ -87,7 +87,7 @@ pub const JiraConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Jira data source field names must exist in
     /// your Jira custom metadata.
-    project_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    project_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// The Amazon Resource Name (ARN) of a secret in Secrets Manager contains the
     /// key-value pairs required to connect to your Jira data source. The secret
@@ -104,7 +104,7 @@ pub const JiraConfiguration = struct {
     /// Specify which statuses to crawl in your Jira data source. You can specify
     /// one or more
     /// of these options to crawl.
-    status: ?[]const []const u8,
+    status: ?[]const []const u8 = null,
 
     /// `TRUE` to use the Jira change log to determine which documents require
     /// updating in the index. Depending on the change log's size, it may take
@@ -117,7 +117,7 @@ pub const JiraConfiguration = struct {
     /// your Jira. For
     /// more information, see [Configuring a
     /// VPC](https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
-    vpc_configuration: ?DataSourceVpcConfiguration,
+    vpc_configuration: ?DataSourceVpcConfiguration = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of Jira work logs to Amazon Kendra index field names. To create
@@ -128,7 +128,7 @@ pub const JiraConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Jira data source field names must exist in
     /// your Jira custom metadata.
-    work_log_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    work_log_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     pub const json_field_names = .{
         .attachment_field_mappings = "AttachmentFieldMappings",

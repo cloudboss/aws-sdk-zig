@@ -13,13 +13,13 @@ pub const ImscDestinationSettings = struct {
     /// or DASH manifest. For HLS manifests, MediaConvert adds the following
     /// accessibility attributes under EXT-X-MEDIA for this track:
     /// CHARACTERISTICS="public.accessibility.transcribes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES". For DASH manifests, MediaConvert adds the following in the adaptation set for this track: . If the captions track is not intended to provide such accessibility: Keep the default value, Disabled. When you do, for DASH manifests, MediaConvert instead adds the following in the adaptation set for this track: .
-    accessibility: ?ImscAccessibilitySubs,
+    accessibility: ?ImscAccessibilitySubs = null,
 
     /// Keep this setting enabled to have MediaConvert use the font style and
     /// position information from the captions source in the output. This option is
     /// available only when your input captions are IMSC, SMPTE-TT, or TTML. Disable
     /// this setting for simplified output captions.
-    style_passthrough: ?ImscStylePassthrough,
+    style_passthrough: ?ImscStylePassthrough = null,
 
     pub const json_field_names = .{
         .accessibility = "Accessibility",

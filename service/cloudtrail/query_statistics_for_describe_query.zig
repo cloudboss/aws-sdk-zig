@@ -9,19 +9,19 @@ pub const QueryStatisticsForDescribeQuery = struct {
     /// number of bytes for which your account is billed for the query, unless the
     /// query is still
     /// running.
-    bytes_scanned: ?i64,
+    bytes_scanned: ?i64 = null,
 
     /// The creation time of the query.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The number of events that matched a query.
-    events_matched: ?i64,
+    events_matched: ?i64 = null,
 
     /// The number of events that the query scanned in the event data store.
-    events_scanned: ?i64,
+    events_scanned: ?i64 = null,
 
     /// The query's run time, in milliseconds.
-    execution_time_in_millis: ?i32,
+    execution_time_in_millis: ?i32 = null,
 
     pub const json_field_names = .{
         .bytes_scanned = "BytesScanned",

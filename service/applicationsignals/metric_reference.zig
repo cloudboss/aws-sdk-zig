@@ -4,12 +4,12 @@ const Dimension = @import("dimension.zig").Dimension;
 /// with this entity discovered by Application Signals.
 pub const MetricReference = struct {
     /// Amazon Web Services account ID.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// An array of one or more dimensions that further define the metric. For more
     /// information, see
     /// [CloudWatchDimensions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension).
-    dimensions: ?[]const Dimension,
+    dimensions: ?[]const Dimension = null,
 
     /// The name of the metric.
     metric_name: []const u8,

@@ -25,7 +25,7 @@ pub const SSHPublicKey = struct {
     /// The date and time, in [ISO 8601 date-time
     /// format](http://www.iso.org/iso/iso8601), when the SSH public key was
     /// uploaded.
-    upload_date: ?i64,
+    upload_date: ?i64 = null,
 
     /// The name of the IAM user associated with the SSH public key.
     user_name: []const u8,

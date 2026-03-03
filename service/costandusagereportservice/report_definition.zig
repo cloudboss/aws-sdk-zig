@@ -15,7 +15,7 @@ const TimeUnit = @import("time_unit.zig").TimeUnit;
 pub const ReportDefinition = struct {
     /// A list of manifests that you want Amazon Web Services to create for this
     /// report.
-    additional_artifacts: ?[]const AdditionalArtifact,
+    additional_artifacts: ?[]const AdditionalArtifact = null,
 
     /// A list of strings that indicate additional content that Amazon Web Services
     /// includes in the report, such as individual resource IDs.
@@ -26,7 +26,7 @@ pub const ReportDefinition = struct {
     /// maintained in the Amazon Web Services Billing Conductor service. The
     /// `BillingViewArn` for a billing group can be constructed as:
     /// `arn:aws:billing::payer-account-id:billingview/billing-group-primary-account-id`
-    billing_view_arn: ?[]const u8,
+    billing_view_arn: ?[]const u8 = null,
 
     compression: CompressionFormat,
 
@@ -36,17 +36,17 @@ pub const ReportDefinition = struct {
     /// been finalized if Amazon Web Services detects charges related to
     /// previous months. These charges can include refunds, credits, or support
     /// fees.
-    refresh_closed_reports: ?bool,
+    refresh_closed_reports: ?bool = null,
 
     report_name: []const u8,
 
     /// The status of the report.
-    report_status: ?ReportStatus,
+    report_status: ?ReportStatus = null,
 
     /// Whether you want Amazon Web Services to overwrite the previous version of
     /// each report or
     /// to deliver the report in addition to the previous versions.
-    report_versioning: ?ReportVersioning,
+    report_versioning: ?ReportVersioning = null,
 
     s3_bucket: []const u8,
 

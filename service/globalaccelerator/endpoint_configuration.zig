@@ -5,7 +5,7 @@ pub const EndpointConfiguration = struct {
     /// specifies the endpoints (resources)
     /// that can be added to accelerators and principals that have permission to add
     /// the endpoints.
-    attachment_arn: ?[]const u8,
+    attachment_arn: ?[]const u8 = null,
 
     /// Indicates whether client IP address preservation is enabled for an endpoint.
     /// The value is true or false. The default value is true for Application Load
@@ -24,7 +24,7 @@ pub const EndpointConfiguration = struct {
     /// For more information, see [
     /// Preserve client IP addresses in Global
     /// Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html) in the *Global Accelerator Developer Guide*.
-    client_ip_preservation_enabled: ?bool,
+    client_ip_preservation_enabled: ?bool = null,
 
     /// An ID for the endpoint. If the endpoint is a Network Load Balancer or
     /// Application Load Balancer, this is the Amazon
@@ -35,7 +35,7 @@ pub const EndpointConfiguration = struct {
     /// when you add it as an endpoint.
     ///
     /// For cross-account endpoints, this must be the ARN of the resource.
-    endpoint_id: ?[]const u8,
+    endpoint_id: ?[]const u8 = null,
 
     /// The weight associated with the endpoint. When you add weights to endpoints,
     /// you configure Global Accelerator to route traffic
@@ -47,7 +47,7 @@ pub const EndpointConfiguration = struct {
     /// information, see [Endpoint
     /// weights](https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html) in the
     /// *Global Accelerator Developer Guide*.
-    weight: ?i32,
+    weight: ?i32 = null,
 
     pub const json_field_names = .{
         .attachment_arn = "AttachmentArn",

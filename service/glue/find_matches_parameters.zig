@@ -17,7 +17,7 @@ pub const FindMatchesParameters = struct {
     /// Cost measures how many compute resources, and thus money, are consumed to
     /// run the
     /// transform.
-    accuracy_cost_tradeoff: ?f64,
+    accuracy_cost_tradeoff: ?f64 = null,
 
     /// The value to switch on or off to force the output to match the provided
     /// labels from users. If the value is `True`, the `find matches` transform
@@ -28,7 +28,7 @@ pub const FindMatchesParameters = struct {
     ///
     /// Note that setting this value to true may increase the conflation execution
     /// time.
-    enforce_provided_labels: ?bool,
+    enforce_provided_labels: ?bool = null,
 
     /// The value selected when tuning your transform for a balance between
     /// precision and recall.
@@ -45,11 +45,11 @@ pub const FindMatchesParameters = struct {
     /// The recall metric indicates that for an actual match, how often your model
     /// predicts the
     /// match.
-    precision_recall_tradeoff: ?f64,
+    precision_recall_tradeoff: ?f64 = null,
 
     /// The name of a column that uniquely identifies rows in the source table. Used
     /// to help identify matching records.
-    primary_key_column_name: ?[]const u8,
+    primary_key_column_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .accuracy_cost_tradeoff = "AccuracyCostTradeoff",

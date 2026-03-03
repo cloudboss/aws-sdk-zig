@@ -6,7 +6,7 @@ pub const TableCellConditionalFormatting = struct {
     field_id: []const u8,
 
     /// The text format of the cell for conditional formatting.
-    text_format: ?TextConditionalFormat,
+    text_format: ?TextConditionalFormat = null,
 
     pub const json_field_names = .{
         .field_id = "FieldId",

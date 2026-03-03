@@ -3,11 +3,11 @@
 pub const ListCustomLineItemVersionsBillingPeriodRangeFilter = struct {
     /// The exclusive end billing period that defines a billing period range where a
     /// custom line item version is applied.
-    end_billing_period: ?[]const u8,
+    end_billing_period: ?[]const u8 = null,
 
     /// The inclusive start billing period that defines a billing period range where
     /// a custom line item version is applied.
-    start_billing_period: ?[]const u8,
+    start_billing_period: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .end_billing_period = "EndBillingPeriod",

@@ -3,8 +3,8 @@ const TransitGatewayMulitcastDomainAssociationState = @import("transit_gateway_m
 /// Describes the subnet association with the transit gateway multicast domain.
 pub const SubnetAssociation = struct {
     /// The state of the subnet association.
-    state: ?TransitGatewayMulitcastDomainAssociationState,
+    state: ?TransitGatewayMulitcastDomainAssociationState = null,
 
     /// The ID of the subnet.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 };

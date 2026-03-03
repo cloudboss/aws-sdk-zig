@@ -6,21 +6,21 @@ const LanguageCode = @import("language_code.zig").LanguageCode;
 pub const LexiconAttributes = struct {
     /// Phonetic alphabet used in the lexicon. Valid values are
     /// `ipa` and `x-sampa`.
-    alphabet: ?[]const u8,
+    alphabet: ?[]const u8 = null,
 
     /// Language code that the lexicon applies to. A lexicon with a
     /// language code such as "en" would be applied to all English languages
     /// (en-GB, en-US, en-AUS, en-WLS, and so on.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// Date lexicon was last modified (a timestamp value).
-    last_modified: ?i64,
+    last_modified: ?i64 = null,
 
     /// Number of lexemes in the lexicon.
     lexemes_count: i32 = 0,
 
     /// Amazon Resource Name (ARN) of the lexicon.
-    lexicon_arn: ?[]const u8,
+    lexicon_arn: ?[]const u8 = null,
 
     /// Total size of the lexicon, in characters.
     size: i32 = 0,

@@ -9,14 +9,14 @@ pub const DocumentDbConfiguration = struct {
     behavior: DocumentDbDefaultBehavior = "switchoverOnly",
 
     /// The cross account role for the configuration.
-    cross_account_role: ?[]const u8,
+    cross_account_role: ?[]const u8 = null,
 
     /// The database cluster Amazon Resource Names (ARNs) for a DocumentDB global
     /// cluster.
     database_cluster_arns: []const []const u8,
 
     /// The external ID (secret key) for the configuration.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The global cluster identifier for a DocumentDB global cluster.
     global_cluster_identifier: []const u8,
@@ -25,7 +25,7 @@ pub const DocumentDbConfiguration = struct {
     timeout_minutes: i32 = 60,
 
     /// The settings for ungraceful execution.
-    ungraceful: ?DocumentDbUngraceful,
+    ungraceful: ?DocumentDbUngraceful = null,
 
     pub const json_field_names = .{
         .behavior = "behavior",

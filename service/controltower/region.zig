@@ -7,7 +7,7 @@
 /// governance](https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html#mixed-governance).
 pub const Region = struct {
     /// The Amazon Web Services Region name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

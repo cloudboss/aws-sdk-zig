@@ -10,7 +10,7 @@ pub const S3Config = struct {
     bucket_prefix: []const u8,
 
     /// The Amazon S3 encryption configuration.
-    encryption_config: ?EncryptionConfig,
+    encryption_config: ?EncryptionConfig = null,
 
     pub const json_field_names = .{
         .bucket_name = "BucketName",

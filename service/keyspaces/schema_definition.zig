@@ -9,14 +9,14 @@ pub const SchemaDefinition = struct {
     all_columns: []const ColumnDefinition,
 
     /// The columns that are part of the clustering key of the table.
-    clustering_keys: ?[]const ClusteringKey,
+    clustering_keys: ?[]const ClusteringKey = null,
 
     /// The columns that are part of the partition key of the table .
     partition_keys: []const PartitionKey,
 
     /// The columns that have been defined as `STATIC`. Static columns store values
     /// that are shared by all rows in the same partition.
-    static_columns: ?[]const StaticColumn,
+    static_columns: ?[]const StaticColumn = null,
 
     pub const json_field_names = .{
         .all_columns = "allColumns",

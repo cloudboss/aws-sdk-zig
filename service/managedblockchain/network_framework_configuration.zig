@@ -5,7 +5,7 @@ const NetworkFabricConfiguration = @import("network_fabric_configuration.zig").N
 pub const NetworkFrameworkConfiguration = struct {
     /// Hyperledger Fabric configuration properties for a Managed Blockchain network
     /// that uses Hyperledger Fabric.
-    fabric: ?NetworkFabricConfiguration,
+    fabric: ?NetworkFabricConfiguration = null,
 
     pub const json_field_names = .{
         .fabric = "Fabric",

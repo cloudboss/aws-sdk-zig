@@ -8,7 +8,7 @@ pub const Volume = struct {
     /// that are running on Fargate resources must specify a `platformVersion` of at
     /// least
     /// `1.4.0`.
-    efs_volume_configuration: ?EFSVolumeConfiguration,
+    efs_volume_configuration: ?EFSVolumeConfiguration = null,
 
     /// The contents of the `host` parameter determine whether your data volume
     /// persists
@@ -21,13 +21,13 @@ pub const Volume = struct {
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources and
     /// shouldn't be provided.
-    host: ?Host,
+    host: ?Host = null,
 
     /// The name of the volume. It can be up to 255 characters long. It can contain
     /// uppercase and lowercase letters,
     /// numbers, hyphens (-), and underscores (_). This name is referenced in the
     /// `sourceVolume` parameter of container definition `mountPoints`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .efs_volume_configuration = "efsVolumeConfiguration",

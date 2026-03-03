@@ -20,25 +20,25 @@ pub const App = struct {
     app_id: []const u8,
 
     /// Describes the automated branch creation configuration for the Amplify app.
-    auto_branch_creation_config: ?AutoBranchCreationConfig,
+    auto_branch_creation_config: ?AutoBranchCreationConfig = null,
 
     /// Describes the automated branch creation glob patterns for the Amplify app.
-    auto_branch_creation_patterns: ?[]const []const u8,
+    auto_branch_creation_patterns: ?[]const []const u8 = null,
 
     /// The basic authorization credentials for branches for the Amplify app. You
     /// must
     /// base64-encode the authorization credentials and provide them in the format
     /// `user:password`.
-    basic_auth_credentials: ?[]const u8,
+    basic_auth_credentials: ?[]const u8 = null,
 
     /// Describes the content of the build specification (build spec) for the
     /// Amplify app.
-    build_spec: ?[]const u8,
+    build_spec: ?[]const u8 = null,
 
     /// The cache configuration for the Amplify app. If you don't specify the
     /// cache configuration `type`, Amplify uses the default
     /// `AMPLIFY_MANAGED` setting.
-    cache_config: ?CacheConfig,
+    cache_config: ?CacheConfig = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role for an SSR app. The
     /// Compute role allows the Amplify Hosting compute service to securely
@@ -46,16 +46,16 @@ pub const App = struct {
     /// permissions. For more
     /// information about the SSR Compute role, see [Adding an SSR Compute
     /// role](https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html) in the *Amplify User Guide*.
-    compute_role_arn: ?[]const u8,
+    compute_role_arn: ?[]const u8 = null,
 
     /// A timestamp of when Amplify created the application.
     create_time: i64,
 
     /// Describes the custom HTTP headers for the Amplify app.
-    custom_headers: ?[]const u8,
+    custom_headers: ?[]const u8 = null,
 
     /// Describes the custom redirect and rewrite rules for the Amplify app.
-    custom_rules: ?[]const CustomRule,
+    custom_rules: ?[]const CustomRule = null,
 
     /// The default domain for the Amplify app.
     default_domain: []const u8,
@@ -64,7 +64,7 @@ pub const App = struct {
     description: []const u8,
 
     /// Enables automated branch creation for the Amplify app.
-    enable_auto_branch_creation: ?bool,
+    enable_auto_branch_creation: ?bool = null,
 
     /// Enables basic authorization for the Amplify app's branches.
     enable_basic_auth: bool,
@@ -75,7 +75,7 @@ pub const App = struct {
     /// Automatically disconnect a branch in the Amplify console when you delete a
     /// branch from
     /// your Git repository.
-    enable_branch_auto_deletion: ?bool,
+    enable_branch_auto_deletion: ?bool = null,
 
     /// The environment variables for the Amplify app.
     ///
@@ -88,10 +88,10 @@ pub const App = struct {
     environment_variables: []const aws.map.StringMapEntry,
 
     /// The Amazon Resource Name (ARN) of the IAM service role for the Amplify app.
-    iam_service_role_arn: ?[]const u8,
+    iam_service_role_arn: ?[]const u8 = null,
 
     /// The configuration details that apply to the jobs for an Amplify app.
-    job_config: ?JobConfig,
+    job_config: ?JobConfig = null,
 
     /// The name for the Amplify app.
     name: []const u8,
@@ -107,7 +107,7 @@ pub const App = struct {
     platform: Platform,
 
     /// Describes the information about a production branch of the Amplify app.
-    production_branch: ?ProductionBranch,
+    production_branch: ?ProductionBranch = null,
 
     /// The Git repository for the Amplify app.
     repository: []const u8,
@@ -119,10 +119,10 @@ pub const App = struct {
     /// to access the Git repository for an Amplify app. Amplify specifies `TOKEN`
     /// for a GitHub repository, `SIGV4` for an Amazon Web Services CodeCommit
     /// repository, and `SSH` for GitLab and Bitbucket repositories.
-    repository_clone_method: ?RepositoryCloneMethod,
+    repository_clone_method: ?RepositoryCloneMethod = null,
 
     /// The tag for the Amplify app.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// A timestamp of when Amplify updated the application.
     update_time: i64,
@@ -131,11 +131,11 @@ pub const App = struct {
     /// support enables you to protect your hosted applications with a direct
     /// integration with
     /// WAF.
-    waf_configuration: ?WafConfiguration,
+    waf_configuration: ?WafConfiguration = null,
 
     /// A timestamp of when Amplify created the webhook in your Git
     /// repository.
-    webhook_create_time: ?i64,
+    webhook_create_time: ?i64 = null,
 
     pub const json_field_names = .{
         .app_arn = "appArn",

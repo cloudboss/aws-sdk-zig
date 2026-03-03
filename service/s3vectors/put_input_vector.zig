@@ -20,7 +20,7 @@ pub const PutInputVector = struct {
 
     /// Metadata about the vector. All metadata entries undergo validation to ensure
     /// they meet the format requirements for size and data types.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data = "data",

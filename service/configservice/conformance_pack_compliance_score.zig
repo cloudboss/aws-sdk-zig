@@ -7,14 +7,14 @@
 /// the level of compliance in your conformance packs.
 pub const ConformancePackComplianceScore = struct {
     /// The name of the conformance pack.
-    conformance_pack_name: ?[]const u8,
+    conformance_pack_name: ?[]const u8 = null,
 
     /// The time that the conformance pack compliance score was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// Compliance score for the conformance pack. Conformance packs with no
     /// evaluation results will have a compliance score of `INSUFFICIENT_DATA`.
-    score: ?[]const u8,
+    score: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .conformance_pack_name = "ConformancePackName",

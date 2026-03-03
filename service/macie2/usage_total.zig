@@ -8,17 +8,17 @@ const UsageType = @import("usage_type.zig").UsageType;
 pub const UsageTotal = struct {
     /// The type of currency that the value for the metric (estimatedCost) is
     /// reported in.
-    currency: ?Currency,
+    currency: ?Currency = null,
 
     /// The estimated value for the metric.
-    estimated_cost: ?[]const u8,
+    estimated_cost: ?[]const u8 = null,
 
     /// The name of the metric. Possible values are: AUTOMATED_OBJECT_MONITORING, to
     /// monitor S3 objects for automated sensitive data discovery;
     /// AUTOMATED_SENSITIVE_DATA_DISCOVERY, to analyze S3 objects for automated
     /// sensitive data discovery; DATA_INVENTORY_EVALUATION, to monitor S3 buckets;
     /// and, SENSITIVE_DATA_DISCOVERY, to run classification jobs.
-    @"type": ?UsageType,
+    @"type": ?UsageType = null,
 
     pub const json_field_names = .{
         .currency = "currency",

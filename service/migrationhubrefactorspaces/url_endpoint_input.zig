@@ -6,7 +6,7 @@ pub const UrlEndpointInput = struct {
     /// inside a virtual private cloud (VPC), the health URL must also be a private
     /// endpoint, and the
     /// host must be the same as the URL.
-    health_url: ?[]const u8,
+    health_url: ?[]const u8 = null,
 
     /// The URL to route traffic to. The URL must be an [rfc3986-formatted
     /// URL](https://datatracker.ietf.org/doc/html/rfc3986). If the

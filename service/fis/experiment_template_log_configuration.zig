@@ -4,13 +4,13 @@ const ExperimentTemplateS3LogConfiguration = @import("experiment_template_s3_log
 /// Describes the configuration for experiment logging.
 pub const ExperimentTemplateLogConfiguration = struct {
     /// The configuration for experiment logging to Amazon CloudWatch Logs.
-    cloud_watch_logs_configuration: ?ExperimentTemplateCloudWatchLogsLogConfiguration,
+    cloud_watch_logs_configuration: ?ExperimentTemplateCloudWatchLogsLogConfiguration = null,
 
     /// The schema version.
-    log_schema_version: ?i32,
+    log_schema_version: ?i32 = null,
 
     /// The configuration for experiment logging to Amazon S3.
-    s_3_configuration: ?ExperimentTemplateS3LogConfiguration,
+    s_3_configuration: ?ExperimentTemplateS3LogConfiguration = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs_configuration = "cloudWatchLogsConfiguration",

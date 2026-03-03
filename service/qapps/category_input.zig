@@ -3,7 +3,7 @@
 pub const CategoryInput = struct {
     /// The color of the category, represented as a hexadecimal value of either 3 or
     /// 6 digits.
-    color: ?[]const u8,
+    color: ?[]const u8 = null,
 
     /// The unique identifier of the category.
     id: []const u8,

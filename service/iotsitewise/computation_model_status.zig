@@ -3,7 +3,7 @@ const ComputationModelState = @import("computation_model_state.zig").Computation
 
 /// Contains current status information for a computation model.
 pub const ComputationModelStatus = struct {
-    @"error": ?ErrorDetails,
+    @"error": ?ErrorDetails = null,
 
     /// The current state of the computation model.
     state: ComputationModelState,

@@ -11,19 +11,19 @@ const Type = @import("type.zig").Type;
 /// https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.
 pub const Queue = struct {
     /// An identifier for this resource that is unique within all of AWS.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The maximum number of jobs your queue can process concurrently.
-    concurrent_jobs: ?i32,
+    concurrent_jobs: ?i32 = null,
 
     /// The timestamp in epoch seconds for when you created the queue.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// An optional description that you create for each queue.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The timestamp in epoch seconds for when you most recently updated the queue.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// A name that you create for each queue. Each name must be unique within your
     /// account.
@@ -34,32 +34,32 @@ pub const Queue = struct {
     /// reserved, you pay for the transcoding capacity of the entire queue,
     /// regardless of how much or how little you use it. Reserved pricing requires a
     /// 12-month commitment.
-    pricing_plan: ?PricingPlan,
+    pricing_plan: ?PricingPlan = null,
 
     /// The estimated number of jobs with a PROGRESSING status.
-    progressing_jobs_count: ?i32,
+    progressing_jobs_count: ?i32 = null,
 
     /// Details about the pricing plan for your reserved queue. Required for
     /// reserved queues and not applicable to on-demand queues.
-    reservation_plan: ?ReservationPlan,
+    reservation_plan: ?ReservationPlan = null,
 
     /// A list of any service overrides applied by MediaConvert to the settings that
     /// you have configured. If you see any overrides, we recommend that you contact
     /// AWS Support.
-    service_overrides: ?[]const ServiceOverride,
+    service_overrides: ?[]const ServiceOverride = null,
 
     /// Queues can be ACTIVE or PAUSED. If you pause a queue, the service won't
     /// begin processing jobs in that queue. Jobs that are running when you pause
     /// the queue continue to run until they finish or result in an error.
-    status: ?QueueStatus,
+    status: ?QueueStatus = null,
 
     /// The estimated number of jobs with a SUBMITTED status.
-    submitted_jobs_count: ?i32,
+    submitted_jobs_count: ?i32 = null,
 
     /// Specifies whether this on-demand queue is system or custom. System queues
     /// are built in. You can't modify or delete system queues. You can create and
     /// modify custom queues.
-    @"type": ?Type,
+    @"type": ?Type = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

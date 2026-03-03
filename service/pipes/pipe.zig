@@ -6,35 +6,35 @@ const RequestedPipeState = @import("requested_pipe_state.zig").RequestedPipeStat
 /// targets and reduces the need for specialized knowledge and integration code.
 pub const Pipe = struct {
     /// The ARN of the pipe.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time the pipe was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The state the pipe is in.
-    current_state: ?PipeState,
+    current_state: ?PipeState = null,
 
     /// The state the pipe should be in.
-    desired_state: ?RequestedPipeState,
+    desired_state: ?RequestedPipeState = null,
 
     /// The ARN of the enrichment resource.
-    enrichment: ?[]const u8,
+    enrichment: ?[]const u8 = null,
 
     /// When the pipe was last updated, in [ISO-8601
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the pipe.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN of the source resource.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     /// The reason the pipe is in its current state.
-    state_reason: ?[]const u8,
+    state_reason: ?[]const u8 = null,
 
     /// The ARN of the target resource.
-    target: ?[]const u8,
+    target: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

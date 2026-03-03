@@ -2,12 +2,12 @@
 /// Resource Explorer.
 pub const SupportedResourceType = struct {
     /// The unique identifier of the resource type.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The Amazon Web Services service that is associated with the resource type.
     /// This is the primary service that lets you create and interact with resources
     /// of this type.
-    service: ?[]const u8,
+    service: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resource_type = "ResourceType",

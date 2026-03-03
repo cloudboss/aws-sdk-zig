@@ -9,7 +9,7 @@ pub const NotificationHubOverview = struct {
     creation_time: i64,
 
     /// The most recent time this `NotificationHub` had an `ACTIVE` status.
-    last_activation_time: ?i64,
+    last_activation_time: ?i64 = null,
 
     /// The Region of the resource.
     notification_hub_region: []const u8,

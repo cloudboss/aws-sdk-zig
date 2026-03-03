@@ -14,49 +14,49 @@ const EndpointState = @import("endpoint_state.zig").EndpointState;
 /// .
 pub const Endpoint = struct {
     /// The ARN of the endpoint.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time the endpoint was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A description for the endpoint.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The URL subdomain of the endpoint. For example, if the URL for Endpoint is
     /// https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is
     /// `abcde.veo`.
-    endpoint_id: ?[]const u8,
+    endpoint_id: ?[]const u8 = null,
 
     /// The URL of the endpoint.
-    endpoint_url: ?[]const u8,
+    endpoint_url: ?[]const u8 = null,
 
     /// The event buses being used by the endpoint.
-    event_buses: ?[]const EndpointEventBus,
+    event_buses: ?[]const EndpointEventBus = null,
 
     /// The last time the endpoint was modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the endpoint.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Whether event replication was enabled or disabled for this endpoint. The
     /// default state is
     /// `ENABLED` which means you must supply a `RoleArn`. If you don't have a
     /// `RoleArn` or you don't want event replication enabled, set the state to
     /// `DISABLED`.
-    replication_config: ?ReplicationConfig,
+    replication_config: ?ReplicationConfig = null,
 
     /// The ARN of the role used by event replication for the endpoint.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The routing configuration of the endpoint.
-    routing_config: ?RoutingConfig,
+    routing_config: ?RoutingConfig = null,
 
     /// The current state of the endpoint.
-    state: ?EndpointState,
+    state: ?EndpointState = null,
 
     /// The reason the endpoint is in its current state.
-    state_reason: ?[]const u8,
+    state_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

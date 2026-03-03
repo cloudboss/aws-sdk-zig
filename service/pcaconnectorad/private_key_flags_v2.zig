@@ -8,10 +8,10 @@ pub const PrivateKeyFlagsV2 = struct {
     client_version: ClientCompatibilityV2,
 
     /// Allows the private key to be exported.
-    exportable_key: ?bool,
+    exportable_key: ?bool = null,
 
     /// Require user input when using the private key for enrollment.
-    strong_key_protection_required: ?bool,
+    strong_key_protection_required: ?bool = null,
 
     pub const json_field_names = .{
         .client_version = "ClientVersion",

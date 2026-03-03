@@ -6,33 +6,33 @@ const UploadType = @import("upload_type.zig").UploadType;
 /// uploaded.
 pub const Upload = struct {
     /// The upload's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The upload's category. Allowed values include:
     ///
     /// * CURATED: An upload managed by AWS Device Farm.
     ///
     /// * PRIVATE: An upload managed by the AWS Device Farm customer.
-    category: ?UploadCategory,
+    category: ?UploadCategory = null,
 
     /// The upload's content type (for example, `application/octet-stream`).
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// When the upload was created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// A message about the upload's result.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The upload's metadata. For example, for Android, this contains information
     /// that is
     /// parsed from the manifest and is displayed in the AWS Device Farm console
     /// after the
     /// associated app is uploaded.
-    metadata: ?[]const u8,
+    metadata: ?[]const u8 = null,
 
     /// The upload's file name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The upload's status.
     ///
@@ -45,7 +45,7 @@ pub const Upload = struct {
     /// * PROCESSING
     ///
     /// * SUCCEEDED
-    status: ?UploadStatus,
+    status: ?UploadStatus = null,
 
     /// The upload's type.
     ///
@@ -108,11 +108,11 @@ pub const Upload = struct {
     /// * INSTRUMENTATION_TEST_SPEC
     ///
     /// * XCTEST_UI_TEST_SPEC
-    @"type": ?UploadType,
+    @"type": ?UploadType = null,
 
     /// The presigned Amazon S3 URL that was used to store a file using a PUT
     /// request.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

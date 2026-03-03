@@ -20,87 +20,87 @@ pub const MonitorTopContributorsRow = struct {
     ///   Services services
     /// * `UNCLASSIFIED`: Top contributor network flows that do not have a bucket
     ///   classification
-    destination_category: ?DestinationCategory,
+    destination_category: ?DestinationCategory = null,
 
     /// The destination network address translation (DNAT) IP address for a top
     /// contributor network flow.
-    dnat_ip: ?[]const u8,
+    dnat_ip: ?[]const u8 = null,
 
     /// Meta data about Kubernetes resources.
-    kubernetes_metadata: ?KubernetesMetadata,
+    kubernetes_metadata: ?KubernetesMetadata = null,
 
     /// The Availability Zone for the local resource for a top contributor network
     /// flow.
-    local_az: ?[]const u8,
+    local_az: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of a local resource.
-    local_instance_arn: ?[]const u8,
+    local_instance_arn: ?[]const u8 = null,
 
     /// The instance identifier for the local resource for a top contributor network
     /// flow.
-    local_instance_id: ?[]const u8,
+    local_instance_id: ?[]const u8 = null,
 
     /// The IP address of the local resource for a top contributor network flow.
-    local_ip: ?[]const u8,
+    local_ip: ?[]const u8 = null,
 
     /// The Amazon Web Services Region for the local resource for a top contributor
     /// network flow.
-    local_region: ?[]const u8,
+    local_region: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of a local subnet.
-    local_subnet_arn: ?[]const u8,
+    local_subnet_arn: ?[]const u8 = null,
 
     /// The subnet ID for the local resource for a top contributor network flow.
-    local_subnet_id: ?[]const u8,
+    local_subnet_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of a local VPC.
-    local_vpc_arn: ?[]const u8,
+    local_vpc_arn: ?[]const u8 = null,
 
     /// The VPC ID for a top contributor network flow for the local resource.
-    local_vpc_id: ?[]const u8,
+    local_vpc_id: ?[]const u8 = null,
 
     /// The Availability Zone for the remote resource for a top contributor network
     /// flow.
-    remote_az: ?[]const u8,
+    remote_az: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of a remote resource.
-    remote_instance_arn: ?[]const u8,
+    remote_instance_arn: ?[]const u8 = null,
 
     /// The instance identifier for the remote resource for a top contributor
     /// network flow.
-    remote_instance_id: ?[]const u8,
+    remote_instance_id: ?[]const u8 = null,
 
     /// The IP address of the remote resource for a top contributor network flow.
-    remote_ip: ?[]const u8,
+    remote_ip: ?[]const u8 = null,
 
     /// The Amazon Web Services Region for the remote resource for a top contributor
     /// network flow.
-    remote_region: ?[]const u8,
+    remote_region: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of a remote subnet.
-    remote_subnet_arn: ?[]const u8,
+    remote_subnet_arn: ?[]const u8 = null,
 
     /// The subnet ID for the remote resource for a top contributor network flow.
-    remote_subnet_id: ?[]const u8,
+    remote_subnet_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of a remote VPC.
-    remote_vpc_arn: ?[]const u8,
+    remote_vpc_arn: ?[]const u8 = null,
 
     /// The VPC ID for a top contributor network flow for the remote resource.
-    remote_vpc_id: ?[]const u8,
+    remote_vpc_id: ?[]const u8 = null,
 
     /// The secure network address translation (SNAT) IP address for a top
     /// contributor network flow.
-    snat_ip: ?[]const u8,
+    snat_ip: ?[]const u8 = null,
 
     /// The target port.
-    target_port: ?i32,
+    target_port: ?i32 = null,
 
     /// The constructs traversed by a network flow.
-    traversed_constructs: ?[]const TraversedComponent,
+    traversed_constructs: ?[]const TraversedComponent = null,
 
     /// The value of the metric for a top contributor network flow.
-    value: ?i64,
+    value: ?i64 = null,
 
     pub const json_field_names = .{
         .destination_category = "destinationCategory",

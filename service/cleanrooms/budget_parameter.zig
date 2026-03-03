@@ -6,7 +6,7 @@ const AccessBudgetType = @import("access_budget_type.zig").AccessBudgetType;
 pub const BudgetParameter = struct {
     /// Whether this individual budget parameter automatically refreshes when the
     /// budget period resets.
-    auto_refresh: ?AutoRefreshMode,
+    auto_refresh: ?AutoRefreshMode = null,
 
     /// The budget allocation amount for this specific parameter.
     budget: i32,

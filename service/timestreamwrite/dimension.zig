@@ -7,7 +7,7 @@ const DimensionValueType = @import("dimension_value_type.zig").DimensionValueTyp
 /// dimensions.
 pub const Dimension = struct {
     /// The data type of the dimension for the time-series data point.
-    dimension_value_type: ?DimensionValueType,
+    dimension_value_type: ?DimensionValueType = null,
 
     /// Dimension represents the metadata attributes of the time series. For
     /// example, the name

@@ -5,7 +5,7 @@ const AddressComponentMatchScores = @import("address_component_match_scores.zig"
 /// tokens were matched and 0 indicating no tokens were matched.
 pub const ComponentMatchScores = struct {
     /// The place's address.
-    address: ?AddressComponentMatchScores,
+    address: ?AddressComponentMatchScores = null,
 
     /// Indicates the match score of the title in the text query that match the
     /// found title.

@@ -1,9 +1,9 @@
 const TagInfoForResource = @import("tag_info_for_resource.zig").TagInfoForResource;
 
 pub const ListTagsForResourceResponse = struct {
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
-    tag_info_for_resource: ?TagInfoForResource,
+    tag_info_for_resource: ?TagInfoForResource = null,
 
     pub const json_field_names = .{
         .next_marker = "NextMarker",

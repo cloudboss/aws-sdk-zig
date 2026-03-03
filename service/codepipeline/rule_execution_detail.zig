@@ -8,41 +8,41 @@ const RuleExecutionStatus = @import("rule_execution_status.zig").RuleExecutionSt
 pub const RuleExecutionDetail = struct {
     /// Input details for the rule execution, such as role ARN, Region, and input
     /// artifacts.
-    input: ?RuleExecutionInput,
+    input: ?RuleExecutionInput = null,
 
     /// The date and time of the last change to the rule execution, in timestamp
     /// format.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// Output details for the rule execution, such as the rule execution result.
-    output: ?RuleExecutionOutput,
+    output: ?RuleExecutionOutput = null,
 
     /// The ID of the pipeline execution in the stage where the rule was run. Use
     /// the GetPipelineState action to retrieve the current pipelineExecutionId of
     /// the stage.
-    pipeline_execution_id: ?[]const u8,
+    pipeline_execution_id: ?[]const u8 = null,
 
     /// The version number of the pipeline with the stage where the rule was run.
-    pipeline_version: ?i32,
+    pipeline_version: ?i32 = null,
 
     /// The ID of the run for the rule.
-    rule_execution_id: ?[]const u8,
+    rule_execution_id: ?[]const u8 = null,
 
     /// The name of the rule that was run in the stage.
-    rule_name: ?[]const u8,
+    rule_name: ?[]const u8 = null,
 
     /// The name of the stage where the rule was run.
-    stage_name: ?[]const u8,
+    stage_name: ?[]const u8 = null,
 
     /// The start time of the rule execution.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of the rule execution. Status categories are `InProgress`,
     /// `Succeeded`, and `Failed`.
-    status: ?RuleExecutionStatus,
+    status: ?RuleExecutionStatus = null,
 
     /// The ARN of the user who changed the rule execution details.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .input = "input",

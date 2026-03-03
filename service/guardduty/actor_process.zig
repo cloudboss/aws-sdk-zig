@@ -11,7 +11,7 @@ pub const ActorProcess = struct {
     /// The SHA256 hash of the process executable file, which can be used for
     /// identification
     /// and verification purposes.
-    sha_256: ?[]const u8,
+    sha_256: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

@@ -10,7 +10,7 @@ pub const ClusterEventSummary = struct {
     cluster_name: []const u8,
 
     /// A brief, human-readable description of the event.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier (UUID) of the event.
     event_id: []const u8,
@@ -19,11 +19,11 @@ pub const ClusterEventSummary = struct {
     event_time: i64,
 
     /// The name of the instance group associated with the event, if applicable.
-    instance_group_name: ?[]const u8,
+    instance_group_name: ?[]const u8 = null,
 
     /// The Amazon Elastic Compute Cloud (EC2) instance ID associated with the
     /// event, if applicable.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The type of resource associated with the event. Valid values are `Cluster`,
     /// `InstanceGroup`, or `Instance`.

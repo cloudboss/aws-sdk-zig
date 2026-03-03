@@ -5,14 +5,14 @@ const TlsValidationContext = @import("tls_validation_context.zig").TlsValidation
 /// client policy.
 pub const ClientPolicyTls = struct {
     /// A reference to an object that represents a client's TLS certificate.
-    certificate: ?ClientTlsCertificate,
+    certificate: ?ClientTlsCertificate = null,
 
     /// Whether the policy is enforced. The default is `True`, if a value isn't
     /// specified.
-    enforce: ?bool,
+    enforce: ?bool = null,
 
     /// One or more ports that the policy is enforced for.
-    ports: ?[]const i32,
+    ports: ?[]const i32 = null,
 
     /// A reference to an object that represents a TLS validation context.
     validation: TlsValidationContext,

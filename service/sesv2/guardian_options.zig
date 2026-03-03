@@ -13,7 +13,7 @@ pub const GuardianOptions = struct {
     ///
     /// * `DISABLED` – Amazon SES disables optimized shared delivery for the
     /// configuration set.
-    optimized_shared_delivery: ?FeatureStatus,
+    optimized_shared_delivery: ?FeatureStatus = null,
 
     pub const json_field_names = .{
         .optimized_shared_delivery = "OptimizedSharedDelivery",

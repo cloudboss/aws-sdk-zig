@@ -17,10 +17,10 @@ const IPAddressVersion = @import("ip_address_version.zig").IPAddressVersion;
 /// rate limit, WAF limits those with the highest rates.
 pub const RateBasedStatementManagedKeysIPSet = struct {
     /// The IP addresses that are currently blocked.
-    addresses: ?[]const []const u8,
+    addresses: ?[]const []const u8 = null,
 
     /// The version of the IP addresses, either `IPV4` or `IPV6`.
-    ip_address_version: ?IPAddressVersion,
+    ip_address_version: ?IPAddressVersion = null,
 
     pub const json_field_names = .{
         .addresses = "Addresses",

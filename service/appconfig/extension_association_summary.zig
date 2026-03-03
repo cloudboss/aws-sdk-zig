@@ -4,17 +4,17 @@
 /// association.
 pub const ExtensionAssociationSummary = struct {
     /// The system-generated Amazon Resource Name (ARN) for the extension.
-    extension_arn: ?[]const u8,
+    extension_arn: ?[]const u8 = null,
 
     /// The extension association ID. This ID is used to call other
     /// `ExtensionAssociation` API actions such as
     /// `GetExtensionAssociation` or `DeleteExtensionAssociation`.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The ARNs of applications, configuration profiles, or environments defined in
     /// the
     /// association.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .extension_arn = "ExtensionArn",

@@ -9,7 +9,7 @@
 pub const PinpointDestination = struct {
     /// The Amazon Resource Name (ARN) of the Amazon Pinpoint project to send email
     /// events to.
-    application_arn: ?[]const u8,
+    application_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_arn = "ApplicationArn",

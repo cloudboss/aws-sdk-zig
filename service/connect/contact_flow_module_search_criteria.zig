@@ -6,18 +6,18 @@ const StringCondition = @import("string_condition.zig").StringCondition;
 pub const ContactFlowModuleSearchCriteria = struct {
     /// A list of conditions which would be applied together with an `AND`
     /// condition.
-    and_conditions: ?[]const ContactFlowModuleSearchCriteria,
+    and_conditions: ?[]const ContactFlowModuleSearchCriteria = null,
 
     /// A list of conditions which would be applied together with an `OR` condition.
-    or_conditions: ?[]const ContactFlowModuleSearchCriteria,
+    or_conditions: ?[]const ContactFlowModuleSearchCriteria = null,
 
     /// The state of the flow.
-    state_condition: ?ContactFlowModuleState,
+    state_condition: ?ContactFlowModuleState = null,
 
     /// The status of the flow.
-    status_condition: ?ContactFlowModuleStatus,
+    status_condition: ?ContactFlowModuleStatus = null,
 
-    string_condition: ?StringCondition,
+    string_condition: ?StringCondition = null,
 
     pub const json_field_names = .{
         .and_conditions = "AndConditions",

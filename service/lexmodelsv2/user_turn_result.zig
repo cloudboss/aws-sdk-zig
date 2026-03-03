@@ -7,17 +7,17 @@ const UserTurnInputSpecification = @import("user_turn_input_specification.zig").
 /// Contains the results for the user turn by the test execution.
 pub const UserTurnResult = struct {
     /// Contains information about the actual output for the user turn.
-    actual_output: ?UserTurnOutputSpecification,
+    actual_output: ?UserTurnOutputSpecification = null,
 
     /// Contains information about the results related to the conversation
     /// associated with the user turn.
-    conversation_level_result: ?ConversationLevelResultDetail,
+    conversation_level_result: ?ConversationLevelResultDetail = null,
 
     /// Specifies whether the expected and actual outputs match or not, or if there
     /// is an error in execution.
-    end_to_end_result: ?TestResultMatchStatus,
+    end_to_end_result: ?TestResultMatchStatus = null,
 
-    error_details: ?ExecutionErrorDetails,
+    error_details: ?ExecutionErrorDetails = null,
 
     /// Contains information about the expected output for the user turn.
     expected_output: UserTurnOutputSpecification,
@@ -26,14 +26,14 @@ pub const UserTurnResult = struct {
     input: UserTurnInputSpecification,
 
     /// Specifies whether the expected and actual intents match or not.
-    intent_match_result: ?TestResultMatchStatus,
+    intent_match_result: ?TestResultMatchStatus = null,
 
     /// Specifies whether the expected and actual slots match or not.
-    slot_match_result: ?TestResultMatchStatus,
+    slot_match_result: ?TestResultMatchStatus = null,
 
     /// Specifies whether the expected and actual speech transcriptions match or
     /// not, or if there is an error in execution.
-    speech_transcription_result: ?TestResultMatchStatus,
+    speech_transcription_result: ?TestResultMatchStatus = null,
 
     pub const json_field_names = .{
         .actual_output = "actualOutput",

@@ -10,17 +10,17 @@ pub const CapacityProvider = struct {
     capacity_provider_arn: []const u8,
 
     /// The scaling configuration for the capacity provider.
-    capacity_provider_scaling_config: ?CapacityProviderScalingConfig,
+    capacity_provider_scaling_config: ?CapacityProviderScalingConfig = null,
 
     /// The instance requirements for compute resources managed by the capacity
     /// provider.
-    instance_requirements: ?InstanceRequirements,
+    instance_requirements: ?InstanceRequirements = null,
 
     /// The ARN of the KMS key used to encrypt the capacity provider's resources.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The date and time when the capacity provider was last modified.
-    last_modified: ?[]const u8,
+    last_modified: ?[]const u8 = null,
 
     /// The permissions configuration for the capacity provider.
     permissions_config: CapacityProviderPermissionsConfig,

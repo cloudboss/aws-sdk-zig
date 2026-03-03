@@ -13,31 +13,31 @@ pub const EbsInfo = struct {
     /// for
     /// Amazon EC2
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html) in the *Amazon EC2 User Guide*.
-    attachment_limit_type: ?AttachmentLimitType,
+    attachment_limit_type: ?AttachmentLimitType = null,
 
     /// Describes the EBS cards available for the instance type.
-    ebs_cards: ?[]const EbsCardInfo,
+    ebs_cards: ?[]const EbsCardInfo = null,
 
     /// Describes the optimized EBS performance for the instance type.
-    ebs_optimized_info: ?EbsOptimizedInfo,
+    ebs_optimized_info: ?EbsOptimizedInfo = null,
 
     /// Indicates whether the instance type is Amazon EBS-optimized. For more
     /// information, see [Amazon EBS-optimized
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in *Amazon EC2 User Guide*.
-    ebs_optimized_support: ?EbsOptimizedSupport,
+    ebs_optimized_support: ?EbsOptimizedSupport = null,
 
     /// Indicates whether Amazon EBS encryption is supported.
-    encryption_support: ?EbsEncryptionSupport,
+    encryption_support: ?EbsEncryptionSupport = null,
 
     /// Indicates the maximum number of Amazon EBS volumes that can be attached to
     /// the instance type. For more information, see [Amazon EBS volume limits for
     /// Amazon EC2
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html) in the *Amazon EC2 User Guide*.
-    maximum_ebs_attachments: ?i32,
+    maximum_ebs_attachments: ?i32 = null,
 
     /// Indicates the number of EBS cards supported by the instance type.
-    maximum_ebs_cards: ?i32,
+    maximum_ebs_cards: ?i32 = null,
 
     /// Indicates whether non-volatile memory express (NVMe) is supported.
-    nvme_support: ?EbsNvmeSupport,
+    nvme_support: ?EbsNvmeSupport = null,
 };

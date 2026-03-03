@@ -12,7 +12,7 @@ pub const IncrementalRunConfig = struct {
     ///
     /// For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
     /// incremental processing is not supported.
-    incremental_run_type: ?IncrementalRunType,
+    incremental_run_type: ?IncrementalRunType = null,
 
     pub const json_field_names = .{
         .incremental_run_type = "incrementalRunType",

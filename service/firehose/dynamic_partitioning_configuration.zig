@@ -7,11 +7,11 @@ const RetryOptions = @import("retry_options.zig").RetryOptions;
 /// partitioning is only supported for Amazon S3 destinations.
 pub const DynamicPartitioningConfiguration = struct {
     /// Specifies that the dynamic partitioning is enabled for this Firehose stream.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The retry behavior in case Firehose is unable to deliver data to an Amazon
     /// S3 prefix.
-    retry_options: ?RetryOptions,
+    retry_options: ?RetryOptions = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

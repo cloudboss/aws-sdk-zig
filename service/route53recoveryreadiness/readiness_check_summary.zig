@@ -4,10 +4,10 @@ const Readiness = @import("readiness.zig").Readiness;
 /// GetRecoveryGroupReadinessSummary and GetCellReadinessSummary.
 pub const ReadinessCheckSummary = struct {
     /// The readiness status of this readiness check.
-    readiness: ?Readiness,
+    readiness: ?Readiness = null,
 
     /// The name of a readiness check.
-    readiness_check_name: ?[]const u8,
+    readiness_check_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .readiness = "Readiness",

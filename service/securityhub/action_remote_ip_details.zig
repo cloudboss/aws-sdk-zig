@@ -8,21 +8,21 @@ const IpOrganizationDetails = @import("ip_organization_details.zig").IpOrganizat
 /// the remote IP address that was involved in the action.
 pub const ActionRemoteIpDetails = struct {
     /// The city where the remote IP address is located.
-    city: ?City,
+    city: ?City = null,
 
     /// The country where the remote IP address is located.
-    country: ?Country,
+    country: ?Country = null,
 
     /// The coordinates of the location of the remote IP address.
-    geo_location: ?GeoLocation,
+    geo_location: ?GeoLocation = null,
 
     /// The IP address.
-    ip_address_v4: ?[]const u8,
+    ip_address_v4: ?[]const u8 = null,
 
     /// The internet service provider (ISP) organization associated with the remote
     /// IP
     /// address.
-    organization: ?IpOrganizationDetails,
+    organization: ?IpOrganizationDetails = null,
 
     pub const json_field_names = .{
         .city = "City",

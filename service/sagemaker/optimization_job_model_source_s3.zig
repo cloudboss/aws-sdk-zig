@@ -6,11 +6,11 @@ pub const OptimizationJobModelSourceS3 = struct {
     /// The access configuration settings for the source ML model for an
     /// optimization job, where you can accept the model end-user license agreement
     /// (EULA).
-    model_access_config: ?OptimizationModelAccessConfig,
+    model_access_config: ?OptimizationModelAccessConfig = null,
 
     /// An Amazon S3 URI that locates a source model to optimize with an
     /// optimization job.
-    s3_uri: ?[]const u8,
+    s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .model_access_config = "ModelAccessConfig",

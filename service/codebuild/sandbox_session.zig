@@ -5,29 +5,29 @@ const SandboxSessionPhase = @import("sandbox_session_phase.zig").SandboxSessionP
 /// Contains information about the sandbox session.
 pub const SandboxSession = struct {
     /// The current phase for the sandbox.
-    current_phase: ?[]const u8,
+    current_phase: ?[]const u8 = null,
 
     /// When the sandbox session ended, expressed in Unix time format.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The ID of the sandbox session.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
-    logs: ?LogsLocation,
+    logs: ?LogsLocation = null,
 
-    network_interface: ?NetworkInterface,
+    network_interface: ?NetworkInterface = null,
 
     /// An array of `SandboxSessionPhase` objects.
-    phases: ?[]const SandboxSessionPhase,
+    phases: ?[]const SandboxSessionPhase = null,
 
     /// An identifier for the version of this sandbox's source code.
-    resolved_source_version: ?[]const u8,
+    resolved_source_version: ?[]const u8 = null,
 
     /// When the sandbox session started, expressed in Unix time format.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of the sandbox session.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .current_phase = "currentPhase",

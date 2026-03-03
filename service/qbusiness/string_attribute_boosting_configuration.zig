@@ -17,7 +17,7 @@ pub const StringAttributeBoostingConfiguration = struct {
     /// Specifies specific values of a `STRING` type document attribute being
     /// boosted. When using `NativeIndexConfiguration` version 2, you can specify up
     /// to five values in order of priority.
-    attribute_value_boosting: ?[]const aws.map.MapEntry(StringAttributeValueBoostingLevel),
+    attribute_value_boosting: ?[]const aws.map.MapEntry(StringAttributeValueBoostingLevel) = null,
 
     /// Specifies the priority tier ranking of boosting applied to document
     /// attributes. For version 2, this parameter indicates the relative ranking

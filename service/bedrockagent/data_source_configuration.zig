@@ -11,22 +11,22 @@ pub const DataSourceConfiguration = struct {
     ///
     /// Confluence data source connector is in preview release and is subject to
     /// change.
-    confluence_configuration: ?ConfluenceDataSourceConfiguration,
+    confluence_configuration: ?ConfluenceDataSourceConfiguration = null,
 
     /// The configuration information to connect to Amazon S3 as your data source.
-    s_3_configuration: ?S3DataSourceConfiguration,
+    s_3_configuration: ?S3DataSourceConfiguration = null,
 
     /// The configuration information to connect to Salesforce as your data source.
     ///
     /// Salesforce data source connector is in preview release and is subject to
     /// change.
-    salesforce_configuration: ?SalesforceDataSourceConfiguration,
+    salesforce_configuration: ?SalesforceDataSourceConfiguration = null,
 
     /// The configuration information to connect to SharePoint as your data source.
     ///
     /// SharePoint data source connector is in preview release and is subject to
     /// change.
-    share_point_configuration: ?SharePointDataSourceConfiguration,
+    share_point_configuration: ?SharePointDataSourceConfiguration = null,
 
     /// The type of data source.
     @"type": DataSourceType,
@@ -36,7 +36,7 @@ pub const DataSourceConfiguration = struct {
     ///
     /// Crawling web URLs as your data source is in preview release and is subject
     /// to change.
-    web_configuration: ?WebDataSourceConfiguration,
+    web_configuration: ?WebDataSourceConfiguration = null,
 
     pub const json_field_names = .{
         .confluence_configuration = "confluenceConfiguration",

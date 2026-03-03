@@ -3,10 +3,10 @@
 /// related error messages.
 pub const ErrorInfo = struct {
     /// Specifies the error message that appears if a flow fails.
-    execution_message: ?[]const u8,
+    execution_message: ?[]const u8 = null,
 
     /// Specifies the failure count for the attempted flow.
-    put_failures_count: ?i64,
+    put_failures_count: ?i64 = null,
 
     pub const json_field_names = .{
         .execution_message = "executionMessage",

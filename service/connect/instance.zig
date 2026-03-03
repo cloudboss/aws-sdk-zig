@@ -7,43 +7,43 @@ const InstanceStatusReason = @import("instance_status_reason.zig").InstanceStatu
 /// The Amazon Connect instance.
 pub const Instance = struct {
     /// The Amazon Resource Name (ARN) of the instance.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// When the instance was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The identifier of the Amazon Connect instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The identity management type.
-    identity_management_type: ?DirectoryType,
+    identity_management_type: ?DirectoryType = null,
 
     /// Whether inbound calls are enabled.
-    inbound_calls_enabled: ?bool,
+    inbound_calls_enabled: ?bool = null,
 
     /// This URL allows contact center users to access the Amazon Connect admin
     /// website.
-    instance_access_url: ?[]const u8,
+    instance_access_url: ?[]const u8 = null,
 
     /// The alias of instance.
-    instance_alias: ?[]const u8,
+    instance_alias: ?[]const u8 = null,
 
     /// The state of the instance.
-    instance_status: ?InstanceStatus,
+    instance_status: ?InstanceStatus = null,
 
     /// Whether outbound calls are enabled.
-    outbound_calls_enabled: ?bool,
+    outbound_calls_enabled: ?bool = null,
 
     /// The service role of the instance.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
     /// Relevant
     /// details why the instance was not successfully created.
-    status_reason: ?InstanceStatusReason,
+    status_reason: ?InstanceStatusReason = null,
 
     /// The tags of an instance.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

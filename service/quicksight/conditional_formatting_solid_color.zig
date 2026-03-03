@@ -1,7 +1,7 @@
 /// Formatting configuration for solid color.
 pub const ConditionalFormattingSolidColor = struct {
     /// Determines the color.
-    color: ?[]const u8,
+    color: ?[]const u8 = null,
 
     /// The expression that determines the formatting configuration for solid color.
     expression: []const u8,

@@ -23,7 +23,7 @@ pub const S3Location = struct {
     /// `S3Key` refers to the VHD file. If a new application package is
     /// required, then `S3Key` is not required. (Actions:
     /// CreateAppBlock)
-    s3_key: ?[]const u8,
+    s3_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s3_bucket = "S3Bucket",

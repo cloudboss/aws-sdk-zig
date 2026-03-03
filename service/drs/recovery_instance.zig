@@ -9,56 +9,56 @@ const RecoveryInstanceProperties = @import("recovery_instance_properties.zig").R
 /// A Recovery Instance is a replica of a Source Server running on EC2.
 pub const RecoveryInstance = struct {
     /// The version of the DRS agent installed on the recovery instance
-    agent_version: ?[]const u8,
+    agent_version: ?[]const u8 = null,
 
     /// The ARN of the Recovery Instance.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Data Replication Info of the Recovery Instance.
-    data_replication_info: ?RecoveryInstanceDataReplicationInfo,
+    data_replication_info: ?RecoveryInstanceDataReplicationInfo = null,
 
     /// The EC2 instance ID of the Recovery Instance.
-    ec_2_instance_id: ?[]const u8,
+    ec_2_instance_id: ?[]const u8 = null,
 
     /// The state of the EC2 instance for this Recovery Instance.
-    ec_2_instance_state: ?EC2InstanceState,
+    ec_2_instance_state: ?EC2InstanceState = null,
 
     /// An object representing failback related information of the Recovery
     /// Instance.
-    failback: ?RecoveryInstanceFailback,
+    failback: ?RecoveryInstanceFailback = null,
 
     /// Whether this Recovery Instance was created for a drill or for an actual
     /// Recovery event.
-    is_drill: ?bool,
+    is_drill: ?bool = null,
 
     /// The ID of the Job that created the Recovery Instance.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// AWS availability zone associated with the recovery instance.
-    origin_availability_zone: ?[]const u8,
+    origin_availability_zone: ?[]const u8 = null,
 
     /// Environment (On Premises / AWS) of the instance that the recovery instance
     /// originated from.
-    origin_environment: ?OriginEnvironment,
+    origin_environment: ?OriginEnvironment = null,
 
     /// The date and time of the Point in Time (PIT) snapshot that this Recovery
     /// Instance was launched from.
-    point_in_time_snapshot_date_time: ?[]const u8,
+    point_in_time_snapshot_date_time: ?[]const u8 = null,
 
     /// The ID of the Recovery Instance.
-    recovery_instance_id: ?[]const u8,
+    recovery_instance_id: ?[]const u8 = null,
 
     /// Properties of the Recovery Instance machine.
-    recovery_instance_properties: ?RecoveryInstanceProperties,
+    recovery_instance_properties: ?RecoveryInstanceProperties = null,
 
     /// The ARN of the source Outpost
-    source_outpost_arn: ?[]const u8,
+    source_outpost_arn: ?[]const u8 = null,
 
     /// The Source Server ID that this Recovery Instance is associated with.
-    source_server_id: ?[]const u8,
+    source_server_id: ?[]const u8 = null,
 
     /// An array of tags that are associated with the Recovery Instance.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .agent_version = "agentVersion",

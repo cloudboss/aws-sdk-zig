@@ -6,25 +6,25 @@ const ExperimentState = @import("experiment_state.zig").ExperimentState;
 /// Provides a summary of an experiment.
 pub const ExperimentSummary = struct {
     /// The Amazon Resource Name (ARN) of the experiment.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time that the experiment was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The experiment options for the experiment.
-    experiment_options: ?ExperimentOptions,
+    experiment_options: ?ExperimentOptions = null,
 
     /// The ID of the experiment template.
-    experiment_template_id: ?[]const u8,
+    experiment_template_id: ?[]const u8 = null,
 
     /// The ID of the experiment.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The state of the experiment.
-    state: ?ExperimentState,
+    state: ?ExperimentState = null,
 
     /// The tags for the experiment.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

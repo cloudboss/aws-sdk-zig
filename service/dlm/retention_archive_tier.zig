@@ -25,18 +25,18 @@ pub const RetentionArchiveTier = struct {
     /// must specify a
     /// count of 3 or more to ensure that each snapshot is archived for at least 90
     /// days.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// Specifies the period of time to retain snapshots in the archive tier. After
     /// this period
     /// expires, the snapshot is permanently deleted.
-    interval: ?i32,
+    interval: ?i32 = null,
 
     /// The unit of time in which to measure the **Interval**. For
     /// example, to retain a snapshots in the archive tier for 6 months, specify
     /// `Interval=6`
     /// and `IntervalUnit=MONTHS`.
-    interval_unit: ?RetentionIntervalUnitValues,
+    interval_unit: ?RetentionIntervalUnitValues = null,
 
     pub const json_field_names = .{
         .count = "Count",

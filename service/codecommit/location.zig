@@ -5,15 +5,15 @@ const RelativeFileVersionEnum = @import("relative_file_version_enum.zig").Relati
 pub const Location = struct {
     /// The name of the file being compared, including its extension and
     /// subdirectory, if any.
-    file_path: ?[]const u8,
+    file_path: ?[]const u8 = null,
 
     /// The position of a change in a compared file, in line number format.
-    file_position: ?i64,
+    file_position: ?i64 = null,
 
     /// In a comparison of commits or a pull request, whether the change is in the
     /// before or
     /// after of that comparison.
-    relative_file_version: ?RelativeFileVersionEnum,
+    relative_file_version: ?RelativeFileVersionEnum = null,
 
     pub const json_field_names = .{
         .file_path = "filePath",

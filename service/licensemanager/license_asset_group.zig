@@ -8,31 +8,31 @@ pub const LicenseAssetGroup = struct {
     associated_license_asset_ruleset_ar_ns: []const []const u8,
 
     /// License asset group description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Latest resource discovery time.
-    latest_resource_discovery_time: ?i64,
+    latest_resource_discovery_time: ?i64 = null,
 
     /// Latest usage analysis time.
-    latest_usage_analysis_time: ?i64,
+    latest_usage_analysis_time: ?i64 = null,
 
     /// Amazon Resource Name (ARN) of the license asset group.
     license_asset_group_arn: []const u8,
 
     /// License asset group configurations.
-    license_asset_group_configurations: ?[]const LicenseAssetGroupConfiguration,
+    license_asset_group_configurations: ?[]const LicenseAssetGroupConfiguration = null,
 
     /// License asset group name.
     name: []const u8,
 
     /// License asset group properties.
-    properties: ?[]const LicenseAssetGroupProperty,
+    properties: ?[]const LicenseAssetGroupProperty = null,
 
     /// License asset group status.
     status: LicenseAssetGroupStatus,
 
     /// License asset group status message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .associated_license_asset_ruleset_ar_ns = "AssociatedLicenseAssetRulesetARNs",

@@ -12,12 +12,12 @@ pub const FilesLimit = struct {
     /// default uses DESCENDING order, i.e. most recent files are selected first.
     /// Another
     /// possible value is ASCENDING.
-    order: ?Order,
+    order: ?Order = null,
 
     /// A criteria to use for Amazon S3 files sorting before their selection. By
     /// default uses LAST_MODIFIED_DATE as
     /// a sorting criteria. Currently it's the only allowed value.
-    ordered_by: ?OrderedBy,
+    ordered_by: ?OrderedBy = null,
 
     pub const json_field_names = .{
         .max_files = "MaxFiles",

@@ -6,10 +6,10 @@ const ProjectStatus = @import("project_status.zig").ProjectStatus;
 /// project.
 pub const ProjectSummary = struct {
     /// The number of experiments currently in the project.
-    active_experiment_count: ?i64,
+    active_experiment_count: ?i64 = null,
 
     /// The number of ongoing launches currently in the project.
-    active_launch_count: ?i64,
+    active_launch_count: ?i64 = null,
 
     /// The name or ARN of the project.
     arn: []const u8,
@@ -18,20 +18,20 @@ pub const ProjectSummary = struct {
     created_time: i64,
 
     /// The description of the project.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The number of experiments currently in the project.
-    experiment_count: ?i64,
+    experiment_count: ?i64 = null,
 
     /// The number of features currently in the project.
-    feature_count: ?i64,
+    feature_count: ?i64 = null,
 
     /// The date and time that the project was most recently updated.
     last_updated_time: i64,
 
     /// The number of launches currently in the project, including launches that are
     /// ongoing, completed, and not started yet.
-    launch_count: ?i64,
+    launch_count: ?i64 = null,
 
     /// The name of the project.
     name: []const u8,
@@ -40,7 +40,7 @@ pub const ProjectSummary = struct {
     status: ProjectStatus,
 
     /// The list of tag keys and values associated with this project.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .active_experiment_count = "activeExperimentCount",

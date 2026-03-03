@@ -5,7 +5,7 @@
 pub const FillMissingValues = struct {
     /// A JSON path to a variable in the data structure for the dataset that is
     /// filled.
-    filled_path: ?[]const u8,
+    filled_path: ?[]const u8 = null,
 
     /// A JSON path to a variable in the data structure for the dataset that is
     /// imputed.

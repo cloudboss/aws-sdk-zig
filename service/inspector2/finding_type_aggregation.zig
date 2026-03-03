@@ -6,16 +6,16 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// The details that define an aggregation based on finding type.
 pub const FindingTypeAggregation = struct {
     /// The finding type to aggregate.
-    finding_type: ?AggregationFindingType,
+    finding_type: ?AggregationFindingType = null,
 
     /// The resource type to aggregate.
-    resource_type: ?AggregationResourceType,
+    resource_type: ?AggregationResourceType = null,
 
     /// The value to sort results by.
-    sort_by: ?FindingTypeSortBy,
+    sort_by: ?FindingTypeSortBy = null,
 
     /// The order to sort results by.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .finding_type = "findingType",

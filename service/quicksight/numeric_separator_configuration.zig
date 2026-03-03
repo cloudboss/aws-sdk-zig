@@ -4,10 +4,10 @@ const ThousandSeparatorOptions = @import("thousand_separator_options.zig").Thous
 /// The options that determine the numeric separator configuration.
 pub const NumericSeparatorConfiguration = struct {
     /// Determines the decimal separator.
-    decimal_separator: ?NumericSeparatorSymbol,
+    decimal_separator: ?NumericSeparatorSymbol = null,
 
     /// The options that determine the thousands separator configuration.
-    thousands_separator: ?ThousandSeparatorOptions,
+    thousands_separator: ?ThousandSeparatorOptions = null,
 
     pub const json_field_names = .{
         .decimal_separator = "DecimalSeparator",

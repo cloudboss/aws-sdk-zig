@@ -4,9 +4,9 @@ const FileSystemEndpoints = @import("file_system_endpoints.zig").FileSystemEndpo
 
 /// Configuration for the FSx for NetApp ONTAP file system.
 pub const OntapFileSystemConfiguration = struct {
-    automatic_backup_retention_days: ?i32,
+    automatic_backup_retention_days: ?i32 = null,
 
-    daily_automatic_backup_start_time: ?[]const u8,
+    daily_automatic_backup_start_time: ?[]const u8 = null,
 
     /// Specifies the FSx for ONTAP file system deployment type in use in the file
     /// system.
@@ -32,11 +32,11 @@ pub const OntapFileSystemConfiguration = struct {
     /// [Choosing Multi-AZ or
     /// Single-AZ file system
     /// deployment](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html).
-    deployment_type: ?OntapDeploymentType,
+    deployment_type: ?OntapDeploymentType = null,
 
     /// The SSD IOPS configuration for the ONTAP file system, specifying
     /// the number of provisioned IOPS and the provision mode.
-    disk_iops_configuration: ?DiskIopsConfiguration,
+    disk_iops_configuration: ?DiskIopsConfiguration = null,
 
     /// (Multi-AZ only) Specifies the IPv4 address range in which the endpoints to
     /// access your
@@ -49,7 +49,7 @@ pub const OntapFileSystemConfiguration = struct {
     /// You can have overlapping endpoint IP addresses for file systems deployed in
     /// the
     /// same VPC/route tables.
-    endpoint_ip_address_range: ?[]const u8,
+    endpoint_ip_address_range: ?[]const u8 = null,
 
     /// (Multi-AZ only) Specifies the IPv6 address range in which the endpoints to
     /// access
@@ -60,16 +60,16 @@ pub const OntapFileSystemConfiguration = struct {
     /// IP addresses for file systems deployed in the same VPC/route tables, as long
     /// as they
     /// don't overlap with any subnet.
-    endpoint_ipv_6_address_range: ?[]const u8,
+    endpoint_ipv_6_address_range: ?[]const u8 = null,
 
     /// The `Management` and `Intercluster` endpoints
     /// that are used to access data or to manage the file system using the
     /// NetApp ONTAP CLI, REST API, or NetApp SnapMirror.
-    endpoints: ?FileSystemEndpoints,
+    endpoints: ?FileSystemEndpoints = null,
 
     /// You can use the `fsxadmin` user account to access the NetApp ONTAP CLI and
     /// REST API. The password value is always redacted in the response.
-    fsx_admin_password: ?[]const u8,
+    fsx_admin_password: ?[]const u8 = null,
 
     /// Specifies how many high-availability (HA) file server pairs the file system
     /// will have. The default value is 1. The value of this property affects the
@@ -86,16 +86,16 @@ pub const OntapFileSystemConfiguration = struct {
     ///
     /// * The value of `HAPairs` is greater than 1 and the value of `DeploymentType`
     ///   is `SINGLE_AZ_1`, `MULTI_AZ_1`, or `MULTI_AZ_2`.
-    ha_pairs: ?i32,
+    ha_pairs: ?i32 = null,
 
-    preferred_subnet_id: ?[]const u8,
+    preferred_subnet_id: ?[]const u8 = null,
 
     /// (Multi-AZ only) The VPC route tables in which your file system's endpoints
     /// are
     /// created.
-    route_table_ids: ?[]const []const u8,
+    route_table_ids: ?[]const []const u8 = null,
 
-    throughput_capacity: ?i32,
+    throughput_capacity: ?i32 = null,
 
     /// Use to choose the throughput capacity per HA pair. When the value of
     /// `HAPairs` is equal to 1, the value of `ThroughputCapacityPerHAPair` is the
@@ -125,9 +125,9 @@ pub const OntapFileSystemConfiguration = struct {
     ///   and 12).
     ///
     /// * The value of `ThroughputCapacityPerHAPair` is not a valid value.
-    throughput_capacity_per_ha_pair: ?i32,
+    throughput_capacity_per_ha_pair: ?i32 = null,
 
-    weekly_maintenance_start_time: ?[]const u8,
+    weekly_maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .automatic_backup_retention_days = "AutomaticBackupRetentionDays",

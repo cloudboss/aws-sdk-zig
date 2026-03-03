@@ -8,10 +8,10 @@ pub const InstanceCredentials = struct {
     /// Secret string. For Windows instances, the secret is a password for use with
     /// Windows
     /// Remote Desktop. For Linux instances, it's a private key for use with SSH.
-    secret: ?[]const u8,
+    secret: ?[]const u8 = null,
 
     /// A user name for logging in.
-    user_name: ?[]const u8,
+    user_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .secret = "Secret",

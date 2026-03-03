@@ -8,7 +8,7 @@ pub const BusinessVerificationDetails = struct {
     /// The specific legal jurisdiction or state where the business was incorporated
     /// or registered, providing additional location context beyond the country
     /// code.
-    jurisdiction_of_incorporation: ?[]const u8,
+    jurisdiction_of_incorporation: ?[]const u8 = null,
 
     /// The official legal name of the business as registered with the appropriate
     /// government authorities.

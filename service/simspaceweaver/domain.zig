@@ -23,10 +23,10 @@ pub const Domain = struct {
     ///
     /// * `ByRequest` – Unmanaged: You use the `StartApp`
     /// API to start the apps and use the `StopApp` API to stop the apps.
-    lifecycle: ?LifecycleManagementStrategy,
+    lifecycle: ?LifecycleManagementStrategy = null,
 
     /// The name of the domain.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .lifecycle = "Lifecycle",

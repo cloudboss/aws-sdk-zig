@@ -8,7 +8,7 @@ pub const GameSessionQueueDestination = struct {
     /// include a fleet ID or alias ID and a Region name, provide a unique
     /// identifier across all
     /// Regions.
-    destination_arn: ?[]const u8,
+    destination_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_arn = "DestinationArn",

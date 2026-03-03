@@ -8,7 +8,7 @@ pub const TagQueryConfiguration = struct {
     /// in the IAM policy
     /// that associates resources
     /// to an application.
-    tag_key: ?[]const u8,
+    tag_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .tag_key = "tagKey",

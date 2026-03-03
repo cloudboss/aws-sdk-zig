@@ -7,7 +7,7 @@ const OpenIdIssuer = @import("open_id_issuer.zig").OpenIdIssuer;
 pub const IdentitySourceItemDetails = struct {
     /// The application client IDs associated with the specified Amazon Cognito user
     /// pool that are enabled for this identity source.
-    client_ids: ?[]const []const u8,
+    client_ids: ?[]const []const u8 = null,
 
     /// The well-known URL that points to this user pool's OIDC discovery endpoint.
     /// This is a URL string in the following format. This URL replaces the
@@ -15,17 +15,17 @@ pub const IdentitySourceItemDetails = struct {
     /// identifier with those appropriate for this user pool.
     ///
     /// `https://cognito-idp.*<region>*.amazonaws.com/*<user-pool-id>*/.well-known/openid-configuration`
-    discovery_url: ?[]const u8,
+    discovery_url: ?[]const u8 = null,
 
     /// A string that identifies the type of OIDC service represented by this
     /// identity source.
     ///
     /// At this time, the only valid value is `cognito`.
-    open_id_issuer: ?OpenIdIssuer,
+    open_id_issuer: ?OpenIdIssuer = null,
 
     /// The Amazon Cognito user pool whose identities are accessible to this
     /// Verified Permissions policy store.
-    user_pool_arn: ?[]const u8,
+    user_pool_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_ids = "clientIds",

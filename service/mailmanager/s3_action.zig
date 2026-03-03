@@ -5,7 +5,7 @@ pub const S3Action = struct {
     /// A policy that states what to do in the case of failure. The action will fail
     /// if there are configuration errors. For example, the specified the bucket has
     /// been deleted.
-    action_failure_policy: ?ActionFailurePolicy,
+    action_failure_policy: ?ActionFailurePolicy = null,
 
     /// The Amazon Resource Name (ARN) of the IAM Role to use while writing to S3.
     /// This role must have access to the s3:PutObject, kms:Encrypt, and
@@ -16,10 +16,10 @@ pub const S3Action = struct {
     s3_bucket: []const u8,
 
     /// The S3 prefix to use for the write to the s3 bucket.
-    s3_prefix: ?[]const u8,
+    s3_prefix: ?[]const u8 = null,
 
     /// The KMS Key ID to use to encrypt the message in S3.
-    s3_sse_kms_key_id: ?[]const u8,
+    s3_sse_kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action_failure_policy = "ActionFailurePolicy",

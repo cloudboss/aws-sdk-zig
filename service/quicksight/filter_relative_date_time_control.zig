@@ -5,10 +5,10 @@ const RelativeDateTimeControlDisplayOptions = @import("relative_date_time_contro
 pub const FilterRelativeDateTimeControl = struct {
     /// The visibility configuration of the Apply button on a
     /// `FilterRelativeDateTimeControl`.
-    commit_mode: ?CommitMode,
+    commit_mode: ?CommitMode = null,
 
     /// The display options of a control.
-    display_options: ?RelativeDateTimeControlDisplayOptions,
+    display_options: ?RelativeDateTimeControlDisplayOptions = null,
 
     /// The ID of the `FilterTextAreaControl`.
     filter_control_id: []const u8,

@@ -8,28 +8,28 @@ const TestType = @import("test_type.zig").TestType;
 /// Represents a device.
 pub const Job = struct {
     /// The job's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The job's result counters.
-    counters: ?Counters,
+    counters: ?Counters = null,
 
     /// When the job was created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// The device (phone or tablet).
-    device: ?Device,
+    device: ?Device = null,
 
     /// Represents the total (metered or unmetered) minutes used by the job.
-    device_minutes: ?DeviceMinutes,
+    device_minutes: ?DeviceMinutes = null,
 
     /// The ARN of the instance.
-    instance_arn: ?[]const u8,
+    instance_arn: ?[]const u8 = null,
 
     /// A message about the job's result.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The job's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The job's result.
     ///
@@ -48,10 +48,10 @@ pub const Job = struct {
     /// * ERRORED
     ///
     /// * STOPPED
-    result: ?ExecutionResult,
+    result: ?ExecutionResult = null,
 
     /// The job's start time.
-    started: ?i64,
+    started: ?i64 = null,
 
     /// The job's status.
     ///
@@ -74,10 +74,10 @@ pub const Job = struct {
     /// * COMPLETED
     ///
     /// * STOPPING
-    status: ?ExecutionStatus,
+    status: ?ExecutionStatus = null,
 
     /// The job's stop time.
-    stopped: ?i64,
+    stopped: ?i64 = null,
 
     /// The job's type.
     ///
@@ -110,14 +110,14 @@ pub const Job = struct {
     /// * XCTEST
     ///
     /// * XCTEST_UI
-    @"type": ?TestType,
+    @"type": ?TestType = null,
 
     /// This value is set to true if video capture is enabled. Otherwise, it is set
     /// to false.
-    video_capture: ?bool,
+    video_capture: ?bool = null,
 
     /// The endpoint for streaming device video.
-    video_endpoint: ?[]const u8,
+    video_endpoint: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

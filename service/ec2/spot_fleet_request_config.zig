@@ -12,20 +12,20 @@ pub const SpotFleetRequestConfig = struct {
     /// the status is `fulfilled`.
     /// If the size of the fleet is decreased, the status is `pending_termination`
     /// while Spot Instances are terminating.
-    activity_status: ?ActivityStatus,
+    activity_status: ?ActivityStatus = null,
 
     /// The creation date and time of the request.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The configuration of the Spot Fleet request.
-    spot_fleet_request_config: ?SpotFleetRequestConfigData,
+    spot_fleet_request_config: ?SpotFleetRequestConfigData = null,
 
     /// The ID of the Spot Fleet request.
-    spot_fleet_request_id: ?[]const u8,
+    spot_fleet_request_id: ?[]const u8 = null,
 
     /// The state of the Spot Fleet request.
-    spot_fleet_request_state: ?BatchState,
+    spot_fleet_request_state: ?BatchState = null,
 
     /// The tags for a Spot Fleet resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

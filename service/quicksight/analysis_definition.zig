@@ -11,15 +11,15 @@ const StaticFile = @import("static_file.zig").StaticFile;
 
 /// The definition of an analysis.
 pub const AnalysisDefinition = struct {
-    analysis_defaults: ?AnalysisDefaults,
+    analysis_defaults: ?AnalysisDefaults = null,
 
     /// An array of calculated field definitions for the analysis.
-    calculated_fields: ?[]const CalculatedField,
+    calculated_fields: ?[]const CalculatedField = null,
 
     /// An array of analysis-level column configurations. Column configurations can
     /// be used to set default
     /// formatting for a column to be used throughout an analysis.
-    column_configurations: ?[]const ColumnConfiguration,
+    column_configurations: ?[]const ColumnConfiguration = null,
 
     /// An array of dataset identifier declarations. This mapping allows the usage
     /// of dataset identifiers instead
@@ -30,10 +30,10 @@ pub const AnalysisDefinition = struct {
     ///
     /// For more information, see [Filtering Data in Amazon Quick
     /// Sight](https://docs.aws.amazon.com/quicksight/latest/user/adding-a-filter.html) in the *Amazon Quick Suite User Guide*.
-    filter_groups: ?[]const FilterGroup,
+    filter_groups: ?[]const FilterGroup = null,
 
     /// An array of option definitions for an analysis.
-    options: ?AssetOptions,
+    options: ?AssetOptions = null,
 
     /// An array of parameter declarations for an analysis.
     ///
@@ -42,17 +42,17 @@ pub const AnalysisDefinition = struct {
     ///
     /// For more information, see [Parameters in Amazon Quick
     /// Sight](https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html) in the *Amazon Quick Suite User Guide*.
-    parameter_declarations: ?[]const ParameterDeclaration,
+    parameter_declarations: ?[]const ParameterDeclaration = null,
 
-    query_execution_options: ?QueryExecutionOptions,
+    query_execution_options: ?QueryExecutionOptions = null,
 
     /// An array of sheet definitions for an analysis. Each `SheetDefinition`
     /// provides detailed information about
     /// a sheet within this analysis.
-    sheets: ?[]const SheetDefinition,
+    sheets: ?[]const SheetDefinition = null,
 
     /// The static files for the definition.
-    static_files: ?[]const StaticFile,
+    static_files: ?[]const StaticFile = null,
 
     pub const json_field_names = .{
         .analysis_defaults = "AnalysisDefaults",

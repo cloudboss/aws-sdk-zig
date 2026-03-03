@@ -11,7 +11,7 @@ pub const Contact = struct {
     contact_arn: []const u8,
 
     /// The full name of the contact or escalation plan.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The type of contact.
     ///

@@ -13,7 +13,7 @@
 /// this limit, contact [Support](http://aws.amazon.com/contact-us/).
 pub const Facet = struct {
     /// The unique key for the document attribute.
-    document_attribute_key: ?[]const u8,
+    document_attribute_key: ?[]const u8 = null,
 
     /// An array of document attributes that are nested facets within a facet.
     ///
@@ -32,7 +32,7 @@ pub const Facet = struct {
     /// You can only have one nested facet within a facet. If you want to increase
     /// this limit,
     /// contact [Support](http://aws.amazon.com/contact-us/).
-    facets: ?[]const Facet,
+    facets: ?[]const Facet = null,
 
     /// Maximum number of facet values per facet. The default is 10. You can use
     /// this to limit

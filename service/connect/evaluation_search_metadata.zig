@@ -4,43 +4,43 @@ const ContactParticipantRole = @import("contact_participant_role.zig").ContactPa
 /// Metadata information about an evaluation search.
 pub const EvaluationSearchMetadata = struct {
     /// The agent who acknowledged the evaluation.
-    acknowledged_by: ?[]const u8,
+    acknowledged_by: ?[]const u8 = null,
 
     /// When the evaluation was acknowledged by the agent.
-    acknowledged_time: ?i64,
+    acknowledged_time: ?i64 = null,
 
     /// The comment from the agent when they acknowledged the evaluation.
-    acknowledger_comment: ?[]const u8,
+    acknowledger_comment: ?[]const u8 = null,
 
     /// Whether auto-evaluation is enabled.
     auto_evaluation_enabled: bool = false,
 
     /// The status of the contact auto evaluation.
-    auto_evaluation_status: ?AutoEvaluationStatus,
+    auto_evaluation_status: ?AutoEvaluationStatus = null,
 
     /// The calibration session ID that this evaluation belongs to.
-    calibration_session_id: ?[]const u8,
+    calibration_session_id: ?[]const u8 = null,
 
     /// The unique ID of the agent who handled the contact.
-    contact_agent_id: ?[]const u8,
+    contact_agent_id: ?[]const u8 = null,
 
     /// The identifier of the contact in this instance of Amazon Connect.
     contact_id: []const u8,
 
     /// Identifier for a contact participant in the evaluation.
-    contact_participant_id: ?[]const u8,
+    contact_participant_id: ?[]const u8 = null,
 
     /// Role of a contact participant in the evaluation.
-    contact_participant_role: ?ContactParticipantRole,
+    contact_participant_role: ?ContactParticipantRole = null,
 
     /// The Amazon Resource Name (ARN) of the person who evaluated the contact.
     evaluator_arn: []const u8,
 
     /// Identifier for the review.
-    review_id: ?[]const u8,
+    review_id: ?[]const u8 = null,
 
     /// Identifier of the sampling job.
-    sampling_job_id: ?[]const u8,
+    sampling_job_id: ?[]const u8 = null,
 
     /// The flag that marks the item as automatic fail. If the item or a child item
     /// gets an automatic fail answer, this

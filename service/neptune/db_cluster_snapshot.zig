@@ -4,25 +4,25 @@
 /// DescribeDBClusterSnapshots action.
 pub const DBClusterSnapshot = struct {
     /// Specifies the allocated storage size in gibibytes (GiB).
-    allocated_storage: ?i32,
+    allocated_storage: ?i32 = null,
 
     /// Provides the list of EC2 Availability Zones that instances in the DB cluster
     /// snapshot can
     /// be restored in.
-    availability_zones: ?[]const []const u8,
+    availability_zones: ?[]const []const u8 = null,
 
     /// Specifies the time when the DB cluster was created, in Universal Coordinated
     /// Time
     /// (UTC).
-    cluster_create_time: ?i64,
+    cluster_create_time: ?i64 = null,
 
     /// Specifies the DB cluster identifier of the DB cluster that this DB cluster
     /// snapshot was
     /// created from.
-    db_cluster_identifier: ?[]const u8,
+    db_cluster_identifier: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the DB cluster snapshot.
-    db_cluster_snapshot_arn: ?[]const u8,
+    db_cluster_snapshot_arn: ?[]const u8 = null,
 
     /// Specifies the identifier for a DB cluster snapshot. Must match the
     /// identifier
@@ -44,59 +44,59 @@ pub const DBClusterSnapshot = struct {
     /// cluster is restored from the snapshot specified by the
     /// `DBClusterSnapshotIdentifier`,
     /// and the original DB cluster is deleted.
-    db_cluster_snapshot_identifier: ?[]const u8,
+    db_cluster_snapshot_identifier: ?[]const u8 = null,
 
     /// Specifies the name of the database engine.
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// Provides the version of the database engine for this DB cluster snapshot.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// True if mapping of Amazon Identity and Access Management (IAM) accounts to
     /// database accounts
     /// is enabled, and otherwise false.
-    iam_database_authentication_enabled: ?bool,
+    iam_database_authentication_enabled: ?bool = null,
 
     /// If `StorageEncrypted` is true, the Amazon KMS key identifier for the
     /// encrypted DB
     /// cluster snapshot.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Provides the license model information for this DB cluster snapshot.
-    license_model: ?[]const u8,
+    license_model: ?[]const u8 = null,
 
     /// Not supported by Neptune.
-    master_username: ?[]const u8,
+    master_username: ?[]const u8 = null,
 
     /// Specifies the percentage of the estimated data that has been transferred.
-    percent_progress: ?i32,
+    percent_progress: ?i32 = null,
 
     /// Specifies the port that the DB cluster was listening on at the time of the
     /// snapshot.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// Provides the time when the snapshot was taken, in Universal Coordinated Time
     /// (UTC).
-    snapshot_create_time: ?i64,
+    snapshot_create_time: ?i64 = null,
 
     /// Provides the type of the DB cluster snapshot.
-    snapshot_type: ?[]const u8,
+    snapshot_type: ?[]const u8 = null,
 
     /// If the DB cluster snapshot was copied from a source DB cluster snapshot, the
     /// Amazon
     /// Resource Name (ARN) for the source DB cluster snapshot, otherwise, a null
     /// value.
-    source_db_cluster_snapshot_arn: ?[]const u8,
+    source_db_cluster_snapshot_arn: ?[]const u8 = null,
 
     /// Specifies the status of this DB cluster snapshot.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// Specifies whether the DB cluster snapshot is encrypted.
-    storage_encrypted: ?bool,
+    storage_encrypted: ?bool = null,
 
     /// The storage type associated with the DB cluster snapshot.
-    storage_type: ?[]const u8,
+    storage_type: ?[]const u8 = null,
 
     /// Provides the VPC ID associated with the DB cluster snapshot.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

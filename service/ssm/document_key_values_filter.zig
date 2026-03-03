@@ -79,10 +79,10 @@
 /// Key=Owner,Values=Self`
 pub const DocumentKeyValuesFilter = struct {
     /// The name of the filter key.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value for the filter key.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

@@ -3,5 +3,5 @@
 /// instance properties.
 pub const DBInstanceAutomatedBackupsReplication = struct {
     /// The Amazon Resource Name (ARN) of the replicated automated backups.
-    db_instance_automated_backups_arn: ?[]const u8,
+    db_instance_automated_backups_arn: ?[]const u8 = null,
 };

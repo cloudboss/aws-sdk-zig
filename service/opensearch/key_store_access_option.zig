@@ -3,7 +3,7 @@
 /// package.
 pub const KeyStoreAccessOption = struct {
     /// Role ARN to access the KeyStore Key
-    key_access_role_arn: ?[]const u8,
+    key_access_role_arn: ?[]const u8 = null,
 
     /// This indicates whether Key Store access is enabled
     key_store_access_enabled: bool,

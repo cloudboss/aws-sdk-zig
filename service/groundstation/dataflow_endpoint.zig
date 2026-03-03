@@ -4,16 +4,16 @@ const EndpointStatus = @import("endpoint_status.zig").EndpointStatus;
 /// Information about a dataflow endpoint.
 pub const DataflowEndpoint = struct {
     /// Socket address of a dataflow endpoint.
-    address: ?SocketAddress,
+    address: ?SocketAddress = null,
 
     /// Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
-    mtu: ?i32,
+    mtu: ?i32 = null,
 
     /// Name of a dataflow endpoint.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Status of a dataflow endpoint.
-    status: ?EndpointStatus,
+    status: ?EndpointStatus = null,
 
     pub const json_field_names = .{
         .address = "address",

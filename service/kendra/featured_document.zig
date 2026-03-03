@@ -8,7 +8,7 @@ pub const FeaturedDocument = struct {
     /// API to search for
     /// specific documents with their document IDs included in the result items,
     /// or you can use the console.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

@@ -29,7 +29,7 @@ pub const JourneyDateRangeKpiResponse = struct {
     /// The string to use in a subsequent request to get the next page of results in
     /// a paginated response. This value is null for the Journey Engagement Metrics
     /// resource because the resource returns all results in a single page.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The first date and time of the date range that was used to filter the query
     /// results, in extended ISO 8601 format. The date range is inclusive.

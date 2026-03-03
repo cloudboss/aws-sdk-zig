@@ -5,7 +5,7 @@ pub const AwsJobPresignedUrlConfig = struct {
     /// the default value is 1800
     /// seconds. Pre-signed URLs are generated when a request for the job document
     /// is received.
-    expires_in_sec: ?i64,
+    expires_in_sec: ?i64 = null,
 
     pub const json_field_names = .{
         .expires_in_sec = "expiresInSec",

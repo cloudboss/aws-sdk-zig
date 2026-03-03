@@ -9,45 +9,45 @@ const InsightResourceDetail = @import("insight_resource_detail.zig").InsightReso
 /// issues.
 pub const Insight = struct {
     /// Links to sources that provide additional context on the insight.
-    additional_info: ?[]const aws.map.StringMapEntry,
+    additional_info: ?[]const aws.map.StringMapEntry = null,
 
     /// The category of the insight.
-    category: ?Category,
+    category: ?Category = null,
 
     /// Summary information that relates to the category of the insight. Currently
     /// only
     /// returned with certain insights having category `UPGRADE_READINESS`.
-    category_specific_summary: ?InsightCategorySpecificSummary,
+    category_specific_summary: ?InsightCategorySpecificSummary = null,
 
     /// The description of the insight which includes alert criteria, remediation
     /// recommendation, and additional resources (contains Markdown).
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the insight.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// An object containing more detail on the status of the insight resource.
-    insight_status: ?InsightStatus,
+    insight_status: ?InsightStatus = null,
 
     /// The Kubernetes minor version associated with an insight if applicable.
-    kubernetes_version: ?[]const u8,
+    kubernetes_version: ?[]const u8 = null,
 
     /// The time Amazon EKS last successfully completed a refresh of this insight
     /// check on the
     /// cluster.
-    last_refresh_time: ?i64,
+    last_refresh_time: ?i64 = null,
 
     /// The time the status of the insight last changed.
-    last_transition_time: ?i64,
+    last_transition_time: ?i64 = null,
 
     /// The name of the insight.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A summary of how to remediate the finding of this insight if applicable.
-    recommendation: ?[]const u8,
+    recommendation: ?[]const u8 = null,
 
     /// The details about each resource listed in the insight check result.
-    resources: ?[]const InsightResourceDetail,
+    resources: ?[]const InsightResourceDetail = null,
 
     pub const json_field_names = .{
         .additional_info = "additionalInfo",

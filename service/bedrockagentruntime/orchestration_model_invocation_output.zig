@@ -6,17 +6,17 @@ const ReasoningContentBlock = @import("reasoning_content_block.zig").ReasoningCo
 pub const OrchestrationModelInvocationOutput = struct {
     /// Contains information about the foundation model output from the
     /// orchestration step.
-    metadata: ?Metadata,
+    metadata: ?Metadata = null,
 
     /// Contains details of the raw response from the foundation model output.
-    raw_response: ?RawResponse,
+    raw_response: ?RawResponse = null,
 
     /// Contains content about the reasoning that the model made during the
     /// orchestration step.
-    reasoning_content: ?ReasoningContentBlock,
+    reasoning_content: ?ReasoningContentBlock = null,
 
     /// The unique identifier of the trace.
-    trace_id: ?[]const u8,
+    trace_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metadata = "metadata",

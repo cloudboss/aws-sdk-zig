@@ -5,10 +5,10 @@ const OpenSearchResourceStatusType = @import("open_search_resource_status_type.z
 /// resource.
 pub const OpenSearchResourceStatus = struct {
     /// The current status of this resource.
-    status: ?OpenSearchResourceStatusType,
+    status: ?OpenSearchResourceStatusType = null,
 
     /// A message with additional information about the status of this resource.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status = "status",

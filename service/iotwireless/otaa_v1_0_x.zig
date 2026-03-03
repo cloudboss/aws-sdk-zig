@@ -3,18 +3,18 @@ pub const OtaaV1_0_x = struct {
     /// The AppEUI value. You specify this value when using LoRaWAN versions v1.0.2
     /// or
     /// v1.0.3.
-    app_eui: ?[]const u8,
+    app_eui: ?[]const u8 = null,
 
     /// The AppKey value.
-    app_key: ?[]const u8,
+    app_key: ?[]const u8 = null,
 
     /// The GenAppKey value.
-    gen_app_key: ?[]const u8,
+    gen_app_key: ?[]const u8 = null,
 
     /// The JoinEUI value. You specify this value instead of the AppEUI when using
     /// LoRaWAN
     /// version v1.0.4.
-    join_eui: ?[]const u8,
+    join_eui: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .app_eui = "AppEui",

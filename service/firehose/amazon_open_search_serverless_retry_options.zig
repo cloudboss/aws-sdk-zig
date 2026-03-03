@@ -9,7 +9,7 @@ pub const AmazonOpenSearchServerlessRetryOptions = struct {
     /// written to Amazon S3. Default value is 300 seconds (5 minutes). A value of 0
     /// (zero) results
     /// in no retries.
-    duration_in_seconds: ?i32,
+    duration_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .duration_in_seconds = "DurationInSeconds",

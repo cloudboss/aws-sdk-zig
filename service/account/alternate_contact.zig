@@ -4,19 +4,19 @@ const AlternateContactType = @import("alternate_contact_type.zig").AlternateCont
 /// with an Amazon Web Services account
 pub const AlternateContact = struct {
     /// The type of alternate contact.
-    alternate_contact_type: ?AlternateContactType,
+    alternate_contact_type: ?AlternateContactType = null,
 
     /// The email address associated with this alternate contact.
-    email_address: ?[]const u8,
+    email_address: ?[]const u8 = null,
 
     /// The name associated with this alternate contact.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The phone number associated with this alternate contact.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     /// The title associated with this alternate contact.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alternate_contact_type = "AlternateContactType",

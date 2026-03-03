@@ -15,27 +15,27 @@ pub const Connection = struct {
     /// services.
     ///
     /// The ARN is never reused if the connection is deleted.
-    connection_arn: ?[]const u8,
+    connection_arn: ?[]const u8 = null,
 
     /// The name of the connection. Connection names must be unique in an Amazon Web
     /// Services account.
-    connection_name: ?[]const u8,
+    connection_name: ?[]const u8 = null,
 
     /// The current status of the connection.
-    connection_status: ?ConnectionStatus,
+    connection_status: ?ConnectionStatus = null,
 
     /// The Amazon Resource Name (ARN) of the host associated with the connection.
-    host_arn: ?[]const u8,
+    host_arn: ?[]const u8 = null,
 
     /// The identifier of the external provider where your third-party code
     /// repository is configured.
     /// For Bitbucket, this is the account ID of the owner of the Bitbucket
     /// repository.
-    owner_account_id: ?[]const u8,
+    owner_account_id: ?[]const u8 = null,
 
     /// The name of the external provider where your third-party code repository is
     /// configured.
-    provider_type: ?ProviderType,
+    provider_type: ?ProviderType = null,
 
     pub const json_field_names = .{
         .connection_arn = "ConnectionArn",

@@ -6,7 +6,7 @@ pub const InferenceS3OutputConfiguration = struct {
     bucket: []const u8,
 
     /// The prefix for the S3 bucket used for the output results from the inference.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "Bucket",

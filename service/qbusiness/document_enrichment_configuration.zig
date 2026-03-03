@@ -9,11 +9,11 @@ const HookConfiguration = @import("hook_configuration.zig").HookConfiguration;
 pub const DocumentEnrichmentConfiguration = struct {
     /// Configuration information to alter document attributes or metadata fields
     /// and content when ingesting documents into Amazon Q Business.
-    inline_configurations: ?[]const InlineDocumentEnrichmentConfiguration,
+    inline_configurations: ?[]const InlineDocumentEnrichmentConfiguration = null,
 
-    post_extraction_hook_configuration: ?HookConfiguration,
+    post_extraction_hook_configuration: ?HookConfiguration = null,
 
-    pre_extraction_hook_configuration: ?HookConfiguration,
+    pre_extraction_hook_configuration: ?HookConfiguration = null,
 
     pub const json_field_names = .{
         .inline_configurations = "inlineConfigurations",

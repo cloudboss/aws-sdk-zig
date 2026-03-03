@@ -9,36 +9,36 @@ const Type = @import("type.zig").Type;
 pub const JobTemplate = struct {
     /// Accelerated transcoding can significantly speed up jobs with long, visually
     /// complex content.
-    acceleration_settings: ?AccelerationSettings,
+    acceleration_settings: ?AccelerationSettings = null,
 
     /// An identifier for this resource that is unique within all of AWS.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// An optional category you create to organize your job templates.
-    category: ?[]const u8,
+    category: ?[]const u8 = null,
 
     /// The timestamp in epoch seconds for Job template creation.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// An optional description you create for each job template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Optional list of hop destinations.
-    hop_destinations: ?[]const HopDestination,
+    hop_destinations: ?[]const HopDestination = null,
 
     /// The timestamp in epoch seconds when the Job template was last updated.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// A name you create for each job template. Each name must be unique within
     /// your account.
     name: []const u8,
 
     /// Relative priority on the job.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// Optional. The queue that jobs created from this template are assigned to. If
     /// you don't specify this, jobs will go to the default queue.
-    queue: ?[]const u8,
+    queue: ?[]const u8 = null,
 
     /// JobTemplateSettings contains all the transcode settings saved in the
     /// template that will be applied to jobs created from it.
@@ -49,11 +49,11 @@ pub const JobTemplate = struct {
     /// MediaConvert sends an update at this interval from the time the service
     /// begins processing your job to the time it completes the transcode or
     /// encounters an error.
-    status_update_interval: ?StatusUpdateInterval,
+    status_update_interval: ?StatusUpdateInterval = null,
 
     /// A job template can be of two types: system or custom. System or built-in job
     /// templates can't be modified or deleted by the user.
-    @"type": ?Type,
+    @"type": ?Type = null,
 
     pub const json_field_names = .{
         .acceleration_settings = "AccelerationSettings",

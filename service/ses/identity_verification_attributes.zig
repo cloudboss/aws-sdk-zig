@@ -8,5 +8,5 @@ pub const IdentityVerificationAttributes = struct {
 
     /// The verification token for a domain identity. Null for email address
     /// identities.
-    verification_token: ?[]const u8,
+    verification_token: ?[]const u8 = null,
 };

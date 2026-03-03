@@ -60,7 +60,7 @@ pub const ForwardedValues = struct {
     ///
     /// For more information, see [ Caching Content Based on Request
     /// Headers](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html) in the *Amazon CloudFront Developer Guide*.
-    headers: ?Headers,
+    headers: ?Headers = null,
 
     /// This field is deprecated. We recommend that you use a cache policy or an
     /// origin request policy instead of this field.
@@ -113,5 +113,5 @@ pub const ForwardedValues = struct {
     ///
     /// A complex type that contains information about the query string parameters
     /// that you want CloudFront to use for caching for this cache behavior.
-    query_string_cache_keys: ?QueryStringCacheKeys,
+    query_string_cache_keys: ?QueryStringCacheKeys = null,
 };

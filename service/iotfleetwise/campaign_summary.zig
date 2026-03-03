@@ -6,22 +6,22 @@ const CampaignStatus = @import("campaign_status.zig").CampaignStatus;
 /// information about multiple created campaigns.
 pub const CampaignSummary = struct {
     /// The Amazon Resource Name (ARN) of a campaign.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time the campaign was created.
     creation_time: i64,
 
     /// The description of the campaign.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The last time the campaign was modified.
     last_modification_time: i64,
 
     /// The name of a campaign.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN of the signal catalog associated with the campaign.
-    signal_catalog_arn: ?[]const u8,
+    signal_catalog_arn: ?[]const u8 = null,
 
     /// The state of a campaign. The status can be one of the following:
     ///
@@ -39,10 +39,10 @@ pub const CampaignSummary = struct {
     ///
     /// * `SUSPENDED` - The campaign is suspended. To resume the campaign, use
     /// the API operation.
-    status: ?CampaignStatus,
+    status: ?CampaignStatus = null,
 
     /// The ARN of a vehicle or fleet to which the campaign is deployed.
-    target_arn: ?[]const u8,
+    target_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

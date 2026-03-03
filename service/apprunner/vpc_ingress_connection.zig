@@ -8,7 +8,7 @@ const VpcIngressConnectionStatus = @import("vpc_ingress_connection_status.zig").
 /// Amazon VPC.
 pub const VpcIngressConnection = struct {
     /// The Account Id you use to create the VPC Ingress Connection resource.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The time when the VPC Ingress Connection was created. It's in the Unix time
     /// stamp format.
@@ -16,7 +16,7 @@ pub const VpcIngressConnection = struct {
     /// * Type: Timestamp
     ///
     /// * Required: Yes
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The time when the App Runner service was deleted. It's in the Unix time
     /// stamp format.
@@ -24,31 +24,31 @@ pub const VpcIngressConnection = struct {
     /// * Type: Timestamp
     ///
     /// * Required: No
-    deleted_at: ?i64,
+    deleted_at: ?i64 = null,
 
     /// The domain name associated with the VPC Ingress Connection resource.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// Specifications for the customer’s VPC and related PrivateLink VPC endpoint
     /// that are used to associate with the VPC Ingress Connection resource.
-    ingress_vpc_configuration: ?IngressVpcConfiguration,
+    ingress_vpc_configuration: ?IngressVpcConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the service associated with the VPC
     /// Ingress Connection.
-    service_arn: ?[]const u8,
+    service_arn: ?[]const u8 = null,
 
     /// The current status of the VPC Ingress Connection.
     /// The VPC Ingress Connection displays one of the following statuses:
     /// `AVAILABLE`, `PENDING_CREATION`, `PENDING_UPDATE`,
     /// `PENDING_DELETION`,`FAILED_CREATION`, `FAILED_UPDATE`, `FAILED_DELETION`,
     /// and `DELETED`..
-    status: ?VpcIngressConnectionStatus,
+    status: ?VpcIngressConnectionStatus = null,
 
     /// The Amazon Resource Name (ARN) of the VPC Ingress Connection.
-    vpc_ingress_connection_arn: ?[]const u8,
+    vpc_ingress_connection_arn: ?[]const u8 = null,
 
     /// The customer-provided VPC Ingress Connection name.
-    vpc_ingress_connection_name: ?[]const u8,
+    vpc_ingress_connection_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

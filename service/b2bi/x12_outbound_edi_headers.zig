@@ -9,27 +9,27 @@ pub const X12OutboundEdiHeaders = struct {
     /// Specifies control number configuration for outbound X12 EDI headers. These
     /// settings determine the starting values for interchange, functional group,
     /// and transaction set control numbers.
-    control_numbers: ?X12ControlNumbers,
+    control_numbers: ?X12ControlNumbers = null,
 
     /// The delimiters, for example semicolon (`;`), that separates sections of the
     /// headers for the X12 object.
-    delimiters: ?X12Delimiters,
+    delimiters: ?X12Delimiters = null,
 
     /// The functional group headers for the X12 object.
-    functional_group_headers: ?X12FunctionalGroupHeaders,
+    functional_group_headers: ?X12FunctionalGroupHeaders = null,
 
-    gs_05_time_format: ?X12GS05TimeFormat,
+    gs_05_time_format: ?X12GS05TimeFormat = null,
 
     /// In X12 EDI messages, delimiters are used to mark the end of segments or
     /// elements, and are defined in the interchange control header.
-    interchange_control_headers: ?X12InterchangeControlHeaders,
+    interchange_control_headers: ?X12InterchangeControlHeaders = null,
 
     /// Specifies whether or not to validate the EDI for this X12 object: `TRUE` or
     /// `FALSE`. When enabled, this performs both standard EDI validation and
     /// applies any configured custom validation rules including element length
     /// constraints, code list validations, and element requirement checks.
     /// Validation results are returned in the response validation messages.
-    validate_edi: ?bool,
+    validate_edi: ?bool = null,
 
     pub const json_field_names = .{
         .control_numbers = "controlNumbers",

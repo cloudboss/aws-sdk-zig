@@ -16,12 +16,12 @@ pub const PendingMaintenanceAction = struct {
     /// For more information about these actions, see [Maintenance actions for
     /// Amazon
     /// Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora) or [Maintenance actions for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds).
-    action: ?[]const u8,
+    action: ?[]const u8 = null,
 
     /// The date of the maintenance window when the action is applied. The
     /// maintenance action is applied to the resource during its first maintenance
     /// window after this date.
-    auto_applied_after_date: ?i64,
+    auto_applied_after_date: ?i64 = null,
 
     /// The effective date when the pending maintenance action is applied to the
     /// resource. This date takes into account opt-in requests received from the
@@ -29,10 +29,10 @@ pub const PendingMaintenanceAction = struct {
     /// `ForcedApplyDate`. This value is blank if an opt-in request has not been
     /// received and nothing has been specified as `AutoAppliedAfterDate` or
     /// `ForcedApplyDate`.
-    current_apply_date: ?i64,
+    current_apply_date: ?i64 = null,
 
     /// A description providing more detail about the maintenance action.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The date when the maintenance action is automatically applied.
     ///
@@ -40,9 +40,9 @@ pub const PendingMaintenanceAction = struct {
     /// possible, regardless of the maintenance window for the resource. There might
     /// be a delay of one or more days from this date before the maintenance action
     /// is applied.
-    forced_apply_date: ?i64,
+    forced_apply_date: ?i64 = null,
 
     /// Indicates the type of opt-in request that has been received for the
     /// resource.
-    opt_in_status: ?[]const u8,
+    opt_in_status: ?[]const u8 = null,
 };

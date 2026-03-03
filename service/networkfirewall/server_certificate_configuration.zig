@@ -31,7 +31,7 @@ pub const ServerCertificateConfiguration = struct {
     ///
     /// For information about working with certificates in ACM, see [Importing
     /// certificates](https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in the *Certificate Manager User Guide*.
-    certificate_authority_arn: ?[]const u8,
+    certificate_authority_arn: ?[]const u8 = null,
 
     /// When enabled, Network Firewall checks if the server certificate presented by
     /// the server in the SSL/TLS connection has a revoked or unkown status. If the
@@ -39,13 +39,13 @@ pub const ServerCertificateConfiguration = struct {
     /// that Network Firewall takes on outbound traffic. To check the certificate
     /// revocation status, you must also specify a `CertificateAuthorityArn` in
     /// ServerCertificateConfiguration.
-    check_certificate_revocation_status: ?CheckCertificateRevocationStatusActions,
+    check_certificate_revocation_status: ?CheckCertificateRevocationStatusActions = null,
 
     /// A list of scopes.
-    scopes: ?[]const ServerCertificateScope,
+    scopes: ?[]const ServerCertificateScope = null,
 
     /// The list of server certificates to use for inbound SSL/TLS inspection.
-    server_certificates: ?[]const ServerCertificate,
+    server_certificates: ?[]const ServerCertificate = null,
 
     pub const json_field_names = .{
         .certificate_authority_arn = "CertificateAuthorityArn",

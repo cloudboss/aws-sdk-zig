@@ -4,10 +4,10 @@ const DetectorModelDefinition = @import("detector_model_definition.zig").Detecto
 /// Information about the detector model.
 pub const DetectorModel = struct {
     /// Information about how the detector is configured.
-    detector_model_configuration: ?DetectorModelConfiguration,
+    detector_model_configuration: ?DetectorModelConfiguration = null,
 
     /// Information that defines how a detector operates.
-    detector_model_definition: ?DetectorModelDefinition,
+    detector_model_definition: ?DetectorModelDefinition = null,
 
     pub const json_field_names = .{
         .detector_model_configuration = "detectorModelConfiguration",

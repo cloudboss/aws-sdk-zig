@@ -5,10 +5,10 @@ const ObjectReference = @import("object_reference.zig").ObjectReference;
 /// more information, see ListObjectParentPaths and BatchReadRequest$Operations.
 pub const BatchListObjectParentPaths = struct {
     /// The maximum number of results to retrieve.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The pagination token.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The reference that identifies the object whose attributes will be listed.
     object_reference: ObjectReference,

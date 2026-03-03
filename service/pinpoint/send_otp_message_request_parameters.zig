@@ -1,7 +1,7 @@
 /// Send OTP message request parameters.
 pub const SendOTPMessageRequestParameters = struct {
     /// The attempts allowed to validate an OTP.
-    allowed_attempts: ?i32,
+    allowed_attempts: ?i32 = null,
 
     /// The brand name that will be substituted into the OTP message body. Should be
     /// owned by calling AWS account.
@@ -11,16 +11,16 @@ pub const SendOTPMessageRequestParameters = struct {
     channel: []const u8,
 
     /// The number of characters in the generated OTP.
-    code_length: ?i32,
+    code_length: ?i32 = null,
 
     /// The destination identity to send OTP to.
     destination_identity: []const u8,
 
     /// A unique Entity ID received from DLT after entity registration is approved.
-    entity_id: ?[]const u8,
+    entity_id: ?[]const u8 = null,
 
     /// The language to be used for the outgoing message body containing the OTP.
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// The origination identity used to send OTP from.
     origination_identity: []const u8,
@@ -31,10 +31,10 @@ pub const SendOTPMessageRequestParameters = struct {
 
     /// A unique Template ID received from DLT after entity registration is
     /// approved.
-    template_id: ?[]const u8,
+    template_id: ?[]const u8 = null,
 
     /// The time in minutes before the OTP is no longer valid.
-    validity_period: ?i32,
+    validity_period: ?i32 = null,
 
     pub const json_field_names = .{
         .allowed_attempts = "AllowedAttempts",

@@ -7,13 +7,13 @@
 /// The content of VMware tags can be matched to Amazon Web Services tags.
 pub const VmwareTag = struct {
     /// The is the category of VMware.
-    vmware_category: ?[]const u8,
+    vmware_category: ?[]const u8 = null,
 
     /// This is a user-defined description of a VMware tag.
-    vmware_tag_description: ?[]const u8,
+    vmware_tag_description: ?[]const u8 = null,
 
     /// This is the user-defined name of a VMware tag.
-    vmware_tag_name: ?[]const u8,
+    vmware_tag_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .vmware_category = "VmwareCategory",

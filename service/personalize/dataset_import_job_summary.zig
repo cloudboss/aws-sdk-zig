@@ -5,33 +5,33 @@ const ImportMode = @import("import_mode.zig").ImportMode;
 /// [DescribeDatasetImportJob](https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html) API.
 pub const DatasetImportJobSummary = struct {
     /// The date and time (in Unix time) that the dataset import job was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset import job.
-    dataset_import_job_arn: ?[]const u8,
+    dataset_import_job_arn: ?[]const u8 = null,
 
     /// If a dataset import job fails, the reason behind the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The import mode the dataset import job used to update the data in the
     /// dataset.
     /// For more information see [Updating existing bulk
     /// data](https://docs.aws.amazon.com/personalize/latest/dg/updating-existing-bulk-data.html).
-    import_mode: ?ImportMode,
+    import_mode: ?ImportMode = null,
 
     /// The name of the dataset import job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The date and time (in Unix time) that the dataset import job status was last
     /// updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The status of the dataset import job.
     ///
     /// A dataset import job can be in one of the following states:
     ///
     /// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

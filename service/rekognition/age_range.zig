@@ -7,10 +7,10 @@
 /// face of a 6-year-old might have an estimated range of 4-8.
 pub const AgeRange = struct {
     /// The highest estimated age.
-    high: ?i32,
+    high: ?i32 = null,
 
     /// The lowest estimated age.
-    low: ?i32,
+    low: ?i32 = null,
 
     pub const json_field_names = .{
         .high = "High",

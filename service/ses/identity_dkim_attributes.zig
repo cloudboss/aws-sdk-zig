@@ -22,7 +22,7 @@ pub const IdentityDkimAttributes = struct {
     /// For more information about creating DNS records using DKIM tokens, see the
     /// [Amazon SES Developer
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html).
-    dkim_tokens: ?[]const []const u8,
+    dkim_tokens: ?[]const []const u8 = null,
 
     /// Describes whether Amazon SES has successfully verified the DKIM DNS records
     /// (tokens)

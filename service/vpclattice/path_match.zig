@@ -4,7 +4,7 @@ const PathMatchType = @import("path_match_type.zig").PathMatchType;
 /// incoming requests.
 pub const PathMatch = struct {
     /// Indicates whether the match is case sensitive.
-    case_sensitive: ?bool,
+    case_sensitive: ?bool = null,
 
     /// The type of path match.
     match: PathMatchType,

@@ -4,14 +4,14 @@ pub const Category = struct {
     id: []const u8,
 
     /// Localized name of the category type.
-    localized_name: ?[]const u8,
+    localized_name: ?[]const u8 = null,
 
     /// The category name.
     name: []const u8,
 
     /// Boolean which indicates if this category is the primary offered by the
     /// place.
-    primary: ?bool,
+    primary: ?bool = null,
 
     pub const json_field_names = .{
         .id = "Id",

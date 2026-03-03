@@ -8,17 +8,17 @@ const AwsWafv2RulesActionCountDetails = @import("aws_wafv_2_rules_action_count_d
 /// Settings at the web ACL level can override the rule action setting.
 pub const AwsWafv2RulesActionDetails = struct {
     /// Instructs WAF to allow the web request.
-    allow: ?AwsWafv2ActionAllowDetails,
+    allow: ?AwsWafv2ActionAllowDetails = null,
 
     /// Instructs WAF to block the web request.
-    block: ?AwsWafv2ActionBlockDetails,
+    block: ?AwsWafv2ActionBlockDetails = null,
 
     /// Instructs WAF to run a CAPTCHA check against the web request.
-    captcha: ?AwsWafv2RulesActionCaptchaDetails,
+    captcha: ?AwsWafv2RulesActionCaptchaDetails = null,
 
     /// Instructs WAF to count the web request and then continue evaluating the
     /// request using the remaining rules in the web ACL.
-    count: ?AwsWafv2RulesActionCountDetails,
+    count: ?AwsWafv2RulesActionCountDetails = null,
 
     pub const json_field_names = .{
         .allow = "Allow",

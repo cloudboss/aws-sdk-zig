@@ -6,7 +6,7 @@ pub const SensitivityInspectionTemplateExcludes = struct {
     /// An array of unique identifiers, one for each managed data identifier to
     /// exclude. To retrieve a list of valid values, use the
     /// ListManagedDataIdentifiers operation.
-    managed_data_identifier_ids: ?[]const []const u8,
+    managed_data_identifier_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .managed_data_identifier_ids = "managedDataIdentifierIds",

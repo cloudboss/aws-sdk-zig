@@ -7,10 +7,10 @@ const AdditionalResourceType = @import("additional_resource_type.zig").Additiona
 pub const AdditionalResources = struct {
     /// The URLs for additional resources, either helpful resources or improvement
     /// plans, for a custom lens. Up to five additional URLs can be specified.
-    content: ?[]const ChoiceContent,
+    content: ?[]const ChoiceContent = null,
 
     /// Type of additional resource for a custom lens.
-    @"type": ?AdditionalResourceType,
+    @"type": ?AdditionalResourceType = null,
 
     pub const json_field_names = .{
         .content = "Content",

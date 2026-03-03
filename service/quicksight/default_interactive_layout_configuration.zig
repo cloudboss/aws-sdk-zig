@@ -6,11 +6,11 @@ const DefaultGridLayoutConfiguration = @import("default_grid_layout_configuratio
 pub const DefaultInteractiveLayoutConfiguration = struct {
     /// The options that determine the default settings of a free-form layout
     /// configuration.
-    free_form: ?DefaultFreeFormLayoutConfiguration,
+    free_form: ?DefaultFreeFormLayoutConfiguration = null,
 
     /// The options that determine the default settings for a grid layout
     /// configuration.
-    grid: ?DefaultGridLayoutConfiguration,
+    grid: ?DefaultGridLayoutConfiguration = null,
 
     pub const json_field_names = .{
         .free_form = "FreeForm",

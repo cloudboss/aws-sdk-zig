@@ -5,7 +5,7 @@ const SslSecurityProtocolValue = @import("ssl_security_protocol_value.zig").SslS
 pub const RedisSettings = struct {
     /// The password provided with the `auth-role` and `auth-token`
     /// options of the `AuthType` setting for a Redis target endpoint.
-    auth_password: ?[]const u8,
+    auth_password: ?[]const u8 = null,
 
     /// The type of authentication to perform when connecting to a Redis target.
     /// Options include
@@ -13,11 +13,11 @@ pub const RedisSettings = struct {
     /// `auth-token` option requires an `AuthPassword` value to be
     /// provided. The `auth-role` option requires `AuthUserName` and
     /// `AuthPassword` values to be provided.
-    auth_type: ?RedisAuthTypeValue,
+    auth_type: ?RedisAuthTypeValue = null,
 
     /// The user name provided with the `auth-role` option of the
     /// `AuthType` setting for a Redis target endpoint.
-    auth_user_name: ?[]const u8,
+    auth_user_name: ?[]const u8 = null,
 
     /// Transmission Control Protocol (TCP) port for the endpoint.
     port: i32 = 0,
@@ -28,7 +28,7 @@ pub const RedisSettings = struct {
     /// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS
     /// uses to
     /// connect to your Redis target endpoint.
-    ssl_ca_certificate_arn: ?[]const u8,
+    ssl_ca_certificate_arn: ?[]const u8 = null,
 
     /// The connection to a Redis target endpoint using Transport Layer Security
     /// (TLS). Valid
@@ -42,7 +42,7 @@ pub const RedisSettings = struct {
     ///
     /// The `plaintext` option doesn't provide Transport Layer Security (TLS)
     /// encryption for traffic between endpoint and database.
-    ssl_security_protocol: ?SslSecurityProtocolValue,
+    ssl_security_protocol: ?SslSecurityProtocolValue = null,
 
     pub const json_field_names = .{
         .auth_password = "AuthPassword",

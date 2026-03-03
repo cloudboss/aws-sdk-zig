@@ -5,7 +5,7 @@ pub const AddRegionAction = struct {
     region_name: []const u8,
 
     /// The KMS key ID to use to encrypt your replication set.
-    sse_kms_key_id: ?[]const u8,
+    sse_kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .region_name = "regionName",

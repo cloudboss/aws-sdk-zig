@@ -9,63 +9,63 @@ const SavingsPlanState = @import("savings_plan_state.zig").SavingsPlanState;
 /// Information about a Savings Plan.
 pub const SavingsPlan = struct {
     /// The hourly commitment amount in the specified currency.
-    commitment: ?[]const u8,
+    commitment: ?[]const u8 = null,
 
     /// The currency.
-    currency: ?CurrencyCode,
+    currency: ?CurrencyCode = null,
 
     /// The description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The EC2 instance family.
-    ec_2_instance_family: ?[]const u8,
+    ec_2_instance_family: ?[]const u8 = null,
 
     /// The end time.
-    end: ?[]const u8,
+    end: ?[]const u8 = null,
 
     /// The ID of the offering.
-    offering_id: ?[]const u8,
+    offering_id: ?[]const u8 = null,
 
     /// The payment option.
-    payment_option: ?SavingsPlanPaymentOption,
+    payment_option: ?SavingsPlanPaymentOption = null,
 
     /// The product types.
-    product_types: ?[]const SavingsPlanProductType,
+    product_types: ?[]const SavingsPlanProductType = null,
 
     /// The recurring payment amount.
-    recurring_payment_amount: ?[]const u8,
+    recurring_payment_amount: ?[]const u8 = null,
 
     /// The Amazon Web Services Region.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The time until when a return for the Savings Plan can be requested. If the
     /// Savings Plan is not returnable, the field reflects the Savings Plans start
     /// time.
-    returnable_until: ?[]const u8,
+    returnable_until: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Savings Plan.
-    savings_plan_arn: ?[]const u8,
+    savings_plan_arn: ?[]const u8 = null,
 
     /// The ID of the Savings Plan.
-    savings_plan_id: ?[]const u8,
+    savings_plan_id: ?[]const u8 = null,
 
     /// The plan type.
-    savings_plan_type: ?SavingsPlanType,
+    savings_plan_type: ?SavingsPlanType = null,
 
     /// The start time.
-    start: ?[]const u8,
+    start: ?[]const u8 = null,
 
     /// The current state.
-    state: ?SavingsPlanState,
+    state: ?SavingsPlanState = null,
 
     /// One or more tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The duration of the term, in seconds.
     term_duration_in_seconds: i64 = 0,
 
     /// The up-front payment amount.
-    upfront_payment_amount: ?[]const u8,
+    upfront_payment_amount: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .commitment = "commitment",

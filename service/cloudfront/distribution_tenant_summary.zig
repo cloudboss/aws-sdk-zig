@@ -8,7 +8,7 @@ pub const DistributionTenantSummary = struct {
 
     /// The ID of the connection group ID for the distribution tenant. If you don't
     /// specify a connection group, CloudFront uses the default connection group.
-    connection_group_id: ?[]const u8,
+    connection_group_id: ?[]const u8 = null,
 
     /// The date and time when the distribution tenant was created.
     created_time: i64,
@@ -18,7 +18,7 @@ pub const DistributionTenantSummary = struct {
     /// (ARNs) for the ACM certificate and WAF web ACL. These are specific values
     /// that you can override or disable from the multi-tenant distribution that was
     /// used to create the distribution tenant.
-    customizations: ?Customizations,
+    customizations: ?Customizations = null,
 
     /// The identifier for the multi-tenant distribution. For example:
     /// `EDFDVBD632BHDS5`.
@@ -29,7 +29,7 @@ pub const DistributionTenantSummary = struct {
 
     /// Indicates whether the distribution tenants are in an enabled state. If
     /// disabled, the distribution tenant won't service traffic.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The current version of the distribution tenant.
     e_tag: []const u8,
@@ -44,5 +44,5 @@ pub const DistributionTenantSummary = struct {
     name: []const u8,
 
     /// The status of the distribution tenant.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 };

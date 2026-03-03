@@ -8,7 +8,7 @@ pub const DatasetContentDeliveryRule = struct {
     destination: DatasetContentDeliveryDestination,
 
     /// The name of the dataset content delivery rules entry.
-    entry_name: ?[]const u8,
+    entry_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination = "destination",

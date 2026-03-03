@@ -17,18 +17,18 @@ pub const Experiment = struct {
     created_time: i64,
 
     /// A description of the experiment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A structure that contains the date and time that the experiment started and
     /// ended.
-    execution: ?ExperimentExecution,
+    execution: ?ExperimentExecution = null,
 
     /// The date and time that the experiment was most recently updated.
     last_updated_time: i64,
 
     /// An array of structures that defines the metrics used for the experiment, and
     /// whether a higher or lower value for each metric is the goal.
-    metric_goals: ?[]const MetricGoal,
+    metric_goals: ?[]const MetricGoal = null,
 
     /// The name of the experiment.
     name: []const u8,
@@ -37,16 +37,16 @@ pub const Experiment = struct {
     /// "control" version. The "control" version is used for comparison with other
     /// variations. This structure also specifies how much experiment traffic is
     /// allocated to each variation.
-    online_ab_definition: ?OnlineAbDefinition,
+    online_ab_definition: ?OnlineAbDefinition = null,
 
     /// The name or ARN of the project that contains this experiment.
-    project: ?[]const u8,
+    project: ?[]const u8 = null,
 
     /// This value is used when Evidently assigns a particular user session to the
     /// experiment. It helps create a randomization ID to determine which variation
     /// the user session is served. This randomization ID is a combination of the
     /// entity ID and `randomizationSalt`.
-    randomization_salt: ?[]const u8,
+    randomization_salt: ?[]const u8 = null,
 
     /// In thousandths of a percent, the amount of the available audience that is
     /// allocated to this experiment. The available audience is the total audience
@@ -59,25 +59,25 @@ pub const Experiment = struct {
 
     /// A structure that contains the time and date that Evidently completed the
     /// analysis of the experiment.
-    schedule: ?ExperimentSchedule,
+    schedule: ?ExperimentSchedule = null,
 
     /// The audience segment being used for the experiment, if a segment is being
     /// used.
-    segment: ?[]const u8,
+    segment: ?[]const u8 = null,
 
     /// The current state of the experiment.
     status: ExperimentStatus,
 
     /// If the experiment was stopped, this is the string that was entered by the
     /// person who stopped the experiment, to explain why it was stopped.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The list of tag keys and values associated with this experiment.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// An array of structures that describe the configuration of each feature
     /// variation used in the experiment.
-    treatments: ?[]const Treatment,
+    treatments: ?[]const Treatment = null,
 
     /// The type of this experiment. Currently, this value must be
     /// `aws.experiment.onlineab`.

@@ -5,7 +5,7 @@ const IcebergCompactionConfiguration = @import("iceberg_compaction_configuration
 /// query performance and reduce storage costs.
 pub const CompactionConfiguration = struct {
     /// The configuration for an Iceberg compaction optimizer.
-    iceberg_configuration: ?IcebergCompactionConfiguration,
+    iceberg_configuration: ?IcebergCompactionConfiguration = null,
 
     pub const json_field_names = .{
         .iceberg_configuration = "icebergConfiguration",

@@ -7,43 +7,43 @@ const TaskTargetRunStatus = @import("task_target_run_status.zig").TaskTargetRunS
 /// The details of a task search.
 pub const TaskSearchSummary = struct {
     /// The date and time the resource ended running.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The number of times that the task failed and was retried.
-    failure_retry_count: ?i32,
+    failure_retry_count: ?i32 = null,
 
     /// The job ID.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The latest session action ID for the task.
-    latest_session_action_id: ?[]const u8,
+    latest_session_action_id: ?[]const u8 = null,
 
     /// The parameters to search for.
-    parameters: ?[]const aws.map.MapEntry(TaskParameterValue),
+    parameters: ?[]const aws.map.MapEntry(TaskParameterValue) = null,
 
     /// The queue ID.
-    queue_id: ?[]const u8,
+    queue_id: ?[]const u8 = null,
 
     /// The run status of the task.
-    run_status: ?TaskRunStatus,
+    run_status: ?TaskRunStatus = null,
 
     /// The date and time the resource started running.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The step ID.
-    step_id: ?[]const u8,
+    step_id: ?[]const u8 = null,
 
     /// The run status that the task is being updated to.
-    target_run_status: ?TaskTargetRunStatus,
+    target_run_status: ?TaskTargetRunStatus = null,
 
     /// The task ID.
-    task_id: ?[]const u8,
+    task_id: ?[]const u8 = null,
 
     /// The date and time the resource was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user or system that updated this resource.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ended_at = "endedAt",

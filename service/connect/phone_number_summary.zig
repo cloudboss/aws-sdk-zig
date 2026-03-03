@@ -4,19 +4,19 @@ const PhoneNumberType = @import("phone_number_type.zig").PhoneNumberType;
 /// Contains summary information about a phone number for a contact center.
 pub const PhoneNumberSummary = struct {
     /// The Amazon Resource Name (ARN) of the phone number.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The identifier of the phone number.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The phone number.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     /// The ISO country code.
-    phone_number_country_code: ?PhoneNumberCountryCode,
+    phone_number_country_code: ?PhoneNumberCountryCode = null,
 
     /// The type of phone number.
-    phone_number_type: ?PhoneNumberType,
+    phone_number_type: ?PhoneNumberType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

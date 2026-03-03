@@ -11,7 +11,7 @@ pub const SalesforceCustomKnowledgeArticleTypeConfiguration = struct {
     /// The name of the field in the custom knowledge article that contains the
     /// document
     /// title.
-    document_title_field_name: ?[]const u8,
+    document_title_field_name: ?[]const u8 = null,
 
     /// Maps attributes or field names of the custom knowledge article to Amazon
     /// Kendra
@@ -21,7 +21,7 @@ pub const SalesforceCustomKnowledgeArticleTypeConfiguration = struct {
     /// The
     /// Salesforce data source field names must exist in your Salesforce custom
     /// metadata.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// The name of the configuration.
     name: []const u8,

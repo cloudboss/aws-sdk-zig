@@ -7,10 +7,10 @@ pub const AdditionalS3DataSource = struct {
     /// The type of compression used for an additional data source used in inference
     /// or training. Specify `None` if your additional data source is not
     /// compressed.
-    compression_type: ?CompressionType,
+    compression_type: ?CompressionType = null,
 
     /// The ETag associated with S3 URI.
-    e_tag: ?[]const u8,
+    e_tag: ?[]const u8 = null,
 
     /// The data type of the additional data source that you specify for use in
     /// inference or training.

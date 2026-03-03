@@ -4,7 +4,7 @@ const DataSourceS3Configuration = @import("data_source_s3_configuration.zig").Da
 
 /// Defines configuration details about the data source.
 pub const DataSourceConfiguration = struct {
-    csv_configuration: ?CsvConfiguration,
+    csv_configuration: ?CsvConfiguration = null,
 
     /// This is currently CSV.
     data_format: BatchLoadDataFormat,

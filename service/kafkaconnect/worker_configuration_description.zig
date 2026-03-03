@@ -4,7 +4,7 @@ pub const WorkerConfigurationDescription = struct {
     revision: i64 = 0,
 
     /// The Amazon Resource Name (ARN) of the worker configuration.
-    worker_configuration_arn: ?[]const u8,
+    worker_configuration_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .revision = "revision",

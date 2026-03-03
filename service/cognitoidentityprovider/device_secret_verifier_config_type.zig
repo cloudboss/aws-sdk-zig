@@ -4,10 +4,10 @@
 /// key](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html#user-pools-remembered-devices-getting-a-device-key).
 pub const DeviceSecretVerifierConfigType = struct {
     /// A password verifier for a user's device. Used in SRP authentication.
-    password_verifier: ?[]const u8,
+    password_verifier: ?[]const u8 = null,
 
     /// The salt that you want to use in SRP authentication with the user's device.
-    salt: ?[]const u8,
+    salt: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .password_verifier = "PasswordVerifier",

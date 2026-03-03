@@ -4,7 +4,7 @@ pub const JourneyEmailMessage = struct {
     /// The verified email address to send the email message from. The default
     /// address is the FromAddress specified for the email channel for the
     /// application.
-    from_address: ?[]const u8,
+    from_address: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .from_address = "FromAddress",

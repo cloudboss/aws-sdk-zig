@@ -11,27 +11,27 @@ const ColumnStatisticsType = @import("column_statistics_type.zig").ColumnStatist
 /// object should be set and indicated by the `Type` attribute.
 pub const ColumnStatisticsData = struct {
     /// Binary column statistics data.
-    binary_column_statistics_data: ?BinaryColumnStatisticsData,
+    binary_column_statistics_data: ?BinaryColumnStatisticsData = null,
 
     /// Boolean column statistics data.
-    boolean_column_statistics_data: ?BooleanColumnStatisticsData,
+    boolean_column_statistics_data: ?BooleanColumnStatisticsData = null,
 
     /// Date column statistics data.
-    date_column_statistics_data: ?DateColumnStatisticsData,
+    date_column_statistics_data: ?DateColumnStatisticsData = null,
 
     /// Decimal column statistics data. UnscaledValues within are Base64-encoded
     /// binary objects storing big-endian, two's complement representations of
     /// the decimal's unscaled value.
-    decimal_column_statistics_data: ?DecimalColumnStatisticsData,
+    decimal_column_statistics_data: ?DecimalColumnStatisticsData = null,
 
     /// Double column statistics data.
-    double_column_statistics_data: ?DoubleColumnStatisticsData,
+    double_column_statistics_data: ?DoubleColumnStatisticsData = null,
 
     /// Long column statistics data.
-    long_column_statistics_data: ?LongColumnStatisticsData,
+    long_column_statistics_data: ?LongColumnStatisticsData = null,
 
     /// String column statistics data.
-    string_column_statistics_data: ?StringColumnStatisticsData,
+    string_column_statistics_data: ?StringColumnStatisticsData = null,
 
     /// The type of column statistics data.
     @"type": ColumnStatisticsType,

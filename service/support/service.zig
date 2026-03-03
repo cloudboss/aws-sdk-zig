@@ -9,16 +9,16 @@ pub const Service = struct {
     /// Categories consist of a category name and a category code. Category names
     /// and codes are
     /// passed to Amazon Web Services Support when you call CreateCase.
-    categories: ?[]const Category,
+    categories: ?[]const Category = null,
 
     /// The code for an Amazon Web Services service returned by the DescribeServices
     /// response. The `name` element contains the corresponding friendly name.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The friendly name for an Amazon Web Services service. The `code` element
     /// contains the
     /// corresponding code.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .categories = "categories",

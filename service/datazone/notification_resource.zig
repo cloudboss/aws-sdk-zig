@@ -6,7 +6,7 @@ pub const NotificationResource = struct {
     id: []const u8,
 
     /// The name of the resource mentioned in a notification.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of the resource mentioned in a notification.
     @"type": NotificationResourceType,

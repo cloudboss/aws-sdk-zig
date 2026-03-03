@@ -6,10 +6,10 @@ const EncryptionInTransit = @import("encryption_in_transit.zig").EncryptionInTra
 /// transit.
 pub const EncryptionInfo = struct {
     /// The data-volume encryption details.
-    encryption_at_rest: ?EncryptionAtRest,
+    encryption_at_rest: ?EncryptionAtRest = null,
 
     /// The details for encryption in transit.
-    encryption_in_transit: ?EncryptionInTransit,
+    encryption_in_transit: ?EncryptionInTransit = null,
 
     pub const json_field_names = .{
         .encryption_at_rest = "EncryptionAtRest",

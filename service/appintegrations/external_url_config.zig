@@ -4,7 +4,7 @@ pub const ExternalUrlConfig = struct {
     access_url: []const u8,
 
     /// Additional URLs to allow list if different than the access URL.
-    approved_origins: ?[]const []const u8,
+    approved_origins: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .access_url = "AccessUrl",

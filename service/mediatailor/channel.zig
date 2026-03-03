@@ -12,7 +12,7 @@ pub const Channel = struct {
     arn: []const u8,
 
     /// The list of audiences defined in channel.
-    audiences: ?[]const []const u8,
+    audiences: ?[]const []const u8 = null,
 
     /// The name of the channel.
     channel_name: []const u8,
@@ -21,16 +21,16 @@ pub const Channel = struct {
     channel_state: []const u8,
 
     /// The timestamp of when the channel was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The slate used to fill gaps between programs in the schedule. You must
     /// configure filler slate if your channel uses the `LINEAR` `PlaybackMode`.
     /// MediaTailor doesn't support filler slate for channels using the `LOOP`
     /// `PlaybackMode`.
-    filler_slate: ?SlateSource,
+    filler_slate: ?SlateSource = null,
 
     /// The timestamp of when the channel was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The log configuration.
     log_configuration: LogConfigurationForChannel,
@@ -52,7 +52,7 @@ pub const Channel = struct {
     /// and cost tracking. For more information, see [Tagging AWS Elemental
     /// MediaTailor
     /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The tier for this channel. STANDARD tier channels can contain live programs.
     tier: []const u8,

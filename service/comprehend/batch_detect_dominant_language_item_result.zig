@@ -6,11 +6,11 @@ const DominantLanguage = @import("dominant_language.zig").DominantLanguage;
 /// operation.
 pub const BatchDetectDominantLanguageItemResult = struct {
     /// The zero-based index of the document in the input list.
-    index: ?i32,
+    index: ?i32 = null,
 
     /// One or more DominantLanguage objects describing the dominant
     /// languages in the document.
-    languages: ?[]const DominantLanguage,
+    languages: ?[]const DominantLanguage = null,
 
     pub const json_field_names = .{
         .index = "Index",

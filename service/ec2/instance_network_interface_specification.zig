@@ -15,7 +15,7 @@ pub const InstanceNetworkInterfaceSpecification = struct {
     /// [Carrier IP
     /// address](https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip) in the *Amazon Web Services Wavelength Developer
     /// Guide*.
-    associate_carrier_ip_address: ?bool,
+    associate_carrier_ip_address: ?bool = null,
 
     /// Indicates whether to assign a public IPv4 address to an instance you launch
     /// in a VPC.
@@ -32,7 +32,7 @@ pub const InstanceNetworkInterfaceSpecification = struct {
     /// associated with running instances and Elastic IP addresses. For more
     /// information, see the *Public IPv4 Address* tab on the [Amazon VPC pricing
     /// page](http://aws.amazon.com/vpc/pricing/).
-    associate_public_ip_address: ?bool,
+    associate_public_ip_address: ?bool = null,
 
     /// A security group connection tracking specification that enables you to set
     /// the timeout
@@ -41,17 +41,17 @@ pub const InstanceNetworkInterfaceSpecification = struct {
     /// [Connection tracking
     /// timeouts](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts) in the
     /// *Amazon EC2 User Guide*.
-    connection_tracking_specification: ?ConnectionTrackingSpecificationRequest,
+    connection_tracking_specification: ?ConnectionTrackingSpecificationRequest = null,
 
     /// If set to `true`, the interface is deleted when the instance is terminated.
     /// You can specify `true` only if creating a new network interface when
     /// launching an instance.
-    delete_on_termination: ?bool,
+    delete_on_termination: ?bool = null,
 
     /// The description of the network interface. Applies only if creating a network
     /// interface
     /// when launching an instance.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The position of the network interface in the attachment order. A primary
     /// network
@@ -60,20 +60,20 @@ pub const InstanceNetworkInterfaceSpecification = struct {
     /// If you specify a network interface when launching an instance, you must
     /// specify the
     /// device index.
-    device_index: ?i32,
+    device_index: ?i32 = null,
 
     /// The number of ENA queues to be created with the instance.
-    ena_queue_count: ?i32,
+    ena_queue_count: ?i32 = null,
 
     /// Specifies the ENA Express settings for the network interface that's attached
     /// to
     /// the instance.
-    ena_srd_specification: ?EnaSrdSpecificationRequest,
+    ena_srd_specification: ?EnaSrdSpecificationRequest = null,
 
     /// The IDs of the security groups for the network interface. Applies only if
     /// creating a
     /// network interface when launching an instance.
-    groups: ?[]const []const u8,
+    groups: ?[]const []const u8 = null,
 
     /// The type of network interface.
     ///
@@ -81,18 +81,18 @@ pub const InstanceNetworkInterfaceSpecification = struct {
     /// interface. EFA-only network interfaces do not support IP addresses.
     ///
     /// Valid values: `interface` | `efa` | `efa-only`
-    interface_type: ?[]const u8,
+    interface_type: ?[]const u8 = null,
 
     /// The number of IPv4 delegated prefixes to be automatically assigned to the
     /// network
     /// interface. You cannot use this option if you use the `Ipv4Prefix`
     /// option.
-    ipv_4_prefix_count: ?i32,
+    ipv_4_prefix_count: ?i32 = null,
 
     /// The IPv4 delegated prefixes to be assigned to the network interface. You
     /// cannot use
     /// this option if you use the `Ipv4PrefixCount` option.
-    ipv_4_prefixes: ?[]const Ipv4PrefixSpecificationRequest,
+    ipv_4_prefixes: ?[]const Ipv4PrefixSpecificationRequest = null,
 
     /// A number of IPv6 addresses to assign to the network interface. Amazon EC2
     /// chooses the
@@ -101,7 +101,7 @@ pub const InstanceNetworkInterfaceSpecification = struct {
     /// option to assign specific IPv6 addresses in the same request. You can
     /// specify this
     /// option if you've specified a minimum number of instances to launch.
-    ipv_6_address_count: ?i32,
+    ipv_6_address_count: ?i32 = null,
 
     /// The IPv6 addresses to assign to the network interface. You cannot specify
     /// this option
@@ -109,18 +109,18 @@ pub const InstanceNetworkInterfaceSpecification = struct {
     /// cannot
     /// specify this option if you've specified a minimum number of instances to
     /// launch.
-    ipv_6_addresses: ?[]const InstanceIpv6Address,
+    ipv_6_addresses: ?[]const InstanceIpv6Address = null,
 
     /// The number of IPv6 delegated prefixes to be automatically assigned to the
     /// network
     /// interface. You cannot use this option if you use the `Ipv6Prefix`
     /// option.
-    ipv_6_prefix_count: ?i32,
+    ipv_6_prefix_count: ?i32 = null,
 
     /// The IPv6 delegated prefixes to be assigned to the network interface. You
     /// cannot use
     /// this option if you use the `Ipv6PrefixCount` option.
-    ipv_6_prefixes: ?[]const Ipv6PrefixSpecificationRequest,
+    ipv_6_prefixes: ?[]const Ipv6PrefixSpecificationRequest = null,
 
     /// The index of the network card. Some instance types support multiple network
     /// cards. The
@@ -134,14 +134,14 @@ pub const InstanceNetworkInterfaceSpecification = struct {
     /// network
     /// card index, use
     /// [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html).
-    network_card_index: ?i32,
+    network_card_index: ?i32 = null,
 
     /// The ID of the network interface.
     ///
     /// If you are creating a Spot Fleet, omit this parameter because you can’t
     /// specify a
     /// network interface ID in a launch specification.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// The primary IPv6 address of the network interface. When you enable an IPv6
     /// GUA address to be a primary IPv6, the first IPv6 GUA will be made the
@@ -149,7 +149,7 @@ pub const InstanceNetworkInterfaceSpecification = struct {
     /// interface is detached. For more information about primary IPv6 addresses,
     /// see
     /// [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html).
-    primary_ipv_6: ?bool,
+    primary_ipv_6: ?bool = null,
 
     /// The private IPv4 address of the network interface. Applies only if creating
     /// a network
@@ -158,7 +158,7 @@ pub const InstanceNetworkInterfaceSpecification = struct {
     /// more than one instance in a
     /// [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
     /// request.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// The private IPv4 addresses to assign to the network interface. Only one
     /// private IPv4
@@ -167,16 +167,16 @@ pub const InstanceNetworkInterfaceSpecification = struct {
     /// more than one instance in a
     /// [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
     /// request.
-    private_ip_addresses: ?[]const PrivateIpAddressSpecification,
+    private_ip_addresses: ?[]const PrivateIpAddressSpecification = null,
 
     /// The number of secondary private IPv4 addresses. You can’t specify this
     /// parameter and
     /// also specify a secondary private IP address using the `PrivateIpAddress`
     /// parameter.
-    secondary_private_ip_address_count: ?i32,
+    secondary_private_ip_address_count: ?i32 = null,
 
     /// The ID of the subnet associated with the network interface. Applies only if
     /// creating a
     /// network interface when launching an instance.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 };

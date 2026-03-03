@@ -4,22 +4,22 @@
 pub const TaskStatisticsForAuditCheck = struct {
     /// The number of findings to which the mitigation action task was canceled when
     /// applied.
-    canceled_findings_count: ?i64,
+    canceled_findings_count: ?i64 = null,
 
     /// The number of findings for which at least one of the actions failed when
     /// applied.
-    failed_findings_count: ?i64,
+    failed_findings_count: ?i64 = null,
 
     /// The number of findings skipped because of filter conditions provided in the
     /// parameters to the command.
-    skipped_findings_count: ?i64,
+    skipped_findings_count: ?i64 = null,
 
     /// The number of findings for which all mitigation actions succeeded when
     /// applied.
-    succeeded_findings_count: ?i64,
+    succeeded_findings_count: ?i64 = null,
 
     /// The total number of findings to which a task is being applied.
-    total_findings_count: ?i64,
+    total_findings_count: ?i64 = null,
 
     pub const json_field_names = .{
         .canceled_findings_count = "canceledFindingsCount",

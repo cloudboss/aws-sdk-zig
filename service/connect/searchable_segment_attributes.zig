@@ -8,7 +8,7 @@ pub const SearchableSegmentAttributes = struct {
 
     /// The match type combining search criteria using multiple searchable segment
     /// attributes.
-    match_type: ?SearchContactsMatchType,
+    match_type: ?SearchContactsMatchType = null,
 
     pub const json_field_names = .{
         .criteria = "Criteria",

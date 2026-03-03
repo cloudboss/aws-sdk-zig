@@ -2,7 +2,7 @@
 /// variation of the feature that you are including in the experiment.
 pub const TreatmentConfig = struct {
     /// A description for this treatment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The feature that this experiment is testing.
     feature: []const u8,

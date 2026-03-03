@@ -5,41 +5,41 @@ const FormTypeStatus = @import("form_type_status.zig").FormTypeStatus;
 /// The details of the metadata form type.
 pub const FormTypeData = struct {
     /// The timestamp of when the metadata form type was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon DataZone user who created teh metadata form type.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The description of the metadata form type.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the Amazon DataZone domain in which the form type exists.
     domain_id: []const u8,
 
     /// The imports specified in the form type.
-    imports: ?[]const Import,
+    imports: ?[]const Import = null,
 
     /// The model of the form type.
-    model: ?Model,
+    model: ?Model = null,
 
     /// The name of the form type.
     name: []const u8,
 
     /// The identifier of the Amazon DataZone domain in which the form type was
     /// originally created.
-    origin_domain_id: ?[]const u8,
+    origin_domain_id: ?[]const u8 = null,
 
     /// The identifier of the project in which the form type was originally created.
-    origin_project_id: ?[]const u8,
+    origin_project_id: ?[]const u8 = null,
 
     /// The identifier of the project that owns the form type.
-    owning_project_id: ?[]const u8,
+    owning_project_id: ?[]const u8 = null,
 
     /// The revision of the form type.
     revision: []const u8,
 
     /// The status of the form type.
-    status: ?FormTypeStatus,
+    status: ?FormTypeStatus = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

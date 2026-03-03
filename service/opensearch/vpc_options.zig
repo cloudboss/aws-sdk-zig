@@ -9,14 +9,14 @@ pub const VPCOptions = struct {
     /// you do not provide a security group ID, OpenSearch Service uses the default
     /// security
     /// group for the VPC.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// A list of subnet IDs associated with the VPC endpoints for the domain. If
     /// your domain
     /// uses multiple Availability Zones, you need to provide two subnet IDs, one
     /// per zone.
     /// Otherwise, provide only one.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .security_group_ids = "SecurityGroupIds",

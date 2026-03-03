@@ -13,7 +13,7 @@ pub const OutputDataConfig = struct {
     /// using the job ID so that the output from one job does not overwrite the
     /// output of
     /// another.
-    s3_key: ?[]const u8,
+    s3_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s3_bucket = "S3Bucket",

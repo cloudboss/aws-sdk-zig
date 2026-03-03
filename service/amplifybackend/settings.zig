@@ -4,10 +4,10 @@ const MfaTypesElement = @import("mfa_types_element.zig").MfaTypesElement;
 /// project.
 pub const Settings = struct {
     /// The supported MFA types.
-    mfa_types: ?[]const MfaTypesElement,
+    mfa_types: ?[]const MfaTypesElement = null,
 
     /// The body of the SMS message.
-    sms_message: ?[]const u8,
+    sms_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .mfa_types = "MfaTypes",

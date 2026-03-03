@@ -21,7 +21,7 @@ pub const BulkEmailEntry = struct {
 
     /// The `ReplacementEmailContent` associated with a
     /// `BulkEmailEntry`.
-    replacement_email_content: ?ReplacementEmailContent,
+    replacement_email_content: ?ReplacementEmailContent = null,
 
     /// The list of message headers associated with the `BulkEmailEntry` data type.
     ///
@@ -46,7 +46,7 @@ pub const BulkEmailEntry = struct {
     /// * If the header is not defined within `Template`,
     /// it will simply be added to the email as specified in
     /// `BulkEmailEntry`.
-    replacement_headers: ?[]const MessageHeader,
+    replacement_headers: ?[]const MessageHeader = null,
 
     /// A list of tags, in the form of name/value pairs, to apply to an email that
     /// you send
@@ -54,7 +54,7 @@ pub const BulkEmailEntry = struct {
     /// characteristics of the email that you define, so that you can publish email
     /// sending
     /// events.
-    replacement_tags: ?[]const MessageTag,
+    replacement_tags: ?[]const MessageTag = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

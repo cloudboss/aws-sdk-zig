@@ -12,7 +12,7 @@ pub const QuipConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The
     /// Quip field names must exist in your Quip custom metadata.
-    attachment_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    attachment_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// `TRUE` to index attachments.
     crawl_attachments: bool = false,
@@ -37,14 +37,14 @@ pub const QuipConfiguration = struct {
     /// pattern and an exclusion pattern, the exclusion pattern takes precedence,
     /// and the file
     /// isn't included in the index.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// The identifiers of the Quip folders you want to index. You can find the
     /// folder ID in
     /// your browser URL when you access your folder in Quip. For example,
     /// *https://quip-company.quipdomain.com/zlLuOVNSarTL/folder-name*.
     /// The folder ID in this example is "zlLuOVNSarTL".
-    folder_ids: ?[]const []const u8,
+    folder_ids: ?[]const []const u8 = null,
 
     /// A list of regular expression patterns to include certain files in your Quip
     /// file
@@ -55,7 +55,7 @@ pub const QuipConfiguration = struct {
     /// and an exclusion pattern, the exclusion pattern takes precedence, and the
     /// file isn't
     /// included in the index.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of Quip messages to Amazon Kendra index field names. To create
@@ -65,7 +65,7 @@ pub const QuipConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Quip field names must exist in your Quip
     /// custom metadata.
-    message_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    message_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains
     /// the
@@ -86,13 +86,13 @@ pub const QuipConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Quip field names must exist in your Quip
     /// custom metadata.
-    thread_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    thread_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// Configuration information for an Amazon Virtual Private Cloud (VPC) to
     /// connect to your Quip.
     /// For more information, see [Configuring a
     /// VPC](https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
-    vpc_configuration: ?DataSourceVpcConfiguration,
+    vpc_configuration: ?DataSourceVpcConfiguration = null,
 
     pub const json_field_names = .{
         .attachment_field_mappings = "AttachmentFieldMappings",

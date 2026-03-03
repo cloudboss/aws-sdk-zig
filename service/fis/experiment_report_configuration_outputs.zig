@@ -3,7 +3,7 @@ const ExperimentReportConfigurationOutputsS3Configuration = @import("experiment_
 /// Describes the output destinations of the experiment report.
 pub const ExperimentReportConfigurationOutputs = struct {
     /// The S3 destination for the experiment report.
-    s_3_configuration: ?ExperimentReportConfigurationOutputsS3Configuration,
+    s_3_configuration: ?ExperimentReportConfigurationOutputsS3Configuration = null,
 
     pub const json_field_names = .{
         .s_3_configuration = "s3Configuration",

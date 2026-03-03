@@ -8,7 +8,7 @@ pub const GuardrailContentPolicyConfig = struct {
     filters_config: []const GuardrailContentFilterConfig,
 
     /// The tier that your guardrail uses for content filters.
-    tier_config: ?GuardrailContentFiltersTierConfig,
+    tier_config: ?GuardrailContentFiltersTierConfig = null,
 
     pub const json_field_names = .{
         .filters_config = "filtersConfig",

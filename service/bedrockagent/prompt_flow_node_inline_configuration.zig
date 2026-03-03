@@ -5,10 +5,10 @@ const PromptTemplateType = @import("prompt_template_type.zig").PromptTemplateTyp
 /// Contains configurations for a prompt defined inline in the node.
 pub const PromptFlowNodeInlineConfiguration = struct {
     /// Additional fields to be included in the model request for the Prompt node.
-    additional_model_request_fields: ?[]const u8,
+    additional_model_request_fields: ?[]const u8 = null,
 
     /// Contains inference configurations for the prompt.
-    inference_configuration: ?PromptInferenceConfiguration,
+    inference_configuration: ?PromptInferenceConfiguration = null,
 
     /// The unique identifier of the model or [inference
     /// profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html) to run inference with.

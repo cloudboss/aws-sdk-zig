@@ -4,9 +4,9 @@ const ReservedInstancesCostCalculation = @import("reserved_instances_cost_calcul
 /// The DynamoDB reserved capacity recommendation details.
 pub const DynamoDbReservedCapacity = struct {
     /// The DynamoDB reserved capacity configuration used for recommendations.
-    configuration: ?DynamoDbReservedCapacityConfiguration,
+    configuration: ?DynamoDbReservedCapacityConfiguration = null,
 
-    cost_calculation: ?ReservedInstancesCostCalculation,
+    cost_calculation: ?ReservedInstancesCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

@@ -16,7 +16,7 @@ pub const ExecuteStatementRequest = struct {
     continue_after_timeout: bool = false,
 
     /// The name of the database.
-    database: ?[]const u8,
+    database: ?[]const u8 = null,
 
     /// A value that indicates whether to format the result set as a single JSON
     /// string.
@@ -29,7 +29,7 @@ pub const ExecuteStatementRequest = struct {
     /// [Using the Data
     /// API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
     /// in the *Amazon Aurora User Guide*.
-    format_records_as: ?RecordsFormatType,
+    format_records_as: ?RecordsFormatType = null,
 
     /// A value that indicates whether to include metadata in the results.
     include_result_metadata: bool = false,
@@ -37,18 +37,18 @@ pub const ExecuteStatementRequest = struct {
     /// The parameters for the SQL statement.
     ///
     /// Array parameters are not supported.
-    parameters: ?[]const SqlParameter,
+    parameters: ?[]const SqlParameter = null,
 
     /// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
     resource_arn: []const u8,
 
     /// Options that control how the result set is returned.
-    result_set_options: ?ResultSetOptions,
+    result_set_options: ?ResultSetOptions = null,
 
     /// The name of the database schema.
     ///
     /// Currently, the `schema` parameter isn't supported.
-    schema: ?[]const u8,
+    schema: ?[]const u8 = null,
 
     /// The ARN of the secret that enables access to the DB cluster. Enter the
     /// database user name and password for the credentials in
@@ -66,7 +66,7 @@ pub const ExecuteStatementRequest = struct {
     /// transaction that you want to include the SQL statement in.
     ///
     /// If the SQL statement is not part of a transaction, don't set this parameter.
-    transaction_id: ?[]const u8,
+    transaction_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .continue_after_timeout = "continueAfterTimeout",

@@ -12,10 +12,10 @@ pub const CreateEnvironmentMessage = struct {
     /// your Elastic Beanstalk environment URL. If not specified, the CNAME is
     /// generated automatically by
     /// appending a random alphanumeric string to the environment name.
-    cname_prefix: ?[]const u8,
+    cname_prefix: ?[]const u8 = null,
 
     /// Your description for this environment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique name for the environment.
     ///
@@ -30,7 +30,7 @@ pub const CreateEnvironmentMessage = struct {
     /// If you don't specify the `CNAMEPrefix` parameter, the environment name
     /// becomes part of
     /// the CNAME, and therefore part of the visible URL for your application.
-    environment_name: ?[]const u8,
+    environment_name: ?[]const u8 = null,
 
     /// The name of the group to which the target environment belongs. Specify a
     /// group name
@@ -38,7 +38,7 @@ pub const CreateEnvironmentMessage = struct {
     /// not with the
     /// environment name parameter. See [Environment Manifest
     /// (env.yaml)](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html) for details.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an existing IAM role to be used as the
     /// environment's
@@ -51,19 +51,19 @@ pub const CreateEnvironmentMessage = struct {
     /// more information, see [Operations
     /// roles](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html) in the
     /// *AWS Elastic Beanstalk Developer Guide*.
-    operations_role: ?[]const u8,
+    operations_role: ?[]const u8 = null,
 
     /// If specified, AWS Elastic Beanstalk sets the specified configuration options
     /// to the
     /// requested value in the configuration set for the new environment. These
     /// override the values
     /// obtained from the solution stack or the configuration template.
-    option_settings: ?[]const ConfigurationOptionSetting,
+    option_settings: ?[]const ConfigurationOptionSetting = null,
 
     /// A list of custom user-defined configuration options to remove from the
     /// configuration
     /// set for this new environment.
-    options_to_remove: ?[]const OptionSpecification,
+    options_to_remove: ?[]const OptionSpecification = null,
 
     /// The Amazon Resource Name (ARN) of the custom platform to use with the
     /// environment. For
@@ -73,7 +73,7 @@ pub const CreateEnvironmentMessage = struct {
     ///
     /// If you specify `PlatformArn`, don't specify
     /// `SolutionStackName`.
-    platform_arn: ?[]const u8,
+    platform_arn: ?[]const u8 = null,
 
     /// The name of an Elastic Beanstalk solution stack (platform version) to use
     /// with the environment. If
@@ -86,17 +86,17 @@ pub const CreateEnvironmentMessage = struct {
     ///
     /// If you specify `SolutionStackName`, don't specify `PlatformArn` or
     /// `TemplateName`.
-    solution_stack_name: ?[]const u8,
+    solution_stack_name: ?[]const u8 = null,
 
     /// Specifies the tags applied to resources in the environment.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The name of the Elastic Beanstalk configuration template to use with the
     /// environment.
     ///
     /// If you specify `TemplateName`, then don't specify
     /// `SolutionStackName`.
-    template_name: ?[]const u8,
+    template_name: ?[]const u8 = null,
 
     /// Specifies the tier to use in creating this environment. The environment tier
     /// that you
@@ -104,11 +104,11 @@ pub const CreateEnvironmentMessage = struct {
     /// a web application that handles
     /// HTTP(S) requests or a web application that handles background-processing
     /// tasks.
-    tier: ?EnvironmentTier,
+    tier: ?EnvironmentTier = null,
 
     /// The name of the application version to deploy.
     ///
     /// Default: If not specified, Elastic Beanstalk attempts to deploy the sample
     /// application.
-    version_label: ?[]const u8,
+    version_label: ?[]const u8 = null,
 };

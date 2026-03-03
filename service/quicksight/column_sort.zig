@@ -5,7 +5,7 @@ const ColumnIdentifier = @import("column_identifier.zig").ColumnIdentifier;
 /// The sort configuration for a column that is not used in a field well.
 pub const ColumnSort = struct {
     /// The aggregation function that is defined in the column sort.
-    aggregation_function: ?AggregationFunction,
+    aggregation_function: ?AggregationFunction = null,
 
     /// The sort direction.
     direction: SortDirection,

@@ -6,11 +6,11 @@ const IoTJobExponentialRolloutRate = @import("io_t_job_exponential_rollout_rate.
 /// devices.
 pub const IoTJobExecutionsRolloutConfig = struct {
     /// The exponential rate to increase the job rollout rate.
-    exponential_rate: ?IoTJobExponentialRolloutRate,
+    exponential_rate: ?IoTJobExponentialRolloutRate = null,
 
     /// The maximum number of devices that receive a pending job notification, per
     /// minute.
-    maximum_per_minute: ?i32,
+    maximum_per_minute: ?i32 = null,
 
     pub const json_field_names = .{
         .exponential_rate = "exponentialRate",

@@ -9,20 +9,20 @@ const Resource = @import("resource.zig").Resource;
 /// by a user, or a system configuration snapshot.
 pub const Evidence = struct {
     /// Specifies whether the evidence is included in the assessment report.
-    assessment_report_selection: ?[]const u8,
+    assessment_report_selection: ?[]const u8 = null,
 
     /// The names and values that are used by the evidence event. This includes an
     /// attribute
     /// name (such as `allowUsersToChangePassword`) and value (such as `true`
     /// or `false`).
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The identifier for the Amazon Web Services account.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
     /// The Amazon Web Services account that the evidence is collected from, and its
     /// organization path.
-    aws_organization: ?[]const u8,
+    aws_organization: ?[]const u8 = null,
 
     /// The evaluation status for automated evidence that falls under the compliance
     /// check
@@ -45,38 +45,38 @@ pub const Evidence = struct {
     /// that doesn't support compliance checks (such as manual evidence, Amazon Web
     /// Services
     /// API calls, or CloudTrail).
-    compliance_check: ?[]const u8,
+    compliance_check: ?[]const u8 = null,
 
     /// The data source where the evidence was collected from.
-    data_source: ?[]const u8,
+    data_source: ?[]const u8 = null,
 
     /// The name of the evidence event.
-    event_name: ?[]const u8,
+    event_name: ?[]const u8 = null,
 
     /// The Amazon Web Services service that the evidence is collected from.
-    event_source: ?[]const u8,
+    event_source: ?[]const u8 = null,
 
     /// The identifier for the Amazon Web Services account.
-    evidence_aws_account_id: ?[]const u8,
+    evidence_aws_account_id: ?[]const u8 = null,
 
     /// The type of automated evidence.
-    evidence_by_type: ?[]const u8,
+    evidence_by_type: ?[]const u8 = null,
 
     /// The identifier for the folder that the evidence is stored in.
-    evidence_folder_id: ?[]const u8,
+    evidence_folder_id: ?[]const u8 = null,
 
     /// The unique identifier for the user or role that's associated with
     /// the evidence.
-    iam_id: ?[]const u8,
+    iam_id: ?[]const u8 = null,
 
     /// The identifier for the evidence.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The list of resources that are assessed to generate the evidence.
-    resources_included: ?[]const Resource,
+    resources_included: ?[]const Resource = null,
 
     /// The timestamp that represents when the evidence was collected.
-    time: ?i64,
+    time: ?i64 = null,
 
     pub const json_field_names = .{
         .assessment_report_selection = "assessmentReportSelection",

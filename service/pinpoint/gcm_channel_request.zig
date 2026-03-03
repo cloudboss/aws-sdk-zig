@@ -5,20 +5,20 @@
 pub const GCMChannelRequest = struct {
     /// The Web API Key, also referred to as an *API_KEY* or *server key*, that you
     /// received from Google to communicate with Google services.
-    api_key: ?[]const u8,
+    api_key: ?[]const u8 = null,
 
     /// The default authentication method used for GCM. Values are either "TOKEN" or
     /// "KEY". Defaults to "KEY".
-    default_authentication_method: ?[]const u8,
+    default_authentication_method: ?[]const u8 = null,
 
     /// Specifies whether to enable the GCM channel for the application.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The contents of the JSON file provided by Google during registration in
     /// order to generate an access token for authentication. For more information
     /// see [Migrate from legacy FCM APIs to HTTP
     /// v1](https://firebase.google.com/docs/cloud-messaging/migrate-v1).
-    service_json: ?[]const u8,
+    service_json: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_key = "ApiKey",

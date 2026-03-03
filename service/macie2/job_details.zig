@@ -20,7 +20,7 @@ pub const JobDetails = struct {
     ///   for any jobs that previously ran.
     /// * UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve
     ///   job data for the bucket.
-    is_defined_in_job: ?IsDefinedInJob,
+    is_defined_in_job: ?IsDefinedInJob = null,
 
     /// Specifies whether any recurring jobs are configured to analyze objects in
     /// the bucket. Possible values are:
@@ -37,7 +37,7 @@ pub const JobDetails = struct {
     ///   bucket have a status of CANCELLED.
     /// * UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve
     ///   job data for the bucket.
-    is_monitored_by_job: ?IsMonitoredByJob,
+    is_monitored_by_job: ?IsMonitoredByJob = null,
 
     /// The unique identifier for the job that ran most recently and is configured
     /// to analyze objects in the bucket, either the latest run of a recurring job
@@ -45,7 +45,7 @@ pub const JobDetails = struct {
     ///
     /// This value is typically null if the value for the isDefinedInJob property is
     /// FALSE or UNKNOWN.
-    last_job_id: ?[]const u8,
+    last_job_id: ?[]const u8 = null,
 
     /// The date and time, in UTC and extended ISO 8601 format, when the job
     /// (lastJobId) started. If the job is a recurring job, this value indicates
@@ -53,7 +53,7 @@ pub const JobDetails = struct {
     ///
     /// This value is typically null if the value for the isDefinedInJob property is
     /// FALSE or UNKNOWN.
-    last_job_run_time: ?i64,
+    last_job_run_time: ?i64 = null,
 
     pub const json_field_names = .{
         .is_defined_in_job = "isDefinedInJob",

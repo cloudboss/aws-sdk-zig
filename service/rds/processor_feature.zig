@@ -38,8 +38,8 @@
 pub const ProcessorFeature = struct {
     /// The name of the processor feature. Valid names are `coreCount` and
     /// `threadsPerCore`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The value of a processor feature.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

@@ -4,16 +4,16 @@ const RouterInputMessage = @import("router_input_message.zig").RouterInputMessag
 /// thumbnail messages, the thumbnail image, the timecode, and the timestamp.
 pub const RouterInputThumbnailDetails = struct {
     /// The thumbnail image, encoded as a Base64-encoded binary data object.
-    thumbnail: ?[]const u8,
+    thumbnail: ?[]const u8 = null,
 
     /// The messages associated with the router input thumbnail.
     thumbnail_messages: []const RouterInputMessage,
 
     /// The timecode associated with the thumbnail.
-    timecode: ?[]const u8,
+    timecode: ?[]const u8 = null,
 
     /// The timestamp associated with the thumbnail.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .thumbnail = "Thumbnail",

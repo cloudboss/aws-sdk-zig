@@ -8,7 +8,7 @@ pub const CreateSnapshotScheduleActionParameters = struct {
     namespace_name: []const u8,
 
     /// The retention period of the snapshot created by the scheduled action.
-    retention_period: ?i32,
+    retention_period: ?i32 = null,
 
     /// A string prefix that is attached to the name of the snapshot created by the
     /// scheduled action. The final name of the snapshot is the string prefix
@@ -17,7 +17,7 @@ pub const CreateSnapshotScheduleActionParameters = struct {
 
     /// An array of [Tag
     /// objects](https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html) to associate with the snapshot.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .namespace_name = "namespaceName",

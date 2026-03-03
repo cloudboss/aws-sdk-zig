@@ -7,11 +7,11 @@ pub const RequestBasedServiceLevelIndicatorConfig = struct {
     /// The arithmetic operation to use when comparing the specified metric to the
     /// threshold. This parameter is required if this SLO is tracking the `Latency`
     /// metric.
-    comparison_operator: ?ServiceLevelIndicatorComparisonOperator,
+    comparison_operator: ?ServiceLevelIndicatorComparisonOperator = null,
 
     /// The value that the SLI metric is compared to. This parameter is required if
     /// this SLO is tracking the `Latency` metric.
-    metric_threshold: ?f64,
+    metric_threshold: ?f64 = null,
 
     /// Use this structure to specify the metric to be used for the SLO.
     request_based_sli_metric_config: RequestBasedServiceLevelIndicatorMetricConfig,

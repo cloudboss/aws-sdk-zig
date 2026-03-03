@@ -1,8 +1,8 @@
 /// Describes a port range.
 pub const FilterPortRange = struct {
     /// The first port in the range.
-    from_port: ?i32,
+    from_port: ?i32 = null,
 
     /// The last port in the range.
-    to_port: ?i32,
+    to_port: ?i32 = null,
 };

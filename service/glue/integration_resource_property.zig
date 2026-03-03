@@ -8,13 +8,13 @@ pub const IntegrationResourceProperty = struct {
 
     /// The resource ARN created through this create API. The format is something
     /// like arn:aws:glue:::integrationresourceproperty/*
-    resource_property_arn: ?[]const u8,
+    resource_property_arn: ?[]const u8 = null,
 
     /// The resource properties associated with the integration source.
-    source_processing_properties: ?SourceProcessingProperties,
+    source_processing_properties: ?SourceProcessingProperties = null,
 
     /// The resource properties associated with the integration target.
-    target_processing_properties: ?TargetProcessingProperties,
+    target_processing_properties: ?TargetProcessingProperties = null,
 
     pub const json_field_names = .{
         .resource_arn = "ResourceArn",

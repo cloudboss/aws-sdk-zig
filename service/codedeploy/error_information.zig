@@ -49,10 +49,10 @@ pub const ErrorInformation = struct {
     /// raised if the revision is deleted after the deployment is created, but
     /// before it
     /// is started.
-    code: ?ErrorCode,
+    code: ?ErrorCode = null,
 
     /// An accompanying error message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

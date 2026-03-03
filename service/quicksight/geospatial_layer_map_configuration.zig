@@ -6,18 +6,18 @@ const GeospatialMapStyle = @import("geospatial_map_style.zig").GeospatialMapStyl
 
 /// The map definition that defines map state, map style, and geospatial layers.
 pub const GeospatialLayerMapConfiguration = struct {
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
-    legend: ?LegendOptions,
+    legend: ?LegendOptions = null,
 
     /// The geospatial layers to visualize on the map.
-    map_layers: ?[]const GeospatialLayerItem,
+    map_layers: ?[]const GeospatialLayerItem = null,
 
     /// The map state properties for the map.
-    map_state: ?GeospatialMapState,
+    map_state: ?GeospatialMapState = null,
 
     /// The map style properties for the map.
-    map_style: ?GeospatialMapStyle,
+    map_style: ?GeospatialMapStyle = null,
 
     pub const json_field_names = .{
         .interactions = "Interactions",

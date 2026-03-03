@@ -7,7 +7,7 @@ pub const VariablePaymentTermConfiguration = struct {
     /// if no further action is taken. This only applies when the payment request
     /// approval strategy is set to `AUTO_APPROVE_ON_EXPIRATION`. The duration is
     /// represented in the ISO_8601 format (e.g., P10D for 10 days).
-    expiration_duration: ?[]const u8,
+    expiration_duration: ?[]const u8 = null,
 
     /// Defines the strategy for approving payment requests. Values include
     /// `AUTO_APPROVE_ON_EXPIRATION` and `WAIT_FOR_APPROVAL`

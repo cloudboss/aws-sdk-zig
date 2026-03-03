@@ -3,7 +3,7 @@ const AppRegistryConfiguration = @import("app_registry_configuration.zig").AppRe
 pub const GetConfigurationResponse = struct {
     /// Retrieves `TagKey` configuration
     /// from an account.
-    configuration: ?AppRegistryConfiguration,
+    configuration: ?AppRegistryConfiguration = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

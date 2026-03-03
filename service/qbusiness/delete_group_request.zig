@@ -12,7 +12,7 @@ pub const DeleteGroupRequest = struct {
     /// that these groups cannot access customer-related documents stored in
     /// Salesforce. Only "Sales and Marketing" should access documents in the
     /// Salesforce data source.
-    data_source_id: ?[]const u8,
+    data_source_id: ?[]const u8 = null,
 
     /// The name of the group you want to delete.
     group_name: []const u8,

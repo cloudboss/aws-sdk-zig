@@ -7,7 +7,7 @@ const GetSolVnfcResourceInfoMetadata = @import("get_sol_vnfc_resource_info_metad
 /// update, and delete) can be performed.
 pub const GetSolVnfcResourceInfo = struct {
     /// The metadata of the network function compute.
-    metadata: ?GetSolVnfcResourceInfoMetadata,
+    metadata: ?GetSolVnfcResourceInfoMetadata = null,
 
     pub const json_field_names = .{
         .metadata = "metadata",

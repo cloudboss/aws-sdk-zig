@@ -8,19 +8,19 @@ const OutputFileUriValue = @import("output_file_uri_value.zig").OutputFileUriVal
 pub const Variable = struct {
     /// The value of the variable as a structure that specifies a dataset content
     /// version.
-    dataset_content_version_value: ?DatasetContentVersionValue,
+    dataset_content_version_value: ?DatasetContentVersionValue = null,
 
     /// The value of the variable as a double (numeric).
-    double_value: ?f64,
+    double_value: ?f64 = null,
 
     /// The name of the variable.
     name: []const u8,
 
     /// The value of the variable as a structure that specifies an output file URI.
-    output_file_uri_value: ?OutputFileUriValue,
+    output_file_uri_value: ?OutputFileUriValue = null,
 
     /// The value of the variable as a string.
-    string_value: ?[]const u8,
+    string_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dataset_content_version_value = "datasetContentVersionValue",

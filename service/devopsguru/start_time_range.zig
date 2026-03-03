@@ -2,10 +2,10 @@
 /// started.
 pub const StartTimeRange = struct {
     /// The start time of the time range.
-    from_time: ?i64,
+    from_time: ?i64 = null,
 
     /// The end time of the time range.
-    to_time: ?i64,
+    to_time: ?i64 = null,
 
     pub const json_field_names = .{
         .from_time = "FromTime",

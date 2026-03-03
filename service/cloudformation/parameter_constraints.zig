@@ -5,5 +5,5 @@
 /// `AllowedValues` property.
 pub const ParameterConstraints = struct {
     /// A list of values that are permitted for a parameter.
-    allowed_values: ?[]const []const u8,
+    allowed_values: ?[]const []const u8 = null,
 };

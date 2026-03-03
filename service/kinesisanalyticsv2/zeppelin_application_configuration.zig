@@ -7,18 +7,18 @@ const ZeppelinMonitoringConfiguration = @import("zeppelin_monitoring_configurati
 pub const ZeppelinApplicationConfiguration = struct {
     /// The Amazon Glue Data Catalog that you use in queries in a Managed Service
     /// for Apache Flink Studio notebook.
-    catalog_configuration: ?CatalogConfiguration,
+    catalog_configuration: ?CatalogConfiguration = null,
 
     /// Custom artifacts are dependency JARs and user-defined functions (UDF).
-    custom_artifacts_configuration: ?[]const CustomArtifactConfiguration,
+    custom_artifacts_configuration: ?[]const CustomArtifactConfiguration = null,
 
     /// The information required to deploy a Managed Service for Apache Flink Studio
     /// notebook as an application with durable state.
-    deploy_as_application_configuration: ?DeployAsApplicationConfiguration,
+    deploy_as_application_configuration: ?DeployAsApplicationConfiguration = null,
 
     /// The monitoring configuration of a Managed Service for Apache Flink Studio
     /// notebook.
-    monitoring_configuration: ?ZeppelinMonitoringConfiguration,
+    monitoring_configuration: ?ZeppelinMonitoringConfiguration = null,
 
     pub const json_field_names = .{
         .catalog_configuration = "CatalogConfiguration",

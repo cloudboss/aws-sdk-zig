@@ -2,7 +2,7 @@
 pub const PathPatternConditionConfig = struct {
     /// The regular expressions to compare against the request URL. The maximum
     /// length of each string is 128 characters.
-    regex_values: ?[]const []const u8,
+    regex_values: ?[]const []const u8 = null,
 
     /// The path patterns to compare against the request URL. The maximum length of
     /// each
@@ -17,5 +17,5 @@ pub const PathPatternConditionConfig = struct {
     /// to its query
     /// string. To compare against the query string, use a [query string
     /// condition](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#query-string-conditions).
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 };

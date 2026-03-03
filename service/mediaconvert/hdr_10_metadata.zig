@@ -8,67 +8,67 @@ pub const Hdr10Metadata = struct {
     /// color grading tools. Range is 0 to 50,000, each increment represents 0.00002
     /// in CIE1931 color coordinate. Note that this setting is not for color
     /// correction.
-    blue_primary_x: ?i32,
+    blue_primary_x: ?i32 = null,
 
     /// HDR Master Display Information must be provided by a color grader, using
     /// color grading tools. Range is 0 to 50,000, each increment represents 0.00002
     /// in CIE1931 color coordinate. Note that this setting is not for color
     /// correction.
-    blue_primary_y: ?i32,
+    blue_primary_y: ?i32 = null,
 
     /// HDR Master Display Information must be provided by a color grader, using
     /// color grading tools. Range is 0 to 50,000, each increment represents 0.00002
     /// in CIE1931 color coordinate. Note that this setting is not for color
     /// correction.
-    green_primary_x: ?i32,
+    green_primary_x: ?i32 = null,
 
     /// HDR Master Display Information must be provided by a color grader, using
     /// color grading tools. Range is 0 to 50,000, each increment represents 0.00002
     /// in CIE1931 color coordinate. Note that this setting is not for color
     /// correction.
-    green_primary_y: ?i32,
+    green_primary_y: ?i32 = null,
 
     /// Maximum light level among all samples in the coded video sequence, in units
     /// of candelas per square meter. This setting doesn't have a default value; you
     /// must specify a value that is suitable for the content.
-    max_content_light_level: ?i32,
+    max_content_light_level: ?i32 = null,
 
     /// Maximum average light level of any frame in the coded video sequence, in
     /// units of candelas per square meter. This setting doesn't have a default
     /// value; you must specify a value that is suitable for the content.
-    max_frame_average_light_level: ?i32,
+    max_frame_average_light_level: ?i32 = null,
 
     /// Nominal maximum mastering display luminance in units of of 0.0001 candelas
     /// per square meter.
-    max_luminance: ?i32,
+    max_luminance: ?i32 = null,
 
     /// Nominal minimum mastering display luminance in units of of 0.0001 candelas
     /// per square meter
-    min_luminance: ?i32,
+    min_luminance: ?i32 = null,
 
     /// HDR Master Display Information must be provided by a color grader, using
     /// color grading tools. Range is 0 to 50,000, each increment represents 0.00002
     /// in CIE1931 color coordinate. Note that this setting is not for color
     /// correction.
-    red_primary_x: ?i32,
+    red_primary_x: ?i32 = null,
 
     /// HDR Master Display Information must be provided by a color grader, using
     /// color grading tools. Range is 0 to 50,000, each increment represents 0.00002
     /// in CIE1931 color coordinate. Note that this setting is not for color
     /// correction.
-    red_primary_y: ?i32,
+    red_primary_y: ?i32 = null,
 
     /// HDR Master Display Information must be provided by a color grader, using
     /// color grading tools. Range is 0 to 50,000, each increment represents 0.00002
     /// in CIE1931 color coordinate. Note that this setting is not for color
     /// correction.
-    white_point_x: ?i32,
+    white_point_x: ?i32 = null,
 
     /// HDR Master Display Information must be provided by a color grader, using
     /// color grading tools. Range is 0 to 50,000, each increment represents 0.00002
     /// in CIE1931 color coordinate. Note that this setting is not for color
     /// correction.
-    white_point_y: ?i32,
+    white_point_y: ?i32 = null,
 
     pub const json_field_names = .{
         .blue_primary_x = "BluePrimaryX",

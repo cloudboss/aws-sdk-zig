@@ -7,10 +7,10 @@ pub const ListProjectsResult = struct {
     /// returned. It can be used in a subsequent call to this operation to return
     /// the next set of items in the
     /// list.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// Information about the projects.
-    projects: ?[]const Project,
+    projects: ?[]const Project = null,
 
     pub const json_field_names = .{
         .next_token = "nextToken",

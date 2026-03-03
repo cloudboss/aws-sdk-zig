@@ -4,7 +4,7 @@ const CharacterOffsets = @import("character_offsets.zig").CharacterOffsets;
 pub const IssueDetected = struct {
     /// Provides the timestamps that identify when in an audio segment the specified
     /// issue occurs.
-    character_offsets: ?CharacterOffsets,
+    character_offsets: ?CharacterOffsets = null,
 
     pub const json_field_names = .{
         .character_offsets = "CharacterOffsets",

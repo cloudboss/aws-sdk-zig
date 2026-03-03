@@ -5,10 +5,10 @@ const PendingLogs = @import("pending_logs.zig").PendingLogs;
 pub const LogsSummary = struct {
     /// Enables audit logging. Every user management action made using JMX or the
     /// ActiveMQ Web Console is logged.
-    audit: ?bool,
+    audit: ?bool = null,
 
     /// The location of the CloudWatch Logs log group where audit logs are sent.
-    audit_log_group: ?[]const u8,
+    audit_log_group: ?[]const u8 = null,
 
     /// Enables general logging.
     general: bool,
@@ -18,7 +18,7 @@ pub const LogsSummary = struct {
 
     /// The list of information about logs pending to be deployed for the specified
     /// broker.
-    pending: ?PendingLogs,
+    pending: ?PendingLogs = null,
 
     pub const json_field_names = .{
         .audit = "Audit",

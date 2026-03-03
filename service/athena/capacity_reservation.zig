@@ -11,10 +11,10 @@ pub const CapacityReservation = struct {
     /// The time in UTC epoch millis when the capacity reservation was created.
     creation_time: i64,
 
-    last_allocation: ?CapacityAllocation,
+    last_allocation: ?CapacityAllocation = null,
 
     /// The time of the most recent capacity allocation that succeeded.
-    last_successful_allocation_time: ?i64,
+    last_successful_allocation_time: ?i64 = null,
 
     /// The name of the capacity reservation.
     name: []const u8,

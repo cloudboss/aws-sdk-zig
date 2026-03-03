@@ -11,7 +11,7 @@ pub const ECSSavingsOpportunityAfterDiscounts = struct {
     /// The estimated monthly savings possible by adopting Compute Optimizer’s
     /// Amazon ECS service recommendations.
     /// This includes any applicable Savings Plans discounts.
-    estimated_monthly_savings: ?ECSEstimatedMonthlySavings,
+    estimated_monthly_savings: ?ECSEstimatedMonthlySavings = null,
 
     /// The estimated monthly savings possible as a percentage of monthly cost by
     /// adopting Compute Optimizer’s

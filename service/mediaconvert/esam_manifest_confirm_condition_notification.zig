@@ -5,7 +5,7 @@ pub const EsamManifestConfirmConditionNotification = struct {
     /// your JSON job settings. Form the XML document as per
     /// OC-SP-ESAM-API-I03-131025. The transcoder will use the Manifest Conditioning
     /// instructions in the message that you supply.
-    mcc_xml: ?[]const u8,
+    mcc_xml: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .mcc_xml = "MccXml",

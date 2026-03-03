@@ -15,11 +15,11 @@ pub const FeatureGroupSummary = struct {
 
     /// The status of a FeatureGroup. The status can be any of the following:
     /// `Creating`, `Created`, `CreateFail`, `Deleting` or `DetailFail`.
-    feature_group_status: ?FeatureGroupStatus,
+    feature_group_status: ?FeatureGroupStatus = null,
 
     /// Notifies you if replicating data into the `OfflineStore` has failed. Returns
     /// either: `Active` or `Blocked`.
-    offline_store_status: ?OfflineStoreStatus,
+    offline_store_status: ?OfflineStoreStatus = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

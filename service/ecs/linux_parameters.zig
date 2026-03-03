@@ -12,7 +12,7 @@ pub const LinuxParameters = struct {
     /// For tasks that use the Fargate launch type, `capabilities` is supported
     /// for all platform versions but the `add` parameter is only supported if
     /// using platform version 1.4.0 or later.
-    capabilities: ?KernelCapabilities,
+    capabilities: ?KernelCapabilities = null,
 
     /// Any host devices to expose to the container. This parameter maps to
     /// `Devices` in the docker container create command and the
@@ -20,7 +20,7 @@ pub const LinuxParameters = struct {
     ///
     /// If you're using tasks that use the Fargate launch type, the `devices`
     /// parameter isn't supported.
-    devices: ?[]const Device,
+    devices: ?[]const Device = null,
 
     /// Run an `init` process inside the container that forwards signals and reaps
     /// processes. This parameter maps to the `--init` option to docker run. This
@@ -30,7 +30,7 @@ pub const LinuxParameters = struct {
     /// log in to
     /// your container instance and run the following command: `sudo docker version
     /// --format '{{.Server.APIVersion}}'`
-    init_process_enabled: ?bool,
+    init_process_enabled: ?bool = null,
 
     /// The total amount of swap memory (in MiB) a container can use. This parameter
     /// will be
@@ -48,14 +48,14 @@ pub const LinuxParameters = struct {
     ///
     /// If you're using tasks on Amazon Linux 2023 the `swappiness` parameter
     /// isn't supported.
-    max_swap: ?i32,
+    max_swap: ?i32 = null,
 
     /// The value for the size (in MiB) of the `/dev/shm` volume. This parameter
     /// maps to the `--shm-size` option to docker run.
     ///
     /// If you are using tasks that use the Fargate launch type, the
     /// `sharedMemorySize` parameter is not supported.
-    shared_memory_size: ?i32,
+    shared_memory_size: ?i32 = null,
 
     /// This allows you to tune a container's memory swappiness behavior. A
     /// `swappiness` value of `0` will cause swapping to not happen
@@ -72,7 +72,7 @@ pub const LinuxParameters = struct {
     ///
     /// If you're using tasks on Amazon Linux 2023 the `swappiness` parameter
     /// isn't supported.
-    swappiness: ?i32,
+    swappiness: ?i32 = null,
 
     /// The container path, mount options, and size (in MiB) of the tmpfs mount.
     /// This
@@ -80,7 +80,7 @@ pub const LinuxParameters = struct {
     ///
     /// If you're using tasks that use the Fargate launch type, the `tmpfs`
     /// parameter isn't supported.
-    tmpfs: ?[]const Tmpfs,
+    tmpfs: ?[]const Tmpfs = null,
 
     pub const json_field_names = .{
         .capabilities = "capabilities",

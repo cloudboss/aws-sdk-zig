@@ -5,10 +5,10 @@ const ErrorCode = @import("error_code.zig").ErrorCode;
 /// IdentityId.
 pub const UnprocessedIdentityId = struct {
     /// The error code indicating the type of error that occurred.
-    error_code: ?ErrorCode,
+    error_code: ?ErrorCode = null,
 
     /// A unique identifier in the format REGION:GUID.
-    identity_id: ?[]const u8,
+    identity_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

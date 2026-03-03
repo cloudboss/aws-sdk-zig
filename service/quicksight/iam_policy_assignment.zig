@@ -5,22 +5,22 @@ const AssignmentStatus = @import("assignment_status.zig").AssignmentStatus;
 /// An Identity and Access Management (IAM) policy assignment.
 pub const IAMPolicyAssignment = struct {
     /// Assignment ID.
-    assignment_id: ?[]const u8,
+    assignment_id: ?[]const u8 = null,
 
     /// Assignment name.
-    assignment_name: ?[]const u8,
+    assignment_name: ?[]const u8 = null,
 
     /// Assignment status.
-    assignment_status: ?AssignmentStatus,
+    assignment_status: ?AssignmentStatus = null,
 
     /// The Amazon Web Services account ID.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
     /// Identities.
-    identities: ?[]const aws.map.MapEntry([]const []const u8),
+    identities: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The Amazon Resource Name (ARN) for the IAM policy.
-    policy_arn: ?[]const u8,
+    policy_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .assignment_id = "AssignmentId",

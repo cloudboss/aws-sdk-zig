@@ -3,13 +3,13 @@
 pub const ActiveDirectoryBackupAttributes = struct {
     /// The ID of the Amazon Web Services Managed Microsoft Active Directory
     /// instance to which the file system is joined.
-    active_directory_id: ?[]const u8,
+    active_directory_id: ?[]const u8 = null,
 
     /// The fully qualified domain name of the self-managed Active Directory
     /// directory.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active_directory_id = "ActiveDirectoryId",

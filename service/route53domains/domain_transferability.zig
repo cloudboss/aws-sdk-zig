@@ -4,7 +4,7 @@ const Transferable = @import("transferable.zig").Transferable;
 /// can be
 /// transferred to Route 53.
 pub const DomainTransferability = struct {
-    transferable: ?Transferable,
+    transferable: ?Transferable = null,
 
     pub const json_field_names = .{
         .transferable = "Transferable",

@@ -7,14 +7,14 @@ pub const ModuleLoggingConfiguration = struct {
     /// Apache Airflow log type (e.g. `DagProcessingLogs`) is published. For
     /// example,
     /// `arn:aws:logs:us-east-1:123456789012:log-group:airflow-MyMWAAEnvironment-MwaaEnvironment-DAGProcessing:*`.
-    cloud_watch_log_group_arn: ?[]const u8,
+    cloud_watch_log_group_arn: ?[]const u8 = null,
 
     /// Indicates whether the Apache Airflow log type (e.g. `DagProcessingLogs`) is
     /// enabled.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The Apache Airflow log level for the log type (e.g. `DagProcessingLogs`).
-    log_level: ?LoggingLevel,
+    log_level: ?LoggingLevel = null,
 
     pub const json_field_names = .{
         .cloud_watch_log_group_arn = "CloudWatchLogGroupArn",

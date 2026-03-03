@@ -23,10 +23,10 @@
 /// in the *Amazon SWF Developer Guide*.
 pub const FailWorkflowExecutionDecisionAttributes = struct {
     /// Details of the failure.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// A descriptive reason for the failure that may help in diagnostics.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .details = "details",

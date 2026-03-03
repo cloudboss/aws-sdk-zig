@@ -11,27 +11,27 @@ pub const DetectLabelsImageProperties = struct {
     /// background’s
     /// quality and dominant colors, including the quality and dominant colors of
     /// the image.
-    background: ?DetectLabelsImageBackground,
+    background: ?DetectLabelsImageBackground = null,
 
     /// Information about the dominant colors found in an image, described with RGB
     /// values, CSS
     /// color name, simplified color name, and PixelPercentage (the percentage of
     /// image pixels that
     /// have a particular color).
-    dominant_colors: ?[]const DominantColor,
+    dominant_colors: ?[]const DominantColor = null,
 
     /// Information about the properties of an image’s foreground, including the
     /// foreground’s
     /// quality and dominant colors, including the quality and dominant colors of
     /// the image.
-    foreground: ?DetectLabelsImageForeground,
+    foreground: ?DetectLabelsImageForeground = null,
 
     /// Information about the quality of the image foreground as defined by
     /// brightness, sharpness,
     /// and contrast. The higher the value the greater the brightness, sharpness,
     /// and contrast
     /// respectively.
-    quality: ?DetectLabelsImageQuality,
+    quality: ?DetectLabelsImageQuality = null,
 
     pub const json_field_names = .{
         .background = "Background",

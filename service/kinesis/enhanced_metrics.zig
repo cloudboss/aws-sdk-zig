@@ -27,7 +27,7 @@ pub const EnhancedMetrics = struct {
     /// Kinesis Data Streams Service with Amazon
     /// CloudWatch](https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html) in the *Amazon
     /// Kinesis Data Streams Developer Guide*.
-    shard_level_metrics: ?[]const MetricsName,
+    shard_level_metrics: ?[]const MetricsName = null,
 
     pub const json_field_names = .{
         .shard_level_metrics = "ShardLevelMetrics",

@@ -1,7 +1,7 @@
 /// A chunk of the streamed response payload.
 pub const InvokeResponseStreamUpdate = struct {
     /// Data returned by your Lambda function.
-    payload: ?[]const u8,
+    payload: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .payload = "Payload",

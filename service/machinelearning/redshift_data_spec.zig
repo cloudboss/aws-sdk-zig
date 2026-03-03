@@ -115,7 +115,7 @@ pub const RedshiftDataSpec = struct {
     /// Datasource for training: `{"splitting":{"percentBegin":70, "percentEnd":100,
     /// "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv",
     /// "complement":"true"}}`
-    data_rearrangement: ?[]const u8,
+    data_rearrangement: ?[]const u8 = null,
 
     /// A JSON string that represents the schema for an Amazon Redshift
     /// `DataSource`. The `DataSchema`
@@ -151,10 +151,10 @@ pub const RedshiftDataSpec = struct {
     /// "F8", "fieldType": "WEIGHTED_STRING_SEQUENCE" } ],
     ///
     /// "excludedVariableNames": [ "F6" ] }
-    data_schema: ?[]const u8,
+    data_schema: ?[]const u8 = null,
 
     /// Describes the schema location for an Amazon Redshift `DataSource`.
-    data_schema_uri: ?[]const u8,
+    data_schema_uri: ?[]const u8 = null,
 
     /// Describes an Amazon S3 location to store the result set of the
     /// `SelectSqlQuery` query.

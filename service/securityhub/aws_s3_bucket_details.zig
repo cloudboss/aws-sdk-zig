@@ -10,53 +10,53 @@ const AwsS3BucketServerSideEncryptionConfiguration = @import("aws_s3_bucket_serv
 /// The details of an Amazon Simple Storage Service (Amazon S3) bucket.
 pub const AwsS3BucketDetails = struct {
     /// The access control list for the S3 bucket.
-    access_control_list: ?[]const u8,
+    access_control_list: ?[]const u8 = null,
 
     /// The lifecycle configuration for objects in the specified bucket.
-    bucket_lifecycle_configuration: ?AwsS3BucketBucketLifecycleConfigurationDetails,
+    bucket_lifecycle_configuration: ?AwsS3BucketBucketLifecycleConfigurationDetails = null,
 
     /// The logging configuration for the S3 bucket.
-    bucket_logging_configuration: ?AwsS3BucketLoggingConfiguration,
+    bucket_logging_configuration: ?AwsS3BucketLoggingConfiguration = null,
 
     /// The notification configuration for the S3 bucket.
-    bucket_notification_configuration: ?AwsS3BucketNotificationConfiguration,
+    bucket_notification_configuration: ?AwsS3BucketNotificationConfiguration = null,
 
     /// The versioning state of an S3 bucket.
-    bucket_versioning_configuration: ?AwsS3BucketBucketVersioningConfiguration,
+    bucket_versioning_configuration: ?AwsS3BucketBucketVersioningConfiguration = null,
 
     /// The website configuration parameters for the S3 bucket.
-    bucket_website_configuration: ?AwsS3BucketWebsiteConfiguration,
+    bucket_website_configuration: ?AwsS3BucketWebsiteConfiguration = null,
 
     /// Indicates when the S3 bucket was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    created_at: ?[]const u8,
+    created_at: ?[]const u8 = null,
 
     /// The name of the bucket.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Specifies which rule Amazon S3 applies by default to every new object placed
     /// in the bucket.
-    object_lock_configuration: ?AwsS3BucketObjectLockConfiguration,
+    object_lock_configuration: ?AwsS3BucketObjectLockConfiguration = null,
 
     /// The Amazon Web Services account identifier of the account that owns the S3
     /// bucket.
-    owner_account_id: ?[]const u8,
+    owner_account_id: ?[]const u8 = null,
 
     /// The canonical user ID of the owner of the S3 bucket.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The display name of the owner of the S3 bucket.
-    owner_name: ?[]const u8,
+    owner_name: ?[]const u8 = null,
 
     /// Provides information about the Amazon S3 Public Access Block configuration
     /// for the S3 bucket.
-    public_access_block_configuration: ?AwsS3AccountPublicAccessBlockDetails,
+    public_access_block_configuration: ?AwsS3AccountPublicAccessBlockDetails = null,
 
     /// The encryption rules that are applied to the S3 bucket.
-    server_side_encryption_configuration: ?AwsS3BucketServerSideEncryptionConfiguration,
+    server_side_encryption_configuration: ?AwsS3BucketServerSideEncryptionConfiguration = null,
 
     pub const json_field_names = .{
         .access_control_list = "AccessControlList",

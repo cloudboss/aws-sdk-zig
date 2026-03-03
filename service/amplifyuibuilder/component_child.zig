@@ -6,7 +6,7 @@ const ComponentProperty = @import("component_property.zig").ComponentProperty;
 /// A nested UI configuration within a parent `Component`.
 pub const ComponentChild = struct {
     /// The list of `ComponentChild` instances for this component.
-    children: ?[]const ComponentChild,
+    children: ?[]const ComponentChild = null,
 
     /// The type of the child component.
     component_type: []const u8,
@@ -15,7 +15,7 @@ pub const ComponentChild = struct {
     /// workflow
     /// feature in Amplify Studio that allows you to bind events and actions to
     /// components.
-    events: ?[]const aws.map.MapEntry(ComponentEvent),
+    events: ?[]const aws.map.MapEntry(ComponentEvent) = null,
 
     /// The name of the child component.
     name: []const u8,
@@ -27,7 +27,7 @@ pub const ComponentChild = struct {
 
     /// The unique ID of the child component in its original source system, such as
     /// Figma.
-    source_id: ?[]const u8,
+    source_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .children = "children",

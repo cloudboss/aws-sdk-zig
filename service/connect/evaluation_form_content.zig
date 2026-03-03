@@ -8,10 +8,10 @@ const EvaluationFormTargetConfiguration = @import("evaluation_form_target_config
 /// Information about an evaluation form used in a contact evaluation.
 pub const EvaluationFormContent = struct {
     /// The configuration of the automated evaluation.
-    auto_evaluation_configuration: ?EvaluationFormAutoEvaluationConfiguration,
+    auto_evaluation_configuration: ?EvaluationFormAutoEvaluationConfiguration = null,
 
     /// The description of the evaluation form.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the evaluation form resource.
     evaluation_form_arn: []const u8,
@@ -28,17 +28,17 @@ pub const EvaluationFormContent = struct {
     items: []const EvaluationFormItem,
 
     /// Configuration for language settings of this evaluation form content.
-    language_configuration: ?EvaluationFormLanguageConfiguration,
+    language_configuration: ?EvaluationFormLanguageConfiguration = null,
 
     /// Configuration for evaluation review settings of this evaluation form
     /// content.
-    review_configuration: ?EvaluationReviewConfiguration,
+    review_configuration: ?EvaluationReviewConfiguration = null,
 
     /// A scoring strategy of the evaluation form.
-    scoring_strategy: ?EvaluationFormScoringStrategy,
+    scoring_strategy: ?EvaluationFormScoringStrategy = null,
 
     /// Configuration that specifies the target for this evaluation form content.
-    target_configuration: ?EvaluationFormTargetConfiguration,
+    target_configuration: ?EvaluationFormTargetConfiguration = null,
 
     /// A title of the evaluation form.
     title: []const u8,

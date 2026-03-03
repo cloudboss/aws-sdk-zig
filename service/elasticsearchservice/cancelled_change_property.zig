@@ -2,14 +2,14 @@
 /// domain.
 pub const CancelledChangeProperty = struct {
     /// The current value of the property, after the change was cancelled.
-    active_value: ?[]const u8,
+    active_value: ?[]const u8 = null,
 
     /// The pending value of the property that was cancelled. This would have been
     /// the eventual value of the property if the chance had not been cancelled.
-    cancelled_value: ?[]const u8,
+    cancelled_value: ?[]const u8 = null,
 
     /// The name of the property whose change was cancelled.
-    property_name: ?[]const u8,
+    property_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active_value = "ActiveValue",

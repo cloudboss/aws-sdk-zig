@@ -5,10 +5,10 @@
 /// the Amazon Textract API reference.
 pub const Point = struct {
     /// The value of the X coordinate for a point on a polygon
-    x: ?f32,
+    x: ?f32 = null,
 
     /// The value of the Y coordinate for a point on a polygon
-    y: ?f32,
+    y: ?f32 = null,
 
     pub const json_field_names = .{
         .x = "X",

@@ -7,7 +7,7 @@ pub const AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails = s
     /// [
     /// Amazon Web
     /// Services::Logs::LogGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html) in the *CloudFormation User Guide*.
-    cloud_watch_logs_log_group: ?AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails,
+    cloud_watch_logs_log_group: ?AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs_log_group = "CloudWatchLogsLogGroup",

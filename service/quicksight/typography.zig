@@ -5,24 +5,24 @@ const VisualTitleFontConfiguration = @import("visual_title_font_configuration.zi
 
 /// Determines the typography options.
 pub const Typography = struct {
-    axis_label_font_configuration: ?FontConfiguration,
+    axis_label_font_configuration: ?FontConfiguration = null,
 
-    axis_title_font_configuration: ?FontConfiguration,
+    axis_title_font_configuration: ?FontConfiguration = null,
 
-    data_label_font_configuration: ?FontConfiguration,
+    data_label_font_configuration: ?FontConfiguration = null,
 
     /// Determines the list of font families.
-    font_families: ?[]const Font,
+    font_families: ?[]const Font = null,
 
-    legend_title_font_configuration: ?FontConfiguration,
+    legend_title_font_configuration: ?FontConfiguration = null,
 
-    legend_value_font_configuration: ?FontConfiguration,
+    legend_value_font_configuration: ?FontConfiguration = null,
 
     /// Configures the display properties of the visual sub-title.
-    visual_subtitle_font_configuration: ?VisualSubtitleFontConfiguration,
+    visual_subtitle_font_configuration: ?VisualSubtitleFontConfiguration = null,
 
     /// Configures the display properties of the visual title.
-    visual_title_font_configuration: ?VisualTitleFontConfiguration,
+    visual_title_font_configuration: ?VisualTitleFontConfiguration = null,
 
     pub const json_field_names = .{
         .axis_label_font_configuration = "AxisLabelFontConfiguration",

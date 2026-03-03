@@ -3,7 +3,7 @@ const EphemerisType = @import("ephemeris_type.zig").EphemerisType;
 /// Ephemeris data for a contact.
 pub const EphemerisResponseData = struct {
     /// Unique identifier of the ephemeris. Appears only for custom ephemerides.
-    ephemeris_id: ?[]const u8,
+    ephemeris_id: ?[]const u8 = null,
 
     /// Type of ephemeris.
     ephemeris_type: EphemerisType,

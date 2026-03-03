@@ -9,7 +9,7 @@ pub const AuthenticationConfiguration = struct {
     /// website host using basic authentication credentials.
     ///
     /// The list includes the name and port number of the website host.
-    basic_authentication: ?[]const BasicAuthenticationConfiguration,
+    basic_authentication: ?[]const BasicAuthenticationConfiguration = null,
 
     pub const json_field_names = .{
         .basic_authentication = "BasicAuthentication",

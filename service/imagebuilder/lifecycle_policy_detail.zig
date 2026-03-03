@@ -9,7 +9,7 @@ pub const LifecyclePolicyDetail = struct {
 
     /// Additional rules to specify resources that should be exempt from policy
     /// actions.
-    exclusion_rules: ?LifecyclePolicyDetailExclusionRules,
+    exclusion_rules: ?LifecyclePolicyDetailExclusionRules = null,
 
     /// Specifies the resources that the lifecycle policy applies to.
     filter: LifecyclePolicyDetailFilter,

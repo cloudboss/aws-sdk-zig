@@ -1,7 +1,7 @@
 /// A short summary and metadata for a managed notification event.
 pub const ManagedSourceEventMetadataSummary = struct {
     /// The Region where the notification originated.
-    event_origin_region: ?[]const u8,
+    event_origin_region: ?[]const u8 = null,
 
     /// The event Type of the notification.
     event_type: []const u8,

@@ -8,7 +8,7 @@ pub const BatchGetRecordIdentifier = struct {
     /// List of names of Features to be retrieved. If not specified, the latest
     /// value for all
     /// the Features are returned.
-    feature_names: ?[]const []const u8,
+    feature_names: ?[]const []const u8 = null,
 
     /// The value for a list of record identifiers in string format.
     record_identifiers_value_as_string: []const []const u8,

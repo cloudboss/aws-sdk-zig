@@ -16,7 +16,7 @@ pub const LabelOptions = struct {
     /// number of minutes. For example, +0130 indicates a time zone that is 1 hour
     /// and 30
     /// minutes ahead of UTC. The default is +0000.
-    timezone: ?[]const u8,
+    timezone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .timezone = "Timezone",

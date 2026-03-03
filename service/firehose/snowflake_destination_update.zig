@@ -14,39 +14,39 @@ pub const SnowflakeDestinationUpdate = struct {
     /// [account
     /// identifier](https://docs.snowflake.com/en/user-guide/admin-account-identifier).
     /// Note that the protocol (https://) and port number are optional.
-    account_url: ?[]const u8,
+    account_url: ?[]const u8 = null,
 
     /// Describes the buffering to perform before delivering data to the Snowflake
     /// destination.
-    buffering_hints: ?SnowflakeBufferingHints,
+    buffering_hints: ?SnowflakeBufferingHints = null,
 
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The name of the content metadata column
-    content_column_name: ?[]const u8,
+    content_column_name: ?[]const u8 = null,
 
     /// All data in Snowflake is maintained in databases.
-    database: ?[]const u8,
+    database: ?[]const u8 = null,
 
     /// JSON keys mapped to table column names or choose to split the JSON payload
     /// where content is mapped to a record content column and source metadata is
     /// mapped to a record metadata column.
-    data_loading_option: ?SnowflakeDataLoadingOption,
+    data_loading_option: ?SnowflakeDataLoadingOption = null,
 
     /// Passphrase to decrypt the private key when the key is encrypted. For
     /// information, see [Using Key Pair Authentication & Key
     /// Rotation](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation).
-    key_passphrase: ?[]const u8,
+    key_passphrase: ?[]const u8 = null,
 
     /// The name of the record metadata column
-    meta_data_column_name: ?[]const u8,
+    meta_data_column_name: ?[]const u8 = null,
 
     /// The private key used to encrypt your Snowflake client. For information, see
     /// [Using Key Pair Authentication & Key
     /// Rotation](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation).
-    private_key: ?[]const u8,
+    private_key: ?[]const u8 = null,
 
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// Specify how long Firehose retries sending data to the New Relic HTTP
     /// endpoint.
@@ -70,34 +70,34 @@ pub const SnowflakeDestinationUpdate = struct {
     /// determines that the retry time has expired.
     ///
     /// If you don't want Firehose to retry sending data, set this value to 0.
-    retry_options: ?SnowflakeRetryOptions,
+    retry_options: ?SnowflakeRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the Snowflake role
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Choose an S3 backup mode. Once you set the mode as `AllData`, you can not
     /// change it to `FailedDataOnly`.
-    s3_backup_mode: ?SnowflakeS3BackupMode,
+    s3_backup_mode: ?SnowflakeS3BackupMode = null,
 
-    s3_update: ?S3DestinationUpdate,
+    s3_update: ?S3DestinationUpdate = null,
 
     /// Each database consists of one or more schemas, which are logical groupings
     /// of database objects, such as tables and views
-    schema: ?[]const u8,
+    schema: ?[]const u8 = null,
 
     /// Describes the Secrets Manager configuration in Snowflake.
-    secrets_manager_configuration: ?SecretsManagerConfiguration,
+    secrets_manager_configuration: ?SecretsManagerConfiguration = null,
 
     /// Optionally configure a Snowflake role. Otherwise the default user role will
     /// be used.
-    snowflake_role_configuration: ?SnowflakeRoleConfiguration,
+    snowflake_role_configuration: ?SnowflakeRoleConfiguration = null,
 
     /// All data in Snowflake is stored in database tables, logically structured as
     /// collections of columns and rows.
-    table: ?[]const u8,
+    table: ?[]const u8 = null,
 
     /// User login name for the Snowflake account.
-    user: ?[]const u8,
+    user: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_url = "AccountUrl",

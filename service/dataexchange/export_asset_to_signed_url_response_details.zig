@@ -10,10 +10,10 @@ pub const ExportAssetToSignedUrlResponseDetails = struct {
     revision_id: []const u8,
 
     /// The signed URL for the export request.
-    signed_url: ?[]const u8,
+    signed_url: ?[]const u8 = null,
 
     /// The date and time that the signed URL expires, in ISO 8601 format.
-    signed_url_expires_at: ?i64,
+    signed_url_expires_at: ?i64 = null,
 
     pub const json_field_names = .{
         .asset_id = "AssetId",

@@ -8,7 +8,7 @@ const SourceDescription = @import("source_description.zig").SourceDescription;
 /// Contains information about a Firehose stream.
 pub const DeliveryStreamDescription = struct {
     /// The date and time that the Firehose stream was created.
-    create_timestamp: ?i64,
+    create_timestamp: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the Firehose stream. For more information,
     /// see
@@ -18,7 +18,7 @@ pub const DeliveryStreamDescription = struct {
     delivery_stream_arn: []const u8,
 
     /// Indicates the server-side encryption (SSE) status for the Firehose stream.
-    delivery_stream_encryption_configuration: ?DeliveryStreamEncryptionConfiguration,
+    delivery_stream_encryption_configuration: ?DeliveryStreamEncryptionConfiguration = null,
 
     /// The name of the Firehose stream.
     delivery_stream_name: []const u8,
@@ -45,18 +45,18 @@ pub const DeliveryStreamDescription = struct {
     /// error related
     /// to KMS: CreateDeliveryStream, DeleteDeliveryStream,
     /// StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
-    failure_description: ?FailureDescription,
+    failure_description: ?FailureDescription = null,
 
     /// Indicates whether there are more destinations available to list.
     has_more_destinations: bool,
 
     /// The date and time that the Firehose stream was last updated.
-    last_update_timestamp: ?i64,
+    last_update_timestamp: ?i64 = null,
 
     /// If the `DeliveryStreamType` parameter is
     /// `KinesisStreamAsSource`, a SourceDescription object
     /// describing the source Kinesis data stream.
-    source: ?SourceDescription,
+    source: ?SourceDescription = null,
 
     /// Each time the destination is updated for a Firehose stream, the version ID
     /// is

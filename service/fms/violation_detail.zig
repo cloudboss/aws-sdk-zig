@@ -13,13 +13,13 @@ pub const ViolationDetail = struct {
     policy_id: []const u8,
 
     /// Brief description for the requested resource.
-    resource_description: ?[]const u8,
+    resource_description: ?[]const u8 = null,
 
     /// The resource ID that the violation details were requested for.
     resource_id: []const u8,
 
     /// The `ResourceTag` objects associated with the resource.
-    resource_tags: ?[]const Tag,
+    resource_tags: ?[]const Tag = null,
 
     /// The resource type that the violation details were requested for.
     resource_type: []const u8,

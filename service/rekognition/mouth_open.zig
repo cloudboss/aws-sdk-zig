@@ -3,7 +3,7 @@
 /// determination.
 pub const MouthOpen = struct {
     /// Level of confidence in the determination.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// Boolean value that indicates whether the mouth on the face is open or not.
     value: bool = false,

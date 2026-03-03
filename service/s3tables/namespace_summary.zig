@@ -10,14 +10,14 @@ pub const NamespaceSummary = struct {
     namespace: []const []const u8,
 
     /// The system-assigned unique identifier for the namespace.
-    namespace_id: ?[]const u8,
+    namespace_id: ?[]const u8 = null,
 
     /// The ID of the account that owns the namespace.
     owner_account_id: []const u8,
 
     /// The system-assigned unique identifier for the table bucket that contains
     /// this namespace.
-    table_bucket_id: ?[]const u8,
+    table_bucket_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

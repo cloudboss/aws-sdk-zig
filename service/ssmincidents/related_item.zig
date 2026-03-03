@@ -6,13 +6,13 @@ pub const RelatedItem = struct {
     ///
     /// Don't specify this parameter when you add a `RelatedItem` by using the
     /// UpdateRelatedItems API action.
-    generated_id: ?[]const u8,
+    generated_id: ?[]const u8 = null,
 
     /// Details about the related item.
     identifier: ItemIdentifier,
 
     /// The title of the related item.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .generated_id = "generatedId",

@@ -3,41 +3,41 @@ pub const AwsEc2EipDetails = struct {
     /// The identifier that Amazon Web Services assigns to represent the allocation
     /// of the Elastic IP address
     /// for use with Amazon VPC.
-    allocation_id: ?[]const u8,
+    allocation_id: ?[]const u8 = null,
 
     /// The identifier that represents the association of the Elastic IP address
     /// with an EC2
     /// instance.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The domain in which to allocate the address.
     ///
     /// If the address is for use with EC2 instances in a VPC, then `Domain` is
     /// `vpc`. Otherwise, `Domain` is `standard`.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// The identifier of the EC2 instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The name of the location from which the Elastic IP address is advertised.
-    network_border_group: ?[]const u8,
+    network_border_group: ?[]const u8 = null,
 
     /// The identifier of the network interface.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID of the owner of the network interface.
-    network_interface_owner_id: ?[]const u8,
+    network_interface_owner_id: ?[]const u8 = null,
 
     /// The private IP address that is associated with the Elastic IP address.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// A public IP address that is associated with the EC2 instance.
-    public_ip: ?[]const u8,
+    public_ip: ?[]const u8 = null,
 
     /// The identifier of an IP address pool. This parameter allows Amazon EC2 to
     /// select an IP
     /// address from the address pool.
-    public_ipv_4_pool: ?[]const u8,
+    public_ipv_4_pool: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allocation_id = "AllocationId",

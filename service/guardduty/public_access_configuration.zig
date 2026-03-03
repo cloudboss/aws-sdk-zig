@@ -11,20 +11,20 @@ pub const PublicAccessConfiguration = struct {
     /// Indicates whether or not there is a setting that allows public access to the
     /// Amazon S3 buckets through access
     /// control lists (ACLs).
-    public_acl_access: ?PublicAccessStatus,
+    public_acl_access: ?PublicAccessStatus = null,
 
     /// Indicates whether or not there is a setting that ignores all public access
     /// control lists (ACLs)
     /// on the Amazon S3 bucket and the objects that it contains.
-    public_acl_ignore_behavior: ?PublicAclIgnoreBehavior,
+    public_acl_ignore_behavior: ?PublicAclIgnoreBehavior = null,
 
     /// Indicates whether or not there is a setting that restricts access to the
     /// bucket with specified policies.
-    public_bucket_restrict_behavior: ?PublicBucketRestrictBehavior,
+    public_bucket_restrict_behavior: ?PublicBucketRestrictBehavior = null,
 
     /// Indicates whether or not there is a setting that allows public access to the
     /// Amazon S3 bucket policy.
-    public_policy_access: ?PublicAccessStatus,
+    public_policy_access: ?PublicAccessStatus = null,
 
     pub const json_field_names = .{
         .public_acl_access = "PublicAclAccess",

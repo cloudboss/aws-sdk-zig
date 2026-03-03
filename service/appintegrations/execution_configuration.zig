@@ -7,9 +7,9 @@ pub const ExecutionConfiguration = struct {
     /// The mode for data import/export execution.
     execution_mode: ExecutionMode,
 
-    on_demand_configuration: ?OnDemandConfiguration,
+    on_demand_configuration: ?OnDemandConfiguration = null,
 
-    schedule_configuration: ?ScheduleConfiguration,
+    schedule_configuration: ?ScheduleConfiguration = null,
 
     pub const json_field_names = .{
         .execution_mode = "ExecutionMode",

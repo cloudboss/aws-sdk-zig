@@ -2,5 +2,5 @@
 /// negotiations.
 pub const Phase2DHGroupNumbersRequestListValue = struct {
     /// The Diffie-Hellmann group number.
-    value: ?i32,
+    value: ?i32 = null,
 };

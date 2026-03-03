@@ -7,16 +7,16 @@ const AnalyticsIntentMetricResult = @import("analytics_intent_metric_result.zig"
 pub const AnalyticsIntentResult = struct {
     /// A list of objects containing the criteria you requested for binning results
     /// and the values of the bins.
-    bin_keys: ?[]const AnalyticsBinKey,
+    bin_keys: ?[]const AnalyticsBinKey = null,
 
     /// A list of objects containing the criteria you requested for grouping results
     /// and the values of the groups.
-    group_by_keys: ?[]const AnalyticsIntentGroupByKey,
+    group_by_keys: ?[]const AnalyticsIntentGroupByKey = null,
 
     /// A list of objects, each of which contains a metric you want to list, the
     /// statistic for the metric you want to return, and the method by which to
     /// organize the results.
-    metrics_results: ?[]const AnalyticsIntentMetricResult,
+    metrics_results: ?[]const AnalyticsIntentMetricResult = null,
 
     pub const json_field_names = .{
         .bin_keys = "binKeys",

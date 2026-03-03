@@ -18,7 +18,7 @@ pub const CloudWatchAlarmConfiguration = struct {
     /// CloudWatch Namespaces, Dimensions, and Metrics
     /// Reference](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html) in the
     /// *Amazon CloudWatch User Guide*.
-    dimensions: ?[]const Dimension,
+    dimensions: ?[]const Dimension = null,
 
     /// For the metric that the CloudWatch alarm is associated with, the number of
     /// periods

@@ -4,10 +4,10 @@ pub const AWSDomainInformation = struct {
     domain_name: []const u8,
 
     /// The Amazon Web Services account ID of the domain owner.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region in which the domain is located.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",

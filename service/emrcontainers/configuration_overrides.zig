@@ -5,10 +5,10 @@ const MonitoringConfiguration = @import("monitoring_configuration.zig").Monitori
 /// configurations.
 pub const ConfigurationOverrides = struct {
     /// The configurations for the application running by the job run.
-    application_configuration: ?[]const Configuration,
+    application_configuration: ?[]const Configuration = null,
 
     /// The configurations for monitoring.
-    monitoring_configuration: ?MonitoringConfiguration,
+    monitoring_configuration: ?MonitoringConfiguration = null,
 
     pub const json_field_names = .{
         .application_configuration = "applicationConfiguration",

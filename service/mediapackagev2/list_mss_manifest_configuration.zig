@@ -6,7 +6,7 @@ pub const ListMssManifestConfiguration = struct {
     manifest_name: []const u8,
 
     /// The URL for accessing the MSS manifest.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .manifest_name = "ManifestName",

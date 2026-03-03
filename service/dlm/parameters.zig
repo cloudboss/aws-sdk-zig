@@ -22,7 +22,7 @@ pub const Parameters = struct {
     /// then the root volumes attached to targeted instances will be excluded from
     /// the multi-volume
     /// snapshot sets created by the policy.
-    exclude_boot_volume: ?bool,
+    exclude_boot_volume: ?bool = null,
 
     /// **[Custom snapshot policies that target instances only]** The tags used to
     /// identify data (non-root) volumes to exclude from
@@ -34,7 +34,7 @@ pub const Parameters = struct {
     /// to targeted
     /// instances will be excluded from the multi-volume snapshot sets created by
     /// the policy.
-    exclude_data_volume_tags: ?[]const Tag,
+    exclude_data_volume_tags: ?[]const Tag = null,
 
     /// **[Custom AMI policies only]** Indicates whether targeted instances are
     /// rebooted when the lifecycle policy
@@ -43,7 +43,7 @@ pub const Parameters = struct {
     /// runs. `false` indicates that target instances are rebooted when the policy
     /// runs.
     /// The default is `true` (instances are not rebooted).
-    no_reboot: ?bool,
+    no_reboot: ?bool = null,
 
     pub const json_field_names = .{
         .exclude_boot_volume = "ExcludeBootVolume",

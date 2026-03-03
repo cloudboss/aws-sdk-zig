@@ -4,32 +4,32 @@ const PurchaseAgreementType = @import("purchase_agreement_type.zig").PurchaseAgr
 /// Provides a summary of commitment-related information for a bill estimate.
 pub const BillEstimateCommitmentSummary = struct {
     /// The unique identifier of the commitment.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The monthly payment amount for this commitment, if applicable.
-    monthly_payment: ?CostAmount,
+    monthly_payment: ?CostAmount = null,
 
     /// The identifier of the specific offering associated with this commitment.
-    offering_id: ?[]const u8,
+    offering_id: ?[]const u8 = null,
 
     /// The payment option chosen for this commitment (e.g., All Upfront, Partial
     /// Upfront, No Upfront).
-    payment_option: ?[]const u8,
+    payment_option: ?[]const u8 = null,
 
     /// The type of purchase agreement (e.g., Reserved Instance, Savings Plan).
-    purchase_agreement_type: ?PurchaseAgreementType,
+    purchase_agreement_type: ?PurchaseAgreementType = null,
 
     /// The Amazon Web Services region associated with this commitment.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The length of the commitment term.
-    term_length: ?[]const u8,
+    term_length: ?[]const u8 = null,
 
     /// The upfront payment amount for this commitment, if applicable.
-    upfront_payment: ?CostAmount,
+    upfront_payment: ?CostAmount = null,
 
     /// The Amazon Web Services account ID associated with this commitment.
-    usage_account_id: ?[]const u8,
+    usage_account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",

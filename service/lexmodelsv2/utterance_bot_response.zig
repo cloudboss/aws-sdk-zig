@@ -4,7 +4,7 @@ const ImageResponseCard = @import("image_response_card.zig").ImageResponseCard;
 /// An object that contains a response to the utterance from the bot.
 pub const UtteranceBotResponse = struct {
     /// The text of the response to the utterance from the bot.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The type of the response. The following values are possible:
     ///
@@ -19,9 +19,9 @@ pub const UtteranceBotResponse = struct {
     /// * `ImageResponseCard` – An image with buttons that the customer can select.
     ///   See
     ///   [ImageResponseCard](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_ImageResponseCard.html) for more information.
-    content_type: ?UtteranceContentType,
+    content_type: ?UtteranceContentType = null,
 
-    image_response_card: ?ImageResponseCard,
+    image_response_card: ?ImageResponseCard = null,
 
     pub const json_field_names = .{
         .content = "content",

@@ -14,7 +14,7 @@ pub const ResourceCollection = struct {
     /// stacks define Amazon Web Services resources that
     /// DevOps Guru analyzes. You can specify up to 500 Amazon Web Services
     /// CloudFormation stacks.
-    cloud_formation: ?CloudFormationCollection,
+    cloud_formation: ?CloudFormationCollection = null,
 
     /// The Amazon Web Services tags that are used by resources in the resource
     /// collection.
@@ -58,7 +58,7 @@ pub const ResourceCollection = struct {
     /// *key*/*value* pairs in your
     /// application might be `Devops-Guru-production-application/RDS` or
     /// `Devops-Guru-production-application/containers`.
-    tags: ?[]const TagCollection,
+    tags: ?[]const TagCollection = null,
 
     pub const json_field_names = .{
         .cloud_formation = "CloudFormation",

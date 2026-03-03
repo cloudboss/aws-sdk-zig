@@ -4,7 +4,7 @@ const LifecyclePolicyDetailActionType = @import("lifecycle_policy_detail_action_
 /// Contains selection criteria for the lifecycle policy.
 pub const LifecyclePolicyDetailAction = struct {
     /// Specifies the resources that the lifecycle policy applies to.
-    include_resources: ?LifecyclePolicyDetailActionIncludeResources,
+    include_resources: ?LifecyclePolicyDetailActionIncludeResources = null,
 
     /// Specifies the lifecycle action to take.
     @"type": LifecyclePolicyDetailActionType,

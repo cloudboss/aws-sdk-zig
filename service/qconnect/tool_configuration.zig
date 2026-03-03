@@ -8,32 +8,32 @@ const UserInteractionConfiguration = @import("user_interaction_configuration.zig
 /// Configuration settings for a tool used by AI Agents.
 pub const ToolConfiguration = struct {
     /// Annotations for the tool configuration.
-    annotations: ?Annotation,
+    annotations: ?Annotation = null,
 
     /// The description of the tool configuration.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The input schema for the tool configuration.
-    input_schema: ?[]const u8,
+    input_schema: ?[]const u8 = null,
 
     /// Instructions for using the tool.
-    instruction: ?ToolInstruction,
+    instruction: ?ToolInstruction = null,
 
     /// Output filters applies to the tool result.
-    output_filters: ?[]const ToolOutputFilter,
+    output_filters: ?[]const ToolOutputFilter = null,
 
     /// The output schema for the tool configuration.
-    output_schema: ?[]const u8,
+    output_schema: ?[]const u8 = null,
 
     /// Override input values for the tool configuration.
-    override_input_values: ?[]const ToolOverrideInputValue,
+    override_input_values: ?[]const ToolOverrideInputValue = null,
 
     /// The title of the tool configuration.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// The identifier of the tool, for example toolName from Model Context Provider
     /// server.
-    tool_id: ?[]const u8,
+    tool_id: ?[]const u8 = null,
 
     /// The name of the tool.
     tool_name: []const u8,
@@ -42,7 +42,7 @@ pub const ToolConfiguration = struct {
     tool_type: ToolType,
 
     /// Configuration for user interaction with the tool.
-    user_interaction_configuration: ?UserInteractionConfiguration,
+    user_interaction_configuration: ?UserInteractionConfiguration = null,
 
     pub const json_field_names = .{
         .annotations = "annotations",

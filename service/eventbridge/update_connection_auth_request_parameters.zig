@@ -8,11 +8,11 @@ const UpdateConnectionOAuthRequestParameters = @import("update_connection_o_auth
 pub const UpdateConnectionAuthRequestParameters = struct {
     /// The
     /// authorization parameters for API key authorization.
-    api_key_auth_parameters: ?UpdateConnectionApiKeyAuthRequestParameters,
+    api_key_auth_parameters: ?UpdateConnectionApiKeyAuthRequestParameters = null,
 
     /// The
     /// authorization parameters for Basic authorization.
-    basic_auth_parameters: ?UpdateConnectionBasicAuthRequestParameters,
+    basic_auth_parameters: ?UpdateConnectionBasicAuthRequestParameters = null,
 
     /// If you specify a private OAuth endpoint, the parameters for EventBridge to
     /// use when authenticating against the endpoint.
@@ -21,15 +21,15 @@ pub const UpdateConnectionAuthRequestParameters = struct {
     /// connections](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-target-connection-auth.html) in the *
     /// Amazon EventBridge User Guide*
     /// .
-    connectivity_parameters: ?ConnectivityResourceParameters,
+    connectivity_parameters: ?ConnectivityResourceParameters = null,
 
     /// The additional parameters to
     /// use for the connection.
-    invocation_http_parameters: ?ConnectionHttpParameters,
+    invocation_http_parameters: ?ConnectionHttpParameters = null,
 
     /// The
     /// authorization parameters for OAuth authorization.
-    o_auth_parameters: ?UpdateConnectionOAuthRequestParameters,
+    o_auth_parameters: ?UpdateConnectionOAuthRequestParameters = null,
 
     pub const json_field_names = .{
         .api_key_auth_parameters = "ApiKeyAuthParameters",

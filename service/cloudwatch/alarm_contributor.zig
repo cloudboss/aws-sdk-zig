@@ -16,7 +16,7 @@ pub const AlarmContributor = struct {
     state_reason: []const u8,
 
     /// The timestamp when the contributor last transitioned to its current state.
-    state_transitioned_timestamp: ?i64,
+    state_transitioned_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .contributor_attributes = "ContributorAttributes",

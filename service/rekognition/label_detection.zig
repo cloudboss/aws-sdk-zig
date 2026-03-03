@@ -5,18 +5,18 @@ const Label = @import("label.zig").Label;
 pub const LabelDetection = struct {
     /// The time duration of a segment in milliseconds, I.e. time elapsed from
     /// StartTimestampMillis to EndTimestampMillis.
-    duration_millis: ?i64,
+    duration_millis: ?i64 = null,
 
     /// The time in milliseconds defining the end of the timeline segment containing
     /// a continuously detected label.
-    end_timestamp_millis: ?i64,
+    end_timestamp_millis: ?i64 = null,
 
     /// Details about the detected label.
-    label: ?Label,
+    label: ?Label = null,
 
     /// The time in milliseconds defining the start of the timeline segment
     /// containing a continuously detected label.
-    start_timestamp_millis: ?i64,
+    start_timestamp_millis: ?i64 = null,
 
     /// Time, in milliseconds from the start of the video, that the label was
     /// detected.

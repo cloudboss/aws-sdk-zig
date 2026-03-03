@@ -4,10 +4,10 @@ const NodeExporter = @import("node_exporter.zig").NodeExporter;
 /// Prometheus settings.
 pub const Prometheus = struct {
     /// Indicates whether you want to turn on or turn off the JMX Exporter.
-    jmx_exporter: ?JmxExporter,
+    jmx_exporter: ?JmxExporter = null,
 
     /// Indicates whether you want to turn on or turn off the Node Exporter.
-    node_exporter: ?NodeExporter,
+    node_exporter: ?NodeExporter = null,
 
     pub const json_field_names = .{
         .jmx_exporter = "JmxExporter",

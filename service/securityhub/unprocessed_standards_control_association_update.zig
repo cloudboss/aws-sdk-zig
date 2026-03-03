@@ -15,7 +15,7 @@ pub const UnprocessedStandardsControlAssociationUpdate = struct {
 
     /// The reason why a control's enablement status in the specified standard
     /// couldn't be updated.
-    error_reason: ?[]const u8,
+    error_reason: ?[]const u8 = null,
 
     /// An array of control and standard associations for which an update failed
     /// when calling

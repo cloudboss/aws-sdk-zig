@@ -11,16 +11,16 @@ pub const DomainDeliverabilityTrackingOption = struct {
     /// A verified domain that’s associated with your Amazon Web Services account
     /// and currently has an
     /// active Deliverability dashboard subscription.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// An object that contains information about the inbox placement data settings
     /// for the
     /// domain.
-    inbox_placement_tracking_option: ?InboxPlacementTrackingOption,
+    inbox_placement_tracking_option: ?InboxPlacementTrackingOption = null,
 
     /// The date when you enabled the Deliverability dashboard for the
     /// domain.
-    subscription_start_date: ?i64,
+    subscription_start_date: ?i64 = null,
 
     pub const json_field_names = .{
         .domain = "Domain",

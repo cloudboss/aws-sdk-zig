@@ -23,7 +23,7 @@ pub const CanSignal = struct {
     message_id: i32 = 0,
 
     /// The name of the signal.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The offset used to calculate the signal value. Combined with factor, the
     /// calculation
@@ -31,7 +31,7 @@ pub const CanSignal = struct {
     offset: f64,
 
     /// The value type of the signal. The default value is `INTEGER`.
-    signal_value_type: ?SignalValueType,
+    signal_value_type: ?SignalValueType = null,
 
     /// Indicates the beginning of the CAN signal. This should always be the least
     /// significant

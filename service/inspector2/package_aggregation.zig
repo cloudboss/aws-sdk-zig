@@ -6,13 +6,13 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// type.
 pub const PackageAggregation = struct {
     /// The names of packages to aggregate findings on.
-    package_names: ?[]const StringFilter,
+    package_names: ?[]const StringFilter = null,
 
     /// The value to sort results by.
-    sort_by: ?PackageSortBy,
+    sort_by: ?PackageSortBy = null,
 
     /// The order to sort results by.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .package_names = "packageNames",

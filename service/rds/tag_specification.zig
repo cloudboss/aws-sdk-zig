@@ -10,7 +10,7 @@ pub const TagSpecification = struct {
     ///
     /// * `auto-backup` - The DB instance's automated backup.
     /// * `cluster-auto-backup` - The DB cluster's automated backup.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

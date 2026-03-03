@@ -6,7 +6,7 @@ pub const StartingPosition = struct {
     /// streaming. To
     /// specify a sequence number, set `StartingPosition` to
     /// `AT_SEQUENCE_NUMBER` or `AFTER_SEQUENCE_NUMBER`.
-    sequence_number: ?[]const u8,
+    sequence_number: ?[]const u8 = null,
 
     /// The time stamp of the data record from which to start reading. To specify a
     /// time
@@ -18,7 +18,7 @@ pub const StartingPosition = struct {
     /// (later) record. If the time stamp is older than the current trim horizon,
     /// records will
     /// be streamed from the oldest untrimmed data record (`TRIM_HORIZON`).
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     /// You can set the starting position to one of the following values:
     ///

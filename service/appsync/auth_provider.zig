@@ -9,11 +9,11 @@ pub const AuthProvider = struct {
     auth_type: AuthenticationType,
 
     /// Describes an Amazon Cognito user pool configuration.
-    cognito_config: ?CognitoConfig,
+    cognito_config: ?CognitoConfig = null,
 
-    lambda_authorizer_config: ?LambdaAuthorizerConfig,
+    lambda_authorizer_config: ?LambdaAuthorizerConfig = null,
 
-    open_id_connect_config: ?OpenIDConnectConfig,
+    open_id_connect_config: ?OpenIDConnectConfig = null,
 
     pub const json_field_names = .{
         .auth_type = "authType",

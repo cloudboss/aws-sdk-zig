@@ -3,10 +3,10 @@
 /// text-only part.
 pub const Template = struct {
     /// The HTML body of the email.
-    html_part: ?[]const u8,
+    html_part: ?[]const u8 = null,
 
     /// The subject line of the email.
-    subject_part: ?[]const u8,
+    subject_part: ?[]const u8 = null,
 
     /// The name of the template. You use this name when you send email using the
     /// `SendTemplatedEmail` or `SendBulkTemplatedEmail`
@@ -16,5 +16,5 @@ pub const Template = struct {
     /// The email body that is visible to recipients whose email clients do not
     /// display HTML
     /// content.
-    text_part: ?[]const u8,
+    text_part: ?[]const u8 = null,
 };

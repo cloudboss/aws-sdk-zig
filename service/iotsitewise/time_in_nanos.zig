@@ -1,7 +1,7 @@
 /// Contains a timestamp with optional nanosecond granularity.
 pub const TimeInNanos = struct {
     /// The nanosecond offset from `timeInSeconds`.
-    offset_in_nanos: ?i32,
+    offset_in_nanos: ?i32 = null,
 
     /// The timestamp date, in seconds, in the Unix epoch format. Fractional
     /// nanosecond data is

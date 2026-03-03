@@ -6,13 +6,13 @@ pub const Session = struct {
     /// When true, this Boolean value indicates the primary session for the
     /// specified
     /// resource.
-    is_primary: ?bool,
+    is_primary: ?bool = null,
 
     /// The session name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The session URL.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .is_primary = "isPrimary",

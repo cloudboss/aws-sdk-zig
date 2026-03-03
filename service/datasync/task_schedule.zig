@@ -37,7 +37,7 @@ pub const TaskSchedule = struct {
     /// repeatedly
     /// with the same error. For more information, see
     /// [TaskScheduleDetails](https://docs.aws.amazon.com/datasync/latest/userguide/API_TaskScheduleDetails.html).
-    status: ?ScheduleStatus,
+    status: ?ScheduleStatus = null,
 
     pub const json_field_names = .{
         .schedule_expression = "ScheduleExpression",

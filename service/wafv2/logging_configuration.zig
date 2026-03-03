@@ -61,7 +61,7 @@ pub const LoggingConfiguration = struct {
     /// You can filter on the rule action and on the web request labels that were
     /// applied by
     /// matching rules during web ACL evaluation.
-    logging_filter: ?LoggingFilter,
+    logging_filter: ?LoggingFilter = null,
 
     /// The owner of the logging configuration, which must be set to `CUSTOMER` for
     /// the configurations that you manage.
@@ -82,13 +82,13 @@ pub const LoggingConfiguration = struct {
     /// in the *Amazon CloudWatch Logs user guide*.
     ///
     /// Default: `CUSTOMER`
-    log_scope: ?LogScope,
+    log_scope: ?LogScope = null,
 
     /// Used to distinguish between various logging options. Currently, there is one
     /// option.
     ///
     /// Default: `WAF_LOGS`
-    log_type: ?LogType,
+    log_type: ?LogType = null,
 
     /// Indicates whether the logging configuration was created by Firewall Manager,
     /// as part of an
@@ -128,7 +128,7 @@ pub const LoggingConfiguration = struct {
     /// from request sampling by disabling sampling in the web ACL visibility
     /// configuration
     /// or by configuring data protection for the web ACL.
-    redacted_fields: ?[]const FieldToMatch,
+    redacted_fields: ?[]const FieldToMatch = null,
 
     /// The Amazon Resource Name (ARN) of the web ACL that you want to associate
     /// with

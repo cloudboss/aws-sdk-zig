@@ -6,7 +6,7 @@ const Visibility = @import("visibility.zig").Visibility;
 /// styling for data elements.
 pub const DecalSettings = struct {
     /// Color configuration for the decal pattern.
-    decal_color: ?[]const u8,
+    decal_color: ?[]const u8 = null,
 
     /// Type of pattern used for the decal, such as solid, diagonal, or circular
     /// patterns in various sizes.
@@ -54,7 +54,7 @@ pub const DecalSettings = struct {
     /// * `TRIANGLE_MEDIUM`: Medium triangles pattern.
     ///
     /// * `TRIANGLE_LARGE`: Large triangles pattern.
-    decal_pattern_type: ?DecalPatternType,
+    decal_pattern_type: ?DecalPatternType = null,
 
     /// Style type for the decal, which can be either manual or automatic. This
     /// field is only applicable for line series.
@@ -62,14 +62,14 @@ pub const DecalSettings = struct {
     /// * `Manual`: Apply manual line and marker configuration for line series.
     ///
     /// * `Auto`: Apply automatic line and marker configuration for line series.
-    decal_style_type: ?DecalStyleType,
+    decal_style_type: ?DecalStyleType = null,
 
     /// Visibility setting for the decal pattern.
-    decal_visibility: ?Visibility,
+    decal_visibility: ?Visibility = null,
 
     /// Field value of the field that you are setting the decal pattern to.
     /// Applicable only for field level settings.
-    element_value: ?[]const u8,
+    element_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .decal_color = "DecalColor",

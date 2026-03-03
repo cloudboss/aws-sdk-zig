@@ -24,7 +24,7 @@ pub const RegexMatchSet = struct {
     /// A friendly name or description of the RegexMatchSet. You can't change `Name`
     /// after you create a
     /// `RegexMatchSet`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The `RegexMatchSetId` for a `RegexMatchSet`. You use `RegexMatchSetId` to
     /// get information about a
@@ -36,7 +36,7 @@ pub const RegexMatchSet = struct {
     ///
     /// `RegexMatchSetId` is returned by CreateRegexMatchSet and by
     /// ListRegexMatchSets.
-    regex_match_set_id: ?[]const u8,
+    regex_match_set_id: ?[]const u8 = null,
 
     /// Contains an array of RegexMatchTuple objects. Each `RegexMatchTuple`
     /// object contains:
@@ -49,7 +49,7 @@ pub const RegexMatchSet = struct {
     ///
     /// * Whether to perform any conversions on the request, such as converting it
     ///   to lowercase, before inspecting it for the specified string.
-    regex_match_tuples: ?[]const RegexMatchTuple,
+    regex_match_tuples: ?[]const RegexMatchTuple = null,
 
     pub const json_field_names = .{
         .name = "Name",

@@ -9,17 +9,17 @@ pub const InstanceMetadataOptions = struct {
     /// disabled.
     ///
     /// If the value is `disabled`, you cannot access your instance metadata.
-    http_endpoint: ?HttpEndpoint,
+    http_endpoint: ?HttpEndpoint = null,
 
     /// Indicates whether the IPv6 endpoint for the instance metadata service is
     /// enabled or
     /// disabled.
-    http_protocol_ipv_6: ?HttpProtocolIpv6,
+    http_protocol_ipv_6: ?HttpProtocolIpv6 = null,
 
     /// The desired HTTP PUT response hop limit for instance metadata requests. A
     /// larger number
     /// means that the instance metadata requests can travel farther.
-    http_put_response_hop_limit: ?i32,
+    http_put_response_hop_limit: ?i32 = null,
 
     /// The state of token usage for your instance metadata requests.
     ///
@@ -45,7 +45,7 @@ pub const InstanceMetadataOptions = struct {
     /// information, see
     /// [Viewing instance metrics in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-health-metrics) in the *Amazon Lightsail Developer Guide*.
-    http_tokens: ?HttpTokens,
+    http_tokens: ?HttpTokens = null,
 
     /// The state of the metadata option changes.
     ///
@@ -57,7 +57,7 @@ pub const InstanceMetadataOptions = struct {
     ///
     /// * `applied` - The metadata options have been successfully applied to the
     /// instance.
-    state: ?InstanceMetadataState,
+    state: ?InstanceMetadataState = null,
 
     pub const json_field_names = .{
         .http_endpoint = "httpEndpoint",

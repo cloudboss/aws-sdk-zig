@@ -2,5 +2,5 @@
 pub const LaunchTemplatesMonitoringRequest = struct {
     /// Specify `true` to enable detailed monitoring. Otherwise, basic monitoring
     /// is enabled.
-    enabled: ?bool,
+    enabled: ?bool = null,
 };

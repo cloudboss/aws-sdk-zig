@@ -3,7 +3,7 @@ const RouteMatrixOriginOptions = @import("route_matrix_origin_options.zig").Rout
 /// The start position for the route.
 pub const RouteMatrixOrigin = struct {
     /// Origin related options.
-    options: ?RouteMatrixOriginOptions,
+    options: ?RouteMatrixOriginOptions = null,
 
     /// Position defined as `[longitude, latitude]`.
     position: []const f64,

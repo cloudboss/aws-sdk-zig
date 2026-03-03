@@ -8,7 +8,7 @@ pub const DeviceQueueInfo = struct {
 
     /// Optional. Specifies the priority of the queue. Quantum tasks in a priority
     /// queue are processed before the quantum tasks in a normal queue.
-    queue_priority: ?QueuePriority,
+    queue_priority: ?QueuePriority = null,
 
     /// The number of hybrid jobs or quantum tasks in the queue for a given device.
     queue_size: []const u8,

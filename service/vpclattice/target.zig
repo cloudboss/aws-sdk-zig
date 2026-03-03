@@ -8,7 +8,7 @@ pub const Target = struct {
 
     /// The port on which the target is listening. For HTTP, the default is 80. For
     /// HTTPS, the default is 443.
-    port: ?i32,
+    port: ?i32 = null,
 
     pub const json_field_names = .{
         .id = "id",

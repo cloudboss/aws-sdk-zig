@@ -5,19 +5,19 @@ const ModuleLoggingConfiguration = @import("module_logging_configuration.zig").M
 pub const LoggingConfiguration = struct {
     /// The Airflow DAG processing logs published to CloudWatch Logs and the log
     /// level.
-    dag_processing_logs: ?ModuleLoggingConfiguration,
+    dag_processing_logs: ?ModuleLoggingConfiguration = null,
 
     /// The Airflow scheduler logs published to CloudWatch Logs and the log level.
-    scheduler_logs: ?ModuleLoggingConfiguration,
+    scheduler_logs: ?ModuleLoggingConfiguration = null,
 
     /// The Airflow task logs published to CloudWatch Logs and the log level.
-    task_logs: ?ModuleLoggingConfiguration,
+    task_logs: ?ModuleLoggingConfiguration = null,
 
     /// The Airflow web server logs published to CloudWatch Logs and the log level.
-    webserver_logs: ?ModuleLoggingConfiguration,
+    webserver_logs: ?ModuleLoggingConfiguration = null,
 
     /// The Airflow worker logs published to CloudWatch Logs and the log level.
-    worker_logs: ?ModuleLoggingConfiguration,
+    worker_logs: ?ModuleLoggingConfiguration = null,
 
     pub const json_field_names = .{
         .dag_processing_logs = "DagProcessingLogs",

@@ -8,13 +8,13 @@ const CustomActionURLOperation = @import("custom_action_url_operation.zig").Cust
 /// This is a union type structure. For this structure to be valid, only one of
 /// the attributes can be defined.
 pub const LayerCustomActionOperation = struct {
-    filter_operation: ?CustomActionFilterOperation,
+    filter_operation: ?CustomActionFilterOperation = null,
 
-    navigation_operation: ?CustomActionNavigationOperation,
+    navigation_operation: ?CustomActionNavigationOperation = null,
 
-    set_parameters_operation: ?CustomActionSetParametersOperation,
+    set_parameters_operation: ?CustomActionSetParametersOperation = null,
 
-    url_operation: ?CustomActionURLOperation,
+    url_operation: ?CustomActionURLOperation = null,
 
     pub const json_field_names = .{
         .filter_operation = "FilterOperation",

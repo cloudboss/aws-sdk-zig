@@ -5,10 +5,10 @@ const InferenceProfileType = @import("inference_profile_type.zig").InferenceProf
 /// Contains information about an inference profile.
 pub const InferenceProfileSummary = struct {
     /// The time at which the inference profile was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of the inference profile.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the inference profile.
     inference_profile_arn: []const u8,
@@ -36,7 +36,7 @@ pub const InferenceProfileSummary = struct {
     @"type": InferenceProfileType,
 
     /// The time at which the inference profile was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

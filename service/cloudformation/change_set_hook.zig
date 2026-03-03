@@ -10,16 +10,16 @@ pub const ChangeSetHook = struct {
     /// * `FAIL` Stops provisioning resources.
     ///
     /// * `WARN` Allows provisioning to continue with a warning message.
-    failure_mode: ?HookFailureMode,
+    failure_mode: ?HookFailureMode = null,
 
     /// The specific point in the provisioning process where the Hook is invoked.
-    invocation_point: ?HookInvocationPoint,
+    invocation_point: ?HookInvocationPoint = null,
 
     /// Specifies details about the target that the Hook will run against.
-    target_details: ?ChangeSetHookTargetDetails,
+    target_details: ?ChangeSetHookTargetDetails = null,
 
     /// The version ID of the type configuration.
-    type_configuration_version_id: ?[]const u8,
+    type_configuration_version_id: ?[]const u8 = null,
 
     /// The unique name for your Hook. Specifies a three-part namespace for your
     /// Hook, with a
@@ -42,8 +42,8 @@ pub const ChangeSetHook = struct {
     /// * `Custom`
     ///
     /// * `Dev`
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 
     /// The version ID of the type specified.
-    type_version_id: ?[]const u8,
+    type_version_id: ?[]const u8 = null,
 };

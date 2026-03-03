@@ -5,18 +5,18 @@ const ServiceStatistics = @import("service_statistics.zig").ServiceStatistics;
 
 /// A list of TimeSeriesStatistic structures.
 pub const TimeSeriesServiceStatistics = struct {
-    edge_summary_statistics: ?EdgeStatistics,
+    edge_summary_statistics: ?EdgeStatistics = null,
 
     /// The response time histogram for the selected entities.
-    response_time_histogram: ?[]const HistogramEntry,
+    response_time_histogram: ?[]const HistogramEntry = null,
 
     /// The forecasted high and low fault count values.
-    service_forecast_statistics: ?ForecastStatistics,
+    service_forecast_statistics: ?ForecastStatistics = null,
 
-    service_summary_statistics: ?ServiceStatistics,
+    service_summary_statistics: ?ServiceStatistics = null,
 
     /// Timestamp of the window for which statistics are aggregated.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .edge_summary_statistics = "EdgeSummaryStatistics",

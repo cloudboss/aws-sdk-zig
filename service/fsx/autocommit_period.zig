@@ -28,7 +28,7 @@ pub const AutocommitPeriod = struct {
     /// * `Months`: 1 - 120
     ///
     /// * `Years`: 1 - 10
-    value: ?i32,
+    value: ?i32 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

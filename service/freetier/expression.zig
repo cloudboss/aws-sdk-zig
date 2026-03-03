@@ -42,17 +42,17 @@ const DimensionValues = @import("dimension_values.zig").DimensionValues;
 /// root operators.
 pub const Expression = struct {
     /// Return results that match all `Expressions` that you specified in the array.
-    @"and": ?[]const Expression,
+    @"and": ?[]const Expression = null,
 
     /// The specific dimension, values, and match type to filter objects with.
-    dimensions: ?DimensionValues,
+    dimensions: ?DimensionValues = null,
 
     /// Return results that don’t match the `Expression` that you specified.
     not: ?*Expression = null,
 
     /// Return results that match any of the `Expressions` that you specified. in
     /// the array.
-    @"or": ?[]const Expression,
+    @"or": ?[]const Expression = null,
 
     pub const json_field_names = .{
         .@"and" = "And",

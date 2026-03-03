@@ -15,7 +15,7 @@ pub const DryRunProgressStatus = struct {
     update_date: []const u8,
 
     /// Any validation failures that occurred as a result of the dry run.
-    validation_failures: ?[]const ValidationFailure,
+    validation_failures: ?[]const ValidationFailure = null,
 
     pub const json_field_names = .{
         .creation_date = "CreationDate",

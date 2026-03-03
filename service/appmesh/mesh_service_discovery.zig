@@ -4,7 +4,7 @@ const IpPreference = @import("ip_preference.zig").IpPreference;
 /// mesh.
 pub const MeshServiceDiscovery = struct {
     /// The IP version to use to control traffic within the mesh.
-    ip_preference: ?IpPreference,
+    ip_preference: ?IpPreference = null,
 
     pub const json_field_names = .{
         .ip_preference = "ipPreference",

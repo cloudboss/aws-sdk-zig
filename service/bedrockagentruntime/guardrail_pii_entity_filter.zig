@@ -5,13 +5,13 @@ const GuardrailPiiEntityType = @import("guardrail_pii_entity_type.zig").Guardrai
 /// information (PII).
 pub const GuardrailPiiEntityFilter = struct {
     /// The action of the Guardrail filter to identify and remove PII.
-    action: ?GuardrailSensitiveInformationPolicyAction,
+    action: ?GuardrailSensitiveInformationPolicyAction = null,
 
     /// The match to settings in the Guardrail filter to identify and remove PII.
-    match: ?[]const u8,
+    match: ?[]const u8 = null,
 
     /// The type of PII the Guardrail filter has identified and removed.
-    @"type": ?GuardrailPiiEntityType,
+    @"type": ?GuardrailPiiEntityType = null,
 
     pub const json_field_names = .{
         .action = "action",

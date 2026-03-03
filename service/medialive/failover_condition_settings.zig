@@ -6,15 +6,15 @@ const VideoBlackFailoverSettings = @import("video_black_failover_settings.zig").
 pub const FailoverConditionSettings = struct {
     /// MediaLive will perform a failover if the specified audio selector is silent
     /// for the specified period.
-    audio_silence_settings: ?AudioSilenceFailoverSettings,
+    audio_silence_settings: ?AudioSilenceFailoverSettings = null,
 
     /// MediaLive will perform a failover if content is not detected in this input
     /// for the specified period.
-    input_loss_settings: ?InputLossFailoverSettings,
+    input_loss_settings: ?InputLossFailoverSettings = null,
 
     /// MediaLive will perform a failover if content is considered black for the
     /// specified period.
-    video_black_settings: ?VideoBlackFailoverSettings,
+    video_black_settings: ?VideoBlackFailoverSettings = null,
 
     pub const json_field_names = .{
         .audio_silence_settings = "AudioSilenceSettings",

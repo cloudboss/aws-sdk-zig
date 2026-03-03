@@ -6,17 +6,17 @@ const PortRange = @import("port_range.zig").PortRange;
 /// path.
 pub const AnalysisPacketHeader = struct {
     /// The destination addresses.
-    destination_addresses: ?[]const []const u8,
+    destination_addresses: ?[]const []const u8 = null,
 
     /// The destination port ranges.
-    destination_port_ranges: ?[]const PortRange,
+    destination_port_ranges: ?[]const PortRange = null,
 
     /// The protocol.
-    protocol: ?[]const u8,
+    protocol: ?[]const u8 = null,
 
     /// The source addresses.
-    source_addresses: ?[]const []const u8,
+    source_addresses: ?[]const []const u8 = null,
 
     /// The source port ranges.
-    source_port_ranges: ?[]const PortRange,
+    source_port_ranges: ?[]const PortRange = null,
 };

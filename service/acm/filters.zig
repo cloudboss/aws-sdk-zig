@@ -9,10 +9,10 @@ const CertificateManagedBy = @import("certificate_managed_by.zig").CertificateMa
 pub const Filters = struct {
     /// Specify `ENABLED` or `DISABLED` to identify certificates that can be
     /// exported.
-    export_option: ?CertificateExport,
+    export_option: ?CertificateExport = null,
 
     /// Specify one or more ExtendedKeyUsage extension values.
-    extended_key_usage: ?[]const ExtendedKeyUsageName,
+    extended_key_usage: ?[]const ExtendedKeyUsageName = null,
 
     /// Specify one or more algorithms that can be used to generate key pairs.
     ///
@@ -21,14 +21,14 @@ pub const Filters = struct {
     /// desired type signatures in a comma-separated list. For example, `"keyTypes":
     /// ["RSA_2048","RSA_4096"]` returns both `RSA_2048` and `RSA_4096`
     /// certificates.
-    key_types: ?[]const KeyAlgorithm,
+    key_types: ?[]const KeyAlgorithm = null,
 
     /// Specify one or more KeyUsage extension values.
-    key_usage: ?[]const KeyUsageName,
+    key_usage: ?[]const KeyUsageName = null,
 
     /// Identifies the Amazon Web Services service that manages the certificate
     /// issued by ACM.
-    managed_by: ?CertificateManagedBy,
+    managed_by: ?CertificateManagedBy = null,
 
     pub const json_field_names = .{
         .export_option = "exportOption",

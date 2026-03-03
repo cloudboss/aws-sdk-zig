@@ -16,11 +16,11 @@ pub const DataRepositoryTaskFilter = struct {
     /// * Use `task-lifecycle` to retrieve data repository tasks with one or more
     ///   specific lifecycle states,
     /// as follows: CANCELED, EXECUTING, FAILED, PENDING, and SUCCEEDED.
-    name: ?DataRepositoryTaskFilterName,
+    name: ?DataRepositoryTaskFilterName = null,
 
     /// Use Values to include the specific file system IDs and task
     /// lifecycle states for the filters you are using.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

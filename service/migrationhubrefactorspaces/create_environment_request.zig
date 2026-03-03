@@ -6,10 +6,10 @@ pub const CreateEnvironmentRequest = struct {
     /// A unique, case-sensitive identifier that you provide to ensure the
     /// idempotency of the
     /// request.
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The description of the environment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the environment.
     name: []const u8,
@@ -19,7 +19,7 @@ pub const CreateEnvironmentRequest = struct {
 
     /// The tags to assign to the environment. A tag is a label that you assign to
     /// an Amazon Web Services resource. Each tag consists of a key-value pair.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .client_token = "ClientToken",

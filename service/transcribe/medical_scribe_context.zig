@@ -5,7 +5,7 @@ const MedicalScribePatientContext = @import("medical_scribe_patient_context.zig"
 /// customized clinical notes.
 pub const MedicalScribeContext = struct {
     /// Contains patient-specific information.
-    patient_context: ?MedicalScribePatientContext,
+    patient_context: ?MedicalScribePatientContext = null,
 
     pub const json_field_names = .{
         .patient_context = "PatientContext",

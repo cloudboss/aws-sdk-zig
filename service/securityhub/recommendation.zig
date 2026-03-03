@@ -4,11 +4,11 @@ pub const Recommendation = struct {
     /// a finding.
     ///
     /// Length Constraints: Minimum of 1 length. Maximum of 512 length.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// A URL to a page or site that contains information about how to remediate a
     /// finding.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .text = "Text",

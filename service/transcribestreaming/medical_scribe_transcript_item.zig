@@ -13,22 +13,22 @@ pub const MedicalScribeTranscriptItem = struct {
     /// higher
     /// probability that the identified item correctly matches the item spoken in
     /// your media.
-    confidence: ?f64,
+    confidence: ?f64 = null,
 
     /// The word, phrase or punctuation mark that was transcribed.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The end time, in milliseconds, of the transcribed item.
     end_audio_time: f64 = 0,
 
     /// The type of item identified. Options are: `PRONUNCIATION` (spoken words)
     /// and `PUNCTUATION`.
-    @"type": ?MedicalScribeTranscriptItemType,
+    @"type": ?MedicalScribeTranscriptItemType = null,
 
     /// Indicates whether the specified item matches a word in the vocabulary filter
     /// included in
     /// your configuration event. If `true`, there is a vocabulary filter match.
-    vocabulary_filter_match: ?bool,
+    vocabulary_filter_match: ?bool = null,
 
     pub const json_field_names = .{
         .begin_audio_time = "BeginAudioTime",

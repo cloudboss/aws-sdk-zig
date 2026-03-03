@@ -3,7 +3,7 @@ const ParentEntityUpdateType = @import("parent_entity_update_type.zig").ParentEn
 /// The parent entity update request.
 pub const ParentEntityUpdateRequest = struct {
     /// The ID of the parent entity.
-    parent_entity_id: ?[]const u8,
+    parent_entity_id: ?[]const u8 = null,
 
     /// The type of the update.
     update_type: ParentEntityUpdateType,

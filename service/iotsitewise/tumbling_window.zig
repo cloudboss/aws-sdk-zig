@@ -82,7 +82,7 @@ pub const TumblingWindow = struct {
     /// * If you create the metric after 6 PM (PST), you get the first aggregation
     ///   result at
     /// 6 PM (PST) the next day.
-    offset: ?[]const u8,
+    offset: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .interval = "interval",

@@ -6,12 +6,12 @@ pub const CmafEncryption = struct {
     /// An optional 128-bit, 16-byte hex value represented by a 32-character string,
     /// used in conjunction with the key for encrypting blocks. If you don't specify
     /// a value, then MediaPackage creates the constant initialization vector (IV).
-    constant_initialization_vector: ?[]const u8,
+    constant_initialization_vector: ?[]const u8 = null,
 
-    encryption_method: ?CmafEncryptionMethod,
+    encryption_method: ?CmafEncryptionMethod = null,
 
     /// Time (in seconds) between each encryption key rotation.
-    key_rotation_interval_seconds: ?i32,
+    key_rotation_interval_seconds: ?i32 = null,
 
     speke_key_provider: SpekeKeyProvider,
 

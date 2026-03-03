@@ -4,7 +4,7 @@
 pub const InferenceComponentComputeResourceRequirements = struct {
     /// The maximum MB of memory to allocate to run a model that you assign to an
     /// inference component.
-    max_memory_required_in_mb: ?i32,
+    max_memory_required_in_mb: ?i32 = null,
 
     /// The minimum MB of memory to allocate to run a model that you assign to an
     /// inference component.
@@ -13,11 +13,11 @@ pub const InferenceComponentComputeResourceRequirements = struct {
     /// The number of accelerators to allocate to run a model that you assign to an
     /// inference component. Accelerators include GPUs and Amazon Web Services
     /// Inferentia.
-    number_of_accelerator_devices_required: ?f32,
+    number_of_accelerator_devices_required: ?f32 = null,
 
     /// The number of CPU cores to allocate to run a model that you assign to an
     /// inference component.
-    number_of_cpu_cores_required: ?f32,
+    number_of_cpu_cores_required: ?f32 = null,
 
     pub const json_field_names = .{
         .max_memory_required_in_mb = "MaxMemoryRequiredInMb",

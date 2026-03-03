@@ -11,28 +11,28 @@ const PivotTableTotalOptions = @import("pivot_table_total_options.zig").PivotTab
 pub const PivotTableConfiguration = struct {
     /// The options that define customizations available to dashboard readers for a
     /// specific visual
-    dashboard_customization_visual_options: ?DashboardCustomizationVisualOptions,
+    dashboard_customization_visual_options: ?DashboardCustomizationVisualOptions = null,
 
     /// The field options for a pivot table visual.
-    field_options: ?PivotTableFieldOptions,
+    field_options: ?PivotTableFieldOptions = null,
 
     /// The field wells of the visual.
-    field_wells: ?PivotTableFieldWells,
+    field_wells: ?PivotTableFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The paginated report options for a pivot table visual.
-    paginated_report_options: ?PivotTablePaginatedReportOptions,
+    paginated_report_options: ?PivotTablePaginatedReportOptions = null,
 
     /// The sort configuration for a `PivotTableVisual`.
-    sort_configuration: ?PivotTableSortConfiguration,
+    sort_configuration: ?PivotTableSortConfiguration = null,
 
     /// The table options for a pivot table visual.
-    table_options: ?PivotTableOptions,
+    table_options: ?PivotTableOptions = null,
 
     /// The total options for a pivot table visual.
-    total_options: ?PivotTableTotalOptions,
+    total_options: ?PivotTableTotalOptions = null,
 
     pub const json_field_names = .{
         .dashboard_customization_visual_options = "DashboardCustomizationVisualOptions",

@@ -2,7 +2,7 @@
 /// copy actions.
 pub const CrossRegionCopyTarget = struct {
     /// The target Region, for example `us-east-1`.
-    target_region: ?[]const u8,
+    target_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .target_region = "TargetRegion",

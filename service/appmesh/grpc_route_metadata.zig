@@ -4,10 +4,10 @@ const GrpcRouteMetadataMatchMethod = @import("grpc_route_metadata_match_method.z
 pub const GrpcRouteMetadata = struct {
     /// Specify `True` to match anything except the match criteria. The default
     /// value is `False`.
-    invert: ?bool,
+    invert: ?bool = null,
 
     /// An object that represents the data to match from the request.
-    match: ?GrpcRouteMetadataMatchMethod,
+    match: ?GrpcRouteMetadataMatchMethod = null,
 
     /// The name of the route.
     name: []const u8,

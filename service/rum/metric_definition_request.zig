@@ -116,7 +116,7 @@ pub const MetricDefinitionRequest = struct {
     ///
     /// For both extended metrics and custom metrics, all dimensions listed in this
     /// field must also be included in `EventPattern`.
-    dimension_keys: ?[]const aws.map.StringMapEntry,
+    dimension_keys: ?[]const aws.map.StringMapEntry = null,
 
     /// The pattern that defines the metric, specified as a JSON object. RUM checks
     /// events that happen in a user's session against the pattern, and events that
@@ -140,7 +140,7 @@ pub const MetricDefinitionRequest = struct {
     /// If the metrics destination is `CloudWatch` and the event also matches a
     /// value in `DimensionKeys`, then the metric is published with the specified
     /// dimensions.
-    event_pattern: ?[]const u8,
+    event_pattern: ?[]const u8 = null,
 
     /// The name for the metric that is defined in this structure. For custom
     /// metrics, you can specify any name that you like. For extended metrics, valid
@@ -164,11 +164,11 @@ pub const MetricDefinitionRequest = struct {
     /// specify this parameter if this structure is for an extended metric.
     ///
     /// You cannot use any string that starts with `AWS/` for your namespace.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The CloudWatch metric unit to use for this metric. If you omit this field,
     /// the metric is recorded with no unit.
-    unit_label: ?[]const u8,
+    unit_label: ?[]const u8 = null,
 
     /// The field within the event object that the metric value is sourced from.
     ///
@@ -178,7 +178,7 @@ pub const MetricDefinitionRequest = struct {
     ///
     /// If this metric is sent to CloudWatch Evidently, this field will be passed to
     /// Evidently raw. Evidently will handle data extraction from the event.
-    value_key: ?[]const u8,
+    value_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dimension_keys = "DimensionKeys",

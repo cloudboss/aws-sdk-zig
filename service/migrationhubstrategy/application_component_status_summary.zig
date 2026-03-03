@@ -5,10 +5,10 @@ pub const ApplicationComponentStatusSummary = struct {
     /// The number of application components successfully analyzed, partially
     /// successful or failed
     /// analysis.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// The status of database analysis.
-    src_code_or_db_analysis_status: ?SrcCodeOrDbAnalysisStatus,
+    src_code_or_db_analysis_status: ?SrcCodeOrDbAnalysisStatus = null,
 
     pub const json_field_names = .{
         .count = "count",

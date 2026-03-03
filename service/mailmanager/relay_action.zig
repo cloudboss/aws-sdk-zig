@@ -6,11 +6,11 @@ pub const RelayAction = struct {
     /// A policy that states what to do in the case of failure. The action will fail
     /// if there are configuration errors. For example, the specified relay has been
     /// deleted.
-    action_failure_policy: ?ActionFailurePolicy,
+    action_failure_policy: ?ActionFailurePolicy = null,
 
     /// This action specifies whether to preserve or replace original mail from
     /// address while relaying received emails to a destination server.
-    mail_from: ?MailFrom,
+    mail_from: ?MailFrom = null,
 
     /// The identifier of the relay resource to be used when relaying an email.
     relay: []const u8,

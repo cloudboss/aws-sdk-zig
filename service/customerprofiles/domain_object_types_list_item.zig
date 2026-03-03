@@ -4,20 +4,20 @@ const aws = @import("aws");
 /// information about a specific object type within a domain.
 pub const DomainObjectTypesListItem = struct {
     /// The timestamp of when the domain object type was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// A description explaining the purpose and characteristics of this object
     /// type.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The timestamp of when the domain object type was most recently edited.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The name that identifies the object type within the domain.
     object_type_name: []const u8,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

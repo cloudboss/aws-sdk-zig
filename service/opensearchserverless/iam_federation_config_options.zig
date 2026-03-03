@@ -5,11 +5,11 @@
 pub const IamFederationConfigOptions = struct {
     /// The group attribute for this IAM federation integration. This attribute is
     /// used to map identity provider groups to OpenSearch Serverless permissions.
-    group_attribute: ?[]const u8,
+    group_attribute: ?[]const u8 = null,
 
     /// The user attribute for this IAM federation integration. This attribute is
     /// used to identify users in the federated authentication process.
-    user_attribute: ?[]const u8,
+    user_attribute: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .group_attribute = "groupAttribute",

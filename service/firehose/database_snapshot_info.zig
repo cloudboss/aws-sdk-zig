@@ -7,7 +7,7 @@ const SnapshotStatus = @import("snapshot_status.zig").SnapshotStatus;
 ///
 /// Amazon Data Firehose is in preview release and is subject to change.
 pub const DatabaseSnapshotInfo = struct {
-    failure_description: ?FailureDescription,
+    failure_description: ?FailureDescription = null,
 
     /// The identifier of the current snapshot of the table in source database
     /// endpoint.

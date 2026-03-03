@@ -9,14 +9,14 @@ pub const Document = struct {
     /// The identifier of the access control configuration that you want to apply to
     /// the
     /// document.
-    access_control_configuration_id: ?[]const u8,
+    access_control_configuration_id: ?[]const u8 = null,
 
     /// Information on principals (users and/or groups) and which documents they
     /// should have
     /// access to. This is useful for user context filtering, where search results
     /// are filtered
     /// based on the user or their group access to documents.
-    access_control_list: ?[]const Principal,
+    access_control_list: ?[]const Principal = null,
 
     /// Custom attributes to apply to the document. Use the custom attributes to
     /// provide
@@ -31,7 +31,7 @@ pub const Document = struct {
     /// 'DataSourceSyncJobId' could be an optional custom attribute as Amazon Kendra
     /// will use the ID of
     /// a running sync job.
-    attributes: ?[]const DocumentAttribute,
+    attributes: ?[]const DocumentAttribute = null,
 
     /// The contents of the document.
     ///
@@ -41,7 +41,7 @@ pub const Document = struct {
     /// SDK to call Amazon Kendra APIs. If you are calling the Amazon Kendra
     /// endpoint
     /// directly using REST, you must base64 encode the contents before sending.
-    blob: ?[]const u8,
+    blob: ?[]const u8 = null,
 
     /// The file type of the document in the `Blob` field.
     ///
@@ -49,13 +49,13 @@ pub const Document = struct {
     /// entirety of
     /// the HTML documents, you must add the `HTML` start and closing tags
     /// (`content`) around the content.
-    content_type: ?ContentType,
+    content_type: ?ContentType = null,
 
     /// The list of
     /// [principal](https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html)
     /// lists that define the hierarchy for which documents users should
     /// have access to.
-    hierarchical_access_control_list: ?[]const HierarchicalPrincipal,
+    hierarchical_access_control_list: ?[]const HierarchicalPrincipal = null,
 
     /// A identifier of the document in the index.
     ///
@@ -68,10 +68,10 @@ pub const Document = struct {
     /// same documents, or vice versa.
     id: []const u8,
 
-    s3_path: ?S3Path,
+    s3_path: ?S3Path = null,
 
     /// The title of the document.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_control_configuration_id = "AccessControlConfigurationId",

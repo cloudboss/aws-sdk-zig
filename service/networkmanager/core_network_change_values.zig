@@ -5,56 +5,56 @@ const ServiceInsertionAction = @import("service_insertion_action.zig").ServiceIn
 /// Describes a core network change.
 pub const CoreNetworkChangeValues = struct {
     /// The ASN of a core network.
-    asn: ?i64,
+    asn: ?i64 = null,
 
     /// The attachment identifier in the core network change values.
-    attachment_id: ?[]const u8,
+    attachment_id: ?[]const u8 = null,
 
     /// The IP addresses used for a core network.
-    cidr: ?[]const u8,
+    cidr: ?[]const u8 = null,
 
     /// The ID of the destination.
-    destination_identifier: ?[]const u8,
+    destination_identifier: ?[]const u8 = null,
 
     /// Indicates whether public DNS support is supported. The default is `true`.
     dns_support: bool = false,
 
     /// The Regions where edges are located in a core network.
-    edge_locations: ?[]const []const u8,
+    edge_locations: ?[]const []const u8 = null,
 
     /// The inside IP addresses used for core network change values.
-    inside_cidr_blocks: ?[]const []const u8,
+    inside_cidr_blocks: ?[]const []const u8 = null,
 
     /// The network function group name if the change event is associated with a
     /// network function group.
-    network_function_group_name: ?[]const u8,
+    network_function_group_name: ?[]const u8 = null,
 
     /// The edge locations of peers in the core network change values.
-    peer_edge_locations: ?[]const []const u8,
+    peer_edge_locations: ?[]const []const u8 = null,
 
     /// The routing policy configuration in the core network change values.
-    routing_policy: ?[]const u8,
+    routing_policy: ?[]const u8 = null,
 
     /// The names of the routing policies and other association details in the core
     /// network change values.
-    routing_policy_association_details: ?[]const RoutingPolicyAssociationDetail,
+    routing_policy_association_details: ?[]const RoutingPolicyAssociationDetail = null,
 
     /// The routing policy direction (inbound/outbound) in a core network change
     /// event.
-    routing_policy_direction: ?RoutingPolicyDirection,
+    routing_policy_direction: ?RoutingPolicyDirection = null,
 
     /// Indicates whether security group referencing is enabled for the core
     /// network.
     security_group_referencing_support: bool = false,
 
     /// The names of the segments in a core network.
-    segment_name: ?[]const u8,
+    segment_name: ?[]const u8 = null,
 
     /// Describes the service insertion action.
-    service_insertion_actions: ?[]const ServiceInsertionAction,
+    service_insertion_actions: ?[]const ServiceInsertionAction = null,
 
     /// The shared segments for a core network change value.
-    shared_segments: ?[]const []const u8,
+    shared_segments: ?[]const []const u8 = null,
 
     /// Indicates whether Equal Cost Multipath (ECMP) is enabled for the core
     /// network.

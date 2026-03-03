@@ -9,10 +9,10 @@ pub const InputClippingSettings = struct {
     input_timecode_source: InputTimecodeSource,
 
     /// Settings to identify the start of the clip.
-    start_timecode: ?StartTimecode,
+    start_timecode: ?StartTimecode = null,
 
     /// Settings to identify the end of the clip.
-    stop_timecode: ?StopTimecode,
+    stop_timecode: ?StopTimecode = null,
 
     pub const json_field_names = .{
         .input_timecode_source = "InputTimecodeSource",

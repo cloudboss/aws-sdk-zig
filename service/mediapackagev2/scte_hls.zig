@@ -16,7 +16,7 @@ pub const ScteHls = struct {
     ///   set a programDateTimeIntervalSeconds value of 1 or higher. To learn more
     ///   about DATERANGE, see [SCTE-35 Ad Marker
     ///   EXT-X-DATERANGE](http://docs.aws.amazon.com/mediapackage/latest/ug/scte-35-ad-marker-ext-x-daterange.html).
-    ad_marker_hls: ?AdMarkerHls,
+    ad_marker_hls: ?AdMarkerHls = null,
 
     pub const json_field_names = .{
         .ad_marker_hls = "AdMarkerHls",

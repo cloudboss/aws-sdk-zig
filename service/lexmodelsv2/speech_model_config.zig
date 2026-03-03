@@ -4,7 +4,7 @@ const DeepgramSpeechModelConfig = @import("deepgram_speech_model_config.zig").De
 /// processing speech input.
 pub const SpeechModelConfig = struct {
     /// Configuration settings for using Deepgram as the speech-to-text provider.
-    deepgram_config: ?DeepgramSpeechModelConfig,
+    deepgram_config: ?DeepgramSpeechModelConfig = null,
 
     pub const json_field_names = .{
         .deepgram_config = "deepgramConfig",

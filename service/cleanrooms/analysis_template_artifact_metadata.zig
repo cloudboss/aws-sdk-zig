@@ -3,7 +3,7 @@ const Hash = @import("hash.zig").Hash;
 /// The analysis template artifact metadata.
 pub const AnalysisTemplateArtifactMetadata = struct {
     /// Additional artifact hashes for the analysis template.
-    additional_artifact_hashes: ?[]const Hash,
+    additional_artifact_hashes: ?[]const Hash = null,
 
     /// The hash of the entry point for the analysis template artifact metadata.
     entry_point_hash: Hash,

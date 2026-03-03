@@ -12,7 +12,7 @@ pub const FlowTimeouts = struct {
     ///
     /// You can define the `TcpIdleTimeoutSeconds` value to be between 60 and 6000
     /// seconds. If no value is provided, it defaults to 350 seconds.
-    tcp_idle_timeout_seconds: ?i32,
+    tcp_idle_timeout_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .tcp_idle_timeout_seconds = "TcpIdleTimeoutSeconds",

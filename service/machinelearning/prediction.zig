@@ -15,17 +15,17 @@ const aws = @import("aws");
 /// * `PredictedValue` - Present for a `REGRESSION`
 /// `MLModel` request.
 pub const Prediction = struct {
-    details: ?[]const aws.map.StringMapEntry,
+    details: ?[]const aws.map.StringMapEntry = null,
 
     /// The prediction label for either a `BINARY` or `MULTICLASS`
     /// `MLModel`.
-    predicted_label: ?[]const u8,
+    predicted_label: ?[]const u8 = null,
 
-    predicted_scores: ?[]const aws.map.MapEntry(f32),
+    predicted_scores: ?[]const aws.map.MapEntry(f32) = null,
 
     /// The prediction value for `REGRESSION`
     /// `MLModel`.
-    predicted_value: ?f32,
+    predicted_value: ?f32 = null,
 
     pub const json_field_names = .{
         .details = "details",

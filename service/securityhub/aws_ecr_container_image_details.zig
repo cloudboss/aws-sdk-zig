@@ -7,28 +7,28 @@ pub const AwsEcrContainerImageDetails = struct {
     /// * `i386`
     ///
     /// * `x86_64`
-    architecture: ?[]const u8,
+    architecture: ?[]const u8 = null,
 
     /// The sha256 digest of the image manifest.
-    image_digest: ?[]const u8,
+    image_digest: ?[]const u8 = null,
 
     /// The date and time when the image was pushed to the repository.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    image_published_at: ?[]const u8,
+    image_published_at: ?[]const u8 = null,
 
     /// The list of tags that are associated with the image.
-    image_tags: ?[]const []const u8,
+    image_tags: ?[]const []const u8 = null,
 
     /// The Amazon Web Services account identifier that is associated with the
     /// registry that the image belongs
     /// to.
-    registry_id: ?[]const u8,
+    registry_id: ?[]const u8 = null,
 
     /// The name of the repository that the image belongs to.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .architecture = "Architecture",

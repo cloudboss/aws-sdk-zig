@@ -9,13 +9,13 @@ pub const PromptAttemptSpecification = struct {
 
     /// Indicates whether the user can interrupt a speech prompt attempt from the
     /// bot.
-    allow_interrupt: ?bool,
+    allow_interrupt: ?bool = null,
 
     /// Specifies the settings on audio and DTMF input.
-    audio_and_dtmf_input_specification: ?AudioAndDTMFInputSpecification,
+    audio_and_dtmf_input_specification: ?AudioAndDTMFInputSpecification = null,
 
     /// Specifies the settings on text input.
-    text_input_specification: ?TextInputSpecification,
+    text_input_specification: ?TextInputSpecification = null,
 
     pub const json_field_names = .{
         .allowed_input_types = "allowedInputTypes",

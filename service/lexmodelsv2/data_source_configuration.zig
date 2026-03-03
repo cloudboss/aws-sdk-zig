@@ -10,19 +10,19 @@ pub const DataSourceConfiguration = struct {
     /// base used for the `AMAZON.QnAIntent`. To set up a knowledge base, follow the
     /// steps at [Building a knowledge
     /// base](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html).
-    bedrock_knowledge_store_configuration: ?BedrockKnowledgeStoreConfiguration,
+    bedrock_knowledge_store_configuration: ?BedrockKnowledgeStoreConfiguration = null,
 
     /// Contains details about the configuration of the Amazon Kendra index used for
     /// the `AMAZON.QnAIntent`. To create a Amazon Kendra index, follow the steps at
     /// [Creating an
     /// index](https://docs.aws.amazon.com/kendra/latest/dg/create-index.html).
-    kendra_configuration: ?QnAKendraConfiguration,
+    kendra_configuration: ?QnAKendraConfiguration = null,
 
     /// Contains details about the configuration of the Amazon OpenSearch Service
     /// database used for the `AMAZON.QnAIntent`. To create a domain, follow the
     /// steps at [Creating and managing Amazon OpenSearch Service
     /// domains](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html).
-    opensearch_configuration: ?OpensearchConfiguration,
+    opensearch_configuration: ?OpensearchConfiguration = null,
 
     pub const json_field_names = .{
         .bedrock_knowledge_store_configuration = "bedrockKnowledgeStoreConfiguration",

@@ -10,10 +10,10 @@ pub const Item = struct {
     /// higher
     /// probability that the identified item correctly matches the item spoken in
     /// your media.
-    confidence: ?f64,
+    confidence: ?f64 = null,
 
     /// The word or punctuation that was transcribed.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The end time of the transcribed item in seconds, with millisecond precision
     /// (e.g., 1.056)
@@ -21,13 +21,13 @@ pub const Item = struct {
 
     /// If speaker partitioning is enabled, `Speaker` labels the speaker of the
     /// specified item.
-    speaker: ?[]const u8,
+    speaker: ?[]const u8 = null,
 
     /// If partial result stabilization is enabled, `Stable` indicates whether the
     /// specified
     /// item is stable (`true`) or if it may change when the segment is complete
     /// (`false`).
-    stable: ?bool,
+    stable: ?bool = null,
 
     /// The start time of the transcribed item in seconds, with millisecond
     /// precision (e.g., 1.056)
@@ -35,7 +35,7 @@ pub const Item = struct {
 
     /// The type of item identified. Options are: `PRONUNCIATION` (spoken words) and
     /// `PUNCTUATION`.
-    @"type": ?ItemType,
+    @"type": ?ItemType = null,
 
     /// Indicates whether the specified item matches a word in the vocabulary filter
     /// included in

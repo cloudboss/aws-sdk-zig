@@ -8,7 +8,7 @@ const ReplicationRuleStatus = @import("replication_rule_status.zig").Replication
 /// Specifies which Amazon S3 objects to replicate and where to store the
 /// replicas.
 pub const ReplicationRule = struct {
-    delete_marker_replication: ?DeleteMarkerReplication,
+    delete_marker_replication: ?DeleteMarkerReplication = null,
 
     /// A container for information about the replication destination and its
     /// configurations including
@@ -22,12 +22,12 @@ pub const ReplicationRule = struct {
     /// existing objects with S3 Batch
     /// Replication](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-batch-replication-batch.html) in the
     /// *Amazon S3 User Guide*.
-    existing_object_replication: ?ExistingObjectReplication,
+    existing_object_replication: ?ExistingObjectReplication = null,
 
-    filter: ?ReplicationRuleFilter,
+    filter: ?ReplicationRuleFilter = null,
 
     /// A unique identifier for the rule. The maximum value is 255 characters.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// An object key name prefix that identifies the object or objects to which the
     /// rule applies. The
@@ -39,7 +39,7 @@ pub const ReplicationRule = struct {
     /// XML requests. For more information, see [
     /// XML related object key
     /// constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The priority indicates which rule has precedence whenever two or more
     /// replication rules conflict.
@@ -51,7 +51,7 @@ pub const ReplicationRule = struct {
     ///
     /// For more information, see
     /// [Replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the *Amazon S3 User Guide*.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// A container that describes additional filters for identifying the source
     /// objects that you want to
@@ -61,7 +61,7 @@ pub const ReplicationRule = struct {
     /// server-side encryption using a
     /// customer managed key stored in Amazon Web Services Key Management Service
     /// (SSE-KMS).
-    source_selection_criteria: ?SourceSelectionCriteria,
+    source_selection_criteria: ?SourceSelectionCriteria = null,
 
     /// Specifies whether the rule is enabled.
     status: ReplicationRuleStatus,

@@ -13,14 +13,14 @@ pub const SchemaInputAttribute = struct {
     /// For example, when working with columns such as `NAME_FIRST`, `NAME_MIDDLE`,
     /// and `NAME_LAST`, assigning them a common `groupName` will prompt Entity
     /// Resolution to concatenate them into a single value.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// Indicates if the column values are hashed in the schema input.
     ///
     /// If the value is set to `TRUE`, the column values are hashed.
     ///
     /// If the value is set to `FALSE`, the column values are cleartext.
-    hashed: ?bool,
+    hashed: ?bool = null,
 
     /// A key that allows grouping of multiple input attributes into a unified
     /// matching group.
@@ -32,10 +32,10 @@ pub const SchemaInputAttribute = struct {
     ///
     /// If no `matchKey` is specified for a column, it won't be utilized for
     /// matching purposes but will still be included in the output table.
-    match_key: ?[]const u8,
+    match_key: ?[]const u8 = null,
 
     /// The subtype of the attribute, selected from a list of values.
-    sub_type: ?[]const u8,
+    sub_type: ?[]const u8 = null,
 
     /// The type of the attribute, selected from a list of values.
     ///

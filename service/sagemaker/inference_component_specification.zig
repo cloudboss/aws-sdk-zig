@@ -24,7 +24,7 @@ pub const InferenceComponentSpecification = struct {
     /// Before you can create an adapter inference component, you must have an
     /// existing inference component that contains the foundation model that you
     /// want to adapt.
-    base_inference_component_name: ?[]const u8,
+    base_inference_component_name: ?[]const u8 = null,
 
     /// The compute resources allocated to run the model, plus any adapter models,
     /// that you assign to the inference component.
@@ -33,21 +33,21 @@ pub const InferenceComponentSpecification = struct {
     /// component. An adapter inference component is loaded by a base inference
     /// component, and it uses the compute resources of the base inference
     /// component.
-    compute_resource_requirements: ?InferenceComponentComputeResourceRequirements,
+    compute_resource_requirements: ?InferenceComponentComputeResourceRequirements = null,
 
     /// Defines a container that provides the runtime environment for a model that
     /// you deploy with an inference component.
-    container: ?InferenceComponentContainerSpecification,
+    container: ?InferenceComponentContainerSpecification = null,
 
     /// Settings that affect how the inference component caches data.
-    data_cache_config: ?InferenceComponentDataCacheConfig,
+    data_cache_config: ?InferenceComponentDataCacheConfig = null,
 
     /// The name of an existing SageMaker AI model object in your account that you
     /// want to deploy with the inference component.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     /// Settings that take effect while the model container starts up.
-    startup_parameters: ?InferenceComponentStartupParameters,
+    startup_parameters: ?InferenceComponentStartupParameters = null,
 
     pub const json_field_names = .{
         .base_inference_component_name = "BaseInferenceComponentName",

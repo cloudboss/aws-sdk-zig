@@ -7,7 +7,7 @@ const EvaluatorModelConfig = @import("evaluator_model_config.zig").EvaluatorMode
 /// datasets, task type, and metric names.
 pub const AutomatedEvaluationConfig = struct {
     /// Defines the configuration of custom metrics to be used in an evaluation job.
-    custom_metric_config: ?AutomatedEvaluationCustomMetricConfig,
+    custom_metric_config: ?AutomatedEvaluationCustomMetricConfig = null,
 
     /// Configuration details of the prompt datasets and metrics you want to use for
     /// your evaluation job.
@@ -17,7 +17,7 @@ pub const AutomatedEvaluationConfig = struct {
     /// is required for evaluation jobs that use a knowledge base or in model
     /// evaluation job that use a model as judge. This model computes all evaluation
     /// related metrics.
-    evaluator_model_config: ?EvaluatorModelConfig,
+    evaluator_model_config: ?EvaluatorModelConfig = null,
 
     pub const json_field_names = .{
         .custom_metric_config = "customMetricConfig",

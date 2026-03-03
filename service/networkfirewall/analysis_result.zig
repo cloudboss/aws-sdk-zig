@@ -14,10 +14,10 @@ const IdentifiedType = @import("identified_type.zig").IdentifiedType;
 /// report results, see AnalysisTypeReportResult.
 pub const AnalysisResult = struct {
     /// Provides analysis details for the identified rule.
-    analysis_detail: ?[]const u8,
+    analysis_detail: ?[]const u8 = null,
 
     /// The priority number of the stateless rules identified in the analysis.
-    identified_rule_ids: ?[]const []const u8,
+    identified_rule_ids: ?[]const []const u8 = null,
 
     /// The types of rule configurations that Network Firewall analyzes your rule
     /// groups for. Network Firewall analyzes stateless rule groups for the
@@ -49,7 +49,7 @@ pub const AnalysisResult = struct {
     /// * If you need to inspect TCP flags, check that the rules correctly account
     ///   for changes in TCP flags throughout the TCP connection cycle, for example
     ///   `SYN` and `ACK` flags used in a 3-way TCP handshake.
-    identified_type: ?IdentifiedType,
+    identified_type: ?IdentifiedType = null,
 
     pub const json_field_names = .{
         .analysis_detail = "AnalysisDetail",

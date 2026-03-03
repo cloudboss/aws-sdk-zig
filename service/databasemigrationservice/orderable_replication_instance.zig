@@ -6,7 +6,7 @@ const ReleaseStatusValues = @import("release_status_values.zig").ReleaseStatusVa
 /// replication instance's type, engine version, and allocated storage.
 pub const OrderableReplicationInstance = struct {
     /// List of Availability Zones for this replication instance.
-    availability_zones: ?[]const []const u8,
+    availability_zones: ?[]const []const u8 = null,
 
     /// The default amount of storage (in gigabytes) that is allocated for the
     /// replication
@@ -14,7 +14,7 @@ pub const OrderableReplicationInstance = struct {
     default_allocated_storage: i32 = 0,
 
     /// The version of the replication engine.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// The amount of storage (in gigabytes) that is allocated for the replication
     /// instance.
@@ -37,7 +37,7 @@ pub const OrderableReplicationInstance = struct {
     ///
     /// DMS supports the `ReleaseStatus` parameter in versions 3.1.4 and
     /// later.
-    release_status: ?ReleaseStatusValues,
+    release_status: ?ReleaseStatusValues = null,
 
     /// The compute and memory capacity of the replication instance as defined for
     /// the specified
@@ -50,10 +50,10 @@ pub const OrderableReplicationInstance = struct {
     /// instance classes, see [ Selecting the right DMS replication instance for
     /// your
     /// migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
-    replication_instance_class: ?[]const u8,
+    replication_instance_class: ?[]const u8 = null,
 
     /// The type of storage used by the replication instance.
-    storage_type: ?[]const u8,
+    storage_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .availability_zones = "AvailabilityZones",

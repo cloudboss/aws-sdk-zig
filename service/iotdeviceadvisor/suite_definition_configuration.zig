@@ -7,16 +7,16 @@ pub const SuiteDefinitionConfiguration = struct {
     device_permission_role_arn: []const u8,
 
     /// Gets the devices configured.
-    devices: ?[]const DeviceUnderTest,
+    devices: ?[]const DeviceUnderTest = null,
 
     /// Gets the tests intended for qualification in a suite.
-    intended_for_qualification: ?bool,
+    intended_for_qualification: ?bool = null,
 
     /// Verifies if the test suite is a long duration test.
-    is_long_duration_test: ?bool,
+    is_long_duration_test: ?bool = null,
 
     /// Sets the MQTT protocol that is configured in the suite definition.
-    protocol: ?Protocol,
+    protocol: ?Protocol = null,
 
     /// Gets the test suite root group. This is a required parameter.
     /// For updating or creating the latest qualification suite,

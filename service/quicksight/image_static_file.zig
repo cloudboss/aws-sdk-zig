@@ -3,7 +3,7 @@ const StaticFileSource = @import("static_file_source.zig").StaticFileSource;
 /// A static file that contains an image.
 pub const ImageStaticFile = struct {
     /// The source of the image static file.
-    source: ?StaticFileSource,
+    source: ?StaticFileSource = null,
 
     /// The ID of the static file that contains an image.
     static_file_id: []const u8,

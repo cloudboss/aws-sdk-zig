@@ -10,19 +10,19 @@ pub const LifecyclePolicyDetailExclusionRulesAmis = struct {
     /// Specifies configuration details for Image Builder to exclude the most recent
     /// resources
     /// from lifecycle actions.
-    last_launched: ?LifecyclePolicyDetailExclusionRulesAmisLastLaunched,
+    last_launched: ?LifecyclePolicyDetailExclusionRulesAmisLastLaunched = null,
 
     /// Configures Amazon Web Services Regions that are excluded from the lifecycle
     /// action.
-    regions: ?[]const []const u8,
+    regions: ?[]const []const u8 = null,
 
     /// Specifies Amazon Web Services accounts whose resources are excluded from the
     /// lifecycle action.
-    shared_accounts: ?[]const []const u8,
+    shared_accounts: ?[]const []const u8 = null,
 
     /// Lists tags that should be excluded from lifecycle actions for the AMIs that
     /// have them.
-    tag_map: ?[]const aws.map.StringMapEntry,
+    tag_map: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .is_public = "isPublic",

@@ -10,10 +10,10 @@ pub const FilterScopeConfiguration = struct {
     /// `AllSheets` as the value for a `FilterScopeConfiguration`, this filter is
     /// applied to all visuals of all sheets in an Analysis, Dashboard, or Template.
     /// The `AllSheetsFilterScopeConfiguration` is chosen.
-    all_sheets: ?AllSheetsFilterScopeConfiguration,
+    all_sheets: ?AllSheetsFilterScopeConfiguration = null,
 
     /// The configuration for applying a filter to specific sheets.
-    selected_sheets: ?SelectedSheetsFilterScopeConfiguration,
+    selected_sheets: ?SelectedSheetsFilterScopeConfiguration = null,
 
     pub const json_field_names = .{
         .all_sheets = "AllSheets",

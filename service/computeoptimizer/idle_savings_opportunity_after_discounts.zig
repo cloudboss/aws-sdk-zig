@@ -9,7 +9,7 @@ const IdleEstimatedMonthlySavings = @import("idle_estimated_monthly_savings.zig"
 pub const IdleSavingsOpportunityAfterDiscounts = struct {
     /// The estimated monthly savings possible by adopting Compute Optimizer's idle
     /// resource recommendations. This includes any applicable discounts.
-    estimated_monthly_savings: ?IdleEstimatedMonthlySavings,
+    estimated_monthly_savings: ?IdleEstimatedMonthlySavings = null,
 
     /// The estimated monthly savings possible as a percentage of monthly cost by
     /// adopting Compute Optimizer's idle resource recommendations. This includes

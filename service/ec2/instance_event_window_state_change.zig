@@ -3,8 +3,8 @@ const InstanceEventWindowState = @import("instance_event_window_state.zig").Inst
 /// The state of the event window.
 pub const InstanceEventWindowStateChange = struct {
     /// The ID of the event window.
-    instance_event_window_id: ?[]const u8,
+    instance_event_window_id: ?[]const u8 = null,
 
     /// The current state of the event window.
-    state: ?InstanceEventWindowState,
+    state: ?InstanceEventWindowState = null,
 };

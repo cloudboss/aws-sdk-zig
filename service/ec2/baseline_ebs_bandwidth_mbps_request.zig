@@ -6,9 +6,9 @@
 pub const BaselineEbsBandwidthMbpsRequest = struct {
     /// The maximum baseline bandwidth, in Mbps. To specify no maximum limit, omit
     /// this parameter.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// The minimum baseline bandwidth, in Mbps. To specify no minimum limit, omit
     /// this parameter.
-    min: ?i32,
+    min: ?i32 = null,
 };

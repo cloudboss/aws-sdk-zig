@@ -5,19 +5,19 @@ const RefreshSchemasStatusTypeValue = @import("refresh_schemas_status_type_value
 /// `DescribeRefreshSchemaStatus` operation.
 pub const RefreshSchemasStatus = struct {
     /// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-    endpoint_arn: ?[]const u8,
+    endpoint_arn: ?[]const u8 = null,
 
     /// The last failure message for the schema.
-    last_failure_message: ?[]const u8,
+    last_failure_message: ?[]const u8 = null,
 
     /// The date the schema was last refreshed.
-    last_refresh_date: ?i64,
+    last_refresh_date: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the replication instance.
-    replication_instance_arn: ?[]const u8,
+    replication_instance_arn: ?[]const u8 = null,
 
     /// The status of the schema.
-    status: ?RefreshSchemasStatusTypeValue,
+    status: ?RefreshSchemasStatusTypeValue = null,
 
     pub const json_field_names = .{
         .endpoint_arn = "EndpointArn",

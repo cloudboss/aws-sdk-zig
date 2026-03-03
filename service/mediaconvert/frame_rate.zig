@@ -4,12 +4,12 @@ pub const FrameRate = struct {
     /// The denominator, or bottom number, in the fractional frame rate. For
     /// example, if your frame rate is 24000 / 1001 (23.976 frames per second), then
     /// the denominator would be 1001.
-    denominator: ?i32,
+    denominator: ?i32 = null,
 
     /// The numerator, or top number, in the fractional frame rate. For example, if
     /// your frame rate is 24000 / 1001 (23.976 frames per second), then the
     /// numerator would be 24000.
-    numerator: ?i32,
+    numerator: ?i32 = null,
 
     pub const json_field_names = .{
         .denominator = "Denominator",

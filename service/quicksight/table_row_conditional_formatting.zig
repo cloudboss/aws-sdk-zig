@@ -4,11 +4,11 @@ const ConditionalFormattingColor = @import("conditional_formatting_color.zig").C
 pub const TableRowConditionalFormatting = struct {
     /// The conditional formatting color (solid, gradient) of the background for a
     /// table row.
-    background_color: ?ConditionalFormattingColor,
+    background_color: ?ConditionalFormattingColor = null,
 
     /// The conditional formatting color (solid, gradient) of the text for a table
     /// row.
-    text_color: ?ConditionalFormattingColor,
+    text_color: ?ConditionalFormattingColor = null,
 
     pub const json_field_names = .{
         .background_color = "BackgroundColor",

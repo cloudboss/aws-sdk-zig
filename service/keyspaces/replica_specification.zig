@@ -13,11 +13,11 @@ const AutoScalingSettings = @import("auto_scaling_settings.zig").AutoScalingSett
 pub const ReplicaSpecification = struct {
     /// The read capacity auto scaling settings for the multi-Region table in the
     /// specified Amazon Web Services Region.
-    read_capacity_auto_scaling: ?AutoScalingSettings,
+    read_capacity_auto_scaling: ?AutoScalingSettings = null,
 
     /// The provisioned read capacity units for the multi-Region table in the
     /// specified Amazon Web Services Region.
-    read_capacity_units: ?i64,
+    read_capacity_units: ?i64 = null,
 
     /// The Amazon Web Services Region.
     region: []const u8,

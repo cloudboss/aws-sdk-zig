@@ -3,7 +3,7 @@
 /// search capabilities for improved performance on vector workloads.
 pub const ServerlessVectorAcceleration = struct {
     /// Specifies whether serverless vector acceleration is enabled for the domain.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

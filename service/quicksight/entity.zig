@@ -3,7 +3,7 @@
 pub const Entity = struct {
     /// The hierarchical path of the entity within the analysis, template, or
     /// dashboard definition tree.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .path = "Path",

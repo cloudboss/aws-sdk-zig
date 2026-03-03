@@ -7,7 +7,7 @@ const AssetPropertyValue = @import("asset_property_value.zig").AssetPropertyValu
 /// operation.
 pub const PutAssetPropertyValueEntry = struct {
     /// The ID of the asset to update.
-    asset_id: ?[]const u8,
+    asset_id: ?[]const u8 = null,
 
     /// The user specified ID for the entry. You can use this ID to identify which
     /// entries
@@ -21,10 +21,10 @@ pub const PutAssetPropertyValueEntry = struct {
     /// [Mapping industrial data streams to asset
     /// properties](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html) in the
     /// *IoT SiteWise User Guide*.
-    property_alias: ?[]const u8,
+    property_alias: ?[]const u8 = null,
 
     /// The ID of the asset property for this entry.
-    property_id: ?[]const u8,
+    property_id: ?[]const u8 = null,
 
     /// The list of property values to upload. You can specify up to 10
     /// `propertyValues` array elements.

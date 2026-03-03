@@ -12,24 +12,24 @@ pub const CustomMessageActivity = struct {
     /// * The URL for a web application or service that supports HTTPS and can
     ///   receive the message. The URL has to be a full URL, including the HTTPS
     ///   protocol.
-    delivery_uri: ?[]const u8,
+    delivery_uri: ?[]const u8 = null,
 
     /// The types of endpoints to send the custom message to. Each valid value maps
     /// to a type of channel that you can associate with an endpoint by using the
     /// ChannelType property of an endpoint.
-    endpoint_types: ?[]const __EndpointTypesElement,
+    endpoint_types: ?[]const __EndpointTypesElement = null,
 
     /// Specifies the message data included in a custom channel message that's sent
     /// to participants in a journey.
-    message_config: ?JourneyCustomMessage,
+    message_config: ?JourneyCustomMessage = null,
 
     /// The unique identifier for the next activity to perform, after Amazon
     /// Pinpoint calls the AWS Lambda function or web hook.
-    next_activity: ?[]const u8,
+    next_activity: ?[]const u8 = null,
 
     /// The name of the custom message template to use for the message. If
     /// specified, this value must match the name of an existing message template.
-    template_name: ?[]const u8,
+    template_name: ?[]const u8 = null,
 
     /// The unique identifier for the version of the message template to use for the
     /// message. If specified, this value must match the identifier for an existing
@@ -41,7 +41,7 @@ pub const CustomMessageActivity = struct {
     /// version of a template that's been most recently reviewed and approved for
     /// use, depending on your workflow. It isn't necessarily the latest version of
     /// a template.
-    template_version: ?[]const u8,
+    template_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .delivery_uri = "DeliveryUri",

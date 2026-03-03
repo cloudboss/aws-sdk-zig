@@ -4,7 +4,7 @@ pub const ConfigurationRevision = struct {
     created: i64,
 
     /// The description of the configuration revision.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Required. The revision number of the configuration.
     revision: i32,

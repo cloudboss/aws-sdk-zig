@@ -7,16 +7,16 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// Amazon Web Services accounts.
 pub const AccountAggregation = struct {
     /// The type of finding.
-    finding_type: ?AggregationFindingType,
+    finding_type: ?AggregationFindingType = null,
 
     /// The type of resource.
-    resource_type: ?AggregationResourceType,
+    resource_type: ?AggregationResourceType = null,
 
     /// The value to sort by.
-    sort_by: ?AccountSortBy,
+    sort_by: ?AccountSortBy = null,
 
     /// The sort order (ascending or descending).
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .finding_type = "findingType",

@@ -3,7 +3,7 @@ const TaskTemplateDefaultFieldValue = @import("task_template_default_field_value
 /// Describes default values for fields on a template.
 pub const TaskTemplateDefaults = struct {
     /// Default value for the field.
-    default_field_values: ?[]const TaskTemplateDefaultFieldValue,
+    default_field_values: ?[]const TaskTemplateDefaultFieldValue = null,
 
     pub const json_field_names = .{
         .default_field_values = "DefaultFieldValues",

@@ -5,10 +5,10 @@ const Reason = @import("reason.zig").Reason;
 /// intelligence.
 pub const FlaggedIpAddressDetail = struct {
     /// IP address of the suspicious entity.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// Details the reason the IP address was flagged as suspicious.
-    reason: ?Reason,
+    reason: ?Reason = null,
 
     pub const json_field_names = .{
         .ip_address = "IpAddress",

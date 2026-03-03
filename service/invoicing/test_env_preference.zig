@@ -13,15 +13,15 @@ pub const TestEnvPreference = struct {
     buyer_identifier: []const u8,
 
     /// The endpoint URL where e-invoices are delivered in the test environment.
-    procurement_portal_instance_endpoint: ?[]const u8,
+    procurement_portal_instance_endpoint: ?[]const u8 = null,
 
     /// The shared secret or authentication credential used for secure communication
     /// with the test environment.
-    procurement_portal_shared_secret: ?[]const u8,
+    procurement_portal_shared_secret: ?[]const u8 = null,
 
     /// The endpoint URL used for retrieving purchase orders in the test
     /// environment.
-    purchase_order_retrieval_endpoint: ?[]const u8,
+    purchase_order_retrieval_endpoint: ?[]const u8 = null,
 
     /// The domain identifier for the supplier in the test environment of the
     /// procurement portal.

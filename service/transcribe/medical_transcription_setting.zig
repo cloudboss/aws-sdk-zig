@@ -17,7 +17,7 @@ pub const MedicalTranscriptionSetting = struct {
     ///
     /// For more information, see [Transcribing multi-channel
     /// audio](https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html).
-    channel_identification: ?bool,
+    channel_identification: ?bool = null,
 
     /// Indicate the maximum number of alternative transcriptions you want Amazon
     /// Transcribe
@@ -34,7 +34,7 @@ pub const MedicalTranscriptionSetting = struct {
     ///
     /// For more information, see [Alternative
     /// transcriptions](https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
-    max_alternatives: ?i32,
+    max_alternatives: ?i32 = null,
 
     /// Specify the maximum number of speakers you want to partition in your media.
     ///
@@ -44,7 +44,7 @@ pub const MedicalTranscriptionSetting = struct {
     ///
     /// If you specify the `MaxSpeakerLabels` field, you must set the
     /// `ShowSpeakerLabels` field to true.
-    max_speaker_labels: ?i32,
+    max_speaker_labels: ?i32 = null,
 
     /// To include alternative transcriptions within your transcription output,
     /// include
@@ -56,7 +56,7 @@ pub const MedicalTranscriptionSetting = struct {
     ///
     /// For more information, see [Alternative
     /// transcriptions](https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
-    show_alternatives: ?bool,
+    show_alternatives: ?bool = null,
 
     /// Enables speaker partitioning (diarization) in your transcription output.
     /// Speaker
@@ -67,7 +67,7 @@ pub const MedicalTranscriptionSetting = struct {
     ///
     /// For more information, see [Partitioning speakers
     /// (diarization)](https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
-    show_speaker_labels: ?bool,
+    show_speaker_labels: ?bool = null,
 
     /// The name of the custom vocabulary you want to use when processing your
     /// medical
@@ -81,7 +81,7 @@ pub const MedicalTranscriptionSetting = struct {
     /// language
     /// mismatch. US English (`en-US`) is the only valid language for Amazon
     /// Transcribe Medical.
-    vocabulary_name: ?[]const u8,
+    vocabulary_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channel_identification = "ChannelIdentification",

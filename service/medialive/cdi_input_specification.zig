@@ -3,7 +3,7 @@ const CdiInputResolution = @import("cdi_input_resolution.zig").CdiInputResolutio
 /// Placeholder documentation for CdiInputSpecification
 pub const CdiInputSpecification = struct {
     /// Maximum CDI input resolution
-    resolution: ?CdiInputResolution,
+    resolution: ?CdiInputResolution = null,
 
     pub const json_field_names = .{
         .resolution = "Resolution",

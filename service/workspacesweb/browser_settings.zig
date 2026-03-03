@@ -7,26 +7,26 @@ const WebContentFilteringPolicy = @import("web_content_filtering_policy.zig").We
 /// behave once a user starts a streaming session for the web portal.
 pub const BrowserSettings = struct {
     /// The additional encryption context of the browser settings.
-    additional_encryption_context: ?[]const aws.map.StringMapEntry,
+    additional_encryption_context: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of web portal ARNs that this browser settings is associated with.
-    associated_portal_arns: ?[]const []const u8,
+    associated_portal_arns: ?[]const []const u8 = null,
 
     /// A JSON string containing Chrome Enterprise policies that will be applied to
     /// all streaming sessions.
-    browser_policy: ?[]const u8,
+    browser_policy: ?[]const u8 = null,
 
     /// The ARN of the browser settings.
     browser_settings_arn: []const u8,
 
     /// The customer managed key used to encrypt sensitive information in the
     /// browser settings.
-    customer_managed_key: ?[]const u8,
+    customer_managed_key: ?[]const u8 = null,
 
     /// The policy that specifies which URLs end users are allowed to access or
     /// which URLs or domain categories they are restricted from accessing for
     /// enhanced security.
-    web_content_filtering_policy: ?WebContentFilteringPolicy,
+    web_content_filtering_policy: ?WebContentFilteringPolicy = null,
 
     pub const json_field_names = .{
         .additional_encryption_context = "additionalEncryptionContext",

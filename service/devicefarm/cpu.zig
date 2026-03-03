@@ -3,15 +3,15 @@
 /// CPU usage.
 pub const CPU = struct {
     /// The CPU's architecture (for example, x86 or ARM).
-    architecture: ?[]const u8,
+    architecture: ?[]const u8 = null,
 
     /// The clock speed of the device's CPU, expressed in hertz (Hz). For example, a
     /// 1.2
     /// GHz CPU is expressed as 1200000000.
-    clock: ?f64,
+    clock: ?f64 = null,
 
     /// The CPU's frequency.
-    frequency: ?[]const u8,
+    frequency: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .architecture = "architecture",

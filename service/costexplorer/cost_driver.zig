@@ -11,10 +11,10 @@ pub const CostDriver = struct {
     /// A mapping of metric names to their comparison values, measuring the impact
     /// of this
     /// cost driver.
-    metrics: ?[]const aws.map.MapEntry(ComparisonMetricValue),
+    metrics: ?[]const aws.map.MapEntry(ComparisonMetricValue) = null,
 
     /// The specific identifier of the cost driver.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The category or classification of the cost driver.
     ///
@@ -24,7 +24,7 @@ pub const CostDriver = struct {
     /// SAVINGS_PLAN_RECURRING_FEE, SUPPORT_FEE, TAX, UPFRONT_RESERVATION_FEE,
     /// USAGE_CHANGE,
     /// COMMITMENT
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metrics = "Metrics",

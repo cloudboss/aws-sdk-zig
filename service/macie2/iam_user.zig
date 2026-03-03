@@ -3,18 +3,18 @@
 pub const IamUser = struct {
     /// The unique identifier for the Amazon Web Services account that's associated
     /// with the IAM user who performed the action.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the principal that performed the action.
     /// The last section of the ARN contains the name of the user who performed the
     /// action.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The unique identifier for the IAM user who performed the action.
-    principal_id: ?[]const u8,
+    principal_id: ?[]const u8 = null,
 
     /// The username of the IAM user who performed the action.
-    user_name: ?[]const u8,
+    user_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

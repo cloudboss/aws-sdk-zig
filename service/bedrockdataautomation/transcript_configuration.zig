@@ -3,9 +3,9 @@ const SpeakerLabelingConfiguration = @import("speaker_labeling_configuration.zig
 
 /// Configuration for transcript related features
 pub const TranscriptConfiguration = struct {
-    channel_labeling: ?ChannelLabelingConfiguration,
+    channel_labeling: ?ChannelLabelingConfiguration = null,
 
-    speaker_labeling: ?SpeakerLabelingConfiguration,
+    speaker_labeling: ?SpeakerLabelingConfiguration = null,
 
     pub const json_field_names = .{
         .channel_labeling = "channelLabeling",

@@ -5,7 +5,7 @@ pub const Ebs = struct {
     /// Indicates whether the volume is deleted on instance termination. For Amazon
     /// EC2 Auto Scaling, the
     /// default value is `true`.
-    delete_on_termination: ?bool,
+    delete_on_termination: ?bool = null,
 
     /// Specifies whether the volume should be encrypted. Encrypted EBS volumes can
     /// only be
@@ -30,7 +30,7 @@ pub const Ebs = struct {
     /// Amazon EBS
     /// volumes](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-data-protection.html#encryption) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The number of input/output (I/O) operations per second (IOPS) to provision
     /// for the
@@ -55,15 +55,15 @@ pub const Ebs = struct {
     /// `io1` and required only when the volume type is `io1`. (Not
     /// used with `standard`, `gp2`, `st1`, or `sc1`
     /// volumes.)
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// The snapshot ID of the volume to use.
     ///
     /// You must specify either a `VolumeSize` or a `SnapshotId`.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
     /// The throughput (MiBps) to provision for a `gp3` volume.
-    throughput: ?i32,
+    throughput: ?i32 = null,
 
     /// The volume size, in GiBs. The following are the supported volumes sizes for
     /// each
@@ -80,7 +80,7 @@ pub const Ebs = struct {
     /// You must specify either a `SnapshotId` or a `VolumeSize`. If you
     /// specify both `SnapshotId` and `VolumeSize`, the volume size must
     /// be equal or greater than the size of the snapshot.
-    volume_size: ?i32,
+    volume_size: ?i32 = null,
 
     /// The volume type. For more information, see [Amazon EBS volume
     /// types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the
@@ -88,5 +88,5 @@ pub const Ebs = struct {
     ///
     /// Valid values: `standard` | `io1` | `gp2` |
     /// `st1` | `sc1` | `gp3`
-    volume_type: ?[]const u8,
+    volume_type: ?[]const u8 = null,
 };

@@ -5,7 +5,7 @@ const ThumbnailConfigurationStorage = @import("thumbnail_configuration_storage.z
 /// An object representing a configuration of thumbnails for recorded video.
 pub const ThumbnailConfiguration = struct {
     /// Thumbnail recording mode. Default: `INTERVAL`.
-    recording_mode: ?RecordingMode,
+    recording_mode: ?RecordingMode = null,
 
     /// Indicates the desired resolution of recorded thumbnails. Thumbnails are
     /// recorded at the
@@ -17,7 +17,7 @@ pub const ThumbnailConfiguration = struct {
     /// S3](https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html).
     /// Default:
     /// Null (source resolution is returned).
-    resolution: ?ThumbnailConfigurationResolution,
+    resolution: ?ThumbnailConfigurationResolution = null,
 
     /// Indicates the format in which thumbnails are recorded. `SEQUENTIAL` records
     /// all
@@ -26,7 +26,7 @@ pub const ThumbnailConfiguration = struct {
     /// overwrites it at the interval specified by `targetIntervalSeconds`. You can
     /// enable
     /// both `SEQUENTIAL` and `LATEST`. Default: `SEQUENTIAL`.
-    storage: ?[]const ThumbnailConfigurationStorage,
+    storage: ?[]const ThumbnailConfigurationStorage = null,
 
     /// The targeted thumbnail-generation interval in seconds. This is configurable
     /// (and required)
@@ -42,7 +42,7 @@ pub const ThumbnailConfiguration = struct {
     /// Amazon IVS Streaming
     /// Configuration](https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html) for information on setting `IDR/Keyframe` to the
     /// recommended value in video-encoder settings.
-    target_interval_seconds: ?i64,
+    target_interval_seconds: ?i64 = null,
 
     pub const json_field_names = .{
         .recording_mode = "recordingMode",

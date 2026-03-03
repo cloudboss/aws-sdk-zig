@@ -38,7 +38,7 @@ pub const Filter = struct {
     /// specific key. This doesn’t consider the tag value. For example, you can find
     /// your recommendations with a tag key value of `Owner` or without any tag
     /// keys assigned.
-    name: ?FilterName,
+    name: ?FilterName = null,
 
     /// The value of the filter.
     ///
@@ -168,7 +168,7 @@ pub const Filter = struct {
     /// instance’s disk throughput configuration doesn't meet the performance
     /// requirements of your workload and there is an alternative instance type
     /// that provides better disk throughput performance.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

@@ -7,10 +7,10 @@
 /// Accuracy](https://docs.aws.amazon.com/forecast/latest/dg/metrics.html)
 pub const MetricResult = struct {
     /// The name of the metric.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The value for the metric.
-    metric_value: ?f64,
+    metric_value: ?f64 = null,
 
     pub const json_field_names = .{
         .metric_name = "MetricName",

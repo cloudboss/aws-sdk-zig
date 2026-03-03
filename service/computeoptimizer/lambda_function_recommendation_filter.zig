@@ -37,7 +37,7 @@ pub const LambdaFunctionRecommendationFilter = struct {
     /// your Lambda function recommendations with a tag key value of `Owner` or
     /// without any tag
     /// keys assigned.
-    name: ?LambdaFunctionRecommendationFilterName,
+    name: ?LambdaFunctionRecommendationFilterName = null,
 
     /// The value of the filter.
     ///
@@ -53,7 +53,7 @@ pub const LambdaFunctionRecommendationFilter = struct {
     /// `MemoryUnderprovisioned`, `InsufficientData`, or
     /// `Inconclusive` if you specify the `name` parameter as
     /// `FindingReasonCode`.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

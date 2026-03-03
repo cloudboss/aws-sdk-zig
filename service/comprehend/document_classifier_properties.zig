@@ -13,33 +13,33 @@ pub const DocumentClassifierProperties = struct {
     /// training the classifier, the number of documents used for test the
     /// classifier, and an accuracy
     /// rating.
-    classifier_metadata: ?ClassifierMetadata,
+    classifier_metadata: ?ClassifierMetadata = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that
     /// grants Amazon Comprehend read access to your input data.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) that identifies the document classifier.
-    document_classifier_arn: ?[]const u8,
+    document_classifier_arn: ?[]const u8 = null,
 
     /// The time that training the document classifier completed.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The Amazon Resource Number (ARN) of the flywheel
-    flywheel_arn: ?[]const u8,
+    flywheel_arn: ?[]const u8 = null,
 
     /// The input data configuration that you supplied when you created the document
     /// classifier
     /// for training.
-    input_data_config: ?DocumentClassifierInputDataConfig,
+    input_data_config: ?DocumentClassifierInputDataConfig = null,
 
     /// The language code for the language of the documents that the classifier was
     /// trained
     /// on.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// Additional information about the status of the classifier.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Indicates the mode in which the specific classifier was trained. This also
     /// indicates the
@@ -47,7 +47,7 @@ pub const DocumentClassifierProperties = struct {
     /// classifier can only be
     /// trained in one mode and this cannot be changed once the classifier is
     /// trained.
-    mode: ?DocumentClassifierMode,
+    mode: ?DocumentClassifierMode = null,
 
     /// ID for the KMS key that Amazon Comprehend uses to encrypt
     /// trained custom models. The ModelKmsKeyId can be either of the following
@@ -57,16 +57,16 @@ pub const DocumentClassifierProperties = struct {
     ///
     /// * Amazon Resource Name (ARN) of a KMS Key:
     /// `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
-    model_kms_key_id: ?[]const u8,
+    model_kms_key_id: ?[]const u8 = null,
 
     /// Provides output results configuration parameters for custom classifier jobs.
-    output_data_config: ?DocumentClassifierOutputDataConfig,
+    output_data_config: ?DocumentClassifierOutputDataConfig = null,
 
     /// The Amazon Resource Name (ARN) of the source model. This model was imported
     /// from a
     /// different Amazon Web Services account to create the document classifier
     /// model in your Amazon Web Services account.
-    source_model_arn: ?[]const u8,
+    source_model_arn: ?[]const u8 = null,
 
     /// The status of the document classifier. If the status is `TRAINED` the
     /// classifier is ready to use. If the status is `TRAINED_WITH_WARNINGS` the
@@ -76,25 +76,25 @@ pub const DocumentClassifierProperties = struct {
     ///
     /// If the status is `FAILED` you can see additional
     /// information about why the classifier wasn't trained in the `Message` field.
-    status: ?ModelStatus,
+    status: ?ModelStatus = null,
 
     /// The time that the document classifier was submitted for training.
-    submit_time: ?i64,
+    submit_time: ?i64 = null,
 
     /// The time that training of the document classifier was completed. Indicates
     /// the time when
     /// the training completes on documentation classifiers. You are billed for the
     /// time interval
     /// between this time and the value of TrainingStartTime.
-    training_end_time: ?i64,
+    training_end_time: ?i64 = null,
 
     /// Indicates the time when the training starts on documentation classifiers.
     /// You are billed
     /// for the time interval between this time and the value of TrainingEndTime.
-    training_start_time: ?i64,
+    training_start_time: ?i64 = null,
 
     /// The version name that you assigned to the document classifier.
-    version_name: ?[]const u8,
+    version_name: ?[]const u8 = null,
 
     /// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
     /// Comprehend uses to encrypt
@@ -106,14 +106,14 @@ pub const DocumentClassifierProperties = struct {
     ///
     /// * Amazon Resource Name (ARN) of a KMS Key:
     /// `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
-    volume_kms_key_id: ?[]const u8,
+    volume_kms_key_id: ?[]const u8 = null,
 
     /// Configuration parameters for a private Virtual Private Cloud (VPC)
     /// containing the
     /// resources you are using for your custom classifier. For more information,
     /// see [Amazon
     /// VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .classifier_metadata = "ClassifierMetadata",

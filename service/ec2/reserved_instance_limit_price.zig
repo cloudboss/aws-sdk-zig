@@ -5,10 +5,10 @@ pub const ReservedInstanceLimitPrice = struct {
     /// Used for Reserved Instance Marketplace offerings. Specifies the limit price
     /// on the total
     /// order (instanceCount * price).
-    amount: ?f64,
+    amount: ?f64 = null,
 
     /// The currency in which the `limitPrice` amount is specified. At this time,
     /// the
     /// only supported currency is `USD`.
-    currency_code: ?CurrencyCodeValues,
+    currency_code: ?CurrencyCodeValues = null,
 };

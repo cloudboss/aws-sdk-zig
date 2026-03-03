@@ -10,10 +10,10 @@ pub const StartTextDetectionFilters = struct {
     /// Filter focusing on a certain area of the frame. Uses a `BoundingBox` object
     /// to set the region
     /// of the screen.
-    regions_of_interest: ?[]const RegionOfInterest,
+    regions_of_interest: ?[]const RegionOfInterest = null,
 
     /// Filters focusing on qualities of the text, such as confidence or size.
-    word_filter: ?DetectionFilter,
+    word_filter: ?DetectionFilter = null,
 
     pub const json_field_names = .{
         .regions_of_interest = "RegionsOfInterest",

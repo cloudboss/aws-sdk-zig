@@ -9,8 +9,8 @@ pub const Signer = struct {
     /// signed cookies. If the Amazon Web Services account that owns the key pairs
     /// is the same account that owns the CloudFront distribution, the value of this
     /// field is `self`.
-    aws_account_number: ?[]const u8,
+    aws_account_number: ?[]const u8 = null,
 
     /// A list of CloudFront key pair identifiers.
-    key_pair_ids: ?KeyPairIds,
+    key_pair_ids: ?KeyPairIds = null,
 };

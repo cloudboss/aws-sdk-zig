@@ -43,11 +43,11 @@ pub const H265Settings = struct {
     /// Quantization, and Flicker Adaptive Quantization, to further control the
     /// quantization filter. Set Adaptive Quantization to Off to apply no
     /// quantization to your output.
-    adaptive_quantization: ?H265AdaptiveQuantization,
+    adaptive_quantization: ?H265AdaptiveQuantization = null,
 
     /// Enables Alternate Transfer Function SEI message for outputs using Hybrid Log
     /// Gamma (HLG) Electro-Optical Transfer Function (EOTF).
-    alternate_transfer_function_sei: ?H265AlternateTransferFunctionSei,
+    alternate_transfer_function_sei: ?H265AlternateTransferFunctionSei = null,
 
     /// The Bandwidth reduction filter increases the video quality of your output
     /// relative to its bitrate. Use to lower the bitrate of your constant quality
@@ -57,21 +57,21 @@ pub const H265Settings = struct {
     /// your input is low quality or noisy. Outputs that use this feature incur
     /// pro-tier pricing. When you include Bandwidth reduction filter, you cannot
     /// include the Noise reducer preprocessor.
-    bandwidth_reduction_filter: ?BandwidthReductionFilter,
+    bandwidth_reduction_filter: ?BandwidthReductionFilter = null,
 
     /// Specify the average bitrate in bits per second. Required for VBR and CBR.
     /// For MS Smooth outputs, bitrates must be unique when rounded down to the
     /// nearest multiple of 1000.
-    bitrate: ?i32,
+    bitrate: ?i32 = null,
 
     /// H.265 Level.
-    codec_level: ?H265CodecLevel,
+    codec_level: ?H265CodecLevel = null,
 
     /// Represents the Profile and Tier, per the HEVC (H.265) specification.
     /// Selections are grouped as [Profile] / [Tier], so "Main/High" represents Main
     /// Profile with High Tier. 4:2:2 profiles are only available with the HEVC
     /// 4:2:2 License.
-    codec_profile: ?H265CodecProfile,
+    codec_profile: ?H265CodecProfile = null,
 
     /// Use Deblocking to improve the video quality of your output by smoothing the
     /// edges of macroblock artifacts created during video compression. To reduce
@@ -79,7 +79,7 @@ pub const H265Settings = struct {
     /// Keep the default value, Enabled. To not apply any deblocking: Choose
     /// Disabled. Visible block edge artifacts might appear in the output,
     /// especially at lower bitrates.
-    deblocking: ?H265Deblocking,
+    deblocking: ?H265Deblocking = null,
 
     /// Specify whether to allow the number of B-frames in your output GOP structure
     /// to vary or not depending on your input video content. To improve the
@@ -89,14 +89,14 @@ pub const H265Settings = struct {
     /// number of B- frames is limited by the value that you choose for B-frames
     /// between reference frames. To use the same number B-frames for all types of
     /// content: Choose Static.
-    dynamic_sub_gop: ?H265DynamicSubGop,
+    dynamic_sub_gop: ?H265DynamicSubGop = null,
 
     /// Optionally include or suppress markers at the end of your output that signal
     /// the end of the video stream. To include end of stream markers: Leave blank
     /// or keep the default value, Include. To not include end of stream markers:
     /// Choose Suppress. This is useful when your output will be inserted into
     /// another stream.
-    end_of_stream_markers: ?H265EndOfStreamMarkers,
+    end_of_stream_markers: ?H265EndOfStreamMarkers = null,
 
     /// Enable this setting to have the encoder reduce I-frame pop. I-frame pop
     /// appears as a visual flicker that can arise when the encoder saves bits by
@@ -105,7 +105,7 @@ pub const H265Settings = struct {
     /// macroblocks slightly more often to smooth out the flicker. This setting is
     /// disabled by default. Related setting: In addition to enabling this setting,
     /// you must also set adaptiveQuantization to a value other than Off.
-    flicker_adaptive_quantization: ?H265FlickerAdaptiveQuantization,
+    flicker_adaptive_quantization: ?H265FlickerAdaptiveQuantization = null,
 
     /// Use the Framerate setting to specify the frame rate for this output. If you
     /// want to keep the same frame rate as the input video, choose Follow source.
@@ -113,7 +113,7 @@ pub const H265Settings = struct {
     /// dropdown list or choose Custom. The framerates shown in the dropdown list
     /// are decimal approximations of fractions. If you choose Custom, specify your
     /// frame rate as a fraction.
-    framerate_control: ?H265FramerateControl,
+    framerate_control: ?H265FramerateControl = null,
 
     /// Choose the method that you want MediaConvert to use when increasing or
     /// decreasing your video's frame rate. For numerically simple conversions, such
@@ -131,7 +131,7 @@ pub const H265Settings = struct {
     /// add, or otherwise change the frame count from your input to your output.
     /// Note that since the frame count is maintained, the duration of your output
     /// will become shorter at higher frame rates and longer at lower frame rates.
-    framerate_conversion_algorithm: ?H265FramerateConversionAlgorithm,
+    framerate_conversion_algorithm: ?H265FramerateConversionAlgorithm = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -140,7 +140,7 @@ pub const H265Settings = struct {
     /// use the console for transcode jobs that use frame rate conversion, provide
     /// the value as a decimal number for Framerate. In this example, specify
     /// 23.976.
-    framerate_denominator: ?i32,
+    framerate_denominator: ?i32 = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -148,14 +148,14 @@ pub const H265Settings = struct {
     /// this example, use 24000 for the value of FramerateNumerator. When you use
     /// the console for transcode jobs that use frame rate conversion, provide the
     /// value as a decimal number for Framerate. In this example, specify 23.976.
-    framerate_numerator: ?i32,
+    framerate_numerator: ?i32 = null,
 
     /// Specify whether to allow B-frames to be referenced by other frame types. To
     /// use reference B-frames when your GOP structure has 1 or more B-frames: Leave
     /// blank or keep the default value Enabled. We recommend that you choose
     /// Enabled to help improve the video quality of your output relative to its
     /// bitrate. To not use reference B-frames: Choose Disabled.
-    gop_b_reference: ?H265GopBReference,
+    gop_b_reference: ?H265GopBReference = null,
 
     /// Specify the relative frequency of open to closed GOPs in this output. For
     /// example, if you want to allow four open GOPs and then require a closed GOP,
@@ -164,7 +164,7 @@ pub const H265Settings = struct {
     /// enable this automatic behavior, do this by keeping the default empty value.
     /// If you do explicitly specify a value, for segmented outputs, don't set this
     /// value to 0.
-    gop_closed_cadence: ?i32,
+    gop_closed_cadence: ?i32 = null,
 
     /// Use this setting only when you set GOP mode control to Specified, frames or
     /// Specified, seconds. Specify the GOP length using a whole number of frames or
@@ -174,7 +174,7 @@ pub const H265Settings = struct {
     /// size blank and set GOP mode control to Auto. If your output group specifies
     /// HLS, DASH, or CMAF, leave GOP size blank and set GOP mode control to Auto in
     /// each output in your output group.
-    gop_size: ?f64,
+    gop_size: ?f64 = null,
 
     /// Specify how the transcoder determines GOP size for this output. We recommend
     /// that you have the transcoder automatically choose this value for you based
@@ -185,20 +185,20 @@ pub const H265Settings = struct {
     /// GOP size blank in each output in your output group. To explicitly specify
     /// the GOP length, choose Specified, frames or Specified, seconds and then
     /// provide the GOP length in the related setting GOP size.
-    gop_size_units: ?H265GopSizeUnits,
+    gop_size_units: ?H265GopSizeUnits = null,
 
     /// If your downstream systems have strict buffer requirements: Specify the
     /// minimum percentage of the HRD buffer that's available at the end of each
     /// encoded video segment. For the best video quality: Set to 0 or leave blank
     /// to automatically determine the final buffer fill percentage.
-    hrd_buffer_final_fill_percentage: ?i32,
+    hrd_buffer_final_fill_percentage: ?i32 = null,
 
     /// Percentage of the buffer that should initially be filled (HRD buffer model).
-    hrd_buffer_initial_fill_percentage: ?i32,
+    hrd_buffer_initial_fill_percentage: ?i32 = null,
 
     /// Size of buffer (HRD buffer model) in bits. For example, enter five megabits
     /// as 5000000.
-    hrd_buffer_size: ?i32,
+    hrd_buffer_size: ?i32 = null,
 
     /// Choose the scan line type for the output. Keep the default value,
     /// Progressive to create a progressive output, regardless of the scan type of
@@ -211,11 +211,11 @@ pub const H265Settings = struct {
     /// interlaced with the same polarity as the source. If the source is
     /// progressive, the output will be interlaced with top field bottom field
     /// first, depending on which of the Follow options you choose.
-    interlace_mode: ?H265InterlaceMode,
+    interlace_mode: ?H265InterlaceMode = null,
 
     /// Maximum bitrate in bits/second. For example, enter five megabits per second
     /// as 5000000. Required when Rate control mode is QVBR.
-    max_bitrate: ?i32,
+    max_bitrate: ?i32 = null,
 
     /// Specify the minimum number of frames allowed between two IDR-frames in your
     /// output. This includes frames created at the start of a GOP or a scene
@@ -234,33 +234,33 @@ pub const H265Settings = struct {
     /// requirements. To disable GOP size variance: Enter 0. MediaConvert will only
     /// create IDR-frames at the start of your output's cadence-driven GOP. Use when
     /// your downstream systems require a regular GOP size.
-    min_i_interval: ?i32,
+    min_i_interval: ?i32 = null,
 
     /// If you are setting up the picture as a tile, you must set this to
     /// "disabled". In all other configurations, you typically enter "enabled".
-    mv_over_picture_boundaries: ?H265MvOverPictureBoundaries,
+    mv_over_picture_boundaries: ?H265MvOverPictureBoundaries = null,
 
     /// If you are setting up the picture as a tile, you must set this to
     /// "disabled". In other configurations, you typically enter "enabled".
-    mv_temporal_predictor: ?H265MvTemporalPredictor,
+    mv_temporal_predictor: ?H265MvTemporalPredictor = null,
 
     /// Specify the number of B-frames between reference frames in this output. For
     /// the best video quality: Leave blank. MediaConvert automatically determines
     /// the number of B-frames to use based on the characteristics of your input
     /// video. To manually specify the number of B-frames between reference frames:
     /// Enter an integer from 0 to 7.
-    number_b_frames_between_reference_frames: ?i32,
+    number_b_frames_between_reference_frames: ?i32 = null,
 
     /// Number of reference frames to use. The encoder may use more than requested
     /// if using B-frames and/or interlaced encoding.
-    number_reference_frames: ?i32,
+    number_reference_frames: ?i32 = null,
 
     /// Optional. Specify how the service determines the pixel aspect ratio (PAR)
     /// for this output. The default behavior, Follow source, uses the PAR from your
     /// input video for your output. To specify a different PAR, choose any value
     /// other than Follow source. When you choose SPECIFIED for this setting, you
     /// must also specify values for the parNumerator and parDenominator settings.
-    par_control: ?H265ParControl,
+    par_control: ?H265ParControl = null,
 
     /// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
     /// corresponds to any value other than Follow source. When you specify an
@@ -268,7 +268,7 @@ pub const H265Settings = struct {
     /// provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen,
     /// you would specify the ratio 40:33. In this example, the value for
     /// parDenominator is 33.
-    par_denominator: ?i32,
+    par_denominator: ?i32 = null,
 
     /// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
     /// corresponds to any value other than Follow source. When you specify an
@@ -276,7 +276,7 @@ pub const H265Settings = struct {
     /// provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen,
     /// you would specify the ratio 40:33. In this example, the value for
     /// parNumerator is 40.
-    par_numerator: ?i32,
+    par_numerator: ?i32 = null,
 
     /// Optionally choose one or more per frame metric reports to generate along
     /// with your output. You can use these metrics to analyze your video output
@@ -296,24 +296,24 @@ pub const H265Settings = struct {
     /// Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     /// Quality-Defined Variable Bitrate. This option is only available when your
     /// output uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
-    per_frame_metrics: ?[]const FrameMetricType,
+    per_frame_metrics: ?[]const FrameMetricType = null,
 
     /// Optional. Use Quality tuning level to choose how you want to trade off
     /// encoding speed for output video quality. The default behavior is faster,
     /// lower quality, single-pass encoding.
-    quality_tuning_level: ?H265QualityTuningLevel,
+    quality_tuning_level: ?H265QualityTuningLevel = null,
 
     /// Settings for quality-defined variable bitrate encoding with the H.265 codec.
     /// Use these settings only when you set QVBR for Rate control mode.
-    qvbr_settings: ?H265QvbrSettings,
+    qvbr_settings: ?H265QvbrSettings = null,
 
     /// Use this setting to specify whether this output has a variable bitrate
     /// (VBR), constant bitrate (CBR) or quality-defined variable bitrate (QVBR).
-    rate_control_mode: ?H265RateControlMode,
+    rate_control_mode: ?H265RateControlMode = null,
 
     /// Specify Sample Adaptive Offset (SAO) filter strength. Adaptive mode
     /// dynamically selects best strength based on content
-    sample_adaptive_offset_filter_mode: ?H265SampleAdaptiveOffsetFilterMode,
+    sample_adaptive_offset_filter_mode: ?H265SampleAdaptiveOffsetFilterMode = null,
 
     /// Use this setting for interlaced outputs, when your output frame rate is half
     /// of your input frame rate. In this situation, choose Optimized interlacing to
@@ -327,19 +327,19 @@ pub const H265Settings = struct {
     /// Required settings: To use optimized interlacing, you must set Telecine to
     /// None or Soft. You can't use optimized interlacing for hard telecine outputs.
     /// You must also set Interlace mode to a value other than Progressive.
-    scan_type_conversion_mode: ?H265ScanTypeConversionMode,
+    scan_type_conversion_mode: ?H265ScanTypeConversionMode = null,
 
     /// Enable this setting to insert I-frames at scene changes that the service
     /// automatically detects. This improves video quality and is enabled by
     /// default. If this output uses QVBR, choose Transition detection for further
     /// video quality improvement. For more information about QVBR, see
     /// https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
-    scene_change_detect: ?H265SceneChangeDetect,
+    scene_change_detect: ?H265SceneChangeDetect = null,
 
     /// Number of slices per picture. Must be less than or equal to the number of
     /// macroblock rows for progressive pictures, and less than or equal to half the
     /// number of macroblock rows for interlaced pictures.
-    slices: ?i32,
+    slices: ?i32 = null,
 
     /// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
     /// second (fps). Enable slow PAL to create a 25 fps output. When you enable
@@ -347,7 +347,7 @@ pub const H265Settings = struct {
     /// your audio to keep it synchronized with the video. Note that enabling this
     /// setting will slightly reduce the duration of your video. Required settings:
     /// You must also set Framerate to 25.
-    slow_pal: ?H265SlowPal,
+    slow_pal: ?H265SlowPal = null,
 
     /// Keep the default value, Enabled, to adjust quantization within each frame
     /// based on spatial variation of content complexity. When you enable this
@@ -364,7 +364,7 @@ pub const H265Settings = struct {
     /// depending on your content. For homogeneous content, such as cartoons and
     /// video games, set it to Low. For content with a wider variety of textures,
     /// set it to High or Higher.
-    spatial_adaptive_quantization: ?H265SpatialAdaptiveQuantization,
+    spatial_adaptive_quantization: ?H265SpatialAdaptiveQuantization = null,
 
     /// This field applies only if the Streams > Advanced > Framerate field is set
     /// to 29.970. This field works with the Streams > Advanced > Preprocessors >
@@ -372,7 +372,7 @@ pub const H265Settings = struct {
     /// identify the scan type for the output: Progressive, Interlaced, Hard
     /// Telecine or Soft Telecine. - Hard: produces 29.97i output from 23.976 input.
     /// - Soft: produces 23.976; the player converts this output to 29.97i.
-    telecine: ?H265Telecine,
+    telecine: ?H265Telecine = null,
 
     /// Keep the default value, Enabled, to adjust quantization within each frame
     /// based on temporal variation of content complexity. When you enable this
@@ -387,7 +387,7 @@ pub const H265Settings = struct {
     /// faces, you might choose to disable this feature. Related setting: When you
     /// enable temporal quantization, adjust the strength of the filter with the
     /// setting Adaptive quantization.
-    temporal_adaptive_quantization: ?H265TemporalAdaptiveQuantization,
+    temporal_adaptive_quantization: ?H265TemporalAdaptiveQuantization = null,
 
     /// Enables temporal layer identifiers in the encoded bitstream. Up to 3 layers
     /// are supported depending on GOP structure: I- and P-frames form one layer,
@@ -397,7 +397,7 @@ pub const H265Settings = struct {
     /// with temporal IDs and with b-frames = 1 (i.e. IbPbPb display order), a
     /// decoder could decode all the frames for full frame rate output or only the I
     /// and P frames (lowest temporal layer) for a half frame rate output.
-    temporal_ids: ?H265TemporalIds,
+    temporal_ids: ?H265TemporalIds = null,
 
     /// Set this field to set up the picture as a tile. You must also set TileWidth.
     /// The tile height must result in 22 or fewer rows in the frame. The tile width
@@ -405,30 +405,30 @@ pub const H265Settings = struct {
     /// the column count and row count must be 64 or less. If the tile width and
     /// height are specified, MediaConvert will override the video codec slices
     /// field with a value that MediaConvert calculates.
-    tile_height: ?i32,
+    tile_height: ?i32 = null,
 
     /// Set to "padded" to force MediaConvert to add padding to the frame, to obtain
     /// a frame that is a whole multiple of the tile size. If you are setting up the
     /// picture as a tile, you must enter "padded". In all other configurations, you
     /// typically enter "none".
-    tile_padding: ?H265TilePadding,
+    tile_padding: ?H265TilePadding = null,
 
     /// Enable use of tiles, allowing horizontal as well as vertical subdivision of
     /// the encoded pictures.
-    tiles: ?H265Tiles,
+    tiles: ?H265Tiles = null,
 
     /// Set this field to set up the picture as a tile. See TileHeight for more
     /// information.
-    tile_width: ?i32,
+    tile_width: ?i32 = null,
 
     /// Select the tree block size used for encoding. If you enter "auto", the
     /// encoder will pick the best size. If you are setting up the picture as a
     /// tile, you must set this to 32x32. In all other configurations, you typically
     /// enter "auto".
-    tree_block_size: ?H265TreeBlockSize,
+    tree_block_size: ?H265TreeBlockSize = null,
 
     /// Inserts timecode for each frame as 4 bytes of an unregistered SEI message.
-    unregistered_sei_timecode: ?H265UnregisteredSeiTimecode,
+    unregistered_sei_timecode: ?H265UnregisteredSeiTimecode = null,
 
     /// If the location of parameter set NAL units doesn't matter in your workflow,
     /// ignore this setting. Use this setting only with CMAF or DASH outputs, or
@@ -441,7 +441,7 @@ pub const H265Settings = struct {
     /// downstream systems and video players. The service defaults to marking your
     /// output as HEV1. For these outputs, the service writes parameter set NAL
     /// units directly into the samples.
-    write_mp_4_packaging_type: ?H265WriteMp4PackagingType,
+    write_mp_4_packaging_type: ?H265WriteMp4PackagingType = null,
 
     pub const json_field_names = .{
         .adaptive_quantization = "AdaptiveQuantization",

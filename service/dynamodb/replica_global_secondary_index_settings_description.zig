@@ -17,24 +17,24 @@ pub const ReplicaGlobalSecondaryIndexSettingsDescription = struct {
     /// * `DELETING` - The global secondary index is being deleted.
     ///
     /// * `ACTIVE` - The global secondary index is ready for use.
-    index_status: ?IndexStatus,
+    index_status: ?IndexStatus = null,
 
     /// Auto scaling settings for a global secondary index replica's read capacity
     /// units.
-    provisioned_read_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription,
+    provisioned_read_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription = null,
 
     /// The maximum number of strongly consistent reads consumed per second before
     /// DynamoDB
     /// returns a `ThrottlingException`.
-    provisioned_read_capacity_units: ?i64,
+    provisioned_read_capacity_units: ?i64 = null,
 
     /// Auto scaling settings for a global secondary index replica's write capacity
     /// units.
-    provisioned_write_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription,
+    provisioned_write_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription = null,
 
     /// The maximum number of writes consumed per second before DynamoDB returns a
     /// `ThrottlingException`.
-    provisioned_write_capacity_units: ?i64,
+    provisioned_write_capacity_units: ?i64 = null,
 
     pub const json_field_names = .{
         .index_name = "IndexName",

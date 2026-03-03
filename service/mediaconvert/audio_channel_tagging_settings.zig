@@ -12,7 +12,7 @@ pub const AudioChannelTaggingSettings = struct {
     /// left and a right channel, enter Left (L) for the first channel and Right (R)
     /// for the second. If your output has multiple single-channel audio tracks,
     /// enter a single channel layout tag for each track.
-    channel_tag: ?AudioChannelTag,
+    channel_tag: ?AudioChannelTag = null,
 
     /// Specify the QuickTime audio channel layout tags for the audio channels in
     /// this audio track. Enter channel layout tags in the same order as your
@@ -20,7 +20,7 @@ pub const AudioChannelTaggingSettings = struct {
     /// left and a right channel, enter Left (L) for the first channel and Right (R)
     /// for the second. If your output has multiple single-channel audio tracks,
     /// enter a single channel layout tag for each track.
-    channel_tags: ?[]const AudioChannelTag,
+    channel_tags: ?[]const AudioChannelTag = null,
 
     pub const json_field_names = .{
         .channel_tag = "ChannelTag",

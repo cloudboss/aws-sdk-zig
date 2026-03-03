@@ -7,13 +7,13 @@ pub const MergeMetadata = struct {
     is_merged: bool = false,
 
     /// The commit ID for the merge commit, if any.
-    merge_commit_id: ?[]const u8,
+    merge_commit_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the user who merged the branches.
-    merged_by: ?[]const u8,
+    merged_by: ?[]const u8 = null,
 
     /// The merge strategy used in the merge.
-    merge_option: ?MergeOptionTypeEnum,
+    merge_option: ?MergeOptionTypeEnum = null,
 
     pub const json_field_names = .{
         .is_merged = "isMerged",

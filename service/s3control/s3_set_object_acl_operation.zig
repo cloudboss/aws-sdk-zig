@@ -10,5 +10,5 @@ const S3AccessControlPolicy = @import("s3_access_control_policy.zig").S3AccessCo
 /// see
 /// [PutObjectAcl](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html).
 pub const S3SetObjectAclOperation = struct {
-    access_control_policy: ?S3AccessControlPolicy,
+    access_control_policy: ?S3AccessControlPolicy = null,
 };

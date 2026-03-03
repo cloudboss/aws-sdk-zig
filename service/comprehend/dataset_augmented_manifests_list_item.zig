@@ -8,7 +8,7 @@ pub const DatasetAugmentedManifestsListItem = struct {
     /// The S3 prefix to the annotation files that are referred in the augmented
     /// manifest
     /// file.
-    annotation_data_s3_uri: ?[]const u8,
+    annotation_data_s3_uri: ?[]const u8 = null,
 
     /// The JSON attribute that contains the annotations for your training
     /// documents. The number
@@ -32,7 +32,7 @@ pub const DatasetAugmentedManifestsListItem = struct {
     ///
     /// `PLAIN_TEXT_DOCUMENT` A document type that represents any unicode text that
     /// is encoded in UTF-8.
-    document_type: ?AugmentedManifestsDocumentTypeFormat,
+    document_type: ?AugmentedManifestsDocumentTypeFormat = null,
 
     /// The Amazon S3 location of the augmented manifest file.
     s3_uri: []const u8,
@@ -40,7 +40,7 @@ pub const DatasetAugmentedManifestsListItem = struct {
     /// The S3 prefix to the source files (PDFs) that are referred to in the
     /// augmented manifest
     /// file.
-    source_documents_s3_uri: ?[]const u8,
+    source_documents_s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .annotation_data_s3_uri = "AnnotationDataS3Uri",

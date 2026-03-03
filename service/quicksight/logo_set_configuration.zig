@@ -3,7 +3,7 @@ const ImageSetConfiguration = @import("image_set_configuration.zig").ImageSetCon
 /// The logo set configuration.
 pub const LogoSetConfiguration = struct {
     /// The favicon logo.
-    favicon: ?ImageSetConfiguration,
+    favicon: ?ImageSetConfiguration = null,
 
     /// The primary logo.
     primary: ImageSetConfiguration,

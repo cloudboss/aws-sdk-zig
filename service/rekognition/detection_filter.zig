@@ -5,20 +5,20 @@ pub const DetectionFilter = struct {
     /// heights lesser than
     /// this value will be excluded from the result. Value is relative to the video
     /// frame height.
-    min_bounding_box_height: ?f32,
+    min_bounding_box_height: ?f32 = null,
 
     /// Sets the minimum width of the word bounding box. Words with bounding boxes
     /// widths lesser than
     /// this value will be excluded from the result. Value is relative to the video
     /// frame width.
-    min_bounding_box_width: ?f32,
+    min_bounding_box_width: ?f32 = null,
 
     /// Sets the confidence of word detection. Words with detection confidence below
     /// this will be
     /// excluded from the result. Values should be between 0 and 100. The default
     /// MinConfidence is
     /// 80.
-    min_confidence: ?f32,
+    min_confidence: ?f32 = null,
 
     pub const json_field_names = .{
         .min_bounding_box_height = "MinBoundingBoxHeight",

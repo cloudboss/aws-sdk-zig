@@ -31,11 +31,11 @@ pub const GameSessionPlacement = struct {
     ///
     /// When connecting to a game session that is running on a TLS-enabled fleet,
     /// you must use the DNS name, not the IP address.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// Time stamp indicating when this request was completed, canceled, or timed
     /// out.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// A set of key-value pairs that can store custom data in a game session.
     /// For example: `{"Key": "difficulty", "Value": "novice"}`.
@@ -44,42 +44,42 @@ pub const GameSessionPlacement = struct {
     /// sessions by properties. Property keys containing periods cannot be searched
     /// and will be filtered out from search results due to search index
     /// limitations.
-    game_properties: ?[]const GameProperty,
+    game_properties: ?[]const GameProperty = null,
 
     /// Identifier for the game session created by this placement request. This
     /// identifier is
     /// unique across all Regions. This value isn't final until placement status is
     /// `FULFILLED`.
-    game_session_arn: ?[]const u8,
+    game_session_arn: ?[]const u8 = null,
 
     /// A set of custom game session properties, formatted as a single string value.
     /// This data is passed to a game server process with a request to start a new
     /// game session. For more information, see [Start a game
     /// session](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession).
-    game_session_data: ?[]const u8,
+    game_session_data: ?[]const u8 = null,
 
     /// A unique identifier for the game session. This value isn't final until
     /// placement status is
     /// `FULFILLED`.
-    game_session_id: ?[]const u8,
+    game_session_id: ?[]const u8 = null,
 
     /// A descriptive label that is associated with a game session. Session names do
     /// not need to be unique.
-    game_session_name: ?[]const u8,
+    game_session_name: ?[]const u8 = null,
 
     /// A descriptive label that is associated with game session queue. Queue names
     /// must be unique within each Region.
-    game_session_queue_name: ?[]const u8,
+    game_session_queue_name: ?[]const u8 = null,
 
     /// Name of the Region where the game session created by this placement request
     /// is
     /// running. This value isn't final until placement status is `FULFILLED`.
-    game_session_region: ?[]const u8,
+    game_session_region: ?[]const u8 = null,
 
     /// The IP address of the game session. To connect to a Amazon GameLift Servers
     /// game server, an app needs both the IP address and port number. This value
     /// isn't final until placement status is `FULFILLED`.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// Information on the matchmaking process for this game. Data is in JSON
     /// syntax,
@@ -90,11 +90,11 @@ pub const GameSessionPlacement = struct {
     /// attributes and team assignments. For more details on matchmaker data, see
     /// [Match
     /// Data](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data).
-    matchmaker_data: ?[]const u8,
+    matchmaker_data: ?[]const u8 = null,
 
     /// The maximum number of players that can be connected simultaneously to the
     /// game session.
-    maximum_player_session_count: ?i32,
+    maximum_player_session_count: ?i32 = null,
 
     /// A collection of information on player sessions created in response to the
     /// game session
@@ -104,21 +104,21 @@ pub const GameSessionPlacement = struct {
     /// includes the player ID, provided in the placement request, and a
     /// corresponding player
     /// session ID.
-    placed_player_sessions: ?[]const PlacedPlayerSession,
+    placed_player_sessions: ?[]const PlacedPlayerSession = null,
 
     /// A unique identifier for a game session placement.
-    placement_id: ?[]const u8,
+    placement_id: ?[]const u8 = null,
 
     /// A set of values, expressed in milliseconds, that indicates the amount of
     /// latency that a player experiences when connected to Amazon Web Services
     /// Regions.
-    player_latencies: ?[]const PlayerLatency,
+    player_latencies: ?[]const PlayerLatency = null,
 
     /// The port number for the game session. To connect to a Amazon GameLift
     /// Servers game server, an app needs both the IP address and port number. This
     /// value isn't final until placement status is
     /// `FULFILLED`.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// An alternative priority list of locations that's included with a game
     /// session
@@ -130,12 +130,12 @@ pub const GameSessionPlacement = struct {
     /// tells Amazon GameLift Servers
     /// what action to take (if any) in the event that it failed to place a new game
     /// session.
-    priority_configuration_override: ?PriorityConfigurationOverride,
+    priority_configuration_override: ?PriorityConfigurationOverride = null,
 
     /// Time stamp indicating when this request was placed in the queue. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Current status of the game session placement request.
     ///
@@ -158,7 +158,7 @@ pub const GameSessionPlacement = struct {
     /// terminated before the placement process was completed, or an unexpected
     /// internal
     /// error.
-    status: ?GameSessionPlacementState,
+    status: ?GameSessionPlacementState = null,
 
     pub const json_field_names = .{
         .dns_name = "DnsName",

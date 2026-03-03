@@ -4,13 +4,13 @@ const RecommendationJobStatus = @import("recommendation_job_status.zig").Recomme
 /// A structure that contains a list of recommendation jobs.
 pub const InferenceRecommendationsJob = struct {
     /// A timestamp that shows when the job completed.
-    completion_time: ?i64,
+    completion_time: ?i64 = null,
 
     /// A timestamp that shows when the job was created.
     creation_time: i64,
 
     /// If the job fails, provides information why the job failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the recommendation job.
     job_arn: []const u8,
@@ -28,10 +28,10 @@ pub const InferenceRecommendationsJob = struct {
     last_modified_time: i64,
 
     /// The name of the created model.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of a versioned model package.
-    model_package_version_arn: ?[]const u8,
+    model_package_version_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker
     /// to perform tasks on your behalf.
@@ -40,7 +40,7 @@ pub const InferenceRecommendationsJob = struct {
     /// The Amazon Simple Storage Service (Amazon S3) path where the sample payload
     /// is stored. This path must point to a single gzip compressed tar archive
     /// (.tar.gz suffix).
-    sample_payload_url: ?[]const u8,
+    sample_payload_url: ?[]const u8 = null,
 
     /// The status of the job.
     status: RecommendationJobStatus,

@@ -2,10 +2,10 @@
 /// represents a unit of work or an operation performed by a service.
 pub const Span = struct {
     /// The span document.
-    document: ?[]const u8,
+    document: ?[]const u8 = null,
 
     /// The span ID.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .document = "Document",

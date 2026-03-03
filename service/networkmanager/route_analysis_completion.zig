@@ -32,15 +32,15 @@ pub const RouteAnalysisCompletion = struct {
     ///
     /// * `TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND` - The state of the route table
     ///   association is not associated.
-    reason_code: ?RouteAnalysisCompletionReasonCode,
+    reason_code: ?RouteAnalysisCompletionReasonCode = null,
 
     /// Additional information about the path. Available only if a connection is not
     /// found.
-    reason_context: ?[]const aws.map.StringMapEntry,
+    reason_context: ?[]const aws.map.StringMapEntry = null,
 
     /// The result of the analysis. If the status is `NOT_CONNECTED`, check the
     /// reason code.
-    result_code: ?RouteAnalysisCompletionResultCode,
+    result_code: ?RouteAnalysisCompletionResultCode = null,
 
     pub const json_field_names = .{
         .reason_code = "ReasonCode",

@@ -10,20 +10,20 @@ pub const PushNotificationTemplateRequest = struct {
     /// The message template to use for the ADM (Amazon Device Messaging) channel.
     /// This message template overrides the default template for push notification
     /// channels (DefaultPushNotificationTemplate).
-    adm: ?AndroidPushNotificationTemplate,
+    adm: ?AndroidPushNotificationTemplate = null,
 
     /// The message template to use for the APNs (Apple Push Notification service)
     /// channel. This message template overrides the default template for push
     /// notification channels (DefaultPushNotificationTemplate).
-    apns: ?APNSPushNotificationTemplate,
+    apns: ?APNSPushNotificationTemplate = null,
 
     /// The message template to use for the Baidu (Baidu Cloud Push) channel. This
     /// message template overrides the default template for push notification
     /// channels (DefaultPushNotificationTemplate).
-    baidu: ?AndroidPushNotificationTemplate,
+    baidu: ?AndroidPushNotificationTemplate = null,
 
     /// The default message template to use for push notification channels.
-    default: ?DefaultPushNotificationTemplate,
+    default: ?DefaultPushNotificationTemplate = null,
 
     /// A JSON object that specifies the default values to use for message variables
     /// in the message template. This object is a set of key-value pairs. Each key
@@ -31,20 +31,20 @@ pub const PushNotificationTemplateRequest = struct {
     /// the default value for that variable. When you create a message that's based
     /// on the template, you can override these defaults with message-specific and
     /// address-specific variables and values.
-    default_substitutions: ?[]const u8,
+    default_substitutions: ?[]const u8 = null,
 
     /// The message template to use for the GCM channel, which is used to send
     /// notifications through the Firebase Cloud Messaging (FCM), formerly Google
     /// Cloud Messaging (GCM), service. This message template overrides the default
     /// template for push notification channels (DefaultPushNotificationTemplate).
-    gcm: ?AndroidPushNotificationTemplate,
+    gcm: ?AndroidPushNotificationTemplate = null,
 
     /// The unique identifier for the recommender model to use for the message
     /// template. Amazon Pinpoint uses this value to determine how to retrieve and
     /// process data from a recommender model when it sends messages that use the
     /// template, if the template contains message variables for recommendation
     /// data.
-    recommender_id: ?[]const u8,
+    recommender_id: ?[]const u8 = null,
 
     /// As of **22-05-2023** tags has been deprecated for update operations. After
     /// this date any value in tags is not processed and an error code is not
@@ -54,10 +54,10 @@ pub const PushNotificationTemplateRequest = struct {
     /// (Deprecated) A string-to-string map of key-value pairs that defines the tags
     /// to associate with the message template. Each tag consists of a required tag
     /// key and an associated tag value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// A custom description of the message template.
-    template_description: ?[]const u8,
+    template_description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .adm = "ADM",

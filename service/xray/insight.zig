@@ -9,43 +9,43 @@ const AnomalousService = @import("anomalous_service.zig").AnomalousService;
 /// tracks emergent issues within your applications.
 pub const Insight = struct {
     /// The categories that label and describe the type of insight.
-    categories: ?[]const InsightCategory,
+    categories: ?[]const InsightCategory = null,
 
     /// The impact statistics of the client side service. This includes the number
     /// of requests to the client service
     /// and whether the requests were faults or okay.
-    client_request_impact_statistics: ?RequestImpactStatistics,
+    client_request_impact_statistics: ?RequestImpactStatistics = null,
 
     /// The time, in Unix seconds, at which the insight ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the group that the insight belongs to.
-    group_arn: ?[]const u8,
+    group_arn: ?[]const u8 = null,
 
     /// The name of the group that the insight belongs to.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// The insights unique identifier.
-    insight_id: ?[]const u8,
+    insight_id: ?[]const u8 = null,
 
-    root_cause_service_id: ?ServiceId,
+    root_cause_service_id: ?ServiceId = null,
 
     /// The impact statistics of the root cause service. This includes the number of
     /// requests to the client service
     /// and whether the requests were faults or okay.
-    root_cause_service_request_impact_statistics: ?RequestImpactStatistics,
+    root_cause_service_request_impact_statistics: ?RequestImpactStatistics = null,
 
     /// The time, in Unix seconds, at which the insight began.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The current state of the insight.
-    state: ?InsightState,
+    state: ?InsightState = null,
 
     /// A brief description of the insight.
-    summary: ?[]const u8,
+    summary: ?[]const u8 = null,
 
     /// The service within the insight that is most impacted by the incident.
-    top_anomalous_services: ?[]const AnomalousService,
+    top_anomalous_services: ?[]const AnomalousService = null,
 
     pub const json_field_names = .{
         .categories = "Categories",

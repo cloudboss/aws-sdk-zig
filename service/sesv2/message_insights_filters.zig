@@ -18,19 +18,19 @@ const EngagementEventType = @import("engagement_event_type.zig").EngagementEvent
 /// If no wildcard character is present, an exact match is performed.
 pub const MessageInsightsFilters = struct {
     /// The recipient's email address.
-    destination: ?[]const []const u8,
+    destination: ?[]const []const u8 = null,
 
     /// The from address used to send the message.
-    from_email_address: ?[]const []const u8,
+    from_email_address: ?[]const []const u8 = null,
 
     /// The recipient's ISP (e.g., `Gmail`, `Yahoo`,
     /// etc.).
-    isp: ?[]const []const u8,
+    isp: ?[]const []const u8 = null,
 
     /// The last delivery-related event for the email, where the ordering is as
     /// follows:
     /// `SEND` < `BOUNCE` < `DELIVERY` < `COMPLAINT`.
-    last_delivery_event: ?[]const DeliveryEventType,
+    last_delivery_event: ?[]const DeliveryEventType = null,
 
     /// The last engagement-related event for the email, where the ordering is as
     /// follows:
@@ -39,10 +39,10 @@ pub const MessageInsightsFilters = struct {
     /// Engagement events are only available if [Engagement
     /// tracking](https://docs.aws.amazon.com/ses/latest/dg/vdm-settings.html)
     /// is enabled.
-    last_engagement_event: ?[]const EngagementEventType,
+    last_engagement_event: ?[]const EngagementEventType = null,
 
     /// The subject line of the message.
-    subject: ?[]const []const u8,
+    subject: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

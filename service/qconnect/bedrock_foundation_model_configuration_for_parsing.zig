@@ -6,7 +6,7 @@ pub const BedrockFoundationModelConfigurationForParsing = struct {
     model_arn: []const u8,
 
     /// Instructions for interpreting the contents of a document.
-    parsing_prompt: ?ParsingPrompt,
+    parsing_prompt: ?ParsingPrompt = null,
 
     pub const json_field_names = .{
         .model_arn = "modelArn",

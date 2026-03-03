@@ -2,10 +2,10 @@
 /// EC2 instance uses.
 pub const AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails = struct {
     /// The maximum amount of total local storage, in GB.
-    max: ?f64,
+    max: ?f64 = null,
 
     /// The minimum amount of total local storage, in GB.
-    min: ?f64,
+    min: ?f64 = null,
 
     pub const json_field_names = .{
         .max = "Max",

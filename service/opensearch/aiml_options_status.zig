@@ -4,9 +4,9 @@ const OptionStatus = @import("option_status.zig").OptionStatus;
 /// The status of machine learning options on the specified domain.
 pub const AIMLOptionsStatus = struct {
     /// Machine learning options on the specified domain.
-    options: ?AIMLOptionsOutput,
+    options: ?AIMLOptionsOutput = null,
 
-    status: ?OptionStatus,
+    status: ?OptionStatus = null,
 
     pub const json_field_names = .{
         .options = "Options",

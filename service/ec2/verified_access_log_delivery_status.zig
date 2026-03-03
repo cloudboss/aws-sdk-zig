@@ -3,8 +3,8 @@ const VerifiedAccessLogDeliveryStatusCode = @import("verified_access_log_deliver
 /// Describes a log delivery status.
 pub const VerifiedAccessLogDeliveryStatus = struct {
     /// The status code.
-    code: ?VerifiedAccessLogDeliveryStatusCode,
+    code: ?VerifiedAccessLogDeliveryStatusCode = null,
 
     /// The status message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

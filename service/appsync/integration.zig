@@ -6,7 +6,7 @@ pub const Integration = struct {
     data_source_name: []const u8,
 
     /// The configuration for a Lambda data source.
-    lambda_config: ?LambdaConfig,
+    lambda_config: ?LambdaConfig = null,
 
     pub const json_field_names = .{
         .data_source_name = "dataSourceName",

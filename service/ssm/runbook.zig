@@ -14,43 +14,43 @@ pub const Runbook = struct {
     document_name: []const u8,
 
     /// The version of the Automation runbook used in a runbook workflow.
-    document_version: ?[]const u8,
+    document_version: ?[]const u8 = null,
 
     /// The `MaxConcurrency` value specified by the user when the operation started,
     /// indicating the maximum number of resources that the runbook operation can
     /// run on at the same
     /// time.
-    max_concurrency: ?[]const u8,
+    max_concurrency: ?[]const u8 = null,
 
     /// The `MaxErrors` value specified by the user when the execution started,
     /// indicating the maximum number of errors that can occur during the operation
     /// before the updates
     /// are stopped or rolled back.
-    max_errors: ?[]const u8,
+    max_errors: ?[]const u8 = null,
 
     /// The key-value map of execution parameters, which were supplied when calling
     /// `StartChangeRequestExecution`.
-    parameters: ?[]const aws.map.MapEntry([]const []const u8),
+    parameters: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// Information about the Amazon Web Services Regions and Amazon Web Services
     /// accounts targeted by the current Runbook
     /// operation.
-    target_locations: ?[]const TargetLocation,
+    target_locations: ?[]const TargetLocation = null,
 
     /// A key-value mapping of runbook parameters to target resources. Both Targets
     /// and TargetMaps
     /// can't be specified together.
-    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8),
+    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8) = null,
 
     /// The name of the parameter used as the target resource for the
     /// rate-controlled
     /// runbook workflow. Required if you specify `Targets`.
-    target_parameter_name: ?[]const u8,
+    target_parameter_name: ?[]const u8 = null,
 
     /// A key-value mapping to target resources that the runbook operation performs
     /// tasks on.
     /// Required if you specify `TargetParameterName`.
-    targets: ?[]const Target,
+    targets: ?[]const Target = null,
 
     pub const json_field_names = .{
         .document_name = "DocumentName",

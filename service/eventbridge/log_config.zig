@@ -14,14 +14,14 @@ pub const LogConfig = struct {
     ///
     /// For more information, see [Including detail data in event bus
     /// logs](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html#eb-event-logs-data) in the *EventBridge User Guide*.
-    include_detail: ?IncludeDetail,
+    include_detail: ?IncludeDetail = null,
 
     /// The level of logging detail to include. This applies to all log destinations
     /// for the event bus.
     ///
     /// For more information, see [Specifying event bus log
     /// level](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html#eb-event-bus-logs-level) in the *EventBridge User Guide*.
-    level: ?Level,
+    level: ?Level = null,
 
     pub const json_field_names = .{
         .include_detail = "IncludeDetail",

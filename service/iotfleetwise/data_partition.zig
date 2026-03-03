@@ -20,7 +20,7 @@ pub const DataPartition = struct {
     storage_options: DataPartitionStorageOptions,
 
     /// The upload options for the data partition.
-    upload_options: ?DataPartitionUploadOptions,
+    upload_options: ?DataPartitionUploadOptions = null,
 
     pub const json_field_names = .{
         .id = "id",

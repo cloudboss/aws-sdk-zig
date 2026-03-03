@@ -2,13 +2,13 @@
 /// details, and a revision.
 pub const ResourcePolicy = struct {
     /// The resource policy formatted in JSON.
-    document: ?[]const u8,
+    document: ?[]const u8 = null,
 
     /// The ARN of the resource associated with the resource policy
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The current revision of the resource policy.
-    revision: ?[]const u8,
+    revision: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .document = "document",

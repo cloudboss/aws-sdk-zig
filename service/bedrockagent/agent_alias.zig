@@ -9,7 +9,7 @@ pub const AgentAlias = struct {
     agent_alias_arn: []const u8,
 
     /// Contains details about the history of the alias.
-    agent_alias_history_events: ?[]const AgentAliasHistoryEvent,
+    agent_alias_history_events: ?[]const AgentAliasHistoryEvent = null,
 
     /// The unique identifier of the alias of the agent.
     agent_alias_id: []const u8,
@@ -36,24 +36,24 @@ pub const AgentAlias = struct {
     /// value is `ACCEPT_INVOCATIONS`. If the agent alias is paused, the value is
     /// `REJECT_INVOCATIONS`. Use the `UpdateAgentAlias` operation to change the
     /// invocation state.
-    alias_invocation_state: ?AliasInvocationState,
+    alias_invocation_state: ?AliasInvocationState = null,
 
     /// A unique, case-sensitive identifier to ensure that the API request completes
     /// no more than one time. If this token matches a previous request, Amazon
     /// Bedrock ignores the request, but does not return an error. For more
     /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The time at which the alias of the agent was created.
     created_at: i64,
 
     /// The description of the alias of the agent.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information on the failure of Provisioned Throughput assigned to an agent
     /// alias.
-    failure_reasons: ?[]const []const u8,
+    failure_reasons: ?[]const []const u8 = null,
 
     /// Contains details about the routing configuration of the alias.
     routing_configuration: []const AgentAliasRoutingConfigurationListItem,

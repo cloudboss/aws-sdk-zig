@@ -7,10 +7,10 @@ pub const PrincipalGroup = struct {
     access: ReadAccessType,
 
     /// The type of group.
-    membership_type: ?MembershipType,
+    membership_type: ?MembershipType = null,
 
     /// The name of the group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access = "access",

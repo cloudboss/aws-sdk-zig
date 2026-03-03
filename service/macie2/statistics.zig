@@ -2,10 +2,10 @@
 pub const Statistics = struct {
     /// The approximate number of objects that the job has yet to process during its
     /// current run.
-    approximate_number_of_objects_to_process: ?f64,
+    approximate_number_of_objects_to_process: ?f64 = null,
 
     /// The number of times that the job has run.
-    number_of_runs: ?f64,
+    number_of_runs: ?f64 = null,
 
     pub const json_field_names = .{
         .approximate_number_of_objects_to_process = "approximateNumberOfObjectsToProcess",

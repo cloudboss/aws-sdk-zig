@@ -17,7 +17,7 @@ pub const ReferenceDataSource = struct {
     /// An Amazon Kinesis Analytics application loads reference data only once. If
     /// the data changes, you call the `UpdateApplication` operation to trigger
     /// reloading of data into your application.
-    s3_reference_data_source: ?S3ReferenceDataSource,
+    s3_reference_data_source: ?S3ReferenceDataSource = null,
 
     /// Name of the in-application table to create.
     table_name: []const u8,

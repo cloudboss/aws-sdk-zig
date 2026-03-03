@@ -4,7 +4,7 @@ const ConfigurationRecorderFilterName = @import("configuration_recorder_filter_n
 pub const ConfigurationRecorderFilter = struct {
     /// The name of the type of filter. Currently, only `recordingScope` is
     /// supported.
-    filter_name: ?ConfigurationRecorderFilterName,
+    filter_name: ?ConfigurationRecorderFilterName = null,
 
     /// The value of the filter. For `recordingScope`, valid values include:
     /// `INTERNAL` and `PAID`.
@@ -14,7 +14,7 @@ pub const ConfigurationRecorderFilter = struct {
     ///
     /// `PAID` indicates that the
     /// [ConfigurationItems](https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html) in scope for the configuration recorder impact the costs to your bill.
-    filter_value: ?[]const []const u8,
+    filter_value: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .filter_name = "filterName",

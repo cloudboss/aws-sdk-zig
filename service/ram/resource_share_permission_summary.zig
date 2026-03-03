@@ -6,15 +6,15 @@ const Tag = @import("tag.zig").Tag;
 pub const ResourceSharePermissionSummary = struct {
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the permission you want information about.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time when the permission was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Specifies whether the version of the managed permission used by this
     /// resource share is the default version for
     /// this managed permission.
-    default_version: ?bool,
+    default_version: ?bool = null,
 
     /// Indicates what features are available for this resource share. This
     /// parameter can have one of
@@ -45,18 +45,18 @@ pub const ResourceSharePermissionSummary = struct {
     /// the PromoteResourceShareCreatedFromPolicy and that operation
     /// is still in progress. This value changes to `STANDARD` when
     /// complete.
-    feature_set: ?PermissionFeatureSet,
+    feature_set: ?PermissionFeatureSet = null,
 
     /// Specifies whether the managed permission associated with this resource share
     /// is the default managed permission for all
     /// resources of this resource type.
-    is_resource_type_default: ?bool,
+    is_resource_type_default: ?bool = null,
 
     /// The date and time when the permission was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The name of this managed permission.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of managed permission. This can be one of the following values:
     ///
@@ -68,23 +68,23 @@ pub const ResourceSharePermissionSummary = struct {
     /// your account created this managed permission. You can associate it with your
     /// resource shares and create
     /// new versions that have different permissions.
-    permission_type: ?PermissionType,
+    permission_type: ?PermissionType = null,
 
     /// The type of resource to which this permission applies. This takes the form
     /// of:
     /// `service-code`:`resource-code`, and is case-insensitive. For
     /// example, an Amazon EC2 Subnet would be represented by the string
     /// `ec2:subnet`.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The current status of the permission.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// A list of the tag key value pairs currently attached to the permission.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The version of the permission associated with this resource share.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

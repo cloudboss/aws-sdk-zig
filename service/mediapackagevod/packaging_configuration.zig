@@ -8,26 +8,26 @@ const MssPackage = @import("mss_package.zig").MssPackage;
 /// A MediaPackage VOD PackagingConfiguration resource.
 pub const PackagingConfiguration = struct {
     /// The ARN of the PackagingConfiguration.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
-    cmaf_package: ?CmafPackage,
+    cmaf_package: ?CmafPackage = null,
 
     /// The time the PackagingConfiguration was created.
-    created_at: ?[]const u8,
+    created_at: ?[]const u8 = null,
 
-    dash_package: ?DashPackage,
+    dash_package: ?DashPackage = null,
 
-    hls_package: ?HlsPackage,
+    hls_package: ?HlsPackage = null,
 
     /// The ID of the PackagingConfiguration.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
-    mss_package: ?MssPackage,
+    mss_package: ?MssPackage = null,
 
     /// The ID of a PackagingGroup.
-    packaging_group_id: ?[]const u8,
+    packaging_group_id: ?[]const u8 = null,
 
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

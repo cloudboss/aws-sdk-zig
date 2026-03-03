@@ -6,12 +6,12 @@ const S3ContentLocation = @import("s3_content_location.zig").S3ContentLocation;
 pub const CustomArtifactConfigurationDescription = struct {
     /// `UDF` stands for user-defined functions. This type of artifact must be in an
     /// S3 bucket. A `DEPENDENCY_JAR` can be in either Maven or an S3 bucket.
-    artifact_type: ?ArtifactType,
+    artifact_type: ?ArtifactType = null,
 
     /// The parameters that are required to specify a Maven dependency.
-    maven_reference_description: ?MavenReference,
+    maven_reference_description: ?MavenReference = null,
 
-    s3_content_location_description: ?S3ContentLocation,
+    s3_content_location_description: ?S3ContentLocation = null,
 
     pub const json_field_names = .{
         .artifact_type = "ArtifactType",

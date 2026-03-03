@@ -6,10 +6,10 @@ pub const IdentityProviderSummary = struct {
     identity_provider_arn: []const u8,
 
     /// The identity provider name.
-    identity_provider_name: ?[]const u8,
+    identity_provider_name: ?[]const u8 = null,
 
     /// The identity provider type.
-    identity_provider_type: ?IdentityProviderType,
+    identity_provider_type: ?IdentityProviderType = null,
 
     pub const json_field_names = .{
         .identity_provider_arn = "identityProviderArn",

@@ -7,5 +7,5 @@ pub const DSSEKMSFilter = struct {
     /// the filter to return objects that are encrypted by the specified key. For
     /// best performance, use keys in the same Region as the S3 Batch Operations
     /// job.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 };

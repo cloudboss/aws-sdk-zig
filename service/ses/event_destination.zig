@@ -20,7 +20,7 @@ pub const EventDestination = struct {
     /// An object that contains the names, default values, and sources of the
     /// dimensions
     /// associated with an Amazon CloudWatch event destination.
-    cloud_watch_destination: ?CloudWatchDestination,
+    cloud_watch_destination: ?CloudWatchDestination = null,
 
     /// Sets whether Amazon SES publishes events to this destination when you send
     /// an email with
@@ -32,7 +32,7 @@ pub const EventDestination = struct {
     /// An object that contains the delivery stream ARN and the IAM role ARN
     /// associated with
     /// an Amazon Kinesis Firehose event destination.
-    kinesis_firehose_destination: ?KinesisFirehoseDestination,
+    kinesis_firehose_destination: ?KinesisFirehoseDestination = null,
 
     /// The type of email sending events to publish to the event destination.
     ///
@@ -72,5 +72,5 @@ pub const EventDestination = struct {
     /// An object that contains the topic ARN associated with an Amazon Simple
     /// Notification Service (Amazon SNS) event
     /// destination.
-    sns_destination: ?SNSDestination,
+    sns_destination: ?SNSDestination = null,
 };

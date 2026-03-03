@@ -12,10 +12,10 @@ pub const S3Retention = struct {
     /// The Object Lock retention mode to be applied to all objects in the Batch
     /// Operations
     /// job.
-    mode: ?S3ObjectLockRetentionMode,
+    mode: ?S3ObjectLockRetentionMode = null,
 
     /// The date when the applied Object Lock retention will expire on all objects
     /// set by the
     /// Batch Operations job.
-    retain_until_date: ?i64,
+    retain_until_date: ?i64 = null,
 };

@@ -9,15 +9,15 @@
 /// and `UpdateManagedRuleSetVersionExpiryDate`.
 pub const ManagedRuleSetSummary = struct {
     /// The Amazon Resource Name (ARN) of the entity.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A description of the set that helps with identification.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier for the managed rule set. The ID is returned in the
     /// responses to commands like `list`. You provide it to operations like `get`
     /// and `update`.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The label namespace prefix for the managed rule groups that are offered to
     /// customers from this managed rule set. All labels that are added by rules in
@@ -34,7 +34,7 @@ pub const ManagedRuleSetSummary = struct {
     ///   and the label from the rule, separated by a colon:
     ///
     /// `:`
-    label_namespace: ?[]const u8,
+    label_namespace: ?[]const u8 = null,
 
     /// A token used for optimistic locking. WAF returns a token to your `get` and
     /// `list` requests, to mark the state of the entity at the time of the request.
@@ -44,14 +44,14 @@ pub const ManagedRuleSetSummary = struct {
     /// a change has been made, the update fails with a
     /// `WAFOptimisticLockException`. If this happens, perform another `get`, and
     /// use the new token returned by that operation.
-    lock_token: ?[]const u8,
+    lock_token: ?[]const u8 = null,
 
     /// The name of the managed rule set. You use this, along with the rule set ID,
     /// to identify the rule set.
     ///
     /// This name is assigned to the corresponding managed rule group, which your
     /// customers can access and use.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "ARN",

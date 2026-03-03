@@ -14,7 +14,7 @@ pub const AssetModelHierarchyDefinition = struct {
     /// among asset model hierarchies within this asset model. For more information,
     /// see [Using external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ID to assign to the asset model hierarchy, if desired. IoT SiteWise
     /// automatically generates a unique ID for you, so this parameter is never
@@ -22,7 +22,7 @@ pub const AssetModelHierarchyDefinition = struct {
     /// However, if you prefer to supply your own ID instead, you can specify it
     /// here in UUID format.
     /// If you specify your own ID, it must be globally unique.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the asset model hierarchy definition (as specified in the
     /// [CreateAssetModel](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html) or

@@ -4,16 +4,16 @@ const MetadataValueType = @import("metadata_value_type.zig").MetadataValueType;
 /// the field that corresponds to it.
 pub const MetadataAttributeValue = struct {
     /// The value of the Boolean metadata attribute.
-    boolean_value: ?bool,
+    boolean_value: ?bool = null,
 
     /// The value of the numeric metadata attribute.
-    number_value: ?f64,
+    number_value: ?f64 = null,
 
     /// An array of strings that define the value of the metadata attribute.
-    string_list_value: ?[]const []const u8,
+    string_list_value: ?[]const []const u8 = null,
 
     /// The value of the string metadata attribute.
-    string_value: ?[]const u8,
+    string_value: ?[]const u8 = null,
 
     /// The type of the metadata attribute.
     @"type": MetadataValueType,

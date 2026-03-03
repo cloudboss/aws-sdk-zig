@@ -10,7 +10,7 @@ pub const PutPartnerEventsRequestEntry = struct {
     /// properties, EventBridge fails that entry.
     /// If you submit a request in which *none* of the entries have each of these
     /// properties, EventBridge fails the entire request.
-    detail: ?[]const u8,
+    detail: ?[]const u8 = null,
 
     /// A free-form string, with a maximum of 128 characters, used to decide what
     /// fields to expect
@@ -22,12 +22,12 @@ pub const PutPartnerEventsRequestEntry = struct {
     /// properties, EventBridge fails that entry.
     /// If you submit a request in which *none* of the entries have each of these
     /// properties, EventBridge fails the entire request.
-    detail_type: ?[]const u8,
+    detail_type: ?[]const u8 = null,
 
     /// Amazon Web Services resources, identified by Amazon Resource Name (ARN),
     /// which the event primarily concerns.
     /// Any number, including zero, may be present.
-    resources: ?[]const []const u8,
+    resources: ?[]const []const u8 = null,
 
     /// The event source that is generating the entry.
     ///
@@ -37,10 +37,10 @@ pub const PutPartnerEventsRequestEntry = struct {
     /// properties, EventBridge fails that entry.
     /// If you submit a request in which *none* of the entries have each of these
     /// properties, EventBridge fails the entire request.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     /// The date and time of the event.
-    time: ?i64,
+    time: ?i64 = null,
 
     pub const json_field_names = .{
         .detail = "Detail",

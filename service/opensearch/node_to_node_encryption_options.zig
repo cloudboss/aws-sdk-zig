@@ -3,7 +3,7 @@
 /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ntn.html).
 pub const NodeToNodeEncryptionOptions = struct {
     /// True to enable node-to-node encryption.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

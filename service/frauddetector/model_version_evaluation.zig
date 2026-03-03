@@ -3,13 +3,13 @@ const PredictionExplanations = @import("prediction_explanations.zig").Prediction
 /// The model version evalutions.
 pub const ModelVersionEvaluation = struct {
     /// The evaluation score generated for the model version.
-    evaluation_score: ?[]const u8,
+    evaluation_score: ?[]const u8 = null,
 
     /// The output variable name.
-    output_variable_name: ?[]const u8,
+    output_variable_name: ?[]const u8 = null,
 
     /// The prediction explanations generated for the model version.
-    prediction_explanations: ?PredictionExplanations,
+    prediction_explanations: ?PredictionExplanations = null,
 
     pub const json_field_names = .{
         .evaluation_score = "evaluationScore",

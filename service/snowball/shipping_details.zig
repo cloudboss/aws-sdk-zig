@@ -7,11 +7,11 @@ const ShippingOption = @import("shipping_option.zig").ShippingOption;
 pub const ShippingDetails = struct {
     /// The `Status` and `TrackingNumber` values for a Snow device being
     /// returned to Amazon Web Services for a particular job.
-    inbound_shipment: ?Shipment,
+    inbound_shipment: ?Shipment = null,
 
     /// The `Status` and `TrackingNumber` values for a Snow device being
     /// delivered to the address that you specified for a particular job.
-    outbound_shipment: ?Shipment,
+    outbound_shipment: ?Shipment = null,
 
     /// The shipping speed for a particular job. This speed doesn't dictate how soon
     /// you'll get
@@ -36,7 +36,7 @@ pub const ShippingDetails = struct {
     /// * In the United States of America (US), you have access to one-day shipping
     ///   and
     /// two-day shipping.
-    shipping_option: ?ShippingOption,
+    shipping_option: ?ShippingOption = null,
 
     pub const json_field_names = .{
         .inbound_shipment = "InboundShipment",

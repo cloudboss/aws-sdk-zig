@@ -5,7 +5,7 @@ pub const InputSource = struct {
     /// example, if an attribute has an `AttributeType` of `PHONE_NUMBER`, and the
     /// data in the input table is in a format of 1234567890, Entity Resolution will
     /// normalize this field in the output to (123)-456-7890.
-    apply_normalization: ?bool,
+    apply_normalization: ?bool = null,
 
     /// An Glue table Amazon Resource Name (ARN) for the input source table.
     input_source_arn: []const u8,

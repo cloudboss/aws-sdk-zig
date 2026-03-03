@@ -4,11 +4,11 @@ pub const AwsElbLoadBalancerHealthCheck = struct {
     /// The number of consecutive health check successes required before the
     /// instance is moved
     /// to the Healthy state.
-    healthy_threshold: ?i32,
+    healthy_threshold: ?i32 = null,
 
     /// The approximate interval, in seconds, between health checks of an individual
     /// instance.
-    interval: ?i32,
+    interval: ?i32 = null,
 
     /// The instance that is being checked. The target specifies the protocol and
     /// port. The
@@ -30,17 +30,17 @@ pub const AwsElbLoadBalancerHealthCheck = struct {
     /// `
     /// **:**/**
     /// `.
-    target: ?[]const u8,
+    target: ?[]const u8 = null,
 
     /// The amount of time, in seconds, during which no response means a failed
     /// health
     /// check.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 
     /// The number of consecutive health check failures that must occur before the
     /// instance is
     /// moved to the Unhealthy state.
-    unhealthy_threshold: ?i32,
+    unhealthy_threshold: ?i32 = null,
 
     pub const json_field_names = .{
         .healthy_threshold = "HealthyThreshold",

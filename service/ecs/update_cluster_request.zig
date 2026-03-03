@@ -7,7 +7,7 @@ pub const UpdateClusterRequest = struct {
     cluster: []const u8,
 
     /// The execute command configuration for the cluster.
-    configuration: ?ClusterConfiguration,
+    configuration: ?ClusterConfiguration = null,
 
     /// Use this parameter to set a default Service Connect namespace. After you set
     /// a default
@@ -31,10 +31,10 @@ pub const UpdateClusterRequest = struct {
     /// Service Connect. For more information, see [Service
     /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    service_connect_defaults: ?ClusterServiceConnectDefaultsRequest,
+    service_connect_defaults: ?ClusterServiceConnectDefaultsRequest = null,
 
     /// The cluster settings for your cluster.
-    settings: ?[]const ClusterSetting,
+    settings: ?[]const ClusterSetting = null,
 
     pub const json_field_names = .{
         .cluster = "cluster",

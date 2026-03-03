@@ -3,10 +3,10 @@ const ProvisionedResourceEngine = @import("provisioned_resource_engine.zig").Pro
 /// Detail data for a provisioned resource.
 pub const ProvisionedResource = struct {
     /// The provisioned resource identifier.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// The provisioned resource name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The resource provisioning engine. At this time, `CLOUDFORMATION` can be used
     /// for Amazon Web Services-managed provisioning, and `TERRAFORM` can
@@ -14,7 +14,7 @@ pub const ProvisionedResource = struct {
     ///
     /// For more information, see [Self-managed
     /// provisioning](https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self) in the *Proton User Guide*.
-    provisioning_engine: ?ProvisionedResourceEngine,
+    provisioning_engine: ?ProvisionedResourceEngine = null,
 
     pub const json_field_names = .{
         .identifier = "identifier",

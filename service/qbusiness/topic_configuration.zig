@@ -4,11 +4,11 @@ const Rule = @import("rule.zig").Rule;
 pub const TopicConfiguration = struct {
     /// A description for your topic control configuration. Use this to outline how
     /// the large language model (LLM) should use this topic control configuration.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A list of example phrases that you expect the end user to use in relation to
     /// the topic.
-    example_chat_messages: ?[]const []const u8,
+    example_chat_messages: ?[]const []const u8 = null,
 
     /// A name for your topic control configuration.
     name: []const u8,

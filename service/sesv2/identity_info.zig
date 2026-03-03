@@ -4,11 +4,11 @@ const VerificationStatus = @import("verification_status.zig").VerificationStatus
 /// Information about an email identity.
 pub const IdentityInfo = struct {
     /// The address or domain of the identity.
-    identity_name: ?[]const u8,
+    identity_name: ?[]const u8 = null,
 
     /// The email identity type. Note: the `MANAGED_DOMAIN` type is not supported
     /// for email identity types.
-    identity_type: ?IdentityType,
+    identity_type: ?IdentityType = null,
 
     /// Indicates whether or not you can send email from the identity.
     ///
@@ -35,7 +35,7 @@ pub const IdentityInfo = struct {
     ///
     /// * `NOT_STARTED` – The verification process hasn't been
     /// initiated for the identity.
-    verification_status: ?VerificationStatus,
+    verification_status: ?VerificationStatus = null,
 
     pub const json_field_names = .{
         .identity_name = "IdentityName",

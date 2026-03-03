@@ -19,7 +19,7 @@ pub const BlackFrame = struct {
     /// The default value of MaxPixelThreshold is 0.2, which maps to a
     /// max_black_pixel_value of 51 for a full range video.
     /// You can lower this threshold to be more strict on black levels.
-    max_pixel_threshold: ?f32,
+    max_pixel_threshold: ?f32 = null,
 
     /// The minimum percentage of pixels in a frame that need to have a luminance
     /// below the max_black_pixel_value for a frame to be considered
@@ -28,7 +28,7 @@ pub const BlackFrame = struct {
     /// The default value is 99, which means at least 99% of all pixels in the frame
     /// are black pixels as per the `MaxPixelThreshold`
     /// set. You can reduce this value to allow more noise on the black frame.
-    min_coverage_percentage: ?f32,
+    min_coverage_percentage: ?f32 = null,
 
     pub const json_field_names = .{
         .max_pixel_threshold = "MaxPixelThreshold",

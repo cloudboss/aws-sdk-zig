@@ -22,7 +22,7 @@ pub const AssertionRule = struct {
     name: []const u8,
 
     /// The Amazon Web Services account ID of the assertion rule owner.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The criteria that you set for specific assertion routing controls
     /// (AssertedControls) that designate how many routing control states must be ON

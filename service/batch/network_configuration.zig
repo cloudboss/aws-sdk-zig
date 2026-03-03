@@ -14,7 +14,7 @@ pub const NetworkConfiguration = struct {
     /// networking](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html) in the
     /// *Amazon Elastic Container Service Developer Guide*. The default value is
     /// "`DISABLED`".
-    assign_public_ip: ?AssignPublicIp,
+    assign_public_ip: ?AssignPublicIp = null,
 
     pub const json_field_names = .{
         .assign_public_ip = "assignPublicIp",

@@ -7,17 +7,17 @@ const UserIdentity = @import("user_identity.zig").UserIdentity;
 pub const FindingActor = struct {
     /// The domain name of the device that the entity used to perform the action on
     /// the affected resource.
-    domain_details: ?DomainDetails,
+    domain_details: ?DomainDetails = null,
 
     /// The IP address and related details about the device that the entity used to
     /// perform the action on the affected resource. The details can include
     /// information such as the owner and geographic location of the IP address.
-    ip_address_details: ?IpAddressDetails,
+    ip_address_details: ?IpAddressDetails = null,
 
     /// The type and other characteristics of the entity that performed the action
     /// on the affected resource. This value is null if the action was performed by
     /// an anonymous (unauthenticated) entity.
-    user_identity: ?UserIdentity,
+    user_identity: ?UserIdentity = null,
 
     pub const json_field_names = .{
         .domain_details = "domainDetails",

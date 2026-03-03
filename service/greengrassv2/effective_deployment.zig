@@ -38,14 +38,14 @@ pub const EffectiveDeployment = struct {
     deployment_name: []const u8,
 
     /// The description of the deployment job.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The
     /// [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IoT job that applies the deployment to target devices.
-    iot_job_arn: ?[]const u8,
+    iot_job_arn: ?[]const u8 = null,
 
     /// The ID of the IoT job that applies the deployment to target devices.
-    iot_job_id: ?[]const u8,
+    iot_job_id: ?[]const u8 = null,
 
     /// The time at which the deployment job was last modified, expressed in ISO
     /// 8601
@@ -53,12 +53,12 @@ pub const EffectiveDeployment = struct {
     modified_timestamp: i64,
 
     /// The reason code for the update, if the job was updated.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The status details that explain why a deployment has an error. This response
     /// will be null
     /// if the deployment is in a success state.
-    status_details: ?EffectiveDeploymentStatusDetails,
+    status_details: ?EffectiveDeploymentStatusDetails = null,
 
     /// The
     /// [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the target IoT thing or thing group.

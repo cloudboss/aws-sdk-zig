@@ -5,10 +5,10 @@ const StaticFileUrlSourceOptions = @import("static_file_url_source_options.zig")
 pub const StaticFileSource = struct {
     /// The structure that contains the Amazon S3 location to download the static
     /// file from.
-    s3_options: ?StaticFileS3SourceOptions,
+    s3_options: ?StaticFileS3SourceOptions = null,
 
     /// The structure that contains the URL to download the static file from.
-    url_options: ?StaticFileUrlSourceOptions,
+    url_options: ?StaticFileUrlSourceOptions = null,
 
     pub const json_field_names = .{
         .s3_options = "S3Options",

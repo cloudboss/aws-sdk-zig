@@ -9,7 +9,7 @@ pub const MediaPackageGroupSettings = struct {
     /// Parameters that apply only if the destination parameter (for the output
     /// group) specifies a channelGroup and channelName. Use of these two paramters
     /// indicates that the output group is for MediaPackage V2 (CMAF Ingest).
-    mediapackage_v2_group_settings: ?MediaPackageV2GroupSettings,
+    mediapackage_v2_group_settings: ?MediaPackageV2GroupSettings = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

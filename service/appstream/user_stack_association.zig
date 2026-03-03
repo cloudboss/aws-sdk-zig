@@ -7,7 +7,7 @@ pub const UserStackAssociation = struct {
 
     /// Specifies whether a welcome email is sent to a user after the user is
     /// created in the user pool.
-    send_email_notification: ?bool,
+    send_email_notification: ?bool = null,
 
     /// The name of the stack that is associated with the user.
     stack_name: []const u8,

@@ -7,10 +7,10 @@ pub const AssetHierarchy = struct {
     /// an asset hierarchy that already has one. For more information, see [Using
     /// external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ID of the hierarchy. This ID is a `hierarchyId`.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The hierarchy name provided in the
     /// [CreateAssetModel](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html) or [UpdateAssetModel](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)

@@ -9,7 +9,7 @@ const ServiceLevelIndicatorMetricType = @import("service_level_indicator_metric_
 pub const ServiceLevelIndicatorMetric = struct {
     /// Identifies the dependency using the `DependencyKeyAttributes` and
     /// `DependencyOperationName`.
-    dependency_config: ?DependencyConfig,
+    dependency_config: ?DependencyConfig = null,
 
     /// This is a string-to-string map that contains information about the type of
     /// object that this SLO is related to. It can include the following fields.
@@ -24,7 +24,7 @@ pub const ServiceLevelIndicatorMetric = struct {
     ///   `AWS::Resource`.
     /// * `Environment` specifies the location where this object is hosted, or what
     ///   it belongs to.
-    key_attributes: ?[]const aws.map.StringMapEntry,
+    key_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// If this SLO monitors a CloudWatch metric or the result of a CloudWatch
     /// metric math expression, this structure includes the information about that
@@ -34,11 +34,11 @@ pub const ServiceLevelIndicatorMetric = struct {
     /// If the SLO monitors either the `LATENCY` or `AVAILABILITY` metric that
     /// Application Signals collects, this field displays which of those metrics is
     /// used.
-    metric_type: ?ServiceLevelIndicatorMetricType,
+    metric_type: ?ServiceLevelIndicatorMetricType = null,
 
     /// If the SLO monitors a specific operation of the service, this field displays
     /// that operation name.
-    operation_name: ?[]const u8,
+    operation_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dependency_config = "DependencyConfig",

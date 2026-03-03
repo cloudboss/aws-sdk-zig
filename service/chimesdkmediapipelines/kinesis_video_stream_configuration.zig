@@ -25,7 +25,7 @@
 /// in the *AWS Account Management Reference Guide*.
 pub const KinesisVideoStreamConfiguration = struct {
     /// The amount of time that data is retained.
-    data_retention_in_hours: ?i32,
+    data_retention_in_hours: ?i32 = null,
 
     /// The Amazon Web Services Region of the video stream.
     region: []const u8,

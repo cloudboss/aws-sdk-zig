@@ -7,7 +7,7 @@
 /// set. Examples include UTF-8, ISO-8859-1, and Shift_JIS.
 pub const Content = struct {
     /// The character set of the content.
-    charset: ?[]const u8,
+    charset: ?[]const u8 = null,
 
     /// The textual data of the content.
     data: []const u8,

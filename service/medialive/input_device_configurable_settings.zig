@@ -11,35 +11,35 @@ pub const InputDeviceConfigurableSettings = struct {
     /// applies only to UHD devices, and only when the device is configured as the
     /// source for a MediaConnect flow. For an HD device, you configure the audio by
     /// setting up audio selectors in the channel configuration.
-    audio_channel_pairs: ?[]const InputDeviceConfigurableAudioChannelPairConfig,
+    audio_channel_pairs: ?[]const InputDeviceConfigurableAudioChannelPairConfig = null,
 
     /// Choose the codec for the video that the device produces. Only UHD devices
     /// can specify this parameter.
-    codec: ?InputDeviceCodec,
+    codec: ?InputDeviceCodec = null,
 
     /// The input source that you want to use. If the device has a source connected
     /// to only one of its input ports, or if you don't care which source the device
     /// sends, specify Auto. If the device has sources connected to both its input
     /// ports, and you want to use a specific source, specify the source.
-    configured_input: ?InputDeviceConfiguredInput,
+    configured_input: ?InputDeviceConfiguredInput = null,
 
     /// Choose the resolution of the Link device's source (HD or UHD). Make sure the
     /// resolution matches the current source from the device. This value determines
     /// MediaLive resource allocation and billing for this input. Only UHD devices
     /// can specify this parameter.
-    input_resolution: ?[]const u8,
+    input_resolution: ?[]const u8 = null,
 
     /// The Link device's buffer size (latency) in milliseconds (ms).
-    latency_ms: ?i32,
+    latency_ms: ?i32 = null,
 
     /// The maximum bitrate in bits per second. Set a value here to throttle the
     /// bitrate of the source video.
-    max_bitrate: ?i32,
+    max_bitrate: ?i32 = null,
 
     /// To attach this device to a MediaConnect flow, specify these parameters. To
     /// detach an existing flow, enter {} for the value of mediaconnectSettings.
     /// Only UHD devices can specify this parameter.
-    mediaconnect_settings: ?InputDeviceMediaConnectConfigurableSettings,
+    mediaconnect_settings: ?InputDeviceMediaConnectConfigurableSettings = null,
 
     pub const json_field_names = .{
         .audio_channel_pairs = "AudioChannelPairs",

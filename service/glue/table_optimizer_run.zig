@@ -8,7 +8,7 @@ const RetentionMetrics = @import("retention_metrics.zig").RetentionMetrics;
 /// Contains details for a table optimizer run.
 pub const TableOptimizerRun = struct {
     /// A `CompactionMetrics` object containing metrics for the optimizer run.
-    compaction_metrics: ?CompactionMetrics,
+    compaction_metrics: ?CompactionMetrics = null,
 
     /// The strategy used for the compaction run. Indicates which algorithm was
     /// applied to determine how files were selected and combined during the
@@ -32,33 +32,33 @@ pub const TableOptimizerRun = struct {
     /// simultaneously. To use this strategy, you must first define a sort order in
     /// your Iceberg table properties using the
     /// `sort_order` table property.
-    compaction_strategy: ?CompactionStrategy,
+    compaction_strategy: ?CompactionStrategy = null,
 
     /// Represents the epoch timestamp at which the compaction job ended.
-    end_timestamp: ?i64,
+    end_timestamp: ?i64 = null,
 
     /// An error that occured during the optimizer run.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// An event type representing the status of the table optimizer run.
-    event_type: ?TableOptimizerEventType,
+    event_type: ?TableOptimizerEventType = null,
 
     /// A `RunMetrics` object containing metrics for the optimizer run.
     ///
     /// This member is deprecated. See the individual metric members for compaction,
     /// retention, and orphan file deletion.
-    metrics: ?RunMetrics,
+    metrics: ?RunMetrics = null,
 
     /// An `OrphanFileDeletionMetrics` object containing metrics for the optimizer
     /// run.
-    orphan_file_deletion_metrics: ?OrphanFileDeletionMetrics,
+    orphan_file_deletion_metrics: ?OrphanFileDeletionMetrics = null,
 
     /// A `RetentionMetrics` object containing metrics for the optimizer run.
-    retention_metrics: ?RetentionMetrics,
+    retention_metrics: ?RetentionMetrics = null,
 
     /// Represents the epoch timestamp at which the compaction job was started
     /// within Lake Formation.
-    start_timestamp: ?i64,
+    start_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .compaction_metrics = "compactionMetrics",

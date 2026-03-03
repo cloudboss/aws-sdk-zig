@@ -5,7 +5,7 @@ const GlueSchema = @import("glue_schema.zig").GlueSchema;
 /// Specifies a Hudi data source that is registered in the Glue Data Catalog.
 pub const CatalogHudiSource = struct {
     /// Specifies additional connection options.
-    additional_hudi_options: ?[]const aws.map.StringMapEntry,
+    additional_hudi_options: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the database to read from.
     database: []const u8,
@@ -14,7 +14,7 @@ pub const CatalogHudiSource = struct {
     name: []const u8,
 
     /// Specifies the data schema for the Hudi source.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// The name of the table in the database to read from.
     table: []const u8,

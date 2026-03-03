@@ -5,7 +5,7 @@ const Output = @import("output.zig").Output;
 /// where streams should be distributed.
 pub const OutputGroup = struct {
     /// Custom output group name optionally defined by the user.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Settings associated with the output group.
     output_group_settings: OutputGroupSettings,

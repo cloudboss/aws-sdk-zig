@@ -5,14 +5,14 @@ const DataSetDateRangeFilterCondition = @import("data_set_date_range_filter_cond
 /// range-based filtering.
 pub const DataSetDateFilterCondition = struct {
     /// The name of the date column to filter.
-    column_name: ?[]const u8,
+    column_name: ?[]const u8 = null,
 
     /// A comparison-based filter condition for the date column.
-    comparison_filter_condition: ?DataSetDateComparisonFilterCondition,
+    comparison_filter_condition: ?DataSetDateComparisonFilterCondition = null,
 
     /// A range-based filter condition for the date column, filtering values between
     /// minimum and maximum dates.
-    range_filter_condition: ?DataSetDateRangeFilterCondition,
+    range_filter_condition: ?DataSetDateRangeFilterCondition = null,
 
     pub const json_field_names = .{
         .column_name = "ColumnName",

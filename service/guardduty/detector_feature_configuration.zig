@@ -13,13 +13,13 @@ const FeatureStatus = @import("feature_status.zig").FeatureStatus;
 /// Monitoring](https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html).
 pub const DetectorFeatureConfiguration = struct {
     /// Additional configuration for a resource.
-    additional_configuration: ?[]const DetectorAdditionalConfiguration,
+    additional_configuration: ?[]const DetectorAdditionalConfiguration = null,
 
     /// The name of the feature.
-    name: ?DetectorFeature,
+    name: ?DetectorFeature = null,
 
     /// The status of the feature.
-    status: ?FeatureStatus,
+    status: ?FeatureStatus = null,
 
     pub const json_field_names = .{
         .additional_configuration = "AdditionalConfiguration",

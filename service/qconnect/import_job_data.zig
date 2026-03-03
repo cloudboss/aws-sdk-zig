@@ -9,11 +9,11 @@ pub const ImportJobData = struct {
     /// The timestamp when the import job was created.
     created_time: i64,
 
-    external_source_configuration: ?ExternalSourceConfiguration,
+    external_source_configuration: ?ExternalSourceConfiguration = null,
 
     /// The link to download the information of resource data that failed to be
     /// imported.
-    failed_record_report: ?[]const u8,
+    failed_record_report: ?[]const u8 = null,
 
     /// The identifier of the import job.
     import_job_id: []const u8,
@@ -31,7 +31,7 @@ pub const ImportJobData = struct {
     last_modified_time: i64,
 
     /// The metadata fields of the imported Amazon Q in Connect resources.
-    metadata: ?[]const aws.map.StringMapEntry,
+    metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// The status of the import job.
     status: ImportJobStatus,

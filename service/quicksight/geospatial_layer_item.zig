@@ -9,30 +9,30 @@ const Visibility = @import("visibility.zig").Visibility;
 /// The properties for a single geospatial layer.
 pub const GeospatialLayerItem = struct {
     /// A list of custom actions for a layer.
-    actions: ?[]const LayerCustomAction,
+    actions: ?[]const LayerCustomAction = null,
 
     /// The data source for the layer.
-    data_source: ?GeospatialDataSourceItem,
+    data_source: ?GeospatialDataSourceItem = null,
 
     /// The join definition properties for a layer.
-    join_definition: ?GeospatialLayerJoinDefinition,
+    join_definition: ?GeospatialLayerJoinDefinition = null,
 
     /// The label that is displayed for the layer.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// The definition properties for a layer.
-    layer_definition: ?GeospatialLayerDefinition,
+    layer_definition: ?GeospatialLayerDefinition = null,
 
     /// The ID of the layer.
     layer_id: []const u8,
 
     /// The layer type.
-    layer_type: ?GeospatialLayerType,
+    layer_type: ?GeospatialLayerType = null,
 
-    tooltip: ?TooltipOptions,
+    tooltip: ?TooltipOptions = null,
 
     /// The state of visibility for the layer.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

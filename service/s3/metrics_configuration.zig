@@ -14,7 +14,7 @@ pub const MetricsConfiguration = struct {
     /// meet the filter's criteria. A filter must be a prefix, an object tag, an
     /// access point ARN, or a
     /// conjunction (MetricsAndOperator).
-    filter: ?MetricsFilter,
+    filter: ?MetricsFilter = null,
 
     /// The ID used to identify the metrics configuration. The ID has a 64 character
     /// limit and can only

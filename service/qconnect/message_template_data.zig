@@ -10,16 +10,16 @@ const MessageTemplateSourceConfigurationSummary = @import("message_template_sour
 /// The data of a message template.
 pub const MessageTemplateData = struct {
     /// The types of attributes that the message template contains.
-    attribute_types: ?[]const MessageTemplateAttributeType,
+    attribute_types: ?[]const MessageTemplateAttributeType = null,
 
     /// The channel of the message template.
-    channel: ?[]const u8,
+    channel: ?[]const u8 = null,
 
     /// The channel subtype this message template applies to.
     channel_subtype: ChannelSubtype,
 
     /// The content of the message template.
-    content: ?MessageTemplateContentProvider,
+    content: ?MessageTemplateContentProvider = null,
 
     /// The timestamp when the message template was created.
     created_time: i64,
@@ -28,12 +28,12 @@ pub const MessageTemplateData = struct {
     /// message template. This object contains different categories of key-value
     /// pairs. Each key defines a variable or placeholder in the message template.
     /// The corresponding value defines the default value for that variable.
-    default_attributes: ?MessageTemplateAttributes,
+    default_attributes: ?MessageTemplateAttributes = null,
 
     /// The description of the message template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
-    grouping_configuration: ?GroupingConfiguration,
+    grouping_configuration: ?GroupingConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the knowledge base.
     knowledge_base_arn: []const u8,
@@ -44,7 +44,7 @@ pub const MessageTemplateData = struct {
     /// The language code value for the language in which the quick response is
     /// written. The supported language codes include `de_DE`, `en_US`, `es_ES`,
     /// `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`, `zh_CN`, `zh_TW`
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the user who last updated the message
     /// template data.
@@ -69,10 +69,10 @@ pub const MessageTemplateData = struct {
     name: []const u8,
 
     /// The source configuration summary of the message template.
-    source_configuration_summary: ?MessageTemplateSourceConfigurationSummary,
+    source_configuration_summary: ?MessageTemplateSourceConfigurationSummary = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .attribute_types = "attributeTypes",

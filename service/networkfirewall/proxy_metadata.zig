@@ -4,11 +4,11 @@
 /// proxy. You can retrieve all objects for a proxy by calling DescribeProxy.
 pub const ProxyMetadata = struct {
     /// The Amazon Resource Name (ARN) of a proxy.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The descriptive name of the proxy. You can't change the name of a proxy
     /// after you create it.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

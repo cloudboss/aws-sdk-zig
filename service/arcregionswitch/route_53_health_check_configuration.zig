@@ -3,10 +3,10 @@ const Route53ResourceRecordSet = @import("route_53_resource_record_set.zig").Rou
 /// The Amazon Route 53 health check configuration.
 pub const Route53HealthCheckConfiguration = struct {
     /// The cross account role for the configuration.
-    cross_account_role: ?[]const u8,
+    cross_account_role: ?[]const u8 = null,
 
     /// The external ID (secret key) for the configuration.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The Amazon Route 53 health check configuration hosted zone ID.
     hosted_zone_id: []const u8,
@@ -15,7 +15,7 @@ pub const Route53HealthCheckConfiguration = struct {
     record_name: []const u8,
 
     /// The Amazon Route 53 health check configuration record sets.
-    record_sets: ?[]const Route53ResourceRecordSet,
+    record_sets: ?[]const Route53ResourceRecordSet = null,
 
     /// The Amazon Route 53 health check configuration time out (in minutes).
     timeout_minutes: i32 = 60,

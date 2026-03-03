@@ -2,13 +2,13 @@
 /// is evaluated sequentially for each email.
 pub const RuleSet = struct {
     /// The last modification date of the rule set.
-    last_modification_date: ?i64,
+    last_modification_date: ?i64 = null,
 
     /// The identifier of the rule set.
-    rule_set_id: ?[]const u8,
+    rule_set_id: ?[]const u8 = null,
 
     /// A user-friendly name for the rule set.
-    rule_set_name: ?[]const u8,
+    rule_set_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .last_modification_date = "LastModificationDate",

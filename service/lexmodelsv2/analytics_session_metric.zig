@@ -24,7 +24,7 @@ pub const AnalyticsSessionMetric = struct {
     name: AnalyticsSessionMetricName,
 
     /// Specifies whether to sort the results in ascending or descending order.
-    order: ?AnalyticsSortOrder,
+    order: ?AnalyticsSortOrder = null,
 
     /// The summary statistic to calculate.
     ///

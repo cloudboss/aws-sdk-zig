@@ -2,7 +2,7 @@
 pub const ClusterParameterStatus = struct {
     /// The error that prevented the parameter from being applied to the
     /// database.
-    parameter_apply_error_description: ?[]const u8,
+    parameter_apply_error_description: ?[]const u8 = null,
 
     /// The status of the parameter that indicates whether the parameter is in sync
     /// with
@@ -32,8 +32,8 @@ pub const ClusterParameterStatus = struct {
     ///
     /// * `unknown-error`: Cannot apply the parameter change right now. The
     /// change will be applied after the cluster reboots.
-    parameter_apply_status: ?[]const u8,
+    parameter_apply_status: ?[]const u8 = null,
 
     /// The name of the parameter.
-    parameter_name: ?[]const u8,
+    parameter_name: ?[]const u8 = null,
 };

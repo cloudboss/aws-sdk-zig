@@ -10,7 +10,7 @@ pub const ScalingConfiguration = struct {
     /// If a DB cluster is paused for more than seven days, the DB cluster might be
     /// backed up with a snapshot. In this case, the DB cluster is restored when
     /// there is a request to connect to it.
-    auto_pause: ?bool,
+    auto_pause: ?bool = null,
 
     /// The maximum capacity for an Aurora DB cluster in `serverless` DB engine
     /// mode.
@@ -22,7 +22,7 @@ pub const ScalingConfiguration = struct {
     /// `64`, `192`, and `384`.
     ///
     /// The maximum capacity must be greater than or equal to the minimum capacity.
-    max_capacity: ?i32,
+    max_capacity: ?i32 = null,
 
     /// The minimum capacity for an Aurora DB cluster in `serverless` DB engine
     /// mode.
@@ -34,20 +34,20 @@ pub const ScalingConfiguration = struct {
     /// `64`, `192`, and `384`.
     ///
     /// The minimum capacity must be less than or equal to the maximum capacity.
-    min_capacity: ?i32,
+    min_capacity: ?i32 = null,
 
     /// The amount of time, in seconds, that Aurora Serverless v1 tries to find a
     /// scaling point to perform seamless scaling before enforcing the timeout
     /// action. The default is 300.
     ///
     /// Specify a value between 60 and 600 seconds.
-    seconds_before_timeout: ?i32,
+    seconds_before_timeout: ?i32 = null,
 
     /// The time, in seconds, before an Aurora DB cluster in `serverless` mode is
     /// paused.
     ///
     /// Specify a value between 300 and 86,400 seconds.
-    seconds_until_auto_pause: ?i32,
+    seconds_until_auto_pause: ?i32 = null,
 
     /// The action to take when the timeout is reached, either
     /// `ForceApplyCapacityChange` or `RollbackCapacityChange`.
@@ -63,5 +63,5 @@ pub const ScalingConfiguration = struct {
     ///
     /// For more information, see [ Autoscaling for Aurora Serverless
     /// v1](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling) in the *Amazon Aurora User Guide*.
-    timeout_action: ?[]const u8,
+    timeout_action: ?[]const u8 = null,
 };

@@ -12,7 +12,7 @@ pub const IntelligentTieringConfiguration = struct {
     /// Specifies a bucket filter. The configuration only includes objects that meet
     /// the filter's
     /// criteria.
-    filter: ?IntelligentTieringFilter,
+    filter: ?IntelligentTieringFilter = null,
 
     /// The ID used to identify the S3 Intelligent-Tiering configuration.
     id: []const u8,

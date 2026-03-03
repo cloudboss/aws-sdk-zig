@@ -7,7 +7,7 @@ pub const ServerCertificateConfig = struct {
     /// For more information, see [
     /// Server certificate configuration for OCSP
     /// stapling](https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html) from Amazon Web Services IoT Core Developer Guide.
-    enable_ocsp_check: ?bool,
+    enable_ocsp_check: ?bool = null,
 
     /// The Amazon Resource Name (ARN) for an X.509 certificate stored in Amazon Web
     /// Services Certificate
@@ -20,7 +20,7 @@ pub const ServerCertificateConfig = struct {
     /// is provided or not. The certificate must be in the same Amazon Web Services
     /// account and region as the
     /// domain configuration.
-    ocsp_authorized_responder_arn: ?[]const u8,
+    ocsp_authorized_responder_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for a Lambda function that acts as a Request
     /// for Comments
@@ -38,7 +38,7 @@ pub const ServerCertificateConfig = struct {
     /// certificate OCSP for private endpoints in Amazon Web Services IoT
     /// Core](https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html#iot-custom-endpoints-cert-config-ocsp-private-endpoint.html) from the
     /// Amazon Web Services IoT Core developer guide.
-    ocsp_lambda_arn: ?[]const u8,
+    ocsp_lambda_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enable_ocsp_check = "enableOCSPCheck",

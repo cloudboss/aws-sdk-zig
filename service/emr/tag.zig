@@ -10,12 +10,12 @@ pub const Tag = struct {
     /// tag. For more
     /// information, see
     /// [Tag](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// A user-defined value, which is optional in a tag. For more information, see
     /// [Tag
     /// Clusters](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

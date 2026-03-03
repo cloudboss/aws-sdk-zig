@@ -5,15 +5,15 @@ const MalwareScanner = @import("malware_scanner.zig").MalwareScanner;
 pub const ScanSetting = struct {
     /// The malware scanner to use for scanning. Currently only `GUARDDUTY` is
     /// supported.
-    malware_scanner: ?MalwareScanner,
+    malware_scanner: ?MalwareScanner = null,
 
     /// An array of resource types to be scanned for malware.
-    resource_types: ?[]const []const u8,
+    resource_types: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that the scanner uses to
     /// access resources; for example,
     /// `arn:aws:iam::123456789012:role/ScannerRole`.
-    scanner_role_arn: ?[]const u8,
+    scanner_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .malware_scanner = "MalwareScanner",

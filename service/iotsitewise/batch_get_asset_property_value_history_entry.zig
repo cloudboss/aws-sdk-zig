@@ -16,11 +16,11 @@ const TimeOrdering = @import("time_ordering.zig").TimeOrdering;
 /// [UpdateAssetProperty](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
 pub const BatchGetAssetPropertyValueHistoryEntry = struct {
     /// The ID of the asset in which the asset property was created.
-    asset_id: ?[]const u8,
+    asset_id: ?[]const u8 = null,
 
     /// The inclusive end of the range from which to query historical data,
     /// expressed in seconds in Unix epoch time.
-    end_date: ?i64,
+    end_date: ?i64 = null,
 
     /// The ID of the entry.
     entry_id: []const u8,
@@ -32,22 +32,22 @@ pub const BatchGetAssetPropertyValueHistoryEntry = struct {
     /// [Mapping industrial data streams to asset
     /// properties](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html) in the
     /// *IoT SiteWise User Guide*.
-    property_alias: ?[]const u8,
+    property_alias: ?[]const u8 = null,
 
     /// The ID of the asset property, in UUID format.
-    property_id: ?[]const u8,
+    property_id: ?[]const u8 = null,
 
     /// The quality by which to filter asset data.
-    qualities: ?[]const Quality,
+    qualities: ?[]const Quality = null,
 
     /// The exclusive start of the range from which to query historical data,
     /// expressed in seconds in Unix epoch time.
-    start_date: ?i64,
+    start_date: ?i64 = null,
 
     /// The chronological sorting order of the requested information.
     ///
     /// Default: `ASCENDING`
-    time_ordering: ?TimeOrdering,
+    time_ordering: ?TimeOrdering = null,
 
     pub const json_field_names = .{
         .asset_id = "assetId",

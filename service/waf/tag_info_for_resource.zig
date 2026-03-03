@@ -20,9 +20,9 @@ const Tag = @import("tag.zig").Tag;
 /// resources that you manage through AWS WAF Classic: web ACLs, rule groups,
 /// and rules.
 pub const TagInfoForResource = struct {
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
-    tag_list: ?[]const Tag,
+    tag_list: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .resource_arn = "ResourceARN",

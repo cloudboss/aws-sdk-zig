@@ -9,19 +9,19 @@ pub const SsmDocument = struct {
     action_name: []const u8,
 
     /// AWS Systems Manager Document external parameters.
-    external_parameters: ?[]const aws.map.MapEntry(SsmExternalParameter),
+    external_parameters: ?[]const aws.map.MapEntry(SsmExternalParameter) = null,
 
     /// If true, Cutover will not be enabled if the document has failed.
-    must_succeed_for_cutover: ?bool,
+    must_succeed_for_cutover: ?bool = null,
 
     /// AWS Systems Manager Document parameters.
-    parameters: ?[]const aws.map.MapEntry([]const SsmParameterStoreParameter),
+    parameters: ?[]const aws.map.MapEntry([]const SsmParameterStoreParameter) = null,
 
     /// AWS Systems Manager Document name or full ARN.
     ssm_document_name: []const u8,
 
     /// AWS Systems Manager Document timeout seconds.
-    timeout_seconds: ?i32,
+    timeout_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .action_name = "actionName",

@@ -3,7 +3,7 @@
 pub const CampaignCustomMessage = struct {
     /// The raw, JSON-formatted string to use as the payload for the message. The
     /// maximum size is 5 KB.
-    data: ?[]const u8,
+    data: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data = "Data",

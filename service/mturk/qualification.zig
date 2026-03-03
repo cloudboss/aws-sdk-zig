@@ -10,23 +10,23 @@ pub const Qualification = struct {
     /// re-granted based on a new Qualification request, GrantTime is the
     /// date and time of the last call to the AcceptQualificationRequest
     /// operation.
-    grant_time: ?i64,
+    grant_time: ?i64 = null,
 
     /// The value (score) of the Qualification, if the Qualification
     /// has an integer value.
-    integer_value: ?i32,
+    integer_value: ?i32 = null,
 
-    locale_value: ?Locale,
+    locale_value: ?Locale = null,
 
     /// The ID of the Qualification type for the Qualification.
-    qualification_type_id: ?[]const u8,
+    qualification_type_id: ?[]const u8 = null,
 
     /// The status of the Qualification. Valid values are Granted |
     /// Revoked.
-    status: ?QualificationStatus,
+    status: ?QualificationStatus = null,
 
     /// The ID of the Worker who possesses the Qualification.
-    worker_id: ?[]const u8,
+    worker_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .grant_time = "GrantTime",

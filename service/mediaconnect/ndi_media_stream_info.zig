@@ -7,26 +7,26 @@ const ScanMode = @import("scan_mode.zig").ScanMode;
 pub const NdiMediaStreamInfo = struct {
     /// The number of audio channels in the stream. Used when the `streamType` is
     /// `Audio`.
-    channels: ?i32,
+    channels: ?i32 = null,
 
     /// The codec used for the media stream. For NDI sources, use `speed-hq`.
     codec: []const u8,
 
     /// The number of video frames displayed per second. Used when the `streamType`
     /// is `Video`.
-    frame_rate: ?[]const u8,
+    frame_rate: ?[]const u8 = null,
 
     /// The width and height dimensions of the video frame in pixels. Used when the
     /// `streamType` is `Video`.
-    frame_resolution: ?FrameResolution,
+    frame_resolution: ?FrameResolution = null,
 
     /// The number of audio samples captured per second, measured in kilohertz
     /// (kHz). Used when the `streamType` is `Audio`.
-    sample_rate: ?i32,
+    sample_rate: ?i32 = null,
 
     /// The method used to display video frames. Used when the `streamType` is
     /// `Video`.
-    scan_mode: ?ScanMode,
+    scan_mode: ?ScanMode = null,
 
     /// A unique identifier for the media stream.
     stream_id: i32,

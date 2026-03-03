@@ -10,7 +10,7 @@ const SummaryRuleOption = @import("summary_rule_option.zig").SummaryRuleOption;
 /// active threat defense Amazon Web Services managed rule groups.
 pub const SummaryConfiguration = struct {
     /// Specifies the selected rule options returned by DescribeRuleGroupSummary.
-    rule_options: ?[]const SummaryRuleOption,
+    rule_options: ?[]const SummaryRuleOption = null,
 
     pub const json_field_names = .{
         .rule_options = "RuleOptions",

@@ -10,5 +10,5 @@ const S3Tag = @import("s3_tag.zig").S3Tag;
 /// see
 /// [PutObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html).
 pub const S3SetObjectTaggingOperation = struct {
-    tag_set: ?[]const S3Tag,
+    tag_set: ?[]const S3Tag = null,
 };

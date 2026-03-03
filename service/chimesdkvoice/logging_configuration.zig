@@ -3,10 +3,10 @@
 /// Specifies whether SIP message logs can be sent to Amazon CloudWatch Logs.
 pub const LoggingConfiguration = struct {
     /// Enables or disables media metrics logging.
-    enable_media_metric_logs: ?bool,
+    enable_media_metric_logs: ?bool = null,
 
     /// Boolean that enables sending SIP message logs to Amazon CloudWatch.
-    enable_sip_logs: ?bool,
+    enable_sip_logs: ?bool = null,
 
     pub const json_field_names = .{
         .enable_media_metric_logs = "EnableMediaMetricLogs",

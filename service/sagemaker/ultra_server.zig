@@ -9,23 +9,23 @@ pub const UltraServer = struct {
     availability_zone: []const u8,
 
     /// The number of instances currently available for use in this UltraServer.
-    available_instance_count: ?i32,
+    available_instance_count: ?i32 = null,
 
     /// The number of available spare instances in the UltraServer.
-    available_spare_instance_count: ?i32,
+    available_spare_instance_count: ?i32 = null,
 
     /// The number of spare instances configured for this UltraServer to provide
     /// enhanced resiliency.
-    configured_spare_instance_count: ?i32,
+    configured_spare_instance_count: ?i32 = null,
 
     /// The overall health status of the UltraServer.
-    health_status: ?UltraServerHealthStatus,
+    health_status: ?UltraServerHealthStatus = null,
 
     /// The Amazon EC2 instance type used in the UltraServer.
     instance_type: ReservedCapacityInstanceType,
 
     /// The number of instances currently in use in this UltraServer.
-    in_use_instance_count: ?i32,
+    in_use_instance_count: ?i32 = null,
 
     /// The total number of instances in this UltraServer.
     total_instance_count: i32,
@@ -38,7 +38,7 @@ pub const UltraServer = struct {
 
     /// The number of instances in this UltraServer that are currently in an
     /// unhealthy state.
-    unhealthy_instance_count: ?i32,
+    unhealthy_instance_count: ?i32 = null,
 
     pub const json_field_names = .{
         .availability_zone = "AvailabilityZone",

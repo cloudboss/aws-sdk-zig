@@ -8,31 +8,31 @@ const Status = @import("status.zig").Status;
 /// Contains a summary of a DB instance belonging to a DB cluster.
 pub const DbInstanceForClusterSummary = struct {
     /// The amount of storage allocated for your DB storage type in GiB (gibibytes).
-    allocated_storage: ?i32,
+    allocated_storage: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the DB instance.
     arn: []const u8,
 
     /// The Timestream for InfluxDB instance type to run InfluxDB on.
-    db_instance_type: ?DbInstanceType,
+    db_instance_type: ?DbInstanceType = null,
 
     /// The storage type for your DB instance.
-    db_storage_type: ?DbStorageType,
+    db_storage_type: ?DbStorageType = null,
 
     /// Specifies the deployment type if applicable.
-    deployment_type: ?DeploymentType,
+    deployment_type: ?DeploymentType = null,
 
     /// The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// The service-generated unique identifier of the DB instance.
     id: []const u8,
 
     /// Specifies the DB instance's role in the cluster.
-    instance_mode: ?InstanceMode,
+    instance_mode: ?InstanceMode = null,
 
     /// Specifies the DB instance's roles in the cluster.
-    instance_modes: ?[]const InstanceMode,
+    instance_modes: ?[]const InstanceMode = null,
 
     /// A service-generated name for the DB instance based on the customer-supplied
     /// name for the DB cluster.
@@ -41,13 +41,13 @@ pub const DbInstanceForClusterSummary = struct {
     /// Specifies whether the network type of the Timestream for InfluxDB instance
     /// is IPv4, which can communicate over IPv4 protocol only, or DUAL, which can
     /// communicate over both IPv4 and IPv6 protocols.
-    network_type: ?NetworkType,
+    network_type: ?NetworkType = null,
 
     /// The port number on which InfluxDB accepts connections.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The status of the DB instance.
-    status: ?Status,
+    status: ?Status = null,
 
     pub const json_field_names = .{
         .allocated_storage = "allocatedStorage",

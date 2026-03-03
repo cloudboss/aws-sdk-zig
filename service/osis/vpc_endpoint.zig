@@ -4,15 +4,15 @@ const VpcOptions = @import("vpc_options.zig").VpcOptions;
 /// pipelines.
 pub const VpcEndpoint = struct {
     /// The unique identifier of the endpoint.
-    vpc_endpoint_id: ?[]const u8,
+    vpc_endpoint_id: ?[]const u8 = null,
 
     /// The ID for your VPC. Amazon Web Services PrivateLink generates this value
     /// when you create a
     /// VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     /// Information about the VPC, including associated subnets and security groups.
-    vpc_options: ?VpcOptions,
+    vpc_options: ?VpcOptions = null,
 
     pub const json_field_names = .{
         .vpc_endpoint_id = "VpcEndpointId",

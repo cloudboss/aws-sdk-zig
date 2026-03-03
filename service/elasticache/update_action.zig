@@ -9,47 +9,47 @@ const UpdateActionStatus = @import("update_action_status.zig").UpdateActionStatu
 /// The status of the service update for a specific replication group
 pub const UpdateAction = struct {
     /// The ID of the cache cluster
-    cache_cluster_id: ?[]const u8,
+    cache_cluster_id: ?[]const u8 = null,
 
     /// The status of the service update on the cache node
-    cache_node_update_status: ?[]const CacheNodeUpdateStatus,
+    cache_node_update_status: ?[]const CacheNodeUpdateStatus = null,
 
     /// The Elasticache engine to which the update applies. Either Valkey, Redis OSS
     /// or Memcached.
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// The estimated length of time for the update to complete
-    estimated_update_time: ?[]const u8,
+    estimated_update_time: ?[]const u8 = null,
 
     /// The status of the service update on the node group
-    node_group_update_status: ?[]const NodeGroupUpdateStatus,
+    node_group_update_status: ?[]const NodeGroupUpdateStatus = null,
 
     /// The progress of the service update on the replication group
-    nodes_updated: ?[]const u8,
+    nodes_updated: ?[]const u8 = null,
 
     /// The ID of the replication group
-    replication_group_id: ?[]const u8,
+    replication_group_id: ?[]const u8 = null,
 
     /// The unique ID of the service update
-    service_update_name: ?[]const u8,
+    service_update_name: ?[]const u8 = null,
 
     /// The recommended date to apply the service update to ensure compliance. For
     /// information
     /// on compliance, see [Self-Service Security Updates for
     /// Compliance](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/elasticache-compliance.html#elasticache-compliance-self-service).
-    service_update_recommended_apply_by_date: ?i64,
+    service_update_recommended_apply_by_date: ?i64 = null,
 
     /// The date the update is first available
-    service_update_release_date: ?i64,
+    service_update_release_date: ?i64 = null,
 
     /// The severity of the service update
-    service_update_severity: ?ServiceUpdateSeverity,
+    service_update_severity: ?ServiceUpdateSeverity = null,
 
     /// The status of the service update
-    service_update_status: ?ServiceUpdateStatus,
+    service_update_status: ?ServiceUpdateStatus = null,
 
     /// Reflects the nature of the service update
-    service_update_type: ?ServiceUpdateType,
+    service_update_type: ?ServiceUpdateType = null,
 
     /// If yes, all nodes in the replication group have been updated by the
     /// recommended
@@ -58,14 +58,14 @@ pub const UpdateAction = struct {
     /// by the recommended apply-by date. If N/A, the replication group was created
     /// after the
     /// recommended apply-by date.
-    sla_met: ?SlaMet,
+    sla_met: ?SlaMet = null,
 
     /// The date that the service update is available to a replication group
-    update_action_available_date: ?i64,
+    update_action_available_date: ?i64 = null,
 
     /// The status of the update action
-    update_action_status: ?UpdateActionStatus,
+    update_action_status: ?UpdateActionStatus = null,
 
     /// The date when the UpdateActionStatus was last modified
-    update_action_status_modified_date: ?i64,
+    update_action_status_modified_date: ?i64 = null,
 };

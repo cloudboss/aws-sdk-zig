@@ -7,12 +7,12 @@ pub const TotalLocalStorageGBRequest = struct {
     /// The maximum total local storage in GB. Instance types with more local
     /// storage are
     /// excluded from selection.
-    max: ?f64,
+    max: ?f64 = null,
 
     /// The minimum total local storage in GB. Instance types with less local
     /// storage are
     /// excluded from selection.
-    min: ?f64,
+    min: ?f64 = null,
 
     pub const json_field_names = .{
         .max = "max",

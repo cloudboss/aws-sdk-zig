@@ -6,16 +6,16 @@ const GuardrailWordPolicyAssessment = @import("guardrail_word_policy_assessment.
 /// Assessment details of the content analyzed by Guardrails.
 pub const GuardrailAssessment = struct {
     /// Content policy details of the Guardrail.
-    content_policy: ?GuardrailContentPolicyAssessment,
+    content_policy: ?GuardrailContentPolicyAssessment = null,
 
     /// Sensitive Information policy details of Guardrail.
-    sensitive_information_policy: ?GuardrailSensitiveInformationPolicyAssessment,
+    sensitive_information_policy: ?GuardrailSensitiveInformationPolicyAssessment = null,
 
     /// Topic policy details of the Guardrail.
-    topic_policy: ?GuardrailTopicPolicyAssessment,
+    topic_policy: ?GuardrailTopicPolicyAssessment = null,
 
     /// Word policy details of the Guardrail.
-    word_policy: ?GuardrailWordPolicyAssessment,
+    word_policy: ?GuardrailWordPolicyAssessment = null,
 
     pub const json_field_names = .{
         .content_policy = "contentPolicy",

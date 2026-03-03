@@ -6,19 +6,19 @@ const UpdateSlurmRestRequest = @import("update_slurm_rest_request.zig").UpdateSl
 pub const UpdateClusterSlurmConfigurationRequest = struct {
     /// The accounting configuration includes configurable settings for Slurm
     /// accounting.
-    accounting: ?UpdateAccountingRequest,
+    accounting: ?UpdateAccountingRequest = null,
 
     /// The time (in seconds) before an idle node is scaled down.
     ///
     /// Default: `600`
-    scale_down_idle_time_in_seconds: ?i32,
+    scale_down_idle_time_in_seconds: ?i32 = null,
 
     /// Additional Slurm-specific configuration that directly maps to Slurm
     /// settings.
-    slurm_custom_settings: ?[]const SlurmCustomSetting,
+    slurm_custom_settings: ?[]const SlurmCustomSetting = null,
 
     /// The Slurm REST API configuration for the cluster.
-    slurm_rest: ?UpdateSlurmRestRequest,
+    slurm_rest: ?UpdateSlurmRestRequest = null,
 
     pub const json_field_names = .{
         .accounting = "accounting",

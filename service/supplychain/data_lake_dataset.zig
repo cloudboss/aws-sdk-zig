@@ -10,7 +10,7 @@ pub const DataLakeDataset = struct {
     created_time: i64,
 
     /// The description of the dataset.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Web Services Supply Chain instance identifier.
     instance_id: []const u8,
@@ -33,7 +33,7 @@ pub const DataLakeDataset = struct {
     /// * **default** - For datasets with custom user-defined schemas.
     namespace: []const u8,
 
-    partition_spec: ?DataLakeDatasetPartitionSpec,
+    partition_spec: ?DataLakeDatasetPartitionSpec = null,
 
     /// The schema of the dataset.
     schema: DataLakeDatasetSchema,

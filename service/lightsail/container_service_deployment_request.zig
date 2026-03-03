@@ -13,10 +13,10 @@ const EndpointRequest = @import("endpoint_request.zig").EndpointRequest;
 pub const ContainerServiceDeploymentRequest = struct {
     /// An object that describes the configuration for the containers of the
     /// deployment.
-    containers: ?[]const aws.map.MapEntry(Container),
+    containers: ?[]const aws.map.MapEntry(Container) = null,
 
     /// An object that describes the endpoint of the deployment.
-    public_endpoint: ?EndpointRequest,
+    public_endpoint: ?EndpointRequest = null,
 
     pub const json_field_names = .{
         .containers = "containers",

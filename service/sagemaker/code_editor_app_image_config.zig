@@ -5,9 +5,9 @@ const FileSystemConfig = @import("file_system_config.zig").FileSystemConfig;
 /// running as a Code Editor app. The `FileSystemConfig` object is not
 /// supported.
 pub const CodeEditorAppImageConfig = struct {
-    container_config: ?ContainerConfig,
+    container_config: ?ContainerConfig = null,
 
-    file_system_config: ?FileSystemConfig,
+    file_system_config: ?FileSystemConfig = null,
 
     pub const json_field_names = .{
         .container_config = "ContainerConfig",

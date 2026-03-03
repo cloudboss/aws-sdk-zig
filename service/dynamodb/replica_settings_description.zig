@@ -10,13 +10,13 @@ pub const ReplicaSettingsDescription = struct {
     region_name: []const u8,
 
     /// The read/write capacity mode of the replica.
-    replica_billing_mode_summary: ?BillingModeSummary,
+    replica_billing_mode_summary: ?BillingModeSummary = null,
 
     /// Replica global secondary index settings for the global table.
-    replica_global_secondary_index_settings: ?[]const ReplicaGlobalSecondaryIndexSettingsDescription,
+    replica_global_secondary_index_settings: ?[]const ReplicaGlobalSecondaryIndexSettingsDescription = null,
 
     /// Auto scaling settings for a global table replica's read capacity units.
-    replica_provisioned_read_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription,
+    replica_provisioned_read_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription = null,
 
     /// The maximum number of strongly consistent reads consumed per second before
     /// DynamoDB
@@ -24,16 +24,16 @@ pub const ReplicaSettingsDescription = struct {
     /// and Write
     /// Requirements](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput) in the *Amazon DynamoDB
     /// Developer Guide*.
-    replica_provisioned_read_capacity_units: ?i64,
+    replica_provisioned_read_capacity_units: ?i64 = null,
 
     /// Auto scaling settings for a global table replica's write capacity units.
-    replica_provisioned_write_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription,
+    replica_provisioned_write_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription = null,
 
     /// The maximum number of writes consumed per second before DynamoDB returns a
     /// `ThrottlingException`. For more information, see [Specifying Read and Write
     /// Requirements](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput) in the *Amazon DynamoDB
     /// Developer Guide*.
-    replica_provisioned_write_capacity_units: ?i64,
+    replica_provisioned_write_capacity_units: ?i64 = null,
 
     /// The current state of the Region:
     ///
@@ -44,9 +44,9 @@ pub const ReplicaSettingsDescription = struct {
     /// * `DELETING` - The Region is being deleted.
     ///
     /// * `ACTIVE` - The Region is ready for use.
-    replica_status: ?ReplicaStatus,
+    replica_status: ?ReplicaStatus = null,
 
-    replica_table_class_summary: ?TableClassSummary,
+    replica_table_class_summary: ?TableClassSummary = null,
 
     pub const json_field_names = .{
         .region_name = "RegionName",

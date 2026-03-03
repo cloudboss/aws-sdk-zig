@@ -15,10 +15,10 @@ pub const EndpointUser = struct {
     /// question mark (?), backslash (\), and slash (/). The Amazon Pinpoint console
     /// can't display attribute names that contain these characters. This
     /// restriction doesn't apply to attribute values.
-    user_attributes: ?[]const aws.map.MapEntry([]const []const u8),
+    user_attributes: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The unique identifier for the user.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .user_attributes = "UserAttributes",

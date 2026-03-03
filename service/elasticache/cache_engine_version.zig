@@ -1,10 +1,10 @@
 /// Provides all of the details about a particular cache engine version.
 pub const CacheEngineVersion = struct {
     /// The description of the cache engine.
-    cache_engine_description: ?[]const u8,
+    cache_engine_description: ?[]const u8 = null,
 
     /// The description of the cache engine version.
-    cache_engine_version_description: ?[]const u8,
+    cache_engine_version_description: ?[]const u8 = null,
 
     /// The name of the cache parameter group family associated with this cache
     /// engine.
@@ -13,11 +13,11 @@ pub const CacheEngineVersion = struct {
     /// `memcached1.6` | `redis2.6` | `redis2.8` |
     /// `redis3.2` | `redis4.0` | `redis5.0` |
     /// `redis6.x` | `redis7`
-    cache_parameter_group_family: ?[]const u8,
+    cache_parameter_group_family: ?[]const u8 = null,
 
     /// The name of the cache engine.
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// The version number of the cache engine.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 };

@@ -5,7 +5,7 @@ const AwsSsmPatch = @import("aws_ssm_patch.zig").AwsSsmPatch;
 /// baseline that was used to patch the instance.
 pub const AwsSsmPatchComplianceDetails = struct {
     /// Information about the status of a patch.
-    patch: ?AwsSsmPatch,
+    patch: ?AwsSsmPatch = null,
 
     pub const json_field_names = .{
         .patch = "Patch",

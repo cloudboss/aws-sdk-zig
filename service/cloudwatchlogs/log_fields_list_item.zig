@@ -5,7 +5,7 @@ const LogFieldType = @import("log_field_type.zig").LogFieldType;
 /// source.
 pub const LogFieldsListItem = struct {
     /// The name of the log field.
-    log_field_name: ?[]const u8,
+    log_field_name: ?[]const u8 = null,
 
     /// The data type information for the log field.
     log_field_type: ?*LogFieldType = null,

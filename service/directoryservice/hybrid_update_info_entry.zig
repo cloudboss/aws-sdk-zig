@@ -7,32 +7,32 @@ const UpdateStatus = @import("update_status.zig").UpdateStatus;
 pub const HybridUpdateInfoEntry = struct {
     /// The identifier of the assessment performed to validate this update
     /// configuration.
-    assessment_id: ?[]const u8,
+    assessment_id: ?[]const u8 = null,
 
     /// Specifies if the update was initiated by the customer or Amazon Web
     /// Services.
-    initiated_by: ?[]const u8,
+    initiated_by: ?[]const u8 = null,
 
     /// The date and time when the update activity status was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The new configuration values being applied in this update.
-    new_value: ?HybridUpdateValue,
+    new_value: ?HybridUpdateValue = null,
 
     /// The previous configuration values before this update was applied.
-    previous_value: ?HybridUpdateValue,
+    previous_value: ?HybridUpdateValue = null,
 
     /// The date and time when the update activity was initiated.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The current status of the update activity. Valid values include `UPDATED`,
     /// `UPDATING`, and `UPDATE_FAILED`.
-    status: ?UpdateStatus,
+    status: ?UpdateStatus = null,
 
     /// A human-readable description of the update status, including any error
     /// details or
     /// progress information.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .assessment_id = "AssessmentId",

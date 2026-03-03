@@ -4,10 +4,10 @@ const Usage = @import("usage.zig").Usage;
 /// Cost impact of the resource recommendation.
 pub const ResourceCostCalculation = struct {
     /// Pricing details of the resource recommendation.
-    pricing: ?ResourcePricing,
+    pricing: ?ResourcePricing = null,
 
     /// Usage details of the resource recommendation.
-    usages: ?[]const Usage,
+    usages: ?[]const Usage = null,
 
     pub const json_field_names = .{
         .pricing = "pricing",

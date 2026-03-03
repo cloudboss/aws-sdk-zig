@@ -16,22 +16,22 @@ pub const ConflictMetadata = struct {
 
     /// The file modes of the file in the source, destination, and base of the
     /// merge.
-    file_modes: ?FileModes,
+    file_modes: ?FileModes = null,
 
     /// The path of the file that contains conflicts.
-    file_path: ?[]const u8,
+    file_path: ?[]const u8 = null,
 
     /// The file sizes of the file in the source, destination, and base of the
     /// merge.
-    file_sizes: ?FileSizes,
+    file_sizes: ?FileSizes = null,
 
     /// A boolean value (true or false) indicating whether the file is binary or
     /// textual in the source, destination, and base of the merge.
-    is_binary_file: ?IsBinaryFile,
+    is_binary_file: ?IsBinaryFile = null,
 
     /// Whether an add, modify, or delete operation caused the conflict between the
     /// source and destination of the merge.
-    merge_operations: ?MergeOperations,
+    merge_operations: ?MergeOperations = null,
 
     /// The number of conflicts, including both hunk conflicts and metadata
     /// conflicts.
@@ -42,7 +42,7 @@ pub const ConflictMetadata = struct {
     object_type_conflict: bool = false,
 
     /// Information about any object type conflicts in a merge operation.
-    object_types: ?ObjectTypes,
+    object_types: ?ObjectTypes = null,
 
     pub const json_field_names = .{
         .content_conflict = "contentConflict",

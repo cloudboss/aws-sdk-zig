@@ -4,10 +4,10 @@ const SemanticOverrideExtractionConfigurationInput = @import("semantic_override_
 /// Input for semantic override configuration in a memory strategy.
 pub const SemanticOverrideConfigurationInput = struct {
     /// The consolidation configuration for a semantic override.
-    consolidation: ?SemanticOverrideConsolidationConfigurationInput,
+    consolidation: ?SemanticOverrideConsolidationConfigurationInput = null,
 
     /// The extraction configuration for a semantic override.
-    extraction: ?SemanticOverrideExtractionConfigurationInput,
+    extraction: ?SemanticOverrideExtractionConfigurationInput = null,
 
     pub const json_field_names = .{
         .consolidation = "consolidation",

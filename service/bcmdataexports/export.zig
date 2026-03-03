@@ -8,13 +8,13 @@ pub const Export = struct {
     data_query: DataQuery,
 
     /// The description for this specific data export.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The destination configuration for this specific data export.
     destination_configurations: DestinationConfigurations,
 
     /// The Amazon Resource Name (ARN) for this export.
-    export_arn: ?[]const u8,
+    export_arn: ?[]const u8 = null,
 
     /// The name of this specific data export.
     name: []const u8,

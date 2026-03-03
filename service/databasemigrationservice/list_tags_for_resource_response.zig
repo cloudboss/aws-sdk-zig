@@ -2,7 +2,7 @@ const Tag = @import("tag.zig").Tag;
 
 pub const ListTagsForResourceResponse = struct {
     /// A list of tags for the resource.
-    tag_list: ?[]const Tag,
+    tag_list: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .tag_list = "TagList",

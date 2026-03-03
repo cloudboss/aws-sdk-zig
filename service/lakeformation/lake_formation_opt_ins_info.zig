@@ -7,17 +7,17 @@ const Resource = @import("resource.zig").Resource;
 pub const LakeFormationOptInsInfo = struct {
     /// A Lake Formation condition, which applies to permissions and opt-ins that
     /// contain an expression.
-    condition: ?Condition,
+    condition: ?Condition = null,
 
     /// The last modified date and time of the record.
-    last_modified: ?i64,
+    last_modified: ?i64 = null,
 
     /// The user who updated the record.
-    last_updated_by: ?[]const u8,
+    last_updated_by: ?[]const u8 = null,
 
-    principal: ?DataLakePrincipal,
+    principal: ?DataLakePrincipal = null,
 
-    resource: ?Resource,
+    resource: ?Resource = null,
 
     pub const json_field_names = .{
         .condition = "Condition",

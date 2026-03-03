@@ -4,16 +4,16 @@ const PivotTotalOptions = @import("pivot_total_options.zig").PivotTotalOptions;
 /// The total options for a pivot table visual.
 pub const PivotTableTotalOptions = struct {
     /// The column subtotal options.
-    column_subtotal_options: ?SubtotalOptions,
+    column_subtotal_options: ?SubtotalOptions = null,
 
     /// The column total options.
-    column_total_options: ?PivotTotalOptions,
+    column_total_options: ?PivotTotalOptions = null,
 
     /// The row subtotal options.
-    row_subtotal_options: ?SubtotalOptions,
+    row_subtotal_options: ?SubtotalOptions = null,
 
     /// The row total options.
-    row_total_options: ?PivotTotalOptions,
+    row_total_options: ?PivotTotalOptions = null,
 
     pub const json_field_names = .{
         .column_subtotal_options = "ColumnSubtotalOptions",

@@ -11,11 +11,11 @@ pub const ReplicaSettingsUpdate = struct {
     /// Represents the settings of a global secondary index for a global table that
     /// will be
     /// modified.
-    replica_global_secondary_index_settings_update: ?[]const ReplicaGlobalSecondaryIndexSettingsUpdate,
+    replica_global_secondary_index_settings_update: ?[]const ReplicaGlobalSecondaryIndexSettingsUpdate = null,
 
     /// Auto scaling settings for managing a global table replica's read capacity
     /// units.
-    replica_provisioned_read_capacity_auto_scaling_settings_update: ?AutoScalingSettingsUpdate,
+    replica_provisioned_read_capacity_auto_scaling_settings_update: ?AutoScalingSettingsUpdate = null,
 
     /// The maximum number of strongly consistent reads consumed per second before
     /// DynamoDB
@@ -23,12 +23,12 @@ pub const ReplicaSettingsUpdate = struct {
     /// and Write
     /// Requirements](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput) in the *Amazon DynamoDB
     /// Developer Guide*.
-    replica_provisioned_read_capacity_units: ?i64,
+    replica_provisioned_read_capacity_units: ?i64 = null,
 
     /// Replica-specific table class. If not specified, uses the source table's
     /// table
     /// class.
-    replica_table_class: ?TableClass,
+    replica_table_class: ?TableClass = null,
 
     pub const json_field_names = .{
         .region_name = "RegionName",

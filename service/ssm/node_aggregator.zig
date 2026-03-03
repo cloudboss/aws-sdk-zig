@@ -6,7 +6,7 @@ const NodeTypeName = @import("node_type_name.zig").NodeTypeName;
 /// dimensions.
 pub const NodeAggregator = struct {
     /// Information about aggregators used to refine a node summary.
-    aggregators: ?[]const NodeAggregator,
+    aggregators: ?[]const NodeAggregator = null,
 
     /// The aggregator type for limiting a node summary. Currently, only `Count` is
     /// supported.

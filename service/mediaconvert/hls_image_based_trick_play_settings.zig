@@ -7,13 +7,13 @@ pub const HlsImageBasedTrickPlaySettings = struct {
     /// output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert
     /// generates thumbnails according to the interval you specify in
     /// thumbnailInterval.
-    interval_cadence: ?HlsIntervalCadence,
+    interval_cadence: ?HlsIntervalCadence = null,
 
     /// Height of each thumbnail within each tile image, in pixels. Leave blank to
     /// maintain aspect ratio with thumbnail width. If following the aspect ratio
     /// would lead to a total tile height greater than 4096, then the job will be
     /// rejected. Must be divisible by 2.
-    thumbnail_height: ?i32,
+    thumbnail_height: ?i32 = null,
 
     /// Enter the interval, in seconds, that MediaConvert uses to generate
     /// thumbnails. If the interval you enter doesn't align with the output frame
@@ -21,19 +21,19 @@ pub const HlsImageBasedTrickPlaySettings = struct {
     /// output frame rate. For example, if the output frame rate is 29.97 frames per
     /// second and you enter 5, MediaConvert uses a 150 frame interval to generate
     /// thumbnails.
-    thumbnail_interval: ?f64,
+    thumbnail_interval: ?f64 = null,
 
     /// Width of each thumbnail within each tile image, in pixels. Default is 312.
     /// Must be divisible by 8.
-    thumbnail_width: ?i32,
+    thumbnail_width: ?i32 = null,
 
     /// Number of thumbnails in each column of a tile image. Set a value between 2
     /// and 2048. Must be divisible by 2.
-    tile_height: ?i32,
+    tile_height: ?i32 = null,
 
     /// Number of thumbnails in each row of a tile image. Set a value between 1 and
     /// 512.
-    tile_width: ?i32,
+    tile_width: ?i32 = null,
 
     pub const json_field_names = .{
         .interval_cadence = "IntervalCadence",

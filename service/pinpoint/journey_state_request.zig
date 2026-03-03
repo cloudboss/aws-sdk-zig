@@ -21,7 +21,7 @@ pub const JourneyStateRequest = struct {
     /// resume entering the journey after the journey is resumed. For wait
     /// activities, wait time is paused when the journey is paused. Currently,
     /// PAUSED only supports journeys with a segment refresh interval.
-    state: ?State,
+    state: ?State = null,
 
     pub const json_field_names = .{
         .state = "State",

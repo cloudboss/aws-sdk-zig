@@ -53,10 +53,10 @@ pub const AccountGateResult = struct {
     /// * Either no action is necessary, or no action is possible, on the stack.
     ///   CloudFormation skips
     /// the StackSet operation in this account and Region.
-    status: ?AccountGateStatus,
+    status: ?AccountGateStatus = null,
 
     /// The reason for the account gate status assigned to this account and Region
     /// for the StackSet
     /// operation.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 };

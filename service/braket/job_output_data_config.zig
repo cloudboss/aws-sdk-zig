@@ -4,7 +4,7 @@ pub const JobOutputDataConfig = struct {
     /// The AWS Key Management Service (AWS KMS) key that Amazon Braket uses to
     /// encrypt the hybrid job training artifacts at rest using Amazon S3
     /// server-side encryption.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Identifies the S3 path where you want Amazon Braket to store the hybrid job
     /// training artifacts. For example, `s3://bucket-name/key-name-prefix`.

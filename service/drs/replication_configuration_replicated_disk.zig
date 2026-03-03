@@ -3,20 +3,20 @@ const ReplicationConfigurationReplicatedDiskStagingDiskType = @import("replicati
 /// The configuration of a disk of the Source Server to be replicated.
 pub const ReplicationConfigurationReplicatedDisk = struct {
     /// The name of the device.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// The requested number of I/O operations per second (IOPS).
     iops: i64 = 0,
 
     /// Whether to boot from this disk or not.
-    is_boot_disk: ?bool,
+    is_boot_disk: ?bool = null,
 
     /// The Staging Disk EBS volume type to be used during replication when
     /// `stagingDiskType` is set to Auto. This is a read-only field.
-    optimized_staging_disk_type: ?ReplicationConfigurationReplicatedDiskStagingDiskType,
+    optimized_staging_disk_type: ?ReplicationConfigurationReplicatedDiskStagingDiskType = null,
 
     /// The Staging Disk EBS volume type to be used during replication.
-    staging_disk_type: ?ReplicationConfigurationReplicatedDiskStagingDiskType,
+    staging_disk_type: ?ReplicationConfigurationReplicatedDiskStagingDiskType = null,
 
     /// The throughput to use for the EBS volume in MiB/s. This parameter is valid
     /// only for gp3 volumes.

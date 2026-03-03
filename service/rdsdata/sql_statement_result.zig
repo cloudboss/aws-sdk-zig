@@ -9,7 +9,7 @@ pub const SqlStatementResult = struct {
     number_of_records_updated: i64 = 0,
 
     /// The result set of the SQL statement.
-    result_frame: ?ResultFrame,
+    result_frame: ?ResultFrame = null,
 
     pub const json_field_names = .{
         .number_of_records_updated = "numberOfRecordsUpdated",

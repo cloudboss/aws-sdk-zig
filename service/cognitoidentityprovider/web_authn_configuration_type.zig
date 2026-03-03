@@ -27,13 +27,13 @@ pub const WebAuthnConfigurationType = struct {
     ///
     /// * Your application performs authentication with managed login or the classic
     /// hosted UI.
-    relying_party_id: ?[]const u8,
+    relying_party_id: ?[]const u8 = null,
 
     /// When `required`, users can only register and sign in users with passkeys
     /// that are capable of [user
     /// verification](https://www.w3.org/TR/webauthn-2/#enum-userVerificationRequirement). When `preferred`, your user pool doesn't
     /// require the use of authenticators with user verification but encourages it.
-    user_verification: ?UserVerificationType,
+    user_verification: ?UserVerificationType = null,
 
     pub const json_field_names = .{
         .relying_party_id = "RelyingPartyId",

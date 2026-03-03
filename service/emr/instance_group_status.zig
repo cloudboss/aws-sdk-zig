@@ -5,13 +5,13 @@ const InstanceGroupTimeline = @import("instance_group_timeline.zig").InstanceGro
 /// The details of the instance group status.
 pub const InstanceGroupStatus = struct {
     /// The current state of the instance group.
-    state: ?InstanceGroupState,
+    state: ?InstanceGroupState = null,
 
     /// The status change reason details for the instance group.
-    state_change_reason: ?InstanceGroupStateChangeReason,
+    state_change_reason: ?InstanceGroupStateChangeReason = null,
 
     /// The timeline of the instance group status over time.
-    timeline: ?InstanceGroupTimeline,
+    timeline: ?InstanceGroupTimeline = null,
 
     pub const json_field_names = .{
         .state = "State",

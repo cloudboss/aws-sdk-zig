@@ -9,15 +9,15 @@ const ArtifactLocation = @import("artifact_location.zig").ArtifactLocation;
 /// provided as a ZIP file. Example artifact name: SampleApp_Windows.zip
 pub const Artifact = struct {
     /// The location of an artifact.
-    location: ?ArtifactLocation,
+    location: ?ArtifactLocation = null,
 
     /// The artifact's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The artifact's revision ID. Depending on the type of object, this could be a
     /// commit
     /// ID (GitHub) or a revision ID (Amazon S3).
-    revision: ?[]const u8,
+    revision: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .location = "location",

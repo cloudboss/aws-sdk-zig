@@ -6,11 +6,11 @@ const RequestBasedServiceLevelIndicatorMetric = @import("request_based_service_l
 pub const RequestBasedServiceLevelIndicator = struct {
     /// The arithmetic operation used when comparing the specified metric to the
     /// threshold.
-    comparison_operator: ?ServiceLevelIndicatorComparisonOperator,
+    comparison_operator: ?ServiceLevelIndicatorComparisonOperator = null,
 
     /// This value is the threshold that the observed metric values of the SLI
     /// metric are compared to.
-    metric_threshold: ?f64,
+    metric_threshold: ?f64 = null,
 
     /// A structure that contains information about the metric that the SLO
     /// monitors.

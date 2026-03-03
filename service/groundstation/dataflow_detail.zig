@@ -3,12 +3,12 @@ const Source = @import("source.zig").Source;
 
 /// Information about a dataflow edge used in a contact.
 pub const DataflowDetail = struct {
-    destination: ?Destination,
+    destination: ?Destination = null,
 
     /// Error message for a dataflow.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
-    source: ?Source,
+    source: ?Source = null,
 
     pub const json_field_names = .{
         .destination = "destination",

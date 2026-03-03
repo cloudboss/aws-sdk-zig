@@ -10,19 +10,19 @@ pub const DvbSdtSettings = struct {
     /// fall back on the user-defined values. Enter "SDT Manually" means user will
     /// enter the SDT information. "No SDT" means output stream will not contain SDT
     /// information.
-    output_sdt: ?OutputSdt,
+    output_sdt: ?OutputSdt = null,
 
     /// The number of milliseconds between instances of this table in the output
     /// transport stream.
-    sdt_interval: ?i32,
+    sdt_interval: ?i32 = null,
 
     /// The service name placed in the service_descriptor in the Service Description
     /// Table. Maximum length is 256 characters.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// The service provider name placed in the service_descriptor in the Service
     /// Description Table. Maximum length is 256 characters.
-    service_provider_name: ?[]const u8,
+    service_provider_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .output_sdt = "OutputSdt",

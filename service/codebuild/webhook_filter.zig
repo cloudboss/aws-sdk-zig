@@ -6,7 +6,7 @@ pub const WebhookFilter = struct {
     /// trigger a build. If true, then a webhook event that does not match the
     /// `pattern` triggers a build. If false, then a webhook event that matches
     /// the `pattern` triggers a build.
-    exclude_matched_pattern: ?bool,
+    exclude_matched_pattern: ?bool = null,
 
     /// For a `WebHookFilter` that uses `EVENT` type, a comma-separated
     /// string that specifies one or more events. For example, the webhook filter

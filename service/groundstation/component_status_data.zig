@@ -3,10 +3,10 @@ const AgentStatus = @import("agent_status.zig").AgentStatus;
 /// Data on the status of agent components.
 pub const ComponentStatusData = struct {
     /// Bytes received by the component.
-    bytes_received: ?i64,
+    bytes_received: ?i64 = null,
 
     /// Bytes sent by the component.
-    bytes_sent: ?i64,
+    bytes_sent: ?i64 = null,
 
     /// Capability ARN of the component.
     capability_arn: []const u8,
@@ -18,7 +18,7 @@ pub const ComponentStatusData = struct {
     dataflow_id: []const u8,
 
     /// Packets dropped by component.
-    packets_dropped: ?i64,
+    packets_dropped: ?i64 = null,
 
     /// Component status.
     status: AgentStatus,

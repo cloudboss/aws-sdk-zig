@@ -5,7 +5,7 @@ const TraceLocation = @import("trace_location.zig").TraceLocation;
 /// timing.
 pub const WorkflowRunSummary = struct {
     /// The timestamp when the workflow run completed execution, if applicable.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The timestamp when the workflow run started execution.
     started_at: i64,
@@ -14,7 +14,7 @@ pub const WorkflowRunSummary = struct {
     status: WorkflowRunStatus,
 
     /// The location where trace information for this workflow run is stored.
-    trace_location: ?TraceLocation,
+    trace_location: ?TraceLocation = null,
 
     /// The Amazon Resource Name (ARN) of the workflow run.
     workflow_run_arn: []const u8,

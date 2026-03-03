@@ -26,7 +26,7 @@ pub const ConnectionPasswordEncryption = struct {
     ///
     /// You can set the decrypt permission to enable or restrict access on the
     /// password key according to your security requirements.
-    aws_kms_key_id: ?[]const u8,
+    aws_kms_key_id: ?[]const u8 = null,
 
     /// When the `ReturnConnectionPasswordEncrypted` flag is set to "true",
     /// passwords remain encrypted in the responses of `GetConnection` and

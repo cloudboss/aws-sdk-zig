@@ -13,7 +13,7 @@ pub const CanDbcDefinition = struct {
     network_interface: []const u8,
 
     /// Pairs every signal specified in your vehicle model with a signal decoder.
-    signals_map: ?[]const aws.map.StringMapEntry,
+    signals_map: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .can_dbc_files = "canDbcFiles",

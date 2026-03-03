@@ -2,7 +2,7 @@
 /// behavior.
 pub const RecommendationRelatedAnomalyResource = struct {
     /// The name of the resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of the resource. Resource types take the same form that is used by
     /// Amazon Web Services CloudFormation
@@ -12,7 +12,7 @@ pub const RecommendationRelatedAnomalyResource = struct {
     /// resource and property types
     /// reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) in the *Amazon Web Services CloudFormation User
     /// Guide*.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

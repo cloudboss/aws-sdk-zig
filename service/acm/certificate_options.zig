@@ -19,11 +19,11 @@ const CertificateExport = @import("certificate_export.zig").CertificateExport;
 pub const CertificateOptions = struct {
     /// You can opt out of certificate transparency logging by specifying the
     /// `DISABLED` option. Opt in by specifying `ENABLED`.
-    certificate_transparency_logging_preference: ?CertificateTransparencyLoggingPreference,
+    certificate_transparency_logging_preference: ?CertificateTransparencyLoggingPreference = null,
 
     /// You can opt in to allow the export of your certificates by specifying
     /// `ENABLED`.
-    @"export": ?CertificateExport,
+    @"export": ?CertificateExport = null,
 
     pub const json_field_names = .{
         .certificate_transparency_logging_preference = "CertificateTransparencyLoggingPreference",

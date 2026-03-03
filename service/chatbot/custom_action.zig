@@ -5,14 +5,14 @@ const CustomActionDefinition = @import("custom_action_definition.zig").CustomAct
 /// notification button in the chat client.
 pub const CustomAction = struct {
     /// The name of the custom action that is included in the ARN.
-    action_name: ?[]const u8,
+    action_name: ?[]const u8 = null,
 
     /// The name used to invoke this action in the chat channel. For example, `@aws
     /// run my-alias`.
-    alias_name: ?[]const u8,
+    alias_name: ?[]const u8 = null,
 
     /// Defines when this custom action button should be attached to a notification.
-    attachments: ?[]const CustomActionAttachment,
+    attachments: ?[]const CustomActionAttachment = null,
 
     /// The fully defined Amazon Resource Name (ARN) of the custom action.
     custom_action_arn: []const u8,

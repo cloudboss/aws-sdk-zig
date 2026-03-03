@@ -9,11 +9,11 @@
 pub const NetworkConfiguration = struct {
     /// A list of VPC security group IDs to associate with the workflow execution
     /// environment.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// A list of VPC subnet IDs where the workflow execution environment is
     /// deployed.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .security_group_ids = "SecurityGroupIds",

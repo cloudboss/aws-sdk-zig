@@ -11,7 +11,7 @@ pub const ObdInterface = struct {
     name: []const u8,
 
     /// The standard OBD II PID.
-    obd_standard: ?[]const u8,
+    obd_standard: ?[]const u8 = null,
 
     /// The maximum number message requests per second.
     pid_request_interval_seconds: i32 = 0,

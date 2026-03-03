@@ -13,7 +13,7 @@ pub const GetBucketMetadataTableConfigurationResult = struct {
     /// Metadata was
     /// unable to create the table, this structure contains the error code and error
     /// message.
-    @"error": ?ErrorDetails,
+    @"error": ?ErrorDetails = null,
 
     /// The V1 S3 Metadata configuration for a general purpose bucket.
     metadata_table_configuration_result: MetadataTableConfigurationResult,

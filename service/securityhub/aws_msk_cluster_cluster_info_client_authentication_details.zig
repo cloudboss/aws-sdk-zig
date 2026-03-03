@@ -5,13 +5,13 @@ const AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails = @impo
 /// Provides details about different modes of client authentication.
 pub const AwsMskClusterClusterInfoClientAuthenticationDetails = struct {
     /// Provides details for client authentication using SASL.
-    sasl: ?AwsMskClusterClusterInfoClientAuthenticationSaslDetails,
+    sasl: ?AwsMskClusterClusterInfoClientAuthenticationSaslDetails = null,
 
     /// Provides details for client authentication using TLS.
-    tls: ?AwsMskClusterClusterInfoClientAuthenticationTlsDetails,
+    tls: ?AwsMskClusterClusterInfoClientAuthenticationTlsDetails = null,
 
     /// Provides details for allowing no client authentication.
-    unauthenticated: ?AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails,
+    unauthenticated: ?AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails = null,
 
     pub const json_field_names = .{
         .sasl = "Sasl",

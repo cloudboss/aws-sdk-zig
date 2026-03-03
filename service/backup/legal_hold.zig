@@ -10,26 +10,26 @@ const LegalHoldStatus = @import("legal_hold_status.zig").LegalHoldStatus;
 /// types and by resource IDs.
 pub const LegalHold = struct {
     /// The time when the legal hold was cancelled.
-    cancellation_date: ?i64,
+    cancellation_date: ?i64 = null,
 
     /// The time when the legal hold was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The description of a legal hold.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the legal hold; for example,
     /// `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-    legal_hold_arn: ?[]const u8,
+    legal_hold_arn: ?[]const u8 = null,
 
     /// The ID of the legal hold.
-    legal_hold_id: ?[]const u8,
+    legal_hold_id: ?[]const u8 = null,
 
     /// The status of the legal hold.
-    status: ?LegalHoldStatus,
+    status: ?LegalHoldStatus = null,
 
     /// The title of a legal hold.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cancellation_date = "CancellationDate",

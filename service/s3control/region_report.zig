@@ -2,13 +2,13 @@
 /// Point.
 pub const RegionReport = struct {
     /// The name of the bucket.
-    bucket: ?[]const u8,
+    bucket: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID that owns the Amazon S3 bucket that's
     /// associated with this
     /// Multi-Region Access Point.
-    bucket_account_id: ?[]const u8,
+    bucket_account_id: ?[]const u8 = null,
 
     /// The name of the Region.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 };

@@ -4,7 +4,7 @@ pub const MediaResourceNeighbor = struct {
     arn: []const u8,
 
     /// The logical name of an AWS media resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

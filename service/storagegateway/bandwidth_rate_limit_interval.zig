@@ -15,7 +15,7 @@ pub const BandwidthRateLimitInterval = struct {
     /// set.
     ///
     /// S3 File Gateway does not support this feature.
-    average_download_rate_limit_in_bits_per_sec: ?i64,
+    average_download_rate_limit_in_bits_per_sec: ?i64 = null,
 
     /// The average upload rate limit component of the bandwidth rate limit
     /// interval, in bits
@@ -26,7 +26,7 @@ pub const BandwidthRateLimitInterval = struct {
     ///
     /// This field is required for S3 File Gateway, and the minimum value is
     /// `104857600`.
-    average_upload_rate_limit_in_bits_per_sec: ?i64,
+    average_upload_rate_limit_in_bits_per_sec: ?i64 = null,
 
     /// The days of the week component of the bandwidth rate limit interval,
     /// represented as

@@ -6,34 +6,34 @@ const ImportStatus = @import("import_status.zig").ImportStatus;
 pub const Import = struct {
     /// The timestamp when the import task was created, expressed as the number of
     /// milliseconds after Jan 1, 1970 00:00:00 UTC.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Error message related to any failed imports
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The ARN of the managed CloudWatch Logs log group where the events are being
     /// imported to.
-    import_destination_arn: ?[]const u8,
+    import_destination_arn: ?[]const u8 = null,
 
     /// The filter criteria used for this import task.
-    import_filter: ?ImportFilter,
+    import_filter: ?ImportFilter = null,
 
     /// The unique identifier of the import task.
-    import_id: ?[]const u8,
+    import_id: ?[]const u8 = null,
 
     /// The ARN of the CloudTrail Lake Event Data Store being imported from.
-    import_source_arn: ?[]const u8,
+    import_source_arn: ?[]const u8 = null,
 
     /// Statistics about the import progress
-    import_statistics: ?ImportStatistics,
+    import_statistics: ?ImportStatistics = null,
 
     /// The current status of the import task. Valid values are IN_PROGRESS,
     /// CANCELLED, COMPLETED and FAILED.
-    import_status: ?ImportStatus,
+    import_status: ?ImportStatus = null,
 
     /// The timestamp when the import task was last updated, expressed as the number
     /// of milliseconds after Jan 1, 1970 00:00:00 UTC.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     pub const json_field_names = .{
         .creation_time = "creationTime",

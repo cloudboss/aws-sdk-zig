@@ -5,18 +5,18 @@ const CustomClaimValidationType = @import("custom_claim_validation_type.zig").Cu
 pub const CustomJWTAuthorizerConfiguration = struct {
     /// Represents individual audience values that are validated in the incoming JWT
     /// token validation process.
-    allowed_audience: ?[]const []const u8,
+    allowed_audience: ?[]const []const u8 = null,
 
     /// Represents individual client IDs that are validated in the incoming JWT
     /// token validation process.
-    allowed_clients: ?[]const []const u8,
+    allowed_clients: ?[]const []const u8 = null,
 
     /// An array of scopes that are allowed to access the token.
-    allowed_scopes: ?[]const []const u8,
+    allowed_scopes: ?[]const []const u8 = null,
 
     /// An array of objects that define a custom claim validation name, value, and
     /// operation
-    custom_claims: ?[]const CustomClaimValidationType,
+    custom_claims: ?[]const CustomClaimValidationType = null,
 
     /// This URL is used to fetch OpenID Connect configuration or authorization
     /// server metadata for validating incoming tokens.

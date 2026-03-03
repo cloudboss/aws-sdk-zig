@@ -9,29 +9,29 @@ const StorageClass = @import("storage_class.zig").StorageClass;
 /// results are stored.
 pub const S3Location = struct {
     /// A list of grants that control access to the staged results.
-    access_control_list: ?[]const Grant,
+    access_control_list: ?[]const Grant = null,
 
     /// The name of the Amazon S3 bucket where the job results are stored.
-    bucket_name: ?[]const u8,
+    bucket_name: ?[]const u8 = null,
 
     /// The canned access control list (ACL) to apply to the job results.
-    canned_acl: ?CannedACL,
+    canned_acl: ?CannedACL = null,
 
     /// Contains information about the encryption used to store the job results in
     /// Amazon S3.
-    encryption: ?Encryption,
+    encryption: ?Encryption = null,
 
     /// The prefix that is prepended to the results for this request.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The storage class used to store the job results.
-    storage_class: ?StorageClass,
+    storage_class: ?StorageClass = null,
 
     /// The tag-set that is applied to the job results.
-    tagging: ?[]const aws.map.StringMapEntry,
+    tagging: ?[]const aws.map.StringMapEntry = null,
 
     /// A map of metadata to store with the job results in Amazon S3.
-    user_metadata: ?[]const aws.map.StringMapEntry,
+    user_metadata: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .access_control_list = "AccessControlList",

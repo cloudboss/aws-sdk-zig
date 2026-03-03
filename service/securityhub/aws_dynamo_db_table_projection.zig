@@ -5,7 +5,7 @@ pub const AwsDynamoDbTableProjection = struct {
     /// The nonkey attributes that are projected into the index. For each attribute,
     /// provide the
     /// attribute name.
-    non_key_attributes: ?[]const []const u8,
+    non_key_attributes: ?[]const []const u8 = null,
 
     /// The types of attributes that are projected into the index. Valid values are
     /// as follows:
@@ -15,7 +15,7 @@ pub const AwsDynamoDbTableProjection = struct {
     /// * `INCLUDE`
     ///
     /// * `KEYS_ONLY`
-    projection_type: ?[]const u8,
+    projection_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .non_key_attributes = "NonKeyAttributes",

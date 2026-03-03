@@ -241,16 +241,16 @@ pub const HistoricalMetric = struct {
     ///
     /// UI name: [Service level
     /// X](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level)
-    name: ?HistoricalMetricName,
+    name: ?HistoricalMetricName = null,
 
     /// The statistic for the metric.
-    statistic: ?Statistic,
+    statistic: ?Statistic = null,
 
     /// The threshold for the metric, used with service level metrics.
-    threshold: ?Threshold,
+    threshold: ?Threshold = null,
 
     /// The unit for the metric.
-    unit: ?Unit,
+    unit: ?Unit = null,
 
     pub const json_field_names = .{
         .name = "Name",

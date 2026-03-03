@@ -5,10 +5,10 @@ const EvaluationFormQuestionTypeProperties = @import("evaluation_form_question_t
 /// Information about a question from an evaluation form.
 pub const EvaluationFormQuestion = struct {
     /// A question conditional enablement.
-    enablement: ?EvaluationFormItemEnablementConfiguration,
+    enablement: ?EvaluationFormItemEnablementConfiguration = null,
 
     /// The instructions of the section.
-    instructions: ?[]const u8,
+    instructions: ?[]const u8 = null,
 
     /// The flag to enable not applicable answers to the question.
     not_applicable_enabled: bool = false,
@@ -18,7 +18,7 @@ pub const EvaluationFormQuestion = struct {
 
     /// The properties of the type of question. Text questions do not have to define
     /// question type properties.
-    question_type_properties: ?EvaluationFormQuestionTypeProperties,
+    question_type_properties: ?EvaluationFormQuestionTypeProperties = null,
 
     /// The identifier of the question. An identifier must be unique within the
     /// evaluation form.

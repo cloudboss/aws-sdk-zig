@@ -8,21 +8,21 @@ pub const Gateway = struct {
     /// operation
     /// to return a list of gateways for your account and Amazon Web Services
     /// Region.
-    gateway_arn: ?[]const u8,
+    gateway_arn: ?[]const u8 = null,
 
     /// The display name of the gateway.
-    gateway_display_name: ?[]const u8,
+    gateway_display_name: ?[]const u8 = null,
 
     /// The type of the gateway.
-    gateway_type: ?GatewayType,
+    gateway_type: ?GatewayType = null,
 
     /// The hypervisor ID of the gateway.
-    hypervisor_id: ?[]const u8,
+    hypervisor_id: ?[]const u8 = null,
 
     /// The last time Backup gateway communicated with the gateway, in Unix format
     /// and
     /// UTC time.
-    last_seen_time: ?i64,
+    last_seen_time: ?i64 = null,
 
     pub const json_field_names = .{
         .gateway_arn = "GatewayArn",

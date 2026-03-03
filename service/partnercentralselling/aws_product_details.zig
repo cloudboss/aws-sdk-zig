@@ -4,7 +4,7 @@ const AwsProductOptimization = @import("aws_product_optimization.zig").AwsProduc
 /// pathways), cost estimates, and optimization recommendations.
 pub const AwsProductDetails = struct {
     /// Baseline service cost before optimizations.
-    amount: ?[]const u8,
+    amount: ?[]const u8 = null,
 
     /// List of program and pathway categories this product is eligible for.
     categories: []const []const u8,
@@ -13,16 +13,16 @@ pub const AwsProductDetails = struct {
     optimizations: []const AwsProductOptimization,
 
     /// Service cost after applying optimizations.
-    optimized_amount: ?[]const u8,
+    optimized_amount: ?[]const u8 = null,
 
     /// Service-specific cost reduction through optimizations.
-    potential_savings_amount: ?[]const u8,
+    potential_savings_amount: ?[]const u8 = null,
 
     /// AWS Partner Central product identifier used for opportunity association.
     product_code: []const u8,
 
     /// Pricing Calculator service code.
-    service_code: ?[]const u8,
+    service_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .amount = "Amount",

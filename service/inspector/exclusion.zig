@@ -7,7 +7,7 @@ pub const Exclusion = struct {
     arn: []const u8,
 
     /// The system-defined attributes for the exclusion.
-    attributes: ?[]const Attribute,
+    attributes: ?[]const Attribute = null,
 
     /// The description of the exclusion.
     description: []const u8,

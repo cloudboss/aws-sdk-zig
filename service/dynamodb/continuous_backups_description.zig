@@ -9,7 +9,7 @@ pub const ContinuousBackupsDescription = struct {
     continuous_backups_status: ContinuousBackupsStatus,
 
     /// The description of the point in time recovery settings applied to the table.
-    point_in_time_recovery_description: ?PointInTimeRecoveryDescription,
+    point_in_time_recovery_description: ?PointInTimeRecoveryDescription = null,
 
     pub const json_field_names = .{
         .continuous_backups_status = "ContinuousBackupsStatus",

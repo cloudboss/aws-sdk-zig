@@ -5,25 +5,25 @@ const RelationalDatabaseEngine = @import("relational_database_engine.zig").Relat
 /// of a database.
 pub const RelationalDatabaseBlueprint = struct {
     /// The ID for the database blueprint.
-    blueprint_id: ?[]const u8,
+    blueprint_id: ?[]const u8 = null,
 
     /// The database software of the database blueprint (for example, `MySQL`).
-    engine: ?RelationalDatabaseEngine,
+    engine: ?RelationalDatabaseEngine = null,
 
     /// The description of the database engine for the database blueprint.
-    engine_description: ?[]const u8,
+    engine_description: ?[]const u8 = null,
 
     /// The database engine version for the database blueprint (for example,
     /// `5.7.23`).
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// The description of the database engine version for the database blueprint.
-    engine_version_description: ?[]const u8,
+    engine_version_description: ?[]const u8 = null,
 
     /// A Boolean value indicating whether the engine version is the default for the
     /// database
     /// blueprint.
-    is_engine_default: ?bool,
+    is_engine_default: ?bool = null,
 
     pub const json_field_names = .{
         .blueprint_id = "blueprintId",

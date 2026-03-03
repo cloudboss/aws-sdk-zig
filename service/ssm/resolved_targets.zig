@@ -3,7 +3,7 @@ pub const ResolvedTargets = struct {
     /// A list of parameter values sent to targets that resolved during the
     /// Automation
     /// execution.
-    parameter_values: ?[]const []const u8,
+    parameter_values: ?[]const []const u8 = null,
 
     /// A boolean value indicating whether the resolved target list is truncated.
     truncated: bool = false,

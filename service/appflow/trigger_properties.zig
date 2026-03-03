@@ -6,7 +6,7 @@ const ScheduledTriggerProperties = @import("scheduled_trigger_properties.zig").S
 pub const TriggerProperties = struct {
     /// Specifies the configuration details of a schedule-triggered flow as defined
     /// by the user.
-    scheduled: ?ScheduledTriggerProperties,
+    scheduled: ?ScheduledTriggerProperties = null,
 
     pub const json_field_names = .{
         .scheduled = "Scheduled",

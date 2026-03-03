@@ -5,50 +5,50 @@ const ExpectedRoute = @import("expected_route.zig").ExpectedRoute;
 /// inspected.
 pub const NetworkFirewallInternetTrafficNotInspectedViolation = struct {
     /// The actual firewall subnet routes.
-    actual_firewall_subnet_routes: ?[]const Route,
+    actual_firewall_subnet_routes: ?[]const Route = null,
 
     /// The actual internet gateway routes.
-    actual_internet_gateway_routes: ?[]const Route,
+    actual_internet_gateway_routes: ?[]const Route = null,
 
     /// Information about the subnet route table for the current firewall.
-    current_firewall_subnet_route_table: ?[]const u8,
+    current_firewall_subnet_route_table: ?[]const u8 = null,
 
     /// The current route table for the internet gateway.
-    current_internet_gateway_route_table: ?[]const u8,
+    current_internet_gateway_route_table: ?[]const u8 = null,
 
     /// The expected endpoint for the current firewall.
-    expected_firewall_endpoint: ?[]const u8,
+    expected_firewall_endpoint: ?[]const u8 = null,
 
     /// The firewall subnet routes that are expected.
-    expected_firewall_subnet_routes: ?[]const ExpectedRoute,
+    expected_firewall_subnet_routes: ?[]const ExpectedRoute = null,
 
     /// The internet gateway routes that are expected.
-    expected_internet_gateway_routes: ?[]const ExpectedRoute,
+    expected_internet_gateway_routes: ?[]const ExpectedRoute = null,
 
     /// The firewall subnet ID.
-    firewall_subnet_id: ?[]const u8,
+    firewall_subnet_id: ?[]const u8 = null,
 
     /// The internet gateway ID.
-    internet_gateway_id: ?[]const u8,
+    internet_gateway_id: ?[]const u8 = null,
 
     /// Information about whether the route table is used in another Availability
     /// Zone.
     is_route_table_used_in_different_az: bool = false,
 
     /// Information about the route table ID.
-    route_table_id: ?[]const u8,
+    route_table_id: ?[]const u8 = null,
 
     /// The subnet Availability Zone.
-    subnet_availability_zone: ?[]const u8,
+    subnet_availability_zone: ?[]const u8 = null,
 
     /// The subnet ID.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The route or routes that are in violation.
-    violating_routes: ?[]const Route,
+    violating_routes: ?[]const Route = null,
 
     /// Information about the VPC ID.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .actual_firewall_subnet_routes = "ActualFirewallSubnetRoutes",

@@ -9,11 +9,11 @@
 pub const WarmThroughputSpecification = struct {
     /// The number of read capacity units per second to pre-warm the table for read
     /// capacity throughput. The minimum value is 1.
-    read_units_per_second: ?i64,
+    read_units_per_second: ?i64 = null,
 
     /// The number of write capacity units per second to pre-warm the table for
     /// write capacity throughput. The minimum value is 1.
-    write_units_per_second: ?i64,
+    write_units_per_second: ?i64 = null,
 
     pub const json_field_names = .{
         .read_units_per_second = "readUnitsPerSecond",

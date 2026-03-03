@@ -5,32 +5,32 @@ const RecurringCharge = @import("recurring_charge.zig").RecurringCharge;
 /// Details of a reserved Elasticsearch instance offering.
 pub const ReservedElasticsearchInstanceOffering = struct {
     /// The currency code for the reserved Elasticsearch instance offering.
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// The duration, in seconds, for which the offering will reserve the
     /// Elasticsearch instance.
     duration: i32 = 0,
 
     /// The Elasticsearch instance type offered by the reserved instance offering.
-    elasticsearch_instance_type: ?ESPartitionInstanceType,
+    elasticsearch_instance_type: ?ESPartitionInstanceType = null,
 
     /// The upfront fixed charge you will pay to purchase the specific reserved
     /// Elasticsearch instance offering.
-    fixed_price: ?f64,
+    fixed_price: ?f64 = null,
 
     /// Payment option for the reserved Elasticsearch instance offering
-    payment_option: ?ReservedElasticsearchInstancePaymentOption,
+    payment_option: ?ReservedElasticsearchInstancePaymentOption = null,
 
     /// The charge to your account regardless of whether you are creating any
     /// domains using the instance offering.
-    recurring_charges: ?[]const RecurringCharge,
+    recurring_charges: ?[]const RecurringCharge = null,
 
     /// The Elasticsearch reserved instance offering identifier.
-    reserved_elasticsearch_instance_offering_id: ?[]const u8,
+    reserved_elasticsearch_instance_offering_id: ?[]const u8 = null,
 
     /// The rate you are charged for each hour the domain that is using the offering
     /// is running.
-    usage_price: ?f64,
+    usage_price: ?f64 = null,
 
     pub const json_field_names = .{
         .currency_code = "CurrencyCode",

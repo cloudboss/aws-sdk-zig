@@ -11,12 +11,12 @@ pub const RouteFerryTravelStep = struct {
     duration: i64 = 0,
 
     /// Offset in the leg geometry corresponding to the start of this step.
-    geometry_offset: ?i32,
+    geometry_offset: ?i32 = null,
 
     /// Brief description of the step in the requested language.
     ///
     /// Only available when the TravelStepType is Default.
-    instruction: ?[]const u8,
+    instruction: ?[]const u8 = null,
 
     /// Type of the step.
     @"type": RouteFerryTravelStepType,

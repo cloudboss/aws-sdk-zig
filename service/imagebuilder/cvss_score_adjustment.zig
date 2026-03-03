@@ -2,10 +2,10 @@
 /// a finding.
 pub const CvssScoreAdjustment = struct {
     /// The metric that Amazon Inspector used to adjust the CVSS score.
-    metric: ?[]const u8,
+    metric: ?[]const u8 = null,
 
     /// The reason for the CVSS score adjustment.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metric = "metric",

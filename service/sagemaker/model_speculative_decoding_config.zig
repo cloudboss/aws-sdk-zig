@@ -11,7 +11,7 @@ pub const ModelSpeculativeDecodingConfig = struct {
     /// must be formatted as ShareGPT, OpenAI Completions or OpenAI Chat
     /// Completions. The input can also be unencrypted captured data from a
     /// SageMaker endpoint as long as the endpoint uses one of the above formats.
-    training_data_source: ?ModelSpeculativeDecodingTrainingDataSource,
+    training_data_source: ?ModelSpeculativeDecodingTrainingDataSource = null,
 
     pub const json_field_names = .{
         .technique = "Technique",

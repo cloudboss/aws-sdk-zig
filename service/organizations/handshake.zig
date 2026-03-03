@@ -28,35 +28,35 @@ pub const Handshake = struct {
     /// * **TRANSFER_RESPONSIBILITY**: Handshake sent to
     /// another organization's management account requesting that it designate the
     /// sender with the specified responsibilities for recipient's organization.
-    action: ?ActionType,
+    action: ?ActionType = null,
 
     /// Amazon Resource Name (ARN) for the handshake.
     ///
     /// For more information about ARNs in Organizations, see [ARN
     /// Formats Supported by
     /// Organizations](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies) in the *Amazon Web Services Service Authorization Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Timestamp when the handshake expires.
-    expiration_timestamp: ?i64,
+    expiration_timestamp: ?i64 = null,
 
     /// ID for the handshake.
     ///
     /// The [regex pattern](http://wikipedia.org/wiki/regex) for handshake ID string
     /// requires "h-"
     /// followed by from 8 to 32 lowercase letters or digits.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// An array of `HandshakeParty` objects. Contains details for participant in a
     /// handshake.
-    parties: ?[]const HandshakeParty,
+    parties: ?[]const HandshakeParty = null,
 
     /// Timestamp when the handshake request was made.
-    requested_timestamp: ?i64,
+    requested_timestamp: ?i64 = null,
 
     /// An array of `HandshakeResource` objects. When needed, contains additional
     /// details for a handshake. For example, the email address for the sender.
-    resources: ?[]const HandshakeResource,
+    resources: ?[]const HandshakeResource = null,
 
     /// Current state for the handshake.
     ///
@@ -77,7 +77,7 @@ pub const Handshake = struct {
     /// recipient.
     ///
     /// * **EXPIRED**: Handshake has expired.
-    state: ?HandshakeState,
+    state: ?HandshakeState = null,
 
     pub const json_field_names = .{
         .action = "Action",

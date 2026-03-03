@@ -4,7 +4,7 @@ const SidewalkPositioning = @import("sidewalk_positioning.zig").SidewalkPosition
 /// configure Sidewalk devices during import.
 pub const SidewalkListDevicesForImportInfo = struct {
     /// The Positioning object of the Sidewalk device.
-    positioning: ?SidewalkPositioning,
+    positioning: ?SidewalkPositioning = null,
 
     pub const json_field_names = .{
         .positioning = "Positioning",

@@ -6,35 +6,35 @@ const Tag = @import("tag.zig").Tag;
 pub const KeyPair = struct {
     /// The Amazon Resource Name (ARN) of the key pair
     /// (`arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE`).
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The timestamp when the key pair was created (`1479816991.349`).
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The RSA fingerprint of the key pair.
-    fingerprint: ?[]const u8,
+    fingerprint: ?[]const u8 = null,
 
     /// The region name and Availability Zone where the key pair was created.
-    location: ?ResourceLocation,
+    location: ?ResourceLocation = null,
 
     /// The friendly name of the SSH key pair.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The resource type (usually `KeyPair`).
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The support code. Include this code in your email to support when you have
     /// questions about
     /// an instance or another resource in Lightsail. This code enables our support
     /// team to look up
     /// your Lightsail information more easily.
-    support_code: ?[]const u8,
+    support_code: ?[]const u8 = null,
 
     /// The tag keys and optional values for the resource. For more information
     /// about tags in
     /// Lightsail, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .arn = "arn",

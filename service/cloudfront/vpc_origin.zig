@@ -3,7 +3,7 @@ const VpcOriginEndpointConfig = @import("vpc_origin_endpoint_config.zig").VpcOri
 /// An Amazon CloudFront VPC origin.
 pub const VpcOrigin = struct {
     /// The account ID of the Amazon Web Services account that owns the VPC origin.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The VPC origin ARN.
     arn: []const u8,

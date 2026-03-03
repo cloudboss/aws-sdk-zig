@@ -9,10 +9,10 @@ const BoundingBox = @import("bounding_box.zig").BoundingBox;
 /// comparison.
 pub const ComparedSourceImageFace = struct {
     /// Bounding box of the face.
-    bounding_box: ?BoundingBox,
+    bounding_box: ?BoundingBox = null,
 
     /// Confidence level that the selected bounding box contains a face.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     pub const json_field_names = .{
         .bounding_box = "BoundingBox",

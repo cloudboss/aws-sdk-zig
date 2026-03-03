@@ -6,7 +6,7 @@ const ExportFilterPropertyAttributes = @import("export_filter_property_attribute
 pub const ExportFilterElement = struct {
     /// Each property is defined by a key-value pair, where the key is the desired
     /// output property name (e.g. "name"), and the value is an object.
-    properties: ?[]const aws.map.MapEntry(ExportFilterPropertyAttributes),
+    properties: ?[]const aws.map.MapEntry(ExportFilterPropertyAttributes) = null,
 
     pub const json_field_names = .{
         .properties = "properties",

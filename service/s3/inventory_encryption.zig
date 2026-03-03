@@ -5,8 +5,8 @@ const SSES3 = @import("sses3.zig").SSES3;
 /// results.
 pub const InventoryEncryption = struct {
     /// Specifies the use of SSE-KMS to encrypt delivered inventory reports.
-    ssekms: ?SSEKMS,
+    ssekms: ?SSEKMS = null,
 
     /// Specifies the use of SSE-S3 to encrypt delivered inventory reports.
-    sses3: ?SSES3,
+    sses3: ?SSES3 = null,
 };

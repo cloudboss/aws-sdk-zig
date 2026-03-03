@@ -4,10 +4,10 @@ const FeatureType = @import("feature_type.zig").FeatureType;
 /// The standard domain object type.
 pub const DomainObjectTypeField = struct {
     /// The content type of the field.
-    content_type: ?ContentType,
+    content_type: ?ContentType = null,
 
     /// The semantic meaning of the field.
-    feature_type: ?FeatureType,
+    feature_type: ?FeatureType = null,
 
     /// The expression that defines how to extract the field value from the source
     /// object.>

@@ -4,29 +4,29 @@ const CdmaNmrObj = @import("cdma_nmr_obj.zig").CdmaNmrObj;
 /// CDMA (Code-division multiple access) object.
 pub const CdmaObj = struct {
     /// CDMA base station latitude in degrees.
-    base_lat: ?f32,
+    base_lat: ?f32 = null,
 
     /// CDMA base station longitude in degrees.
-    base_lng: ?f32,
+    base_lng: ?f32 = null,
 
     /// CDMA base station ID (BSID).
     base_station_id: i32,
 
     /// CDMA local identification (local ID) parameters.
-    cdma_local_id: ?CdmaLocalId,
+    cdma_local_id: ?CdmaLocalId = null,
 
     /// CDMA network measurement reports.
-    cdma_nmr: ?[]const CdmaNmrObj,
+    cdma_nmr: ?[]const CdmaNmrObj = null,
 
     /// CDMA network ID (NID).
     network_id: i32,
 
     /// Transmit power level of the pilot signal, measured in dBm
     /// (decibel-milliwatts).
-    pilot_power: ?i32,
+    pilot_power: ?i32 = null,
 
     /// CDMA registration zone (RZ).
-    registration_zone: ?i32,
+    registration_zone: ?i32 = null,
 
     /// CDMA system ID (SID).
     system_id: i32,

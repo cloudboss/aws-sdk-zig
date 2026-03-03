@@ -2,7 +2,7 @@
 pub const OpsItemIdentity = struct {
     /// The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem
     /// event.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

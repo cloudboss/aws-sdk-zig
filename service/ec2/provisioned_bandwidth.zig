@@ -3,17 +3,17 @@
 /// contact Amazon Web Services Support.
 pub const ProvisionedBandwidth = struct {
     /// Reserved.
-    provisioned: ?[]const u8,
+    provisioned: ?[]const u8 = null,
 
     /// Reserved.
-    provision_time: ?i64,
+    provision_time: ?i64 = null,
 
     /// Reserved.
-    requested: ?[]const u8,
+    requested: ?[]const u8 = null,
 
     /// Reserved.
-    request_time: ?i64,
+    request_time: ?i64 = null,
 
     /// Reserved.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 };

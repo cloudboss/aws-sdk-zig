@@ -8,10 +8,10 @@ const FormInputBindingPropertiesValueProperties = @import("form_input_binding_pr
 /// an app.
 pub const FormInputBindingPropertiesValue = struct {
     /// Describes the properties to customize with data at runtime.
-    binding_properties: ?FormInputBindingPropertiesValueProperties,
+    binding_properties: ?FormInputBindingPropertiesValueProperties = null,
 
     /// The property type.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .binding_properties = "bindingProperties",

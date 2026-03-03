@@ -3,7 +3,7 @@ const PeriodUnit = @import("period_unit.zig").PeriodUnit;
 /// Defines a limit and the time period during which it is enforced.
 pub const Period = struct {
     /// The maximum allowed number of destination invocations per profile.
-    max_invocations_per_profile: ?i32,
+    max_invocations_per_profile: ?i32 = null,
 
     /// The unit of time.
     unit: PeriodUnit,

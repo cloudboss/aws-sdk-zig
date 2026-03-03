@@ -34,7 +34,7 @@ pub const IntegerParameterRange = struct {
     ///
     /// Logarithmic scaling works only for ranges that have only values greater than
     /// 0.
-    scaling_type: ?HyperParameterScalingType,
+    scaling_type: ?HyperParameterScalingType = null,
 
     pub const json_field_names = .{
         .max_value = "MaxValue",

@@ -20,7 +20,7 @@ const NetworkAclRuleAction = @import("network_acl_rule_action.zig").NetworkAclRu
 /// when you save the network ACL policy specification.
 pub const NetworkAclEntry = struct {
     /// The IPv4 network range to allow or deny, in CIDR notation.
-    cidr_block: ?[]const u8,
+    cidr_block: ?[]const u8 = null,
 
     /// Indicates whether the rule is an egress, or outbound, rule (applied to
     /// traffic leaving the subnet). If it's not
@@ -28,13 +28,13 @@ pub const NetworkAclEntry = struct {
     egress: bool,
 
     /// ICMP protocol: The ICMP type and code.
-    icmp_type_code: ?NetworkAclIcmpTypeCode,
+    icmp_type_code: ?NetworkAclIcmpTypeCode = null,
 
     /// The IPv6 network range to allow or deny, in CIDR notation.
-    ipv_6_cidr_block: ?[]const u8,
+    ipv_6_cidr_block: ?[]const u8 = null,
 
     /// TCP or UDP protocols: The range of ports the rule applies to.
-    port_range: ?NetworkAclPortRange,
+    port_range: ?NetworkAclPortRange = null,
 
     /// The protocol number. A value of "-1" means all protocols.
     protocol: []const u8,

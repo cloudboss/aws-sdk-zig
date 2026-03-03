@@ -6,7 +6,7 @@ const TableClass = @import("table_class.zig").TableClass;
 /// Represents a replica to be created.
 pub const CreateReplicationGroupMemberAction = struct {
     /// Replica-specific global secondary index settings.
-    global_secondary_indexes: ?[]const ReplicaGlobalSecondaryIndex,
+    global_secondary_indexes: ?[]const ReplicaGlobalSecondaryIndex = null,
 
     /// The KMS key that should be used for KMS encryption in
     /// the new replica. To specify a key, use its key ID, Amazon Resource Name
@@ -15,18 +15,18 @@ pub const CreateReplicationGroupMemberAction = struct {
     /// key is
     /// different from the default DynamoDB KMS key
     /// `alias/aws/dynamodb`.
-    kms_master_key_id: ?[]const u8,
+    kms_master_key_id: ?[]const u8 = null,
 
     /// The maximum on-demand throughput settings for the specified replica table
     /// being
     /// created. You can only modify `MaxReadRequestUnits`, because you can't modify
     /// `MaxWriteRequestUnits` for individual replica tables.
-    on_demand_throughput_override: ?OnDemandThroughputOverride,
+    on_demand_throughput_override: ?OnDemandThroughputOverride = null,
 
     /// Replica-specific provisioned throughput. If not specified, uses the source
     /// table's
     /// provisioned throughput settings.
-    provisioned_throughput_override: ?ProvisionedThroughputOverride,
+    provisioned_throughput_override: ?ProvisionedThroughputOverride = null,
 
     /// The Region where the new replica will be created.
     region_name: []const u8,
@@ -34,7 +34,7 @@ pub const CreateReplicationGroupMemberAction = struct {
     /// Replica-specific table class. If not specified, uses the source table's
     /// table
     /// class.
-    table_class_override: ?TableClass,
+    table_class_override: ?TableClass = null,
 
     pub const json_field_names = .{
         .global_secondary_indexes = "GlobalSecondaryIndexes",

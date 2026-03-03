@@ -1,16 +1,16 @@
 /// Describes a work team of a vendor that does the labelling job.
 pub const SubscribedWorkteam = struct {
     /// Marketplace product listing ID.
-    listing_id: ?[]const u8,
+    listing_id: ?[]const u8 = null,
 
     /// The description of the vendor from the Amazon Marketplace.
-    marketplace_description: ?[]const u8,
+    marketplace_description: ?[]const u8 = null,
 
     /// The title of the service provided by the vendor in the Amazon Marketplace.
-    marketplace_title: ?[]const u8,
+    marketplace_title: ?[]const u8 = null,
 
     /// The name of the vendor in the Amazon Marketplace.
-    seller_name: ?[]const u8,
+    seller_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the vendor that you have subscribed.
     workteam_arn: []const u8,

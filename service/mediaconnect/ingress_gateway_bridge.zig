@@ -3,7 +3,7 @@
 /// delivered to the cloud.
 pub const IngressGatewayBridge = struct {
     /// The ID of the instance running this bridge.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The maximum expected bitrate (in bps) of the ingress bridge.
     max_bitrate: i32,

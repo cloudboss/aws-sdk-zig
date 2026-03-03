@@ -2,17 +2,17 @@
 pub const IpOwner = struct {
     /// The autonomous system number (ASN) for the autonomous system that included
     /// the IP address.
-    asn: ?[]const u8,
+    asn: ?[]const u8 = null,
 
     /// The organization identifier that's associated with the autonomous system
     /// number (ASN) for the autonomous system that included the IP address.
-    asn_org: ?[]const u8,
+    asn_org: ?[]const u8 = null,
 
     /// The name of the internet service provider (ISP) that owned the IP address.
-    isp: ?[]const u8,
+    isp: ?[]const u8 = null,
 
     /// The name of the organization that owned the IP address.
-    org: ?[]const u8,
+    org: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .asn = "asn",

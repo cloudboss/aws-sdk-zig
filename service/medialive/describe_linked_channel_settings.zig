@@ -3,9 +3,9 @@ const DescribePrimaryChannelSettings = @import("describe_primary_channel_setting
 
 /// Linked channel configuration details
 pub const DescribeLinkedChannelSettings = struct {
-    follower_channel_settings: ?DescribeFollowerChannelSettings,
+    follower_channel_settings: ?DescribeFollowerChannelSettings = null,
 
-    primary_channel_settings: ?DescribePrimaryChannelSettings,
+    primary_channel_settings: ?DescribePrimaryChannelSettings = null,
 
     pub const json_field_names = .{
         .follower_channel_settings = "FollowerChannelSettings",

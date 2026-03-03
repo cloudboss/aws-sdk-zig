@@ -10,14 +10,14 @@ pub const ProfileSummary = struct {
     created_at: i64,
 
     /// Specifies whether or not logging is enabled for this profile.
-    logging: ?Logging,
+    logging: ?Logging = null,
 
     /// Returns the name of the logging group.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     /// Returns the timestamp that identifies the most recent date and time that the
     /// profile was modified.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// Returns the display name for profile.
     name: []const u8,

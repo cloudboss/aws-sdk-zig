@@ -10,26 +10,26 @@ pub const LifecyclePolicySummary = struct {
     /// * `VOLUME` - Default policy for EBS snapshots
     ///
     /// * `INSTANCE` - Default policy for EBS-backed AMIs
-    default_policy: ?bool,
+    default_policy: ?bool = null,
 
     /// The description of the lifecycle policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the lifecycle policy.
-    policy_id: ?[]const u8,
+    policy_id: ?[]const u8 = null,
 
     /// The type of policy. `EBS_SNAPSHOT_MANAGEMENT` indicates that the policy
     /// manages the lifecycle of Amazon EBS snapshots. `IMAGE_MANAGEMENT`
     /// indicates that the policy manages the lifecycle of EBS-backed AMIs.
     /// `EVENT_BASED_POLICY` indicates that the policy automates cross-account
     /// snapshot copies for snapshots that are shared with your account.
-    policy_type: ?PolicyTypeValues,
+    policy_type: ?PolicyTypeValues = null,
 
     /// The activation state of the lifecycle policy.
-    state: ?GettablePolicyStateValues,
+    state: ?GettablePolicyStateValues = null,
 
     /// The tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .default_policy = "DefaultPolicy",

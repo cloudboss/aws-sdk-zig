@@ -4,7 +4,7 @@ const WorkflowType = @import("workflow_type.zig").WorkflowType;
 /// Provide details of the `ChildWorkflowExecutionCanceled` event.
 pub const ChildWorkflowExecutionCanceledEventAttributes = struct {
     /// Details of the cancellation (if provided).
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// The ID of the `StartChildWorkflowExecutionInitiated` event corresponding to
     /// the

@@ -9,13 +9,13 @@ pub const InputSwitchScheduleActionSettings = struct {
 
     /// Settings to let you create a clip of the file input, in order to set up the
     /// input to ingest only a portion of the file.
-    input_clipping_settings: ?InputClippingSettings,
+    input_clipping_settings: ?InputClippingSettings = null,
 
     /// The value for the variable portion of the URL for the dynamic input, for
     /// this instance of the input. Each time you use the same dynamic input in an
     /// input switch action, you can provide a different value, in order to connect
     /// the input to a different content source.
-    url_path: ?[]const []const u8,
+    url_path: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .input_attachment_name_reference = "InputAttachmentNameReference",

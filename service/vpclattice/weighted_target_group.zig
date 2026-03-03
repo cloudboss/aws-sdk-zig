@@ -11,7 +11,7 @@ pub const WeightedTargetGroup = struct {
     /// with a weight of 20 receives twice as many requests as the other target
     /// group. If there's only one target group specified, then the default value is
     /// 100.
-    weight: ?i32,
+    weight: ?i32 = null,
 
     pub const json_field_names = .{
         .target_group_identifier = "targetGroupIdentifier",

@@ -4,7 +4,7 @@ const SessionLifecycleTargetStatus = @import("session_lifecycle_target_status.zi
 /// The summary of a session.
 pub const SessionSummary = struct {
     /// The date and time the resource ended running.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The fleet ID.
     fleet_id: []const u8,
@@ -19,13 +19,13 @@ pub const SessionSummary = struct {
     started_at: i64,
 
     /// The target life cycle status for the session.
-    target_lifecycle_status: ?SessionLifecycleTargetStatus,
+    target_lifecycle_status: ?SessionLifecycleTargetStatus = null,
 
     /// The date and time the resource was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user or system that updated this resource.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     /// The worker ID.
     worker_id: []const u8,

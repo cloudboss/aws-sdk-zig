@@ -4,14 +4,14 @@ const ImportInstanceVolumeDetailItem = @import("import_instance_volume_detail_it
 /// Describes an import instance task.
 pub const ImportInstanceTaskDetails = struct {
     /// A description of the task.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The instance operating system.
-    platform: ?PlatformValues,
+    platform: ?PlatformValues = null,
 
     /// The volumes.
-    volumes: ?[]const ImportInstanceVolumeDetailItem,
+    volumes: ?[]const ImportInstanceVolumeDetailItem = null,
 };

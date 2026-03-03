@@ -3,17 +3,17 @@ const EpisodicReflectionConfigurationInput = @import("episodic_reflection_config
 /// Input for creating an episodic memory strategy.
 pub const EpisodicMemoryStrategyInput = struct {
     /// The description of the episodic memory strategy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the episodic memory strategy.
     name: []const u8,
 
     /// The namespaces for which to create episodes.
-    namespaces: ?[]const []const u8,
+    namespaces: ?[]const []const u8 = null,
 
     /// The configuration for the reflections created with the episodic memory
     /// strategy.
-    reflection_configuration: ?EpisodicReflectionConfigurationInput,
+    reflection_configuration: ?EpisodicReflectionConfigurationInput = null,
 
     pub const json_field_names = .{
         .description = "description",

@@ -5,10 +5,10 @@ pub const Volume = struct {
     /// Represents a pre-existing file or directory on the host machine that the
     /// volume maps
     /// to.
-    host_path: ?HostPath,
+    host_path: ?HostPath = null,
 
     /// Volume name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .host_path = "HostPath",

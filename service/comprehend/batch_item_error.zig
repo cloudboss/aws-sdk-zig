@@ -4,13 +4,13 @@
 /// error.
 pub const BatchItemError = struct {
     /// The numeric error code of the error.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// A text description of the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The zero-based index of the document in the input list.
-    index: ?i32,
+    index: ?i32 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

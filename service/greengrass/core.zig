@@ -9,7 +9,7 @@ pub const Core = struct {
     id: []const u8,
 
     /// If true, the core's local shadow is automatically synced with the cloud.
-    sync_shadow: ?bool,
+    sync_shadow: ?bool = null,
 
     /// The ARN of the thing which is the core.
     thing_arn: []const u8,

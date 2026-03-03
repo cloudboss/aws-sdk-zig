@@ -7,7 +7,7 @@ pub const ImportBatch = struct {
 
     /// The error message if the batch failed to import. Only present when status is
     /// FAILED.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The current status of the import batch. Valid values are IN_PROGRESS,
     /// CANCELLED, COMPLETED and FAILED.

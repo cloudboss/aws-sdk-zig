@@ -3,16 +3,16 @@
 /// instance.
 pub const EBSResourceUtilization = struct {
     /// The maximum size of read operations per second
-    ebs_read_bytes_per_second: ?[]const u8,
+    ebs_read_bytes_per_second: ?[]const u8 = null,
 
     /// The maximum number of read operations per second.
-    ebs_read_ops_per_second: ?[]const u8,
+    ebs_read_ops_per_second: ?[]const u8 = null,
 
     /// The maximum size of write operations per second.
-    ebs_write_bytes_per_second: ?[]const u8,
+    ebs_write_bytes_per_second: ?[]const u8 = null,
 
     /// The maximum number of write operations per second.
-    ebs_write_ops_per_second: ?[]const u8,
+    ebs_write_ops_per_second: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ebs_read_bytes_per_second = "EbsReadBytesPerSecond",

@@ -6,11 +6,11 @@ const SearchResourcesTagCriterionPair = @import("search_resources_tag_criterion_
 pub const SearchResourcesTagCriterion = struct {
     /// The operator to use in the condition. Valid values are EQ (equals) and NE
     /// (not equals).
-    comparator: ?SearchResourcesComparator,
+    comparator: ?SearchResourcesComparator = null,
 
     /// The tag keys, tag values, or tag key and value pairs to use in the
     /// condition.
-    tag_values: ?[]const SearchResourcesTagCriterionPair,
+    tag_values: ?[]const SearchResourcesTagCriterionPair = null,
 
     pub const json_field_names = .{
         .comparator = "comparator",

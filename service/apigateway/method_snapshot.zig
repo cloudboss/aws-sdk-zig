@@ -6,7 +6,7 @@ pub const MethodSnapshot = struct {
     /// The method's authorization type. Valid values are `NONE` for open access,
     /// `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using a custom
     /// authorizer, or `COGNITO_USER_POOLS` for using a Cognito user pool.
-    authorization_type: ?[]const u8,
+    authorization_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_key_required = "apiKeyRequired",

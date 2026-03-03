@@ -7,11 +7,11 @@ pub const DataAutomationProjectSummary = struct {
 
     project_arn: []const u8,
 
-    project_name: ?[]const u8,
+    project_name: ?[]const u8 = null,
 
-    project_stage: ?DataAutomationProjectStage,
+    project_stage: ?DataAutomationProjectStage = null,
 
-    project_type: ?DataAutomationProjectType,
+    project_type: ?DataAutomationProjectType = null,
 
     pub const json_field_names = .{
         .creation_time = "creationTime",

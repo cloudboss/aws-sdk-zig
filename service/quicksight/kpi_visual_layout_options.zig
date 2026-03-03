@@ -3,7 +3,7 @@ const KPIVisualStandardLayout = @import("kpi_visual_standard_layout.zig").KPIVis
 /// The options that determine the layout a KPI visual.
 pub const KPIVisualLayoutOptions = struct {
     /// The standard layout of the KPI visual.
-    standard_layout: ?KPIVisualStandardLayout,
+    standard_layout: ?KPIVisualStandardLayout = null,
 
     pub const json_field_names = .{
         .standard_layout = "StandardLayout",

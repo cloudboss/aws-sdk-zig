@@ -18,56 +18,56 @@ pub const GameServer = struct {
     /// update its utilization status. After one minute, the game server claim
     /// status reverts to
     /// null.
-    claim_status: ?GameServerClaimStatus,
+    claim_status: ?GameServerClaimStatus = null,
 
     /// The port and IP address that must be used to establish a client connection
     /// to the game
     /// server.
-    connection_info: ?[]const u8,
+    connection_info: ?[]const u8 = null,
 
     /// A set of custom game server properties, formatted as a single string value.
     /// This data
     /// is passed to a game client or service when it requests information on game
     /// servers.
-    game_server_data: ?[]const u8,
+    game_server_data: ?[]const u8 = null,
 
     /// The ARN identifier for the game server group where the game server is
     /// located.
-    game_server_group_arn: ?[]const u8,
+    game_server_group_arn: ?[]const u8 = null,
 
     /// A unique identifier for the game server group where the game server is
     /// running.
-    game_server_group_name: ?[]const u8,
+    game_server_group_name: ?[]const u8 = null,
 
     /// A custom string that uniquely identifies the game server. Game server IDs
     /// are developer-defined and are unique across all game
     /// server groups in an Amazon Web Services account.
-    game_server_id: ?[]const u8,
+    game_server_id: ?[]const u8 = null,
 
     /// The unique identifier for the instance where the game server is running.
     /// This ID is
     /// available in the instance metadata. EC2 instance IDs
     /// use a 17-character format, for example: `i-1234567890abcdef0`.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// Timestamp that indicates the last time the game server was claimed. The
     /// format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`). This value is used to calculate when a claimed game
     /// server's status should revert to null.
-    last_claim_time: ?i64,
+    last_claim_time: ?i64 = null,
 
     /// Timestamp that indicates the last time the game server was updated with
     /// health status.
     /// The format is a number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`). After game server registration, this property is
     /// only changed when a game server update specifies a health check value.
-    last_health_check_time: ?i64,
+    last_health_check_time: ?i64 = null,
 
     /// Timestamp that indicates when the game server registered. The format is a
     /// number expressed in Unix
     /// time as milliseconds (for example `"1469498468.057"`).
-    registration_time: ?i64,
+    registration_time: ?i64 = null,
 
     /// Indicates whether the game server is currently available for new games or is
     /// busy.
@@ -79,7 +79,7 @@ pub const GameServer = struct {
     ///
     /// * `UTILIZED` - The game server is currently hosting a game session
     /// with players.
-    utilization_status: ?GameServerUtilizationStatus,
+    utilization_status: ?GameServerUtilizationStatus = null,
 
     pub const json_field_names = .{
         .claim_status = "ClaimStatus",

@@ -12,10 +12,10 @@ pub const NotificationAction = struct {
     action: NotificationTargetActions,
 
     /// Contains the configuration information of email notifications.
-    email_configurations: ?[]const EmailConfiguration,
+    email_configurations: ?[]const EmailConfiguration = null,
 
     /// Contains the configuration information of SMS notifications.
-    sms_configurations: ?[]const SMSConfiguration,
+    sms_configurations: ?[]const SMSConfiguration = null,
 
     pub const json_field_names = .{
         .action = "action",

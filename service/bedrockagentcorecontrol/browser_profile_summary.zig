@@ -7,18 +7,18 @@ pub const BrowserProfileSummary = struct {
     created_at: i64,
 
     /// The description of the browser profile.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The timestamp when browser session data was last saved to this profile.
-    last_saved_at: ?i64,
+    last_saved_at: ?i64 = null,
 
     /// The identifier of the browser from which data was last saved to this
     /// profile.
-    last_saved_browser_id: ?[]const u8,
+    last_saved_browser_id: ?[]const u8 = null,
 
     /// The identifier of the browser session from which data was last saved to this
     /// profile.
-    last_saved_browser_session_id: ?[]const u8,
+    last_saved_browser_session_id: ?[]const u8 = null,
 
     /// The timestamp when the browser profile was last updated.
     last_updated_at: i64,

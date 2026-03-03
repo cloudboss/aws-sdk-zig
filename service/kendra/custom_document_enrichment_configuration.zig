@@ -12,7 +12,7 @@ pub const CustomDocumentEnrichmentConfiguration = struct {
     /// Configuration information to alter document attributes or metadata fields
     /// and content
     /// when ingesting documents into Amazon Kendra.
-    inline_configurations: ?[]const InlineCustomDocumentEnrichmentConfiguration,
+    inline_configurations: ?[]const InlineCustomDocumentEnrichmentConfiguration = null,
 
     /// Configuration information for invoking a Lambda function in Lambda on
     /// the structured documents with their metadata and text extracted. You can use
@@ -21,7 +21,7 @@ pub const CustomDocumentEnrichmentConfiguration = struct {
     /// document metadata
     /// and content. For more information, see [Advanced data
     /// manipulation](https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation).
-    post_extraction_hook_configuration: ?HookConfiguration,
+    post_extraction_hook_configuration: ?HookConfiguration = null,
 
     /// Configuration information for invoking a Lambda function in Lambda on
     /// the original or raw documents before extracting their metadata and text. You
@@ -30,7 +30,7 @@ pub const CustomDocumentEnrichmentConfiguration = struct {
     /// document
     /// metadata and content. For more information, see [Advanced data
     /// manipulation](https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation).
-    pre_extraction_hook_configuration: ?HookConfiguration,
+    pre_extraction_hook_configuration: ?HookConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of an IAM role with permission to run
     /// `PreExtractionHookConfiguration` and
@@ -38,7 +38,7 @@ pub const CustomDocumentEnrichmentConfiguration = struct {
     /// content during the document ingestion process. For more information, see [an
     /// IAM roles for Amazon
     /// Kendra](https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .inline_configurations = "InlineConfigurations",

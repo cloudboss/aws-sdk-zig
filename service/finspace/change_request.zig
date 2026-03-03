@@ -15,7 +15,7 @@ pub const ChangeRequest = struct {
 
     /// Defines the S3 path of the source file that is required to add or update
     /// files in a database.
-    s_3_path: ?[]const u8,
+    s_3_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .change_type = "changeType",

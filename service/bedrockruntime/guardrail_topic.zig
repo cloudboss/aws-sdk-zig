@@ -8,7 +8,7 @@ pub const GuardrailTopic = struct {
 
     /// Indicates whether topic content that breaches the guardrail configuration is
     /// detected.
-    detected: ?bool,
+    detected: ?bool = null,
 
     /// The name for the guardrail.
     name: []const u8,

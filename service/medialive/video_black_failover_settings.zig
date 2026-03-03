@@ -9,11 +9,11 @@ pub const VideoBlackFailoverSettings = struct {
     /// means a pixel value of 102 or less is 'black'. If you set this field to .1
     /// in an 8-bit color depth: (255*0.1=25.5), which means a pixel value of 25 or
     /// less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
-    black_detect_threshold: ?f64,
+    black_detect_threshold: ?f64 = null,
 
     /// The amount of time (in milliseconds) that the active input must be black
     /// before automatic input failover occurs.
-    video_black_threshold_msec: ?i32,
+    video_black_threshold_msec: ?i32 = null,
 
     pub const json_field_names = .{
         .black_detect_threshold = "BlackDetectThreshold",

@@ -8,29 +8,29 @@ const Visibility = @import("visibility.zig").Visibility;
 /// The table cell style for a cell in pivot table or table visual.
 pub const TableCellStyle = struct {
     /// The background color for the table cells.
-    background_color: ?[]const u8,
+    background_color: ?[]const u8 = null,
 
     /// The borders for the table cells.
-    border: ?GlobalTableBorderOptions,
+    border: ?GlobalTableBorderOptions = null,
 
     /// The font configuration of the table cells.
-    font_configuration: ?FontConfiguration,
+    font_configuration: ?FontConfiguration = null,
 
     /// The height color for the table cells.
-    height: ?i32,
+    height: ?i32 = null,
 
     /// The horizontal text alignment (left, center, right, auto) for the table
     /// cells.
-    horizontal_text_alignment: ?HorizontalTextAlignment,
+    horizontal_text_alignment: ?HorizontalTextAlignment = null,
 
     /// The text wrap (none, wrap) for the table cells.
-    text_wrap: ?TextWrap,
+    text_wrap: ?TextWrap = null,
 
     /// The vertical text alignment (top, middle, bottom) for the table cells.
-    vertical_text_alignment: ?VerticalTextAlignment,
+    vertical_text_alignment: ?VerticalTextAlignment = null,
 
     /// The visibility of the table cells.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .background_color = "BackgroundColor",

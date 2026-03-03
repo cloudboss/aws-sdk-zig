@@ -19,10 +19,10 @@ pub const NameServersUpdateState = struct {
     /// * `FAILED` - The name server record update failed.
     ///
     /// * `STARTED` - The automatic name server record update started.
-    code: ?NameServersUpdateStateCode,
+    code: ?NameServersUpdateStateCode = null,
 
     /// The message that describes the reason for the status code.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

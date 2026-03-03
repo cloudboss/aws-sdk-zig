@@ -15,7 +15,7 @@ pub const ConfigurationRecorderSummary = struct {
 
     /// For service-linked configuration recorders, indicates which Amazon Web
     /// Services service the configuration recorder is linked to.
-    service_principal: ?[]const u8,
+    service_principal: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

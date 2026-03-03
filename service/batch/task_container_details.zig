@@ -21,10 +21,10 @@ pub const TaskContainerDetails = struct {
     /// parameter to [docker run](https://docs.docker.com/engine/reference/run/).
     /// For more information, see
     /// [https://docs.docker.com/engine/reference/builder/#cmd](https://docs.docker.com/engine/reference/builder/#cmd).
-    command: ?[]const []const u8,
+    command: ?[]const []const u8 = null,
 
     /// A list of containers that this container depends on.
-    depends_on: ?[]const TaskContainerDependency,
+    depends_on: ?[]const TaskContainerDependency = null,
 
     /// The environment variables to pass to a container. This parameter maps to
     /// `Env` in
@@ -38,7 +38,7 @@ pub const TaskContainerDetails = struct {
     /// We don't recommend using plaintext environment variables for sensitive
     /// information, such as
     /// credential data.
-    environment: ?[]const KeyValuePair,
+    environment: ?[]const KeyValuePair = null,
 
     /// If the essential parameter of a container is marked as `true`, and that
     /// container
@@ -58,17 +58,17 @@ pub const TaskContainerDetails = struct {
     /// definitions. For more
     /// information, see [Application
     /// Architecture](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html) in the *Amazon Elastic Container Service Developer Guide*.
-    essential: ?bool,
+    essential: ?bool = null,
 
     /// The exit code returned upon completion.
-    exit_code: ?i32,
+    exit_code: ?i32 = null,
 
     /// The FireLens configuration for the container. This is used to specify and
     /// configure a
     /// log router for container logs. For more information, see [Custom
     /// log](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html) routing in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    firelens_configuration: ?FirelensConfiguration,
+    firelens_configuration: ?FirelensConfiguration = null,
 
     /// The image used to start a container. This string is passed directly to the
     /// Docker daemon. By
@@ -85,7 +85,7 @@ pub const TaskContainerDetails = struct {
     /// *docker
     /// run*
     /// ](https://docs.docker.com/engine/reference/run/#security-configuration).
-    image: ?[]const u8,
+    image: ?[]const u8 = null,
 
     /// Linux-specific modifications that are applied to the container, such as
     /// Linux kernel
@@ -93,7 +93,7 @@ pub const TaskContainerDetails = struct {
     /// [KernelCapabilities](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_KernelCapabilities.html).
     ///
     /// This parameter is not supported for Windows containers.
-    linux_parameters: ?LinuxParameters,
+    linux_parameters: ?LinuxParameters = null,
 
     /// The log configuration specification for the container.
     ///
@@ -139,14 +139,14 @@ pub const TaskContainerDetails = struct {
     /// configuration options. For
     /// more information, see [Amazon ECS container agent
     /// configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.
-    log_configuration: ?LogConfiguration,
+    log_configuration: ?LogConfiguration = null,
 
     /// The name of the CloudWatch Logs log stream that's associated with the
     /// container. The log group for
     /// Batch jobs is /aws/batch/job. Each container attempt receives a log stream
     /// name when they reach
     /// the `RUNNING` status.
-    log_stream_name: ?[]const u8,
+    log_stream_name: ?[]const u8 = null,
 
     /// The mount points for data volumes in your container.
     ///
@@ -160,13 +160,13 @@ pub const TaskContainerDetails = struct {
     /// `$env:ProgramData`. Windows containers can't mount directories on a
     /// different drive,
     /// and mount point can't be across drives.
-    mount_points: ?[]const MountPoint,
+    mount_points: ?[]const MountPoint = null,
 
     /// The name of a container.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The network interfaces that are associated with the job.
-    network_interfaces: ?[]const NetworkInterface,
+    network_interfaces: ?[]const NetworkInterface = null,
 
     /// When this parameter is `true`, the container is given elevated privileges on
     /// the
@@ -179,7 +179,7 @@ pub const TaskContainerDetails = struct {
     ///
     /// This parameter is not supported for Windows containers or tasks run on
     /// Fargate.
-    privileged: ?bool,
+    privileged: ?bool = null,
 
     /// When this parameter is true, the container is given read-only access to its
     /// root file
@@ -190,25 +190,25 @@ pub const TaskContainerDetails = struct {
     /// run](https://docs.docker.com/engine/reference/run/#security-configuration).
     ///
     /// This parameter is not supported for Windows containers.
-    readonly_root_filesystem: ?bool,
+    readonly_root_filesystem: ?bool = null,
 
     /// A short (255 max characters) human-readable string to provide additional
     /// details for a
     /// running or stopped container.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The private repository authentication credentials to use.
-    repository_credentials: ?RepositoryCredentials,
+    repository_credentials: ?RepositoryCredentials = null,
 
     /// The type and amount of a resource to assign to a container. The only
     /// supported resource is a
     /// GPU.
-    resource_requirements: ?[]const ResourceRequirement,
+    resource_requirements: ?[]const ResourceRequirement = null,
 
     /// The secrets to pass to the container. For more information, see [Specifying
     /// Sensitive
     /// Data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) in the Amazon Elastic Container Service Developer Guide.
-    secrets: ?[]const Secret,
+    secrets: ?[]const Secret = null,
 
     /// A list of `ulimits` to set in the container. If a `ulimit` value is
     /// specified in a task definition, it overrides the default values set by
@@ -237,7 +237,7 @@ pub const TaskContainerDetails = struct {
     /// '{{.Server.APIVersion}}'`
     ///
     /// This parameter is not supported for Windows containers.
-    ulimits: ?[]const Ulimit,
+    ulimits: ?[]const Ulimit = null,
 
     /// The user to use inside the container. This parameter maps to User in the
     /// Create a container
@@ -266,7 +266,7 @@ pub const TaskContainerDetails = struct {
     /// * ``
     ///
     /// This parameter is not supported for Windows containers.
-    user: ?[]const u8,
+    user: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .command = "command",

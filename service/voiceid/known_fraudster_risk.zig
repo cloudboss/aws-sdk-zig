@@ -7,7 +7,7 @@ pub const KnownFraudsterRisk = struct {
     /// no fraudsters registered in a given domain, or if there are no fraudsters
     /// with a
     /// non-zero RiskScore, this value is `null`.
-    generated_fraudster_id: ?[]const u8,
+    generated_fraudster_id: ?[]const u8 = null,
 
     /// The score indicating the likelihood the speaker is a known fraudster.
     risk_score: i32,

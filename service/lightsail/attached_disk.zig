@@ -3,10 +3,10 @@
 /// automatic snapshot.
 pub const AttachedDisk = struct {
     /// The path of the disk (`/dev/xvdf`).
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// The size of the disk in GB.
-    size_in_gb: ?i32,
+    size_in_gb: ?i32 = null,
 
     pub const json_field_names = .{
         .path = "path",

@@ -19,13 +19,13 @@ pub const DataLakeReplicationConfiguration = struct {
     /// to a single destination bucket or to multiple destination buckets. The
     /// destination buckets
     /// can be in different Regions or within the same Region as the source bucket.
-    regions: ?[]const []const u8,
+    regions: ?[]const []const u8 = null,
 
     /// Replication settings for the Amazon S3 buckets. This parameter uses the
     /// Identity and Access Management (IAM) role you created that is managed by
     /// Security Lake, to
     /// ensure the replication setting is correct.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .regions = "regions",

@@ -10,7 +10,7 @@ const Radios = @import("radios.zig").Radios;
 /// auxiliary apps, and network profiles.
 pub const ScheduleRunConfiguration = struct {
     /// A list of upload ARNs for app packages to be installed with your app.
-    auxiliary_apps: ?[]const []const u8,
+    auxiliary_apps: ?[]const []const u8 = null,
 
     /// Specifies the billing method for a test run: `metered` or
     /// `unmetered`. If the parameter is not specified, the default value is
@@ -19,40 +19,40 @@ pub const ScheduleRunConfiguration = struct {
     /// If you have purchased unmetered device slots, you must set this parameter to
     /// `unmetered` to
     /// make use of them. Otherwise, your run counts against your metered time.
-    billing_method: ?BillingMethod,
+    billing_method: ?BillingMethod = null,
 
     /// Input `CustomerArtifactPaths` object for the scheduled run
     /// configuration.
-    customer_artifact_paths: ?CustomerArtifactPaths,
+    customer_artifact_paths: ?CustomerArtifactPaths = null,
 
     /// The device proxy to be configured on the device for the run.
-    device_proxy: ?DeviceProxy,
+    device_proxy: ?DeviceProxy = null,
 
     /// Environment variables associated with the run.
-    environment_variables: ?[]const EnvironmentVariable,
+    environment_variables: ?[]const EnvironmentVariable = null,
 
     /// An IAM role to be assumed by the test host for the run.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The ARN of the extra data for the run. The extra data is a .zip file that
     /// AWS Device Farm extracts to
     /// external data for Android or the app's sandbox for iOS.
-    extra_data_package_arn: ?[]const u8,
+    extra_data_package_arn: ?[]const u8 = null,
 
     /// Information about the locale that is used for the run.
-    locale: ?[]const u8,
+    locale: ?[]const u8 = null,
 
     /// Information about the location that is used for the run.
-    location: ?Location,
+    location: ?Location = null,
 
     /// Reserved for internal use.
-    network_profile_arn: ?[]const u8,
+    network_profile_arn: ?[]const u8 = null,
 
     /// Information about the radio states for the run.
-    radios: ?Radios,
+    radios: ?Radios = null,
 
     /// An array of ARNs for your VPC endpoint configurations.
-    vpce_configuration_arns: ?[]const []const u8,
+    vpce_configuration_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .auxiliary_apps = "auxiliaryApps",

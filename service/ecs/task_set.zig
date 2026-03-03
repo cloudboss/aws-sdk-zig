@@ -15,12 +15,12 @@ const Tag = @import("tag.zig").Tag;
 /// production traffic.
 pub const TaskSet = struct {
     /// The capacity provider strategy that are associated with the task set.
-    capacity_provider_strategy: ?[]const CapacityProviderStrategyItem,
+    capacity_provider_strategy: ?[]const CapacityProviderStrategyItem = null,
 
     /// The Amazon Resource Name (ARN) of the cluster that the service that hosts
     /// the task set
     /// exists in.
-    cluster_arn: ?[]const u8,
+    cluster_arn: ?[]const u8 = null,
 
     /// The computed desired count for the task set. This is calculated by
     /// multiplying the
@@ -31,7 +31,7 @@ pub const TaskSet = struct {
     computed_desired_count: i32 = 0,
 
     /// The Unix timestamp for the time when the task set was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The external ID associated with the task set.
     ///
@@ -44,26 +44,26 @@ pub const TaskSet = struct {
     /// `ECS_TASK_SET_EXTERNAL_ID`
     /// Cloud Map
     /// attribute.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The Fargate ephemeral storage settings for the task set.
-    fargate_ephemeral_storage: ?DeploymentEphemeralStorage,
+    fargate_ephemeral_storage: ?DeploymentEphemeralStorage = null,
 
     /// The ID of the task set.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The launch type the tasks in the task set are using. For more information,
     /// see [Amazon
     /// ECS launch
     /// types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    launch_type: ?LaunchType,
+    launch_type: ?LaunchType = null,
 
     /// Details on a load balancer that are used with a task set.
-    load_balancers: ?[]const LoadBalancer,
+    load_balancers: ?[]const LoadBalancer = null,
 
     /// The network configuration for the task set.
-    network_configuration: ?NetworkConfiguration,
+    network_configuration: ?NetworkConfiguration = null,
 
     /// The number of tasks in the task set that are in the `PENDING` status during
     /// a deployment. A task in the `PENDING` state is preparing to enter the
@@ -77,7 +77,7 @@ pub const TaskSet = struct {
     /// specified only for tasks that use the Fargate launch type.
     ///
     /// All tasks in the set must have the same value.
-    platform_family: ?[]const u8,
+    platform_family: ?[]const u8 = null,
 
     /// The Fargate platform version where the tasks in the task set are running. A
     /// platform version is only specified for tasks run on Fargate. For more
@@ -85,7 +85,7 @@ pub const TaskSet = struct {
     /// platform
     /// versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic Container Service
     /// Developer Guide*.
-    platform_version: ?[]const u8,
+    platform_version: ?[]const u8 = null,
 
     /// The number of tasks in the task set that are in the `RUNNING` status during
     /// a deployment. A task in the `RUNNING` state is running and ready for
@@ -95,16 +95,16 @@ pub const TaskSet = struct {
     /// A floating-point percentage of your desired number of tasks to place and
     /// keep running
     /// in the task set.
-    scale: ?Scale,
+    scale: ?Scale = null,
 
     /// The Amazon Resource Name (ARN) of the service the task set exists in.
-    service_arn: ?[]const u8,
+    service_arn: ?[]const u8 = null,
 
     /// The details for the service discovery registries to assign to this task set.
     /// For more
     /// information, see [Service
     /// discovery](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
-    service_registries: ?[]const ServiceRegistry,
+    service_registries: ?[]const ServiceRegistry = null,
 
     /// The stability status. This indicates whether the task set has reached a
     /// steady state.
@@ -124,18 +124,18 @@ pub const TaskSet = struct {
     ///
     /// If any of those conditions aren't met, the stability status returns
     /// `STABILIZING`.
-    stability_status: ?StabilityStatus,
+    stability_status: ?StabilityStatus = null,
 
     /// The Unix timestamp for the time when the task set stability status was
     /// retrieved.
-    stability_status_at: ?i64,
+    stability_status_at: ?i64 = null,
 
     /// The tag specified when a task set is started. If an CodeDeploy deployment
     /// created
     /// the task set, the `startedBy` parameter is `CODE_DEPLOY`. If an
     /// external deployment created the task set, the `startedBy` field isn't
     /// used.
-    started_by: ?[]const u8,
+    started_by: ?[]const u8 = null,
 
     /// The status of the task set. The following describes each state.
     ///
@@ -151,7 +151,7 @@ pub const TaskSet = struct {
     ///
     /// The tasks in the task set are being stopped, and their corresponding
     /// targets are being deregistered from their target group.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The metadata that you apply to the task set to help you categorize and
     /// organize them.
@@ -185,16 +185,16 @@ pub const TaskSet = struct {
     /// this prefix. Tags with this prefix do not count against your tags per
     /// resource
     /// limit.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The task definition that the task set is using.
-    task_definition: ?[]const u8,
+    task_definition: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the task set.
-    task_set_arn: ?[]const u8,
+    task_set_arn: ?[]const u8 = null,
 
     /// The Unix timestamp for the time when the task set was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .capacity_provider_strategy = "capacityProviderStrategy",

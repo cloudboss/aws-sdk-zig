@@ -10,7 +10,7 @@ pub const RecipeAction = struct {
     operation: []const u8,
 
     /// Contextual parameters for the transformation.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .operation = "Operation",

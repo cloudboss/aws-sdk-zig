@@ -9,11 +9,11 @@ const AutoScalingGroupSavingsOpportunityAfterDiscounts = @import("auto_scaling_g
 pub const AutoScalingGroupRecommendationOption = struct {
     /// An array of objects that describe an Amazon EC2 Auto Scaling group
     /// configuration.
-    configuration: ?AutoScalingGroupConfiguration,
+    configuration: ?AutoScalingGroupConfiguration = null,
 
     /// Describes the GPU accelerator settings for the recommended instance type of
     /// the Amazon EC2 Auto Scaling group.
-    instance_gpu_info: ?GpuInfo,
+    instance_gpu_info: ?GpuInfo = null,
 
     /// The level of effort required to migrate from the current instance type to
     /// the
@@ -27,7 +27,7 @@ pub const AutoScalingGroupRecommendationOption = struct {
     /// effort is
     /// `VeryLow` if both the current and recommended instance types are of the
     /// same CPU architecture.
-    migration_effort: ?MigrationEffort,
+    migration_effort: ?MigrationEffort = null,
 
     /// The performance risk of the Amazon EC2 Auto Scaling group configuration
     /// recommendation.
@@ -65,7 +65,7 @@ pub const AutoScalingGroupRecommendationOption = struct {
     /// on them. For more information, see [Enabling Memory
     /// Utilization with the CloudWatch
     /// Agent](https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
-    projected_utilization_metrics: ?[]const UtilizationMetric,
+    projected_utilization_metrics: ?[]const UtilizationMetric = null,
 
     /// The rank of the Amazon EC2 Auto Scaling group recommendation option.
     ///
@@ -77,13 +77,13 @@ pub const AutoScalingGroupRecommendationOption = struct {
     /// recommendation option. Savings opportunity includes the estimated monthly
     /// savings amount
     /// and percentage.
-    savings_opportunity: ?SavingsOpportunity,
+    savings_opportunity: ?SavingsOpportunity = null,
 
     /// An object that describes the savings opportunity for the Amazon EC2 Auto
     /// Scaling group recommendation option that includes Savings Plans and Reserved
     /// Instances discounts.
     /// Savings opportunity includes the estimated monthly savings and percentage.
-    savings_opportunity_after_discounts: ?AutoScalingGroupSavingsOpportunityAfterDiscounts,
+    savings_opportunity_after_discounts: ?AutoScalingGroupSavingsOpportunityAfterDiscounts = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

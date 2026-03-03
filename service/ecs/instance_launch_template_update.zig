@@ -22,14 +22,14 @@ pub const InstanceLaunchTemplateUpdate = struct {
     /// ECS instance profile for Managed
     /// Instances](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instances-instance-profile.html) in the *Amazon ECS
     /// Developer Guide*.
-    ec_2_instance_profile_arn: ?[]const u8,
+    ec_2_instance_profile_arn: ?[]const u8 = null,
 
     /// The updated instance requirements for attribute-based instance type
     /// selection. Changes
     /// to instance requirements affect which instance types Amazon ECS selects for
     /// new
     /// instances.
-    instance_requirements: ?InstanceRequirementsRequest,
+    instance_requirements: ?InstanceRequirementsRequest = null,
 
     /// CloudWatch provides two categories of monitoring: basic monitoring and
     /// detailed
@@ -43,17 +43,17 @@ pub const InstanceLaunchTemplateUpdate = struct {
     /// monitoring for Amazon ECS Managed
     /// Instances](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/detailed-monitoring-managed-instances.html) in the Amazon ECS
     /// Developer Guide.
-    monitoring: ?ManagedInstancesMonitoringOptions,
+    monitoring: ?ManagedInstancesMonitoringOptions = null,
 
     /// The updated network configuration for Amazon ECS Managed Instances. Changes
     /// to subnets
     /// and security groups affect new instances launched after the update.
-    network_configuration: ?ManagedInstancesNetworkConfiguration,
+    network_configuration: ?ManagedInstancesNetworkConfiguration = null,
 
     /// The updated storage configuration for Amazon ECS Managed Instances. Changes
     /// to storage
     /// settings apply to new instances launched after the update.
-    storage_configuration: ?ManagedInstancesStorageConfiguration,
+    storage_configuration: ?ManagedInstancesStorageConfiguration = null,
 
     pub const json_field_names = .{
         .ec_2_instance_profile_arn = "ec2InstanceProfileArn",

@@ -4,10 +4,10 @@ const VariableValue = @import("variable_value.zig").VariableValue;
 /// feature.
 pub const Variation = struct {
     /// The name of the variation.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The value assigned to this variation.
-    value: ?VariableValue,
+    value: ?VariableValue = null,
 
     pub const json_field_names = .{
         .name = "name",

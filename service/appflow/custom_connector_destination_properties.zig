@@ -9,7 +9,7 @@ pub const CustomConnectorDestinationProperties = struct {
     /// The custom properties that are specific to the connector when it's used as a
     /// destination
     /// in the flow.
-    custom_properties: ?[]const aws.map.StringMapEntry,
+    custom_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The entity specified in the custom connector as a destination in the flow.
     entity_name: []const u8,
@@ -17,17 +17,17 @@ pub const CustomConnectorDestinationProperties = struct {
     /// The settings that determine how Amazon AppFlow handles an error when placing
     /// data in
     /// the custom connector as destination.
-    error_handling_config: ?ErrorHandlingConfig,
+    error_handling_config: ?ErrorHandlingConfig = null,
 
     /// The name of the field that Amazon AppFlow uses as an ID when performing a
     /// write
     /// operation such as update, delete, or upsert.
-    id_field_names: ?[]const []const u8,
+    id_field_names: ?[]const []const u8 = null,
 
     /// Specifies the type of write operation to be performed in the custom
     /// connector when it's
     /// used as destination.
-    write_operation_type: ?WriteOperationType,
+    write_operation_type: ?WriteOperationType = null,
 
     pub const json_field_names = .{
         .custom_properties = "customProperties",

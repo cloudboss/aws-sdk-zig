@@ -3,13 +3,13 @@ const EnvironmentConfigurationParameter = @import("environment_configuration_par
 /// The details of the environment configuration parameter.
 pub const EnvironmentConfigurationParametersDetails = struct {
     /// The parameter overrides.
-    parameter_overrides: ?[]const EnvironmentConfigurationParameter,
+    parameter_overrides: ?[]const EnvironmentConfigurationParameter = null,
 
     /// The resolved environment configuration parameters.
-    resolved_parameters: ?[]const EnvironmentConfigurationParameter,
+    resolved_parameters: ?[]const EnvironmentConfigurationParameter = null,
 
     /// Ssm path environment configuration parameters.
-    ssm_path: ?[]const u8,
+    ssm_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .parameter_overrides = "parameterOverrides",

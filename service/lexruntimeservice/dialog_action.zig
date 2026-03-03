@@ -21,14 +21,14 @@ pub const DialogAction = struct {
     /// * `ReadyForFulfillment` - All of the information
     /// necessary for the intent is present and the intent ready to be
     /// fulfilled by the client application.
-    fulfillment_state: ?FulfillmentState,
+    fulfillment_state: ?FulfillmentState = null,
 
     /// The name of the intent.
-    intent_name: ?[]const u8,
+    intent_name: ?[]const u8 = null,
 
     /// The message that should be shown to the user. If you don't specify a
     /// message, Amazon Lex will use the message configured for the intent.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// * `PlainText` - The message contains plain UTF-8
     /// text.
@@ -43,13 +43,13 @@ pub const DialogAction = struct {
     /// object containing one or more messages. For more information, see
     /// [Message
     /// Groups](https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html).
-    message_format: ?MessageFormatType,
+    message_format: ?MessageFormatType = null,
 
     /// Map of the slots that have been gathered and their values.
-    slots: ?[]const aws.map.StringMapEntry,
+    slots: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the slot that should be elicited from the user.
-    slot_to_elicit: ?[]const u8,
+    slot_to_elicit: ?[]const u8 = null,
 
     /// The next action that the bot should take in its interaction with the
     /// user. The possible values are:

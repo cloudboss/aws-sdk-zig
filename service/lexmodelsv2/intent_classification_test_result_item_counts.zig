@@ -8,7 +8,7 @@ pub const IntentClassificationTestResultItemCounts = struct {
 
     /// The number of matched, mismatched, and execution error results for speech
     /// transcription for the intent.
-    speech_transcription_result_counts: ?[]const aws.map.MapEntry(i32),
+    speech_transcription_result_counts: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The total number of results in the intent classification test.
     total_result_count: i32,

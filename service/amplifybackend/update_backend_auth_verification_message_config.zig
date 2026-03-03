@@ -9,10 +9,10 @@ pub const UpdateBackendAuthVerificationMessageConfig = struct {
     delivery_method: DeliveryMethod,
 
     /// The settings for the email message.
-    email_settings: ?EmailSettings,
+    email_settings: ?EmailSettings = null,
 
     /// The settings for the SMS message.
-    sms_settings: ?SmsSettings,
+    sms_settings: ?SmsSettings = null,
 
     pub const json_field_names = .{
         .delivery_method = "DeliveryMethod",

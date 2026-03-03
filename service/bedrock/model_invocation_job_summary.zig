@@ -10,10 +10,10 @@ pub const ModelInvocationJobSummary = struct {
     /// Bedrock ignores the request, but does not return an error. For more
     /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    client_request_token: ?[]const u8,
+    client_request_token: ?[]const u8 = null,
 
     /// The time at which the batch inference job ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// Details about the location of the input to the batch inference job.
     input_data_config: ModelInvocationJobInputDataConfig,
@@ -22,17 +22,17 @@ pub const ModelInvocationJobSummary = struct {
     job_arn: []const u8,
 
     /// The time at which the batch inference job times or timed out.
-    job_expiration_time: ?i64,
+    job_expiration_time: ?i64 = null,
 
     /// The name of the batch inference job.
     job_name: []const u8,
 
     /// The time at which the batch inference job was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// If the batch inference job failed, this field contains a message describing
     /// why the job failed.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The unique identifier of the foundation model used for model inference.
     model_id: []const u8,
@@ -80,19 +80,19 @@ pub const ModelInvocationJobSummary = struct {
     ///   Support Center](https://console.aws.amazon.com/support/home/).
     /// * Stopped – This job was stopped by a user.
     /// * Stopping – This job is being stopped by a user.
-    status: ?ModelInvocationJobStatus,
+    status: ?ModelInvocationJobStatus = null,
 
     /// The time at which the batch inference job was submitted.
     submit_time: i64,
 
     /// The number of hours after which the batch inference job was set to time out.
-    timeout_duration_in_hours: ?i32,
+    timeout_duration_in_hours: ?i32 = null,
 
     /// The configuration of the Virtual Private Cloud (VPC) for the data in the
     /// batch inference job. For more information, see [Protect batch inference jobs
     /// using a
     /// VPC](https://docs.aws.amazon.com/bedrock/latest/userguide/batch-vpc).
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .client_request_token = "clientRequestToken",

@@ -4,23 +4,23 @@ const AwsEcrRepositoryLifecyclePolicyDetails = @import("aws_ecr_repository_lifec
 /// Provides information about an Amazon Elastic Container Registry repository.
 pub const AwsEcrRepositoryDetails = struct {
     /// The ARN of the repository.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The image scanning configuration for a repository.
-    image_scanning_configuration: ?AwsEcrRepositoryImageScanningConfigurationDetails,
+    image_scanning_configuration: ?AwsEcrRepositoryImageScanningConfigurationDetails = null,
 
     /// The tag mutability setting for the repository. Valid values are `IMMUTABLE`
     /// or `MUTABLE`.
-    image_tag_mutability: ?[]const u8,
+    image_tag_mutability: ?[]const u8 = null,
 
     /// Information about the lifecycle policy for the repository.
-    lifecycle_policy: ?AwsEcrRepositoryLifecyclePolicyDetails,
+    lifecycle_policy: ?AwsEcrRepositoryLifecyclePolicyDetails = null,
 
     /// The name of the repository.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     /// The text of the repository policy.
-    repository_policy_text: ?[]const u8,
+    repository_policy_text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -4,10 +4,10 @@ const ExtractionJobStatus = @import("extraction_job_status.zig").ExtractionJobSt
 /// Metadata information associated with this extraction job.
 pub const ExtractionJobMetadata = struct {
     /// The identifier of the actor for this extraction job.
-    actor_id: ?[]const u8,
+    actor_id: ?[]const u8 = null,
 
     /// The cause of failure, if the job did not complete successfully.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The unique identifier for the extraction job.
     job_id: []const u8,
@@ -16,13 +16,13 @@ pub const ExtractionJobMetadata = struct {
     messages: ExtractionJobMessages,
 
     /// The identifier of the session for this extraction job.
-    session_id: ?[]const u8,
+    session_id: ?[]const u8 = null,
 
     /// The current status of the extraction job.
-    status: ?ExtractionJobStatus,
+    status: ?ExtractionJobStatus = null,
 
     /// The identifier of the memory strategy for this extraction job.
-    strategy_id: ?[]const u8,
+    strategy_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .actor_id = "actorId",

@@ -23,10 +23,10 @@
 /// `TaskParameters` and `LoggingInfo`.
 pub const MaintenanceWindowStepFunctionsParameters = struct {
     /// The inputs for the `STEP_FUNCTIONS` task.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The name of the `STEP_FUNCTIONS` task.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .input = "Input",

@@ -24,15 +24,15 @@ pub const ServiceEnvironmentDetail = struct {
 
     /// The state of the service environment. Valid values are `ENABLED` and
     /// `DISABLED`.
-    state: ?ServiceEnvironmentState,
+    state: ?ServiceEnvironmentState = null,
 
     /// The current status of the service environment.
-    status: ?ServiceEnvironmentStatus,
+    status: ?ServiceEnvironmentStatus = null,
 
     /// The tags associated with the service environment. Each tag consists of a key
     /// and an optional value. For more information, see [Tagging your Batch
     /// resources](https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html).
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .capacity_limits = "capacityLimits",

@@ -13,41 +13,41 @@ const VisualPalette = @import("visual_palette.zig").VisualPalette;
 /// The configuration of a pie chart.
 pub const PieChartConfiguration = struct {
     /// The label options of the group/color that is displayed in a pie chart.
-    category_label_options: ?ChartAxisLabelOptions,
+    category_label_options: ?ChartAxisLabelOptions = null,
 
     /// The contribution analysis (anomaly configuration) setup of the visual.
-    contribution_analysis_defaults: ?[]const ContributionAnalysisDefault,
+    contribution_analysis_defaults: ?[]const ContributionAnalysisDefault = null,
 
     /// The options that determine if visual data labels are displayed.
-    data_labels: ?DataLabelOptions,
+    data_labels: ?DataLabelOptions = null,
 
     /// The options that determine the shape of the chart. This option determines
     /// whether the chart is a pie chart or a donut chart.
-    donut_options: ?DonutOptions,
+    donut_options: ?DonutOptions = null,
 
     /// The field wells of the visual.
-    field_wells: ?PieChartFieldWells,
+    field_wells: ?PieChartFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The legend display setup of the visual.
-    legend: ?LegendOptions,
+    legend: ?LegendOptions = null,
 
     /// The small multiples setup for the visual.
-    small_multiples_options: ?SmallMultiplesOptions,
+    small_multiples_options: ?SmallMultiplesOptions = null,
 
     /// The sort configuration of a pie chart.
-    sort_configuration: ?PieChartSortConfiguration,
+    sort_configuration: ?PieChartSortConfiguration = null,
 
     /// The tooltip display setup of the visual.
-    tooltip: ?TooltipOptions,
+    tooltip: ?TooltipOptions = null,
 
     /// The label options for the value that is displayed in a pie chart.
-    value_label_options: ?ChartAxisLabelOptions,
+    value_label_options: ?ChartAxisLabelOptions = null,
 
     /// The palette (chart color) display setup of the visual.
-    visual_palette: ?VisualPalette,
+    visual_palette: ?VisualPalette = null,
 
     pub const json_field_names = .{
         .category_label_options = "CategoryLabelOptions",

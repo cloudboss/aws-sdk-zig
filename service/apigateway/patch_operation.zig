@@ -12,7 +12,7 @@ pub const PatchOperation = struct {
     /// deployment ID by calling a PATCH request on a Stage resource with
     /// "op":"copy",
     /// "from":"/canarySettings/deploymentId" and "path":"/deploymentId".
-    from: ?[]const u8,
+    from: ?[]const u8 = null,
 
     /// An update operation to be performed with this PATCH request. The valid value
     /// can be
@@ -22,7 +22,7 @@ pub const PatchOperation = struct {
     /// contexts. Attempts
     /// to apply an unsupported operation on a resource will return an error
     /// message..
-    op: ?Op,
+    op: ?Op = null,
 
     /// The op operation's target, as identified by a JSON Pointer value that
     /// references a
@@ -37,14 +37,14 @@ pub const PatchOperation = struct {
     /// character appearing in path names must be escaped with "~1", as shown in the
     /// example
     /// above. Each op operation can have only one path associated with it.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// The new target value of the update operation. It is applicable for the add
     /// or replace
     /// operation. When using AWS CLI to update a property of a JSON value, enclose
     /// the JSON
     /// object with a pair of single quotes in a Linux shell, e.g., '{"a": ...}'.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .from = "from",

@@ -5,7 +5,7 @@ const EvaluationFormItem = @import("evaluation_form_item.zig").EvaluationFormIte
 /// forms can only contain sections and subsections (two level nesting).
 pub const EvaluationFormSection = struct {
     /// The instructions of the section.
-    instructions: ?[]const u8,
+    instructions: ?[]const u8 = null,
 
     /// The items of the section.
     items: []const EvaluationFormItem,

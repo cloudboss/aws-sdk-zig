@@ -5,31 +5,31 @@ const ReviewTemplatePillarReviewSummary = @import("review_template_pillar_review
 
 /// The lens review of a review template.
 pub const ReviewTemplateLensReview = struct {
-    lens_alias: ?[]const u8,
+    lens_alias: ?[]const u8 = null,
 
     /// The lens ARN.
-    lens_arn: ?[]const u8,
+    lens_arn: ?[]const u8 = null,
 
-    lens_name: ?[]const u8,
+    lens_name: ?[]const u8 = null,
 
     /// The status of the lens.
-    lens_status: ?LensStatus,
+    lens_status: ?LensStatus = null,
 
     /// The version of the lens.
-    lens_version: ?[]const u8,
+    lens_version: ?[]const u8 = null,
 
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
-    notes: ?[]const u8,
+    notes: ?[]const u8 = null,
 
     /// Pillar review summaries of a lens review.
-    pillar_review_summaries: ?[]const ReviewTemplatePillarReviewSummary,
+    pillar_review_summaries: ?[]const ReviewTemplatePillarReviewSummary = null,
 
     /// A count of how many questions are answered and unanswered in the lens
     /// review.
-    question_counts: ?[]const aws.map.MapEntry(i32),
+    question_counts: ?[]const aws.map.MapEntry(i32) = null,
 
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .lens_alias = "LensAlias",

@@ -13,23 +13,23 @@ const SmoothGroupTimestampOffsetMode = @import("smooth_group_timestamp_offset_mo
 pub const MsSmoothGroupSettings = struct {
     /// The ID to include in each message in the sparse track. Ignored if
     /// sparseTrackType is NONE.
-    acquisition_point_id: ?[]const u8,
+    acquisition_point_id: ?[]const u8 = null,
 
     /// If set to passthrough for an audio-only MS Smooth output, the fragment
     /// absolute time will be set to the current timecode. This option does not
     /// write timecodes to the audio elementary stream.
-    audio_only_timecode_control: ?SmoothGroupAudioOnlyTimecodeControl,
+    audio_only_timecode_control: ?SmoothGroupAudioOnlyTimecodeControl = null,
 
     /// If set to verifyAuthenticity, verify the https certificate chain to a
     /// trusted Certificate Authority (CA). This will cause https outputs to
     /// self-signed certificates to fail.
-    certificate_mode: ?SmoothGroupCertificateMode,
+    certificate_mode: ?SmoothGroupCertificateMode = null,
 
     /// Number of seconds to wait before retrying connection to the IIS server if
     /// the connection is lost. Content will be cached during this time and the
     /// cache will be be delivered to the IIS server once the connection is
     /// re-established.
-    connection_retry_interval: ?i32,
+    connection_retry_interval: ?i32 = null,
 
     /// Smooth Streaming publish point on an IIS server. Elemental Live acts as a
     /// "Push" encoder to IIS.
@@ -38,7 +38,7 @@ pub const MsSmoothGroupSettings = struct {
     /// MS Smooth event ID to be sent to the IIS server.
     ///
     /// Should only be specified if eventIdMode is set to useConfigured.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// Specifies whether or not to send an event ID to the IIS server. If no event
     /// ID is sent and the same Live Event is used without changing the publishing
@@ -49,34 +49,34 @@ pub const MsSmoothGroupSettings = struct {
     /// - "useTimestamp" - generate and send an event ID based on the current
     /// timestamp
     /// - "noEventId" - do not send an event ID to the IIS server.
-    event_id_mode: ?SmoothGroupEventIdMode,
+    event_id_mode: ?SmoothGroupEventIdMode = null,
 
     /// When set to sendEos, send EOS signal to IIS server when stopping the event
-    event_stop_behavior: ?SmoothGroupEventStopBehavior,
+    event_stop_behavior: ?SmoothGroupEventStopBehavior = null,
 
     /// Size in seconds of file cache for streaming outputs.
-    filecache_duration: ?i32,
+    filecache_duration: ?i32 = null,
 
     /// Length of mp4 fragments to generate (in seconds). Fragment length must be
     /// compatible with GOP size and framerate.
-    fragment_length: ?i32,
+    fragment_length: ?i32 = null,
 
     /// Parameter that control output group behavior on input loss.
-    input_loss_action: ?InputLossActionForMsSmoothOut,
+    input_loss_action: ?InputLossActionForMsSmoothOut = null,
 
     /// Number of retry attempts.
-    num_retries: ?i32,
+    num_retries: ?i32 = null,
 
     /// Number of seconds before initiating a restart due to output failure, due to
     /// exhausting the numRetries on one segment, or exceeding filecacheDuration.
-    restart_delay: ?i32,
+    restart_delay: ?i32 = null,
 
     /// useInputSegmentation has been deprecated. The configured segment size is
     /// always used.
-    segmentation_mode: ?SmoothGroupSegmentationMode,
+    segmentation_mode: ?SmoothGroupSegmentationMode = null,
 
     /// Number of milliseconds to delay the output from the second pipeline.
-    send_delay_ms: ?i32,
+    send_delay_ms: ?i32 = null,
 
     /// Identifies the type of data to place in the sparse track:
     /// - SCTE35: Insert SCTE-35 messages from the source content. With each
@@ -85,20 +85,20 @@ pub const MsSmoothGroupSettings = struct {
     /// content. With each message, insert an IDR frame but don't start a new
     /// segment.
     /// - NONE: Don't generate a sparse track for any outputs in this output group.
-    sparse_track_type: ?SmoothGroupSparseTrackType,
+    sparse_track_type: ?SmoothGroupSparseTrackType = null,
 
     /// When set to send, send stream manifest so publishing point doesn't start
     /// until all streams start.
-    stream_manifest_behavior: ?SmoothGroupStreamManifestBehavior,
+    stream_manifest_behavior: ?SmoothGroupStreamManifestBehavior = null,
 
     /// Timestamp offset for the event. Only used if timestampOffsetMode is set to
     /// useConfiguredOffset.
-    timestamp_offset: ?[]const u8,
+    timestamp_offset: ?[]const u8 = null,
 
     /// Type of timestamp date offset to use.
     /// - useEventStartDate: Use the date the event was started as the offset
     /// - useConfiguredOffset: Use an explicitly configured date as the offset
-    timestamp_offset_mode: ?SmoothGroupTimestampOffsetMode,
+    timestamp_offset_mode: ?SmoothGroupTimestampOffsetMode = null,
 
     pub const json_field_names = .{
         .acquisition_point_id = "AcquisitionPointId",

@@ -1,7 +1,7 @@
 pub const ListClustersResponse = struct {
     /// A list of all of the clusters for your account in the specified Amazon Web
     /// Services Region .
-    clusters: ?[]const []const u8,
+    clusters: ?[]const []const u8 = null,
 
     /// The `nextToken` value returned from a previous paginated request, where
     /// `maxResults` was used and
@@ -12,7 +12,7 @@ pub const ListClustersResponse = struct {
     ///
     /// This token should be treated as an opaque identifier that is used only to
     /// retrieve the next items in a list and not for other programmatic purposes.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .clusters = "clusters",

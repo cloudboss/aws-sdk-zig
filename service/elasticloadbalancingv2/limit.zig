@@ -17,8 +17,8 @@
 /// Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/quotas-limits.html)
 pub const Limit = struct {
     /// The maximum value of the limit.
-    max: ?[]const u8,
+    max: ?[]const u8 = null,
 
     /// The name of the limit.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 };

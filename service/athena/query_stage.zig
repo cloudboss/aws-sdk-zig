@@ -5,32 +5,32 @@ const QueryStagePlanNode = @import("query_stage_plan_node.zig").QueryStagePlanNo
 /// state. This information also includes substages and the query stage plan.
 pub const QueryStage = struct {
     /// Time taken to execute this stage.
-    execution_time: ?i64,
+    execution_time: ?i64 = null,
 
     /// The number of bytes input into the stage for execution.
-    input_bytes: ?i64,
+    input_bytes: ?i64 = null,
 
     /// The number of rows input into the stage for execution.
-    input_rows: ?i64,
+    input_rows: ?i64 = null,
 
     /// The number of bytes output from the stage after execution.
-    output_bytes: ?i64,
+    output_bytes: ?i64 = null,
 
     /// The number of rows output from the stage after execution.
-    output_rows: ?i64,
+    output_rows: ?i64 = null,
 
     /// Stage plan information such as name, identifier, sub plans, and source
     /// stages.
-    query_stage_plan: ?QueryStagePlanNode,
+    query_stage_plan: ?QueryStagePlanNode = null,
 
     /// The identifier for a stage.
-    stage_id: ?i64,
+    stage_id: ?i64 = null,
 
     /// State of the stage after query execution.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// List of sub query stages that form this stage execution plan.
-    sub_stages: ?[]const QueryStage,
+    sub_stages: ?[]const QueryStage = null,
 
     pub const json_field_names = .{
         .execution_time = "ExecutionTime",

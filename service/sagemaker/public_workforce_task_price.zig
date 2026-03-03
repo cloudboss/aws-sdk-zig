@@ -122,7 +122,7 @@ const USD = @import("usd.zig").USD;
 pub const PublicWorkforceTaskPrice = struct {
     /// Defines the amount of money paid to an Amazon Mechanical Turk worker in
     /// United States dollars.
-    amount_in_usd: ?USD,
+    amount_in_usd: ?USD = null,
 
     pub const json_field_names = .{
         .amount_in_usd = "AmountInUsd",

@@ -3,5 +3,5 @@
 pub const HostedZoneFailureReasons = struct {
     /// The reason why accelerated recovery failed to be enabled or disabled for the
     /// hosted zone, if applicable.
-    accelerated_recovery: ?[]const u8,
+    accelerated_recovery: ?[]const u8 = null,
 };

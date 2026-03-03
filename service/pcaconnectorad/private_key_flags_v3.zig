@@ -10,15 +10,15 @@ pub const PrivateKeyFlagsV3 = struct {
     client_version: ClientCompatibilityV3,
 
     /// Allows the private key to be exported.
-    exportable_key: ?bool,
+    exportable_key: ?bool = null,
 
     /// Reguires the PKCS #1 v2.1 signature format for certificates. You should
     /// verify that your
     /// CA, objects, and applications can accept this signature format.
-    require_alternate_signature_algorithm: ?bool,
+    require_alternate_signature_algorithm: ?bool = null,
 
     /// Requirer user input when using the private key for enrollment.
-    strong_key_protection_required: ?bool,
+    strong_key_protection_required: ?bool = null,
 
     pub const json_field_names = .{
         .client_version = "ClientVersion",

@@ -6,5 +6,5 @@ pub const LaunchTemplateInstanceMaintenanceOptionsRequest = struct {
     /// default. For
     /// more information, see [Simplified automatic
     /// recovery](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-recover.html#instance-configuration-recovery).
-    auto_recovery: ?LaunchTemplateAutoRecoveryState,
+    auto_recovery: ?LaunchTemplateAutoRecoveryState = null,
 };

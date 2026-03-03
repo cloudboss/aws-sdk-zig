@@ -6,20 +6,20 @@ const SavingsOpportunity = @import("savings_opportunity.zig").SavingsOpportunity
 pub const LicenseRecommendationOption = struct {
     /// The recommended edition of the license for the application that runs on the
     /// instance.
-    license_edition: ?LicenseEdition,
+    license_edition: ?LicenseEdition = null,
 
     /// The recommended license type associated with the instance.
-    license_model: ?LicenseModel,
+    license_model: ?LicenseModel = null,
 
     /// The operating system of a license recommendation option.
-    operating_system: ?[]const u8,
+    operating_system: ?[]const u8 = null,
 
     /// The rank of the license recommendation option.
     ///
     /// The top recommendation option is ranked as `1`.
     rank: i32 = 0,
 
-    savings_opportunity: ?SavingsOpportunity,
+    savings_opportunity: ?SavingsOpportunity = null,
 
     pub const json_field_names = .{
         .license_edition = "licenseEdition",

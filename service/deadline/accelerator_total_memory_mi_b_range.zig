@@ -2,7 +2,7 @@
 /// accelerator.
 pub const AcceleratorTotalMemoryMiBRange = struct {
     /// The maximum amount of memory to use for the accelerator, measured in MiB.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// The minimum amount of memory to use for the accelerator, measured in MiB.
     min: i32,

@@ -4,10 +4,10 @@ const RefreshConfiguration = @import("refresh_configuration.zig").RefreshConfigu
 /// The refresh properties of a dataset.
 pub const DataSetRefreshProperties = struct {
     /// The failure configuration for a dataset.
-    failure_configuration: ?RefreshFailureConfiguration,
+    failure_configuration: ?RefreshFailureConfiguration = null,
 
     /// The refresh configuration for a dataset.
-    refresh_configuration: ?RefreshConfiguration,
+    refresh_configuration: ?RefreshConfiguration = null,
 
     pub const json_field_names = .{
         .failure_configuration = "FailureConfiguration",

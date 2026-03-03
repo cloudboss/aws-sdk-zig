@@ -6,12 +6,12 @@ const SourceConnectorProperties = @import("source_connector_properties.zig").Sou
 /// the flow.
 pub const SourceFlowConfig = struct {
     /// The API version of the connector when it's used as a source in the flow.
-    api_version: ?[]const u8,
+    api_version: ?[]const u8 = null,
 
     /// The name of the connector profile. This name must be unique for each
     /// connector profile in
     /// the Amazon Web Services account.
-    connector_profile_name: ?[]const u8,
+    connector_profile_name: ?[]const u8 = null,
 
     /// The type of connector, such as Salesforce, Amplitude, and so on.
     connector_type: ConnectorType,
@@ -21,7 +21,7 @@ pub const SourceFlowConfig = struct {
     /// is provided, the fields specified in the configuration are used when
     /// querying for the
     /// incremental data pull.
-    incremental_pull_config: ?IncrementalPullConfig,
+    incremental_pull_config: ?IncrementalPullConfig = null,
 
     /// Specifies the information that is required to query a particular source
     /// connector.

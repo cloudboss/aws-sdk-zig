@@ -84,7 +84,7 @@ pub const RecordingStrategy = struct {
     /// * Israel (Tel Aviv)
     ///
     /// * Middle East (UAE)
-    use_only: ?RecordingStrategyType,
+    use_only: ?RecordingStrategyType = null,
 
     pub const json_field_names = .{
         .use_only = "useOnly",

@@ -3,7 +3,7 @@ const OfflineStoreStatusValue = @import("offline_store_status_value.zig").Offlin
 /// The status of `OfflineStore`.
 pub const OfflineStoreStatus = struct {
     /// The justification for why the OfflineStoreStatus is Blocked (if applicable).
-    blocked_reason: ?[]const u8,
+    blocked_reason: ?[]const u8 = null,
 
     /// An `OfflineStore` status.
     status: OfflineStoreStatusValue,

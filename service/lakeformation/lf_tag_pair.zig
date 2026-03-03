@@ -4,7 +4,7 @@ pub const LFTagPair = struct {
     /// Catalog is the persistent metadata store. It contains database definitions,
     /// table definitions, and other control information to manage your Lake
     /// Formation environment.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The key-name for the LF-tag.
     tag_key: []const u8,

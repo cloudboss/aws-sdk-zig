@@ -6,10 +6,10 @@ const OrganizationManagedRuleMetadata = @import("organization_managed_rule_metad
 /// Config creates in member accounts.
 pub const OrganizationConfigRule = struct {
     /// A comma-separated list of accounts excluded from organization Config rule.
-    excluded_accounts: ?[]const []const u8,
+    excluded_accounts: ?[]const []const u8 = null,
 
     /// The timestamp of the last update.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// Amazon Resource Name (ARN) of organization Config rule.
     organization_config_rule_arn: []const u8,
@@ -24,13 +24,13 @@ pub const OrganizationConfigRule = struct {
     /// type, resource
     /// ID of Amazon Web Services resource, and organization trigger types that
     /// initiate Config to evaluate Amazon Web Services resources against a rule.
-    organization_custom_policy_rule_metadata: ?OrganizationCustomPolicyRuleMetadataNoPolicy,
+    organization_custom_policy_rule_metadata: ?OrganizationCustomPolicyRuleMetadataNoPolicy = null,
 
     /// An `OrganizationCustomRuleMetadata` object.
-    organization_custom_rule_metadata: ?OrganizationCustomRuleMetadata,
+    organization_custom_rule_metadata: ?OrganizationCustomRuleMetadata = null,
 
     /// An `OrganizationManagedRuleMetadata` object.
-    organization_managed_rule_metadata: ?OrganizationManagedRuleMetadata,
+    organization_managed_rule_metadata: ?OrganizationManagedRuleMetadata = null,
 
     pub const json_field_names = .{
         .excluded_accounts = "ExcludedAccounts",

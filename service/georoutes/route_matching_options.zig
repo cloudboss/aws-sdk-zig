@@ -4,7 +4,7 @@ const MatchingStrategy = @import("matching_strategy.zig").MatchingStrategy;
 pub const RouteMatchingOptions = struct {
     /// Attempts to match the provided position to a road similar to the provided
     /// name.
-    name_hint: ?[]const u8,
+    name_hint: ?[]const u8 = null,
 
     /// If the distance to a highway/bridge/tunnel/sliproad is within threshold, the
     /// waypoint will be snapped to the highway/bridge/tunnel/sliproad.
@@ -22,7 +22,7 @@ pub const RouteMatchingOptions = struct {
     /// Strategy that defines matching of the position onto the road network.
     /// MatchAny considers all roads possible, whereas MatchMostSignificantRoad
     /// matches to the most significant road.
-    strategy: ?MatchingStrategy,
+    strategy: ?MatchingStrategy = null,
 
     pub const json_field_names = .{
         .name_hint = "NameHint",

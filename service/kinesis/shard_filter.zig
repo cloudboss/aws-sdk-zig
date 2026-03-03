@@ -6,7 +6,7 @@ pub const ShardFilter = struct {
     /// The exclusive start `shardID` speified in the `ShardFilter`
     /// parameter. This property can only be used if the `AFTER_SHARD_ID` shard type
     /// is specified.
-    shard_id: ?[]const u8,
+    shard_id: ?[]const u8 = null,
 
     /// The timestamps specified in the `ShardFilter` parameter. A timestamp is a
     /// Unix epoch date with precision in milliseconds. For example,
@@ -14,7 +14,7 @@ pub const ShardFilter = struct {
     /// used if
     /// `FROM_TIMESTAMP` or `AT_TIMESTAMP` shard types are
     /// specified.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     /// The shard type specified in the `ShardFilter` parameter. This is a required
     /// property of the `ShardFilter` parameter.

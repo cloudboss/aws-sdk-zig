@@ -23,7 +23,7 @@
 pub const StartTimerDecisionAttributes = struct {
     /// The data attached to the event that can be used by the decider in subsequent
     /// workflow tasks.
-    control: ?[]const u8,
+    control: ?[]const u8 = null,
 
     /// The duration to wait before firing the timer.
     ///

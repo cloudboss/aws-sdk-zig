@@ -4,7 +4,7 @@ const HeaderMatchType = @import("header_match_type.zig").HeaderMatchType;
 /// rule based on request header value before applying rule action.
 pub const HeaderMatch = struct {
     /// Indicates whether the match is case sensitive.
-    case_sensitive: ?bool,
+    case_sensitive: ?bool = null,
 
     /// The header match type.
     match: HeaderMatchType,

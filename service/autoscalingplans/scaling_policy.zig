@@ -12,7 +12,7 @@ pub const ScalingPolicy = struct {
     /// The target tracking scaling policy. Includes support for predefined or
     /// customized
     /// metrics.
-    target_tracking_configuration: ?TargetTrackingConfiguration,
+    target_tracking_configuration: ?TargetTrackingConfiguration = null,
 
     pub const json_field_names = .{
         .policy_name = "PolicyName",

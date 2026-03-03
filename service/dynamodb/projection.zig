@@ -19,7 +19,7 @@ pub const Projection = struct {
     /// ProjectionType of `ALL` to project all attributes from the source table,
     /// even
     /// if the table has more than 100 attributes.
-    non_key_attributes: ?[]const []const u8,
+    non_key_attributes: ?[]const []const u8 = null,
 
     /// The set of attributes that are projected into the index:
     ///
@@ -34,7 +34,7 @@ pub const Projection = struct {
     /// index.
     ///
     /// When using the DynamoDB console, `ALL` is selected by default.
-    projection_type: ?ProjectionType,
+    projection_type: ?ProjectionType = null,
 
     pub const json_field_names = .{
         .non_key_attributes = "NonKeyAttributes",

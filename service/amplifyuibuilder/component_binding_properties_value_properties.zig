@@ -8,28 +8,28 @@ const Predicate = @import("predicate.zig").Predicate;
 /// authenticated user attribute.
 pub const ComponentBindingPropertiesValueProperties = struct {
     /// An Amazon S3 bucket.
-    bucket: ?[]const u8,
+    bucket: ?[]const u8 = null,
 
     /// The default value to assign to the property.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// The field to bind the data to.
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// The storage key for an Amazon S3 bucket.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// An Amplify DataStore model.
-    model: ?[]const u8,
+    model: ?[]const u8 = null,
 
     /// A list of predicates for binding a component's properties to data.
-    predicates: ?[]const Predicate,
+    predicates: ?[]const Predicate = null,
 
     /// The name of a component slot.
-    slot_name: ?[]const u8,
+    slot_name: ?[]const u8 = null,
 
     /// An authenticated user attribute.
-    user_attribute: ?[]const u8,
+    user_attribute: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

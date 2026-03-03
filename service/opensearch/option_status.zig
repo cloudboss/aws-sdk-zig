@@ -6,7 +6,7 @@ pub const OptionStatus = struct {
     creation_date: i64,
 
     /// Indicates whether the entity is being deleted.
-    pending_deletion: ?bool,
+    pending_deletion: ?bool = null,
 
     /// The state of the entity.
     state: OptionState,

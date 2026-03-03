@@ -6,7 +6,7 @@
 pub const SpecialRouterSettings = struct {
     /// This is the arn of the MediaConnect Router resource being associated with
     /// the MediaLive Input.
-    router_arn: ?[]const u8,
+    router_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .router_arn = "RouterArn",

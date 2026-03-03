@@ -2,13 +2,13 @@
 /// used to provide more meaningful errors than a simple string message.
 pub const BatchDeleteDelegationByAssessmentError = struct {
     /// The identifier for the delegation.
-    delegation_id: ?[]const u8,
+    delegation_id: ?[]const u8 = null,
 
     /// The error code that the `BatchDeleteDelegationByAssessment` API returned.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message that the `BatchDeleteDelegationByAssessment` API returned.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .delegation_id = "delegationId",

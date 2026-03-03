@@ -10,12 +10,12 @@ pub const XksProxyConfigurationType = struct {
     /// The part of the external key store [proxy authentication
     /// credential](https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateCustomKeyStore.html#KMS-CreateCustomKeyStore-request-XksProxyAuthenticationCredential) that uniquely identifies the secret access
     /// key.
-    access_key_id: ?[]const u8,
+    access_key_id: ?[]const u8 = null,
 
     /// Indicates whether the external key store proxy uses a public endpoint or an
     /// Amazon VPC endpoint
     /// service to communicate with KMS.
-    connectivity: ?XksProxyConnectivityType,
+    connectivity: ?XksProxyConnectivityType = null,
 
     /// The URI endpoint for the external key store proxy.
     ///
@@ -24,24 +24,24 @@ pub const XksProxyConfigurationType = struct {
     /// If the external key store proxy uses an Amazon VPC endpoint service name,
     /// this field displays
     /// the private DNS name associated with the VPC endpoint service.
-    uri_endpoint: ?[]const u8,
+    uri_endpoint: ?[]const u8 = null,
 
     /// The path to the external key store proxy APIs.
-    uri_path: ?[]const u8,
+    uri_path: ?[]const u8 = null,
 
     /// The Amazon VPC endpoint service used to communicate with the external key
     /// store proxy. This
     /// field appears only when the external key store proxy uses an Amazon VPC
     /// endpoint service to
     /// communicate with KMS.
-    vpc_endpoint_service_name: ?[]const u8,
+    vpc_endpoint_service_name: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID that owns the Amazon VPC endpoint service
     /// used to communicate with the
     /// external key store proxy (XKS). This field appears only when the XKS uses an
     /// VPC endpoint
     /// service to communicate with KMS.
-    vpc_endpoint_service_owner: ?[]const u8,
+    vpc_endpoint_service_owner: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_key_id = "AccessKeyId",

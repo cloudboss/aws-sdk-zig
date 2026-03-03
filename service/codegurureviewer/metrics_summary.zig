@@ -1,7 +1,7 @@
 /// Information about metrics summaries.
 pub const MetricsSummary = struct {
     /// Total number of recommendations found in the code review.
-    findings_count: ?i64,
+    findings_count: ?i64 = null,
 
     /// Lines of code metered in the code review. For the initial code review pull
     /// request and
@@ -21,7 +21,7 @@ pub const MetricsSummary = struct {
     /// lines), the new file (200 lines) and the 25 changed lines of code for a
     /// total of 2,725
     /// lines of code.
-    metered_lines_of_code_count: ?i64,
+    metered_lines_of_code_count: ?i64 = null,
 
     /// Lines of code suppressed in the code review based on the `excludeFiles`
     /// element in the `aws-codeguru-reviewer.yml` file. For full repository
@@ -44,7 +44,7 @@ pub const MetricsSummary = struct {
     /// changed. If only 1 of the 2 files changed in the pull request, then
     /// `SuppressedLinesOfCodeCount` returns 100 (1 * 100) as the total number of
     /// lines of code suppressed.
-    suppressed_lines_of_code_count: ?i64,
+    suppressed_lines_of_code_count: ?i64 = null,
 
     pub const json_field_names = .{
         .findings_count = "FindingsCount",

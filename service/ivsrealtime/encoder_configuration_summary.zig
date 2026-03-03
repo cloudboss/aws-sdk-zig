@@ -6,7 +6,7 @@ pub const EncoderConfigurationSummary = struct {
     arn: []const u8,
 
     /// Optional name to identify the resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Tags attached to the resource. Array of maps, each of the form
     /// `string:string
@@ -17,7 +17,7 @@ pub const EncoderConfigurationSummary = struct {
     /// limits and requirements"; Amazon IVS has no constraints on tags beyond what
     /// is documented
     /// there.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

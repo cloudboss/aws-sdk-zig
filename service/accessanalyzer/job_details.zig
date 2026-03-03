@@ -4,10 +4,10 @@ const JobStatus = @import("job_status.zig").JobStatus;
 /// Contains details about the policy generation request.
 pub const JobDetails = struct {
     /// A timestamp of when the job was completed.
-    completed_on: ?i64,
+    completed_on: ?i64 = null,
 
     /// The job error for the policy generation request.
-    job_error: ?JobError,
+    job_error: ?JobError = null,
 
     /// The `JobId` that is returned by the `StartPolicyGeneration` operation. The
     /// `JobId` can be used with `GetGeneratedPolicy` to retrieve the generated

@@ -6,14 +6,14 @@ const TransformOperationSource = @import("transform_operation_source.zig").Trans
 /// operation form a lexical closure.
 pub const CreateColumnsOperation = struct {
     /// Alias for this operation.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// Calculated columns to create.
     columns: []const CalculatedColumn,
 
     /// The source transform operation that provides input data for creating new
     /// calculated columns.
-    source: ?TransformOperationSource,
+    source: ?TransformOperationSource = null,
 
     pub const json_field_names = .{
         .alias = "Alias",

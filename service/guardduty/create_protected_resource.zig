@@ -6,7 +6,7 @@ const CreateS3BucketResource = @import("create_s3_bucket_resource.zig").CreateS3
 /// protected resource.
 pub const CreateProtectedResource = struct {
     /// Information about the protected S3 bucket resource.
-    s3_bucket: ?CreateS3BucketResource,
+    s3_bucket: ?CreateS3BucketResource = null,
 
     pub const json_field_names = .{
         .s3_bucket = "S3Bucket",

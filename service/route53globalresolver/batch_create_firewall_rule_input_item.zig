@@ -10,43 +10,43 @@ pub const BatchCreateFirewallRuleInputItem = struct {
     action: FirewallRuleAction,
 
     /// The DNS record type for the custom response when the action is BLOCK.
-    block_override_dns_type: ?BlockOverrideDnsQueryType,
+    block_override_dns_type: ?BlockOverrideDnsQueryType = null,
 
     /// The custom domain name for the BLOCK response.
-    block_override_domain: ?[]const u8,
+    block_override_domain: ?[]const u8 = null,
 
     /// The TTL value for the custom response when the action is BLOCK.
-    block_override_ttl: ?i32,
+    block_override_ttl: ?i32 = null,
 
     /// The type of block response to return when the action is BLOCK.
-    block_response: ?FirewallBlockResponse,
+    block_response: ?FirewallBlockResponse = null,
 
     /// A unique string that identifies the request and ensures idempotency.
     client_token: []const u8,
 
     /// The confidence threshold for advanced threat detection.
-    confidence_threshold: ?ConfidenceThreshold,
+    confidence_threshold: ?ConfidenceThreshold = null,
 
     /// A description of the firewall rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether to enable advanced DNS threat protection for the firewall rule.
-    dns_advanced_protection: ?DnsAdvancedProtection,
+    dns_advanced_protection: ?DnsAdvancedProtection = null,
 
     /// The ID of the DNS view to associate the firewall rule with.
     dns_view_id: []const u8,
 
     /// The ID of the firewall domain list to associate with the rule.
-    firewall_domain_list_id: ?[]const u8,
+    firewall_domain_list_id: ?[]const u8 = null,
 
     /// A name for the firewall rule.
     name: []const u8,
 
     /// The priority of the firewall rule.
-    priority: ?i64,
+    priority: ?i64 = null,
 
     /// The DNS query type that the firewall rule should match.
-    q_type: ?[]const u8,
+    q_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "action",

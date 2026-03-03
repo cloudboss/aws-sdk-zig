@@ -8,21 +8,21 @@ const Method = @import("method.zig").Method;
 pub const HttpRequest = struct {
     /// The request body content to send with HTTP requests to the ad decision
     /// server. This value is only eligible for `POST` requests.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// The compression method to apply to requests sent to the ad decision server.
     /// Supported values are `NONE` and `GZIP`. This value is only eligible for
     /// `POST` requests.
-    compress_request: ?CompressionMethod,
+    compress_request: ?CompressionMethod = null,
 
     /// Custom HTTP headers to include in requests to the ad decision server.
     /// Specify headers as key-value pairs. This value is only eligible for `POST`
     /// requests.
-    headers: ?[]const aws.map.StringMapEntry,
+    headers: ?[]const aws.map.StringMapEntry = null,
 
     /// The HTTP method to use when making requests to the ad decision server.
     /// Supported values are `GET` and `POST`.
-    method: ?Method,
+    method: ?Method = null,
 
     pub const json_field_names = .{
         .body = "Body",

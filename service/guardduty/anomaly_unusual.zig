@@ -7,7 +7,7 @@ const AnomalyObject = @import("anomaly_object.zig").AnomalyObject;
 pub const AnomalyUnusual = struct {
     /// The behavior of the anomalous activity that caused GuardDuty to
     /// generate the finding.
-    behavior: ?[]const aws.map.MapEntry([]const aws.map.MapEntry(AnomalyObject)),
+    behavior: ?[]const aws.map.MapEntry([]const aws.map.MapEntry(AnomalyObject)) = null,
 
     pub const json_field_names = .{
         .behavior = "Behavior",

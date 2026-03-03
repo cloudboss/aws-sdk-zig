@@ -9,23 +9,23 @@ const Volume = @import("volume.zig").Volume;
 /// Windows,
 /// Lustre, OpenZFS, or ONTAP file system or volume.
 pub const AdministrativeAction = struct {
-    administrative_action_type: ?AdministrativeActionType,
+    administrative_action_type: ?AdministrativeActionType = null,
 
-    failure_details: ?AdministrativeActionFailureDetails,
+    failure_details: ?AdministrativeActionFailureDetails = null,
 
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The percentage-complete status of a `STORAGE_OPTIMIZATION`
     /// or `DOWNLOAD_DATA_FROM_BACKUP` administrative action. Does not apply to any
     /// other administrative action type.
-    progress_percent: ?i32,
+    progress_percent: ?i32 = null,
 
     /// The remaining bytes to transfer for the FSx for OpenZFS snapshot that you're
     /// copying.
-    remaining_transfer_bytes: ?i64,
+    remaining_transfer_bytes: ?i64 = null,
 
     /// The time that the administrative action request was received.
-    request_time: ?i64,
+    request_time: ?i64 = null,
 
     /// The status of the administrative action, as follows:
     ///
@@ -60,7 +60,7 @@ pub const AdministrativeAction = struct {
     /// can access data with read-only access
     /// while Amazon FSx downloads the file data to the volume. Track the
     /// progress of this process with the `ProgressPercent` element.
-    status: ?Status,
+    status: ?Status = null,
 
     /// The target value for the administration action, provided in the
     /// `UpdateFileSystem` operation. Returned for
@@ -73,7 +73,7 @@ pub const AdministrativeAction = struct {
 
     /// The number of bytes that have transferred for the FSx for OpenZFS snapshot
     /// that you're copying.
-    total_transfer_bytes: ?i64,
+    total_transfer_bytes: ?i64 = null,
 
     pub const json_field_names = .{
         .administrative_action_type = "AdministrativeActionType",

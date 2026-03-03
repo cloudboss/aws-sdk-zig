@@ -5,13 +5,13 @@ const LandingZoneStatus = @import("landing_zone_status.zig").LandingZoneStatus;
 /// Information about the landing zone.
 pub const LandingZoneDetail = struct {
     /// The ARN of the landing zone.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The drift status of the landing zone.
-    drift_status: ?LandingZoneDriftStatusSummary,
+    drift_status: ?LandingZoneDriftStatusSummary = null,
 
     /// The latest available version of the landing zone.
-    latest_available_version: ?[]const u8,
+    latest_available_version: ?[]const u8 = null,
 
     /// The landing zone manifest JSON text file that specifies the landing zone
     /// configurations.
@@ -19,10 +19,10 @@ pub const LandingZoneDetail = struct {
 
     /// The types of remediation actions configured for the landing zone, such as
     /// automatic drift correction or compliance enforcement.
-    remediation_types: ?[]const RemediationType,
+    remediation_types: ?[]const RemediationType = null,
 
     /// The landing zone deployment status. One of `ACTIVE`, `PROCESSING`, `FAILED`.
-    status: ?LandingZoneStatus,
+    status: ?LandingZoneStatus = null,
 
     /// The landing zone's current deployed version.
     version: []const u8,

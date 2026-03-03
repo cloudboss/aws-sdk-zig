@@ -19,7 +19,7 @@ pub const KendraConfiguration = struct {
     ///
     /// You can override this filter string with a new filter string at
     /// runtime.
-    query_filter_string: ?[]const u8,
+    query_filter_string: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an IAM role that has permission to
     /// search the Amazon Kendra index. The role must be in the same account and

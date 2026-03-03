@@ -3,7 +3,7 @@ pub const CustomAccountPoolHandler = struct {
     /// The ARN of the IAM role that enables Amazon SageMaker Unified Studio to
     /// invoke the Amazon Web Services Lambda funtion if the account source is the
     /// custom account pool handler.
-    lambda_execution_role_arn: ?[]const u8,
+    lambda_execution_role_arn: ?[]const u8 = null,
 
     /// The ARN of the Amazon Web Services Lambda function for the custom Amazon Web
     /// Services Lambda handler.

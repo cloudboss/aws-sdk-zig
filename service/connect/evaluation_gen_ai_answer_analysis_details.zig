@@ -3,10 +3,10 @@ const EvaluationTranscriptPointOfInterest = @import("evaluation_transcript_point
 /// An analysis for a generative AI answer to the question.
 pub const EvaluationGenAIAnswerAnalysisDetails = struct {
     /// Generative AI automation answer justification.
-    justification: ?[]const u8,
+    justification: ?[]const u8 = null,
 
     /// Generative AI automation answer analysis points of interest.
-    points_of_interest: ?[]const EvaluationTranscriptPointOfInterest,
+    points_of_interest: ?[]const EvaluationTranscriptPointOfInterest = null,
 
     pub const json_field_names = .{
         .justification = "Justification",

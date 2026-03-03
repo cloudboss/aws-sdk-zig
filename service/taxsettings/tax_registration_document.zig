@@ -4,10 +4,10 @@ const SourceS3Location = @import("source_s3_location.zig").SourceS3Location;
 /// Tax registration document information.
 pub const TaxRegistrationDocument = struct {
     /// The tax registration document.
-    file: ?TaxRegistrationDocFile,
+    file: ?TaxRegistrationDocFile = null,
 
     /// The Amazon S3 location where your tax registration document is stored.
-    s_3_location: ?SourceS3Location,
+    s_3_location: ?SourceS3Location = null,
 
     pub const json_field_names = .{
         .file = "file",

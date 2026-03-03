@@ -2,7 +2,7 @@
 pub const NamespaceProviderProperties = struct {
     /// An object which defines any additional configurations required by the
     /// provider service.
-    provider_configuration: ?[]const u8,
+    provider_configuration: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the provider service.
     provider_service_arn: []const u8,

@@ -5,27 +5,27 @@ const StepType = @import("step_type.zig").StepType;
 /// Contains information about a step in an automation event.
 pub const AutomationEventStep = struct {
     /// The timestamp when this automation event step completed execution.
-    completed_timestamp: ?i64,
+    completed_timestamp: ?i64 = null,
 
-    estimated_monthly_savings: ?EstimatedMonthlySavings,
+    estimated_monthly_savings: ?EstimatedMonthlySavings = null,
 
     /// The ID of the automation event this step belongs to.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The unique identifier of the resource being acted upon in this step.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The timestamp when this automation event step started execution.
-    start_timestamp: ?i64,
+    start_timestamp: ?i64 = null,
 
     /// The unique identifier for this step.
-    step_id: ?[]const u8,
+    step_id: ?[]const u8 = null,
 
     /// The current status of the step.
-    step_status: ?StepStatus,
+    step_status: ?StepStatus = null,
 
     /// The type of step.
-    step_type: ?StepType,
+    step_type: ?StepType = null,
 
     pub const json_field_names = .{
         .completed_timestamp = "completedTimestamp",

@@ -3,31 +3,31 @@
 /// database.
 pub const RelationalDatabaseBundle = struct {
     /// The ID for the database bundle.
-    bundle_id: ?[]const u8,
+    bundle_id: ?[]const u8 = null,
 
     /// The number of virtual CPUs (vCPUs) for the database bundle.
-    cpu_count: ?i32,
+    cpu_count: ?i32 = null,
 
     /// The size of the disk for the database bundle.
-    disk_size_in_gb: ?i32,
+    disk_size_in_gb: ?i32 = null,
 
     /// A Boolean value indicating whether the database bundle is active.
-    is_active: ?bool,
+    is_active: ?bool = null,
 
     /// A Boolean value indicating whether the database bundle is encrypted.
-    is_encrypted: ?bool,
+    is_encrypted: ?bool = null,
 
     /// The name for the database bundle.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The cost of the database bundle in US currency.
-    price: ?f32,
+    price: ?f32 = null,
 
     /// The amount of RAM in GB (for example, `2.0`) for the database bundle.
-    ram_size_in_gb: ?f32,
+    ram_size_in_gb: ?f32 = null,
 
     /// The data transfer rate per month in GB for the database bundle.
-    transfer_per_month_in_gb: ?i32,
+    transfer_per_month_in_gb: ?i32 = null,
 
     pub const json_field_names = .{
         .bundle_id = "bundleId",

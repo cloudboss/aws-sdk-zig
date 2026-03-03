@@ -19,7 +19,7 @@ pub const AccountInfo = struct {
     status: EnrollmentStatus,
 
     /// The reason for the current Automation enrollment status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

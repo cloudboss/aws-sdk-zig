@@ -4,14 +4,14 @@
 pub const DashBaseUrl = struct {
     /// For use with DVB-DASH profiles only. The priority of this location for
     /// servings segments. The lower the number, the higher the priority.
-    dvb_priority: ?i32,
+    dvb_priority: ?i32 = null,
 
     /// For use with DVB-DASH profiles only. The weighting for source locations that
     /// have the same priority.
-    dvb_weight: ?i32,
+    dvb_weight: ?i32 = null,
 
     /// The name of the source location.
-    service_location: ?[]const u8,
+    service_location: ?[]const u8 = null,
 
     /// A source location for segments.
     url: []const u8,

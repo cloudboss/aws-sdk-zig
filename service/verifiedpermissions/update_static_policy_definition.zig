@@ -1,7 +1,7 @@
 /// Contains information about an update to a static policy.
 pub const UpdateStaticPolicyDefinition = struct {
     /// Specifies the description to be added to or replaced on the static policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Specifies the Cedar policy language text to be added to or replaced on the
     /// static policy.

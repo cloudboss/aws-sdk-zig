@@ -2,7 +2,7 @@ const FirewallDomainList = @import("firewall_domain_list.zig").FirewallDomainLis
 
 pub const DeleteFirewallDomainListResponse = struct {
     /// The domain list that you just deleted.
-    firewall_domain_list: ?FirewallDomainList,
+    firewall_domain_list: ?FirewallDomainList = null,
 
     pub const json_field_names = .{
         .firewall_domain_list = "FirewallDomainList",

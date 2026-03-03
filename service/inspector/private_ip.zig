@@ -4,10 +4,10 @@
 /// action.
 pub const PrivateIp = struct {
     /// The DNS name of the private IP address.
-    private_dns_name: ?[]const u8,
+    private_dns_name: ?[]const u8 = null,
 
     /// The full IP address of the network inteface.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .private_dns_name = "privateDnsName",

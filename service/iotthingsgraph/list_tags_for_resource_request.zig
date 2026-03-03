@@ -1,9 +1,9 @@
 pub const ListTagsForResourceRequest = struct {
     /// The maximum number of tags to return.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The token that specifies the next page of results to return.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the resource whose tags are to be
     /// returned.

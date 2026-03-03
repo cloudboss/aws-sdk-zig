@@ -3,7 +3,7 @@ const RemediationActionWithOrder = @import("remediation_action_with_order.zig").
 /// A list of remediation actions.
 pub const PossibleRemediationAction = struct {
     /// A description of the list of remediation actions.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about whether an action is taken by default.
     is_default_action: bool = false,

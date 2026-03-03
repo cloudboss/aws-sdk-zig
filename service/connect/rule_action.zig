@@ -21,22 +21,22 @@ pub const RuleAction = struct {
     /// `OnRealTimeCallAnalysisAvailable` | `OnRealTimeChatAnalysisAvailable` |
     /// `OnPostChatAnalysisAvailable` | `OnZendeskTicketCreate` |
     /// `OnZendeskTicketStatusUpdate` | `OnSalesforceCaseCreate`
-    assign_contact_category_action: ?AssignContactCategoryActionDefinition,
+    assign_contact_category_action: ?AssignContactCategoryActionDefinition = null,
 
     /// Information about the assign SLA action.
-    assign_sla_action: ?AssignSlaActionDefinition,
+    assign_sla_action: ?AssignSlaActionDefinition = null,
 
     /// Information about the create case action.
     ///
     /// Supported only for `TriggerEventSource` values:
     /// `OnPostCallAnalysisAvailable` |
     /// `OnPostChatAnalysisAvailable`.
-    create_case_action: ?CreateCaseActionDefinition,
+    create_case_action: ?CreateCaseActionDefinition = null,
 
     /// Information about the end associated tasks action.
     ///
     /// Supported only for `TriggerEventSource` values: `OnCaseUpdate`.
-    end_associated_tasks_action: ?EndAssociatedTasksActionDefinition,
+    end_associated_tasks_action: ?EndAssociatedTasksActionDefinition = null,
 
     /// Information about the EventBridge action.
     ///
@@ -45,7 +45,7 @@ pub const RuleAction = struct {
     /// `OnRealTimeCallAnalysisAvailable` | `OnRealTimeChatAnalysisAvailable` |
     /// `OnPostChatAnalysisAvailable` | `OnContactEvaluationSubmit` |
     /// `OnMetricDataUpdate`
-    event_bridge_action: ?EventBridgeActionDefinition,
+    event_bridge_action: ?EventBridgeActionDefinition = null,
 
     /// Information about the send notification action.
     ///
@@ -54,22 +54,22 @@ pub const RuleAction = struct {
     /// `OnRealTimeCallAnalysisAvailable` | `OnRealTimeChatAnalysisAvailable` |
     /// `OnPostChatAnalysisAvailable` | `OnContactEvaluationSubmit` |
     /// `OnMetricDataUpdate`
-    send_notification_action: ?SendNotificationActionDefinition,
+    send_notification_action: ?SendNotificationActionDefinition = null,
 
     /// Information about the submit automated evaluation action.
-    submit_auto_evaluation_action: ?SubmitAutoEvaluationActionDefinition,
+    submit_auto_evaluation_action: ?SubmitAutoEvaluationActionDefinition = null,
 
     /// Information about the task action. This field is required if
     /// `TriggerEventSource` is one of the
     /// following values: `OnZendeskTicketCreate` | `OnZendeskTicketStatusUpdate` |
     /// `OnSalesforceCaseCreate`
-    task_action: ?TaskActionDefinition,
+    task_action: ?TaskActionDefinition = null,
 
     /// Information about the update case action.
     ///
     /// Supported only for `TriggerEventSource` values: `OnCaseCreate` |
     /// `OnCaseUpdate`.
-    update_case_action: ?UpdateCaseActionDefinition,
+    update_case_action: ?UpdateCaseActionDefinition = null,
 
     pub const json_field_names = .{
         .action_type = "ActionType",

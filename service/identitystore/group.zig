@@ -4,13 +4,13 @@ const ExternalId = @import("external_id.zig").ExternalId;
 /// group.
 pub const Group = struct {
     /// The date and time the group was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of the user or system that created the group.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// A string containing a description of the specified group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The display name value for the group. The length limit is 1,024 characters.
     /// This value can consist of letters, accented characters, symbols, numbers,
@@ -19,11 +19,11 @@ pub const Group = struct {
     /// stored as an attribute of the group object in the identity store.
     ///
     /// Prefix search supports a maximum of 1,000 characters for the string.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// A list of `ExternalId` objects that contains the identifiers issued to this
     /// resource by an external identity provider.
-    external_ids: ?[]const ExternalId,
+    external_ids: ?[]const ExternalId = null,
 
     /// The identifier for a group in the identity store.
     group_id: []const u8,
@@ -32,10 +32,10 @@ pub const Group = struct {
     identity_store_id: []const u8,
 
     /// The date and time the group was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The identifier of the user or system that last updated the group.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

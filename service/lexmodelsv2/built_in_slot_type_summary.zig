@@ -4,11 +4,11 @@
 /// operation.
 pub const BuiltInSlotTypeSummary = struct {
     /// The description of the built-in slot type.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The signature of the built-in slot type. Use this to specify the
     /// parent slot type of a derived slot type.
-    slot_type_signature: ?[]const u8,
+    slot_type_signature: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "description",

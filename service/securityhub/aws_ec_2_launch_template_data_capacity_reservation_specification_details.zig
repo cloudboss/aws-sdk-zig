@@ -8,10 +8,10 @@ pub const AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails = stru
     /// matching attributes (instance type, platform, Availability Zone). If equal
     /// to `none`, the instance avoids running in a Capacity Reservation even if one
     /// is available. The instance runs in On-Demand capacity.
-    capacity_reservation_preference: ?[]const u8,
+    capacity_reservation_preference: ?[]const u8 = null,
 
     /// Specifies a target Capacity Reservation.
-    capacity_reservation_target: ?AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails,
+    capacity_reservation_target: ?AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails = null,
 
     pub const json_field_names = .{
         .capacity_reservation_preference = "CapacityReservationPreference",

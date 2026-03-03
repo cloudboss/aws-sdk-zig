@@ -7,7 +7,7 @@ pub const EthernetPayload = struct {
     connection_type: ConnectionType,
 
     /// Network configuration for a static IP connection.
-    static_ip_connection_info: ?StaticIpConnectionInfo,
+    static_ip_connection_info: ?StaticIpConnectionInfo = null,
 
     pub const json_field_names = .{
         .connection_type = "ConnectionType",

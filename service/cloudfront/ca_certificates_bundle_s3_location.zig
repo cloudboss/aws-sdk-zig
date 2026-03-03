@@ -10,5 +10,5 @@ pub const CaCertificatesBundleS3Location = struct {
     region: []const u8,
 
     /// The location's version.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 };

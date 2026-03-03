@@ -4,20 +4,20 @@ const AwsWafRegionalRulePredicateListDetails = @import("aws_waf_regional_rule_pr
 /// web requests that you want to allow, block, or count.
 pub const AwsWafRegionalRuleDetails = struct {
     /// A name for the metrics for the rule.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// A descriptive name for the rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Specifies the `ByteMatchSet`, `IPSet`,
     /// `SqlInjectionMatchSet`, `XssMatchSet`, `RegexMatchSet`,
     /// `GeoMatchSet`, and `SizeConstraintSet` objects that you want to
     /// add to a rule and, for each object, indicates whether you want to negate the
     /// settings.
-    predicate_list: ?[]const AwsWafRegionalRulePredicateListDetails,
+    predicate_list: ?[]const AwsWafRegionalRulePredicateListDetails = null,
 
     /// The ID of the rule.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metric_name = "MetricName",

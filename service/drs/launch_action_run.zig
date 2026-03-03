@@ -4,16 +4,16 @@ const LaunchActionRunStatus = @import("launch_action_run_status.zig").LaunchActi
 /// Launch action run.
 pub const LaunchActionRun = struct {
     /// Action.
-    action: ?LaunchAction,
+    action: ?LaunchAction = null,
 
     /// Failure reason.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// Run Id.
-    run_id: ?[]const u8,
+    run_id: ?[]const u8 = null,
 
     /// Run status.
-    status: ?LaunchActionRunStatus,
+    status: ?LaunchActionRunStatus = null,
 
     pub const json_field_names = .{
         .action = "action",

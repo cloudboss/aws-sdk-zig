@@ -6,7 +6,7 @@ const KinesisVideoStreamStartSelector = @import("kinesis_video_stream_start_sele
 pub const StreamProcessingStartSelector = struct {
     /// Specifies the starting point in the stream to start processing. This can be
     /// done with a producer timestamp or a fragment number in a Kinesis stream.
-    kvs_stream_start_selector: ?KinesisVideoStreamStartSelector,
+    kvs_stream_start_selector: ?KinesisVideoStreamStartSelector = null,
 
     pub const json_field_names = .{
         .kvs_stream_start_selector = "KVSStreamStartSelector",

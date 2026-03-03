@@ -7,19 +7,19 @@ pub const SimulationAppMetadata = struct {
     /// concepts:
     /// Domains](https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains)
     /// in the *SimSpace Weaver User Guide*.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// The name of the app.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The name of the simulation of the app.
-    simulation: ?[]const u8,
+    simulation: ?[]const u8 = null,
 
     /// The current status of the app.
-    status: ?SimulationAppStatus,
+    status: ?SimulationAppStatus = null,
 
     /// The desired status of the app.
-    target_status: ?SimulationAppTargetStatus,
+    target_status: ?SimulationAppTargetStatus = null,
 
     pub const json_field_names = .{
         .domain = "Domain",

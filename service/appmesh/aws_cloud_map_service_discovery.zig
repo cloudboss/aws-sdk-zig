@@ -11,14 +11,14 @@ pub const AwsCloudMapServiceDiscovery = struct {
     /// by any custom attribute that you specified when you registered the instance.
     /// Only instances
     /// that match all of the specified key/value pairs will be returned.
-    attributes: ?[]const AwsCloudMapInstanceAttribute,
+    attributes: ?[]const AwsCloudMapInstanceAttribute = null,
 
     /// The preferred IP version that this virtual node uses. Setting the IP
     /// preference on the
     /// virtual node only overrides the IP preference set for the mesh on this
     /// specific
     /// node.
-    ip_preference: ?IpPreference,
+    ip_preference: ?IpPreference = null,
 
     /// The name of the Cloud Map namespace to use.
     namespace_name: []const u8,

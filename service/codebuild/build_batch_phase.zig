@@ -7,15 +7,15 @@ pub const BuildBatchPhase = struct {
     /// Additional information about the batch build phase. Especially to help
     /// troubleshoot a
     /// failed batch build.
-    contexts: ?[]const PhaseContext,
+    contexts: ?[]const PhaseContext = null,
 
     /// How long, in seconds, between the starting and ending times of the batch
     /// build's
     /// phase.
-    duration_in_seconds: ?i64,
+    duration_in_seconds: ?i64 = null,
 
     /// When the batch build phase ended, expressed in Unix time format.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The current status of the batch build phase. Valid values include:
     ///
@@ -42,7 +42,7 @@ pub const BuildBatchPhase = struct {
     /// **TIMED_OUT**
     ///
     /// The build phase timed out.
-    phase_status: ?StatusType,
+    phase_status: ?StatusType = null,
 
     /// The name of the batch build phase. Valid values include:
     ///
@@ -74,10 +74,10 @@ pub const BuildBatchPhase = struct {
     /// **SUCCEEDED**
     ///
     /// The batch build succeeded.
-    phase_type: ?BuildBatchPhaseType,
+    phase_type: ?BuildBatchPhaseType = null,
 
     /// When the batch build phase started, expressed in Unix time format.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .contexts = "contexts",

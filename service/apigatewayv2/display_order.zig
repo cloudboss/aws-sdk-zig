@@ -4,13 +4,13 @@ const Section = @import("section.zig").Section;
 pub const DisplayOrder = struct {
     /// Represents a list of sections which include section name and list of product
     /// REST endpoints for a product.
-    contents: ?[]const Section,
+    contents: ?[]const Section = null,
 
     /// The ARN of the overview page.
-    overview_page_arn: ?[]const u8,
+    overview_page_arn: ?[]const u8 = null,
 
     /// The product page ARNs.
-    product_page_arns: ?[]const []const u8,
+    product_page_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .contents = "Contents",

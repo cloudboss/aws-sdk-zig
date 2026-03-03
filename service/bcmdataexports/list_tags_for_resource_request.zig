@@ -3,7 +3,7 @@ pub const ListTagsForResourceRequest = struct {
     max_results: ?i32 = null,
 
     /// The token to retrieve the next set of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The unique identifier for the resource.
     resource_arn: []const u8,

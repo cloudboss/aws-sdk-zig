@@ -9,19 +9,19 @@ pub const InstanceInformation = struct {
     /// The activation ID created by Amazon Web Services Systems Manager when the
     /// server or virtual machine (VM) was
     /// registered.
-    activation_id: ?[]const u8,
+    activation_id: ?[]const u8 = null,
 
     /// The version of SSM Agent running on your Linux managed node.
-    agent_version: ?[]const u8,
+    agent_version: ?[]const u8 = null,
 
     /// Information about the association.
-    association_overview: ?InstanceAggregatedAssociationOverview,
+    association_overview: ?InstanceAggregatedAssociationOverview = null,
 
     /// The status of the association.
-    association_status: ?[]const u8,
+    association_status: ?[]const u8 = null,
 
     /// The fully qualified host name of the managed node.
-    computer_name: ?[]const u8,
+    computer_name: ?[]const u8 = null,
 
     /// The role assigned to an Amazon EC2 instance configured with a Systems
     /// Manager
@@ -39,13 +39,13 @@ pub const InstanceInformation = struct {
     /// *Amazon EC2 API Reference* or
     /// [describe-instances](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html) in the
     /// *Amazon Web Services CLI Command Reference*.
-    iam_role: ?[]const u8,
+    iam_role: ?[]const u8 = null,
 
     /// The managed node ID.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The IP address of the managed node.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// Indicates whether the latest version of SSM Agent is running on your Linux
     /// managed node. This
@@ -54,16 +54,16 @@ pub const InstanceInformation = struct {
     /// because some older versions of Windows Server use the EC2Config service to
     /// process Systems Manager
     /// requests.
-    is_latest_version: ?bool,
+    is_latest_version: ?bool = null,
 
     /// The date the association was last run.
-    last_association_execution_date: ?i64,
+    last_association_execution_date: ?i64 = null,
 
     /// The date and time when the agent last pinged the Systems Manager service.
-    last_ping_date_time: ?i64,
+    last_ping_date_time: ?i64 = null,
 
     /// The last date the association was successfully run.
-    last_successful_association_execution_date: ?i64,
+    last_successful_association_execution_date: ?i64 = null,
 
     /// The name assigned to an on-premises server, edge device, or virtual machine
     /// (VM) when it is
@@ -81,37 +81,37 @@ pub const InstanceInformation = struct {
     /// of an EC2 instance, use the Amazon EC2 `DescribeInstances` operation. For
     /// information, see
     /// [DescribeInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html) in the *Amazon EC2 API Reference* or [describe-instances](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html) in the *Amazon Web Services CLI Command Reference*.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Connection status of SSM Agent.
     ///
     /// The status `Inactive` has been deprecated and is no longer in use.
-    ping_status: ?PingStatus,
+    ping_status: ?PingStatus = null,
 
     /// The name of the operating system platform running on your managed node.
-    platform_name: ?[]const u8,
+    platform_name: ?[]const u8 = null,
 
     /// The operating system platform type.
-    platform_type: ?PlatformType,
+    platform_type: ?PlatformType = null,
 
     /// The version of the OS platform running on your managed node.
-    platform_version: ?[]const u8,
+    platform_version: ?[]const u8 = null,
 
     /// The date the server or VM was registered with Amazon Web Services as a
     /// managed node.
-    registration_date: ?i64,
+    registration_date: ?i64 = null,
 
     /// The type of instance. Instances are either EC2 instances or managed
     /// instances.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The ID of the source resource. For IoT Greengrass devices, `SourceId` is
     /// the Thing name.
-    source_id: ?[]const u8,
+    source_id: ?[]const u8 = null,
 
     /// The type of the source resource. For IoT Greengrass devices, `SourceType`
     /// is `AWS::IoT::Thing`.
-    source_type: ?SourceType,
+    source_type: ?SourceType = null,
 
     pub const json_field_names = .{
         .activation_id = "ActivationId",

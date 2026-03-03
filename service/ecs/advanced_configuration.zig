@@ -9,23 +9,23 @@
 pub const AdvancedConfiguration = struct {
     /// The Amazon Resource Name (ARN) of the alternate target group for Amazon ECS
     /// blue/green deployments.
-    alternate_target_group_arn: ?[]const u8,
+    alternate_target_group_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) that that identifies the production listener
     /// rule (in the case of an Application Load Balancer) or
     /// listener (in the case for an Network Load Balancer) for routing production
     /// traffic.
-    production_listener_rule: ?[]const u8,
+    production_listener_rule: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS
     /// permission to call the Elastic Load Balancing APIs for you.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) that identifies ) that identifies the test
     /// listener rule (in the case of an Application Load Balancer) or
     /// listener (in the case for an Network Load Balancer) for routing test
     /// traffic.
-    test_listener_rule: ?[]const u8,
+    test_listener_rule: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alternate_target_group_arn = "alternateTargetGroupArn",

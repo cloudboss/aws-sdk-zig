@@ -12,10 +12,10 @@ pub const ServicePipeline = struct {
     deployment_status: DeploymentStatus,
 
     /// A service pipeline deployment status message.
-    deployment_status_message: ?[]const u8,
+    deployment_status_message: ?[]const u8 = null,
 
     /// The ID of the last attempted deployment of this service pipeline.
-    last_attempted_deployment_id: ?[]const u8,
+    last_attempted_deployment_id: ?[]const u8 = null,
 
     /// The time when a deployment of the service pipeline was last attempted.
     last_deployment_attempted_at: i64,
@@ -24,10 +24,10 @@ pub const ServicePipeline = struct {
     last_deployment_succeeded_at: i64,
 
     /// The ID of the last successful deployment of this service pipeline.
-    last_succeeded_deployment_id: ?[]const u8,
+    last_succeeded_deployment_id: ?[]const u8 = null,
 
     /// The service spec that was used to create the service pipeline.
-    spec: ?[]const u8,
+    spec: ?[]const u8 = null,
 
     /// The major version of the service template that was used to create the
     /// service

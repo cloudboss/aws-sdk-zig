@@ -9,7 +9,7 @@ pub const RepositoryLinkInfo = struct {
 
     /// The Amazon Resource Name (ARN) of the encryption key for the repository
     /// associated with the repository link.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The owner ID for the repository associated with the repository link, such as
     /// the owner

@@ -13,7 +13,7 @@ pub const ActionInteraction = struct {
     /// the event ID to distinguish unique events. Any subsequent events after the
     /// first with the
     /// same event ID are not used in model training.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The type of action interaction event. You can specify `Viewed`, `Taken`, and
     /// `Not Taken` event types. For more
@@ -26,7 +26,7 @@ pub const ActionInteraction = struct {
     /// Amazon Personalize doesn't use impressions data from action interaction
     /// events. Instead, record multiple events for each action and use the `Viewed`
     /// event type.
-    impression: ?[]const []const u8,
+    impression: ?[]const []const u8 = null,
 
     /// A string map of event-specific data that you might choose to record. For
     /// example, if a
@@ -56,11 +56,11 @@ pub const ActionInteraction = struct {
     /// * recommendationId
     ///
     /// * impression
-    properties: ?[]const u8,
+    properties: ?[]const u8 = null,
 
     /// The ID of the list of recommendations that contains the action the user
     /// interacted with.
-    recommendation_id: ?[]const u8,
+    recommendation_id: ?[]const u8 = null,
 
     /// The ID associated with the user's visit.
     /// Your application generates a unique `sessionId` when a user first visits
@@ -74,7 +74,7 @@ pub const ActionInteraction = struct {
     /// The ID of the user who interacted with the action. This corresponds to the
     /// `USER_ID`
     /// field of the Action interaction schema.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action_id = "actionId",

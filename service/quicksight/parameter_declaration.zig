@@ -12,16 +12,16 @@ const StringParameterDeclaration = @import("string_parameter_declaration.zig").S
 /// the attributes can be defined.
 pub const ParameterDeclaration = struct {
     /// A parameter declaration for the `DateTime` data type.
-    date_time_parameter_declaration: ?DateTimeParameterDeclaration,
+    date_time_parameter_declaration: ?DateTimeParameterDeclaration = null,
 
     /// A parameter declaration for the `Decimal` data type.
-    decimal_parameter_declaration: ?DecimalParameterDeclaration,
+    decimal_parameter_declaration: ?DecimalParameterDeclaration = null,
 
     /// A parameter declaration for the `Integer` data type.
-    integer_parameter_declaration: ?IntegerParameterDeclaration,
+    integer_parameter_declaration: ?IntegerParameterDeclaration = null,
 
     /// A parameter declaration for the `String` data type.
-    string_parameter_declaration: ?StringParameterDeclaration,
+    string_parameter_declaration: ?StringParameterDeclaration = null,
 
     pub const json_field_names = .{
         .date_time_parameter_declaration = "DateTimeParameterDeclaration",

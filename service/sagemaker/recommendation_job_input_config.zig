@@ -10,29 +10,29 @@ pub const RecommendationJobInputConfig = struct {
     /// Specifies mandatory fields for running an Inference Recommender job. The
     /// fields specified in `ContainerConfig` override the corresponding fields in
     /// the model package.
-    container_config: ?RecommendationJobContainerConfig,
+    container_config: ?RecommendationJobContainerConfig = null,
 
     /// Specifies the endpoint configuration to use for a job.
-    endpoint_configurations: ?[]const EndpointInputConfiguration,
+    endpoint_configurations: ?[]const EndpointInputConfiguration = null,
 
     /// Existing customer endpoints on which to run an Inference Recommender job.
-    endpoints: ?[]const EndpointInfo,
+    endpoints: ?[]const EndpointInfo = null,
 
     /// Specifies the maximum duration of the job, in seconds. The maximum value is
     /// 18,000 seconds.
-    job_duration_in_seconds: ?i32,
+    job_duration_in_seconds: ?i32 = null,
 
     /// The name of the created model.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of a versioned model package.
-    model_package_version_arn: ?[]const u8,
+    model_package_version_arn: ?[]const u8 = null,
 
     /// Defines the resource limit of the job.
-    resource_limit: ?RecommendationJobResourceLimit,
+    resource_limit: ?RecommendationJobResourceLimit = null,
 
     /// Specifies the traffic pattern of the job.
-    traffic_pattern: ?TrafficPattern,
+    traffic_pattern: ?TrafficPattern = null,
 
     /// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management
     /// Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt
@@ -63,11 +63,11 @@ pub const RecommendationJobInputConfig = struct {
     ///
     /// For more information about key identifiers, see [Key identifiers
     /// (KeyID)](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id) in the Amazon Web Services Key Management Service (Amazon Web Services KMS) documentation.
-    volume_kms_key_id: ?[]const u8,
+    volume_kms_key_id: ?[]const u8 = null,
 
     /// Inference Recommender provisions SageMaker endpoints with access to VPC in
     /// the inference recommendation job.
-    vpc_config: ?RecommendationJobVpcConfig,
+    vpc_config: ?RecommendationJobVpcConfig = null,
 
     pub const json_field_names = .{
         .container_config = "ContainerConfig",

@@ -24,7 +24,7 @@ pub const SpendingLimitSummary = struct {
 
     /// The tags associated with the spending limit. Each tag consists of a key and
     /// an optional value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The time period during which the spending limit is active.
     time_period: TimePeriod,

@@ -13,7 +13,7 @@ pub const MetadataTransferJobSummary = struct {
     metadata_transfer_job_id: []const u8,
 
     /// The metadata transfer job summary progess.
-    progress: ?MetadataTransferJobProgress,
+    progress: ?MetadataTransferJobProgress = null,
 
     /// The metadata transfer job summary status.
     status: MetadataTransferJobStatus,

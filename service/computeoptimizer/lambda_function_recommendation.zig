@@ -9,7 +9,7 @@ const LambdaFunctionUtilizationMetric = @import("lambda_function_utilization_met
 /// Describes an Lambda function recommendation.
 pub const LambdaFunctionRecommendation = struct {
     /// The Amazon Web Services account ID of the function.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The amount of memory, in MB, that's allocated to the current function.
     current_memory_size: i32 = 0,
@@ -17,10 +17,10 @@ pub const LambdaFunctionRecommendation = struct {
     /// The risk of the current Lambda function not meeting the performance needs
     /// of its workloads. The higher the risk, the more likely the current Lambda
     /// function requires more memory.
-    current_performance_risk: ?CurrentPerformanceRisk,
+    current_performance_risk: ?CurrentPerformanceRisk = null,
 
     /// Describes the effective recommendation preferences for Lambda functions.
-    effective_recommendation_preferences: ?LambdaEffectiveRecommendationPreferences,
+    effective_recommendation_preferences: ?LambdaEffectiveRecommendationPreferences = null,
 
     /// The finding classification of the function.
     ///
@@ -62,7 +62,7 @@ pub const LambdaFunctionRecommendation = struct {
     /// specify the `filter` parameter with a value of
     /// `Unavailable` in your
     /// `GetLambdaFunctionRecommendations` request.
-    finding: ?LambdaFunctionRecommendationFinding,
+    finding: ?LambdaFunctionRecommendationFinding = null,
 
     /// The reason for the finding classification of the function.
     ///
@@ -106,16 +106,16 @@ pub const LambdaFunctionRecommendation = struct {
     /// not qualify for a recommendation because Compute Optimizer cannot generate a
     /// recommendation with a high degree of confidence. This finding reason code is
     /// part of the `Unavailable` finding classification.
-    finding_reason_codes: ?[]const LambdaFunctionRecommendationFindingReasonCode,
+    finding_reason_codes: ?[]const LambdaFunctionRecommendationFindingReasonCode = null,
 
     /// The Amazon Resource Name (ARN) of the current function.
-    function_arn: ?[]const u8,
+    function_arn: ?[]const u8 = null,
 
     /// The version number of the current function.
-    function_version: ?[]const u8,
+    function_version: ?[]const u8 = null,
 
     /// The timestamp of when the function recommendation was last generated.
-    last_refresh_timestamp: ?i64,
+    last_refresh_timestamp: ?i64 = null,
 
     /// The number of days for which utilization metrics were analyzed for the
     /// function.
@@ -124,17 +124,17 @@ pub const LambdaFunctionRecommendation = struct {
     /// An array of objects that describe the memory configuration recommendation
     /// options for
     /// the function.
-    memory_size_recommendation_options: ?[]const LambdaFunctionMemoryRecommendationOption,
+    memory_size_recommendation_options: ?[]const LambdaFunctionMemoryRecommendationOption = null,
 
     /// The number of times your function code was applied during the look-back
     /// period.
     number_of_invocations: i64 = 0,
 
     /// A list of tags assigned to your Lambda function recommendations.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// An array of objects that describe the utilization metrics of the function.
-    utilization_metrics: ?[]const LambdaFunctionUtilizationMetric,
+    utilization_metrics: ?[]const LambdaFunctionUtilizationMetric = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

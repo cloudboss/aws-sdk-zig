@@ -8,5 +8,5 @@
 pub const AbortIncompleteMultipartUpload = struct {
     /// Specifies the number of days after which Amazon S3 aborts an incomplete
     /// multipart upload.
-    days_after_initiation: ?i32,
+    days_after_initiation: ?i32 = null,
 };

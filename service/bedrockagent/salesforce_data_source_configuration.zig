@@ -5,7 +5,7 @@ const SalesforceSourceConfiguration = @import("salesforce_source_configuration.z
 pub const SalesforceDataSourceConfiguration = struct {
     /// The configuration of the Salesforce content. For example, configuring
     /// specific types of Salesforce content.
-    crawler_configuration: ?SalesforceCrawlerConfiguration,
+    crawler_configuration: ?SalesforceCrawlerConfiguration = null,
 
     /// The endpoint information to connect to your Salesforce data source.
     source_configuration: SalesforceSourceConfiguration,

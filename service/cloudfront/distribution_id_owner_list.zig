@@ -10,7 +10,7 @@ pub const DistributionIdOwnerList = struct {
     is_truncated: bool,
 
     /// The number of `DistributionIdOwner` objects.
-    items: ?[]const DistributionIdOwner,
+    items: ?[]const DistributionIdOwner = null,
 
     /// Use this field when paginating results to indicate where to begin in your
     /// list of `DistributionIdOwner` objects. The response includes distributions
@@ -25,7 +25,7 @@ pub const DistributionIdOwnerList = struct {
     /// A token used for pagination of results returned in the response. You can use
     /// the token from the previous request to define where the current request
     /// should begin.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// Specifies the actual number of `DistributionIdOwner` objects included in the
     /// list for the current page.

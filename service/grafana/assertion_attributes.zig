@@ -6,31 +6,31 @@ pub const AssertionAttributes = struct {
     /// The name of the attribute within the SAML assertion to use as the email
     /// names for SAML
     /// users.
-    email: ?[]const u8,
+    email: ?[]const u8 = null,
 
     /// The name of the attribute within the SAML assertion to use as the user full
     /// "friendly"
     /// names for user groups.
-    groups: ?[]const u8,
+    groups: ?[]const u8 = null,
 
     /// The name of the attribute within the SAML assertion to use as the login
     /// names for SAML
     /// users.
-    login: ?[]const u8,
+    login: ?[]const u8 = null,
 
     /// The name of the attribute within the SAML assertion to use as the user full
     /// "friendly"
     /// names for SAML users.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The name of the attribute within the SAML assertion to use as the user full
     /// "friendly"
     /// names for the users' organizations.
-    org: ?[]const u8,
+    org: ?[]const u8 = null,
 
     /// The name of the attribute within the SAML assertion to use as the user
     /// roles.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .email = "email",

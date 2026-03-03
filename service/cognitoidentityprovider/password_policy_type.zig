@@ -5,13 +5,13 @@ pub const PasswordPolicyType = struct {
     /// The minimum length of the password in the policy that you have set. This
     /// value can't
     /// be less than 6.
-    minimum_length: ?i32,
+    minimum_length: ?i32 = null,
 
     /// The number of previous passwords that you want Amazon Cognito to restrict
     /// each user from
     /// reusing. Users can't set a password that matches any of `n` previous
     /// passwords, where `n` is the value of `PasswordHistorySize`.
-    password_history_size: ?i32,
+    password_history_size: ?i32 = null,
 
     /// The requirement in a password policy that users must include at least one
     /// lowercase

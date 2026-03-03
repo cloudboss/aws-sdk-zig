@@ -15,7 +15,7 @@ pub const UpdateProvisioningPreferences = struct {
     ///
     /// If no values are specified, the default value is all accounts from the
     /// `STACKSET` constraint.
-    stack_set_accounts: ?[]const []const u8,
+    stack_set_accounts: ?[]const []const u8 = null,
 
     /// The number of accounts, per Region, for which this operation can fail before
     /// Service Catalog stops the operation in that Region. If the operation is
@@ -28,7 +28,7 @@ pub const UpdateProvisioningPreferences = struct {
     /// `StackSetFailureTolerancePercentage`, but not both.
     ///
     /// The default value is `0` if no value is specified.
-    stack_set_failure_tolerance_count: ?i32,
+    stack_set_failure_tolerance_count: ?i32 = null,
 
     /// The percentage of accounts, per Region, for which this stack operation can
     /// fail before Service Catalog stops the operation in that Region. If the
@@ -42,7 +42,7 @@ pub const UpdateProvisioningPreferences = struct {
     ///
     /// Conditional: You must specify either `StackSetFailureToleranceCount` or
     /// `StackSetFailureTolerancePercentage`, but not both.
-    stack_set_failure_tolerance_percentage: ?i32,
+    stack_set_failure_tolerance_percentage: ?i32 = null,
 
     /// The maximum number of accounts in which to perform this operation at one
     /// time. This is dependent on the value of `StackSetFailureToleranceCount`.
@@ -57,7 +57,7 @@ pub const UpdateProvisioningPreferences = struct {
     ///
     /// Conditional: You must specify either `StackSetMaxConcurrentCount` or
     /// `StackSetMaxConcurrentPercentage`, but not both.
-    stack_set_max_concurrency_count: ?i32,
+    stack_set_max_concurrency_count: ?i32 = null,
 
     /// The maximum percentage of accounts in which to perform this operation at one
     /// time.
@@ -75,7 +75,7 @@ pub const UpdateProvisioningPreferences = struct {
     ///
     /// Conditional: You must specify either `StackSetMaxConcurrentCount` or
     /// `StackSetMaxConcurrentPercentage`, but not both.
-    stack_set_max_concurrency_percentage: ?i32,
+    stack_set_max_concurrency_percentage: ?i32 = null,
 
     /// Determines what action Service Catalog performs to a stack set or a stack
     /// instance represented by the provisioned product. The default value is
@@ -99,7 +99,7 @@ pub const UpdateProvisioningPreferences = struct {
     ///
     /// Deletes a stack instance in the stack set represented by the provisioned
     /// product.
-    stack_set_operation_type: ?StackSetOperationType,
+    stack_set_operation_type: ?StackSetOperationType = null,
 
     /// One or more Amazon Web Services Regions where the provisioned product will
     /// be available.
@@ -112,7 +112,7 @@ pub const UpdateProvisioningPreferences = struct {
     ///
     /// If no values are specified, the default value is all Regions from the
     /// `STACKSET` constraint.
-    stack_set_regions: ?[]const []const u8,
+    stack_set_regions: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .stack_set_accounts = "StackSetAccounts",

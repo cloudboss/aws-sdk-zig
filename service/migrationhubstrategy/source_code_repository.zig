@@ -2,16 +2,16 @@
 /// component.
 pub const SourceCodeRepository = struct {
     /// The branch of the source code.
-    branch: ?[]const u8,
+    branch: ?[]const u8 = null,
 
     /// The name of the project.
-    project_name: ?[]const u8,
+    project_name: ?[]const u8 = null,
 
     /// The repository name for the source code.
-    repository: ?[]const u8,
+    repository: ?[]const u8 = null,
 
     /// The type of repository to use for the source code.
-    version_control_type: ?[]const u8,
+    version_control_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .branch = "branch",

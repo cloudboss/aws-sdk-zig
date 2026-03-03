@@ -5,13 +5,13 @@ const GeospatialSelectedPointStyle = @import("geospatial_selected_point_style.zi
 /// The point style of the geospatial map.
 pub const GeospatialPointStyleOptions = struct {
     /// The cluster marker configuration of the geospatial point style.
-    cluster_marker_configuration: ?ClusterMarkerConfiguration,
+    cluster_marker_configuration: ?ClusterMarkerConfiguration = null,
 
     /// The heatmap configuration of the geospatial point style.
-    heatmap_configuration: ?GeospatialHeatmapConfiguration,
+    heatmap_configuration: ?GeospatialHeatmapConfiguration = null,
 
     /// The selected point styles (point, cluster) of the geospatial map.
-    selected_point_style: ?GeospatialSelectedPointStyle,
+    selected_point_style: ?GeospatialSelectedPointStyle = null,
 
     pub const json_field_names = .{
         .cluster_marker_configuration = "ClusterMarkerConfiguration",

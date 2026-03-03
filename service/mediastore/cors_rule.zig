@@ -20,7 +20,7 @@ pub const CorsRule = struct {
     ///
     /// Each CORS rule must contain at least one `AllowedMethods` and one
     /// `AllowedOrigins` element.
-    allowed_methods: ?[]const MethodName,
+    allowed_methods: ?[]const MethodName = null,
 
     /// One or more response headers that you want users to be able to access from
     /// their
@@ -40,7 +40,7 @@ pub const CorsRule = struct {
     /// object).
     ///
     /// This element is optional for each rule.
-    expose_headers: ?[]const []const u8,
+    expose_headers: ?[]const []const u8 = null,
 
     /// The time in seconds that your browser caches the preflight response for the
     /// specified

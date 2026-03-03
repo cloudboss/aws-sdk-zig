@@ -14,7 +14,7 @@ pub const S3LogDestinationParameters = struct {
     /// How EventBridge should format the log records.
     ///
     /// EventBridge currently only supports `json` formatting.
-    output_format: ?S3OutputFormat,
+    output_format: ?S3OutputFormat = null,
 
     /// Specifies any prefix text with which to begin Amazon S3 log object names.
     ///
@@ -26,7 +26,7 @@ pub const S3LogDestinationParameters = struct {
     /// bytes). For more
     /// information, see [Organizing objects using
     /// prefixes](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html) in the *Amazon Simple Storage Service User Guide*.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket_name = "BucketName",

@@ -4,10 +4,10 @@
 /// wildcard characters in tag-based filter conditions.
 pub const SearchResourcesTagCriterionPair = struct {
     /// The value for the tag key to use in the condition.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The tag value to use in the condition.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "key",

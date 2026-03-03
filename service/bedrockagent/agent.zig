@@ -12,7 +12,7 @@ pub const Agent = struct {
     agent_arn: []const u8,
 
     /// The agent's collaboration settings.
-    agent_collaboration: ?AgentCollaboration,
+    agent_collaboration: ?AgentCollaboration = null,
 
     /// The unique identifier of the agent.
     agent_id: []const u8,
@@ -44,28 +44,28 @@ pub const Agent = struct {
     /// Bedrock ignores the request, but does not return an error. For more
     /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The time at which the agent was created.
     created_at: i64,
 
     /// The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
-    customer_encryption_key_arn: ?[]const u8,
+    customer_encryption_key_arn: ?[]const u8 = null,
 
     /// Contains custom orchestration configurations for the agent.
-    custom_orchestration: ?CustomOrchestration,
+    custom_orchestration: ?CustomOrchestration = null,
 
     /// The description of the agent.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Contains reasons that the agent-related API that you invoked failed.
-    failure_reasons: ?[]const []const u8,
+    failure_reasons: ?[]const []const u8 = null,
 
     /// The foundation model used for orchestration by the agent.
-    foundation_model: ?[]const u8,
+    foundation_model: ?[]const u8 = null,
 
     /// Details about the guardrail associated with the agent.
-    guardrail_configuration: ?GuardrailConfiguration,
+    guardrail_configuration: ?GuardrailConfiguration = null,
 
     /// The number of seconds for which Amazon Bedrock keeps information about a
     /// user's conversation with the agent.
@@ -77,25 +77,25 @@ pub const Agent = struct {
 
     /// Instructions that tell the agent what it should do and how it should
     /// interact with users.
-    instruction: ?[]const u8,
+    instruction: ?[]const u8 = null,
 
     /// Contains memory configuration for the agent.
-    memory_configuration: ?MemoryConfiguration,
+    memory_configuration: ?MemoryConfiguration = null,
 
     /// Specifies the orchestration strategy for the agent.
-    orchestration_type: ?OrchestrationType,
+    orchestration_type: ?OrchestrationType = null,
 
     /// The time at which the agent was last prepared.
-    prepared_at: ?i64,
+    prepared_at: ?i64 = null,
 
     /// Contains configurations to override prompt templates in different parts of
     /// an agent sequence. For more information, see [Advanced
     /// prompts](https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html).
-    prompt_override_configuration: ?PromptOverrideConfiguration,
+    prompt_override_configuration: ?PromptOverrideConfiguration = null,
 
     /// Contains recommended actions to take for the agent-related API that you
     /// invoked to succeed.
-    recommended_actions: ?[]const []const u8,
+    recommended_actions: ?[]const []const u8 = null,
 
     /// The time at which the agent was last updated.
     updated_at: i64,

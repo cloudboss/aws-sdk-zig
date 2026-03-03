@@ -32,41 +32,41 @@ pub const InputTemplate = struct {
     /// this feature incur pro-tier pricing. To not apply advanced input filtering:
     /// Choose Disabled. Note that you can still apply basic filtering with Deblock
     /// and Denoise.
-    advanced_input_filter: ?AdvancedInputFilter,
+    advanced_input_filter: ?AdvancedInputFilter = null,
 
     /// Optional settings for Advanced input filter when you set Advanced input
     /// filter to Enabled.
-    advanced_input_filter_settings: ?AdvancedInputFilterSettings,
+    advanced_input_filter_settings: ?AdvancedInputFilterSettings = null,
 
     /// Use audio selector groups to combine multiple sidecar audio inputs so that
     /// you can assign them to a single output audio tab. Note that, if you're
     /// working with embedded audio, it's simpler to assign multiple input tracks
     /// into a single audio selector rather than use an audio selector group.
-    audio_selector_groups: ?[]const aws.map.MapEntry(AudioSelectorGroup),
+    audio_selector_groups: ?[]const aws.map.MapEntry(AudioSelectorGroup) = null,
 
     /// Use Audio selectors to specify a track or set of tracks from the input that
     /// you will use in your outputs. You can use multiple Audio selectors per
     /// input.
-    audio_selectors: ?[]const aws.map.MapEntry(AudioSelector),
+    audio_selectors: ?[]const aws.map.MapEntry(AudioSelector) = null,
 
     /// Use captions selectors to specify the captions data from your input that you
     /// use in your outputs. You can use up to 100 captions selectors per input.
-    caption_selectors: ?[]const aws.map.MapEntry(CaptionSelector),
+    caption_selectors: ?[]const aws.map.MapEntry(CaptionSelector) = null,
 
     /// Use Cropping selection to specify the video area that the service will
     /// include in the output video frame. If you specify a value here, it will
     /// override any value that you specify in the output setting Cropping
     /// selection.
-    crop: ?Rectangle,
+    crop: ?Rectangle = null,
 
     /// Enable Deblock to produce smoother motion in the output. Default is
     /// disabled. Only manually controllable for MPEG2 and uncompressed video
     /// inputs.
-    deblock_filter: ?InputDeblockFilter,
+    deblock_filter: ?InputDeblockFilter = null,
 
     /// Enable Denoise to filter noise from the input. Default is disabled. Only
     /// applicable to MPEG2, H.264, H.265, and uncompressed video inputs.
-    denoise_filter: ?InputDenoiseFilter,
+    denoise_filter: ?InputDenoiseFilter = null,
 
     /// Use this setting only when your video source has Dolby Vision studio
     /// mastering metadata that is carried in a separate XML file. Specify the
@@ -78,7 +78,7 @@ pub const InputTemplate = struct {
     /// role must grant MediaConvert read permissions to this file. For more
     /// information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
-    dolby_vision_metadata_xml: ?[]const u8,
+    dolby_vision_metadata_xml: ?[]const u8 = null,
 
     /// Use Dynamic audio selectors when you do not know the track layout of your
     /// source when you submit your job, but want to select multiple audio tracks.
@@ -87,14 +87,14 @@ pub const InputTemplate = struct {
     /// track for each dynamically selected track. Note that when you include a
     /// Dynamic audio selector for two or more inputs, each input must have the same
     /// number of audio tracks and audio channels.
-    dynamic_audio_selectors: ?[]const aws.map.MapEntry(DynamicAudioSelector),
+    dynamic_audio_selectors: ?[]const aws.map.MapEntry(DynamicAudioSelector) = null,
 
     /// Specify whether to apply input filtering to improve the video quality of
     /// your input. To apply filtering depending on your input type and quality:
     /// Choose Auto. To apply no filtering: Choose Disable. To apply filtering
     /// regardless of your input type and quality: Choose Force. When you do, you
     /// must also specify a value for Filter strength.
-    filter_enable: ?InputFilterEnable,
+    filter_enable: ?InputFilterEnable = null,
 
     /// Specify the strength of the input filter. To apply an automatic amount of
     /// filtering based the compression artifacts measured in your input: We
@@ -103,12 +103,12 @@ pub const InputTemplate = struct {
     /// least amount of filtering and 5 is the most. The value that you enter
     /// applies to the strength of the Deblock or Denoise filters, or to the
     /// strength of the Advanced input filter.
-    filter_strength: ?i32,
+    filter_strength: ?i32 = null,
 
     /// Enable the image inserter feature to include a graphic overlay on your
     /// video. Enable or disable this feature for each input individually. This
     /// setting is disabled by default.
-    image_inserter: ?ImageInserter,
+    image_inserter: ?ImageInserter = null,
 
     /// Contains sets of start and end times that together specify a portion of the
     /// input to be used in the outputs. If you provide only a start time, the clip
@@ -116,7 +116,7 @@ pub const InputTemplate = struct {
     /// end time, it will be the entire input up to that point. When you specify
     /// more than one input clip, the transcoding service creates the job outputs by
     /// stringing the clips together in the order you specify them.
-    input_clippings: ?[]const InputClipping,
+    input_clippings: ?[]const InputClipping = null,
 
     /// When you have a progressive segmented frame (PsF) input, use this setting to
     /// flag the input as PsF. MediaConvert doesn't automatically detect PsF.
@@ -125,7 +125,7 @@ pub const InputTemplate = struct {
     /// don't specify, the default value is Auto. Auto is the correct setting for
     /// all inputs that are not PsF. Don't set this value to PsF when your input is
     /// interlaced. Doing so creates horizontal interlacing artifacts.
-    input_scan_type: ?InputScanType,
+    input_scan_type: ?InputScanType = null,
 
     /// Use Selection placement to define the video area in your output frame. The
     /// area outside of the rectangle that you specify here is black. If you specify
@@ -134,19 +134,19 @@ pub const InputTemplate = struct {
     /// any AFD values in your input, even if you set Respond to AFD to Respond. If
     /// you specify a value here, this will ignore anything that you specify for the
     /// setting Scaling Behavior.
-    position: ?Rectangle,
+    position: ?Rectangle = null,
 
     /// Use Program to select a specific program from within a multi-program
     /// transport stream. Note that Quad 4K is not currently supported. Default is
     /// the first program within the transport stream. If the program you specify
     /// doesn't exist, the transcoding service will use this default.
-    program_number: ?i32,
+    program_number: ?i32 = null,
 
     /// Set PSI control for transport stream inputs to specify which data the demux
     /// process to scans.
     /// * Ignore PSI - Scan all PIDs for audio and video.
     /// * Use PSI - Scan only PSI data.
-    psi_control: ?InputPsiControl,
+    psi_control: ?InputPsiControl = null,
 
     /// Use this Timecode source setting, located under the input settings, to
     /// specify how the service counts input video frames. This input frame count
@@ -158,21 +158,21 @@ pub const InputTemplate = struct {
     /// don't specify a value for Timecode source, the service will use Embedded by
     /// default. For more information about timecodes, see
     /// https://docs.aws.amazon.com/console/mediaconvert/timecode.
-    timecode_source: ?InputTimecodeSource,
+    timecode_source: ?InputTimecodeSource = null,
 
     /// Specify the timecode that you want the service to use for this input's
     /// initial frame. To use this setting, you must set the Timecode source
     /// setting, located under the input settings, to Specified start. For more
     /// information about timecodes, see
     /// https://docs.aws.amazon.com/console/mediaconvert/timecode.
-    timecode_start: ?[]const u8,
+    timecode_start: ?[]const u8 = null,
 
     /// Contains an array of video overlays.
-    video_overlays: ?[]const VideoOverlay,
+    video_overlays: ?[]const VideoOverlay = null,
 
     /// Input video selectors contain the video settings for the input. Each of your
     /// inputs can have up to one video selector.
-    video_selector: ?VideoSelector,
+    video_selector: ?VideoSelector = null,
 
     pub const json_field_names = .{
         .advanced_input_filter = "AdvancedInputFilter",

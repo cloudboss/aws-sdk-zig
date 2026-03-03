@@ -19,7 +19,7 @@ pub const EventConfig = struct {
     default_subscribe_auth_modes: []const AuthMode,
 
     /// The CloudWatch Logs configuration for the Event API.
-    log_config: ?EventLogConfig,
+    log_config: ?EventLogConfig = null,
 
     pub const json_field_names = .{
         .auth_providers = "authProviders",

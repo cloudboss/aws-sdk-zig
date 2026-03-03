@@ -4,18 +4,18 @@ const GlobalClusterMemberSynchronizationStatus = @import("global_cluster_member_
 /// associated with an Amazon DocumentDB global clusters.
 pub const GlobalClusterMember = struct {
     /// The Amazon Resource Name (ARN) for each Amazon DocumentDB cluster.
-    db_cluster_arn: ?[]const u8,
+    db_cluster_arn: ?[]const u8 = null,
 
     /// Specifies whether the Amazon DocumentDB cluster is the primary cluster (that
     /// is, has read-write capability) for the Amazon DocumentDB global cluster with
     /// which it is associated.
-    is_writer: ?bool,
+    is_writer: ?bool = null,
 
     /// The Amazon Resource Name (ARN) for each read-only secondary cluster
     /// associated with the Amazon DocumentDB global cluster.
-    readers: ?[]const []const u8,
+    readers: ?[]const []const u8 = null,
 
     /// The status of synchronization of each Amazon DocumentDB cluster in the
     /// global cluster.
-    synchronization_status: ?GlobalClusterMemberSynchronizationStatus,
+    synchronization_status: ?GlobalClusterMemberSynchronizationStatus = null,
 };

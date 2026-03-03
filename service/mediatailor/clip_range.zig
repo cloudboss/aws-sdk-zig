@@ -6,7 +6,7 @@ pub const ClipRange = struct {
 
     /// The start offset of the clip range, in milliseconds. This offset truncates
     /// the start at the number of milliseconds into the duration of the VOD source.
-    start_offset_millis: ?i64,
+    start_offset_millis: ?i64 = null,
 
     pub const json_field_names = .{
         .end_offset_millis = "EndOffsetMillis",

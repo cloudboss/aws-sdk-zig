@@ -2,16 +2,16 @@
 /// DescribeDataset.
 pub const DatasetStats = struct {
     /// The total number of entries that contain at least one error.
-    error_entries: ?i32,
+    error_entries: ?i32 = null,
 
     /// The total number of images in the dataset that have labels.
-    labeled_entries: ?i32,
+    labeled_entries: ?i32 = null,
 
     /// The total number of images in the dataset.
-    total_entries: ?i32,
+    total_entries: ?i32 = null,
 
     /// The total number of labels declared in the dataset.
-    total_labels: ?i32,
+    total_labels: ?i32 = null,
 
     pub const json_field_names = .{
         .error_entries = "ErrorEntries",

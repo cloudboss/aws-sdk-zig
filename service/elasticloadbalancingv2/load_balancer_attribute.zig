@@ -167,8 +167,8 @@ pub const LoadBalancerAttribute = struct {
     /// IP addresses to configure for your load balancer nodes. Use to address port
     /// allocation errors if you can't add targets. The valid range is 0 to 7. The
     /// default is 0. After you set this value, you can't decrease it.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value of the attribute.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

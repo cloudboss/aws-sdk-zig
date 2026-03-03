@@ -16,8 +16,8 @@ pub const ReplicationRuleAndOperator = struct {
     /// An object key name prefix that identifies the subset of objects that the
     /// rule applies
     /// to.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// An array of tags that contain key and value pairs.
-    tags: ?[]const S3Tag,
+    tags: ?[]const S3Tag = null,
 };

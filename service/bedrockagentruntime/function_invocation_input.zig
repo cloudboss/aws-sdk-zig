@@ -13,19 +13,19 @@ pub const FunctionInvocationInput = struct {
     action_group: []const u8,
 
     /// Contains information about the function to invoke,
-    action_invocation_type: ?ActionInvocationType,
+    action_invocation_type: ?ActionInvocationType = null,
 
     /// The agent's ID.
-    agent_id: ?[]const u8,
+    agent_id: ?[]const u8 = null,
 
     /// The collaborator's name.
-    collaborator_name: ?[]const u8,
+    collaborator_name: ?[]const u8 = null,
 
     /// The name of the function.
-    function: ?[]const u8,
+    function: ?[]const u8 = null,
 
     /// A list of parameters of the function.
-    parameters: ?[]const FunctionParameter,
+    parameters: ?[]const FunctionParameter = null,
 
     pub const json_field_names = .{
         .action_group = "actionGroup",

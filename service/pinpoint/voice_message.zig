@@ -4,29 +4,29 @@ const aws = @import("aws");
 /// an endpoint through the voice channel.
 pub const VoiceMessage = struct {
     /// The text of the script to use for the voice message.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// The code for the language to use when synthesizing the text of the message
     /// script. For a list of supported languages and the code for each one, see the
     /// [Amazon Polly Developer
     /// Guide](https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
-    language_code: ?[]const u8,
+    language_code: ?[]const u8 = null,
 
     /// The long code to send the voice message from. This value should be one of
     /// the dedicated long codes that's assigned to your AWS account. Although it
     /// isn't required, we recommend that you specify the long code in E.164 format,
     /// for example +12065550100, to ensure prompt and accurate delivery of the
     /// message.
-    origination_number: ?[]const u8,
+    origination_number: ?[]const u8 = null,
 
     /// The default message variables to use in the voice message. You can override
     /// the default variables with individual address variables.
-    substitutions: ?[]const aws.map.MapEntry([]const []const u8),
+    substitutions: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The name of the voice to use when delivering the message. For a list of
     /// supported voices, see the [Amazon Polly Developer
     /// Guide](https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
-    voice_id: ?[]const u8,
+    voice_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .body = "Body",

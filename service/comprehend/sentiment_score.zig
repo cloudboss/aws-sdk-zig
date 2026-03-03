@@ -5,22 +5,22 @@ pub const SentimentScore = struct {
     /// The level of confidence that Amazon Comprehend has in the accuracy of its
     /// detection of
     /// the `MIXED` sentiment.
-    mixed: ?f32,
+    mixed: ?f32 = null,
 
     /// The level of confidence that Amazon Comprehend has in the accuracy of its
     /// detection of
     /// the `NEGATIVE` sentiment.
-    negative: ?f32,
+    negative: ?f32 = null,
 
     /// The level of confidence that Amazon Comprehend has in the accuracy of its
     /// detection of
     /// the `NEUTRAL` sentiment.
-    neutral: ?f32,
+    neutral: ?f32 = null,
 
     /// The level of confidence that Amazon Comprehend has in the accuracy of its
     /// detection of
     /// the `POSITIVE` sentiment.
-    positive: ?f32,
+    positive: ?f32 = null,
 
     pub const json_field_names = .{
         .mixed = "Mixed",

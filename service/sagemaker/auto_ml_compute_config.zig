@@ -21,7 +21,7 @@ pub const AutoMLComputeConfig = struct {
     /// EMR Serverless is available for the tabular and time series problem types.
     /// We recommend setting up this option for tabular datasets larger than 5 GB
     /// and time series datasets larger than 30 GB.
-    emr_serverless_compute_config: ?EmrServerlessComputeConfig,
+    emr_serverless_compute_config: ?EmrServerlessComputeConfig = null,
 
     pub const json_field_names = .{
         .emr_serverless_compute_config = "EmrServerlessComputeConfig",

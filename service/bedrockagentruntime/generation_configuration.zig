@@ -16,23 +16,23 @@ pub const GenerationConfiguration = struct {
     /// Additional model parameters and corresponding values not included in the
     /// textInferenceConfig structure for a knowledge base. This allows users to
     /// provide custom model parameters specific to the language model being used.
-    additional_model_request_fields: ?[]const aws.map.StringMapEntry,
+    additional_model_request_fields: ?[]const aws.map.StringMapEntry = null,
 
     /// The configuration details for the guardrail.
-    guardrail_configuration: ?GuardrailConfiguration,
+    guardrail_configuration: ?GuardrailConfiguration = null,
 
     /// Configuration settings for inference when using RetrieveAndGenerate to
     /// generate responses while using a knowledge base as a source.
-    inference_config: ?InferenceConfig,
+    inference_config: ?InferenceConfig = null,
 
     /// The latency configuration for the model.
-    performance_config: ?PerformanceConfiguration,
+    performance_config: ?PerformanceConfiguration = null,
 
     /// Contains the template for the prompt that's sent to the model for response
     /// generation. Generation prompts must include the `$search_results$` variable.
     /// For more information, see [Use placeholder
     /// variables](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html) in the user guide.
-    prompt_template: ?PromptTemplate,
+    prompt_template: ?PromptTemplate = null,
 
     pub const json_field_names = .{
         .additional_model_request_fields = "additionalModelRequestFields",

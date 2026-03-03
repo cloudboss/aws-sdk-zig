@@ -7,11 +7,11 @@ pub const AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails = struct {
     /// distribution of On-Demand Instances and Spot Instances, the maximum price to
     /// pay for Spot Instances, and how the Auto Scaling group allocates instance
     /// types to fulfill On-Demand and Spot capacity.
-    instances_distribution: ?AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails,
+    instances_distribution: ?AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails = null,
 
     /// The launch template to use and the instance types (overrides) to use to
     /// provision EC2 instances to fulfill On-Demand and Spot capacities.
-    launch_template: ?AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails,
+    launch_template: ?AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails = null,
 
     pub const json_field_names = .{
         .instances_distribution = "InstancesDistribution",

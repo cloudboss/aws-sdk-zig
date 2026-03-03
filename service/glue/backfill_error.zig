@@ -23,10 +23,10 @@ const PartitionValueList = @import("partition_value_list.zig").PartitionValueLis
 pub const BackfillError = struct {
     /// The error code for an error that occurred when registering partition indexes
     /// for an existing table.
-    code: ?BackfillErrorCode,
+    code: ?BackfillErrorCode = null,
 
     /// A list of a limited number of partitions in the response.
-    partitions: ?[]const PartitionValueList,
+    partitions: ?[]const PartitionValueList = null,
 
     pub const json_field_names = .{
         .code = "Code",

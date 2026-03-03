@@ -11,7 +11,7 @@ pub const QuantumTaskSummary = struct {
     device_arn: []const u8,
 
     /// The time at which the quantum task finished.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The S3 bucket where the quantum task result file is stored.
     output_s3_bucket: []const u8,
@@ -29,7 +29,7 @@ pub const QuantumTaskSummary = struct {
     status: QuantumTaskStatus,
 
     /// Displays the key, value pairs of tags associated with this quantum task.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

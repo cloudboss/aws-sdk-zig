@@ -13,7 +13,7 @@ pub const ListJobsByConsumableResourceSummary = struct {
     job_arn: []const u8,
 
     /// The Amazon Resource Name (ARN) of the job definition.
-    job_definition_arn: ?[]const u8,
+    job_definition_arn: ?[]const u8 = null,
 
     /// The name of the job.
     job_name: []const u8,
@@ -42,16 +42,16 @@ pub const ListJobsByConsumableResourceSummary = struct {
     quantity: i64,
 
     /// The fair-share scheduling policy identifier for the job.
-    share_identifier: ?[]const u8,
+    share_identifier: ?[]const u8 = null,
 
     /// The Unix timestamp for when the job was started. More specifically, it's
     /// when the job transitioned
     /// from the `STARTING` state to the `RUNNING` state.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// A short, human-readable string to provide more details for the current
     /// status of the job.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .consumable_resource_properties = "consumableResourceProperties",

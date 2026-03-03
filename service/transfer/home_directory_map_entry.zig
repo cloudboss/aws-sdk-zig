@@ -20,7 +20,7 @@ pub const HomeDirectoryMapEntry = struct {
     /// By default, home directory mappings have a `Type` of `DIRECTORY` when you
     /// create a Transfer Family server. You would need to explicitly set `Type` to
     /// `FILE` if you want a mapping to have a file target.
-    @"type": ?MapType,
+    @"type": ?MapType = null,
 
     pub const json_field_names = .{
         .entry = "Entry",

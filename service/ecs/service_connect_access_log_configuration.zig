@@ -25,7 +25,7 @@ pub const ServiceConnectAccessLogConfiguration = struct {
     /// parameters may contain sensitive information such as request IDs and tokens.
     /// By default,
     /// this parameter is `DISABLED`.
-    include_query_parameters: ?ServiceConnectIncludeQueryParameters,
+    include_query_parameters: ?ServiceConnectIncludeQueryParameters = null,
 
     pub const json_field_names = .{
         .format = "format",

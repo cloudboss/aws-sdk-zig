@@ -9,60 +9,60 @@ const TargetInstanceTypeRightSizingMethod = @import("target_instance_type_right_
 
 pub const LaunchConfigurationTemplate = struct {
     /// ARN of the Launch Configuration Template.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Associate public Ip address.
-    associate_public_ip_address: ?bool,
+    associate_public_ip_address: ?bool = null,
 
     /// Launch configuration template boot mode.
-    boot_mode: ?BootMode,
+    boot_mode: ?BootMode = null,
 
     /// Copy private Ip.
-    copy_private_ip: ?bool,
+    copy_private_ip: ?bool = null,
 
     /// Copy tags.
-    copy_tags: ?bool,
+    copy_tags: ?bool = null,
 
     /// EC2 launch template ID.
-    ec_2_launch_template_id: ?[]const u8,
+    ec_2_launch_template_id: ?[]const u8 = null,
 
     /// Enable map auto tagging.
-    enable_map_auto_tagging: ?bool,
+    enable_map_auto_tagging: ?bool = null,
 
     /// Enable parameters encryption.
-    enable_parameters_encryption: ?bool,
+    enable_parameters_encryption: ?bool = null,
 
     /// Large volume config.
-    large_volume_conf: ?LaunchTemplateDiskConf,
+    large_volume_conf: ?LaunchTemplateDiskConf = null,
 
     /// ID of the Launch Configuration Template.
     launch_configuration_template_id: []const u8,
 
     /// Launch disposition.
-    launch_disposition: ?LaunchDisposition,
+    launch_disposition: ?LaunchDisposition = null,
 
-    licensing: ?Licensing,
+    licensing: ?Licensing = null,
 
     /// Launch configuration template map auto tagging MPE ID.
-    map_auto_tagging_mpe_id: ?[]const u8,
+    map_auto_tagging_mpe_id: ?[]const u8 = null,
 
     /// Parameters encryption key.
-    parameters_encryption_key: ?[]const u8,
+    parameters_encryption_key: ?[]const u8 = null,
 
     /// Post Launch Actions of the Launch Configuration Template.
-    post_launch_actions: ?PostLaunchActions,
+    post_launch_actions: ?PostLaunchActions = null,
 
     /// Small volume config.
-    small_volume_conf: ?LaunchTemplateDiskConf,
+    small_volume_conf: ?LaunchTemplateDiskConf = null,
 
     /// Small volume maximum size.
     small_volume_max_size: i64 = 0,
 
     /// Tags of the Launch Configuration Template.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Target instance type right-sizing method.
-    target_instance_type_right_sizing_method: ?TargetInstanceTypeRightSizingMethod,
+    target_instance_type_right_sizing_method: ?TargetInstanceTypeRightSizingMethod = null,
 
     pub const json_field_names = .{
         .arn = "arn",

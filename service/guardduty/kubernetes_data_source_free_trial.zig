@@ -4,7 +4,7 @@ const DataSourceFreeTrial = @import("data_source_free_trial.zig").DataSourceFree
 /// source.
 pub const KubernetesDataSourceFreeTrial = struct {
     /// Describes whether Kubernetes audit logs are enabled as a data source.
-    audit_logs: ?DataSourceFreeTrial,
+    audit_logs: ?DataSourceFreeTrial = null,
 
     pub const json_field_names = .{
         .audit_logs = "AuditLogs",

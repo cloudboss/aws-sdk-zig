@@ -18,10 +18,10 @@ pub const SubscriberResource = struct {
     /// your
     /// Amazon S3 bucket through services like Amazon Athena. This subscription
     /// type is defined as `LAKEFORMATION`.
-    access_types: ?[]const AccessType,
+    access_types: ?[]const AccessType = null,
 
     /// The date and time when the subscriber was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) which uniquely defines the Amazon Web
     /// Services RAM resource share. Before
@@ -31,16 +31,16 @@ pub const SubscriberResource = struct {
     ///
     /// This field is available only for Lake Formation subscribers created after
     /// March 8, 2023.
-    resource_share_arn: ?[]const u8,
+    resource_share_arn: ?[]const u8 = null,
 
     /// The name of the resource share.
-    resource_share_name: ?[]const u8,
+    resource_share_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) specifying the role of the subscriber.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The ARN for the Amazon S3 bucket.
-    s_3_bucket_arn: ?[]const u8,
+    s_3_bucket_arn: ?[]const u8 = null,
 
     /// Amazon Security Lake supports log and event collection for natively
     /// supported Amazon Web Services services. For more information, see the
@@ -55,10 +55,10 @@ pub const SubscriberResource = struct {
     /// subscriber
     /// includes `subscriberName`, `accountID`, `externalID`, and
     /// `subscriberId`.
-    subscriber_description: ?[]const u8,
+    subscriber_description: ?[]const u8 = null,
 
     /// The subscriber endpoint to which exception messages are posted.
-    subscriber_endpoint: ?[]const u8,
+    subscriber_endpoint: ?[]const u8 = null,
 
     /// The subscriber ID of the Amazon Security Lake subscriber account.
     subscriber_id: []const u8,
@@ -70,10 +70,10 @@ pub const SubscriberResource = struct {
     subscriber_name: []const u8,
 
     /// The subscriber status of the Amazon Security Lake subscriber account.
-    subscriber_status: ?SubscriberStatus,
+    subscriber_status: ?SubscriberStatus = null,
 
     /// The date and time when the subscriber was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .access_types = "accessTypes",

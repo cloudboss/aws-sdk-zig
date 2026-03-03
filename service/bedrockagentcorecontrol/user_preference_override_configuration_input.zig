@@ -4,10 +4,10 @@ const UserPreferenceOverrideExtractionConfigurationInput = @import("user_prefere
 /// Input for user preference override configuration in a memory strategy.
 pub const UserPreferenceOverrideConfigurationInput = struct {
     /// The consolidation configuration for a user preference override.
-    consolidation: ?UserPreferenceOverrideConsolidationConfigurationInput,
+    consolidation: ?UserPreferenceOverrideConsolidationConfigurationInput = null,
 
     /// The extraction configuration for a user preference override.
-    extraction: ?UserPreferenceOverrideExtractionConfigurationInput,
+    extraction: ?UserPreferenceOverrideExtractionConfigurationInput = null,
 
     pub const json_field_names = .{
         .consolidation = "consolidation",

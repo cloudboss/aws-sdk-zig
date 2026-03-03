@@ -4,7 +4,7 @@ const RoutePassThroughPlace = @import("route_pass_through_place.zig").RoutePassT
 /// into different legs around the stop.
 pub const RoutePassThroughWaypoint = struct {
     /// Offset in the leg geometry corresponding to the start of this step.
-    geometry_offset: ?i32,
+    geometry_offset: ?i32 = null,
 
     /// The place details.
     place: RoutePassThroughPlace,

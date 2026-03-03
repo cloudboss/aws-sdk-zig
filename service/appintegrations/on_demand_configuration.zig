@@ -2,7 +2,7 @@
 pub const OnDemandConfiguration = struct {
     /// The end time for data pull from the source as an Unix/epoch string in
     /// milliseconds
-    end_time: ?[]const u8,
+    end_time: ?[]const u8 = null,
 
     /// The start time for data pull from the source as an Unix/epoch string in
     /// milliseconds

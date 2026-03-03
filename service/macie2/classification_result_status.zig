@@ -10,7 +10,7 @@ pub const ClassificationResultStatus = struct {
     /// * SKIPPED - Macie wasn't able to analyze the S3 object that the finding
     ///   applies to. For example, the object is a file that uses an unsupported
     ///   format.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// A brief description of the status of the finding. This value is null if the
     /// status (code) of the finding is COMPLETE.
@@ -79,7 +79,7 @@ pub const ClassificationResultStatus = struct {
     /// [Quotas](https://docs.aws.amazon.com/macie/latest/user/macie-quotas.html)
     /// and [Supported storage classes and
     /// formats](https://docs.aws.amazon.com/macie/latest/user/discovery-supported-storage.html) in the *Amazon Macie User Guide*.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

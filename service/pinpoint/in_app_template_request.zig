@@ -8,13 +8,13 @@ pub const InAppTemplateRequest = struct {
     /// The content of the message, can include up to 5 modals. Each modal must
     /// contain a message, a header, and background color. ImageUrl and buttons are
     /// optional.
-    content: ?[]const InAppMessageContent,
+    content: ?[]const InAppMessageContent = null,
 
     /// Custom config to be sent to client.
-    custom_config: ?[]const aws.map.StringMapEntry,
+    custom_config: ?[]const aws.map.StringMapEntry = null,
 
     /// The layout of the message.
-    layout: ?Layout,
+    layout: ?Layout = null,
 
     /// As of **22-05-2023** tags has been deprecated for update operations. After
     /// this date any value in tags is not processed and an error code is not
@@ -24,10 +24,10 @@ pub const InAppTemplateRequest = struct {
     /// (Deprecated) A string-to-string map of key-value pairs that defines the tags
     /// to associate with the message template. Each tag consists of a required tag
     /// key and an associated tag value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The description of the template.
-    template_description: ?[]const u8,
+    template_description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content = "Content",

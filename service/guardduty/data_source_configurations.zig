@@ -5,13 +5,13 @@ const S3LogsConfiguration = @import("s3_logs_configuration.zig").S3LogsConfigura
 /// Contains information about which data sources are enabled.
 pub const DataSourceConfigurations = struct {
     /// Describes whether any Kubernetes logs are enabled as data sources.
-    kubernetes: ?KubernetesConfiguration,
+    kubernetes: ?KubernetesConfiguration = null,
 
     /// Describes whether Malware Protection is enabled as a data source.
-    malware_protection: ?MalwareProtectionConfiguration,
+    malware_protection: ?MalwareProtectionConfiguration = null,
 
     /// Describes whether S3 data event logs are enabled as a data source.
-    s3_logs: ?S3LogsConfiguration,
+    s3_logs: ?S3LogsConfiguration = null,
 
     pub const json_field_names = .{
         .kubernetes = "Kubernetes",

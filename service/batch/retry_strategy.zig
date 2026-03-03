@@ -9,14 +9,14 @@ pub const RetryStrategy = struct {
     /// between 1 and 10 attempts. If the value of `attempts` is greater than one,
     /// the job is
     /// retried on failure the same number of attempts as the value.
-    attempts: ?i32,
+    attempts: ?i32 = null,
 
     /// Array of up to 5 objects that specify the conditions where jobs are retried
     /// or failed. If
     /// this parameter is specified, then the `attempts` parameter must also be
     /// specified. If
     /// none of the listed conditions match, then the job is retried.
-    evaluate_on_exit: ?[]const EvaluateOnExit,
+    evaluate_on_exit: ?[]const EvaluateOnExit = null,
 
     pub const json_field_names = .{
         .attempts = "attempts",

@@ -18,7 +18,7 @@ pub const VpcConfigRequest = struct {
     /// endpoint](https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the *
     /// Amazon EKS User Guide*
     /// .
-    endpoint_private_access: ?bool,
+    endpoint_private_access: ?bool = null,
 
     /// Set this value to `false` to disable public access to your cluster's
     /// Kubernetes
@@ -33,7 +33,7 @@ pub const VpcConfigRequest = struct {
     /// endpoint](https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the *
     /// Amazon EKS User Guide*
     /// .
-    endpoint_public_access: ?bool,
+    endpoint_public_access: ?bool = null,
 
     /// The CIDR blocks that are allowed access to your cluster's public Kubernetes
     /// API server
@@ -53,7 +53,7 @@ pub const VpcConfigRequest = struct {
     /// are made after October 2024. You can't add `IPv6` CIDR blocks to
     /// `IPv4` clusters or `IPv6` clusters that were made before
     /// October 2024.
-    public_access_cidrs: ?[]const []const u8,
+    public_access_cidrs: ?[]const []const u8 = null,
 
     /// Specify one or more security groups for the cross-account elastic network
     /// interfaces
@@ -67,14 +67,14 @@ pub const VpcConfigRequest = struct {
     /// considerations](https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html) in the *
     /// Amazon EKS User Guide*
     /// .
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account
     /// elastic network
     /// interfaces in these subnets to allow communication between your nodes and
     /// the Kubernetes
     /// control plane.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .endpoint_private_access = "endpointPrivateAccess",

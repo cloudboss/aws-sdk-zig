@@ -12,40 +12,40 @@ const WaterfallChartOptions = @import("waterfall_chart_options.zig").WaterfallCh
 /// The configuration for a waterfall visual.
 pub const WaterfallChartConfiguration = struct {
     /// The options that determine the presentation of the category axis.
-    category_axis_display_options: ?AxisDisplayOptions,
+    category_axis_display_options: ?AxisDisplayOptions = null,
 
     /// The options that determine the presentation of the category axis label.
-    category_axis_label_options: ?ChartAxisLabelOptions,
+    category_axis_label_options: ?ChartAxisLabelOptions = null,
 
     /// The color configuration of a waterfall visual.
-    color_configuration: ?WaterfallChartColorConfiguration,
+    color_configuration: ?WaterfallChartColorConfiguration = null,
 
     /// The data label configuration of a waterfall visual.
-    data_labels: ?DataLabelOptions,
+    data_labels: ?DataLabelOptions = null,
 
     /// The field well configuration of a waterfall visual.
-    field_wells: ?WaterfallChartFieldWells,
+    field_wells: ?WaterfallChartFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The legend configuration of a waterfall visual.
-    legend: ?LegendOptions,
+    legend: ?LegendOptions = null,
 
     /// The options that determine the presentation of the y-axis.
-    primary_y_axis_display_options: ?AxisDisplayOptions,
+    primary_y_axis_display_options: ?AxisDisplayOptions = null,
 
     /// The options that determine the presentation of the y-axis label.
-    primary_y_axis_label_options: ?ChartAxisLabelOptions,
+    primary_y_axis_label_options: ?ChartAxisLabelOptions = null,
 
     /// The sort configuration of a waterfall visual.
-    sort_configuration: ?WaterfallChartSortConfiguration,
+    sort_configuration: ?WaterfallChartSortConfiguration = null,
 
     /// The visual palette configuration of a waterfall visual.
-    visual_palette: ?VisualPalette,
+    visual_palette: ?VisualPalette = null,
 
     /// The options that determine the presentation of a waterfall visual.
-    waterfall_chart_options: ?WaterfallChartOptions,
+    waterfall_chart_options: ?WaterfallChartOptions = null,
 
     pub const json_field_names = .{
         .category_axis_display_options = "CategoryAxisDisplayOptions",

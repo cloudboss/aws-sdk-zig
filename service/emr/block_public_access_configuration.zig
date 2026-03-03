@@ -19,10 +19,10 @@ pub const BlockPublicAccessConfiguration = struct {
     block_public_security_group_rules: bool,
 
     /// The classification within a configuration.
-    classification: ?[]const u8,
+    classification: ?[]const u8 = null,
 
     /// A list of additional configurations to apply within a configuration object.
-    configurations: ?[]const Configuration,
+    configurations: ?[]const Configuration = null,
 
     /// Specifies ports and port ranges that are permitted to have security group
     /// rules that
@@ -37,10 +37,10 @@ pub const BlockPublicAccessConfiguration = struct {
     ///
     /// By default, Port 22, which is used for SSH access to the cluster Amazon EC2
     /// instances, is in the list of `PermittedPublicSecurityGroupRuleRanges`.
-    permitted_public_security_group_rule_ranges: ?[]const PortRange,
+    permitted_public_security_group_rule_ranges: ?[]const PortRange = null,
 
     /// A set of properties specified within a configuration classification.
-    properties: ?[]const aws.map.StringMapEntry,
+    properties: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .block_public_security_group_rules = "BlockPublicSecurityGroupRules",

@@ -6,13 +6,13 @@ pub const PropertyResponse = struct {
     /// This flag notes whether all values of a list or map type property are
     /// returned in the API response. The maximum number of values per property
     /// returned is 50.
-    are_all_property_values_returned: ?bool,
+    are_all_property_values_returned: ?bool = null,
 
     /// An object that specifies information about a property.
-    definition: ?PropertyDefinitionResponse,
+    definition: ?PropertyDefinitionResponse = null,
 
     /// The value of the property.
-    value: ?DataValue,
+    value: ?DataValue = null,
 
     pub const json_field_names = .{
         .are_all_property_values_returned = "areAllPropertyValuesReturned",

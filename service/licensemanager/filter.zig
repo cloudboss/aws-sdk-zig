@@ -5,11 +5,11 @@
 /// such as tags, attributes, or IDs.
 pub const Filter = struct {
     /// Name of the filter. Filter names are case-sensitive.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The value of the filter, which is case-sensitive. You can only specify one
     /// value for the filter.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

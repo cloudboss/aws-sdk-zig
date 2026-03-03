@@ -4,8 +4,8 @@ const Tag = @import("tag.zig").Tag;
 /// The tags specification for the launch template.
 pub const LaunchTemplateTagSpecification = struct {
     /// The type of resource to tag.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The tags for the resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

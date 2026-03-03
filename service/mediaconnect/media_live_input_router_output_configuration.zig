@@ -8,10 +8,10 @@ pub const MediaLiveInputRouterOutputConfiguration = struct {
     destination_transit_encryption: MediaLiveTransitEncryption,
 
     /// The ARN of the MediaLive input to connect to this router output.
-    media_live_input_arn: ?[]const u8,
+    media_live_input_arn: ?[]const u8 = null,
 
     /// The index of the MediaLive pipeline to connect to this router output.
-    media_live_pipeline_id: ?MediaLiveInputPipelineId,
+    media_live_pipeline_id: ?MediaLiveInputPipelineId = null,
 
     pub const json_field_names = .{
         .destination_transit_encryption = "DestinationTransitEncryption",

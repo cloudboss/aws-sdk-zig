@@ -15,7 +15,7 @@ pub const ConditionalBranch = struct {
     /// The next step in the conversation.
     next_step: DialogState,
 
-    response: ?ResponseSpecification,
+    response: ?ResponseSpecification = null,
 
     pub const json_field_names = .{
         .condition = "condition",

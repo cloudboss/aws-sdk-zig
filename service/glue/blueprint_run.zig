@@ -3,34 +3,34 @@ const BlueprintRunState = @import("blueprint_run_state.zig").BlueprintRunState;
 /// The details of a blueprint run.
 pub const BlueprintRun = struct {
     /// The name of the blueprint.
-    blueprint_name: ?[]const u8,
+    blueprint_name: ?[]const u8 = null,
 
     /// The date and time that the blueprint run completed.
-    completed_on: ?i64,
+    completed_on: ?i64 = null,
 
     /// Indicates any errors that are seen while running the blueprint.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The blueprint parameters as a string. You will have to provide a value for
     /// each key that is required from the parameter spec that is defined in the
     /// `Blueprint$ParameterSpec`.
-    parameters: ?[]const u8,
+    parameters: ?[]const u8 = null,
 
     /// The role ARN. This role will be assumed by the Glue service and will be used
     /// to create the workflow and other entities of a workflow.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// If there are any errors while creating the entities of a workflow, we try to
     /// roll back the created entities until that point and delete them. This
     /// attribute indicates the errors seen while trying to delete the entities that
     /// are created.
-    rollback_error_message: ?[]const u8,
+    rollback_error_message: ?[]const u8 = null,
 
     /// The run ID for this blueprint run.
-    run_id: ?[]const u8,
+    run_id: ?[]const u8 = null,
 
     /// The date and time that the blueprint run started.
-    started_on: ?i64,
+    started_on: ?i64 = null,
 
     /// The state of the blueprint run. Possible values are:
     ///
@@ -41,11 +41,11 @@ pub const BlueprintRun = struct {
     /// * Failed — The blueprint run failed and rollback is complete.
     ///
     /// * Rolling Back — The blueprint run failed and rollback is in progress.
-    state: ?BlueprintRunState,
+    state: ?BlueprintRunState = null,
 
     /// The name of a workflow that is created as a result of a successful blueprint
     /// run. If a blueprint run has an error, there will not be a workflow created.
-    workflow_name: ?[]const u8,
+    workflow_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .blueprint_name = "BlueprintName",

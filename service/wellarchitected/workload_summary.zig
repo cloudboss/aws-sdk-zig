@@ -5,26 +5,26 @@ const WorkloadProfile = @import("workload_profile.zig").WorkloadProfile;
 
 /// A workload summary return object.
 pub const WorkloadSummary = struct {
-    improvement_status: ?WorkloadImprovementStatus,
+    improvement_status: ?WorkloadImprovementStatus = null,
 
-    lenses: ?[]const []const u8,
+    lenses: ?[]const []const u8 = null,
 
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
-    prioritized_risk_counts: ?[]const aws.map.MapEntry(i32),
+    prioritized_risk_counts: ?[]const aws.map.MapEntry(i32) = null,
 
     /// Profile associated with a workload.
-    profiles: ?[]const WorkloadProfile,
+    profiles: ?[]const WorkloadProfile = null,
 
-    risk_counts: ?[]const aws.map.MapEntry(i32),
+    risk_counts: ?[]const aws.map.MapEntry(i32) = null,
 
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
-    workload_arn: ?[]const u8,
+    workload_arn: ?[]const u8 = null,
 
-    workload_id: ?[]const u8,
+    workload_id: ?[]const u8 = null,
 
-    workload_name: ?[]const u8,
+    workload_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .improvement_status = "ImprovementStatus",

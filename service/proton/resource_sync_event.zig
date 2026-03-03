@@ -4,7 +4,7 @@ pub const ResourceSyncEvent = struct {
     event: []const u8,
 
     /// The external ID for the event.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The time when the event occurred.
     time: i64,

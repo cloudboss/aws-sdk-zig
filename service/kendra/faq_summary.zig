@@ -6,13 +6,13 @@ const FaqStatus = @import("faq_status.zig").FaqStatus;
 /// index.
 pub const FaqSummary = struct {
     /// The Unix timestamp when the FAQ was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The file type used to create the FAQ.
-    file_format: ?FaqFileFormat,
+    file_format: ?FaqFileFormat = null,
 
     /// The identifier of the FAQ.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The code for a language. This shows a supported language for the FAQ
     /// document
@@ -22,17 +22,17 @@ pub const FaqSummary = struct {
     /// see [Adding
     /// documents in languages other than
     /// English](https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
-    language_code: ?[]const u8,
+    language_code: ?[]const u8 = null,
 
     /// The name that you assigned the FAQ when you created or updated the FAQ.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the FAQ. When the status is `ACTIVE` the FAQ is ready
     /// for use.
-    status: ?FaqStatus,
+    status: ?FaqStatus = null,
 
     /// The Unix timestamp when the FAQ was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

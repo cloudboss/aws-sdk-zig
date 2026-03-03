@@ -11,7 +11,7 @@ pub const DataSetNumericComparisonFilterCondition = struct {
     operator: DataSetNumericComparisonFilterOperator,
 
     /// The numeric value to compare against.
-    value: ?DataSetNumericFilterValue,
+    value: ?DataSetNumericFilterValue = null,
 
     pub const json_field_names = .{
         .operator = "Operator",

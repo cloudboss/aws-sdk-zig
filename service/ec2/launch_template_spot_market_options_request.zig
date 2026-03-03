@@ -4,11 +4,11 @@ const SpotInstanceType = @import("spot_instance_type.zig").SpotInstanceType;
 /// The options for Spot Instances.
 pub const LaunchTemplateSpotMarketOptionsRequest = struct {
     /// Deprecated.
-    block_duration_minutes: ?i32,
+    block_duration_minutes: ?i32 = null,
 
     /// The behavior when a Spot Instance is interrupted. The default is
     /// `terminate`.
-    instance_interruption_behavior: ?InstanceInterruptionBehavior,
+    instance_interruption_behavior: ?InstanceInterruptionBehavior = null,
 
     /// The maximum hourly price you're willing to pay for a Spot Instance. We do
     /// not
@@ -23,10 +23,10 @@ pub const LaunchTemplateSpotMarketOptionsRequest = struct {
     ///
     /// If you specify a maximum price, your Spot Instances will be interrupted more
     /// frequently than if you do not specify this parameter.
-    max_price: ?[]const u8,
+    max_price: ?[]const u8 = null,
 
     /// The Spot Instance request type.
-    spot_instance_type: ?SpotInstanceType,
+    spot_instance_type: ?SpotInstanceType = null,
 
     /// The end date of the request, in UTC format
     /// (*YYYY-MM-DD*T*HH:MM:SS*Z). Supported only for
@@ -40,5 +40,5 @@ pub const LaunchTemplateSpotMarketOptionsRequest = struct {
     /// remains active until all instances launch or you cancel the request.
     ///
     /// Default: 7 days from the current date
-    valid_until: ?i64,
+    valid_until: ?i64 = null,
 };

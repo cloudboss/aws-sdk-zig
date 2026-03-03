@@ -10,13 +10,13 @@ const AttributeValue = @import("attribute_value.zig").AttributeValue;
 /// associated item an error with a Null code and Null message will be present.
 pub const CancellationReason = struct {
     /// Status code for the result of the cancelled transaction.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// Item in the request which caused the transaction to get cancelled.
-    item: ?[]const aws.map.MapEntry(AttributeValue),
+    item: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// Cancellation reason message description.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

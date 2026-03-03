@@ -11,7 +11,7 @@ pub const NetworkFirewallPolicy = struct {
     /// distributed model,
     /// set
     /// [PolicyOption](https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html) to `NULL`.
-    firewall_deployment_model: ?FirewallDeploymentModel,
+    firewall_deployment_model: ?FirewallDeploymentModel = null,
 
     pub const json_field_names = .{
         .firewall_deployment_model = "FirewallDeploymentModel",

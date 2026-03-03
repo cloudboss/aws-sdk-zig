@@ -3,13 +3,13 @@ const GroupNameAndArn = @import("group_name_and_arn.zig").GroupNameAndArn;
 /// Thing group metadata.
 pub const ThingGroupMetadata = struct {
     /// The UNIX timestamp of when the thing group was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The parent thing group name.
-    parent_group_name: ?[]const u8,
+    parent_group_name: ?[]const u8 = null,
 
     /// The root parent thing group.
-    root_to_parent_thing_groups: ?[]const GroupNameAndArn,
+    root_to_parent_thing_groups: ?[]const GroupNameAndArn = null,
 
     pub const json_field_names = .{
         .creation_date = "creationDate",

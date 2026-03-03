@@ -13,17 +13,17 @@ pub const RedshiftTarget = struct {
 
     /// The Amazon S3 path where temporary data can be staged when copying out of
     /// the database.
-    redshift_tmp_dir: ?[]const u8,
+    redshift_tmp_dir: ?[]const u8 = null,
 
     /// The name of the table in the database to write to.
     table: []const u8,
 
     /// The IAM role with permissions.
-    tmp_dir_iam_role: ?[]const u8,
+    tmp_dir_iam_role: ?[]const u8 = null,
 
     /// The set of options to configure an upsert operation when writing to a
     /// Redshift target.
-    upsert_redshift_options: ?UpsertRedshiftTargetOptions,
+    upsert_redshift_options: ?UpsertRedshiftTargetOptions = null,
 
     pub const json_field_names = .{
         .database = "Database",

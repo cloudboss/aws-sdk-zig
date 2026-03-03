@@ -3,30 +3,30 @@ const AwsEc2VolumeAttachment = @import("aws_ec_2_volume_attachment.zig").AwsEc2V
 /// Details about an EC2 volume.
 pub const AwsEc2VolumeDetails = struct {
     /// The volume attachments.
-    attachments: ?[]const AwsEc2VolumeAttachment,
+    attachments: ?[]const AwsEc2VolumeAttachment = null,
 
     /// Indicates when the volume was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    create_time: ?[]const u8,
+    create_time: ?[]const u8 = null,
 
     /// The device name for the volume that is attached to the instance.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// Specifies whether the volume is encrypted.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The ARN of the KMS key that was
     /// used to protect the volume encryption key for the volume.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The size of the volume, in GiBs.
-    size: ?i32,
+    size: ?i32 = null,
 
     /// The snapshot from which the volume was created.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
     /// The volume state. Valid values are as follows:
     ///
@@ -41,16 +41,16 @@ pub const AwsEc2VolumeDetails = struct {
     /// * `error`
     ///
     /// * `in-use`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The ID of the volume.
-    volume_id: ?[]const u8,
+    volume_id: ?[]const u8 = null,
 
     /// Indicates whether the volume was scanned or skipped.
-    volume_scan_status: ?[]const u8,
+    volume_scan_status: ?[]const u8 = null,
 
     /// The volume type.
-    volume_type: ?[]const u8,
+    volume_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attachments = "Attachments",

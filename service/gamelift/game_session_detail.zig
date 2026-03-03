@@ -4,7 +4,7 @@ const ProtectionPolicy = @import("protection_policy.zig").ProtectionPolicy;
 /// A game session's properties plus the protection policy currently in force.
 pub const GameSessionDetail = struct {
     /// Object that describes a game session.
-    game_session: ?GameSession,
+    game_session: ?GameSession = null,
 
     /// Current status of protection for the game session.
     ///
@@ -14,7 +14,7 @@ pub const GameSessionDetail = struct {
     /// * **FullProtection** -- If the game session is in an
     /// `ACTIVE` status, it cannot be terminated during a scale-down
     /// event.
-    protection_policy: ?ProtectionPolicy,
+    protection_policy: ?ProtectionPolicy = null,
 
     pub const json_field_names = .{
         .game_session = "GameSession",

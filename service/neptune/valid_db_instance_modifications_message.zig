@@ -6,5 +6,5 @@ const ValidStorageOptions = @import("valid_storage_options.zig").ValidStorageOpt
 /// action. You can use this information when you call ModifyDBInstance.
 pub const ValidDBInstanceModificationsMessage = struct {
     /// Valid storage options for your DB instance.
-    storage: ?[]const ValidStorageOptions,
+    storage: ?[]const ValidStorageOptions = null,
 };

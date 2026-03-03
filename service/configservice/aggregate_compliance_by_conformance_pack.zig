@@ -15,16 +15,16 @@ const AggregateConformancePackCompliance = @import("aggregate_conformance_pack_c
 /// compliant.
 pub const AggregateComplianceByConformancePack = struct {
     /// The 12-digit Amazon Web Services account ID of the source account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The source Amazon Web Services Region from where the data is aggregated.
-    aws_region: ?[]const u8,
+    aws_region: ?[]const u8 = null,
 
     /// The compliance status of the conformance pack.
-    compliance: ?AggregateConformancePackCompliance,
+    compliance: ?AggregateConformancePackCompliance = null,
 
     /// The name of the conformance pack.
-    conformance_pack_name: ?[]const u8,
+    conformance_pack_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

@@ -9,7 +9,7 @@ pub const ChallengePreference = struct {
 
     /// The version of the challenges that have been selected for the Face Liveness
     /// session.
-    versions: ?Versions,
+    versions: ?Versions = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

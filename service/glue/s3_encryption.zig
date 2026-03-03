@@ -5,10 +5,10 @@ const S3EncryptionMode = @import("s3_encryption_mode.zig").S3EncryptionMode;
 pub const S3Encryption = struct {
     /// The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the
     /// data.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The encryption mode to use for Amazon S3 data.
-    s3_encryption_mode: ?S3EncryptionMode,
+    s3_encryption_mode: ?S3EncryptionMode = null,
 
     pub const json_field_names = .{
         .kms_key_arn = "KmsKeyArn",

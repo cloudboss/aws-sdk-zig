@@ -8,7 +8,7 @@ pub const EvaluationFormSingleSelectQuestionOption = struct {
     automatic_fail: bool = false,
 
     /// Whether automatic fail is configured on a single select question.
-    automatic_fail_configuration: ?AutomaticFailConfiguration,
+    automatic_fail_configuration: ?AutomaticFailConfiguration = null,
 
     /// The identifier of the answer option. An identifier must be unique within the
     /// question.

@@ -6,11 +6,11 @@ const AvailabilityZone = @import("availability_zone.zig").AvailabilityZone;
 /// action.
 pub const Subnet = struct {
     /// Specifies the EC2 Availability Zone that the subnet is in.
-    subnet_availability_zone: ?AvailabilityZone,
+    subnet_availability_zone: ?AvailabilityZone = null,
 
     /// Specifies the identifier of the subnet.
-    subnet_identifier: ?[]const u8,
+    subnet_identifier: ?[]const u8 = null,
 
     /// Specifies the status of the subnet.
-    subnet_status: ?[]const u8,
+    subnet_status: ?[]const u8 = null,
 };

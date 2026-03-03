@@ -4,12 +4,12 @@ pub const AssetBundleImportJobFolderOverrideParameters = struct {
     folder_id: []const u8,
 
     /// A new name for the folder.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A new parent folder arn. This change can only be applied if the import
     /// creates a brand
     /// new folder. Existing folders cannot be moved.
-    parent_folder_arn: ?[]const u8,
+    parent_folder_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .folder_id = "FolderId",

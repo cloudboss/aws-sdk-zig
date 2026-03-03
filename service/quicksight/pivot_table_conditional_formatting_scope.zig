@@ -4,7 +4,7 @@ const PivotTableConditionalFormattingScopeRole = @import("pivot_table_conditiona
 pub const PivotTableConditionalFormattingScope = struct {
     /// The role (field, field total, grand total) of the cell for conditional
     /// formatting.
-    role: ?PivotTableConditionalFormattingScopeRole,
+    role: ?PivotTableConditionalFormattingScopeRole = null,
 
     pub const json_field_names = .{
         .role = "Role",

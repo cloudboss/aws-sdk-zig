@@ -6,10 +6,10 @@ const ParametricMonitoringConfiguration = @import("parametric_monitoring_configu
 /// type allows job template parameters to be specified within.
 pub const ParametricConfigurationOverrides = struct {
     /// The configurations for the application running by the job run.
-    application_configuration: ?[]const Configuration,
+    application_configuration: ?[]const Configuration = null,
 
     /// The configurations for monitoring.
-    monitoring_configuration: ?ParametricMonitoringConfiguration,
+    monitoring_configuration: ?ParametricMonitoringConfiguration = null,
 
     pub const json_field_names = .{
         .application_configuration = "applicationConfiguration",

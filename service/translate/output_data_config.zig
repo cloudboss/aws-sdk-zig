@@ -2,7 +2,7 @@ const EncryptionKey = @import("encryption_key.zig").EncryptionKey;
 
 /// The output configuration properties for a batch translation job.
 pub const OutputDataConfig = struct {
-    encryption_key: ?EncryptionKey,
+    encryption_key: ?EncryptionKey = null,
 
     /// The URI of the S3 folder that contains a translation job's output file. The
     /// folder must

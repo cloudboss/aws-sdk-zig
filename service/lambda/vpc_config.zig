@@ -5,13 +5,13 @@
 pub const VpcConfig = struct {
     /// Allows outbound IPv6 traffic on VPC functions that are connected to
     /// dual-stack subnets.
-    ipv_6_allowed_for_dual_stack: ?bool,
+    ipv_6_allowed_for_dual_stack: ?bool = null,
 
     /// A list of VPC security group IDs.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// A list of VPC subnet IDs.
-    subnet_ids: ?[]const []const u8,
+    subnet_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .ipv_6_allowed_for_dual_stack = "Ipv6AllowedForDualStack",

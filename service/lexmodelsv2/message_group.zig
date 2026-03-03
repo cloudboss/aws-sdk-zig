@@ -9,7 +9,7 @@ pub const MessageGroup = struct {
     /// Message variations to send to the user. When variations are defined,
     /// Amazon Lex chooses the primary message or one of the variations to send to
     /// the user.
-    variations: ?[]const Message,
+    variations: ?[]const Message = null,
 
     pub const json_field_names = .{
         .message = "message",

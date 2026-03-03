@@ -3,10 +3,10 @@ const InstalledComponentLifecycleState = @import("installed_component_lifecycle_
 /// Contains information about a component on a Greengrass core device.
 pub const InstalledComponent = struct {
     /// The name of the component.
-    component_name: ?[]const u8,
+    component_name: ?[]const u8 = null,
 
     /// The version of the component.
-    component_version: ?[]const u8,
+    component_version: ?[]const u8 = null,
 
     /// Whether or not the component is a root component.
     is_root: bool = false,
@@ -20,14 +20,14 @@ pub const InstalledComponent = struct {
     /// Any deployment will attempt to reinstall currently broken components on the
     /// device,
     /// which will update the last installation source.
-    last_installation_source: ?[]const u8,
+    last_installation_source: ?[]const u8 = null,
 
     /// The last time the Greengrass core device sent a message containing a
     /// component's state to the
     /// Amazon Web Services Cloud.
     ///
     /// A component does not need to see a state change for this field to update.
-    last_reported_timestamp: ?i64,
+    last_reported_timestamp: ?i64 = null,
 
     /// The status of how current the data is.
     ///
@@ -37,15 +37,15 @@ pub const InstalledComponent = struct {
     /// during a
     /// deployment, it might not undergo a state change and this status would not be
     /// updated.
-    last_status_change_timestamp: ?i64,
+    last_status_change_timestamp: ?i64 = null,
 
     /// The lifecycle state of the component.
-    lifecycle_state: ?InstalledComponentLifecycleState,
+    lifecycle_state: ?InstalledComponentLifecycleState = null,
 
     /// A detailed response about the lifecycle state of the component that explains
     /// the reason
     /// why a component has an error or is broken.
-    lifecycle_state_details: ?[]const u8,
+    lifecycle_state_details: ?[]const u8 = null,
 
     /// The status codes that indicate the reason for failure whenever the
     /// `lifecycleState` has an error or is in a broken state.
@@ -53,7 +53,7 @@ pub const InstalledComponent = struct {
     /// Greengrass nucleus v2.8.0 or later is required to get an accurate
     /// `lifecycleStatusCodes` response. This response can be inaccurate in earlier
     /// Greengrass nucleus versions.
-    lifecycle_status_codes: ?[]const []const u8,
+    lifecycle_status_codes: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .component_name = "componentName",

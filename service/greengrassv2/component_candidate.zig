@@ -5,10 +5,10 @@ const aws = @import("aws");
 /// device.
 pub const ComponentCandidate = struct {
     /// The name of the component.
-    component_name: ?[]const u8,
+    component_name: ?[]const u8 = null,
 
     /// The version of the component.
-    component_version: ?[]const u8,
+    component_version: ?[]const u8 = null,
 
     /// The version requirements for the component's dependencies. Greengrass core
     /// devices get the
@@ -16,7 +16,7 @@ pub const ComponentCandidate = struct {
     ///
     /// IoT Greengrass V2 uses semantic version constraints. For more information,
     /// see [Semantic Versioning](https://semver.org/).
-    version_requirements: ?[]const aws.map.StringMapEntry,
+    version_requirements: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .component_name = "componentName",

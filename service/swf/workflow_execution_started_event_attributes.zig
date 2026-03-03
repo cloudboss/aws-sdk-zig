@@ -27,19 +27,19 @@ pub const WorkflowExecutionStartedEventAttributes = struct {
     /// contains the `runId` of the previous workflow execution that was closed and
     /// continued as this
     /// execution.
-    continued_execution_run_id: ?[]const u8,
+    continued_execution_run_id: ?[]const u8 = null,
 
     /// The maximum duration for this workflow execution.
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    execution_start_to_close_timeout: ?[]const u8,
+    execution_start_to_close_timeout: ?[]const u8 = null,
 
     /// The input provided to the workflow execution.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The IAM role attached to the workflow execution.
-    lambda_role: ?[]const u8,
+    lambda_role: ?[]const u8 = null,
 
     /// The ID of the `StartChildWorkflowExecutionInitiated` event corresponding to
     /// the
@@ -53,24 +53,24 @@ pub const WorkflowExecutionStartedEventAttributes = struct {
 
     /// The source workflow execution that started this workflow execution. The
     /// member isn't set if the workflow execution was not started by a workflow.
-    parent_workflow_execution: ?WorkflowExecution,
+    parent_workflow_execution: ?WorkflowExecution = null,
 
     /// The list of tags associated with this workflow execution. An execution can
     /// have up to 5 tags.
-    tag_list: ?[]const []const u8,
+    tag_list: ?[]const []const u8 = null,
 
     /// The name of the task list for scheduling the decision tasks for this
     /// workflow execution.
     task_list: TaskList,
 
     /// The priority of the decision tasks in the workflow execution.
-    task_priority: ?[]const u8,
+    task_priority: ?[]const u8 = null,
 
     /// The maximum duration of decision tasks for this workflow type.
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    task_start_to_close_timeout: ?[]const u8,
+    task_start_to_close_timeout: ?[]const u8 = null,
 
     /// The workflow type of this execution.
     workflow_type: WorkflowType,

@@ -4,7 +4,7 @@ const FlowConnectionType = @import("flow_connection_type.zig").FlowConnectionTyp
 /// Contains information about a connection between two nodes in the flow.
 pub const FlowConnection = struct {
     /// The configuration of the connection.
-    configuration: ?FlowConnectionConfiguration,
+    configuration: ?FlowConnectionConfiguration = null,
 
     /// A name for the connection that you can reference.
     name: []const u8,

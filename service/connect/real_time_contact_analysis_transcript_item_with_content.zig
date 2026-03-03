@@ -6,11 +6,11 @@ const RealTimeContactAnalysisCharacterInterval = @import("real_time_contact_anal
 /// describe both content that contains identified
 /// issue and intervals where that content is taken from.
 pub const RealTimeContactAnalysisTranscriptItemWithContent = struct {
-    character_offsets: ?RealTimeContactAnalysisCharacterInterval,
+    character_offsets: ?RealTimeContactAnalysisCharacterInterval = null,
 
     /// Part of the transcript content that contains identified issue. Can be
     /// redacted
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// Transcript identifier. Matches the identifier from one of the
     /// TranscriptSegments.

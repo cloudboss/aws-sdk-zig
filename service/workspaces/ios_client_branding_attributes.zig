@@ -11,7 +11,7 @@ pub const IosClientBrandingAttributes = struct {
     /// The forgotten password link. This is the web address that users can go to if
     /// they forget
     /// the password for their WorkSpace.
-    forgot_password_link: ?[]const u8,
+    forgot_password_link: ?[]const u8 = null,
 
     /// The login message. Specified as a key value pair, in which the key is a
     /// locale and the
@@ -19,7 +19,7 @@ pub const IosClientBrandingAttributes = struct {
     /// `en_US`. The HTML tags supported include the following: `a, b, blockquote,
     /// br, cite, code, dd, dl, dt, div, em,
     /// i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul`.
-    login_message: ?[]const aws.map.StringMapEntry,
+    login_message: ?[]const aws.map.StringMapEntry = null,
 
     /// The @2x version of the logo. This is the higher resolution display that
     /// offers a scale
@@ -31,7 +31,7 @@ pub const IosClientBrandingAttributes = struct {
     /// and Resolution
     /// ](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/) in the *Apple Human Interface
     /// Guidelines*.
-    logo_2_x_url: ?[]const u8,
+    logo_2_x_url: ?[]const u8 = null,
 
     /// The @3x version of the logo. This is the higher resolution display that
     /// offers a scale
@@ -43,7 +43,7 @@ pub const IosClientBrandingAttributes = struct {
     /// and Resolution
     /// ](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/) in the *Apple Human Interface
     /// Guidelines*.
-    logo_3_x_url: ?[]const u8,
+    logo_3_x_url: ?[]const u8 = null,
 
     /// The logo. This is the standard-resolution display that has a 1:1 pixel
     /// density
@@ -51,7 +51,7 @@ pub const IosClientBrandingAttributes = struct {
     /// to one point. The only image format accepted is a binary data object that is
     /// converted from
     /// a `.png` file.
-    logo_url: ?[]const u8,
+    logo_url: ?[]const u8 = null,
 
     /// The support email. The company's customer support email address.
     ///
@@ -60,7 +60,7 @@ pub const IosClientBrandingAttributes = struct {
     /// parameter for each platform type, but not both.
     ///
     /// * The default email is `workspaces-feedback@amazon.com`.
-    support_email: ?[]const u8,
+    support_email: ?[]const u8 = null,
 
     /// The support link. The link for the company's customer support page for their
     /// WorkSpace.
@@ -70,7 +70,7 @@ pub const IosClientBrandingAttributes = struct {
     /// parameter for each platform type, but not both.
     ///
     /// * The default support link is `workspaces-feedback@amazon.com`.
-    support_link: ?[]const u8,
+    support_link: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .forgot_password_link = "ForgotPasswordLink",

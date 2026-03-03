@@ -6,7 +6,7 @@ pub const AssetPropertyValue = struct {
     /// Optional. A string that describes the quality of the value. Accepts
     /// substitution
     /// templates. Must be `GOOD`, `BAD`, or `UNCERTAIN`.
-    quality: ?[]const u8,
+    quality: ?[]const u8 = null,
 
     /// The asset property value timestamp.
     timestamp: AssetPropertyTimestamp,

@@ -14,7 +14,7 @@ pub const CredentialPair = struct {
     /// the existing credentials. If the `AlternateDataSourceParameters` list is
     /// null, the `DataSourceParameters` originally used with these
     /// `Credentials` is automatically allowed.
-    alternate_data_source_parameters: ?[]const DataSourceParameters,
+    alternate_data_source_parameters: ?[]const DataSourceParameters = null,
 
     /// Password.
     password: []const u8,

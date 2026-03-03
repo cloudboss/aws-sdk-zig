@@ -10,25 +10,25 @@ const OfferSetStateFilter = @import("offer_set_state_filter.zig").OfferSetStateF
 /// add a maximum of 8 filters in a single `ListEntities` request.
 pub const OfferSetFilters = struct {
     /// Allows filtering on the `AssociatedOfferIds` of an offer set.
-    associated_offer_ids: ?OfferSetAssociatedOfferIdsFilter,
+    associated_offer_ids: ?OfferSetAssociatedOfferIdsFilter = null,
 
     /// Allows filtering on `EntityId` of an offer set.
-    entity_id: ?OfferSetEntityIdFilter,
+    entity_id: ?OfferSetEntityIdFilter = null,
 
     /// Allows filtering on the `LastModifiedDate` of an offer set.
-    last_modified_date: ?OfferSetLastModifiedDateFilter,
+    last_modified_date: ?OfferSetLastModifiedDateFilter = null,
 
     /// Allows filtering on the `Name` of an offer set.
-    name: ?OfferSetNameFilter,
+    name: ?OfferSetNameFilter = null,
 
     /// Allows filtering on the `ReleaseDate` of an offer set.
-    release_date: ?OfferSetReleaseDateFilter,
+    release_date: ?OfferSetReleaseDateFilter = null,
 
     /// Allows filtering on the `SolutionId` of an offer set.
-    solution_id: ?OfferSetSolutionIdFilter,
+    solution_id: ?OfferSetSolutionIdFilter = null,
 
     /// Allows filtering on the `State` of an offer set.
-    state: ?OfferSetStateFilter,
+    state: ?OfferSetStateFilter = null,
 
     pub const json_field_names = .{
         .associated_offer_ids = "AssociatedOfferIds",

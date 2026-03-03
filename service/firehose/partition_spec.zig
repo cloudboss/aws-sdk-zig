@@ -19,7 +19,7 @@ pub const PartitionSpec = struct {
     /// source value, and does not modify it. Result type is the source type.
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    identity: ?[]const PartitionField,
+    identity: ?[]const PartitionField = null,
 
     pub const json_field_names = .{
         .identity = "Identity",

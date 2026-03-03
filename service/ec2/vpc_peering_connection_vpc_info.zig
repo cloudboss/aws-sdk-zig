@@ -5,24 +5,24 @@ const VpcPeeringConnectionOptionsDescription = @import("vpc_peering_connection_o
 /// Describes a VPC in a VPC peering connection.
 pub const VpcPeeringConnectionVpcInfo = struct {
     /// The IPv4 CIDR block for the VPC.
-    cidr_block: ?[]const u8,
+    cidr_block: ?[]const u8 = null,
 
     /// Information about the IPv4 CIDR blocks for the VPC.
-    cidr_block_set: ?[]const CidrBlock,
+    cidr_block_set: ?[]const CidrBlock = null,
 
     /// The IPv6 CIDR block for the VPC.
-    ipv_6_cidr_block_set: ?[]const Ipv6CidrBlock,
+    ipv_6_cidr_block_set: ?[]const Ipv6CidrBlock = null,
 
     /// The ID of the Amazon Web Services account that owns the VPC.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// Information about the VPC peering connection options for the accepter or
     /// requester VPC.
-    peering_options: ?VpcPeeringConnectionOptionsDescription,
+    peering_options: ?VpcPeeringConnectionOptionsDescription = null,
 
     /// The Region in which the VPC is located.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The ID of the VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

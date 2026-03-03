@@ -8,7 +8,7 @@ pub const CacheAttributes = struct {
     /// or Amazon FSx file system. The TTL duration is in seconds.
     ///
     /// Valid Values:0, 300 to 2,592,000 seconds (5 minutes to 30 days)
-    cache_stale_timeout_in_seconds: ?i32,
+    cache_stale_timeout_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .cache_stale_timeout_in_seconds = "CacheStaleTimeoutInSeconds",

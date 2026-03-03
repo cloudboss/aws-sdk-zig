@@ -5,7 +5,7 @@
 pub const AutoDataQuality = struct {
     /// The evaluation context for the automatic data quality checks. This defines
     /// the scope and parameters for the data quality evaluation.
-    evaluation_context: ?[]const u8,
+    evaluation_context: ?[]const u8 = null,
 
     /// Specifies whether automatic data quality evaluation is enabled. When set to
     /// `true`, data quality checks are performed automatically.

@@ -7,7 +7,7 @@ pub const WorkflowExportConfig = struct {
     s_3_bucket_name: []const u8,
 
     /// An optional prefix for Amazon S3 object keys to organize exported data.
-    s_3_key_prefix: ?[]const u8,
+    s_3_key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s_3_bucket_name = "s3BucketName",

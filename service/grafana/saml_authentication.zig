@@ -4,7 +4,7 @@ const SamlConfigurationStatus = @import("saml_configuration_status.zig").SamlCon
 /// A structure containing information about how this workspace works with SAML.
 pub const SamlAuthentication = struct {
     /// A structure containing details about how this workspace works with SAML.
-    configuration: ?SamlConfiguration,
+    configuration: ?SamlConfiguration = null,
 
     /// Specifies whether the workspace's SAML configuration is complete.
     status: SamlConfigurationStatus,

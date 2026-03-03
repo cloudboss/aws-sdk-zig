@@ -8,10 +8,10 @@ const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator
 pub const StreamNameCondition = struct {
     /// A comparison operator. Currently, you can specify only the `BEGINS_WITH`
     /// operator, which finds streams whose names start with a given prefix.
-    comparison_operator: ?ComparisonOperator,
+    comparison_operator: ?ComparisonOperator = null,
 
     /// A value to compare.
-    comparison_value: ?[]const u8,
+    comparison_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comparison_operator = "ComparisonOperator",

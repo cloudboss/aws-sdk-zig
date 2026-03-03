@@ -12,15 +12,15 @@ pub const MessageResponse = struct {
     /// A map that contains a multipart response for each address that the message
     /// was sent to. In the map, the endpoint ID is the key and the result is the
     /// value.
-    endpoint_result: ?[]const aws.map.MapEntry(EndpointMessageResult),
+    endpoint_result: ?[]const aws.map.MapEntry(EndpointMessageResult) = null,
 
     /// The identifier for the original request that the message was delivered for.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// A map that contains a multipart response for each address (email address,
     /// phone number, or push notification token) that the message was sent to. In
     /// the map, the address is the key and the result is the value.
-    result: ?[]const aws.map.MapEntry(MessageResult),
+    result: ?[]const aws.map.MapEntry(MessageResult) = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

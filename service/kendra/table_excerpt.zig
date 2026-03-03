@@ -9,10 +9,10 @@ const TableRow = @import("table_row.zig").TableRow;
 /// displayed in the table excerpt, along with the next most relevant cells.
 pub const TableExcerpt = struct {
     /// A list of rows in the table excerpt.
-    rows: ?[]const TableRow,
+    rows: ?[]const TableRow = null,
 
     /// A count of the number of rows in the original table within the document.
-    total_number_of_rows: ?i32,
+    total_number_of_rows: ?i32 = null,
 
     pub const json_field_names = .{
         .rows = "Rows",

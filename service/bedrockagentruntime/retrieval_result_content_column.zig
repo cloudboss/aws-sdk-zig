@@ -3,13 +3,13 @@ const RetrievalResultContentColumnType = @import("retrieval_result_content_colum
 /// Contains information about a column with a cell to return in retrieval.
 pub const RetrievalResultContentColumn = struct {
     /// The name of the column.
-    column_name: ?[]const u8,
+    column_name: ?[]const u8 = null,
 
     /// The value in the column.
-    column_value: ?[]const u8,
+    column_value: ?[]const u8 = null,
 
     /// The data type of the value.
-    @"type": ?RetrievalResultContentColumnType,
+    @"type": ?RetrievalResultContentColumnType = null,
 
     pub const json_field_names = .{
         .column_name = "columnName",

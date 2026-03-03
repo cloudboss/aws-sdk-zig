@@ -9,10 +9,10 @@ pub const AvailabilityZone = struct {
     /// balancer. For internal load balancers, you can specify a private IP address
     /// from the IPv4
     /// range of the subnet.
-    load_balancer_addresses: ?[]const LoadBalancerAddress,
+    load_balancer_addresses: ?[]const LoadBalancerAddress = null,
 
     /// [Application Load Balancers on Outposts] The ID of the Outpost.
-    outpost_id: ?[]const u8,
+    outpost_id: ?[]const u8 = null,
 
     /// [Network Load Balancers with UDP listeners] The IPv6 prefixes to use for
     /// source NAT.
@@ -21,11 +21,11 @@ pub const AvailabilityZone = struct {
     /// `auto_assigned` to use an IPv6 prefix selected at random from the subnet
     /// CIDR
     /// block.
-    source_nat_ipv_6_prefixes: ?[]const []const u8,
+    source_nat_ipv_6_prefixes: ?[]const []const u8 = null,
 
     /// The ID of the subnet. You can specify one subnet per Availability Zone.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The name of the Availability Zone.
-    zone_name: ?[]const u8,
+    zone_name: ?[]const u8 = null,
 };

@@ -8,7 +8,7 @@ pub const FieldsData = struct {
     /// and values of the log event in a structured format that can be parsed and
     /// processed by the
     /// client.
-    data: ?[]const u8,
+    data: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data = "data",

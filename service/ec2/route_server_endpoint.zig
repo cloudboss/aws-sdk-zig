@@ -9,29 +9,29 @@ const Tag = @import("tag.zig").Tag;
 /// connections between your route server and your BGP peers.
 pub const RouteServerEndpoint = struct {
     /// The IP address of the Elastic network interface for the endpoint.
-    eni_address: ?[]const u8,
+    eni_address: ?[]const u8 = null,
 
     /// The ID of the Elastic network interface for the endpoint.
-    eni_id: ?[]const u8,
+    eni_id: ?[]const u8 = null,
 
     /// The reason for any failure in endpoint creation or operation.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The unique identifier of the route server endpoint.
-    route_server_endpoint_id: ?[]const u8,
+    route_server_endpoint_id: ?[]const u8 = null,
 
     /// The ID of the route server associated with this endpoint.
-    route_server_id: ?[]const u8,
+    route_server_id: ?[]const u8 = null,
 
     /// The current state of the route server endpoint.
-    state: ?RouteServerEndpointState,
+    state: ?RouteServerEndpointState = null,
 
     /// The ID of the subnet to place the route server endpoint into.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// Any tags assigned to the route server endpoint.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the VPC containing the endpoint.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

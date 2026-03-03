@@ -12,7 +12,7 @@ pub const LabelSchema = struct {
     /// ["fraud", "abuse"]`, `"LEGIT" => ["legit", "safe"]}`. The value part of the
     /// mapper is a list, because you may have multiple label variants from your
     /// event type for a single Amazon Fraud Detector label.
-    label_mapper: ?[]const aws.map.MapEntry([]const []const u8),
+    label_mapper: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The action to take for unlabeled events.
     ///
@@ -32,7 +32,7 @@ pub const LabelSchema = struct {
     ///   events in the dataset.
     ///
     /// By default, Amazon Fraud Detector ignores the unlabeled data.
-    unlabeled_events_treatment: ?UnlabeledEventsTreatment,
+    unlabeled_events_treatment: ?UnlabeledEventsTreatment = null,
 
     pub const json_field_names = .{
         .label_mapper = "labelMapper",

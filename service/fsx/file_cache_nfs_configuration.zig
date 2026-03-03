@@ -8,7 +8,7 @@ pub const FileCacheNFSConfiguration = struct {
     /// be the IP addresses of a DNS forwarder or resolver that the customer
     /// manages and runs inside the customer VPC, or the IP addresses of the
     /// on-premises DNS servers.
-    dns_ips: ?[]const []const u8,
+    dns_ips: ?[]const []const u8 = null,
 
     /// The version of the NFS (Network File System) protocol of the
     /// NFS data repository. The only supported value is `NFS3`,

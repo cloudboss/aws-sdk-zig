@@ -21,19 +21,19 @@ pub const Diagnostics = struct {
     /// * ScriptFailed: The specified script failed to run as expected.
     ///
     /// * UnknownError: The specified script did not run for an unknown reason.
-    error_code: ?LifecycleErrorCode,
+    error_code: ?LifecycleErrorCode = null,
 
     /// The last portion of the diagnostic log.
     ///
     /// If available, CodeDeploy returns up to the last 4 KB of the diagnostic
     /// log.
-    log_tail: ?[]const u8,
+    log_tail: ?[]const u8 = null,
 
     /// The message associated with the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The name of the script.
-    script_name: ?[]const u8,
+    script_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

@@ -14,7 +14,7 @@ pub const AwsAthenaWorkGroupConfigurationDetails = struct {
     /// known as client-side settings. If
     /// workgroup settings override client-side settings, then the query uses the
     /// workgroup settings.
-    result_configuration: ?AwsAthenaWorkGroupConfigurationResultConfigurationDetails,
+    result_configuration: ?AwsAthenaWorkGroupConfigurationResultConfigurationDetails = null,
 
     pub const json_field_names = .{
         .result_configuration = "ResultConfiguration",

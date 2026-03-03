@@ -8,15 +8,15 @@
 pub const ManagedRuleGroupSummary = struct {
     /// The description of the managed rule group, provided by Amazon Web Services
     /// Managed Rules or the Amazon Web Services Marketplace seller who manages it.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the managed rule group. You use this, along with the vendor
     /// name, to identify the rule group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The name of the managed rule group vendor. You use this, along with the rule
     /// group name, to identify a rule group.
-    vendor_name: ?[]const u8,
+    vendor_name: ?[]const u8 = null,
 
     /// Indicates whether the managed rule group is versioned. If it is, you can
     /// retrieve the

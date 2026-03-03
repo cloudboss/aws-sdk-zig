@@ -13,10 +13,10 @@ pub const GuardrailContentFilter = struct {
 
     /// Indicates whether content that breaches the guardrail configuration is
     /// detected.
-    detected: ?bool,
+    detected: ?bool = null,
 
     /// The filter strength setting for the guardrail content filter.
-    filter_strength: ?GuardrailContentFilterStrength,
+    filter_strength: ?GuardrailContentFilterStrength = null,
 
     /// The guardrail type.
     @"type": GuardrailContentFilterType,

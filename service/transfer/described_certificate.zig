@@ -8,37 +8,37 @@ pub const DescribedCertificate = struct {
     /// An optional date that specifies when the certificate becomes active. If you
     /// do not specify a value, `ActiveDate` takes the same value as
     /// `NotBeforeDate`, which is specified by the CA.
-    active_date: ?i64,
+    active_date: ?i64 = null,
 
     /// The unique Amazon Resource Name (ARN) for the certificate.
     arn: []const u8,
 
     /// The file name for the certificate.
-    certificate: ?[]const u8,
+    certificate: ?[]const u8 = null,
 
     /// The list of certificates that make up the chain for the certificate.
-    certificate_chain: ?[]const u8,
+    certificate_chain: ?[]const u8 = null,
 
     /// An array of identifiers for the imported certificates. You use this
     /// identifier for working with profiles and partner profiles.
-    certificate_id: ?[]const u8,
+    certificate_id: ?[]const u8 = null,
 
     /// The name or description that's used to identity the certificate.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// An optional date that specifies when the certificate becomes inactive. If
     /// you do not specify a value, `InactiveDate` takes the same value as
     /// `NotAfterDate`, which is specified by the CA.
-    inactive_date: ?i64,
+    inactive_date: ?i64 = null,
 
     /// The final date that the certificate is valid.
-    not_after_date: ?i64,
+    not_after_date: ?i64 = null,
 
     /// The earliest date that the certificate is valid.
-    not_before_date: ?i64,
+    not_before_date: ?i64 = null,
 
     /// The serial number for the certificate.
-    serial: ?[]const u8,
+    serial: ?[]const u8 = null,
 
     /// A certificate's status can be either `ACTIVE` or `INACTIVE`.
     ///
@@ -49,15 +49,15 @@ pub const DescribedCertificate = struct {
     /// If you don't set values for `ActiveDate` and `InactiveDate`, we use the
     /// `NotBefore` and `NotAfter` date as specified on the X509 certificate to
     /// determine when a certificate is active and when it is inactive.
-    status: ?CertificateStatusType,
+    status: ?CertificateStatusType = null,
 
     /// Key-value pairs that can be used to group and search for certificates.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// If a private key has been specified for the certificate, its type is
     /// `CERTIFICATE_WITH_PRIVATE_KEY`. If there is no private key, the type is
     /// `CERTIFICATE`.
-    @"type": ?CertificateType,
+    @"type": ?CertificateType = null,
 
     /// Specifies how this certificate is used. It can be used in the following
     /// ways:
@@ -65,7 +65,7 @@ pub const DescribedCertificate = struct {
     /// * `SIGNING`: For signing AS2 messages
     /// * `ENCRYPTION`: For encrypting AS2 messages
     /// * `TLS`: For securing AS2 communications sent over HTTPS
-    usage: ?CertificateUsageType,
+    usage: ?CertificateUsageType = null,
 
     pub const json_field_names = .{
         .active_date = "ActiveDate",

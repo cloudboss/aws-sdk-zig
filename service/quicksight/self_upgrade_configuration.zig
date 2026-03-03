@@ -9,7 +9,7 @@ pub const SelfUpgradeConfiguration = struct {
     ///
     /// * `ADMIN_APPROVAL`: All the self-upgrade requests will require admin
     ///   approval.
-    self_upgrade_status: ?SelfUpgradeStatus,
+    self_upgrade_status: ?SelfUpgradeStatus = null,
 
     pub const json_field_names = .{
         .self_upgrade_status = "SelfUpgradeStatus",

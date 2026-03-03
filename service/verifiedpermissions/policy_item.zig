@@ -12,7 +12,7 @@ pub const PolicyItem = struct {
     /// The action that a policy permits or forbids. For example, `{"actions":
     /// [{"actionId": "ViewPhoto", "actionType": "PhotoFlash::Action"}, {"entityID":
     /// "SharePhoto", "entityType": "PhotoFlash::Action"}]}`.
-    actions: ?[]const ActionIdentifier,
+    actions: ?[]const ActionIdentifier = null,
 
     /// The date and time the policy was created.
     created_date: i64,
@@ -22,7 +22,7 @@ pub const PolicyItem = struct {
 
     /// The effect of the decision that a policy returns to an authorization
     /// request. For example, `"effect": "Permit"`.
-    effect: ?PolicyEffect,
+    effect: ?PolicyEffect = null,
 
     /// The date and time the policy was most recently updated.
     last_updated_date: i64,
@@ -41,10 +41,10 @@ pub const PolicyItem = struct {
     policy_type: PolicyType,
 
     /// The principal associated with the policy.
-    principal: ?EntityIdentifier,
+    principal: ?EntityIdentifier = null,
 
     /// The resource associated with the policy.
-    resource: ?EntityIdentifier,
+    resource: ?EntityIdentifier = null,
 
     pub const json_field_names = .{
         .actions = "actions",

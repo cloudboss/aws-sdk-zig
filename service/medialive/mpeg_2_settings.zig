@@ -17,7 +17,7 @@ pub const Mpeg2Settings = struct {
     /// enable the quantizer and set its strength. The strengths are: Auto, Off,
     /// Low, Medium, High. When you enable this field, MediaLive allows intra-frame
     /// quantizers to vary, which might improve visual quality.
-    adaptive_quantization: ?Mpeg2AdaptiveQuantization,
+    adaptive_quantization: ?Mpeg2AdaptiveQuantization = null,
 
     /// Indicates the AFD values that MediaLive will write into the video encode. If
     /// you do not know what AFD signaling is, or if your downstream system has not
@@ -25,12 +25,12 @@ pub const Mpeg2Settings = struct {
     /// AUTO: MediaLive will try to preserve the input AFD value (in cases where
     /// multiple AFD values are valid).
     /// FIXED: MediaLive will use the value you specify in fixedAFD.
-    afd_signaling: ?AfdSignaling,
+    afd_signaling: ?AfdSignaling = null,
 
     /// Specifies whether to include the color space metadata. The metadata
     /// describes the color space that applies to the video (the colorSpace field).
     /// We recommend that you insert the metadata.
-    color_metadata: ?Mpeg2ColorMetadata,
+    color_metadata: ?Mpeg2ColorMetadata = null,
 
     /// Choose the type of color space conversion to apply to the output. For
     /// detailed information on setting up both the input and the output to obtain
@@ -39,10 +39,10 @@ pub const Mpeg2Settings = struct {
     /// PASSTHROUGH: Keep the color space of the input content - do not convert it.
     /// AUTO:Convert all content that is SD to rec 601, and convert all content that
     /// is HD to rec 709.
-    color_space: ?Mpeg2ColorSpace,
+    color_space: ?Mpeg2ColorSpace = null,
 
     /// Sets the pixel aspect ratio for the encode.
-    display_aspect_ratio: ?Mpeg2DisplayRatio,
+    display_aspect_ratio: ?Mpeg2DisplayRatio = null,
 
     /// Optionally specify a noise reduction filter, which can improve quality of
     /// compressed content. If you do not choose a filter, no filter will be
@@ -56,11 +56,11 @@ pub const Mpeg2Settings = struct {
     /// noise.
     /// When the content is reasonably clean, the filter tends to decrease the
     /// bitrate.
-    filter_settings: ?Mpeg2FilterSettings,
+    filter_settings: ?Mpeg2FilterSettings = null,
 
     /// Complete this field only when afdSignaling is set to FIXED. Enter the AFD
     /// value (4 bits) to write on all frames of the video encode.
-    fixed_afd: ?FixedAfd,
+    fixed_afd: ?FixedAfd = null,
 
     /// description": "The framerate denominator. For example, 1001. The framerate
     /// is the numerator divided by the denominator. For example, 24000 / 1001 =
@@ -72,11 +72,11 @@ pub const Mpeg2Settings = struct {
     framerate_numerator: i32,
 
     /// MPEG2: default is open GOP.
-    gop_closed_cadence: ?i32,
+    gop_closed_cadence: ?i32 = null,
 
     /// Relates to the GOP structure. The number of B-frames between reference
     /// frames. If you do not know what a B-frame is, use the default.
-    gop_num_b_frames: ?i32,
+    gop_num_b_frames: ?i32 = null,
 
     /// Relates to the GOP structure. The GOP size (keyframe interval) in the units
     /// specified in gopSizeUnits. If you do not know what GOP is, use the default.
@@ -84,17 +84,17 @@ pub const Mpeg2Settings = struct {
     /// greater than or equal to 1.
     /// If gopSizeUnits is seconds, the gopSize must be greater than 0, but does not
     /// need to be an integer.
-    gop_size: ?f64,
+    gop_size: ?f64 = null,
 
     /// Relates to the GOP structure. Specifies whether the gopSize is specified in
     /// frames or seconds. If you do not plan to change the default gopSize, leave
     /// the default. If you specify SECONDS, MediaLive will internally convert the
     /// gop size to a frame count.
-    gop_size_units: ?Mpeg2GopSizeUnits,
+    gop_size_units: ?Mpeg2GopSizeUnits = null,
 
     /// Set the scan type of the output to PROGRESSIVE or INTERLACED (top field
     /// first).
-    scan_type: ?Mpeg2ScanType,
+    scan_type: ?Mpeg2ScanType = null,
 
     /// Relates to the GOP structure. If you do not know what GOP is, use the
     /// default.
@@ -102,10 +102,10 @@ pub const Mpeg2Settings = struct {
     /// gopNumBFrames.
     /// DYNAMIC: Let MediaLive optimize the number of B-frames in each sub-GOP, to
     /// improve visual quality.
-    subgop_length: ?Mpeg2SubGopLength,
+    subgop_length: ?Mpeg2SubGopLength = null,
 
     /// Timecode burn-in settings
-    timecode_burnin_settings: ?TimecodeBurninSettings,
+    timecode_burnin_settings: ?TimecodeBurninSettings = null,
 
     /// Determines how MediaLive inserts timecodes in the output video. For detailed
     /// information about setting up the input and the output for a timecode, see
@@ -113,7 +113,7 @@ pub const Mpeg2Settings = struct {
     /// MediaLive User Guide.
     /// DISABLED: do not include timecodes.
     /// GOP_TIMECODE: Include timecode metadata in the GOP header.
-    timecode_insertion: ?Mpeg2TimecodeInsertionBehavior,
+    timecode_insertion: ?Mpeg2TimecodeInsertionBehavior = null,
 
     pub const json_field_names = .{
         .adaptive_quantization = "AdaptiveQuantization",

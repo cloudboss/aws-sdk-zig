@@ -9,7 +9,7 @@ pub const ActivateReadSetSourceItem = struct {
     status: ReadSetActivationJobItemStatus,
 
     /// The source's status message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .read_set_id = "readSetId",

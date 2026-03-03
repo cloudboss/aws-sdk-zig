@@ -10,9 +10,9 @@ const ASN1Subject = @import("asn1_subject.zig").ASN1Subject;
 /// rules](https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations) to determine what information is used.
 pub const ApiPassthrough = struct {
     /// Specifies X.509 extension information for a certificate.
-    extensions: ?Extensions,
+    extensions: ?Extensions = null,
 
-    subject: ?ASN1Subject,
+    subject: ?ASN1Subject = null,
 
     pub const json_field_names = .{
         .extensions = "Extensions",

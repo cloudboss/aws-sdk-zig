@@ -12,22 +12,22 @@ const PropagateTags = @import("propagate_tags.zig").PropagateTags;
 /// ](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html) API operation.
 pub const EcsParameters = struct {
     /// The capacity provider strategy to use for the task.
-    capacity_provider_strategy: ?[]const CapacityProviderStrategyItem,
+    capacity_provider_strategy: ?[]const CapacityProviderStrategyItem = null,
 
     /// Specifies whether to enable Amazon ECS managed tags for the task. For more
     /// information, see [Tagging Your Amazon ECS
     /// Resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
     /// in the *Amazon ECS Developer Guide*.
-    enable_ecs_managed_tags: ?bool,
+    enable_ecs_managed_tags: ?bool = null,
 
     /// Whether or not to enable the execute command functionality for the
     /// containers in this task. If true, this enables execute command functionality
     /// on all containers in the task.
-    enable_execute_command: ?bool,
+    enable_execute_command: ?bool = null,
 
     /// Specifies an ECS task group for the task. The maximum length is 255
     /// characters.
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// Specifies the launch type on which your task is running. The launch type
     /// that you specify here must match one of the launch type (compatibilities) of
@@ -36,22 +36,22 @@ pub const EcsParameters = struct {
     /// Amazon ECS is supported.
     /// For more information, see [AWS Fargate on Amazon
     /// ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html) in the *Amazon ECS Developer Guide*.
-    launch_type: ?LaunchType,
+    launch_type: ?LaunchType = null,
 
     /// This structure specifies the network configuration for an ECS task.
-    network_configuration: ?NetworkConfiguration,
+    network_configuration: ?NetworkConfiguration = null,
 
     /// An array of placement constraint objects to use for the task. You can
     /// specify up to 10 constraints per task (including constraints in the task
     /// definition and those specified at runtime).
-    placement_constraints: ?[]const PlacementConstraint,
+    placement_constraints: ?[]const PlacementConstraint = null,
 
     /// The task placement strategy for a task or service.
-    placement_strategy: ?[]const PlacementStrategy,
+    placement_strategy: ?[]const PlacementStrategy = null,
 
     /// Specifies the platform version for the task. Specify only the numeric
     /// portion of the platform version, such as `1.1.0`.
-    platform_version: ?[]const u8,
+    platform_version: ?[]const u8 = null,
 
     /// Specifies whether to propagate the tags from the task definition to the
     /// task. If no value is specified, the tags are not propagated.
@@ -60,10 +60,10 @@ pub const EcsParameters = struct {
     /// `TagResource`
     /// ](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html)
     /// API action.
-    propagate_tags: ?PropagateTags,
+    propagate_tags: ?PropagateTags = null,
 
     /// The reference ID to use for the task.
-    reference_id: ?[]const u8,
+    reference_id: ?[]const u8 = null,
 
     /// The metadata that you apply to the task to help you categorize and organize
     /// them. Each tag consists of a key and an optional value, both of which you
@@ -71,10 +71,10 @@ pub const EcsParameters = struct {
     /// For more information, see [
     /// `RunTask`
     /// ](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html) in the *Amazon ECS API Reference*.
-    tags: ?[]const []const aws.map.StringMapEntry,
+    tags: ?[]const []const aws.map.StringMapEntry = null,
 
     /// The number of tasks to create based on `TaskDefinition`. The default is `1`.
-    task_count: ?i32,
+    task_count: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the task definition to use if the event
     /// target is an Amazon ECS task.

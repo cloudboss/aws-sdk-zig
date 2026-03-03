@@ -13,7 +13,7 @@ pub const StackSetOperation = struct {
     /// are associated with the specified StackSet. Update operations affect both
     /// the StackSet itself, in
     /// addition to *all* associated stack instances.
-    action: ?StackSetOperationAction,
+    action: ?StackSetOperationAction = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role used to perform this StackSet
     /// operation.
@@ -23,7 +23,7 @@ pub const StackSetOperation = struct {
     /// StackSets within the same administrator account. For more information, see
     /// [Grant self-managed
     /// permissions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html) in the *CloudFormation User Guide*.
-    administration_role_arn: ?[]const u8,
+    administration_role_arn: ?[]const u8 = null,
 
     /// The time at which the operation was initiated. Note that the creation times
     /// for the stack
@@ -32,32 +32,32 @@ pub const StackSetOperation = struct {
     /// because CloudFormation needs to perform preparatory work for the operation,
     /// such as dispatching the
     /// work to the requested Regions, before actually creating the first stacks.
-    creation_timestamp: ?i64,
+    creation_timestamp: ?i64 = null,
 
     /// The Organizations accounts affected by the stack operation. Valid only if
     /// the
     /// StackSet uses service-managed permissions.
-    deployment_targets: ?DeploymentTargets,
+    deployment_targets: ?DeploymentTargets = null,
 
     /// The time at which the StackSet operation ended, across all accounts and
     /// Regions specified.
     /// Note that this doesn't necessarily mean that the StackSet operation was
     /// successful, or even
     /// attempted, in each account or Region.
-    end_timestamp: ?i64,
+    end_timestamp: ?i64 = null,
 
     /// The name of the IAM execution role used to create or update the StackSet.
     ///
     /// Use customized execution roles to control which stack resources users and
     /// groups can include
     /// in their StackSets.
-    execution_role_name: ?[]const u8,
+    execution_role_name: ?[]const u8 = null,
 
     /// The unique ID of a StackSet operation.
-    operation_id: ?[]const u8,
+    operation_id: ?[]const u8 = null,
 
     /// The preferences for how CloudFormation performs this StackSet operation.
-    operation_preferences: ?StackSetOperationPreferences,
+    operation_preferences: ?StackSetOperationPreferences = null,
 
     /// For StackSet operations of action type `DELETE`, specifies whether to remove
     /// the
@@ -65,7 +65,7 @@ pub const StackSetOperation = struct {
     /// You can't
     /// re-associate a retained stack, or add an existing, saved stack to a new
     /// StackSet.
-    retain_stacks: ?bool,
+    retain_stacks: ?bool = null,
 
     /// Detailed information about the drift status of the StackSet. This includes
     /// information about
@@ -78,10 +78,10 @@ pub const StackSetOperation = struct {
     /// For more information, see [Performing drift detection on
     /// CloudFormation
     /// StackSets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html) in the *CloudFormation User Guide*.
-    stack_set_drift_detection_details: ?StackSetDriftDetectionDetails,
+    stack_set_drift_detection_details: ?StackSetDriftDetectionDetails = null,
 
     /// The ID of the StackSet.
-    stack_set_id: ?[]const u8,
+    stack_set_id: ?[]const u8 = null,
 
     /// The status of the operation.
     ///
@@ -114,11 +114,11 @@ pub const StackSetOperation = struct {
     /// * `SUCCEEDED`: The operation completed creating or updating all the
     ///   specified
     /// stacks without exceeding the failure tolerance for the operation.
-    status: ?StackSetOperationStatus,
+    status: ?StackSetOperationStatus = null,
 
     /// Detailed information about the StackSet operation.
-    status_details: ?StackSetOperationStatusDetails,
+    status_details: ?StackSetOperationStatusDetails = null,
 
     /// The status of the operation in details.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 };

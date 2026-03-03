@@ -15,7 +15,7 @@ pub const S3SetObjectRetentionOperation = struct {
     /// Indicates if the action should be applied to objects in the Batch Operations
     /// job even if they
     /// have Object Lock ` GOVERNANCE` type in place.
-    bypass_governance_retention: ?bool,
+    bypass_governance_retention: ?bool = null,
 
     /// Contains the Object Lock retention mode to be applied to all objects in the
     /// Batch Operations

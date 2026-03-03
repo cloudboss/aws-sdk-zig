@@ -15,37 +15,37 @@ pub const MLModel = struct {
     ///
     /// * `SGD` -- Stochastic gradient descent. The goal of `SGD` is to minimize the
     ///   gradient of the loss function.
-    algorithm: ?Algorithm,
+    algorithm: ?Algorithm = null,
 
-    compute_time: ?i64,
+    compute_time: ?i64 = null,
 
     /// The time that the `MLModel` was created. The time is expressed in epoch
     /// time.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The AWS user account from which the `MLModel` was created. The account type
     /// can be either an AWS root account or an AWS Identity and Access Management
     /// (IAM) user account.
-    created_by_iam_user: ?[]const u8,
+    created_by_iam_user: ?[]const u8 = null,
 
     /// The current endpoint of the `MLModel`.
-    endpoint_info: ?RealtimeEndpointInfo,
+    endpoint_info: ?RealtimeEndpointInfo = null,
 
-    finished_at: ?i64,
+    finished_at: ?i64 = null,
 
     /// The location of the data file or directory in Amazon Simple Storage Service
     /// (Amazon S3).
-    input_data_location_s3: ?[]const u8,
+    input_data_location_s3: ?[]const u8 = null,
 
     /// The time of the most recent edit to the `MLModel`. The time is expressed in
     /// epoch time.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// A description of the most recent details about accessing the `MLModel`.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The ID assigned to the `MLModel` at creation.
-    ml_model_id: ?[]const u8,
+    ml_model_id: ?[]const u8 = null,
 
     /// Identifies the `MLModel` category. The following are the available types:
     ///
@@ -58,20 +58,20 @@ pub const MLModel = struct {
     ///
     /// * `MULTICLASS` - Produces one of several possible results. For example, "Is
     /// this a HIGH-, LOW-, or MEDIUM-risk trade?".
-    ml_model_type: ?MLModelType,
+    ml_model_type: ?MLModelType = null,
 
     /// A user-supplied name or description of the `MLModel`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    score_threshold: ?f32,
+    score_threshold: ?f32 = null,
 
     /// The time of the most recent edit to the `ScoreThreshold`. The time is
     /// expressed in epoch time.
-    score_threshold_last_updated_at: ?i64,
+    score_threshold_last_updated_at: ?i64 = null,
 
-    size_in_bytes: ?i64,
+    size_in_bytes: ?i64 = null,
 
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The current status of an `MLModel`. This element can have one of the
     /// following values:
@@ -88,11 +88,11 @@ pub const MLModel = struct {
     ///
     /// * `DELETED` - The `MLModel` is marked as deleted. It isn't
     /// usable.
-    status: ?EntityStatus,
+    status: ?EntityStatus = null,
 
     /// The ID of the training `DataSource`. The `CreateMLModel` operation uses the
     /// `TrainingDataSourceId`.
-    training_data_source_id: ?[]const u8,
+    training_data_source_id: ?[]const u8 = null,
 
     /// A list of the training parameters in the `MLModel`. The list is implemented
     /// as
@@ -142,7 +142,7 @@ pub const MLModel = struct {
     /// The default is to not use L2 normalization. This parameter can't be used
     /// when
     /// `L1` is specified. Use this parameter sparingly.
-    training_parameters: ?[]const aws.map.StringMapEntry,
+    training_parameters: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .algorithm = "Algorithm",

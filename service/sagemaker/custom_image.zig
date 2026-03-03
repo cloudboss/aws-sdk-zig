@@ -9,7 +9,7 @@ pub const CustomImage = struct {
     image_name: []const u8,
 
     /// The version number of the CustomImage.
-    image_version_number: ?i32,
+    image_version_number: ?i32 = null,
 
     pub const json_field_names = .{
         .app_image_config_name = "AppImageConfigName",

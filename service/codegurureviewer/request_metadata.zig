@@ -6,16 +6,16 @@ const VendorName = @import("vendor_name.zig").VendorName;
 /// repository analysis code reviews.
 pub const RequestMetadata = struct {
     /// Information about the event associated with a code review.
-    event_info: ?EventInfo,
+    event_info: ?EventInfo = null,
 
     /// An identifier, such as a name or account ID, that is associated with the
     /// requester. The
     /// `Requester` is used to capture the `author/actor` name of the
     /// event request.
-    requester: ?[]const u8,
+    requester: ?[]const u8 = null,
 
     /// The ID of the request. This is required for a pull request code review.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// The name of the repository vendor used to upload code to an S3 bucket for a
     /// CI/CD code
@@ -26,7 +26,7 @@ pub const RequestMetadata = struct {
     /// `ProviderType` is `S3Bucket` and the CI/CD repository vendor name
     /// is GitHub. For more information, see the definition for `ProviderType` in
     /// [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html).
-    vendor_name: ?VendorName,
+    vendor_name: ?VendorName = null,
 
     pub const json_field_names = .{
         .event_info = "EventInfo",

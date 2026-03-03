@@ -6,11 +6,11 @@ pub const ConnectionPropertiesConfiguration = struct {
     /// Key-value pairs of additional request parameters that may be needed during
     /// connection creation, such as API versions or service-specific configuration
     /// options.
-    additional_request_parameters: ?[]const ConnectorProperty,
+    additional_request_parameters: ?[]const ConnectorProperty = null,
 
     /// The base instance URL for the endpoint that this connection type will
     /// connect to.
-    url: ?ConnectorProperty,
+    url: ?ConnectorProperty = null,
 
     pub const json_field_names = .{
         .additional_request_parameters = "AdditionalRequestParameters",

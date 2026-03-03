@@ -4,7 +4,7 @@ const ReportStatusType = @import("report_status_type.zig").ReportStatusType;
 /// `status` parameter.
 pub const ReportFilter = struct {
     /// The status used to filter reports. You can filter using one status only.
-    status: ?ReportStatusType,
+    status: ?ReportStatusType = null,
 
     pub const json_field_names = .{
         .status = "status",

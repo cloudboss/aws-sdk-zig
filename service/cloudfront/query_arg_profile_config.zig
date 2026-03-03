@@ -9,5 +9,5 @@ pub const QueryArgProfileConfig = struct {
 
     /// Profiles specified for query argument-profile mapping for field-level
     /// encryption.
-    query_arg_profiles: ?QueryArgProfiles,
+    query_arg_profiles: ?QueryArgProfiles = null,
 };

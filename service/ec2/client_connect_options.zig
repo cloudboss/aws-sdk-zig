@@ -3,9 +3,9 @@
 pub const ClientConnectOptions = struct {
     /// Indicates whether client connect options are enabled. The default is `false`
     /// (not enabled).
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the Lambda function used for connection
     /// authorization.
-    lambda_function_arn: ?[]const u8,
+    lambda_function_arn: ?[]const u8 = null,
 };

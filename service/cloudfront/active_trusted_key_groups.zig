@@ -11,7 +11,7 @@ pub const ActiveTrustedKeyGroups = struct {
     /// A list of key groups, including the identifiers of the public keys in each
     /// key group that CloudFront can use to verify the signatures of signed URLs
     /// and signed cookies.
-    items: ?[]const KGKeyPairIds,
+    items: ?[]const KGKeyPairIds = null,
 
     /// The number of key groups in the list.
     quantity: i32,

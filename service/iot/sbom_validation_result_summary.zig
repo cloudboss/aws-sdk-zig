@@ -6,17 +6,17 @@ const SbomValidationResult = @import("sbom_validation_result.zig").SbomValidatio
 pub const SbomValidationResultSummary = struct {
     /// The `errorCode` representing the validation failure error if the SBOM
     /// validation failed.
-    error_code: ?SbomValidationErrorCode,
+    error_code: ?SbomValidationErrorCode = null,
 
     /// The `errorMessage` representing the validation failure error if the SBOM
     /// validation failed.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The name of the SBOM file.
-    file_name: ?[]const u8,
+    file_name: ?[]const u8 = null,
 
     /// The end result of the SBOM validation.
-    validation_result: ?SbomValidationResult,
+    validation_result: ?SbomValidationResult = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

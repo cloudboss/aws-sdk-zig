@@ -1,7 +1,7 @@
 /// Provides information about the Explainability resource.
 pub const ExplainabilityInfo = struct {
     /// The Amazon Resource Name (ARN) of the Explainability.
-    explainability_arn: ?[]const u8,
+    explainability_arn: ?[]const u8 = null,
 
     /// The status of the Explainability. States include:
     ///
@@ -14,7 +14,7 @@ pub const ExplainabilityInfo = struct {
     ///
     /// * `DELETE_PENDING`, `DELETE_IN_PROGRESS`,
     /// `DELETE_FAILED`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .explainability_arn = "ExplainabilityArn",

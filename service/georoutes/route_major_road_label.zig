@@ -5,10 +5,10 @@ const RouteNumber = @import("route_number.zig").RouteNumber;
 /// current route from the alternatives presented.
 pub const RouteMajorRoadLabel = struct {
     /// Name of the road (localized).
-    road_name: ?LocalizedString,
+    road_name: ?LocalizedString = null,
 
     /// Route number of the road.
-    route_number: ?RouteNumber,
+    route_number: ?RouteNumber = null,
 
     pub const json_field_names = .{
         .road_name = "RoadName",

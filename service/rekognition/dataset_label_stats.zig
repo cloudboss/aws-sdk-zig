@@ -2,10 +2,10 @@
 /// DatasetLabelDescription.
 pub const DatasetLabelStats = struct {
     /// The total number of images that have the label assigned to a bounding box.
-    bounding_box_count: ?i32,
+    bounding_box_count: ?i32 = null,
 
     /// The total number of images that use the label.
-    entry_count: ?i32,
+    entry_count: ?i32 = null,
 
     pub const json_field_names = .{
         .bounding_box_count = "BoundingBoxCount",

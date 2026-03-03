@@ -5,10 +5,10 @@ const DecalSettings = @import("decal_settings.zig").DecalSettings;
 /// `BarChartVisual`.
 pub const BarChartDefaultSeriesSettings = struct {
     /// Border settings for all bar series in the visual.
-    border_settings: ?BorderSettings,
+    border_settings: ?BorderSettings = null,
 
     /// Decal settings for all bar series in the visual.
-    decal_settings: ?DecalSettings,
+    decal_settings: ?DecalSettings = null,
 
     pub const json_field_names = .{
         .border_settings = "BorderSettings",

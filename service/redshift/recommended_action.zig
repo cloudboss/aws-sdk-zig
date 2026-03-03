@@ -3,15 +3,15 @@ const RecommendedActionType = @import("recommended_action_type.zig").Recommended
 /// The recommended action from the Amazon Redshift Advisor recommendation.
 pub const RecommendedAction = struct {
     /// The command to run.
-    command: ?[]const u8,
+    command: ?[]const u8 = null,
 
     /// The database name to perform the action on. Only applicable if the type of
     /// command is SQL.
-    database: ?[]const u8,
+    database: ?[]const u8 = null,
 
     /// The specific instruction about the command.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// The type of command.
-    @"type": ?RecommendedActionType,
+    @"type": ?RecommendedActionType = null,
 };

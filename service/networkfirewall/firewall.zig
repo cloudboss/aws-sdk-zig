@@ -28,7 +28,7 @@ pub const Firewall = struct {
     /// The Availability Zones where the firewall endpoints are created for a
     /// transit gateway-attached firewall. Each mapping specifies an Availability
     /// Zone where the firewall processes traffic.
-    availability_zone_mappings: ?[]const AvailabilityZoneMapping,
+    availability_zone_mappings: ?[]const AvailabilityZoneMapping = null,
 
     /// A flag indicating whether it is possible to delete the firewall. A setting
     /// of `TRUE` indicates
@@ -39,25 +39,25 @@ pub const Firewall = struct {
     delete_protection: bool = false,
 
     /// A description of the firewall.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// An optional setting indicating the specific traffic analysis types to enable
     /// on the firewall.
-    enabled_analysis_types: ?[]const EnabledAnalysisType,
+    enabled_analysis_types: ?[]const EnabledAnalysisType = null,
 
     /// A complex type that contains the Amazon Web Services KMS encryption
     /// configuration settings for your firewall.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the firewall.
-    firewall_arn: ?[]const u8,
+    firewall_arn: ?[]const u8 = null,
 
     /// The unique identifier for the firewall.
     firewall_id: []const u8,
 
     /// The descriptive name of the firewall. You can't change the name of a
     /// firewall after you create it.
-    firewall_name: ?[]const u8,
+    firewall_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the firewall policy.
     ///
@@ -77,7 +77,7 @@ pub const Firewall = struct {
     firewall_policy_change_protection: bool = false,
 
     /// The number of `VpcEndpointAssociation` resources that use this firewall.
-    number_of_associations: ?i32,
+    number_of_associations: ?i32 = null,
 
     /// A setting indicating whether the firewall is protected against changes to
     /// the subnet associations.
@@ -104,16 +104,16 @@ pub const Firewall = struct {
     /// Availability Zone.
     subnet_mappings: []const SubnetMapping,
 
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The unique identifier of the transit gateway associated with this firewall.
     /// This field is only present for transit gateway-attached firewalls.
-    transit_gateway_id: ?[]const u8,
+    transit_gateway_id: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID that owns the transit gateway. This may
     /// be different from the firewall owner's account ID when using a shared
     /// transit gateway.
-    transit_gateway_owner_account_id: ?[]const u8,
+    transit_gateway_owner_account_id: ?[]const u8 = null,
 
     /// The unique identifier of the VPC where the firewall is in use.
     vpc_id: []const u8,

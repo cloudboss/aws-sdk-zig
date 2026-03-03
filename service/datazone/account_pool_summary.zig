@@ -3,25 +3,25 @@ const ResolutionStrategy = @import("resolution_strategy.zig").ResolutionStrategy
 /// The summary of the account pool.
 pub const AccountPoolSummary = struct {
     /// The user who created the account pool.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The ID of the domain.
-    domain_id: ?[]const u8,
+    domain_id: ?[]const u8 = null,
 
     /// The ID of the domain unit.
-    domain_unit_id: ?[]const u8,
+    domain_unit_id: ?[]const u8 = null,
 
     /// The ID of the account pool.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the account pool.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The mechanism used to resolve the account selection from the account pool.
-    resolution_strategy: ?ResolutionStrategy,
+    resolution_strategy: ?ResolutionStrategy = null,
 
     /// The user who updated the account pool.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_by = "createdBy",

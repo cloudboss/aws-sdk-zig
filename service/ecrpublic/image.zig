@@ -4,20 +4,20 @@ const ImageIdentifier = @import("image_identifier.zig").ImageIdentifier;
 pub const Image = struct {
     /// An object that contains the image tag and image digest associated with an
     /// image.
-    image_id: ?ImageIdentifier,
+    image_id: ?ImageIdentifier = null,
 
     /// The image manifest that's associated with the image.
-    image_manifest: ?[]const u8,
+    image_manifest: ?[]const u8 = null,
 
     /// The manifest media type of the image.
-    image_manifest_media_type: ?[]const u8,
+    image_manifest_media_type: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID that's associated with the registry
     /// containing the image.
-    registry_id: ?[]const u8,
+    registry_id: ?[]const u8 = null,
 
     /// The name of the repository that's associated with the image.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .image_id = "imageId",

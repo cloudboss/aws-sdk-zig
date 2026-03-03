@@ -24,7 +24,7 @@ pub const AssistantAssociationSummary = struct {
     association_type: AssociationType,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .assistant_arn = "assistantArn",

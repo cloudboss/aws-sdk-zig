@@ -10,7 +10,7 @@ pub const CertificateSettings = struct {
     /// to Certificate Manager in your Amazon Web Services account.
     ///
     /// This field is required only when the certificate type is `CUSTOM`.
-    custom_certificate_arn: ?[]const u8,
+    custom_certificate_arn: ?[]const u8 = null,
 
     /// The certificate type.
     ///

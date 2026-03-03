@@ -11,7 +11,7 @@
 pub const AvailabilityZoneAddress = struct {
     /// The allocation IDs of the Elastic IP addresses (EIPs) to be used for
     /// handling outbound NAT traffic in this specific Availability Zone.
-    allocation_ids: ?[]const []const u8,
+    allocation_ids: ?[]const []const u8 = null,
 
     /// For regional NAT gateways only: The Availability Zone where this specific
     /// NAT gateway configuration will be active. Each AZ in a regional NAT gateway
@@ -20,7 +20,7 @@ pub const AvailabilityZoneAddress = struct {
     /// A regional NAT gateway is a single NAT Gateway that works across multiple
     /// availability zones (AZs) in your VPC, providing redundancy, scalability and
     /// availability across all the AZs in a Region.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// For regional NAT gateways only: The ID of the Availability Zone where this
     /// specific NAT gateway configuration will be active. Each AZ in a regional NAT
@@ -31,5 +31,5 @@ pub const AvailabilityZoneAddress = struct {
     /// A regional NAT gateway is a single NAT Gateway that works across multiple
     /// availability zones (AZs) in your VPC, providing redundancy, scalability and
     /// availability across all the AZs in a Region.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 };

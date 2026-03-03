@@ -4,10 +4,10 @@
 /// account.
 pub const AwsAccount = struct {
     /// The unique identifier for the Amazon Web Services account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The unique identifier for the entity that performed the action.
-    principal_id: ?[]const u8,
+    principal_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

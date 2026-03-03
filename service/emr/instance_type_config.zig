@@ -19,7 +19,7 @@ pub const InstanceTypeConfig = struct {
     /// `InstanceType`. Expressed in USD. If neither `BidPrice` nor
     /// `BidPriceAsPercentageOfOnDemandPrice` is provided,
     /// `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
-    bid_price: ?[]const u8,
+    bid_price: ?[]const u8 = null,
 
     /// The bid price, as a percentage of On-Demand price, for each Amazon EC2 Spot
     /// Instance as defined by `InstanceType`. Expressed as a number (for example,
@@ -27,21 +27,21 @@ pub const InstanceTypeConfig = struct {
     /// specifies 20%). If neither `BidPrice` nor
     /// `BidPriceAsPercentageOfOnDemandPrice` is provided,
     /// `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
-    bid_price_as_percentage_of_on_demand_price: ?f64,
+    bid_price_as_percentage_of_on_demand_price: ?f64 = null,
 
     /// A configuration classification that applies when provisioning cluster
     /// instances, which
     /// can include configurations for applications and software that run on the
     /// cluster.
-    configurations: ?[]const Configuration,
+    configurations: ?[]const Configuration = null,
 
     /// The custom AMI ID to use for the instance type.
-    custom_ami_id: ?[]const u8,
+    custom_ami_id: ?[]const u8 = null,
 
     /// The configuration of Amazon Elastic Block Store (Amazon EBS) attached to
     /// each
     /// instance as defined by `InstanceType`.
-    ebs_configuration: ?EbsConfiguration,
+    ebs_configuration: ?EbsConfiguration = null,
 
     /// An Amazon EC2 instance type, such as `m3.xlarge`.
     instance_type: []const u8,
@@ -50,7 +50,7 @@ pub const InstanceTypeConfig = struct {
     /// instance type.
     /// Priority starts at 0, which is the highest priority. Amazon EMR considers
     /// the highest priority first.
-    priority: ?f64,
+    priority: ?f64 = null,
 
     /// The number of units that a provisioned instance of this type provides toward
     /// fulfilling
@@ -58,7 +58,7 @@ pub const InstanceTypeConfig = struct {
     /// a master instance fleet, and must be 1 or greater for core and task instance
     /// fleets.
     /// Defaults to 1 if not specified.
-    weighted_capacity: ?i32,
+    weighted_capacity: ?i32 = null,
 
     pub const json_field_names = .{
         .bid_price = "BidPrice",

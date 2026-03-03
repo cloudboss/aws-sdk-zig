@@ -10,7 +10,7 @@ pub const MetadataConfigurationForReranking = struct {
 
     /// Contains configurations for the metadata fields to include or exclude when
     /// considering reranking.
-    selective_mode_configuration: ?RerankingMetadataSelectiveModeConfiguration,
+    selective_mode_configuration: ?RerankingMetadataSelectiveModeConfiguration = null,
 
     pub const json_field_names = .{
         .selection_mode = "selectionMode",

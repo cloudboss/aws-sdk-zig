@@ -4,11 +4,11 @@ const ParsedQueryComponent = @import("parsed_query_component.zig").ParsedQueryCo
 /// Parsed components in the provided QueryText.
 pub const GeocodeParsedQuery = struct {
     /// The place address.
-    address: ?GeocodeParsedQueryAddressComponents,
+    address: ?GeocodeParsedQueryAddressComponents = null,
 
     /// The localized display name of this result item based on request parameter
     /// `language`.
-    title: ?[]const ParsedQueryComponent,
+    title: ?[]const ParsedQueryComponent = null,
 
     pub const json_field_names = .{
         .address = "Address",

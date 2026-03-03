@@ -16,11 +16,11 @@ pub const NetworkInterface = struct {
     /// Information about a network interface specified by the Controller Area
     /// Network (CAN)
     /// protocol.
-    can_interface: ?CanInterface,
+    can_interface: ?CanInterface = null,
 
     /// Information about a [custom network
     /// interface](https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CustomDecodingInterface.html).
-    custom_decoding_interface: ?CustomDecodingInterface,
+    custom_decoding_interface: ?CustomDecodingInterface = null,
 
     /// The ID of the network interface.
     interface_id: []const u8,
@@ -28,7 +28,7 @@ pub const NetworkInterface = struct {
     /// Information about a network interface specified by the on-board diagnostic
     /// (OBD) II
     /// protocol.
-    obd_interface: ?ObdInterface,
+    obd_interface: ?ObdInterface = null,
 
     /// The network protocol for the vehicle. For example, `CAN_SIGNAL` specifies a
     /// protocol that defines how data is communicated between electronic control
@@ -40,7 +40,7 @@ pub const NetworkInterface = struct {
     /// The vehicle middleware defined as a type of network interface. Examples of
     /// vehicle
     /// middleware include `ROS2` and `SOME/IP`.
-    vehicle_middleware: ?VehicleMiddleware,
+    vehicle_middleware: ?VehicleMiddleware = null,
 
     pub const json_field_names = .{
         .can_interface = "canInterface",

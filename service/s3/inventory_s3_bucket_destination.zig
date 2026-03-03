@@ -12,7 +12,7 @@ pub const InventoryS3BucketDestination = struct {
     /// Although this value is optional, we strongly recommend that you set it to
     /// help prevent problems
     /// if the destination bucket ownership changes.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the bucket where inventory results will be
     /// published.
@@ -20,11 +20,11 @@ pub const InventoryS3BucketDestination = struct {
 
     /// Contains the type of server-side encryption used to encrypt the inventory
     /// results.
-    encryption: ?InventoryEncryption,
+    encryption: ?InventoryEncryption = null,
 
     /// Specifies the output format of the inventory results.
     format: InventoryFormat,
 
     /// The prefix that is prepended to all inventory results.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 };

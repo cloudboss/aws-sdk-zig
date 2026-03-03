@@ -3,5 +3,5 @@ const ModifyVerifiedAccessEndpointPortRange = @import("modify_verified_access_en
 /// The CIDR options for a Verified Access endpoint.
 pub const ModifyVerifiedAccessEndpointCidrOptions = struct {
     /// The port ranges.
-    port_ranges: ?[]const ModifyVerifiedAccessEndpointPortRange,
+    port_ranges: ?[]const ModifyVerifiedAccessEndpointPortRange = null,
 };

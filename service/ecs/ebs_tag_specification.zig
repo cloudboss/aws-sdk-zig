@@ -8,14 +8,14 @@ pub const EBSTagSpecification = struct {
     /// Amazon EBS volume. Tags can only propagate to a `SERVICE` specified in
     /// `ServiceVolumeConfiguration`. If no value is specified, the tags
     /// aren't  propagated.
-    propagate_tags: ?PropagateTags,
+    propagate_tags: ?PropagateTags = null,
 
     /// The type of volume resource.
     resource_type: EBSResourceType,
 
     /// The tags applied to this Amazon EBS volume. `AmazonECSCreated` and
     /// `AmazonECSManaged` are reserved tags that can't be used.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .propagate_tags = "propagateTags",

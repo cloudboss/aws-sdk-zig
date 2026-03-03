@@ -3,7 +3,7 @@ const GuardrailContentQualifier = @import("guardrail_content_qualifier.zig").Gua
 /// The text block to be evaluated by the guardrail.
 pub const GuardrailTextBlock = struct {
     /// The qualifiers describing the text block.
-    qualifiers: ?[]const GuardrailContentQualifier,
+    qualifiers: ?[]const GuardrailContentQualifier = null,
 
     /// The input text details to be evaluated by the guardrail.
     text: []const u8,

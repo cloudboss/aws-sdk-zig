@@ -1,10 +1,10 @@
 /// The rule results.
 pub const RuleResult = struct {
     /// The outcomes of the matched rule, based on the rule execution mode.
-    outcomes: ?[]const []const u8,
+    outcomes: ?[]const []const u8 = null,
 
     /// The rule ID that was matched, based on the rule execution mode.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .outcomes = "outcomes",

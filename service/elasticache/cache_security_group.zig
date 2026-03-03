@@ -9,19 +9,19 @@ const EC2SecurityGroup = @import("ec2_security_group.zig").EC2SecurityGroup;
 /// * `RevokeCacheSecurityGroupIngress`
 pub const CacheSecurityGroup = struct {
     /// The ARN of the cache security group,
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the cache security group.
-    cache_security_group_name: ?[]const u8,
+    cache_security_group_name: ?[]const u8 = null,
 
     /// The description of the cache security group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A list of Amazon EC2 security groups that are associated with this cache
     /// security
     /// group.
-    ec2_security_groups: ?[]const EC2SecurityGroup,
+    ec2_security_groups: ?[]const EC2SecurityGroup = null,
 
     /// The Amazon account ID of the cache security group owner.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 };

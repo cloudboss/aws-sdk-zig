@@ -8,16 +8,16 @@ pub const FlinkApplicationConfigurationUpdate = struct {
     /// Describes updates to an application's checkpointing configuration.
     /// Checkpointing is the process of persisting
     /// application state for fault tolerance.
-    checkpoint_configuration_update: ?CheckpointConfigurationUpdate,
+    checkpoint_configuration_update: ?CheckpointConfigurationUpdate = null,
 
     /// Describes updates to the configuration parameters for Amazon CloudWatch
     /// logging for an
     /// application.
-    monitoring_configuration_update: ?MonitoringConfigurationUpdate,
+    monitoring_configuration_update: ?MonitoringConfigurationUpdate = null,
 
     /// Describes updates to the parameters for how an application executes multiple
     /// tasks simultaneously.
-    parallelism_configuration_update: ?ParallelismConfigurationUpdate,
+    parallelism_configuration_update: ?ParallelismConfigurationUpdate = null,
 
     pub const json_field_names = .{
         .checkpoint_configuration_update = "CheckpointConfigurationUpdate",

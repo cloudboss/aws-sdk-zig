@@ -3,16 +3,16 @@ const TopicRefreshSchedule = @import("topic_refresh_schedule.zig").TopicRefreshS
 /// A summary of the refresh schedule details for a dataset.
 pub const TopicRefreshScheduleSummary = struct {
     /// The Amazon Resource Name (ARN) of the dataset.
-    dataset_arn: ?[]const u8,
+    dataset_arn: ?[]const u8 = null,
 
     /// The ID of the dataset.
-    dataset_id: ?[]const u8,
+    dataset_id: ?[]const u8 = null,
 
     /// The name of the dataset.
-    dataset_name: ?[]const u8,
+    dataset_name: ?[]const u8 = null,
 
     /// The definition of a refresh schedule.
-    refresh_schedule: ?TopicRefreshSchedule,
+    refresh_schedule: ?TopicRefreshSchedule = null,
 
     pub const json_field_names = .{
         .dataset_arn = "DatasetArn",

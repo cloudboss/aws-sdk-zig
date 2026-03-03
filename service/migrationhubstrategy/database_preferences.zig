@@ -6,10 +6,10 @@ pub const DatabasePreferences = struct {
     /// Specifies whether you're interested in self-managed databases or databases
     /// managed by
     /// AWS.
-    database_management_preference: ?DatabaseManagementPreference,
+    database_management_preference: ?DatabaseManagementPreference = null,
 
     /// Specifies your preferred migration path.
-    database_migration_preference: ?DatabaseMigrationPreference,
+    database_migration_preference: ?DatabaseMigrationPreference = null,
 
     pub const json_field_names = .{
         .database_management_preference = "databaseManagementPreference",

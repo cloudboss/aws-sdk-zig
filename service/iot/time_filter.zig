@@ -5,11 +5,11 @@ pub const TimeFilter = struct {
     /// Filter to display command executions that started or completed only after a
     /// particular
     /// date and time.
-    after: ?[]const u8,
+    after: ?[]const u8 = null,
 
     /// Filter to display command executions that started or completed only before a
     /// particular date and time.
-    before: ?[]const u8,
+    before: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .after = "after",

@@ -5,7 +5,7 @@ pub const VpcAttachmentOptions = struct {
 
     /// The CIDR block to be reserved for OpenSearch Ingestion to create elastic
     /// network interfaces (ENIs).
-    cidr_block: ?[]const u8,
+    cidr_block: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attach_to_vpc = "AttachToVpc",

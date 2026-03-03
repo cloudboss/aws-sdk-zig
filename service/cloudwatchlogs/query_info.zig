@@ -6,27 +6,27 @@ const QueryStatus = @import("query_status.zig").QueryStatus;
 /// `DescribeQueries` operation.
 pub const QueryInfo = struct {
     /// The date and time that this query was created.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The name of the log group scanned by this query.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     /// The unique ID number of this query.
-    query_id: ?[]const u8,
+    query_id: ?[]const u8 = null,
 
     /// The query language used for this query. For more information about the query
     /// languages
     /// that CloudWatch Logs supports, see [Supported query
     /// languages](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html).
-    query_language: ?QueryLanguage,
+    query_language: ?QueryLanguage = null,
 
     /// The query string used in this query.
-    query_string: ?[]const u8,
+    query_string: ?[]const u8 = null,
 
     /// The status of this query. Possible values are `Cancelled`,
     /// `Complete`, `Failed`, `Running`, `Scheduled`,
     /// and `Unknown`.
-    status: ?QueryStatus,
+    status: ?QueryStatus = null,
 
     pub const json_field_names = .{
         .create_time = "createTime",

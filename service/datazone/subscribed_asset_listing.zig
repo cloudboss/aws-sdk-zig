@@ -6,29 +6,29 @@ const Permissions = @import("permissions.zig").Permissions;
 /// created.
 pub const SubscribedAssetListing = struct {
     /// The asset scope of the subscribed asset listing.
-    asset_scope: ?AssetScope,
+    asset_scope: ?AssetScope = null,
 
     /// The identifier of the published asset for which the subscription grant is
     /// created.
-    entity_id: ?[]const u8,
+    entity_id: ?[]const u8 = null,
 
     /// The revision of the published asset for which the subscription grant is
     /// created.
-    entity_revision: ?[]const u8,
+    entity_revision: ?[]const u8 = null,
 
     /// The type of the published asset for which the subscription grant is created.
-    entity_type: ?[]const u8,
+    entity_type: ?[]const u8 = null,
 
     /// The forms attached to the published asset for which the subscription grant
     /// is created.
-    forms: ?[]const u8,
+    forms: ?[]const u8 = null,
 
     /// The glossary terms attached to the published asset for which the
     /// subscription grant is created.
-    glossary_terms: ?[]const DetailedGlossaryTerm,
+    glossary_terms: ?[]const DetailedGlossaryTerm = null,
 
     /// The asset permissions.
-    permissions: ?Permissions,
+    permissions: ?Permissions = null,
 
     pub const json_field_names = .{
         .asset_scope = "assetScope",

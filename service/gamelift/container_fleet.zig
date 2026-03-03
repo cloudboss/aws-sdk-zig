@@ -17,18 +17,18 @@ pub const ContainerFleet = struct {
     /// property.
     ///
     /// By default, this property is set to `ON_DEMAND`.
-    billing_type: ?ContainerFleetBillingType,
+    billing_type: ?ContainerFleetBillingType = null,
 
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Information about the most recent deployment for the container fleet.
-    deployment_details: ?DeploymentDetails,
+    deployment_details: ?DeploymentDetails = null,
 
     /// A meaningful description of the container fleet.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
@@ -37,47 +37,47 @@ pub const ContainerFleet = struct {
     /// `arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`. In a
     /// GameLift fleet ARN, the resource ID matches the `FleetId`
     /// value.
-    fleet_arn: ?[]const u8,
+    fleet_arn: ?[]const u8 = null,
 
     /// A unique identifier for the container fleet to retrieve.
-    fleet_id: ?[]const u8,
+    fleet_id: ?[]const u8 = null,
 
     /// The unique identifier for an Identity and Access Management (IAM) role with
     /// permissions to run your
     /// containers on resources that are managed by Amazon GameLift Servers. See
     /// [Set up an IAM service
     /// role](https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html). This fleet property can't be changed.
-    fleet_role_arn: ?[]const u8,
+    fleet_role_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
     /// that is assigned to the fleet's game server container group. The ARN value
     /// also identifies the specific container group definition version in use.
-    game_server_container_group_definition_arn: ?[]const u8,
+    game_server_container_group_definition_arn: ?[]const u8 = null,
 
     /// The name of the fleet's game server container group definition, which
     /// describes how to
     /// deploy containers with your game server build and support software onto each
     /// fleet
     /// instance.
-    game_server_container_group_definition_name: ?[]const u8,
+    game_server_container_group_definition_name: ?[]const u8 = null,
 
     /// The number of times to replicate the game server container group on each
     /// fleet
     /// instance.
-    game_server_container_groups_per_instance: ?i32,
+    game_server_container_groups_per_instance: ?i32 = null,
 
     /// A policy that limits the number of game sessions that each individual player
     /// can create
     /// on instances in this fleet. The limit applies for a specified span of time.
-    game_session_creation_limit_policy: ?GameSessionCreationLimitPolicy,
+    game_session_creation_limit_policy: ?GameSessionCreationLimitPolicy = null,
 
-    instance_connection_port_range: ?ConnectionPortRange,
+    instance_connection_port_range: ?ConnectionPortRange = null,
 
     /// The IP address ranges and port settings that allow inbound traffic to access
     /// game
     /// server processes and other processes on this fleet.
-    instance_inbound_permissions: ?[]const IpPermission,
+    instance_inbound_permissions: ?[]const IpPermission = null,
 
     /// The Amazon EC2 instance type to use for all instances in the fleet. Instance
     /// type
@@ -86,12 +86,12 @@ pub const ContainerFleet = struct {
     /// game servers. This includes including CPU, memory, storage, and networking
     /// capacity. You
     /// can't update this fleet property.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// Information about the container fleet's remote locations where fleet
     /// instances are
     /// deployed.
-    location_attributes: ?[]const ContainerFleetLocationAttributes,
+    location_attributes: ?[]const ContainerFleetLocationAttributes = null,
 
     /// The method that is used to collect container logs for the fleet. Amazon
     /// GameLift Servers saves all
@@ -104,19 +104,19 @@ pub const ContainerFleet = struct {
     /// * `S3` -- Store logs in an Amazon S3 bucket that you define.
     ///
     /// * `NONE` -- Don't collect container logs.
-    log_configuration: ?LogConfiguration,
+    log_configuration: ?LogConfiguration = null,
 
     /// The calculated maximum number of game server container group that can be
     /// deployed on
     /// each fleet instance. The calculation depends on the resource needs of the
     /// container
     /// group and the CPU and memory resources of the fleet's instance type.
-    maximum_game_server_container_groups_per_instance: ?i32,
+    maximum_game_server_container_groups_per_instance: ?i32 = null,
 
     /// The name of an Amazon Web Services CloudWatch metric group to add this fleet
     /// to. Metric groups
     /// aggregate metrics for multiple fleets.
-    metric_groups: ?[]const []const u8,
+    metric_groups: ?[]const []const u8 = null,
 
     /// Determines whether Amazon GameLift Servers can shut down game sessions on
     /// the fleet that are actively
@@ -132,16 +132,16 @@ pub const ContainerFleet = struct {
     ///
     /// * **FullProtection** -- Game sessions in
     /// `ACTIVE` status can't be shut down.
-    new_game_session_protection_policy: ?ProtectionPolicy,
+    new_game_session_protection_policy: ?ProtectionPolicy = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
     /// that is assigned to the fleet's per-instance container group. The ARN value
     /// also identifies the specific container group definition version in use.
-    per_instance_container_group_definition_arn: ?[]const u8,
+    per_instance_container_group_definition_arn: ?[]const u8 = null,
 
     /// The name of the fleet's per-instance container group definition.
-    per_instance_container_group_definition_name: ?[]const u8,
+    per_instance_container_group_definition_name: ?[]const u8 = null,
 
     /// The current status of the container fleet.
     ///
@@ -162,7 +162,7 @@ pub const ContainerFleet = struct {
     /// * `UPDATING` -- Updates to the container fleet is being updated. A
     ///   deployment is in
     /// progress.
-    status: ?ContainerFleetStatus,
+    status: ?ContainerFleetStatus = null,
 
     pub const json_field_names = .{
         .billing_type = "BillingType",

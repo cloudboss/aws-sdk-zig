@@ -16,7 +16,7 @@ pub const PolicyGrantingServiceAccess = struct {
     /// see [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html) in the
     /// *IAM User Guide*.
-    entity_name: ?[]const u8,
+    entity_name: ?[]const u8 = null,
 
     /// The type of entity (user or role) that used the policy to access the service
     /// to which
@@ -27,9 +27,9 @@ pub const PolicyGrantingServiceAccess = struct {
     /// see [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html) in the
     /// *IAM User Guide*.
-    entity_type: ?policyOwnerEntityType,
+    entity_type: ?policyOwnerEntityType = null,
 
-    policy_arn: ?[]const u8,
+    policy_arn: ?[]const u8 = null,
 
     /// The policy name.
     policy_name: []const u8,

@@ -7,7 +7,7 @@ const AssetState = @import("asset_state.zig").AssetState;
 /// states](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html) in the *IoT SiteWise User Guide*.
 pub const AssetStatus = struct {
     /// Contains associated error information, if any.
-    @"error": ?ErrorDetails,
+    @"error": ?ErrorDetails = null,
 
     /// The current status of the asset.
     state: AssetState,

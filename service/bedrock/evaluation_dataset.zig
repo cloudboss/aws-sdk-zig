@@ -5,7 +5,7 @@ const EvaluationDatasetLocation = @import("evaluation_dataset_location.zig").Eva
 pub const EvaluationDataset = struct {
     /// For custom prompt datasets, you must specify the location in Amazon S3 where
     /// the prompt dataset is saved.
-    dataset_location: ?EvaluationDatasetLocation,
+    dataset_location: ?EvaluationDatasetLocation = null,
 
     /// Used to specify supported built-in prompt datasets. Valid values are
     /// `Builtin.Bold`, `Builtin.BoolQ`, `Builtin.NaturalQuestions`,

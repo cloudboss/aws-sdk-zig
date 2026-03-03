@@ -22,7 +22,7 @@ pub const NumberAttributeBoostingConfiguration = struct {
     /// Specifies whether higher or lower numeric values should be prioritized when
     /// boosting. Valid values are ASCENDING (higher numbers are more important) and
     /// DESCENDING (lower numbers are more important).
-    boosting_type: ?NumberAttributeBoostingType,
+    boosting_type: ?NumberAttributeBoostingType = null,
 
     pub const json_field_names = .{
         .boosting_level = "boostingLevel",

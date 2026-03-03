@@ -27,10 +27,10 @@ pub const MaintenanceWindowLambdaParameters = struct {
     /// invoking. You can then process the client information in your Lambda
     /// function as you
     /// choose through the context variable.
-    client_context: ?[]const u8,
+    client_context: ?[]const u8 = null,
 
     /// JSON to provide to your Lambda function as input.
-    payload: ?[]const u8,
+    payload: ?[]const u8 = null,
 
     /// (Optional) Specify an Lambda function version or alias name. If you specify
     /// a
@@ -39,7 +39,7 @@ pub const MaintenanceWindowLambdaParameters = struct {
     /// a specific Lambda function. If you specify an alias name, the operation uses
     /// the
     /// alias ARN to invoke the Lambda function version to which the alias points.
-    qualifier: ?[]const u8,
+    qualifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_context = "ClientContext",

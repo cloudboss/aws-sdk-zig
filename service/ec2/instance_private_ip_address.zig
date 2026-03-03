@@ -4,16 +4,16 @@ const InstanceNetworkInterfaceAssociation = @import("instance_network_interface_
 pub const InstancePrivateIpAddress = struct {
     /// The association information for an Elastic IP address for the network
     /// interface.
-    association: ?InstanceNetworkInterfaceAssociation,
+    association: ?InstanceNetworkInterfaceAssociation = null,
 
     /// Indicates whether this IPv4 address is the primary private IP address of the
     /// network
     /// interface.
-    primary: ?bool,
+    primary: ?bool = null,
 
     /// The private IPv4 DNS name.
-    private_dns_name: ?[]const u8,
+    private_dns_name: ?[]const u8 = null,
 
     /// The private IPv4 address of the network interface.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 };

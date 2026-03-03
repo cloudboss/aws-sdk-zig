@@ -4,29 +4,29 @@ const StreamState = @import("stream_state.zig").StreamState;
 /// Specifies a live video stream that has been ingested and distributed.
 pub const Stream = struct {
     /// Channel ARN for the stream.
-    channel_arn: ?[]const u8,
+    channel_arn: ?[]const u8 = null,
 
     /// The stream’s health.
-    health: ?StreamHealth,
+    health: ?StreamHealth = null,
 
     /// URL of the master playlist, required by the video player to play the HLS
     /// stream.
-    playback_url: ?[]const u8,
+    playback_url: ?[]const u8 = null,
 
     /// Time of the stream’s start. This is an ISO 8601 timestamp; *note that this
     /// is
     /// returned as a string*.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The stream’s state. Do not rely on the `OFFLINE` state, as the API may not
     /// return it; instead, a "NotBroadcasting" error will indicate that the stream
     /// is not
     /// live.
-    state: ?StreamState,
+    state: ?StreamState = null,
 
     /// Unique identifier for a live or previously live stream in the specified
     /// channel.
-    stream_id: ?[]const u8,
+    stream_id: ?[]const u8 = null,
 
     /// A count of concurrent views of the stream. Typically, a new view appears in
     /// `viewerCount` within 15 seconds of when video playback starts and a view is

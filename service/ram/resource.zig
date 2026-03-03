@@ -5,20 +5,20 @@ const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 pub const Resource = struct {
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time when the resource was associated with the resource share.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The date an time when the association between the resource and the resource
     /// share was
     /// last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource group. This value is available only if the resource is
     /// part of a resource group.
-    resource_group_arn: ?[]const u8,
+    resource_group_arn: ?[]const u8 = null,
 
     /// Specifies the scope of visibility of this resource:
     ///
@@ -29,23 +29,23 @@ pub const Resource = struct {
     ///
     /// * **GLOBAL** – The resource can be accessed
     /// from any Amazon Web Services Region.
-    resource_region_scope: ?ResourceRegionScope,
+    resource_region_scope: ?ResourceRegionScope = null,
 
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share this resource is associated with.
-    resource_share_arn: ?[]const u8,
+    resource_share_arn: ?[]const u8 = null,
 
     /// The current status of the resource.
-    status: ?ResourceStatus,
+    status: ?ResourceStatus = null,
 
     /// A message about the status of the resource.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The resource type. This takes the form of:
     /// `service-code`:`resource-code`, and is case-insensitive. For
     /// example, an Amazon EC2 Subnet would be represented by the string
     /// `ec2:subnet`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

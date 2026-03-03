@@ -6,16 +6,16 @@ const RoutingRule = @import("routing_rule.zig").RoutingRule;
 /// Specifies website configuration parameters for an Amazon S3 bucket.
 pub const WebsiteConfiguration = struct {
     /// The name of the error document for the website.
-    error_document: ?ErrorDocument,
+    error_document: ?ErrorDocument = null,
 
     /// The name of the index document for the website.
-    index_document: ?IndexDocument,
+    index_document: ?IndexDocument = null,
 
     /// The redirect behavior for every request to this bucket's website endpoint.
     ///
     /// If you specify this property, you can't specify any other property.
-    redirect_all_requests_to: ?RedirectAllRequestsTo,
+    redirect_all_requests_to: ?RedirectAllRequestsTo = null,
 
     /// Rules that define when a redirect is applied and the redirect behavior.
-    routing_rules: ?[]const RoutingRule,
+    routing_rules: ?[]const RoutingRule = null,
 };

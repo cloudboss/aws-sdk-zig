@@ -4,19 +4,19 @@ const AgentHierarchyGroup = @import("agent_hierarchy_group.zig").AgentHierarchyG
 /// to five levels.
 pub const HierarchyGroups = struct {
     /// The group at level one of the agent hierarchy.
-    level_1: ?AgentHierarchyGroup,
+    level_1: ?AgentHierarchyGroup = null,
 
     /// The group at level two of the agent hierarchy.
-    level_2: ?AgentHierarchyGroup,
+    level_2: ?AgentHierarchyGroup = null,
 
     /// The group at level three of the agent hierarchy.
-    level_3: ?AgentHierarchyGroup,
+    level_3: ?AgentHierarchyGroup = null,
 
     /// The group at level four of the agent hierarchy.
-    level_4: ?AgentHierarchyGroup,
+    level_4: ?AgentHierarchyGroup = null,
 
     /// The group at level five of the agent hierarchy.
-    level_5: ?AgentHierarchyGroup,
+    level_5: ?AgentHierarchyGroup = null,
 
     pub const json_field_names = .{
         .level_1 = "Level1",

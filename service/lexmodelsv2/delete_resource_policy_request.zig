@@ -4,7 +4,7 @@ pub const DeleteResourcePolicyRequest = struct {
     ///
     /// If you don't specify a revision ID, Amazon Lex will delete the current
     /// policy.
-    expected_revision_id: ?[]const u8,
+    expected_revision_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the bot or bot alias that has the
     /// resource policy attached.

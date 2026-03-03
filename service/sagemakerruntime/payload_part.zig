@@ -5,7 +5,7 @@
 pub const PayloadPart = struct {
     /// A blob that contains part of the response for your streaming inference
     /// request.
-    bytes: ?[]const u8,
+    bytes: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bytes = "Bytes",

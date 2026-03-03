@@ -9,13 +9,13 @@ pub const GlobalAuroraConfiguration = struct {
     behavior: GlobalAuroraDefaultBehavior = "switchoverOnly",
 
     /// The cross account role for the configuration.
-    cross_account_role: ?[]const u8,
+    cross_account_role: ?[]const u8 = null,
 
     /// The database cluster Amazon Resource Names (ARNs) for a global database.
     database_cluster_arns: []const []const u8,
 
     /// The external ID (secret key) for the configuration.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The global cluster identifier for a global database.
     global_cluster_identifier: []const u8,
@@ -24,7 +24,7 @@ pub const GlobalAuroraConfiguration = struct {
     timeout_minutes: i32 = 60,
 
     /// The settings for ungraceful execution.
-    ungraceful: ?GlobalAuroraUngraceful,
+    ungraceful: ?GlobalAuroraUngraceful = null,
 
     pub const json_field_names = .{
         .behavior = "behavior",

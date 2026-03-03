@@ -3,24 +3,24 @@
 /// Amazon Resource Names (ARNs) and the last error message issued.
 pub const Connection = struct {
     /// The ARN string that uniquely identifies the endpoint.
-    endpoint_arn: ?[]const u8,
+    endpoint_arn: ?[]const u8 = null,
 
     /// The identifier of the endpoint. Identifiers must begin with a letter and
     /// must contain
     /// only ASCII letters, digits, and hyphens. They can't end with a hyphen or
     /// contain two
     /// consecutive hyphens.
-    endpoint_identifier: ?[]const u8,
+    endpoint_identifier: ?[]const u8 = null,
 
     /// The error message when the connection last failed.
-    last_failure_message: ?[]const u8,
+    last_failure_message: ?[]const u8 = null,
 
     /// The ARN of the replication instance.
-    replication_instance_arn: ?[]const u8,
+    replication_instance_arn: ?[]const u8 = null,
 
     /// The replication instance identifier. This parameter is stored as a lowercase
     /// string.
-    replication_instance_identifier: ?[]const u8,
+    replication_instance_identifier: ?[]const u8 = null,
 
     /// The connection status. This parameter can return one of the following
     /// values:
@@ -32,7 +32,7 @@ pub const Connection = struct {
     /// * `"failed"`
     ///
     /// * `"deleting"`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .endpoint_arn = "EndpointArn",

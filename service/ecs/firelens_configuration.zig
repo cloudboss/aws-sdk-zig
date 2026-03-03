@@ -23,7 +23,7 @@ pub const FirelensConfiguration = struct {
     ///
     /// Tasks hosted on Fargate only support the `file` configuration file
     /// type.
-    options: ?[]const aws.map.StringMapEntry,
+    options: ?[]const aws.map.StringMapEntry = null,
 
     /// The log router to use. The valid values are `fluentd` or
     /// `fluentbit`.

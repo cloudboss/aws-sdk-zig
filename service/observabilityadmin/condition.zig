@@ -5,10 +5,10 @@ const LabelNameCondition = @import("label_name_condition.zig").LabelNameConditio
 pub const Condition = struct {
     /// Matches log records based on the WAF rule action taken (ALLOW, BLOCK, COUNT,
     /// etc.).
-    action_condition: ?ActionCondition,
+    action_condition: ?ActionCondition = null,
 
     /// Matches log records based on WAF rule labels applied to the request.
-    label_name_condition: ?LabelNameCondition,
+    label_name_condition: ?LabelNameCondition = null,
 
     pub const json_field_names = .{
         .action_condition = "ActionCondition",

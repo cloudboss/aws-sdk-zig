@@ -5,10 +5,10 @@ const DataIntegrationFlowSourceType = @import("data_integration_flow_source_type
 /// The DataIntegrationFlow source parameters.
 pub const DataIntegrationFlowSource = struct {
     /// The dataset DataIntegrationFlow source.
-    dataset_source: ?DataIntegrationFlowDatasetSourceConfiguration,
+    dataset_source: ?DataIntegrationFlowDatasetSourceConfiguration = null,
 
     /// The S3 DataIntegrationFlow source.
-    s_3_source: ?DataIntegrationFlowS3SourceConfiguration,
+    s_3_source: ?DataIntegrationFlowS3SourceConfiguration = null,
 
     /// The DataIntegrationFlow source name that can be used as table alias in SQL
     /// transformation query.

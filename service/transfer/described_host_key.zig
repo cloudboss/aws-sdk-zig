@@ -6,20 +6,20 @@ pub const DescribedHostKey = struct {
     arn: []const u8,
 
     /// The date on which the host key was added to the server.
-    date_imported: ?i64,
+    date_imported: ?i64 = null,
 
     /// The text description for this host key.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The public key fingerprint, which is a short sequence of bytes used to
     /// identify the longer public key.
-    host_key_fingerprint: ?[]const u8,
+    host_key_fingerprint: ?[]const u8 = null,
 
     /// A unique identifier for the host key.
-    host_key_id: ?[]const u8,
+    host_key_id: ?[]const u8 = null,
 
     /// Key-value pairs that can be used to group and search for host keys.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The encryption algorithm that is used for the host key. The `Type` parameter
     /// is specified by using one of the following values:
@@ -29,7 +29,7 @@ pub const DescribedHostKey = struct {
     /// * `ecdsa-sha2-nistp256`
     /// * `ecdsa-sha2-nistp384`
     /// * `ecdsa-sha2-nistp521`
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

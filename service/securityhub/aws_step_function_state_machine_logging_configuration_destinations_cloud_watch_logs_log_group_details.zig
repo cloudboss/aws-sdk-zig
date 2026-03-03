@@ -5,7 +5,7 @@
 pub const AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails = struct {
     /// The ARN (ends with `:*`) of the CloudWatch Logs log group to which you want
     /// your logs emitted.
-    log_group_arn: ?[]const u8,
+    log_group_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .log_group_arn = "LogGroupArn",

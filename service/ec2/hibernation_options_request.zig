@@ -19,5 +19,5 @@ pub const HibernationOptionsRequest = struct {
     /// `hibernate`, you'll get an error.
     ///
     /// Default: `false`
-    configured: ?bool,
+    configured: ?bool = null,
 };

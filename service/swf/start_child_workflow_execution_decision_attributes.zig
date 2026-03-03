@@ -62,11 +62,11 @@ pub const StartChildWorkflowExecutionDecisionAttributes = struct {
     /// default for the workflow type or through this parameter. If neither this
     /// parameter is set nor a default child policy was specified at registration
     /// time then a fault is returned.
-    child_policy: ?ChildPolicy,
+    child_policy: ?ChildPolicy = null,
 
     /// The data attached to the event that can be used by the decider in subsequent
     /// workflow tasks. This data isn't sent to the child workflow execution.
-    control: ?[]const u8,
+    control: ?[]const u8 = null,
 
     /// The total duration for this workflow execution. This overrides the
     /// defaultExecutionStartToCloseTimeout specified when registering the workflow
@@ -80,20 +80,20 @@ pub const StartChildWorkflowExecutionDecisionAttributes = struct {
     /// parameter. If neither this parameter is set nor a default execution
     /// start-to-close timeout was specified at registration time then a fault is
     /// returned.
-    execution_start_to_close_timeout: ?[]const u8,
+    execution_start_to_close_timeout: ?[]const u8 = null,
 
     /// The input to be provided to the workflow execution.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The IAM role attached to the child workflow execution.
-    lambda_role: ?[]const u8,
+    lambda_role: ?[]const u8 = null,
 
     /// The list of tags to associate with the child workflow execution. A maximum
     /// of 5 tags can be specified. You can
     /// list workflow executions with a specific tag by calling
     /// ListOpenWorkflowExecutions or
     /// ListClosedWorkflowExecutions and specifying a TagFilter.
-    tag_list: ?[]const []const u8,
+    tag_list: ?[]const []const u8 = null,
 
     /// The name of the task list to be used for decision tasks of the child
     /// workflow execution.
@@ -108,7 +108,7 @@ pub const StartChildWorkflowExecutionDecisionAttributes = struct {
     /// `:` (colon), `/` (slash), `|` (vertical bar), or any
     /// control characters (`\u0000-\u001f` | `\u007f-\u009f`). Also, it must
     /// *not* be the literal string `arn`.
-    task_list: ?TaskList,
+    task_list: ?TaskList = null,
 
     /// A task priority that, if set, specifies the priority for a decision task of
     /// this workflow
@@ -120,7 +120,7 @@ pub const StartChildWorkflowExecutionDecisionAttributes = struct {
     ///
     /// For more information about setting task priority, see [Setting Task
     /// Priority](https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html) in the *Amazon SWF Developer Guide*.
-    task_priority: ?[]const u8,
+    task_priority: ?[]const u8 = null,
 
     /// Specifies the maximum duration of decision tasks for this workflow
     /// execution. This parameter overrides the
@@ -135,7 +135,7 @@ pub const StartChildWorkflowExecutionDecisionAttributes = struct {
     /// either as a default for the workflow type or through this parameter. If
     /// neither this parameter is set nor a default task start-to-close timeout was
     /// specified at registration time then a fault is returned.
-    task_start_to_close_timeout: ?[]const u8,
+    task_start_to_close_timeout: ?[]const u8 = null,
 
     /// The `workflowId` of the workflow execution.
     ///

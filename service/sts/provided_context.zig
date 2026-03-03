@@ -8,9 +8,9 @@ pub const ProvidedContext = struct {
     /// provider.
     /// The trusted context assertion is signed and encrypted by Amazon Web Services
     /// STS.
-    context_assertion: ?[]const u8,
+    context_assertion: ?[]const u8 = null,
 
     /// The context provider ARN from which the trusted context assertion was
     /// generated.
-    provider_arn: ?[]const u8,
+    provider_arn: ?[]const u8 = null,
 };

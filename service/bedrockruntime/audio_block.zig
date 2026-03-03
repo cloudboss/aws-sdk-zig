@@ -7,7 +7,7 @@ const AudioSource = @import("audio_source.zig").AudioSource;
 pub const AudioBlock = struct {
     /// Error information if the audio block could not be processed or contains
     /// invalid data.
-    @"error": ?ErrorBlock,
+    @"error": ?ErrorBlock = null,
 
     /// The format of the audio data, such as MP3, WAV, FLAC, or other supported
     /// audio formats.

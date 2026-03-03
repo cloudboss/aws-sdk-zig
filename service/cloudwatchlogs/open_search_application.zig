@@ -7,18 +7,18 @@ const OpenSearchResourceStatus = @import("open_search_resource_status.zig").Open
 /// integration with CloudWatch Logs. It hosts the vended logs dashboards.
 pub const OpenSearchApplication = struct {
     /// The Amazon Resource Name (ARN) of the application.
-    application_arn: ?[]const u8,
+    application_arn: ?[]const u8 = null,
 
     /// The endpoint of the application.
-    application_endpoint: ?[]const u8,
+    application_endpoint: ?[]const u8 = null,
 
     /// The ID of the application.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// This structure contains information about the status of this OpenSearch
     /// Service
     /// resource.
-    status: ?OpenSearchResourceStatus,
+    status: ?OpenSearchResourceStatus = null,
 
     pub const json_field_names = .{
         .application_arn = "applicationArn",

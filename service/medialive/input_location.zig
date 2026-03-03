@@ -1,7 +1,7 @@
 /// Input Location
 pub const InputLocation = struct {
     /// key used to extract the password from EC2 Parameter store
-    password_param: ?[]const u8,
+    password_param: ?[]const u8 = null,
 
     /// Uniform Resource Identifier - This should be a path to a file accessible to
     /// the Live system (eg. a http:// URI) depending on the output type. For
@@ -10,7 +10,7 @@ pub const InputLocation = struct {
     uri: []const u8,
 
     /// Documentation update needed
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .password_param = "PasswordParam",

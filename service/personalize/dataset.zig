@@ -3,14 +3,14 @@ const DatasetUpdateSummary = @import("dataset_update_summary.zig").DatasetUpdate
 /// Provides metadata for a dataset.
 pub const Dataset = struct {
     /// The creation date and time (in Unix time) of the dataset.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset that you want metadata
     /// for.
-    dataset_arn: ?[]const u8,
+    dataset_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset group.
-    dataset_group_arn: ?[]const u8,
+    dataset_group_arn: ?[]const u8 = null,
 
     /// One of the following values:
     ///
@@ -23,19 +23,19 @@ pub const Dataset = struct {
     /// * Actions
     ///
     /// * Action_Interactions
-    dataset_type: ?[]const u8,
+    dataset_type: ?[]const u8 = null,
 
     /// A time stamp that shows when the dataset was updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// Describes the latest update to the dataset.
-    latest_dataset_update: ?DatasetUpdateSummary,
+    latest_dataset_update: ?DatasetUpdateSummary = null,
 
     /// The name of the dataset.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN of the associated schema.
-    schema_arn: ?[]const u8,
+    schema_arn: ?[]const u8 = null,
 
     /// The status of the dataset.
     ///
@@ -45,13 +45,13 @@ pub const Dataset = struct {
     /// FAILED
     ///
     /// * DELETE PENDING > DELETE IN_PROGRESS
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The ID of the event tracker for an Action interactions dataset.
     /// You specify the tracker's ID in the `PutActionInteractions` API operation.
     /// Amazon Personalize uses it to direct new data to the Action interactions
     /// dataset in your dataset group.
-    tracking_id: ?[]const u8,
+    tracking_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

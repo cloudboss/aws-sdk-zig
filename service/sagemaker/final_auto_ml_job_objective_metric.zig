@@ -11,10 +11,10 @@ pub const FinalAutoMLJobObjectiveMetric = struct {
     /// The name of the standard metric. For a description of the standard metrics,
     /// see [Autopilot candidate
     /// metrics](https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics).
-    standard_metric_name: ?AutoMLMetricEnum,
+    standard_metric_name: ?AutoMLMetricEnum = null,
 
     /// The type of metric with the best result.
-    @"type": ?AutoMLJobObjectiveType,
+    @"type": ?AutoMLJobObjectiveType = null,
 
     /// The value of the metric with the best result.
     value: f32,

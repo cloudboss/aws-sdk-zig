@@ -7,19 +7,19 @@ const HttpQueryParameter = @import("http_query_parameter.zig").HttpQueryParamete
 /// An object that represents the criteria for determining a request match.
 pub const HttpGatewayRouteMatch = struct {
     /// The client request headers to match on.
-    headers: ?[]const HttpGatewayRouteHeader,
+    headers: ?[]const HttpGatewayRouteHeader = null,
 
     /// The host name to match on.
-    hostname: ?GatewayRouteHostnameMatch,
+    hostname: ?GatewayRouteHostnameMatch = null,
 
     /// The method to match on.
-    method: ?HttpMethod,
+    method: ?HttpMethod = null,
 
     /// The path to match on.
-    path: ?HttpPathMatch,
+    path: ?HttpPathMatch = null,
 
     /// The port number to match on.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// Specifies the path to match requests with. This parameter must always start
     /// with
@@ -29,10 +29,10 @@ pub const HttpGatewayRouteMatch = struct {
     /// name is `my-service.local` and you want the route to match requests to
     /// `my-service.local/metrics`, your prefix should be
     /// `/metrics`.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The query parameter to match on.
-    query_parameters: ?[]const HttpQueryParameter,
+    query_parameters: ?[]const HttpQueryParameter = null,
 
     pub const json_field_names = .{
         .headers = "headers",

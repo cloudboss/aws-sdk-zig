@@ -3,15 +3,15 @@ const SlotTypeCategory = @import("slot_type_category.zig").SlotTypeCategory;
 /// Provides summary information about a slot type.
 pub const SlotTypeSummary = struct {
     /// The description of the slot type.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A timestamp of the date and time that the slot type was last
     /// updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// If the slot type is derived from a built-on slot type, the name of
     /// the parent slot type.
-    parent_slot_type_signature: ?[]const u8,
+    parent_slot_type_signature: ?[]const u8 = null,
 
     /// Indicates the type of the slot type.
     ///
@@ -29,13 +29,13 @@ pub const SlotTypeSummary = struct {
     /// GRXML grammar to define values. For more information, see [Using a custom
     /// grammar slot
     /// type](https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html).
-    slot_type_category: ?SlotTypeCategory,
+    slot_type_category: ?SlotTypeCategory = null,
 
     /// The unique identifier assigned to the slot type.
-    slot_type_id: ?[]const u8,
+    slot_type_id: ?[]const u8 = null,
 
     /// The name of the slot type.
-    slot_type_name: ?[]const u8,
+    slot_type_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "description",

@@ -7,9 +7,9 @@ const VPCRegion = @import("vpc_region.zig").VPCRegion;
 /// [CreateHostedZone](https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html)
 /// request, the following parameters are also required.
 pub const VPC = struct {
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     /// (Private hosted zones only) The region that an Amazon VPC was created
     /// in.
-    vpc_region: ?VPCRegion,
+    vpc_region: ?VPCRegion = null,
 };

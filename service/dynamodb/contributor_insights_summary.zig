@@ -8,18 +8,18 @@ pub const ContributorInsightsSummary = struct {
     /// tracks all access and throttled events or throttled events only for the
     /// DynamoDB
     /// table or index.
-    contributor_insights_mode: ?ContributorInsightsMode,
+    contributor_insights_mode: ?ContributorInsightsMode = null,
 
     /// Describes the current status for contributor insights for the given table
     /// and index,
     /// if applicable.
-    contributor_insights_status: ?ContributorInsightsStatus,
+    contributor_insights_status: ?ContributorInsightsStatus = null,
 
     /// Name of the index associated with the summary, if any.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
     /// Name of the table associated with the summary.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .contributor_insights_mode = "ContributorInsightsMode",

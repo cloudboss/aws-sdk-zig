@@ -34,7 +34,7 @@ pub const StreamingDistribution = struct {
     id: []const u8,
 
     /// The date and time that the distribution was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The current status of the RTMP distribution. When the status is `Deployed`,
     /// the distribution's information is propagated to all CloudFront edge

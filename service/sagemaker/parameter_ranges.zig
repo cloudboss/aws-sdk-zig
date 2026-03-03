@@ -18,19 +18,19 @@ const IntegerParameterRange = @import("integer_parameter_range.zig").IntegerPara
 pub const ParameterRanges = struct {
     /// A list containing hyperparameter names and example values to be used by
     /// Autotune to determine optimal ranges for your tuning job.
-    auto_parameters: ?[]const AutoParameter,
+    auto_parameters: ?[]const AutoParameter = null,
 
     /// The array of
     /// [CategoricalParameterRange](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CategoricalParameterRange.html) objects that specify ranges of categorical hyperparameters that a hyperparameter tuning job searches.
-    categorical_parameter_ranges: ?[]const CategoricalParameterRange,
+    categorical_parameter_ranges: ?[]const CategoricalParameterRange = null,
 
     /// The array of
     /// [ContinuousParameterRange](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContinuousParameterRange.html) objects that specify ranges of continuous hyperparameters that a hyperparameter tuning job searches.
-    continuous_parameter_ranges: ?[]const ContinuousParameterRange,
+    continuous_parameter_ranges: ?[]const ContinuousParameterRange = null,
 
     /// The array of
     /// [IntegerParameterRange](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_IntegerParameterRange.html) objects that specify ranges of integer hyperparameters that a hyperparameter tuning job searches.
-    integer_parameter_ranges: ?[]const IntegerParameterRange,
+    integer_parameter_ranges: ?[]const IntegerParameterRange = null,
 
     pub const json_field_names = .{
         .auto_parameters = "AutoParameters",

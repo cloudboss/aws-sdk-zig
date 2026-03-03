@@ -12,7 +12,7 @@ const VocabularyFilterMethod = @import("vocabulary_filter_method.zig").Vocabular
 /// models, custom
 /// vocabulary filters, and custom vocabularies.
 pub const CallAnalyticsJobSettings = struct {
-    content_redaction: ?ContentRedaction,
+    content_redaction: ?ContentRedaction = null,
 
     /// If using automatic language identification in your request and you want to
     /// apply a
@@ -50,7 +50,7 @@ pub const CallAnalyticsJobSettings = struct {
     /// languages and
     /// language-specific
     /// features](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html).
-    language_id_settings: ?[]const aws.map.MapEntry(LanguageIdSettings),
+    language_id_settings: ?[]const aws.map.MapEntry(LanguageIdSettings) = null,
 
     /// The name of the custom language model you want to use when processing your
     /// Call
@@ -63,7 +63,7 @@ pub const CallAnalyticsJobSettings = struct {
     /// language model isn't applied. There are no errors or warnings associated
     /// with a language
     /// mismatch.
-    language_model_name: ?[]const u8,
+    language_model_name: ?[]const u8 = null,
 
     /// You can specify two or more language codes that represent the languages you
     /// think may
@@ -83,11 +83,11 @@ pub const CallAnalyticsJobSettings = struct {
     /// GovCloud (US) (US-East, us-gov-east-1), Canada (Calgary) ca-west-1 and
     /// Africa (Cape Town) af-south-1, your media file
     /// must be encoded at a sample rate of 16,000 Hz or higher.
-    language_options: ?[]const LanguageCode,
+    language_options: ?[]const LanguageCode = null,
 
     /// Contains `GenerateAbstractiveSummary`, which is a required parameter if you
     /// want to enable Generative call summarization in your Call Analytics request.
-    summarization: ?Summarization,
+    summarization: ?Summarization = null,
 
     /// Specify how you want your custom vocabulary filter applied to your
     /// transcript.
@@ -97,7 +97,7 @@ pub const CallAnalyticsJobSettings = struct {
     /// To delete words, choose `remove`.
     ///
     /// To flag words without changing them, choose `tag`.
-    vocabulary_filter_method: ?VocabularyFilterMethod,
+    vocabulary_filter_method: ?VocabularyFilterMethod = null,
 
     /// The name of the custom vocabulary filter you want to include in your Call
     /// Analytics
@@ -105,11 +105,11 @@ pub const CallAnalyticsJobSettings = struct {
     ///
     /// Note that if you include `VocabularyFilterName` in your request, you must
     /// also include `VocabularyFilterMethod`.
-    vocabulary_filter_name: ?[]const u8,
+    vocabulary_filter_name: ?[]const u8 = null,
 
     /// The name of the custom vocabulary you want to include in your Call Analytics
     /// transcription request. Custom vocabulary names are case sensitive.
-    vocabulary_name: ?[]const u8,
+    vocabulary_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content_redaction = "ContentRedaction",

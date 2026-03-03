@@ -7,7 +7,7 @@ const Resource = @import("resource.zig").Resource;
 /// resource.
 pub const AccessPolicySummary = struct {
     /// The date the access policy was created, in Unix epoch time.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The ID of the access policy.
     id: []const u8,
@@ -17,7 +17,7 @@ pub const AccessPolicySummary = struct {
     identity: Identity,
 
     /// The date the access policy was last updated, in Unix epoch time.
-    last_update_date: ?i64,
+    last_update_date: ?i64 = null,
 
     /// The permissions for the access policy. Note that a project `ADMINISTRATOR`
     /// is

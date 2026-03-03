@@ -6,19 +6,19 @@ pub const TeamsChannelConfiguration = struct {
     channel_id: []const u8,
 
     /// The name of the Microsoft Teams channel.
-    channel_name: ?[]const u8,
+    channel_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration
     /// associated with the user identity to delete.
     chat_configuration_arn: []const u8,
 
     /// The name of the configuration.
-    configuration_name: ?[]const u8,
+    configuration_name: ?[]const u8 = null,
 
     /// The list of IAM policy ARNs that are applied as channel guardrails. The AWS
     /// managed `AdministratorAccess` policy is applied by default if this is not
     /// set.
-    guardrail_policy_arns: ?[]const []const u8,
+    guardrail_policy_arns: ?[]const []const u8 = null,
 
     /// A user-defined role that AWS Chatbot assumes. This is not the service-linked
     /// role.
@@ -28,7 +28,7 @@ pub const TeamsChannelConfiguration = struct {
     iam_role_arn: []const u8,
 
     /// Logging levels include `ERROR`, `INFO`, or `NONE`.
-    logging_level: ?[]const u8,
+    logging_level: ?[]const u8 = null,
 
     /// The Amazon Resource Names (ARNs) of the SNS topics that deliver
     /// notifications to AWS Chatbot.
@@ -37,15 +37,15 @@ pub const TeamsChannelConfiguration = struct {
     /// Either `ENABLED` or `DISABLED`. The resource returns `DISABLED` if the
     /// organization's AWS Chatbot policy has explicitly denied that configuration.
     /// For example, if Amazon Chime is disabled.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// Provided if State is `DISABLED`. Provides context as to why the resource is
     /// disabled.
-    state_reason: ?[]const u8,
+    state_reason: ?[]const u8 = null,
 
     /// A map of tags assigned to a resource. A tag is a string-to-string map of
     /// key-value pairs.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the Microsoft Teams authorized with AWS Chatbot.
     ///
@@ -57,13 +57,13 @@ pub const TeamsChannelConfiguration = struct {
     team_id: []const u8,
 
     /// The name of the Microsoft Teams Team.
-    team_name: ?[]const u8,
+    team_name: ?[]const u8 = null,
 
     /// The ID of the Microsoft Teams tenant.
     tenant_id: []const u8,
 
     /// Enables use of a user role requirement in your chat configuration.
-    user_authorization_required: ?bool,
+    user_authorization_required: ?bool = null,
 
     pub const json_field_names = .{
         .channel_id = "ChannelId",

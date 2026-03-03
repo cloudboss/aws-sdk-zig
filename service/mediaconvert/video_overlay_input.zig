@@ -17,28 +17,28 @@ pub const VideoOverlayInput = struct {
     /// Audio selectors from the underlying input by using a single Audio selector
     /// in your overlay, set DefaultSelection to DEFAULT (Check \"Use as default\"
     /// in the MediaConvert console).
-    audio_selectors: ?[]const aws.map.MapEntry(AudioSelector),
+    audio_selectors: ?[]const aws.map.MapEntry(AudioSelector) = null,
 
     /// Specify the input file S3, HTTP, or HTTPS URL for your video overlay.
     /// To specify one or more Transitions for your base input video instead: Leave
     /// blank.
-    file_input: ?[]const u8,
+    file_input: ?[]const u8 = null,
 
     /// Specify one or more clips to use from your video overlay. When you include
     /// an input clip, you must also specify its start timecode, end timecode, or
     /// both start and end timecode.
-    input_clippings: ?[]const VideoOverlayInputClipping,
+    input_clippings: ?[]const VideoOverlayInputClipping = null,
 
     /// Specify the timecode source for your video overlay input clips. To use the
     /// timecode present in your video overlay: Choose Embedded. To use a zerobased
     /// timecode: Choose Start at 0. To choose a timecode: Choose Specified start.
     /// When you do, enter the starting timecode in Start timecode. If you don't
     /// specify a value for Timecode source, MediaConvert uses Embedded by default.
-    timecode_source: ?InputTimecodeSource,
+    timecode_source: ?InputTimecodeSource = null,
 
     /// Specify the starting timecode for this video overlay. To use this setting,
     /// you must set Timecode source to Specified start.
-    timecode_start: ?[]const u8,
+    timecode_start: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .audio_selectors = "AudioSelectors",

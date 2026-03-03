@@ -4,10 +4,10 @@ const DataReplicationInitiationStepStatus = @import("data_replication_initiation
 /// Data replication initiation step.
 pub const DataReplicationInitiationStep = struct {
     /// Request to query data initiation step name.
-    name: ?DataReplicationInitiationStepName,
+    name: ?DataReplicationInitiationStepName = null,
 
     /// Request to query data initiation status.
-    status: ?DataReplicationInitiationStepStatus,
+    status: ?DataReplicationInitiationStepStatus = null,
 
     pub const json_field_names = .{
         .name = "name",

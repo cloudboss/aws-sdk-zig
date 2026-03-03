@@ -18,7 +18,7 @@ pub const ManagedRuleSet = struct {
     arn: []const u8,
 
     /// A description of the set that helps with identification.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier for the managed rule set. The ID is returned in the
     /// responses to commands like `list`. You provide it to operations like `get`
@@ -40,7 +40,7 @@ pub const ManagedRuleSet = struct {
     ///   and the label from the rule, separated by a colon:
     ///
     /// `:`
-    label_namespace: ?[]const u8,
+    label_namespace: ?[]const u8 = null,
 
     /// The name of the managed rule set. You use this, along with the rule set ID,
     /// to identify the rule set.
@@ -51,10 +51,10 @@ pub const ManagedRuleSet = struct {
 
     /// The versions of this managed rule set that are available for use by
     /// customers.
-    published_versions: ?[]const aws.map.MapEntry(ManagedRuleSetVersion),
+    published_versions: ?[]const aws.map.MapEntry(ManagedRuleSetVersion) = null,
 
     /// The version that you would like your customers to use.
-    recommended_version: ?[]const u8,
+    recommended_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "ARN",

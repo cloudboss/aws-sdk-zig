@@ -6,14 +6,14 @@ const DialogState = @import("dialog_state.zig").DialogState;
 /// Configuration setting for a response sent to the user before Amazon Lex
 /// starts eliciting slots.
 pub const InitialResponseSetting = struct {
-    code_hook: ?DialogCodeHookInvocationSetting,
+    code_hook: ?DialogCodeHookInvocationSetting = null,
 
-    conditional: ?ConditionalSpecification,
+    conditional: ?ConditionalSpecification = null,
 
-    initial_response: ?ResponseSpecification,
+    initial_response: ?ResponseSpecification = null,
 
     /// The next step in the conversation.
-    next_step: ?DialogState,
+    next_step: ?DialogState = null,
 
     pub const json_field_names = .{
         .code_hook = "codeHook",

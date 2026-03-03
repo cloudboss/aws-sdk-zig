@@ -3,20 +3,20 @@ const IndexStatus = @import("index_status.zig").IndexStatus;
 /// Summary information for your Amazon Q Business index.
 pub const Index = struct {
     /// The Unix timestamp when the index was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The name of the index.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The identifier for the index.
-    index_id: ?[]const u8,
+    index_id: ?[]const u8 = null,
 
     /// The current status of the index. When the status is `ACTIVE`, the index is
     /// ready.
-    status: ?IndexStatus,
+    status: ?IndexStatus = null,
 
     /// The Unix timestamp when the index was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

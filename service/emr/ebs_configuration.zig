@@ -4,13 +4,13 @@ const EbsBlockDeviceConfig = @import("ebs_block_device_config.zig").EbsBlockDevi
 pub const EbsConfiguration = struct {
     /// An array of Amazon EBS volume specifications attached to a cluster
     /// instance.
-    ebs_block_device_configs: ?[]const EbsBlockDeviceConfig,
+    ebs_block_device_configs: ?[]const EbsBlockDeviceConfig = null,
 
     /// Indicates whether an Amazon EBS volume is EBS-optimized. The default is
     /// false. You should explicitly set this value to true to enable the Amazon
     /// EBS-optimized setting
     /// for an EC2 instance.
-    ebs_optimized: ?bool,
+    ebs_optimized: ?bool = null,
 
     pub const json_field_names = .{
         .ebs_block_device_configs = "EbsBlockDeviceConfigs",

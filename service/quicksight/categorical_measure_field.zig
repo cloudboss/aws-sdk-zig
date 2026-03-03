@@ -5,7 +5,7 @@ const StringFormatConfiguration = @import("string_format_configuration.zig").Str
 /// The measure type field with categorical type columns.
 pub const CategoricalMeasureField = struct {
     /// The aggregation function of the measure field.
-    aggregation_function: ?CategoricalAggregationFunction,
+    aggregation_function: ?CategoricalAggregationFunction = null,
 
     /// The column that is used in the `CategoricalMeasureField`.
     column: ColumnIdentifier,
@@ -14,7 +14,7 @@ pub const CategoricalMeasureField = struct {
     field_id: []const u8,
 
     /// The format configuration of the field.
-    format_configuration: ?StringFormatConfiguration,
+    format_configuration: ?StringFormatConfiguration = null,
 
     pub const json_field_names = .{
         .aggregation_function = "AggregationFunction",

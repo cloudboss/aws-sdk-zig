@@ -3,14 +3,14 @@ pub const NeptuneSettings = struct {
     /// The number of milliseconds for DMS to wait to retry a bulk-load of migrated
     /// graph data
     /// to the Neptune target database before raising an error. The default is 250.
-    error_retry_duration: ?i32,
+    error_retry_duration: ?i32 = null,
 
     /// If you want Identity and Access Management (IAM) authorization enabled for
     /// this endpoint, set this parameter
     /// to `true`. Then attach the appropriate IAM policy document to your service
     /// role
     /// specified by `ServiceAccessRoleArn`. The default is `false`.
-    iam_auth_enabled: ?bool,
+    iam_auth_enabled: ?bool = null,
 
     /// The maximum size in kilobytes of migrated graph data stored in a .csv file
     /// before DMS
@@ -19,12 +19,12 @@ pub const NeptuneSettings = struct {
     /// bulk load is successful, DMS clears the bucket, ready to store the next
     /// batch of migrated
     /// graph data.
-    max_file_size: ?i32,
+    max_file_size: ?i32 = null,
 
     /// The number of times for DMS to retry a bulk load of migrated graph data to
     /// the Neptune
     /// target database before raising an error. The default is 5.
-    max_retry_count: ?i32,
+    max_retry_count: ?i32 = null,
 
     /// A folder path where you want DMS to store migrated graph data in the S3
     /// bucket
@@ -44,7 +44,7 @@ pub const NeptuneSettings = struct {
     /// information, see [Creating an IAM Service Role for Accessing Amazon Neptune
     /// as a
     /// Target](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole) in the *Database Migration Service User Guide. *
-    service_access_role_arn: ?[]const u8,
+    service_access_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_retry_duration = "ErrorRetryDuration",

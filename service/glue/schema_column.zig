@@ -3,10 +3,10 @@
 /// 100 of these structures.
 pub const SchemaColumn = struct {
     /// The type of data in the column.
-    data_type: ?[]const u8,
+    data_type: ?[]const u8 = null,
 
     /// The name of the column.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_type = "DataType",

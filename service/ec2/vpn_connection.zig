@@ -11,13 +11,13 @@ pub const VpnConnection = struct {
     /// The category of the VPN connection. A value of `VPN` indicates an Amazon Web
     /// Services VPN connection. A value of `VPN-Classic` indicates an Amazon Web
     /// Services Classic VPN connection.
-    category: ?[]const u8,
+    category: ?[]const u8 = null,
 
     /// The ARN of the core network.
-    core_network_arn: ?[]const u8,
+    core_network_arn: ?[]const u8 = null,
 
     /// The ARN of the core network attachment.
-    core_network_attachment_arn: ?[]const u8,
+    core_network_attachment_arn: ?[]const u8 = null,
 
     /// The configuration information for the VPN connection's customer gateway (in
     /// the native
@@ -25,47 +25,47 @@ pub const VpnConnection = struct {
     /// response; however, it's present in the DescribeVpnConnections response
     /// only if the VPN connection is in the `pending` or `available`
     /// state.
-    customer_gateway_configuration: ?[]const u8,
+    customer_gateway_configuration: ?[]const u8 = null,
 
     /// The ID of the customer gateway at your end of the VPN connection.
-    customer_gateway_id: ?[]const u8,
+    customer_gateway_id: ?[]const u8 = null,
 
     /// The current state of the gateway association.
-    gateway_association_state: ?GatewayAssociationState,
+    gateway_association_state: ?GatewayAssociationState = null,
 
     /// The VPN connection options.
-    options: ?VpnConnectionOptions,
+    options: ?VpnConnectionOptions = null,
 
     /// The Amazon Resource Name (ARN) of the Secrets Manager secret storing the
     /// pre-shared key(s) for the VPN connection.
-    pre_shared_key_arn: ?[]const u8,
+    pre_shared_key_arn: ?[]const u8 = null,
 
     /// The static routes associated with the VPN connection.
-    routes: ?[]const VpnStaticRoute,
+    routes: ?[]const VpnStaticRoute = null,
 
     /// The current state of the VPN connection.
-    state: ?VpnState,
+    state: ?VpnState = null,
 
     /// Any tags assigned to the VPN connection.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the transit gateway associated with the VPN connection.
-    transit_gateway_id: ?[]const u8,
+    transit_gateway_id: ?[]const u8 = null,
 
     /// The type of VPN connection.
-    @"type": ?GatewayType,
+    @"type": ?GatewayType = null,
 
     /// Information about the VPN tunnel.
-    vgw_telemetry: ?[]const VgwTelemetry,
+    vgw_telemetry: ?[]const VgwTelemetry = null,
 
     /// The ID of the VPN concentrator associated with the VPN connection.
-    vpn_concentrator_id: ?[]const u8,
+    vpn_concentrator_id: ?[]const u8 = null,
 
     /// The ID of the VPN connection.
-    vpn_connection_id: ?[]const u8,
+    vpn_connection_id: ?[]const u8 = null,
 
     /// The ID of the virtual private gateway at the Amazon Web Services side of the
     /// VPN
     /// connection.
-    vpn_gateway_id: ?[]const u8,
+    vpn_gateway_id: ?[]const u8 = null,
 };

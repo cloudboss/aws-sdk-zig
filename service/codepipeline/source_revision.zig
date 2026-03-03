@@ -8,7 +8,7 @@ pub const SourceRevision = struct {
 
     /// The system-generated unique ID that identifies the revision number of the
     /// artifact.
-    revision_id: ?[]const u8,
+    revision_id: ?[]const u8 = null,
 
     /// Summary information about the most recent revision of the artifact. For
     /// GitHub and
@@ -16,11 +16,11 @@ pub const SourceRevision = struct {
     /// actions,
     /// the user-provided content of a `codepipeline-artifact-revision-summary` key
     /// specified in the object metadata.
-    revision_summary: ?[]const u8,
+    revision_summary: ?[]const u8 = null,
 
     /// The commit ID for the artifact revision. For artifacts stored in GitHub or
     /// CodeCommit repositories, the commit ID is linked to a commit details page.
-    revision_url: ?[]const u8,
+    revision_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action_name = "actionName",

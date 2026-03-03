@@ -5,7 +5,7 @@ const SampleType = @import("sample_type.zig").SampleType;
 /// analysis.
 pub const Sample = struct {
     /// The number of rows in the sample.
-    size: ?i32,
+    size: ?i32 = null,
 
     /// The way in which DataBrew obtains rows from a dataset.
     @"type": SampleType,

@@ -12,7 +12,7 @@ pub const AwsEc2SecurityGroupIpPermission = struct {
     /// A value of -1 indicates all ICMP/ICMPv6 types. If you specify all
     /// ICMP/ICMPv6 types, you
     /// must specify all codes.
-    from_port: ?i32,
+    from_port: ?i32 = null,
 
     /// The IP protocol name (`tcp`, `udp`, `icmp`,
     /// `icmpv6`) or number.
@@ -30,20 +30,20 @@ pub const AwsEc2SecurityGroupIpPermission = struct {
     /// For `icmpv6`, the port range is optional. If you omit the port range,
     /// traffic
     /// for all types and codes is allowed.
-    ip_protocol: ?[]const u8,
+    ip_protocol: ?[]const u8 = null,
 
     /// The IPv4 ranges.
-    ip_ranges: ?[]const AwsEc2SecurityGroupIpRange,
+    ip_ranges: ?[]const AwsEc2SecurityGroupIpRange = null,
 
     /// The IPv6 ranges.
-    ipv_6_ranges: ?[]const AwsEc2SecurityGroupIpv6Range,
+    ipv_6_ranges: ?[]const AwsEc2SecurityGroupIpv6Range = null,
 
     /// [VPC only] The prefix list IDs for an Amazon Web Services service. With
     /// outbound rules, this is the Amazon Web Services
     /// service to access through a VPC endpoint from instances associated with the
     /// security
     /// group.
-    prefix_list_ids: ?[]const AwsEc2SecurityGroupPrefixListId,
+    prefix_list_ids: ?[]const AwsEc2SecurityGroupPrefixListId = null,
 
     /// The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6
     /// code.
@@ -51,10 +51,10 @@ pub const AwsEc2SecurityGroupIpPermission = struct {
     /// A value of `-1` indicates all ICMP/ICMPv6 codes. If you specify all
     /// ICMP/ICMPv6 types, you must specify all
     /// codes.
-    to_port: ?i32,
+    to_port: ?i32 = null,
 
     /// The security group and Amazon Web Services account ID pairs.
-    user_id_group_pairs: ?[]const AwsEc2SecurityGroupUserIdGroupPair,
+    user_id_group_pairs: ?[]const AwsEc2SecurityGroupUserIdGroupPair = null,
 
     pub const json_field_names = .{
         .from_port = "FromPort",

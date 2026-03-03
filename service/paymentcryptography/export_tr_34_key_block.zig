@@ -20,18 +20,18 @@ pub const ExportTr34KeyBlock = struct {
 
     /// Optional metadata for export associated with the key material. This data is
     /// signed but transmitted in clear text.
-    key_block_headers: ?KeyBlockHeaders,
+    key_block_headers: ?KeyBlockHeaders = null,
 
     /// A random number value that is unique to the TR-34 key block generated using
     /// 2 pass. The operation will fail, if a random nonce value is not provided for
     /// a TR-34 key block generated using 2 pass.
-    random_nonce: ?[]const u8,
+    random_nonce: ?[]const u8 = null,
 
     /// The certificate used to sign the TR-34 key block.
-    signing_key_certificate: ?[]const u8,
+    signing_key_certificate: ?[]const u8 = null,
 
     /// Key Identifier used for signing the export key
-    signing_key_identifier: ?[]const u8,
+    signing_key_identifier: ?[]const u8 = null,
 
     /// The `KeyARN` of the wrapping key certificate. Amazon Web Services Payment
     /// Cryptography uses this certificate to wrap the key under export.

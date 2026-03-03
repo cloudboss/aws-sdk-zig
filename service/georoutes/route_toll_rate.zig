@@ -6,10 +6,10 @@ const RouteTransponder = @import("route_transponder.zig").RouteTransponder;
 /// The toll rate.
 pub const RouteTollRate = struct {
     /// Time when the rate is valid.
-    applicable_times: ?[]const u8,
+    applicable_times: ?[]const u8 = null,
 
     /// Price in the converted currency as specified in the request.
-    converted_price: ?RouteTollPrice,
+    converted_price: ?RouteTollPrice = null,
 
     /// The Toll rate Id.
     id: []const u8,
@@ -21,7 +21,7 @@ pub const RouteTollRate = struct {
     name: []const u8,
 
     /// Details if the toll rate can be a pass that supports multiple trips.
-    pass: ?RouteTollPass,
+    pass: ?RouteTollPass = null,
 
     /// Accepted payment methods at the toll.
     payment_methods: []const RouteTollPaymentMethod,

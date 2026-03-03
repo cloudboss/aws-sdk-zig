@@ -6,10 +6,10 @@ const EncryptionConfiguration = @import("encryption_configuration.zig").Encrypti
 /// encryption configuration for the query results.
 pub const ResultConfigurationUpdates = struct {
     /// The ACL configuration for the query results.
-    acl_configuration: ?AclConfiguration,
+    acl_configuration: ?AclConfiguration = null,
 
     /// The encryption configuration for query and calculation results.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// The Amazon Web Services account ID that you expect to be the owner of the
     /// Amazon S3 bucket specified by ResultConfiguration$OutputLocation.
@@ -26,7 +26,7 @@ pub const ResultConfigurationUpdates = struct {
     /// See WorkGroupConfiguration$EnforceWorkGroupConfiguration and [Workgroup
     /// Settings Override Client-Side
     /// Settings](https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
-    expected_bucket_owner: ?[]const u8,
+    expected_bucket_owner: ?[]const u8 = null,
 
     /// The location in Amazon S3 where your query and calculation results are
     /// stored,
@@ -39,7 +39,7 @@ pub const ResultConfigurationUpdates = struct {
     /// the
     /// `WorkGroupConfiguration`. See
     /// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
-    output_location: ?[]const u8,
+    output_location: ?[]const u8 = null,
 
     /// If set to `true`, indicates that the previously-specified ACL configuration
     /// for queries in this workgroup should be ignored and set to null. If set to
@@ -50,7 +50,7 @@ pub const ResultConfigurationUpdates = struct {
     /// Override
     /// Client-Side
     /// Settings](https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
-    remove_acl_configuration: ?bool,
+    remove_acl_configuration: ?bool = null,
 
     /// If set to "true", indicates that the previously-specified encryption
     /// configuration
@@ -63,7 +63,7 @@ pub const ResultConfigurationUpdates = struct {
     /// information, see [Workgroup Settings Override
     /// Client-Side
     /// Settings](https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
-    remove_encryption_configuration: ?bool,
+    remove_encryption_configuration: ?bool = null,
 
     /// If set to "true", removes the Amazon Web Services account ID previously
     /// specified for
@@ -75,7 +75,7 @@ pub const ResultConfigurationUpdates = struct {
     /// Override
     /// Client-Side
     /// Settings](https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
-    remove_expected_bucket_owner: ?bool,
+    remove_expected_bucket_owner: ?bool = null,
 
     /// If set to "true", indicates that the previously-specified query results
     /// location (also
@@ -88,7 +88,7 @@ pub const ResultConfigurationUpdates = struct {
     /// information, see [Workgroup Settings Override
     /// Client-Side
     /// Settings](https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
-    remove_output_location: ?bool,
+    remove_output_location: ?bool = null,
 
     pub const json_field_names = .{
         .acl_configuration = "AclConfiguration",

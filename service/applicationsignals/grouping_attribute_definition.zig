@@ -5,7 +5,7 @@ pub const GroupingAttributeDefinition = struct {
     /// The default value to use for this grouping attribute when no value can be
     /// derived from the source keys. This ensures all services have a grouping
     /// value even if the source data is missing.
-    default_grouping_value: ?[]const u8,
+    default_grouping_value: ?[]const u8 = null,
 
     /// The friendly name for this grouping attribute, such as `BusinessUnit` or
     /// `Environment`. This name is used to identify the grouping in the console and
@@ -15,7 +15,7 @@ pub const GroupingAttributeDefinition = struct {
     /// An array of source keys used to derive the grouping attribute value from
     /// telemetry data, Amazon Web Services tags, or other sources. For example,
     /// ["business_unit", "team"] would look for values in those fields.
-    grouping_source_keys: ?[]const []const u8,
+    grouping_source_keys: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .default_grouping_value = "DefaultGroupingValue",

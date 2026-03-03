@@ -5,5 +5,5 @@ const Tag = @import("tag.zig").Tag;
 /// operations.
 pub const TagListMessage = struct {
     /// A list of tags as key-value pairs.
-    tag_list: ?[]const Tag,
+    tag_list: ?[]const Tag = null,
 };

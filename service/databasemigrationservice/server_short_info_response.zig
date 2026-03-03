@@ -1,13 +1,13 @@
 /// Describes a server in a Fleet Advisor collector inventory.
 pub const ServerShortInfoResponse = struct {
     /// The IP address of a server in a Fleet Advisor collector inventory.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The ID of a server in a Fleet Advisor collector inventory.
-    server_id: ?[]const u8,
+    server_id: ?[]const u8 = null,
 
     /// The name address of a server in a Fleet Advisor collector inventory.
-    server_name: ?[]const u8,
+    server_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ip_address = "IpAddress",

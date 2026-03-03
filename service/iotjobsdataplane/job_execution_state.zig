@@ -7,13 +7,13 @@ pub const JobExecutionState = struct {
     /// The status of the job execution. Can be one of: "QUEUED", "IN_PROGRESS",
     /// "FAILED",
     /// "SUCCESS", "CANCELED", "TIMED_OUT", "REJECTED", or "REMOVED".
-    status: ?JobExecutionStatus,
+    status: ?JobExecutionStatus = null,
 
     /// A collection of name/value pairs that describe the status of the job
     /// execution.
     ///
     /// The maximum length of the value in the name/value pair is 1,024 characters.
-    status_details: ?[]const aws.map.StringMapEntry,
+    status_details: ?[]const aws.map.StringMapEntry = null,
 
     /// The version of the job execution. Job execution versions are incremented
     /// each time

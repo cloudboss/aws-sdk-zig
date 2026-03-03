@@ -26,7 +26,7 @@ pub const ProcessingClusterConfig = struct {
     /// For more information about local instance storage encryption, see [SSD
     /// Instance Store
     /// Volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
-    volume_kms_key_id: ?[]const u8,
+    volume_kms_key_id: ?[]const u8 = null,
 
     /// The size of the ML storage volume in gigabytes that you want to provision.
     /// You must specify sufficient ML storage for your scenario.

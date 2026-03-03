@@ -20,7 +20,7 @@ pub const ImportTask = struct {
     /// you didn't provide a token, a token was automatically generated when the
     /// import task request
     /// was sent.
-    client_request_token: ?[]const u8,
+    client_request_token: ?[]const u8 = null,
 
     /// A link to a compressed archive folder (in the ZIP format) that contains an
     /// error log and a
@@ -40,33 +40,33 @@ pub const ImportTask = struct {
     /// you from having
     /// to correct and update the larger original file and attempt importing it
     /// again.
-    errors_and_failed_entries_zip: ?[]const u8,
+    errors_and_failed_entries_zip: ?[]const u8 = null,
 
     /// The type of file detected by the import task.
-    file_classification: ?FileClassification,
+    file_classification: ?FileClassification = null,
 
     /// The time that the import task request finished, presented in the Unix time
     /// stamp
     /// format.
-    import_completion_time: ?i64,
+    import_completion_time: ?i64 = null,
 
     /// The time that the import task request was deleted, presented in the Unix
     /// time stamp
     /// format.
-    import_deleted_time: ?i64,
+    import_deleted_time: ?i64 = null,
 
     /// The time that the import task request was made, presented in the Unix time
     /// stamp
     /// format.
-    import_request_time: ?i64,
+    import_request_time: ?i64 = null,
 
     /// The unique ID for a specific import task. These IDs aren't globally unique,
     /// but they are
     /// unique within an Amazon Web Services account.
-    import_task_id: ?[]const u8,
+    import_task_id: ?[]const u8 = null,
 
     /// The URL for your import file that you've uploaded to Amazon S3.
-    import_url: ?[]const u8,
+    import_url: ?[]const u8 = null,
 
     /// A descriptive name for an import task. You can use this name to filter
     /// future requests
@@ -74,7 +74,7 @@ pub const ImportTask = struct {
     /// that were included
     /// in this import task. We recommend that you use a meaningful name for each
     /// import task.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The total number of server records in the import file that failed to be
     /// imported.
@@ -91,7 +91,7 @@ pub const ImportTask = struct {
     /// in the
     /// `errorsAndFailedEntriesZip` field, or in the Migration Hub management
     /// console.
-    status: ?ImportStatus,
+    status: ?ImportStatus = null,
 
     pub const json_field_names = .{
         .application_import_failure = "applicationImportFailure",

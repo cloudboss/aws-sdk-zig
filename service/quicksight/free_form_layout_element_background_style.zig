@@ -3,10 +3,10 @@ const Visibility = @import("visibility.zig").Visibility;
 /// The background style configuration of a free-form layout element.
 pub const FreeFormLayoutElementBackgroundStyle = struct {
     /// The background color of a free-form layout element.
-    color: ?[]const u8,
+    color: ?[]const u8 = null,
 
     /// The background visibility of a free-form layout element.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .color = "Color",

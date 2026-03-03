@@ -19,7 +19,7 @@ pub const Prompt = struct {
     /// `PostText` API response. It substitutes session attributes
     /// and slot values for placeholders in the response card. For more
     /// information, see ex-resp-card.
-    response_card: ?[]const u8,
+    response_card: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_attempts = "maxAttempts",

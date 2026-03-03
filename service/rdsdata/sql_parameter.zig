@@ -4,7 +4,7 @@ const Field = @import("field.zig").Field;
 /// A parameter used in a SQL statement.
 pub const SqlParameter = struct {
     /// The name of the parameter.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A hint that specifies the correct object type for data type mapping.
     /// Possible values
@@ -31,10 +31,10 @@ pub const SqlParameter = struct {
     /// * `UUID` - The corresponding `String` parameter value is sent as an object
     ///   of
     /// `UUID` type to the database.
-    type_hint: ?TypeHint,
+    type_hint: ?TypeHint = null,
 
     /// The value of the parameter.
-    value: ?Field,
+    value: ?Field = null,
 
     pub const json_field_names = .{
         .name = "name",

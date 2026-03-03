@@ -5,16 +5,16 @@ const AwsS3BucketWebsiteConfigurationRoutingRule = @import("aws_s3_bucket_websit
 /// bucket.
 pub const AwsS3BucketWebsiteConfiguration = struct {
     /// The name of the error document for the website.
-    error_document: ?[]const u8,
+    error_document: ?[]const u8 = null,
 
     /// The name of the index document for the website.
-    index_document_suffix: ?[]const u8,
+    index_document_suffix: ?[]const u8 = null,
 
     /// The redirect behavior for requests to the website.
-    redirect_all_requests_to: ?AwsS3BucketWebsiteConfigurationRedirectTo,
+    redirect_all_requests_to: ?AwsS3BucketWebsiteConfigurationRedirectTo = null,
 
     /// The rules for applying redirects for requests to the website.
-    routing_rules: ?[]const AwsS3BucketWebsiteConfigurationRoutingRule,
+    routing_rules: ?[]const AwsS3BucketWebsiteConfigurationRoutingRule = null,
 
     pub const json_field_names = .{
         .error_document = "ErrorDocument",

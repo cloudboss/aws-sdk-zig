@@ -23,15 +23,15 @@
 pub const SignalExternalWorkflowExecutionDecisionAttributes = struct {
     /// The data attached to the event that can be used by the decider in subsequent
     /// decision tasks.
-    control: ?[]const u8,
+    control: ?[]const u8 = null,
 
     /// The input data to be provided with the signal. The target workflow execution
     /// uses the signal
     /// name and input data to process the signal.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The `runId` of the workflow execution to be signaled.
-    run_id: ?[]const u8,
+    run_id: ?[]const u8 = null,
 
     /// The name of the signal.The target workflow execution uses the signal name
     /// and input to

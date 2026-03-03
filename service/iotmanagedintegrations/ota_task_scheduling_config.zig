@@ -6,16 +6,16 @@ pub const OtaTaskSchedulingConfig = struct {
     /// Specifies the end behavior for all task executions after a task reaches the
     /// selected `endTime`. If `endTime` is not selected when creating the task,
     /// then `endBehavior` does not apply.
-    end_behavior: ?SchedulingConfigEndBehavior,
+    end_behavior: ?SchedulingConfigEndBehavior = null,
 
     /// The time an over-the-air (OTA) task will stop.
-    end_time: ?[]const u8,
+    end_time: ?[]const u8 = null,
 
     /// Maintenance window list for over-the-air (OTA) task scheduling config.
-    maintenance_windows: ?[]const ScheduleMaintenanceWindow,
+    maintenance_windows: ?[]const ScheduleMaintenanceWindow = null,
 
     /// The time an over-the-air (OTA) task will start.
-    start_time: ?[]const u8,
+    start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .end_behavior = "EndBehavior",

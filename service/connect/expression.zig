@@ -3,15 +3,15 @@ const AttributeCondition = @import("attribute_condition.zig").AttributeCondition
 /// A tagged union to specify expression for a routing step.
 pub const Expression = struct {
     /// List of routing expressions which will be AND-ed together.
-    and_expression: ?[]const Expression,
+    and_expression: ?[]const Expression = null,
 
     /// An object to specify the predefined attribute condition.
-    attribute_condition: ?AttributeCondition,
+    attribute_condition: ?AttributeCondition = null,
 
-    not_attribute_condition: ?AttributeCondition,
+    not_attribute_condition: ?AttributeCondition = null,
 
     /// List of routing expressions which will be OR-ed together.
-    or_expression: ?[]const Expression,
+    or_expression: ?[]const Expression = null,
 
     pub const json_field_names = .{
         .and_expression = "AndExpression",

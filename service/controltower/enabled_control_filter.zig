@@ -6,25 +6,25 @@ const EnablementStatus = @import("enablement_status.zig").EnablementStatus;
 /// set.
 pub const EnabledControlFilter = struct {
     /// The set of `controlIdentifier` returned by the filter.
-    control_identifiers: ?[]const []const u8,
+    control_identifiers: ?[]const []const u8 = null,
 
     /// A list of `DriftStatus` items.
-    drift_statuses: ?[]const DriftStatus,
+    drift_statuses: ?[]const DriftStatus = null,
 
     /// Filters enabled controls by their inheritance drift status, allowing you to
     /// find controls with specific inheritance-related drift conditions.
-    inheritance_drift_statuses: ?[]const DriftStatus,
+    inheritance_drift_statuses: ?[]const DriftStatus = null,
 
     /// Filters enabled controls by their parent control identifiers, allowing you
     /// to find child controls of specific parent controls.
-    parent_identifiers: ?[]const []const u8,
+    parent_identifiers: ?[]const []const u8 = null,
 
     /// Filters enabled controls by their resource drift status, allowing you to
     /// find controls with specific resource-related drift conditions.
-    resource_drift_statuses: ?[]const DriftStatus,
+    resource_drift_statuses: ?[]const DriftStatus = null,
 
     /// A list of `EnablementStatus` items.
-    statuses: ?[]const EnablementStatus,
+    statuses: ?[]const EnablementStatus = null,
 
     pub const json_field_names = .{
         .control_identifiers = "controlIdentifiers",

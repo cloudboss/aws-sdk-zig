@@ -13,8 +13,8 @@
 /// *Amazon EC2 User Guide*.
 pub const NetworkBandwidthGbpsRequest = struct {
     /// The maximum amount of network bandwidth, in gigabits per second (Gbps).
-    max: ?f64,
+    max: ?f64 = null,
 
     /// The minimum amount of network bandwidth, in gigabits per second (Gbps).
-    min: ?f64,
+    min: ?f64 = null,
 };

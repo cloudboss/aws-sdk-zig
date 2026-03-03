@@ -4,28 +4,28 @@ const VmwareTag = @import("vmware_tag.zig").VmwareTag;
 /// (ARNs).
 pub const VirtualMachineDetails = struct {
     /// The host name of the virtual machine.
-    host_name: ?[]const u8,
+    host_name: ?[]const u8 = null,
 
     /// The ID of the virtual machine's hypervisor.
-    hypervisor_id: ?[]const u8,
+    hypervisor_id: ?[]const u8 = null,
 
     /// The most recent date a virtual machine was backed up, in Unix format and UTC
     /// time.
-    last_backup_date: ?i64,
+    last_backup_date: ?i64 = null,
 
     /// The name of the virtual machine.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The path of the virtual machine.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the virtual machine. For example,
     /// `arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL`.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// These are the details of the VMware tags associated with the specified
     /// virtual machine.
-    vmware_tags: ?[]const VmwareTag,
+    vmware_tags: ?[]const VmwareTag = null,
 
     pub const json_field_names = .{
         .host_name = "HostName",

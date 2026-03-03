@@ -8,45 +8,45 @@ const ProxySessionStatus = @import("proxy_session_status.zig").ProxySessionStatu
 /// The proxy session for an Amazon Chime SDK Voice Connector.
 pub const ProxySession = struct {
     /// The proxy session capabilities.
-    capabilities: ?[]const Capability,
+    capabilities: ?[]const Capability = null,
 
     /// The created time stamp, in ISO 8601 format.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The ended time stamp, in ISO 8601 format.
-    ended_timestamp: ?i64,
+    ended_timestamp: ?i64 = null,
 
     /// The number of minutes allowed for the proxy session.
-    expiry_minutes: ?i32,
+    expiry_minutes: ?i32 = null,
 
     /// The preference for matching the country or area code of the proxy phone
     /// number with that of the first participant.
-    geo_match_level: ?GeoMatchLevel,
+    geo_match_level: ?GeoMatchLevel = null,
 
     /// The country and area code for the proxy phone number.
-    geo_match_params: ?GeoMatchParams,
+    geo_match_params: ?GeoMatchParams = null,
 
     /// The proxy session name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The preference for proxy phone number reuse, or stickiness, between the same
     /// participants across sessions.
-    number_selection_behavior: ?NumberSelectionBehavior,
+    number_selection_behavior: ?NumberSelectionBehavior = null,
 
     /// The proxy session participants.
-    participants: ?[]const Participant,
+    participants: ?[]const Participant = null,
 
     /// The proxy session ID.
-    proxy_session_id: ?[]const u8,
+    proxy_session_id: ?[]const u8 = null,
 
     /// The proxy session status.
-    status: ?ProxySessionStatus,
+    status: ?ProxySessionStatus = null,
 
     /// The updated time stamp, in ISO 8601 format.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     /// The Voice Connector ID.
-    voice_connector_id: ?[]const u8,
+    voice_connector_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .capabilities = "Capabilities",

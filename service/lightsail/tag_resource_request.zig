@@ -3,7 +3,7 @@ const Tag = @import("tag.zig").Tag;
 pub const TagResourceRequest = struct {
     /// The Amazon Resource Name (ARN) of the resource to which you want to add a
     /// tag.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The name of the resource to which you are adding tags.
     resource_name: []const u8,

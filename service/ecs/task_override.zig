@@ -5,10 +5,10 @@ const InferenceAcceleratorOverride = @import("inference_accelerator_override.zig
 /// The overrides that are associated with a task.
 pub const TaskOverride = struct {
     /// One or more container overrides that are sent to a task.
-    container_overrides: ?[]const ContainerOverride,
+    container_overrides: ?[]const ContainerOverride = null,
 
     /// The CPU override for the task.
-    cpu: ?[]const u8,
+    cpu: ?[]const u8 = null,
 
     /// The ephemeral storage setting override for the task.
     ///
@@ -18,7 +18,7 @@ pub const TaskOverride = struct {
     /// * Linux platform version `1.4.0` or later.
     ///
     /// * Windows platform version `1.0.0` or later.
-    ephemeral_storage: ?EphemeralStorage,
+    ephemeral_storage: ?EphemeralStorage = null,
 
     /// The Amazon Resource Name (ARN) of the task execution role override for the
     /// task. For
@@ -26,13 +26,13 @@ pub const TaskOverride = struct {
     /// execution IAM
     /// role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html) in the *Amazon Elastic Container Service
     /// Developer Guide*.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The Elastic Inference accelerator override for the task.
-    inference_accelerator_overrides: ?[]const InferenceAcceleratorOverride,
+    inference_accelerator_overrides: ?[]const InferenceAcceleratorOverride = null,
 
     /// The memory override for the task.
-    memory: ?[]const u8,
+    memory: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the role that containers in this task can
     /// assume.
@@ -41,7 +41,7 @@ pub const TaskOverride = struct {
     /// For more information, see [IAM Role for
     /// Tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    task_role_arn: ?[]const u8,
+    task_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .container_overrides = "containerOverrides",

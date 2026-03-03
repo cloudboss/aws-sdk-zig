@@ -7,10 +7,10 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// input
 /// metrics.
 pub const CurrentMetricSortCriteria = struct {
-    sort_by_metric: ?CurrentMetricName,
+    sort_by_metric: ?CurrentMetricName = null,
 
     /// The way to sort.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .sort_by_metric = "SortByMetric",

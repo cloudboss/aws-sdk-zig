@@ -1,7 +1,7 @@
 pub const Unauthenticated = struct {
     /// Specifies whether you want to turn on or turn off unauthenticated traffic to
     /// your cluster.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

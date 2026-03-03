@@ -19,18 +19,18 @@
 pub const CoverageNormalizedUnits = struct {
     /// The percentage of your used instance normalized units that a reservation
     /// covers.
-    coverage_normalized_units_percentage: ?[]const u8,
+    coverage_normalized_units_percentage: ?[]const u8 = null,
 
     /// The number of normalized units that are covered by On-Demand Instances
     /// instead of a
     /// reservation.
-    on_demand_normalized_units: ?[]const u8,
+    on_demand_normalized_units: ?[]const u8 = null,
 
     /// The number of normalized units that a reservation covers.
-    reserved_normalized_units: ?[]const u8,
+    reserved_normalized_units: ?[]const u8 = null,
 
     /// The total number of normalized units that you used.
-    total_running_normalized_units: ?[]const u8,
+    total_running_normalized_units: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .coverage_normalized_units_percentage = "CoverageNormalizedUnitsPercentage",

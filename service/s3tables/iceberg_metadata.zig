@@ -5,7 +5,7 @@ const IcebergSchema = @import("iceberg_schema.zig").IcebergSchema;
 /// Contains details about the metadata for an Iceberg table.
 pub const IcebergMetadata = struct {
     /// Contains configuration properties for an Iceberg table.
-    properties: ?[]const aws.map.StringMapEntry,
+    properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The schema for an Iceberg table.
     schema: IcebergSchema,

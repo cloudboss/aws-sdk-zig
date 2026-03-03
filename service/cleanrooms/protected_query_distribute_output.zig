@@ -11,9 +11,9 @@ pub const ProtectedQueryDistributeOutput = struct {
     /// Contains the output results for each member location specified in the
     /// distribute output configuration. Each entry provides details about the
     /// result distribution to a specific collaboration member.
-    member_list: ?[]const ProtectedQuerySingleMemberOutput,
+    member_list: ?[]const ProtectedQuerySingleMemberOutput = null,
 
-    s_3: ?ProtectedQueryS3Output,
+    s_3: ?ProtectedQueryS3Output = null,
 
     pub const json_field_names = .{
         .member_list = "memberList",

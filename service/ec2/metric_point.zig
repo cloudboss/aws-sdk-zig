@@ -4,15 +4,15 @@
 pub const MetricPoint = struct {
     /// The end date for the metric point. The ending time must be formatted as
     /// `yyyy-mm-ddThh:mm:ss`. For example, `2022-06-12T12:00:00.000Z`.
-    end_date: ?i64,
+    end_date: ?i64 = null,
 
     /// The start date for the metric point. The starting date for the metric point.
     /// The starting time must be formatted
     /// as `yyyy-mm-ddThh:mm:ss`. For example, `2022-06-10T12:00:00.000Z`.
-    start_date: ?i64,
+    start_date: ?i64 = null,
 
     /// The status of the metric point.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
-    value: ?f32,
+    value: ?f32 = null,
 };

@@ -6,71 +6,71 @@ const DeviceStatus = @import("device_status.zig").DeviceStatus;
 /// Describes a thin client device.
 pub const Device = struct {
     /// The Amazon Resource Name (ARN) of the device.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The timestamp of when the device was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The ID of the software set currently installed on the device.
-    current_software_set_id: ?[]const u8,
+    current_software_set_id: ?[]const u8 = null,
 
     /// The version of the software set currently installed on the device.
-    current_software_set_version: ?[]const u8,
+    current_software_set_version: ?[]const u8 = null,
 
     /// The ID of the software set which the device has been set to.
-    desired_software_set_id: ?[]const u8,
+    desired_software_set_id: ?[]const u8 = null,
 
     /// The ID of the environment the device is associated with.
-    environment_id: ?[]const u8,
+    environment_id: ?[]const u8 = null,
 
     /// The ID of the device.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Key Management Service key used to
     /// encrypt the device.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The timestamp of the most recent session on the device.
-    last_connected_at: ?i64,
+    last_connected_at: ?i64 = null,
 
     /// The timestamp of the most recent check-in of the device.
-    last_posture_at: ?i64,
+    last_posture_at: ?i64 = null,
 
     /// The user ID of the most recent session on the device.
-    last_user_id: ?[]const u8,
+    last_user_id: ?[]const u8 = null,
 
     /// The model number of the device.
-    model: ?[]const u8,
+    model: ?[]const u8 = null,
 
     /// The name of the device.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the software set that is pending to be installed on the device.
-    pending_software_set_id: ?[]const u8,
+    pending_software_set_id: ?[]const u8 = null,
 
     /// The version of the software set that is pending to be installed on the
     /// device.
-    pending_software_set_version: ?[]const u8,
+    pending_software_set_version: ?[]const u8 = null,
 
     /// The hardware serial number of the device.
-    serial_number: ?[]const u8,
+    serial_number: ?[]const u8 = null,
 
     /// Describes if the software currently installed on the device is a supported
     /// version.
-    software_set_compliance_status: ?DeviceSoftwareSetComplianceStatus,
+    software_set_compliance_status: ?DeviceSoftwareSetComplianceStatus = null,
 
     /// An option to define if software updates should be applied within a
     /// maintenance window.
-    software_set_update_schedule: ?SoftwareSetUpdateSchedule,
+    software_set_update_schedule: ?SoftwareSetUpdateSchedule = null,
 
     /// Describes if the device has a supported version of software installed.
-    software_set_update_status: ?SoftwareSetUpdateStatus,
+    software_set_update_status: ?SoftwareSetUpdateStatus = null,
 
     /// The status of the device.
-    status: ?DeviceStatus,
+    status: ?DeviceStatus = null,
 
     /// The timestamp of when the device was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

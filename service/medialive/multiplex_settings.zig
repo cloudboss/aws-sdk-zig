@@ -1,7 +1,7 @@
 /// Contains configuration for a Multiplex event
 pub const MultiplexSettings = struct {
     /// Maximum video buffer delay in milliseconds.
-    maximum_video_buffer_delay_milliseconds: ?i32,
+    maximum_video_buffer_delay_milliseconds: ?i32 = null,
 
     /// Transport stream bit rate.
     transport_stream_bitrate: i32,
@@ -10,7 +10,7 @@ pub const MultiplexSettings = struct {
     transport_stream_id: i32,
 
     /// Transport stream reserved bit rate.
-    transport_stream_reserved_bitrate: ?i32,
+    transport_stream_reserved_bitrate: ?i32 = null,
 
     pub const json_field_names = .{
         .maximum_video_buffer_delay_milliseconds = "MaximumVideoBufferDelayMilliseconds",

@@ -4,7 +4,7 @@ const CfnUpdateTemplateProvider = @import("cfn_update_template_provider.zig").Cf
 /// the project.
 pub const UpdateTemplateProvider = struct {
     /// The CloudFormation template provider configuration to update.
-    cfn_template_provider: ?CfnUpdateTemplateProvider,
+    cfn_template_provider: ?CfnUpdateTemplateProvider = null,
 
     pub const json_field_names = .{
         .cfn_template_provider = "CfnTemplateProvider",

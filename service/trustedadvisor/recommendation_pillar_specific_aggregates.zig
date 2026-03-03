@@ -3,7 +3,7 @@ const RecommendationCostOptimizingAggregates = @import("recommendation_cost_opti
 /// Recommendation pillar aggregates
 pub const RecommendationPillarSpecificAggregates = struct {
     /// Cost optimizing aggregates
-    cost_optimizing: ?RecommendationCostOptimizingAggregates,
+    cost_optimizing: ?RecommendationCostOptimizingAggregates = null,
 
     pub const json_field_names = .{
         .cost_optimizing = "costOptimizing",

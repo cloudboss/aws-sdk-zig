@@ -24,30 +24,30 @@ pub const HTTPRequest = struct {
     ///
     /// * `x-forwarded-for`, if the viewer did use an HTTP proxy or a load balancer
     ///   to send the request
-    client_ip: ?[]const u8,
+    client_ip: ?[]const u8 = null,
 
     /// The two-letter country code for the country that the request originated
     /// from. For a current list of country codes,
     /// see the Wikipedia entry [ISO 3166-1
     /// alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// A complex type that contains two values for each header in the sampled web
     /// request: the name of the header and the value of the header.
-    headers: ?[]const HTTPHeader,
+    headers: ?[]const HTTPHeader = null,
 
     /// The HTTP version specified in the sampled web request, for example,
     /// `HTTP/1.1`.
-    http_version: ?[]const u8,
+    http_version: ?[]const u8 = null,
 
     /// The HTTP method specified in the sampled web request. CloudFront supports
     /// the following methods: `DELETE`,
     /// `GET`, `HEAD`, `OPTIONS`, `PATCH`, `POST`, and `PUT`.
-    method: ?[]const u8,
+    method: ?[]const u8 = null,
 
     /// The part of a web request that identifies the resource, for example,
     /// `/images/daily-ad.jpg`.
-    uri: ?[]const u8,
+    uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_ip = "ClientIP",

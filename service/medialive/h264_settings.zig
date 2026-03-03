@@ -33,35 +33,35 @@ pub const H264Settings = struct {
     /// quantization: spatial, temporal, and flicker. We recommend that you set the
     /// field to Auto. For more information about all the options, see the topic
     /// about video adaptive quantization in the MediaLive user guide.
-    adaptive_quantization: ?H264AdaptiveQuantization,
+    adaptive_quantization: ?H264AdaptiveQuantization = null,
 
     /// Indicates that AFD values will be written into the output stream. If
     /// afdSignaling is "auto", the system will try to preserve the input AFD value
     /// (in cases where multiple AFD values are valid). If set to "fixed", the AFD
     /// value will be the value configured in the fixedAfd parameter.
-    afd_signaling: ?AfdSignaling,
+    afd_signaling: ?AfdSignaling = null,
 
     /// Average bitrate in bits/second. Required when the rate control mode is VBR
     /// or CBR. Not used for QVBR. In an MS Smooth output group, each output must
     /// have a unique value when its bitrate is rounded down to the nearest multiple
     /// of 1000.
-    bitrate: ?i32,
+    bitrate: ?i32 = null,
 
     /// Percentage of the buffer that should initially be filled (HRD buffer model).
-    buf_fill_pct: ?i32,
+    buf_fill_pct: ?i32 = null,
 
     /// Size of buffer (HRD buffer model) in bits.
-    buf_size: ?i32,
+    buf_size: ?i32 = null,
 
     /// Includes colorspace metadata in the output.
-    color_metadata: ?H264ColorMetadata,
+    color_metadata: ?H264ColorMetadata = null,
 
     /// Specify the type of color space to apply or choose to pass through. The
     /// default is to pass through the color space that is in the source.
-    color_space_settings: ?H264ColorSpaceSettings,
+    color_space_settings: ?H264ColorSpaceSettings = null,
 
     /// Entropy encoding mode. Use cabac (must be in Main or High profile) or cavlc.
-    entropy_encoding: ?H264EntropyEncoding,
+    entropy_encoding: ?H264EntropyEncoding = null,
 
     /// Optional. Both filters reduce bandwidth by removing imperceptible details.
     /// You can enable one of the filters. We
@@ -77,17 +77,17 @@ pub const H264Settings = struct {
     /// encoding loop. It adapts to the current
     /// compression level to filter imperceptible signals. This filter works only
     /// when the resolution is 1080p or lower.
-    filter_settings: ?H264FilterSettings,
+    filter_settings: ?H264FilterSettings = null,
 
     /// Four bit AFD value to write on all frames of video in the output stream.
     /// Only valid when afdSignaling is set to 'Fixed'.
-    fixed_afd: ?FixedAfd,
+    fixed_afd: ?FixedAfd = null,
 
     /// Flicker AQ makes adjustments within each frame to reduce flicker or 'pop' on
     /// I-frames. The value to enter in this field depends on the value in the
     /// Adaptive quantization field. For more information, see the topic about video
     /// adaptive quantization in the MediaLive user guide.
-    flicker_aq: ?H264FlickerAq,
+    flicker_aq: ?H264FlickerAq = null,
 
     /// This setting applies only when scan type is "interlaced." It controls
     /// whether coding is performed on a field basis or on a frame basis. (When the
@@ -97,33 +97,33 @@ pub const H264Settings = struct {
     /// disabled: Code the two sets of fields separately (on a field basis) or
     /// together (on a frame basis using PAFF), depending on what is most
     /// appropriate for the content.
-    force_field_pictures: ?H264ForceFieldPictures,
+    force_field_pictures: ?H264ForceFieldPictures = null,
 
     /// This field indicates how the output video frame rate is specified. If
     /// "specified" is selected then the output video frame rate is determined by
     /// framerateNumerator and framerateDenominator, else if "initializeFromSource"
     /// is selected then the output video frame rate will be set equal to the input
     /// video frame rate of the first input.
-    framerate_control: ?H264FramerateControl,
+    framerate_control: ?H264FramerateControl = null,
 
     /// Framerate denominator.
-    framerate_denominator: ?i32,
+    framerate_denominator: ?i32 = null,
 
     /// Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976
     /// fps.
-    framerate_numerator: ?i32,
+    framerate_numerator: ?i32 = null,
 
     /// Documentation update needed
-    gop_b_reference: ?H264GopBReference,
+    gop_b_reference: ?H264GopBReference = null,
 
     /// Frequency of closed GOPs. In streaming applications, it is recommended that
     /// this be set to 1 so a decoder joining mid-stream will receive an IDR frame
     /// as quickly as possible. Setting this value to 0 will break output
     /// segmenting.
-    gop_closed_cadence: ?i32,
+    gop_closed_cadence: ?i32 = null,
 
     /// Number of B-frames between reference frames.
-    gop_num_b_frames: ?i32,
+    gop_num_b_frames: ?i32 = null,
 
     /// GOP size (keyframe interval) in units of either frames or seconds per
     /// gopSizeUnits.
@@ -131,31 +131,31 @@ pub const H264Settings = struct {
     /// than or equal to 1.
     /// If gopSizeUnits is seconds, gopSize must be greater than 0, but need not be
     /// an integer.
-    gop_size: ?f64,
+    gop_size: ?f64 = null,
 
     /// Indicates if the gopSize is specified in frames or seconds. If seconds the
     /// system will convert the gopSize into a frame count at run time.
-    gop_size_units: ?H264GopSizeUnits,
+    gop_size_units: ?H264GopSizeUnits = null,
 
     /// H.264 Level.
-    level: ?H264Level,
+    level: ?H264Level = null,
 
     /// Amount of lookahead. A value of low can decrease latency and memory usage,
     /// while high can produce better quality for certain content.
-    look_ahead_rate_control: ?H264LookAheadRateControl,
+    look_ahead_rate_control: ?H264LookAheadRateControl = null,
 
     /// For QVBR: See the tooltip for Quality level
     ///
     /// For VBR: Set the maximum bitrate in order to accommodate expected spikes in
     /// the complexity of the video.
-    max_bitrate: ?i32,
+    max_bitrate: ?i32 = null,
 
     /// Used for QVBR rate control mode only.
     /// Optional.
     /// Enter a minimum bitrate if you want to keep the output bitrate about a
     /// threshold, in order to prevent the downstream system from de-allocating
     /// network bandwidth for this output.
-    min_bitrate: ?i32,
+    min_bitrate: ?i32 = null,
 
     /// Only meaningful if sceneChangeDetect is set to enabled. Defaults to 5 if
     /// multiplex rate control is used. Enforces separation between repeated
@@ -165,32 +165,32 @@ pub const H264Settings = struct {
     /// requires enabling lookahead as well as setting I-interval. The normal
     /// cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size +
     /// Min-I-interval - 1
-    min_i_interval: ?i32,
+    min_i_interval: ?i32 = null,
 
     /// Sets the minimum QP. If you aren't familiar with quantization adjustment,
     /// leave the field empty. MediaLive will
     /// apply an appropriate value.
-    min_qp: ?i32,
+    min_qp: ?i32 = null,
 
     /// Number of reference frames to use. The encoder may use more than requested
     /// if using B-frames and/or interlaced encoding.
-    num_ref_frames: ?i32,
+    num_ref_frames: ?i32 = null,
 
     /// This field indicates how the output pixel aspect ratio is specified. If
     /// "specified" is selected then the output video pixel aspect ratio is
     /// determined by parNumerator and parDenominator, else if
     /// "initializeFromSource" is selected then the output pixsel aspect ratio will
     /// be set equal to the input video pixel aspect ratio of the first input.
-    par_control: ?H264ParControl,
+    par_control: ?H264ParControl = null,
 
     /// Pixel Aspect Ratio denominator.
-    par_denominator: ?i32,
+    par_denominator: ?i32 = null,
 
     /// Pixel Aspect Ratio numerator.
-    par_numerator: ?i32,
+    par_numerator: ?i32 = null,
 
     /// H.264 Profile.
-    profile: ?H264Profile,
+    profile: ?H264Profile = null,
 
     /// Leave as STANDARD_QUALITY or choose a different value (which might result in
     /// additional costs to run the channel).
@@ -199,7 +199,7 @@ pub const H264Settings = struct {
     /// QVBR or CBR. If this channel is in a MediaLive multiplex, the value must be
     /// ENHANCED_QUALITY.
     /// - STANDARD_QUALITY: Valid for any Rate control mode.
-    quality_level: ?H264QualityLevel,
+    quality_level: ?H264QualityLevel = null,
 
     /// Controls the target quality for the video encode. Applies only when the rate
     /// control mode is QVBR. You can set a target quality or you can let MediaLive
@@ -213,7 +213,7 @@ pub const H264Settings = struct {
     /// Max bitrate enter the maximum rate you want in the video. For more
     /// information, see the section called "Video - rate control mode" in the
     /// MediaLive user guide
-    qvbr_quality_level: ?i32,
+    qvbr_quality_level: ?i32 = null,
 
     /// Rate control mode.
     ///
@@ -235,58 +235,58 @@ pub const H264Settings = struct {
     /// delivered to a MediaLive Multiplex in which case the rate control
     /// configuration is controlled
     /// by the properties within the Multiplex Program.
-    rate_control_mode: ?H264RateControlMode,
+    rate_control_mode: ?H264RateControlMode = null,
 
     /// Sets the scan type of the output to progressive or top-field-first
     /// interlaced.
-    scan_type: ?H264ScanType,
+    scan_type: ?H264ScanType = null,
 
     /// Scene change detection.
     ///
     /// - On: inserts I-frames when scene change is detected.
     /// - Off: does not force an I-frame when scene change is detected.
-    scene_change_detect: ?H264SceneChangeDetect,
+    scene_change_detect: ?H264SceneChangeDetect = null,
 
     /// Number of slices per picture. Must be less than or equal to the number of
     /// macroblock rows for progressive pictures, and less than or equal to half the
     /// number of macroblock rows for interlaced pictures.
     /// This field is optional; when no value is specified the encoder will choose
     /// the number of slices based on encode resolution.
-    slices: ?i32,
+    slices: ?i32 = null,
 
     /// Softness. Selects quantizer matrix, larger values reduce high-frequency
     /// content in the encoded image. If not set to zero, must be greater than 15.
-    softness: ?i32,
+    softness: ?i32 = null,
 
     /// Spatial AQ makes adjustments within each frame based on spatial variation of
     /// content complexity. The value to enter in this field depends on the value in
     /// the Adaptive quantization field. For more information, see the topic about
     /// video adaptive quantization in the MediaLive user guide.
-    spatial_aq: ?H264SpatialAq,
+    spatial_aq: ?H264SpatialAq = null,
 
     /// If set to fixed, use gopNumBFrames B-frames per sub-GOP. If set to dynamic,
     /// optimize the number of B-frames used for each sub-GOP to improve visual
     /// quality.
-    subgop_length: ?H264SubGopLength,
+    subgop_length: ?H264SubGopLength = null,
 
     /// Produces a bitstream compliant with SMPTE RP-2027.
-    syntax: ?H264Syntax,
+    syntax: ?H264Syntax = null,
 
     /// Temporal makes adjustments within each frame based on variations in content
     /// complexity over time. The value to enter in this field depends on the value
     /// in the Adaptive quantization field. For more information, see the topic
     /// about video adaptive quantization in the MediaLive user guide.
-    temporal_aq: ?H264TemporalAq,
+    temporal_aq: ?H264TemporalAq = null,
 
     /// Timecode burn-in settings
-    timecode_burnin_settings: ?TimecodeBurninSettings,
+    timecode_burnin_settings: ?TimecodeBurninSettings = null,
 
     /// Determines how timecodes should be inserted into the video elementary
     /// stream.
     /// - 'disabled': Do not include timecodes
     /// - 'picTimingSei': Pass through picture timing SEI messages from the source
     /// specified in Timecode Config
-    timecode_insertion: ?H264TimecodeInsertionBehavior,
+    timecode_insertion: ?H264TimecodeInsertionBehavior = null,
 
     pub const json_field_names = .{
         .adaptive_quantization = "AdaptiveQuantization",

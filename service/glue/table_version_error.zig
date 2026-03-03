@@ -3,14 +3,14 @@ const ErrorDetail = @import("error_detail.zig").ErrorDetail;
 /// An error record for table-version operations.
 pub const TableVersionError = struct {
     /// The details about the error.
-    error_detail: ?ErrorDetail,
+    error_detail: ?ErrorDetail = null,
 
     /// The name of the table in question.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The ID value of the version in question. A `VersionID` is a string
     /// representation of an integer. Each version is incremented by 1.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_detail = "ErrorDetail",

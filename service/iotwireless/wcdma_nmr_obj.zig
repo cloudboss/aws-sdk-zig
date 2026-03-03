@@ -2,13 +2,13 @@
 pub const WcdmaNmrObj = struct {
     /// Path loss, or path attenuation, is the reduction in power density of an
     /// electromagnetic wave as it propagates through space.
-    path_loss: ?i32,
+    path_loss: ?i32 = null,
 
     /// Primary Scrambling Code.
     psc: i32,
 
     /// Received Signal Code Power (signal power) (dBm)
-    rscp: ?i32,
+    rscp: ?i32 = null,
 
     /// WCDMA UTRA Absolute RF Channel Number downlink.
     uarfcndl: i32,

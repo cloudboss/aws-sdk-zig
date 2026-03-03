@@ -5,18 +5,18 @@ pub const ListedWebApp = struct {
     /// The `AccessEndpoint` is the URL that you provide to your users for them to
     /// interact with the Transfer Family web app. You can specify a custom URL or
     /// use the default value.
-    access_endpoint: ?[]const u8,
+    access_endpoint: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the web app.
     arn: []const u8,
 
     /// The type of endpoint hosting the web app. Valid values are `PUBLIC` for
     /// publicly accessible endpoints and `VPC` for VPC-hosted endpoints.
-    endpoint_type: ?WebAppEndpointType,
+    endpoint_type: ?WebAppEndpointType = null,
 
     /// The `WebAppEndpoint` is the unique URL for your Transfer Family web app.
     /// This is the value that you use when you configure **Origins** on CloudFront.
-    web_app_endpoint: ?[]const u8,
+    web_app_endpoint: ?[]const u8 = null,
 
     /// The unique identifier for the web app.
     web_app_id: []const u8,

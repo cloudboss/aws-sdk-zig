@@ -6,7 +6,7 @@
 /// `"oldestDate": 1325376070.`
 pub const ExecutionTimeFilter = struct {
     /// Specifies the latest start or close date and time to return.
-    latest_date: ?i64,
+    latest_date: ?i64 = null,
 
     /// Specifies the oldest start or close date and time to return.
     oldest_date: i64,

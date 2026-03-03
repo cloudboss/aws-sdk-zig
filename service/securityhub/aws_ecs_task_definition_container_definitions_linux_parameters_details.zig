@@ -7,28 +7,28 @@ const AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails = @imp
 pub const AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails = struct {
     /// The Linux capabilities for the container that are added to or dropped from
     /// the default configuration provided by Docker.
-    capabilities: ?AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails,
+    capabilities: ?AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails = null,
 
     /// The host devices to expose to the container.
-    devices: ?[]const AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails,
+    devices: ?[]const AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails = null,
 
     /// Whether to run an `init` process inside the container that forwards signals
     /// and reaps processes.
-    init_process_enabled: ?bool,
+    init_process_enabled: ?bool = null,
 
     /// The total amount of swap memory (in MiB) that a container can use.
-    max_swap: ?i32,
+    max_swap: ?i32 = null,
 
     /// The value for the size (in MiB) of the **/dev/shm** volume.
-    shared_memory_size: ?i32,
+    shared_memory_size: ?i32 = null,
 
     /// Configures the container's memory swappiness behavior. Determines how
     /// aggressively pages are swapped. The higher the value, the more aggressive
     /// the swappiness. The default is 60.
-    swappiness: ?i32,
+    swappiness: ?i32 = null,
 
     /// The container path, mount options, and size (in MiB) of the tmpfs mount.
-    tmpfs: ?[]const AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails,
+    tmpfs: ?[]const AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails = null,
 
     pub const json_field_names = .{
         .capabilities = "Capabilities",

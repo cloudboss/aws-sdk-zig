@@ -3,7 +3,7 @@ const RelayConversationHistory = @import("relay_conversation_history.zig").Relay
 /// Settings of an inline collaborator agent.
 pub const CollaboratorConfiguration = struct {
     /// The Amazon Resource Name (ARN) of the inline collaborator agent.
-    agent_alias_arn: ?[]const u8,
+    agent_alias_arn: ?[]const u8 = null,
 
     /// Instructions that tell the inline collaborator agent what it should do and
     /// how it should interact with users.
@@ -14,7 +14,7 @@ pub const CollaboratorConfiguration = struct {
     collaborator_name: []const u8,
 
     /// A relay conversation history for the inline collaborator agent.
-    relay_conversation_history: ?RelayConversationHistory,
+    relay_conversation_history: ?RelayConversationHistory = null,
 
     pub const json_field_names = .{
         .agent_alias_arn = "agentAliasArn",

@@ -1,13 +1,13 @@
 /// The statistics of a mitigation action task.
 pub const DetectMitigationActionsTaskStatistics = struct {
     /// The actions that were performed.
-    actions_executed: ?i64,
+    actions_executed: ?i64 = null,
 
     /// The actions that failed.
-    actions_failed: ?i64,
+    actions_failed: ?i64 = null,
 
     /// The actions that were skipped.
-    actions_skipped: ?i64,
+    actions_skipped: ?i64 = null,
 
     pub const json_field_names = .{
         .actions_executed = "actionsExecuted",

@@ -6,14 +6,14 @@ pub const IndonesiaAdditionalInfo = struct {
     /// letter or certificate (Surat Keterangan Bebas) decision number.
     /// Non-collected VAT have a DGT letter or certificate (Surat Keterangan Tidak
     /// Dipungut).
-    decision_number: ?[]const u8,
+    decision_number: ?[]const u8 = null,
 
     /// Exception code if you are designated by Directorate General of Taxation
     /// (DGT) as a VAT collector, non-collected VAT, or VAT-exempt customer.
-    ppn_exception_designation_code: ?[]const u8,
+    ppn_exception_designation_code: ?[]const u8 = null,
 
     /// The tax registration number type.
-    tax_registration_number_type: ?IndonesiaTaxRegistrationNumberType,
+    tax_registration_number_type: ?IndonesiaTaxRegistrationNumberType = null,
 
     pub const json_field_names = .{
         .decision_number = "decisionNumber",

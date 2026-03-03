@@ -6,37 +6,37 @@ const DefaultHyperParameterRanges = @import("default_hyper_parameter_ranges.zig"
 /// Describes a custom algorithm.
 pub const Algorithm = struct {
     /// The Amazon Resource Name (ARN) of the algorithm.
-    algorithm_arn: ?[]const u8,
+    algorithm_arn: ?[]const u8 = null,
 
     /// The URI of the Docker container for the algorithm image.
-    algorithm_image: ?AlgorithmImage,
+    algorithm_image: ?AlgorithmImage = null,
 
     /// The date and time (in Unix time) that the algorithm was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// Specifies the default hyperparameters, their ranges, and whether they
     /// are tunable. A tunable hyperparameter can
     /// have its value determined during hyperparameter optimization (HPO).
-    default_hyper_parameter_ranges: ?DefaultHyperParameterRanges,
+    default_hyper_parameter_ranges: ?DefaultHyperParameterRanges = null,
 
     /// Specifies the default hyperparameters.
-    default_hyper_parameters: ?[]const aws.map.StringMapEntry,
+    default_hyper_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies the default maximum number of training jobs and parallel training
     /// jobs.
-    default_resource_config: ?[]const aws.map.StringMapEntry,
+    default_resource_config: ?[]const aws.map.StringMapEntry = null,
 
     /// The date and time (in Unix time) that the algorithm was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The name of the algorithm.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the role.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The training input mode.
-    training_input_mode: ?[]const u8,
+    training_input_mode: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .algorithm_arn = "algorithmArn",

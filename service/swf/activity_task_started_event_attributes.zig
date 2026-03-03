@@ -2,7 +2,7 @@
 pub const ActivityTaskStartedEventAttributes = struct {
     /// Identity of the worker that was assigned this task. This aids diagnostics
     /// when problems arise. The form of this identity is user defined.
-    identity: ?[]const u8,
+    identity: ?[]const u8 = null,
 
     /// The ID of the `ActivityTaskScheduled` event that was recorded when this
     /// activity task was scheduled. This information can be useful for diagnosing

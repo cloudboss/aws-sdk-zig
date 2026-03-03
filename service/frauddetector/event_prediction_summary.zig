@@ -1,22 +1,22 @@
 /// Information about the summary of an event prediction.
 pub const EventPredictionSummary = struct {
     /// The detector ID.
-    detector_id: ?[]const u8,
+    detector_id: ?[]const u8 = null,
 
     /// The detector version ID.
-    detector_version_id: ?[]const u8,
+    detector_version_id: ?[]const u8 = null,
 
     /// The event ID.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The timestamp of the event.
-    event_timestamp: ?[]const u8,
+    event_timestamp: ?[]const u8 = null,
 
     /// The event type.
-    event_type_name: ?[]const u8,
+    event_type_name: ?[]const u8 = null,
 
     /// The timestamp when the prediction was generated.
-    prediction_timestamp: ?[]const u8,
+    prediction_timestamp: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .detector_id = "detectorId",

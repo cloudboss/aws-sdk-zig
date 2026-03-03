@@ -19,7 +19,7 @@ const S3StorageClass = @import("s3_storage_class.zig").S3StorageClass;
 /// [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html).
 pub const S3CopyObjectOperation = struct {
     /// This functionality is not supported by directory buckets.
-    access_control_grants: ?[]const S3Grant,
+    access_control_grants: ?[]const S3Grant = null,
 
     /// Specifies whether Amazon S3 should use an S3 Bucket Key for object
     /// encryption with
@@ -38,7 +38,7 @@ pub const S3CopyObjectOperation = struct {
     bucket_key_enabled: bool = false,
 
     /// This functionality is not supported by directory buckets.
-    canned_access_control_list: ?S3CannedAccessControlList,
+    canned_access_control_list: ?S3CannedAccessControlList = null,
 
     /// Indicates the algorithm
     /// that
@@ -46,18 +46,18 @@ pub const S3CopyObjectOperation = struct {
     /// information,
     /// see [ Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
-    checksum_algorithm: ?S3ChecksumAlgorithm,
+    checksum_algorithm: ?S3ChecksumAlgorithm = null,
 
-    metadata_directive: ?S3MetadataDirective,
+    metadata_directive: ?S3MetadataDirective = null,
 
-    modified_since_constraint: ?i64,
+    modified_since_constraint: ?i64 = null,
 
     /// If you don't provide this parameter, Amazon S3 copies all the metadata from
     /// the original
     /// objects. If you specify an empty set, the new objects will have no tags.
     /// Otherwise, Amazon S3
     /// assigns the supplied tags to the new objects.
-    new_object_metadata: ?S3ObjectMetadata,
+    new_object_metadata: ?S3ObjectMetadata = null,
 
     /// Specifies a list of tags to add to the destination objects after they are
     /// copied.
@@ -68,25 +68,25 @@ pub const S3CopyObjectOperation = struct {
     /// If your source objects have tags and your destination bucket is a directory
     /// bucket, specify an empty tag set in the `NewObjectTagging` field
     /// to prevent copying the source object tags to the directory bucket.
-    new_object_tagging: ?[]const S3Tag,
+    new_object_tagging: ?[]const S3Tag = null,
 
     /// The legal hold status to be applied to all objects in the Batch Operations
     /// job.
     ///
     /// This functionality is not supported by directory buckets.
-    object_lock_legal_hold_status: ?S3ObjectLockLegalHoldStatus,
+    object_lock_legal_hold_status: ?S3ObjectLockLegalHoldStatus = null,
 
     /// The retention mode to be applied to all objects in the Batch Operations job.
     ///
     /// This functionality is not supported by directory buckets.
-    object_lock_mode: ?S3ObjectLockMode,
+    object_lock_mode: ?S3ObjectLockMode = null,
 
     /// The date when the applied object retention configuration expires on all
     /// objects in the
     /// Batch Operations job.
     ///
     /// This functionality is not supported by directory buckets.
-    object_lock_retain_until_date: ?i64,
+    object_lock_retain_until_date: ?i64 = null,
 
     /// If the destination bucket is configured as a website, specifies an optional
     /// metadata property for website redirects,
@@ -95,7 +95,7 @@ pub const S3CopyObjectOperation = struct {
     /// accessed through a website endpoint.
     ///
     /// This functionality is not supported by directory buckets.
-    redirect_location: ?[]const u8,
+    redirect_location: ?[]const u8 = null,
 
     /// This functionality is not supported by directory buckets.
     requester_pays: bool = false,
@@ -123,13 +123,13 @@ pub const S3CopyObjectOperation = struct {
     /// with SSE-KMS, you must make sure the encryption key is the same customer
     /// managed key that you specified for the directory bucket's default encryption
     /// configuration.
-    sse_aws_kms_key_id: ?[]const u8,
+    sse_aws_kms_key_id: ?[]const u8 = null,
 
     /// Specify the storage class for the destination objects in a `Copy` operation.
     ///
     /// **Directory buckets ** - This functionality is not supported by directory
     /// buckets.
-    storage_class: ?S3StorageClass,
+    storage_class: ?S3StorageClass = null,
 
     /// Specifies the folder prefix
     /// that
@@ -142,7 +142,7 @@ pub const S3CopyObjectOperation = struct {
     /// `TargetKeyPrefix`
     /// property
     /// to `Folder1`.
-    target_key_prefix: ?[]const u8,
+    target_key_prefix: ?[]const u8 = null,
 
     /// Specifies the destination bucket
     /// Amazon Resource Name
@@ -166,7 +166,7 @@ pub const S3CopyObjectOperation = struct {
     /// Services Region. Otherwise,
     /// you get an HTTP `400 Bad Request` error with the error code
     /// `InvalidRequest`.
-    target_resource: ?[]const u8,
+    target_resource: ?[]const u8 = null,
 
-    un_modified_since_constraint: ?i64,
+    un_modified_since_constraint: ?i64 = null,
 };

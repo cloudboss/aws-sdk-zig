@@ -1,10 +1,10 @@
 /// An AWS IoT thing.
 pub const Thing = struct {
     /// The ARN of the thing.
-    thing_arn: ?[]const u8,
+    thing_arn: ?[]const u8 = null,
 
     /// The name of the thing.
-    thing_name: ?[]const u8,
+    thing_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .thing_arn = "thingArn",

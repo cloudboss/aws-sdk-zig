@@ -7,7 +7,7 @@ pub const ErrorDetails = struct {
     code: ErrorCode,
 
     /// A list of detailed errors.
-    details: ?[]const DetailedError,
+    details: ?[]const DetailedError = null,
 
     /// The error message.
     message: []const u8,

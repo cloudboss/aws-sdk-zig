@@ -7,15 +7,15 @@ pub const InstancePortInfo = struct {
     /// The access direction (`inbound` or `outbound`).
     ///
     /// Lightsail currently supports only `inbound` access direction.
-    access_direction: ?AccessDirection,
+    access_direction: ?AccessDirection = null,
 
     /// The location from which access is allowed. For example, `Anywhere
     /// (0.0.0.0/0)`,
     /// or `Custom` if a specific IP address or range of IP addresses is allowed.
-    access_from: ?[]const u8,
+    access_from: ?[]const u8 = null,
 
     /// The type of access (`Public` or `Private`).
-    access_type: ?PortAccessType,
+    access_type: ?PortAccessType = null,
 
     /// An alias that defines access for a preconfigured range of IP addresses.
     ///
@@ -23,7 +23,7 @@ pub const InstancePortInfo = struct {
     /// addresses of the browser-based RDP/SSH client in the Lightsail console to
     /// connect to your
     /// instance.
-    cidr_list_aliases: ?[]const []const u8,
+    cidr_list_aliases: ?[]const []const u8 = null,
 
     /// The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are
     /// allowed to
@@ -35,10 +35,10 @@ pub const InstancePortInfo = struct {
     /// For more information about CIDR block notation, see [Classless
     /// Inter-Domain
     /// Routing](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on *Wikipedia*.
-    cidrs: ?[]const []const u8,
+    cidrs: ?[]const []const u8 = null,
 
     /// The common name of the port information.
-    common_name: ?[]const u8,
+    common_name: ?[]const u8 = null,
 
     /// The first port in a range of open ports on an instance.
     ///
@@ -71,7 +71,7 @@ pub const InstancePortInfo = struct {
     /// For more information about CIDR block notation, see [Classless
     /// Inter-Domain
     /// Routing](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on *Wikipedia*.
-    ipv_6_cidrs: ?[]const []const u8,
+    ipv_6_cidrs: ?[]const []const u8 = null,
 
     /// The IP protocol name.
     ///
@@ -113,7 +113,7 @@ pub const InstancePortInfo = struct {
     /// specify `icmp6` as the `protocol`, you must specify the ICMP type
     /// using the `fromPort` parameter, and ICMP code using the `toPort`
     /// parameter.
-    protocol: ?NetworkProtocol,
+    protocol: ?NetworkProtocol = null,
 
     /// The last port in a range of open ports on an instance.
     ///

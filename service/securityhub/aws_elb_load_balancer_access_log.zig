@@ -4,19 +4,19 @@ pub const AwsElbLoadBalancerAccessLog = struct {
     /// The interval in minutes for publishing the access logs.
     ///
     /// You can publish access logs either every 5 minutes or every 60 minutes.
-    emit_interval: ?i32,
+    emit_interval: ?i32 = null,
 
     /// Indicates whether access logs are enabled for the load balancer.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The name of the S3 bucket where the access logs are stored.
-    s3_bucket_name: ?[]const u8,
+    s3_bucket_name: ?[]const u8 = null,
 
     /// The logical hierarchy that was created for the S3 bucket.
     ///
     /// If a prefix is not provided, the log is placed at the root level of the
     /// bucket.
-    s3_bucket_prefix: ?[]const u8,
+    s3_bucket_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .emit_interval = "EmitInterval",

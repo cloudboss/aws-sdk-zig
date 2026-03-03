@@ -12,13 +12,13 @@ pub const WorkspaceRequest = struct {
     directory_id: []const u8,
 
     /// The IPv6 address for the WorkSpace.
-    ipv_6_address: ?[]const u8,
+    ipv_6_address: ?[]const u8 = null,
 
     /// Indicates whether the data stored on the root volume is encrypted.
-    root_volume_encryption_enabled: ?bool,
+    root_volume_encryption_enabled: ?bool = null,
 
     /// The tags for the WorkSpace.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The user name of the user for the WorkSpace. This user name must exist in
     /// the Directory Service directory for the WorkSpace.
@@ -31,12 +31,12 @@ pub const WorkspaceRequest = struct {
     user_name: []const u8,
 
     /// Indicates whether the data stored on the user volume is encrypted.
-    user_volume_encryption_enabled: ?bool,
+    user_volume_encryption_enabled: ?bool = null,
 
     /// The ARN of the symmetric KMS key used to encrypt data stored on your
     /// WorkSpace.
     /// Amazon WorkSpaces does not support asymmetric KMS keys.
-    volume_encryption_key: ?[]const u8,
+    volume_encryption_key: ?[]const u8 = null,
 
     /// The name of the user-decoupled WorkSpace.
     ///
@@ -44,10 +44,10 @@ pub const WorkspaceRequest = struct {
     /// `[UNDEFINED]` for user-decoupled WorkSpaces.
     /// `WorkspaceName` is not applicable if `UserName` is specified
     /// for user-assigned WorkSpaces.
-    workspace_name: ?[]const u8,
+    workspace_name: ?[]const u8 = null,
 
     /// The WorkSpace properties.
-    workspace_properties: ?WorkspaceProperties,
+    workspace_properties: ?WorkspaceProperties = null,
 
     pub const json_field_names = .{
         .bundle_id = "BundleId",

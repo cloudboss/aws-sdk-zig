@@ -17,7 +17,7 @@ const aws = @import("aws");
 /// Machine Learning Developer
 /// Guide](https://docs.aws.amazon.com/machine-learning/latest/dg).
 pub const PerformanceMetrics = struct {
-    properties: ?[]const aws.map.StringMapEntry,
+    properties: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .properties = "Properties",

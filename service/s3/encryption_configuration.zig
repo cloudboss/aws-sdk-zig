@@ -18,5 +18,5 @@ pub const EncryptionConfiguration = struct {
     /// [Asymmetric keys in Amazon Web Services
     /// KMS](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the
     /// *Amazon Web Services Key Management Service Developer Guide*.
-    replica_kms_key_id: ?[]const u8,
+    replica_kms_key_id: ?[]const u8 = null,
 };

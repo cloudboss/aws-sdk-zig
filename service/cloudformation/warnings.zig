@@ -5,5 +5,5 @@ pub const Warnings = struct {
     /// `TemplateSummaryConfig` parameter has the
     /// `TreatUnrecognizedResourceTypesAsWarning` configuration set to
     /// `True`.
-    unrecognized_resource_types: ?[]const []const u8,
+    unrecognized_resource_types: ?[]const []const u8 = null,
 };

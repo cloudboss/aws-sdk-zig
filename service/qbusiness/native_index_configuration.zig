@@ -6,7 +6,7 @@ const DocumentAttributeBoostingConfiguration = @import("document_attribute_boost
 pub const NativeIndexConfiguration = struct {
     /// Overrides the default boosts applied by Amazon Q Business to supported
     /// document attribute data types.
-    boosting_override: ?[]const aws.map.MapEntry(DocumentAttributeBoostingConfiguration),
+    boosting_override: ?[]const aws.map.MapEntry(DocumentAttributeBoostingConfiguration) = null,
 
     /// The identifier for the Amazon Q Business index.
     index_id: []const u8,
@@ -28,7 +28,7 @@ pub const NativeIndexConfiguration = struct {
     ///   text-based levels
     /// * Version 2 allows specifying prioritization between Date and String fields
     /// * Version 2 maintains backward compatibility with existing configurations
-    version: ?i64,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .boosting_override = "boostingOverride",

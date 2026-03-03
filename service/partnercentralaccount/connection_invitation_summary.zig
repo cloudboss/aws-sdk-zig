@@ -12,7 +12,7 @@ pub const ConnectionInvitationSummary = struct {
     catalog: []const u8,
 
     /// The identifier of the connection associated with this invitation.
-    connection_id: ?[]const u8,
+    connection_id: ?[]const u8 = null,
 
     /// The type of connection being requested in the invitation.
     connection_type: ConnectionType,
@@ -21,7 +21,7 @@ pub const ConnectionInvitationSummary = struct {
     created_at: i64,
 
     /// The timestamp when the connection invitation will expire.
-    expires_at: ?i64,
+    expires_at: ?i64 = null,
 
     /// The unique identifier of the connection invitation.
     id: []const u8,

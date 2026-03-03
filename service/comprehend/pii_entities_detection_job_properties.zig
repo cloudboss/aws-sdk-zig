@@ -9,13 +9,13 @@ const RedactionConfig = @import("redaction_config.zig").RedactionConfig;
 pub const PiiEntitiesDetectionJobProperties = struct {
     /// The Amazon Resource Name (ARN) of the IAM role that
     /// grants Amazon Comprehend read access to your input data.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     /// The time that the PII entities detection job completed.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The input properties for a PII entities detection job.
-    input_data_config: ?InputDataConfig,
+    input_data_config: ?InputDataConfig = null,
 
     /// The Amazon Resource Name (ARN) of the PII entities detection job. It is a
     /// unique, fully
@@ -28,43 +28,43 @@ pub const PiiEntitiesDetectionJobProperties = struct {
     /// The following is an example job ARN:
     ///
     /// `arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab`
-    job_arn: ?[]const u8,
+    job_arn: ?[]const u8 = null,
 
     /// The identifier assigned to the PII entities detection job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The name that you assigned the PII entities detection job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The current status of the PII entities detection job. If the status is
     /// `FAILED`, the `Message` field shows the reason for the failure.
-    job_status: ?JobStatus,
+    job_status: ?JobStatus = null,
 
     /// The language code of the input documents.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// A description of the status of a job.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Specifies whether the output provides the locations (offsets) of PII
     /// entities or a file in
     /// which PII entities are redacted.
-    mode: ?PiiEntitiesDetectionMode,
+    mode: ?PiiEntitiesDetectionMode = null,
 
     /// The output data configuration that you supplied when you created the PII
     /// entities
     /// detection job.
-    output_data_config: ?PiiOutputDataConfig,
+    output_data_config: ?PiiOutputDataConfig = null,
 
     /// Provides configuration parameters for PII entity redaction.
     ///
     /// This parameter is required if you set the `Mode` parameter to
     /// `ONLY_REDACTION`. In that case, you must provide a `RedactionConfig`
     /// definition that includes the `PiiEntityTypes` parameter.
-    redaction_config: ?RedactionConfig,
+    redaction_config: ?RedactionConfig = null,
 
     /// The time that the PII entities detection job was submitted for processing.
-    submit_time: ?i64,
+    submit_time: ?i64 = null,
 
     pub const json_field_names = .{
         .data_access_role_arn = "DataAccessRoleArn",

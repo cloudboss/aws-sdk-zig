@@ -6,10 +6,10 @@ pub const SystemEvent = struct {
     /// The event type. If the value is `STATE_CHANGE`, the event contains
     /// information
     /// about alarm state changes.
-    event_type: ?EventType,
+    event_type: ?EventType = null,
 
     /// Contains the configuration information of alarm state changes.
-    state_change_configuration: ?StateChangeConfiguration,
+    state_change_configuration: ?StateChangeConfiguration = null,
 
     pub const json_field_names = .{
         .event_type = "eventType",

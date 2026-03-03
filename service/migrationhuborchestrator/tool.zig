@@ -1,10 +1,10 @@
 /// List of AWS services utilized in a migration workflow.
 pub const Tool = struct {
     /// The name of an AWS service.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The URL of an AWS service.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

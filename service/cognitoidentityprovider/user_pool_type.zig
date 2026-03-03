@@ -33,27 +33,27 @@ pub const UserPoolType = struct {
     /// Cognito uses the legacy
     /// behavior to determine the recovery method where SMS is preferred through
     /// email.
-    account_recovery_setting: ?AccountRecoverySettingType,
+    account_recovery_setting: ?AccountRecoverySettingType = null,
 
     /// The configuration for `AdminCreateUser` requests.
-    admin_create_user_config: ?AdminCreateUserConfigType,
+    admin_create_user_config: ?AdminCreateUserConfigType = null,
 
     /// Attributes supported as an alias for this user pool. An alias is an
     /// attribute that
     /// users can enter as an alternative username. Possible values:
     /// **phone_number**, **email**, or **preferred_username**.
-    alias_attributes: ?[]const AliasAttributeType,
+    alias_attributes: ?[]const AliasAttributeType = null,
 
     /// The Amazon Resource Name (ARN) of the user pool.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The attributes that are auto-verified in a user pool.
-    auto_verified_attributes: ?[]const VerifiedAttributeType,
+    auto_verified_attributes: ?[]const VerifiedAttributeType = null,
 
     /// The date and time when the item was created. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// A custom domain name that you provide to Amazon Cognito. This parameter
     /// applies only if you use
@@ -64,7 +64,7 @@ pub const UserPoolType = struct {
     /// For more information about adding a custom domain to your user pool, see
     /// [Using Your Own Domain for the Hosted
     /// UI](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html).
-    custom_domain: ?[]const u8,
+    custom_domain: ?[]const u8 = null,
 
     /// When active, `DeletionProtection` prevents accidental deletion of your user
     /// pool. Before you can delete a user pool that you have protected against
@@ -78,7 +78,7 @@ pub const UserPoolType = struct {
     /// send a new `DeleteUserPool` request after you deactivate deletion protection
     /// in an
     /// `UpdateUserPool` API request.
-    deletion_protection: ?DeletionProtectionType,
+    deletion_protection: ?DeletionProtectionType = null,
 
     /// The device-remembering configuration for a user pool. A null value indicates
     /// that you
@@ -86,46 +86,46 @@ pub const UserPoolType = struct {
     ///
     /// When you provide a value for any `DeviceConfiguration` field, you
     /// activate the Amazon Cognito device-remembering feature.
-    device_configuration: ?DeviceConfigurationType,
+    device_configuration: ?DeviceConfigurationType = null,
 
     /// The domain prefix, if the user pool has a domain associated with it.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// The email configuration of your user pool. The email configuration type sets
     /// your
     /// preferred sending method, Amazon Web Services Region, and sender for
     /// messages from your user
     /// pool.
-    email_configuration: ?EmailConfigurationType,
+    email_configuration: ?EmailConfigurationType = null,
 
     /// Deprecated. Review error codes from API requests with
     /// `EventSource:cognito-idp.amazonaws.com` in CloudTrail for
     /// information about problems with user pool email configuration.
-    email_configuration_failure: ?[]const u8,
+    email_configuration_failure: ?[]const u8 = null,
 
     /// This parameter is no longer used.
-    email_verification_message: ?[]const u8,
+    email_verification_message: ?[]const u8 = null,
 
     /// This parameter is no longer used.
-    email_verification_subject: ?[]const u8,
+    email_verification_subject: ?[]const u8 = null,
 
     /// A number estimating the size of the user pool.
     estimated_number_of_users: i32 = 0,
 
     /// The ID of the user pool.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A collection of user pool Lambda triggers. Amazon Cognito invokes triggers
     /// at several possible
     /// stages of user pool operations. Triggers can modify the outcome of the
     /// operations that
     /// invoked them.
-    lambda_config: ?LambdaConfigType,
+    lambda_config: ?LambdaConfigType = null,
 
     /// The date and time when the item was modified. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// Can be one of the following values:
     ///
@@ -137,15 +137,15 @@ pub const UserPoolType = struct {
     ///
     /// * `OPTIONAL` - Users have the option when registering to create an MFA
     /// token.
-    mfa_configuration: ?UserPoolMfaType,
+    mfa_configuration: ?UserPoolMfaType = null,
 
     /// The name of the user pool.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A list of user pool policies. Contains the policy that sets
     /// password-complexity
     /// requirements.
-    policies: ?UserPoolPolicyType,
+    policies: ?UserPoolPolicyType = null,
 
     /// A list of the user attributes and their properties in your user pool. The
     /// attribute
@@ -159,10 +159,10 @@ pub const UserPoolType = struct {
     /// app clients. You can create and update developer-only attributes only with
     /// IAM-authenticated API operations. Use app client read/write permissions
     /// instead.
-    schema_attributes: ?[]const SchemaAttributeType,
+    schema_attributes: ?[]const SchemaAttributeType = null,
 
     /// The contents of the SMS authentication message.
-    sms_authentication_message: ?[]const u8,
+    sms_authentication_message: ?[]const u8 = null,
 
     /// User pool configuration for delivery of SMS messages with Amazon Simple
     /// Notification Service. To send SMS
@@ -170,7 +170,7 @@ pub const UserPoolType = struct {
     /// the Amazon Cognito user pool uses an
     /// Identity and Access Management (IAM) role in your Amazon Web Services
     /// account.
-    sms_configuration: ?SmsConfigurationType,
+    sms_configuration: ?SmsConfigurationType = null,
 
     /// The reason why the SMS configuration can't send the messages to your users.
     ///
@@ -194,13 +194,13 @@ pub const UserPoolType = struct {
     /// [Moving out
     /// of the SMS
     /// sandbox](https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html).
-    sms_configuration_failure: ?[]const u8,
+    sms_configuration_failure: ?[]const u8 = null,
 
     /// This parameter is no longer used.
-    sms_verification_message: ?[]const u8,
+    sms_verification_message: ?[]const u8 = null,
 
     /// This parameter is no longer used.
-    status: ?StatusType,
+    status: ?StatusType = null,
 
     /// The settings for updates to user attributes. These settings include the
     /// property `AttributesRequireVerificationBeforeUpdate`,
@@ -209,12 +209,12 @@ pub const UserPoolType = struct {
     /// more information, see [
     /// Verifying updates to email addresses and phone
     /// numbers](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates).
-    user_attribute_update_settings: ?UserAttributeUpdateSettingsType,
+    user_attribute_update_settings: ?UserAttributeUpdateSettingsType = null,
 
     /// Specifies whether a user can use an email address or phone number as a
     /// username when
     /// they sign up.
-    username_attributes: ?[]const UsernameAttributeType,
+    username_attributes: ?[]const UsernameAttributeType = null,
 
     /// Case sensitivity of the username input for the selected sign-in option. When
     /// case
@@ -229,7 +229,7 @@ pub const UserPoolType = struct {
     /// case as the same user, and prevents a case variation from being assigned to
     /// the same
     /// attribute for a different user.
-    username_configuration: ?UsernameConfigurationType,
+    username_configuration: ?UsernameConfigurationType = null,
 
     /// Contains settings for activation of threat protection, including the
     /// operating
@@ -242,25 +242,25 @@ pub const UserPoolType = struct {
     /// pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html). To activate this setting, your user pool must be on the [
     /// Plus
     /// tier](https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html).
-    user_pool_add_ons: ?UserPoolAddOnsType,
+    user_pool_add_ons: ?UserPoolAddOnsType = null,
 
     /// The tags that are assigned to the user pool. A tag is a label that you can
     /// apply to
     /// user pools to categorize and manage them in different ways, such as by
     /// purpose, owner,
     /// environment, or other criteria.
-    user_pool_tags: ?[]const aws.map.StringMapEntry,
+    user_pool_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The user pool [feature
     /// plan](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html), or tier. This parameter determines the
     /// eligibility of the user pool for features like managed login, access-token
     /// customization, and threat protection. Defaults to `ESSENTIALS`.
-    user_pool_tier: ?UserPoolTierType,
+    user_pool_tier: ?UserPoolTierType = null,
 
     /// The template for the verification message that your user pool delivers to
     /// users who
     /// set an email address or phone number attribute.
-    verification_message_template: ?VerificationMessageTemplateType,
+    verification_message_template: ?VerificationMessageTemplateType = null,
 
     pub const json_field_names = .{
         .account_recovery_setting = "AccountRecoverySetting",

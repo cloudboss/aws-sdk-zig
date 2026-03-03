@@ -19,14 +19,14 @@ pub const Attachment = struct {
     /// subnet. You use this to identify the firewall endpoint in the VPC route
     /// tables, when you
     /// redirect the VPC traffic through the endpoint.
-    endpoint_id: ?[]const u8,
+    endpoint_id: ?[]const u8 = null,
 
     /// The current status of the firewall endpoint instantiation in the subnet.
     ///
     /// When this value is `READY`, the endpoint is available to handle network
     /// traffic. Otherwise,
     /// this value reflects its state, for example `CREATING` or `DELETING`.
-    status: ?AttachmentStatus,
+    status: ?AttachmentStatus = null,
 
     /// If Network Firewall fails to create or delete the firewall endpoint in the
     /// subnet, it populates this with the reason for the error or failure and how
@@ -37,11 +37,11 @@ pub const Attachment = struct {
     /// field. For more information about the causes for failiure or errors and
     /// solutions available for this field, see [Troubleshooting firewall endpoint
     /// failures](https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html) in the *Network Firewall Developer Guide*.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The unique identifier of the subnet that you've specified to be used for a
     /// firewall endpoint.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .endpoint_id = "EndpointId",

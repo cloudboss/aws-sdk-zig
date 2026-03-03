@@ -21,10 +21,10 @@ const Tag = @import("tag.zig").Tag;
 /// console.
 pub const TagInfoForResource = struct {
     /// The Amazon Resource Name (ARN) of the resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The array of Tag objects defined for the resource.
-    tag_list: ?[]const Tag,
+    tag_list: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .resource_arn = "ResourceARN",

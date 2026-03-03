@@ -2,7 +2,7 @@
 /// authorized targets.
 pub const ScopeDetails = struct {
     /// An array list of ARNs of applications.
-    authorized_targets: ?[]const []const u8,
+    authorized_targets: ?[]const []const u8 = null,
 
     /// The name of the access scope.
     scope: []const u8,

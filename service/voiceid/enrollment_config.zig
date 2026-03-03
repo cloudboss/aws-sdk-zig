@@ -10,10 +10,10 @@ pub const EnrollmentConfig = struct {
     /// voice prints and enrollment audio stored for that speaker with new data
     /// generated from
     /// the latest audio.
-    existing_enrollment_action: ?ExistingEnrollmentAction,
+    existing_enrollment_action: ?ExistingEnrollmentAction = null,
 
     /// The fraud detection configuration to use for the speaker enrollment job.
-    fraud_detection_config: ?EnrollmentJobFraudDetectionConfig,
+    fraud_detection_config: ?EnrollmentJobFraudDetectionConfig = null,
 
     pub const json_field_names = .{
         .existing_enrollment_action = "ExistingEnrollmentAction",

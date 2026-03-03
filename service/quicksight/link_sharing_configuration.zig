@@ -4,7 +4,7 @@ const ResourcePermission = @import("resource_permission.zig").ResourcePermission
 /// dashboard.
 pub const LinkSharingConfiguration = struct {
     /// A structure that contains the permissions of a shareable link.
-    permissions: ?[]const ResourcePermission,
+    permissions: ?[]const ResourcePermission = null,
 
     pub const json_field_names = .{
         .permissions = "Permissions",

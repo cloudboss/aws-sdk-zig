@@ -10,7 +10,7 @@ pub const IncrementalTrainingDataChannelOutput = struct {
 
     /// The version identifier of the trained model that was used for incremental
     /// training.
-    version_identifier: ?[]const u8,
+    version_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .channel_name = "channelName",

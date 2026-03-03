@@ -4,10 +4,10 @@ const DTMFSpecification = @import("dtmf_specification.zig").DTMFSpecification;
 /// Specifies the audio and DTMF input specification.
 pub const AudioAndDTMFInputSpecification = struct {
     /// Specifies the settings on audio input.
-    audio_specification: ?AudioSpecification,
+    audio_specification: ?AudioSpecification = null,
 
     /// Specifies the settings on DTMF input.
-    dtmf_specification: ?DTMFSpecification,
+    dtmf_specification: ?DTMFSpecification = null,
 
     /// Time for which a bot waits before assuming that the customer isn't going to
     /// speak or press

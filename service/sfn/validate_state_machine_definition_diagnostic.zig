@@ -97,7 +97,7 @@ pub const ValidateStateMachineDefinitionDiagnostic = struct {
     ///
     /// For errors specific to a field, the location could be in the format:
     /// `/States//`, for example: `/States/FailState/ErrorPath`.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// Message describing the diagnostic condition.
     message: []const u8,

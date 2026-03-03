@@ -14,7 +14,7 @@ pub const Range = struct {
     /// and source JSON is {"generatedAt": {"timestamp":
     /// "2001-07-04T12:08:56.235-0700"}}, then
     /// TimestampFormat should be "ISO_8601".
-    timestamp_format: ?[]const u8,
+    timestamp_format: ?[]const u8 = null,
 
     /// An expression specifying the field in your JSON object from which the date
     /// should be
@@ -23,7 +23,7 @@ pub const Range = struct {
     /// JSON is {"generatedAt": {"timestamp": "1737587945945"}}, then
     /// TimestampSource should be
     /// "{MyType.generatedAt.timestamp}".
-    timestamp_source: ?[]const u8,
+    timestamp_source: ?[]const u8 = null,
 
     /// The unit of time.
     unit: Unit = "DAYS",
@@ -38,7 +38,7 @@ pub const Range = struct {
     /// is in the past, and negative numbers to indicate it is in the future.
     /// ValueRange overrides
     /// Value.
-    value_range: ?ValueRange,
+    value_range: ?ValueRange = null,
 
     pub const json_field_names = .{
         .timestamp_format = "TimestampFormat",

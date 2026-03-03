@@ -3,13 +3,13 @@
 pub const RecommendationSummary = struct {
     /// The estimated total savings resulting from modifications, on a monthly
     /// basis.
-    estimated_monthly_savings: ?f64,
+    estimated_monthly_savings: ?f64 = null,
 
     /// The grouping of recommendations.
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// The total number of instance recommendations.
-    recommendation_count: ?i32,
+    recommendation_count: ?i32 = null,
 
     pub const json_field_names = .{
         .estimated_monthly_savings = "estimatedMonthlySavings",

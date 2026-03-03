@@ -6,7 +6,7 @@ pub const JoinResourceTypeEventConfiguration = struct {
     /// Join resource type event configuration object for enabling or disabling
     /// LoRaWAN
     /// related event topics.
-    lo_ra_wan: ?LoRaWANJoinResourceTypeEventConfiguration,
+    lo_ra_wan: ?LoRaWANJoinResourceTypeEventConfiguration = null,
 
     pub const json_field_names = .{
         .lo_ra_wan = "LoRaWAN",

@@ -20,16 +20,16 @@ pub const Theme = struct {
     id: []const u8,
 
     /// The time that the theme was modified.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// The name of the theme.
     name: []const u8,
 
     /// Describes the properties that can be overriden to customize a theme.
-    overrides: ?[]const ThemeValues,
+    overrides: ?[]const ThemeValues = null,
 
     /// One or more key-value pairs to use when tagging the theme.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of key-value pairs that defines the properties of the theme.
     values: []const ThemeValues,

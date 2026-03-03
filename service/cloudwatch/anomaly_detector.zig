@@ -21,35 +21,35 @@ pub const AnomalyDetector = struct {
     /// trained, including time ranges to exclude from use for training the model,
     /// and the time
     /// zone to use for the metric.
-    configuration: ?AnomalyDetectorConfiguration,
+    configuration: ?AnomalyDetectorConfiguration = null,
 
     /// The metric dimensions associated with the anomaly detection model.
-    dimensions: ?[]const Dimension,
+    dimensions: ?[]const Dimension = null,
 
     /// This object includes parameters that you can use to provide information
     /// about your
     /// metric to CloudWatch to help it build more accurate anomaly detection
     /// models.
     /// Currently, it includes the `PeriodicSpikes` parameter.
-    metric_characteristics: ?MetricCharacteristics,
+    metric_characteristics: ?MetricCharacteristics = null,
 
     /// The CloudWatch metric math expression for this anomaly detector.
-    metric_math_anomaly_detector: ?MetricMathAnomalyDetector,
+    metric_math_anomaly_detector: ?MetricMathAnomalyDetector = null,
 
     /// The name of the metric associated with the anomaly detection model.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The namespace of the metric associated with the anomaly detection model.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The CloudWatch metric and statistic for this anomaly detector.
-    single_metric_anomaly_detector: ?SingleMetricAnomalyDetector,
+    single_metric_anomaly_detector: ?SingleMetricAnomalyDetector = null,
 
     /// The statistic associated with the anomaly detection model.
-    stat: ?[]const u8,
+    stat: ?[]const u8 = null,
 
     /// The current status of the anomaly detector's training.
-    state_value: ?AnomalyDetectorStateValue,
+    state_value: ?AnomalyDetectorStateValue = null,
 
     pub const json_field_names = .{
         .configuration = "Configuration",

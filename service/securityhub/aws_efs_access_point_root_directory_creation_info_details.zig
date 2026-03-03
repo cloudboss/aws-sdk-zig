@@ -3,15 +3,15 @@
 /// when a client connects to an access point.
 pub const AwsEfsAccessPointRootDirectoryCreationInfoDetails = struct {
     /// Specifies the POSIX group ID to apply to the root directory.
-    owner_gid: ?[]const u8,
+    owner_gid: ?[]const u8 = null,
 
     /// Specifies the POSIX user ID to apply to the root directory.
-    owner_uid: ?[]const u8,
+    owner_uid: ?[]const u8 = null,
 
     /// Specifies the POSIX permissions to apply to the root directory, in the
     /// format of an octal number
     /// representing the file's mode bits.
-    permissions: ?[]const u8,
+    permissions: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .owner_gid = "OwnerGid",

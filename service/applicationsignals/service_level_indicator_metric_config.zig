@@ -9,7 +9,7 @@ const ServiceLevelIndicatorMetricType = @import("service_level_indicator_metric_
 pub const ServiceLevelIndicatorMetricConfig = struct {
     /// Identifies the dependency using the `DependencyKeyAttributes` and
     /// `DependencyOperationName`.
-    dependency_config: ?DependencyConfig,
+    dependency_config: ?DependencyConfig = null,
 
     /// If this SLO is related to a metric collected by Application Signals, you
     /// must use this field to specify which service the SLO metric is related to.
@@ -28,37 +28,37 @@ pub const ServiceLevelIndicatorMetricConfig = struct {
     ///   `AWS::Resource`.
     /// * `Environment` specifies the location where this object is hosted, or what
     ///   it belongs to.
-    key_attributes: ?[]const aws.map.StringMapEntry,
+    key_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// If this SLO monitors a CloudWatch metric or the result of a CloudWatch
     /// metric math expression, use this structure to specify that metric or
     /// expression.
-    metric_data_queries: ?[]const MetricDataQuery,
+    metric_data_queries: ?[]const MetricDataQuery = null,
 
     /// The name of the CloudWatch metric to use for the SLO, when using a custom
     /// metric rather than Application Signals standard metrics.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// If the SLO is to monitor either the `LATENCY` or `AVAILABILITY` metric that
     /// Application Signals collects, use this field to specify which of those
     /// metrics is used.
-    metric_type: ?ServiceLevelIndicatorMetricType,
+    metric_type: ?ServiceLevelIndicatorMetricType = null,
 
     /// If the SLO is to monitor a specific operation of the service, use this field
     /// to specify the name of that operation.
-    operation_name: ?[]const u8,
+    operation_name: ?[]const u8 = null,
 
     /// The number of seconds to use as the period for SLO evaluation. Your
     /// application's performance is compared to the SLI during each period. For
     /// each period, the application is determined to have either achieved or not
     /// achieved the necessary performance.
-    period_seconds: ?i32,
+    period_seconds: ?i32 = null,
 
     /// The statistic to use for comparison to the threshold. It can be any
     /// CloudWatch statistic or extended statistic. For more information about
     /// statistics, see [CloudWatch statistics
     /// definitions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html).
-    statistic: ?[]const u8,
+    statistic: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dependency_config = "DependencyConfig",

@@ -4,10 +4,10 @@ const Visibility = @import("visibility.zig").Visibility;
 /// The label options for an axis on a chart.
 pub const ChartAxisLabelOptions = struct {
     /// The label options for a chart axis.
-    axis_label_options: ?[]const AxisLabelOptions,
+    axis_label_options: ?[]const AxisLabelOptions = null,
 
     /// The visibility configuration of the sort icon on a chart's axis label.
-    sort_icon_visibility: ?Visibility,
+    sort_icon_visibility: ?Visibility = null,
 
     /// The visibility of an axis label on a chart. Choose one of the following
     /// options:
@@ -15,7 +15,7 @@ pub const ChartAxisLabelOptions = struct {
     /// * `VISIBLE`: Shows the axis.
     ///
     /// * `HIDDEN`: Hides the axis.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .axis_label_options = "AxisLabelOptions",

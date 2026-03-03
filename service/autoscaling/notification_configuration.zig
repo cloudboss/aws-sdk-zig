@@ -1,7 +1,7 @@
 /// Describes a notification.
 pub const NotificationConfiguration = struct {
     /// The name of the Auto Scaling group.
-    auto_scaling_group_name: ?[]const u8,
+    auto_scaling_group_name: ?[]const u8 = null,
 
     /// One of the following event notification types:
     ///
@@ -14,8 +14,8 @@ pub const NotificationConfiguration = struct {
     /// * `autoscaling:EC2_INSTANCE_TERMINATE_ERROR`
     ///
     /// * `autoscaling:TEST_NOTIFICATION`
-    notification_type: ?[]const u8,
+    notification_type: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon SNS topic.
-    topic_arn: ?[]const u8,
+    topic_arn: ?[]const u8 = null,
 };

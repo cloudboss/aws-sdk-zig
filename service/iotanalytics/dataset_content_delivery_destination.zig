@@ -4,10 +4,10 @@ const S3DestinationConfiguration = @import("s3_destination_configuration.zig").S
 /// The destination to which dataset contents are delivered.
 pub const DatasetContentDeliveryDestination = struct {
     /// Configuration information for delivery of dataset contents to IoT Events.
-    iot_events_destination_configuration: ?IotEventsDestinationConfiguration,
+    iot_events_destination_configuration: ?IotEventsDestinationConfiguration = null,
 
     /// Configuration information for delivery of dataset contents to Amazon S3.
-    s_3_destination_configuration: ?S3DestinationConfiguration,
+    s_3_destination_configuration: ?S3DestinationConfiguration = null,
 
     pub const json_field_names = .{
         .iot_events_destination_configuration = "iotEventsDestinationConfiguration",

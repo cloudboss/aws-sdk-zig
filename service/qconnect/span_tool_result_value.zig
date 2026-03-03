@@ -3,7 +3,7 @@ const SpanMessageValue = @import("span_message_value.zig").SpanMessageValue;
 /// Tool result message content
 pub const SpanToolResultValue = struct {
     /// The tool invocation error if failed
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// Relates this result back to the tool invocation
     tool_use_id: []const u8,

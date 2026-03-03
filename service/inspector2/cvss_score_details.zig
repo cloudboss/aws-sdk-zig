@@ -4,10 +4,10 @@ const CvssScoreAdjustment = @import("cvss_score_adjustment.zig").CvssScoreAdjust
 pub const CvssScoreDetails = struct {
     /// An object that contains details about adjustment Amazon Inspector made to
     /// the CVSS score.
-    adjustments: ?[]const CvssScoreAdjustment,
+    adjustments: ?[]const CvssScoreAdjustment = null,
 
     /// The source of the CVSS data.
-    cvss_source: ?[]const u8,
+    cvss_source: ?[]const u8 = null,
 
     /// The CVSS score.
     score: f64,

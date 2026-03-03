@@ -4,5 +4,5 @@ pub const Ipv4PrefixSpecification = struct {
     /// Assigning prefixes to network
     /// interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html) in the
     /// *Amazon EC2 User Guide*.
-    ipv_4_prefix: ?[]const u8,
+    ipv_4_prefix: ?[]const u8 = null,
 };

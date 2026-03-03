@@ -7,16 +7,16 @@ const SheetImageTooltipConfiguration = @import("sheet_image_tooltip_configuratio
 /// An image that is located on a sheet.
 pub const SheetImage = struct {
     /// A list of custom actions that are configured for an image.
-    actions: ?[]const ImageCustomAction,
+    actions: ?[]const ImageCustomAction = null,
 
     /// The alt text for the image.
-    image_content_alt_text: ?[]const u8,
+    image_content_alt_text: ?[]const u8 = null,
 
     /// The general image interactions setup for an image.
-    interactions: ?ImageInteractionOptions,
+    interactions: ?ImageInteractionOptions = null,
 
     /// Determines how the image is scaled.
-    scaling: ?SheetImageScalingConfiguration,
+    scaling: ?SheetImageScalingConfiguration = null,
 
     /// The ID of the sheet image.
     sheet_image_id: []const u8,
@@ -25,7 +25,7 @@ pub const SheetImage = struct {
     source: SheetImageSource,
 
     /// The tooltip to be shown when hovering over the image.
-    tooltip: ?SheetImageTooltipConfiguration,
+    tooltip: ?SheetImageTooltipConfiguration = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

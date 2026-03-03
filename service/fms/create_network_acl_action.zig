@@ -4,7 +4,7 @@ const ActionTarget = @import("action_target.zig").ActionTarget;
 /// remediation option in `RemediationAction`.
 pub const CreateNetworkAclAction = struct {
     /// Brief description of this remediation action.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether it is possible for Firewall Manager to perform this
     /// remediation action. A false value indicates that auto remediation is
@@ -13,7 +13,7 @@ pub const CreateNetworkAclAction = struct {
     fms_can_remediate: bool = false,
 
     /// The VPC that's associated with the remediation action.
-    vpc: ?ActionTarget,
+    vpc: ?ActionTarget = null,
 
     pub const json_field_names = .{
         .description = "Description",

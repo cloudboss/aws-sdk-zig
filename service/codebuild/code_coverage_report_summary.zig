@@ -9,22 +9,22 @@
 /// structure, such as an `if` or `case` statement.
 pub const CodeCoverageReportSummary = struct {
     /// The percentage of branches that are covered by your tests.
-    branch_coverage_percentage: ?f64,
+    branch_coverage_percentage: ?f64 = null,
 
     /// The number of conditional branches that are covered by your tests.
-    branches_covered: ?i32,
+    branches_covered: ?i32 = null,
 
     /// The number of conditional branches that are not covered by your tests.
-    branches_missed: ?i32,
+    branches_missed: ?i32 = null,
 
     /// The percentage of lines that are covered by your tests.
-    line_coverage_percentage: ?f64,
+    line_coverage_percentage: ?f64 = null,
 
     /// The number of lines that are covered by your tests.
-    lines_covered: ?i32,
+    lines_covered: ?i32 = null,
 
     /// The number of lines that are not covered by your tests.
-    lines_missed: ?i32,
+    lines_missed: ?i32 = null,
 
     pub const json_field_names = .{
         .branch_coverage_percentage = "branchCoveragePercentage",

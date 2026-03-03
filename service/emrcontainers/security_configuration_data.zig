@@ -3,7 +3,7 @@ const AuthorizationConfiguration = @import("authorization_configuration.zig").Au
 /// Configurations related to the security configuration for the request.
 pub const SecurityConfigurationData = struct {
     /// Authorization-related configuration input for the security configuration.
-    authorization_configuration: ?AuthorizationConfiguration,
+    authorization_configuration: ?AuthorizationConfiguration = null,
 
     pub const json_field_names = .{
         .authorization_configuration = "authorizationConfiguration",

@@ -5,7 +5,7 @@ pub const NetworkConfiguration = struct {
     /// The VPC subnets and security groups that are associated with a task.
     ///
     /// All specified subnets and security groups must be from the same VPC.
-    awsvpc_configuration: ?AwsVpcConfiguration,
+    awsvpc_configuration: ?AwsVpcConfiguration = null,
 
     pub const json_field_names = .{
         .awsvpc_configuration = "awsvpcConfiguration",

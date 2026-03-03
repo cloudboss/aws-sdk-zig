@@ -4,7 +4,7 @@ pub const DimensionFilter = struct {
     name: []const u8,
 
     /// The value of the dimension to be matched.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

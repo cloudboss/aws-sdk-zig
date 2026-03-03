@@ -6,16 +6,16 @@ pub const TopicRulePayload = struct {
     actions: []const Action,
 
     /// The version of the SQL rules engine to use when evaluating the rule.
-    aws_iot_sql_version: ?[]const u8,
+    aws_iot_sql_version: ?[]const u8 = null,
 
     /// The description of the rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The action to take when an error occurs.
-    error_action: ?Action,
+    error_action: ?Action = null,
 
     /// Specifies whether the rule is disabled.
-    rule_disabled: ?bool,
+    rule_disabled: ?bool = null,
 
     /// The SQL statement used to query the topic. For more information, see [IoT
     /// SQL

@@ -7,7 +7,7 @@ pub const RetentionPolicy = struct {
     /// Amazon EFS volume.
     ///
     /// Specify `Delete` to delete the data stored on the Amazon EFS volume.
-    home_efs_file_system: ?RetentionType,
+    home_efs_file_system: ?RetentionType = null,
 
     pub const json_field_names = .{
         .home_efs_file_system = "HomeEfsFileSystem",

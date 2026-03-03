@@ -8,12 +8,12 @@ const TaskType = @import("task_type.zig").TaskType;
 /// TaskType.
 pub const Task = struct {
     /// The operation to be performed on the provided source fields.
-    connector_operator: ?ConnectorOperator,
+    connector_operator: ?ConnectorOperator = null,
 
     /// A field in a destination connector, or a field value against which Amazon
     /// AppFlow validates a
     /// source field.
-    destination_field: ?[]const u8,
+    destination_field: ?[]const u8 = null,
 
     /// The source fields to which a particular task is applied.
     source_fields: []const []const u8,
@@ -21,7 +21,7 @@ pub const Task = struct {
     /// A map used to store task-related information. The service looks for
     /// particular
     /// information based on the TaskType.
-    task_properties: ?[]const aws.map.StringMapEntry,
+    task_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies the particular task implementation that Amazon AppFlow performs.
     task_type: TaskType,

@@ -8,7 +8,7 @@ pub const DeviceShadowEnrichActivity = struct {
     name: []const u8,
 
     /// The next activity in the pipeline.
-    next: ?[]const u8,
+    next: ?[]const u8 = null,
 
     /// The ARN of the role that allows access to the device's shadow.
     role_arn: []const u8,

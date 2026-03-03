@@ -4,7 +4,7 @@ const Oauth2Discovery = @import("oauth_2_discovery.zig").Oauth2Discovery;
 /// including client credentials and OAuth2 discovery information.
 pub const IncludedOauth2ProviderConfigOutput = struct {
     /// The client ID for the supported OAuth2 provider.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     oauth_discovery: Oauth2Discovery,
 

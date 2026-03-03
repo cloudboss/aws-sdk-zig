@@ -6,25 +6,25 @@ const DomainInformationContainer = @import("domain_information_container.zig").D
 /// Specifies details about an outbound cross-cluster connection.
 pub const OutboundConnection = struct {
     /// Name of the connection.
-    connection_alias: ?[]const u8,
+    connection_alias: ?[]const u8 = null,
 
     /// Unique identifier of the connection.
-    connection_id: ?[]const u8,
+    connection_id: ?[]const u8 = null,
 
     /// The connection mode.
-    connection_mode: ?ConnectionMode,
+    connection_mode: ?ConnectionMode = null,
 
     /// Properties for the outbound connection.
-    connection_properties: ?ConnectionProperties,
+    connection_properties: ?ConnectionProperties = null,
 
     /// Status of the connection.
-    connection_status: ?OutboundConnectionStatus,
+    connection_status: ?OutboundConnectionStatus = null,
 
     /// Information about the source (local) domain.
-    local_domain_info: ?DomainInformationContainer,
+    local_domain_info: ?DomainInformationContainer = null,
 
     /// Information about the destination (remote) domain.
-    remote_domain_info: ?DomainInformationContainer,
+    remote_domain_info: ?DomainInformationContainer = null,
 
     pub const json_field_names = .{
         .connection_alias = "ConnectionAlias",

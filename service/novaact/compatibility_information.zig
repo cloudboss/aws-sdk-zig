@@ -4,7 +4,7 @@ pub const CompatibilityInformation = struct {
     client_compatibility_version: i32,
 
     /// Additional information about compatibility requirements or recommendations.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// A list of model IDs that are supported for the client compatibility version.
     supported_model_ids: []const []const u8,

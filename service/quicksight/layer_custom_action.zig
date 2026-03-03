@@ -17,7 +17,7 @@ pub const LayerCustomAction = struct {
     name: []const u8,
 
     /// The status of the `LayerCustomAction`.
-    status: ?WidgetStatus,
+    status: ?WidgetStatus = null,
 
     /// The trigger of the `LayerCustomAction`.
     ///

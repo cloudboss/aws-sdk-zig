@@ -3,7 +3,7 @@
 pub const EventAccountFilter = struct {
     /// The 12-digit Amazon Web Services account numbers that contains the affected
     /// entities.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
     /// The unique identifier for the event. The event ARN has the
     /// `arn:aws:health:*event-region*::event/*SERVICE*/*EVENT_TYPE_CODE*/*EVENT_TYPE_PLUS_ID*

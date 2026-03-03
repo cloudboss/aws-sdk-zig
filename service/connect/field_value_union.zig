@@ -6,13 +6,13 @@ pub const FieldValueUnion = struct {
     boolean_value: bool = false,
 
     /// A Double number value type.
-    double_value: ?f64,
+    double_value: ?f64 = null,
 
     /// An empty value.
-    empty_value: ?EmptyFieldValue,
+    empty_value: ?EmptyFieldValue = null,
 
     /// String value type.
-    string_value: ?[]const u8,
+    string_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .boolean_value = "BooleanValue",

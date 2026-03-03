@@ -5,7 +5,7 @@ pub const ListTagsForResourceResponse = struct {
     /// keys can have a maximum
     /// character length of 128 characters. Tag values can have a maximum length of
     /// 256 characters.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .tags = "Tags",

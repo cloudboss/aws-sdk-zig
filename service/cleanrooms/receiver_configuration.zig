@@ -10,7 +10,7 @@ pub const ReceiverConfiguration = struct {
     analysis_type: AnalysisType,
 
     /// The configuration details of the receiver configuration.
-    configuration_details: ?ConfigurationDetails,
+    configuration_details: ?ConfigurationDetails = null,
 
     pub const json_field_names = .{
         .analysis_type = "analysisType",

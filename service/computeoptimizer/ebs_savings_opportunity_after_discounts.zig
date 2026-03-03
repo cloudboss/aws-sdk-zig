@@ -6,7 +6,7 @@ pub const EBSSavingsOpportunityAfterDiscounts = struct {
     /// The estimated monthly savings possible as a percentage of monthly cost by
     /// adopting Compute Optimizer’s Amazon EBS volume
     /// recommendations. This saving includes any applicable discounts.
-    estimated_monthly_savings: ?EBSEstimatedMonthlySavings,
+    estimated_monthly_savings: ?EBSEstimatedMonthlySavings = null,
 
     /// The estimated monthly savings possible as a percentage of monthly cost after
     /// applying the specific discounts.

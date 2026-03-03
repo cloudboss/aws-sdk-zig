@@ -6,28 +6,28 @@ pub const UserPoolDescriptionType = struct {
     /// The date and time when the item was created. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The user pool ID.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A collection of user pool Lambda triggers. Amazon Cognito invokes triggers
     /// at several possible
     /// stages of user pool operations. Triggers can modify the outcome of the
     /// operations that
     /// invoked them.
-    lambda_config: ?LambdaConfigType,
+    lambda_config: ?LambdaConfigType = null,
 
     /// The date and time when the item was modified. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The user pool name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The user pool status.
-    status: ?StatusType,
+    status: ?StatusType = null,
 
     pub const json_field_names = .{
         .creation_date = "CreationDate",

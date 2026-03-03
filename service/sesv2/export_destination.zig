@@ -10,7 +10,7 @@ pub const ExportDestination = struct {
     data_format: DataFormat,
 
     /// An Amazon S3 pre-signed URL that points to the generated export file.
-    s3_url: ?[]const u8,
+    s3_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_format = "DataFormat",

@@ -6,29 +6,29 @@ const MetricSource = @import("metric_source.zig").MetricSource;
 /// Describes the configuration of a license for an Amazon EC2 instance.
 pub const LicenseConfiguration = struct {
     /// The instance type used in the license.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// The edition of the license for the application that runs on the instance.
-    license_edition: ?LicenseEdition,
+    license_edition: ?LicenseEdition = null,
 
     /// The license type associated with the instance.
-    license_model: ?LicenseModel,
+    license_model: ?LicenseModel = null,
 
     /// The name of the license for the application that runs on the instance.
-    license_name: ?LicenseName,
+    license_name: ?LicenseName = null,
 
     /// The version of the license for the application that runs on the instance.
-    license_version: ?[]const u8,
+    license_version: ?[]const u8 = null,
 
     /// The list of metric sources required to generate recommendations for
     /// commercial software licenses.
-    metrics_source: ?[]const MetricSource,
+    metrics_source: ?[]const MetricSource = null,
 
     /// The current number of cores associated with the instance.
     number_of_cores: i32 = 0,
 
     /// The operating system of the instance.
-    operating_system: ?[]const u8,
+    operating_system: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .instance_type = "instanceType",

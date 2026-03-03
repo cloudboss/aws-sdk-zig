@@ -7,13 +7,13 @@ pub const MonitoringScheduleSummary = struct {
     creation_time: i64,
 
     /// The name of the endpoint using the monitoring schedule.
-    endpoint_name: ?[]const u8,
+    endpoint_name: ?[]const u8 = null,
 
     /// The last time the monitoring schedule was modified.
     last_modified_time: i64,
 
     /// The name of the monitoring job definition that the schedule is for.
-    monitoring_job_definition_name: ?[]const u8,
+    monitoring_job_definition_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the monitoring schedule.
     monitoring_schedule_arn: []const u8,
@@ -25,7 +25,7 @@ pub const MonitoringScheduleSummary = struct {
     monitoring_schedule_status: ScheduleStatus,
 
     /// The type of the monitoring job definition that the schedule is for.
-    monitoring_type: ?MonitoringType,
+    monitoring_type: ?MonitoringType = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

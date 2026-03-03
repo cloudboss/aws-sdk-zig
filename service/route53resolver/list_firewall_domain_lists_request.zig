@@ -7,7 +7,7 @@ pub const ListFirewallDomainListsRequest = struct {
     ///
     /// If you don't specify a value for `MaxResults`, Resolver returns up to 100
     /// objects.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// For the first call to this list request, omit this value.
     ///
@@ -17,7 +17,7 @@ pub const ListFirewallDomainListsRequest = struct {
     /// Resolver returns a `NextToken` value in the response. To retrieve the next
     /// batch of objects, use the token that was returned for the prior request in
     /// your next request.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",

@@ -16,7 +16,7 @@ pub const S3DestinationDescription = struct {
     buffering_hints: BufferingHints,
 
     /// The Amazon CloudWatch logging options for your Firehose stream.
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The compression format. If no value is specified, the default is
     /// `UNCOMPRESSED`.
@@ -31,14 +31,14 @@ pub const S3DestinationDescription = struct {
     /// information
     /// about how to specify this prefix, see [Custom Prefixes for Amazon S3
     /// Objects](https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
-    error_output_prefix: ?[]const u8,
+    error_output_prefix: ?[]const u8 = null,
 
     /// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
     /// Amazon S3
     /// files. You can also specify a custom prefix, as described in [Custom
     /// Prefixes for Amazon S3
     /// Objects](https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
     /// more

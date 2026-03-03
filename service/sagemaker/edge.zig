@@ -4,15 +4,15 @@ const AssociationEdgeType = @import("association_edge_type.zig").AssociationEdge
 pub const Edge = struct {
     /// The type of the Association(Edge) between the source and destination. For
     /// example `ContributedTo`, `Produced`, or `DerivedFrom`.
-    association_type: ?AssociationEdgeType,
+    association_type: ?AssociationEdgeType = null,
 
     /// The Amazon Resource Name (ARN) of the destination lineage entity of the
     /// directed edge.
-    destination_arn: ?[]const u8,
+    destination_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the source lineage entity of the directed
     /// edge.
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_type = "AssociationType",

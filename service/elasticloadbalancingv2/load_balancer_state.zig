@@ -10,8 +10,8 @@ pub const LoadBalancerState = struct {
     /// needs to scale, its state is`active_impaired`. If the load balancer could
     /// not be
     /// set up, its state is `failed`.
-    code: ?LoadBalancerStateEnum,
+    code: ?LoadBalancerStateEnum = null,
 
     /// A description of the state.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 };

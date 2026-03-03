@@ -1,16 +1,16 @@
 /// A representation of a linked account.
 pub const AccountAssociationsListElement = struct {
     /// The Amazon Web Services account email.
-    account_email: ?[]const u8,
+    account_email: ?[]const u8 = null,
 
     /// The associating array of account IDs.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Web Services account name.
-    account_name: ?[]const u8,
+    account_name: ?[]const u8 = null,
 
     /// The Billing Group Arn that the linked account is associated to.
-    billing_group_arn: ?[]const u8,
+    billing_group_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_email = "AccountEmail",

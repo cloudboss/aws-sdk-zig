@@ -9,7 +9,7 @@ pub const Tag = struct {
     /// The value in a key-value pair of a tag. The value must be no longer than 256
     /// Unicode
     /// characters.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

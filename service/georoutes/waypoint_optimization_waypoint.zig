@@ -4,19 +4,19 @@ const WaypointOptimizationSideOfStreetOptions = @import("waypoint_optimization_s
 /// Waypoint between the Origin and Destination.
 pub const WaypointOptimizationWaypoint = struct {
     /// Access hours corresponding to when a waypoint can be visited.
-    access_hours: ?WaypointOptimizationAccessHours,
+    access_hours: ?WaypointOptimizationAccessHours = null,
 
     /// Appointment time at the waypoint.
-    appointment_time: ?[]const u8,
+    appointment_time: ?[]const u8 = null,
 
     /// Constraint defining what waypoints are to be visited after this waypoint.
-    before: ?[]const i32,
+    before: ?[]const i32 = null,
 
     /// GPS Heading at the position.
     heading: f64 = 0,
 
     /// The waypoint Id.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Position defined as `[longitude, latitude]`.
     position: []const f64,
@@ -28,7 +28,7 @@ pub const WaypointOptimizationWaypoint = struct {
     service_duration: i64 = 0,
 
     /// Options to configure matching the provided position to a side of the street.
-    side_of_street: ?WaypointOptimizationSideOfStreetOptions,
+    side_of_street: ?WaypointOptimizationSideOfStreetOptions = null,
 
     pub const json_field_names = .{
         .access_hours = "AccessHours",

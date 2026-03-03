@@ -3,7 +3,7 @@ const LogTargetType = @import("log_target_type.zig").LogTargetType;
 /// A log target.
 pub const LogTarget = struct {
     /// The target name.
-    target_name: ?[]const u8,
+    target_name: ?[]const u8 = null,
 
     /// The target type.
     target_type: LogTargetType,

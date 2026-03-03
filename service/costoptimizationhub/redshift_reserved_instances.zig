@@ -4,10 +4,10 @@ const ReservedInstancesCostCalculation = @import("reserved_instances_cost_calcul
 /// The Redshift reserved instances recommendation details.
 pub const RedshiftReservedInstances = struct {
     /// The Redshift reserved instances configuration used for recommendations.
-    configuration: ?RedshiftReservedInstancesConfiguration,
+    configuration: ?RedshiftReservedInstancesConfiguration = null,
 
     /// Cost impact of the purchase recommendation.
-    cost_calculation: ?ReservedInstancesCostCalculation,
+    cost_calculation: ?ReservedInstancesCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

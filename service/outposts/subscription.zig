@@ -4,20 +4,20 @@ const SubscriptionType = @import("subscription_type.zig").SubscriptionType;
 /// Provides information about your Amazon Web Services Outposts subscriptions.
 pub const Subscription = struct {
     /// The date your subscription starts.
-    begin_date: ?i64,
+    begin_date: ?i64 = null,
 
     /// The date your subscription ends.
-    end_date: ?i64,
+    end_date: ?i64 = null,
 
     /// The amount you are billed each month in the subscription period.
-    monthly_recurring_price: ?f64,
+    monthly_recurring_price: ?f64 = null,
 
     /// The order ID for your subscription.
-    order_ids: ?[]const []const u8,
+    order_ids: ?[]const []const u8 = null,
 
     /// The ID of the subscription that appears on the Amazon Web Services Billing
     /// Center console.
-    subscription_id: ?[]const u8,
+    subscription_id: ?[]const u8 = null,
 
     /// The status of subscription which can be one of the following:
     ///
@@ -29,7 +29,7 @@ pub const Subscription = struct {
     ///
     /// * **CANCELLED** - Subscription requests that are
     /// cancelled.
-    subscription_status: ?SubscriptionStatus,
+    subscription_status: ?SubscriptionStatus = null,
 
     /// The type of subscription which can be one of the following:
     ///
@@ -39,11 +39,11 @@ pub const Subscription = struct {
     /// longer term.
     ///
     /// * **CAPACITY_INCREASE** - Capacity scaling orders.
-    subscription_type: ?SubscriptionType,
+    subscription_type: ?SubscriptionType = null,
 
     /// The amount billed when the subscription is created. This is a one-time
     /// charge.
-    upfront_price: ?f64,
+    upfront_price: ?f64 = null,
 
     pub const json_field_names = .{
         .begin_date = "BeginDate",

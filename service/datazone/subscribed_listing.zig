@@ -23,11 +23,11 @@ pub const SubscribedListing = struct {
 
     /// The name of the project that owns the published asset for which the
     /// subscription grant is created.
-    owner_project_name: ?[]const u8,
+    owner_project_name: ?[]const u8 = null,
 
     /// The revision of the published asset for which the subscription grant is
     /// created.
-    revision: ?[]const u8,
+    revision: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "description",

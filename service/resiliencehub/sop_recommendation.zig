@@ -5,25 +5,25 @@ const SopServiceType = @import("sop_service_type.zig").SopServiceType;
 /// Defines a standard operating procedure (SOP) recommendation.
 pub const SopRecommendation = struct {
     /// Name of the Application Component.
-    app_component_name: ?[]const u8,
+    app_component_name: ?[]const u8 = null,
 
     /// Description of the SOP recommendation.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The recommendation items.
-    items: ?[]const RecommendationItem,
+    items: ?[]const RecommendationItem = null,
 
     /// Name of the SOP recommendation.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Prerequisite for the SOP recommendation.
-    prerequisite: ?[]const u8,
+    prerequisite: ?[]const u8 = null,
 
     /// Identifier for the SOP recommendation.
     recommendation_id: []const u8,
 
     /// Status of the recommended standard operating procedure.
-    recommendation_status: ?RecommendationStatus,
+    recommendation_status: ?RecommendationStatus = null,
 
     /// Reference identifier for the SOP recommendation.
     reference_id: []const u8,

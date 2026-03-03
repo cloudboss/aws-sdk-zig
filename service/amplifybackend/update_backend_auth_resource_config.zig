@@ -12,7 +12,7 @@ pub const UpdateBackendAuthResourceConfig = struct {
 
     /// Describes the authorization configuration for the Amazon Cognito identity
     /// pool, provisioned as a part of your auth resource in the Amplify project.
-    identity_pool_configs: ?UpdateBackendAuthIdentityPoolConfig,
+    identity_pool_configs: ?UpdateBackendAuthIdentityPoolConfig = null,
 
     /// Defines the service name to use when configuring an authentication resource
     /// in your Amplify project.

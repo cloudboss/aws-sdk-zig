@@ -6,7 +6,7 @@ const DatasetParameterValueType = @import("dataset_parameter_value_type.zig").Da
 pub const DateTimeDatasetParameter = struct {
     /// A list of default values for a given date time parameter. This structure
     /// only accepts static values.
-    default_values: ?DateTimeDatasetParameterDefaultValues,
+    default_values: ?DateTimeDatasetParameterDefaultValues = null,
 
     /// An identifier for the parameter that is created in the dataset.
     id: []const u8,
@@ -15,7 +15,7 @@ pub const DateTimeDatasetParameter = struct {
     name: []const u8,
 
     /// The time granularity of the date time parameter.
-    time_granularity: ?TimeGranularity,
+    time_granularity: ?TimeGranularity = null,
 
     /// The value type of the dataset parameter. Valid values are `single value` or
     /// `multi value`.

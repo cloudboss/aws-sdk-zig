@@ -6,7 +6,7 @@ const ConfigurationState = @import("configuration_state.zig").ConfigurationState
 pub const ConfigurationStatus = struct {
     /// The error details describing a failed default encryption configuration
     /// update.
-    @"error": ?ConfigurationError,
+    @"error": ?ConfigurationError = null,
 
     /// The status state describing the default encryption configuration update.
     state: ConfigurationState,

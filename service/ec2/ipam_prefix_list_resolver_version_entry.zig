@@ -3,5 +3,5 @@
 /// particular point in time.
 pub const IpamPrefixListResolverVersionEntry = struct {
     /// The CIDR block that was selected and synchronized in this resolver version.
-    cidr: ?[]const u8,
+    cidr: ?[]const u8 = null,
 };

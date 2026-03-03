@@ -4,40 +4,40 @@ const CisFindingStatus = @import("cis_finding_status.zig").CisFindingStatus;
 /// The CIS scan result details.
 pub const CisScanResultDetails = struct {
     /// The CIS scan result details' account ID.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The account ID that's associated with the CIS scan result details.
-    check_description: ?[]const u8,
+    check_description: ?[]const u8 = null,
 
     /// The CIS scan result details' check ID.
-    check_id: ?[]const u8,
+    check_id: ?[]const u8 = null,
 
     /// The CIS scan result details' finding ARN.
-    finding_arn: ?[]const u8,
+    finding_arn: ?[]const u8 = null,
 
     /// The CIS scan result details' level.
-    level: ?CisSecurityLevel,
+    level: ?CisSecurityLevel = null,
 
     /// The CIS scan result details' platform.
-    platform: ?[]const u8,
+    platform: ?[]const u8 = null,
 
     /// The CIS scan result details' remediation.
-    remediation: ?[]const u8,
+    remediation: ?[]const u8 = null,
 
     /// The CIS scan result details' scan ARN.
     scan_arn: []const u8,
 
     /// The CIS scan result details' status.
-    status: ?CisFindingStatus,
+    status: ?CisFindingStatus = null,
 
     /// The CIS scan result details' status reason.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The CIS scan result details' target resource ID.
-    target_resource_id: ?[]const u8,
+    target_resource_id: ?[]const u8 = null,
 
     /// The CIS scan result details' title.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

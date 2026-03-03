@@ -22,25 +22,25 @@ pub const RuleDeclaration = struct {
     /// are used, you do not need to create any resources in CodeBuild.
     ///
     /// Using compute time for this action will incur separate charges in CodeBuild.
-    commands: ?[]const []const u8,
+    commands: ?[]const []const u8 = null,
 
     /// The action configuration fields for the rule.
-    configuration: ?[]const aws.map.StringMapEntry,
+    configuration: ?[]const aws.map.StringMapEntry = null,
 
     /// The input artifacts fields for the rule, such as specifying an input file
     /// for the
     /// rule.
-    input_artifacts: ?[]const InputArtifact,
+    input_artifacts: ?[]const InputArtifact = null,
 
     /// The name of the rule that is created for the condition, such as
     /// `VariableCheck`.
     name: []const u8,
 
     /// The Region for the condition associated with the rule.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The pipeline role ARN associated with the rule.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The ID for the rule type, which is made up of the combined values for
     /// category, owner,
@@ -48,7 +48,7 @@ pub const RuleDeclaration = struct {
     rule_type_id: RuleTypeId,
 
     /// The action timeout for the rule.
-    timeout_in_minutes: ?i32,
+    timeout_in_minutes: ?i32 = null,
 
     pub const json_field_names = .{
         .commands = "commands",

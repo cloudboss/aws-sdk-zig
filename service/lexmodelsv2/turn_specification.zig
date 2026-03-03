@@ -4,10 +4,10 @@ const UserTurnSpecification = @import("user_turn_specification.zig").UserTurnSpe
 /// Contains information about the messages in the turn.
 pub const TurnSpecification = struct {
     /// Contains information about the agent messages in the turn.
-    agent_turn: ?AgentTurnSpecification,
+    agent_turn: ?AgentTurnSpecification = null,
 
     /// Contains information about the user messages in the turn.
-    user_turn: ?UserTurnSpecification,
+    user_turn: ?UserTurnSpecification = null,
 
     pub const json_field_names = .{
         .agent_turn = "agentTurn",

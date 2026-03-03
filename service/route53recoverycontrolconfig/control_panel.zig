@@ -5,31 +5,31 @@ const Status = @import("status.zig").Status;
 pub const ControlPanel = struct {
     /// The Amazon Resource Name (ARN) of the cluster that includes the control
     /// panel.
-    cluster_arn: ?[]const u8,
+    cluster_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the control panel.
-    control_panel_arn: ?[]const u8,
+    control_panel_arn: ?[]const u8 = null,
 
     /// A flag that Amazon Route 53 Application Recovery Controller sets to true to
     /// designate the default control panel for a cluster. When you create a
     /// cluster, Amazon Route 53 Application Recovery Controller creates a control
     /// panel, and sets this flag for that control panel. If you create a control
     /// panel yourself, this flag is set to false.
-    default_control_panel: ?bool,
+    default_control_panel: ?bool = null,
 
     /// The name of the control panel. You can use any non-white space character in
     /// the name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID of the control panel owner.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The number of routing controls in the control panel.
-    routing_control_count: ?i32,
+    routing_control_count: ?i32 = null,
 
     /// The deployment status of control panel. Status can be one of the following:
     /// PENDING, DEPLOYED, PENDING_DELETION.
-    status: ?Status,
+    status: ?Status = null,
 
     pub const json_field_names = .{
         .cluster_arn = "ClusterArn",

@@ -2,10 +2,10 @@
 /// structure stores the bucket name and bucket prefix.
 pub const S3Destination = struct {
     /// The name of the bucket in which Evidently stores evaluation events.
-    bucket: ?[]const u8,
+    bucket: ?[]const u8 = null,
 
     /// The bucket prefix in which Evidently stores evaluation events.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

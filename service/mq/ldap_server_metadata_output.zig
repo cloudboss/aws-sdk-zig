@@ -12,7 +12,7 @@ pub const LdapServerMetadataOutput = struct {
 
     /// Specifies the LDAP attribute that identifies the group name attribute in the
     /// object returned from the group membership query.
-    role_name: ?[]const u8,
+    role_name: ?[]const u8 = null,
 
     /// The LDAP search filter used to find roles within the roleBase. The
     /// distinguished name of the user matched by userSearchMatching is substituted
@@ -26,7 +26,7 @@ pub const LdapServerMetadataOutput = struct {
 
     /// The directory search scope for the role. If set to true, scope is to search
     /// the entire subtree.
-    role_search_subtree: ?bool,
+    role_search_subtree: ?bool = null,
 
     /// Service account username. A service account is an account in your LDAP
     /// server that has access to initiate a connection. For example,
@@ -43,7 +43,7 @@ pub const LdapServerMetadataOutput = struct {
     user_base: []const u8,
 
     /// Specifies the name of the LDAP attribute for the user group membership.
-    user_role_name: ?[]const u8,
+    user_role_name: ?[]const u8 = null,
 
     /// The LDAP search filter used to find users within the userBase. The client's
     /// username is substituted into the {0} placeholder in the search filter. For
@@ -56,7 +56,7 @@ pub const LdapServerMetadataOutput = struct {
 
     /// The directory search scope for the user. If set to true, scope is to search
     /// the entire subtree.
-    user_search_subtree: ?bool,
+    user_search_subtree: ?bool = null,
 
     pub const json_field_names = .{
         .hosts = "Hosts",

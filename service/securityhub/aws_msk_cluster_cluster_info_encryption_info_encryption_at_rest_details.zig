@@ -4,7 +4,7 @@ pub const AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails = struct
     /// The Amazon Resource Name (ARN) of the KMS key for encrypting data at rest.
     /// If you don't specify a
     /// KMS key, MSK creates one for you and uses it.
-    data_volume_kms_key_id: ?[]const u8,
+    data_volume_kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_volume_kms_key_id = "DataVolumeKMSKeyId",

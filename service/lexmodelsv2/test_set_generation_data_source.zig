@@ -5,7 +5,7 @@ const ConversationLogsDataSource = @import("conversation_logs_data_source.zig").
 pub const TestSetGenerationDataSource = struct {
     /// Contains information about the bot from which the conversation logs are
     /// sourced.
-    conversation_logs_data_source: ?ConversationLogsDataSource,
+    conversation_logs_data_source: ?ConversationLogsDataSource = null,
 
     pub const json_field_names = .{
         .conversation_logs_data_source = "conversationLogsDataSource",

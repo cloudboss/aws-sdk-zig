@@ -8,9 +8,9 @@ const ReservedInstancesCostCalculation = @import("reserved_instances_cost_calcul
 /// terms are used interchangeably.
 pub const MemoryDbReservedInstances = struct {
     /// The MemoryDB reserved instances configuration used for recommendations.
-    configuration: ?MemoryDbReservedInstancesConfiguration,
+    configuration: ?MemoryDbReservedInstancesConfiguration = null,
 
-    cost_calculation: ?ReservedInstancesCostCalculation,
+    cost_calculation: ?ReservedInstancesCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

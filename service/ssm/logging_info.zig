@@ -14,7 +14,7 @@ pub const LoggingInfo = struct {
     s3_bucket_name: []const u8,
 
     /// (Optional) The S3 bucket subfolder.
-    s3_key_prefix: ?[]const u8,
+    s3_key_prefix: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the S3 bucket is located.
     s3_region: []const u8,

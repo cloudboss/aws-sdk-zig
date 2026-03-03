@@ -10,7 +10,7 @@ pub const Container = struct {
     /// MediaStore changes this value to `true`, indicating that the service
     /// delivers access logs for objects stored in that container to CloudWatch
     /// Logs.
-    access_logging_enabled: ?bool,
+    access_logging_enabled: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the container. The ARN has the following
     /// format:
@@ -18,26 +18,26 @@ pub const Container = struct {
     /// arn:aws:::container/
     ///
     /// For example: arn:aws:mediastore:us-west-2:111122223333:container/movies
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Unix timestamp.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The DNS endpoint of the container. Use the endpoint to identify the specific
     /// container when sending requests to the data plane. The service assigns this
     /// value when the
     /// container is created. Once the value has been assigned, it does not change.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// The name of the container.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The status of container creation or deletion. The status is one of the
     /// following:
     /// `CREATING`, `ACTIVE`, or `DELETING`. While the service
     /// is creating the container, the status is `CREATING`. When the endpoint is
     /// available, the status changes to `ACTIVE`.
-    status: ?ContainerStatus,
+    status: ?ContainerStatus = null,
 
     pub const json_field_names = .{
         .access_logging_enabled = "AccessLoggingEnabled",

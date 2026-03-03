@@ -5,7 +5,7 @@ pub const CustomRoutingEndpointDescription = struct {
     /// An ID for the endpoint. For custom routing accelerators, this is the virtual
     /// private cloud (VPC)
     /// subnet ID.
-    endpoint_id: ?[]const u8,
+    endpoint_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .endpoint_id = "EndpointId",

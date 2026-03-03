@@ -14,39 +14,39 @@ const UnpivotOperation = @import("unpivot_operation.zig").UnpivotOperation;
 pub const TransformStep = struct {
     /// A transform step that groups data and applies aggregation functions to
     /// calculate summary values.
-    aggregate_step: ?AggregateOperation,
+    aggregate_step: ?AggregateOperation = null,
 
     /// A transform step that combines rows from multiple sources by stacking them
     /// vertically.
-    append_step: ?AppendOperation,
+    append_step: ?AppendOperation = null,
 
     /// A transform step that changes the data types of one or more columns.
-    cast_column_types_step: ?CastColumnTypesOperation,
+    cast_column_types_step: ?CastColumnTypesOperation = null,
 
-    create_columns_step: ?CreateColumnsOperation,
+    create_columns_step: ?CreateColumnsOperation = null,
 
     /// A transform step that applies filter conditions.
-    filters_step: ?FiltersOperation,
+    filters_step: ?FiltersOperation = null,
 
     /// A transform step that brings data from a source table.
-    import_table_step: ?ImportTableOperation,
+    import_table_step: ?ImportTableOperation = null,
 
     /// A transform step that combines data from two sources based on specified join
     /// conditions.
-    join_step: ?JoinOperation,
+    join_step: ?JoinOperation = null,
 
     /// A transform step that converts row values into columns to reshape the data
     /// structure.
-    pivot_step: ?PivotOperation,
+    pivot_step: ?PivotOperation = null,
 
-    project_step: ?ProjectOperation,
+    project_step: ?ProjectOperation = null,
 
     /// A transform step that changes the names of one or more columns.
-    rename_columns_step: ?RenameColumnsOperation,
+    rename_columns_step: ?RenameColumnsOperation = null,
 
     /// A transform step that converts columns into rows to normalize the data
     /// structure.
-    unpivot_step: ?UnpivotOperation,
+    unpivot_step: ?UnpivotOperation = null,
 
     pub const json_field_names = .{
         .aggregate_step = "AggregateStep",

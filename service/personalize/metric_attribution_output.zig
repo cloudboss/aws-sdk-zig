@@ -8,7 +8,7 @@ pub const MetricAttributionOutput = struct {
     /// recommendations](https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
     role_arn: []const u8,
 
-    s_3_data_destination: ?S3DataConfig,
+    s_3_data_destination: ?S3DataConfig = null,
 
     pub const json_field_names = .{
         .role_arn = "roleArn",

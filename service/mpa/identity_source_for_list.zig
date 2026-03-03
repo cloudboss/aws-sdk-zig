@@ -8,29 +8,29 @@ const IdentitySourceStatusCode = @import("identity_source_status_code.zig").Iden
 /// in the *Multi-party approval User Guide*.
 pub const IdentitySourceForList = struct {
     /// Timestamp when the identity source was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Amazon Resource Name (ARN) for the identity source.
-    identity_source_arn: ?[]const u8,
+    identity_source_arn: ?[]const u8 = null,
 
     /// A `IdentitySourceParametersForList` object. Contains details for the
     /// resource that provides identities to the identity source. For example, an
     /// IAM Identity Center instance.
-    identity_source_parameters: ?IdentitySourceParametersForList,
+    identity_source_parameters: ?IdentitySourceParametersForList = null,
 
     /// The type of resource that provided identities to the identity source. For
     /// example, an IAM Identity Center instance.
-    identity_source_type: ?IdentitySourceType,
+    identity_source_type: ?IdentitySourceType = null,
 
     /// Status for the identity source. For example, if the identity source is
     /// `ACTIVE`.
-    status: ?IdentitySourceStatus,
+    status: ?IdentitySourceStatus = null,
 
     /// Status code of the identity source.
-    status_code: ?IdentitySourceStatusCode,
+    status_code: ?IdentitySourceStatusCode = null,
 
     /// Message describing the status for the identity source.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

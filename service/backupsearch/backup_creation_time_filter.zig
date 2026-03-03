@@ -3,11 +3,11 @@
 pub const BackupCreationTimeFilter = struct {
     /// This timestamp includes recovery points only created after the specified
     /// time.
-    created_after: ?i64,
+    created_after: ?i64 = null,
 
     /// This timestamp includes recovery points only created before the specified
     /// time.
-    created_before: ?i64,
+    created_before: ?i64 = null,
 
     pub const json_field_names = .{
         .created_after = "CreatedAfter",

@@ -35,7 +35,7 @@ pub const LocalHealthEventsConfig = struct {
     /// threshold percentage set for a local health score. The status can be
     /// `ENABLED`
     /// or `DISABLED`.
-    status: ?LocalHealthEventsConfigStatus,
+    status: ?LocalHealthEventsConfigStatus = null,
 
     pub const json_field_names = .{
         .health_score_threshold = "HealthScoreThreshold",

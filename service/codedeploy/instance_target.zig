@@ -7,26 +7,26 @@ const TargetStatus = @import("target_status.zig").TargetStatus;
 /// EC2/On-premises compute platform.
 pub const InstanceTarget = struct {
     /// The unique ID of a deployment.
-    deployment_id: ?[]const u8,
+    deployment_id: ?[]const u8 = null,
 
     /// A label that identifies whether the instance is an original target
     /// (`BLUE`) or a replacement target (`GREEN`).
-    instance_label: ?TargetLabel,
+    instance_label: ?TargetLabel = null,
 
     /// The date and time when the target instance was updated by a deployment.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The lifecycle events of the deployment to this target instance.
-    lifecycle_events: ?[]const LifecycleEvent,
+    lifecycle_events: ?[]const LifecycleEvent = null,
 
     /// The status an EC2/On-premises deployment's target instance.
-    status: ?TargetStatus,
+    status: ?TargetStatus = null,
 
     /// The Amazon Resource Name (ARN) of the target.
-    target_arn: ?[]const u8,
+    target_arn: ?[]const u8 = null,
 
     /// The unique ID of a deployment target that has a type of `instanceTarget`.
-    target_id: ?[]const u8,
+    target_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .deployment_id = "deploymentId",

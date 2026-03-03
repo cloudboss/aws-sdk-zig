@@ -5,10 +5,10 @@ const UserTurnResult = @import("user_turn_result.zig").UserTurnResult;
 /// set.
 pub const TestSetTurnResult = struct {
     /// Contains information about the agent messages in the turn.
-    agent: ?AgentTurnResult,
+    agent: ?AgentTurnResult = null,
 
     /// Contains information about the user messages in the turn.
-    user: ?UserTurnResult,
+    user: ?UserTurnResult = null,
 
     pub const json_field_names = .{
         .agent = "agent",

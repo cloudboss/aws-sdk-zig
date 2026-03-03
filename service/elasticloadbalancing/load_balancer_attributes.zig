@@ -12,10 +12,10 @@ pub const LoadBalancerAttributes = struct {
     /// For more information, see [Enable Access
     /// Logs](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html)
     /// in the *Classic Load Balancers Guide*.
-    access_log: ?AccessLog,
+    access_log: ?AccessLog = null,
 
     /// Any additional attributes.
-    additional_attributes: ?[]const AdditionalAttribute,
+    additional_attributes: ?[]const AdditionalAttribute = null,
 
     /// If enabled, the load balancer allows existing requests to complete before
     /// the load balancer shifts traffic away from a deregistered or unhealthy
@@ -24,7 +24,7 @@ pub const LoadBalancerAttributes = struct {
     /// For more information, see [Configure Connection
     /// Draining](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html)
     /// in the *Classic Load Balancers Guide*.
-    connection_draining: ?ConnectionDraining,
+    connection_draining: ?ConnectionDraining = null,
 
     /// If enabled, the load balancer allows the connections to remain idle (no data
     /// is sent over the connection) for the specified duration.
@@ -34,7 +34,7 @@ pub const LoadBalancerAttributes = struct {
     /// For more information, see [Configure Idle Connection
     /// Timeout](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html)
     /// in the *Classic Load Balancers Guide*.
-    connection_settings: ?ConnectionSettings,
+    connection_settings: ?ConnectionSettings = null,
 
     /// If enabled, the load balancer routes the request traffic evenly across all
     /// instances regardless of the Availability Zones.
@@ -42,5 +42,5 @@ pub const LoadBalancerAttributes = struct {
     /// For more information, see [Configure Cross-Zone Load
     /// Balancing](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html)
     /// in the *Classic Load Balancers Guide*.
-    cross_zone_load_balancing: ?CrossZoneLoadBalancing,
+    cross_zone_load_balancing: ?CrossZoneLoadBalancing = null,
 };

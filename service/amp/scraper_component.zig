@@ -5,7 +5,7 @@ const ScraperComponentType = @import("scraper_component_type.zig").ScraperCompon
 /// configured for logging.
 pub const ScraperComponent = struct {
     /// The configuration settings for the scraper component.
-    config: ?ComponentConfig,
+    config: ?ComponentConfig = null,
 
     /// The type of the scraper component.
     @"type": ScraperComponentType,

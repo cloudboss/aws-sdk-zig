@@ -4,13 +4,13 @@ const AuditMitigationActionsTaskStatus = @import("audit_mitigation_actions_task_
 /// `ListAuditMitigationActionsTasks`.
 pub const AuditMitigationActionsTaskMetadata = struct {
     /// The time at which the audit mitigation actions task was started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The unique identifier for the task.
-    task_id: ?[]const u8,
+    task_id: ?[]const u8 = null,
 
     /// The current state of the audit mitigation actions task.
-    task_status: ?AuditMitigationActionsTaskStatus,
+    task_status: ?AuditMitigationActionsTaskStatus = null,
 
     pub const json_field_names = .{
         .start_time = "startTime",

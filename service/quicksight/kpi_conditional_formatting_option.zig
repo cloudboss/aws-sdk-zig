@@ -6,16 +6,16 @@ const KPIProgressBarConditionalFormatting = @import("kpi_progress_bar_conditiona
 /// The conditional formatting options of a KPI visual.
 pub const KPIConditionalFormattingOption = struct {
     /// The conditional formatting for the actual value of a KPI visual.
-    actual_value: ?KPIActualValueConditionalFormatting,
+    actual_value: ?KPIActualValueConditionalFormatting = null,
 
     /// The conditional formatting for the comparison value of a KPI visual.
-    comparison_value: ?KPIComparisonValueConditionalFormatting,
+    comparison_value: ?KPIComparisonValueConditionalFormatting = null,
 
     /// The conditional formatting for the primary value of a KPI visual.
-    primary_value: ?KPIPrimaryValueConditionalFormatting,
+    primary_value: ?KPIPrimaryValueConditionalFormatting = null,
 
     /// The conditional formatting for the progress bar of a KPI visual.
-    progress_bar: ?KPIProgressBarConditionalFormatting,
+    progress_bar: ?KPIProgressBarConditionalFormatting = null,
 
     pub const json_field_names = .{
         .actual_value = "ActualValue",

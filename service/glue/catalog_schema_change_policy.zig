@@ -4,10 +4,10 @@ const UpdateCatalogBehavior = @import("update_catalog_behavior.zig").UpdateCatal
 pub const CatalogSchemaChangePolicy = struct {
     /// Whether to use the specified update behavior when the crawler finds a
     /// changed schema.
-    enable_update_catalog: ?bool,
+    enable_update_catalog: ?bool = null,
 
     /// The update behavior when the crawler finds a changed schema.
-    update_behavior: ?UpdateCatalogBehavior,
+    update_behavior: ?UpdateCatalogBehavior = null,
 
     pub const json_field_names = .{
         .enable_update_catalog = "EnableUpdateCatalog",

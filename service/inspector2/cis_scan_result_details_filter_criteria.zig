@@ -5,21 +5,21 @@ const CisSecurityLevelFilter = @import("cis_security_level_filter.zig").CisSecur
 /// The CIS scan result details filter criteria.
 pub const CisScanResultDetailsFilterCriteria = struct {
     /// The criteria's check ID filters.
-    check_id_filters: ?[]const CisStringFilter,
+    check_id_filters: ?[]const CisStringFilter = null,
 
     /// The criteria's finding ARN filters.
-    finding_arn_filters: ?[]const CisStringFilter,
+    finding_arn_filters: ?[]const CisStringFilter = null,
 
     /// The criteria's finding status filters.
-    finding_status_filters: ?[]const CisFindingStatusFilter,
+    finding_status_filters: ?[]const CisFindingStatusFilter = null,
 
     /// The criteria's security level filters. . Security level refers to the
     /// Benchmark levels
     /// that CIS assigns to a profile.
-    security_level_filters: ?[]const CisSecurityLevelFilter,
+    security_level_filters: ?[]const CisSecurityLevelFilter = null,
 
     /// The criteria's title filters.
-    title_filters: ?[]const CisStringFilter,
+    title_filters: ?[]const CisStringFilter = null,
 
     pub const json_field_names = .{
         .check_id_filters = "checkIdFilters",

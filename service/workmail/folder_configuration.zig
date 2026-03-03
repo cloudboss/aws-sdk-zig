@@ -13,7 +13,7 @@ pub const FolderConfiguration = struct {
     name: FolderName,
 
     /// The number of days for which the folder-configuration action applies.
-    period: ?i32,
+    period: ?i32 = null,
 
     pub const json_field_names = .{
         .action = "Action",

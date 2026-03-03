@@ -10,10 +10,10 @@ const GuardrailContentFiltersTier = @import("guardrail_content_filters_tier.zig"
 pub const GuardrailContentPolicy = struct {
     /// Contains the type of the content filter and how strongly it should apply to
     /// prompts and model responses.
-    filters: ?[]const GuardrailContentFilter,
+    filters: ?[]const GuardrailContentFilter = null,
 
     /// The tier that your guardrail uses for content filters.
-    tier: ?GuardrailContentFiltersTier,
+    tier: ?GuardrailContentFiltersTier = null,
 
     pub const json_field_names = .{
         .filters = "filters",

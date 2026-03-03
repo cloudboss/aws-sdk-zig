@@ -5,22 +5,22 @@ const RedshiftStorageProperties = @import("redshift_storage_properties.zig").Red
 /// Amazon Redshift properties patch.
 pub const RedshiftPropertiesPatch = struct {
     /// The credentials in the Amazon Redshift properties patch.
-    credentials: ?RedshiftCredentials,
+    credentials: ?RedshiftCredentials = null,
 
     /// The name in the Amazon Redshift properties patch.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The host in the Amazon Redshift properties patch.
-    host: ?[]const u8,
+    host: ?[]const u8 = null,
 
     /// The lineage sync in the Amazon Redshift properties patch.
-    lineage_sync: ?RedshiftLineageSyncConfigurationInput,
+    lineage_sync: ?RedshiftLineageSyncConfigurationInput = null,
 
     /// The port in the Amazon Redshift properties patch.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The storage in the Amazon Redshift properties patch.
-    storage: ?RedshiftStorageProperties,
+    storage: ?RedshiftStorageProperties = null,
 
     pub const json_field_names = .{
         .credentials = "credentials",

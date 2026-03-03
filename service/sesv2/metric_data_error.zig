@@ -9,13 +9,13 @@ pub const MetricDataError = struct {
     ///
     /// * `ACCESS_DENIED` – You have insufficient access to retrieve metrics
     /// based on the given query.
-    code: ?QueryErrorCode,
+    code: ?QueryErrorCode = null,
 
     /// The query identifier.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The error message associated with the current query error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

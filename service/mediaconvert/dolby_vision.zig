@@ -13,15 +13,15 @@ pub const DolbyVision = struct {
     /// DolbyVision streams that have a backward compatible base layer (e.g.,
     /// DolbyVision 8.1) will cause the associate stream in the manifest to include
     /// a SUPPLEMENTAL_CODECS property.
-    compatibility: ?DolbyVisionCompatibility,
+    compatibility: ?DolbyVisionCompatibility = null,
 
     /// Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override
     /// the MaxCLL and MaxFALL values in your input with new values.
-    l6_metadata: ?DolbyVisionLevel6Metadata,
+    l6_metadata: ?DolbyVisionLevel6Metadata = null,
 
     /// Use Dolby Vision Mode to choose how the service will handle Dolby Vision
     /// MaxCLL and MaxFALL properies.
-    l6_mode: ?DolbyVisionLevel6Mode,
+    l6_mode: ?DolbyVisionLevel6Mode = null,
 
     /// Required when you set Dolby Vision Profile to Profile 8.1. When you set
     /// Content mapping to None, content mapping is not applied to the
@@ -32,14 +32,14 @@ pub const DolbyVision = struct {
     /// This mode is speed-optimized for PQ10 sources with metadata that is created
     /// from analysis. For graded Dolby Vision content, be aware that creative
     /// intent might not be guaranteed with extreme 1,000 nits trims.
-    mapping: ?DolbyVisionMapping,
+    mapping: ?DolbyVisionMapping = null,
 
     /// Required when you enable Dolby Vision. Use Profile 5 to include
     /// frame-interleaved Dolby Vision metadata in your output. Your input must
     /// include Dolby Vision metadata or an HDR10 YUV color space. Use Profile 8.1
     /// to include frame-interleaved Dolby Vision metadata and HDR10 metadata in
     /// your output. Your input must include Dolby Vision metadata.
-    profile: ?DolbyVisionProfile,
+    profile: ?DolbyVisionProfile = null,
 
     pub const json_field_names = .{
         .compatibility = "Compatibility",

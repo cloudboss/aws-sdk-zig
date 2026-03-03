@@ -25,7 +25,7 @@ pub const UpdateRetrievalConfiguration = struct {
     /// and Amazon Macie is allowed to assume when retrieving sensitive data from
     /// affected S3 objects for the account. The trust and permissions policies for
     /// the role must meet all requirements for Macie to assume the role.
-    role_name: ?[]const u8,
+    role_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .retrieval_mode = "retrievalMode",

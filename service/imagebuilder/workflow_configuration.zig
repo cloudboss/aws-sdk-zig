@@ -5,7 +5,7 @@ const WorkflowParameter = @import("workflow_parameter.zig").WorkflowParameter;
 /// resource.
 pub const WorkflowConfiguration = struct {
     /// The action to take if the workflow fails.
-    on_failure: ?OnWorkflowFailure,
+    on_failure: ?OnWorkflowFailure = null,
 
     /// Test workflows are defined within named runtime groups called parallel
     /// groups.
@@ -17,11 +17,11 @@ pub const WorkflowConfiguration = struct {
     /// others complete, until all workflows in the group have completed. This field
     /// only
     /// applies for test workflows.
-    parallel_group: ?[]const u8,
+    parallel_group: ?[]const u8 = null,
 
     /// Contains parameter values for each of the parameters that the workflow
     /// document defined for the workflow resource.
-    parameters: ?[]const WorkflowParameter,
+    parameters: ?[]const WorkflowParameter = null,
 
     /// The Amazon Resource Name (ARN) of the workflow resource.
     workflow_arn: []const u8,

@@ -10,7 +10,7 @@ pub const RouteFerryNotice = struct {
     /// Impact corresponding to the issue. While Low impact notices can be safely
     /// ignored, High impact notices must be evaluated further to determine the
     /// impact.
-    impact: ?RouteNoticeImpact,
+    impact: ?RouteNoticeImpact = null,
 
     pub const json_field_names = .{
         .code = "Code",

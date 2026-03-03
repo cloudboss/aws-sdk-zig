@@ -4,7 +4,7 @@ const TableFieldIconSetType = @import("table_field_icon_set_type.zig").TableFiel
 pub const TableFieldCustomIconContent = struct {
     /// The icon set type (link) of the custom icon content for table URL link
     /// content.
-    icon: ?TableFieldIconSetType,
+    icon: ?TableFieldIconSetType = null,
 
     pub const json_field_names = .{
         .icon = "Icon",

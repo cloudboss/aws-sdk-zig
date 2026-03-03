@@ -12,11 +12,11 @@ pub const DeploymentConfiguration = struct {
     /// can maintain a few impaired containers for the purpose of debugging, while
     /// all other
     /// tasks return to the last successful deployment.
-    impairment_strategy: ?DeploymentImpairmentStrategy,
+    impairment_strategy: ?DeploymentImpairmentStrategy = null,
 
     /// Sets a minimum level of healthy tasks to maintain during deployment
     /// activity.
-    minimum_healthy_percentage: ?i32,
+    minimum_healthy_percentage: ?i32 = null,
 
     /// Determines how fleet deployment activity affects active game sessions on the
     /// fleet.
@@ -27,7 +27,7 @@ pub const DeploymentConfiguration = struct {
     /// protection, deployment activity can shut down all running tasks, including
     /// active game
     /// sessions, regardless of game session protection.
-    protection_strategy: ?DeploymentProtectionStrategy,
+    protection_strategy: ?DeploymentProtectionStrategy = null,
 
     pub const json_field_names = .{
         .impairment_strategy = "ImpairmentStrategy",

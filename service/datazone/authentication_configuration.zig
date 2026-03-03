@@ -4,13 +4,13 @@ const OAuth2Properties = @import("o_auth_2_properties.zig").OAuth2Properties;
 /// The authentication configuration of a connection.
 pub const AuthenticationConfiguration = struct {
     /// The authentication type of a connection.
-    authentication_type: ?AuthenticationType,
+    authentication_type: ?AuthenticationType = null,
 
     /// The oAuth2 properties of a connection.
-    o_auth_2_properties: ?OAuth2Properties,
+    o_auth_2_properties: ?OAuth2Properties = null,
 
     /// The secret ARN of a connection.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authentication_type = "authenticationType",

@@ -5,7 +5,7 @@ pub const DICOMStudyDateAndTime = struct {
     dicom_study_date: []const u8,
 
     /// The DICOM study time provided in `HHmmss.FFFFFF` format.
-    dicom_study_time: ?[]const u8,
+    dicom_study_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dicom_study_date = "DICOMStudyDate",

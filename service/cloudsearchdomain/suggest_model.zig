@@ -6,10 +6,10 @@ pub const SuggestModel = struct {
     found: i64 = 0,
 
     /// The query string specified in the suggest request.
-    query: ?[]const u8,
+    query: ?[]const u8 = null,
 
     /// The documents that match the query string.
-    suggestions: ?[]const SuggestionMatch,
+    suggestions: ?[]const SuggestionMatch = null,
 
     pub const json_field_names = .{
         .found = "found",

@@ -6,26 +6,26 @@ const AwsWafRegionalRateBasedRuleMatchPredicate = @import("aws_waf_regional_rate
 /// a specified period of time.
 pub const AwsWafRegionalRateBasedRuleDetails = struct {
     /// The predicates to include in the rate-based rule.
-    match_predicates: ?[]const AwsWafRegionalRateBasedRuleMatchPredicate,
+    match_predicates: ?[]const AwsWafRegionalRateBasedRuleMatchPredicate = null,
 
     /// The name of the metrics for the rate-based rule.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The name of the rate-based rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The field that WAF uses to determine whether requests are likely arriving
     /// from single source and are subject to rate monitoring.
-    rate_key: ?[]const u8,
+    rate_key: ?[]const u8 = null,
 
     /// The maximum number of requests that have an identical value for the field
     /// specified in `RateKey` that are allowed within a five-minute period. If the
     /// number of requests exceeds `RateLimit` and the other predicates specified in
     /// the rule are met, WAF triggers the action for the rule.
-    rate_limit: ?i64,
+    rate_limit: ?i64 = null,
 
     /// The unique identifier for the rate-based rule.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .match_predicates = "MatchPredicates",

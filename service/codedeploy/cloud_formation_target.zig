@@ -6,27 +6,27 @@ const TargetStatus = @import("target_status.zig").TargetStatus;
 /// CloudFormation stack update.
 pub const CloudFormationTarget = struct {
     /// The unique ID of an CloudFormation blue/green deployment.
-    deployment_id: ?[]const u8,
+    deployment_id: ?[]const u8 = null,
 
     /// The date and time when the target application was updated by an
     /// CloudFormation
     /// blue/green deployment.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The lifecycle events of the CloudFormation blue/green deployment to this
     /// target
     /// application.
-    lifecycle_events: ?[]const LifecycleEvent,
+    lifecycle_events: ?[]const LifecycleEvent = null,
 
     /// The resource type for the CloudFormation blue/green deployment.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The status of an CloudFormation blue/green deployment's target application.
-    status: ?TargetStatus,
+    status: ?TargetStatus = null,
 
     /// The unique ID of a deployment target that has a type
     /// of `CloudFormationTarget`.
-    target_id: ?[]const u8,
+    target_id: ?[]const u8 = null,
 
     /// The percentage of production traffic that the target version of an
     /// CloudFormation

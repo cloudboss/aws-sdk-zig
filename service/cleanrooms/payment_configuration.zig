@@ -6,11 +6,11 @@ const QueryComputePaymentConfig = @import("query_compute_payment_config.zig").Qu
 /// set by the collaboration creator.
 pub const PaymentConfiguration = struct {
     /// The compute configuration for the job.
-    job_compute: ?JobComputePaymentConfig,
+    job_compute: ?JobComputePaymentConfig = null,
 
     /// An object representing the collaboration member's machine learning payment
     /// responsibilities set by the collaboration creator.
-    machine_learning: ?MLPaymentConfig,
+    machine_learning: ?MLPaymentConfig = null,
 
     /// The collaboration member's payment responsibilities set by the collaboration
     /// creator for query compute costs.

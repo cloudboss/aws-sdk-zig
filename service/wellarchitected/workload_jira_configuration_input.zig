@@ -4,13 +4,13 @@ const IssueManagementType = @import("issue_management_type.zig").IssueManagement
 /// Workload-level: Input for the Jira configuration.
 pub const WorkloadJiraConfigurationInput = struct {
     /// Workload-level: Jira issue management status.
-    issue_management_status: ?WorkloadIssueManagementStatus,
+    issue_management_status: ?WorkloadIssueManagementStatus = null,
 
     /// Workload-level: Jira issue management type.
-    issue_management_type: ?IssueManagementType,
+    issue_management_type: ?IssueManagementType = null,
 
     /// Workload-level: Jira project key to sync workloads to.
-    jira_project_key: ?[]const u8,
+    jira_project_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .issue_management_status = "IssueManagementStatus",

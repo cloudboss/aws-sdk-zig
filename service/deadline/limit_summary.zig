@@ -38,10 +38,10 @@ pub const LimitSummary = struct {
     max_count: i32,
 
     /// The Unix timestamp of the date and time that the limit was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user identifier of the person that last updated the limit.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .amount_requirement_name = "amountRequirementName",

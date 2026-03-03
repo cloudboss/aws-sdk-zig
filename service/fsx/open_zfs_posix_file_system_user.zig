@@ -5,7 +5,7 @@ pub const OpenZFSPosixFileSystemUser = struct {
     gid: i64,
 
     /// The list of secondary GIDs for the file system user.
-    secondary_gids: ?[]const i64,
+    secondary_gids: ?[]const i64 = null,
 
     /// The UID of the file system user.
     uid: i64,

@@ -10,25 +10,25 @@ pub const Scope = struct {
     /// evaluation for the rule. If you specify a resource ID, you must
     /// specify one resource type for
     /// `ComplianceResourceTypes`.
-    compliance_resource_id: ?[]const u8,
+    compliance_resource_id: ?[]const u8 = null,
 
     /// The resource types of only those Amazon Web Services resources that you want
     /// to
     /// trigger an evaluation for the rule. You can only specify one type if
     /// you also specify a resource ID for
     /// `ComplianceResourceId`.
-    compliance_resource_types: ?[]const []const u8,
+    compliance_resource_types: ?[]const []const u8 = null,
 
     /// The tag key that is applied to only those Amazon Web Services resources that
     /// you want to trigger an evaluation for the rule.
-    tag_key: ?[]const u8,
+    tag_key: ?[]const u8 = null,
 
     /// The tag value applied to only those Amazon Web Services resources that you
     /// want
     /// to trigger an evaluation for the rule. If you specify a value for
     /// `TagValue`, you must also specify a value for
     /// `TagKey`.
-    tag_value: ?[]const u8,
+    tag_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .compliance_resource_id = "ComplianceResourceId",

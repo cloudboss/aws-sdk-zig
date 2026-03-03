@@ -6,10 +6,10 @@ const Filter = @import("filter.zig").Filter;
 pub const LoggingFilter = struct {
     /// The default action (KEEP or DROP) for log records that don't match any
     /// filter conditions.
-    default_behavior: ?FilterBehavior,
+    default_behavior: ?FilterBehavior = null,
 
     /// A list of filter conditions that determine log record handling behavior.
-    filters: ?[]const Filter,
+    filters: ?[]const Filter = null,
 
     pub const json_field_names = .{
         .default_behavior = "DefaultBehavior",

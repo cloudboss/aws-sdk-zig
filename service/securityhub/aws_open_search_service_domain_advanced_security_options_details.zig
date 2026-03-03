@@ -3,13 +3,13 @@ const AwsOpenSearchServiceDomainMasterUserOptionsDetails = @import("aws_open_sea
 /// Provides information about domain access control options.
 pub const AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails = struct {
     /// Enables fine-grained access control.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// Enables the internal user database.
-    internal_user_database_enabled: ?bool,
+    internal_user_database_enabled: ?bool = null,
 
     /// Specifies information about the master user of the domain.
-    master_user_options: ?AwsOpenSearchServiceDomainMasterUserOptionsDetails,
+    master_user_options: ?AwsOpenSearchServiceDomainMasterUserOptionsDetails = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

@@ -5,25 +5,25 @@ const LifeCycleState = @import("life_cycle_state.zig").LifeCycleState;
 /// Lifecycle.
 pub const LifeCycle = struct {
     /// Lifecycle added to service data and time.
-    added_to_service_date_time: ?[]const u8,
+    added_to_service_date_time: ?[]const u8 = null,
 
     /// Lifecycle elapsed time and duration.
-    elapsed_replication_duration: ?[]const u8,
+    elapsed_replication_duration: ?[]const u8 = null,
 
     /// Lifecycle replication initiation date and time.
-    first_byte_date_time: ?[]const u8,
+    first_byte_date_time: ?[]const u8 = null,
 
     /// Lifecycle last Cutover.
-    last_cutover: ?LifeCycleLastCutover,
+    last_cutover: ?LifeCycleLastCutover = null,
 
     /// Lifecycle last seen date and time.
-    last_seen_by_service_date_time: ?[]const u8,
+    last_seen_by_service_date_time: ?[]const u8 = null,
 
     /// Lifecycle last Test.
-    last_test: ?LifeCycleLastTest,
+    last_test: ?LifeCycleLastTest = null,
 
     /// Lifecycle state.
-    state: ?LifeCycleState,
+    state: ?LifeCycleState = null,
 
     pub const json_field_names = .{
         .added_to_service_date_time = "addedToServiceDateTime",

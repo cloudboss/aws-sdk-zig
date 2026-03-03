@@ -6,11 +6,11 @@ const WaitTime = @import("wait_time.zig").WaitTime;
 pub const WaitActivity = struct {
     /// The unique identifier for the next activity to perform, after performing the
     /// wait activity.
-    next_activity: ?[]const u8,
+    next_activity: ?[]const u8 = null,
 
     /// The amount of time to wait or the date and time when the activity moves
     /// participants to the next activity in the journey.
-    wait_time: ?WaitTime,
+    wait_time: ?WaitTime = null,
 
     pub const json_field_names = .{
         .next_activity = "NextActivity",

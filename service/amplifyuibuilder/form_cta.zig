@@ -4,16 +4,16 @@ const FormButtonsPosition = @import("form_buttons_position.zig").FormButtonsPosi
 /// Describes the call to action button configuration for the form.
 pub const FormCTA = struct {
     /// Displays a cancel button.
-    cancel: ?FormButton,
+    cancel: ?FormButton = null,
 
     /// Displays a clear button.
-    clear: ?FormButton,
+    clear: ?FormButton = null,
 
     /// The position of the button.
-    position: ?FormButtonsPosition,
+    position: ?FormButtonsPosition = null,
 
     /// Displays a submit button.
-    submit: ?FormButton,
+    submit: ?FormButton = null,
 
     pub const json_field_names = .{
         .cancel = "cancel",

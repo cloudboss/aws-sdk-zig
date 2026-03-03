@@ -12,7 +12,7 @@ pub const SamlConfiguration = struct {
     role_arn: []const u8,
 
     /// The group attribute name in your IdP that maps to user groups.
-    user_group_attribute: ?[]const u8,
+    user_group_attribute: ?[]const u8 = null,
 
     /// The user attribute name in your IdP that maps to the user email.
     user_id_attribute: []const u8,

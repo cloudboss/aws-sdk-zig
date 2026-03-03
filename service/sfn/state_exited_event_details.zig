@@ -6,10 +6,10 @@ const HistoryEventExecutionDataDetails = @import("history_event_execution_data_d
 /// Contains details about an exit from a state during an execution.
 pub const StateExitedEventDetails = struct {
     /// Map of variable name and value as a serialized JSON representation.
-    assigned_variables: ?[]const aws.map.StringMapEntry,
+    assigned_variables: ?[]const aws.map.StringMapEntry = null,
 
     /// Provides details about input or output in an execution history event.
-    assigned_variables_details: ?AssignedVariablesDetails,
+    assigned_variables_details: ?AssignedVariablesDetails = null,
 
     /// The name of the state.
     ///
@@ -35,10 +35,10 @@ pub const StateExitedEventDetails = struct {
 
     /// The JSON output data of the state. Length constraints apply to the payload
     /// size, and are expressed as bytes in UTF-8 encoding.
-    output: ?[]const u8,
+    output: ?[]const u8 = null,
 
     /// Contains details about the output of an execution history event.
-    output_details: ?HistoryEventExecutionDataDetails,
+    output_details: ?HistoryEventExecutionDataDetails = null,
 
     pub const json_field_names = .{
         .assigned_variables = "assignedVariables",

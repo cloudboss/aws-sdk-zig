@@ -3,7 +3,7 @@ const AvailabilityZoneInfo = @import("availability_zone_info.zig").AvailabilityZ
 /// Information about the active domain environment.
 pub const EnvironmentInfo = struct {
     /// A list of `AvailabilityZoneInfo` for the domain.
-    availability_zone_information: ?[]const AvailabilityZoneInfo,
+    availability_zone_information: ?[]const AvailabilityZoneInfo = null,
 
     pub const json_field_names = .{
         .availability_zone_information = "AvailabilityZoneInformation",

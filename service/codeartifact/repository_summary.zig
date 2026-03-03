@@ -5,27 +5,27 @@
 /// `RepositorySummary` objects.
 pub const RepositorySummary = struct {
     /// The Amazon Web Services account ID that manages the repository.
-    administrator_account: ?[]const u8,
+    administrator_account: ?[]const u8 = null,
 
     /// The ARN of the repository.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A timestamp that represents the date and time the repository was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The description of the repository.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the domain that contains the repository.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// The 12-digit account number of the Amazon Web Services account that owns the
     /// domain. It does not include
     /// dashes or spaces.
-    domain_owner: ?[]const u8,
+    domain_owner: ?[]const u8 = null,
 
     /// The name of the repository.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .administrator_account = "administratorAccount",

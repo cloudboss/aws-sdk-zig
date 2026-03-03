@@ -36,9 +36,9 @@ pub const KeySummary = struct {
     /// Services Regions) or a Replica Region key (RRK) (which is a copy of a PRK in
     /// another Region). For more information, see [Multi-Region key
     /// replication](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html).
-    multi_region_key_type: ?MultiRegionKeyType,
+    multi_region_key_type: ?MultiRegionKeyType = null,
 
-    primary_region: ?[]const u8,
+    primary_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

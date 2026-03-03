@@ -22,7 +22,7 @@ pub const EndpointState = struct {
     status: EndpointStatus,
 
     /// The reason for the `EndpointStatus`.
-    status_reason: ?EndpointStatusReason,
+    status_reason: ?EndpointStatusReason = null,
 
     pub const json_field_names = .{
         .status = "Status",

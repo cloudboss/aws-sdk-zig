@@ -11,38 +11,38 @@ pub const ActionParameters = struct {
     /// The HTML anchor link to the location to open. Specify this value for a
     /// navigation
     /// action.
-    anchor: ?ComponentProperty,
+    anchor: ?ComponentProperty = null,
 
     /// A dictionary of key-value pairs mapping Amplify Studio properties to fields
     /// in a data model. Use when the action performs an operation on an Amplify
     /// DataStore model.
-    fields: ?[]const aws.map.MapEntry(ComponentProperty),
+    fields: ?[]const aws.map.MapEntry(ComponentProperty) = null,
 
     /// Specifies whether the user should be signed out globally. Specify this value
     /// for an auth
     /// sign out action.
-    global: ?ComponentProperty,
+    global: ?ComponentProperty = null,
 
     /// The unique ID of the component that the `ActionParameters` apply to.
-    id: ?ComponentProperty,
+    id: ?ComponentProperty = null,
 
     /// The name of the data model. Use when the action performs an operation on an
     /// Amplify DataStore model.
-    model: ?[]const u8,
+    model: ?[]const u8 = null,
 
     /// A key-value pair that specifies the state property name and its initial
     /// value.
-    state: ?MutationActionSetStateParameter,
+    state: ?MutationActionSetStateParameter = null,
 
     /// The element within the same component to modify when the action occurs.
-    target: ?ComponentProperty,
+    target: ?ComponentProperty = null,
 
     /// The type of navigation action. Valid values are `url` and `anchor`.
     /// This value is required for a navigation action.
-    @"type": ?ComponentProperty,
+    @"type": ?ComponentProperty = null,
 
     /// The URL to the location to open. Specify this value for a navigation action.
-    url: ?ComponentProperty,
+    url: ?ComponentProperty = null,
 
     pub const json_field_names = .{
         .anchor = "anchor",

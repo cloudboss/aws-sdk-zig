@@ -3,10 +3,10 @@ const Tag = @import("tag.zig").Tag;
 /// A resource tag.
 pub const ResourceTag = struct {
     /// Specifies the ARN of the resource.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// A list of tags.
-    tags_list: ?[]const Tag,
+    tags_list: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .resource_id = "ResourceId",

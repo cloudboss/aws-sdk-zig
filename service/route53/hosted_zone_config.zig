@@ -4,7 +4,7 @@
 /// `Comment` elements.
 pub const HostedZoneConfig = struct {
     /// Any comments that you want to include about the hosted zone.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// A value that indicates whether this is a private hosted zone.
     private_zone: bool = false,

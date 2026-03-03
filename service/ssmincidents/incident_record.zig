@@ -11,10 +11,10 @@ pub const IncidentRecord = struct {
 
     /// The runbook, or automation document, that's run at the beginning of the
     /// incident.
-    automation_executions: ?[]const AutomationExecution,
+    automation_executions: ?[]const AutomationExecution = null,
 
     /// The chat channel used for collaboration during an incident.
-    chat_channel: ?ChatChannel,
+    chat_channel: ?ChatChannel = null,
 
     /// The timestamp for when Incident Manager created the incident record.
     creation_time: i64,
@@ -50,11 +50,11 @@ pub const IncidentRecord = struct {
 
     /// The Amazon SNS targets that are notified when updates are made to an
     /// incident.
-    notification_targets: ?[]const NotificationTargetItem,
+    notification_targets: ?[]const NotificationTargetItem = null,
 
     /// The timestamp for when the incident was resolved. This appears as a timeline
     /// event.
-    resolved_time: ?i64,
+    resolved_time: ?i64 = null,
 
     /// The current status of the incident.
     status: IncidentRecordStatus,
@@ -62,7 +62,7 @@ pub const IncidentRecord = struct {
     /// The summary of the incident. The summary is a brief synopsis of what
     /// occurred, what's
     /// currently happening, and context of the incident.
-    summary: ?[]const u8,
+    summary: ?[]const u8 = null,
 
     /// The title of the incident.
     title: []const u8,

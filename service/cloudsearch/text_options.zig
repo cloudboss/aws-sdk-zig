@@ -3,19 +3,19 @@
 /// by default.
 pub const TextOptions = struct {
     /// The name of an analysis scheme for a `text` field.
-    analysis_scheme: ?[]const u8,
+    analysis_scheme: ?[]const u8 = null,
 
     /// A value to use for the field if the field isn't specified for a document.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// Whether highlights can be returned for the field.
-    highlight_enabled: ?bool,
+    highlight_enabled: ?bool = null,
 
     /// Whether the contents of the field can be returned in the search results.
-    return_enabled: ?bool,
+    return_enabled: ?bool = null,
 
     /// Whether the field can be used to sort the search results.
-    sort_enabled: ?bool,
+    sort_enabled: ?bool = null,
 
-    source_field: ?[]const u8,
+    source_field: ?[]const u8 = null,
 };

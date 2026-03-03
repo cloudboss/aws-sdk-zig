@@ -4,7 +4,7 @@ pub const CachingConfig = struct {
     ///
     /// Valid values are entries from the `$context.arguments`,
     /// `$context.source`, and `$context.identity` maps.
-    caching_keys: ?[]const []const u8,
+    caching_keys: ?[]const []const u8 = null,
 
     /// The TTL in seconds for a resolver that has caching activated.
     ///

@@ -1,10 +1,10 @@
 /// Represents an endpoint configuration.
 pub const EndpointConfigurationResponse = struct {
     /// The ARN of the ACM certificate.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The domain name.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// The portal default domain name. This domain name is generated and managed by
     /// API Gateway.

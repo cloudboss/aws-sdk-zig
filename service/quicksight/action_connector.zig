@@ -13,19 +13,19 @@ pub const ActionConnector = struct {
     arn: []const u8,
 
     /// The authentication configuration used to connect to the external service.
-    authentication_config: ?ReadAuthConfig,
+    authentication_config: ?ReadAuthConfig = null,
 
     /// The timestamp when the action connector was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The description of the action connector.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The list of actions that are enabled for this connector.
-    enabled_actions: ?[]const []const u8,
+    enabled_actions: ?[]const []const u8 = null,
 
     /// Error information if the action connector is in an error state.
-    @"error": ?ActionConnectorError,
+    @"error": ?ActionConnectorError = null,
 
     /// The date and time when the action connector was last updated.
     last_updated_time: i64,
@@ -34,14 +34,14 @@ pub const ActionConnector = struct {
     name: []const u8,
 
     /// The current status of the action connector.
-    status: ?ResourceStatus,
+    status: ?ResourceStatus = null,
 
     /// The type of action connector.
     @"type": ActionConnectorType,
 
     /// The ARN of the VPC connection used for secure connectivity to the external
     /// service.
-    vpc_connection_arn: ?[]const u8,
+    vpc_connection_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action_connector_id = "ActionConnectorId",

@@ -1,16 +1,16 @@
 /// Contains a summary of information about a fraudster.
 pub const FraudsterSummary = struct {
     /// The timestamp of when the fraudster summary was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of the domain that contains the fraudster summary.
-    domain_id: ?[]const u8,
+    domain_id: ?[]const u8 = null,
 
     /// The service-generated identifier for the fraudster.
-    generated_fraudster_id: ?[]const u8,
+    generated_fraudster_id: ?[]const u8 = null,
 
     /// The identifier of the watchlists the fraudster is a part of.
-    watchlist_ids: ?[]const []const u8,
+    watchlist_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

@@ -4,22 +4,22 @@ const AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails = @import("
 pub const AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails = struct {
     /// The device name that is exposed to the EC2 instance. For example, `/dev/sdh`
     /// or `xvdh`.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// Parameters that are used to automatically set up Amazon EBS volumes when an
     /// instance is launched.
-    ebs: ?AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails,
+    ebs: ?AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails = null,
 
     /// Whether to suppress the device that is included in the block device mapping
     /// of the Amazon Machine Image (AMI).
     ///
     /// If `NoDevice` is `true`, then you cannot specify `Ebs`.>
-    no_device: ?bool,
+    no_device: ?bool = null,
 
     /// The name of the virtual device (for example, `ephemeral0`).
     ///
     /// You can provide either `VirtualName` or `Ebs`, but not both.
-    virtual_name: ?[]const u8,
+    virtual_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .device_name = "DeviceName",

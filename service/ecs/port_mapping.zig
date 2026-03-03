@@ -57,7 +57,7 @@ pub const PortMapping = struct {
     /// Service Connect. For more information, see [Service
     /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    app_protocol: ?ApplicationProtocol,
+    app_protocol: ?ApplicationProtocol = null,
 
     /// The port number on the container that's bound to the user-specified or
     /// automatically
@@ -73,7 +73,7 @@ pub const PortMapping = struct {
     /// Port mappings that are automatically assigned in this way do not count
     /// toward the 100
     /// reserved ports limit of a container instance.
-    container_port: ?i32,
+    container_port: ?i32 = null,
 
     /// The port number range on the container that's bound to the dynamically
     /// mapped host
@@ -133,7 +133,7 @@ pub const PortMapping = struct {
     /// `DescribeTasks`
     /// ](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html) to view the `hostPortRange` which
     /// are the host ports that are bound to the container ports.
-    container_port_range: ?[]const u8,
+    container_port_range: ?[]const u8 = null,
 
     /// The port number on the container instance to reserve for your container.
     ///
@@ -184,7 +184,7 @@ pub const PortMapping = struct {
     /// reserved ports at a time. This number includes the default reserved ports.
     /// Automatically
     /// assigned ports aren't included in the 100 reserved ports quota.
-    host_port: ?i32,
+    host_port: ?i32 = null,
 
     /// The name that's used for the port mapping. This parameter is the name that
     /// you use in
@@ -193,14 +193,14 @@ pub const PortMapping = struct {
     /// characters. The characters can include lowercase letters, numbers,
     /// underscores (_), and
     /// hyphens (-). The name can't start with a hyphen.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The protocol used for the port mapping. Valid values are `tcp` and
     /// `udp`. The default is `tcp`. `protocol` is
     /// immutable in a Service Connect service. Updating this field requires a
     /// service deletion
     /// and redeployment.
-    protocol: ?TransportProtocol,
+    protocol: ?TransportProtocol = null,
 
     pub const json_field_names = .{
         .app_protocol = "appProtocol",

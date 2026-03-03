@@ -14,12 +14,12 @@ pub const ParseJSON = struct {
     /// The location to put the parsed key value pair into. If you omit this
     /// parameter, it is
     /// placed under the root node.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// Path to the field in the log event that will be parsed. Use dot notation to
     /// access child
     /// fields. For example, `store.book`
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination = "destination",

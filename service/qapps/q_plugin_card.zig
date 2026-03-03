@@ -4,7 +4,7 @@ const CardType = @import("card_type.zig").CardType;
 /// A card in an Q App that integrates with a third-party plugin or service.
 pub const QPluginCard = struct {
     /// The action identifier of the action to be performed by the plugin card.
-    action_identifier: ?[]const u8,
+    action_identifier: ?[]const u8 = null,
 
     /// Any dependencies or requirements for the plugin card.
     dependencies: []const []const u8,

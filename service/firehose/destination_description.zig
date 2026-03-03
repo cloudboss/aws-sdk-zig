@@ -12,37 +12,37 @@ const SplunkDestinationDescription = @import("splunk_destination_description.zig
 /// Describes the destination for a Firehose stream.
 pub const DestinationDescription = struct {
     /// The destination in the Serverless offering for Amazon OpenSearch Service.
-    amazon_open_search_serverless_destination_description: ?AmazonOpenSearchServerlessDestinationDescription,
+    amazon_open_search_serverless_destination_description: ?AmazonOpenSearchServerlessDestinationDescription = null,
 
     /// The destination in Amazon OpenSearch Service.
-    amazonopensearchservice_destination_description: ?AmazonopensearchserviceDestinationDescription,
+    amazonopensearchservice_destination_description: ?AmazonopensearchserviceDestinationDescription = null,
 
     /// The ID of the destination.
     destination_id: []const u8,
 
     /// The destination in Amazon OpenSearch Service.
-    elasticsearch_destination_description: ?ElasticsearchDestinationDescription,
+    elasticsearch_destination_description: ?ElasticsearchDestinationDescription = null,
 
     /// The destination in Amazon S3.
-    extended_s3_destination_description: ?ExtendedS3DestinationDescription,
+    extended_s3_destination_description: ?ExtendedS3DestinationDescription = null,
 
     /// Describes the specified HTTP endpoint destination.
-    http_endpoint_destination_description: ?HttpEndpointDestinationDescription,
+    http_endpoint_destination_description: ?HttpEndpointDestinationDescription = null,
 
     /// Describes a destination in Apache Iceberg Tables.
-    iceberg_destination_description: ?IcebergDestinationDescription,
+    iceberg_destination_description: ?IcebergDestinationDescription = null,
 
     /// The destination in Amazon Redshift.
-    redshift_destination_description: ?RedshiftDestinationDescription,
+    redshift_destination_description: ?RedshiftDestinationDescription = null,
 
     /// [Deprecated] The destination in Amazon S3.
-    s3_destination_description: ?S3DestinationDescription,
+    s3_destination_description: ?S3DestinationDescription = null,
 
     /// Optional description for the destination
-    snowflake_destination_description: ?SnowflakeDestinationDescription,
+    snowflake_destination_description: ?SnowflakeDestinationDescription = null,
 
     /// The destination in Splunk.
-    splunk_destination_description: ?SplunkDestinationDescription,
+    splunk_destination_description: ?SplunkDestinationDescription = null,
 
     pub const json_field_names = .{
         .amazon_open_search_serverless_destination_description = "AmazonOpenSearchServerlessDestinationDescription",

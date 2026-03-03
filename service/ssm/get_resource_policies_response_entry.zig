@@ -15,17 +15,17 @@ pub const GetResourcePoliciesResponseEntry = struct {
     /// `OpsItemGroup` enables Amazon Web Services accounts to view and interact
     /// with OpsCenter operational
     /// work items (OpsItems).
-    policy: ?[]const u8,
+    policy: ?[]const u8 = null,
 
     /// ID of the current policy version. The hash helps to prevent a situation
     /// where multiple users
     /// attempt to overwrite a policy. You must provide this hash when updating or
     /// deleting a
     /// policy.
-    policy_hash: ?[]const u8,
+    policy_hash: ?[]const u8 = null,
 
     /// A policy ID.
-    policy_id: ?[]const u8,
+    policy_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .policy = "Policy",

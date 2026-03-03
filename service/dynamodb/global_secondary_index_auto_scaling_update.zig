@@ -5,9 +5,9 @@ const AutoScalingSettingsUpdate = @import("auto_scaling_settings_update.zig").Au
 /// that will be modified.
 pub const GlobalSecondaryIndexAutoScalingUpdate = struct {
     /// The name of the global secondary index.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
-    provisioned_write_capacity_auto_scaling_update: ?AutoScalingSettingsUpdate,
+    provisioned_write_capacity_auto_scaling_update: ?AutoScalingSettingsUpdate = null,
 
     pub const json_field_names = .{
         .index_name = "IndexName",

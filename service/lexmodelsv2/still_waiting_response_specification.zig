@@ -5,7 +5,7 @@ const MessageGroup = @import("message_group.zig").MessageGroup;
 pub const StillWaitingResponseSpecification = struct {
     /// Indicates that the user can interrupt the response by speaking while
     /// the message is being played.
-    allow_interrupt: ?bool,
+    allow_interrupt: ?bool = null,
 
     /// How often a message should be sent to the user. Minimum of 1 second,
     /// maximum of 5 minutes.

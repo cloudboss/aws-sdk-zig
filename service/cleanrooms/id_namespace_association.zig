@@ -19,13 +19,13 @@ pub const IdNamespaceAssociation = struct {
     create_time: i64,
 
     /// The description of the ID namespace association.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier for this ID namespace association.
     id: []const u8,
 
     /// The configuration settings for the ID mapping table.
-    id_mapping_config: ?IdMappingConfig,
+    id_mapping_config: ?IdMappingConfig = null,
 
     /// The input reference configuration for the ID namespace association.
     input_reference_config: IdNamespaceAssociationInputReferenceConfig,

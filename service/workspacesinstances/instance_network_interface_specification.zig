@@ -9,67 +9,67 @@ const PrivateIpAddressSpecification = @import("private_ip_address_specification.
 /// Defines network interface configuration for WorkSpace Instance.
 pub const InstanceNetworkInterfaceSpecification = struct {
     /// Enables carrier IP address association.
-    associate_carrier_ip_address: ?bool,
+    associate_carrier_ip_address: ?bool = null,
 
     /// Enables public IP address assignment.
-    associate_public_ip_address: ?bool,
+    associate_public_ip_address: ?bool = null,
 
     /// Configures network connection tracking parameters.
-    connection_tracking_specification: ?ConnectionTrackingSpecificationRequest,
+    connection_tracking_specification: ?ConnectionTrackingSpecificationRequest = null,
 
     /// Descriptive text for the network interface.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Unique index for the network interface.
-    device_index: ?i32,
+    device_index: ?i32 = null,
 
     /// Configures Elastic Network Adapter Scalable Reliable Datagram settings.
-    ena_srd_specification: ?EnaSrdSpecificationRequest,
+    ena_srd_specification: ?EnaSrdSpecificationRequest = null,
 
     /// Security groups associated with the network interface.
-    groups: ?[]const []const u8,
+    groups: ?[]const []const u8 = null,
 
     /// Specifies the type of network interface.
-    interface_type: ?InterfaceTypeEnum,
+    interface_type: ?InterfaceTypeEnum = null,
 
     /// Number of IPv4 prefixes to assign.
-    ipv_4_prefix_count: ?i32,
+    ipv_4_prefix_count: ?i32 = null,
 
     /// IPv4 prefix configurations for the interface.
-    ipv_4_prefixes: ?[]const Ipv4PrefixSpecificationRequest,
+    ipv_4_prefixes: ?[]const Ipv4PrefixSpecificationRequest = null,
 
     /// Number of IPv6 addresses to assign.
-    ipv_6_address_count: ?i32,
+    ipv_6_address_count: ?i32 = null,
 
     /// Specific IPv6 addresses for the interface.
-    ipv_6_addresses: ?[]const InstanceIpv6Address,
+    ipv_6_addresses: ?[]const InstanceIpv6Address = null,
 
     /// Number of IPv6 prefixes to assign.
-    ipv_6_prefix_count: ?i32,
+    ipv_6_prefix_count: ?i32 = null,
 
     /// IPv6 prefix configurations for the interface.
-    ipv_6_prefixes: ?[]const Ipv6PrefixSpecificationRequest,
+    ipv_6_prefixes: ?[]const Ipv6PrefixSpecificationRequest = null,
 
     /// Index of the network card for multiple network interfaces.
-    network_card_index: ?i32,
+    network_card_index: ?i32 = null,
 
     /// Unique identifier for the network interface.
-    network_interface_id: ?[]const u8,
+    network_interface_id: ?[]const u8 = null,
 
     /// Indicates the primary IPv6 configuration.
-    primary_ipv_6: ?bool,
+    primary_ipv_6: ?bool = null,
 
     /// Primary private IP address for the interface.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// List of private IP addresses for the interface.
-    private_ip_addresses: ?[]const PrivateIpAddressSpecification,
+    private_ip_addresses: ?[]const PrivateIpAddressSpecification = null,
 
     /// Number of additional private IP addresses to assign.
-    secondary_private_ip_address_count: ?i32,
+    secondary_private_ip_address_count: ?i32 = null,
 
     /// Subnet identifier for the network interface.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .associate_carrier_ip_address = "AssociateCarrierIpAddress",

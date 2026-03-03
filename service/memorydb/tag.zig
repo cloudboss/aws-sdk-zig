@@ -8,10 +8,10 @@
 /// resources](https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html)
 pub const Tag = struct {
     /// The key for the tag. May not be null.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The tag's value. May be null.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

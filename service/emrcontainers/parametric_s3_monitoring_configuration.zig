@@ -5,7 +5,7 @@
 /// specified within.
 pub const ParametricS3MonitoringConfiguration = struct {
     /// Amazon S3 destination URI for log publishing.
-    log_uri: ?[]const u8,
+    log_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .log_uri = "logUri",

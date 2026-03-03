@@ -12,7 +12,7 @@ pub const ListDomainItem = struct {
     last_updated_at: i64,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

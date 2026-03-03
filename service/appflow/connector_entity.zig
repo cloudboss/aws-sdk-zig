@@ -14,7 +14,7 @@ pub const ConnectorEntity = struct {
     has_nested_entities: bool = false,
 
     /// The label applied to the connector entity.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// The name of the connector entity.
     name: []const u8,

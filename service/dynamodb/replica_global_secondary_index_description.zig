@@ -5,19 +5,19 @@ const GlobalSecondaryIndexWarmThroughputDescription = @import("global_secondary_
 /// Represents the properties of a replica global secondary index.
 pub const ReplicaGlobalSecondaryIndexDescription = struct {
     /// The name of the global secondary index.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
     /// Overrides the maximum on-demand throughput for the specified global
     /// secondary index in
     /// the specified replica table.
-    on_demand_throughput_override: ?OnDemandThroughputOverride,
+    on_demand_throughput_override: ?OnDemandThroughputOverride = null,
 
     /// If not described, uses the source table GSI's read capacity settings.
-    provisioned_throughput_override: ?ProvisionedThroughputOverride,
+    provisioned_throughput_override: ?ProvisionedThroughputOverride = null,
 
     /// Represents the warm throughput of the global secondary index for this
     /// replica.
-    warm_throughput: ?GlobalSecondaryIndexWarmThroughputDescription,
+    warm_throughput: ?GlobalSecondaryIndexWarmThroughputDescription = null,
 
     pub const json_field_names = .{
         .index_name = "IndexName",

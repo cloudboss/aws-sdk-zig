@@ -6,32 +6,32 @@ pub const GraphSummary = struct {
     arn: []const u8,
 
     /// If `true`, deletion protection is enabled for the graph.
-    deletion_protection: ?bool,
+    deletion_protection: ?bool = null,
 
     /// The graph endpoint.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// The unique identifier of the graph.
     id: []const u8,
 
     /// The ID of the KMS key used to encrypt and decrypt graph data.
-    kms_key_identifier: ?[]const u8,
+    kms_key_identifier: ?[]const u8 = null,
 
     /// The name of the graph.
     name: []const u8,
 
     /// The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to
     /// the graph.
-    provisioned_memory: ?i32,
+    provisioned_memory: ?i32 = null,
 
     /// If `true`, the graph has a public endpoint, otherwise not.
-    public_connectivity: ?bool,
+    public_connectivity: ?bool = null,
 
     /// The number of replicas for the graph.
-    replica_count: ?i32,
+    replica_count: ?i32 = null,
 
     /// The status of the graph.
-    status: ?GraphStatus,
+    status: ?GraphStatus = null,
 
     pub const json_field_names = .{
         .arn = "arn",

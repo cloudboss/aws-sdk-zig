@@ -6,40 +6,40 @@ const ReservedNodeOfferingType = @import("reserved_node_offering_type.zig").Rese
 /// offerings.
 pub const ReservedNode = struct {
     /// The currency code for the reserved cluster.
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// The duration of the node reservation in seconds.
-    duration: ?i32,
+    duration: ?i32 = null,
 
     /// The fixed cost Amazon Redshift charges you for this reserved node.
-    fixed_price: ?f64,
+    fixed_price: ?f64 = null,
 
     /// The number of reserved compute nodes.
-    node_count: ?i32,
+    node_count: ?i32 = null,
 
     /// The node type of the reserved node.
-    node_type: ?[]const u8,
+    node_type: ?[]const u8 = null,
 
     /// The anticipated utilization of the reserved node, as defined in the reserved
     /// node
     /// offering.
-    offering_type: ?[]const u8,
+    offering_type: ?[]const u8 = null,
 
     /// The recurring charges for the reserved node.
-    recurring_charges: ?[]const RecurringCharge,
+    recurring_charges: ?[]const RecurringCharge = null,
 
     /// The unique identifier for the reservation.
-    reserved_node_id: ?[]const u8,
+    reserved_node_id: ?[]const u8 = null,
 
     /// The identifier for the reserved node offering.
-    reserved_node_offering_id: ?[]const u8,
+    reserved_node_offering_id: ?[]const u8 = null,
 
-    reserved_node_offering_type: ?ReservedNodeOfferingType,
+    reserved_node_offering_type: ?ReservedNodeOfferingType = null,
 
     /// The time the reservation started. You purchase a reserved node offering for
     /// a
     /// duration. This is the start time of that duration.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The state of the reserved compute node.
     ///
@@ -57,8 +57,8 @@ pub const ReservedNode = struct {
     ///
     /// * exchanging-The owner is exchanging the reserved node for another reserved
     /// node.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// The hourly rate Amazon Redshift charges you for this reserved node.
-    usage_price: ?f64,
+    usage_price: ?f64 = null,
 };

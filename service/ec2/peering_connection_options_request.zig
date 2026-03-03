@@ -3,11 +3,11 @@ pub const PeeringConnectionOptionsRequest = struct {
     /// If true, enables a local VPC to resolve public DNS hostnames to private IP
     /// addresses
     /// when queried from instances in the peer VPC.
-    allow_dns_resolution_from_remote_vpc: ?bool,
+    allow_dns_resolution_from_remote_vpc: ?bool = null,
 
     /// Deprecated.
-    allow_egress_from_local_classic_link_to_remote_vpc: ?bool,
+    allow_egress_from_local_classic_link_to_remote_vpc: ?bool = null,
 
     /// Deprecated.
-    allow_egress_from_local_vpc_to_remote_classic_link: ?bool,
+    allow_egress_from_local_vpc_to_remote_classic_link: ?bool = null,
 };

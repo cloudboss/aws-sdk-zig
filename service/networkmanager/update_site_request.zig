@@ -4,7 +4,7 @@ pub const UpdateSiteRequest = struct {
     /// A description of your site.
     ///
     /// Constraints: Maximum length of 256 characters.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the global network.
     global_network_id: []const u8,
@@ -16,7 +16,7 @@ pub const UpdateSiteRequest = struct {
     /// * `Latitude`: The latitude of the site.
     ///
     /// * `Longitude`: The longitude of the site.
-    location: ?Location,
+    location: ?Location = null,
 
     /// The ID of your site.
     site_id: []const u8,

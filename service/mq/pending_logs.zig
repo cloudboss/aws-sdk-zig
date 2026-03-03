@@ -2,10 +2,10 @@
 pub const PendingLogs = struct {
     /// Enables audit logging. Every user management action made using JMX or the
     /// ActiveMQ Web Console is logged.
-    audit: ?bool,
+    audit: ?bool = null,
 
     /// Enables general logging.
-    general: ?bool,
+    general: ?bool = null,
 
     pub const json_field_names = .{
         .audit = "Audit",

@@ -11,7 +11,7 @@ pub const JobTimeout = struct {
     /// For multi-node parallel (MNP) jobs, the timeout applies to the whole job,
     /// not to the
     /// individual nodes.
-    attempt_duration_seconds: ?i32,
+    attempt_duration_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .attempt_duration_seconds = "attemptDurationSeconds",

@@ -7,18 +7,18 @@ const GuardrailAutomatedReasoningTranslation = @import("guardrail_automated_reas
 /// premises, with no possible alternative interpretations.
 pub const GuardrailAutomatedReasoningValidFinding = struct {
     /// An example scenario demonstrating how the claims are logically true.
-    claims_true_scenario: ?GuardrailAutomatedReasoningScenario,
+    claims_true_scenario: ?GuardrailAutomatedReasoningScenario = null,
 
     /// Indication of a logic issue with the translation without needing to consider
     /// the automated reasoning policy rules.
-    logic_warning: ?GuardrailAutomatedReasoningLogicWarning,
+    logic_warning: ?GuardrailAutomatedReasoningLogicWarning = null,
 
     /// The automated reasoning policy rules that support why this result is
     /// considered valid.
-    supporting_rules: ?[]const GuardrailAutomatedReasoningRule,
+    supporting_rules: ?[]const GuardrailAutomatedReasoningRule = null,
 
     /// The logical translation of the input that this finding validates.
-    translation: ?GuardrailAutomatedReasoningTranslation,
+    translation: ?GuardrailAutomatedReasoningTranslation = null,
 
     pub const json_field_names = .{
         .claims_true_scenario = "claimsTrueScenario",

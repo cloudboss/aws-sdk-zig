@@ -1,10 +1,10 @@
 /// Contains details about an error.
 pub const ErrorDetail = struct {
     /// The code associated with this error.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// A message describing the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

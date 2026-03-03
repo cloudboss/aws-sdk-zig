@@ -3,26 +3,26 @@
 /// `ListConfigurationPolicies` request.
 pub const ConfigurationPolicySummary = struct {
     /// The Amazon Resource Name (ARN) of the configuration policy.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The description of the configuration policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The universally unique identifier (UUID) of the configuration policy.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the configuration policy. Alphanumeric characters and the
     /// following ASCII characters are permitted:
     /// `-, ., !, *, /`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Indicates whether the service that the configuration policy applies to is
     /// enabled in the policy.
-    service_enabled: ?bool,
+    service_enabled: ?bool = null,
 
     /// The date and time, in UTC and ISO 8601 format, that the configuration policy
     /// was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

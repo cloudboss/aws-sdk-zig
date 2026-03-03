@@ -3,8 +3,8 @@ const OperationResultFilterName = @import("operation_result_filter_name.zig").Op
 /// The status that operation results are filtered by.
 pub const OperationResultFilter = struct {
     /// The type of filter to apply.
-    name: ?OperationResultFilterName,
+    name: ?OperationResultFilterName = null,
 
     /// The value to filter by.
-    values: ?[]const u8,
+    values: ?[]const u8 = null,
 };

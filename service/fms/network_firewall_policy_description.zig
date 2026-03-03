@@ -17,34 +17,34 @@ pub const NetworkFirewallPolicyDescription = struct {
     /// * aws:alert_strict
     ///
     /// * aws:alert_established
-    stateful_default_actions: ?[]const []const u8,
+    stateful_default_actions: ?[]const []const u8 = null,
 
     /// Additional options governing how Network Firewall handles stateful rules.
     /// The stateful rule groups
     /// that you use in your policy must have stateful rule options settings that
     /// are compatible with these
     /// settings.
-    stateful_engine_options: ?StatefulEngineOptions,
+    stateful_engine_options: ?StatefulEngineOptions = null,
 
     /// The stateful rule groups that are used in the Network Firewall firewall
     /// policy.
-    stateful_rule_groups: ?[]const StatefulRuleGroup,
+    stateful_rule_groups: ?[]const StatefulRuleGroup = null,
 
     /// Names of custom actions that are available for use in the stateless default
     /// actions settings.
-    stateless_custom_actions: ?[]const []const u8,
+    stateless_custom_actions: ?[]const []const u8 = null,
 
     /// The actions to take on packets that don't match any of the stateless rule
     /// groups.
-    stateless_default_actions: ?[]const []const u8,
+    stateless_default_actions: ?[]const []const u8 = null,
 
     /// The actions to take on packet fragments that don't match any of the
     /// stateless rule groups.
-    stateless_fragment_default_actions: ?[]const []const u8,
+    stateless_fragment_default_actions: ?[]const []const u8 = null,
 
     /// The stateless rule groups that are used in the Network Firewall firewall
     /// policy.
-    stateless_rule_groups: ?[]const StatelessRuleGroup,
+    stateless_rule_groups: ?[]const StatelessRuleGroup = null,
 
     pub const json_field_names = .{
         .stateful_default_actions = "StatefulDefaultActions",

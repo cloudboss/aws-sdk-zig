@@ -12,25 +12,25 @@ const SecurityConfigurationData = @import("security_configuration_data.zig").Sec
 /// cluster.
 pub const SecurityConfiguration = struct {
     /// The ARN (Amazon Resource Name) of the security configuration.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the job run was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The user who created the job run.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The ID of the security configuration.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the security configuration.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Security configuration inputs for the request.
-    security_configuration_data: ?SecurityConfigurationData,
+    security_configuration_data: ?SecurityConfigurationData = null,
 
     /// The tags to assign to the security configuration.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

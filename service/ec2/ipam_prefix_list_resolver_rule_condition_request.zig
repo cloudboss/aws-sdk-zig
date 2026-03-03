@@ -64,28 +64,28 @@ const RequestIpamResourceTag = @import("request_ipam_resource_tag.zig").RequestI
 pub const IpamPrefixListResolverRuleConditionRequest = struct {
     /// A CIDR block to match against. This condition selects CIDRs that fall within
     /// or match the specified CIDR range.
-    cidr: ?[]const u8,
+    cidr: ?[]const u8 = null,
 
     /// The ID of the IPAM pool to match against. This condition selects CIDRs that
     /// belong to the specified IPAM pool.
-    ipam_pool_id: ?[]const u8,
+    ipam_pool_id: ?[]const u8 = null,
 
     /// The operation to perform when evaluating this condition.
     operation: IpamPrefixListResolverRuleConditionOperation,
 
     /// The ID of the Amazon Web Services resource to match against. This condition
     /// selects CIDRs associated with the specified resource.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID that owns the resources to match against.
     /// This condition selects CIDRs from resources owned by the specified account.
-    resource_owner: ?[]const u8,
+    resource_owner: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the resources are located. This
     /// condition selects CIDRs from resources in the specified Region.
-    resource_region: ?[]const u8,
+    resource_region: ?[]const u8 = null,
 
     /// A tag key-value pair to match against. This condition selects CIDRs from
     /// resources that have the specified tag.
-    resource_tag: ?RequestIpamResourceTag,
+    resource_tag: ?RequestIpamResourceTag = null,
 };

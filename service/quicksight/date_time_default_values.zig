@@ -5,14 +5,14 @@ const RollingDateConfiguration = @import("rolling_date_configuration.zig").Rolli
 pub const DateTimeDefaultValues = struct {
     /// The dynamic value of the `DataTimeDefaultValues`. Different defaults are
     /// displayed according to users, groups, and values mapping.
-    dynamic_value: ?DynamicDefaultValue,
+    dynamic_value: ?DynamicDefaultValue = null,
 
     /// The rolling date of the `DataTimeDefaultValues`. The date is determined from
     /// the dataset based on input expression.
-    rolling_date: ?RollingDateConfiguration,
+    rolling_date: ?RollingDateConfiguration = null,
 
     /// The static values of the `DataTimeDefaultValues`.
-    static_values: ?[]const i64,
+    static_values: ?[]const i64 = null,
 
     pub const json_field_names = .{
         .dynamic_value = "DynamicValue",

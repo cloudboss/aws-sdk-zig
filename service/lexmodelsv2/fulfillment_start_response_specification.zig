@@ -5,7 +5,7 @@ const MessageGroup = @import("message_group.zig").MessageGroup;
 pub const FulfillmentStartResponseSpecification = struct {
     /// Determines whether the user can interrupt the start message while it
     /// is playing.
-    allow_interrupt: ?bool,
+    allow_interrupt: ?bool = null,
 
     /// The delay between when the Lambda fulfillment function starts running
     /// and the start message is played. If the Lambda function returns before

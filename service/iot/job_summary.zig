@@ -4,27 +4,27 @@ const TargetSelection = @import("target_selection.zig").TargetSelection;
 /// The job summary.
 pub const JobSummary = struct {
     /// The time, in seconds since the epoch, when the job completed.
-    completed_at: ?i64,
+    completed_at: ?i64 = null,
 
     /// The time, in seconds since the epoch, when the job was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Indicates whether a job is concurrent. Will be true when a job is rolling
     /// out new job
     /// executions or canceling previously created executions, otherwise false.
-    is_concurrent: ?bool,
+    is_concurrent: ?bool = null,
 
     /// The job ARN.
-    job_arn: ?[]const u8,
+    job_arn: ?[]const u8 = null,
 
     /// The unique identifier you assigned to this job when it was created.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The time, in seconds since the epoch, when the job was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The job summary status.
-    status: ?JobStatus,
+    status: ?JobStatus = null,
 
     /// Specifies whether the job will continue to run (CONTINUOUS), or will be
     /// complete
@@ -41,10 +41,10 @@ pub const JobSummary = struct {
     /// thing group targets. By using continuous jobs, devices that join the group
     /// receive
     /// the job execution even after the job has been created.
-    target_selection: ?TargetSelection,
+    target_selection: ?TargetSelection = null,
 
     /// The ID of the thing group.
-    thing_group_id: ?[]const u8,
+    thing_group_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .completed_at = "completedAt",

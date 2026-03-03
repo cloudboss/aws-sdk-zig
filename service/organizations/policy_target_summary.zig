@@ -8,7 +8,7 @@ pub const PolicyTargetSummary = struct {
     /// For more information about ARNs in Organizations, see [ARN
     /// Formats Supported by
     /// Organizations](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies) in the *Amazon Web Services Service Authorization Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The friendly name of the policy target.
     ///
@@ -16,7 +16,7 @@ pub const PolicyTargetSummary = struct {
     /// that is used to validate this parameter is a string of any of the characters
     /// in the ASCII
     /// character range.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The unique identifier (ID) of the policy target.
     ///
@@ -35,10 +35,10 @@ pub const PolicyTargetSummary = struct {
     /// lowercase letters or digits (the ID of the root that the OU is in). This
     /// string is followed by a second
     /// "-" dash and from 8 to 32 additional lowercase letters or digits.
-    target_id: ?[]const u8,
+    target_id: ?[]const u8 = null,
 
     /// The type of the policy target.
-    @"type": ?TargetType,
+    @"type": ?TargetType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

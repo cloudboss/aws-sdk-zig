@@ -6,22 +6,22 @@ const OrderStatus = @import("order_status.zig").OrderStatus;
 /// A summary of line items in your order.
 pub const OrderSummary = struct {
     /// The status of all line items in the order.
-    line_item_counts_by_status: ?[]const aws.map.MapEntry(i32),
+    line_item_counts_by_status: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The fulfilment date for the order.
-    order_fulfilled_date: ?i64,
+    order_fulfilled_date: ?i64 = null,
 
     /// The ID of the order.
-    order_id: ?[]const u8,
+    order_id: ?[]const u8 = null,
 
     /// The submission date for the order.
-    order_submission_date: ?i64,
+    order_submission_date: ?i64 = null,
 
     /// The type of order.
-    order_type: ?OrderType,
+    order_type: ?OrderType = null,
 
     /// The ID of the Outpost.
-    outpost_id: ?[]const u8,
+    outpost_id: ?[]const u8 = null,
 
     /// The status of the order.
     ///
@@ -38,7 +38,7 @@ pub const OrderSummary = struct {
     ///
     /// The following statuses are deprecated: `RECEIVED`, `PENDING`,
     /// `PROCESSING`, `INSTALLING`, and `FULFILLED`.
-    status: ?OrderStatus,
+    status: ?OrderStatus = null,
 
     pub const json_field_names = .{
         .line_item_counts_by_status = "LineItemCountsByStatus",

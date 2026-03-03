@@ -5,7 +5,7 @@ const Tag = @import("tag.zig").Tag;
 pub const StandbyWorkspace = struct {
     /// Indicates whether data replication is enabled, and if enabled, the type of
     /// data replication.
-    data_replication: ?DataReplication,
+    data_replication: ?DataReplication = null,
 
     /// The identifier of the directory for the standby WorkSpace.
     directory_id: []const u8,
@@ -14,10 +14,10 @@ pub const StandbyWorkspace = struct {
     primary_workspace_id: []const u8,
 
     /// The tags associated with the standby WorkSpace.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The volume encryption key of the standby WorkSpace.
-    volume_encryption_key: ?[]const u8,
+    volume_encryption_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_replication = "DataReplication",

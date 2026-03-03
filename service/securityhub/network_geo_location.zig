@@ -8,16 +8,16 @@
 /// ](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html) in the *Amazon GuardDuty User Guide*.
 pub const NetworkGeoLocation = struct {
     /// The name of the city.
-    city: ?[]const u8,
+    city: ?[]const u8 = null,
 
     /// The name of the country.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// The latitude information of the endpoint location.
-    lat: ?f64,
+    lat: ?f64 = null,
 
     /// The longitude information of the endpoint location.
-    lon: ?f64,
+    lon: ?f64 = null,
 
     pub const json_field_names = .{
         .city = "City",

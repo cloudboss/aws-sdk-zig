@@ -13,7 +13,7 @@ pub const TemplateConfiguration = struct {
     ///
     /// For more information, see [DeletionPolicy
     /// attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html) in the *CloudFormation User Guide*.
-    deletion_policy: ?GeneratedTemplateDeletionPolicy,
+    deletion_policy: ?GeneratedTemplateDeletionPolicy = null,
 
     /// The `UpdateReplacePolicy` assigned to resources in the generated template.
     /// Supported values are:
@@ -28,5 +28,5 @@ pub const TemplateConfiguration = struct {
     ///
     /// For more information, see [UpdateReplacePolicy
     /// attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatereplacepolicy.html) in the *CloudFormation User Guide*.
-    update_replace_policy: ?GeneratedTemplateUpdateReplacePolicy,
+    update_replace_policy: ?GeneratedTemplateUpdateReplacePolicy = null,
 };

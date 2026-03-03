@@ -2,7 +2,7 @@
 pub const RandomSplitEntry = struct {
     /// The unique identifier for the next activity to perform, after completing the
     /// activity for the path.
-    next_activity: ?[]const u8,
+    next_activity: ?[]const u8 = null,
 
     /// The percentage of participants to send down the activity path.
     ///
@@ -10,7 +10,7 @@ pub const RandomSplitEntry = struct {
     /// applies a probability-based algorithm to the percentages that you specify
     /// for the paths. Therefore, the actual percentage of participants who are sent
     /// down a path may not be equal to the percentage that you specify.
-    percentage: ?i32,
+    percentage: ?i32 = null,
 
     pub const json_field_names = .{
         .next_activity = "NextActivity",

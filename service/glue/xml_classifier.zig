@@ -4,10 +4,10 @@ pub const XMLClassifier = struct {
     classification: []const u8,
 
     /// The time that this classifier was registered.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The time that this classifier was last updated.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The name of the classifier.
     name: []const u8,
@@ -20,7 +20,7 @@ pub const XMLClassifier = struct {
     /// with a closing tag
     /// (for example, `` is okay, but
     /// `` is not).
-    row_tag: ?[]const u8,
+    row_tag: ?[]const u8 = null,
 
     /// The version of this classifier.
     version: i64 = 0,

@@ -33,7 +33,7 @@ pub const DashboardSearchFilter = struct {
     ///
     /// * `DASHBOARD_NAME`: Any dashboards whose names have a substring match to
     ///   this value will be returned.
-    name: ?DashboardFilterAttribute,
+    name: ?DashboardFilterAttribute = null,
 
     /// The comparison operator that you want to use as a filter, for example
     /// `"Operator": "StringEquals"`. Valid values are `"StringEquals"` and
@@ -54,7 +54,7 @@ pub const DashboardSearchFilter = struct {
     /// The value of the named item, in this case `QUICKSIGHT_USER`, that you want
     /// to use as a filter, for example, `"Value":
     /// "arn:aws:quicksight:us-east-1:1:user/default/UserName1"`.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

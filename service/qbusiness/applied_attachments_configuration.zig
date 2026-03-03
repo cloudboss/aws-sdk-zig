@@ -5,7 +5,7 @@ const AttachmentsControlMode = @import("attachments_control_mode.zig").Attachmen
 pub const AppliedAttachmentsConfiguration = struct {
     /// Information about whether file upload during chat functionality is activated
     /// for your application.
-    attachments_control_mode: ?AttachmentsControlMode,
+    attachments_control_mode: ?AttachmentsControlMode = null,
 
     pub const json_field_names = .{
         .attachments_control_mode = "attachmentsControlMode",

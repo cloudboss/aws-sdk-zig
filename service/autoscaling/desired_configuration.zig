@@ -11,7 +11,7 @@ pub const DesiredConfiguration = struct {
     /// uses to launch Amazon EC2 instances. For more information about launch
     /// templates, see [Launch
     /// templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    launch_template: ?LaunchTemplateSpecification,
+    launch_template: ?LaunchTemplateSpecification = null,
 
     /// Use this structure to launch multiple instance types and On-Demand Instances
     /// and Spot
@@ -24,5 +24,5 @@ pub const DesiredConfiguration = struct {
     /// groups with multiple instance types and purchase
     /// options](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    mixed_instances_policy: ?MixedInstancesPolicy,
+    mixed_instances_policy: ?MixedInstancesPolicy = null,
 };

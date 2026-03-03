@@ -3,7 +3,7 @@ const MultiplexMediaConnectOutputDestinationSettings = @import("multiplex_media_
 /// Multiplex output destination settings
 pub const MultiplexOutputDestination = struct {
     /// Multiplex MediaConnect output destination settings.
-    media_connect_settings: ?MultiplexMediaConnectOutputDestinationSettings,
+    media_connect_settings: ?MultiplexMediaConnectOutputDestinationSettings = null,
 
     pub const json_field_names = .{
         .media_connect_settings = "MediaConnectSettings",

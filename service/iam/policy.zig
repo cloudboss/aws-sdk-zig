@@ -11,19 +11,19 @@ const Tag = @import("tag.zig").Tag;
 /// inline
 /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
 pub const Policy = struct {
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The number of entities (users, groups, and roles) that the policy is
     /// attached to.
-    attachment_count: ?i32,
+    attachment_count: ?i32 = null,
 
     /// The date and time, in [ISO 8601 date-time
     /// format](http://www.iso.org/iso/iso8601), when the policy was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The identifier for the version of the policy that is set as the default
     /// version.
-    default_version_id: ?[]const u8,
+    default_version_id: ?[]const u8 = null,
 
     /// A friendly description of the policy.
     ///
@@ -31,7 +31,7 @@ pub const Policy = struct {
     /// [GetPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicy.html) operation. It is not
     /// included in the response to the
     /// [ListPolicies](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicies.html) operation.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Specifies whether the policy can be attached to an IAM user, group, or role.
     is_attachable: bool = false,
@@ -41,7 +41,7 @@ pub const Policy = struct {
     /// For more information about paths, see [IAM
     /// identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
     /// *IAM User Guide*.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// The number of entities (users and roles) for which the policy is used to set
     /// the
@@ -51,24 +51,24 @@ pub const Policy = struct {
     /// boundaries for IAM
     /// identities
     /// ](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM User Guide*.
-    permissions_boundary_usage_count: ?i32,
+    permissions_boundary_usage_count: ?i32 = null,
 
     /// The stable and unique string identifying the policy.
     ///
     /// For more information about IDs, see [IAM
     /// identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
     /// *IAM User Guide*.
-    policy_id: ?[]const u8,
+    policy_id: ?[]const u8 = null,
 
     /// The friendly name (not ARN) identifying the policy.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// A list of tags that are attached to the instance profile. For more
     /// information about tagging, see [Tagging IAM
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The date and time, in [ISO 8601 date-time
     /// format](http://www.iso.org/iso/iso8601), when the policy was last updated.
@@ -78,5 +78,5 @@ pub const Policy = struct {
     /// policy was created. When a policy has more than one version, this field
     /// contains the date
     /// and time when the most recent policy version was created.
-    update_date: ?i64,
+    update_date: ?i64 = null,
 };

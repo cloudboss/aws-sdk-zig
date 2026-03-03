@@ -3,7 +3,7 @@ pub const OutputArtifact = struct {
     /// The files that you want to associate with the output artifact that will be
     /// exported
     /// from the compute action.
-    files: ?[]const []const u8,
+    files: ?[]const []const u8 = null,
 
     /// The name of the output of an artifact, such as "My App".
     ///

@@ -6,14 +6,14 @@ pub const TabularConditions = struct {
     /// Filter criteria that orders the output. It can be sorted in ascending or
     /// descending
     /// order.
-    order_by: ?[]const OrderBy,
+    order_by: ?[]const OrderBy = null,
 
     /// You can filter the request using various logical operators and a key-value
     /// format. For
     /// example:
     ///
     /// `{"key": "serverType", "value": "webServer"}`
-    property_filters: ?[]const PropertyFilter,
+    property_filters: ?[]const PropertyFilter = null,
 
     pub const json_field_names = .{
         .order_by = "orderBy",

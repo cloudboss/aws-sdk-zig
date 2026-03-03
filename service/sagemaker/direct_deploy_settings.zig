@@ -10,7 +10,7 @@ const FeatureStatus = @import("feature_status.zig").FeatureStatus;
 pub const DirectDeploySettings = struct {
     /// Describes whether model deployment permissions are enabled or disabled in
     /// the Canvas application.
-    status: ?FeatureStatus,
+    status: ?FeatureStatus = null,
 
     pub const json_field_names = .{
         .status = "Status",

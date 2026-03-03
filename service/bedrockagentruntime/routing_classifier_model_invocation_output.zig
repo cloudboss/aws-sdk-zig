@@ -4,13 +4,13 @@ const RawResponse = @import("raw_response.zig").RawResponse;
 /// Invocation output from a routing classifier model.
 pub const RoutingClassifierModelInvocationOutput = struct {
     /// The invocation's metadata.
-    metadata: ?Metadata,
+    metadata: ?Metadata = null,
 
     /// The invocation's raw response.
-    raw_response: ?RawResponse,
+    raw_response: ?RawResponse = null,
 
     /// The invocation's trace ID.
-    trace_id: ?[]const u8,
+    trace_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metadata = "metadata",

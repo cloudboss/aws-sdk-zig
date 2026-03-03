@@ -7,19 +7,19 @@ const OperatingSystem = @import("operating_system.zig").OperatingSystem;
 /// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetInstanceAccess](https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetInstanceAccess).
 pub const InstanceAccess = struct {
     /// Security credentials that are required to access the instance.
-    credentials: ?InstanceCredentials,
+    credentials: ?InstanceCredentials = null,
 
     /// A unique identifier for the fleet containing the instance to be accessed.
-    fleet_id: ?[]const u8,
+    fleet_id: ?[]const u8 = null,
 
     /// A unique identifier for the instance to be accessed.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// IP address assigned to the instance.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// Operating system that is running on the instance.
-    operating_system: ?OperatingSystem,
+    operating_system: ?OperatingSystem = null,
 
     pub const json_field_names = .{
         .credentials = "Credentials",

@@ -9,5 +9,5 @@
 /// the established policy.
 pub const ProposedMultiRegionAccessPointPolicy = struct {
     /// The details of the proposed policy.
-    policy: ?[]const u8,
+    policy: ?[]const u8 = null,
 };

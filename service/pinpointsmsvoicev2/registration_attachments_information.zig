@@ -12,7 +12,7 @@ pub const RegistrationAttachmentsInformation = struct {
     attachment_status: AttachmentStatus,
 
     /// A description of why the upload didn't successfully complete.
-    attachment_upload_error_reason: ?AttachmentUploadErrorReason,
+    attachment_upload_error_reason: ?AttachmentUploadErrorReason = null,
 
     /// The time when the registration attachment was created, in [UNIX epoch
     /// time](https://www.epochconverter.com/) format.

@@ -22,7 +22,7 @@ pub const AcceleratorCapabilities = struct {
     /// specify a maximum count, Amazon Web Services Deadline Cloud uses the
     /// instance types you specify in `allowedInstanceTypes` to determine the
     /// maximum number of accelerators.
-    count: ?AcceleratorCountRange,
+    count: ?AcceleratorCountRange = null,
 
     /// A list of accelerator capabilities requested for this fleet. Only Amazon
     /// Elastic Compute Cloud instances that provide these capabilities will be

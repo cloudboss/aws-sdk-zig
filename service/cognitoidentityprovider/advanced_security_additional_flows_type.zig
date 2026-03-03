@@ -9,7 +9,7 @@ pub const AdvancedSecurityAdditionalFlowsType = struct {
     /// Custom
     /// authentication challenge Lambda
     /// triggers](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html).
-    custom_auth_mode: ?AdvancedSecurityEnabledModeType,
+    custom_auth_mode: ?AdvancedSecurityEnabledModeType = null,
 
     pub const json_field_names = .{
         .custom_auth_mode = "CustomAuthMode",

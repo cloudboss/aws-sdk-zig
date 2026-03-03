@@ -5,7 +5,7 @@
 /// the time range when DevOps Guru opens and then closes an anomaly.
 pub const AnomalyTimeRange = struct {
     /// The time when the anomalous behavior ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The time when the anomalous behavior started.
     start_time: i64,

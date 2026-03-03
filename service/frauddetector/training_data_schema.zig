@@ -2,7 +2,7 @@ const LabelSchema = @import("label_schema.zig").LabelSchema;
 
 /// The training data schema.
 pub const TrainingDataSchema = struct {
-    label_schema: ?LabelSchema,
+    label_schema: ?LabelSchema = null,
 
     /// The training data schema variables.
     model_variables: []const []const u8,

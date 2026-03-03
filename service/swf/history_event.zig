@@ -222,107 +222,107 @@ pub const HistoryEvent = struct {
     /// If the event is of type `ActivityTaskCanceled` then this member is set and
     /// provides detailed
     /// information about the event. It isn't set for other event types.
-    activity_task_canceled_event_attributes: ?ActivityTaskCanceledEventAttributes,
+    activity_task_canceled_event_attributes: ?ActivityTaskCanceledEventAttributes = null,
 
     /// If the event is of type `ActivityTaskcancelRequested` then this member is
     /// set and provides detailed
     /// information about the event. It isn't set for other event types.
-    activity_task_cancel_requested_event_attributes: ?ActivityTaskCancelRequestedEventAttributes,
+    activity_task_cancel_requested_event_attributes: ?ActivityTaskCancelRequestedEventAttributes = null,
 
     /// If the event is of type `ActivityTaskCompleted` then this member is set and
     /// provides detailed
     /// information about the event. It isn't set for other event types.
-    activity_task_completed_event_attributes: ?ActivityTaskCompletedEventAttributes,
+    activity_task_completed_event_attributes: ?ActivityTaskCompletedEventAttributes = null,
 
     /// If the event is of type `ActivityTaskFailed` then this member is set and
     /// provides detailed
     /// information about the event. It isn't set for other event types.
-    activity_task_failed_event_attributes: ?ActivityTaskFailedEventAttributes,
+    activity_task_failed_event_attributes: ?ActivityTaskFailedEventAttributes = null,
 
     /// If the event is of type `ActivityTaskScheduled` then this member is set and
     /// provides detailed
     /// information about the event. It isn't set for other event types.
-    activity_task_scheduled_event_attributes: ?ActivityTaskScheduledEventAttributes,
+    activity_task_scheduled_event_attributes: ?ActivityTaskScheduledEventAttributes = null,
 
     /// If the event is of type `ActivityTaskStarted` then this member is set and
     /// provides detailed
     /// information about the event. It isn't set for other event types.
-    activity_task_started_event_attributes: ?ActivityTaskStartedEventAttributes,
+    activity_task_started_event_attributes: ?ActivityTaskStartedEventAttributes = null,
 
     /// If the event is of type `ActivityTaskTimedOut` then this member is set and
     /// provides detailed
     /// information about the event. It isn't set for other event types.
-    activity_task_timed_out_event_attributes: ?ActivityTaskTimedOutEventAttributes,
+    activity_task_timed_out_event_attributes: ?ActivityTaskTimedOutEventAttributes = null,
 
     /// If the event is of type `CancelTimerFailed` then this member is set and
     /// provides detailed information
     /// about the event. It isn't set for other event types.
-    cancel_timer_failed_event_attributes: ?CancelTimerFailedEventAttributes,
+    cancel_timer_failed_event_attributes: ?CancelTimerFailedEventAttributes = null,
 
     /// If the event is of type `CancelWorkflowExecutionFailed` then this member is
     /// set and provides detailed
     /// information about the event. It isn't set for other event types.
-    cancel_workflow_execution_failed_event_attributes: ?CancelWorkflowExecutionFailedEventAttributes,
+    cancel_workflow_execution_failed_event_attributes: ?CancelWorkflowExecutionFailedEventAttributes = null,
 
     /// If the event is of type `ChildWorkflowExecutionCanceled` then this member is
     /// set and provides
     /// detailed information about the event. It isn't set for other event types.
-    child_workflow_execution_canceled_event_attributes: ?ChildWorkflowExecutionCanceledEventAttributes,
+    child_workflow_execution_canceled_event_attributes: ?ChildWorkflowExecutionCanceledEventAttributes = null,
 
     /// If the event is of type `ChildWorkflowExecutionCompleted` then this member
     /// is set and provides
     /// detailed information about the event. It isn't set for other event types.
-    child_workflow_execution_completed_event_attributes: ?ChildWorkflowExecutionCompletedEventAttributes,
+    child_workflow_execution_completed_event_attributes: ?ChildWorkflowExecutionCompletedEventAttributes = null,
 
     /// If the event is of type `ChildWorkflowExecutionFailed` then this member is
     /// set and provides detailed
     /// information about the event. It isn't set for other event types.
-    child_workflow_execution_failed_event_attributes: ?ChildWorkflowExecutionFailedEventAttributes,
+    child_workflow_execution_failed_event_attributes: ?ChildWorkflowExecutionFailedEventAttributes = null,
 
     /// If the event is of type `ChildWorkflowExecutionStarted` then this member is
     /// set and provides detailed
     /// information about the event. It isn't set for other event types.
-    child_workflow_execution_started_event_attributes: ?ChildWorkflowExecutionStartedEventAttributes,
+    child_workflow_execution_started_event_attributes: ?ChildWorkflowExecutionStartedEventAttributes = null,
 
     /// If the event is of type `ChildWorkflowExecutionTerminated` then this member
     /// is set and provides
     /// detailed information about the event. It isn't set for other event types.
-    child_workflow_execution_terminated_event_attributes: ?ChildWorkflowExecutionTerminatedEventAttributes,
+    child_workflow_execution_terminated_event_attributes: ?ChildWorkflowExecutionTerminatedEventAttributes = null,
 
     /// If the event is of type `ChildWorkflowExecutionTimedOut` then this member is
     /// set and provides
     /// detailed information about the event. It isn't set for other event types.
-    child_workflow_execution_timed_out_event_attributes: ?ChildWorkflowExecutionTimedOutEventAttributes,
+    child_workflow_execution_timed_out_event_attributes: ?ChildWorkflowExecutionTimedOutEventAttributes = null,
 
     /// If the event is of type `CompleteWorkflowExecutionFailed` then this member
     /// is set and provides
     /// detailed information about the event. It isn't set for other event types.
-    complete_workflow_execution_failed_event_attributes: ?CompleteWorkflowExecutionFailedEventAttributes,
+    complete_workflow_execution_failed_event_attributes: ?CompleteWorkflowExecutionFailedEventAttributes = null,
 
     /// If the event is of type `ContinueAsNewWorkflowExecutionFailed` then this
     /// member is set and provides
     /// detailed information about the event. It isn't set for other event types.
-    continue_as_new_workflow_execution_failed_event_attributes: ?ContinueAsNewWorkflowExecutionFailedEventAttributes,
+    continue_as_new_workflow_execution_failed_event_attributes: ?ContinueAsNewWorkflowExecutionFailedEventAttributes = null,
 
     /// If the event is of type `DecisionTaskCompleted` then this member is set and
     /// provides detailed
     /// information about the event. It isn't set for other event types.
-    decision_task_completed_event_attributes: ?DecisionTaskCompletedEventAttributes,
+    decision_task_completed_event_attributes: ?DecisionTaskCompletedEventAttributes = null,
 
     /// If the event is of type `DecisionTaskScheduled` then this member is set and
     /// provides detailed
     /// information about the event. It isn't set for other event types.
-    decision_task_scheduled_event_attributes: ?DecisionTaskScheduledEventAttributes,
+    decision_task_scheduled_event_attributes: ?DecisionTaskScheduledEventAttributes = null,
 
     /// If the event is of type `DecisionTaskStarted` then this member is set and
     /// provides detailed
     /// information about the event. It isn't set for other event types.
-    decision_task_started_event_attributes: ?DecisionTaskStartedEventAttributes,
+    decision_task_started_event_attributes: ?DecisionTaskStartedEventAttributes = null,
 
     /// If the event is of type `DecisionTaskTimedOut` then this member is set and
     /// provides detailed
     /// information about the event. It isn't set for other event types.
-    decision_task_timed_out_event_attributes: ?DecisionTaskTimedOutEventAttributes,
+    decision_task_timed_out_event_attributes: ?DecisionTaskTimedOutEventAttributes = null,
 
     /// The system generated ID of the event. This ID uniquely identifies the event
     /// with in the workflow execution history.
@@ -338,163 +338,163 @@ pub const HistoryEvent = struct {
     /// member is set and
     /// provides detailed information about the event. It isn't set for other event
     /// types.
-    external_workflow_execution_cancel_requested_event_attributes: ?ExternalWorkflowExecutionCancelRequestedEventAttributes,
+    external_workflow_execution_cancel_requested_event_attributes: ?ExternalWorkflowExecutionCancelRequestedEventAttributes = null,
 
     /// If the event is of type `ExternalWorkflowExecutionSignaled` then this member
     /// is set and provides
     /// detailed information about the event. It isn't set for other event types.
-    external_workflow_execution_signaled_event_attributes: ?ExternalWorkflowExecutionSignaledEventAttributes,
+    external_workflow_execution_signaled_event_attributes: ?ExternalWorkflowExecutionSignaledEventAttributes = null,
 
     /// If the event is of type `FailWorkflowExecutionFailed` then this member is
     /// set and provides detailed
     /// information about the event. It isn't set for other event types.
-    fail_workflow_execution_failed_event_attributes: ?FailWorkflowExecutionFailedEventAttributes,
+    fail_workflow_execution_failed_event_attributes: ?FailWorkflowExecutionFailedEventAttributes = null,
 
     /// Provides the details of the `LambdaFunctionCompleted` event. It isn't set
     /// for other event types.
-    lambda_function_completed_event_attributes: ?LambdaFunctionCompletedEventAttributes,
+    lambda_function_completed_event_attributes: ?LambdaFunctionCompletedEventAttributes = null,
 
     /// Provides the details of the `LambdaFunctionFailed` event. It isn't set for
     /// other event types.
-    lambda_function_failed_event_attributes: ?LambdaFunctionFailedEventAttributes,
+    lambda_function_failed_event_attributes: ?LambdaFunctionFailedEventAttributes = null,
 
     /// Provides the details of the `LambdaFunctionScheduled` event. It isn't set
     /// for other event types.
-    lambda_function_scheduled_event_attributes: ?LambdaFunctionScheduledEventAttributes,
+    lambda_function_scheduled_event_attributes: ?LambdaFunctionScheduledEventAttributes = null,
 
     /// Provides the details of the `LambdaFunctionStarted` event. It isn't set for
     /// other event types.
-    lambda_function_started_event_attributes: ?LambdaFunctionStartedEventAttributes,
+    lambda_function_started_event_attributes: ?LambdaFunctionStartedEventAttributes = null,
 
     /// Provides the details of the `LambdaFunctionTimedOut` event. It isn't set for
     /// other event types.
-    lambda_function_timed_out_event_attributes: ?LambdaFunctionTimedOutEventAttributes,
+    lambda_function_timed_out_event_attributes: ?LambdaFunctionTimedOutEventAttributes = null,
 
     /// If the event is of type `MarkerRecorded` then this member is set and
     /// provides detailed information
     /// about the event. It isn't set for other event types.
-    marker_recorded_event_attributes: ?MarkerRecordedEventAttributes,
+    marker_recorded_event_attributes: ?MarkerRecordedEventAttributes = null,
 
     /// If the event is of type `DecisionTaskFailed` then this member is set and
     /// provides detailed
     /// information about the event. It isn't set for other event types.
-    record_marker_failed_event_attributes: ?RecordMarkerFailedEventAttributes,
+    record_marker_failed_event_attributes: ?RecordMarkerFailedEventAttributes = null,
 
     /// If the event is of type `RequestCancelActivityTaskFailed` then this member
     /// is set and provides
     /// detailed information about the event. It isn't set for other event types.
-    request_cancel_activity_task_failed_event_attributes: ?RequestCancelActivityTaskFailedEventAttributes,
+    request_cancel_activity_task_failed_event_attributes: ?RequestCancelActivityTaskFailedEventAttributes = null,
 
     /// If the event is of type `RequestCancelExternalWorkflowExecutionFailed` then
     /// this member is set and
     /// provides detailed information about the event. It isn't set for other event
     /// types.
-    request_cancel_external_workflow_execution_failed_event_attributes: ?RequestCancelExternalWorkflowExecutionFailedEventAttributes,
+    request_cancel_external_workflow_execution_failed_event_attributes: ?RequestCancelExternalWorkflowExecutionFailedEventAttributes = null,
 
     /// If the event is of type `RequestCancelExternalWorkflowExecutionInitiated`
     /// then this member is set and
     /// provides detailed information about the event. It isn't set for other event
     /// types.
-    request_cancel_external_workflow_execution_initiated_event_attributes: ?RequestCancelExternalWorkflowExecutionInitiatedEventAttributes,
+    request_cancel_external_workflow_execution_initiated_event_attributes: ?RequestCancelExternalWorkflowExecutionInitiatedEventAttributes = null,
 
     /// If the event is of type `ScheduleActivityTaskFailed` then this member is set
     /// and provides detailed
     /// information about the event. It isn't set for other event types.
-    schedule_activity_task_failed_event_attributes: ?ScheduleActivityTaskFailedEventAttributes,
+    schedule_activity_task_failed_event_attributes: ?ScheduleActivityTaskFailedEventAttributes = null,
 
     /// Provides the details of the `ScheduleLambdaFunctionFailed` event. It isn't
     /// set for other event types.
-    schedule_lambda_function_failed_event_attributes: ?ScheduleLambdaFunctionFailedEventAttributes,
+    schedule_lambda_function_failed_event_attributes: ?ScheduleLambdaFunctionFailedEventAttributes = null,
 
     /// If the event is of type `SignalExternalWorkflowExecutionFailed` then this
     /// member is set and provides
     /// detailed information about the event. It isn't set for other event types.
-    signal_external_workflow_execution_failed_event_attributes: ?SignalExternalWorkflowExecutionFailedEventAttributes,
+    signal_external_workflow_execution_failed_event_attributes: ?SignalExternalWorkflowExecutionFailedEventAttributes = null,
 
     /// If the event is of type `SignalExternalWorkflowExecutionInitiated` then this
     /// member is set and
     /// provides detailed information about the event. It isn't set for other event
     /// types.
-    signal_external_workflow_execution_initiated_event_attributes: ?SignalExternalWorkflowExecutionInitiatedEventAttributes,
+    signal_external_workflow_execution_initiated_event_attributes: ?SignalExternalWorkflowExecutionInitiatedEventAttributes = null,
 
     /// If the event is of type `StartChildWorkflowExecutionFailed` then this member
     /// is set and provides
     /// detailed information about the event. It isn't set for other event types.
-    start_child_workflow_execution_failed_event_attributes: ?StartChildWorkflowExecutionFailedEventAttributes,
+    start_child_workflow_execution_failed_event_attributes: ?StartChildWorkflowExecutionFailedEventAttributes = null,
 
     /// If the event is of type `StartChildWorkflowExecutionInitiated` then this
     /// member is set and provides
     /// detailed information about the event. It isn't set for other event types.
-    start_child_workflow_execution_initiated_event_attributes: ?StartChildWorkflowExecutionInitiatedEventAttributes,
+    start_child_workflow_execution_initiated_event_attributes: ?StartChildWorkflowExecutionInitiatedEventAttributes = null,
 
     /// Provides the details of the `StartLambdaFunctionFailed` event. It isn't set
     /// for other event types.
-    start_lambda_function_failed_event_attributes: ?StartLambdaFunctionFailedEventAttributes,
+    start_lambda_function_failed_event_attributes: ?StartLambdaFunctionFailedEventAttributes = null,
 
     /// If the event is of type `StartTimerFailed` then this member is set and
     /// provides detailed information
     /// about the event. It isn't set for other event types.
-    start_timer_failed_event_attributes: ?StartTimerFailedEventAttributes,
+    start_timer_failed_event_attributes: ?StartTimerFailedEventAttributes = null,
 
     /// If the event is of type `TimerCanceled` then this member is set and provides
     /// detailed information
     /// about the event. It isn't set for other event types.
-    timer_canceled_event_attributes: ?TimerCanceledEventAttributes,
+    timer_canceled_event_attributes: ?TimerCanceledEventAttributes = null,
 
     /// If the event is of type `TimerFired` then this member is set and provides
     /// detailed information about
     /// the event. It isn't set for other event types.
-    timer_fired_event_attributes: ?TimerFiredEventAttributes,
+    timer_fired_event_attributes: ?TimerFiredEventAttributes = null,
 
     /// If the event is of type `TimerStarted` then this member is set and provides
     /// detailed information
     /// about the event. It isn't set for other event types.
-    timer_started_event_attributes: ?TimerStartedEventAttributes,
+    timer_started_event_attributes: ?TimerStartedEventAttributes = null,
 
     /// If the event is of type `WorkflowExecutionCanceled` then this member is set
     /// and provides detailed
     /// information about the event. It isn't set for other event types.
-    workflow_execution_canceled_event_attributes: ?WorkflowExecutionCanceledEventAttributes,
+    workflow_execution_canceled_event_attributes: ?WorkflowExecutionCanceledEventAttributes = null,
 
     /// If the event is of type `WorkflowExecutionCancelRequested` then this member
     /// is set and provides
     /// detailed information about the event. It isn't set for other event types.
-    workflow_execution_cancel_requested_event_attributes: ?WorkflowExecutionCancelRequestedEventAttributes,
+    workflow_execution_cancel_requested_event_attributes: ?WorkflowExecutionCancelRequestedEventAttributes = null,
 
     /// If the event is of type `WorkflowExecutionCompleted` then this member is set
     /// and provides detailed
     /// information about the event. It isn't set for other event types.
-    workflow_execution_completed_event_attributes: ?WorkflowExecutionCompletedEventAttributes,
+    workflow_execution_completed_event_attributes: ?WorkflowExecutionCompletedEventAttributes = null,
 
     /// If the event is of type `WorkflowExecutionContinuedAsNew` then this member
     /// is set and provides
     /// detailed information about the event. It isn't set for other event types.
-    workflow_execution_continued_as_new_event_attributes: ?WorkflowExecutionContinuedAsNewEventAttributes,
+    workflow_execution_continued_as_new_event_attributes: ?WorkflowExecutionContinuedAsNewEventAttributes = null,
 
     /// If the event is of type `WorkflowExecutionFailed` then this member is set
     /// and provides detailed
     /// information about the event. It isn't set for other event types.
-    workflow_execution_failed_event_attributes: ?WorkflowExecutionFailedEventAttributes,
+    workflow_execution_failed_event_attributes: ?WorkflowExecutionFailedEventAttributes = null,
 
     /// If the event is of type `WorkflowExecutionSignaled` then this member is set
     /// and provides detailed
     /// information about the event. It isn't set for other event types.
-    workflow_execution_signaled_event_attributes: ?WorkflowExecutionSignaledEventAttributes,
+    workflow_execution_signaled_event_attributes: ?WorkflowExecutionSignaledEventAttributes = null,
 
     /// If the event is of type `WorkflowExecutionStarted` then this member is set
     /// and provides detailed
     /// information about the event. It isn't set for other event types.
-    workflow_execution_started_event_attributes: ?WorkflowExecutionStartedEventAttributes,
+    workflow_execution_started_event_attributes: ?WorkflowExecutionStartedEventAttributes = null,
 
     /// If the event is of type `WorkflowExecutionTerminated` then this member is
     /// set and provides detailed
     /// information about the event. It isn't set for other event types.
-    workflow_execution_terminated_event_attributes: ?WorkflowExecutionTerminatedEventAttributes,
+    workflow_execution_terminated_event_attributes: ?WorkflowExecutionTerminatedEventAttributes = null,
 
     /// If the event is of type `WorkflowExecutionTimedOut` then this member is set
     /// and provides detailed
     /// information about the event. It isn't set for other event types.
-    workflow_execution_timed_out_event_attributes: ?WorkflowExecutionTimedOutEventAttributes,
+    workflow_execution_timed_out_event_attributes: ?WorkflowExecutionTimedOutEventAttributes = null,
 
     pub const json_field_names = .{
         .activity_task_canceled_event_attributes = "activityTaskCanceledEventAttributes",

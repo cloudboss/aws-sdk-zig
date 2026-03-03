@@ -10,12 +10,12 @@ pub const ClusterDetails = struct {
     last_in_use: i64,
 
     /// The number of tasks or pods where an image was running on the cluster.
-    running_unit_count: ?i64,
+    running_unit_count: ?i64 = null,
 
     /// The number of tasks or pods where an image was stopped on the cluster in the
     /// last 24
     /// hours.
-    stopped_unit_count: ?i64,
+    stopped_unit_count: ?i64 = null,
 
     pub const json_field_names = .{
         .cluster_metadata = "clusterMetadata",

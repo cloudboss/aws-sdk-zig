@@ -9,27 +9,27 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 pub const EntityRecognizerProperties = struct {
     /// The Amazon Resource Name (ARN) of the IAM role that
     /// grants Amazon Comprehend read access to your input data.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     /// The time that the recognizer creation completed.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) that identifies the entity recognizer.
-    entity_recognizer_arn: ?[]const u8,
+    entity_recognizer_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Number (ARN) of the flywheel
-    flywheel_arn: ?[]const u8,
+    flywheel_arn: ?[]const u8 = null,
 
     /// The input data properties of an entity recognizer.
-    input_data_config: ?EntityRecognizerInputDataConfig,
+    input_data_config: ?EntityRecognizerInputDataConfig = null,
 
     /// The language of the input documents. All documents must be in the same
     /// language. Only
     /// English ("en") is currently supported.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// A description of the status of the recognizer.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// ID for the KMS key that Amazon Comprehend uses to encrypt
     /// trained custom models. The ModelKmsKeyId can be either of the following
@@ -39,34 +39,34 @@ pub const EntityRecognizerProperties = struct {
     ///
     /// * Amazon Resource Name (ARN) of a KMS Key:
     /// `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
-    model_kms_key_id: ?[]const u8,
+    model_kms_key_id: ?[]const u8 = null,
 
     /// Output data configuration.
-    output_data_config: ?EntityRecognizerOutputDataConfig,
+    output_data_config: ?EntityRecognizerOutputDataConfig = null,
 
     /// Provides information about an entity recognizer.
-    recognizer_metadata: ?EntityRecognizerMetadata,
+    recognizer_metadata: ?EntityRecognizerMetadata = null,
 
     /// The Amazon Resource Name (ARN) of the source model. This model was imported
     /// from a
     /// different Amazon Web Services account to create the entity recognizer model
     /// in your Amazon Web Services account.
-    source_model_arn: ?[]const u8,
+    source_model_arn: ?[]const u8 = null,
 
     /// Provides the status of the entity recognizer.
-    status: ?ModelStatus,
+    status: ?ModelStatus = null,
 
     /// The time that the recognizer was submitted for processing.
-    submit_time: ?i64,
+    submit_time: ?i64 = null,
 
     /// The time that training of the entity recognizer was completed.
-    training_end_time: ?i64,
+    training_end_time: ?i64 = null,
 
     /// The time that training of the entity recognizer started.
-    training_start_time: ?i64,
+    training_start_time: ?i64 = null,
 
     /// The version name you assigned to the entity recognizer.
-    version_name: ?[]const u8,
+    version_name: ?[]const u8 = null,
 
     /// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
     /// Comprehend uses to encrypt
@@ -78,14 +78,14 @@ pub const EntityRecognizerProperties = struct {
     ///
     /// * Amazon Resource Name (ARN) of a KMS Key:
     /// `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
-    volume_kms_key_id: ?[]const u8,
+    volume_kms_key_id: ?[]const u8 = null,
 
     /// Configuration parameters for a private Virtual Private Cloud (VPC)
     /// containing the
     /// resources you are using for your custom entity recognizer. For more
     /// information, see [Amazon
     /// VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .data_access_role_arn = "DataAccessRoleArn",

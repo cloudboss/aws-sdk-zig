@@ -12,14 +12,14 @@ pub const ResponseHeadersPolicyConfig = struct {
     /// A comment to describe the response headers policy.
     ///
     /// The comment cannot be longer than 128 characters.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// A configuration for a set of HTTP response headers that are used for
     /// cross-origin resource sharing (CORS).
-    cors_config: ?ResponseHeadersPolicyCorsConfig,
+    cors_config: ?ResponseHeadersPolicyCorsConfig = null,
 
     /// A configuration for a set of custom HTTP response headers.
-    custom_headers_config: ?ResponseHeadersPolicyCustomHeadersConfig,
+    custom_headers_config: ?ResponseHeadersPolicyCustomHeadersConfig = null,
 
     /// A name to identify the response headers policy.
     ///
@@ -28,12 +28,12 @@ pub const ResponseHeadersPolicyConfig = struct {
     name: []const u8,
 
     /// A configuration for a set of HTTP headers to remove from the HTTP response.
-    remove_headers_config: ?ResponseHeadersPolicyRemoveHeadersConfig,
+    remove_headers_config: ?ResponseHeadersPolicyRemoveHeadersConfig = null,
 
     /// A configuration for a set of security-related HTTP response headers.
-    security_headers_config: ?ResponseHeadersPolicySecurityHeadersConfig,
+    security_headers_config: ?ResponseHeadersPolicySecurityHeadersConfig = null,
 
     /// A configuration for enabling the `Server-Timing` header in HTTP responses
     /// sent from CloudFront.
-    server_timing_headers_config: ?ResponseHeadersPolicyServerTimingHeadersConfig,
+    server_timing_headers_config: ?ResponseHeadersPolicyServerTimingHeadersConfig = null,
 };

@@ -6,7 +6,7 @@ const AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails = @import("a
 pub const AwsS3BucketObjectLockConfigurationRuleDetails = struct {
     /// The default Object Lock retention mode and period that you want to apply to
     /// new objects placed in the specified bucket.
-    default_retention: ?AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails,
+    default_retention: ?AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails = null,
 
     pub const json_field_names = .{
         .default_retention = "DefaultRetention",

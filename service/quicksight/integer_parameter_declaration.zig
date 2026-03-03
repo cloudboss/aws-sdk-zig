@@ -7,9 +7,9 @@ const IntegerValueWhenUnsetConfiguration = @import("integer_value_when_unset_con
 pub const IntegerParameterDeclaration = struct {
     /// The default values of a parameter. If the parameter is a single-value
     /// parameter, a maximum of one default value can be provided.
-    default_values: ?IntegerDefaultValues,
+    default_values: ?IntegerDefaultValues = null,
 
-    mapped_data_set_parameters: ?[]const MappedDataSetParameter,
+    mapped_data_set_parameters: ?[]const MappedDataSetParameter = null,
 
     /// The name of the parameter that is being declared.
     name: []const u8,
@@ -19,7 +19,7 @@ pub const IntegerParameterDeclaration = struct {
     parameter_value_type: ParameterValueType,
 
     /// A parameter declaration for the `Integer` data type.
-    value_when_unset: ?IntegerValueWhenUnsetConfiguration,
+    value_when_unset: ?IntegerValueWhenUnsetConfiguration = null,
 
     pub const json_field_names = .{
         .default_values = "DefaultValues",

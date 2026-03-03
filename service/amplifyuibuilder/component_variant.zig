@@ -6,11 +6,11 @@ pub const ComponentVariant = struct {
     /// customizing an instance
     /// of the component. You can't specify `tags` as a valid property for
     /// `overrides`.
-    overrides: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry),
+    overrides: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry) = null,
 
     /// The combination of variants that comprise this variant. You can't specify
     /// `tags` as a valid property for `variantValues`.
-    variant_values: ?[]const aws.map.StringMapEntry,
+    variant_values: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .overrides = "overrides",

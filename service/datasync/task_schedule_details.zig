@@ -11,7 +11,7 @@ pub const TaskScheduleDetails = struct {
     ///
     /// * `SERVICE` - Your schedule was automatically disabled by DataSync
     /// because the task failed repeatedly with the same error.
-    disabled_by: ?ScheduleDisabledBy,
+    disabled_by: ?ScheduleDisabledBy = null,
 
     /// Provides a reason if the task schedule is disabled.
     ///
@@ -24,13 +24,13 @@ pub const TaskScheduleDetails = struct {
     /// errors,
     /// see [Troubleshooting issues with DataSync
     /// transfers](https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html).
-    disabled_reason: ?[]const u8,
+    disabled_reason: ?[]const u8 = null,
 
     /// Indicates the last time the status of your task schedule changed. For
     /// example, if DataSync automatically disables your schedule because of a
     /// repeated error, you can see
     /// when the schedule was disabled.
-    status_update_time: ?i64,
+    status_update_time: ?i64 = null,
 
     pub const json_field_names = .{
         .disabled_by = "DisabledBy",

@@ -15,44 +15,44 @@ pub const LightsailDistribution = struct {
     ///
     /// Use the `UpdateDistributionBundle` action to change your distribution's
     /// bundle.
-    able_to_update_bundle: ?bool,
+    able_to_update_bundle: ?bool = null,
 
     /// The alternate domain names of the distribution.
-    alternative_domain_names: ?[]const []const u8,
+    alternative_domain_names: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the distribution.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The ID of the bundle currently applied to the distribution.
-    bundle_id: ?[]const u8,
+    bundle_id: ?[]const u8 = null,
 
     /// An array of objects that describe the per-path cache behavior of the
     /// distribution.
-    cache_behaviors: ?[]const CacheBehaviorPerPath,
+    cache_behaviors: ?[]const CacheBehaviorPerPath = null,
 
     /// An object that describes the cache behavior settings of the distribution.
-    cache_behavior_settings: ?CacheSettings,
+    cache_behavior_settings: ?CacheSettings = null,
 
     /// The name of the SSL/TLS certificate attached to the distribution, if any.
-    certificate_name: ?[]const u8,
+    certificate_name: ?[]const u8 = null,
 
     /// The timestamp when the distribution was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// An object that describes the default cache behavior of the distribution.
-    default_cache_behavior: ?CacheBehavior,
+    default_cache_behavior: ?CacheBehavior = null,
 
     /// The domain name of the distribution.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// The IP address type of the distribution.
     ///
     /// The possible values are `ipv4` for IPv4 only, and `dualstack` for
     /// IPv4 and IPv6.
-    ip_address_type: ?IpAddressType,
+    ip_address_type: ?IpAddressType = null,
 
     /// Indicates whether the distribution is enabled.
-    is_enabled: ?bool,
+    is_enabled: ?bool = null,
 
     /// An object that describes the location of the distribution, such as the
     /// Amazon Web Services
@@ -63,44 +63,44 @@ pub const LightsailDistribution = struct {
     /// Amazon Web Services Region, and distribute its content globally. However,
     /// all distributions
     /// are located in the `us-east-1` Region.
-    location: ?ResourceLocation,
+    location: ?ResourceLocation = null,
 
     /// The name of the distribution.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// An object that describes the origin resource of the distribution, such as a
     /// Lightsail
     /// instance, bucket, or load balancer.
     ///
     /// The distribution pulls, caches, and serves content from the origin.
-    origin: ?Origin,
+    origin: ?Origin = null,
 
     /// The public DNS of the origin.
-    origin_public_dns: ?[]const u8,
+    origin_public_dns: ?[]const u8 = null,
 
     /// The Lightsail resource type (`Distribution`).
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The status of the distribution.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The support code. Include this code in your email to support when you have
     /// questions about
     /// your Lightsail distribution. This code enables our support team to look up
     /// your Lightsail
     /// information more easily.
-    support_code: ?[]const u8,
+    support_code: ?[]const u8 = null,
 
     /// The tag keys and optional values for the resource. For more information
     /// about tags in
     /// Lightsail, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The minimum TLS protocol version that the distribution can use to
     /// communicate with
     /// viewers.
-    viewer_minimum_tls_protocol_version: ?[]const u8,
+    viewer_minimum_tls_protocol_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .able_to_update_bundle = "ableToUpdateBundle",

@@ -21,26 +21,26 @@ pub const RegisteredInstance = struct {
     /// * `invalid` - An error occurred due to misconfigured permissions, or unable
     /// to dertemine SQL Server High Availability status for the SQL Server High
     /// Availability instance.
-    ha_status: ?HaStatus,
+    ha_status: ?HaStatus = null,
 
     /// The ID of the SQL Server High Availability instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The date and time when the instance's SQL Server High Availability status
     /// was last updated, in the ISO 8601 format
     /// in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// A brief description of the SQL Server High Availability status. If the
     /// instance is in the `invalid`
     /// High Availability status, this parameter includes the error message.
-    processing_status: ?[]const u8,
+    processing_status: ?[]const u8 = null,
 
     /// The ARN of the Secrets Manager secret containing the SQL Server access
     /// credentials for the SQL Server High Availability instance.
     /// If not specified, deafult local user credentials will be used by the Amazon
     /// Web Services Systems Manager agent.
-    sql_server_credentials: ?[]const u8,
+    sql_server_credentials: ?[]const u8 = null,
 
     /// The license type for the SQL Server license. Valid values include:
     ///
@@ -49,8 +49,8 @@ pub const RegisteredInstance = struct {
     ///
     /// * `waived` - The SQL Server High Availability instance is waived from the
     ///   SQL Server license.
-    sql_server_license_usage: ?SqlServerLicenseUsage,
+    sql_server_license_usage: ?SqlServerLicenseUsage = null,
 
     /// The tags assigned to the SQL Server High Availability instance.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

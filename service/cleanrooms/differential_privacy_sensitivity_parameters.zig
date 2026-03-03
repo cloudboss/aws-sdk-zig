@@ -9,10 +9,10 @@ pub const DifferentialPrivacySensitivityParameters = struct {
     aggregation_type: DifferentialPrivacyAggregationType,
 
     /// The upper bound of the aggregation expression.
-    max_column_value: ?f32,
+    max_column_value: ?f32 = null,
 
     /// The lower bound of the aggregation expression.
-    min_column_value: ?f32,
+    min_column_value: ?f32 = null,
 
     /// The maximum number of rows contributed by a user in a SQL query.
     user_contribution_limit: i32,

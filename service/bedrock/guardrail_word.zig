@@ -8,12 +8,12 @@ pub const GuardrailWord = struct {
     /// * `BLOCK` – Block the content and replace it with blocked messaging.
     /// * `NONE` – Take no action but return detection information in the trace
     ///   response.
-    input_action: ?GuardrailWordAction,
+    input_action: ?GuardrailWordAction = null,
 
     /// Indicates whether guardrail evaluation is enabled on the input. When
     /// disabled, you aren't charged for the evaluation. The evaluation doesn't
     /// appear in the response.
-    input_enabled: ?bool,
+    input_enabled: ?bool = null,
 
     /// The action to take when harmful content is detected in the output. Supported
     /// values include:
@@ -21,12 +21,12 @@ pub const GuardrailWord = struct {
     /// * `BLOCK` – Block the content and replace it with blocked messaging.
     /// * `NONE` – Take no action but return detection information in the trace
     ///   response.
-    output_action: ?GuardrailWordAction,
+    output_action: ?GuardrailWordAction = null,
 
     /// Indicates whether guardrail evaluation is enabled on the output. When
     /// disabled, you aren't charged for the evaluation. The evaluation doesn't
     /// appear in the response.
-    output_enabled: ?bool,
+    output_enabled: ?bool = null,
 
     /// Text of the word configured for the guardrail to block.
     text: []const u8,

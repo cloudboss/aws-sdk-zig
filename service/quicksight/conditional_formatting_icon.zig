@@ -4,10 +4,10 @@ const ConditionalFormattingIconSet = @import("conditional_formatting_icon_set.zi
 /// The formatting configuration for the icon.
 pub const ConditionalFormattingIcon = struct {
     /// Determines the custom condition for an icon set.
-    custom_condition: ?ConditionalFormattingCustomIconCondition,
+    custom_condition: ?ConditionalFormattingCustomIconCondition = null,
 
     /// Formatting configuration for icon set.
-    icon_set: ?ConditionalFormattingIconSet,
+    icon_set: ?ConditionalFormattingIconSet = null,
 
     pub const json_field_names = .{
         .custom_condition = "CustomCondition",

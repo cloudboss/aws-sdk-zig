@@ -7,30 +7,30 @@ const IpAddressStatus = @import("ip_address_status.zig").IpAddressStatus;
 pub const IpAddressResponse = struct {
     /// The date and time that the IP address was created, in Unix time format and
     /// Coordinated Universal Time (UTC).
-    creation_time: ?[]const u8,
+    creation_time: ?[]const u8 = null,
 
     /// One IPv4 address that the Resolver endpoint uses for DNS queries.
-    ip: ?[]const u8,
+    ip: ?[]const u8 = null,
 
     /// The ID of one IP address.
-    ip_id: ?[]const u8,
+    ip_id: ?[]const u8 = null,
 
     /// One IPv6 address that the Resolver endpoint uses for DNS queries.
-    ipv_6: ?[]const u8,
+    ipv_6: ?[]const u8 = null,
 
     /// The date and time that the IP address was last modified, in Unix time format
     /// and Coordinated Universal Time (UTC).
-    modification_time: ?[]const u8,
+    modification_time: ?[]const u8 = null,
 
     /// A status code that gives the current status of the request.
-    status: ?IpAddressStatus,
+    status: ?IpAddressStatus = null,
 
     /// A message that provides additional information about the status of the
     /// request.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The ID of one subnet.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

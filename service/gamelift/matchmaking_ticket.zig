@@ -12,25 +12,25 @@ pub const MatchmakingTicket = struct {
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
     /// associated with the GameLift matchmaking configuration resource that is used
     /// with this ticket.
-    configuration_arn: ?[]const u8,
+    configuration_arn: ?[]const u8 = null,
 
     /// Name of the matchmaking configuration that is used with this ticket.
     /// Matchmaking
     /// configurations determine how players are grouped into a match and how a new
     /// game session
     /// is created for the match.
-    configuration_name: ?[]const u8,
+    configuration_name: ?[]const u8 = null,
 
     /// Time stamp indicating when the matchmaking request stopped being processed
     /// due to
     /// successful completion, timeout, or cancellation. Format is a number
     /// expressed in Unix time as milliseconds (for example `"1469498468.057"`).
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// Average amount of time (in seconds) that players are currently waiting for a
     /// match. If
     /// there is not enough recent data, this property may be empty.
-    estimated_wait_time: ?i32,
+    estimated_wait_time: ?i32 = null,
 
     /// Connection information for a new game session. Once a match is made, the
     /// FlexMatch
@@ -38,7 +38,7 @@ pub const MatchmakingTicket = struct {
     /// matchmaking
     /// ticket, which you can be retrieve by calling
     /// [DescribeMatchmaking](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeMatchmaking.html) .
-    game_session_connection_info: ?GameSessionConnectionInfo,
+    game_session_connection_info: ?GameSessionConnectionInfo = null,
 
     /// A set of `Player` objects, each representing a player to find matches for.
     /// Players are identified by a unique player ID and may include latency data
@@ -46,12 +46,12 @@ pub const MatchmakingTicket = struct {
     /// matchmaking. If the ticket is in status `COMPLETED`, the `Player`
     /// objects include the team the players were assigned to in the resulting
     /// match.
-    players: ?[]const Player,
+    players: ?[]const Player = null,
 
     /// Time stamp indicating when this matchmaking request was received. Format is
     /// a number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Current status of the matchmaking request.
     ///
@@ -89,19 +89,19 @@ pub const MatchmakingTicket = struct {
     /// Matchmaking requests that fail to successfully complete (statuses FAILED,
     /// CANCELLED, TIMED_OUT) can be resubmitted as new requests with new ticket
     /// IDs.
-    status: ?MatchmakingConfigurationStatus,
+    status: ?MatchmakingConfigurationStatus = null,
 
     /// Additional information about the current status.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// Code to explain the current status. For example, a status reason may
     /// indicate when a
     /// ticket has returned to `SEARCHING` status after a proposed match fails to
     /// receive player acceptances.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// A unique identifier for a matchmaking ticket.
-    ticket_id: ?[]const u8,
+    ticket_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration_arn = "ConfigurationArn",

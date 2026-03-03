@@ -6,14 +6,14 @@ const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 /// resources in
 /// the group.
 pub const ListGroupResourcesItem = struct {
-    identifier: ?ResourceIdentifier,
+    identifier: ?ResourceIdentifier = null,
 
     /// A structure that contains the status of this resource's membership in the
     /// group.
     ///
     /// This field is present in the response only if the group is of type
     /// `AWS::EC2::HostManagement`.
-    status: ?ResourceStatus,
+    status: ?ResourceStatus = null,
 
     pub const json_field_names = .{
         .identifier = "Identifier",

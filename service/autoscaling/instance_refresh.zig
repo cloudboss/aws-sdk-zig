@@ -8,16 +8,16 @@ const RefreshStrategy = @import("refresh_strategy.zig").RefreshStrategy;
 /// Describes an instance refresh for an Auto Scaling group.
 pub const InstanceRefresh = struct {
     /// The name of the Auto Scaling group.
-    auto_scaling_group_name: ?[]const u8,
+    auto_scaling_group_name: ?[]const u8 = null,
 
     /// Describes the desired configuration for the instance refresh.
-    desired_configuration: ?DesiredConfiguration,
+    desired_configuration: ?DesiredConfiguration = null,
 
     /// The date and time at which the instance refresh ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The instance refresh ID.
-    instance_refresh_id: ?[]const u8,
+    instance_refresh_id: ?[]const u8 = null,
 
     /// The number of instances remaining to update before the instance refresh is
     /// complete.
@@ -26,7 +26,7 @@ pub const InstanceRefresh = struct {
     /// the number of instances that were not yet updated by the instance refresh.
     /// Therefore, these instances don't need to be replaced as part of the
     /// rollback.
-    instances_to_update: ?i32,
+    instances_to_update: ?i32 = null,
 
     /// The percentage of the instance refresh that is complete. For each instance
     /// replacement, Amazon EC2 Auto Scaling tracks the instance's health status and
@@ -38,19 +38,19 @@ pub const InstanceRefresh = struct {
     /// `PercentageComplete` does not include instances that are replaced
     /// during a rollback. This value gradually goes back down to zero during a
     /// rollback.
-    percentage_complete: ?i32,
+    percentage_complete: ?i32 = null,
 
     /// The preferences for an instance refresh.
-    preferences: ?RefreshPreferences,
+    preferences: ?RefreshPreferences = null,
 
     /// Additional progress details for an Auto Scaling group that has a warm pool.
-    progress_details: ?InstanceRefreshProgressDetails,
+    progress_details: ?InstanceRefreshProgressDetails = null,
 
     /// The rollback details.
-    rollback_details: ?RollbackDetails,
+    rollback_details: ?RollbackDetails = null,
 
     /// The date and time at which the instance refresh began.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The current status for the instance refresh operation:
     ///
@@ -79,10 +79,10 @@ pub const InstanceRefresh = struct {
     ///
     /// * `Baking` - Waiting the specified bake time after an instance refresh has
     ///   finished updating instances.
-    status: ?InstanceRefreshStatus,
+    status: ?InstanceRefreshStatus = null,
 
     /// The explanation for the specific status assigned to this operation.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The strategy to use for the instance refresh. This determines how instances
     /// in the Auto Scaling group are
@@ -92,5 +92,5 @@ pub const InstanceRefresh = struct {
     ///
     /// * `ReplaceRootVolume` – Updates instances by replacing only the root volume
     ///   without terminating the instance
-    strategy: ?RefreshStrategy,
+    strategy: ?RefreshStrategy = null,
 };

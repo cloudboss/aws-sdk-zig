@@ -12,7 +12,7 @@ pub const MetadataCatalogDetail = struct {
     ///
     /// The metadata catalog is provided by the Glue Data Catalog. Glue
     /// includes the Glue Data Catalog as a component.
-    catalog_type: ?CatalogType,
+    catalog_type: ?CatalogType = null,
 
     /// Describes the status of the attempt from Amazon AppFlow to register the data
     /// partitions with the metadata catalog. The data partitions organize the flow
@@ -20,21 +20,21 @@ pub const MetadataCatalogDetail = struct {
     /// hierarchical path, such as a folder path in an S3 bucket. Amazon AppFlow
     /// creates the
     /// partitions (if they don't already exist) based on your flow configuration.
-    partition_registration_output: ?RegistrationOutput,
+    partition_registration_output: ?RegistrationOutput = null,
 
     /// The name of the table that stores the metadata for the associated flow run.
     /// The table
     /// stores metadata that represents the data that the flow transferred. Amazon
     /// AppFlow stores
     /// the table in the metadata catalog.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// Describes the status of the attempt from Amazon AppFlow to register the
     /// metadata
     /// table with the metadata catalog. Amazon AppFlow creates or updates this
     /// table for the
     /// associated flow run.
-    table_registration_output: ?RegistrationOutput,
+    table_registration_output: ?RegistrationOutput = null,
 
     pub const json_field_names = .{
         .catalog_type = "catalogType",

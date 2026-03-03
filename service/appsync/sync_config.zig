@@ -15,7 +15,7 @@ pub const SyncConfig = struct {
     ///
     /// * **NONE**: Do not detect conflicts when invoking
     /// this resolver.
-    conflict_detection: ?ConflictDetectionType,
+    conflict_detection: ?ConflictDetectionType = null,
 
     /// The Conflict Resolution strategy to perform in the event of a conflict.
     ///
@@ -28,11 +28,11 @@ pub const SyncConfig = struct {
     ///
     /// * **LAMBDA**: Resolve conflicts with an Lambda function supplied in the
     /// `LambdaConflictHandlerConfig`.
-    conflict_handler: ?ConflictHandlerType,
+    conflict_handler: ?ConflictHandlerType = null,
 
     /// The `LambdaConflictHandlerConfig` when configuring `LAMBDA` as the
     /// Conflict Handler.
-    lambda_conflict_handler_config: ?LambdaConflictHandlerConfig,
+    lambda_conflict_handler_config: ?LambdaConflictHandlerConfig = null,
 
     pub const json_field_names = .{
         .conflict_detection = "conflictDetection",

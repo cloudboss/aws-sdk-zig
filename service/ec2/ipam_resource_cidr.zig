@@ -7,21 +7,21 @@ const IpamResourceType = @import("ipam_resource_type.zig").IpamResourceType;
 /// The CIDR for an IPAM resource.
 pub const IpamResourceCidr = struct {
     /// The Availability Zone ID.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The compliance status of the IPAM resource. For more information on
     /// compliance statuses, see [Monitor CIDR usage by
     /// resource](https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html) in the *Amazon VPC IPAM User Guide*.
-    compliance_status: ?IpamComplianceStatus,
+    compliance_status: ?IpamComplianceStatus = null,
 
     /// The IPAM ID for an IPAM resource.
-    ipam_id: ?[]const u8,
+    ipam_id: ?[]const u8 = null,
 
     /// The pool ID for an IPAM resource.
-    ipam_pool_id: ?[]const u8,
+    ipam_pool_id: ?[]const u8 = null,
 
     /// The scope ID for an IPAM resource.
-    ipam_scope_id: ?[]const u8,
+    ipam_scope_id: ?[]const u8 = null,
 
     /// The percentage of IP address space in use. To convert the decimal to a
     /// percentage, multiply the decimal by 100. Note the following:
@@ -38,40 +38,40 @@ pub const IpamResourceCidr = struct {
     /// * For resources that are public IPv4 pools, this is the percentage of IP
     ///   address space in the pool that's been allocated to Elastic IP addresses
     ///   (EIPs).
-    ip_usage: ?f64,
+    ip_usage: ?f64 = null,
 
     /// The management state of the resource. For more information about management
     /// states, see [Monitor CIDR usage by
     /// resource](https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html) in the *Amazon VPC IPAM User Guide*.
-    management_state: ?IpamManagementState,
+    management_state: ?IpamManagementState = null,
 
     /// The overlap status of an IPAM resource. The overlap status tells you if the
     /// CIDR for a resource overlaps with another CIDR in the scope. For more
     /// information on overlap statuses, see [Monitor CIDR usage by
     /// resource](https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html) in the *Amazon VPC IPAM User Guide*.
-    overlap_status: ?IpamOverlapStatus,
+    overlap_status: ?IpamOverlapStatus = null,
 
     /// The CIDR for an IPAM resource.
-    resource_cidr: ?[]const u8,
+    resource_cidr: ?[]const u8 = null,
 
     /// The ID of an IPAM resource.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The name of an IPAM resource.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// The Amazon Web Services account number of the owner of an IPAM resource.
-    resource_owner_id: ?[]const u8,
+    resource_owner_id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region for an IPAM resource.
-    resource_region: ?[]const u8,
+    resource_region: ?[]const u8 = null,
 
     /// The tags for an IPAM resource.
-    resource_tags: ?[]const IpamResourceTag,
+    resource_tags: ?[]const IpamResourceTag = null,
 
     /// The type of IPAM resource.
-    resource_type: ?IpamResourceType,
+    resource_type: ?IpamResourceType = null,
 
     /// The ID of a VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

@@ -5,14 +5,14 @@ const KeyspacesMetadata = @import("keyspaces_metadata.zig").KeyspacesMetadata;
 /// including the associated metadata.
 pub const KeyspacesCellMapDefinition = struct {
     /// The key of this map entry in the Amazon Keyspaces cell.
-    key: ?KeyspacesCellValue,
+    key: ?KeyspacesCellValue = null,
 
     /// Metadata for this specific key-value pair within the map, such as timestamps
     /// and TTL information.
-    metadata: ?KeyspacesMetadata,
+    metadata: ?KeyspacesMetadata = null,
 
     /// The value associated with the key in this map entry.
-    value: ?KeyspacesCellValue,
+    value: ?KeyspacesCellValue = null,
 
     pub const json_field_names = .{
         .key = "key",

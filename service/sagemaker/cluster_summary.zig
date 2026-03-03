@@ -20,7 +20,7 @@ pub const ClusterSummary = struct {
     /// For more information about how to reserve GPU capacity for your SageMaker
     /// HyperPod clusters using Amazon SageMaker Training Plan, see `
     /// [CreateTrainingPlan](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html) `.
-    training_plan_arns: ?[]const []const u8,
+    training_plan_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .cluster_arn = "ClusterArn",

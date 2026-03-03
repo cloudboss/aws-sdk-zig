@@ -3,5 +3,5 @@ pub const JSONOutput = struct {
     /// The value used to separate individual records in the output. If no value is
     /// specified, Amazon S3 uses a
     /// newline character ('\n').
-    record_delimiter: ?[]const u8,
+    record_delimiter: ?[]const u8 = null,
 };

@@ -10,7 +10,7 @@ pub const Statement = struct {
     /// [PostText](http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html) API, Amazon Lex includes the response card in the response.
     /// It substitutes all of the session attributes and slot values for
     /// placeholders in the response card.
-    response_card: ?[]const u8,
+    response_card: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .messages = "messages",

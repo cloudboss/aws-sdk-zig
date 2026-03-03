@@ -7,7 +7,7 @@ pub const WorkflowExecutionTerminatedEventAttributes = struct {
     /// and specifies the cause. This happens if the parent workflow execution times
     /// out or is terminated and the child policy is set to terminate child
     /// executions.
-    cause: ?WorkflowExecutionTerminatedCause,
+    cause: ?WorkflowExecutionTerminatedCause = null,
 
     /// The policy used for the child workflow executions of this workflow
     /// execution.
@@ -26,10 +26,10 @@ pub const WorkflowExecutionTerminatedEventAttributes = struct {
     child_policy: ChildPolicy,
 
     /// The details provided for the termination.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// The reason provided for the termination.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cause = "cause",

@@ -7,10 +7,10 @@ pub const CodeSecurityScanConfiguration = struct {
     /// Configuration settings for continuous integration scans that run
     /// automatically when code
     /// changes are made.
-    continuous_integration_scan_configuration: ?ContinuousIntegrationScanConfiguration,
+    continuous_integration_scan_configuration: ?ContinuousIntegrationScanConfiguration = null,
 
     /// Configuration settings for periodic scans that run on a scheduled basis.
-    periodic_scan_configuration: ?PeriodicScanConfiguration,
+    periodic_scan_configuration: ?PeriodicScanConfiguration = null,
 
     /// The categories of security rules to be applied during the scan.
     rule_set_categories: []const RuleSetCategory,

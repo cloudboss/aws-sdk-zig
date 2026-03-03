@@ -3,14 +3,14 @@ const ProductionVariantServerlessUpdateConfig = @import("production_variant_serv
 /// Specifies weight and capacity values for a production variant.
 pub const DesiredWeightAndCapacity = struct {
     /// The variant's capacity.
-    desired_instance_count: ?i32,
+    desired_instance_count: ?i32 = null,
 
     /// The variant's weight.
-    desired_weight: ?f32,
+    desired_weight: ?f32 = null,
 
     /// Specifies the serverless update concurrency configuration for an endpoint
     /// variant.
-    serverless_update_config: ?ProductionVariantServerlessUpdateConfig,
+    serverless_update_config: ?ProductionVariantServerlessUpdateConfig = null,
 
     /// The name of the variant to update.
     variant_name: []const u8,

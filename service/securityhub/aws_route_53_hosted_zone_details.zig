@@ -9,21 +9,21 @@ const AwsRoute53HostedZoneVpcDetails = @import("aws_route_53_hosted_zone_vpc_det
 /// domain name.
 pub const AwsRoute53HostedZoneDetails = struct {
     /// An object that contains information about the specified hosted zone.
-    hosted_zone: ?AwsRoute53HostedZoneObjectDetails,
+    hosted_zone: ?AwsRoute53HostedZoneObjectDetails = null,
 
     /// An object that contains a list of the authoritative name servers for a
     /// hosted zone or for a reusable delegation set.
-    name_servers: ?[]const []const u8,
+    name_servers: ?[]const []const u8 = null,
 
     /// An array that contains one `QueryLoggingConfig` element for each DNS query
     /// logging configuration that is
     /// associated with the current Amazon Web Services account.
-    query_logging_config: ?AwsRoute53QueryLoggingConfigDetails,
+    query_logging_config: ?AwsRoute53QueryLoggingConfigDetails = null,
 
     /// An object that contains information about the Amazon Virtual Private Clouds
     /// (Amazon VPCs) that are associated with
     /// the specified hosted zone.
-    vpcs: ?[]const AwsRoute53HostedZoneVpcDetails,
+    vpcs: ?[]const AwsRoute53HostedZoneVpcDetails = null,
 
     pub const json_field_names = .{
         .hosted_zone = "HostedZone",

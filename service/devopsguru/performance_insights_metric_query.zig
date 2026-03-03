@@ -39,7 +39,7 @@ pub const PerformanceInsightsMetricQuery = struct {
     /// `GroupBy` parameter.
     ///
     /// * A single filter for any other dimension in this dimension group.
-    filter: ?[]const aws.map.StringMapEntry,
+    filter: ?[]const aws.map.StringMapEntry = null,
 
     /// The specification for how to aggregate the data points from a Performance
     /// Insights
@@ -50,7 +50,7 @@ pub const PerformanceInsightsMetricQuery = struct {
     /// that group. You can also request that Performance Insights return a limited
     /// number of values for a
     /// dimension.
-    group_by: ?PerformanceInsightsMetricDimensionGroup,
+    group_by: ?PerformanceInsightsMetricDimensionGroup = null,
 
     /// The name of the meteric used used when querying an Performance Insights
     /// `GetResourceMetrics` API for anomaly metrics.
@@ -73,7 +73,7 @@ pub const PerformanceInsightsMetricQuery = struct {
     /// showing the raw values, and `db.sampledload.avg` less than
     /// `db.load.avg`. For most use cases, you can query `db.load.avg`
     /// only.
-    metric: ?[]const u8,
+    metric: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .filter = "Filter",

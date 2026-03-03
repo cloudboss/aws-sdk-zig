@@ -148,7 +148,7 @@ pub const DimensionGroup = struct {
     ///
     /// * `db.wait_state.name` - The event for which the backend is waiting (only
     ///   Amazon DocumentDB).
-    dimensions: ?[]const []const u8,
+    dimensions: ?[]const []const u8 = null,
 
     /// The name of the dimension group. Valid values are as follows:
     ///
@@ -215,7 +215,7 @@ pub const DimensionGroup = struct {
     group: []const u8,
 
     /// The maximum number of items to fetch for this dimension group.
-    limit: ?i32,
+    limit: ?i32 = null,
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",

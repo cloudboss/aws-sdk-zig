@@ -11,7 +11,7 @@
 pub const ServerCertificate = struct {
     /// The Amazon Resource Name (ARN) of the Certificate Manager SSL/TLS server
     /// certificate that's used for inbound SSL/TLS inspection.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resource_arn = "ResourceArn",

@@ -7,10 +7,10 @@ const ResponseResourceMetricKey = @import("response_resource_metric_key.zig").Re
 pub const MetricKeyDataPoints = struct {
     /// An array of timestamp-value pairs, representing measurements over a period
     /// of time.
-    data_points: ?[]const DataPoint,
+    data_points: ?[]const DataPoint = null,
 
     /// The dimensions to which the data points apply.
-    key: ?ResponseResourceMetricKey,
+    key: ?ResponseResourceMetricKey = null,
 
     pub const json_field_names = .{
         .data_points = "DataPoints",

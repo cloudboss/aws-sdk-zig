@@ -9,7 +9,7 @@ pub const AuditEventField = struct {
     new_value: AuditEventFieldValueUnion,
 
     /// Union of potential field value types.
-    old_value: ?AuditEventFieldValueUnion,
+    old_value: ?AuditEventFieldValueUnion = null,
 
     pub const json_field_names = .{
         .event_field_id = "eventFieldId",

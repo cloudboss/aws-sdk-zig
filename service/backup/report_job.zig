@@ -11,7 +11,7 @@ pub const ReportJob = struct {
     /// For example, the value 1516925490.087 represents Friday, January 26, 2018
     /// 12:11:30.087
     /// AM.
-    completion_time: ?i64,
+    completion_time: ?i64 = null,
 
     /// The date and time that a report job is created, in Unix format and
     /// Coordinated Universal
@@ -19,22 +19,22 @@ pub const ReportJob = struct {
     /// example, the value 1516925490.087 represents Friday, January 26, 2018
     /// 12:11:30.087
     /// AM.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The S3 bucket name and S3 keys for the destination where the report job
     /// publishes the
     /// report.
-    report_destination: ?ReportDestination,
+    report_destination: ?ReportDestination = null,
 
     /// The identifier for a report job. A unique, randomly generated, Unicode,
     /// UTF-8 encoded
     /// string that is at most 1,024 bytes long. Report job IDs cannot be edited.
-    report_job_id: ?[]const u8,
+    report_job_id: ?[]const u8 = null,
 
     /// An Amazon Resource Name (ARN) that uniquely identifies a resource. The
     /// format of the ARN
     /// depends on the resource type.
-    report_plan_arn: ?[]const u8,
+    report_plan_arn: ?[]const u8 = null,
 
     /// Identifies the report template for the report. Reports are built using a
     /// report
@@ -43,7 +43,7 @@ pub const ReportJob = struct {
     /// `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT
     /// |
     /// COPY_JOB_REPORT | RESTORE_JOB_REPORT`
-    report_template: ?[]const u8,
+    report_template: ?[]const u8 = null,
 
     /// The status of a report job. The statuses are:
     ///
@@ -52,10 +52,10 @@ pub const ReportJob = struct {
     /// `COMPLETED` means that the report is available for your review at your
     /// designated destination. If the status is `FAILED`, review the
     /// `StatusMessage` for the reason.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// A message explaining the status of the report job.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .completion_time = "CompletionTime",

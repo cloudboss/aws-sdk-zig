@@ -1,7 +1,7 @@
 /// Contains information summarizing an edge deployment plan.
 pub const EdgeDeploymentPlanSummary = struct {
     /// The time when the edge deployment plan was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The name of the device fleet used for the deployment.
     device_fleet_name: []const u8,
@@ -22,7 +22,7 @@ pub const EdgeDeploymentPlanSummary = struct {
     edge_deployment_success: i32,
 
     /// The time when the edge deployment plan was last updated.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

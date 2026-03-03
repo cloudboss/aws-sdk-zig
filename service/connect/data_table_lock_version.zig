@@ -9,22 +9,22 @@ pub const DataTableLockVersion = struct {
     /// value for the attribute changes. For other lock levels, it only changes when
     /// the attribute's properties are directly
     /// updated.
-    attribute: ?[]const u8,
+    attribute: ?[]const u8 = null,
 
     /// The lock version for the data table itself. Used for optimistic locking and
     /// table versioning. Changes with each
     /// update to the table's metadata or structure.
-    data_table: ?[]const u8,
+    data_table: ?[]const u8 = null,
 
     /// The lock version for a specific set of primary values (record). This
     /// includes the default record even if the
     /// table does not have any primary attributes. Used for record-level locking.
-    primary_values: ?[]const u8,
+    primary_values: ?[]const u8 = null,
 
     /// The lock version for a specific value. Changes each time the individual
     /// value is modified. Used for the
     /// finest-grained locking control.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attribute = "Attribute",

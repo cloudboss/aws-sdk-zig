@@ -4,19 +4,19 @@ const ExecutionStatusReason = @import("execution_status_reason.zig").ExecutionSt
 /// The status of the execution.
 pub const ExecutionStatus = struct {
     /// The time when the execution was completed.
-    completed_at: ?i64,
+    completed_at: ?i64 = null,
 
     /// The time when the execution was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The time when the execution was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The code for the status of the execution.
-    status_code: ?ExecutionStatusCode,
+    status_code: ?ExecutionStatusCode = null,
 
     /// The reason for the failed status.
-    status_reason: ?ExecutionStatusReason,
+    status_reason: ?ExecutionStatusReason = null,
 
     pub const json_field_names = .{
         .completed_at = "CompletedAt",

@@ -12,7 +12,7 @@ pub const S3StorageOptions = struct {
     /// enable this option, you would then need to explicitly set the
     /// `HomeDirectoryMapEntry` `Type` to `FILE` if you want a mapping to have a
     /// file target.
-    directory_listing_optimization: ?DirectoryListingOptimization,
+    directory_listing_optimization: ?DirectoryListingOptimization = null,
 
     pub const json_field_names = .{
         .directory_listing_optimization = "DirectoryListingOptimization",

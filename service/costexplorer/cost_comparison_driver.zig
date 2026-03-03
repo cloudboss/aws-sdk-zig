@@ -15,12 +15,12 @@ pub const CostComparisonDriver = struct {
     /// change) that contributed to the cost variance, along with the identifier and
     /// type of
     /// change.
-    cost_drivers: ?[]const CostDriver,
+    cost_drivers: ?[]const CostDriver = null,
 
-    cost_selector: ?Expression,
+    cost_selector: ?Expression = null,
 
     /// A mapping of metric names to their comparison values.
-    metrics: ?[]const aws.map.MapEntry(ComparisonMetricValue),
+    metrics: ?[]const aws.map.MapEntry(ComparisonMetricValue) = null,
 
     pub const json_field_names = .{
         .cost_drivers = "CostDrivers",

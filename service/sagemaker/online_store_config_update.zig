@@ -6,7 +6,7 @@ pub const OnlineStoreConfigUpdate = struct {
     /// time is reached; `ExpiresAt` = `EventTime` + `TtlDuration`. For information
     /// on HardDelete, see the
     /// [DeleteRecord](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html) API in the Amazon SageMaker API Reference guide.
-    ttl_duration: ?TtlDuration,
+    ttl_duration: ?TtlDuration = null,
 
     pub const json_field_names = .{
         .ttl_duration = "TtlDuration",

@@ -4,7 +4,7 @@ const SchemaAttribute = @import("schema_attribute.zig").SchemaAttribute;
 pub const Schema = struct {
     /// An array of attributes specifying the name and type of each field in a
     /// dataset.
-    attributes: ?[]const SchemaAttribute,
+    attributes: ?[]const SchemaAttribute = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

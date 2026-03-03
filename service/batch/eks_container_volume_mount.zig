@@ -5,20 +5,20 @@
 /// *Kubernetes documentation*.
 pub const EksContainerVolumeMount = struct {
     /// The path on the container where the volume is mounted.
-    mount_path: ?[]const u8,
+    mount_path: ?[]const u8 = null,
 
     /// The name the volume mount. This must match the name of one of the volumes in
     /// the
     /// pod.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// If this value is `true`, the container has read-only access to the volume.
     /// Otherwise, the container can write to the volume. The default value is
     /// `false`.
-    read_only: ?bool,
+    read_only: ?bool = null,
 
     /// A sub-path inside the referenced volume instead of its root.
-    sub_path: ?[]const u8,
+    sub_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .mount_path = "mountPath",

@@ -4,7 +4,7 @@ const SignalType = @import("signal_type.zig").SignalType;
 /// Contains information about the signals involved in the attack sequence.
 pub const Signal = struct {
     /// Information about the IDs of the threat actors involved in the signal.
-    actor_ids: ?[]const []const u8,
+    actor_ids: ?[]const []const u8 = null,
 
     /// The number of times this signal was observed.
     count: i32,
@@ -14,10 +14,10 @@ pub const Signal = struct {
     created_at: i64,
 
     /// The description of the signal.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about the endpoint IDs associated with this signal.
-    endpoint_ids: ?[]const []const u8,
+    endpoint_ids: ?[]const []const u8 = null,
 
     /// The timestamp when the first finding or activity related to this signal was
     /// observed.
@@ -33,17 +33,17 @@ pub const Signal = struct {
 
     /// Information about the unique identifiers of the resources involved in the
     /// signal.
-    resource_uids: ?[]const []const u8,
+    resource_uids: ?[]const []const u8 = null,
 
     /// The severity associated with the signal. For more information about
     /// severity, see
     /// [Findings severity
     /// levels](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html)
     /// in the *Amazon GuardDuty User Guide*.
-    severity: ?f64,
+    severity: ?f64 = null,
 
     /// Contains information about the indicators associated with the signals.
-    signal_indicators: ?[]const Indicator,
+    signal_indicators: ?[]const Indicator = null,
 
     /// The type of the signal used to identify an attack sequence.
     ///

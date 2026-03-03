@@ -8,7 +8,7 @@ pub const AccountAggregationSource = struct {
     all_aws_regions: bool = false,
 
     /// The source regions being aggregated.
-    aws_regions: ?[]const []const u8,
+    aws_regions: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .account_ids = "AccountIds",

@@ -12,32 +12,32 @@ const Tag = @import("tag.zig").Tag;
 /// Contains information about an CloudHSM cluster.
 pub const Cluster = struct {
     /// The cluster's backup policy.
-    backup_policy: ?BackupPolicy,
+    backup_policy: ?BackupPolicy = null,
 
     /// A policy that defines how the service retains backups.
-    backup_retention_policy: ?BackupRetentionPolicy,
+    backup_retention_policy: ?BackupRetentionPolicy = null,
 
     /// Contains one or more certificates or a certificate signing request (CSR).
-    certificates: ?Certificates,
+    certificates: ?Certificates = null,
 
     /// The cluster's identifier (ID).
-    cluster_id: ?[]const u8,
+    cluster_id: ?[]const u8 = null,
 
     /// The date and time when the cluster was created.
-    create_timestamp: ?i64,
+    create_timestamp: ?i64 = null,
 
     /// Contains information about the HSMs in the cluster.
-    hsms: ?[]const Hsm,
+    hsms: ?[]const Hsm = null,
 
     /// The type of HSM that the cluster contains.
-    hsm_type: ?[]const u8,
+    hsm_type: ?[]const u8 = null,
 
     /// The timestamp until when the cluster can be rolled back to its original HSM
     /// type.
-    hsm_type_rollback_expiration: ?i64,
+    hsm_type_rollback_expiration: ?i64 = null,
 
     /// The mode of the cluster.
-    mode: ?ClusterMode,
+    mode: ?ClusterMode = null,
 
     /// The cluster's NetworkType can be IPv4 (the default) or DUALSTACK.
     /// The IPv4 NetworkType restricts communication between your application and
@@ -51,35 +51,35 @@ pub const Cluster = struct {
     /// The NetworkType you choose affects the network addressing options for your
     /// cluster. DUALSTACK provides more flexibility by supporting both IPv4 and
     /// IPv6 communication.
-    network_type: ?NetworkType,
+    network_type: ?NetworkType = null,
 
     /// The default password for the cluster's Pre-Crypto Officer (PRECO) user.
-    pre_co_password: ?[]const u8,
+    pre_co_password: ?[]const u8 = null,
 
     /// The identifier (ID) of the cluster's security group.
-    security_group: ?[]const u8,
+    security_group: ?[]const u8 = null,
 
     /// The identifier (ID) of the backup used to create the cluster. This value
     /// exists only
     /// when the cluster was created from a backup.
-    source_backup_id: ?[]const u8,
+    source_backup_id: ?[]const u8 = null,
 
     /// The cluster's state.
-    state: ?ClusterState,
+    state: ?ClusterState = null,
 
     /// A description of the cluster's state.
-    state_message: ?[]const u8,
+    state_message: ?[]const u8 = null,
 
     /// A map from availability zone to the cluster’s subnet in that availability
     /// zone.
-    subnet_mapping: ?[]const aws.map.StringMapEntry,
+    subnet_mapping: ?[]const aws.map.StringMapEntry = null,
 
     /// The list of tags for the cluster.
-    tag_list: ?[]const Tag,
+    tag_list: ?[]const Tag = null,
 
     /// The identifier (ID) of the virtual private cloud (VPC) that contains the
     /// cluster.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .backup_policy = "BackupPolicy",

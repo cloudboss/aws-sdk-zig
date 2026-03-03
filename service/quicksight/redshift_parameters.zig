@@ -7,25 +7,25 @@ const IdentityCenterConfiguration = @import("identity_center_configuration.zig")
 pub const RedshiftParameters = struct {
     /// Cluster ID. This field can be blank if the `Host` and `Port` are
     /// provided.
-    cluster_id: ?[]const u8,
+    cluster_id: ?[]const u8 = null,
 
     /// Database.
     database: []const u8,
 
     /// Host. This field can be blank if `ClusterId` is provided.
-    host: ?[]const u8,
+    host: ?[]const u8 = null,
 
     /// An optional parameter that uses IAM authentication to grant Quick Sight
     /// access to your cluster. This parameter can be used instead of
     /// [DataSourceCredentials](https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html).
-    iam_parameters: ?RedshiftIAMParameters,
+    iam_parameters: ?RedshiftIAMParameters = null,
 
     /// An optional parameter that configures IAM Identity Center authentication to
     /// grant Quick Sight access to your cluster.
     ///
     /// This parameter can only be specified if your Quick Sight account is
     /// configured with IAM Identity Center.
-    identity_center_configuration: ?IdentityCenterConfiguration,
+    identity_center_configuration: ?IdentityCenterConfiguration = null,
 
     /// Port. This field can be blank if the `ClusterId` is provided.
     port: i32 = 0,

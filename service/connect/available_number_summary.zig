@@ -5,13 +5,13 @@ const PhoneNumberType = @import("phone_number_type.zig").PhoneNumberType;
 pub const AvailableNumberSummary = struct {
     /// The phone number. Phone numbers are formatted `[+] [country code]
     /// [subscriber number including area code]`.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     /// The ISO country code.
-    phone_number_country_code: ?PhoneNumberCountryCode,
+    phone_number_country_code: ?PhoneNumberCountryCode = null,
 
     /// The type of phone number.
-    phone_number_type: ?PhoneNumberType,
+    phone_number_type: ?PhoneNumberType = null,
 
     pub const json_field_names = .{
         .phone_number = "PhoneNumber",

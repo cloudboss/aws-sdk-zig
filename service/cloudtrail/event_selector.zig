@@ -35,7 +35,7 @@ pub const EventSelector = struct {
     /// [directory
     /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html), you must use [AdvancedEventSelectors](https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html). You must also
     /// use `AdvancedEventSelectors` if you want to filter on the `eventName` field.
-    data_resources: ?[]const DataResource,
+    data_resources: ?[]const DataResource = null,
 
     /// An optional list of service event sources from which you do not want
     /// management events
@@ -47,7 +47,7 @@ pub const EventSelector = struct {
     /// Amazon RDS Data API events are logged to your trail. You can exclude
     /// management
     /// event sources only in Regions that support the event source.
-    exclude_management_event_sources: ?[]const []const u8,
+    exclude_management_event_sources: ?[]const []const u8 = null,
 
     /// Specify if you want your event selector to include management events for
     /// your
@@ -65,7 +65,7 @@ pub const EventSelector = struct {
     /// Region. For more
     /// information about CloudTrail pricing, see [CloudTrail
     /// Pricing](http://aws.amazon.com/cloudtrail/pricing/).
-    include_management_events: ?bool,
+    include_management_events: ?bool = null,
 
     /// Specify if you want your trail to log read-only events, write-only events,
     /// or all. For
@@ -73,7 +73,7 @@ pub const EventSelector = struct {
     /// `RunInstances` is a write-only API operation.
     ///
     /// By default, the value is `All`.
-    read_write_type: ?ReadWriteType,
+    read_write_type: ?ReadWriteType = null,
 
     pub const json_field_names = .{
         .data_resources = "DataResources",

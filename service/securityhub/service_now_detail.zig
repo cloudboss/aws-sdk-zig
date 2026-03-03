@@ -6,7 +6,7 @@ pub const ServiceNowDetail = struct {
     auth_status: ConnectorAuthStatus,
 
     /// The instanceName of ServiceNow ITSM.
-    instance_name: ?[]const u8,
+    instance_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
     /// secret that contains the ServiceNow credentials.

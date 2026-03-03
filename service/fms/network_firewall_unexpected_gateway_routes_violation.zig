@@ -4,16 +4,16 @@ const Route = @import("route.zig").Route;
 /// table.
 pub const NetworkFirewallUnexpectedGatewayRoutesViolation = struct {
     /// Information about the gateway ID.
-    gateway_id: ?[]const u8,
+    gateway_id: ?[]const u8 = null,
 
     /// Information about the route table.
-    route_table_id: ?[]const u8,
+    route_table_id: ?[]const u8 = null,
 
     /// The routes that are in violation.
-    violating_routes: ?[]const Route,
+    violating_routes: ?[]const Route = null,
 
     /// Information about the VPC ID.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .gateway_id = "GatewayId",

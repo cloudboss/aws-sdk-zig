@@ -8,19 +8,19 @@ pub const AssetBundleImportJobDataSourceOverrideParameters = struct {
     /// An optional structure that provides the credentials to be used to create the
     /// imported
     /// data source.
-    credentials: ?AssetBundleImportJobDataSourceCredentials,
+    credentials: ?AssetBundleImportJobDataSourceCredentials = null,
 
     /// The ID of the data source to apply overrides to.
     data_source_id: []const u8,
 
-    data_source_parameters: ?DataSourceParameters,
+    data_source_parameters: ?DataSourceParameters = null,
 
     /// A new name for the data source.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    ssl_properties: ?SslProperties,
+    ssl_properties: ?SslProperties = null,
 
-    vpc_connection_properties: ?VpcConnectionProperties,
+    vpc_connection_properties: ?VpcConnectionProperties = null,
 
     pub const json_field_names = .{
         .credentials = "Credentials",

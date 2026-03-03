@@ -4,7 +4,7 @@ const TimestampRange = @import("timestamp_range.zig").TimestampRange;
 pub const PointsOfInterest = struct {
     /// Contains the timestamp ranges (start time through end time) of matched
     /// categories and rules.
-    timestamp_ranges: ?[]const TimestampRange,
+    timestamp_ranges: ?[]const TimestampRange = null,
 
     pub const json_field_names = .{
         .timestamp_ranges = "TimestampRanges",

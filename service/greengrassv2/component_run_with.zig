@@ -21,7 +21,7 @@ pub const ComponentRunWith = struct {
     /// you configure on the Greengrass nucleus component. For more information, see
     /// [Configure the user and group that run
     /// components](https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user).
-    posix_user: ?[]const u8,
+    posix_user: ?[]const u8 = null,
 
     /// The system resource limits to apply to this component's process on the core
     /// device. IoT Greengrass
@@ -32,7 +32,7 @@ pub const ComponentRunWith = struct {
     /// that you configure on the Greengrass nucleus component. For more
     /// information, see [Configure system resource limits for
     /// components](https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits).
-    system_resource_limits: ?SystemResourceLimits,
+    system_resource_limits: ?SystemResourceLimits = null,
 
     /// The Windows user to use to run this component on Windows core devices. The
     /// user must exist
@@ -45,7 +45,7 @@ pub const ComponentRunWith = struct {
     /// configure on the Greengrass nucleus component. For more information, see
     /// [Configure the user and group that run
     /// components](https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user).
-    windows_user: ?[]const u8,
+    windows_user: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .posix_user = "posixUser",

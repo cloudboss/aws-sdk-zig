@@ -1,7 +1,7 @@
 /// Metrics for a specified crawler.
 pub const CrawlerMetrics = struct {
     /// The name of the crawler.
-    crawler_name: ?[]const u8,
+    crawler_name: ?[]const u8 = null,
 
     /// The duration of the crawler's most recent run, in seconds.
     last_runtime_seconds: f64 = 0,

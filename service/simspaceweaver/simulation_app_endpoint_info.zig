@@ -10,12 +10,12 @@ pub const SimulationAppEndpointInfo = struct {
     /// The IP address of the app. SimSpace Weaver dynamically assigns this IP
     /// address when the
     /// app starts.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// The inbound TCP/UDP port numbers of the app. The combination of an IP
     /// address and
     /// a port number form a network endpoint.
-    ingress_port_mappings: ?[]const SimulationAppPortMapping,
+    ingress_port_mappings: ?[]const SimulationAppPortMapping = null,
 
     pub const json_field_names = .{
         .address = "Address",

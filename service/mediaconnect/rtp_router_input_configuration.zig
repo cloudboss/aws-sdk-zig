@@ -6,7 +6,7 @@ const ForwardErrorCorrectionState = @import("forward_error_correction_state.zig"
 pub const RtpRouterInputConfiguration = struct {
     /// The state of forward error correction for the RTP protocol in the router
     /// input configuration.
-    forward_error_correction: ?ForwardErrorCorrectionState,
+    forward_error_correction: ?ForwardErrorCorrectionState = null,
 
     /// The port number used for the RTP protocol in the router input configuration.
     port: i32,

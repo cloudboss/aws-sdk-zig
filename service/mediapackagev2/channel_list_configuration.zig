@@ -20,7 +20,7 @@ pub const ChannelListConfiguration = struct {
 
     /// Any descriptive information that you want to add to the channel for future
     /// identification purposes.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The input type will be an immutable field which will be used to define
     /// whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it
@@ -32,7 +32,7 @@ pub const ChannelListConfiguration = struct {
     ///   TS segments).
     /// * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
     ///   segments with optional DASH manifests).
-    input_type: ?InputType,
+    input_type: ?InputType = null,
 
     /// The date and time the channel was modified.
     modified_at: i64,

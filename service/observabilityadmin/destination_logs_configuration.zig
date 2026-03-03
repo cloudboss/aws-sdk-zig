@@ -6,10 +6,10 @@ const LogsEncryptionConfiguration = @import("logs_encryption_configuration.zig")
 pub const DestinationLogsConfiguration = struct {
     /// Configuration defining the backup region and an optional KMS key for the
     /// backup destination.
-    backup_configuration: ?LogsBackupConfiguration,
+    backup_configuration: ?LogsBackupConfiguration = null,
 
     /// The encryption configuration for centralization destination log groups.
-    logs_encryption_configuration: ?LogsEncryptionConfiguration,
+    logs_encryption_configuration: ?LogsEncryptionConfiguration = null,
 
     pub const json_field_names = .{
         .backup_configuration = "BackupConfiguration",

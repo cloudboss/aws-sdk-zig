@@ -7,7 +7,7 @@ pub const AutomatedEncodingSettings = struct {
     /// package for you automatically, based on characteristics of your input video.
     /// This feature optimizes video quality while minimizing the overall size of
     /// your ABR package.
-    abr_settings: ?AutomatedAbrSettings,
+    abr_settings: ?AutomatedAbrSettings = null,
 
     pub const json_field_names = .{
         .abr_settings = "AbrSettings",

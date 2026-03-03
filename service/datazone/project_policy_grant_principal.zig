@@ -7,10 +7,10 @@ pub const ProjectPolicyGrantPrincipal = struct {
     project_designation: ProjectDesignation,
 
     /// The project grant filter of the project policy grant principal.
-    project_grant_filter: ?ProjectGrantFilter,
+    project_grant_filter: ?ProjectGrantFilter = null,
 
     /// The project ID of the project policy grant principal.
-    project_identifier: ?[]const u8,
+    project_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .project_designation = "projectDesignation",

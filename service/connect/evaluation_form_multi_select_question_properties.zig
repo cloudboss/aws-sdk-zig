@@ -5,10 +5,10 @@ const EvaluationFormMultiSelectQuestionOption = @import("evaluation_form_multi_s
 /// Properties for a multi-select question in an evaluation form.
 pub const EvaluationFormMultiSelectQuestionProperties = struct {
     /// Automation configuration for this multi-select question.
-    automation: ?EvaluationFormMultiSelectQuestionAutomation,
+    automation: ?EvaluationFormMultiSelectQuestionAutomation = null,
 
     /// Display format for the multi-select question.
-    display_as: ?EvaluationFormMultiSelectQuestionDisplayMode,
+    display_as: ?EvaluationFormMultiSelectQuestionDisplayMode = null,
 
     /// Options available for this multi-select question.
     options: []const EvaluationFormMultiSelectQuestionOption,

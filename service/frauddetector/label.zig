@@ -1,19 +1,19 @@
 /// The label details.
 pub const Label = struct {
     /// The label ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Timestamp of when the event type was created.
-    created_time: ?[]const u8,
+    created_time: ?[]const u8 = null,
 
     /// The label description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Timestamp of when the label was last updated.
-    last_updated_time: ?[]const u8,
+    last_updated_time: ?[]const u8 = null,
 
     /// The label name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

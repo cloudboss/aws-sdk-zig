@@ -3,7 +3,7 @@
 pub const CitationSourceContentDelta = struct {
     /// An incremental update to the text content from the source document that is
     /// being cited.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .text = "text",

@@ -10,11 +10,11 @@ const StackInstanceStatus = @import("stack_instance_status.zig").StackInstanceSt
 pub const StackInstance = struct {
     /// The name of the Amazon Web Services account that the stack instance is
     /// associated with.
-    account: ?[]const u8,
+    account: ?[]const u8 = null,
 
     /// The name of the Amazon Web Services Region that the stack instance is
     /// associated with.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The status of the stack instance, in terms of its synchronization with its
     /// associated stack set.
@@ -33,7 +33,7 @@ pub const StackInstance = struct {
     /// that failed or was stopped before the stack was created or updated.
     ///
     /// * `CURRENT`: The stack is currently up to date with the stack set.
-    stack_instance_status: ?StackInstanceStatus,
+    stack_instance_status: ?StackInstanceStatus = null,
 
     pub const json_field_names = .{
         .account = "Account",

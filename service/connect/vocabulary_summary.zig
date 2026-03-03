@@ -7,7 +7,7 @@ pub const VocabularySummary = struct {
     arn: []const u8,
 
     /// The reason why the custom vocabulary was not created.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The identifier of the custom vocabulary.
     id: []const u8,

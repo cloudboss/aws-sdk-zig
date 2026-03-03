@@ -4,47 +4,47 @@ const InstanceType = @import("instance_type.zig").InstanceType;
 /// Information about a Capacity Reservation in a Capacity Reservation Fleet.
 pub const FleetCapacityReservation = struct {
     /// The Availability Zone in which the Capacity Reservation reserves capacity.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the Availability Zone in which the Capacity Reservation reserves
     /// capacity.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The ID of the Capacity Reservation.
-    capacity_reservation_id: ?[]const u8,
+    capacity_reservation_id: ?[]const u8 = null,
 
     /// The date and time at which the Capacity Reservation was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// Indicates whether the Capacity Reservation reserves capacity for
     /// EBS-optimized
     /// instance types.
-    ebs_optimized: ?bool,
+    ebs_optimized: ?bool = null,
 
     /// The number of capacity units fulfilled by the Capacity Reservation. For more
     /// information, see [Total target
     /// capacity](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity) in the *Amazon EC2 User Guide*.
-    fulfilled_capacity: ?f64,
+    fulfilled_capacity: ?f64 = null,
 
     /// The type of operating system for which the Capacity Reservation reserves
     /// capacity.
-    instance_platform: ?CapacityReservationInstancePlatform,
+    instance_platform: ?CapacityReservationInstancePlatform = null,
 
     /// The instance type for which the Capacity Reservation reserves capacity.
-    instance_type: ?InstanceType,
+    instance_type: ?InstanceType = null,
 
     /// The priority of the instance type in the Capacity Reservation Fleet. For
     /// more
     /// information, see [Instance type
     /// priority](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#instance-priority) in the *Amazon EC2 User Guide*.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The total number of instances for which the Capacity Reservation reserves
     /// capacity.
-    total_instance_count: ?i32,
+    total_instance_count: ?i32 = null,
 
     /// The weight of the instance type in the Capacity Reservation Fleet. For more
     /// information, see [Instance type
     /// weight](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#instance-weight) in the *Amazon EC2 User Guide*.
-    weight: ?f64,
+    weight: ?f64 = null,
 };

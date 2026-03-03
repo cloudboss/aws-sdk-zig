@@ -4,7 +4,7 @@ const SuggestionTextWithHighlights = @import("suggestion_text_with_highlights.zi
 pub const SuggestionValue = struct {
     /// The `SuggestionTextWithHighlights` structure that contains
     /// the query suggestion text and highlights.
-    text: ?SuggestionTextWithHighlights,
+    text: ?SuggestionTextWithHighlights = null,
 
     pub const json_field_names = .{
         .text = "Text",

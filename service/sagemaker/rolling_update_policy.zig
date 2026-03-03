@@ -9,14 +9,14 @@ pub const RollingUpdatePolicy = struct {
 
     /// The time limit for the total deployment. Exceeding this limit causes a
     /// timeout.
-    maximum_execution_timeout_in_seconds: ?i32,
+    maximum_execution_timeout_in_seconds: ?i32 = null,
 
     /// Batch size for rollback to the old endpoint fleet. Each rolling step to
     /// provision capacity and turn on traffic on the old endpoint fleet, and
     /// terminate capacity on the new endpoint fleet. If this field is absent, the
     /// default value will be set to 100% of total capacity which means to bring up
     /// the whole capacity of the old fleet at once during rollback.
-    rollback_maximum_batch_size: ?CapacitySize,
+    rollback_maximum_batch_size: ?CapacitySize = null,
 
     /// The length of the baking period, during which SageMaker monitors alarms for
     /// each batch on the new fleet.

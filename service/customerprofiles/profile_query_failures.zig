@@ -7,7 +7,7 @@ pub const ProfileQueryFailures = struct {
     profile_id: []const u8,
 
     /// The status describing the failure.
-    status: ?i32,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .message = "Message",

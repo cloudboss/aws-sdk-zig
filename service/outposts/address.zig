@@ -4,10 +4,10 @@ pub const Address = struct {
     address_line_1: []const u8,
 
     /// The second line of the address.
-    address_line_2: ?[]const u8,
+    address_line_2: ?[]const u8 = null,
 
     /// The third line of the address.
-    address_line_3: ?[]const u8,
+    address_line_3: ?[]const u8 = null,
 
     /// The city for the address.
     city: []const u8,
@@ -22,10 +22,10 @@ pub const Address = struct {
     country_code: []const u8,
 
     /// The district or county for the address.
-    district_or_county: ?[]const u8,
+    district_or_county: ?[]const u8 = null,
 
     /// The municipality for the address.
-    municipality: ?[]const u8,
+    municipality: ?[]const u8 = null,
 
     /// The postal code for the address.
     postal_code: []const u8,

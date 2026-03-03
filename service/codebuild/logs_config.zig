@@ -7,12 +7,12 @@ const S3LogsConfig = @import("s3_logs_config.zig").S3LogsConfig;
 pub const LogsConfig = struct {
     /// Information about CloudWatch Logs for a build project. CloudWatch Logs are
     /// enabled by default.
-    cloud_watch_logs: ?CloudWatchLogsConfig,
+    cloud_watch_logs: ?CloudWatchLogsConfig = null,
 
     /// Information about logs built to an S3 bucket for a build project. S3 logs
     /// are not
     /// enabled by default.
-    s_3_logs: ?S3LogsConfig,
+    s_3_logs: ?S3LogsConfig = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs = "cloudWatchLogs",

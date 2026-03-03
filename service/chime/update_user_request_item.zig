@@ -6,16 +6,16 @@ const UserType = @import("user_type.zig").UserType;
 /// BatchUpdateUser action.
 pub const UpdateUserRequestItem = struct {
     /// The Alexa for Business metadata.
-    alexa_for_business_metadata: ?AlexaForBusinessMetadata,
+    alexa_for_business_metadata: ?AlexaForBusinessMetadata = null,
 
     /// The user license type.
-    license_type: ?License,
+    license_type: ?License = null,
 
     /// The user ID.
     user_id: []const u8,
 
     /// The user type.
-    user_type: ?UserType,
+    user_type: ?UserType = null,
 
     pub const json_field_names = .{
         .alexa_for_business_metadata = "AlexaForBusinessMetadata",

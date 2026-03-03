@@ -12,7 +12,7 @@ pub const ScalableTargetAction = struct {
     /// about the default
     /// quotas for each service, see [Service endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html) in the *Amazon Web Services General Reference*.
-    max_capacity: ?i32,
+    max_capacity: ?i32 = null,
 
     /// The minimum capacity.
     ///
@@ -21,7 +21,7 @@ pub const ScalableTargetAction = struct {
     /// might have more depending on other settings, such as the target utilization
     /// level of a target
     /// tracking scaling policy.
-    min_capacity: ?i32,
+    min_capacity: ?i32 = null,
 
     pub const json_field_names = .{
         .max_capacity = "MaxCapacity",

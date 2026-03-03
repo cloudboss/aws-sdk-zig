@@ -6,40 +6,40 @@ pub const Instance = struct {
     aws_account_id: []const u8,
 
     /// The instance creation timestamp.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The Amazon Web Services Supply Chain instance error message. If the instance
     /// results in an unhealthy state, customers need to check the error message,
     /// delete the current instance, and recreate a new one based on the mitigation
     /// from the error message.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The Amazon Web Services Supply Chain instance description.
-    instance_description: ?[]const u8,
+    instance_description: ?[]const u8 = null,
 
     /// The Amazon Web Services Supply Chain instance identifier.
     instance_id: []const u8,
 
     /// The Amazon Web Services Supply Chain instance name.
-    instance_name: ?[]const u8,
+    instance_name: ?[]const u8 = null,
 
     /// The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you
     /// optionally provided for encryption. If you did not provide anything here,
     /// AWS Supply Chain uses the Amazon Web Services owned KMS key and nothing is
     /// returned.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The instance last modified timestamp.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The state of the instance.
     state: InstanceState,
 
     /// The version number of the instance.
-    version_number: ?f64,
+    version_number: ?f64 = null,
 
     /// The WebApp DNS domain name of the instance.
-    web_app_dns_domain: ?[]const u8,
+    web_app_dns_domain: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_account_id = "awsAccountId",

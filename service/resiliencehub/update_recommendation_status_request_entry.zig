@@ -5,7 +5,7 @@ const UpdateRecommendationStatusItem = @import("update_recommendation_status_ite
 /// excluded.
 pub const UpdateRecommendationStatusRequestEntry = struct {
     /// Indicates the identifier of the AppComponent.
-    app_component_id: ?[]const u8,
+    app_component_id: ?[]const u8 = null,
 
     /// An identifier for an entry in this batch that is used to communicate the
     /// result.
@@ -19,10 +19,10 @@ pub const UpdateRecommendationStatusRequestEntry = struct {
     excluded: bool,
 
     /// Indicates the reason for excluding an operational recommendation.
-    exclude_reason: ?ExcludeRecommendationReason,
+    exclude_reason: ?ExcludeRecommendationReason = null,
 
     /// The operational recommendation item.
-    item: ?UpdateRecommendationStatusItem,
+    item: ?UpdateRecommendationStatusItem = null,
 
     /// Reference identifier of the operational recommendation item.
     reference_id: []const u8,

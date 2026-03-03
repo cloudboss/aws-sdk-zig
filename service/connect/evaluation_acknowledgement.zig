@@ -8,7 +8,7 @@ pub const EvaluationAcknowledgement = struct {
 
     /// A comment from the agent when they confirmed they acknowledged the
     /// evaluation.
-    acknowledger_comment: ?[]const u8,
+    acknowledger_comment: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .acknowledged_by = "AcknowledgedBy",

@@ -4,12 +4,12 @@ pub const KinesisFirehoseInputUpdate = struct {
     /// Amazon Resource Name (ARN) of the input Amazon Kinesis Firehose delivery
     /// stream to
     /// read.
-    resource_arn_update: ?[]const u8,
+    resource_arn_update: ?[]const u8 = null,
 
     /// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
     /// stream
     /// on your behalf. You need to grant the necessary permissions to this role.
-    role_arn_update: ?[]const u8,
+    role_arn_update: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resource_arn_update = "ResourceARNUpdate",

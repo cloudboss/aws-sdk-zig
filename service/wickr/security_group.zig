@@ -6,7 +6,7 @@ const SecurityGroupSettings = @import("security_group_settings.zig").SecurityGro
 pub const SecurityGroup = struct {
     /// The GUID of the Active Directory group associated with this security group,
     /// if synchronized with LDAP.
-    active_directory_guid: ?[]const u8,
+    active_directory_guid: ?[]const u8 = null,
 
     /// The number of active user members currently in the security group.
     active_members: i32,

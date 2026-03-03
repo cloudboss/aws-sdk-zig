@@ -2,7 +2,7 @@
 /// component type.
 pub const CompositeComponentTypeRequest = struct {
     /// This is the `componentTypeId` that the `compositeComponentType` refers to.
-    component_type_id: ?[]const u8,
+    component_type_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .component_type_id = "componentTypeId",

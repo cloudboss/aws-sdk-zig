@@ -28,7 +28,7 @@ pub const CacheBehaviorPerPath = struct {
     /// `dont-cache`
     /// ** - This behavior doesn't cache
     /// the specified path.
-    behavior: ?BehaviorEnum,
+    behavior: ?BehaviorEnum = null,
 
     /// The path to a directory or file to cached, or not cache. Use an asterisk
     /// symbol to specify
@@ -70,7 +70,7 @@ pub const CacheBehaviorPerPath = struct {
     /// root of an Apache web server.
     ///
     /// `var/www/html/images/`
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .behavior = "behavior",

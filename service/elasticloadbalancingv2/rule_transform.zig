@@ -8,7 +8,7 @@ pub const RuleTransform = struct {
     /// Information about a host header rewrite transform. This transform modifies
     /// the host header in an HTTP request.
     /// Specify only when `Type` is `host-header-rewrite`.
-    host_header_rewrite_config: ?HostHeaderRewriteConfig,
+    host_header_rewrite_config: ?HostHeaderRewriteConfig = null,
 
     /// The type of transform.
     ///
@@ -20,5 +20,5 @@ pub const RuleTransform = struct {
     /// Information about a URL rewrite transform. This transform modifies the
     /// request URL.
     /// Specify only when `Type` is `url-rewrite`.
-    url_rewrite_config: ?UrlRewriteConfig,
+    url_rewrite_config: ?UrlRewriteConfig = null,
 };

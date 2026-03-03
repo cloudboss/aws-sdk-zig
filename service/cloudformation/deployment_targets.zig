@@ -43,7 +43,7 @@ pub const DeploymentTargets = struct {
     ///
     /// * `NONE`: Performs stack operations on all accounts in the specified
     /// organizational units (OUs).
-    account_filter_type: ?AccountFilterType,
+    account_filter_type: ?AccountFilterType = null,
 
     /// The Amazon Web Services account IDs where you want to perform stack
     /// operations. How these accounts are
@@ -51,7 +51,7 @@ pub const DeploymentTargets = struct {
     ///
     /// If you have many account numbers, you can provide those accounts using the
     /// `AccountsUrl` property instead.
-    accounts: ?[]const []const u8,
+    accounts: ?[]const []const u8 = null,
 
     /// The Amazon S3 URL path to a file that contains a list of Amazon Web Services
     /// account IDs. The file
@@ -63,12 +63,12 @@ pub const DeploymentTargets = struct {
     /// This property serves the same purpose as `Accounts` but allows you to
     /// specify a
     /// large number of accounts.
-    accounts_url: ?[]const u8,
+    accounts_url: ?[]const u8 = null,
 
     /// The organization root ID or organizational unit (OU) IDs where you want to
     /// perform stack
     /// operations. CloudFormation will perform operations on accounts within these
     /// OUs and their child
     /// OUs.
-    organizational_unit_ids: ?[]const []const u8,
+    organizational_unit_ids: ?[]const []const u8 = null,
 };

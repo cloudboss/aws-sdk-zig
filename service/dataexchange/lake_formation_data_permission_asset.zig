@@ -16,7 +16,7 @@ pub const LakeFormationDataPermissionAsset = struct {
     /// The IAM role's ARN that allows AWS Data Exchange to assume the role and
     /// grant and revoke
     /// permissions to AWS Lake Formation data permissions.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .lake_formation_data_permission_details = "LakeFormationDataPermissionDetails",

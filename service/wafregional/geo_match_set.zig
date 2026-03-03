@@ -27,7 +27,7 @@ pub const GeoMatchSet = struct {
 
     /// A friendly name or description of the GeoMatchSet. You can't change the name
     /// of an `GeoMatchSet` after you create it.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .geo_match_constraints = "GeoMatchConstraints",

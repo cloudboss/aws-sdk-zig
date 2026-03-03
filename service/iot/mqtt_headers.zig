@@ -12,7 +12,7 @@ pub const MqttHeaders = struct {
     ///
     /// Supports [substitution
     /// templates](https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html).
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// The base64-encoded binary data used by the sender of the request message to
     /// identify which request the response message is
@@ -26,7 +26,7 @@ pub const MqttHeaders = struct {
     ///
     /// Supports [substitution
     /// templates](https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html).
-    correlation_data: ?[]const u8,
+    correlation_data: ?[]const u8 = null,
 
     /// A user-defined integer value that will persist a message at the message
     /// broker for a
@@ -42,7 +42,7 @@ pub const MqttHeaders = struct {
     ///
     /// Supports [substitution
     /// templates](https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html).
-    message_expiry: ?[]const u8,
+    message_expiry: ?[]const u8 = null,
 
     /// An `Enum` string value that indicates whether the payload is formatted as
     /// UTF-8.
@@ -55,7 +55,7 @@ pub const MqttHeaders = struct {
     ///
     /// Supports [substitution
     /// templates](https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html).
-    payload_format_indicator: ?[]const u8,
+    payload_format_indicator: ?[]const u8 = null,
 
     /// A UTF-8 encoded string that's used as the topic name for a response message.
     /// The response topic is used to describe
@@ -69,10 +69,10 @@ pub const MqttHeaders = struct {
     ///
     /// Supports [substitution
     /// templates](https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html).
-    response_topic: ?[]const u8,
+    response_topic: ?[]const u8 = null,
 
     /// An array of key-value pairs that you define in the MQTT5 header.
-    user_properties: ?[]const UserProperty,
+    user_properties: ?[]const UserProperty = null,
 
     pub const json_field_names = .{
         .content_type = "contentType",

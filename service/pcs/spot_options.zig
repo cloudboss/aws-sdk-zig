@@ -8,7 +8,7 @@ pub const SpotOptions = struct {
     /// optimized**. For more information, see [Use allocation strategies to
     /// determine how EC2 Fleet or Spot Fleet fulfills Spot and On-Demand
     /// capacity](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-allocation-strategy.html) in the *Amazon Elastic Compute Cloud User Guide*. If you don't provide this option, it defaults to **price capacity optimized**.
-    allocation_strategy: ?SpotAllocationStrategy,
+    allocation_strategy: ?SpotAllocationStrategy = null,
 
     pub const json_field_names = .{
         .allocation_strategy = "allocationStrategy",

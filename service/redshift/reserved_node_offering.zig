@@ -4,37 +4,37 @@ const ReservedNodeOfferingType = @import("reserved_node_offering_type.zig").Rese
 /// Describes a reserved node offering.
 pub const ReservedNodeOffering = struct {
     /// The currency code for the compute nodes offering.
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// The duration, in seconds, for which the offering will reserve the node.
-    duration: ?i32,
+    duration: ?i32 = null,
 
     /// The upfront fixed charge you will pay to purchase the specific reserved node
     /// offering.
-    fixed_price: ?f64,
+    fixed_price: ?f64 = null,
 
     /// The node type offered by the reserved node offering.
-    node_type: ?[]const u8,
+    node_type: ?[]const u8 = null,
 
     /// The anticipated utilization of the reserved node, as defined in the reserved
     /// node
     /// offering.
-    offering_type: ?[]const u8,
+    offering_type: ?[]const u8 = null,
 
     /// The charge to your account regardless of whether you are creating any
     /// clusters
     /// using the node offering. Recurring charges are only in effect for
     /// heavy-utilization
     /// reserved nodes.
-    recurring_charges: ?[]const RecurringCharge,
+    recurring_charges: ?[]const RecurringCharge = null,
 
     /// The offering identifier.
-    reserved_node_offering_id: ?[]const u8,
+    reserved_node_offering_id: ?[]const u8 = null,
 
-    reserved_node_offering_type: ?ReservedNodeOfferingType,
+    reserved_node_offering_type: ?ReservedNodeOfferingType = null,
 
     /// The rate you are charged for each hour the cluster that is using the
     /// offering is
     /// running.
-    usage_price: ?f64,
+    usage_price: ?f64 = null,
 };

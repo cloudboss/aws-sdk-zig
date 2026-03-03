@@ -27,15 +27,15 @@ pub const KMSServerSideEncryptionIntegrationConfig = struct {
     /// Alias name: alias/ExampleAlias
     ///
     /// Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Specifies if DevOps Guru is enabled for KMS integration.
-    opt_in_status: ?OptInStatus,
+    opt_in_status: ?OptInStatus = null,
 
     /// The type of KMS key used. Customer managed keys are the KMS keys that you
     /// create. Amazon Web Services owned keys are keys that are owned and managed
     /// by DevOps Guru.
-    @"type": ?ServerSideEncryptionType,
+    @"type": ?ServerSideEncryptionType = null,
 
     pub const json_field_names = .{
         .kms_key_id = "KMSKeyId",

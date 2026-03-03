@@ -8,7 +8,7 @@ pub const S3Location = struct {
 
     /// The name of the Amazon S3 version ID where the resource is stored
     /// (Optional).
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

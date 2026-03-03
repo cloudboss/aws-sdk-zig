@@ -9,13 +9,13 @@ pub const Application = struct {
     /// `ACCESS` permission is supported. For MCP Servers, the permissions are tool
     /// Identifiers accepted by MCP
     /// Server.
-    application_permissions: ?[]const []const u8,
+    application_permissions: ?[]const []const u8 = null,
 
     /// Namespace of the application that you want to give access to.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// Type of Application.
-    @"type": ?ApplicationType,
+    @"type": ?ApplicationType = null,
 
     pub const json_field_names = .{
         .application_permissions = "ApplicationPermissions",

@@ -15,5 +15,5 @@ const CpuPerformanceFactorRequest = @import("cpu_performance_factor_request.zig"
 pub const BaselinePerformanceFactorsRequest = struct {
     /// The CPU performance to consider, using an instance family as the baseline
     /// reference.
-    cpu: ?CpuPerformanceFactorRequest,
+    cpu: ?CpuPerformanceFactorRequest = null,
 };

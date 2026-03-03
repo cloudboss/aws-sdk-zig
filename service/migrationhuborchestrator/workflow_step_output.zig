@@ -4,16 +4,16 @@ const WorkflowStepOutputUnion = @import("workflow_step_output_union.zig").Workfl
 /// The output of a step.
 pub const WorkflowStepOutput = struct {
     /// The data type of the output.
-    data_type: ?DataType,
+    data_type: ?DataType = null,
 
     /// The name of the step.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Determine if an output is required from a step.
-    required: ?bool,
+    required: ?bool = null,
 
     /// The value of the output.
-    value: ?WorkflowStepOutputUnion,
+    value: ?WorkflowStepOutputUnion = null,
 
     pub const json_field_names = .{
         .data_type = "dataType",

@@ -5,10 +5,10 @@ const AutoScalingSpecification = @import("auto_scaling_specification.zig").AutoS
 pub const ReplicaAutoScalingSpecification = struct {
     /// The auto scaling settings for a multi-Region table in the specified Amazon
     /// Web Services Region.
-    auto_scaling_specification: ?AutoScalingSpecification,
+    auto_scaling_specification: ?AutoScalingSpecification = null,
 
     /// The Amazon Web Services Region.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_scaling_specification = "autoScalingSpecification",

@@ -13,7 +13,7 @@ pub const AuditEvent = struct {
     /// following:
     ///
     /// `printf %s *$eventdata* | openssl dgst -binary -sha256 | base64`
-    event_data_checksum: ?[]const u8,
+    event_data_checksum: ?[]const u8 = null,
 
     /// The original event ID from the source event.
     id: []const u8,

@@ -4,13 +4,13 @@ const UserAssignment = @import("user_assignment.zig").UserAssignment;
 /// The single sign-on details in Amazon DataZone.
 pub const SingleSignOn = struct {
     /// The ARN of the IDC instance.
-    idc_instance_arn: ?[]const u8,
+    idc_instance_arn: ?[]const u8 = null,
 
     /// The type of single sign-on in Amazon DataZone.
-    @"type": ?AuthType,
+    @"type": ?AuthType = null,
 
     /// The single sign-on user assignment in Amazon DataZone.
-    user_assignment: ?UserAssignment,
+    user_assignment: ?UserAssignment = null,
 
     pub const json_field_names = .{
         .idc_instance_arn = "idcInstanceArn",

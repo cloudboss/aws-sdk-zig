@@ -3,19 +3,19 @@
 /// meeting.
 pub const MediaPlacement = struct {
     /// The audio fallback URL.
-    audio_fallback_url: ?[]const u8,
+    audio_fallback_url: ?[]const u8 = null,
 
     /// The audio host URL.
-    audio_host_url: ?[]const u8,
+    audio_host_url: ?[]const u8 = null,
 
     /// The event ingestion URL to which you send client meeting events.
-    event_ingestion_url: ?[]const u8,
+    event_ingestion_url: ?[]const u8 = null,
 
     /// The signaling URL.
-    signaling_url: ?[]const u8,
+    signaling_url: ?[]const u8 = null,
 
     /// The turn control URL.
-    turn_control_url: ?[]const u8,
+    turn_control_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .audio_fallback_url = "AudioFallbackUrl",

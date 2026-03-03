@@ -5,19 +5,19 @@ const InsightImpactGraphEdge = @import("insight_impact_graph_edge.zig").InsightI
 /// resources, and applications that an application used.
 pub const InsightImpactGraphService = struct {
     /// Identifier of the Amazon Web Services account in which the service runs.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Connections to downstream services.
-    edges: ?[]const InsightImpactGraphEdge,
+    edges: ?[]const InsightImpactGraphEdge = null,
 
     /// The canonical name of the service.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A list of names for the service, including the canonical name.
-    names: ?[]const []const u8,
+    names: ?[]const []const u8 = null,
 
     /// Identifier for the service. Unique within the service map.
-    reference_id: ?i32,
+    reference_id: ?i32 = null,
 
     /// Identifier for the service. Unique within the service map.
     ///
@@ -35,7 +35,7 @@ pub const InsightImpactGraphService = struct {
     /// DynamoDB that didn't target a specific table.
     ///
     /// * remote - A downstream service of indeterminate type.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

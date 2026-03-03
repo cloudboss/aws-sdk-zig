@@ -9,12 +9,12 @@ pub const SsmParameterConfiguration = struct {
     /// this account must be specified in distribution settings as a target account
     /// for the
     /// Region.
-    ami_account_id: ?[]const u8,
+    ami_account_id: ?[]const u8 = null,
 
     /// The data type specifies what type of value the Parameter contains. We
     /// recommend that
     /// you use data type `aws:ec2:image`.
-    data_type: ?SsmParameterDataType,
+    data_type: ?SsmParameterDataType = null,
 
     /// This is the name of the Parameter in the target Region or account. The image
     /// distribution creates the Parameter if it doesn't already exist. Otherwise,

@@ -24,27 +24,27 @@ pub const LanguageModel = struct {
     /// The Amazon Transcribe standard language model, or base model, used to create
     /// your
     /// custom language model.
-    base_model_name: ?BaseModelName,
+    base_model_name: ?BaseModelName = null,
 
     /// The date and time the specified custom language model was created.
     ///
     /// Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     /// example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM UTC-7 on May
     /// 4, 2022.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// If `ModelStatus` is `FAILED`, `FailureReason`
     /// contains information about why the custom language model request failed. See
     /// also:
     /// [Common
     /// Errors](https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html).
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The Amazon S3 location of the input files used to train and tune your custom
     /// language model, in addition to the data access role ARN (Amazon Resource
     /// Name) that has
     /// permissions to access these data.
-    input_data_config: ?InputDataConfig,
+    input_data_config: ?InputDataConfig = null,
 
     /// The language code used to create your custom language model. Each custom
     /// language
@@ -58,26 +58,26 @@ pub const LanguageModel = struct {
     /// [Supported
     /// languages](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html) table. Note that US English (`en-US`) is
     /// the only language supported with Amazon Transcribe Medical.
-    language_code: ?CLMLanguageCode,
+    language_code: ?CLMLanguageCode = null,
 
     /// The date and time the specified custom language model was last modified.
     ///
     /// Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     /// example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM UTC-7 on May
     /// 4, 2022.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// A unique name, chosen by you, for your custom language model.
     ///
     /// This name is case sensitive, cannot contain spaces, and must be unique
     /// within an
     /// Amazon Web Services account.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     /// The status of the specified custom language model. When the status displays
     /// as
     /// `COMPLETED` the model is ready for use.
-    model_status: ?ModelStatus,
+    model_status: ?ModelStatus = null,
 
     /// Shows if a more current base model is available for use with the specified
     /// custom
@@ -94,7 +94,7 @@ pub const LanguageModel = struct {
     /// the new base model. Base model upgrades for existing custom language models
     /// are not
     /// supported.
-    upgrade_availability: ?bool,
+    upgrade_availability: ?bool = null,
 
     pub const json_field_names = .{
         .base_model_name = "BaseModelName",

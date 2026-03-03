@@ -5,7 +5,7 @@
 pub const LiveViewStream = struct {
     /// The endpoint URL for the live view stream. This URL is used to establish a
     /// connection to receive visual updates from the browser session.
-    stream_endpoint: ?[]const u8,
+    stream_endpoint: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .stream_endpoint = "streamEndpoint",

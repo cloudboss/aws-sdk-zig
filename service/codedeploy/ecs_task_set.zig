@@ -20,7 +20,7 @@ pub const ECSTaskSet = struct {
     desired_count: i64 = 0,
 
     /// A unique ID of an `ECSTaskSet`.
-    identifer: ?[]const u8,
+    identifer: ?[]const u8 = null,
 
     /// The number of tasks in the task set that are in the `PENDING` status
     /// during an Amazon ECS deployment. A task in the `PENDING` state is
@@ -42,15 +42,15 @@ pub const ECSTaskSet = struct {
     ///
     /// * `DRAINING`: Indicates the tasks in the task set are being stopped and
     /// their corresponding targets are being deregistered from their target group.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The target group associated with the task set. The target group is used by
     /// CodeDeploy to manage traffic to a task set.
-    target_group: ?TargetGroupInfo,
+    target_group: ?TargetGroupInfo = null,
 
     /// A label that identifies whether the ECS task set is an original target
     /// (`BLUE`) or a replacement target (`GREEN`).
-    task_set_label: ?TargetLabel,
+    task_set_label: ?TargetLabel = null,
 
     /// The percentage of traffic served by this task set.
     traffic_weight: f64 = 0,

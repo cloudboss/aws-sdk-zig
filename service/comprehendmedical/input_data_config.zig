@@ -8,7 +8,7 @@ pub const InputDataConfig = struct {
     s3_bucket: []const u8,
 
     /// The path to the input data files in the S3 bucket.
-    s3_key: ?[]const u8,
+    s3_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s3_bucket = "S3Bucket",

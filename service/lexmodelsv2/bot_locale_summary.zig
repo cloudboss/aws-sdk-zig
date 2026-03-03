@@ -5,24 +5,24 @@ const BotLocaleStatus = @import("bot_locale_status.zig").BotLocaleStatus;
 pub const BotLocaleSummary = struct {
     /// The current status of the bot locale. When the status is
     /// `Built` the locale is ready for use.
-    bot_locale_status: ?BotLocaleStatus,
+    bot_locale_status: ?BotLocaleStatus = null,
 
     /// The description of the bot locale.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A timestamp of the date and time that the bot locale was last
     /// built.
-    last_build_submitted_date_time: ?i64,
+    last_build_submitted_date_time: ?i64 = null,
 
     /// A timestamp of the date and time that the bot locale was last
     /// updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The language and locale of the bot locale.
-    locale_id: ?[]const u8,
+    locale_id: ?[]const u8 = null,
 
     /// The name of the bot locale.
-    locale_name: ?[]const u8,
+    locale_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bot_locale_status = "botLocaleStatus",

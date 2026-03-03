@@ -27,7 +27,7 @@ pub const ResourceSetOutput = struct {
     /// AWS::Route53RecoveryReadiness::DNSTargetResource
     resource_set_type: []const u8,
 
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .resources = "Resources",

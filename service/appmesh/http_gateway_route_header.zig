@@ -5,12 +5,12 @@ pub const HttpGatewayRouteHeader = struct {
     /// Specify `True` to match anything except the match criteria. The default
     /// value
     /// is `False`.
-    invert: ?bool,
+    invert: ?bool = null,
 
     /// An object that represents the method and value to match with the header
     /// value sent in a
     /// request. Specify one match method.
-    match: ?HeaderMatchMethod,
+    match: ?HeaderMatchMethod = null,
 
     /// A name for the HTTP header in the gateway route that will be matched on.
     name: []const u8,

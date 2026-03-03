@@ -4,18 +4,18 @@
 pub const ConnectionTypeVariant = struct {
     /// The unique identifier for the connection type variant. This name is used
     /// internally to identify the specific variant of a connection type.
-    connection_type_variant_name: ?[]const u8,
+    connection_type_variant_name: ?[]const u8 = null,
 
     /// A detailed description of the connection type variant, including its
     /// purpose, use cases, and any specific configuration requirements.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The human-readable name for the connection type variant that is displayed in
     /// the Glue console.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The URL of the logo associated with a connection type variant.
-    logo_url: ?[]const u8,
+    logo_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connection_type_variant_name = "ConnectionTypeVariantName",

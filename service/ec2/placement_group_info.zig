@@ -3,5 +3,5 @@ const PlacementGroupStrategy = @import("placement_group_strategy.zig").Placement
 /// Describes the placement group support of the instance type.
 pub const PlacementGroupInfo = struct {
     /// The supported placement group types.
-    supported_strategies: ?[]const PlacementGroupStrategy,
+    supported_strategies: ?[]const PlacementGroupStrategy = null,
 };

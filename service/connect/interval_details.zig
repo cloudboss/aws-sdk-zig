@@ -40,10 +40,10 @@ pub const IntervalDetails = struct {
     /// * `TOTAL`: The difference between `StartTime` and `EndTime` must be less
     ///   than
     /// 35 days.
-    interval_period: ?IntervalPeriod,
+    interval_period: ?IntervalPeriod = null,
 
     /// The timezone applied to requested metrics.
-    time_zone: ?[]const u8,
+    time_zone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .interval_period = "IntervalPeriod",

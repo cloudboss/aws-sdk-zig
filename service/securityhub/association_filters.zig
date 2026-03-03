@@ -8,15 +8,15 @@ const AssociationType = @import("association_type.zig").AssociationType;
 pub const AssociationFilters = struct {
     /// The current status of the association between a target and a configuration
     /// policy.
-    association_status: ?ConfigurationPolicyAssociationStatus,
+    association_status: ?ConfigurationPolicyAssociationStatus = null,
 
     /// Indicates whether the association between a target and a configuration was
     /// directly applied by the
     /// Security Hub delegated administrator or inherited from a parent.
-    association_type: ?AssociationType,
+    association_type: ?AssociationType = null,
 
     /// The ARN or UUID of the configuration policy.
-    configuration_policy_id: ?[]const u8,
+    configuration_policy_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_status = "AssociationStatus",

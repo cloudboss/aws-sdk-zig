@@ -12,10 +12,10 @@ pub const Condition = struct {
     /// The action to be done when the condition is met. For example, rolling back
     /// an
     /// execution for a failure condition.
-    result: ?Result,
+    result: ?Result = null,
 
     /// The rules that make up the condition.
-    rules: ?[]const RuleDeclaration,
+    rules: ?[]const RuleDeclaration = null,
 
     pub const json_field_names = .{
         .result = "result",

@@ -3,7 +3,7 @@ const FunctionSummary = @import("function_summary.zig").FunctionSummary;
 /// A list of CloudFront functions.
 pub const FunctionList = struct {
     /// Contains the functions in the list.
-    items: ?[]const FunctionSummary,
+    items: ?[]const FunctionSummary = null,
 
     /// The maximum number of functions requested.
     max_items: i32,
@@ -11,7 +11,7 @@ pub const FunctionList = struct {
     /// If there are more items in the list than are in this response, this element
     /// is present. It contains the value that you should use in the `Marker` field
     /// of a subsequent request to continue listing functions where you left off.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The number of functions returned in the response.
     quantity: i32,

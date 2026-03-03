@@ -6,7 +6,7 @@ pub const CreateGroupRequest = struct {
     aws_account_id: []const u8,
 
     /// A description for the group that you want to create.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A name for the group that you want to create.
     group_name: []const u8,

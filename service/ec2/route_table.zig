@@ -6,23 +6,23 @@ const Tag = @import("tag.zig").Tag;
 /// Describes a route table.
 pub const RouteTable = struct {
     /// The associations between the route table and your subnets or gateways.
-    associations: ?[]const RouteTableAssociation,
+    associations: ?[]const RouteTableAssociation = null,
 
     /// The ID of the Amazon Web Services account that owns the route table.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// Any virtual private gateway (VGW) propagating routes.
-    propagating_vgws: ?[]const PropagatingVgw,
+    propagating_vgws: ?[]const PropagatingVgw = null,
 
     /// The routes in the route table.
-    routes: ?[]const Route,
+    routes: ?[]const Route = null,
 
     /// The ID of the route table.
-    route_table_id: ?[]const u8,
+    route_table_id: ?[]const u8 = null,
 
     /// Any tags assigned to the route table.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the VPC.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

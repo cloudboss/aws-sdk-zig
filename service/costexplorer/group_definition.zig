@@ -5,10 +5,10 @@ const GroupDefinitionType = @import("group_definition_type.zig").GroupDefinition
 /// with a specific grouping.
 pub const GroupDefinition = struct {
     /// The string that represents a key for a specified group.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The string that represents the type of group.
-    @"type": ?GroupDefinitionType,
+    @"type": ?GroupDefinitionType = null,
 
     pub const json_field_names = .{
         .key = "Key",

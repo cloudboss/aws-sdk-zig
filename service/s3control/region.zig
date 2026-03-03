@@ -7,5 +7,5 @@ pub const Region = struct {
     /// The Amazon Web Services account ID that owns the Amazon S3 bucket that's
     /// associated with this
     /// Multi-Region Access Point.
-    bucket_account_id: ?[]const u8,
+    bucket_account_id: ?[]const u8 = null,
 };

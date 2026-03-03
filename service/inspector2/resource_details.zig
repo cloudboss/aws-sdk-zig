@@ -7,20 +7,20 @@ const CodeRepositoryDetails = @import("code_repository_details.zig").CodeReposit
 pub const ResourceDetails = struct {
     /// An object that contains details about the Amazon EC2 instance involved in
     /// the finding.
-    aws_ec_2_instance: ?AwsEc2InstanceDetails,
+    aws_ec_2_instance: ?AwsEc2InstanceDetails = null,
 
     /// An object that contains details about the Amazon ECR container image
     /// involved in the
     /// finding.
-    aws_ecr_container_image: ?AwsEcrContainerImageDetails,
+    aws_ecr_container_image: ?AwsEcrContainerImageDetails = null,
 
     /// A summary of the information about an Amazon Web Services Lambda function
     /// affected by a
     /// finding.
-    aws_lambda_function: ?AwsLambdaFunctionDetails,
+    aws_lambda_function: ?AwsLambdaFunctionDetails = null,
 
     /// Contains details about a code repository resource associated with a finding.
-    code_repository: ?CodeRepositoryDetails,
+    code_repository: ?CodeRepositoryDetails = null,
 
     pub const json_field_names = .{
         .aws_ec_2_instance = "awsEc2Instance",

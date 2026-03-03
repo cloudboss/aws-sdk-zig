@@ -17,7 +17,7 @@ pub const EfsFileSystemConfiguration = struct {
     /// information on the elements that make up a file system policy, see [Amazon
     /// EFS Resource-based
     /// policies](https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies).
-    file_system_policy: ?[]const u8,
+    file_system_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .file_system_policy = "fileSystemPolicy",

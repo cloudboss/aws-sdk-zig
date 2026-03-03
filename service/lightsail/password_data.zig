@@ -20,7 +20,7 @@ pub const PasswordData = struct {
     /// you need to
     /// manually enter the Administrator password after changing it from the
     /// default.
-    ciphertext: ?[]const u8,
+    ciphertext: ?[]const u8 = null,
 
     /// The name of the key pair that you used when creating your instance. If no
     /// key pair name
@@ -33,7 +33,7 @@ pub const PasswordData = struct {
     /// password using the `ciphertext`. Lightsail creates the ciphertext by
     /// encrypting
     /// your password with the public key part of this key pair.
-    key_pair_name: ?[]const u8,
+    key_pair_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ciphertext = "ciphertext",

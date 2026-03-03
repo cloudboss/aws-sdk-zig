@@ -11,32 +11,32 @@ pub const ParquetSerDe = struct {
     /// copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB
     /// and the
     /// minimum is 64 MiB. Firehose uses this value for padding calculations.
-    block_size_bytes: ?i32,
+    block_size_bytes: ?i32 = null,
 
     /// The compression code to use over data blocks. The possible values are
     /// `UNCOMPRESSED`, `SNAPPY`, and `GZIP`, with the default
     /// being `SNAPPY`. Use `SNAPPY` for higher decompression speed. Use
     /// `GZIP` if the compression ratio is more important than speed.
-    compression: ?ParquetCompression,
+    compression: ?ParquetCompression = null,
 
     /// Indicates whether to enable dictionary compression.
-    enable_dictionary_compression: ?bool,
+    enable_dictionary_compression: ?bool = null,
 
     /// The maximum amount of padding to apply. This is useful if you intend to copy
     /// the data
     /// from Amazon S3 to HDFS before querying. The default is 0.
-    max_padding_bytes: ?i32,
+    max_padding_bytes: ?i32 = null,
 
     /// The Parquet page size. Column chunks are divided into pages. A page is
     /// conceptually an
     /// indivisible unit (in terms of compression and encoding). The minimum value
     /// is 64 KiB and
     /// the default is 1 MiB.
-    page_size_bytes: ?i32,
+    page_size_bytes: ?i32 = null,
 
     /// Indicates the version of row format to output. The possible values are `V1`
     /// and `V2`. The default is `V1`.
-    writer_version: ?ParquetWriterVersion,
+    writer_version: ?ParquetWriterVersion = null,
 
     pub const json_field_names = .{
         .block_size_bytes = "BlockSizeBytes",

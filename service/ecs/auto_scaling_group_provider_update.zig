@@ -9,10 +9,10 @@ pub const AutoScalingGroupProviderUpdate = struct {
     /// enable this, Amazon ECS manages and gracefully drains the EC2 container
     /// instances that
     /// are in the Auto Scaling group capacity provider.
-    managed_draining: ?ManagedDraining,
+    managed_draining: ?ManagedDraining = null,
 
     /// The managed scaling settings for the Auto Scaling group capacity provider.
-    managed_scaling: ?ManagedScaling,
+    managed_scaling: ?ManagedScaling = null,
 
     /// The managed termination protection setting to use for the Auto Scaling group
     /// capacity
@@ -37,7 +37,7 @@ pub const AutoScalingGroupProviderUpdate = struct {
     /// When managed termination protection is off, your Amazon EC2 instances aren't
     /// protected
     /// from termination when the Auto Scaling group scales in.
-    managed_termination_protection: ?ManagedTerminationProtection,
+    managed_termination_protection: ?ManagedTerminationProtection = null,
 
     pub const json_field_names = .{
         .managed_draining = "managedDraining",

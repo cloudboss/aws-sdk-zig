@@ -16,7 +16,7 @@ pub const TimecodeConfig = struct {
     /// input timecode. Discrepancies below this threshold are permitted to avoid
     /// unnecessary discontinuities in the output timecode. No timecode sync when
     /// this is not specified.
-    sync_threshold: ?i32,
+    sync_threshold: ?i32 = null,
 
     pub const json_field_names = .{
         .source = "Source",

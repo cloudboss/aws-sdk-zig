@@ -9,69 +9,69 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 /// Contains sandbox information.
 pub const Sandbox = struct {
     /// The ARN of the sandbox.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The current session for the sandbox.
-    current_session: ?SandboxSession,
+    current_session: ?SandboxSession = null,
 
     /// The Key Management Service customer master key (CMK) to be used for
     /// encrypting the sandbox output
     /// artifacts.
-    encryption_key: ?[]const u8,
+    encryption_key: ?[]const u8 = null,
 
     /// When the sandbox process ended, expressed in Unix time format.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
-    environment: ?ProjectEnvironment,
+    environment: ?ProjectEnvironment = null,
 
     /// An array of `ProjectFileSystemLocation` objects for a CodeBuild build
     /// project. A `ProjectFileSystemLocation` object
     /// specifies the `identifier`, `location`, `mountOptions`,
     /// `mountPoint`, and `type` of a file system created using Amazon Elastic File
     /// System.
-    file_system_locations: ?[]const ProjectFileSystemLocation,
+    file_system_locations: ?[]const ProjectFileSystemLocation = null,
 
     /// The ID of the sandbox.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
-    log_config: ?LogsConfig,
+    log_config: ?LogsConfig = null,
 
     /// The CodeBuild project name.
-    project_name: ?[]const u8,
+    project_name: ?[]const u8 = null,
 
     /// The number of minutes a sandbox is allowed to be queued before it times out.
-    queued_timeout_in_minutes: ?i32,
+    queued_timeout_in_minutes: ?i32 = null,
 
     /// When the sandbox process was initially requested, expressed in Unix time
     /// format.
-    request_time: ?i64,
+    request_time: ?i64 = null,
 
     /// An array of `ProjectSource` objects.
-    secondary_sources: ?[]const ProjectSource,
+    secondary_sources: ?[]const ProjectSource = null,
 
     /// An array of `ProjectSourceVersion` objects.
-    secondary_source_versions: ?[]const ProjectSourceVersion,
+    secondary_source_versions: ?[]const ProjectSourceVersion = null,
 
     /// The name of a service role used for this sandbox.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
-    source: ?ProjectSource,
+    source: ?ProjectSource = null,
 
     /// Any version identifier for the version of the sandbox to be built.
-    source_version: ?[]const u8,
+    source_version: ?[]const u8 = null,
 
     /// When the sandbox process started, expressed in Unix time format.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of the sandbox.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait
     /// before timing out this sandbox if it does not
     /// get marked as completed.
-    timeout_in_minutes: ?i32,
+    timeout_in_minutes: ?i32 = null,
 
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .arn = "arn",

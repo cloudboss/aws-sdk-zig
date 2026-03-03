@@ -5,7 +5,7 @@ pub const ResourceDataSyncSource = struct {
     /// Information about the `AwsOrganizationsSource` resource data sync source. A
     /// sync
     /// source of this type can synchronize data from Organizations.
-    aws_organizations_source: ?ResourceDataSyncAwsOrganizationsSource,
+    aws_organizations_source: ?ResourceDataSyncAwsOrganizationsSource = null,
 
     /// When you create a resource data sync, if you choose one of the Organizations
     /// options, then Systems Manager

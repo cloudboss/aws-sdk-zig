@@ -17,7 +17,7 @@ pub const LabelingJobOutputConfig = struct {
     /// `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more information, see
     /// [KMS-Managed Encryption
     /// Keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the *Amazon Simple Storage Service Developer Guide.*
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The Amazon S3 location to write output data.
     s3_output_path: []const u8,
@@ -33,7 +33,7 @@ pub const LabelingJobOutputConfig = struct {
     ///
     /// To learn more, see [Receive Output Data from a Streaming Labeling
     /// Job](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-output-data).
-    sns_topic_arn: ?[]const u8,
+    sns_topic_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .kms_key_id = "KmsKeyId",

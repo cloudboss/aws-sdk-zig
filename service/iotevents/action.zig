@@ -15,7 +15,7 @@ const SqsAction = @import("sqs_action.zig").SqsAction;
 /// An action to be performed when the `condition` is TRUE.
 pub const Action = struct {
     /// Information needed to clear the timer.
-    clear_timer: ?ClearTimerAction,
+    clear_timer: ?ClearTimerAction = null,
 
     /// Writes to the DynamoDB table that you created. The default action payload
     /// contains all
@@ -28,7 +28,7 @@ pub const Action = struct {
     /// information, see
     /// [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in
     /// *AWS IoT Events Developer Guide*.
-    dynamo_db: ?DynamoDBAction,
+    dynamo_db: ?DynamoDBAction = null,
 
     /// Writes to the DynamoDB table that you created. The default action payload
     /// contains all
@@ -41,48 +41,48 @@ pub const Action = struct {
     /// information, see
     /// [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in
     /// *AWS IoT Events Developer Guide*.
-    dynamo_d_bv_2: ?DynamoDBv2Action,
+    dynamo_d_bv_2: ?DynamoDBv2Action = null,
 
     /// Sends information about the detector model instance and the event that
     /// triggered the
     /// action to an Amazon Kinesis Data Firehose delivery stream.
-    firehose: ?FirehoseAction,
+    firehose: ?FirehoseAction = null,
 
     /// Sends AWS IoT Events input, which passes information about the detector
     /// model instance and the
     /// event that triggered the action.
-    iot_events: ?IotEventsAction,
+    iot_events: ?IotEventsAction = null,
 
     /// Sends information about the detector model instance and the event that
     /// triggered the
     /// action to an asset property in AWS IoT SiteWise .
-    iot_site_wise: ?IotSiteWiseAction,
+    iot_site_wise: ?IotSiteWiseAction = null,
 
     /// Publishes an MQTT message with the given topic to the AWS IoT message
     /// broker.
-    iot_topic_publish: ?IotTopicPublishAction,
+    iot_topic_publish: ?IotTopicPublishAction = null,
 
     /// Calls a Lambda function, passing in information about the detector model
     /// instance and the
     /// event that triggered the action.
-    lambda: ?LambdaAction,
+    lambda: ?LambdaAction = null,
 
     /// Information needed to reset the timer.
-    reset_timer: ?ResetTimerAction,
+    reset_timer: ?ResetTimerAction = null,
 
     /// Information needed to set the timer.
-    set_timer: ?SetTimerAction,
+    set_timer: ?SetTimerAction = null,
 
     /// Sets a variable to a specified value.
-    set_variable: ?SetVariableAction,
+    set_variable: ?SetVariableAction = null,
 
     /// Sends an Amazon SNS message.
-    sns: ?SNSTopicPublishAction,
+    sns: ?SNSTopicPublishAction = null,
 
     /// Sends information about the detector model instance and the event that
     /// triggered the
     /// action to an Amazon SQS queue.
-    sqs: ?SqsAction,
+    sqs: ?SqsAction = null,
 
     pub const json_field_names = .{
         .clear_timer = "clearTimer",

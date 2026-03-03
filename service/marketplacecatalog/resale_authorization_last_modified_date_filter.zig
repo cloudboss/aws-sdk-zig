@@ -4,7 +4,7 @@ const ResaleAuthorizationLastModifiedDateFilterDateRange = @import("resale_autho
 pub const ResaleAuthorizationLastModifiedDateFilter = struct {
     /// Allows filtering on the `LastModifiedDate` of a ResaleAuthorization with
     /// date range as input.
-    date_range: ?ResaleAuthorizationLastModifiedDateFilterDateRange,
+    date_range: ?ResaleAuthorizationLastModifiedDateFilterDateRange = null,
 
     pub const json_field_names = .{
         .date_range = "DateRange",

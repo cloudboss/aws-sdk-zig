@@ -5,7 +5,7 @@ pub const CORSRule = struct {
     /// are allowed in a preflight OPTIONS request. In response to any preflight
     /// OPTIONS request, Amazon S3 returns
     /// any requested headers that are allowed.
-    allowed_headers: ?[]const []const u8,
+    allowed_headers: ?[]const []const u8 = null,
 
     /// An HTTP method that you allow the origin to execute. Valid values are `GET`,
     /// `PUT`, `HEAD`, `POST`, and `DELETE`.
@@ -17,14 +17,14 @@ pub const CORSRule = struct {
     /// One or more headers in the response that you want customers to be able to
     /// access from their
     /// applications (for example, from a JavaScript `XMLHttpRequest` object).
-    expose_headers: ?[]const []const u8,
+    expose_headers: ?[]const []const u8 = null,
 
     /// Unique identifier for the rule. The value cannot be longer than 255
     /// characters.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The time in seconds that your browser is to cache the preflight response for
     /// the specified
     /// resource.
-    max_age_seconds: ?i32,
+    max_age_seconds: ?i32 = null,
 };

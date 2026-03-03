@@ -8,19 +8,19 @@ pub const LogDeliveryConfigurationRequest = struct {
     /// Configuration details of either a CloudWatch Logs destination or Kinesis
     /// Data Firehose
     /// destination.
-    destination_details: ?DestinationDetails,
+    destination_details: ?DestinationDetails = null,
 
     /// Specify either `cloudwatch-logs` or `kinesis-firehose` as the
     /// destination type.
-    destination_type: ?DestinationType,
+    destination_type: ?DestinationType = null,
 
     /// Specify if log delivery is enabled. Default `true`.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// Specifies either JSON or TEXT
-    log_format: ?LogFormat,
+    log_format: ?LogFormat = null,
 
     /// Refers to [slow-log](https://redis.io/commands/slowlog) or
     /// engine-log..
-    log_type: ?LogType,
+    log_type: ?LogType = null,
 };

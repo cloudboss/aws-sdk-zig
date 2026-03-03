@@ -6,16 +6,16 @@ const GlueSchema = @import("glue_schema.zig").GlueSchema;
 /// Specifies a Hudi data source stored in Amazon S3.
 pub const S3HudiSource = struct {
     /// Specifies additional connection options.
-    additional_hudi_options: ?[]const aws.map.StringMapEntry,
+    additional_hudi_options: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies additional options for the connector.
-    additional_options: ?S3DirectSourceAdditionalOptions,
+    additional_options: ?S3DirectSourceAdditionalOptions = null,
 
     /// The name of the Hudi source.
     name: []const u8,
 
     /// Specifies the data schema for the Hudi source.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// A list of the Amazon S3 paths to read from.
     paths: []const []const u8,

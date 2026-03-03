@@ -7,7 +7,7 @@ const RecommendationStatus = @import("recommendation_status.zig").Recommendation
 pub const DeploymentRecommendation = struct {
     /// A list of
     /// [RealTimeInferenceRecommendation](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_RealTimeInferenceRecommendation.html) items.
-    real_time_inference_recommendations: ?[]const RealTimeInferenceRecommendation,
+    real_time_inference_recommendations: ?[]const RealTimeInferenceRecommendation = null,
 
     /// Status of the deployment recommendation. The status `NOT_APPLICABLE` means
     /// that SageMaker is unable to provide a default recommendation for the model

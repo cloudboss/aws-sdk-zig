@@ -2,7 +2,7 @@
 /// is
 /// set to `MISCONFIGURED` or `FAILED`.
 pub const DataRepositoryFailureDetails = struct {
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .message = "Message",

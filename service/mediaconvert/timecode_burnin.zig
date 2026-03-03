@@ -5,11 +5,11 @@ const TimecodeBurninPosition = @import("timecode_burnin_position.zig").TimecodeB
 pub const TimecodeBurnin = struct {
     /// Use Font size to set the font size of any burned-in timecode. Valid values
     /// are 10, 16, 32, 48.
-    font_size: ?i32,
+    font_size: ?i32 = null,
 
     /// Use Position under Timecode burn-in to specify the location the burned-in
     /// timecode on output video.
-    position: ?TimecodeBurninPosition,
+    position: ?TimecodeBurninPosition = null,
 
     /// Use Prefix to place ASCII characters before any burned-in timecode. For
     /// example, a prefix of "EZ-" will result in the timecode "EZ-00:00:00:00".
@@ -17,7 +17,7 @@ pub const TimecodeBurnin = struct {
     /// supported range of characters is 0x20 through 0x7e. This includes letters,
     /// numbers, and all special characters represented on a standard English
     /// keyboard.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .font_size = "FontSize",

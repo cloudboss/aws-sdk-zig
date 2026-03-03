@@ -13,7 +13,7 @@ pub const TopicCalculatedField = struct {
     /// `MAX`, `MIN`, `COUNT`,
     /// `DISTINCT_COUNT`,
     /// and `AVERAGE`.
-    aggregation: ?DefaultAggregation,
+    aggregation: ?DefaultAggregation = null,
 
     /// The list of aggregation types that are allowed for the calculated field.
     /// Valid values
@@ -21,35 +21,35 @@ pub const TopicCalculatedField = struct {
     /// `MAX`, `MEDIAN`, `SUM`, `AVERAGE`,
     /// `STDEV`, `STDEVP`, `VAR`,
     /// `VARP`, and `PERCENTILE`.
-    allowed_aggregations: ?[]const AuthorSpecifiedAggregation,
+    allowed_aggregations: ?[]const AuthorSpecifiedAggregation = null,
 
     /// The calculated field description.
-    calculated_field_description: ?[]const u8,
+    calculated_field_description: ?[]const u8 = null,
 
     /// The calculated field name.
     calculated_field_name: []const u8,
 
     /// The other names or aliases for the calculated field.
-    calculated_field_synonyms: ?[]const []const u8,
+    calculated_field_synonyms: ?[]const []const u8 = null,
 
     /// The other
     /// names or aliases for the calculated field cell value.
-    cell_value_synonyms: ?[]const CellValueSynonym,
+    cell_value_synonyms: ?[]const CellValueSynonym = null,
 
     /// The column data role for a calculated field. Valid values for this structure
     /// are `DIMENSION` and `MEASURE`.
-    column_data_role: ?ColumnDataRole,
+    column_data_role: ?ColumnDataRole = null,
 
     /// The order in which data is displayed for the calculated field when
     /// it's used in a comparative context.
-    comparative_order: ?ComparativeOrder,
+    comparative_order: ?ComparativeOrder = null,
 
     /// The default formatting definition.
-    default_formatting: ?DefaultFormatting,
+    default_formatting: ?DefaultFormatting = null,
 
     /// A Boolean value that indicates if a calculated field is visible in the
     /// autocomplete.
-    disable_indexing: ?bool,
+    disable_indexing: ?bool = null,
 
     /// The calculated field expression.
     expression: []const u8,
@@ -63,7 +63,7 @@ pub const TopicCalculatedField = struct {
     never_aggregate_in_filter: bool = false,
 
     /// The non additive for the table style target.
-    non_additive: ?bool,
+    non_additive: ?bool = null,
 
     /// The list of aggregation types that are not allowed for the calculated field.
     /// Valid
@@ -71,13 +71,13 @@ pub const TopicCalculatedField = struct {
     /// `MIN`, `MAX`, `MEDIAN`, `SUM`,
     /// `AVERAGE`, `STDEV`, `STDEVP`, `VAR`,
     /// `VARP`, and `PERCENTILE`.
-    not_allowed_aggregations: ?[]const AuthorSpecifiedAggregation,
+    not_allowed_aggregations: ?[]const AuthorSpecifiedAggregation = null,
 
     /// The semantic type.
-    semantic_type: ?SemanticType,
+    semantic_type: ?SemanticType = null,
 
     /// The level of time precision that is used to aggregate `DateTime` values.
-    time_granularity: ?TopicTimeGranularity,
+    time_granularity: ?TopicTimeGranularity = null,
 
     pub const json_field_names = .{
         .aggregation = "Aggregation",

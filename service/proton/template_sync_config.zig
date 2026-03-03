@@ -13,7 +13,7 @@ pub const TemplateSyncConfig = struct {
     repository_provider: RepositoryProvider,
 
     /// A subdirectory path to your template bundle version.
-    subdirectory: ?[]const u8,
+    subdirectory: ?[]const u8 = null,
 
     /// The template name.
     template_name: []const u8,

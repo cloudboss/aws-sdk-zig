@@ -12,7 +12,7 @@ pub const Grantee = struct {
     /// universally unique identifier (UUID) in the format
     /// `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`. You can obtain this UUID from your
     /// Amazon Web Services IAM Identity Center instance.
-    grantee_identifier: ?[]const u8,
+    grantee_identifier: ?[]const u8 = null,
 
     /// The type of the grantee to which access has been granted. It can be one of
     /// the following values:
@@ -28,5 +28,5 @@ pub const Grantee = struct {
     ///   option if you have added your corporate identity directory to IAM Identity
     ///   Center and associated the IAM Identity Center instance with your S3 Access
     ///   Grants instance.
-    grantee_type: ?GranteeType,
+    grantee_type: ?GranteeType = null,
 };

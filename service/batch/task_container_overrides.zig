@@ -12,7 +12,7 @@ pub const TaskContainerOverrides = struct {
     /// image or the job definition.
     ///
     /// This parameter can't contain an empty string.
-    command: ?[]const []const u8,
+    command: ?[]const []const u8 = null,
 
     /// The environment variables to send to the container. You can add new
     /// environment variables,
@@ -23,18 +23,18 @@ pub const TaskContainerOverrides = struct {
     /// Environment variables cannot start with `AWS_BATCH`. This naming convention
     /// is
     /// reserved for variables that Batch sets.
-    environment: ?[]const KeyValuePair,
+    environment: ?[]const KeyValuePair = null,
 
     /// A pointer to the container that you want to override. The container's name
     /// provides a unique
     /// identifier for the container being used.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type and amount of resources to assign to a container. This overrides
     /// the settings in
     /// the job definition. The supported resources include `GPU`, `MEMORY`, and
     /// `VCPU`.
-    resource_requirements: ?[]const ResourceRequirement,
+    resource_requirements: ?[]const ResourceRequirement = null,
 
     pub const json_field_names = .{
         .command = "command",

@@ -15,7 +15,7 @@ pub const AnalyticsIntentStageMetricResult = struct {
     ///
     /// * `Retry` – The number of times the bot tried to elicit a response from the
     ///   user at this stage.
-    name: ?AnalyticsIntentStageMetricName,
+    name: ?AnalyticsIntentStageMetricName = null,
 
     /// The summary statistic that you requested to calculate.
     ///
@@ -25,10 +25,10 @@ pub const AnalyticsIntentStageMetricResult = struct {
     ///   category you provide in `name`.
     ///
     /// * `Max` – The highest count in the category you provide in `name`.
-    statistic: ?AnalyticsMetricStatistic,
+    statistic: ?AnalyticsMetricStatistic = null,
 
     /// The value of the summary statistic for the metric that you requested.
-    value: ?f64,
+    value: ?f64 = null,
 
     pub const json_field_names = .{
         .name = "name",

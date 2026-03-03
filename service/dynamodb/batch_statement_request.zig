@@ -4,10 +4,10 @@ const ReturnValuesOnConditionCheckFailure = @import("return_values_on_condition_
 /// A PartiQL batch statement request.
 pub const BatchStatementRequest = struct {
     /// The read consistency of the PartiQL batch request.
-    consistent_read: ?bool,
+    consistent_read: ?bool = null,
 
     /// The parameters associated with a PartiQL statement in the batch request.
-    parameters: ?[]const AttributeValue,
+    parameters: ?[]const AttributeValue = null,
 
     /// An optional parameter that returns the item attributes for a PartiQL batch
     /// request
@@ -18,7 +18,7 @@ pub const BatchStatementRequest = struct {
     /// small network and processing overhead of receiving a larger response. No
     /// read capacity
     /// units are consumed.
-    return_values_on_condition_check_failure: ?ReturnValuesOnConditionCheckFailure,
+    return_values_on_condition_check_failure: ?ReturnValuesOnConditionCheckFailure = null,
 
     /// A valid PartiQL statement.
     statement: []const u8,

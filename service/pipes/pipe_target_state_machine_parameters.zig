@@ -19,7 +19,7 @@ pub const PipeTargetStateMachineParameters = struct {
     ///
     /// For more information, see [Invocation
     /// types](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation) in the *Amazon EventBridge User Guide*.
-    invocation_type: ?PipeTargetInvocationType,
+    invocation_type: ?PipeTargetInvocationType = null,
 
     pub const json_field_names = .{
         .invocation_type = "InvocationType",

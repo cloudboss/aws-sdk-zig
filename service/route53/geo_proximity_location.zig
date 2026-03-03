@@ -11,7 +11,7 @@ const Coordinates = @import("coordinates.zig").Coordinates;
 pub const GeoProximityLocation = struct {
     /// The Amazon Web Services Region the resource you are directing DNS traffic
     /// to, is in.
-    aws_region: ?[]const u8,
+    aws_region: ?[]const u8 = null,
 
     /// The bias increases or decreases the size of the geographic region from which
     /// Route 53 routes traffic to a resource.
@@ -27,10 +27,10 @@ pub const GeoProximityLocation = struct {
     /// * To shrink the size of the geographic region from which Route 53 routes
     ///   traffic to a resource, specify a
     /// negative bias of -1 to -99. Route 53 expands the size of adjacent regions.
-    bias: ?i32,
+    bias: ?i32 = null,
 
     /// Contains the longitude and latitude for a geographic region.
-    coordinates: ?Coordinates,
+    coordinates: ?Coordinates = null,
 
     /// Specifies an Amazon Web Services Local Zone Group.
     ///
@@ -46,5 +46,5 @@ pub const GeoProximityLocation = struct {
     /// This command returns: `"GroupName": "us-west-2-den-1"`, specifying that the
     /// Local Zone `us-west-2-den-1a`
     /// belongs to the Local Zone Group `us-west-2-den-1`.
-    local_zone_group: ?[]const u8,
+    local_zone_group: ?[]const u8 = null,
 };

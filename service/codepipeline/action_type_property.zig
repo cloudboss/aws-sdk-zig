@@ -5,7 +5,7 @@
 /// type.
 pub const ActionTypeProperty = struct {
     /// The description of the property that is displayed to users.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether the configuration property is a key.
     key: bool = false,

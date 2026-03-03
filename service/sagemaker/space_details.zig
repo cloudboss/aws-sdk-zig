@@ -6,31 +6,31 @@ const SpaceStatus = @import("space_status.zig").SpaceStatus;
 /// The space's details.
 pub const SpaceDetails = struct {
     /// The creation time.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The ID of the associated domain.
-    domain_id: ?[]const u8,
+    domain_id: ?[]const u8 = null,
 
     /// The last modified time.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// Specifies summary information about the ownership settings.
-    ownership_settings_summary: ?OwnershipSettingsSummary,
+    ownership_settings_summary: ?OwnershipSettingsSummary = null,
 
     /// The name of the space that appears in the Studio UI.
-    space_display_name: ?[]const u8,
+    space_display_name: ?[]const u8 = null,
 
     /// The name of the space.
-    space_name: ?[]const u8,
+    space_name: ?[]const u8 = null,
 
     /// Specifies summary information about the space settings.
-    space_settings_summary: ?SpaceSettingsSummary,
+    space_settings_summary: ?SpaceSettingsSummary = null,
 
     /// Specifies summary information about the space sharing settings.
-    space_sharing_settings_summary: ?SpaceSharingSettingsSummary,
+    space_sharing_settings_summary: ?SpaceSharingSettingsSummary = null,
 
     /// The status.
-    status: ?SpaceStatus,
+    status: ?SpaceStatus = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

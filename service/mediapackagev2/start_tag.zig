@@ -5,7 +5,7 @@
 pub const StartTag = struct {
     /// Specify the value for PRECISE within your EXT-X-START tag. Leave blank, or
     /// choose false, to use the default value NO. Choose yes to use the value YES.
-    precise: ?bool,
+    precise: ?bool = null,
 
     /// Specify the value for TIME-OFFSET within your EXT-X-START tag. Enter a
     /// signed floating point value which, if positive, must be less than the

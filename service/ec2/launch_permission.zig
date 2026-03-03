@@ -3,16 +3,16 @@ const PermissionGroup = @import("permission_group.zig").PermissionGroup;
 /// Describes a launch permission.
 pub const LaunchPermission = struct {
     /// The name of the group.
-    group: ?PermissionGroup,
+    group: ?PermissionGroup = null,
 
     /// The Amazon Resource Name (ARN) of an organizational unit (OU).
-    organizational_unit_arn: ?[]const u8,
+    organizational_unit_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an organization.
-    organization_arn: ?[]const u8,
+    organization_arn: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID.
     ///
     /// Constraints: Up to 10 000 account IDs can be specified in a single request.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 };

@@ -3,16 +3,16 @@
 /// include Wi-Fi, GPS, Bluetooth, and NFC.
 pub const Radios = struct {
     /// True if Bluetooth is enabled at the beginning of the test. Otherwise, false.
-    bluetooth: ?bool,
+    bluetooth: ?bool = null,
 
     /// True if GPS is enabled at the beginning of the test. Otherwise, false.
-    gps: ?bool,
+    gps: ?bool = null,
 
     /// True if NFC is enabled at the beginning of the test. Otherwise, false.
-    nfc: ?bool,
+    nfc: ?bool = null,
 
     /// True if Wi-Fi is enabled at the beginning of the test. Otherwise, false.
-    wifi: ?bool,
+    wifi: ?bool = null,
 
     pub const json_field_names = .{
         .bluetooth = "bluetooth",

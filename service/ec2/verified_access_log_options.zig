@@ -5,19 +5,19 @@ const VerifiedAccessLogS3DestinationOptions = @import("verified_access_log_s3_de
 /// Options for Verified Access logs.
 pub const VerifiedAccessLogOptions = struct {
     /// Sends Verified Access logs to CloudWatch Logs.
-    cloud_watch_logs: ?VerifiedAccessLogCloudWatchLogsDestinationOptions,
+    cloud_watch_logs: ?VerifiedAccessLogCloudWatchLogsDestinationOptions = null,
 
     /// Indicates whether to include trust data sent by trust providers in the logs.
-    include_trust_context: ?bool,
+    include_trust_context: ?bool = null,
 
     /// Sends Verified Access logs to Kinesis.
-    kinesis_data_firehose: ?VerifiedAccessLogKinesisDataFirehoseDestinationOptions,
+    kinesis_data_firehose: ?VerifiedAccessLogKinesisDataFirehoseDestinationOptions = null,
 
     /// The logging version.
     ///
     /// Valid values: `ocsf-0.1` | `ocsf-1.0.0-rc.2`
-    log_version: ?[]const u8,
+    log_version: ?[]const u8 = null,
 
     /// Sends Verified Access logs to Amazon S3.
-    s3: ?VerifiedAccessLogS3DestinationOptions,
+    s3: ?VerifiedAccessLogS3DestinationOptions = null,
 };

@@ -4,12 +4,12 @@ pub const GitBranchFilterCriteria = struct {
     /// The list of patterns of Git branches that, when a commit is pushed, are to
     /// be
     /// excluded from starting the pipeline.
-    excludes: ?[]const []const u8,
+    excludes: ?[]const []const u8 = null,
 
     /// The list of patterns of Git branches that, when a commit is pushed, are to
     /// be
     /// included as criteria that starts the pipeline.
-    includes: ?[]const []const u8,
+    includes: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .excludes = "excludes",

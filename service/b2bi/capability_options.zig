@@ -4,10 +4,10 @@ const OutboundEdiOptions = @import("outbound_edi_options.zig").OutboundEdiOption
 /// Contains the details for an Outbound EDI capability.
 pub const CapabilityOptions = struct {
     /// A structure that contains the inbound EDI options for the capability.
-    inbound_edi: ?InboundEdiOptions,
+    inbound_edi: ?InboundEdiOptions = null,
 
     /// A structure that contains the outbound EDI options.
-    outbound_edi: ?OutboundEdiOptions,
+    outbound_edi: ?OutboundEdiOptions = null,
 
     pub const json_field_names = .{
         .inbound_edi = "inboundEdi",

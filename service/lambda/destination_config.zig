@@ -6,11 +6,11 @@ const OnSuccess = @import("on_success.zig").OnSuccess;
 /// destination](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations).
 pub const DestinationConfig = struct {
     /// The destination configuration for failed invocations.
-    on_failure: ?OnFailure,
+    on_failure: ?OnFailure = null,
 
     /// The destination configuration for successful invocations. Not supported in
     /// `CreateEventSourceMapping` or `UpdateEventSourceMapping`.
-    on_success: ?OnSuccess,
+    on_success: ?OnSuccess = null,
 
     pub const json_field_names = .{
         .on_failure = "OnFailure",

@@ -19,7 +19,7 @@ pub const TCPFlagField = struct {
 
     /// The set of flags to consider in the inspection. To inspect all flags in the
     /// valid values list, leave this with no setting.
-    masks: ?[]const TCPFlag,
+    masks: ?[]const TCPFlag = null,
 
     pub const json_field_names = .{
         .flags = "Flags",

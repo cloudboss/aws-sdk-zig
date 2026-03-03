@@ -9,15 +9,15 @@ pub const AIMLOptionsOutput = struct {
     /// Container for parameters required for natural language query generation on
     /// the
     /// specified domain.
-    natural_language_query_generation_options: ?NaturalLanguageQueryGenerationOptionsOutput,
+    natural_language_query_generation_options: ?NaturalLanguageQueryGenerationOptionsOutput = null,
 
     /// Container for parameters representing the state of S3 vectors engine
     /// features on the
     /// specified domain.
-    s3_vectors_engine: ?S3VectorsEngine,
+    s3_vectors_engine: ?S3VectorsEngine = null,
 
     /// The current serverless vector acceleration configuration for the domain.
-    serverless_vector_acceleration: ?ServerlessVectorAcceleration,
+    serverless_vector_acceleration: ?ServerlessVectorAcceleration = null,
 
     pub const json_field_names = .{
         .natural_language_query_generation_options = "NaturalLanguageQueryGenerationOptions",

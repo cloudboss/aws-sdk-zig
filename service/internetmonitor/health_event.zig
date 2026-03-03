@@ -6,11 +6,11 @@ const HealthEventStatus = @import("health_event_status.zig").HealthEventStatus;
 /// Internet Monitor.
 pub const HealthEvent = struct {
     /// When the health event was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The time when a health event ended. If the health event is still active,
     /// then the end time is not set.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the event.
     event_arn: []const u8,
@@ -39,7 +39,7 @@ pub const HealthEvent = struct {
     /// during the event, compared to what is typical for traffic from this
     /// client location to the Amazon Web Services location using this client
     /// network.
-    percent_of_total_traffic_impacted: ?f64,
+    percent_of_total_traffic_impacted: ?f64 = null,
 
     /// When a health event started.
     started_at: i64,

@@ -9,33 +9,33 @@ const ConnectionPoolConfigurationInfo = @import("connection_pool_configuration_i
 pub const DBProxyTargetGroup = struct {
     /// The settings that determine the size and behavior of the connection pool for
     /// the target group.
-    connection_pool_config: ?ConnectionPoolConfigurationInfo,
+    connection_pool_config: ?ConnectionPoolConfigurationInfo = null,
 
     /// The date and time when the target group was first created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// The identifier for the RDS proxy associated with this target group.
-    db_proxy_name: ?[]const u8,
+    db_proxy_name: ?[]const u8 = null,
 
     /// Indicates whether this target group is the first one used for connection
     /// requests by the associated proxy. Because each proxy is currently associated
     /// with a single target group, currently this setting is always `true`.
-    is_default: ?bool,
+    is_default: ?bool = null,
 
     /// The current status of this target group. A status of `available` means the
     /// target group is correctly associated with a database. Other values indicate
     /// that you must wait for the target group to be ready, or take some action to
     /// resolve an issue.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) representing the target group.
-    target_group_arn: ?[]const u8,
+    target_group_arn: ?[]const u8 = null,
 
     /// The identifier for the target group. This name must be unique for all target
     /// groups owned by your Amazon Web Services account in the specified Amazon Web
     /// Services Region.
-    target_group_name: ?[]const u8,
+    target_group_name: ?[]const u8 = null,
 
     /// The date and time when the target group was last updated.
-    updated_date: ?i64,
+    updated_date: ?i64 = null,
 };

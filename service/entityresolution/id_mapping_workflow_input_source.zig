@@ -7,7 +7,7 @@ pub const IdMappingWorkflowInputSource = struct {
     input_source_arn: []const u8,
 
     /// The name of the schema to be retrieved.
-    schema_name: ?[]const u8,
+    schema_name: ?[]const u8 = null,
 
     /// The type of ID namespace. There are two types: `SOURCE` and `TARGET`.
     ///
@@ -16,7 +16,7 @@ pub const IdMappingWorkflowInputSource = struct {
     ///
     /// The `TARGET` contains a configuration of `targetId` which all `sourceIds`
     /// will resolve to.
-    @"type": ?IdNamespaceType,
+    @"type": ?IdNamespaceType = null,
 
     pub const json_field_names = .{
         .input_source_arn = "inputSourceARN",

@@ -8,7 +8,7 @@ pub const DimensionKeyDetail = struct {
     /// * `db.query.statement` (Amazon DocumentDB)
     ///
     /// * `db.sql.statement` (Amazon RDS and Aurora)
-    dimension: ?[]const u8,
+    dimension: ?[]const u8 = null,
 
     /// The status of the dimension detail data. Possible values include the
     /// following:
@@ -22,7 +22,7 @@ pub const DimensionKeyDetail = struct {
     ///
     /// * `UNAVAILABLE` - The dimension detail data could not be collected
     ///   successfully.
-    status: ?DetailStatus,
+    status: ?DetailStatus = null,
 
     /// The value of the dimension detail data. Depending on the return status, this
     /// value is either the
@@ -31,7 +31,7 @@ pub const DimensionKeyDetail = struct {
     /// * `db.query.statement` (Amazon DocumentDB)
     ///
     /// * `db.sql.statement` (Amazon RDS and Aurora)
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dimension = "Dimension",

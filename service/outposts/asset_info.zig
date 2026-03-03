@@ -7,19 +7,19 @@ pub const AssetInfo = struct {
     /// The ID of the asset. An Outpost asset can be a single server within an
     /// Outposts rack or
     /// an Outposts server configuration.
-    asset_id: ?[]const u8,
+    asset_id: ?[]const u8 = null,
 
     /// The position of an asset in a rack.
-    asset_location: ?AssetLocation,
+    asset_location: ?AssetLocation = null,
 
     /// The type of the asset.
-    asset_type: ?AssetType,
+    asset_type: ?AssetType = null,
 
     /// Information about compute hardware assets.
-    compute_attributes: ?ComputeAttributes,
+    compute_attributes: ?ComputeAttributes = null,
 
     /// The rack ID of the asset.
-    rack_id: ?[]const u8,
+    rack_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .asset_id = "AssetId",

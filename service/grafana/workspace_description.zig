@@ -21,7 +21,7 @@ pub const WorkspaceDescription = struct {
     /// resources in other accounts in the same organization. If this is
     /// `ORGANIZATION`, the `workspaceOrganizationalUnits` parameter
     /// specifies which organizational units the workspace can access.
-    account_access_type: ?AccountAccessType,
+    account_access_type: ?AccountAccessType = null,
 
     /// A structure that describes whether the workspace uses SAML, IAM Identity
     /// Center, or
@@ -42,7 +42,7 @@ pub const WorkspaceDescription = struct {
     data_sources: []const DataSourceType,
 
     /// The user-defined description of the workspace.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The URL that users can use to access the Grafana console in the workspace.
     endpoint: []const u8,
@@ -53,7 +53,7 @@ pub const WorkspaceDescription = struct {
     ///
     /// Amazon Managed Grafana workspaces no longer support Grafana Enterprise free
     /// trials.
-    free_trial_consumed: ?bool,
+    free_trial_consumed: ?bool = null,
 
     /// If this workspace is currently in the free trial period for Grafana
     /// Enterprise, this
@@ -61,13 +61,13 @@ pub const WorkspaceDescription = struct {
     ///
     /// Amazon Managed Grafana workspaces no longer support Grafana Enterprise free
     /// trials.
-    free_trial_expiration: ?i64,
+    free_trial_expiration: ?i64 = null,
 
     /// The token that ties this workspace to a Grafana Labs account. For more
     /// information,
     /// see [Link your account with Grafana
     /// Labs](https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise).
-    grafana_token: ?[]const u8,
+    grafana_token: ?[]const u8 = null,
 
     /// The version of Grafana supported in this workspace.
     grafana_version: []const u8,
@@ -82,37 +82,37 @@ pub const WorkspaceDescription = struct {
     /// through Amazon Managed Grafana does not have an expiration. It is valid
     /// until the
     /// license is removed.
-    license_expiration: ?i64,
+    license_expiration: ?i64 = null,
 
     /// Specifies whether this workspace has a full Grafana Enterprise license.
     ///
     /// Amazon Managed Grafana workspaces no longer support Grafana Enterprise free
     /// trials.
-    license_type: ?LicenseType,
+    license_type: ?LicenseType = null,
 
     /// The most recent date that the workspace was modified.
     modified: i64,
 
     /// The name of the workspace.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The configuration settings for network access to your workspace.
-    network_access_control: ?NetworkAccessConfiguration,
+    network_access_control: ?NetworkAccessConfiguration = null,
 
     /// The Amazon Web Services notification channels that Amazon Managed Grafana
     /// can automatically
     /// create IAM roles and permissions for, to allow Amazon Managed Grafana to use
     /// these channels.
-    notification_destinations: ?[]const NotificationDestinationType,
+    notification_destinations: ?[]const NotificationDestinationType = null,
 
     /// Specifies the organizational units that this workspace is allowed to use
     /// data sources
     /// from, if this workspace is in an account that is part of an organization.
-    organizational_units: ?[]const []const u8,
+    organizational_units: ?[]const []const u8 = null,
 
     /// The name of the IAM role that is used to access resources through
     /// Organizations.
-    organization_role_name: ?[]const u8,
+    organization_role_name: ?[]const u8 = null,
 
     /// If this is `SERVICE_MANAGED`, and the workplace was created through the
     /// Amazon Managed Grafana console, then Amazon Managed Grafana automatically
@@ -141,26 +141,26 @@ pub const WorkspaceDescription = struct {
     /// permissions and policies for Amazon Web Services data sources and
     /// notification
     /// channels](https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
-    permission_type: ?PermissionType,
+    permission_type: ?PermissionType = null,
 
     /// The name of the CloudFormation stack set that is used to generate IAM roles
     /// to be used for this workspace.
-    stack_set_name: ?[]const u8,
+    stack_set_name: ?[]const u8 = null,
 
     /// The current status of the workspace.
     status: WorkspaceStatus,
 
     /// The list of tags associated with the workspace.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The configuration for connecting to data sources in a private VPC (Amazon
     /// Virtual Private Cloud).
-    vpc_configuration: ?VpcConfiguration,
+    vpc_configuration: ?VpcConfiguration = null,
 
     /// The IAM role that grants permissions to the Amazon Web Services
     /// resources that the workspace will view data from. This role must already
     /// exist.
-    workspace_role_arn: ?[]const u8,
+    workspace_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_access_type = "accountAccessType",

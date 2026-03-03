@@ -3,7 +3,7 @@ const ActiveSpeakerPosition = @import("active_speaker_position.zig").ActiveSpeak
 /// Defines the configuration for an `ActiveSpeakerOnly` video tile.
 pub const ActiveSpeakerOnlyConfiguration = struct {
     /// The position of the `ActiveSpeakerOnly` video tile.
-    active_speaker_position: ?ActiveSpeakerPosition,
+    active_speaker_position: ?ActiveSpeakerPosition = null,
 
     pub const json_field_names = .{
         .active_speaker_position = "ActiveSpeakerPosition",

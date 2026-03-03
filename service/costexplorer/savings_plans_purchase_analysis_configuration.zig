@@ -6,10 +6,10 @@ const SavingsPlans = @import("savings_plans.zig").SavingsPlans;
 /// The configuration for the Savings Plans purchase analysis.
 pub const SavingsPlansPurchaseAnalysisConfiguration = struct {
     /// The account that the analysis is for.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The account scope that you want your analysis for.
-    account_scope: ?AccountScope,
+    account_scope: ?AccountScope = null,
 
     /// The type of analysis.
     analysis_type: AnalysisType,
@@ -21,7 +21,7 @@ pub const SavingsPlansPurchaseAnalysisConfiguration = struct {
     savings_plans_to_add: []const SavingsPlans,
 
     /// Savings Plans to exclude from the analysis.
-    savings_plans_to_exclude: ?[]const []const u8,
+    savings_plans_to_exclude: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

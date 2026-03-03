@@ -2,10 +2,10 @@
 /// cluster.
 pub const ParameterGroup = struct {
     /// A description of the parameter group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the parameter group.
-    parameter_group_name: ?[]const u8,
+    parameter_group_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

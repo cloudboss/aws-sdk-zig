@@ -10,15 +10,15 @@ const IpamResourceType = @import("ipam_resource_type.zig").IpamResourceType;
 /// is associated with the resource.
 pub const IpamDiscoveredResourceCidr = struct {
     /// The Availability Zone ID.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The resource discovery ID.
-    ipam_resource_discovery_id: ?[]const u8,
+    ipam_resource_discovery_id: ?[]const u8 = null,
 
     /// The source that allocated the IP address space. `byoip` or `amazon`
     /// indicates public IP address space allocated by Amazon or space that you have
     /// allocated with Bring your own IP (BYOIP). `none` indicates private space.
-    ip_source: ?IpamResourceCidrIpSource,
+    ip_source: ?IpamResourceCidrIpSource = null,
 
     /// The percentage of IP address space in use. To convert the decimal to a
     /// percentage, multiply the decimal by 100. Note the following:
@@ -35,36 +35,36 @@ pub const IpamDiscoveredResourceCidr = struct {
     /// * For resources that are public IPv4 pools, this is the percentage of IP
     ///   address space in the pool that's been allocated to Elastic IP addresses
     ///   (EIPs).
-    ip_usage: ?f64,
+    ip_usage: ?f64 = null,
 
     /// For elastic network interfaces, this is the status of whether or not the
     /// elastic network interface is attached.
-    network_interface_attachment_status: ?IpamNetworkInterfaceAttachmentStatus,
+    network_interface_attachment_status: ?IpamNetworkInterfaceAttachmentStatus = null,
 
     /// The resource CIDR.
-    resource_cidr: ?[]const u8,
+    resource_cidr: ?[]const u8 = null,
 
     /// The resource ID.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The resource owner ID.
-    resource_owner_id: ?[]const u8,
+    resource_owner_id: ?[]const u8 = null,
 
     /// The resource Region.
-    resource_region: ?[]const u8,
+    resource_region: ?[]const u8 = null,
 
     /// The resource tags.
-    resource_tags: ?[]const IpamResourceTag,
+    resource_tags: ?[]const IpamResourceTag = null,
 
     /// The resource type.
-    resource_type: ?IpamResourceType,
+    resource_type: ?IpamResourceType = null,
 
     /// The last successful resource discovery time.
-    sample_time: ?i64,
+    sample_time: ?i64 = null,
 
     /// The subnet ID.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The VPC ID.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

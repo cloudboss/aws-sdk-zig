@@ -6,7 +6,7 @@ pub const ListTagsForResourceRequest = struct {
 
     /// The `nextToken` string returned on a previous page that you use to get the
     /// next page of results in a paginated response.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) that identifies the resource for which to
     /// list the tags. The following resources are supported:

@@ -12,19 +12,19 @@ pub const FunctionEventInvokeConfig = struct {
     ///
     /// S3 buckets are supported only for on-failure destinations. To retain records
     /// of successful invocations, use another destination type.
-    destination_config: ?DestinationConfig,
+    destination_config: ?DestinationConfig = null,
 
     /// The Amazon Resource Name (ARN) of the function.
-    function_arn: ?[]const u8,
+    function_arn: ?[]const u8 = null,
 
     /// The date and time that the configuration was last updated.
-    last_modified: ?i64,
+    last_modified: ?i64 = null,
 
     /// The maximum age of a request that Lambda sends to a function for processing.
-    maximum_event_age_in_seconds: ?i32,
+    maximum_event_age_in_seconds: ?i32 = null,
 
     /// The maximum number of times to retry when the function returns an error.
-    maximum_retry_attempts: ?i32,
+    maximum_retry_attempts: ?i32 = null,
 
     pub const json_field_names = .{
         .destination_config = "DestinationConfig",

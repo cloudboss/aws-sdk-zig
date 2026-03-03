@@ -7,36 +7,36 @@ const RetryStageMetadata = @import("retry_stage_metadata.zig").RetryStageMetadat
 /// Represents information about the state of the stage.
 pub const StageState = struct {
     /// The state of the stage.
-    action_states: ?[]const ActionState,
+    action_states: ?[]const ActionState = null,
 
     /// The state of the entry conditions for a stage.
-    before_entry_condition_state: ?StageConditionState,
+    before_entry_condition_state: ?StageConditionState = null,
 
-    inbound_execution: ?StageExecution,
+    inbound_execution: ?StageExecution = null,
 
     /// The inbound executions for a stage.
-    inbound_executions: ?[]const StageExecution,
+    inbound_executions: ?[]const StageExecution = null,
 
     /// The state of the inbound transition, which is either enabled or disabled.
-    inbound_transition_state: ?TransitionState,
+    inbound_transition_state: ?TransitionState = null,
 
     /// Information about the latest execution in the stage, including its ID and
     /// status.
-    latest_execution: ?StageExecution,
+    latest_execution: ?StageExecution = null,
 
     /// The state of the failure conditions for a stage.
-    on_failure_condition_state: ?StageConditionState,
+    on_failure_condition_state: ?StageConditionState = null,
 
     /// The state of the success conditions for a stage.
-    on_success_condition_state: ?StageConditionState,
+    on_success_condition_state: ?StageConditionState = null,
 
     /// he details of a specific automatic retry on stage failure, including the
     /// attempt
     /// number and trigger.
-    retry_stage_metadata: ?RetryStageMetadata,
+    retry_stage_metadata: ?RetryStageMetadata = null,
 
     /// The name of the stage.
-    stage_name: ?[]const u8,
+    stage_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action_states = "actionStates",

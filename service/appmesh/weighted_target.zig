@@ -8,7 +8,7 @@
 /// 100.
 pub const WeightedTarget = struct {
     /// The targeted port of the weighted object.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The virtual node to associate with the weighted target.
     virtual_node: []const u8,

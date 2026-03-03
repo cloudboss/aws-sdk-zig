@@ -20,9 +20,9 @@ pub const OpenZFSOriginSnapshotConfiguration = struct {
     /// by using a snapshot from another FSx for OpenZFS file system. For more
     /// information, see
     /// [CopySnapshotAndUpdateVolume](https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html).
-    copy_strategy: ?OpenZFSCopyStrategy,
+    copy_strategy: ?OpenZFSCopyStrategy = null,
 
-    snapshot_arn: ?[]const u8,
+    snapshot_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .copy_strategy = "CopyStrategy",

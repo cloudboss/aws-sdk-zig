@@ -7,7 +7,7 @@ pub const MemoryRecordCreateInput = struct {
 
     /// The ID of the memory strategy that defines how this memory record is
     /// grouped.
-    memory_strategy_id: ?[]const u8,
+    memory_strategy_id: ?[]const u8 = null,
 
     /// A list of namespace identifiers that categorize or group the memory record.
     namespaces: []const []const u8,

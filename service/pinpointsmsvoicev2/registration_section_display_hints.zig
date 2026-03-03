@@ -1,13 +1,13 @@
 /// Provides help information on the registration section.
 pub const RegistrationSectionDisplayHints = struct {
     /// The link to the document the display hint is associated with.
-    documentation_link: ?[]const u8,
+    documentation_link: ?[]const u8 = null,
 
     /// The title of the document the display hint is associated with.
-    documentation_title: ?[]const u8,
+    documentation_title: ?[]const u8 = null,
 
     /// A full description of the display hint.
-    long_description: ?[]const u8,
+    long_description: ?[]const u8 = null,
 
     /// A short description of the display hint.
     short_description: []const u8,

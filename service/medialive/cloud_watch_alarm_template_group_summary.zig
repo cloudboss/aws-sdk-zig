@@ -8,19 +8,19 @@ pub const CloudWatchAlarmTemplateGroupSummary = struct {
     created_at: i64,
 
     /// A resource's optional description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A cloudwatch alarm template group's id. AWS provided template groups have
     /// ids that start with `aws-`
     id: []const u8,
 
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// A resource's name. Names must be unique within the scope of a resource type
     /// in a specific region.
     name: []const u8,
 
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The number of templates in a group.
     template_count: i32,

@@ -6,7 +6,7 @@ pub const DataCaptureConfig = struct {
     /// Configuration specifying how to treat different headers. If no headers are
     /// specified SageMaker AI will by default base64 encode when capturing the
     /// data.
-    capture_content_type_header: ?CaptureContentTypeHeader,
+    capture_content_type_header: ?CaptureContentTypeHeader = null,
 
     /// Specifies data Model Monitor will capture. You can configure whether to
     /// collect only input, only output, or both
@@ -16,7 +16,7 @@ pub const DataCaptureConfig = struct {
     destination_s3_uri: []const u8,
 
     /// Whether data capture should be enabled or disabled (defaults to enabled).
-    enable_capture: ?bool,
+    enable_capture: ?bool = null,
 
     /// The percentage of requests SageMaker AI will capture. A lower value is
     /// recommended for Endpoints with high traffic.
@@ -33,7 +33,7 @@ pub const DataCaptureConfig = struct {
     ///   `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     /// * Alias name: `alias/ExampleAlias`
     /// * Alias name ARN: `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .capture_content_type_header = "CaptureContentTypeHeader",

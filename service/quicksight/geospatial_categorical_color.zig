@@ -8,13 +8,13 @@ pub const GeospatialCategoricalColor = struct {
     category_data_colors: []const GeospatialCategoricalDataColor,
 
     /// The default opacity of a categorical color.
-    default_opacity: ?f64,
+    default_opacity: ?f64 = null,
 
     /// The null data visualization settings.
-    null_data_settings: ?GeospatialNullDataSettings,
+    null_data_settings: ?GeospatialNullDataSettings = null,
 
     /// The state of visibility for null data.
-    null_data_visibility: ?Visibility,
+    null_data_visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .category_data_colors = "CategoryDataColors",

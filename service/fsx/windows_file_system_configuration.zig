@@ -10,21 +10,21 @@ const SelfManagedActiveDirectoryAttributes = @import("self_managed_active_direct
 pub const WindowsFileSystemConfiguration = struct {
     /// The ID for an existing Amazon Web Services Managed Microsoft Active
     /// Directory instance that the file system is joined to.
-    active_directory_id: ?[]const u8,
+    active_directory_id: ?[]const u8 = null,
 
-    aliases: ?[]const Alias,
+    aliases: ?[]const Alias = null,
 
     /// The configuration that Amazon FSx for Windows File Server uses to audit and
     /// log
     /// user accesses of files, folders, and file shares on the Amazon FSx for
     /// Windows File Server
     /// file system.
-    audit_log_configuration: ?WindowsAuditLogConfiguration,
+    audit_log_configuration: ?WindowsAuditLogConfiguration = null,
 
     /// The number of days to retain automatic backups. Setting this to 0 disables
     /// automatic
     /// backups. You can retain automatic backups for a maximum of 90 days.
-    automatic_backup_retention_days: ?i32,
+    automatic_backup_retention_days: ?i32 = null,
 
     /// A boolean flag indicating whether tags on the file system should be copied
     /// to backups.
@@ -38,10 +38,10 @@ pub const WindowsFileSystemConfiguration = struct {
     /// tags when
     /// creating a user-initiated backup, no tags are copied from the file system,
     /// regardless of this value.
-    copy_tags_to_backups: ?bool,
+    copy_tags_to_backups: ?bool = null,
 
     /// The preferred time to take daily automatic backups, in the UTC time zone.
-    daily_automatic_backup_start_time: ?[]const u8,
+    daily_automatic_backup_start_time: ?[]const u8 = null,
 
     /// Specifies the file system deployment type, valid values are the following:
     ///
@@ -61,7 +61,7 @@ pub const WindowsFileSystemConfiguration = struct {
     /// For more information, see
     /// [Single-AZ and Multi-AZ File
     /// Systems](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html).
-    deployment_type: ?WindowsDeploymentType,
+    deployment_type: ?WindowsDeploymentType = null,
 
     /// The SSD IOPS (input/output operations per second) configuration for an
     /// Amazon FSx for Windows file system.
@@ -69,14 +69,14 @@ pub const WindowsFileSystemConfiguration = struct {
     /// capacity. You can provision additional
     /// IOPS per GiB of storage, up to the maximum limit associated with your chosen
     /// throughput capacity.
-    disk_iops_configuration: ?DiskIopsConfiguration,
+    disk_iops_configuration: ?DiskIopsConfiguration = null,
 
     /// The File Server Resource Manager (FSRM) configuration that Amazon FSx for
     /// Windows File Server uses for the file system. FSRM is disabled by default.
-    fsrm_configuration: ?WindowsFsrmConfiguration,
+    fsrm_configuration: ?WindowsFsrmConfiguration = null,
 
     /// The list of maintenance operations in progress for this file system.
-    maintenance_operations_in_progress: ?[]const FileSystemMaintenanceOperation,
+    maintenance_operations_in_progress: ?[]const FileSystemMaintenanceOperation = null,
 
     /// For `MULTI_AZ_1` deployment types, the IPv4 address of the primary, or
     /// preferred, file server.
@@ -92,7 +92,7 @@ pub const WindowsFileSystemConfiguration = struct {
     /// on mapping and mounting file shares, see
     /// [Accessing data using file
     /// shares](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-file-shares.html).
-    preferred_file_server_ip: ?[]const u8,
+    preferred_file_server_ip: ?[]const u8 = null,
 
     /// For MULTI_AZ_1 deployment types, the IPv6 address of the primary, or
     /// preferred, file server.
@@ -105,7 +105,7 @@ pub const WindowsFileSystemConfiguration = struct {
     /// maintenance. For Linux and Windows SMB clients that are joined to an Active
     /// Directory, use the
     /// file system's DNSName instead.
-    preferred_file_server_ipv_6: ?[]const u8,
+    preferred_file_server_ipv_6: ?[]const u8 = null,
 
     /// For `MULTI_AZ_1` deployment types, it specifies the ID of the subnet where
     /// the preferred file server is located.
@@ -118,7 +118,7 @@ pub const WindowsFileSystemConfiguration = struct {
     /// For more information, see
     /// [Availability and durability: Single-AZ and Multi-AZ file
     /// systems](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources).
-    preferred_subnet_id: ?[]const u8,
+    preferred_subnet_id: ?[]const u8 = null,
 
     /// For `MULTI_AZ_1` deployment types, use this endpoint when performing
     /// administrative tasks on the file system using
@@ -129,19 +129,19 @@ pub const WindowsFileSystemConfiguration = struct {
     ///
     /// This endpoint is temporarily unavailable when the file system is undergoing
     /// maintenance.
-    remote_administration_endpoint: ?[]const u8,
+    remote_administration_endpoint: ?[]const u8 = null,
 
-    self_managed_active_directory_configuration: ?SelfManagedActiveDirectoryAttributes,
+    self_managed_active_directory_configuration: ?SelfManagedActiveDirectoryAttributes = null,
 
     /// The throughput of the Amazon FSx file system, measured in megabytes per
     /// second.
-    throughput_capacity: ?i32,
+    throughput_capacity: ?i32 = null,
 
     /// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
     /// the UTC
     /// time zone. d is the weekday number, from 1 through 7, beginning with Monday
     /// and ending with Sunday.
-    weekly_maintenance_start_time: ?[]const u8,
+    weekly_maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active_directory_id = "ActiveDirectoryId",

@@ -10,7 +10,7 @@ pub const SpotPlacement = struct {
     ///
     /// Either `AvailabilityZone` or `AvailabilityZoneId` must be
     /// specified in the request, but not both.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The ID of the Availability Zone. For example, `use2-az1`.
     ///
@@ -20,14 +20,14 @@ pub const SpotPlacement = struct {
     ///
     /// Either `AvailabilityZone` or `AvailabilityZoneId` must be
     /// specified in the request, but not both.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The name of the placement group.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// The tenancy of the instance (if the instance is running in a VPC). An
     /// instance with a
     /// tenancy of `dedicated` runs on single-tenant hardware. The `host`
     /// tenancy is not supported for Spot Instances.
-    tenancy: ?Tenancy,
+    tenancy: ?Tenancy = null,
 };

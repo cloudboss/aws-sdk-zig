@@ -5,7 +5,7 @@ const VideoStandardGenerativeFieldType = @import("video_standard_generative_fiel
 pub const VideoStandardGenerativeField = struct {
     state: State,
 
-    types: ?[]const VideoStandardGenerativeFieldType,
+    types: ?[]const VideoStandardGenerativeFieldType = null,
 
     pub const json_field_names = .{
         .state = "state",

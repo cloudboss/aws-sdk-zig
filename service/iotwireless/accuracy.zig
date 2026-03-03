@@ -9,12 +9,12 @@ pub const Accuracy = struct {
     /// The horizontal accuracy of the estimated position, which is the difference
     /// between the
     /// estimated location and the actual device location.
-    horizontal_accuracy: ?f32,
+    horizontal_accuracy: ?f32 = null,
 
     /// The vertical accuracy of the estimated position, which is the difference
     /// between the
     /// estimated altitude and actual device latitude in meters.
-    vertical_accuracy: ?f32,
+    vertical_accuracy: ?f32 = null,
 
     pub const json_field_names = .{
         .horizontal_accuracy = "HorizontalAccuracy",

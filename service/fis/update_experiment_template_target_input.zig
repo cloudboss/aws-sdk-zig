@@ -6,16 +6,16 @@ const ExperimentTemplateTargetInputFilter = @import("experiment_template_target_
 /// Resource Name (ARN) or at least one resource tag. You cannot specify both.
 pub const UpdateExperimentTemplateTargetInput = struct {
     /// The filters to apply to identify target resources using specific attributes.
-    filters: ?[]const ExperimentTemplateTargetInputFilter,
+    filters: ?[]const ExperimentTemplateTargetInputFilter = null,
 
     /// The resource type parameters.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Resource Names (ARNs) of the targets.
-    resource_arns: ?[]const []const u8,
+    resource_arns: ?[]const []const u8 = null,
 
     /// The tags for the target resources.
-    resource_tags: ?[]const aws.map.StringMapEntry,
+    resource_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The resource type. The resource type must be supported for the specified
     /// action.

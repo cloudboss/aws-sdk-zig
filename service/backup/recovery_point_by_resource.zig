@@ -9,17 +9,17 @@ pub const RecoveryPointByResource = struct {
     /// Contains the latest scanning results against the recovery point and
     /// currently include
     /// `FailedScan`, `Findings`, `LastComputed`.
-    aggregated_scan_result: ?AggregatedScanResult,
+    aggregated_scan_result: ?AggregatedScanResult = null,
 
     /// The size, in bytes, of a backup.
-    backup_size_bytes: ?i64,
+    backup_size_bytes: ?i64 = null,
 
     /// The name of a logical container where backups are stored. Backup vaults are
     /// identified
     /// by names that are unique to the account used to create them and the Amazon
     /// Web Services
     /// Region where they are created.
-    backup_vault_name: ?[]const u8,
+    backup_vault_name: ?[]const u8 = null,
 
     /// The date and time a recovery point is created, in Unix format and
     /// Coordinated Universal
@@ -27,17 +27,17 @@ pub const RecoveryPointByResource = struct {
     /// example, the value 1516925490.087 represents Friday, January 26, 2018
     /// 12:11:30.087
     /// AM.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The server-side encryption key that is used to protect your backups; for
     /// example,
     /// `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The type of encryption key used for the recovery point. Valid values are
     /// CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web
     /// Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.
-    encryption_key_type: ?EncryptionKeyType,
+    encryption_key_type: ?EncryptionKeyType = null,
 
     /// This is the current status for the backup index associated
     /// with the specified recovery point.
@@ -46,12 +46,12 @@ pub const RecoveryPointByResource = struct {
     ///
     /// A recovery point with an index that has the status of `ACTIVE`
     /// can be included in a search.
-    index_status: ?IndexStatus,
+    index_status: ?IndexStatus = null,
 
     /// A string in the form of a detailed message explaining the status of a backup
     /// index
     /// associated with the recovery point.
-    index_status_message: ?[]const u8,
+    index_status_message: ?[]const u8 = null,
 
     /// This is a boolean value indicating this is
     /// a parent (composite) recovery point.
@@ -59,26 +59,26 @@ pub const RecoveryPointByResource = struct {
 
     /// The Amazon Resource Name (ARN) of the parent (composite)
     /// recovery point.
-    parent_recovery_point_arn: ?[]const u8,
+    parent_recovery_point_arn: ?[]const u8 = null,
 
     /// An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for
     /// example,
     /// `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-    recovery_point_arn: ?[]const u8,
+    recovery_point_arn: ?[]const u8 = null,
 
     /// The non-unique name of the resource that
     /// belongs to the specified backup.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// A status code specifying the state of the recovery point.
-    status: ?RecoveryPointStatus,
+    status: ?RecoveryPointStatus = null,
 
     /// A message explaining the current status of the recovery point.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The type of vault in which the described recovery point is
     /// stored.
-    vault_type: ?VaultType,
+    vault_type: ?VaultType = null,
 
     pub const json_field_names = .{
         .aggregated_scan_result = "AggregatedScanResult",

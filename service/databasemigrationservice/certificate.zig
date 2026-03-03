@@ -3,31 +3,31 @@
 /// the replication instance.
 pub const Certificate = struct {
     /// The Amazon Resource Name (ARN) for the certificate.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The date that the certificate was created.
-    certificate_creation_date: ?i64,
+    certificate_creation_date: ?i64 = null,
 
     /// A customer-assigned name for the certificate. Identifiers must begin with a
     /// letter and
     /// must contain only ASCII letters, digits, and hyphens. They can't end with a
     /// hyphen or
     /// contain two consecutive hyphens.
-    certificate_identifier: ?[]const u8,
+    certificate_identifier: ?[]const u8 = null,
 
     /// The owner of the certificate.
-    certificate_owner: ?[]const u8,
+    certificate_owner: ?[]const u8 = null,
 
     /// The contents of a `.pem` file, which contains an X.509 certificate.
-    certificate_pem: ?[]const u8,
+    certificate_pem: ?[]const u8 = null,
 
     /// The location of an imported Oracle Wallet certificate for use with SSL.
     /// Example:
     /// `filebase64("${path.root}/rds-ca-2019-root.sso")`
-    certificate_wallet: ?[]const u8,
+    certificate_wallet: ?[]const u8 = null,
 
     /// The key length of the cryptographic algorithm being used.
-    key_length: ?i32,
+    key_length: ?i32 = null,
 
     /// An KMS key identifier that is used to encrypt the certificate.
     ///
@@ -37,16 +37,16 @@ pub const Certificate = struct {
     /// KMS creates the default encryption key for your Amazon Web Services account.
     /// Your Amazon Web Services account has
     /// a different default encryption key for each Amazon Web Services Region.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The signing algorithm for the certificate.
-    signing_algorithm: ?[]const u8,
+    signing_algorithm: ?[]const u8 = null,
 
     /// The beginning date that the certificate is valid.
-    valid_from_date: ?i64,
+    valid_from_date: ?i64 = null,
 
     /// The final date that the certificate is valid.
-    valid_to_date: ?i64,
+    valid_to_date: ?i64 = null,
 
     pub const json_field_names = .{
         .certificate_arn = "CertificateArn",

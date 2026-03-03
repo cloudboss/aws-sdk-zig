@@ -6,13 +6,13 @@ const S3LogDeliveryDescription = @import("s3_log_delivery_description.zig").S3Lo
 /// configuration specifies the details of these destinations.
 pub const WorkerLogDeliveryDescription = struct {
     /// Details about delivering logs to Amazon CloudWatch Logs.
-    cloud_watch_logs: ?CloudWatchLogsLogDeliveryDescription,
+    cloud_watch_logs: ?CloudWatchLogsLogDeliveryDescription = null,
 
     /// Details about delivering logs to Amazon Kinesis Data Firehose.
-    firehose: ?FirehoseLogDeliveryDescription,
+    firehose: ?FirehoseLogDeliveryDescription = null,
 
     /// Details about delivering logs to Amazon S3.
-    s_3: ?S3LogDeliveryDescription,
+    s_3: ?S3LogDeliveryDescription = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs = "cloudWatchLogs",

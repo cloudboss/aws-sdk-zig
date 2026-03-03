@@ -5,7 +5,7 @@ const FilterKey = @import("filter_key.zig").FilterKey;
 /// projects.
 pub const ProjectListFilter = struct {
     /// The operator used to compare the fields.
-    comparison_operator: ?ComparisonOperator,
+    comparison_operator: ?ComparisonOperator = null,
 
     /// A key that can be used to sort results.
     key: FilterKey,

@@ -28,7 +28,7 @@ pub const EnvironmentVariable = struct {
     /// in the buildspec. To learn how to do so, see
     /// [env/secrets-manager](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager) in the
     /// *CodeBuild User Guide*.
-    @"type": ?EnvironmentVariableType,
+    @"type": ?EnvironmentVariableType = null,
 
     /// The value of the environment variable.
     ///

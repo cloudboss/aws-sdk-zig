@@ -31,7 +31,7 @@ pub const AnalysisSearchFilter = struct {
     ///
     /// * `ANALYSIS_NAME`: Any analyses whose names have a substring match to this
     ///   value will be returned.
-    name: ?AnalysisFilterAttribute,
+    name: ?AnalysisFilterAttribute = null,
 
     /// The comparison operator that you want to use as a filter, for example
     /// `"Operator": "StringEquals"`. Valid values are `"StringEquals"` and
@@ -47,12 +47,12 @@ pub const AnalysisSearchFilter = struct {
     /// folders you are searching for. For example, `"Name":"ANALYSIS_NAME",
     /// "Operator": "StringLike", "Value": "Test"`. The `"StringLike"` operator only
     /// supports the `NAME` value `ANALYSIS_NAME`.
-    operator: ?FilterOperator,
+    operator: ?FilterOperator = null,
 
     /// The value of the named item, in this case `QUICKSIGHT_USER`, that you want
     /// to use as a filter, for example `"Value"`. An example is
     /// `"arn:aws:quicksight:us-east-1:1:user/default/UserName1"`.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

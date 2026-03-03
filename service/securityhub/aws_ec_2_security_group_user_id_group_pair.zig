@@ -1,13 +1,13 @@
 /// A relationship between a security group and a user.
 pub const AwsEc2SecurityGroupUserIdGroupPair = struct {
     /// The ID of the security group.
-    group_id: ?[]const u8,
+    group_id: ?[]const u8 = null,
 
     /// The name of the security group.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// The status of a VPC peering connection, if applicable.
-    peering_status: ?[]const u8,
+    peering_status: ?[]const u8 = null,
 
     /// The ID of an Amazon Web Services account.
     ///
@@ -20,13 +20,13 @@ pub const AwsEc2SecurityGroupUserIdGroupPair = struct {
     /// [EC2-Classic] Required when adding or removing rules that reference a
     /// security group in
     /// another VPC.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     /// The ID of the VPC for the referenced security group, if applicable.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     /// The ID of the VPC peering connection, if applicable.
-    vpc_peering_connection_id: ?[]const u8,
+    vpc_peering_connection_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .group_id = "GroupId",

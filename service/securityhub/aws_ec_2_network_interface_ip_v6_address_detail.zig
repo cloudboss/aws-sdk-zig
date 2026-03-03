@@ -3,7 +3,7 @@
 /// interface.
 pub const AwsEc2NetworkInterfaceIpV6AddressDetail = struct {
     /// The IPV6 address.
-    ip_v6_address: ?[]const u8,
+    ip_v6_address: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .ip_v6_address = "IpV6Address",

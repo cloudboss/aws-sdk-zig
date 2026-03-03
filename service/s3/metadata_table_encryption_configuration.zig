@@ -10,7 +10,7 @@ pub const MetadataTableEncryptionConfiguration = struct {
     /// that's located in the same Region as the general purpose bucket that
     /// corresponds to the metadata
     /// table configuration.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The encryption type specified for a metadata table. To specify server-side
     /// encryption with

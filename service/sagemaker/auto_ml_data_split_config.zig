@@ -9,7 +9,7 @@ pub const AutoMLDataSplitConfig = struct {
     /// the training dataset to be used for validation. The default value is 0.2,
     /// and values must be greater than 0 and less than 1. We recommend setting this
     /// value to be less than 0.5.
-    validation_fraction: ?f32,
+    validation_fraction: ?f32 = null,
 
     pub const json_field_names = .{
         .validation_fraction = "ValidationFraction",

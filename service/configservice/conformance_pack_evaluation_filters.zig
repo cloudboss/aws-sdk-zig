@@ -7,20 +7,20 @@ pub const ConformancePackEvaluationFilters = struct {
     ///
     /// The allowed values are `COMPLIANT` and `NON_COMPLIANT`. `INSUFFICIENT_DATA`
     /// is not supported.
-    compliance_type: ?ConformancePackComplianceType,
+    compliance_type: ?ConformancePackComplianceType = null,
 
     /// Filters the results by Config rule names.
-    config_rule_names: ?[]const []const u8,
+    config_rule_names: ?[]const []const u8 = null,
 
     /// Filters the results by resource IDs.
     ///
     /// This is valid only when you provide resource type. If there is no resource
     /// type, you will see an error.
-    resource_ids: ?[]const []const u8,
+    resource_ids: ?[]const []const u8 = null,
 
     /// Filters the results by the resource type (for example,
     /// `"AWS::EC2::Instance"`).
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .compliance_type = "ComplianceType",

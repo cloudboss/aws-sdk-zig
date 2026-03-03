@@ -6,7 +6,7 @@ const InsightHealth = @import("insight_health.zig").InsightHealth;
 pub const TagHealth = struct {
     /// Number of resources that DevOps Guru is monitoring in your account that are
     /// specified by an Amazon Web Services tag.
-    analyzed_resource_count: ?i64,
+    analyzed_resource_count: ?i64 = null,
 
     /// An Amazon Web Services tag *key* that is used to identify the Amazon Web
     /// Services resources that
@@ -27,14 +27,14 @@ pub const TagHealth = struct {
     /// *key*/*value* pairs in your
     /// application might be `Devops-Guru-production-application/RDS` or
     /// `Devops-Guru-production-application/containers`.
-    app_boundary_key: ?[]const u8,
+    app_boundary_key: ?[]const u8 = null,
 
     /// Information about the health of the Amazon Web Services resources in your
     /// account that are specified
     /// by an Amazon Web Services tag, including the number of open proactive, open
     /// reactive insights, and the
     /// Mean Time to Recover (MTTR) of closed insights.
-    insight: ?InsightHealth,
+    insight: ?InsightHealth = null,
 
     /// The value in an Amazon Web Services tag.
     ///
@@ -44,7 +44,7 @@ pub const TagHealth = struct {
     /// Omitting the tag *value* is the same as using an empty
     /// string. Like tag *keys*, tag *values* are
     /// case-sensitive. You can specify a maximum of 256 characters for a tag value.
-    tag_value: ?[]const u8,
+    tag_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .analyzed_resource_count = "AnalyzedResourceCount",

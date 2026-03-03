@@ -3,7 +3,7 @@ const KeySpec = @import("key_spec.zig").KeySpec;
 /// Defines the attributes of the private key.
 pub const PrivateKeyAttributesV2 = struct {
     /// Defines the cryptographic providers used to generate the private key.
-    crypto_providers: ?[]const []const u8,
+    crypto_providers: ?[]const []const u8 = null,
 
     /// Defines the purpose of the private key. Set it to "KEY_EXCHANGE" or
     /// "SIGNATURE"

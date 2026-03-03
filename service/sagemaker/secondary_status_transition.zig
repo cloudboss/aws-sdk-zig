@@ -6,7 +6,7 @@ pub const SecondaryStatusTransition = struct {
     /// A timestamp that shows when the training job transitioned out of this
     /// secondary status state into another secondary status state or when the
     /// training job has ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// A timestamp that shows when the training job transitioned to the current
     /// secondary status state.
@@ -80,7 +80,7 @@ pub const SecondaryStatusTransition = struct {
     /// * `TrainingJobStatus` - InProgress
     /// * `SecondaryStatus` - Training
     /// * `StatusMessage` - Downloading the training image
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .end_time = "EndTime",

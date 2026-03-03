@@ -16,14 +16,14 @@ pub const DialogAction = struct {
     /// For more information, see [
     /// Using spelling to enter slot values
     /// ](https://docs.aws.amazon.com/lexv2/latest/dg/spelling-styles.html).
-    slot_elicitation_style: ?StyleType,
+    slot_elicitation_style: ?StyleType = null,
 
     /// The name of the slot that should be elicited from the user.
-    slot_to_elicit: ?[]const u8,
+    slot_to_elicit: ?[]const u8 = null,
 
     /// The name of the constituent sub slot of the composite slot
     /// specified in slotToElicit that should be elicited from the user.
-    sub_slot_to_elicit: ?ElicitSubSlot,
+    sub_slot_to_elicit: ?ElicitSubSlot = null,
 
     /// The next action that the bot should take in its interaction with the
     /// user. The following values are possible:

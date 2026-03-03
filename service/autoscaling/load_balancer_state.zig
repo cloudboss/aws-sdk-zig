@@ -1,7 +1,7 @@
 /// Describes the state of a Classic Load Balancer.
 pub const LoadBalancerState = struct {
     /// The name of the load balancer.
-    load_balancer_name: ?[]const u8,
+    load_balancer_name: ?[]const u8 = null,
 
     /// One of the following load balancer states:
     ///
@@ -21,5 +21,5 @@ pub const LoadBalancerState = struct {
     ///
     /// * `Removed` - All Auto Scaling instances are deregistered from the load
     /// balancer.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 };

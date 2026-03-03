@@ -3,20 +3,20 @@ const Tag = @import("tag.zig").Tag;
 /// A security group that can be used by interfaces in the VPC.
 pub const SecurityGroupForVpc = struct {
     /// The security group's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The security group ID.
-    group_id: ?[]const u8,
+    group_id: ?[]const u8 = null,
 
     /// The security group name.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// The security group owner ID.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The VPC ID in which the security group was created.
-    primary_vpc_id: ?[]const u8,
+    primary_vpc_id: ?[]const u8 = null,
 
     /// The security group tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

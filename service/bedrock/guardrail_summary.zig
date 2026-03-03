@@ -17,10 +17,10 @@ pub const GuardrailSummary = struct {
     /// Details about the system-defined guardrail profile that you're using with
     /// your guardrail, including the guardrail profile ID and Amazon Resource Name
     /// (ARN).
-    cross_region_details: ?GuardrailCrossRegionDetails,
+    cross_region_details: ?GuardrailCrossRegionDetails = null,
 
     /// A description of the guardrail.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the guardrail.
     id: []const u8,

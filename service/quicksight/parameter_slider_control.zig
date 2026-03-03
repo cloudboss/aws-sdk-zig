@@ -4,7 +4,7 @@ const SliderControlDisplayOptions = @import("slider_control_display_options.zig"
 /// by sliding the toggle.
 pub const ParameterSliderControl = struct {
     /// The display options of a control.
-    display_options: ?SliderControlDisplayOptions,
+    display_options: ?SliderControlDisplayOptions = null,
 
     /// The larger value that is displayed at the right of the slider.
     maximum_value: f64 = 0,

@@ -11,7 +11,7 @@ pub const ReferenceDataSourceDescription = struct {
 
     /// Describes the format of the data in the streaming source, and how each data
     /// element maps to corresponding columns created in the in-application stream.
-    reference_schema: ?SourceSchema,
+    reference_schema: ?SourceSchema = null,
 
     /// Provides the S3 bucket name, the object key name that contains the reference
     /// data. It also provides the Amazon Resource Name (ARN) of the IAM role that

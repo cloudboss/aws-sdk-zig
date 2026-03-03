@@ -5,7 +5,7 @@ pub const TrialComponentSource = struct {
     source_arn: []const u8,
 
     /// The source job type.
-    source_type: ?[]const u8,
+    source_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_arn = "SourceArn",

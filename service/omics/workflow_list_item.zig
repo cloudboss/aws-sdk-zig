@@ -6,29 +6,29 @@ const WorkflowType = @import("workflow_type.zig").WorkflowType;
 /// A workflow.
 pub const WorkflowListItem = struct {
     /// The workflow's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// When the workflow was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The workflow's digest.
-    digest: ?[]const u8,
+    digest: ?[]const u8 = null,
 
     /// The workflow's ID.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Any metadata available for workflow. The information listed may vary
     /// depending on the workflow, and there may also be no metadata to return.
-    metadata: ?[]const aws.map.StringMapEntry,
+    metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// The workflow's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The workflow's status.
-    status: ?WorkflowStatus,
+    status: ?WorkflowStatus = null,
 
     /// The workflow's type.
-    @"type": ?WorkflowType,
+    @"type": ?WorkflowType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

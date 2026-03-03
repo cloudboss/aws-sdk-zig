@@ -9,46 +9,46 @@ const SourceProperties = @import("source_properties.zig").SourceProperties;
 
 pub const SourceServer = struct {
     /// Source server application ID.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// Source server ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Source Server connector action.
-    connector_action: ?SourceServerConnectorAction,
+    connector_action: ?SourceServerConnectorAction = null,
 
     /// Source server data replication info.
-    data_replication_info: ?DataReplicationInfo,
+    data_replication_info: ?DataReplicationInfo = null,
 
     /// Source server fqdn for action framework.
-    fqdn_for_action_framework: ?[]const u8,
+    fqdn_for_action_framework: ?[]const u8 = null,
 
     /// Source server archived status.
-    is_archived: ?bool,
+    is_archived: ?bool = null,
 
     /// Source server launched instance.
-    launched_instance: ?LaunchedInstance,
+    launched_instance: ?LaunchedInstance = null,
 
     /// Source server lifecycle state.
-    life_cycle: ?LifeCycle,
+    life_cycle: ?LifeCycle = null,
 
     /// Source server replication type.
-    replication_type: ?ReplicationType,
+    replication_type: ?ReplicationType = null,
 
     /// Source server properties.
-    source_properties: ?SourceProperties,
+    source_properties: ?SourceProperties = null,
 
     /// Source server ID.
-    source_server_id: ?[]const u8,
+    source_server_id: ?[]const u8 = null,
 
     /// Source server Tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Source server user provided ID.
-    user_provided_id: ?[]const u8,
+    user_provided_id: ?[]const u8 = null,
 
     /// Source server vCenter client id.
-    vcenter_client_id: ?[]const u8,
+    vcenter_client_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_id = "applicationID",

@@ -6,11 +6,11 @@ pub const InstanceStatusDetails = struct {
     /// The time when a status check failed. For an instance that was launched and
     /// impaired,
     /// this is the time when the instance was launched.
-    impaired_since: ?i64,
+    impaired_since: ?i64 = null,
 
     /// The type of instance status.
-    name: ?StatusName,
+    name: ?StatusName = null,
 
     /// The status.
-    status: ?StatusType,
+    status: ?StatusType = null,
 };

@@ -5,7 +5,7 @@ const FargateProfileIssue = @import("fargate_profile_issue.zig").FargateProfileI
 /// profile's health, they are listed here.
 pub const FargateProfileHealth = struct {
     /// Any issues that are associated with the Fargate profile.
-    issues: ?[]const FargateProfileIssue,
+    issues: ?[]const FargateProfileIssue = null,
 
     pub const json_field_names = .{
         .issues = "issues",

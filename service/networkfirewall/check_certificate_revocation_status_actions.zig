@@ -16,7 +16,7 @@ pub const CheckCertificateRevocationStatusActions = struct {
     /// * **REJECT** - Network Firewall sends a TCP reject packet back to your
     ///   client. The service closes the connection and drops subsequent packets for
     ///   that connection. `REJECT` is available only for TCP traffic.
-    revoked_status_action: ?RevocationCheckAction,
+    revoked_status_action: ?RevocationCheckAction = null,
 
     /// Configures how Network Firewall processes traffic when it determines that
     /// the certificate presented by the server in the SSL/TLS connection has an
@@ -33,7 +33,7 @@ pub const CheckCertificateRevocationStatusActions = struct {
     /// * **REJECT** - Network Firewall sends a TCP reject packet back to your
     ///   client. The service closes the connection and drops subsequent packets for
     ///   that connection. `REJECT` is available only for TCP traffic.
-    unknown_status_action: ?RevocationCheckAction,
+    unknown_status_action: ?RevocationCheckAction = null,
 
     pub const json_field_names = .{
         .revoked_status_action = "RevokedStatusAction",

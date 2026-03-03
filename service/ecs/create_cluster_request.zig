@@ -31,16 +31,16 @@ pub const CreateClusterRequest = struct {
     /// The
     /// [PutCapacityProvider](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProvider.html) API operation is used to update the list of available
     /// capacity providers for a cluster after the cluster is created.
-    capacity_providers: ?[]const []const u8,
+    capacity_providers: ?[]const []const u8 = null,
 
     /// The name of your cluster. If you don't specify a name for your cluster, you
     /// create a
     /// cluster that's named `default`. Up to 255 letters (uppercase and lowercase),
     /// numbers, underscores, and hyphens are allowed.
-    cluster_name: ?[]const u8,
+    cluster_name: ?[]const u8 = null,
 
     /// The `execute` command configuration for the cluster.
-    configuration: ?ClusterConfiguration,
+    configuration: ?ClusterConfiguration = null,
 
     /// The capacity provider strategy to set as the default for the cluster. After
     /// a default
@@ -54,7 +54,7 @@ pub const CreateClusterRequest = struct {
     /// was
     /// created, it can be defined later with the
     /// [PutClusterCapacityProviders](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html) API operation.
-    default_capacity_provider_strategy: ?[]const CapacityProviderStrategyItem,
+    default_capacity_provider_strategy: ?[]const CapacityProviderStrategyItem = null,
 
     /// Use this parameter to set a default Service Connect namespace. After you set
     /// a default
@@ -78,7 +78,7 @@ pub const CreateClusterRequest = struct {
     /// Service Connect. For more information, see [Service
     /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    service_connect_defaults: ?ClusterServiceConnectDefaultsRequest,
+    service_connect_defaults: ?ClusterServiceConnectDefaultsRequest = null,
 
     /// The setting to use when creating a cluster. This parameter is used to turn
     /// on
@@ -86,7 +86,7 @@ pub const CreateClusterRequest = struct {
     /// overrides
     /// the `containerInsights` value set with
     /// [PutAccountSetting](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html) or [PutAccountSettingDefault](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html).
-    settings: ?[]const ClusterSetting,
+    settings: ?[]const ClusterSetting = null,
 
     /// The metadata that you apply to the cluster to help you categorize and
     /// organize them.
@@ -120,7 +120,7 @@ pub const CreateClusterRequest = struct {
     /// this prefix. Tags with this prefix do not count against your tags per
     /// resource
     /// limit.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .capacity_providers = "capacityProviders",

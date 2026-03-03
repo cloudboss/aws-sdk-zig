@@ -3,11 +3,11 @@
 pub const MotionImageInsertionOffset = struct {
     /// Set the distance, in pixels, between the overlay and the left edge of the
     /// video frame.
-    image_x: ?i32,
+    image_x: ?i32 = null,
 
     /// Set the distance, in pixels, between the overlay and the top edge of the
     /// video frame.
-    image_y: ?i32,
+    image_y: ?i32 = null,
 
     pub const json_field_names = .{
         .image_x = "ImageX",

@@ -9,7 +9,7 @@ const S3Object = @import("s3_object.zig").S3Object;
 /// PDF format.
 pub const DocumentLocation = struct {
     /// The Amazon S3 bucket that contains the input document.
-    s3_object: ?S3Object,
+    s3_object: ?S3Object = null,
 
     pub const json_field_names = .{
         .s3_object = "S3Object",

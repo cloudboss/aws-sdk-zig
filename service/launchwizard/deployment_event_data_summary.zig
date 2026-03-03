@@ -3,19 +3,19 @@ const EventStatus = @import("event_status.zig").EventStatus;
 /// A summary of the deployment event data.
 pub const DeploymentEventDataSummary = struct {
     /// The description of the deployment event.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the deployment event.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The status of the deployment event.
-    status: ?EventStatus,
+    status: ?EventStatus = null,
 
     /// The reason of the deployment event status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The timestamp of the deployment event.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .description = "description",

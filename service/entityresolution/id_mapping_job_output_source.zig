@@ -2,7 +2,7 @@
 pub const IdMappingJobOutputSource = struct {
     /// Customer KMS ARN for encryption at rest. If not provided, system will use an
     /// Entity Resolution managed KMS key.
-    kms_arn: ?[]const u8,
+    kms_arn: ?[]const u8 = null,
 
     /// The S3 path to which Entity Resolution will write the output table.
     output_s3_path: []const u8,

@@ -4,13 +4,13 @@ pub const PhonemeTranscription = struct {
     /// compliant language codes for the results to be rendered in. If there is no
     /// data for the result in the requested language, data will be returned in the
     /// default language for the entry.
-    language: ?[]const u8,
+    language: ?[]const u8 = null,
 
     /// Boolean which indicates if it the preferred pronunciation.
-    preferred: ?bool,
+    preferred: ?bool = null,
 
     /// Value which indicates how to pronounce the value.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .language = "Language",

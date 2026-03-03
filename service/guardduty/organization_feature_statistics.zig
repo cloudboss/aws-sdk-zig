@@ -5,14 +5,14 @@ const OrgFeature = @import("org_feature.zig").OrgFeature;
 /// that have enabled a specific feature.
 pub const OrganizationFeatureStatistics = struct {
     /// Name of the additional configuration.
-    additional_configuration: ?[]const OrganizationFeatureStatisticsAdditionalConfiguration,
+    additional_configuration: ?[]const OrganizationFeatureStatisticsAdditionalConfiguration = null,
 
     /// Total number of accounts that have enabled a specific
     /// feature.
-    enabled_accounts_count: ?i32,
+    enabled_accounts_count: ?i32 = null,
 
     /// Name of the feature.
-    name: ?OrgFeature,
+    name: ?OrgFeature = null,
 
     pub const json_field_names = .{
         .additional_configuration = "AdditionalConfiguration",

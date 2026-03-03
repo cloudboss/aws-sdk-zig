@@ -6,41 +6,41 @@ const DatabaseStatus = @import("database_status.zig").DatabaseStatus;
 /// for SAP.
 pub const Database = struct {
     /// The ID of the application.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the database.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The ID of the component.
-    component_id: ?[]const u8,
+    component_id: ?[]const u8 = null,
 
     /// The Amazon Resource Names of the connected AWS Systems Manager for SAP
     /// components.
-    connected_component_arns: ?[]const []const u8,
+    connected_component_arns: ?[]const []const u8 = null,
 
     /// The credentials of the database.
-    credentials: ?[]const ApplicationCredential,
+    credentials: ?[]const ApplicationCredential = null,
 
     /// The ID of the SAP HANA database.
-    database_id: ?[]const u8,
+    database_id: ?[]const u8 = null,
 
     /// The name of the database.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The type of the database.
-    database_type: ?DatabaseType,
+    database_type: ?DatabaseType = null,
 
     /// The time at which the database was last updated.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The primary host of the database.
-    primary_host: ?[]const u8,
+    primary_host: ?[]const u8 = null,
 
     /// The SQL port of the database.
-    sql_port: ?i32,
+    sql_port: ?i32 = null,
 
     /// The status of the database.
-    status: ?DatabaseStatus,
+    status: ?DatabaseStatus = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

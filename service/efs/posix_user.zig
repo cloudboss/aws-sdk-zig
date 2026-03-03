@@ -9,7 +9,7 @@ pub const PosixUser = struct {
 
     /// Secondary POSIX group IDs used for all file system operations using this
     /// access point.
-    secondary_gids: ?[]const i64,
+    secondary_gids: ?[]const i64 = null,
 
     /// The POSIX user ID used for all file system operations using this access
     /// point.

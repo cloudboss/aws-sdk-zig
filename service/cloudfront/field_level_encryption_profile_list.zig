@@ -3,7 +3,7 @@ const FieldLevelEncryptionProfileSummary = @import("field_level_encryption_profi
 /// List of field-level encryption profiles.
 pub const FieldLevelEncryptionProfileList = struct {
     /// The field-level encryption profile items.
-    items: ?[]const FieldLevelEncryptionProfileSummary,
+    items: ?[]const FieldLevelEncryptionProfileSummary = null,
 
     /// The maximum number of field-level encryption profiles you want in the
     /// response body.
@@ -12,7 +12,7 @@ pub const FieldLevelEncryptionProfileList = struct {
     /// If there are more elements to be listed, this element is present and
     /// contains the value that you can use for the `Marker` request parameter to
     /// continue listing your profiles where you left off.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The number of field-level encryption profiles.
     quantity: i32,

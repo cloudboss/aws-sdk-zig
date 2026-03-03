@@ -4,7 +4,7 @@ const RuleConfigurationPropertyType = @import("rule_configuration_property_type.
 pub const RuleConfigurationProperty = struct {
     /// The description of the action configuration property that is displayed to
     /// users.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether the configuration property is a key.
     key: bool = false,
@@ -33,7 +33,7 @@ pub const RuleConfigurationProperty = struct {
     secret: bool = false,
 
     /// The type of the configuration property.
-    @"type": ?RuleConfigurationPropertyType,
+    @"type": ?RuleConfigurationPropertyType = null,
 
     pub const json_field_names = .{
         .description = "description",

@@ -5,14 +5,14 @@ const Parameter = @import("parameter.zig").Parameter;
 pub const EngineDefaults = struct {
     /// The name of the cluster parameter group family to return the engine
     /// parameter information for.
-    db_parameter_group_family: ?[]const u8,
+    db_parameter_group_family: ?[]const u8 = null,
 
     /// An optional pagination token provided by a previous request. If this
     /// parameter is specified, the response
     /// includes only records beyond the marker, up to the value specified by
     /// `MaxRecords`.
-    marker: ?[]const u8,
+    marker: ?[]const u8 = null,
 
     /// The parameters of a particular cluster parameter group family.
-    parameters: ?[]const Parameter,
+    parameters: ?[]const Parameter = null,
 };

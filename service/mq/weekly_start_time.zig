@@ -11,7 +11,7 @@ pub const WeeklyStartTime = struct {
 
     /// The time zone, UTC by default, in either the Country/City format, or the UTC
     /// offset format.
-    time_zone: ?[]const u8,
+    time_zone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .day_of_week = "DayOfWeek",

@@ -13,7 +13,7 @@ pub const S3EncryptionSettings = struct {
     /// associated with Amazon S3 to encrypt your data keys. You can optionally
     /// choose to specify a different, customer managed CMK. Do so by specifying the
     /// Amazon Resource Name (ARN) of the key for the setting KMS ARN.
-    encryption_type: ?S3ServerSideEncryptionType,
+    encryption_type: ?S3ServerSideEncryptionType = null,
 
     /// Optionally, specify the encryption context that you want to use alongside
     /// your KMS key. AWS KMS uses this encryption context as additional
@@ -22,7 +22,7 @@ pub const S3EncryptionSettings = struct {
     /// string-string map. To use this setting, you must also set Server-side
     /// encryption to AWS KMS. For more information about encryption context, see:
     /// https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context.
-    kms_encryption_context: ?[]const u8,
+    kms_encryption_context: ?[]const u8 = null,
 
     /// Optionally, specify the customer master key (CMK) that you want to use to
     /// encrypt the data key that AWS uses to encrypt your output content. Enter the
@@ -30,7 +30,7 @@ pub const S3EncryptionSettings = struct {
     /// set Server-side encryption to AWS KMS. If you set Server-side encryption to
     /// AWS KMS but don't specify a CMK here, AWS uses the AWS managed CMK
     /// associated with Amazon S3.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .encryption_type = "EncryptionType",

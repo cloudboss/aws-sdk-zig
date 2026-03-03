@@ -6,7 +6,7 @@ pub const TargetHealth = struct {
     /// A description of the target health that provides additional details. If the
     /// state is
     /// `healthy`, a description is not provided.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The reason code.
     ///
@@ -69,8 +69,8 @@ pub const TargetHealth = struct {
     ///
     /// * `Elb.InternalError` - Target health is unavailable due to an internal
     /// error.
-    reason: ?TargetHealthReasonEnum,
+    reason: ?TargetHealthReasonEnum = null,
 
     /// The state of the target.
-    state: ?TargetHealthStateEnum,
+    state: ?TargetHealthStateEnum = null,
 };

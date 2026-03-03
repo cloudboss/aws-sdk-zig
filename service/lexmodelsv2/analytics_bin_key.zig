@@ -4,10 +4,10 @@ const AnalyticsBinByName = @import("analytics_bin_by_name.zig").AnalyticsBinByNa
 /// that defines that bin.
 pub const AnalyticsBinKey = struct {
     /// The criterion by which to bin the results.
-    name: ?AnalyticsBinByName,
+    name: ?AnalyticsBinByName = null,
 
     /// The value of the criterion that defines the bin.
-    value: ?i64,
+    value: ?i64 = null,
 
     pub const json_field_names = .{
         .name = "name",

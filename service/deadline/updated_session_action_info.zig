@@ -5,30 +5,30 @@ const TaskRunManifestPropertiesRequest = @import("task_run_manifest_properties_r
 /// progress of the session.
 pub const UpdatedSessionActionInfo = struct {
     /// The status of the session upon completion.
-    completed_status: ?CompletedStatus,
+    completed_status: ?CompletedStatus = null,
 
     /// The date and time the resource ended running.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// A list of output manifest properties reported by the worker agent, with each
     /// entry corresponding to a manifest property in the job.
-    manifests: ?[]const TaskRunManifestPropertiesRequest,
+    manifests: ?[]const TaskRunManifestPropertiesRequest = null,
 
     /// The process exit code. The default Deadline Cloud worker agent converts
     /// unsigned 32-bit exit codes to signed 32-bit exit codes.
-    process_exit_code: ?i32,
+    process_exit_code: ?i32 = null,
 
     /// A message to indicate the progress of the updated session action.
-    progress_message: ?[]const u8,
+    progress_message: ?[]const u8 = null,
 
     /// The percentage completed.
-    progress_percent: ?f32,
+    progress_percent: ?f32 = null,
 
     /// The date and time the resource started running.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The updated time.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .completed_status = "completedStatus",

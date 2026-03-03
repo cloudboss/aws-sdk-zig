@@ -3,5 +3,5 @@ const StringSchemaConfig = @import("string_schema_config.zig").StringSchemaConfi
 /// An object that contains information about the parameter definition.
 pub const ParameterDefinitionSchema = struct {
     /// An object that contains information about the string schema.
-    string_schema: ?StringSchemaConfig,
+    string_schema: ?StringSchemaConfig = null,
 };

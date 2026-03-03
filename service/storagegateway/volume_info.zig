@@ -1,6 +1,6 @@
 /// Describes a storage volume object.
 pub const VolumeInfo = struct {
-    gateway_arn: ?[]const u8,
+    gateway_arn: ?[]const u8 = null,
 
     /// The unique identifier assigned to your gateway during activation. This ID
     /// becomes part
@@ -9,7 +9,7 @@ pub const VolumeInfo = struct {
     ///
     /// Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens
     /// (-).
-    gateway_id: ?[]const u8,
+    gateway_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the storage volume. For example, the
     /// following is a
@@ -19,11 +19,11 @@ pub const VolumeInfo = struct {
     ///
     /// Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens
     /// (-).
-    volume_arn: ?[]const u8,
+    volume_arn: ?[]const u8 = null,
 
     /// One of the VolumeStatus values that indicates the state of the storage
     /// volume.
-    volume_attachment_status: ?[]const u8,
+    volume_attachment_status: ?[]const u8 = null,
 
     /// The unique identifier assigned to the volume. This ID becomes part of the
     /// volume Amazon
@@ -31,7 +31,7 @@ pub const VolumeInfo = struct {
     ///
     /// Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens
     /// (-).
-    volume_id: ?[]const u8,
+    volume_id: ?[]const u8 = null,
 
     /// The size of the volume in bytes.
     ///
@@ -40,7 +40,7 @@ pub const VolumeInfo = struct {
     volume_size_in_bytes: i64 = 0,
 
     /// One of the VolumeType enumeration values describing the type of the volume.
-    volume_type: ?[]const u8,
+    volume_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .gateway_arn = "GatewayARN",

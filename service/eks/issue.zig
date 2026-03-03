@@ -89,13 +89,13 @@ pub const Issue = struct {
     /// are insufficient [node IAM
     /// role](https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html)
     /// permissions or lack of outbound internet access for the nodes.
-    code: ?NodegroupIssueCode,
+    code: ?NodegroupIssueCode = null,
 
     /// The error message associated with the issue.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The Amazon Web Services resources that are afflicted by this issue.
-    resource_ids: ?[]const []const u8,
+    resource_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

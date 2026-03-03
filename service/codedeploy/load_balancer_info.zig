@@ -25,7 +25,7 @@ pub const LoadBalancerInfo = struct {
     /// If you're using Application Load Balancers or Network Load Balancers, use
     /// the
     /// `targetGroupInfoList` array instead of this one.
-    elb_info_list: ?[]const ELBInfo,
+    elb_info_list: ?[]const ELBInfo = null,
 
     /// An array that contains information about the target groups to use for load
     /// balancing
@@ -37,11 +37,11 @@ pub const LoadBalancerInfo = struct {
     ///
     /// If you're using Classic Load Balancers, use the `elbInfoList` array
     /// instead of this one.
-    target_group_info_list: ?[]const TargetGroupInfo,
+    target_group_info_list: ?[]const TargetGroupInfo = null,
 
     /// The target group pair information. This is an array of
     /// `TargeGroupPairInfo` objects with a maximum size of one.
-    target_group_pair_info_list: ?[]const TargetGroupPairInfo,
+    target_group_pair_info_list: ?[]const TargetGroupPairInfo = null,
 
     pub const json_field_names = .{
         .elb_info_list = "elbInfoList",

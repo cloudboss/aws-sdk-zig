@@ -11,61 +11,61 @@ const AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails = @import("aw
 pub const AwsEc2LaunchTemplateDataInstanceRequirementsDetails = struct {
     /// The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web
     /// Services Inferentia chips) on an instance.
-    accelerator_count: ?AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails,
+    accelerator_count: ?AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails = null,
 
     /// Indicates whether instance types must have accelerators by specific
     /// manufacturers.
-    accelerator_manufacturers: ?[]const []const u8,
+    accelerator_manufacturers: ?[]const []const u8 = null,
 
     /// The accelerators that must be on the instance type.
-    accelerator_names: ?[]const []const u8,
+    accelerator_names: ?[]const []const u8 = null,
 
     /// The minimum and maximum amount of total accelerator memory, in MiB.
-    accelerator_total_memory_mi_b: ?AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails,
+    accelerator_total_memory_mi_b: ?AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails = null,
 
     /// The accelerator types that must be on the instance type.
-    accelerator_types: ?[]const []const u8,
+    accelerator_types: ?[]const []const u8 = null,
 
     /// Indicates whether bare metal instance types must be included, excluded, or
     /// required.
-    bare_metal: ?[]const u8,
+    bare_metal: ?[]const u8 = null,
 
     /// The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more
     /// information, see [Amazon EBS optimized
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.
-    baseline_ebs_bandwidth_mbps: ?AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails,
+    baseline_ebs_bandwidth_mbps: ?AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails = null,
 
     /// Indicates whether burstable performance T instance types are included,
     /// excluded, or required. For more information, [Burstable performance
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.
-    burstable_performance: ?[]const u8,
+    burstable_performance: ?[]const u8 = null,
 
     /// The CPU manufacturers to include.
-    cpu_manufacturers: ?[]const []const u8,
+    cpu_manufacturers: ?[]const []const u8 = null,
 
     /// The instance types to exclude.
-    excluded_instance_types: ?[]const []const u8,
+    excluded_instance_types: ?[]const []const u8 = null,
 
     /// Indicates whether current or previous generation instance types are
     /// included.
-    instance_generations: ?[]const []const u8,
+    instance_generations: ?[]const []const u8 = null,
 
     /// Indicates whether instance types with instance store volumes are included,
     /// excluded, or required. For more information, see [Amazon EC2 instance
     /// store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide*.
-    local_storage: ?[]const u8,
+    local_storage: ?[]const u8 = null,
 
     /// The type of local storage that is required.
-    local_storage_types: ?[]const []const u8,
+    local_storage_types: ?[]const []const u8 = null,
 
     /// The minimum and maximum amount of memory per vCPU, in GiB.
-    memory_gi_b_per_v_cpu: ?AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails,
+    memory_gi_b_per_v_cpu: ?AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails = null,
 
     /// The minimum and maximum amount of memory, in MiB.
-    memory_mi_b: ?AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails,
+    memory_mi_b: ?AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails = null,
 
     /// The minimum and maximum number of network interfaces.
-    network_interface_count: ?AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails,
+    network_interface_count: ?AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails = null,
 
     /// The price protection threshold for On-Demand Instances. This is the maximum
     /// you'll pay
@@ -81,11 +81,11 @@ pub const AwsEc2LaunchTemplateDataInstanceRequirementsDetails = struct {
     /// percentage.
     ///
     /// A high value, such as `999999`, turns off price protection.
-    on_demand_max_price_percentage_over_lowest_price: ?i32,
+    on_demand_max_price_percentage_over_lowest_price: ?i32 = null,
 
     /// Indicates whether instance types must support hibernation for On-Demand
     /// Instances.
-    require_hibernate_support: ?bool,
+    require_hibernate_support: ?bool = null,
 
     /// The price protection threshold for Spot Instances. This is the maximum
     /// you'll pay for a
@@ -100,13 +100,13 @@ pub const AwsEc2LaunchTemplateDataInstanceRequirementsDetails = struct {
     /// percentage.
     ///
     /// A high value, such as `999999`, turns off price protection.
-    spot_max_price_percentage_over_lowest_price: ?i32,
+    spot_max_price_percentage_over_lowest_price: ?i32 = null,
 
     /// The minimum and maximum amount of total local storage, in GB.
-    total_local_storage_gb: ?AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails,
+    total_local_storage_gb: ?AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails = null,
 
     /// The minimum and maximum number of vCPUs.
-    v_cpu_count: ?AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails,
+    v_cpu_count: ?AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails = null,
 
     pub const json_field_names = .{
         .accelerator_count = "AcceleratorCount",

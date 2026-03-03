@@ -18,10 +18,10 @@ pub const Fleet = struct {
     compute_capacity_status: ComputeCapacityStatus,
 
     /// The time the fleet was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The description to display.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The amount of time that a streaming session remains active after users
     /// disconnect. If they try to reconnect to the streaming session after a
@@ -30,20 +30,20 @@ pub const Fleet = struct {
     /// session with a new streaming instance.
     ///
     /// Specify a value between 60 and 36000.
-    disconnect_timeout_in_seconds: ?i32,
+    disconnect_timeout_in_seconds: ?i32 = null,
 
     /// The fleet name to display.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The name of the directory and organizational unit (OU) to use to join the
     /// fleet to a Microsoft Active Directory domain.
-    domain_join_info: ?DomainJoinInfo,
+    domain_join_info: ?DomainJoinInfo = null,
 
     /// Indicates whether default internet access is enabled for the fleet.
-    enable_default_internet_access: ?bool,
+    enable_default_internet_access: ?bool = null,
 
     /// The fleet errors.
-    fleet_errors: ?[]const FleetError,
+    fleet_errors: ?[]const FleetError = null,
 
     /// The fleet type.
     ///
@@ -59,7 +59,7 @@ pub const Fleet = struct {
     /// one to two minutes.
     /// You are charged for instance streaming when users are connected and a
     /// small hourly fee for instances that are not streaming apps.
-    fleet_type: ?FleetType,
+    fleet_type: ?FleetType = null,
 
     /// The ARN of the IAM role that is applied to the fleet. To assume a role, the
     /// fleet instance calls the AWS Security Token Service (STS) `AssumeRole` API
@@ -71,7 +71,7 @@ pub const Fleet = struct {
     /// For more information, see [Using an IAM Role to Grant Permissions to
     /// Applications and Scripts Running on WorkSpaces Applications Streaming
     /// Instances](https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html) in the *Amazon WorkSpaces Applications Administration Guide*.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// The amount of time that users can be idle (inactive) before they are
     /// disconnected
@@ -101,13 +101,13 @@ pub const Fleet = struct {
     /// of inactivity. If you specify a value that is at the midpoint between two
     /// different minutes, the value is rounded up. For example, if you specify a
     /// value of 90, users are disconnected after 2 minutes of inactivity.
-    idle_disconnect_timeout_in_seconds: ?i32,
+    idle_disconnect_timeout_in_seconds: ?i32 = null,
 
     /// The ARN for the public, private, or shared image.
-    image_arn: ?[]const u8,
+    image_arn: ?[]const u8 = null,
 
     /// The name of the image used to create the fleet.
-    image_name: ?[]const u8,
+    image_name: ?[]const u8 = null,
 
     /// The instance type to use when launching fleet instances. The following
     /// instance types are available:
@@ -206,11 +206,11 @@ pub const Fleet = struct {
     instance_type: []const u8,
 
     /// The maximum number of concurrent sessions for the fleet.
-    max_concurrent_sessions: ?i32,
+    max_concurrent_sessions: ?i32 = null,
 
     /// The maximum number of user sessions on an instance. This only applies to
     /// multi-session fleets.
-    max_sessions_per_instance: ?i32,
+    max_sessions_per_instance: ?i32 = null,
 
     /// The maximum amount of time that a streaming session can remain active, in
     /// seconds. If users are still connected to a streaming instance five minutes
@@ -219,21 +219,21 @@ pub const Fleet = struct {
     /// terminated and replaced by a new instance.
     ///
     /// Specify a value between 600 and 360000.
-    max_user_duration_in_seconds: ?i32,
+    max_user_duration_in_seconds: ?i32 = null,
 
     /// The name of the fleet.
     name: []const u8,
 
     /// The platform of the fleet.
-    platform: ?PlatformType,
+    platform: ?PlatformType = null,
 
     /// The current configuration of the root volume for fleet instances, including
     /// the storage size in GB.
-    root_volume_config: ?VolumeConfig,
+    root_volume_config: ?VolumeConfig = null,
 
     /// The S3 location of the session scripts configuration zip file. This only
     /// applies to Elastic fleets.
-    session_script_s3_location: ?S3Location,
+    session_script_s3_location: ?S3Location = null,
 
     /// The current state for the fleet.
     state: FleetState,
@@ -244,13 +244,13 @@ pub const Fleet = struct {
     /// standard desktop that is provided by the operating system displays.
     ///
     /// The default value is `APP`.
-    stream_view: ?StreamView,
+    stream_view: ?StreamView = null,
 
     /// The USB device filter strings associated with the fleet.
-    usb_device_filter_strings: ?[]const []const u8,
+    usb_device_filter_strings: ?[]const []const u8 = null,
 
     /// The VPC configuration for the fleet.
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

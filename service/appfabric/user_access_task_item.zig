@@ -6,10 +6,10 @@ pub const UserAccessTaskItem = struct {
     app: []const u8,
 
     /// Error from the task, if any.
-    @"error": ?TaskError,
+    @"error": ?TaskError = null,
 
     /// The unique ID of the task.
-    task_id: ?[]const u8,
+    task_id: ?[]const u8 = null,
 
     /// The ID of the application tenant.
     tenant_id: []const u8,

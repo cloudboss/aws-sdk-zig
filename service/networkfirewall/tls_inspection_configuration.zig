@@ -22,7 +22,7 @@ const ServerCertificateConfiguration = @import("server_certificate_configuration
 pub const TLSInspectionConfiguration = struct {
     /// Lists the server certificate configurations that are associated with the TLS
     /// configuration.
-    server_certificate_configurations: ?[]const ServerCertificateConfiguration,
+    server_certificate_configurations: ?[]const ServerCertificateConfiguration = null,
 
     pub const json_field_names = .{
         .server_certificate_configurations = "ServerCertificateConfigurations",

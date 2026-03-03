@@ -4,28 +4,28 @@ const CollectionType = @import("collection_type.zig").CollectionType;
 /// Details about an updated OpenSearch Serverless collection.
 pub const UpdateCollectionDetail = struct {
     /// The Amazon Resource Name (ARN) of the collection.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time when the collection was created.
-    created_date: ?i64,
+    created_date: ?i64 = null,
 
     /// The description of the collection.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the collection.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The date and time when the collection was last modified.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The name of the collection.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the collection.
-    status: ?CollectionStatus,
+    status: ?CollectionStatus = null,
 
     /// The collection type.
-    @"type": ?CollectionType,
+    @"type": ?CollectionType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

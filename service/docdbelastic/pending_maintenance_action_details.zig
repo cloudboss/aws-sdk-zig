@@ -8,25 +8,25 @@ pub const PendingMaintenanceActionDetails = struct {
     /// maintenance window after this date.
     /// If this date is specified, any `NEXT_MAINTENANCE`
     /// `optInType` requests are ignored.
-    auto_applied_after_date: ?[]const u8,
+    auto_applied_after_date: ?[]const u8 = null,
 
     /// Displays the effective date when the pending maintenance action is applied
     /// to the resource.
-    current_apply_date: ?[]const u8,
+    current_apply_date: ?[]const u8 = null,
 
     /// Displays a description providing more detail about the maintenance action.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Displays the date when the maintenance action is automatically applied.
     /// The maintenance action is applied to the resource on this date regardless of
     /// the maintenance window for the resource.
     /// If this date is specified, any `IMMEDIATE`
     /// `optInType` requests are ignored.
-    forced_apply_date: ?[]const u8,
+    forced_apply_date: ?[]const u8 = null,
 
     /// Displays the type of `optInType` request that has been received for the
     /// resource.
-    opt_in_status: ?[]const u8,
+    opt_in_status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "action",

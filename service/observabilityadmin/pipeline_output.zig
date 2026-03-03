@@ -5,10 +5,10 @@ const Record = @import("record.zig").Record;
 /// records and any errors encountered.
 pub const PipelineOutput = struct {
     /// Any error that occurred during the pipeline test operation for this record.
-    @"error": ?PipelineOutputError,
+    @"error": ?PipelineOutputError = null,
 
     /// The processed record output from the pipeline test operation.
-    record: ?Record,
+    record: ?Record = null,
 
     pub const json_field_names = .{
         .@"error" = "Error",

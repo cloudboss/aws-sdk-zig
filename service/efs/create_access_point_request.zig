@@ -13,7 +13,7 @@ pub const CreateAccessPointRequest = struct {
 
     /// The operating system user and
     /// group applied to all file system requests made using the access point.
-    posix_user: ?PosixUser,
+    posix_user: ?PosixUser = null,
 
     /// Specifies the directory on the EFS file system that the access point exposes
     /// as
@@ -30,14 +30,14 @@ pub const CreateAccessPointRequest = struct {
     /// If you do not provide this information, Amazon EFS does not create the root
     /// directory. If the root directory does not exist, attempts to mount
     /// using the access point will fail.
-    root_directory: ?RootDirectory,
+    root_directory: ?RootDirectory = null,
 
     /// Creates tags associated with the access point. Each tag is a key-value pair,
     /// each key must be unique. For more
     /// information, see [Tagging Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
     /// in the *Amazon Web Services General Reference Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .client_token = "ClientToken",

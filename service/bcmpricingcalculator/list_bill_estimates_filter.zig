@@ -4,7 +4,7 @@ const ListBillEstimatesFilterName = @import("list_bill_estimates_filter_name.zig
 /// Represents a filter for listing bill estimates.
 pub const ListBillEstimatesFilter = struct {
     /// The match option for the filter (e.g., equals, contains).
-    match_option: ?MatchOption,
+    match_option: ?MatchOption = null,
 
     /// The name of the filter attribute.
     name: ListBillEstimatesFilterName,

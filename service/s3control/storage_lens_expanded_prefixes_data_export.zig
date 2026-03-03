@@ -9,9 +9,9 @@ const StorageLensTableDestination = @import("storage_lens_table_destination.zig"
 /// prefixes in your Storage
 /// Lens configuration.
 pub const StorageLensExpandedPrefixesDataExport = struct {
-    s3_bucket_destination: ?S3BucketDestination,
+    s3_bucket_destination: ?S3BucketDestination = null,
 
     /// A container for the bucket where the S3 Storage Lens metric export files are
     /// located. At least one export destination must be specified.
-    storage_lens_table_destination: ?StorageLensTableDestination,
+    storage_lens_table_destination: ?StorageLensTableDestination = null,
 };

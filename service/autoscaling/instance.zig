@@ -30,19 +30,19 @@ pub const Instance = struct {
     ///
     /// * Existing instances that didn’t have their root volume replaced through
     ///   Instance Refresh
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// The ID of the instance.
     instance_id: []const u8,
 
     /// The instance type of the EC2 instance.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// The launch configuration associated with the instance.
-    launch_configuration_name: ?[]const u8,
+    launch_configuration_name: ?[]const u8 = null,
 
     /// The launch template for the instance.
-    launch_template: ?LaunchTemplateSpecification,
+    launch_template: ?LaunchTemplateSpecification = null,
 
     /// A description of the current lifecycle state. The `Quarantined` state is
     /// not used. For more information, see [Amazon EC2 Auto Scaling instance
@@ -59,5 +59,5 @@ pub const Instance = struct {
     /// type.
     ///
     /// Valid Range: Minimum value of 1. Maximum value of 999.
-    weighted_capacity: ?[]const u8,
+    weighted_capacity: ?[]const u8 = null,
 };

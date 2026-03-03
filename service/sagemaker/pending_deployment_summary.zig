@@ -8,14 +8,14 @@ pub const PendingDeploymentSummary = struct {
 
     /// An array of
     /// [PendingProductionVariantSummary](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_PendingProductionVariantSummary.html) objects, one for each model hosted behind this endpoint for the in-progress deployment.
-    production_variants: ?[]const PendingProductionVariantSummary,
+    production_variants: ?[]const PendingProductionVariantSummary = null,
 
     /// An array of
     /// [PendingProductionVariantSummary](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_PendingProductionVariantSummary.html) objects, one for each model hosted behind this endpoint in shadow mode with production traffic replicated from the model specified on `ProductionVariants` for the in-progress deployment.
-    shadow_production_variants: ?[]const PendingProductionVariantSummary,
+    shadow_production_variants: ?[]const PendingProductionVariantSummary = null,
 
     /// The start time of the deployment.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .endpoint_config_name = "EndpointConfigName",

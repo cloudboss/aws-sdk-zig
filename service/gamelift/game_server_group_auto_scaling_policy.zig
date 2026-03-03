@@ -18,7 +18,7 @@ pub const GameServerGroupAutoScalingPolicy = struct {
     /// with game servers that take a long time to start up, because it avoids
     /// prematurely
     /// starting new instances.
-    estimated_instance_warmup: ?i32,
+    estimated_instance_warmup: ?i32 = null,
 
     /// Settings for a target-based scaling policy applied to Auto Scaling group.
     /// These

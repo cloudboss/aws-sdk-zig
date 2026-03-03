@@ -4,10 +4,10 @@ const ParticipatingResourceID = @import("participating_resource_id.zig").Partici
 /// Represents a resource participating in an asynchronous Job.
 pub const ParticipatingResource = struct {
     /// The launch status of a participating resource.
-    launch_status: ?LaunchStatus,
+    launch_status: ?LaunchStatus = null,
 
     /// The ID of a participating resource.
-    participating_resource_id: ?ParticipatingResourceID,
+    participating_resource_id: ?ParticipatingResourceID = null,
 
     pub const json_field_names = .{
         .launch_status = "launchStatus",

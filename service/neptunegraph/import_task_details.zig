@@ -7,7 +7,7 @@ pub const ImportTaskDetails = struct {
     error_count: i32,
 
     /// Details about the errors that have been encountered.
-    error_details: ?[]const u8,
+    error_details: ?[]const u8 = null,
 
     /// The percentage progress so far.
     progress_percentage: i32,

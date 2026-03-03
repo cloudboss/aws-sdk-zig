@@ -11,7 +11,7 @@ pub const UserHierarchyGroupSearchFilter = struct {
     ///
     /// * The inner list specifies conditions that need to be applied with `AND`
     ///   operator.
-    attribute_filter: ?ControlPlaneAttributeFilter,
+    attribute_filter: ?ControlPlaneAttributeFilter = null,
 
     pub const json_field_names = .{
         .attribute_filter = "AttributeFilter",

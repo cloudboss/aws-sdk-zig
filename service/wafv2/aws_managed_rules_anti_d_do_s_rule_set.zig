@@ -41,7 +41,7 @@ pub const AWSManagedRulesAntiDDoSRuleSet = struct {
     ///   low, medium, and high.
     ///
     /// Default: `LOW`
-    sensitivity_to_block: ?SensitivityToAct,
+    sensitivity_to_block: ?SensitivityToAct = null,
 
     pub const json_field_names = .{
         .client_side_action_config = "ClientSideActionConfig",

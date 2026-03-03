@@ -47,7 +47,7 @@ const Tag = @import("tag.zig").Tag;
 /// the association and its status by calling DescribeVpcEndpointAssociation.
 pub const VpcEndpointAssociation = struct {
     /// A description of the VPC endpoint association.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the firewall.
     firewall_arn: []const u8,
@@ -55,13 +55,13 @@ pub const VpcEndpointAssociation = struct {
     subnet_mapping: SubnetMapping,
 
     /// The key:value pairs to associate with the resource.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The Amazon Resource Name (ARN) of a VPC endpoint association.
     vpc_endpoint_association_arn: []const u8,
 
     /// The unique identifier of the VPC endpoint association.
-    vpc_endpoint_association_id: ?[]const u8,
+    vpc_endpoint_association_id: ?[]const u8 = null,
 
     /// The unique identifier of the VPC for the endpoint association.
     vpc_id: []const u8,

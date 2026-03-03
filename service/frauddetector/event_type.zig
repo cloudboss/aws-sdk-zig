@@ -5,40 +5,40 @@ const IngestedEventStatistics = @import("ingested_event_statistics.zig").Ingeste
 /// The event type details.
 pub const EventType = struct {
     /// The entity type ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Timestamp of when the event type was created.
-    created_time: ?[]const u8,
+    created_time: ?[]const u8 = null,
 
     /// The event type description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The event type entity types.
-    entity_types: ?[]const []const u8,
+    entity_types: ?[]const []const u8 = null,
 
     /// If `Enabled`, Amazon Fraud Detector stores event data when you generate a
     /// prediction and uses that data to update calculated variables in near
     /// real-time. Amazon Fraud Detector uses this data, known as `INGESTED_EVENTS`,
     /// to train your model and improve fraud predictions.
-    event_ingestion: ?EventIngestion,
+    event_ingestion: ?EventIngestion = null,
 
     /// The event orchestration status.
-    event_orchestration: ?EventOrchestration,
+    event_orchestration: ?EventOrchestration = null,
 
     /// The event type event variables.
-    event_variables: ?[]const []const u8,
+    event_variables: ?[]const []const u8 = null,
 
     /// Data about the stored events.
-    ingested_event_statistics: ?IngestedEventStatistics,
+    ingested_event_statistics: ?IngestedEventStatistics = null,
 
     /// The event type labels.
-    labels: ?[]const []const u8,
+    labels: ?[]const []const u8 = null,
 
     /// Timestamp of when the event type was last updated.
-    last_updated_time: ?[]const u8,
+    last_updated_time: ?[]const u8 = null,
 
     /// The event type name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

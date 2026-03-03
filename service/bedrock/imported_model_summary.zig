@@ -4,10 +4,10 @@ pub const ImportedModelSummary = struct {
     creation_time: i64,
 
     /// Specifies if the imported model supports converse.
-    instruct_supported: ?bool,
+    instruct_supported: ?bool = null,
 
     /// The architecture of the imported model.
-    model_architecture: ?[]const u8,
+    model_architecture: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the imported model.
     model_arn: []const u8,

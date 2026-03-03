@@ -3,11 +3,11 @@ const Tag = @import("tag.zig").Tag;
 /// Describes an IP range used in a security group.
 pub const IPRange = struct {
     /// The IP range in Classless Inter-Domain Routing (CIDR) notation.
-    cidrip: ?[]const u8,
+    cidrip: ?[]const u8 = null,
 
     /// The status of the IP range, for example, "authorized".
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The list of tags for the IP range.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

@@ -22,15 +22,15 @@ const DkimStatus = @import("dkim_status.zig").DkimStatus;
 /// the process of creating the identity
 pub const DkimAttributes = struct {
     /// [Easy DKIM] The key length of the DKIM key pair in use.
-    current_signing_key_length: ?DkimSigningKeyLength,
+    current_signing_key_length: ?DkimSigningKeyLength = null,
 
     /// [Easy DKIM] The last time a key pair was generated for this identity.
-    last_key_generation_timestamp: ?i64,
+    last_key_generation_timestamp: ?i64 = null,
 
     /// [Easy DKIM] The key length of the future DKIM key pair to be generated. This
     /// can be
     /// changed at most once per day.
-    next_signing_key_length: ?DkimSigningKeyLength,
+    next_signing_key_length: ?DkimSigningKeyLength = null,
 
     /// A string that indicates how DKIM was configured for the identity. These are
     /// the
@@ -191,7 +191,7 @@ pub const DkimAttributes = struct {
     ///   by
     /// replicating signing attributes from a parent identity in US West (Oregon)
     /// region using Deterministic Easy-DKIM (DEED).
-    signing_attributes_origin: ?DkimSigningAttributesOrigin,
+    signing_attributes_origin: ?DkimSigningAttributesOrigin = null,
 
     /// If the value is `true`, then the messages that you send from the identity
     /// are signed using DKIM. If the value is `false`, then the messages that you
@@ -218,7 +218,7 @@ pub const DkimAttributes = struct {
     /// `
     /// selector3._domainkey.yourdomain.com CNAME selector3.
     /// `
-    signing_hosted_zone: ?[]const u8,
+    signing_hosted_zone: ?[]const u8 = null,
 
     /// Describes whether or not Amazon SES has successfully located the DKIM
     /// records in the DNS
@@ -241,7 +241,7 @@ pub const DkimAttributes = struct {
     ///
     /// * `NOT_STARTED` – The DKIM verification process hasn't been
     /// initiated for the domain.
-    status: ?DkimStatus,
+    status: ?DkimStatus = null,
 
     /// If you used [Easy
     /// DKIM](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
@@ -262,7 +262,7 @@ pub const DkimAttributes = struct {
     /// for the
     /// appropriate records in the DNS configuration of the domain for up to 72
     /// hours.
-    tokens: ?[]const []const u8,
+    tokens: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .current_signing_key_length = "CurrentSigningKeyLength",

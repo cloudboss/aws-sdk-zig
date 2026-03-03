@@ -7,7 +7,7 @@ pub const AvailConfiguration = struct {
     /// segmentation signals traditionally. With Time Signal APOS mode only Time
     /// Signal Placement Opportunity and Break messages create segment breaks. With
     /// ESAM mode, signals are forwarded to an ESAM server for possible update.
-    avail_settings: ?AvailSettings,
+    avail_settings: ?AvailSettings = null,
 
     /// Configures whether SCTE 35 passthrough triggers segment breaks in all output
     /// groups that use segmented outputs. Insertion of a SCTE 35 message typically
@@ -20,7 +20,7 @@ pub const AvailConfiguration = struct {
     /// SCTE35_ENABLED_OUTPUT_GROUPS: Insert the segment break only in output groups
     /// that have SCTE 35 passthrough enabled. This is the recommended value,
     /// because it reduces unnecessary segment breaks.
-    scte_35_segmentation_scope: ?Scte35SegmentationScope,
+    scte_35_segmentation_scope: ?Scte35SegmentationScope = null,
 
     pub const json_field_names = .{
         .avail_settings = "AvailSettings",

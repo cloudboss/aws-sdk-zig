@@ -11,7 +11,7 @@ pub const DatabaseConfiguration = struct {
     /// Information about the database column that provides information for user
     /// context
     /// filtering.
-    acl_configuration: ?AclConfiguration,
+    acl_configuration: ?AclConfiguration = null,
 
     /// Information about where the index should get the document information from
     /// the
@@ -26,9 +26,9 @@ pub const DatabaseConfiguration = struct {
 
     /// Provides information about how Amazon Kendra uses quote marks around SQL
     /// identifiers when querying a database data source.
-    sql_configuration: ?SqlConfiguration,
+    sql_configuration: ?SqlConfiguration = null,
 
-    vpc_configuration: ?DataSourceVpcConfiguration,
+    vpc_configuration: ?DataSourceVpcConfiguration = null,
 
     pub const json_field_names = .{
         .acl_configuration = "AclConfiguration",

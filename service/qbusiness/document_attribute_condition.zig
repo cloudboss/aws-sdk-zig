@@ -35,7 +35,7 @@ pub const DocumentAttributeCondition = struct {
     /// attribute key used for the condition.
     operator: DocumentEnrichmentConditionOperator,
 
-    value: ?DocumentAttributeValue,
+    value: ?DocumentAttributeValue = null,
 
     pub const json_field_names = .{
         .key = "key",

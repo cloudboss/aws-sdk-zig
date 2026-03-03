@@ -5,12 +5,12 @@ pub const AuthorizationCodeProperties = struct {
     /// `AUTHORIZATION_CODE` grant workflow. This is a single-use code which becomes
     /// invalid once exchanged for an access token, thus it is acceptable to have
     /// this value as a request parameter.
-    authorization_code: ?[]const u8,
+    authorization_code: ?[]const u8 = null,
 
     /// The redirect URI where the user gets redirected to by authorization server
     /// when issuing an authorization code. The URI is subsequently used when the
     /// authorization code is exchanged for an access token.
-    redirect_uri: ?[]const u8,
+    redirect_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authorization_code = "AuthorizationCode",

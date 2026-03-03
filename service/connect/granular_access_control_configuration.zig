@@ -5,7 +5,7 @@ const DataTableAccessControlConfiguration = @import("data_table_access_control_c
 /// permissions.
 pub const GranularAccessControlConfiguration = struct {
     /// The access control configuration for data tables.
-    data_table_access_control_configuration: ?DataTableAccessControlConfiguration,
+    data_table_access_control_configuration: ?DataTableAccessControlConfiguration = null,
 
     pub const json_field_names = .{
         .data_table_access_control_configuration = "DataTableAccessControlConfiguration",

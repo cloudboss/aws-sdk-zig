@@ -5,19 +5,19 @@ const VolumeType = @import("volume_type.zig").VolumeType;
 /// Storage](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs).
 pub const EBSOptions = struct {
     /// Specifies whether EBS-based storage is enabled.
-    ebs_enabled: ?bool,
+    ebs_enabled: ?bool = null,
 
     /// Specifies the IOPS for Provisioned IOPS And GP3 EBS volume (SSD).
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// Specifies the Throughput for GP3 EBS volume (SSD).
-    throughput: ?i32,
+    throughput: ?i32 = null,
 
     /// Integer to specify the size of an EBS volume.
-    volume_size: ?i32,
+    volume_size: ?i32 = null,
 
     /// Specifies the volume type for EBS-based storage.
-    volume_type: ?VolumeType,
+    volume_type: ?VolumeType = null,
 
     pub const json_field_names = .{
         .ebs_enabled = "EBSEnabled",

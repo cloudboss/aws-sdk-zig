@@ -13,14 +13,14 @@ pub const AssetModelProperty = struct {
     /// The data type of the structure for this property. This parameter exists on
     /// properties that
     /// have the `STRUCT` data type.
-    data_type_spec: ?[]const u8,
+    data_type_spec: ?[]const u8 = null,
 
     /// The external ID (if any) provided in the
     /// [CreateAssetModel](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html) or [UpdateAssetModel](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)
     /// operation. You can assign an external ID by specifying
     /// this value as part of a call to
     /// [UpdateAssetModel](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html). However, you can't change the external ID if one is already assigned. For more information, see [Using external IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ID of the asset model property.
     ///
@@ -38,20 +38,20 @@ pub const AssetModelProperty = struct {
     /// `externalId:` followed by the external ID, if it has one.
     /// For more information, see [Referencing objects with external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references) in the *IoT SiteWise User Guide*.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the asset model property.
     name: []const u8,
 
     /// The structured path to the property from the root of the asset model.
-    path: ?[]const AssetModelPropertyPathSegment,
+    path: ?[]const AssetModelPropertyPathSegment = null,
 
     /// The property type (see `PropertyType`).
     @"type": PropertyType,
 
     /// The unit of the asset model property, such as `Newtons` or
     /// `RPM`.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_type = "dataType",

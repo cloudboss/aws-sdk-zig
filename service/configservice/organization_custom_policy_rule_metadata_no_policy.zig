@@ -11,21 +11,21 @@ pub const OrganizationCustomPolicyRuleMetadataNoPolicy = struct {
     /// A list of accounts that you can enable debug logging for your organization
     /// Config Custom Policy rule. List is null when debug logging is enabled for
     /// all accounts.
-    debug_log_delivery_accounts: ?[]const []const u8,
+    debug_log_delivery_accounts: ?[]const []const u8 = null,
 
     /// The description that you provide for your organization Config Custom Policy
     /// rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A string, in JSON format, that is passed to your organization Config Custom
     /// Policy rule.
-    input_parameters: ?[]const u8,
+    input_parameters: ?[]const u8 = null,
 
     /// The maximum frequency with which Config runs evaluations for a rule. Your
     /// Config Custom Policy rule is triggered when Config delivers
     /// the configuration snapshot. For more information, see
     /// ConfigSnapshotDeliveryProperties.
-    maximum_execution_frequency: ?MaximumExecutionFrequency,
+    maximum_execution_frequency: ?MaximumExecutionFrequency = null,
 
     /// The type of notification that triggers Config to run an evaluation for a
     /// rule.
@@ -39,28 +39,28 @@ pub const OrganizationCustomPolicyRuleMetadataNoPolicy = struct {
     ///   when Config delivers an oversized configuration item.
     /// Config may generate this notification type when a resource changes and the
     /// notification exceeds the maximum size allowed by Amazon SNS.
-    organization_config_rule_trigger_types: ?[]const OrganizationConfigRuleTriggerTypeNoSN,
+    organization_config_rule_trigger_types: ?[]const OrganizationConfigRuleTriggerTypeNoSN = null,
 
     /// The runtime system for your organization Config Custom Policy rules. Guard
     /// is a policy-as-code language that allows you to write policies that are
     /// enforced by Config Custom Policy rules. For more information about Guard,
     /// see the [Guard GitHub
     /// Repository](https://github.com/aws-cloudformation/cloudformation-guard).
-    policy_runtime: ?[]const u8,
+    policy_runtime: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services resource that was evaluated.
-    resource_id_scope: ?[]const u8,
+    resource_id_scope: ?[]const u8 = null,
 
     /// The type of the Amazon Web Services resource that was evaluated.
-    resource_types_scope: ?[]const []const u8,
+    resource_types_scope: ?[]const []const u8 = null,
 
     /// One part of a key-value pair that make up a tag. A key is a general label
     /// that acts like a category for more specific tag values.
-    tag_key_scope: ?[]const u8,
+    tag_key_scope: ?[]const u8 = null,
 
     /// The optional part of a key-value pair that make up a tag. A value acts as a
     /// descriptor within a tag category (key).
-    tag_value_scope: ?[]const u8,
+    tag_value_scope: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .debug_log_delivery_accounts = "DebugLogDeliveryAccounts",

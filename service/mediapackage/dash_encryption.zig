@@ -3,7 +3,7 @@ const SpekeKeyProvider = @import("speke_key_provider.zig").SpekeKeyProvider;
 /// A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
 pub const DashEncryption = struct {
     /// Time (in seconds) between each encryption key rotation.
-    key_rotation_interval_seconds: ?i32,
+    key_rotation_interval_seconds: ?i32 = null,
 
     speke_key_provider: SpekeKeyProvider,
 

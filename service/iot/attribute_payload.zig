@@ -6,7 +6,7 @@ pub const AttributePayload = struct {
     /// example:
     ///
     /// `{\"attributes\":{\"string1\":\"string2\"}}`
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies whether the list of attributes provided in the `AttributePayload`
     /// is merged with

@@ -9,12 +9,12 @@ const SyncBlocker = @import("sync_blocker.zig").SyncBlocker;
 /// summary describes the blocker as being active or resolved.
 pub const ServiceSyncBlockerSummary = struct {
     /// The latest active blockers for the synced service.
-    latest_blockers: ?[]const SyncBlocker,
+    latest_blockers: ?[]const SyncBlocker = null,
 
     /// The name of the service instance that you want sync your service
     /// configuration
     /// with.
-    service_instance_name: ?[]const u8,
+    service_instance_name: ?[]const u8 = null,
 
     /// The name of the service that you want to get the sync blocker summary for.
     /// If given a

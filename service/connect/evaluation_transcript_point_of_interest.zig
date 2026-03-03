@@ -4,10 +4,10 @@ const EvaluationSuggestedAnswerTranscriptMillisecondOffsets = @import("evaluatio
 /// evaluation.
 pub const EvaluationTranscriptPointOfInterest = struct {
     /// Offset in milliseconds from the beginning of transcript.
-    millisecond_offsets: ?EvaluationSuggestedAnswerTranscriptMillisecondOffsets,
+    millisecond_offsets: ?EvaluationSuggestedAnswerTranscriptMillisecondOffsets = null,
 
     /// Segment of transcript.
-    transcript_segment: ?[]const u8,
+    transcript_segment: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .millisecond_offsets = "MillisecondOffsets",

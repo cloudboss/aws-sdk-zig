@@ -14,7 +14,7 @@ pub const Deserializer = struct {
     /// depending on
     /// which one offers the functionality you need. The other option is the OpenX
     /// SerDe.
-    hive_json_ser_de: ?HiveJsonSerDe,
+    hive_json_ser_de: ?HiveJsonSerDe = null,
 
     /// The OpenX SerDe. Used by Firehose for deserializing data, which means
     /// converting it from the JSON format in preparation for serializing it to the
@@ -23,7 +23,7 @@ pub const Deserializer = struct {
     /// one offers the
     /// functionality you need. The other option is the native Hive / HCatalog
     /// JsonSerDe.
-    open_x_json_ser_de: ?OpenXJsonSerDe,
+    open_x_json_ser_de: ?OpenXJsonSerDe = null,
 
     pub const json_field_names = .{
         .hive_json_ser_de = "HiveJsonSerDe",

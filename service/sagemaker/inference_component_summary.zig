@@ -19,7 +19,7 @@ pub const InferenceComponentSummary = struct {
     inference_component_name: []const u8,
 
     /// The status of the inference component.
-    inference_component_status: ?InferenceComponentStatus,
+    inference_component_status: ?InferenceComponentStatus = null,
 
     /// The time when the inference component was last updated.
     last_modified_time: i64,

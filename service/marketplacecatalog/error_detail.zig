@@ -1,10 +1,10 @@
 /// Details about the error.
 pub const ErrorDetail = struct {
     /// The error code that identifies the type of error.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The message for the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

@@ -4,7 +4,7 @@ const RdsRecommendation = @import("rds_recommendation.zig").RdsRecommendation;
 /// database.
 pub const RecommendationData = struct {
     /// The recommendation of a target Amazon RDS database engine.
-    rds_engine: ?RdsRecommendation,
+    rds_engine: ?RdsRecommendation = null,
 
     pub const json_field_names = .{
         .rds_engine = "RdsEngine",

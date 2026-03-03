@@ -4,7 +4,7 @@
 /// evaluation context.
 pub const EvaluationContext = struct {
     /// A unique EvaluationContextIdentifier ID for an EvaluationContext.
-    evaluation_context_identifier: ?[]const u8,
+    evaluation_context_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .evaluation_context_identifier = "EvaluationContextIdentifier",

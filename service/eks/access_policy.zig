@@ -14,10 +14,10 @@
 /// permissions](https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html#access-policy-permissions) in the *Amazon EKS User Guide*.
 pub const AccessPolicy = struct {
     /// The ARN of the access policy.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the access policy.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

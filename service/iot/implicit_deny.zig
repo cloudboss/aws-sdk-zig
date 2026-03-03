@@ -7,7 +7,7 @@ pub const ImplicitDeny = struct {
     /// Policies that don't contain a matching allow or deny statement for the
     /// specified
     /// action on the specified resource.
-    policies: ?[]const Policy,
+    policies: ?[]const Policy = null,
 
     pub const json_field_names = .{
         .policies = "policies",

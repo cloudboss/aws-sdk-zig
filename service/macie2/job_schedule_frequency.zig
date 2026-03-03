@@ -5,13 +5,13 @@ const WeeklySchedule = @import("weekly_schedule.zig").WeeklySchedule;
 /// Specifies the recurrence pattern for running a classification job.
 pub const JobScheduleFrequency = struct {
     /// Specifies a daily recurrence pattern for running the job.
-    daily_schedule: ?DailySchedule,
+    daily_schedule: ?DailySchedule = null,
 
     /// Specifies a monthly recurrence pattern for running the job.
-    monthly_schedule: ?MonthlySchedule,
+    monthly_schedule: ?MonthlySchedule = null,
 
     /// Specifies a weekly recurrence pattern for running the job.
-    weekly_schedule: ?WeeklySchedule,
+    weekly_schedule: ?WeeklySchedule = null,
 
     pub const json_field_names = .{
         .daily_schedule = "dailySchedule",

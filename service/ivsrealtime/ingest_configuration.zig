@@ -16,13 +16,13 @@ pub const IngestConfiguration = struct {
     /// not be
     /// used for personally identifying, confidential, or sensitive
     /// information.*
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// Type of ingest protocol that the user employs for broadcasting.
     ingest_protocol: IngestProtocol,
 
     /// Ingest name
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// ID of the participant within the stage.
     participant_id: []const u8,
@@ -47,7 +47,7 @@ pub const IngestConfiguration = struct {
     /// limits and requirements"; Amazon IVS has no constraints on tags beyond what
     /// is documented
     /// there.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Customer-assigned name to help identify the participant using the
     /// IngestConfiguration;
@@ -56,7 +56,7 @@ pub const IngestConfiguration = struct {
     /// any UTF-8 encoded text. *This field is exposed to all stage participants and
     /// should not be used for personally identifying, confidential, or sensitive
     /// information.*
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

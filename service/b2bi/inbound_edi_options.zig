@@ -5,7 +5,7 @@ const X12InboundEdiOptions = @import("x12_inbound_edi_options.zig").X12InboundEd
 pub const InboundEdiOptions = struct {
     /// A structure that contains X12-specific options for processing inbound X12
     /// EDI files.
-    x_12: ?X12InboundEdiOptions,
+    x_12: ?X12InboundEdiOptions = null,
 
     pub const json_field_names = .{
         .x_12 = "x12",

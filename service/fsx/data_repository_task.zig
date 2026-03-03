@@ -25,23 +25,23 @@ const DataRepositoryTaskType = @import("data_repository_task_type.zig").DataRepo
 pub const DataRepositoryTask = struct {
     /// Specifies the amount of data to release, in GiB, by an Amazon File Cache
     /// AUTO_RELEASE_DATA task that automatically releases files from the cache.
-    capacity_to_release: ?i64,
+    capacity_to_release: ?i64 = null,
 
     creation_time: i64,
 
     /// The time the system completed processing the task, populated after the task
     /// is complete.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// Failure message describing why the task failed, it is populated only when
     /// `Lifecycle` is set to `FAILED`.
-    failure_details: ?DataRepositoryTaskFailureDetails,
+    failure_details: ?DataRepositoryTaskFailureDetails = null,
 
     /// The system-generated, unique ID of the cache.
-    file_cache_id: ?[]const u8,
+    file_cache_id: ?[]const u8 = null,
 
     /// The globally unique ID of the file system.
-    file_system_id: ?[]const u8,
+    file_system_id: ?[]const u8 = null,
 
     /// The lifecycle status of the data repository task, as follows:
     ///
@@ -77,24 +77,24 @@ pub const DataRepositoryTask = struct {
     ///
     /// (Default) If `Paths` is not specified, Amazon FSx uses the file system root
     /// directory.
-    paths: ?[]const []const u8,
+    paths: ?[]const []const u8 = null,
 
     /// The configuration that specifies the last accessed time criteria for files
     /// that will be released from an Amazon FSx for Lustre file system.
-    release_configuration: ?ReleaseConfiguration,
+    release_configuration: ?ReleaseConfiguration = null,
 
-    report: ?CompletionReport,
+    report: ?CompletionReport = null,
 
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The time the system began processing the task.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Provides the status of the number of files that the task has processed
     /// successfully and failed to process.
-    status: ?DataRepositoryTaskStatus,
+    status: ?DataRepositoryTaskStatus = null,
 
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The system-generated, unique 17-digit ID of the data repository task.
     task_id: []const u8,

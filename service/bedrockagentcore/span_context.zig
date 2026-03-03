@@ -10,12 +10,12 @@ pub const SpanContext = struct {
     /// The unique identifier of the specific span being referenced. Spans represent
     /// individual operations like tool calls, model invocations, or other discrete
     /// actions within the agent's execution.
-    span_id: ?[]const u8,
+    span_id: ?[]const u8 = null,
 
     /// The unique identifier of the trace containing this span. Traces represent
     /// individual request-response interactions within a session and group related
     /// spans together.
-    trace_id: ?[]const u8,
+    trace_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .session_id = "sessionId",

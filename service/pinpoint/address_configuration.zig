@@ -7,10 +7,10 @@ const ChannelType = @import("channel_type.zig").ChannelType;
 pub const AddressConfiguration = struct {
     /// The message body to use instead of the default message body. This value
     /// overrides the default message body.
-    body_override: ?[]const u8,
+    body_override: ?[]const u8 = null,
 
     /// The channel to use when sending the message.
-    channel_type: ?ChannelType,
+    channel_type: ?ChannelType = null,
 
     /// An object that maps custom attributes to attributes for the address and is
     /// attached to the message. Attribute names are case sensitive.
@@ -18,20 +18,20 @@ pub const AddressConfiguration = struct {
     /// For a push notification, this payload is added to the data.pinpoint object.
     /// For an email or text message, this payload is added to email/SMS delivery
     /// receipt event attributes.
-    context: ?[]const aws.map.StringMapEntry,
+    context: ?[]const aws.map.StringMapEntry = null,
 
     /// The raw, JSON-formatted string to use as the payload for the message. If
     /// specified, this value overrides all other values for the message.
-    raw_content: ?[]const u8,
+    raw_content: ?[]const u8 = null,
 
     /// A map of the message variables to merge with the variables specified by
     /// properties of the DefaultMessage object. The variables specified in this map
     /// take precedence over all other variables.
-    substitutions: ?[]const aws.map.MapEntry([]const []const u8),
+    substitutions: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The message title to use instead of the default message title. This value
     /// overrides the default message title.
-    title_override: ?[]const u8,
+    title_override: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .body_override = "BodyOverride",

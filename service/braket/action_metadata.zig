@@ -6,11 +6,11 @@ pub const ActionMetadata = struct {
 
     /// The number of executables in a program set. This is only available for a
     /// program set.
-    executable_count: ?i64,
+    executable_count: ?i64 = null,
 
     /// The number of programs in a program set. This is only available for a
     /// program set.
-    program_count: ?i64,
+    program_count: ?i64 = null,
 
     pub const json_field_names = .{
         .action_type = "actionType",

@@ -11,19 +11,19 @@ pub const IndexedRecoveryPoint = struct {
     /// For example, the value 1516925490.087 represents Friday, January 26, 2018
     /// 12:11:30.087
     /// AM.
-    backup_creation_date: ?i64,
+    backup_creation_date: ?i64 = null,
 
     /// An ARN that uniquely identifies the backup vault where the recovery
     /// point index is stored.
     ///
     /// For example,
     /// `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
-    backup_vault_arn: ?[]const u8,
+    backup_vault_arn: ?[]const u8 = null,
 
     /// This specifies the IAM role ARN used for this operation.
     ///
     /// For example, arn:aws:iam::123456789012:role/S3Access
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// The date and time that a backup index was created, in Unix format and
     /// Coordinated
@@ -32,7 +32,7 @@ pub const IndexedRecoveryPoint = struct {
     /// For example, the value 1516925490.087 represents Friday, January 26, 2018
     /// 12:11:30.087
     /// AM.
-    index_creation_date: ?i64,
+    index_creation_date: ?i64 = null,
 
     /// This is the current status for the backup index associated
     /// with the specified recovery point.
@@ -41,27 +41,27 @@ pub const IndexedRecoveryPoint = struct {
     ///
     /// A recovery point with an index that has the status of `ACTIVE`
     /// can be included in a search.
-    index_status: ?IndexStatus,
+    index_status: ?IndexStatus = null,
 
     /// A string in the form of a detailed message explaining the status of a backup
     /// index associated
     /// with the recovery point.
-    index_status_message: ?[]const u8,
+    index_status_message: ?[]const u8 = null,
 
     /// An ARN that uniquely identifies a recovery point; for example,
     /// `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`
-    recovery_point_arn: ?[]const u8,
+    recovery_point_arn: ?[]const u8 = null,
 
     /// The resource type of the indexed recovery point.
     ///
     /// * `EBS` for Amazon Elastic Block Store
     ///
     /// * `S3` for Amazon Simple Storage Service (Amazon S3)
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// A string of the Amazon Resource Name (ARN) that uniquely identifies
     /// the source resource.
-    source_resource_arn: ?[]const u8,
+    source_resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .backup_creation_date = "BackupCreationDate",

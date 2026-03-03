@@ -17,7 +17,7 @@ pub const CognitoUserPoolConfigurationDetail = struct {
 
     /// The type of entity that a policy store maps to groups from an Amazon Cognito
     /// user pool identity source.
-    group_configuration: ?CognitoGroupConfigurationDetail,
+    group_configuration: ?CognitoGroupConfigurationDetail = null,
 
     /// The OpenID Connect (OIDC) `issuer` ID of the Amazon Cognito user pool that
     /// contains the identities to be authorized.

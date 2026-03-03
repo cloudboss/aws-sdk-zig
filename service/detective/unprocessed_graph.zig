@@ -1,12 +1,12 @@
 /// Behavior graphs that could not be processed in the request.
 pub const UnprocessedGraph = struct {
     /// The ARN of the organization behavior graph.
-    graph_arn: ?[]const u8,
+    graph_arn: ?[]const u8 = null,
 
     /// The reason data source package information could not be processed for a
     /// behavior
     /// graph.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .graph_arn = "GraphArn",

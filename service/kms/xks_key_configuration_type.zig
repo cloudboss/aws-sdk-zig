@@ -17,7 +17,7 @@ pub const XksKeyConfigurationType = struct {
     /// The ID of the external key in its external key manager. This is the ID that
     /// the external
     /// key store proxy uses to identify the external key.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

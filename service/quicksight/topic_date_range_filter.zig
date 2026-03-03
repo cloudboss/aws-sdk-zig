@@ -3,7 +3,7 @@ const TopicRangeFilterConstant = @import("topic_range_filter_constant.zig").Topi
 /// A filter used to restrict data based on a range of dates or times.
 pub const TopicDateRangeFilter = struct {
     /// The constant used in a date range filter.
-    constant: ?TopicRangeFilterConstant,
+    constant: ?TopicRangeFilterConstant = null,
 
     /// A Boolean value that indicates whether the date range filter should include
     /// the boundary values. If

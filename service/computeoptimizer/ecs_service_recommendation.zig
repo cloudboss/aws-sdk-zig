@@ -11,20 +11,20 @@ const ECSServiceUtilizationMetric = @import("ecs_service_utilization_metric.zig"
 /// Describes an Amazon ECS service recommendation.
 pub const ECSServiceRecommendation = struct {
     /// The Amazon Web Services account ID of the Amazon ECS service.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The risk of the current Amazon ECS service not meeting the performance needs
     /// of its workloads.
     /// The higher the risk, the more likely the current service can't meet the
     /// performance
     /// requirements of its workload.
-    current_performance_risk: ?CurrentPerformanceRisk,
+    current_performance_risk: ?CurrentPerformanceRisk = null,
 
     /// The configuration of the current Amazon ECS service.
-    current_service_configuration: ?ServiceConfiguration,
+    current_service_configuration: ?ServiceConfiguration = null,
 
     /// Describes the effective recommendation preferences for Amazon ECS services.
-    effective_recommendation_preferences: ?ECSEffectiveRecommendationPreferences,
+    effective_recommendation_preferences: ?ECSEffectiveRecommendationPreferences = null,
 
     /// The finding classification of an Amazon ECS service.
     ///
@@ -52,7 +52,7 @@ pub const ECSServiceRecommendation = struct {
     /// When both the CPU and memory of your Amazon ECS service meet the performance
     /// requirements
     /// of your workload, the service is considered optimized.
-    finding: ?ECSServiceRecommendationFinding,
+    finding: ?ECSServiceRecommendationFinding = null,
 
     /// The reason for the finding classification of an Amazon ECS service.
     ///
@@ -92,16 +92,16 @@ pub const ECSServiceRecommendation = struct {
     /// the
     /// `MemoryUtilization` metric of the current service during the look-back
     /// period.
-    finding_reason_codes: ?[]const ECSServiceRecommendationFindingReasonCode,
+    finding_reason_codes: ?[]const ECSServiceRecommendationFindingReasonCode = null,
 
     /// The timestamp of when the Amazon ECS service recommendation was last
     /// generated.
-    last_refresh_timestamp: ?i64,
+    last_refresh_timestamp: ?i64 = null,
 
     /// The launch type the Amazon ECS service is using.
     ///
     /// Compute Optimizer only supports the Fargate launch type.
-    launch_type: ?ECSServiceLaunchType,
+    launch_type: ?ECSServiceLaunchType = null,
 
     /// The number of days the Amazon ECS service utilization metrics were analyzed.
     lookback_period_in_days: f64 = 0,
@@ -111,18 +111,18 @@ pub const ECSServiceRecommendation = struct {
     /// The following is the format of the ARN:
     ///
     /// `arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name`
-    service_arn: ?[]const u8,
+    service_arn: ?[]const u8 = null,
 
     /// An array of objects that describe the recommendation options for the Amazon
     /// ECS service.
-    service_recommendation_options: ?[]const ECSServiceRecommendationOption,
+    service_recommendation_options: ?[]const ECSServiceRecommendationOption = null,
 
     /// A list of tags assigned to your Amazon ECS service recommendations.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// An array of objects that describe the utilization metrics of the Amazon ECS
     /// service.
-    utilization_metrics: ?[]const ECSServiceUtilizationMetric,
+    utilization_metrics: ?[]const ECSServiceUtilizationMetric = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

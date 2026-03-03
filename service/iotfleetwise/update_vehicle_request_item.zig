@@ -12,7 +12,7 @@ pub const UpdateVehicleRequestItem = struct {
     /// Static information about a vehicle in a key-value pair. For example:
     ///
     /// `"engineType"` : `"1.3 L R2"`
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The method the specified attributes will update the existing attributes on
     /// the
@@ -20,27 +20,27 @@ pub const UpdateVehicleRequestItem = struct {
     /// attributes. Or use `Merge` to combine all attributes.
     ///
     /// This is required if attributes are present in the input.
-    attribute_update_mode: ?UpdateMode,
+    attribute_update_mode: ?UpdateMode = null,
 
     /// The ARN of the signal decoder manifest associated with the vehicle to
     /// update.
-    decoder_manifest_arn: ?[]const u8,
+    decoder_manifest_arn: ?[]const u8 = null,
 
     /// The ARN of the vehicle model (model manifest) associated with the vehicle to
     /// update.
-    model_manifest_arn: ?[]const u8,
+    model_manifest_arn: ?[]const u8 = null,
 
     /// Associate additional state templates to track the state of the vehicle.
     /// State templates determine which signal updates the vehicle sends to the
     /// cloud.
-    state_templates_to_add: ?[]const StateTemplateAssociation,
+    state_templates_to_add: ?[]const StateTemplateAssociation = null,
 
     /// Remove existing state template associations from the vehicle.
-    state_templates_to_remove: ?[]const []const u8,
+    state_templates_to_remove: ?[]const []const u8 = null,
 
     /// Change the `stateTemplateUpdateStrategy` of state templates already
     /// associated with the vehicle.
-    state_templates_to_update: ?[]const StateTemplateAssociation,
+    state_templates_to_update: ?[]const StateTemplateAssociation = null,
 
     /// The unique ID of the vehicle to update.
     vehicle_name: []const u8,

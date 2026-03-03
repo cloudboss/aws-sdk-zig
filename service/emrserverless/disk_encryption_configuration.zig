@@ -5,10 +5,10 @@ pub const DiskEncryptionConfiguration = struct {
     /// Specifies the optional encryption context that will be used when encrypting
     /// the data. An encryption context is a collection of non-secret key-value
     /// pairs that represent additional authenticated data.
-    encryption_context: ?[]const aws.map.StringMapEntry,
+    encryption_context: ?[]const aws.map.StringMapEntry = null,
 
     /// The KMS key ARN to encrypt local disks.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .encryption_context = "encryptionContext",

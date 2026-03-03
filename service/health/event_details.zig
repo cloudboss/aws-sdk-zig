@@ -9,13 +9,13 @@ const EventDescription = @import("event_description.zig").EventDescription;
 /// [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html) operation.
 pub const EventDetails = struct {
     /// Summary information about the event.
-    event: ?Event,
+    event: ?Event = null,
 
     /// The most recent description of the event.
-    event_description: ?EventDescription,
+    event_description: ?EventDescription = null,
 
     /// Additional metadata about the event.
-    event_metadata: ?[]const aws.map.StringMapEntry,
+    event_metadata: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .event = "event",

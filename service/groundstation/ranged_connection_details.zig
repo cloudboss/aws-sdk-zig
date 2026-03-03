@@ -3,7 +3,7 @@ const RangedSocketAddress = @import("ranged_socket_address.zig").RangedSocketAdd
 /// Ingress address of AgentEndpoint with a port range and an optional mtu.
 pub const RangedConnectionDetails = struct {
     /// Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
-    mtu: ?i32,
+    mtu: ?i32 = null,
 
     /// A ranged socket address.
     socket_address: RangedSocketAddress,

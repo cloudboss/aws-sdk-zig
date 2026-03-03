@@ -5,10 +5,10 @@ const OpsItemDataType = @import("ops_item_data_type.zig").OpsItemDataType;
 pub const OpsItemDataValue = struct {
     /// The type of key-value pair. Valid types include `SearchableString` and
     /// `String`.
-    @"type": ?OpsItemDataType,
+    @"type": ?OpsItemDataType = null,
 
     /// The value of the OperationalData key.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

@@ -5,18 +5,18 @@ pub const DatastoreFilter = struct {
     /// Filter to set cutoff dates for records. All data stores created after the
     /// specified date
     /// are included in the results.
-    created_after: ?i64,
+    created_after: ?i64 = null,
 
     /// Filter to set cutoff dates for records. All data stores created before the
     /// specified
     /// date are included in the results.
-    created_before: ?i64,
+    created_before: ?i64 = null,
 
     /// Filter data store results by name.
-    datastore_name: ?[]const u8,
+    datastore_name: ?[]const u8 = null,
 
     /// Filter data store results by status.
-    datastore_status: ?DatastoreStatus,
+    datastore_status: ?DatastoreStatus = null,
 
     pub const json_field_names = .{
         .created_after = "CreatedAfter",

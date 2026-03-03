@@ -24,75 +24,75 @@ pub const Application = struct {
     application_id: []const u8,
 
     /// The CPU architecture of an application.
-    architecture: ?Architecture,
+    architecture: ?Architecture = null,
 
     /// The ARN of the application.
     arn: []const u8,
 
     /// The configuration for an application to automatically start on job
     /// submission.
-    auto_start_configuration: ?AutoStartConfig,
+    auto_start_configuration: ?AutoStartConfig = null,
 
     /// The configuration for an application to automatically stop after a certain
     /// amount of time being idle.
-    auto_stop_configuration: ?AutoStopConfig,
+    auto_stop_configuration: ?AutoStopConfig = null,
 
     /// The date and time when the application run was created.
     created_at: i64,
 
     /// The configuration object that allows encrypting local disks.
-    disk_encryption_configuration: ?DiskEncryptionConfiguration,
+    disk_encryption_configuration: ?DiskEncryptionConfiguration = null,
 
     /// The IAM Identity Center configuration applied to enable trusted identity
     /// propagation.
-    identity_center_configuration: ?IdentityCenterConfiguration,
+    identity_center_configuration: ?IdentityCenterConfiguration = null,
 
     /// The image configuration applied to all worker types.
-    image_configuration: ?ImageConfiguration,
+    image_configuration: ?ImageConfiguration = null,
 
     /// The initial capacity of the application.
-    initial_capacity: ?[]const aws.map.MapEntry(InitialCapacityConfig),
+    initial_capacity: ?[]const aws.map.MapEntry(InitialCapacityConfig) = null,
 
     /// The interactive configuration object that enables the interactive use cases
     /// for an application.
-    interactive_configuration: ?InteractiveConfiguration,
+    interactive_configuration: ?InteractiveConfiguration = null,
 
     /// The configuration object that enables job level cost allocation.
-    job_level_cost_allocation_configuration: ?JobLevelCostAllocationConfiguration,
+    job_level_cost_allocation_configuration: ?JobLevelCostAllocationConfiguration = null,
 
     /// The maximum capacity of the application. This is cumulative across all
     /// workers at any given point in time during the lifespan of the application is
     /// created. No new resources will be created once any one of the defined limits
     /// is hit.
-    maximum_capacity: ?MaximumAllowedResources,
+    maximum_capacity: ?MaximumAllowedResources = null,
 
-    monitoring_configuration: ?MonitoringConfiguration,
+    monitoring_configuration: ?MonitoringConfiguration = null,
 
     /// The name of the application.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The network configuration for customer VPC connectivity for the application.
-    network_configuration: ?NetworkConfiguration,
+    network_configuration: ?NetworkConfiguration = null,
 
     /// The Amazon EMR release associated with the application.
     release_label: []const u8,
 
     /// The
     /// [Configuration](https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html) specifications of an application. Each configuration consists of a classification and properties. You use this parameter when creating or updating an application. To see the runtimeConfiguration object of an application, run the [GetApplication](https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_GetApplication.html) API operation.
-    runtime_configuration: ?[]const Configuration,
+    runtime_configuration: ?[]const Configuration = null,
 
     /// The scheduler configuration for batch and streaming jobs running on this
     /// application. Supported with release labels emr-7.0.0 and above.
-    scheduler_configuration: ?SchedulerConfiguration,
+    scheduler_configuration: ?SchedulerConfiguration = null,
 
     /// The state of the application.
     state: ApplicationState,
 
     /// The state details of the application.
-    state_details: ?[]const u8,
+    state_details: ?[]const u8 = null,
 
     /// The tags assigned to the application.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of application, such as Spark or Hive.
     @"type": []const u8,
@@ -101,7 +101,7 @@ pub const Application = struct {
     updated_at: i64,
 
     /// The specification applied to each worker type.
-    worker_type_specifications: ?[]const aws.map.MapEntry(WorkerTypeSpecification),
+    worker_type_specifications: ?[]const aws.map.MapEntry(WorkerTypeSpecification) = null,
 
     pub const json_field_names = .{
         .application_id = "applicationId",

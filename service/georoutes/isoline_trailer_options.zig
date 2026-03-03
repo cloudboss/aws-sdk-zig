@@ -1,12 +1,12 @@
 /// Trailer options corresponding to the vehicle.
 pub const IsolineTrailerOptions = struct {
     /// Total number of axles of the vehicle.
-    axle_count: ?i32,
+    axle_count: ?i32 = null,
 
     /// Number of trailers attached to the vehicle.
     ///
     /// Default Value: `0`
-    trailer_count: ?i32,
+    trailer_count: ?i32 = null,
 
     pub const json_field_names = .{
         .axle_count = "AxleCount",

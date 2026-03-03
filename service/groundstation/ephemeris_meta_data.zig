@@ -5,19 +5,19 @@ pub const EphemerisMetaData = struct {
     /// UUID of a customer-provided ephemeris.
     ///
     /// This field is not populated for default ephemerides from Space Track.
-    ephemeris_id: ?[]const u8,
+    ephemeris_id: ?[]const u8 = null,
 
     /// The epoch of a default, ephemeris from Space Track in UTC.
     ///
     /// This field is not populated for customer-provided ephemerides.
-    epoch: ?i64,
+    epoch: ?i64 = null,
 
     /// A name string associated with the ephemeris. Used as a human-readable
     /// identifier for the ephemeris.
     ///
     /// A name is only returned for customer-provider ephemerides that have a name
     /// associated.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The `EphemerisSource` that generated a given ephemeris.
     source: EphemerisSource,

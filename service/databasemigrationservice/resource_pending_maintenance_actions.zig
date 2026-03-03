@@ -3,7 +3,7 @@ const PendingMaintenanceAction = @import("pending_maintenance_action.zig").Pendi
 /// Identifies an DMS resource and any pending actions for it.
 pub const ResourcePendingMaintenanceActions = struct {
     /// Detailed information about the pending maintenance action.
-    pending_maintenance_action_details: ?[]const PendingMaintenanceAction,
+    pending_maintenance_action_details: ?[]const PendingMaintenanceAction = null,
 
     /// The Amazon Resource Name (ARN) of the DMS resource that the pending
     /// maintenance action
@@ -11,7 +11,7 @@ pub const ResourcePendingMaintenanceActions = struct {
     /// Amazon
     /// Resource Name (ARN) for
     /// DMS](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.AWS.ARN.html) in the DMS documentation.
-    resource_identifier: ?[]const u8,
+    resource_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .pending_maintenance_action_details = "PendingMaintenanceActionDetails",

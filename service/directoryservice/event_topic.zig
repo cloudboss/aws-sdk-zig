@@ -5,22 +5,22 @@ const TopicStatus = @import("topic_status.zig").TopicStatus;
 pub const EventTopic = struct {
     /// The date and time of when you associated your directory with the Amazon SNS
     /// topic.
-    created_date_time: ?i64,
+    created_date_time: ?i64 = null,
 
     /// The Directory ID of an Directory Service directory that will publish status
     /// messages to an Amazon SNS
     /// topic.
-    directory_id: ?[]const u8,
+    directory_id: ?[]const u8 = null,
 
     /// The topic registration status.
-    status: ?TopicStatus,
+    status: ?TopicStatus = null,
 
     /// The Amazon SNS topic ARN (Amazon Resource Name).
-    topic_arn: ?[]const u8,
+    topic_arn: ?[]const u8 = null,
 
     /// The name of an Amazon SNS topic the receives status messages from the
     /// directory.
-    topic_name: ?[]const u8,
+    topic_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_date_time = "CreatedDateTime",

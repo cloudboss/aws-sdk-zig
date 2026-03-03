@@ -4,7 +4,7 @@ const Tag = @import("tag.zig").Tag;
 /// Contains pipeline metadata.
 pub const PipelineDescription = struct {
     /// Description of the pipeline.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A list of read-only fields that contain metadata about the pipeline:
     /// @userId, @accountId, and @pipelineState.
@@ -21,7 +21,7 @@ pub const PipelineDescription = struct {
     /// pipelines.
     /// For more information, see [Controlling User Access to
     /// Pipelines](http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html) in the *AWS Data Pipeline Developer Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .description = "description",

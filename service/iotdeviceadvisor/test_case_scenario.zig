@@ -4,7 +4,7 @@ const TestCaseScenarioType = @import("test_case_scenario_type.zig").TestCaseScen
 /// Provides test case scenario.
 pub const TestCaseScenario = struct {
     /// Provides test case scenario failure result.
-    failure: ?[]const u8,
+    failure: ?[]const u8 = null,
 
     /// Provides the test case scenario status. Status is one of the following:
     ///
@@ -26,20 +26,20 @@ pub const TestCaseScenario = struct {
     ///
     /// * `ERORR`: Test faced an error when running due to an internal
     /// issue.
-    status: ?TestCaseScenarioStatus,
+    status: ?TestCaseScenarioStatus = null,
 
     /// Provides test case scenario system messages if any.
-    system_message: ?[]const u8,
+    system_message: ?[]const u8 = null,
 
     /// Provides test case scenario ID.
-    test_case_scenario_id: ?[]const u8,
+    test_case_scenario_id: ?[]const u8 = null,
 
     /// Provides test case scenario type. Type is one of the following:
     ///
     /// * Advanced
     ///
     /// * Basic
-    test_case_scenario_type: ?TestCaseScenarioType,
+    test_case_scenario_type: ?TestCaseScenarioType = null,
 
     pub const json_field_names = .{
         .failure = "failure",

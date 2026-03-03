@@ -41,7 +41,7 @@
 pub const DestinationToCreate = struct {
     /// To create a file system that uses One Zone storage, specify the name of the
     /// Availability Zone in which to create the destination file system.
-    availability_zone_name: ?[]const u8,
+    availability_zone_name: ?[]const u8 = null,
 
     /// The ID or ARN of the file system to use for the destination.
     /// For cross-account replication, this must be an ARN. The file system's
@@ -57,7 +57,7 @@ pub const DestinationToCreate = struct {
     /// then you should replicate to a new file system instead. For more
     /// information, see
     /// [https://docs.aws.amazon.com/efs/latest/ug/create-replication.html](https://docs.aws.amazon.com/efs/latest/ug/create-replication.html).
-    file_system_id: ?[]const u8,
+    file_system_id: ?[]const u8 = null,
 
     /// Specify the Key Management Service (KMS) key that you want to use to
     /// encrypt the destination file system. If you do not specify a KMS key, Amazon
@@ -75,7 +75,7 @@ pub const DestinationToCreate = struct {
     ///
     /// * Key alias ARN - The ARN for a key alias, for example
     /// `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// To create a file system that uses Regional storage, specify the Amazon Web
     /// Services Region in which to create the destination file system. The Region
@@ -85,13 +85,13 @@ pub const DestinationToCreate = struct {
     /// [Managing Amazon Web Services
     /// Regions](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable) in the *Amazon Web Services General
     /// Reference Reference Guide*.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) of the IAM role in the source account that allows
     /// Amazon EFS to perform replication on its behalf. This is optional for
     /// same-account
     /// replication and required for cross-account replication.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .availability_zone_name = "AvailabilityZoneName",

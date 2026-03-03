@@ -13,7 +13,7 @@ pub const UnsupportedResource = struct {
     resource_type: []const u8,
 
     /// The status of the unsupported resource.
-    unsupported_resource_status: ?[]const u8,
+    unsupported_resource_status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .logical_resource_id = "logicalResourceId",

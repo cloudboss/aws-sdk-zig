@@ -21,7 +21,7 @@ pub const TrustStoreSummary = struct {
     number_of_ca_certificates: i32,
 
     /// The trust store's reason.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The trust store's status.
     status: TrustStoreStatus,

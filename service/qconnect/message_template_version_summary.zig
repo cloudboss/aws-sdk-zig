@@ -3,7 +3,7 @@ const ChannelSubtype = @import("channel_subtype.zig").ChannelSubtype;
 /// The summary of the message template version.
 pub const MessageTemplateVersionSummary = struct {
     /// The channel of the message template.
-    channel: ?[]const u8,
+    channel: ?[]const u8 = null,
 
     /// The channel subtype this message template applies to.
     channel_subtype: ChannelSubtype,

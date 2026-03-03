@@ -6,33 +6,33 @@ const Tag = @import("tag.zig").Tag;
 /// web sites to monitor cluster activity.
 pub const PersistentAppUI = struct {
     /// The author ID for the persistent application user interface object.
-    author_id: ?[]const u8,
+    author_id: ?[]const u8 = null,
 
     /// The creation date and time for the persistent application user interface
     /// object.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The date and time the persistent application user interface object was last
     /// changed.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The reason the persistent application user interface object was last
     /// changed.
-    last_state_change_reason: ?[]const u8,
+    last_state_change_reason: ?[]const u8 = null,
 
     /// The identifier for the persistent application user interface object.
-    persistent_app_ui_id: ?[]const u8,
+    persistent_app_ui_id: ?[]const u8 = null,
 
     /// The status for the persistent application user interface object.
-    persistent_app_ui_status: ?[]const u8,
+    persistent_app_ui_status: ?[]const u8 = null,
 
     /// The type list for the persistent application user interface object. Valid
     /// values
     /// include SHS, YTS, or TEZ.
-    persistent_app_ui_type_list: ?[]const PersistentAppUIType,
+    persistent_app_ui_type_list: ?[]const PersistentAppUIType = null,
 
     /// A collection of tags for the persistent application user interface object.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .author_id = "AuthorId",

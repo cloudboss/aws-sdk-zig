@@ -6,8 +6,8 @@
 /// (env.yaml)](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html) for details.
 pub const EnvironmentLink = struct {
     /// The name of the linked environment (the dependency).
-    environment_name: ?[]const u8,
+    environment_name: ?[]const u8 = null,
 
     /// The name of the link.
-    link_name: ?[]const u8,
+    link_name: ?[]const u8 = null,
 };

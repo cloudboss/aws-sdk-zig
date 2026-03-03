@@ -10,13 +10,13 @@ pub const MetricDefinitionConfig = struct {
     /// For more information about EventBridge event patterns, see [Amazon
     /// EventBridge event
     /// patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html).
-    event_pattern: ?[]const u8,
+    event_pattern: ?[]const u8 = null,
 
     /// A name for the metric.
     name: []const u8,
 
     /// A label for the units that the metric is measuring.
-    unit_label: ?[]const u8,
+    unit_label: ?[]const u8 = null,
 
     /// The value that is tracked to produce the metric.
     value_key: []const u8,

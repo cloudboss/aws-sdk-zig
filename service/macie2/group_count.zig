@@ -2,11 +2,11 @@
 /// statistical data about findings.
 pub const GroupCount = struct {
     /// The total number of findings in the group of query results.
-    count: ?i64,
+    count: ?i64 = null,
 
     /// The name of the property that defines the group in the query results, as
     /// specified by the groupBy property in the query request.
-    group_key: ?[]const u8,
+    group_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .count = "count",

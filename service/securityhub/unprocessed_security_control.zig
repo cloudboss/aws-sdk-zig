@@ -9,7 +9,7 @@ pub const UnprocessedSecurityControl = struct {
     error_code: UnprocessedErrorCode,
 
     /// The reason why the security control was unprocessed.
-    error_reason: ?[]const u8,
+    error_reason: ?[]const u8 = null,
 
     /// The control (identified with `SecurityControlId`,
     /// `SecurityControlArn`, or a mix of both parameters) for which a response

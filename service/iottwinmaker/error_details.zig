@@ -3,10 +3,10 @@ const ErrorCode = @import("error_code.zig").ErrorCode;
 /// The error details.
 pub const ErrorDetails = struct {
     /// The error code.
-    code: ?ErrorCode,
+    code: ?ErrorCode = null,
 
     /// The error message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

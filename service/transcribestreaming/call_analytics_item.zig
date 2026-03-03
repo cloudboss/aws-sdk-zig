@@ -7,7 +7,7 @@ const ItemType = @import("item_type.zig").ItemType;
 pub const CallAnalyticsItem = struct {
     /// The time, in milliseconds, from the beginning of the audio stream to the
     /// start of the identified item.
-    begin_offset_millis: ?i64,
+    begin_offset_millis: ?i64 = null,
 
     /// The confidence score associated with a word or phrase in your transcript.
     ///
@@ -15,24 +15,24 @@ pub const CallAnalyticsItem = struct {
     /// higher
     /// probability that the identified item correctly matches the item spoken in
     /// your media.
-    confidence: ?f64,
+    confidence: ?f64 = null,
 
     /// The word or punctuation that was transcribed.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The time, in milliseconds, from the beginning of the audio stream to the end
     /// of the identified item.
-    end_offset_millis: ?i64,
+    end_offset_millis: ?i64 = null,
 
     /// If partial result stabilization is enabled, `Stable` indicates whether the
     /// specified
     /// item is stable (`true`) or if it may change when the segment is complete
     /// (`false`).
-    stable: ?bool,
+    stable: ?bool = null,
 
     /// The type of item identified. Options are: `PRONUNCIATION` (spoken words) and
     /// `PUNCTUATION`.
-    @"type": ?ItemType,
+    @"type": ?ItemType = null,
 
     /// Indicates whether the specified item matches a word in the vocabulary filter
     /// included in

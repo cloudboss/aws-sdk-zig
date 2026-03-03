@@ -7,14 +7,14 @@ const ParquetInput = @import("parquet_input.zig").ParquetInput;
 pub const InputSerialization = struct {
     /// Specifies object's compression format. Valid values: NONE, GZIP, BZIP2.
     /// Default Value: NONE.
-    compression_type: ?CompressionType,
+    compression_type: ?CompressionType = null,
 
     /// Describes the serialization of a CSV-encoded object.
-    csv: ?CSVInput,
+    csv: ?CSVInput = null,
 
     /// Specifies JSON as object's input serialization format.
-    json: ?JSONInput,
+    json: ?JSONInput = null,
 
     /// Specifies Parquet as object's input serialization format.
-    parquet: ?ParquetInput,
+    parquet: ?ParquetInput = null,
 };

@@ -3,7 +3,7 @@
 /// to gauge the health of your system.
 pub const InsightHealth = struct {
     /// The Meant Time to Recover (MTTR) for the insight.
-    mean_time_to_recover_in_milliseconds: ?i64,
+    mean_time_to_recover_in_milliseconds: ?i64 = null,
 
     /// The number of open proactive insights.
     open_proactive_insights: i32 = 0,

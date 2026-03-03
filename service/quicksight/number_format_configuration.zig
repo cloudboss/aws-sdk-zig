@@ -3,7 +3,7 @@ const NumericFormatConfiguration = @import("numeric_format_configuration.zig").N
 /// Formatting configuration for number fields.
 pub const NumberFormatConfiguration = struct {
     /// The options that determine the numeric format configuration.
-    format_configuration: ?NumericFormatConfiguration,
+    format_configuration: ?NumericFormatConfiguration = null,
 
     pub const json_field_names = .{
         .format_configuration = "FormatConfiguration",

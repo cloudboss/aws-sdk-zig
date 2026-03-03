@@ -4,14 +4,14 @@ const StatusType = @import("status_type.zig").StatusType;
 /// Contains information about the sandbox phase.
 pub const SandboxSessionPhase = struct {
     /// An array of `PhaseContext` objects.
-    contexts: ?[]const PhaseContext,
+    contexts: ?[]const PhaseContext = null,
 
     /// How long, in seconds, between the starting and ending times of the sandbox's
     /// phase.
-    duration_in_seconds: ?i64,
+    duration_in_seconds: ?i64 = null,
 
     /// When the sandbox phase ended, expressed in Unix time format.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The current status of the sandbox phase. Valid values include:
     ///
@@ -38,13 +38,13 @@ pub const SandboxSessionPhase = struct {
     /// **TIMED_OUT**
     ///
     /// The sandbox phase timed out.
-    phase_status: ?StatusType,
+    phase_status: ?StatusType = null,
 
     /// The name of the sandbox phase.
-    phase_type: ?[]const u8,
+    phase_type: ?[]const u8 = null,
 
     /// When the sandbox phase started, expressed in Unix time format.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .contexts = "contexts",

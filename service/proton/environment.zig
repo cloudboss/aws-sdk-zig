@@ -11,7 +11,7 @@ pub const Environment = struct {
     /// The Amazon Resource Name (ARN) of the IAM service role that allows Proton to
     /// provision infrastructure using CodeBuild-based provisioning on your
     /// behalf.
-    codebuild_role_arn: ?[]const u8,
+    codebuild_role_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
     /// provisioning directly defined components in this environment. It
@@ -24,7 +24,7 @@ pub const Environment = struct {
     /// [Proton
     /// components](https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
     /// *Proton User Guide*.
-    component_role_arn: ?[]const u8,
+    component_role_arn: ?[]const u8 = null,
 
     /// The time when the environment was created.
     created_at: i64,
@@ -33,21 +33,21 @@ pub const Environment = struct {
     deployment_status: DeploymentStatus,
 
     /// An environment deployment status message.
-    deployment_status_message: ?[]const u8,
+    deployment_status_message: ?[]const u8 = null,
 
     /// The description of the environment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the environment account connection that's used to provision
     /// infrastructure resources in an environment account.
-    environment_account_connection_id: ?[]const u8,
+    environment_account_connection_id: ?[]const u8 = null,
 
     /// The ID of the environment account that the environment infrastructure
     /// resources are provisioned in.
-    environment_account_id: ?[]const u8,
+    environment_account_id: ?[]const u8 = null,
 
     /// The ID of the last attempted deployment of this environment.
-    last_attempted_deployment_id: ?[]const u8,
+    last_attempted_deployment_id: ?[]const u8 = null,
 
     /// The time when a deployment of the environment was last attempted.
     last_deployment_attempted_at: i64,
@@ -56,28 +56,28 @@ pub const Environment = struct {
     last_deployment_succeeded_at: i64,
 
     /// The ID of the last successful deployment of this environment.
-    last_succeeded_deployment_id: ?[]const u8,
+    last_succeeded_deployment_id: ?[]const u8 = null,
 
     /// The name of the environment.
     name: []const u8,
 
     /// The Amazon Resource Name (ARN) of the Proton service role that allows Proton
     /// to make calls to other services on your behalf.
-    proton_service_role_arn: ?[]const u8,
+    proton_service_role_arn: ?[]const u8 = null,
 
     /// When included, indicates that the environment template is for customer
     /// provisioned and managed infrastructure.
-    provisioning: ?Provisioning,
+    provisioning: ?Provisioning = null,
 
     /// The linked repository that you use to host your rendered infrastructure
     /// templates for self-managed
     /// provisioning. A linked repository is a repository that has been registered
     /// with Proton. For more information, see
     /// [CreateRepository](https://docs.aws.amazon.com/proton/latest/APIReference/API_CreateRepository.html).
-    provisioning_repository: ?RepositoryBranch,
+    provisioning_repository: ?RepositoryBranch = null,
 
     /// The environment spec.
-    spec: ?[]const u8,
+    spec: ?[]const u8 = null,
 
     /// The major version of the environment template.
     template_major_version: []const u8,

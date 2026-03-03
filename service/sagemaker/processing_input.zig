@@ -7,17 +7,17 @@ pub const ProcessingInput = struct {
     /// When `True`, input operations such as data download are managed natively by
     /// the processing job application. When `False` (default), input operations are
     /// managed by Amazon SageMaker.
-    app_managed: ?bool,
+    app_managed: ?bool = null,
 
     /// Configuration for a Dataset Definition input.
-    dataset_definition: ?DatasetDefinition,
+    dataset_definition: ?DatasetDefinition = null,
 
     /// The name for the processing job input.
     input_name: []const u8,
 
     /// Configuration for downloading input data from Amazon S3 into the processing
     /// container.
-    s3_input: ?ProcessingS3Input,
+    s3_input: ?ProcessingS3Input = null,
 
     pub const json_field_names = .{
         .app_managed = "AppManaged",

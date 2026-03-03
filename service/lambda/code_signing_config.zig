@@ -18,7 +18,7 @@ pub const CodeSigningConfig = struct {
     code_signing_policies: CodeSigningPolicies,
 
     /// Code signing configuration description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The date and time that the Code signing configuration was last modified, in
     /// ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).

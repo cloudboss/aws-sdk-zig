@@ -7,22 +7,22 @@ const TestType = @import("test_type.zig").TestType;
 /// Represents a condition that is evaluated.
 pub const Test = struct {
     /// The test's ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The test's result counters.
-    counters: ?Counters,
+    counters: ?Counters = null,
 
     /// When the test was created.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// Represents the total (metered or unmetered) minutes used by the test.
-    device_minutes: ?DeviceMinutes,
+    device_minutes: ?DeviceMinutes = null,
 
     /// A message about the test's result.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The test's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The test's result.
     ///
@@ -41,10 +41,10 @@ pub const Test = struct {
     /// * ERRORED
     ///
     /// * STOPPED
-    result: ?ExecutionResult,
+    result: ?ExecutionResult = null,
 
     /// The test's start time.
-    started: ?i64,
+    started: ?i64 = null,
 
     /// The test's status.
     ///
@@ -67,10 +67,10 @@ pub const Test = struct {
     /// * COMPLETED
     ///
     /// * STOPPING
-    status: ?ExecutionStatus,
+    status: ?ExecutionStatus = null,
 
     /// The test's stop time.
-    stopped: ?i64,
+    stopped: ?i64 = null,
 
     /// The test's type.
     ///
@@ -103,7 +103,7 @@ pub const Test = struct {
     /// * XCTEST
     ///
     /// * XCTEST_UI
-    @"type": ?TestType,
+    @"type": ?TestType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -11,13 +11,13 @@ pub const OptimizationJobSummary = struct {
     deployment_instance_type: OptimizationJobDeploymentInstanceType,
 
     /// The time when the optimization job was last updated.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The maximum number of instances to use for the optimization job.
-    max_instance_count: ?i32,
+    max_instance_count: ?i32 = null,
 
     /// The time when the optimization job finished processing.
-    optimization_end_time: ?i64,
+    optimization_end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the optimization job.
     optimization_job_arn: []const u8,
@@ -29,7 +29,7 @@ pub const OptimizationJobSummary = struct {
     optimization_job_status: OptimizationJobStatus,
 
     /// The time when the optimization job started.
-    optimization_start_time: ?i64,
+    optimization_start_time: ?i64 = null,
 
     /// The optimization techniques that are applied by the optimization job.
     optimization_types: []const []const u8,

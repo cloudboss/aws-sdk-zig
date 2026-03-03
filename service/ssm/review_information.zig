@@ -3,13 +3,13 @@ const ReviewStatus = @import("review_status.zig").ReviewStatus;
 /// Information about the result of a document review request.
 pub const ReviewInformation = struct {
     /// The time that the reviewer took action on the document review request.
-    reviewed_time: ?i64,
+    reviewed_time: ?i64 = null,
 
     /// The reviewer assigned to take action on the document review request.
-    reviewer: ?[]const u8,
+    reviewer: ?[]const u8 = null,
 
     /// The current status of the document review request.
-    status: ?ReviewStatus,
+    status: ?ReviewStatus = null,
 
     pub const json_field_names = .{
         .reviewed_time = "ReviewedTime",

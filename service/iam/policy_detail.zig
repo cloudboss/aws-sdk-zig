@@ -4,8 +4,8 @@
 /// [GetAccountAuthorizationDetails](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountAuthorizationDetails.html) operation.
 pub const PolicyDetail = struct {
     /// The policy document.
-    policy_document: ?[]const u8,
+    policy_document: ?[]const u8 = null,
 
     /// The name of the policy.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 };

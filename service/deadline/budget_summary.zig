@@ -21,7 +21,7 @@ pub const BudgetSummary = struct {
     /// This field can store any content. Escape or encode this content before
     /// displaying it on a webpage or any other system that might interpret the
     /// content of this field.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The display name of the budget summary to update.
     ///
@@ -38,10 +38,10 @@ pub const BudgetSummary = struct {
     status: BudgetStatus,
 
     /// The date and time the resource was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user or system that updated this resource.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     /// The consumed usage for the budget.
     usages: ConsumedUsages,

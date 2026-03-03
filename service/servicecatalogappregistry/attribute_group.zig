@@ -5,28 +5,28 @@ const aws = @import("aws");
 pub const AttributeGroup = struct {
     /// The Amazon resource name (ARN) that specifies the attribute group across
     /// services.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The ISO-8601 formatted timestamp of the moment the attribute group was
     /// created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The description of the attribute group that the user provides.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The globally unique attribute group identifier of the attribute group.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The ISO-8601 formatted timestamp of the moment the attribute group was last
     /// updated. This time is the same as the creationTime for a newly created
     /// attribute group.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The name of the attribute group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Key-value pairs you can use to associate with the attribute group.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

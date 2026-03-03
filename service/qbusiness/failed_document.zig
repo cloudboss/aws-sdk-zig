@@ -6,14 +6,14 @@ const ErrorDetail = @import("error_detail.zig").ErrorDetail;
 pub const FailedDocument = struct {
     /// The identifier of the Amazon Q Business data source connector that contains
     /// the failed document.
-    data_source_id: ?[]const u8,
+    data_source_id: ?[]const u8 = null,
 
     /// An explanation for why the document couldn't be removed from the index.
-    @"error": ?ErrorDetail,
+    @"error": ?ErrorDetail = null,
 
     /// The identifier of the document that couldn't be removed from the Amazon Q
     /// Business index.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_source_id = "dataSourceId",

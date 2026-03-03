@@ -5,30 +5,30 @@ const Address = @import("address.zig").Address;
 pub const Intersection = struct {
     /// Position of the access point in World Geodetic System (WGS 84) format:
     /// [longitude, latitude].
-    access_points: ?[]const AccessPoint,
+    access_points: ?[]const AccessPoint = null,
 
-    address: ?Address,
+    address: ?Address = null,
 
     /// The distance in meters from the QueryPosition.
-    distance: ?i64,
+    distance: ?i64 = null,
 
     /// The bounding box enclosing the geometric shape (area or line) that an
     /// individual result covers.
     ///
     /// The bounding box formed is defined as a set of four coordinates: `[{westward
     /// lng}, {southern lat}, {eastward lng}, {northern lat}]`
-    map_view: ?[]const f64,
+    map_view: ?[]const f64 = null,
 
     /// The `PlaceId` of the place result.
     place_id: []const u8,
 
     /// The position in World Geodetic System (WGS 84) format: [longitude,
     /// latitude].
-    position: ?[]const f64,
+    position: ?[]const f64 = null,
 
     /// The distance from the routing position of the nearby address to the street
     /// result.
-    route_distance: ?i64,
+    route_distance: ?i64 = null,
 
     /// The localized display name of this result item based on request parameter
     /// `language`.

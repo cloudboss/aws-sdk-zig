@@ -24,7 +24,7 @@ pub const SmsConfigurationType = struct {
     /// external ID when granting access to your Amazon Web Services resources to a
     /// third
     /// party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon SNS caller. This is the ARN of
     /// the IAM role
@@ -44,7 +44,7 @@ pub const SmsConfigurationType = struct {
     /// configuration in the Asia Pacific (Tokyo) Region. For more information, see
     /// [SMS message settings for Amazon Cognito user
     /// pools](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html).
-    sns_region: ?[]const u8,
+    sns_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .external_id = "ExternalId",

@@ -14,7 +14,7 @@ pub const EndpointRequest = struct {
     /// Messaging (FCM) registration token. For the SMS channel, use a phone number
     /// in E.164 format, such as +12065550100. For the email channel, use an email
     /// address.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// One or more custom attributes that describe the endpoint by associating a
     /// name with an array of values. For example, the value of a custom attribute
@@ -28,18 +28,18 @@ pub const EndpointRequest = struct {
     /// question mark (?), backslash (\), and slash (/). The Amazon Pinpoint console
     /// can't display attribute names that contain these characters. This
     /// restriction doesn't apply to attribute values.
-    attributes: ?[]const aws.map.MapEntry([]const []const u8),
+    attributes: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The channel to use when sending messages or push notifications to the
     /// endpoint.
-    channel_type: ?ChannelType,
+    channel_type: ?ChannelType = null,
 
     /// The demographic information for the endpoint, such as the time zone and
     /// platform.
-    demographic: ?EndpointDemographic,
+    demographic: ?EndpointDemographic = null,
 
     /// The date and time, in ISO 8601 format, when the endpoint is updated.
-    effective_date: ?[]const u8,
+    effective_date: ?[]const u8 = null,
 
     /// Specifies whether to send messages or push notifications to the endpoint.
     /// Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE,
@@ -49,28 +49,28 @@ pub const EndpointRequest = struct {
     /// endpoint or update an existing endpoint. Amazon Pinpoint automatically sets
     /// this value to INACTIVE if you update another endpoint that has the same
     /// address specified by the Address property.
-    endpoint_status: ?[]const u8,
+    endpoint_status: ?[]const u8 = null,
 
     /// The geographic information for the endpoint.
-    location: ?EndpointLocation,
+    location: ?EndpointLocation = null,
 
     /// One or more custom metrics that your app reports to Amazon Pinpoint for the
     /// endpoint.
-    metrics: ?[]const aws.map.MapEntry(f64),
+    metrics: ?[]const aws.map.MapEntry(f64) = null,
 
     /// Specifies whether the user who's associated with the endpoint has opted out
     /// of receiving messages and push notifications from you. Possible values are:
     /// ALL, the user has opted out and doesn't want to receive any messages or push
     /// notifications; and, NONE, the user hasn't opted out and wants to receive all
     /// messages and push notifications.
-    opt_out: ?[]const u8,
+    opt_out: ?[]const u8 = null,
 
     /// The unique identifier for the most recent request to update the endpoint.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// One or more custom attributes that describe the user who's associated with
     /// the endpoint.
-    user: ?EndpointUser,
+    user: ?EndpointUser = null,
 
     pub const json_field_names = .{
         .address = "Address",

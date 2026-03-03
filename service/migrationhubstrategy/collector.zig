@@ -4,29 +4,29 @@ const ConfigurationSummary = @import("configuration_summary.zig").ConfigurationS
 /// Process data collector that runs in the environment that you specify.
 pub const Collector = struct {
     /// Indicates the health of a collector.
-    collector_health: ?CollectorHealth,
+    collector_health: ?CollectorHealth = null,
 
     /// The ID of the collector.
-    collector_id: ?[]const u8,
+    collector_id: ?[]const u8 = null,
 
     /// Current version of the collector that is running in the environment that you
     /// specify.
-    collector_version: ?[]const u8,
+    collector_version: ?[]const u8 = null,
 
     /// Summary of the collector configuration.
-    configuration_summary: ?ConfigurationSummary,
+    configuration_summary: ?ConfigurationSummary = null,
 
     /// Hostname of the server that is hosting the collector.
-    host_name: ?[]const u8,
+    host_name: ?[]const u8 = null,
 
     /// IP address of the server that is hosting the collector.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// Time when the collector last pinged the service.
-    last_activity_time_stamp: ?[]const u8,
+    last_activity_time_stamp: ?[]const u8 = null,
 
     /// Time when the collector registered with the service.
-    registered_time_stamp: ?[]const u8,
+    registered_time_stamp: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .collector_health = "collectorHealth",

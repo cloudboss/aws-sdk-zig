@@ -6,16 +6,16 @@ const SankeyDiagramSortConfiguration = @import("sankey_diagram_sort_configuratio
 /// The configuration of a sankey diagram.
 pub const SankeyDiagramChartConfiguration = struct {
     /// The data label configuration of a sankey diagram.
-    data_labels: ?DataLabelOptions,
+    data_labels: ?DataLabelOptions = null,
 
     /// The field well configuration of a sankey diagram.
-    field_wells: ?SankeyDiagramFieldWells,
+    field_wells: ?SankeyDiagramFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The sort configuration of a sankey diagram.
-    sort_configuration: ?SankeyDiagramSortConfiguration,
+    sort_configuration: ?SankeyDiagramSortConfiguration = null,
 
     pub const json_field_names = .{
         .data_labels = "DataLabels",

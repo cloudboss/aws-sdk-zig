@@ -8,45 +8,45 @@ const WorkspaceProperties = @import("workspace_properties.zig").WorkspacePropert
 /// Describes a WorkSpace.
 pub const Workspace = struct {
     /// The identifier of the bundle used to create the WorkSpace.
-    bundle_id: ?[]const u8,
+    bundle_id: ?[]const u8 = null,
 
     /// The name of the WorkSpace, as seen by the operating system. The format of
     /// this name
     /// varies. For more information, see [ Launch a
     /// WorkSpace](https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspaces-tutorials.html).
-    computer_name: ?[]const u8,
+    computer_name: ?[]const u8 = null,
 
     /// Indicates the settings of the data replication.
-    data_replication_settings: ?DataReplicationSettings,
+    data_replication_settings: ?DataReplicationSettings = null,
 
     /// The identifier of the Directory Service directory for the WorkSpace.
-    directory_id: ?[]const u8,
+    directory_id: ?[]const u8 = null,
 
     /// The error code that is returned if the WorkSpace cannot be created.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The text of the error message that is returned if the WorkSpace cannot be
     /// created.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The IP address of the WorkSpace.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     /// The IPv6 address of the WorkSpace.
-    ipv_6_address: ?[]const u8,
+    ipv_6_address: ?[]const u8 = null,
 
     /// The modification states of the WorkSpace.
-    modification_states: ?[]const ModificationState,
+    modification_states: ?[]const ModificationState = null,
 
     /// The standby WorkSpace or primary WorkSpace related to the specified
     /// WorkSpace.
-    related_workspaces: ?[]const RelatedWorkspaceProperties,
+    related_workspaces: ?[]const RelatedWorkspaceProperties = null,
 
     /// Indicates whether the data stored on the root volume is encrypted.
-    root_volume_encryption_enabled: ?bool,
+    root_volume_encryption_enabled: ?bool = null,
 
     /// The properties of the standby WorkSpace
-    standby_workspaces_properties: ?[]const StandbyWorkspacesProperties,
+    standby_workspaces_properties: ?[]const StandbyWorkspacesProperties = null,
 
     /// The operational state of the WorkSpace.
     ///
@@ -96,30 +96,30 @@ pub const Workspace = struct {
     /// [
     /// DescribeWorkSpaces](https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html). If the WorkSpace ID isn't returned, then the WorkSpace
     /// has been successfully terminated.
-    state: ?WorkspaceState,
+    state: ?WorkspaceState = null,
 
     /// The identifier of the subnet for the WorkSpace.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The user for the WorkSpace.
-    user_name: ?[]const u8,
+    user_name: ?[]const u8 = null,
 
     /// Indicates whether the data stored on the user volume is encrypted.
-    user_volume_encryption_enabled: ?bool,
+    user_volume_encryption_enabled: ?bool = null,
 
     /// The ARN of the symmetric KMS key used to encrypt data stored on your
     /// WorkSpace.
     /// Amazon WorkSpaces does not support asymmetric KMS keys.
-    volume_encryption_key: ?[]const u8,
+    volume_encryption_key: ?[]const u8 = null,
 
     /// The identifier of the WorkSpace.
-    workspace_id: ?[]const u8,
+    workspace_id: ?[]const u8 = null,
 
     /// The name of the user-decoupled WorkSpace.
-    workspace_name: ?[]const u8,
+    workspace_name: ?[]const u8 = null,
 
     /// The properties of the WorkSpace.
-    workspace_properties: ?WorkspaceProperties,
+    workspace_properties: ?WorkspaceProperties = null,
 
     pub const json_field_names = .{
         .bundle_id = "BundleId",

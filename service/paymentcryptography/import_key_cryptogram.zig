@@ -19,7 +19,7 @@ pub const ImportKeyCryptogram = struct {
     wrapped_key_cryptogram: []const u8,
 
     /// The wrapping spec for the wrapped key cryptogram.
-    wrapping_spec: ?WrappingKeySpec,
+    wrapping_spec: ?WrappingKeySpec = null,
 
     pub const json_field_names = .{
         .exportable = "Exportable",

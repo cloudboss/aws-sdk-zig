@@ -5,10 +5,10 @@ pub const S3LoggingConfiguration = struct {
 
     /// The KMS key ARN to encrypt the logs published to the given Amazon S3
     /// destination.
-    kms_key: ?[]const u8,
+    kms_key: ?[]const u8 = null,
 
     /// The Amazon S3 destination URI for log publishing.
-    log_location: ?[]const u8,
+    log_location: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

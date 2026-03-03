@@ -6,10 +6,10 @@ pub const S3Location = struct {
     bucket: []const u8,
 
     /// The Amazon Web Services account ID of the bucket owner.
-    bucket_owner: ?[]const u8,
+    bucket_owner: ?[]const u8 = null,
 
     /// The unique name of the object in the bucket.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "Bucket",

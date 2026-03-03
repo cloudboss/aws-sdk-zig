@@ -7,10 +7,10 @@ pub const MonitoringExecutionSummary = struct {
     creation_time: i64,
 
     /// The name of the endpoint used to run the monitoring job.
-    endpoint_name: ?[]const u8,
+    endpoint_name: ?[]const u8 = null,
 
     /// Contains the reason a monitoring job failed, if it failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// A timestamp that indicates the last time the monitoring job was modified.
     last_modified_time: i64,
@@ -19,16 +19,16 @@ pub const MonitoringExecutionSummary = struct {
     monitoring_execution_status: ExecutionStatus,
 
     /// The name of the monitoring job.
-    monitoring_job_definition_name: ?[]const u8,
+    monitoring_job_definition_name: ?[]const u8 = null,
 
     /// The name of the monitoring schedule.
     monitoring_schedule_name: []const u8,
 
     /// The type of the monitoring job.
-    monitoring_type: ?MonitoringType,
+    monitoring_type: ?MonitoringType = null,
 
     /// The Amazon Resource Name (ARN) of the monitoring job.
-    processing_job_arn: ?[]const u8,
+    processing_job_arn: ?[]const u8 = null,
 
     /// The time the monitoring job was scheduled.
     scheduled_time: i64,

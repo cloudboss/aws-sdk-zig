@@ -7,14 +7,14 @@ pub const ContainerConfig = struct {
     /// SageMaker Runs Your Training Image for additional information. For more
     /// information, see [How Sagemaker runs your training
     /// image](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html).
-    arguments: ?[]const []const u8,
+    arguments: ?[]const []const u8 = null,
 
     /// The entrypoint script for a Docker container used to run a training job.
     /// This script takes precedence over the default train processing instructions.
     /// See How Amazon SageMaker Runs Your Training Image for additional
     /// information. For more information, see [How Sagemaker runs your training
     /// image](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html).
-    entrypoint: ?[]const []const u8,
+    entrypoint: ?[]const []const u8 = null,
 
     /// The registry path of the docker image that contains the algorithm. Clean
     /// Rooms ML currently only supports the `registry/repository[:tag]` image path
@@ -27,7 +27,7 @@ pub const ContainerConfig = struct {
     /// and regular expressions used to parse algorithm logs. Amazon Web Services
     /// Clean Rooms ML publishes each metric to all members' Amazon CloudWatch using
     /// IAM role configured in PutMLConfiguration.
-    metric_definitions: ?[]const MetricDefinition,
+    metric_definitions: ?[]const MetricDefinition = null,
 
     pub const json_field_names = .{
         .arguments = "arguments",

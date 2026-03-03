@@ -2,7 +2,7 @@
 /// volume.
 pub const VolumeConfiguration = struct {
     /// Contains the image used to boot the instance during launch.
-    root_volume: ?bool,
+    root_volume: ?bool = null,
 
     /// The baseline IOPS of the volume.
     volume_baseline_iops: i32 = 0,
@@ -32,7 +32,7 @@ pub const VolumeConfiguration = struct {
     /// * Cold HDD `sc1`
     ///
     /// * Magnetic volumes `standard`
-    volume_type: ?[]const u8,
+    volume_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .root_volume = "rootVolume",

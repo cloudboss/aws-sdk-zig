@@ -7,31 +7,31 @@ const ShareStatus = @import("share_status.zig").ShareStatus;
 /// GetFirewallRuleGroup and ListFirewallRules.
 pub const FirewallRuleGroupMetadata = struct {
     /// The ARN (Amazon Resource Name) of the rule group.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A unique string defined by you to identify the request. This allows you to
     /// retry failed
     /// requests without the risk of running the operation twice. This can be any
     /// unique string,
     /// for example, a timestamp.
-    creator_request_id: ?[]const u8,
+    creator_request_id: ?[]const u8 = null,
 
     /// The ID of the rule group.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the rule group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID for the account that created the rule
     /// group. When a rule group is shared with your account,
     /// this is the account that has shared the rule group with you.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// Whether the rule group is shared with other Amazon Web Services accounts, or
     /// was shared with the current account by another
     /// Amazon Web Services account. Sharing is configured through Resource Access
     /// Manager (RAM).
-    share_status: ?ShareStatus,
+    share_status: ?ShareStatus = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

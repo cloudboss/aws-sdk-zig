@@ -5,10 +5,10 @@ const TopicFilter = @import("topic_filter.zig").TopicFilter;
 pub const ListContactsFilter = struct {
     /// The status by which you are filtering: `OPT_IN` or
     /// `OPT_OUT`.
-    filtered_status: ?SubscriptionStatus,
+    filtered_status: ?SubscriptionStatus = null,
 
     /// Used for filtering by a specific topic preference.
-    topic_filter: ?TopicFilter,
+    topic_filter: ?TopicFilter = null,
 
     pub const json_field_names = .{
         .filtered_status = "FilteredStatus",

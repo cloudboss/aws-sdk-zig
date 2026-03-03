@@ -8,13 +8,13 @@ const QueryNetwork = @import("query_network.zig").QueryNetwork;
 /// container when using this operation.
 pub const TokenFilter = struct {
     /// This is the address of the contract.
-    contract_address: ?[]const u8,
+    contract_address: ?[]const u8 = null,
 
     /// The blockchain network of the token.
     network: QueryNetwork,
 
     /// The unique identifier of the token.
-    token_id: ?[]const u8,
+    token_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .contract_address = "contractAddress",

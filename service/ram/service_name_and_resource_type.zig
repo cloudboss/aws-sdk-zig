@@ -13,17 +13,17 @@ pub const ServiceNameAndResourceType = struct {
     ///
     /// * **GLOBAL** – The resource can be accessed
     /// from any Amazon Web Services Region.
-    resource_region_scope: ?ResourceRegionScope,
+    resource_region_scope: ?ResourceRegionScope = null,
 
     /// The type of the resource. This takes the form of:
     /// `service-code`:`resource-code`, and is case-insensitive. For
     /// example, an Amazon EC2 Subnet would be represented by the string
     /// `ec2:subnet`.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The name of the Amazon Web Services service to which resources of this type
     /// belong.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resource_region_scope = "resourceRegionScope",

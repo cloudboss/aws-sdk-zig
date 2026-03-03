@@ -4,12 +4,12 @@ const AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails
 pub const AwsElasticsearchDomainElasticsearchClusterConfigDetails = struct {
     /// The number of instances to use for the master node. If this attribute is
     /// specified, then `DedicatedMasterEnabled` must be `true`.
-    dedicated_master_count: ?i32,
+    dedicated_master_count: ?i32 = null,
 
     /// Whether to use a dedicated master node for the Elasticsearch domain. A
     /// dedicated master node performs cluster management tasks, but doesn't hold
     /// data or respond to data upload requests.
-    dedicated_master_enabled: ?bool,
+    dedicated_master_enabled: ?bool = null,
 
     /// The hardware configuration of the computer that hosts the dedicated master
     /// node. A sample value is `m3.medium.elasticsearch`. If this attribute is
@@ -18,10 +18,10 @@ pub const AwsElasticsearchDomainElasticsearchClusterConfigDetails = struct {
     /// For a list of valid values, see [Supported instance types in Amazon
     /// OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html) in the *Amazon OpenSearch Service Developer Guide*.
-    dedicated_master_type: ?[]const u8,
+    dedicated_master_type: ?[]const u8 = null,
 
     /// The number of data nodes to use in the Elasticsearch domain.
-    instance_count: ?i32,
+    instance_count: ?i32 = null,
 
     /// The instance type for your data nodes. For example,
     /// `m3.medium.elasticsearch`.
@@ -29,17 +29,17 @@ pub const AwsElasticsearchDomainElasticsearchClusterConfigDetails = struct {
     /// For a list of valid values, see [Supported instance types in Amazon
     /// OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html) in the *Amazon OpenSearch Service Developer Guide*.
-    instance_type: ?[]const u8,
+    instance_type: ?[]const u8 = null,
 
     /// Configuration options for zone awareness. Provided if `ZoneAwarenessEnabled`
     /// is `true`.
-    zone_awareness_config: ?AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails,
+    zone_awareness_config: ?AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails = null,
 
     /// Whether to enable zone awareness for the Elasticsearch domain. When zone
     /// awareness is enabled, OpenSearch allocates the cluster's nodes and replica
     /// index shards across Availability Zones in the same Region. This prevents
     /// data loss and minimizes downtime if a node or data center fails.
-    zone_awareness_enabled: ?bool,
+    zone_awareness_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .dedicated_master_count = "DedicatedMasterCount",

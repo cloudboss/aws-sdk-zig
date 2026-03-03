@@ -29,7 +29,7 @@ pub const SupportedAssociation = struct {
 
     /// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
     /// region.
-    iso_country_code: ?[]const u8,
+    iso_country_code: ?[]const u8 = null,
 
     /// Defines the behavior of when an origination identity and registration can be
     /// associated with each other.

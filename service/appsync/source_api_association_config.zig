@@ -15,7 +15,7 @@ pub const SourceApiAssociationConfig = struct {
     /// made to the
     /// merged API. Auto merges use `MergedApiExecutionRoleArn` to perform merge
     /// operations.
-    merge_type: ?MergeType,
+    merge_type: ?MergeType = null,
 
     pub const json_field_names = .{
         .merge_type = "mergeType",

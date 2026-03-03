@@ -18,7 +18,7 @@ pub const NamespaceRuleBasedProperties = struct {
     /// sub-types of an attribute type. For example, if the value of the `Email`
     /// field of Profile A matches the value of `BusinessEmail` field of Profile B,
     /// the two profiles are matched on the `Email` attribute type.
-    attribute_matching_model: ?AttributeMatchingModel,
+    attribute_matching_model: ?AttributeMatchingModel = null,
 
     /// The type of matching record that is allowed to be used in an ID mapping
     /// workflow.
@@ -28,14 +28,14 @@ pub const NamespaceRuleBasedProperties = struct {
     ///
     /// If the value is set to `MANY_SOURCE_TO_ONE_TARGET`, all matching records in
     /// the source are matched to one record in the target.
-    record_matching_models: ?[]const RecordMatchingModel,
+    record_matching_models: ?[]const RecordMatchingModel = null,
 
     /// The sets of rules you can use in an ID mapping workflow. The limitations
     /// specified for the source and target must be compatible.
-    rule_definition_types: ?[]const IdMappingWorkflowRuleDefinitionType,
+    rule_definition_types: ?[]const IdMappingWorkflowRuleDefinitionType = null,
 
     /// The rules for the ID namespace.
-    rules: ?[]const Rule,
+    rules: ?[]const Rule = null,
 
     pub const json_field_names = .{
         .attribute_matching_model = "attributeMatchingModel",

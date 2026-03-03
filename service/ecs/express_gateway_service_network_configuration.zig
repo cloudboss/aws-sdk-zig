@@ -3,10 +3,10 @@
 /// VPC.
 pub const ExpressGatewayServiceNetworkConfiguration = struct {
     /// The IDs of the security groups associated with the Express service.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// The IDs of the subnets associated with the Express service.
-    subnets: ?[]const []const u8,
+    subnets: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .security_groups = "securityGroups",

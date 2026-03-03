@@ -14,33 +14,33 @@ const RecordState = @import("record_state.zig").RecordState;
 /// Lightsail instance snapshot.
 pub const CloudFormationStackRecord = struct {
     /// The Amazon Resource Name (ARN) of the CloudFormation stack record.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date when the CloudFormation stack record was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// A list of objects describing the destination service, which is AWS
     /// CloudFormation, and the Amazon
     /// Resource Name (ARN) of the AWS CloudFormation stack.
-    destination_info: ?DestinationInfo,
+    destination_info: ?DestinationInfo = null,
 
     /// A list of objects describing the Availability Zone and Amazon Web Services
     /// Region of the
     /// CloudFormation stack record.
-    location: ?ResourceLocation,
+    location: ?ResourceLocation = null,
 
     /// The name of the CloudFormation stack record. It starts with
     /// `CloudFormationStackRecord` followed by a GUID.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Lightsail resource type (`CloudFormationStackRecord`).
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// A list of objects describing the source of the CloudFormation stack record.
-    source_info: ?[]const CloudFormationStackRecordSourceInfo,
+    source_info: ?[]const CloudFormationStackRecordSourceInfo = null,
 
     /// The current state of the CloudFormation stack record.
-    state: ?RecordState,
+    state: ?RecordState = null,
 
     pub const json_field_names = .{
         .arn = "arn",

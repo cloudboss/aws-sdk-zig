@@ -7,10 +7,10 @@ pub const BodySectionDynamicNumericDimensionConfiguration = struct {
     column: ColumnIdentifier,
 
     /// Number of values to use from the column for repetition.
-    limit: ?i32,
+    limit: ?i32 = null,
 
     /// Sort criteria on the column values that you use for repetition.
-    sort_by_metrics: ?[]const ColumnSort,
+    sort_by_metrics: ?[]const ColumnSort = null,
 
     pub const json_field_names = .{
         .column = "Column",

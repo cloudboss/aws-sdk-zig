@@ -3,13 +3,13 @@ const ResourceDownloadOwnerSetting = @import("resource_download_owner_setting.zi
 /// Attributes that define an Amazon S3 machine learning resource.
 pub const S3MachineLearningModelResourceData = struct {
     /// The absolute local path of the resource inside the Lambda environment.
-    destination_path: ?[]const u8,
+    destination_path: ?[]const u8 = null,
 
-    owner_setting: ?ResourceDownloadOwnerSetting,
+    owner_setting: ?ResourceDownloadOwnerSetting = null,
 
     /// The URI of the source model in an S3 bucket. The model package must be in
     /// tar.gz or .zip format.
-    s3_uri: ?[]const u8,
+    s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_path = "DestinationPath",

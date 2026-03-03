@@ -18,5 +18,5 @@ pub const InstanceLifecyclePolicy = struct {
     /// allows you to maintain
     /// control over instance management when lifecycles transition and operations
     /// fail.
-    retention_triggers: ?RetentionTriggers,
+    retention_triggers: ?RetentionTriggers = null,
 };

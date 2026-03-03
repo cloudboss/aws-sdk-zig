@@ -14,7 +14,7 @@ pub const ListedFlow = struct {
     flow_arn: []const u8,
 
     /// The maintenance settings for the flow.
-    maintenance: ?Maintenance,
+    maintenance: ?Maintenance = null,
 
     /// The name of the flow.
     name: []const u8,

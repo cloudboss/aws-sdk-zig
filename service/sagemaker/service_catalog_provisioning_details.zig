@@ -6,16 +6,16 @@ const ProvisioningParameter = @import("provisioning_parameter.zig").Provisioning
 pub const ServiceCatalogProvisioningDetails = struct {
     /// The path identifier of the product. This value is optional if the product
     /// has a default path, and required if the product has more than one path.
-    path_id: ?[]const u8,
+    path_id: ?[]const u8 = null,
 
     /// The ID of the product to provision.
     product_id: []const u8,
 
     /// The ID of the provisioning artifact.
-    provisioning_artifact_id: ?[]const u8,
+    provisioning_artifact_id: ?[]const u8 = null,
 
     /// A list of key value pairs that you specify when you provision a product.
-    provisioning_parameters: ?[]const ProvisioningParameter,
+    provisioning_parameters: ?[]const ProvisioningParameter = null,
 
     pub const json_field_names = .{
         .path_id = "PathId",

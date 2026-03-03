@@ -56,7 +56,7 @@ pub const AutoSnapshotAddOnRequest = struct {
     /// * The snapshot will be automatically created between the time specified and
     ///   up to 45
     /// minutes after.
-    snapshot_time_of_day: ?[]const u8,
+    snapshot_time_of_day: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .snapshot_time_of_day = "snapshotTimeOfDay",

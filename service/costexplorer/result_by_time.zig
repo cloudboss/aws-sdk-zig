@@ -10,13 +10,13 @@ pub const ResultByTime = struct {
     estimated: bool = false,
 
     /// The groups that this time period includes.
-    groups: ?[]const Group,
+    groups: ?[]const Group = null,
 
     /// The time period that the result covers.
-    time_period: ?DateInterval,
+    time_period: ?DateInterval = null,
 
     /// The total amount of cost or usage accrued during the time period.
-    total: ?[]const aws.map.MapEntry(MetricValue),
+    total: ?[]const aws.map.MapEntry(MetricValue) = null,
 
     pub const json_field_names = .{
         .estimated = "Estimated",

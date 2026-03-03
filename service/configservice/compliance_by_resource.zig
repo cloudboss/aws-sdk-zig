@@ -9,13 +9,13 @@ const Compliance = @import("compliance.zig").Compliance;
 pub const ComplianceByResource = struct {
     /// Indicates whether the Amazon Web Services resource complies with all of the
     /// Config rules that evaluated it.
-    compliance: ?Compliance,
+    compliance: ?Compliance = null,
 
     /// The ID of the Amazon Web Services resource that was evaluated.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The type of the Amazon Web Services resource that was evaluated.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .compliance = "Compliance",

@@ -4,10 +4,10 @@ const LibraryTemplateButtonInput = @import("library_template_button_input.zig").
 /// Represents a template from Meta's library with customization options.
 pub const MetaLibraryTemplate = struct {
     /// Body text customizations for the template.
-    library_template_body_inputs: ?LibraryTemplateBodyInputs,
+    library_template_body_inputs: ?LibraryTemplateBodyInputs = null,
 
     /// Button customizations for the template.
-    library_template_button_inputs: ?[]const LibraryTemplateButtonInput,
+    library_template_button_inputs: ?[]const LibraryTemplateButtonInput = null,
 
     /// The name of the template in Meta's library.
     library_template_name: []const u8,

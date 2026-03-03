@@ -12,7 +12,7 @@ pub const VpcConfiguration = struct {
 
     /// The value of the Transport Layer Security (TLS) certificate associated with
     /// the infrastructure where your provider type is installed.
-    tls_certificate: ?[]const u8,
+    tls_certificate: ?[]const u8 = null,
 
     /// The ID of the Amazon VPC connected to the infrastructure where your provider
     /// type is

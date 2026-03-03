@@ -3,7 +3,7 @@
 /// authorization type.
 pub const ConnectionOAuthClientResponseParameters = struct {
     /// The client ID associated with the response to the connection request.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_id = "ClientID",

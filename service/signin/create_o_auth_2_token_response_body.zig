@@ -20,7 +20,7 @@ pub const CreateOAuth2TokenResponseBody = struct {
     /// Present only in authorization code redemption response
     /// (grant_type=authorization_code)
     /// Not included in token refresh responses
-    id_token: ?[]const u8,
+    id_token: ?[]const u8 = null,
 
     /// Encrypted refresh token with cnf.jkt (SHA-256 thumbprint of presented jwk)
     /// Always present in responses (required for both flows)

@@ -17,7 +17,7 @@ pub const RegisteredUserGenerativeQnAEmbeddingConfiguration = struct {
     /// whether or not readers are allowed to select other new reader experience
     /// topics from the
     /// available ones in the list.
-    initial_topic_id: ?[]const u8,
+    initial_topic_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .initial_topic_id = "InitialTopicId",

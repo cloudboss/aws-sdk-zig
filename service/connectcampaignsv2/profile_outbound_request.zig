@@ -2,7 +2,7 @@
 pub const ProfileOutboundRequest = struct {
     client_token: []const u8,
 
-    expiration_time: ?i64,
+    expiration_time: ?i64 = null,
 
     profile_id: []const u8,
 

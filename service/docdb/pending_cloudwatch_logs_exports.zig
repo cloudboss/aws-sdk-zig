@@ -5,10 +5,10 @@ pub const PendingCloudwatchLogsExports = struct {
     /// Log types that are in the process of being enabled. After they are enabled,
     /// these log
     /// types are exported to Amazon CloudWatch Logs.
-    log_types_to_disable: ?[]const []const u8,
+    log_types_to_disable: ?[]const []const u8 = null,
 
     /// Log types that are in the process of being deactivated. After they are
     /// deactivated,
     /// these log types aren't exported to CloudWatch Logs.
-    log_types_to_enable: ?[]const []const u8,
+    log_types_to_enable: ?[]const []const u8 = null,
 };

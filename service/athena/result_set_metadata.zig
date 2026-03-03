@@ -5,7 +5,7 @@ const ColumnInfo = @import("column_info.zig").ColumnInfo;
 /// results. To return a `ResultSetMetadata` object, use GetQueryResults.
 pub const ResultSetMetadata = struct {
     /// Information about the columns returned in a query result metadata.
-    column_info: ?[]const ColumnInfo,
+    column_info: ?[]const ColumnInfo = null,
 
     pub const json_field_names = .{
         .column_info = "ColumnInfo",

@@ -26,7 +26,7 @@ pub const RuleBasedProperties = struct {
     ///
     /// If you choose `INDEXING`, the process indexes the data without generating
     /// IDs.
-    match_purpose: ?MatchPurpose,
+    match_purpose: ?MatchPurpose = null,
 
     /// A list of `Rule` objects, each of which have fields `RuleName` and
     /// `MatchingKeys`.

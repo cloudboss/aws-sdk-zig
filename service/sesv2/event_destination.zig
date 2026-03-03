@@ -17,7 +17,7 @@ pub const EventDestination = struct {
     /// An object that defines an Amazon CloudWatch destination for email events.
     /// You can use Amazon CloudWatch to
     /// monitor and gain insights on your email sending metrics.
-    cloud_watch_destination: ?CloudWatchDestination,
+    cloud_watch_destination: ?CloudWatchDestination = null,
 
     /// If `true`, the event destination is enabled. When the event destination is
     /// enabled, the specified event types are sent to the destinations in this
@@ -30,12 +30,12 @@ pub const EventDestination = struct {
     /// An object that defines an Amazon EventBridge destination for email events.
     /// You can use Amazon EventBridge to
     /// send notifications when certain email events occur.
-    event_bridge_destination: ?EventBridgeDestination,
+    event_bridge_destination: ?EventBridgeDestination = null,
 
     /// An object that defines an Amazon Kinesis Data Firehose destination for email
     /// events. You can use Amazon Kinesis Data Firehose to
     /// stream data to other services, such as Amazon S3 and Amazon Redshift.
-    kinesis_firehose_destination: ?KinesisFirehoseDestination,
+    kinesis_firehose_destination: ?KinesisFirehoseDestination = null,
 
     /// The types of events that Amazon SES sends to the specified event
     /// destinations.
@@ -101,12 +101,12 @@ pub const EventDestination = struct {
     /// [Transactional
     /// Messaging
     /// Charts](https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html) in the *Amazon Pinpoint User Guide*.
-    pinpoint_destination: ?PinpointDestination,
+    pinpoint_destination: ?PinpointDestination = null,
 
     /// An object that defines an Amazon SNS destination for email events. You can
     /// use Amazon SNS to
     /// send notifications when certain email events occur.
-    sns_destination: ?SnsDestination,
+    sns_destination: ?SnsDestination = null,
 
     pub const json_field_names = .{
         .cloud_watch_destination = "CloudWatchDestination",

@@ -6,18 +6,18 @@ const ConnectionOAuthResponseParameters = @import("connection_o_auth_response_pa
 /// Contains the authorization parameters to use for the connection.
 pub const ConnectionAuthResponseParameters = struct {
     /// The API Key parameters to use for authorization.
-    api_key_auth_parameters: ?ConnectionApiKeyAuthResponseParameters,
+    api_key_auth_parameters: ?ConnectionApiKeyAuthResponseParameters = null,
 
     /// The authorization parameters for Basic authorization.
-    basic_auth_parameters: ?ConnectionBasicAuthResponseParameters,
+    basic_auth_parameters: ?ConnectionBasicAuthResponseParameters = null,
 
     /// Additional parameters for the connection that are passed through with every
     /// invocation to
     /// the HTTP endpoint.
-    invocation_http_parameters: ?ConnectionHttpParameters,
+    invocation_http_parameters: ?ConnectionHttpParameters = null,
 
     /// The OAuth parameters to use for authorization.
-    o_auth_parameters: ?ConnectionOAuthResponseParameters,
+    o_auth_parameters: ?ConnectionOAuthResponseParameters = null,
 
     pub const json_field_names = .{
         .api_key_auth_parameters = "ApiKeyAuthParameters",

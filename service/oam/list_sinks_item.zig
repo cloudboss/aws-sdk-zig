@@ -2,14 +2,14 @@
 /// sinks.
 pub const ListSinksItem = struct {
     /// The ARN of the sink.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The random ID string that Amazon Web Services generated as part of the sink
     /// ARN.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the sink.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

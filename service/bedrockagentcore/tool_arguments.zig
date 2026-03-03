@@ -7,35 +7,35 @@ const ProgrammingLanguage = @import("programming_language.zig").ProgrammingLangu
 /// pass the appropriate arguments to each tool type.
 pub const ToolArguments = struct {
     /// Whether to clear the context for the tool.
-    clear_context: ?bool,
+    clear_context: ?bool = null,
 
     /// The code to execute in a code interpreter session. This is the source code
     /// in the specified programming language that will be executed by the code
     /// interpreter.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The command to execute with the tool.
-    command: ?[]const u8,
+    command: ?[]const u8 = null,
 
     /// The content for the tool operation.
-    content: ?[]const InputContentBlock,
+    content: ?[]const InputContentBlock = null,
 
     /// The directory path for the tool operation.
-    directory_path: ?[]const u8,
+    directory_path: ?[]const u8 = null,
 
     /// The programming language of the code to execute. This tells the code
     /// interpreter which language runtime to use for execution. Common values
     /// include 'python', 'javascript', and 'r'.
-    language: ?ProgrammingLanguage,
+    language: ?ProgrammingLanguage = null,
 
     /// The path for the tool operation.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     /// The paths for the tool operation.
-    paths: ?[]const []const u8,
+    paths: ?[]const []const u8 = null,
 
     /// The identifier of the task for the tool operation.
-    task_id: ?[]const u8,
+    task_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .clear_context = "clearContext",

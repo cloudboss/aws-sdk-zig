@@ -1,7 +1,7 @@
 /// An object representing a value allowed for a property.
 pub const AllowedValue = struct {
     /// A description of the allowed value.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The value allowed for the property.
     value: []const u8,

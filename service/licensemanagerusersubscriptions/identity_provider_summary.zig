@@ -4,17 +4,17 @@ const Settings = @import("settings.zig").Settings;
 /// Describes an identity provider.
 pub const IdentityProviderSummary = struct {
     /// The failure message associated with an identity provider.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// The `IdentityProvider` resource contains information about an identity
     /// provider.
     identity_provider: IdentityProvider,
 
     /// The Amazon Resource Name (ARN) of the identity provider.
-    identity_provider_arn: ?[]const u8,
+    identity_provider_arn: ?[]const u8 = null,
 
     /// The AWS Account ID of the owner of this resource.
-    owner_account_id: ?[]const u8,
+    owner_account_id: ?[]const u8 = null,
 
     /// The name of the user-based subscription product.
     product: []const u8,

@@ -2,18 +2,18 @@
 /// DescribeImageTags action.
 pub const ReferencedImageDetail = struct {
     /// The artifact media type of the image.
-    artifact_media_type: ?[]const u8,
+    artifact_media_type: ?[]const u8 = null,
 
     /// The `sha256` digest of the image manifest.
-    image_digest: ?[]const u8,
+    image_digest: ?[]const u8 = null,
 
     /// The media type of the image manifest.
-    image_manifest_media_type: ?[]const u8,
+    image_manifest_media_type: ?[]const u8 = null,
 
     /// The date and time, expressed in standard JavaScript date format, which the
     /// current image
     /// tag was pushed to the repository at.
-    image_pushed_at: ?i64,
+    image_pushed_at: ?i64 = null,
 
     /// The size, in bytes, of the image in the repository.
     ///
@@ -27,7 +27,7 @@ pub const ReferencedImageDetail = struct {
     /// command shows the uncompressed image size, so it might return a larger image
     /// size than
     /// the image sizes that are returned by DescribeImages.
-    image_size_in_bytes: ?i64,
+    image_size_in_bytes: ?i64 = null,
 
     pub const json_field_names = .{
         .artifact_media_type = "artifactMediaType",

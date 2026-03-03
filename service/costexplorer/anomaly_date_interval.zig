@@ -1,7 +1,7 @@
 /// The time period for an anomaly.
 pub const AnomalyDateInterval = struct {
     /// The last date an anomaly was observed.
-    end_date: ?[]const u8,
+    end_date: ?[]const u8 = null,
 
     /// The first date an anomaly was observed.
     start_date: []const u8,

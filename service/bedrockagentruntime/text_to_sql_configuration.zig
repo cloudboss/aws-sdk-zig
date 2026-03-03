@@ -4,7 +4,7 @@ const TextToSqlConfigurationType = @import("text_to_sql_configuration_type.zig")
 /// Contains configurations for transforming text to SQL.
 pub const TextToSqlConfiguration = struct {
     /// Specifies configurations for a knowledge base to use in transformation.
-    knowledge_base_configuration: ?TextToSqlKnowledgeBaseConfiguration,
+    knowledge_base_configuration: ?TextToSqlKnowledgeBaseConfiguration = null,
 
     /// The type of resource to use in transformation.
     @"type": TextToSqlConfigurationType,

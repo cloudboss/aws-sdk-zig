@@ -1,10 +1,10 @@
 /// Represents a modification to a value within an existing custom type.
 pub const AutomatedReasoningPolicyUpdateTypeValue = struct {
     /// The new description for the type value, replacing the previous description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The new identifier or name for the type value, if you want to rename it.
-    new_value: ?[]const u8,
+    new_value: ?[]const u8 = null,
 
     /// The current identifier or name of the type value to update.
     value: []const u8,

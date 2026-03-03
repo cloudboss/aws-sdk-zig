@@ -6,8 +6,8 @@ pub const VerifiedAccessSseSpecificationRequest = struct {
     /// encryption.
     ///
     /// Valid values: `True` | `False`
-    customer_managed_key_enabled: ?bool,
+    customer_managed_key_enabled: ?bool = null,
 
     /// The ARN of the KMS key.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 };

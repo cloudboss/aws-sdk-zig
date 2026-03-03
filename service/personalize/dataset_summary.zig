@@ -3,10 +3,10 @@
 /// [DescribeDataset](https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html) API.
 pub const DatasetSummary = struct {
     /// The date and time (in Unix time) that the dataset was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset.
-    dataset_arn: ?[]const u8,
+    dataset_arn: ?[]const u8 = null,
 
     /// The dataset type. One of the following values:
     ///
@@ -17,13 +17,13 @@ pub const DatasetSummary = struct {
     /// * Users
     ///
     /// * Event-Interactions
-    dataset_type: ?[]const u8,
+    dataset_type: ?[]const u8 = null,
 
     /// The date and time (in Unix time) that the dataset was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The name of the dataset.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The status of the dataset.
     ///
@@ -32,7 +32,7 @@ pub const DatasetSummary = struct {
     /// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
     ///
     /// * DELETE PENDING > DELETE IN_PROGRESS
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

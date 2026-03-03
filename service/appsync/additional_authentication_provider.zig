@@ -8,16 +8,16 @@ pub const AdditionalAuthenticationProvider = struct {
     /// The authentication type: API key, Identity and Access Management (IAM),
     /// OpenID
     /// Connect (OIDC), Amazon Cognito user pools, or Lambda.
-    authentication_type: ?AuthenticationType,
+    authentication_type: ?AuthenticationType = null,
 
     /// Configuration for Lambda function authorization.
-    lambda_authorizer_config: ?LambdaAuthorizerConfig,
+    lambda_authorizer_config: ?LambdaAuthorizerConfig = null,
 
     /// The OIDC configuration.
-    open_id_connect_config: ?OpenIDConnectConfig,
+    open_id_connect_config: ?OpenIDConnectConfig = null,
 
     /// The Amazon Cognito user pool configuration.
-    user_pool_config: ?CognitoUserPoolConfig,
+    user_pool_config: ?CognitoUserPoolConfig = null,
 
     pub const json_field_names = .{
         .authentication_type = "authenticationType",

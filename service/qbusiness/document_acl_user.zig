@@ -5,11 +5,11 @@ const MembershipType = @import("membership_type.zig").MembershipType;
 pub const DocumentAclUser = struct {
     /// The unique identifier of the user in the document's ACL. This is used to
     /// identify the user when applying access rules.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The type of the user. This indicates the scope of the user's applicability
     /// in access control.
-    @"type": ?MembershipType,
+    @"type": ?MembershipType = null,
 
     pub const json_field_names = .{
         .id = "id",

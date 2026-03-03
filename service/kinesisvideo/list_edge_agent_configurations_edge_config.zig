@@ -4,24 +4,24 @@ const SyncStatus = @import("sync_status.zig").SyncStatus;
 /// A description of a single stream's edge configuration.
 pub const ListEdgeAgentConfigurationsEdgeConfig = struct {
     /// The timestamp when the stream first created the edge config.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
-    edge_config: ?EdgeConfig,
+    edge_config: ?EdgeConfig = null,
 
     /// A description of the generated failure status.
-    failed_status_details: ?[]const u8,
+    failed_status_details: ?[]const u8 = null,
 
     /// The timestamp when the stream last updated the edge config.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the stream.
-    stream_arn: ?[]const u8,
+    stream_arn: ?[]const u8 = null,
 
     /// The name of the stream.
-    stream_name: ?[]const u8,
+    stream_name: ?[]const u8 = null,
 
     /// The current sync status of the stream's edge configuration.
-    sync_status: ?SyncStatus,
+    sync_status: ?SyncStatus = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

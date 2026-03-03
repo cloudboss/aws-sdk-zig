@@ -12,40 +12,40 @@ const Tag = @import("tag.zig").Tag;
 /// Describes an Amazon Lightsail container service.
 pub const ContainerService = struct {
     /// The Amazon Resource Name (ARN) of the container service.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the container service.
-    container_service_name: ?[]const u8,
+    container_service_name: ?[]const u8 = null,
 
     /// The timestamp when the container service was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// An object that describes the current container deployment of the container
     /// service.
-    current_deployment: ?ContainerServiceDeployment,
+    current_deployment: ?ContainerServiceDeployment = null,
 
     /// A Boolean value indicating whether the container service is disabled.
-    is_disabled: ?bool,
+    is_disabled: ?bool = null,
 
     /// An object that describes the location of the container service, such as the
     /// Amazon Web Services Region and Availability Zone.
-    location: ?ResourceLocation,
+    location: ?ResourceLocation = null,
 
     /// An object that describes the next deployment of the container service.
     ///
     /// This value is `null` when there is no deployment in a `pending`
     /// state.
-    next_deployment: ?ContainerServiceDeployment,
+    next_deployment: ?ContainerServiceDeployment = null,
 
     /// The power specification of the container service.
     ///
     /// The power specifies the amount of RAM, the number of vCPUs, and the base
     /// price of the
     /// container service.
-    power: ?ContainerServicePowerName,
+    power: ?ContainerServicePowerName = null,
 
     /// The ID of the power of the container service.
-    power_id: ?[]const u8,
+    power_id: ?[]const u8 = null,
 
     /// The principal ARN of the container service.
     ///
@@ -54,14 +54,14 @@ pub const ContainerService = struct {
     /// This allows you to give your
     /// service permission to access resources in your standard Amazon Web Services
     /// account.
-    principal_arn: ?[]const u8,
+    principal_arn: ?[]const u8 = null,
 
     /// The private domain name of the container service.
     ///
     /// The private domain name is accessible only by other resources within the
     /// default virtual
     /// private cloud (VPC) of your Lightsail account.
-    private_domain_name: ?[]const u8,
+    private_domain_name: ?[]const u8 = null,
 
     /// An object that describes the configuration for the container service to
     /// access private
@@ -72,7 +72,7 @@ pub const ContainerService = struct {
     /// For more information, see [Configuring access to an Amazon ECR private
     /// repository for an Amazon Lightsail container
     /// service](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-container-service-ecr-private-repo-access) in the *Amazon Lightsail Developer Guide*.
-    private_registry_access: ?PrivateRegistryAccess,
+    private_registry_access: ?PrivateRegistryAccess = null,
 
     /// The public domain name of the container service, such as `example.com` and
     /// `www.example.com`.
@@ -98,15 +98,15 @@ pub const ContainerService = struct {
     /// information about how to specify public domain names for your Lightsail
     /// container
     /// service.
-    public_domain_names: ?[]const aws.map.MapEntry([]const []const u8),
+    public_domain_names: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The Lightsail resource type of the container service.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The scale specification of the container service.
     ///
     /// The scale specifies the allocated compute nodes of the container service.
-    scale: ?i32,
+    scale: ?i32 = null,
 
     /// The current state of the container service.
     ///
@@ -132,26 +132,26 @@ pub const ContainerService = struct {
     ///
     /// * `DISABLED` - The container service is disabled, and its active deployment
     /// and containers, if any, are shut down.
-    state: ?ContainerServiceState,
+    state: ?ContainerServiceState = null,
 
     /// An object that describes the current state of the container service.
     ///
     /// The state detail is populated only when a container service is in a
     /// `PENDING`, `DEPLOYING`, or `UPDATING` state.
-    state_detail: ?ContainerServiceStateDetail,
+    state_detail: ?ContainerServiceStateDetail = null,
 
     /// The tag keys and optional values for the resource. For more information
     /// about tags in
     /// Lightsail, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The publicly accessible URL of the container service.
     ///
     /// If no public endpoint is specified in the `currentDeployment`, this URL
     /// returns
     /// a 404 response.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

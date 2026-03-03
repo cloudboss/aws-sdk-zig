@@ -22,19 +22,19 @@ pub const Relevance = struct {
     /// week.
     ///
     /// Only applies to `DATE` fields.
-    duration: ?[]const u8,
+    duration: ?[]const u8 = null,
 
     /// Indicates that this field determines how "fresh" a document is. For example,
     /// if
     /// document 1 was created on November 5, and document 2 was created on October
     /// 31, document
     /// 1 is "fresher" than document 2. Only applies to `DATE` fields.
-    freshness: ?bool,
+    freshness: ?bool = null,
 
     /// The relative importance of the field in the search. Larger numbers provide
     /// more of a
     /// boost than smaller numbers.
-    importance: ?i32,
+    importance: ?i32 = null,
 
     /// Determines how values should be interpreted.
     ///
@@ -49,7 +49,7 @@ pub const Relevance = struct {
     /// than a priority 5 task.
     ///
     /// Only applies to `LONG` fields.
-    rank_order: ?Order,
+    rank_order: ?Order = null,
 
     /// A list of values that should be given a different boost when they appear in
     /// the result
@@ -66,7 +66,7 @@ pub const Relevance = struct {
     /// the metadata of a document. When those terms appear they are given the
     /// specified
     /// importance instead of the regular importance for the boost.
-    value_importance_map: ?[]const aws.map.MapEntry(i32),
+    value_importance_map: ?[]const aws.map.MapEntry(i32) = null,
 
     pub const json_field_names = .{
         .duration = "Duration",

@@ -3,16 +3,16 @@ const LicenseEndpointStatus = @import("license_endpoint_status.zig").LicenseEndp
 /// The details for a license endpoint.
 pub const LicenseEndpointSummary = struct {
     /// The license endpoint ID.
-    license_endpoint_id: ?[]const u8,
+    license_endpoint_id: ?[]const u8 = null,
 
     /// The status of the license endpoint.
-    status: ?LicenseEndpointStatus,
+    status: ?LicenseEndpointStatus = null,
 
     /// The status message of the license endpoint.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The VPC (virtual private cloud) ID associated with the license endpoint.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .license_endpoint_id = "licenseEndpointId",

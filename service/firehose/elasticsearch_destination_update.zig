@@ -10,18 +10,18 @@ const S3DestinationUpdate = @import("s3_destination_update.zig").S3DestinationUp
 pub const ElasticsearchDestinationUpdate = struct {
     /// The buffering options. If no value is specified,
     /// `ElasticsearchBufferingHints` object default values are used.
-    buffering_hints: ?ElasticsearchBufferingHints,
+    buffering_hints: ?ElasticsearchBufferingHints = null,
 
     /// The CloudWatch logging options for your Firehose stream.
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The endpoint to use when communicating with the cluster. Specify either this
     /// `ClusterEndpoint` or the `DomainARN` field.
-    cluster_endpoint: ?[]const u8,
+    cluster_endpoint: ?[]const u8 = null,
 
     /// Indicates the method for setting up document ID. The supported methods are
     /// Firehose generated document ID and OpenSearch Service generated document ID.
-    document_id_options: ?DocumentIdOptions,
+    document_id_options: ?DocumentIdOptions = null,
 
     /// The ARN of the Amazon OpenSearch Service domain. The IAM role must have
     /// permissions
@@ -32,10 +32,10 @@ pub const ElasticsearchDestinationUpdate = struct {
     /// Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
     ///
     /// Specify either `ClusterEndpoint` or `DomainARN`.
-    domain_arn: ?[]const u8,
+    domain_arn: ?[]const u8 = null,
 
     /// The Elasticsearch index name.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
     /// The Elasticsearch index rotation period. Index rotation appends a timestamp
     /// to
@@ -43,14 +43,14 @@ pub const ElasticsearchDestinationUpdate = struct {
     /// see [Index Rotation for the
     /// Amazon OpenSearch Service
     /// Destination](https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation). Default value is `OneDay`.
-    index_rotation_period: ?ElasticsearchIndexRotationPeriod,
+    index_rotation_period: ?ElasticsearchIndexRotationPeriod = null,
 
     /// The data processing configuration.
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The retry behavior in case Firehose is unable to deliver documents to
     /// Amazon OpenSearch Service. The default value is 300 (5 minutes).
-    retry_options: ?ElasticsearchRetryOptions,
+    retry_options: ?ElasticsearchRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose
     /// for calling the Amazon OpenSearch Service Configuration API and for indexing
@@ -59,10 +59,10 @@ pub const ElasticsearchDestinationUpdate = struct {
     /// Destination](https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3) and [Amazon Resource Names (ARNs) and
     /// Amazon Web Services Service
     /// Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The Amazon S3 destination.
-    s3_update: ?S3DestinationUpdate,
+    s3_update: ?S3DestinationUpdate = null,
 
     /// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one
     /// type per
@@ -77,7 +77,7 @@ pub const ElasticsearchDestinationUpdate = struct {
     /// name. If you want to update your Firehose stream with a new index name,
     /// provide an empty
     /// string for `TypeName`.
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .buffering_hints = "BufferingHints",

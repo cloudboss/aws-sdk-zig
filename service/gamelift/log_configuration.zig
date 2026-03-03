@@ -16,15 +16,15 @@ pub const LogConfiguration = struct {
     ///   must reside in the fleet's home Amazon Web Services Region.
     ///
     /// * `NONE` -- Don't collect container logs.
-    log_destination: ?LogDestination,
+    log_destination: ?LogDestination = null,
 
     /// If log destination is `CLOUDWATCH`, logs are sent to the specified log group
     /// in Amazon CloudWatch.
-    log_group_arn: ?[]const u8,
+    log_group_arn: ?[]const u8 = null,
 
     /// If log destination is `S3`, logs are sent to the specified Amazon S3 bucket
     /// name.
-    s3_bucket_name: ?[]const u8,
+    s3_bucket_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .log_destination = "LogDestination",

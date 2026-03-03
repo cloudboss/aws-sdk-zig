@@ -5,10 +5,10 @@ const ExpressGatewayServiceStatusCode = @import("express_gateway_service_status_
 /// status of the service.
 pub const ExpressGatewayServiceStatus = struct {
     /// The status of the Express service.
-    status_code: ?ExpressGatewayServiceStatusCode,
+    status_code: ?ExpressGatewayServiceStatusCode = null,
 
     /// Information about why the Express service is in the current status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status_code = "statusCode",

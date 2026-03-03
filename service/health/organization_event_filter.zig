@@ -10,47 +10,47 @@ pub const OrganizationEventFilter = struct {
     /// A list of actionability values to filter events. Use this to filter events
     /// based on whether they require action (`ACTION_REQUIRED`), may require action
     /// (`ACTION_MAY_BE_REQUIRED`) or are informational (`INFORMATIONAL`).
-    actionabilities: ?[]const EventActionability,
+    actionabilities: ?[]const EventActionability = null,
 
     /// A list of 12-digit Amazon Web Services account numbers that contains the
     /// affected entities.
-    aws_account_ids: ?[]const []const u8,
+    aws_account_ids: ?[]const []const u8 = null,
 
-    end_time: ?DateTimeRange,
+    end_time: ?DateTimeRange = null,
 
     /// A list of entity ARNs (unique identifiers).
-    entity_arns: ?[]const []const u8,
+    entity_arns: ?[]const []const u8 = null,
 
     /// A list of entity identifiers, such as EC2 instance IDs (i-34ab692e) or EBS
     /// volumes (vol-426ab23e).
-    entity_values: ?[]const []const u8,
+    entity_values: ?[]const []const u8 = null,
 
     /// A list of event status codes.
-    event_status_codes: ?[]const eventStatusCode,
+    event_status_codes: ?[]const eventStatusCode = null,
 
     /// A list of event type category codes. Possible values are
     /// `issue`, `accountNotification`, or `scheduledChange`. Currently,
     /// the `investigation` value isn't supported at this time.
-    event_type_categories: ?[]const eventTypeCategory,
+    event_type_categories: ?[]const eventTypeCategory = null,
 
     /// A list of unique identifiers for event types. For example,
     /// `"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".`
-    event_type_codes: ?[]const []const u8,
+    event_type_codes: ?[]const []const u8 = null,
 
-    last_updated_time: ?DateTimeRange,
+    last_updated_time: ?DateTimeRange = null,
 
     /// A list of persona values to filter events. Use this to filter events based
     /// on their target audience: `OPERATIONS`, `SECURITY`, or `BILLING`.
-    personas: ?[]const EventPersona,
+    personas: ?[]const EventPersona = null,
 
     /// A list of Amazon Web Services Regions.
-    regions: ?[]const []const u8,
+    regions: ?[]const []const u8 = null,
 
     /// The Amazon Web Services services associated with the event. For example,
     /// `EC2`, `RDS`.
-    services: ?[]const []const u8,
+    services: ?[]const []const u8 = null,
 
-    start_time: ?DateTimeRange,
+    start_time: ?DateTimeRange = null,
 
     pub const json_field_names = .{
         .actionabilities = "actionabilities",

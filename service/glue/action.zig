@@ -17,20 +17,20 @@ pub const Action = struct {
     /// For information about the key-value pairs that Glue consumes to set up your
     /// job, see the [Special Parameters Used by
     /// Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html) topic in the developer guide.
-    arguments: ?[]const aws.map.StringMapEntry,
+    arguments: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the crawler to be used with this action.
-    crawler_name: ?[]const u8,
+    crawler_name: ?[]const u8 = null,
 
     /// The name of a job to be run.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// Specifies configuration properties of a job run notification.
-    notification_property: ?NotificationProperty,
+    notification_property: ?NotificationProperty = null,
 
     /// The name of the `SecurityConfiguration` structure to be used with this
     /// action.
-    security_configuration: ?[]const u8,
+    security_configuration: ?[]const u8 = null,
 
     /// The `JobRun` timeout in minutes. This is the maximum time that a job run can
     /// consume resources before it is terminated and enters `TIMEOUT` status. This
@@ -47,7 +47,7 @@ pub const Action = struct {
     ///
     /// For streaming jobs, if you have set up a maintenance window, it will be
     /// restarted during the maintenance window after 7 days.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 
     pub const json_field_names = .{
         .arguments = "Arguments",

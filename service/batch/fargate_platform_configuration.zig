@@ -12,7 +12,7 @@ pub const FargatePlatformConfiguration = struct {
     /// [Fargate
     /// platform
     /// versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic Container Service Developer Guide*.
-    platform_version: ?[]const u8,
+    platform_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .platform_version = "platformVersion",

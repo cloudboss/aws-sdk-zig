@@ -5,13 +5,13 @@ const CfnStackDetail = @import("cfn_stack_detail.zig").CfnStackDetail;
 /// associated provisioning information.
 pub const CfnTemplateProviderDetail = struct {
     /// An array of CloudFormation stack parameters.
-    parameters: ?[]const CfnStackParameter,
+    parameters: ?[]const CfnStackParameter = null,
 
     /// The IAM role used by CloudFormation to create the stack.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Information about the CloudFormation stack created by the template provider.
-    stack_detail: ?CfnStackDetail,
+    stack_detail: ?CfnStackDetail = null,
 
     /// The unique identifier of the template within the project.
     template_name: []const u8,

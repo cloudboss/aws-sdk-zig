@@ -6,7 +6,7 @@ const CompleteOnConvergence = @import("complete_on_convergence.zig").CompleteOnC
 pub const ConvergenceDetected = struct {
     /// A flag to stop a tuning job once AMT has detected that the job has
     /// converged.
-    complete_on_convergence: ?CompleteOnConvergence,
+    complete_on_convergence: ?CompleteOnConvergence = null,
 
     pub const json_field_names = .{
         .complete_on_convergence = "CompleteOnConvergence",

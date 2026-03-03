@@ -17,10 +17,10 @@ pub const ManagedNotificationChildEvent = struct {
 
     /// Provides detailed information about the dimensions used for event
     /// summarization and aggregation.
-    aggregation_detail: ?AggregationDetail,
+    aggregation_detail: ?AggregationDetail = null,
 
     /// The end time of the event.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The assesed nature of the event.
     ///
@@ -33,7 +33,7 @@ pub const ManagedNotificationChildEvent = struct {
     /// * `UNHEALTHY`
     ///
     /// * Some `EventRules` are `ACTIVE` and some are `INACTIVE`.
-    event_status: ?EventStatus,
+    event_status: ?EventStatus = null,
 
     /// The unique identifier for a Managed Notification Child Event.
     id: []const u8,
@@ -66,19 +66,19 @@ pub const ManagedNotificationChildEvent = struct {
     notification_type: NotificationType,
 
     /// The Organizational Unit Id that an Amazon Web Services account belongs to.
-    organizational_unit_id: ?[]const u8,
+    organizational_unit_id: ?[]const u8 = null,
 
     /// The schema version of the Managed Notification Child Event.
     schema_version: SchemaVersion,
 
     /// The source event URL.
-    source_event_detail_url: ?[]const u8,
+    source_event_detail_url: ?[]const u8 = null,
 
     /// The detailed URL for the source event.
-    source_event_detail_url_display_text: ?[]const u8,
+    source_event_detail_url_display_text: ?[]const u8 = null,
 
     /// The notification event start time.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// A list of text values.
     text_parts: []const aws.map.MapEntry(TextPartValue),

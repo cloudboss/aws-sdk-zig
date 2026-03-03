@@ -10,21 +10,21 @@ pub const NodeRepairConfigOverrides = struct {
     /// node
     /// with this specific `nodeMonitoringCondition` and
     /// `nodeUnhealthyReason`.
-    min_repair_wait_time_mins: ?i32,
+    min_repair_wait_time_mins: ?i32 = null,
 
     /// Specify an unhealthy condition reported by the node monitoring agent that
     /// this
     /// override would apply to.
-    node_monitoring_condition: ?[]const u8,
+    node_monitoring_condition: ?[]const u8 = null,
 
     /// Specify a reason reported by the node monitoring agent that this
     /// override would apply to.
-    node_unhealthy_reason: ?[]const u8,
+    node_unhealthy_reason: ?[]const u8 = null,
 
     /// Specify the repair action to take for nodes when all of the specified
     /// conditions are
     /// met.
-    repair_action: ?RepairAction,
+    repair_action: ?RepairAction = null,
 
     pub const json_field_names = .{
         .min_repair_wait_time_mins = "minRepairWaitTimeMins",

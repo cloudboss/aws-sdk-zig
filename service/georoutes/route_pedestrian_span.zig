@@ -13,7 +13,7 @@ pub const RoutePedestrianSpan = struct {
     best_case_duration: i64 = 0,
 
     /// 3 letter Country code corresponding to the Span.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// Distance of the computed span. This feature doesn't split a span, but is
     /// always computed on a span split by other properties.
@@ -28,38 +28,38 @@ pub const RoutePedestrianSpan = struct {
     /// Dynamic speed details corresponding to the span.
     ///
     /// **Unit**: `KilometersPerHour`
-    dynamic_speed: ?RouteSpanDynamicSpeedDetails,
+    dynamic_speed: ?RouteSpanDynamicSpeedDetails = null,
 
     /// Functional classification of the road segment corresponding to the span.
-    functional_classification: ?i32,
+    functional_classification: ?i32 = null,
 
     /// Offset in the leg geometry corresponding to the start of this span.
-    geometry_offset: ?i32,
+    geometry_offset: ?i32 = null,
 
     /// Incidents corresponding to the span. These index into the Incidents in the
     /// parent Leg.
-    incidents: ?[]const i32,
+    incidents: ?[]const i32 = null,
 
     /// Provides an array of names of the pedestrian span in available languages.
-    names: ?[]const LocalizedString,
+    names: ?[]const LocalizedString = null,
 
     /// Access attributes for a pedestrian corresponding to the span.
-    pedestrian_access: ?[]const RouteSpanPedestrianAccessAttribute,
+    pedestrian_access: ?[]const RouteSpanPedestrianAccessAttribute = null,
 
     /// 2-3 letter Region code corresponding to the Span. This is either a province
     /// or a state.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// Attributes for the road segment corresponding to the span.
-    road_attributes: ?[]const RouteSpanRoadAttribute,
+    road_attributes: ?[]const RouteSpanRoadAttribute = null,
 
     /// Designated route name or number corresponding to the span.
-    route_numbers: ?[]const RouteNumber,
+    route_numbers: ?[]const RouteNumber = null,
 
     /// Speed limit details corresponding to the span.
     ///
     /// **Unit**: `KilometersPerHour`
-    speed_limit: ?RouteSpanSpeedLimitDetails,
+    speed_limit: ?RouteSpanSpeedLimitDetails = null,
 
     /// Duration of the computed span under typical traffic congestion.
     ///

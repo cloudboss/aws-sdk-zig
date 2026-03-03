@@ -13,14 +13,14 @@ pub const SearchRelatedItemsResponseItem = struct {
     content: RelatedItemContent,
 
     /// Represents the creator of the related item.
-    performed_by: ?UserUnion,
+    performed_by: ?UserUnion = null,
 
     /// Unique identifier of a related item.
     related_item_id: []const u8,
 
     /// A map of of key-value pairs that represent tags on a resource. Tags are used
     /// to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Type of a related item.
     @"type": RelatedItemType,

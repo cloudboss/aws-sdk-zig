@@ -4,13 +4,13 @@ const Range = @import("range.zig").Range;
 /// Portable Document Format file.
 pub const Page = struct {
     /// Reserved for future use.
-    line_range: ?Range,
+    line_range: ?Range = null,
 
     /// Reserved for future use.
-    offset_range: ?Range,
+    offset_range: ?Range = null,
 
     /// The page number of the page that contains the sensitive data.
-    page_number: ?i64,
+    page_number: ?i64 = null,
 
     pub const json_field_names = .{
         .line_range = "lineRange",

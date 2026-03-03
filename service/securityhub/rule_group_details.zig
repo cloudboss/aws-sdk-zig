@@ -9,10 +9,10 @@ pub const RuleGroupDetails = struct {
     /// `StatefulRules`.
     ///
     /// For stateless rule groups, contains `StatelessRulesAndCustomActions`.
-    rules_source: ?RuleGroupSource,
+    rules_source: ?RuleGroupSource = null,
 
     /// Additional settings to use in the specified rules.
-    rule_variables: ?RuleGroupVariables,
+    rule_variables: ?RuleGroupVariables = null,
 
     pub const json_field_names = .{
         .rules_source = "RulesSource",

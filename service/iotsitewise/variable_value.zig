@@ -18,7 +18,7 @@ pub const VariableValue = struct {
     /// information, see
     /// [Asset
     /// hierarchies](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html) in the *IoT SiteWise User Guide*.
-    hierarchy_id: ?[]const u8,
+    hierarchy_id: ?[]const u8 = null,
 
     /// The ID of the property to use as the variable. You can use the property
     /// `name`
@@ -27,10 +27,10 @@ pub const VariableValue = struct {
     /// `externalId:` followed by the external ID. For more information, see [Using
     /// external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    property_id: ?[]const u8,
+    property_id: ?[]const u8 = null,
 
     /// The path of the property.
-    property_path: ?[]const AssetModelPropertyPathSegment,
+    property_path: ?[]const AssetModelPropertyPathSegment = null,
 
     pub const json_field_names = .{
         .hierarchy_id = "hierarchyId",

@@ -9,10 +9,10 @@ const RoutingStrategyType = @import("routing_strategy_type.zig").RoutingStrategy
 pub const RoutingStrategy = struct {
     /// A unique identifier for the fleet that the alias points to. This value is
     /// the fleet ID, not the fleet ARN.
-    fleet_id: ?[]const u8,
+    fleet_id: ?[]const u8 = null,
 
     /// The message text to be used with a terminal routing strategy.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The type of routing strategy for the alias.
     ///
@@ -25,7 +25,7 @@ pub const RoutingStrategy = struct {
     /// fleet but instead can be used to display a message to the user. A terminal
     /// alias
     /// throws a TerminalRoutingStrategyException with the message embedded.
-    @"type": ?RoutingStrategyType,
+    @"type": ?RoutingStrategyType = null,
 
     pub const json_field_names = .{
         .fleet_id = "FleetId",

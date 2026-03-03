@@ -6,14 +6,14 @@ const Parameters = @import("parameters.zig").Parameters;
 pub const SnapshotConfiguration = struct {
     /// A structure that contains information on the Amazon S3 bucket that the
     /// generated snapshot is stored in.
-    destination_configuration: ?SnapshotDestinationConfiguration,
+    destination_configuration: ?SnapshotDestinationConfiguration = null,
 
     /// A list of `SnapshotJobResultFileGroup` objects that contain information
     /// about the snapshot that is generated. This list can hold a maximum of 6
     /// `FileGroup` configurations.
     file_groups: []const SnapshotFileGroup,
 
-    parameters: ?Parameters,
+    parameters: ?Parameters = null,
 
     pub const json_field_names = .{
         .destination_configuration = "DestinationConfiguration",

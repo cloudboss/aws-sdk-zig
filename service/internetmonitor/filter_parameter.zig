@@ -28,17 +28,17 @@ pub const FilterParameter = struct {
     /// must be one of the fields
     /// that was returned by the specific query that you used to create the
     /// repository.
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// The operator to use with the filter field and a value, such as `not_equals`.
-    operator: ?Operator,
+    operator: ?Operator = null,
 
     /// One or more values to be used, together with the specified operator, to
     /// filter data for a query.
     /// For example, you could specify an array of values such as `["Seattle",
     /// "Redmond"]`. Values in the array are separated by
     /// commas.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .field = "Field",

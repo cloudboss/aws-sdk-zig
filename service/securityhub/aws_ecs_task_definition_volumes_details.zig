@@ -5,17 +5,17 @@ const AwsEcsTaskDefinitionVolumesHostDetails = @import("aws_ecs_task_definition_
 /// A data volume to mount from another container.
 pub const AwsEcsTaskDefinitionVolumesDetails = struct {
     /// Information about a Docker volume.
-    docker_volume_configuration: ?AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails,
+    docker_volume_configuration: ?AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails = null,
 
     /// Information about the Amazon Elastic File System file system that is used
     /// for task storage.
-    efs_volume_configuration: ?AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails,
+    efs_volume_configuration: ?AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails = null,
 
     /// Information about a bind mount host volume.
-    host: ?AwsEcsTaskDefinitionVolumesHostDetails,
+    host: ?AwsEcsTaskDefinitionVolumesHostDetails = null,
 
     /// The name of the data volume.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .docker_volume_configuration = "DockerVolumeConfiguration",

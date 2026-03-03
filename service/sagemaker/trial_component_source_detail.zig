@@ -6,16 +6,16 @@ const TransformJob = @import("transform_job.zig").TransformJob;
 /// `ProcessingJob` or `TrainingJob` is returned.
 pub const TrialComponentSourceDetail = struct {
     /// Information about a processing job that's the source of a trial component.
-    processing_job: ?ProcessingJob,
+    processing_job: ?ProcessingJob = null,
 
     /// The Amazon Resource Name (ARN) of the source.
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     /// Information about a training job that's the source of a trial component.
-    training_job: ?TrainingJob,
+    training_job: ?TrainingJob = null,
 
     /// Information about a transform job that's the source of a trial component.
-    transform_job: ?TransformJob,
+    transform_job: ?TransformJob = null,
 
     pub const json_field_names = .{
         .processing_job = "ProcessingJob",

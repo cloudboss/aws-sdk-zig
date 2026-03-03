@@ -5,7 +5,7 @@ const AutoMLJobCompletionCriteria = @import("auto_ml_job_completion_criteria.zig
 pub const TextClassificationJobConfig = struct {
     /// How long a job is allowed to run, or how many candidates a job is allowed to
     /// generate.
-    completion_criteria: ?AutoMLJobCompletionCriteria,
+    completion_criteria: ?AutoMLJobCompletionCriteria = null,
 
     /// The name of the column used to provide the sentences to be classified. It
     /// should not be the same as the target column.

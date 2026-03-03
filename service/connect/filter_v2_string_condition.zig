@@ -8,7 +8,7 @@ const FilterV2StringConditionComparisonOperator = @import("filter_v2_string_cond
 /// FilterValues must be null or empty.
 pub const FilterV2StringCondition = struct {
     /// The string condition.
-    comparison: ?FilterV2StringConditionComparisonOperator,
+    comparison: ?FilterV2StringConditionComparisonOperator = null,
 
     pub const json_field_names = .{
         .comparison = "Comparison",

@@ -7,19 +7,19 @@ const ECSSavingsOpportunityAfterDiscounts = @import("ecs_savings_opportunity_aft
 pub const ECSServiceRecommendationOption = struct {
     /// The CPU and memory size recommendations for the containers within the task
     /// of your Amazon ECS service.
-    container_recommendations: ?[]const ContainerRecommendation,
+    container_recommendations: ?[]const ContainerRecommendation = null,
 
     /// The CPU size of the Amazon ECS service recommendation option.
-    cpu: ?i32,
+    cpu: ?i32 = null,
 
     /// The memory size of the Amazon ECS service recommendation option.
-    memory: ?i32,
+    memory: ?i32 = null,
 
     /// An array of objects that describe the projected utilization metrics of the
     /// Amazon ECS service recommendation option.
-    projected_utilization_metrics: ?[]const ECSServiceProjectedUtilizationMetric,
+    projected_utilization_metrics: ?[]const ECSServiceProjectedUtilizationMetric = null,
 
-    savings_opportunity: ?SavingsOpportunity,
+    savings_opportunity: ?SavingsOpportunity = null,
 
     /// Describes the savings opportunity for Amazon ECS service recommendations or
     /// for the recommendation option.
@@ -28,7 +28,7 @@ pub const ECSServiceRecommendationOption = struct {
     /// Savings Plans discounts.
     /// You can achieve this by implementing a given Compute Optimizer
     /// recommendation.
-    savings_opportunity_after_discounts: ?ECSSavingsOpportunityAfterDiscounts,
+    savings_opportunity_after_discounts: ?ECSSavingsOpportunityAfterDiscounts = null,
 
     pub const json_field_names = .{
         .container_recommendations = "containerRecommendations",

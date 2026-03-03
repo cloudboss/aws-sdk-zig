@@ -10,7 +10,7 @@ pub const StackDriftInformation = struct {
     /// Most recent time when a drift detection operation was initiated on the
     /// stack, or any of its
     /// individual resources that support drift detection.
-    last_check_timestamp: ?i64,
+    last_check_timestamp: ?i64 = null,
 
     /// Status of the stack's actual configuration compared to its expected template
     /// configuration.

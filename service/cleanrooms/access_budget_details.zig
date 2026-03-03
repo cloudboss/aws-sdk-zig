@@ -12,7 +12,7 @@ pub const AccessBudgetDetails = struct {
     /// `DISABLED` - The budget must be refreshed manually.
     ///
     /// `NULL` - The value is null when `budgetType` is set to `LIFETIME`.
-    auto_refresh: ?AutoRefreshMode,
+    auto_refresh: ?AutoRefreshMode = null,
 
     /// The total budget allocation amount for this access budget.
     budget: i32,
@@ -32,7 +32,7 @@ pub const AccessBudgetDetails = struct {
     budget_type: AccessBudgetType,
 
     /// The end time for the access budget period.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The remaining budget amount available for use within this access budget.
     remaining_budget: i32,

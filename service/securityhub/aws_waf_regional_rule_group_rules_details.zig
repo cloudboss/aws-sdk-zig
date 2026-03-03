@@ -4,18 +4,18 @@ const AwsWafRegionalRuleGroupRulesActionDetails = @import("aws_waf_regional_rule
 pub const AwsWafRegionalRuleGroupRulesDetails = struct {
     /// The action that WAF should take on a web request when it matches the
     /// criteria defined in the rule.
-    action: ?AwsWafRegionalRuleGroupRulesActionDetails,
+    action: ?AwsWafRegionalRuleGroupRulesActionDetails = null,
 
     /// If you define more than one rule in a web ACL, WAF evaluates each request
     /// against the rules in
     /// order based on the value of `Priority`.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The ID for a rule.
-    rule_id: ?[]const u8,
+    rule_id: ?[]const u8 = null,
 
     /// The type of rule in the rule group.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

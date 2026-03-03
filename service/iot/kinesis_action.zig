@@ -1,7 +1,7 @@
 /// Describes an action to write data to an Amazon Kinesis stream.
 pub const KinesisAction = struct {
     /// The partition key.
-    partition_key: ?[]const u8,
+    partition_key: ?[]const u8 = null,
 
     /// The ARN of the IAM role that grants access to the Amazon Kinesis stream.
     role_arn: []const u8,

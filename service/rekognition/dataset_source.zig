@@ -18,9 +18,9 @@ const GroundTruthManifest = @import("ground_truth_manifest.zig").GroundTruthMani
 pub const DatasetSource = struct {
     /// The ARN of an Amazon Rekognition Custom Labels dataset that you want to
     /// copy.
-    dataset_arn: ?[]const u8,
+    dataset_arn: ?[]const u8 = null,
 
-    ground_truth_manifest: ?GroundTruthManifest,
+    ground_truth_manifest: ?GroundTruthManifest = null,
 
     pub const json_field_names = .{
         .dataset_arn = "DatasetArn",

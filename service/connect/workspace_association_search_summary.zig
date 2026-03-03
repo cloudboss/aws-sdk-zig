@@ -2,24 +2,24 @@
 /// routing profile.
 pub const WorkspaceAssociationSearchSummary = struct {
     /// The Amazon Resource Name (ARN) of the associated resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The identifier of the associated resource (user or routing profile).
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The name of the associated resource.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// The type of resource associated with the workspace. Valid values are: `USER`
     /// and
     /// `ROUTING_PROFILE`.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the workspace.
-    workspace_arn: ?[]const u8,
+    workspace_arn: ?[]const u8 = null,
 
     /// The identifier of the workspace.
-    workspace_id: ?[]const u8,
+    workspace_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .resource_arn = "ResourceArn",

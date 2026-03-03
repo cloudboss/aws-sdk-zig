@@ -7,7 +7,7 @@ pub const ExportInfo = struct {
     /// A URL for an Amazon S3 bucket where you can review the exported data. The
     /// URL is
     /// displayed only if the export succeeded.
-    configurations_download_url: ?[]const u8,
+    configurations_download_url: ?[]const u8 = null,
 
     /// A unique identifier used to query an export.
     export_id: []const u8,
@@ -29,12 +29,12 @@ pub const ExportInfo = struct {
     /// The `endTime` used in the `StartExportTask` request. If no
     /// `endTime` was requested, this result does not appear in
     /// `ExportInfo`.
-    requested_end_time: ?i64,
+    requested_end_time: ?i64 = null,
 
     /// The value of `startTime` parameter in the `StartExportTask`
     /// request. If no `startTime` was requested, this result does not appear in
     /// `ExportInfo`.
-    requested_start_time: ?i64,
+    requested_start_time: ?i64 = null,
 
     /// A status message provided for API callers.
     status_message: []const u8,

@@ -24,12 +24,12 @@ pub const JobQueueDetail = struct {
     /// The type of job queue. For service jobs that run on SageMaker Training, this
     /// value is `SAGEMAKER_TRAINING`. For regular container jobs, this value is
     /// `EKS`, `ECS`, or `ECS_FARGATE` depending on the compute environment.
-    job_queue_type: ?JobQueueType,
+    job_queue_type: ?JobQueueType = null,
 
     /// The set of actions that Batch perform on jobs that remain at the head of the
     /// job queue in the specified state longer than specified times. Batch will
     /// perform each action after `maxTimeSeconds` has passed.
-    job_state_time_limit_actions: ?[]const JobStateTimeLimitAction,
+    job_state_time_limit_actions: ?[]const JobStateTimeLimitAction = null,
 
     /// The priority of the job queue. Job queue priority determines the order
     /// that job queues are evaluated when multiple queues dispatch jobs within a
@@ -65,12 +65,12 @@ pub const JobQueueDetail = struct {
     /// `.
     /// For example,
     /// `aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy`.
-    scheduling_policy_arn: ?[]const u8,
+    scheduling_policy_arn: ?[]const u8 = null,
 
     /// The order of the service environment associated with the job queue. Job
     /// queues with a higher priority are evaluated first when associated with the
     /// same service environment.
-    service_environment_order: ?[]const ServiceEnvironmentOrder,
+    service_environment_order: ?[]const ServiceEnvironmentOrder = null,
 
     /// Describes the ability of the queue to accept new jobs. If the job queue
     /// state is
@@ -80,18 +80,18 @@ pub const JobQueueDetail = struct {
 
     /// The status of the job queue (for example, `CREATING` or
     /// `VALID`).
-    status: ?JQStatus,
+    status: ?JQStatus = null,
 
     /// A short, human-readable string to provide additional details for the current
     /// status of the
     /// job queue.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The tags that are applied to the job queue. For more information, see
     /// [Tagging your Batch
     /// resources](https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html) in
     /// *Batch User Guide*.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .compute_environment_order = "computeEnvironmentOrder",

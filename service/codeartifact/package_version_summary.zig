@@ -9,10 +9,10 @@ pub const PackageVersionSummary = struct {
     /// A
     /// [PackageVersionOrigin](https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionOrigin.html) object that contains information
     /// about how the package version was added to the repository.
-    origin: ?PackageVersionOrigin,
+    origin: ?PackageVersionOrigin = null,
 
     /// The revision associated with a package version.
-    revision: ?[]const u8,
+    revision: ?[]const u8 = null,
 
     /// A string that contains the status of the package version. It can be one of
     /// the following:

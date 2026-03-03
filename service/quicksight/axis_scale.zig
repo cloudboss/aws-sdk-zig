@@ -8,10 +8,10 @@ const AxisLogarithmicScale = @import("axis_logarithmic_scale.zig").AxisLogarithm
 /// the attributes can be defined.
 pub const AxisScale = struct {
     /// The linear axis scale setup.
-    linear: ?AxisLinearScale,
+    linear: ?AxisLinearScale = null,
 
     /// The logarithmic axis scale setup.
-    logarithmic: ?AxisLogarithmicScale,
+    logarithmic: ?AxisLogarithmicScale = null,
 
     pub const json_field_names = .{
         .linear = "Linear",

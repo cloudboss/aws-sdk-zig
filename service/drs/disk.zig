@@ -4,7 +4,7 @@ pub const Disk = struct {
     bytes: i64 = 0,
 
     /// The disk or device name.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bytes = "bytes",

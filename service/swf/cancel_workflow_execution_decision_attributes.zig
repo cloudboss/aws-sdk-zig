@@ -22,7 +22,7 @@
 /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
 pub const CancelWorkflowExecutionDecisionAttributes = struct {
     /// Details of the cancellation.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .details = "details",

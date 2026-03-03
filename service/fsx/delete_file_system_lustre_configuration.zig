@@ -10,7 +10,7 @@ pub const DeleteFileSystemLustreConfiguration = struct {
     /// `CopyTagsToBackups` to true, and
     /// you specify one or more `FinalBackupTags` when deleting a file system,
     /// Amazon FSx will not copy any existing file system tags to the backup.
-    final_backup_tags: ?[]const Tag,
+    final_backup_tags: ?[]const Tag = null,
 
     /// Set `SkipFinalBackup` to false if you want to take a final backup of the
     /// file
@@ -20,7 +20,7 @@ pub const DeleteFileSystemLustreConfiguration = struct {
     ///
     /// The `fsx:CreateBackup` permission is required if you set `SkipFinalBackup`
     /// to `false` in order to delete the file system and take a final backup.
-    skip_final_backup: ?bool,
+    skip_final_backup: ?bool = null,
 
     pub const json_field_names = .{
         .final_backup_tags = "FinalBackupTags",

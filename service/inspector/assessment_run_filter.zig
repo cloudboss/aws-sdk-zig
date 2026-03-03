@@ -10,48 +10,48 @@ pub const AssessmentRunFilter = struct {
     /// property must inclusively match any value between the specified minimum and
     /// maximum values
     /// of the **completedAt** property of the AssessmentRun data type.
-    completion_time_range: ?TimestampRange,
+    completion_time_range: ?TimestampRange = null,
 
     /// For a record to match a filter, the value that is specified for this data
     /// type
     /// property must inclusively match any value between the specified minimum and
     /// maximum values
     /// of the **durationInSeconds** property of the AssessmentRun data type.
-    duration_range: ?DurationRange,
+    duration_range: ?DurationRange = null,
 
     /// For a record to match a filter, an explicit value or a string containing a
     /// wildcard
     /// that is specified for this data type property must match the value of the
     /// **assessmentRunName** property of the AssessmentRun
     /// data type.
-    name_pattern: ?[]const u8,
+    name_pattern: ?[]const u8 = null,
 
     /// For a record to match a filter, the value that is specified for this data
     /// type
     /// property must be contained in the list of values of the **rulesPackages**
     /// property of the AssessmentRun data
     /// type.
-    rules_package_arns: ?[]const []const u8,
+    rules_package_arns: ?[]const []const u8 = null,
 
     /// For a record to match a filter, the value that is specified for this data
     /// type
     /// property must inclusively match any value between the specified minimum and
     /// maximum values
     /// of the **startTime** property of the AssessmentRun data type.
-    start_time_range: ?TimestampRange,
+    start_time_range: ?TimestampRange = null,
 
     /// For a record to match a filter, the value that is specified for this data
     /// type
     /// property must match the **stateChangedAt** property of the
     /// AssessmentRun data type.
-    state_change_time_range: ?TimestampRange,
+    state_change_time_range: ?TimestampRange = null,
 
     /// For a record to match a filter, one of the values specified for this data
     /// type
     /// property must be the exact match of the value of the **assessmentRunState**
     /// property of the AssessmentRun data
     /// type.
-    states: ?[]const AssessmentRunState,
+    states: ?[]const AssessmentRunState = null,
 
     pub const json_field_names = .{
         .completion_time_range = "completionTimeRange",

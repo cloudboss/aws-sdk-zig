@@ -4,10 +4,10 @@ const AdminStatus = @import("admin_status.zig").AdminStatus;
 /// administrator.
 pub const AdminAccount = struct {
     /// The Amazon Web Services account ID for the account.
-    admin_account_id: ?[]const u8,
+    admin_account_id: ?[]const u8 = null,
 
     /// Indicates whether the account is enabled as the delegated administrator.
-    admin_status: ?AdminStatus,
+    admin_status: ?AdminStatus = null,
 
     pub const json_field_names = .{
         .admin_account_id = "AdminAccountId",

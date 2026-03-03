@@ -6,7 +6,7 @@ pub const StatefulRuleGroupOverride = struct {
     /// The action that changes the rule group from `DROP` to `ALERT`. This only
     /// applies to
     /// managed rule groups.
-    action: ?OverrideAction,
+    action: ?OverrideAction = null,
 
     pub const json_field_names = .{
         .action = "Action",

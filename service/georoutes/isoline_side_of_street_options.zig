@@ -9,7 +9,7 @@ pub const IsolineSideOfStreetOptions = struct {
     /// AnyStreet will always use the provided position.
     ///
     /// Default Value: `DividedStreetOnly`
-    use_with: ?SideOfStreetMatchingStrategy,
+    use_with: ?SideOfStreetMatchingStrategy = null,
 
     pub const json_field_names = .{
         .position = "Position",

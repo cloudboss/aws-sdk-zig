@@ -3,16 +3,16 @@ const ResourceIntegrations = @import("resource_integrations.zig").ResourceIntegr
 /// The information about the resource.
 pub const Resource = struct {
     /// The Amazon resource name (ARN) of the resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time the resource was associated with the application.
-    association_time: ?i64,
+    association_time: ?i64 = null,
 
     /// The service integration information about the resource.
-    integrations: ?ResourceIntegrations,
+    integrations: ?ResourceIntegrations = null,
 
     /// The name of the resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

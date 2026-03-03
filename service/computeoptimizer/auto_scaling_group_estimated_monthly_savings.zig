@@ -6,7 +6,7 @@ const Currency = @import("currency.zig").Currency;
 /// Savings Plans and Reserved Instances discounts.
 pub const AutoScalingGroupEstimatedMonthlySavings = struct {
     /// The currency of the estimated monthly savings.
-    currency: ?Currency,
+    currency: ?Currency = null,
 
     /// The value of the estimated monthly savings.
     value: f64 = 0,

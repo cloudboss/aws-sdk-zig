@@ -14,12 +14,12 @@ pub const RepositoryTrigger = struct {
     ///
     /// Although no content is required in the array, you must include the array
     /// itself.
-    branches: ?[]const []const u8,
+    branches: ?[]const []const u8 = null,
 
     /// Any custom data associated with the trigger to be included in the
     /// information sent to
     /// the target of the trigger.
-    custom_data: ?[]const u8,
+    custom_data: ?[]const u8 = null,
 
     /// The ARN of the resource that is the target for a trigger (for example, the
     /// ARN of a

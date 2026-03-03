@@ -25,18 +25,18 @@ pub const GlobalSecondaryIndexDescription = struct {
     /// For indexes that were created during a `CreateTable` operation, the
     /// `Backfilling` attribute does not appear in the
     /// `DescribeTable` output.
-    backfilling: ?bool,
+    backfilling: ?bool = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the index.
-    index_arn: ?[]const u8,
+    index_arn: ?[]const u8 = null,
 
     /// The name of the global secondary index.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
     /// The total size of the specified index, in bytes. DynamoDB updates this value
     /// approximately every six hours. Recent changes might not be reflected in this
     /// value.
-    index_size_bytes: ?i64,
+    index_size_bytes: ?i64 = null,
 
     /// The current state of the global secondary index:
     ///
@@ -47,12 +47,12 @@ pub const GlobalSecondaryIndexDescription = struct {
     /// * `DELETING` - The index is being deleted.
     ///
     /// * `ACTIVE` - The index is ready for use.
-    index_status: ?IndexStatus,
+    index_status: ?IndexStatus = null,
 
     /// The number of items in the specified index. DynamoDB updates this value
     /// approximately
     /// every six hours. Recent changes might not be reflected in this value.
-    item_count: ?i64,
+    item_count: ?i64 = null,
 
     /// The complete key schema for a global secondary index, which consists of one
     /// or more
@@ -72,20 +72,20 @@ pub const GlobalSecondaryIndexDescription = struct {
     /// the same partition key physically close together, in sorted order by the
     /// sort key
     /// value.
-    key_schema: ?[]const KeySchemaElement,
+    key_schema: ?[]const KeySchemaElement = null,
 
     /// The maximum number of read and write units for the specified global
     /// secondary index.
     /// If you use this parameter, you must specify `MaxReadRequestUnits`,
     /// `MaxWriteRequestUnits`, or both.
-    on_demand_throughput: ?OnDemandThroughput,
+    on_demand_throughput: ?OnDemandThroughput = null,
 
     /// Represents attributes that are copied (projected) from the table into the
     /// global
     /// secondary index. These are in addition to the primary key attributes and
     /// index key
     /// attributes, which are automatically projected.
-    projection: ?Projection,
+    projection: ?Projection = null,
 
     /// Represents the provisioned throughput settings for the specified global
     /// secondary
@@ -95,12 +95,12 @@ pub const GlobalSecondaryIndexDescription = struct {
     /// Account, and Table
     /// Quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    provisioned_throughput: ?ProvisionedThroughputDescription,
+    provisioned_throughput: ?ProvisionedThroughputDescription = null,
 
     /// Represents the warm throughput value (in read units per second and write
     /// units per
     /// second) for the specified secondary index.
-    warm_throughput: ?GlobalSecondaryIndexWarmThroughputDescription,
+    warm_throughput: ?GlobalSecondaryIndexWarmThroughputDescription = null,
 
     pub const json_field_names = .{
         .backfilling = "Backfilling",

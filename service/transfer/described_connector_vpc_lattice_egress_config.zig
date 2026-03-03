@@ -5,7 +5,7 @@ pub const DescribedConnectorVpcLatticeEgressConfig = struct {
     /// Port number currently configured for SFTP connections through VPC_LATTICE.
     /// Shows the port on which the connector attempts to connect to the target SFTP
     /// server.
-    port_number: ?i32,
+    port_number: ?i32 = null,
 
     /// ARN of the VPC_LATTICE Resource Configuration currently used by the
     /// connector. This Resource Configuration defines the network path to the SFTP

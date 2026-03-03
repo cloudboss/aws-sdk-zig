@@ -4,16 +4,16 @@ pub const Member = struct {
     account_id: []const u8,
 
     /// The administrator account ID.
-    administrator_id: ?[]const u8,
+    administrator_id: ?[]const u8 = null,
 
     /// The detector ID of the member account.
-    detector_id: ?[]const u8,
+    detector_id: ?[]const u8 = null,
 
     /// The email address of the member account.
     email: []const u8,
 
     /// The timestamp when the invitation was sent.
-    invited_at: ?[]const u8,
+    invited_at: ?[]const u8 = null,
 
     /// The administrator account ID.
     master_id: []const u8,

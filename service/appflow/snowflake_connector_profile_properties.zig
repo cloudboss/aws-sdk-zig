@@ -1,21 +1,21 @@
 /// The connector-specific profile properties required when using Snowflake.
 pub const SnowflakeConnectorProfileProperties = struct {
     /// The name of the account.
-    account_name: ?[]const u8,
+    account_name: ?[]const u8 = null,
 
     /// The name of the Amazon S3 bucket associated with Snowflake.
     bucket_name: []const u8,
 
     /// The bucket path that refers to the Amazon S3 bucket associated with
     /// Snowflake.
-    bucket_prefix: ?[]const u8,
+    bucket_prefix: ?[]const u8 = null,
 
     /// The Snowflake Private Link service name to be used for private data
     /// transfers.
-    private_link_service_name: ?[]const u8,
+    private_link_service_name: ?[]const u8 = null,
 
     /// The Amazon Web Services Region of the Snowflake account.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The name of the Amazon S3 stage that was created while setting up an Amazon
     /// S3 stage in the Snowflake account. This is written in the following format:

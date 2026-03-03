@@ -2,7 +2,7 @@
 pub const PredictiveDialerConfig = struct {
     bandwidth_allocation: f64,
 
-    dialing_capacity: ?f64,
+    dialing_capacity: ?f64 = null,
 
     pub const json_field_names = .{
         .bandwidth_allocation = "bandwidthAllocation",

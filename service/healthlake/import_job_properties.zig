@@ -8,13 +8,13 @@ const ValidationLevel = @import("validation_level.zig").ValidationLevel;
 pub const ImportJobProperties = struct {
     /// The Amazon Resource Name (ARN) that grants AWS HealthLake access to the
     /// input data.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     /// The data store identifier.
     datastore_id: []const u8,
 
     /// The time the import job was completed.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The input data configuration supplied when the import job was created.
     input_data_config: InputDataConfig,
@@ -23,27 +23,27 @@ pub const ImportJobProperties = struct {
     job_id: []const u8,
 
     /// The import job name.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
-    job_output_data_config: ?OutputDataConfig,
+    job_output_data_config: ?OutputDataConfig = null,
 
     /// Displays the progress of the import job, including total resources scanned,
     /// total
     /// resources imported, and total size of data imported.
-    job_progress_report: ?JobProgressReport,
+    job_progress_report: ?JobProgressReport = null,
 
     /// The import job status.
     job_status: JobStatus,
 
     /// An explanation of any errors that might have occurred during the FHIR import
     /// job.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The time the import job was submitted for processing.
     submit_time: i64,
 
     /// The validation level of the import job.
-    validation_level: ?ValidationLevel,
+    validation_level: ?ValidationLevel = null,
 
     pub const json_field_names = .{
         .data_access_role_arn = "DataAccessRoleArn",

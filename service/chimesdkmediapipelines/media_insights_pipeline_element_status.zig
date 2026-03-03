@@ -4,10 +4,10 @@ const MediaInsightsPipelineConfigurationElementType = @import("media_insights_pi
 /// The status of the pipeline element.
 pub const MediaInsightsPipelineElementStatus = struct {
     /// The element's status.
-    status: ?MediaPipelineElementStatus,
+    status: ?MediaPipelineElementStatus = null,
 
     /// The type of status.
-    @"type": ?MediaInsightsPipelineConfigurationElementType,
+    @"type": ?MediaInsightsPipelineConfigurationElementType = null,
 
     pub const json_field_names = .{
         .status = "Status",

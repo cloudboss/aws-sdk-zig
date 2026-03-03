@@ -8,22 +8,22 @@ const BuildSummary = @import("build_summary.zig").BuildSummary;
 pub const BuildGroup = struct {
     /// A `BuildSummary` object that contains a summary of the current build
     /// group.
-    current_build_summary: ?BuildSummary,
+    current_build_summary: ?BuildSummary = null,
 
     /// An array of strings that contain the identifiers of the build groups that
     /// this build
     /// group depends on.
-    depends_on: ?[]const []const u8,
+    depends_on: ?[]const []const u8 = null,
 
     /// Contains the identifier of the build group.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     /// Specifies if failures in this build group can be ignored.
     ignore_failure: bool = false,
 
     /// An array of `BuildSummary` objects that contain summaries of previous
     /// build groups.
-    prior_build_summary_list: ?[]const BuildSummary,
+    prior_build_summary_list: ?[]const BuildSummary = null,
 
     pub const json_field_names = .{
         .current_build_summary = "currentBuildSummary",

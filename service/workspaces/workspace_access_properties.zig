@@ -8,38 +8,38 @@ const AccessPropertyValue = @import("access_property_value.zig").AccessPropertyV
 /// Requirements](https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-network-requirements.html).
 pub const WorkspaceAccessProperties = struct {
     /// Specifies the configuration for accessing the WorkSpace.
-    access_endpoint_config: ?AccessEndpointConfig,
+    access_endpoint_config: ?AccessEndpointConfig = null,
 
     /// Indicates whether users can use Android and Android-compatible Chrome OS
     /// devices to
     /// access their WorkSpaces.
-    device_type_android: ?AccessPropertyValue,
+    device_type_android: ?AccessPropertyValue = null,
 
     /// Indicates whether users can use Chromebooks to access their WorkSpaces.
-    device_type_chrome_os: ?AccessPropertyValue,
+    device_type_chrome_os: ?AccessPropertyValue = null,
 
     /// Indicates whether users can use iOS devices to access their WorkSpaces.
-    device_type_ios: ?AccessPropertyValue,
+    device_type_ios: ?AccessPropertyValue = null,
 
     /// Indicates whether users can use Linux clients to access their WorkSpaces.
-    device_type_linux: ?AccessPropertyValue,
+    device_type_linux: ?AccessPropertyValue = null,
 
     /// Indicates whether users can use macOS clients to access their WorkSpaces.
-    device_type_osx: ?AccessPropertyValue,
+    device_type_osx: ?AccessPropertyValue = null,
 
     /// Indicates whether users can access their WorkSpaces through a web browser.
-    device_type_web: ?AccessPropertyValue,
+    device_type_web: ?AccessPropertyValue = null,
 
     /// Indicates whether users can use Windows clients to access their WorkSpaces.
-    device_type_windows: ?AccessPropertyValue,
+    device_type_windows: ?AccessPropertyValue = null,
 
     /// Indicates whether users can access their WorkSpaces through a WorkSpaces
     /// Thin Client.
-    device_type_work_spaces_thin_client: ?AccessPropertyValue,
+    device_type_work_spaces_thin_client: ?AccessPropertyValue = null,
 
     /// Indicates whether users can use zero client devices to access their
     /// WorkSpaces.
-    device_type_zero_client: ?AccessPropertyValue,
+    device_type_zero_client: ?AccessPropertyValue = null,
 
     pub const json_field_names = .{
         .access_endpoint_config = "AccessEndpointConfig",

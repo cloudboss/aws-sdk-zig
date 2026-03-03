@@ -10,18 +10,18 @@
 pub const BoundingBox = struct {
     /// The height of the bounding box as a ratio of the overall document page
     /// height.
-    height: ?f32,
+    height: ?f32 = null,
 
     /// The left coordinate of the bounding box as a ratio of overall document page
     /// width.
-    left: ?f32,
+    left: ?f32 = null,
 
     /// The top coordinate of the bounding box as a ratio of overall document page
     /// height.
-    top: ?f32,
+    top: ?f32 = null,
 
     /// The width of the bounding box as a ratio of the overall document page width.
-    width: ?f32,
+    width: ?f32 = null,
 
     pub const json_field_names = .{
         .height = "Height",

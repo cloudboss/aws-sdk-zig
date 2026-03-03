@@ -3,19 +3,19 @@ const ResourceSetStatus = @import("resource_set_status.zig").ResourceSetStatus;
 /// Summarizes the resource sets used in a policy.
 pub const ResourceSetSummary = struct {
     /// A description of the resource set.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier for the resource set. This ID is returned in the
     /// responses to create and list commands. You provide it to operations like
     /// update and delete.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The last time that the resource set was changed.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The descriptive name of the resource set. You can't change the name of a
     /// resource set after you create it.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Indicates whether the resource set is in or out of an admin's Region scope.
     ///
@@ -25,7 +25,7 @@ pub const ResourceSetSummary = struct {
     ///   they can't edit or delete the resource set. Existing protections stay in
     ///   place. Any new resource that come into scope of the resource set won't be
     ///   protected.
-    resource_set_status: ?ResourceSetStatus,
+    resource_set_status: ?ResourceSetStatus = null,
 
     pub const json_field_names = .{
         .description = "Description",

@@ -5,10 +5,10 @@ const ImageSource = @import("image_source.zig").ImageSource;
 /// streaming responses.
 pub const ImageBlockDelta = struct {
     /// Error information if this image delta could not be processed.
-    @"error": ?ErrorBlock,
+    @"error": ?ErrorBlock = null,
 
     /// The incremental image source data for this delta event.
-    source: ?ImageSource,
+    source: ?ImageSource = null,
 
     pub const json_field_names = .{
         .@"error" = "error",

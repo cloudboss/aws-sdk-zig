@@ -3,13 +3,13 @@ const MQBrokerAccessCredentials = @import("mq_broker_access_credentials.zig").MQ
 /// The parameters for using an Active MQ broker as a source.
 pub const PipeSourceActiveMQBrokerParameters = struct {
     /// The maximum number of records to include in each batch.
-    batch_size: ?i32,
+    batch_size: ?i32 = null,
 
     /// The credentials needed to access the resource.
     credentials: MQBrokerAccessCredentials,
 
     /// The maximum length of a time to wait for events.
-    maximum_batching_window_in_seconds: ?i32,
+    maximum_batching_window_in_seconds: ?i32 = null,
 
     /// The name of the destination queue to consume.
     queue_name: []const u8,

@@ -3,7 +3,7 @@ pub const DisconnectDetails = struct {
     /// Indicates the potential disconnection issues for a call. This field is not
     /// populated if the service does not
     /// detect potential issues.
-    potential_disconnect_issue: ?[]const u8,
+    potential_disconnect_issue: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .potential_disconnect_issue = "PotentialDisconnectIssue",

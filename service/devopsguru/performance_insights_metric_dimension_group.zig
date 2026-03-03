@@ -87,7 +87,7 @@ pub const PerformanceInsightsMetricDimensionGroup = struct {
     ///
     /// * `db.wait_event_type.name` - The name of the event type for which the
     /// backend is waiting (all engines)
-    dimensions: ?[]const []const u8,
+    dimensions: ?[]const []const u8 = null,
 
     /// The name of the dimension group. Its valid values are:
     ///
@@ -116,10 +116,10 @@ pub const PerformanceInsightsMetricDimensionGroup = struct {
     /// backend is waiting (all engines)
     ///
     /// * `db.user` - The user logged in to the database (all engines)
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// The maximum number of items to fetch for this dimension group.
-    limit: ?i32,
+    limit: ?i32 = null,
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",

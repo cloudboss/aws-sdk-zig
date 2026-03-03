@@ -3,14 +3,14 @@ const AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDeta
 /// A value to use for the filter.
 pub const AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails = struct {
     /// Prefix text for matching objects.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// A tag that is assigned to matching objects.
-    tag: ?AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails,
+    tag: ?AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails = null,
 
     /// The type of filter value.
     /// Valid values are `LifecyclePrefixPredicate` or `LifecycleTagPredicate`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .prefix = "Prefix",

@@ -7,24 +7,24 @@ const DirectoryRegistrationStatusReason = @import("directory_registration_status
 pub const DirectoryRegistrationSummary = struct {
     /// The Amazon Resource Name (ARN) that was returned when you called
     /// [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the directory registration was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The identifier of the Active Directory.
-    directory_id: ?[]const u8,
+    directory_id: ?[]const u8 = null,
 
     /// Status of the directory registration.
-    status: ?DirectoryRegistrationStatus,
+    status: ?DirectoryRegistrationStatus = null,
 
     /// Additional information about the directory registration status if the status
     /// is
     /// failed.
-    status_reason: ?DirectoryRegistrationStatusReason,
+    status_reason: ?DirectoryRegistrationStatusReason = null,
 
     /// The date and time that the directory registration was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -9,25 +9,25 @@ pub const ExpenseField = struct {
     /// Shows the kind of currency, both the code and confidence associated with any
     /// monatary value
     /// detected.
-    currency: ?ExpenseCurrency,
+    currency: ?ExpenseCurrency = null,
 
     /// Shows which group a response object belongs to, such as whether an address
     /// line
     /// belongs to the vendor's address or the recipent's address.
-    group_properties: ?[]const ExpenseGroupProperty,
+    group_properties: ?[]const ExpenseGroupProperty = null,
 
     /// The explicitly stated label of a detected element.
-    label_detection: ?ExpenseDetection,
+    label_detection: ?ExpenseDetection = null,
 
     /// The page number the value was detected on.
-    page_number: ?i32,
+    page_number: ?i32 = null,
 
     /// The implied label of a detected element. Present alongside LabelDetection
     /// for explicit elements.
-    @"type": ?ExpenseType,
+    @"type": ?ExpenseType = null,
 
     /// The value of a detected element. Present in explicit and implicit elements.
-    value_detection: ?ExpenseDetection,
+    value_detection: ?ExpenseDetection = null,
 
     pub const json_field_names = .{
         .currency = "Currency",

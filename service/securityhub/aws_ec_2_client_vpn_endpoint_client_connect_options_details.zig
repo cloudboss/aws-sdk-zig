@@ -4,14 +4,14 @@ const AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails = @import("aws_ec
 /// connections.
 pub const AwsEc2ClientVpnEndpointClientConnectOptionsDetails = struct {
     /// Indicates whether client connect options are enabled.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the Lambda function used for connection
     /// authorization.
-    lambda_function_arn: ?[]const u8,
+    lambda_function_arn: ?[]const u8 = null,
 
     /// The status of any updates to the client connect options.
-    status: ?AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails,
+    status: ?AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

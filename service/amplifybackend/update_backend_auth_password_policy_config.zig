@@ -5,11 +5,11 @@ const AdditionalConstraintsElement = @import("additional_constraints_element.zig
 pub const UpdateBackendAuthPasswordPolicyConfig = struct {
     /// Describes additional constraints on password requirements to sign in to the
     /// auth resource, configured as a part of your Amplify project.
-    additional_constraints: ?[]const AdditionalConstraintsElement,
+    additional_constraints: ?[]const AdditionalConstraintsElement = null,
 
     /// Describes the minimum length of the password required to sign in to the auth
     /// resource, configured as a part of your Amplify project.
-    minimum_length: ?f64,
+    minimum_length: ?f64 = null,
 
     pub const json_field_names = .{
         .additional_constraints = "AdditionalConstraints",

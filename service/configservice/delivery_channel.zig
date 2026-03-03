@@ -5,7 +5,7 @@ const ConfigSnapshotDeliveryProperties = @import("config_snapshot_delivery_prope
 pub const DeliveryChannel = struct {
     /// The options for how often Config delivers configuration
     /// snapshots to the Amazon S3 bucket.
-    config_snapshot_delivery_properties: ?ConfigSnapshotDeliveryProperties,
+    config_snapshot_delivery_properties: ?ConfigSnapshotDeliveryProperties = null,
 
     /// The name of the delivery channel. By default, Config
     /// assigns the name "default" when creating the delivery channel. To
@@ -13,7 +13,7 @@ pub const DeliveryChannel = struct {
     /// DeleteDeliveryChannel action to delete your current delivery
     /// channel, and then you must use the PutDeliveryChannel command to
     /// create a delivery channel that has the desired name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The name of the Amazon S3 bucket to which Config delivers
     /// configuration snapshots and configuration history files.
@@ -23,15 +23,15 @@ pub const DeliveryChannel = struct {
     /// more information, see [Permissions for the Amazon S3
     /// Bucket](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html) in the *Config
     /// Developer Guide*.
-    s_3_bucket_name: ?[]const u8,
+    s_3_bucket_name: ?[]const u8 = null,
 
     /// The prefix for the specified Amazon S3 bucket.
-    s_3_key_prefix: ?[]const u8,
+    s_3_key_prefix: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Key Management Service (KMS ) KMS key
     /// (KMS key) used to encrypt objects delivered by Config.
     /// Must belong to the same Region as the destination S3 bucket.
-    s_3_kms_key_arn: ?[]const u8,
+    s_3_kms_key_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon SNS topic to which
     /// Config sends notifications about configuration
@@ -42,7 +42,7 @@ pub const DeliveryChannel = struct {
     /// information, see [Permissions for the Amazon SNS
     /// Topic](https://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html) in the *Config
     /// Developer Guide*.
-    sns_topic_arn: ?[]const u8,
+    sns_topic_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .config_snapshot_delivery_properties = "configSnapshotDeliveryProperties",

@@ -3,25 +3,25 @@ const ModelTypeEnum = @import("model_type_enum.zig").ModelTypeEnum;
 /// The model.
 pub const Model = struct {
     /// The ARN of the model.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Timestamp of when the model was created.
-    created_time: ?[]const u8,
+    created_time: ?[]const u8 = null,
 
     /// The model description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the event type.
-    event_type_name: ?[]const u8,
+    event_type_name: ?[]const u8 = null,
 
     /// Timestamp of last time the model was updated.
-    last_updated_time: ?[]const u8,
+    last_updated_time: ?[]const u8 = null,
 
     /// The model ID.
-    model_id: ?[]const u8,
+    model_id: ?[]const u8 = null,
 
     /// The model type.
-    model_type: ?ModelTypeEnum,
+    model_type: ?ModelTypeEnum = null,
 
     pub const json_field_names = .{
         .arn = "arn",

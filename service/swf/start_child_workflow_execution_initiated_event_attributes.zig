@@ -23,7 +23,7 @@ pub const StartChildWorkflowExecutionInitiatedEventAttributes = struct {
 
     /// Data attached to the event that can be used by the decider in subsequent
     /// decision tasks. This data isn't sent to the activity.
-    control: ?[]const u8,
+    control: ?[]const u8 = null,
 
     /// The ID of the `DecisionTaskCompleted` event corresponding to the decision
     /// task that resulted in the
@@ -39,16 +39,16 @@ pub const StartChildWorkflowExecutionInitiatedEventAttributes = struct {
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    execution_start_to_close_timeout: ?[]const u8,
+    execution_start_to_close_timeout: ?[]const u8 = null,
 
     /// The inputs provided to the child workflow execution.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The IAM role to attach to the child workflow execution.
-    lambda_role: ?[]const u8,
+    lambda_role: ?[]const u8 = null,
 
     /// The list of tags to associated with the child workflow execution.
-    tag_list: ?[]const []const u8,
+    tag_list: ?[]const []const u8 = null,
 
     /// The name of the task list used for the decision tasks of the child workflow
     /// execution.
@@ -61,14 +61,14 @@ pub const StartChildWorkflowExecutionInitiatedEventAttributes = struct {
     ///
     /// For more information about setting task priority, see [Setting Task
     /// Priority](https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html) in the *Amazon SWF Developer Guide*.
-    task_priority: ?[]const u8,
+    task_priority: ?[]const u8 = null,
 
     /// The maximum duration allowed for the decision tasks for this workflow
     /// execution.
     ///
     /// The duration is specified in seconds, an integer greater than or equal to
     /// `0`. You can use `NONE` to specify unlimited duration.
-    task_start_to_close_timeout: ?[]const u8,
+    task_start_to_close_timeout: ?[]const u8 = null,
 
     /// The `workflowId` of the child workflow execution.
     workflow_id: []const u8,

@@ -8,7 +8,7 @@ pub const MethodResponse = struct {
     /// Specifies the Model resources used for the response's content-type. Response
     /// models are represented as a key/value map, with a content-type as the key
     /// and a Model name as the value.
-    response_models: ?[]const aws.map.StringMapEntry,
+    response_models: ?[]const aws.map.StringMapEntry = null,
 
     /// A key-value map specifying required or optional response parameters that API
     /// Gateway can send back to the caller. A key defines a method response header
@@ -24,10 +24,10 @@ pub const MethodResponse = struct {
     /// back-end response payload in the form of
     /// `integration.response.body.{JSON-expression}`, where `JSON-expression` is a
     /// valid JSON expression without the `$` prefix.)
-    response_parameters: ?[]const aws.map.MapEntry(bool),
+    response_parameters: ?[]const aws.map.MapEntry(bool) = null,
 
     /// The method response's status code.
-    status_code: ?[]const u8,
+    status_code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .response_models = "responseModels",

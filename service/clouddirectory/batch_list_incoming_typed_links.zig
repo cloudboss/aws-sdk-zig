@@ -11,18 +11,18 @@ pub const BatchListIncomingTypedLinks = struct {
     /// selection, any inexact ranges must be specified at the end. Any attributes
     /// that do not have a
     /// range specified are presumed to match the entire range.
-    filter_attribute_ranges: ?[]const TypedLinkAttributeRange,
+    filter_attribute_ranges: ?[]const TypedLinkAttributeRange = null,
 
     /// Filters are interpreted in the order of the attributes on the typed link
     /// facet, not the
     /// order in which they are supplied to any API calls.
-    filter_typed_link: ?TypedLinkSchemaAndFacetName,
+    filter_typed_link: ?TypedLinkSchemaAndFacetName = null,
 
     /// The maximum number of results to retrieve.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The pagination token.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The reference that identifies the object whose attributes will be listed.
     object_reference: ObjectReference,

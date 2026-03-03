@@ -8,7 +8,7 @@
 pub const RecordColumn = struct {
     /// A reference to the data element in the streaming input or the reference data
     /// source.
-    mapping: ?[]const u8,
+    mapping: ?[]const u8 = null,
 
     /// The name of the column that is created in the in-application input stream or
     /// reference

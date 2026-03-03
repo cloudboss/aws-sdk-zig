@@ -6,7 +6,7 @@ pub const SearchPrincipalType = struct {
     id: []const u8,
 
     /// The Role of a User or Group.
-    roles: ?[]const PrincipalRoleType,
+    roles: ?[]const PrincipalRoleType = null,
 
     pub const json_field_names = .{
         .id = "Id",

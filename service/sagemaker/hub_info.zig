@@ -9,16 +9,16 @@ pub const HubInfo = struct {
     hub_arn: []const u8,
 
     /// A description of the hub.
-    hub_description: ?[]const u8,
+    hub_description: ?[]const u8 = null,
 
     /// The display name of the hub.
-    hub_display_name: ?[]const u8,
+    hub_display_name: ?[]const u8 = null,
 
     /// The name of the hub.
     hub_name: []const u8,
 
     /// The searchable keywords for the hub.
-    hub_search_keywords: ?[]const []const u8,
+    hub_search_keywords: ?[]const []const u8 = null,
 
     /// The status of the hub.
     hub_status: HubStatus,

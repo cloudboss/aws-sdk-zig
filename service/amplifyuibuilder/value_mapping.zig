@@ -5,7 +5,7 @@ const FormInputValueProperty = @import("form_input_value_property.zig").FormInpu
 /// how to represent complex objects when they are displayed.
 pub const ValueMapping = struct {
     /// The value to display for the complex object.
-    display_value: ?FormInputValueProperty,
+    display_value: ?FormInputValueProperty = null,
 
     /// The complex object.
     value: FormInputValueProperty,

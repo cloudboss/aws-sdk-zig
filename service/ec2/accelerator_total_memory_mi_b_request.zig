@@ -3,10 +3,10 @@ pub const AcceleratorTotalMemoryMiBRequest = struct {
     /// The maximum amount of accelerator memory, in MiB. To specify no maximum
     /// limit, omit this
     /// parameter.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// The minimum amount of accelerator memory, in MiB. To specify no minimum
     /// limit, omit this
     /// parameter.
-    min: ?i32,
+    min: ?i32 = null,
 };

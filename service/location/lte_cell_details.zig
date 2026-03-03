@@ -7,7 +7,7 @@ pub const LteCellDetails = struct {
     cell_id: i32 = 0,
 
     /// The LTE local identification information (local ID).
-    local_id: ?LteLocalId,
+    local_id: ?LteLocalId = null,
 
     /// The Mobile Country Code (MCC).
     mcc: i32,
@@ -16,23 +16,23 @@ pub const LteCellDetails = struct {
     mnc: i32,
 
     /// The network measurements.
-    network_measurements: ?[]const LteNetworkMeasurements,
+    network_measurements: ?[]const LteNetworkMeasurements = null,
 
     /// Indicates whether the LTE object is capable of supporting NR (new radio).
-    nr_capable: ?bool,
+    nr_capable: ?bool = null,
 
     /// Signal power of the reference signal received, measured in
     /// decibel-milliwatts (dBm).
-    rsrp: ?i32,
+    rsrp: ?i32 = null,
 
     /// Signal quality of the reference Signal received, measured in decibels (dB).
-    rsrq: ?f32,
+    rsrq: ?f32 = null,
 
     /// LTE Tracking Area Code (TAC).
-    tac: ?i32,
+    tac: ?i32 = null,
 
     /// Timing Advance (TA).
-    timing_advance: ?i32,
+    timing_advance: ?i32 = null,
 
     pub const json_field_names = .{
         .cell_id = "CellId",

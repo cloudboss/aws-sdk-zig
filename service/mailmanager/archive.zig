@@ -6,7 +6,7 @@ pub const Archive = struct {
     archive_id: []const u8,
 
     /// The unique name assigned to the archive.
-    archive_name: ?[]const u8,
+    archive_name: ?[]const u8 = null,
 
     /// The current state of the archive:
     ///
@@ -14,10 +14,10 @@ pub const Archive = struct {
     /// * `PENDING_DELETION` – The archive has been marked for deletion and will be
     ///   permanently deleted in 30 days. No further modifications can be made in
     ///   this state.
-    archive_state: ?ArchiveState,
+    archive_state: ?ArchiveState = null,
 
     /// The timestamp of when the archive was last updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .archive_id = "ArchiveId",

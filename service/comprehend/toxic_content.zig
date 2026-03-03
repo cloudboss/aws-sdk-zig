@@ -5,11 +5,11 @@ const ToxicContentType = @import("toxic_content_type.zig").ToxicContentType;
 /// detection](https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html) in the *Amazon Comprehend Developer Guide*
 pub const ToxicContent = struct {
     /// The name of the toxic content type.
-    name: ?ToxicContentType,
+    name: ?ToxicContentType = null,
 
     /// Model confidence in the detected content type. Value range is zero to one,
     /// where one is highest confidence.
-    score: ?f32,
+    score: ?f32 = null,
 
     pub const json_field_names = .{
         .name = "Name",

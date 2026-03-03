@@ -5,7 +5,7 @@ const PositionalAccuracy = @import("positional_accuracy.zig").PositionalAccuracy
 /// Contains the position update details for a device.
 pub const DevicePositionUpdate = struct {
     /// The accuracy of the device position.
-    accuracy: ?PositionalAccuracy,
+    accuracy: ?PositionalAccuracy = null,
 
     /// The device associated to the position update.
     device_id: []const u8,
@@ -20,7 +20,7 @@ pub const DevicePositionUpdate = struct {
     /// event the update may trigger.
     ///
     /// Format: `"key" : "value"`
-    position_properties: ?[]const aws.map.StringMapEntry,
+    position_properties: ?[]const aws.map.StringMapEntry = null,
 
     /// The timestamp at which the device's position was determined. Uses [ISO
     /// 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format:

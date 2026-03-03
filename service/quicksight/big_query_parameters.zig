@@ -2,7 +2,7 @@
 /// source.
 pub const BigQueryParameters = struct {
     /// The storage location where you create a Google BigQuery data source.
-    data_set_region: ?[]const u8,
+    data_set_region: ?[]const u8 = null,
 
     /// The Google Cloud Platform project ID where your datasource was created.
     project_id: []const u8,

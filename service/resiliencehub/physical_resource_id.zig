@@ -3,10 +3,10 @@ const PhysicalIdentifierType = @import("physical_identifier_type.zig").PhysicalI
 /// Defines a physical resource identifier.
 pub const PhysicalResourceId = struct {
     /// The Amazon Web Services account that owns the physical resource.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region that the physical resource is located in.
-    aws_region: ?[]const u8,
+    aws_region: ?[]const u8 = null,
 
     /// Identifier of the physical resource.
     identifier: []const u8,

@@ -4,10 +4,10 @@ const CrossRegionDiscoveryStatus = @import("cross_region_discovery_status.zig").
 /// Overall service status information for License Manager.
 pub const ServiceStatus = struct {
     /// Status of cross-account discovery service.
-    cross_account_discovery: ?CrossAccountDiscoveryServiceStatus,
+    cross_account_discovery: ?CrossAccountDiscoveryServiceStatus = null,
 
     /// Status of cross-region discovery service.
-    cross_region_discovery: ?CrossRegionDiscoveryStatus,
+    cross_region_discovery: ?CrossRegionDiscoveryStatus = null,
 
     pub const json_field_names = .{
         .cross_account_discovery = "CrossAccountDiscovery",

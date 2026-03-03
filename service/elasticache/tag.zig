@@ -9,8 +9,8 @@
 /// replication group. A tag with a null Value is permitted.
 pub const Tag = struct {
     /// The key for the tag. May not be null.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The tag's value. May be null.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

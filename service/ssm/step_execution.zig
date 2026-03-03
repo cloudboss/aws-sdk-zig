@@ -11,85 +11,85 @@ const AlarmStateInformation = @import("alarm_state_information.zig").AlarmStateI
 pub const StepExecution = struct {
     /// The action this step performs. The action determines the behavior of the
     /// step.
-    action: ?[]const u8,
+    action: ?[]const u8 = null,
 
     /// If a step has finished execution, this contains the time the execution
     /// ended. If the step
     /// hasn't yet concluded, this field isn't populated.
-    execution_end_time: ?i64,
+    execution_end_time: ?i64 = null,
 
     /// If a step has begun execution, this contains the time the step started. If
     /// the step is in
     /// Pending status, this field isn't populated.
-    execution_start_time: ?i64,
+    execution_start_time: ?i64 = null,
 
     /// Information about the Automation failure.
-    failure_details: ?FailureDetails,
+    failure_details: ?FailureDetails = null,
 
     /// If a step failed, this message explains why the execution failed.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// Fully-resolved values passed into the step before execution.
-    inputs: ?[]const aws.map.StringMapEntry,
+    inputs: ?[]const aws.map.StringMapEntry = null,
 
     /// The flag which can be used to help decide whether the failure of current
     /// step leads to the
     /// Automation failure.
-    is_critical: ?bool,
+    is_critical: ?bool = null,
 
     /// The flag which can be used to end automation no matter whether the step
     /// succeeds or
     /// fails.
-    is_end: ?bool,
+    is_end: ?bool = null,
 
     /// The maximum number of tries to run the action of the step. The default value
     /// is
     /// `1`.
-    max_attempts: ?i32,
+    max_attempts: ?i32 = null,
 
     /// The next step after the step succeeds.
-    next_step: ?[]const u8,
+    next_step: ?[]const u8 = null,
 
     /// The action to take if the step fails. The default value is `Abort`.
-    on_failure: ?[]const u8,
+    on_failure: ?[]const u8 = null,
 
     /// Returned values from the execution of the step.
-    outputs: ?[]const aws.map.MapEntry([]const []const u8),
+    outputs: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// A user-specified list of parameters to override when running a step.
-    overridden_parameters: ?[]const aws.map.MapEntry([]const []const u8),
+    overridden_parameters: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// Information about the parent step.
-    parent_step_details: ?ParentStepDetails,
+    parent_step_details: ?ParentStepDetails = null,
 
     /// A message associated with the response code for an execution.
-    response: ?[]const u8,
+    response: ?[]const u8 = null,
 
     /// The response code returned by the execution of the step.
-    response_code: ?[]const u8,
+    response_code: ?[]const u8 = null,
 
     /// The unique ID of a step execution.
-    step_execution_id: ?[]const u8,
+    step_execution_id: ?[]const u8 = null,
 
     /// The name of this execution step.
-    step_name: ?[]const u8,
+    step_name: ?[]const u8 = null,
 
     /// The execution status for this step.
-    step_status: ?AutomationExecutionStatus,
+    step_status: ?AutomationExecutionStatus = null,
 
     /// The combination of Amazon Web Services Regions and Amazon Web Services
     /// accounts targeted by the current Automation
     /// execution.
-    target_location: ?TargetLocation,
+    target_location: ?TargetLocation = null,
 
     /// The targets for the step execution.
-    targets: ?[]const Target,
+    targets: ?[]const Target = null,
 
     /// The timeout seconds of the step.
-    timeout_seconds: ?i64,
+    timeout_seconds: ?i64 = null,
 
     /// The CloudWatch alarms that were invoked by the automation.
-    triggered_alarms: ?[]const AlarmStateInformation,
+    triggered_alarms: ?[]const AlarmStateInformation = null,
 
     /// Strategies used when step fails, we support Continue and Abort. Abort will
     /// fail the
@@ -98,7 +98,7 @@ pub const StepExecution = struct {
     /// automation to run the next step. With conditional branching, we add
     /// step:stepName to support the
     /// automation to go to another specific step.
-    valid_next_steps: ?[]const []const u8,
+    valid_next_steps: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

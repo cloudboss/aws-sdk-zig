@@ -12,16 +12,16 @@
 /// Guide*.
 pub const CvssScore = struct {
     /// The CVSS base score.
-    base_score: ?f64,
+    base_score: ?f64 = null,
 
     /// The vector string of the CVSS score.
-    scoring_vector: ?[]const u8,
+    scoring_vector: ?[]const u8 = null,
 
     /// The source of the CVSS score.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     /// The CVSS version that generated the score.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .base_score = "baseScore",

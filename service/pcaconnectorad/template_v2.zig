@@ -44,7 +44,7 @@ pub const TemplateV2 = struct {
     subject_name_flags: SubjectNameFlagsV2,
 
     /// List of templates in Active Directory that are superseded by this template.
-    superseded_templates: ?[]const []const u8,
+    superseded_templates: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .certificate_validity = "CertificateValidity",

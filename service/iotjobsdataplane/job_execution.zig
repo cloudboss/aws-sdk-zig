@@ -8,18 +8,18 @@ pub const JobExecution = struct {
     /// will be
     /// changed to `TIMED_OUT`. The actual job execution timeout can occur up to 60
     /// seconds later than the estimated duration.
-    approximate_seconds_before_timed_out: ?i64,
+    approximate_seconds_before_timed_out: ?i64 = null,
 
     /// A number that identifies a particular job execution on a particular device.
     /// It can be
     /// used later in commands that return or update job execution information.
-    execution_number: ?i64,
+    execution_number: ?i64 = null,
 
     /// The content of the job document.
-    job_document: ?[]const u8,
+    job_document: ?[]const u8 = null,
 
     /// The unique identifier you assigned to this job when it was created.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The time, in seconds since the epoch, when the job execution was last
     /// updated.
@@ -29,21 +29,21 @@ pub const JobExecution = struct {
     queued_at: i64 = 0,
 
     /// The time, in seconds since the epoch, when the job execution was started.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     /// The status of the job execution. Can be one of: "QUEUED", "IN_PROGRESS",
     /// "FAILED",
     /// "SUCCESS", "CANCELED", "TIMED_OUT", "REJECTED", or "REMOVED".
-    status: ?JobExecutionStatus,
+    status: ?JobExecutionStatus = null,
 
     /// A collection of name/value pairs that describe the status of the job
     /// execution.
     ///
     /// The maximum length of the value in the name/value pair is 1,024 characters.
-    status_details: ?[]const aws.map.StringMapEntry,
+    status_details: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the thing that is executing the job.
-    thing_name: ?[]const u8,
+    thing_name: ?[]const u8 = null,
 
     /// The version of the job execution. Job execution versions are incremented
     /// each time

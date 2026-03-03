@@ -10,16 +10,16 @@ const AddressType = @import("address_type.zig").AddressType;
 /// exception is thrown.
 pub const Address = struct {
     /// The unique ID for an address.
-    address_id: ?[]const u8,
+    address_id: ?[]const u8 = null,
 
     /// The city in an address that a Snow device is to be delivered to.
-    city: ?[]const u8,
+    city: ?[]const u8 = null,
 
     /// The name of the company to receive a Snow device at an address.
-    company: ?[]const u8,
+    company: ?[]const u8 = null,
 
     /// The country in an address that a Snow device is to be delivered to.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// If the address you are creating is a primary address, then set this option
     /// to
@@ -27,41 +27,41 @@ pub const Address = struct {
     is_restricted: bool = false,
 
     /// This field is no longer used and the value is ignored.
-    landmark: ?[]const u8,
+    landmark: ?[]const u8 = null,
 
     /// The name of a person to receive a Snow device at an address.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The phone number associated with an address that a Snow device is to be
     /// delivered
     /// to.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     /// The postal code in an address that a Snow device is to be delivered to.
-    postal_code: ?[]const u8,
+    postal_code: ?[]const u8 = null,
 
     /// This field is no longer used and the value is ignored.
-    prefecture_or_district: ?[]const u8,
+    prefecture_or_district: ?[]const u8 = null,
 
     /// The state or province in an address that a Snow device is to be delivered
     /// to.
-    state_or_province: ?[]const u8,
+    state_or_province: ?[]const u8 = null,
 
     /// The first line in a street address that a Snow device is to be delivered
     /// to.
-    street_1: ?[]const u8,
+    street_1: ?[]const u8 = null,
 
     /// The second line in a street address that a Snow device is to be delivered
     /// to.
-    street_2: ?[]const u8,
+    street_2: ?[]const u8 = null,
 
     /// The third line in a street address that a Snow device is to be delivered
     /// to.
-    street_3: ?[]const u8,
+    street_3: ?[]const u8 = null,
 
     /// Differentiates between delivery address and pickup address in the customer
     /// account. Provided at job creation.
-    @"type": ?AddressType,
+    @"type": ?AddressType = null,
 
     pub const json_field_names = .{
         .address_id = "AddressId",

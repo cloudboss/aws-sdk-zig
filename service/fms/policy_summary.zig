@@ -18,13 +18,13 @@ pub const PolicySummary = struct {
     delete_unused_fm_managed_resources: bool = false,
 
     /// The Amazon Resource Name (ARN) of the specified policy.
-    policy_arn: ?[]const u8,
+    policy_arn: ?[]const u8 = null,
 
     /// The ID of the specified policy.
-    policy_id: ?[]const u8,
+    policy_id: ?[]const u8 = null,
 
     /// The name of the specified policy.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// Indicates whether the policy is in or out of an admin's policy or Region
     /// scope.
@@ -35,7 +35,7 @@ pub const PolicySummary = struct {
     ///   can't edit or delete the policy. Existing policy protections stay in
     ///   place. Any new resources that come into scope of the policy won't be
     ///   protected.
-    policy_status: ?CustomerPolicyStatus,
+    policy_status: ?CustomerPolicyStatus = null,
 
     /// Indicates if the policy should be automatically applied to new resources.
     remediation_enabled: bool = false,
@@ -44,14 +44,14 @@ pub const PolicySummary = struct {
     /// format shown
     /// in the [Amazon Web Services Resource Types
     /// Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     /// The service that the policy is using to protect the resources. This
     /// specifies the type of
     /// policy that is created, either an WAF policy, a Shield Advanced policy, or a
     /// security
     /// group policy.
-    security_service_type: ?SecurityServiceType,
+    security_service_type: ?SecurityServiceType = null,
 
     pub const json_field_names = .{
         .delete_unused_fm_managed_resources = "DeleteUnusedFMManagedResources",

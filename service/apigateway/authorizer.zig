@@ -7,26 +7,26 @@ pub const Authorizer = struct {
     /// the authorizer. To specify an IAM role for API Gateway to assume, use the
     /// role's Amazon Resource Name (ARN). To use resource-based permissions on the
     /// Lambda function, specify null.
-    authorizer_credentials: ?[]const u8,
+    authorizer_credentials: ?[]const u8 = null,
 
     /// The TTL in seconds of cached authorizer results. If it equals 0,
     /// authorization caching is disabled. If it is greater than 0, API Gateway will
     /// cache authorizer responses. If this field is not set, the default value is
     /// 300. The maximum value is 3600, or 1 hour.
-    authorizer_result_ttl_in_seconds: ?i32,
+    authorizer_result_ttl_in_seconds: ?i32 = null,
 
     /// Specifies the authorizer's Uniform Resource Identifier (URI). For `TOKEN` or
     /// `REQUEST` authorizers, this must be a well-formed Lambda function URI, for
     /// example,
     /// `arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations`. In general, the URI has this form `arn:aws:apigateway:{region}:lambda:path/{service_api}`, where `{region}` is the same as the region hosting the Lambda function, `path` indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial `/`. For Lambda functions, this is usually of the form `/2015-03-31/functions/[FunctionARN]/invocations`.
-    authorizer_uri: ?[]const u8,
+    authorizer_uri: ?[]const u8 = null,
 
     /// Optional customer-defined field, used in OpenAPI imports and exports without
     /// functional impact.
-    auth_type: ?[]const u8,
+    auth_type: ?[]const u8 = null,
 
     /// The identifier for the authorizer resource.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The identity source for which authorization is requested. For a `TOKEN` or
     /// `COGNITO_USER_POOLS` authorizer, this is required and specifies the request
@@ -55,7 +55,7 @@ pub const Authorizer = struct {
     /// comma-separated mapping expressions of the specified request parameters.
     /// When the
     /// authorization caching is not enabled, this property is optional.
-    identity_source: ?[]const u8,
+    identity_source: ?[]const u8 = null,
 
     /// A validation expression for the incoming identity token. For `TOKEN`
     /// authorizers, this value is a regular expression. For `COGNITO_USER_POOLS`
@@ -64,22 +64,22 @@ pub const Authorizer = struct {
     /// authorizer's Lambda function when there is a match. Otherwise, it will
     /// return a 401 Unauthorized response without calling the Lambda function. The
     /// validation expression does not apply to the `REQUEST` authorizer.
-    identity_validation_expression: ?[]const u8,
+    identity_validation_expression: ?[]const u8 = null,
 
     /// The name of the authorizer.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A list of the Amazon Cognito user pool ARNs for the `COGNITO_USER_POOLS`
     /// authorizer. Each element is of this format:
     /// `arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}`. For a
     /// `TOKEN` or `REQUEST` authorizer, this is not defined.
-    provider_ar_ns: ?[]const []const u8,
+    provider_ar_ns: ?[]const []const u8 = null,
 
     /// The authorizer type. Valid values are `TOKEN` for a Lambda function using a
     /// single authorization token submitted in a custom header, `REQUEST` for a
     /// Lambda function using incoming request parameters, and `COGNITO_USER_POOLS`
     /// for using an Amazon Cognito user pool.
-    @"type": ?AuthorizerType,
+    @"type": ?AuthorizerType = null,
 
     pub const json_field_names = .{
         .authorizer_credentials = "authorizerCredentials",

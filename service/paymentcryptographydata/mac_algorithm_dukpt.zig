@@ -7,7 +7,7 @@ pub const MacAlgorithmDukpt = struct {
     /// Serial Number (KSN). This must be less than or equal to the strength of the
     /// BDK. For example, you can't use `AES_128` as a derivation type for a BDK of
     /// `AES_128` or `TDES_2KEY`.
-    dukpt_derivation_type: ?DukptDerivationType,
+    dukpt_derivation_type: ?DukptDerivationType = null,
 
     /// The type of use of DUKPT, which can be MAC generation, MAC verification, or
     /// both.

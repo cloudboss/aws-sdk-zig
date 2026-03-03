@@ -18,8 +18,8 @@ const LaunchTemplateEnaSrdUdpSpecification = @import("launch_template_ena_srd_ud
 /// is enabled, you can specify whether UDP network traffic uses it.
 pub const LaunchTemplateEnaSrdSpecification = struct {
     /// Indicates whether ENA Express is enabled for the network interface.
-    ena_srd_enabled: ?bool,
+    ena_srd_enabled: ?bool = null,
 
     /// Configures ENA Express for UDP network traffic.
-    ena_srd_udp_specification: ?LaunchTemplateEnaSrdUdpSpecification,
+    ena_srd_udp_specification: ?LaunchTemplateEnaSrdUdpSpecification = null,
 };

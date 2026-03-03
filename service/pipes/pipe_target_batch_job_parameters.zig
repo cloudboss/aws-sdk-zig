@@ -11,10 +11,10 @@ pub const PipeTargetBatchJobParameters = struct {
     /// The array size can be between 2 and 10,000.
     /// If you specify array properties for a job, it becomes an array job. This
     /// parameter is used only if the target is an Batch job.
-    array_properties: ?BatchArrayProperties,
+    array_properties: ?BatchArrayProperties = null,
 
     /// The overrides that are sent to a container.
-    container_overrides: ?BatchContainerOverrides,
+    container_overrides: ?BatchContainerOverrides = null,
 
     /// A list of dependencies for the job. A job can depend upon a maximum of 20
     /// jobs. You can
@@ -26,7 +26,7 @@ pub const PipeTargetBatchJobParameters = struct {
     /// each index child of this job must wait for the corresponding index child of
     /// each dependency
     /// to complete before it can begin.
-    depends_on: ?[]const BatchJobDependency,
+    depends_on: ?[]const BatchJobDependency = null,
 
     /// The job definition used by this job. This value can be one of `name`,
     /// `name:revision`, or the Amazon Resource Name (ARN) for the job definition.
@@ -49,12 +49,12 @@ pub const PipeTargetBatchJobParameters = struct {
     /// mapping. Parameters included here override any corresponding parameter
     /// defaults from the
     /// job definition.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The retry strategy to use for failed jobs. When a retry strategy is
     /// specified here, it
     /// overrides the retry strategy defined in the job definition.
-    retry_strategy: ?BatchRetryStrategy,
+    retry_strategy: ?BatchRetryStrategy = null,
 
     pub const json_field_names = .{
         .array_properties = "ArrayProperties",

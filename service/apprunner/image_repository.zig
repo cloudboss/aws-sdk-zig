@@ -4,7 +4,7 @@ const ImageRepositoryType = @import("image_repository_type.zig").ImageRepository
 /// Describes a source image repository.
 pub const ImageRepository = struct {
     /// Configuration for running the identified image.
-    image_configuration: ?ImageConfiguration,
+    image_configuration: ?ImageConfiguration = null,
 
     /// The identifier of an image.
     ///

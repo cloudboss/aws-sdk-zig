@@ -9,14 +9,14 @@ pub const IcebergCompactionConfiguration = struct {
     /// focusing on files that contain a significant number of delete operations,
     /// which can improve query performance by removing deleted records. If an input
     /// is not provided, the default value 1 will be used.
-    delete_file_threshold: ?i32,
+    delete_file_threshold: ?i32 = null,
 
     /// The minimum number of data files that must be present in a partition before
     /// compaction will actually compact files. This parameter helps control when
     /// compaction is triggered, preventing unnecessary compaction operations on
     /// partitions with few files. If an input is not provided, the default value
     /// 100 will be used.
-    min_input_files: ?i32,
+    min_input_files: ?i32 = null,
 
     /// The strategy to use for compaction. Valid values are:
     ///
@@ -40,7 +40,7 @@ pub const IcebergCompactionConfiguration = struct {
     /// `sort_order` table property.
     ///
     /// If an input is not provided, the default value 'binpack' will be used.
-    strategy: ?CompactionStrategy,
+    strategy: ?CompactionStrategy = null,
 
     pub const json_field_names = .{
         .delete_file_threshold = "deleteFileThreshold",

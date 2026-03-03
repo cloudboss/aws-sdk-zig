@@ -29,7 +29,7 @@ pub const PredictiveScalingPredefinedLoadMetricSpecification = struct {
     predefined_metric_type: []const u8,
 
     /// A label that uniquely identifies a target group.
-    resource_label: ?[]const u8,
+    resource_label: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .predefined_metric_type = "PredefinedMetricType",

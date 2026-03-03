@@ -10,11 +10,11 @@ pub const MappingParameters = struct {
     /// Provides additional mapping information when the record format uses
     /// delimiters
     /// (for example, CSV).
-    csv_mapping_parameters: ?CSVMappingParameters,
+    csv_mapping_parameters: ?CSVMappingParameters = null,
 
     /// Provides additional mapping information when JSON is the record format on
     /// the streaming source.
-    json_mapping_parameters: ?JSONMappingParameters,
+    json_mapping_parameters: ?JSONMappingParameters = null,
 
     pub const json_field_names = .{
         .csv_mapping_parameters = "CSVMappingParameters",

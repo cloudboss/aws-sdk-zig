@@ -8,11 +8,11 @@ pub const ReportExportConfig = struct {
     /// * `S3`: The report results are exported to an S3 bucket.
     ///
     /// * `NO_EXPORT`: The report results are not exported.
-    export_config_type: ?ReportExportConfigType,
+    export_config_type: ?ReportExportConfigType = null,
 
     /// A `S3ReportExportConfig` object that contains information about the S3
     /// bucket where the run of a report is exported.
-    s_3_destination: ?S3ReportExportConfig,
+    s_3_destination: ?S3ReportExportConfig = null,
 
     pub const json_field_names = .{
         .export_config_type = "exportConfigType",

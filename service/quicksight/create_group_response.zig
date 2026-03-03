@@ -3,10 +3,10 @@ const Group = @import("group.zig").Group;
 /// The response object for this operation.
 pub const CreateGroupResponse = struct {
     /// The name of the group.
-    group: ?Group,
+    group: ?Group = null,
 
     /// The Amazon Web Services request ID for this operation.
-    request_id: ?[]const u8,
+    request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
     status: i32 = 0,

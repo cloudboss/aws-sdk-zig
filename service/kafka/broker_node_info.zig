@@ -3,23 +3,23 @@ const BrokerSoftwareInfo = @import("broker_software_info.zig").BrokerSoftwareInf
 /// BrokerNodeInfo
 pub const BrokerNodeInfo = struct {
     /// The attached elastic network interface of the broker.
-    attached_eni_id: ?[]const u8,
+    attached_eni_id: ?[]const u8 = null,
 
     /// The ID of the broker.
-    broker_id: ?f64,
+    broker_id: ?f64 = null,
 
     /// The client subnet to which this broker node belongs.
-    client_subnet: ?[]const u8,
+    client_subnet: ?[]const u8 = null,
 
     /// The virtual private cloud (VPC) of the client.
-    client_vpc_ip_address: ?[]const u8,
+    client_vpc_ip_address: ?[]const u8 = null,
 
     /// Information about the version of software currently deployed on the Apache
     /// Kafka brokers in the cluster.
-    current_broker_software_info: ?BrokerSoftwareInfo,
+    current_broker_software_info: ?BrokerSoftwareInfo = null,
 
     /// Endpoints for accessing the broker.
-    endpoints: ?[]const []const u8,
+    endpoints: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .attached_eni_id = "AttachedENIId",

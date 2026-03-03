@@ -11,7 +11,7 @@ pub const BrokerNodeGroupInfo = struct {
     ///
     /// Amazon MSK distributes the broker nodes evenly across the Availability Zones
     /// that correspond to the subnets you provide when you create the cluster.
-    broker_az_distribution: ?BrokerAZDistribution,
+    broker_az_distribution: ?BrokerAZDistribution = null,
 
     /// The list of subnets to connect to in the client virtual private cloud (VPC).
     /// AWS creates elastic network interfaces inside these subnets. Client
@@ -20,7 +20,7 @@ pub const BrokerNodeGroupInfo = struct {
     client_subnets: []const []const u8,
 
     /// Information about the broker access configuration.
-    connectivity_info: ?ConnectivityInfo,
+    connectivity_info: ?ConnectivityInfo = null,
 
     /// The type of Amazon EC2 instances to use for Apache Kafka brokers. The
     /// following instance types are allowed: kafka.m5.large, kafka.m5.xlarge,
@@ -32,13 +32,13 @@ pub const BrokerNodeGroupInfo = struct {
     /// order to specify who can connect to and communicate with the Amazon MSK
     /// cluster. If you don't specify a security group, Amazon MSK uses the default
     /// security group associated with the VPC.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// Contains information about storage volumes attached to MSK broker nodes.
-    storage_info: ?StorageInfo,
+    storage_info: ?StorageInfo = null,
 
     /// The list of zoneIds for the cluster in the virtual private cloud (VPC).
-    zone_ids: ?[]const []const u8,
+    zone_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .broker_az_distribution = "BrokerAZDistribution",

@@ -6,13 +6,13 @@ pub const StepExecutionStatusDetail = struct {
     creation_date_time: i64,
 
     /// The completion date and time of the step.
-    end_date_time: ?i64,
+    end_date_time: ?i64 = null,
 
     /// A description of the step's current state.
-    last_state_change_reason: ?[]const u8,
+    last_state_change_reason: ?[]const u8 = null,
 
     /// The start date and time of the step.
-    start_date_time: ?i64,
+    start_date_time: ?i64 = null,
 
     /// The state of the step.
     state: StepExecutionState,

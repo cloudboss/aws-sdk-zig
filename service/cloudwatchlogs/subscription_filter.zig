@@ -15,36 +15,36 @@ pub const SubscriptionFilter = struct {
     /// The creation time of the subscription filter, expressed as the number of
     /// milliseconds
     /// after `Jan 1, 1970 00:00:00 UTC`.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the destination.
-    destination_arn: ?[]const u8,
+    destination_arn: ?[]const u8 = null,
 
-    distribution: ?Distribution,
+    distribution: ?Distribution = null,
 
     /// The list of system fields that are included in the log events sent to the
     /// subscription
     /// destination. Returns the `emitSystemFields` value if it was specified when
     /// the
     /// subscription filter was created.
-    emit_system_fields: ?[]const []const u8,
+    emit_system_fields: ?[]const []const u8 = null,
 
     /// The filter expression that specifies which log events are processed by this
     /// subscription
     /// filter based on system fields. Returns the `fieldSelectionCriteria` value if
     /// it was
     /// specified when the subscription filter was created.
-    field_selection_criteria: ?[]const u8,
+    field_selection_criteria: ?[]const u8 = null,
 
     /// The name of the subscription filter.
-    filter_name: ?[]const u8,
+    filter_name: ?[]const u8 = null,
 
-    filter_pattern: ?[]const u8,
+    filter_pattern: ?[]const u8 = null,
 
     /// The name of the log group.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .apply_on_transformed_logs = "applyOnTransformedLogs",

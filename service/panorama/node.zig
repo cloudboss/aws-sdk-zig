@@ -10,7 +10,7 @@ pub const Node = struct {
     created_time: i64,
 
     /// The node's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The node's name.
     name: []const u8,
@@ -19,10 +19,10 @@ pub const Node = struct {
     node_id: []const u8,
 
     /// The account ID of the node's owner.
-    owner_account: ?[]const u8,
+    owner_account: ?[]const u8 = null,
 
     /// The node's ARN.
-    package_arn: ?[]const u8,
+    package_arn: ?[]const u8 = null,
 
     /// The node's package ID.
     package_id: []const u8,

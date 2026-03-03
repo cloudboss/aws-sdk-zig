@@ -15,12 +15,12 @@ pub const WorkflowStep = struct {
     /// * An Amazon S3 location for the destination of the file copy.
     /// * A flag that indicates whether to overwrite an existing file of the same
     ///   name. The default is `FALSE`.
-    copy_step_details: ?CopyStepDetails,
+    copy_step_details: ?CopyStepDetails = null,
 
     /// Details for a step that invokes an Lambda function.
     ///
     /// Consists of the Lambda function's name, target, and timeout (in seconds).
-    custom_step_details: ?CustomStepDetails,
+    custom_step_details: ?CustomStepDetails = null,
 
     /// Details for a step that decrypts an encrypted file.
     ///
@@ -34,15 +34,15 @@ pub const WorkflowStep = struct {
     ///   name. The default is `FALSE`.
     /// * The type of encryption that's used. Currently, only PGP encryption is
     ///   supported.
-    decrypt_step_details: ?DecryptStepDetails,
+    decrypt_step_details: ?DecryptStepDetails = null,
 
     /// Details for a step that deletes the file.
-    delete_step_details: ?DeleteStepDetails,
+    delete_step_details: ?DeleteStepDetails = null,
 
     /// Details for a step that creates one or more tags.
     ///
     /// You specify one or more tags. Each tag contains a key-value pair.
-    tag_step_details: ?TagStepDetails,
+    tag_step_details: ?TagStepDetails = null,
 
     /// Currently, the following step types are supported.
     ///
@@ -52,7 +52,7 @@ pub const WorkflowStep = struct {
     ///   uploaded.
     /// * ** `DELETE` ** - Delete the file.
     /// * ** `TAG` ** - Add a tag to the file.
-    @"type": ?WorkflowStepType,
+    @"type": ?WorkflowStepType = null,
 
     pub const json_field_names = .{
         .copy_step_details = "CopyStepDetails",

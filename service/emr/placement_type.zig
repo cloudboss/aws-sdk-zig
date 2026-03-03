@@ -4,7 +4,7 @@ pub const PlacementType = struct {
     /// is used for uniform instance groups, while `AvailabilityZones` (plural) is
     /// used
     /// for instance fleets.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// When multiple Availability Zones are specified, Amazon EMR evaluates them
     /// and
@@ -15,7 +15,7 @@ pub const PlacementType = struct {
     ///
     /// The instance fleet configuration is available only in Amazon EMR releases
     /// 4.8.0 and later, excluding 5.0.x versions.
-    availability_zones: ?[]const []const u8,
+    availability_zones: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .availability_zone = "AvailabilityZone",

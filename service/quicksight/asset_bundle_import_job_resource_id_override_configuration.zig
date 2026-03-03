@@ -6,7 +6,7 @@ pub const AssetBundleImportJobResourceIdOverrideConfiguration = struct {
     /// resource's ID before import. The prefix is only added to the asset IDs and
     /// does not
     /// change the name of the asset.
-    prefix_for_all_resources: ?[]const u8,
+    prefix_for_all_resources: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .prefix_for_all_resources = "PrefixForAllResources",

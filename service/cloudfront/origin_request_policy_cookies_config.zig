@@ -21,5 +21,5 @@ pub const OriginRequestPolicyCookiesConfig = struct {
     ///   `CookieNames` type, which are not included.
     cookie_behavior: OriginRequestPolicyCookieBehavior,
 
-    cookies: ?CookieNames,
+    cookies: ?CookieNames = null,
 };

@@ -4,11 +4,11 @@ const CapabilityIssueCode = @import("capability_issue_code.zig").CapabilityIssue
 pub const CapabilityIssue = struct {
     /// A code identifying the type of issue. This can be used to programmatically
     /// handle specific issue types.
-    code: ?CapabilityIssueCode,
+    code: ?CapabilityIssueCode = null,
 
     /// A human-readable message describing the issue and potential remediation
     /// steps.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

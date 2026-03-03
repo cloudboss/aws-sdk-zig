@@ -6,7 +6,7 @@ pub const AggregationType = struct {
     name: AggregationTypeName,
 
     /// A list of the values of aggregation types.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

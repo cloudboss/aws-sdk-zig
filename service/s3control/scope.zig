@@ -8,9 +8,9 @@ const ScopePermission = @import("scope_permission.zig").ScopePermission;
 /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets-manage-scope.html).
 pub const Scope = struct {
     /// You can include one or more API operations as permissions.
-    permissions: ?[]const ScopePermission,
+    permissions: ?[]const ScopePermission = null,
 
     /// You can specify any amount of prefixes, but the total length of characters
     /// of all prefixes must be less than 256 bytes in size.
-    prefixes: ?[]const []const u8,
+    prefixes: ?[]const []const u8 = null,
 };

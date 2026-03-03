@@ -10,18 +10,18 @@ pub const UserImportJobType = struct {
     /// job. For more information, see "Creating the CloudWatch Logs IAM Role" in
     /// the Amazon Cognito Developer
     /// Guide.
-    cloud_watch_logs_role_arn: ?[]const u8,
+    cloud_watch_logs_role_arn: ?[]const u8 = null,
 
     /// The date when the user import job was completed.
-    completion_date: ?i64,
+    completion_date: ?i64 = null,
 
     /// The message returned when the user import job is completed.
-    completion_message: ?[]const u8,
+    completion_message: ?[]const u8 = null,
 
     /// The date and time when the item was created. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The number of users that couldn't be imported.
     failed_users: i64 = 0,
@@ -30,19 +30,19 @@ pub const UserImportJobType = struct {
     imported_users: i64 = 0,
 
     /// The ID of the user import job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The friendly name of the user import job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The pre-signed URL target for uploading the CSV file.
-    pre_signed_url: ?[]const u8,
+    pre_signed_url: ?[]const u8 = null,
 
     /// The number of users that were skipped.
     skipped_users: i64 = 0,
 
     /// The date when the user import job was started.
-    start_date: ?i64,
+    start_date: ?i64 = null,
 
     /// The status of the user import job. One of the following:
     ///
@@ -68,10 +68,10 @@ pub const UserImportJobType = struct {
     /// 24-48 hours. All data associated with the job was deleted, and the job can't
     /// be
     /// started.
-    status: ?UserImportJobStatusType,
+    status: ?UserImportJobStatusType = null,
 
     /// The ID of the user pool that the users are being imported into.
-    user_pool_id: ?[]const u8,
+    user_pool_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs_role_arn = "CloudWatchLogsRoleArn",

@@ -3,10 +3,10 @@ const AmiProductVisibilityString = @import("ami_product_visibility_string.zig").
 /// Object that contains summarized information about an AMI product.
 pub const AmiProductSummary = struct {
     /// The title of the AMI product.
-    product_title: ?[]const u8,
+    product_title: ?[]const u8 = null,
 
     /// The lifecycle of the AMI product.
-    visibility: ?AmiProductVisibilityString,
+    visibility: ?AmiProductVisibilityString = null,
 
     pub const json_field_names = .{
         .product_title = "ProductTitle",

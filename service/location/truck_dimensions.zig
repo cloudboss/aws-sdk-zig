@@ -10,7 +10,7 @@ pub const TruckDimensions = struct {
     ///
     /// For routes calculated with a HERE resource, this value must be between 0 and
     /// 50 meters.
-    height: ?f64,
+    height: ?f64 = null,
 
     /// The length of the truck.
     ///
@@ -18,12 +18,12 @@ pub const TruckDimensions = struct {
     ///
     /// For routes calculated with a HERE resource, this value must be between 0 and
     /// 300 meters.
-    length: ?f64,
+    length: ?f64 = null,
 
     /// Specifies the unit of measurement for the truck dimensions.
     ///
     /// Default Value: `Meters`
-    unit: ?DimensionUnit,
+    unit: ?DimensionUnit = null,
 
     /// The width of the truck.
     ///
@@ -31,7 +31,7 @@ pub const TruckDimensions = struct {
     ///
     /// For routes calculated with a HERE resource, this value must be between 0 and
     /// 50 meters.
-    width: ?f64,
+    width: ?f64 = null,
 
     pub const json_field_names = .{
         .height = "Height",

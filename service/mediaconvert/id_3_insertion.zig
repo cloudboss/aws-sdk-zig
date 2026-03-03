@@ -4,10 +4,10 @@
 /// create multiple instances of ID3 insertion.
 pub const Id3Insertion = struct {
     /// Use ID3 tag to provide a fully formed ID3 tag in base64-encode format.
-    id_3: ?[]const u8,
+    id_3: ?[]const u8 = null,
 
     /// Provide a Timecode in HH:MM:SS:FF or HH:MM:SS;FF format.
-    timecode: ?[]const u8,
+    timecode: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id_3 = "Id3",

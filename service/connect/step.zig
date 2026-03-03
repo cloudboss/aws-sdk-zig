@@ -5,13 +5,13 @@ const RoutingCriteriaStepStatus = @import("routing_criteria_step_status.zig").Ro
 /// Step signifies the criteria to be used for routing to an agent
 pub const Step = struct {
     /// An object to specify the expiration of a routing step.
-    expiry: ?Expiry,
+    expiry: ?Expiry = null,
 
     /// A tagged union to specify expression for a routing step.
-    expression: ?Expression,
+    expression: ?Expression = null,
 
     /// Represents status of the Routing step.
-    status: ?RoutingCriteriaStepStatus,
+    status: ?RoutingCriteriaStepStatus = null,
 
     pub const json_field_names = .{
         .expiry = "Expiry",

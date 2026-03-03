@@ -26,9 +26,9 @@ pub const LaunchTemplateCapacityReservationSpecificationRequest = struct {
     ///
     /// * `none` - The instance avoids running in a Capacity Reservation even
     /// if one is available. The instance runs in On-Demand capacity.
-    capacity_reservation_preference: ?CapacityReservationPreference,
+    capacity_reservation_preference: ?CapacityReservationPreference = null,
 
     /// Information about the target Capacity Reservation or Capacity Reservation
     /// group.
-    capacity_reservation_target: ?CapacityReservationTarget,
+    capacity_reservation_target: ?CapacityReservationTarget = null,
 };

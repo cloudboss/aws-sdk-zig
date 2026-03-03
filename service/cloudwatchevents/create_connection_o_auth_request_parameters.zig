@@ -19,7 +19,7 @@ pub const CreateConnectionOAuthRequestParameters = struct {
     /// A `ConnectionHttpParameters` object that contains details about the
     /// additional
     /// parameters to use for the connection.
-    o_auth_http_parameters: ?ConnectionHttpParameters,
+    o_auth_http_parameters: ?ConnectionHttpParameters = null,
 
     pub const json_field_names = .{
         .authorization_endpoint = "AuthorizationEndpoint",

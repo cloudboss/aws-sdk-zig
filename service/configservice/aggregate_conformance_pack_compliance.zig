@@ -16,7 +16,7 @@ const ConformancePackComplianceType = @import("conformance_pack_compliance_type.
 /// the conformance pack shows compliant.
 pub const AggregateConformancePackCompliance = struct {
     /// The compliance status of the conformance pack.
-    compliance_type: ?ConformancePackComplianceType,
+    compliance_type: ?ConformancePackComplianceType = null,
 
     /// The number of compliant Config Rules.
     compliant_rule_count: i32 = 0,

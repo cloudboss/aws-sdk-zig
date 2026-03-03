@@ -23,7 +23,7 @@ pub const OnDemandProvisioningSpecification = struct {
     /// The launch specification for On-Demand instances in the instance fleet,
     /// which determines
     /// the allocation strategy.
-    capacity_reservation_options: ?OnDemandCapacityReservationOptions,
+    capacity_reservation_options: ?OnDemandCapacityReservationOptions = null,
 
     pub const json_field_names = .{
         .allocation_strategy = "AllocationStrategy",

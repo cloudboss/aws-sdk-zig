@@ -1,17 +1,17 @@
 /// A table that points to an entity outside the Glue Data Catalog.
 pub const FederatedTable = struct {
     /// The name of the connection to the external metastore.
-    connection_name: ?[]const u8,
+    connection_name: ?[]const u8 = null,
 
     /// The type of connection used to access the federated table, specifying the
     /// protocol or method for connecting to the external data source.
-    connection_type: ?[]const u8,
+    connection_type: ?[]const u8 = null,
 
     /// A unique identifier for the federated database.
-    database_identifier: ?[]const u8,
+    database_identifier: ?[]const u8 = null,
 
     /// A unique identifier for the federated table.
-    identifier: ?[]const u8,
+    identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connection_name = "ConnectionName",

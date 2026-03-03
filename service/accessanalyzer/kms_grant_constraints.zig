@@ -6,12 +6,12 @@ pub const KmsGrantConstraints = struct {
     /// A list of key-value pairs that must match the encryption context in the
     /// [cryptographic
     /// operation](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations) request. The grant allows the operation only when the encryption context in the request is the same as the encryption context specified in this constraint.
-    encryption_context_equals: ?[]const aws.map.StringMapEntry,
+    encryption_context_equals: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of key-value pairs that must be included in the encryption context of
     /// the [cryptographic
     /// operation](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations) request. The grant allows the cryptographic operation only when the encryption context in the request includes the key-value pairs specified in this constraint, although it can include additional key-value pairs.
-    encryption_context_subset: ?[]const aws.map.StringMapEntry,
+    encryption_context_subset: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .encryption_context_equals = "encryptionContextEquals",

@@ -15,7 +15,7 @@ pub const ContentRedaction = struct {
     /// select
     /// `ALL`. If you do not include `PiiEntityTypes` in your request, all PII is
     /// redacted.
-    pii_entity_types: ?[]const PiiEntityType,
+    pii_entity_types: ?[]const PiiEntityType = null,
 
     /// Specify if you want only a redacted transcript, or if you want a redacted
     /// and an

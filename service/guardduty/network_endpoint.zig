@@ -6,25 +6,25 @@ const NetworkGeoLocation = @import("network_geo_location.zig").NetworkGeoLocatio
 /// attack sequence.
 pub const NetworkEndpoint = struct {
     /// The Autonomous System (AS) of the network endpoint.
-    autonomous_system: ?AutonomousSystem,
+    autonomous_system: ?AutonomousSystem = null,
 
     /// Information about the network connection.
-    connection: ?NetworkConnection,
+    connection: ?NetworkConnection = null,
 
     /// The domain information for the network endpoint.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// The ID of the network endpoint.
     id: []const u8,
 
     /// The IP address associated with the network endpoint.
-    ip: ?[]const u8,
+    ip: ?[]const u8 = null,
 
     /// Information about the location of the network endpoint.
-    location: ?NetworkGeoLocation,
+    location: ?NetworkGeoLocation = null,
 
     /// The port number associated with the network endpoint.
-    port: ?i32,
+    port: ?i32 = null,
 
     pub const json_field_names = .{
         .autonomous_system = "AutonomousSystem",

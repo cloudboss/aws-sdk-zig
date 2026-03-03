@@ -4,10 +4,10 @@
 pub const ShotSegment = struct {
     /// The confidence that Amazon Rekognition Video has in the accuracy of the
     /// detected segment.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// An Identifier for a shot detection segment detected in a video.
-    index: ?i64,
+    index: ?i64 = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",

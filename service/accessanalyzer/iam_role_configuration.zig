@@ -9,7 +9,7 @@
 /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html).
 pub const IamRoleConfiguration = struct {
     /// The proposed trust policy for the IAM role.
-    trust_policy: ?[]const u8,
+    trust_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .trust_policy = "trustPolicy",

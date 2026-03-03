@@ -7,7 +7,7 @@ pub const MediaAnalysisOutputConfig = struct {
     /// Specifies the Amazon S3 key prefix that comes after the name of the bucket
     /// you have
     /// designated for storage.
-    s3_key_prefix: ?[]const u8,
+    s3_key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s3_bucket = "S3Bucket",

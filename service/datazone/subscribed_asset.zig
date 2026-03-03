@@ -12,27 +12,27 @@ pub const SubscribedAsset = struct {
     asset_revision: []const u8,
 
     /// The asset scope of the subscribed asset.
-    asset_scope: ?AssetScope,
+    asset_scope: ?AssetScope = null,
 
     /// The failure cause included in the details of the asset for which the
     /// subscription grant is created.
-    failure_cause: ?FailureCause,
+    failure_cause: ?FailureCause = null,
 
     /// The failure timestamp included in the details of the asset for which the
     /// subscription grant is created.
-    failure_timestamp: ?i64,
+    failure_timestamp: ?i64 = null,
 
     /// The timestamp of when the subscription grant to the asset is created.
-    granted_timestamp: ?i64,
+    granted_timestamp: ?i64 = null,
 
     /// The asset permissions.
-    permissions: ?Permissions,
+    permissions: ?Permissions = null,
 
     /// The status of the asset for which the subscription grant is created.
     status: SubscriptionGrantStatus,
 
     /// The target name of the asset for which the subscription grant is created.
-    target_name: ?[]const u8,
+    target_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .asset_id = "assetId",

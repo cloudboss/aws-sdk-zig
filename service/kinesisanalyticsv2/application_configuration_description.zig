@@ -14,41 +14,41 @@ const ZeppelinApplicationConfigurationDescription = @import("zeppelin_applicatio
 pub const ApplicationConfigurationDescription = struct {
     /// The details about the application code for a Managed Service for Apache
     /// Flink application.
-    application_code_configuration_description: ?ApplicationCodeConfigurationDescription,
+    application_code_configuration_description: ?ApplicationCodeConfigurationDescription = null,
 
     /// Describes the encryption at rest configuration.
-    application_encryption_configuration_description: ?ApplicationEncryptionConfigurationDescription,
+    application_encryption_configuration_description: ?ApplicationEncryptionConfigurationDescription = null,
 
     /// Describes whether snapshots are enabled for a Managed Service for Apache
     /// Flink application.
-    application_snapshot_configuration_description: ?ApplicationSnapshotConfigurationDescription,
+    application_snapshot_configuration_description: ?ApplicationSnapshotConfigurationDescription = null,
 
     /// Describes whether system rollbacks are enabled for a Managed Service for
     /// Apache Flink application.
-    application_system_rollback_configuration_description: ?ApplicationSystemRollbackConfigurationDescription,
+    application_system_rollback_configuration_description: ?ApplicationSystemRollbackConfigurationDescription = null,
 
     /// Describes execution properties for a Managed Service for Apache Flink
     /// application.
-    environment_property_descriptions: ?EnvironmentPropertyDescriptions,
+    environment_property_descriptions: ?EnvironmentPropertyDescriptions = null,
 
     /// The details about a Managed Service for Apache Flink application.
-    flink_application_configuration_description: ?FlinkApplicationConfigurationDescription,
+    flink_application_configuration_description: ?FlinkApplicationConfigurationDescription = null,
 
     /// The details about the starting properties for a Managed Service for Apache
     /// Flink application.
-    run_configuration_description: ?RunConfigurationDescription,
+    run_configuration_description: ?RunConfigurationDescription = null,
 
     /// The details about inputs, outputs, and reference data sources for a
     /// SQL-based Kinesis Data Analytics application.
-    sql_application_configuration_description: ?SqlApplicationConfigurationDescription,
+    sql_application_configuration_description: ?SqlApplicationConfigurationDescription = null,
 
     /// The array of descriptions of VPC configurations available to the
     /// application.
-    vpc_configuration_descriptions: ?[]const VpcConfigurationDescription,
+    vpc_configuration_descriptions: ?[]const VpcConfigurationDescription = null,
 
     /// The configuration parameters for a Managed Service for Apache Flink Studio
     /// notebook.
-    zeppelin_application_configuration_description: ?ZeppelinApplicationConfigurationDescription,
+    zeppelin_application_configuration_description: ?ZeppelinApplicationConfigurationDescription = null,
 
     pub const json_field_names = .{
         .application_code_configuration_description = "ApplicationCodeConfigurationDescription",

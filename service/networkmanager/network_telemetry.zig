@@ -3,31 +3,31 @@ const ConnectionHealth = @import("connection_health.zig").ConnectionHealth;
 /// Describes the telemetry information for a resource.
 pub const NetworkTelemetry = struct {
     /// The Amazon Web Services account ID.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The address.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// The Amazon Web Services Region.
-    aws_region: ?[]const u8,
+    aws_region: ?[]const u8 = null,
 
     /// The ID of a core network.
-    core_network_id: ?[]const u8,
+    core_network_id: ?[]const u8 = null,
 
     /// The connection health.
-    health: ?ConnectionHealth,
+    health: ?ConnectionHealth = null,
 
     /// The ARN of the gateway.
-    registered_gateway_arn: ?[]const u8,
+    registered_gateway_arn: ?[]const u8 = null,
 
     /// The ARN of the resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The ID of the resource.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The resource type.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

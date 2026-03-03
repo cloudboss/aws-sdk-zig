@@ -13,13 +13,13 @@ pub const MatchItem = struct {
     /// reject). Given confidence scores vary as per the data input, it should not
     /// be used an
     /// absolute measure of matching quality.
-    confidence_score: ?f64,
+    confidence_score: ?f64 = null,
 
     /// The unique identifiers for this group of profiles that match.
-    match_id: ?[]const u8,
+    match_id: ?[]const u8 = null,
 
     /// A list of identifiers for profiles that match.
-    profile_ids: ?[]const []const u8,
+    profile_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .confidence_score = "ConfidenceScore",

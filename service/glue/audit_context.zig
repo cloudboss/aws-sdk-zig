@@ -1,13 +1,13 @@
 /// A structure containing the Lake Formation audit context.
 pub const AuditContext = struct {
     /// A string containing the additional audit context information.
-    additional_audit_context: ?[]const u8,
+    additional_audit_context: ?[]const u8 = null,
 
     /// All columns request for audit.
-    all_columns_requested: ?bool,
+    all_columns_requested: ?bool = null,
 
     /// The requested columns for audit.
-    requested_columns: ?[]const []const u8,
+    requested_columns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .additional_audit_context = "AdditionalAuditContext",

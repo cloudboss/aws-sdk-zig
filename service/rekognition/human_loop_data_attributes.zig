@@ -5,7 +5,7 @@ const ContentClassifier = @import("content_classifier.zig").ContentClassifier;
 /// personally identifiable information.
 pub const HumanLoopDataAttributes = struct {
     /// Sets whether the input image is free of personally identifiable information.
-    content_classifiers: ?[]const ContentClassifier,
+    content_classifiers: ?[]const ContentClassifier = null,
 
     pub const json_field_names = .{
         .content_classifiers = "ContentClassifiers",

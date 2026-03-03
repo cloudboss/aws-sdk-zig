@@ -22,7 +22,7 @@ pub const FieldToMatch = struct {
     /// sensitive.
     ///
     /// If the value of `Type` is any other value, omit `Data`.
-    data: ?[]const u8,
+    data: ?[]const u8 = null,
 
     /// The part of the web request that you want AWS WAF to search for a specified
     /// string. Parts of a request that you can search include the following:

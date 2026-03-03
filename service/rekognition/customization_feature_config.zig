@@ -6,7 +6,7 @@ const CustomizationFeatureContentModerationConfig = @import("customization_featu
 /// and feature type do not match an InvalidParameterException is returned.
 pub const CustomizationFeatureConfig = struct {
     /// Configuration options for Custom Moderation training.
-    content_moderation: ?CustomizationFeatureContentModerationConfig,
+    content_moderation: ?CustomizationFeatureContentModerationConfig = null,
 
     pub const json_field_names = .{
         .content_moderation = "ContentModeration",

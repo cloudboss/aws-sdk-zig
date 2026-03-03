@@ -12,36 +12,36 @@ const SearchableSegmentAttributes = @import("searchable_segment_attributes.zig")
 /// A structure of search criteria to be used to return contacts.
 pub const SearchCriteria = struct {
     /// The list of active regions for contacts in ACGR instances.
-    active_regions: ?[]const []const u8,
+    active_regions: ?[]const []const u8 = null,
 
     /// Additional TimeRange used to filter contacts.
-    additional_time_range: ?SearchContactsAdditionalTimeRange,
+    additional_time_range: ?SearchContactsAdditionalTimeRange = null,
 
     /// The agent hierarchy groups of the agent at the time of handling the contact.
-    agent_hierarchy_groups: ?AgentHierarchyGroups,
+    agent_hierarchy_groups: ?AgentHierarchyGroups = null,
 
     /// The identifiers of agents who handled the contacts.
-    agent_ids: ?[]const []const u8,
+    agent_ids: ?[]const []const u8 = null,
 
     /// The list of channels associated with contacts.
-    channels: ?[]const Channel,
+    channels: ?[]const Channel = null,
 
     /// Search criteria based on analysis outputs from Amazon Connect Contact Lens.
-    contact_analysis: ?ContactAnalysis,
+    contact_analysis: ?ContactAnalysis = null,
 
-    contact_tags: ?ControlPlaneTagFilter,
+    contact_tags: ?ControlPlaneTagFilter = null,
 
     /// The list of initiation methods associated with contacts.
-    initiation_methods: ?[]const ContactInitiationMethod,
+    initiation_methods: ?[]const ContactInitiationMethod = null,
 
     /// Name of the contact.
-    name: ?NameCriteria,
+    name: ?NameCriteria = null,
 
     /// The list of queue IDs associated with contacts.
-    queue_ids: ?[]const []const u8,
+    queue_ids: ?[]const []const u8 = null,
 
     /// Routing criteria for the contact.
-    routing_criteria: ?SearchableRoutingCriteria,
+    routing_criteria: ?SearchableRoutingCriteria = null,
 
     /// The search criteria based on user-defined contact attributes that have been
     /// configured for contact search. For
@@ -54,10 +54,10 @@ pub const SearchCriteria = struct {
     /// action is required to perform an API request. For more information, see
     /// [https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions)Actions
     /// defined by Amazon Connect.
-    searchable_contact_attributes: ?SearchableContactAttributes,
+    searchable_contact_attributes: ?SearchableContactAttributes = null,
 
     /// The search criteria based on searchable segment attributes of a contact.
-    searchable_segment_attributes: ?SearchableSegmentAttributes,
+    searchable_segment_attributes: ?SearchableSegmentAttributes = null,
 
     pub const json_field_names = .{
         .active_regions = "ActiveRegions",

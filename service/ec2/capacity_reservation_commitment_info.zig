@@ -4,10 +4,10 @@ pub const CapacityReservationCommitmentInfo = struct {
     /// format in
     /// the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`). You can't decrease the
     /// instance count or cancel the Capacity Reservation before this date and time.
-    commitment_end_date: ?i64,
+    commitment_end_date: ?i64 = null,
 
     /// The instance capacity that you committed to when you requested the
     /// future-dated
     /// Capacity Reservation.
-    committed_instance_count: ?i32,
+    committed_instance_count: ?i32 = null,
 };

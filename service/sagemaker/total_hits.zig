@@ -14,11 +14,11 @@ pub const TotalHits = struct {
     /// * `EqualTo`: The `Value` is the exact count of matching results.
     /// * `GreaterThanOrEqualTo`: The `Value` is a lower bound of the actual count
     ///   of matching results.
-    relation: ?Relation,
+    relation: ?Relation = null,
 
     /// The total number of matching results. This value may be exact or an
     /// estimate, depending on the `Relation` field.
-    value: ?i64,
+    value: ?i64 = null,
 
     pub const json_field_names = .{
         .relation = "Relation",

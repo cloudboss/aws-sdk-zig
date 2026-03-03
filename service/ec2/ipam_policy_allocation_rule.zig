@@ -8,5 +8,5 @@ pub const IpamPolicyAllocationRule = struct {
     ///
     /// An IPAM pool is a collection of IP addresses in IPAM that can be allocated
     /// to Amazon Web Services resources.
-    source_ipam_pool_id: ?[]const u8,
+    source_ipam_pool_id: ?[]const u8 = null,
 };

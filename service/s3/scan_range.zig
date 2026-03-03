@@ -13,7 +13,7 @@ pub const ScanRange = struct {
     /// the file. For example,
     /// `50` means scan the last 50
     /// bytes.
-    end: ?i64,
+    end: ?i64 = null,
 
     /// Specifies the start of the byte range. This parameter is optional. Valid
     /// values: non-negative
@@ -22,5 +22,5 @@ pub const ScanRange = struct {
     /// to the end of the file. For example,
     /// `50` means scan from byte 50
     /// until the end of the file.
-    start: ?i64,
+    start: ?i64 = null,
 };

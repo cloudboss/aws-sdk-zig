@@ -21,29 +21,29 @@ pub const KafkaSettings = struct {
     /// Kafka as a target for Database Migration
     /// Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html) in the *Database Migration Service User
     /// Guide*.
-    broker: ?[]const u8,
+    broker: ?[]const u8 = null,
 
     /// Shows detailed control information for table definition, column definition,
     /// and table
     /// and column changes in the Kafka message output. The default is `false`.
-    include_control_details: ?bool,
+    include_control_details: ?bool = null,
 
     /// Include NULL and empty columns for records migrated to the endpoint. The
     /// default is
     /// `false`.
-    include_null_and_empty: ?bool,
+    include_null_and_empty: ?bool = null,
 
     /// Shows the partition value within the Kafka message output unless the
     /// partition type is
     /// `schema-table-type`. The default is `false`.
-    include_partition_value: ?bool,
+    include_partition_value: ?bool = null,
 
     /// Includes any data definition language (DDL) operations that change the table
     /// in the
     /// control data, such as `rename-table`, `drop-table`,
     /// `add-column`, `drop-column`, and `rename-column`. The
     /// default is `false`.
-    include_table_alter_operations: ?bool,
+    include_table_alter_operations: ?bool = null,
 
     /// Provides detailed transaction information from the source database. This
     /// information
@@ -51,17 +51,17 @@ pub const KafkaSettings = struct {
     /// `transaction_id`,
     /// previous `transaction_id`, and `transaction_record_id` (the record
     /// offset within a transaction). The default is `false`.
-    include_transaction_details: ?bool,
+    include_transaction_details: ?bool = null,
 
     /// The output format for the records created on the endpoint. The message
     /// format is
     /// `JSON` (default) or `JSON_UNFORMATTED` (a single line with no
     /// tab).
-    message_format: ?MessageFormatValue,
+    message_format: ?MessageFormatValue = null,
 
     /// The maximum size in bytes for records created on the endpoint The default is
     /// 1,000,000.
-    message_max_bytes: ?i32,
+    message_max_bytes: ?i32 = null,
 
     /// Set this optional parameter to `true` to avoid adding a '0x' prefix
     /// to raw data in hexadecimal format. For example, by default, DMS adds a '0x'
@@ -70,7 +70,7 @@ pub const KafkaSettings = struct {
     /// target. Use the `NoHexPrefix` endpoint setting to enable migration of RAW
     /// data
     /// type columns without adding the '0x' prefix.
-    no_hex_prefix: ?bool,
+    no_hex_prefix: ?bool = null,
 
     /// Prefixes schema and table names to partition values, when the partition type
     /// is
@@ -82,65 +82,65 @@ pub const KafkaSettings = struct {
     /// from thousands of tables to the same partition, which causes throttling. The
     /// default is
     /// `false`.
-    partition_include_schema_table: ?bool,
+    partition_include_schema_table: ?bool = null,
 
     /// For SASL/SSL authentication, DMS supports the `SCRAM-SHA-512` mechanism by
     /// default. DMS versions 3.5.0 and later also support the `PLAIN` mechanism. To
     /// use the `PLAIN` mechanism, set this parameter to `PLAIN.`
-    sasl_mechanism: ?KafkaSaslMechanism,
+    sasl_mechanism: ?KafkaSaslMechanism = null,
 
     /// The secure password you created when you first set up your MSK cluster to
     /// validate a
     /// client identity and make an encrypted connection between server and client
     /// using SASL-SSL
     /// authentication.
-    sasl_password: ?[]const u8,
+    sasl_password: ?[]const u8 = null,
 
     /// The secure user name you created when you first set up your MSK cluster to
     /// validate a
     /// client identity and make an encrypted connection between server and client
     /// using SASL-SSL
     /// authentication.
-    sasl_username: ?[]const u8,
+    sasl_username: ?[]const u8 = null,
 
     /// Set secure connection to a Kafka target endpoint using Transport Layer
     /// Security (TLS).
     /// Options include `ssl-encryption`, `ssl-authentication`, and
     /// `sasl-ssl`. `sasl-ssl` requires `SaslUsername` and
     /// `SaslPassword`.
-    security_protocol: ?KafkaSecurityProtocol,
+    security_protocol: ?KafkaSecurityProtocol = null,
 
     /// The Amazon Resource Name (ARN) for the private certificate authority (CA)
     /// cert that
     /// DMS uses to securely connect to your Kafka target endpoint.
-    ssl_ca_certificate_arn: ?[]const u8,
+    ssl_ca_certificate_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the client certificate used to securely
     /// connect to a
     /// Kafka target endpoint.
-    ssl_client_certificate_arn: ?[]const u8,
+    ssl_client_certificate_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) for the client private key used to securely
     /// connect to a
     /// Kafka target endpoint.
-    ssl_client_key_arn: ?[]const u8,
+    ssl_client_key_arn: ?[]const u8 = null,
 
     /// The password for the client private key used to securely connect to a Kafka
     /// target
     /// endpoint.
-    ssl_client_key_password: ?[]const u8,
+    ssl_client_key_password: ?[]const u8 = null,
 
     /// Sets hostname verification for the certificate. This setting is supported in
     /// DMS
     /// version 3.5.1 and later.
-    ssl_endpoint_identification_algorithm: ?KafkaSslEndpointIdentificationAlgorithm,
+    ssl_endpoint_identification_algorithm: ?KafkaSslEndpointIdentificationAlgorithm = null,
 
     /// The topic to which you migrate the data. If you don't specify a topic, DMS
     /// specifies `"kafka-default-topic"` as the migration topic.
-    topic: ?[]const u8,
+    topic: ?[]const u8 = null,
 
     /// Specifies using the large integer value with Kafka.
-    use_large_integer_value: ?bool,
+    use_large_integer_value: ?bool = null,
 
     pub const json_field_names = .{
         .broker = "Broker",

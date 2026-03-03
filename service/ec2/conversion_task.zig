@@ -6,27 +6,27 @@ const Tag = @import("tag.zig").Tag;
 /// Describes a conversion task.
 pub const ConversionTask = struct {
     /// The ID of the conversion task.
-    conversion_task_id: ?[]const u8,
+    conversion_task_id: ?[]const u8 = null,
 
     /// The time when the task expires. If the upload isn't complete before the
     /// expiration time, we automatically cancel
     /// the task.
-    expiration_time: ?[]const u8,
+    expiration_time: ?[]const u8 = null,
 
     /// If the task is for importing an instance, this contains information about
     /// the import instance task.
-    import_instance: ?ImportInstanceTaskDetails,
+    import_instance: ?ImportInstanceTaskDetails = null,
 
     /// If the task is for importing a volume, this contains information about the
     /// import volume task.
-    import_volume: ?ImportVolumeTaskDetails,
+    import_volume: ?ImportVolumeTaskDetails = null,
 
     /// The state of the conversion task.
-    state: ?ConversionTaskState,
+    state: ?ConversionTaskState = null,
 
     /// The status message related to the conversion task.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// Any tags assigned to the task.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

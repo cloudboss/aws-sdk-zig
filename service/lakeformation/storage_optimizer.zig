@@ -6,7 +6,7 @@ const OptimizerType = @import("optimizer_type.zig").OptimizerType;
 pub const StorageOptimizer = struct {
     /// A map of the storage optimizer configuration. Currently contains only one
     /// key-value pair: `is_enabled` indicates true or false for acceleration.
-    config: ?[]const aws.map.StringMapEntry,
+    config: ?[]const aws.map.StringMapEntry = null,
 
     /// A message that contains information about any error (if present).
     ///
@@ -15,17 +15,17 @@ pub const StorageOptimizer = struct {
     ///
     /// When an acceleration result has a disabled status, the message describes an
     /// error or simply indicates "disabled by the user".
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// When an acceleration result has an enabled status, contains the details of
     /// the last job run.
-    last_run_details: ?[]const u8,
+    last_run_details: ?[]const u8 = null,
 
     /// The specific type of storage optimizer. The supported value is `compaction`.
-    storage_optimizer_type: ?OptimizerType,
+    storage_optimizer_type: ?OptimizerType = null,
 
     /// A message that contains information about any warnings (if present).
-    warnings: ?[]const u8,
+    warnings: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .config = "Config",

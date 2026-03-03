@@ -4,20 +4,20 @@ const PluginProperties = @import("plugin_properties.zig").PluginProperties;
 /// Details about a package version.
 pub const PackageVersionHistory = struct {
     /// A message associated with the package version when it was uploaded.
-    commit_message: ?[]const u8,
+    commit_message: ?[]const u8 = null,
 
     /// The date and time when the package was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The configuration details for a specific version of a package.
-    package_configuration: ?PackageConfiguration,
+    package_configuration: ?PackageConfiguration = null,
 
     /// The package version.
-    package_version: ?[]const u8,
+    package_version: ?[]const u8 = null,
 
     /// Additional information about plugin properties if the package is a
     /// `ZIP-PLUGIN` package.
-    plugin_properties: ?PluginProperties,
+    plugin_properties: ?PluginProperties = null,
 
     pub const json_field_names = .{
         .commit_message = "CommitMessage",

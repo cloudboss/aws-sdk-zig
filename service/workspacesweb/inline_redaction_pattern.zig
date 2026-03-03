@@ -5,7 +5,7 @@ const RedactionPlaceHolder = @import("redaction_place_holder.zig").RedactionPlac
 pub const InlineRedactionPattern = struct {
     /// The built-in pattern from the list of preconfigured patterns. Either a
     /// customPattern or builtInPatternId is required.
-    built_in_pattern_id: ?[]const u8,
+    built_in_pattern_id: ?[]const u8 = null,
 
     /// The confidence level for inline redaction pattern. This indicates the
     /// certainty of data type matches in the redaction process. Confidence level 3
@@ -15,20 +15,20 @@ pub const InlineRedactionPattern = struct {
     /// associate to the logic. Confidence level 1 means low confidence, and
     /// redaction is enforced for both formatted pattern + unformatted pattern
     /// without keyword. This overrides the global confidence level.
-    confidence_level: ?i32,
+    confidence_level: ?i32 = null,
 
     /// >The configuration for a custom pattern. Either a customPattern or
     /// builtInPatternId is required.
-    custom_pattern: ?CustomPattern,
+    custom_pattern: ?CustomPattern = null,
 
     /// The enforced URL configuration for the inline redaction pattern. This will
     /// override the global enforced URL configuration.
-    enforced_urls: ?[]const []const u8,
+    enforced_urls: ?[]const []const u8 = null,
 
     /// The exempt URL configuration for the inline redaction pattern. This will
     /// override the global exempt URL configuration for the inline redaction
     /// pattern.
-    exempt_urls: ?[]const []const u8,
+    exempt_urls: ?[]const []const u8 = null,
 
     /// The redaction placeholder that will replace the redacted text in session for
     /// the inline redaction pattern.

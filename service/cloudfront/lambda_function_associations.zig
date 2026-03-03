@@ -15,7 +15,7 @@ const LambdaFunctionAssociation = @import("lambda_function_association.zig").Lam
 pub const LambdaFunctionAssociations = struct {
     /// **Optional**: A complex type that contains `LambdaFunctionAssociation` items
     /// for this cache behavior. If `Quantity` is `0`, you can omit `Items`.
-    items: ?[]const LambdaFunctionAssociation,
+    items: ?[]const LambdaFunctionAssociation = null,
 
     /// The number of Lambda@Edge function associations for this cache behavior.
     quantity: i32,

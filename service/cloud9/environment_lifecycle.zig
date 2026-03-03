@@ -7,10 +7,10 @@ pub const EnvironmentLifecycle = struct {
     /// If the environment failed to delete, the Amazon Resource Name (ARN) of the
     /// related Amazon Web Services
     /// resource.
-    failure_resource: ?[]const u8,
+    failure_resource: ?[]const u8 = null,
 
     /// Any informational message about the lifecycle state of the environment.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The current creation or deletion lifecycle state of the environment.
     ///
@@ -23,7 +23,7 @@ pub const EnvironmentLifecycle = struct {
     /// * `DELETING`: The environment is in the process of being deleted.
     ///
     /// * `DELETE_FAILED`: The environment failed to delete.
-    status: ?EnvironmentLifecycleStatus,
+    status: ?EnvironmentLifecycleStatus = null,
 
     pub const json_field_names = .{
         .failure_resource = "failureResource",

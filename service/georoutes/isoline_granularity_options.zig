@@ -1,7 +1,7 @@
 /// Isoline granularity related options.
 pub const IsolineGranularityOptions = struct {
     /// Maximum number of points of returned Isoline.
-    max_points: ?i32,
+    max_points: ?i32 = null,
 
     /// Maximum resolution of the returned isoline.
     ///

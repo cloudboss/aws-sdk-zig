@@ -7,23 +7,23 @@ const PrincipalType = @import("principal_type.zig").PrincipalType;
 /// Identity Center.
 pub const AccountAssignment = struct {
     /// The identifier of the Amazon Web Services account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The ARN of the permission set. For more information about ARNs, see [Amazon
     /// Resource Names (ARNs) and Amazon Web Services Service
     /// Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon
     /// Web Services General Reference*.
-    permission_set_arn: ?[]const u8,
+    permission_set_arn: ?[]const u8 = null,
 
     /// An identifier for an object in IAM Identity Center, such as a user or group.
     /// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6).
     /// For more information about PrincipalIds in IAM Identity Center, see the [IAM
     /// Identity Center Identity Store API
     /// Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
-    principal_id: ?[]const u8,
+    principal_id: ?[]const u8 = null,
 
     /// The entity type for which the assignment will be created.
-    principal_type: ?PrincipalType,
+    principal_type: ?PrincipalType = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

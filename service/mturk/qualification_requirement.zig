@@ -32,7 +32,7 @@ pub const QualificationRequirement = struct {
     /// HIT in their search result, but will not be able to Preview or Accept the
     /// HIT. ActionsGuarded should not be used in combination with the
     /// `RequiredToPreview` field.
-    actions_guarded: ?HITAccessActions,
+    actions_guarded: ?HITAccessActions = null,
 
     /// The kind of comparison to make against a Qualification's
     /// value. You can compare a Qualification's value to an IntegerValue to
@@ -55,7 +55,7 @@ pub const QualificationRequirement = struct {
     /// QualificationType ID. When performing a set comparison by using the
     /// In or the NotIn comparator, you can use up to 15 IntegerValue
     /// elements in a QualificationRequirement data structure.
-    integer_values: ?[]const i32,
+    integer_values: ?[]const i32 = null,
 
     /// The locale value to compare against the Qualification's
     /// value. The local value must be a valid ISO 3166 country code or
@@ -66,7 +66,7 @@ pub const QualificationRequirement = struct {
     /// comparators. When performing a set comparison by using the In or the
     /// NotIn comparator, you can use up to 30 LocaleValue elements in a
     /// QualificationRequirement data structure.
-    locale_values: ?[]const Locale,
+    locale_values: ?[]const Locale = null,
 
     /// The ID of the Qualification type for the requirement.
     qualification_type_id: []const u8,
@@ -83,7 +83,7 @@ pub const QualificationRequirement = struct {
     /// allowed to preview the HIT's question data, but will not be allowed
     /// to accept and complete the HIT. The default is false. This should not
     /// be used in combination with the `ActionsGuarded` field.
-    required_to_preview: ?bool,
+    required_to_preview: ?bool = null,
 
     pub const json_field_names = .{
         .actions_guarded = "ActionsGuarded",

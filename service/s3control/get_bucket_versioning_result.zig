@@ -7,8 +7,8 @@ pub const GetBucketVersioningResult = struct {
     /// element is returned only if the bucket has been configured with MFA delete.
     /// If MFA delete
     /// has never been configured for the bucket, this element is not returned.
-    mfa_delete: ?MFADeleteStatus,
+    mfa_delete: ?MFADeleteStatus = null,
 
     /// The versioning state of the S3 on Outposts bucket.
-    status: ?BucketVersioningStatus,
+    status: ?BucketVersioningStatus = null,
 };

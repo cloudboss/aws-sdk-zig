@@ -15,7 +15,7 @@ pub const PackageDependency = struct {
     /// * nuget: The `dependencyType` field is never set for NuGet packages.
     ///
     /// * pypi: `Requires-Dist`
-    dependency_type: ?[]const u8,
+    dependency_type: ?[]const u8 = null,
 
     /// The namespace of the package that this package depends on. The package
     /// component that specifies its
@@ -30,17 +30,17 @@ pub const PackageDependency = struct {
     /// * Python, NuGet, Ruby, and Cargo package versions do not contain a
     ///   corresponding component, package versions
     /// of those formats do not have a namespace.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The name of the package that this package depends on.
-    package: ?[]const u8,
+    package: ?[]const u8 = null,
 
     /// The required version, or version range, of the package that this package
     /// depends on. The version format
     /// is specific to the package type. For example, the following are possible
     /// valid required versions: `1.2.3`,
     /// `^2.3.4`, or `4.x`.
-    version_requirement: ?[]const u8,
+    version_requirement: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dependency_type = "dependencyType",

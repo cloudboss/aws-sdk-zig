@@ -9,10 +9,10 @@ pub const RealTimeContactAnalysisSegmentTranscript = struct {
     content: []const u8,
 
     /// The type of content of the item. For example, `text/plain`.
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// The display name of the participant.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The identifier of the transcript.
     id: []const u8,
@@ -27,10 +27,10 @@ pub const RealTimeContactAnalysisSegmentTranscript = struct {
     /// Object describing redaction that was applied to the transcript. If
     /// transcript has the field it means part of the
     /// transcript was redacted.
-    redaction: ?RealTimeContactAnalysisTranscriptItemRedaction,
+    redaction: ?RealTimeContactAnalysisTranscriptItemRedaction = null,
 
     /// The sentiment detected for this piece of transcript.
-    sentiment: ?RealTimeContactAnalysisSentimentLabel,
+    sentiment: ?RealTimeContactAnalysisSentimentLabel = null,
 
     /// Field describing the time of the event. It can have different
     /// representations of time.

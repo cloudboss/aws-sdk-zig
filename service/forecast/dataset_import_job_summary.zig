@@ -7,13 +7,13 @@ const ImportMode = @import("import_mode.zig").ImportMode;
 /// `DatasetImportJobArn`.
 pub const DatasetImportJobSummary = struct {
     /// When the dataset import job was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset import job.
-    dataset_import_job_arn: ?[]const u8,
+    dataset_import_job_arn: ?[]const u8 = null,
 
     /// The name of the dataset import job.
-    dataset_import_job_name: ?[]const u8,
+    dataset_import_job_name: ?[]const u8 = null,
 
     /// The location of the training data to import and an Identity and Access
     /// Management (IAM) role that Amazon Forecast
@@ -22,10 +22,10 @@ pub const DatasetImportJobSummary = struct {
     ///
     /// If encryption is used, `DataSource` includes an Key Management Service (KMS)
     /// key.
-    data_source: ?DataSource,
+    data_source: ?DataSource = null,
 
     /// The import mode of the dataset import job, FULL or INCREMENTAL.
-    import_mode: ?ImportMode,
+    import_mode: ?ImportMode = null,
 
     /// The last time the resource was modified. The timestamp depends on the status
     /// of the
@@ -41,10 +41,10 @@ pub const DatasetImportJobSummary = struct {
     ///
     /// * `ACTIVE` or `CREATE_FAILED` - When the job finished or
     /// failed.
-    last_modification_time: ?i64,
+    last_modification_time: ?i64 = null,
 
     /// If an error occurred, an informational message about the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status of the dataset import job. States include:
     ///
@@ -57,7 +57,7 @@ pub const DatasetImportJobSummary = struct {
     /// `DELETE_FAILED`
     ///
     /// * `CREATE_STOPPING`, `CREATE_STOPPED`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

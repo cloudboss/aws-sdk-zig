@@ -13,7 +13,7 @@ pub const FlowNodeInput = struct {
     ///   update for each loop iteration.
     /// * `ExitLoop` - Defines the value that's available once the loop ends. Use
     ///   this category to expose loop results to nodes outside the loop.
-    category: ?FlowNodeInputCategory,
+    category: ?FlowNodeInputCategory = null,
 
     /// An expression that formats the input for the node. For an explanation of how
     /// to create expressions, see [Expressions in Prompt flows in Amazon

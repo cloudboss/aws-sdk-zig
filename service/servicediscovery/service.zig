@@ -7,14 +7,14 @@ const ServiceType = @import("service_type.zig").ServiceType;
 pub const Service = struct {
     /// The Amazon Resource Name (ARN) that Cloud Map assigns to the service when
     /// you create it.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the service was created, in Unix format and
     /// Coordinated Universal
     /// Time (UTC). The value of `CreateDate` is accurate to milliseconds. For
     /// example, the
     /// value `1516925490.087` represents Friday, January 26, 2018 12:11:30.087 AM.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The ID of the Amazon Web Services account that created the service. If this
     /// isn't your account ID, it is
@@ -24,17 +24,17 @@ pub const Service = struct {
     /// Cloud Map
     /// namespace
     /// sharing](https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html) in the *Cloud Map Developer Guide*.
-    created_by_account: ?[]const u8,
+    created_by_account: ?[]const u8 = null,
 
     /// A unique string that identifies the request and that allows failed requests
     /// to be retried
     /// without the risk of running the operation twice. `CreatorRequestId` can be
     /// any unique
     /// string (for example, a date/timestamp).
-    creator_request_id: ?[]const u8,
+    creator_request_id: ?[]const u8 = null,
 
     /// The description of the service.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A complex type that contains information about the Route 53 DNS records that
     /// you want
@@ -43,7 +43,7 @@ pub const Service = struct {
     /// The record types of a service can only be changed by deleting the service
     /// and recreating it
     /// with a new `Dnsconfig`.
-    dns_config: ?DnsConfig,
+    dns_config: ?DnsConfig = null,
 
     /// *Public DNS and HTTP namespaces only.* A complex type that contains
     /// settings for an optional health check. If you specify settings for a health
@@ -53,30 +53,30 @@ pub const Service = struct {
     ///
     /// For information about the charges for health checks, see [Amazon Route 53
     /// Pricing](http://aws.amazon.com/route53/pricing/).
-    health_check_config: ?HealthCheckConfig,
+    health_check_config: ?HealthCheckConfig = null,
 
     /// A complex type that contains information about an optional custom health
     /// check.
     ///
     /// If you specify a health check configuration, you can specify either
     /// `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
-    health_check_custom_config: ?HealthCheckCustomConfig,
+    health_check_custom_config: ?HealthCheckCustomConfig = null,
 
     /// The ID that Cloud Map assigned to the service when you created it.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The number of instances that are currently associated with the service.
     /// Instances that were
     /// previously associated with the service but that are deleted aren't included
     /// in the count. The
     /// count might not reflect pending registrations and deregistrations.
-    instance_count: ?i32,
+    instance_count: ?i32 = null,
 
     /// The name of the service.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the namespace that was used to create the service.
-    namespace_id: ?[]const u8,
+    namespace_id: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that created the namespace with
     /// which the service is associated.
@@ -86,7 +86,7 @@ pub const Service = struct {
     /// Cloud Map
     /// namespace
     /// sharing](https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html) in the *Cloud Map Developer Guide*.
-    resource_owner: ?[]const u8,
+    resource_owner: ?[]const u8 = null,
 
     /// Describes the systems that can be used to discover the service instances.
     ///
@@ -104,7 +104,7 @@ pub const Service = struct {
     /// **DNS**
     ///
     /// Reserved.
-    @"type": ?ServiceType,
+    @"type": ?ServiceType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

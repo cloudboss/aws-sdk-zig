@@ -17,7 +17,7 @@ pub const SubscriptionSummary = struct {
     id: []const u8,
 
     /// The retain permissions included in the subscription.
-    retain_permissions: ?bool,
+    retain_permissions: ?bool = null,
 
     /// The status of the subscription.
     status: SubscriptionStatus,
@@ -29,13 +29,13 @@ pub const SubscriptionSummary = struct {
     subscribed_principal: SubscribedPrincipal,
 
     /// The identifier of the subscription request for the subscription.
-    subscription_request_id: ?[]const u8,
+    subscription_request_id: ?[]const u8 = null,
 
     /// The timestamp of when the subscription was updated.
     updated_at: i64,
 
     /// The Amazon DataZone user who updated the subscription.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

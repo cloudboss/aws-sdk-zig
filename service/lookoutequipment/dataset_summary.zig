@@ -4,16 +4,16 @@ const DatasetStatus = @import("dataset_status.zig").DatasetStatus;
 /// status.
 pub const DatasetSummary = struct {
     /// The time at which the dataset was created in Amazon Lookout for Equipment.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the specified dataset.
-    dataset_arn: ?[]const u8,
+    dataset_arn: ?[]const u8 = null,
 
     /// The name of the dataset.
-    dataset_name: ?[]const u8,
+    dataset_name: ?[]const u8 = null,
 
     /// Indicates the status of the dataset.
-    status: ?DatasetStatus,
+    status: ?DatasetStatus = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

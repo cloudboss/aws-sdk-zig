@@ -7,10 +7,10 @@ pub const Schedule = struct {
     /// Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html). For example, to run
     /// something every day at 12:15 UTC, you would specify:
     /// `cron(15 12 * * ? *)`.
-    schedule_expression: ?[]const u8,
+    schedule_expression: ?[]const u8 = null,
 
     /// The state of the schedule.
-    state: ?ScheduleState,
+    state: ?ScheduleState = null,
 
     pub const json_field_names = .{
         .schedule_expression = "ScheduleExpression",

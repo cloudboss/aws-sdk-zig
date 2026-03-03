@@ -21,12 +21,12 @@ pub const SimpleScalingPolicyConfiguration = struct {
     /// instance
     /// group with the number of Amazon EC2 instances specified by
     /// `ScalingAdjustment`, which should be expressed as a positive integer.
-    adjustment_type: ?AdjustmentType,
+    adjustment_type: ?AdjustmentType = null,
 
     /// The amount of time, in seconds, after a scaling activity completes before
     /// any further
     /// trigger-related scaling activities can start. The default value is 0.
-    cool_down: ?i32,
+    cool_down: ?i32 = null,
 
     /// The amount by which to scale in or scale out, based on the specified
     /// `AdjustmentType`. A positive value adds to the instance group's Amazon EC2

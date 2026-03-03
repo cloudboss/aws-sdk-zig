@@ -5,21 +5,21 @@ const ObjectTypeEnum = @import("object_type_enum.zig").ObjectTypeEnum;
 /// status change of an assessment or the delegation of a control set.
 pub const ChangeLog = struct {
     /// The action that was performed.
-    action: ?ActionEnum,
+    action: ?ActionEnum = null,
 
     /// The time when the action was performed and the changelog record was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The user or role that performed the action.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The name of the object that changed. This could be the name of an
     /// assessment, control,
     /// or control set.
-    object_name: ?[]const u8,
+    object_name: ?[]const u8 = null,
 
     /// The object that was changed, such as an assessment, control, or control set.
-    object_type: ?ObjectTypeEnum,
+    object_type: ?ObjectTypeEnum = null,
 
     pub const json_field_names = .{
         .action = "action",

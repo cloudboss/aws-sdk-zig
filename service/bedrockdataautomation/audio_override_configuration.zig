@@ -4,11 +4,11 @@ const SensitiveDataConfiguration = @import("sensitive_data_configuration.zig").S
 
 /// Override Configuration of Audio
 pub const AudioOverrideConfiguration = struct {
-    language_configuration: ?AudioLanguageConfiguration,
+    language_configuration: ?AudioLanguageConfiguration = null,
 
-    modality_processing: ?ModalityProcessingConfiguration,
+    modality_processing: ?ModalityProcessingConfiguration = null,
 
-    sensitive_data_configuration: ?SensitiveDataConfiguration,
+    sensitive_data_configuration: ?SensitiveDataConfiguration = null,
 
     pub const json_field_names = .{
         .language_configuration = "languageConfiguration",

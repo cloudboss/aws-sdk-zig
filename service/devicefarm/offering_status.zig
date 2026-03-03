@@ -4,16 +4,16 @@ const OfferingTransactionType = @import("offering_transaction_type.zig").Offerin
 /// The status of the offering.
 pub const OfferingStatus = struct {
     /// The date on which the offering is effective.
-    effective_on: ?i64,
+    effective_on: ?i64 = null,
 
     /// Represents the metadata of an offering status.
-    offering: ?Offering,
+    offering: ?Offering = null,
 
     /// The number of available devices in the offering.
-    quantity: ?i32,
+    quantity: ?i32 = null,
 
     /// The type specified for the offering status.
-    @"type": ?OfferingTransactionType,
+    @"type": ?OfferingTransactionType = null,
 
     pub const json_field_names = .{
         .effective_on = "effectiveOn",

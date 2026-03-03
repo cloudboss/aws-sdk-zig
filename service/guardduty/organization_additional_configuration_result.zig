@@ -28,13 +28,13 @@ pub const OrganizationAdditionalConfigurationResult = struct {
     /// account in the organization. The administrator must manage the additional
     /// configuration
     /// for each account individually.
-    auto_enable: ?OrgFeatureStatus,
+    auto_enable: ?OrgFeatureStatus = null,
 
     /// The name of the additional configuration that is configured for the member
     /// accounts within
     /// the organization. These values are applicable to only Runtime Monitoring
     /// protection plan.
-    name: ?OrgFeatureAdditionalConfiguration,
+    name: ?OrgFeatureAdditionalConfiguration = null,
 
     pub const json_field_names = .{
         .auto_enable = "AutoEnable",

@@ -11,7 +11,7 @@ pub const AnomalyDetectorConfiguration = struct {
     /// trained. Use this to make sure that events that could cause unusual values
     /// for the
     /// metric, such as deployments, aren't used when CloudWatch creates the model.
-    excluded_time_ranges: ?[]const Range,
+    excluded_time_ranges: ?[]const Range = null,
 
     /// The time zone to use for the metric. This is useful to enable the model to
     /// automatically account for daylight savings time changes if the metric is
@@ -22,7 +22,7 @@ pub const AnomalyDetectorConfiguration = struct {
     /// standard
     /// tz database. For more information, see [tz
     /// database](https://en.wikipedia.org/wiki/Tz_database).
-    metric_timezone: ?[]const u8,
+    metric_timezone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .excluded_time_ranges = "ExcludedTimeRanges",

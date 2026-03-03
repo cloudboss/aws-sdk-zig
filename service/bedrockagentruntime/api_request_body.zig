@@ -12,7 +12,7 @@ const PropertyParameters = @import("property_parameters.zig").PropertyParameters
 pub const ApiRequestBody = struct {
     /// The content of the request body. The key of the object in this field is a
     /// media type defining the format of the request body.
-    content: ?[]const aws.map.MapEntry(PropertyParameters),
+    content: ?[]const aws.map.MapEntry(PropertyParameters) = null,
 
     pub const json_field_names = .{
         .content = "content",

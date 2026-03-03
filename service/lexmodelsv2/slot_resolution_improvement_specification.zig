@@ -4,7 +4,7 @@ const BedrockModelSpecification = @import("bedrock_model_specification.zig").Bed
 pub const SlotResolutionImprovementSpecification = struct {
     /// An object containing information about the Amazon Bedrock model used to
     /// assist slot resolution.
-    bedrock_model_specification: ?BedrockModelSpecification,
+    bedrock_model_specification: ?BedrockModelSpecification = null,
 
     /// Specifies whether assisted slot resolution is turned on or off.
     enabled: bool = false,

@@ -5,13 +5,13 @@ const Transcript = @import("transcript.zig").Transcript;
 /// An analyzed segment for a real-time analysis session.
 pub const RealtimeContactAnalysisSegment = struct {
     /// The matched category rules.
-    categories: ?Categories,
+    categories: ?Categories = null,
 
     /// Information about the post-contact summary.
-    post_contact_summary: ?PostContactSummary,
+    post_contact_summary: ?PostContactSummary = null,
 
     /// The analyzed transcript.
-    transcript: ?Transcript,
+    transcript: ?Transcript = null,
 
     pub const json_field_names = .{
         .categories = "Categories",

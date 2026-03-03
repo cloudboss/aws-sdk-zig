@@ -18,57 +18,57 @@ const VPCDerivedInfoStatus = @import("vpc_derived_info_status.zig").VPCDerivedIn
 /// The configuration of an Elasticsearch domain.
 pub const ElasticsearchDomainConfig = struct {
     /// IAM access policy as a JSON-formatted string.
-    access_policies: ?AccessPoliciesStatus,
+    access_policies: ?AccessPoliciesStatus = null,
 
     /// Specifies the `AdvancedOptions` for the domain. See [Configuring Advanced
     /// Options](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options) for more information.
-    advanced_options: ?AdvancedOptionsStatus,
+    advanced_options: ?AdvancedOptionsStatus = null,
 
     /// Specifies `AdvancedSecurityOptions` for the domain.
-    advanced_security_options: ?AdvancedSecurityOptionsStatus,
+    advanced_security_options: ?AdvancedSecurityOptionsStatus = null,
 
     /// Specifies `AutoTuneOptions` for the domain.
-    auto_tune_options: ?AutoTuneOptionsStatus,
+    auto_tune_options: ?AutoTuneOptionsStatus = null,
 
     /// Specifies change details of the domain configuration change.
-    change_progress_details: ?ChangeProgressDetails,
+    change_progress_details: ?ChangeProgressDetails = null,
 
     /// The `CognitoOptions` for the specified domain. For more information, see
     /// [Amazon Cognito Authentication for
     /// Kibana](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
-    cognito_options: ?CognitoOptionsStatus,
+    cognito_options: ?CognitoOptionsStatus = null,
 
     /// Specifies the `DomainEndpointOptions` for the Elasticsearch domain.
-    domain_endpoint_options: ?DomainEndpointOptionsStatus,
+    domain_endpoint_options: ?DomainEndpointOptionsStatus = null,
 
     /// Specifies the `EBSOptions` for the Elasticsearch domain.
-    ebs_options: ?EBSOptionsStatus,
+    ebs_options: ?EBSOptionsStatus = null,
 
     /// Specifies the `ElasticsearchClusterConfig` for the Elasticsearch domain.
-    elasticsearch_cluster_config: ?ElasticsearchClusterConfigStatus,
+    elasticsearch_cluster_config: ?ElasticsearchClusterConfigStatus = null,
 
     /// String of format X.Y to specify version for the Elasticsearch domain.
-    elasticsearch_version: ?ElasticsearchVersionStatus,
+    elasticsearch_version: ?ElasticsearchVersionStatus = null,
 
     /// Specifies the `EncryptionAtRestOptions` for the Elasticsearch domain.
-    encryption_at_rest_options: ?EncryptionAtRestOptionsStatus,
+    encryption_at_rest_options: ?EncryptionAtRestOptionsStatus = null,
 
     /// Log publishing options for the given domain.
-    log_publishing_options: ?LogPublishingOptionsStatus,
+    log_publishing_options: ?LogPublishingOptionsStatus = null,
 
     /// Information about the domain properties that are currently being modified.
-    modifying_properties: ?[]const ModifyingProperties,
+    modifying_properties: ?[]const ModifyingProperties = null,
 
     /// Specifies the `NodeToNodeEncryptionOptions` for the Elasticsearch domain.
-    node_to_node_encryption_options: ?NodeToNodeEncryptionOptionsStatus,
+    node_to_node_encryption_options: ?NodeToNodeEncryptionOptionsStatus = null,
 
     /// Specifies the `SnapshotOptions` for the Elasticsearch domain.
-    snapshot_options: ?SnapshotOptionsStatus,
+    snapshot_options: ?SnapshotOptionsStatus = null,
 
     /// The `VPCOptions` for the specified domain. For more information, see [VPC
     /// Endpoints for Amazon Elasticsearch Service
     /// Domains](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
-    vpc_options: ?VPCDerivedInfoStatus,
+    vpc_options: ?VPCDerivedInfoStatus = null,
 
     pub const json_field_names = .{
         .access_policies = "AccessPolicies",

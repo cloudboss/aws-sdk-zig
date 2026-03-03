@@ -8,7 +8,7 @@ pub const DocumentClassifierDocuments = struct {
     /// The S3 URI location of the test documents included in the TestS3Uri CSV
     /// file.
     /// This field is not required if you do not specify a test CSV file.
-    test_s3_uri: ?[]const u8,
+    test_s3_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .s3_uri = "S3Uri",

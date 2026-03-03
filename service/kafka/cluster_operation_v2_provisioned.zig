@@ -5,17 +5,17 @@ const VpcConnectionInfo = @import("vpc_connection_info.zig").VpcConnectionInfo;
 /// Returns information about a provisioned cluster operation.
 pub const ClusterOperationV2Provisioned = struct {
     /// Steps completed during the operation.
-    operation_steps: ?[]const ClusterOperationStep,
+    operation_steps: ?[]const ClusterOperationStep = null,
 
     /// Information about cluster attributes before a cluster is updated.
-    source_cluster_info: ?MutableClusterInfo,
+    source_cluster_info: ?MutableClusterInfo = null,
 
     /// Information about cluster attributes after a cluster is updated.
-    target_cluster_info: ?MutableClusterInfo,
+    target_cluster_info: ?MutableClusterInfo = null,
 
     /// Description of the VPC connection for CreateVpcConnection and
     /// DeleteVpcConnection operations.
-    vpc_connection_info: ?VpcConnectionInfo,
+    vpc_connection_info: ?VpcConnectionInfo = null,
 
     pub const json_field_names = .{
         .operation_steps = "OperationSteps",

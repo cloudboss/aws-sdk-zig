@@ -8,7 +8,7 @@ pub const SheetElementConfigurationOverrides = struct {
     /// * `VISIBLE`
     ///
     /// * `HIDDEN`
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .visibility = "Visibility",

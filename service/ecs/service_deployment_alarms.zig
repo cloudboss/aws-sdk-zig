@@ -12,17 +12,17 @@ pub const ServiceDeploymentAlarms = struct {
     /// The name of the CloudWatch alarms that determine when a service deployment
     /// failed. A
     /// "," separates the alarms.
-    alarm_names: ?[]const []const u8,
+    alarm_names: ?[]const []const u8 = null,
 
     /// The status of the alarms check. Amazon ECS is not using alarms for service
     /// deployment
     /// failures when the status is `DISABLED`.
-    status: ?ServiceDeploymentRollbackMonitorsStatus,
+    status: ?ServiceDeploymentRollbackMonitorsStatus = null,
 
     /// One or more CloudWatch alarm names that have been triggered during the
     /// service
     /// deployment. A "," separates the alarm names.
-    triggered_alarm_names: ?[]const []const u8,
+    triggered_alarm_names: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .alarm_names = "alarmNames",

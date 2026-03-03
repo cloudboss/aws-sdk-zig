@@ -31,22 +31,22 @@ pub const SentimentFilter = struct {
     /// Makes it possible to specify a time range (in milliseconds) in your audio,
     /// during
     /// which you want to search for the specified sentiments. See for more detail.
-    absolute_time_range: ?AbsoluteTimeRange,
+    absolute_time_range: ?AbsoluteTimeRange = null,
 
     /// Set to `TRUE` to flag the sentiments that you didn't include in your
     /// request. Set to `FALSE` to flag the sentiments that you specified in your
     /// request.
-    negate: ?bool,
+    negate: ?bool = null,
 
     /// Specify the participant that you want to flag. Omitting this parameter is
     /// equivalent
     /// to specifying both participants.
-    participant_role: ?ParticipantRole,
+    participant_role: ?ParticipantRole = null,
 
     /// Makes it possible to specify a time range (in percentage) in your media
     /// file, during
     /// which you want to search for the specified sentiments. See for more detail.
-    relative_time_range: ?RelativeTimeRange,
+    relative_time_range: ?RelativeTimeRange = null,
 
     /// Specify the sentiments that you want to flag.
     sentiments: []const SentimentValue,

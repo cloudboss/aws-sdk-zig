@@ -66,7 +66,7 @@ pub const AWSManagedRulesACFPRuleSet = struct {
     /// information, the rule group labels
     /// and mitigates requests from client sessions and IP addresses that have had
     /// too many successful account creation attempts in a short amount of time.
-    response_inspection: ?ResponseInspection,
+    response_inspection: ?ResponseInspection = null,
 
     pub const json_field_names = .{
         .creation_path = "CreationPath",

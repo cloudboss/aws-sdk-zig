@@ -25,7 +25,7 @@ pub const ReplicationRule = struct {
     /// operations affect
     /// replication](https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated) in the
     /// *Amazon S3 User Guide*.
-    delete_marker_replication: ?DeleteMarkerReplication,
+    delete_marker_replication: ?DeleteMarkerReplication = null,
 
     /// A container for information about the replication destination and its
     /// configurations.
@@ -34,16 +34,16 @@ pub const ReplicationRule = struct {
     /// An optional configuration to replicate existing source bucket objects.
     ///
     /// This is not supported by Amazon S3 on Outposts buckets.
-    existing_object_replication: ?ExistingObjectReplication,
+    existing_object_replication: ?ExistingObjectReplication = null,
 
     /// A filter that identifies the subset of objects to which the replication rule
     /// applies. A
     /// `Filter` element must specify exactly one `Prefix`,
     /// `Tag`, or `And` child element.
-    filter: ?ReplicationRuleFilter,
+    filter: ?ReplicationRuleFilter = null,
 
     /// A unique identifier for the rule. The maximum value is 255 characters.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// An object key name prefix that identifies the object or objects to which the
     /// rule
@@ -57,7 +57,7 @@ pub const ReplicationRule = struct {
     /// For more information, see [
     /// XML-related object key
     /// constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints) in the *Amazon S3 User Guide*.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The priority indicates which rule has precedence whenever two or more
     /// replication rules
@@ -72,14 +72,14 @@ pub const ReplicationRule = struct {
     /// For more information, see [Creating replication
     /// rules on
     /// Outposts](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-between-outposts.html) in the *Amazon S3 User Guide*.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// A container that describes additional filters for identifying the source
     /// Outposts
     /// objects that you want to replicate. You can choose to enable or disable the
     /// replication of
     /// these objects.
-    source_selection_criteria: ?SourceSelectionCriteria,
+    source_selection_criteria: ?SourceSelectionCriteria = null,
 
     /// Specifies whether the rule is enabled.
     status: ReplicationRuleStatus,

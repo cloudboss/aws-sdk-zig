@@ -3,11 +3,11 @@ const AggregateConformancePackComplianceCount = @import("aggregate_conformance_p
 /// Provides a summary of compliance based on either account ID or region.
 pub const AggregateConformancePackComplianceSummary = struct {
     /// Returns an `AggregateConformancePackComplianceCount` object.
-    compliance_summary: ?AggregateConformancePackComplianceCount,
+    compliance_summary: ?AggregateConformancePackComplianceCount = null,
 
     /// Groups the result based on Amazon Web Services account ID or Amazon Web
     /// Services Region.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .compliance_summary = "ComplianceSummary",

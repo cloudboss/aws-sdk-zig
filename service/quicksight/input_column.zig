@@ -4,14 +4,14 @@ const InputColumnDataType = @import("input_column_data_type.zig").InputColumnDat
 /// Metadata for a column that is used as the input of a transform operation.
 pub const InputColumn = struct {
     /// A unique identifier for the input column.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of this column in the underlying data source.
     name: []const u8,
 
     /// The sub data type of the column. Sub types are only available for decimal
     /// columns that are part of a SPICE dataset.
-    sub_type: ?ColumnDataSubType,
+    sub_type: ?ColumnDataSubType = null,
 
     /// The data type of the column.
     @"type": InputColumnDataType,

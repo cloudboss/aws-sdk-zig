@@ -2,10 +2,10 @@
 /// workflow.
 pub const WorkflowParameterDetail = struct {
     /// The default value of this parameter if no input is provided.
-    default_value: ?[]const []const u8,
+    default_value: ?[]const []const u8 = null,
 
     /// Describes this parameter.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of this input parameter.
     name: []const u8,

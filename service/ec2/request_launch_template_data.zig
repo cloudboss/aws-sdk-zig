@@ -27,7 +27,7 @@ const LaunchTemplateTagSpecificationRequest = @import("launch_template_tag_speci
 /// You must specify at least one parameter for the launch template data.
 pub const RequestLaunchTemplateData = struct {
     /// The block device mapping.
-    block_device_mappings: ?[]const LaunchTemplateBlockDeviceMappingRequest,
+    block_device_mappings: ?[]const LaunchTemplateBlockDeviceMappingRequest = null,
 
     /// The Capacity Reservation targeting option. If you do not specify this
     /// parameter, the
@@ -35,23 +35,23 @@ pub const RequestLaunchTemplateData = struct {
     /// it to run in any open Capacity Reservation that has matching attributes
     /// (instance type,
     /// platform, Availability Zone).
-    capacity_reservation_specification: ?LaunchTemplateCapacityReservationSpecificationRequest,
+    capacity_reservation_specification: ?LaunchTemplateCapacityReservationSpecificationRequest = null,
 
     /// The CPU options for the instance. For more information, see [CPU
     /// options for Amazon EC2
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html) in the
     /// *Amazon EC2 User Guide*.
-    cpu_options: ?LaunchTemplateCpuOptionsRequest,
+    cpu_options: ?LaunchTemplateCpuOptionsRequest = null,
 
     /// The credit option for CPU usage of the instance. Valid only for T instances.
-    credit_specification: ?CreditSpecificationRequest,
+    credit_specification: ?CreditSpecificationRequest = null,
 
     /// Indicates whether to enable the instance for stop protection. For more
     /// information,
     /// see [Enable stop protection for your EC2
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html) in the
     /// *Amazon EC2 User Guide*.
-    disable_api_stop: ?bool,
+    disable_api_stop: ?bool = null,
 
     /// Indicates whether termination protection is enabled for the instance. The
     /// default is
@@ -61,7 +61,7 @@ pub const RequestLaunchTemplateData = struct {
     /// when you
     /// launch an instance, while the instance is running, or while the instance is
     /// stopped.
-    disable_api_termination: ?bool,
+    disable_api_termination: ?bool = null,
 
     /// Indicates whether the instance is optimized for Amazon EBS I/O. This
     /// optimization
@@ -71,12 +71,12 @@ pub const RequestLaunchTemplateData = struct {
     /// available with all
     /// instance types. Additional usage charges apply when using an EBS-optimized
     /// instance.
-    ebs_optimized: ?bool,
+    ebs_optimized: ?bool = null,
 
     /// Deprecated.
     ///
     /// Amazon Elastic Graphics reached end of life on January 8, 2024.
-    elastic_gpu_specifications: ?[]const ElasticGpuSpecification,
+    elastic_gpu_specifications: ?[]const ElasticGpuSpecification = null,
 
     /// Amazon Elastic Inference is no longer available.
     ///
@@ -88,7 +88,7 @@ pub const RequestLaunchTemplateData = struct {
     ///
     /// You cannot specify accelerators from different generations in the same
     /// request.
-    elastic_inference_accelerators: ?[]const LaunchTemplateElasticInferenceAccelerator,
+    elastic_inference_accelerators: ?[]const LaunchTemplateElasticInferenceAccelerator = null,
 
     /// Indicates whether the instance is enabled for Amazon Web Services Nitro
     /// Enclaves. For more
@@ -98,17 +98,17 @@ pub const RequestLaunchTemplateData = struct {
     ///
     /// You can't enable Amazon Web Services Nitro Enclaves and hibernation on the
     /// same instance.
-    enclave_options: ?LaunchTemplateEnclaveOptionsRequest,
+    enclave_options: ?LaunchTemplateEnclaveOptionsRequest = null,
 
     /// Indicates whether an instance is enabled for hibernation. This parameter is
     /// valid only
     /// if the instance meets the [hibernation
     /// prerequisites](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html). For more information, see [Hibernate your Amazon EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
     /// in the *Amazon EC2 User Guide*.
-    hibernation_options: ?LaunchTemplateHibernationOptionsRequest,
+    hibernation_options: ?LaunchTemplateHibernationOptionsRequest = null,
 
     /// The name or Amazon Resource Name (ARN) of an IAM instance profile.
-    iam_instance_profile: ?LaunchTemplateIamInstanceProfileSpecificationRequest,
+    iam_instance_profile: ?LaunchTemplateIamInstanceProfileSpecificationRequest = null,
 
     /// The ID of the AMI in the format `ami-0ac394d6a3example`.
     ///
@@ -155,17 +155,17 @@ pub const RequestLaunchTemplateData = struct {
     ///
     /// * For EC2 Fleets of type `maintain` or `request`, or
     /// for Spot Fleets, you must specify the AMI ID.
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// Indicates whether an instance stops or terminates when you initiate shutdown
     /// from the
     /// instance (using the operating system command for system shutdown).
     ///
     /// Default: `stop`
-    instance_initiated_shutdown_behavior: ?ShutdownBehavior,
+    instance_initiated_shutdown_behavior: ?ShutdownBehavior = null,
 
     /// The market (purchasing) option for the instances.
-    instance_market_options: ?LaunchTemplateInstanceMarketOptionsRequest,
+    instance_market_options: ?LaunchTemplateInstanceMarketOptionsRequest = null,
 
     /// The attributes for the instance types. When you specify instance attributes,
     /// Amazon EC2 will
@@ -208,7 +208,7 @@ pub const RequestLaunchTemplateData = struct {
     /// Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html) and [Spot
     /// placement
     /// score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*.
-    instance_requirements: ?InstanceRequirementsRequest,
+    instance_requirements: ?InstanceRequirementsRequest = null,
 
     /// The instance type. For more information, see [Amazon EC2 instance
     /// types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in
@@ -216,7 +216,7 @@ pub const RequestLaunchTemplateData = struct {
     ///
     /// If you specify `InstanceType`, you can't specify
     /// `InstanceRequirements`.
-    instance_type: ?InstanceType,
+    instance_type: ?InstanceType = null,
 
     /// The ID of the kernel.
     ///
@@ -225,7 +225,7 @@ pub const RequestLaunchTemplateData = struct {
     /// kernels](https://docs.aws.amazon.com/linux/al2/ug/UserProvidedKernels.html)
     /// in the
     /// *Amazon Linux 2 User Guide*.
-    kernel_id: ?[]const u8,
+    kernel_id: ?[]const u8 = null,
 
     /// The name of the key pair. You can create a key pair using
     /// [CreateKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html) or
@@ -234,55 +234,55 @@ pub const RequestLaunchTemplateData = struct {
     /// If you do not specify a key pair, you can't connect to the instance unless
     /// you
     /// choose an AMI that is configured to allow users another way to log in.
-    key_name: ?[]const u8,
+    key_name: ?[]const u8 = null,
 
     /// The license configurations.
-    license_specifications: ?[]const LaunchTemplateLicenseConfigurationRequest,
+    license_specifications: ?[]const LaunchTemplateLicenseConfigurationRequest = null,
 
     /// The maintenance options for the instance.
-    maintenance_options: ?LaunchTemplateInstanceMaintenanceOptionsRequest,
+    maintenance_options: ?LaunchTemplateInstanceMaintenanceOptionsRequest = null,
 
     /// The metadata options for the instance. For more information, see [Configure
     /// the Instance Metadata Service
     /// options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html) in the
     /// *Amazon EC2 User Guide*.
-    metadata_options: ?LaunchTemplateInstanceMetadataOptionsRequest,
+    metadata_options: ?LaunchTemplateInstanceMetadataOptionsRequest = null,
 
     /// The monitoring for the instance.
-    monitoring: ?LaunchTemplatesMonitoringRequest,
+    monitoring: ?LaunchTemplatesMonitoringRequest = null,
 
     /// The network interfaces for the instance.
-    network_interfaces: ?[]const LaunchTemplateInstanceNetworkInterfaceSpecificationRequest,
+    network_interfaces: ?[]const LaunchTemplateInstanceNetworkInterfaceSpecificationRequest = null,
 
     /// Contains launch template settings to boost network performance for the type
     /// of
     /// workload that runs on your instance.
-    network_performance_options: ?LaunchTemplateNetworkPerformanceOptionsRequest,
+    network_performance_options: ?LaunchTemplateNetworkPerformanceOptionsRequest = null,
 
     /// The entity that manages the launch template.
-    operator: ?OperatorRequest,
+    operator: ?OperatorRequest = null,
 
     /// The placement for the instance.
-    placement: ?LaunchTemplatePlacementRequest,
+    placement: ?LaunchTemplatePlacementRequest = null,
 
     /// The options for the instance hostname. The default values are inherited from
     /// the
     /// subnet.
-    private_dns_name_options: ?LaunchTemplatePrivateDnsNameOptionsRequest,
+    private_dns_name_options: ?LaunchTemplatePrivateDnsNameOptionsRequest = null,
 
     /// The ID of the RAM disk.
     ///
     /// We recommend that you use PV-GRUB instead of kernels and RAM disks. For more
     /// information, see [User provided
     /// kernels](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the *Amazon EC2 User Guide*.
-    ram_disk_id: ?[]const u8,
+    ram_disk_id: ?[]const u8 = null,
 
     /// The IDs of the security groups.
     ///
     /// If you specify a network interface, you must specify any security groups as
     /// part of
     /// the network interface instead of using this parameter.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The names of the security groups. For a nondefault VPC, you must use
     /// security group
@@ -291,12 +291,12 @@ pub const RequestLaunchTemplateData = struct {
     /// If you specify a network interface, you must specify any security groups as
     /// part of
     /// the network interface instead of using this parameter.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// The tags to apply to the resources that are created during instance launch.
     /// These tags
     /// are not applied to the launch template.
-    tag_specifications: ?[]const LaunchTemplateTagSpecificationRequest,
+    tag_specifications: ?[]const LaunchTemplateTagSpecificationRequest = null,
 
     /// The user data to make available to the instance. You must provide
     /// base64-encoded text.
@@ -311,5 +311,5 @@ pub const RequestLaunchTemplateData = struct {
     /// data must be provided in the [MIME multi-part archive
     /// format](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive). For more information, see [Amazon EC2 user data in launch templates](https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html#lt-user-data) in the
     /// *Batch User Guide*.
-    user_data: ?[]const u8,
+    user_data: ?[]const u8 = null,
 };

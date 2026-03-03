@@ -7,31 +7,31 @@ pub const DDBELTConnectionOptions = struct {
     /// Specifies the export type for DynamoDB data extraction. This parameter
     /// determines how data is exported from the DynamoDB table during the ELT
     /// process.
-    dynamodb_export: ?DdbExportType,
+    dynamodb_export: ?DdbExportType = null,
 
     /// The name of the Amazon S3 bucket used for intermediate storage during the
     /// DynamoDB ELT process. This bucket is used to temporarily store exported
     /// DynamoDB data before it is processed by the ELT job.
-    dynamodb_s3_bucket: ?[]const u8,
+    dynamodb_s3_bucket: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID of the owner of the S3 bucket specified
     /// in `DynamodbS3Bucket`. This parameter is required when the S3 bucket is
     /// owned by
     /// a different Amazon Web Services account than the one running the ELT job,
     /// enabling cross-account access to the intermediate storage bucket.
-    dynamodb_s3_bucket_owner: ?[]const u8,
+    dynamodb_s3_bucket_owner: ?[]const u8 = null,
 
     /// The S3 object key prefix for files stored in the intermediate S3 bucket
     /// during the DynamoDB ELT process. This prefix helps organize and identify the
     /// temporary files created during data extraction.
-    dynamodb_s3_prefix: ?[]const u8,
+    dynamodb_s3_prefix: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services Security Token
     /// Service (STS) role to assume for accessing DynamoDB and S3 resources during
     /// the ELT operation.
     /// This role must have the necessary permissions to read from the DynamoDB
     /// table and write to the intermediate S3 bucket.
-    dynamodb_sts_role_arn: ?[]const u8,
+    dynamodb_sts_role_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the DynamoDB table to extract data from.
     /// This parameter specifies the source table for the ELT operation.

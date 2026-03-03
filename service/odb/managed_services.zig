@@ -10,34 +10,34 @@ const ZeroEtlAccess = @import("zero_etl_access.zig").ZeroEtlAccess;
 pub const ManagedServices = struct {
     /// The access configuration for the cross-Region Amazon S3 database restore
     /// source.
-    cross_region_s3_restore_sources_access: ?[]const CrossRegionS3RestoreSourcesAccess,
+    cross_region_s3_restore_sources_access: ?[]const CrossRegionS3RestoreSourcesAccess = null,
 
     /// The Amazon Web Services Key Management Service (KMS) access configuration.
-    kms_access: ?KmsAccess,
+    kms_access: ?KmsAccess = null,
 
     /// The managed Amazon S3 backup access configuration.
-    managed_s3_backup_access: ?ManagedS3BackupAccess,
+    managed_s3_backup_access: ?ManagedS3BackupAccess = null,
 
     /// The IPv4 CIDR blocks for the managed services.
-    managed_services_ipv_4_cidrs: ?[]const []const u8,
+    managed_services_ipv_4_cidrs: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the resource gateway.
-    resource_gateway_arn: ?[]const u8,
+    resource_gateway_arn: ?[]const u8 = null,
 
     /// The Amazon S3 access configuration.
-    s_3_access: ?S3Access,
+    s_3_access: ?S3Access = null,
 
     /// The Amazon Resource Name (ARN) of the service network.
-    service_network_arn: ?[]const u8,
+    service_network_arn: ?[]const u8 = null,
 
     /// The service network endpoint configuration.
-    service_network_endpoint: ?ServiceNetworkEndpoint,
+    service_network_endpoint: ?ServiceNetworkEndpoint = null,
 
     /// The Amazon Web Services Security Token Service (STS) access configuration.
-    sts_access: ?StsAccess,
+    sts_access: ?StsAccess = null,
 
     /// The Zero-ETL access configuration.
-    zero_etl_access: ?ZeroEtlAccess,
+    zero_etl_access: ?ZeroEtlAccess = null,
 
     pub const json_field_names = .{
         .cross_region_s3_restore_sources_access = "crossRegionS3RestoreSourcesAccess",

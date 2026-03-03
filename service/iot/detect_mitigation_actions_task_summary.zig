@@ -7,7 +7,7 @@ const ViolationEventOccurrenceRange = @import("violation_event_occurrence_range.
 /// The summary of the mitigation action tasks.
 pub const DetectMitigationActionsTaskSummary = struct {
     /// The definition of the actions.
-    actions_definition: ?[]const MitigationAction,
+    actions_definition: ?[]const MitigationAction = null,
 
     /// Includes only active violations.
     only_active_violations_included: bool = false,
@@ -17,25 +17,25 @@ pub const DetectMitigationActionsTaskSummary = struct {
 
     /// Specifies the ML Detect findings to which the mitigation actions are
     /// applied.
-    target: ?DetectMitigationActionsTaskTarget,
+    target: ?DetectMitigationActionsTaskTarget = null,
 
     /// The date the task ended.
-    task_end_time: ?i64,
+    task_end_time: ?i64 = null,
 
     /// The unique identifier of the task.
-    task_id: ?[]const u8,
+    task_id: ?[]const u8 = null,
 
     /// The date the task started.
-    task_start_time: ?i64,
+    task_start_time: ?i64 = null,
 
     /// The statistics of a mitigation action task.
-    task_statistics: ?DetectMitigationActionsTaskStatistics,
+    task_statistics: ?DetectMitigationActionsTaskStatistics = null,
 
     /// The status of the task.
-    task_status: ?DetectMitigationActionsTaskStatus,
+    task_status: ?DetectMitigationActionsTaskStatus = null,
 
     /// Specifies the time period of which violation events occurred between.
-    violation_event_occurrence_range: ?ViolationEventOccurrenceRange,
+    violation_event_occurrence_range: ?ViolationEventOccurrenceRange = null,
 
     pub const json_field_names = .{
         .actions_definition = "actionsDefinition",

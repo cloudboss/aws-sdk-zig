@@ -9,22 +9,22 @@ pub const Reservation = struct {
 
     /// The end date for the serverless reservation. This date is one year after the
     /// start date that you specify.
-    end_date: ?i64,
+    end_date: ?i64 = null,
 
     /// The type of offering for the reservation. The offering class determines the
     /// payment schedule for the reservation.
-    offering: ?ReservationOffering,
+    offering: ?ReservationOffering = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the serverless
     /// reservation.
-    reservation_arn: ?[]const u8,
+    reservation_arn: ?[]const u8 = null,
 
     /// The identifier that uniquely identifies the serverless reservation.
-    reservation_id: ?[]const u8,
+    reservation_id: ?[]const u8 = null,
 
     /// The start date for the serverless reservation. This is the date you created
     /// the reservation.
-    start_date: ?i64,
+    start_date: ?i64 = null,
 
     /// The status of the reservation. Possible values include the following:
     ///
@@ -32,7 +32,7 @@ pub const Reservation = struct {
     /// * `active`
     /// * `payment-failed`
     /// * `retired`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .capacity = "capacity",

@@ -16,10 +16,10 @@ pub const NetworkACLEntry = struct {
     cidr_block: []const u8,
 
     /// Defines the ICMP protocol that consists of the ICMP type and code.
-    icmp_type_code: ?IcmpTypeCode,
+    icmp_type_code: ?IcmpTypeCode = null,
 
     /// The range of ports the rule applies to.
-    port_range: ?PortRange,
+    port_range: ?PortRange = null,
 
     /// The protocol number. A value of *-1* means all the protocols.
     protocol: []const u8,

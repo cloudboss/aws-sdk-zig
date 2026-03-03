@@ -9,28 +9,28 @@ pub const ScheduledQuery = struct {
     arn: []const u8,
 
     /// The creation time of the scheduled query.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Configuration for scheduled query error reporting.
-    error_report_configuration: ?ErrorReportConfiguration,
+    error_report_configuration: ?ErrorReportConfiguration = null,
 
     /// Status of the last scheduled query run.
-    last_run_status: ?ScheduledQueryRunStatus,
+    last_run_status: ?ScheduledQueryRunStatus = null,
 
     /// The name of the scheduled query.
     name: []const u8,
 
     /// The next time the scheduled query is to be run.
-    next_invocation_time: ?i64,
+    next_invocation_time: ?i64 = null,
 
     /// The last time the scheduled query was run.
-    previous_invocation_time: ?i64,
+    previous_invocation_time: ?i64 = null,
 
     /// State of scheduled query.
     state: ScheduledQueryState,
 
     /// Target data source where final scheduled query result will be written.
-    target_destination: ?TargetDestination,
+    target_destination: ?TargetDestination = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

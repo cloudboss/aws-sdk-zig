@@ -20,7 +20,7 @@ pub const MedicalScribeEncryptionSettings = struct {
     /// security for your data. For more information, see [KMSencryption context
     /// ](https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context) and [Asymmetric keys in KMS
     /// ](https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html).
-    kms_encryption_context: ?[]const aws.map.StringMapEntry,
+    kms_encryption_context: ?[]const aws.map.StringMapEntry = null,
 
     /// The ID of the KMS key you want to use for your streaming session. You
     /// can specify its KMS key ID, key Amazon Resource Name (ARN), alias name, or

@@ -22,7 +22,7 @@
 /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
 pub const RecordMarkerDecisionAttributes = struct {
     /// The details of the marker.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// The name of the marker.
     marker_name: []const u8,

@@ -8,5 +8,5 @@ const S3UpdateObjectEncryptionSSEKMS = @import("s3_update_object_encryption_ssek
 pub const ObjectEncryption = struct {
     /// Specifies to update the object encryption type to server-side encryption
     /// with Key Management Service (KMS) keys (SSE-KMS).
-    ssekms: ?S3UpdateObjectEncryptionSSEKMS,
+    ssekms: ?S3UpdateObjectEncryptionSSEKMS = null,
 };

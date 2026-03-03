@@ -7,11 +7,11 @@ pub const TrafficRoutingConfig = struct {
     /// Batch size for the first step to turn on traffic on the new endpoint fleet.
     /// `Value` must be less than or equal to 50% of the variant's total instance
     /// count.
-    canary_size: ?CapacitySize,
+    canary_size: ?CapacitySize = null,
 
     /// Batch size for each step to turn on traffic on the new endpoint fleet.
     /// `Value` must be 10-50% of the variant's total instance count.
-    linear_step_size: ?CapacitySize,
+    linear_step_size: ?CapacitySize = null,
 
     /// Traffic routing strategy type.
     ///

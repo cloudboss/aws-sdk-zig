@@ -8,13 +8,13 @@ pub const MessageInsightsDataSource = struct {
     end_date: i64,
 
     /// Filters for results to be excluded from the export file.
-    exclude: ?MessageInsightsFilters,
+    exclude: ?MessageInsightsFilters = null,
 
     /// Filters for results to be included in the export file.
-    include: ?MessageInsightsFilters,
+    include: ?MessageInsightsFilters = null,
 
     /// The maximum number of results.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// Represents the start date for the export interval as a timestamp. The start
     /// date is inclusive.

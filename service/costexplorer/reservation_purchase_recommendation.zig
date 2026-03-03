@@ -13,28 +13,28 @@ pub const ReservationPurchaseRecommendation = struct {
     /// for. For example, you can purchase this reservation for an entire
     /// organization in
     /// Amazon Web Services Organizations.
-    account_scope: ?AccountScope,
+    account_scope: ?AccountScope = null,
 
     /// How many days of previous usage that Amazon Web Services considers when
     /// making this
     /// recommendation.
-    lookback_period_in_days: ?LookbackPeriodInDays,
+    lookback_period_in_days: ?LookbackPeriodInDays = null,
 
     /// The payment option for the reservation (for example, `AllUpfront` or
     /// `NoUpfront`).
-    payment_option: ?PaymentOption,
+    payment_option: ?PaymentOption = null,
 
     /// Details about the recommended purchases.
-    recommendation_details: ?[]const ReservationPurchaseRecommendationDetail,
+    recommendation_details: ?[]const ReservationPurchaseRecommendationDetail = null,
 
     /// A summary about the recommended purchase.
-    recommendation_summary: ?ReservationPurchaseRecommendationSummary,
+    recommendation_summary: ?ReservationPurchaseRecommendationSummary = null,
 
     /// Hardware specifications for the service that you want recommendations for.
-    service_specification: ?ServiceSpecification,
+    service_specification: ?ServiceSpecification = null,
 
     /// The term of the reservation that you want recommendations for, in years.
-    term_in_years: ?TermInYears,
+    term_in_years: ?TermInYears = null,
 
     pub const json_field_names = .{
         .account_scope = "AccountScope",

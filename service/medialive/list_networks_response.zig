@@ -3,10 +3,10 @@ const DescribeNetworkSummary = @import("describe_network_summary.zig").DescribeN
 /// Placeholder documentation for ListNetworksResponse
 pub const ListNetworksResponse = struct {
     /// An array of networks that you have created.
-    networks: ?[]const DescribeNetworkSummary,
+    networks: ?[]const DescribeNetworkSummary = null,
 
     /// Token for the next ListNetworks request.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .networks = "Networks",

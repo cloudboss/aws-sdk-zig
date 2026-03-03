@@ -7,7 +7,7 @@ pub const ImageVersion = struct {
     creation_time: i64,
 
     /// When a create or delete operation fails, the reason for the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The ARN of the image the version is based on.
     image_arn: []const u8,

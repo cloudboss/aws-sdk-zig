@@ -5,7 +5,7 @@ const AudioStandardGenerativeFieldType = @import("audio_standard_generative_fiel
 pub const AudioStandardGenerativeField = struct {
     state: State,
 
-    types: ?[]const AudioStandardGenerativeFieldType,
+    types: ?[]const AudioStandardGenerativeFieldType = null,
 
     pub const json_field_names = .{
         .state = "state",

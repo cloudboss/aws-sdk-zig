@@ -6,7 +6,7 @@
 /// account ID.
 pub const ResourceDataSyncDestinationDataSharing = struct {
     /// The sharing data type. Only `Organization` is supported.
-    destination_data_sharing_type: ?[]const u8,
+    destination_data_sharing_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_data_sharing_type = "DestinationDataSharingType",

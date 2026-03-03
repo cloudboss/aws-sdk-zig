@@ -7,14 +7,14 @@ const MediaStreamType = @import("media_stream_type.zig").MediaStreamType;
 /// protocol.
 pub const MediaStream = struct {
     /// Attributes that are related to the media stream.
-    attributes: ?MediaStreamAttributes,
+    attributes: ?MediaStreamAttributes = null,
 
     /// The sample rate for the stream. This value is measured in Hz.
-    clock_rate: ?i32,
+    clock_rate: ?i32 = null,
 
     /// A description that can help you quickly identify what your media stream is
     /// used for.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The format type number (sometimes referred to as RTP payload type) of the
     /// media stream. MediaConnect assigns this value to the media stream. For ST
@@ -31,7 +31,7 @@ pub const MediaStream = struct {
     media_stream_type: MediaStreamType,
 
     /// The resolution of the video.
-    video_format: ?[]const u8,
+    video_format: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

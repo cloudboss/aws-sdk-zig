@@ -13,84 +13,84 @@ pub const AddOutputRequest = struct {
     /// The range of IP addresses that should be allowed to initiate output requests
     /// to this flow. These IP addresses should be in the form of a Classless
     /// Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
-    cidr_allow_list: ?[]const []const u8,
+    cidr_allow_list: ?[]const []const u8 = null,
 
     /// A description of the output. This description appears only on the Audit
     /// Manager console and will not be seen by the end user.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The IP address from which video will be sent to output destinations.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// The type of key used for the encryption. If no keyType is provided, the
     /// service will use the default setting (static-key). Allowable encryption
     /// types: static-key.
-    encryption: ?Encryption,
+    encryption: ?Encryption = null,
 
     /// The maximum latency in milliseconds. This parameter applies only to
     /// RIST-based and Zixi-based streams.
-    max_latency: ?i32,
+    max_latency: ?i32 = null,
 
     /// The media streams that are associated with the output, and the parameters
     /// for those associations.
-    media_stream_output_configurations: ?[]const MediaStreamOutputConfigurationRequest,
+    media_stream_output_configurations: ?[]const MediaStreamOutputConfigurationRequest = null,
 
     /// The minimum latency in milliseconds for SRT-based streams. In streams that
     /// use the SRT protocol, this value that you set on your MediaConnect source or
     /// output represents the minimal potential latency of that connection. The
     /// latency of the stream is set to the highest number between the sender’s
     /// minimum latency and the receiver’s minimum latency.
-    min_latency: ?i32,
+    min_latency: ?i32 = null,
 
     /// The name of the output. This value must be unique within the current flow.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A suffix for the name of the NDI® sender that the flow creates. If a custom
     /// name isn't specified, MediaConnect uses the output name.
-    ndi_program_name: ?[]const u8,
+    ndi_program_name: ?[]const u8 = null,
 
     /// A quality setting for the NDI Speed HQ encoder.
-    ndi_speed_hq_quality: ?i32,
+    ndi_speed_hq_quality: ?i32 = null,
 
     /// An indication of whether the new output should be enabled or disabled as
     /// soon as it is created. If you don't specify the outputStatus field in your
     /// request, MediaConnect sets it to ENABLED.
-    output_status: ?OutputStatus,
+    output_status: ?OutputStatus = null,
 
     /// The key-value pairs that can be used to tag and organize the output.
-    output_tags: ?[]const aws.map.StringMapEntry,
+    output_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The port to use when content is distributed to this output.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The protocol to use for the output.
     ///
     /// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
     /// reference is maintained for legacy purposes only.
-    protocol: ?Protocol,
+    protocol: ?Protocol = null,
 
     /// The remote ID for the Zixi-pull output stream.
-    remote_id: ?[]const u8,
+    remote_id: ?[]const u8 = null,
 
     /// Indicates whether to enable or disable router integration when creating a
     /// new flow output.
-    router_integration_state: ?State,
+    router_integration_state: ?State = null,
 
-    router_integration_transit_encryption: ?FlowTransitEncryption,
+    router_integration_transit_encryption: ?FlowTransitEncryption = null,
 
     /// The port that the flow uses to send outbound requests to initiate connection
     /// with the sender.
-    sender_control_port: ?i32,
+    sender_control_port: ?i32 = null,
 
     /// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
-    smoothing_latency: ?i32,
+    smoothing_latency: ?i32 = null,
 
     /// The stream ID that you want to use for this transport. This parameter
     /// applies only to Zixi and SRT caller-based streams.
-    stream_id: ?[]const u8,
+    stream_id: ?[]const u8 = null,
 
     /// The name of the VPC interface attachment to use for this output.
-    vpc_interface_attachment: ?VpcInterfaceAttachment,
+    vpc_interface_attachment: ?VpcInterfaceAttachment = null,
 
     pub const json_field_names = .{
         .cidr_allow_list = "CidrAllowList",

@@ -9,27 +9,27 @@ const AwsGuardDutyDetectorDataSourcesS3LogsDetails = @import("aws_guard_duty_det
 pub const AwsGuardDutyDetectorDataSourcesDetails = struct {
     /// An object that contains information on the status of CloudTrail as a data
     /// source for the detector.
-    cloud_trail: ?AwsGuardDutyDetectorDataSourcesCloudTrailDetails,
+    cloud_trail: ?AwsGuardDutyDetectorDataSourcesCloudTrailDetails = null,
 
     /// An object that contains information on the status of DNS logs as a data
     /// source for the detector.
-    dns_logs: ?AwsGuardDutyDetectorDataSourcesDnsLogsDetails,
+    dns_logs: ?AwsGuardDutyDetectorDataSourcesDnsLogsDetails = null,
 
     /// An object that contains information on the status of VPC Flow Logs as a data
     /// source for the detector.
-    flow_logs: ?AwsGuardDutyDetectorDataSourcesFlowLogsDetails,
+    flow_logs: ?AwsGuardDutyDetectorDataSourcesFlowLogsDetails = null,
 
     /// An object that contains information on the status of Kubernetes data sources
     /// for the detector.
-    kubernetes: ?AwsGuardDutyDetectorDataSourcesKubernetesDetails,
+    kubernetes: ?AwsGuardDutyDetectorDataSourcesKubernetesDetails = null,
 
     /// An object that contains information on the status of Malware Protection as a
     /// data source for the detector.
-    malware_protection: ?AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails,
+    malware_protection: ?AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails = null,
 
     /// An object that contains information on the status of S3 Data event logs as a
     /// data source for the detector.
-    s3_logs: ?AwsGuardDutyDetectorDataSourcesS3LogsDetails,
+    s3_logs: ?AwsGuardDutyDetectorDataSourcesS3LogsDetails = null,
 
     pub const json_field_names = .{
         .cloud_trail = "CloudTrail",

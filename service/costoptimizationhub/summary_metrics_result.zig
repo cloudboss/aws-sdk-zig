@@ -6,7 +6,7 @@ pub const SummaryMetricsResult = struct {
     ///
     /// Savings percentage is only supported when filtering by Region, account ID,
     /// or tags.
-    savings_percentage: ?[]const u8,
+    savings_percentage: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .savings_percentage = "savingsPercentage",

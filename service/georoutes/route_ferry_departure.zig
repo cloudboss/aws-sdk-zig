@@ -6,7 +6,7 @@ pub const RouteFerryDeparture = struct {
     place: RouteFerryPlace,
 
     /// The time.
-    time: ?[]const u8,
+    time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .place = "Place",

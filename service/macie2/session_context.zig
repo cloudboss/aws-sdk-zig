@@ -7,10 +7,10 @@ pub const SessionContext = struct {
     /// The date and time when the credentials were issued, and whether the
     /// credentials were authenticated with a multi-factor authentication (MFA)
     /// device.
-    attributes: ?SessionContextAttributes,
+    attributes: ?SessionContextAttributes = null,
 
     /// The source and type of credentials that were issued to the entity.
-    session_issuer: ?SessionIssuer,
+    session_issuer: ?SessionIssuer = null,
 
     pub const json_field_names = .{
         .attributes = "attributes",

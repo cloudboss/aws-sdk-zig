@@ -9,16 +9,16 @@ const HttpScheme = @import("http_scheme.zig").HttpScheme;
 /// virtual router.
 pub const HttpRouteMatch = struct {
     /// The client request headers to match on.
-    headers: ?[]const HttpRouteHeader,
+    headers: ?[]const HttpRouteHeader = null,
 
     /// The client request method to match on. Specify only one.
-    method: ?HttpMethod,
+    method: ?HttpMethod = null,
 
     /// The client request path to match on.
-    path: ?HttpPathMatch,
+    path: ?HttpPathMatch = null,
 
     /// The port number to match on.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// Specifies the path to match requests with. This parameter must always start
     /// with
@@ -28,15 +28,15 @@ pub const HttpRouteMatch = struct {
     /// name is `my-service.local` and you want the route to match requests to
     /// `my-service.local/metrics`, your prefix should be
     /// `/metrics`.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// The client request query parameters to match on.
-    query_parameters: ?[]const HttpQueryParameter,
+    query_parameters: ?[]const HttpQueryParameter = null,
 
     /// The client request scheme to match on. Specify only one. Applicable only for
     /// HTTP2
     /// routes.
-    scheme: ?HttpScheme,
+    scheme: ?HttpScheme = null,
 
     pub const json_field_names = .{
         .headers = "headers",

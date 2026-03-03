@@ -10,13 +10,13 @@ pub const Actor = struct {
     /// Contains information about the process associated with the threat actor.
     /// This includes details such as process name, path, execution time, and
     /// unique identifiers that help track the actor's activities within the system.
-    process: ?ActorProcess,
+    process: ?ActorProcess = null,
 
     /// Contains information about the user session where the activity initiated.
-    session: ?Session,
+    session: ?Session = null,
 
     /// Contains information about the user credentials used by the threat actor.
-    user: ?User,
+    user: ?User = null,
 
     pub const json_field_names = .{
         .id = "Id",

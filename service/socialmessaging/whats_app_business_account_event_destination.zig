@@ -5,7 +5,7 @@ pub const WhatsAppBusinessAccountEventDestination = struct {
 
     /// The Amazon Resource Name (ARN) of an Identity and Access Management role
     /// that is able to import phone numbers and write events.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .event_destination_arn = "eventDestinationArn",

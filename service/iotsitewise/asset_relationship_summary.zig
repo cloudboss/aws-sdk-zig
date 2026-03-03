@@ -7,7 +7,7 @@ pub const AssetRelationshipSummary = struct {
     ///
     /// This object is present if the `relationshipType` is
     /// `HIERARCHY`.
-    hierarchy_info: ?AssetHierarchyInfo,
+    hierarchy_info: ?AssetHierarchyInfo = null,
 
     /// The relationship type of the assets in this relationship. This value is one
     /// of the

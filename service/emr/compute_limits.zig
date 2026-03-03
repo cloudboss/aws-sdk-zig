@@ -22,7 +22,7 @@ pub const ComputeLimits = struct {
     /// instance fleets. The core units are not allowed to scale beyond this
     /// boundary. The
     /// parameter is used to split capacity allocation between core and task nodes.
-    maximum_core_capacity_units: ?i32,
+    maximum_core_capacity_units: ?i32 = null,
 
     /// The upper boundary of On-Demand Amazon EC2 units. It is measured through
     /// vCPU
@@ -31,7 +31,7 @@ pub const ComputeLimits = struct {
     /// On-Demand units are not allowed to scale beyond this boundary. The parameter
     /// is used to
     /// split capacity allocation between On-Demand and Spot Instances.
-    maximum_on_demand_capacity_units: ?i32,
+    maximum_on_demand_capacity_units: ?i32 = null,
 
     /// The lower boundary of Amazon EC2 units. It is measured through vCPU cores or
     /// instances for instance groups and measured through units for instance

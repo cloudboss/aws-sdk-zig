@@ -8,48 +8,48 @@ const ApplicationState = @import("application_state.zig").ApplicationState;
 /// The list of `ApplicationSummary` objects.
 pub const ApplicationSummary = struct {
     /// The endpoint URL of the Amazon API Gateway proxy.
-    api_gateway_proxy: ?ApiGatewayProxySummary,
+    api_gateway_proxy: ?ApiGatewayProxySummary = null,
 
     /// The unique identifier of the application.
-    application_id: ?[]const u8,
+    application_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the application.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID of the application creator.
-    created_by_account_id: ?[]const u8,
+    created_by_account_id: ?[]const u8 = null,
 
     /// A timestamp that indicates when the application is created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The unique identifier of the environment.
-    environment_id: ?[]const u8,
+    environment_id: ?[]const u8 = null,
 
     /// Any error associated with the application resource.
-    @"error": ?ErrorResponse,
+    @"error": ?ErrorResponse = null,
 
     /// A timestamp that indicates when the application was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The name of the application.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID of the application owner (which is always
     /// the same as
     /// the environment owner account ID).
-    owner_account_id: ?[]const u8,
+    owner_account_id: ?[]const u8 = null,
 
     /// The proxy type of the proxy created within the application.
-    proxy_type: ?ProxyType,
+    proxy_type: ?ProxyType = null,
 
     /// The current state of the application.
-    state: ?ApplicationState,
+    state: ?ApplicationState = null,
 
     /// The tags assigned to the application.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The ID of the virtual private cloud (VPC).
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .api_gateway_proxy = "ApiGatewayProxy",

@@ -16,7 +16,7 @@ pub const ValidationConfiguration = struct {
     /// Mode of data quality validation. Default mode is “CHECK_ALL” which verifies
     /// all rules
     /// defined in the selected ruleset.
-    validation_mode: ?ValidationMode,
+    validation_mode: ?ValidationMode = null,
 
     pub const json_field_names = .{
         .ruleset_arn = "RulesetArn",

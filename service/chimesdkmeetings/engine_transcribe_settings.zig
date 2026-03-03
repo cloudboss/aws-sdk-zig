@@ -18,13 +18,13 @@ pub const EngineTranscribeSettings = struct {
     /// transcript. If you don't include `PiiEntityTypes`, all PII is identified.
     ///
     /// You can’t set `ContentIdentificationType` and `ContentRedactionType`.
-    content_identification_type: ?TranscribeContentIdentificationType,
+    content_identification_type: ?TranscribeContentIdentificationType = null,
 
     /// Content redaction is performed at the segment level. If you don't include
     /// `PiiEntityTypes`, all PII is redacted.
     ///
     /// You can’t set `ContentRedactionType` and `ContentIdentificationType`.
-    content_redaction_type: ?TranscribeContentRedactionType,
+    content_redaction_type: ?TranscribeContentRedactionType = null,
 
     /// Enables partial result stabilization for your transcription. Partial result
     /// stabilization can reduce latency in your output, but may impact accuracy.
@@ -50,7 +50,7 @@ pub const EngineTranscribeSettings = struct {
     ///
     /// If you're unsure of the language spoken in your audio, consider using
     /// `IdentifyLanguage` to enable automatic language identification.
-    language_code: ?TranscribeLanguageCode,
+    language_code: ?TranscribeLanguageCode = null,
 
     /// Specify the name of the custom language model that you want to use when
     /// processing your transcription. Note that language model names are case
@@ -63,7 +63,7 @@ pub const EngineTranscribeSettings = struct {
     ///
     /// If you use Amazon Transcribe in multiple Regions, the custom language model
     /// must be available in Amazon Transcribe in each Region.
-    language_model_name: ?[]const u8,
+    language_model_name: ?[]const u8 = null,
 
     /// Specify two or more language codes that represent the languages you think
     /// may be present in your media; including more than five is not recommended.
@@ -77,14 +77,14 @@ pub const EngineTranscribeSettings = struct {
     ///
     /// You can only include one language dialect per language. For example, you
     /// cannot include `en-US` and `en-AU`.
-    language_options: ?[]const u8,
+    language_options: ?[]const u8 = null,
 
     /// Specify the level of stability to use when you enable partial results
     /// stabilization (`EnablePartialResultsStabilization`).
     ///
     /// Low stability provides the highest accuracy. High stability transcribes
     /// faster, but with slightly lower accuracy.
-    partial_results_stability: ?TranscribePartialResultsStability,
+    partial_results_stability: ?TranscribePartialResultsStability = null,
 
     /// Specify which types of personally identifiable information (PII) you want to
     /// redact in your transcript. You can include as many types as you'd like, or
@@ -101,14 +101,14 @@ pub const EngineTranscribeSettings = struct {
     ///
     /// If you include `ContentRedactionType` or `ContentIdentificationType`, but do
     /// not include PiiEntityTypes, all PII is redacted or identified.
-    pii_entity_types: ?[]const u8,
+    pii_entity_types: ?[]const u8 = null,
 
     /// Specify a preferred language from the subset of languages codes you
     /// specified in `LanguageOptions`.
     ///
     /// You can only use this parameter if you include `IdentifyLanguage` and
     /// `LanguageOptions`.
-    preferred_language: ?TranscribeLanguageCode,
+    preferred_language: ?TranscribeLanguageCode = null,
 
     /// The Amazon Web Services Region in which to use Amazon Transcribe.
     ///
@@ -122,7 +122,7 @@ pub const EngineTranscribeSettings = struct {
     /// [Choosing a transcription
     /// Region](https://docs.aws.amazon.com/chime-sdk/latest/dg/transcription-options.html#choose-region) in the
     /// *Amazon Chime SDK Developer Guide*.
-    region: ?TranscribeRegion,
+    region: ?TranscribeRegion = null,
 
     /// Specify how you want your vocabulary filter applied to your transcript.
     ///
@@ -131,7 +131,7 @@ pub const EngineTranscribeSettings = struct {
     /// To delete words, choose `remove`.
     ///
     /// To flag words without changing them, choose `tag`.
-    vocabulary_filter_method: ?TranscribeVocabularyFilterMethod,
+    vocabulary_filter_method: ?TranscribeVocabularyFilterMethod = null,
 
     /// Specify the name of the custom vocabulary filter that you want to use when
     /// processing your transcription. Note that vocabulary filter names are case
@@ -143,7 +143,7 @@ pub const EngineTranscribeSettings = struct {
     /// If you include `IdentifyLanguage` and want to use one or more vocabulary
     /// filters with your transcription, use the `VocabularyFilterNames` parameter
     /// instead.
-    vocabulary_filter_name: ?[]const u8,
+    vocabulary_filter_name: ?[]const u8 = null,
 
     /// Specify the names of the custom vocabulary filters that you want to use when
     /// processing your transcription. Note that vocabulary filter names are case
@@ -155,7 +155,7 @@ pub const EngineTranscribeSettings = struct {
     /// If you're *not* including `IdentifyLanguage` and want to use a custom
     /// vocabulary filter with your transcription, use the `VocabularyFilterName`
     /// parameter instead.
-    vocabulary_filter_names: ?[]const u8,
+    vocabulary_filter_names: ?[]const u8 = null,
 
     /// Specify the name of the custom vocabulary that you want to use when
     /// processing your transcription. Note that vocabulary names are case
@@ -167,7 +167,7 @@ pub const EngineTranscribeSettings = struct {
     /// If you include `IdentifyLanguage` and want to use one or more custom
     /// vocabularies with your transcription, use the `VocabularyNames`
     /// parameter instead.
-    vocabulary_name: ?[]const u8,
+    vocabulary_name: ?[]const u8 = null,
 
     /// Specify the names of the custom vocabularies that you want to use when
     /// processing your transcription. Note that vocabulary names are case
@@ -178,7 +178,7 @@ pub const EngineTranscribeSettings = struct {
     ///
     /// If you don't include `IdentifyLanguage` and want to use a custom vocabulary
     /// with your transcription, use the `VocabularyName` parameter instead.
-    vocabulary_names: ?[]const u8,
+    vocabulary_names: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content_identification_type = "ContentIdentificationType",

@@ -6,7 +6,7 @@ const TargetPreview = @import("target_preview.zig").TargetPreview;
 pub const AutomationExecutionPreview = struct {
     /// Information about the Amazon Web Services Regions targeted by the execution
     /// preview.
-    regions: ?[]const []const u8,
+    regions: ?[]const []const u8 = null,
 
     /// Information about the type of impact a runbook step would have on a
     /// resource.
@@ -27,12 +27,12 @@ pub const AutomationExecutionPreview = struct {
     /// third-party API. Systems Manager Automation doesn't know the outcome of the
     /// orchestration processes or
     /// third-party API executions, so the results of the steps are undetermined.
-    step_previews: ?[]const aws.map.MapEntry(i32),
+    step_previews: ?[]const aws.map.MapEntry(i32) = null,
 
     /// Information that provides a preview of what the impact of running the
     /// specified Automation
     /// runbook would be.
-    target_previews: ?[]const TargetPreview,
+    target_previews: ?[]const TargetPreview = null,
 
     /// Information about the Amazon Web Services accounts that were included in the
     /// execution

@@ -8,7 +8,7 @@ pub const MarkerRecordedEventAttributes = struct {
     decision_task_completed_event_id: i64 = 0,
 
     /// The details of the marker.
-    details: ?[]const u8,
+    details: ?[]const u8 = null,
 
     /// The name of the marker.
     marker_name: []const u8,

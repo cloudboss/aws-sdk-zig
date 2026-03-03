@@ -3,10 +3,10 @@ const EdgePackagingJobStatus = @import("edge_packaging_job_status.zig").EdgePack
 /// Summary of edge packaging job.
 pub const EdgePackagingJobSummary = struct {
     /// The name of the SageMaker Neo compilation job.
-    compilation_job_name: ?[]const u8,
+    compilation_job_name: ?[]const u8 = null,
 
     /// The timestamp of when the job was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the edge packaging job.
     edge_packaging_job_arn: []const u8,
@@ -18,13 +18,13 @@ pub const EdgePackagingJobSummary = struct {
     edge_packaging_job_status: EdgePackagingJobStatus,
 
     /// The timestamp of when the edge packaging job was last updated.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the model.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     /// The version of the model.
-    model_version: ?[]const u8,
+    model_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .compilation_job_name = "CompilationJobName",

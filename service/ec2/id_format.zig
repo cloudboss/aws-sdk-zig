@@ -3,12 +3,12 @@ pub const IdFormat = struct {
     /// The date in UTC at which you are permanently switched over to using longer
     /// IDs. If a deadline is not yet available for this resource type, this field
     /// is not returned.
-    deadline: ?i64,
+    deadline: ?i64 = null,
 
     /// The type of resource.
-    resource: ?[]const u8,
+    resource: ?[]const u8 = null,
 
     /// Indicates whether longer IDs (17-character IDs) are enabled for the
     /// resource.
-    use_long_ids: ?bool,
+    use_long_ids: ?bool = null,
 };

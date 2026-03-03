@@ -13,7 +13,7 @@ pub const StatefulEngineOptions = struct {
     /// rules](https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html) in the *Network Firewall Developer Guide*.
     ///
     /// Default: `DEFAULT_ACTION_ORDER`
-    rule_order: ?RuleOrder,
+    rule_order: ?RuleOrder = null,
 
     /// Indicates how Network Firewall should handle traffic when a network
     /// connection breaks midstream.
@@ -48,7 +48,7 @@ pub const StatefulEngineOptions = struct {
     /// in the *Network Firewall Developer Guide*.
     ///
     /// Default: `FMS_IGNORE`
-    stream_exception_policy: ?StreamExceptionPolicy,
+    stream_exception_policy: ?StreamExceptionPolicy = null,
 
     pub const json_field_names = .{
         .rule_order = "RuleOrder",

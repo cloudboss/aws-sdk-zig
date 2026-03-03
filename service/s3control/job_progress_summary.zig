@@ -4,12 +4,12 @@ const JobTimers = @import("job_timers.zig").JobTimers;
 /// number of
 /// tasks that succeeded, and the number of tasks that failed.
 pub const JobProgressSummary = struct {
-    number_of_tasks_failed: ?i64,
+    number_of_tasks_failed: ?i64 = null,
 
-    number_of_tasks_succeeded: ?i64,
+    number_of_tasks_succeeded: ?i64 = null,
 
     /// The JobTimers attribute of a job's progress summary.
-    timers: ?JobTimers,
+    timers: ?JobTimers = null,
 
-    total_number_of_tasks: ?i64,
+    total_number_of_tasks: ?i64 = null,
 };

@@ -10,7 +10,7 @@ pub const ServiceAccountTokenSummary = struct {
     id: []const u8,
 
     /// The last time the token was used to authorize a Grafana HTTP API.
-    last_used_at: ?i64,
+    last_used_at: ?i64 = null,
 
     /// The name of the service account token.
     name: []const u8,

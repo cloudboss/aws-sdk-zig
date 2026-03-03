@@ -6,13 +6,13 @@ const CardType = @import("card_type.zig").CardType;
 pub const FileUploadCardInput = struct {
     /// A flag indicating if the user can override the default file for the upload
     /// card.
-    allow_override: ?bool,
+    allow_override: ?bool = null,
 
     /// The identifier of a pre-uploaded file associated with the card.
-    file_id: ?[]const u8,
+    file_id: ?[]const u8 = null,
 
     /// The default filename to use for the file upload card.
-    filename: ?[]const u8,
+    filename: ?[]const u8 = null,
 
     /// The unique identifier of the file upload card.
     id: []const u8,

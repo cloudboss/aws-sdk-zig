@@ -11,11 +11,11 @@ pub const LogEventConfiguration = struct {
     /// should be sent. The log destination for event-based logging overrides
     /// default Log Group for the specified event type and applies to all resources
     /// associated with that event.
-    log_destination: ?[]const u8,
+    log_destination: ?[]const u8 = null,
 
     /// The logging level for the specified event type. Determines the verbosity of
     /// log messages generated for this event type.
-    log_level: ?LogLevel,
+    log_level: ?LogLevel = null,
 
     pub const json_field_names = .{
         .event_type = "eventType",

@@ -7,7 +7,7 @@ pub const PartnerLedSupport = struct {
     coverage: Coverage,
 
     /// The provider of the partner-led support.
-    provider: ?Provider,
+    provider: ?Provider = null,
 
     /// The location of the Technical Account Manager (TAM).
     tam_location: []const u8,

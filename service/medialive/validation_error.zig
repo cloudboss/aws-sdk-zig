@@ -1,10 +1,10 @@
 /// Placeholder documentation for ValidationError
 pub const ValidationError = struct {
     /// Path to the source of the error.
-    element_path: ?[]const u8,
+    element_path: ?[]const u8 = null,
 
     /// The error message.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .element_path = "ElementPath",

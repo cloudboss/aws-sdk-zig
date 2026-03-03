@@ -4,20 +4,20 @@ const NodeOwnerInfo = @import("node_owner_info.zig").NodeOwnerInfo;
 /// Details about an individual managed node.
 pub const Node = struct {
     /// The UTC timestamp for when the managed node data was last captured.
-    capture_time: ?i64,
+    capture_time: ?i64 = null,
 
     /// The ID of the managed node.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Information about the type of node.
-    node_type: ?NodeType,
+    node_type: ?NodeType = null,
 
     /// Information about the ownership of the managed node.
-    owner: ?NodeOwnerInfo,
+    owner: ?NodeOwnerInfo = null,
 
     /// The Amazon Web Services Region that a managed node was created in or
     /// assigned to.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .capture_time = "CaptureTime",

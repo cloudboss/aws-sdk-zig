@@ -24,14 +24,14 @@ const SupportedHour = @import("supported_hour.zig").SupportedHour;
 pub const CommunicationTypeOptions = struct {
     /// A JSON-formatted list containing date and time ranges for periods without
     /// support
-    dates_without_support: ?[]const DateInterval,
+    dates_without_support: ?[]const DateInterval = null,
 
     /// A JSON-formatted list containing time ranges when support is available.
-    supported_hours: ?[]const SupportedHour,
+    supported_hours: ?[]const SupportedHour = null,
 
     /// A string value indicating the communication type. At the moment the type
     /// value can assume one of 3 values at the moment chat, web and call.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dates_without_support = "datesWithoutSupport",

@@ -6,9 +6,9 @@ const RemoteIpDetails = @import("remote_ip_details.zig").RemoteIpDetails;
 /// remote IP address.
 pub const RdsLoginAttemptAction = struct {
     /// Indicates the login attributes used in the login attempt.
-    login_attributes: ?[]const LoginAttribute,
+    login_attributes: ?[]const LoginAttribute = null,
 
-    remote_ip_details: ?RemoteIpDetails,
+    remote_ip_details: ?RemoteIpDetails = null,
 
     pub const json_field_names = .{
         .login_attributes = "LoginAttributes",

@@ -7,7 +7,7 @@ pub const GlobalAcceleratorForDirectory = struct {
     mode: AGAModeForDirectoryEnum,
 
     /// Indicates the preferred protocol for Global Accelerator.
-    preferred_protocol: ?AGAPreferredProtocolForDirectory,
+    preferred_protocol: ?AGAPreferredProtocolForDirectory = null,
 
     pub const json_field_names = .{
         .mode = "Mode",

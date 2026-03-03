@@ -10,50 +10,50 @@ pub const ServiceQuota = struct {
     adjustable: bool = false,
 
     /// The quota description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The error code and error reason.
-    error_reason: ?ErrorReason,
+    error_reason: ?ErrorReason = null,
 
     /// Indicates whether the quota is global.
     global_quota: bool = false,
 
     /// The period of time.
-    period: ?QuotaPeriod,
+    period: ?QuotaPeriod = null,
 
     /// Filters the response to return applied quota values for the `ACCOUNT`,
     /// `RESOURCE`, or `ALL` levels. `ACCOUNT` is the default.
-    quota_applied_at_level: ?AppliedLevelEnum,
+    quota_applied_at_level: ?AppliedLevelEnum = null,
 
     /// The Amazon Resource Name (ARN) of the quota.
-    quota_arn: ?[]const u8,
+    quota_arn: ?[]const u8 = null,
 
     /// Specifies the quota identifier. To find the quota code for a specific
     /// quota, use the ListServiceQuotas operation, and look for the
     /// `QuotaCode` response in the output for the quota you want.
-    quota_code: ?[]const u8,
+    quota_code: ?[]const u8 = null,
 
     /// The context for this service quota.
-    quota_context: ?QuotaContextInfo,
+    quota_context: ?QuotaContextInfo = null,
 
     /// Specifies the quota name.
-    quota_name: ?[]const u8,
+    quota_name: ?[]const u8 = null,
 
     /// Specifies the service identifier. To find the service code value
     /// for an Amazon Web Services service, use the ListServices operation.
-    service_code: ?[]const u8,
+    service_code: ?[]const u8 = null,
 
     /// Specifies the service name.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// The unit of measurement.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     /// Information about the measurement.
-    usage_metric: ?MetricInfo,
+    usage_metric: ?MetricInfo = null,
 
     /// The quota value.
-    value: ?f64,
+    value: ?f64 = null,
 
     pub const json_field_names = .{
         .adjustable = "Adjustable",

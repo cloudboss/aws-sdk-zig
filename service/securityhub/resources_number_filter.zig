@@ -5,9 +5,9 @@ const NumberFilter = @import("number_filter.zig").NumberFilter;
 /// values.
 pub const ResourcesNumberFilter = struct {
     /// The name of the field.
-    field_name: ?ResourcesNumberField,
+    field_name: ?ResourcesNumberField = null,
 
-    filter: ?NumberFilter,
+    filter: ?NumberFilter = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

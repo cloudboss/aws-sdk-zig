@@ -8,29 +8,29 @@ const TelemetryPipelineStatusReason = @import("telemetry_pipeline_status_reason.
 /// status, and metadata for data processing and transformation.
 pub const TelemetryPipeline = struct {
     /// The Amazon Resource Name (ARN) of the telemetry pipeline.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The configuration that defines how the telemetry pipeline processes data.
-    configuration: ?TelemetryPipelineConfiguration,
+    configuration: ?TelemetryPipelineConfiguration = null,
 
     /// The timestamp when the telemetry pipeline was created.
-    created_time_stamp: ?i64,
+    created_time_stamp: ?i64 = null,
 
     /// The timestamp when the telemetry pipeline was last updated.
-    last_update_time_stamp: ?i64,
+    last_update_time_stamp: ?i64 = null,
 
     /// The name of the telemetry pipeline.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the telemetry pipeline.
-    status: ?TelemetryPipelineStatus,
+    status: ?TelemetryPipelineStatus = null,
 
     /// Additional information about the pipeline status, including reasons for
     /// failure states.
-    status_reason: ?TelemetryPipelineStatusReason,
+    status_reason: ?TelemetryPipelineStatusReason = null,
 
     /// The key-value pairs associated with the telemetry pipeline resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -14,7 +14,7 @@ const TemplateConfiguration = @import("template_configuration.zig").TemplateConf
 pub const CampaignResponse = struct {
     /// An array of responses, one for each treatment that you defined for the
     /// campaign, in addition to the default treatment.
-    additional_treatments: ?[]const TreatmentResource,
+    additional_treatments: ?[]const TreatmentResource = null,
 
     /// The unique identifier for the application that the campaign applies to.
     application_id: []const u8,
@@ -27,50 +27,50 @@ pub const CampaignResponse = struct {
 
     /// The delivery configuration settings for sending the campaign through a
     /// custom channel.
-    custom_delivery_configuration: ?CustomDeliveryConfiguration,
+    custom_delivery_configuration: ?CustomDeliveryConfiguration = null,
 
     /// The current status of the campaign's default treatment. This value exists
     /// only for campaigns that have more than one treatment.
-    default_state: ?CampaignState,
+    default_state: ?CampaignState = null,
 
     /// The custom description of the campaign.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The allocated percentage of users (segment members) who shouldn't receive
     /// messages from the campaign.
-    holdout_percent: ?i32,
+    holdout_percent: ?i32 = null,
 
     /// The settings for the AWS Lambda function to use as a code hook for the
     /// campaign. You can use this hook to customize the segment that's used by the
     /// campaign.
-    hook: ?CampaignHook,
+    hook: ?CampaignHook = null,
 
     /// The unique identifier for the campaign.
     id: []const u8,
 
     /// Specifies whether the campaign is paused. A paused campaign doesn't run
     /// unless you resume it by changing this value to false.
-    is_paused: ?bool,
+    is_paused: ?bool = null,
 
     /// The date, in ISO 8601 format, when the campaign was last modified.
     last_modified_date: []const u8,
 
     /// The messaging limits for the campaign.
-    limits: ?CampaignLimits,
+    limits: ?CampaignLimits = null,
 
     /// The message configuration settings for the campaign.
-    message_configuration: ?MessageConfiguration,
+    message_configuration: ?MessageConfiguration = null,
 
     /// The name of the campaign.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Defines the priority of the campaign, used to decide the order of messages
     /// displayed to user if there are multiple messages scheduled to be displayed
     /// at the same moment.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The schedule settings for the campaign.
-    schedule: ?Schedule,
+    schedule: ?Schedule = null,
 
     /// The unique identifier for the segment that's associated with the campaign.
     segment_id: []const u8,
@@ -79,26 +79,26 @@ pub const CampaignResponse = struct {
     segment_version: i32,
 
     /// The current status of the campaign.
-    state: ?CampaignState,
+    state: ?CampaignState = null,
 
     /// A string-to-string map of key-value pairs that identifies the tags that are
     /// associated with the campaign. Each tag consists of a required tag key and an
     /// associated tag value.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The message template that’s used for the campaign.
-    template_configuration: ?TemplateConfiguration,
+    template_configuration: ?TemplateConfiguration = null,
 
     /// The custom description of the default treatment for the campaign.
-    treatment_description: ?[]const u8,
+    treatment_description: ?[]const u8 = null,
 
     /// The custom name of the default treatment for the campaign, if the campaign
     /// has multiple treatments. A *treatment* is a variation of a campaign that's
     /// used for A/B testing.
-    treatment_name: ?[]const u8,
+    treatment_name: ?[]const u8 = null,
 
     /// The version number of the campaign.
-    version: ?i32,
+    version: ?i32 = null,
 
     pub const json_field_names = .{
         .additional_treatments = "AdditionalTreatments",

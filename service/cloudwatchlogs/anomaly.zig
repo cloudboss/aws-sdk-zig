@@ -40,7 +40,7 @@ pub const Anomaly = struct {
     /// because the pattern is suppressed. If `false`, then only this particular
     /// anomaly is
     /// suppressed.
-    is_pattern_level_suppression: ?bool,
+    is_pattern_level_suppression: ?bool = null,
 
     /// The date and time when the anomaly detector most recently saw this anomaly.
     /// It is
@@ -63,7 +63,7 @@ pub const Anomaly = struct {
 
     /// The pattern used to help identify this anomaly, in regular expression
     /// format.
-    pattern_regex: ?[]const u8,
+    pattern_regex: ?[]const u8 = null,
 
     /// The pattern used to help identify this anomaly, in string format.
     pattern_string: []const u8,
@@ -78,7 +78,7 @@ pub const Anomaly = struct {
     /// computed based on log severity labels such as `FATAL` and `ERROR` and
     /// the amount of deviation from the baseline. Possible values are `HIGH`,
     /// `MEDIUM`, and `LOW`.
-    priority: ?[]const u8,
+    priority: ?[]const u8 = null,
 
     /// Indicates the current state of this anomaly. If it is still being treated as
     /// an anomaly,
@@ -90,7 +90,7 @@ pub const Anomaly = struct {
     /// Indicates whether this anomaly is currently suppressed. To suppress an
     /// anomaly, use
     /// [UpdateAnomaly](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateAnomaly.html).
-    suppressed: ?bool,
+    suppressed: ?bool = null,
 
     /// If the anomaly is suppressed, this indicates when it was suppressed.
     suppressed_date: i64 = 0,

@@ -2,10 +2,10 @@
 /// topics.
 pub const ContactList = struct {
     /// The name of the contact list.
-    contact_list_name: ?[]const u8,
+    contact_list_name: ?[]const u8 = null,
 
     /// A timestamp noting the last time the contact list was updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .contact_list_name = "ContactListName",

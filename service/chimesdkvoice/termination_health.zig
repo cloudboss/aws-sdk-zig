@@ -3,10 +3,10 @@
 /// infrastructure.
 pub const TerminationHealth = struct {
     /// The source IP address.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     /// The timestamp, in ISO 8601 format.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .source = "Source",

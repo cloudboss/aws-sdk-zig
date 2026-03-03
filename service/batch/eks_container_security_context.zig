@@ -6,7 +6,7 @@ pub const EksContainerSecurityContext = struct {
     /// Whether or not a container or a Kubernetes pod is allowed to gain more
     /// privileges than its parent
     /// process. The default value is `false`.
-    allow_privilege_escalation: ?bool,
+    allow_privilege_escalation: ?bool = null,
 
     /// When this parameter is `true`, the container is given elevated permissions
     /// on the
@@ -16,7 +16,7 @@ pub const EksContainerSecurityContext = struct {
     /// `privileged` policy in the [Privileged
     /// pod security
     /// policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/#privileged) in the *Kubernetes documentation*.
-    privileged: ?bool,
+    privileged: ?bool = null,
 
     /// When this parameter is `true`, the container is given read-only access to
     /// its
@@ -25,7 +25,7 @@ pub const EksContainerSecurityContext = struct {
     /// security
     /// policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/#volumes-and-file-systems) in the *Kubernetes
     /// documentation*.
-    read_only_root_filesystem: ?bool,
+    read_only_root_filesystem: ?bool = null,
 
     /// When this parameter is specified, the container is run as the specified
     /// group ID
@@ -36,7 +36,7 @@ pub const EksContainerSecurityContext = struct {
     /// and groups pod security
     /// policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups) in the *Kubernetes
     /// documentation*.
-    run_as_group: ?i64,
+    run_as_group: ?i64 = null,
 
     /// When this parameter is specified, the container is run as a user with a
     /// `uid`
@@ -46,7 +46,7 @@ pub const EksContainerSecurityContext = struct {
     /// and groups pod security
     /// policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups) in the *Kubernetes
     /// documentation*.
-    run_as_non_root: ?bool,
+    run_as_non_root: ?bool = null,
 
     /// When this parameter is specified, the container is run as the specified user
     /// ID
@@ -57,7 +57,7 @@ pub const EksContainerSecurityContext = struct {
     /// and groups pod security
     /// policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups) in the *Kubernetes
     /// documentation*.
-    run_as_user: ?i64,
+    run_as_user: ?i64 = null,
 
     pub const json_field_names = .{
         .allow_privilege_escalation = "allowPrivilegeEscalation",

@@ -8,14 +8,14 @@ pub const MetricInterval = struct {
     /// the API request differs by 1 day, then 48 results are returned in the
     /// response. Each result is aggregated by the 30
     /// minutes period, with each `StartTime` and `EndTime` differing by 30 minutes.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The interval period provided in the API request.
-    interval: ?IntervalPeriod,
+    interval: ?IntervalPeriod = null,
 
     /// The timestamp, in UNIX Epoch time format. Start time is based on the
     /// interval period selected.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .end_time = "EndTime",

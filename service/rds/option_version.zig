@@ -2,8 +2,8 @@
 /// `DescribeOptionGroupOptions` action.
 pub const OptionVersion = struct {
     /// Indicates whether the version is the default version of the option.
-    is_default: ?bool,
+    is_default: ?bool = null,
 
     /// The version of the option.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 };

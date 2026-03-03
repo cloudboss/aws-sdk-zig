@@ -14,7 +14,7 @@ const WriteOperationType = @import("write_operation_type.zig").WriteOperationTyp
 /// The configuration settings related to a given connector.
 pub const ConnectorConfiguration = struct {
     /// The authentication config required for the connector.
-    authentication_config: ?AuthenticationConfig,
+    authentication_config: ?AuthenticationConfig = null,
 
     /// Specifies whether the connector can be used as a destination.
     can_use_as_destination: bool = false,
@@ -23,41 +23,41 @@ pub const ConnectorConfiguration = struct {
     can_use_as_source: bool = false,
 
     /// The Amazon Resource Name (ARN) for the registered connector.
-    connector_arn: ?[]const u8,
+    connector_arn: ?[]const u8 = null,
 
     /// A description about the connector.
-    connector_description: ?[]const u8,
+    connector_description: ?[]const u8 = null,
 
     /// The label used for registering the connector.
-    connector_label: ?[]const u8,
+    connector_label: ?[]const u8 = null,
 
     /// Specifies connector-specific metadata such as `oAuthScopes`,
     /// `supportedRegions`, `privateLinkServiceUrl`, and so on.
-    connector_metadata: ?ConnectorMetadata,
+    connector_metadata: ?ConnectorMetadata = null,
 
     /// The connection modes that the connector supports.
-    connector_modes: ?[]const []const u8,
+    connector_modes: ?[]const []const u8 = null,
 
     /// The connector name.
-    connector_name: ?[]const u8,
+    connector_name: ?[]const u8 = null,
 
     /// The owner who developed the connector.
-    connector_owner: ?[]const u8,
+    connector_owner: ?[]const u8 = null,
 
     /// The configuration required for registering the connector.
-    connector_provisioning_config: ?ConnectorProvisioningConfig,
+    connector_provisioning_config: ?ConnectorProvisioningConfig = null,
 
     /// The provisioning type used to register the connector.
-    connector_provisioning_type: ?ConnectorProvisioningType,
+    connector_provisioning_type: ?ConnectorProvisioningType = null,
 
     /// The required connector runtime settings.
-    connector_runtime_settings: ?[]const ConnectorRuntimeSetting,
+    connector_runtime_settings: ?[]const ConnectorRuntimeSetting = null,
 
     /// The connector type.
-    connector_type: ?ConnectorType,
+    connector_type: ?ConnectorType = null,
 
     /// The connector version.
-    connector_version: ?[]const u8,
+    connector_version: ?[]const u8 = null,
 
     /// Specifies if PrivateLink is enabled for that connector.
     is_private_link_enabled: bool = false,
@@ -66,21 +66,21 @@ pub const ConnectorConfiguration = struct {
     is_private_link_endpoint_url_required: bool = false,
 
     /// Logo URL of the connector.
-    logo_url: ?[]const u8,
+    logo_url: ?[]const u8 = null,
 
     /// The date on which the connector was registered.
-    registered_at: ?i64,
+    registered_at: ?i64 = null,
 
     /// Information about who registered the connector.
-    registered_by: ?[]const u8,
+    registered_by: ?[]const u8 = null,
 
     /// A list of API versions that are supported by the connector.
-    supported_api_versions: ?[]const []const u8,
+    supported_api_versions: ?[]const []const u8 = null,
 
     /// The APIs of the connector application that Amazon AppFlow can use to
     /// transfer your
     /// data.
-    supported_data_transfer_apis: ?[]const DataTransferApi,
+    supported_data_transfer_apis: ?[]const DataTransferApi = null,
 
     /// The data transfer types that the connector supports.
     ///
@@ -91,22 +91,22 @@ pub const ConnectorConfiguration = struct {
     /// **FILE**
     ///
     /// Files or binary data.
-    supported_data_transfer_types: ?[]const SupportedDataTransferType,
+    supported_data_transfer_types: ?[]const SupportedDataTransferType = null,
 
     /// Lists the connectors that are available for use as destinations.
-    supported_destination_connectors: ?[]const ConnectorType,
+    supported_destination_connectors: ?[]const ConnectorType = null,
 
     /// A list of operators supported by the connector.
-    supported_operators: ?[]const Operators,
+    supported_operators: ?[]const Operators = null,
 
     /// Specifies the supported flow frequency for that connector.
-    supported_scheduling_frequencies: ?[]const ScheduleFrequencyType,
+    supported_scheduling_frequencies: ?[]const ScheduleFrequencyType = null,
 
     /// Specifies the supported trigger types for the flow.
-    supported_trigger_types: ?[]const TriggerType,
+    supported_trigger_types: ?[]const TriggerType = null,
 
     /// A list of write operations supported by the connector.
-    supported_write_operations: ?[]const WriteOperationType,
+    supported_write_operations: ?[]const WriteOperationType = null,
 
     pub const json_field_names = .{
         .authentication_config = "authenticationConfig",

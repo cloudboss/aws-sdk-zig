@@ -1,10 +1,10 @@
 /// Information about the agent status assigned to the user.
 pub const AgentStatusIdentifier = struct {
     /// The Amazon Resource Name (ARN) of the agent status.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The identifier of the agent status.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

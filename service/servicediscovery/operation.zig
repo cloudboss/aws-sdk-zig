@@ -12,7 +12,7 @@ pub const Operation = struct {
     /// example, the value `1516925490.087` represents Friday, January 26, 2018
     /// 12:11:30.087
     /// AM.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The code associated with `ErrorMessage`. Values for `ErrorCode`
     /// include the following:
@@ -30,18 +30,18 @@ pub const Operation = struct {
     /// * `INVALID_CHANGE_BATCH`
     ///
     /// * `THROTTLED_REQUEST`
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// If the value of `Status` is `FAIL`, the reason that the operation
     /// failed.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The ID of the operation that you want to get information about.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the namespace associated
     /// with the operation.
-    owner_account: ?[]const u8,
+    owner_account: ?[]const u8 = null,
 
     /// The status of the operation. Values include the following:
     ///
@@ -61,7 +61,7 @@ pub const Operation = struct {
     /// **FAIL**
     ///
     /// The operation failed. For the failure reason, see `ErrorMessage`.
-    status: ?OperationStatus,
+    status: ?OperationStatus = null,
 
     /// The name of the target entity that's associated with the operation:
     ///
@@ -76,10 +76,10 @@ pub const Operation = struct {
     /// **INSTANCE**
     ///
     /// The instance ID is returned in the `ResourceId` property.
-    targets: ?[]const aws.map.StringMapEntry,
+    targets: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the operation that's associated with the specified ID.
-    @"type": ?OperationType,
+    @"type": ?OperationType = null,
 
     /// The date and time that the value of `Status` changed to the current value,
     /// in
@@ -88,7 +88,7 @@ pub const Operation = struct {
     /// is accurate to milliseconds. For example, the value `1516925490.087`
     /// represents
     /// Friday, January 26, 2018 12:11:30.087 AM.
-    update_date: ?i64,
+    update_date: ?i64 = null,
 
     pub const json_field_names = .{
         .create_date = "CreateDate",

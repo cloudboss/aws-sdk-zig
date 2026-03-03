@@ -5,7 +5,7 @@ const HttpRequest = @import("http_request.zig").HttpRequest;
 /// request body, and compression settings for ADS requests.
 pub const AdDecisionServerConfiguration = struct {
     /// The HTTP request configuration parameters for the ad decision server.
-    http_request: ?HttpRequest,
+    http_request: ?HttpRequest = null,
 
     pub const json_field_names = .{
         .http_request = "HttpRequest",

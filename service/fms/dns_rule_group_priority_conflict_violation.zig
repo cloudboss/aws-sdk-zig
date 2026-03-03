@@ -5,7 +5,7 @@ pub const DnsRuleGroupPriorityConflictViolation = struct {
     /// The ID of the Firewall Manager DNS Firewall policy that was already applied
     /// to the VPC.
     /// This policy contains the rule group that's already associated with the VPC.
-    conflicting_policy_id: ?[]const u8,
+    conflicting_policy_id: ?[]const u8 = null,
 
     /// The priority setting of the two conflicting rule groups.
     conflicting_priority: i32 = 0,
@@ -14,14 +14,14 @@ pub const DnsRuleGroupPriorityConflictViolation = struct {
     /// retry your operation,
     /// choose priority settings that aren't in this list for the rule groups in
     /// your new DNS Firewall policy.
-    unavailable_priorities: ?[]const i32,
+    unavailable_priorities: ?[]const i32 = null,
 
     /// Information about the VPC ID.
-    violation_target: ?[]const u8,
+    violation_target: ?[]const u8 = null,
 
     /// A description of the violation that specifies the VPC and the rule group
     /// that's already associated with it.
-    violation_target_description: ?[]const u8,
+    violation_target_description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .conflicting_policy_id = "ConflictingPolicyId",

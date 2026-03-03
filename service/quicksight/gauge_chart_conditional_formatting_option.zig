@@ -5,10 +5,10 @@ const GaugeChartPrimaryValueConditionalFormatting = @import("gauge_chart_primary
 pub const GaugeChartConditionalFormattingOption = struct {
     /// The options that determine the presentation of the arc of a
     /// `GaugeChartVisual`.
-    arc: ?GaugeChartArcConditionalFormatting,
+    arc: ?GaugeChartArcConditionalFormatting = null,
 
     /// The conditional formatting for the primary value of a `GaugeChartVisual`.
-    primary_value: ?GaugeChartPrimaryValueConditionalFormatting,
+    primary_value: ?GaugeChartPrimaryValueConditionalFormatting = null,
 
     pub const json_field_names = .{
         .arc = "Arc",

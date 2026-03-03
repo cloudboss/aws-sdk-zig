@@ -13,18 +13,18 @@ const JobTimeout = @import("job_timeout.zig").JobTimeout;
 /// An object that represents an Batch job definition.
 pub const JobDefinition = struct {
     /// Contains a list of consumable resources required by the job.
-    consumable_resource_properties: ?ConsumableResourceProperties,
+    consumable_resource_properties: ?ConsumableResourceProperties = null,
 
     /// The orchestration type of the compute environment. The valid values are
     /// `ECS`
     /// (default) or `EKS`.
-    container_orchestration_type: ?OrchestrationType,
+    container_orchestration_type: ?OrchestrationType = null,
 
     /// An object with properties specific to Amazon ECS-based jobs. When
     /// `containerProperties` is used in the job definition, it can't be used in
     /// addition to
     /// `eksProperties`, `ecsProperties`, or `nodeProperties`.
-    container_properties: ?ContainerProperties,
+    container_properties: ?ContainerProperties = null,
 
     /// An object that contains the properties for the Amazon ECS resources of a
     /// job.When
@@ -32,14 +32,14 @@ pub const JobDefinition = struct {
     /// to
     /// `containerProperties`, `eksProperties`, or
     /// `nodeProperties`.
-    ecs_properties: ?EcsProperties,
+    ecs_properties: ?EcsProperties = null,
 
     /// An object with properties that are specific to Amazon EKS-based jobs. When
     /// `eksProperties` is used in the job definition, it can't be used in addition
     /// to
     /// `containerProperties`, `ecsProperties`, or
     /// `nodeProperties`.
-    eks_properties: ?EksProperties,
+    eks_properties: ?EksProperties = null,
 
     /// The Amazon Resource Name (ARN) for the job definition.
     job_definition_arn: []const u8,
@@ -56,7 +56,7 @@ pub const JobDefinition = struct {
     ///
     /// If the job runs on Fargate resources, don't specify `nodeProperties`. Use
     /// `containerProperties` instead.
-    node_properties: ?NodeProperties,
+    node_properties: ?NodeProperties = null,
 
     /// Default parameters or parameter substitution placeholders that are set in
     /// the job
@@ -68,13 +68,13 @@ pub const JobDefinition = struct {
     /// definition
     /// parameters](https://docs.aws.amazon.com/batch/latest/userguide/job_definition_parameters.html) in the
     /// *Batch User Guide*.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The platform capabilities required by the job definition. If no value is
     /// specified, it
     /// defaults to `EC2`. Jobs run on Fargate resources specify
     /// `FARGATE`.
-    platform_capabilities: ?[]const PlatformCapability,
+    platform_capabilities: ?[]const PlatformCapability = null,
 
     /// Specifies whether to propagate the tags from the job or job definition to
     /// the corresponding
@@ -85,11 +85,11 @@ pub const JobDefinition = struct {
     /// over job definitions tags. If the total number of combined tags from the job
     /// and job definition
     /// is over 50, the job is moved to the `FAILED` state.
-    propagate_tags: ?bool,
+    propagate_tags: ?bool = null,
 
     /// The retry strategy to use for failed jobs that are submitted with this job
     /// definition.
-    retry_strategy: ?RetryStrategy,
+    retry_strategy: ?RetryStrategy = null,
 
     /// The revision of the job definition.
     revision: i32,
@@ -99,18 +99,18 @@ pub const JobDefinition = struct {
     /// fair-share policy. Jobs with a higher scheduling priority are scheduled
     /// before jobs with a lower
     /// scheduling priority.
-    scheduling_priority: ?i32,
+    scheduling_priority: ?i32 = null,
 
     /// The status of the job definition.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The tags that are applied to the job definition.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The timeout time for jobs that are submitted with this job definition. After
     /// the amount of
     /// time you specify passes, Batch terminates your jobs if they aren't finished.
-    timeout: ?JobTimeout,
+    timeout: ?JobTimeout = null,
 
     /// The type of job definition. It's either `container` or `multinode`. If
     /// the job is run on Fargate resources, then `multinode` isn't supported. For

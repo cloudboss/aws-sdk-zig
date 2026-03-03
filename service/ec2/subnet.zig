@@ -9,52 +9,52 @@ pub const Subnet = struct {
     /// Indicates whether a network interface created in this subnet (including a
     /// network
     /// interface created by RunInstances) receives an IPv6 address.
-    assign_ipv_6_address_on_creation: ?bool,
+    assign_ipv_6_address_on_creation: ?bool = null,
 
     /// The Availability Zone of the subnet.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The AZ ID of the subnet.
-    availability_zone_id: ?[]const u8,
+    availability_zone_id: ?[]const u8 = null,
 
     /// The number of unused private IPv4 addresses in the subnet. The IPv4
     /// addresses for any
     /// stopped instances are considered unavailable.
-    available_ip_address_count: ?i32,
+    available_ip_address_count: ?i32 = null,
 
     /// The state of VPC Block Public Access (BPA).
-    block_public_access_states: ?BlockPublicAccessStates,
+    block_public_access_states: ?BlockPublicAccessStates = null,
 
     /// The IPv4 CIDR block assigned to the subnet.
-    cidr_block: ?[]const u8,
+    cidr_block: ?[]const u8 = null,
 
     /// The customer-owned IPv4 address pool associated with the subnet.
-    customer_owned_ipv_4_pool: ?[]const u8,
+    customer_owned_ipv_4_pool: ?[]const u8 = null,
 
     /// Indicates whether this is the default subnet for the Availability Zone.
-    default_for_az: ?bool,
+    default_for_az: ?bool = null,
 
     /// Indicates whether DNS queries made to the Amazon-provided DNS Resolver in
     /// this subnet
     /// should return synthetic IPv6 addresses for IPv4-only destinations.
-    enable_dns_64: ?bool,
+    enable_dns_64: ?bool = null,
 
     /// Indicates the device position for local network interfaces in this subnet.
     /// For example,
     /// `1` indicates local network interfaces in this subnet are the secondary
     /// network interface (eth1).
-    enable_lni_at_device_index: ?i32,
+    enable_lni_at_device_index: ?i32 = null,
 
     /// Information about the IPv6 CIDR blocks associated with the subnet.
-    ipv_6_cidr_block_association_set: ?[]const SubnetIpv6CidrBlockAssociation,
+    ipv_6_cidr_block_association_set: ?[]const SubnetIpv6CidrBlockAssociation = null,
 
     /// Indicates whether this is an IPv6 only subnet.
-    ipv_6_native: ?bool,
+    ipv_6_native: ?bool = null,
 
     /// Indicates whether a network interface created in this subnet (including a
     /// network
     /// interface created by RunInstances) receives a customer-owned IPv4 address.
-    map_customer_owned_ip_on_launch: ?bool,
+    map_customer_owned_ip_on_launch: ?bool = null,
 
     /// Indicates whether instances launched in this subnet receive a public IPv4
     /// address.
@@ -64,18 +64,18 @@ pub const Subnet = struct {
     /// associated with running instances and Elastic IP addresses. For more
     /// information, see the *Public IPv4 Address* tab on the [Amazon VPC pricing
     /// page](http://aws.amazon.com/vpc/pricing/).
-    map_public_ip_on_launch: ?bool,
+    map_public_ip_on_launch: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the Outpost.
-    outpost_arn: ?[]const u8,
+    outpost_arn: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the subnet.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The type of hostnames to assign to instances in the subnet at launch. An
     /// instance hostname
     /// is based on the IPv4 address or ID of the instance.
-    private_dns_name_options_on_launch: ?PrivateDnsNameOptionsOnLaunch,
+    private_dns_name_options_on_launch: ?PrivateDnsNameOptionsOnLaunch = null,
 
     /// The current state of the subnet.
     ///
@@ -86,16 +86,16 @@ pub const Subnet = struct {
     /// * `failed-insufficient-capacity`: The underlying infrastructure to support
     ///   the subnet
     /// failed to provision due to a shortage of EC2 instance capacity.
-    state: ?SubnetState,
+    state: ?SubnetState = null,
 
     /// The Amazon Resource Name (ARN) of the subnet.
-    subnet_arn: ?[]const u8,
+    subnet_arn: ?[]const u8 = null,
 
     /// The ID of the subnet.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// Any tags assigned to the subnet.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// Indicates if this is a subnet used with Amazon Elastic VMware Service (EVS).
     /// Possible values are `Elastic VMware Service` or no value. For more
@@ -103,8 +103,8 @@ pub const Subnet = struct {
     /// *Amazon Elastic VMware Service
     /// API Reference*
     /// ](https://docs.aws.amazon.com/evs/latest/APIReference/Welcome.html).
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The ID of the VPC the subnet is in.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

@@ -7,7 +7,7 @@ const EvaluationResultIdentifier = @import("evaluation_result_identifier.zig").E
 pub const ConformancePackEvaluationResult = struct {
     /// Supplementary information about how the evaluation determined the
     /// compliance.
-    annotation: ?[]const u8,
+    annotation: ?[]const u8 = null,
 
     /// The compliance type. The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
     /// `INSUFFICIENT_DATA` is not supported.

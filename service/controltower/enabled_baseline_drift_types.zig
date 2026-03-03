@@ -24,7 +24,7 @@ pub const EnabledBaselineDriftTypes = struct {
     /// configuration defined on that OU. An account is in inheritance drift when it
     /// does not match the configuration of a parent OU, possibly a new parent OU,
     /// if the account is moved.
-    inheritance: ?EnabledBaselineInheritanceDrift,
+    inheritance: ?EnabledBaselineInheritanceDrift = null,
 
     pub const json_field_names = .{
         .inheritance = "inheritance",

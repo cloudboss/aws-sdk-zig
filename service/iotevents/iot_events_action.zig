@@ -9,7 +9,7 @@ pub const IotEventsAction = struct {
 
     /// You can configure the action payload when you send a message to an AWS IoT
     /// Events input.
-    payload: ?Payload,
+    payload: ?Payload = null,
 
     pub const json_field_names = .{
         .input_name = "inputName",

@@ -8,7 +8,7 @@ pub const TestConnectionInput = struct {
     /// A structure containing the authentication configuration in the
     /// TestConnection request. Required for a connection to Salesforce using OAuth
     /// authentication.
-    authentication_configuration: ?AuthenticationConfigurationInput,
+    authentication_configuration: ?AuthenticationConfigurationInput = null,
 
     /// The key-value pairs that define parameters for the connection.
     ///

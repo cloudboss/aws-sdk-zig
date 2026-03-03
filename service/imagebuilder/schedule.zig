@@ -8,7 +8,7 @@ pub const Schedule = struct {
     /// The policy that configures when Image Builder should automatically disable a
     /// pipeline that
     /// is failing.
-    auto_disable_policy: ?AutoDisablePolicy,
+    auto_disable_policy: ?AutoDisablePolicy = null,
 
     /// The start condition configures when the pipeline should trigger a new image
     /// build,
@@ -27,7 +27,7 @@ pub const Schedule = struct {
     ///
     /// * `EXPRESSION_MATCH_ONLY` – This condition builds a new
     /// image every time the CRON expression matches the current time.
-    pipeline_execution_start_condition: ?PipelineExecutionStartCondition,
+    pipeline_execution_start_condition: ?PipelineExecutionStartCondition = null,
 
     /// The cron expression determines how often EC2 Image Builder evaluates your
     /// `pipelineExecutionStartCondition`.
@@ -36,14 +36,14 @@ pub const Schedule = struct {
     /// [Use
     /// cron expressions in EC2 Image
     /// Builder](https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html).
-    schedule_expression: ?[]const u8,
+    schedule_expression: ?[]const u8 = null,
 
     /// The timezone that applies to the scheduling expression. For example,
     /// "Etc/UTC",
     /// "America/Los_Angeles" in the [IANA timezone
     /// format](https://www.joda.org/joda-time/timezones.html). If not specified
     /// this defaults to UTC.
-    timezone: ?[]const u8,
+    timezone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_disable_policy = "autoDisablePolicy",

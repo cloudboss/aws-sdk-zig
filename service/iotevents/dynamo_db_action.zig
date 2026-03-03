@@ -71,7 +71,7 @@ pub const DynamoDBAction = struct {
     ///
     /// If you don't specify `hashKeyType`, the default value is
     /// `'STRING'`.
-    hash_key_type: ?[]const u8,
+    hash_key_type: ?[]const u8 = null,
 
     /// The value of the hash key (also called the partition key).
     hash_key_value: []const u8,
@@ -97,20 +97,20 @@ pub const DynamoDBAction = struct {
     ///
     /// If you don't specify this parameter, AWS IoT Events triggers the `'INSERT'`
     /// operation.
-    operation: ?[]const u8,
+    operation: ?[]const u8 = null,
 
-    payload: ?Payload,
+    payload: ?Payload = null,
 
     /// The name of the DynamoDB column that receives the action payload.
     ///
     /// If you don't specify this parameter, the name of the DynamoDB column is
     /// `payload`.
-    payload_field: ?[]const u8,
+    payload_field: ?[]const u8 = null,
 
     /// The name of the range key (also called the sort key). The `rangeKeyField`
     /// value
     /// must match the sort key of the target DynamoDB table.
-    range_key_field: ?[]const u8,
+    range_key_field: ?[]const u8 = null,
 
     /// The data type for the range key (also called the sort key), You can specify
     /// the following
@@ -122,10 +122,10 @@ pub const DynamoDBAction = struct {
     ///
     /// If you don't specify `rangeKeyField`, the default value is
     /// `'STRING'`.
-    range_key_type: ?[]const u8,
+    range_key_type: ?[]const u8 = null,
 
     /// The value of the range key (also called the sort key).
-    range_key_value: ?[]const u8,
+    range_key_value: ?[]const u8 = null,
 
     /// The name of the DynamoDB table. The `tableName` value must match the table
     /// name of

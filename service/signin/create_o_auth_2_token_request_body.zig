@@ -10,11 +10,11 @@ pub const CreateOAuth2TokenRequestBody = struct {
 
     /// The authorization code received from /v1/authorize
     /// Required only when grant_type=authorization_code
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// PKCE code verifier to prove possession of the original code challenge
     /// Required only when grant_type=authorization_code
-    code_verifier: ?[]const u8,
+    code_verifier: ?[]const u8 = null,
 
     /// OAuth 2.0 grant type - determines which flow is used
     /// Must be "authorization_code" or "refresh_token"
@@ -22,11 +22,11 @@ pub const CreateOAuth2TokenRequestBody = struct {
 
     /// The redirect URI that must match the original authorization request
     /// Required only when grant_type=authorization_code
-    redirect_uri: ?[]const u8,
+    redirect_uri: ?[]const u8 = null,
 
     /// The refresh token returned from auth_code redemption
     /// Required only when grant_type=refresh_token
-    refresh_token: ?[]const u8,
+    refresh_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_id = "clientId",

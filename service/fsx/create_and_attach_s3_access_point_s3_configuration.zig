@@ -8,11 +8,11 @@ pub const CreateAndAttachS3AccessPointS3Configuration = struct {
     /// [Configuring IAM policies for using access
     /// points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html)
     /// in the Amazon Simple Storage Service User Guide.
-    policy: ?[]const u8,
+    policy: ?[]const u8 = null,
 
     /// If included, Amazon S3 restricts access to this S3 access point to requests
     /// made from the specified virtual private cloud (VPC).
-    vpc_configuration: ?S3AccessPointVpcConfiguration,
+    vpc_configuration: ?S3AccessPointVpcConfiguration = null,
 
     pub const json_field_names = .{
         .policy = "Policy",

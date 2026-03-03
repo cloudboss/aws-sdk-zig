@@ -28,66 +28,66 @@ const WebACLHasOutOfScopeResourcesViolation = @import("web_acl_has_out_of_scope_
 /// Violation detail based on resource type.
 pub const ResourceViolation = struct {
     /// Violation detail for an EC2 instance.
-    aws_ec_2_instance_violation: ?AwsEc2InstanceViolation,
+    aws_ec_2_instance_violation: ?AwsEc2InstanceViolation = null,
 
     /// Violation detail for a network interface.
-    aws_ec_2_network_interface_violation: ?AwsEc2NetworkInterfaceViolation,
+    aws_ec_2_network_interface_violation: ?AwsEc2NetworkInterfaceViolation = null,
 
     /// Violation detail for security groups.
-    aws_vpc_security_group_violation: ?AwsVPCSecurityGroupViolation,
+    aws_vpc_security_group_violation: ?AwsVPCSecurityGroupViolation = null,
 
     /// Violation detail for a DNS Firewall policy that indicates that a rule group
     /// that Firewall Manager
     /// tried to associate with a VPC is already associated with the VPC and can't
     /// be associated again.
-    dns_duplicate_rule_group_violation: ?DnsDuplicateRuleGroupViolation,
+    dns_duplicate_rule_group_violation: ?DnsDuplicateRuleGroupViolation = null,
 
     /// Violation detail for a DNS Firewall policy that indicates that the VPC
     /// reached the limit for associated DNS Firewall rule groups. Firewall Manager
     /// tried to associate another rule group with the VPC and failed.
-    dns_rule_group_limit_exceeded_violation: ?DnsRuleGroupLimitExceededViolation,
+    dns_rule_group_limit_exceeded_violation: ?DnsRuleGroupLimitExceededViolation = null,
 
     /// Violation detail for a DNS Firewall policy that indicates that a rule group
     /// that Firewall Manager
     /// tried to associate with a VPC has the same priority as a rule group that's
     /// already associated.
-    dns_rule_group_priority_conflict_violation: ?DnsRuleGroupPriorityConflictViolation,
+    dns_rule_group_priority_conflict_violation: ?DnsRuleGroupPriorityConflictViolation = null,
 
     /// Contains details about the firewall subnet that violates the policy scope.
-    firewall_subnet_is_out_of_scope_violation: ?FirewallSubnetIsOutOfScopeViolation,
+    firewall_subnet_is_out_of_scope_violation: ?FirewallSubnetIsOutOfScopeViolation = null,
 
     /// The violation details for a third-party firewall's VPC endpoint subnet that
     /// was deleted.
-    firewall_subnet_missing_vpc_endpoint_violation: ?FirewallSubnetMissingVPCEndpointViolation,
+    firewall_subnet_missing_vpc_endpoint_violation: ?FirewallSubnetMissingVPCEndpointViolation = null,
 
     /// Violation detail for the entries in a network ACL resource.
-    invalid_network_acl_entries_violation: ?InvalidNetworkAclEntriesViolation,
+    invalid_network_acl_entries_violation: ?InvalidNetworkAclEntriesViolation = null,
 
-    network_firewall_black_hole_route_detected_violation: ?NetworkFirewallBlackHoleRouteDetectedViolation,
+    network_firewall_black_hole_route_detected_violation: ?NetworkFirewallBlackHoleRouteDetectedViolation = null,
 
     /// Violation detail for the subnet for which internet traffic hasn't been
     /// inspected.
-    network_firewall_internet_traffic_not_inspected_violation: ?NetworkFirewallInternetTrafficNotInspectedViolation,
+    network_firewall_internet_traffic_not_inspected_violation: ?NetworkFirewallInternetTrafficNotInspectedViolation = null,
 
     /// The route configuration is invalid.
-    network_firewall_invalid_route_configuration_violation: ?NetworkFirewallInvalidRouteConfigurationViolation,
+    network_firewall_invalid_route_configuration_violation: ?NetworkFirewallInvalidRouteConfigurationViolation = null,
 
     /// Expected routes are missing from Network Firewall.
-    network_firewall_missing_expected_routes_violation: ?NetworkFirewallMissingExpectedRoutesViolation,
+    network_firewall_missing_expected_routes_violation: ?NetworkFirewallMissingExpectedRoutesViolation = null,
 
     /// Violation detail for an Network Firewall policy that indicates that a subnet
     /// is not associated with the expected Firewall Manager managed route table.
-    network_firewall_missing_expected_rt_violation: ?NetworkFirewallMissingExpectedRTViolation,
+    network_firewall_missing_expected_rt_violation: ?NetworkFirewallMissingExpectedRTViolation = null,
 
     /// Violation detail for an Network Firewall policy that indicates that a subnet
     /// has no Firewall Manager
     /// managed firewall in its VPC.
-    network_firewall_missing_firewall_violation: ?NetworkFirewallMissingFirewallViolation,
+    network_firewall_missing_firewall_violation: ?NetworkFirewallMissingFirewallViolation = null,
 
     /// Violation detail for an Network Firewall policy that indicates that an
     /// Availability Zone is
     /// missing the expected Firewall Manager managed subnet.
-    network_firewall_missing_subnet_violation: ?NetworkFirewallMissingSubnetViolation,
+    network_firewall_missing_subnet_violation: ?NetworkFirewallMissingSubnetViolation = null,
 
     /// Violation detail for an Network Firewall policy that indicates that a
     /// firewall policy
@@ -96,40 +96,40 @@ pub const ResourceViolation = struct {
     /// For example, the individual account owner might have deleted a rule group,
     /// changed the priority of a stateless rule group, or changed a policy default
     /// action.
-    network_firewall_policy_modified_violation: ?NetworkFirewallPolicyModifiedViolation,
+    network_firewall_policy_modified_violation: ?NetworkFirewallPolicyModifiedViolation = null,
 
     /// There's an unexpected firewall route.
-    network_firewall_unexpected_firewall_routes_violation: ?NetworkFirewallUnexpectedFirewallRoutesViolation,
+    network_firewall_unexpected_firewall_routes_violation: ?NetworkFirewallUnexpectedFirewallRoutesViolation = null,
 
     /// There's an unexpected gateway route.
-    network_firewall_unexpected_gateway_routes_violation: ?NetworkFirewallUnexpectedGatewayRoutesViolation,
+    network_firewall_unexpected_gateway_routes_violation: ?NetworkFirewallUnexpectedGatewayRoutesViolation = null,
 
     /// A list of possible remediation action lists. Each individual possible
     /// remediation action is a list of individual remediation actions.
-    possible_remediation_actions: ?PossibleRemediationActions,
+    possible_remediation_actions: ?PossibleRemediationActions = null,
 
     /// Contains details about the route endpoint that violates the policy scope.
-    route_has_out_of_scope_endpoint_violation: ?RouteHasOutOfScopeEndpointViolation,
+    route_has_out_of_scope_endpoint_violation: ?RouteHasOutOfScopeEndpointViolation = null,
 
     /// The violation details for a third-party firewall that has the Firewall
     /// Manager managed route table that was associated with the third-party
     /// firewall has been deleted.
-    third_party_firewall_missing_expected_route_table_violation: ?ThirdPartyFirewallMissingExpectedRouteTableViolation,
+    third_party_firewall_missing_expected_route_table_violation: ?ThirdPartyFirewallMissingExpectedRouteTableViolation = null,
 
     /// The violation details for a third-party firewall that's been deleted.
-    third_party_firewall_missing_firewall_violation: ?ThirdPartyFirewallMissingFirewallViolation,
+    third_party_firewall_missing_firewall_violation: ?ThirdPartyFirewallMissingFirewallViolation = null,
 
     /// The violation details for a third-party firewall's subnet that's been
     /// deleted.
-    third_party_firewall_missing_subnet_violation: ?ThirdPartyFirewallMissingSubnetViolation,
+    third_party_firewall_missing_subnet_violation: ?ThirdPartyFirewallMissingSubnetViolation = null,
 
     /// The violation details for a web ACL whose configuration is incompatible with
     /// the Firewall Manager policy.
-    web_acl_has_incompatible_configuration_violation: ?WebACLHasIncompatibleConfigurationViolation,
+    web_acl_has_incompatible_configuration_violation: ?WebACLHasIncompatibleConfigurationViolation = null,
 
     /// The violation details for a web ACL that's associated with at least one
     /// resource that's out of scope of the Firewall Manager policy.
-    web_acl_has_out_of_scope_resources_violation: ?WebACLHasOutOfScopeResourcesViolation,
+    web_acl_has_out_of_scope_resources_violation: ?WebACLHasOutOfScopeResourcesViolation = null,
 
     pub const json_field_names = .{
         .aws_ec_2_instance_violation = "AwsEc2InstanceViolation",

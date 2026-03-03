@@ -16,13 +16,13 @@ pub const RequiredActivatedType = struct {
     /// [Use
     /// aliases to refer to
     /// extensions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias) in the *CloudFormation User Guide*.
-    original_type_name: ?[]const u8,
+    original_type_name: ?[]const u8 = null,
 
     /// The publisher ID of the extension publisher.
-    publisher_id: ?[]const u8,
+    publisher_id: ?[]const u8 = null,
 
     /// A list of the major versions of the extension type that the macro supports.
-    supported_major_versions: ?[]const i32,
+    supported_major_versions: ?[]const i32 = null,
 
     /// An alias assigned to the public extension, in this account and Region. If
     /// you specify an
@@ -31,5 +31,5 @@ pub const RequiredActivatedType = struct {
     /// account and Region. You must use the alias to refer to the extension in your
     /// templates, API
     /// calls, and CloudFormation console.
-    type_name_alias: ?[]const u8,
+    type_name_alias: ?[]const u8 = null,
 };

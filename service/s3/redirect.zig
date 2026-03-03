@@ -5,17 +5,17 @@ const Protocol = @import("protocol.zig").Protocol;
 /// code to return.
 pub const Redirect = struct {
     /// The host name to use in the redirect request.
-    host_name: ?[]const u8,
+    host_name: ?[]const u8 = null,
 
     /// The HTTP redirect code to use on the response. Not required if one of the
     /// siblings is
     /// present.
-    http_redirect_code: ?[]const u8,
+    http_redirect_code: ?[]const u8 = null,
 
     /// Protocol to use when redirecting requests. The default is the protocol that
     /// is used in the original
     /// request.
-    protocol: ?Protocol,
+    protocol: ?Protocol = null,
 
     /// The object key prefix to use in the redirect request. For example, to
     /// redirect requests for all
@@ -31,7 +31,7 @@ pub const Redirect = struct {
     /// XML requests. For more information, see [
     /// XML related object key
     /// constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
-    replace_key_prefix_with: ?[]const u8,
+    replace_key_prefix_with: ?[]const u8 = null,
 
     /// The specific object key to use in the redirect request. For example,
     /// redirect request to
@@ -44,5 +44,5 @@ pub const Redirect = struct {
     /// XML requests. For more information, see [
     /// XML related object key
     /// constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
-    replace_key_with: ?[]const u8,
+    replace_key_with: ?[]const u8 = null,
 };

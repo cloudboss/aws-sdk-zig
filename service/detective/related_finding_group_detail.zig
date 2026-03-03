@@ -3,7 +3,7 @@
 /// findings and entities, and groups them together as a finding group.
 pub const RelatedFindingGroupDetail = struct {
     /// The unique identifier for the finding group.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

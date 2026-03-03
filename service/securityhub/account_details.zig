@@ -4,7 +4,7 @@ pub const AccountDetails = struct {
     account_id: []const u8,
 
     /// The email of an Amazon Web Services account.
-    email: ?[]const u8,
+    email: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

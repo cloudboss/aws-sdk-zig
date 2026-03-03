@@ -2,7 +2,7 @@
 /// (`timems`).
 pub const SuggestStatus = struct {
     /// The encrypted resource ID for the request.
-    rid: ?[]const u8,
+    rid: ?[]const u8 = null,
 
     /// How long it took to process the request, in milliseconds.
     timems: i64 = 0,

@@ -5,7 +5,7 @@ const Visibility = @import("visibility.zig").Visibility;
 pub const DonutCenterOptions = struct {
     /// Determines the visibility of the label in a donut chart. In the Quick Sight
     /// console, this option is called `'Show total'`.
-    label_visibility: ?Visibility,
+    label_visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .label_visibility = "LabelVisibility",

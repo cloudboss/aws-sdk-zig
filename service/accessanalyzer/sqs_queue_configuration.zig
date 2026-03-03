@@ -11,7 +11,7 @@
 /// policies](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-policies.html).
 pub const SqsQueueConfiguration = struct {
     /// The proposed resource policy for the Amazon SQS queue.
-    queue_policy: ?[]const u8,
+    queue_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .queue_policy = "queuePolicy",

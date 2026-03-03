@@ -5,7 +5,7 @@ pub const VolumeConfig = struct {
     /// 200 GB, which is included in the hourly instance rate. Additional storage
     /// beyond 200 GB incurs extra charges and applies to instances regardless of
     /// their running state.
-    volume_size_in_gb: ?i32,
+    volume_size_in_gb: ?i32 = null,
 
     pub const json_field_names = .{
         .volume_size_in_gb = "VolumeSizeInGb",

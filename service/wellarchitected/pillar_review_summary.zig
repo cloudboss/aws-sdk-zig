@@ -2,15 +2,15 @@ const aws = @import("aws");
 
 /// A pillar review summary of a lens review.
 pub const PillarReviewSummary = struct {
-    notes: ?[]const u8,
+    notes: ?[]const u8 = null,
 
-    pillar_id: ?[]const u8,
+    pillar_id: ?[]const u8 = null,
 
-    pillar_name: ?[]const u8,
+    pillar_name: ?[]const u8 = null,
 
-    prioritized_risk_counts: ?[]const aws.map.MapEntry(i32),
+    prioritized_risk_counts: ?[]const aws.map.MapEntry(i32) = null,
 
-    risk_counts: ?[]const aws.map.MapEntry(i32),
+    risk_counts: ?[]const aws.map.MapEntry(i32) = null,
 
     pub const json_field_names = .{
         .notes = "Notes",

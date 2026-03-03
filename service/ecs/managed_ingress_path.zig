@@ -12,25 +12,25 @@ pub const ManagedIngressPath = struct {
     access_type: AccessType,
 
     /// The ACM certificate for the Express service's domain.
-    certificate: ?ManagedCertificate,
+    certificate: ?ManagedCertificate = null,
 
     /// The endpoint for access to the Express service.
     endpoint: []const u8,
 
     /// The listeners associated with the Application Load Balancer.
-    listener: ?ManagedListener,
+    listener: ?ManagedListener = null,
 
     /// The Application Load Balancer associated with the Express service.
-    load_balancer: ?ManagedLoadBalancer,
+    load_balancer: ?ManagedLoadBalancer = null,
 
     /// The security groups associated with the Application Load Balancer.
-    load_balancer_security_groups: ?[]const ManagedSecurityGroup,
+    load_balancer_security_groups: ?[]const ManagedSecurityGroup = null,
 
     /// The listener rules for the Application Load Balancer.
-    rule: ?ManagedListenerRule,
+    rule: ?ManagedListenerRule = null,
 
     /// The target groups associated with the Application Load Balancer.
-    target_groups: ?[]const ManagedTargetGroup,
+    target_groups: ?[]const ManagedTargetGroup = null,
 
     pub const json_field_names = .{
         .access_type = "accessType",

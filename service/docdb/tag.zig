@@ -6,12 +6,12 @@ pub const Tag = struct {
     /// string can contain only the set of Unicode letters, digits, white space,
     /// '_', '.', '/', '=', '+', '-' (Java regex:
     /// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The optional value of the tag. The string value can be from 1 to 256 Unicode
     /// characters in length and can't be prefixed with "`aws:`" or "`rds:`". The
     /// string can contain only the set of Unicode letters, digits, white space,
     /// '_', '.', '/', '=', '+', '-' (Java regex:
     /// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

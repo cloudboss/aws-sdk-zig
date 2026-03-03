@@ -10,13 +10,13 @@
 /// action that you can take to address or avoid this limitation.
 pub const Limitation = struct {
     /// The identifier of the source database.
-    database_id: ?[]const u8,
+    database_id: ?[]const u8 = null,
 
     /// A description of the limitation. Provides additional information about the
     /// limitation,
     /// and includes recommended actions that you can take to address or avoid this
     /// limitation.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the target engine that Fleet Advisor should use in the target
     /// engine
@@ -24,23 +24,23 @@ pub const Limitation = struct {
     /// `"rds-aurora-postgresql"`, `"rds-mysql"`,
     /// `"rds-oracle"`, `"rds-sql-server"`, and
     /// `"rds-postgresql"`.
-    engine_name: ?[]const u8,
+    engine_name: ?[]const u8 = null,
 
     /// The impact of the limitation. You can use this parameter to prioritize
     /// limitations
     /// that you want to address. Valid values include `"Blocker"`,
     /// `"High"`, `"Medium"`, and `"Low"`.
-    impact: ?[]const u8,
+    impact: ?[]const u8 = null,
 
     /// The name of the limitation. Describes unsupported database features,
     /// migration action
     /// items, and other limitations.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type of the limitation, such as action required, upgrade required, and
     /// limited
     /// feature.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .database_id = "DatabaseId",

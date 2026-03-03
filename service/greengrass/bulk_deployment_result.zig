@@ -5,29 +5,29 @@ const ErrorDetail = @import("error_detail.zig").ErrorDetail;
 /// operation.
 pub const BulkDeploymentResult = struct {
     /// The time, in ISO format, when the deployment was created.
-    created_at: ?[]const u8,
+    created_at: ?[]const u8 = null,
 
     /// The ARN of the group deployment.
-    deployment_arn: ?[]const u8,
+    deployment_arn: ?[]const u8 = null,
 
     /// The ID of the group deployment.
-    deployment_id: ?[]const u8,
+    deployment_id: ?[]const u8 = null,
 
     /// The current status of the group deployment: ''InProgress'', ''Building'',
     /// ''Success'', or ''Failure''.
-    deployment_status: ?[]const u8,
+    deployment_status: ?[]const u8 = null,
 
     /// The type of the deployment.
-    deployment_type: ?DeploymentType,
+    deployment_type: ?DeploymentType = null,
 
     /// Details about the error.
-    error_details: ?[]const ErrorDetail,
+    error_details: ?[]const ErrorDetail = null,
 
     /// The error message for a failed deployment
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The ARN of the Greengrass group.
-    group_arn: ?[]const u8,
+    group_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

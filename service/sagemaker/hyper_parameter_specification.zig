@@ -5,23 +5,23 @@ const ParameterType = @import("parameter_type.zig").ParameterType;
 pub const HyperParameterSpecification = struct {
     /// The default value for this hyperparameter. If a default value is specified,
     /// a hyperparameter cannot be required.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// A brief description of the hyperparameter.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether this hyperparameter is required.
-    is_required: ?bool,
+    is_required: ?bool = null,
 
     /// Indicates whether this hyperparameter is tunable in a hyperparameter tuning
     /// job.
-    is_tunable: ?bool,
+    is_tunable: ?bool = null,
 
     /// The name of this hyperparameter. The name must be unique.
     name: []const u8,
 
     /// The allowed range for this hyperparameter.
-    range: ?ParameterRange,
+    range: ?ParameterRange = null,
 
     /// The type of this hyperparameter. The valid types are `Integer`,
     /// `Continuous`, `Categorical`, and `FreeText`.

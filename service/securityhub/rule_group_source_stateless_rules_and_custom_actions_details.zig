@@ -4,10 +4,10 @@ const RuleGroupSourceStatelessRulesDetails = @import("rule_group_source_stateles
 /// Stateless rules and custom actions for a stateless rule group.
 pub const RuleGroupSourceStatelessRulesAndCustomActionsDetails = struct {
     /// Custom actions for the rule group.
-    custom_actions: ?[]const RuleGroupSourceCustomActionsDetails,
+    custom_actions: ?[]const RuleGroupSourceCustomActionsDetails = null,
 
     /// Stateless rules for the rule group.
-    stateless_rules: ?[]const RuleGroupSourceStatelessRulesDetails,
+    stateless_rules: ?[]const RuleGroupSourceStatelessRulesDetails = null,
 
     pub const json_field_names = .{
         .custom_actions = "CustomActions",

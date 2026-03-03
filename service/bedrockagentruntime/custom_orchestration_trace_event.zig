@@ -3,7 +3,7 @@
 /// agent.
 pub const CustomOrchestrationTraceEvent = struct {
     /// The text that prompted the event at this step.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .text = "text",

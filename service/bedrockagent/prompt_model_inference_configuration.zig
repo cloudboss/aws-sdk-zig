@@ -3,19 +3,19 @@
 /// parameters](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html).
 pub const PromptModelInferenceConfiguration = struct {
     /// The maximum number of tokens to return in the response.
-    max_tokens: ?i32,
+    max_tokens: ?i32 = null,
 
     /// A list of strings that define sequences after which the model will stop
     /// generating.
-    stop_sequences: ?[]const []const u8,
+    stop_sequences: ?[]const []const u8 = null,
 
     /// Controls the randomness of the response. Choose a lower value for more
     /// predictable outputs and a higher value for more surprising outputs.
-    temperature: ?f32,
+    temperature: ?f32 = null,
 
     /// The percentage of most-likely candidates that the model considers for the
     /// next token.
-    top_p: ?f32,
+    top_p: ?f32 = null,
 
     pub const json_field_names = .{
         .max_tokens = "maxTokens",

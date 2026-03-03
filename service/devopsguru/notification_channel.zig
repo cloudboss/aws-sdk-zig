@@ -24,10 +24,10 @@ const NotificationChannelConfig = @import("notification_channel_config.zig").Not
 pub const NotificationChannel = struct {
     /// A `NotificationChannelConfig` object that contains information about
     /// configured notification channels.
-    config: ?NotificationChannelConfig,
+    config: ?NotificationChannelConfig = null,
 
     /// The ID of a notification channel.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .config = "Config",

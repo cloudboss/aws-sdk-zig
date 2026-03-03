@@ -13,7 +13,7 @@ pub const LambdaFunctionTimedOutEventAttributes = struct {
     started_event_id: i64 = 0,
 
     /// The type of the timeout that caused this event.
-    timeout_type: ?LambdaFunctionTimeoutType,
+    timeout_type: ?LambdaFunctionTimeoutType = null,
 
     pub const json_field_names = .{
         .scheduled_event_id = "scheduledEventId",

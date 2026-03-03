@@ -34,7 +34,7 @@ pub const AssociationConfig = struct {
     ///
     /// For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
     /// bytes).
-    request_body: ?[]const aws.map.MapEntry(RequestBodyAssociatedResourceTypeConfig),
+    request_body: ?[]const aws.map.MapEntry(RequestBodyAssociatedResourceTypeConfig) = null,
 
     pub const json_field_names = .{
         .request_body = "RequestBody",

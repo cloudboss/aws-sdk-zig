@@ -5,44 +5,44 @@ const ResourceConfigurationType = @import("resource_configuration_type.zig").Res
 pub const ResourceConfigurationSummary = struct {
     /// Indicates whether the resource configuration was created and is managed by
     /// Amazon.
-    amazon_managed: ?bool,
+    amazon_managed: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the resource configuration.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The date and time that the resource configuration was created, in ISO-8601
     /// format.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The custom domain name.
-    custom_domain_name: ?[]const u8,
+    custom_domain_name: ?[]const u8 = null,
 
     /// The domain verification ID.
-    domain_verification_id: ?[]const u8,
+    domain_verification_id: ?[]const u8 = null,
 
     /// (GROUP) The group domain for a group resource configuration. Any domains
     /// that you create for the child resource are subdomains of the group domain.
     /// Child resources inherit the verification status of the domain.
-    group_domain: ?[]const u8,
+    group_domain: ?[]const u8 = null,
 
     /// The ID of the resource configuration.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The most recent date and time that the resource configuration was updated,
     /// in ISO-8601 format.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The name of the resource configuration.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the group resource configuration.
-    resource_configuration_group_id: ?[]const u8,
+    resource_configuration_group_id: ?[]const u8 = null,
 
     /// The ID of the resource gateway.
-    resource_gateway_id: ?[]const u8,
+    resource_gateway_id: ?[]const u8 = null,
 
     /// The status of the resource configuration.
-    status: ?ResourceConfigurationStatus,
+    status: ?ResourceConfigurationStatus = null,
 
     /// The type of resource configuration.
     ///
@@ -52,7 +52,7 @@ pub const ResourceConfigurationSummary = struct {
     /// * `CHILD` - A single resource that is part of a group resource
     ///   configuration.
     /// * `ARN` - An Amazon Web Services resource.
-    @"type": ?ResourceConfigurationType,
+    @"type": ?ResourceConfigurationType = null,
 
     pub const json_field_names = .{
         .amazon_managed = "amazonManaged",

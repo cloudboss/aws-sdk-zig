@@ -5,23 +5,23 @@ const JobRunState = @import("job_run_state.zig").JobRunState;
 /// Defines a condition under which a trigger fires.
 pub const Condition = struct {
     /// The name of the crawler to which this condition applies.
-    crawler_name: ?[]const u8,
+    crawler_name: ?[]const u8 = null,
 
     /// The state of the crawler to which this condition applies.
-    crawl_state: ?CrawlState,
+    crawl_state: ?CrawlState = null,
 
     /// The name of the job whose `JobRuns` this condition applies to, and on which
     /// this trigger waits.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// A logical operator.
-    logical_operator: ?LogicalOperator,
+    logical_operator: ?LogicalOperator = null,
 
     /// The condition state. Currently, the only job states that a trigger can
     /// listen for are `SUCCEEDED`, `STOPPED`, `FAILED`, and `TIMEOUT`. The only
     /// crawler states that a trigger can listen for are `SUCCEEDED`, `FAILED`, and
     /// `CANCELLED`.
-    state: ?JobRunState,
+    state: ?JobRunState = null,
 
     pub const json_field_names = .{
         .crawler_name = "CrawlerName",

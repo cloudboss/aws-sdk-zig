@@ -4,16 +4,16 @@ const ExperimentResultResponseType = @import("experiment_result_response_type.zi
 /// monitored in the experiment.
 pub const ExperimentResultsData = struct {
     /// The name of the metric.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The experiment statistic that these results pertain to.
-    result_stat: ?ExperimentResultResponseType,
+    result_stat: ?ExperimentResultResponseType = null,
 
     /// The treatment, or variation, that returned the `values` in this structure.
-    treatment_name: ?[]const u8,
+    treatment_name: ?[]const u8 = null,
 
     /// The values for the `metricName` that were recorded in the experiment.
-    values: ?[]const f64,
+    values: ?[]const f64 = null,
 
     pub const json_field_names = .{
         .metric_name = "metricName",

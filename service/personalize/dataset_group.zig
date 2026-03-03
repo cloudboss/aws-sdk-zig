@@ -15,35 +15,35 @@ const Domain = @import("domain.zig").Domain;
 /// the group.
 pub const DatasetGroup = struct {
     /// The creation date and time (in Unix time) of the dataset group.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset group.
-    dataset_group_arn: ?[]const u8,
+    dataset_group_arn: ?[]const u8 = null,
 
     /// The domain of a Domain dataset group.
-    domain: ?Domain,
+    domain: ?Domain = null,
 
     /// If creating a dataset group fails, provides the reason why.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used
     /// to
     /// encrypt the datasets.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The last update date and time (in Unix time) of the dataset
     /// group.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The name of the dataset group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN of the Identity and Access Management (IAM) role that has
     /// permissions to access
     /// the Key Management Service (KMS) key. Supplying an IAM role is only valid
     /// when also
     /// specifying a KMS key.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The current status of the dataset group.
     ///
@@ -53,7 +53,7 @@ pub const DatasetGroup = struct {
     /// FAILED
     ///
     /// * DELETE PENDING
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

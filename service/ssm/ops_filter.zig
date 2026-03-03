@@ -6,7 +6,7 @@ pub const OpsFilter = struct {
     key: []const u8,
 
     /// The type of filter.
-    @"type": ?OpsFilterOperatorType,
+    @"type": ?OpsFilterOperatorType = null,
 
     /// The filter value.
     values: []const []const u8,

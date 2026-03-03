@@ -5,12 +5,12 @@ const aws = @import("aws");
 pub const CollectionConfiguration = struct {
     /// The name of the tensor collection. The name must be unique relative to other
     /// rule configuration names.
-    collection_name: ?[]const u8,
+    collection_name: ?[]const u8 = null,
 
     /// Parameter values for the tensor collection. The allowed parameters are
     /// `"name"`, `"include_regex"`, `"reduction_config"`, `"save_config"`,
     /// `"tensor_names"`, and `"save_histogram"`.
-    collection_parameters: ?[]const aws.map.StringMapEntry,
+    collection_parameters: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .collection_name = "CollectionName",

@@ -6,10 +6,10 @@ const Expression = @import("expression.zig").Expression;
 /// Name, or Value.
 pub const RoutingCriteriaInputStep = struct {
     /// An object to specify the expiration of a routing step.
-    expiry: ?RoutingCriteriaInputStepExpiry,
+    expiry: ?RoutingCriteriaInputStepExpiry = null,
 
     /// A tagged union to specify expression for a routing step.
-    expression: ?Expression,
+    expression: ?Expression = null,
 
     pub const json_field_names = .{
         .expiry = "Expiry",

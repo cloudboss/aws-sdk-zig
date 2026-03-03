@@ -7,16 +7,16 @@ pub const MetricComparisonComputation = struct {
     computation_id: []const u8,
 
     /// The field that is used in a metric comparison from value setup.
-    from_value: ?MeasureField,
+    from_value: ?MeasureField = null,
 
     /// The name of a computation.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The field that is used in a metric comparison to value setup.
-    target_value: ?MeasureField,
+    target_value: ?MeasureField = null,
 
     /// The time field that is used in a computation.
-    time: ?DimensionField,
+    time: ?DimensionField = null,
 
     pub const json_field_names = .{
         .computation_id = "ComputationId",

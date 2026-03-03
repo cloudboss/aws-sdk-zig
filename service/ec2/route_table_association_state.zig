@@ -4,8 +4,8 @@ const RouteTableAssociationStateCode = @import("route_table_association_state_co
 /// gateway.
 pub const RouteTableAssociationState = struct {
     /// The state of the association.
-    state: ?RouteTableAssociationStateCode,
+    state: ?RouteTableAssociationStateCode = null,
 
     /// The status message, if applicable.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 };

@@ -7,7 +7,7 @@ pub const ZonalStatisticsConfigInput = struct {
 
     /// Bands used in the operation.
     /// If no target bands are specified, it uses all bands available input.
-    target_bands: ?[]const []const u8,
+    target_bands: ?[]const []const u8 = null,
 
     /// The Amazon S3 path pointing to the GeoJSON containing the polygonal zones.
     zone_s3_path: []const u8,
@@ -32,7 +32,7 @@ pub const ZonalStatisticsConfigInput = struct {
     /// (KeyID)](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id) in the
     /// Amazon Web Services Key Management Service (Amazon Web Services KMS)
     /// documentation.
-    zone_s3_path_kms_key_id: ?[]const u8,
+    zone_s3_path_kms_key_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .statistics = "Statistics",

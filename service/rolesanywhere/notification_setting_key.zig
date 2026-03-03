@@ -5,7 +5,7 @@ const NotificationEvent = @import("notification_event.zig").NotificationEvent;
 /// event and the channel.
 pub const NotificationSettingKey = struct {
     /// The specified channel of notification.
-    channel: ?NotificationChannel,
+    channel: ?NotificationChannel = null,
 
     /// The notification setting event to reset.
     event: NotificationEvent,

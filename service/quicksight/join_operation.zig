@@ -13,7 +13,7 @@ pub const JoinOperation = struct {
 
     /// Properties that control how the left operand's columns are handled in the
     /// join result.
-    left_operand_properties: ?JoinOperandProperties,
+    left_operand_properties: ?JoinOperandProperties = null,
 
     /// The join condition that specifies how to match rows between the left and
     /// right operands.
@@ -24,7 +24,7 @@ pub const JoinOperation = struct {
 
     /// Properties that control how the right operand's columns are handled in the
     /// join result.
-    right_operand_properties: ?JoinOperandProperties,
+    right_operand_properties: ?JoinOperandProperties = null,
 
     /// The type of join to perform, such as `INNER`, `LEFT`, `RIGHT`, or `OUTER`.
     @"type": JoinOperationType,

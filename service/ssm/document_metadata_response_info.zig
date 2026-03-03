@@ -3,7 +3,7 @@ const DocumentReviewerResponseSource = @import("document_reviewer_response_sourc
 /// Details about the response to a document review request.
 pub const DocumentMetadataResponseInfo = struct {
     /// Details about a reviewer's response to a document review request.
-    reviewer_response: ?[]const DocumentReviewerResponseSource,
+    reviewer_response: ?[]const DocumentReviewerResponseSource = null,
 
     pub const json_field_names = .{
         .reviewer_response = "ReviewerResponse",

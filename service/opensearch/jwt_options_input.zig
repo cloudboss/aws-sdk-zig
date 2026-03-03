@@ -3,16 +3,16 @@
 /// Service domain.
 pub const JWTOptionsInput = struct {
     /// True to enable JWT authentication and authorization for a domain.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// Element of the JWT assertion used by the cluster to verify JWT signatures.
-    public_key: ?[]const u8,
+    public_key: ?[]const u8 = null,
 
     /// Element of the JWT assertion to use for roles.
-    roles_key: ?[]const u8,
+    roles_key: ?[]const u8 = null,
 
     /// Element of the JWT assertion to use for the user name.
-    subject_key: ?[]const u8,
+    subject_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

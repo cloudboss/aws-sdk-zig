@@ -1,10 +1,10 @@
 /// Represents the output of a ListPolicyAttachments response operation.
 pub const BatchListPolicyAttachmentsResponse = struct {
     /// The pagination token.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// A list of `ObjectIdentifiers` to which the policy is attached.
-    object_identifiers: ?[]const []const u8,
+    object_identifiers: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .next_token = "NextToken",

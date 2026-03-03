@@ -4,14 +4,14 @@ const ReviewStatus = @import("review_status.zig").ReviewStatus;
 /// Information about a reviewer's response to a document review request.
 pub const DocumentReviewerResponseSource = struct {
     /// The comment entered by a reviewer as part of their document review response.
-    comment: ?[]const DocumentReviewCommentSource,
+    comment: ?[]const DocumentReviewCommentSource = null,
 
     /// The date and time that a reviewer entered a response to a document review
     /// request.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The user in your organization assigned to review a document request.
-    reviewer: ?[]const u8,
+    reviewer: ?[]const u8 = null,
 
     /// The current review status of a new custom SSM document created by a member
     /// of your
@@ -22,12 +22,12 @@ pub const DocumentReviewerResponseSource = struct {
     /// approved, the status of the previous version changes to REJECTED.
     ///
     /// Only one version of a document can be in review, or PENDING, at a time.
-    review_status: ?ReviewStatus,
+    review_status: ?ReviewStatus = null,
 
     /// The date and time that a reviewer last updated a response to a document
     /// review
     /// request.
-    updated_time: ?i64,
+    updated_time: ?i64 = null,
 
     pub const json_field_names = .{
         .comment = "Comment",

@@ -6,10 +6,10 @@ const SimplePrefix = @import("simple_prefix.zig").SimplePrefix;
 /// allowed.
 pub const TargetObjectKeyFormat = struct {
     /// Partitioned S3 key for log objects.
-    partitioned_prefix: ?PartitionedPrefix,
+    partitioned_prefix: ?PartitionedPrefix = null,
 
     /// To use the simple format for S3 keys for log objects. To specify
     /// SimplePrefix format, set
     /// SimplePrefix to {}.
-    simple_prefix: ?SimplePrefix,
+    simple_prefix: ?SimplePrefix = null,
 };

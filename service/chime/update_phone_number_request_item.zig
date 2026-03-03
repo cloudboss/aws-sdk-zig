@@ -5,13 +5,13 @@ const PhoneNumberProductType = @import("phone_number_product_type.zig").PhoneNum
 /// BatchUpdatePhoneNumber and UpdatePhoneNumber actions.
 pub const UpdatePhoneNumberRequestItem = struct {
     /// The outbound calling name to update.
-    calling_name: ?[]const u8,
+    calling_name: ?[]const u8 = null,
 
     /// The phone number ID to update.
     phone_number_id: []const u8,
 
     /// The product type to update.
-    product_type: ?PhoneNumberProductType,
+    product_type: ?PhoneNumberProductType = null,
 
     pub const json_field_names = .{
         .calling_name = "CallingName",

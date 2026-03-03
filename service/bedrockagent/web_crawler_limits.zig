@@ -4,10 +4,10 @@ pub const WebCrawlerLimits = struct {
     /// The max number of web pages crawled from your source URLs, up to 25,000
     /// pages. If the web pages exceed this limit, the data source sync will fail
     /// and no web pages will be ingested.
-    max_pages: ?i32,
+    max_pages: ?i32 = null,
 
     /// The max rate at which pages are crawled, up to 300 per minute per host.
-    rate_limit: ?i32,
+    rate_limit: ?i32 = null,
 
     pub const json_field_names = .{
         .max_pages = "maxPages",

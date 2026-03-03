@@ -41,5 +41,5 @@ pub const PerformanceFactorReferenceRequest = struct {
     ///
     /// If you specify an unsupported instance family as a value for baseline
     /// performance, the API returns an empty response.
-    instance_family: ?[]const u8,
+    instance_family: ?[]const u8 = null,
 };

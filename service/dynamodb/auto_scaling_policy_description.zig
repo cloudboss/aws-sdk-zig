@@ -3,10 +3,10 @@ const AutoScalingTargetTrackingScalingPolicyConfigurationDescription = @import("
 /// Represents the properties of the scaling policy.
 pub const AutoScalingPolicyDescription = struct {
     /// The name of the scaling policy.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// Represents a target tracking scaling policy configuration.
-    target_tracking_scaling_policy_configuration: ?AutoScalingTargetTrackingScalingPolicyConfigurationDescription,
+    target_tracking_scaling_policy_configuration: ?AutoScalingTargetTrackingScalingPolicyConfigurationDescription = null,
 
     pub const json_field_names = .{
         .policy_name = "PolicyName",

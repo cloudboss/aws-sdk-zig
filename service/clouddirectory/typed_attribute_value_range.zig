@@ -8,13 +8,13 @@ pub const TypedAttributeValueRange = struct {
     end_mode: RangeMode,
 
     /// The attribute value to terminate the range at.
-    end_value: ?TypedAttributeValue,
+    end_value: ?TypedAttributeValue = null,
 
     /// The inclusive or exclusive range start.
     start_mode: RangeMode,
 
     /// The value to start the range at.
-    start_value: ?TypedAttributeValue,
+    start_value: ?TypedAttributeValue = null,
 
     pub const json_field_names = .{
         .end_mode = "EndMode",

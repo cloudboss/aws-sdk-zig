@@ -9,7 +9,7 @@ pub const RecordingConfig = struct {
 
     /// The Amazon S3 location where browser recordings are stored. This location
     /// contains the recorded browser sessions.
-    s_3_location: ?S3Location,
+    s_3_location: ?S3Location = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

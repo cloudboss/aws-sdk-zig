@@ -2,7 +2,7 @@
 pub const TeamsUserIdentity = struct {
     /// The AWS user identity ARN used to associate a Microsoft Teams user Identity
     /// with an IAM Role.
-    aws_user_identity: ?[]const u8,
+    aws_user_identity: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration
     /// associated with the user identity to delete.
@@ -25,13 +25,13 @@ pub const TeamsUserIdentity = struct {
     team_id: []const u8,
 
     /// The ID of the Microsoft Teams channel.
-    teams_channel_id: ?[]const u8,
+    teams_channel_id: ?[]const u8 = null,
 
     /// The ID of the Microsoft Teams tenant.
-    teams_tenant_id: ?[]const u8,
+    teams_tenant_id: ?[]const u8 = null,
 
     /// The Microsoft Teams user ID.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_user_identity = "AwsUserIdentity",

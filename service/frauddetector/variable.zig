@@ -4,29 +4,29 @@ const DataType = @import("data_type.zig").DataType;
 /// The variable.
 pub const Variable = struct {
     /// The ARN of the variable.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time when the variable was created.
-    created_time: ?[]const u8,
+    created_time: ?[]const u8 = null,
 
     /// The data source of the variable.
-    data_source: ?DataSource,
+    data_source: ?DataSource = null,
 
     /// The data type of the variable. For more information see [Variable
     /// types](https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types).
-    data_type: ?DataType,
+    data_type: ?DataType = null,
 
     /// The default value of the variable.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// The description of the variable.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time when variable was last updated.
-    last_updated_time: ?[]const u8,
+    last_updated_time: ?[]const u8 = null,
 
     /// The name of the variable.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The variable type of the variable.
     ///
@@ -38,7 +38,7 @@ pub const Variable = struct {
     /// | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY |
     /// SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE |
     /// SHIPPING_ZIP | USERAGENT `
-    variable_type: ?[]const u8,
+    variable_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

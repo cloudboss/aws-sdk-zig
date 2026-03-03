@@ -3,10 +3,10 @@ const GeospatialMapNavigation = @import("geospatial_map_navigation.zig").Geospat
 
 /// The map state properties for a map.
 pub const GeospatialMapState = struct {
-    bounds: ?GeospatialCoordinateBounds,
+    bounds: ?GeospatialCoordinateBounds = null,
 
     /// Enables or disables map navigation for a map.
-    map_navigation: ?GeospatialMapNavigation,
+    map_navigation: ?GeospatialMapNavigation = null,
 
     pub const json_field_names = .{
         .bounds = "Bounds",

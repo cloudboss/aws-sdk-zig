@@ -17,7 +17,7 @@ pub const RotationRulesType = struct {
     /// `RotationRules` with `AutomaticallyAfterDays` or
     /// `ScheduleExpression`, but not both. To set a rotation schedule in hours,
     /// use `ScheduleExpression`.
-    automatically_after_days: ?i64,
+    automatically_after_days: ?i64 = null,
 
     /// The length of the rotation window in hours, for example `3h` for a three
     /// hour window. Secrets Manager rotates your secret at any time during this
@@ -33,7 +33,7 @@ pub const RotationRulesType = struct {
     /// expressions in Secrets Manager
     /// rotation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_schedule.html) in the *Secrets Manager Users
     /// Guide*.
-    duration: ?[]const u8,
+    duration: ?[]const u8 = null,
 
     /// A `cron()` or `rate()` expression that defines the schedule for
     /// rotating your secret. Secrets Manager rotation schedules use UTC time zone.
@@ -64,7 +64,7 @@ pub const RotationRulesType = struct {
     /// default rotation window closes at the end of the day. You can set the
     /// `Duration` to change the rotation window. The rotation window must not
     /// extend into the next UTC day or into the next rotation window.
-    schedule_expression: ?[]const u8,
+    schedule_expression: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .automatically_after_days = "AutomaticallyAfterDays",

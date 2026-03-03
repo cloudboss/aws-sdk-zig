@@ -7,7 +7,7 @@ pub const ProtectedJobParameters = struct {
 
     /// Runtime configuration values passed to the PySpark analysis script.
     /// Parameter names and types must match those defined in the analysis template.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .analysis_template_arn = "analysisTemplateArn",

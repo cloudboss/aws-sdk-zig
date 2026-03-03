@@ -7,19 +7,19 @@ pub const ExpenseDocument = struct {
     /// This is a block object, the same as reported when DetectDocumentText is run
     /// on a document.
     /// It provides word level recognition of text.
-    blocks: ?[]const Block,
+    blocks: ?[]const Block = null,
 
     /// Denotes which invoice or receipt in the document the information is coming
     /// from.
     /// First document will be 1, the second 2, and so on.
-    expense_index: ?i32,
+    expense_index: ?i32 = null,
 
     /// Information detected on each table of a document, seperated into
     /// `LineItems`.
-    line_item_groups: ?[]const LineItemGroup,
+    line_item_groups: ?[]const LineItemGroup = null,
 
     /// Any information found outside of a table by Amazon Textract.
-    summary_fields: ?[]const ExpenseField,
+    summary_fields: ?[]const ExpenseField = null,
 
     pub const json_field_names = .{
         .blocks = "Blocks",

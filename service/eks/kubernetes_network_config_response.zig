@@ -8,14 +8,14 @@ pub const KubernetesNetworkConfigResponse = struct {
     /// Indicates the current configuration of the load balancing capability on your
     /// EKS Auto
     /// Mode cluster. For example, if the capability is enabled or disabled.
-    elastic_load_balancing: ?ElasticLoadBalancing,
+    elastic_load_balancing: ?ElasticLoadBalancing = null,
 
     /// The IP family used to assign Kubernetes `Pod` and `Service` objects
     /// IP addresses. The IP family is always `ipv4`, unless you have a
     /// `1.21` or later cluster running version `1.10.1` or later of
     /// the Amazon VPC CNI plugin for Kubernetes and specified `ipv6` when you
     /// created the cluster.
-    ip_family: ?IpFamily,
+    ip_family: ?IpFamily = null,
 
     /// The CIDR block that Kubernetes `Pod` and `Service` object IP
     /// addresses are assigned from. Kubernetes assigns addresses from an `IPv4`
@@ -27,7 +27,7 @@ pub const KubernetesNetworkConfigResponse = struct {
     /// specified, then it was specified when the cluster was created and it can't
     /// be
     /// changed.
-    service_ipv_4_cidr: ?[]const u8,
+    service_ipv_4_cidr: ?[]const u8 = null,
 
     /// The CIDR block that Kubernetes pod and service IP addresses are assigned
     /// from if you
@@ -38,7 +38,7 @@ pub const KubernetesNetworkConfigResponse = struct {
     /// local address range
     /// (`fc00::/7`) because you can't specify a custom IPv6 CIDR block when you
     /// create the cluster.
-    service_ipv_6_cidr: ?[]const u8,
+    service_ipv_6_cidr: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .elastic_load_balancing = "elasticLoadBalancing",

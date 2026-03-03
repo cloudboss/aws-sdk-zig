@@ -21,15 +21,15 @@ pub const ListMonitorsRequest = struct {
     /// For example, to list all monitors who's status is ACTIVE, you would specify:
     ///
     /// `"Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" } ]`
-    filters: ?[]const Filter,
+    filters: ?[]const Filter = null,
 
     /// The maximum number of monitors to include in the response.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// If the result of the previous request was truncated, the response includes a
     /// `NextToken`. To retrieve the next set of results, use the token in the next
     /// request. Tokens expire after 24 hours.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .filters = "Filters",

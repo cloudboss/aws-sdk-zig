@@ -9,22 +9,22 @@ const ComplianceStatus = @import("compliance_status.zig").ComplianceStatus;
 /// policy.
 pub const AppComponentCompliance = struct {
     /// Name of the Application Component.
-    app_component_name: ?[]const u8,
+    app_component_name: ?[]const u8 = null,
 
     /// The compliance of the Application Component against the resiliency policy.
-    compliance: ?[]const aws.map.MapEntry(DisruptionCompliance),
+    compliance: ?[]const aws.map.MapEntry(DisruptionCompliance) = null,
 
     /// The cost for the application.
-    cost: ?Cost,
+    cost: ?Cost = null,
 
     /// The compliance message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The current resiliency score for the application.
-    resiliency_score: ?ResiliencyScore,
+    resiliency_score: ?ResiliencyScore = null,
 
     /// Status of the action.
-    status: ?ComplianceStatus,
+    status: ?ComplianceStatus = null,
 
     pub const json_field_names = .{
         .app_component_name = "appComponentName",

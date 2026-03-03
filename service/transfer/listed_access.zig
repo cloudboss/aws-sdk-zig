@@ -18,7 +18,7 @@ pub const ListedAccess = struct {
     /// characters consisting of uppercase and lowercase alphanumeric characters
     /// with no spaces. You can also include underscores or any of the following
     /// characters: =,.@:/-
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The landing directory (folder) for a user when they log in to the server
     /// using the client.
@@ -27,7 +27,7 @@ pub const ListedAccess = struct {
     ///
     /// You can use the `HomeDirectory` parameter for `HomeDirectoryType` when it is
     /// set to either `PATH` or `LOGICAL`.
-    home_directory: ?[]const u8,
+    home_directory: ?[]const u8 = null,
 
     /// The type of landing directory (folder) that you want your users' home
     /// directory to be when they log in to the server. If you set it to `PATH`, the
@@ -41,7 +41,7 @@ pub const ListedAccess = struct {
     /// `HomeDirectoryType` is `PATH`, you provide an absolute path using the
     /// `HomeDirectory` parameter. You cannot have both `HomeDirectory` and
     /// `HomeDirectoryMappings` in your template.
-    home_directory_type: ?HomeDirectoryType,
+    home_directory_type: ?HomeDirectoryType = null,
 
     /// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
     /// role that controls your users' access to your Amazon S3 bucket or Amazon EFS
@@ -50,7 +50,7 @@ pub const ListedAccess = struct {
     /// out of your Amazon S3 bucket or Amazon EFS file system. The IAM role should
     /// also contain a trust relationship that allows the server to access your
     /// resources when servicing your users' transfer requests.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .external_id = "ExternalId",

@@ -12,7 +12,7 @@ const Circle = @import("circle.zig").Circle;
 /// antimeridian.
 pub const GeofenceGeometry = struct {
     /// A circle on the earth, as defined by a center point and a radius.
-    circle: ?Circle,
+    circle: ?Circle = null,
 
     /// Geobuf is a compact binary encoding for geographic data that provides
     /// lossless compression of GeoJSON polygons. The Geobuf must be Base64-encoded.
@@ -31,7 +31,7 @@ pub const GeofenceGeometry = struct {
     /// * A `MultiPolygon` in `Geobuf` format can contain up to 10,000 `Polygons`
     ///   and up to 100,000 total vertices, including all vertices from all
     ///   component `Polygons`.
-    geobuf: ?[]const u8,
+    geobuf: ?[]const u8 = null,
 
     /// A `MultiPolygon` is a list of up to 250 `Polygon` elements which represent
     /// the shape of a geofence. The `Polygon` components of a `MultiPolygon`
@@ -55,7 +55,7 @@ pub const GeofenceGeometry = struct {
     /// * The total number of intersecting edges of component `Polygons` must be no
     ///   more than 100,000. Parallel edges that are shared but do not cross are not
     ///   counted toward this limit.
-    multi_polygon: ?[]const []const []const []const f64,
+    multi_polygon: ?[]const []const []const []const f64 = null,
 
     /// A `Polygon` is a list of up to 250 linear rings which represent the shape of
     /// a geofence. This list *must* include 1 exterior ring (representing the outer
@@ -88,7 +88,7 @@ pub const GeofenceGeometry = struct {
     /// * All interior rings must be fully contained within the exterior ring.
     /// * Interior rings must not contain other interior rings.
     /// * No ring is permitted to intersect itself.
-    polygon: ?[]const []const []const f64,
+    polygon: ?[]const []const []const f64 = null,
 
     pub const json_field_names = .{
         .circle = "Circle",

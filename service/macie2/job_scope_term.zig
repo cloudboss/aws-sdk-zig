@@ -8,11 +8,11 @@ const TagScopeTerm = @import("tag_scope_term.zig").TagScopeTerm;
 pub const JobScopeTerm = struct {
     /// A property-based condition that defines a property, operator, and one or
     /// more values for including or excluding objects from the job.
-    simple_scope_term: ?SimpleScopeTerm,
+    simple_scope_term: ?SimpleScopeTerm = null,
 
     /// A tag-based condition that defines the operator and tag keys or tag key and
     /// value pairs for including or excluding objects from the job.
-    tag_scope_term: ?TagScopeTerm,
+    tag_scope_term: ?TagScopeTerm = null,
 
     pub const json_field_names = .{
         .simple_scope_term = "simpleScopeTerm",

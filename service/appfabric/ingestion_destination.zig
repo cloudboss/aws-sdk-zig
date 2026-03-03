@@ -8,7 +8,7 @@ pub const IngestionDestination = struct {
     arn: []const u8,
 
     /// The timestamp of when the ingestion destination was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Contains information about the destination of ingested data.
     destination_configuration: DestinationConfiguration,
@@ -29,16 +29,16 @@ pub const IngestionDestination = struct {
     /// * `Failed`: The ingestion destination has failed. If the ingestion
     /// destination is in this state, you should verify the ingestion destination
     /// configuration and try again.
-    status: ?IngestionDestinationStatus,
+    status: ?IngestionDestinationStatus = null,
 
     /// The reason for the current status of the ingestion destination.
     ///
     /// Only present when the `status` of ingestion destination is
     /// `Failed`.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The timestamp of when the ingestion destination was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

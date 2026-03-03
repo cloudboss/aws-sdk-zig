@@ -4,16 +4,16 @@ const SingleHeader = @import("single_header.zig").SingleHeader;
 /// query parameters, or body content.
 pub const FieldToMatch = struct {
     /// Redacts the HTTP method from WAF logs.
-    method: ?[]const u8,
+    method: ?[]const u8 = null,
 
     /// Redacts the entire query string from WAF logs.
-    query_string: ?[]const u8,
+    query_string: ?[]const u8 = null,
 
     /// Redacts a specific header field by name from WAF logs.
-    single_header: ?SingleHeader,
+    single_header: ?SingleHeader = null,
 
     /// Redacts the URI path from WAF logs.
-    uri_path: ?[]const u8,
+    uri_path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .method = "Method",

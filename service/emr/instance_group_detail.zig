@@ -8,19 +8,19 @@ pub const InstanceGroupDetail = struct {
     /// `InstanceType`. Expressed in USD. If neither `BidPrice` nor
     /// `BidPriceAsPercentageOfOnDemandPrice` is provided,
     /// `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
-    bid_price: ?[]const u8,
+    bid_price: ?[]const u8 = null,
 
     /// The date/time the instance group was created.
     creation_date_time: i64,
 
     /// The custom AMI ID to use for the provisioned instance group.
-    custom_ami_id: ?[]const u8,
+    custom_ami_id: ?[]const u8 = null,
 
     /// The date/time the instance group was terminated.
-    end_date_time: ?i64,
+    end_date_time: ?i64 = null,
 
     /// Unique identifier for the instance group.
-    instance_group_id: ?[]const u8,
+    instance_group_id: ?[]const u8 = null,
 
     /// Target number of instances to run in the instance group.
     instance_request_count: i32,
@@ -35,19 +35,19 @@ pub const InstanceGroupDetail = struct {
     instance_type: []const u8,
 
     /// Details regarding the state of the instance group.
-    last_state_change_reason: ?[]const u8,
+    last_state_change_reason: ?[]const u8 = null,
 
     /// Market type of the Amazon EC2 instances used to create a cluster node.
     market: MarketType,
 
     /// Friendly name for the instance group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The date/time the instance group was available to the cluster.
-    ready_date_time: ?i64,
+    ready_date_time: ?i64 = null,
 
     /// The date/time the instance group was started.
-    start_date_time: ?i64,
+    start_date_time: ?i64 = null,
 
     /// State of instance group. The following values are no longer supported:
     /// STARTING,

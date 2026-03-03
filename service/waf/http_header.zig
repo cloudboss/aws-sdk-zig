@@ -15,10 +15,10 @@
 /// by `GetSampledRequests`.
 pub const HTTPHeader = struct {
     /// The name of one of the headers in the sampled web request.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The value of one of the headers in the sampled web request.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

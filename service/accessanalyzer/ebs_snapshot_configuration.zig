@@ -15,7 +15,7 @@ pub const EbsSnapshotConfiguration = struct {
     ///   `groups`.
     /// * To propose deletion of existing shared `groups`, you can specify an empty
     ///   list for `groups`.
-    groups: ?[]const []const u8,
+    groups: ?[]const []const u8 = null,
 
     /// The KMS key identifier for an encrypted Amazon EBS volume snapshot. The KMS
     /// key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS
@@ -26,7 +26,7 @@ pub const EbsSnapshotConfiguration = struct {
     ///   access preview uses the existing `kmsKeyId` of the snapshot.
     /// * If the access preview is for a new resource and you do not specify the
     ///   `kmsKeyId`, the access preview considers the snapshot as unencrypted.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The IDs of the Amazon Web Services accounts that have access to the Amazon
     /// EBS volume snapshot.
@@ -39,7 +39,7 @@ pub const EbsSnapshotConfiguration = struct {
     ///   `userIds`.
     /// * To propose deletion of existing shared `accountIds`, you can specify an
     ///   empty list for `userIds`.
-    user_ids: ?[]const []const u8,
+    user_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .groups = "groups",

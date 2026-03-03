@@ -5,7 +5,7 @@ pub const UserSummary = struct {
     enabled: bool,
 
     /// The first name of the user.
-    given_name: ?[]const u8,
+    given_name: ?[]const u8 = null,
 
     /// The name of the user.
     sam_account_name: []const u8,
@@ -14,7 +14,7 @@ pub const UserSummary = struct {
     sid: []const u8,
 
     /// The last name of the user.
-    surname: ?[]const u8,
+    surname: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

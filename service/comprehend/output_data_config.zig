@@ -17,7 +17,7 @@ pub const OutputDataConfig = struct {
     ///
     /// * ARN of a KMS Key Alias:
     /// `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// When you use the `OutputDataConfig` object with asynchronous operations, you
     /// specify the Amazon S3 location where you want to write the output data. The

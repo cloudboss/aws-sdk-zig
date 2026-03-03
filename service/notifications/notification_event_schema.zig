@@ -18,7 +18,7 @@ pub const NotificationEventSchema = struct {
     /// Resource Event (ARN) of the parent aggregate notification.
     ///
     /// This is omitted if notification isn't aggregated.
-    aggregate_notification_event_arn: ?[]const u8,
+    aggregate_notification_event_arn: ?[]const u8 = null,
 
     /// The aggregation type of the `NotificationConfiguration`.
     ///
@@ -37,14 +37,14 @@ pub const NotificationEventSchema = struct {
     /// * `NONE`
     ///
     /// * The notification isn't aggregated.
-    aggregation_event_type: ?AggregationEventType,
+    aggregation_event_type: ?AggregationEventType = null,
 
     /// Provides additional information about how multiple notifications are
     /// grouped.
-    aggregation_summary: ?AggregationSummary,
+    aggregation_summary: ?AggregationSummary = null,
 
     /// The end time of the event.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The assessed nature of the event.
     ///
@@ -58,7 +58,7 @@ pub const NotificationEventSchema = struct {
     ///
     /// * Some `EventRules` are `ACTIVE` and some are `INACTIVE`. Any call can be
     ///   run.
-    event_status: ?EventStatus,
+    event_status: ?EventStatus = null,
 
     /// The unique identifier for a `NotificationEvent`.
     id: []const u8,
@@ -95,22 +95,22 @@ pub const NotificationEventSchema = struct {
 
     /// The unique identifier of the organizational unit associated with the
     /// notification event.
-    organizational_unit_id: ?[]const u8,
+    organizational_unit_id: ?[]const u8 = null,
 
     /// The schema version of the Notification Event.
     schema_version: SchemaVersion,
 
     /// The source event URL.
-    source_event_detail_url: ?[]const u8,
+    source_event_detail_url: ?[]const u8 = null,
 
     /// The detailed URL for the source event.
-    source_event_detail_url_display_text: ?[]const u8,
+    source_event_detail_url_display_text: ?[]const u8 = null,
 
     /// The source event metadata.
     source_event_metadata: SourceEventMetadata,
 
     /// The notification event start time.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// A list of text values.
     text_parts: []const aws.map.MapEntry(TextPartValue),

@@ -16,7 +16,7 @@ pub const AccountTakeoverRiskConfigurationType = struct {
     /// `AccountTakeoverRiskConfiguration`, Amazon Cognito sends an email message
     /// using
     /// the method and template that you set with this data type.
-    notify_configuration: ?NotifyConfigurationType,
+    notify_configuration: ?NotifyConfigurationType = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

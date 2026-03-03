@@ -6,28 +6,28 @@ pub const Connection = struct {
     /// The authorization type specified for the connection.
     ///
     /// OAUTH tokens are refreshed when a 401 or 407 response is returned.
-    authorization_type: ?ConnectionAuthorizationType,
+    authorization_type: ?ConnectionAuthorizationType = null,
 
     /// The ARN of the connection.
-    connection_arn: ?[]const u8,
+    connection_arn: ?[]const u8 = null,
 
     /// The state of the connection.
-    connection_state: ?ConnectionState,
+    connection_state: ?ConnectionState = null,
 
     /// A time stamp for the time that the connection was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A time stamp for the time that the connection was last authorized.
-    last_authorized_time: ?i64,
+    last_authorized_time: ?i64 = null,
 
     /// A time stamp for the time that the connection was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the connection.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The reason that the connection is in the connection state.
-    state_reason: ?[]const u8,
+    state_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authorization_type = "AuthorizationType",

@@ -6,7 +6,7 @@ pub const ProductViewAggregationValue = struct {
     approximate_count: i32 = 0,
 
     /// The value of the product view aggregation.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .approximate_count = "ApproximateCount",

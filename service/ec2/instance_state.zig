@@ -33,8 +33,8 @@ pub const InstanceState = struct {
     /// You can ignore the high byte value by zeroing out all of the bits above 2^8
     /// or 256 in
     /// decimal.
-    code: ?i32,
+    code: ?i32 = null,
 
     /// The current state of the instance.
-    name: ?InstanceStateName,
+    name: ?InstanceStateName = null,
 };

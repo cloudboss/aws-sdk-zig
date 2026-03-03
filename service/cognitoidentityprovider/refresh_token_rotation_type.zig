@@ -17,7 +17,7 @@ pub const RefreshTokenRotationType = struct {
     /// `RetryGracePeriodSeconds` is `0`, the grace period is disabled
     /// and a successful request immediately invalidates the submitted refresh
     /// token.
-    retry_grace_period_seconds: ?i32,
+    retry_grace_period_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .feature = "Feature",

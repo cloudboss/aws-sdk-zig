@@ -11,7 +11,7 @@ pub const SemanticTable = struct {
 
     /// Configuration for row level security that control data access for this
     /// semantic table.
-    row_level_permission_configuration: ?RowLevelPermissionConfiguration,
+    row_level_permission_configuration: ?RowLevelPermissionConfiguration = null,
 
     pub const json_field_names = .{
         .alias = "Alias",

@@ -62,12 +62,12 @@ pub const ApiKeyRestrictions = struct {
     /// An optional list of allowed Android applications for which requests must
     /// originate from. Requests using this API key from other sources will not be
     /// allowed.
-    allow_android_apps: ?[]const AndroidApp,
+    allow_android_apps: ?[]const AndroidApp = null,
 
     /// An optional list of allowed Apple applications for which requests must
     /// originate from. Requests using this API key from other sources will not be
     /// allowed.
-    allow_apple_apps: ?[]const AppleApp,
+    allow_apple_apps: ?[]const AppleApp = null,
 
     /// An optional list of allowed HTTP referers for which requests must originate
     /// from. Requests using this API key from other domains will not be allowed.
@@ -86,7 +86,7 @@ pub const ApiKeyRestrictions = struct {
     /// Asterisk (*) will replace any multiple characters (including multiple
     /// hexadecimal digits).
     /// * No spaces allowed. For example, `https://example.com`.
-    allow_referers: ?[]const []const u8,
+    allow_referers: ?[]const []const u8 = null,
 
     /// A list of allowed resource ARNs that a API key bearer can perform actions
     /// on.

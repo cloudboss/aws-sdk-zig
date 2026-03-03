@@ -6,13 +6,13 @@
 /// code and an error message.
 pub const PutRecordBatchResponseEntry = struct {
     /// The error code for an individual record result.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message for an individual record result.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The ID of the record.
-    record_id: ?[]const u8,
+    record_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

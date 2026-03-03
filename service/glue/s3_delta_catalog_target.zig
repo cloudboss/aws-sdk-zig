@@ -8,12 +8,12 @@ const CatalogSchemaChangePolicy = @import("catalog_schema_change_policy.zig").Ca
 /// Catalog.
 pub const S3DeltaCatalogTarget = struct {
     /// Specifies additional connection options for the connector.
-    additional_options: ?[]const aws.map.StringMapEntry,
+    additional_options: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies whether to automatically enable data quality evaluation for the S3
     /// Delta catalog target. When set to `true`,
     /// data quality checks are performed automatically during the write operation.
-    auto_data_quality: ?AutoDataQuality,
+    auto_data_quality: ?AutoDataQuality = null,
 
     /// The name of the database to write to.
     database: []const u8,
@@ -25,13 +25,13 @@ pub const S3DeltaCatalogTarget = struct {
     name: []const u8,
 
     /// Specifies the data schema for the S3 Delta catalog target.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     /// Specifies native partitioning using a sequence of keys.
-    partition_keys: ?[]const []const []const u8,
+    partition_keys: ?[]const []const []const u8 = null,
 
     /// A policy that specifies update behavior for the crawler.
-    schema_change_policy: ?CatalogSchemaChangePolicy,
+    schema_change_policy: ?CatalogSchemaChangePolicy = null,
 
     /// The name of the table in the database to write to.
     table: []const u8,

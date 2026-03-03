@@ -8,15 +8,15 @@ const statusType = @import("status_type.zig").statusType;
 /// operation.
 pub const AccessKeyMetadata = struct {
     /// The ID for this access key.
-    access_key_id: ?[]const u8,
+    access_key_id: ?[]const u8 = null,
 
     /// The date when the access key was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The status of the access key. `Active` means that the key is valid for API
     /// calls; `Inactive` means it is not.
-    status: ?statusType,
+    status: ?statusType = null,
 
     /// The name of the IAM user that the key is associated with.
-    user_name: ?[]const u8,
+    user_name: ?[]const u8 = null,
 };

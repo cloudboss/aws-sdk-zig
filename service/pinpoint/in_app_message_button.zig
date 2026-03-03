@@ -4,16 +4,16 @@ const DefaultButtonConfiguration = @import("default_button_configuration.zig").D
 /// Button Config for an in-app message.
 pub const InAppMessageButton = struct {
     /// Default button content.
-    android: ?OverrideButtonConfiguration,
+    android: ?OverrideButtonConfiguration = null,
 
     /// Default button content.
-    default_config: ?DefaultButtonConfiguration,
+    default_config: ?DefaultButtonConfiguration = null,
 
     /// Default button content.
-    ios: ?OverrideButtonConfiguration,
+    ios: ?OverrideButtonConfiguration = null,
 
     /// Default button content.
-    web: ?OverrideButtonConfiguration,
+    web: ?OverrideButtonConfiguration = null,
 
     pub const json_field_names = .{
         .android = "Android",

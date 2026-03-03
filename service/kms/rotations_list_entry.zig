@@ -15,24 +15,24 @@ pub const RotationsListEntry = struct {
     /// date and time is indicated in `ValidTo`. This field is only present for
     /// symmetric
     /// encryption KMS keys with `EXTERNAL` origin.
-    expiration_model: ?ExpirationModelType,
+    expiration_model: ?ExpirationModelType = null,
 
     /// Indicates if the key material is currently imported into KMS. It has two
     /// possible
     /// values: `IMPORTED` or `PENDING_IMPORT`. This field is only present for
     /// symmetric encryption KMS keys with `EXTERNAL` origin.
-    import_state: ?ImportState,
+    import_state: ?ImportState = null,
 
     /// Unique identifier of the key.
-    key_id: ?[]const u8,
+    key_id: ?[]const u8 = null,
 
     /// User-specified description of the key material. This field is only present
     /// for symmetric
     /// encryption KMS keys with `EXTERNAL` origin.
-    key_material_description: ?[]const u8,
+    key_material_description: ?[]const u8 = null,
 
     /// Unique identifier of the key material.
-    key_material_id: ?[]const u8,
+    key_material_id: ?[]const u8 = null,
 
     /// There are four possible values for this field: `CURRENT`,
     /// `NON_CURRENT`, `PENDING_MULTI_REGION_IMPORT_AND_ROTATION` and
@@ -60,25 +60,25 @@ pub const RotationsListEntry = struct {
     /// with imported
     /// key material. The other values, `CURRENT` and `NON_CURRENT`, are used
     /// for all KMS keys that support automatic or on-demand key rotation.
-    key_material_state: ?KeyMaterialState,
+    key_material_state: ?KeyMaterialState = null,
 
     /// Date and time that the key material rotation completed. Formatted as Unix
     /// time. This field
     /// is not present for the first key material or an imported key material in
     /// `PENDING_ROTATION` state.
-    rotation_date: ?i64,
+    rotation_date: ?i64 = null,
 
     /// Identifies whether the key material rotation was a scheduled [automatic
     /// rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html) or an [on-demand
     /// rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-on-demand.html). This field is not present for the first key material or an imported key
     /// material in `PENDING_ROTATION` state.
-    rotation_type: ?RotationType,
+    rotation_type: ?RotationType = null,
 
     /// Date and time at which the key material expires. This field is only present
     /// for symmetric
     /// encryption KMS keys with `EXTERNAL` origin in rotation list entries with an
     /// `ExpirationModel` value of `KEY_MATERIAL_EXPIRES`.
-    valid_to: ?i64,
+    valid_to: ?i64 = null,
 
     pub const json_field_names = .{
         .expiration_model = "ExpirationModel",

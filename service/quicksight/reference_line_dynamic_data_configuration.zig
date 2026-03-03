@@ -11,7 +11,7 @@ pub const ReferenceLineDynamicDataConfiguration = struct {
     column: ColumnIdentifier,
 
     /// The aggregation function that is used in the dynamic data.
-    measure_aggregation_function: ?AggregationFunction,
+    measure_aggregation_function: ?AggregationFunction = null,
 
     pub const json_field_names = .{
         .calculation = "Calculation",

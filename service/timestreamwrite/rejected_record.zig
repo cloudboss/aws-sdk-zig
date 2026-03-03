@@ -8,7 +8,7 @@ pub const RejectedRecord = struct {
     /// where an
     /// identical record exists with a higher version than the version in the write
     /// request.
-    existing_version: ?i64,
+    existing_version: ?i64 = null,
 
     /// The reason why a record was not successfully inserted into Timestream.
     /// Possible causes of failure include:
@@ -49,7 +49,7 @@ pub const RejectedRecord = struct {
     /// For more information, see [Access
     /// Management](https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html) in the
     /// Timestream Developer Guide.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The index of the record in the input request for WriteRecords. Indexes begin
     /// with 0.

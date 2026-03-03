@@ -8,24 +8,24 @@ const AwsDmsReplicationInstanceVpcSecurityGroupsDetails = @import("aws_dms_repli
 pub const AwsDmsReplicationInstanceDetails = struct {
     /// The amount of storage (in gigabytes) that is allocated for the replication
     /// instance.
-    allocated_storage: ?i32,
+    allocated_storage: ?i32 = null,
 
     /// Indicates whether minor engine upgrades are applied automatically to the
     /// replication instance during the maintenance
     /// window.
-    auto_minor_version_upgrade: ?bool,
+    auto_minor_version_upgrade: ?bool = null,
 
     /// The Availability Zone that the replication instance is created in. The
     /// default value is a random, system-chosen
     /// Availability Zone in the endpoint's Amazon Web Services Region, such as
     /// `us-east-1d`.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The engine version number of the replication instance. If an engine version
     /// number is not specified when a
     /// replication instance is created, the default is the latest engine version
     /// available.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// An KMS key identifier that is used to encrypt the data on the replication
     /// instance. If you don't
@@ -35,37 +35,37 @@ pub const AwsDmsReplicationInstanceDetails = struct {
     /// Your
     /// Amazon Web Services account has a different default encryption key for each
     /// Amazon Web Services Region.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Specifies whether the replication instance is deployed across multiple
     /// Availability Zones (AZs). You can't set the
     /// `AvailabilityZone` parameter if the `MultiAZ` parameter is set to `true`.
-    multi_az: ?bool,
+    multi_az: ?bool = null,
 
     /// The maintenance window times for the replication instance. Upgrades to the
     /// replication instance are performed during
     /// this time.
-    preferred_maintenance_window: ?[]const u8,
+    preferred_maintenance_window: ?[]const u8 = null,
 
     /// Specifies the accessibility options for the replication instance. A value of
     /// `true` represents an instance
     /// with a public IP address. A value of `false` represents an instance with a
     /// private IP address. The default
     /// value is `true`.
-    publicly_accessible: ?bool,
+    publicly_accessible: ?bool = null,
 
     /// The compute and memory capacity of the replication instance as defined for
     /// the specified replication instance class.
-    replication_instance_class: ?[]const u8,
+    replication_instance_class: ?[]const u8 = null,
 
     /// The replication instance identifier.
-    replication_instance_identifier: ?[]const u8,
+    replication_instance_identifier: ?[]const u8 = null,
 
     /// The subnet group for the replication instance.
-    replication_subnet_group: ?AwsDmsReplicationInstanceReplicationSubnetGroupDetails,
+    replication_subnet_group: ?AwsDmsReplicationInstanceReplicationSubnetGroupDetails = null,
 
     /// The virtual private cloud (VPC) security group for the replication instance.
-    vpc_security_groups: ?[]const AwsDmsReplicationInstanceVpcSecurityGroupsDetails,
+    vpc_security_groups: ?[]const AwsDmsReplicationInstanceVpcSecurityGroupsDetails = null,
 
     pub const json_field_names = .{
         .allocated_storage = "AllocatedStorage",

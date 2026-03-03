@@ -6,11 +6,11 @@ const AwsLogSourceName = @import("aws_log_source_name.zig").AwsLogSourceName;
 pub const AwsLogSourceResource = struct {
     /// The name for a Amazon Web Services source. This must be a Regionally unique
     /// value.
-    source_name: ?AwsLogSourceName,
+    source_name: ?AwsLogSourceName = null,
 
     /// The version for a Amazon Web Services source. This must be a Regionally
     /// unique value.
-    source_version: ?[]const u8,
+    source_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source_name = "sourceName",

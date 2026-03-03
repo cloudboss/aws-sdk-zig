@@ -6,7 +6,7 @@ pub const PrefetchConsumption = struct {
     /// If you only want MediaTailor to insert prefetched ads into avails (ad
     /// breaks) that match specific dynamic variables, such as `scte.event_id`, set
     /// the avail matching criteria.
-    avail_matching_criteria: ?[]const AvailMatchingCriteria,
+    avail_matching_criteria: ?[]const AvailMatchingCriteria = null,
 
     /// The time when MediaTailor no longer considers the prefetched ads for use in
     /// an ad break. MediaTailor automatically deletes prefetch schedules no less
@@ -17,7 +17,7 @@ pub const PrefetchConsumption = struct {
     /// The time when prefetched ads are considered for use in an ad break. If you
     /// don't specify `StartTime`, the prefetched ads are available after
     /// MediaTailor retrieves them from the ad decision server.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .avail_matching_criteria = "AvailMatchingCriteria",

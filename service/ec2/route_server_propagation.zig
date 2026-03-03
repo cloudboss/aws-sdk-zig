@@ -8,11 +8,11 @@ const RouteServerPropagationState = @import("route_server_propagation_state.zig"
 /// propagation.
 pub const RouteServerPropagation = struct {
     /// The ID of the route server configured for route propagation.
-    route_server_id: ?[]const u8,
+    route_server_id: ?[]const u8 = null,
 
     /// The ID of the route table configured for route server propagation.
-    route_table_id: ?[]const u8,
+    route_table_id: ?[]const u8 = null,
 
     /// The current state of route propagation.
-    state: ?RouteServerPropagationState,
+    state: ?RouteServerPropagationState = null,
 };

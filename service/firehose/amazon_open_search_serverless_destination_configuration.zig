@@ -12,25 +12,25 @@ const VpcConfiguration = @import("vpc_configuration.zig").VpcConfiguration;
 pub const AmazonOpenSearchServerlessDestinationConfiguration = struct {
     /// The buffering options. If no value is specified, the default values for
     /// AmazonopensearchserviceBufferingHints are used.
-    buffering_hints: ?AmazonOpenSearchServerlessBufferingHints,
+    buffering_hints: ?AmazonOpenSearchServerlessBufferingHints = null,
 
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The endpoint to use when communicating with the collection in the Serverless
     /// offering
     /// for Amazon OpenSearch Service.
-    collection_endpoint: ?[]const u8,
+    collection_endpoint: ?[]const u8 = null,
 
     /// The Serverless offering for Amazon OpenSearch Service index name.
     index_name: []const u8,
 
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The retry behavior in case Firehose is unable to deliver documents to the
     /// Serverless offering for Amazon OpenSearch Service. The default value is 300
     /// (5
     /// minutes).
-    retry_options: ?AmazonOpenSearchServerlessRetryOptions,
+    retry_options: ?AmazonOpenSearchServerlessRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose
     /// for calling the Serverless offering for Amazon OpenSearch Service
@@ -46,11 +46,11 @@ pub const AmazonOpenSearchServerlessDestinationConfiguration = struct {
     /// records to Amazon S3, and also writes failed documents with
     /// AmazonOpenSearchService-failed/
     /// appended to the prefix.
-    s3_backup_mode: ?AmazonOpenSearchServerlessS3BackupMode,
+    s3_backup_mode: ?AmazonOpenSearchServerlessS3BackupMode = null,
 
     s3_configuration: S3DestinationConfiguration,
 
-    vpc_configuration: ?VpcConfiguration,
+    vpc_configuration: ?VpcConfiguration = null,
 
     pub const json_field_names = .{
         .buffering_hints = "BufferingHints",

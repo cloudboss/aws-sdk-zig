@@ -26,10 +26,10 @@ pub const QueueLimitAssociationSummary = struct {
 
     /// The Unix timestamp of the date and time that the association was last
     /// updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user identifier of the person that updated the association.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

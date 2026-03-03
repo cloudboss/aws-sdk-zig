@@ -7,17 +7,17 @@ pub const RetryStageMetadata = struct {
     /// The number of attempts for a specific stage with automatic retry on stage
     /// failure. One
     /// attempt is allowed for automatic stage retry on failure.
-    auto_stage_retry_attempt: ?i32,
+    auto_stage_retry_attempt: ?i32 = null,
 
     /// The latest trigger for a specific stage where manual or automatic retries
     /// have been
     /// made upon stage failure.
-    latest_retry_trigger: ?RetryTrigger,
+    latest_retry_trigger: ?RetryTrigger = null,
 
     /// The number of attempts for a specific stage where manual retries have been
     /// made upon
     /// stage failure.
-    manual_stage_retry_attempt: ?i32,
+    manual_stage_retry_attempt: ?i32 = null,
 
     pub const json_field_names = .{
         .auto_stage_retry_attempt = "autoStageRetryAttempt",

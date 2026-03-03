@@ -11,7 +11,7 @@ pub const RDSStorageSavingsOpportunityAfterDiscounts = struct {
     /// The estimated monthly savings possible by adopting Compute Optimizer’s DB
     /// instance storage recommendations. This includes any applicable Savings Plans
     /// discounts.
-    estimated_monthly_savings: ?RDSStorageEstimatedMonthlySavings,
+    estimated_monthly_savings: ?RDSStorageEstimatedMonthlySavings = null,
 
     /// The estimated monthly savings possible as a percentage of monthly cost by
     /// adopting Compute Optimizer’s

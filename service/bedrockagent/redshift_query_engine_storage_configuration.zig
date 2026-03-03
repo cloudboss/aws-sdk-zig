@@ -9,10 +9,10 @@ const RedshiftQueryEngineStorageType = @import("redshift_query_engine_storage_ty
 /// source](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html) in the Amazon Bedrock User Guide.
 pub const RedshiftQueryEngineStorageConfiguration = struct {
     /// Specifies configurations for storage in Glue Data Catalog.
-    aws_data_catalog_configuration: ?RedshiftQueryEngineAwsDataCatalogStorageConfiguration,
+    aws_data_catalog_configuration: ?RedshiftQueryEngineAwsDataCatalogStorageConfiguration = null,
 
     /// Specifies configurations for storage in Amazon Redshift.
-    redshift_configuration: ?RedshiftQueryEngineRedshiftStorageConfiguration,
+    redshift_configuration: ?RedshiftQueryEngineRedshiftStorageConfiguration = null,
 
     /// The data storage service to use.
     @"type": RedshiftQueryEngineStorageType,

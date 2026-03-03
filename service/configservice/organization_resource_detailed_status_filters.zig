@@ -4,7 +4,7 @@ const OrganizationResourceDetailedStatus = @import("organization_resource_detail
 /// or status type for an organization conformance pack.
 pub const OrganizationResourceDetailedStatusFilters = struct {
     /// The 12-digit account ID of the member account within an organization.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Indicates deployment status for conformance pack in a member account.
     /// When management account calls `PutOrganizationConformancePack` action for
@@ -43,7 +43,7 @@ pub const OrganizationResourceDetailedStatusFilters = struct {
     ///
     /// * `UPDATE_FAILED` when conformance pack deletion has failed in the member
     ///   account.
-    status: ?OrganizationResourceDetailedStatus,
+    status: ?OrganizationResourceDetailedStatus = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

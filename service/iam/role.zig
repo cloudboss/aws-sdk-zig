@@ -14,21 +14,21 @@ pub const Role = struct {
     arn: []const u8,
 
     /// The policy that grants an entity permission to assume the role.
-    assume_role_policy_document: ?[]const u8,
+    assume_role_policy_document: ?[]const u8 = null,
 
     /// The date and time, in [ISO 8601 date-time
     /// format](http://www.iso.org/iso/iso8601), when the role was created.
     create_date: i64,
 
     /// A description of the role that you provide.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The maximum session duration (in seconds) for the specified role. Anyone who
     /// uses the
     /// CLI, or API to assume the role can specify the duration using the optional
     /// `DurationSeconds` API parameter or `duration-seconds` CLI
     /// parameter.
-    max_session_duration: ?i32,
+    max_session_duration: ?i32 = null,
 
     /// The path to the role. For more information about paths, see [IAM
     /// identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
@@ -41,7 +41,7 @@ pub const Role = struct {
     /// boundaries for IAM
     /// identities
     /// ](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM User Guide*.
-    permissions_boundary: ?AttachedPermissionsBoundary,
+    permissions_boundary: ?AttachedPermissionsBoundary = null,
 
     /// The stable and unique string identifying the role. For more information
     /// about IDs, see
@@ -60,7 +60,7 @@ pub const Role = struct {
     /// more information, see [Regions where data is
     /// tracked](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period) in the *IAM user
     /// Guide*.
-    role_last_used: ?RoleLastUsed,
+    role_last_used: ?RoleLastUsed = null,
 
     /// The friendly name that identifies the role.
     role_name: []const u8,
@@ -70,5 +70,5 @@ pub const Role = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

@@ -8,13 +8,13 @@ pub const Geometry = struct {
     /// An axis-aligned coarse representation of the location of the recognized item
     /// on the
     /// document page.
-    bounding_box: ?BoundingBox,
+    bounding_box: ?BoundingBox = null,
 
     /// Within the bounding box, a fine-grained polygon around the recognized item.
-    polygon: ?[]const Point,
+    polygon: ?[]const Point = null,
 
     /// Provides a numerical value corresponding to the rotation of the text.
-    rotation_angle: ?f32,
+    rotation_angle: ?f32 = null,
 
     pub const json_field_names = .{
         .bounding_box = "BoundingBox",

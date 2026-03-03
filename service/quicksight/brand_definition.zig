@@ -4,16 +4,16 @@ const LogoConfiguration = @import("logo_configuration.zig").LogoConfiguration;
 /// The definition of the brand.
 pub const BrandDefinition = struct {
     /// The application theme of the brand.
-    application_theme: ?ApplicationTheme,
+    application_theme: ?ApplicationTheme = null,
 
     /// The name of the brand.
     brand_name: []const u8,
 
     /// The description of the brand.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The logo configuration of the brand.
-    logo_configuration: ?LogoConfiguration,
+    logo_configuration: ?LogoConfiguration = null,
 
     pub const json_field_names = .{
         .application_theme = "ApplicationTheme",

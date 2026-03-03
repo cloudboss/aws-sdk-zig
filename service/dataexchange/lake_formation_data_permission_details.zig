@@ -3,7 +3,7 @@ const LFTagPolicyDetails = @import("lf_tag_policy_details.zig").LFTagPolicyDetai
 /// Details about the AWS Lake Formation data permission.
 pub const LakeFormationDataPermissionDetails = struct {
     /// Details about the LF-tag policy.
-    lf_tag_policy: ?LFTagPolicyDetails,
+    lf_tag_policy: ?LFTagPolicyDetails = null,
 
     pub const json_field_names = .{
         .lf_tag_policy = "LFTagPolicy",

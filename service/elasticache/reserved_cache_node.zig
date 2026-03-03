@@ -4,7 +4,7 @@ const RecurringCharge = @import("recurring_charge.zig").RecurringCharge;
 /// operation.
 pub const ReservedCacheNode = struct {
     /// The number of cache nodes that have been reserved.
-    cache_node_count: ?i32,
+    cache_node_count: ?i32 = null,
 
     /// The cache node type for the reserved cache nodes.
     ///
@@ -171,41 +171,41 @@ pub const ReservedCacheNode = struct {
     /// `appendfsync` are not supported on Valkey, or on Redis OSS version 2.8.22
     /// and
     /// later.
-    cache_node_type: ?[]const u8,
+    cache_node_type: ?[]const u8 = null,
 
     /// The duration of the reservation in seconds.
-    duration: ?i32,
+    duration: ?i32 = null,
 
     /// The fixed price charged for this reserved cache node.
-    fixed_price: ?f64,
+    fixed_price: ?f64 = null,
 
     /// The offering type of this reserved cache node.
-    offering_type: ?[]const u8,
+    offering_type: ?[]const u8 = null,
 
     /// The description of the reserved cache node.
-    product_description: ?[]const u8,
+    product_description: ?[]const u8 = null,
 
     /// The recurring price charged to run this reserved cache node.
-    recurring_charges: ?[]const RecurringCharge,
+    recurring_charges: ?[]const RecurringCharge = null,
 
     /// The Amazon Resource Name (ARN) of the reserved cache node.
     ///
     /// Example:
     /// `arn:aws:elasticache:us-east-1:123456789012:reserved-instance:ri-2017-03-27-08-33-25-582`
-    reservation_arn: ?[]const u8,
+    reservation_arn: ?[]const u8 = null,
 
     /// The unique identifier for the reservation.
-    reserved_cache_node_id: ?[]const u8,
+    reserved_cache_node_id: ?[]const u8 = null,
 
     /// The offering identifier.
-    reserved_cache_nodes_offering_id: ?[]const u8,
+    reserved_cache_nodes_offering_id: ?[]const u8 = null,
 
     /// The time the reservation started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The state of the reserved cache node.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// The hourly price charged for this reserved cache node.
-    usage_price: ?f64,
+    usage_price: ?f64 = null,
 };

@@ -28,19 +28,19 @@ pub const ServiceConfiguration = struct {
     /// Target tracking scaling policies for Application Auto
     /// Scaling](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html) in the
     /// *Application Auto Scaling User Guide*.
-    auto_scaling_configuration: ?AutoScalingConfiguration,
+    auto_scaling_configuration: ?AutoScalingConfiguration = null,
 
     /// The container configurations within a task of an Amazon ECS service.
-    container_configurations: ?[]const ContainerConfiguration,
+    container_configurations: ?[]const ContainerConfiguration = null,
 
     /// The number of CPU units used by the tasks in the Amazon ECS service.
-    cpu: ?i32,
+    cpu: ?i32 = null,
 
     /// The amount of memory used by the tasks in the Amazon ECS service.
-    memory: ?i32,
+    memory: ?i32 = null,
 
     /// The task definition ARN used by the tasks in the Amazon ECS service.
-    task_definition_arn: ?[]const u8,
+    task_definition_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_scaling_configuration = "autoScalingConfiguration",

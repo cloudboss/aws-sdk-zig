@@ -9,12 +9,12 @@ const StringCondition = @import("string_condition.zig").StringCondition;
 /// results.
 pub const SecurityProfileSearchCriteria = struct {
     /// A list of conditions which would be applied together with an AND condition.
-    and_conditions: ?[]const SecurityProfileSearchCriteria,
+    and_conditions: ?[]const SecurityProfileSearchCriteria = null,
 
     /// A list of conditions which would be applied together with an OR condition.
-    or_conditions: ?[]const SecurityProfileSearchCriteria,
+    or_conditions: ?[]const SecurityProfileSearchCriteria = null,
 
-    string_condition: ?StringCondition,
+    string_condition: ?StringCondition = null,
 
     pub const json_field_names = .{
         .and_conditions = "AndConditions",

@@ -12,7 +12,7 @@ pub const BlockDeviceMapping = struct {
     device_name: []const u8,
 
     /// Information to attach an EBS volume to an instance at launch.
-    ebs: ?Ebs,
+    ebs: ?Ebs = null,
 
     /// Setting this value to `true` prevents a volume that is included in the
     /// block device mapping of the AMI from being mapped to the specified device
@@ -22,12 +22,12 @@ pub const BlockDeviceMapping = struct {
     /// If `NoDevice` is `true` for the root device, instances might
     /// fail the EC2 health check. In that case, Amazon EC2 Auto Scaling launches
     /// replacement instances.
-    no_device: ?bool,
+    no_device: ?bool = null,
 
     /// The name of the instance store volume (virtual device) to attach to an
     /// instance at
     /// launch. The name must be in the form ephemeral*X* where
     /// *X* is a number starting from zero (0), for example,
     /// `ephemeral0`.
-    virtual_name: ?[]const u8,
+    virtual_name: ?[]const u8 = null,
 };

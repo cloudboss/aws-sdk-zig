@@ -20,7 +20,7 @@ pub const AudioEvent = struct {
     ///
     /// For 8 kHz, 1-channel, 16-bit audio, a 1-second chunk would be
     /// `1 * 8000 * 1 * 2 = 16000 bytes`.
-    audio_chunk: ?[]const u8,
+    audio_chunk: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .audio_chunk = "AudioChunk",

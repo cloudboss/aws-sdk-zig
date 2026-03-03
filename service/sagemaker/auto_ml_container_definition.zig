@@ -7,7 +7,7 @@ pub const AutoMLContainerDefinition = struct {
     /// The environment variables to set in the container. For more information, see
     /// [
     /// ContainerDefinition](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
-    environment: ?[]const aws.map.StringMapEntry,
+    environment: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Elastic Container Registry (Amazon ECR) path of the container.
     /// For more information, see [

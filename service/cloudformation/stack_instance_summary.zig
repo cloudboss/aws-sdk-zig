@@ -7,7 +7,7 @@ pub const StackInstanceSummary = struct {
     /// [Self-managed permissions] The name of the Amazon Web Services account that
     /// the stack instance is
     /// associated with.
-    account: ?[]const u8,
+    account: ?[]const u8 = null,
 
     /// Status of the stack instance's actual configuration compared to the expected
     /// template and
@@ -26,37 +26,37 @@ pub const StackInstanceSummary = struct {
     /// StackSet configuration.
     ///
     /// * `UNKNOWN`: This value is reserved for future use.
-    drift_status: ?StackDriftStatus,
+    drift_status: ?StackDriftStatus = null,
 
     /// Most recent time when CloudFormation performed a drift detection operation
     /// on the stack
     /// instance. This value will be `NULL` for any stack instance that drift
     /// detection hasn't
     /// yet been performed on.
-    last_drift_check_timestamp: ?i64,
+    last_drift_check_timestamp: ?i64 = null,
 
     /// The last unique ID of a StackSet operation performed on a stack instance.
-    last_operation_id: ?[]const u8,
+    last_operation_id: ?[]const u8 = null,
 
     /// [Service-managed permissions] The organization root ID or organizational
     /// unit (OU) IDs that
     /// you specified for
     /// [DeploymentTargets](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
-    organizational_unit_id: ?[]const u8,
+    organizational_unit_id: ?[]const u8 = null,
 
     /// The name of the Amazon Web Services Region that the stack instance is
     /// associated with.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The ID of the stack instance.
-    stack_id: ?[]const u8,
+    stack_id: ?[]const u8 = null,
 
     /// The detailed status of the stack instance.
-    stack_instance_status: ?StackInstanceComprehensiveStatus,
+    stack_instance_status: ?StackInstanceComprehensiveStatus = null,
 
     /// The name or unique ID of the StackSet that the stack instance is associated
     /// with.
-    stack_set_id: ?[]const u8,
+    stack_set_id: ?[]const u8 = null,
 
     /// The status of the stack instance, in terms of its synchronization with its
     /// associated stack
@@ -88,9 +88,9 @@ pub const StackInstanceSummary = struct {
     /// updated.
     ///
     /// * `CURRENT`: The stack is currently up to date with the StackSet.
-    status: ?StackInstanceStatus,
+    status: ?StackInstanceStatus = null,
 
     /// The explanation for the specific status code assigned to this stack
     /// instance.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 };

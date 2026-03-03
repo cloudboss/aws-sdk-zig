@@ -7,19 +7,19 @@ const SensitivityAggregations = @import("sensitivity_aggregations.zig").Sensitiv
 pub const BucketStatisticsBySensitivity = struct {
     /// The aggregated statistical data for all buckets that have a sensitivity
     /// score of -1.
-    classification_error: ?SensitivityAggregations,
+    classification_error: ?SensitivityAggregations = null,
 
     /// The aggregated statistical data for all buckets that have a sensitivity
     /// score of 50.
-    not_classified: ?SensitivityAggregations,
+    not_classified: ?SensitivityAggregations = null,
 
     /// The aggregated statistical data for all buckets that have a sensitivity
     /// score of 1-49.
-    not_sensitive: ?SensitivityAggregations,
+    not_sensitive: ?SensitivityAggregations = null,
 
     /// The aggregated statistical data for all buckets that have a sensitivity
     /// score of 51-100.
-    sensitive: ?SensitivityAggregations,
+    sensitive: ?SensitivityAggregations = null,
 
     pub const json_field_names = .{
         .classification_error = "classificationError",

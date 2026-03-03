@@ -17,7 +17,7 @@ pub const ExportDiffieHellmanTr31KeyBlock = struct {
     /// The key algorithm of the shared derived ECDH key.
     derive_key_algorithm: SymmetricKeyAlgorithm,
 
-    key_block_headers: ?KeyBlockHeaders,
+    key_block_headers: ?KeyBlockHeaders = null,
 
     /// The key derivation function to use when deriving a key using ECDH.
     key_derivation_function: KeyDerivationFunction,

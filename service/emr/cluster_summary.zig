@@ -3,13 +3,13 @@ const ClusterStatus = @import("cluster_status.zig").ClusterStatus;
 /// The summary description of the cluster.
 pub const ClusterSummary = struct {
     /// The Amazon Resource Name of the cluster.
-    cluster_arn: ?[]const u8,
+    cluster_arn: ?[]const u8 = null,
 
     /// The unique identifier for the cluster.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name of the cluster.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// An approximation of the cost of the cluster, represented in m1.small/hours.
     /// This value
@@ -20,13 +20,13 @@ pub const ClusterSummary = struct {
     /// would result in the normalized instance hours being incremented by four.
     /// This result is
     /// only an approximation and does not reflect the actual billing rate.
-    normalized_instance_hours: ?i32,
+    normalized_instance_hours: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
-    outpost_arn: ?[]const u8,
+    outpost_arn: ?[]const u8 = null,
 
     /// The details about the current status of the cluster.
-    status: ?ClusterStatus,
+    status: ?ClusterStatus = null,
 
     pub const json_field_names = .{
         .cluster_arn = "ClusterArn",

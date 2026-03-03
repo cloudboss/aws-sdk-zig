@@ -7,7 +7,7 @@ pub const ClipLimits = struct {
     /// 105 as an offset percentage to the maximum possible value. Leave blank to
     /// use the default value 100. When you specify a value for Maximum RGB
     /// tolerance, you must set Sample range conversion to Limited range clip.
-    maximum_rgb_tolerance: ?i32,
+    maximum_rgb_tolerance: ?i32 = null,
 
     /// Specify the Maximum YUV color sample limit. MediaConvert conforms any pixels
     /// in your input above the value that you specify to typical limited range
@@ -16,7 +16,7 @@ pub const ClipLimits = struct {
     /// ranges, MediaConvert automatically scales this value down. When you specify
     /// a value for Maximum YUV, you must set Sample range conversion to Limited
     /// range clip.
-    maximum_yuv: ?i32,
+    maximum_yuv: ?i32 = null,
 
     /// Specify the Minimum RGB color sample range tolerance for your output.
     /// MediaConvert corrects any YUV values that, when converted to RGB, would be
@@ -24,7 +24,7 @@ pub const ClipLimits = struct {
     /// as an offset percentage to the minimum possible value. Leave blank to use
     /// the default value 0. When you specify a value for Minimum RGB tolerance, you
     /// must set Sample range conversion to Limited range clip.
-    minimum_rgb_tolerance: ?i32,
+    minimum_rgb_tolerance: ?i32 = null,
 
     /// Specify the Minimum YUV color sample limit. MediaConvert conforms any pixels
     /// in your input below the value that you specify to typical limited range
@@ -32,7 +32,7 @@ pub const ClipLimits = struct {
     /// 64. The value that you enter applies to 10-bit ranges. For 8-bit ranges,
     /// MediaConvert automatically scales this value down. When you specify a value
     /// for Minumum YUV, you must set Sample range conversion to Limited range clip.
-    minimum_yuv: ?i32,
+    minimum_yuv: ?i32 = null,
 
     pub const json_field_names = .{
         .maximum_rgb_tolerance = "MaximumRGBTolerance",

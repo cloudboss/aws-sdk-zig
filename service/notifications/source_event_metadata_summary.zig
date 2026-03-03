@@ -4,7 +4,7 @@ pub const SourceEventMetadataSummary = struct {
     /// The Region where the notification originated.
     ///
     /// Unavailable for aggregated notifications.
-    event_origin_region: ?[]const u8,
+    event_origin_region: ?[]const u8 = null,
 
     /// The event type to match.
     ///

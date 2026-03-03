@@ -9,11 +9,11 @@ const WebAclCustomization = @import("web_acl_customization.zig").WebAclCustomiza
 /// used to create the distribution tenant.
 pub const Customizations = struct {
     /// The Certificate Manager (ACM) certificate.
-    certificate: ?Certificate,
+    certificate: ?Certificate = null,
 
     /// The geographic restrictions.
-    geo_restrictions: ?GeoRestrictionCustomization,
+    geo_restrictions: ?GeoRestrictionCustomization = null,
 
     /// The WAF web ACL.
-    web_acl: ?WebAclCustomization,
+    web_acl: ?WebAclCustomization = null,
 };

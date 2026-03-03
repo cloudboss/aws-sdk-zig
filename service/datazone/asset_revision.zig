@@ -1,19 +1,19 @@
 /// The revision of an inventory asset.
 pub const AssetRevision = struct {
     /// The timestamp of when an inventory asset revison was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon DataZone user who created the asset revision.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The Amazon DataZone user who created the inventory asset.
-    domain_id: ?[]const u8,
+    domain_id: ?[]const u8 = null,
 
     /// The identifier of the inventory asset revision.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The revision details of the inventory asset.
-    revision: ?[]const u8,
+    revision: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

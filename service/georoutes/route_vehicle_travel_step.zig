@@ -17,13 +17,13 @@ const RouteUTurnStepDetails = @import("route_u_turn_step_details.zig").RouteUTur
 /// Steps of a leg that correspond to the travel portion of the leg.
 pub const RouteVehicleTravelStep = struct {
     /// Details that are specific to a Continue Highway step.
-    continue_highway_step_details: ?RouteContinueHighwayStepDetails,
+    continue_highway_step_details: ?RouteContinueHighwayStepDetails = null,
 
     /// Details that are specific to a Continue step.
-    continue_step_details: ?RouteContinueStepDetails,
+    continue_step_details: ?RouteContinueStepDetails = null,
 
     /// Details of the current road.
-    current_road: ?RouteRoad,
+    current_road: ?RouteRoad = null,
 
     /// Distance of the step.
     distance: i64 = 0,
@@ -34,52 +34,52 @@ pub const RouteVehicleTravelStep = struct {
     duration: i64 = 0,
 
     /// Details that are specific to a Enter Highway step.
-    enter_highway_step_details: ?RouteEnterHighwayStepDetails,
+    enter_highway_step_details: ?RouteEnterHighwayStepDetails = null,
 
     /// Exit number of the road exit, if applicable.
-    exit_number: ?[]const LocalizedString,
+    exit_number: ?[]const LocalizedString = null,
 
     /// Details that are specific to a Roundabout Exit step.
-    exit_step_details: ?RouteExitStepDetails,
+    exit_step_details: ?RouteExitStepDetails = null,
 
     /// Offset in the leg geometry corresponding to the start of this step.
-    geometry_offset: ?i32,
+    geometry_offset: ?i32 = null,
 
     /// Brief description of the step in the requested language.
     ///
     /// Only available when the TravelStepType is Default.
-    instruction: ?[]const u8,
+    instruction: ?[]const u8 = null,
 
     /// Details that are specific to a Keep step.
-    keep_step_details: ?RouteKeepStepDetails,
+    keep_step_details: ?RouteKeepStepDetails = null,
 
     /// Details of the next road. See RouteRoad for details of sub-attributes.
-    next_road: ?RouteRoad,
+    next_road: ?RouteRoad = null,
 
     /// Details that are specific to a Ramp step.
-    ramp_step_details: ?RouteRampStepDetails,
+    ramp_step_details: ?RouteRampStepDetails = null,
 
     /// Details that are specific to a Roundabout Enter step.
-    roundabout_enter_step_details: ?RouteRoundaboutEnterStepDetails,
+    roundabout_enter_step_details: ?RouteRoundaboutEnterStepDetails = null,
 
     /// Details that are specific to a Roundabout Exit step.
-    roundabout_exit_step_details: ?RouteRoundaboutExitStepDetails,
+    roundabout_exit_step_details: ?RouteRoundaboutExitStepDetails = null,
 
     /// Details that are specific to a Roundabout Pass step.
-    roundabout_pass_step_details: ?RouteRoundaboutPassStepDetails,
+    roundabout_pass_step_details: ?RouteRoundaboutPassStepDetails = null,
 
     /// Sign post information of the action, applicable only for TurnByTurn steps.
     /// See RouteSignpost for details of sub-attributes.
-    signpost: ?RouteSignpost,
+    signpost: ?RouteSignpost = null,
 
     /// Details that are specific to a Turn step.
-    turn_step_details: ?RouteTurnStepDetails,
+    turn_step_details: ?RouteTurnStepDetails = null,
 
     /// Type of the step.
     @"type": RouteVehicleTravelStepType,
 
     /// Details that are specific to a Turn step.
-    u_turn_step_details: ?RouteUTurnStepDetails,
+    u_turn_step_details: ?RouteUTurnStepDetails = null,
 
     pub const json_field_names = .{
         .continue_highway_step_details = "ContinueHighwayStepDetails",

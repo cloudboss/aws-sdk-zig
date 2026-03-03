@@ -7,7 +7,7 @@ pub const MemoryMiBRequest = struct {
     /// The maximum amount of memory in MiB. Instance types with more memory than
     /// this value
     /// are excluded from selection.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// The minimum amount of memory in MiB. Instance types with less memory than
     /// this value

@@ -3,7 +3,7 @@ const PerformanceInsightsMetricQuery = @import("performance_insights_metric_quer
 /// Information about a reference metric used to evaluate Performance Insights.
 pub const PerformanceInsightsReferenceMetric = struct {
     /// A query to be processed on the metric.
-    metric_query: ?PerformanceInsightsMetricQuery,
+    metric_query: ?PerformanceInsightsMetricQuery = null,
 
     pub const json_field_names = .{
         .metric_query = "MetricQuery",

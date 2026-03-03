@@ -15,28 +15,28 @@ const Webhook = @import("webhook.zig").Webhook;
 /// Information about a build project.
 pub const Project = struct {
     /// The Amazon Resource Name (ARN) of the build project.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Information about the build output artifacts for the build project.
-    artifacts: ?ProjectArtifacts,
+    artifacts: ?ProjectArtifacts = null,
 
     /// The maximum number of additional automatic retries after a failed build. For
     /// example, if the
     /// auto-retry limit is set to 2, CodeBuild will call the `RetryBuild` API to
     /// automatically
     /// retry your build for up to 2 additional times.
-    auto_retry_limit: ?i32,
+    auto_retry_limit: ?i32 = null,
 
     /// Information about the build badge for the build project.
-    badge: ?ProjectBadge,
+    badge: ?ProjectBadge = null,
 
     /// A ProjectBuildBatchConfig
     /// object that defines the batch build
     /// options for the project.
-    build_batch_config: ?ProjectBuildBatchConfig,
+    build_batch_config: ?ProjectBuildBatchConfig = null,
 
     /// Information about the cache for the build project.
-    cache: ?ProjectCache,
+    cache: ?ProjectCache = null,
 
     /// The maximum number of concurrent builds that are allowed for this project.
     ///
@@ -44,13 +44,13 @@ pub const Project = struct {
     /// equal to this limit.
     /// If the current build count meets this limit, new builds are throttled and
     /// are not run.
-    concurrent_build_limit: ?i32,
+    concurrent_build_limit: ?i32 = null,
 
     /// When the build project was created, expressed in Unix time format.
-    created: ?i64,
+    created: ?i64 = null,
 
     /// A description that makes the build project easy to identify.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Key Management Service customer master key (CMK) to be used for
     /// encrypting the build output
@@ -65,61 +65,61 @@ pub const Project = struct {
     /// the format `alias/`). If you don't specify a
     /// value, CodeBuild uses the managed CMK for Amazon Simple Storage Service
     /// (Amazon S3).
-    encryption_key: ?[]const u8,
+    encryption_key: ?[]const u8 = null,
 
     /// Information about the build environment for this build project.
-    environment: ?ProjectEnvironment,
+    environment: ?ProjectEnvironment = null,
 
     /// An array of `ProjectFileSystemLocation` objects for a CodeBuild build
     /// project. A `ProjectFileSystemLocation` object
     /// specifies the `identifier`, `location`, `mountOptions`,
     /// `mountPoint`, and `type` of a file system created using Amazon Elastic File
     /// System.
-    file_system_locations: ?[]const ProjectFileSystemLocation,
+    file_system_locations: ?[]const ProjectFileSystemLocation = null,
 
     /// When the build project's settings were last modified, expressed in Unix time
     /// format.
-    last_modified: ?i64,
+    last_modified: ?i64 = null,
 
     /// Information about logs for the build project. A project can create logs in
     /// CloudWatch Logs, an
     /// S3 bucket, or both.
-    logs_config: ?LogsConfig,
+    logs_config: ?LogsConfig = null,
 
     /// The name of the build project.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    project_visibility: ?ProjectVisibilityType,
+    project_visibility: ?ProjectVisibilityType = null,
 
     /// Contains the project identifier used with the public build APIs.
-    public_project_alias: ?[]const u8,
+    public_project_alias: ?[]const u8 = null,
 
     /// The number of minutes a build is allowed to be queued before it times out.
-    queued_timeout_in_minutes: ?i32,
+    queued_timeout_in_minutes: ?i32 = null,
 
     /// The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs
     /// and Amazon S3 artifacts for
     /// the project's builds.
-    resource_access_role: ?[]const u8,
+    resource_access_role: ?[]const u8 = null,
 
     /// An array of `ProjectArtifacts` objects.
-    secondary_artifacts: ?[]const ProjectArtifacts,
+    secondary_artifacts: ?[]const ProjectArtifacts = null,
 
     /// An array of `ProjectSource` objects.
-    secondary_sources: ?[]const ProjectSource,
+    secondary_sources: ?[]const ProjectSource = null,
 
     /// An array of `ProjectSourceVersion` objects. If
     /// `secondarySourceVersions` is specified at the build level, then they take
     /// over these `secondarySourceVersions` (at the project level).
-    secondary_source_versions: ?[]const ProjectSourceVersion,
+    secondary_source_versions: ?[]const ProjectSourceVersion = null,
 
     /// The ARN of the IAM role that enables CodeBuild to interact with dependent
     /// Amazon Web Services services
     /// on behalf of the Amazon Web Services account.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
     /// Information about the build input source code for this build project.
-    source: ?ProjectSource,
+    source: ?ProjectSource = null,
 
     /// A version of the build input to be built for this project. If not specified,
     /// the
@@ -154,28 +154,28 @@ pub const Project = struct {
     /// For more information, see [Source Version Sample
     /// with
     /// CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html) in the *CodeBuild User Guide*.
-    source_version: ?[]const u8,
+    source_version: ?[]const u8 = null,
 
     /// A list of tag key and value pairs associated with this build project.
     ///
     /// These tags are available for use by Amazon Web Services services that
     /// support CodeBuild build project
     /// tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait
     /// before timing out any
     /// related build that did not get marked as completed. The default is 60
     /// minutes.
-    timeout_in_minutes: ?i32,
+    timeout_in_minutes: ?i32 = null,
 
     /// Information about the VPC configuration that CodeBuild accesses.
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     /// Information about a webhook that connects repository events to a build
     /// project in
     /// CodeBuild.
-    webhook: ?Webhook,
+    webhook: ?Webhook = null,
 
     pub const json_field_names = .{
         .arn = "arn",

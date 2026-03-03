@@ -8,7 +8,7 @@ pub const LegendOptions = struct {
     /// The height of the legend. If this value is omitted, a default height is used
     /// when
     /// rendering.
-    height: ?[]const u8,
+    height: ?[]const u8 = null,
 
     /// The positions for the legend. Choose one of the following
     /// options:
@@ -20,19 +20,19 @@ pub const LegendOptions = struct {
     /// * `BOTTOM`
     ///
     /// * `LEFT`
-    position: ?LegendPosition,
+    position: ?LegendPosition = null,
 
     /// The custom title for the legend.
-    title: ?LabelOptions,
+    title: ?LabelOptions = null,
 
-    value_font_configuration: ?FontConfiguration,
+    value_font_configuration: ?FontConfiguration = null,
 
     /// Determines whether or not the legend is visible.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     /// The width of the legend. If this value is omitted, a default width is used
     /// when rendering.
-    width: ?[]const u8,
+    width: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .height = "Height",

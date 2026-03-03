@@ -10,18 +10,18 @@ pub const ProcessingS3Input = struct {
     /// input data to. `LocalPath` is an absolute path to the input data and must
     /// begin with `/opt/ml/processing/`. `LocalPath` is a required parameter when
     /// `AppManaged` is `False` (default).
-    local_path: ?[]const u8,
+    local_path: ?[]const u8 = null,
 
     /// Whether to GZIP-decompress the data in Amazon S3 as it is streamed into the
     /// processing container. `Gzip` can only be used when `Pipe` mode is specified
     /// as the `S3InputMode`. In `Pipe` mode, Amazon SageMaker streams input data
     /// from the source directly to your container without using the EBS volume.
-    s3_compression_type: ?ProcessingS3CompressionType,
+    s3_compression_type: ?ProcessingS3CompressionType = null,
 
     /// Whether to distribute the data from Amazon S3 to all processing instances
     /// with `FullyReplicated`, or whether the data from Amazon S3 is sharded by
     /// Amazon S3 key, downloading one shard of data to each processing instance.
-    s3_data_distribution_type: ?ProcessingS3DataDistributionType,
+    s3_data_distribution_type: ?ProcessingS3DataDistributionType = null,
 
     /// Whether you use an `S3Prefix` or a `ManifestFile` for the data type. If you
     /// choose `S3Prefix`, `S3Uri` identifies a key name prefix. Amazon SageMaker
@@ -37,7 +37,7 @@ pub const ProcessingS3Input = struct {
     /// input mode. In `Pipe` mode, Amazon SageMaker streams input data from the
     /// source directly to your processing container into named pipes without using
     /// the ML storage volume.
-    s3_input_mode: ?ProcessingS3InputMode,
+    s3_input_mode: ?ProcessingS3InputMode = null,
 
     /// The URI of the Amazon S3 prefix Amazon SageMaker downloads data required to
     /// run a processing job.

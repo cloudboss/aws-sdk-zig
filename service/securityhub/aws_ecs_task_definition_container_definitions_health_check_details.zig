@@ -2,24 +2,24 @@
 /// for the container.
 pub const AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails = struct {
     /// The command that the container runs to determine whether it is healthy.
-    command: ?[]const []const u8,
+    command: ?[]const []const u8 = null,
 
     /// The time period in seconds between each health check execution. The default
     /// value is 30 seconds.
-    interval: ?i32,
+    interval: ?i32 = null,
 
     /// The number of times to retry a failed health check before the container is
     /// considered unhealthy. The default value is 3.
-    retries: ?i32,
+    retries: ?i32 = null,
 
     /// The optional grace period in seconds that allows containers time to
     /// bootstrap before failed health checks count towards the maximum number of
     /// retries.
-    start_period: ?i32,
+    start_period: ?i32 = null,
 
     /// The time period in seconds to wait for a health check to succeed before it
     /// is considered a failure. The default value is 5.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 
     pub const json_field_names = .{
         .command = "Command",

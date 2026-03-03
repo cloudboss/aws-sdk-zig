@@ -3,10 +3,10 @@
 /// predicted value and the confidence in the predicted value.
 pub const Prediction = struct {
     /// Amazon Textract's confidence in its predicted value.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// The predicted value of a detected object.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",

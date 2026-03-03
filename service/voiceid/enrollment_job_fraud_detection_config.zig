@@ -9,17 +9,17 @@ pub const EnrollmentJobFraudDetectionConfig = struct {
     /// this value to `IGNORE` results in the speaker being enrolled even if they
     /// are
     /// flagged by the fraud detection system.
-    fraud_detection_action: ?FraudDetectionAction,
+    fraud_detection_action: ?FraudDetectionAction = null,
 
     /// Threshold value for determining whether the speaker is a high risk to be
     /// fraudulent.
     /// If the detected risk score calculated by Voice ID is greater than or equal
     /// to the
     /// threshold, the speaker is considered a fraudster.
-    risk_threshold: ?i32,
+    risk_threshold: ?i32 = null,
 
     /// The identifier of watchlists against which fraud detection is performed.
-    watchlist_ids: ?[]const []const u8,
+    watchlist_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .fraud_detection_action = "FraudDetectionAction",

@@ -4,10 +4,10 @@ const ObjectReference = @import("object_reference.zig").ObjectReference;
 /// information, see ListAttachedIndices and BatchReadRequest$Operations.
 pub const BatchListAttachedIndices = struct {
     /// The maximum number of results to retrieve.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The pagination token.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// A reference to the object that has indices attached.
     target_reference: ObjectReference,

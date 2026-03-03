@@ -7,20 +7,20 @@ const ActionRemoteIpDetails = @import("action_remote_ip_details.zig").ActionRemo
 /// about the API call that was detected.
 pub const AwsApiCallAction = struct {
     /// Identifies the resources that were affected by the API call.
-    affected_resources: ?[]const aws.map.StringMapEntry,
+    affected_resources: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the API method that was issued.
     ///
     /// Length Constraints: 128.
-    api: ?[]const u8,
+    api: ?[]const u8 = null,
 
     /// Indicates whether the API call originated from a remote IP address
     /// (`remoteip`) or from a DNS domain (`domain`).
-    caller_type: ?[]const u8,
+    caller_type: ?[]const u8 = null,
 
     /// Provided if `CallerType` is `domain`. Provides information about
     /// the DNS domain that the API call originated from.
-    domain_details: ?AwsApiCallActionDomainDetails,
+    domain_details: ?AwsApiCallActionDomainDetails = null,
 
     /// A timestamp that indicates when the API call was first
     /// observed.
@@ -28,7 +28,7 @@ pub const AwsApiCallAction = struct {
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    first_seen: ?[]const u8,
+    first_seen: ?[]const u8 = null,
 
     /// A timestamp that indicates when the API call was most recently
     /// observed.
@@ -36,16 +36,16 @@ pub const AwsApiCallAction = struct {
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    last_seen: ?[]const u8,
+    last_seen: ?[]const u8 = null,
 
     /// Provided if `CallerType` is `remoteip`. Provides information about
     /// the remote IP address that the API call originated from.
-    remote_ip_details: ?ActionRemoteIpDetails,
+    remote_ip_details: ?ActionRemoteIpDetails = null,
 
     /// The name of the Amazon Web Services service that the API method belongs to.
     ///
     /// Length Constraints: 128.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .affected_resources = "AffectedResources",

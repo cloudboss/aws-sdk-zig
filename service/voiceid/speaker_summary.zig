@@ -3,27 +3,27 @@ const SpeakerStatus = @import("speaker_status.zig").SpeakerStatus;
 /// Contains a summary of information about a speaker.
 pub const SpeakerSummary = struct {
     /// A timestamp showing the speaker's creation time.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The client-provided identifier for the speaker.
-    customer_speaker_id: ?[]const u8,
+    customer_speaker_id: ?[]const u8 = null,
 
     /// The identifier of the domain that contains the speaker.
-    domain_id: ?[]const u8,
+    domain_id: ?[]const u8 = null,
 
     /// The service-generated identifier for the speaker.
-    generated_speaker_id: ?[]const u8,
+    generated_speaker_id: ?[]const u8 = null,
 
     /// The timestamp when the speaker was last accessed for enrollment,
     /// re-enrollment or a
     /// successful authentication. This timestamp is accurate to one hour.
-    last_accessed_at: ?i64,
+    last_accessed_at: ?i64 = null,
 
     /// The current status of the speaker.
-    status: ?SpeakerStatus,
+    status: ?SpeakerStatus = null,
 
     /// A timestamp showing the speaker's last update.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

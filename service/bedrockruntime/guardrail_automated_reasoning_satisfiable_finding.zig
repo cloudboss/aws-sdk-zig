@@ -6,17 +6,17 @@ const GuardrailAutomatedReasoningTranslation = @import("guardrail_automated_reas
 /// additional assumptions not provided in the input.
 pub const GuardrailAutomatedReasoningSatisfiableFinding = struct {
     /// An example scenario demonstrating how the claims could be logically false.
-    claims_false_scenario: ?GuardrailAutomatedReasoningScenario,
+    claims_false_scenario: ?GuardrailAutomatedReasoningScenario = null,
 
     /// An example scenario demonstrating how the claims could be logically true.
-    claims_true_scenario: ?GuardrailAutomatedReasoningScenario,
+    claims_true_scenario: ?GuardrailAutomatedReasoningScenario = null,
 
     /// Indication of a logic issue with the translation without needing to consider
     /// the automated reasoning policy rules.
-    logic_warning: ?GuardrailAutomatedReasoningLogicWarning,
+    logic_warning: ?GuardrailAutomatedReasoningLogicWarning = null,
 
     /// The logical translation of the input that this finding evaluates.
-    translation: ?GuardrailAutomatedReasoningTranslation,
+    translation: ?GuardrailAutomatedReasoningTranslation = null,
 
     pub const json_field_names = .{
         .claims_false_scenario = "claimsFalseScenario",

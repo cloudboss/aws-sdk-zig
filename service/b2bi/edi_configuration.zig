@@ -7,7 +7,7 @@ const EdiType = @import("edi_type.zig").EdiType;
 pub const EdiConfiguration = struct {
     /// Specifies whether this is capability is for inbound or outbound
     /// transformations.
-    capability_direction: ?CapabilityDirection,
+    capability_direction: ?CapabilityDirection = null,
 
     /// Contains the Amazon S3 bucket and prefix for the location of the input file,
     /// which is contained in an `S3Location` object.

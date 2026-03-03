@@ -9,7 +9,7 @@ pub const OrganizationalUnit = struct {
     /// For more information about ARNs in Organizations, see [ARN
     /// Formats Supported by
     /// Organizations](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies) in the *Amazon Web Services Service Authorization Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The unique identifier (ID) associated with this OU. The ID is unique to the
     /// organization only.
@@ -21,7 +21,7 @@ pub const OrganizationalUnit = struct {
     /// OU). This string is followed by a second "-" dash and from 8 to 32
     /// additional lowercase letters
     /// or digits.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The friendly name of this OU.
     ///
@@ -29,7 +29,7 @@ pub const OrganizationalUnit = struct {
     /// that is used to validate this parameter is a string of any of the characters
     /// in the ASCII
     /// character range.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

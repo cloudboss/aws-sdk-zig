@@ -16,7 +16,7 @@ pub const MotionImageInserter = struct {
     /// you want a 30-second overlay at 30 fps, you should have 900 .png images.
     /// This overlay frame rate doesn't need to match the frame rate of the
     /// underlying video.
-    framerate: ?MotionImageInsertionFramerate,
+    framerate: ?MotionImageInsertionFramerate = null,
 
     /// Specify the .mov file or series of .png files that you want to overlay on
     /// your video. For .png files, provide the file name of the first file in the
@@ -29,22 +29,22 @@ pub const MotionImageInserter = struct {
     /// only 10 images in the sequence, with the last image being overlay_9.png. But
     /// if the first image is overlay_00.png, there can be 100 images in the
     /// sequence.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// Choose the type of motion graphic asset that you are providing for your
     /// overlay. You can choose either a .mov file or a series of .png files.
-    insertion_mode: ?MotionImageInsertionMode,
+    insertion_mode: ?MotionImageInsertionMode = null,
 
     /// Use Offset to specify the placement of your motion graphic overlay on the
     /// video frame. Specify in pixels, from the upper-left corner of the frame. If
     /// you don't specify an offset, the service scales your overlay to the full
     /// size of the frame. Otherwise, the service inserts the overlay at its native
     /// resolution and scales the size up or down with any video scaling.
-    offset: ?MotionImageInsertionOffset,
+    offset: ?MotionImageInsertionOffset = null,
 
     /// Specify whether your motion graphic overlay repeats on a loop or plays only
     /// once.
-    playback: ?MotionImagePlayback,
+    playback: ?MotionImagePlayback = null,
 
     /// Specify when the motion overlay begins. Use timecode format (HH:MM:SS:FF or
     /// HH:MM:SS;FF). Make sure that the timecode you provide here takes into
@@ -54,7 +54,7 @@ pub const MotionImageInserter = struct {
     /// your source that don't start at zero, make sure that you specify a start
     /// time that is after the first embedded timecode. For more information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/setting-up-timecode.html
-    start_time: ?[]const u8,
+    start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .framerate = "Framerate",

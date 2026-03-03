@@ -27,19 +27,19 @@
 /// included in the `InsightsByAssessment` counts for that day.
 pub const Insights = struct {
     /// The number of active assessments in Audit Manager.
-    active_assessments_count: ?i32,
+    active_assessments_count: ?i32 = null,
 
     /// The number of assessment controls that collected non-compliant evidence on
     /// the
     /// `lastUpdated` date.
-    assessment_controls_count_by_noncompliant_evidence: ?i32,
+    assessment_controls_count_by_noncompliant_evidence: ?i32 = null,
 
     /// The number of compliance check evidence that Audit Manager classified as
     /// compliant
     /// on the `lastUpdated` date. This includes evidence that was collected from
     /// Security Hub with a *Pass* ruling, or collected from
     /// Config with a *Compliant* ruling.
-    compliant_evidence_count: ?i32,
+    compliant_evidence_count: ?i32 = null,
 
     /// The number of evidence without a compliance check ruling. Evidence is
     /// inconclusive when
@@ -52,19 +52,19 @@ pub const Insights = struct {
     ///
     /// If evidence has a compliance check status of *not applicable*,
     /// it's classed as *inconclusive* in `Insights` data.
-    inconclusive_evidence_count: ?i32,
+    inconclusive_evidence_count: ?i32 = null,
 
     /// The time when the cross-assessment insights were last updated.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The number of compliance check evidence that Audit Manager classified as
     /// non-compliant on the `lastUpdated` date. This includes evidence that was
     /// collected from Security Hub with a *Fail* ruling, or collected
     /// from Config with a *Non-compliant* ruling.
-    noncompliant_evidence_count: ?i32,
+    noncompliant_evidence_count: ?i32 = null,
 
     /// The total number of controls across all active assessments.
-    total_assessment_controls_count: ?i32,
+    total_assessment_controls_count: ?i32 = null,
 
     pub const json_field_names = .{
         .active_assessments_count = "activeAssessmentsCount",

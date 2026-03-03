@@ -14,41 +14,41 @@ pub const DirectMessageConfiguration = struct {
     /// The default push notification message for the ADM (Amazon Device Messaging)
     /// channel. This message overrides the default push notification message
     /// (DefaultPushNotificationMessage).
-    adm_message: ?ADMMessage,
+    adm_message: ?ADMMessage = null,
 
     /// The default push notification message for the APNs (Apple Push Notification
     /// service) channel. This message overrides the default push notification
     /// message (DefaultPushNotificationMessage).
-    apns_message: ?APNSMessage,
+    apns_message: ?APNSMessage = null,
 
     /// The default push notification message for the Baidu (Baidu Cloud Push)
     /// channel. This message overrides the default push notification message
     /// (DefaultPushNotificationMessage).
-    baidu_message: ?BaiduMessage,
+    baidu_message: ?BaiduMessage = null,
 
     /// The default message for all channels.
-    default_message: ?DefaultMessage,
+    default_message: ?DefaultMessage = null,
 
     /// The default push notification message for all push notification channels.
-    default_push_notification_message: ?DefaultPushNotificationMessage,
+    default_push_notification_message: ?DefaultPushNotificationMessage = null,
 
     /// The default message for the email channel. This message overrides the
     /// default message (DefaultMessage).
-    email_message: ?EmailMessage,
+    email_message: ?EmailMessage = null,
 
     /// The default push notification message for the GCM channel, which is used to
     /// send notifications through the Firebase Cloud Messaging (FCM), formerly
     /// Google Cloud Messaging (GCM), service. This message overrides the default
     /// push notification message (DefaultPushNotificationMessage).
-    gcm_message: ?GCMMessage,
+    gcm_message: ?GCMMessage = null,
 
     /// The default message for the SMS channel. This message overrides the default
     /// message (DefaultMessage).
-    sms_message: ?SMSMessage,
+    sms_message: ?SMSMessage = null,
 
     /// The default message for the voice channel. This message overrides the
     /// default message (DefaultMessage).
-    voice_message: ?VoiceMessage,
+    voice_message: ?VoiceMessage = null,
 
     pub const json_field_names = .{
         .adm_message = "ADMMessage",

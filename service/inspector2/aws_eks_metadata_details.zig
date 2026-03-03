@@ -4,10 +4,10 @@ const AwsEksWorkloadInfo = @import("aws_eks_workload_info.zig").AwsEksWorkloadIn
 /// use.
 pub const AwsEksMetadataDetails = struct {
     /// The namespace for an Amazon EKS cluster.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The list of workloads.
-    workload_info_list: ?[]const AwsEksWorkloadInfo,
+    workload_info_list: ?[]const AwsEksWorkloadInfo = null,
 
     pub const json_field_names = .{
         .namespace = "namespace",

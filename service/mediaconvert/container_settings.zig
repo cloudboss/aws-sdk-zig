@@ -12,14 +12,14 @@ const MxfSettings = @import("mxf_settings.zig").MxfSettings;
 pub const ContainerSettings = struct {
     /// These settings relate to the fragmented MP4 container for the segments in
     /// your CMAF outputs.
-    cmfc_settings: ?CmfcSettings,
+    cmfc_settings: ?CmfcSettings = null,
 
     /// Container for this output. Some containers require a container settings
     /// object. If not specified, the default object will be created.
-    container: ?ContainerType,
+    container: ?ContainerType = null,
 
     /// Settings for F4v container
-    f4_v_settings: ?F4vSettings,
+    f4_v_settings: ?F4vSettings = null,
 
     /// MPEG-2 TS container settings. These apply to outputs in a File output group
     /// when the output's container is MPEG-2 Transport Stream (M2TS). In these
@@ -31,26 +31,26 @@ pub const ContainerSettings = struct {
     /// their PID. Downstream systems and players use the program map table to look
     /// up the PID for each type of data it accesses and then uses the PIDs to
     /// locate specific data within the asset.
-    m2_ts_settings: ?M2tsSettings,
+    m2_ts_settings: ?M2tsSettings = null,
 
     /// These settings relate to the MPEG-2 transport stream (MPEG2-TS) container
     /// for the MPEG2-TS segments in your HLS outputs.
-    m3_u_8_settings: ?M3u8Settings,
+    m3_u_8_settings: ?M3u8Settings = null,
 
     /// These settings relate to your QuickTime MOV output container.
-    mov_settings: ?MovSettings,
+    mov_settings: ?MovSettings = null,
 
     /// These settings relate to your MP4 output container. You can create audio
     /// only outputs with this container. For more information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/supported-codecs-containers-audio-only.html#output-codecs-and-containers-supported-for-audio-only.
-    mp_4_settings: ?Mp4Settings,
+    mp_4_settings: ?Mp4Settings = null,
 
     /// These settings relate to the fragmented MP4 container for the segments in
     /// your DASH outputs.
-    mpd_settings: ?MpdSettings,
+    mpd_settings: ?MpdSettings = null,
 
     /// These settings relate to your MXF output container.
-    mxf_settings: ?MxfSettings,
+    mxf_settings: ?MxfSettings = null,
 
     pub const json_field_names = .{
         .cmfc_settings = "CmfcSettings",

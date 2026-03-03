@@ -6,7 +6,7 @@ pub const ArchiveAction = struct {
     /// A policy that states what to do in the case of failure. The action will fail
     /// if there are configuration errors. For example, the specified archive has
     /// been deleted.
-    action_failure_policy: ?ActionFailurePolicy,
+    action_failure_policy: ?ActionFailurePolicy = null,
 
     /// The identifier of the archive to send the email to.
     target_archive: []const u8,

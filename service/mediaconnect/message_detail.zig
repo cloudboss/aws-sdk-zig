@@ -8,7 +8,7 @@ pub const MessageDetail = struct {
     message: []const u8,
 
     /// The name of the resource.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

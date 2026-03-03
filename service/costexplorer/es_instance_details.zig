@@ -6,13 +6,13 @@ pub const ESInstanceDetails = struct {
     current_generation: bool = false,
 
     /// The class of instance that Amazon Web Services recommends.
-    instance_class: ?[]const u8,
+    instance_class: ?[]const u8 = null,
 
     /// The size of instance that Amazon Web Services recommends.
-    instance_size: ?[]const u8,
+    instance_size: ?[]const u8 = null,
 
     /// The Amazon Web Services Region of the recommended reservation.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// Determines whether the recommended reservation is size flexible.
     size_flex_eligible: bool = false,

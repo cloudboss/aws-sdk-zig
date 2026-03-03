@@ -14,11 +14,11 @@ pub const WorkflowExecutionSignaledEventAttributes = struct {
 
     /// The workflow execution that sent the signal. This is set only of the signal
     /// was sent by another workflow execution.
-    external_workflow_execution: ?WorkflowExecution,
+    external_workflow_execution: ?WorkflowExecution = null,
 
     /// The inputs provided with the signal. The decider can use the signal name and
     /// inputs to determine how to process the signal.
-    input: ?[]const u8,
+    input: ?[]const u8 = null,
 
     /// The name of the signal received. The decider can use the signal name and
     /// inputs to determine how to the process the signal.

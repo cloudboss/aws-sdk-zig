@@ -5,24 +5,24 @@ const InitiatedBy = @import("initiated_by.zig").InitiatedBy;
 /// domain.
 pub const ChangeProgressDetails = struct {
     /// The ID of the configuration change.
-    change_id: ?[]const u8,
+    change_id: ?[]const u8 = null,
 
     /// The current status of the configuration change.
-    config_change_status: ?ConfigChangeStatus,
+    config_change_status: ?ConfigChangeStatus = null,
 
     /// The IAM principal who initiated the configuration change.
-    initiated_by: ?InitiatedBy,
+    initiated_by: ?InitiatedBy = null,
 
     /// The last time that the configuration change was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// A message corresponding to the status of the configuration change.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The time that the configuration change was initiated, in Universal
     /// Coordinated Time
     /// (UTC).
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .change_id = "ChangeId",

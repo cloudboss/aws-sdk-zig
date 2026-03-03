@@ -7,11 +7,11 @@ const Tag = @import("tag.zig").Tag;
 /// Describes a license recommendation for an EC2 instance.
 pub const LicenseRecommendation = struct {
     /// The Amazon Web Services account ID of the license.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// An object that describes the current configuration of an instance that runs
     /// on a license.
-    current_license_configuration: ?LicenseConfiguration,
+    current_license_configuration: ?LicenseConfiguration = null,
 
     /// The finding classification for an instance that runs on a license.
     ///
@@ -30,7 +30,7 @@ pub const LicenseRecommendation = struct {
     /// * `Optimized` — When Compute Optimizer detects that all specifications of
     ///   your
     /// license meet the performance requirements of your workload.
-    finding: ?LicenseFinding,
+    finding: ?LicenseFinding = null,
 
     /// The reason for the finding classification for an instance that runs on a
     /// license.
@@ -50,23 +50,23 @@ pub const LicenseRecommendation = struct {
     ///
     /// * `CloudwatchApplicationInsightsError` — There is a CloudWatch
     /// Application Insights error.
-    finding_reason_codes: ?[]const LicenseFindingReasonCode,
+    finding_reason_codes: ?[]const LicenseFindingReasonCode = null,
 
     /// The timestamp of when the license recommendation was last generated.
-    last_refresh_timestamp: ?i64,
+    last_refresh_timestamp: ?i64 = null,
 
     /// An array of objects that describe the license recommendation options.
-    license_recommendation_options: ?[]const LicenseRecommendationOption,
+    license_recommendation_options: ?[]const LicenseRecommendationOption = null,
 
     /// The number of days for which utilization metrics were analyzed for an
     /// instance that runs on a license.
     lookback_period_in_days: f64 = 0,
 
     /// The ARN that identifies the Amazon EC2 instance.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// A list of tags assigned to an EC2 instance.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

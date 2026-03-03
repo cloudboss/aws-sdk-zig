@@ -4,7 +4,7 @@ const aws = @import("aws");
 pub const AuditCheckConfiguration = struct {
     /// A structure containing the configName and corresponding configValue for
     /// configuring audit checks.
-    configuration: ?[]const aws.map.StringMapEntry,
+    configuration: ?[]const aws.map.StringMapEntry = null,
 
     /// True if this audit check is enabled for this account.
     enabled: bool = false,

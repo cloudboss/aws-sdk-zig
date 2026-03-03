@@ -24,11 +24,11 @@ pub const RuleGroup = struct {
     /// whitespace or metric names reserved for AWS WAF, including "All" and
     /// "Default_Action." You can't change the name of the metric after you create
     /// the `RuleGroup`.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The friendly name or description for the `RuleGroup`. You can't change the
     /// name of a `RuleGroup` after you create it.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A unique identifier for a `RuleGroup`. You use `RuleGroupId` to get more
     /// information about a `RuleGroup` (see GetRuleGroup),

@@ -17,17 +17,17 @@ const InputType = @import("input_type.zig").InputType;
 /// Placeholder documentation for Input
 pub const Input = struct {
     /// The Unique ARN of the input (generated, immutable).
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A list of channel IDs that that input is attached to (currently an input can
     /// only be attached to one channel).
-    attached_channels: ?[]const []const u8,
+    attached_channels: ?[]const []const u8 = null,
 
     /// A list of the destinations of the input (PUSH-type).
-    destinations: ?[]const InputDestination,
+    destinations: ?[]const InputDestination = null,
 
     /// The generated ID of the input (unique for user account, immutable).
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// STANDARD - MediaLive expects two sources to be connected to this input. If
     /// the channel is also STANDARD, both sources will be ingested. If the channel
@@ -37,62 +37,62 @@ pub const Input = struct {
     /// ChannelClass is also SINGLE_PIPELINE, this value is valid. If the
     /// ChannelClass is STANDARD, this value is not valid because the channel
     /// requires two sources in the input.
-    input_class: ?InputClass,
+    input_class: ?InputClass = null,
 
     /// Settings for the input devices.
-    input_devices: ?[]const InputDeviceSettings,
+    input_devices: ?[]const InputDeviceSettings = null,
 
     /// The location of this input. AWS, for an input existing in the AWS Cloud,
     /// On-Prem for
     /// an input in a customer network.
-    input_network_location: ?InputNetworkLocation,
+    input_network_location: ?InputNetworkLocation = null,
 
     /// A list of IDs for all Inputs which are partners of this one.
-    input_partner_ids: ?[]const []const u8,
+    input_partner_ids: ?[]const []const u8 = null,
 
     /// Certain pull input sources can be dynamic, meaning that they can have their
     /// URL's dynamically changes
     /// during input switch actions. Presently, this functionality only works with
     /// MP4_FILE and TS_FILE inputs.
-    input_source_type: ?InputSourceType,
+    input_source_type: ?InputSourceType = null,
 
     /// A list of MediaConnect Flows for this input.
-    media_connect_flows: ?[]const MediaConnectFlow,
+    media_connect_flows: ?[]const MediaConnectFlow = null,
 
     /// Multicast Input settings.
-    multicast_settings: ?MulticastSettings,
+    multicast_settings: ?MulticastSettings = null,
 
     /// The user-assigned name (This is a mutable value).
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the role this input assumes during and
     /// after creation.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// Information about any MediaConnect router association with this input.
-    router_settings: ?RouterInputSettings,
+    router_settings: ?RouterInputSettings = null,
 
-    sdi_sources: ?[]const []const u8,
+    sdi_sources: ?[]const []const u8 = null,
 
     /// A list of IDs for all the Input Security Groups attached to the input.
-    security_groups: ?[]const []const u8,
+    security_groups: ?[]const []const u8 = null,
 
     /// Include this parameter if the input is a SMPTE 2110 input, to identify the
     /// stream sources for this input.
-    smpte_2110_receiver_group_settings: ?Smpte2110ReceiverGroupSettings,
+    smpte_2110_receiver_group_settings: ?Smpte2110ReceiverGroupSettings = null,
 
     /// A list of the sources of the input (PULL-type).
-    sources: ?[]const InputSource,
+    sources: ?[]const InputSource = null,
 
     /// The settings associated with an SRT input.
-    srt_settings: ?SrtSettings,
+    srt_settings: ?SrtSettings = null,
 
-    state: ?InputState,
+    state: ?InputState = null,
 
     /// A collection of key-value pairs.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
-    @"type": ?InputType,
+    @"type": ?InputType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

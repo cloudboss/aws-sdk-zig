@@ -29,5 +29,5 @@ pub const CapacityReservationOptionsRequest = struct {
     /// If you do not specify a value, the fleet fulfils the On-Demand capacity
     /// according to the
     /// chosen On-Demand allocation strategy.
-    usage_strategy: ?FleetCapacityReservationUsageStrategy,
+    usage_strategy: ?FleetCapacityReservationUsageStrategy = null,
 };

@@ -1,7 +1,7 @@
 /// Provides the details of the `ActivityTaskCompleted` event.
 pub const ActivityTaskCompletedEventAttributes = struct {
     /// The results of the activity task.
-    result: ?[]const u8,
+    result: ?[]const u8 = null,
 
     /// The ID of the `ActivityTaskScheduled` event that was recorded when this
     /// activity task was scheduled. This information can be useful for diagnosing

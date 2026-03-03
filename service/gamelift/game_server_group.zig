@@ -18,7 +18,7 @@ pub const GameServerGroup = struct {
     /// A generated unique ID for the Amazon EC2 Auto Scaling group that is
     /// associated with this
     /// game server group.
-    auto_scaling_group_arn: ?[]const u8,
+    auto_scaling_group_arn: ?[]const u8 = null,
 
     /// Indicates how Amazon GameLift Servers FleetIQ balances the use of Spot
     /// Instances and On-Demand Instances in the
@@ -46,20 +46,20 @@ pub const GameServerGroup = struct {
     /// * `ON_DEMAND_ONLY` - Only On-Demand Instances are used in the game
     /// server group. No Spot Instances are used, even when available, while this
     /// balancing strategy is in force.
-    balancing_strategy: ?BalancingStrategy,
+    balancing_strategy: ?BalancingStrategy = null,
 
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A generated unique ID for the game server group.
-    game_server_group_arn: ?[]const u8,
+    game_server_group_arn: ?[]const u8 = null,
 
     /// A developer-defined identifier for the game server group. The name is unique
     /// for each
     /// Region in each Amazon Web Services account.
-    game_server_group_name: ?[]const u8,
+    game_server_group_name: ?[]const u8 = null,
 
     /// A flag that indicates whether instances in the game server group are
     /// protected
@@ -73,22 +73,22 @@ pub const GameServerGroup = struct {
     /// this is with Spot
     /// Instances, which can be terminated by Amazon Web Services regardless of
     /// protection status.
-    game_server_protection_policy: ?GameServerProtectionPolicy,
+    game_server_protection_policy: ?GameServerProtectionPolicy = null,
 
     /// The set of Amazon EC2 instance types that Amazon GameLift Servers FleetIQ
     /// can use when balancing and automatically
     /// scaling instances in the corresponding Auto Scaling group.
-    instance_definitions: ?[]const InstanceDefinition,
+    instance_definitions: ?[]const InstanceDefinition = null,
 
     /// A timestamp that indicates when this game server group was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
     /// for an IAM role that
     /// allows Amazon GameLift Servers to access your Amazon EC2 Auto Scaling
     /// groups.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The current status of the game server group. Possible statuses include:
     ///
@@ -116,17 +116,17 @@ pub const GameServerGroup = struct {
     ///
     /// * `ERROR` - The asynchronous processes of activating or deleting a
     /// game server group has failed, resulting in an error state.
-    status: ?GameServerGroupStatus,
+    status: ?GameServerGroupStatus = null,
 
     /// Additional information about the current game server group status. This
     /// information
     /// might provide additional insight on groups that are in `ERROR` status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// A list of activities that are currently suspended for this game server
     /// group. If this
     /// property is empty, all activities are occurring.
-    suspended_actions: ?[]const GameServerGroupAction,
+    suspended_actions: ?[]const GameServerGroupAction = null,
 
     pub const json_field_names = .{
         .auto_scaling_group_arn = "AutoScalingGroupArn",

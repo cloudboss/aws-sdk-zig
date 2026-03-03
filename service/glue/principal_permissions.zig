@@ -4,10 +4,10 @@ const DataLakePrincipal = @import("data_lake_principal.zig").DataLakePrincipal;
 /// Permissions granted to a principal.
 pub const PrincipalPermissions = struct {
     /// The permissions that are granted to the principal.
-    permissions: ?[]const Permission,
+    permissions: ?[]const Permission = null,
 
     /// The principal who is granted permissions.
-    principal: ?DataLakePrincipal,
+    principal: ?DataLakePrincipal = null,
 
     pub const json_field_names = .{
         .permissions = "Permissions",

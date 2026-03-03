@@ -6,35 +6,35 @@ const Tag = @import("tag.zig").Tag;
 /// Describes a core network Connect peer.
 pub const ConnectPeer = struct {
     /// The configuration of the Connect peer.
-    configuration: ?ConnectPeerConfiguration,
+    configuration: ?ConnectPeerConfiguration = null,
 
     /// The ID of the attachment to connect.
-    connect_attachment_id: ?[]const u8,
+    connect_attachment_id: ?[]const u8 = null,
 
     /// The ID of the Connect peer.
-    connect_peer_id: ?[]const u8,
+    connect_peer_id: ?[]const u8 = null,
 
     /// The ID of a core network.
-    core_network_id: ?[]const u8,
+    core_network_id: ?[]const u8 = null,
 
     /// The timestamp when the Connect peer was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Connect peer Regions where edges are located.
-    edge_location: ?[]const u8,
+    edge_location: ?[]const u8 = null,
 
     /// Describes the error associated with the attachment request.
-    last_modification_errors: ?[]const ConnectPeerError,
+    last_modification_errors: ?[]const ConnectPeerError = null,
 
     /// The state of the Connect peer.
-    state: ?ConnectPeerState,
+    state: ?ConnectPeerState = null,
 
     /// The subnet ARN for the Connect peer. This only applies only when the
     /// protocol is NO_ENCAP.
-    subnet_arn: ?[]const u8,
+    subnet_arn: ?[]const u8 = null,
 
     /// The list of key-value tags associated with the Connect peer.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .configuration = "Configuration",

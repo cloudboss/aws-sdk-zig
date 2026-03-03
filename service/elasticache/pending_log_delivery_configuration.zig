@@ -8,16 +8,16 @@ pub const PendingLogDeliveryConfiguration = struct {
     /// Configuration details of either a CloudWatch Logs destination or Kinesis
     /// Data Firehose
     /// destination.
-    destination_details: ?DestinationDetails,
+    destination_details: ?DestinationDetails = null,
 
     /// Returns the destination type, either CloudWatch Logs or Kinesis Data
     /// Firehose.
-    destination_type: ?DestinationType,
+    destination_type: ?DestinationType = null,
 
     /// Returns the log format, either JSON or TEXT
-    log_format: ?LogFormat,
+    log_format: ?LogFormat = null,
 
     /// Refers to [slow-log](https://redis.io/commands/slowlog) or
     /// engine-log..
-    log_type: ?LogType,
+    log_type: ?LogType = null,
 };

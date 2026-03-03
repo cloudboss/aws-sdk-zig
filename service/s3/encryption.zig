@@ -10,7 +10,7 @@ pub const Encryption = struct {
     /// If the encryption type is `aws:kms`, this optional value can be used to
     /// specify the
     /// encryption context for the restore results.
-    kms_context: ?[]const u8,
+    kms_context: ?[]const u8 = null,
 
     /// If the encryption type is `aws:kms`, this optional value specifies the ID of
     /// the
@@ -19,5 +19,5 @@ pub const Encryption = struct {
     /// encryption KMS keys. For more information, see [Asymmetric keys in
     /// KMS](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the
     /// *Amazon Web Services Key Management Service Developer Guide*.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 };

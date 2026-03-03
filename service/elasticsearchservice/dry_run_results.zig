@@ -9,10 +9,10 @@ pub const DryRunResults = struct {
     /// before the deployment type can be predicted.)
     /// `None` (The configuration change matches the current configuration and will
     /// not result in any update.)
-    deployment_type: ?[]const u8,
+    deployment_type: ?[]const u8 = null,
 
     /// Contains an optional message associated with the DryRunResults.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .deployment_type = "DeploymentType",

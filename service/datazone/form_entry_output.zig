@@ -1,7 +1,7 @@
 /// The details of the form entry.
 pub const FormEntryOutput = struct {
     /// Specifies whether a form entry is required.
-    required: ?bool,
+    required: ?bool = null,
 
     /// The name of the type of the form entry.
     type_name: []const u8,

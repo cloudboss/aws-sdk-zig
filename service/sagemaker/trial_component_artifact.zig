@@ -12,7 +12,7 @@ pub const TrialComponentArtifact = struct {
     /// concatenated with a slash (/) character, for example, text/csv, image/jpeg,
     /// and s3/uri. The type specifies the category of the media. The subtype
     /// specifies the kind of data.
-    media_type: ?[]const u8,
+    media_type: ?[]const u8 = null,
 
     /// The location of the artifact.
     value: []const u8,

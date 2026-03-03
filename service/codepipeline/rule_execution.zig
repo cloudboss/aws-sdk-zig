@@ -5,33 +5,33 @@ const RuleExecutionStatus = @import("rule_execution_status.zig").RuleExecutionSt
 /// execution
 /// for a pipeline configured with conditions.
 pub const RuleExecution = struct {
-    error_details: ?ErrorDetails,
+    error_details: ?ErrorDetails = null,
 
     /// The external ID of the run of the rule.
-    external_execution_id: ?[]const u8,
+    external_execution_id: ?[]const u8 = null,
 
     /// The URL of a resource external to Amazon Web Services that is used when
     /// running the
     /// rule (for example, an external repository URL).
-    external_execution_url: ?[]const u8,
+    external_execution_url: ?[]const u8 = null,
 
     /// The last status change of the rule.
-    last_status_change: ?i64,
+    last_status_change: ?i64 = null,
 
     /// The ARN of the user who last changed the rule.
-    last_updated_by: ?[]const u8,
+    last_updated_by: ?[]const u8 = null,
 
     /// The execution ID for the run of the rule.
-    rule_execution_id: ?[]const u8,
+    rule_execution_id: ?[]const u8 = null,
 
     /// The status of the run of the rule, such as FAILED.
-    status: ?RuleExecutionStatus,
+    status: ?RuleExecutionStatus = null,
 
     /// A summary of the run of the rule.
-    summary: ?[]const u8,
+    summary: ?[]const u8 = null,
 
     /// The system-generated token used to identify a unique request.
-    token: ?[]const u8,
+    token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_details = "errorDetails",

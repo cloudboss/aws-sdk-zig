@@ -4,7 +4,7 @@ pub const RecurringCharge = struct {
     recurring_charge_amount: f64 = 0,
 
     /// The frequency of the recurring price charged to run this reserved node.
-    recurring_charge_frequency: ?[]const u8,
+    recurring_charge_frequency: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .recurring_charge_amount = "RecurringChargeAmount",

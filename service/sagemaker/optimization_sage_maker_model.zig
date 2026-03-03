@@ -2,7 +2,7 @@
 /// job.
 pub const OptimizationSageMakerModel = struct {
     /// The name of a SageMaker model.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .model_name = "ModelName",

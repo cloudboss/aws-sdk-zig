@@ -6,15 +6,15 @@ const Mpeg2Settings = @import("mpeg_2_settings.zig").Mpeg2Settings;
 
 /// Video Codec Settings
 pub const VideoCodecSettings = struct {
-    av_1_settings: ?Av1Settings,
+    av_1_settings: ?Av1Settings = null,
 
-    frame_capture_settings: ?FrameCaptureSettings,
+    frame_capture_settings: ?FrameCaptureSettings = null,
 
-    h264_settings: ?H264Settings,
+    h264_settings: ?H264Settings = null,
 
-    h265_settings: ?H265Settings,
+    h265_settings: ?H265Settings = null,
 
-    mpeg_2_settings: ?Mpeg2Settings,
+    mpeg_2_settings: ?Mpeg2Settings = null,
 
     pub const json_field_names = .{
         .av_1_settings = "Av1Settings",

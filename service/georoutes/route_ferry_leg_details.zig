@@ -32,13 +32,13 @@ pub const RouteFerryLegDetails = struct {
     pass_through_waypoints: []const RoutePassThroughWaypoint,
 
     /// Route name of the ferry line.
-    route_name: ?[]const u8,
+    route_name: ?[]const u8 = null,
 
     /// Spans that were computed for the requested SpanAdditionalFeatures.
     spans: []const RouteFerrySpan,
 
     /// Summarized details of the leg.
-    summary: ?RouteFerrySummary,
+    summary: ?RouteFerrySummary = null,
 
     /// Steps of a leg that must be performed before the travel portion of the leg.
     travel_steps: []const RouteFerryTravelStep,

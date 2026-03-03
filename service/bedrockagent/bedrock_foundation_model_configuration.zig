@@ -8,10 +8,10 @@ pub const BedrockFoundationModelConfiguration = struct {
 
     /// Specifies whether to enable parsing of multimodal data, including both text
     /// and/or images.
-    parsing_modality: ?ParsingModality,
+    parsing_modality: ?ParsingModality = null,
 
     /// Instructions for interpreting the contents of a document.
-    parsing_prompt: ?ParsingPrompt,
+    parsing_prompt: ?ParsingPrompt = null,
 
     pub const json_field_names = .{
         .model_arn = "modelArn",

@@ -42,7 +42,7 @@ pub const Scope = struct {
     ///
     /// * `ResourceArn` - Specifies that the recommendation preference
     /// applies at the individual resource level.
-    name: ?ScopeName,
+    name: ?ScopeName = null,
 
     /// The value of the scope.
     ///
@@ -59,7 +59,7 @@ pub const Scope = struct {
     ///
     /// Only EC2 instance and Amazon EC2 Auto Scaling group ARNs are currently
     /// supported.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

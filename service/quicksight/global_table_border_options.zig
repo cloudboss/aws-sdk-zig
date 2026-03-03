@@ -4,10 +4,10 @@ const TableBorderOptions = @import("table_border_options.zig").TableBorderOption
 /// Determines the border options for a table visual.
 pub const GlobalTableBorderOptions = struct {
     /// Determines the options for side specific border.
-    side_specific_border: ?TableSideBorderOptions,
+    side_specific_border: ?TableSideBorderOptions = null,
 
     /// Determines the options for uniform border.
-    uniform_border: ?TableBorderOptions,
+    uniform_border: ?TableBorderOptions = null,
 
     pub const json_field_names = .{
         .side_specific_border = "SideSpecificBorder",

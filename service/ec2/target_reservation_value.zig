@@ -8,9 +8,9 @@ pub const TargetReservationValue = struct {
     /// the sum of the list value, remaining upfront price, and additional upfront
     /// cost of the
     /// exchange.
-    reservation_value: ?ReservationValue,
+    reservation_value: ?ReservationValue = null,
 
     /// The configuration of the Convertible Reserved Instances that make up the
     /// exchange.
-    target_configuration: ?TargetConfiguration,
+    target_configuration: ?TargetConfiguration = null,
 };

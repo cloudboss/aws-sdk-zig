@@ -3,13 +3,13 @@
 /// service.
 pub const ContainerImage = struct {
     /// The timestamp when the container image was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The digest of the container image.
-    digest: ?[]const u8,
+    digest: ?[]const u8 = null,
 
     /// The name of the container image.
-    image: ?[]const u8,
+    image: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

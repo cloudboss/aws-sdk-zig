@@ -2,10 +2,10 @@
 /// made.
 pub const KnowledgeBaseLookupInput = struct {
     /// The unique identifier of the knowledge base to look up.
-    knowledge_base_id: ?[]const u8,
+    knowledge_base_id: ?[]const u8 = null,
 
     /// The query made to the knowledge base.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .knowledge_base_id = "knowledgeBaseId",

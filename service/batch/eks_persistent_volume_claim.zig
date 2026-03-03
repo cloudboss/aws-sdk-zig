@@ -17,7 +17,7 @@ pub const EksPersistentVolumeClaim = struct {
     /// information, see [
     /// Read Only
     /// Mounts](https://kubernetes.io/docs/concepts/storage/volumes/#read-only-mounts) in the *Kubernetes documentation*.
-    read_only: ?bool,
+    read_only: ?bool = null,
 
     pub const json_field_names = .{
         .claim_name = "claimName",

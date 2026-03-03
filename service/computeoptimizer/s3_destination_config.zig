@@ -18,10 +18,10 @@
 pub const S3DestinationConfig = struct {
     /// The name of the Amazon S3 bucket to use as the destination for an export
     /// job.
-    bucket: ?[]const u8,
+    bucket: ?[]const u8 = null,
 
     /// The Amazon S3 bucket prefix for an export job.
-    key_prefix: ?[]const u8,
+    key_prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "bucket",

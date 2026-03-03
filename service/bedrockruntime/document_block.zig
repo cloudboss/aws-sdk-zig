@@ -6,11 +6,11 @@ const DocumentSource = @import("document_source.zig").DocumentSource;
 pub const DocumentBlock = struct {
     /// Configuration settings that control how citations should be generated for
     /// this specific document.
-    citations: ?CitationsConfig,
+    citations: ?CitationsConfig = null,
 
     /// Contextual information about how the document should be processed or
     /// interpreted by the model when generating citations.
-    context: ?[]const u8,
+    context: ?[]const u8 = null,
 
     /// The format of a document, or its extension.
     format: DocumentFormat = "txt",

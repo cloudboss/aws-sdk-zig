@@ -4,7 +4,7 @@ pub const Contributor = struct {
     /// on the `AttackPropertyIdentifier` setting in the `AttackProperty` where this
     /// contributor is defined. For example, if the `AttackPropertyIdentifier` is
     /// `SOURCE_COUNTRY`, the `Name` could be `United States`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The contribution of this contributor expressed in Protection units. For
     /// example `10,000`.

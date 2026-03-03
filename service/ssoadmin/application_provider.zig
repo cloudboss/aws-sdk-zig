@@ -11,13 +11,13 @@ pub const ApplicationProvider = struct {
 
     /// A structure that describes how IAM Identity Center represents the
     /// application provider in the portal.
-    display_data: ?DisplayData,
+    display_data: ?DisplayData = null,
 
     /// The protocol that the application provider uses to perform federation.
-    federation_protocol: ?FederationProtocol,
+    federation_protocol: ?FederationProtocol = null,
 
     /// A structure that describes the application provider's resource server.
-    resource_server_config: ?ResourceServerConfig,
+    resource_server_config: ?ResourceServerConfig = null,
 
     pub const json_field_names = .{
         .application_provider_arn = "ApplicationProviderArn",

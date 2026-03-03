@@ -3,10 +3,10 @@ const FlowTransitEncryption = @import("flow_transit_encryption.zig").FlowTransit
 /// Configuration settings for connecting a router input to a flow output.
 pub const MediaConnectFlowRouterInputConfiguration = struct {
     /// The ARN of the flow to connect to.
-    flow_arn: ?[]const u8,
+    flow_arn: ?[]const u8 = null,
 
     /// The ARN of the flow output to connect to this router input.
-    flow_output_arn: ?[]const u8,
+    flow_output_arn: ?[]const u8 = null,
 
     /// The decryption configuration for the flow source when connected to this
     /// router input.

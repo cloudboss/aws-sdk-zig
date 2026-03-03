@@ -8,7 +8,7 @@ const SearchResultContentBlock = @import("search_result_content_block.zig").Sear
 /// 4.5, Sonnet 4, Sonnet 3.7, and 3.5 Haiku models.
 pub const SearchResultBlock = struct {
     /// Configuration setting for citations
-    citations: ?CitationsConfig,
+    citations: ?CitationsConfig = null,
 
     /// An array of search result content block.
     content: []const SearchResultContentBlock,

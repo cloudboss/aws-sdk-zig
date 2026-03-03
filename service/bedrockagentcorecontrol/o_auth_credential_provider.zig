@@ -8,11 +8,11 @@ const OAuthGrantType = @import("o_auth_grant_type.zig").OAuthGrantType;
 pub const OAuthCredentialProvider = struct {
     /// The custom parameters for the OAuth credential provider. These parameters
     /// provide additional configuration for the OAuth authentication process.
-    custom_parameters: ?[]const aws.map.StringMapEntry,
+    custom_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The URL where the end user's browser is redirected after obtaining the
     /// authorization code. Generally points to the customer's application.
-    default_return_url: ?[]const u8,
+    default_return_url: ?[]const u8 = null,
 
     /// Specifies the kind of credentials to use for authorization:
     ///

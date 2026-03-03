@@ -2,7 +2,7 @@
 /// source.
 pub const CustomConnectionParameters = struct {
     /// The type of custom connector.
-    connection_type: ?[]const u8,
+    connection_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connection_type = "ConnectionType",

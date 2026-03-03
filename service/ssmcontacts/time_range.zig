@@ -1,10 +1,10 @@
 /// A range of between two set times
 pub const TimeRange = struct {
     /// The end of the time range.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The start of the time range.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .end_time = "EndTime",

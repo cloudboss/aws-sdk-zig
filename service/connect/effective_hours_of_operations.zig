@@ -4,11 +4,11 @@ const OperationalHour = @import("operational_hour.zig").OperationalHour;
 /// applied.
 pub const EffectiveHoursOfOperations = struct {
     /// The date that the hours of operation or overrides applies to.
-    date: ?[]const u8,
+    date: ?[]const u8 = null,
 
     /// Information about the hours of operations with the effective override
     /// applied.
-    operational_hours: ?[]const OperationalHour,
+    operational_hours: ?[]const OperationalHour = null,
 
     pub const json_field_names = .{
         .date = "Date",

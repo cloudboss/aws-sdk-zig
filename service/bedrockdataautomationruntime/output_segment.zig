@@ -3,13 +3,13 @@ const CustomOutputStatus = @import("custom_output_status.zig").CustomOutputStatu
 /// Results for an output segment
 pub const OutputSegment = struct {
     /// Custom output response
-    custom_output: ?[]const u8,
+    custom_output: ?[]const u8 = null,
 
     /// Status of blueprint match
-    custom_output_status: ?CustomOutputStatus,
+    custom_output_status: ?CustomOutputStatus = null,
 
     /// Standard output response
-    standard_output: ?[]const u8,
+    standard_output: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .custom_output = "customOutput",

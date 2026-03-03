@@ -7,7 +7,7 @@ pub const ClusterNetworkSettingsCreateRequest = struct {
     /// traffic isn't covered by the route table for any of the networks. Specify
     /// the value of the appropriate logicalInterfaceName parameter that you create
     /// in the interfaceMappings.
-    default_route: ?[]const u8,
+    default_route: ?[]const u8 = null,
 
     /// An array of interfaceMapping objects for this Cluster. You must create a
     /// mapping for node interfaces that you plan to use for encoding traffic. You
@@ -20,7 +20,7 @@ pub const ClusterNetworkSettingsCreateRequest = struct {
     /// The networkID parameter refers to the ID of the network. When you create the
     /// Nodes in this Cluster, you will associate the logicalInterfaceName with the
     /// appropriate physical interface.
-    interface_mappings: ?[]const InterfaceMappingCreateRequest,
+    interface_mappings: ?[]const InterfaceMappingCreateRequest = null,
 
     pub const json_field_names = .{
         .default_route = "DefaultRoute",

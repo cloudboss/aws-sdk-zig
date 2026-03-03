@@ -4,5 +4,5 @@ pub const TemplateSummaryConfig = struct {
     /// an
     /// error. Any unrecognized resource types are returned in the `Warnings` output
     /// parameter.
-    treat_unrecognized_resource_types_as_warnings: ?bool,
+    treat_unrecognized_resource_types_as_warnings: ?bool = null,
 };

@@ -4,7 +4,7 @@ const TestSetTurnResult = @import("test_set_turn_result.zig").TestSetTurnResult;
 /// execution.
 pub const UtteranceLevelTestResultItem = struct {
     /// The unique identifier for the conversation associated with the result.
-    conversation_id: ?[]const u8,
+    conversation_id: ?[]const u8 = null,
 
     /// The record number of the result.
     record_number: i64,

@@ -6,7 +6,7 @@ pub const AudioQualityMetricsInfo = struct {
     ///
     /// Valid values: `HighPacketLoss` | `HighRoundTripTime` |
     /// `HighJitterBuffer`
-    potential_quality_issues: ?[]const []const u8,
+    potential_quality_issues: ?[]const []const u8 = null,
 
     /// Number measuring the estimated quality of the media connection.
     quality_score: f32 = 0,

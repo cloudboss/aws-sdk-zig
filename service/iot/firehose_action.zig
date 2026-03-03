@@ -10,7 +10,7 @@ pub const FirehoseAction = struct {
     /// `PutRecordBatch`
     /// ](https://docs.aws.amazon.com/firehose/latest/APIReference/API_PutRecordBatch.html) request. The resulting array can't have more
     /// than 500 records.
-    batch_mode: ?bool,
+    batch_mode: ?bool = null,
 
     /// The delivery stream name.
     delivery_stream_name: []const u8,
@@ -23,7 +23,7 @@ pub const FirehoseAction = struct {
     /// stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows
     /// newline), ','
     /// (comma).
-    separator: ?[]const u8,
+    separator: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .batch_mode = "batchMode",

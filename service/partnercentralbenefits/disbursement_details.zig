@@ -5,10 +5,10 @@ const IssuanceDetail = @import("issuance_detail.zig").IssuanceDetail;
 /// direct payments or reimbursements.
 pub const DisbursementDetails = struct {
     /// The total amount that has been disbursed for this benefit allocation.
-    disbursed_amount: ?MonetaryValue,
+    disbursed_amount: ?MonetaryValue = null,
 
     /// Detailed information about how the disbursement was issued and processed.
-    issuance_details: ?IssuanceDetail,
+    issuance_details: ?IssuanceDetail = null,
 
     pub const json_field_names = .{
         .disbursed_amount = "DisbursedAmount",

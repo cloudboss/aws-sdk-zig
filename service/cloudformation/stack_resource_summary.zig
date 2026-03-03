@@ -11,7 +11,7 @@ pub const StackResourceSummary = struct {
     /// [Detect
     /// unmanaged configuration changes to stacks and resources with drift
     /// detection](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
-    drift_information: ?StackResourceDriftInformationSummary,
+    drift_information: ?StackResourceDriftInformationSummary = null,
 
     /// Time the status was updated.
     last_updated_timestamp: i64,
@@ -22,18 +22,18 @@ pub const StackResourceSummary = struct {
     /// Contains information about the module from which the resource was created,
     /// if the resource
     /// was created from a module included in the stack template.
-    module_info: ?ModuleInfo,
+    module_info: ?ModuleInfo = null,
 
     /// The name or unique identifier that corresponds to a physical instance ID of
     /// the
     /// resource.
-    physical_resource_id: ?[]const u8,
+    physical_resource_id: ?[]const u8 = null,
 
     /// Current status of the resource.
     resource_status: ResourceStatus,
 
     /// Success/failure message associated with the resource.
-    resource_status_reason: ?[]const u8,
+    resource_status_reason: ?[]const u8 = null,
 
     /// Type of resource. (For more information, see [Amazon Web Services resource
     /// and

@@ -2,7 +2,7 @@
 /// that is the source for the slot type.
 pub const GrammarSlotTypeSource = struct {
     /// The KMS key required to decrypt the contents of the grammar, if any.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The name of the Amazon S3 bucket that contains the grammar source.
     s_3_bucket_name: []const u8,

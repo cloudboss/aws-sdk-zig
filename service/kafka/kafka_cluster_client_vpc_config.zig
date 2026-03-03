@@ -2,7 +2,7 @@
 /// cluster.
 pub const KafkaClusterClientVpcConfig = struct {
     /// The security groups to attach to the ENIs for the broker nodes.
-    security_group_ids: ?[]const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The list of subnets in the client VPC to connect to.
     subnet_ids: []const []const u8,

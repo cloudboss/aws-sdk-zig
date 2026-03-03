@@ -24,15 +24,15 @@ pub const GlobalSecondaryIndexUpdate = struct {
     /// * `Projection `
     ///
     /// * `ProvisionedThroughput `
-    create: ?CreateGlobalSecondaryIndexAction,
+    create: ?CreateGlobalSecondaryIndexAction = null,
 
     /// The name of an existing global secondary index to be removed.
-    delete: ?DeleteGlobalSecondaryIndexAction,
+    delete: ?DeleteGlobalSecondaryIndexAction = null,
 
     /// The name of an existing global secondary index, along with new provisioned
     /// throughput
     /// settings to be applied to that index.
-    update: ?UpdateGlobalSecondaryIndexAction,
+    update: ?UpdateGlobalSecondaryIndexAction = null,
 
     pub const json_field_names = .{
         .create = "Create",

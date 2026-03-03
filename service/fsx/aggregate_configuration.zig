@@ -17,11 +17,11 @@ pub const AggregateConfiguration = struct {
     ///
     /// * One or more of the aggregates supplied are too close to the volume limit
     ///   to support adding more volumes.
-    aggregates: ?[]const []const u8,
+    aggregates: ?[]const []const u8 = null,
 
     /// The total number of constituents this FlexGroup volume has. Not applicable
     /// for FlexVols.
-    total_constituents: ?i32,
+    total_constituents: ?i32 = null,
 
     pub const json_field_names = .{
         .aggregates = "Aggregates",

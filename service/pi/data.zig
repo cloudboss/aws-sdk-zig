@@ -8,7 +8,7 @@ const PerformanceInsightsMetric = @import("performance_insights_metric.zig").Per
 pub const Data = struct {
     /// This field determines the Performance Insights metric to render
     /// for the insight. The `name` field refers to a Performance Insights metric.
-    performance_insights_metric: ?PerformanceInsightsMetric,
+    performance_insights_metric: ?PerformanceInsightsMetric = null,
 
     pub const json_field_names = .{
         .performance_insights_metric = "PerformanceInsightsMetric",

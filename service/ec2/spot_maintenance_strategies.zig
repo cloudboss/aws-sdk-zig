@@ -10,5 +10,5 @@ pub const SpotMaintenanceStrategies = struct {
     /// information, see
     /// [Capacity
     /// rebalancing](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-capacity-rebalance.html) in the *Amazon EC2 User Guide*.
-    capacity_rebalance: ?SpotCapacityRebalance,
+    capacity_rebalance: ?SpotCapacityRebalance = null,
 };

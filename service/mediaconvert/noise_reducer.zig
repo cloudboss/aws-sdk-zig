@@ -16,16 +16,16 @@ pub const NoiseReducer = struct {
     /// Conserve does min/max noise reduction. * Spatial does frequency-domain
     /// filtering based on JND principles. * Temporal optimizes video quality for
     /// complex motion.
-    filter: ?NoiseReducerFilter,
+    filter: ?NoiseReducerFilter = null,
 
     /// Settings for a noise reducer filter
-    filter_settings: ?NoiseReducerFilterSettings,
+    filter_settings: ?NoiseReducerFilterSettings = null,
 
     /// Noise reducer filter settings for spatial filter.
-    spatial_filter_settings: ?NoiseReducerSpatialFilterSettings,
+    spatial_filter_settings: ?NoiseReducerSpatialFilterSettings = null,
 
     /// Noise reducer filter settings for temporal filter.
-    temporal_filter_settings: ?NoiseReducerTemporalFilterSettings,
+    temporal_filter_settings: ?NoiseReducerTemporalFilterSettings = null,
 
     pub const json_field_names = .{
         .filter = "Filter",

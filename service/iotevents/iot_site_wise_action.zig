@@ -41,23 +41,23 @@ const AssetPropertyValue = @import("asset_property_value.zig").AssetPropertyValu
 /// in the *AWS IoT Events Developer Guide*.
 pub const IotSiteWiseAction = struct {
     /// The ID of the asset that has the specified property.
-    asset_id: ?[]const u8,
+    asset_id: ?[]const u8 = null,
 
     /// A unique identifier for this entry. You can use the entry ID to track which
     /// data entry
     /// causes an error in case of failure. The default is a new unique identifier.
-    entry_id: ?[]const u8,
+    entry_id: ?[]const u8 = null,
 
     /// The alias of the asset property.
-    property_alias: ?[]const u8,
+    property_alias: ?[]const u8 = null,
 
     /// The ID of the asset property.
-    property_id: ?[]const u8,
+    property_id: ?[]const u8 = null,
 
     /// The value to send to the asset property. This value contains timestamp,
     /// quality, and value
     /// (TQV) information.
-    property_value: ?AssetPropertyValue,
+    property_value: ?AssetPropertyValue = null,
 
     pub const json_field_names = .{
         .asset_id = "assetId",

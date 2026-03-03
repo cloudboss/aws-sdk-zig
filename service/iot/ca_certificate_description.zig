@@ -8,13 +8,13 @@ pub const CACertificateDescription = struct {
     /// Whether the CA certificate configured for auto registration of device
     /// certificates.
     /// Valid values are "ENABLE" and "DISABLE"
-    auto_registration_status: ?AutoRegistrationStatus,
+    auto_registration_status: ?AutoRegistrationStatus = null,
 
     /// The CA certificate ARN.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The CA certificate ID.
-    certificate_id: ?[]const u8,
+    certificate_id: ?[]const u8 = null,
 
     /// The mode of the CA.
     ///
@@ -23,31 +23,31 @@ pub const CACertificateDescription = struct {
     /// in the same mode as the CA. For more information about certificate mode for
     /// device certificates, see [certificate
     /// mode](https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode).
-    certificate_mode: ?CertificateMode,
+    certificate_mode: ?CertificateMode = null,
 
     /// The CA certificate data, in PEM format.
-    certificate_pem: ?[]const u8,
+    certificate_pem: ?[]const u8 = null,
 
     /// The date the CA certificate was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The customer version of the CA certificate.
-    customer_version: ?i32,
+    customer_version: ?i32 = null,
 
     /// The generation ID of the CA certificate.
-    generation_id: ?[]const u8,
+    generation_id: ?[]const u8 = null,
 
     /// The date the CA certificate was last modified.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// The owner of the CA certificate.
-    owned_by: ?[]const u8,
+    owned_by: ?[]const u8 = null,
 
     /// The status of a CA certificate.
-    status: ?CACertificateStatus,
+    status: ?CACertificateStatus = null,
 
     /// When the CA certificate is valid.
-    validity: ?CertificateValidity,
+    validity: ?CertificateValidity = null,
 
     pub const json_field_names = .{
         .auto_registration_status = "autoRegistrationStatus",

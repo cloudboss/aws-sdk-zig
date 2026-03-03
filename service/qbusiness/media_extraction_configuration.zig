@@ -6,16 +6,16 @@ const VideoExtractionConfiguration = @import("video_extraction_configuration.zig
 pub const MediaExtractionConfiguration = struct {
     /// Configuration settings for extracting and processing audio content from
     /// media files.
-    audio_extraction_configuration: ?AudioExtractionConfiguration,
+    audio_extraction_configuration: ?AudioExtractionConfiguration = null,
 
     /// The configuration for extracting semantic meaning from images in documents.
     /// For more information, see [Extracting semantic meaning from images and
     /// visuals](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html).
-    image_extraction_configuration: ?ImageExtractionConfiguration,
+    image_extraction_configuration: ?ImageExtractionConfiguration = null,
 
     /// Configuration settings for extracting and processing video content from
     /// media files.
-    video_extraction_configuration: ?VideoExtractionConfiguration,
+    video_extraction_configuration: ?VideoExtractionConfiguration = null,
 
     pub const json_field_names = .{
         .audio_extraction_configuration = "audioExtractionConfiguration",

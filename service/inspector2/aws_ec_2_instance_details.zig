@@ -1,34 +1,34 @@
 /// Details of the Amazon EC2 instance involved in a finding.
 pub const AwsEc2InstanceDetails = struct {
     /// The IAM instance profile ARN of the Amazon EC2 instance.
-    iam_instance_profile_arn: ?[]const u8,
+    iam_instance_profile_arn: ?[]const u8 = null,
 
     /// The image ID of the Amazon EC2 instance.
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// The IPv4 addresses of the Amazon EC2 instance.
-    ip_v4_addresses: ?[]const []const u8,
+    ip_v4_addresses: ?[]const []const u8 = null,
 
     /// The IPv6 addresses of the Amazon EC2 instance.
-    ip_v6_addresses: ?[]const []const u8,
+    ip_v6_addresses: ?[]const []const u8 = null,
 
     /// The name of the key pair used to launch the Amazon EC2 instance.
-    key_name: ?[]const u8,
+    key_name: ?[]const u8 = null,
 
     /// The date and time the Amazon EC2 instance was launched at.
-    launched_at: ?i64,
+    launched_at: ?i64 = null,
 
     /// The platform of the Amazon EC2 instance.
-    platform: ?[]const u8,
+    platform: ?[]const u8 = null,
 
     /// The subnet ID of the Amazon EC2 instance.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The type of the Amazon EC2 instance.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The VPC ID of the Amazon EC2 instance.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .iam_instance_profile_arn = "iamInstanceProfileArn",

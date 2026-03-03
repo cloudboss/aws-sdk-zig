@@ -3,7 +3,7 @@ const FailureType = @import("failure_type.zig").FailureType;
 /// Represents information about failure details.
 pub const FailureDetails = struct {
     /// The external ID of the run of the action that failed.
-    external_execution_id: ?[]const u8,
+    external_execution_id: ?[]const u8 = null,
 
     /// The message about the failure.
     message: []const u8,

@@ -5,10 +5,10 @@ const VectorEnrichmentJobExportErrorType = @import("vector_enrichment_job_export
 pub const VectorEnrichmentJobExportErrorDetails = struct {
     /// The message providing details about the errors generated during the Vector
     /// Enrichment job.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The output error details for an Export operation on a Vector Enrichment job.
-    @"type": ?VectorEnrichmentJobExportErrorType,
+    @"type": ?VectorEnrichmentJobExportErrorType = null,
 
     pub const json_field_names = .{
         .message = "Message",

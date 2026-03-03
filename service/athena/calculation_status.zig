@@ -3,7 +3,7 @@ const CalculationExecutionState = @import("calculation_execution_state.zig").Cal
 /// Contains information about the status of a notebook calculation.
 pub const CalculationStatus = struct {
     /// The date and time the calculation completed processing.
-    completion_date_time: ?i64,
+    completion_date_time: ?i64 = null,
 
     /// The state of the calculation execution. A description of each state follows.
     ///
@@ -24,15 +24,15 @@ pub const CalculationStatus = struct {
     /// `COMPLETED` - The calculation has completed without error.
     ///
     /// `FAILED` - The calculation failed and is no longer running.
-    state: ?CalculationExecutionState,
+    state: ?CalculationExecutionState = null,
 
     /// The reason for the calculation state change (for example, the calculation
     /// was canceled
     /// because the session was terminated).
-    state_change_reason: ?[]const u8,
+    state_change_reason: ?[]const u8 = null,
 
     /// The date and time the calculation was submitted for processing.
-    submission_date_time: ?i64,
+    submission_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .completion_date_time = "CompletionDateTime",

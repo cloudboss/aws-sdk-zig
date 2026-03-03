@@ -7,17 +7,17 @@ const SSMLMessage = @import("ssml_message.zig").SSMLMessage;
 pub const Message = struct {
     /// A message in a custom format defined by the client
     /// application.
-    custom_payload: ?CustomPayload,
+    custom_payload: ?CustomPayload = null,
 
     /// A message that defines a response card that the client application
     /// can show to the user.
-    image_response_card: ?ImageResponseCard,
+    image_response_card: ?ImageResponseCard = null,
 
     /// A message in plain text format.
-    plain_text_message: ?PlainTextMessage,
+    plain_text_message: ?PlainTextMessage = null,
 
     /// A message in Speech Synthesis Markup Language (SSML).
-    ssml_message: ?SSMLMessage,
+    ssml_message: ?SSMLMessage = null,
 
     pub const json_field_names = .{
         .custom_payload = "customPayload",

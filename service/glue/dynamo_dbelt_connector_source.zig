@@ -5,13 +5,13 @@ const GlueSchema = @import("glue_schema.zig").GlueSchema;
 /// tables.
 pub const DynamoDBELTConnectorSource = struct {
     /// The connection options for the DynamoDB ELT connector source.
-    connection_options: ?DDBELTConnectionOptions,
+    connection_options: ?DDBELTConnectionOptions = null,
 
     /// The name of the DynamoDB ELT connector source.
     name: []const u8,
 
     /// Specifies the data schema for the DynamoDB ELT connector source.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     pub const json_field_names = .{
         .connection_options = "ConnectionOptions",

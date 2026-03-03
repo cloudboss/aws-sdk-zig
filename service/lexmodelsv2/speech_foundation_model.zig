@@ -7,7 +7,7 @@ pub const SpeechFoundationModel = struct {
 
     /// The identifier of the voice to use for speech synthesis with the foundation
     /// model.
-    voice_id: ?[]const u8,
+    voice_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .model_arn = "modelArn",

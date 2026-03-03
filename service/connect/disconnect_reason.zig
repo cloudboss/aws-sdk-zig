@@ -3,7 +3,7 @@
 /// this field.
 pub const DisconnectReason = struct {
     /// A code that indicates how the contact was terminated.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

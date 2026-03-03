@@ -13,7 +13,7 @@ pub const AgentCollaborator = struct {
     agent_version: []const u8,
 
     /// The collaborator's client token.
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The collaborator's instructions.
     collaboration_instruction: []const u8,
@@ -31,7 +31,7 @@ pub const AgentCollaborator = struct {
     last_updated_at: i64,
 
     /// The collaborator's relay conversation history.
-    relay_conversation_history: ?RelayConversationHistory,
+    relay_conversation_history: ?RelayConversationHistory = null,
 
     pub const json_field_names = .{
         .agent_descriptor = "agentDescriptor",

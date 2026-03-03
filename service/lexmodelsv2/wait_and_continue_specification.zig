@@ -8,7 +8,7 @@ pub const WaitAndContinueSpecification = struct {
     /// field is false, wait and continue responses for a slot aren't used. If
     /// the `active` field isn't specified, the default is
     /// true.
-    active: ?bool,
+    active: ?bool = null,
 
     /// The response that Amazon Lex sends to indicate that the bot is ready to
     /// continue the conversation.
@@ -16,7 +16,7 @@ pub const WaitAndContinueSpecification = struct {
 
     /// A response that Amazon Lex sends periodically to the user to indicate
     /// that the bot is still waiting for input from the user.
-    still_waiting_response: ?StillWaitingResponseSpecification,
+    still_waiting_response: ?StillWaitingResponseSpecification = null,
 
     /// The response that Amazon Lex sends to indicate that the bot is waiting
     /// for the conversation to continue.

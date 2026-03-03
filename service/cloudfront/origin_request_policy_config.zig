@@ -23,7 +23,7 @@ const OriginRequestPolicyQueryStringsConfig = @import("origin_request_policy_que
 pub const OriginRequestPolicyConfig = struct {
     /// A comment to describe the origin request policy. The comment cannot be
     /// longer than 128 characters.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The cookies from viewer requests to include in origin requests.
     cookies_config: OriginRequestPolicyCookiesConfig,

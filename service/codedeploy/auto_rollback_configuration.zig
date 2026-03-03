@@ -9,7 +9,7 @@ pub const AutoRollbackConfiguration = struct {
     enabled: bool = false,
 
     /// The event type or types that trigger a rollback.
-    events: ?[]const AutoRollbackEvent,
+    events: ?[]const AutoRollbackEvent = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

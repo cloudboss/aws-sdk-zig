@@ -6,7 +6,7 @@ const OperationStatus = @import("operation_status.zig").OperationStatus;
 /// [ListOperations](https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html) request.
 pub const OperationSummary = struct {
     /// The ID for an operation.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The status of the operation. Values include the following:
     ///
@@ -19,7 +19,7 @@ pub const OperationSummary = struct {
     ///
     /// * **FAIL**: The operation failed. For the failure reason, see
     /// `ErrorMessage`.
-    status: ?OperationStatus,
+    status: ?OperationStatus = null,
 
     pub const json_field_names = .{
         .id = "Id",

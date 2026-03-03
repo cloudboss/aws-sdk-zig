@@ -7,11 +7,11 @@ pub const SmallMultiplesAxisProperties = struct {
     /// Defines the placement of the axis. By default, axes are rendered `OUTSIDE`
     /// of the panels. Axes with `INDEPENDENT` scale are rendered `INSIDE` the
     /// panels.
-    placement: ?SmallMultiplesAxisPlacement,
+    placement: ?SmallMultiplesAxisPlacement = null,
 
     /// Determines whether scale of the axes are shared or independent. The default
     /// value is `SHARED`.
-    scale: ?SmallMultiplesAxisScale,
+    scale: ?SmallMultiplesAxisScale = null,
 
     pub const json_field_names = .{
         .placement = "Placement",

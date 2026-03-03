@@ -1,10 +1,10 @@
 /// When the certificate is valid.
 pub const CertificateValidity = struct {
     /// The certificate is not valid after this date.
-    not_after: ?i64,
+    not_after: ?i64 = null,
 
     /// The certificate is not valid before this date.
-    not_before: ?i64,
+    not_before: ?i64 = null,
 
     pub const json_field_names = .{
         .not_after = "notAfter",

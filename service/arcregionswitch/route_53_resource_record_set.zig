@@ -1,10 +1,10 @@
 /// The Amazon Route 53 record set.
 pub const Route53ResourceRecordSet = struct {
     /// The Amazon Route 53 record set identifier.
-    record_set_identifier: ?[]const u8,
+    record_set_identifier: ?[]const u8 = null,
 
     /// The Amazon Route 53 record set Region.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .record_set_identifier = "recordSetIdentifier",

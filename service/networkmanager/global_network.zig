@@ -6,22 +6,22 @@ const Tag = @import("tag.zig").Tag;
 /// Services-managed Core Network.
 pub const GlobalNetwork = struct {
     /// The date and time that the global network was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of the global network.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the global network.
-    global_network_arn: ?[]const u8,
+    global_network_arn: ?[]const u8 = null,
 
     /// The ID of the global network.
-    global_network_id: ?[]const u8,
+    global_network_id: ?[]const u8 = null,
 
     /// The state of the global network.
-    state: ?GlobalNetworkState,
+    state: ?GlobalNetworkState = null,
 
     /// The tags for the global network.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

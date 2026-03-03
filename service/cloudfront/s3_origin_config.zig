@@ -39,5 +39,5 @@ pub const S3OriginConfig = struct {
     ///
     /// For more information, see [Response
     /// timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.
-    origin_read_timeout: ?i32,
+    origin_read_timeout: ?i32 = null,
 };

@@ -3,7 +3,7 @@
 /// This is the ID of an existing Savings Plan in your account.
 pub const NegateSavingsPlanAction = struct {
     /// The ID of the Savings Plan to remove.
-    savings_plan_id: ?[]const u8,
+    savings_plan_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .savings_plan_id = "savingsPlanId",

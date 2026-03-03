@@ -6,22 +6,22 @@ const DeliveryStatus = @import("delivery_status.zig").DeliveryStatus;
 /// the specified Amazon SNS topic.
 pub const ConfigExportDeliveryInfo = struct {
     /// The time of the last attempted delivery.
-    last_attempt_time: ?i64,
+    last_attempt_time: ?i64 = null,
 
     /// The error code from the last attempted delivery.
-    last_error_code: ?[]const u8,
+    last_error_code: ?[]const u8 = null,
 
     /// The error message from the last attempted delivery.
-    last_error_message: ?[]const u8,
+    last_error_message: ?[]const u8 = null,
 
     /// Status of the last attempted delivery.
-    last_status: ?DeliveryStatus,
+    last_status: ?DeliveryStatus = null,
 
     /// The time of the last successful delivery.
-    last_successful_time: ?i64,
+    last_successful_time: ?i64 = null,
 
     /// The time that the next delivery occurs.
-    next_delivery_time: ?i64,
+    next_delivery_time: ?i64 = null,
 
     pub const json_field_names = .{
         .last_attempt_time = "lastAttemptTime",

@@ -7,7 +7,7 @@ pub const DataPrepListAggregationFunction = struct {
     distinct: bool = false,
 
     /// The name of the column containing values to be concatenated.
-    input_column_name: ?[]const u8,
+    input_column_name: ?[]const u8 = null,
 
     /// The string used to separate values in the concatenated result.
     separator: []const u8,

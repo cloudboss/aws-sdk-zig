@@ -10,7 +10,7 @@ pub const HealthCheck = struct {
     last_checked_at: i64,
 
     /// The message for the reason of connectorStatus change.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connector_status = "ConnectorStatus",

@@ -23,7 +23,7 @@ pub const UpdateFileSystemLustreMetadataConfiguration = struct {
     ///
     /// The value you provide must be greater than or equal to the current number of
     /// Metadata IOPS provisioned for the file system.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// The metadata configuration mode for provisioning Metadata IOPS for
     /// an FSx for Lustre file system using a `PERSISTENT_2`
@@ -48,7 +48,7 @@ pub const UpdateFileSystemLustreMetadataConfiguration = struct {
     /// * AUTOMATIC mode is not supported on Intelligent-Tiering
     /// file systems. For Intelligent-Tiering file systems, use USER_PROVISIONED
     /// mode.
-    mode: ?MetadataConfigurationMode,
+    mode: ?MetadataConfigurationMode = null,
 
     pub const json_field_names = .{
         .iops = "Iops",

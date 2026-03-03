@@ -11,7 +11,7 @@ pub const EncryptionDetails = struct {
     encryption_type: EncryptionType,
 
     /// The ARN of the KMS key that encrypts data in the cluster.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .encryption_status = "encryptionStatus",

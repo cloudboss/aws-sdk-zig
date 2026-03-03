@@ -11,10 +11,10 @@ pub const TaxRegistrationEntry = struct {
     /// parameter if Amazon Web Services collects any additional information for
     /// your country within
     /// AdditionalInfoRequest.
-    additional_tax_information: ?AdditionalInfoRequest,
+    additional_tax_information: ?AdditionalInfoRequest = null,
 
     /// The email address to receive VAT invoices.
-    certified_email_id: ?[]const u8,
+    certified_email_id: ?[]const u8 = null,
 
     /// The legal address associated with your TRN.
     ///
@@ -25,14 +25,14 @@ pub const TaxRegistrationEntry = struct {
     /// For TRNs in other countries and for CPF tax types Brazil, you must specify
     /// the legal
     /// address.
-    legal_address: ?Address,
+    legal_address: ?Address = null,
 
     /// The legal name associated with your TRN.
     ///
     /// If you're setting a TRN in Brazil, you don't need to specify the legal name.
     /// For TRNs in
     /// other countries, you must specify the legal name.
-    legal_name: ?[]const u8,
+    legal_name: ?[]const u8 = null,
 
     /// Your tax registration unique identifier.
     registration_id: []const u8,
@@ -45,7 +45,7 @@ pub const TaxRegistrationEntry = struct {
     /// specify Individual. For business-to-government (B2G), specify
     /// Government.Note that certain values may not applicable for the request
     /// country. Please refer to country specific information in API document.
-    sector: ?Sector,
+    sector: ?Sector = null,
 
     /// Additional details needed to verify your TRN information in Brazil. You only
     /// need to specify this
@@ -54,7 +54,7 @@ pub const TaxRegistrationEntry = struct {
     /// Don't specify this parameter to set a TRN in Brazil of the CNPJ tax type or
     /// to set a TRN
     /// for another country.
-    verification_details: ?VerificationDetails,
+    verification_details: ?VerificationDetails = null,
 
     pub const json_field_names = .{
         .additional_tax_information = "additionalTaxInformation",

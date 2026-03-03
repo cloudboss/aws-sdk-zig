@@ -28,16 +28,16 @@
 /// `top` values.
 pub const BoundingBox = struct {
     /// Height of the bounding box as a ratio of the overall image height.
-    height: ?f32,
+    height: ?f32 = null,
 
     /// Left coordinate of the bounding box as a ratio of overall image width.
-    left: ?f32,
+    left: ?f32 = null,
 
     /// Top coordinate of the bounding box as a ratio of overall image height.
-    top: ?f32,
+    top: ?f32 = null,
 
     /// Width of the bounding box as a ratio of the overall image width.
-    width: ?f32,
+    width: ?f32 = null,
 
     pub const json_field_names = .{
         .height = "Height",

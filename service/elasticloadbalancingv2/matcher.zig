@@ -5,7 +5,7 @@ pub const Matcher = struct {
     /// You can specify values between 0 and 99. You can specify multiple values
     /// (for example,
     /// "0,1") or a range of values (for example, "0-5"). The default value is 12.
-    grpc_code: ?[]const u8,
+    grpc_code: ?[]const u8 = null,
 
     /// For Application Load Balancers, you can specify values between 200 and 499,
     /// with the
@@ -21,5 +21,5 @@ pub const Matcher = struct {
     ///
     /// Note that when using shorthand syntax, some values such as commas need to be
     /// escaped.
-    http_code: ?[]const u8,
+    http_code: ?[]const u8 = null,
 };

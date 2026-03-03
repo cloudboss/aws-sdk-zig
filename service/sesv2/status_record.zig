@@ -6,10 +6,10 @@ const SendingStatus = @import("sending_status.zig").SendingStatus;
 pub const StatusRecord = struct {
     /// A description of the reason for the current status, or null if no specific
     /// cause is available.
-    cause: ?[]const u8,
+    cause: ?[]const u8 = null,
 
     /// The timestamp when this status was last updated.
-    last_updated_timestamp: ?i64,
+    last_updated_timestamp: ?i64 = null,
 
     /// The current sending status. This can be one of the following:
     ///
@@ -18,7 +18,7 @@ pub const StatusRecord = struct {
     /// * `DISABLED` – Sending is prevented.
     ///
     /// * `REINSTATED` – Sending is allowed even with active reputation findings.
-    status: ?SendingStatus,
+    status: ?SendingStatus = null,
 
     pub const json_field_names = .{
         .cause = "Cause",

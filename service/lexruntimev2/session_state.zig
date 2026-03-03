@@ -10,27 +10,27 @@ pub const SessionState = struct {
     /// One or more contexts that indicate to Amazon Lex V2 the context of a
     /// request. When a context is active, Amazon Lex V2 considers intents with the
     /// matching context as a trigger as the next intent in a session.
-    active_contexts: ?[]const ActiveContext,
+    active_contexts: ?[]const ActiveContext = null,
 
     /// The next step that Amazon Lex V2 should take in the conversation with a
     /// user.
-    dialog_action: ?DialogAction,
+    dialog_action: ?DialogAction = null,
 
     /// The active intent that Amazon Lex V2 is processing.
-    intent: ?Intent,
+    intent: ?Intent = null,
 
     /// A unique identifier for a specific request.
-    originating_request_id: ?[]const u8,
+    originating_request_id: ?[]const u8 = null,
 
     /// Hints for phrases that a customer is likely to use for a slot. Amazon Lex V2
     /// uses the hints to help determine the correct value of a slot.
-    runtime_hints: ?RuntimeHints,
+    runtime_hints: ?RuntimeHints = null,
 
     /// Map of key/value pairs representing session-specific context
     /// information. It contains application information passed between Amazon Lex
     /// V2
     /// and a client application.
-    session_attributes: ?[]const aws.map.StringMapEntry,
+    session_attributes: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .active_contexts = "activeContexts",

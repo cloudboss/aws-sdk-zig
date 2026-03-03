@@ -11,14 +11,14 @@ pub const AppliedTerminology = struct {
     /// The name of the custom terminology applied to the input text by Amazon
     /// Translate for the translated
     /// text response.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The specific terms of the custom terminology applied to the input text by
     /// Amazon Translate for the
     /// translated text response. A maximum of 250 terms will be returned, and the
     /// specific terms
     /// applied will be the first 250 terms in the source text.
-    terms: ?[]const Term,
+    terms: ?[]const Term = null,
 
     pub const json_field_names = .{
         .name = "Name",

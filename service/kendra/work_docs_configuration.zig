@@ -20,7 +20,7 @@ pub const WorkDocsConfiguration = struct {
     /// are included in the index. If a file matches both an inclusion and exclusion
     /// pattern, the exclusion pattern takes precedence and the file isn't included
     /// in the index.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that
     /// map Amazon WorkDocs data source attributes or field names to Amazon Kendra
@@ -31,7 +31,7 @@ pub const WorkDocsConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Amazon WorkDocs data source field names
     /// must exist in your Amazon WorkDocs custom metadata.
-    field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of regular expression patterns to include certain files
     /// in your Amazon WorkDocs site repository. Files that match the patterns
@@ -39,7 +39,7 @@ pub const WorkDocsConfiguration = struct {
     /// excluded from the index. If a file matches both an inclusion and exclusion
     /// pattern, the exclusion pattern takes precedence and the file isn't included
     /// in the index.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// The identifier of the directory corresponding to your
     /// Amazon WorkDocs site repository.

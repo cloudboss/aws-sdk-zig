@@ -8,13 +8,13 @@ const PercentageDisplayFormatConfiguration = @import("percentage_display_format_
 /// the attributes can be defined.
 pub const NumericFormatConfiguration = struct {
     /// The options that determine the currency display format configuration.
-    currency_display_format_configuration: ?CurrencyDisplayFormatConfiguration,
+    currency_display_format_configuration: ?CurrencyDisplayFormatConfiguration = null,
 
     /// The options that determine the number display format configuration.
-    number_display_format_configuration: ?NumberDisplayFormatConfiguration,
+    number_display_format_configuration: ?NumberDisplayFormatConfiguration = null,
 
     /// The options that determine the percentage display format configuration.
-    percentage_display_format_configuration: ?PercentageDisplayFormatConfiguration,
+    percentage_display_format_configuration: ?PercentageDisplayFormatConfiguration = null,
 
     pub const json_field_names = .{
         .currency_display_format_configuration = "CurrencyDisplayFormatConfiguration",

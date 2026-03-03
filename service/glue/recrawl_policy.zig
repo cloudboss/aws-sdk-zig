@@ -17,7 +17,7 @@ pub const RecrawlPolicy = struct {
     ///
     /// A value of `CRAWL_EVENT_MODE` specifies crawling only the changes identified
     /// by Amazon S3 events.
-    recrawl_behavior: ?RecrawlBehavior,
+    recrawl_behavior: ?RecrawlBehavior = null,
 
     pub const json_field_names = .{
         .recrawl_behavior = "RecrawlBehavior",

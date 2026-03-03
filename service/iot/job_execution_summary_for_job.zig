@@ -4,10 +4,10 @@ const JobExecutionSummary = @import("job_execution_summary.zig").JobExecutionSum
 /// job.
 pub const JobExecutionSummaryForJob = struct {
     /// Contains a subset of information about a job execution.
-    job_execution_summary: ?JobExecutionSummary,
+    job_execution_summary: ?JobExecutionSummary = null,
 
     /// The ARN of the thing on which the job execution is running.
-    thing_arn: ?[]const u8,
+    thing_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .job_execution_summary = "jobExecutionSummary",

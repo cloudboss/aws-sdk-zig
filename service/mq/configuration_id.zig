@@ -4,7 +4,7 @@ pub const ConfigurationId = struct {
     id: []const u8,
 
     /// The revision number of the configuration.
-    revision: ?i32,
+    revision: ?i32 = null,
 
     pub const json_field_names = .{
         .id = "Id",

@@ -7,7 +7,7 @@ pub const GuardrailRegexConfig = struct {
     action: GuardrailSensitiveInformationAction,
 
     /// The description of the regular expression to configure for the AI Guardrail.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the regular expression to configure for the AI Guardrail.
     name: []const u8,

@@ -31,14 +31,14 @@ const LocalHealthEventsConfig = @import("local_health_events_config.zig").LocalH
 pub const HealthEventsConfig = struct {
     /// The configuration that determines the threshold and other conditions for
     /// when Internet Monitor creates a health event for a local availability issue.
-    availability_local_health_events_config: ?LocalHealthEventsConfig,
+    availability_local_health_events_config: ?LocalHealthEventsConfig = null,
 
     /// The health event threshold percentage set for availability scores.
     availability_score_threshold: f64 = 0,
 
     /// The configuration that determines the threshold and other conditions for
     /// when Internet Monitor creates a health event for a local performance issue.
-    performance_local_health_events_config: ?LocalHealthEventsConfig,
+    performance_local_health_events_config: ?LocalHealthEventsConfig = null,
 
     /// The health event threshold percentage set for performance scores.
     performance_score_threshold: f64 = 0,

@@ -10,9 +10,9 @@ pub const CustomArtifactConfiguration = struct {
     artifact_type: ArtifactType,
 
     /// The parameters required to fully specify a Maven reference.
-    maven_reference: ?MavenReference,
+    maven_reference: ?MavenReference = null,
 
-    s3_content_location: ?S3ContentLocation,
+    s3_content_location: ?S3ContentLocation = null,
 
     pub const json_field_names = .{
         .artifact_type = "ArtifactType",

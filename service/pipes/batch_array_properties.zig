@@ -4,7 +4,7 @@
 /// parameter is used only if the target is an Batch job.
 pub const BatchArrayProperties = struct {
     /// The size of the array, if this is an array batch job.
-    size: ?i32,
+    size: ?i32 = null,
 
     pub const json_field_names = .{
         .size = "Size",

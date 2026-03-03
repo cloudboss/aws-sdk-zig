@@ -4,7 +4,7 @@ const ExpenseField = @import("expense_field.zig").ExpenseField;
 /// document's tables.
 pub const LineItemFields = struct {
     /// ExpenseFields used to show information from detected lines on a table.
-    line_item_expense_fields: ?[]const ExpenseField,
+    line_item_expense_fields: ?[]const ExpenseField = null,
 
     pub const json_field_names = .{
         .line_item_expense_fields = "LineItemExpenseFields",

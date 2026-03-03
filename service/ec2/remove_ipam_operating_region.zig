@@ -8,5 +8,5 @@
 /// *Amazon VPC IPAM User Guide*
 pub const RemoveIpamOperatingRegion = struct {
     /// The name of the operating Region you want to remove.
-    region_name: ?[]const u8,
+    region_name: ?[]const u8 = null,
 };

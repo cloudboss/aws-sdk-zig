@@ -4,7 +4,7 @@ const AwsS3BucketNotificationConfigurationS3KeyFilter = @import("aws_s3_bucket_n
 /// filtering is based on Amazon S3 key names.
 pub const AwsS3BucketNotificationConfigurationFilter = struct {
     /// Details for an Amazon S3 filter.
-    s3_key_filter: ?AwsS3BucketNotificationConfigurationS3KeyFilter,
+    s3_key_filter: ?AwsS3BucketNotificationConfigurationS3KeyFilter = null,
 
     pub const json_field_names = .{
         .s3_key_filter = "S3KeyFilter",

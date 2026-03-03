@@ -3,7 +3,7 @@ const S3Location = @import("s3_location.zig").S3Location;
 /// Describes the details of the script.
 pub const ScriptDetails = struct {
     /// The runtime parameters passed to the run path for the script.
-    executable_parameters: ?[]const u8,
+    executable_parameters: ?[]const u8 = null,
 
     /// The run path for the script.
     executable_path: []const u8,

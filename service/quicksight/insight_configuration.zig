@@ -5,13 +5,13 @@ const VisualInteractionOptions = @import("visual_interaction_options.zig").Visua
 /// The configuration of an insight visual.
 pub const InsightConfiguration = struct {
     /// The computations configurations of the insight visual
-    computations: ?[]const Computation,
+    computations: ?[]const Computation = null,
 
     /// The custom narrative of the insight visual.
-    custom_narrative: ?CustomNarrativeOptions,
+    custom_narrative: ?CustomNarrativeOptions = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     pub const json_field_names = .{
         .computations = "Computations",

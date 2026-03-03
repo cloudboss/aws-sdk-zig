@@ -1,7 +1,7 @@
 /// Data about the result of tool usage.
 pub const ToolUseResultData = struct {
     /// The input schema for the tool use result.
-    input_schema: ?[]const u8,
+    input_schema: ?[]const u8 = null,
 
     /// The name of the tool that was used.
     tool_name: []const u8,

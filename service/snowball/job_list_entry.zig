@@ -6,11 +6,11 @@ const SnowballType = @import("snowball_type.zig").SnowballType;
 /// that indicates whether the job is a job part, in the case of an export job.
 pub const JobListEntry = struct {
     /// The creation date for this job.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The optional description of this specific job, for example `Important Photos
     /// 2016-08-11`.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A value that indicates that this job is a main job. A main job represents a
     /// successful
@@ -25,16 +25,16 @@ pub const JobListEntry = struct {
 
     /// The automatically generated ID for a job, for example
     /// `JID123e4567-e89b-12d3-a456-426655440000`.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The current state of this job.
-    job_state: ?JobState,
+    job_state: ?JobState = null,
 
     /// The type of job.
-    job_type: ?JobType,
+    job_type: ?JobType = null,
 
     /// The type of device used with this job.
-    snowball_type: ?SnowballType,
+    snowball_type: ?SnowballType = null,
 
     pub const json_field_names = .{
         .creation_date = "CreationDate",

@@ -4,10 +4,10 @@ const TableFieldLinkConfiguration = @import("table_field_link_configuration.zig"
 /// The URL configuration for a table field.
 pub const TableFieldURLConfiguration = struct {
     /// The image configuration of a table field URL.
-    image_configuration: ?TableFieldImageConfiguration,
+    image_configuration: ?TableFieldImageConfiguration = null,
 
     /// The link configuration of a table field URL.
-    link_configuration: ?TableFieldLinkConfiguration,
+    link_configuration: ?TableFieldLinkConfiguration = null,
 
     pub const json_field_names = .{
         .image_configuration = "ImageConfiguration",

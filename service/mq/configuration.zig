@@ -41,7 +41,7 @@ pub const Configuration = struct {
     name: []const u8,
 
     /// The list of all tags associated with this configuration.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

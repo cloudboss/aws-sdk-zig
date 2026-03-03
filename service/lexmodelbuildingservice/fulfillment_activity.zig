@@ -23,7 +23,7 @@ const FulfillmentActivityType = @import("fulfillment_activity_type.zig").Fulfill
 pub const FulfillmentActivity = struct {
     /// A description of the Lambda function that is run to fulfill the
     /// intent.
-    code_hook: ?CodeHook,
+    code_hook: ?CodeHook = null,
 
     /// How the intent should be fulfilled, either by running a Lambda
     /// function or by returning the slot data to the client application.

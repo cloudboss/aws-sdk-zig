@@ -4,7 +4,7 @@ const DataIntegrationFlowDedupeStrategyType = @import("data_integration_flow_ded
 /// The deduplication strategy details.
 pub const DataIntegrationFlowDedupeStrategy = struct {
     /// The field priority deduplication strategy.
-    field_priority: ?DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration,
+    field_priority: ?DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration = null,
 
     /// The type of the deduplication strategy.
     ///

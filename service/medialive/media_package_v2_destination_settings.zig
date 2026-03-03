@@ -10,7 +10,7 @@ pub const MediaPackageV2DestinationSettings = struct {
     /// specification (not the CMAF specification), but if you include it then
     /// MediaPackage will include it in the manifest it creates for the video
     /// player.
-    audio_group_id: ?[]const u8,
+    audio_group_id: ?[]const u8 = null,
 
     /// Applies only to an output that contains video, and only if you want to
     /// associate one or more audio groups to this video. In this field you assign
@@ -19,7 +19,7 @@ pub const MediaPackageV2DestinationSettings = struct {
     /// Note that this information is part of the HLS specification (not the CMAF
     /// specification), but if you include it then MediaPackage will include it in
     /// the manifest it creates for the video player.
-    audio_rendition_sets: ?[]const u8,
+    audio_rendition_sets: ?[]const u8 = null,
 
     /// Specifies whether MediaPackage should set this output as the auto-select
     /// rendition in the HLS manifest. YES means this must be the auto-select. NO
@@ -29,7 +29,7 @@ pub const MediaPackageV2DestinationSettings = struct {
     /// zero or one renditions to YES. You can set zero or more renditions to NO,
     /// but you can't set all renditions to NO. You can set zero, some, or all to
     /// OMIT.
-    hls_auto_select: ?HlsAutoSelect,
+    hls_auto_select: ?HlsAutoSelect = null,
 
     /// Specifies whether MediaPackage should set this output as the default
     /// rendition in the HLS manifest. YES means this must be the default. NO means
@@ -39,7 +39,7 @@ pub const MediaPackageV2DestinationSettings = struct {
     /// zero or one renditions to YES. You can set zero or more renditions to NO,
     /// but you can't set all renditions to NO. You can set zero, some, or all to
     /// OMIT.
-    hls_default: ?HlsDefault,
+    hls_default: ?HlsDefault = null,
 
     pub const json_field_names = .{
         .audio_group_id = "AudioGroupId",

@@ -5,11 +5,11 @@ const SlotTypeStatistics = @import("slot_type_statistics.zig").SlotTypeStatistic
 pub const BotRecommendationResultStatistics = struct {
     /// Statistical information about about the intents associated with the
     /// bot recommendation results.
-    intents: ?IntentStatistics,
+    intents: ?IntentStatistics = null,
 
     /// Statistical information about the slot types associated with the bot
     /// recommendation results.
-    slot_types: ?SlotTypeStatistics,
+    slot_types: ?SlotTypeStatistics = null,
 
     pub const json_field_names = .{
         .intents = "intents",

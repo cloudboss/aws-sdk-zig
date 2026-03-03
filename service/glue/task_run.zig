@@ -5,35 +5,35 @@ const TaskStatusType = @import("task_status_type.zig").TaskStatusType;
 /// transform.
 pub const TaskRun = struct {
     /// The last point in time that the requested task run was completed.
-    completed_on: ?i64,
+    completed_on: ?i64 = null,
 
     /// The list of error strings associated with this task run.
-    error_string: ?[]const u8,
+    error_string: ?[]const u8 = null,
 
     /// The amount of time (in seconds) that the task run consumed resources.
     execution_time: i32 = 0,
 
     /// The last point in time that the requested task run was updated.
-    last_modified_on: ?i64,
+    last_modified_on: ?i64 = null,
 
     /// The names of the log group for secure logging, associated with this task
     /// run.
-    log_group_name: ?[]const u8,
+    log_group_name: ?[]const u8 = null,
 
     /// Specifies configuration properties associated with this task run.
-    properties: ?TaskRunProperties,
+    properties: ?TaskRunProperties = null,
 
     /// The date and time that this task run started.
-    started_on: ?i64,
+    started_on: ?i64 = null,
 
     /// The current status of the requested task run.
-    status: ?TaskStatusType,
+    status: ?TaskStatusType = null,
 
     /// The unique identifier for this task run.
-    task_run_id: ?[]const u8,
+    task_run_id: ?[]const u8 = null,
 
     /// The unique identifier for the transform.
-    transform_id: ?[]const u8,
+    transform_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .completed_on = "CompletedOn",

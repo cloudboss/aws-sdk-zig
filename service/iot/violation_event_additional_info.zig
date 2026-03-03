@@ -4,7 +4,7 @@ const ConfidenceLevel = @import("confidence_level.zig").ConfidenceLevel;
 pub const ViolationEventAdditionalInfo = struct {
     /// The sensitivity of anomalous behavior evaluation. Can be `Low`, `Medium`, or
     /// `High`.
-    confidence_level: ?ConfidenceLevel,
+    confidence_level: ?ConfidenceLevel = null,
 
     pub const json_field_names = .{
         .confidence_level = "confidenceLevel",

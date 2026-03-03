@@ -5,13 +5,13 @@ const FormEntryOutput = @import("form_entry_output.zig").FormEntryOutput;
 /// The details of the asset type.
 pub const AssetTypeItem = struct {
     /// The timestamp of when the asset type was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon DataZone user who created the asset type.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The description of the asset type.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the Amazon DataZone domain where the asset type exists.
     domain_id: []const u8,
@@ -24,10 +24,10 @@ pub const AssetTypeItem = struct {
 
     /// The identifier of the Amazon DataZone domain where the asset type was
     /// originally created.
-    origin_domain_id: ?[]const u8,
+    origin_domain_id: ?[]const u8 = null,
 
     /// The identifier of the Amazon DataZone project where the asset type exists.
-    origin_project_id: ?[]const u8,
+    origin_project_id: ?[]const u8 = null,
 
     /// The identifier of the Amazon DataZone project that owns the asset type.
     owning_project_id: []const u8,
@@ -36,10 +36,10 @@ pub const AssetTypeItem = struct {
     revision: []const u8,
 
     /// The timestamp of when the asset type was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The Amazon DataZone user who updated the asset type.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

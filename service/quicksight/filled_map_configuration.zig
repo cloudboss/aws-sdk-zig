@@ -9,25 +9,25 @@ const GeospatialWindowOptions = @import("geospatial_window_options.zig").Geospat
 /// The configuration for a `FilledMapVisual`.
 pub const FilledMapConfiguration = struct {
     /// The field wells of the visual.
-    field_wells: ?FilledMapFieldWells,
+    field_wells: ?FilledMapFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The legend display setup of the visual.
-    legend: ?LegendOptions,
+    legend: ?LegendOptions = null,
 
     /// The map style options of the filled map visual.
-    map_style_options: ?GeospatialMapStyleOptions,
+    map_style_options: ?GeospatialMapStyleOptions = null,
 
     /// The sort configuration of a `FilledMapVisual`.
-    sort_configuration: ?FilledMapSortConfiguration,
+    sort_configuration: ?FilledMapSortConfiguration = null,
 
     /// The tooltip display setup of the visual.
-    tooltip: ?TooltipOptions,
+    tooltip: ?TooltipOptions = null,
 
     /// The window options of the filled map visual.
-    window_options: ?GeospatialWindowOptions,
+    window_options: ?GeospatialWindowOptions = null,
 
     pub const json_field_names = .{
         .field_wells = "FieldWells",

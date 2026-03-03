@@ -5,7 +5,7 @@ const KinesisStreamConfig = @import("kinesis_stream_config.zig").KinesisStreamCo
 pub const EndPoint = struct {
     /// Contains information about the Amazon Kinesis data stream where you are
     /// sending real-time log data in a real-time log configuration.
-    kinesis_stream_config: ?KinesisStreamConfig,
+    kinesis_stream_config: ?KinesisStreamConfig = null,
 
     /// The type of data stream where you are sending real-time log data. The only
     /// valid value is `Kinesis`.

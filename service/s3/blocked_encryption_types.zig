@@ -36,5 +36,5 @@ pub const BlockedEncryptionTypes = struct {
     /// encryption with customer-provided keys (SSE-C). For more information about
     /// SSE-C, see [Using server-side encryption with customer-provided keys
     /// (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html).
-    encryption_type: ?[]const EncryptionType,
+    encryption_type: ?[]const EncryptionType = null,
 };

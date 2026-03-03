@@ -5,10 +5,10 @@ const ContinuousDeploymentPolicyType = @import("continuous_deployment_policy_typ
 /// The traffic configuration of your continuous deployment.
 pub const TrafficConfig = struct {
     /// Determines which HTTP requests are sent to the staging distribution.
-    single_header_config: ?ContinuousDeploymentSingleHeaderConfig,
+    single_header_config: ?ContinuousDeploymentSingleHeaderConfig = null,
 
     /// Contains the percentage of traffic to send to the staging distribution.
-    single_weight_config: ?ContinuousDeploymentSingleWeightConfig,
+    single_weight_config: ?ContinuousDeploymentSingleWeightConfig = null,
 
     /// The type of traffic configuration.
     @"type": ContinuousDeploymentPolicyType,

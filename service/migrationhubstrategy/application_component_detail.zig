@@ -17,77 +17,77 @@ pub const ApplicationComponentDetail = struct {
     /// The status of analysis, if the application component has source code or an
     /// associated
     /// database.
-    analysis_status: ?SrcCodeOrDbAnalysisStatus,
+    analysis_status: ?SrcCodeOrDbAnalysisStatus = null,
 
     /// The S3 bucket name and the Amazon S3 key name for the anti-pattern report.
-    antipattern_report_s3_object: ?S3Object,
+    antipattern_report_s3_object: ?S3Object = null,
 
     /// The status of the anti-pattern report generation.
-    antipattern_report_status: ?AntipatternReportStatus,
+    antipattern_report_status: ?AntipatternReportStatus = null,
 
     /// The status message for the anti-pattern.
-    antipattern_report_status_message: ?[]const u8,
+    antipattern_report_status_message: ?[]const u8 = null,
 
     /// The type of application component.
-    app_type: ?AppType,
+    app_type: ?AppType = null,
 
     /// The error in the analysis of the source code or database.
-    app_unit_error: ?AppUnitError,
+    app_unit_error: ?AppUnitError = null,
 
     /// The ID of the server that the application component is running on.
-    associated_server_id: ?[]const u8,
+    associated_server_id: ?[]const u8 = null,
 
     /// Configuration details for the database associated with the application
     /// component.
-    database_config_detail: ?DatabaseConfigDetail,
+    database_config_detail: ?DatabaseConfigDetail = null,
 
     /// The ID of the application component.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Indicates whether the application component has been included for server
     /// recommendation
     /// or not.
-    inclusion_status: ?InclusionStatus,
+    inclusion_status: ?InclusionStatus = null,
 
     /// The timestamp of when the application component was assessed.
-    last_analyzed_timestamp: ?i64,
+    last_analyzed_timestamp: ?i64 = null,
 
     /// A list of anti-pattern severity summaries.
-    list_antipattern_severity_summary: ?[]const AntipatternSeveritySummary,
+    list_antipattern_severity_summary: ?[]const AntipatternSeveritySummary = null,
 
     /// Set to true if the application component is running on multiple servers.
-    more_server_association_exists: ?bool,
+    more_server_association_exists: ?bool = null,
 
     /// The name of application component.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// OS driver.
-    os_driver: ?[]const u8,
+    os_driver: ?[]const u8 = null,
 
     /// OS version.
-    os_version: ?[]const u8,
+    os_version: ?[]const u8 = null,
 
     /// The top recommendation set for the application component.
-    recommendation_set: ?RecommendationSet,
+    recommendation_set: ?RecommendationSet = null,
 
     /// The application component subtype.
-    resource_sub_type: ?ResourceSubType,
+    resource_sub_type: ?ResourceSubType = null,
 
     /// A list of the analysis results.
-    result_list: ?[]const Result,
+    result_list: ?[]const Result = null,
 
     /// The status of the application unit.
-    runtime_status: ?RuntimeAnalysisStatus,
+    runtime_status: ?RuntimeAnalysisStatus = null,
 
     /// The status message for the application unit.
-    runtime_status_message: ?[]const u8,
+    runtime_status_message: ?[]const u8 = null,
 
     /// Details about the source code repository associated with the application
     /// component.
-    source_code_repositories: ?[]const SourceCodeRepository,
+    source_code_repositories: ?[]const SourceCodeRepository = null,
 
     /// A detailed description of the analysis status and any failure message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .analysis_status = "analysisStatus",

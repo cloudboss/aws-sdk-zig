@@ -8,53 +8,53 @@ const WorkflowType = @import("workflow_type.zig").WorkflowType;
 /// the image creation process.
 pub const Workflow = struct {
     /// The Amazon Resource Name (ARN) of the workflow resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Describes what change has been made in this version of the workflow, or
     /// what makes this version different from other versions of the workflow.
-    change_description: ?[]const u8,
+    change_description: ?[]const u8 = null,
 
     /// Contains the YAML document content for the workflow.
-    data: ?[]const u8,
+    data: ?[]const u8 = null,
 
     /// The timestamp when Image Builder created the workflow resource.
-    date_created: ?[]const u8,
+    date_created: ?[]const u8 = null,
 
     /// The description of the workflow.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The KMS key identifier used to encrypt the workflow resource. This can be
     /// either the Key ARN or the Alias ARN. For more information, see [Key
     /// identifiers
     /// (KeyId)](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN)
     /// in the *Key Management Service Developer Guide*.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The name of the workflow resource.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The owner of the workflow resource.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// An array of input parameters that that the image workflow uses
     /// to control actions or configure settings.
-    parameters: ?[]const WorkflowParameterDetail,
+    parameters: ?[]const WorkflowParameterDetail = null,
 
     /// Describes the current status of the workflow and the reason for
     /// that status.
-    state: ?WorkflowState,
+    state: ?WorkflowState = null,
 
     /// The tags that apply to the workflow resource
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies the image creation stage that the workflow applies to. Image
     /// Builder
     /// currently supports build and test workflows.
-    @"type": ?WorkflowType,
+    @"type": ?WorkflowType = null,
 
     /// The workflow resource version. Workflow resources are immutable.
     /// To make a change, you can clone a workflow or create a new version.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

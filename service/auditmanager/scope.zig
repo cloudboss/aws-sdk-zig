@@ -22,7 +22,7 @@ const AWSService = @import("aws_service.zig").AWSService;
 pub const Scope = struct {
     /// The Amazon Web Services accounts that are included in the scope of the
     /// assessment.
-    aws_accounts: ?[]const AWSAccount,
+    aws_accounts: ?[]const AWSAccount = null,
 
     /// The Amazon Web Services services that are included in the scope of the
     /// assessment.
@@ -32,7 +32,7 @@ pub const Scope = struct {
     /// or more Amazon Web Services services, Audit Manager ignores this input.
     /// Instead, the
     /// value for `awsServices` will show as empty.
-    aws_services: ?[]const AWSService,
+    aws_services: ?[]const AWSService = null,
 
     pub const json_field_names = .{
         .aws_accounts = "awsAccounts",

@@ -4,10 +4,10 @@ pub const EksCluster = struct {
     cluster_arn: []const u8,
 
     /// The cross account role for the configuration.
-    cross_account_role: ?[]const u8,
+    cross_account_role: ?[]const u8 = null,
 
     /// The external ID (secret key) for the configuration.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cluster_arn = "clusterArn",

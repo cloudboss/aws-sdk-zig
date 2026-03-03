@@ -4,16 +4,16 @@ pub const TableStatistics = struct {
     /// The number of data definition language (DDL) statements used to build and
     /// modify the
     /// structure of your tables applied on the target.
-    applied_ddls: ?i64,
+    applied_ddls: ?i64 = null,
 
     /// The number of delete actions applied on a target table.
-    applied_deletes: ?i64,
+    applied_deletes: ?i64 = null,
 
     /// The number of insert actions applied on a target table.
-    applied_inserts: ?i64,
+    applied_inserts: ?i64 = null,
 
     /// The number of update actions applied on a target table.
-    applied_updates: ?i64,
+    applied_updates: ?i64 = null,
 
     /// The data definition language (DDL) used to build and modify the structure of
     /// your
@@ -29,7 +29,7 @@ pub const TableStatistics = struct {
     full_load_condtnl_chk_failed_rows: i64 = 0,
 
     /// The time when the full load operation completed.
-    full_load_end_time: ?i64,
+    full_load_end_time: ?i64 = null,
 
     /// The number of rows that failed to load during the full load operation (valid
     /// only for
@@ -38,37 +38,37 @@ pub const TableStatistics = struct {
 
     /// A value that indicates if the table was reloaded (`true`) or loaded as part
     /// of a new full load operation (`false`).
-    full_load_reloaded: ?bool,
+    full_load_reloaded: ?bool = null,
 
     /// The number of rows added during the full load operation.
     full_load_rows: i64 = 0,
 
     /// The time when the full load operation started.
-    full_load_start_time: ?i64,
+    full_load_start_time: ?i64 = null,
 
     /// The number of insert actions performed on a table.
     inserts: i64 = 0,
 
     /// The last time a table was updated.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// Calculates the percentage of failed validations that were successfully
     /// resynced to the system.
-    resync_progress: ?f64,
+    resync_progress: ?f64 = null,
 
     /// Records the total number of mismatched data rows where the system attempted
     /// to apply
     /// fixes in the target database.
-    resync_rows_attempted: ?i64,
+    resync_rows_attempted: ?i64 = null,
 
     /// Records the total number of mismatched data rows where fix attempts failed
     /// in the target
     /// database.
-    resync_rows_failed: ?i64,
+    resync_rows_failed: ?i64 = null,
 
     /// Records the total number of mismatched data rows where fixes were
     /// successfully applied in the target database.
-    resync_rows_succeeded: ?i64,
+    resync_rows_succeeded: ?i64 = null,
 
     /// Records the current state of table resynchronization in the migration task.
     ///
@@ -85,20 +85,20 @@ pub const TableStatistics = struct {
     ///
     /// * Last resync at: `date/time` – Resync session is finished at time. Time
     ///   provided in UTC format.
-    resync_state: ?[]const u8,
+    resync_state: ?[]const u8 = null,
 
     /// The schema name.
-    schema_name: ?[]const u8,
+    schema_name: ?[]const u8 = null,
 
     /// The name of the table.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The state of the tables described.
     ///
     /// Valid states: Table does not exist | Before load | Full load | Table
     /// completed | Table
     /// cancelled | Table error | Table is being reloaded
-    table_state: ?[]const u8,
+    table_state: ?[]const u8 = null,
 
     /// The number of update actions performed on a table.
     updates: i64 = 0,
@@ -144,10 +144,10 @@ pub const TableStatistics = struct {
     ///
     /// * Pending revalidation – All rows in the table are pending validation after
     /// the table was updated.
-    validation_state: ?[]const u8,
+    validation_state: ?[]const u8 = null,
 
     /// Additional details about the state of validation.
-    validation_state_details: ?[]const u8,
+    validation_state_details: ?[]const u8 = null,
 
     /// The number of records that couldn't be validated.
     validation_suspended_records: i64 = 0,

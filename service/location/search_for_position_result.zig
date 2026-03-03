@@ -18,7 +18,7 @@ pub const SearchForPositionResult = struct {
     ///
     /// For `SearchPlaceIndexForPosition` operations, the `PlaceId` is returned only
     /// by place indexes that use HERE or Grab as a data provider.
-    place_id: ?[]const u8,
+    place_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .distance = "Distance",

@@ -11,49 +11,49 @@ const VpcConfigurationDescription = @import("vpc_configuration_description.zig")
 /// The destination description in Amazon OpenSearch Service.
 pub const AmazonopensearchserviceDestinationDescription = struct {
     /// The buffering options.
-    buffering_hints: ?AmazonopensearchserviceBufferingHints,
+    buffering_hints: ?AmazonopensearchserviceBufferingHints = null,
 
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The endpoint to use when communicating with the cluster. Firehose uses
     /// either this ClusterEndpoint or the DomainARN field to send data to Amazon
     /// OpenSearch
     /// Service.
-    cluster_endpoint: ?[]const u8,
+    cluster_endpoint: ?[]const u8 = null,
 
     /// Indicates the method for setting up document ID. The supported methods are
     /// Firehose generated document ID and OpenSearch Service generated document ID.
-    document_id_options: ?DocumentIdOptions,
+    document_id_options: ?DocumentIdOptions = null,
 
     /// The ARN of the Amazon OpenSearch Service domain.
-    domain_arn: ?[]const u8,
+    domain_arn: ?[]const u8 = null,
 
     /// The Amazon OpenSearch Service index name.
-    index_name: ?[]const u8,
+    index_name: ?[]const u8 = null,
 
     /// The Amazon OpenSearch Service index rotation period
-    index_rotation_period: ?AmazonopensearchserviceIndexRotationPeriod,
+    index_rotation_period: ?AmazonopensearchserviceIndexRotationPeriod = null,
 
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The Amazon OpenSearch Service retry options.
-    retry_options: ?AmazonopensearchserviceRetryOptions,
+    retry_options: ?AmazonopensearchserviceRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services credentials.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The Amazon S3 backup mode.
-    s3_backup_mode: ?AmazonopensearchserviceS3BackupMode,
+    s3_backup_mode: ?AmazonopensearchserviceS3BackupMode = null,
 
-    s3_destination_description: ?S3DestinationDescription,
+    s3_destination_description: ?S3DestinationDescription = null,
 
     /// The Amazon OpenSearch Service type name. This applies to Elasticsearch 6.x
     /// and lower
     /// versions. For Elasticsearch 7.x and OpenSearch Service 1.x, there's no value
     /// for TypeName.
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 
-    vpc_configuration_description: ?VpcConfigurationDescription,
+    vpc_configuration_description: ?VpcConfigurationDescription = null,
 
     pub const json_field_names = .{
         .buffering_hints = "BufferingHints",

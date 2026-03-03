@@ -5,24 +5,24 @@ const ShrinkPolicy = @import("shrink_policy.zig").ShrinkPolicy;
 /// Modify the size or configurations of an instance group.
 pub const InstanceGroupModifyConfig = struct {
     /// A list of new or modified configurations to apply for an instance group.
-    configurations: ?[]const Configuration,
+    configurations: ?[]const Configuration = null,
 
     /// The Amazon EC2 InstanceIds to terminate. After you terminate the instances,
     /// the
     /// instance group will not return to its original requested size.
-    ec2_instance_ids_to_terminate: ?[]const []const u8,
+    ec2_instance_ids_to_terminate: ?[]const []const u8 = null,
 
     /// Target size for the instance group.
-    instance_count: ?i32,
+    instance_count: ?i32 = null,
 
     /// Unique ID of the instance group to modify.
     instance_group_id: []const u8,
 
     /// Type of reconfiguration requested. Valid values are MERGE and OVERWRITE.
-    reconfiguration_type: ?ReconfigurationType,
+    reconfiguration_type: ?ReconfigurationType = null,
 
     /// Policy for customizing shrink operations.
-    shrink_policy: ?ShrinkPolicy,
+    shrink_policy: ?ShrinkPolicy = null,
 
     pub const json_field_names = .{
         .configurations = "Configurations",

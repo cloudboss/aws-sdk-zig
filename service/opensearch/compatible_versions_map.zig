@@ -3,10 +3,10 @@
 /// to.
 pub const CompatibleVersionsMap = struct {
     /// The current version that the OpenSearch Service domain is running.
-    source_version: ?[]const u8,
+    source_version: ?[]const u8 = null,
 
     /// The possible versions that you can upgrade the domain to.
-    target_versions: ?[]const []const u8,
+    target_versions: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .source_version = "SourceVersion",

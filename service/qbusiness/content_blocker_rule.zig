@@ -5,7 +5,7 @@
 pub const ContentBlockerRule = struct {
     /// The configured custom message displayed to an end user informing them that
     /// they've used a blocked phrase during chat.
-    system_message_override: ?[]const u8,
+    system_message_override: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .system_message_override = "systemMessageOverride",

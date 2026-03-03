@@ -6,19 +6,19 @@ const AwsEc2VpcPeeringConnectionStatusDetails = @import("aws_ec_2_vpc_peering_co
 /// accepter VPC with which to create the connection.
 pub const AwsEc2VpcPeeringConnectionDetails = struct {
     /// Information about the accepter VPC.
-    accepter_vpc_info: ?AwsEc2VpcPeeringConnectionVpcInfoDetails,
+    accepter_vpc_info: ?AwsEc2VpcPeeringConnectionVpcInfoDetails = null,
 
     /// The time at which an unaccepted VPC peering connection will expire.
-    expiration_time: ?[]const u8,
+    expiration_time: ?[]const u8 = null,
 
     /// Information about the requester VPC.
-    requester_vpc_info: ?AwsEc2VpcPeeringConnectionVpcInfoDetails,
+    requester_vpc_info: ?AwsEc2VpcPeeringConnectionVpcInfoDetails = null,
 
     /// The status of the VPC peering connection.
-    status: ?AwsEc2VpcPeeringConnectionStatusDetails,
+    status: ?AwsEc2VpcPeeringConnectionStatusDetails = null,
 
     /// The ID of the VPC peering connection.
-    vpc_peering_connection_id: ?[]const u8,
+    vpc_peering_connection_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .accepter_vpc_info = "AccepterVpcInfo",

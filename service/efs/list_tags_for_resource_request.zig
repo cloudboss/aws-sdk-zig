@@ -1,11 +1,11 @@
 pub const ListTagsForResourceRequest = struct {
     /// (Optional) Specifies the maximum number of tag objects to return in the
     /// response. The default value is 100.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// (Optional) You can use `NextToken` in a subsequent request to fetch the next
     /// page of access point descriptions if the response payload was paginated.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// Specifies the EFS resource you want to retrieve tags for. You can retrieve
     /// tags

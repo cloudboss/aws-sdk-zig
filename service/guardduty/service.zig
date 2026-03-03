@@ -9,58 +9,58 @@ const RuntimeDetails = @import("runtime_details.zig").RuntimeDetails;
 /// Contains additional information about the generated finding.
 pub const Service = struct {
     /// Information about the activity that is described in a finding.
-    action: ?Action,
+    action: ?Action = null,
 
     /// Contains additional information about the generated finding.
-    additional_info: ?ServiceAdditionalInfo,
+    additional_info: ?ServiceAdditionalInfo = null,
 
     /// Indicates whether this finding is archived.
-    archived: ?bool,
+    archived: ?bool = null,
 
     /// The total count of the occurrences of this finding type.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// Contains information about the detected unusual behavior.
-    detection: ?Detection,
+    detection: ?Detection = null,
 
     /// The detector ID for the GuardDuty service.
-    detector_id: ?[]const u8,
+    detector_id: ?[]const u8 = null,
 
     /// Returns details from the malware scan that created a finding.
-    ebs_volume_scan_details: ?EbsVolumeScanDetails,
+    ebs_volume_scan_details: ?EbsVolumeScanDetails = null,
 
     /// The first-seen timestamp of the activity that prompted GuardDuty to generate
     /// this
     /// finding.
-    event_first_seen: ?[]const u8,
+    event_first_seen: ?[]const u8 = null,
 
     /// The last-seen timestamp of the activity that prompted GuardDuty to generate
     /// this
     /// finding.
-    event_last_seen: ?[]const u8,
+    event_last_seen: ?[]const u8 = null,
 
     /// An evidence object associated with the service.
-    evidence: ?Evidence,
+    evidence: ?Evidence = null,
 
     /// The name of the feature that generated a finding.
-    feature_name: ?[]const u8,
+    feature_name: ?[]const u8 = null,
 
     /// Returns details from the malware scan that generated a GuardDuty finding.
-    malware_scan_details: ?MalwareScanDetails,
+    malware_scan_details: ?MalwareScanDetails = null,
 
     /// The resource role information for this finding.
-    resource_role: ?[]const u8,
+    resource_role: ?[]const u8 = null,
 
     /// Information about the process and any required context values for a specific
     /// finding
-    runtime_details: ?RuntimeDetails,
+    runtime_details: ?RuntimeDetails = null,
 
     /// The name of the Amazon Web Services service (GuardDuty) that generated a
     /// finding.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// Feedback that was submitted about the finding.
-    user_feedback: ?[]const u8,
+    user_feedback: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

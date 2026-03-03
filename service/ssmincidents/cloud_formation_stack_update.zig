@@ -5,7 +5,7 @@ pub const CloudFormationStackUpdate = struct {
     /// The timestamp for when the CloudFormation stack creation or update ended.
     /// Not reported
     /// for deployments that are still in progress.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the CloudFormation stack involved in the
     /// update.

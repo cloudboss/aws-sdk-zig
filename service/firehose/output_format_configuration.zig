@@ -8,7 +8,7 @@ pub const OutputFormatConfiguration = struct {
     /// Specifies which serializer to use. You can choose either the ORC SerDe or
     /// the Parquet
     /// SerDe. If both are non-null, the server rejects the request.
-    serializer: ?Serializer,
+    serializer: ?Serializer = null,
 
     pub const json_field_names = .{
         .serializer = "Serializer",

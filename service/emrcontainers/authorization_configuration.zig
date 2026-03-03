@@ -4,11 +4,11 @@ const LakeFormationConfiguration = @import("lake_formation_configuration.zig").L
 /// Authorization-related configuration inputs for the security configuration.
 pub const AuthorizationConfiguration = struct {
     /// Encryption-related configuration input for the security configuration.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// Lake Formation related configuration inputs for the security
     /// configuration.
-    lake_formation_configuration: ?LakeFormationConfiguration,
+    lake_formation_configuration: ?LakeFormationConfiguration = null,
 
     pub const json_field_names = .{
         .encryption_configuration = "encryptionConfiguration",

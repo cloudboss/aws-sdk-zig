@@ -5,7 +5,7 @@ pub const DeadLetterConfig = struct {
     ///
     /// For Amazon Kinesis stream and Amazon DynamoDB stream sources, specify
     /// either an Amazon SNS topic or Amazon SQS queue ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

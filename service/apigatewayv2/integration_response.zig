@@ -17,10 +17,10 @@ pub const IntegrationResponse = struct {
     /// If this property is not defined, the response payload will be passed through
     /// from the integration response to the route response or method response
     /// without modification.
-    content_handling_strategy: ?ContentHandlingStrategy,
+    content_handling_strategy: ?ContentHandlingStrategy = null,
 
     /// The integration response ID.
-    integration_response_id: ?[]const u8,
+    integration_response_id: ?[]const u8 = null,
 
     /// The integration response key.
     integration_response_key: []const u8,
@@ -36,16 +36,16 @@ pub const IntegrationResponse = struct {
     /// integration.response.body.{JSON-expression}, where name is a valid and
     /// unique response header name and JSON-expression is a valid JSON expression
     /// without the $ prefix.
-    response_parameters: ?[]const aws.map.StringMapEntry,
+    response_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The collection of response templates for the integration response as a
     /// string-to-string map of key-value pairs. Response templates are represented
     /// as a key/value map, with a content-type as the key and a template as the
     /// value.
-    response_templates: ?[]const aws.map.StringMapEntry,
+    response_templates: ?[]const aws.map.StringMapEntry = null,
 
     /// The template selection expressions for the integration response.
-    template_selection_expression: ?[]const u8,
+    template_selection_expression: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content_handling_strategy = "ContentHandlingStrategy",

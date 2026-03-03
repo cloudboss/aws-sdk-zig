@@ -6,7 +6,7 @@ pub const RecipeAction = struct {
     operation: []const u8,
 
     /// The parameters of the recipe action.
-    parameters: ?[]const aws.map.StringMapEntry,
+    parameters: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .operation = "Operation",

@@ -6,10 +6,10 @@ pub const BuiltinSlotTypeMetadata = struct {
     /// signature for a slot type, see [Slot Type
     /// Reference](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference) in the *Alexa Skills
     /// Kit*.
-    signature: ?[]const u8,
+    signature: ?[]const u8 = null,
 
     /// A list of target locales for the slot.
-    supported_locales: ?[]const Locale,
+    supported_locales: ?[]const Locale = null,
 
     pub const json_field_names = .{
         .signature = "signature",

@@ -5,10 +5,10 @@ const AuthenticationMethodType = @import("authentication_method_type.zig").Authe
 pub const AuthenticationMethodItem = struct {
     /// A structure that describes an authentication method. The contents of this
     /// structure is determined by the `AuthenticationMethodType`.
-    authentication_method: ?AuthenticationMethod,
+    authentication_method: ?AuthenticationMethod = null,
 
     /// The type of authentication that is used by this method.
-    authentication_method_type: ?AuthenticationMethodType,
+    authentication_method_type: ?AuthenticationMethodType = null,
 
     pub const json_field_names = .{
         .authentication_method = "AuthenticationMethod",

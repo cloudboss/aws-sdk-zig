@@ -7,20 +7,20 @@ const IpOwner = @import("ip_owner.zig").IpOwner;
 /// to perform an action on an affected resource.
 pub const IpAddressDetails = struct {
     /// The Internet Protocol version 4 (IPv4) address of the device.
-    ip_address_v4: ?[]const u8,
+    ip_address_v4: ?[]const u8 = null,
 
     /// The city that the IP address originated from.
-    ip_city: ?IpCity,
+    ip_city: ?IpCity = null,
 
     /// The country that the IP address originated from.
-    ip_country: ?IpCountry,
+    ip_country: ?IpCountry = null,
 
     /// The geographic coordinates of the location that the IP address originated
     /// from.
-    ip_geo_location: ?IpGeoLocation,
+    ip_geo_location: ?IpGeoLocation = null,
 
     /// The registered owner of the IP address.
-    ip_owner: ?IpOwner,
+    ip_owner: ?IpOwner = null,
 
     pub const json_field_names = .{
         .ip_address_v4 = "ipAddressV4",

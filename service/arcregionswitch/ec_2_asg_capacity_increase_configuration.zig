@@ -19,7 +19,7 @@ pub const Ec2AsgCapacityIncreaseConfiguration = struct {
     timeout_minutes: i32 = 60,
 
     /// The settings for ungraceful execution.
-    ungraceful: ?Ec2Ungraceful,
+    ungraceful: ?Ec2Ungraceful = null,
 
     pub const json_field_names = .{
         .asgs = "asgs",

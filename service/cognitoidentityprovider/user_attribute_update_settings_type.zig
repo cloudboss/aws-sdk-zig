@@ -24,7 +24,7 @@ pub const UserAttributeUpdateSettingsType = struct {
     /// user pool where `AttributesRequireVerificationBeforeUpdate` is false, API
     /// operations that change attribute values can immediately update a user’s
     /// `email` or `phone_number` attribute.
-    attributes_require_verification_before_update: ?[]const VerifiedAttributeType,
+    attributes_require_verification_before_update: ?[]const VerifiedAttributeType = null,
 
     pub const json_field_names = .{
         .attributes_require_verification_before_update = "AttributesRequireVerificationBeforeUpdate",

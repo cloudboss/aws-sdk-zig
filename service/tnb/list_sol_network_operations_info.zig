@@ -10,7 +10,7 @@ pub const ListSolNetworkOperationsInfo = struct {
     arn: []const u8,
 
     /// Error related to this specific network operation.
-    @"error": ?ProblemDetails,
+    @"error": ?ProblemDetails = null,
 
     /// ID of this network operation.
     id: []const u8,
@@ -19,7 +19,7 @@ pub const ListSolNetworkOperationsInfo = struct {
     lcm_operation_type: LcmOperationType,
 
     /// Metadata related to this network operation.
-    metadata: ?ListSolNetworkOperationsMetadata,
+    metadata: ?ListSolNetworkOperationsMetadata = null,
 
     /// ID of the network instance related to this operation.
     ns_instance_id: []const u8,
@@ -29,7 +29,7 @@ pub const ListSolNetworkOperationsInfo = struct {
 
     /// Type of the update. Only present if the network operation lcmOperationType
     /// is `UPDATE`.
-    update_type: ?UpdateSolNetworkType,
+    update_type: ?UpdateSolNetworkType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -4,10 +4,10 @@ const AutoScalingPolicyStateChangeReason = @import("auto_scaling_policy_state_ch
 /// The status of an automatic scaling policy.
 pub const AutoScalingPolicyStatus = struct {
     /// Indicates the status of the automatic scaling policy.
-    state: ?AutoScalingPolicyState,
+    state: ?AutoScalingPolicyState = null,
 
     /// The reason for a change in status.
-    state_change_reason: ?AutoScalingPolicyStateChangeReason,
+    state_change_reason: ?AutoScalingPolicyStateChangeReason = null,
 
     pub const json_field_names = .{
         .state = "State",

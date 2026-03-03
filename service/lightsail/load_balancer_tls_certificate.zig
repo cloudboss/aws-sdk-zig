@@ -12,18 +12,18 @@ const Tag = @import("tag.zig").Tag;
 /// TLS is just an updated, more secure version of Secure Socket Layer (SSL).
 pub const LoadBalancerTlsCertificate = struct {
     /// The Amazon Resource Name (ARN) of the SSL/TLS certificate.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time when you created your SSL/TLS certificate.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The domain name for your SSL/TLS certificate.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// An array of LoadBalancerTlsCertificateDomainValidationRecord objects
     /// describing the
     /// records.
-    domain_validation_records: ?[]const LoadBalancerTlsCertificateDomainValidationRecord,
+    domain_validation_records: ?[]const LoadBalancerTlsCertificateDomainValidationRecord = null,
 
     /// The validation failure reason, if any, of the certificate.
     ///
@@ -98,40 +98,40 @@ pub const LoadBalancerTlsCertificate = struct {
     /// request. Try to request a certificate again, correcting any spelling errors
     /// or typos that
     /// were in the failed request.
-    failure_reason: ?LoadBalancerTlsCertificateFailureReason,
+    failure_reason: ?LoadBalancerTlsCertificateFailureReason = null,
 
     /// When `true`, the SSL/TLS certificate is attached to the Lightsail load
     /// balancer.
-    is_attached: ?bool,
+    is_attached: ?bool = null,
 
     /// The time when the SSL/TLS certificate was issued.
-    issued_at: ?i64,
+    issued_at: ?i64 = null,
 
     /// The issuer of the certificate.
-    issuer: ?[]const u8,
+    issuer: ?[]const u8 = null,
 
     /// The algorithm used to generate the key pair (the public and private key).
-    key_algorithm: ?[]const u8,
+    key_algorithm: ?[]const u8 = null,
 
     /// The load balancer name where your SSL/TLS certificate is attached.
-    load_balancer_name: ?[]const u8,
+    load_balancer_name: ?[]const u8 = null,
 
     /// The Amazon Web Services Region and Availability Zone where you created your
     /// certificate.
-    location: ?ResourceLocation,
+    location: ?ResourceLocation = null,
 
     /// The name of the SSL/TLS certificate (`my-certificate`).
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The timestamp when the SSL/TLS certificate expires.
-    not_after: ?i64,
+    not_after: ?i64 = null,
 
     /// The timestamp when the SSL/TLS certificate is first valid.
-    not_before: ?i64,
+    not_before: ?i64 = null,
 
     /// An object that describes the status of the certificate renewal managed by
     /// Lightsail.
-    renewal_summary: ?LoadBalancerTlsCertificateRenewalSummary,
+    renewal_summary: ?LoadBalancerTlsCertificateRenewalSummary = null,
 
     /// The resource type (`LoadBalancerTlsCertificate`).
     ///
@@ -181,48 +181,48 @@ pub const LoadBalancerTlsCertificate = struct {
     /// `DiskSnapshot`
     /// ** - A block storage disk
     /// snapshot
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The reason the certificate was revoked. This value is present only when the
     /// certificate
     /// status is `REVOKED`.
-    revocation_reason: ?LoadBalancerTlsCertificateRevocationReason,
+    revocation_reason: ?LoadBalancerTlsCertificateRevocationReason = null,
 
     /// The timestamp when the certificate was revoked. This value is present only
     /// when the
     /// certificate status is `REVOKED`.
-    revoked_at: ?i64,
+    revoked_at: ?i64 = null,
 
     /// The serial number of the certificate.
-    serial: ?[]const u8,
+    serial: ?[]const u8 = null,
 
     /// The algorithm that was used to sign the certificate.
-    signature_algorithm: ?[]const u8,
+    signature_algorithm: ?[]const u8 = null,
 
     /// The validation status of the SSL/TLS certificate. Valid values are below.
-    status: ?LoadBalancerTlsCertificateStatus,
+    status: ?LoadBalancerTlsCertificateStatus = null,
 
     /// The name of the entity that is associated with the public key contained in
     /// the
     /// certificate.
-    subject: ?[]const u8,
+    subject: ?[]const u8 = null,
 
     /// An array of strings that specify the alternate domains (`example2.com`) and
     /// subdomains (`blog.example.com`) for the certificate.
-    subject_alternative_names: ?[]const []const u8,
+    subject_alternative_names: ?[]const []const u8 = null,
 
     /// The support code. Include this code in your email to support when you have
     /// questions about
     /// your Lightsail load balancer or SSL/TLS certificate. This code enables our
     /// support team to
     /// look up your Lightsail information more easily.
-    support_code: ?[]const u8,
+    support_code: ?[]const u8 = null,
 
     /// The tag keys and optional values for the resource. For more information
     /// about tags in
     /// Lightsail, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .arn = "arn",

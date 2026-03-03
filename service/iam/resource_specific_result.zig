@@ -17,7 +17,7 @@ pub const ResourceSpecificResult = struct {
     /// This parameter is returned only for cross-account simulations. This
     /// parameter explains how
     /// each policy type contributes to the resource-specific evaluation decision.
-    eval_decision_details: ?[]const aws.map.MapEntry(PolicyEvaluationDecisionType),
+    eval_decision_details: ?[]const aws.map.MapEntry(PolicyEvaluationDecisionType) = null,
 
     /// The result of the simulation of the simulated API operation on the resource
     /// specified in
@@ -35,7 +35,7 @@ pub const ResourceSpecificResult = struct {
     /// deny overrides any allow. In addition, the deny statement is the only entry
     /// included in the
     /// result.
-    matched_statements: ?[]const Statement,
+    matched_statements: ?[]const Statement = null,
 
     /// A list of context keys that are required by the included input policies but
     /// that were
@@ -49,10 +49,10 @@ pub const ResourceSpecificResult = struct {
     /// included under the `EvaluationResults` section. To discover the context keys
     /// used by a set of policies, you can call
     /// [GetContextKeysForCustomPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html) or [GetContextKeysForPrincipalPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html).
-    missing_context_values: ?[]const []const u8,
+    missing_context_values: ?[]const []const u8 = null,
 
     /// Contains information about the effect that a permissions boundary has on a
     /// policy
     /// simulation when that boundary is applied to an IAM entity.
-    permissions_boundary_decision_detail: ?PermissionsBoundaryDecisionDetail,
+    permissions_boundary_decision_detail: ?PermissionsBoundaryDecisionDetail = null,
 };

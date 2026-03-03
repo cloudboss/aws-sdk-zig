@@ -14,7 +14,7 @@ pub const ContactConfiguration = struct {
     /// Only `CUSTOMER` is currently supported. Any other values other than
     /// `CUSTOMER` will
     /// result in an exception (4xx error).
-    participant_role: ?ParticipantRole,
+    participant_role: ?ParticipantRole = null,
 
     pub const json_field_names = .{
         .contact_id = "ContactId",

@@ -12,19 +12,19 @@ pub const ListIntegrationItem = struct {
 
     /// A list of unique names for active event triggers associated with the
     /// integration.
-    event_trigger_names: ?[]const []const u8,
+    event_trigger_names: ?[]const []const u8 = null,
 
     /// Boolean that shows if the Flow that's associated with the Integration is
     /// created in
     /// Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in
     /// flowDefinition.
-    is_unstructured: ?bool,
+    is_unstructured: ?bool = null,
 
     /// The timestamp of when the integration was most recently edited.
     last_updated_at: i64,
 
     /// The name of the profile object type.
-    object_type_name: ?[]const u8,
+    object_type_name: ?[]const u8 = null,
 
     /// A map in which each key is an event type from an external application such
     /// as Segment or Shopify, and each value is an `ObjectTypeName` (template) used
@@ -34,24 +34,24 @@ pub const ListIntegrationItem = struct {
     /// `ShopifyCreateDraftOrders`,
     /// `ShopifyUpdateDraftOrders`, `ShopifyCreateOrders`, and
     /// `ShopifyUpdatedOrders`.
-    object_type_names: ?[]const aws.map.StringMapEntry,
+    object_type_names: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role. The Integration uses this
     /// role to make
     /// Customer Profiles requests on your behalf.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The scope or boundary of the integration item's applicability.
-    scope: ?Scope,
+    scope: ?Scope = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The URI of the S3 bucket or any other type of data source.
     uri: []const u8,
 
     /// Unique identifier for the workflow.
-    workflow_id: ?[]const u8,
+    workflow_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

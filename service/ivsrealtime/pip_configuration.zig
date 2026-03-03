@@ -11,7 +11,7 @@ pub const PipConfiguration = struct {
     /// to `"true"` (as a string value) in ParticipantTokenConfiguration is placed
     /// in the featured slot. Default: `""` (no featured
     /// participant).
-    featured_participant_attribute: ?[]const u8,
+    featured_participant_attribute: ?[]const u8 = null,
 
     /// Specifies the spacing between participant tiles in pixels. Default:
     /// `0`.
@@ -27,18 +27,18 @@ pub const PipConfiguration = struct {
     /// Participants with `participantOrderAttribute` set to `""` or not specified
     /// are ordered based
     /// on their arrival time into the stage.
-    participant_order_attribute: ?[]const u8,
+    participant_order_attribute: ?[]const u8 = null,
 
     /// Defines PiP behavior when all participants have left: `STATIC` (maintains
     /// original position/size) or `DYNAMIC` (expands to full composition). Default:
     /// `STATIC`.
-    pip_behavior: ?PipBehavior,
+    pip_behavior: ?PipBehavior = null,
 
     /// Specifies the height of the PiP window in pixels. When this is not set
     /// explicitly,
     /// `pipHeight`’s value will be based on the size of the composition and the
     /// aspect ratio of the participant’s video.
-    pip_height: ?i32,
+    pip_height: ?i32 = null,
 
     /// Sets the PiP window’s offset position in pixels from the closest edges
     /// determined by
@@ -49,22 +49,22 @@ pub const PipConfiguration = struct {
     /// attribute set to
     /// `"true"` (as a string value) in ParticipantTokenConfiguration is placed in
     /// the PiP slot. Default: `""` (no PiP participant).
-    pip_participant_attribute: ?[]const u8,
+    pip_participant_attribute: ?[]const u8 = null,
 
     /// Determines the corner position of the PiP window. Default:
     /// `BOTTOM_RIGHT`.
-    pip_position: ?PipPosition,
+    pip_position: ?PipPosition = null,
 
     /// Specifies the width of the PiP window in pixels. When this is not set
     /// explicitly,
     /// `pipWidth`’s value will be based on the size of the composition and the
     /// aspect ratio of the participant’s video.
-    pip_width: ?i32,
+    pip_width: ?i32 = null,
 
     /// Defines how video content fits within the participant tile: `FILL`
     /// (stretched), `COVER` (cropped), or `CONTAIN` (letterboxed). Default:
     /// `COVER`.
-    video_fill_mode: ?VideoFillMode,
+    video_fill_mode: ?VideoFillMode = null,
 
     pub const json_field_names = .{
         .featured_participant_attribute = "featuredParticipantAttribute",

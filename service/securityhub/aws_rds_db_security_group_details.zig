@@ -4,26 +4,26 @@ const AwsRdsDbSecurityGroupIpRange = @import("aws_rds_db_security_group_ip_range
 /// Provides information about an Amazon RDS DB security group.
 pub const AwsRdsDbSecurityGroupDetails = struct {
     /// The ARN for the DB security group.
-    db_security_group_arn: ?[]const u8,
+    db_security_group_arn: ?[]const u8 = null,
 
     /// Provides the description of the DB security group.
-    db_security_group_description: ?[]const u8,
+    db_security_group_description: ?[]const u8 = null,
 
     /// Specifies the name of the DB security group.
-    db_security_group_name: ?[]const u8,
+    db_security_group_name: ?[]const u8 = null,
 
     /// Contains a list of EC2 security groups.
-    ec_2_security_groups: ?[]const AwsRdsDbSecurityGroupEc2SecurityGroup,
+    ec_2_security_groups: ?[]const AwsRdsDbSecurityGroupEc2SecurityGroup = null,
 
     /// Contains a list of IP ranges.
-    ip_ranges: ?[]const AwsRdsDbSecurityGroupIpRange,
+    ip_ranges: ?[]const AwsRdsDbSecurityGroupIpRange = null,
 
     /// Provides the Amazon Web Services ID of the owner of a specific DB security
     /// group.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// Provides VPC ID associated with the DB security group.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .db_security_group_arn = "DbSecurityGroupArn",

@@ -15,7 +15,7 @@ pub const ConnectionSummary = struct {
     domain_unit_id: []const u8,
 
     /// The environment ID of a connection.
-    environment_id: ?[]const u8,
+    environment_id: ?[]const u8 = null,
 
     /// The connection name.
     name: []const u8,
@@ -24,13 +24,13 @@ pub const ConnectionSummary = struct {
     physical_endpoints: []const PhysicalEndpoint,
 
     /// The connection project ID.
-    project_id: ?[]const u8,
+    project_id: ?[]const u8 = null,
 
     /// The connection props.
-    props: ?ConnectionPropertiesOutput,
+    props: ?ConnectionPropertiesOutput = null,
 
     /// The scope of the connection.
-    scope: ?ConnectionScope,
+    scope: ?ConnectionScope = null,
 
     /// The connection type.
     @"type": ConnectionType,

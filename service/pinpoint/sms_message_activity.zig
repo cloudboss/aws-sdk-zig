@@ -5,15 +5,15 @@ const JourneySMSMessage = @import("journey_sms_message.zig").JourneySMSMessage;
 pub const SMSMessageActivity = struct {
     /// Specifies the sender ID and message type for an SMS message that's sent to
     /// participants in a journey.
-    message_config: ?JourneySMSMessage,
+    message_config: ?JourneySMSMessage = null,
 
     /// The unique identifier for the next activity to perform, after the message is
     /// sent.
-    next_activity: ?[]const u8,
+    next_activity: ?[]const u8 = null,
 
     /// The name of the SMS message template to use for the message. If specified,
     /// this value must match the name of an existing message template.
-    template_name: ?[]const u8,
+    template_name: ?[]const u8 = null,
 
     /// The unique identifier for the version of the SMS template to use for the
     /// message. If specified, this value must match the identifier for an existing
@@ -25,7 +25,7 @@ pub const SMSMessageActivity = struct {
     /// version of a template that's been most recently reviewed and approved for
     /// use, depending on your workflow. It isn't necessarily the latest version of
     /// a template.
-    template_version: ?[]const u8,
+    template_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .message_config = "MessageConfig",

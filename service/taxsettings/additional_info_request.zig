@@ -34,60 +34,60 @@ const VietnamAdditionalInfo = @import("vietnam_additional_info.zig").VietnamAddi
 /// `canadaAdditionalInfo` parameter.
 pub const AdditionalInfoRequest = struct {
     /// Additional tax information associated with your TRN in Canada.
-    canada_additional_info: ?CanadaAdditionalInfo,
+    canada_additional_info: ?CanadaAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Egypt.
-    egypt_additional_info: ?EgyptAdditionalInfo,
+    egypt_additional_info: ?EgyptAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Estonia.
-    estonia_additional_info: ?EstoniaAdditionalInfo,
+    estonia_additional_info: ?EstoniaAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Georgia.
-    georgia_additional_info: ?GeorgiaAdditionalInfo,
+    georgia_additional_info: ?GeorgiaAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Greece.
-    greece_additional_info: ?GreeceAdditionalInfo,
+    greece_additional_info: ?GreeceAdditionalInfo = null,
 
-    indonesia_additional_info: ?IndonesiaAdditionalInfo,
+    indonesia_additional_info: ?IndonesiaAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Israel.
-    israel_additional_info: ?IsraelAdditionalInfo,
+    israel_additional_info: ?IsraelAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Italy.
-    italy_additional_info: ?ItalyAdditionalInfo,
+    italy_additional_info: ?ItalyAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Kenya.
-    kenya_additional_info: ?KenyaAdditionalInfo,
+    kenya_additional_info: ?KenyaAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Malaysia.
-    malaysia_additional_info: ?MalaysiaAdditionalInfo,
+    malaysia_additional_info: ?MalaysiaAdditionalInfo = null,
 
     /// Additional tax information associated with your TRN in Poland.
-    poland_additional_info: ?PolandAdditionalInfo,
+    poland_additional_info: ?PolandAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Romania.
-    romania_additional_info: ?RomaniaAdditionalInfo,
+    romania_additional_info: ?RomaniaAdditionalInfo = null,
 
     /// Additional tax information associated with your TRN in Saudi Arabia.
-    saudi_arabia_additional_info: ?SaudiArabiaAdditionalInfo,
+    saudi_arabia_additional_info: ?SaudiArabiaAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in South Korea.
-    south_korea_additional_info: ?SouthKoreaAdditionalInfo,
+    south_korea_additional_info: ?SouthKoreaAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Spain.
-    spain_additional_info: ?SpainAdditionalInfo,
+    spain_additional_info: ?SpainAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Turkey.
-    turkey_additional_info: ?TurkeyAdditionalInfo,
+    turkey_additional_info: ?TurkeyAdditionalInfo = null,
 
     /// Additional tax information associated with your TRN in Ukraine.
-    ukraine_additional_info: ?UkraineAdditionalInfo,
+    ukraine_additional_info: ?UkraineAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Uzbekistan.
-    uzbekistan_additional_info: ?UzbekistanAdditionalInfo,
+    uzbekistan_additional_info: ?UzbekistanAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Vietnam.
-    vietnam_additional_info: ?VietnamAdditionalInfo,
+    vietnam_additional_info: ?VietnamAdditionalInfo = null,
 
     pub const json_field_names = .{
         .canada_additional_info = "canadaAdditionalInfo",

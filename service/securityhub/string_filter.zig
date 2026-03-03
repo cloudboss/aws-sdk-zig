@@ -98,13 +98,13 @@ pub const StringFilter = struct {
     /// APIs.
     /// For more information, see [Automation
     /// rules](https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html) in the *Security Hub User Guide*.
-    comparison: ?StringFilterComparison,
+    comparison: ?StringFilterComparison = null,
 
     /// The string filter value. Filter values are case sensitive. For example, the
     /// product name
     /// for control-based findings is `Security Hub`. If you provide `security hub`
     /// as the filter value, there's no match.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comparison = "Comparison",

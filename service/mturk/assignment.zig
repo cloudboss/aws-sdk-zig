@@ -5,25 +5,25 @@ const AssignmentStatus = @import("assignment_status.zig").AssignmentStatus;
 /// complete the HIT, and contains the results for later retrieval.
 pub const Assignment = struct {
     /// The date and time the Worker accepted the assignment.
-    accept_time: ?i64,
+    accept_time: ?i64 = null,
 
     /// The Worker's answers submitted for the HIT contained in a
     /// QuestionFormAnswers document, if the Worker provides an answer. If
     /// the Worker does not provide any answers, Answer may contain a
     /// QuestionFormAnswers document, or Answer may be empty.
-    answer: ?[]const u8,
+    answer: ?[]const u8 = null,
 
     /// If the Worker has submitted results and the Requester has
     /// approved the results, ApprovalTime is the date and time the Requester
     /// approved the results. This value is omitted from the assignment if
     /// the Requester has not yet approved the results.
-    approval_time: ?i64,
+    approval_time: ?i64 = null,
 
     /// A unique identifier for the assignment.
-    assignment_id: ?[]const u8,
+    assignment_id: ?[]const u8 = null,
 
     /// The status of the assignment.
-    assignment_status: ?AssignmentStatus,
+    assignment_status: ?AssignmentStatus = null,
 
     /// If results have been submitted, AutoApprovalTime is the date
     /// and time the results of the assignment results are considered
@@ -32,33 +32,33 @@ pub const Assignment = struct {
     /// auto-approval delay specified by the Requester in the HIT. This value
     /// is omitted from the assignment if the Worker has not yet submitted
     /// results.
-    auto_approval_time: ?i64,
+    auto_approval_time: ?i64 = null,
 
     /// The date and time of the deadline for the assignment. This
     /// value is derived from the deadline specification for the HIT and the
     /// date and time the Worker accepted the HIT.
-    deadline: ?i64,
+    deadline: ?i64 = null,
 
     /// The ID of the HIT.
-    hit_id: ?[]const u8,
+    hit_id: ?[]const u8 = null,
 
     /// If the Worker has submitted results and the Requester has
     /// rejected the results, RejectionTime is the date and time the
     /// Requester rejected the results.
-    rejection_time: ?i64,
+    rejection_time: ?i64 = null,
 
     /// The feedback string included with the call to the
     /// ApproveAssignment operation or the RejectAssignment operation, if the
     /// Requester approved or rejected the assignment and specified feedback.
-    requester_feedback: ?[]const u8,
+    requester_feedback: ?[]const u8 = null,
 
     /// If the Worker has submitted results, SubmitTime is the date
     /// and time the assignment was submitted. This value is omitted from the
     /// assignment if the Worker has not yet submitted results.
-    submit_time: ?i64,
+    submit_time: ?i64 = null,
 
     /// The ID of the Worker who accepted the HIT.
-    worker_id: ?[]const u8,
+    worker_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .accept_time = "AcceptTime",

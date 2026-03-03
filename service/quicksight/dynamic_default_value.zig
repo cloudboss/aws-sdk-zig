@@ -6,10 +6,10 @@ pub const DynamicDefaultValue = struct {
     default_value_column: ColumnIdentifier,
 
     /// The column that contains the group name.
-    group_name_column: ?ColumnIdentifier,
+    group_name_column: ?ColumnIdentifier = null,
 
     /// The column that contains the username.
-    user_name_column: ?ColumnIdentifier,
+    user_name_column: ?ColumnIdentifier = null,
 
     pub const json_field_names = .{
         .default_value_column = "DefaultValueColumn",

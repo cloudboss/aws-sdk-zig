@@ -2,7 +2,7 @@
 /// software that can be installed on a VM cluster.
 pub const GiVersionSummary = struct {
     /// The GI software version.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .version = "version",

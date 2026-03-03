@@ -5,7 +5,7 @@
 /// in speech before processing the input.
 pub const AudioInputEvent = struct {
     /// An encoded stream of audio.
-    audio_chunk: ?[]const u8,
+    audio_chunk: ?[]const u8 = null,
 
     /// A timestamp set by the client of the date and time that the event
     /// was sent to Amazon Lex V2.
@@ -21,7 +21,7 @@ pub const AudioInputEvent = struct {
 
     /// A unique identifier that your application assigns to the event. You
     /// can use this to identify events in logs.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .audio_chunk = "audioChunk",

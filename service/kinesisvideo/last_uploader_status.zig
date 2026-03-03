@@ -3,17 +3,17 @@ const UploaderStatus = @import("uploader_status.zig").UploaderStatus;
 /// The latest status of a stream’s edge to cloud uploader job.
 pub const LastUploaderStatus = struct {
     /// A description of an uploader job’s latest status.
-    job_status_details: ?[]const u8,
+    job_status_details: ?[]const u8 = null,
 
     /// The timestamp at which the uploader job was last executed and media
     /// collected to the cloud.
-    last_collected_time: ?i64,
+    last_collected_time: ?i64 = null,
 
     /// The timestamp at which the uploader status was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The status of the latest uploader job.
-    uploader_status: ?UploaderStatus,
+    uploader_status: ?UploaderStatus = null,
 
     pub const json_field_names = .{
         .job_status_details = "JobStatusDetails",

@@ -8,12 +8,12 @@ pub const TransformInput = struct {
     /// If your transform data is compressed, specify the compression type. Amazon
     /// SageMaker automatically decompresses the data for the transform job
     /// accordingly. The default value is `None`.
-    compression_type: ?CompressionType,
+    compression_type: ?CompressionType = null,
 
     /// The multipurpose internet mail extension (MIME) type of the data. Amazon
     /// SageMaker uses the MIME type with each http call to transfer data to the
     /// transform job.
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// Describes the location of the channel data, which is, the S3 location of the
     /// input data that the model can consume.
@@ -51,7 +51,7 @@ pub const TransformInput = struct {
     /// TFRecord
     /// data](https://www.tensorflow.org/guide/data#consuming_tfrecord_data) in the
     /// TensorFlow documentation.
-    split_type: ?SplitType,
+    split_type: ?SplitType = null,
 
     pub const json_field_names = .{
         .compression_type = "CompressionType",

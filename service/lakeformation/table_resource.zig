@@ -6,7 +6,7 @@ const TableWildcard = @import("table_wildcard.zig").TableWildcard;
 pub const TableResource = struct {
     /// The identifier for the Data Catalog. By default, it is the account ID of the
     /// caller.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The name of the database for the table. Unique to a Data Catalog. A database
     /// is a set of associated table definitions organized into a logical group. You
@@ -14,13 +14,13 @@ pub const TableResource = struct {
     database_name: []const u8,
 
     /// The name of the table.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A wildcard object representing every table under a database.
     ///
     /// At least one of `TableResource$Name` or `TableResource$TableWildcard` is
     /// required.
-    table_wildcard: ?TableWildcard,
+    table_wildcard: ?TableWildcard = null,
 
     pub const json_field_names = .{
         .catalog_id = "CatalogId",

@@ -2,10 +2,10 @@ pub const ListEnvironmentsRequest = struct {
     /// The maximum number of results to return with a single call. To retrieve the
     /// remaining
     /// results, make another call with the returned `nextToken` value.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The token for the next page of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",

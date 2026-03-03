@@ -16,20 +16,20 @@ pub const Attachment = struct {
     /// `deleteOnTermination`, `volumeName`, `volumeId`,
     /// and `statusReason` (only when the attachment fails to create or
     /// attach).
-    details: ?[]const KeyValuePair,
+    details: ?[]const KeyValuePair = null,
 
     /// The unique identifier for the attachment.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The status of the attachment. Valid values are `PRECREATED`,
     /// `CREATED`, `ATTACHING`, `ATTACHED`,
     /// `DETACHING`, `DETACHED`, `DELETED`, and
     /// `FAILED`.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The type of the attachment, such as `ElasticNetworkInterface`,
     /// `Service Connect`, and `AmazonElasticBlockStorage`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .details = "details",

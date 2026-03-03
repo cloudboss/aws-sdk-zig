@@ -14,7 +14,7 @@
 pub const IPSetReference = struct {
     /// The Amazon Resource Name (ARN) of the resource that you are referencing in
     /// your rule group.
-    reference_arn: ?[]const u8,
+    reference_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .reference_arn = "ReferenceArn",

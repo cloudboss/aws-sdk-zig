@@ -40,7 +40,7 @@ pub const ByteMatchSet = struct {
 
     /// A friendly name or description of the ByteMatchSet. You can't change `Name`
     /// after you create a `ByteMatchSet`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .byte_match_set_id = "ByteMatchSetId",

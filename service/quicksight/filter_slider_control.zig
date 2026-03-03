@@ -5,7 +5,7 @@ const SheetControlSliderType = @import("sheet_control_slider_type.zig").SheetCon
 /// by sliding the toggle.
 pub const FilterSliderControl = struct {
     /// The display options of a control.
-    display_options: ?SliderControlDisplayOptions,
+    display_options: ?SliderControlDisplayOptions = null,
 
     /// The ID of the `FilterSliderControl`.
     filter_control_id: []const u8,
@@ -30,7 +30,7 @@ pub const FilterSliderControl = struct {
     /// * `SINGLE_POINT`: Filter against(equals) a single data point.
     ///
     /// * `RANGE`: Filter data that is in a specified range.
-    @"type": ?SheetControlSliderType,
+    @"type": ?SheetControlSliderType = null,
 
     pub const json_field_names = .{
         .display_options = "DisplayOptions",

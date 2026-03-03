@@ -7,7 +7,7 @@ pub const ExportRevisionsToS3RequestDetails = struct {
     data_set_id: []const u8,
 
     /// Encryption configuration for the export job.
-    encryption: ?ExportServerSideEncryption,
+    encryption: ?ExportServerSideEncryption = null,
 
     /// The destination for the revision.
     revision_destinations: []const RevisionDestinationEntry,

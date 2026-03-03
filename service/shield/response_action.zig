@@ -14,13 +14,13 @@ pub const ResponseAction = struct {
     /// `Block` action.
     ///
     /// You must specify exactly one action, either `Block` or `Count`.
-    block: ?BlockAction,
+    block: ?BlockAction = null,
 
     /// Specifies that Shield Advanced should configure its WAF rules with the WAF
     /// `Count` action.
     ///
     /// You must specify exactly one action, either `Block` or `Count`.
-    count: ?CountAction,
+    count: ?CountAction = null,
 
     pub const json_field_names = .{
         .block = "Block",

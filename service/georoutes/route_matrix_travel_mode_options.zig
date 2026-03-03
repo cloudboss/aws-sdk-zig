@@ -5,16 +5,16 @@ const RouteMatrixTruckOptions = @import("route_matrix_truck_options.zig").RouteM
 /// Travel mode related options for the provided travel mode.
 pub const RouteMatrixTravelModeOptions = struct {
     /// Travel mode options when the provided travel mode is "Car"
-    car: ?RouteMatrixCarOptions,
+    car: ?RouteMatrixCarOptions = null,
 
     /// Travel mode options when the provided travel mode is `Scooter`
     ///
     /// When travel mode is set to `Scooter`, then the avoidance option
     /// `ControlledAccessHighways` defaults to `true`.
-    scooter: ?RouteMatrixScooterOptions,
+    scooter: ?RouteMatrixScooterOptions = null,
 
     /// Travel mode options when the provided travel mode is "Truck"
-    truck: ?RouteMatrixTruckOptions,
+    truck: ?RouteMatrixTruckOptions = null,
 
     pub const json_field_names = .{
         .car = "Car",

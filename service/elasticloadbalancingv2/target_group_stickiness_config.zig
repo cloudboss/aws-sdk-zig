@@ -5,8 +5,8 @@ pub const TargetGroupStickinessConfig = struct {
     /// client should be routed to the same target group. The range is 1-604800
     /// seconds (7 days). You
     /// must specify this value when enabling target group stickiness.
-    duration_seconds: ?i32,
+    duration_seconds: ?i32 = null,
 
     /// Indicates whether target group stickiness is enabled.
-    enabled: ?bool,
+    enabled: ?bool = null,
 };

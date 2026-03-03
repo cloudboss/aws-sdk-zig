@@ -7,7 +7,7 @@ pub const WebAuthnCredentialDescription = struct {
     /// authenticator like a built-in fingerprint scanner, or a cross-platform
     /// device that's not
     /// attached to the device like a Bluetooth security key.
-    authenticator_attachment: ?[]const u8,
+    authenticator_attachment: ?[]const u8 = null,
 
     /// Information about the transport methods of the passkey credential, for
     /// example USB or

@@ -8,23 +8,23 @@ pub const CreateConnectionRequest = struct {
     connection_name: []const u8,
 
     /// The ID of the LAG.
-    lag_id: ?[]const u8,
+    lag_id: ?[]const u8 = null,
 
     /// The location of the connection.
     location: []const u8,
 
     /// The name of the service provider associated with the requested connection.
-    provider_name: ?[]const u8,
+    provider_name: ?[]const u8 = null,
 
     /// Indicates whether you want the connection to support MAC Security (MACsec).
     ///
     /// MAC Security (MACsec) is unavailable on hosted connections. For information
     /// about MAC Security (MACsec) prerequisites, see [MAC Security in Direct
     /// Connect](https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACSec.html) in the *Direct Connect User Guide*.
-    request_mac_sec: ?bool,
+    request_mac_sec: ?bool = null,
 
     /// The tags to associate with the lag.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .bandwidth = "bandwidth",

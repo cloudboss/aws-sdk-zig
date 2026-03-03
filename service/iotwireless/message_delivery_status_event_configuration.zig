@@ -5,12 +5,12 @@ const EventNotificationTopicStatus = @import("event_notification_topic_status.zi
 /// disabling relevant
 /// topics.
 pub const MessageDeliveryStatusEventConfiguration = struct {
-    sidewalk: ?SidewalkEventNotificationConfigurations,
+    sidewalk: ?SidewalkEventNotificationConfigurations = null,
 
     /// Denotes whether the wireless device ID message delivery status event topic
     /// is enabled
     /// or disabled.
-    wireless_device_id_event_topic: ?EventNotificationTopicStatus,
+    wireless_device_id_event_topic: ?EventNotificationTopicStatus = null,
 
     pub const json_field_names = .{
         .sidewalk = "Sidewalk",

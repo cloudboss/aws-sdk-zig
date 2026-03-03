@@ -13,7 +13,7 @@ pub const BlockStorage = struct {
     /// the block storage capability is enabled, EKS Auto Mode will create and
     /// delete EBS
     /// volumes in your Amazon Web Services account.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .enabled = "enabled",

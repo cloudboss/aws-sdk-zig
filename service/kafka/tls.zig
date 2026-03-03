@@ -1,10 +1,10 @@
 /// Details for client authentication using TLS.
 pub const Tls = struct {
     /// List of ACM Certificate Authority ARNs.
-    certificate_authority_arn_list: ?[]const []const u8,
+    certificate_authority_arn_list: ?[]const []const u8 = null,
 
     /// Specifies whether you want to turn on or turn off TLS authentication.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .certificate_authority_arn_list = "CertificateAuthorityArnList",

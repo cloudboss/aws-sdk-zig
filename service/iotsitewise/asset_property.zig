@@ -11,7 +11,7 @@ pub const AssetProperty = struct {
     /// [Mapping industrial data streams to asset
     /// properties](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html) in the
     /// *IoT SiteWise User Guide*.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The data type of the asset property.
     data_type: PropertyDataType,
@@ -19,12 +19,12 @@ pub const AssetProperty = struct {
     /// The data type of the structure for this property. This parameter exists on
     /// properties that
     /// have the `STRUCT` data type.
-    data_type_spec: ?[]const u8,
+    data_type_spec: ?[]const u8 = null,
 
     /// The external ID of the asset property. For more information, see [Using
     /// external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ID of the asset property.
     id: []const u8,
@@ -34,13 +34,13 @@ pub const AssetProperty = struct {
 
     /// The asset property's notification topic and state. For more information, see
     /// [UpdateAssetProperty](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
-    notification: ?PropertyNotification,
+    notification: ?PropertyNotification = null,
 
     /// The structured path to the property from the root of the asset.
-    path: ?[]const AssetPropertyPathSegment,
+    path: ?[]const AssetPropertyPathSegment = null,
 
     /// The unit (such as `Newtons` or `RPM`) of the asset property.
-    unit: ?[]const u8,
+    unit: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alias = "alias",

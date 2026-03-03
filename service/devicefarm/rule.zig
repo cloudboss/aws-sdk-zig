@@ -103,16 +103,16 @@ pub const Rule = struct {
     /// Because remote debugging is [no
     /// longer
     /// supported](https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html), this filter is ignored.
-    attribute: ?DeviceAttribute,
+    attribute: ?DeviceAttribute = null,
 
     /// Specifies how Device Farm compares the rule's attribute to the value. For
     /// the
     /// operators that are supported by each attribute, see the attribute
     /// descriptions.
-    operator: ?RuleOperator,
+    operator: ?RuleOperator = null,
 
     /// The rule's value.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attribute = "attribute",

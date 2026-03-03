@@ -15,7 +15,7 @@ pub const DefinitionS3Location = struct {
 
     /// Optional. The version ID of the workflow definition file in Amazon S3. If
     /// not specified, the latest version is used.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "Bucket",

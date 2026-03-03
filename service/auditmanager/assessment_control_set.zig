@@ -6,28 +6,28 @@ const ControlSetStatus = @import("control_set_status.zig").ControlSetStatus;
 /// Represents a set of controls in an Audit Manager assessment.
 pub const AssessmentControlSet = struct {
     /// The list of controls that's contained with the control set.
-    controls: ?[]const AssessmentControl,
+    controls: ?[]const AssessmentControl = null,
 
     /// The delegations that are associated with the control set.
-    delegations: ?[]const Delegation,
+    delegations: ?[]const Delegation = null,
 
     /// The description for the control set.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the control set in the assessment. This is the control set
     /// name in a
     /// plain string format.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The total number of evidence objects that are uploaded manually to the
     /// control set.
     manual_evidence_count: i32 = 0,
 
     /// The roles that are associated with the control set.
-    roles: ?[]const Role,
+    roles: ?[]const Role = null,
 
     /// The current status of the control set.
-    status: ?ControlSetStatus,
+    status: ?ControlSetStatus = null,
 
     /// The total number of evidence objects that are retrieved automatically for
     /// the control

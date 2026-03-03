@@ -26,94 +26,94 @@ const WaitSucceededDetails = @import("wait_succeeded_details.zig").WaitSucceeded
 
 /// An event that occurred during the execution of a durable function.
 pub const Event = struct {
-    callback_failed_details: ?CallbackFailedDetails,
+    callback_failed_details: ?CallbackFailedDetails = null,
 
-    callback_started_details: ?CallbackStartedDetails,
+    callback_started_details: ?CallbackStartedDetails = null,
 
-    callback_succeeded_details: ?CallbackSucceededDetails,
+    callback_succeeded_details: ?CallbackSucceededDetails = null,
 
-    callback_timed_out_details: ?CallbackTimedOutDetails,
+    callback_timed_out_details: ?CallbackTimedOutDetails = null,
 
-    chained_invoke_failed_details: ?ChainedInvokeFailedDetails,
+    chained_invoke_failed_details: ?ChainedInvokeFailedDetails = null,
 
-    chained_invoke_started_details: ?ChainedInvokeStartedDetails,
+    chained_invoke_started_details: ?ChainedInvokeStartedDetails = null,
 
     /// Details about a chained invocation that was stopped.
-    chained_invoke_stopped_details: ?ChainedInvokeStoppedDetails,
+    chained_invoke_stopped_details: ?ChainedInvokeStoppedDetails = null,
 
     /// Details about a chained invocation that succeeded.
-    chained_invoke_succeeded_details: ?ChainedInvokeSucceededDetails,
+    chained_invoke_succeeded_details: ?ChainedInvokeSucceededDetails = null,
 
     /// Details about a chained invocation that timed out.
-    chained_invoke_timed_out_details: ?ChainedInvokeTimedOutDetails,
+    chained_invoke_timed_out_details: ?ChainedInvokeTimedOutDetails = null,
 
     /// Details about a context that failed.
-    context_failed_details: ?ContextFailedDetails,
+    context_failed_details: ?ContextFailedDetails = null,
 
     /// Details about a context that started.
-    context_started_details: ?ContextStartedDetails,
+    context_started_details: ?ContextStartedDetails = null,
 
     /// Details about a context that succeeded.
-    context_succeeded_details: ?ContextSucceededDetails,
+    context_succeeded_details: ?ContextSucceededDetails = null,
 
     /// The unique identifier for this event. Event IDs increment sequentially.
     event_id: i32 = 1,
 
     /// The date and time when this event occurred, in [ISO-8601
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
-    event_timestamp: ?i64,
+    event_timestamp: ?i64 = null,
 
     /// The type of event that occurred.
-    event_type: ?EventType,
+    event_type: ?EventType = null,
 
     /// Details about an execution that failed.
-    execution_failed_details: ?ExecutionFailedDetails,
+    execution_failed_details: ?ExecutionFailedDetails = null,
 
     /// Details about an execution that started.
-    execution_started_details: ?ExecutionStartedDetails,
+    execution_started_details: ?ExecutionStartedDetails = null,
 
     /// Details about an execution that was stopped.
-    execution_stopped_details: ?ExecutionStoppedDetails,
+    execution_stopped_details: ?ExecutionStoppedDetails = null,
 
     /// Details about an execution that succeeded.
-    execution_succeeded_details: ?ExecutionSucceededDetails,
+    execution_succeeded_details: ?ExecutionSucceededDetails = null,
 
     /// Details about an execution that timed out.
-    execution_timed_out_details: ?ExecutionTimedOutDetails,
+    execution_timed_out_details: ?ExecutionTimedOutDetails = null,
 
     /// The unique identifier for this operation.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Details about a function invocation that completed.
-    invocation_completed_details: ?InvocationCompletedDetails,
+    invocation_completed_details: ?InvocationCompletedDetails = null,
 
     /// The customer-provided name for this operation.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The unique identifier of the parent operation, if this operation is running
     /// within a child context.
-    parent_id: ?[]const u8,
+    parent_id: ?[]const u8 = null,
 
     /// Details about a step that failed.
-    step_failed_details: ?StepFailedDetails,
+    step_failed_details: ?StepFailedDetails = null,
 
     /// Details about a step that started.
-    step_started_details: ?StepStartedDetails,
+    step_started_details: ?StepStartedDetails = null,
 
     /// Details about a step that succeeded.
-    step_succeeded_details: ?StepSucceededDetails,
+    step_succeeded_details: ?StepSucceededDetails = null,
 
     /// The subtype of the event, providing additional categorization.
-    sub_type: ?[]const u8,
+    sub_type: ?[]const u8 = null,
 
     /// Details about a wait operation that was cancelled.
-    wait_cancelled_details: ?WaitCancelledDetails,
+    wait_cancelled_details: ?WaitCancelledDetails = null,
 
     /// Details about a wait operation that started.
-    wait_started_details: ?WaitStartedDetails,
+    wait_started_details: ?WaitStartedDetails = null,
 
     /// Details about a wait operation that succeeded.
-    wait_succeeded_details: ?WaitSucceededDetails,
+    wait_succeeded_details: ?WaitSucceededDetails = null,
 
     pub const json_field_names = .{
         .callback_failed_details = "CallbackFailedDetails",

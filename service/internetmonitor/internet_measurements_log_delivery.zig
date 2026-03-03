@@ -9,7 +9,7 @@ pub const InternetMeasurementsLogDelivery = struct {
     /// for the S3 bucket to store the measurements, and the delivery status. The
     /// delivery status is `ENABLED` or `DISABLED`, depending on
     /// whether you choose to deliver internet measurements to S3 logs.
-    s3_config: ?S3Config,
+    s3_config: ?S3Config = null,
 
     pub const json_field_names = .{
         .s3_config = "S3Config",

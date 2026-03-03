@@ -4,7 +4,7 @@ const MetadataGenerationRunType = @import("metadata_generation_run_type.zig").Me
 /// The statistics of the metadata generation run type.
 pub const MetadataGenerationRunTypeStat = struct {
     /// The error message displayed if the action fails to run.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The status of the metadata generation run type statistics.
     status: MetadataGenerationRunStatus,

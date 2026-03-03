@@ -2,10 +2,10 @@
 /// Marketplace.
 pub const MarketplaceInformation = struct {
     /// The product ID from the Amazon Web Services Marketplace.
-    product_id: ?[]const u8,
+    product_id: ?[]const u8 = null,
 
     /// The product URL from the Amazon Web Services Marketplace.
-    product_url: ?[]const u8,
+    product_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .product_id = "productId",

@@ -6,10 +6,10 @@ const Point = @import("point.zig").Point;
 pub const Geometry = struct {
     /// An axis-aligned coarse representation of the detected item's location on the
     /// image.
-    bounding_box: ?BoundingBox,
+    bounding_box: ?BoundingBox = null,
 
     /// Within the bounding box, a fine-grained polygon around the detected item.
-    polygon: ?[]const Point,
+    polygon: ?[]const Point = null,
 
     pub const json_field_names = .{
         .bounding_box = "BoundingBox",

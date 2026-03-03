@@ -3,10 +3,10 @@ const AwsEc2VpnConnectionOptionsTunnelOptionsDetails = @import("aws_ec_2_vpn_con
 /// VPN connection options.
 pub const AwsEc2VpnConnectionOptionsDetails = struct {
     /// Whether the VPN connection uses static routes only.
-    static_routes_only: ?bool,
+    static_routes_only: ?bool = null,
 
     /// The VPN tunnel options.
-    tunnel_options: ?[]const AwsEc2VpnConnectionOptionsTunnelOptionsDetails,
+    tunnel_options: ?[]const AwsEc2VpnConnectionOptionsTunnelOptionsDetails = null,
 
     pub const json_field_names = .{
         .static_routes_only = "StaticRoutesOnly",

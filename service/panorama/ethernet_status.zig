@@ -3,13 +3,13 @@ const NetworkConnectionStatus = @import("network_connection_status.zig").Network
 /// A device's Ethernet status.
 pub const EthernetStatus = struct {
     /// The device's connection status.
-    connection_status: ?NetworkConnectionStatus,
+    connection_status: ?NetworkConnectionStatus = null,
 
     /// The device's physical address.
-    hw_address: ?[]const u8,
+    hw_address: ?[]const u8 = null,
 
     /// The device's IP address.
-    ip_address: ?[]const u8,
+    ip_address: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connection_status = "ConnectionStatus",

@@ -6,21 +6,21 @@ const LambdaVolumeMount = @import("lambda_volume_mount.zig").LambdaVolumeMount;
 /// devices.
 pub const LambdaContainerParams = struct {
     /// The list of system devices that the container can access.
-    devices: ?[]const LambdaDeviceMount,
+    devices: ?[]const LambdaDeviceMount = null,
 
     /// The memory size of the container, expressed in kilobytes.
     ///
     /// Default: `16384` (16 MB)
-    memory_size_in_kb: ?i32,
+    memory_size_in_kb: ?i32 = null,
 
     /// Whether or not the container can read information from the device's `/sys`
     /// folder.
     ///
     /// Default: `false`
-    mount_ro_sysfs: ?bool,
+    mount_ro_sysfs: ?bool = null,
 
     /// The list of volumes that the container can access.
-    volumes: ?[]const LambdaVolumeMount,
+    volumes: ?[]const LambdaVolumeMount = null,
 
     pub const json_field_names = .{
         .devices = "devices",

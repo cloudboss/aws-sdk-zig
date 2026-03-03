@@ -6,15 +6,15 @@ const OnInputLifecycle = @import("on_input_lifecycle.zig").OnInputLifecycle;
 pub const State = struct {
     /// When entering this state, perform these `actions` if the `condition`
     /// is TRUE.
-    on_enter: ?OnEnterLifecycle,
+    on_enter: ?OnEnterLifecycle = null,
 
     /// When exiting this state, perform these `actions` if the specified
     /// `condition` is `TRUE`.
-    on_exit: ?OnExitLifecycle,
+    on_exit: ?OnExitLifecycle = null,
 
     /// When an input is received and the `condition` is TRUE, perform the specified
     /// `actions`.
-    on_input: ?OnInputLifecycle,
+    on_input: ?OnInputLifecycle = null,
 
     /// The name of the state.
     state_name: []const u8,

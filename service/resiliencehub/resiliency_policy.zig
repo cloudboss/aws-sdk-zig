@@ -18,18 +18,18 @@ const ResiliencyPolicyTier = @import("resiliency_policy_tier.zig").ResiliencyPol
 /// breached**.
 pub const ResiliencyPolicy = struct {
     /// Date and time when the resiliency policy was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Specifies a high-level geographical location constraint for where your
     /// resilience policy
     /// data can be stored.
-    data_location_constraint: ?DataLocationConstraint,
+    data_location_constraint: ?DataLocationConstraint = null,
 
     /// Specifies the estimated cost tier of the resiliency policy.
-    estimated_cost_tier: ?EstimatedCostTier,
+    estimated_cost_tier: ?EstimatedCostTier = null,
 
     /// The resiliency policy.
-    policy: ?[]const aws.map.MapEntry(FailurePolicy),
+    policy: ?[]const aws.map.MapEntry(FailurePolicy) = null,
 
     /// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
     /// is:
@@ -38,22 +38,22 @@ pub const ResiliencyPolicy = struct {
     /// Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the
     /// *Amazon Web Services General Reference* guide.
-    policy_arn: ?[]const u8,
+    policy_arn: ?[]const u8 = null,
 
     /// Description of the resiliency policy.
-    policy_description: ?[]const u8,
+    policy_description: ?[]const u8 = null,
 
     /// The name of the policy
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// Tags assigned to the resource. A tag is a label that you assign to an Amazon
     /// Web Services resource.
     /// Each tag consists of a key/value pair.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The tier for this resiliency policy, ranging from the highest severity
     /// (`MissionCritical`) to lowest (`NonCritical`).
-    tier: ?ResiliencyPolicyTier,
+    tier: ?ResiliencyPolicyTier = null,
 
     pub const json_field_names = .{
         .creation_time = "creationTime",

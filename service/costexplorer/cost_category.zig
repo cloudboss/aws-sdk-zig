@@ -10,10 +10,10 @@ pub const CostCategory = struct {
     /// The unique identifier for your cost category.
     cost_category_arn: []const u8,
 
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// The effective end date of your cost category.
-    effective_end: ?[]const u8,
+    effective_end: ?[]const u8 = null,
 
     /// The effective start date of your cost category.
     effective_start: []const u8,
@@ -23,7 +23,7 @@ pub const CostCategory = struct {
     /// The list of processing statuses for Cost Management products for a specific
     /// cost
     /// category.
-    processing_status: ?[]const CostCategoryProcessingStatus,
+    processing_status: ?[]const CostCategoryProcessingStatus = null,
 
     /// The rules are processed in order. If there are multiple rules that match the
     /// line
@@ -35,7 +35,7 @@ pub const CostCategory = struct {
 
     /// The split charge rules that are used to allocate your charges between your
     /// cost category values.
-    split_charge_rules: ?[]const CostCategorySplitChargeRule,
+    split_charge_rules: ?[]const CostCategorySplitChargeRule = null,
 
     pub const json_field_names = .{
         .cost_category_arn = "CostCategoryArn",

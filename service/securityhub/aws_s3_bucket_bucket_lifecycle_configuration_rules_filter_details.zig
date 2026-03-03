@@ -3,7 +3,7 @@ const AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails = @impo
 /// Identifies the objects that a rule applies to.
 pub const AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails = struct {
     /// The configuration for the filter.
-    predicate: ?AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails,
+    predicate: ?AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails = null,
 
     pub const json_field_names = .{
         .predicate = "Predicate",

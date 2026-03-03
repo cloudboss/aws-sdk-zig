@@ -12,12 +12,12 @@ pub const ApprovalThresholdPolicy = struct {
     /// proposal nor the number of `NO` votes required to reject it before the
     /// duration expires, the proposal is `EXPIRED` and `ProposalActions` aren't
     /// carried out.
-    proposal_duration_in_hours: ?i32,
+    proposal_duration_in_hours: ?i32 = null,
 
     /// Determines whether the vote percentage must be greater than the
     /// `ThresholdPercentage` or must be greater than or equal to the
     /// `ThresholdPercentage` to be approved.
-    threshold_comparator: ?ThresholdComparator,
+    threshold_comparator: ?ThresholdComparator = null,
 
     /// The percentage of votes among all members that must be `YES` for a proposal
     /// to be approved. For example, a `ThresholdPercentage` value of `50` indicates
@@ -25,7 +25,7 @@ pub const ApprovalThresholdPolicy = struct {
     /// `ThresholdPercentage` value of `50` is specified on a network with 10
     /// members, along with a `ThresholdComparator` value of `GREATER_THAN`, this
     /// indicates that 6 `YES` votes are required for the proposal to be approved.
-    threshold_percentage: ?i32,
+    threshold_percentage: ?i32 = null,
 
     pub const json_field_names = .{
         .proposal_duration_in_hours = "ProposalDurationInHours",

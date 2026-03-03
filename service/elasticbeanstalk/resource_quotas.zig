@@ -5,17 +5,17 @@ const ResourceQuota = @import("resource_quota.zig").ResourceQuota;
 /// Elastic Beanstalk resource limits for this account.
 pub const ResourceQuotas = struct {
     /// The quota for applications in the AWS account.
-    application_quota: ?ResourceQuota,
+    application_quota: ?ResourceQuota = null,
 
     /// The quota for application versions in the AWS account.
-    application_version_quota: ?ResourceQuota,
+    application_version_quota: ?ResourceQuota = null,
 
     /// The quota for configuration templates in the AWS account.
-    configuration_template_quota: ?ResourceQuota,
+    configuration_template_quota: ?ResourceQuota = null,
 
     /// The quota for custom platforms in the AWS account.
-    custom_platform_quota: ?ResourceQuota,
+    custom_platform_quota: ?ResourceQuota = null,
 
     /// The quota for environments in the AWS account.
-    environment_quota: ?ResourceQuota,
+    environment_quota: ?ResourceQuota = null,
 };

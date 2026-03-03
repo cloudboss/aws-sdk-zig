@@ -11,7 +11,7 @@ const TcpRetryPolicyEvent = @import("tcp_retry_policy_event.zig").TcpRetryPolicy
 /// documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on).
 pub const GrpcRetryPolicy = struct {
     /// Specify at least one of the valid values.
-    grpc_retry_events: ?[]const GrpcRetryPolicyEvent,
+    grpc_retry_events: ?[]const GrpcRetryPolicyEvent = null,
 
     /// Specify at least one of the following values.
     ///
@@ -25,7 +25,7 @@ pub const GrpcRetryPolicy = struct {
     ///
     /// * **stream-error** – Retry on refused
     /// stream
-    http_retry_events: ?[]const []const u8,
+    http_retry_events: ?[]const []const u8 = null,
 
     /// The maximum number of retry attempts.
     max_retries: i64,
@@ -36,7 +36,7 @@ pub const GrpcRetryPolicy = struct {
     /// Specify a valid value. The event occurs before any processing of a request
     /// has started and is encountered when the upstream is temporarily or
     /// permanently unavailable.
-    tcp_retry_events: ?[]const TcpRetryPolicyEvent,
+    tcp_retry_events: ?[]const TcpRetryPolicyEvent = null,
 
     pub const json_field_names = .{
         .grpc_retry_events = "grpcRetryEvents",

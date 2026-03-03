@@ -10,32 +10,32 @@ pub const TreatmentResource = struct {
     /// The delivery configuration settings for sending the treatment through a
     /// custom channel. This object is required if the MessageConfiguration object
     /// for the treatment specifies a CustomMessage object.
-    custom_delivery_configuration: ?CustomDeliveryConfiguration,
+    custom_delivery_configuration: ?CustomDeliveryConfiguration = null,
 
     /// The unique identifier for the treatment.
     id: []const u8,
 
     /// The message configuration settings for the treatment.
-    message_configuration: ?MessageConfiguration,
+    message_configuration: ?MessageConfiguration = null,
 
     /// The schedule settings for the treatment.
-    schedule: ?Schedule,
+    schedule: ?Schedule = null,
 
     /// The allocated percentage of users (segment members) that the treatment is
     /// sent to.
     size_percent: i32,
 
     /// The current status of the treatment.
-    state: ?CampaignState,
+    state: ?CampaignState = null,
 
     /// The message template to use for the treatment.
-    template_configuration: ?TemplateConfiguration,
+    template_configuration: ?TemplateConfiguration = null,
 
     /// The custom description of the treatment.
-    treatment_description: ?[]const u8,
+    treatment_description: ?[]const u8 = null,
 
     /// The custom name of the treatment.
-    treatment_name: ?[]const u8,
+    treatment_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .custom_delivery_configuration = "CustomDeliveryConfiguration",

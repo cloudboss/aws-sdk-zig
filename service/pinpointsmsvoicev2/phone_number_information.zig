@@ -45,13 +45,13 @@ pub const PhoneNumberInformation = struct {
     phone_number_arn: []const u8,
 
     /// The unique identifier for the phone number.
-    phone_number_id: ?[]const u8,
+    phone_number_id: ?[]const u8 = null,
 
     /// The unique identifier of the pool associated with the phone number.
-    pool_id: ?[]const u8,
+    pool_id: ?[]const u8 = null,
 
     /// The unique identifier for the registration.
-    registration_id: ?[]const u8,
+    registration_id: ?[]const u8 = null,
 
     /// When set to false and an end recipient sends a message that begins with HELP
     /// or STOP to one of your dedicated numbers, End User Messaging SMS
@@ -66,11 +66,11 @@ pub const PhoneNumberInformation = struct {
     status: NumberStatus,
 
     /// The Amazon Resource Name (ARN) of the two way channel.
-    two_way_channel_arn: ?[]const u8,
+    two_way_channel_arn: ?[]const u8 = null,
 
     /// An optional IAM Role Arn for a service to assume, to be able to post inbound
     /// SMS messages.
-    two_way_channel_role: ?[]const u8,
+    two_way_channel_role: ?[]const u8 = null,
 
     /// By default this is set to false. When set to true you can receive incoming
     /// text messages from your end recipients using the TwoWayChannelArn.

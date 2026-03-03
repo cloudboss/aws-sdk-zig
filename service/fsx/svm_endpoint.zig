@@ -4,13 +4,13 @@
 /// are the `Iscsi`, `Management`, `Nfs`,
 /// and `Smb` endpoints.
 pub const SvmEndpoint = struct {
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// The SVM endpoint's IPv4 addresses.
-    ip_addresses: ?[]const []const u8,
+    ip_addresses: ?[]const []const u8 = null,
 
     /// The SVM endpoint's IPv6 addresses.
-    ipv_6_addresses: ?[]const []const u8,
+    ipv_6_addresses: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .dns_name = "DNSName",

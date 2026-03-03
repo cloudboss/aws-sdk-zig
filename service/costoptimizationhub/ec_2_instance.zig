@@ -5,10 +5,10 @@ const ResourceCostCalculation = @import("resource_cost_calculation.zig").Resourc
 /// resource configuration for a recommendation.
 pub const Ec2Instance = struct {
     /// The EC2 instance configuration used for recommendations.
-    configuration: ?Ec2InstanceConfiguration,
+    configuration: ?Ec2InstanceConfiguration = null,
 
     /// Cost impact of the recommendation.
-    cost_calculation: ?ResourceCostCalculation,
+    cost_calculation: ?ResourceCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

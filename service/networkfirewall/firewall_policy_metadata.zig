@@ -6,11 +6,11 @@
 /// calling DescribeFirewallPolicy.
 pub const FirewallPolicyMetadata = struct {
     /// The Amazon Resource Name (ARN) of the firewall policy.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The descriptive name of the firewall policy. You can't change the name of a
     /// firewall policy after you create it.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

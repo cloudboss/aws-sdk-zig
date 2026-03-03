@@ -5,17 +5,17 @@ pub const DocumentRequires = struct {
     name: []const u8,
 
     /// The document type of the required SSM document.
-    require_type: ?[]const u8,
+    require_type: ?[]const u8 = null,
 
     /// The document version required by the current document.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     /// An optional field specifying the version of the artifact associated with the
     /// document. For
     /// example, 12.6. This value is unique across all versions of a document, and
     /// can't be
     /// changed.
-    version_name: ?[]const u8,
+    version_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

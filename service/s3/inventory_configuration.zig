@@ -14,7 +14,7 @@ pub const InventoryConfiguration = struct {
     /// Specifies an inventory filter. The inventory only includes objects that meet
     /// the filter's
     /// criteria.
-    filter: ?InventoryFilter,
+    filter: ?InventoryFilter = null,
 
     /// The ID used to identify the inventory configuration.
     id: []const u8,
@@ -32,7 +32,7 @@ pub const InventoryConfiguration = struct {
     is_enabled: bool,
 
     /// Contains the optional fields that are included in the inventory results.
-    optional_fields: ?[]const InventoryOptionalField,
+    optional_fields: ?[]const InventoryOptionalField = null,
 
     /// Specifies the schedule for generating inventory results.
     schedule: InventorySchedule,

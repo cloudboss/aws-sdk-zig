@@ -12,14 +12,14 @@ pub const InstanceMetadataOptions = struct {
     ///
     /// If you specify a value of `disabled`, you will not be able to access
     /// your instance metadata.
-    http_endpoint: ?InstanceMetadataEndpointState,
+    http_endpoint: ?InstanceMetadataEndpointState = null,
 
     /// The desired HTTP PUT response hop limit for instance metadata requests. The
     /// larger the
     /// number, the further instance metadata requests can travel.
     ///
     /// Default: 1
-    http_put_response_hop_limit: ?i32,
+    http_put_response_hop_limit: ?i32 = null,
 
     /// The state of token usage for your instance metadata requests. If the
     /// parameter is not
@@ -40,5 +40,5 @@ pub const InstanceMetadataOptions = struct {
     /// always returns the version 2.0 credentials; the version 1.0 credentials are
     /// not
     /// available.
-    http_tokens: ?InstanceMetadataHttpTokensState,
+    http_tokens: ?InstanceMetadataHttpTokensState = null,
 };

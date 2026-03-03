@@ -7,7 +7,7 @@ pub const Counts = struct {
     count: i64 = 0,
 
     /// The key associated with this group
-    group_key: ?GroupKey,
+    group_key: ?GroupKey = null,
 
     pub const json_field_names = .{
         .count = "count",

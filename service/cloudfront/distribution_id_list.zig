@@ -6,7 +6,7 @@ pub const DistributionIdList = struct {
     is_truncated: bool,
 
     /// Contains the distribution IDs in the list.
-    items: ?[]const []const u8,
+    items: ?[]const []const u8 = null,
 
     /// The value provided in the `Marker` request field.
     marker: []const u8,
@@ -16,7 +16,7 @@ pub const DistributionIdList = struct {
 
     /// Contains the value that you should use in the `Marker` field of a subsequent
     /// request to continue listing distribution IDs where you left off.
-    next_marker: ?[]const u8,
+    next_marker: ?[]const u8 = null,
 
     /// The total number of distribution IDs returned in the response.
     quantity: i32,

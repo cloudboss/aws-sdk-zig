@@ -12,7 +12,7 @@ pub const Organization = struct {
     /// For more information about ARNs in Organizations, see [ARN
     /// Formats Supported by
     /// Organizations](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies) in the *Amazon Web Services Service Authorization Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Do not use. This field is deprecated and doesn't provide complete
     /// information
@@ -21,7 +21,7 @@ pub const Organization = struct {
     /// To determine the policies that are enabled and available for use in your
     /// organization,
     /// use the ListRoots operation instead.
-    available_policy_types: ?[]const PolicyTypeSummary,
+    available_policy_types: ?[]const PolicyTypeSummary = null,
 
     /// Specifies the functionality that currently is available to the organization.
     /// If set to
@@ -32,14 +32,14 @@ pub const Organization = struct {
     /// functionality is available. For more information, see [Enabling all features
     /// in your
     /// organization](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html) in the *Organizations User Guide*.
-    feature_set: ?OrganizationFeatureSet,
+    feature_set: ?OrganizationFeatureSet = null,
 
     /// The unique identifier (ID) of an organization.
     ///
     /// The [regex pattern](http://wikipedia.org/wiki/regex) for an organization ID
     /// string requires "o-"
     /// followed by from 10 to 32 lowercase letters or digits.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the account that is designated as the
     /// management
@@ -48,19 +48,19 @@ pub const Organization = struct {
     /// For more information about ARNs in Organizations, see [ARN
     /// Formats Supported by
     /// Organizations](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies) in the *Amazon Web Services Service Authorization Reference*.
-    master_account_arn: ?[]const u8,
+    master_account_arn: ?[]const u8 = null,
 
     /// The email address that is associated with the Amazon Web Services account
     /// that is designated as the
     /// management account for the organization.
-    master_account_email: ?[]const u8,
+    master_account_email: ?[]const u8 = null,
 
     /// The unique identifier (ID) of the management account of an organization.
     ///
     /// The [regex pattern](http://wikipedia.org/wiki/regex) for an account ID
     /// string requires exactly 12
     /// digits.
-    master_account_id: ?[]const u8,
+    master_account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -5,7 +5,7 @@ const SSEAlgorithm = @import("sse_algorithm.zig").SSEAlgorithm;
 pub const Encryption = struct {
     /// The Amazon Resource Name (ARN) of the KMS key used for encryption when using
     /// customer-managed keys.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The server-side encryption algorithm used for encrypting data in the S3
     /// Table integration.

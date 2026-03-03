@@ -18,17 +18,17 @@ pub const ResolverConfig = struct {
     ///
     /// * **DISABLED:** Autodefined rules for reverse DNS lookups are
     /// disabled.
-    autodefined_reverse: ?ResolverAutodefinedReverseStatus,
+    autodefined_reverse: ?ResolverAutodefinedReverseStatus = null,
 
     /// ID for the Resolver configuration.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The owner account ID of the Amazon Virtual Private Cloud VPC.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The ID of the Amazon Virtual Private Cloud VPC or a Route 53 Profile that
     /// you're configuring Resolver for.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .autodefined_reverse = "AutodefinedReverse",

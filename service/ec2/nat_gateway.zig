@@ -12,7 +12,7 @@ const Tag = @import("tag.zig").Tag;
 pub const NatGateway = struct {
     /// The proxy appliances attached to the NAT Gateway for filtering and
     /// inspecting traffic to prevent data exfiltration.
-    attached_appliances: ?[]const NatGatewayAttachedAppliance,
+    attached_appliances: ?[]const NatGatewayAttachedAppliance = null,
 
     /// For regional NAT gateways only: Indicates whether Amazon Web Services
     /// automatically manages AZ coverage. When enabled, the NAT gateway associates
@@ -27,7 +27,7 @@ pub const NatGateway = struct {
     ///
     /// For more information, see [Regional NAT gateways for automatic multi-AZ
     /// expansion](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html) in the *Amazon VPC User Guide*.
-    auto_provision_zones: ?AutoProvisionZonesState,
+    auto_provision_zones: ?AutoProvisionZonesState = null,
 
     /// For regional NAT gateways only: Indicates whether Amazon Web Services
     /// automatically allocates additional Elastic IP addresses (EIPs) in an AZ when
@@ -36,7 +36,7 @@ pub const NatGateway = struct {
     ///
     /// For more information, see [Regional NAT gateways for automatic multi-AZ
     /// expansion](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html) in the *Amazon VPC User Guide*.
-    auto_scaling_ips: ?AutoScalingIpsState,
+    auto_scaling_ips: ?AutoScalingIpsState = null,
 
     /// Indicates whether this is a zonal (single-AZ) or regional (multi-AZ) NAT
     /// gateway.
@@ -49,23 +49,23 @@ pub const NatGateway = struct {
     ///
     /// For more information, see [Regional NAT gateways for automatic multi-AZ
     /// expansion](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html) in the *Amazon VPC User Guide*.
-    availability_mode: ?AvailabilityMode,
+    availability_mode: ?AvailabilityMode = null,
 
     /// Indicates whether the NAT gateway supports public or private connectivity.
-    connectivity_type: ?ConnectivityType,
+    connectivity_type: ?ConnectivityType = null,
 
     /// The date and time the NAT gateway was created.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The date and time the NAT gateway was deleted, if applicable.
-    delete_time: ?i64,
+    delete_time: ?i64 = null,
 
     /// If the NAT gateway could not be created, specifies the error code for the
     /// failure.
     /// (`InsufficientFreeAddressesInSubnet` | `Gateway.NotAttached` |
     /// `InvalidAllocationID.NotFound` | `Resource.AlreadyAssociated` |
     /// `InternalError` | `InvalidSubnetID.NotFound`)
-    failure_code: ?[]const u8,
+    failure_code: ?[]const u8 = null,
 
     /// If the NAT gateway could not be created, specifies the error message for the
     /// failure, that corresponds to the error code.
@@ -87,22 +87,22 @@ pub const NatGateway = struct {
     ///
     /// * For InvalidSubnetID.NotFound: "The specified subnet subnet-xxxxxxxx does
     ///   not exist or could not be found."
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// Information about the IP addresses and network interface associated with the
     /// NAT gateway.
-    nat_gateway_addresses: ?[]const NatGatewayAddress,
+    nat_gateway_addresses: ?[]const NatGatewayAddress = null,
 
     /// The ID of the NAT gateway.
-    nat_gateway_id: ?[]const u8,
+    nat_gateway_id: ?[]const u8 = null,
 
     /// Reserved. If you need to sustain traffic greater than the [documented
     /// limits](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways),
     /// contact Amazon Web Services Support.
-    provisioned_bandwidth: ?ProvisionedBandwidth,
+    provisioned_bandwidth: ?ProvisionedBandwidth = null,
 
     /// For regional NAT gateways only, this is the ID of the NAT gateway.
-    route_table_id: ?[]const u8,
+    route_table_id: ?[]const u8 = null,
 
     /// The state of the NAT gateway.
     ///
@@ -122,14 +122,14 @@ pub const NatGateway = struct {
     ///
     /// * `deleted`: The NAT gateway has been terminated and is no longer processing
     /// traffic.
-    state: ?NatGatewayState,
+    state: ?NatGatewayState = null,
 
     /// The ID of the subnet in which the NAT gateway is located.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// The tags for the NAT gateway.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the VPC in which the NAT gateway is located.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

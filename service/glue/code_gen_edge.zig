@@ -7,7 +7,7 @@ pub const CodeGenEdge = struct {
     target: []const u8,
 
     /// The target of the edge.
-    target_parameter: ?[]const u8,
+    target_parameter: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .source = "Source",

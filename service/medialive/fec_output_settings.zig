@@ -5,10 +5,10 @@ pub const FecOutputSettings = struct {
     /// Parameter D from SMPTE 2022-1. The height of the FEC protection matrix. The
     /// number of transport stream packets per column error correction packet. Must
     /// be between 4 and 20, inclusive.
-    column_depth: ?i32,
+    column_depth: ?i32 = null,
 
     /// Enables column only or column and row based FEC
-    include_fec: ?FecOutputIncludeFec,
+    include_fec: ?FecOutputIncludeFec = null,
 
     /// Parameter L from SMPTE 2022-1. The width of the FEC protection matrix. Must
     /// be between 1 and 20, inclusive. If only Column FEC is used, then larger
@@ -16,7 +16,7 @@ pub const FecOutputSettings = struct {
     /// transport stream packets per row error correction packet, and the value must
     /// be between 4 and 20, inclusive, if includeFec is columnAndRow. If includeFec
     /// is column, this value must be 1 to 20, inclusive.
-    row_length: ?i32,
+    row_length: ?i32 = null,
 
     pub const json_field_names = .{
         .column_depth = "ColumnDepth",

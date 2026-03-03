@@ -10,7 +10,7 @@ pub const CanaryScheduleInput = struct {
     /// continues
     /// making runs until you stop it. If you omit this field, the default of 0 is
     /// used.
-    duration_in_seconds: ?i64,
+    duration_in_seconds: ?i64 = null,
 
     /// A `rate` expression or a `cron` expression that defines how often the canary
     /// is to run.
@@ -37,7 +37,7 @@ pub const CanaryScheduleInput = struct {
     expression: []const u8,
 
     /// A structure that contains the retry configuration for a canary
-    retry_config: ?RetryConfigInput,
+    retry_config: ?RetryConfigInput = null,
 
     pub const json_field_names = .{
         .duration_in_seconds = "DurationInSeconds",

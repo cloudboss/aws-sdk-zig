@@ -7,17 +7,17 @@ pub const UpdateAutomationRulesRequestItem = struct {
     /// One or more actions to update finding fields if a finding matches the
     /// conditions
     /// specified in `Criteria`.
-    actions: ?[]const AutomationRulesAction,
+    actions: ?[]const AutomationRulesAction = null,
 
     /// A set of ASFF finding field attributes and corresponding expected values
     /// that
     /// Security Hub uses to filter findings. If a rule is enabled and a finding
     /// matches the conditions specified in
     /// this parameter, Security Hub applies the rule action to the finding.
-    criteria: ?AutomationRulesFindingFilters,
+    criteria: ?AutomationRulesFindingFilters = null,
 
     /// A description of the rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Specifies whether a rule is the last to be applied with respect to a finding
     /// that matches the rule criteria. This is useful when a finding
@@ -26,20 +26,20 @@ pub const UpdateAutomationRulesRequestItem = struct {
     /// finding that matches
     /// the rule criteria and doesn't evaluate other rules for the finding. By
     /// default, a rule isn't terminal.
-    is_terminal: ?bool,
+    is_terminal: ?bool = null,
 
     /// The Amazon Resource Name (ARN) for the rule.
     rule_arn: []const u8,
 
     /// The name of the rule.
-    rule_name: ?[]const u8,
+    rule_name: ?[]const u8 = null,
 
     /// An integer ranging from 1 to 1000 that represents the order in which the
     /// rule action is
     /// applied to findings. Security Hub applies rules with lower values for this
     /// parameter
     /// first.
-    rule_order: ?i32,
+    rule_order: ?i32 = null,
 
     /// Whether the rule is active after it is created. If
     /// this parameter is equal to `ENABLED`, Security Hub starts applying the rule
@@ -48,7 +48,7 @@ pub const UpdateAutomationRulesRequestItem = struct {
     /// parameter after creating a rule, use [
     /// `BatchUpdateAutomationRules`
     /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html).
-    rule_status: ?RuleStatus,
+    rule_status: ?RuleStatus = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

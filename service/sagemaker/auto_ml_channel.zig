@@ -15,18 +15,18 @@ pub const AutoMLChannel = struct {
     /// training and validation channel types, see [How to specify training and
     /// validation
     /// datasets](https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-data-sources-training-or-validation).
-    channel_type: ?AutoMLChannelType,
+    channel_type: ?AutoMLChannelType = null,
 
     /// You can use `Gzip` or `None`. The default value is `None`.
-    compression_type: ?CompressionType,
+    compression_type: ?CompressionType = null,
 
     /// The content type of the data from the input source. You can use
     /// `text/csv;header=present` or `x-application/vnd.amazon+parquet`. The default
     /// value is `text/csv;header=present`.
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// The data source for an AutoML channel.
-    data_source: ?AutoMLDataSource,
+    data_source: ?AutoMLDataSource = null,
 
     /// If specified, this column name indicates which column of the dataset should
     /// be treated as sample weights for use by the objective metric during the
@@ -41,7 +41,7 @@ pub const AutoMLChannel = struct {
     ///
     /// Support for sample weights is available in
     /// [Ensembling](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html) mode only.
-    sample_weight_attribute_name: ?[]const u8,
+    sample_weight_attribute_name: ?[]const u8 = null,
 
     /// The name of the target variable in supervised learning, usually represented
     /// by 'y'.

@@ -9,7 +9,7 @@ pub const ReferenceListItem = struct {
     creation_time: i64,
 
     /// The reference's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The reference's ID.
     id: []const u8,
@@ -18,13 +18,13 @@ pub const ReferenceListItem = struct {
     md_5: []const u8,
 
     /// The reference's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The reference's store ID.
     reference_store_id: []const u8,
 
     /// The reference's status.
-    status: ?ReferenceStatus,
+    status: ?ReferenceStatus = null,
 
     /// When the reference was updated.
     update_time: i64,

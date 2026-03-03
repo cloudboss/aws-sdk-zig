@@ -8,7 +8,7 @@ pub const LFTagPolicyResource = struct {
     /// Catalog is the persistent metadata store. It contains database definitions,
     /// table definitions, and other control information to manage your Lake
     /// Formation environment.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// A list of LF-tag conditions or a saved expression that apply to the
     /// resource's LF-tag policy.
@@ -18,7 +18,7 @@ pub const LFTagPolicyResource = struct {
     /// assigned LF-Tags
     /// match the expression body of the saved expression under the provided
     /// `ExpressionName`.
-    expression_name: ?[]const u8,
+    expression_name: ?[]const u8 = null,
 
     /// The resource type for which the LF-tag policy applies.
     resource_type: ResourceType,

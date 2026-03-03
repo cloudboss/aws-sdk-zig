@@ -4,10 +4,10 @@ const MetricSourceProvider = @import("metric_source_provider.zig").MetricSourceP
 /// commercial software licenses.
 pub const MetricSource = struct {
     /// The name of the metric source provider.
-    provider: ?MetricSourceProvider,
+    provider: ?MetricSourceProvider = null,
 
     /// The ARN of the metric source provider.
-    provider_arn: ?[]const u8,
+    provider_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .provider = "provider",

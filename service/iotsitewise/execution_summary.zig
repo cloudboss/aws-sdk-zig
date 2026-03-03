@@ -5,13 +5,13 @@ const TargetResource = @import("target_resource.zig").TargetResource;
 /// Contains the execution summary of the computation model.
 pub const ExecutionSummary = struct {
     /// The type of action exectued.
-    action_type: ?[]const u8,
+    action_type: ?[]const u8 = null,
 
     /// The time the process ended.
-    execution_end_time: ?i64,
+    execution_end_time: ?i64 = null,
 
     /// The execution entity version associated with the summary.
-    execution_entity_version: ?[]const u8,
+    execution_entity_version: ?[]const u8 = null,
 
     /// The ID of the execution.
     execution_id: []const u8,
@@ -23,7 +23,7 @@ pub const ExecutionSummary = struct {
     execution_status: ExecutionStatus,
 
     /// The detailed resource this execution resolves to.
-    resolve_to: ?ResolveTo,
+    resolve_to: ?ResolveTo = null,
 
     target_resource: TargetResource,
 

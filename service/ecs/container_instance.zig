@@ -18,45 +18,45 @@ pub const ContainerInstance = struct {
     /// The status of the most recent agent update. If an update wasn't ever
     /// requested, this
     /// value is `NULL`.
-    agent_update_status: ?AgentUpdateStatus,
+    agent_update_status: ?AgentUpdateStatus = null,
 
     /// The resources attached to a container instance, such as an elastic network
     /// interface.
-    attachments: ?[]const Attachment,
+    attachments: ?[]const Attachment = null,
 
     /// The attributes set for the container instance, either by the Amazon ECS
     /// container
     /// agent at instance registration or manually with the
     /// [PutAttributes](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAttributes.html)
     /// operation.
-    attributes: ?[]const Attribute,
+    attributes: ?[]const Attribute = null,
 
     /// The capacity provider that's associated with the container instance.
-    capacity_provider_name: ?[]const u8,
+    capacity_provider_name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the container instance. For more
     /// information about
     /// the ARN format, see [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids) in the *Amazon ECS Developer
     /// Guide*.
-    container_instance_arn: ?[]const u8,
+    container_instance_arn: ?[]const u8 = null,
 
     /// The ID of the container instance. For Amazon EC2 instances, this value is
     /// the Amazon
     /// EC2 instance ID. For external instances, this value is the Amazon Web
     /// Services Systems
     /// Manager managed instance ID.
-    ec_2_instance_id: ?[]const u8,
+    ec_2_instance_id: ?[]const u8 = null,
 
     /// An object representing the health status of the container instance.
-    health_status: ?ContainerInstanceHealthStatus,
+    health_status: ?ContainerInstanceHealthStatus = null,
 
     /// The number of tasks on the container instance that are in the `PENDING`
     /// status.
     pending_tasks_count: i32 = 0,
 
     /// The Unix timestamp for the time when the container instance was registered.
-    registered_at: ?i64,
+    registered_at: ?i64 = null,
 
     /// For CPU and memory resource types, this parameter describes the amount of
     /// each
@@ -69,7 +69,7 @@ pub const ContainerInstance = struct {
     /// parameter describes the ports that were reserved by the Amazon ECS container
     /// agent when
     /// it registered the container instance with Amazon ECS.
-    registered_resources: ?[]const Resource,
+    registered_resources: ?[]const Resource = null,
 
     /// For CPU and memory resource types, this parameter describes the remaining
     /// CPU and
@@ -82,7 +82,7 @@ pub const ContainerInstance = struct {
     /// have reserved port mappings on the host (with the `host` or
     /// `bridge` network mode). Any port that's not specified here is available
     /// for new tasks.
-    remaining_resources: ?[]const Resource,
+    remaining_resources: ?[]const Resource = null,
 
     /// The number of tasks on the container instance that have a desired status
     /// (`desiredStatus`) of `RUNNING`.
@@ -111,10 +111,10 @@ pub const ContainerInstance = struct {
     /// possible. For more information, see [Container instance
     /// draining](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html) in the *Amazon
     /// Elastic Container Service Developer Guide*.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The reason that the container instance reached its current status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The metadata that you apply to the container instance to help you categorize
     /// and
@@ -149,7 +149,7 @@ pub const ContainerInstance = struct {
     /// this prefix. Tags with this prefix do not count against your tags per
     /// resource
     /// limit.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The version counter for the container instance. Every time a container
     /// instance
@@ -168,7 +168,7 @@ pub const ContainerInstance = struct {
     /// The version information for the Amazon ECS container agent and Docker daemon
     /// running
     /// on the container instance.
-    version_info: ?VersionInfo,
+    version_info: ?VersionInfo = null,
 
     pub const json_field_names = .{
         .agent_connected = "agentConnected",

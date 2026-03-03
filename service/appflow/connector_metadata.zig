@@ -25,69 +25,69 @@ const ZendeskMetadata = @import("zendesk_metadata.zig").ZendeskMetadata;
 /// `supportedRegions`, `privateLinkServiceUrl`, and so on.
 pub const ConnectorMetadata = struct {
     /// The connector metadata specific to Amplitude.
-    amplitude: ?AmplitudeMetadata,
+    amplitude: ?AmplitudeMetadata = null,
 
     /// The connector metadata specific to Amazon Connect Customer Profiles.
-    customer_profiles: ?CustomerProfilesMetadata,
+    customer_profiles: ?CustomerProfilesMetadata = null,
 
     /// The connector metadata specific to Datadog.
-    datadog: ?DatadogMetadata,
+    datadog: ?DatadogMetadata = null,
 
     /// The connector metadata specific to Dynatrace.
-    dynatrace: ?DynatraceMetadata,
+    dynatrace: ?DynatraceMetadata = null,
 
     /// The connector metadata specific to Amazon EventBridge.
-    event_bridge: ?EventBridgeMetadata,
+    event_bridge: ?EventBridgeMetadata = null,
 
     /// The connector metadata specific to Google Analytics.
-    google_analytics: ?GoogleAnalyticsMetadata,
+    google_analytics: ?GoogleAnalyticsMetadata = null,
 
     /// The connector metadata specific to Amazon Honeycode.
-    honeycode: ?HoneycodeMetadata,
+    honeycode: ?HoneycodeMetadata = null,
 
     /// The connector metadata specific to Infor Nexus.
-    infor_nexus: ?InforNexusMetadata,
+    infor_nexus: ?InforNexusMetadata = null,
 
     /// The connector metadata specific to Marketo.
-    marketo: ?MarketoMetadata,
+    marketo: ?MarketoMetadata = null,
 
     /// The connector metadata specific to Salesforce Pardot.
-    pardot: ?PardotMetadata,
+    pardot: ?PardotMetadata = null,
 
     /// The connector metadata specific to Amazon Redshift.
-    redshift: ?RedshiftMetadata,
+    redshift: ?RedshiftMetadata = null,
 
     /// The connector metadata specific to Amazon S3.
-    s3: ?S3Metadata,
+    s3: ?S3Metadata = null,
 
     /// The connector metadata specific to Salesforce.
-    salesforce: ?SalesforceMetadata,
+    salesforce: ?SalesforceMetadata = null,
 
-    sapo_data: ?SAPODataMetadata,
+    sapo_data: ?SAPODataMetadata = null,
 
     /// The connector metadata specific to ServiceNow.
-    service_now: ?ServiceNowMetadata,
+    service_now: ?ServiceNowMetadata = null,
 
     /// The connector metadata specific to Singular.
-    singular: ?SingularMetadata,
+    singular: ?SingularMetadata = null,
 
     /// The connector metadata specific to Slack.
-    slack: ?SlackMetadata,
+    slack: ?SlackMetadata = null,
 
     /// The connector metadata specific to Snowflake.
-    snowflake: ?SnowflakeMetadata,
+    snowflake: ?SnowflakeMetadata = null,
 
     /// The connector metadata specific to Trend Micro.
-    trendmicro: ?TrendmicroMetadata,
+    trendmicro: ?TrendmicroMetadata = null,
 
     /// The connector metadata specific to Upsolver.
-    upsolver: ?UpsolverMetadata,
+    upsolver: ?UpsolverMetadata = null,
 
     /// The connector metadata specific to Veeva.
-    veeva: ?VeevaMetadata,
+    veeva: ?VeevaMetadata = null,
 
     /// The connector metadata specific to Zendesk.
-    zendesk: ?ZendeskMetadata,
+    zendesk: ?ZendeskMetadata = null,
 
     pub const json_field_names = .{
         .amplitude = "Amplitude",

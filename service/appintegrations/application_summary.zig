@@ -3,28 +3,28 @@ const ApplicationType = @import("application_type.zig").ApplicationType;
 /// Summary information about the Application.
 pub const ApplicationSummary = struct {
     /// The type of application.
-    application_type: ?ApplicationType,
+    application_type: ?ApplicationType = null,
 
     /// The Amazon Resource Name (ARN) of the Application.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time when the application was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// A unique identifier for the Application.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Indicates whether the application is a service.
     is_service: bool = false,
 
     /// The time when the application was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name of the application.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The namespace of the application.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_type = "ApplicationType",

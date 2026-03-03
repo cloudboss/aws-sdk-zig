@@ -8,10 +8,10 @@
 /// ](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html) in the *Amazon GuardDuty User Guide*.
 pub const NetworkAutonomousSystem = struct {
     /// The name associated with the AS.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The unique number that identifies the AS.
-    number: ?i32,
+    number: ?i32 = null,
 
     pub const json_field_names = .{
         .name = "Name",

@@ -31,7 +31,7 @@ pub const ContactChannel = struct {
     /// * VOICE
     ///
     /// * EMAIL
-    @"type": ?ChannelType,
+    @"type": ?ChannelType = null,
 
     pub const json_field_names = .{
         .activation_status = "ActivationStatus",

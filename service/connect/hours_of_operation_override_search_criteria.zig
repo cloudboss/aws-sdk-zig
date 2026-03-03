@@ -4,15 +4,15 @@ const StringCondition = @import("string_condition.zig").StringCondition;
 /// The search criteria to be used to return hours of operations overrides.
 pub const HoursOfOperationOverrideSearchCriteria = struct {
     /// A list of conditions which would be applied together with an AND condition.
-    and_conditions: ?[]const HoursOfOperationOverrideSearchCriteria,
+    and_conditions: ?[]const HoursOfOperationOverrideSearchCriteria = null,
 
     /// A leaf node condition which can be used to specify a date condition.
-    date_condition: ?DateCondition,
+    date_condition: ?DateCondition = null,
 
     /// A list of conditions which would be applied together with an OR condition.
-    or_conditions: ?[]const HoursOfOperationOverrideSearchCriteria,
+    or_conditions: ?[]const HoursOfOperationOverrideSearchCriteria = null,
 
-    string_condition: ?StringCondition,
+    string_condition: ?StringCondition = null,
 
     pub const json_field_names = .{
         .and_conditions = "AndConditions",

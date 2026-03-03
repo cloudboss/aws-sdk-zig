@@ -5,17 +5,17 @@
 /// in the *Amazon EMR Management Guide*.
 pub const KerberosAttributes = struct {
     /// The Active Directory password for `ADDomainJoinUser`.
-    ad_domain_join_password: ?[]const u8,
+    ad_domain_join_password: ?[]const u8 = null,
 
     /// Required only when establishing a cross-realm trust with an Active Directory
     /// domain. A
     /// user with sufficient privileges to join resources to the domain.
-    ad_domain_join_user: ?[]const u8,
+    ad_domain_join_user: ?[]const u8 = null,
 
     /// Required only when establishing a cross-realm trust with a KDC in a
     /// different realm. The
     /// cross-realm principal password, which must be identical across realms.
-    cross_realm_trust_principal_password: ?[]const u8,
+    cross_realm_trust_principal_password: ?[]const u8 = null,
 
     /// The password used within the cluster for the kadmin service on the
     /// cluster-dedicated

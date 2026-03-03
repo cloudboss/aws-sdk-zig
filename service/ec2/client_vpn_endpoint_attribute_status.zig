@@ -3,8 +3,8 @@ const ClientVpnEndpointAttributeStatusCode = @import("client_vpn_endpoint_attrib
 /// Describes the status of the Client VPN endpoint attribute.
 pub const ClientVpnEndpointAttributeStatus = struct {
     /// The status code.
-    code: ?ClientVpnEndpointAttributeStatusCode,
+    code: ?ClientVpnEndpointAttributeStatusCode = null,
 
     /// The status message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

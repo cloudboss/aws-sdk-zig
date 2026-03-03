@@ -8,13 +8,13 @@ pub const GroupMembers = struct {
     /// A list of sub groups that belong to a group. For example, the sub groups
     /// "Research", "Engineering", and "Sales and Marketing" all belong to the group
     /// "Company".
-    member_groups: ?[]const MemberGroup,
+    member_groups: ?[]const MemberGroup = null,
 
     /// A list of users that belong to a group. For example, a list of interns all
     /// belong to the "Interns" group.
-    member_users: ?[]const MemberUser,
+    member_users: ?[]const MemberUser = null,
 
-    s_3_path_for_group_members: ?S3,
+    s_3_path_for_group_members: ?S3 = null,
 
     pub const json_field_names = .{
         .member_groups = "memberGroups",

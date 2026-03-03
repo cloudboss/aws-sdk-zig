@@ -7,7 +7,7 @@ pub const AutoScalingTargetTrackingScalingPolicyConfigurationDescription = struc
     /// scalable resource. Otherwise, scale in is enabled and the target tracking
     /// policy can
     /// remove capacity from the scalable resource. The default value is false.
-    disable_scale_in: ?bool,
+    disable_scale_in: ?bool = null,
 
     /// The amount of time, in seconds, after a scale in activity completes before
     /// another
@@ -20,7 +20,7 @@ pub const AutoScalingTargetTrackingScalingPolicyConfigurationDescription = struc
     /// the cooldown period after a scale-in, application auto scaling scales out
     /// your scalable
     /// target immediately.
-    scale_in_cooldown: ?i32,
+    scale_in_cooldown: ?i32 = null,
 
     /// The amount of time, in seconds, after a scale out activity completes before
     /// another
@@ -31,7 +31,7 @@ pub const AutoScalingTargetTrackingScalingPolicyConfigurationDescription = struc
     /// as part of the desired capacity for the next scale out. You should
     /// continuously (but not
     /// excessively) scale out.
-    scale_out_cooldown: ?i32,
+    scale_out_cooldown: ?i32 = null,
 
     /// The target value for the metric. The range is 8.515920e-109 to 1.174271e+108
     /// (Base 10)

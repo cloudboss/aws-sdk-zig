@@ -4,7 +4,7 @@ pub const UntagResourceRequest = struct {
     arn: []const u8,
 
     /// The keys of the tags that you want to remove from the resource.
-    tag_keys: ?[]const []const u8,
+    tag_keys: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

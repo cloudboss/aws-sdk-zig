@@ -7,20 +7,20 @@ const DateTimeRange = @import("date_time_range.zig").DateTimeRange;
 /// Defines the parameters for querying Reserved Instance coverage data,
 /// including grouping options, metrics, and sorting preferences.
 pub const ReservationCoverageQuery = struct {
-    filter: ?Expression,
+    filter: ?Expression = null,
 
     /// The time granularity of the retrieved data: `HOURLY`, `DAILY`, or `MONTHLY`.
-    granularity: ?Granularity,
+    granularity: ?Granularity = null,
 
     /// Specifies how to group the Reserved Instance coverage data, such as by
     /// service, Region, or instance type.
-    group_by: ?[]const GroupDefinition,
+    group_by: ?[]const GroupDefinition = null,
 
     /// The coverage metrics to include in the results.
     ///
     /// Valid values for ReservationCoverageQuery metrics are `Hour`, `Unit`, and
     /// `Cost`.
-    metrics: ?[]const MetricName,
+    metrics: ?[]const MetricName = null,
 
     time_range: DateTimeRange,
 

@@ -9,23 +9,23 @@ const OAuth2PropertiesInput = @import("o_auth_2_properties_input.zig").OAuth2Pro
 pub const AuthenticationConfigurationInput = struct {
     /// A structure containing the authentication configuration in the
     /// CreateConnection request.
-    authentication_type: ?AuthenticationType,
+    authentication_type: ?AuthenticationType = null,
 
     /// The credentials used when the authentication type is basic authentication.
-    basic_authentication_credentials: ?BasicAuthenticationCredentials,
+    basic_authentication_credentials: ?BasicAuthenticationCredentials = null,
 
     /// The credentials used when the authentication type is custom authentication.
-    custom_authentication_credentials: ?[]const aws.map.StringMapEntry,
+    custom_authentication_credentials: ?[]const aws.map.StringMapEntry = null,
 
     /// The ARN of the KMS key used to encrypt the connection. Only taken an as
     /// input in the request and stored in the Secret Manager.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The properties for OAuth2 authentication in the CreateConnection request.
-    o_auth_2_properties: ?OAuth2PropertiesInput,
+    o_auth_2_properties: ?OAuth2PropertiesInput = null,
 
     /// The secret manager ARN to store credentials in the CreateConnection request.
-    secret_arn: ?[]const u8,
+    secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authentication_type = "AuthenticationType",

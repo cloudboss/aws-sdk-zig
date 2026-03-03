@@ -5,7 +5,7 @@ pub const Filter = struct {
     /// `EntityId`.
     ///
     /// For `ListChangeSets`, the supported values are as follows:
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// `ListEntities` - This is a list of unique `EntityId`s.
     ///
@@ -33,7 +33,7 @@ pub const Filter = struct {
     ///
     /// * `AfterEndTime` - The supported `ValueList` is a list of
     /// all change sets that ended after the filter value.
-    value_list: ?[]const []const u8,
+    value_list: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

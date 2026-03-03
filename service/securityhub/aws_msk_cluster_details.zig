@@ -4,7 +4,7 @@ const AwsMskClusterClusterInfoDetails = @import("aws_msk_cluster_cluster_info_de
 /// MSK) cluster.
 pub const AwsMskClusterDetails = struct {
     /// Provides information about a cluster.
-    cluster_info: ?AwsMskClusterClusterInfoDetails,
+    cluster_info: ?AwsMskClusterClusterInfoDetails = null,
 
     pub const json_field_names = .{
         .cluster_info = "ClusterInfo",

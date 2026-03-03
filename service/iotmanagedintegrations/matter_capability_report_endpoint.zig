@@ -3,7 +3,7 @@ const MatterCapabilityReportCluster = @import("matter_capability_report_cluster.
 /// Matter endpoint used in capability report.
 pub const MatterCapabilityReportEndpoint = struct {
     /// Semantic information related to endpoint.
-    client_clusters: ?[]const []const u8,
+    client_clusters: ?[]const []const u8 = null,
 
     /// Matter clusters used in capability report.
     clusters: []const MatterCapabilityReportCluster,
@@ -15,10 +15,10 @@ pub const MatterCapabilityReportEndpoint = struct {
     id: []const u8,
 
     /// Heirachy of child endpoints contained in the given endpoint.
-    parts: ?[]const []const u8,
+    parts: ?[]const []const u8 = null,
 
     /// Semantic information related to endpoint.
-    semantic_tags: ?[]const []const u8,
+    semantic_tags: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .client_clusters = "clientClusters",

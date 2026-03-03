@@ -4,19 +4,19 @@ const ClosedDaysRule = @import("closed_days_rule.zig").ClosedDaysRule;
 /// configured first and SendingSchedule should be set to true.
 pub const ClosedDays = struct {
     /// Rules for the Custom channel.
-    custom: ?[]const ClosedDaysRule,
+    custom: ?[]const ClosedDaysRule = null,
 
     /// Rules for the Email channel.
-    email: ?[]const ClosedDaysRule,
+    email: ?[]const ClosedDaysRule = null,
 
     /// Rules for the Push channel.
-    push: ?[]const ClosedDaysRule,
+    push: ?[]const ClosedDaysRule = null,
 
     /// Rules for the SMS channel.
-    sms: ?[]const ClosedDaysRule,
+    sms: ?[]const ClosedDaysRule = null,
 
     /// Rules for the Voice channel.
-    voice: ?[]const ClosedDaysRule,
+    voice: ?[]const ClosedDaysRule = null,
 
     pub const json_field_names = .{
         .custom = "CUSTOM",

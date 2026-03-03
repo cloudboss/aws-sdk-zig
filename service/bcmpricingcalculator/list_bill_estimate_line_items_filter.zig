@@ -4,7 +4,7 @@ const ListBillEstimateLineItemsFilterName = @import("list_bill_estimate_line_ite
 /// Represents a filter for listing bill estimate line items.
 pub const ListBillEstimateLineItemsFilter = struct {
     /// The match option for the filter (e.g., equals, contains).
-    match_option: ?MatchOption,
+    match_option: ?MatchOption = null,
 
     /// The name of the filter attribute.
     name: ListBillEstimateLineItemsFilterName,

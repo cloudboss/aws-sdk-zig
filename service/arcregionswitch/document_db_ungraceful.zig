@@ -4,7 +4,7 @@ const DocumentDbUngracefulBehavior = @import("document_db_ungraceful_behavior.zi
 /// global clusters.
 pub const DocumentDbUngraceful = struct {
     /// The settings for ungraceful execution.
-    ungraceful: ?DocumentDbUngracefulBehavior,
+    ungraceful: ?DocumentDbUngracefulBehavior = null,
 
     pub const json_field_names = .{
         .ungraceful = "ungraceful",

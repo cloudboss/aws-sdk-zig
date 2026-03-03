@@ -1,7 +1,7 @@
 /// The properties (metadata) of a column.
 pub const ColumnMetadata = struct {
     /// The default value of the column.
-    column_default: ?[]const u8,
+    column_default: ?[]const u8 = null,
 
     /// A value that indicates whether the column is case-sensitive.
     is_case_sensitive: bool = false,
@@ -13,13 +13,13 @@ pub const ColumnMetadata = struct {
     is_signed: bool = false,
 
     /// The label for the column.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// The length of the column.
     length: i32 = 0,
 
     /// The name of the column.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A value that indicates whether the column is nullable.
     nullable: i32 = 0,
@@ -31,13 +31,13 @@ pub const ColumnMetadata = struct {
     scale: i32 = 0,
 
     /// The name of the schema that contains the table that includes the column.
-    schema_name: ?[]const u8,
+    schema_name: ?[]const u8 = null,
 
     /// The name of the table that includes the column.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     /// The database-specific data type of the column.
-    type_name: ?[]const u8,
+    type_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .column_default = "columnDefault",

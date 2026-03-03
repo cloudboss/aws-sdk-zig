@@ -5,13 +5,13 @@ pub const AwsIamPolicyVersion = struct {
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    create_date: ?[]const u8,
+    create_date: ?[]const u8 = null,
 
     /// Whether the version is the default version.
-    is_default_version: ?bool,
+    is_default_version: ?bool = null,
 
     /// The identifier of the policy version.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .create_date = "CreateDate",

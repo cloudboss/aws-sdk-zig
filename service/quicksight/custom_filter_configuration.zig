@@ -8,7 +8,7 @@ pub const CustomFilterConfiguration = struct {
     /// The category value for the filter.
     ///
     /// This field is mutually exclusive to `ParameterName`.
-    category_value: ?[]const u8,
+    category_value: ?[]const u8 = null,
 
     /// The match operator that is used to determine if a filter should be applied.
     match_operator: CategoryFilterMatchOperator,
@@ -26,12 +26,12 @@ pub const CustomFilterConfiguration = struct {
     /// The parameter whose value should be used for the filter value.
     ///
     /// This field is mutually exclusive to `CategoryValue`.
-    parameter_name: ?[]const u8,
+    parameter_name: ?[]const u8 = null,
 
     /// Select all of the values. Null is not the assigned value of select all.
     ///
     /// * `FILTER_ALL_VALUES`
-    select_all_options: ?CategoryFilterSelectAllOptions,
+    select_all_options: ?CategoryFilterSelectAllOptions = null,
 
     pub const json_field_names = .{
         .category_value = "CategoryValue",

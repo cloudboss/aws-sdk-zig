@@ -4,5 +4,5 @@ const RouteServerBfdState = @import("route_server_bfd_state.zig").RouteServerBfd
 /// session.
 pub const RouteServerBfdStatus = struct {
     /// The operational status of the BFD session.
-    status: ?RouteServerBfdState,
+    status: ?RouteServerBfdState = null,
 };

@@ -5,7 +5,7 @@ const VisualCustomizationFieldsConfiguration = @import("visual_customization_fie
 pub const DashboardCustomizationVisualOptions = struct {
     /// The configuration that controls field customization options available to
     /// dashboard readers for a visual.
-    fields_configuration: ?VisualCustomizationFieldsConfiguration,
+    fields_configuration: ?VisualCustomizationFieldsConfiguration = null,
 
     pub const json_field_names = .{
         .fields_configuration = "FieldsConfiguration",

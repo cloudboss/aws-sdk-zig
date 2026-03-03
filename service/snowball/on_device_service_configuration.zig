@@ -8,17 +8,17 @@ const TGWOnDeviceServiceConfiguration = @import("tgw_on_device_service_configura
 /// Snow Family device.
 pub const OnDeviceServiceConfiguration = struct {
     /// The configuration of EKS Anywhere on the Snow Family device.
-    eks_on_device_service: ?EKSOnDeviceServiceConfiguration,
+    eks_on_device_service: ?EKSOnDeviceServiceConfiguration = null,
 
     /// Represents the NFS (Network File System) service on a Snow Family device.
-    nfs_on_device_service: ?NFSOnDeviceServiceConfiguration,
+    nfs_on_device_service: ?NFSOnDeviceServiceConfiguration = null,
 
     /// Configuration for Amazon S3 compatible storage on Snow family devices.
-    s3_on_device_service: ?S3OnDeviceServiceConfiguration,
+    s3_on_device_service: ?S3OnDeviceServiceConfiguration = null,
 
     /// Represents the Storage Gateway service Tape Gateway type on a Snow Family
     /// device.
-    tgw_on_device_service: ?TGWOnDeviceServiceConfiguration,
+    tgw_on_device_service: ?TGWOnDeviceServiceConfiguration = null,
 
     pub const json_field_names = .{
         .eks_on_device_service = "EKSOnDeviceService",

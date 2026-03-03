@@ -5,10 +5,10 @@ pub const BatchDeviceErrorResponseItem = struct {
     app_id: []const u8,
 
     /// The field that caused the error.
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// A description of why the device operation failed.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .app_id = "appId",

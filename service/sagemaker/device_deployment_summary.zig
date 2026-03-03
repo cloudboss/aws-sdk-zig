@@ -3,25 +3,25 @@ const DeviceDeploymentStatus = @import("device_deployment_status.zig").DeviceDep
 /// Contains information summarizing device details and deployment status.
 pub const DeviceDeploymentSummary = struct {
     /// The name of the deployed stage.
-    deployed_stage_name: ?[]const u8,
+    deployed_stage_name: ?[]const u8 = null,
 
     /// The time when the deployment on the device started.
-    deployment_start_time: ?i64,
+    deployment_start_time: ?i64 = null,
 
     /// The description of the device.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ARN of the device.
     device_arn: []const u8,
 
     /// The deployment status of the device.
-    device_deployment_status: ?DeviceDeploymentStatus,
+    device_deployment_status: ?DeviceDeploymentStatus = null,
 
     /// The detailed error message for the deployoment status result.
-    device_deployment_status_message: ?[]const u8,
+    device_deployment_status_message: ?[]const u8 = null,
 
     /// The name of the fleet to which the device belongs to.
-    device_fleet_name: ?[]const u8,
+    device_fleet_name: ?[]const u8 = null,
 
     /// The name of the device.
     device_name: []const u8,

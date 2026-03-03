@@ -7,7 +7,7 @@ pub const ContainerProvider = struct {
     id: []const u8,
 
     /// The information about the container cluster.
-    info: ?ContainerInfo,
+    info: ?ContainerInfo = null,
 
     /// The type of the container provider. Amazon EKS is the only supported type as
     /// of

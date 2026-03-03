@@ -16,7 +16,7 @@ pub const TableCell = struct {
     /// The actual value or content within a table cell. A table cell could contain
     /// a date
     /// value of a year, or a string value of text, for example.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .header = "Header",

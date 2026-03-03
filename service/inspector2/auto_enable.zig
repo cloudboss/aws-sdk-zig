@@ -5,7 +5,7 @@ pub const AutoEnable = struct {
     /// Represents whether code repository scans are automatically enabled for new
     /// members of
     /// your Amazon Inspector organization.
-    code_repository: ?bool,
+    code_repository: ?bool = null,
 
     /// Represents whether Amazon EC2 scans are automatically enabled for new
     /// members of your Amazon Inspector
@@ -20,12 +20,12 @@ pub const AutoEnable = struct {
     /// Represents whether Amazon Web Services Lambda standard scans are
     /// automatically enabled
     /// for new members of your Amazon Inspector organization.
-    lambda: ?bool,
+    lambda: ?bool = null,
 
     /// Represents whether Lambda code scans are automatically enabled for new
     /// members of your
     /// Amazon Inspector organization.
-    lambda_code: ?bool,
+    lambda_code: ?bool = null,
 
     pub const json_field_names = .{
         .code_repository = "codeRepository",

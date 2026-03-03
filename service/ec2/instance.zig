@@ -34,13 +34,13 @@ const VirtualizationType = @import("virtualization_type.zig").VirtualizationType
 pub const Instance = struct {
     /// The AMI launch index, which can be used to find this instance in the launch
     /// group.
-    ami_launch_index: ?i32,
+    ami_launch_index: ?i32 = null,
 
     /// The architecture of the image.
-    architecture: ?ArchitectureValues,
+    architecture: ?ArchitectureValues = null,
 
     /// Any block device mapping entries for the instance.
-    block_device_mappings: ?[]const InstanceBlockDeviceMapping,
+    block_device_mappings: ?[]const InstanceBlockDeviceMapping = null,
 
     /// The boot mode that was specified by the AMI. If the value is
     /// `uefi-preferred`,
@@ -55,34 +55,34 @@ pub const Instance = struct {
     /// modes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in
     /// the
     /// *Amazon EC2 User Guide*.
-    boot_mode: ?BootModeValues,
+    boot_mode: ?BootModeValues = null,
 
     /// The ID of the Capacity Block.
     ///
     /// For P5 instances, a Capacity Block ID refers to a group of instances. For
     /// Trn2u
     /// instances, a capacity block ID refers to an EC2 UltraServer.
-    capacity_block_id: ?[]const u8,
+    capacity_block_id: ?[]const u8 = null,
 
     /// The ID of the Capacity Reservation.
-    capacity_reservation_id: ?[]const u8,
+    capacity_reservation_id: ?[]const u8 = null,
 
     /// Information about the Capacity Reservation targeting option.
-    capacity_reservation_specification: ?CapacityReservationSpecificationResponse,
+    capacity_reservation_specification: ?CapacityReservationSpecificationResponse = null,
 
     /// The idempotency token you provided when you launched the instance, if
     /// applicable.
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The CPU options for the instance.
-    cpu_options: ?CpuOptions,
+    cpu_options: ?CpuOptions = null,
 
     /// The boot mode that is used to boot the instance at launch or start. For more
     /// information, see [Boot
     /// modes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in
     /// the
     /// *Amazon EC2 User Guide*.
-    current_instance_boot_mode: ?InstanceBootModeValues,
+    current_instance_boot_mode: ?InstanceBootModeValues = null,
 
     /// Indicates whether the instance is optimized for Amazon EBS I/O. This
     /// optimization
@@ -91,101 +91,101 @@ pub const Instance = struct {
     /// provide optimal I/O performance. This optimization isn't available with all
     /// instance
     /// types. Additional usage charges apply when using an EBS Optimized instance.
-    ebs_optimized: ?bool,
+    ebs_optimized: ?bool = null,
 
     /// Deprecated.
     ///
     /// Amazon Elastic Graphics reached end of life on January 8, 2024.
-    elastic_gpu_associations: ?[]const ElasticGpuAssociation,
+    elastic_gpu_associations: ?[]const ElasticGpuAssociation = null,
 
     /// Deprecated
     ///
     /// Amazon Elastic Inference is no longer available.
-    elastic_inference_accelerator_associations: ?[]const ElasticInferenceAcceleratorAssociation,
+    elastic_inference_accelerator_associations: ?[]const ElasticInferenceAcceleratorAssociation = null,
 
     /// Specifies whether enhanced networking with ENA is enabled.
-    ena_support: ?bool,
+    ena_support: ?bool = null,
 
     /// Indicates whether the instance is enabled for Amazon Web Services Nitro
     /// Enclaves.
-    enclave_options: ?EnclaveOptions,
+    enclave_options: ?EnclaveOptions = null,
 
     /// Indicates whether the instance is enabled for hibernation.
-    hibernation_options: ?HibernationOptions,
+    hibernation_options: ?HibernationOptions = null,
 
     /// The hypervisor type of the instance. The value `xen` is used for both Xen
     /// and Nitro hypervisors.
-    hypervisor: ?HypervisorType,
+    hypervisor: ?HypervisorType = null,
 
     /// The IAM instance profile associated with the instance, if
     /// applicable.
-    iam_instance_profile: ?IamInstanceProfile,
+    iam_instance_profile: ?IamInstanceProfile = null,
 
     /// The ID of the AMI used to launch the instance.
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// The ID of the instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// Indicates whether this is a Spot Instance or a Scheduled Instance.
-    instance_lifecycle: ?InstanceLifecycleType,
+    instance_lifecycle: ?InstanceLifecycleType = null,
 
     /// The instance type.
-    instance_type: ?InstanceType,
+    instance_type: ?InstanceType = null,
 
     /// The IPv6 address assigned to the instance.
-    ipv_6_address: ?[]const u8,
+    ipv_6_address: ?[]const u8 = null,
 
     /// The kernel associated with this instance, if applicable.
-    kernel_id: ?[]const u8,
+    kernel_id: ?[]const u8 = null,
 
     /// The name of the key pair, if this instance was launched with an associated
     /// key
     /// pair.
-    key_name: ?[]const u8,
+    key_name: ?[]const u8 = null,
 
     /// The time that the instance was last launched. To determine the time that
     /// instance was first launched,
     /// see the attachment time for the primary network interface.
-    launch_time: ?i64,
+    launch_time: ?i64 = null,
 
     /// The license configurations for the instance.
-    licenses: ?[]const LicenseConfiguration,
+    licenses: ?[]const LicenseConfiguration = null,
 
     /// Provides information on the recovery and maintenance options of your
     /// instance.
-    maintenance_options: ?InstanceMaintenanceOptions,
+    maintenance_options: ?InstanceMaintenanceOptions = null,
 
     /// The metadata options for the instance.
-    metadata_options: ?InstanceMetadataOptionsResponse,
+    metadata_options: ?InstanceMetadataOptionsResponse = null,
 
     /// The monitoring for the instance.
-    monitoring: ?Monitoring,
+    monitoring: ?Monitoring = null,
 
     /// The network interfaces for the instance.
-    network_interfaces: ?[]const InstanceNetworkInterface,
+    network_interfaces: ?[]const InstanceNetworkInterface = null,
 
     /// Contains settings for the network performance options for your instance.
-    network_performance_options: ?InstanceNetworkPerformanceOptions,
+    network_performance_options: ?InstanceNetworkPerformanceOptions = null,
 
     /// The service provider that manages the instance.
-    operator: ?OperatorResponse,
+    operator: ?OperatorResponse = null,
 
     /// The Amazon Resource Name (ARN) of the Outpost.
-    outpost_arn: ?[]const u8,
+    outpost_arn: ?[]const u8 = null,
 
     /// The location where the instance launched, if applicable.
-    placement: ?Placement,
+    placement: ?Placement = null,
 
     /// The platform. This value is `windows` for Windows instances; otherwise, it
     /// is empty.
-    platform: ?PlatformValues,
+    platform: ?PlatformValues = null,
 
     /// The platform details value for the instance. For more information, see [AMI
     /// billing information
     /// fields](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html) in the
     /// *Amazon EC2 User Guide*.
-    platform_details: ?[]const u8,
+    platform_details: ?[]const u8 = null,
 
     /// [IPv4 only] The private DNS hostname name assigned to the instance. This DNS
     /// hostname
@@ -199,23 +199,23 @@ pub const Instance = struct {
     /// using the Amazon-provided DNS server in your VPC, your custom domain name
     /// servers must
     /// resolve the hostname as appropriate.
-    private_dns_name: ?[]const u8,
+    private_dns_name: ?[]const u8 = null,
 
     /// The options for the instance hostname.
-    private_dns_name_options: ?PrivateDnsNameOptionsResponse,
+    private_dns_name_options: ?PrivateDnsNameOptionsResponse = null,
 
     /// The private IPv4 address assigned to the instance.
-    private_ip_address: ?[]const u8,
+    private_ip_address: ?[]const u8 = null,
 
     /// The product codes attached to this instance, if applicable.
-    product_codes: ?[]const ProductCode,
+    product_codes: ?[]const ProductCode = null,
 
     /// The public DNS name assigned to the instance. This name is not available
     /// until the instance enters the `running` state. This name is only
     /// available if you've enabled DNS hostnames for your VPC. The format of this
     /// name depends on the [public hostname
     /// type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hostname-types.html#public-hostnames).
-    public_dns_name: ?[]const u8,
+    public_dns_name: ?[]const u8 = null,
 
     /// The public IPv4 address, or the Carrier IP address assigned to the instance,
     /// if
@@ -224,68 +224,68 @@ pub const Instance = struct {
     /// A Carrier IP address only applies to an instance launched in a subnet
     /// associated with
     /// a Wavelength Zone.
-    public_ip_address: ?[]const u8,
+    public_ip_address: ?[]const u8 = null,
 
     /// The RAM disk associated with this instance, if applicable.
-    ramdisk_id: ?[]const u8,
+    ramdisk_id: ?[]const u8 = null,
 
     /// The device name of the root device volume (for example,
     /// `/dev/sda1`).
-    root_device_name: ?[]const u8,
+    root_device_name: ?[]const u8 = null,
 
     /// The root device type used by the AMI. The AMI can use an EBS volume or an
     /// instance
     /// store volume.
-    root_device_type: ?DeviceType,
+    root_device_type: ?DeviceType = null,
 
     /// The security groups for the instance.
-    security_groups: ?[]const GroupIdentifier,
+    security_groups: ?[]const GroupIdentifier = null,
 
     /// Indicates whether source/destination checking is enabled.
-    source_dest_check: ?bool,
+    source_dest_check: ?bool = null,
 
     /// If the request is a Spot Instance request, the ID of the request.
-    spot_instance_request_id: ?[]const u8,
+    spot_instance_request_id: ?[]const u8 = null,
 
     /// Specifies whether enhanced networking with the Intel 82599 Virtual Function
     /// interface
     /// is enabled.
-    sriov_net_support: ?[]const u8,
+    sriov_net_support: ?[]const u8 = null,
 
     /// The current state of the instance.
-    state: ?InstanceState,
+    state: ?InstanceState = null,
 
     /// The reason for the most recent state transition.
-    state_reason: ?StateReason,
+    state_reason: ?StateReason = null,
 
     /// The reason for the most recent state transition. This might be an empty
     /// string.
-    state_transition_reason: ?[]const u8,
+    state_transition_reason: ?[]const u8 = null,
 
     /// The ID of the subnet in which the instance is running.
-    subnet_id: ?[]const u8,
+    subnet_id: ?[]const u8 = null,
 
     /// Any tags assigned to the instance.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// If the instance is configured for NitroTPM support, the value is `v2.0`.
     /// For more information, see
     /// [NitroTPM](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html) in the
     /// *Amazon EC2 User Guide*.
-    tpm_support: ?[]const u8,
+    tpm_support: ?[]const u8 = null,
 
     /// The usage operation value for the instance. For more information, see [AMI
     /// billing information
     /// fields](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html) in the
     /// *Amazon EC2 User Guide*.
-    usage_operation: ?[]const u8,
+    usage_operation: ?[]const u8 = null,
 
     /// The time that the usage operation was last updated.
-    usage_operation_update_time: ?i64,
+    usage_operation_update_time: ?i64 = null,
 
     /// The virtualization type of the instance.
-    virtualization_type: ?VirtualizationType,
+    virtualization_type: ?VirtualizationType = null,
 
     /// The ID of the VPC in which the instance is running.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

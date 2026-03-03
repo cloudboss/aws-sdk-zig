@@ -22,14 +22,14 @@ pub const OpenSearchIntegrationDetails = struct {
     /// control for Amazon OpenSearch
     /// Serverless](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html) in the OpenSearch Service Developer
     /// Guide.
-    access_policy: ?OpenSearchDataAccessPolicy,
+    access_policy: ?OpenSearchDataAccessPolicy = null,
 
     /// This structure contains information about the OpenSearch Service application
     /// used for this
     /// integration. An OpenSearch Service application is the web application that
     /// was created by the
     /// integration with CloudWatch Logs. It hosts the vended logs dashboards.
-    application: ?OpenSearchApplication,
+    application: ?OpenSearchApplication = null,
 
     /// This structure contains information about the OpenSearch Service collection
     /// used for this
@@ -39,7 +39,7 @@ pub const OpenSearchIntegrationDetails = struct {
     /// workload. For more information, see [Creating and
     /// managing OpenSearch Service Serverless
     /// collections](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-collections.html).
-    collection: ?OpenSearchCollection,
+    collection: ?OpenSearchCollection = null,
 
     /// This structure contains information about the OpenSearch Service data source
     /// used for this
@@ -51,7 +51,7 @@ pub const OpenSearchIntegrationDetails = struct {
     /// For more information about OpenSearch Service data sources , see [Creating
     /// OpenSearch Service data source integrations with Amazon
     /// S3.](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html)
-    data_source: ?OpenSearchDataSource,
+    data_source: ?OpenSearchDataSource = null,
 
     /// This structure contains information about the OpenSearch Service encryption
     /// policy used
@@ -59,7 +59,7 @@ pub const OpenSearchIntegrationDetails = struct {
     /// you created the
     /// integration. For more information, see [Encryption
     /// policies](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html#serverless-encryption-policies) in the OpenSearch Service Developer Guide.
-    encryption_policy: ?OpenSearchEncryptionPolicy,
+    encryption_policy: ?OpenSearchEncryptionPolicy = null,
 
     /// This structure contains information about the OpenSearch Service data
     /// lifecycle policy
@@ -71,7 +71,7 @@ pub const OpenSearchIntegrationDetails = struct {
     /// lifecycle policies with OpenSearch Service
     /// Serverless](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html) in the OpenSearch Service
     /// Developer Guide.
-    lifecycle_policy: ?OpenSearchLifecyclePolicy,
+    lifecycle_policy: ?OpenSearchLifecyclePolicy = null,
 
     /// This structure contains information about the OpenSearch Service network
     /// policy used for
@@ -79,7 +79,7 @@ pub const OpenSearchIntegrationDetails = struct {
     /// collections. For more
     /// information, see [Network
     /// policies](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html#serverless-network-policies) in the OpenSearch Service Developer Guide.
-    network_policy: ?OpenSearchNetworkPolicy,
+    network_policy: ?OpenSearchNetworkPolicy = null,
 
     /// This structure contains information about the OpenSearch Service workspace
     /// used for this
@@ -90,7 +90,7 @@ pub const OpenSearchIntegrationDetails = struct {
     /// integration setup. For more information, see [Centralized OpenSearch user
     /// interface (Dashboards) with OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html).
-    workspace: ?OpenSearchWorkspace,
+    workspace: ?OpenSearchWorkspace = null,
 
     pub const json_field_names = .{
         .access_policy = "accessPolicy",

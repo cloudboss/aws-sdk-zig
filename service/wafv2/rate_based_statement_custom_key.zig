@@ -20,14 +20,14 @@ pub const RateBasedStatementCustomKey = struct {
     /// Use an Autonomous System Number (ASN) derived from the request's originating
     /// or forwarded IP address as an aggregate key.
     /// Each distinct ASN contributes to the aggregation instance.
-    asn: ?RateLimitAsn,
+    asn: ?RateLimitAsn = null,
 
     /// Use the value of a cookie in the request as an aggregate key. Each distinct
     /// value in the cookie contributes to the aggregation instance. If you use a
     /// single
     /// cookie as your custom key, then each value fully defines an aggregation
     /// instance.
-    cookie: ?RateLimitCookie,
+    cookie: ?RateLimitCookie = null,
 
     /// Use the first IP address in an HTTP header as an aggregate key. Each
     /// distinct forwarded IP address contributes to the aggregation instance.
@@ -39,19 +39,19 @@ pub const RateBasedStatementCustomKey = struct {
     ///
     /// With this option, you must specify the header to use in the rate-based
     /// rule's `ForwardedIPConfig` property.
-    forwarded_ip: ?RateLimitForwardedIP,
+    forwarded_ip: ?RateLimitForwardedIP = null,
 
     /// Use the value of a header in the request as an aggregate key. Each distinct
     /// value in the header contributes to the aggregation instance. If you use a
     /// single
     /// header as your custom key, then each value fully defines an aggregation
     /// instance.
-    header: ?RateLimitHeader,
+    header: ?RateLimitHeader = null,
 
     /// Use the request's HTTP method as an aggregate key. Each distinct HTTP method
     /// contributes to the aggregation instance. If you use just the HTTP method
     /// as your custom key, then each method fully defines an aggregation instance.
-    http_method: ?RateLimitHTTPMethod,
+    http_method: ?RateLimitHTTPMethod = null,
 
     /// Use the request's originating IP address as an aggregate key. Each distinct
     /// IP address contributes to the aggregation instance.
@@ -60,17 +60,17 @@ pub const RateBasedStatementCustomKey = struct {
     /// also specify at least one other key to use.
     /// You can aggregate on only the IP address by specifying `IP` in your
     /// rate-based statement's `AggregateKeyType`.
-    ip: ?RateLimitIP,
+    ip: ?RateLimitIP = null,
 
     /// Use the request's JA3 fingerprint as an aggregate key. If you use a single
     /// JA3 fingerprint as your custom key, then each value fully defines an
     /// aggregation instance.
-    ja3_fingerprint: ?RateLimitJA3Fingerprint,
+    ja3_fingerprint: ?RateLimitJA3Fingerprint = null,
 
     /// Use the request's JA4 fingerprint as an aggregate key. If you use a single
     /// JA4 fingerprint as your custom key, then each value fully defines an
     /// aggregation instance.
-    ja4_fingerprint: ?RateLimitJA4Fingerprint,
+    ja4_fingerprint: ?RateLimitJA4Fingerprint = null,
 
     /// Use the specified label namespace as an aggregate key. Each distinct fully
     /// qualified label name that has the specified label namespace contributes to
@@ -83,25 +83,25 @@ pub const RateBasedStatementCustomKey = struct {
     /// For information about label namespaces and names, see
     /// [Label syntax and naming
     /// requirements](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-label-requirements.html) in the *WAF Developer Guide*.
-    label_namespace: ?RateLimitLabelNamespace,
+    label_namespace: ?RateLimitLabelNamespace = null,
 
     /// Use the specified query argument as an aggregate key. Each distinct value
     /// for the named query argument contributes to the aggregation instance. If you
     /// use a single query argument as your custom key, then each value fully
     /// defines an aggregation instance.
-    query_argument: ?RateLimitQueryArgument,
+    query_argument: ?RateLimitQueryArgument = null,
 
     /// Use the request's query string as an aggregate key. Each distinct string
     /// contributes to the aggregation instance. If you use just the
     /// query string as your custom key, then each string fully defines an
     /// aggregation instance.
-    query_string: ?RateLimitQueryString,
+    query_string: ?RateLimitQueryString = null,
 
     /// Use the request's URI path as an aggregate key. Each distinct URI path
     /// contributes to the aggregation instance. If you use just the
     /// URI path as your custom key, then each URI path fully defines an aggregation
     /// instance.
-    uri_path: ?RateLimitUriPath,
+    uri_path: ?RateLimitUriPath = null,
 
     pub const json_field_names = .{
         .asn = "ASN",

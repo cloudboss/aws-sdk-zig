@@ -7,34 +7,34 @@ const MultiplexState = @import("multiplex_state.zig").MultiplexState;
 /// The multiplex object.
 pub const Multiplex = struct {
     /// The unique arn of the multiplex.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A list of availability zones for the multiplex.
-    availability_zones: ?[]const []const u8,
+    availability_zones: ?[]const []const u8 = null,
 
     /// A list of the multiplex output destinations.
-    destinations: ?[]const MultiplexOutputDestination,
+    destinations: ?[]const MultiplexOutputDestination = null,
 
     /// The unique id of the multiplex.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Configuration for a multiplex event.
-    multiplex_settings: ?MultiplexSettings,
+    multiplex_settings: ?MultiplexSettings = null,
 
     /// The name of the multiplex.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The number of currently healthy pipelines.
-    pipelines_running_count: ?i32,
+    pipelines_running_count: ?i32 = null,
 
     /// The number of programs in the multiplex.
-    program_count: ?i32,
+    program_count: ?i32 = null,
 
     /// The current state of the multiplex.
-    state: ?MultiplexState,
+    state: ?MultiplexState = null,
 
     /// A collection of key-value pairs.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

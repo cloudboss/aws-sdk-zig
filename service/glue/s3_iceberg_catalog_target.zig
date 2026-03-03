@@ -7,12 +7,12 @@ const CatalogSchemaChangePolicy = @import("catalog_schema_change_policy.zig").Ca
 /// registers the table in the Glue Data Catalog.
 pub const S3IcebergCatalogTarget = struct {
     /// Specifies additional connection options for the Iceberg catalog target.
-    additional_options: ?[]const aws.map.StringMapEntry,
+    additional_options: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies whether to automatically enable data quality evaluation for the S3
     /// Iceberg catalog target. When set to `true`, data quality checks are
     /// performed automatically during the write operation.
-    auto_data_quality: ?AutoDataQuality,
+    auto_data_quality: ?AutoDataQuality = null,
 
     /// The name of the database to write to.
     database: []const u8,
@@ -24,10 +24,10 @@ pub const S3IcebergCatalogTarget = struct {
     name: []const u8,
 
     /// A list of partition keys for the Iceberg table.
-    partition_keys: ?[]const []const []const u8,
+    partition_keys: ?[]const []const []const u8 = null,
 
     /// The policy for handling schema changes in the catalog target.
-    schema_change_policy: ?CatalogSchemaChangePolicy,
+    schema_change_policy: ?CatalogSchemaChangePolicy = null,
 
     /// The name of the table to write to in the catalog.
     table: []const u8,

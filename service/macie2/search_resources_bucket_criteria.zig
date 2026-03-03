@@ -6,11 +6,11 @@ const SearchResourcesCriteriaBlock = @import("search_resources_criteria_block.zi
 pub const SearchResourcesBucketCriteria = struct {
     /// The property- and tag-based conditions that determine which buckets to
     /// exclude from the results.
-    excludes: ?SearchResourcesCriteriaBlock,
+    excludes: ?SearchResourcesCriteriaBlock = null,
 
     /// The property- and tag-based conditions that determine which buckets to
     /// include in the results.
-    includes: ?SearchResourcesCriteriaBlock,
+    includes: ?SearchResourcesCriteriaBlock = null,
 
     pub const json_field_names = .{
         .excludes = "excludes",

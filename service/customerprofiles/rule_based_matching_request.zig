@@ -7,25 +7,25 @@ const MatchingRule = @import("matching_rule.zig").MatchingRule;
 pub const RuleBasedMatchingRequest = struct {
     /// Configures information about the `AttributeTypesSelector` where the
     /// rule-based identity resolution uses to match profiles.
-    attribute_types_selector: ?AttributeTypesSelector,
+    attribute_types_selector: ?AttributeTypesSelector = null,
 
-    conflict_resolution: ?ConflictResolution,
+    conflict_resolution: ?ConflictResolution = null,
 
     /// The flag that enables the rule-based matching process of duplicate profiles.
     enabled: bool,
 
-    exporting_config: ?ExportingConfig,
+    exporting_config: ?ExportingConfig = null,
 
     /// Configures how the rule-based matching process should match profiles. You
     /// can have up to
     /// 15 `MatchingRule` in the `MatchingRules`.
-    matching_rules: ?[]const MatchingRule,
+    matching_rules: ?[]const MatchingRule = null,
 
     /// Indicates the maximum allowed rule level.
-    max_allowed_rule_level_for_matching: ?i32,
+    max_allowed_rule_level_for_matching: ?i32 = null,
 
     /// [MatchingRule](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html)
-    max_allowed_rule_level_for_merging: ?i32,
+    max_allowed_rule_level_for_merging: ?i32 = null,
 
     pub const json_field_names = .{
         .attribute_types_selector = "AttributeTypesSelector",

@@ -14,33 +14,33 @@ pub const Participant = struct {
     /// is 1 KB total.
     /// *This field is exposed to all stage participants and should not be used for
     /// personally identifying, confidential, or sensitive information*.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The participant’s browser.
-    browser_name: ?[]const u8,
+    browser_name: ?[]const u8 = null,
 
     /// The participant’s browser version.
-    browser_version: ?[]const u8,
+    browser_version: ?[]const u8 = null,
 
     /// ISO 8601 timestamp (returned as a string) when the participant first joined
     /// the stage
     /// session.
-    first_join_time: ?i64,
+    first_join_time: ?i64 = null,
 
     /// The participant’s Internet Service Provider.
-    isp_name: ?[]const u8,
+    isp_name: ?[]const u8 = null,
 
     /// The participant’s operating system.
-    os_name: ?[]const u8,
+    os_name: ?[]const u8 = null,
 
     /// The participant’s operating system version.
-    os_version: ?[]const u8,
+    os_version: ?[]const u8 = null,
 
     /// Unique identifier for this participant, assigned by IVS.
-    participant_id: ?[]const u8,
+    participant_id: ?[]const u8 = null,
 
     /// Type of ingest protocol that the participant employs for broadcasting.
-    protocol: ?ParticipantProtocol,
+    protocol: ?ParticipantProtocol = null,
 
     /// Whether the participant ever published to the stage session.
     published: bool = false,
@@ -50,7 +50,7 @@ pub const Participant = struct {
     /// participant recording is enabled, or `""` (empty string), if recording is
     /// not
     /// enabled.
-    recording_s3_bucket_name: ?[]const u8,
+    recording_s3_bucket_name: ?[]const u8 = null,
 
     /// S3 prefix of the S3 bucket where the participant is being recorded, if
     /// individual
@@ -64,31 +64,31 @@ pub const Participant = struct {
     /// [
     /// Merge Fragmented Individual Participant
     /// Recordings](/ivs/latest/RealTimeUserGuide/rt-individual-participant-recording.html#ind-part-rec-merge-frag).
-    recording_s3_prefix: ?[]const u8,
+    recording_s3_prefix: ?[]const u8 = null,
 
     /// The participant’s recording state.
-    recording_state: ?ParticipantRecordingState,
+    recording_state: ?ParticipantRecordingState = null,
 
     /// The participant's replication state.
-    replication_state: ?ReplicationState,
+    replication_state: ?ReplicationState = null,
 
     /// Indicates if the participant has been replicated to another stage or is a
     /// replica from another stage. Default: `NONE`.
-    replication_type: ?ReplicationType,
+    replication_type: ?ReplicationType = null,
 
     /// The participant’s SDK version.
-    sdk_version: ?[]const u8,
+    sdk_version: ?[]const u8 = null,
 
     /// ID of the session within the source stage, if `replicationType` is
     /// `REPLICA`.
-    source_session_id: ?[]const u8,
+    source_session_id: ?[]const u8 = null,
 
     /// Source stage ARN from which this participant is replicated, if
     /// `replicationType` is `REPLICA`.
-    source_stage_arn: ?[]const u8,
+    source_stage_arn: ?[]const u8 = null,
 
     /// Whether the participant is connected to or disconnected from the stage.
-    state: ?ParticipantState,
+    state: ?ParticipantState = null,
 
     /// Customer-assigned name to help identify the token; this can be used to link
     /// a
@@ -96,7 +96,7 @@ pub const Participant = struct {
     /// encoded text.
     /// *This field is exposed to all stage participants and should not be used for
     /// personally identifying, confidential, or sensitive information*.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "attributes",

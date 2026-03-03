@@ -6,10 +6,10 @@ pub const RawString = struct {
     /// information about
     /// which Lambda function to update and optional Lambda functions
     /// that validate deployment lifecycle events.
-    content: ?[]const u8,
+    content: ?[]const u8 = null,
 
     /// The SHA256 hash value of the revision content.
-    sha_256: ?[]const u8,
+    sha_256: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content = "content",

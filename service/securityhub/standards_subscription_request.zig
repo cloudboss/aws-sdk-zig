@@ -8,7 +8,7 @@ pub const StandardsSubscriptionRequest = struct {
     standards_arn: []const u8,
 
     /// A key-value pair of input for the standard.
-    standards_input: ?[]const aws.map.StringMapEntry,
+    standards_input: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .standards_arn = "StandardsArn",

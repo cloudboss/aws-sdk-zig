@@ -11,11 +11,11 @@ pub const CreateBackendAuthForgotPasswordConfig = struct {
 
     /// **(DEPRECATED)** The configuration for the email sent when an app user
     /// forgets their password.
-    email_settings: ?EmailSettings,
+    email_settings: ?EmailSettings = null,
 
     /// **(DEPRECATED)** The configuration for the SMS message sent when an app user
     /// forgets their password.
-    sms_settings: ?SmsSettings,
+    sms_settings: ?SmsSettings = null,
 
     pub const json_field_names = .{
         .delivery_method = "DeliveryMethod",

@@ -8,12 +8,12 @@ pub const SubtitlesOutput = struct {
     /// WebVTT
     /// (`vtt`) and SubRip (`srt`) formats, both formats are
     /// shown.
-    formats: ?[]const SubtitleFormat,
+    formats: ?[]const SubtitleFormat = null,
 
     /// Provides the start index value for your subtitle files. If you did not
     /// specify a value
     /// in your request, the default value of `0` is used.
-    output_start_index: ?i32,
+    output_start_index: ?i32 = null,
 
     /// The Amazon S3 location of your transcript. You can use this URI to access or
     /// download your subtitle file. Your subtitle file is stored in the same
@@ -35,7 +35,7 @@ pub const SubtitlesOutput = struct {
     /// minutes. If you get an `AccesDenied` error, you can get a new temporary
     /// URI by running a `GetTranscriptionJob` or
     /// `ListTranscriptionJob` request.
-    subtitle_file_uris: ?[]const []const u8,
+    subtitle_file_uris: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .formats = "Formats",

@@ -9,8 +9,8 @@ pub const AdditionalAttribute = struct {
     /// might pose a security risk to your application. The possible values are
     /// `monitor`,
     /// `defensive`, and `strictest`. The default is `defensive`.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// This value of the attribute.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

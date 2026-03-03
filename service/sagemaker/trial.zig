@@ -8,40 +8,40 @@ const TrialComponentSimpleSummary = @import("trial_component_simple_summary.zig"
 /// [Search](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html) API.
 pub const Trial = struct {
     /// Who created the trial.
-    created_by: ?UserContext,
+    created_by: ?UserContext = null,
 
     /// When the trial was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The name of the trial as displayed. If `DisplayName` isn't specified,
     /// `TrialName` is displayed.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The name of the experiment the trial is part of.
-    experiment_name: ?[]const u8,
+    experiment_name: ?[]const u8 = null,
 
-    last_modified_by: ?UserContext,
+    last_modified_by: ?UserContext = null,
 
     /// Who last modified the trial.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
-    metadata_properties: ?MetadataProperties,
+    metadata_properties: ?MetadataProperties = null,
 
-    source: ?TrialSource,
+    source: ?TrialSource = null,
 
     /// The list of tags that are associated with the trial. You can use
     /// [Search](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html) API to search on the tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The Amazon Resource Name (ARN) of the trial.
-    trial_arn: ?[]const u8,
+    trial_arn: ?[]const u8 = null,
 
     /// A list of the components associated with the trial. For each component, a
     /// summary of the component's properties is included.
-    trial_component_summaries: ?[]const TrialComponentSimpleSummary,
+    trial_component_summaries: ?[]const TrialComponentSimpleSummary = null,
 
     /// The name of the trial.
-    trial_name: ?[]const u8,
+    trial_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_by = "CreatedBy",

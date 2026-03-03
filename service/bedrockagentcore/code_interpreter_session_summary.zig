@@ -16,11 +16,11 @@ pub const CodeInterpreterSessionSummary = struct {
 
     /// The timestamp when the code interpreter session was last updated. This value
     /// is in ISO 8601 format.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The name of the code interpreter session. This name helps identify and
     /// manage the session.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The unique identifier of the code interpreter session. This identifier is
     /// used in operations that interact with the session.

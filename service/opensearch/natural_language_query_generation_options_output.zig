@@ -8,12 +8,12 @@ pub const NaturalLanguageQueryGenerationOptionsOutput = struct {
     /// The current state of the natural language query generation feature,
     /// indicating
     /// completion, in progress, or failure.
-    current_state: ?NaturalLanguageQueryGenerationCurrentState,
+    current_state: ?NaturalLanguageQueryGenerationCurrentState = null,
 
     /// The desired state of the natural language query generation feature. Valid
     /// values are
     /// ENABLED and DISABLED.
-    desired_state: ?NaturalLanguageQueryGenerationDesiredState,
+    desired_state: ?NaturalLanguageQueryGenerationDesiredState = null,
 
     pub const json_field_names = .{
         .current_state = "CurrentState",

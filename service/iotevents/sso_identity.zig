@@ -8,7 +8,7 @@ pub const SSOIdentity = struct {
     identity_store_id: []const u8,
 
     /// The user ID.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .identity_store_id = "identityStoreId",

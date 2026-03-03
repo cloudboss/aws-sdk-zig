@@ -6,5 +6,5 @@ pub const GetBucketReplicationResult = struct {
     /// least one rule and you can add up to 100 rules. The maximum size of a
     /// replication
     /// configuration is 128 KB.
-    replication_configuration: ?ReplicationConfiguration,
+    replication_configuration: ?ReplicationConfiguration = null,
 };

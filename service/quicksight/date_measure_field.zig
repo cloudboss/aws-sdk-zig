@@ -5,7 +5,7 @@ const DateTimeFormatConfiguration = @import("date_time_format_configuration.zig"
 /// The measure type field with date type columns.
 pub const DateMeasureField = struct {
     /// The aggregation function of the measure field.
-    aggregation_function: ?DateAggregationFunction,
+    aggregation_function: ?DateAggregationFunction = null,
 
     /// The column that is used in the `DateMeasureField`.
     column: ColumnIdentifier,
@@ -14,7 +14,7 @@ pub const DateMeasureField = struct {
     field_id: []const u8,
 
     /// The format configuration of the field.
-    format_configuration: ?DateTimeFormatConfiguration,
+    format_configuration: ?DateTimeFormatConfiguration = null,
 
     pub const json_field_names = .{
         .aggregation_function = "AggregationFunction",

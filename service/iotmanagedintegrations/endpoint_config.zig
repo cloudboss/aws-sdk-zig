@@ -5,7 +5,7 @@ const LambdaConfig = @import("lambda_config.zig").LambdaConfig;
 pub const EndpointConfig = struct {
     /// The Lambda function configuration for the endpoint, used when the endpoint
     /// communicates through an AWS Lambda function.
-    lambda: ?LambdaConfig,
+    lambda: ?LambdaConfig = null,
 
     pub const json_field_names = .{
         .lambda = "lambda",

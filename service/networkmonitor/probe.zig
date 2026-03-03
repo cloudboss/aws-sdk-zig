@@ -7,30 +7,30 @@ const ProbeState = @import("probe_state.zig").ProbeState;
 /// Describes information about a network monitor probe.
 pub const Probe = struct {
     /// The IPv4 or IPv6 address for the probe.
-    address_family: ?AddressFamily,
+    address_family: ?AddressFamily = null,
 
     /// The time and date the probe was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The destination for the probe. This should be either an `IPV4` or `IPV6`.
     destination: []const u8,
 
     /// The destination port for the probe. This is required only if the `protocol`
     /// is `TCP` and must be a number between `1` and `65536`.
-    destination_port: ?i32,
+    destination_port: ?i32 = null,
 
     /// The time and date that the probe was last modified.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     /// The size of the packets traveling between the `source` and `destination`.
     /// This must be a number between `56` and
-    packet_size: ?i32,
+    packet_size: ?i32 = null,
 
     /// The ARN of the probe.
-    probe_arn: ?[]const u8,
+    probe_arn: ?[]const u8 = null,
 
     /// The ID of the probe.
-    probe_id: ?[]const u8,
+    probe_id: ?[]const u8 = null,
 
     /// The network protocol for the destination. This can be either `TCP` or
     /// `ICMP`. If the protocol is `TCP`, then `port` is also required.
@@ -40,13 +40,13 @@ pub const Probe = struct {
     source_arn: []const u8,
 
     /// The state of the probe.
-    state: ?ProbeState,
+    state: ?ProbeState = null,
 
     /// The list of key-value pairs created and assigned to the probe.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The ID of the source VPC subnet.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .address_family = "addressFamily",

@@ -13,7 +13,7 @@ pub const ListTagsForResourceResponse = struct {
     /// Omitting the tag value is the same as using an empty string. Like tag keys,
     /// tag
     /// values are case sensitive.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .tags = "Tags",

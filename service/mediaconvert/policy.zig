@@ -5,13 +5,13 @@ const InputPolicy = @import("input_policy.zig").InputPolicy;
 /// http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
 pub const Policy = struct {
     /// Allow or disallow jobs that specify HTTP inputs.
-    http_inputs: ?InputPolicy,
+    http_inputs: ?InputPolicy = null,
 
     /// Allow or disallow jobs that specify HTTPS inputs.
-    https_inputs: ?InputPolicy,
+    https_inputs: ?InputPolicy = null,
 
     /// Allow or disallow jobs that specify Amazon S3 inputs.
-    s3_inputs: ?InputPolicy,
+    s3_inputs: ?InputPolicy = null,
 
     pub const json_field_names = .{
         .http_inputs = "HttpInputs",

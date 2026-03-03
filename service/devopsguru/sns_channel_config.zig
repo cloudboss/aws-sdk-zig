@@ -19,7 +19,7 @@
 pub const SnsChannelConfig = struct {
     /// The Amazon Resource Name (ARN) of an Amazon Simple Notification Service
     /// topic.
-    topic_arn: ?[]const u8,
+    topic_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .topic_arn = "TopicArn",

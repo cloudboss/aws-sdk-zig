@@ -3,7 +3,7 @@ const SchemaVersionType = @import("schema_version_type.zig").SchemaVersionType;
 
 pub const GetSchemaVersionRequest = struct {
     /// The format of the schema version.
-    format: ?SchemaVersionFormat,
+    format: ?SchemaVersionFormat = null,
 
     /// Schema id with a version specified. If the version is missing, it defaults
     /// to latest version.

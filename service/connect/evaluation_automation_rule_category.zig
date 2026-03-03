@@ -11,7 +11,7 @@ pub const EvaluationAutomationRuleCategory = struct {
 
     /// A point of interest in a contact transcript that indicates match of
     /// condition.
-    points_of_interest: ?[]const EvaluationTranscriptPointOfInterest,
+    points_of_interest: ?[]const EvaluationTranscriptPointOfInterest = null,
 
     pub const json_field_names = .{
         .category = "Category",

@@ -19,7 +19,7 @@ pub const AssetModelSummary = struct {
     ///   composite
     /// models of other asset models. You can't create assets directly from this
     /// type of asset model.
-    asset_model_type: ?AssetModelType,
+    asset_model_type: ?AssetModelType = null,
 
     /// The date the asset model was created, in Unix epoch time.
     creation_date: i64,
@@ -30,7 +30,7 @@ pub const AssetModelSummary = struct {
     /// The external ID of the asset model. For more information, see [Using
     /// external
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids) in the *IoT SiteWise User Guide*.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The ID of the asset model (used with IoT SiteWise API operations).
     id: []const u8,
@@ -45,7 +45,7 @@ pub const AssetModelSummary = struct {
     status: AssetModelStatus,
 
     /// The version number of the asset model.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

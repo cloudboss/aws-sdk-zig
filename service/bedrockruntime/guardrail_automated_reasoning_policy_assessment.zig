@@ -5,7 +5,7 @@ const GuardrailAutomatedReasoningFinding = @import("guardrail_automated_reasonin
 pub const GuardrailAutomatedReasoningPolicyAssessment = struct {
     /// List of logical validation results produced by evaluating the input content
     /// against automated reasoning policies.
-    findings: ?[]const GuardrailAutomatedReasoningFinding,
+    findings: ?[]const GuardrailAutomatedReasoningFinding = null,
 
     pub const json_field_names = .{
         .findings = "findings",

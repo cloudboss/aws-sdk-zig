@@ -27,7 +27,7 @@ pub const LambdaFunctionAssociation = struct {
     /// content. For more information, see [Accessing the Request Body by Choosing
     /// the Include Body
     /// Option](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html) in the Amazon CloudFront Developer Guide.
-    include_body: ?bool,
+    include_body: ?bool = null,
 
     /// The ARN of the Lambda@Edge function. You must specify the ARN of a function
     /// version; you can't specify an alias or $LATEST.

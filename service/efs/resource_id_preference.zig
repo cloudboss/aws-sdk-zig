@@ -6,11 +6,11 @@ const Resource = @import("resource.zig").Resource;
 pub const ResourceIdPreference = struct {
     /// Identifies the EFS resource ID preference, either `LONG_ID` (17
     /// characters) or `SHORT_ID` (8 characters).
-    resource_id_type: ?ResourceIdType,
+    resource_id_type: ?ResourceIdType = null,
 
     /// Identifies the Amazon EFS resources to which the ID preference setting
     /// applies, `FILE_SYSTEM` and `MOUNT_TARGET`.
-    resources: ?[]const Resource,
+    resources: ?[]const Resource = null,
 
     pub const json_field_names = .{
         .resource_id_type = "ResourceIdType",

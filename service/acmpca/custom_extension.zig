@@ -5,7 +5,7 @@
 /// rules](https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations).
 pub const CustomExtension = struct {
     /// Specifies the critical flag of the X.509 extension.
-    critical: ?bool,
+    critical: ?bool = null,
 
     /// Specifies the object identifier (OID) of the X.509 extension. For more
     /// information, see the [Global OID reference

@@ -15,25 +15,25 @@ pub const PolicyComplianceDetail = struct {
     /// A timestamp that indicates when the returned information should be
     /// considered out of
     /// date.
-    expired_at: ?i64,
+    expired_at: ?i64 = null,
 
     /// Details about problems with dependent services, such as WAF or Config,
     /// and the error message received that indicates the problem with the service.
-    issue_info_map: ?[]const aws.map.StringMapEntry,
+    issue_info_map: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Web Services account ID.
-    member_account: ?[]const u8,
+    member_account: ?[]const u8 = null,
 
     /// The ID of the Firewall Manager policy.
-    policy_id: ?[]const u8,
+    policy_id: ?[]const u8 = null,
 
     /// The Amazon Web Services account that created the Firewall Manager policy.
-    policy_owner: ?[]const u8,
+    policy_owner: ?[]const u8 = null,
 
     /// An array of resources that aren't protected by the WAF or Shield Advanced
     /// policy or
     /// that aren't in compliance with the security group policy.
-    violators: ?[]const ComplianceViolator,
+    violators: ?[]const ComplianceViolator = null,
 
     pub const json_field_names = .{
         .evaluation_limit_exceeded = "EvaluationLimitExceeded",

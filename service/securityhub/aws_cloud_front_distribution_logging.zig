@@ -2,18 +2,18 @@
 /// CloudFront distribution.
 pub const AwsCloudFrontDistributionLogging = struct {
     /// The S3 bucket to store the access logs in.
-    bucket: ?[]const u8,
+    bucket: ?[]const u8 = null,
 
     /// With this field, you can enable or disable the selected distribution.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// Specifies whether you want CloudFront to include cookies in access logs.
-    include_cookies: ?bool,
+    include_cookies: ?bool = null,
 
     /// An optional string that you want CloudFront to use as a prefix to the access
     /// log
     /// filenames for this distribution.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "Bucket",

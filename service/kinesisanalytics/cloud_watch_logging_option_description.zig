@@ -1,7 +1,7 @@
 /// Description of the CloudWatch logging option.
 pub const CloudWatchLoggingOptionDescription = struct {
     /// ID of the CloudWatch logging option description.
-    cloud_watch_logging_option_id: ?[]const u8,
+    cloud_watch_logging_option_id: ?[]const u8 = null,
 
     /// ARN of the CloudWatch log to receive application messages.
     log_stream_arn: []const u8,

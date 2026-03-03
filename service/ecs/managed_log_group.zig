@@ -4,7 +4,7 @@ const ManagedResourceStatus = @import("managed_resource_status.zig").ManagedReso
 pub const ManagedLogGroup = struct {
     /// The Amazon Resource Name (ARN) of the Cloudwatch Log Group associated with
     /// the Express service.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The name of the Cloudwatch Log Group associated with
     /// the Express service.
@@ -14,7 +14,7 @@ pub const ManagedLogGroup = struct {
     status: ManagedResourceStatus,
 
     /// Information about why the Cloudwatch LogGroup is in the current status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The Unix timestamp for when the Cloudwatch LogGroup was last updated
     updated_at: i64,

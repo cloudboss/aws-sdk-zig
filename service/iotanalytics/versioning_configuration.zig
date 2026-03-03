@@ -3,7 +3,7 @@ pub const VersioningConfiguration = struct {
     /// How many versions of dataset contents are kept. The `unlimited` parameter
     /// must
     /// be `false`.
-    max_versions: ?i32,
+    max_versions: ?i32 = null,
 
     /// If true, unlimited versions of dataset contents are kept.
     unlimited: bool = false,

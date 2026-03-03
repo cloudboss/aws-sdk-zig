@@ -21,12 +21,12 @@ pub const Mp4Settings = struct {
     /// adds padding only to the end of the file. When you keep the default value,
     /// any minor discrepancies between audio and video duration will depend on your
     /// output audio codec.
-    audio_duration: ?CmfcAudioDuration,
+    audio_duration: ?CmfcAudioDuration = null,
 
     /// When enabled, a C2PA compliant manifest will be generated, signed and
     /// embeded in the output. For more information on C2PA, see
     /// https://c2pa.org/specifications/specifications/2.1/index.html
-    c2_pa_manifest: ?Mp4C2paManifest,
+    c2_pa_manifest: ?Mp4C2paManifest = null,
 
     /// Specify the name or ARN of the AWS Secrets Manager secret that contains your
     /// C2PA public certificate chain in PEM format. Provide a valid secret name or
@@ -36,14 +36,14 @@ pub const Mp4Settings = struct {
     /// intermediate certificates. Do not include the root certificate. For details
     /// on COSE, see:
     /// https://opensource.contentauthenticity.org/docs/manifest/signing-manifests
-    certificate_secret: ?[]const u8,
+    certificate_secret: ?[]const u8 = null,
 
     /// When enabled, file composition times will start at zero, composition times
     /// in the 'ctts' (composition time to sample) box for B-frames will be
     /// negative, and a 'cslg' (composition shift least greatest) box will be
     /// included per 14496-1 amendment 1. This improves compatibility with Apple
     /// players and tools.
-    cslg_atom: ?Mp4CslgAtom,
+    cslg_atom: ?Mp4CslgAtom = null,
 
     /// Ignore this setting unless compliance to the CTTS box version specification
     /// matters in your workflow. Specify a value of 1 to set your CTTS box version
@@ -51,24 +51,24 @@ pub const Mp4Settings = struct {
     /// a value of 1, you must also set CSLG atom to the value INCLUDE. Keep the
     /// default value 0 to set your CTTS box version to 0. This can provide backward
     /// compatibility for some players and packagers.
-    ctts_version: ?i32,
+    ctts_version: ?i32 = null,
 
     /// Inserts a free-space box immediately after the moov box.
-    free_space_box: ?Mp4FreeSpaceBox,
+    free_space_box: ?Mp4FreeSpaceBox = null,
 
     /// To place the MOOV atom at the beginning of your output, which is useful for
     /// progressive downloading: Leave blank or choose Progressive download. To
     /// place the MOOV at the end of your output: Choose Normal.
-    moov_placement: ?Mp4MoovPlacement,
+    moov_placement: ?Mp4MoovPlacement = null,
 
     /// Overrides the "Major Brand" field in the output file. Usually not necessary
     /// to specify.
-    mp_4_major_brand: ?[]const u8,
+    mp_4_major_brand: ?[]const u8 = null,
 
     /// Specify the ID or ARN of the AWS KMS key used to sign the C2PA manifest in
     /// your MP4 output. Provide a valid KMS key ARN. Note that your MediaConvert
     /// service role must allow access to this key.
-    signing_kms_key: ?[]const u8,
+    signing_kms_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .audio_duration = "AudioDuration",

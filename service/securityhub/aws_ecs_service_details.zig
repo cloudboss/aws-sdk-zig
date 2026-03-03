@@ -10,68 +10,68 @@ const AwsEcsServiceServiceRegistriesDetails = @import("aws_ecs_service_service_r
 /// Provides details about a service within an ECS cluster.
 pub const AwsEcsServiceDetails = struct {
     /// The capacity provider strategy that the service uses.
-    capacity_provider_strategy: ?[]const AwsEcsServiceCapacityProviderStrategyDetails,
+    capacity_provider_strategy: ?[]const AwsEcsServiceCapacityProviderStrategyDetails = null,
 
     /// The ARN of the cluster that hosts the service.
-    cluster: ?[]const u8,
+    cluster: ?[]const u8 = null,
 
     /// Deployment parameters for the service. Includes the number of tasks that run
     /// and the order in which to start and stop tasks.
-    deployment_configuration: ?AwsEcsServiceDeploymentConfigurationDetails,
+    deployment_configuration: ?AwsEcsServiceDeploymentConfigurationDetails = null,
 
     /// Contains the deployment controller type that the service uses.
-    deployment_controller: ?AwsEcsServiceDeploymentControllerDetails,
+    deployment_controller: ?AwsEcsServiceDeploymentControllerDetails = null,
 
     /// The number of instantiations of the task definition to run on the service.
-    desired_count: ?i32,
+    desired_count: ?i32 = null,
 
     /// Whether to enable Amazon ECS managed tags for the tasks in the service.
-    enable_ecs_managed_tags: ?bool,
+    enable_ecs_managed_tags: ?bool = null,
 
     /// Whether the execute command functionality is enabled for the service.
-    enable_execute_command: ?bool,
+    enable_execute_command: ?bool = null,
 
     /// After a task starts, the amount of time in seconds that the Amazon ECS
     /// service scheduler ignores unhealthy ELB target health checks.
-    health_check_grace_period_seconds: ?i32,
+    health_check_grace_period_seconds: ?i32 = null,
 
     /// The launch type that the service uses.
     ///
     /// Valid values: `EC2` | `FARGATE` | `EXTERNAL`
-    launch_type: ?[]const u8,
+    launch_type: ?[]const u8 = null,
 
     /// Information about the load balancers that the service uses.
-    load_balancers: ?[]const AwsEcsServiceLoadBalancersDetails,
+    load_balancers: ?[]const AwsEcsServiceLoadBalancersDetails = null,
 
     /// The name of the service.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// For tasks that use the `awsvpc` networking mode, the VPC subnet and security
     /// group configuration.
-    network_configuration: ?AwsEcsServiceNetworkConfigurationDetails,
+    network_configuration: ?AwsEcsServiceNetworkConfigurationDetails = null,
 
     /// The placement constraints for the tasks in the service.
-    placement_constraints: ?[]const AwsEcsServicePlacementConstraintsDetails,
+    placement_constraints: ?[]const AwsEcsServicePlacementConstraintsDetails = null,
 
     /// Information about how tasks for the service are placed.
-    placement_strategies: ?[]const AwsEcsServicePlacementStrategiesDetails,
+    placement_strategies: ?[]const AwsEcsServicePlacementStrategiesDetails = null,
 
     /// The platform version on which to run the service. Only specified for tasks
     /// that are hosted on Fargate. If a platform version is not specified, the
     /// `LATEST` platform version is used by default.
-    platform_version: ?[]const u8,
+    platform_version: ?[]const u8 = null,
 
     /// Indicates whether to propagate the tags from the task definition to the task
     /// or from the service to the task. If no value is provided, then tags are not
     /// propagated.
     ///
     /// Valid values: `TASK_DEFINITION` | `SERVICE`
-    propagate_tags: ?[]const u8,
+    propagate_tags: ?[]const u8 = null,
 
     /// The ARN of the IAM role that is associated with the service. The role allows
     /// the Amazon ECS container agent to register container instances with an ELB
     /// load balancer.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     /// The scheduling strategy to use for the service.
     ///
@@ -87,22 +87,22 @@ pub const AwsEcsServiceDetails = struct {
     /// placement constraints.
     ///
     /// Valid values: `REPLICA` | `DAEMON`
-    scheduling_strategy: ?[]const u8,
+    scheduling_strategy: ?[]const u8 = null,
 
     /// The ARN of the service.
-    service_arn: ?[]const u8,
+    service_arn: ?[]const u8 = null,
 
     /// The name of the service.
     ///
     /// The name can contain up to 255 characters. It can use letters, numbers,
     /// underscores, and hyphens.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     /// Information about the service discovery registries to assign to the service.
-    service_registries: ?[]const AwsEcsServiceServiceRegistriesDetails,
+    service_registries: ?[]const AwsEcsServiceServiceRegistriesDetails = null,
 
     /// The task definition to use for tasks in the service.
-    task_definition: ?[]const u8,
+    task_definition: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .capacity_provider_strategy = "CapacityProviderStrategy",

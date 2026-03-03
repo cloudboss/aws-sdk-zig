@@ -7,7 +7,7 @@ pub const FindingCriteria = struct {
     /// Represents a map of finding properties that match specified conditions and
     /// values when
     /// querying findings.
-    criterion: ?[]const aws.map.MapEntry(Condition),
+    criterion: ?[]const aws.map.MapEntry(Condition) = null,
 
     pub const json_field_names = .{
         .criterion = "Criterion",

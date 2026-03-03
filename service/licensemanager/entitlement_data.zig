@@ -9,7 +9,7 @@ pub const EntitlementData = struct {
     unit: EntitlementDataUnit,
 
     /// Entitlement data value.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

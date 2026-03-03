@@ -9,7 +9,7 @@ pub const OpenIDConnectConfig = struct {
     /// the OpenID
     /// identity provider. You can specify a regular expression so that AppSync can
     /// validate against multiple client identifiers at a time.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     /// The number of milliseconds that a token is valid after it's issued to a
     /// user.

@@ -12,33 +12,33 @@ const AssetBundleImportJobVPCConnectionOverrideTags = @import("asset_bundle_impo
 pub const AssetBundleImportJobOverrideTags = struct {
     /// A list of tag overrides for any `Analysis` resources that are present in the
     /// asset bundle that is imported.
-    analyses: ?[]const AssetBundleImportJobAnalysisOverrideTags,
+    analyses: ?[]const AssetBundleImportJobAnalysisOverrideTags = null,
 
     /// A list of tag overrides for any `Dashboard` resources that are present in
     /// the
     /// asset bundle that is imported.
-    dashboards: ?[]const AssetBundleImportJobDashboardOverrideTags,
+    dashboards: ?[]const AssetBundleImportJobDashboardOverrideTags = null,
 
     /// A list of tag overrides for any `DataSet` resources that are present in the
     /// asset bundle that is imported.
-    data_sets: ?[]const AssetBundleImportJobDataSetOverrideTags,
+    data_sets: ?[]const AssetBundleImportJobDataSetOverrideTags = null,
 
     /// A list of tag overrides for any `DataSource` resources that are present in
     /// the asset bundle that is imported.
-    data_sources: ?[]const AssetBundleImportJobDataSourceOverrideTags,
+    data_sources: ?[]const AssetBundleImportJobDataSourceOverrideTags = null,
 
     /// A list of tag overrides for any `Folder` resources that are present in the
     /// asset bundle that is imported.
-    folders: ?[]const AssetBundleImportJobFolderOverrideTags,
+    folders: ?[]const AssetBundleImportJobFolderOverrideTags = null,
 
     /// A list of tag overrides for any `Theme` resources that are present in the
     /// asset bundle that is imported.
-    themes: ?[]const AssetBundleImportJobThemeOverrideTags,
+    themes: ?[]const AssetBundleImportJobThemeOverrideTags = null,
 
     /// A list of tag overrides for any `VPCConnection` resources that are present
     /// in
     /// the asset bundle that is imported.
-    vpc_connections: ?[]const AssetBundleImportJobVPCConnectionOverrideTags,
+    vpc_connections: ?[]const AssetBundleImportJobVPCConnectionOverrideTags = null,
 
     pub const json_field_names = .{
         .analyses = "Analyses",

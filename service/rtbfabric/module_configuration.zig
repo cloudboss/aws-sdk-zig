@@ -3,16 +3,16 @@ const ModuleParameters = @import("module_parameters.zig").ModuleParameters;
 /// Describes the configuration of a module.
 pub const ModuleConfiguration = struct {
     /// The dependencies of the module.
-    depends_on: ?[]const []const u8,
+    depends_on: ?[]const []const u8 = null,
 
     /// Describes the parameters of a module.
-    module_parameters: ?ModuleParameters,
+    module_parameters: ?ModuleParameters = null,
 
     /// The name of the module.
     name: []const u8,
 
     /// The version of the module.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .depends_on = "dependsOn",

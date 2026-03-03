@@ -6,7 +6,7 @@ const PredefinedScalingMetricSpecification = @import("predefined_scaling_metric_
 pub const TargetTrackingConfiguration = struct {
     /// A customized metric. You can specify either a predefined metric or a
     /// customized metric.
-    customized_scaling_metric_specification: ?CustomizedScalingMetricSpecification,
+    customized_scaling_metric_specification: ?CustomizedScalingMetricSpecification = null,
 
     /// Indicates whether scale in by the target tracking scaling policy is
     /// disabled. If the
@@ -17,18 +17,18 @@ pub const TargetTrackingConfiguration = struct {
     /// resource.
     ///
     /// The default value is `false`.
-    disable_scale_in: ?bool,
+    disable_scale_in: ?bool = null,
 
     /// The estimated time, in seconds, until a newly launched instance can
     /// contribute to the
     /// CloudWatch metrics. This value is used only if the resource is an Auto
     /// Scaling group.
-    estimated_instance_warmup: ?i32,
+    estimated_instance_warmup: ?i32 = null,
 
     /// A predefined metric. You can specify either a predefined metric or a
     /// customized
     /// metric.
-    predefined_scaling_metric_specification: ?PredefinedScalingMetricSpecification,
+    predefined_scaling_metric_specification: ?PredefinedScalingMetricSpecification = null,
 
     /// The amount of time, in seconds, after a scale-in activity completes before
     /// another
@@ -44,7 +44,7 @@ pub const TargetTrackingConfiguration = struct {
     /// during the scale-in cooldown period, Auto Scaling scales out the target
     /// immediately. In this case,
     /// the scale-in cooldown period stops and doesn't complete.
-    scale_in_cooldown: ?i32,
+    scale_in_cooldown: ?i32 = null,
 
     /// The amount of time, in seconds, to wait for a previous scale-out activity to
     /// take
@@ -60,7 +60,7 @@ pub const TargetTrackingConfiguration = struct {
     /// increase the desired capacity again unless either a larger scale out is
     /// triggered or the
     /// cooldown period ends.
-    scale_out_cooldown: ?i32,
+    scale_out_cooldown: ?i32 = null,
 
     /// The target value for the metric. Although this property accepts numbers of
     /// type Double,

@@ -8,12 +8,12 @@ const DirectSchemaChangePolicy = @import("direct_schema_change_policy.zig").Dire
 /// Specifies a target that writes to a Delta Lake data source in Amazon S3.
 pub const S3DeltaDirectTarget = struct {
     /// Specifies additional connection options for the connector.
-    additional_options: ?[]const aws.map.StringMapEntry,
+    additional_options: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies whether to automatically enable data quality evaluation for the S3
     /// Delta direct target. When set to `true`,
     /// data quality checks are performed automatically during the write operation.
-    auto_data_quality: ?AutoDataQuality,
+    auto_data_quality: ?AutoDataQuality = null,
 
     /// Specifies how the data is compressed. This is generally not necessary if the
     /// data has a standard file extension. Possible values are `"gzip"` and
@@ -31,16 +31,16 @@ pub const S3DeltaDirectTarget = struct {
 
     /// Specifies the number of target partitions for distributing Delta Lake
     /// dataset files across Amazon S3.
-    number_target_partitions: ?[]const u8,
+    number_target_partitions: ?[]const u8 = null,
 
     /// Specifies native partitioning using a sequence of keys.
-    partition_keys: ?[]const []const []const u8,
+    partition_keys: ?[]const []const []const u8 = null,
 
     /// The Amazon S3 path of your Delta Lake data source to write to.
     path: []const u8,
 
     /// A policy that specifies update behavior for the crawler.
-    schema_change_policy: ?DirectSchemaChangePolicy,
+    schema_change_policy: ?DirectSchemaChangePolicy = null,
 
     pub const json_field_names = .{
         .additional_options = "AdditionalOptions",

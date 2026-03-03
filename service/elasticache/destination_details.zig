@@ -6,8 +6,8 @@ const KinesisFirehoseDestinationDetails = @import("kinesis_firehose_destination_
 /// destination.
 pub const DestinationDetails = struct {
     /// The configuration details of the CloudWatch Logs destination.
-    cloud_watch_logs_details: ?CloudWatchLogsDestinationDetails,
+    cloud_watch_logs_details: ?CloudWatchLogsDestinationDetails = null,
 
     /// The configuration details of the Kinesis Data Firehose destination.
-    kinesis_firehose_details: ?KinesisFirehoseDestinationDetails,
+    kinesis_firehose_details: ?KinesisFirehoseDestinationDetails = null,
 };

@@ -8,7 +8,7 @@ pub const AggregateResourceIdentifier = struct {
     resource_id: []const u8,
 
     /// The name of the Amazon Web Services resource.
-    resource_name: ?[]const u8,
+    resource_name: ?[]const u8 = null,
 
     /// The type of the Amazon Web Services resource.
     resource_type: ResourceType,

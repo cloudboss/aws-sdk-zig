@@ -1,10 +1,10 @@
 /// The time range of a cost estimation.
 pub const CostEstimationTimeRange = struct {
     /// The end time of the cost estimation.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The start time of the cost estimation.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .end_time = "EndTime",

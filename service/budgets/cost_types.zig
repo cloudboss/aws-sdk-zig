@@ -8,57 +8,57 @@ pub const CostTypes = struct {
     /// Specifies whether a budget includes credits.
     ///
     /// The default value is `true`.
-    include_credit: ?bool,
+    include_credit: ?bool = null,
 
     /// Specifies whether a budget includes discounts.
     ///
     /// The default value is `true`.
-    include_discount: ?bool,
+    include_discount: ?bool = null,
 
     /// Specifies whether a budget includes non-RI subscription costs.
     ///
     /// The default value is `true`.
-    include_other_subscription: ?bool,
+    include_other_subscription: ?bool = null,
 
     /// Specifies whether a budget includes recurring fees such as monthly RI fees.
     ///
     /// The default value is `true`.
-    include_recurring: ?bool,
+    include_recurring: ?bool = null,
 
     /// Specifies whether a budget includes refunds.
     ///
     /// The default value is `true`.
-    include_refund: ?bool,
+    include_refund: ?bool = null,
 
     /// Specifies whether a budget includes subscriptions.
     ///
     /// The default value is `true`.
-    include_subscription: ?bool,
+    include_subscription: ?bool = null,
 
     /// Specifies whether a budget includes support subscription fees.
     ///
     /// The default value is `true`.
-    include_support: ?bool,
+    include_support: ?bool = null,
 
     /// Specifies whether a budget includes taxes.
     ///
     /// The default value is `true`.
-    include_tax: ?bool,
+    include_tax: ?bool = null,
 
     /// Specifies whether a budget includes upfront RI costs.
     ///
     /// The default value is `true`.
-    include_upfront: ?bool,
+    include_upfront: ?bool = null,
 
     /// Specifies whether a budget uses the amortized rate.
     ///
     /// The default value is `false`.
-    use_amortized: ?bool,
+    use_amortized: ?bool = null,
 
     /// Specifies whether a budget uses a blended rate.
     ///
     /// The default value is `false`.
-    use_blended: ?bool,
+    use_blended: ?bool = null,
 
     pub const json_field_names = .{
         .include_credit = "IncludeCredit",

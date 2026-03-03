@@ -7,56 +7,56 @@ const InternetProtocol = @import("internet_protocol.zig").InternetProtocol;
 
 pub const ReplicationConfigurationTemplate = struct {
     /// Replication Configuration template ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Replication Configuration template associate default Application Migration
     /// Service Security group.
-    associate_default_security_group: ?bool,
+    associate_default_security_group: ?bool = null,
 
     /// Replication Configuration template bandwidth throttling.
     bandwidth_throttling: i64 = 0,
 
     /// Replication Configuration template create Public IP.
-    create_public_ip: ?bool,
+    create_public_ip: ?bool = null,
 
     /// Replication Configuration template data plane routing.
-    data_plane_routing: ?ReplicationConfigurationDataPlaneRouting,
+    data_plane_routing: ?ReplicationConfigurationDataPlaneRouting = null,
 
     /// Replication Configuration template use default large Staging Disk type.
-    default_large_staging_disk_type: ?ReplicationConfigurationDefaultLargeStagingDiskType,
+    default_large_staging_disk_type: ?ReplicationConfigurationDefaultLargeStagingDiskType = null,
 
     /// Replication Configuration template EBS encryption.
-    ebs_encryption: ?ReplicationConfigurationEbsEncryption,
+    ebs_encryption: ?ReplicationConfigurationEbsEncryption = null,
 
     /// Replication Configuration template EBS encryption key ARN.
-    ebs_encryption_key_arn: ?[]const u8,
+    ebs_encryption_key_arn: ?[]const u8 = null,
 
     /// Replication Configuration template internet protocol.
-    internet_protocol: ?InternetProtocol,
+    internet_protocol: ?InternetProtocol = null,
 
     /// Replication Configuration template ID.
     replication_configuration_template_id: []const u8,
 
     /// Replication Configuration template server instance type.
-    replication_server_instance_type: ?[]const u8,
+    replication_server_instance_type: ?[]const u8 = null,
 
     /// Replication Configuration template server Security Groups IDs.
-    replication_servers_security_groups_i_ds: ?[]const []const u8,
+    replication_servers_security_groups_i_ds: ?[]const []const u8 = null,
 
     /// Replication Configuration template Staging Area subnet ID.
-    staging_area_subnet_id: ?[]const u8,
+    staging_area_subnet_id: ?[]const u8 = null,
 
     /// Replication Configuration template Staging Area Tags.
-    staging_area_tags: ?[]const aws.map.StringMapEntry,
+    staging_area_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Replication Configuration template Tags.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Replication Configuration template use Dedicated Replication Server.
-    use_dedicated_replication_server: ?bool,
+    use_dedicated_replication_server: ?bool = null,
 
     /// Replication Configuration template use Fips Endpoint.
-    use_fips_endpoint: ?bool,
+    use_fips_endpoint: ?bool = null,
 
     pub const json_field_names = .{
         .arn = "arn",

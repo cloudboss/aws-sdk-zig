@@ -8,7 +8,7 @@ pub const PlatformFilter = struct {
     /// Valid values: `=` | `!=` |
     /// `` | `>=` |
     /// `contains` | `begins_with` | `ends_with`
-    operator: ?[]const u8,
+    operator: ?[]const u8 = null,
 
     /// The platform version attribute to which the filter values are applied.
     ///
@@ -17,7 +17,7 @@ pub const PlatformFilter = struct {
     /// `PlatformLifecycleState` | `PlatformOwner` |
     /// `SupportedTier` | `SupportedAddon` |
     /// `ProgrammingLanguageName` | `OperatingSystemName`
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     /// The list of values applied to the filtering platform version attribute. Only
     /// one value is supported
@@ -35,5 +35,5 @@ pub const PlatformFilter = struct {
     ///
     /// * `SupportedAddon`: `Log/S3` | `Monitoring/Healthd` |
     /// `WorkerDaemon/SQSD`
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 };

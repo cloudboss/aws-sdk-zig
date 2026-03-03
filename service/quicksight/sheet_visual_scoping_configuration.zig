@@ -13,7 +13,7 @@ pub const SheetVisualScopingConfiguration = struct {
     sheet_id: []const u8,
 
     /// The selected visuals that the filter is applied to.
-    visual_ids: ?[]const []const u8,
+    visual_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .scope = "Scope",

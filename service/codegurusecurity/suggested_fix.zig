@@ -2,10 +2,10 @@
 pub const SuggestedFix = struct {
     /// The suggested code fix. If applicable, includes code patch to replace your
     /// source code.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// A description of the suggested code fix and why it is being suggested.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "code",

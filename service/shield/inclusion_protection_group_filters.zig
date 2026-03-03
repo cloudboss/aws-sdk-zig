@@ -10,19 +10,19 @@ const ProtectedResourceType = @import("protected_resource_type.zig").ProtectedRe
 /// criteria that you provide.
 pub const InclusionProtectionGroupFilters = struct {
     /// The aggregation setting of the protection groups that you want to retrieve.
-    aggregations: ?[]const ProtectionGroupAggregation,
+    aggregations: ?[]const ProtectionGroupAggregation = null,
 
     /// The pattern specification of the protection groups that you want to
     /// retrieve.
-    patterns: ?[]const ProtectionGroupPattern,
+    patterns: ?[]const ProtectionGroupPattern = null,
 
     /// The ID of the protection group that you want to retrieve.
-    protection_group_ids: ?[]const []const u8,
+    protection_group_ids: ?[]const []const u8 = null,
 
     /// The resource type configuration of the protection groups that you want to
     /// retrieve. In the protection group configuration, you specify the resource
     /// type when you set the group's `Pattern` to `BY_RESOURCE_TYPE`.
-    resource_types: ?[]const ProtectedResourceType,
+    resource_types: ?[]const ProtectedResourceType = null,
 
     pub const json_field_names = .{
         .aggregations = "Aggregations",

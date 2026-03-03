@@ -5,13 +5,13 @@ const MonitoringParquetDatasetFormat = @import("monitoring_parquet_dataset_forma
 /// Represents the dataset format used when running a monitoring job.
 pub const MonitoringDatasetFormat = struct {
     /// The CSV dataset used in the monitoring job.
-    csv: ?MonitoringCsvDatasetFormat,
+    csv: ?MonitoringCsvDatasetFormat = null,
 
     /// The JSON dataset used in the monitoring job
-    json: ?MonitoringJsonDatasetFormat,
+    json: ?MonitoringJsonDatasetFormat = null,
 
     /// The Parquet dataset used in the monitoring job
-    parquet: ?MonitoringParquetDatasetFormat,
+    parquet: ?MonitoringParquetDatasetFormat = null,
 
     pub const json_field_names = .{
         .csv = "Csv",

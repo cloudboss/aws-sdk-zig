@@ -8,7 +8,7 @@ pub const TableFieldCustomTextContent = struct {
     font_configuration: FontConfiguration,
 
     /// The string value of the custom text content for the table URL link content.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .font_configuration = "FontConfiguration",

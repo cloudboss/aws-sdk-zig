@@ -4,10 +4,10 @@ const BatchPermissionsRequestEntry = @import("batch_permissions_request_entry.zi
 /// A list of failures when performing a batch grant or batch revoke operation.
 pub const BatchPermissionsFailureEntry = struct {
     /// An error message that applies to the failure of the entry.
-    @"error": ?ErrorDetail,
+    @"error": ?ErrorDetail = null,
 
     /// An identifier for an entry of the batch request.
-    request_entry: ?BatchPermissionsRequestEntry,
+    request_entry: ?BatchPermissionsRequestEntry = null,
 
     pub const json_field_names = .{
         .@"error" = "Error",

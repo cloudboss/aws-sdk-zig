@@ -4,7 +4,7 @@ const ClientPolicyTls = @import("client_policy_tls.zig").ClientPolicyTls;
 pub const ClientPolicy = struct {
     /// A reference to an object that represents a Transport Layer Security (TLS)
     /// client policy.
-    tls: ?ClientPolicyTls,
+    tls: ?ClientPolicyTls = null,
 
     pub const json_field_names = .{
         .tls = "tls",

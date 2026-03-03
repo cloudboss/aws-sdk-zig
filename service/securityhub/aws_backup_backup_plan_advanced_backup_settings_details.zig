@@ -11,13 +11,13 @@ pub const AwsBackupBackupPlanAdvancedBackupSettingsDetails = struct {
     ///
     /// * Set to `WindowsVSS: disabled` to create a regular backup. The `WindowsVSS`
     ///   option is not enabled by default.
-    backup_options: ?[]const aws.map.StringMapEntry,
+    backup_options: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of a resource type. The only supported resource type is Amazon EC2
     /// instances with Windows VSS.
     ///
     /// The only valid value is `EC2`.
-    resource_type: ?[]const u8,
+    resource_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .backup_options = "BackupOptions",

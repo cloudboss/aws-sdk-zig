@@ -3,22 +3,22 @@ const TelemetryStatus = @import("telemetry_status.zig").TelemetryStatus;
 /// Describes telemetry for a VPN tunnel.
 pub const VgwTelemetry = struct {
     /// The number of accepted routes.
-    accepted_route_count: ?i32,
+    accepted_route_count: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the VPN tunnel endpoint certificate.
-    certificate_arn: ?[]const u8,
+    certificate_arn: ?[]const u8 = null,
 
     /// The date and time of the last change in status. This field is updated when
     /// changes in IKE (Phase 1), IPSec (Phase 2), or BGP status are detected.
-    last_status_change: ?i64,
+    last_status_change: ?i64 = null,
 
     /// The Internet-routable IP address of the virtual private gateway's outside
     /// interface.
-    outside_ip_address: ?[]const u8,
+    outside_ip_address: ?[]const u8 = null,
 
     /// The status of the VPN tunnel.
-    status: ?TelemetryStatus,
+    status: ?TelemetryStatus = null,
 
     /// If an error occurs, a description of the error.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 };

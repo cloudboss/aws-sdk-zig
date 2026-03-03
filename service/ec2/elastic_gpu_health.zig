@@ -5,5 +5,5 @@ const ElasticGpuStatus = @import("elastic_gpu_status.zig").ElasticGpuStatus;
 /// Describes the status of an Elastic Graphics accelerator.
 pub const ElasticGpuHealth = struct {
     /// The health status.
-    status: ?ElasticGpuStatus,
+    status: ?ElasticGpuStatus = null,
 };

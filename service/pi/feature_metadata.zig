@@ -20,7 +20,7 @@ pub const FeatureMetadata = struct {
     ///   requires a reboot to take effect.
     ///
     /// * `UNKNOWN` - The feature status couldn't be determined.
-    status: ?FeatureStatus,
+    status: ?FeatureStatus = null,
 
     pub const json_field_names = .{
         .status = "Status",

@@ -6,13 +6,13 @@ const AssetPropertyBindingValue = @import("asset_property_binding_value.zig").As
 /// `assetModelProperty`, `list`.
 pub const ComputationModelDataBindingValue = struct {
     /// Specifies an asset model property data binding value.
-    asset_model_property: ?AssetModelPropertyBindingValue,
+    asset_model_property: ?AssetModelPropertyBindingValue = null,
 
     /// The asset property value used for computation model data binding.
-    asset_property: ?AssetPropertyBindingValue,
+    asset_property: ?AssetPropertyBindingValue = null,
 
     /// Specifies a list of data binding value.
-    list: ?[]const ComputationModelDataBindingValue,
+    list: ?[]const ComputationModelDataBindingValue = null,
 
     pub const json_field_names = .{
         .asset_model_property = "assetModelProperty",

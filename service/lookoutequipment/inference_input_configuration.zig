@@ -8,17 +8,17 @@ pub const InferenceInputConfiguration = struct {
     /// Specifies configuration information for the input data for the inference,
     /// including
     /// timestamp format and delimiter.
-    inference_input_name_configuration: ?InferenceInputNameConfiguration,
+    inference_input_name_configuration: ?InferenceInputNameConfiguration = null,
 
     /// Indicates the difference between your time zone and Coordinated Universal
     /// Time
     /// (UTC).
-    input_time_zone_offset: ?[]const u8,
+    input_time_zone_offset: ?[]const u8 = null,
 
     /// Specifies configuration information for the input data for the inference,
     /// including
     /// Amazon S3 location of input data.
-    s3_input_configuration: ?InferenceS3InputConfiguration,
+    s3_input_configuration: ?InferenceS3InputConfiguration = null,
 
     pub const json_field_names = .{
         .inference_input_name_configuration = "InferenceInputNameConfiguration",

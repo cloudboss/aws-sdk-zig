@@ -3,19 +3,19 @@
 /// is part of the Metrics object.
 pub const ErrorMetric = struct {
     /// The Forecast type used to compute WAPE, MAPE, MASE, and RMSE.
-    forecast_type: ?[]const u8,
+    forecast_type: ?[]const u8 = null,
 
     /// The Mean Absolute Percentage Error (MAPE)
-    mape: ?f64,
+    mape: ?f64 = null,
 
     /// The Mean Absolute Scaled Error (MASE)
-    mase: ?f64,
+    mase: ?f64 = null,
 
     /// The root-mean-square error (RMSE).
-    rmse: ?f64,
+    rmse: ?f64 = null,
 
     /// The weighted absolute percentage error (WAPE).
-    wape: ?f64,
+    wape: ?f64 = null,
 
     pub const json_field_names = .{
         .forecast_type = "ForecastType",

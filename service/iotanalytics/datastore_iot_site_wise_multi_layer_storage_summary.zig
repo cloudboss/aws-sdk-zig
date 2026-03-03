@@ -5,7 +5,7 @@ const IotSiteWiseCustomerManagedDatastoreS3StorageSummary = @import("iot_site_wi
 pub const DatastoreIotSiteWiseMultiLayerStorageSummary = struct {
     /// Used to store data used by IoT SiteWise in an Amazon S3 bucket that you
     /// manage.
-    customer_managed_s3_storage: ?IotSiteWiseCustomerManagedDatastoreS3StorageSummary,
+    customer_managed_s3_storage: ?IotSiteWiseCustomerManagedDatastoreS3StorageSummary = null,
 
     pub const json_field_names = .{
         .customer_managed_s3_storage = "customerManagedS3Storage",

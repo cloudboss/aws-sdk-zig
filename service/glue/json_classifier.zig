@@ -1,7 +1,7 @@
 /// A classifier for `JSON` content.
 pub const JsonClassifier = struct {
     /// The time that this classifier was registered.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// A `JsonPath` string defining the JSON data for the classifier to classify.
     /// Glue supports a subset of JsonPath, as described in [Writing JsonPath Custom
@@ -9,7 +9,7 @@ pub const JsonClassifier = struct {
     json_path: []const u8,
 
     /// The time that this classifier was last updated.
-    last_updated: ?i64,
+    last_updated: ?i64 = null,
 
     /// The name of the classifier.
     name: []const u8,

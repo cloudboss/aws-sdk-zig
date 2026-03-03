@@ -14,7 +14,7 @@ pub const PrivateRegistryAccess = struct {
     /// repositories. If the role is activated, the Amazon Resource Name (ARN) of
     /// the role is also
     /// listed.
-    ecr_image_puller_role: ?ContainerServiceECRImagePullerRole,
+    ecr_image_puller_role: ?ContainerServiceECRImagePullerRole = null,
 
     pub const json_field_names = .{
         .ecr_image_puller_role = "ecrImagePullerRole",

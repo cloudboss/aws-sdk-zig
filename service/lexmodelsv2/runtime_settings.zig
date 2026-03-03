@@ -7,11 +7,11 @@ pub const RuntimeSettings = struct {
     /// An object containing specifications for the Assisted NLU feature within the
     /// bot's runtime settings. These settings determine how the bot processes and
     /// interprets user utterances during conversations.
-    nlu_improvement: ?NluImprovementSpecification,
+    nlu_improvement: ?NluImprovementSpecification = null,
 
     /// An object containing specifications for the assisted slot resolution
     /// feature.
-    slot_resolution_improvement: ?SlotResolutionImprovementSpecification,
+    slot_resolution_improvement: ?SlotResolutionImprovementSpecification = null,
 
     pub const json_field_names = .{
         .nlu_improvement = "nluImprovement",

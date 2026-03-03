@@ -9,7 +9,7 @@ const ScanSetting = @import("scan_setting.zig").ScanSetting;
 /// resources.
 pub const BackupPlan = struct {
     /// Contains a list of `BackupOptions` for each resource type.
-    advanced_backup_settings: ?[]const AdvancedBackupSetting,
+    advanced_backup_settings: ?[]const AdvancedBackupSetting = null,
 
     /// The display name of a backup plan. Must contain only alphanumeric or '-_.'
     /// special characters.
@@ -24,7 +24,7 @@ pub const BackupPlan = struct {
 
     /// Contains your scanning configuration for the backup plan and includes the
     /// Malware scanner, your selected resources, and scanner role.
-    scan_settings: ?[]const ScanSetting,
+    scan_settings: ?[]const ScanSetting = null,
 
     pub const json_field_names = .{
         .advanced_backup_settings = "AdvancedBackupSettings",

@@ -6,22 +6,22 @@ const VoiceConnectorItem = @import("voice_connector_item.zig").VoiceConnectorIte
 /// fallback in case of availability events.
 pub const VoiceConnectorGroup = struct {
     /// The Voice Connector group's creation time stamp, in ISO 8601 format.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The name of a Voice Connector group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Voice Connector group's creation time stamp, in ISO 8601 format.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     /// The ARN of the Voice Connector group.
-    voice_connector_group_arn: ?[]const u8,
+    voice_connector_group_arn: ?[]const u8 = null,
 
     /// The ID of a Voice Connector group.
-    voice_connector_group_id: ?[]const u8,
+    voice_connector_group_id: ?[]const u8 = null,
 
     /// The Voice Connectors to which you route inbound calls.
-    voice_connector_items: ?[]const VoiceConnectorItem,
+    voice_connector_items: ?[]const VoiceConnectorItem = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

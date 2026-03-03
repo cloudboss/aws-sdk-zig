@@ -11,15 +11,15 @@ const LanguageCode = @import("language_code.zig").LanguageCode;
 /// WebvttHlsSourceSettings.
 pub const WebvttHlsSourceSettings = struct {
     /// Optional. Specify alternative group ID
-    rendition_group_id: ?[]const u8,
+    rendition_group_id: ?[]const u8 = null,
 
     /// Optionally specify the language, using an ISO 639-2 or ISO 639-3
     /// three-letter code in all capital letters. You can find a list of codes at:
     /// https://www.loc.gov/standards/iso639-2/php/code_list.php
-    rendition_language_code: ?LanguageCode,
+    rendition_language_code: ?LanguageCode = null,
 
     /// Optional. Specify media name
-    rendition_name: ?[]const u8,
+    rendition_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .rendition_group_id = "RenditionGroupId",

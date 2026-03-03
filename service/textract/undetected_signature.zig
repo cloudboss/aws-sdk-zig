@@ -2,7 +2,7 @@
 /// where it was expected but not found.
 pub const UndetectedSignature = struct {
     /// The page where a signature was expected but not found.
-    page: ?i32,
+    page: ?i32 = null,
 
     pub const json_field_names = .{
         .page = "Page",

@@ -4,10 +4,10 @@
 /// the attributes can be defined.
 pub const ShortFormatText = struct {
     /// Plain text format.
-    plain_text: ?[]const u8,
+    plain_text: ?[]const u8 = null,
 
     /// Rich text. Examples of rich text include bold, underline, and italics.
-    rich_text: ?[]const u8,
+    rich_text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .plain_text = "PlainText",

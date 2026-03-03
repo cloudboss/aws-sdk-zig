@@ -3,31 +3,31 @@ const ApplyMethod = @import("apply_method.zig").ApplyMethod;
 /// Detailed information about an individual parameter.
 pub const Parameter = struct {
     /// Specifies the valid range of values for the parameter.
-    allowed_values: ?[]const u8,
+    allowed_values: ?[]const u8 = null,
 
     /// Indicates when to apply parameter updates.
-    apply_method: ?ApplyMethod,
+    apply_method: ?ApplyMethod = null,
 
     /// Specifies the engine-specific parameters type.
-    apply_type: ?[]const u8,
+    apply_type: ?[]const u8 = null,
 
     /// Specifies the valid data type for the parameter.
-    data_type: ?[]const u8,
+    data_type: ?[]const u8 = null,
 
     /// Provides a description of the parameter.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether (`true`) or not (`false`) the parameter can
     /// be modified. Some parameters have security or operational implications that
     /// prevent them
     /// from being changed.
-    is_modifiable: ?bool,
+    is_modifiable: ?bool = null,
 
     /// The earliest engine version to which the parameter can apply.
-    minimum_engine_version: ?[]const u8,
+    minimum_engine_version: ?[]const u8 = null,
 
     /// Specifies the name of the parameter.
-    parameter_name: ?[]const u8,
+    parameter_name: ?[]const u8 = null,
 
     /// Specifies the value of the parameter.
     /// Must be one or more of the cluster parameter's `AllowedValues` in CSV
@@ -56,8 +56,8 @@ pub const Parameter = struct {
     ///   and above.
     /// Only supported starting with Amazon DocumentDB 4.0 (engine version
     /// 2.0.10980) and Amazon DocumentDB 5.0 (engine version 3.0.11051).
-    parameter_value: ?[]const u8,
+    parameter_value: ?[]const u8 = null,
 
     /// Indicates the source of the parameter value.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 };

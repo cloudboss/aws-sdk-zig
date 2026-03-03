@@ -10,7 +10,7 @@ pub const SnsAction = struct {
     /// payload should
     /// be extracted. To read more about SNS message formats, see
     /// [https://docs.aws.amazon.com/sns/latest/dg/json-formats.html](https://docs.aws.amazon.com/sns/latest/dg/json-formats.html) refer to their official documentation.
-    message_format: ?MessageFormat,
+    message_format: ?MessageFormat = null,
 
     /// The ARN of the IAM role that grants access.
     role_arn: []const u8,

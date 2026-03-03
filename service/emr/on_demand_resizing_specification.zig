@@ -7,9 +7,9 @@ const OnDemandCapacityReservationOptions = @import("on_demand_capacity_reservati
 pub const OnDemandResizingSpecification = struct {
     /// Specifies the allocation strategy to use to launch On-Demand instances
     /// during a resize. The default is `lowest-price`.
-    allocation_strategy: ?OnDemandProvisioningAllocationStrategy,
+    allocation_strategy: ?OnDemandProvisioningAllocationStrategy = null,
 
-    capacity_reservation_options: ?OnDemandCapacityReservationOptions,
+    capacity_reservation_options: ?OnDemandCapacityReservationOptions = null,
 
     /// On-Demand resize timeout in minutes. If On-Demand Instances are not
     /// provisioned within
@@ -21,7 +21,7 @@ pub const OnDemandResizingSpecification = struct {
     /// customer (via Amazon EMR Console, Amazon EMR CLI modify-instance-fleet or
     /// Amazon EMR SDK ModifyInstanceFleet API) or by Amazon EMR due to Amazon EC2
     /// Spot Reclamation.
-    timeout_duration_minutes: ?i32,
+    timeout_duration_minutes: ?i32 = null,
 
     pub const json_field_names = .{
         .allocation_strategy = "AllocationStrategy",

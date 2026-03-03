@@ -9,7 +9,7 @@ const TriggerConfig = @import("trigger_config.zig").TriggerConfig;
 /// customers.
 pub const FlowDefinition = struct {
     /// A description of the flow you want to create.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The specified name of the flow. Use underscores (_) or hyphens (-) only.
     /// Spaces are not

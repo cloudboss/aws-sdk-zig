@@ -5,39 +5,39 @@ const RecordStatus = @import("record_status.zig").RecordStatus;
 /// Information about a request operation.
 pub const RecordDetail = struct {
     /// The UTC time stamp of the creation time.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// The ARN of the launch role associated with the provisioned product.
-    launch_role_arn: ?[]const u8,
+    launch_role_arn: ?[]const u8 = null,
 
     /// The path identifier.
-    path_id: ?[]const u8,
+    path_id: ?[]const u8 = null,
 
     /// The product identifier.
-    product_id: ?[]const u8,
+    product_id: ?[]const u8 = null,
 
     /// The identifier of the provisioned product.
-    provisioned_product_id: ?[]const u8,
+    provisioned_product_id: ?[]const u8 = null,
 
     /// The user-friendly name of the provisioned product.
-    provisioned_product_name: ?[]const u8,
+    provisioned_product_name: ?[]const u8 = null,
 
     /// The type of provisioned product. The supported values are `CFN_STACK`,
     /// `CFN_STACKSET`,
     /// `TERRAFORM_OPEN_SOURCE`, `TERRAFORM_CLOUD`, and `EXTERNAL`.
-    provisioned_product_type: ?[]const u8,
+    provisioned_product_type: ?[]const u8 = null,
 
     /// The identifier of the provisioning artifact.
-    provisioning_artifact_id: ?[]const u8,
+    provisioning_artifact_id: ?[]const u8 = null,
 
     /// The errors that occurred.
-    record_errors: ?[]const RecordError,
+    record_errors: ?[]const RecordError = null,
 
     /// The identifier of the record.
-    record_id: ?[]const u8,
+    record_id: ?[]const u8 = null,
 
     /// One or more tags.
-    record_tags: ?[]const RecordTag,
+    record_tags: ?[]const RecordTag = null,
 
     /// The record type.
     ///
@@ -46,7 +46,7 @@ pub const RecordDetail = struct {
     /// * `UPDATE_PROVISIONED_PRODUCT`
     ///
     /// * `TERMINATE_PROVISIONED_PRODUCT`
-    record_type: ?[]const u8,
+    record_type: ?[]const u8 = null,
 
     /// The status of the provisioned product.
     ///
@@ -62,10 +62,10 @@ pub const RecordDetail = struct {
     ///
     /// * `FAILED` - The requested operation has unsuccessfully completed.
     /// Investigate using the error messages returned.
-    status: ?RecordStatus,
+    status: ?RecordStatus = null,
 
     /// The time when the record was last updated.
-    updated_time: ?i64,
+    updated_time: ?i64 = null,
 
     pub const json_field_names = .{
         .created_time = "CreatedTime",

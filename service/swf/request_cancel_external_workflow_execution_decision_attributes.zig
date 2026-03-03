@@ -24,10 +24,10 @@
 pub const RequestCancelExternalWorkflowExecutionDecisionAttributes = struct {
     /// The data attached to the event that can be used by the decider in subsequent
     /// workflow tasks.
-    control: ?[]const u8,
+    control: ?[]const u8 = null,
 
     /// The `runId` of the external workflow execution to cancel.
-    run_id: ?[]const u8,
+    run_id: ?[]const u8 = null,
 
     /// The `workflowId` of the external workflow execution to cancel.
     workflow_id: []const u8,

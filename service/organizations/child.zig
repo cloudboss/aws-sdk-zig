@@ -16,10 +16,10 @@ pub const Child = struct {
     /// contains the OU). This string is followed by a second "-" dash and from 8 to
     /// 32 additional
     /// lowercase letters or digits.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The type of this child entity.
-    @"type": ?ChildType,
+    @"type": ?ChildType = null,
 
     pub const json_field_names = .{
         .id = "Id",

@@ -7,39 +7,39 @@ const RunIdentifier = @import("run_identifier.zig").RunIdentifier;
 /// Summary information about a statistic.
 pub const StatisticSummary = struct {
     /// The list of columns referenced by the statistic.
-    columns_referenced: ?[]const []const u8,
+    columns_referenced: ?[]const []const u8 = null,
 
     /// The value of the statistic.
     double_value: f64 = 0,
 
     /// The evaluation level of the statistic. Possible values: `Dataset`, `Column`,
     /// `Multicolumn`.
-    evaluation_level: ?StatisticEvaluationLevel,
+    evaluation_level: ?StatisticEvaluationLevel = null,
 
     /// The inclusion annotation for the statistic.
-    inclusion_annotation: ?TimestampedInclusionAnnotation,
+    inclusion_annotation: ?TimestampedInclusionAnnotation = null,
 
     /// The Profile ID.
-    profile_id: ?[]const u8,
+    profile_id: ?[]const u8 = null,
 
     /// The timestamp when the statistic was recorded.
-    recorded_on: ?i64,
+    recorded_on: ?i64 = null,
 
     /// The list of datasets referenced by the statistic.
-    referenced_datasets: ?[]const []const u8,
+    referenced_datasets: ?[]const []const u8 = null,
 
     /// The Run Identifier
-    run_identifier: ?RunIdentifier,
+    run_identifier: ?RunIdentifier = null,
 
     /// The Statistic ID.
-    statistic_id: ?[]const u8,
+    statistic_id: ?[]const u8 = null,
 
     /// The name of the statistic.
-    statistic_name: ?[]const u8,
+    statistic_name: ?[]const u8 = null,
 
     /// A `StatisticPropertiesMap`, which contains a `NameString` and
     /// `DescriptionString`
-    statistic_properties: ?[]const aws.map.StringMapEntry,
+    statistic_properties: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .columns_referenced = "ColumnsReferenced",

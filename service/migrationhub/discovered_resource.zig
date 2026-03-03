@@ -8,7 +8,7 @@ pub const DiscoveredResource = struct {
     /// A description that can be free-form text to record additional detail about
     /// the
     /// discovered resource for clarity or later reference.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration_id = "ConfigurationId",

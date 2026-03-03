@@ -7,7 +7,7 @@ pub const TargetTrackingConfiguration = struct {
     /// A customized metric. You must specify either a predefined metric or a
     /// customized
     /// metric.
-    customized_metric_specification: ?CustomizedMetricSpecification,
+    customized_metric_specification: ?CustomizedMetricSpecification = null,
 
     /// Indicates whether scaling in by the target tracking scaling policy is
     /// disabled. If
@@ -16,12 +16,12 @@ pub const TargetTrackingConfiguration = struct {
     /// the Auto Scaling group. Otherwise, the target tracking scaling policy can
     /// remove instances from
     /// the Auto Scaling group. The default is `false`.
-    disable_scale_in: ?bool,
+    disable_scale_in: ?bool = null,
 
     /// A predefined metric. You must specify either a predefined metric or a
     /// customized
     /// metric.
-    predefined_metric_specification: ?PredefinedMetricSpecification,
+    predefined_metric_specification: ?PredefinedMetricSpecification = null,
 
     /// The target value for the metric.
     ///

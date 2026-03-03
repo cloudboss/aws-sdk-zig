@@ -6,10 +6,10 @@ const SearchResourcesSimpleCriterionKey = @import("search_resources_simple_crite
 pub const SearchResourcesSimpleCriterion = struct {
     /// The operator to use in the condition. Valid values are EQ (equals) and NE
     /// (not equals).
-    comparator: ?SearchResourcesComparator,
+    comparator: ?SearchResourcesComparator = null,
 
     /// The property to use in the condition.
-    key: ?SearchResourcesSimpleCriterionKey,
+    key: ?SearchResourcesSimpleCriterionKey = null,
 
     /// An array that lists one or more values to use in the condition. If you
     /// specify multiple values, Amazon Macie uses OR logic to join the values.
@@ -30,7 +30,7 @@ pub const SearchResourcesSimpleCriterion = struct {
     ///
     /// Values are case sensitive. Also, Macie doesn't support use of partial values
     /// or wildcard characters in values.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .comparator = "comparator",

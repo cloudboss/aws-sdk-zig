@@ -4,9 +4,9 @@ const SrtListenerSettingsRequest = @import("srt_listener_settings_request.zig").
 /// Configures the settings for SRT inputs. Provide either srtCallerSources (for
 /// SRT_CALLER type) OR srtListenerSettings (for SRT_LISTENER type), not both.
 pub const SrtSettingsRequest = struct {
-    srt_caller_sources: ?[]const SrtCallerSourceRequest,
+    srt_caller_sources: ?[]const SrtCallerSourceRequest = null,
 
-    srt_listener_settings: ?SrtListenerSettingsRequest,
+    srt_listener_settings: ?SrtListenerSettingsRequest = null,
 
     pub const json_field_names = .{
         .srt_caller_sources = "SrtCallerSources",

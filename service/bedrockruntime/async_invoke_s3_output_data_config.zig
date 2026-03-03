@@ -1,10 +1,10 @@
 /// Asynchronous invocation output data settings.
 pub const AsyncInvokeS3OutputDataConfig = struct {
     /// If the bucket belongs to another AWS account, specify that account's ID.
-    bucket_owner: ?[]const u8,
+    bucket_owner: ?[]const u8 = null,
 
     /// A KMS encryption key ID.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// An object URI starting with `s3://`.
     s_3_uri: []const u8,

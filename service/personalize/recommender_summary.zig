@@ -3,27 +3,27 @@ const RecommenderConfig = @import("recommender_config.zig").RecommenderConfig;
 /// Provides a summary of the properties of the recommender.
 pub const RecommenderSummary = struct {
     /// The date and time (in Unix format) that the recommender was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the Domain dataset group that contains the
     /// recommender.
-    dataset_group_arn: ?[]const u8,
+    dataset_group_arn: ?[]const u8 = null,
 
     /// The date and time (in Unix format) that the recommender was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The name of the recommender.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the recipe (Domain dataset group use case)
     /// that the recommender was created for.
-    recipe_arn: ?[]const u8,
+    recipe_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the recommender.
-    recommender_arn: ?[]const u8,
+    recommender_arn: ?[]const u8 = null,
 
     /// The configuration details of the recommender.
-    recommender_config: ?RecommenderConfig,
+    recommender_config: ?RecommenderConfig = null,
 
     /// The status of the recommender. A recommender can be in one of the following
     /// states:
@@ -34,7 +34,7 @@ pub const RecommenderSummary = struct {
     ///   IN_PROGRESS > ACTIVE
     ///
     /// * DELETE PENDING > DELETE IN_PROGRESS
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

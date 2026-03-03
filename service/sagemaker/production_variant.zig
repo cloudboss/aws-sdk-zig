@@ -18,21 +18,21 @@ pub const ProductionVariant = struct {
     ///
     /// This parameter was used to specify the size of the EI instance to use for
     /// the production variant.
-    accelerator_type: ?ProductionVariantAcceleratorType,
+    accelerator_type: ?ProductionVariantAcceleratorType = null,
 
     /// Settings for the capacity reservation for the compute instances that
     /// SageMaker AI reserves for an endpoint.
-    capacity_reservation_config: ?ProductionVariantCapacityReservationConfig,
+    capacity_reservation_config: ?ProductionVariantCapacityReservationConfig = null,
 
     /// The timeout value, in seconds, for your inference container to pass health
     /// check by SageMaker Hosting. For more information about health check, see
     /// [How Your Container Should Respond to Health Check (Ping)
     /// Requests](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests).
-    container_startup_health_check_timeout_in_seconds: ?i32,
+    container_startup_health_check_timeout_in_seconds: ?i32 = null,
 
     /// Specifies configuration for a core dump from the model container when the
     /// process crashes.
-    core_dump_config: ?ProductionVariantCoreDumpConfig,
+    core_dump_config: ?ProductionVariantCoreDumpConfig = null,
 
     /// You can use this parameter to turn on native Amazon Web Services Systems
     /// Manager (SSM) access for a production variant behind an endpoint. By
@@ -40,7 +40,7 @@ pub const ProductionVariant = struct {
     /// endpoint. You can turn on or turn off SSM access for a production variant
     /// behind an existing endpoint by creating a new endpoint configuration and
     /// calling `UpdateEndpoint`.
-    enable_ssm_access: ?bool,
+    enable_ssm_access: ?bool = null,
 
     /// Specifies an option from a collection of preconfigured Amazon Machine Image
     /// (AMI) images. Each image is configured by Amazon Web Services with a set of
@@ -78,41 +78,41 @@ pub const ProductionVariant = struct {
     ///
     /// * Accelerator: Inferentia2 and Trainium
     /// * Neuron driver version: 2.19
-    inference_ami_version: ?ProductionVariantInferenceAmiVersion,
+    inference_ami_version: ?ProductionVariantInferenceAmiVersion = null,
 
     /// Number of instances to launch initially.
-    initial_instance_count: ?i32,
+    initial_instance_count: ?i32 = null,
 
     /// Determines initial traffic distribution among all of the models that you
     /// specify in the endpoint configuration. The traffic to a production variant
     /// is determined by the ratio of the `VariantWeight` to the sum of all
     /// `VariantWeight` values across all ProductionVariants. If unspecified, it
     /// defaults to 1.0.
-    initial_variant_weight: ?f32,
+    initial_variant_weight: ?f32 = null,
 
     /// The ML compute instance type.
-    instance_type: ?ProductionVariantInstanceType,
+    instance_type: ?ProductionVariantInstanceType = null,
 
     /// Settings that control the range in the number of instances that the endpoint
     /// provisions as it scales up or down to accommodate traffic.
-    managed_instance_scaling: ?ProductionVariantManagedInstanceScaling,
+    managed_instance_scaling: ?ProductionVariantManagedInstanceScaling = null,
 
     /// The timeout value, in seconds, to download and extract the model that you
     /// want to host from Amazon S3 to the individual inference instance associated
     /// with this production variant.
-    model_data_download_timeout_in_seconds: ?i32,
+    model_data_download_timeout_in_seconds: ?i32 = null,
 
     /// The name of the model that you want to host. This is the name that you
     /// specified when creating the model.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     /// Settings that control how the endpoint routes incoming traffic to the
     /// instances that the endpoint hosts.
-    routing_config: ?ProductionVariantRoutingConfig,
+    routing_config: ?ProductionVariantRoutingConfig = null,
 
     /// The serverless configuration for an endpoint. Specifies a serverless
     /// endpoint configuration instead of an instance-based endpoint configuration.
-    serverless_config: ?ProductionVariantServerlessConfig,
+    serverless_config: ?ProductionVariantServerlessConfig = null,
 
     /// The name of the production variant.
     variant_name: []const u8,
@@ -120,7 +120,7 @@ pub const ProductionVariant = struct {
     /// The size, in GB, of the ML storage volume attached to individual inference
     /// instance associated with the production variant. Currently only Amazon EBS
     /// gp2 storage volumes are supported.
-    volume_size_in_gb: ?i32,
+    volume_size_in_gb: ?i32 = null,
 
     pub const json_field_names = .{
         .accelerator_type = "AcceleratorType",

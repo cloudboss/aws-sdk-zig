@@ -4,16 +4,16 @@ const GrpcGatewayRouteMetadata = @import("grpc_gateway_route_metadata.zig").Grpc
 /// An object that represents the criteria for determining a request match.
 pub const GrpcGatewayRouteMatch = struct {
     /// The gateway route host name to be matched on.
-    hostname: ?GatewayRouteHostnameMatch,
+    hostname: ?GatewayRouteHostnameMatch = null,
 
     /// The gateway route metadata to be matched on.
-    metadata: ?[]const GrpcGatewayRouteMetadata,
+    metadata: ?[]const GrpcGatewayRouteMetadata = null,
 
     /// The gateway route port to be matched on.
-    port: ?i32,
+    port: ?i32 = null,
 
     /// The fully qualified domain name for the service to match from the request.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .hostname = "hostname",

@@ -4,7 +4,7 @@ pub const BaselineSummary = struct {
     arn: []const u8,
 
     /// A summary description of a Baseline.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The human-readable name of a Baseline.
     name: []const u8,

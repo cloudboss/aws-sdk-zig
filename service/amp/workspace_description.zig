@@ -7,7 +7,7 @@ const WorkspaceStatus = @import("workspace_status.zig").WorkspaceStatus;
 pub const WorkspaceDescription = struct {
     /// The alias that is assigned to this workspace to help identify it. It does
     /// not need to be unique.
-    alias: ?[]const u8,
+    alias: ?[]const u8 = null,
 
     /// The ARN of the workspace. For example,
     /// `arn:aws:aps:<region>:123456789012:workspace/ws-example1-1234-abcd-5678-ef90abcd1234`.
@@ -18,17 +18,17 @@ pub const WorkspaceDescription = struct {
 
     /// (optional) If the workspace was created with a customer managed KMS key, the
     /// ARN for the key used.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// The Prometheus endpoint available for this workspace. For example,
     /// `https://aps-workspaces.<region>.amazonaws.com/workspaces/ws-example1-1234-abcd-5678-ef90abcd1234/api/v1/`.
-    prometheus_endpoint: ?[]const u8,
+    prometheus_endpoint: ?[]const u8 = null,
 
     /// The current status of the workspace.
     status: WorkspaceStatus,
 
     /// The list of tag keys and values that are associated with the workspace.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The unique ID for the workspace. For example,
     /// `ws-example1-1234-abcd-5678-ef90abcd1234`.

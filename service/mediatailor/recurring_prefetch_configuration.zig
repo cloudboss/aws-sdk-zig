@@ -16,7 +16,7 @@ pub const RecurringPrefetchConfiguration = struct {
 
     /// The start time for the window that MediaTailor prefetches and inserts ads in
     /// a live event.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     pub const json_field_names = .{
         .end_time = "EndTime",

@@ -41,7 +41,7 @@ pub const WabaPhoneNumberSetupFinalization = struct {
     /// **North America (NORAM)**
     ///
     /// * Canada **CA**
-    data_localization_region: ?[]const u8,
+    data_localization_region: ?[]const u8 = null,
 
     /// The unique identifier of the originating phone number associated with the
     /// media. Phone
@@ -52,7 +52,7 @@ pub const WabaPhoneNumberSetupFinalization = struct {
     id: []const u8,
 
     /// An array of key and value pair tags.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The PIN to use for two-step verification. To reset your PIN follow the
     /// directions in

@@ -9,14 +9,14 @@ pub const JobParameters = struct {
     /// `Type` is set to `select` or `archive-retrieval`code>.
     /// An error occurs if you specify this
     /// request parameter for an inventory retrieval job request.
-    archive_id: ?[]const u8,
+    archive_id: ?[]const u8 = null,
 
     /// The optional description for the job. The description must be less than or
     /// equal to
     /// 1,024 bytes. The allowable characters are 7-bit ASCII without control
     /// codes-specifically,
     /// ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// When initiating a job to retrieve a vault inventory, you can optionally add
     /// this
@@ -25,14 +25,14 @@ pub const JobParameters = struct {
     /// job and do not specify a Format field, JSON is the default format. Valid
     /// values are "CSV"
     /// and "JSON".
-    format: ?[]const u8,
+    format: ?[]const u8 = null,
 
     /// Input parameters used for range inventory retrieval.
-    inventory_retrieval_parameters: ?InventoryRetrievalJobInput,
+    inventory_retrieval_parameters: ?InventoryRetrievalJobInput = null,
 
     /// Contains information about the location where the select job results are
     /// stored.
-    output_location: ?OutputLocation,
+    output_location: ?OutputLocation = null,
 
     /// The byte range to retrieve for an archive retrieval. in the form
     /// "*StartByteValue*-*EndByteValue*" If not
@@ -46,28 +46,28 @@ pub const JobParameters = struct {
     ///
     /// An error occurs if you specify this field for an inventory retrieval job
     /// request.
-    retrieval_byte_range: ?[]const u8,
+    retrieval_byte_range: ?[]const u8 = null,
 
     /// Contains the parameters that define a job.
-    select_parameters: ?SelectParameters,
+    select_parameters: ?SelectParameters = null,
 
     /// The Amazon SNS topic ARN to which Amazon Glacier sends a notification when
     /// the job is
     /// completed and the output is ready for you to download. The specified topic
     /// publishes the
     /// notification to its subscribers. The SNS topic must exist.
-    sns_topic: ?[]const u8,
+    sns_topic: ?[]const u8 = null,
 
     /// The tier to use for a select or an archive retrieval job. Valid values are
     /// `Expedited`, `Standard`, or `Bulk`.
     /// `Standard` is the default.
-    tier: ?[]const u8,
+    tier: ?[]const u8 = null,
 
     /// The job type. You can initiate a job to perform a select query on an
     /// archive,
     /// retrieve an archive, or get an inventory of a vault.
     /// Valid values are "select", "archive-retrieval" and "inventory-retrieval".
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .archive_id = "ArchiveId",

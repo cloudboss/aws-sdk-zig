@@ -6,11 +6,11 @@ pub const InvoiceUnitRule = struct {
     /// Unlike linked accounts, these bill source accounts can be payer accounts
     /// from other organizations that have authorized billing transfer to this
     /// account.
-    bill_source_accounts: ?[]const []const u8,
+    bill_source_accounts: ?[]const []const u8 = null,
 
     /// The list of `LINKED_ACCOUNT` IDs where charges are included within the
     /// invoice unit.
-    linked_accounts: ?[]const []const u8,
+    linked_accounts: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .bill_source_accounts = "BillSourceAccounts",

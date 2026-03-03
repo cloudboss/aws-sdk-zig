@@ -4,11 +4,11 @@ const AdminStatus = @import("admin_status.zig").AdminStatus;
 /// for an organization in Organizations.
 pub const AdminAccount = struct {
     /// The Amazon Web Services account ID for the account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The current status of the account as the delegated Amazon Macie
     /// administrator account for the organization.
-    status: ?AdminStatus,
+    status: ?AdminStatus = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

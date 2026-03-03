@@ -3,7 +3,7 @@ pub const TaskEphemeralStorage = struct {
     /// Specify an Key
     /// Management Service key ID to encrypt the ephemeral storage for the
     /// task.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The total amount, in GiB, of the ephemeral storage to set for the task. The
     /// minimum

@@ -5,11 +5,11 @@ const MeasureField = @import("measure_field.zig").MeasureField;
 pub const BoxPlotAggregatedFieldWells = struct {
     /// The group by field well of a box plot chart. Values are grouped based on
     /// group by fields.
-    group_by: ?[]const DimensionField,
+    group_by: ?[]const DimensionField = null,
 
     /// The value field well of a box plot chart. Values are aggregated based on
     /// group by fields.
-    values: ?[]const MeasureField,
+    values: ?[]const MeasureField = null,
 
     pub const json_field_names = .{
         .group_by = "GroupBy",

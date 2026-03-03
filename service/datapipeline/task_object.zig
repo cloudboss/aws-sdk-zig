@@ -7,18 +7,18 @@ const PipelineObject = @import("pipeline_object.zig").PipelineObject;
 pub const TaskObject = struct {
     /// The ID of the pipeline task attempt object. AWS Data Pipeline uses this
     /// value to track how many times a task is attempted.
-    attempt_id: ?[]const u8,
+    attempt_id: ?[]const u8 = null,
 
     /// Connection information for the location where the task runner will publish
     /// the output of the task.
-    objects: ?[]const aws.map.MapEntry(PipelineObject),
+    objects: ?[]const aws.map.MapEntry(PipelineObject) = null,
 
     /// The ID of the pipeline that provided the task.
-    pipeline_id: ?[]const u8,
+    pipeline_id: ?[]const u8 = null,
 
     /// An internal identifier for the task. This ID is passed to the SetTaskStatus
     /// and ReportTaskProgress actions.
-    task_id: ?[]const u8,
+    task_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attempt_id = "attemptId",

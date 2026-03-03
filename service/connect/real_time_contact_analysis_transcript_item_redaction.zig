@@ -7,7 +7,7 @@ pub const RealTimeContactAnalysisTranscriptItemRedaction = struct {
     /// `OutputType.Raw`, part of the original text that contains data that can be
     /// redacted. For `
     /// OutputType.Redacted`, part of the string with redaction tag.
-    character_offsets: ?[]const RealTimeContactAnalysisCharacterInterval,
+    character_offsets: ?[]const RealTimeContactAnalysisCharacterInterval = null,
 
     pub const json_field_names = .{
         .character_offsets = "CharacterOffsets",

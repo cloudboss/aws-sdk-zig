@@ -6,7 +6,7 @@ const SemanticTable = @import("semantic_table.zig").SemanticTable;
 /// structured for analysis and reporting.
 pub const SemanticModelConfiguration = struct {
     /// A map of semantic tables that define the analytical structure.
-    table_map: ?[]const aws.map.MapEntry(SemanticTable),
+    table_map: ?[]const aws.map.MapEntry(SemanticTable) = null,
 
     pub const json_field_names = .{
         .table_map = "TableMap",

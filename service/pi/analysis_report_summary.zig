@@ -4,22 +4,22 @@ const Tag = @import("tag.zig").Tag;
 /// Retrieves the details of the performance analysis report.
 pub const AnalysisReportSummary = struct {
     /// The name of the analysis report.
-    analysis_report_id: ?[]const u8,
+    analysis_report_id: ?[]const u8 = null,
 
     /// The time you created the analysis report.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The end time of the analysis in the report.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The start time of the analysis in the report.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The status of the analysis report.
-    status: ?AnalysisStatus,
+    status: ?AnalysisStatus = null,
 
     /// List of all the tags added to the analysis report.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .analysis_report_id = "AnalysisReportId",

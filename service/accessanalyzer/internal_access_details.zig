@@ -12,26 +12,26 @@ const FindingSource = @import("finding_source.zig").FindingSource;
 pub const InternalAccessDetails = struct {
     /// The type of internal access identified in the finding. This indicates how
     /// the access is granted within your Amazon Web Services environment.
-    access_type: ?InternalAccessType,
+    access_type: ?InternalAccessType = null,
 
     /// The action in the analyzed policy statement that has internal access
     /// permission to use.
-    action: ?[]const []const u8,
+    action: ?[]const []const u8 = null,
 
     /// The condition in the analyzed policy statement that resulted in an internal
     /// access finding.
-    condition: ?[]const aws.map.StringMapEntry,
+    condition: ?[]const aws.map.StringMapEntry = null,
 
     /// The principal that has access to a resource within the internal environment.
-    principal: ?[]const aws.map.StringMapEntry,
+    principal: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Web Services account ID that owns the principal identified in the
     /// internal access finding.
-    principal_owner_account: ?[]const u8,
+    principal_owner_account: ?[]const u8 = null,
 
     /// The type of principal identified in the internal access finding, such as IAM
     /// role or IAM user.
-    principal_type: ?PrincipalType,
+    principal_type: ?PrincipalType = null,
 
     /// The type of restriction applied to the finding by the resource owner with an
     /// Organizations resource control policy (RCP).
@@ -53,7 +53,7 @@ pub const InternalAccessDetails = struct {
     ///   then `s3:DeleteObject` would not be included in the list of actions for
     ///   the finding. Only applicable to internal access findings with the
     ///   organization as the zone of trust.
-    resource_control_policy_restriction: ?ResourceControlPolicyRestriction,
+    resource_control_policy_restriction: ?ResourceControlPolicyRestriction = null,
 
     /// The type of restriction applied to the finding by an Organizations service
     /// control policy (SCP).
@@ -70,12 +70,12 @@ pub const InternalAccessDetails = struct {
     /// * `APPLIED`: An SCP is present in the organization and IAM Access Analyzer
     ///   included it in the evaluation of effective permissions. Only applicable to
     ///   internal access findings with the organization as the zone of trust.
-    service_control_policy_restriction: ?ServiceControlPolicyRestriction,
+    service_control_policy_restriction: ?ServiceControlPolicyRestriction = null,
 
     /// The sources of the internal access finding. This indicates how the access
     /// that generated the finding is granted within your Amazon Web Services
     /// environment.
-    sources: ?[]const FindingSource,
+    sources: ?[]const FindingSource = null,
 
     pub const json_field_names = .{
         .access_type = "accessType",

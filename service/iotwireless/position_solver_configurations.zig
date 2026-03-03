@@ -3,7 +3,7 @@ const SemtechGnssConfiguration = @import("semtech_gnss_configuration.zig").Semte
 /// The wrapper for position solver configurations.
 pub const PositionSolverConfigurations = struct {
     /// The Semtech GNSS solver configuration object.
-    semtech_gnss: ?SemtechGnssConfiguration,
+    semtech_gnss: ?SemtechGnssConfiguration = null,
 
     pub const json_field_names = .{
         .semtech_gnss = "SemtechGnss",

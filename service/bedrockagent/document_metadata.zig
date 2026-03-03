@@ -8,11 +8,11 @@ const MetadataSourceType = @import("metadata_source_type.zig").MetadataSourceTyp
 pub const DocumentMetadata = struct {
     /// An array of objects, each of which defines a metadata attribute to associate
     /// with the content to ingest. You define the attributes inline.
-    inline_attributes: ?[]const MetadataAttribute,
+    inline_attributes: ?[]const MetadataAttribute = null,
 
     /// The Amazon S3 location of the file containing metadata to associate with the
     /// content to ingest.
-    s_3_location: ?CustomS3Location,
+    s_3_location: ?CustomS3Location = null,
 
     /// The type of the source source from which to add metadata.
     @"type": MetadataSourceType,

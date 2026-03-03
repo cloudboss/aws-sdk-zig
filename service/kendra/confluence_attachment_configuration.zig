@@ -17,7 +17,7 @@ pub const ConfluenceAttachmentConfiguration = struct {
     ///
     /// If you specify the `AttachentFieldMappings` parameter, you must specify at
     /// least one field mapping.
-    attachment_field_mappings: ?[]const ConfluenceAttachmentToIndexFieldMapping,
+    attachment_field_mappings: ?[]const ConfluenceAttachmentToIndexFieldMapping = null,
 
     /// `TRUE` to index attachments of pages and blogs in Confluence.
     crawl_attachments: bool = false,

@@ -150,7 +150,7 @@ pub const InputConfig = struct {
     ///
     /// * `"DataInputConfig": {"input_tensor:0": [1, 224, 224, 3]}`
     /// * `"CompilerOptions": {"output_names": ["output_tensor:0"]}`
-    data_input_config: ?[]const u8,
+    data_input_config: ?[]const u8 = null,
 
     /// Identifies the framework in which the model was trained. For example:
     /// TENSORFLOW.
@@ -162,7 +162,7 @@ pub const InputConfig = struct {
     /// For information about framework versions supported for cloud targets and
     /// edge devices, see [Cloud Supported Instance Types and
     /// Frameworks](https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-cloud.html) and [Edge Supported Frameworks](https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-devices-edge-frameworks.html).
-    framework_version: ?[]const u8,
+    framework_version: ?[]const u8 = null,
 
     /// The S3 path where the model artifacts, which result from model training, are
     /// stored. This path must point to a single gzip compressed tar archive

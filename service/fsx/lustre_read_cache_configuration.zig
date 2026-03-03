@@ -13,7 +13,7 @@ pub const LustreReadCacheConfiguration = struct {
     /// and maximum of 131072 GiB for SSD read cache size for every 4,000 MB/s of
     /// throughput
     /// capacity provisioned.
-    size_gi_b: ?i32,
+    size_gi_b: ?i32 = null,
 
     /// Specifies how the provisioned SSD read cache is sized, as follows:
     ///
@@ -25,7 +25,7 @@ pub const LustreReadCacheConfiguration = struct {
     ///
     /// * Set to `PROPORTIONAL_TO_THROUGHPUT_CAPACITY` to have your SSD read cache
     ///   automatically sized based on your throughput capacity.
-    sizing_mode: ?LustreReadCacheSizingMode,
+    sizing_mode: ?LustreReadCacheSizingMode = null,
 
     pub const json_field_names = .{
         .size_gi_b = "SizeGiB",

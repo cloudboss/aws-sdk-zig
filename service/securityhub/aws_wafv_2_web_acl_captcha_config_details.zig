@@ -5,7 +5,7 @@ const AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails = @import("aws_wafv
 pub const AwsWafv2WebAclCaptchaConfigDetails = struct {
     /// Determines how long a CAPTCHA timestamp in the token remains valid after the
     /// client successfully solves a CAPTCHA puzzle.
-    immunity_time_property: ?AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails,
+    immunity_time_property: ?AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails = null,
 
     pub const json_field_names = .{
         .immunity_time_property = "ImmunityTimeProperty",

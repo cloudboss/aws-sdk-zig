@@ -6,7 +6,7 @@ const GlueSchema = @import("glue_schema.zig").GlueSchema;
 /// storage.
 pub const JDBCConnectorTarget = struct {
     /// Additional connection options for the connector.
-    additional_options: ?[]const aws.map.StringMapEntry,
+    additional_options: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the connection that is associated with the connector.
     connection_name: []const u8,
@@ -28,7 +28,7 @@ pub const JDBCConnectorTarget = struct {
     name: []const u8,
 
     /// Specifies the data schema for the JDBC target.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     pub const json_field_names = .{
         .additional_options = "AdditionalOptions",

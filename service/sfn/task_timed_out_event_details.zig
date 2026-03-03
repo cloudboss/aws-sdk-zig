@@ -1,10 +1,10 @@
 /// Contains details about a resource timeout that occurred during an execution.
 pub const TaskTimedOutEventDetails = struct {
     /// A more detailed explanation of the cause of the failure.
-    cause: ?[]const u8,
+    cause: ?[]const u8 = null,
 
     /// The error code of the failure.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// The action of the resource called by a task state.
     resource: []const u8,

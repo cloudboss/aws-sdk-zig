@@ -3,7 +3,7 @@
 /// group `AWSManagedRulesAntiDDoSRuleSet`.
 pub const Regex = struct {
     /// The string representing the regular expression.
-    regex_string: ?[]const u8,
+    regex_string: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .regex_string = "RegexString",

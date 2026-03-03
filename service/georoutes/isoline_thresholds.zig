@@ -2,10 +2,10 @@
 /// provided type can be requested.
 pub const IsolineThresholds = struct {
     /// Distance to be used for the isoline calculation.
-    distance: ?[]const i64,
+    distance: ?[]const i64 = null,
 
     /// Time to be used for the isoline calculation.
-    time: ?[]const i64,
+    time: ?[]const i64 = null,
 
     pub const json_field_names = .{
         .distance = "Distance",

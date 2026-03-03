@@ -10,7 +10,7 @@ pub const UnaggregatedField = struct {
     field_id: []const u8,
 
     /// The format configuration of the field.
-    format_configuration: ?FormatConfiguration,
+    format_configuration: ?FormatConfiguration = null,
 
     pub const json_field_names = .{
         .column = "Column",

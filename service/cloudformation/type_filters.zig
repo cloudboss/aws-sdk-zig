@@ -22,14 +22,14 @@ pub const TypeFilters = struct {
     ///   not.
     ///
     /// * `AWS_TYPES`: Extensions available for use from Amazon.
-    category: ?Category,
+    category: ?Category = null,
 
     /// The id of the publisher of the extension.
     ///
     /// Extensions published by Amazon aren't assigned a publisher ID. Use the
     /// `AWS_TYPES` category to specify a list of types published by Amazon.
-    publisher_id: ?[]const u8,
+    publisher_id: ?[]const u8 = null,
 
     /// A prefix to use as a filter for results.
-    type_name_prefix: ?[]const u8,
+    type_name_prefix: ?[]const u8 = null,
 };

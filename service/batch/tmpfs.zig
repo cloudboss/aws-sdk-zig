@@ -19,7 +19,7 @@ pub const Tmpfs = struct {
     /// "`norelatime`" | "`strictatime`" | "`nostrictatime`" |
     /// "`mode`" | "`uid`" | "`gid`" | "`nr_inodes`" |
     /// "`nr_blocks`" | "`mpol`"
-    mount_options: ?[]const []const u8,
+    mount_options: ?[]const []const u8 = null,
 
     /// The size (in MiB) of the `tmpfs` volume.
     size: i32,

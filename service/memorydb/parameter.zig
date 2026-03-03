@@ -2,22 +2,22 @@
 /// behavior.
 pub const Parameter = struct {
     /// The valid range of values for the parameter.
-    allowed_values: ?[]const u8,
+    allowed_values: ?[]const u8 = null,
 
     /// The parameter's data type
-    data_type: ?[]const u8,
+    data_type: ?[]const u8 = null,
 
     /// A description of the parameter
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The earliest engine version to which the parameter can apply.
-    minimum_engine_version: ?[]const u8,
+    minimum_engine_version: ?[]const u8 = null,
 
     /// The name of the parameter
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The value of the parameter
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allowed_values = "AllowedValues",

@@ -8,72 +8,72 @@ const WorkerType = @import("worker_type.zig").WorkerType;
 /// The period in which a remote Spark runtime environment is running.
 pub const Session = struct {
     /// The command object.See SessionCommand.
-    command: ?SessionCommand,
+    command: ?SessionCommand = null,
 
     /// The date and time that this session is completed.
-    completed_on: ?i64,
+    completed_on: ?i64 = null,
 
     /// The number of connections used for the session.
-    connections: ?ConnectionsList,
+    connections: ?ConnectionsList = null,
 
     /// The time and date when the session was created.
-    created_on: ?i64,
+    created_on: ?i64 = null,
 
     /// A map array of key-value pairs. Max is 75 pairs.
-    default_arguments: ?[]const aws.map.StringMapEntry,
+    default_arguments: ?[]const aws.map.StringMapEntry = null,
 
     /// The description of the session.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The DPUs consumed by the session (formula: ExecutionTime * MaxCapacity).
-    dpu_seconds: ?f64,
+    dpu_seconds: ?f64 = null,
 
     /// The error message displayed during the session.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The total time the session ran for.
-    execution_time: ?f64,
+    execution_time: ?f64 = null,
 
     /// The Glue version determines the versions of Apache Spark and Python that
     /// Glue supports.
     /// The GlueVersion must be greater than 2.0.
-    glue_version: ?[]const u8,
+    glue_version: ?[]const u8 = null,
 
     /// The ID of the session.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The number of minutes when idle before the session times out.
-    idle_timeout: ?i32,
+    idle_timeout: ?i32 = null,
 
     /// The number of Glue data processing units (DPUs) that can be allocated when
     /// the job runs.
     /// A DPU is a relative measure of processing power that consists of 4 vCPUs of
     /// compute capacity and 16 GB memory.
-    max_capacity: ?f64,
+    max_capacity: ?f64 = null,
 
     /// The number of workers of a defined `WorkerType` to use for the session.
-    number_of_workers: ?i32,
+    number_of_workers: ?i32 = null,
 
     /// The name of an Glue usage profile associated with the session.
-    profile_name: ?[]const u8,
+    profile_name: ?[]const u8 = null,
 
     /// The code execution progress of the session.
     progress: f64 = 0,
 
     /// The name or Amazon Resource Name (ARN) of the IAM role associated with the
     /// Session.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     /// The name of the SecurityConfiguration structure to be used with the session.
-    security_configuration: ?[]const u8,
+    security_configuration: ?[]const u8 = null,
 
     /// The session status.
-    status: ?SessionStatus,
+    status: ?SessionStatus = null,
 
     /// The type of predefined worker that is allocated when a session runs. Accepts
     /// a value of `G.1X`, `G.2X`, `G.4X`, or `G.8X` for Spark sessions. Accepts the
     /// value `Z.2X` for Ray sessions.
-    worker_type: ?WorkerType,
+    worker_type: ?WorkerType = null,
 
     pub const json_field_names = .{
         .command = "Command",

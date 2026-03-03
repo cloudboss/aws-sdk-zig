@@ -3,7 +3,7 @@ const UpstreamRepository = @import("upstream_repository.zig").UpstreamRepository
 
 pub const CreateRepositoryRequest = struct {
     /// A description of the created repository.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the domain that contains the created repository.
     domain: []const u8,
@@ -11,13 +11,13 @@ pub const CreateRepositoryRequest = struct {
     /// The 12-digit account number of the Amazon Web Services account that owns the
     /// domain. It does not include
     /// dashes or spaces.
-    domain_owner: ?[]const u8,
+    domain_owner: ?[]const u8 = null,
 
     /// The name of the repository to create.
     repository: []const u8,
 
     /// One or more tag key-value pairs for the repository.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// A list of upstream repositories to associate with the repository. The order
     /// of the upstream repositories
@@ -25,7 +25,7 @@ pub const CreateRepositoryRequest = struct {
     /// requested package version. For more
     /// information, see [Working with upstream
     /// repositories](https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
-    upstreams: ?[]const UpstreamRepository,
+    upstreams: ?[]const UpstreamRepository = null,
 
     pub const json_field_names = .{
         .description = "description",

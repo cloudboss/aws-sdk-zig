@@ -14,27 +14,27 @@ pub const ApiInvocationInput = struct {
     action_group: []const u8,
 
     /// Contains information about the API operation to invoke.
-    action_invocation_type: ?ActionInvocationType,
+    action_invocation_type: ?ActionInvocationType = null,
 
     /// The agent's ID.
-    agent_id: ?[]const u8,
+    agent_id: ?[]const u8 = null,
 
     /// The path to the API operation.
-    api_path: ?[]const u8,
+    api_path: ?[]const u8 = null,
 
     /// The agent collaborator's name.
-    collaborator_name: ?[]const u8,
+    collaborator_name: ?[]const u8 = null,
 
     /// The HTTP method of the API operation.
-    http_method: ?[]const u8,
+    http_method: ?[]const u8 = null,
 
     /// The parameters to provide for the API request, as the agent elicited from
     /// the user.
-    parameters: ?[]const ApiParameter,
+    parameters: ?[]const ApiParameter = null,
 
     /// The request body to provide for the API request, as the agent elicited from
     /// the user.
-    request_body: ?ApiRequestBody,
+    request_body: ?ApiRequestBody = null,
 
     pub const json_field_names = .{
         .action_group = "actionGroup",

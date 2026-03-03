@@ -7,31 +7,31 @@ pub const ReservedInstancesModification = struct {
     /// request is
     /// idempotent. For more information, see [Ensuring
     /// Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    client_token: ?[]const u8,
+    client_token: ?[]const u8 = null,
 
     /// The time when the modification request was created.
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// The time for the modification to become effective.
-    effective_date: ?i64,
+    effective_date: ?i64 = null,
 
     /// Contains target configurations along with their corresponding new Reserved
     /// Instance
     /// IDs.
-    modification_results: ?[]const ReservedInstancesModificationResult,
+    modification_results: ?[]const ReservedInstancesModificationResult = null,
 
     /// The IDs of one or more Reserved Instances.
-    reserved_instances_ids: ?[]const ReservedInstancesId,
+    reserved_instances_ids: ?[]const ReservedInstancesId = null,
 
     /// A unique ID for the Reserved Instance modification.
-    reserved_instances_modification_id: ?[]const u8,
+    reserved_instances_modification_id: ?[]const u8 = null,
 
     /// The status of the Reserved Instances modification request.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The reason for the status.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The time when the modification request was last updated.
-    update_date: ?i64,
+    update_date: ?i64 = null,
 };

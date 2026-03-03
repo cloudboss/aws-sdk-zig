@@ -9,7 +9,7 @@ const GuardrailTopic = @import("guardrail_topic.zig").GuardrailTopic;
 ///   body](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax)
 pub const GuardrailTopicPolicy = struct {
     /// The tier that your guardrail uses for denied topic filters.
-    tier: ?GuardrailTopicsTier,
+    tier: ?GuardrailTopicsTier = null,
 
     /// A list of policies related to topics that the guardrail should deny.
     topics: []const GuardrailTopic,

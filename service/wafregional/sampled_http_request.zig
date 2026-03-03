@@ -18,7 +18,7 @@ const HTTPRequest = @import("http_request.zig").HTTPRequest;
 pub const SampledHTTPRequest = struct {
     /// The action for the `Rule` that the request matched: `ALLOW`, `BLOCK`, or
     /// `COUNT`.
-    action: ?[]const u8,
+    action: ?[]const u8 = null,
 
     /// A complex type that contains detailed information about the request.
     request: HTTPRequest,
@@ -27,11 +27,11 @@ pub const SampledHTTPRequest = struct {
     /// of a `RuleGroup` rather than the ID of an individual rule.
     /// `RuleWithinRuleGroup` is the rule within the specified `RuleGroup` that
     /// matched the request listed in the response.
-    rule_within_rule_group: ?[]const u8,
+    rule_within_rule_group: ?[]const u8 = null,
 
     /// The time at which AWS WAF received the request from your AWS resource, in
     /// Unix time format (in seconds).
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     /// A value that indicates how one result in the response relates proportionally
     /// to other results in the response.

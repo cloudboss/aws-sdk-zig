@@ -5,5 +5,5 @@ const RewriteConfig = @import("rewrite_config.zig").RewriteConfig;
 pub const UrlRewriteConfig = struct {
     /// The URL rewrite transform to apply to the request. The transform consists of
     /// a regular expression to match and a replacement string.
-    rewrites: ?[]const RewriteConfig,
+    rewrites: ?[]const RewriteConfig = null,
 };

@@ -14,7 +14,7 @@ pub const ChangeMessageVisibilityBatchRequestEntry = struct {
     receipt_handle: []const u8,
 
     /// The new value (in seconds) for the message's visibility timeout.
-    visibility_timeout: ?i32,
+    visibility_timeout: ?i32 = null,
 
     pub const json_field_names = .{
         .id = "Id",

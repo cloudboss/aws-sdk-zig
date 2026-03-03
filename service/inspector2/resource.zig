@@ -6,19 +6,19 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// Details about the resource involved in a finding.
 pub const Resource = struct {
     /// An object that contains details about the resource involved in a finding.
-    details: ?ResourceDetails,
+    details: ?ResourceDetails = null,
 
     /// The ID of the resource.
     id: []const u8,
 
     /// The partition of the resource.
-    partition: ?[]const u8,
+    partition: ?[]const u8 = null,
 
     /// The Amazon Web Services Region the impacted resource is located in.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The tags attached to the resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of resource.
     @"type": ResourceType,

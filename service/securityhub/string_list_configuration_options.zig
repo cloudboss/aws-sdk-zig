@@ -3,19 +3,19 @@
 pub const StringListConfigurationOptions = struct {
     /// The Security Hub default value for a control parameter that is a list of
     /// strings.
-    default_value: ?[]const []const u8,
+    default_value: ?[]const []const u8 = null,
 
     /// The description of the RE2 regular expression.
-    expression_description: ?[]const u8,
+    expression_description: ?[]const u8 = null,
 
     /// The maximum number of list items that a string list control parameter can
     /// accept.
-    max_items: ?i32,
+    max_items: ?i32 = null,
 
     /// An RE2 regular expression that Security Hub uses to validate a user-provided
     /// list of strings for a control
     /// parameter.
-    re_2_expression: ?[]const u8,
+    re_2_expression: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .default_value = "DefaultValue",

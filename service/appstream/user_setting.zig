@@ -18,7 +18,7 @@ pub const UserSetting = struct {
     /// `ENABLED`. This can't be specified when the permission is `DISABLED`.
     ///
     /// The value can be between 1 and 20,971,520 (20 MB).
-    maximum_length: ?i32,
+    maximum_length: ?i32 = null,
 
     /// Indicates whether the action is enabled or disabled.
     permission: Permission,

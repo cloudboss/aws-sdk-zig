@@ -16,7 +16,7 @@ pub const Transcript = struct {
     id: []const u8,
 
     /// List of positions where issues were detected on the transcript.
-    issues_detected: ?[]const IssueDetected,
+    issues_detected: ?[]const IssueDetected = null,
 
     /// The identifier of the participant. Valid values are CUSTOMER or AGENT.
     participant_id: []const u8,
@@ -25,7 +25,7 @@ pub const Transcript = struct {
     participant_role: []const u8,
 
     /// The sentiment detected for this piece of transcript.
-    sentiment: ?SentimentValue,
+    sentiment: ?SentimentValue = null,
 
     pub const json_field_names = .{
         .begin_offset_millis = "BeginOffsetMillis",

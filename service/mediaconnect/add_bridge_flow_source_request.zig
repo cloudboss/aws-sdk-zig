@@ -7,7 +7,7 @@ pub const AddBridgeFlowSourceRequest = struct {
     flow_arn: []const u8,
 
     /// The name of the VPC interface attachment to use for this source.
-    flow_vpc_interface_attachment: ?VpcInterfaceAttachment,
+    flow_vpc_interface_attachment: ?VpcInterfaceAttachment = null,
 
     /// The name of the flow source. This name is used to reference the source and
     /// must be unique among sources in this bridge.

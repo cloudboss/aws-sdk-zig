@@ -13,7 +13,7 @@ pub const ModelCopyJobSummary = struct {
 
     /// If a model fails to be copied, a message describing why the job failed is
     /// included here.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// The Amazon Resoource Name (ARN) of the model copy job.
     job_arn: []const u8,
@@ -26,7 +26,7 @@ pub const ModelCopyJobSummary = struct {
     source_model_arn: []const u8,
 
     /// The name of the original model being copied.
-    source_model_name: ?[]const u8,
+    source_model_name: ?[]const u8 = null,
 
     /// The status of the model copy job.
     status: ModelCopyJobStatus,
@@ -36,13 +36,13 @@ pub const ModelCopyJobSummary = struct {
 
     /// The Amazon Resource Name (ARN) of the KMS key used to encrypt the copied
     /// model.
-    target_model_kms_key_arn: ?[]const u8,
+    target_model_kms_key_arn: ?[]const u8 = null,
 
     /// The name of the copied model.
-    target_model_name: ?[]const u8,
+    target_model_name: ?[]const u8 = null,
 
     /// Tags associated with the copied model.
-    target_model_tags: ?[]const Tag,
+    target_model_tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .creation_time = "creationTime",

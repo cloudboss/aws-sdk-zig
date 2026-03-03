@@ -10,18 +10,18 @@ const KnowledgeBasePromptTemplate = @import("knowledge_base_prompt_template.zig"
 pub const KnowledgeBaseOrchestrationConfiguration = struct {
     /// The additional model-specific request parameters as key-value pairs to be
     /// included in the request to the foundation model.
-    additional_model_request_fields: ?[]const aws.map.StringMapEntry,
+    additional_model_request_fields: ?[]const aws.map.StringMapEntry = null,
 
     /// Contains inference configurations for the prompt.
-    inference_config: ?PromptInferenceConfiguration,
+    inference_config: ?PromptInferenceConfiguration = null,
 
     /// The performance configuration options for the knowledge base retrieval and
     /// generation process.
-    performance_config: ?PerformanceConfiguration,
+    performance_config: ?PerformanceConfiguration = null,
 
     /// A custom prompt template for orchestrating the retrieval and generation
     /// process.
-    prompt_template: ?KnowledgeBasePromptTemplate,
+    prompt_template: ?KnowledgeBasePromptTemplate = null,
 
     pub const json_field_names = .{
         .additional_model_request_fields = "additionalModelRequestFields",

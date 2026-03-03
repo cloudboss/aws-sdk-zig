@@ -4,7 +4,7 @@ const PointInTimeRecoveryStatus = @import("point_in_time_recovery_status.zig").P
 pub const PointInTimeRecoverySummary = struct {
     /// Specifies the earliest possible restore point of the table in ISO 8601
     /// format.
-    earliest_restorable_timestamp: ?i64,
+    earliest_restorable_timestamp: ?i64 = null,
 
     /// Shows if point-in-time recovery is enabled or disabled for the specified
     /// table.

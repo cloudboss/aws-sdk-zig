@@ -12,7 +12,7 @@ pub const RegisteredCustomerManagedKey = struct {
 
     /// The ARN of the KMS key that is registered to a Quick Sight account for
     /// encryption and decryption use.
-    key_arn: ?[]const u8,
+    key_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .default_key = "DefaultKey",

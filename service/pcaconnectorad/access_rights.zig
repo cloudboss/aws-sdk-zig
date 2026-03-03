@@ -7,12 +7,12 @@ pub const AccessRights = struct {
     /// Allow or deny an Active Directory group from autoenrolling certificates
     /// issued against a template.
     /// The Active Directory group must be allowed to enroll to allow autoenrollment
-    auto_enroll: ?AccessRight,
+    auto_enroll: ?AccessRight = null,
 
     /// Allow or deny an Active Directory group from enrolling certificates issued
     /// against a
     /// template.
-    enroll: ?AccessRight,
+    enroll: ?AccessRight = null,
 
     pub const json_field_names = .{
         .auto_enroll = "AutoEnroll",

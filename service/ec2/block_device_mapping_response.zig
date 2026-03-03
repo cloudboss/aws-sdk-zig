@@ -5,15 +5,15 @@ const EbsBlockDeviceResponse = @import("ebs_block_device_response.zig").EbsBlock
 /// volumes to attach to an instance at launch.
 pub const BlockDeviceMappingResponse = struct {
     /// The device name (for example, `/dev/sdh` or `xvdh`).
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// Parameters used to automatically set up EBS volumes when the instance is
     /// launched.
-    ebs: ?EbsBlockDeviceResponse,
+    ebs: ?EbsBlockDeviceResponse = null,
 
     /// Suppresses the specified device included in the block device mapping.
-    no_device: ?[]const u8,
+    no_device: ?[]const u8 = null,
 
     /// The virtual device name.
-    virtual_name: ?[]const u8,
+    virtual_name: ?[]const u8 = null,
 };

@@ -16,10 +16,10 @@ const JobState = @import("job_state.zig").JobState;
 pub const Notification = struct {
     /// Used to send SNS notifications for the person picking up the device
     /// (identified during job creation).
-    device_pickup_sns_topic_arn: ?[]const u8,
+    device_pickup_sns_topic_arn: ?[]const u8 = null,
 
     /// The list of job states that will trigger a notification for this job.
-    job_states_to_notify: ?[]const JobState,
+    job_states_to_notify: ?[]const JobState = null,
 
     /// Any change in job state will trigger a notification for this job.
     notify_all: bool = false,
@@ -34,7 +34,7 @@ pub const Notification = struct {
     /// [Subscribe](https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html)
     /// Amazon Simple Notification
     /// Service (Amazon SNS) API action.
-    sns_topic_arn: ?[]const u8,
+    sns_topic_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .device_pickup_sns_topic_arn = "DevicePickupSnsTopicARN",

@@ -12,10 +12,10 @@ pub const AppendOperation = struct {
     appended_columns: []const AppendedColumn,
 
     /// The first data source to be included in the append operation.
-    first_source: ?TransformOperationSource,
+    first_source: ?TransformOperationSource = null,
 
     /// The second data source to be appended to the first source.
-    second_source: ?TransformOperationSource,
+    second_source: ?TransformOperationSource = null,
 
     pub const json_field_names = .{
         .alias = "Alias",

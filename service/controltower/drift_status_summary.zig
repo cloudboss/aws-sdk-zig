@@ -20,11 +20,11 @@ pub const DriftStatusSummary = struct {
     ///   this enabled control. Drift is not supported for the control type.
     /// * `UNKNOWN`: Amazon Web Services Control Tower is not able to check the
     ///   drift status for the enabled control.
-    drift_status: ?DriftStatus,
+    drift_status: ?DriftStatus = null,
 
     /// An object that categorizes the different types of drift detected for the
     /// enabled control.
-    types: ?EnabledControlDriftTypes,
+    types: ?EnabledControlDriftTypes = null,
 
     pub const json_field_names = .{
         .drift_status = "driftStatus",

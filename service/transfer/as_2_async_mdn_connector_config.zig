@@ -5,10 +5,10 @@
 pub const As2AsyncMdnConnectorConfig = struct {
     /// A list of server identifiers that can handle asynchronous MDN responses. You
     /// can specify between 1 and 10 server IDs.
-    server_ids: ?[]const []const u8,
+    server_ids: ?[]const []const u8 = null,
 
     /// The URL endpoint where asynchronous MDN responses should be sent.
-    url: ?[]const u8,
+    url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .server_ids = "ServerIds",

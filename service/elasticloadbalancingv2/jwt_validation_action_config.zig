@@ -5,7 +5,7 @@ pub const JwtValidationActionConfig = struct {
     /// Additional claims to validate. The maximum size of the list is 10.
     /// We validate the `exp`, `iss`, `nbf`,
     /// and `iat` claims by default.
-    additional_claims: ?[]const JwtValidationActionAdditionalClaim,
+    additional_claims: ?[]const JwtValidationActionAdditionalClaim = null,
 
     /// The issuer of the JWT. The maximum length is 256 characters.
     issuer: []const u8,

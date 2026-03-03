@@ -11,7 +11,7 @@ const TopicTimeGranularity = @import("topic_time_granularity.zig").TopicTimeGran
 pub const TopicColumn = struct {
     /// The type of aggregation that is performed on the column data when
     /// it's queried.
-    aggregation: ?DefaultAggregation,
+    aggregation: ?DefaultAggregation = null,
 
     /// The list of aggregation types that are allowed for the column. Valid values
     /// for this
@@ -20,37 +20,37 @@ pub const TopicColumn = struct {
     /// `STDEV`, `STDEVP`, `VAR`,
     /// `VARP`,
     /// and `PERCENTILE`.
-    allowed_aggregations: ?[]const AuthorSpecifiedAggregation,
+    allowed_aggregations: ?[]const AuthorSpecifiedAggregation = null,
 
     /// The other names or aliases for the column cell value.
-    cell_value_synonyms: ?[]const CellValueSynonym,
+    cell_value_synonyms: ?[]const CellValueSynonym = null,
 
     /// The role of the column in the data. Valid values are `DIMENSION` and
     /// `MEASURE`.
-    column_data_role: ?ColumnDataRole,
+    column_data_role: ?ColumnDataRole = null,
 
     /// A description of the column and its contents.
-    column_description: ?[]const u8,
+    column_description: ?[]const u8 = null,
 
     /// A user-friendly name for the column.
-    column_friendly_name: ?[]const u8,
+    column_friendly_name: ?[]const u8 = null,
 
     /// The name of the column.
     column_name: []const u8,
 
     /// The other names or aliases for the column.
-    column_synonyms: ?[]const []const u8,
+    column_synonyms: ?[]const []const u8 = null,
 
     /// The order in which data is displayed for the column when
     /// it's used in a comparative context.
-    comparative_order: ?ComparativeOrder,
+    comparative_order: ?ComparativeOrder = null,
 
     /// The default formatting used for values in the column.
-    default_formatting: ?DefaultFormatting,
+    default_formatting: ?DefaultFormatting = null,
 
     /// A Boolean value that indicates whether the column shows in the autocomplete
     /// functionality.
-    disable_indexing: ?bool,
+    disable_indexing: ?bool = null,
 
     /// A Boolean value that indicates whether the column is included in the query
     /// results.
@@ -62,7 +62,7 @@ pub const TopicColumn = struct {
     never_aggregate_in_filter: bool = false,
 
     /// The non additive value for the column.
-    non_additive: ?bool,
+    non_additive: ?bool = null,
 
     /// The list of aggregation types that are not allowed for the column. Valid
     /// values for this
@@ -71,13 +71,13 @@ pub const TopicColumn = struct {
     /// `STDEV`, `STDEVP`, `VAR`,
     /// `VARP`,
     /// and `PERCENTILE`.
-    not_allowed_aggregations: ?[]const AuthorSpecifiedAggregation,
+    not_allowed_aggregations: ?[]const AuthorSpecifiedAggregation = null,
 
     /// The semantic type of data contained in the column.
-    semantic_type: ?SemanticType,
+    semantic_type: ?SemanticType = null,
 
     /// The level of time precision that is used to aggregate `DateTime` values.
-    time_granularity: ?TopicTimeGranularity,
+    time_granularity: ?TopicTimeGranularity = null,
 
     pub const json_field_names = .{
         .aggregation = "Aggregation",

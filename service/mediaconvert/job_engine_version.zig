@@ -5,7 +5,7 @@ pub const JobEngineVersion = struct {
     /// The date that this Job engine version expires. Requests to create jobs with
     /// an expired version result in a regular job, as if no specific Job engine
     /// version was requested.
-    expiration_date: ?i64,
+    expiration_date: ?i64 = null,
 
     /// Use Job engine versions to run jobs for your production workflow on one
     /// version, while you test and validate the latest version. Job engine versions
@@ -13,7 +13,7 @@ pub const JobEngineVersion = struct {
     /// updates, improvements, and fixes. Job engine versions are in a YYYY-MM-DD
     /// format. Note that the Job engine version feature is not publicly available
     /// at this time. To request access, contact AWS support.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .expiration_date = "ExpirationDate",

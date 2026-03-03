@@ -9,7 +9,7 @@ pub const ResourceMapFilter = struct {
     key: []const u8,
 
     /// The filter's value.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comparison = "comparison",

@@ -8,7 +8,7 @@ const ChangeRequestStatus = @import("change_request_status.zig").ChangeRequestSt
 pub const CollaborationChangeRequestSummary = struct {
     /// Summary of approval statuses from all collaboration members for this change
     /// request.
-    approvals: ?[]const aws.map.MapEntry(ApprovalStatusDetails),
+    approvals: ?[]const aws.map.MapEntry(ApprovalStatusDetails) = null,
 
     /// Summary of the changes in this change request.
     changes: []const Change,

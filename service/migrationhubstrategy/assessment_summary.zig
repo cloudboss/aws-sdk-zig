@@ -10,37 +10,37 @@ const ServerSummary = @import("server_summary.zig").ServerSummary;
 /// Contains the summary of the assessment results.
 pub const AssessmentSummary = struct {
     /// The Amazon S3 object containing the anti-pattern report.
-    antipattern_report_s3_object: ?S3Object,
+    antipattern_report_s3_object: ?S3Object = null,
 
     /// The status of the anti-pattern report.
-    antipattern_report_status: ?AntipatternReportStatus,
+    antipattern_report_status: ?AntipatternReportStatus = null,
 
     /// The status message of the anti-pattern report.
-    antipattern_report_status_message: ?[]const u8,
+    antipattern_report_status_message: ?[]const u8 = null,
 
     /// The time the assessment was performed.
-    last_analyzed_timestamp: ?i64,
+    last_analyzed_timestamp: ?i64 = null,
 
     /// List of AntipatternSeveritySummary.
-    list_antipattern_severity_summary: ?[]const AntipatternSeveritySummary,
+    list_antipattern_severity_summary: ?[]const AntipatternSeveritySummary = null,
 
     /// List of status summaries of the analyzed application components.
-    list_application_component_status_summary: ?[]const ApplicationComponentStatusSummary,
+    list_application_component_status_summary: ?[]const ApplicationComponentStatusSummary = null,
 
     /// List of ApplicationComponentStrategySummary.
-    list_application_component_strategy_summary: ?[]const StrategySummary,
+    list_application_component_strategy_summary: ?[]const StrategySummary = null,
 
     /// List of ApplicationComponentSummary.
-    list_application_component_summary: ?[]const ApplicationComponentSummary,
+    list_application_component_summary: ?[]const ApplicationComponentSummary = null,
 
     /// List of status summaries of the analyzed servers.
-    list_server_status_summary: ?[]const ServerStatusSummary,
+    list_server_status_summary: ?[]const ServerStatusSummary = null,
 
     /// List of ServerStrategySummary.
-    list_server_strategy_summary: ?[]const StrategySummary,
+    list_server_strategy_summary: ?[]const StrategySummary = null,
 
     /// List of ServerSummary.
-    list_server_summary: ?[]const ServerSummary,
+    list_server_summary: ?[]const ServerSummary = null,
 
     pub const json_field_names = .{
         .antipattern_report_s3_object = "antipatternReportS3Object",

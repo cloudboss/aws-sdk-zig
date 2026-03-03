@@ -19,55 +19,55 @@ const TimedMetadataScheduleActionSettings = @import("timed_metadata_schedule_act
 /// Holds the settings for a single schedule action.
 pub const ScheduleActionSettings = struct {
     /// Action to insert ID3 metadata in every segment, in HLS output groups
-    hls_id_3_segment_tagging_settings: ?HlsId3SegmentTaggingScheduleActionSettings,
+    hls_id_3_segment_tagging_settings: ?HlsId3SegmentTaggingScheduleActionSettings = null,
 
     /// Action to insert ID3 metadata once, in HLS output groups
-    hls_timed_metadata_settings: ?HlsTimedMetadataScheduleActionSettings,
+    hls_timed_metadata_settings: ?HlsTimedMetadataScheduleActionSettings = null,
 
     /// Action to insert ID3 metadata in every segment, in applicable output groups
-    id_3_segment_tagging_settings: ?Id3SegmentTaggingScheduleActionSettings,
+    id_3_segment_tagging_settings: ?Id3SegmentTaggingScheduleActionSettings = null,
 
     /// Action to prepare an input for a future immediate input switch
-    input_prepare_settings: ?InputPrepareScheduleActionSettings,
+    input_prepare_settings: ?InputPrepareScheduleActionSettings = null,
 
     /// Action to switch the input
-    input_switch_settings: ?InputSwitchScheduleActionSettings,
+    input_switch_settings: ?InputSwitchScheduleActionSettings = null,
 
     /// Action to activate a motion graphics image overlay
-    motion_graphics_image_activate_settings: ?MotionGraphicsActivateScheduleActionSettings,
+    motion_graphics_image_activate_settings: ?MotionGraphicsActivateScheduleActionSettings = null,
 
     /// Action to deactivate a motion graphics image overlay
-    motion_graphics_image_deactivate_settings: ?MotionGraphicsDeactivateScheduleActionSettings,
+    motion_graphics_image_deactivate_settings: ?MotionGraphicsDeactivateScheduleActionSettings = null,
 
     /// Action to pause or unpause one or both channel pipelines
-    pause_state_settings: ?PauseStateScheduleActionSettings,
+    pause_state_settings: ?PauseStateScheduleActionSettings = null,
 
     /// Action to specify scte35 input
-    scte_35_input_settings: ?Scte35InputScheduleActionSettings,
+    scte_35_input_settings: ?Scte35InputScheduleActionSettings = null,
 
     /// Action to insert SCTE-35 return_to_network message
-    scte_35_return_to_network_settings: ?Scte35ReturnToNetworkScheduleActionSettings,
+    scte_35_return_to_network_settings: ?Scte35ReturnToNetworkScheduleActionSettings = null,
 
     /// Action to insert SCTE-35 splice_insert message
-    scte_35_splice_insert_settings: ?Scte35SpliceInsertScheduleActionSettings,
+    scte_35_splice_insert_settings: ?Scte35SpliceInsertScheduleActionSettings = null,
 
     /// Action to insert SCTE-35 time_signal message
-    scte_35_time_signal_settings: ?Scte35TimeSignalScheduleActionSettings,
+    scte_35_time_signal_settings: ?Scte35TimeSignalScheduleActionSettings = null,
 
     /// Action to activate a static image overlay
-    static_image_activate_settings: ?StaticImageActivateScheduleActionSettings,
+    static_image_activate_settings: ?StaticImageActivateScheduleActionSettings = null,
 
     /// Action to deactivate a static image overlay
-    static_image_deactivate_settings: ?StaticImageDeactivateScheduleActionSettings,
+    static_image_deactivate_settings: ?StaticImageDeactivateScheduleActionSettings = null,
 
     /// Action to activate a static image overlay in one or more specified outputs
-    static_image_output_activate_settings: ?StaticImageOutputActivateScheduleActionSettings,
+    static_image_output_activate_settings: ?StaticImageOutputActivateScheduleActionSettings = null,
 
     /// Action to deactivate a static image overlay in one or more specified outputs
-    static_image_output_deactivate_settings: ?StaticImageOutputDeactivateScheduleActionSettings,
+    static_image_output_deactivate_settings: ?StaticImageOutputDeactivateScheduleActionSettings = null,
 
     /// Action to insert ID3 metadata once, in applicable output groups
-    timed_metadata_settings: ?TimedMetadataScheduleActionSettings,
+    timed_metadata_settings: ?TimedMetadataScheduleActionSettings = null,
 
     pub const json_field_names = .{
         .hls_id_3_segment_tagging_settings = "HlsId3SegmentTaggingSettings",

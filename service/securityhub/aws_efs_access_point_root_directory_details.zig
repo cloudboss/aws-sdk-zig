@@ -6,14 +6,14 @@ const AwsEfsAccessPointRootDirectoryCreationInfoDetails = @import("aws_efs_acces
 pub const AwsEfsAccessPointRootDirectoryDetails = struct {
     /// Specifies the POSIX IDs and permissions to apply to the access point's root
     /// directory.
-    creation_info: ?AwsEfsAccessPointRootDirectoryCreationInfoDetails,
+    creation_info: ?AwsEfsAccessPointRootDirectoryCreationInfoDetails = null,
 
     /// Specifies the path on the Amazon EFS file system to expose as the root
     /// directory to NFS clients
     /// using the access point to access the EFS file system. A path can have up to
     /// four subdirectories. If the specified
     /// path does not exist, you are required to provide `CreationInfo`.
-    path: ?[]const u8,
+    path: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_info = "CreationInfo",

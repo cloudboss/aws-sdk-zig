@@ -11,10 +11,10 @@ pub const NamedEntityDefinitionMetric = struct {
     /// `VARP`, `PERCENTILE`,
     /// `MEDIAN`,
     /// and `CUSTOM`.
-    aggregation: ?NamedEntityAggType,
+    aggregation: ?NamedEntityAggType = null,
 
     /// The additional parameters for an aggregation function.
-    aggregation_function_parameters: ?[]const aws.map.StringMapEntry,
+    aggregation_function_parameters: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .aggregation = "Aggregation",

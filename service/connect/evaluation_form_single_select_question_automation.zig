@@ -8,11 +8,11 @@ const EvaluationFormSingleSelectQuestionAutomationOption = @import("evaluation_f
 /// the default option is applied.
 pub const EvaluationFormSingleSelectQuestionAutomation = struct {
     /// Automation answer source.
-    answer_source: ?EvaluationFormQuestionAutomationAnswerSource,
+    answer_source: ?EvaluationFormQuestionAutomationAnswerSource = null,
 
     /// The identifier of the default answer option, when none of the automation
     /// options match the criteria.
-    default_option_ref_id: ?[]const u8,
+    default_option_ref_id: ?[]const u8 = null,
 
     /// The automation options of the single select question.
     options: []const EvaluationFormSingleSelectQuestionAutomationOption = &.{},

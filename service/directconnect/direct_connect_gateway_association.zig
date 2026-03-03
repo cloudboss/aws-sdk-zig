@@ -7,17 +7,17 @@ const DirectConnectGatewayAssociationState = @import("direct_connect_gateway_ass
 /// virtual private gateway or transit gateway.
 pub const DirectConnectGatewayAssociation = struct {
     /// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
-    allowed_prefixes_to_direct_connect_gateway: ?[]const RouteFilterPrefix,
+    allowed_prefixes_to_direct_connect_gateway: ?[]const RouteFilterPrefix = null,
 
     /// The ID of the Cloud WAN core network associated with the Direct Connect
     /// gateway attachment.
-    associated_core_network: ?AssociatedCoreNetwork,
+    associated_core_network: ?AssociatedCoreNetwork = null,
 
     /// Information about the associated gateway.
-    associated_gateway: ?AssociatedGateway,
+    associated_gateway: ?AssociatedGateway = null,
 
     /// The ID of the Direct Connect gateway association.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The state of the association. The following are the possible values:
     ///
@@ -38,27 +38,27 @@ pub const DirectConnectGatewayAssociation = struct {
     /// * `updating`: The CIDR blocks for the virtual private gateway or transit
     ///   gateway are currently being updated. This could
     /// be new CIDR blocks added or current CIDR blocks removed.
-    association_state: ?DirectConnectGatewayAssociationState,
+    association_state: ?DirectConnectGatewayAssociationState = null,
 
     /// The ID of the Direct Connect gateway.
-    direct_connect_gateway_id: ?[]const u8,
+    direct_connect_gateway_id: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the associated gateway.
-    direct_connect_gateway_owner_account: ?[]const u8,
+    direct_connect_gateway_owner_account: ?[]const u8 = null,
 
     /// The error message if the state of an object failed to advance.
-    state_change_error: ?[]const u8,
+    state_change_error: ?[]const u8 = null,
 
     /// The ID of the virtual private gateway. Applies only to private virtual
     /// interfaces.
-    virtual_gateway_id: ?[]const u8,
+    virtual_gateway_id: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the virtual private
     /// gateway.
-    virtual_gateway_owner_account: ?[]const u8,
+    virtual_gateway_owner_account: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the virtual private gateway is located.
-    virtual_gateway_region: ?[]const u8,
+    virtual_gateway_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allowed_prefixes_to_direct_connect_gateway = "allowedPrefixesToDirectConnectGateway",

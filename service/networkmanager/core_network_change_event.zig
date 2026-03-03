@@ -7,24 +7,24 @@ const CoreNetworkChangeEventValues = @import("core_network_change_event_values.z
 /// attachment, route, etc.
 pub const CoreNetworkChangeEvent = struct {
     /// The action taken for the change event.
-    action: ?ChangeAction,
+    action: ?ChangeAction = null,
 
     /// The timestamp for an event change in status.
-    event_time: ?i64,
+    event_time: ?i64 = null,
 
     /// Uniquely identifies the path for a change within the changeset. For example,
     /// the `IdentifierPath` for a core network segment change might be
     /// `"CORE_NETWORK_SEGMENT/us-east-1/devsegment"`.
-    identifier_path: ?[]const u8,
+    identifier_path: ?[]const u8 = null,
 
     /// The status of the core network change event.
-    status: ?ChangeStatus,
+    status: ?ChangeStatus = null,
 
     /// Describes the type of change event.
-    @"type": ?ChangeType,
+    @"type": ?ChangeType = null,
 
     /// Details of the change event.
-    values: ?CoreNetworkChangeEventValues,
+    values: ?CoreNetworkChangeEventValues = null,
 
     pub const json_field_names = .{
         .action = "Action",

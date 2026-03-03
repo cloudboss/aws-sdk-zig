@@ -3,21 +3,21 @@ const WebCrawlerAuthType = @import("web_crawler_auth_type.zig").WebCrawlerAuthTy
 /// The parameters for a web crawler data source.
 pub const WebCrawlerParameters = struct {
     /// The URL of the login page for the web crawler to authenticate.
-    login_page_url: ?[]const u8,
+    login_page_url: ?[]const u8 = null,
 
     /// The XPath expression for locating the password submit button on the login
     /// page.
-    password_button_xpath: ?[]const u8,
+    password_button_xpath: ?[]const u8 = null,
 
     /// The XPath expression for locating the password field on the login page.
-    password_field_xpath: ?[]const u8,
+    password_field_xpath: ?[]const u8 = null,
 
     /// The XPath expression for locating the username submit button on the login
     /// page.
-    username_button_xpath: ?[]const u8,
+    username_button_xpath: ?[]const u8 = null,
 
     /// The XPath expression for locating the username field on the login page.
-    username_field_xpath: ?[]const u8,
+    username_field_xpath: ?[]const u8 = null,
 
     /// The authentication type for the web crawler. The type can be one of the
     /// following:
@@ -32,7 +32,7 @@ pub const WebCrawlerParameters = struct {
     web_crawler_auth_type: WebCrawlerAuthType,
 
     /// The hostname of the web proxy server for the web crawler.
-    web_proxy_host_name: ?[]const u8,
+    web_proxy_host_name: ?[]const u8 = null,
 
     /// The port number of the web proxy server for the web crawler.
     web_proxy_port_number: i32 = 0,

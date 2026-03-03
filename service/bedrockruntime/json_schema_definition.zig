@@ -1,10 +1,10 @@
 /// JSON schema structured output format options.
 pub const JsonSchemaDefinition = struct {
     /// A description of the JSON schema.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the JSON schema.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The JSON schema to constrain the model's output. For more information, see
     /// [JSON Schema

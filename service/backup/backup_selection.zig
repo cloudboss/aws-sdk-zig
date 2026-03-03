@@ -23,7 +23,7 @@ pub const BackupSelection = struct {
     ///
     /// If you specify multiple conditions, the resources much match all conditions
     /// (AND logic).
-    conditions: ?Conditions,
+    conditions: ?Conditions = null,
 
     /// The ARN of the IAM role that Backup uses to authenticate when backing up the
     /// target resource; for example, `arn:aws:iam::123456789012:role/S3Access`.
@@ -38,7 +38,7 @@ pub const BackupSelection = struct {
     ///
     /// If you specify multiple conditions, the resources much match any of the
     /// conditions (OR logic).
-    list_of_tags: ?[]const Condition,
+    list_of_tags: ?[]const Condition = null,
 
     /// The Amazon Resource Names (ARNs) of the resources to exclude from a backup
     /// plan. The maximum number
@@ -49,7 +49,7 @@ pub const BackupSelection = struct {
     /// selection strategy, such as assigning only one or a few resource types or
     /// refining your
     /// resource selection using tags.
-    not_resources: ?[]const []const u8,
+    not_resources: ?[]const []const u8 = null,
 
     /// The Amazon Resource Names (ARNs) of the resources to assign to a backup
     /// plan. The maximum number of
@@ -63,7 +63,7 @@ pub const BackupSelection = struct {
     ///
     /// If you specify multiple ARNs, the resources much match any of the ARNs (OR
     /// logic).
-    resources: ?[]const []const u8,
+    resources: ?[]const []const u8 = null,
 
     /// The display name of a resource selection document. Must contain 1 to 50
     /// alphanumeric or

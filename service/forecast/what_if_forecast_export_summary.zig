@@ -6,11 +6,11 @@ const DataDestination = @import("data_destination.zig").DataDestination;
 /// `WhatIfForecastExportArn` that is listed in the summary.
 pub const WhatIfForecastExportSummary = struct {
     /// When the what-if forecast export was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The path to the Amazon Simple Storage Service (Amazon S3) bucket where the
     /// forecast is exported.
-    destination: ?DataDestination,
+    destination: ?DataDestination = null,
 
     /// The last time the resource was modified. The timestamp depends on the status
     /// of the job:
@@ -25,10 +25,10 @@ pub const WhatIfForecastExportSummary = struct {
     ///
     /// * `ACTIVE` or `CREATE_FAILED` - When the job finished or
     /// failed.
-    last_modification_time: ?i64,
+    last_modification_time: ?i64 = null,
 
     /// If an error occurred, an informational message about the error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The status of the what-if forecast export. States include:
     ///
@@ -45,17 +45,17 @@ pub const WhatIfForecastExportSummary = struct {
     /// The `Status` of the what-if analysis must be `ACTIVE` before you can access
     /// the
     /// analysis.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// An array of Amazon Resource Names (ARNs) that define the what-if forecasts
     /// included in the export.
-    what_if_forecast_arns: ?[]const []const u8,
+    what_if_forecast_arns: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the what-if forecast export.
-    what_if_forecast_export_arn: ?[]const u8,
+    what_if_forecast_export_arn: ?[]const u8 = null,
 
     /// The what-if forecast export name.
-    what_if_forecast_export_name: ?[]const u8,
+    what_if_forecast_export_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

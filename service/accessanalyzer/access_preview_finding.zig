@@ -10,7 +10,7 @@ const FindingSource = @import("finding_source.zig").FindingSource;
 pub const AccessPreviewFinding = struct {
     /// The action in the analyzed policy statement that an external principal has
     /// permission to perform.
-    action: ?[]const []const u8,
+    action: ?[]const []const u8 = null,
 
     /// Provides context on how the access preview finding compares to existing
     /// access identified in IAM Access Analyzer.
@@ -27,20 +27,20 @@ pub const AccessPreviewFinding = struct {
     change_type: FindingChangeType,
 
     /// The condition in the analyzed policy statement that resulted in a finding.
-    condition: ?[]const aws.map.StringMapEntry,
+    condition: ?[]const aws.map.StringMapEntry = null,
 
     /// The time at which the access preview finding was created.
     created_at: i64,
 
     /// An error.
-    @"error": ?[]const u8,
+    @"error": ?[]const u8 = null,
 
     /// The existing ID of the finding in IAM Access Analyzer, provided only for
     /// existing findings.
-    existing_finding_id: ?[]const u8,
+    existing_finding_id: ?[]const u8 = null,
 
     /// The existing status of the finding, provided only for existing findings.
-    existing_finding_status: ?FindingStatus,
+    existing_finding_status: ?FindingStatus = null,
 
     /// The ID of the access preview finding. This ID uniquely identifies the
     /// element in the list of access preview findings and is not related to the
@@ -49,19 +49,19 @@ pub const AccessPreviewFinding = struct {
 
     /// Indicates whether the policy that generated the finding allows public access
     /// to the resource.
-    is_public: ?bool,
+    is_public: ?bool = null,
 
     /// The external principal that has access to a resource within the zone of
     /// trust.
-    principal: ?[]const aws.map.StringMapEntry,
+    principal: ?[]const aws.map.StringMapEntry = null,
 
     /// The resource that an external principal has access to. This is the resource
     /// associated with the access preview.
-    resource: ?[]const u8,
+    resource: ?[]const u8 = null,
 
     /// The type of restriction applied to the finding by the resource owner with an
     /// Organizations resource control policy (RCP).
-    resource_control_policy_restriction: ?ResourceControlPolicyRestriction,
+    resource_control_policy_restriction: ?ResourceControlPolicyRestriction = null,
 
     /// The Amazon Web Services account ID that owns the resource. For most Amazon
     /// Web Services resources, the owning account is the account in which the
@@ -73,7 +73,7 @@ pub const AccessPreviewFinding = struct {
 
     /// The sources of the finding. This indicates how the access that generated the
     /// finding is granted. It is populated for Amazon S3 bucket findings.
-    sources: ?[]const FindingSource,
+    sources: ?[]const FindingSource = null,
 
     /// The preview status of the finding. This is what the status of the finding
     /// would be after permissions deployment. For example, a `Changed` finding with

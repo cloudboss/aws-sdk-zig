@@ -6,10 +6,10 @@ const HistoryEventExecutionDataDetails = @import("history_event_execution_data_d
 pub const LambdaFunctionSucceededEventDetails = struct {
     /// The JSON data output by the Lambda function. Length constraints apply to the
     /// payload size, and are expressed as bytes in UTF-8 encoding.
-    output: ?[]const u8,
+    output: ?[]const u8 = null,
 
     /// Contains details about the output of an execution history event.
-    output_details: ?HistoryEventExecutionDataDetails,
+    output_details: ?HistoryEventExecutionDataDetails = null,
 
     pub const json_field_names = .{
         .output = "output",

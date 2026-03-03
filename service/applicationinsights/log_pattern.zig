@@ -6,21 +6,21 @@ pub const LogPattern = struct {
     /// 50 characters, and it cannot be empty. The pattern must be DFA compatible.
     /// Patterns that
     /// utilize forward lookahead or backreference constructions are not supported.
-    pattern: ?[]const u8,
+    pattern: ?[]const u8 = null,
 
     /// The name of the log pattern. A log pattern name can contain as many as 50
     /// characters,
     /// and it cannot be empty. The characters can be Unicode letters, digits, or
     /// one of the
     /// following symbols: period, dash, underscore.
-    pattern_name: ?[]const u8,
+    pattern_name: ?[]const u8 = null,
 
     /// The name of the log pattern. A log pattern name can contain as many as 30
     /// characters,
     /// and it cannot be empty. The characters can be Unicode letters, digits, or
     /// one of the
     /// following symbols: period, dash, underscore.
-    pattern_set_name: ?[]const u8,
+    pattern_set_name: ?[]const u8 = null,
 
     /// Rank of the log pattern. Must be a value between `1` and
     /// `1,000,000`. The patterns are sorted by rank, so we recommend that you set

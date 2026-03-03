@@ -7,16 +7,16 @@ pub const AwsEc2ClientVpnEndpointAuthenticationOptionsDetails = struct {
     /// Information about the Active Directory, if applicable. With Active Directory
     /// authentication, clients are authenticated
     /// against existing Active Directory groups.
-    active_directory: ?AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails,
+    active_directory: ?AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails = null,
 
     /// Information about the IAM SAML identity provider, if applicable.
-    federated_authentication: ?AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails,
+    federated_authentication: ?AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails = null,
 
     /// Information about the authentication certificates, if applicable.
-    mutual_authentication: ?AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails,
+    mutual_authentication: ?AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails = null,
 
     /// The authentication type used.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active_directory = "ActiveDirectory",

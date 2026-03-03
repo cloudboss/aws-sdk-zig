@@ -4,10 +4,10 @@
 pub const DelegationSet = struct {
     /// The value that you specified for `CallerReference` when you created the
     /// reusable delegation set.
-    caller_reference: ?[]const u8,
+    caller_reference: ?[]const u8 = null,
 
     /// The ID that Amazon Route 53 assigns to a reusable delegation set.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// A complex type that contains a list of the authoritative name servers for a
     /// hosted

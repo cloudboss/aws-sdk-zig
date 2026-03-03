@@ -6,29 +6,29 @@ pub const CommandParameterValue = struct {
     /// An attribute of type Boolean. For example:
     ///
     /// `"BOOL": true`
-    b: ?bool,
+    b: ?bool = null,
 
     /// An attribute of type Binary. For example:
     ///
     /// `"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"`
-    bin: ?[]const u8,
+    bin: ?[]const u8 = null,
 
     /// An attribute of type Double (Sixty-Four Bits).
-    d: ?f64,
+    d: ?f64 = null,
 
     /// An attribute of type Integer (Thirty-Two Bits).
-    i: ?i32,
+    i: ?i32 = null,
 
     /// An attribute of type Long.
-    l: ?i64,
+    l: ?i64 = null,
 
     /// An attribute of type String. For example:
     ///
     /// `"S": "Hello"`
-    s: ?[]const u8,
+    s: ?[]const u8 = null,
 
     /// An attribute of type unsigned long.
-    ul: ?[]const u8,
+    ul: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .b = "B",

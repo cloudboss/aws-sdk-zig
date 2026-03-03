@@ -11,25 +11,25 @@ const DataSourceType = @import("data_source_type.zig").DataSourceType;
 /// Describes a data source.
 pub const DataSource = struct {
     /// The data source Amazon Resource Name (ARN).
-    data_source_arn: ?[]const u8,
+    data_source_arn: ?[]const u8 = null,
 
     /// The description of the data source.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// DynamoDB settings.
-    dynamodb_config: ?DynamodbDataSourceConfig,
+    dynamodb_config: ?DynamodbDataSourceConfig = null,
 
     /// Amazon OpenSearch Service settings.
-    elasticsearch_config: ?ElasticsearchDataSourceConfig,
+    elasticsearch_config: ?ElasticsearchDataSourceConfig = null,
 
     /// Amazon EventBridge settings.
-    event_bridge_config: ?EventBridgeDataSourceConfig,
+    event_bridge_config: ?EventBridgeDataSourceConfig = null,
 
     /// HTTP endpoint settings.
-    http_config: ?HttpDataSourceConfig,
+    http_config: ?HttpDataSourceConfig = null,
 
     /// Lambda settings.
-    lambda_config: ?LambdaDataSourceConfig,
+    lambda_config: ?LambdaDataSourceConfig = null,
 
     /// Enables or disables enhanced data source metrics for specified data sources.
     /// Note that
@@ -40,22 +40,22 @@ pub const DataSource = struct {
     /// will be ignored. However, you can still set its value.
     ///
     /// `metricsConfig` can be `ENABLED` or `DISABLED`.
-    metrics_config: ?DataSourceLevelMetricsConfig,
+    metrics_config: ?DataSourceLevelMetricsConfig = null,
 
     /// The name of the data source.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Amazon OpenSearch Service settings.
-    open_search_service_config: ?OpenSearchServiceDataSourceConfig,
+    open_search_service_config: ?OpenSearchServiceDataSourceConfig = null,
 
     /// Relational database settings.
-    relational_database_config: ?RelationalDatabaseDataSourceConfig,
+    relational_database_config: ?RelationalDatabaseDataSourceConfig = null,
 
     /// The Identity and Access Management (IAM) service role Amazon Resource Name
     /// (ARN)
     /// for the data source. The system assumes this role when accessing the data
     /// source.
-    service_role_arn: ?[]const u8,
+    service_role_arn: ?[]const u8 = null,
 
     /// The type of the data source.
     ///
@@ -86,7 +86,7 @@ pub const DataSource = struct {
     ///
     /// * **RELATIONAL_DATABASE**: The data source is a
     /// relational database.
-    @"type": ?DataSourceType,
+    @"type": ?DataSourceType = null,
 
     pub const json_field_names = .{
         .data_source_arn = "dataSourceArn",

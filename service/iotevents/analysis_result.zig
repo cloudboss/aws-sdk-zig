@@ -21,15 +21,15 @@ pub const AnalysisResult = struct {
     /// * `ERROR` - An error result notifies you about a problem found in your
     /// detector model. You must fix all errors before you can publish your detector
     /// model.
-    level: ?AnalysisResultLevel,
+    level: ?AnalysisResultLevel = null,
 
     /// Contains one or more locations that you can use to locate the fields in your
     /// detector
     /// model that the analysis result references.
-    locations: ?[]const AnalysisResultLocation,
+    locations: ?[]const AnalysisResultLocation = null,
 
     /// Contains additional information about the analysis result.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The type of the analysis result. Analyses fall into the following types
     /// based on the
@@ -61,7 +61,7 @@ pub const AnalysisResult = struct {
     ///
     /// For more information, see [Running detector model
     /// analyses](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html) in the *AWS IoT Events Developer Guide*.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .level = "level",

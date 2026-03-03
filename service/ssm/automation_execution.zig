@@ -16,81 +16,81 @@ const AlarmStateInformation = @import("alarm_state_information.zig").AlarmStateI
 /// execution.
 pub const AutomationExecution = struct {
     /// The details for the CloudWatch alarm applied to your automation.
-    alarm_configuration: ?AlarmConfiguration,
+    alarm_configuration: ?AlarmConfiguration = null,
 
     /// The ID of a State Manager association used in the Automation operation.
-    association_id: ?[]const u8,
+    association_id: ?[]const u8 = null,
 
     /// The execution ID.
-    automation_execution_id: ?[]const u8,
+    automation_execution_id: ?[]const u8 = null,
 
     /// The execution status of the Automation.
-    automation_execution_status: ?AutomationExecutionStatus,
+    automation_execution_status: ?AutomationExecutionStatus = null,
 
     /// The subtype of the Automation operation. Currently, the only supported value
     /// is
     /// `ChangeRequest`.
-    automation_subtype: ?AutomationSubtype,
+    automation_subtype: ?AutomationSubtype = null,
 
     /// The name of the Change Manager change request.
-    change_request_name: ?[]const u8,
+    change_request_name: ?[]const u8 = null,
 
     /// The action of the step that is currently running.
-    current_action: ?[]const u8,
+    current_action: ?[]const u8 = null,
 
     /// The name of the step that is currently running.
-    current_step_name: ?[]const u8,
+    current_step_name: ?[]const u8 = null,
 
     /// The name of the Automation runbook used during the execution.
-    document_name: ?[]const u8,
+    document_name: ?[]const u8 = null,
 
     /// The version of the document to use during execution.
-    document_version: ?[]const u8,
+    document_version: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the user who ran the automation.
-    executed_by: ?[]const u8,
+    executed_by: ?[]const u8 = null,
 
     /// The time the execution finished.
-    execution_end_time: ?i64,
+    execution_end_time: ?i64 = null,
 
     /// The time the execution started.
-    execution_start_time: ?i64,
+    execution_start_time: ?i64 = null,
 
     /// A message describing why an execution has failed, if the status is set to
     /// Failed.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// The `MaxConcurrency` value specified by the user when the execution
     /// started.
-    max_concurrency: ?[]const u8,
+    max_concurrency: ?[]const u8 = null,
 
     /// The MaxErrors value specified by the user when the execution started.
-    max_errors: ?[]const u8,
+    max_errors: ?[]const u8 = null,
 
     /// The automation execution mode.
-    mode: ?ExecutionMode,
+    mode: ?ExecutionMode = null,
 
     /// The ID of an OpsItem that is created to represent a Change Manager change
     /// request.
-    ops_item_id: ?[]const u8,
+    ops_item_id: ?[]const u8 = null,
 
     /// The list of execution outputs as defined in the Automation runbook.
-    outputs: ?[]const aws.map.MapEntry([]const []const u8),
+    outputs: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The key-value map of execution parameters, which were supplied when calling
     /// StartAutomationExecution.
-    parameters: ?[]const aws.map.MapEntry([]const []const u8),
+    parameters: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The AutomationExecutionId of the parent automation.
-    parent_automation_execution_id: ?[]const u8,
+    parent_automation_execution_id: ?[]const u8 = null,
 
     /// An aggregate of step execution statuses displayed in the Amazon Web Services
     /// Systems Manager console for a
     /// multi-Region and multi-account Automation execution.
-    progress_counters: ?ProgressCounters,
+    progress_counters: ?ProgressCounters = null,
 
     /// A list of resolved targets in the rate control execution.
-    resolved_targets: ?ResolvedTargets,
+    resolved_targets: ?ResolvedTargets = null,
 
     /// Information about the Automation runbooks that are run as part of a runbook
     /// workflow.
@@ -98,15 +98,15 @@ pub const AutomationExecution = struct {
     /// The Automation runbooks specified for the runbook workflow can't run until
     /// all required
     /// approvals for the change request have been received.
-    runbooks: ?[]const Runbook,
+    runbooks: ?[]const Runbook = null,
 
     /// The date and time the Automation operation is scheduled to start.
-    scheduled_time: ?i64,
+    scheduled_time: ?i64 = null,
 
     /// A list of details about the current state of all steps that comprise an
     /// execution. An
     /// Automation runbook contains a list of steps that are run in order.
-    step_executions: ?[]const StepExecution,
+    step_executions: ?[]const StepExecution = null,
 
     /// A boolean value that indicates if the response contains the full list of the
     /// Automation step
@@ -116,32 +116,32 @@ pub const AutomationExecution = struct {
     step_executions_truncated: bool = false,
 
     /// The target of the execution.
-    target: ?[]const u8,
+    target: ?[]const u8 = null,
 
     /// The combination of Amazon Web Services Regions and/or Amazon Web Services
     /// accounts where you want to run the
     /// Automation.
-    target_locations: ?[]const TargetLocation,
+    target_locations: ?[]const TargetLocation = null,
 
     /// A publicly accessible URL for a file that contains the `TargetLocations`
     /// body.
     /// Currently, only files in presigned Amazon S3 buckets are supported
-    target_locations_url: ?[]const u8,
+    target_locations_url: ?[]const u8 = null,
 
     /// The specified key-value mapping of document parameters to target resources.
-    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8),
+    target_maps: ?[]const []const aws.map.MapEntry([]const []const u8) = null,
 
     /// The parameter name.
-    target_parameter_name: ?[]const u8,
+    target_parameter_name: ?[]const u8 = null,
 
     /// The specified targets.
-    targets: ?[]const Target,
+    targets: ?[]const Target = null,
 
     /// The CloudWatch alarm that was invoked by the automation.
-    triggered_alarms: ?[]const AlarmStateInformation,
+    triggered_alarms: ?[]const AlarmStateInformation = null,
 
     /// Variables defined for the automation.
-    variables: ?[]const aws.map.MapEntry([]const []const u8),
+    variables: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     pub const json_field_names = .{
         .alarm_configuration = "AlarmConfiguration",

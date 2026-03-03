@@ -1,22 +1,22 @@
 /// The detector.
 pub const Detector = struct {
     /// The detector ARN.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Timestamp of when the detector was created.
-    created_time: ?[]const u8,
+    created_time: ?[]const u8 = null,
 
     /// The detector description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The detector ID.
-    detector_id: ?[]const u8,
+    detector_id: ?[]const u8 = null,
 
     /// The name of the event type.
-    event_type_name: ?[]const u8,
+    event_type_name: ?[]const u8 = null,
 
     /// Timestamp of when the detector was last updated.
-    last_updated_time: ?[]const u8,
+    last_updated_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

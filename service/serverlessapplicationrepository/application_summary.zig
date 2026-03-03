@@ -11,7 +11,7 @@ pub const ApplicationSummary = struct {
     author: []const u8,
 
     /// The date and time this resource was created.
-    creation_time: ?[]const u8,
+    creation_time: ?[]const u8 = null,
 
     /// The description of the application.
     ///
@@ -20,14 +20,14 @@ pub const ApplicationSummary = struct {
 
     /// A URL with more information about the application, for example the location
     /// of your GitHub repository for the application.
-    home_page_url: ?[]const u8,
+    home_page_url: ?[]const u8 = null,
 
     /// Labels to improve discovery of apps in search results.
     ///
     /// Minimum length=1. Maximum length=127. Maximum number of labels: 10
     ///
     /// Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
-    labels: ?[]const []const u8,
+    labels: ?[]const []const u8 = null,
 
     /// The name of the application.
     ///
@@ -38,7 +38,7 @@ pub const ApplicationSummary = struct {
 
     /// A valid identifier from
     /// [https://spdx.org/licenses/](https://spdx.org/licenses/).
-    spdx_license_id: ?[]const u8,
+    spdx_license_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

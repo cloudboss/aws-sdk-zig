@@ -20,16 +20,16 @@ pub const HarvestJob = struct {
     created_at: i64,
 
     /// An optional description of the harvest job.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The S3 destination where the harvested content will be placed.
     destination: Destination,
 
     /// An error message if the harvest job encountered any issues.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The current version of the harvest job. Used for concurrency control.
-    e_tag: ?[]const u8,
+    e_tag: ?[]const u8 = null,
 
     /// A list of manifests that are being or have been harvested.
     harvested_manifests: HarvestedManifests,

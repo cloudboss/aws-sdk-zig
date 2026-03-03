@@ -21,7 +21,7 @@ pub const CloudwatchLogsExportConfiguration = struct {
     /// * Aurora PostgreSQL - `postgresql`
     /// * RDS for MySQL - `error | general | slowquery`
     /// * RDS for PostgreSQL - `postgresql | upgrade`
-    disable_log_types: ?[]const []const u8,
+    disable_log_types: ?[]const []const u8 = null,
 
     /// The list of log types to enable.
     ///
@@ -31,5 +31,5 @@ pub const CloudwatchLogsExportConfiguration = struct {
     /// * Aurora PostgreSQL - `postgresql`
     /// * RDS for MySQL - `error | general | slowquery`
     /// * RDS for PostgreSQL - `postgresql | upgrade`
-    enable_log_types: ?[]const []const u8,
+    enable_log_types: ?[]const []const u8 = null,
 };

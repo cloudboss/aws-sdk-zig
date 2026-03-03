@@ -21,10 +21,10 @@ const DeprecationTimeConditionRequest = @import("deprecation_time_condition_requ
 /// works](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#how-allowed-amis-works) in the *Amazon EC2 User Guide*.
 pub const ImageCriterionRequest = struct {
     /// The maximum age for allowed images.
-    creation_date_condition: ?CreationDateConditionRequest,
+    creation_date_condition: ?CreationDateConditionRequest = null,
 
     /// The maximum period since deprecation for allowed images.
-    deprecation_time_condition: ?DeprecationTimeConditionRequest,
+    deprecation_time_condition: ?DeprecationTimeConditionRequest = null,
 
     /// The names of allowed images. Names can include wildcards (`?` and
     /// `*`).
@@ -42,7 +42,7 @@ pub const ImageCriterionRequest = struct {
     /// * Spaces
     ///
     /// Maximum: 50 values
-    image_names: ?[]const []const u8,
+    image_names: ?[]const []const u8 = null,
 
     /// The image providers whose images are allowed.
     ///
@@ -64,7 +64,7 @@ pub const ImageCriterionRequest = struct {
     /// specified, no other values can be specified.
     ///
     /// Maximum: 200 values
-    image_providers: ?[]const []const u8,
+    image_providers: ?[]const []const u8 = null,
 
     /// The Amazon Web Services Marketplace product codes for allowed images.
     ///
@@ -73,5 +73,5 @@ pub const ImageCriterionRequest = struct {
     /// Valid characters: Letters (`A–Z, a–z`) and numbers (`0–9`)
     ///
     /// Maximum: 50 values
-    marketplace_product_codes: ?[]const []const u8,
+    marketplace_product_codes: ?[]const []const u8 = null,
 };

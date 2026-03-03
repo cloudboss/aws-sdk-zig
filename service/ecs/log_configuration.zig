@@ -301,14 +301,14 @@ pub const LogConfiguration = struct {
     /// log in to your container instance and run the following command: `sudo
     /// docker
     /// version --format '{{.Server.APIVersion}}'`
-    options: ?[]const aws.map.StringMapEntry,
+    options: ?[]const aws.map.StringMapEntry = null,
 
     /// The secrets to pass to the log configuration. For more information, see
     /// [Specifying
     /// sensitive
     /// data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    secret_options: ?[]const Secret,
+    secret_options: ?[]const Secret = null,
 
     pub const json_field_names = .{
         .log_driver = "logDriver",

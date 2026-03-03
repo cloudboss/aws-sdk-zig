@@ -6,10 +6,10 @@ pub const RevisionInfo = struct {
     /// Information about an application revision, including usage details and
     /// associated
     /// deployment groups.
-    generic_revision_info: ?GenericRevisionInfo,
+    generic_revision_info: ?GenericRevisionInfo = null,
 
     /// Information about the location and type of an application revision.
-    revision_location: ?RevisionLocation,
+    revision_location: ?RevisionLocation = null,
 
     pub const json_field_names = .{
         .generic_revision_info = "genericRevisionInfo",

@@ -5,13 +5,13 @@ pub const AwsCodeBuildProjectEnvironmentRegistryCredential = struct {
     /// The credential can use the name of the credentials only if they exist in
     /// your current
     /// Amazon Web Services Region.
-    credential: ?[]const u8,
+    credential: ?[]const u8 = null,
 
     /// The service that created the credentials to access a private Docker
     /// registry.
     ///
     /// The valid value,` SECRETS_MANAGER`, is for Secrets Manager.
-    credential_provider: ?[]const u8,
+    credential_provider: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .credential = "Credential",

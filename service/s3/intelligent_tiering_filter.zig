@@ -10,7 +10,7 @@ pub const IntelligentTieringFilter = struct {
     /// operator must have at least two predicates, and an object must match all of
     /// the predicates in order for
     /// the filter to apply.
-    @"and": ?IntelligentTieringAndOperator,
+    @"and": ?IntelligentTieringAndOperator = null,
 
     /// An object key name prefix that identifies the subset of objects to which the
     /// rule applies.
@@ -20,7 +20,7 @@ pub const IntelligentTieringFilter = struct {
     /// XML requests. For more information, see [
     /// XML related object key
     /// constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
-    tag: ?Tag,
+    tag: ?Tag = null,
 };

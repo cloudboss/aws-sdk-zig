@@ -23,7 +23,7 @@ pub const ListenerTls = struct {
 
     /// A reference to an object that represents a listener's Transport Layer
     /// Security (TLS) validation context.
-    validation: ?ListenerTlsValidationContext,
+    validation: ?ListenerTlsValidationContext = null,
 
     pub const json_field_names = .{
         .certificate = "certificate",

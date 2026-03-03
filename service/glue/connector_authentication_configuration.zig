@@ -10,11 +10,11 @@ pub const ConnectorAuthenticationConfiguration = struct {
     /// Basic, OAuth2, or Custom authentication methods.
     authentication_types: []const AuthenticationType,
 
-    basic_authentication_properties: ?BasicAuthenticationProperties,
+    basic_authentication_properties: ?BasicAuthenticationProperties = null,
 
-    custom_authentication_properties: ?CustomAuthenticationProperties,
+    custom_authentication_properties: ?CustomAuthenticationProperties = null,
 
-    o_auth_2_properties: ?ConnectorOAuth2Properties,
+    o_auth_2_properties: ?ConnectorOAuth2Properties = null,
 
     pub const json_field_names = .{
         .authentication_types = "AuthenticationTypes",

@@ -11,26 +11,26 @@ const StringCondition = @import("string_condition.zig").StringCondition;
 pub const UserSearchCriteria = struct {
     /// A list of conditions which would be applied together with an `AND`
     /// condition.
-    and_conditions: ?[]const UserSearchCriteria,
+    and_conditions: ?[]const UserSearchCriteria = null,
 
     /// A leaf node condition which can be used to specify a hierarchy group
     /// condition.
-    hierarchy_group_condition: ?HierarchyGroupCondition,
+    hierarchy_group_condition: ?HierarchyGroupCondition = null,
 
     /// A leaf node condition which can be used to specify a List condition to
     /// search users with attributes included in
     /// Lists like Proficiencies.
-    list_condition: ?ListCondition,
+    list_condition: ?ListCondition = null,
 
     /// A list of conditions which would be applied together with an `OR` condition.
-    or_conditions: ?[]const UserSearchCriteria,
+    or_conditions: ?[]const UserSearchCriteria = null,
 
     /// A leaf node condition which can be used to specify a string condition.
     ///
     /// The currently supported values for `FieldName` are `Username`, `FirstName`,
     /// `LastName`, `RoutingProfileId`, `SecurityProfileId`,
     /// `resourceId`.
-    string_condition: ?StringCondition,
+    string_condition: ?StringCondition = null,
 
     pub const json_field_names = .{
         .and_conditions = "AndConditions",

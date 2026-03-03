@@ -5,24 +5,24 @@ const GroupingStatus = @import("grouping_status.zig").GroupingStatus;
 pub const GroupingStatusesItem = struct {
     /// Describes the resource grouping action with values of
     /// `GROUP` or `UNGROUP`.
-    action: ?GroupingType,
+    action: ?GroupingType = null,
 
     /// Specifies the error code that was raised.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// A message that explains the `ErrorCode`.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The Amazon resource name (ARN) of a resource.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// Describes the resource grouping status with values of
     /// `SUCCESS`, `FAILED`, `IN_PROGRESS`,
     /// or `SKIPPED`.
-    status: ?GroupingStatus,
+    status: ?GroupingStatus = null,
 
     /// A timestamp of when the status was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .action = "Action",

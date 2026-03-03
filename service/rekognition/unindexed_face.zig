@@ -7,7 +7,7 @@ pub const UnindexedFace = struct {
     /// The
     /// structure that contains attributes of a face that
     /// `IndexFaces`detected, but didn't index.
-    face_detail: ?FaceDetail,
+    face_detail: ?FaceDetail = null,
 
     /// An array of reasons that specify why a face wasn't indexed.
     ///
@@ -26,7 +26,7 @@ pub const UnindexedFace = struct {
     /// * LOW_CONFIDENCE - The face was detected with a low confidence.
     ///
     /// * SMALL_BOUNDING_BOX - The bounding box around the face is too small.
-    reasons: ?[]const Reason,
+    reasons: ?[]const Reason = null,
 
     pub const json_field_names = .{
         .face_detail = "FaceDetail",

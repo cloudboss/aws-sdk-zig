@@ -1,8 +1,8 @@
 /// The last error that occurred for a VPC endpoint.
 pub const LastError = struct {
     /// The error code for the VPC endpoint error.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The error message for the VPC endpoint error.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

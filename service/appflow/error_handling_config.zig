@@ -8,10 +8,10 @@
 /// details.
 pub const ErrorHandlingConfig = struct {
     /// Specifies the name of the Amazon S3 bucket.
-    bucket_name: ?[]const u8,
+    bucket_name: ?[]const u8 = null,
 
     /// Specifies the Amazon S3 bucket prefix.
-    bucket_prefix: ?[]const u8,
+    bucket_prefix: ?[]const u8 = null,
 
     /// Specifies if the flow should fail after the first instance of a failure when
     /// attempting

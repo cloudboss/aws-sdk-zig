@@ -16,7 +16,7 @@ pub const SoftwareUpdatePreferences = struct {
     /// emergency version update is applied. These updates are applied during your
     /// gateway's
     /// scheduled maintenance window.
-    automatic_update_policy: ?AutomaticUpdatePolicy,
+    automatic_update_policy: ?AutomaticUpdatePolicy = null,
 
     pub const json_field_names = .{
         .automatic_update_policy = "AutomaticUpdatePolicy",

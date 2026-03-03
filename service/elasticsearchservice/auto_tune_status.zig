@@ -7,10 +7,10 @@ pub const AutoTuneStatus = struct {
 
     /// Specifies the error message while enabling or disabling the Auto-Tune
     /// options.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// Indicates whether the Elasticsearch domain is being deleted.
-    pending_deletion: ?bool,
+    pending_deletion: ?bool = null,
 
     /// Specifies the `AutoTuneState` for the Elasticsearch domain.
     state: AutoTuneState,

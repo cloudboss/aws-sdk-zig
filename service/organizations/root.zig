@@ -11,7 +11,7 @@ pub const Root = struct {
     /// For more information about ARNs in Organizations, see [ARN
     /// Formats Supported by
     /// Organizations](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies) in the *Amazon Web Services Service Authorization Reference*.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The unique identifier (ID) for the root. The ID is unique to the
     /// organization
@@ -20,7 +20,7 @@ pub const Root = struct {
     /// The [regex pattern](http://wikipedia.org/wiki/regex) for a root ID string
     /// requires "r-" followed by
     /// from 4 to 32 lowercase letters or digits.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The friendly name of the root.
     ///
@@ -28,7 +28,7 @@ pub const Root = struct {
     /// that is used to validate this parameter is a string of any of the characters
     /// in the ASCII
     /// character range.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The types of policies that are currently enabled for the root and therefore
     /// can be
@@ -39,7 +39,7 @@ pub const Root = struct {
     /// EnablePolicyType and DisablePolicyType. Use DescribeOrganization to see the
     /// availability of the policy types in
     /// that organization.
-    policy_types: ?[]const PolicyTypeSummary,
+    policy_types: ?[]const PolicyTypeSummary = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

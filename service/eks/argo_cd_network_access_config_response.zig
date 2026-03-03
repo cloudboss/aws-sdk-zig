@@ -6,7 +6,7 @@ pub const ArgoCdNetworkAccessConfigResponse = struct {
     /// The list of VPC endpoint IDs associated with the managed Argo CD API server
     /// endpoint. Each VPC endpoint provides private connectivity from a specific
     /// VPC to the Argo CD server.
-    vpce_ids: ?[]const []const u8,
+    vpce_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .vpce_ids = "vpceIds",

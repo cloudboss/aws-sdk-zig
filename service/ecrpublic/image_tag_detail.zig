@@ -3,13 +3,13 @@ const ReferencedImageDetail = @import("referenced_image_detail.zig").ReferencedI
 /// An object that represents the image tag details for an image.
 pub const ImageTagDetail = struct {
     /// The time stamp that indicates when the image tag was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// An object that describes the details of an image.
-    image_detail: ?ReferencedImageDetail,
+    image_detail: ?ReferencedImageDetail = null,
 
     /// The tag that's associated with the image.
-    image_tag: ?[]const u8,
+    image_tag: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

@@ -5,22 +5,22 @@ const SetDimension = @import("set_dimension.zig").SetDimension;
 /// endpoint devices, such as platform, make, and model.
 pub const SegmentDemographics = struct {
     /// The app version criteria for the segment.
-    app_version: ?SetDimension,
+    app_version: ?SetDimension = null,
 
     /// The channel criteria for the segment.
-    channel: ?SetDimension,
+    channel: ?SetDimension = null,
 
     /// The device type criteria for the segment.
-    device_type: ?SetDimension,
+    device_type: ?SetDimension = null,
 
     /// The device make criteria for the segment.
-    make: ?SetDimension,
+    make: ?SetDimension = null,
 
     /// The device model criteria for the segment.
-    model: ?SetDimension,
+    model: ?SetDimension = null,
 
     /// The device platform criteria for the segment.
-    platform: ?SetDimension,
+    platform: ?SetDimension = null,
 
     pub const json_field_names = .{
         .app_version = "AppVersion",

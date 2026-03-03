@@ -6,26 +6,26 @@ pub const ResourcePolicy = struct {
     /// Timestamp showing when this policy was last updated, expressed as the number
     /// of
     /// milliseconds after `Jan 1, 1970 00:00:00 UTC`.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The details of the policy.
-    policy_document: ?[]const u8,
+    policy_document: ?[]const u8 = null,
 
     /// The name of the resource policy.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// Specifies scope of the resource policy. Valid values are ACCOUNT or
     /// RESOURCE.
-    policy_scope: ?PolicyScope,
+    policy_scope: ?PolicyScope = null,
 
     /// The ARN of the CloudWatch Logs resource to which the resource policy is
     /// attached. Only
     /// populated for resource-scoped policies.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The revision ID of the resource policy. Only populated for resource-scoped
     /// policies.
-    revision_id: ?[]const u8,
+    revision_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .last_updated_time = "lastUpdatedTime",

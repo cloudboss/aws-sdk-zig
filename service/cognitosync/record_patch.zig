@@ -4,7 +4,7 @@ const Operation = @import("operation.zig").Operation;
 pub const RecordPatch = struct {
     /// The last modified date of the client
     /// device.
-    device_last_modified_date: ?i64,
+    device_last_modified_date: ?i64 = null,
 
     /// The key associated with the record patch.
     key: []const u8,
@@ -18,7 +18,7 @@ pub const RecordPatch = struct {
 
     /// The value associated with the record
     /// patch.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .device_last_modified_date = "DeviceLastModifiedDate",

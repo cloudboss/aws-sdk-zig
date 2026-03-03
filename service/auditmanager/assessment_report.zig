@@ -9,31 +9,31 @@ const AssessmentReportStatus = @import("assessment_report_status.zig").Assessmen
 /// controls that are specified in your assessment.
 pub const AssessmentReport = struct {
     /// The identifier for the specified assessment.
-    assessment_id: ?[]const u8,
+    assessment_id: ?[]const u8 = null,
 
     /// The name of the associated assessment.
-    assessment_name: ?[]const u8,
+    assessment_name: ?[]const u8 = null,
 
     /// The name of the user who created the assessment report.
-    author: ?[]const u8,
+    author: ?[]const u8 = null,
 
     /// The identifier for the specified Amazon Web Services account.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
     /// Specifies when the assessment report was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The description of the specified assessment report.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier for the assessment report.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The name that's given to the assessment report.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the specified assessment report.
-    status: ?AssessmentReportStatus,
+    status: ?AssessmentReportStatus = null,
 
     pub const json_field_names = .{
         .assessment_id = "assessmentId",

@@ -10,16 +10,16 @@ pub const DomainSummary = struct {
     created_at: i64,
 
     /// A description of an Amazon DataZone domain.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The domain version.
-    domain_version: ?DomainVersion,
+    domain_version: ?DomainVersion = null,
 
     /// The ID of the Amazon DataZone domain.
     id: []const u8,
 
     /// A timestamp of when a Amazon DataZone domain was last updated.
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The identifier of the Amazon Web Services account that manages the domain.
     managed_account_id: []const u8,
@@ -28,7 +28,7 @@ pub const DomainSummary = struct {
     name: []const u8,
 
     /// The data portal URL for the Amazon DataZone domain.
-    portal_url: ?[]const u8,
+    portal_url: ?[]const u8 = null,
 
     /// The status of the Amazon DataZone domain.
     status: DomainStatus,

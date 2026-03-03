@@ -7,11 +7,11 @@ const SampleRangeConversion = @import("sample_range_conversion.zig").SampleRange
 /// Settings for color correction.
 pub const ColorCorrector = struct {
     /// Brightness level.
-    brightness: ?i32,
+    brightness: ?i32 = null,
 
     /// Specify YUV limits and RGB tolerances when you set Sample range conversion
     /// to Limited range clip.
-    clip_limits: ?ClipLimits,
+    clip_limits: ?ClipLimits = null,
 
     /// Specify the color space you want for this output. The service supports
     /// conversion between HDR formats, between SDR formats, from SDR to HDR, and
@@ -27,10 +27,10 @@ pub const ColorCorrector = struct {
     /// * P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
     /// * P3D65 (SDR): Display P3, sRGB, BT.709
     /// * P3D65 (HDR): Display P3, PQ, BT.709
-    color_space_conversion: ?ColorSpaceConversion,
+    color_space_conversion: ?ColorSpaceConversion = null,
 
     /// Contrast level.
-    contrast: ?i32,
+    contrast: ?i32 = null,
 
     /// Use these settings when you convert to the HDR 10 color space. Specify the
     /// SMPTE ST 2086 Mastering Display Color Volume static metadata that you want
@@ -43,7 +43,7 @@ pub const ColorCorrector = struct {
     /// default values for the other HDR 10 metadata settings are defined by the
     /// P3D65 color space. For more information about MediaConvert HDR jobs, see
     /// https://docs.aws.amazon.com/console/mediaconvert/hdr.
-    hdr_10_metadata: ?Hdr10Metadata,
+    hdr_10_metadata: ?Hdr10Metadata = null,
 
     /// Specify how MediaConvert maps brightness and colors from your HDR input to
     /// your SDR output. The mode that you select represents a creative choice, with
@@ -57,15 +57,15 @@ pub const ColorCorrector = struct {
     /// is mastered for 1000 nits. You may notice loss of details in bright or
     /// saturated areas of your output. HDR to SDR tone mapping has no effect when
     /// your input is SDR.
-    hdr_to_sdr_tone_mapper: ?HDRToSDRToneMapper,
+    hdr_to_sdr_tone_mapper: ?HDRToSDRToneMapper = null,
 
     /// Hue in degrees.
-    hue: ?i32,
+    hue: ?i32 = null,
 
     /// Specify the maximum mastering display luminance. Enter an integer from 0 to
     /// 2147483647, in units of 0.0001 nits. For example, enter 10000000 for 1000
     /// nits.
-    max_luminance: ?i32,
+    max_luminance: ?i32 = null,
 
     /// Specify how MediaConvert limits the color sample range for this output. To
     /// create a limited range output from a full range input: Choose Limited range
@@ -82,10 +82,10 @@ pub const ColorCorrector = struct {
     /// bounds you specify under Minimum RGB tolerance and Maximum RGB tolerance.
     /// With either limited range conversion, MediaConvert writes the sample range
     /// metadata in the output.
-    sample_range_conversion: ?SampleRangeConversion,
+    sample_range_conversion: ?SampleRangeConversion = null,
 
     /// Saturation level.
-    saturation: ?i32,
+    saturation: ?i32 = null,
 
     /// Specify the reference white level, in nits, for all of your SDR inputs. Use
     /// to correct brightness levels within HDR10 outputs. The following color
@@ -96,7 +96,7 @@ pub const ColorCorrector = struct {
     /// brightness displays, we recommend that you set SDR reference white level to
     /// 203 (according to ITU-R BT.2408). Leave blank to use the default value of
     /// 100, or specify an integer from 100 to 1000.
-    sdr_reference_white_level: ?i32,
+    sdr_reference_white_level: ?i32 = null,
 
     pub const json_field_names = .{
         .brightness = "Brightness",

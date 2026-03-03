@@ -13,23 +13,23 @@ pub const NodeGroup = struct {
     /// Valkey or Redis OSS (cluster mode enabled) replication group contains 1 to
     /// 90 node groups numbered 0001 to 0090.
     /// Optionally, the user can provide the id for a node group.
-    node_group_id: ?[]const u8,
+    node_group_id: ?[]const u8 = null,
 
     /// A list containing information about individual nodes within the node group
     /// (shard).
-    node_group_members: ?[]const NodeGroupMember,
+    node_group_members: ?[]const NodeGroupMember = null,
 
     /// The endpoint of the primary node in this node group (shard).
-    primary_endpoint: ?Endpoint,
+    primary_endpoint: ?Endpoint = null,
 
     /// The endpoint of the replica nodes in this node group (shard). This value is
     /// read-only.
-    reader_endpoint: ?Endpoint,
+    reader_endpoint: ?Endpoint = null,
 
     /// The keyspace for this node group (shard).
-    slots: ?[]const u8,
+    slots: ?[]const u8 = null,
 
     /// The current state of this replication group - `creating`,
     /// `available`, `modifying`, `deleting`.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 };

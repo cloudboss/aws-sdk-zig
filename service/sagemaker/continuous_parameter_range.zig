@@ -43,7 +43,7 @@ pub const ContinuousParameterRange = struct {
     ///
     /// Reverse logarithmic scaling works only for ranges that are entirely within
     /// the range 0<=x<1.0.
-    scaling_type: ?HyperParameterScalingType,
+    scaling_type: ?HyperParameterScalingType = null,
 
     pub const json_field_names = .{
         .max_value = "MaxValue",

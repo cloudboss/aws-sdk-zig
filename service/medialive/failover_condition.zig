@@ -4,7 +4,7 @@ const FailoverConditionSettings = @import("failover_condition_settings.zig").Fai
 /// inside AutomaticInputFailoverSettings.
 pub const FailoverCondition = struct {
     /// Failover condition type-specific settings.
-    failover_condition_settings: ?FailoverConditionSettings,
+    failover_condition_settings: ?FailoverConditionSettings = null,
 
     pub const json_field_names = .{
         .failover_condition_settings = "FailoverConditionSettings",

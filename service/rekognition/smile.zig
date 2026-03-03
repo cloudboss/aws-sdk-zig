@@ -3,7 +3,7 @@
 /// determination.
 pub const Smile = struct {
     /// Level of confidence in the determination.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// Boolean value that indicates whether the face is smiling or not.
     value: bool = false,

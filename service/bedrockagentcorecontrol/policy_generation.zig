@@ -17,7 +17,7 @@ pub const PolicyGeneration = struct {
     created_at: i64,
 
     /// Findings and insights from this policy generation process.
-    findings: ?[]const u8,
+    findings: ?[]const u8 = null,
 
     /// The customer-assigned name for this policy generation request.
     name: []const u8,

@@ -8,5 +8,5 @@ const BucketAbacStatus = @import("bucket_abac_status.zig").BucketAbacStatus;
 /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html).
 pub const AbacStatus = struct {
     /// The ABAC status of the general purpose bucket.
-    status: ?BucketAbacStatus,
+    status: ?BucketAbacStatus = null,
 };

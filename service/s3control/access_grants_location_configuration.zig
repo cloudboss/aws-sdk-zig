@@ -15,5 +15,5 @@ pub const AccessGrantsLocationConfiguration = struct {
     /// If the `S3SubPrefix` includes a prefix, append the wildcard character `*`
     /// after the prefix to indicate that you want to include all object key names
     /// in the bucket that start with that prefix.
-    s3_sub_prefix: ?[]const u8,
+    s3_sub_prefix: ?[]const u8 = null,
 };

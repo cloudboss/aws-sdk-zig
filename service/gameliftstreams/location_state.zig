@@ -13,36 +13,36 @@ pub const LocationState = struct {
     /// resources are allocated or deallocated. Similarly, when allocated on-demand
     /// capacity is no longer needed, it can take a few minutes for Amazon GameLift
     /// Streams to spin down the allocated capacity.
-    allocated_capacity: ?i32,
+    allocated_capacity: ?i32 = null,
 
     /// This setting, if non-zero, indicates minimum streaming capacity which is
     /// allocated to you and is never released back to the service. You pay for this
     /// base level of capacity at all times, whether used or idle.
-    always_on_capacity: ?i32,
+    always_on_capacity: ?i32 = null,
 
     /// This value is the amount of allocated capacity that is not currently
     /// streaming. It represents the stream group's ability to respond immediately
     /// to new stream requests with near-instant startup time.
-    idle_capacity: ?i32,
+    idle_capacity: ?i32 = null,
 
     /// A location's name. For example, `us-east-1`. For a complete list of
     /// locations that Amazon GameLift Streams supports, refer to [Regions, quotas,
     /// and
     /// limitations](https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html) in the *Amazon GameLift Streams Developer Guide*.
-    location_name: ?[]const u8,
+    location_name: ?[]const u8 = null,
 
     /// This indicates the maximum capacity that the service can allocate for you.
     /// Newly created streams may take a few minutes to start. Capacity is released
     /// back to the service when idle. You pay for capacity that is allocated to you
     /// until it is released.
-    maximum_capacity: ?i32,
+    maximum_capacity: ?i32 = null,
 
     /// The streaming capacity that Amazon GameLift Streams can allocate in response
     /// to stream requests, and then de-allocate when the session has terminated.
     /// This offers a cost control measure at the expense of a greater startup time
     /// (typically under 5 minutes). Default is 0 when creating a stream group or
     /// adding a location.
-    on_demand_capacity: ?i32,
+    on_demand_capacity: ?i32 = null,
 
     /// This value is the always-on capacity that you most recently requested for a
     /// stream group. You request capacity separately for each location in a stream
@@ -51,7 +51,7 @@ pub const LocationState = struct {
     /// allocated capacity meet requested capacity. When always-on capacity is
     /// decreased, it can take a few minutes to deprovision allocated capacity to
     /// match the requested capacity.
-    requested_capacity: ?i32,
+    requested_capacity: ?i32 = null,
 
     /// This value is set of locations, including their name, current status, and
     /// capacities.
@@ -68,13 +68,13 @@ pub const LocationState = struct {
     /// * `REMOVING`: Amazon GameLift Streams is working to remove this location.
     ///   This will release all provisioned capacity for this location in this
     ///   stream group.
-    status: ?StreamGroupLocationStatus,
+    status: ?StreamGroupLocationStatus = null,
 
     /// This indicates idle capacity which the service pre-allocates and holds for
     /// you in anticipation of future activity. This helps to insulate your users
     /// from capacity-allocation delays. You pay for capacity which is held in this
     /// intentional idle state.
-    target_idle_capacity: ?i32,
+    target_idle_capacity: ?i32 = null,
 
     pub const json_field_names = .{
         .allocated_capacity = "AllocatedCapacity",

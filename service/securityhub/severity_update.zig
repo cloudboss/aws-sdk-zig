@@ -14,7 +14,7 @@ pub const SeverityUpdate = struct {
     ///
     /// * `CRITICAL` - The issue must be remediated immediately to avoid it
     /// escalating.
-    label: ?SeverityLabel,
+    label: ?SeverityLabel = null,
 
     /// The normalized severity for the finding. This attribute is to be deprecated
     /// in favor of
@@ -32,12 +32,12 @@ pub const SeverityUpdate = struct {
     /// * 70–89 - `HIGH`
     ///
     /// * 90–100 - `CRITICAL`
-    normalized: ?i32,
+    normalized: ?i32 = null,
 
     /// The native severity as defined by the Amazon Web Services service or
     /// integrated partner product that
     /// generated the finding.
-    product: ?f64,
+    product: ?f64 = null,
 
     pub const json_field_names = .{
         .label = "Label",

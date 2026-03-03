@@ -6,7 +6,7 @@
 pub const AvailBlanking = struct {
     /// Blanking image to be used. Leave empty for solid black. Only bmp and png
     /// images are supported.
-    avail_blanking_image: ?[]const u8,
+    avail_blanking_image: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .avail_blanking_image = "AvailBlankingImage",

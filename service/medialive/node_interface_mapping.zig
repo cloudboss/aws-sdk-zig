@@ -5,17 +5,17 @@ const NetworkInterfaceMode = @import("network_interface_mode.zig").NetworkInterf
 pub const NodeInterfaceMapping = struct {
     /// A uniform logical interface name to address in a MediaLive channel
     /// configuration.
-    logical_interface_name: ?[]const u8,
+    logical_interface_name: ?[]const u8 = null,
 
-    network_interface_mode: ?NetworkInterfaceMode,
+    network_interface_mode: ?NetworkInterfaceMode = null,
 
     /// The IP addresses associated with the physical interface on the node
     /// hardware.
-    physical_interface_ip_addresses: ?[]const []const u8,
+    physical_interface_ip_addresses: ?[]const []const u8 = null,
 
     /// The name of the physical interface on the hardware that will be running
     /// Elemental anywhere.
-    physical_interface_name: ?[]const u8,
+    physical_interface_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .logical_interface_name = "LogicalInterfaceName",

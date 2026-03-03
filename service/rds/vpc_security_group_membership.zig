@@ -4,8 +4,8 @@ pub const VpcSecurityGroupMembership = struct {
     /// The membership status of the VPC security group.
     ///
     /// Currently, the only valid status is `active`.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The name of the VPC security group.
-    vpc_security_group_id: ?[]const u8,
+    vpc_security_group_id: ?[]const u8 = null,
 };

@@ -2,13 +2,13 @@
 pub const NoteTakingAIAgentConfiguration = struct {
     /// The locale setting for language-specific case summarization generation (for
     /// example, en_US, es_ES).
-    locale: ?[]const u8,
+    locale: ?[]const u8 = null,
 
     /// The AI Guardrail identifier used by the Note Taking AI Agent.
-    note_taking_ai_guardrail_id: ?[]const u8,
+    note_taking_ai_guardrail_id: ?[]const u8 = null,
 
     /// The AI Prompt identifier used by the Note Taking AI Agent.
-    note_taking_ai_prompt_id: ?[]const u8,
+    note_taking_ai_prompt_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .locale = "locale",

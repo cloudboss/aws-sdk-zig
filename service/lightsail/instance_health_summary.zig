@@ -4,7 +4,7 @@ const InstanceHealthReason = @import("instance_health_reason.zig").InstanceHealt
 /// Describes information about the health of the instance.
 pub const InstanceHealthSummary = struct {
     /// Describes the overall instance health. Valid values are below.
-    instance_health: ?InstanceHealthState,
+    instance_health: ?InstanceHealthState = null,
 
     /// More information about the instance health. If the `instanceHealth` is
     /// `healthy`, then an `instanceHealthReason` value is not
@@ -106,11 +106,11 @@ pub const InstanceHealthSummary = struct {
     /// target instance is in the process of being deregistered and the
     /// deregistration delay
     /// period has not expired.
-    instance_health_reason: ?InstanceHealthReason,
+    instance_health_reason: ?InstanceHealthReason = null,
 
     /// The name of the Lightsail instance for which you are requesting health check
     /// data.
-    instance_name: ?[]const u8,
+    instance_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .instance_health = "instanceHealth",

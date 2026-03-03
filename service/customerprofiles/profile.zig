@@ -10,44 +10,44 @@ const ProfileType = @import("profile_type.zig").ProfileType;
 /// The standard profile of a customer.
 pub const Profile = struct {
     /// An account number that you have assigned to the customer.
-    account_number: ?[]const u8,
+    account_number: ?[]const u8 = null,
 
     /// Any additional information relevant to the customer’s profile.
-    additional_information: ?[]const u8,
+    additional_information: ?[]const u8 = null,
 
     /// A generic address associated with the customer that is not mailing,
     /// shipping, or
     /// billing.
-    address: ?Address,
+    address: ?Address = null,
 
     /// A key value pair of attributes of a customer profile.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The customer’s billing address.
-    billing_address: ?Address,
+    billing_address: ?Address = null,
 
     /// The customer’s birth date.
-    birth_date: ?[]const u8,
+    birth_date: ?[]const u8 = null,
 
     /// The customer’s business email address.
-    business_email_address: ?[]const u8,
+    business_email_address: ?[]const u8 = null,
 
     /// The name of the customer’s business.
-    business_name: ?[]const u8,
+    business_name: ?[]const u8 = null,
 
     /// The customer’s home phone number.
-    business_phone_number: ?[]const u8,
+    business_phone_number: ?[]const u8 = null,
 
     /// The customer’s email address, which has not been specified as a personal or
     /// business
     /// address.
-    email_address: ?[]const u8,
+    email_address: ?[]const u8 = null,
 
     /// The customer or account’s engagement preferences.
-    engagement_preferences: ?EngagementPreferences,
+    engagement_preferences: ?EngagementPreferences = null,
 
     /// The customer’s first name.
-    first_name: ?[]const u8,
+    first_name: ?[]const u8 = null,
 
     /// A list of items used to find a profile returned in a
     /// [SearchProfiles](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html) response.
@@ -71,51 +71,51 @@ pub const Profile = struct {
     /// `LogicalOperator` parameter is not included in the
     /// [SearchProfiles](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
     /// request.
-    found_by_items: ?[]const FoundByKeyValue,
+    found_by_items: ?[]const FoundByKeyValue = null,
 
     /// The gender with which the customer identifies.
-    gender: ?Gender,
+    gender: ?Gender = null,
 
     /// An alternative to Gender which accepts any string as input.
-    gender_string: ?[]const u8,
+    gender_string: ?[]const u8 = null,
 
     /// The customer’s home phone number.
-    home_phone_number: ?[]const u8,
+    home_phone_number: ?[]const u8 = null,
 
     /// The customer’s last name.
-    last_name: ?[]const u8,
+    last_name: ?[]const u8 = null,
 
     /// The customer’s mailing address.
-    mailing_address: ?Address,
+    mailing_address: ?Address = null,
 
     /// The customer’s middle name.
-    middle_name: ?[]const u8,
+    middle_name: ?[]const u8 = null,
 
     /// The customer’s mobile phone number.
-    mobile_phone_number: ?[]const u8,
+    mobile_phone_number: ?[]const u8 = null,
 
     /// The type of profile used to describe the customer.
-    party_type: ?PartyType,
+    party_type: ?PartyType = null,
 
     /// An alternative to PartyType which accepts any string as input.
-    party_type_string: ?[]const u8,
+    party_type_string: ?[]const u8 = null,
 
     /// The customer’s personal email address.
-    personal_email_address: ?[]const u8,
+    personal_email_address: ?[]const u8 = null,
 
     /// The customer's phone number, which has not been specified as a mobile, home,
     /// or business
     /// number.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     /// The unique identifier of a customer profile.
-    profile_id: ?[]const u8,
+    profile_id: ?[]const u8 = null,
 
     /// The type of the profile.
-    profile_type: ?ProfileType,
+    profile_type: ?ProfileType = null,
 
     /// The customer’s shipping address.
-    shipping_address: ?Address,
+    shipping_address: ?Address = null,
 
     pub const json_field_names = .{
         .account_number = "AccountNumber",

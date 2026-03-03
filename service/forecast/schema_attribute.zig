@@ -8,14 +8,14 @@ const AttributeType = @import("attribute_type.zig").AttributeType;
 /// `SchemaAttribute` objects.
 pub const SchemaAttribute = struct {
     /// The name of the dataset field.
-    attribute_name: ?[]const u8,
+    attribute_name: ?[]const u8 = null,
 
     /// The data type of the field.
     ///
     /// For a related time series dataset, other than date, item_id, and forecast
     /// dimensions attributes, all attributes should be of numerical type
     /// (integer/float).
-    attribute_type: ?AttributeType,
+    attribute_type: ?AttributeType = null,
 
     pub const json_field_names = .{
         .attribute_name = "AttributeName",

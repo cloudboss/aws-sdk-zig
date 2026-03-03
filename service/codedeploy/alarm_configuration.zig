@@ -5,7 +5,7 @@ pub const AlarmConfiguration = struct {
     /// A list of alarms configured for the deployment or deployment group. A
     /// maximum of 10
     /// alarms can be added.
-    alarms: ?[]const Alarm,
+    alarms: ?[]const Alarm = null,
 
     /// Indicates whether the alarm configuration is enabled.
     enabled: bool = false,

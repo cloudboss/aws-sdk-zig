@@ -5,13 +5,13 @@ const WorkerAccessConfiguration = @import("worker_access_configuration.zig").Wor
 /// Provides details about a labeling work team.
 pub const Workteam = struct {
     /// The date and time that the work team was created (timestamp).
-    create_date: ?i64,
+    create_date: ?i64 = null,
 
     /// A description of the work team.
     description: []const u8,
 
     /// The date and time that the work team was last updated (timestamp).
-    last_updated_date: ?i64,
+    last_updated_date: ?i64 = null,
 
     /// A list of `MemberDefinition` objects that contains objects that identify the
     /// workers that make up the work team.
@@ -24,21 +24,21 @@ pub const Workteam = struct {
 
     /// Configures SNS notifications of available or expiring work items for work
     /// teams.
-    notification_configuration: ?NotificationConfiguration,
+    notification_configuration: ?NotificationConfiguration = null,
 
     /// The Amazon Marketplace identifier for a vendor's work team.
-    product_listing_ids: ?[]const []const u8,
+    product_listing_ids: ?[]const []const u8 = null,
 
     /// The URI of the labeling job's user interface. Workers open this URI to start
     /// labeling your data objects.
-    sub_domain: ?[]const u8,
+    sub_domain: ?[]const u8 = null,
 
     /// Describes any access constraints that have been defined for Amazon S3
     /// resources.
-    worker_access_configuration: ?WorkerAccessConfiguration,
+    worker_access_configuration: ?WorkerAccessConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the workforce.
-    workforce_arn: ?[]const u8,
+    workforce_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) that identifies the work team.
     workteam_arn: []const u8,

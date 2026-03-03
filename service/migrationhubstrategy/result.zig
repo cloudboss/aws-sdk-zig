@@ -5,16 +5,16 @@ const AntipatternReportResult = @import("antipattern_report_result.zig").Antipat
 /// The error in server analysis.
 pub const Result = struct {
     /// The error in server analysis.
-    analysis_status: ?AnalysisStatusUnion,
+    analysis_status: ?AnalysisStatusUnion = null,
 
     /// The error in server analysis.
-    analysis_type: ?AnalysisType,
+    analysis_type: ?AnalysisType = null,
 
     /// The error in server analysis.
-    antipattern_report_result_list: ?[]const AntipatternReportResult,
+    antipattern_report_result_list: ?[]const AntipatternReportResult = null,
 
     /// The error in server analysis.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .analysis_status = "analysisStatus",

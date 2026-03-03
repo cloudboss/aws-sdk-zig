@@ -37,7 +37,7 @@ pub const Origin = struct {
     ///
     /// For more information, see [Origin Connection
     /// Attempts](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-attempts) in the *Amazon CloudFront Developer Guide*.
-    connection_attempts: ?i32,
+    connection_attempts: ?i32 = null,
 
     /// The number of seconds that CloudFront waits when trying to establish a
     /// connection to the origin. The minimum timeout is 1 second, the maximum is 10
@@ -45,20 +45,20 @@ pub const Origin = struct {
     ///
     /// For more information, see [Origin Connection
     /// Timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-timeout) in the *Amazon CloudFront Developer Guide*.
-    connection_timeout: ?i32,
+    connection_timeout: ?i32 = null,
 
     /// A list of HTTP header names and values that CloudFront adds to the requests
     /// that it sends to the origin.
     ///
     /// For more information, see [Adding Custom Headers to Origin
     /// Requests](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/add-origin-custom-headers.html) in the *Amazon CloudFront Developer Guide*.
-    custom_headers: ?CustomHeaders,
+    custom_headers: ?CustomHeaders = null,
 
     /// Use this type to specify an origin that is not an Amazon S3 bucket, with one
     /// exception. If the Amazon S3 bucket is configured with static website
     /// hosting, use this type. If the Amazon S3 bucket is not configured with
     /// static website hosting, use the `S3OriginConfig` type instead.
-    custom_origin_config: ?CustomOriginConfig,
+    custom_origin_config: ?CustomOriginConfig = null,
 
     /// The domain name for the origin.
     ///
@@ -77,21 +77,21 @@ pub const Origin = struct {
     ///
     /// For more information, see [Restricting access to an Amazon S3
     /// origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html) in the *Amazon CloudFront Developer Guide*.
-    origin_access_control_id: ?[]const u8,
+    origin_access_control_id: ?[]const u8 = null,
 
     /// An optional path that CloudFront appends to the origin domain name when
     /// CloudFront requests content from the origin.
     ///
     /// For more information, see [Origin
     /// Path](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginPath) in the *Amazon CloudFront Developer Guide*.
-    origin_path: ?[]const u8,
+    origin_path: ?[]const u8 = null,
 
     /// CloudFront Origin Shield. Using Origin Shield can help reduce the load on
     /// your origin.
     ///
     /// For more information, see [Using Origin
     /// Shield](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html) in the *Amazon CloudFront Developer Guide*.
-    origin_shield: ?OriginShield,
+    origin_shield: ?OriginShield = null,
 
     /// The time (in seconds) that a request from CloudFront to the origin can stay
     /// open and wait for a response. If the complete response isn't received from
@@ -103,14 +103,14 @@ pub const Origin = struct {
     ///
     /// For more information, see [Response completion
     /// timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#response-completion-timeout) in the *Amazon CloudFront Developer Guide*.
-    response_completion_timeout: ?i32,
+    response_completion_timeout: ?i32 = null,
 
     /// Use this type to specify an origin that is an Amazon S3 bucket that is not
     /// configured with static website hosting. To specify any other type of origin,
     /// including an Amazon S3 bucket that is configured with static website
     /// hosting, use the `CustomOriginConfig` type instead.
-    s3_origin_config: ?S3OriginConfig,
+    s3_origin_config: ?S3OriginConfig = null,
 
     /// The VPC origin configuration.
-    vpc_origin_config: ?VpcOriginConfig,
+    vpc_origin_config: ?VpcOriginConfig = null,
 };

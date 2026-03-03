@@ -3,10 +3,10 @@
 /// (StartDocumentTextDetection).
 pub const Warning = struct {
     /// The error code for the warning.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// A list of the pages that the warning applies to.
-    pages: ?[]const i32,
+    pages: ?[]const i32 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

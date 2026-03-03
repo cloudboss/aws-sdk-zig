@@ -2,10 +2,10 @@ pub const GetResourcePoliciesRequest = struct {
     /// The maximum number of items to return for this call. The call also returns a
     /// token that you
     /// can specify in a subsequent call to get the next set of results.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// A token to start the list. Use this token to get the next set of results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) of the resource to which the policies are
     /// attached.

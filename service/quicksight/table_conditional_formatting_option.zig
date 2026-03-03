@@ -4,10 +4,10 @@ const TableRowConditionalFormatting = @import("table_row_conditional_formatting.
 /// Conditional formatting options for a `PivotTableVisual`.
 pub const TableConditionalFormattingOption = struct {
     /// The cell conditional formatting option for a table.
-    cell: ?TableCellConditionalFormatting,
+    cell: ?TableCellConditionalFormatting = null,
 
     /// The row conditional formatting option for a table.
-    row: ?TableRowConditionalFormatting,
+    row: ?TableRowConditionalFormatting = null,
 
     pub const json_field_names = .{
         .cell = "Cell",

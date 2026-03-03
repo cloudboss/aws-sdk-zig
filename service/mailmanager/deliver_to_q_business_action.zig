@@ -7,7 +7,7 @@ pub const DeliverToQBusinessAction = struct {
     /// if there are configuration errors. For example, the specified application
     /// has been deleted or the role lacks necessary permissions to call the
     /// `qbusiness:BatchPutDocument` API.
-    action_failure_policy: ?ActionFailurePolicy,
+    action_failure_policy: ?ActionFailurePolicy = null,
 
     /// The unique identifier of the Amazon Q Business application instance where
     /// the email content will be delivered.

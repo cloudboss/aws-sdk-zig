@@ -18,7 +18,7 @@ pub const ComboChartConfiguration = struct {
     /// The options that determine if visual data labels are displayed.
     ///
     /// The data label options for a bar in a combo chart.
-    bar_data_labels: ?DataLabelOptions,
+    bar_data_labels: ?DataLabelOptions = null,
 
     /// Determines the bar arrangement in a combo chart. The following are valid
     /// values in this structure:
@@ -29,69 +29,69 @@ pub const ComboChartConfiguration = struct {
     ///
     /// * `STACKED_PERCENT`: Do not use. If you use this value, the operation
     ///   returns a validation error.
-    bars_arrangement: ?BarsArrangement,
+    bars_arrangement: ?BarsArrangement = null,
 
     /// The category axis of a combo chart.
-    category_axis: ?AxisDisplayOptions,
+    category_axis: ?AxisDisplayOptions = null,
 
     /// The label options (label text, label visibility, and sort icon visibility)
     /// of a combo chart category (group/color) field well.
-    category_label_options: ?ChartAxisLabelOptions,
+    category_label_options: ?ChartAxisLabelOptions = null,
 
     /// The label options (label text, label visibility, and sort icon visibility)
     /// of a combo chart's color field well.
-    color_label_options: ?ChartAxisLabelOptions,
+    color_label_options: ?ChartAxisLabelOptions = null,
 
     /// The options that determine the default presentation of all series in
     /// `ComboChartVisual`.
-    default_series_settings: ?ComboChartDefaultSeriesSettings,
+    default_series_settings: ?ComboChartDefaultSeriesSettings = null,
 
     /// The field wells of the visual.
-    field_wells: ?ComboChartFieldWells,
+    field_wells: ?ComboChartFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The legend display setup of the visual.
-    legend: ?LegendOptions,
+    legend: ?LegendOptions = null,
 
     /// The options that determine if visual data labels are displayed.
     ///
     /// The data label options for a line in a combo chart.
-    line_data_labels: ?DataLabelOptions,
+    line_data_labels: ?DataLabelOptions = null,
 
     /// The label display options (grid line, range, scale, and axis step) of a
     /// combo chart's primary y-axis (bar) field well.
-    primary_y_axis_display_options: ?AxisDisplayOptions,
+    primary_y_axis_display_options: ?AxisDisplayOptions = null,
 
     /// The label options (label text, label visibility, and sort icon visibility)
     /// of a combo chart's primary y-axis (bar) field well.
-    primary_y_axis_label_options: ?ChartAxisLabelOptions,
+    primary_y_axis_label_options: ?ChartAxisLabelOptions = null,
 
     /// The reference line setup of the visual.
-    reference_lines: ?[]const ReferenceLine,
+    reference_lines: ?[]const ReferenceLine = null,
 
     /// The label display options (grid line, range, scale, axis step) of a combo
     /// chart's secondary y-axis (line) field well.
-    secondary_y_axis_display_options: ?AxisDisplayOptions,
+    secondary_y_axis_display_options: ?AxisDisplayOptions = null,
 
     /// The label options (label text, label visibility, and sort icon visibility)
     /// of a combo chart's secondary y-axis(line) field well.
-    secondary_y_axis_label_options: ?ChartAxisLabelOptions,
+    secondary_y_axis_label_options: ?ChartAxisLabelOptions = null,
 
     /// The series item configuration of a `ComboChartVisual`.
-    series: ?[]const ComboSeriesItem,
+    series: ?[]const ComboSeriesItem = null,
 
-    single_axis_options: ?SingleAxisOptions,
+    single_axis_options: ?SingleAxisOptions = null,
 
     /// The sort configuration of a `ComboChartVisual`.
-    sort_configuration: ?ComboChartSortConfiguration,
+    sort_configuration: ?ComboChartSortConfiguration = null,
 
     /// The legend display setup of the visual.
-    tooltip: ?TooltipOptions,
+    tooltip: ?TooltipOptions = null,
 
     /// The palette (chart color) display setup of the visual.
-    visual_palette: ?VisualPalette,
+    visual_palette: ?VisualPalette = null,
 
     pub const json_field_names = .{
         .bar_data_labels = "BarDataLabels",

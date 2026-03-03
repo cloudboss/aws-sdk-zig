@@ -6,7 +6,7 @@ const Value = @import("value.zig").Value;
 /// Use the `BatchExecuteStatement` or `ExecuteStatement` operation instead.
 pub const Record = struct {
     /// The values returned in the record.
-    values: ?[]const Value,
+    values: ?[]const Value = null,
 
     pub const json_field_names = .{
         .values = "values",

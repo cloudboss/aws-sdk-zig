@@ -5,14 +5,14 @@ const SpaceStorageSettings = @import("space_storage_settings.zig").SpaceStorageS
 /// Specifies summary information about the space settings.
 pub const SpaceSettingsSummary = struct {
     /// The type of app created within the space.
-    app_type: ?AppType,
+    app_type: ?AppType = null,
 
     /// A setting that enables or disables remote access for a SageMaker space. When
     /// enabled, this allows you to connect to the remote space from your local IDE.
-    remote_access: ?FeatureStatus,
+    remote_access: ?FeatureStatus = null,
 
     /// The storage settings for a space.
-    space_storage_settings: ?SpaceStorageSettings,
+    space_storage_settings: ?SpaceStorageSettings = null,
 
     pub const json_field_names = .{
         .app_type = "AppType",

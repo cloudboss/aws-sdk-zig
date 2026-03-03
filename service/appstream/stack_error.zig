@@ -3,10 +3,10 @@ const StackErrorCode = @import("stack_error_code.zig").StackErrorCode;
 /// Describes a stack error.
 pub const StackError = struct {
     /// The error code.
-    error_code: ?StackErrorCode,
+    error_code: ?StackErrorCode = null,
 
     /// The error message.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

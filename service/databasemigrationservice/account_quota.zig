@@ -3,7 +3,7 @@
 /// allowed.
 pub const AccountQuota = struct {
     /// The name of the DMS quota for this Amazon Web Services account.
-    account_quota_name: ?[]const u8,
+    account_quota_name: ?[]const u8 = null,
 
     /// The maximum allowed value for the quota.
     max: i64 = 0,

@@ -121,7 +121,7 @@ pub const UtilizationMetric = struct {
     /// by the instance on all network interfaces. This metric identifies the volume
     /// of
     /// outgoing traffic in terms of the number of packets on a single instance.
-    name: ?MetricName,
+    name: ?MetricName = null,
 
     /// The statistic of the utilization metric.
     ///
@@ -139,7 +139,7 @@ pub const UtilizationMetric = struct {
     /// using Amazon CloudWatch. For more information, see the [Amazon CloudWatch
     /// User
     /// Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
-    statistic: ?MetricStatistic,
+    statistic: ?MetricStatistic = null,
 
     /// The value of the utilization metric.
     value: f64 = 0,

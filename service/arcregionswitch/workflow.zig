@@ -5,17 +5,17 @@ const WorkflowTargetAction = @import("workflow_target_action.zig").WorkflowTarge
 /// of steps to execute during a Region switch.
 pub const Workflow = struct {
     /// The steps that make up the workflow.
-    steps: ?[]const Step,
+    steps: ?[]const Step = null,
 
     /// The description of the workflow.
-    workflow_description: ?[]const u8,
+    workflow_description: ?[]const u8 = null,
 
     /// The action that the workflow performs. Valid values include `activate` and
     /// `deactivate`.
     workflow_target_action: WorkflowTargetAction,
 
     /// The Amazon Web Services Region that the workflow targets.
-    workflow_target_region: ?[]const u8,
+    workflow_target_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .steps = "steps",

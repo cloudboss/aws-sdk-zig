@@ -5,11 +5,11 @@ const Risk = @import("risk.zig").Risk;
 pub const QuestionMetric = struct {
     /// The best practices, or choices, that have been identified as contributing to
     /// risk in a question.
-    best_practices: ?[]const BestPractice,
+    best_practices: ?[]const BestPractice = null,
 
-    question_id: ?[]const u8,
+    question_id: ?[]const u8 = null,
 
-    risk: ?Risk,
+    risk: ?Risk = null,
 
     pub const json_field_names = .{
         .best_practices = "BestPractices",

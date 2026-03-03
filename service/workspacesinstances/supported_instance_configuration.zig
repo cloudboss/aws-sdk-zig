@@ -7,14 +7,14 @@ const InstanceConfigurationTenancyEnum = @import("instance_configuration_tenancy
 /// complete configuration specification.
 pub const SupportedInstanceConfiguration = struct {
     /// Specifies the billing mode supported in this configuration combination.
-    billing_mode: ?BillingMode,
+    billing_mode: ?BillingMode = null,
 
     /// Specifies the operating system platform supported in this configuration
     /// combination.
-    platform_type: ?PlatformTypeEnum,
+    platform_type: ?PlatformTypeEnum = null,
 
     /// Specifies the tenancy model supported in this configuration combination.
-    tenancy: ?InstanceConfigurationTenancyEnum,
+    tenancy: ?InstanceConfigurationTenancyEnum = null,
 
     pub const json_field_names = .{
         .billing_mode = "BillingMode",

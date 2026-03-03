@@ -13,11 +13,11 @@ pub const Volume = struct {
     /// Administrative actions describe changes to the volume that you have
     /// initiated using
     /// the `UpdateVolume` action.
-    administrative_actions: ?[]const AdministrativeAction,
+    administrative_actions: ?[]const AdministrativeAction = null,
 
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
-    file_system_id: ?[]const u8,
+    file_system_id: ?[]const u8 = null,
 
     /// The lifecycle status of the volume.
     ///
@@ -39,28 +39,28 @@ pub const Volume = struct {
     ///
     /// * `PENDING` - Amazon FSx hasn't started creating the
     /// volume.
-    lifecycle: ?VolumeLifecycle,
+    lifecycle: ?VolumeLifecycle = null,
 
     /// The reason why the volume lifecycle status changed.
-    lifecycle_transition_reason: ?LifecycleTransitionReason,
+    lifecycle_transition_reason: ?LifecycleTransitionReason = null,
 
     /// The name of the volume.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
-    ontap_configuration: ?OntapVolumeConfiguration,
+    ontap_configuration: ?OntapVolumeConfiguration = null,
 
     /// The configuration of an Amazon FSx for OpenZFS volume.
-    open_zfs_configuration: ?OpenZFSVolumeConfiguration,
+    open_zfs_configuration: ?OpenZFSVolumeConfiguration = null,
 
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The system-generated, unique ID of the volume.
-    volume_id: ?[]const u8,
+    volume_id: ?[]const u8 = null,
 
     /// The type of the volume.
-    volume_type: ?VolumeType,
+    volume_type: ?VolumeType = null,
 
     pub const json_field_names = .{
         .administrative_actions = "AdministrativeActions",

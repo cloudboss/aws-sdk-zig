@@ -4,8 +4,8 @@ const EnableFastSnapshotRestoreStateErrorItem = @import("enable_fast_snapshot_re
 /// snapshot restores.
 pub const EnableFastSnapshotRestoreErrorItem = struct {
     /// The errors.
-    fast_snapshot_restore_state_errors: ?[]const EnableFastSnapshotRestoreStateErrorItem,
+    fast_snapshot_restore_state_errors: ?[]const EnableFastSnapshotRestoreStateErrorItem = null,
 
     /// The ID of the snapshot.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 };

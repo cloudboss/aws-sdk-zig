@@ -4,9 +4,9 @@ const DiskIopsConfiguration = @import("disk_iops_configuration.zig").DiskIopsCon
 /// The ONTAP configuration properties of the FSx for ONTAP file system that you
 /// are creating.
 pub const CreateFileSystemOntapConfiguration = struct {
-    automatic_backup_retention_days: ?i32,
+    automatic_backup_retention_days: ?i32 = null,
 
-    daily_automatic_backup_start_time: ?[]const u8,
+    daily_automatic_backup_start_time: ?[]const u8 = null,
 
     /// Specifies the FSx for ONTAP file system deployment type to use in creating
     /// the file system.
@@ -34,7 +34,7 @@ pub const CreateFileSystemOntapConfiguration = struct {
     deployment_type: OntapDeploymentType,
 
     /// The SSD IOPS configuration for the FSx for ONTAP file system.
-    disk_iops_configuration: ?DiskIopsConfiguration,
+    disk_iops_configuration: ?DiskIopsConfiguration = null,
 
     /// (Multi-AZ only) Specifies the IPv4 address range in which the endpoints to
     /// access your
@@ -47,7 +47,7 @@ pub const CreateFileSystemOntapConfiguration = struct {
     /// You can have overlapping endpoint IP addresses for file systems deployed in
     /// the
     /// same VPC/route tables, as long as they don't overlap with any subnet.
-    endpoint_ip_address_range: ?[]const u8,
+    endpoint_ip_address_range: ?[]const u8 = null,
 
     /// (Multi-AZ only) Specifies the IPv6 address range in which the endpoints to
     /// access
@@ -58,11 +58,11 @@ pub const CreateFileSystemOntapConfiguration = struct {
     /// IP addresses for file systems deployed in the same VPC/route tables, as long
     /// as they
     /// don't overlap with any subnet.
-    endpoint_ipv_6_address_range: ?[]const u8,
+    endpoint_ipv_6_address_range: ?[]const u8 = null,
 
     /// The ONTAP administrative password for the `fsxadmin` user with which you
     /// administer your file system using the NetApp ONTAP CLI and REST API.
-    fsx_admin_password: ?[]const u8,
+    fsx_admin_password: ?[]const u8 = null,
 
     /// Specifies how many high-availability (HA) pairs of file servers will power
     /// your file system. First-generation file systems are powered by 1 HA pair.
@@ -85,12 +85,12 @@ pub const CreateFileSystemOntapConfiguration = struct {
     ///
     /// * The value of `HAPairs` is greater than 1 and the value of `DeploymentType`
     ///   is `SINGLE_AZ_1`, `MULTI_AZ_1`, or `MULTI_AZ_2`.
-    ha_pairs: ?i32,
+    ha_pairs: ?i32 = null,
 
     /// Required when `DeploymentType` is set to `MULTI_AZ_1` or `MULTI_AZ_2`. This
     /// specifies the subnet in which you want the preferred file server to be
     /// located.
-    preferred_subnet_id: ?[]const u8,
+    preferred_subnet_id: ?[]const u8 = null,
 
     /// (Multi-AZ only) Specifies the route tables in which Amazon FSx creates the
     /// rules
@@ -107,7 +107,7 @@ pub const CreateFileSystemOntapConfiguration = struct {
     /// When creating FSx for ONTAP Multi-AZ file systems using CloudFormation we
     /// recommend that you add the
     /// `Key: AmazonFSx; Value: ManagedByAmazonFSx` tag manually.
-    route_table_ids: ?[]const []const u8,
+    route_table_ids: ?[]const []const u8 = null,
 
     /// Sets the throughput capacity for the file system that you're creating in
     /// megabytes per second (MBps). For more information, see
@@ -123,7 +123,7 @@ pub const CreateFileSystemOntapConfiguration = struct {
     ///
     /// * The value of `ThroughputCapacity` when divided by the value of `HAPairs`
     ///   is outside of the valid range for `ThroughputCapacity`.
-    throughput_capacity: ?i32,
+    throughput_capacity: ?i32 = null,
 
     /// Use to choose the throughput capacity per HA pair, rather than the total
     /// throughput for the file system.
@@ -152,9 +152,9 @@ pub const CreateFileSystemOntapConfiguration = struct {
     ///   and 12).
     ///
     /// * The value of `ThroughputCapacityPerHAPair` is not a valid value.
-    throughput_capacity_per_ha_pair: ?i32,
+    throughput_capacity_per_ha_pair: ?i32 = null,
 
-    weekly_maintenance_start_time: ?[]const u8,
+    weekly_maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .automatic_backup_retention_days = "AutomaticBackupRetentionDays",

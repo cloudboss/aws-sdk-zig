@@ -17,13 +17,13 @@ pub const ExchangedParticipantToken = struct {
     /// not be
     /// used for personally identifying, confidential, or sensitive
     /// information.*
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// Set of capabilities that the user is allowed to perform in the stage.
-    capabilities: ?[]const ParticipantTokenCapability,
+    capabilities: ?[]const ParticipantTokenCapability = null,
 
     /// ISO 8601 timestamp (returned as a string) for when this token expires.
-    expiration_time: ?i64,
+    expiration_time: ?i64 = null,
 
     /// Customer-assigned name to help identify the token; this can be used to link
     /// a
@@ -31,7 +31,7 @@ pub const ExchangedParticipantToken = struct {
     /// encoded text.
     /// *This field is exposed to all stage participants and should not be used for
     /// personally identifying, confidential, or sensitive information.*
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "attributes",

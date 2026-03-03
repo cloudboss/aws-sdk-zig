@@ -15,31 +15,31 @@ const FilterTextFieldControl = @import("filter_text_field_control.zig").FilterTe
 pub const FilterControl = struct {
     /// A control from a filter that is scoped across more than one sheet. This
     /// represents your filter control on a sheet
-    cross_sheet: ?FilterCrossSheetControl,
+    cross_sheet: ?FilterCrossSheetControl = null,
 
     /// A control from a date filter that is used to specify date and time.
-    date_time_picker: ?FilterDateTimePickerControl,
+    date_time_picker: ?FilterDateTimePickerControl = null,
 
     /// A control to display a dropdown list with buttons that are used to select a
     /// single value.
-    dropdown: ?FilterDropDownControl,
+    dropdown: ?FilterDropDownControl = null,
 
     /// A control to display a list of buttons or boxes. This is used to select
     /// either a single value or multiple values.
-    list: ?FilterListControl,
+    list: ?FilterListControl = null,
 
     /// A control from a date filter that is used to specify the relative date.
-    relative_date_time: ?FilterRelativeDateTimeControl,
+    relative_date_time: ?FilterRelativeDateTimeControl = null,
 
     /// A control to display a horizontal toggle bar. This is used to change a value
     /// by sliding the toggle.
-    slider: ?FilterSliderControl,
+    slider: ?FilterSliderControl = null,
 
     /// A control to display a text box that is used to enter multiple entries.
-    text_area: ?FilterTextAreaControl,
+    text_area: ?FilterTextAreaControl = null,
 
     /// A control to display a text box that is used to enter a single entry.
-    text_field: ?FilterTextFieldControl,
+    text_field: ?FilterTextFieldControl = null,
 
     pub const json_field_names = .{
         .cross_sheet = "CrossSheet",

@@ -9,15 +9,15 @@ const PolicySourceType = @import("policy_source_type.zig").PolicySourceType;
 /// ` type.
 pub const Statement = struct {
     /// The row and column of the end of a `Statement` in an IAM policy.
-    end_position: ?Position,
+    end_position: ?Position = null,
 
     /// The identifier of the policy that was provided as an input.
-    source_policy_id: ?[]const u8,
+    source_policy_id: ?[]const u8 = null,
 
     /// The type of the policy.
-    source_policy_type: ?PolicySourceType,
+    source_policy_type: ?PolicySourceType = null,
 
     /// The row and column of the beginning of the `Statement` in an IAM
     /// policy.
-    start_position: ?Position,
+    start_position: ?Position = null,
 };

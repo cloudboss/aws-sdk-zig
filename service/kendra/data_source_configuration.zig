@@ -27,19 +27,19 @@ pub const DataSourceConfiguration = struct {
     /// schema /
     /// [TemplateConfiguration](https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html)
     /// API.
-    alfresco_configuration: ?AlfrescoConfiguration,
+    alfresco_configuration: ?AlfrescoConfiguration = null,
 
     /// Provides the configuration information to connect to Box as your data
     /// source.
-    box_configuration: ?BoxConfiguration,
+    box_configuration: ?BoxConfiguration = null,
 
     /// Provides the configuration information to connect to Confluence as your data
     /// source.
-    confluence_configuration: ?ConfluenceConfiguration,
+    confluence_configuration: ?ConfluenceConfiguration = null,
 
     /// Provides the configuration information to connect to a database as your data
     /// source.
-    database_configuration: ?DatabaseConfiguration,
+    database_configuration: ?DatabaseConfiguration = null,
 
     /// Provides the configuration information to connect to Amazon FSx as your data
     /// source.
@@ -61,7 +61,7 @@ pub const DataSourceConfiguration = struct {
     /// Support for
     /// connectors configured using the older architecture is scheduled to end by
     /// June 2024.
-    fsx_configuration: ?FsxConfiguration,
+    fsx_configuration: ?FsxConfiguration = null,
 
     /// Provides the configuration information to connect to GitHub as your data
     /// source.
@@ -84,25 +84,25 @@ pub const DataSourceConfiguration = struct {
     /// for connectors configured using the older architecture is scheduled to end
     /// by June
     /// 2024.
-    git_hub_configuration: ?GitHubConfiguration,
+    git_hub_configuration: ?GitHubConfiguration = null,
 
     /// Provides the configuration information to connect to Google Drive as your
     /// data
     /// source.
-    google_drive_configuration: ?GoogleDriveConfiguration,
+    google_drive_configuration: ?GoogleDriveConfiguration = null,
 
     /// Provides the configuration information to connect to Jira as your data
     /// source.
-    jira_configuration: ?JiraConfiguration,
+    jira_configuration: ?JiraConfiguration = null,
 
     /// Provides the configuration information to connect to Microsoft OneDrive as
     /// your data
     /// source.
-    one_drive_configuration: ?OneDriveConfiguration,
+    one_drive_configuration: ?OneDriveConfiguration = null,
 
     /// Provides the configuration information to connect to Quip as your data
     /// source.
-    quip_configuration: ?QuipConfiguration,
+    quip_configuration: ?QuipConfiguration = null,
 
     /// Provides the configuration information to connect to an Amazon S3 bucket as
     /// your
@@ -125,20 +125,20 @@ pub const DataSourceConfiguration = struct {
     /// Support for
     /// connectors configured using the older architecture is scheduled to end by
     /// June 2024.
-    s3_configuration: ?S3DataSourceConfiguration,
+    s3_configuration: ?S3DataSourceConfiguration = null,
 
     /// Provides the configuration information to connect to Salesforce as your data
     /// source.
-    salesforce_configuration: ?SalesforceConfiguration,
+    salesforce_configuration: ?SalesforceConfiguration = null,
 
     /// Provides the configuration information to connect to ServiceNow as your data
     /// source.
-    service_now_configuration: ?ServiceNowConfiguration,
+    service_now_configuration: ?ServiceNowConfiguration = null,
 
     /// Provides the configuration information to connect to Microsoft SharePoint as
     /// your data
     /// source.
-    share_point_configuration: ?SharePointConfiguration,
+    share_point_configuration: ?SharePointConfiguration = null,
 
     /// Provides the configuration information to connect to Slack as your data
     /// source.
@@ -160,19 +160,19 @@ pub const DataSourceConfiguration = struct {
     /// Support for
     /// connectors configured using the older architecture is scheduled to end by
     /// June 2024.
-    slack_configuration: ?SlackConfiguration,
+    slack_configuration: ?SlackConfiguration = null,
 
     /// Provides a template for the configuration information to connect to your
     /// data
     /// source.
-    template_configuration: ?TemplateConfiguration,
+    template_configuration: ?TemplateConfiguration = null,
 
-    web_crawler_configuration: ?WebCrawlerConfiguration,
+    web_crawler_configuration: ?WebCrawlerConfiguration = null,
 
     /// Provides the configuration information to connect to Amazon WorkDocs as your
     /// data
     /// source.
-    work_docs_configuration: ?WorkDocsConfiguration,
+    work_docs_configuration: ?WorkDocsConfiguration = null,
 
     pub const json_field_names = .{
         .alfresco_configuration = "AlfrescoConfiguration",

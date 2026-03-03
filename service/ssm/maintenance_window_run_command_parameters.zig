@@ -29,18 +29,18 @@ const NotificationConfig = @import("notification_config.zig").NotificationConfig
 /// `TaskParameters` and `LoggingInfo` only if no values are specified for
 /// `TaskInvocationParameters`.
 pub const MaintenanceWindowRunCommandParameters = struct {
-    cloud_watch_output_config: ?CloudWatchOutputConfig,
+    cloud_watch_output_config: ?CloudWatchOutputConfig = null,
 
     /// Information about the commands to run.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// The SHA-256 or SHA-1 hash created by the system when the document was
     /// created. SHA-1 hashes
     /// have been deprecated.
-    document_hash: ?[]const u8,
+    document_hash: ?[]const u8 = null,
 
     /// SHA-256 or SHA-1. SHA-1 hashes have been deprecated.
-    document_hash_type: ?DocumentHashType,
+    document_hash_type: ?DocumentHashType = null,
 
     /// The Amazon Web Services Systems Manager document (SSM document) version to
     /// use in the request. You can specify
@@ -55,21 +55,21 @@ pub const MaintenanceWindowRunCommandParameters = struct {
     /// `--document-version "\$LATEST"`
     ///
     /// `--document-version "3"`
-    document_version: ?[]const u8,
+    document_version: ?[]const u8 = null,
 
     /// Configurations for sending notifications about command status changes on a
     /// per-managed node
     /// basis.
-    notification_config: ?NotificationConfig,
+    notification_config: ?NotificationConfig = null,
 
     /// The name of the Amazon Simple Storage Service (Amazon S3) bucket.
-    output_s3_bucket_name: ?[]const u8,
+    output_s3_bucket_name: ?[]const u8 = null,
 
     /// The S3 bucket subfolder.
-    output_s3_key_prefix: ?[]const u8,
+    output_s3_key_prefix: ?[]const u8 = null,
 
     /// The parameters for the `RUN_COMMAND` task execution.
-    parameters: ?[]const aws.map.MapEntry([]const []const u8),
+    parameters: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The Amazon Resource Name (ARN) of the IAM service role for
     /// Amazon Web Services Systems Manager to assume when running a maintenance
@@ -88,12 +88,12 @@ pub const MaintenanceWindowRunCommandParameters = struct {
     /// maintenance window tasks. For more information, see [Setting up Maintenance
     /// Windows](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html) in the in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    service_role_arn: ?[]const u8,
+    service_role_arn: ?[]const u8 = null,
 
     /// If this time is reached and the command hasn't already started running, it
     /// doesn't
     /// run.
-    timeout_seconds: ?i32,
+    timeout_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .cloud_watch_output_config = "CloudWatchOutputConfig",

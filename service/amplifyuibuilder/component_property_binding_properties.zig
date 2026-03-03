@@ -4,7 +4,7 @@
 /// values.
 pub const ComponentPropertyBindingProperties = struct {
     /// The data field to bind the property to.
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// The component property to bind to the data field.
     property: []const u8,

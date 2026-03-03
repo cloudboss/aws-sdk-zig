@@ -20,36 +20,36 @@ pub const ConfigurationOptionDescription = struct {
     /// However, a short application outage occurs when the application servers on
     /// the running
     /// Amazon EC2 instances are restarted.
-    change_severity: ?[]const u8,
+    change_severity: ?[]const u8 = null,
 
     /// The default value for this configuration option.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// If specified, the configuration option must be a string value no longer than
     /// this
     /// value.
-    max_length: ?i32,
+    max_length: ?i32 = null,
 
     /// If specified, the configuration option must be a numeric value less than
     /// this
     /// value.
-    max_value: ?i32,
+    max_value: ?i32 = null,
 
     /// If specified, the configuration option must be a numeric value greater than
     /// this
     /// value.
-    min_value: ?i32,
+    min_value: ?i32 = null,
 
     /// The name of the configuration option.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A unique namespace identifying the option's associated AWS resource.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// If specified, the configuration option must be a string value that satisfies
     /// this
     /// regular expression.
-    regex: ?OptionRestrictionRegex,
+    regex: ?OptionRestrictionRegex = null,
 
     /// An indication of whether the user defined this configuration option:
     ///
@@ -62,11 +62,11 @@ pub const ConfigurationOptionDescription = struct {
     /// Constraint: You can remove only `UserDefined` options from a configuration.
     ///
     /// Valid Values: `true` | `false`
-    user_defined: ?bool,
+    user_defined: ?bool = null,
 
     /// If specified, values for the configuration option are selected from this
     /// list.
-    value_options: ?[]const []const u8,
+    value_options: ?[]const []const u8 = null,
 
     /// An indication of which type of values this option has and whether it is
     /// allowable to
@@ -84,5 +84,5 @@ pub const ConfigurationOptionDescription = struct {
     ///
     /// * `Json` : Values for this option are a JSON representation of a
     /// `ConfigDocument`.
-    value_type: ?ConfigurationOptionValueType,
+    value_type: ?ConfigurationOptionValueType = null,
 };

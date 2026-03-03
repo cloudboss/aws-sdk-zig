@@ -24,7 +24,7 @@ const Featurization = @import("featurization.zig").Featurization;
 pub const FeaturizationConfig = struct {
     /// An array of featurization (transformation) information for the fields of a
     /// dataset.
-    featurizations: ?[]const Featurization,
+    featurizations: ?[]const Featurization = null,
 
     /// An array of dimension (field) names that specify how to group the generated
     /// forecast.
@@ -40,7 +40,7 @@ pub const FeaturizationConfig = struct {
     /// dimensions
     /// specified in the `RELATED_TIME_SERIES` dataset must be specified in the
     /// `CreatePredictor` request.
-    forecast_dimensions: ?[]const []const u8,
+    forecast_dimensions: ?[]const []const u8 = null,
 
     /// The frequency of predictions in a forecast.
     ///

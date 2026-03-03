@@ -4,7 +4,7 @@ const StepParameterType = @import("step_parameter_type.zig").StepParameterType;
 /// The details of a step parameter.
 pub const StepParameter = struct {
     /// The configuration for task chunking.
-    chunks: ?StepParameterChunks,
+    chunks: ?StepParameterChunks = null,
 
     /// The name of the parameter.
     name: []const u8,

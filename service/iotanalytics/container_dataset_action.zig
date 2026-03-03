@@ -26,7 +26,7 @@ pub const ContainerDatasetAction = struct {
     /// must have a name
     /// and a value given by one of `stringValue`, `datasetContentVersionValue`,
     /// or `outputFileUriValue`.
-    variables: ?[]const Variable,
+    variables: ?[]const Variable = null,
 
     pub const json_field_names = .{
         .execution_role_arn = "executionRoleArn",

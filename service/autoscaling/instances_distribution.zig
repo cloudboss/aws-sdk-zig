@@ -33,7 +33,7 @@ pub const InstancesDistribution = struct {
     /// specify
     /// [InstanceRequirements](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html) and cannot be used for groups
     /// that do.
-    on_demand_allocation_strategy: ?[]const u8,
+    on_demand_allocation_strategy: ?[]const u8 = null,
 
     /// The minimum amount of the Auto Scaling group's capacity that must be
     /// fulfilled by On-Demand
@@ -50,7 +50,7 @@ pub const InstancesDistribution = struct {
     /// unit of measurement.
     ///
     /// Default: 0
-    on_demand_base_capacity: ?i32,
+    on_demand_base_capacity: ?i32 = null,
 
     /// Controls the percentages of On-Demand Instances and Spot Instances for your
     /// additional
@@ -60,7 +60,7 @@ pub const InstancesDistribution = struct {
     /// Instances are used.
     ///
     /// Default: 100
-    on_demand_percentage_above_base_capacity: ?i32,
+    on_demand_percentage_above_base_capacity: ?i32 = null,
 
     /// The allocation strategy to apply to your Spot Instances when they are
     /// launched.
@@ -104,7 +104,7 @@ pub const InstancesDistribution = struct {
     /// The price and capacity optimized allocation strategy looks at both price
     /// and capacity to select the Spot Instance pools that are the least likely to
     /// be interrupted and have the lowest possible price.
-    spot_allocation_strategy: ?[]const u8,
+    spot_allocation_strategy: ?[]const u8 = null,
 
     /// The number of Spot Instance pools across which to allocate your Spot
     /// Instances. The
@@ -114,7 +114,7 @@ pub const InstancesDistribution = struct {
     /// in the range of 1–20.
     ///
     /// Default: 2
-    spot_instance_pools: ?i32,
+    spot_instance_pools: ?i32 = null,
 
     /// The maximum price per unit hour that you are willing to pay for a Spot
     /// Instance. If
@@ -133,5 +133,5 @@ pub const InstancesDistribution = struct {
     /// than if you do not specify one.
     ///
     /// Valid Range: Minimum value of 0.001
-    spot_max_price: ?[]const u8,
+    spot_max_price: ?[]const u8 = null,
 };

@@ -14,14 +14,14 @@ pub const EncryptionInTransit = struct {
     /// only.
     ///
     /// The default value is TLS_PLAINTEXT.
-    client_broker: ?ClientBroker,
+    client_broker: ?ClientBroker = null,
 
     /// When set to true, it indicates that data communication among the broker
     /// nodes of the cluster is encrypted. When set to false, the communication
     /// happens in plaintext.
     ///
     /// The default value is true.
-    in_cluster: ?bool,
+    in_cluster: ?bool = null,
 
     pub const json_field_names = .{
         .client_broker = "ClientBroker",

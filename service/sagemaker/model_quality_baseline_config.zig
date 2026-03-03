@@ -5,9 +5,9 @@ const MonitoringConstraintsResource = @import("monitoring_constraints_resource.z
 /// the series of jobs scheduled to collect data periodically.
 pub const ModelQualityBaselineConfig = struct {
     /// The name of the job that performs baselining for the monitoring job.
-    baselining_job_name: ?[]const u8,
+    baselining_job_name: ?[]const u8 = null,
 
-    constraints_resource: ?MonitoringConstraintsResource,
+    constraints_resource: ?MonitoringConstraintsResource = null,
 
     pub const json_field_names = .{
         .baselining_job_name = "BaseliningJobName",

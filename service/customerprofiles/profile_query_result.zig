@@ -3,7 +3,7 @@ const QueryResult = @import("query_result.zig").QueryResult;
 
 /// Object that holds the results for membership.
 pub const ProfileQueryResult = struct {
-    profile: ?Profile,
+    profile: ?Profile = null,
 
     /// The profile id the result belongs to.
     profile_id: []const u8,

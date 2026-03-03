@@ -2,7 +2,7 @@ pub const DeleteRuleRequest = struct {
     /// The name or ARN of the event bus associated with the rule. If you omit this,
     /// the default
     /// event bus is used.
-    event_bus_name: ?[]const u8,
+    event_bus_name: ?[]const u8 = null,
 
     /// If this is a managed rule, created by an Amazon Web Services service on your
     /// behalf, you

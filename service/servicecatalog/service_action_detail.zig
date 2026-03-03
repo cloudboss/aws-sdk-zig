@@ -5,10 +5,10 @@ const ServiceActionSummary = @import("service_action_summary.zig").ServiceAction
 /// An object containing detailed information about the self-service action.
 pub const ServiceActionDetail = struct {
     /// A map that defines the self-service action.
-    definition: ?[]const aws.map.StringMapEntry,
+    definition: ?[]const aws.map.StringMapEntry = null,
 
     /// Summary information about the self-service action.
-    service_action_summary: ?ServiceActionSummary,
+    service_action_summary: ?ServiceActionSummary = null,
 
     pub const json_field_names = .{
         .definition = "Definition",

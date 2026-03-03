@@ -8,10 +8,10 @@ pub const ReplicationStatus = struct {
     /// locations that Amazon GameLift Streams supports, refer to [Regions, quotas,
     /// and
     /// limitations](https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html) in the *Amazon GameLift Streams Developer Guide*.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The current status of the replication process.
-    status: ?ReplicationStatusType,
+    status: ?ReplicationStatusType = null,
 
     pub const json_field_names = .{
         .location = "Location",

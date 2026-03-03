@@ -6,23 +6,23 @@ pub const IdentityUsage = struct {
 
     /// Total data storage for this
     /// identity.
-    data_storage: ?i64,
+    data_storage: ?i64 = null,
 
     /// A name-spaced GUID (for example,
     /// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
     /// GUID generation is
     /// unique within a region.
-    identity_id: ?[]const u8,
+    identity_id: ?[]const u8 = null,
 
     /// A name-spaced GUID (for example,
     /// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
     /// GUID generation is
     /// unique within a region.
-    identity_pool_id: ?[]const u8,
+    identity_pool_id: ?[]const u8 = null,
 
     /// Date on which the identity was last
     /// modified.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     pub const json_field_names = .{
         .dataset_count = "DatasetCount",

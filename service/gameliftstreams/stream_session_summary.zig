@@ -11,35 +11,35 @@ pub const StreamSessionSummary = struct {
     /// (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html)
     /// that uniquely identifies the application resource. Example ARN:
     /// `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
-    application_arn: ?[]const u8,
+    application_arn: ?[]const u8 = null,
 
     /// An [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html)
     /// that uniquely identifies the stream session resource. Example ARN:
     /// `arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567`.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A timestamp that indicates when this resource was created. Timestamps are
     /// expressed using in ISO8601 format, such as: `2022-12-27T22:29:40+00:00`
     /// (UTC).
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// Provides details about the stream session's exported files.
-    export_files_metadata: ?ExportFilesMetadata,
+    export_files_metadata: ?ExportFilesMetadata = null,
 
     /// A timestamp that indicates when this resource was last updated. Timestamps
     /// are expressed using in ISO8601 format, such as: `2022-12-27T22:29:40+00:00`
     /// (UTC).
-    last_updated_at: ?i64,
+    last_updated_at: ?i64 = null,
 
     /// The location where Amazon GameLift Streams hosts and streams your
     /// application. For example, `us-east-1`. For a complete list of locations that
     /// Amazon GameLift Streams supports, refer to [Regions, quotas, and
     /// limitations](https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html) in the *Amazon GameLift Streams Developer Guide*.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The data transfer protocol in use with the stream session.
-    protocol: ?Protocol,
+    protocol: ?Protocol = null,
 
     /// The current status of the stream session resource.
     ///
@@ -66,7 +66,7 @@ pub const StreamSessionSummary = struct {
     ///   in `PENDING_CLIENT_RECONNECTION` state.
     /// * `TERMINATING`: The stream session is ending.
     /// * `TERMINATED`: The stream session has ended.
-    status: ?StreamSessionStatus,
+    status: ?StreamSessionStatus = null,
 
     /// A short description of the reason the stream session is in `ERROR` status or
     /// `TERMINATED` status.
@@ -103,10 +103,10 @@ pub const StreamSessionSummary = struct {
     /// * `reconnectionTimeout`: The stream session was terminated because the
     ///   client failed to reconnect within the reconnection timeout period
     ///   specified by `ConnectionTimeoutSeconds` after losing connection.
-    status_reason: ?StreamSessionStatusReason,
+    status_reason: ?StreamSessionStatusReason = null,
 
     /// An opaque, unique identifier for an end-user, defined by the developer.
-    user_id: ?[]const u8,
+    user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_arn = "ApplicationArn",

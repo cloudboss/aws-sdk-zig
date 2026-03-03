@@ -4,11 +4,11 @@ const MembershipType = @import("membership_type.zig").MembershipType;
 pub const AssociatedUser = struct {
     /// The unique identifier of the associated user. This is used to identify the
     /// user in access control decisions.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The type of the associated user. This indicates the scope of the user's
     /// association.
-    @"type": ?MembershipType,
+    @"type": ?MembershipType = null,
 
     pub const json_field_names = .{
         .id = "id",

@@ -4,25 +4,25 @@ const RouteServerRouteStatus = @import("route_server_route_status.zig").RouteSer
 /// Describes a route in the route server's routing database.
 pub const RouteServerRoute = struct {
     /// The AS path attributes of the BGP route.
-    as_paths: ?[]const []const u8,
+    as_paths: ?[]const []const u8 = null,
 
     /// The Multi-Exit Discriminator (MED) value of the BGP route.
-    med: ?i32,
+    med: ?i32 = null,
 
     /// The IP address for the next hop.
-    next_hop_ip: ?[]const u8,
+    next_hop_ip: ?[]const u8 = null,
 
     /// The destination CIDR block of the route.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// Details about the installation status of this route in route tables.
-    route_installation_details: ?[]const RouteServerRouteInstallationDetail,
+    route_installation_details: ?[]const RouteServerRouteInstallationDetail = null,
 
     /// The ID of the route server endpoint that received this route.
-    route_server_endpoint_id: ?[]const u8,
+    route_server_endpoint_id: ?[]const u8 = null,
 
     /// The ID of the route server peer that advertised this route.
-    route_server_peer_id: ?[]const u8,
+    route_server_peer_id: ?[]const u8 = null,
 
     /// The current status of the route in the routing database. Values are `in-rib`
     /// or `in-fib` depending on if the routes are in the RIB or the FIB database.
@@ -41,5 +41,5 @@ pub const RouteServerRoute = struct {
     /// routes in the RIB after evaluating all available routing information and
     /// policies. The FIB routes are installed on the route tables. The FIB is
     /// recomputed whenever there are changes to the RIB.
-    route_status: ?RouteServerRouteStatus,
+    route_status: ?RouteServerRouteStatus = null,
 };

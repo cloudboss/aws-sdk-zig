@@ -19,14 +19,14 @@ pub const CollaborationAnalysisTemplateSummary = struct {
     creator_account_id: []const u8,
 
     /// The description of the analysis template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the analysis template.
     id: []const u8,
 
     /// Indicates if this collaboration analysis template uses synthetic data
     /// generation.
-    is_synthetic_data: ?bool,
+    is_synthetic_data: ?bool = null,
 
     /// The name of the analysis template.
     name: []const u8,

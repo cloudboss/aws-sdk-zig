@@ -8,7 +8,7 @@ const EntityTypesListItem = @import("entity_types_list_item.zig").EntityTypesLis
 /// Specifies the format and location of the input data.
 pub const EntityRecognizerInputDataConfig = struct {
     /// The S3 location of the CSV file that annotates your training documents.
-    annotations: ?EntityRecognizerAnnotations,
+    annotations: ?EntityRecognizerAnnotations = null,
 
     /// A list of augmented manifest files that provide training data for your
     /// custom model. An
@@ -18,7 +18,7 @@ pub const EntityRecognizerInputDataConfig = struct {
     ///
     /// This parameter is required if you set `DataFormat` to
     /// `AUGMENTED_MANIFEST`.
-    augmented_manifests: ?[]const AugmentedManifestsListItem,
+    augmented_manifests: ?[]const AugmentedManifestsListItem = null,
 
     /// The format of your training data:
     ///
@@ -45,7 +45,7 @@ pub const EntityRecognizerInputDataConfig = struct {
     ///
     /// If you don't specify a value, Amazon Comprehend uses `COMPREHEND_CSV` as the
     /// default.
-    data_format: ?EntityRecognizerDataFormat,
+    data_format: ?EntityRecognizerDataFormat = null,
 
     /// The S3 location of the folder that contains the training documents for your
     /// custom entity
@@ -53,12 +53,12 @@ pub const EntityRecognizerInputDataConfig = struct {
     ///
     /// This parameter is required if you set `DataFormat` to
     /// `COMPREHEND_CSV`.
-    documents: ?EntityRecognizerDocuments,
+    documents: ?EntityRecognizerDocuments = null,
 
     /// The S3 location of the CSV file that has the entity list for your custom
     /// entity
     /// recognizer.
-    entity_list: ?EntityRecognizerEntityList,
+    entity_list: ?EntityRecognizerEntityList = null,
 
     /// The entity types in the labeled training data that Amazon Comprehend uses to
     /// train the

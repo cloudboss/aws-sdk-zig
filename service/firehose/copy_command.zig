@@ -25,10 +25,10 @@ pub const CopyCommand = struct {
     ///
     /// For more examples, see [Amazon Redshift COPY command
     /// examples](https://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html).
-    copy_options: ?[]const u8,
+    copy_options: ?[]const u8 = null,
 
     /// A comma-separated list of column names.
-    data_table_columns: ?[]const u8,
+    data_table_columns: ?[]const u8 = null,
 
     /// The name of the target table. The table must already exist in the database.
     data_table_name: []const u8,

@@ -7,7 +7,7 @@ pub const DeviceRegistrationStateResourceTypeEventConfiguration = struct {
     /// Device registration resource type state event configuration object for
     /// enabling or
     /// disabling Sidewalk related event topics.
-    sidewalk: ?SidewalkResourceTypeEventConfiguration,
+    sidewalk: ?SidewalkResourceTypeEventConfiguration = null,
 
     pub const json_field_names = .{
         .sidewalk = "Sidewalk",

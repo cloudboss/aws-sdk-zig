@@ -3,17 +3,17 @@
 /// logs.
 pub const LogStream = struct {
     /// The Amazon Resource Name (ARN) of the log stream.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The creation time of the stream, expressed as the number of milliseconds
     /// after
     /// `Jan 1, 1970 00:00:00 UTC`.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The time of the first event, expressed as the number of milliseconds after
     /// `Jan 1,
     /// 1970 00:00:00 UTC`.
-    first_event_timestamp: ?i64,
+    first_event_timestamp: ?i64 = null,
 
     /// The time of the most recent log event in the log stream in CloudWatch Logs.
     /// This number
@@ -23,7 +23,7 @@ pub const LogStream = struct {
     /// updates in less than an hour from ingestion, but in rare situations might
     /// take
     /// longer.
-    last_event_timestamp: ?i64,
+    last_event_timestamp: ?i64 = null,
 
     /// The ingestion time, expressed as the number of milliseconds after `Jan 1,
     /// 1970
@@ -31,10 +31,10 @@ pub const LogStream = struct {
     /// consistency basis. It typically updates in less than an hour after
     /// ingestion, but in rare
     /// situations might take longer.
-    last_ingestion_time: ?i64,
+    last_ingestion_time: ?i64 = null,
 
     /// The name of the log stream.
-    log_stream_name: ?[]const u8,
+    log_stream_name: ?[]const u8 = null,
 
     /// The number of bytes stored.
     ///
@@ -42,7 +42,7 @@ pub const LogStream = struct {
     /// longer supported for log streams, and is always reported as zero. This
     /// change applies only to
     /// log streams. The `storedBytes` parameter for log groups is not affected.
-    stored_bytes: ?i64,
+    stored_bytes: ?i64 = null,
 
     /// The sequence token.
     ///
@@ -51,7 +51,7 @@ pub const LogStream = struct {
     /// invalid
     /// sequence token. You don't need to obtain `uploadSequenceToken` to use a
     /// `PutLogEvents` action.
-    upload_sequence_token: ?[]const u8,
+    upload_sequence_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

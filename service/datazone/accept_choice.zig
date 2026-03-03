@@ -2,11 +2,11 @@
 /// metadata) and the target (for example, a column name) that can be accepted.
 pub const AcceptChoice = struct {
     /// The edit of the prediction.
-    edited_value: ?[]const u8,
+    edited_value: ?[]const u8 = null,
 
     /// Specifies the prediction (aka, the automatically generated piece of
     /// metadata) that can be accepted.
-    prediction_choice: ?i32,
+    prediction_choice: ?i32 = null,
 
     /// Specifies the target (for example, a column name) where a prediction can be
     /// accepted.

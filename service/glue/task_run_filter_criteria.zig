@@ -5,16 +5,16 @@ const TaskType = @import("task_type.zig").TaskType;
 /// transform.
 pub const TaskRunFilterCriteria = struct {
     /// Filter on task runs started after this date.
-    started_after: ?i64,
+    started_after: ?i64 = null,
 
     /// Filter on task runs started before this date.
-    started_before: ?i64,
+    started_before: ?i64 = null,
 
     /// The current status of the task run.
-    status: ?TaskStatusType,
+    status: ?TaskStatusType = null,
 
     /// The type of task run.
-    task_run_type: ?TaskType,
+    task_run_type: ?TaskType = null,
 
     pub const json_field_names = .{
         .started_after = "StartedAfter",

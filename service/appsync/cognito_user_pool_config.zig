@@ -3,7 +3,7 @@ pub const CognitoUserPoolConfig = struct {
     /// A regular expression for validating the incoming Amazon Cognito user pool
     /// app client
     /// ID. If this value isn't set, no filtering is applied.
-    app_id_client_regex: ?[]const u8,
+    app_id_client_regex: ?[]const u8 = null,
 
     /// The Amazon Web Services Region in which the user pool was created.
     aws_region: []const u8,

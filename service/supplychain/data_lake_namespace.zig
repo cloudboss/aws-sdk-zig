@@ -7,7 +7,7 @@ pub const DataLakeNamespace = struct {
     created_time: i64,
 
     /// The description of the namespace.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The Amazon Web Services Supply Chain instance identifier.
     instance_id: []const u8,

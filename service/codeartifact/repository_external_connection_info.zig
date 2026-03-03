@@ -4,7 +4,7 @@ const ExternalConnectionStatus = @import("external_connection_status.zig").Exter
 /// Contains information about the external connection of a repository.
 pub const RepositoryExternalConnectionInfo = struct {
     /// The name of the external connection associated with a repository.
-    external_connection_name: ?[]const u8,
+    external_connection_name: ?[]const u8 = null,
 
     /// The package format associated with a repository's external connection. The
     /// valid package formats are:
@@ -25,11 +25,11 @@ pub const RepositoryExternalConnectionInfo = struct {
     /// * `swift`: A Swift package.
     ///
     /// * `cargo`: A Cargo package.
-    package_format: ?PackageFormat,
+    package_format: ?PackageFormat = null,
 
     /// The status of the external connection of a repository. There is one valid
     /// value, `Available`.
-    status: ?ExternalConnectionStatus,
+    status: ?ExternalConnectionStatus = null,
 
     pub const json_field_names = .{
         .external_connection_name = "externalConnectionName",

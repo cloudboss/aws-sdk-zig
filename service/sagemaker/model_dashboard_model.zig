@@ -7,18 +7,18 @@ const ModelDashboardMonitoringSchedule = @import("model_dashboard_monitoring_sch
 /// A model displayed in the Amazon SageMaker Model Dashboard.
 pub const ModelDashboardModel = struct {
     /// The endpoints that host a model.
-    endpoints: ?[]const ModelDashboardEndpoint,
+    endpoints: ?[]const ModelDashboardEndpoint = null,
 
-    last_batch_transform_job: ?TransformJob,
+    last_batch_transform_job: ?TransformJob = null,
 
     /// A model displayed in the Model Dashboard.
-    model: ?Model,
+    model: ?Model = null,
 
     /// The model card for a model.
-    model_card: ?ModelDashboardModelCard,
+    model_card: ?ModelDashboardModelCard = null,
 
     /// The monitoring schedules for a model.
-    monitoring_schedules: ?[]const ModelDashboardMonitoringSchedule,
+    monitoring_schedules: ?[]const ModelDashboardMonitoringSchedule = null,
 
     pub const json_field_names = .{
         .endpoints = "Endpoints",

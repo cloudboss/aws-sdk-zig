@@ -17,11 +17,11 @@ pub const StatefulRuleGroupReference = struct {
     /// Network Firewall console or API. When customers opt out, Network Firewall
     /// will not use the network traffic processed by those customers' active threat
     /// defense rule groups for rule group improvement.
-    deep_threat_inspection: ?bool,
+    deep_threat_inspection: ?bool = null,
 
     /// The action that allows the policy owner to override the behavior of the rule
     /// group within a policy.
-    override: ?StatefulRuleGroupOverride,
+    override: ?StatefulRuleGroupOverride = null,
 
     /// An integer setting that indicates the order in which to run the stateful
     /// rule groups in
@@ -39,7 +39,7 @@ pub const StatefulRuleGroupReference = struct {
     /// insert rule groups later, number them so there's a wide range in between,
     /// for example use 100,
     /// 200, and so on.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the stateful rule group.
     resource_arn: []const u8,

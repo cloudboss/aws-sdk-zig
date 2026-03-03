@@ -9,7 +9,7 @@ pub const PrivateGraphEndpointSummary = struct {
     subnet_ids: []const []const u8,
 
     /// The ID of the VPC endpoint.
-    vpc_endpoint_id: ?[]const u8,
+    vpc_endpoint_id: ?[]const u8 = null,
 
     /// The ID of the VPC in which the private graph endpoint is located.
     vpc_id: []const u8,

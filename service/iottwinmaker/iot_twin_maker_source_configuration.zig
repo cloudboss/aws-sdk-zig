@@ -3,7 +3,7 @@ const IotTwinMakerSourceConfigurationFilter = @import("iot_twin_maker_source_con
 /// The metadata transfer job AWS IoT TwinMaker source configuration.
 pub const IotTwinMakerSourceConfiguration = struct {
     /// The metadata transfer job AWS IoT TwinMaker source configuration filters.
-    filters: ?[]const IotTwinMakerSourceConfigurationFilter,
+    filters: ?[]const IotTwinMakerSourceConfigurationFilter = null,
 
     /// The IoT TwinMaker workspace.
     workspace: []const u8,

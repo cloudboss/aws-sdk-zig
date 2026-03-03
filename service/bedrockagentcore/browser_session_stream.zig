@@ -14,7 +14,7 @@ pub const BrowserSessionStream = struct {
     /// The stream that provides a visual representation of the browser content.
     /// This stream allows agents to observe the current state of the browser,
     /// including rendered web pages and visual elements.
-    live_view_stream: ?LiveViewStream,
+    live_view_stream: ?LiveViewStream = null,
 
     pub const json_field_names = .{
         .automation_stream = "automationStream",

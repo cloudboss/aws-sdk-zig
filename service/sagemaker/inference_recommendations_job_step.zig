@@ -6,7 +6,7 @@ const RecommendationStepType = @import("recommendation_step_type.zig").Recommend
 /// [ListInferenceRecommendationsJobSteps](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListInferenceRecommendationsJobSteps.html) API command.
 pub const InferenceRecommendationsJobStep = struct {
     /// The details for a specific benchmark.
-    inference_benchmark: ?RecommendationJobInferenceBenchmark,
+    inference_benchmark: ?RecommendationJobInferenceBenchmark = null,
 
     /// The name of the Inference Recommender job.
     job_name: []const u8,

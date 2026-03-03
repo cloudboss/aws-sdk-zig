@@ -2,7 +2,7 @@ const FrameCaptureS3Settings = @import("frame_capture_s3_settings.zig").FrameCap
 
 /// Frame Capture Cdn Settings
 pub const FrameCaptureCdnSettings = struct {
-    frame_capture_s3_settings: ?FrameCaptureS3Settings,
+    frame_capture_s3_settings: ?FrameCaptureS3Settings = null,
 
     pub const json_field_names = .{
         .frame_capture_s3_settings = "FrameCaptureS3Settings",

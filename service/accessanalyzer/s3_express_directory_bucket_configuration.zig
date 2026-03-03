@@ -16,10 +16,10 @@ const S3ExpressDirectoryAccessPointConfiguration = @import("s3_express_directory
 /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html) in the Amazon Simple Storage Service User Guide.
 pub const S3ExpressDirectoryBucketConfiguration = struct {
     /// The proposed access points for the Amazon S3 directory bucket.
-    access_points: ?[]const aws.map.MapEntry(S3ExpressDirectoryAccessPointConfiguration),
+    access_points: ?[]const aws.map.MapEntry(S3ExpressDirectoryAccessPointConfiguration) = null,
 
     /// The proposed bucket policy for the Amazon S3 directory bucket.
-    bucket_policy: ?[]const u8,
+    bucket_policy: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_points = "accessPoints",

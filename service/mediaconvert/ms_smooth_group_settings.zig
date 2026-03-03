@@ -14,43 +14,43 @@ pub const MsSmoothGroupSettings = struct {
     /// manifest references every output in the output group. To create additional
     /// manifests that reference a subset of the outputs in the output group,
     /// specify a list of them here.
-    additional_manifests: ?[]const MsSmoothAdditionalManifest,
+    additional_manifests: ?[]const MsSmoothAdditionalManifest = null,
 
     /// COMBINE_DUPLICATE_STREAMS combines identical audio encoding settings across
     /// a Microsoft Smooth output group into a single audio stream.
-    audio_deduplication: ?MsSmoothAudioDeduplication,
+    audio_deduplication: ?MsSmoothAudioDeduplication = null,
 
     /// Use Destination to specify the S3 output location and the output filename
     /// base. Destination accepts format identifiers. If you do not specify the base
     /// filename in the URI, the service will use the filename of the input file. If
     /// your job has multiple inputs, the service uses the filename of the first
     /// input file.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// Settings associated with the destination. Will vary based on the type of
     /// destination
-    destination_settings: ?DestinationSettings,
+    destination_settings: ?DestinationSettings = null,
 
     /// If you are using DRM, set DRM System to specify the value SpekeKeyProvider.
-    encryption: ?MsSmoothEncryptionSettings,
+    encryption: ?MsSmoothEncryptionSettings = null,
 
     /// Specify how you want MediaConvert to determine the fragment length. Choose
     /// Exact to have the encoder use the exact length that you specify with the
     /// setting Fragment length. This might result in extra I-frames. Choose
     /// Multiple of GOP to have the encoder round up the segment lengths to match
     /// the next GOP boundary.
-    fragment_length: ?i32,
+    fragment_length: ?i32 = null,
 
     /// Specify how you want MediaConvert to determine the fragment length. Choose
     /// Exact to have the encoder use the exact length that you specify with the
     /// setting Fragment length. This might result in extra I-frames. Choose
     /// Multiple of GOP to have the encoder round up the segment lengths to match
     /// the next GOP boundary.
-    fragment_length_control: ?MsSmoothFragmentLengthControl,
+    fragment_length_control: ?MsSmoothFragmentLengthControl = null,
 
     /// Use Manifest encoding to specify the encoding format for the server and
     /// client manifest. Valid options are utf8 and utf16.
-    manifest_encoding: ?MsSmoothManifestEncoding,
+    manifest_encoding: ?MsSmoothManifestEncoding = null,
 
     pub const json_field_names = .{
         .additional_manifests = "AdditionalManifests",

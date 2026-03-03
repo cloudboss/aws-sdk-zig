@@ -4,7 +4,7 @@ pub const WafOverrideAction = struct {
     /// `RuleGroup` .
     ///
     /// If set to `NONE`, the rule's action takes place.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "Type",

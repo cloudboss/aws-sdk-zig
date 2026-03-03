@@ -5,7 +5,7 @@ pub const Monitor = struct {
 
     /// ARN of an Identity and Access Management (IAM) role for AppConfig to monitor
     /// `AlarmArn`.
-    alarm_role_arn: ?[]const u8,
+    alarm_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .alarm_arn = "AlarmArn",

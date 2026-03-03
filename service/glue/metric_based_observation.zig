@@ -4,18 +4,18 @@ const DataQualityMetricValues = @import("data_quality_metric_values.zig").DataQu
 /// quality metrics.
 pub const MetricBasedObservation = struct {
     /// The name of the data quality metric used for generating the observation.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// An object of type `DataQualityMetricValues` representing the analysis of the
     /// data quality metric value.
-    metric_values: ?DataQualityMetricValues,
+    metric_values: ?DataQualityMetricValues = null,
 
     /// A list of new data quality rules generated as part of the observation based
     /// on the data quality metric value.
-    new_rules: ?[]const []const u8,
+    new_rules: ?[]const []const u8 = null,
 
     /// The Statistic ID.
-    statistic_id: ?[]const u8,
+    statistic_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metric_name = "MetricName",

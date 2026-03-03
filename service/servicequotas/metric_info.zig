@@ -5,16 +5,16 @@ pub const MetricInfo = struct {
     /// The metric dimension. This is a name/value pair that is part of the identity
     /// of a
     /// metric.
-    metric_dimensions: ?[]const aws.map.StringMapEntry,
+    metric_dimensions: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the metric.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The namespace of the metric.
-    metric_namespace: ?[]const u8,
+    metric_namespace: ?[]const u8 = null,
 
     /// The metric statistic that we recommend you use when determining quota usage.
-    metric_statistic_recommendation: ?[]const u8,
+    metric_statistic_recommendation: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .metric_dimensions = "MetricDimensions",

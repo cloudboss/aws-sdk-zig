@@ -1,25 +1,25 @@
 /// Dashboard summary.
 pub const DashboardSummary = struct {
     /// The Amazon Resource Name (ARN) of the resource.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time that this dashboard was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// Dashboard ID.
-    dashboard_id: ?[]const u8,
+    dashboard_id: ?[]const u8 = null,
 
     /// The last time that this dashboard was published.
-    last_published_time: ?i64,
+    last_published_time: ?i64 = null,
 
     /// The last time that this dashboard was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// A display name for the dashboard.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Published version number.
-    published_version_number: ?i64,
+    published_version_number: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

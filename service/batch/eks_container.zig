@@ -29,7 +29,7 @@ pub const EksContainer = struct {
     /// and [Define a command and arguments for a
     /// pod](https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/) in the *Kubernetes
     /// documentation*.
-    args: ?[]const []const u8,
+    args: ?[]const []const u8 = null,
 
     /// The entrypoint for the container. This isn't run within a shell. If this
     /// isn't specified,
@@ -50,13 +50,13 @@ pub const EksContainer = struct {
     /// [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint)
     /// in the *Dockerfile reference* and [Define a command and arguments for a
     /// container](https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/) and [Entrypoint](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#entrypoint) in the *Kubernetes documentation*.
-    command: ?[]const []const u8,
+    command: ?[]const []const u8 = null,
 
     /// The environment variables to pass to a container.
     ///
     /// Environment variables cannot start with "`AWS_BATCH`". This naming
     /// convention is reserved for variables that Batch sets.
-    env: ?[]const EksContainerEnvironmentVariable,
+    env: ?[]const EksContainerEnvironmentVariable = null,
 
     /// The Docker image used to start the container.
     image: []const u8,
@@ -66,11 +66,11 @@ pub const EksContainer = struct {
     /// `IfNotPresent`. However, if the `:latest` tag is specified, it defaults to
     /// `Always`. For more information, see [Updating
     /// images](https://kubernetes.io/docs/concepts/containers/images/#updating-images) in the *Kubernetes documentation*.
-    image_pull_policy: ?[]const u8,
+    image_pull_policy: ?[]const u8 = null,
 
     /// The name of the container. If the name isn't specified, the default name
     /// "`Default`" is used. Each container in a pod must have a unique name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The type and amount of resources to assign to a container. The supported
     /// resources include
@@ -78,20 +78,20 @@ pub const EksContainer = struct {
     /// see [Resource management for pods and
     /// containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) in the *Kubernetes
     /// documentation*.
-    resources: ?EksContainerResourceRequirements,
+    resources: ?EksContainerResourceRequirements = null,
 
     /// The security context for a job. For more information, see [Configure a
     /// security context for a pod or
     /// container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) in the *Kubernetes
     /// documentation*.
-    security_context: ?EksContainerSecurityContext,
+    security_context: ?EksContainerSecurityContext = null,
 
     /// The volume mounts for the container. Batch supports `emptyDir`,
     /// `hostPath`, and `secret` volume types. For more information about volumes
     /// and volume mounts in Kubernetes, see
     /// [Volumes](https://kubernetes.io/docs/concepts/storage/volumes/) in the
     /// *Kubernetes documentation*.
-    volume_mounts: ?[]const EksContainerVolumeMount,
+    volume_mounts: ?[]const EksContainerVolumeMount = null,
 
     pub const json_field_names = .{
         .args = "args",

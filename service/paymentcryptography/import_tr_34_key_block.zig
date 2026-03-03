@@ -20,7 +20,7 @@ pub const ImportTr34KeyBlock = struct {
     /// A random number value that is unique to the TR-34 key block generated using
     /// 2 pass. The operation will fail, if a random nonce value is not provided for
     /// a TR-34 key block generated using 2 pass.
-    random_nonce: ?[]const u8,
+    random_nonce: ?[]const u8 = null,
 
     /// The public key component in PEM certificate format of the private key that
     /// signs the KDH TR-34 WrappedKeyBlock.
@@ -30,10 +30,10 @@ pub const ImportTr34KeyBlock = struct {
     wrapped_key_block: []const u8,
 
     /// The certificate used to wrap the TR-34 key block.
-    wrapping_key_certificate: ?[]const u8,
+    wrapping_key_certificate: ?[]const u8 = null,
 
     /// Key Identifier used for unwrapping the import key
-    wrapping_key_identifier: ?[]const u8,
+    wrapping_key_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .certificate_authority_public_key_identifier = "CertificateAuthorityPublicKeyIdentifier",

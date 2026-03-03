@@ -40,7 +40,7 @@ pub const ValidationExceptionError = struct {
     code: ValidationExceptionErrorCode,
 
     /// Specifies the field name with the invalid value.
-    field_name: ?[]const u8,
+    field_name: ?[]const u8 = null,
 
     /// Specifies the detailed error message for the invalid field value.
     message: []const u8,

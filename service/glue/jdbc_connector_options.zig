@@ -12,7 +12,7 @@ pub const JDBCConnectorOptions = struct {
     /// implemented by each driver, so the behavior is specific to the driver you
     /// use. Refer to the documentation for your JDBC driver to understand how the
     /// driver performs the conversions.
-    data_type_mapping: ?[]const aws.map.MapEntry(GlueRecordType),
+    data_type_mapping: ?[]const aws.map.MapEntry(GlueRecordType) = null,
 
     /// Extra condition clause to filter data from source. For example:
     ///
@@ -20,32 +20,32 @@ pub const JDBCConnectorOptions = struct {
     ///
     /// When using a query instead of a table name, you should validate that the
     /// query works with the specified `filterPredicate`.
-    filter_predicate: ?[]const u8,
+    filter_predicate: ?[]const u8 = null,
 
     /// The name of the job bookmark keys on which to sort.
-    job_bookmark_keys: ?[]const []const u8,
+    job_bookmark_keys: ?[]const []const u8 = null,
 
     /// Specifies an ascending or descending sort order.
-    job_bookmark_keys_sort_order: ?[]const u8,
+    job_bookmark_keys_sort_order: ?[]const u8 = null,
 
     /// The minimum value of `partitionColumn` that is used to decide partition
     /// stride.
-    lower_bound: ?i64,
+    lower_bound: ?i64 = null,
 
     /// The number of partitions. This value, along with `lowerBound` (inclusive)
     /// and `upperBound` (exclusive), form partition strides for generated `WHERE`
     /// clause expressions that are used to split the `partitionColumn`.
-    num_partitions: ?i64,
+    num_partitions: ?i64 = null,
 
     /// The name of an integer column that is used for partitioning. This option
     /// works only when it's included with `lowerBound`, `upperBound`, and
     /// `numPartitions`. This option works the same way as in the Spark SQL JDBC
     /// reader.
-    partition_column: ?[]const u8,
+    partition_column: ?[]const u8 = null,
 
     /// The maximum value of `partitionColumn` that is used to decide partition
     /// stride.
-    upper_bound: ?i64,
+    upper_bound: ?i64 = null,
 
     pub const json_field_names = .{
         .data_type_mapping = "DataTypeMapping",

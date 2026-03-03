@@ -7,20 +7,20 @@ const TransformationToolName = @import("transformation_tool_name.zig").Transform
 /// application component.
 pub const StrategyOption = struct {
     /// Indicates if a specific strategy is preferred for the application component.
-    is_preferred: ?bool,
+    is_preferred: ?bool = null,
 
     /// Type of transformation. For example, Rehost, Replatform, and so on.
-    strategy: ?Strategy,
+    strategy: ?Strategy = null,
 
     /// Destination information about where the application component can migrate
     /// to. For
     /// example, `EC2`, `ECS`, and so on.
-    target_destination: ?TargetDestination,
+    target_destination: ?TargetDestination = null,
 
     /// The name of the tool that can be used to transform an application component
     /// using this
     /// strategy.
-    tool_name: ?TransformationToolName,
+    tool_name: ?TransformationToolName = null,
 
     pub const json_field_names = .{
         .is_preferred = "isPreferred",

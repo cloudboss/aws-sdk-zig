@@ -4,21 +4,21 @@ const CertificateType = @import("certificate_type.zig").CertificateType;
 /// Contains general information about a certificate.
 pub const CertificateInfo = struct {
     /// The identifier of the certificate.
-    certificate_id: ?[]const u8,
+    certificate_id: ?[]const u8 = null,
 
     /// The common name for the certificate.
-    common_name: ?[]const u8,
+    common_name: ?[]const u8 = null,
 
     /// The date and time when the certificate will expire.
-    expiry_date_time: ?i64,
+    expiry_date_time: ?i64 = null,
 
     /// The state of the certificate.
-    state: ?CertificateState,
+    state: ?CertificateState = null,
 
     /// The function that the registered certificate performs. Valid values include
     /// `ClientLDAPS` or `ClientCertAuth`. The default value is
     /// `ClientLDAPS`.
-    @"type": ?CertificateType,
+    @"type": ?CertificateType = null,
 
     pub const json_field_names = .{
         .certificate_id = "CertificateId",

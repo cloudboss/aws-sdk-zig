@@ -4,12 +4,12 @@ const NoEncryptionConfig = @import("no_encryption_config.zig").NoEncryptionConfi
 /// Describes the encryption for a destination in Amazon S3.
 pub const EncryptionConfiguration = struct {
     /// The encryption key.
-    kms_encryption_config: ?KMSEncryptionConfig,
+    kms_encryption_config: ?KMSEncryptionConfig = null,
 
     /// Specifically override existing encryption information to ensure that no
     /// encryption is
     /// used.
-    no_encryption_config: ?NoEncryptionConfig,
+    no_encryption_config: ?NoEncryptionConfig = null,
 
     pub const json_field_names = .{
         .kms_encryption_config = "KMSEncryptionConfig",

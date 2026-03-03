@@ -7,22 +7,22 @@ const ResourceState = @import("resource_state.zig").ResourceState;
 /// `UpdateTable` or `CreateTable` API calls.
 pub const ViewValidation = struct {
     /// The dialect of the query engine.
-    dialect: ?ViewDialect,
+    dialect: ?ViewDialect = null,
 
     /// The version of the dialect of the query engine. For example, 3.0.0.
-    dialect_version: ?[]const u8,
+    dialect_version: ?[]const u8 = null,
 
     /// An error associated with the validation.
-    @"error": ?ErrorDetail,
+    @"error": ?ErrorDetail = null,
 
     /// The state of the validation.
-    state: ?ResourceState,
+    state: ?ResourceState = null,
 
     /// The time of the last update.
-    update_time: ?i64,
+    update_time: ?i64 = null,
 
     /// The `SELECT` query that defines the view, as provided by the customer.
-    view_validation_text: ?[]const u8,
+    view_validation_text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dialect = "Dialect",

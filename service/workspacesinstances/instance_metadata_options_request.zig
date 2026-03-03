@@ -6,19 +6,19 @@ const InstanceMetadataTagsEnum = @import("instance_metadata_tags_enum.zig").Inst
 /// Defines instance metadata service configuration.
 pub const InstanceMetadataOptionsRequest = struct {
     /// Enables or disables HTTP endpoint for instance metadata.
-    http_endpoint: ?HttpEndpointEnum,
+    http_endpoint: ?HttpEndpointEnum = null,
 
     /// Configures IPv6 support for instance metadata HTTP protocol.
-    http_protocol_ipv_6: ?HttpProtocolIpv6Enum,
+    http_protocol_ipv_6: ?HttpProtocolIpv6Enum = null,
 
     /// Sets maximum number of network hops for metadata PUT responses.
-    http_put_response_hop_limit: ?i32,
+    http_put_response_hop_limit: ?i32 = null,
 
     /// Configures token requirement for instance metadata retrieval.
-    http_tokens: ?HttpTokensEnum,
+    http_tokens: ?HttpTokensEnum = null,
 
     /// Enables or disables instance metadata tags retrieval.
-    instance_metadata_tags: ?InstanceMetadataTagsEnum,
+    instance_metadata_tags: ?InstanceMetadataTagsEnum = null,
 
     pub const json_field_names = .{
         .http_endpoint = "HttpEndpoint",

@@ -20,29 +20,29 @@ pub const HlsPackage = struct {
     /// in HLS and CMAF manifests. For this option, you must set a
     /// programDateTimeIntervalSeconds value
     /// that is greater than 0.
-    ad_markers: ?AdMarkers,
+    ad_markers: ?AdMarkers = null,
 
-    ads_on_delivery_restrictions: ?AdsOnDeliveryRestrictions,
+    ads_on_delivery_restrictions: ?AdsOnDeliveryRestrictions = null,
 
-    ad_triggers: ?[]const __AdTriggersElement,
+    ad_triggers: ?[]const __AdTriggersElement = null,
 
-    encryption: ?HlsEncryption,
+    encryption: ?HlsEncryption = null,
 
     /// When enabled, MediaPackage passes through digital video broadcasting (DVB)
     /// subtitles into the output.
-    include_dvb_subtitles: ?bool,
+    include_dvb_subtitles: ?bool = null,
 
     /// When enabled, an I-Frame only stream will be included in the output.
-    include_iframe_only_stream: ?bool,
+    include_iframe_only_stream: ?bool = null,
 
     /// The HTTP Live Streaming (HLS) playlist type.
     /// When either "EVENT" or "VOD" is specified, a corresponding
     /// EXT-X-PLAYLIST-TYPE
     /// entry will be included in the media playlist.
-    playlist_type: ?PlaylistType,
+    playlist_type: ?PlaylistType = null,
 
     /// Time window (in seconds) contained in each parent manifest.
-    playlist_window_seconds: ?i32,
+    playlist_window_seconds: ?i32 = null,
 
     /// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
     /// inserted into manifests. Additionally, when an interval is specified
@@ -54,17 +54,17 @@ pub const HlsPackage = struct {
     /// of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming
     /// (HLS) input,
     /// it will be passed through to HLS output.
-    program_date_time_interval_seconds: ?i32,
+    program_date_time_interval_seconds: ?i32 = null,
 
     /// Duration (in seconds) of each fragment. Actual fragments will be
     /// rounded to the nearest multiple of the source fragment duration.
-    segment_duration_seconds: ?i32,
+    segment_duration_seconds: ?i32 = null,
 
-    stream_selection: ?StreamSelection,
+    stream_selection: ?StreamSelection = null,
 
     /// When enabled, audio streams will be placed in rendition groups in the
     /// output.
-    use_audio_rendition_group: ?bool,
+    use_audio_rendition_group: ?bool = null,
 
     pub const json_field_names = .{
         .ad_markers = "AdMarkers",

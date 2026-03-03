@@ -4,22 +4,22 @@ const EventResourceData = @import("event_resource_data.zig").EventResourceData;
 /// Metadata associated with a Job log.
 pub const JobLogEventData = struct {
     /// Properties of a conversion job
-    conversion_properties: ?ConversionProperties,
+    conversion_properties: ?ConversionProperties = null,
 
     /// The ID of a conversion server.
-    conversion_server_id: ?[]const u8,
+    conversion_server_id: ?[]const u8 = null,
 
     /// Properties of resource related to a job event.
-    event_resource_data: ?EventResourceData,
+    event_resource_data: ?EventResourceData = null,
 
     /// A string representing a job error.
-    raw_error: ?[]const u8,
+    raw_error: ?[]const u8 = null,
 
     /// The ID of a Source Server.
-    source_server_id: ?[]const u8,
+    source_server_id: ?[]const u8 = null,
 
     /// The ID of a Recovery Instance.
-    target_instance_id: ?[]const u8,
+    target_instance_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .conversion_properties = "conversionProperties",

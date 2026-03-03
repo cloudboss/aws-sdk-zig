@@ -5,13 +5,13 @@ pub const S3DataAccessDetails = struct {
     /// list of the key prefixes affected by this
     /// notification. This
     /// can have up to 50 entries.
-    key_prefixes: ?[]const []const u8,
+    key_prefixes: ?[]const []const u8 = null,
 
     /// A
     /// list of the keys affected by this
     /// notification. This
     /// can have up to 50 entries.
-    keys: ?[]const []const u8,
+    keys: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key_prefixes = "KeyPrefixes",

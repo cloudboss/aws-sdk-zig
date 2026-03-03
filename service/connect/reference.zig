@@ -6,13 +6,13 @@ const ReferenceType = @import("reference_type.zig").ReferenceType;
 /// bytes across all references for a contact.
 pub const Reference = struct {
     /// The Amazon Resource Name (ARN) of the reference
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Status of the attachment reference type.
-    status: ?ReferenceStatus,
+    status: ?ReferenceStatus = null,
 
     /// Relevant details why the reference was not successfully created.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The type of the reference. `DATE` must be of type Epoch timestamp.
     @"type": ReferenceType,

@@ -7,13 +7,13 @@ const SheetControlListType = @import("sheet_control_list_type.zig").SheetControl
 pub const DefaultFilterDropDownControlOptions = struct {
     /// The visibility configuration of the Apply button on a
     /// `FilterDropDownControl`.
-    commit_mode: ?CommitMode,
+    commit_mode: ?CommitMode = null,
 
     /// The display options of a control.
-    display_options: ?DropDownControlDisplayOptions,
+    display_options: ?DropDownControlDisplayOptions = null,
 
     /// A list of selectable values that are used in a control.
-    selectable_values: ?FilterSelectableValues,
+    selectable_values: ?FilterSelectableValues = null,
 
     /// The type of the `FilterDropDownControl`. Choose one of the following
     /// options:
@@ -21,7 +21,7 @@ pub const DefaultFilterDropDownControlOptions = struct {
     /// * `MULTI_SELECT`: The user can select multiple entries from a dropdown menu.
     ///
     /// * `SINGLE_SELECT`: The user can select a single entry from a dropdown menu.
-    @"type": ?SheetControlListType,
+    @"type": ?SheetControlListType = null,
 
     pub const json_field_names = .{
         .commit_mode = "CommitMode",

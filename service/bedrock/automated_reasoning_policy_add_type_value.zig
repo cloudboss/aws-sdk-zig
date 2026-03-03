@@ -3,7 +3,7 @@
 pub const AutomatedReasoningPolicyAddTypeValue = struct {
     /// A description of what this new type value represents and when it should be
     /// used.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier or name of the new value to add to the type.
     value: []const u8,

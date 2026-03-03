@@ -11,24 +11,24 @@ pub const HttpInstanceSummary = struct {
     /// If you included any attributes when you registered the instance, the values
     /// of those
     /// attributes.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// If you configured health checking in the service, the current health status
     /// of the service
     /// instance.
-    health_status: ?HealthStatus,
+    health_status: ?HealthStatus = null,
 
     /// The ID of an instance that matches the values that you specified in the
     /// request.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     /// The `HttpName` name of the namespace. It's found in the
     /// `HttpProperties` member of the `Properties` member of the
     /// namespace.
-    namespace_name: ?[]const u8,
+    namespace_name: ?[]const u8 = null,
 
     /// The name of the service that you specified when you registered the instance.
-    service_name: ?[]const u8,
+    service_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

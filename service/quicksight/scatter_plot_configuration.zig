@@ -11,41 +11,41 @@ const ChartAxisLabelOptions = @import("chart_axis_label_options.zig").ChartAxisL
 /// The configuration of a scatter plot.
 pub const ScatterPlotConfiguration = struct {
     /// The options that determine if visual data labels are displayed.
-    data_labels: ?DataLabelOptions,
+    data_labels: ?DataLabelOptions = null,
 
     /// The field wells of the visual.
-    field_wells: ?ScatterPlotFieldWells,
+    field_wells: ?ScatterPlotFieldWells = null,
 
     /// The general visual interactions setup for a visual.
-    interactions: ?VisualInteractionOptions,
+    interactions: ?VisualInteractionOptions = null,
 
     /// The legend display setup of the visual.
-    legend: ?LegendOptions,
+    legend: ?LegendOptions = null,
 
     /// The sort configuration of a scatter plot.
-    sort_configuration: ?ScatterPlotSortConfiguration,
+    sort_configuration: ?ScatterPlotSortConfiguration = null,
 
     /// The legend display setup of the visual.
-    tooltip: ?TooltipOptions,
+    tooltip: ?TooltipOptions = null,
 
     /// The palette (chart color) display setup of the visual.
-    visual_palette: ?VisualPalette,
+    visual_palette: ?VisualPalette = null,
 
     /// The label display options (grid line, range, scale, and axis step) of the
     /// scatter plot's x-axis.
-    x_axis_display_options: ?AxisDisplayOptions,
+    x_axis_display_options: ?AxisDisplayOptions = null,
 
     /// The label options (label text, label visibility, and sort icon visibility)
     /// of the scatter plot's x-axis.
-    x_axis_label_options: ?ChartAxisLabelOptions,
+    x_axis_label_options: ?ChartAxisLabelOptions = null,
 
     /// The label display options (grid line, range, scale, and axis step) of the
     /// scatter plot's y-axis.
-    y_axis_display_options: ?AxisDisplayOptions,
+    y_axis_display_options: ?AxisDisplayOptions = null,
 
     /// The label options (label text, label visibility, and sort icon visibility)
     /// of the scatter plot's y-axis.
-    y_axis_label_options: ?ChartAxisLabelOptions,
+    y_axis_label_options: ?ChartAxisLabelOptions = null,
 
     pub const json_field_names = .{
         .data_labels = "DataLabels",

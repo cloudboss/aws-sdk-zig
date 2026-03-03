@@ -8,7 +8,7 @@ pub const UpdateProjectRequest = struct {
     /// request.
     role_arn: []const u8,
 
-    sample: ?Sample,
+    sample: ?Sample = null,
 
     pub const json_field_names = .{
         .name = "Name",

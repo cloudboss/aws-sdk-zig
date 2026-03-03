@@ -6,10 +6,10 @@ const CodeContentUpdate = @import("code_content_update.zig").CodeContentUpdate;
 /// Data Analytics application.
 pub const ApplicationCodeConfigurationUpdate = struct {
     /// Describes updates to the code content type.
-    code_content_type_update: ?CodeContentType,
+    code_content_type_update: ?CodeContentType = null,
 
     /// Describes updates to the code content of an application.
-    code_content_update: ?CodeContentUpdate,
+    code_content_update: ?CodeContentUpdate = null,
 
     pub const json_field_names = .{
         .code_content_type_update = "CodeContentTypeUpdate",

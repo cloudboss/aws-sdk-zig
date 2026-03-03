@@ -1,31 +1,31 @@
 /// A summary of the metrics of a trial component.
 pub const TrialComponentMetricSummary = struct {
     /// The average value of the metric.
-    avg: ?f64,
+    avg: ?f64 = null,
 
     /// The number of samples used to generate the metric.
-    count: ?i32,
+    count: ?i32 = null,
 
     /// The most recent value of the metric.
-    last: ?f64,
+    last: ?f64 = null,
 
     /// The maximum value of the metric.
-    max: ?f64,
+    max: ?f64 = null,
 
     /// The name of the metric.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// The minimum value of the metric.
-    min: ?f64,
+    min: ?f64 = null,
 
     /// The Amazon Resource Name (ARN) of the source.
-    source_arn: ?[]const u8,
+    source_arn: ?[]const u8 = null,
 
     /// The standard deviation of the metric.
-    std_dev: ?f64,
+    std_dev: ?f64 = null,
 
     /// When the metric was last updated.
-    time_stamp: ?i64,
+    time_stamp: ?i64 = null,
 
     pub const json_field_names = .{
         .avg = "Avg",

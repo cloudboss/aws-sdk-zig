@@ -7,7 +7,7 @@ pub const EvaluationFormItemEnablementCondition = struct {
     operands: []const EvaluationFormItemEnablementConditionOperand,
 
     /// The operator to be used to be applied to operands if more than one provided.
-    operator: ?EvaluationFormItemEnablementOperator,
+    operator: ?EvaluationFormItemEnablementOperator = null,
 
     pub const json_field_names = .{
         .operands = "Operands",

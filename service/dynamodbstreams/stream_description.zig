@@ -6,10 +6,10 @@ const StreamViewType = @import("stream_view_type.zig").StreamViewType;
 /// Represents all of the data describing a particular stream.
 pub const StreamDescription = struct {
     /// The date and time when the request to create this stream was issued.
-    creation_request_date_time: ?i64,
+    creation_request_date_time: ?i64 = null,
 
     /// The key attribute(s) of the stream's DynamoDB table.
-    key_schema: ?[]const KeySchemaElement,
+    key_schema: ?[]const KeySchemaElement = null,
 
     /// The shard ID of the item where the operation stopped, inclusive of the
     /// previous result set. Use this value to start a new operation, excluding this
@@ -23,13 +23,13 @@ pub const StreamDescription = struct {
     /// more data in the result set. The only way to know when you have reached the
     /// end of the result
     /// set is when `LastEvaluatedShardId` is empty.
-    last_evaluated_shard_id: ?[]const u8,
+    last_evaluated_shard_id: ?[]const u8 = null,
 
     /// The shards that comprise the stream.
-    shards: ?[]const Shard,
+    shards: ?[]const Shard = null,
 
     /// The Amazon Resource Name (ARN) for the stream.
-    stream_arn: ?[]const u8,
+    stream_arn: ?[]const u8 = null,
 
     /// A timestamp, in ISO 8601 format, for this stream.
     ///
@@ -44,7 +44,7 @@ pub const StreamDescription = struct {
     /// * the table name
     ///
     /// * the `StreamLabel`
-    stream_label: ?[]const u8,
+    stream_label: ?[]const u8 = null,
 
     /// Indicates the current status of the stream:
     ///
@@ -55,7 +55,7 @@ pub const StreamDescription = struct {
     /// * `DISABLING` - Streams is currently being disabled on the DynamoDB table.
     ///
     /// * `DISABLED` - the stream is disabled.
-    stream_status: ?StreamStatus,
+    stream_status: ?StreamStatus = null,
 
     /// Indicates the format of the records within this stream:
     ///
@@ -70,10 +70,10 @@ pub const StreamDescription = struct {
     ///
     /// * `NEW_AND_OLD_IMAGES` - both the new and the old images of the items from
     ///   the table.
-    stream_view_type: ?StreamViewType,
+    stream_view_type: ?StreamViewType = null,
 
     /// The DynamoDB table with which the stream is associated.
-    table_name: ?[]const u8,
+    table_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_request_date_time = "CreationRequestDateTime",

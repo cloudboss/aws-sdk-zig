@@ -6,7 +6,7 @@ pub const RouteTollPassValidityPeriod = struct {
     period: RouteTollPassValidityPeriodType,
 
     /// Counts for the validity period.
-    period_count: ?i32,
+    period_count: ?i32 = null,
 
     pub const json_field_names = .{
         .period = "Period",

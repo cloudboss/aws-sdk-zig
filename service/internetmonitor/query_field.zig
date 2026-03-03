@@ -5,12 +5,12 @@
 pub const QueryField = struct {
     /// The name of a field to query your application's Amazon CloudWatch Internet
     /// Monitor data for, such as `availability_score`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The data type for a query field, which must correspond to the field you're
     /// defining for `QueryField`. For example, if the query
     /// field name is `availability_score`, the data type is `float`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

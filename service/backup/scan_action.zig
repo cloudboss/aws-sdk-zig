@@ -6,12 +6,12 @@ const ScanMode = @import("scan_mode.zig").ScanMode;
 pub const ScanAction = struct {
     /// The malware scanner to use for the scan action. Currently only `GUARDDUTY`
     /// is supported.
-    malware_scanner: ?MalwareScanner,
+    malware_scanner: ?MalwareScanner = null,
 
     /// The scanning mode to use for the scan action.
     ///
     /// Valid values: `FULL_SCAN` | `INCREMENTAL_SCAN`.
-    scan_mode: ?ScanMode,
+    scan_mode: ?ScanMode = null,
 
     pub const json_field_names = .{
         .malware_scanner = "MalwareScanner",

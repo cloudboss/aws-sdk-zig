@@ -14,7 +14,7 @@ pub const DomainValidation = struct {
     /// requested through Amazon CloudFront and issued by ACM. This field exists
     /// only when the certificate type is `AMAZON_ISSUED` and the validation method
     /// is `HTTP`.
-    http_redirect: ?HttpRedirect,
+    http_redirect: ?HttpRedirect = null,
 
     /// Contains the CNAME record that you add to your DNS database for domain
     /// validation. For more information, see [Use DNS to Validate Domain
@@ -25,16 +25,16 @@ pub const DomainValidation = struct {
     /// validation fails. For example, if the name is
     /// `_a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com`, only
     /// `_a79865eb4cd1a6ab990a45779b4e0b96` must be used.
-    resource_record: ?ResourceRecord,
+    resource_record: ?ResourceRecord = null,
 
     /// The domain name that ACM used to send domain validation emails.
-    validation_domain: ?[]const u8,
+    validation_domain: ?[]const u8 = null,
 
     /// A list of email addresses that ACM used to send domain validation emails.
-    validation_emails: ?[]const []const u8,
+    validation_emails: ?[]const []const u8 = null,
 
     /// Specifies the domain validation method.
-    validation_method: ?ValidationMethod,
+    validation_method: ?ValidationMethod = null,
 
     /// The validation status of the domain name. This can be one of the following
     /// values:
@@ -42,7 +42,7 @@ pub const DomainValidation = struct {
     /// * `PENDING_VALIDATION`
     /// * SUCCESS
     /// * FAILED
-    validation_status: ?DomainStatus,
+    validation_status: ?DomainStatus = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",

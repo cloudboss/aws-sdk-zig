@@ -2,10 +2,10 @@
 /// header consists of a key-value pair.
 pub const CustomHttpHeader = struct {
     /// The name of the custom HTTP header.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value of the custom HTTP header.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

@@ -21,7 +21,7 @@ pub const CollaborationConfiguredAudienceModelAssociation = struct {
     creator_account_id: []const u8,
 
     /// The description of the configured audience model association.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the configured audience model association.
     id: []const u8,

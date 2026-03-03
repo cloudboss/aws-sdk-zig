@@ -22,7 +22,7 @@ const WarningGroup = @import("warning_group.zig").WarningGroup;
 pub const Job = struct {
     /// Accelerated transcoding can significantly speed up jobs with long, visually
     /// complex content.
-    acceleration_settings: ?AccelerationSettings,
+    acceleration_settings: ?AccelerationSettings = null,
 
     /// Describes whether the current job is running with accelerated transcoding.
     /// For jobs that have Acceleration (AccelerationMode) set to DISABLED,
@@ -36,14 +36,14 @@ pub const Job = struct {
     /// accelerated transcoding, depending on how you set Acceleration
     /// (AccelerationMode). When the service runs your job without accelerated
     /// transcoding, AccelerationStatus is NOT_ACCELERATED.
-    acceleration_status: ?AccelerationStatus,
+    acceleration_status: ?AccelerationStatus = null,
 
     /// An identifier for this resource that is unique within all of AWS.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The tag type that AWS Billing and Cost Management will use to sort your AWS
     /// Elemental MediaConvert costs on any billing report that you set up.
-    billing_tags_source: ?BillingTagsSource,
+    billing_tags_source: ?BillingTagsSource = null,
 
     /// Prevent duplicate jobs from being created and ensure idempotency for your
     /// requests. A client request token can be any string that includes up to 64
@@ -51,30 +51,30 @@ pub const Job = struct {
     /// successful request, the API returns the job details of the original request
     /// instead. For more information see
     /// https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.
-    client_request_token: ?[]const u8,
+    client_request_token: ?[]const u8 = null,
 
     /// The time, in Unix epoch format in seconds, when the job got created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// A job's phase can be PROBING, TRANSCODING OR UPLOADING
-    current_phase: ?JobPhase,
+    current_phase: ?JobPhase = null,
 
     /// Error code for the job
-    error_code: ?i32,
+    error_code: ?i32 = null,
 
     /// Error message of Job
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// Optional list of hop destinations.
-    hop_destinations: ?[]const HopDestination,
+    hop_destinations: ?[]const HopDestination = null,
 
     /// A portion of the job's ARN, unique within your AWS Elemental MediaConvert
     /// resources
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Job engine version that you requested for your job. Valid versions are
     /// in a YYYY-MM-DD format.
-    job_engine_version_requested: ?[]const u8,
+    job_engine_version_requested: ?[]const u8 = null,
 
     /// The Job engine version that your job used. Job engine versions are in a
     /// YYYY-MM-DD format. When you request an expired version, the response for
@@ -83,7 +83,7 @@ pub const Job = struct {
     /// When you request an invalid version, the response for this property will be
     /// empty. Requests to create jobs with an invalid version result in a 400 error
     /// message, and no job is created.
-    job_engine_version_used: ?[]const u8,
+    job_engine_version_used: ?[]const u8 = null,
 
     /// An estimate of how far your job has progressed. This estimate is shown as a
     /// percentage of the total time from when your job leaves its queue to when
@@ -94,39 +94,39 @@ pub const Job = struct {
     /// Transport Stream, MP4, and MXF. For some jobs, the service can't provide
     /// information about job progress. In those cases, jobPercentComplete returns a
     /// null value.
-    job_percent_complete: ?i32,
+    job_percent_complete: ?i32 = null,
 
     /// The job template that the job is created from, if it is created from a job
     /// template.
-    job_template: ?[]const u8,
+    job_template: ?[]const u8 = null,
 
     /// Contains information about the most recent share attempt for the job. For
     /// more information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/creating-resource-share.html
-    last_share_details: ?[]const u8,
+    last_share_details: ?[]const u8 = null,
 
     /// Provides messages from the service about jobs that you have already
     /// successfully submitted.
-    messages: ?JobMessages,
+    messages: ?JobMessages = null,
 
     /// List of output group details
-    output_group_details: ?[]const OutputGroupDetail,
+    output_group_details: ?[]const OutputGroupDetail = null,
 
     /// Relative priority on the job.
-    priority: ?i32,
+    priority: ?i32 = null,
 
     /// When you create a job, you can specify a queue to send it to. If you don't
     /// specify, the job will go to the default queue. For more about queues, see
     /// the User Guide topic at
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
-    queue: ?[]const u8,
+    queue: ?[]const u8 = null,
 
     /// The job's queue hopping history.
-    queue_transitions: ?[]const QueueTransition,
+    queue_transitions: ?[]const QueueTransition = null,
 
     /// The number of times that the service automatically attempted to process your
     /// job after encountering an error.
-    retry_count: ?i32,
+    retry_count: ?i32 = null,
 
     /// The IAM role you use for creating this job. For details about permissions,
     /// see the User Guide topic at the User Guide at
@@ -137,36 +137,36 @@ pub const Job = struct {
     settings: JobSettings,
 
     /// A job's share status can be NOT_SHARED, INITIATED, or SHARED
-    share_status: ?ShareStatus,
+    share_status: ?ShareStatus = null,
 
     /// Enable this setting when you run a test job to estimate how many reserved
     /// transcoding slots (RTS) you need. When this is enabled, MediaConvert runs
     /// your job from an on-demand queue with similar performance to what you will
     /// see with one RTS in a reserved queue. This setting is disabled by default.
-    simulate_reserved_queue: ?SimulateReservedQueue,
+    simulate_reserved_queue: ?SimulateReservedQueue = null,
 
     /// A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.
-    status: ?JobStatus,
+    status: ?JobStatus = null,
 
     /// Specify how often MediaConvert sends STATUS_UPDATE events to Amazon
     /// CloudWatch Events. Set the interval, in seconds, between status updates.
     /// MediaConvert sends an update at this interval from the time the service
     /// begins processing your job to the time it completes the transcode or
     /// encounters an error.
-    status_update_interval: ?StatusUpdateInterval,
+    status_update_interval: ?StatusUpdateInterval = null,
 
     /// Information about when jobs are submitted, started, and finished is
     /// specified in Unix epoch format in seconds.
-    timing: ?Timing,
+    timing: ?Timing = null,
 
     /// User-defined metadata that you want to associate with an MediaConvert job.
     /// You specify metadata in key/value pairs.
-    user_metadata: ?[]const aws.map.StringMapEntry,
+    user_metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// Contains any warning messages for the job. Use to help identify potential
     /// issues with your input, output, or job. For more information, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/warning_codes.html
-    warnings: ?[]const WarningGroup,
+    warnings: ?[]const WarningGroup = null,
 
     pub const json_field_names = .{
         .acceleration_settings = "AccelerationSettings",

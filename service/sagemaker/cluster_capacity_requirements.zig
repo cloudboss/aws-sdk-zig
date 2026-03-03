@@ -5,10 +5,10 @@ const ClusterSpotOptions = @import("cluster_spot_options.zig").ClusterSpotOption
 /// configurations for both Spot and On-Demand capacity types.
 pub const ClusterCapacityRequirements = struct {
     /// Configuration options specific to On-Demand instances.
-    on_demand: ?ClusterOnDemandOptions,
+    on_demand: ?ClusterOnDemandOptions = null,
 
     /// Configuration options specific to Spot instances.
-    spot: ?ClusterSpotOptions,
+    spot: ?ClusterSpotOptions = null,
 
     pub const json_field_names = .{
         .on_demand = "OnDemand",

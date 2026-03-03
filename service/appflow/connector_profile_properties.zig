@@ -21,60 +21,60 @@ const ZendeskConnectorProfileProperties = @import("zendesk_connector_profile_pro
 /// The connector-specific profile properties required by each connector.
 pub const ConnectorProfileProperties = struct {
     /// The connector-specific properties required by Amplitude.
-    amplitude: ?AmplitudeConnectorProfileProperties,
+    amplitude: ?AmplitudeConnectorProfileProperties = null,
 
     /// The properties required by the custom connector.
-    custom_connector: ?CustomConnectorProfileProperties,
+    custom_connector: ?CustomConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Datadog.
-    datadog: ?DatadogConnectorProfileProperties,
+    datadog: ?DatadogConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Dynatrace.
-    dynatrace: ?DynatraceConnectorProfileProperties,
+    dynatrace: ?DynatraceConnectorProfileProperties = null,
 
     /// The connector-specific properties required Google Analytics.
-    google_analytics: ?GoogleAnalyticsConnectorProfileProperties,
+    google_analytics: ?GoogleAnalyticsConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Amazon Honeycode.
-    honeycode: ?HoneycodeConnectorProfileProperties,
+    honeycode: ?HoneycodeConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Infor Nexus.
-    infor_nexus: ?InforNexusConnectorProfileProperties,
+    infor_nexus: ?InforNexusConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Marketo.
-    marketo: ?MarketoConnectorProfileProperties,
+    marketo: ?MarketoConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Salesforce Pardot.
-    pardot: ?PardotConnectorProfileProperties,
+    pardot: ?PardotConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Amazon Redshift.
-    redshift: ?RedshiftConnectorProfileProperties,
+    redshift: ?RedshiftConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Salesforce.
-    salesforce: ?SalesforceConnectorProfileProperties,
+    salesforce: ?SalesforceConnectorProfileProperties = null,
 
-    sapo_data: ?SAPODataConnectorProfileProperties,
+    sapo_data: ?SAPODataConnectorProfileProperties = null,
 
     /// The connector-specific properties required by serviceNow.
-    service_now: ?ServiceNowConnectorProfileProperties,
+    service_now: ?ServiceNowConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Singular.
-    singular: ?SingularConnectorProfileProperties,
+    singular: ?SingularConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Slack.
-    slack: ?SlackConnectorProfileProperties,
+    slack: ?SlackConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Snowflake.
-    snowflake: ?SnowflakeConnectorProfileProperties,
+    snowflake: ?SnowflakeConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Trend Micro.
-    trendmicro: ?TrendmicroConnectorProfileProperties,
+    trendmicro: ?TrendmicroConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Veeva.
-    veeva: ?VeevaConnectorProfileProperties,
+    veeva: ?VeevaConnectorProfileProperties = null,
 
     /// The connector-specific properties required by Zendesk.
-    zendesk: ?ZendeskConnectorProfileProperties,
+    zendesk: ?ZendeskConnectorProfileProperties = null,
 
     pub const json_field_names = .{
         .amplitude = "Amplitude",

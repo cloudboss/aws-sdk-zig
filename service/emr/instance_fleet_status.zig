@@ -30,15 +30,15 @@ pub const InstanceFleetStatus = struct {
     ///
     /// * `TERMINATED`—The instance fleet is no longer active, and all Amazon EC2
     ///   instances have been terminated.
-    state: ?InstanceFleetState,
+    state: ?InstanceFleetState = null,
 
     /// Provides status change reason details for the instance fleet.
-    state_change_reason: ?InstanceFleetStateChangeReason,
+    state_change_reason: ?InstanceFleetStateChangeReason = null,
 
     /// Provides historical timestamps for the instance fleet, including the time of
     /// creation,
     /// the time it became ready to run jobs, and the time of termination.
-    timeline: ?InstanceFleetTimeline,
+    timeline: ?InstanceFleetTimeline = null,
 
     pub const json_field_names = .{
         .state = "State",

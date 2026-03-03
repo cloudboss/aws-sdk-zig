@@ -6,7 +6,7 @@ const RecommendedActionParameter = @import("recommended_action_parameter.zig").R
 /// DB instances, DB clusters, and DB parameter groups.
 pub const RecommendedAction = struct {
     /// The unique identifier of the recommended action.
-    action_id: ?[]const u8,
+    action_id: ?[]const u8 = null,
 
     /// The methods to apply the recommended action.
     ///
@@ -16,23 +16,23 @@ pub const RecommendedAction = struct {
     /// * `immediately` - The action is applied immediately.
     /// * `next-maintainance-window` - The action is applied during the next
     ///   scheduled maintainance.
-    apply_modes: ?[]const []const u8,
+    apply_modes: ?[]const []const u8 = null,
 
     /// The supporting attributes to explain the recommended action.
-    context_attributes: ?[]const ContextAttribute,
+    context_attributes: ?[]const ContextAttribute = null,
 
     /// A detailed description of the action. The description might contain
     /// markdown.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The details of the issue.
-    issue_details: ?IssueDetails,
+    issue_details: ?IssueDetails = null,
 
     /// An API operation for the action.
-    operation: ?[]const u8,
+    operation: ?[]const u8 = null,
 
     /// The parameters for the API operation.
-    parameters: ?[]const RecommendedActionParameter,
+    parameters: ?[]const RecommendedActionParameter = null,
 
     /// The status of the action.
     ///
@@ -40,9 +40,9 @@ pub const RecommendedAction = struct {
     /// * `applied`
     /// * `scheduled`
     /// * `resolved`
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// A short description to summarize the action. The description might contain
     /// markdown.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 };

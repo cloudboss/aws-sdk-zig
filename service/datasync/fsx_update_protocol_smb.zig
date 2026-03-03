@@ -14,12 +14,12 @@ pub const FsxUpdateProtocolSmb = struct {
     /// If you have multiple Active Directory domains in your environment,
     /// configuring this
     /// parameter makes sure that DataSync connects to the right SVM.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
-    mount_options: ?SmbMountOptions,
+    mount_options: ?SmbMountOptions = null,
 
     /// Specifies the password of a user who has permission to access your SVM.
-    password: ?[]const u8,
+    password: ?[]const u8 = null,
 
     /// Specifies a user that can mount and access the files, folders, and metadata
     /// in your
@@ -30,7 +30,7 @@ pub const FsxUpdateProtocolSmb = struct {
     /// see [Using
     /// the SMB
     /// protocol](https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb).
-    user: ?[]const u8,
+    user: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domain = "Domain",

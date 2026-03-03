@@ -3,7 +3,7 @@
 pub const AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails = struct {
     /// Describes whether Kubernetes audit logs are activated as a data source for
     /// the detector.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status = "Status",

@@ -23,9 +23,9 @@ pub const ResourceRecordSet = struct {
     /// hosted zone, see [Configuring Failover in a Private Hosted
     /// Zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html) in the
     /// *Amazon Route 53 Developer Guide*.
-    alias_target: ?AliasTarget,
+    alias_target: ?AliasTarget = null,
 
-    cidr_routing_config: ?CidrRoutingConfig,
+    cidr_routing_config: ?CidrRoutingConfig = null,
 
     /// *Failover resource record sets only:* To configure failover, you
     /// add the `Failover` element to two resource record sets. For one resource
@@ -78,7 +78,7 @@ pub const ResourceRecordSet = struct {
     ///
     /// * [Configuring Failover in a Private Hosted
     ///   Zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html)
-    failover: ?ResourceRecordSetFailover,
+    failover: ?ResourceRecordSetFailover = null,
 
     /// *Geolocation resource record sets only:* A complex type that lets you
     /// control how Amazon Route 53 responds to DNS queries based on the geographic
@@ -131,13 +131,13 @@ pub const ResourceRecordSet = struct {
     /// values for
     /// the `Name` and `Type` elements as geolocation resource record
     /// sets.
-    geo_location: ?GeoLocation,
+    geo_location: ?GeoLocation = null,
 
     /// * GeoproximityLocation resource record sets only:* A complex type that lets
     ///   you control how
     /// Route 53 responds to DNS queries based on the geographic origin of the
     /// query and your resources.
-    geo_proximity_location: ?GeoProximityLocation,
+    geo_proximity_location: ?GeoProximityLocation = null,
 
     /// If you want Amazon Route 53 to return this resource record set in response
     /// to a DNS
@@ -278,7 +278,7 @@ pub const ResourceRecordSet = struct {
     /// set.
     ///
     /// * Associate that health check with the resource record set.
-    health_check_id: ?[]const u8,
+    health_check_id: ?[]const u8 = null,
 
     /// *Multivalue answer resource record sets only*: To route traffic
     /// approximately randomly to multiple resources, such as web servers, create
@@ -315,7 +315,7 @@ pub const ResourceRecordSet = struct {
     /// software typically tries another of the IP addresses in the response.
     ///
     /// You can't create multivalue answer alias records.
-    multi_value_answer: ?bool,
+    multi_value_answer: ?bool = null,
 
     /// For `ChangeResourceRecordSets` requests, the name of the record that you
     /// want to create, update, or delete. For `ListResourceRecordSets` responses,
@@ -390,13 +390,13 @@ pub const ResourceRecordSet = struct {
     ///   values
     /// for the `Name` and `Type` elements as latency resource
     /// record sets.
-    region: ?ResourceRecordSetRegion,
+    region: ?ResourceRecordSetRegion = null,
 
     /// Information about the resource records to act upon.
     ///
     /// If you're creating an alias resource record set, omit
     /// `ResourceRecords`.
-    resource_records: ?[]const ResourceRecord,
+    resource_records: ?[]const ResourceRecord = null,
 
     /// *Resource record sets that have a routing policy other than
     /// simple:* An identifier that differentiates among multiple resource record
@@ -409,7 +409,7 @@ pub const ResourceRecordSet = struct {
     ///
     /// For information about routing policies, see [Choosing a Routing
     /// Policy](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html) in the *Amazon Route 53 Developer Guide*.
-    set_identifier: ?[]const u8,
+    set_identifier: ?[]const u8 = null,
 
     /// When you create a traffic policy instance, Amazon Route 53 automatically
     /// creates a
@@ -424,7 +424,7 @@ pub const ResourceRecordSet = struct {
     /// traffic policy instance, and you'll continue to be charged for it even
     /// though it's
     /// no longer in use.
-    traffic_policy_instance_id: ?[]const u8,
+    traffic_policy_instance_id: ?[]const u8 = null,
 
     /// The resource record cache time to live (TTL), in seconds. Note the
     /// following:
@@ -452,7 +452,7 @@ pub const ResourceRecordSet = struct {
     /// other than 60 seconds (the TTL for load balancers) will change the effect of
     /// the
     /// values that you specify for `Weight`.
-    ttl: ?i64,
+    ttl: ?i64 = null,
 
     /// The DNS record type. For information about different record types and how
     /// data is
@@ -571,5 +571,5 @@ pub const ResourceRecordSet = struct {
     /// Active-Passive
     /// Failover](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-configuring-options.html) in the *Amazon Route 53 Developer
     /// Guide*.
-    weight: ?i64,
+    weight: ?i64 = null,
 };

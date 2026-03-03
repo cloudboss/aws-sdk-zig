@@ -4,10 +4,10 @@ const TypedAttributeValueRange = @import("typed_attribute_value_range.zig").Type
 /// A range of attributes.
 pub const ObjectAttributeRange = struct {
     /// The key of the attribute that the attribute range covers.
-    attribute_key: ?AttributeKey,
+    attribute_key: ?AttributeKey = null,
 
     /// The range of attribute values being selected.
-    range: ?TypedAttributeValueRange,
+    range: ?TypedAttributeValueRange = null,
 
     pub const json_field_names = .{
         .attribute_key = "AttributeKey",

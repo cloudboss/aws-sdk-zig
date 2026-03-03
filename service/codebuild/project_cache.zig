@@ -8,14 +8,14 @@ pub const ProjectCache = struct {
     /// multiple projects. For more information, see [Cache sharing
     /// between
     /// projects](https://docs.aws.amazon.com/codebuild/latest/userguide/caching-s3.html#caching-s3-sharing) in the *CodeBuild User Guide*.
-    cache_namespace: ?[]const u8,
+    cache_namespace: ?[]const u8 = null,
 
     /// Information about the cache location:
     ///
     /// * `NO_CACHE` or `LOCAL`: This value is ignored.
     ///
     /// * `S3`: This is the S3 bucket name/prefix.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// An array of strings that specify the local cache modes. You can use one or
     /// more local
@@ -63,7 +63,7 @@ pub const ProjectCache = struct {
     /// its project sources. Cached items are overridden if a source item
     /// has the same name. Directories are specified using cache paths in
     /// the buildspec file.
-    modes: ?[]const CacheMode,
+    modes: ?[]const CacheMode = null,
 
     /// The type of cache used by the build project. Valid values include:
     ///

@@ -13,10 +13,10 @@ pub const Plan = struct {
     arn: []const u8,
 
     /// The associated application health alarms for a plan.
-    associated_alarms: ?[]const aws.map.MapEntry(AssociatedAlarm),
+    associated_alarms: ?[]const aws.map.MapEntry(AssociatedAlarm) = null,
 
     /// The description for a plan.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The execution role for a plan.
     execution_role: []const u8,
@@ -28,29 +28,29 @@ pub const Plan = struct {
     owner: []const u8,
 
     /// The primary Region for a plan.
-    primary_region: ?[]const u8,
+    primary_region: ?[]const u8 = null,
 
     /// The recovery approach for a Region switch plan, which can be active/active
     /// (activeActive) or active/passive (activePassive).
     recovery_approach: RecoveryApproach,
 
     /// The recovery time objective for a plan.
-    recovery_time_objective_minutes: ?i32,
+    recovery_time_objective_minutes: ?i32 = null,
 
     /// The Amazon Web Services Regions for a plan.
     regions: []const []const u8,
 
     /// The report configuration for a plan.
-    report_configuration: ?ReportConfiguration,
+    report_configuration: ?ReportConfiguration = null,
 
     /// The triggers for a plan.
-    triggers: ?[]const Trigger,
+    triggers: ?[]const Trigger = null,
 
     /// The timestamp when the plan was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The version for the plan.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     /// The workflows for a plan.
     workflows: []const Workflow,

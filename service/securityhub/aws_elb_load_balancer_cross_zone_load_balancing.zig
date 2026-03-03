@@ -2,7 +2,7 @@
 pub const AwsElbLoadBalancerCrossZoneLoadBalancing = struct {
     /// Indicates whether cross-zone load balancing is enabled for the load
     /// balancer.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

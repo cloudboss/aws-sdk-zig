@@ -34,22 +34,22 @@ pub const LifeCycle = struct {
     /// * Product/Technology: Issues related to the product or technology.
     /// * Financial/Commercial: Financial or commercial issues impacted the
     ///   decision.
-    closed_lost_reason: ?ClosedLostReason,
+    closed_lost_reason: ?ClosedLostReason = null,
 
     /// Specifies the upcoming actions or tasks for the `Opportunity`. Use this
     /// field to communicate with Amazon Web Services about the next actions
     /// required for the `Opportunity`.
-    next_steps: ?[]const u8,
+    next_steps: ?[]const u8 = null,
 
     /// Captures a chronological record of the next steps or actions planned or
     /// taken for the current opportunity, along with the timestamp.
-    next_steps_history: ?[]const NextStepsHistory,
+    next_steps_history: ?[]const NextStepsHistory = null,
 
     /// Contains detailed feedback from Amazon Web Services when requesting
     /// additional information from partners. Provides specific guidance on what
     /// partners need to provide or clarify for opportunity validation,
     /// complementing the `ReviewStatusReason` field.
-    review_comments: ?[]const u8,
+    review_comments: ?[]const u8 = null,
 
     /// Indicates the review status of an opportunity referred by a partner. This
     /// field is read-only and only applicable for partner referrals. The possible
@@ -83,14 +83,14 @@ pub const LifeCycle = struct {
     /// * Approved: Validated and converted into the Amazon Web Services seller's
     ///   pipeline (editable).
     /// * Rejected: Disqualified (read-only).
-    review_status: ?ReviewStatus,
+    review_status: ?ReviewStatus = null,
 
     /// Code indicating the validation decision during the Amazon Web Services
     /// opportunity review. Applies when status is `Rejected` or `Action Required`.
     /// Used to document validation results for AWS Partner Referrals and indicate
     /// when additional information is needed from partners as part of the APN
     /// Customer Engagement (ACE) program.
-    review_status_reason: ?[]const u8,
+    review_status_reason: ?[]const u8 = null,
 
     /// Specifies the current stage of the `Opportunity`'s lifecycle as it maps to
     /// Amazon Web Services stages from the current stage in the partner CRM. This
@@ -120,7 +120,7 @@ pub const LifeCycle = struct {
     ///   billing.
     /// * Closed Lost: The opportunity is lost, and there are no steps to move
     ///   forward.
-    stage: ?Stage,
+    stage: ?Stage = null,
 
     /// Specifies the date when Amazon Web Services expects to start significant
     /// billing, when the project finishes, and when it moves into production. This
@@ -128,7 +128,7 @@ pub const LifeCycle = struct {
     /// launches and starts to incur Amazon Web Services usage.
     ///
     /// Ensure the `Target Close Date` isn't in the past.
-    target_close_date: ?[]const u8,
+    target_close_date: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .closed_lost_reason = "ClosedLostReason",

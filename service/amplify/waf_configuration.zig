@@ -8,15 +8,15 @@ const WafStatus = @import("waf_status.zig").WafStatus;
 /// sites](https://docs.aws.amazon.com/amplify/latest/userguide/WAF-integration.html) in the *Amplify User Guide*.
 pub const WafConfiguration = struct {
     /// The reason for the current status of the Firewall configuration.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The status of the process to associate or disassociate a web ACL to an
     /// Amplify app.
-    waf_status: ?WafStatus,
+    waf_status: ?WafStatus = null,
 
     /// The Amazon Resource Name (ARN) for the web ACL associated with an Amplify
     /// app.
-    web_acl_arn: ?[]const u8,
+    web_acl_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .status_reason = "statusReason",

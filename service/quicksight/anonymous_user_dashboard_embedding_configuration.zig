@@ -5,13 +5,13 @@ const AnonymousUserDashboardFeatureConfigurations = @import("anonymous_user_dash
 /// Information about the dashboard that you want to embed.
 pub const AnonymousUserDashboardEmbeddingConfiguration = struct {
     /// A list of all disabled features of a specified anonymous dashboard.
-    disabled_features: ?[]const AnonymousUserDashboardEmbeddingConfigurationDisabledFeature,
+    disabled_features: ?[]const AnonymousUserDashboardEmbeddingConfigurationDisabledFeature = null,
 
     /// A list of all enabled features of a specified anonymous dashboard.
-    enabled_features: ?[]const AnonymousUserDashboardEmbeddingConfigurationEnabledFeature,
+    enabled_features: ?[]const AnonymousUserDashboardEmbeddingConfigurationEnabledFeature = null,
 
     /// The feature configuration for an embedded dashboard.
-    feature_configurations: ?AnonymousUserDashboardFeatureConfigurations,
+    feature_configurations: ?AnonymousUserDashboardFeatureConfigurations = null,
 
     /// The dashboard ID for the dashboard that you want the user to see first. This
     /// ID is

@@ -4,15 +4,15 @@
 pub const ExcelOptions = struct {
     /// A variable that specifies whether the first row in the file is parsed as the
     /// header. If this value is false, column names are auto-generated.
-    header_row: ?bool,
+    header_row: ?bool = null,
 
     /// One or more sheet numbers in the Excel file that will be included in the
     /// dataset.
-    sheet_indexes: ?[]const i32,
+    sheet_indexes: ?[]const i32 = null,
 
     /// One or more named sheets in the Excel file that will be included in the
     /// dataset.
-    sheet_names: ?[]const []const u8,
+    sheet_names: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .header_row = "HeaderRow",

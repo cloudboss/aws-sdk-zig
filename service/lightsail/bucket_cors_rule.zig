@@ -8,7 +8,7 @@ pub const BucketCorsRule = struct {
     /// These headers are allowed in a preflight `OPTIONS` request. In response to
     /// any preflight `OPTIONS` request, Amazon S3 returns any requested headers
     /// that are allowed.
-    allowed_headers: ?[]const []const u8,
+    allowed_headers: ?[]const []const u8 = null,
 
     /// The HTTP methods that are allowed when accessing the bucket from the
     /// specified origin. Each CORS rule must identify at least one origin and one
@@ -39,16 +39,16 @@ pub const BucketCorsRule = struct {
     /// One or more headers in the response that you want customers to be able to
     /// access from their applications (for example, from a JavaScript
     /// `XMLHttpRequest` object).
-    expose_headers: ?[]const []const u8,
+    expose_headers: ?[]const []const u8 = null,
 
     /// A unique identifier for the CORS rule. The ID value can be up to 255
     /// characters long. The IDs help you find a rule in the configuration.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The time in seconds that your browser is to cache the preflight response for
     /// the specified resource. A CORS rule can have only one `maxAgeSeconds`
     /// element.
-    max_age_seconds: ?i32,
+    max_age_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .allowed_headers = "allowedHeaders",

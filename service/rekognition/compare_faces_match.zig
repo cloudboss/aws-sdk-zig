@@ -10,10 +10,10 @@ pub const CompareFacesMatch = struct {
     /// Provides face metadata (bounding box and confidence that the bounding box
     /// actually
     /// contains a face).
-    face: ?ComparedFace,
+    face: ?ComparedFace = null,
 
     /// Level of confidence that the faces match.
-    similarity: ?f32,
+    similarity: ?f32 = null,
 
     pub const json_field_names = .{
         .face = "Face",

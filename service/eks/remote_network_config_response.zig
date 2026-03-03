@@ -6,12 +6,12 @@ const RemotePodNetwork = @import("remote_pod_network.zig").RemotePodNetwork;
 /// configuration after the cluster is created.
 pub const RemoteNetworkConfigResponse = struct {
     /// The list of network CIDRs that can contain hybrid nodes.
-    remote_node_networks: ?[]const RemoteNodeNetwork,
+    remote_node_networks: ?[]const RemoteNodeNetwork = null,
 
     /// The list of network CIDRs that can contain pods that run Kubernetes webhooks
     /// on hybrid
     /// nodes.
-    remote_pod_networks: ?[]const RemotePodNetwork,
+    remote_pod_networks: ?[]const RemotePodNetwork = null,
 
     pub const json_field_names = .{
         .remote_node_networks = "remoteNodeNetworks",

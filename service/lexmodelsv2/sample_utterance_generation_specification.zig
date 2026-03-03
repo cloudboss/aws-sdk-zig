@@ -2,7 +2,7 @@ const BedrockModelSpecification = @import("bedrock_model_specification.zig").Bed
 
 /// Contains specifications for the sample utterance generation feature.
 pub const SampleUtteranceGenerationSpecification = struct {
-    bedrock_model_specification: ?BedrockModelSpecification,
+    bedrock_model_specification: ?BedrockModelSpecification = null,
 
     /// Specifies whether to enable sample utterance generation or not.
     enabled: bool = false,

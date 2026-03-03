@@ -10,7 +10,7 @@ const ThingIndexingMode = @import("thing_indexing_mode.zig").ThingIndexingMode;
 /// Indexing](https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html).
 pub const ThingIndexingConfiguration = struct {
     /// Contains custom field names and their data type.
-    custom_fields: ?[]const Field,
+    custom_fields: ?[]const Field = null,
 
     /// Device Defender indexing mode. Valid values are:
     ///
@@ -23,7 +23,7 @@ pub const ThingIndexingConfiguration = struct {
     ///
     /// For more information about Device Defender violations, see [Device Defender
     /// Detect.](https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-detect.html)
-    device_defender_indexing_mode: ?DeviceDefenderIndexingMode,
+    device_defender_indexing_mode: ?DeviceDefenderIndexingMode = null,
 
     /// Provides additional selections for named shadows and geolocation data.
     ///
@@ -44,7 +44,7 @@ pub const ThingIndexingConfiguration = struct {
     /// information, see
     /// [Managing fleet
     /// indexing](https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html).
-    filter: ?IndexingFilter,
+    filter: ?IndexingFilter = null,
 
     /// Contains fields that are indexed and whose types are already known by the
     /// Fleet Indexing
@@ -52,7 +52,7 @@ pub const ThingIndexingConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html#managed-field) in the *Amazon Web Services IoT Core Developer Guide*.
     ///
     /// You can't modify managed fields by updating fleet indexing configuration.
-    managed_fields: ?[]const Field,
+    managed_fields: ?[]const Field = null,
 
     /// Named shadow indexing mode. Valid values are:
     ///
@@ -64,7 +64,7 @@ pub const ThingIndexingConfiguration = struct {
     ///
     /// For more information about Shadows, see [IoT Device Shadow
     /// service.](https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html)
-    named_shadow_indexing_mode: ?NamedShadowIndexingMode,
+    named_shadow_indexing_mode: ?NamedShadowIndexingMode = null,
 
     /// Thing connectivity indexing mode. Valid values are:
     ///
@@ -73,7 +73,7 @@ pub const ThingIndexingConfiguration = struct {
     /// OFF.
     ///
     /// * OFF - Thing connectivity status indexing is disabled.
-    thing_connectivity_indexing_mode: ?ThingConnectivityIndexingMode,
+    thing_connectivity_indexing_mode: ?ThingConnectivityIndexingMode = null,
 
     /// Thing indexing mode. Valid values are:
     ///

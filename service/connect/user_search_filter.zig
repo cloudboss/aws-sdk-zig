@@ -3,7 +3,7 @@ const ControlPlaneUserAttributeFilter = @import("control_plane_user_attribute_fi
 
 /// Filters to be applied to search results.
 pub const UserSearchFilter = struct {
-    tag_filter: ?ControlPlaneTagFilter,
+    tag_filter: ?ControlPlaneTagFilter = null,
 
     /// An object that can be used to specify Tag conditions or Hierarchy Group
     /// conditions inside the
@@ -22,7 +22,7 @@ pub const UserSearchFilter = struct {
     /// TagFilter or UserAttributeFilter if SearchFilter is specified, combination
     /// of both is not supported and such request
     /// will throw AccessDeniedException.
-    user_attribute_filter: ?ControlPlaneUserAttributeFilter,
+    user_attribute_filter: ?ControlPlaneUserAttributeFilter = null,
 
     pub const json_field_names = .{
         .tag_filter = "TagFilter",

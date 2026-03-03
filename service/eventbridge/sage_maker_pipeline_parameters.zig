@@ -6,7 +6,7 @@ const SageMakerPipelineParameter = @import("sage_maker_pipeline_parameter.zig").
 pub const SageMakerPipelineParameters = struct {
     /// List of Parameter names and values for SageMaker AI Model Building Pipeline
     /// execution.
-    pipeline_parameter_list: ?[]const SageMakerPipelineParameter,
+    pipeline_parameter_list: ?[]const SageMakerPipelineParameter = null,
 
     pub const json_field_names = .{
         .pipeline_parameter_list = "PipelineParameterList",

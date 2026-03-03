@@ -16,17 +16,17 @@ const GitFilePathFilterCriteria = @import("git_file_path_filter_criteria.zig").G
 pub const GitPullRequestFilter = struct {
     /// The field that specifies to filter on branches for the pull request trigger
     /// configuration.
-    branches: ?GitBranchFilterCriteria,
+    branches: ?GitBranchFilterCriteria = null,
 
     /// The field that specifies which pull request events to filter on (OPEN,
     /// UPDATED,
     /// CLOSED) for the trigger configuration.
-    events: ?[]const GitPullRequestEventType,
+    events: ?[]const GitPullRequestEventType = null,
 
     /// The field that specifies to filter on file paths for the pull request
     /// trigger
     /// configuration.
-    file_paths: ?GitFilePathFilterCriteria,
+    file_paths: ?GitFilePathFilterCriteria = null,
 
     pub const json_field_names = .{
         .branches = "branches",

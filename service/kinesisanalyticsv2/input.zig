@@ -11,14 +11,14 @@ const KinesisStreamsInput = @import("kinesis_streams_input.zig").KinesisStreamsI
 /// and the mapping between the two.
 pub const Input = struct {
     /// Describes the number of in-application streams to create.
-    input_parallelism: ?InputParallelism,
+    input_parallelism: ?InputParallelism = null,
 
     /// The InputProcessingConfiguration for the input. An input processor
     /// transforms records as they are received
     /// from the stream, before the application's SQL code executes. Currently, the
     /// only input processing configuration available is
     /// InputLambdaProcessor.
-    input_processing_configuration: ?InputProcessingConfiguration,
+    input_processing_configuration: ?InputProcessingConfiguration = null,
 
     /// Describes the format of the data in the streaming source, and how each data
     /// element maps
@@ -29,11 +29,11 @@ pub const Input = struct {
 
     /// If the streaming source is an Amazon Kinesis Data Firehose delivery stream,
     /// identifies the delivery stream's ARN.
-    kinesis_firehose_input: ?KinesisFirehoseInput,
+    kinesis_firehose_input: ?KinesisFirehoseInput = null,
 
     /// If the streaming source is an Amazon Kinesis data stream, identifies the
     /// stream's Amazon Resource Name (ARN).
-    kinesis_streams_input: ?KinesisStreamsInput,
+    kinesis_streams_input: ?KinesisStreamsInput = null,
 
     /// The name prefix to use when creating an in-application stream. Suppose that
     /// you specify a

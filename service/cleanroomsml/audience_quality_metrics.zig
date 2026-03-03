@@ -8,7 +8,7 @@ pub const AudienceQualityMetrics = struct {
     /// generation job. Values range from 0-1, larger values indicate a better
     /// audience. A recall value approximately equal to the maximum bin size
     /// indicates that the audience model is equivalent to random selection.
-    recall_metric: ?f64,
+    recall_metric: ?f64 = null,
 
     /// The relevance scores of the generated audience.
     relevance_metrics: []const RelevanceMetric,

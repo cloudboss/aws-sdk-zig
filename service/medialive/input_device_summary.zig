@@ -12,59 +12,59 @@ const InputDeviceUhdSettings = @import("input_device_uhd_settings.zig").InputDev
 /// Details of the input device.
 pub const InputDeviceSummary = struct {
     /// The unique ARN of the input device.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Availability Zone associated with this input device.
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// The state of the connection between the input device and AWS.
-    connection_state: ?InputDeviceConnectionState,
+    connection_state: ?InputDeviceConnectionState = null,
 
     /// The status of the action to synchronize the device configuration. If you
     /// change the configuration of the input device (for example, the maximum
     /// bitrate), MediaLive sends the new data to the device. The device might not
     /// update itself immediately. SYNCED means the device has updated its
     /// configuration. SYNCING means that it has not updated its configuration.
-    device_settings_sync_state: ?DeviceSettingsSyncState,
+    device_settings_sync_state: ?DeviceSettingsSyncState = null,
 
     /// The status of software on the input device.
-    device_update_status: ?DeviceUpdateStatus,
+    device_update_status: ?DeviceUpdateStatus = null,
 
     /// Settings that describe an input device that is type HD.
-    hd_device_settings: ?InputDeviceHdSettings,
+    hd_device_settings: ?InputDeviceHdSettings = null,
 
     /// The unique ID of the input device.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The network MAC address of the input device.
-    mac_address: ?[]const u8,
+    mac_address: ?[]const u8 = null,
 
     /// An array of the ARNs for the MediaLive inputs attached to the device.
     /// Returned only if the outputType is MEDIALIVE_INPUT.
-    medialive_input_arns: ?[]const []const u8,
+    medialive_input_arns: ?[]const []const u8 = null,
 
     /// A name that you specify for the input device.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Network settings for the input device.
-    network_settings: ?InputDeviceNetworkSettings,
+    network_settings: ?InputDeviceNetworkSettings = null,
 
     /// The output attachment type of the input device. Specifies MEDIACONNECT_FLOW
     /// if this device is the source for a MediaConnect flow. Specifies
     /// MEDIALIVE_INPUT if this device is the source for a MediaLive input.
-    output_type: ?InputDeviceOutputType,
+    output_type: ?InputDeviceOutputType = null,
 
     /// The unique serial number of the input device.
-    serial_number: ?[]const u8,
+    serial_number: ?[]const u8 = null,
 
     /// A collection of key-value pairs.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the input device.
-    @"type": ?InputDeviceType,
+    @"type": ?InputDeviceType = null,
 
     /// Settings that describe an input device that is type UHD.
-    uhd_device_settings: ?InputDeviceUhdSettings,
+    uhd_device_settings: ?InputDeviceUhdSettings = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

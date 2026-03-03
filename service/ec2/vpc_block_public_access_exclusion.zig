@@ -11,13 +11,13 @@ const Tag = @import("tag.zig").Tag;
 /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html) in the *Amazon VPC User Guide*.
 pub const VpcBlockPublicAccessExclusion = struct {
     /// When the exclusion was created.
-    creation_timestamp: ?i64,
+    creation_timestamp: ?i64 = null,
 
     /// When the exclusion was deleted.
-    deletion_timestamp: ?i64,
+    deletion_timestamp: ?i64 = null,
 
     /// The ID of the exclusion.
-    exclusion_id: ?[]const u8,
+    exclusion_id: ?[]const u8 = null,
 
     /// The exclusion mode for internet gateway traffic.
     ///
@@ -27,24 +27,24 @@ pub const VpcBlockPublicAccessExclusion = struct {
     /// * `allow-egress`: Allow outbound internet traffic from the excluded VPCs and
     ///   subnets. Block inbound internet traffic to the excluded VPCs and subnets.
     ///   Only applies when VPC Block Public Access is set to Bidirectional.
-    internet_gateway_exclusion_mode: ?InternetGatewayExclusionMode,
+    internet_gateway_exclusion_mode: ?InternetGatewayExclusionMode = null,
 
     /// When the exclusion was last updated.
-    last_update_timestamp: ?i64,
+    last_update_timestamp: ?i64 = null,
 
     /// The reason for the current exclusion state.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The ARN of the exclusion.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The state of the exclusion.
-    state: ?VpcBlockPublicAccessExclusionState,
+    state: ?VpcBlockPublicAccessExclusionState = null,
 
     /// `tag` - The key/value combination of a tag assigned to the resource. Use the
     /// tag key in the filter name and the tag value as the filter value.
     /// For example, to find all resources that have a tag with the key `Owner` and
     /// the value `TeamA`, specify `tag:Owner` for the filter name and `TeamA` for
     /// the filter value.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

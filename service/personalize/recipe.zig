@@ -6,25 +6,25 @@ pub const Recipe = struct {
     /// The Amazon Resource Name (ARN) of the algorithm that Amazon Personalize uses
     /// to train
     /// the model.
-    algorithm_arn: ?[]const u8,
+    algorithm_arn: ?[]const u8 = null,
 
     /// The date and time (in Unix format) that the recipe was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The description of the recipe.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ARN of the FeatureTransformation object.
-    feature_transformation_arn: ?[]const u8,
+    feature_transformation_arn: ?[]const u8 = null,
 
     /// The date and time (in Unix format) that the recipe was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The name of the recipe.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the recipe.
-    recipe_arn: ?[]const u8,
+    recipe_arn: ?[]const u8 = null,
 
     /// One of the following values:
     ///
@@ -33,10 +33,10 @@ pub const Recipe = struct {
     /// * RELATED_ITEMS
     ///
     /// * USER_PERSONALIZATION
-    recipe_type: ?[]const u8,
+    recipe_type: ?[]const u8 = null,
 
     /// The status of the recipe.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .algorithm_arn = "algorithmArn",

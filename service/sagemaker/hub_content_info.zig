@@ -14,16 +14,16 @@ pub const HubContentInfo = struct {
     hub_content_arn: []const u8,
 
     /// A description of the hub content.
-    hub_content_description: ?[]const u8,
+    hub_content_description: ?[]const u8 = null,
 
     /// The display name of the hub content.
-    hub_content_display_name: ?[]const u8,
+    hub_content_display_name: ?[]const u8 = null,
 
     /// The name of the hub content.
     hub_content_name: []const u8,
 
     /// The searchable keywords for the hub content.
-    hub_content_search_keywords: ?[]const []const u8,
+    hub_content_search_keywords: ?[]const []const u8 = null,
 
     /// The status of the hub content.
     hub_content_status: HubContentStatus,
@@ -36,13 +36,13 @@ pub const HubContentInfo = struct {
 
     /// The date and time when the hub content was originally created, before any
     /// updates or revisions.
-    original_creation_time: ?i64,
+    original_creation_time: ?i64 = null,
 
     /// The ARN of the public hub content.
-    sage_maker_public_hub_content_arn: ?[]const u8,
+    sage_maker_public_hub_content_arn: ?[]const u8 = null,
 
     /// The support status of the hub content.
-    support_status: ?HubContentSupportStatus,
+    support_status: ?HubContentSupportStatus = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

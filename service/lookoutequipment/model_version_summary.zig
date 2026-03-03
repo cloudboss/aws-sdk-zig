@@ -5,15 +5,15 @@ const ModelVersionStatus = @import("model_version_status.zig").ModelVersionStatu
 /// Contains information about the specific model version.
 pub const ModelVersionSummary = struct {
     /// The time when this model version was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the model that this model version is a
     /// version
     /// of.
-    model_arn: ?[]const u8,
+    model_arn: ?[]const u8 = null,
 
     /// The name of the model that this model version is a version of.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     /// Provides a quality assessment for a model that uses labels. If Lookout for
     /// Equipment determines that the
@@ -30,19 +30,19 @@ pub const ModelVersionSummary = struct {
     /// with
     /// Amazon Lookout for
     /// Equipment](https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html).
-    model_quality: ?ModelQuality,
+    model_quality: ?ModelQuality = null,
 
     /// The version of the model.
-    model_version: ?i64,
+    model_version: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the model version.
-    model_version_arn: ?[]const u8,
+    model_version_arn: ?[]const u8 = null,
 
     /// Indicates how this model version was generated.
-    source_type: ?ModelVersionSourceType,
+    source_type: ?ModelVersionSourceType = null,
 
     /// The current status of the model version.
-    status: ?ModelVersionStatus,
+    status: ?ModelVersionStatus = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

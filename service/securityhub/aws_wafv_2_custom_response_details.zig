@@ -6,16 +6,16 @@ pub const AwsWafv2CustomResponseDetails = struct {
     /// References the response body that you want WAF to return to the web request
     /// client. You can define a custom response for a rule action or a default web
     /// ACL action that is set to block.
-    custom_response_body_key: ?[]const u8,
+    custom_response_body_key: ?[]const u8 = null,
 
     /// The HTTP status code to return to the client. For a list of status codes
     /// that you can use in your custom responses, see
     /// [Supported status codes for custom
     /// response](https://docs.aws.amazon.com/waf/latest/developerguide/customizing-the-response-status-codes.html) in the *WAF Developer Guide.*
-    response_code: ?i32,
+    response_code: ?i32 = null,
 
     /// The HTTP headers to use in the response.
-    response_headers: ?[]const AwsWafv2CustomHttpHeader,
+    response_headers: ?[]const AwsWafv2CustomHttpHeader = null,
 
     pub const json_field_names = .{
         .custom_response_body_key = "CustomResponseBodyKey",

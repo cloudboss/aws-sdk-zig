@@ -13,58 +13,58 @@ pub const EventFilter = struct {
     /// A list of actionability values to filter events. Use this to filter events
     /// based on whether they require action (`ACTION_REQUIRED`), may require action
     /// (`ACTION_MAY_BE_REQUIRED`) or are informational (`INFORMATIONAL`).
-    actionabilities: ?[]const EventActionability,
+    actionabilities: ?[]const EventActionability = null,
 
     /// A list of Amazon Web Services Availability Zones.
-    availability_zones: ?[]const []const u8,
+    availability_zones: ?[]const []const u8 = null,
 
     /// A list of dates and times that the event ended.
-    end_times: ?[]const DateTimeRange,
+    end_times: ?[]const DateTimeRange = null,
 
     /// A list of entity ARNs (unique identifiers).
-    entity_arns: ?[]const []const u8,
+    entity_arns: ?[]const []const u8 = null,
 
     /// A list of entity identifiers, such as EC2 instance IDs (`i-34ab692e`) or EBS
     /// volumes (`vol-426ab23e`).
-    entity_values: ?[]const []const u8,
+    entity_values: ?[]const []const u8 = null,
 
     /// A list of event ARNs (unique identifiers). For example:
     /// `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"`
-    event_arns: ?[]const []const u8,
+    event_arns: ?[]const []const u8 = null,
 
     /// A list of event status codes.
-    event_status_codes: ?[]const eventStatusCode,
+    event_status_codes: ?[]const eventStatusCode = null,
 
     /// A list of event type category codes. Possible values are
     /// `issue`, `accountNotification`, or `scheduledChange`. Currently,
     /// the `investigation` value isn't supported at this time.
-    event_type_categories: ?[]const eventTypeCategory,
+    event_type_categories: ?[]const eventTypeCategory = null,
 
     /// A list of unique identifiers for event types. For example,
     /// `"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".`
-    event_type_codes: ?[]const []const u8,
+    event_type_codes: ?[]const []const u8 = null,
 
     /// A list of dates and times that the event was last updated.
-    last_updated_times: ?[]const DateTimeRange,
+    last_updated_times: ?[]const DateTimeRange = null,
 
     /// A list of persona values to filter events. Use this to filter events based
     /// on their target audience: `OPERATIONS`, `SECURITY`, or `BILLING`.
-    personas: ?[]const EventPersona,
+    personas: ?[]const EventPersona = null,
 
     /// A list of Amazon Web Services Regions.
-    regions: ?[]const []const u8,
+    regions: ?[]const []const u8 = null,
 
     /// The Amazon Web Services services associated with the event. For example,
     /// `EC2`, `RDS`.
-    services: ?[]const []const u8,
+    services: ?[]const []const u8 = null,
 
     /// A list of dates and times that the event began.
-    start_times: ?[]const DateTimeRange,
+    start_times: ?[]const DateTimeRange = null,
 
     /// A map of entity tags attached to the affected entity.
     ///
     /// Currently, the `tags` property isn't supported.
-    tags: ?[]const []const aws.map.StringMapEntry,
+    tags: ?[]const []const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .actionabilities = "actionabilities",

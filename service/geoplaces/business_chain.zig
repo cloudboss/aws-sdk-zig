@@ -2,10 +2,10 @@
 /// example `7-11`.
 pub const BusinessChain = struct {
     /// The Business Chain Id.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The business chain name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "Id",

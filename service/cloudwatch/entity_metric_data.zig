@@ -7,10 +7,10 @@ const MetricDatum = @import("metric_datum.zig").MetricDatum;
 /// it.
 pub const EntityMetricData = struct {
     /// The entity associated with the metrics.
-    entity: ?Entity,
+    entity: ?Entity = null,
 
     /// The metric data.
-    metric_data: ?[]const MetricDatum,
+    metric_data: ?[]const MetricDatum = null,
 
     pub const json_field_names = .{
         .entity = "Entity",

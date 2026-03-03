@@ -5,7 +5,7 @@ pub const Xavc4kIntraCbgProfileSettings = struct {
     /// Specify the XAVC Intra 4k (CBG) Class to set the bitrate of your output.
     /// Outputs of the same class have similar image quality over the operating
     /// points that are valid for that class.
-    xavc_class: ?Xavc4kIntraCbgProfileClass,
+    xavc_class: ?Xavc4kIntraCbgProfileClass = null,
 
     pub const json_field_names = .{
         .xavc_class = "XavcClass",

@@ -39,7 +39,7 @@ pub const ActivatedRule = struct {
     /// you do not use `ActivatedRule|Action`. For all other update requests,
     /// `ActivatedRule|Action` is used instead of
     /// `ActivatedRule|OverrideAction`.
-    action: ?WafAction,
+    action: ?WafAction = null,
 
     /// An array of rules to exclude from a rule group. This is applicable only when
     /// the `ActivatedRule` refers to a `RuleGroup`.
@@ -86,7 +86,7 @@ pub const ActivatedRule = struct {
     /// `Updates:ActivatedRule:RuleId` should be the rule group that you
     /// just removed, and `ExcludedRules` should contain the rules that you
     /// want to exclude.
-    excluded_rules: ?[]const ExcludedRule,
+    excluded_rules: ?[]const ExcludedRule = null,
 
     /// Use the `OverrideAction` to test your `RuleGroup`.
     ///
@@ -103,7 +103,7 @@ pub const ActivatedRule = struct {
     /// `RuleGroup` to a `WebACL`. In this case you do not use
     /// `ActivatedRule|Action`. For all other update requests,
     /// `ActivatedRule|Action` is used instead of `ActivatedRule|OverrideAction`.
-    override_action: ?WafOverrideAction,
+    override_action: ?WafOverrideAction = null,
 
     /// Specifies the order in which the `Rules` in a `WebACL` are evaluated. Rules
     /// with a lower value for
@@ -128,7 +128,7 @@ pub const ActivatedRule = struct {
     /// a RATE_BASED rule to a web ACL without setting the type, the UpdateWebACL
     /// request will fail because the request tries to add a REGULAR rule with the
     /// specified ID, which does not exist.
-    @"type": ?WafRuleType,
+    @"type": ?WafRuleType = null,
 
     pub const json_field_names = .{
         .action = "Action",

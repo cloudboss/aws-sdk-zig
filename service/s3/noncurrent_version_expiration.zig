@@ -22,7 +22,7 @@ pub const NoncurrentVersionExpiration = struct {
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket
     /// lifecycle configurations.
-    newer_noncurrent_versions: ?i32,
+    newer_noncurrent_versions: ?i32 = null,
 
     /// Specifies the number of days an object is noncurrent before Amazon S3 can
     /// perform the associated action.
@@ -35,5 +35,5 @@ pub const NoncurrentVersionExpiration = struct {
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket
     /// lifecycle configurations.
-    noncurrent_days: ?i32,
+    noncurrent_days: ?i32 = null,
 };

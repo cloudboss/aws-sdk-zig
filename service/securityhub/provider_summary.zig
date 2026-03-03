@@ -4,10 +4,10 @@ const ConnectorProviderName = @import("connector_provider_name.zig").ConnectorPr
 /// The connectorV2 third-party provider configuration summary.
 pub const ProviderSummary = struct {
     /// The status for the connectorV2.
-    connector_status: ?ConnectorStatus,
+    connector_status: ?ConnectorStatus = null,
 
     /// The name of the provider.
-    provider_name: ?ConnectorProviderName,
+    provider_name: ?ConnectorProviderName = null,
 
     pub const json_field_names = .{
         .connector_status = "ConnectorStatus",

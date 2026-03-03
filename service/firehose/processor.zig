@@ -9,7 +9,7 @@ const ProcessorType = @import("processor_type.zig").ProcessorType;
 /// `AppendDelimiterToRecord`.
 pub const Processor = struct {
     /// The processor parameters.
-    parameters: ?[]const ProcessorParameter,
+    parameters: ?[]const ProcessorParameter = null,
 
     /// The type of processor.
     @"type": ProcessorType,

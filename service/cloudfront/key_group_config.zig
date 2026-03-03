@@ -6,7 +6,7 @@
 pub const KeyGroupConfig = struct {
     /// A comment to describe the key group. The comment cannot be longer than 128
     /// characters.
-    comment: ?[]const u8,
+    comment: ?[]const u8 = null,
 
     /// A list of the identifiers of the public keys in the key group.
     items: []const []const u8,

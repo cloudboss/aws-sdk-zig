@@ -7,7 +7,7 @@ pub const ListTagsForResourceResponse = struct {
     /// example, a tag with
     /// "Sales" as the key might be added to a resource to indicate its use by the
     /// sales department.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .tags = "Tags",

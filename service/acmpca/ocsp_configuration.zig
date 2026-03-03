@@ -21,7 +21,7 @@ pub const OcspConfiguration = struct {
     /// For more information, see [Customizing Online Certificate Status Protocol
     /// (OCSP)
     /// ](https://docs.aws.amazon.com/privateca/latest/userguide/ocsp-customize.html) in the *Amazon Web Services Private Certificate Authority User Guide*.
-    ocsp_custom_cname: ?[]const u8,
+    ocsp_custom_cname: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .enabled = "Enabled",

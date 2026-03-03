@@ -11,23 +11,23 @@ const StatusReason = @import("status_reason.zig").StatusReason;
 pub const Compliance = struct {
     /// Typically provides an array of enabled security standards in which a
     /// security control is currently enabled.
-    associated_standards: ?[]const AssociatedStandard,
+    associated_standards: ?[]const AssociatedStandard = null,
 
     /// Typically provides the industry or regulatory framework requirements that
     /// are related to a
     /// control. The check for that control is aligned with these requirements.
     ///
     /// Array Members: Maximum number of 32 items.
-    related_requirements: ?[]const []const u8,
+    related_requirements: ?[]const []const u8 = null,
 
     /// Typically provides the unique identifier of a control across standards. For
     /// Security Hub controls, this field consists of an
     /// Amazon Web Services service and a unique number, such as `APIGateway.5`.
-    security_control_id: ?[]const u8,
+    security_control_id: ?[]const u8 = null,
 
     /// Typically an object that includes security control parameter names and
     /// values.
-    security_control_parameters: ?[]const SecurityControlParameter,
+    security_control_parameters: ?[]const SecurityControlParameter = null,
 
     /// Typically summarizes the result of a control check.
     ///
@@ -50,10 +50,10 @@ pub const Compliance = struct {
     /// `NOT_APPLICABLE` for a Security Hub control, Security Hub automatically
     /// archives
     /// the finding after 3 days.
-    status: ?ComplianceStatus,
+    status: ?ComplianceStatus = null,
 
     /// Typically used to provide a list of reasons for the value of `Status`.
-    status_reasons: ?[]const StatusReason,
+    status_reasons: ?[]const StatusReason = null,
 
     pub const json_field_names = .{
         .associated_standards = "AssociatedStandards",

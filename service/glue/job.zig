@@ -26,16 +26,16 @@ pub const Job = struct {
 
     /// The representation of a directed acyclic graph on which both the Glue Studio
     /// visual component and Glue Studio code generation is based.
-    code_gen_configuration_nodes: ?[]const aws.map.MapEntry(CodeGenConfigurationNode),
+    code_gen_configuration_nodes: ?[]const aws.map.MapEntry(CodeGenConfigurationNode) = null,
 
     /// The `JobCommand` that runs this job.
-    command: ?JobCommand,
+    command: ?JobCommand = null,
 
     /// The connections used for this job.
-    connections: ?ConnectionsList,
+    connections: ?ConnectionsList = null,
 
     /// The time and date that this job definition was created.
-    created_on: ?i64,
+    created_on: ?i64 = null,
 
     /// The default arguments for every run of this job, specified as name-value
     /// pairs.
@@ -62,10 +62,10 @@ pub const Job = struct {
     /// jobs, see [Using
     /// job parameters in Ray
     /// jobs](https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html) in the developer guide.
-    default_arguments: ?[]const aws.map.StringMapEntry,
+    default_arguments: ?[]const aws.map.StringMapEntry = null,
 
     /// A description of the job.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether the job is run with a standard or flexible execution
     /// class. The standard execution class is ideal for time-sensitive workloads
@@ -77,12 +77,12 @@ pub const Job = struct {
     /// Only jobs with Glue version 3.0 and above and command type `glueetl` will be
     /// allowed to set `ExecutionClass` to `FLEX`. The flexible execution class is
     /// available for Spark jobs.
-    execution_class: ?ExecutionClass,
+    execution_class: ?ExecutionClass = null,
 
     /// An `ExecutionProperty` specifying the maximum number of concurrent runs
     /// allowed
     /// for this job.
-    execution_property: ?ExecutionProperty,
+    execution_property: ?ExecutionProperty = null,
 
     /// In Spark jobs, `GlueVersion` determines the versions of Apache Spark and
     /// Python
@@ -101,7 +101,7 @@ pub const Job = struct {
     /// guide.
     ///
     /// Jobs that are created without specifying a Glue version default to Glue 0.9.
-    glue_version: ?[]const u8,
+    glue_version: ?[]const u8 = null,
 
     /// A mode that describes how a job was created. Valid values are:
     ///
@@ -113,7 +113,7 @@ pub const Job = struct {
     ///
     /// When the `JobMode` field is missing or null, `SCRIPT` is assigned as the
     /// default value.
-    job_mode: ?JobMode,
+    job_mode: ?JobMode = null,
 
     /// Specifies whether job run queuing is enabled for the job runs for this job.
     ///
@@ -122,13 +122,13 @@ pub const Job = struct {
     ///
     /// If this field does not match the value set in the job run, then the value
     /// from the job run field will be used.
-    job_run_queuing_enabled: ?bool,
+    job_run_queuing_enabled: ?bool = null,
 
     /// The last point in time when this job definition was modified.
-    last_modified_on: ?i64,
+    last_modified_on: ?i64 = null,
 
     /// This field is reserved for future use.
-    log_uri: ?[]const u8,
+    log_uri: ?[]const u8 = null,
 
     /// This field specifies a day of the week and hour for a maintenance window for
     /// streaming jobs. Glue periodically performs maintenance activities. During
@@ -137,7 +137,7 @@ pub const Job = struct {
     /// Glue will restart the job within 3 hours of the specified maintenance
     /// window. For instance, if you set up the maintenance window for Monday at
     /// 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
-    maintenance_window: ?[]const u8,
+    maintenance_window: ?[]const u8 = null,
 
     /// For Glue version 1.0 or earlier jobs, using the standard worker type, the
     /// number of
@@ -168,39 +168,39 @@ pub const Job = struct {
     /// allocate from 2 to 100 DPUs.
     /// The default is 10 DPUs. This job type cannot have a fractional DPU
     /// allocation.
-    max_capacity: ?f64,
+    max_capacity: ?f64 = null,
 
     /// The maximum number of times to retry this job after a JobRun fails.
     max_retries: i32 = 0,
 
     /// The name you assign to this job definition.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Arguments for this job that are not overridden when providing job arguments
     /// in a job run, specified as name-value pairs.
-    non_overridable_arguments: ?[]const aws.map.StringMapEntry,
+    non_overridable_arguments: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies configuration properties of a job notification.
-    notification_property: ?NotificationProperty,
+    notification_property: ?NotificationProperty = null,
 
     /// The number of workers of a defined `workerType` that are allocated when a
     /// job runs.
-    number_of_workers: ?i32,
+    number_of_workers: ?i32 = null,
 
     /// The name of an Glue usage profile associated with the job.
-    profile_name: ?[]const u8,
+    profile_name: ?[]const u8 = null,
 
     /// The name or Amazon Resource Name (ARN) of the IAM role associated with this
     /// job.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     /// The name of the `SecurityConfiguration` structure to be used with this
     /// job.
-    security_configuration: ?[]const u8,
+    security_configuration: ?[]const u8 = null,
 
     /// The details for a source control configuration for a job, allowing
     /// synchronization of job artifacts to or from a remote repository.
-    source_control_details: ?SourceControlDetails,
+    source_control_details: ?SourceControlDetails = null,
 
     /// The job timeout in minutes. This is the maximum time that a job run
     /// can consume resources before it is terminated and enters `TIMEOUT`
@@ -217,7 +217,7 @@ pub const Job = struct {
     ///
     /// For streaming jobs, if you have set up a maintenance window, it will be
     /// restarted during the maintenance window after 7 days.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 
     /// The type of predefined worker that is allocated when a job runs.
     ///
@@ -247,7 +247,7 @@ pub const Job = struct {
     /// * R.4X: 4 M-DPU (16 vCPUs, 128 GB memory)
     ///
     /// * R.8X: 8 M-DPU (32 vCPUs, 256 GB memory)
-    worker_type: ?WorkerType,
+    worker_type: ?WorkerType = null,
 
     pub const json_field_names = .{
         .allocated_capacity = "AllocatedCapacity",

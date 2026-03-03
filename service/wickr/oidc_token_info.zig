@@ -4,31 +4,31 @@
 pub const OidcTokenInfo = struct {
     /// The OAuth access token that can be used to access protected resources on
     /// behalf of the authenticated user.
-    access_token: ?[]const u8,
+    access_token: ?[]const u8 = null,
 
     /// The PKCE code challenge, a transformed version of the code verifier sent
     /// during the authorization request for verification.
-    code_challenge: ?[]const u8,
+    code_challenge: ?[]const u8 = null,
 
     /// The PKCE (Proof Key for Code Exchange) code verifier, a cryptographically
     /// random string used to enhance security in the OAuth flow.
-    code_verifier: ?[]const u8,
+    code_verifier: ?[]const u8 = null,
 
     /// The lifetime of the access token in seconds, indicating when the token will
     /// expire and need to be refreshed.
-    expires_in: ?i64,
+    expires_in: ?i64 = null,
 
     /// The OpenID Connect ID token containing user identity information and
     /// authentication context as a signed JWT.
-    id_token: ?[]const u8,
+    id_token: ?[]const u8 = null,
 
     /// The OAuth refresh token that can be used to obtain new access tokens without
     /// requiring the user to re-authenticate.
-    refresh_token: ?[]const u8,
+    refresh_token: ?[]const u8 = null,
 
     /// The type of access token issued, typically 'Bearer', which indicates how the
     /// token should be used in API requests.
-    token_type: ?[]const u8,
+    token_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_token = "accessToken",

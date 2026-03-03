@@ -4,10 +4,10 @@ const ReceiptType = @import("receipt_type.zig").ReceiptType;
 pub const Receipt = struct {
     /// The Amazon Resource Name (ARN) of the contact channel Incident Manager
     /// engaged.
-    contact_channel_arn: ?[]const u8,
+    contact_channel_arn: ?[]const u8 = null,
 
     /// Information provided during the page acknowledgement.
-    receipt_info: ?[]const u8,
+    receipt_info: ?[]const u8 = null,
 
     /// The time receipt was `SENT`, `DELIVERED`, or
     /// `READ`.

@@ -8,10 +8,10 @@ pub const OutboundEmailContent = struct {
     message_source_type: OutboundMessageSourceType,
 
     /// The raw email body content.
-    raw_message: ?OutboundRawMessage,
+    raw_message: ?OutboundRawMessage = null,
 
     /// Information about template message configuration.
-    templated_message_config: ?TemplatedMessageConfig,
+    templated_message_config: ?TemplatedMessageConfig = null,
 
     pub const json_field_names = .{
         .message_source_type = "MessageSourceType",

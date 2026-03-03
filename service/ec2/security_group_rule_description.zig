@@ -4,8 +4,8 @@
 /// for either an inbound or outbound rule.
 pub const SecurityGroupRuleDescription = struct {
     /// The description of the security group rule.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the security group rule.
-    security_group_rule_id: ?[]const u8,
+    security_group_rule_id: ?[]const u8 = null,
 };

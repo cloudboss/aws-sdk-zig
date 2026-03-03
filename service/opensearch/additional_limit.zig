@@ -8,10 +8,10 @@ pub const AdditionalLimit = struct {
     /// applies to data nodes and specifies the maximum number of data nodes of a
     /// given
     /// instance type can exist without a master node governing them.
-    limit_name: ?[]const u8,
+    limit_name: ?[]const u8 = null,
 
     /// The values of the additional instance type limits.
-    limit_values: ?[]const []const u8,
+    limit_values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .limit_name = "LimitName",

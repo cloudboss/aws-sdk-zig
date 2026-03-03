@@ -17,7 +17,7 @@ pub const ModelDiagnosticsS3OutputConfiguration = struct {
     ///
     /// When you call `DescribeModel` or `DescribeModelVersion`, `prefix` contains
     /// the file path and filename of the model evaluation file.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bucket = "Bucket",

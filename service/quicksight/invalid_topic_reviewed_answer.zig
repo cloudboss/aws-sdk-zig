@@ -3,10 +3,10 @@ const ReviewedAnswerErrorCode = @import("reviewed_answer_error_code.zig").Review
 /// The definition for a `InvalidTopicReviewedAnswer`.
 pub const InvalidTopicReviewedAnswer = struct {
     /// The answer ID for the `InvalidTopicReviewedAnswer`.
-    answer_id: ?[]const u8,
+    answer_id: ?[]const u8 = null,
 
     /// The error that is returned for the `InvalidTopicReviewedAnswer`.
-    @"error": ?ReviewedAnswerErrorCode,
+    @"error": ?ReviewedAnswerErrorCode = null,
 
     pub const json_field_names = .{
         .answer_id = "AnswerId",

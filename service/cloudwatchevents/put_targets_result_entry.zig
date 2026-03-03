@@ -4,13 +4,13 @@ pub const PutTargetsResultEntry = struct {
     /// is
     /// `ConcurrentModificationException`, too many requests were made at the same
     /// time.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message that explains why the target addition failed.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The ID of the target.
-    target_id: ?[]const u8,
+    target_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

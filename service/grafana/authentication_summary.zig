@@ -14,7 +14,7 @@ pub const AuthenticationSummary = struct {
 
     /// Specifies whether the workplace's user authentication method is fully
     /// configured.
-    saml_configuration_status: ?SamlConfigurationStatus,
+    saml_configuration_status: ?SamlConfigurationStatus = null,
 
     pub const json_field_names = .{
         .providers = "providers",

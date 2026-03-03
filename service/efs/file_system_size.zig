@@ -13,23 +13,23 @@ pub const FileSystemSize = struct {
     /// The time at which the size of data, returned in the `Value` field, was
     /// determined. The value is the integer number of seconds since
     /// 1970-01-01T00:00:00Z.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     /// The latest known metered size (in bytes) of data stored in the file system.
     value: i64 = 0,
 
     /// The latest known metered size (in bytes) of data stored in the Archive
     /// storage class.
-    value_in_archive: ?i64,
+    value_in_archive: ?i64 = null,
 
     /// The latest known metered size (in bytes) of data stored in the Infrequent
     /// Access storage
     /// class.
-    value_in_ia: ?i64,
+    value_in_ia: ?i64 = null,
 
     /// The latest known metered size (in bytes) of data stored in the Standard
     /// storage class.
-    value_in_standard: ?i64,
+    value_in_standard: ?i64 = null,
 
     pub const json_field_names = .{
         .timestamp = "Timestamp",

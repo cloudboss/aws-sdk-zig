@@ -3,22 +3,22 @@ const AuthenticationType = @import("authentication_type.zig").AuthenticationType
 /// Describes a user in the user pool.
 pub const User = struct {
     /// The ARN of the user.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The authentication type for the user.
     authentication_type: AuthenticationType,
 
     /// The date and time the user was created in the user pool.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// Specifies whether the user in the user pool is enabled.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The first name, or given name, of the user.
-    first_name: ?[]const u8,
+    first_name: ?[]const u8 = null,
 
     /// The last name, or surname, of the user.
-    last_name: ?[]const u8,
+    last_name: ?[]const u8 = null,
 
     /// The status of the user in the user pool. The status can be one of the
     /// following:
@@ -32,12 +32,12 @@ pub const User = struct {
     /// * COMPROMISED – The user is disabled because of a potential security threat.
     ///
     /// * UNKNOWN – The user status is not known.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     /// The email address of the user.
     ///
     /// Users' email addresses are case-sensitive.
-    user_name: ?[]const u8,
+    user_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

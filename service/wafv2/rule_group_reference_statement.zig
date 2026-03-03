@@ -17,7 +17,7 @@ pub const RuleGroupReferenceStatement = struct {
     ///
     /// Instead of this option, use `RuleActionOverrides`. It accepts any valid
     /// action setting, including `Count`.
-    excluded_rules: ?[]const ExcludedRule,
+    excluded_rules: ?[]const ExcludedRule = null,
 
     /// Action settings to use in the place of the rule actions that are configured
     /// inside the rule group. You specify one override for each rule whose action
@@ -34,7 +34,7 @@ pub const RuleGroupReferenceStatement = struct {
     /// understand how the rule group would handle your web traffic. You can also
     /// permanently override some or all actions, to modify how the rule group
     /// manages your web traffic.
-    rule_action_overrides: ?[]const RuleActionOverride,
+    rule_action_overrides: ?[]const RuleActionOverride = null,
 
     pub const json_field_names = .{
         .arn = "ARN",

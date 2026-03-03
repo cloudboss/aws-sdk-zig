@@ -9,12 +9,12 @@ const SeverityCounts = @import("severity_counts.zig").SeverityCounts;
 /// final tally for the account that owns them.
 pub const AccountAggregation = struct {
     /// Identifies the account that owns the aggregated resource findings.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Counts by severity level for medium severity and higher level findings, plus
     /// a total
     /// for all of the findings.
-    severity_counts: ?SeverityCounts,
+    severity_counts: ?SeverityCounts = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",

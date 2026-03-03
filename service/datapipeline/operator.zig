@@ -48,10 +48,10 @@ pub const Operator = struct {
     /// alpha-numeric values, as symbols may be reserved by AWS Data Pipeline.
     /// User-defined fields that you add to a pipeline should prefix their name with
     /// the string "my".
-    @"type": ?OperatorType,
+    @"type": ?OperatorType = null,
 
     /// The value that the actual field value will be compared with.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "type",

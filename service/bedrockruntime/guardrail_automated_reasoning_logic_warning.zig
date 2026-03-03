@@ -7,15 +7,15 @@ const GuardrailAutomatedReasoningLogicWarningType = @import("guardrail_automated
 pub const GuardrailAutomatedReasoningLogicWarning = struct {
     /// The logical statements that are validated while assuming the policy and
     /// premises.
-    claims: ?[]const GuardrailAutomatedReasoningStatement,
+    claims: ?[]const GuardrailAutomatedReasoningStatement = null,
 
     /// The logical statements that serve as premises under which the claims are
     /// validated.
-    premises: ?[]const GuardrailAutomatedReasoningStatement,
+    premises: ?[]const GuardrailAutomatedReasoningStatement = null,
 
     /// The category of the detected logical issue, such as statements that are
     /// always true or always false.
-    @"type": ?GuardrailAutomatedReasoningLogicWarningType,
+    @"type": ?GuardrailAutomatedReasoningLogicWarningType = null,
 
     pub const json_field_names = .{
         .claims = "claims",

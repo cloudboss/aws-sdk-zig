@@ -8,7 +8,7 @@ pub const ActivitiesResponse = struct {
 
     /// The string to use in a subsequent request to get the next page of results in
     /// a paginated response. This value is null if there are no additional pages.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .item = "Item",

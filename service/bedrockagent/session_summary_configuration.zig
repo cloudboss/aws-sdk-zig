@@ -2,7 +2,7 @@
 pub const SessionSummaryConfiguration = struct {
     /// Maximum number of recent session summaries to include in the agent's prompt
     /// context.
-    max_recent_sessions: ?i32,
+    max_recent_sessions: ?i32 = null,
 
     pub const json_field_names = .{
         .max_recent_sessions = "maxRecentSessions",

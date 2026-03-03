@@ -4,10 +4,10 @@ const BackendAPIAppSyncAuthSettings = @import("backend_api_app_sync_auth_setting
 /// Describes the auth types for your configured data models.
 pub const BackendAPIAuthType = struct {
     /// Describes the authentication mode.
-    mode: ?Mode,
+    mode: ?Mode = null,
 
     /// Describes settings for the authentication mode.
-    settings: ?BackendAPIAppSyncAuthSettings,
+    settings: ?BackendAPIAppSyncAuthSettings = null,
 
     pub const json_field_names = .{
         .mode = "Mode",

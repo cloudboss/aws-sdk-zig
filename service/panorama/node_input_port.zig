@@ -3,19 +3,19 @@ const PortType = @import("port_type.zig").PortType;
 /// A node input port.
 pub const NodeInputPort = struct {
     /// The input port's default value.
-    default_value: ?[]const u8,
+    default_value: ?[]const u8 = null,
 
     /// The input port's description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The input port's max connections.
     max_connections: i32 = 0,
 
     /// The input port's name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The input port's type.
-    @"type": ?PortType,
+    @"type": ?PortType = null,
 
     pub const json_field_names = .{
         .default_value = "DefaultValue",

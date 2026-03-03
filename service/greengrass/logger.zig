@@ -17,7 +17,7 @@ pub const Logger = struct {
 
     /// The amount of file space, in KB, to use if the local file system is used for
     /// logging purposes.
-    space: ?i32,
+    space: ?i32 = null,
 
     /// The type of log output which will be used.
     @"type": LoggerType,

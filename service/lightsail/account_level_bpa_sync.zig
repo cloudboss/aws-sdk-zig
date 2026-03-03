@@ -27,13 +27,13 @@ pub const AccountLevelBpaSync = struct {
     /// A Boolean value that indicates whether account-level block public access is
     /// affecting your
     /// Lightsail buckets.
-    bpa_impacts_lightsail: ?bool,
+    bpa_impacts_lightsail: ?bool = null,
 
     /// The timestamp of when the account-level BPA configuration was last
     /// synchronized. This
     /// value is null when the account-level BPA configuration has not been
     /// synchronized.
-    last_synced_at: ?i64,
+    last_synced_at: ?i64 = null,
 
     /// A message that provides a reason for a `Failed` or `Defaulted`
     /// synchronization status.
@@ -74,7 +74,7 @@ pub const AccountLevelBpaSync = struct {
     ///
     /// * `Unknown` - The reason that synchronization failed is unknown. Contact
     /// Amazon Web Services Support for more information.
-    message: ?BPAStatusMessage,
+    message: ?BPAStatusMessage = null,
 
     /// The status of the account-level BPA synchronization.
     ///
@@ -95,7 +95,7 @@ pub const AccountLevelBpaSync = struct {
     /// You might need to complete further actions if the status is `Failed` or
     /// `Defaulted`. The `message` parameter provides more information for
     /// those statuses.
-    status: ?AccountLevelBpaSyncStatus,
+    status: ?AccountLevelBpaSyncStatus = null,
 
     pub const json_field_names = .{
         .bpa_impacts_lightsail = "bpaImpactsLightsail",

@@ -8,14 +8,14 @@ const AvailableProcessorFeature = @import("available_processor_feature.zig").Ava
 /// when you call `ModifyDBInstance`.
 pub const ValidDBInstanceModificationsMessage = struct {
     /// The valid additional storage options for the DB instance.
-    additional_storage: ?ValidAdditionalStorageOptions,
+    additional_storage: ?ValidAdditionalStorageOptions = null,
 
     /// Valid storage options for your DB instance.
-    storage: ?[]const ValidStorageOptions,
+    storage: ?[]const ValidStorageOptions = null,
 
     /// Indicates whether a DB instance supports using a dedicated log volume (DLV).
-    supports_dedicated_log_volume: ?bool,
+    supports_dedicated_log_volume: ?bool = null,
 
     /// Valid processor features for your DB instance.
-    valid_processor_features: ?[]const AvailableProcessorFeature,
+    valid_processor_features: ?[]const AvailableProcessorFeature = null,
 };

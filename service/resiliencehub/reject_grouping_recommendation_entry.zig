@@ -7,7 +7,7 @@ pub const RejectGroupingRecommendationEntry = struct {
 
     /// Indicates the reason you had selected while rejecting a grouping
     /// recommendation.
-    rejection_reason: ?GroupingRecommendationRejectionReason,
+    rejection_reason: ?GroupingRecommendationRejectionReason = null,
 
     pub const json_field_names = .{
         .grouping_recommendation_id = "groupingRecommendationId",

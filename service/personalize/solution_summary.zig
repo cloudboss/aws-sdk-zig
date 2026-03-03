@@ -3,19 +3,19 @@
 /// [DescribeSolution](https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html) API.
 pub const SolutionSummary = struct {
     /// The date and time (in Unix time) that the solution was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The date and time (in Unix time) that the solution was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The name of the solution.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the recipe used by the solution.
-    recipe_arn: ?[]const u8,
+    recipe_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the solution.
-    solution_arn: ?[]const u8,
+    solution_arn: ?[]const u8 = null,
 
     /// The status of the solution.
     ///
@@ -24,7 +24,7 @@ pub const SolutionSummary = struct {
     /// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
     ///
     /// * DELETE PENDING > DELETE IN_PROGRESS
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date_time = "creationDateTime",

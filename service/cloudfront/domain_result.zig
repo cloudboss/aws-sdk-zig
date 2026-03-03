@@ -6,5 +6,5 @@ pub const DomainResult = struct {
     domain: []const u8,
 
     /// Whether the domain is active or inactive.
-    status: ?DomainStatus,
+    status: ?DomainStatus = null,
 };

@@ -5,10 +5,10 @@ pub const AwsJobExecutionsRolloutConfig = struct {
     /// The rate of increase for a job rollout. This parameter allows you to define
     /// an exponential rate
     /// increase for a job rollout.
-    exponential_rate: ?AwsJobExponentialRolloutRate,
+    exponential_rate: ?AwsJobExponentialRolloutRate = null,
 
     /// The maximum number of OTA update job executions started per minute.
-    maximum_per_minute: ?i32,
+    maximum_per_minute: ?i32 = null,
 
     pub const json_field_names = .{
         .exponential_rate = "exponentialRate",

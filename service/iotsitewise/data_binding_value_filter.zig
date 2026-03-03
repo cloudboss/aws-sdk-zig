@@ -12,23 +12,23 @@ pub const DataBindingValueFilter = struct {
     /// Filter criteria for matching data bindings based on a specific asset. Used
     /// to list all
     /// data bindings referencing a particular asset or its properties.
-    asset: ?AssetBindingValueFilter,
+    asset: ?AssetBindingValueFilter = null,
 
     /// Filter criteria for matching data bindings based on a specific asset model.
     /// Used to list
     /// all data bindings referencing a particular asset model or its properties.
-    asset_model: ?AssetModelBindingValueFilter,
+    asset_model: ?AssetModelBindingValueFilter = null,
 
     /// Filter criteria for matching data bindings based on a specific asset model
     /// property. Used
     /// to list all data bindings referencing a particular property of an asset
     /// model.
-    asset_model_property: ?AssetModelPropertyBindingValueFilter,
+    asset_model_property: ?AssetModelPropertyBindingValueFilter = null,
 
     /// Filter criteria for matching data bindings based on a specific asset
     /// property. Used to
     /// list all data bindings referencing a particular property of an asset.
-    asset_property: ?AssetPropertyBindingValueFilter,
+    asset_property: ?AssetPropertyBindingValueFilter = null,
 
     pub const json_field_names = .{
         .asset = "asset",

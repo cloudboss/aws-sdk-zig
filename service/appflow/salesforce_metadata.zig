@@ -6,7 +6,7 @@ pub const SalesforceMetadata = struct {
     /// The Salesforce APIs that you can have Amazon AppFlow use when your flows
     /// transfers
     /// data to or from Salesforce.
-    data_transfer_apis: ?[]const SalesforceDataTransferApi,
+    data_transfer_apis: ?[]const SalesforceDataTransferApi = null,
 
     /// The OAuth 2.0 grant types that Amazon AppFlow can use when it requests an
     /// access
@@ -35,10 +35,10 @@ pub const SalesforceMetadata = struct {
     /// records.
     ///
     /// The CLIENT_CREDENTIALS value is not supported for Salesforce.
-    oauth_2_grant_types_supported: ?[]const OAuth2GrantType,
+    oauth_2_grant_types_supported: ?[]const OAuth2GrantType = null,
 
     /// The desired authorization scope for the Salesforce account.
-    o_auth_scopes: ?[]const []const u8,
+    o_auth_scopes: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .data_transfer_apis = "dataTransferApis",

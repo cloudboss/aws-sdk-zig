@@ -3,7 +3,7 @@ const DocumentClassifierMode = @import("document_classifier_mode.zig").DocumentC
 /// Configuration required for a document classification model.
 pub const DocumentClassificationConfig = struct {
     /// One or more labels to associate with the custom classifier.
-    labels: ?[]const []const u8,
+    labels: ?[]const []const u8 = null,
 
     /// Classification mode indicates whether the documents are `MULTI_CLASS` or
     /// `MULTI_LABEL`.

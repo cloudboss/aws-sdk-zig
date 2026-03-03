@@ -22,7 +22,7 @@ pub const ServiceDeploymentCircuitBreaker = struct {
     /// The circuit breaker status. Amazon ECS is not using the circuit breaker for
     /// service
     /// deployment failures when the status is `DISABLED`.
-    status: ?ServiceDeploymentRollbackMonitorsStatus,
+    status: ?ServiceDeploymentRollbackMonitorsStatus = null,
 
     /// The threshhold which determines that the service deployment failed.
     ///

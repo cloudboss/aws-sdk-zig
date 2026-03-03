@@ -6,17 +6,17 @@ const SvmEndpoint = @import("svm_endpoint.zig").SvmEndpoint;
 pub const SvmEndpoints = struct {
     /// An endpoint for connecting using the Internet Small Computer Systems
     /// Interface (iSCSI) protocol.
-    iscsi: ?SvmEndpoint,
+    iscsi: ?SvmEndpoint = null,
 
     /// An endpoint for managing SVMs using the NetApp ONTAP CLI, NetApp ONTAP API,
     /// or NetApp CloudManager.
-    management: ?SvmEndpoint,
+    management: ?SvmEndpoint = null,
 
     /// An endpoint for connecting using the Network File System (NFS) protocol.
-    nfs: ?SvmEndpoint,
+    nfs: ?SvmEndpoint = null,
 
     /// An endpoint for connecting using the Server Message Block (SMB) protocol.
-    smb: ?SvmEndpoint,
+    smb: ?SvmEndpoint = null,
 
     pub const json_field_names = .{
         .iscsi = "Iscsi",

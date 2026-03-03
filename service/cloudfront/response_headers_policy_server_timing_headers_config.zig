@@ -24,5 +24,5 @@ pub const ResponseHeadersPolicyServerTimingHeadersConfig = struct {
     /// adds the header to 50% of the responses for requests that match the cache
     /// behavior. You can set the sampling rate to any number 0–100 with up to four
     /// decimal places.
-    sampling_rate: ?f64,
+    sampling_rate: ?f64 = null,
 };

@@ -6,22 +6,22 @@
 pub const ReplicationPendingModifiedValues = struct {
     /// The amount of storage (in gigabytes) that is allocated for the replication
     /// instance.
-    allocated_storage: ?i32,
+    allocated_storage: ?i32 = null,
 
     /// The engine version number of the replication instance.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// Specifies whether the replication instance is a Multi-AZ deployment. You
     /// can't set
     /// the `AvailabilityZone` parameter if the Multi-AZ parameter is set to
     /// `true`.
-    multi_az: ?bool,
+    multi_az: ?bool = null,
 
     /// The type of IP address protocol used by a replication instance, such as IPv4
     /// only or
     /// Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet
     /// supported.
-    network_type: ?[]const u8,
+    network_type: ?[]const u8 = null,
 
     /// The compute and memory capacity of the replication instance as defined for
     /// the specified
@@ -32,7 +32,7 @@ pub const ReplicationPendingModifiedValues = struct {
     /// instance classes, see [ Selecting the right DMS replication instance for
     /// your
     /// migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
-    replication_instance_class: ?[]const u8,
+    replication_instance_class: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allocated_storage = "AllocatedStorage",

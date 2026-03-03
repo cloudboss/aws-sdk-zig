@@ -18,7 +18,7 @@ pub const AppAuthorization = struct {
     auth_type: AuthType,
 
     /// The application URL for the OAuth flow.
-    auth_url: ?[]const u8,
+    auth_url: ?[]const u8 = null,
 
     /// The timestamp of when the app authorization was created.
     created_at: i64,
@@ -26,7 +26,7 @@ pub const AppAuthorization = struct {
     /// The user persona of the app authorization.
     ///
     /// This field should always be `admin`.
-    persona: ?Persona,
+    persona: ?Persona = null,
 
     /// The state of the app authorization.
     ///

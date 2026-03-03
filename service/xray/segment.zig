@@ -10,10 +10,10 @@
 /// documents](https://docs.aws.amazon.com/xray/latest/devguide/aws-xray-interface-api.html#xray-api-segmentdocuments) in the *Amazon Web Services X-Ray Developer Guide*.
 pub const Segment = struct {
     /// The segment document.
-    document: ?[]const u8,
+    document: ?[]const u8 = null,
 
     /// The segment's ID.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .document = "Document",

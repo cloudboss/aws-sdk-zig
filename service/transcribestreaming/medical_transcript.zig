@@ -15,7 +15,7 @@ pub const MedicalTranscript = struct {
     /// alternative transcriptions, channel identification, partial result
     /// stabilization, language
     /// identification, and other transcription-related data.
-    results: ?[]const MedicalResult,
+    results: ?[]const MedicalResult = null,
 
     pub const json_field_names = .{
         .results = "Results",

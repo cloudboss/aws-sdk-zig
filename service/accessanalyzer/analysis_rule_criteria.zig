@@ -8,7 +8,7 @@ pub const AnalysisRuleCriteria = struct {
     /// account. Account IDs can only be applied to the analysis rule criteria for
     /// organization-level analyzers. The list cannot include more than 2,000
     /// account IDs.
-    account_ids: ?[]const []const u8,
+    account_ids: ?[]const []const u8 = null,
 
     /// An array of key-value pairs to match for your resources. You can use the set
     /// of Unicode letters, digits, whitespace, `_`, `.`, `/`, `=`, `+`, and `-`.
@@ -19,7 +19,7 @@ pub const AnalysisRuleCriteria = struct {
     /// For the tag value, you can specify a value that is 0 to 256 characters in
     /// length. If the specified tag value is 0 characters, the rule is applied to
     /// all principals with the specified tag key.
-    resource_tags: ?[]const []const aws.map.StringMapEntry,
+    resource_tags: ?[]const []const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .account_ids = "accountIds",

@@ -10,12 +10,12 @@ pub const ServiceSpecificCredentialMetadata = struct {
     /// The date and time when the service specific credential expires. This field
     /// is only
     /// present for Bedrock API keys that were created with an expiration period.
-    expiration_date: ?i64,
+    expiration_date: ?i64 = null,
 
     /// For Bedrock API keys, this is the public portion of the credential that
     /// includes the IAM
     /// user name and a suffix containing version and creation information.
-    service_credential_alias: ?[]const u8,
+    service_credential_alias: ?[]const u8 = null,
 
     /// The name of the service associated with the service-specific credential.
     service_name: []const u8,

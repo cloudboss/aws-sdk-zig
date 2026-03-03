@@ -9,63 +9,63 @@ pub const TextTranslationJobProperties = struct {
     /// The Amazon Resource Name (ARN) of an AWS Identity Access and Management
     /// (IAM) role
     /// that granted Amazon Translate read access to the job's input data.
-    data_access_role_arn: ?[]const u8,
+    data_access_role_arn: ?[]const u8 = null,
 
     /// The time at which the translation job ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The input configuration properties that were specified when the job was
     /// requested.
-    input_data_config: ?InputDataConfig,
+    input_data_config: ?InputDataConfig = null,
 
     /// The number of documents successfully and unsuccessfully processed during the
     /// translation
     /// job.
-    job_details: ?JobDetails,
+    job_details: ?JobDetails = null,
 
     /// The ID of the translation job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The user-defined name of the translation job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The status of the translation job.
-    job_status: ?JobStatus,
+    job_status: ?JobStatus = null,
 
     /// An explanation of any errors that may have occurred during the translation
     /// job.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// The output configuration properties that were specified when the job was
     /// requested.
-    output_data_config: ?OutputDataConfig,
+    output_data_config: ?OutputDataConfig = null,
 
     /// A list containing the names of the parallel data resources applied to the
     /// translation
     /// job.
-    parallel_data_names: ?[]const []const u8,
+    parallel_data_names: ?[]const []const u8 = null,
 
     /// Settings that modify the translation output.
-    settings: ?TranslationSettings,
+    settings: ?TranslationSettings = null,
 
     /// The language code of the language of the source text. The language must be a
     /// language
     /// supported by Amazon Translate.
-    source_language_code: ?[]const u8,
+    source_language_code: ?[]const u8 = null,
 
     /// The time at which the translation job was submitted.
-    submitted_time: ?i64,
+    submitted_time: ?i64 = null,
 
     /// The language code of the language of the target text. The language must be a
     /// language
     /// supported by Amazon Translate.
-    target_language_codes: ?[]const []const u8,
+    target_language_codes: ?[]const []const u8 = null,
 
     /// A list containing the names of the terminologies applied to a translation
     /// job. Only one
     /// terminology can be applied per StartTextTranslationJob request at this
     /// time.
-    terminology_names: ?[]const []const u8,
+    terminology_names: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .data_access_role_arn = "DataAccessRoleArn",

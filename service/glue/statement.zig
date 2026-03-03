@@ -4,7 +4,7 @@ const StatementState = @import("statement_state.zig").StatementState;
 /// The statement or request for a particular action to occur in a session.
 pub const Statement = struct {
     /// The execution code of the statement.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The unix time and date that the job definition was completed.
     completed_on: i64 = 0,
@@ -13,7 +13,7 @@ pub const Statement = struct {
     id: i32 = 0,
 
     /// The output in JSON.
-    output: ?StatementOutput,
+    output: ?StatementOutput = null,
 
     /// The code execution progress.
     progress: f64 = 0,
@@ -22,7 +22,7 @@ pub const Statement = struct {
     started_on: i64 = 0,
 
     /// The state while request is actioned.
-    state: ?StatementState,
+    state: ?StatementState = null,
 
     pub const json_field_names = .{
         .code = "Code",

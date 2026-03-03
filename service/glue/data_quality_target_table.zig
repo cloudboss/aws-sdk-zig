@@ -1,7 +1,7 @@
 /// An object representing an Glue table.
 pub const DataQualityTargetTable = struct {
     /// The catalog id where the Glue table exists.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The name of the database where the Glue table exists.
     database_name: []const u8,

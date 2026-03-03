@@ -9,17 +9,17 @@ const MatchObjectSize = @import("match_object_size.zig").MatchObjectSize;
 /// operator. Only one of each filter condition is allowed.
 pub const StorageLensGroupOrOperator = struct {
     /// Filters objects that match any of the specified prefixes.
-    match_any_prefix: ?[]const []const u8,
+    match_any_prefix: ?[]const []const u8 = null,
 
     /// Filters objects that match any of the specified suffixes.
-    match_any_suffix: ?[]const []const u8,
+    match_any_suffix: ?[]const []const u8 = null,
 
     /// Filters objects that match any of the specified S3 object tags.
-    match_any_tag: ?[]const S3Tag,
+    match_any_tag: ?[]const S3Tag = null,
 
     /// Filters objects that match the specified object age range.
-    match_object_age: ?MatchObjectAge,
+    match_object_age: ?MatchObjectAge = null,
 
     /// Filters objects that match the specified object size range.
-    match_object_size: ?MatchObjectSize,
+    match_object_size: ?MatchObjectSize = null,
 };

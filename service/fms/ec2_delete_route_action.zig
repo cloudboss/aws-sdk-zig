@@ -3,18 +3,18 @@ const ActionTarget = @import("action_target.zig").ActionTarget;
 /// Information about the DeleteRoute action in Amazon EC2.
 pub const EC2DeleteRouteAction = struct {
     /// A description of the DeleteRoute action.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about the IPv4 CIDR range for the route. The value you specify
     /// must match the CIDR for the route exactly.
-    destination_cidr_block: ?[]const u8,
+    destination_cidr_block: ?[]const u8 = null,
 
     /// Information about the IPv6 CIDR range for the route. The value you specify
     /// must match the CIDR for the route exactly.
-    destination_ipv_6_cidr_block: ?[]const u8,
+    destination_ipv_6_cidr_block: ?[]const u8 = null,
 
     /// Information about the ID of the prefix list for the route.
-    destination_prefix_list_id: ?[]const u8,
+    destination_prefix_list_id: ?[]const u8 = null,
 
     /// Information about the ID of the route table.
     route_table_id: ActionTarget,

@@ -7,26 +7,26 @@ const ImageTagMutabilityExclusionFilter = @import("image_tag_mutability_exclusio
 pub const Repository = struct {
     /// The date and time, in JavaScript date format, when the repository was
     /// created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The encryption configuration for the repository. This determines how the
     /// contents of
     /// your repository are encrypted at rest.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
-    image_scanning_configuration: ?ImageScanningConfiguration,
+    image_scanning_configuration: ?ImageScanningConfiguration = null,
 
     /// The tag mutability setting for the repository.
-    image_tag_mutability: ?ImageTagMutability,
+    image_tag_mutability: ?ImageTagMutability = null,
 
     /// A list of filters that specify which image tags are excluded from the
     /// repository's
     /// image tag mutability setting.
-    image_tag_mutability_exclusion_filters: ?[]const ImageTagMutabilityExclusionFilter,
+    image_tag_mutability_exclusion_filters: ?[]const ImageTagMutabilityExclusionFilter = null,
 
     /// The Amazon Web Services account ID associated with the registry that
     /// contains the repository.
-    registry_id: ?[]const u8,
+    registry_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) that identifies the repository. The ARN
     /// contains the `arn:aws:ecr` namespace, followed by the region of the
@@ -34,14 +34,14 @@ pub const Repository = struct {
     /// repository namespace, and repository name.
     /// For example,
     /// `arn:aws:ecr:region:012345678910:repository-namespace/repository-name`.
-    repository_arn: ?[]const u8,
+    repository_arn: ?[]const u8 = null,
 
     /// The name of the repository.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     /// The URI for the repository. You can use this URI for container image `push`
     /// and `pull` operations.
-    repository_uri: ?[]const u8,
+    repository_uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

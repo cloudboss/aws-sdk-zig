@@ -5,12 +5,12 @@ pub const ImplementationFilter = struct {
     /// A list of service-specific identifiers that can serve as filters. For
     /// example, you can filter for controls with specific Amazon Web Services
     /// Config Rule IDs or Security Hub Control IDs.
-    identifiers: ?[]const []const u8,
+    identifiers: ?[]const []const u8 = null,
 
     /// A list of implementation types that can serve as filters. For example, you
     /// can filter for controls implemented as Amazon Web Services Config Rules by
     /// specifying AWS::Config::ConfigRule as a type.
-    types: ?[]const []const u8,
+    types: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .identifiers = "Identifiers",

@@ -4,23 +4,23 @@ const SchemaVersionVisibility = @import("schema_version_visibility.zig").SchemaV
 /// List item describing a schema version.
 pub const SchemaVersionListItem = struct {
     /// A description of the schema version.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the schema version.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The identifier of the schema version.
-    schema_id: ?[]const u8,
+    schema_id: ?[]const u8 = null,
 
     /// The schema version. If this is left blank, it defaults to the latest
     /// version.
-    semantic_version: ?[]const u8,
+    semantic_version: ?[]const u8 = null,
 
     /// The type of schema version.
-    @"type": ?SchemaVersionType,
+    @"type": ?SchemaVersionType = null,
 
     /// The visibility of the schema version.
-    visibility: ?SchemaVersionVisibility,
+    visibility: ?SchemaVersionVisibility = null,
 
     pub const json_field_names = .{
         .description = "Description",

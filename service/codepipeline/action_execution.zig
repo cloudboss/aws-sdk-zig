@@ -9,37 +9,37 @@ pub const ActionExecution = struct {
     ///
     /// For older executions, this field might be empty. The action execution ID is
     /// available for executions run on or after March 2020.
-    action_execution_id: ?[]const u8,
+    action_execution_id: ?[]const u8 = null,
 
     /// The details of an error returned by a URL external to Amazon Web Services.
-    error_details: ?ErrorDetails,
+    error_details: ?ErrorDetails = null,
 
     /// The external ID of the run of the action.
-    external_execution_id: ?[]const u8,
+    external_execution_id: ?[]const u8 = null,
 
     /// The URL of a resource external to Amazon Web Services that is used when
     /// running the
     /// action (for example, an external repository URL).
-    external_execution_url: ?[]const u8,
+    external_execution_url: ?[]const u8 = null,
 
     /// The last status change of the action.
-    last_status_change: ?i64,
+    last_status_change: ?i64 = null,
 
     /// The ARN of the user who last changed the pipeline.
-    last_updated_by: ?[]const u8,
+    last_updated_by: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the log stream for the action compute.
-    log_stream_arn: ?[]const u8,
+    log_stream_arn: ?[]const u8 = null,
 
     /// A percentage of completeness of the action as it runs.
-    percent_complete: ?i32,
+    percent_complete: ?i32 = null,
 
     /// The status of the action, or for a completed action, the last status of the
     /// action.
-    status: ?ActionExecutionStatus,
+    status: ?ActionExecutionStatus = null,
 
     /// A summary of the run of the action.
-    summary: ?[]const u8,
+    summary: ?[]const u8 = null,
 
     /// The system-generated token used to identify a unique approval request. The
     /// token
@@ -47,7 +47,7 @@ pub const ActionExecution = struct {
     /// command. It is used to validate that the approval request corresponding to
     /// this token is
     /// still valid.
-    token: ?[]const u8,
+    token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action_execution_id = "actionExecutionId",

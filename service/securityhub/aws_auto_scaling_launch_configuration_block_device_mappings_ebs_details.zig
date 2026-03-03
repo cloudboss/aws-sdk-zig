@@ -2,22 +2,22 @@
 /// instance is launched.
 pub const AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails = struct {
     /// Whether to delete the volume when the instance is terminated.
-    delete_on_termination: ?bool,
+    delete_on_termination: ?bool = null,
 
     /// Whether to encrypt the volume.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The number of input/output (I/O) operations per second (IOPS) to provision
     /// for the volume.
     ///
     /// Only supported for `gp3` or `io1` volumes. Required for `io1` volumes. Not
     /// used with `standard`, `gp2`, `st1`, or `sc1` volumes.
-    iops: ?i32,
+    iops: ?i32 = null,
 
     /// The snapshot ID of the volume to use.
     ///
     /// You must specify either `VolumeSize` or `SnapshotId`.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
     /// The volume size, in GiBs. The following are the supported volumes sizes for
     /// each volume type:
@@ -33,7 +33,7 @@ pub const AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails = struc
     /// You must specify either `SnapshotId` or `VolumeSize`. If you specify both
     /// `SnapshotId` and `VolumeSize`, the volume size must be equal or greater than
     /// the size of the snapshot.
-    volume_size: ?i32,
+    volume_size: ?i32 = null,
 
     /// The volume type. Valid values are as follows:
     ///
@@ -48,7 +48,7 @@ pub const AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails = struc
     /// * `st1`
     ///
     /// * `standard`
-    volume_type: ?[]const u8,
+    volume_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .delete_on_termination = "DeleteOnTermination",

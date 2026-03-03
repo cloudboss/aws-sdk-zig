@@ -19,7 +19,7 @@ pub const MessageTemplateOrderField = struct {
     name: []const u8,
 
     /// The order at which the message templates are sorted by.
-    order: ?Order,
+    order: ?Order = null,
 
     pub const json_field_names = .{
         .name = "name",

@@ -14,7 +14,7 @@ pub const CloudWatchLogsConfigurationType = struct {
     /// `/aws/vendedlogs`. For more information, see [Enabling
     /// logging from certain Amazon Web Services
     /// services](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html).
-    log_group_arn: ?[]const u8,
+    log_group_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .log_group_arn = "LogGroupArn",

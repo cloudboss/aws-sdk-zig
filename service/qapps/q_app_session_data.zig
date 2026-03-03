@@ -7,16 +7,16 @@ pub const QAppSessionData = struct {
     card_id: []const u8,
 
     /// The unique identifier of the submission.
-    submission_id: ?[]const u8,
+    submission_id: ?[]const u8 = null,
 
     /// The date and time when the session data is submitted.
-    timestamp: ?i64,
+    timestamp: ?i64 = null,
 
     /// The user who submitted the response for a Q App session.
     user: User,
 
     /// The response submitted for a Q App session.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .card_id = "cardId",

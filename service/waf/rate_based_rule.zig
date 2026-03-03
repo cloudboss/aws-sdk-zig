@@ -44,11 +44,11 @@ pub const RateBasedRule = struct {
     /// "Default_Action." You can't change the name of the metric after you create
     /// the
     /// `RateBasedRule`.
-    metric_name: ?[]const u8,
+    metric_name: ?[]const u8 = null,
 
     /// A friendly name or description for a `RateBasedRule`. You can't change the
     /// name of a `RateBasedRule` after you create it.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The field that AWS WAF uses to determine if requests are likely arriving
     /// from single

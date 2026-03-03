@@ -9,14 +9,14 @@ pub const EnvironmentTemplate = struct {
     created_at: i64,
 
     /// A description of the environment template.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the environment template as displayed in the developer
     /// interface.
-    display_name: ?[]const u8,
+    display_name: ?[]const u8 = null,
 
     /// The customer provided encryption key for the environment template.
-    encryption_key: ?[]const u8,
+    encryption_key: ?[]const u8 = null,
 
     /// The time when the environment template was last modified.
     last_modified_at: i64,
@@ -26,10 +26,10 @@ pub const EnvironmentTemplate = struct {
 
     /// When included, indicates that the environment template is for customer
     /// provisioned and managed infrastructure.
-    provisioning: ?Provisioning,
+    provisioning: ?Provisioning = null,
 
     /// The ID of the recommended version of the environment template.
-    recommended_version: ?[]const u8,
+    recommended_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

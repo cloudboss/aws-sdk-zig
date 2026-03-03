@@ -18,7 +18,7 @@ pub const AsnMatchStatement = struct {
     /// instead of using the IP address that's reported by the web request origin.
     /// Commonly, this is the X-Forwarded-For (XFF) header,
     /// but you can specify any header name.
-    forwarded_ip_config: ?ForwardedIPConfig,
+    forwarded_ip_config: ?ForwardedIPConfig = null,
 
     pub const json_field_names = .{
         .asn_list = "AsnList",

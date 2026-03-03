@@ -6,15 +6,15 @@ const PrefixConfig = @import("prefix_config.zig").PrefixConfig;
 /// output
 /// data when Amazon S3 is used as the destination.
 pub const S3OutputFormatConfig = struct {
-    aggregation_config: ?AggregationConfig,
+    aggregation_config: ?AggregationConfig = null,
 
     /// Indicates the file type that Amazon AppFlow places in the Amazon S3 bucket.
-    file_type: ?FileType,
+    file_type: ?FileType = null,
 
     /// Determines the prefix that Amazon AppFlow applies to the folder name in the
     /// Amazon S3 bucket. You can name folders according to the flow frequency and
     /// date.
-    prefix_config: ?PrefixConfig,
+    prefix_config: ?PrefixConfig = null,
 
     /// If your file output format is Parquet, use this parameter to set whether
     /// Amazon AppFlow preserves the data types in your source data when it writes
@@ -27,7 +27,7 @@ pub const S3OutputFormatConfig = struct {
     /// * `false`: Amazon AppFlow converts all of the source data into strings
     /// when it writes to Amazon S3. For example, an integer of `1` in your
     /// source data becomes the string `"1"` in the output.
-    preserve_source_data_typing: ?bool,
+    preserve_source_data_typing: ?bool = null,
 
     pub const json_field_names = .{
         .aggregation_config = "aggregationConfig",

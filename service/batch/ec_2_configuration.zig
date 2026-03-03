@@ -22,12 +22,12 @@ pub const Ec2Configuration = struct {
     /// Amazon Linux 2
     /// AMI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    image_id_override: ?[]const u8,
+    image_id_override: ?[]const u8 = null,
 
     /// The Kubernetes version for the compute environment. If you don't specify a
     /// value, the latest
     /// version that Batch supports is used.
-    image_kubernetes_version: ?[]const u8,
+    image_kubernetes_version: ?[]const u8 = null,
 
     /// The image type to match with the instance type to select an AMI. The
     /// supported values are

@@ -5,7 +5,7 @@ const SourceType = @import("source_type.zig").SourceType;
 /// Provides details about the configured `SourceConnection`.
 pub const SourceConnectionDetail = struct {
     /// The connection details based on the connection `Type`.
-    connection_parameters: ?SourceConnectionParameters,
+    connection_parameters: ?SourceConnectionParameters = null,
 
     /// Provides details about the product's connection sync and contains the
     /// following sub-fields.
@@ -19,10 +19,10 @@ pub const SourceConnectionDetail = struct {
     /// * `LastSuccessfulSyncTime`
     ///
     /// * `LastSuccessfulSyncProvisioningArtifactID`
-    last_sync: ?LastSync,
+    last_sync: ?LastSync = null,
 
     /// The only supported `SourceConnection` type is Codestar.
-    @"type": ?SourceType,
+    @"type": ?SourceType = null,
 
     pub const json_field_names = .{
         .connection_parameters = "ConnectionParameters",

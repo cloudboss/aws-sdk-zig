@@ -6,7 +6,7 @@ const DeltaTime = @import("delta_time.zig").DeltaTime;
 pub const QueryFilter = struct {
     /// Used to limit data to that which has arrived since the last execution of the
     /// action.
-    delta_time: ?DeltaTime,
+    delta_time: ?DeltaTime = null,
 
     pub const json_field_names = .{
         .delta_time = "deltaTime",

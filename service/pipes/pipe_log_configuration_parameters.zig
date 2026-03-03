@@ -30,10 +30,10 @@ const S3LogDestinationParameters = @import("s3_log_destination_parameters.zig").
 /// EventBridge User Guide*.
 pub const PipeLogConfigurationParameters = struct {
     /// The Amazon CloudWatch Logs logging configuration settings for the pipe.
-    cloudwatch_logs_log_destination: ?CloudwatchLogsLogDestinationParameters,
+    cloudwatch_logs_log_destination: ?CloudwatchLogsLogDestinationParameters = null,
 
     /// The Amazon Data Firehose logging configuration settings for the pipe.
-    firehose_log_destination: ?FirehoseLogDestinationParameters,
+    firehose_log_destination: ?FirehoseLogDestinationParameters = null,
 
     /// Specify `ALL` to include the execution data (specifically, the
     /// `payload`, `awsRequest`, and `awsResponse` fields) in
@@ -46,7 +46,7 @@ pub const PipeLogConfigurationParameters = struct {
     /// Guide*.
     ///
     /// By default, execution data is not included.
-    include_execution_data: ?[]const IncludeExecutionDataOption,
+    include_execution_data: ?[]const IncludeExecutionDataOption = null,
 
     /// The level of logging detail to include. This applies to all log destinations
     /// for the pipe.
@@ -58,7 +58,7 @@ pub const PipeLogConfigurationParameters = struct {
     level: LogLevel,
 
     /// The Amazon S3 logging configuration settings for the pipe.
-    s3_log_destination: ?S3LogDestinationParameters,
+    s3_log_destination: ?S3LogDestinationParameters = null,
 
     pub const json_field_names = .{
         .cloudwatch_logs_log_destination = "CloudwatchLogsLogDestination",

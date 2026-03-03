@@ -6,11 +6,11 @@ const NetworkFabricAttributes = @import("network_fabric_attributes.zig").Network
 pub const NetworkFrameworkAttributes = struct {
     /// Attributes of an Ethereum network for Managed Blockchain resources
     /// participating in an Ethereum network.
-    ethereum: ?NetworkEthereumAttributes,
+    ethereum: ?NetworkEthereumAttributes = null,
 
     /// Attributes of Hyperledger Fabric for a Managed Blockchain network that uses
     /// Hyperledger Fabric.
-    fabric: ?NetworkFabricAttributes,
+    fabric: ?NetworkFabricAttributes = null,
 
     pub const json_field_names = .{
         .ethereum = "Ethereum",

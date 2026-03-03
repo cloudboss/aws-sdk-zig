@@ -9,16 +9,16 @@ pub const Snapshot = struct {
     /// The Availability Zone or Local Zone of the snapshot. For example,
     /// `us-west-1a`
     /// (Availability Zone) or `us-west-2-lax-1a` (Local Zone).
-    availability_zone: ?[]const u8,
+    availability_zone: ?[]const u8 = null,
 
     /// Only for snapshot copies created with time-based snapshot copy operations.
     ///
     /// The completion duration requested for the time-based snapshot copy
     /// operation.
-    completion_duration_minutes: ?i32,
+    completion_duration_minutes: ?i32 = null,
 
     /// The time stamp when the snapshot was completed.
-    completion_time: ?i64,
+    completion_time: ?i64 = null,
 
     /// The data encryption key identifier for the snapshot. This value is a unique
     /// identifier
@@ -30,13 +30,13 @@ pub const Snapshot = struct {
     /// then they belong
     /// to the same volume/snapshot lineage. This parameter is only returned by
     /// DescribeSnapshots.
-    data_encryption_key_id: ?[]const u8,
+    data_encryption_key_id: ?[]const u8 = null,
 
     /// The description for the snapshot.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether the snapshot is encrypted.
-    encrypted: ?bool,
+    encrypted: ?bool = null,
 
     /// The full size of the snapshot, in bytes.
     ///
@@ -44,48 +44,48 @@ pub const Snapshot = struct {
     /// This is the full snapshot size and represents the size of all the blocks
     /// that were
     /// written to the source volume at the time the snapshot was created.
-    full_snapshot_size_in_bytes: ?i64,
+    full_snapshot_size_in_bytes: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the KMS key that was used to protect the
     /// volume encryption key for the parent volume.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The ARN of the Outpost on which the snapshot is stored. For more
     /// information, see [Amazon EBS local snapshots on
     /// Outposts](https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html) in the
     /// *Amazon EBS User Guide*.
-    outpost_arn: ?[]const u8,
+    outpost_arn: ?[]const u8 = null,
 
     /// The Amazon Web Services owner alias, from an Amazon-maintained list
     /// (`amazon`). This is not
     /// the user-configured Amazon Web Services account alias set using the IAM
     /// console.
-    owner_alias: ?[]const u8,
+    owner_alias: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the EBS snapshot.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The progress of the snapshot, as a percentage.
-    progress: ?[]const u8,
+    progress: ?[]const u8 = null,
 
     /// Only for archived snapshots that are temporarily restored. Indicates the
     /// date and
     /// time when a temporarily restored snapshot will be automatically re-archived.
-    restore_expiry_time: ?i64,
+    restore_expiry_time: ?i64 = null,
 
     /// The ID of the snapshot. Each snapshot receives a unique identifier when it
     /// is
     /// created.
-    snapshot_id: ?[]const u8,
+    snapshot_id: ?[]const u8 = null,
 
     /// Reserved for future use.
-    sse_type: ?SSEType,
+    sse_type: ?SSEType = null,
 
     /// The time stamp when the snapshot was initiated.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The snapshot state.
-    state: ?SnapshotState,
+    state: ?SnapshotState = null,
 
     /// Encrypted Amazon EBS snapshots are copied asynchronously. If a snapshot copy
     /// operation fails
@@ -94,7 +94,7 @@ pub const Snapshot = struct {
     /// state details to help you diagnose why the error occurred. This parameter is
     /// only returned by
     /// DescribeSnapshots.
-    state_message: ?[]const u8,
+    state_message: ?[]const u8 = null,
 
     /// The storage tier in which the snapshot is stored. `standard` indicates
     /// that the snapshot is stored in the standard snapshot storage tier and that
@@ -102,10 +102,10 @@ pub const Snapshot = struct {
     /// for use. `archive` indicates that the snapshot is currently archived and
     /// that
     /// it must be restored before it can be used.
-    storage_tier: ?StorageTier,
+    storage_tier: ?StorageTier = null,
 
     /// Any tags assigned to the snapshot.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// Only for snapshot copies.
     ///
@@ -122,14 +122,14 @@ pub const Snapshot = struct {
     ///
     /// * `time-based` - The snapshot copy was created with a time-based
     /// snapshot copy operation.
-    transfer_type: ?TransferType,
+    transfer_type: ?TransferType = null,
 
     /// The ID of the volume that was used to create the snapshot. Snapshots created
     /// by a copy
     /// snapshot operation have an arbitrary volume ID that you should not use for
     /// any purpose.
-    volume_id: ?[]const u8,
+    volume_id: ?[]const u8 = null,
 
     /// The size of the volume, in GiB.
-    volume_size: ?i32,
+    volume_size: ?i32 = null,
 };

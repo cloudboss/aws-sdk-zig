@@ -6,10 +6,10 @@ const Schedule = @import("schedule.zig").Schedule;
 pub const DatasetTrigger = struct {
     /// The dataset whose content creation triggers the creation of this dataset's
     /// contents.
-    dataset: ?TriggeringDataset,
+    dataset: ?TriggeringDataset = null,
 
     /// The Schedule when the trigger is initiated.
-    schedule: ?Schedule,
+    schedule: ?Schedule = null,
 
     pub const json_field_names = .{
         .dataset = "dataset",

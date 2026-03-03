@@ -5,7 +5,7 @@ const EligibleDataSource = @import("eligible_data_source.zig").EligibleDataSourc
 pub const ContentRetrievalRule = struct {
     /// Specifies data sources in a Amazon Q Business application to use for content
     /// generation.
-    eligible_data_sources: ?[]const EligibleDataSource,
+    eligible_data_sources: ?[]const EligibleDataSource = null,
 
     pub const json_field_names = .{
         .eligible_data_sources = "eligibleDataSources",

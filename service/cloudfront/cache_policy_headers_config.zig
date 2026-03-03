@@ -17,5 +17,5 @@ pub const CachePolicyHeadersConfig = struct {
     ///   origin.
     header_behavior: CachePolicyHeaderBehavior,
 
-    headers: ?Headers,
+    headers: ?Headers = null,
 };

@@ -10,18 +10,18 @@ const SectionBasedLayoutConfiguration = @import("section_based_layout_configurat
 pub const LayoutConfiguration = struct {
     /// A free-form is optimized for a fixed width and has more control over the
     /// exact placement of layout elements.
-    free_form_layout: ?FreeFormLayoutConfiguration,
+    free_form_layout: ?FreeFormLayoutConfiguration = null,
 
     /// A type of layout that can be used on a sheet. In a grid layout, visuals snap
     /// to a grid with standard spacing and alignment. Dashboards are displayed as
     /// designed, with options to fit to screen or view at actual size. A grid
     /// layout can be configured to behave in one of two ways when the viewport is
     /// resized: `FIXED` or `RESPONSIVE`.
-    grid_layout: ?GridLayoutConfiguration,
+    grid_layout: ?GridLayoutConfiguration = null,
 
     /// A section based layout organizes visuals into multiple sections and has
     /// customized header, footer and page break.
-    section_based_layout: ?SectionBasedLayoutConfiguration,
+    section_based_layout: ?SectionBasedLayoutConfiguration = null,
 
     pub const json_field_names = .{
         .free_form_layout = "FreeFormLayout",

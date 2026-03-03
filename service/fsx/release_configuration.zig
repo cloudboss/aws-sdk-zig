@@ -25,7 +25,7 @@ pub const ReleaseConfiguration = struct {
     /// in order for that file to be eligible for release. Only files that were
     /// last accessed before this point-in-time are eligible to be released from
     /// the file system.
-    duration_since_last_access: ?DurationSinceLastAccess,
+    duration_since_last_access: ?DurationSinceLastAccess = null,
 
     pub const json_field_names = .{
         .duration_since_last_access = "DurationSinceLastAccess",

@@ -3,8 +3,8 @@ const ClientVpnAuthorizationRuleStatusCode = @import("client_vpn_authorization_r
 /// Describes the state of an authorization rule.
 pub const ClientVpnAuthorizationRuleStatus = struct {
     /// The state of the authorization rule.
-    code: ?ClientVpnAuthorizationRuleStatusCode,
+    code: ?ClientVpnAuthorizationRuleStatusCode = null,
 
     /// A message about the status of the authorization rule, if applicable.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

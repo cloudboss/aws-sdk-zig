@@ -4,14 +4,14 @@ const AuthenticationConfiguration = @import("authentication_configuration.zig").
 /// stream.
 pub const MSKSourceDescription = struct {
     /// The authentication configuration of the Amazon MSK cluster.
-    authentication_configuration: ?AuthenticationConfiguration,
+    authentication_configuration: ?AuthenticationConfiguration = null,
 
     /// Firehose starts retrieving records from the topic within the Amazon MSK
     /// cluster starting with this timestamp.
-    delivery_start_timestamp: ?i64,
+    delivery_start_timestamp: ?i64 = null,
 
     /// The ARN of the Amazon MSK cluster.
-    msk_cluster_arn: ?[]const u8,
+    msk_cluster_arn: ?[]const u8 = null,
 
     /// The start date and time in UTC for the offset position within your MSK topic
     /// from where
@@ -22,10 +22,10 @@ pub const MSKSourceDescription = struct {
     /// SDK or CLI,
     /// you need to set the `ReadFromTimestampUTC` parameter to Epoch
     /// (1970-01-01T00:00:00Z).
-    read_from_timestamp: ?i64,
+    read_from_timestamp: ?i64 = null,
 
     /// The topic name within the Amazon MSK cluster.
-    topic_name: ?[]const u8,
+    topic_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authentication_configuration = "AuthenticationConfiguration",

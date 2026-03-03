@@ -10,72 +10,72 @@ pub const AwsLambdaFunctionDetails = struct {
     /// The instruction set architecture that the function uses. Valid values are
     /// `x86_64` or
     /// `arm64`.
-    architectures: ?[]const []const u8,
+    architectures: ?[]const []const u8 = null,
 
     /// An `AwsLambdaFunctionCode` object.
-    code: ?AwsLambdaFunctionCode,
+    code: ?AwsLambdaFunctionCode = null,
 
     /// The SHA256 hash of the function's deployment package.
-    code_sha_256: ?[]const u8,
+    code_sha_256: ?[]const u8 = null,
 
     /// The function's dead letter queue.
-    dead_letter_config: ?AwsLambdaFunctionDeadLetterConfig,
+    dead_letter_config: ?AwsLambdaFunctionDeadLetterConfig = null,
 
     /// The function's environment variables.
-    environment: ?AwsLambdaFunctionEnvironment,
+    environment: ?AwsLambdaFunctionEnvironment = null,
 
     /// The name of the function.
-    function_name: ?[]const u8,
+    function_name: ?[]const u8 = null,
 
     /// The function that Lambda calls to begin executing your function.
-    handler: ?[]const u8,
+    handler: ?[]const u8 = null,
 
     /// The KMS key that is used to encrypt the function's environment variables.
     /// This key is only returned if you've configured a customer managed customer
     /// managed key.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// Indicates when the function was last updated.
     ///
     /// For more information about the validation and formatting of timestamp fields
     /// in Security Hub, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
-    last_modified: ?[]const u8,
+    last_modified: ?[]const u8 = null,
 
     /// The function's layers.
-    layers: ?[]const AwsLambdaFunctionLayer,
+    layers: ?[]const AwsLambdaFunctionLayer = null,
 
     /// For Lambda@Edge functions, the ARN of the master function.
-    master_arn: ?[]const u8,
+    master_arn: ?[]const u8 = null,
 
     /// The memory that is allocated to the function.
-    memory_size: ?i32,
+    memory_size: ?i32 = null,
 
     /// The type of deployment package that's used to deploy the function code to
     /// Lambda. Set to `Image` for a container image and `Zip` for a .zip file
     /// archive.
-    package_type: ?[]const u8,
+    package_type: ?[]const u8 = null,
 
     /// The latest updated revision of the function or alias.
-    revision_id: ?[]const u8,
+    revision_id: ?[]const u8 = null,
 
     /// The function's execution role.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     /// The runtime environment for the Lambda function.
-    runtime: ?[]const u8,
+    runtime: ?[]const u8 = null,
 
     /// The amount of time that Lambda allows a function to run before stopping it.
-    timeout: ?i32,
+    timeout: ?i32 = null,
 
     /// The function's X-Ray tracing configuration.
-    tracing_config: ?AwsLambdaFunctionTracingConfig,
+    tracing_config: ?AwsLambdaFunctionTracingConfig = null,
 
     /// The version of the Lambda function.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     /// The function's networking configuration.
-    vpc_config: ?AwsLambdaFunctionVpcConfig,
+    vpc_config: ?AwsLambdaFunctionVpcConfig = null,
 
     pub const json_field_names = .{
         .architectures = "Architectures",

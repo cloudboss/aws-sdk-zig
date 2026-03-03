@@ -19,27 +19,27 @@ pub const DeploymentInfo = struct {
     /// Provides information about the results of a deployment, such as whether
     /// instances in
     /// the original environment in a blue/green deployment were not terminated.
-    additional_deployment_status_info: ?[]const u8,
+    additional_deployment_status_info: ?[]const u8 = null,
 
     /// The application name.
-    application_name: ?[]const u8,
+    application_name: ?[]const u8 = null,
 
     /// Information about the automatic rollback configuration associated with the
     /// deployment.
-    auto_rollback_configuration: ?AutoRollbackConfiguration,
+    auto_rollback_configuration: ?AutoRollbackConfiguration = null,
 
     /// Information about blue/green deployment options for this deployment.
-    blue_green_deployment_configuration: ?BlueGreenDeploymentConfiguration,
+    blue_green_deployment_configuration: ?BlueGreenDeploymentConfiguration = null,
 
     /// A timestamp that indicates when the deployment was complete.
-    complete_time: ?i64,
+    complete_time: ?i64 = null,
 
     /// The destination platform type for the deployment (`Lambda`,
     /// `Server`, or `ECS`).
-    compute_platform: ?ComputePlatform,
+    compute_platform: ?ComputePlatform = null,
 
     /// A timestamp that indicates when the deployment was created.
-    create_time: ?i64,
+    create_time: ?i64 = null,
 
     /// The means by which the deployment was created:
     ///
@@ -52,37 +52,37 @@ pub const DeploymentInfo = struct {
     ///
     /// * `CodeDeployAutoUpdate`: An auto-update process created the
     /// deployment when it detected outdated Amazon EC2 instances.
-    creator: ?DeploymentCreator,
+    creator: ?DeploymentCreator = null,
 
     /// The deployment configuration name.
-    deployment_config_name: ?[]const u8,
+    deployment_config_name: ?[]const u8 = null,
 
     /// The deployment group name.
-    deployment_group_name: ?[]const u8,
+    deployment_group_name: ?[]const u8 = null,
 
     /// The unique ID of a deployment.
-    deployment_id: ?[]const u8,
+    deployment_id: ?[]const u8 = null,
 
     /// A summary of the deployment status of the instances in the deployment.
-    deployment_overview: ?DeploymentOverview,
+    deployment_overview: ?DeploymentOverview = null,
 
     /// Messages that contain information about the status of a deployment.
-    deployment_status_messages: ?[]const []const u8,
+    deployment_status_messages: ?[]const []const u8 = null,
 
     /// Information about the type of deployment, either in-place or blue/green, you
     /// want to
     /// run and whether to route deployment traffic behind a load balancer.
-    deployment_style: ?DeploymentStyle,
+    deployment_style: ?DeploymentStyle = null,
 
     /// A comment about the deployment.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Information about any error associated with this deployment.
-    error_information: ?ErrorInformation,
+    error_information: ?ErrorInformation = null,
 
     /// The unique ID for an external resource (for example, a CloudFormation stack
     /// ID) that is linked to this deployment.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// Information about how CodeDeploy handles files that already exist in a
     /// deployment target location but weren't part of the previous successful
@@ -96,7 +96,7 @@ pub const DeploymentInfo = struct {
     ///
     /// * `RETAIN`: The version of the file already on the instance is kept
     /// and used as part of the new deployment.
-    file_exists_behavior: ?FileExistsBehavior,
+    file_exists_behavior: ?FileExistsBehavior = null,
 
     /// If true, then if an `ApplicationStop`, `BeforeBlockTraffic`, or
     /// `AfterBlockTraffic` deployment lifecycle event to an instance fails, then
@@ -140,24 +140,24 @@ pub const DeploymentInfo = struct {
     instance_termination_wait_time_started: bool = false,
 
     /// Information about the load balancer used in the deployment.
-    load_balancer_info: ?LoadBalancerInfo,
+    load_balancer_info: ?LoadBalancerInfo = null,
 
-    override_alarm_configuration: ?AlarmConfiguration,
+    override_alarm_configuration: ?AlarmConfiguration = null,
 
     /// Information about the application revision that was deployed to the
     /// deployment group
     /// before the most recent successful deployment.
-    previous_revision: ?RevisionLocation,
+    previous_revision: ?RevisionLocation = null,
 
-    related_deployments: ?RelatedDeployments,
+    related_deployments: ?RelatedDeployments = null,
 
     /// Information about the location of stored application artifacts and the
     /// service from
     /// which to retrieve them.
-    revision: ?RevisionLocation,
+    revision: ?RevisionLocation = null,
 
     /// Information about a deployment rollback.
-    rollback_info: ?RollbackInfo,
+    rollback_info: ?RollbackInfo = null,
 
     /// A timestamp that indicates when the deployment was deployed to the
     /// deployment
@@ -168,15 +168,15 @@ pub const DeploymentInfo = struct {
     /// time. This is due to differences in the clock settings of backend servers
     /// that
     /// participate in the deployment process.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The current state of the deployment as a whole.
-    status: ?DeploymentStatus,
+    status: ?DeploymentStatus = null,
 
     /// Information about the instances that belong to the replacement environment
     /// in a
     /// blue/green deployment.
-    target_instances: ?TargetInstances,
+    target_instances: ?TargetInstances = null,
 
     /// Indicates whether only instances that are not running the latest application
     /// revision

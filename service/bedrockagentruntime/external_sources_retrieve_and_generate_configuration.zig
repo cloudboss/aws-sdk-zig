@@ -6,7 +6,7 @@ const ExternalSource = @import("external_source.zig").ExternalSource;
 pub const ExternalSourcesRetrieveAndGenerateConfiguration = struct {
     /// The prompt used with the external source wrapper object with the
     /// `retrieveAndGenerate` function.
-    generation_configuration: ?ExternalSourcesGenerationConfiguration,
+    generation_configuration: ?ExternalSourcesGenerationConfiguration = null,
 
     /// The model Amazon Resource Name (ARN) for the external source wrapper object
     /// in the `retrieveAndGenerate` function.

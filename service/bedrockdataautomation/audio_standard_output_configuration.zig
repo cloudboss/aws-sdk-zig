@@ -3,9 +3,9 @@ const AudioStandardGenerativeField = @import("audio_standard_generative_field.zi
 
 /// Standard Output Configuration of Audio
 pub const AudioStandardOutputConfiguration = struct {
-    extraction: ?AudioStandardExtraction,
+    extraction: ?AudioStandardExtraction = null,
 
-    generative_field: ?AudioStandardGenerativeField,
+    generative_field: ?AudioStandardGenerativeField = null,
 
     pub const json_field_names = .{
         .extraction = "extraction",

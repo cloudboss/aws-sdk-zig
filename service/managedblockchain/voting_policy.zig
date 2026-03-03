@@ -8,7 +8,7 @@ pub const VotingPolicy = struct {
     /// percentage of `YES` votes required for the proposal to be approved and the
     /// duration of the proposal. The policy applies to all proposals and is
     /// specified when the network is created.
-    approval_threshold_policy: ?ApprovalThresholdPolicy,
+    approval_threshold_policy: ?ApprovalThresholdPolicy = null,
 
     pub const json_field_names = .{
         .approval_threshold_policy = "ApprovalThresholdPolicy",

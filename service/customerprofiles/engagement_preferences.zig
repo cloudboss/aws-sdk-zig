@@ -3,10 +3,10 @@ const ContactPreference = @import("contact_preference.zig").ContactPreference;
 /// Object that defines users preferred methods of engagement.
 pub const EngagementPreferences = struct {
     /// A list of email-related contact preferences
-    email: ?[]const ContactPreference,
+    email: ?[]const ContactPreference = null,
 
     /// A list of phone-related contact preferences
-    phone: ?[]const ContactPreference,
+    phone: ?[]const ContactPreference = null,
 
     pub const json_field_names = .{
         .email = "Email",

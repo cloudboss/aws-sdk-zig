@@ -12,47 +12,47 @@ const ProductionVariantStatus = @import("production_variant_status.zig").Product
 pub const ProductionVariantSummary = struct {
     /// Settings for the capacity reservation for the compute instances that
     /// SageMaker AI reserves for an endpoint.
-    capacity_reservation_config: ?ProductionVariantCapacityReservationSummary,
+    capacity_reservation_config: ?ProductionVariantCapacityReservationSummary = null,
 
     /// The number of instances associated with the variant.
-    current_instance_count: ?i32,
+    current_instance_count: ?i32 = null,
 
     /// The serverless configuration for the endpoint.
-    current_serverless_config: ?ProductionVariantServerlessConfig,
+    current_serverless_config: ?ProductionVariantServerlessConfig = null,
 
     /// The weight associated with the variant.
-    current_weight: ?f32,
+    current_weight: ?f32 = null,
 
     /// An array of `DeployedImage` objects that specify the Amazon EC2 Container
     /// Registry paths of the inference images deployed on instances of this
     /// `ProductionVariant`.
-    deployed_images: ?[]const DeployedImage,
+    deployed_images: ?[]const DeployedImage = null,
 
     /// The number of instances requested in the
     /// `UpdateEndpointWeightsAndCapacities` request.
-    desired_instance_count: ?i32,
+    desired_instance_count: ?i32 = null,
 
     /// The serverless configuration requested for the endpoint update.
-    desired_serverless_config: ?ProductionVariantServerlessConfig,
+    desired_serverless_config: ?ProductionVariantServerlessConfig = null,
 
     /// The requested weight, as specified in the
     /// `UpdateEndpointWeightsAndCapacities` request.
-    desired_weight: ?f32,
+    desired_weight: ?f32 = null,
 
     /// Settings that control the range in the number of instances that the endpoint
     /// provisions as it scales up or down to accommodate traffic.
-    managed_instance_scaling: ?ProductionVariantManagedInstanceScaling,
+    managed_instance_scaling: ?ProductionVariantManagedInstanceScaling = null,
 
     /// Settings that control how the endpoint routes incoming traffic to the
     /// instances that the endpoint hosts.
-    routing_config: ?ProductionVariantRoutingConfig,
+    routing_config: ?ProductionVariantRoutingConfig = null,
 
     /// The name of the variant.
     variant_name: []const u8,
 
     /// The endpoint variant status which describes the current deployment stage
     /// status or operational status.
-    variant_status: ?[]const ProductionVariantStatus,
+    variant_status: ?[]const ProductionVariantStatus = null,
 
     pub const json_field_names = .{
         .capacity_reservation_config = "CapacityReservationConfig",

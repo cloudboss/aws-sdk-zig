@@ -17,7 +17,7 @@ pub const PredictiveScalingMetricDataQuery = struct {
     ///
     /// Conditional: Within each `MetricDataQuery` object, you must specify either
     /// `Expression` or `MetricStat`, but not both.
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     /// A short name that identifies the object's results in the response. This name
     /// must be
@@ -34,13 +34,13 @@ pub const PredictiveScalingMetricDataQuery = struct {
     /// A human-readable label for this metric or expression. This is especially
     /// useful if
     /// this is a math expression, so that you know what the value represents.
-    label: ?[]const u8,
+    label: ?[]const u8 = null,
 
     /// Information about the metric data to return.
     ///
     /// Conditional: Within each `MetricDataQuery` object, you must specify either
     /// `Expression` or `MetricStat`, but not both.
-    metric_stat: ?PredictiveScalingMetricStat,
+    metric_stat: ?PredictiveScalingMetricStat = null,
 
     /// Indicates whether to return the timestamps and raw data values of this
     /// metric.
@@ -55,7 +55,7 @@ pub const PredictiveScalingMetricDataQuery = struct {
     /// do not
     /// specify anything for `ReturnData`. This sets it to its default
     /// (`true`).
-    return_data: ?bool,
+    return_data: ?bool = null,
 
     pub const json_field_names = .{
         .expression = "Expression",

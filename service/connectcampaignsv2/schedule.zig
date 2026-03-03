@@ -2,7 +2,7 @@
 pub const Schedule = struct {
     end_time: i64,
 
-    refresh_frequency: ?[]const u8,
+    refresh_frequency: ?[]const u8 = null,
 
     start_time: i64,
 

@@ -17,7 +17,7 @@ pub const BuildStatusConfig = struct {
     /// This parameter is used for the `context` parameter in the
     /// GitHub commit status. For more information, see [Create a commit
     /// status](https://developer.github.com/v3/repos/statuses/#create-a-commit-status) in the GitHub developer guide.
-    context: ?[]const u8,
+    context: ?[]const u8 = null,
 
     /// Specifies the target url of the build status CodeBuild sends to the source
     /// provider. The
@@ -34,7 +34,7 @@ pub const BuildStatusConfig = struct {
     /// This parameter is used for the `target_url` parameter in the
     /// GitHub commit status. For more information, see [Create a commit
     /// status](https://developer.github.com/v3/repos/statuses/#create-a-commit-status) in the GitHub developer guide.
-    target_url: ?[]const u8,
+    target_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .context = "context",

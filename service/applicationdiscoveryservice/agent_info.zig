@@ -9,36 +9,36 @@ const AgentStatus = @import("agent_status.zig").AgentStatus;
 /// version for each agent.
 pub const AgentInfo = struct {
     /// The agent or collector ID.
-    agent_id: ?[]const u8,
+    agent_id: ?[]const u8 = null,
 
     /// Network details about the host where the agent or collector resides.
-    agent_network_info_list: ?[]const AgentNetworkInfo,
+    agent_network_info_list: ?[]const AgentNetworkInfo = null,
 
     /// Type of agent.
-    agent_type: ?[]const u8,
+    agent_type: ?[]const u8 = null,
 
     /// Status of the collection process for an agent.
-    collection_status: ?[]const u8,
+    collection_status: ?[]const u8 = null,
 
     /// The ID of the connector.
-    connector_id: ?[]const u8,
+    connector_id: ?[]const u8 = null,
 
     /// The health of the agent.
-    health: ?AgentStatus,
+    health: ?AgentStatus = null,
 
     /// The name of the host where the agent or collector resides. The host can be a
     /// server or
     /// virtual machine.
-    host_name: ?[]const u8,
+    host_name: ?[]const u8 = null,
 
     /// Time since agent health was reported.
-    last_health_ping_time: ?[]const u8,
+    last_health_ping_time: ?[]const u8 = null,
 
     /// Agent's first registration timestamp in UTC.
-    registered_time: ?[]const u8,
+    registered_time: ?[]const u8 = null,
 
     /// The agent or collector version.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .agent_id = "agentId",

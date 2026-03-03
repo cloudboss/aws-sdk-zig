@@ -12,7 +12,7 @@ pub const StartShotDetectionFilter = struct {
     /// If you don't specify `MinSegmentConfidence`, the `GetSegmentDetection`
     /// returns
     /// segments with confidence values greater than or equal to 50 percent.
-    min_segment_confidence: ?f32,
+    min_segment_confidence: ?f32 = null,
 
     pub const json_field_names = .{
         .min_segment_confidence = "MinSegmentConfidence",

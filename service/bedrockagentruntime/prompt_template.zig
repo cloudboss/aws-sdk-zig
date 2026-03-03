@@ -19,7 +19,7 @@ pub const PromptTemplate = struct {
     ///   templates](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt)
     /// * [Use XML tags with Anthropic Claude
     ///   models](https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags)
-    text_prompt_template: ?[]const u8,
+    text_prompt_template: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .text_prompt_template = "textPromptTemplate",

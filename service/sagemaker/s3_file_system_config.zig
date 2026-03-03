@@ -2,7 +2,7 @@
 pub const S3FileSystemConfig = struct {
     /// The file system path where the Amazon S3 storage location will be mounted
     /// within the Amazon SageMaker Studio environment.
-    mount_path: ?[]const u8,
+    mount_path: ?[]const u8 = null,
 
     /// The Amazon S3 URI of the S3 file system configuration.
     s3_uri: []const u8,

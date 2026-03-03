@@ -14,26 +14,26 @@ pub const ClassificationResult = struct {
     /// occurrences of sensitive data in an object. You can do this by referring to
     /// the corresponding sensitive data discovery result for the finding
     /// (classificationDetails.detailedResultsLocation).
-    additional_occurrences: ?bool,
+    additional_occurrences: ?bool = null,
 
     /// The custom data identifiers that detected the sensitive data and the number
     /// of occurrences of the data that they detected.
-    custom_data_identifiers: ?CustomDataIdentifiers,
+    custom_data_identifiers: ?CustomDataIdentifiers = null,
 
     /// The type of content, as a MIME type, that the finding applies to. For
     /// example, application/gzip, for a GNU Gzip compressed archive file, or
     /// application/pdf, for an Adobe Portable Document Format file.
-    mime_type: ?[]const u8,
+    mime_type: ?[]const u8 = null,
 
     /// The category, types, and number of occurrences of the sensitive data that
     /// produced the finding.
-    sensitive_data: ?[]const SensitiveDataItem,
+    sensitive_data: ?[]const SensitiveDataItem = null,
 
     /// The total size, in bytes, of the data that the finding applies to.
-    size_classified: ?i64,
+    size_classified: ?i64 = null,
 
     /// The status of the finding.
-    status: ?ClassificationResultStatus,
+    status: ?ClassificationResultStatus = null,
 
     pub const json_field_names = .{
         .additional_occurrences = "additionalOccurrences",

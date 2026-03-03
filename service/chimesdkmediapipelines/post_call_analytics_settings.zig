@@ -12,7 +12,7 @@ const ContentRedactionOutput = @import("content_redaction_output.zig").ContentRe
 /// transcriptions](https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html) in the *Amazon Transcribe Developer Guide*.
 pub const PostCallAnalyticsSettings = struct {
     /// The content redaction output settings for a post-call analysis task.
-    content_redaction_output: ?ContentRedactionOutput,
+    content_redaction_output: ?ContentRedactionOutput = null,
 
     /// The ARN of the role used by Amazon Web Services Transcribe to upload your
     /// post call analysis. For more information, see
@@ -21,7 +21,7 @@ pub const PostCallAnalyticsSettings = struct {
     data_access_role_arn: []const u8,
 
     /// The ID of the KMS (Key Management Service) key used to encrypt the output.
-    output_encryption_kms_key_id: ?[]const u8,
+    output_encryption_kms_key_id: ?[]const u8 = null,
 
     /// The URL of the Amazon S3 bucket that contains the post-call data.
     output_location: []const u8,

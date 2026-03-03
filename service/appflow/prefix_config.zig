@@ -26,16 +26,16 @@ pub const PrefixConfig = struct {
     /// * Field data types
     ///
     /// * Partition keys
-    path_prefix_hierarchy: ?[]const PathPrefix,
+    path_prefix_hierarchy: ?[]const PathPrefix = null,
 
     /// Determines the level of granularity for the date and time that's included in
     /// the prefix.
-    prefix_format: ?PrefixFormat,
+    prefix_format: ?PrefixFormat = null,
 
     /// Determines the format of the prefix, and whether it applies to the file
     /// name, file path,
     /// or both.
-    prefix_type: ?PrefixType,
+    prefix_type: ?PrefixType = null,
 
     pub const json_field_names = .{
         .path_prefix_hierarchy = "pathPrefixHierarchy",

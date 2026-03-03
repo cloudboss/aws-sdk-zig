@@ -5,13 +5,13 @@ const VideoStandardOutputConfiguration = @import("video_standard_output_configur
 
 /// Standard output configuration
 pub const StandardOutputConfiguration = struct {
-    audio: ?AudioStandardOutputConfiguration,
+    audio: ?AudioStandardOutputConfiguration = null,
 
-    document: ?DocumentStandardOutputConfiguration,
+    document: ?DocumentStandardOutputConfiguration = null,
 
-    image: ?ImageStandardOutputConfiguration,
+    image: ?ImageStandardOutputConfiguration = null,
 
-    video: ?VideoStandardOutputConfiguration,
+    video: ?VideoStandardOutputConfiguration = null,
 
     pub const json_field_names = .{
         .audio = "audio",

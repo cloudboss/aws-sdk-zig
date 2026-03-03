@@ -3,10 +3,10 @@ const InstanceMatchCriteria = @import("instance_match_criteria.zig").InstanceMat
 
 pub const ModifyCapacityReservationRequest = struct {
     /// Reserved. Capacity Reservations you have created are accepted by default.
-    accept: ?bool,
+    accept: ?bool = null,
 
     /// Reserved for future use.
-    additional_info: ?[]const u8,
+    additional_info: ?[]const u8 = null,
 
     /// The ID of the Capacity Reservation.
     capacity_reservation_id: []const u8,
@@ -15,7 +15,7 @@ pub const ModifyCapacityReservationRequest = struct {
     /// actually making the request, and provides an error response. If you have the
     /// required permissions, the error response is `DryRunOperation`. Otherwise, it
     /// is `UnauthorizedOperation`.
-    dry_run: ?bool,
+    dry_run: ?bool = null,
 
     /// The date and time at which the Capacity Reservation expires. When a Capacity
     /// Reservation expires, the reserved capacity is released and you can no longer
@@ -33,7 +33,7 @@ pub const ModifyCapacityReservationRequest = struct {
     /// You must provide an `EndDate` value if `EndDateType` is
     /// `limited`. Omit `EndDate` if `EndDateType` is
     /// `unlimited`.
-    end_date: ?i64,
+    end_date: ?i64 = null,
 
     /// Indicates the way in which the Capacity Reservation ends. A Capacity
     /// Reservation can
@@ -46,12 +46,12 @@ pub const ModifyCapacityReservationRequest = struct {
     /// * `limited` - The Capacity Reservation expires automatically at a
     /// specified date and time. You must provide an `EndDate` value if
     /// `EndDateType` is `limited`.
-    end_date_type: ?EndDateType,
+    end_date_type: ?EndDateType = null,
 
     /// The number of instances for which to reserve capacity. The number of
     /// instances can't
     /// be increased or decreased by more than `1000` in a single request.
-    instance_count: ?i32,
+    instance_count: ?i32 = null,
 
     /// The matching criteria (instance eligibility) that you want to use in the
     /// modified
@@ -67,5 +67,5 @@ pub const ModifyCapacityReservationRequest = struct {
     /// To modify the instance eligibility, the Capacity Reservation must be
     /// completely idle
     /// (zero usage).
-    instance_match_criteria: ?InstanceMatchCriteria,
+    instance_match_criteria: ?InstanceMatchCriteria = null,
 };

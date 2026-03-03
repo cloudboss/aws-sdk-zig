@@ -8,19 +8,19 @@ const MediaStreamPipeline = @import("media_stream_pipeline.zig").MediaStreamPipe
 /// live-streaming pipeline.
 pub const MediaPipeline = struct {
     /// A pipeline that enables users to capture audio and video.
-    media_capture_pipeline: ?MediaCapturePipeline,
+    media_capture_pipeline: ?MediaCapturePipeline = null,
 
     /// The media concatenation pipeline in a media pipeline.
-    media_concatenation_pipeline: ?MediaConcatenationPipeline,
+    media_concatenation_pipeline: ?MediaConcatenationPipeline = null,
 
     /// The media insights pipeline of a media pipeline.
-    media_insights_pipeline: ?MediaInsightsPipeline,
+    media_insights_pipeline: ?MediaInsightsPipeline = null,
 
     /// The connector pipeline of the media pipeline.
-    media_live_connector_pipeline: ?MediaLiveConnectorPipeline,
+    media_live_connector_pipeline: ?MediaLiveConnectorPipeline = null,
 
     /// Designates a media pipeline as a media stream pipeline.
-    media_stream_pipeline: ?MediaStreamPipeline,
+    media_stream_pipeline: ?MediaStreamPipeline = null,
 
     pub const json_field_names = .{
         .media_capture_pipeline = "MediaCapturePipeline",

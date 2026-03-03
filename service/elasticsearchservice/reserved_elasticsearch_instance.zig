@@ -5,7 +5,7 @@ const RecurringCharge = @import("recurring_charge.zig").RecurringCharge;
 /// Details of a reserved Elasticsearch instance.
 pub const ReservedElasticsearchInstance = struct {
     /// The currency code for the reserved Elasticsearch instance offering.
-    currency_code: ?[]const u8,
+    currency_code: ?[]const u8 = null,
 
     /// The duration, in seconds, for which the Elasticsearch instance is reserved.
     duration: i32 = 0,
@@ -14,38 +14,38 @@ pub const ReservedElasticsearchInstance = struct {
     elasticsearch_instance_count: i32 = 0,
 
     /// The Elasticsearch instance type offered by the reserved instance offering.
-    elasticsearch_instance_type: ?ESPartitionInstanceType,
+    elasticsearch_instance_type: ?ESPartitionInstanceType = null,
 
     /// The upfront fixed charge you will paid to purchase the specific reserved
     /// Elasticsearch instance offering.
-    fixed_price: ?f64,
+    fixed_price: ?f64 = null,
 
     /// The payment option as defined in the reserved Elasticsearch instance
     /// offering.
-    payment_option: ?ReservedElasticsearchInstancePaymentOption,
+    payment_option: ?ReservedElasticsearchInstancePaymentOption = null,
 
     /// The charge to your account regardless of whether you are creating any
     /// domains using the instance offering.
-    recurring_charges: ?[]const RecurringCharge,
+    recurring_charges: ?[]const RecurringCharge = null,
 
     /// The customer-specified identifier to track this reservation.
-    reservation_name: ?[]const u8,
+    reservation_name: ?[]const u8 = null,
 
     /// The unique identifier for the reservation.
-    reserved_elasticsearch_instance_id: ?[]const u8,
+    reserved_elasticsearch_instance_id: ?[]const u8 = null,
 
     /// The offering identifier.
-    reserved_elasticsearch_instance_offering_id: ?[]const u8,
+    reserved_elasticsearch_instance_offering_id: ?[]const u8 = null,
 
     /// The time the reservation started.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The state of the reserved Elasticsearch instance.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// The rate you are charged for each hour for the domain that is using this
     /// reserved instance.
-    usage_price: ?f64,
+    usage_price: ?f64 = null,
 
     pub const json_field_names = .{
         .currency_code = "CurrencyCode",

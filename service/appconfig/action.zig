@@ -24,21 +24,21 @@
 /// URI, and ARN for each *action point* defined in the extension.
 pub const Action = struct {
     /// Information about the action.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The action name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// An Amazon Resource Name (ARN) for an Identity and Access Management assume
     /// role.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The extension URI associated to the action point in the extension
     /// definition. The URI
     /// can be an Amazon Resource Name (ARN) for one of the following: an Lambda
     /// function, an Amazon Simple Queue Service queue, an Amazon Simple
     /// Notification Service topic, or the Amazon EventBridge default event bus.
-    uri: ?[]const u8,
+    uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",

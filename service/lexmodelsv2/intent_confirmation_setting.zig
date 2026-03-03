@@ -12,49 +12,49 @@ pub const IntentConfirmationSetting = struct {
     /// When this field is false, confirmation and declination responses aren't
     /// sent. If the `active` field isn't specified, the default is
     /// true.
-    active: ?bool,
+    active: ?bool = null,
 
     /// The `DialogCodeHookInvocationSetting` object associated
     /// with intent's confirmation step. The dialog code hook is triggered
     /// based on these invocation settings when the confirmation next step or
     /// declination next step or failure next step is
     /// `InvokeDialogCodeHook`.
-    code_hook: ?DialogCodeHookInvocationSetting,
+    code_hook: ?DialogCodeHookInvocationSetting = null,
 
     /// A list of conditional branches to evaluate after the intent is
     /// closed.
-    confirmation_conditional: ?ConditionalSpecification,
+    confirmation_conditional: ?ConditionalSpecification = null,
 
     /// Specifies the next step that the bot executes when the customer
     /// confirms the intent.
-    confirmation_next_step: ?DialogState,
+    confirmation_next_step: ?DialogState = null,
 
-    confirmation_response: ?ResponseSpecification,
+    confirmation_response: ?ResponseSpecification = null,
 
     /// A list of conditional branches to evaluate after the intent is
     /// declined.
-    declination_conditional: ?ConditionalSpecification,
+    declination_conditional: ?ConditionalSpecification = null,
 
     /// Specifies the next step that the bot executes when the customer
     /// declines the intent.
-    declination_next_step: ?DialogState,
+    declination_next_step: ?DialogState = null,
 
     /// When the user answers "no" to the question defined in
     /// `promptSpecification`, Amazon Lex responds with this response
     /// to acknowledge that the intent was canceled.
-    declination_response: ?ResponseSpecification,
+    declination_response: ?ResponseSpecification = null,
 
     /// The `DialogCodeHookInvocationSetting` used when the code
     /// hook is invoked during confirmation prompt retries.
-    elicitation_code_hook: ?ElicitationCodeHookInvocationSetting,
+    elicitation_code_hook: ?ElicitationCodeHookInvocationSetting = null,
 
-    failure_conditional: ?ConditionalSpecification,
+    failure_conditional: ?ConditionalSpecification = null,
 
     /// The next step to take in the conversation if the confirmation step
     /// fails.
-    failure_next_step: ?DialogState,
+    failure_next_step: ?DialogState = null,
 
-    failure_response: ?ResponseSpecification,
+    failure_response: ?ResponseSpecification = null,
 
     /// Prompts the user to confirm the intent. This question should have a
     /// yes or no answer.

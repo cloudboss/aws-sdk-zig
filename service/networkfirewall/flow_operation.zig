@@ -13,12 +13,12 @@ const FlowFilter = @import("flow_filter.zig").FlowFilter;
 pub const FlowOperation = struct {
     /// Defines the scope a flow operation. You can use up to 20 filters to
     /// configure a single flow operation.
-    flow_filters: ?[]const FlowFilter,
+    flow_filters: ?[]const FlowFilter = null,
 
     /// The reqested `FlowOperation` ignores flows with an age (in seconds) lower
     /// than `MinimumFlowAgeInSeconds`.
     /// You provide this for start commands.
-    minimum_flow_age_in_seconds: ?i32,
+    minimum_flow_age_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .flow_filters = "FlowFilters",

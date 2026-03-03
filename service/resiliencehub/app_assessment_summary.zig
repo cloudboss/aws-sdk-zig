@@ -14,10 +14,10 @@ pub const AppAssessmentSummary = struct {
     /// Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the
     /// *Amazon Web Services General Reference* guide.
-    app_arn: ?[]const u8,
+    app_arn: ?[]const u8 = null,
 
     /// Version of an application.
-    app_version: ?[]const u8,
+    app_version: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
     /// arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
@@ -29,39 +29,39 @@ pub const AppAssessmentSummary = struct {
     assessment_arn: []const u8,
 
     /// Name of the assessment.
-    assessment_name: ?[]const u8,
+    assessment_name: ?[]const u8 = null,
 
     /// Current status of the assessment for the resiliency policy.
     assessment_status: AssessmentStatus,
 
     /// Current status of compliance for the resiliency policy.
-    compliance_status: ?ComplianceStatus,
+    compliance_status: ?ComplianceStatus = null,
 
     /// Cost for an application.
-    cost: ?Cost,
+    cost: ?Cost = null,
 
     /// Indicates if compliance drifts (deviations) were detected while running an
     /// assessment for
     /// your application.
-    drift_status: ?DriftStatus,
+    drift_status: ?DriftStatus = null,
 
     /// End time for the action.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// Entity that invoked the assessment.
-    invoker: ?AssessmentInvoker,
+    invoker: ?AssessmentInvoker = null,
 
     /// Message from the assessment run.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Current resiliency score for the application.
     resiliency_score: f64 = 0,
 
     /// Starting time for the action.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Name of an application version.
-    version_name: ?[]const u8,
+    version_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .app_arn = "appArn",

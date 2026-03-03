@@ -6,22 +6,22 @@ const entityStatusCode = @import("entity_status_code.zig").entityStatusCode;
 pub const AffectedEntity = struct {
     /// The 12-digit Amazon Web Services account number that contains the affected
     /// entity.
-    aws_account_id: ?[]const u8,
+    aws_account_id: ?[]const u8 = null,
 
     /// The unique identifier for the entity. Format:
     /// `arn:aws:health:*entity-region*:*aws-account*:entity/*entity-id*
     /// `. Example:
     /// `arn:aws:health:us-east-1:111222333444:entity/AVh5GGT7ul1arKr1sE1K`
-    entity_arn: ?[]const u8,
+    entity_arn: ?[]const u8 = null,
 
     /// Additional metadata about the affected entity.
-    entity_metadata: ?[]const aws.map.StringMapEntry,
+    entity_metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// The URL of the affected entity.
-    entity_url: ?[]const u8,
+    entity_url: ?[]const u8 = null,
 
     /// The ID of the affected entity.
-    entity_value: ?[]const u8,
+    entity_value: ?[]const u8 = null,
 
     /// The unique identifier for the event. The event ARN has the
     /// `arn:aws:health:*event-region*::event/*SERVICE*/*EVENT_TYPE_CODE*/*EVENT_TYPE_PLUS_ID*
@@ -31,20 +31,20 @@ pub const AffectedEntity = struct {
     /// For example, an event ARN might look like the following:
     ///
     /// `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
-    event_arn: ?[]const u8,
+    event_arn: ?[]const u8 = null,
 
     /// The most recent time that the entity was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The most recent status of the entity affected by the event. The possible
     /// values are
     /// `IMPAIRED`, `UNIMPAIRED`, `UNKNOWN`, `PENDING`, and `RESOLVED`.
-    status_code: ?entityStatusCode,
+    status_code: ?entityStatusCode = null,
 
     /// A map of entity tags attached to the affected entity.
     ///
     /// Currently, the `tags` property isn't supported.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .aws_account_id = "awsAccountId",

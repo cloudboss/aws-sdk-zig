@@ -8,10 +8,10 @@ pub const BrokerEBSVolumeInfo = struct {
     kafka_broker_node_id: []const u8,
 
     /// EBS volume provisioned throughput information.
-    provisioned_throughput: ?ProvisionedThroughput,
+    provisioned_throughput: ?ProvisionedThroughput = null,
 
     /// Size of the EBS volume to update.
-    volume_size_gb: ?i32,
+    volume_size_gb: ?i32 = null,
 
     pub const json_field_names = .{
         .kafka_broker_node_id = "KafkaBrokerNodeId",

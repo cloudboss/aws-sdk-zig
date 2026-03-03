@@ -4,13 +4,13 @@ const MergeMetadata = @import("merge_metadata.zig").MergeMetadata;
 /// event.
 pub const PullRequestMergedStateChangedEventMetadata = struct {
     /// The name of the branch that the pull request is merged into.
-    destination_reference: ?[]const u8,
+    destination_reference: ?[]const u8 = null,
 
     /// Information about the merge state change event.
-    merge_metadata: ?MergeMetadata,
+    merge_metadata: ?MergeMetadata = null,
 
     /// The name of the repository where the pull request was created.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_reference = "destinationReference",

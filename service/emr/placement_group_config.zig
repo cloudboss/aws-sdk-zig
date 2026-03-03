@@ -20,7 +20,7 @@ pub const PlacementGroupConfig = struct {
     /// Starting with Amazon EMR release 5.23.0, the only supported placement
     /// strategy
     /// is `SPREAD` for the `MASTER` instance role.
-    placement_strategy: ?PlacementGroupStrategy,
+    placement_strategy: ?PlacementGroupStrategy = null,
 
     pub const json_field_names = .{
         .instance_role = "InstanceRole",

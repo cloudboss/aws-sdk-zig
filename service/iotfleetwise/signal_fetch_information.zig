@@ -10,7 +10,7 @@ pub const SignalFetchInformation = struct {
     actions: []const []const u8,
 
     /// The version of the condition language used.
-    condition_language_version: ?i32,
+    condition_language_version: ?i32 = null,
 
     /// The fully qualified name of the signal to be fetched.
     fully_qualified_name: []const u8,

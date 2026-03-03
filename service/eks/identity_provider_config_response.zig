@@ -4,7 +4,7 @@ const OidcIdentityProviderConfig = @import("oidc_identity_provider_config.zig").
 pub const IdentityProviderConfigResponse = struct {
     /// An object representing an OpenID Connect (OIDC) identity provider
     /// configuration.
-    oidc: ?OidcIdentityProviderConfig,
+    oidc: ?OidcIdentityProviderConfig = null,
 
     pub const json_field_names = .{
         .oidc = "oidc",

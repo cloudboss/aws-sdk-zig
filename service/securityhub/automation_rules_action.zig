@@ -6,11 +6,11 @@ const AutomationRulesActionType = @import("automation_rules_action_type.zig").Au
 /// of a rule.
 pub const AutomationRulesAction = struct {
     /// Specifies that the automation rule action is an update to a finding field.
-    finding_fields_update: ?AutomationRulesFindingFieldsUpdate,
+    finding_fields_update: ?AutomationRulesFindingFieldsUpdate = null,
 
     /// Specifies the type of action that Security Hub takes when a finding matches
     /// the defined criteria of a rule.
-    @"type": ?AutomationRulesActionType,
+    @"type": ?AutomationRulesActionType = null,
 
     pub const json_field_names = .{
         .finding_fields_update = "FindingFieldsUpdate",

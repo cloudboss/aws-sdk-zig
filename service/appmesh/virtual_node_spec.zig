@@ -7,24 +7,24 @@ const ServiceDiscovery = @import("service_discovery.zig").ServiceDiscovery;
 /// An object that represents the specification of a virtual node.
 pub const VirtualNodeSpec = struct {
     /// A reference to an object that represents the defaults for backends.
-    backend_defaults: ?BackendDefaults,
+    backend_defaults: ?BackendDefaults = null,
 
     /// The backends that the virtual node is expected to send outbound traffic to.
-    backends: ?[]const Backend,
+    backends: ?[]const Backend = null,
 
     /// The listener that the virtual node is expected to receive inbound traffic
     /// from. You can
     /// specify one listener.
-    listeners: ?[]const Listener,
+    listeners: ?[]const Listener = null,
 
     /// The inbound and outbound access logging information for the virtual node.
-    logging: ?Logging,
+    logging: ?Logging = null,
 
     /// The service discovery information for the virtual node. If your virtual node
     /// does not
     /// expect ingress traffic, you can omit this parameter. If you specify a
     /// `listener`, then you must specify service discovery information.
-    service_discovery: ?ServiceDiscovery,
+    service_discovery: ?ServiceDiscovery = null,
 
     pub const json_field_names = .{
         .backend_defaults = "backendDefaults",

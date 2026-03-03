@@ -21,7 +21,7 @@ pub const AccessTokenItem = struct {
     id: []const u8,
 
     /// The name of the token.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The current status of the token.
     status: TokenStatus,

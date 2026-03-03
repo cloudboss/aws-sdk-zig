@@ -3,14 +3,14 @@
 /// administrator.
 pub const DelegatedService = struct {
     /// The date that the account became a delegated administrator for this service.
-    delegation_enabled_date: ?i64,
+    delegation_enabled_date: ?i64 = null,
 
     /// The name of an Amazon Web Services service that can request an operation for
     /// the specified service.
     /// This is typically in the form of a URL, such as:
     /// `
     /// *servicename*.amazonaws.com`.
-    service_principal: ?[]const u8,
+    service_principal: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .delegation_enabled_date = "DelegationEnabledDate",

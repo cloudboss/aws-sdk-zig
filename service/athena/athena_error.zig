@@ -15,16 +15,16 @@ pub const AthenaError = struct {
     /// **2** - User
     ///
     /// **3** - Other
-    error_category: ?i32,
+    error_category: ?i32 = null,
 
     /// Contains a short description of the error that occurred.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// An integer value that provides specific information about an Athena query
     /// error. For the meaning of specific values, see the [Error Type
     /// Reference](https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference) in the *Amazon Athena User
     /// Guide*.
-    error_type: ?i32,
+    error_type: ?i32 = null,
 
     /// True if the query might succeed if resubmitted.
     retryable: bool = false,

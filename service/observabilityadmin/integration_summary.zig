@@ -4,10 +4,10 @@ const IntegrationStatus = @import("integration_status.zig").IntegrationStatus;
 /// operations.
 pub const IntegrationSummary = struct {
     /// The Amazon Resource Name (ARN) of the S3 Table integration.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The current status of the S3 Table integration.
-    status: ?IntegrationStatus,
+    status: ?IntegrationStatus = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

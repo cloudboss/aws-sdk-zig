@@ -9,38 +9,38 @@ const SecretsManagerConfiguration = @import("secrets_manager_configuration.zig")
 /// Describes an update for a destination in Amazon Redshift.
 pub const RedshiftDestinationUpdate = struct {
     /// The Amazon CloudWatch logging options for your Firehose stream.
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The database connection string.
-    cluster_jdbcurl: ?[]const u8,
+    cluster_jdbcurl: ?[]const u8 = null,
 
     /// The `COPY` command.
-    copy_command: ?CopyCommand,
+    copy_command: ?CopyCommand = null,
 
     /// The user password.
-    password: ?[]const u8,
+    password: ?[]const u8 = null,
 
     /// The data processing configuration.
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The retry behavior in case Firehose is unable to deliver documents to
     /// Amazon Redshift. Default value is 3600 (60 minutes).
-    retry_options: ?RedshiftRetryOptions,
+    retry_options: ?RedshiftRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
     /// more
     /// information, see [Amazon Resource Names (ARNs) and
     /// Amazon Web Services Service
     /// Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// You can update a Firehose stream to enable Amazon S3 backup if it is
     /// disabled. If
     /// backup is enabled, you can't update the Firehose stream to disable it.
-    s3_backup_mode: ?RedshiftS3BackupMode,
+    s3_backup_mode: ?RedshiftS3BackupMode = null,
 
     /// The Amazon S3 destination for backup.
-    s3_backup_update: ?S3DestinationUpdate,
+    s3_backup_update: ?S3DestinationUpdate = null,
 
     /// The Amazon S3 destination.
     ///
@@ -48,13 +48,13 @@ pub const RedshiftDestinationUpdate = struct {
     /// in `RedshiftDestinationUpdate.S3Update` because the Amazon Redshift
     /// `COPY` operation that reads from the S3 bucket doesn't support these
     /// compression formats.
-    s3_update: ?S3DestinationUpdate,
+    s3_update: ?S3DestinationUpdate = null,
 
     /// The configuration that defines how you access secrets for Amazon Redshift.
-    secrets_manager_configuration: ?SecretsManagerConfiguration,
+    secrets_manager_configuration: ?SecretsManagerConfiguration = null,
 
     /// The name of the user.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cloud_watch_logging_options = "CloudWatchLoggingOptions",

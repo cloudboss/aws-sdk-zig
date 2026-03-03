@@ -5,7 +5,7 @@ const ResponseHeadersPolicyRemoveHeader = @import("response_headers_policy_remov
 /// attached to.
 pub const ResponseHeadersPolicyRemoveHeadersConfig = struct {
     /// The list of HTTP header names.
-    items: ?[]const ResponseHeadersPolicyRemoveHeader,
+    items: ?[]const ResponseHeadersPolicyRemoveHeader = null,
 
     /// The number of HTTP header names in the list.
     quantity: i32,

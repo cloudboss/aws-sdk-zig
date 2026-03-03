@@ -10,7 +10,7 @@ pub const BoxConfiguration = struct {
     /// For more information, see [Mapping data source
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Box field names must exist in your Box custom metadata.
-    comment_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    comment_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// `TRUE` to index comments.
     crawl_comments: bool = false,
@@ -36,7 +36,7 @@ pub const BoxConfiguration = struct {
     /// If a file or folder matches both an inclusion and exclusion pattern, the
     /// exclusion
     /// pattern takes precedence and the file or folder isn't included in the index.
-    exclusion_patterns: ?[]const []const u8,
+    exclusion_patterns: ?[]const []const u8 = null,
 
     /// A
     /// list of `DataSourceToIndexFieldMapping` objects that map attributes or
@@ -46,7 +46,7 @@ pub const BoxConfiguration = struct {
     /// information, see [Mapping data source
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Box field names must exist in your Box custom metadata.
-    file_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    file_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of regular expression patterns to include certain files and folders
     /// in your
@@ -57,7 +57,7 @@ pub const BoxConfiguration = struct {
     /// file or folder matches both an inclusion and exclusion pattern, the
     /// exclusion pattern
     /// takes precedence and the file or folder isn't included in the index.
-    inclusion_patterns: ?[]const []const u8,
+    inclusion_patterns: ?[]const []const u8 = null,
 
     /// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains
     /// the key-value pairs required to connect to your Box platform. The secret
@@ -89,7 +89,7 @@ pub const BoxConfiguration = struct {
     /// For more information, see [Mapping data source
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Box field names must exist in your Box custom metadata.
-    task_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    task_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// `TRUE` to use the Slack change log to determine which documents require
     /// updating in the index. Depending on the data source change log's size, it
@@ -101,7 +101,7 @@ pub const BoxConfiguration = struct {
     /// Configuration information for an Amazon VPC to connect to your Box. For
     /// more information, see [Configuring a
     /// VPC](https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
-    vpc_configuration: ?DataSourceVpcConfiguration,
+    vpc_configuration: ?DataSourceVpcConfiguration = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes
     /// or field names of Box web links to Amazon Kendra index field names. To
@@ -110,7 +110,7 @@ pub const BoxConfiguration = struct {
     /// For more information, see [Mapping data source
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The Box field names must exist in your Box custom metadata.
-    web_link_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    web_link_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     pub const json_field_names = .{
         .comment_field_mappings = "CommentFieldMappings",

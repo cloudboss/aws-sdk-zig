@@ -3,43 +3,43 @@ const AsyncJobStatus = @import("async_job_status.zig").AsyncJobStatus;
 /// The batch import job details.
 pub const BatchImport = struct {
     /// The ARN of the batch import job.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Timestamp of when batch import job completed.
-    completion_time: ?[]const u8,
+    completion_time: ?[]const u8 = null,
 
     /// The name of the event type.
-    event_type_name: ?[]const u8,
+    event_type_name: ?[]const u8 = null,
 
     /// The number of records that failed to import.
-    failed_records_count: ?i32,
+    failed_records_count: ?i32 = null,
 
     /// The reason batch import job failed.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The ARN of the IAM role to use for this job request.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// The Amazon S3 location of your data file for batch import.
-    input_path: ?[]const u8,
+    input_path: ?[]const u8 = null,
 
     /// The ID of the batch import job.
-    job_id: ?[]const u8,
+    job_id: ?[]const u8 = null,
 
     /// The Amazon S3 location of your output file.
-    output_path: ?[]const u8,
+    output_path: ?[]const u8 = null,
 
     /// The number of records processed by batch import job.
-    processed_records_count: ?i32,
+    processed_records_count: ?i32 = null,
 
     /// Timestamp of when the batch import job started.
-    start_time: ?[]const u8,
+    start_time: ?[]const u8 = null,
 
     /// The status of the batch import job.
-    status: ?AsyncJobStatus,
+    status: ?AsyncJobStatus = null,
 
     /// The total number of records in the batch import job.
-    total_records_count: ?i32,
+    total_records_count: ?i32 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

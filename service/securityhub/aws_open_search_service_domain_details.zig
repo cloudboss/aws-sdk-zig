@@ -13,54 +13,54 @@ const AwsOpenSearchServiceDomainVpcOptionsDetails = @import("aws_open_search_ser
 pub const AwsOpenSearchServiceDomainDetails = struct {
     /// IAM policy document that specifies the access policies for the OpenSearch
     /// Service domain.
-    access_policies: ?[]const u8,
+    access_policies: ?[]const u8 = null,
 
     /// Specifies options for fine-grained access control.
-    advanced_security_options: ?AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails,
+    advanced_security_options: ?AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails = null,
 
     /// The ARN of the OpenSearch Service domain.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Details about the configuration of an OpenSearch cluster.
-    cluster_config: ?AwsOpenSearchServiceDomainClusterConfigDetails,
+    cluster_config: ?AwsOpenSearchServiceDomainClusterConfigDetails = null,
 
     /// The domain endpoint.
-    domain_endpoint: ?[]const u8,
+    domain_endpoint: ?[]const u8 = null,
 
     /// Additional options for the domain endpoint.
-    domain_endpoint_options: ?AwsOpenSearchServiceDomainDomainEndpointOptionsDetails,
+    domain_endpoint_options: ?AwsOpenSearchServiceDomainDomainEndpointOptionsDetails = null,
 
     /// The domain endpoints. Used if the OpenSearch domain resides in a VPC.
     ///
     /// This is a map of key-value pairs. The key is always `vpc`. The value is the
     /// endpoint.
-    domain_endpoints: ?[]const aws.map.StringMapEntry,
+    domain_endpoints: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the endpoint.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// Details about the configuration for encryption at rest.
-    encryption_at_rest_options: ?AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails,
+    encryption_at_rest_options: ?AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails = null,
 
     /// The version of the domain engine.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// The identifier of the domain.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Configures the CloudWatch Logs to publish for the OpenSearch domain.
-    log_publishing_options: ?AwsOpenSearchServiceDomainLogPublishingOptionsDetails,
+    log_publishing_options: ?AwsOpenSearchServiceDomainLogPublishingOptionsDetails = null,
 
     /// Details about the configuration for node-to-node encryption.
-    node_to_node_encryption_options: ?AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails,
+    node_to_node_encryption_options: ?AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails = null,
 
     /// Information about the status of a domain relative to the latest service
     /// software.
-    service_software_options: ?AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails,
+    service_software_options: ?AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails = null,
 
     /// Information that OpenSearch Service derives based on `VPCOptions` for the
     /// domain.
-    vpc_options: ?AwsOpenSearchServiceDomainVpcOptionsDetails,
+    vpc_options: ?AwsOpenSearchServiceDomainVpcOptionsDetails = null,
 
     pub const json_field_names = .{
         .access_policies = "AccessPolicies",

@@ -8,7 +8,7 @@ pub const LateDataRule = struct {
     rule_configuration: LateDataRuleConfiguration,
 
     /// The name of the late data rule.
-    rule_name: ?[]const u8,
+    rule_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .rule_configuration = "ruleConfiguration",

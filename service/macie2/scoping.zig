@@ -6,11 +6,11 @@ const JobScopingBlock = @import("job_scoping_block.zig").JobScopingBlock;
 pub const Scoping = struct {
     /// The property- and tag-based conditions that determine which objects to
     /// exclude from the analysis.
-    excludes: ?JobScopingBlock,
+    excludes: ?JobScopingBlock = null,
 
     /// The property- and tag-based conditions that determine which objects to
     /// include in the analysis.
-    includes: ?JobScopingBlock,
+    includes: ?JobScopingBlock = null,
 
     pub const json_field_names = .{
         .excludes = "excludes",

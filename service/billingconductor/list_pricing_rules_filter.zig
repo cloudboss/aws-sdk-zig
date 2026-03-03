@@ -3,7 +3,7 @@
 pub const ListPricingRulesFilter = struct {
     /// A list containing the pricing rule Amazon Resource Names (ARNs) to include
     /// in the API response.
-    arns: ?[]const []const u8,
+    arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .arns = "Arns",

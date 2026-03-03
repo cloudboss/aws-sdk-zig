@@ -5,14 +5,14 @@ const DataSetNumericRangeFilterCondition = @import("data_set_numeric_range_filte
 /// range-based filtering.
 pub const DataSetNumericFilterCondition = struct {
     /// The name of the numeric column to filter.
-    column_name: ?[]const u8,
+    column_name: ?[]const u8 = null,
 
     /// A comparison-based filter condition for the numeric column.
-    comparison_filter_condition: ?DataSetNumericComparisonFilterCondition,
+    comparison_filter_condition: ?DataSetNumericComparisonFilterCondition = null,
 
     /// A range-based filter condition for the numeric column, filtering values
     /// between minimum and maximum numbers.
-    range_filter_condition: ?DataSetNumericRangeFilterCondition,
+    range_filter_condition: ?DataSetNumericRangeFilterCondition = null,
 
     pub const json_field_names = .{
         .column_name = "ColumnName",

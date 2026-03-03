@@ -8,7 +8,7 @@ pub const ControlFilter = struct {
     /// types or identifiers. This field allows you to find controls that are
     /// implemented by specific Amazon Web Services services or with specific
     /// service identifiers.
-    implementations: ?ImplementationFilter,
+    implementations: ?ImplementationFilter = null,
 
     pub const json_field_names = .{
         .implementations = "Implementations",

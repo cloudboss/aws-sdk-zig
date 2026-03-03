@@ -7,40 +7,40 @@ const BillingGroupStatus = @import("billing_group_status.zig").BillingGroupStatu
 pub const BillingGroupListElement = struct {
     /// Specifies if the billing group has automatic account association
     /// (`AutoAssociate`) enabled.
-    account_grouping: ?ListBillingGroupAccountGrouping,
+    account_grouping: ?ListBillingGroupAccountGrouping = null,
 
     /// The Amazon Resource Number (ARN) that can be used to uniquely identify the
     /// billing group.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The type of billing group.
-    billing_group_type: ?BillingGroupType,
+    billing_group_type: ?BillingGroupType = null,
 
-    computation_preference: ?ComputationPreference,
+    computation_preference: ?ComputationPreference = null,
 
     /// The time when the billing group was created.
     creation_time: i64 = 0,
 
     /// The description of the billing group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The most recent time when the billing group was modified.
     last_modified_time: i64 = 0,
 
     /// The name of the billing group.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The account ID that serves as the main account in a billing group.
-    primary_account_id: ?[]const u8,
+    primary_account_id: ?[]const u8 = null,
 
     /// The number of accounts in the particular billing group.
     size: i64 = 0,
 
     /// The billing group status. Only one of the valid values can be used.
-    status: ?BillingGroupStatus,
+    status: ?BillingGroupStatus = null,
 
     /// The reason why the billing group is in its current status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_grouping = "AccountGrouping",

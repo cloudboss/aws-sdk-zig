@@ -5,44 +5,44 @@ const AnalyticsModality = @import("analytics_modality.zig").AnalyticsModality;
 /// An object containing information about a specific utterance.
 pub const UtteranceSpecification = struct {
     /// The name of the intent that the utterance is associated to.
-    associated_intent_name: ?[]const u8,
+    associated_intent_name: ?[]const u8 = null,
 
     /// The name of the slot that the utterance is associated to.
-    associated_slot_name: ?[]const u8,
+    associated_slot_name: ?[]const u8 = null,
 
     /// The duration in milliseconds of the audio associated with the utterance.
-    audio_voice_duration_millis: ?i64,
+    audio_voice_duration_millis: ?i64 = null,
 
     /// The identifier of the alias of the bot that the utterance was made to.
-    bot_alias_id: ?[]const u8,
+    bot_alias_id: ?[]const u8 = null,
 
     /// The identifier for the audio of the bot response.
-    bot_response_audio_voice_id: ?[]const u8,
+    bot_response_audio_voice_id: ?[]const u8 = null,
 
     /// A list of objects containing information about the bot response to the
     /// utterance.
-    bot_responses: ?[]const UtteranceBotResponse,
+    bot_responses: ?[]const UtteranceBotResponse = null,
 
     /// The version of the bot that the utterance was made to.
-    bot_version: ?[]const u8,
+    bot_version: ?[]const u8 = null,
 
     /// The channel that is integrated with the bot that the utterance was made to.
-    channel: ?[]const u8,
+    channel: ?[]const u8 = null,
 
     /// The date and time when the conversation in which the utterance took place
     /// ended. A conversation is defined as a unique combination of a `sessionId`
     /// and an `originatingRequestId`.
-    conversation_end_time: ?i64,
+    conversation_end_time: ?i64 = null,
 
     /// The date and time when the conversation in which the utterance took place
     /// began. A conversation is defined as a unique combination of a `sessionId`
     /// and an `originatingRequestId`.
-    conversation_start_time: ?i64,
+    conversation_start_time: ?i64 = null,
 
     /// The type of dialog action that the utterance is associated to. See the
     /// `type` field in
     /// [DialogAction](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_DialogAction.html) for more information.
-    dialog_action_type: ?[]const u8,
+    dialog_action_type: ?[]const u8 = null,
 
     /// The input type of the utterance. The possible values are as follows:
     ///
@@ -63,13 +63,13 @@ pub const UtteranceSpecification = struct {
     /// * Text format
     ///
     /// * `text/plain; charset=utf-8`
-    input_type: ?[]const u8,
+    input_type: ?[]const u8 = null,
 
     /// The state of the intent that the utterance is associated to.
-    intent_state: ?IntentState,
+    intent_state: ?IntentState = null,
 
     /// The locale of the bot that the utterance was made to.
-    locale_id: ?[]const u8,
+    locale_id: ?[]const u8 = null,
 
     /// The mode of the session. The possible values are as follows:
     ///
@@ -81,7 +81,7 @@ pub const UtteranceSpecification = struct {
     ///   Multi-Frequency) key presses.
     ///
     /// * `MultiMode` – The session consisted of multiple modes.
-    mode: ?AnalyticsModality,
+    mode: ?AnalyticsModality = null,
 
     /// The output type of the utterance. The possible values are as follows:
     ///
@@ -94,22 +94,22 @@ pub const UtteranceSpecification = struct {
     /// * `audio/` (defaults to `mpeg`)
     ///
     /// * `text/plain; charset=utf-8`
-    output_type: ?[]const u8,
+    output_type: ?[]const u8 = null,
 
     /// The identifier of the session that the utterance was made in.
-    session_id: ?[]const u8,
+    session_id: ?[]const u8 = null,
 
     /// The slots that have been filled in the session by the time of the utterance.
-    slots_filled_in_session: ?[]const u8,
+    slots_filled_in_session: ?[]const u8 = null,
 
     /// The text of the utterance.
-    utterance: ?[]const u8,
+    utterance: ?[]const u8 = null,
 
     /// The identifier of the request associated with the utterance.
-    utterance_request_id: ?[]const u8,
+    utterance_request_id: ?[]const u8 = null,
 
     /// The date and time when the utterance took place.
-    utterance_timestamp: ?i64,
+    utterance_timestamp: ?i64 = null,
 
     /// Specifies whether the bot understood the utterance or not.
     utterance_understood: bool = false,

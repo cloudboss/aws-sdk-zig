@@ -8,13 +8,13 @@ const UpdateTarget = @import("update_target.zig").UpdateTarget;
 /// the previously certified maintenance release.
 pub const MaintenanceTrack = struct {
     /// The version number for the cluster release.
-    database_version: ?[]const u8,
+    database_version: ?[]const u8 = null,
 
     /// The name of the maintenance track. Possible values are `current` and
     /// `trailing`.
-    maintenance_track_name: ?[]const u8,
+    maintenance_track_name: ?[]const u8 = null,
 
     /// An array of UpdateTarget objects to update with the maintenance
     /// track.
-    update_targets: ?[]const UpdateTarget,
+    update_targets: ?[]const UpdateTarget = null,
 };

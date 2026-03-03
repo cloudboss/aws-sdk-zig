@@ -10,31 +10,31 @@ pub const Integration = struct {
     /// An optional set of non-secret key–value pairs that contains additional
     /// contextual information for encryption. This can only be provided if
     /// `KMSKeyId` is provided.
-    additional_encryption_context: ?[]const aws.map.StringMapEntry,
+    additional_encryption_context: ?[]const aws.map.StringMapEntry = null,
 
     /// The time that the integration was created, in UTC.
     create_time: i64,
 
     /// Selects source tables for the integration using Maxwell filter syntax.
-    data_filter: ?[]const u8,
+    data_filter: ?[]const u8 = null,
 
     /// A description for the integration.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A list of errors associated with the integration.
-    errors: ?[]const IntegrationError,
+    errors: ?[]const IntegrationError = null,
 
     /// The Amazon Resource Name (ARN) for the integration.
     integration_arn: []const u8,
 
     /// Properties associated with the integration.
-    integration_config: ?IntegrationConfig,
+    integration_config: ?IntegrationConfig = null,
 
     /// A unique name for the integration.
     integration_name: []const u8,
 
     /// The ARN of a KMS key used for encrypting the channel.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The ARN for the source of the integration.
     source_arn: []const u8,
@@ -57,7 +57,7 @@ pub const Integration = struct {
     status: IntegrationStatus,
 
     /// Metadata assigned to the resource consisting of a list of key-value pairs.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ARN for the target of the integration.
     target_arn: []const u8,

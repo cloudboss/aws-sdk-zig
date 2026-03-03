@@ -4,10 +4,10 @@ const SidewalkSendDataToDevice = @import("sidewalk_send_data_to_device.zig").Sid
 /// WirelessMetadata object.
 pub const WirelessMetadata = struct {
     /// LoRaWAN device info.
-    lo_ra_wan: ?LoRaWANSendDataToDevice,
+    lo_ra_wan: ?LoRaWANSendDataToDevice = null,
 
     /// The Sidewalk account credentials.
-    sidewalk: ?SidewalkSendDataToDevice,
+    sidewalk: ?SidewalkSendDataToDevice = null,
 
     pub const json_field_names = .{
         .lo_ra_wan = "LoRaWAN",

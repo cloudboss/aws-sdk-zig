@@ -1,10 +1,10 @@
 /// A managed policy that is attached to an IAM principal.
 pub const AwsIamAttachedManagedPolicy = struct {
     /// The ARN of the policy.
-    policy_arn: ?[]const u8,
+    policy_arn: ?[]const u8 = null,
 
     /// The name of the policy.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .policy_arn = "PolicyArn",

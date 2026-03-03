@@ -25,24 +25,24 @@ pub const ContainerGroupDefinition = struct {
     /// the resource across all Amazon Web Services Regions. Format is
     /// `arn:aws:gamelift:[region]::containergroupdefinition/[container group
     /// definition name]:[version]`.
-    container_group_definition_arn: ?[]const u8,
+    container_group_definition_arn: ?[]const u8 = null,
 
     /// The type of container group. Container group type determines how Amazon
     /// GameLift Servers deploys the
     /// container group on each fleet instance.
-    container_group_type: ?ContainerGroupType,
+    container_group_type: ?ContainerGroupType = null,
 
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The definition for the game server container in this group. This property is
     /// used only
     /// when the container group type is `GAME_SERVER`. This container definition
     /// specifies
     /// a container image with the game server build.
-    game_server_container_definition: ?GameServerContainerDefinition,
+    game_server_container_definition: ?GameServerContainerDefinition = null,
 
     /// A descriptive identifier for the container group definition. The name value
     /// is unique in an Amazon Web Services Region.
@@ -59,7 +59,7 @@ pub const ContainerGroupDefinition = struct {
     /// Migrate to
     /// server SDK version
     /// 5.](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html)
-    operating_system: ?ContainerOperatingSystem,
+    operating_system: ?ContainerOperatingSystem = null,
 
     /// Current status of the container group definition resource. Values include:
     ///
@@ -82,7 +82,7 @@ pub const ContainerGroupDefinition = struct {
     /// container group definition resource in failed status will be deleted within
     /// a few
     /// minutes.
-    status: ?ContainerGroupDefinitionStatus,
+    status: ?ContainerGroupDefinitionStatus = null,
 
     /// Additional information about a container group definition that's in `FAILED`
     /// status. Possible reasons include:
@@ -113,14 +113,14 @@ pub const ContainerGroupDefinition = struct {
     /// * At least one of the container images referenced in the
     /// container group definition uses a different operating system than the one
     /// defined for the container group.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The set of definitions for support containers in this group. A container
     /// group definition
     /// might have zero support container definitions. Support container can be used
     /// in any type of
     /// container group.
-    support_container_definitions: ?[]const SupportContainerDefinition,
+    support_container_definitions: ?[]const SupportContainerDefinition = null,
 
     /// The amount of memory (in MiB) on a fleet instance to allocate for the
     /// container group. All
@@ -131,7 +131,7 @@ pub const ContainerGroupDefinition = struct {
     /// have limits, this total value must be greater than any individual
     /// container's memory
     /// limit.
-    total_memory_limit_mebibytes: ?i32,
+    total_memory_limit_mebibytes: ?i32 = null,
 
     /// The amount of vCPU units on a fleet instance to allocate for the container
     /// group (1 vCPU
@@ -142,19 +142,19 @@ pub const ContainerGroupDefinition = struct {
     /// total value must be equal to or greater than the sum of the limits for each
     /// container in the
     /// group.
-    total_vcpu_limit: ?f64,
+    total_vcpu_limit: ?f64 = null,
 
     /// An optional description that was provided for a container group definition
     /// update. Each
     /// version can have a unique description.
-    version_description: ?[]const u8,
+    version_description: ?[]const u8 = null,
 
     /// Indicates the version of a particular container group definition. This
     /// number is
     /// incremented automatically when you update a container group definition. You
     /// can view, update,
     /// or delete individual versions or the entire container group definition.
-    version_number: ?i32,
+    version_number: ?i32 = null,
 
     pub const json_field_names = .{
         .container_group_definition_arn = "ContainerGroupDefinitionArn",

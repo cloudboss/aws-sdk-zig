@@ -19,7 +19,7 @@ pub const DataSource = struct {
     /// name:
     ///
     /// `s3://bucket-name/folder-name/`
-    data_location: ?[]const u8,
+    data_location: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_location = "dataLocation",

@@ -2,7 +2,7 @@
 /// settings when you update a web app.
 pub const UpdateWebAppIdentityCenterConfig = struct {
     /// The IAM role used to access IAM Identity Center.
-    role: ?[]const u8,
+    role: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .role = "Role",

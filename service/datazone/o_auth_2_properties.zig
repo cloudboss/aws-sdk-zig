@@ -8,22 +8,22 @@ const OAuth2GrantType = @import("o_auth_2_grant_type.zig").OAuth2GrantType;
 /// The OAuth2 properties.
 pub const OAuth2Properties = struct {
     /// The authorization code properties of the OAuth2 properties.
-    authorization_code_properties: ?AuthorizationCodeProperties,
+    authorization_code_properties: ?AuthorizationCodeProperties = null,
 
     /// The OAuth2 client application of the OAuth2 properties.
-    o_auth_2_client_application: ?OAuth2ClientApplication,
+    o_auth_2_client_application: ?OAuth2ClientApplication = null,
 
     /// The OAuth2 credentials of the OAuth2 properties.
-    o_auth_2_credentials: ?GlueOAuth2Credentials,
+    o_auth_2_credentials: ?GlueOAuth2Credentials = null,
 
     /// The OAuth2 grant type of the OAuth2 properties.
-    o_auth_2_grant_type: ?OAuth2GrantType,
+    o_auth_2_grant_type: ?OAuth2GrantType = null,
 
     /// The OAuth2 token URL of the OAuth2 properties.
-    token_url: ?[]const u8,
+    token_url: ?[]const u8 = null,
 
     /// The OAuth2 token URL parameter map of the OAuth2 properties.
-    token_url_parameters_map: ?[]const aws.map.StringMapEntry,
+    token_url_parameters_map: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .authorization_code_properties = "authorizationCodeProperties",

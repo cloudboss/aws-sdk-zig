@@ -13,7 +13,7 @@ pub const S3HudiDirectTarget = struct {
     /// Specifies whether to automatically enable data quality evaluation for the S3
     /// Hudi direct target. When set to `true`,
     /// data quality checks are performed automatically during the write operation.
-    auto_data_quality: ?AutoDataQuality,
+    auto_data_quality: ?AutoDataQuality = null,
 
     /// Specifies how the data is compressed. This is generally not necessary if the
     /// data has a standard file extension. Possible values are `"gzip"` and
@@ -31,16 +31,16 @@ pub const S3HudiDirectTarget = struct {
 
     /// Specifies the number of target partitions for distributing Hudi dataset
     /// files across Amazon S3.
-    number_target_partitions: ?[]const u8,
+    number_target_partitions: ?[]const u8 = null,
 
     /// Specifies native partitioning using a sequence of keys.
-    partition_keys: ?[]const []const []const u8,
+    partition_keys: ?[]const []const []const u8 = null,
 
     /// The Amazon S3 path of your Hudi data source to write to.
     path: []const u8,
 
     /// A policy that specifies update behavior for the crawler.
-    schema_change_policy: ?DirectSchemaChangePolicy,
+    schema_change_policy: ?DirectSchemaChangePolicy = null,
 
     pub const json_field_names = .{
         .additional_options = "AdditionalOptions",

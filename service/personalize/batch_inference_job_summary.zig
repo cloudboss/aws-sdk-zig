@@ -6,25 +6,25 @@ const BatchInferenceJobMode = @import("batch_inference_job_mode.zig").BatchInfer
 /// summaries.
 pub const BatchInferenceJobSummary = struct {
     /// The Amazon Resource Name (ARN) of the batch inference job.
-    batch_inference_job_arn: ?[]const u8,
+    batch_inference_job_arn: ?[]const u8 = null,
 
     /// The job's mode.
-    batch_inference_job_mode: ?BatchInferenceJobMode,
+    batch_inference_job_mode: ?BatchInferenceJobMode = null,
 
     /// The time at which the batch inference job was created.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// If the batch inference job failed, the reason for the failure.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The name of the batch inference job.
-    job_name: ?[]const u8,
+    job_name: ?[]const u8 = null,
 
     /// The time at which the batch inference job was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// The ARN of the solution version used by the batch inference job.
-    solution_version_arn: ?[]const u8,
+    solution_version_arn: ?[]const u8 = null,
 
     /// The status of the batch inference job. The status is one of the following
     /// values:
@@ -36,7 +36,7 @@ pub const BatchInferenceJobSummary = struct {
     /// * ACTIVE
     ///
     /// * CREATE FAILED
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .batch_inference_job_arn = "batchInferenceJobArn",

@@ -19,7 +19,7 @@ pub const InstanceDefinition = struct {
     /// For detailed information on weighting instance capacity, see [Instance
     /// Weighting](https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html) in the *Amazon Elastic Compute Cloud Auto Scaling User Guide*.
     /// Default value is "1".
-    weighted_capacity: ?[]const u8,
+    weighted_capacity: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .instance_type = "InstanceType",

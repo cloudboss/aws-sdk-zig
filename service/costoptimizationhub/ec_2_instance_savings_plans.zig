@@ -4,10 +4,10 @@ const SavingsPlansCostCalculation = @import("savings_plans_cost_calculation.zig"
 /// The EC2 instance Savings Plans recommendation details.
 pub const Ec2InstanceSavingsPlans = struct {
     /// The EC2 instance Savings Plans configuration used for recommendations.
-    configuration: ?Ec2InstanceSavingsPlansConfiguration,
+    configuration: ?Ec2InstanceSavingsPlansConfiguration = null,
 
     /// Cost impact of the Savings Plans purchase recommendation.
-    cost_calculation: ?SavingsPlansCostCalculation,
+    cost_calculation: ?SavingsPlansCostCalculation = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",

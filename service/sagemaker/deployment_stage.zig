@@ -4,7 +4,7 @@ const DeviceSelectionConfig = @import("device_selection_config.zig").DeviceSelec
 /// Contains information about a stage in an edge deployment plan.
 pub const DeploymentStage = struct {
     /// Configuration of the deployment details.
-    deployment_config: ?EdgeDeploymentConfig,
+    deployment_config: ?EdgeDeploymentConfig = null,
 
     /// Configuration of the devices in the stage.
     device_selection_config: DeviceSelectionConfig,

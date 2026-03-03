@@ -6,7 +6,7 @@ pub const SortDefinition = struct {
     key: []const u8,
 
     /// The order that's used to sort the data.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .key = "Key",

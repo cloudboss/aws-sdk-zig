@@ -7,9 +7,9 @@ pub const LaunchTemplateConfig = struct {
     /// contain the
     /// `NetworkInterfaceId` parameter because you can't specify a network interface
     /// ID in a Spot Fleet.
-    launch_template_specification: ?FleetLaunchTemplateSpecification,
+    launch_template_specification: ?FleetLaunchTemplateSpecification = null,
 
     /// Any parameters that you specify override the same parameters in the launch
     /// template.
-    overrides: ?[]const LaunchTemplateOverrides,
+    overrides: ?[]const LaunchTemplateOverrides = null,
 };

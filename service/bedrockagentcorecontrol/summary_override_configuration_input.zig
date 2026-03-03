@@ -3,7 +3,7 @@ const SummaryOverrideConsolidationConfigurationInput = @import("summary_override
 /// Input for summary override configuration in a memory strategy.
 pub const SummaryOverrideConfigurationInput = struct {
     /// The consolidation configuration for a summary override.
-    consolidation: ?SummaryOverrideConsolidationConfigurationInput,
+    consolidation: ?SummaryOverrideConsolidationConfigurationInput = null,
 
     pub const json_field_names = .{
         .consolidation = "consolidation",

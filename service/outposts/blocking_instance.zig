@@ -4,14 +4,14 @@ const AWSServiceName = @import("aws_service_name.zig").AWSServiceName;
 /// to run the
 /// capacity task.
 pub const BlockingInstance = struct {
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The Amazon Web Services service name that owns the specified blocking
     /// instance.
-    aws_service_name: ?AWSServiceName,
+    aws_service_name: ?AWSServiceName = null,
 
     /// The ID of the blocking instance.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

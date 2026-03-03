@@ -49,7 +49,7 @@ pub const EksContainerResourceRequirements = struct {
     /// If `memory` is specified in both places, then the value that's specified in
     /// `limits` must be equal to the value that's specified in
     /// `requests`.
-    limits: ?[]const aws.map.StringMapEntry,
+    limits: ?[]const aws.map.StringMapEntry = null,
 
     /// The type and quantity of the resources to request for the container. The
     /// values vary based
@@ -94,7 +94,7 @@ pub const EksContainerResourceRequirements = struct {
     /// specified
     /// in `limits` must be equal to the value that's specified in
     /// `requests`.
-    requests: ?[]const aws.map.StringMapEntry,
+    requests: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .limits = "limits",

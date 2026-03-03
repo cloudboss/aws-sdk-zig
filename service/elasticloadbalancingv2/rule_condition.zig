@@ -32,37 +32,37 @@ pub const RuleCondition = struct {
     /// * `query-string`
     ///
     /// * `source-ip`
-    field: ?[]const u8,
+    field: ?[]const u8 = null,
 
     /// Information for a host header condition. Specify only when `Field` is
     /// `host-header`.
-    host_header_config: ?HostHeaderConditionConfig,
+    host_header_config: ?HostHeaderConditionConfig = null,
 
     /// Information for an HTTP header condition. Specify only when `Field` is
     /// `http-header`.
-    http_header_config: ?HttpHeaderConditionConfig,
+    http_header_config: ?HttpHeaderConditionConfig = null,
 
     /// Information for an HTTP method condition. Specify only when `Field` is
     /// `http-request-method`.
-    http_request_method_config: ?HttpRequestMethodConditionConfig,
+    http_request_method_config: ?HttpRequestMethodConditionConfig = null,
 
     /// Information for a path pattern condition. Specify only when `Field` is
     /// `path-pattern`.
-    path_pattern_config: ?PathPatternConditionConfig,
+    path_pattern_config: ?PathPatternConditionConfig = null,
 
     /// Information for a query string condition. Specify only when `Field` is
     /// `query-string`.
-    query_string_config: ?QueryStringConditionConfig,
+    query_string_config: ?QueryStringConditionConfig = null,
 
     /// The regular expressions to match against the condition field. The maximum
     /// length of each string is 128 characters.
     /// Specify only when `Field` is `http-header`, `host-header`, or
     /// `path-pattern`.
-    regex_values: ?[]const []const u8,
+    regex_values: ?[]const []const u8 = null,
 
     /// Information for a source IP condition. Specify only when `Field` is
     /// `source-ip`.
-    source_ip_config: ?SourceIpConditionConfig,
+    source_ip_config: ?SourceIpConditionConfig = null,
 
     /// The condition value. Specify only when `Field` is `host-header` or
     /// `path-pattern`. Alternatively, to specify multiple host names or multiple
@@ -99,5 +99,5 @@ pub const RuleCondition = struct {
     /// * * (matches 0 or more characters)
     ///
     /// * ? (matches exactly 1 character)
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 };

@@ -12,12 +12,12 @@ pub const ReplicaGlobalSecondaryIndexSettingsUpdate = struct {
     /// Auto scaling settings for managing a global secondary index replica's read
     /// capacity
     /// units.
-    provisioned_read_capacity_auto_scaling_settings_update: ?AutoScalingSettingsUpdate,
+    provisioned_read_capacity_auto_scaling_settings_update: ?AutoScalingSettingsUpdate = null,
 
     /// The maximum number of strongly consistent reads consumed per second before
     /// DynamoDB
     /// returns a `ThrottlingException`.
-    provisioned_read_capacity_units: ?i64,
+    provisioned_read_capacity_units: ?i64 = null,
 
     pub const json_field_names = .{
         .index_name = "IndexName",

@@ -15,7 +15,7 @@ const AnalysisTemplateValidationType = @import("analysis_template_validation_typ
 /// [https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy](https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy).
 pub const AnalysisTemplateValidationStatusDetail = struct {
     /// The reasons for the validation results.
-    reasons: ?[]const AnalysisTemplateValidationStatusReason,
+    reasons: ?[]const AnalysisTemplateValidationStatusReason = null,
 
     /// The status of the validation.
     status: AnalysisTemplateValidationStatus,

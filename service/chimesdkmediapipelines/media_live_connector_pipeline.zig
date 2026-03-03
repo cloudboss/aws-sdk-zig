@@ -5,25 +5,25 @@ const MediaPipelineStatus = @import("media_pipeline_status.zig").MediaPipelineSt
 /// The connector pipeline.
 pub const MediaLiveConnectorPipeline = struct {
     /// The time at which the connector pipeline was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The connector pipeline's ARN.
-    media_pipeline_arn: ?[]const u8,
+    media_pipeline_arn: ?[]const u8 = null,
 
     /// The connector pipeline's ID.
-    media_pipeline_id: ?[]const u8,
+    media_pipeline_id: ?[]const u8 = null,
 
     /// The connector pipeline's data sinks.
-    sinks: ?[]const LiveConnectorSinkConfiguration,
+    sinks: ?[]const LiveConnectorSinkConfiguration = null,
 
     /// The connector pipeline's data sources.
-    sources: ?[]const LiveConnectorSourceConfiguration,
+    sources: ?[]const LiveConnectorSourceConfiguration = null,
 
     /// The connector pipeline's status.
-    status: ?MediaPipelineStatus,
+    status: ?MediaPipelineStatus = null,
 
     /// The time at which the connector pipeline was last updated.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

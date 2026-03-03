@@ -7,7 +7,7 @@ pub const DataSetExportTask = struct {
     status: DataSetTaskLifecycle,
 
     /// If dataset exports failed, the failure reason will show here.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// A summary of the data set export task.
     summary: DataSetExportSummary,

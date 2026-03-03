@@ -5,47 +5,47 @@ const DetailedGlossaryTerm = @import("detailed_glossary_term.zig").DetailedGloss
 pub const AssetListingItem = struct {
     /// The additional attributes of an asset published in an Amazon DataZone
     /// catalog.
-    additional_attributes: ?AssetListingItemAdditionalAttributes,
+    additional_attributes: ?AssetListingItemAdditionalAttributes = null,
 
     /// The timestamp of when an asset published in an Amazon DataZone catalog was
     /// created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of an asset published in an Amazon DataZone catalog.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the inventory asset.
-    entity_id: ?[]const u8,
+    entity_id: ?[]const u8 = null,
 
     /// The revision of the inventory asset.
-    entity_revision: ?[]const u8,
+    entity_revision: ?[]const u8 = null,
 
     /// The type of the inventory asset.
-    entity_type: ?[]const u8,
+    entity_type: ?[]const u8 = null,
 
     /// Glossary terms attached to the inventory asset.
-    glossary_terms: ?[]const DetailedGlossaryTerm,
+    glossary_terms: ?[]const DetailedGlossaryTerm = null,
 
     /// The restricted glossary terms associated with an asset.
-    governed_glossary_terms: ?[]const DetailedGlossaryTerm,
+    governed_glossary_terms: ?[]const DetailedGlossaryTerm = null,
 
     /// The Amazon DataZone user who created the listing.
-    listing_created_by: ?[]const u8,
+    listing_created_by: ?[]const u8 = null,
 
     /// The identifier of the listing (asset published in Amazon DataZone catalog).
-    listing_id: ?[]const u8,
+    listing_id: ?[]const u8 = null,
 
     /// The revision of the listing (asset published in Amazon DataZone catalog).
-    listing_revision: ?[]const u8,
+    listing_revision: ?[]const u8 = null,
 
     /// The Amazon DataZone user who updated the listing.
-    listing_updated_by: ?[]const u8,
+    listing_updated_by: ?[]const u8 = null,
 
     /// The name of the inventory asset.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The identifier of the project that owns the inventory asset.
-    owning_project_id: ?[]const u8,
+    owning_project_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .additional_attributes = "additionalAttributes",

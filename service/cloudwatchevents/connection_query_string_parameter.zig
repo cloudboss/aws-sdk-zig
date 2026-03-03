@@ -8,10 +8,10 @@ pub const ConnectionQueryStringParameter = struct {
     is_value_secret: bool = false,
 
     /// The key for a query string parameter.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value associated with the key for the query string parameter.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .is_value_secret = "IsValueSecret",

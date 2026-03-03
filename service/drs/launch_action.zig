@@ -7,30 +7,30 @@ const LaunchActionType = @import("launch_action_type.zig").LaunchActionType;
 /// Launch action.
 pub const LaunchAction = struct {
     /// Launch action code.
-    action_code: ?[]const u8,
+    action_code: ?[]const u8 = null,
 
-    action_id: ?[]const u8,
+    action_id: ?[]const u8 = null,
 
-    action_version: ?[]const u8,
+    action_version: ?[]const u8 = null,
 
     /// Whether the launch action is active.
-    active: ?bool,
+    active: ?bool = null,
 
-    category: ?LaunchActionCategory,
+    category: ?LaunchActionCategory = null,
 
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// Whether the launch will not be marked as failed if this action fails.
-    optional: ?bool,
+    optional: ?bool = null,
 
-    order: ?i32,
+    order: ?i32 = null,
 
-    parameters: ?[]const aws.map.MapEntry(LaunchActionParameter),
+    parameters: ?[]const aws.map.MapEntry(LaunchActionParameter) = null,
 
     /// Launch action type.
-    @"type": ?LaunchActionType,
+    @"type": ?LaunchActionType = null,
 
     pub const json_field_names = .{
         .action_code = "actionCode",

@@ -10,13 +10,13 @@ pub const User = struct {
     active: bool = false,
 
     /// The Amazon Resource Name (ARN) for the user.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The custom permissions profile associated with this user.
-    custom_permissions_name: ?[]const u8,
+    custom_permissions_name: ?[]const u8 = null,
 
     /// The user's email address.
-    email: ?[]const u8,
+    email: ?[]const u8 = null,
 
     /// The type of supported external login provider that provides identity to let
     /// the user
@@ -27,19 +27,19 @@ pub const User = struct {
     ///   cognito-identity.amazonaws.com.
     ///
     /// * `CUSTOM_OIDC`: Custom OpenID Connect (OIDC) provider.
-    external_login_federation_provider_type: ?[]const u8,
+    external_login_federation_provider_type: ?[]const u8 = null,
 
     /// The URL of the external login provider.
-    external_login_federation_provider_url: ?[]const u8,
+    external_login_federation_provider_url: ?[]const u8 = null,
 
     /// The identity ID for the user in the external login provider.
-    external_login_id: ?[]const u8,
+    external_login_id: ?[]const u8 = null,
 
     /// The type of identity authentication used by the user.
-    identity_type: ?IdentityType,
+    identity_type: ?IdentityType = null,
 
     /// The principal ID of the user.
-    principal_id: ?[]const u8,
+    principal_id: ?[]const u8 = null,
 
     /// The Quick Sight role for the user. The user role can be one of the
     /// following:.
@@ -70,14 +70,14 @@ pub const User = struct {
     ///
     /// * `RESTRICTED_AUTHOR`: This role isn't currently available for
     /// use.
-    role: ?UserRole,
+    role: ?UserRole = null,
 
     /// The user's user name. This value is required if you are registering a user
     /// that will be managed in Quick Sight. In the output, the value for `UserName`
     /// is
     /// `N/A` when the value for `IdentityType` is `IAM`
     /// and the corresponding IAM user is deleted.
-    user_name: ?[]const u8,
+    user_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active = "Active",

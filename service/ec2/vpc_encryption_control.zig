@@ -9,25 +9,25 @@ const Tag = @import("tag.zig").Tag;
 /// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
 pub const VpcEncryptionControl = struct {
     /// The encryption mode for the VPC Encryption Control configuration.
-    mode: ?VpcEncryptionControlMode,
+    mode: ?VpcEncryptionControlMode = null,
 
     /// Information about resource exclusions for the VPC Encryption Control
     /// configuration.
-    resource_exclusions: ?VpcEncryptionControlExclusions,
+    resource_exclusions: ?VpcEncryptionControlExclusions = null,
 
     /// The current state of the VPC Encryption Control configuration.
-    state: ?VpcEncryptionControlState,
+    state: ?VpcEncryptionControlState = null,
 
     /// A message providing additional information about the encryption control
     /// state.
-    state_message: ?[]const u8,
+    state_message: ?[]const u8 = null,
 
     /// The tags assigned to the VPC Encryption Control configuration.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// The ID of the VPC Encryption Control configuration.
-    vpc_encryption_control_id: ?[]const u8,
+    vpc_encryption_control_id: ?[]const u8 = null,
 
     /// The ID of the VPC associated with the encryption control configuration.
-    vpc_id: ?[]const u8,
+    vpc_id: ?[]const u8 = null,
 };

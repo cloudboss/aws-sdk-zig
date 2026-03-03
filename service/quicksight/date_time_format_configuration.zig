@@ -4,13 +4,13 @@ const NumericFormatConfiguration = @import("numeric_format_configuration.zig").N
 /// Formatting configuration for `DateTime` fields.
 pub const DateTimeFormatConfiguration = struct {
     /// Determines the `DateTime` format.
-    date_time_format: ?[]const u8,
+    date_time_format: ?[]const u8 = null,
 
     /// The options that determine the null value format configuration.
-    null_value_format_configuration: ?NullValueFormatConfiguration,
+    null_value_format_configuration: ?NullValueFormatConfiguration = null,
 
     /// The formatting configuration for numeric `DateTime` fields.
-    numeric_format_configuration: ?NumericFormatConfiguration,
+    numeric_format_configuration: ?NumericFormatConfiguration = null,
 
     pub const json_field_names = .{
         .date_time_format = "DateTimeFormat",

@@ -10,7 +10,7 @@ const MetricDataQuery = @import("metric_data_query.zig").MetricDataQuery;
 pub const RequestBasedServiceLevelIndicatorMetric = struct {
     /// Identifies the dependency using the `DependencyKeyAttributes` and
     /// `DependencyOperationName`.
-    dependency_config: ?DependencyConfig,
+    dependency_config: ?DependencyConfig = null,
 
     /// This is a string-to-string map that contains information about the type of
     /// object that this SLO is related to. It can include the following fields.
@@ -25,12 +25,12 @@ pub const RequestBasedServiceLevelIndicatorMetric = struct {
     ///   `AWS::Resource`.
     /// * `Environment` specifies the location where this object is hosted, or what
     ///   it belongs to.
-    key_attributes: ?[]const aws.map.StringMapEntry,
+    key_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// If the SLO monitors either the `LATENCY` or `AVAILABILITY` metric that
     /// Application Signals collects, this field displays which of those metrics is
     /// used.
-    metric_type: ?ServiceLevelIndicatorMetricType,
+    metric_type: ?ServiceLevelIndicatorMetricType = null,
 
     /// This structure defines the metric that is used as the "good request" or "bad
     /// request" value for a request-based SLO. This value observed for the metric
@@ -41,7 +41,7 @@ pub const RequestBasedServiceLevelIndicatorMetric = struct {
 
     /// If the SLO monitors a specific operation of the service, this field displays
     /// that operation name.
-    operation_name: ?[]const u8,
+    operation_name: ?[]const u8 = null,
 
     /// This structure defines the metric that is used as the "total requests"
     /// number for a request-based SLO. The number observed for this metric is

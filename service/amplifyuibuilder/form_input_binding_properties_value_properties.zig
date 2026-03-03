@@ -5,7 +5,7 @@
 /// data stored in an Amplify DataStore model.
 pub const FormInputBindingPropertiesValueProperties = struct {
     /// An Amplify DataStore model.
-    model: ?[]const u8,
+    model: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .model = "model",

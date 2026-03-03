@@ -10,7 +10,7 @@ pub const NielsenNaesIiNw = struct {
 
     /// Choose the timezone for the time stamps in the watermark. If not provided,
     /// the timestamps will be in Coordinated Universal Time (UTC)
-    timezone: ?NielsenWatermarkTimezones,
+    timezone: ?NielsenWatermarkTimezones = null,
 
     pub const json_field_names = .{
         .check_digit_string = "CheckDigitString",

@@ -10,7 +10,7 @@ const ScheduledUpdateConfig = @import("scheduled_update_config.zig").ScheduledUp
 /// The specifications of an instance group that you need to define.
 pub const ClusterInstanceGroupSpecification = struct {
     /// Specifies the capacity requirements for the instance group.
-    capacity_requirements: ?ClusterCapacityRequirements,
+    capacity_requirements: ?ClusterCapacityRequirements = null,
 
     /// Specifies an IAM execution role to be assumed by the instance group.
     execution_role: []const u8,
@@ -36,7 +36,7 @@ pub const ClusterInstanceGroupSpecification = struct {
     /// `ImageId` or use the default as input. Note that if you don't specify an
     /// instance group in your `UpdateClusterSoftware` request, then all of the
     /// instance groups are patched with the specified image.
-    image_id: ?[]const u8,
+    image_id: ?[]const u8 = null,
 
     /// Specifies the number of instances to add to the instance group of a
     /// SageMaker HyperPod cluster.
@@ -47,7 +47,7 @@ pub const ClusterInstanceGroupSpecification = struct {
 
     /// Specifies the additional storage configurations for the instances in the
     /// SageMaker HyperPod cluster instance group.
-    instance_storage_configs: ?[]const ClusterInstanceStorageConfig,
+    instance_storage_configs: ?[]const ClusterInstanceStorageConfig = null,
 
     /// Specifies the instance type of the instance group.
     instance_type: ClusterInstanceType,
@@ -56,7 +56,7 @@ pub const ClusterInstanceGroupSpecification = struct {
     /// what you want the labels and taints to look like, and the cluster works to
     /// reconcile the actual state with the declared state for nodes in this
     /// instance group.
-    kubernetes_config: ?ClusterKubernetesConfig,
+    kubernetes_config: ?ClusterKubernetesConfig = null,
 
     /// Specifies the LifeCycle configuration for the instance group.
     life_cycle_config: ClusterLifeCycleConfig,
@@ -67,11 +67,11 @@ pub const ClusterInstanceGroupSpecification = struct {
     /// groups, or previous settings for existing instance groups.
     /// `MinInstanceCount` only affects the initial transition to `InService` and
     /// does not guarantee maintaining this minimum afterward.
-    min_instance_count: ?i32,
+    min_instance_count: ?i32 = null,
 
     /// A flag indicating whether deep health checks should be performed when the
     /// cluster instance group is created or updated.
-    on_start_deep_health_checks: ?[]const DeepHealthCheckType,
+    on_start_deep_health_checks: ?[]const DeepHealthCheckType = null,
 
     /// To configure multi-AZ deployments, customize the Amazon VPC configuration at
     /// the instance group level. You can specify different subnets and security
@@ -103,11 +103,11 @@ pub const ClusterInstanceGroupSpecification = struct {
     /// * To configure SageMaker HyperPod with a custom Amazon VPC, see [Custom
     ///   Amazon VPC Setup for SageMaker
     ///   HyperPod](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-optional-vpc).
-    override_vpc_config: ?VpcConfig,
+    override_vpc_config: ?VpcConfig = null,
 
     /// The configuration object of the schedule that SageMaker uses to update the
     /// AMI.
-    scheduled_update_config: ?ScheduledUpdateConfig,
+    scheduled_update_config: ?ScheduledUpdateConfig = null,
 
     /// Specifies the value for **Threads per core**. For instance types that
     /// support multithreading, you can specify `1` for disabling multithreading and
@@ -115,7 +115,7 @@ pub const ClusterInstanceGroupSpecification = struct {
     /// multithreading, specify `1`. For more information, see the reference table
     /// of [CPU cores and threads per CPU core per instance
     /// type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html) in the *Amazon Elastic Compute Cloud User Guide*.
-    threads_per_core: ?i32,
+    threads_per_core: ?i32 = null,
 
     /// The Amazon Resource Name (ARN); of the training plan to use for this cluster
     /// instance group.
@@ -123,7 +123,7 @@ pub const ClusterInstanceGroupSpecification = struct {
     /// For more information about how to reserve GPU capacity for your SageMaker
     /// HyperPod clusters using Amazon SageMaker Training Plan, see `
     /// [CreateTrainingPlan](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html) `.
-    training_plan_arn: ?[]const u8,
+    training_plan_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .capacity_requirements = "CapacityRequirements",

@@ -3,19 +3,19 @@ const DatasetContentStatus = @import("dataset_content_status.zig").DatasetConten
 /// Summary information about dataset contents.
 pub const DatasetContentSummary = struct {
     /// The time the dataset content status was updated to SUCCEEDED or FAILED.
-    completion_time: ?i64,
+    completion_time: ?i64 = null,
 
     /// The actual time the creation of the dataset contents was started.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The time the creation of the dataset contents was scheduled to start.
-    schedule_time: ?i64,
+    schedule_time: ?i64 = null,
 
     /// The status of the dataset contents.
-    status: ?DatasetContentStatus,
+    status: ?DatasetContentStatus = null,
 
     /// The version of the dataset contents.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .completion_time = "completionTime",

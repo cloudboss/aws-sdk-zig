@@ -11,10 +11,10 @@ pub const Body = struct {
     /// process HTML. You can include clickable links, formatted text, and much more
     /// in an HTML
     /// message.
-    html: ?Content,
+    html: ?Content = null,
 
     /// The content of the message, in text format. Use this for text-based email
     /// clients, or
     /// clients on high-latency networks (such as mobile devices).
-    text: ?Content,
+    text: ?Content = null,
 };

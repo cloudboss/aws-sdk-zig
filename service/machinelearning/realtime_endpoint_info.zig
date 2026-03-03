@@ -4,7 +4,7 @@ const RealtimeEndpointStatus = @import("realtime_endpoint_status.zig").RealtimeE
 pub const RealtimeEndpointInfo = struct {
     /// The time that the request to create the real-time endpoint for the `MLModel`
     /// was received. The time is expressed in epoch time.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The current status of the real-time endpoint for the `MLModel`. This element
     /// can have one of the following values:
@@ -14,14 +14,14 @@ pub const RealtimeEndpointInfo = struct {
     /// * `READY` - Endpoint is ready to be used for real-time predictions.
     ///
     /// * `UPDATING` - Updating/creating the endpoint.
-    endpoint_status: ?RealtimeEndpointStatus,
+    endpoint_status: ?RealtimeEndpointStatus = null,
 
     /// The URI that specifies where to send real-time prediction requests for the
     /// `MLModel`.
     ///
     /// **Note:** The application must wait until the real-time endpoint is ready
     /// before using this URI.
-    endpoint_url: ?[]const u8,
+    endpoint_url: ?[]const u8 = null,
 
     /// The maximum processing rate for the real-time endpoint for `MLModel`,
     /// measured in incoming requests per second.

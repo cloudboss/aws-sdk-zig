@@ -6,14 +6,14 @@ const EphemeralNvmeSupport = @import("ephemeral_nvme_support.zig").EphemeralNvme
 /// type.
 pub const InstanceStorageInfo = struct {
     /// Describes the disks that are available for the instance type.
-    disks: ?[]const DiskInfo,
+    disks: ?[]const DiskInfo = null,
 
     /// Indicates whether data is encrypted at rest.
-    encryption_support: ?InstanceStorageEncryptionSupport,
+    encryption_support: ?InstanceStorageEncryptionSupport = null,
 
     /// Indicates whether non-volatile memory express (NVMe) is supported.
-    nvme_support: ?EphemeralNvmeSupport,
+    nvme_support: ?EphemeralNvmeSupport = null,
 
     /// The total size of the disks, in GB.
-    total_size_in_gb: ?i64,
+    total_size_in_gb: ?i64 = null,
 };

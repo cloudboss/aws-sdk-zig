@@ -7,7 +7,7 @@ pub const FilledMapShapeConditionalFormatting = struct {
 
     /// The conditional formatting that determines the background color of a filled
     /// map's shape.
-    format: ?ShapeConditionalFormat,
+    format: ?ShapeConditionalFormat = null,
 
     pub const json_field_names = .{
         .field_id = "FieldId",

@@ -3,17 +3,17 @@ const BillScenarioCommitmentModificationAction = @import("bill_scenario_commitme
 /// Summarizes an input commitment modification for a bill estimate.
 pub const BillEstimateInputCommitmentModificationSummary = struct {
     /// The specific commitment action taken in this modification.
-    commitment_action: ?BillScenarioCommitmentModificationAction,
+    commitment_action: ?BillScenarioCommitmentModificationAction = null,
 
     /// The group identifier for the commitment modification.
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// The unique identifier of the commitment modification.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID associated with this commitment
     /// modification.
-    usage_account_id: ?[]const u8,
+    usage_account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .commitment_action = "commitmentAction",

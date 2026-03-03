@@ -7,28 +7,28 @@ const OS = @import("os.zig").OS;
 /// Source server properties.
 pub const SourceProperties = struct {
     /// Source Server CPUs.
-    cpus: ?[]const CPU,
+    cpus: ?[]const CPU = null,
 
     /// Source Server disks.
-    disks: ?[]const Disk,
+    disks: ?[]const Disk = null,
 
     /// Source server identification hints.
-    identification_hints: ?IdentificationHints,
+    identification_hints: ?IdentificationHints = null,
 
     /// Source server last update date and time.
-    last_updated_date_time: ?[]const u8,
+    last_updated_date_time: ?[]const u8 = null,
 
     /// Source server network interfaces.
-    network_interfaces: ?[]const NetworkInterface,
+    network_interfaces: ?[]const NetworkInterface = null,
 
     /// Source server OS.
-    os: ?OS,
+    os: ?OS = null,
 
     /// Source server RAM in bytes.
     ram_bytes: i64 = 0,
 
     /// Source server recommended instance type.
-    recommended_instance_type: ?[]const u8,
+    recommended_instance_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cpus = "cpus",

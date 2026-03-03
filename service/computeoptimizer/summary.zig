@@ -4,10 +4,10 @@ const ReasonCodeSummary = @import("reason_code_summary.zig").ReasonCodeSummary;
 /// The summary of a recommendation.
 pub const Summary = struct {
     /// The finding classification of the recommendation.
-    name: ?Finding,
+    name: ?Finding = null,
 
     /// An array of objects that summarize a finding reason code.
-    reason_code_summaries: ?[]const ReasonCodeSummary,
+    reason_code_summaries: ?[]const ReasonCodeSummary = null,
 
     /// The value of the recommendation summary.
     value: f64 = 0,

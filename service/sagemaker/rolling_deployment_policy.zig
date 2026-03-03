@@ -8,7 +8,7 @@ pub const RollingDeploymentPolicy = struct {
 
     /// The maximum amount of instances in the cluster that SageMaker can roll back
     /// at a time.
-    rollback_maximum_batch_size: ?CapacitySizeConfig,
+    rollback_maximum_batch_size: ?CapacitySizeConfig = null,
 
     pub const json_field_names = .{
         .maximum_batch_size = "MaximumBatchSize",

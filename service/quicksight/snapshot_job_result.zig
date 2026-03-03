@@ -8,12 +8,12 @@ pub const SnapshotJobResult = struct {
     /// A list of `AnonymousUserSnapshotJobResult` objects that contain information
     /// on anonymous users and their user configurations. This data provided by you
     /// when you make a `StartDashboardSnapshotJob` API call.
-    anonymous_users: ?[]const AnonymousUserSnapshotJobResult,
+    anonymous_users: ?[]const AnonymousUserSnapshotJobResult = null,
 
     /// A list of `RegisteredUserSnapshotJobResult` objects that contain information
     /// about files that are requested for registered user during a
     /// `StartDashboardSnapshotJob` API call.
-    registered_users: ?[]const RegisteredUserSnapshotJobResult,
+    registered_users: ?[]const RegisteredUserSnapshotJobResult = null,
 
     pub const json_field_names = .{
         .anonymous_users = "AnonymousUsers",

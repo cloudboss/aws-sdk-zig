@@ -13,32 +13,32 @@ const VectorSearchRerankingConfiguration = @import("vector_search_reranking_conf
 pub const KnowledgeBaseFlowNodeConfiguration = struct {
     /// Contains configurations for a guardrail to apply during query and response
     /// generation for the knowledge base in this configuration.
-    guardrail_configuration: ?GuardrailConfiguration,
+    guardrail_configuration: ?GuardrailConfiguration = null,
 
     /// Contains inference configurations for the prompt.
-    inference_configuration: ?PromptInferenceConfiguration,
+    inference_configuration: ?PromptInferenceConfiguration = null,
 
     /// The unique identifier of the knowledge base to query.
     knowledge_base_id: []const u8 = "",
 
     /// The unique identifier of the model or [inference
     /// profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html) to use to generate a response from the query results. Omit this field if you want to return the retrieved results as an array.
-    model_id: ?[]const u8,
+    model_id: ?[]const u8 = null,
 
     /// The number of results to retrieve from the knowledge base.
-    number_of_results: ?i32,
+    number_of_results: ?i32 = null,
 
     /// The configuration for orchestrating the retrieval and generation process in
     /// the knowledge base node.
-    orchestration_configuration: ?KnowledgeBaseOrchestrationConfiguration,
+    orchestration_configuration: ?KnowledgeBaseOrchestrationConfiguration = null,
 
     /// A custom prompt template to use with the knowledge base for generating
     /// responses.
-    prompt_template: ?KnowledgeBasePromptTemplate,
+    prompt_template: ?KnowledgeBasePromptTemplate = null,
 
     /// The configuration for reranking the retrieved results from the knowledge
     /// base to improve relevance.
-    reranking_configuration: ?VectorSearchRerankingConfiguration,
+    reranking_configuration: ?VectorSearchRerankingConfiguration = null,
 
     pub const json_field_names = .{
         .guardrail_configuration = "guardrailConfiguration",

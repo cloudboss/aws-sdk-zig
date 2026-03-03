@@ -5,15 +5,15 @@ const RollingDeploymentPolicy = @import("rolling_deployment_policy.zig").Rolling
 pub const DeploymentConfiguration = struct {
     /// An array that contains the alarms that SageMaker monitors to know whether to
     /// roll back the AMI update.
-    auto_rollback_configuration: ?[]const AlarmDetails,
+    auto_rollback_configuration: ?[]const AlarmDetails = null,
 
     /// The policy that SageMaker uses when updating the AMI versions of the
     /// cluster.
-    rolling_update_policy: ?RollingDeploymentPolicy,
+    rolling_update_policy: ?RollingDeploymentPolicy = null,
 
     /// The duration in seconds that SageMaker waits before updating more instances
     /// in the cluster.
-    wait_interval_in_seconds: ?i32,
+    wait_interval_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .auto_rollback_configuration = "AutoRollbackConfiguration",

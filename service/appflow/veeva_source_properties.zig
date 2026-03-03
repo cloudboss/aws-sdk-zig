@@ -1,7 +1,7 @@
 /// The properties that are applied when using Veeva as a flow source.
 pub const VeevaSourceProperties = struct {
     /// The document type specified in the Veeva document extract flow.
-    document_type: ?[]const u8,
+    document_type: ?[]const u8 = null,
 
     /// Boolean value to include All Versions of files in Veeva document extract
     /// flow.

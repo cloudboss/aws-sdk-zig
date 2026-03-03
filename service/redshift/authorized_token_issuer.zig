@@ -4,9 +4,9 @@ pub const AuthorizedTokenIssuer = struct {
     /// The list of audiences for the authorized token issuer for integrating Amazon
     /// Redshift
     /// with IDC Identity Center.
-    authorized_audiences_list: ?[]const []const u8,
+    authorized_audiences_list: ?[]const []const u8 = null,
 
     /// The ARN for the authorized token issuer for integrating Amazon Redshift with
     /// IDC Identity Center.
-    trusted_token_issuer_arn: ?[]const u8,
+    trusted_token_issuer_arn: ?[]const u8 = null,
 };

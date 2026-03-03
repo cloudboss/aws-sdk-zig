@@ -2,15 +2,15 @@ const ProfileTemplateQuestion = @import("profile_template_question.zig").Profile
 
 /// The profile template.
 pub const ProfileTemplate = struct {
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The name of the profile template.
-    template_name: ?[]const u8,
+    template_name: ?[]const u8 = null,
 
     /// Profile template questions.
-    template_questions: ?[]const ProfileTemplateQuestion,
+    template_questions: ?[]const ProfileTemplateQuestion = null,
 
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .created_at = "CreatedAt",

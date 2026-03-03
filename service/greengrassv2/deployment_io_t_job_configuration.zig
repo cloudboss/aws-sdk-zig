@@ -7,17 +7,17 @@ pub const DeploymentIoTJobConfiguration = struct {
     /// The stop configuration for the job. This configuration defines when and how
     /// to stop a job
     /// rollout.
-    abort_config: ?IoTJobAbortConfig,
+    abort_config: ?IoTJobAbortConfig = null,
 
     /// The rollout configuration for the job. This configuration defines the rate
     /// at which the
     /// job rolls out to the fleet of target devices.
-    job_executions_rollout_config: ?IoTJobExecutionsRolloutConfig,
+    job_executions_rollout_config: ?IoTJobExecutionsRolloutConfig = null,
 
     /// The timeout configuration for the job. This configuration defines the amount
     /// of time each
     /// device has to complete the job.
-    timeout_config: ?IoTJobTimeoutConfig,
+    timeout_config: ?IoTJobTimeoutConfig = null,
 
     pub const json_field_names = .{
         .abort_config = "abortConfig",

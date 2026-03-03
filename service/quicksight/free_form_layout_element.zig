@@ -8,13 +8,13 @@ const Visibility = @import("visibility.zig").Visibility;
 /// An element within a free-form layout.
 pub const FreeFormLayoutElement = struct {
     /// The background style configuration of a free-form layout element.
-    background_style: ?FreeFormLayoutElementBackgroundStyle,
+    background_style: ?FreeFormLayoutElementBackgroundStyle = null,
 
     /// The border radius of a free-form layout element.
-    border_radius: ?[]const u8,
+    border_radius: ?[]const u8 = null,
 
     /// The border style configuration of a free-form layout element.
-    border_style: ?FreeFormLayoutElementBorderStyle,
+    border_style: ?FreeFormLayoutElementBorderStyle = null,
 
     /// A unique identifier for an element within a free-form layout.
     element_id: []const u8,
@@ -26,21 +26,21 @@ pub const FreeFormLayoutElement = struct {
     height: []const u8,
 
     /// The loading animation configuration of a free-form layout element.
-    loading_animation: ?LoadingAnimation,
+    loading_animation: ?LoadingAnimation = null,
 
     /// The padding of a free-form layout element.
-    padding: ?[]const u8,
+    padding: ?[]const u8 = null,
 
     /// The rendering rules that determine when an element should be displayed
     /// within a free-form layout.
-    rendering_rules: ?[]const SheetElementRenderingRule,
+    rendering_rules: ?[]const SheetElementRenderingRule = null,
 
     /// The border style configuration of a free-form layout element. This border
     /// style is used when the element is selected.
-    selected_border_style: ?FreeFormLayoutElementBorderStyle,
+    selected_border_style: ?FreeFormLayoutElementBorderStyle = null,
 
     /// The visibility of an element within a free-form layout.
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     /// The width of an element within a free-form layout.
     width: []const u8,

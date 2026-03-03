@@ -13,14 +13,14 @@ pub const MatchmakingConfiguration = struct {
     /// enabled, matchmaking tickets use the status `REQUIRES_ACCEPTANCE` to
     /// indicate
     /// when a completed potential match is waiting for player acceptance.
-    acceptance_required: ?bool,
+    acceptance_required: ?bool = null,
 
     /// The length of time (in seconds) to wait for players to accept a proposed
     /// match, if
     /// acceptance is required. If any player rejects the match or fails to accept
     /// before the
     /// timeout, the ticket continues to look for an acceptable match.
-    acceptance_timeout_seconds: ?i32,
+    acceptance_timeout_seconds: ?i32 = null,
 
     /// The number of player slots in a match to keep open for future players. For
     /// example, if the configuration's rule set specifies
@@ -28,7 +28,7 @@ pub const MatchmakingConfiguration = struct {
     /// to 2, only 10 players are selected for the match. This parameter is not used
     /// when `FlexMatchMode` is set to
     /// `STANDALONE`.
-    additional_player_count: ?i32,
+    additional_player_count: ?i32 = null,
 
     /// The method used to backfill game sessions created with this matchmaking
     /// configuration.
@@ -41,7 +41,7 @@ pub const MatchmakingConfiguration = struct {
     /// in [Backfill existing games with
     /// FlexMatch](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html). Automatic backfill is not available
     /// when `FlexMatchMode` is set to `STANDALONE`.
-    backfill_mode: ?BackfillMode,
+    backfill_mode: ?BackfillMode = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
@@ -50,19 +50,19 @@ pub const MatchmakingConfiguration = struct {
     /// Format is `arn:aws:gamelift:::matchmakingconfiguration/`. In a Amazon
     /// GameLift Servers configuration ARN, the resource ID matches the
     /// *Name* value.
-    configuration_arn: ?[]const u8,
+    configuration_arn: ?[]const u8 = null,
 
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Information to attach to all events related to the matchmaking
     /// configuration.
-    custom_event_data: ?[]const u8,
+    custom_event_data: ?[]const u8 = null,
 
     /// A descriptive label that is associated with matchmaking configuration.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Indicates whether this matchmaking configuration is being used with Amazon
     /// GameLift Servers hosting or
@@ -75,7 +75,7 @@ pub const MatchmakingConfiguration = struct {
     /// * **WITH_QUEUE** - FlexMatch forms matches and uses
     /// the specified Amazon GameLift Servers queue to start a game session for the
     /// match.
-    flex_match_mode: ?FlexMatchMode,
+    flex_match_mode: ?FlexMatchMode = null,
 
     /// A set of key-value pairs that can store custom data in a game session.
     /// For example: `{"Key": "difficulty", "Value": "novice"}`. This information is
@@ -87,7 +87,7 @@ pub const MatchmakingConfiguration = struct {
     /// sessions by properties. Property keys containing periods cannot be searched
     /// and will be filtered out from search results due to search index
     /// limitations.
-    game_properties: ?[]const GameProperty,
+    game_properties: ?[]const GameProperty = null,
 
     /// A set of custom game session properties, formatted as a single string value.
     /// This data is passed to a game server process with a request to start a new
@@ -95,7 +95,7 @@ pub const MatchmakingConfiguration = struct {
     /// session](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession). This information is added to the new `GameSession` object that is
     /// created for a successful match. This parameter is not used when
     /// `FlexMatchMode` is set to `STANDALONE`.
-    game_session_data: ?[]const u8,
+    game_session_data: ?[]const u8 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
@@ -107,33 +107,33 @@ pub const MatchmakingConfiguration = struct {
     /// with this matchmaking
     /// configuration. This property is not set when `FlexMatchMode` is set to
     /// `STANDALONE`.
-    game_session_queue_arns: ?[]const []const u8,
+    game_session_queue_arns: ?[]const []const u8 = null,
 
     /// A unique identifier for the matchmaking configuration. This name is used to
     /// identify the configuration associated with a matchmaking
     /// request or ticket.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// An SNS topic ARN that is set up to receive matchmaking notifications.
-    notification_target: ?[]const u8,
+    notification_target: ?[]const u8 = null,
 
     /// The maximum duration, in seconds, that a matchmaking ticket can remain in
     /// process
     /// before timing out. Requests that fail due to timing out can be resubmitted
     /// as
     /// needed.
-    request_timeout_seconds: ?i32,
+    request_timeout_seconds: ?i32 = null,
 
     /// The Amazon Resource Name
     /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
     /// associated with the GameLift matchmaking rule set resource that this
     /// configuration uses.
-    rule_set_arn: ?[]const u8,
+    rule_set_arn: ?[]const u8 = null,
 
     /// A unique identifier for the matchmaking rule set to use with this
     /// configuration. A matchmaking configuration can only use rule
     /// sets that are defined in the same Region.
-    rule_set_name: ?[]const u8,
+    rule_set_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .acceptance_required = "AcceptanceRequired",

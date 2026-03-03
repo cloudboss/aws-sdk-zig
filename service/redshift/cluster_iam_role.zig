@@ -15,9 +15,9 @@ pub const ClusterIamRole = struct {
     ///
     /// * `removing`: The role is in the process of being disassociated with
     /// the cluster.
-    apply_status: ?[]const u8,
+    apply_status: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role, for example,
     /// `arn:aws:iam::123456789012:role/RedshiftCopyUnload`.
-    iam_role_arn: ?[]const u8,
+    iam_role_arn: ?[]const u8 = null,
 };

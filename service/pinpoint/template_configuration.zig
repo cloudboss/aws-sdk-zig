@@ -4,21 +4,21 @@ const Template = @import("template.zig").Template;
 /// channel.
 pub const TemplateConfiguration = struct {
     /// The email template to use for the message.
-    email_template: ?Template,
+    email_template: ?Template = null,
 
     /// The InApp template to use for the message. The InApp template object is not
     /// supported for SendMessages.
-    in_app_template: ?Template,
+    in_app_template: ?Template = null,
 
     /// The push notification template to use for the message.
-    push_template: ?Template,
+    push_template: ?Template = null,
 
     /// The SMS template to use for the message.
-    sms_template: ?Template,
+    sms_template: ?Template = null,
 
     /// The voice template to use for the message. This object isn't supported for
     /// campaigns.
-    voice_template: ?Template,
+    voice_template: ?Template = null,
 
     pub const json_field_names = .{
         .email_template = "EmailTemplate",

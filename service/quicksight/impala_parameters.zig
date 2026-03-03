@@ -1,7 +1,7 @@
 /// The parameters that are required to connect to a Impala data source.
 pub const ImpalaParameters = struct {
     /// The database of the Impala data source.
-    database: ?[]const u8,
+    database: ?[]const u8 = null,
 
     /// The host name of the Impala data source.
     host: []const u8,

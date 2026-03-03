@@ -3,15 +3,15 @@
 /// likelihood of the match.
 pub const RxNormConcept = struct {
     /// RxNorm concept ID, also known as the RxCUI.
-    code: ?[]const u8,
+    code: ?[]const u8 = null,
 
     /// The description of the RxNorm concept.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The level of confidence that Amazon Comprehend Medical has that the entity
     /// is accurately
     /// linked to the reported RxNorm concept.
-    score: ?f32,
+    score: ?f32 = null,
 
     pub const json_field_names = .{
         .code = "Code",

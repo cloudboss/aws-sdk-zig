@@ -6,10 +6,10 @@ pub const GrantListEntry = struct {
     /// A list of key-value pairs that must be present in the encryption context of
     /// certain
     /// subsequent operations that the grant allows.
-    constraints: ?GrantConstraints,
+    constraints: ?GrantConstraints = null,
 
     /// The date and time when the grant was created.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// The identity that gets the permissions in the grant.
     ///
@@ -21,26 +21,26 @@ pub const GrantListEntry = struct {
     /// `GranteePrincipal` field contains
     /// the [service
     /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services), which might represent several different grantee principals.
-    grantee_principal: ?[]const u8,
+    grantee_principal: ?[]const u8 = null,
 
     /// The unique identifier for the grant.
-    grant_id: ?[]const u8,
+    grant_id: ?[]const u8 = null,
 
     /// The Amazon Web Services account under which the grant was issued.
-    issuing_account: ?[]const u8,
+    issuing_account: ?[]const u8 = null,
 
     /// The unique identifier for the KMS key to which the grant applies.
-    key_id: ?[]const u8,
+    key_id: ?[]const u8 = null,
 
     /// The friendly name that identifies the grant. If a name was provided in the
     /// CreateGrant request, that name is returned. Otherwise this value is null.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The list of operations permitted by the grant.
-    operations: ?[]const GrantOperation,
+    operations: ?[]const GrantOperation = null,
 
     /// The principal that can retire the grant.
-    retiring_principal: ?[]const u8,
+    retiring_principal: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .constraints = "Constraints",

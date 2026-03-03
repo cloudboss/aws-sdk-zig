@@ -6,11 +6,11 @@
 pub const RoleValues = struct {
     /// A list of groups from the SAML assertion attribute to grant the Grafana
     /// `Admin` role to.
-    admin: ?[]const []const u8,
+    admin: ?[]const []const u8 = null,
 
     /// A list of groups from the SAML assertion attribute to grant the Grafana
     /// `Editor` role to.
-    editor: ?[]const []const u8,
+    editor: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .admin = "admin",

@@ -5,13 +5,13 @@ const InstanceTimeline = @import("instance_timeline.zig").InstanceTimeline;
 /// The instance status details.
 pub const InstanceStatus = struct {
     /// The current state of the instance.
-    state: ?InstanceState,
+    state: ?InstanceState = null,
 
     /// The details of the status change reason for the instance.
-    state_change_reason: ?InstanceStateChangeReason,
+    state_change_reason: ?InstanceStateChangeReason = null,
 
     /// The timeline of the instance status over time.
-    timeline: ?InstanceTimeline,
+    timeline: ?InstanceTimeline = null,
 
     pub const json_field_names = .{
         .state = "State",

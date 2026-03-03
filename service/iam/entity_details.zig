@@ -20,5 +20,5 @@ pub const EntityDetails = struct {
     /// the
     /// [tracking
     /// period](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
-    last_authenticated: ?i64,
+    last_authenticated: ?i64 = null,
 };

@@ -8,27 +8,27 @@ const ChatResponseConfigurationStatus = @import("chat_response_configuration_sta
 /// comprehensive settings and parameters that define how Amazon Q Business
 /// generates and formats responses.
 pub const ChatResponseConfigurationDetail = struct {
-    @"error": ?ErrorDetail,
+    @"error": ?ErrorDetail = null,
 
     /// A collection of specific response configuration settings that collectively
     /// define how responses are generated, formatted, and presented to users in
     /// chat interactions.
-    response_configurations: ?[]const aws.map.MapEntry(ResponseConfiguration),
+    response_configurations: ?[]const aws.map.MapEntry(ResponseConfiguration) = null,
 
     /// A summary of the response configuration details, providing a concise
     /// overview of the key parameters and settings that define the response
     /// generation behavior.
-    response_configuration_summary: ?[]const u8,
+    response_configuration_summary: ?[]const u8 = null,
 
     /// The current status of the chat response configuration, indicating whether it
     /// is active, pending, or in another state that affects its availability for
     /// use.
-    status: ?ChatResponseConfigurationStatus,
+    status: ?ChatResponseConfigurationStatus = null,
 
     /// The timestamp indicating when the detailed chat response configuration was
     /// last modified, helping administrators track changes and maintain version
     /// awareness.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .@"error" = "error",

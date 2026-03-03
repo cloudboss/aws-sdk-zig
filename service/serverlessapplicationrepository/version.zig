@@ -70,11 +70,11 @@ pub const Version = struct {
     /// this version of your application.
     ///
     /// Maximum size 50 MB
-    source_code_archive_url: ?[]const u8,
+    source_code_archive_url: ?[]const u8 = null,
 
     /// A link to a public repository for the source code of your application, for
     /// example the URL of a specific GitHub commit.
-    source_code_url: ?[]const u8,
+    source_code_url: ?[]const u8 = null,
 
     /// A link to the packaged AWS SAM template of your application.
     template_url: []const u8,

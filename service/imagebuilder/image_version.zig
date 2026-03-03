@@ -21,7 +21,7 @@ pub const ImageVersion = struct {
     ///
     /// * Build version ARNs have all four nodes, and point to a specific build for
     ///   a specific version of an object.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Indicates the type of build that created this image. The build can be
     /// initiated in the
@@ -39,32 +39,32 @@ pub const ImageVersion = struct {
     ///
     /// * **IMPORT_ISO** – An ISO disk import created
     /// the image.
-    build_type: ?BuildType,
+    build_type: ?BuildType = null,
 
     /// The date on which this specific version of the Image Builder image was
     /// created.
-    date_created: ?[]const u8,
+    date_created: ?[]const u8 = null,
 
     /// The origin of the base image that Image Builder used to build this image.
-    image_source: ?ImageSource,
+    image_source: ?ImageSource = null,
 
     /// The name of this specific version of an Image Builder image.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The operating system version of the Amazon EC2 build instance. For example,
     /// Amazon Linux 2,
     /// Ubuntu 18, or Microsoft Windows Server 2019.
-    os_version: ?[]const u8,
+    os_version: ?[]const u8 = null,
 
     /// The owner of the image version.
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// The operating system platform of the image version, for example "Windows" or
     /// "Linux".
-    platform: ?Platform,
+    platform: ?Platform = null,
 
     /// Specifies whether this image produces an AMI or a container image.
-    @"type": ?ImageType,
+    @"type": ?ImageType = null,
 
     /// Details for a specific version of an Image Builder image. This version
     /// follows the semantic
@@ -92,7 +92,7 @@ pub const ImageVersion = struct {
     /// recipe. When you use a wildcard in any node, all nodes to the right of the
     /// first wildcard must also be
     /// wildcards.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

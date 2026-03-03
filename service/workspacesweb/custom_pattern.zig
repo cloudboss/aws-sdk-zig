@@ -7,10 +7,10 @@ pub const CustomPattern = struct {
     /// confirmed. The format must follow JavaScript regex format. The pattern must
     /// be enclosed between slashes, and can have flags behind the second slash. For
     /// example, “/ab+c/gi”
-    keyword_regex: ?[]const u8,
+    keyword_regex: ?[]const u8 = null,
 
     /// The pattern description for the customer pattern.
-    pattern_description: ?[]const u8,
+    pattern_description: ?[]const u8 = null,
 
     /// The pattern name for the custom pattern.
     pattern_name: []const u8,

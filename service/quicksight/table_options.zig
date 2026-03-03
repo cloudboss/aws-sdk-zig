@@ -5,17 +5,17 @@ const RowAlternateColorOptions = @import("row_alternate_color_options.zig").RowA
 /// The table options for a table visual.
 pub const TableOptions = struct {
     /// The table cell style of table cells.
-    cell_style: ?TableCellStyle,
+    cell_style: ?TableCellStyle = null,
 
     /// The table cell style of a table header.
-    header_style: ?TableCellStyle,
+    header_style: ?TableCellStyle = null,
 
     /// The orientation (vertical, horizontal) for a table.
-    orientation: ?TableOrientation,
+    orientation: ?TableOrientation = null,
 
     /// The row alternate color options (widget status, row alternate colors) for a
     /// table.
-    row_alternate_color_options: ?RowAlternateColorOptions,
+    row_alternate_color_options: ?RowAlternateColorOptions = null,
 
     pub const json_field_names = .{
         .cell_style = "CellStyle",

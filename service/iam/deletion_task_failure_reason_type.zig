@@ -7,7 +7,7 @@ const RoleUsageType = @import("role_usage_type.zig").RoleUsageType;
 pub const DeletionTaskFailureReasonType = struct {
     /// A short description of the reason that the service-linked role deletion
     /// failed.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// A list of objects that contains details about the service-linked role
     /// deletion failure,
@@ -20,5 +20,5 @@ pub const DeletionTaskFailureReasonType = struct {
     /// that are associated with the role and the Region in which the resources are
     /// being
     /// used.
-    role_usage_list: ?[]const RoleUsageType,
+    role_usage_list: ?[]const RoleUsageType = null,
 };

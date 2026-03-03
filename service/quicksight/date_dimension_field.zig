@@ -27,16 +27,16 @@ pub const DateDimensionField = struct {
     /// * `SECOND`
     ///
     /// * `MILLISECOND`
-    date_granularity: ?TimeGranularity,
+    date_granularity: ?TimeGranularity = null,
 
     /// The custom field ID.
     field_id: []const u8,
 
     /// The format configuration of the field.
-    format_configuration: ?DateTimeFormatConfiguration,
+    format_configuration: ?DateTimeFormatConfiguration = null,
 
     /// The custom hierarchy ID.
-    hierarchy_id: ?[]const u8,
+    hierarchy_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .column = "Column",

@@ -10,7 +10,7 @@ const aws = @import("aws");
 pub const OpenXJsonSerDe = struct {
     /// When set to `true`, which is the default, Firehose converts
     /// JSON keys to lowercase before deserializing them.
-    case_insensitive: ?bool,
+    case_insensitive: ?bool = null,
 
     /// Maps column names to JSON keys that aren't identical to the column names.
     /// This is
@@ -18,7 +18,7 @@ pub const OpenXJsonSerDe = struct {
     /// `timestamp` is a Hive keyword. If you have a JSON key named
     /// `timestamp`, set this parameter to `{"ts": "timestamp"}` to map
     /// this key to a column named `ts`.
-    column_to_json_key_mappings: ?[]const aws.map.StringMapEntry,
+    column_to_json_key_mappings: ?[]const aws.map.StringMapEntry = null,
 
     /// When set to `true`, specifies that the names of the keys include dots and
     /// that you want Firehose to replace them with underscores. This is useful
@@ -29,7 +29,7 @@ pub const OpenXJsonSerDe = struct {
     /// option.
     ///
     /// The default is `false`.
-    convert_dots_in_json_keys_to_underscores: ?bool,
+    convert_dots_in_json_keys_to_underscores: ?bool = null,
 
     pub const json_field_names = .{
         .case_insensitive = "CaseInsensitive",

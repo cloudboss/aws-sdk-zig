@@ -3,7 +3,7 @@ const AutoScalingTargetTrackingScalingPolicyConfigurationUpdate = @import("auto_
 /// Represents the auto scaling policy to be modified.
 pub const AutoScalingPolicyUpdate = struct {
     /// The name of the scaling policy.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// Represents a target tracking scaling policy configuration.
     target_tracking_scaling_policy_configuration: AutoScalingTargetTrackingScalingPolicyConfigurationUpdate,

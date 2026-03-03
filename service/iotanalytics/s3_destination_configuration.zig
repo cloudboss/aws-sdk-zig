@@ -9,7 +9,7 @@ pub const S3DestinationConfiguration = struct {
     /// Configuration information for coordination with Glue, a fully managed
     /// extract, transform
     /// and load (ETL) service.
-    glue_configuration: ?GlueConfiguration,
+    glue_configuration: ?GlueConfiguration = null,
 
     /// The key of the dataset contents object in an S3 bucket. Each object has a
     /// key that is a

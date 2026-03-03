@@ -5,7 +5,7 @@ pub const SingleMasterConfiguration = struct {
     /// messages
     /// before they are discarded. Use to update
     /// this value.
-    message_ttl_seconds: ?i32,
+    message_ttl_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .message_ttl_seconds = "MessageTtlSeconds",

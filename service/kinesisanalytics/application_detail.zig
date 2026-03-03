@@ -19,10 +19,10 @@ pub const ApplicationDetail = struct {
 
     /// Returns the application code that you provided to perform data analysis on
     /// any of the in-application streams in your application.
-    application_code: ?[]const u8,
+    application_code: ?[]const u8 = null,
 
     /// Description of the application.
-    application_description: ?[]const u8,
+    application_description: ?[]const u8 = null,
 
     /// Name of the application.
     application_name: []const u8,
@@ -40,32 +40,32 @@ pub const ApplicationDetail = struct {
     /// Analytics applications, see [Working with Amazon
     /// CloudWatch
     /// Logs](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
-    cloud_watch_logging_option_descriptions: ?[]const CloudWatchLoggingOptionDescription,
+    cloud_watch_logging_option_descriptions: ?[]const CloudWatchLoggingOptionDescription = null,
 
     /// Time stamp when the application version was created.
-    create_timestamp: ?i64,
+    create_timestamp: ?i64 = null,
 
     /// Describes the application input configuration.
     /// For more information,
     /// see [Configuring Application
     /// Input](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-    input_descriptions: ?[]const InputDescription,
+    input_descriptions: ?[]const InputDescription = null,
 
     /// Time stamp when the application was last updated.
-    last_update_timestamp: ?i64,
+    last_update_timestamp: ?i64 = null,
 
     /// Describes the application output configuration.
     /// For more information,
     /// see [Configuring Application
     /// Output](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
-    output_descriptions: ?[]const OutputDescription,
+    output_descriptions: ?[]const OutputDescription = null,
 
     /// Describes reference data sources configured for the application.
     ///
     /// For more information,
     /// see [Configuring Application
     /// Input](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-    reference_data_source_descriptions: ?[]const ReferenceDataSourceDescription,
+    reference_data_source_descriptions: ?[]const ReferenceDataSourceDescription = null,
 
     pub const json_field_names = .{
         .application_arn = "ApplicationARN",

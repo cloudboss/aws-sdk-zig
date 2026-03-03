@@ -1,35 +1,35 @@
 /// A validated address.
 pub const Address = struct {
     /// The city of an address.
-    city: ?[]const u8,
+    city: ?[]const u8 = null,
 
     /// The country of an address.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// The postal code of an address.
-    postal_code: ?[]const u8,
+    postal_code: ?[]const u8 = null,
 
     /// The zip + 4 or postal code + 4 of an address.
-    postal_code_plus_4: ?[]const u8,
+    postal_code_plus_4: ?[]const u8 = null,
 
     /// An address suffix location, such as the `S. Unit A` in
     /// `Central Park S. Unit A`.
-    post_directional: ?[]const u8,
+    post_directional: ?[]const u8 = null,
 
     /// An address prefix location, such as the `N` in `N. Third St.`
-    pre_directional: ?[]const u8,
+    pre_directional: ?[]const u8 = null,
 
     /// The state of an address.
-    state: ?[]const u8,
+    state: ?[]const u8 = null,
 
     /// The address street, such as `8th Avenue`.
-    street_name: ?[]const u8,
+    street_name: ?[]const u8 = null,
 
     /// The numeric portion of an address.
-    street_number: ?[]const u8,
+    street_number: ?[]const u8 = null,
 
     /// The address suffix, such as the `N` in `8th Avenue N`.
-    street_suffix: ?[]const u8,
+    street_suffix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .city = "city",

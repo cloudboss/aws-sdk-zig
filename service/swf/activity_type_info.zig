@@ -11,10 +11,10 @@ pub const ActivityTypeInfo = struct {
     creation_date: i64,
 
     /// If DEPRECATED, the date and time DeprecateActivityType was called.
-    deprecation_date: ?i64,
+    deprecation_date: ?i64 = null,
 
     /// The description of the activity type provided in RegisterActivityType.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The current status of the activity type.
     status: RegistrationStatus,

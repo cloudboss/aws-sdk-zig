@@ -3,49 +3,49 @@
 pub const AvailableAdditionalStorageVolumesOption = struct {
     /// The maximum number of I/O operations per second (IOPS) that the additional
     /// storage volume supports.
-    max_iops: ?i32,
+    max_iops: ?i32 = null,
 
     /// The maximum ratio of I/O operations per second (IOPS) to gibibytes (GiB) of
     /// storage for the additional storage volume.
-    max_iops_per_gib: ?f64,
+    max_iops_per_gib: ?f64 = null,
 
     /// The maximum amount of storage that you can allocate for the additional
     /// storage volume, in gibibytes (GiB).
-    max_storage_size: ?i32,
+    max_storage_size: ?i32 = null,
 
     /// The maximum storage throughput that the additional storage volume supports,
     /// in mebibytes per second (MiBps).
-    max_storage_throughput: ?i32,
+    max_storage_throughput: ?i32 = null,
 
     /// The minimum number of I/O operations per second (IOPS) that the additional
     /// storage volume supports.
-    min_iops: ?i32,
+    min_iops: ?i32 = null,
 
     /// The minimum ratio of I/O operations per second (IOPS) to gibibytes (GiB) of
     /// storage for the additional storage volume.
-    min_iops_per_gib: ?f64,
+    min_iops_per_gib: ?f64 = null,
 
     /// The minimum amount of storage that you can allocate for the additional
     /// storage volume, in gibibytes (GiB).
-    min_storage_size: ?i32,
+    min_storage_size: ?i32 = null,
 
     /// The minimum storage throughput that the additional storage volume supports,
     /// in mebibytes per second (MiBps).
-    min_storage_throughput: ?i32,
+    min_storage_throughput: ?i32 = null,
 
     /// The storage type for the additional storage volume.
     ///
     /// Valid Values: `GP3 | IO2`
-    storage_type: ?[]const u8,
+    storage_type: ?[]const u8 = null,
 
     /// Indicates whether the additional storage volume supports provisioned IOPS.
-    supports_iops: ?bool,
+    supports_iops: ?bool = null,
 
     /// Indicates whether the additional storage volume supports storage
     /// autoscaling.
-    supports_storage_autoscaling: ?bool,
+    supports_storage_autoscaling: ?bool = null,
 
     /// Indicates whether the additional storage volume supports configurable
     /// storage throughput.
-    supports_storage_throughput: ?bool,
+    supports_storage_throughput: ?bool = null,
 };

@@ -12,13 +12,13 @@ const AwsElasticsearchDomainVPCOptions = @import("aws_elasticsearch_domain_vpc_o
 pub const AwsElasticsearchDomainDetails = struct {
     /// IAM policy document specifying the access policies for the new Elasticsearch
     /// domain.
-    access_policies: ?[]const u8,
+    access_policies: ?[]const u8 = null,
 
     /// Additional options for the domain endpoint.
-    domain_endpoint_options: ?AwsElasticsearchDomainDomainEndpointOptions,
+    domain_endpoint_options: ?AwsElasticsearchDomainDomainEndpointOptions = null,
 
     /// Unique identifier for an Elasticsearch domain.
-    domain_id: ?[]const u8,
+    domain_id: ?[]const u8 = null,
 
     /// Name of an Elasticsearch domain.
     ///
@@ -30,41 +30,41 @@ pub const AwsElasticsearchDomainDetails = struct {
     /// characters.
     ///
     /// Valid characters are a-z (lowercase only), 0-9, and – (hyphen).
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// Information about an OpenSearch cluster configuration.
-    elasticsearch_cluster_config: ?AwsElasticsearchDomainElasticsearchClusterConfigDetails,
+    elasticsearch_cluster_config: ?AwsElasticsearchDomainElasticsearchClusterConfigDetails = null,
 
     /// OpenSearch version.
-    elasticsearch_version: ?[]const u8,
+    elasticsearch_version: ?[]const u8 = null,
 
     /// Details about the configuration for encryption at rest.
-    encryption_at_rest_options: ?AwsElasticsearchDomainEncryptionAtRestOptions,
+    encryption_at_rest_options: ?AwsElasticsearchDomainEncryptionAtRestOptions = null,
 
     /// Domain-specific endpoint used to submit index, search, and data upload
     /// requests to an
     /// Elasticsearch domain.
     ///
     /// The endpoint is a service URL.
-    endpoint: ?[]const u8,
+    endpoint: ?[]const u8 = null,
 
     /// The key-value pair that exists if the Elasticsearch domain uses VPC
     /// endpoints.
-    endpoints: ?[]const aws.map.StringMapEntry,
+    endpoints: ?[]const aws.map.StringMapEntry = null,
 
     /// Configures the CloudWatch Logs to publish for the Elasticsearch domain.
-    log_publishing_options: ?AwsElasticsearchDomainLogPublishingOptions,
+    log_publishing_options: ?AwsElasticsearchDomainLogPublishingOptions = null,
 
     /// Details about the configuration for node-to-node encryption.
-    node_to_node_encryption_options: ?AwsElasticsearchDomainNodeToNodeEncryptionOptions,
+    node_to_node_encryption_options: ?AwsElasticsearchDomainNodeToNodeEncryptionOptions = null,
 
     /// Information about the status of a domain relative to the latest service
     /// software.
-    service_software_options: ?AwsElasticsearchDomainServiceSoftwareOptions,
+    service_software_options: ?AwsElasticsearchDomainServiceSoftwareOptions = null,
 
     /// Information that OpenSearch derives based on `VPCOptions` for the
     /// domain.
-    vpc_options: ?AwsElasticsearchDomainVPCOptions,
+    vpc_options: ?AwsElasticsearchDomainVPCOptions = null,
 
     pub const json_field_names = .{
         .access_policies = "AccessPolicies",

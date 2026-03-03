@@ -4,10 +4,10 @@ pub const FixedResponseActionConfig = struct {
     ///
     /// Valid Values: text/plain | text/css | text/html | application/javascript |
     /// application/json
-    content_type: ?[]const u8,
+    content_type: ?[]const u8 = null,
 
     /// The message.
-    message_body: ?[]const u8,
+    message_body: ?[]const u8 = null,
 
     /// The HTTP response code (2XX, 4XX, or 5XX).
     status_code: []const u8,

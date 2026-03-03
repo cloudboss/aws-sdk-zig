@@ -7,7 +7,7 @@ pub const Measurement = struct {
     /// You can configure measurements to be kept at the edge or forwarded to the
     /// Amazon Web Services Cloud.
     /// By default, measurements are forwarded to the cloud.
-    processing_config: ?MeasurementProcessingConfig,
+    processing_config: ?MeasurementProcessingConfig = null,
 
     pub const json_field_names = .{
         .processing_config = "processingConfig",

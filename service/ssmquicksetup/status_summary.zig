@@ -9,10 +9,10 @@ pub const StatusSummary = struct {
     last_updated_at: i64,
 
     /// The current status.
-    status: ?Status,
+    status: ?Status = null,
 
     /// Details about the status.
-    status_details: ?[]const aws.map.StringMapEntry,
+    status_details: ?[]const aws.map.StringMapEntry = null,
 
     /// When applicable, returns an informational message relevant to the current
     /// status
@@ -20,7 +20,7 @@ pub const StatusSummary = struct {
     /// implementing
     /// parsing logic around this value since the messages returned can vary in
     /// format.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The type of a status summary.
     status_type: StatusType,

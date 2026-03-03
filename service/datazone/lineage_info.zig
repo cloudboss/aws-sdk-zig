@@ -3,13 +3,13 @@ const LineageEventProcessingStatus = @import("lineage_event_processing_status.zi
 /// The data lineage information.
 pub const LineageInfo = struct {
     /// The data lineage error message.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The data lineage event ID.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The data lineage event status.
-    event_status: ?LineageEventProcessingStatus,
+    event_status: ?LineageEventProcessingStatus = null,
 
     pub const json_field_names = .{
         .error_message = "errorMessage",

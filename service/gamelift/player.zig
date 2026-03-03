@@ -19,7 +19,7 @@ pub const Player = struct {
     /// in order to be matched. If no latency is reported in this scenario,
     /// FlexMatch assumes that
     /// no Regions are available to the player and the ticket is not matchable.
-    latency_in_ms: ?[]const aws.map.MapEntry(i32),
+    latency_in_ms: ?[]const aws.map.MapEntry(i32) = null,
 
     /// A collection of key:value pairs containing player information for use in
     /// matchmaking.
@@ -28,15 +28,15 @@ pub const Player = struct {
     /// "gameMode": {"S": "deathmatch"}}`.
     ///
     /// You can provide up to 10 `PlayerAttributes`.
-    player_attributes: ?[]const aws.map.MapEntry(AttributeValue),
+    player_attributes: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// A unique identifier for a player
-    player_id: ?[]const u8,
+    player_id: ?[]const u8 = null,
 
     /// Name of the team that the player is assigned to in a match. Team names are
     /// defined in
     /// a matchmaking rule set.
-    team: ?[]const u8,
+    team: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .latency_in_ms = "LatencyInMs",

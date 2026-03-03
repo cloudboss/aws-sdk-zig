@@ -6,16 +6,16 @@ const WhatsAppPhoneNumberDetail = @import("whats_app_phone_number_detail.zig").W
 /// phone number.
 pub const LinkedWhatsAppBusinessAccountIdMetaData = struct {
     /// The name of your account.
-    account_name: ?[]const u8,
+    account_name: ?[]const u8 = null,
 
     /// The registration status of the linked WhatsApp Business Account.
-    registration_status: ?RegistrationStatus,
+    registration_status: ?RegistrationStatus = null,
 
     /// The details for unregistered WhatsApp phone numbers.
-    unregistered_whats_app_phone_numbers: ?[]const WhatsAppPhoneNumberDetail,
+    unregistered_whats_app_phone_numbers: ?[]const WhatsAppPhoneNumberDetail = null,
 
     /// The Amazon Resource Name (ARN) of the WhatsApp Business Account ID.
-    waba_id: ?[]const u8,
+    waba_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_name = "accountName",

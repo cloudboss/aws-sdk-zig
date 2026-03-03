@@ -20,12 +20,12 @@ pub const SnowflakeDestinationConfiguration = struct {
     /// Describes the buffering to perform before delivering data to the Snowflake
     /// destination. If you do not specify any value, Firehose uses the default
     /// values.
-    buffering_hints: ?SnowflakeBufferingHints,
+    buffering_hints: ?SnowflakeBufferingHints = null,
 
-    cloud_watch_logging_options: ?CloudWatchLoggingOptions,
+    cloud_watch_logging_options: ?CloudWatchLoggingOptions = null,
 
     /// The name of the record content column.
-    content_column_name: ?[]const u8,
+    content_column_name: ?[]const u8 = null,
 
     /// All data in Snowflake is maintained in databases.
     database: []const u8,
@@ -33,12 +33,12 @@ pub const SnowflakeDestinationConfiguration = struct {
     /// Choose to load JSON keys mapped to table column names or choose to split the
     /// JSON payload where content is mapped to a record content column and source
     /// metadata is mapped to a record metadata column.
-    data_loading_option: ?SnowflakeDataLoadingOption,
+    data_loading_option: ?SnowflakeDataLoadingOption = null,
 
     /// Passphrase to decrypt the private key when the key is encrypted. For
     /// information, see [Using Key Pair Authentication & Key
     /// Rotation](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation).
-    key_passphrase: ?[]const u8,
+    key_passphrase: ?[]const u8 = null,
 
     /// Specify a column name in the table, where the metadata information has to be
     /// loaded.
@@ -58,24 +58,24 @@ pub const SnowflakeDestinationConfiguration = struct {
     /// "kinesisPartitionKey" : "key", "kinesisSequenceNumber" : "1234",
     /// "subsequenceNumber" :
     /// "2334", "IngestionTime" : "timestamp" }`
-    meta_data_column_name: ?[]const u8,
+    meta_data_column_name: ?[]const u8 = null,
 
     /// The private key used to encrypt your Snowflake client. For information, see
     /// [Using Key Pair Authentication & Key
     /// Rotation](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation).
-    private_key: ?[]const u8,
+    private_key: ?[]const u8 = null,
 
-    processing_configuration: ?ProcessingConfiguration,
+    processing_configuration: ?ProcessingConfiguration = null,
 
     /// The time period where Firehose will retry sending data to the chosen HTTP
     /// endpoint.
-    retry_options: ?SnowflakeRetryOptions,
+    retry_options: ?SnowflakeRetryOptions = null,
 
     /// The Amazon Resource Name (ARN) of the Snowflake role
     role_arn: []const u8,
 
     /// Choose an S3 backup mode
-    s3_backup_mode: ?SnowflakeS3BackupMode,
+    s3_backup_mode: ?SnowflakeS3BackupMode = null,
 
     s3_configuration: S3DestinationConfiguration,
 
@@ -84,25 +84,25 @@ pub const SnowflakeDestinationConfiguration = struct {
     schema: []const u8,
 
     /// The configuration that defines how you access secrets for Snowflake.
-    secrets_manager_configuration: ?SecretsManagerConfiguration,
+    secrets_manager_configuration: ?SecretsManagerConfiguration = null,
 
     /// Optionally configure a Snowflake role. Otherwise the default user role will
     /// be used.
-    snowflake_role_configuration: ?SnowflakeRoleConfiguration,
+    snowflake_role_configuration: ?SnowflakeRoleConfiguration = null,
 
     /// The VPCE ID for Firehose to privately connect with Snowflake. The ID format
     /// is
     /// com.amazonaws.vpce.[region].vpce-svc-. For more information, see [Amazon
     /// PrivateLink &
     /// Snowflake](https://docs.snowflake.com/en/user-guide/admin-security-privatelink)
-    snowflake_vpc_configuration: ?SnowflakeVpcConfiguration,
+    snowflake_vpc_configuration: ?SnowflakeVpcConfiguration = null,
 
     /// All data in Snowflake is stored in database tables, logically structured as
     /// collections of columns and rows.
     table: []const u8,
 
     /// User login name for the Snowflake account.
-    user: ?[]const u8,
+    user: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_url = "AccountUrl",

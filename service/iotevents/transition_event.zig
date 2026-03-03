@@ -5,7 +5,7 @@ const Action = @import("action.zig").Action;
 /// evaluates to TRUE.
 pub const TransitionEvent = struct {
     /// The actions to be performed.
-    actions: ?[]const Action,
+    actions: ?[]const Action = null,
 
     /// Required. A Boolean expression that when TRUE causes the actions to be
     /// performed and the

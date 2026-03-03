@@ -4,7 +4,7 @@ const VectorSearchRerankingConfigurationType = @import("vector_search_reranking_
 /// Contains configurations for reranking the retrieved results.
 pub const VectorSearchRerankingConfiguration = struct {
     /// Contains configurations for an Amazon Bedrock reranker model.
-    bedrock_reranking_configuration: ?VectorSearchBedrockRerankingConfiguration,
+    bedrock_reranking_configuration: ?VectorSearchBedrockRerankingConfiguration = null,
 
     /// The type of reranker model.
     @"type": VectorSearchRerankingConfigurationType,

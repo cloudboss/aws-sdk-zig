@@ -8,7 +8,7 @@ const ECSServiceProjectedMetric = @import("ecs_service_projected_metric.zig").EC
 /// compare the metric data of your service against its projected metric data.
 pub const ECSServiceRecommendedOptionProjectedMetric = struct {
     /// An array of objects that describe the projected metric.
-    projected_metrics: ?[]const ECSServiceProjectedMetric,
+    projected_metrics: ?[]const ECSServiceProjectedMetric = null,
 
     /// The recommended CPU size for the Amazon ECS service.
     recommended_cpu_units: i32 = 0,

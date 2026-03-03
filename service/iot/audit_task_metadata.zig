@@ -4,15 +4,15 @@ const AuditTaskType = @import("audit_task_type.zig").AuditTaskType;
 /// The audits that were performed.
 pub const AuditTaskMetadata = struct {
     /// The ID of this audit.
-    task_id: ?[]const u8,
+    task_id: ?[]const u8 = null,
 
     /// The status of this audit. One of "IN_PROGRESS", "COMPLETED",
     /// "FAILED", or "CANCELED".
-    task_status: ?AuditTaskStatus,
+    task_status: ?AuditTaskStatus = null,
 
     /// The type of this audit. One of "ON_DEMAND_AUDIT_TASK" or
     /// "SCHEDULED_AUDIT_TASK".
-    task_type: ?AuditTaskType,
+    task_type: ?AuditTaskType = null,
 
     pub const json_field_names = .{
         .task_id = "taskId",

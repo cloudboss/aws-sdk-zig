@@ -4,20 +4,20 @@ const ServiceActionAssociationErrorCode = @import("service_action_association_er
 /// information about the self-service action and its associations.
 pub const FailedServiceActionAssociation = struct {
     /// The error code. Valid values are listed below.
-    error_code: ?ServiceActionAssociationErrorCode,
+    error_code: ?ServiceActionAssociationErrorCode = null,
 
     /// A text description of the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The product identifier. For example, `prod-abcdzk7xy33qa`.
-    product_id: ?[]const u8,
+    product_id: ?[]const u8 = null,
 
     /// The identifier of the provisioning artifact. For example,
     /// `pa-4abcdjnxjj6ne`.
-    provisioning_artifact_id: ?[]const u8,
+    provisioning_artifact_id: ?[]const u8 = null,
 
     /// The self-service action identifier. For example, `act-fs7abcd89wxyz`.
-    service_action_id: ?[]const u8,
+    service_action_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

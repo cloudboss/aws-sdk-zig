@@ -4,7 +4,7 @@ const MeetingFeatureStatus = @import("meeting_feature_status.zig").MeetingFeatur
 /// Reduction.
 pub const AudioFeatures = struct {
     /// Makes echo reduction available to clients who connect to the meeting.
-    echo_reduction: ?MeetingFeatureStatus,
+    echo_reduction: ?MeetingFeatureStatus = null,
 
     pub const json_field_names = .{
         .echo_reduction = "EchoReduction",

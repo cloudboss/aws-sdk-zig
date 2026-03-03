@@ -6,7 +6,7 @@ const FeatureType = @import("feature_type.zig").FeatureType;
 /// feature `FeatureType`s are `Integral`, `Fractional` and `String`.
 pub const FeatureDefinition = struct {
     /// Configuration for your collection.
-    collection_config: ?CollectionConfig,
+    collection_config: ?CollectionConfig = null,
 
     /// A grouping of elements where each element within the collection must have
     /// the same feature type (`String`, `Integral`, or `Fractional`).
@@ -16,7 +16,7 @@ pub const FeatureDefinition = struct {
     /// * `Vector`: A specialized list that represents a fixed-size array of
     ///   elements. The vector dimension is determined by you. Must have elements
     ///   with fractional feature types.
-    collection_type: ?CollectionType,
+    collection_type: ?CollectionType = null,
 
     /// The name of a feature. The type must be a string. `FeatureName` cannot be
     /// any of the following: `is_deleted`, `write_time`, `api_invocation_time`.

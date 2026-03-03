@@ -5,12 +5,12 @@ const VpcConnectionProperties = @import("vpc_connection_properties.zig").VpcConn
 /// data source connections that are made with Snowflake and Starburst.
 pub const OAuthParameters = struct {
     /// The resource uri of the identity provider.
-    identity_provider_resource_uri: ?[]const u8,
+    identity_provider_resource_uri: ?[]const u8 = null,
 
-    identity_provider_vpc_connection_properties: ?VpcConnectionProperties,
+    identity_provider_vpc_connection_properties: ?VpcConnectionProperties = null,
 
     /// The OAuth scope.
-    o_auth_scope: ?[]const u8,
+    o_auth_scope: ?[]const u8 = null,
 
     /// The token endpoint URL of the identity provider.
     token_provider_url: []const u8,

@@ -1,10 +1,10 @@
 /// Information about the build input source code for this build project.
 pub const AwsCodeBuildProjectSource = struct {
     /// Information about the Git clone depth for the build project.
-    git_clone_depth: ?i32,
+    git_clone_depth: ?i32 = null,
 
     /// Whether to ignore SSL warnings while connecting to the project source code.
-    insecure_ssl: ?bool,
+    insecure_ssl: ?bool = null,
 
     /// Information about the location of the source code to be built.
     ///
@@ -37,7 +37,7 @@ pub const AwsCodeBuildProjectSource = struct {
     /// * For source code in a Bitbucket repository, the HTTPS clone URL to the
     ///   repository
     /// that contains the source and the build spec file.
-    location: ?[]const u8,
+    location: ?[]const u8 = null,
 
     /// The type of repository that contains the source code to be built. Valid
     /// values
@@ -59,7 +59,7 @@ pub const AwsCodeBuildProjectSource = struct {
     /// * `NO_SOURCE` - The project does not have input source code.
     ///
     /// * `S3` - The source code is in an S3 input bucket.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .git_clone_depth = "GitCloneDepth",

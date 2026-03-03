@@ -21,10 +21,10 @@ pub const AppAssessment = struct {
     /// Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the
     /// *Amazon Web Services General Reference* guide.
-    app_arn: ?[]const u8,
+    app_arn: ?[]const u8 = null,
 
     /// Version of an application.
-    app_version: ?[]const u8,
+    app_version: ?[]const u8 = null,
 
     /// Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
     /// arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
@@ -36,62 +36,62 @@ pub const AppAssessment = struct {
     assessment_arn: []const u8,
 
     /// Name of the assessment.
-    assessment_name: ?[]const u8,
+    assessment_name: ?[]const u8 = null,
 
     /// Current status of the assessment for the resiliency policy.
     assessment_status: AssessmentStatus,
 
     /// Application compliance against the resiliency policy.
-    compliance: ?[]const aws.map.MapEntry(DisruptionCompliance),
+    compliance: ?[]const aws.map.MapEntry(DisruptionCompliance) = null,
 
     /// Current status of the compliance for the resiliency policy.
-    compliance_status: ?ComplianceStatus,
+    compliance_status: ?ComplianceStatus = null,
 
     /// Cost for the application.
-    cost: ?Cost,
+    cost: ?Cost = null,
 
     /// Indicates if compliance drifts (deviations) were detected while running an
     /// assessment for
     /// your application.
-    drift_status: ?DriftStatus,
+    drift_status: ?DriftStatus = null,
 
     /// End time for the action.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The entity that invoked the assessment.
     invoker: AssessmentInvoker,
 
     /// Error or warning message from the assessment execution
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     /// Resiliency policy of an application.
-    policy: ?ResiliencyPolicy,
+    policy: ?ResiliencyPolicy = null,
 
     /// Current resiliency score for an application.
-    resiliency_score: ?ResiliencyScore,
+    resiliency_score: ?ResiliencyScore = null,
 
     /// A resource error object containing a list of errors retrieving an
     /// application's
     /// resources.
-    resource_errors_details: ?ResourceErrorsDetails,
+    resource_errors_details: ?ResourceErrorsDetails = null,
 
     /// Starting time for the action.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Indicates the AI-generated summary for the Resilience Hub assessment,
     /// providing a concise overview that highlights the top risks and
     /// recommendations.
     ///
     /// This property is available only in the US East (N. Virginia) Region.
-    summary: ?AssessmentSummary,
+    summary: ?AssessmentSummary = null,
 
     /// Tags assigned to the resource. A tag is a label that you assign to an Amazon
     /// Web Services resource.
     /// Each tag consists of a key/value pair.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Version name of the published application.
-    version_name: ?[]const u8,
+    version_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .app_arn = "appArn",

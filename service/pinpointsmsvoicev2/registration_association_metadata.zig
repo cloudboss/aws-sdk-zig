@@ -3,10 +3,10 @@
 pub const RegistrationAssociationMetadata = struct {
     /// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
     /// region.
-    iso_country_code: ?[]const u8,
+    iso_country_code: ?[]const u8 = null,
 
     /// The phone number associated with the registration in E.164 format.
-    phone_number: ?[]const u8,
+    phone_number: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the origination identity that is
     /// associated with the registration.

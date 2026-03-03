@@ -7,7 +7,7 @@ pub const AudioSelectorGroup = struct {
     /// Audio selector names are standardized, based on their order within the input
     /// (e.g., "Audio Selector 1"). The audio selector name parameter can be
     /// repeated to add any number of audio selectors to the group.
-    audio_selector_names: ?[]const []const u8,
+    audio_selector_names: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .audio_selector_names = "AudioSelectorNames",

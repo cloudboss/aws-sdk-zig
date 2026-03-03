@@ -5,7 +5,7 @@ pub const HumanWorkflowConfig = struct {
     flow_definition_arn: []const u8,
 
     /// Instructions for the flow definition
-    instructions: ?[]const u8,
+    instructions: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .flow_definition_arn = "flowDefinitionArn",

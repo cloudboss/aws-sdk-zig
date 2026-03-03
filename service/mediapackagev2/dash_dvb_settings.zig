@@ -6,10 +6,10 @@ const DashDvbFontDownload = @import("dash_dvb_font_download.zig").DashDvbFontDow
 /// the manifest.
 pub const DashDvbSettings = struct {
     /// Playback device error reporting settings.
-    error_metrics: ?[]const DashDvbMetricsReporting,
+    error_metrics: ?[]const DashDvbMetricsReporting = null,
 
     /// Subtitle font settings.
-    font_download: ?DashDvbFontDownload,
+    font_download: ?DashDvbFontDownload = null,
 
     pub const json_field_names = .{
         .error_metrics = "ErrorMetrics",

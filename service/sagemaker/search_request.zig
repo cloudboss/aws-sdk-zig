@@ -12,15 +12,15 @@ pub const SearchRequest = struct {
     /// information on searching for resources made discoverable to your account,
     /// see [ Search discoverable
     /// resources](https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html) in the SageMaker Developer Guide. The maximum number of `ResourceCatalog`s viewable is 1000.
-    cross_account_filter_option: ?CrossAccountFilterOption,
+    cross_account_filter_option: ?CrossAccountFilterOption = null,
 
     /// The maximum number of results to return.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// If more than `MaxResults` resources match the specified `SearchExpression`,
     /// the response includes a `NextToken`. The `NextToken` can be passed to the
     /// next `SearchRequest` to continue retrieving results.
-    next_token: ?[]const u8,
+    next_token: ?[]const u8 = null,
 
     /// The name of the SageMaker resource to search for.
     resource: ResourceType,
@@ -30,19 +30,19 @@ pub const SearchRequest = struct {
     /// filter, or nested filter. The maximum number of recursive `SubExpressions`,
     /// `NestedFilters`, and `Filters` that can be included in a `SearchExpression`
     /// object is 50.
-    search_expression: ?SearchExpression,
+    search_expression: ?SearchExpression = null,
 
     /// The name of the resource property used to sort the `SearchResults`. The
     /// default is `LastModifiedTime`.
-    sort_by: ?[]const u8,
+    sort_by: ?[]const u8 = null,
 
     /// How `SearchResults` are ordered. Valid values are `Ascending` or
     /// `Descending`. The default is `Descending`.
-    sort_order: ?SearchSortOrder,
+    sort_order: ?SearchSortOrder = null,
 
     /// Limits the results of your search request to the resources that you can
     /// access.
-    visibility_conditions: ?[]const VisibilityConditions,
+    visibility_conditions: ?[]const VisibilityConditions = null,
 
     pub const json_field_names = .{
         .cross_account_filter_option = "CrossAccountFilterOption",

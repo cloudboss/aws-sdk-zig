@@ -1,11 +1,11 @@
 /// Settings for logging access in a stage.
 pub const AccessLogSettings = struct {
     /// The ARN of the CloudWatch Logs log group to receive access logs.
-    destination_arn: ?[]const u8,
+    destination_arn: ?[]const u8 = null,
 
     /// A single line format of the access logs of data, as specified by selected
     /// $context variables. The format must include at least $context.requestId.
-    format: ?[]const u8,
+    format: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_arn = "DestinationArn",

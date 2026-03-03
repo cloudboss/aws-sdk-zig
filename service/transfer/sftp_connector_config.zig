@@ -55,7 +55,7 @@ pub const SftpConnectorConfig = struct {
     /// For VPC Lattice type connectors (VPC_LATTICE), remove the hostname from the
     /// key and use only the `key-type key-body` format. In this example, it should
     /// be: `ssh-rsa AAAAB3Nza...<long-string-for-public-key>`
-    trusted_host_keys: ?[]const []const u8,
+    trusted_host_keys: ?[]const []const u8 = null,
 
     /// The identifier for the secret (in Amazon Web Services Secrets Manager) that
     /// contains the SFTP user's private key, password, or both. The identifier must
@@ -63,7 +63,7 @@ pub const SftpConnectorConfig = struct {
     ///
     /// * Required when creating an SFTP connector
     /// * Optional when updating an existing SFTP connector
-    user_secret_id: ?[]const u8,
+    user_secret_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_concurrent_connections = "MaxConcurrentConnections",

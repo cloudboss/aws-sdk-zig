@@ -13,10 +13,10 @@ pub const RuntimePlatform = struct {
     /// to
     /// `ARM64`. This option is available for tasks that run on Linux Amazon EC2
     /// instance, Amazon ECS Managed Instances, or Linux containers on Fargate.
-    cpu_architecture: ?CPUArchitecture,
+    cpu_architecture: ?CPUArchitecture = null,
 
     /// The operating system.
-    operating_system_family: ?OSFamily,
+    operating_system_family: ?OSFamily = null,
 
     pub const json_field_names = .{
         .cpu_architecture = "cpuArchitecture",

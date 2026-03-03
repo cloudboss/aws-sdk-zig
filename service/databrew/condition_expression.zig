@@ -20,7 +20,7 @@ pub const ConditionExpression = struct {
     target_column: []const u8,
 
     /// A value that the condition must evaluate to for the condition to succeed.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .condition = "Condition",

@@ -3,11 +3,11 @@
 pub const ModelClientConfig = struct {
     /// The maximum number of retries when invocation requests are failing. The
     /// default value is 3.
-    invocations_max_retries: ?i32,
+    invocations_max_retries: ?i32 = null,
 
     /// The timeout value in seconds for an invocation request. The default value is
     /// 600.
-    invocations_timeout_in_seconds: ?i32,
+    invocations_timeout_in_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .invocations_max_retries = "InvocationsMaxRetries",

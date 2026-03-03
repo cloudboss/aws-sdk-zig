@@ -7,10 +7,10 @@ pub const FaceMatch = struct {
     /// Describes the face properties such as the bounding box, face ID, image ID of
     /// the source
     /// image, and external image ID that you assigned.
-    face: ?Face,
+    face: ?Face = null,
 
     /// Confidence in the match of this face with the input face.
-    similarity: ?f32,
+    similarity: ?f32 = null,
 
     pub const json_field_names = .{
         .face = "Face",

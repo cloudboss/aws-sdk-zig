@@ -6,7 +6,7 @@ pub const DataIntegrationFlowS3TargetConfiguration = struct {
     bucket_name: []const u8,
 
     /// The S3 DataIntegrationFlow target options.
-    options: ?DataIntegrationFlowS3Options,
+    options: ?DataIntegrationFlowS3Options = null,
 
     /// The prefix of the S3 target objects.
     prefix: []const u8,

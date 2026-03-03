@@ -14,7 +14,7 @@ pub const TrackSourceSettings = struct {
     /// track which is not recognized by the service, then the corresponding stream
     /// number will still be reserved for future use. If more types of caption data
     /// get recognized in the future, these numberings will not shift.
-    stream_number: ?i32,
+    stream_number: ?i32 = null,
 
     /// Use this setting to select a single captions track from a source. Track
     /// numbers correspond to the order in the captions source file. For IMF
@@ -24,7 +24,7 @@ pub const TrackSourceSettings = struct {
     /// outputs, create multiple input captions selectors. Specify one track per
     /// selector. If more types of caption data get recognized in the future, these
     /// numberings may shift, but the numberings used for streamNumber will not.
-    track_number: ?i32,
+    track_number: ?i32 = null,
 
     pub const json_field_names = .{
         .stream_number = "StreamNumber",

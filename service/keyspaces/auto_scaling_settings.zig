@@ -48,18 +48,18 @@ pub const AutoScalingSettings = struct {
     /// Manage costs by specifying the maximum amount of throughput to provision.
     /// The value must be between 1 and the max throughput per second quota for your
     /// account (40,000 by default).
-    maximum_units: ?i64,
+    maximum_units: ?i64 = null,
 
     /// The minimum level of throughput the table should always be ready to support.
     /// The value must be between 1 and the max throughput per second quota for your
     /// account (40,000 by default).
-    minimum_units: ?i64,
+    minimum_units: ?i64 = null,
 
     /// Amazon Keyspaces supports the `target tracking` auto scaling policy. With
     /// this policy, Amazon Keyspaces auto scaling ensures that the table's ratio of
     /// consumed to provisioned capacity stays at or near the target value that you
     /// specify. You define the target value as a percentage between 20 and 90.
-    scaling_policy: ?AutoScalingPolicy,
+    scaling_policy: ?AutoScalingPolicy = null,
 
     pub const json_field_names = .{
         .auto_scaling_disabled = "autoScalingDisabled",

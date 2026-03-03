@@ -3,7 +3,7 @@ const ErrorHandlingConfig = @import("error_handling_config.zig").ErrorHandlingCo
 /// The properties that are applied when Amazon EventBridge is being used as a
 /// destination.
 pub const EventBridgeDestinationProperties = struct {
-    error_handling_config: ?ErrorHandlingConfig,
+    error_handling_config: ?ErrorHandlingConfig = null,
 
     /// The object specified in the Amazon EventBridge flow destination.
     object: []const u8,

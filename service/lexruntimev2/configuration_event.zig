@@ -24,7 +24,7 @@ pub const ConfigurationEvent = struct {
 
     /// A unique identifier that your application assigns to the event. You
     /// can use this to identify events in logs.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// Request-specific information passed between the client application
     /// and Amazon Lex V2.
@@ -32,7 +32,7 @@ pub const ConfigurationEvent = struct {
     /// The namespace `x-amz-lex:` is reserved for special
     /// attributes. Don't create any request attributes for prefix
     /// `x-amz-lex:`.
-    request_attributes: ?[]const aws.map.StringMapEntry,
+    request_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The message that Amazon Lex V2 returns in the response can be either text or
     /// speech based on the `responseContentType` value.
@@ -64,7 +64,7 @@ pub const ConfigurationEvent = struct {
     /// * text/plain; charset=utf-8
     response_content_type: []const u8,
 
-    session_state: ?SessionState,
+    session_state: ?SessionState = null,
 
     /// A list of messages to send to the user.
     ///
@@ -75,7 +75,7 @@ pub const ConfigurationEvent = struct {
     /// structure's [
     /// `type`
     /// ](https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html#lexv2-Type-runtime_DialogAction-type) field.
-    welcome_messages: ?[]const Message,
+    welcome_messages: ?[]const Message = null,
 
     pub const json_field_names = .{
         .client_timestamp_millis = "clientTimestampMillis",

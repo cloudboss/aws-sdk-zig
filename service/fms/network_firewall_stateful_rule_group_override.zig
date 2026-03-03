@@ -5,7 +5,7 @@ const NetworkFirewallOverrideAction = @import("network_firewall_override_action.
 pub const NetworkFirewallStatefulRuleGroupOverride = struct {
     /// The action that changes the rule group from `DROP` to `ALERT`. This only
     /// applies to managed rule groups.
-    action: ?NetworkFirewallOverrideAction,
+    action: ?NetworkFirewallOverrideAction = null,
 
     pub const json_field_names = .{
         .action = "Action",

@@ -8,19 +8,19 @@ const PushFCMMessageTemplateContent = @import("push_fcm_message_template_content
 pub const PushMessageTemplateContent = struct {
     /// The content of the message template that applies to ADM (Amazon Device
     /// Messaging) notification service.
-    adm: ?PushADMMessageTemplateContent,
+    adm: ?PushADMMessageTemplateContent = null,
 
     /// The content of the message template that applies to APNS(Apple Push
     /// Notification service) notification service.
-    apns: ?PushAPNSMessageTemplateContent,
+    apns: ?PushAPNSMessageTemplateContent = null,
 
     /// The content of the message template that applies to Baidu notification
     /// service.
-    baidu: ?PushBaiduMessageTemplateContent,
+    baidu: ?PushBaiduMessageTemplateContent = null,
 
     /// The content of the message template that applies to FCM (Firebase Cloud
     /// Messaging) notification service.
-    fcm: ?PushFCMMessageTemplateContent,
+    fcm: ?PushFCMMessageTemplateContent = null,
 
     pub const json_field_names = .{
         .adm = "adm",

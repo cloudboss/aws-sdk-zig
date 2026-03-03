@@ -9,20 +9,20 @@ pub const LoadBalancerTlsPolicy = struct {
     /// The ciphers used by the TLS security policy.
     ///
     /// The ciphers are listed in order of preference.
-    ciphers: ?[]const []const u8,
+    ciphers: ?[]const []const u8 = null,
 
     /// The description of the TLS security policy.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A Boolean value that indicates whether the TLS security policy is the
     /// default.
-    is_default: ?bool,
+    is_default: ?bool = null,
 
     /// The name of the TLS security policy.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The protocols used in a given TLS security policy.
-    protocols: ?[]const []const u8,
+    protocols: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .ciphers = "ciphers",

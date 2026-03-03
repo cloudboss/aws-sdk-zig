@@ -3,21 +3,21 @@ const HierarchyLevelUpdate = @import("hierarchy_level_update.zig").HierarchyLeve
 /// Contains information about the level hierarchy to update.
 pub const HierarchyStructureUpdate = struct {
     /// The update for level five.
-    level_five: ?HierarchyLevelUpdate,
+    level_five: ?HierarchyLevelUpdate = null,
 
     /// The update for level four.
-    level_four: ?HierarchyLevelUpdate,
+    level_four: ?HierarchyLevelUpdate = null,
 
     /// The
     /// update
     /// for level one.
-    level_one: ?HierarchyLevelUpdate,
+    level_one: ?HierarchyLevelUpdate = null,
 
     /// The update for level three.
-    level_three: ?HierarchyLevelUpdate,
+    level_three: ?HierarchyLevelUpdate = null,
 
     /// The update for level two.
-    level_two: ?HierarchyLevelUpdate,
+    level_two: ?HierarchyLevelUpdate = null,
 
     pub const json_field_names = .{
         .level_five = "LevelFive",

@@ -7,15 +7,15 @@ const Protocol = @import("protocol.zig").Protocol;
 pub const CustomRoutingDestinationDescription = struct {
     /// The first port, inclusive, in the range of ports for the endpoint group that
     /// is associated with a custom routing accelerator.
-    from_port: ?i32,
+    from_port: ?i32 = null,
 
     /// The protocol for the endpoint group that is associated with a custom routing
     /// accelerator. The protocol can be either TCP or UDP.
-    protocols: ?[]const Protocol,
+    protocols: ?[]const Protocol = null,
 
     /// The last port, inclusive, in the range of ports for the endpoint group that
     /// is associated with a custom routing accelerator.
-    to_port: ?i32,
+    to_port: ?i32 = null,
 
     pub const json_field_names = .{
         .from_port = "FromPort",

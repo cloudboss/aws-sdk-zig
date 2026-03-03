@@ -26,7 +26,7 @@ pub const ClusterServiceConnectDefaults = struct {
     /// create a service and don't specify a Service Connect configuration, this
     /// namespace is
     /// used.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .namespace = "namespace",

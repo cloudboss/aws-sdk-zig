@@ -10,13 +10,13 @@ pub const Workspace = struct {
     arn: []const u8,
 
     /// The description of the workspace.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the workspace.
     id: []const u8,
 
     /// The Amazon Web Services Region where the workspace was last modified.
-    last_modified_region: ?[]const u8,
+    last_modified_region: ?[]const u8 = null,
 
     /// The timestamp when the workspace was last modified.
     last_modified_time: i64,
@@ -25,18 +25,18 @@ pub const Workspace = struct {
     name: []const u8,
 
     /// The tags used to organize, track, or control access for the workspace.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The theme configuration for the workspace, including colors and styling.
-    theme: ?WorkspaceTheme,
+    theme: ?WorkspaceTheme = null,
 
     /// The title displayed for the workspace.
-    title: ?[]const u8,
+    title: ?[]const u8 = null,
 
     /// Controls who can access the workspace. Valid values are: `ALL` (all users),
     /// `ASSIGNED`
     /// (only assigned users and routing profiles), and `NONE` (not visible).
-    visibility: ?Visibility,
+    visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -5,19 +5,19 @@ const Occurrences = @import("occurrences.zig").Occurrences;
 /// finding.
 pub const CustomDetection = struct {
     /// The unique identifier for the custom data identifier.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The total number of occurrences of the sensitive data that the custom data
     /// identifier detected.
-    count: ?i64,
+    count: ?i64 = null,
 
     /// The name of the custom data identifier.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The location of 1-15 occurrences of the sensitive data that the custom data
     /// identifier detected. A finding includes location data for a maximum of 15
     /// occurrences of sensitive data.
-    occurrences: ?Occurrences,
+    occurrences: ?Occurrences = null,
 
     pub const json_field_names = .{
         .arn = "arn",

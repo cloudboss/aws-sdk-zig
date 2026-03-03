@@ -14,23 +14,23 @@ pub const MxfSettings = struct {
     /// to include or exclude AFD values, see AfdSignaling, under VideoDescription.
     /// On the console, find AFD signaling under the output's video encoding
     /// settings.
-    afd_signaling: ?MxfAfdSignaling,
+    afd_signaling: ?MxfAfdSignaling = null,
 
     /// Specify the MXF profile, also called shim, for this output. To automatically
     /// select a profile according to your output video codec and resolution, leave
     /// blank. For a list of codecs supported with each MXF profile, see
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.
-    profile: ?MxfProfile,
+    profile: ?MxfProfile = null,
 
     /// Choose the audio frame wrapping mode for PCM tracks in MXF outputs. AUTO
     /// (default): Uses codec-appropriate defaults - BWF for H.264/AVC, AES3 for
     /// MPEG2/XDCAM. AES3: Use AES3 frame wrapping with SMPTE-compliant descriptors.
     /// This setting only takes effect when the MXF profile is OP1a.
-    uncompressed_audio_wrapping: ?MxfUncompressedAudioWrapping,
+    uncompressed_audio_wrapping: ?MxfUncompressedAudioWrapping = null,
 
     /// Specify the XAVC profile settings for MXF outputs when you set your MXF
     /// profile to XAVC.
-    xavc_profile_settings: ?MxfXavcProfileSettings,
+    xavc_profile_settings: ?MxfXavcProfileSettings = null,
 
     pub const json_field_names = .{
         .afd_signaling = "AfdSignaling",

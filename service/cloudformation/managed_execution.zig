@@ -19,5 +19,5 @@ pub const ManagedExecution = struct {
     /// When `false` (default), StackSets performs one operation at a time in
     /// request
     /// order.
-    active: ?bool,
+    active: ?bool = null,
 };

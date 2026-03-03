@@ -5,22 +5,22 @@ pub const NetworkPathComponent = struct {
     /// The identifier of a component in the network path.
     ///
     /// Length Constraints: Minimum of 1. Maximum of 32.
-    component_id: ?[]const u8,
+    component_id: ?[]const u8 = null,
 
     /// The type of component.
     ///
     /// Length Constraints: Minimum of 1. Maximum of 32.
-    component_type: ?[]const u8,
+    component_type: ?[]const u8 = null,
 
     /// Information about the component that comes after the current component in
     /// the network
     /// path.
-    egress: ?NetworkHeader,
+    egress: ?NetworkHeader = null,
 
     /// Information about the component that comes before the current node in the
     /// network
     /// path.
-    ingress: ?NetworkHeader,
+    ingress: ?NetworkHeader = null,
 
     pub const json_field_names = .{
         .component_id = "ComponentId",

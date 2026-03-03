@@ -3,7 +3,7 @@ const VariantStatus = @import("variant_status.zig").VariantStatus;
 /// Describes the status of the production variant.
 pub const ProductionVariantStatus = struct {
     /// The start time of the current status change.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The endpoint variant status which describes the current deployment stage
     /// status or operational status.
@@ -17,7 +17,7 @@ pub const ProductionVariantStatus = struct {
     status: VariantStatus,
 
     /// A message that describes the status of the production variant.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .start_time = "StartTime",

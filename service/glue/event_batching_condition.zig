@@ -8,7 +8,7 @@ pub const EventBatchingCondition = struct {
 
     /// Window of time in seconds after which EventBridge event trigger fires.
     /// Window starts when first event is received.
-    batch_window: ?i32,
+    batch_window: ?i32 = null,
 
     pub const json_field_names = .{
         .batch_size = "BatchSize",

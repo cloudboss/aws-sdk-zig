@@ -8,7 +8,7 @@ pub const RevisionDestinationEntry = struct {
     /// revision. For more information about key patterns, see [Key patterns when
     /// exporting
     /// revisions](https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns).
-    key_pattern: ?[]const u8,
+    key_pattern: ?[]const u8 = null,
 
     /// The unique identifier for the revision.
     revision_id: []const u8,

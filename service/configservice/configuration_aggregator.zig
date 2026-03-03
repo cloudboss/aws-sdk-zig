@@ -8,30 +8,30 @@ const OrganizationAggregationSource = @import("organization_aggregation_source.z
 pub const ConfigurationAggregator = struct {
     /// Provides a list of source accounts and regions to be
     /// aggregated.
-    account_aggregation_sources: ?[]const AccountAggregationSource,
+    account_aggregation_sources: ?[]const AccountAggregationSource = null,
 
     /// An object to filter the data you specify for an aggregator.
-    aggregator_filters: ?AggregatorFilters,
+    aggregator_filters: ?AggregatorFilters = null,
 
     /// The Amazon Resource Name (ARN) of the aggregator.
-    configuration_aggregator_arn: ?[]const u8,
+    configuration_aggregator_arn: ?[]const u8 = null,
 
     /// The name of the aggregator.
-    configuration_aggregator_name: ?[]const u8,
+    configuration_aggregator_name: ?[]const u8 = null,
 
     /// Amazon Web Services service that created the configuration aggregator.
-    created_by: ?[]const u8,
+    created_by: ?[]const u8 = null,
 
     /// The time stamp when the configuration aggregator was
     /// created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The time of the last update.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// Provides an organization and list of regions to be
     /// aggregated.
-    organization_aggregation_source: ?OrganizationAggregationSource,
+    organization_aggregation_source: ?OrganizationAggregationSource = null,
 
     pub const json_field_names = .{
         .account_aggregation_sources = "AccountAggregationSources",

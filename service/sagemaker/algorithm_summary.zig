@@ -6,7 +6,7 @@ pub const AlgorithmSummary = struct {
     algorithm_arn: []const u8,
 
     /// A brief description of the algorithm.
-    algorithm_description: ?[]const u8,
+    algorithm_description: ?[]const u8 = null,
 
     /// The name of the algorithm that is described by the summary.
     algorithm_name: []const u8,

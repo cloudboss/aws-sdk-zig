@@ -6,23 +6,23 @@ const GuardrailAutomatedReasoningInputTextReference = @import("guardrail_automat
 pub const GuardrailAutomatedReasoningTranslation = struct {
     /// The logical statements that are being validated against the premises and
     /// policy rules.
-    claims: ?[]const GuardrailAutomatedReasoningStatement,
+    claims: ?[]const GuardrailAutomatedReasoningStatement = null,
 
     /// A confidence score between 0 and 1 indicating how certain the system is
     /// about the logical translation.
-    confidence: ?f64,
+    confidence: ?f64 = null,
 
     /// The logical statements that serve as the foundation or assumptions for the
     /// claims.
-    premises: ?[]const GuardrailAutomatedReasoningStatement,
+    premises: ?[]const GuardrailAutomatedReasoningStatement = null,
 
     /// References to portions of the original input text that correspond to the
     /// claims but could not be fully translated.
-    untranslated_claims: ?[]const GuardrailAutomatedReasoningInputTextReference,
+    untranslated_claims: ?[]const GuardrailAutomatedReasoningInputTextReference = null,
 
     /// References to portions of the original input text that correspond to the
     /// premises but could not be fully translated.
-    untranslated_premises: ?[]const GuardrailAutomatedReasoningInputTextReference,
+    untranslated_premises: ?[]const GuardrailAutomatedReasoningInputTextReference = null,
 
     pub const json_field_names = .{
         .claims = "claims",

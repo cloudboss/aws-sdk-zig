@@ -9,7 +9,7 @@ pub const IntentDetectedDataDetails = struct {
     intent_id: []const u8,
 
     /// The relevance level of the detected intent.
-    relevance_level: ?RelevanceLevel,
+    relevance_level: ?RelevanceLevel = null,
 
     pub const json_field_names = .{
         .intent = "intent",

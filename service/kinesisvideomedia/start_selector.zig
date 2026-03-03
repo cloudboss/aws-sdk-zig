@@ -20,12 +20,12 @@ const StartSelectorType = @import("start_selector_type.zig").StartSelectorType;
 pub const StartSelector = struct {
     /// Specifies the fragment number from where you want the `GetMedia` API to
     /// start returning the fragments.
-    after_fragment_number: ?[]const u8,
+    after_fragment_number: ?[]const u8 = null,
 
     /// Continuation token that Kinesis Video Streams returned in the previous
     /// `GetMedia` response. The `GetMedia` API then starts with the chunk
     /// identified by the continuation token.
-    continuation_token: ?[]const u8,
+    continuation_token: ?[]const u8 = null,
 
     /// Identifies the fragment on the Kinesis video stream where you want to start
     /// getting the
@@ -57,7 +57,7 @@ pub const StartSelector = struct {
     /// SERVER_TIMESTAMP as the `startSelectorType`. The `GetMedia` API then
     /// starts with the chunk containing the fragment that has the specified
     /// timestamp.
-    start_timestamp: ?i64,
+    start_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .after_fragment_number = "AfterFragmentNumber",

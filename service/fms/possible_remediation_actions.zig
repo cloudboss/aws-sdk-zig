@@ -4,10 +4,10 @@ const PossibleRemediationAction = @import("possible_remediation_action.zig").Pos
 /// remediation action is a list of individual remediation actions.
 pub const PossibleRemediationActions = struct {
     /// Information about the actions.
-    actions: ?[]const PossibleRemediationAction,
+    actions: ?[]const PossibleRemediationAction = null,
 
     /// A description of the possible remediation actions list.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

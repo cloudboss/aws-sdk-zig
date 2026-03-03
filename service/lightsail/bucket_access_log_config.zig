@@ -16,7 +16,7 @@ pub const BucketAccessLogConfig = struct {
     /// This parameter is required when enabling the access log for a bucket, and
     /// should be
     /// omitted when disabling the access log.
-    destination: ?[]const u8,
+    destination: ?[]const u8 = null,
 
     /// A Boolean value that indicates whether bucket access logging is enabled for
     /// the
@@ -35,7 +35,7 @@ pub const BucketAccessLogConfig = struct {
     /// This parameter can be optionally specified when enabling the access log for
     /// a bucket,
     /// and should be omitted when disabling the access log.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination = "destination",

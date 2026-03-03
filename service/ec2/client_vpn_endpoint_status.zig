@@ -19,8 +19,8 @@ pub const ClientVpnEndpointStatus = struct {
     /// * `deleted` - The Client VPN endpoint has been deleted. The Client VPN
     ///   endpoint cannot accept
     /// connections.
-    code: ?ClientVpnEndpointStatusCode,
+    code: ?ClientVpnEndpointStatusCode = null,
 
     /// A message about the status of the Client VPN endpoint.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

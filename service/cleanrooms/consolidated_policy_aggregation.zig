@@ -9,19 +9,19 @@ const ScalarFunctions = @import("scalar_functions.zig").ScalarFunctions;
 /// table.
 pub const ConsolidatedPolicyAggregation = struct {
     /// Additional analyses for the consolidated policy aggregation.
-    additional_analyses: ?AdditionalAnalyses,
+    additional_analyses: ?AdditionalAnalyses = null,
 
     /// Aggregate columns in consolidated policy aggregation.
     aggregate_columns: []const AggregateColumn,
 
     /// The additional analyses allowed by the consolidated policy aggregation.
-    allowed_additional_analyses: ?[]const []const u8,
+    allowed_additional_analyses: ?[]const []const u8 = null,
 
     /// The allowed join operators.
-    allowed_join_operators: ?[]const JoinOperator,
+    allowed_join_operators: ?[]const JoinOperator = null,
 
     /// The allowed result receivers.
-    allowed_result_receivers: ?[]const []const u8,
+    allowed_result_receivers: ?[]const []const u8 = null,
 
     /// The dimension columns of the consolidated policy aggregation.
     dimension_columns: []const []const u8,
@@ -30,7 +30,7 @@ pub const ConsolidatedPolicyAggregation = struct {
     join_columns: []const []const u8,
 
     /// Join required
-    join_required: ?JoinRequiredOption,
+    join_required: ?JoinRequiredOption = null,
 
     /// The output constraints of the consolidated policy aggregation.
     output_constraints: []const AggregationConstraint,

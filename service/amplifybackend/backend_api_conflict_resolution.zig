@@ -4,7 +4,7 @@ const ResolutionStrategy = @import("resolution_strategy.zig").ResolutionStrategy
 /// configured in your Amplify project.
 pub const BackendAPIConflictResolution = struct {
     /// The strategy for conflict resolution.
-    resolution_strategy: ?ResolutionStrategy,
+    resolution_strategy: ?ResolutionStrategy = null,
 
     pub const json_field_names = .{
         .resolution_strategy = "ResolutionStrategy",

@@ -10,18 +10,18 @@ pub const TokenValidityUnitsType = struct {
     /// parameter. The default `AccessTokenValidity` time unit is `hours`.
     /// `AccessTokenValidity` duration can range from five minutes to one
     /// day.
-    access_token: ?TimeUnitsType,
+    access_token: ?TimeUnitsType = null,
 
     /// A time unit for the value that you set in the `IdTokenValidity` parameter.
     /// The default `IdTokenValidity` time unit is `hours`.
     /// `IdTokenValidity` duration can range from five minutes to one day.
-    id_token: ?TimeUnitsType,
+    id_token: ?TimeUnitsType = null,
 
     /// A time unit for the value that you set in the `RefreshTokenValidity`
     /// parameter. The default `RefreshTokenValidity` time unit is `days`.
     /// `RefreshTokenValidity` duration can range from 60 minutes to 10
     /// years.
-    refresh_token: ?TimeUnitsType,
+    refresh_token: ?TimeUnitsType = null,
 
     pub const json_field_names = .{
         .access_token = "AccessToken",

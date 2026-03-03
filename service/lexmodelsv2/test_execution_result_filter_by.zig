@@ -6,7 +6,7 @@ const TestResultTypeFilter = @import("test_result_type_filter.zig").TestResultTy
 pub const TestExecutionResultFilterBy = struct {
     /// Contains information about the method for filtering Conversation level test
     /// results.
-    conversation_level_test_results_filter_by: ?ConversationLevelTestResultsFilterBy,
+    conversation_level_test_results_filter_by: ?ConversationLevelTestResultsFilterBy = null,
 
     /// Specifies which results to filter. See [Test result details">Test results
     /// details](https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html)

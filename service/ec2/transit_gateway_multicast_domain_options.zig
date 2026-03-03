@@ -6,13 +6,13 @@ const StaticSourcesSupportValue = @import("static_sources_support_value.zig").St
 pub const TransitGatewayMulticastDomainOptions = struct {
     /// Indicates whether to automatically cross-account subnet associations that
     /// are associated with the transit gateway multicast domain.
-    auto_accept_shared_associations: ?AutoAcceptSharedAssociationsValue,
+    auto_accept_shared_associations: ?AutoAcceptSharedAssociationsValue = null,
 
     /// Indicates whether Internet Group Management Protocol (IGMP) version 2 is
     /// turned on for the transit gateway multicast domain.
-    igmpv_2_support: ?Igmpv2SupportValue,
+    igmpv_2_support: ?Igmpv2SupportValue = null,
 
     /// Indicates whether support for statically configuring transit gateway
     /// multicast group sources is turned on.
-    static_sources_support: ?StaticSourcesSupportValue,
+    static_sources_support: ?StaticSourcesSupportValue = null,
 };

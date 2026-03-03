@@ -12,12 +12,12 @@ const Transition = @import("transition.zig").Transition;
 /// lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html) in
 /// the *Amazon S3 User Guide*.
 pub const LifecycleRule = struct {
-    abort_incomplete_multipart_upload: ?AbortIncompleteMultipartUpload,
+    abort_incomplete_multipart_upload: ?AbortIncompleteMultipartUpload = null,
 
     /// Specifies the expiration for the lifecycle of the object in the form of
     /// date, days and, whether the
     /// object has a delete marker.
-    expiration: ?LifecycleExpiration,
+    expiration: ?LifecycleExpiration = null,
 
     /// The `Filter` is used to identify objects that a Lifecycle Rule applies to. A
     /// `Filter` must have exactly one of `Prefix`, `Tag`,
@@ -30,13 +30,13 @@ pub const LifecycleRule = struct {
     /// in the *Amazon S3 User Guide*.
     ///
     /// `Tag` filters are not supported for directory buckets.
-    filter: ?LifecycleRuleFilter,
+    filter: ?LifecycleRuleFilter = null,
 
     /// Unique identifier for the rule. The value cannot be longer than 255
     /// characters.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
-    noncurrent_version_expiration: ?NoncurrentVersionExpiration,
+    noncurrent_version_expiration: ?NoncurrentVersionExpiration = null,
 
     /// Specifies the transition rule for the lifecycle rule that describes when
     /// noncurrent objects
@@ -49,7 +49,7 @@ pub const LifecycleRule = struct {
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket
     /// lifecycle configurations.
-    noncurrent_version_transitions: ?[]const NoncurrentVersionTransition,
+    noncurrent_version_transitions: ?[]const NoncurrentVersionTransition = null,
 
     /// The general purpose bucket prefix that identifies one or more objects to
     /// which the rule applies. We recommend using `Filter` instead of `Prefix` for
@@ -61,7 +61,7 @@ pub const LifecycleRule = struct {
     /// XML requests. For more information, see [
     /// XML related object key
     /// constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// If 'Enabled', the rule is currently being applied. If 'Disabled', the rule
     /// is not currently being
@@ -73,5 +73,5 @@ pub const LifecycleRule = struct {
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket
     /// lifecycle configurations.
-    transitions: ?[]const Transition,
+    transitions: ?[]const Transition = null,
 };

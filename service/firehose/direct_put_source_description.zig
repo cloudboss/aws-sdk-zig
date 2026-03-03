@@ -7,7 +7,7 @@ pub const DirectPutSourceDescription = struct {
     /// does not affect Firehose delivery throughput limit. You can use the
     /// [Firehose Limits
     /// form](https://support.console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase%26limitType=kinesis-firehose-limits) to request a throughput limit increase.
-    throughput_hint_in_m_bs: ?i32,
+    throughput_hint_in_m_bs: ?i32 = null,
 
     pub const json_field_names = .{
         .throughput_hint_in_m_bs = "ThroughputHintInMBs",

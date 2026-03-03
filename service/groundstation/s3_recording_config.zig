@@ -4,7 +4,7 @@ pub const S3RecordingConfig = struct {
     bucket_arn: []const u8,
 
     /// S3 Key prefix to prefice data files.
-    prefix: ?[]const u8,
+    prefix: ?[]const u8 = null,
 
     /// ARN of the role Ground Station assumes to write data to the bucket.
     role_arn: []const u8,

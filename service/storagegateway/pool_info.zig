@@ -7,20 +7,20 @@ pub const PoolInfo = struct {
     /// The Amazon Resource Name (ARN) of the custom tape pool. Use the
     /// ListTapePools operation to return a list of custom tape pools for your
     /// account and Amazon Web Services Region.
-    pool_arn: ?[]const u8,
+    pool_arn: ?[]const u8 = null,
 
     /// The name of the custom tape pool. `PoolName` can use all ASCII characters,
     /// except '/' and '\'.
-    pool_name: ?[]const u8,
+    pool_name: ?[]const u8 = null,
 
     /// Status of the custom tape pool. Pool can be `ACTIVE` or
     /// `DELETED`.
-    pool_status: ?PoolStatus,
+    pool_status: ?PoolStatus = null,
 
     /// Tape retention lock time is set in days. Tape retention lock can be enabled
     /// for up to
     /// 100 years (36,500 days).
-    retention_lock_time_in_days: ?i32,
+    retention_lock_time_in_days: ?i32 = null,
 
     /// Tape retention lock type, which can be configured in two modes. When
     /// configured in
@@ -31,14 +31,14 @@ pub const PoolInfo = struct {
     /// compliance mode, the tape retention lock cannot be removed by any user,
     /// including the root
     /// Amazon Web Services account.
-    retention_lock_type: ?RetentionLockType,
+    retention_lock_type: ?RetentionLockType = null,
 
     /// The storage class that is associated with the custom pool. When you use your
     /// backup
     /// application to eject the tape, the tape is archived directly into the
     /// storage class (S3
     /// Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
-    storage_class: ?TapeStorageClass,
+    storage_class: ?TapeStorageClass = null,
 
     pub const json_field_names = .{
         .pool_arn = "PoolARN",

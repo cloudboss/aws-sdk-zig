@@ -6,10 +6,10 @@ const State = @import("state.zig").State;
 /// workspace.
 pub const Status = struct {
     /// The error message.
-    @"error": ?ErrorDetails,
+    @"error": ?ErrorDetails = null,
 
     /// The current state of the entity, component, component type, or workspace.
-    state: ?State,
+    state: ?State = null,
 
     pub const json_field_names = .{
         .@"error" = "error",

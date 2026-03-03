@@ -12,7 +12,7 @@ pub const GreenFleetProvisioningOption = struct {
     /// * `COPY_AUTO_SCALING_GROUP`: Use settings from a specified Auto Scaling
     ///   group to define and create instances in a new Auto Scaling
     /// group.
-    action: ?GreenFleetProvisioningAction,
+    action: ?GreenFleetProvisioningAction = null,
 
     pub const json_field_names = .{
         .action = "action",

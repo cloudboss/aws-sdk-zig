@@ -3,7 +3,7 @@ const IdentityType = @import("identity_type.zig").IdentityType;
 /// Information about an email identity.
 pub const IdentityInfo = struct {
     /// The address or domain of the identity.
-    identity_name: ?[]const u8,
+    identity_name: ?[]const u8 = null,
 
     /// The email identity type. The identity type can be one of the following:
     ///
@@ -13,7 +13,7 @@ pub const IdentityInfo = struct {
     ///
     /// * `MANAGED_DOMAIN` – The identity is a domain that is managed
     /// by AWS.
-    identity_type: ?IdentityType,
+    identity_type: ?IdentityType = null,
 
     /// Indicates whether or not you can send email from the identity.
     ///

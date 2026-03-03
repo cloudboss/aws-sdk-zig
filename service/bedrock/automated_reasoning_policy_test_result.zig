@@ -9,7 +9,7 @@ const AutomatedReasoningPolicyTestRunStatus = @import("automated_reasoning_polic
 pub const AutomatedReasoningPolicyTestResult = struct {
     /// A summary of all test findings, aggregated to provide an overall assessment
     /// of policy quality and correctness.
-    aggregated_test_findings_result: ?AutomatedReasoningCheckResult,
+    aggregated_test_findings_result: ?AutomatedReasoningCheckResult = null,
 
     /// The Amazon Resource Name (ARN) of the Automated Reasoning policy that was
     /// tested.
@@ -21,11 +21,11 @@ pub const AutomatedReasoningPolicyTestResult = struct {
 
     /// Detailed findings from the test run, including any issues, violations, or
     /// unexpected behaviors discovered.
-    test_findings: ?[]const AutomatedReasoningCheckFinding,
+    test_findings: ?[]const AutomatedReasoningCheckFinding = null,
 
     /// The overall result of the test run, indicating whether the policy passed or
     /// failed validation.
-    test_run_result: ?AutomatedReasoningPolicyTestRunResult,
+    test_run_result: ?AutomatedReasoningPolicyTestRunResult = null,
 
     /// The overall status of the test run (e.g., COMPLETED, FAILED, IN_PROGRESS).
     test_run_status: AutomatedReasoningPolicyTestRunStatus,

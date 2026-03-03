@@ -6,15 +6,15 @@ const BucketPolicy = @import("bucket_policy.zig").BucketPolicy;
 pub const BucketLevelPermissions = struct {
     /// Contains information on how Access Control Policies are applied to the
     /// bucket.
-    access_control_list: ?AccessControlList,
+    access_control_list: ?AccessControlList = null,
 
     /// Contains information on which account level S3 Block Public Access settings
     /// are applied to
     /// the S3 bucket.
-    block_public_access: ?BlockPublicAccess,
+    block_public_access: ?BlockPublicAccess = null,
 
     /// Contains information on the bucket policies for the S3 bucket.
-    bucket_policy: ?BucketPolicy,
+    bucket_policy: ?BucketPolicy = null,
 
     pub const json_field_names = .{
         .access_control_list = "AccessControlList",

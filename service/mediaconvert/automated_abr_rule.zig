@@ -9,12 +9,12 @@ const RuleType = @import("rule_type.zig").RuleType;
 pub const AutomatedAbrRule = struct {
     /// When customer adds the allowed renditions rule for auto ABR ladder, they are
     /// required to add at leat one rendition to allowedRenditions list
-    allowed_renditions: ?[]const AllowedRenditionSize,
+    allowed_renditions: ?[]const AllowedRenditionSize = null,
 
     /// When customer adds the force include renditions rule for auto ABR ladder,
     /// they are required to add at leat one rendition to forceIncludeRenditions
     /// list
-    force_include_renditions: ?[]const ForceIncludeRenditionSize,
+    force_include_renditions: ?[]const ForceIncludeRenditionSize = null,
 
     /// Use Min bottom rendition size to specify a minimum size for the lowest
     /// resolution in your ABR stack. * The lowest resolution in your ABR stack will
@@ -23,7 +23,7 @@ pub const AutomatedAbrRule = struct {
     /// greater than to 640x360. * If you specify a Min top rendition size rule, the
     /// value that you specify for Min bottom rendition size must be less than, or
     /// equal to, Min top rendition size.
-    min_bottom_rendition_size: ?MinBottomRenditionSize,
+    min_bottom_rendition_size: ?MinBottomRenditionSize = null,
 
     /// Use Min top rendition size to specify a minimum size for the highest
     /// resolution in your ABR stack. * The highest resolution in your ABR stack
@@ -32,7 +32,7 @@ pub const AutomatedAbrRule = struct {
     /// to or greater than 1280x720. * If you specify a value for Max resolution,
     /// the value that you specify for Min top rendition size must be less than, or
     /// equal to, Max resolution.
-    min_top_rendition_size: ?MinTopRenditionSize,
+    min_top_rendition_size: ?MinTopRenditionSize = null,
 
     /// Use Min top rendition size to specify a minimum size for the highest
     /// resolution in your ABR stack. * The highest resolution in your ABR stack
@@ -68,7 +68,7 @@ pub const AutomatedAbrRule = struct {
     /// in Min top rendition size or Min bottom rendition size. * If you specify
     /// Allowed renditions, you must not specify a separate rule for Force include
     /// renditions.
-    @"type": ?RuleType,
+    @"type": ?RuleType = null,
 
     pub const json_field_names = .{
         .allowed_renditions = "AllowedRenditions",

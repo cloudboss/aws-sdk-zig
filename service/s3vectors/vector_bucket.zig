@@ -6,7 +6,7 @@ pub const VectorBucket = struct {
     creation_time: i64,
 
     /// The encryption configuration for the vector bucket.
-    encryption_configuration: ?EncryptionConfiguration,
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the vector bucket.
     vector_bucket_arn: []const u8,

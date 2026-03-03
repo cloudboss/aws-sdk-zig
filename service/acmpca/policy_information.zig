@@ -10,7 +10,7 @@ pub const PolicyInformation = struct {
 
     /// Modifies the given `CertPolicyId` with a qualifier. Amazon Web Services
     /// Private CA supports the certification practice statement (CPS) qualifier.
-    policy_qualifiers: ?[]const PolicyQualifierInfo,
+    policy_qualifiers: ?[]const PolicyQualifierInfo = null,
 
     pub const json_field_names = .{
         .cert_policy_id = "CertPolicyId",

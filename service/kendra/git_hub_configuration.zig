@@ -36,7 +36,7 @@ pub const GitHubConfiguration = struct {
     /// matches both an exclusion and inclusion pattern, the exclusion pattern takes
     /// precedence
     /// and the file isn't included in the index.
-    exclusion_file_name_patterns: ?[]const []const u8,
+    exclusion_file_name_patterns: ?[]const []const u8 = null,
 
     /// A list of regular expression patterns to exclude certain file types in your
     /// GitHub
@@ -47,7 +47,7 @@ pub const GitHubConfiguration = struct {
     /// matches both an exclusion and inclusion pattern, the exclusion pattern takes
     /// precedence
     /// and the file isn't included in the index.
-    exclusion_file_type_patterns: ?[]const []const u8,
+    exclusion_file_type_patterns: ?[]const []const u8 = null,
 
     /// A list of regular expression patterns to exclude certain folder names in
     /// your GitHub
@@ -58,7 +58,7 @@ pub const GitHubConfiguration = struct {
     /// matches both an exclusion and inclusion pattern, the exclusion pattern takes
     /// precedence
     /// and the folder isn't included in the index.
-    exclusion_folder_name_patterns: ?[]const []const u8,
+    exclusion_folder_name_patterns: ?[]const []const u8 = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of GitHub commits to Amazon Kendra index field names. To create
@@ -68,14 +68,14 @@ pub const GitHubConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The GitHub data source field names must exist
     /// in your GitHub custom metadata.
-    git_hub_commit_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    git_hub_commit_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// Configuration information to include certain types of GitHub content. You
     /// can
     /// configure to index repository files only, or also include issues and pull
     /// requests,
     /// comments, and comment attachments.
-    git_hub_document_crawl_properties: ?GitHubDocumentCrawlProperties,
+    git_hub_document_crawl_properties: ?GitHubDocumentCrawlProperties = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of GitHub issue attachments to Amazon Kendra index field names.
@@ -85,7 +85,7 @@ pub const GitHubConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The
     /// GitHub data source field names must exist in your GitHub custom metadata.
-    git_hub_issue_attachment_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    git_hub_issue_attachment_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of GitHub issue comments to Amazon Kendra index field names. To
@@ -96,7 +96,7 @@ pub const GitHubConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The
     /// GitHub data source field names must exist in your GitHub custom metadata.
-    git_hub_issue_comment_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    git_hub_issue_comment_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of GitHub issues to Amazon Kendra index field names. To create
@@ -106,7 +106,7 @@ pub const GitHubConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The GitHub data source field names must exist
     /// in your GitHub custom metadata.
-    git_hub_issue_document_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    git_hub_issue_document_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of GitHub pull request comments to Amazon Kendra index field
@@ -116,7 +116,7 @@ pub const GitHubConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The
     /// GitHub data source field names must exist in your GitHub custom metadata.
-    git_hub_pull_request_comment_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    git_hub_pull_request_comment_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of GitHub pull request attachments to Amazon Kendra index field
@@ -126,7 +126,7 @@ pub const GitHubConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The
     /// GitHub data source field names must exist in your GitHub custom metadata.
-    git_hub_pull_request_document_attachment_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    git_hub_pull_request_document_attachment_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map attributes or
     /// field names of GitHub pull requests to Amazon Kendra index field names. To
@@ -137,7 +137,7 @@ pub const GitHubConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The
     /// GitHub data source field names must exist in your GitHub custom metadata.
-    git_hub_pull_request_document_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    git_hub_pull_request_document_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of `DataSourceToIndexFieldMapping` objects that map GitHub
     /// repository attributes or field names to Amazon Kendra index field names. To
@@ -148,7 +148,7 @@ pub const GitHubConfiguration = struct {
     /// fields](https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
     /// The
     /// GitHub data source field names must exist in your GitHub custom metadata.
-    git_hub_repository_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping,
+    git_hub_repository_configuration_field_mappings: ?[]const DataSourceToIndexFieldMapping = null,
 
     /// A list of regular expression patterns to include certain file names in your
     /// GitHub
@@ -159,7 +159,7 @@ pub const GitHubConfiguration = struct {
     /// matches both an inclusion and exclusion pattern, the exclusion pattern takes
     /// precedence
     /// and the file isn't included in the index.
-    inclusion_file_name_patterns: ?[]const []const u8,
+    inclusion_file_name_patterns: ?[]const []const u8 = null,
 
     /// A list of regular expression patterns to include certain file types in your
     /// GitHub
@@ -170,7 +170,7 @@ pub const GitHubConfiguration = struct {
     /// matches both an inclusion and exclusion pattern, the exclusion pattern takes
     /// precedence
     /// and the file isn't included in the index.
-    inclusion_file_type_patterns: ?[]const []const u8,
+    inclusion_file_type_patterns: ?[]const []const u8 = null,
 
     /// A list of regular expression patterns to include certain folder names in
     /// your GitHub
@@ -181,17 +181,17 @@ pub const GitHubConfiguration = struct {
     /// folder matches both an inclusion and exclusion pattern, the exclusion
     /// pattern takes
     /// precedence and the folder isn't included in the index.
-    inclusion_folder_name_patterns: ?[]const []const u8,
+    inclusion_folder_name_patterns: ?[]const []const u8 = null,
 
     /// Configuration information to connect to GitHub Enterprise Server (on
     /// premises).
-    on_premise_configuration: ?OnPremiseConfiguration,
+    on_premise_configuration: ?OnPremiseConfiguration = null,
 
     /// A list of names of the specific repositories you want to index.
-    repository_filter: ?[]const []const u8,
+    repository_filter: ?[]const []const u8 = null,
 
     /// Configuration information to connect to GitHub Enterprise Cloud (SaaS).
-    saa_s_configuration: ?SaaSConfiguration,
+    saa_s_configuration: ?SaaSConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains
     /// the
@@ -206,7 +206,7 @@ pub const GitHubConfiguration = struct {
 
     /// The type of GitHub service you want to connect to—GitHub Enterprise Cloud
     /// (SaaS) or GitHub Enterprise Server (on premises).
-    @"type": ?Type,
+    @"type": ?Type = null,
 
     /// `TRUE` to use the GitHub change log to determine which documents require
     /// updating in the index. Depending on the GitHub change log's size, it may
@@ -219,7 +219,7 @@ pub const GitHubConfiguration = struct {
     /// your GitHub. For
     /// more information, see [Configuring a
     /// VPC](https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
-    vpc_configuration: ?DataSourceVpcConfiguration,
+    vpc_configuration: ?DataSourceVpcConfiguration = null,
 
     pub const json_field_names = .{
         .exclusion_file_name_patterns = "ExclusionFileNamePatterns",

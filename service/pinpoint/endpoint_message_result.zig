@@ -4,7 +4,7 @@ const DeliveryStatus = @import("delivery_status.zig").DeliveryStatus;
 /// message directly to an endpoint.
 pub const EndpointMessageResult = struct {
     /// The endpoint address that the message was delivered to.
-    address: ?[]const u8,
+    address: ?[]const u8 = null,
 
     /// The delivery status of the message. Possible values are:
     ///
@@ -24,18 +24,18 @@ pub const EndpointMessageResult = struct {
     delivery_status: DeliveryStatus,
 
     /// The unique identifier for the message that was sent.
-    message_id: ?[]const u8,
+    message_id: ?[]const u8 = null,
 
     /// The downstream service status code for delivering the message.
     status_code: i32,
 
     /// The status message for delivering the message.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// For push notifications that are sent through the GCM channel, specifies
     /// whether the endpoint's device registration token was updated as part of
     /// delivering the message.
-    updated_token: ?[]const u8,
+    updated_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .address = "Address",

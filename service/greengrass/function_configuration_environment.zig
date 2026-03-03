@@ -9,19 +9,19 @@ pub const FunctionConfigurationEnvironment = struct {
     /// Use this when the Lambda function needs to read device information from
     /// /sys. This setting applies only when you run the Lambda function in a
     /// Greengrass container.
-    access_sysfs: ?bool,
+    access_sysfs: ?bool = null,
 
     /// Configuration related to executing the Lambda function
-    execution: ?FunctionExecutionConfig,
+    execution: ?FunctionExecutionConfig = null,
 
     /// A list of the resources, with their permissions, to which the Lambda
     /// function will be granted access. A Lambda function can have at most 10
     /// resources. ResourceAccessPolicies apply only when you run the Lambda
     /// function in a Greengrass container.
-    resource_access_policies: ?[]const ResourceAccessPolicy,
+    resource_access_policies: ?[]const ResourceAccessPolicy = null,
 
     /// Environment variables for the Lambda function's configuration.
-    variables: ?[]const aws.map.StringMapEntry,
+    variables: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .access_sysfs = "AccessSysfs",

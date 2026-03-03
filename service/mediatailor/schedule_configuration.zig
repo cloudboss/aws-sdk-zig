@@ -5,7 +5,7 @@ const Transition = @import("transition.zig").Transition;
 /// can be made to the schedule.
 pub const ScheduleConfiguration = struct {
     /// Program clip range configuration.
-    clip_range: ?ClipRange,
+    clip_range: ?ClipRange = null,
 
     /// Program transition configurations.
     transition: Transition,

@@ -5,14 +5,14 @@ const ThrottleSettings = @import("throttle_settings.zig").ThrottleSettings;
 /// API stage name of the associated API stage in a usage plan.
 pub const ApiStage = struct {
     /// API Id of the associated API stage in a usage plan.
-    api_id: ?[]const u8,
+    api_id: ?[]const u8 = null,
 
     /// API stage name of the associated API stage in a usage plan.
-    stage: ?[]const u8,
+    stage: ?[]const u8 = null,
 
     /// Map containing method level throttling information for API stage in a usage
     /// plan.
-    throttle: ?[]const aws.map.MapEntry(ThrottleSettings),
+    throttle: ?[]const aws.map.MapEntry(ThrottleSettings) = null,
 
     pub const json_field_names = .{
         .api_id = "apiId",

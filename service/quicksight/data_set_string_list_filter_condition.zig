@@ -10,7 +10,7 @@ pub const DataSetStringListFilterCondition = struct {
     operator: DataSetStringListFilterOperator,
 
     /// The list of string values to include or exclude in the filter.
-    values: ?DataSetStringListFilterValue,
+    values: ?DataSetStringListFilterValue = null,
 
     pub const json_field_names = .{
         .operator = "Operator",

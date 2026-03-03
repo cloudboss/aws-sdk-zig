@@ -5,25 +5,25 @@ const WorkGroupState = @import("work_group_state.zig").WorkGroupState;
 /// description, and the date and time it was created.
 pub const WorkGroupSummary = struct {
     /// The workgroup creation date and time.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The workgroup description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The engine version setting for all queries on the workgroup. Queries on the
     /// `AmazonAthenaPreviewFunctionality` workgroup run on the preview engine
     /// regardless of this setting.
-    engine_version: ?EngineVersion,
+    engine_version: ?EngineVersion = null,
 
     /// The ARN of the IAM Identity Center enabled application associated with the
     /// workgroup.
-    identity_center_application_arn: ?[]const u8,
+    identity_center_application_arn: ?[]const u8 = null,
 
     /// The name of the workgroup.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The state of the workgroup.
-    state: ?WorkGroupState,
+    state: ?WorkGroupState = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

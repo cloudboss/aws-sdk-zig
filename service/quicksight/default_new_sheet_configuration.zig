@@ -6,14 +6,14 @@ const SheetContentType = @import("sheet_content_type.zig").SheetContentType;
 pub const DefaultNewSheetConfiguration = struct {
     /// The options that determine the default settings for interactive layout
     /// configuration.
-    interactive_layout_configuration: ?DefaultInteractiveLayoutConfiguration,
+    interactive_layout_configuration: ?DefaultInteractiveLayoutConfiguration = null,
 
     /// The options that determine the default settings for a paginated layout
     /// configuration.
-    paginated_layout_configuration: ?DefaultPaginatedLayoutConfiguration,
+    paginated_layout_configuration: ?DefaultPaginatedLayoutConfiguration = null,
 
     /// The option that determines the sheet content type.
-    sheet_content_type: ?SheetContentType,
+    sheet_content_type: ?SheetContentType = null,
 
     pub const json_field_names = .{
         .interactive_layout_configuration = "InteractiveLayoutConfiguration",

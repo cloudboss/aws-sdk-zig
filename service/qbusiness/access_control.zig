@@ -5,7 +5,7 @@ const Principal = @import("principal.zig").Principal;
 /// can be designated document access permissions of either `ALLOW` or `DENY`.
 pub const AccessControl = struct {
     /// Describes the member relation within a principal list.
-    member_relation: ?MemberRelation,
+    member_relation: ?MemberRelation = null,
 
     /// Contains a list of principals, where a principal can be either a `USER` or a
     /// `GROUP`. Each principal can be have the following type of document access:

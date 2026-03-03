@@ -11,12 +11,12 @@ pub const BulkEmailDestination = struct {
     /// you send
     /// using `SendBulkTemplatedEmail`. Tags correspond to characteristics of the
     /// email that you define, so that you can publish email sending events.
-    replacement_tags: ?[]const MessageTag,
+    replacement_tags: ?[]const MessageTag = null,
 
     /// A list of replacement values to apply to the template. This parameter is a
     /// JSON
     /// object, typically consisting of key-value pairs in which the keys correspond
     /// to
     /// replacement tags in the email template.
-    replacement_template_data: ?[]const u8,
+    replacement_template_data: ?[]const u8 = null,
 };

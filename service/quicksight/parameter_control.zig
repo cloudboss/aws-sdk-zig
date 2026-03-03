@@ -12,25 +12,25 @@ const ParameterTextFieldControl = @import("parameter_text_field_control.zig").Pa
 /// the attributes can be defined.
 pub const ParameterControl = struct {
     /// A control from a date parameter that specifies date and time.
-    date_time_picker: ?ParameterDateTimePickerControl,
+    date_time_picker: ?ParameterDateTimePickerControl = null,
 
     /// A control to display a dropdown list with buttons that are used to select a
     /// single value.
-    dropdown: ?ParameterDropDownControl,
+    dropdown: ?ParameterDropDownControl = null,
 
     /// A control to display a list with buttons or boxes that are used to select
     /// either a single value or multiple values.
-    list: ?ParameterListControl,
+    list: ?ParameterListControl = null,
 
     /// A control to display a horizontal toggle bar. This is used to change a value
     /// by sliding the toggle.
-    slider: ?ParameterSliderControl,
+    slider: ?ParameterSliderControl = null,
 
     /// A control to display a text box that is used to enter multiple entries.
-    text_area: ?ParameterTextAreaControl,
+    text_area: ?ParameterTextAreaControl = null,
 
     /// A control to display a text box that is used to enter a single entry.
-    text_field: ?ParameterTextFieldControl,
+    text_field: ?ParameterTextFieldControl = null,
 
     pub const json_field_names = .{
         .date_time_picker = "DateTimePicker",

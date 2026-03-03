@@ -42,7 +42,7 @@ pub const ScalingInstruction = struct {
     /// The customized load metric to use for predictive scaling. This parameter or
     /// a **PredefinedLoadMetricSpecification** is required when configuring
     /// predictive scaling, and cannot be used otherwise.
-    customized_load_metric_specification: ?CustomizedLoadMetricSpecification,
+    customized_load_metric_specification: ?CustomizedLoadMetricSpecification = null,
 
     /// Controls whether dynamic scaling by AWS Auto Scaling is disabled. When
     /// dynamic scaling is
@@ -51,7 +51,7 @@ pub const ScalingInstruction = struct {
     /// tracking configurations.
     ///
     /// The default is enabled (`false`).
-    disable_dynamic_scaling: ?bool,
+    disable_dynamic_scaling: ?bool = null,
 
     /// The maximum capacity of the resource. The exception to this upper limit is
     /// if you
@@ -64,7 +64,7 @@ pub const ScalingInstruction = struct {
     /// The predefined load metric to use for predictive scaling. This parameter or
     /// a **CustomizedLoadMetricSpecification** is required when configuring
     /// predictive scaling, and cannot be used otherwise.
-    predefined_load_metric_specification: ?PredefinedLoadMetricSpecification,
+    predefined_load_metric_specification: ?PredefinedLoadMetricSpecification = null,
 
     /// Defines the behavior that should be applied if the forecast capacity
     /// approaches or
@@ -93,7 +93,7 @@ pub const ScalingInstruction = struct {
     /// occurs.
     ///
     /// Only valid when configuring predictive scaling.
-    predictive_scaling_max_capacity_behavior: ?PredictiveScalingMaxCapacityBehavior,
+    predictive_scaling_max_capacity_behavior: ?PredictiveScalingMaxCapacityBehavior = null,
 
     /// The size of the capacity buffer to use when the forecast capacity is close
     /// to or exceeds
@@ -110,13 +110,13 @@ pub const ScalingInstruction = struct {
     /// `SetMaxCapacityAboveForecastCapacity`, and cannot be used otherwise.
     ///
     /// The range is 1-100.
-    predictive_scaling_max_capacity_buffer: ?i32,
+    predictive_scaling_max_capacity_buffer: ?i32 = null,
 
     /// The predictive scaling mode. The default value is `ForecastAndScale`.
     /// Otherwise, AWS Auto Scaling forecasts capacity but does not create any
     /// scheduled scaling actions
     /// based on the capacity forecast.
-    predictive_scaling_mode: ?PredictiveScalingMode,
+    predictive_scaling_mode: ?PredictiveScalingMode = null,
 
     /// The ID of the resource. This string consists of the resource type and unique
     /// identifier.
@@ -189,7 +189,7 @@ pub const ScalingInstruction = struct {
     /// 50. If there are more than 50 policies to be replaced, AWS Auto Scaling
     /// keeps all existing policies
     /// and does not create new ones.
-    scaling_policy_update_behavior: ?ScalingPolicyUpdateBehavior,
+    scaling_policy_update_behavior: ?ScalingPolicyUpdateBehavior = null,
 
     /// The amount of time, in seconds, to buffer the run time of scheduled scaling
     /// actions when
@@ -210,7 +210,7 @@ pub const ScalingInstruction = struct {
     /// The default is 300 seconds.
     ///
     /// Only valid when configuring predictive scaling.
-    scheduled_action_buffer_time: ?i32,
+    scheduled_action_buffer_time: ?i32 = null,
 
     /// The namespace of the AWS service.
     service_namespace: ServiceNamespace,

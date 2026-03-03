@@ -7,13 +7,13 @@ pub const AssociationOverview = struct {
     /// association with two managed nodes, and one of them was successful, this
     /// would return the count
     /// of managed nodes by status.
-    association_status_aggregated_count: ?[]const aws.map.MapEntry(i32),
+    association_status_aggregated_count: ?[]const aws.map.MapEntry(i32) = null,
 
     /// A detailed status of the association.
-    detailed_status: ?[]const u8,
+    detailed_status: ?[]const u8 = null,
 
     /// The status of the association. Status can be: Pending, Success, or Failed.
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .association_status_aggregated_count = "AssociationStatusAggregatedCount",

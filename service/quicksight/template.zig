@@ -16,23 +16,23 @@ const TemplateVersion = @import("template_version.zig").TemplateVersion;
 /// create a template or a dashboard from an existing template.
 pub const Template = struct {
     /// The Amazon Resource Name (ARN) of the template.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// Time when this was created.
-    created_time: ?i64,
+    created_time: ?i64 = null,
 
     /// Time when this was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The display name of the template.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID for the template. This is unique per Amazon Web Services Region for
     /// each Amazon Web Services account.
-    template_id: ?[]const u8,
+    template_id: ?[]const u8 = null,
 
     /// A structure describing the versions of the template.
-    version: ?TemplateVersion,
+    version: ?TemplateVersion = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

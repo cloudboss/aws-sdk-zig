@@ -1,25 +1,25 @@
 /// Contains EBS volume details.
 pub const VolumeDetail = struct {
     /// The device name for the EBS volume.
-    device_name: ?[]const u8,
+    device_name: ?[]const u8 = null,
 
     /// EBS volume encryption type.
-    encryption_type: ?[]const u8,
+    encryption_type: ?[]const u8 = null,
 
     /// KMS key ARN used to encrypt the EBS volume.
-    kms_key_arn: ?[]const u8,
+    kms_key_arn: ?[]const u8 = null,
 
     /// Snapshot ARN of the EBS volume.
-    snapshot_arn: ?[]const u8,
+    snapshot_arn: ?[]const u8 = null,
 
     /// EBS volume ARN information.
-    volume_arn: ?[]const u8,
+    volume_arn: ?[]const u8 = null,
 
     /// EBS volume size in GB.
-    volume_size_in_gb: ?i32,
+    volume_size_in_gb: ?i32 = null,
 
     /// The EBS volume type.
-    volume_type: ?[]const u8,
+    volume_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .device_name = "DeviceName",

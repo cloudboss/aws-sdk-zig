@@ -6,40 +6,40 @@ const InvoiceType = @import("invoice_type.zig").InvoiceType;
 /// The invoice that the API retrieved.
 pub const InvoiceSummary = struct {
     /// The Amazon Web Services account ID.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// The summary with the product and service currency.
-    base_currency_amount: ?InvoiceCurrencyAmount,
+    base_currency_amount: ?InvoiceCurrencyAmount = null,
 
     /// The billing period of the invoice-related document.
-    billing_period: ?BillingPeriod,
+    billing_period: ?BillingPeriod = null,
 
     /// The invoice due date.
-    due_date: ?i64,
+    due_date: ?i64 = null,
 
     /// The organization name providing Amazon Web Services services.
-    entity: ?Entity,
+    entity: ?Entity = null,
 
     /// The invoice ID.
-    invoice_id: ?[]const u8,
+    invoice_id: ?[]const u8 = null,
 
     /// The type of invoice.
-    invoice_type: ?InvoiceType,
+    invoice_type: ?InvoiceType = null,
 
     /// The issued date of the invoice.
-    issued_date: ?i64,
+    issued_date: ?i64 = null,
 
     /// The initial or original invoice ID.
-    original_invoice_id: ?[]const u8,
+    original_invoice_id: ?[]const u8 = null,
 
     /// The summary with the customer configured currency.
-    payment_currency_amount: ?InvoiceCurrencyAmount,
+    payment_currency_amount: ?InvoiceCurrencyAmount = null,
 
     /// The purchase order number associated to the invoice.
-    purchase_order_number: ?[]const u8,
+    purchase_order_number: ?[]const u8 = null,
 
     /// The summary with the tax currency.
-    tax_currency_amount: ?InvoiceCurrencyAmount,
+    tax_currency_amount: ?InvoiceCurrencyAmount = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

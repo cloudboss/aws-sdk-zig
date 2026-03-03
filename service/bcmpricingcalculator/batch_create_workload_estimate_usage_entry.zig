@@ -6,10 +6,10 @@ pub const BatchCreateWorkloadEstimateUsageEntry = struct {
     amount: f64,
 
     /// An optional group identifier for the usage estimate.
-    group: ?[]const u8,
+    group: ?[]const u8 = null,
 
     /// Historical usage data associated with this estimate, if available.
-    historical_usage: ?HistoricalUsageEntity,
+    historical_usage: ?HistoricalUsageEntity = null,
 
     /// A unique identifier for this entry in the batch operation.
     key: []const u8,

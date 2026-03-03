@@ -16,10 +16,10 @@ pub const QueryFilter = struct {
     ///
     /// Valid values for `Name` are `Browser` | `Device` | `Country` | `Page` | `OS`
     /// | `EventType` | `Invert`
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The values of the `Name` that are to be be included in the returned results.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

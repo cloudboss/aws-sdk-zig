@@ -22,24 +22,24 @@ pub const ComputeEnvironmentDetail = struct {
     /// information, see [Compute
     /// environments](https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html) in
     /// the *Batch User Guide*.
-    compute_resources: ?ComputeResource,
+    compute_resources: ?ComputeResource = null,
 
     /// The orchestration type of the compute environment. The valid values are
     /// `ECS`
     /// (default) or `EKS`.
-    container_orchestration_type: ?OrchestrationType,
+    container_orchestration_type: ?OrchestrationType = null,
 
     /// Reserved.
-    context: ?[]const u8,
+    context: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster that the
     /// compute environment uses.
-    ecs_cluster_arn: ?[]const u8,
+    ecs_cluster_arn: ?[]const u8 = null,
 
     /// The configuration for the Amazon EKS cluster that supports the Batch compute
     /// environment. Only
     /// specify this parameter if the `containerOrchestrationType` is `EKS`.
-    eks_configuration: ?EksConfiguration,
+    eks_configuration: ?EksConfiguration = null,
 
     /// The service role that's associated with the compute environment that allows
     /// Batch to make
@@ -47,7 +47,7 @@ pub const ComputeEnvironmentDetail = struct {
     /// information, see [Batch service IAM
     /// role](https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html) in the
     /// *Batch User Guide*.
-    service_role: ?[]const u8,
+    service_role: ?[]const u8 = null,
 
     /// The state of the compute environment. The valid values are `ENABLED` or
     /// `DISABLED`.
@@ -79,38 +79,38 @@ pub const ComputeEnvironmentDetail = struct {
     /// instance with a `minvCpus` value of `4` and a `desiredvCpus`
     /// value of `36`. This instance doesn't scale down to a `c5.large`
     /// instance.
-    state: ?CEState,
+    state: ?CEState = null,
 
     /// The current status of the compute environment (for example, `CREATING` or
     /// `VALID`).
-    status: ?CEStatus,
+    status: ?CEStatus = null,
 
     /// A short, human-readable string to provide additional details for the current
     /// status of the
     /// compute environment.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The tags applied to the compute environment.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the compute environment: `MANAGED` or `UNMANAGED`. For
     /// more information, see [Compute
     /// environments](https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html) in the *Batch User Guide*.
-    @"type": ?CEType,
+    @"type": ?CEType = null,
 
     /// The maximum number of VCPUs expected to be used for an unmanaged compute
     /// environment.
-    unmanagedv_cpus: ?i32,
+    unmanagedv_cpus: ?i32 = null,
 
     /// Specifies the infrastructure update policy for the compute environment. For
     /// more information
     /// about infrastructure updates, see [Updating compute
     /// environments](https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html) in the
     /// *Batch User Guide*.
-    update_policy: ?UpdatePolicy,
+    update_policy: ?UpdatePolicy = null,
 
     /// Unique identifier for the compute environment.
-    uuid: ?[]const u8,
+    uuid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .compute_environment_arn = "computeEnvironmentArn",

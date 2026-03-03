@@ -12,7 +12,7 @@ pub const GatewaySummary = struct {
     /// capability
     /// configuration's definition, use
     /// [DescribeGatewayCapabilityConfiguration](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html).
-    gateway_capability_summaries: ?[]const GatewayCapabilitySummary,
+    gateway_capability_summaries: ?[]const GatewayCapabilitySummary = null,
 
     /// The ID of the gateway device.
     gateway_id: []const u8,
@@ -20,11 +20,11 @@ pub const GatewaySummary = struct {
     /// The name of the gateway.
     gateway_name: []const u8,
 
-    gateway_platform: ?GatewayPlatform,
+    gateway_platform: ?GatewayPlatform = null,
 
     /// The version of the gateway. A value of `3` indicates an MQTT-enabled, V3
     /// gateway, while `2` indicates a Classic streams, V2 gateway.
-    gateway_version: ?[]const u8,
+    gateway_version: ?[]const u8 = null,
 
     /// The date the gateway was last updated, in Unix epoch time.
     last_update_date: i64,

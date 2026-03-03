@@ -73,7 +73,7 @@ pub const RemoteNodeNetwork = struct {
     ///   hosts
     /// that are running `CoreDNS` on UDP port `53` for service and pod DNS
     /// names.
-    cidrs: ?[]const []const u8,
+    cidrs: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .cidrs = "cidrs",

@@ -14,10 +14,10 @@ pub const NetworkBandwidthGbpsRequest = struct {
     /// The maximum amount of network bandwidth, in Gbps. To specify no maximum
     /// limit, omit this
     /// parameter.
-    max: ?f64,
+    max: ?f64 = null,
 
     /// The minimum amount of network bandwidth, in Gbps. To specify no minimum
     /// limit, omit this
     /// parameter.
-    min: ?f64,
+    min: ?f64 = null,
 };

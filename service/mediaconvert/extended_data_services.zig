@@ -10,12 +10,12 @@ pub const ExtendedDataServices = struct {
     /// The action to take on copy and redistribution control XDS packets. If you
     /// select PASSTHROUGH, packets will not be changed. If you select STRIP, any
     /// packets will be removed in output captions.
-    copy_protection_action: ?CopyProtectionAction,
+    copy_protection_action: ?CopyProtectionAction = null,
 
     /// The action to take on content advisory XDS packets. If you select
     /// PASSTHROUGH, packets will not be changed. If you select STRIP, any packets
     /// will be removed in output captions.
-    vchip_action: ?VchipAction,
+    vchip_action: ?VchipAction = null,
 
     pub const json_field_names = .{
         .copy_protection_action = "CopyProtectionAction",

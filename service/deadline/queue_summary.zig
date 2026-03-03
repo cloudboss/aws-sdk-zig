@@ -5,7 +5,7 @@ const QueueStatus = @import("queue_status.zig").QueueStatus;
 /// The details of a queue summary.
 pub const QueueSummary = struct {
     /// The reason the queue is blocked, if applicable.
-    blocked_reason: ?QueueBlockedReason,
+    blocked_reason: ?QueueBlockedReason = null,
 
     /// The date and time the resource was created.
     created_at: i64,
@@ -33,10 +33,10 @@ pub const QueueSummary = struct {
     status: QueueStatus,
 
     /// The date and time the resource was updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The user or system that updated this resource.
-    updated_by: ?[]const u8,
+    updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .blocked_reason = "blockedReason",

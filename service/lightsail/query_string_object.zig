@@ -9,7 +9,7 @@
 pub const QueryStringObject = struct {
     /// Indicates whether the distribution forwards and caches based on query
     /// strings.
-    option: ?bool,
+    option: ?bool = null,
 
     /// The specific query strings that the distribution forwards to the origin.
     ///
@@ -18,7 +18,7 @@ pub const QueryStringObject = struct {
     /// If the `option` parameter is true, then your distribution forwards all query
     /// strings, regardless of what you specify using the `queryStringsAllowList`
     /// parameter.
-    query_strings_allow_list: ?[]const []const u8,
+    query_strings_allow_list: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .option = "option",

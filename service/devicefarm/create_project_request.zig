@@ -6,7 +6,7 @@ pub const CreateProjectRequest = struct {
     /// Sets the execution timeout value (in minutes) for a project. All test runs
     /// in this project use the
     /// specified execution timeout value unless overridden when scheduling a run.
-    default_job_timeout_minutes: ?i32,
+    default_job_timeout_minutes: ?i32 = null,
 
     /// A set of environment variables which are used by default for all runs in the
     /// project.
@@ -17,16 +17,16 @@ pub const CreateProjectRequest = struct {
     /// [Custom test environments
     /// ](https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html) in *AWS Device
     /// Farm.*
-    environment_variables: ?[]const EnvironmentVariable,
+    environment_variables: ?[]const EnvironmentVariable = null,
 
     /// An IAM role to be assumed by the test host for all runs in the project.
-    execution_role_arn: ?[]const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The project's name.
     name: []const u8,
 
     /// The VPC security groups and subnets that are attached to a project.
-    vpc_config: ?VpcConfig,
+    vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{
         .default_job_timeout_minutes = "defaultJobTimeoutMinutes",

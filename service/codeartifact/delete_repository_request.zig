@@ -5,7 +5,7 @@ pub const DeleteRepositoryRequest = struct {
     /// The 12-digit account number of the Amazon Web Services account that owns the
     /// domain. It does not include
     /// dashes or spaces.
-    domain_owner: ?[]const u8,
+    domain_owner: ?[]const u8 = null,
 
     /// The name of the repository to delete.
     repository: []const u8,

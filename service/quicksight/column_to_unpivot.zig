@@ -2,11 +2,11 @@
 /// with associated values.
 pub const ColumnToUnpivot = struct {
     /// The name of the column to unpivot from the source data.
-    column_name: ?[]const u8,
+    column_name: ?[]const u8 = null,
 
     /// The value to assign to this column in the unpivoted result, typically the
     /// column name or a descriptive label.
-    new_value: ?[]const u8,
+    new_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .column_name = "ColumnName",

@@ -6,7 +6,7 @@ pub const ConditionOverrides = struct {
     /// The relative time period over which data is included in the aggregation for
     /// this
     /// override.
-    range: ?RangeOverride,
+    range: ?RangeOverride = null,
 
     pub const json_field_names = .{
         .range = "Range",

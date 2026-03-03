@@ -13,25 +13,25 @@ pub const SavingsPlansUtilizationDetail = struct {
     /// The total amortized commitment for a Savings Plans. Includes the sum of the
     /// upfront
     /// and recurring Savings Plans fees.
-    amortized_commitment: ?SavingsPlansAmortizedCommitment,
+    amortized_commitment: ?SavingsPlansAmortizedCommitment = null,
 
     /// The attribute that applies to a specific `Dimension`.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The amount saved by using existing Savings Plans. Savings returns both net
     /// savings
     /// from savings plans and also the `onDemandCostEquivalent` of the Savings
     /// Plans
     /// when considering the utilization rate.
-    savings: ?SavingsPlansSavings,
+    savings: ?SavingsPlansSavings = null,
 
     /// The unique Amazon Resource Name (ARN) for a particular Savings Plan.
-    savings_plan_arn: ?[]const u8,
+    savings_plan_arn: ?[]const u8 = null,
 
     /// A ratio of your effectiveness of using existing Savings Plans to apply to
     /// workloads
     /// that are Savings Plans eligible.
-    utilization: ?SavingsPlansUtilization,
+    utilization: ?SavingsPlansUtilization = null,
 
     pub const json_field_names = .{
         .amortized_commitment = "AmortizedCommitment",

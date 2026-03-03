@@ -41,12 +41,12 @@ pub const RegisteredDomainDelegationInfo = struct {
     /// An object that describes the state of the name server records that are
     /// automatically added
     /// to the Route 53 domain by Lightsail.
-    name_servers_update_state: ?NameServersUpdateState,
+    name_servers_update_state: ?NameServersUpdateState = null,
 
     /// Describes the deletion state of an Amazon Route 53 hosted zone for a domain
     /// that is
     /// being automatically delegated to an Amazon Lightsail DNS zone.
-    r_53_hosted_zone_deletion_state: ?R53HostedZoneDeletionState,
+    r_53_hosted_zone_deletion_state: ?R53HostedZoneDeletionState = null,
 
     pub const json_field_names = .{
         .name_servers_update_state = "nameServersUpdateState",

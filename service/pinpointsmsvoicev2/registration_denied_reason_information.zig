@@ -1,13 +1,13 @@
 /// Provides the reason a registration was rejected.
 pub const RegistrationDeniedReasonInformation = struct {
     /// The link to the document.
-    documentation_link: ?[]const u8,
+    documentation_link: ?[]const u8 = null,
 
     /// The title of the document.
-    documentation_title: ?[]const u8,
+    documentation_title: ?[]const u8 = null,
 
     /// A long description of the rejection reason.
-    long_description: ?[]const u8,
+    long_description: ?[]const u8 = null,
 
     /// The reason a registration was rejected.
     reason: []const u8,

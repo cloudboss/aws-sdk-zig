@@ -6,16 +6,16 @@ const MaintenanceWindowStepFunctionsParameters = @import("maintenance_window_ste
 /// The parameters for task execution.
 pub const MaintenanceWindowTaskInvocationParameters = struct {
     /// The parameters for an `AUTOMATION` task type.
-    automation: ?MaintenanceWindowAutomationParameters,
+    automation: ?MaintenanceWindowAutomationParameters = null,
 
     /// The parameters for a `LAMBDA` task type.
-    lambda: ?MaintenanceWindowLambdaParameters,
+    lambda: ?MaintenanceWindowLambdaParameters = null,
 
     /// The parameters for a `RUN_COMMAND` task type.
-    run_command: ?MaintenanceWindowRunCommandParameters,
+    run_command: ?MaintenanceWindowRunCommandParameters = null,
 
     /// The parameters for a `STEP_FUNCTIONS` task type.
-    step_functions: ?MaintenanceWindowStepFunctionsParameters,
+    step_functions: ?MaintenanceWindowStepFunctionsParameters = null,
 
     pub const json_field_names = .{
         .automation = "Automation",

@@ -5,9 +5,9 @@ const StringFilter = @import("string_filter.zig").StringFilter;
 /// values.
 pub const ResourcesStringFilter = struct {
     /// The name of the field.
-    field_name: ?ResourcesStringField,
+    field_name: ?ResourcesStringField = null,
 
-    filter: ?StringFilter,
+    filter: ?StringFilter = null,
 
     pub const json_field_names = .{
         .field_name = "FieldName",

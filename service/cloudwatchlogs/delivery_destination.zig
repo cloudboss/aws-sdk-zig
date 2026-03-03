@@ -38,25 +38,25 @@ const OutputFormat = @import("output_format.zig").OutputFormat;
 pub const DeliveryDestination = struct {
     /// The Amazon Resource Name (ARN) that uniquely identifies this delivery
     /// destination.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A structure that contains the ARN of the Amazon Web Services resource that
     /// will receive the
     /// logs.
-    delivery_destination_configuration: ?DeliveryDestinationConfiguration,
+    delivery_destination_configuration: ?DeliveryDestinationConfiguration = null,
 
     /// Displays whether this delivery destination is CloudWatch Logs, Amazon S3,
     /// Firehose, or X-Ray.
-    delivery_destination_type: ?DeliveryDestinationType,
+    delivery_destination_type: ?DeliveryDestinationType = null,
 
     /// The name of this delivery destination.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The format of the logs that are sent to this delivery destination.
-    output_format: ?OutputFormat,
+    output_format: ?OutputFormat = null,
 
     /// The tags that have been assigned to this delivery destination.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",

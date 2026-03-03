@@ -6,7 +6,7 @@ const EventStreamState = @import("event_stream_state.zig").EventStreamState;
 /// An instance of EventStream in a list of EventStreams.
 pub const EventStreamSummary = struct {
     /// Summary information about the Kinesis data stream.
-    destination_summary: ?DestinationSummary,
+    destination_summary: ?DestinationSummary = null,
 
     /// The unique name of the domain.
     domain_name: []const u8,
@@ -21,10 +21,10 @@ pub const EventStreamSummary = struct {
     state: EventStreamState,
 
     /// The timestamp when the `State` changed to `STOPPED`.
-    stopped_since: ?i64,
+    stopped_since: ?i64 = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .destination_summary = "DestinationSummary",

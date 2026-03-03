@@ -7,7 +7,7 @@ const SessionConfig = @import("session_config.zig").SessionConfig;
 pub const Rule = struct {
     /// The list of filters that determine which agent traces should be included in
     /// the evaluation based on trace properties.
-    filters: ?[]const Filter,
+    filters: ?[]const Filter = null,
 
     /// The sampling configuration that determines what percentage of agent traces
     /// to evaluate.
@@ -15,7 +15,7 @@ pub const Rule = struct {
 
     /// The session configuration that defines timeout settings for detecting when
     /// agent sessions are complete and ready for evaluation.
-    session_config: ?SessionConfig,
+    session_config: ?SessionConfig = null,
 
     pub const json_field_names = .{
         .filters = "filters",

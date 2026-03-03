@@ -5,7 +5,7 @@ const IcebergOrphanFileDeletionMetrics = @import("iceberg_orphan_file_deletion_m
 pub const OrphanFileDeletionMetrics = struct {
     /// A structure containing the Iceberg orphan file deletion metrics for the
     /// optimizer run.
-    iceberg_metrics: ?IcebergOrphanFileDeletionMetrics,
+    iceberg_metrics: ?IcebergOrphanFileDeletionMetrics = null,
 
     pub const json_field_names = .{
         .iceberg_metrics = "IcebergMetrics",

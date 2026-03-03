@@ -7,7 +7,7 @@ pub const AssetBundleResourceLinkSharingConfiguration = struct {
     /// A list of link sharing permissions for the dashboards that you want to apply
     /// overrides
     /// to.
-    permissions: ?AssetBundleResourcePermissions,
+    permissions: ?AssetBundleResourcePermissions = null,
 
     pub const json_field_names = .{
         .permissions = "Permissions",

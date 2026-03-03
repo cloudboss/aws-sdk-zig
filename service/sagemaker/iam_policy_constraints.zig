@@ -8,7 +8,7 @@ pub const IamPolicyConstraints = struct {
     /// generate the Amazon S3 presigned URL. This IP address is checked by Amazon
     /// S3 and must match in order for the Amazon S3 resource to be rendered in the
     /// worker portal.
-    source_ip: ?EnabledOrDisabled,
+    source_ip: ?EnabledOrDisabled = null,
 
     /// When `VpcSourceIp` is `Enabled` the worker's IP address when a task is
     /// rendered in private worker portal inside the VPC is added to the IAM policy
@@ -18,7 +18,7 @@ pub const IamPolicyConstraints = struct {
     /// IP address in the IAM policy. To learn more about configuring private worker
     /// portal, see [Use Amazon VPC mode from a private worker
     /// portal](https://docs.aws.amazon.com/sagemaker/latest/dg/samurai-vpc-worker-portal.html).
-    vpc_source_ip: ?EnabledOrDisabled,
+    vpc_source_ip: ?EnabledOrDisabled = null,
 
     pub const json_field_names = .{
         .source_ip = "SourceIp",

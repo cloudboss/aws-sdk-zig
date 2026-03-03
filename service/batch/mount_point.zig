@@ -5,15 +5,15 @@
 /// `--volume` option to docker run.
 pub const MountPoint = struct {
     /// The path on the container where the host volume is mounted.
-    container_path: ?[]const u8,
+    container_path: ?[]const u8 = null,
 
     /// If this value is `true`, the container has read-only access to the volume.
     /// Otherwise, the container can write to the volume. The default value is
     /// `false`.
-    read_only: ?bool,
+    read_only: ?bool = null,
 
     /// The name of the volume to mount.
-    source_volume: ?[]const u8,
+    source_volume: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .container_path = "containerPath",

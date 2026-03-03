@@ -4,12 +4,12 @@ pub const AuthorizationData = struct {
     /// ECR registry.
     /// When the string is decoded, it's presented in the format `user:password` for
     /// public registry authentication using `docker login`.
-    authorization_token: ?[]const u8,
+    authorization_token: ?[]const u8 = null,
 
     /// The Unix time in seconds and milliseconds when the authorization token
     /// expires.
     /// Authorization tokens are valid for 12 hours.
-    expires_at: ?i64,
+    expires_at: ?i64 = null,
 
     pub const json_field_names = .{
         .authorization_token = "authorizationToken",

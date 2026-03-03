@@ -4,7 +4,7 @@ const DataIntegrationEventType = @import("data_integration_event_type.zig").Data
 /// The data integration event details.
 pub const DataIntegrationEvent = struct {
     /// The target dataset details for a DATASET event type.
-    dataset_target_details: ?DataIntegrationEventDatasetTargetDetails,
+    dataset_target_details: ?DataIntegrationEventDatasetTargetDetails = null,
 
     /// Event identifier (for example, orderId for InboundOrder) used for data
     /// sharding or partitioning.

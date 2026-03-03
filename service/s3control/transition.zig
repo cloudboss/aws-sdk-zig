@@ -10,7 +10,7 @@ pub const Transition = struct {
     /// Indicates when objects are transitioned to the specified storage class. The
     /// date value
     /// must be in ISO 8601 format. The time is always midnight UTC.
-    date: ?i64,
+    date: ?i64 = null,
 
     /// Indicates the number of days after creation when objects are transitioned to
     /// the
@@ -18,5 +18,5 @@ pub const Transition = struct {
     days: i32 = 0,
 
     /// The storage class to which you want the object to transition.
-    storage_class: ?TransitionStorageClass,
+    storage_class: ?TransitionStorageClass = null,
 };

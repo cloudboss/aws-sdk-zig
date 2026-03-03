@@ -11,7 +11,7 @@ const S3PublicAccessBlockConfiguration = @import("s3_public_access_block_configu
 /// points](https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html). For more information about access point policy limits, see [Access points restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html).
 pub const S3AccessPointConfiguration = struct {
     /// The access point or multi-region access point policy.
-    access_point_policy: ?[]const u8,
+    access_point_policy: ?[]const u8 = null,
 
     /// The proposed `Internet` and `VpcConfiguration` to apply to this Amazon S3
     /// access point. `VpcConfiguration` does not apply to multi-region access
@@ -19,11 +19,11 @@ pub const S3AccessPointConfiguration = struct {
     /// specified, the access preview uses `Internet` for the network origin. If the
     /// access preview is for an existing resource and neither is specified, the
     /// access preview uses the existing network origin.
-    network_origin: ?NetworkOriginConfiguration,
+    network_origin: ?NetworkOriginConfiguration = null,
 
     /// The proposed `S3PublicAccessBlock` configuration to apply to this Amazon S3
     /// access point or multi-region access point.
-    public_access_block: ?S3PublicAccessBlockConfiguration,
+    public_access_block: ?S3PublicAccessBlockConfiguration = null,
 
     pub const json_field_names = .{
         .access_point_policy = "accessPointPolicy",

@@ -13,16 +13,16 @@ pub const Exclusions = struct {
     /// (non-boot) volumes will be backed up by the policy. To exclude boot volumes,
     /// specify
     /// `true`.
-    exclude_boot_volumes: ?bool,
+    exclude_boot_volumes: ?bool = null,
 
     /// **[Default policies for EBS-backed AMIs only]** Specifies whether to exclude
     /// volumes that have specific tags.
-    exclude_tags: ?[]const Tag,
+    exclude_tags: ?[]const Tag = null,
 
     /// **[Default policies for EBS snapshots only]** Specifies the volume types to
     /// exclude. Volumes of the specified
     /// types will not be targeted by the policy.
-    exclude_volume_types: ?[]const []const u8,
+    exclude_volume_types: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .exclude_boot_volumes = "ExcludeBootVolumes",

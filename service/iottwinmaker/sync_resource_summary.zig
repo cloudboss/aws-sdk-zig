@@ -4,19 +4,19 @@ const SyncResourceStatus = @import("sync_resource_status.zig").SyncResourceStatu
 /// The sync resource summary.
 pub const SyncResourceSummary = struct {
     /// The external ID.
-    external_id: ?[]const u8,
+    external_id: ?[]const u8 = null,
 
     /// The resource ID.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The resource type.
-    resource_type: ?SyncResourceType,
+    resource_type: ?SyncResourceType = null,
 
     /// The sync resource summary status.
-    status: ?SyncResourceStatus,
+    status: ?SyncResourceStatus = null,
 
     /// The update date and time.
-    update_date_time: ?i64,
+    update_date_time: ?i64 = null,
 
     pub const json_field_names = .{
         .external_id = "externalId",

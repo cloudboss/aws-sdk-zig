@@ -6,10 +6,10 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// sorting.
 pub const SortObject = struct {
     /// Specifies the field by which to sort the resource snapshot jobs.
-    sort_by: ?SortBy,
+    sort_by: ?SortBy = null,
 
     /// Determines the order in which the sorted results are presented.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .sort_by = "SortBy",

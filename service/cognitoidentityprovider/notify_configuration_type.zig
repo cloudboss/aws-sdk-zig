@@ -8,26 +8,26 @@ pub const NotifyConfigurationType = struct {
     /// The template for the email message that your user pool sends when a detected
     /// risk
     /// event is blocked.
-    block_email: ?NotifyEmailType,
+    block_email: ?NotifyEmailType = null,
 
     /// The email address that sends the email message. The address must be either
     /// individually verified with Amazon Simple Email Service, or from a domain
     /// that has been verified with
     /// Amazon SES.
-    from: ?[]const u8,
+    from: ?[]const u8 = null,
 
     /// The template for the email message that your user pool sends when MFA is
     /// challenged in
     /// response to a detected risk.
-    mfa_email: ?NotifyEmailType,
+    mfa_email: ?NotifyEmailType = null,
 
     /// The template for the email message that your user pool sends when no action
     /// is taken
     /// in response to a detected risk.
-    no_action_email: ?NotifyEmailType,
+    no_action_email: ?NotifyEmailType = null,
 
     /// The reply-to email address of an email template.
-    reply_to: ?[]const u8,
+    reply_to: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the identity that is associated with the
     /// sending

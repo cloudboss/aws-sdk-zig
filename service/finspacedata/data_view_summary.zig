@@ -7,7 +7,7 @@ pub const DataViewSummary = struct {
     /// Time range to use for the Dataview. The value is determined as epoch time in
     /// milliseconds. For example, the value for Monday, November 1, 2021 12:00:00
     /// PM UTC is specified as 1635768000000.
-    as_of_timestamp: ?i64,
+    as_of_timestamp: ?i64 = null,
 
     /// The flag to indicate Dataview should be updated automatically.
     auto_update: bool = false,
@@ -18,19 +18,19 @@ pub const DataViewSummary = struct {
     create_time: i64 = 0,
 
     /// Th unique identifier for the Dataview Dataset.
-    dataset_id: ?[]const u8,
+    dataset_id: ?[]const u8 = null,
 
     /// The ARN identifier of the Dataview.
-    data_view_arn: ?[]const u8,
+    data_view_arn: ?[]const u8 = null,
 
     /// The unique identifier for the Dataview.
-    data_view_id: ?[]const u8,
+    data_view_id: ?[]const u8 = null,
 
     /// Information about the Dataview destination.
-    destination_type_properties: ?DataViewDestinationTypeParams,
+    destination_type_properties: ?DataViewDestinationTypeParams = null,
 
     /// The structure with error messages.
-    error_info: ?DataViewErrorInfo,
+    error_info: ?DataViewErrorInfo = null,
 
     /// The last time that a Dataview was modified. The value is determined as epoch
     /// time in milliseconds. For example, the value for Monday, November 1, 2021
@@ -38,10 +38,10 @@ pub const DataViewSummary = struct {
     last_modified_time: i64 = 0,
 
     /// Ordered set of column names used to partition data.
-    partition_columns: ?[]const []const u8,
+    partition_columns: ?[]const []const u8 = null,
 
     /// Columns to be used for sorting the data.
-    sort_columns: ?[]const []const u8,
+    sort_columns: ?[]const []const u8 = null,
 
     /// The status of a Dataview creation.
     ///
@@ -61,7 +61,7 @@ pub const DataViewSummary = struct {
     ///
     /// * `FAILED_CLEANUP_FAILED` – Dataview creation failed and resource cleanup
     ///   failed.
-    status: ?DataViewStatus,
+    status: ?DataViewStatus = null,
 
     pub const json_field_names = .{
         .as_of_timestamp = "asOfTimestamp",

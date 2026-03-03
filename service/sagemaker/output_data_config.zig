@@ -5,7 +5,7 @@ const OutputCompressionType = @import("output_compression_type.zig").OutputCompr
 pub const OutputDataConfig = struct {
     /// The model output compression type. Select `None` to output an uncompressed
     /// model, recommended for large model outputs. Defaults to gzip.
-    compression_type: ?OutputCompressionType,
+    compression_type: ?OutputCompressionType = null,
 
     /// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
     /// that SageMaker uses to encrypt the model artifacts at rest using Amazon S3
@@ -35,7 +35,7 @@ pub const OutputDataConfig = struct {
     /// `CreateHyperParameterTuningJob` requests. For more information, see [Using
     /// Key Policies in Amazon Web Services
     /// KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *Amazon Web Services Key Management Service Developer Guide*.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// Identifies the S3 path where you want SageMaker to store the model
     /// artifacts. For example, `s3://bucket-name/key-name-prefix`.

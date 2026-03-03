@@ -4,10 +4,10 @@ const Stream = @import("stream.zig").Stream;
 /// The location of the OTA update.
 pub const FileLocation = struct {
     /// The location of the updated firmware in S3.
-    s_3_location: ?S3Location,
+    s_3_location: ?S3Location = null,
 
     /// The stream that contains the OTA update.
-    stream: ?Stream,
+    stream: ?Stream = null,
 
     pub const json_field_names = .{
         .s_3_location = "s3Location",

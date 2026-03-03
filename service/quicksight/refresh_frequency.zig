@@ -25,16 +25,16 @@ pub const RefreshFrequency = struct {
 
     /// The day of the week that you want to schedule the refresh on. This value is
     /// required for weekly and monthly refresh intervals.
-    refresh_on_day: ?ScheduleRefreshOnEntity,
+    refresh_on_day: ?ScheduleRefreshOnEntity = null,
 
     /// The time of day that you want the datset to refresh. This value is expressed
     /// in HH:MM format. This field is not required for schedules that refresh
     /// hourly.
-    time_of_the_day: ?[]const u8,
+    time_of_the_day: ?[]const u8 = null,
 
     /// The timezone that you want the refresh schedule to use. The timezone ID must
     /// match a corresponding ID found on `java.util.time.getAvailableIDs()`.
-    timezone: ?[]const u8,
+    timezone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .interval = "Interval",

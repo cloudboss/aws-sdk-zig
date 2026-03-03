@@ -3,7 +3,7 @@ const KnowledgeBaseState = @import("knowledge_base_state.zig").KnowledgeBaseStat
 /// Contains details about a knowledge base associated with an agent.
 pub const AgentKnowledgeBaseSummary = struct {
     /// The description of the knowledge base associated with an agent.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the knowledge base associated with an agent.
     knowledge_base_id: []const u8,

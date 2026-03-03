@@ -12,11 +12,11 @@ pub const IntentResultEvent = struct {
     /// the form `RESPONSE-N`, where N is a number starting with one
     /// and incremented for each event sent by Amazon Lex V2 in the current
     /// session.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// Indicates whether the input to the operation was text, speech, or from a
     /// touch-tone keypad.
-    input_mode: ?InputMode,
+    input_mode: ?InputMode = null,
 
     /// A list of intents that Amazon Lex V2 determined might satisfy the user's
     /// utterance.
@@ -26,18 +26,18 @@ pub const IntentResultEvent = struct {
     /// an
     /// optional sentiment response that indicates the sentiment expressed in
     /// the utterance.
-    interpretations: ?[]const Interpretation,
+    interpretations: ?[]const Interpretation = null,
 
     /// The bot member that is processing the intent.
-    recognized_bot_member: ?RecognizedBotMember,
+    recognized_bot_member: ?RecognizedBotMember = null,
 
     /// The attributes sent in the request.
-    request_attributes: ?[]const aws.map.StringMapEntry,
+    request_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The identifier of the session in use.
-    session_id: ?[]const u8,
+    session_id: ?[]const u8 = null,
 
-    session_state: ?SessionState,
+    session_state: ?SessionState = null,
 
     pub const json_field_names = .{
         .event_id = "eventId",

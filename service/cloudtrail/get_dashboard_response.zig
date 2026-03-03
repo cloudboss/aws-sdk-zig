@@ -5,34 +5,34 @@ const Widget = @import("widget.zig").Widget;
 
 pub const GetDashboardResponse = struct {
     /// The timestamp that shows when the dashboard was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The ARN for the dashboard.
-    dashboard_arn: ?[]const u8,
+    dashboard_arn: ?[]const u8 = null,
 
     /// Provides information about failures for the last scheduled refresh.
-    last_refresh_failure_reason: ?[]const u8,
+    last_refresh_failure_reason: ?[]const u8 = null,
 
     /// The ID of the last dashboard refresh.
-    last_refresh_id: ?[]const u8,
+    last_refresh_id: ?[]const u8 = null,
 
     /// The refresh schedule for the dashboard, if configured.
-    refresh_schedule: ?RefreshSchedule,
+    refresh_schedule: ?RefreshSchedule = null,
 
     /// The status of the dashboard.
-    status: ?DashboardStatus,
+    status: ?DashboardStatus = null,
 
     /// Indicates whether termination protection is enabled for the dashboard.
-    termination_protection_enabled: ?bool,
+    termination_protection_enabled: ?bool = null,
 
     /// The type of dashboard.
-    @"type": ?DashboardType,
+    @"type": ?DashboardType = null,
 
     /// The timestamp that shows when the dashboard was last updated.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     /// An array of widgets for the dashboard.
-    widgets: ?[]const Widget,
+    widgets: ?[]const Widget = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

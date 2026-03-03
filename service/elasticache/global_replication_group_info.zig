@@ -3,9 +3,9 @@
 /// datastore.
 pub const GlobalReplicationGroupInfo = struct {
     /// The name of the Global datastore
-    global_replication_group_id: ?[]const u8,
+    global_replication_group_id: ?[]const u8 = null,
 
     /// The role of the replication group in a Global datastore. Can be primary or
     /// secondary.
-    global_replication_group_member_role: ?[]const u8,
+    global_replication_group_member_role: ?[]const u8 = null,
 };

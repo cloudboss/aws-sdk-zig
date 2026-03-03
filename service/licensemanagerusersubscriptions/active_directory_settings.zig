@@ -6,20 +6,20 @@ const DomainNetworkSettings = @import("domain_network_settings.zig").DomainNetwo
 pub const ActiveDirectorySettings = struct {
     /// Points to the `CredentialsProvider` resource that contains information about
     /// the credential provider for user administration.
-    domain_credentials_provider: ?CredentialsProvider,
+    domain_credentials_provider: ?CredentialsProvider = null,
 
     /// A list of domain IPv4 addresses that are used for the Active Directory.
-    domain_ipv_4_list: ?[]const []const u8,
+    domain_ipv_4_list: ?[]const []const u8 = null,
 
     /// A list of domain IPv6 addresses that are used for the Active Directory.
-    domain_ipv_6_list: ?[]const []const u8,
+    domain_ipv_6_list: ?[]const []const u8 = null,
 
     /// The domain name for the Active Directory.
-    domain_name: ?[]const u8,
+    domain_name: ?[]const u8 = null,
 
     /// The `DomainNetworkSettings` resource contains an array of subnets that apply
     /// for the Active Directory.
-    domain_network_settings: ?DomainNetworkSettings,
+    domain_network_settings: ?DomainNetworkSettings = null,
 
     pub const json_field_names = .{
         .domain_credentials_provider = "DomainCredentialsProvider",

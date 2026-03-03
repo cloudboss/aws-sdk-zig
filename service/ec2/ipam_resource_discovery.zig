@@ -7,35 +7,35 @@ const Tag = @import("tag.zig").Tag;
 /// monitor resources that belong to the owning account.
 pub const IpamResourceDiscovery = struct {
     /// The resource discovery description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The resource discovery Amazon Resource Name (ARN).
-    ipam_resource_discovery_arn: ?[]const u8,
+    ipam_resource_discovery_arn: ?[]const u8 = null,
 
     /// The resource discovery ID.
-    ipam_resource_discovery_id: ?[]const u8,
+    ipam_resource_discovery_id: ?[]const u8 = null,
 
     /// The resource discovery Region.
-    ipam_resource_discovery_region: ?[]const u8,
+    ipam_resource_discovery_region: ?[]const u8 = null,
 
     /// Defines if the resource discovery is the default. The default resource
     /// discovery is the resource discovery automatically created when you create an
     /// IPAM.
-    is_default: ?bool,
+    is_default: ?bool = null,
 
     /// The operating Regions for the resource discovery. Operating Regions are
     /// Amazon Web Services Regions where the IPAM is allowed to manage IP address
     /// CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services
     /// Regions you select as operating Regions.
-    operating_regions: ?[]const IpamOperatingRegion,
+    operating_regions: ?[]const IpamOperatingRegion = null,
 
     /// If your IPAM is integrated with Amazon Web Services Organizations and you
     /// add an organizational unit (OU) exclusion, IPAM will not manage the IP
     /// addresses in accounts in that OU exclusion.
-    organizational_unit_exclusions: ?[]const IpamOrganizationalUnitExclusion,
+    organizational_unit_exclusions: ?[]const IpamOrganizationalUnitExclusion = null,
 
     /// The ID of the owner.
-    owner_id: ?[]const u8,
+    owner_id: ?[]const u8 = null,
 
     /// The lifecycle state of the resource discovery.
     ///
@@ -65,10 +65,10 @@ pub const IpamResourceDiscovery = struct {
     ///
     /// * `restore-in-progress` - Amazon Web Services account that created the
     ///   resource discovery and was isolated has been restored.
-    state: ?IpamResourceDiscoveryState,
+    state: ?IpamResourceDiscoveryState = null,
 
     /// A tag is a label that you assign to an Amazon Web Services resource. Each
     /// tag consists of a key and an optional value. You can use tags to search and
     /// filter your resources or track your Amazon Web Services costs.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 };

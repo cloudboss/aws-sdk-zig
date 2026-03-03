@@ -6,7 +6,7 @@ const Currency = @import("currency.zig").Currency;
 /// Plans discounts.
 pub const RDSStorageEstimatedMonthlySavings = struct {
     /// The currency of the estimated monthly savings.
-    currency: ?Currency,
+    currency: ?Currency = null,
 
     /// The value of the estimated monthly savings for DB instance storage.
     value: f64 = 0,

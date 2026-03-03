@@ -4,7 +4,7 @@ pub const CodegenJobSummary = struct {
     app_id: []const u8,
 
     /// The time that the code generation job summary was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The name of the backend environment associated with the code generation job.
     environment_name: []const u8,
@@ -13,7 +13,7 @@ pub const CodegenJobSummary = struct {
     id: []const u8,
 
     /// The time that the code generation job summary was modified.
-    modified_at: ?i64,
+    modified_at: ?i64 = null,
 
     pub const json_field_names = .{
         .app_id = "appId",

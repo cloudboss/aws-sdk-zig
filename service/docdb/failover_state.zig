@@ -7,12 +7,12 @@ const FailoverStatus = @import("failover_status.zig").FailoverStatus;
 pub const FailoverState = struct {
     /// The Amazon Resource Name (ARN) of the Amazon DocumentDB cluster that is
     /// currently being demoted, and which is associated with this state.
-    from_db_cluster_arn: ?[]const u8,
+    from_db_cluster_arn: ?[]const u8 = null,
 
     /// Indicates whether the operation is a global switchover or a global failover.
     /// If data loss is allowed, then the operation is a global failover. Otherwise,
     /// it's a switchover.
-    is_data_loss_allowed: ?bool,
+    is_data_loss_allowed: ?bool = null,
 
     /// The current status of the global cluster. Possible values are as follows:
     ///
@@ -27,9 +27,9 @@ pub const FailoverState = struct {
     /// * **cancelling** – The request to switch over or fail over the global
     ///   cluster was cancelled and the primary cluster and the selected secondary
     ///   cluster are returning to their previous states.
-    status: ?FailoverStatus,
+    status: ?FailoverStatus = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon DocumentDB cluster that is
     /// currently being promoted, and which is associated with this state.
-    to_db_cluster_arn: ?[]const u8,
+    to_db_cluster_arn: ?[]const u8 = null,
 };

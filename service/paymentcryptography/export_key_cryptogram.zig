@@ -13,7 +13,7 @@ pub const ExportKeyCryptogram = struct {
     wrapping_key_certificate: []const u8,
 
     /// The wrapping spec for the key under export.
-    wrapping_spec: ?WrappingKeySpec,
+    wrapping_spec: ?WrappingKeySpec = null,
 
     pub const json_field_names = .{
         .certificate_authority_public_key_identifier = "CertificateAuthorityPublicKeyIdentifier",

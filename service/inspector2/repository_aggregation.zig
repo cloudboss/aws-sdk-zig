@@ -5,13 +5,13 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 /// The details that define an aggregation based on repository.
 pub const RepositoryAggregation = struct {
     /// The names of repositories to aggregate findings on.
-    repositories: ?[]const StringFilter,
+    repositories: ?[]const StringFilter = null,
 
     /// The value to sort results by.
-    sort_by: ?RepositorySortBy,
+    sort_by: ?RepositorySortBy = null,
 
     /// The order to sort results by.
-    sort_order: ?SortOrder,
+    sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
         .repositories = "repositories",

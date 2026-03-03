@@ -16,7 +16,7 @@ pub const PatternToken = struct {
     /// Contains the values found for a dynamic token, and the number of times each
     /// value was
     /// found.
-    enumerations: ?[]const aws.map.MapEntry(i64),
+    enumerations: ?[]const aws.map.MapEntry(i64) = null,
 
     /// A name that CloudWatch Logs assigned to this dynamic token to make the
     /// pattern more
@@ -33,15 +33,15 @@ pub const PatternToken = struct {
     /// For example, an inferred token name of `IPAddress-3` means that the token
     /// represents an IP address, and this token is the third dynamic token in the
     /// pattern.
-    inferred_token_name: ?[]const u8,
+    inferred_token_name: ?[]const u8 = null,
 
     /// Specifies whether this is a dynamic token.
-    is_dynamic: ?bool,
+    is_dynamic: ?bool = null,
 
     /// The string represented by this token. If this is a dynamic token, the value
     /// will be
     /// ``
-    token_string: ?[]const u8,
+    token_string: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dynamic_token_position = "dynamicTokenPosition",

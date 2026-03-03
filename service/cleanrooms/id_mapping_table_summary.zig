@@ -17,7 +17,7 @@ pub const IdMappingTableSummary = struct {
     create_time: i64,
 
     /// The description of this ID mapping table.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of this ID mapping table.
     id: []const u8,

@@ -11,14 +11,14 @@ pub const FirehoseAction = struct {
     /// You can configure the action payload when you send a message to an Amazon
     /// Kinesis Data Firehose delivery
     /// stream.
-    payload: ?Payload,
+    payload: ?Payload = null,
 
     /// A character separator that is used to separate records written to the
     /// Kinesis Data
     /// Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab),
     /// '\r\n' (Windows
     /// newline), ',' (comma).
-    separator: ?[]const u8,
+    separator: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .delivery_stream_name = "deliveryStreamName",

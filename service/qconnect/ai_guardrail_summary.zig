@@ -19,19 +19,19 @@ pub const AIGuardrailSummary = struct {
     assistant_id: []const u8,
 
     /// A description of the AI Guardrail.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The time the AI Guardrail was last modified.
-    modified_time: ?i64,
+    modified_time: ?i64 = null,
 
     /// The name of the AI Guardrail.
     name: []const u8,
 
     /// The status of the AI Guardrail.
-    status: ?Status,
+    status: ?Status = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The visibility status of the AI Guardrail.
     visibility_status: VisibilityStatus,

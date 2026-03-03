@@ -24,7 +24,7 @@ pub const AnalyticsIntentStageMetric = struct {
 
     /// Specifies whether to sort the results in ascending or descending order of
     /// the summary statistic (`value` in the response).
-    order: ?AnalyticsSortOrder,
+    order: ?AnalyticsSortOrder = null,
 
     /// The summary statistic to calculate.
     ///

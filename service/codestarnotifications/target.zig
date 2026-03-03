@@ -4,7 +4,7 @@
 pub const Target = struct {
     /// The Amazon Resource Name (ARN) of the Amazon Q Developer in chat
     /// applications topic or Amazon Q Developer in chat applications client.
-    target_address: ?[]const u8,
+    target_address: ?[]const u8 = null,
 
     /// The target type. Can be an Amazon Q Developer in chat applications topic or
     /// Amazon Q Developer in chat applications client.
@@ -13,7 +13,7 @@ pub const Target = struct {
     ///
     /// * Amazon Q Developer in chat applications clients are specified as
     ///   `AWSChatbotSlack`.
-    target_type: ?[]const u8,
+    target_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .target_address = "TargetAddress",

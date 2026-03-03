@@ -6,13 +6,13 @@ const TimeRangeFilterInput = @import("time_range_filter_input.zig").TimeRangeFil
 /// Range filter and Property filters.
 pub const RasterDataCollectionQueryWithBandFilterInput = struct {
     /// The Area of interest to be used in the search query.
-    area_of_interest: ?AreaOfInterest,
+    area_of_interest: ?AreaOfInterest = null,
 
     /// The list of Bands to be displayed in the result for each item.
-    band_filter: ?[]const []const u8,
+    band_filter: ?[]const []const u8 = null,
 
     /// The Property Filters used in the search query.
-    property_filters: ?PropertyFilters,
+    property_filters: ?PropertyFilters = null,
 
     /// The TimeRange Filter used in the search query.
     time_range_filter: TimeRangeFilterInput,

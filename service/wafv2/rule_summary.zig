@@ -8,10 +8,10 @@ pub const RuleSummary = struct {
     /// The action that WAF should take on a web request when it matches a rule's
     /// statement. Settings at the web ACL level can override the rule action
     /// setting.
-    action: ?RuleAction,
+    action: ?RuleAction = null,
 
     /// The name of the rule.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",

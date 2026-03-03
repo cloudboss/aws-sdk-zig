@@ -9,17 +9,17 @@ pub const ImageResponseCard = struct {
     /// A list of buttons that should be displayed on the response card. The
     /// arrangement of the buttons is determined by the platform that displays
     /// the button.
-    buttons: ?[]const Button,
+    buttons: ?[]const Button = null,
 
     /// The URL of an image to display on the response card. The image URL
     /// must be publicly available so that the platform displaying the response
     /// card has access to the image.
-    image_url: ?[]const u8,
+    image_url: ?[]const u8 = null,
 
     /// The subtitle to display on the response card. The format of the
     /// subtitle is determined by the platform displaying the response
     /// card.
-    subtitle: ?[]const u8,
+    subtitle: ?[]const u8 = null,
 
     /// The title to display on the response card. The format of the title
     /// is determined by the platform displaying the response card.

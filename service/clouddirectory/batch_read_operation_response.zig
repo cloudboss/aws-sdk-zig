@@ -4,10 +4,10 @@ const BatchReadSuccessfulResponse = @import("batch_read_successful_response.zig"
 /// Represents the output of a `BatchRead` response operation.
 pub const BatchReadOperationResponse = struct {
     /// Identifies which operation in a batch has failed.
-    exception_response: ?BatchReadException,
+    exception_response: ?BatchReadException = null,
 
     /// Identifies which operation in a batch has succeeded.
-    successful_response: ?BatchReadSuccessfulResponse,
+    successful_response: ?BatchReadSuccessfulResponse = null,
 
     pub const json_field_names = .{
         .exception_response = "ExceptionResponse",

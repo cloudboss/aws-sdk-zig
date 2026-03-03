@@ -7,7 +7,7 @@ pub const ExportDestination = struct {
     /// bucket name and object keys of a recommendations export file, and its
     /// associated
     /// metadata file.
-    s_3: ?S3Destination,
+    s_3: ?S3Destination = null,
 
     pub const json_field_names = .{
         .s_3 = "s3",

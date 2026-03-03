@@ -9,18 +9,18 @@ pub const CustomRoutingEndpointGroup = struct {
     /// all endpoints
     /// (virtual private cloud subnets) in an endpoint group to accept client
     /// traffic on.
-    destination_descriptions: ?[]const CustomRoutingDestinationDescription,
+    destination_descriptions: ?[]const CustomRoutingDestinationDescription = null,
 
     /// For a custom routing accelerator, describes the endpoints (virtual private
     /// cloud subnets) in an
     /// endpoint group to accept client traffic on.
-    endpoint_descriptions: ?[]const CustomRoutingEndpointDescription,
+    endpoint_descriptions: ?[]const CustomRoutingEndpointDescription = null,
 
     /// The Amazon Resource Name (ARN) of the endpoint group.
-    endpoint_group_arn: ?[]const u8,
+    endpoint_group_arn: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the endpoint group is located.
-    endpoint_group_region: ?[]const u8,
+    endpoint_group_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .destination_descriptions = "DestinationDescriptions",

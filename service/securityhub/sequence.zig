@@ -12,23 +12,23 @@ const Signal = @import("signal.zig").Signal;
 /// ](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html) in the *Amazon GuardDuty User Guide*.
 pub const Sequence = struct {
     /// Provides information about the actors involved in the attack sequence.
-    actors: ?[]const Actor,
+    actors: ?[]const Actor = null,
 
     /// Contains information about the network endpoints that were used in the
     /// attack sequence.
-    endpoints: ?[]const NetworkEndpoint,
+    endpoints: ?[]const NetworkEndpoint = null,
 
     /// Contains information about the indicators observed in the attack sequence.
     /// The values for
     /// [SignalIndicators](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Signal.html) are a subset of the values for `SequenceIndicators`, but the values for
     /// these fields don't always match 1:1.
-    sequence_indicators: ?[]const Indicator,
+    sequence_indicators: ?[]const Indicator = null,
 
     /// Contains information about the signals involved in the attack sequence.
-    signals: ?[]const Signal,
+    signals: ?[]const Signal = null,
 
     /// Unique identifier of the attack sequence.
-    uid: ?[]const u8,
+    uid: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .actors = "Actors",

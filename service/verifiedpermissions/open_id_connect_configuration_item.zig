@@ -13,12 +13,12 @@ pub const OpenIdConnectConfigurationItem = struct {
     /// identity provider. For example, if you set an `entityIdPrefix` of
     /// `MyOIDCProvider`, you can reference principals in your policies in the
     /// format `MyCorp::User::MyOIDCProvider|Carlos`.
-    entity_id_prefix: ?[]const u8,
+    entity_id_prefix: ?[]const u8 = null,
 
     /// The claim in OIDC identity provider tokens that indicates a user's group
     /// membership, and the entity type that you want to map it to. For example,
     /// this object can map the contents of a `groups` claim to `MyCorp::UserGroup`.
-    group_configuration: ?OpenIdConnectGroupConfigurationItem,
+    group_configuration: ?OpenIdConnectGroupConfigurationItem = null,
 
     /// The issuer URL of an OIDC identity provider. This URL must have an OIDC
     /// discovery endpoint at the path `.well-known/openid-configuration`.

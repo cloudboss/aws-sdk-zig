@@ -6,7 +6,7 @@ pub const DataAutomationConfiguration = struct {
     data_automation_project_arn: []const u8,
 
     /// Data automation stage.
-    stage: ?DataAutomationStage,
+    stage: ?DataAutomationStage = null,
 
     pub const json_field_names = .{
         .data_automation_project_arn = "dataAutomationProjectArn",

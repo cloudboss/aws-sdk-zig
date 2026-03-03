@@ -3,19 +3,19 @@ const TypeDefinitionFormat = @import("type_definition_format.zig").TypeDefinitio
 /// Describes a type.
 pub const Type = struct {
     /// The type Amazon Resource Name (ARN).
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The type definition.
-    definition: ?[]const u8,
+    definition: ?[]const u8 = null,
 
     /// The type description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The type format: SDL or JSON.
-    format: ?TypeDefinitionFormat,
+    format: ?TypeDefinitionFormat = null,
 
     /// The type name.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

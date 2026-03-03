@@ -3,7 +3,7 @@ const AbortConfigCriteria = @import("abort_config_criteria.zig").AbortConfigCrit
 /// Over-the-air (OTA) task abort config.
 pub const OtaTaskAbortConfig = struct {
     /// The list of criteria for the abort config.
-    abort_config_criteria_list: ?[]const AbortConfigCriteria,
+    abort_config_criteria_list: ?[]const AbortConfigCriteria = null,
 
     pub const json_field_names = .{
         .abort_config_criteria_list = "AbortConfigCriteriaList",

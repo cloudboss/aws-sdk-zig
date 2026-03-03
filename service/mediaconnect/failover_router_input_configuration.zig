@@ -11,7 +11,7 @@ pub const FailoverRouterInputConfiguration = struct {
     /// configurations list is currently active. Used to control which of the two
     /// failover sources is currently selected. This field is ignored when
     /// sourcePriorityMode is set to NO_PRIORITY
-    primary_source_index: ?i32,
+    primary_source_index: ?i32 = null,
 
     /// A list of exactly two protocol configurations for the failover input
     /// sources. Both must use the same protocol type.

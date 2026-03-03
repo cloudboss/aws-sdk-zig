@@ -14,7 +14,7 @@ pub const TrustedAdvisorResourceDetail = struct {
     metadata: []const []const u8,
 
     /// The Amazon Web Services Region in which the identified resource is located.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The unique identifier for the identified resource.
     resource_id: []const u8,

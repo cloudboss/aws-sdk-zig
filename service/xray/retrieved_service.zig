@@ -6,9 +6,9 @@ const Service = @import("service.zig").Service;
 /// an application used.
 pub const RetrievedService = struct {
     /// Relation between two 2 services.
-    links: ?[]const GraphLink,
+    links: ?[]const GraphLink = null,
 
-    service: ?Service,
+    service: ?Service = null,
 
     pub const json_field_names = .{
         .links = "Links",

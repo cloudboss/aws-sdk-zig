@@ -8,7 +8,7 @@ pub const UpdateOpenTableFormatInput = struct {
     /// modifications to
     /// be applied, including schema changes, partition specifications, and table
     /// properties.
-    update_iceberg_input: ?UpdateIcebergInput,
+    update_iceberg_input: ?UpdateIcebergInput = null,
 
     pub const json_field_names = .{
         .update_iceberg_input = "UpdateIcebergInput",

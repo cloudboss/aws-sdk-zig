@@ -3,10 +3,10 @@
 /// IDs, error codes, and error messages.
 pub const CreateAttendeeError = struct {
     /// The error code.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// The error message.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The Amazon Chime SDK external user ID. An idempotency token. Links the
     /// attendee to an identity managed by a builder application.
@@ -16,7 +16,7 @@ pub const CreateAttendeeError = struct {
     /// Values that begin with `aws:` are reserved. You can't configure a value that
     /// uses this prefix.
     /// Case insensitive.
-    external_user_id: ?[]const u8,
+    external_user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "ErrorCode",

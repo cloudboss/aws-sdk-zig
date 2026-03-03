@@ -11,7 +11,7 @@ pub const TaskRunSessionActionDefinition = struct {
     step_id: []const u8,
 
     /// The task ID.
-    task_id: ?[]const u8,
+    task_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .parameters = "parameters",

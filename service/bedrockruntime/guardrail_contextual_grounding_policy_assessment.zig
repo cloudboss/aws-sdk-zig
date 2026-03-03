@@ -4,7 +4,7 @@ const GuardrailContextualGroundingFilter = @import("guardrail_contextual_groundi
 /// filter.
 pub const GuardrailContextualGroundingPolicyAssessment = struct {
     /// The filter details for the guardrails contextual grounding filter.
-    filters: ?[]const GuardrailContextualGroundingFilter,
+    filters: ?[]const GuardrailContextualGroundingFilter = null,
 
     pub const json_field_names = .{
         .filters = "filters",

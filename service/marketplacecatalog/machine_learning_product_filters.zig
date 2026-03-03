@@ -9,16 +9,16 @@ const MachineLearningProductVisibilityFilter = @import("machine_learning_product
 /// `Visibility`.
 pub const MachineLearningProductFilters = struct {
     /// Filter machine learning products by their entity IDs.
-    entity_id: ?MachineLearningProductEntityIdFilter,
+    entity_id: ?MachineLearningProductEntityIdFilter = null,
 
     /// Filter machine learning products by their last modified date.
-    last_modified_date: ?MachineLearningProductLastModifiedDateFilter,
+    last_modified_date: ?MachineLearningProductLastModifiedDateFilter = null,
 
     /// Filter machine learning products by their product titles.
-    product_title: ?MachineLearningProductTitleFilter,
+    product_title: ?MachineLearningProductTitleFilter = null,
 
     /// Filter machine learning products by their visibility status.
-    visibility: ?MachineLearningProductVisibilityFilter,
+    visibility: ?MachineLearningProductVisibilityFilter = null,
 
     pub const json_field_names = .{
         .entity_id = "EntityId",

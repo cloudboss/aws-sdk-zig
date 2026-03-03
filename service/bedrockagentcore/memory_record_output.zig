@@ -3,17 +3,17 @@ const MemoryRecordStatus = @import("memory_record_status.zig").MemoryRecordStatu
 /// Output information returned after processing a memory record operation.
 pub const MemoryRecordOutput = struct {
     /// The error code returned when the memory record operation fails.
-    error_code: ?i32,
+    error_code: ?i32 = null,
 
     /// A human-readable error message describing why the memory record operation
     /// failed.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The unique ID associated to the memory record.
     memory_record_id: []const u8,
 
     /// The client-provided identifier that was used to track this record operation.
-    request_identifier: ?[]const u8,
+    request_identifier: ?[]const u8 = null,
 
     /// The status of the memory record operation (e.g., SUCCEEDED, FAILED).
     status: MemoryRecordStatus,

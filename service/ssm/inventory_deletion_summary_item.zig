@@ -8,7 +8,7 @@ pub const InventoryDeletionSummaryItem = struct {
     remaining_count: i32 = 0,
 
     /// The inventory type version.
-    version: ?[]const u8,
+    version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .count = "Count",

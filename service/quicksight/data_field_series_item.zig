@@ -10,11 +10,11 @@ pub const DataFieldSeriesItem = struct {
     field_id: []const u8,
 
     /// The field value of the field that you are setting the axis binding to.
-    field_value: ?[]const u8,
+    field_value: ?[]const u8 = null,
 
     /// The options that determine the presentation of line series associated to the
     /// field.
-    settings: ?LineChartSeriesSettings,
+    settings: ?LineChartSeriesSettings = null,
 
     pub const json_field_names = .{
         .axis_binding = "AxisBinding",

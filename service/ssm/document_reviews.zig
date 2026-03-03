@@ -8,7 +8,7 @@ pub const DocumentReviews = struct {
 
     /// A comment entered by a user in your organization about the document review
     /// request.
-    comment: ?[]const DocumentReviewCommentSource,
+    comment: ?[]const DocumentReviewCommentSource = null,
 
     pub const json_field_names = .{
         .action = "Action",

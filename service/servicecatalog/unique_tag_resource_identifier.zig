@@ -5,12 +5,12 @@ pub const UniqueTagResourceIdentifier = struct {
     /// A unique key
     /// that's attached
     /// to a resource.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// A unique value
     /// that's attached
     /// to a resource.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",

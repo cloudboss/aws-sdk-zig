@@ -11,12 +11,12 @@ const StreamEvent = @import("stream_event.zig").StreamEvent;
 /// it encountered.
 pub const StreamSession = struct {
     /// The properties of the channel at the time of going live.
-    channel: ?Channel,
+    channel: ?Channel = null,
 
     /// Time when the channel went offline. This is an ISO 8601 timestamp; *note
     /// that
     /// this is returned as a string*. For live streams, this is `NULL`.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// The properties of the incoming RTMP stream.
     ///
@@ -27,31 +27,31 @@ pub const StreamSession = struct {
     /// namely information about track0 (the sole track). If multitrack is enabled,
     /// `ingestConfiguration` contains data for only the first track (track0) and
     /// `ingestConfigurations` contains data for all tracks.
-    ingest_configuration: ?IngestConfiguration,
+    ingest_configuration: ?IngestConfiguration = null,
 
     /// The properties of the incoming RTMP stream. If multitrack is enabled,
     /// `ingestConfigurations` contains data for all tracks; otherwise, it contains
     /// data only for track0 (the sole track).
-    ingest_configurations: ?IngestConfigurations,
+    ingest_configurations: ?IngestConfigurations = null,
 
     /// The properties of recording the live stream.
-    recording_configuration: ?RecordingConfiguration,
+    recording_configuration: ?RecordingConfiguration = null,
 
     /// Time when the channel went live. This is an ISO 8601 timestamp; *note that
     /// this
     /// is returned as a string*.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// Unique identifier for a live or previously live stream in the specified
     /// channel.
-    stream_id: ?[]const u8,
+    stream_id: ?[]const u8 = null,
 
     /// List of Amazon IVS events that the stream encountered. The list is sorted by
     /// most recent
     /// events and contains up to 500 events. For Amazon IVS events, see [Using
     /// Amazon EventBridge with Amazon
     /// IVS](https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html).
-    truncated_events: ?[]const StreamEvent,
+    truncated_events: ?[]const StreamEvent = null,
 
     pub const json_field_names = .{
         .channel = "channel",

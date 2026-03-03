@@ -4,12 +4,12 @@ const SupportedEngineLifecycle = @import("supported_engine_lifecycle.zig").Suppo
 /// `DescribeDBMajorEngineVersions`.
 pub const DBMajorEngineVersion = struct {
     /// The name of the database engine.
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// The major version number of the database engine.
-    major_engine_version: ?[]const u8,
+    major_engine_version: ?[]const u8 = null,
 
     /// A list of the lifecycles supported by this engine for the
     /// `DescribeDBMajorEngineVersions` operation.
-    supported_engine_lifecycles: ?[]const SupportedEngineLifecycle,
+    supported_engine_lifecycles: ?[]const SupportedEngineLifecycle = null,
 };

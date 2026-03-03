@@ -4,7 +4,7 @@ const SimpleClusterMarker = @import("simple_cluster_marker.zig").SimpleClusterMa
 /// configuration.
 pub const ClusterMarker = struct {
     /// The simple cluster marker of the cluster marker.
-    simple_cluster_marker: ?SimpleClusterMarker,
+    simple_cluster_marker: ?SimpleClusterMarker = null,
 
     pub const json_field_names = .{
         .simple_cluster_marker = "SimpleClusterMarker",

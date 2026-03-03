@@ -38,17 +38,17 @@ pub const NodegroupScalingConfig = struct {
     /// out-of-date for short periods of time). the Cluster Autoscaler doesn't scale
     /// a managed
     /// node group lower than `minSize` or higher than `maxSize`.
-    desired_size: ?i32,
+    desired_size: ?i32 = null,
 
     /// The maximum number of nodes that the managed node group can scale out to.
     /// For
     /// information about the maximum number that you can specify, see [Amazon EKS
     /// service
     /// quotas](https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html) in the *Amazon EKS User Guide*.
-    max_size: ?i32,
+    max_size: ?i32 = null,
 
     /// The minimum number of nodes that the managed node group can scale in to.
-    min_size: ?i32,
+    min_size: ?i32 = null,
 
     pub const json_field_names = .{
         .desired_size = "desiredSize",

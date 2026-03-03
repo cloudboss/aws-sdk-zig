@@ -24,7 +24,7 @@ pub const FleetSpotCapacityRebalanceRequest = struct {
     /// the fleet, and
     /// then, after a delay that you specify (in `TerminationDelay`), terminates the
     /// instances that received a rebalance notification.
-    replacement_strategy: ?FleetReplacementStrategy,
+    replacement_strategy: ?FleetReplacementStrategy = null,
 
     /// The amount of time (in seconds) that Amazon EC2 waits before terminating the
     /// old Spot
@@ -36,5 +36,5 @@ pub const FleetSpotCapacityRebalanceRequest = struct {
     ///
     /// Valid values: Minimum value of `120` seconds. Maximum value of `7200`
     /// seconds.
-    termination_delay: ?i32,
+    termination_delay: ?i32 = null,
 };

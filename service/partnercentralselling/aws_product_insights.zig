@@ -18,16 +18,16 @@ pub const AwsProductInsights = struct {
     frequency: PaymentFrequency,
 
     /// Total estimated spend for this source before optimizations.
-    total_amount: ?[]const u8,
+    total_amount: ?[]const u8 = null,
 
     /// Spend amounts mapped to AWS programs and modernization pathways.
     total_amount_by_category: []const aws.map.StringMapEntry,
 
     /// Total estimated spend after applying recommended optimizations.
-    total_optimized_amount: ?[]const u8,
+    total_optimized_amount: ?[]const u8 = null,
 
     /// Quantified savings achievable through implementing optimizations.
-    total_potential_savings_amount: ?[]const u8,
+    total_potential_savings_amount: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .aws_products = "AwsProducts",

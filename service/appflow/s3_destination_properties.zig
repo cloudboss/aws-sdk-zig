@@ -8,9 +8,9 @@ pub const S3DestinationProperties = struct {
 
     /// The object key for the destination bucket in which Amazon AppFlow places the
     /// files.
-    bucket_prefix: ?[]const u8,
+    bucket_prefix: ?[]const u8 = null,
 
-    s_3_output_format_config: ?S3OutputFormatConfig,
+    s_3_output_format_config: ?S3OutputFormatConfig = null,
 
     pub const json_field_names = .{
         .bucket_name = "bucketName",

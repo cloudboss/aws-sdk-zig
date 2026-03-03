@@ -13,13 +13,13 @@ pub const FlowAliasSummary = struct {
 
     /// The configuration that specifies how nodes in the flow are executed
     /// concurrently.
-    concurrency_configuration: ?FlowAliasConcurrencyConfiguration,
+    concurrency_configuration: ?FlowAliasConcurrencyConfiguration = null,
 
     /// The time at which the alias was created.
     created_at: i64,
 
     /// A description of the alias.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the flow.
     flow_id: []const u8,

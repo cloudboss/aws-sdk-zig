@@ -14,7 +14,7 @@ pub const Grok = struct {
     /// The path to the field in the log event that you want to parse. If you omit
     /// this value, the
     /// whole log message is parsed.
-    source: ?[]const u8,
+    source: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .match = "match",

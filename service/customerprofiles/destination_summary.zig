@@ -6,7 +6,7 @@ pub const DestinationSummary = struct {
     status: EventStreamDestinationStatus,
 
     /// The timestamp when the status last changed to `UNHEALHY`.
-    unhealthy_since: ?i64,
+    unhealthy_since: ?i64 = null,
 
     /// The StreamARN of the destination to deliver profile events to. For example,
     /// arn:aws:kinesis:region:account-id:stream/stream-name.

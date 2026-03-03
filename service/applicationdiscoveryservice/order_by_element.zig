@@ -6,7 +6,7 @@ pub const OrderByElement = struct {
     field_name: []const u8,
 
     /// Ordering direction.
-    sort_order: ?orderString,
+    sort_order: ?orderString = null,
 
     pub const json_field_names = .{
         .field_name = "fieldName",

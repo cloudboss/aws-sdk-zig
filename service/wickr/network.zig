@@ -12,15 +12,15 @@ pub const Network = struct {
 
     /// The ARN of the Amazon Web Services KMS customer managed key used for
     /// encrypting sensitive data in the network.
-    encryption_key_arn: ?[]const u8,
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The expiration date and time for the network's free trial period, if
     /// applicable.
-    free_trial_expiration: ?[]const u8,
+    free_trial_expiration: ?[]const u8 = null,
 
     /// The SSO redirect URI migration state, managed by the SSO redirect migration
     /// wizard. Values: 0 (not started), 1 (in progress), or 2 (completed).
-    migration_state: ?i32,
+    migration_state: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the network.
     network_arn: []const u8,
@@ -32,7 +32,7 @@ pub const Network = struct {
     network_name: []const u8,
 
     /// The current standing or status of the network.
-    standing: ?i32,
+    standing: ?i32 = null,
 
     pub const json_field_names = .{
         .access_level = "accessLevel",

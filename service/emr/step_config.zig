@@ -34,7 +34,7 @@ pub const StepConfig = struct {
     /// step that fails with this parameter set to `TERMINATE_CLUSTER`, the cluster
     /// does
     /// not terminate.
-    action_on_failure: ?ActionOnFailure,
+    action_on_failure: ?ActionOnFailure = null,
 
     /// The JAR file used for the step.
     hadoop_jar_step: HadoopJarStepConfig,
@@ -43,7 +43,7 @@ pub const StepConfig = struct {
     name: []const u8,
 
     /// Object that holds configuration properties for logging.
-    step_monitoring_configuration: ?StepMonitoringConfiguration,
+    step_monitoring_configuration: ?StepMonitoringConfiguration = null,
 
     pub const json_field_names = .{
         .action_on_failure = "ActionOnFailure",

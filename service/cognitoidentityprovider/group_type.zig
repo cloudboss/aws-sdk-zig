@@ -9,18 +9,18 @@ pub const GroupType = struct {
     /// The date and time when the item was created. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    creation_date: ?i64,
+    creation_date: ?i64 = null,
 
     /// A friendly description of the group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the group.
-    group_name: ?[]const u8,
+    group_name: ?[]const u8 = null,
 
     /// The date and time when the item was modified. Amazon Cognito returns this
     /// timestamp in UNIX epoch time format. Your SDK might render the output in a
     /// human-readable format like ISO 8601 or a Java `Date` object.
-    last_modified_date: ?i64,
+    last_modified_date: ?i64 = null,
 
     /// A non-negative integer value that specifies the precedence of this group
     /// relative to
@@ -42,17 +42,17 @@ pub const GroupType = struct {
     /// set in users' tokens.
     ///
     /// The default `Precedence` value is `null`.
-    precedence: ?i32,
+    precedence: ?i32 = null,
 
     /// The ARN of the IAM role associated with the group. If a group has the
     /// highest
     /// priority of a user's groups, users who authenticate with an identity pool
     /// get
     /// credentials for the `RoleArn` that's associated with the group.
-    role_arn: ?[]const u8,
+    role_arn: ?[]const u8 = null,
 
     /// The ID of the user pool that contains the group.
-    user_pool_id: ?[]const u8,
+    user_pool_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .creation_date = "CreationDate",

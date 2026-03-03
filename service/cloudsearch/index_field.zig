@@ -14,13 +14,13 @@ const TextOptions = @import("text_options.zig").TextOptions;
 /// Configuration information for a field in the index, including its name,
 /// type, and options. The supported options depend on the `IndexFieldType`.
 pub const IndexField = struct {
-    date_array_options: ?DateArrayOptions,
+    date_array_options: ?DateArrayOptions = null,
 
-    date_options: ?DateOptions,
+    date_options: ?DateOptions = null,
 
-    double_array_options: ?DoubleArrayOptions,
+    double_array_options: ?DoubleArrayOptions = null,
 
-    double_options: ?DoubleOptions,
+    double_options: ?DoubleOptions = null,
 
     /// A string that represents the name of an index field. CloudSearch supports
     /// regular index fields as well as dynamic fields.
@@ -44,17 +44,17 @@ pub const IndexField = struct {
 
     index_field_type: IndexFieldType,
 
-    int_array_options: ?IntArrayOptions,
+    int_array_options: ?IntArrayOptions = null,
 
-    int_options: ?IntOptions,
+    int_options: ?IntOptions = null,
 
-    lat_lon_options: ?LatLonOptions,
+    lat_lon_options: ?LatLonOptions = null,
 
-    literal_array_options: ?LiteralArrayOptions,
+    literal_array_options: ?LiteralArrayOptions = null,
 
-    literal_options: ?LiteralOptions,
+    literal_options: ?LiteralOptions = null,
 
-    text_array_options: ?TextArrayOptions,
+    text_array_options: ?TextArrayOptions = null,
 
-    text_options: ?TextOptions,
+    text_options: ?TextOptions = null,
 };

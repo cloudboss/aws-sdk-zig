@@ -15,9 +15,9 @@ pub const SentimentResponse = struct {
     /// The overall sentiment expressed in the user's response. This is the
     /// sentiment most likely expressed by the user based on the analysis by
     /// Amazon Comprehend.
-    sentiment: ?SentimentType,
+    sentiment: ?SentimentType = null,
 
-    sentiment_score: ?SentimentScore,
+    sentiment_score: ?SentimentScore = null,
 
     pub const json_field_names = .{
         .sentiment = "sentiment",

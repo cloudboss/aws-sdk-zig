@@ -5,18 +5,18 @@ const VisualTitleLabelOptions = @import("visual_title_label_options.zig").Visual
 /// A layer map visual.
 pub const LayerMapVisual = struct {
     /// The configuration settings of the visual.
-    chart_configuration: ?GeospatialLayerMapConfiguration,
+    chart_configuration: ?GeospatialLayerMapConfiguration = null,
 
     /// The dataset that is used to create the layer map visual. You can't create a
     /// visual without a dataset.
     data_set_identifier: []const u8,
 
-    subtitle: ?VisualSubtitleLabelOptions,
+    subtitle: ?VisualSubtitleLabelOptions = null,
 
-    title: ?VisualTitleLabelOptions,
+    title: ?VisualTitleLabelOptions = null,
 
     /// The alt text for the visual.
-    visual_content_alt_text: ?[]const u8,
+    visual_content_alt_text: ?[]const u8 = null,
 
     /// The ID of the visual.
     visual_id: []const u8,

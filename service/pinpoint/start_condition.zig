@@ -5,13 +5,13 @@ const SegmentCondition = @import("segment_condition.zig").SegmentCondition;
 /// and its conditions determine which users are participants in a journey.
 pub const StartCondition = struct {
     /// The custom description of the condition.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
-    event_start_condition: ?EventStartCondition,
+    event_start_condition: ?EventStartCondition = null,
 
     /// The segment that's associated with the first activity in the journey. This
     /// segment determines which users are participants in the journey.
-    segment_start_condition: ?SegmentCondition,
+    segment_start_condition: ?SegmentCondition = null,
 
     pub const json_field_names = .{
         .description = "Description",

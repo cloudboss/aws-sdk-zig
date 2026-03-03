@@ -1,7 +1,7 @@
 /// Describes an EC2 Fleet or Spot Fleet event.
 pub const EventInformation = struct {
     /// The description of the event.
-    event_description: ?[]const u8,
+    event_description: ?[]const u8 = null,
 
     /// The event.
     ///
@@ -105,9 +105,9 @@ pub const EventInformation = struct {
     /// instances with load balancers failed. For more information, see the
     /// description
     /// of the event.
-    event_sub_type: ?[]const u8,
+    event_sub_type: ?[]const u8 = null,
 
     /// The ID of the instance. This information is available only for
     /// `instanceChange` events.
-    instance_id: ?[]const u8,
+    instance_id: ?[]const u8 = null,
 };

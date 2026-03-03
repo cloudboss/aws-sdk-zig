@@ -8,7 +8,7 @@ const TimeoutSettings = @import("timeout_settings.zig").TimeoutSettings;
 /// Describes a pool of WorkSpaces.
 pub const WorkspacesPool = struct {
     /// The persistent application settings for users of the pool.
-    application_settings: ?ApplicationSettingsResponse,
+    application_settings: ?ApplicationSettingsResponse = null,
 
     /// The identifier of the bundle used by the pool.
     bundle_id: []const u8,
@@ -20,13 +20,13 @@ pub const WorkspacesPool = struct {
     created_at: i64,
 
     /// The description of the pool.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the directory used by the pool.
     directory_id: []const u8,
 
     /// The pool errors.
-    errors: ?[]const WorkspacesPoolError,
+    errors: ?[]const WorkspacesPoolError = null,
 
     /// The Amazon Resource Name (ARN) for the pool.
     pool_arn: []const u8,
@@ -49,7 +49,7 @@ pub const WorkspacesPool = struct {
     /// network interruption
     /// within this time interval, they are connected to their previous session.
     /// Otherwise, they are connected to a new session with a new pool instance.
-    timeout_settings: ?TimeoutSettings,
+    timeout_settings: ?TimeoutSettings = null,
 
     pub const json_field_names = .{
         .application_settings = "ApplicationSettings",

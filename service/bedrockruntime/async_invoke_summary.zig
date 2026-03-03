@@ -4,19 +4,19 @@ const AsyncInvokeStatus = @import("async_invoke_status.zig").AsyncInvokeStatus;
 /// A summary of an asynchronous invocation.
 pub const AsyncInvokeSummary = struct {
     /// The invocation's idempotency token.
-    client_request_token: ?[]const u8,
+    client_request_token: ?[]const u8 = null,
 
     /// When the invocation ended.
-    end_time: ?i64,
+    end_time: ?i64 = null,
 
     /// An error message.
-    failure_message: ?[]const u8,
+    failure_message: ?[]const u8 = null,
 
     /// The invocation's ARN.
     invocation_arn: []const u8,
 
     /// When the invocation was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The invoked model's ARN.
     model_arn: []const u8,
@@ -25,7 +25,7 @@ pub const AsyncInvokeSummary = struct {
     output_data_config: AsyncInvokeOutputDataConfig,
 
     /// The invocation's status.
-    status: ?AsyncInvokeStatus,
+    status: ?AsyncInvokeStatus = null,
 
     /// When the invocation was submitted.
     submit_time: i64,

@@ -6,7 +6,7 @@ const Currency = @import("currency.zig").Currency;
 /// pricing discounts.
 pub const InstanceEstimatedMonthlySavings = struct {
     /// The currency of the estimated monthly savings.
-    currency: ?Currency,
+    currency: ?Currency = null,
 
     /// The value of the estimated monthly savings.
     value: f64 = 0,

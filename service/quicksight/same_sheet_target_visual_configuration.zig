@@ -12,11 +12,11 @@ pub const SameSheetTargetVisualConfiguration = struct {
     ///
     /// * `ALL_VISUALS`: Applies the filter operation to all visuals in the same
     ///   sheet.
-    target_visual_options: ?TargetVisualOptions,
+    target_visual_options: ?TargetVisualOptions = null,
 
     /// A list of the target visual IDs that are located in the same sheet of the
     /// analysis.
-    target_visuals: ?[]const []const u8,
+    target_visuals: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .target_visual_options = "TargetVisualOptions",

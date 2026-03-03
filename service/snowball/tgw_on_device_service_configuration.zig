@@ -10,7 +10,7 @@ pub const TGWOnDeviceServiceConfiguration = struct {
     storage_limit: i32 = 0,
 
     /// The scale unit of the virtual tapes on the device.
-    storage_unit: ?StorageUnit,
+    storage_unit: ?StorageUnit = null,
 
     pub const json_field_names = .{
         .storage_limit = "StorageLimit",

@@ -2,11 +2,11 @@
 pub const AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails = struct {
     /// The maximum amount of memory per vCPU, in GiB. If this parameter is omitted,
     /// there's no maximum limit.
-    max: ?f64,
+    max: ?f64 = null,
 
     /// The minimum amount of memory per vCPU, in GiB. If this parameter is omitted,
     /// there's no maximum limit.
-    min: ?f64,
+    min: ?f64 = null,
 
     pub const json_field_names = .{
         .max = "Max",

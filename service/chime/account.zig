@@ -10,32 +10,32 @@ pub const Account = struct {
     account_id: []const u8,
 
     /// The status of the account.
-    account_status: ?AccountStatus,
+    account_status: ?AccountStatus = null,
 
     /// The Amazon Chime account type. For more information about different account
     /// types, see
     /// [Managing Your Amazon Chime
     /// Accounts](https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html) in the *Amazon Chime Administration
     /// Guide*.
-    account_type: ?AccountType,
+    account_type: ?AccountType = null,
 
     /// The AWS account ID.
     aws_account_id: []const u8,
 
     /// The Amazon Chime account creation timestamp, in ISO 8601 format.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The default license for the Amazon Chime account.
-    default_license: ?License,
+    default_license: ?License = null,
 
     /// The Amazon Chime account name.
     name: []const u8,
 
     /// The sign-in delegate groups associated with the account.
-    signin_delegate_groups: ?[]const SigninDelegateGroup,
+    signin_delegate_groups: ?[]const SigninDelegateGroup = null,
 
     /// Supported licenses for the Amazon Chime account.
-    supported_licenses: ?[]const License,
+    supported_licenses: ?[]const License = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

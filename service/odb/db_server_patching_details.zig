@@ -4,17 +4,17 @@ const DbServerPatchingStatus = @import("db_server_patching_status.zig").DbServer
 /// system updates take place during the maintenance window.
 pub const DbServerPatchingDetails = struct {
     /// Estimated time, in minutes, to patch one database server.
-    estimated_patch_duration: ?i32,
+    estimated_patch_duration: ?i32 = null,
 
     /// The status of the patching operation. Possible values are `SCHEDULED`,
     /// `MAINTENANCE_IN_PROGRESS`, `FAILED`, and `COMPLETE`.
-    patching_status: ?DbServerPatchingStatus,
+    patching_status: ?DbServerPatchingStatus = null,
 
     /// The time when the patching operation ended.
-    time_patching_ended: ?[]const u8,
+    time_patching_ended: ?[]const u8 = null,
 
     /// The time when the patching operation started.
-    time_patching_started: ?[]const u8,
+    time_patching_started: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .estimated_patch_duration = "estimatedPatchDuration",

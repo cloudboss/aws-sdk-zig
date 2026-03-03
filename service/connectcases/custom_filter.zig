@@ -3,7 +3,7 @@ const CustomFieldsFilter = @import("custom_fields_filter.zig").CustomFieldsFilte
 /// A filter for related items of type `Custom`.
 pub const CustomFilter = struct {
     /// Filter conditions for custom fields.
-    fields: ?CustomFieldsFilter,
+    fields: ?CustomFieldsFilter = null,
 
     pub const json_field_names = .{
         .fields = "fields",

@@ -4,13 +4,13 @@ pub const EstimatedDiscounts = struct {
     /// Estimated other discounts include all discounts that are not itemized.
     /// Itemized discounts include `reservedInstanceDiscount` and
     /// `savingsPlansDiscount`.
-    other_discount: ?f64,
+    other_discount: ?f64 = null,
 
     /// Estimated reserved instance discounts.
-    reserved_instances_discount: ?f64,
+    reserved_instances_discount: ?f64 = null,
 
     /// Estimated Savings Plans discounts.
-    savings_plans_discount: ?f64,
+    savings_plans_discount: ?f64 = null,
 
     pub const json_field_names = .{
         .other_discount = "otherDiscount",

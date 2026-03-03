@@ -26,7 +26,7 @@ pub const AssigneeContact = struct {
     /// opportunity or engagement. This field enables direct communication for
     /// time-sensitive matters and facilitates coordination between AWS and partner
     /// teams.
-    phone: ?[]const u8,
+    phone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .business_title = "BusinessTitle",

@@ -5,8 +5,8 @@ const UnsuccessfulInstanceCreditSpecificationErrorCode = @import("unsuccessful_i
 /// for CPU usage was not modified.
 pub const UnsuccessfulInstanceCreditSpecificationItemError = struct {
     /// The error code.
-    code: ?UnsuccessfulInstanceCreditSpecificationErrorCode,
+    code: ?UnsuccessfulInstanceCreditSpecificationErrorCode = null,
 
     /// The applicable error message.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 };

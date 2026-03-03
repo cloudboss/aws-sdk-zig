@@ -9,16 +9,16 @@ pub const Engagement = struct {
     engagement_arn: []const u8,
 
     /// The ARN of the incident that's engaging the contact.
-    incident_id: ?[]const u8,
+    incident_id: ?[]const u8 = null,
 
     /// The user that started the engagement.
     sender: []const u8,
 
     /// The time that the engagement began.
-    start_time: ?i64,
+    start_time: ?i64 = null,
 
     /// The time that the engagement ended.
-    stop_time: ?i64,
+    stop_time: ?i64 = null,
 
     pub const json_field_names = .{
         .contact_arn = "ContactArn",

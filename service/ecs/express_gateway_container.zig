@@ -15,18 +15,18 @@ const Secret = @import("secret.zig").Secret;
 /// parameter, with sensible defaults provided for other settings.
 pub const ExpressGatewayContainer = struct {
     /// The log configuration for the container.
-    aws_logs_configuration: ?ExpressGatewayServiceAwsLogsConfiguration,
+    aws_logs_configuration: ?ExpressGatewayServiceAwsLogsConfiguration = null,
 
     /// The command that is passed to the container.
-    command: ?[]const []const u8,
+    command: ?[]const []const u8 = null,
 
     /// The port number on the container that receives traffic from the load
     /// balancer. Default
     /// is 80.
-    container_port: ?i32,
+    container_port: ?i32 = null,
 
     /// The environment variables to pass to the container.
-    environment: ?[]const KeyValuePair,
+    environment: ?[]const KeyValuePair = null,
 
     /// The image used to start a container. This string is passed directly to the
     /// Docker
@@ -44,10 +44,10 @@ pub const ExpressGatewayContainer = struct {
 
     /// The configuration for repository credentials for private registry
     /// authentication.
-    repository_credentials: ?ExpressGatewayRepositoryCredentials,
+    repository_credentials: ?ExpressGatewayRepositoryCredentials = null,
 
     /// The secrets to pass to the container.
-    secrets: ?[]const Secret,
+    secrets: ?[]const Secret = null,
 
     pub const json_field_names = .{
         .aws_logs_configuration = "awsLogsConfiguration",

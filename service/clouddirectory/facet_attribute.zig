@@ -8,17 +8,17 @@ pub const FacetAttribute = struct {
     /// structure
     /// contains the attribute definition. See [Attribute
     /// References](https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html) for more information.
-    attribute_definition: ?FacetAttributeDefinition,
+    attribute_definition: ?FacetAttributeDefinition = null,
 
     /// An attribute reference that is associated with the attribute. See [Attribute
     /// References](https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html) for more information.
-    attribute_reference: ?FacetAttributeReference,
+    attribute_reference: ?FacetAttributeReference = null,
 
     /// The name of the facet attribute.
     name: []const u8,
 
     /// The required behavior of the `FacetAttribute`.
-    required_behavior: ?RequiredAttributeBehavior,
+    required_behavior: ?RequiredAttributeBehavior = null,
 
     pub const json_field_names = .{
         .attribute_definition = "AttributeDefinition",

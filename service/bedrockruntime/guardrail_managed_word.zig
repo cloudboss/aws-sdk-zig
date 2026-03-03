@@ -8,7 +8,7 @@ pub const GuardrailManagedWord = struct {
 
     /// Indicates whether managed word content that breaches the guardrail
     /// configuration is detected.
-    detected: ?bool,
+    detected: ?bool = null,
 
     /// The match for the managed word.
     match: []const u8,

@@ -3,11 +3,11 @@
 pub const ConfiguredTableAssociationAnalysisRuleCustom = struct {
     /// The list of resources or wildcards (ARNs) that are allowed to perform
     /// additional analysis on query output.
-    allowed_additional_analyses: ?[]const []const u8,
+    allowed_additional_analyses: ?[]const []const u8 = null,
 
     /// The list of collaboration members who are allowed to receive results of
     /// queries run with this configured table.
-    allowed_result_receivers: ?[]const []const u8,
+    allowed_result_receivers: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .allowed_additional_analyses = "allowedAdditionalAnalyses",

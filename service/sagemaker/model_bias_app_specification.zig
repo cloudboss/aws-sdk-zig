@@ -8,7 +8,7 @@ pub const ModelBiasAppSpecification = struct {
     config_uri: []const u8,
 
     /// Sets the environment variables in the Docker container.
-    environment: ?[]const aws.map.StringMapEntry,
+    environment: ?[]const aws.map.StringMapEntry = null,
 
     /// The container image to be run by the model bias job.
     image_uri: []const u8,

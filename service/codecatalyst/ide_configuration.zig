@@ -3,12 +3,12 @@
 pub const IdeConfiguration = struct {
     /// The name of the IDE. Valid values include `Cloud9`, `IntelliJ`, `PyCharm`,
     /// `GoLand`, and `VSCode`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// A link to the IDE runtime image.
     ///
     /// This parameter is not required for `VSCode`.
-    runtime: ?[]const u8,
+    runtime: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

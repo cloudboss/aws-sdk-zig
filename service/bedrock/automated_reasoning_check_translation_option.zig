@@ -4,7 +4,7 @@ const AutomatedReasoningCheckTranslation = @import("automated_reasoning_check_tr
 pub const AutomatedReasoningCheckTranslationOption = struct {
     /// Different logical interpretations that were detected during translation of
     /// the input.
-    translations: ?[]const AutomatedReasoningCheckTranslation,
+    translations: ?[]const AutomatedReasoningCheckTranslation = null,
 
     pub const json_field_names = .{
         .translations = "translations",

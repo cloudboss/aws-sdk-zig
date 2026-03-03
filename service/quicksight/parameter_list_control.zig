@@ -8,16 +8,16 @@ const SheetControlListType = @import("sheet_control_list_type.zig").SheetControl
 pub const ParameterListControl = struct {
     /// The values that are displayed in a control can be configured to only show
     /// values that are valid based on what's selected in other controls.
-    cascading_control_configuration: ?CascadingControlConfiguration,
+    cascading_control_configuration: ?CascadingControlConfiguration = null,
 
     /// The display options of a control.
-    display_options: ?ListControlDisplayOptions,
+    display_options: ?ListControlDisplayOptions = null,
 
     /// The ID of the `ParameterListControl`.
     parameter_control_id: []const u8,
 
     /// A list of selectable values that are used in a control.
-    selectable_values: ?ParameterSelectableValues,
+    selectable_values: ?ParameterSelectableValues = null,
 
     /// The source parameter name of the `ParameterListControl`.
     source_parameter_name: []const u8,
@@ -26,7 +26,7 @@ pub const ParameterListControl = struct {
     title: []const u8,
 
     /// The type of `ParameterListControl`.
-    @"type": ?SheetControlListType,
+    @"type": ?SheetControlListType = null,
 
     pub const json_field_names = .{
         .cascading_control_configuration = "CascadingControlConfiguration",

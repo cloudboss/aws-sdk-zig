@@ -8,7 +8,7 @@ pub const UpdateDetectorRequest = struct {
     /// The value of the input key attribute (identifying the device or system) that
     /// caused the
     /// creation of this detector (instance).
-    key_value: ?[]const u8,
+    key_value: ?[]const u8 = null,
 
     /// The ID to assign to the detector update `"message"`. Each
     /// `"messageId"` must be unique within each batch sent.

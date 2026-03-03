@@ -33,7 +33,7 @@ pub const TerminologyData = struct {
     /// directionality, it
     /// behaves as uni-directional terminology, although this parameter will have a
     /// null value.
-    directionality: ?Directionality,
+    directionality: ?Directionality = null,
 
     /// The file containing the custom terminology data. Your version of the AWS SDK
     /// performs a

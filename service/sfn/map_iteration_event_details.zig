@@ -4,7 +4,7 @@ pub const MapIterationEventDetails = struct {
     index: i32 = 0,
 
     /// The name of the iteration’s parent Map state.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .index = "index",

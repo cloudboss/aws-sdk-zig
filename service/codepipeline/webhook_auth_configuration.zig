@@ -5,7 +5,7 @@ pub const WebhookAuthConfiguration = struct {
     /// IP, only the `AllowedIPRange` property must be set. This property must be
     /// set
     /// to a valid CIDR range.
-    allowed_ip_range: ?[]const u8,
+    allowed_ip_range: ?[]const u8 = null,
 
     /// The property used to configure GitHub authentication. For GITHUB_HMAC, only
     /// the
@@ -24,7 +24,7 @@ pub const WebhookAuthConfiguration = struct {
     /// multiple webhooks can lead to security vulnerabilities.
     ///
     /// If a secret token was provided, it will be redacted in the response.
-    secret_token: ?[]const u8,
+    secret_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .allowed_ip_range = "AllowedIPRange",

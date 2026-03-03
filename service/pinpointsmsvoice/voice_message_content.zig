@@ -5,11 +5,11 @@ const SSMLMessageType = @import("ssml_message_type.zig").SSMLMessageType;
 /// An object that contains a voice message and information about the recipient
 /// that you want to send it to.
 pub const VoiceMessageContent = struct {
-    call_instructions_message: ?CallInstructionsMessageType,
+    call_instructions_message: ?CallInstructionsMessageType = null,
 
-    plain_text_message: ?PlainTextMessageType,
+    plain_text_message: ?PlainTextMessageType = null,
 
-    ssml_message: ?SSMLMessageType,
+    ssml_message: ?SSMLMessageType = null,
 
     pub const json_field_names = .{
         .call_instructions_message = "CallInstructionsMessage",

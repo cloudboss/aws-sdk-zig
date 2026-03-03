@@ -7,7 +7,7 @@ pub const NotificationConfiguration = struct {
     /// List of up to two channels to be used for sending notifications for events
     /// detected from
     /// the application profile.
-    channels: ?[]const Channel,
+    channels: ?[]const Channel = null,
 
     pub const json_field_names = .{
         .channels = "channels",

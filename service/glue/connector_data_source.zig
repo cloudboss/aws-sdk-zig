@@ -35,7 +35,7 @@ pub const ConnectorDataSource = struct {
     name: []const u8,
 
     /// Specifies the data schema for this source.
-    output_schemas: ?[]const GlueSchema,
+    output_schemas: ?[]const GlueSchema = null,
 
     pub const json_field_names = .{
         .connection_type = "ConnectionType",

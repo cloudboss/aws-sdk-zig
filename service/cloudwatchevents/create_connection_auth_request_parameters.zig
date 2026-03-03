@@ -7,12 +7,12 @@ const CreateConnectionOAuthRequestParameters = @import("create_connection_o_auth
 pub const CreateConnectionAuthRequestParameters = struct {
     /// A `CreateConnectionApiKeyAuthRequestParameters` object that contains the API
     /// key authorization parameters to use for the connection.
-    api_key_auth_parameters: ?CreateConnectionApiKeyAuthRequestParameters,
+    api_key_auth_parameters: ?CreateConnectionApiKeyAuthRequestParameters = null,
 
     /// A `CreateConnectionBasicAuthRequestParameters` object that contains the
     /// Basic
     /// authorization parameters to use for the connection.
-    basic_auth_parameters: ?CreateConnectionBasicAuthRequestParameters,
+    basic_auth_parameters: ?CreateConnectionBasicAuthRequestParameters = null,
 
     /// A `ConnectionHttpParameters` object that contains the API key authorization
     /// parameters to use for the connection. Note that if you include additional
@@ -20,11 +20,11 @@ pub const CreateConnectionAuthRequestParameters = struct {
     /// target of a rule via `HttpParameters`, including query strings, the
     /// parameters
     /// added for the connection take precedence.
-    invocation_http_parameters: ?ConnectionHttpParameters,
+    invocation_http_parameters: ?ConnectionHttpParameters = null,
 
     /// A `CreateConnectionOAuthRequestParameters` object that contains the OAuth
     /// authorization parameters to use for the connection.
-    o_auth_parameters: ?CreateConnectionOAuthRequestParameters,
+    o_auth_parameters: ?CreateConnectionOAuthRequestParameters = null,
 
     pub const json_field_names = .{
         .api_key_auth_parameters = "ApiKeyAuthParameters",

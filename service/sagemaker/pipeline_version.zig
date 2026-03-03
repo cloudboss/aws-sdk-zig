@@ -3,39 +3,39 @@ const PipelineExecutionStatus = @import("pipeline_execution_status.zig").Pipelin
 
 /// The version of the pipeline.
 pub const PipelineVersion = struct {
-    created_by: ?UserContext,
+    created_by: ?UserContext = null,
 
     /// The creation time of the pipeline version.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the most recent pipeline execution created
     /// from this pipeline version.
-    last_executed_pipeline_execution_arn: ?[]const u8,
+    last_executed_pipeline_execution_arn: ?[]const u8 = null,
 
     /// The display name of the most recent pipeline execution created from this
     /// pipeline version.
-    last_executed_pipeline_execution_display_name: ?[]const u8,
+    last_executed_pipeline_execution_display_name: ?[]const u8 = null,
 
     /// The status of the most recent pipeline execution created from this pipeline
     /// version.
-    last_executed_pipeline_execution_status: ?PipelineExecutionStatus,
+    last_executed_pipeline_execution_status: ?PipelineExecutionStatus = null,
 
-    last_modified_by: ?UserContext,
+    last_modified_by: ?UserContext = null,
 
     /// The time when the pipeline version was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the pipeline.
-    pipeline_arn: ?[]const u8,
+    pipeline_arn: ?[]const u8 = null,
 
     /// The description of the pipeline version.
-    pipeline_version_description: ?[]const u8,
+    pipeline_version_description: ?[]const u8 = null,
 
     /// The display name of the pipeline version.
-    pipeline_version_display_name: ?[]const u8,
+    pipeline_version_display_name: ?[]const u8 = null,
 
     /// The ID of the pipeline version.
-    pipeline_version_id: ?i64,
+    pipeline_version_id: ?i64 = null,
 
     pub const json_field_names = .{
         .created_by = "CreatedBy",

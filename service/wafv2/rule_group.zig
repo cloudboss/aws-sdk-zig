@@ -16,7 +16,7 @@ pub const RuleGroup = struct {
 
     /// The labels that one or more rules in this rule group add to matching web
     /// requests. These labels are defined in the `RuleLabels` for a Rule.
-    available_labels: ?[]const LabelSummary,
+    available_labels: ?[]const LabelSummary = null,
 
     /// The web ACL capacity units (WCUs) required for this rule group.
     ///
@@ -42,7 +42,7 @@ pub const RuleGroup = struct {
     /// The labels that one or more rules in this rule group match against in label
     /// match statements. These labels are defined in a `LabelMatchStatement`
     /// specification, in the Statement definition of a rule.
-    consumed_labels: ?[]const LabelSummary,
+    consumed_labels: ?[]const LabelSummary = null,
 
     /// A map of custom response keys and content bodies. When you create a rule
     /// with a block action, you can send a custom response to the web request. You
@@ -58,10 +58,10 @@ pub const RuleGroup = struct {
     /// response settings, see [WAF
     /// quotas](https://docs.aws.amazon.com/waf/latest/developerguide/limits.html)
     /// in the *WAF Developer Guide*.
-    custom_response_bodies: ?[]const aws.map.MapEntry(CustomResponseBody),
+    custom_response_bodies: ?[]const aws.map.MapEntry(CustomResponseBody) = null,
 
     /// A description of the rule group that helps with identification.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A unique identifier for the rule group. This ID is returned in the responses
     /// to create and list commands. You provide it to operations like update and
@@ -82,7 +82,7 @@ pub const RuleGroup = struct {
     ///   and the label from the rule, separated by a colon:
     ///
     /// `:`
-    label_namespace: ?[]const u8,
+    label_namespace: ?[]const u8 = null,
 
     /// The name of the rule group. You cannot change the name of a rule group after
     /// you create it.
@@ -92,7 +92,7 @@ pub const RuleGroup = struct {
     /// want to manage. Each rule includes one top-level statement that WAF uses to
     /// identify matching
     /// web requests, and parameters that govern how WAF handles them.
-    rules: ?[]const Rule,
+    rules: ?[]const Rule = null,
 
     /// Defines and enables Amazon CloudWatch metrics and web request sample
     /// collection.

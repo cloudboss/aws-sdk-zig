@@ -7,12 +7,12 @@ pub const Event = struct {
     /// ID of the session within the destination stage. Applicable only if the event
     /// name is
     /// `REPLICATION_STARTED` or `REPLICATION_STOPPED`.
-    destination_session_id: ?[]const u8,
+    destination_session_id: ?[]const u8 = null,
 
     /// ARN of the stage where the participant is replicated. Applicable only if the
     /// event name is
     /// `REPLICATION_STARTED` or `REPLICATION_STOPPED`.
-    destination_stage_arn: ?[]const u8,
+    destination_stage_arn: ?[]const u8 = null,
 
     /// If the event is an error event, the error code is provided to give insight
     /// into the
@@ -75,30 +75,30 @@ pub const Event = struct {
     /// * `STREAM_DURATION_EXCEEDED` — The participant exceeded the maximum
     /// allowed stream duration. For details, see [ Service
     /// Quotas](https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html).
-    error_code: ?EventErrorCode,
+    error_code: ?EventErrorCode = null,
 
     /// ISO 8601 timestamp (returned as a string) for when the event occurred.
-    event_time: ?i64,
+    event_time: ?i64 = null,
 
     /// The name of the event.
-    name: ?EventName,
+    name: ?EventName = null,
 
     /// Participant token created during `TOKEN_EXCHANGED` event.
-    new_token: ?ExchangedParticipantToken,
+    new_token: ?ExchangedParticipantToken = null,
 
     /// Unique identifier for the participant who triggered the event. This is
     /// assigned by
     /// IVS.
-    participant_id: ?[]const u8,
+    participant_id: ?[]const u8 = null,
 
     /// Source participant token for `TOKEN_EXCHANGED` event.
-    previous_token: ?ExchangedParticipantToken,
+    previous_token: ?ExchangedParticipantToken = null,
 
     /// Unique identifier for the remote participant. For a subscribe event, this is
     /// the
     /// publisher. For a publish or join event, this is null. This is assigned by
     /// IVS.
-    remote_participant_id: ?[]const u8,
+    remote_participant_id: ?[]const u8 = null,
 
     /// If true, this indicates the `participantId` is a replicated participant.
     /// If this is a subscribe event, then this flag refers to

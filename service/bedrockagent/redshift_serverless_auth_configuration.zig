@@ -9,7 +9,7 @@ pub const RedshiftServerlessAuthConfiguration = struct {
     @"type": RedshiftServerlessAuthType,
 
     /// The ARN of an Secrets Manager secret for authentication.
-    username_password_secret_arn: ?[]const u8,
+    username_password_secret_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .@"type" = "type",

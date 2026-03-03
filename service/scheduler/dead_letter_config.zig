@@ -5,7 +5,7 @@
 pub const DeadLetterConfig = struct {
     /// The Amazon Resource Name (ARN) of the SQS queue specified as the destination
     /// for the dead-letter queue.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

@@ -3,7 +3,7 @@ const AwsS3BucketNotificationConfigurationS3KeyFilterRule = @import("aws_s3_buck
 /// Details for an Amazon S3 filter.
 pub const AwsS3BucketNotificationConfigurationS3KeyFilter = struct {
     /// The filter rules for the filter.
-    filter_rules: ?[]const AwsS3BucketNotificationConfigurationS3KeyFilterRule,
+    filter_rules: ?[]const AwsS3BucketNotificationConfigurationS3KeyFilterRule = null,
 
     pub const json_field_names = .{
         .filter_rules = "FilterRules",

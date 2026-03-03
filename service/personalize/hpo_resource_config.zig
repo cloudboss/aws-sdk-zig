@@ -6,7 +6,7 @@ pub const HPOResourceConfig = struct {
     /// version.
     /// The maximum value for `maxNumberOfTrainingJobs` is
     /// `40`.
-    max_number_of_training_jobs: ?[]const u8,
+    max_number_of_training_jobs: ?[]const u8 = null,
 
     /// The maximum number of parallel training
     /// jobs when you create a
@@ -14,7 +14,7 @@ pub const HPOResourceConfig = struct {
     /// version.
     /// The maximum value for `maxParallelTrainingJobs` is
     /// `10`.
-    max_parallel_training_jobs: ?[]const u8,
+    max_parallel_training_jobs: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_number_of_training_jobs = "maxNumberOfTrainingJobs",

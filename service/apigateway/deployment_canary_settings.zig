@@ -9,7 +9,7 @@ pub const DeploymentCanarySettings = struct {
     /// override existing stage variables or add new stage variables for the canary
     /// release deployment. These stage variables are represented as a
     /// string-to-string map between stage variable names and their values.
-    stage_variable_overrides: ?[]const aws.map.StringMapEntry,
+    stage_variable_overrides: ?[]const aws.map.StringMapEntry = null,
 
     /// A Boolean flag to indicate whether the canary release deployment uses the
     /// stage cache or not.

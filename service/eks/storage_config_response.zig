@@ -7,7 +7,7 @@ pub const StorageConfigResponse = struct {
     /// Indicates the current configuration of the block storage capability on your
     /// EKS Auto
     /// Mode cluster. For example, if the capability is enabled or disabled.
-    block_storage: ?BlockStorage,
+    block_storage: ?BlockStorage = null,
 
     pub const json_field_names = .{
         .block_storage = "blockStorage",

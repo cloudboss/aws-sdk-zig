@@ -7,10 +7,10 @@ pub const CoverageSortCriteria = struct {
     ///
     /// Replace the enum value `CLUSTER_NAME` with `EKS_CLUSTER_NAME`.
     /// `CLUSTER_NAME` has been deprecated.
-    attribute_name: ?CoverageSortKey,
+    attribute_name: ?CoverageSortKey = null,
 
     /// The order in which the sorted findings are to be displayed.
-    order_by: ?OrderBy,
+    order_by: ?OrderBy = null,
 
     pub const json_field_names = .{
         .attribute_name = "AttributeName",

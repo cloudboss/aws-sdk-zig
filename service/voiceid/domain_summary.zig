@@ -6,39 +6,39 @@ const WatchlistDetails = @import("watchlist_details.zig").WatchlistDetails;
 /// Contains a summary of information about a domain.
 pub const DomainSummary = struct {
     /// The Amazon Resource Name (ARN) for the domain.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The timestamp of when the domain was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The description of the domain.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The identifier of the domain.
-    domain_id: ?[]const u8,
+    domain_id: ?[]const u8 = null,
 
     /// The current status of the domain.
-    domain_status: ?DomainStatus,
+    domain_status: ?DomainStatus = null,
 
     /// The client-provided name for the domain.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The server-side encryption configuration containing the KMS key
     /// identifier you want Voice ID to use to encrypt your data.
-    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration,
+    server_side_encryption_configuration: ?ServerSideEncryptionConfiguration = null,
 
     /// Details about the most recent server-side encryption configuration update.
     /// When the
     /// server-side encryption configuration is changed, dependency on the old KMS
     /// key is removed through an asynchronous process. When this update is
     /// complete, the domain's data can only be accessed using the new KMS key.
-    server_side_encryption_update_details: ?ServerSideEncryptionUpdateDetails,
+    server_side_encryption_update_details: ?ServerSideEncryptionUpdateDetails = null,
 
     /// The timestamp of when the domain was last updated.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// Provides information about `watchlistDetails` and `DefaultWatchlistID`.
-    watchlist_details: ?WatchlistDetails,
+    watchlist_details: ?WatchlistDetails = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

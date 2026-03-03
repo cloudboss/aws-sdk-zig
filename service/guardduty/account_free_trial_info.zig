@@ -5,13 +5,13 @@ const FreeTrialFeatureConfigurationResult = @import("free_trial_feature_configur
 /// service.
 pub const AccountFreeTrialInfo = struct {
     /// The account identifier of the GuardDuty member account.
-    account_id: ?[]const u8,
+    account_id: ?[]const u8 = null,
 
     /// Describes the data source enabled for the GuardDuty member account.
-    data_sources: ?DataSourcesFreeTrial,
+    data_sources: ?DataSourcesFreeTrial = null,
 
     /// A list of features enabled for the GuardDuty account.
-    features: ?[]const FreeTrialFeatureConfigurationResult,
+    features: ?[]const FreeTrialFeatureConfigurationResult = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",

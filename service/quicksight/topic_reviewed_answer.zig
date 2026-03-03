@@ -8,22 +8,22 @@ pub const TopicReviewedAnswer = struct {
     answer_id: []const u8,
 
     /// The Amazon Resource Name (ARN) of the reviewed answer.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The Dataset ARN for the `TopicReviewedAnswer`.
     dataset_arn: []const u8,
 
     /// The mir for the `TopicReviewedAnswer`.
-    mir: ?TopicIR,
+    mir: ?TopicIR = null,
 
     /// The primary visual for the `TopicReviewedAnswer`.
-    primary_visual: ?TopicVisual,
+    primary_visual: ?TopicVisual = null,
 
     /// The question for the `TopicReviewedAnswer`.
     question: []const u8,
 
     /// The template for the `TopicReviewedAnswer`.
-    template: ?TopicTemplate,
+    template: ?TopicTemplate = null,
 
     pub const json_field_names = .{
         .answer_id = "AnswerId",

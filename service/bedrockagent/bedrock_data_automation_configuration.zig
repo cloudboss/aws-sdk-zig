@@ -5,7 +5,7 @@ const ParsingModality = @import("parsing_modality.zig").ParsingModality;
 pub const BedrockDataAutomationConfiguration = struct {
     /// Specifies whether to enable parsing of multimodal data, including both text
     /// and/or images.
-    parsing_modality: ?ParsingModality,
+    parsing_modality: ?ParsingModality = null,
 
     pub const json_field_names = .{
         .parsing_modality = "parsingModality",

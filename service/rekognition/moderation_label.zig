@@ -13,18 +13,18 @@ pub const ModerationLabel = struct {
     /// `DetectModerationLabels`, the operation returns labels with a confidence
     /// value
     /// greater than or equal to 50 percent.
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
     /// The label name for the type of unsafe content detected in the image.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The name for the parent label. Labels at the top level of the hierarchy have
     /// the parent
     /// label `""`.
-    parent_name: ?[]const u8,
+    parent_name: ?[]const u8 = null,
 
     /// The level of the moderation label with regard to its taxonomy, from 1 to 3.
-    taxonomy_level: ?i32,
+    taxonomy_level: ?i32 = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",

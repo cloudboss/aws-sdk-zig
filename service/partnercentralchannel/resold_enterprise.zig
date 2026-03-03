@@ -3,7 +3,7 @@ const Coverage = @import("coverage.zig").Coverage;
 /// Configuration for resold enterprise support plans.
 pub const ResoldEnterprise = struct {
     /// The AWS account ID to charge for the support plan.
-    charge_account_id: ?[]const u8,
+    charge_account_id: ?[]const u8 = null,
 
     /// The coverage level for resold enterprise support.
     coverage: Coverage,

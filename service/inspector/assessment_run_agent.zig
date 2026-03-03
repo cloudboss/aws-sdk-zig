@@ -13,7 +13,7 @@ pub const AssessmentRunAgent = struct {
     agent_health_code: AgentHealthCode,
 
     /// The description for the agent health code.
-    agent_health_details: ?[]const u8,
+    agent_health_details: ?[]const u8 = null,
 
     /// The AWS account of the EC2 instance where the agent is installed.
     agent_id: []const u8,
@@ -23,7 +23,7 @@ pub const AssessmentRunAgent = struct {
 
     /// The Auto Scaling group of the EC2 instance that is specified by the agent
     /// ID.
-    auto_scaling_group: ?[]const u8,
+    auto_scaling_group: ?[]const u8 = null,
 
     /// The Amazon Inspector application data metrics that are collected by the
     /// agent.

@@ -23,7 +23,7 @@ pub const VirtualGatewayListenerTls = struct {
     /// A reference to an object that represents a virtual gateway's listener's
     /// Transport Layer Security (TLS) validation
     /// context.
-    validation: ?VirtualGatewayListenerTlsValidationContext,
+    validation: ?VirtualGatewayListenerTlsValidationContext = null,
 
     pub const json_field_names = .{
         .certificate = "certificate",

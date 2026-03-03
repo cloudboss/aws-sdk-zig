@@ -5,7 +5,7 @@ pub const WhatsAppSignupCallback = struct {
     access_token: []const u8,
 
     /// The URL where WhatsApp will send callback notifications for this account.
-    callback_url: ?[]const u8,
+    callback_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_token = "accessToken",

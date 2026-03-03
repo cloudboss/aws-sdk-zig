@@ -5,10 +5,10 @@ pub const AssetBundleImportJobDataSetOverrideParameters = struct {
     /// The ID of the dataset to apply overrides to.
     data_set_id: []const u8,
 
-    data_set_refresh_properties: ?DataSetRefreshProperties,
+    data_set_refresh_properties: ?DataSetRefreshProperties = null,
 
     /// A new name for the dataset.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data_set_id = "DataSetId",

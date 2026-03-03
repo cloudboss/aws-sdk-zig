@@ -11,10 +11,10 @@ pub const PolicyStoreItem = struct {
 
     /// Descriptive text that you can provide to help with identification of the
     /// current policy store.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The date and time the policy store was most recently updated.
-    last_updated_date: ?i64,
+    last_updated_date: ?i64 = null,
 
     /// The unique identifier of the policy store.
     policy_store_id: []const u8,

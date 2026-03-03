@@ -5,7 +5,7 @@ pub const PipelineExecutionFilter = struct {
     /// Filter for pipeline executions where the stage was successful in the current
     /// pipeline
     /// version.
-    succeeded_in_stage: ?SucceededInStageFilter,
+    succeeded_in_stage: ?SucceededInStageFilter = null,
 
     pub const json_field_names = .{
         .succeeded_in_stage = "succeededInStage",

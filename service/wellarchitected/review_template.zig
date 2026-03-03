@@ -5,35 +5,35 @@ const ReviewTemplateUpdateStatus = @import("review_template_update_status.zig").
 /// A review template.
 pub const ReviewTemplate = struct {
     /// The review template description.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The lenses applied to the review template.
-    lenses: ?[]const []const u8,
+    lenses: ?[]const []const u8 = null,
 
-    notes: ?[]const u8,
+    notes: ?[]const u8 = null,
 
-    owner: ?[]const u8,
+    owner: ?[]const u8 = null,
 
     /// A count of how many total questions are answered and unanswered in the
     /// review template.
-    question_counts: ?[]const aws.map.MapEntry(i32),
+    question_counts: ?[]const aws.map.MapEntry(i32) = null,
 
     /// The ID assigned to the template share invitation.
-    share_invitation_id: ?[]const u8,
+    share_invitation_id: ?[]const u8 = null,
 
     /// The tags assigned to the review template.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The review template ARN.
-    template_arn: ?[]const u8,
+    template_arn: ?[]const u8 = null,
 
     /// The name of the review template.
-    template_name: ?[]const u8,
+    template_name: ?[]const u8 = null,
 
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     /// The latest status of a review template.
-    update_status: ?ReviewTemplateUpdateStatus,
+    update_status: ?ReviewTemplateUpdateStatus = null,
 
     pub const json_field_names = .{
         .description = "Description",

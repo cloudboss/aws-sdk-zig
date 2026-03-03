@@ -5,7 +5,7 @@ const ComplianceType = @import("compliance_type.zig").ComplianceType;
 pub const ExternalEvaluation = struct {
     /// Supplementary information about the reason of compliance. For example, this
     /// task was completed on a specific date.
-    annotation: ?[]const u8,
+    annotation: ?[]const u8 = null,
 
     /// The evaluated compliance resource ID. Config accepts only Amazon Web
     /// Services account ID.

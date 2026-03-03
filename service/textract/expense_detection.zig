@@ -4,12 +4,12 @@ const Geometry = @import("geometry.zig").Geometry;
 /// Amazon Textract.
 pub const ExpenseDetection = struct {
     /// The confidence in detection, as a percentage
-    confidence: ?f32,
+    confidence: ?f32 = null,
 
-    geometry: ?Geometry,
+    geometry: ?Geometry = null,
 
     /// The word or line of text recognized by Amazon Textract
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",

@@ -4,7 +4,7 @@ const ConcurrencyType = @import("concurrency_type.zig").ConcurrencyType;
 /// concurrently can improve your flow's performance.
 pub const FlowAliasConcurrencyConfiguration = struct {
     /// The maximum number of nodes that can be executed concurrently in the flow.
-    max_concurrency: ?i32,
+    max_concurrency: ?i32 = null,
 
     /// The type of concurrency to use for parallel node execution. Specify one of
     /// the following options:

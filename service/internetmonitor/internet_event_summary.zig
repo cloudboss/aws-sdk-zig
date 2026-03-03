@@ -18,7 +18,7 @@ pub const InternetEventSummary = struct {
     /// The time when an internet event ended. If the event hasn't ended yet, this
     /// value
     /// is empty.
-    ended_at: ?i64,
+    ended_at: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the internet event.
     event_arn: []const u8,

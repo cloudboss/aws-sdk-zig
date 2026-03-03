@@ -4,5 +4,5 @@ const DynamicRoutingValue = @import("dynamic_routing_value.zig").DynamicRoutingV
 /// gateway peering request.
 pub const CreateTransitGatewayPeeringAttachmentRequestOptions = struct {
     /// Indicates whether dynamic routing is enabled or disabled.
-    dynamic_routing: ?DynamicRoutingValue,
+    dynamic_routing: ?DynamicRoutingValue = null,
 };

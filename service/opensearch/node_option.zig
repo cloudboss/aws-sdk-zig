@@ -4,10 +4,10 @@ const NodeOptionsNodeType = @import("node_options_node_type.zig").NodeOptionsNod
 /// Configuration settings for defining the node type within a cluster.
 pub const NodeOption = struct {
     /// Configuration options for defining the setup of any node type.
-    node_config: ?NodeConfig,
+    node_config: ?NodeConfig = null,
 
     /// Defines the type of node, such as coordinating nodes.
-    node_type: ?NodeOptionsNodeType,
+    node_type: ?NodeOptionsNodeType = null,
 
     pub const json_field_names = .{
         .node_config = "NodeConfig",

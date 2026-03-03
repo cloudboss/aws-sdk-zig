@@ -12,7 +12,7 @@ pub const NotificationChannelConfig = struct {
     /// If you do not provide filter configurations, the default configurations are
     /// to receive notifications for all message types of `High` or `Medium`
     /// severity.
-    filters: ?NotificationFilterConfig,
+    filters: ?NotificationFilterConfig = null,
 
     /// Information about a notification channel configured in DevOps Guru to send
     /// notifications

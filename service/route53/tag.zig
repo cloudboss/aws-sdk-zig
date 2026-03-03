@@ -18,7 +18,7 @@ pub const Tag = struct {
     /// default `Name` tag. In the Amazon Route 53 console, the list of your
     /// health checks includes a **Name** column that lets
     /// you see the name that you've given to each health check.
-    key: ?[]const u8,
+    key: ?[]const u8 = null,
 
     /// The value of `Value` depends on the operation that you want to
     /// perform:
@@ -28,5 +28,5 @@ pub const Tag = struct {
     ///
     /// * **Edit a tag**: `Value` is the new
     /// value that you want to assign the tag.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 };

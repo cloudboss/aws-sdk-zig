@@ -9,32 +9,32 @@ pub const Event = struct {
     /// was made with temporary security credentials, this is the access key ID of
     /// the temporary
     /// credentials.
-    access_key_id: ?[]const u8,
+    access_key_id: ?[]const u8 = null,
 
     /// A JSON string that contains a representation of the event returned.
-    cloud_trail_event: ?[]const u8,
+    cloud_trail_event: ?[]const u8 = null,
 
     /// The CloudTrail ID of the event returned.
-    event_id: ?[]const u8,
+    event_id: ?[]const u8 = null,
 
     /// The name of the event returned.
-    event_name: ?[]const u8,
+    event_name: ?[]const u8 = null,
 
     /// The Amazon Web Services service to which the request was made.
-    event_source: ?[]const u8,
+    event_source: ?[]const u8 = null,
 
     /// The date and time of the event returned.
-    event_time: ?i64,
+    event_time: ?i64 = null,
 
     /// Information about whether the event is a write event or a read event.
-    read_only: ?[]const u8,
+    read_only: ?[]const u8 = null,
 
     /// A list of resources referenced by the event returned.
-    resources: ?[]const Resource,
+    resources: ?[]const Resource = null,
 
     /// A user name or role name of the requester that called the API in the event
     /// returned.
-    username: ?[]const u8,
+    username: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .access_key_id = "AccessKeyId",

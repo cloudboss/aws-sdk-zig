@@ -6,44 +6,44 @@ const ServiceUpdateType = @import("service_update_type.zig").ServiceUpdateType;
 pub const ServiceUpdate = struct {
     /// Indicates whether the service update will be automatically applied once the
     /// recommended apply-by date has expired.
-    auto_update_after_recommended_apply_by_date: ?bool,
+    auto_update_after_recommended_apply_by_date: ?bool = null,
 
     /// The Elasticache engine to which the update applies. Either Valkey, Redis OSS
     /// or Memcached.
-    engine: ?[]const u8,
+    engine: ?[]const u8 = null,
 
     /// The Elasticache engine version to which the update applies. Either Valkey,
     /// Redis OSS or Memcached
     /// engine version.
-    engine_version: ?[]const u8,
+    engine_version: ?[]const u8 = null,
 
     /// The estimated length of time the service update will take
-    estimated_update_time: ?[]const u8,
+    estimated_update_time: ?[]const u8 = null,
 
     /// Provides details of the service update
-    service_update_description: ?[]const u8,
+    service_update_description: ?[]const u8 = null,
 
     /// The date after which the service update is no longer available
-    service_update_end_date: ?i64,
+    service_update_end_date: ?i64 = null,
 
     /// The unique ID of the service update
-    service_update_name: ?[]const u8,
+    service_update_name: ?[]const u8 = null,
 
     /// The recommendend date to apply the service update in order to ensure
     /// compliance. For
     /// information on compliance, see [Self-Service Security Updates for
     /// Compliance](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/elasticache-compliance.html#elasticache-compliance-self-service).
-    service_update_recommended_apply_by_date: ?i64,
+    service_update_recommended_apply_by_date: ?i64 = null,
 
     /// The date when the service update is initially available
-    service_update_release_date: ?i64,
+    service_update_release_date: ?i64 = null,
 
     /// The severity of the service update
-    service_update_severity: ?ServiceUpdateSeverity,
+    service_update_severity: ?ServiceUpdateSeverity = null,
 
     /// The status of the service update
-    service_update_status: ?ServiceUpdateStatus,
+    service_update_status: ?ServiceUpdateStatus = null,
 
     /// Reflects the nature of the service update
-    service_update_type: ?ServiceUpdateType,
+    service_update_type: ?ServiceUpdateType = null,
 };

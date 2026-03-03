@@ -6,13 +6,13 @@ const FoundationModelLifecycle = @import("foundation_model_lifecycle.zig").Found
 /// Information about a foundation model.
 pub const FoundationModelDetails = struct {
     /// The customization that the model supports.
-    customizations_supported: ?[]const ModelCustomization,
+    customizations_supported: ?[]const ModelCustomization = null,
 
     /// The inference types that the model supports.
-    inference_types_supported: ?[]const InferenceType,
+    inference_types_supported: ?[]const InferenceType = null,
 
     /// The input modalities that the model supports.
-    input_modalities: ?[]const ModelModality,
+    input_modalities: ?[]const ModelModality = null,
 
     /// The model Amazon Resource Name (ARN).
     model_arn: []const u8,
@@ -21,19 +21,19 @@ pub const FoundationModelDetails = struct {
     model_id: []const u8,
 
     /// Contains details about whether a model version is available or deprecated
-    model_lifecycle: ?FoundationModelLifecycle,
+    model_lifecycle: ?FoundationModelLifecycle = null,
 
     /// The model name.
-    model_name: ?[]const u8,
+    model_name: ?[]const u8 = null,
 
     /// The output modalities that the model supports.
-    output_modalities: ?[]const ModelModality,
+    output_modalities: ?[]const ModelModality = null,
 
     /// The model's provider name.
-    provider_name: ?[]const u8,
+    provider_name: ?[]const u8 = null,
 
     /// Indicates whether the model supports streaming.
-    response_streaming_supported: ?bool,
+    response_streaming_supported: ?bool = null,
 
     pub const json_field_names = .{
         .customizations_supported = "customizationsSupported",

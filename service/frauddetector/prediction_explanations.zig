@@ -13,10 +13,10 @@ pub const PredictionExplanations = struct {
     /// number of times an user has logged in using the same IP address.
     /// In this case, event variables used to derive the aggregated variables are
     /// `IP address` and `user`.
-    aggregated_variables_impact_explanations: ?[]const AggregatedVariablesImpactExplanation,
+    aggregated_variables_impact_explanations: ?[]const AggregatedVariablesImpactExplanation = null,
 
     /// The details of the event variable's impact on the prediction score.
-    variable_impact_explanations: ?[]const VariableImpactExplanation,
+    variable_impact_explanations: ?[]const VariableImpactExplanation = null,
 
     pub const json_field_names = .{
         .aggregated_variables_impact_explanations = "aggregatedVariablesImpactExplanations",

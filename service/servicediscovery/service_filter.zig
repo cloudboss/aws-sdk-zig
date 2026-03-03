@@ -11,7 +11,7 @@ pub const ServiceFilter = struct {
     ///
     /// * `EQ`: When you specify `EQ`, specify one value. `EQ` is
     /// the default condition and can be omitted.
-    condition: ?FilterCondition,
+    condition: ?FilterCondition = null,
 
     /// Specify the services that you want to get using one of the following.
     ///

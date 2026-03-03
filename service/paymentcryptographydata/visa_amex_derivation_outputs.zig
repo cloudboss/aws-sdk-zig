@@ -9,10 +9,10 @@ pub const VisaAmexDerivationOutputs = struct {
     authorization_request_key_check_value: []const u8,
 
     /// The `keyArn` of the current PIN PEK.
-    current_pin_pek_arn: ?[]const u8,
+    current_pin_pek_arn: ?[]const u8 = null,
 
     /// The key check value (KCV) of the current PIN PEK.
-    current_pin_pek_key_check_value: ?[]const u8,
+    current_pin_pek_key_check_value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .authorization_request_key_arn = "AuthorizationRequestKeyArn",

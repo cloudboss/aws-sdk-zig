@@ -56,18 +56,18 @@ pub const VerificationInfo = struct {
     /// primary region specified. Ensure you provide a valid Amazon Web Services
     /// region where Amazon SES is available and different
     /// from the replica region.
-    error_type: ?VerificationError,
+    error_type: ?VerificationError = null,
 
     /// The last time a verification attempt was made for this identity.
-    last_checked_timestamp: ?i64,
+    last_checked_timestamp: ?i64 = null,
 
     /// The last time a successful verification was made for this identity.
-    last_success_timestamp: ?i64,
+    last_success_timestamp: ?i64 = null,
 
     /// An object that contains information about the start of authority (SOA)
     /// record
     /// associated with the identity.
-    soa_record: ?SOARecord,
+    soa_record: ?SOARecord = null,
 
     pub const json_field_names = .{
         .error_type = "ErrorType",

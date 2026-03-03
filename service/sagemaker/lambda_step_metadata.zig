@@ -4,10 +4,10 @@ const OutputParameter = @import("output_parameter.zig").OutputParameter;
 pub const LambdaStepMetadata = struct {
     /// The Amazon Resource Name (ARN) of the Lambda function that was run by this
     /// step execution.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A list of the output parameters of the Lambda step.
-    output_parameters: ?[]const OutputParameter,
+    output_parameters: ?[]const OutputParameter = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

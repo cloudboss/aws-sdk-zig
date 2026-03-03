@@ -7,17 +7,17 @@ const GenerativeAuthoringConfigurations = @import("generative_authoring_configur
 /// console.
 pub const AmazonQInQuickSightConsoleConfigurations = struct {
     /// Adds generative Q&A capabilitiees to an embedded Quick Sight console.
-    data_qn_a: ?DataQnAConfigurations,
+    data_qn_a: ?DataQnAConfigurations = null,
 
     /// Adds the data stories feature to an embedded Quick Sight console.
-    data_stories: ?DataStoriesConfigurations,
+    data_stories: ?DataStoriesConfigurations = null,
 
     /// Adds the executive summaries feature to an embedded Quick Sight console.
-    executive_summary: ?ExecutiveSummaryConfigurations,
+    executive_summary: ?ExecutiveSummaryConfigurations = null,
 
     /// Adds the generative BI authoring experience to an embedded Quick Sight
     /// console.
-    generative_authoring: ?GenerativeAuthoringConfigurations,
+    generative_authoring: ?GenerativeAuthoringConfigurations = null,
 
     pub const json_field_names = .{
         .data_qn_a = "DataQnA",

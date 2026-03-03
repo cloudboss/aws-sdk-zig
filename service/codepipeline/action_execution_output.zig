@@ -8,16 +8,16 @@ const ArtifactDetail = @import("artifact_detail.zig").ArtifactDetail;
 pub const ActionExecutionOutput = struct {
     /// Execution result information listed in the output details for an action
     /// execution.
-    execution_result: ?ActionExecutionResult,
+    execution_result: ?ActionExecutionResult = null,
 
     /// Details of output artifacts of the action that correspond to the action
     /// execution.
-    output_artifacts: ?[]const ArtifactDetail,
+    output_artifacts: ?[]const ArtifactDetail = null,
 
     /// The outputVariables field shows the key-value pairs that were output as part
     /// of that
     /// execution.
-    output_variables: ?[]const aws.map.StringMapEntry,
+    output_variables: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .execution_result = "executionResult",

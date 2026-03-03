@@ -6,7 +6,7 @@ pub const ROS2PrimitiveMessageDefinition = struct {
     /// The offset used to calculate the signal value. Combined with scaling, the
     /// calculation
     /// is `value = raw_value * scaling + offset`.
-    offset: ?f64,
+    offset: ?f64 = null,
 
     /// The primitive type (integer, floating point, boolean, etc.) for the ROS 2
     /// primitive
@@ -14,11 +14,11 @@ pub const ROS2PrimitiveMessageDefinition = struct {
     primitive_type: ROS2PrimitiveType,
 
     /// A multiplier used to decode the message.
-    scaling: ?f64,
+    scaling: ?f64 = null,
 
     /// An optional attribute specifying the upper bound for `STRING` and
     /// `WSTRING`.
-    upper_bound: ?i64,
+    upper_bound: ?i64 = null,
 
     pub const json_field_names = .{
         .offset = "offset",

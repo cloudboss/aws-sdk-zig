@@ -9,17 +9,17 @@ pub const ExternalSourcesGenerationConfiguration = struct {
     /// Additional model parameters and their corresponding values not included in
     /// the text inference configuration for an external source. Takes in custom
     /// model parameters specific to the language model being used.
-    additional_model_request_fields: ?[]const aws.map.StringMapEntry,
+    additional_model_request_fields: ?[]const aws.map.StringMapEntry = null,
 
     /// Configuration details for the guardrail.
-    guardrail_configuration: ?GuardrailConfiguration,
+    guardrail_configuration: ?GuardrailConfiguration = null,
 
     /// Configuration details for inference when using `RetrieveAndGenerate` to
     /// generate responses while using an external source.
-    kb_inference_config: ?KbInferenceConfig,
+    kb_inference_config: ?KbInferenceConfig = null,
 
     /// Contains the template for the prompt for the external source wrapper object.
-    prompt_template: ?PromptTemplate,
+    prompt_template: ?PromptTemplate = null,
 
     pub const json_field_names = .{
         .additional_model_request_fields = "additionalModelRequestFields",

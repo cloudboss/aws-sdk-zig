@@ -13,20 +13,20 @@ pub const Collaboration = struct {
     /// stored. Returns the list of Region identifiers that were specified when the
     /// collaboration was created. This list is used to enforce regional storage
     /// policies and compliance requirements.
-    allowed_result_regions: ?[]const SupportedS3Region,
+    allowed_result_regions: ?[]const SupportedS3Region = null,
 
     /// The analytics engine for the collaboration.
     ///
     /// After July 16, 2025, the `CLEAN_ROOMS_SQL` parameter will no longer be
     /// available.
-    analytics_engine: ?AnalyticsEngine,
+    analytics_engine: ?AnalyticsEngine = null,
 
     /// The unique ARN for the collaboration.
     arn: []const u8,
 
     /// The types of change requests that are automatically approved for this
     /// collaboration.
-    auto_approved_change_types: ?[]const AutoApprovedChangeType,
+    auto_approved_change_types: ?[]const AutoApprovedChangeType = null,
 
     /// The time when the collaboration was created.
     create_time: i64,
@@ -39,10 +39,10 @@ pub const Collaboration = struct {
     creator_display_name: []const u8,
 
     /// The settings for client-side encryption for cryptographic computing.
-    data_encryption_metadata: ?DataEncryptionMetadata,
+    data_encryption_metadata: ?DataEncryptionMetadata = null,
 
     /// A description of the collaboration provided by the collaboration owner.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique ID for the collaboration.
     id: []const u8,
@@ -51,7 +51,7 @@ pub const Collaboration = struct {
     ///
     /// When `true`, collaboration members can opt in to Amazon CloudWatch metrics
     /// for their membership queries.
-    is_metrics_enabled: ?bool,
+    is_metrics_enabled: ?bool = null,
 
     /// An indicator as to whether job logging has been enabled or disabled for the
     /// collaboration.
@@ -59,13 +59,13 @@ pub const Collaboration = struct {
     /// When `ENABLED`, Clean Rooms logs details about jobs run within this
     /// collaboration and those logs can be viewed in Amazon CloudWatch Logs. The
     /// default value is `DISABLED`.
-    job_log_status: ?CollaborationJobLogStatus,
+    job_log_status: ?CollaborationJobLogStatus = null,
 
     /// The unique ARN for your membership within the collaboration.
-    membership_arn: ?[]const u8,
+    membership_arn: ?[]const u8 = null,
 
     /// The unique ID for your membership within the collaboration.
-    membership_id: ?[]const u8,
+    membership_id: ?[]const u8 = null,
 
     /// The status of a member in a collaboration.
     member_status: MemberStatus,

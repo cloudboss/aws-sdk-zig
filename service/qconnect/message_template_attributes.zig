@@ -7,16 +7,16 @@ const SystemAttributes = @import("system_attributes.zig").SystemAttributes;
 /// The attributes that are used with the message template.
 pub const MessageTemplateAttributes = struct {
     /// The agent attributes that are used with the message template.
-    agent_attributes: ?AgentAttributes,
+    agent_attributes: ?AgentAttributes = null,
 
     /// The custom attributes that are used with the message template.
-    custom_attributes: ?[]const aws.map.StringMapEntry,
+    custom_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The customer profile attributes that are used with the message template.
-    customer_profile_attributes: ?CustomerProfileAttributes,
+    customer_profile_attributes: ?CustomerProfileAttributes = null,
 
     /// The system attributes that are used with the message template.
-    system_attributes: ?SystemAttributes,
+    system_attributes: ?SystemAttributes = null,
 
     pub const json_field_names = .{
         .agent_attributes = "agentAttributes",

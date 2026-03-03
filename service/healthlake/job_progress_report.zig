@@ -1,30 +1,30 @@
 /// The progress report for the import job.
 pub const JobProgressReport = struct {
     /// The transaction rate the import job is processed at.
-    throughput: ?f64,
+    throughput: ?f64 = null,
 
     /// The number of files that failed to be read from the S3 input bucket due to
     /// customer
     /// error.
-    total_number_of_files_read_with_customer_error: ?i64,
+    total_number_of_files_read_with_customer_error: ?i64 = null,
 
     /// The number of files imported.
-    total_number_of_imported_files: ?i64,
+    total_number_of_imported_files: ?i64 = null,
 
     /// The number of resources imported.
-    total_number_of_resources_imported: ?i64,
+    total_number_of_resources_imported: ?i64 = null,
 
     /// The number of resources scanned from the S3 input bucket.
-    total_number_of_resources_scanned: ?i64,
+    total_number_of_resources_scanned: ?i64 = null,
 
     /// The number of resources that failed due to customer error.
-    total_number_of_resources_with_customer_error: ?i64,
+    total_number_of_resources_with_customer_error: ?i64 = null,
 
     /// The number of files scanned from the S3 input bucket.
-    total_number_of_scanned_files: ?i64,
+    total_number_of_scanned_files: ?i64 = null,
 
     /// The size (in MB) of files scanned from the S3 input bucket.
-    total_size_of_scanned_files_in_mb: ?f64,
+    total_size_of_scanned_files_in_mb: ?f64 = null,
 
     pub const json_field_names = .{
         .throughput = "Throughput",

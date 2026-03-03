@@ -4,10 +4,10 @@
 pub const AddonCompatibilityDetail = struct {
     /// The list of compatible Amazon EKS add-on versions for the next Kubernetes
     /// version.
-    compatible_versions: ?[]const []const u8,
+    compatible_versions: ?[]const []const u8 = null,
 
     /// The name of the Amazon EKS add-on.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .compatible_versions = "compatibleVersions",

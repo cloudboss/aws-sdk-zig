@@ -4,19 +4,19 @@
 pub const ReplicationDetails = struct {
     /// Specifies whether the bucket is configured to replicate one or more objects
     /// to any destination.
-    replicated: ?bool,
+    replicated: ?bool = null,
 
     /// Specifies whether the bucket is configured to replicate one or more objects
     /// to a bucket for an Amazon Web Services account that isn't part of your
     /// Amazon Macie organization. An *Amazon Macie organization* is a set of Macie
     /// accounts that are centrally managed as a group of related accounts through
     /// Organizations or by Macie invitation.
-    replicated_externally: ?bool,
+    replicated_externally: ?bool = null,
 
     /// An array of Amazon Web Services account IDs, one for each Amazon Web
     /// Services account that owns a bucket that the bucket is configured to
     /// replicate one or more objects to.
-    replication_accounts: ?[]const []const u8,
+    replication_accounts: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .replicated = "replicated",

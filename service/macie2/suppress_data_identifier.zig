@@ -6,12 +6,12 @@ pub const SuppressDataIdentifier = struct {
     /// The unique identifier for the custom data identifier or managed data
     /// identifier that detected the type of sensitive data to exclude from the
     /// score.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// The type of data identifier that detected the sensitive data. Possible
     /// values are: CUSTOM, for a custom data identifier; and, MANAGED, for a
     /// managed data identifier.
-    @"type": ?DataIdentifierType,
+    @"type": ?DataIdentifierType = null,
 
     pub const json_field_names = .{
         .id = "id",

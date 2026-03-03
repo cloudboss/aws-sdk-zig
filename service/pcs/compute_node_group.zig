@@ -12,7 +12,7 @@ pub const ComputeNodeGroup = struct {
     /// The ID of the Amazon Machine Image (AMI) that PCS uses to launch instances.
     /// If not provided, PCS uses the AMI ID specified in the custom launch
     /// template.
-    ami_id: ?[]const u8,
+    ami_id: ?[]const u8 = null,
 
     /// The unique Amazon Resource Name (ARN) of the compute node group.
     arn: []const u8,
@@ -26,7 +26,7 @@ pub const ComputeNodeGroup = struct {
     custom_launch_template: CustomLaunchTemplate,
 
     /// The list of errors that occurred during compute node group provisioning.
-    error_info: ?[]const ErrorInfo,
+    error_info: ?[]const ErrorInfo = null,
 
     /// The Amazon Resource Name (ARN) of the IAM instance profile used to pass an
     /// IAM role when launching EC2 instances. The role contained in your instance
@@ -53,13 +53,13 @@ pub const ComputeNodeGroup = struct {
     /// On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML.
     /// For more information, see [Amazon EC2 billing and purchasing
     /// options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html) in the *Amazon Elastic Compute Cloud User Guide*. For more information about PCS support for Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with PCS](https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html) in the *PCS User Guide*. If you don't provide this option, it defaults to On-Demand.
-    purchase_option: ?PurchaseOption,
+    purchase_option: ?PurchaseOption = null,
 
     scaling_configuration: ScalingConfiguration,
 
-    slurm_configuration: ?ComputeNodeGroupSlurmConfiguration,
+    slurm_configuration: ?ComputeNodeGroupSlurmConfiguration = null,
 
-    spot_options: ?SpotOptions,
+    spot_options: ?SpotOptions = null,
 
     /// The provisioning status of the compute node group.
     ///

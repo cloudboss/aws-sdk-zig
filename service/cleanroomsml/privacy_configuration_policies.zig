@@ -6,13 +6,13 @@ const TrainedModelsConfigurationPolicy = @import("trained_models_configuration_p
 /// algorithm association.
 pub const PrivacyConfigurationPolicies = struct {
     /// Specifies who will receive the trained model export.
-    trained_model_exports: ?TrainedModelExportsConfigurationPolicy,
+    trained_model_exports: ?TrainedModelExportsConfigurationPolicy = null,
 
     /// Specifies who will receive the trained model inference jobs.
-    trained_model_inference_jobs: ?TrainedModelInferenceJobsConfigurationPolicy,
+    trained_model_inference_jobs: ?TrainedModelInferenceJobsConfigurationPolicy = null,
 
     /// Specifies who will receive the trained models.
-    trained_models: ?TrainedModelsConfigurationPolicy,
+    trained_models: ?TrainedModelsConfigurationPolicy = null,
 
     pub const json_field_names = .{
         .trained_model_exports = "trainedModelExports",

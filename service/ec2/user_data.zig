@@ -4,5 +4,5 @@ pub const UserData = struct {
     /// tool, Base64-encoding is performed for you, and you
     /// can load the text from a file. Otherwise, you must provide Base64-encoded
     /// text.
-    data: ?[]const u8,
+    data: ?[]const u8 = null,
 };

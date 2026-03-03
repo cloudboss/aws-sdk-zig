@@ -12,7 +12,7 @@ pub const InferredWorkloadSaving = struct {
     /// An object that describes the estimated monthly savings amount possible by
     /// adopting Compute Optimizer recommendations for a given
     /// resource. This is based on the On-Demand instance pricing.
-    estimated_monthly_savings: ?EstimatedMonthlySavings,
+    estimated_monthly_savings: ?EstimatedMonthlySavings = null,
 
     /// The applications that might be running on the instance as inferred by
     /// Compute Optimizer.
@@ -47,7 +47,7 @@ pub const InferredWorkloadSaving = struct {
     ///
     /// * `SQLServer` - Infers that SQLServer might be running on the
     /// instance.
-    inferred_workload_types: ?[]const InferredWorkloadType,
+    inferred_workload_types: ?[]const InferredWorkloadType = null,
 
     pub const json_field_names = .{
         .estimated_monthly_savings = "estimatedMonthlySavings",

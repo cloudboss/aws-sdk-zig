@@ -3,18 +3,18 @@
 pub const ListSourceRepositoryBranchesItem = struct {
     /// The commit ID of the tip of the branch at the time of the request, also
     /// known as the head commit.
-    head_commit_id: ?[]const u8,
+    head_commit_id: ?[]const u8 = null,
 
     /// The time the branch was last updated, in coordinated universal time (UTC)
     /// timestamp format as specified in [RFC
     /// 3339](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The name of the branch.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Git reference name of the branch.
-    ref: ?[]const u8,
+    ref: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .head_commit_id = "headCommitId",

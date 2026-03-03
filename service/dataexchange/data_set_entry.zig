@@ -30,14 +30,14 @@ pub const DataSetEntry = struct {
     /// If the origin of this data set is ENTITLED, includes the details for the
     /// product on AWS
     /// Marketplace.
-    origin_details: ?OriginDetails,
+    origin_details: ?OriginDetails = null,
 
     /// The data set ID of the owned data set corresponding to the entitled data set
     /// being
     /// viewed. This parameter is returned when a data set owner is viewing the
     /// entitled copy of
     /// its owned data set.
-    source_id: ?[]const u8,
+    source_id: ?[]const u8 = null,
 
     /// The date and time that the data set was last updated, in ISO 8601 format.
     updated_at: i64,

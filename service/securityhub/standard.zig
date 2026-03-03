@@ -3,7 +3,7 @@ const StandardsManagedBy = @import("standards_managed_by.zig").StandardsManagedB
 /// Provides information about a specific security standard.
 pub const Standard = struct {
     /// A description of the standard.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// Whether the standard is enabled by default. When Security Hub is enabled
     /// from the console, if a
@@ -15,16 +15,16 @@ pub const Standard = struct {
     /// the
     /// standard is enabled by default unless `EnableDefaultStandards` is set to
     /// `false`.
-    enabled_by_default: ?bool,
+    enabled_by_default: ?bool = null,
 
     /// The name of the standard.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ARN of the standard.
-    standards_arn: ?[]const u8,
+    standards_arn: ?[]const u8 = null,
 
     /// Provides details about the management of a standard.
-    standards_managed_by: ?StandardsManagedBy,
+    standards_managed_by: ?StandardsManagedBy = null,
 
     pub const json_field_names = .{
         .description = "Description",

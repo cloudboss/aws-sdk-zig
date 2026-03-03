@@ -4,13 +4,13 @@ const LandingZoneOperationStatus = @import("landing_zone_operation_status.zig").
 /// Returns a summary of information about a landing zone operation.
 pub const LandingZoneOperationSummary = struct {
     /// The `operationIdentifier` of the landing zone operation.
-    operation_identifier: ?[]const u8,
+    operation_identifier: ?[]const u8 = null,
 
     /// The type of the landing zone operation.
-    operation_type: ?LandingZoneOperationType,
+    operation_type: ?LandingZoneOperationType = null,
 
     /// The status of the landing zone operation.
-    status: ?LandingZoneOperationStatus,
+    status: ?LandingZoneOperationStatus = null,
 
     pub const json_field_names = .{
         .operation_identifier = "operationIdentifier",

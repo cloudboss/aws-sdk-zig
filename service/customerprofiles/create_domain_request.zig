@@ -6,7 +6,7 @@ const RuleBasedMatchingRequest = @import("rule_based_matching_request.zig").Rule
 
 pub const CreateDomainRequest = struct {
     /// Set to true to enabled data store for this domain.
-    data_store: ?DataStoreRequest,
+    data_store: ?DataStoreRequest = null,
 
     /// The URL of the SQS dead letter queue, which is used for reporting errors
     /// associated with
@@ -15,14 +15,14 @@ pub const CreateDomainRequest = struct {
     /// DeadLetterQueue for the SendMessage operation to enable Amazon Connect
     /// Customer Profiles to send
     /// messages to the DeadLetterQueue.
-    dead_letter_queue_url: ?[]const u8,
+    dead_letter_queue_url: ?[]const u8 = null,
 
     /// The default encryption key, which is an AWS managed key, is used when no
     /// specific type
     /// of encryption key is specified. It is used to encrypt all data before it is
     /// placed in
     /// permanent or semi-permanent storage.
-    default_encryption_key: ?[]const u8,
+    default_encryption_key: ?[]const u8 = null,
 
     /// The default number of days until the data within the domain expires.
     default_expiration_days: i32,
@@ -42,7 +42,7 @@ pub const CreateDomainRequest = struct {
     /// `ExportingConfig` in the `MatchingRequest`, you can download the results
     /// from
     /// S3.
-    matching: ?MatchingRequest,
+    matching: ?MatchingRequest = null,
 
     /// The process of matching duplicate profiles using the Rule-Based matching. If
     /// `RuleBasedMatching` = true, Amazon Connect Customer Profiles will start
@@ -52,10 +52,10 @@ pub const CreateDomainRequest = struct {
     /// have
     /// configured `ExportingConfig` in the `RuleBasedMatchingRequest`, you
     /// can download the results from S3.
-    rule_based_matching: ?RuleBasedMatchingRequest,
+    rule_based_matching: ?RuleBasedMatchingRequest = null,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .data_store = "DataStore",

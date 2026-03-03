@@ -12,12 +12,12 @@ const OpenSearchResourceStatus = @import("open_search_resource_status.zig").Open
 /// Developer Guide.
 pub const OpenSearchLifecyclePolicy = struct {
     /// The name of the lifecycle policy.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// This structure contains information about the status of this OpenSearch
     /// Service
     /// resource.
-    status: ?OpenSearchResourceStatus,
+    status: ?OpenSearchResourceStatus = null,
 
     pub const json_field_names = .{
         .policy_name = "policyName",

@@ -4,7 +4,7 @@ const EmailRecipients = @import("email_recipients.zig").EmailRecipients;
 /// Contains the configuration information of email notifications.
 pub const EmailConfiguration = struct {
     /// Contains the subject and message of an email.
-    content: ?EmailContent,
+    content: ?EmailContent = null,
 
     /// The email address that sends emails.
     ///

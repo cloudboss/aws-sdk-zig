@@ -25,24 +25,24 @@ pub const TranscriptFilter = struct {
     /// during
     /// which you want to search for the specified key words or phrases. See for
     /// more detail.
-    absolute_time_range: ?AbsoluteTimeRange,
+    absolute_time_range: ?AbsoluteTimeRange = null,
 
     /// Set to `TRUE` to flag the absence of the phrase that you specified in your
     /// request. Set to `FALSE` to flag the presence of the phrase that you
     /// specified
     /// in your request.
-    negate: ?bool,
+    negate: ?bool = null,
 
     /// Specify the participant that you want to flag. Omitting this parameter is
     /// equivalent
     /// to specifying both participants.
-    participant_role: ?ParticipantRole,
+    participant_role: ?ParticipantRole = null,
 
     /// Makes it possible to specify a time range (in percentage) in your media
     /// file, during
     /// which you want to search for the specified key words or phrases. See for
     /// more detail.
-    relative_time_range: ?RelativeTimeRange,
+    relative_time_range: ?RelativeTimeRange = null,
 
     /// Specify the phrases that you want to flag.
     targets: []const []const u8,

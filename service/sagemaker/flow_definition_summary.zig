@@ -7,7 +7,7 @@ pub const FlowDefinitionSummary = struct {
 
     /// The reason why the flow definition creation failed. A failure reason is
     /// returned only when the flow definition status is `Failed`.
-    failure_reason: ?[]const u8,
+    failure_reason: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the flow definition.
     flow_definition_arn: []const u8,

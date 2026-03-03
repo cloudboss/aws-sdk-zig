@@ -15,5 +15,5 @@ pub const BlockPublicAccessStates = struct {
     ///   (except for VPCs or subnets which are excluded). Only traffic to and from
     ///   NAT gateways and egress-only internet gateways is allowed because these
     ///   gateways only allow outbound connections to be established.
-    internet_gateway_block_mode: ?BlockPublicAccessMode,
+    internet_gateway_block_mode: ?BlockPublicAccessMode = null,
 };

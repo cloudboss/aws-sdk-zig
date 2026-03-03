@@ -6,7 +6,7 @@
 /// attendees changes from the default of `250` to `25`.
 pub const AttendeeFeatures = struct {
     /// The maximum number of attendees allowed into the meeting.
-    max_count: ?i32,
+    max_count: ?i32 = null,
 
     pub const json_field_names = .{
         .max_count = "MaxCount",

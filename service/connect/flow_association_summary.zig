@@ -3,13 +3,13 @@ const ListFlowAssociationResourceType = @import("list_flow_association_resource_
 /// Information about flow associations.
 pub const FlowAssociationSummary = struct {
     /// The identifier of the flow.
-    flow_id: ?[]const u8,
+    flow_id: ?[]const u8 = null,
 
     /// The identifier of the resource.
-    resource_id: ?[]const u8,
+    resource_id: ?[]const u8 = null,
 
     /// The type of resource association.
-    resource_type: ?ListFlowAssociationResourceType,
+    resource_type: ?ListFlowAssociationResourceType = null,
 
     pub const json_field_names = .{
         .flow_id = "FlowId",

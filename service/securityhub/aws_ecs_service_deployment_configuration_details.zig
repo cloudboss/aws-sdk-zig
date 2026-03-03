@@ -4,7 +4,7 @@ const AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails = @imp
 pub const AwsEcsServiceDeploymentConfigurationDetails = struct {
     /// Determines whether a service deployment fails if a service cannot reach a
     /// steady state.
-    deployment_circuit_breaker: ?AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails,
+    deployment_circuit_breaker: ?AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails = null,
 
     /// For a service that uses the rolling update (`ECS`) deployment type, the
     /// maximum number of tasks in a service that are allowed in the `RUNNING` or
@@ -18,7 +18,7 @@ pub const AwsEcsServiceDeploymentConfigurationDetails = struct {
     /// container instances are in the `DRAINING` state.
     ///
     /// For the Fargate launch type, the maximum percent value is not used.
-    maximum_percent: ?i32,
+    maximum_percent: ?i32 = null,
 
     /// For a service that uses the rolling update (`ECS`) deployment type, the
     /// minimum number of tasks in a service that must remain in the `RUNNING` state
@@ -32,7 +32,7 @@ pub const AwsEcsServiceDeploymentConfigurationDetails = struct {
     /// container instances are in the `DRAINING` state.
     ///
     /// For the Fargate launch type, the minimum healthy percent value is not used.
-    minimum_healthy_percent: ?i32,
+    minimum_healthy_percent: ?i32 = null,
 
     pub const json_field_names = .{
         .deployment_circuit_breaker = "DeploymentCircuitBreaker",

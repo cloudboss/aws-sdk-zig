@@ -24,25 +24,25 @@ pub const Mpeg2Settings = struct {
     /// Specify the strength of any adaptive quantization filters that you enable.
     /// The value that you choose here applies to the following settings: Spatial
     /// adaptive quantization, and Temporal adaptive quantization.
-    adaptive_quantization: ?Mpeg2AdaptiveQuantization,
+    adaptive_quantization: ?Mpeg2AdaptiveQuantization = null,
 
     /// Specify the average bitrate in bits per second. Required for VBR and CBR.
     /// For MS Smooth outputs, bitrates must be unique when rounded down to the
     /// nearest multiple of 1000.
-    bitrate: ?i32,
+    bitrate: ?i32 = null,
 
     /// Use Level to set the MPEG-2 level for the video output.
-    codec_level: ?Mpeg2CodecLevel,
+    codec_level: ?Mpeg2CodecLevel = null,
 
     /// Use Profile to set the MPEG-2 profile for the video output.
-    codec_profile: ?Mpeg2CodecProfile,
+    codec_profile: ?Mpeg2CodecProfile = null,
 
     /// Choose Adaptive to improve subjective video quality for high-motion content.
     /// This will cause the service to use fewer B-frames (which infer information
     /// based on other frames) for high-motion portions of the video and more
     /// B-frames for low-motion portions. The maximum number of B-frames is limited
     /// by the value you provide for the setting B frames between reference frames.
-    dynamic_sub_gop: ?Mpeg2DynamicSubGop,
+    dynamic_sub_gop: ?Mpeg2DynamicSubGop = null,
 
     /// If you are using the console, use the Framerate setting to specify the frame
     /// rate for this output. If you want to keep the same frame rate as the input
@@ -50,7 +50,7 @@ pub const Mpeg2Settings = struct {
     /// a frame rate from the dropdown list or choose Custom. The framerates shown
     /// in the dropdown list are decimal approximations of fractions. If you choose
     /// Custom, specify your frame rate as a fraction.
-    framerate_control: ?Mpeg2FramerateControl,
+    framerate_control: ?Mpeg2FramerateControl = null,
 
     /// Choose the method that you want MediaConvert to use when increasing or
     /// decreasing your video's frame rate. For numerically simple conversions, such
@@ -68,7 +68,7 @@ pub const Mpeg2Settings = struct {
     /// add, or otherwise change the frame count from your input to your output.
     /// Note that since the frame count is maintained, the duration of your output
     /// will become shorter at higher frame rates and longer at lower frame rates.
-    framerate_conversion_algorithm: ?Mpeg2FramerateConversionAlgorithm,
+    framerate_conversion_algorithm: ?Mpeg2FramerateConversionAlgorithm = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -77,7 +77,7 @@ pub const Mpeg2Settings = struct {
     /// use the console for transcode jobs that use frame rate conversion, provide
     /// the value as a decimal number for Framerate. In this example, specify
     /// 23.976.
-    framerate_denominator: ?i32,
+    framerate_denominator: ?i32 = null,
 
     /// When you use the API for transcode jobs that use frame rate conversion,
     /// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976
@@ -85,7 +85,7 @@ pub const Mpeg2Settings = struct {
     /// this example, use 24000 for the value of FramerateNumerator. When you use
     /// the console for transcode jobs that use frame rate conversion, provide the
     /// value as a decimal number for Framerate. In this example, specify 23.976.
-    framerate_numerator: ?i32,
+    framerate_numerator: ?i32 = null,
 
     /// Specify the relative frequency of open to closed GOPs in this output. For
     /// example, if you want to allow four open GOPs and then require a closed GOP,
@@ -93,30 +93,30 @@ pub const Mpeg2Settings = struct {
     /// you keep the default value, 1, so that players starting mid-stream receive
     /// an IDR frame as quickly as possible. Don't set this value to 0; that would
     /// break output segmenting.
-    gop_closed_cadence: ?i32,
+    gop_closed_cadence: ?i32 = null,
 
     /// Specify the interval between keyframes, in seconds or frames, for this
     /// output. Default: 12 Related settings: When you specify the GOP size in
     /// seconds, set GOP mode control to Specified, seconds. The default value for
     /// GOP mode control is Frames.
-    gop_size: ?f64,
+    gop_size: ?f64 = null,
 
     /// Specify the units for GOP size. If you don't specify a value here, by
     /// default the encoder measures GOP size in frames.
-    gop_size_units: ?Mpeg2GopSizeUnits,
+    gop_size_units: ?Mpeg2GopSizeUnits = null,
 
     /// If your downstream systems have strict buffer requirements: Specify the
     /// minimum percentage of the HRD buffer that's available at the end of each
     /// encoded video segment. For the best video quality: Set to 0 or leave blank
     /// to automatically determine the final buffer fill percentage.
-    hrd_buffer_final_fill_percentage: ?i32,
+    hrd_buffer_final_fill_percentage: ?i32 = null,
 
     /// Percentage of the buffer that should initially be filled (HRD buffer model).
-    hrd_buffer_initial_fill_percentage: ?i32,
+    hrd_buffer_initial_fill_percentage: ?i32 = null,
 
     /// Size of buffer (HRD buffer model) in bits. For example, enter five megabits
     /// as 5000000.
-    hrd_buffer_size: ?i32,
+    hrd_buffer_size: ?i32 = null,
 
     /// Choose the scan line type for the output. Keep the default value,
     /// Progressive to create a progressive output, regardless of the scan type of
@@ -129,16 +129,16 @@ pub const Mpeg2Settings = struct {
     /// interlaced with the same polarity as the source. If the source is
     /// progressive, the output will be interlaced with top field bottom field
     /// first, depending on which of the Follow options you choose.
-    interlace_mode: ?Mpeg2InterlaceMode,
+    interlace_mode: ?Mpeg2InterlaceMode = null,
 
     /// Use Intra DC precision to set quantization precision for intra-block DC
     /// coefficients. If you choose the value auto, the service will automatically
     /// select the precision based on the per-frame compression ratio.
-    intra_dc_precision: ?Mpeg2IntraDcPrecision,
+    intra_dc_precision: ?Mpeg2IntraDcPrecision = null,
 
     /// Maximum bitrate in bits/second. For example, enter five megabits per second
     /// as 5000000.
-    max_bitrate: ?i32,
+    max_bitrate: ?i32 = null,
 
     /// Specify the minimum number of frames allowed between two IDR-frames in your
     /// output. This includes frames created at the start of a GOP or a scene
@@ -154,12 +154,12 @@ pub const Mpeg2Settings = struct {
     /// GOP size variance: Enter 0. MediaConvert will only create IDR-frames at the
     /// start of your output's cadence-driven GOP. Use when your downstream systems
     /// require a regular GOP size.
-    min_i_interval: ?i32,
+    min_i_interval: ?i32 = null,
 
     /// Specify the number of B-frames that MediaConvert puts between reference
     /// frames in this output. Valid values are whole numbers from 0 through 7. When
     /// you don't specify a value, MediaConvert defaults to 2.
-    number_b_frames_between_reference_frames: ?i32,
+    number_b_frames_between_reference_frames: ?i32 = null,
 
     /// Optional. Specify how the service determines the pixel aspect ratio (PAR)
     /// for this output. The default behavior, Follow source, uses the PAR from your
@@ -167,7 +167,7 @@ pub const Mpeg2Settings = struct {
     /// choose any value other than Follow source. When you choose SPECIFIED for
     /// this setting, you must also specify values for the parNumerator and
     /// parDenominator settings.
-    par_control: ?Mpeg2ParControl,
+    par_control: ?Mpeg2ParControl = null,
 
     /// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
     /// corresponds to any value other than Follow source. When you specify an
@@ -175,7 +175,7 @@ pub const Mpeg2Settings = struct {
     /// provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen,
     /// you would specify the ratio 40:33. In this example, the value for
     /// parDenominator is 33.
-    par_denominator: ?i32,
+    par_denominator: ?i32 = null,
 
     /// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
     /// corresponds to any value other than Follow source. When you specify an
@@ -183,7 +183,7 @@ pub const Mpeg2Settings = struct {
     /// provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen,
     /// you would specify the ratio 40:33. In this example, the value for
     /// parNumerator is 40.
-    par_numerator: ?i32,
+    par_numerator: ?i32 = null,
 
     /// Optionally choose one or more per frame metric reports to generate along
     /// with your output. You can use these metrics to analyze your video output
@@ -203,16 +203,16 @@ pub const Mpeg2Settings = struct {
     /// Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     /// Quality-Defined Variable Bitrate. This option is only available when your
     /// output uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
-    per_frame_metrics: ?[]const FrameMetricType,
+    per_frame_metrics: ?[]const FrameMetricType = null,
 
     /// Optional. Use Quality tuning level to choose how you want to trade off
     /// encoding speed for output video quality. The default behavior is faster,
     /// lower quality, single-pass encoding.
-    quality_tuning_level: ?Mpeg2QualityTuningLevel,
+    quality_tuning_level: ?Mpeg2QualityTuningLevel = null,
 
     /// Use Rate control mode to specify whether the bitrate is variable (vbr) or
     /// constant (cbr).
-    rate_control_mode: ?Mpeg2RateControlMode,
+    rate_control_mode: ?Mpeg2RateControlMode = null,
 
     /// Use this setting for interlaced outputs, when your output frame rate is half
     /// of your input frame rate. In this situation, choose Optimized interlacing to
@@ -226,12 +226,12 @@ pub const Mpeg2Settings = struct {
     /// Required settings: To use optimized interlacing, you must set Telecine to
     /// None or Soft. You can't use optimized interlacing for hard telecine outputs.
     /// You must also set Interlace mode to a value other than Progressive.
-    scan_type_conversion_mode: ?Mpeg2ScanTypeConversionMode,
+    scan_type_conversion_mode: ?Mpeg2ScanTypeConversionMode = null,
 
     /// Enable this setting to insert I-frames at scene changes that the service
     /// automatically detects. This improves video quality and is enabled by
     /// default.
-    scene_change_detect: ?Mpeg2SceneChangeDetect,
+    scene_change_detect: ?Mpeg2SceneChangeDetect = null,
 
     /// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
     /// second (fps). Enable slow PAL to create a 25 fps output. When you enable
@@ -239,7 +239,7 @@ pub const Mpeg2Settings = struct {
     /// your audio to keep it synchronized with the video. Note that enabling this
     /// setting will slightly reduce the duration of your video. Required settings:
     /// You must also set Framerate to 25.
-    slow_pal: ?Mpeg2SlowPal,
+    slow_pal: ?Mpeg2SlowPal = null,
 
     /// Ignore this setting unless you need to comply with a specification that
     /// requires a specific value. If you don't have a specification requirement, we
@@ -250,7 +250,7 @@ pub const Mpeg2Settings = struct {
     /// a value from 17 to 128 to use planar interpolation. Increasing values from
     /// 17 to 128 result in increasing reduction of high-frequency data. The value
     /// 128 results in the softest video.
-    softness: ?i32,
+    softness: ?i32 = null,
 
     /// Keep the default value, Enabled, to adjust quantization within each frame
     /// based on spatial variation of content complexity. When you enable this
@@ -267,12 +267,12 @@ pub const Mpeg2Settings = struct {
     /// depending on your content. For homogeneous content, such as cartoons and
     /// video games, set it to Low. For content with a wider variety of textures,
     /// set it to High or Higher.
-    spatial_adaptive_quantization: ?Mpeg2SpatialAdaptiveQuantization,
+    spatial_adaptive_quantization: ?Mpeg2SpatialAdaptiveQuantization = null,
 
     /// Specify whether this output's video uses the D10 syntax. Keep the default
     /// value to not use the syntax. Related settings: When you choose D10 for your
     /// MXF profile, you must also set this value to D10.
-    syntax: ?Mpeg2Syntax,
+    syntax: ?Mpeg2Syntax = null,
 
     /// When you do frame rate conversion from 23.976 frames per second (fps) to
     /// 29.97 fps, and your output scan type is interlaced, you can optionally
@@ -282,7 +282,7 @@ pub const Mpeg2Settings = struct {
     /// play back. When you keep the default value, None, MediaConvert does a
     /// standard frame rate conversion to 29.97 without doing anything with the
     /// field polarity to create a smoother picture.
-    telecine: ?Mpeg2Telecine,
+    telecine: ?Mpeg2Telecine = null,
 
     /// Keep the default value, Enabled, to adjust quantization within each frame
     /// based on temporal variation of content complexity. When you enable this
@@ -297,7 +297,7 @@ pub const Mpeg2Settings = struct {
     /// faces, you might choose to disable this feature. Related setting: When you
     /// enable temporal quantization, adjust the strength of the filter with the
     /// setting Adaptive quantization.
-    temporal_adaptive_quantization: ?Mpeg2TemporalAdaptiveQuantization,
+    temporal_adaptive_quantization: ?Mpeg2TemporalAdaptiveQuantization = null,
 
     pub const json_field_names = .{
         .adaptive_quantization = "AdaptiveQuantization",

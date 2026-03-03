@@ -17,23 +17,23 @@ const StorageLensGroupLevel = @import("storage_lens_group_level.zig").StorageLen
 /// Lens](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html) in the *Amazon S3 User Guide*. For a complete list of S3 Storage Lens metrics, see [S3 Storage Lens metrics glossary](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html) in the *Amazon S3 User Guide*.
 pub const AccountLevel = struct {
     /// A container element for S3 Storage Lens activity metrics.
-    activity_metrics: ?ActivityMetrics,
+    activity_metrics: ?ActivityMetrics = null,
 
     /// A container element for S3 Storage Lens advanced cost-optimization metrics.
-    advanced_cost_optimization_metrics: ?AdvancedCostOptimizationMetrics,
+    advanced_cost_optimization_metrics: ?AdvancedCostOptimizationMetrics = null,
 
     /// A container element for S3 Storage Lens advanced data-protection metrics.
-    advanced_data_protection_metrics: ?AdvancedDataProtectionMetrics,
+    advanced_data_protection_metrics: ?AdvancedDataProtectionMetrics = null,
 
     /// A container element for S3 Storage Lens advanced performance metrics.
-    advanced_performance_metrics: ?AdvancedPerformanceMetrics,
+    advanced_performance_metrics: ?AdvancedPerformanceMetrics = null,
 
     /// A container element for the S3 Storage Lens bucket-level configuration.
     bucket_level: BucketLevel,
 
     /// A container element for detailed status code metrics.
-    detailed_status_codes_metrics: ?DetailedStatusCodesMetrics,
+    detailed_status_codes_metrics: ?DetailedStatusCodesMetrics = null,
 
     /// A container element for S3 Storage Lens groups metrics.
-    storage_lens_group_level: ?StorageLensGroupLevel,
+    storage_lens_group_level: ?StorageLensGroupLevel = null,
 };

@@ -4,11 +4,11 @@ pub const Resource = struct {
     ///
     /// We mention the term resource, which is most commonly a product, so a
     /// `resourceId` is also a `productId`.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     /// Type of the resource, which is the product. Values include `SaaSProduct` or
     /// `AmiProduct`.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",

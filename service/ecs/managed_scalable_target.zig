@@ -3,7 +3,7 @@ const ManagedResourceStatus = @import("managed_resource_status.zig").ManagedReso
 /// Represents a scalable target.
 pub const ManagedScalableTarget = struct {
     /// The ARN of the scalable target.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The maximum value to scale to in response to a scale-out activity.
     max_capacity: i32 = 0,
@@ -15,7 +15,7 @@ pub const ManagedScalableTarget = struct {
     status: ManagedResourceStatus,
 
     /// Information about why the scalable target is in the current status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The Unix timestamp for when the target was most recently updated.
     updated_at: i64,

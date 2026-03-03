@@ -9,7 +9,7 @@ pub const SpotResizingSpecification = struct {
     /// the default is `price-capacity-optimized`. If you run Amazon EMR releases
     /// 6.8.0 or lower, the default is
     /// `capacity-optimized`.
-    allocation_strategy: ?SpotProvisioningAllocationStrategy,
+    allocation_strategy: ?SpotProvisioningAllocationStrategy = null,
 
     /// Spot resize timeout in minutes. If Spot Instances are not provisioned within
     /// this time,
@@ -22,7 +22,7 @@ pub const SpotResizingSpecification = struct {
     /// or by the customer (via Amazon EMR Console, Amazon EMR CLI
     /// modify-instance-fleet or Amazon EMR SDK ModifyInstanceFleet API) or by
     /// Amazon EMR due to Amazon EC2 Spot Reclamation.
-    timeout_duration_minutes: ?i32,
+    timeout_duration_minutes: ?i32 = null,
 
     pub const json_field_names = .{
         .allocation_strategy = "AllocationStrategy",

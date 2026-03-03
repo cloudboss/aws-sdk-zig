@@ -17,9 +17,9 @@ pub const SuppressionOptions = struct {
     /// * `BOUNCE` – Amazon SES adds an email address to the suppression
     /// list for your account when a message sent to that address results in a hard
     /// bounce.
-    suppressed_reasons: ?[]const SuppressionListReason,
+    suppressed_reasons: ?[]const SuppressionListReason = null,
 
-    validation_options: ?SuppressionValidationOptions,
+    validation_options: ?SuppressionValidationOptions = null,
 
     pub const json_field_names = .{
         .suppressed_reasons = "SuppressedReasons",

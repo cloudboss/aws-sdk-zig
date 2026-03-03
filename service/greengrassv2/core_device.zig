@@ -5,25 +5,25 @@ const CoreDeviceStatus = @import("core_device_status.zig").CoreDeviceStatus;
 /// Core software.
 pub const CoreDevice = struct {
     /// The computer architecture of the core device.
-    architecture: ?[]const u8,
+    architecture: ?[]const u8 = null,
 
     /// The name of the core device. This is also the name of the IoT thing.
-    core_device_thing_name: ?[]const u8,
+    core_device_thing_name: ?[]const u8 = null,
 
     /// The time at which the core device's status last updated, expressed in ISO
     /// 8601
     /// format.
-    last_status_update_timestamp: ?i64,
+    last_status_update_timestamp: ?i64 = null,
 
     /// The operating system platform that the core device runs.
-    platform: ?[]const u8,
+    platform: ?[]const u8 = null,
 
     /// The runtime for the core device. The runtime can be:
     ///
     /// * `aws_nucleus_classic`
     ///
     /// * `aws_nucleus_lite`
-    runtime: ?[]const u8,
+    runtime: ?[]const u8 = null,
 
     /// The status of the core device. Core devices can have the following
     /// statuses:
@@ -34,7 +34,7 @@ pub const CoreDevice = struct {
     /// * `UNHEALTHY` – The IoT Greengrass Core software or a component is in a
     ///   failed state
     /// on the core device.
-    status: ?CoreDeviceStatus,
+    status: ?CoreDeviceStatus = null,
 
     pub const json_field_names = .{
         .architecture = "architecture",

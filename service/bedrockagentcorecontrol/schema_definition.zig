@@ -7,7 +7,7 @@ const SchemaType = @import("schema_type.zig").SchemaType;
 pub const SchemaDefinition = struct {
     /// The description of the schema definition. This description provides
     /// information about the purpose and usage of the schema.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The items in the schema definition. This field is used for array types to
     /// define the structure of the array elements.
@@ -15,11 +15,11 @@ pub const SchemaDefinition = struct {
 
     /// The properties of the schema definition. These properties define the fields
     /// in the schema.
-    properties: ?[]const aws.map.MapEntry(SchemaDefinition),
+    properties: ?[]const aws.map.MapEntry(SchemaDefinition) = null,
 
     /// The required fields in the schema definition. These fields must be provided
     /// when using the schema.
-    required: ?[]const []const u8,
+    required: ?[]const []const u8 = null,
 
     /// The type of the schema definition. This field specifies the data type of the
     /// schema.

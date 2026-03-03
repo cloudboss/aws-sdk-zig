@@ -5,7 +5,7 @@ pub const Schedule = struct {
     /// Expressions for
     /// Rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html) in the *Amazon CloudWatch Events User
     /// Guide*.
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .expression = "expression",

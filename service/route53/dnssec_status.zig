@@ -29,10 +29,10 @@ pub const DNSSECStatus = struct {
     /// There was an error during a request. Before you can continue to work with
     /// DNSSEC signing, including with key-signing keys (KSKs), you must correct the
     /// problem by enabling or disabling DNSSEC signing for the hosted zone.
-    serve_signature: ?[]const u8,
+    serve_signature: ?[]const u8 = null,
 
     /// The status message provided for the following DNSSEC signing status:
     /// `INTERNAL_FAILURE`. The status message includes information about what
     /// the problem might be and steps that you can take to correct the issue.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 };

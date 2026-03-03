@@ -7,7 +7,7 @@ const ManagedResourceStatus = @import("managed_resource_status.zig").ManagedReso
 /// Reference*
 pub const ManagedTargetGroup = struct {
     /// The Amazon Resource Name (ARN) of the target group.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The destination for health checks on the targets.
     health_check_path: []const u8,
@@ -22,7 +22,7 @@ pub const ManagedTargetGroup = struct {
     status: ManagedResourceStatus,
 
     /// Information about why the target group is in the current status.
-    status_reason: ?[]const u8,
+    status_reason: ?[]const u8 = null,
 
     /// The Unix timestamp for when the target group was last updated.
     updated_at: i64,

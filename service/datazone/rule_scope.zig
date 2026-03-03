@@ -4,13 +4,13 @@ const ProjectsForRule = @import("projects_for_rule.zig").ProjectsForRule;
 /// The scope of a rule.
 pub const RuleScope = struct {
     /// The asset type included in the rule scope.
-    asset_type: ?AssetTypesForRule,
+    asset_type: ?AssetTypesForRule = null,
 
     /// The data product included in the rule scope.
-    data_product: ?bool,
+    data_product: ?bool = null,
 
     /// The project included in the rule scope.
-    project: ?ProjectsForRule,
+    project: ?ProjectsForRule = null,
 
     pub const json_field_names = .{
         .asset_type = "assetType",

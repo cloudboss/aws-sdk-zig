@@ -7,7 +7,7 @@ pub const DateTimeConverter = struct {
     /// The locale of the source field. If you omit this, the default of
     /// `locale.ROOT`
     /// is used.
-    locale: ?[]const u8,
+    locale: ?[]const u8 = null,
 
     /// A list of patterns to match against the `source` field.
     match_patterns: []const []const u8,
@@ -18,7 +18,7 @@ pub const DateTimeConverter = struct {
     /// The time zone of the source field. If you omit this, the default used is the
     /// UTC
     /// zone.
-    source_timezone: ?[]const u8,
+    source_timezone: ?[]const u8 = null,
 
     /// The JSON field to store the result in.
     target: []const u8,
@@ -26,12 +26,12 @@ pub const DateTimeConverter = struct {
     /// The datetime format to use for the converted data in the target field.
     ///
     /// If you omit this, the default of ` yyyy-MM-dd'T'HH:mm:ss.SSS'Z` is used.
-    target_format: ?[]const u8,
+    target_format: ?[]const u8 = null,
 
     /// The time zone of the target field. If you omit this, the default used is the
     /// UTC
     /// zone.
-    target_timezone: ?[]const u8,
+    target_timezone: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .locale = "locale",

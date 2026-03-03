@@ -5,11 +5,11 @@ const ToxicContent = @import("toxic_content.zig").ToxicContent;
 /// detection](https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html) in the *Amazon Comprehend Developer Guide*.
 pub const ToxicLabels = struct {
     /// Array of toxic content types identified in the string.
-    labels: ?[]const ToxicContent,
+    labels: ?[]const ToxicContent = null,
 
     /// Overall toxicity score for the string. Value range is zero to one, where one
     /// is the highest confidence.
-    toxicity: ?f32,
+    toxicity: ?f32 = null,
 
     pub const json_field_names = .{
         .labels = "Labels",

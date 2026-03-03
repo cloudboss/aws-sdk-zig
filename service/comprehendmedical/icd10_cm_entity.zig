@@ -19,50 +19,50 @@ pub const ICD10CMEntity = struct {
     /// is an attribute of an entity, or otherwise related to an entity, such as the
     /// nature of a
     /// medical condition.
-    attributes: ?[]const ICD10CMAttribute,
+    attributes: ?[]const ICD10CMAttribute = null,
 
     /// The 0-based character offset in the input text that shows where the entity
     /// begins. The
     /// offset returns the UTF-8 code point in the string.
-    begin_offset: ?i32,
+    begin_offset: ?i32 = null,
 
     /// The category of the entity. InferICD10CM detects entities in the
     /// `MEDICAL_CONDITION` category.
-    category: ?ICD10CMEntityCategory,
+    category: ?ICD10CMEntityCategory = null,
 
     /// The 0-based character offset in the input text that shows where the entity
     /// ends. The
     /// offset returns the UTF-8 code point in the string.
-    end_offset: ?i32,
+    end_offset: ?i32 = null,
 
     /// The ICD-10-CM concepts that the entity could refer to, along with a score
     /// indicating the
     /// likelihood of the match.
-    icd10_cm_concepts: ?[]const ICD10CMConcept,
+    icd10_cm_concepts: ?[]const ICD10CMConcept = null,
 
     /// The numeric identifier for the entity. This is a monotonically increasing id
     /// unique within
     /// this response rather than a global unique identifier.
-    id: ?i32,
+    id: ?i32 = null,
 
     /// The level of confidence that Amazon Comprehend Medical has in the accuracy
     /// of the
     /// detection.
-    score: ?f32,
+    score: ?f32 = null,
 
     /// The segment of input text that is matched to the detected entity.
-    text: ?[]const u8,
+    text: ?[]const u8 = null,
 
     /// Provides Contextual information for the entity. The traits recognized by
     /// InferICD10CM are
     /// `DIAGNOSIS`, `SIGN`, `SYMPTOM`, and
     /// `NEGATION.`
-    traits: ?[]const ICD10CMTrait,
+    traits: ?[]const ICD10CMTrait = null,
 
     /// Describes the specific type of entity with category of entities.
     /// InferICD10CM detects
     /// entities of the type `DX_NAME` and `TIME_EXPRESSION`.
-    @"type": ?ICD10CMEntityType,
+    @"type": ?ICD10CMEntityType = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

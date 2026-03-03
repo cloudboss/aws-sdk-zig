@@ -9,7 +9,7 @@ pub const ResourceFindingsSummary = struct {
     product_name: []const u8,
 
     /// A breakdown of security findings by their severity levels.
-    severities: ?ResourceSeverityBreakdown,
+    severities: ?ResourceSeverityBreakdown = null,
 
     /// The total count of security findings.
     total_findings: i32,

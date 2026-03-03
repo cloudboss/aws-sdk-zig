@@ -14,14 +14,14 @@ pub const InboundAdditionalRecipients = struct {
     /// required recipient (`DestinationEmailAddress`). You can then specify up to
     /// 49 additional recipients
     /// (across `ToAddresses` and `CcAddresses`), for a total of 50 recipients.
-    cc_addresses: ?[]const EmailAddressInfo,
+    cc_addresses: ?[]const EmailAddressInfo = null,
 
     /// The **additional** recipients information present in to list. You must have
     /// 1
     /// required recipient (`DestinationEmailAddress`). You can then specify up to
     /// 49 additional recipients
     /// (across `ToAddresses` and `CcAddresses`), for a total of 50 recipients.
-    to_addresses: ?[]const EmailAddressInfo,
+    to_addresses: ?[]const EmailAddressInfo = null,
 
     pub const json_field_names = .{
         .cc_addresses = "CcAddresses",

@@ -13,11 +13,11 @@ pub const TaskDefinitionPlacementConstraint = struct {
     /// see [Cluster query
     /// language](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html) in the *Amazon Elastic
     /// Container Service Developer Guide*.
-    expression: ?[]const u8,
+    expression: ?[]const u8 = null,
 
     /// The type of constraint. The `MemberOf` constraint restricts selection to be
     /// from a group of valid candidates.
-    @"type": ?TaskDefinitionPlacementConstraintType,
+    @"type": ?TaskDefinitionPlacementConstraintType = null,
 
     pub const json_field_names = .{
         .expression = "expression",

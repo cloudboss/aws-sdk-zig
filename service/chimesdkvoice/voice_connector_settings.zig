@@ -2,7 +2,7 @@
 /// S3 buckets designated for storing call detail records.
 pub const VoiceConnectorSettings = struct {
     /// The S3 bucket that stores the Voice Connector's call detail records.
-    cdr_bucket: ?[]const u8,
+    cdr_bucket: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .cdr_bucket = "CdrBucket",

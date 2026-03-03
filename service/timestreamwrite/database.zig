@@ -5,20 +5,20 @@
 /// same KMS key.
 pub const Database = struct {
     /// The Amazon Resource Name that uniquely identifies this database.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// The time when the database was created, calculated from the Unix epoch time.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The name of the Timestream database.
-    database_name: ?[]const u8,
+    database_name: ?[]const u8 = null,
 
     /// The identifier of the KMS key used to encrypt the data stored in the
     /// database.
-    kms_key_id: ?[]const u8,
+    kms_key_id: ?[]const u8 = null,
 
     /// The last time that this database was updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The total number of tables found within a Timestream database.
     table_count: i64 = 0,

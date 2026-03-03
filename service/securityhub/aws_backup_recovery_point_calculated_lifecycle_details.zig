@@ -4,11 +4,11 @@ pub const AwsBackupRecoveryPointCalculatedLifecycleDetails = struct {
     /// Specifies the number of days after creation that a recovery point is
     /// deleted. Must be greater
     /// than 90 days plus `MoveToColdStorageAfterDays`.
-    delete_at: ?[]const u8,
+    delete_at: ?[]const u8 = null,
 
     /// Specifies the number of days after creation that a recovery point is moved
     /// to cold storage.
-    move_to_cold_storage_at: ?[]const u8,
+    move_to_cold_storage_at: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .delete_at = "DeleteAt",

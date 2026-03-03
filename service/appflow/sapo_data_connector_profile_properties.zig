@@ -29,17 +29,17 @@ pub const SAPODataConnectorProfileProperties = struct {
     disable_sso: bool = false,
 
     /// The logon language of SAPOData instance.
-    logon_language: ?[]const u8,
+    logon_language: ?[]const u8 = null,
 
     /// The SAPOData OAuth properties required for OAuth type authentication.
-    o_auth_properties: ?OAuthProperties,
+    o_auth_properties: ?OAuthProperties = null,
 
     /// The port number of the SAPOData instance.
     port_number: i32,
 
     /// The SAPOData Private Link service name to be used for private data
     /// transfers.
-    private_link_service_name: ?[]const u8,
+    private_link_service_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_host_url = "applicationHostUrl",

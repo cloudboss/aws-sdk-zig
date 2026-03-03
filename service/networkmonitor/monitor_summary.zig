@@ -6,7 +6,7 @@ const MonitorState = @import("monitor_state.zig").MonitorState;
 pub const MonitorSummary = struct {
     /// The time, in seconds, that metrics are collected and sent to Amazon
     /// CloudWatch. Valid values are either `30` or `60`.
-    aggregation_period: ?i64,
+    aggregation_period: ?i64 = null,
 
     /// The ARN of the monitor.
     monitor_arn: []const u8,
@@ -18,7 +18,7 @@ pub const MonitorSummary = struct {
     state: MonitorState,
 
     /// The list of key-value pairs assigned to the monitor.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .aggregation_period = "aggregationPeriod",

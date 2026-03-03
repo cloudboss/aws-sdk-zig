@@ -5,15 +5,15 @@ const TaskState = @import("task_state.zig").TaskState;
 /// Information about the task assigned to one or many devices.
 pub const TaskSummary = struct {
     /// The state of the task assigned to one or many devices.
-    state: ?TaskState,
+    state: ?TaskState = null,
 
     /// Optional metadata that you assign to a resource. You can use tags to
     /// categorize a resource
     /// in different ways, such as by purpose, owner, or environment.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Resource Name (ARN) of the task.
-    task_arn: ?[]const u8,
+    task_arn: ?[]const u8 = null,
 
     /// The task ID.
     task_id: []const u8,

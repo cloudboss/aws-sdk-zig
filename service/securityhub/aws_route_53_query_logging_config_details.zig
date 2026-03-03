@@ -5,7 +5,7 @@ const CloudWatchLogsLogGroupArnConfigDetails = @import("cloud_watch_logs_log_gro
 pub const AwsRoute53QueryLoggingConfigDetails = struct {
     /// The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log group that
     /// Route 53 is publishing logs to.
-    cloud_watch_logs_log_group_arn: ?CloudWatchLogsLogGroupArnConfigDetails,
+    cloud_watch_logs_log_group_arn: ?CloudWatchLogsLogGroupArnConfigDetails = null,
 
     pub const json_field_names = .{
         .cloud_watch_logs_log_group_arn = "CloudWatchLogsLogGroupArn",

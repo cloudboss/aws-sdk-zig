@@ -6,10 +6,10 @@ const ScriptModeConfig = @import("script_mode_config.zig").ScriptModeConfig;
 /// training.
 pub const AlgorithmSpecification = struct {
     /// The container image used to create an Amazon Braket hybrid job.
-    container_image: ?ContainerImage,
+    container_image: ?ContainerImage = null,
 
     /// Configures the paths to the Python scripts used for entry and training.
-    script_mode_config: ?ScriptModeConfig,
+    script_mode_config: ?ScriptModeConfig = null,
 
     pub const json_field_names = .{
         .container_image = "containerImage",

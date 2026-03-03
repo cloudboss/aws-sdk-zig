@@ -1,10 +1,10 @@
 /// The structure representing the filters supported by a RasterDataCollection.
 pub const Filter = struct {
     /// The maximum value of the filter.
-    maximum: ?f32,
+    maximum: ?f32 = null,
 
     /// The minimum value of the filter.
-    minimum: ?f32,
+    minimum: ?f32 = null,
 
     /// The name of the filter.
     name: []const u8,

@@ -5,10 +5,10 @@ const DocumentItem = @import("document_item.zig").DocumentItem;
 pub const LegalTerm = struct {
     /// List of references to legal resources proposed to the buyers. An example is
     /// the EULA.
-    documents: ?[]const DocumentItem,
+    documents: ?[]const DocumentItem = null,
 
     /// Category of the term being updated.
-    @"type": ?[]const u8,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .documents = "documents",

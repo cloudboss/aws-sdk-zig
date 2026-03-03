@@ -14,10 +14,10 @@ pub const ResourceShare = struct {
     /// * `False` – the resource share can be shared with only
     /// accounts in the same organization as the account that owns the resource
     /// share.
-    allow_external_principals: ?bool,
+    allow_external_principals: ?bool = null,
 
     /// The date and time when the resource share was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// Indicates what features are available for this resource share. This
     /// parameter can have one of
@@ -48,29 +48,29 @@ pub const ResourceShare = struct {
     /// the PromoteResourceShareCreatedFromPolicy and that operation
     /// is still in progress. This value changes to `STANDARD` when
     /// complete.
-    feature_set: ?ResourceShareFeatureSet,
+    feature_set: ?ResourceShareFeatureSet = null,
 
     /// The date and time when the resource share was last updated.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The name of the resource share.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the resource share.
-    owning_account_id: ?[]const u8,
+    owning_account_id: ?[]const u8 = null,
 
     /// The [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share
-    resource_share_arn: ?[]const u8,
+    resource_share_arn: ?[]const u8 = null,
 
     /// The current status of the resource share.
-    status: ?ResourceShareStatus,
+    status: ?ResourceShareStatus = null,
 
     /// A message about the status of the resource share.
-    status_message: ?[]const u8,
+    status_message: ?[]const u8 = null,
 
     /// The tag key and value pairs attached to the resource share.
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
         .allow_external_principals = "allowExternalPrincipals",

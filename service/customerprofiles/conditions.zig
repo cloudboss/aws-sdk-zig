@@ -6,13 +6,13 @@ const Threshold = @import("threshold.zig").Threshold;
 /// attribute.
 pub const Conditions = struct {
     /// The number of profile objects used for the calculated attribute.
-    object_count: ?i32,
+    object_count: ?i32 = null,
 
     /// The relative time period over which data is included in the aggregation.
-    range: ?Range,
+    range: ?Range = null,
 
     /// The threshold for the calculated attribute.
-    threshold: ?Threshold,
+    threshold: ?Threshold = null,
 
     pub const json_field_names = .{
         .object_count = "ObjectCount",

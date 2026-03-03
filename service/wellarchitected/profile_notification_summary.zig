@@ -3,23 +3,23 @@ const ProfileNotificationType = @import("profile_notification_type.zig").Profile
 /// The profile notification summary.
 pub const ProfileNotificationSummary = struct {
     /// The current profile version.
-    current_profile_version: ?[]const u8,
+    current_profile_version: ?[]const u8 = null,
 
     /// The latest profile version.
-    latest_profile_version: ?[]const u8,
+    latest_profile_version: ?[]const u8 = null,
 
     /// The profile ARN.
-    profile_arn: ?[]const u8,
+    profile_arn: ?[]const u8 = null,
 
     /// The profile name.
-    profile_name: ?[]const u8,
+    profile_name: ?[]const u8 = null,
 
     /// Type of notification.
-    @"type": ?ProfileNotificationType,
+    @"type": ?ProfileNotificationType = null,
 
-    workload_id: ?[]const u8,
+    workload_id: ?[]const u8 = null,
 
-    workload_name: ?[]const u8,
+    workload_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .current_profile_version = "CurrentProfileVersion",

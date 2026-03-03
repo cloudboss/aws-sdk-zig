@@ -7,11 +7,11 @@ const ExportImageTaskState = @import("export_image_task_state.zig").ExportImageT
 /// timestamps, and any error details.
 pub const ExportImageTask = struct {
     /// The description that will be applied to the exported EC2 AMI.
-    ami_description: ?[]const u8,
+    ami_description: ?[]const u8 = null,
 
     /// The ID of the EC2 AMI that was created by this export task. This field is
     /// only populated when the task completes successfully.
-    ami_id: ?[]const u8,
+    ami_id: ?[]const u8 = null,
 
     /// The name of the EC2 AMI that will be created by this export task.
     ami_name: []const u8,
@@ -21,17 +21,17 @@ pub const ExportImageTask = struct {
 
     /// Details about any errors that occurred during the export process. This field
     /// is only populated when the task fails.
-    error_details: ?[]const ErrorDetails,
+    error_details: ?[]const ErrorDetails = null,
 
     /// The ARN of the WorkSpaces Applications image being exported.
     image_arn: []const u8,
 
     /// The current state of the export image task, such as PENDING, RUNNING,
     /// COMPLETED, or FAILED.
-    state: ?ExportImageTaskState,
+    state: ?ExportImageTaskState = null,
 
     /// The tags that will be applied to the exported EC2 AMI.
-    tag_specifications: ?[]const aws.map.StringMapEntry,
+    tag_specifications: ?[]const aws.map.StringMapEntry = null,
 
     /// The unique identifier for the export image task. Use this ID to track the
     /// task's progress and retrieve its details.

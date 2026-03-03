@@ -8,13 +8,13 @@ pub const LiveSource = struct {
     arn: []const u8,
 
     /// The timestamp that indicates when the live source was created.
-    creation_time: ?i64,
+    creation_time: ?i64 = null,
 
     /// The HTTP package configurations for the live source.
     http_package_configurations: []const HttpPackageConfiguration,
 
     /// The timestamp that indicates when the live source was last modified.
-    last_modified_time: ?i64,
+    last_modified_time: ?i64 = null,
 
     /// The name that's used to refer to a live source.
     live_source_name: []const u8,
@@ -27,7 +27,7 @@ pub const LiveSource = struct {
     /// and cost tracking. For more information, see [Tagging AWS Elemental
     /// MediaTailor
     /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

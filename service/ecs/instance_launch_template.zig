@@ -31,7 +31,7 @@ pub const InstanceLaunchTemplate = struct {
     /// For more information about Amazon EC2 capacity options, see [Instance
     /// purchasing
     /// options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html) in the *Amazon EC2 User Guide*.
-    capacity_option_type: ?CapacityOptionType,
+    capacity_option_type: ?CapacityOptionType = null,
 
     /// The Amazon Resource Name (ARN) of the instance profile that Amazon ECS
     /// applies to
@@ -54,7 +54,7 @@ pub const InstanceLaunchTemplate = struct {
     ///
     /// If not specified, instances are launched with FIPS enabled in AWS GovCloud
     /// (US) regions and FIPS disabled in other regions.
-    fips_enabled: ?bool,
+    fips_enabled: ?bool = null,
 
     /// The instance requirements. You can specify:
     ///
@@ -65,7 +65,7 @@ pub const InstanceLaunchTemplate = struct {
     ///
     /// Amazon ECS automatically selects the instances that match the specified
     /// criteria.
-    instance_requirements: ?InstanceRequirementsRequest,
+    instance_requirements: ?InstanceRequirementsRequest = null,
 
     /// CloudWatch provides two categories of monitoring: basic monitoring and
     /// detailed
@@ -79,7 +79,7 @@ pub const InstanceLaunchTemplate = struct {
     /// monitoring for Amazon ECS Managed
     /// Instances](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/detailed-monitoring-managed-instances.html) in the Amazon ECS
     /// Developer Guide.
-    monitoring: ?ManagedInstancesMonitoringOptions,
+    monitoring: ?ManagedInstancesMonitoringOptions = null,
 
     /// The network configuration for Amazon ECS Managed Instances. This specifies
     /// the subnets
@@ -89,7 +89,7 @@ pub const InstanceLaunchTemplate = struct {
     /// The storage configuration for Amazon ECS Managed Instances. This defines the
     /// root
     /// volume size and type for the instances.
-    storage_configuration: ?ManagedInstancesStorageConfiguration,
+    storage_configuration: ?ManagedInstancesStorageConfiguration = null,
 
     pub const json_field_names = .{
         .capacity_option_type = "capacityOptionType",

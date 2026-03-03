@@ -20,7 +20,7 @@ pub const ContentData = struct {
     knowledge_base_id: []const u8,
 
     /// The URI of the content.
-    link_out_uri: ?[]const u8,
+    link_out_uri: ?[]const u8 = null,
 
     /// A key/value map to store attributes without affecting tagging or
     /// recommendations. For example, when synchronizing data between an external
@@ -38,7 +38,7 @@ pub const ContentData = struct {
     status: ContentStatus,
 
     /// The tags used to organize, track, or control access for this resource.
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The title of the content.
     title: []const u8,

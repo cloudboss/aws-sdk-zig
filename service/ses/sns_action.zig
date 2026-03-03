@@ -35,7 +35,7 @@ pub const SNSAction = struct {
     /// different encoding format. Base64 preserves all special characters. The
     /// default value is
     /// UTF-8.
-    encoding: ?SNSActionEncoding,
+    encoding: ?SNSActionEncoding = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. You can
     /// find the ARN of a

@@ -10,43 +10,43 @@ const PhoneNumberType = @import("phone_number_type.zig").PhoneNumberType;
 /// Connector.
 pub const PhoneNumber = struct {
     /// The phone number associations.
-    associations: ?[]const PhoneNumberAssociation,
+    associations: ?[]const PhoneNumberAssociation = null,
 
     /// The outbound calling name associated with the phone number.
-    calling_name: ?[]const u8,
+    calling_name: ?[]const u8 = null,
 
     /// The outbound calling name status.
-    calling_name_status: ?CallingNameStatus,
+    calling_name_status: ?CallingNameStatus = null,
 
     /// The phone number capabilities.
-    capabilities: ?PhoneNumberCapabilities,
+    capabilities: ?PhoneNumberCapabilities = null,
 
     /// The phone number country. Format: ISO 3166-1 alpha-2.
-    country: ?[]const u8,
+    country: ?[]const u8 = null,
 
     /// The phone number creation timestamp, in ISO 8601 format.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The deleted phone number timestamp, in ISO 8601 format.
-    deletion_timestamp: ?i64,
+    deletion_timestamp: ?i64 = null,
 
     /// The phone number, in E.164 format.
-    e164_phone_number: ?[]const u8,
+    e164_phone_number: ?[]const u8 = null,
 
     /// The phone number ID.
-    phone_number_id: ?[]const u8,
+    phone_number_id: ?[]const u8 = null,
 
     /// The phone number product type.
-    product_type: ?PhoneNumberProductType,
+    product_type: ?PhoneNumberProductType = null,
 
     /// The phone number status.
-    status: ?PhoneNumberStatus,
+    status: ?PhoneNumberStatus = null,
 
     /// The phone number type.
-    @"type": ?PhoneNumberType,
+    @"type": ?PhoneNumberType = null,
 
     /// The updated phone number timestamp, in ISO 8601 format.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .associations = "Associations",

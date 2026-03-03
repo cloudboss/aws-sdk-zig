@@ -7,13 +7,13 @@ pub const DataCellsFilter = struct {
     /// nested attributes, use a qualified dot (.) delimited format such as
     /// "address"."zip". Nested attributes within this list may not exceed a depth
     /// of 5.
-    column_names: ?[]const []const u8,
+    column_names: ?[]const []const u8 = null,
 
     /// A wildcard with exclusions.
     ///
     /// You must specify either a `ColumnNames` list or the
     /// `ColumnWildCard`.
-    column_wildcard: ?ColumnWildcard,
+    column_wildcard: ?ColumnWildcard = null,
 
     /// A database in the Glue Data Catalog.
     database_name: []const u8,
@@ -22,7 +22,7 @@ pub const DataCellsFilter = struct {
     name: []const u8,
 
     /// A PartiQL predicate.
-    row_filter: ?RowFilter,
+    row_filter: ?RowFilter = null,
 
     /// The ID of the catalog to which the table belongs.
     table_catalog_id: []const u8,
@@ -31,7 +31,7 @@ pub const DataCellsFilter = struct {
     table_name: []const u8,
 
     /// The ID of the data cells filter version.
-    version_id: ?[]const u8,
+    version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .column_names = "ColumnNames",

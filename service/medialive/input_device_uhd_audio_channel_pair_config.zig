@@ -4,14 +4,14 @@ const InputDeviceUhdAudioChannelPairProfile = @import("input_device_uhd_audio_ch
 /// the device produces as output.
 pub const InputDeviceUhdAudioChannelPairConfig = struct {
     /// The ID for one audio pair configuration, a value from 1 to 8.
-    id: ?i32,
+    id: ?i32 = null,
 
     /// The profile for one audio pair configuration. This property describes one
     /// audio configuration in the format (rate control
     /// algorithm)-(codec)_(quality)-(bitrate in bytes). For example,
     /// CBR-AAC_HQ-192000. Or DISABLED, in which case the device won't produce audio
     /// for this pair.
-    profile: ?InputDeviceUhdAudioChannelPairProfile,
+    profile: ?InputDeviceUhdAudioChannelPairProfile = null,
 
     pub const json_field_names = .{
         .id = "Id",

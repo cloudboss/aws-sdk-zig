@@ -3,15 +3,15 @@
 pub const DocumentChunkLocation = struct {
     /// The index of the document within the array of documents provided in the
     /// request.
-    document_index: ?i32,
+    document_index: ?i32 = null,
 
     /// The ending chunk identifier or index of the cited content within the
     /// document.
-    end: ?i32,
+    end: ?i32 = null,
 
     /// The starting chunk identifier or index of the cited content within the
     /// document.
-    start: ?i32,
+    start: ?i32 = null,
 
     pub const json_field_names = .{
         .document_index = "documentIndex",

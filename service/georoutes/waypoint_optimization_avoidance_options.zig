@@ -7,29 +7,29 @@ const WaypointOptimizationAvoidanceArea = @import("waypoint_optimization_avoidan
 /// avoidance criteria were violated.
 pub const WaypointOptimizationAvoidanceOptions = struct {
     /// Areas to be avoided.
-    areas: ?[]const WaypointOptimizationAvoidanceArea,
+    areas: ?[]const WaypointOptimizationAvoidanceArea = null,
 
     /// Avoidance options for cars-shuttles-trains.
-    car_shuttle_trains: ?bool,
+    car_shuttle_trains: ?bool = null,
 
     /// Avoid controlled access highways while calculating the route.
-    controlled_access_highways: ?bool,
+    controlled_access_highways: ?bool = null,
 
     /// Avoid dirt roads while calculating the route.
-    dirt_roads: ?bool,
+    dirt_roads: ?bool = null,
 
     /// Avoidance options for ferries.
-    ferries: ?bool,
+    ferries: ?bool = null,
 
     /// Avoids roads where the specified toll transponders are the only mode of
     /// payment.
-    toll_roads: ?bool,
+    toll_roads: ?bool = null,
 
     /// Avoid tunnels while calculating the route.
-    tunnels: ?bool,
+    tunnels: ?bool = null,
 
     /// Avoid U-turns for calculation on highways and motorways.
-    u_turns: ?bool,
+    u_turns: ?bool = null,
 
     pub const json_field_names = .{
         .areas = "Areas",

@@ -10,40 +10,40 @@ const TrainingDataConfig = @import("training_data_config.zig").TrainingDataConfi
 /// Describes the configuration properties for the solution.
 pub const SolutionConfig = struct {
     /// Lists the algorithm hyperparameters and their values.
-    algorithm_hyper_parameters: ?[]const aws.map.StringMapEntry,
+    algorithm_hyper_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The
     /// [AutoMLConfig](https://docs.aws.amazon.com/personalize/latest/dg/API_AutoMLConfig.html) object containing a list of recipes to search
     /// when AutoML is performed.
-    auto_ml_config: ?AutoMLConfig,
+    auto_ml_config: ?AutoMLConfig = null,
 
     /// Specifies the automatic training configuration to use.
-    auto_training_config: ?AutoTrainingConfig,
+    auto_training_config: ?AutoTrainingConfig = null,
 
     /// Describes the configuration of an event, which includes a list of event
     /// parameters. You can specify up to 10 event parameters. Events are used in
     /// solution creation.
-    events_config: ?EventsConfig,
+    events_config: ?EventsConfig = null,
 
     /// Only events with a value greater than or equal to this threshold are
     /// used for training a model.
-    event_value_threshold: ?[]const u8,
+    event_value_threshold: ?[]const u8 = null,
 
     /// Lists the feature transformation parameters.
-    feature_transformation_parameters: ?[]const aws.map.StringMapEntry,
+    feature_transformation_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// Describes the properties for hyperparameter optimization (HPO).
-    hpo_config: ?HPOConfig,
+    hpo_config: ?HPOConfig = null,
 
     /// Describes the additional objective for the solution, such as maximizing
     /// streaming
     /// minutes or increasing revenue. For more information see [Optimizing a
     /// solution](https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html).
-    optimization_objective: ?OptimizationObjective,
+    optimization_objective: ?OptimizationObjective = null,
 
     /// Specifies the training data configuration to use when creating a custom
     /// solution version (trained model).
-    training_data_config: ?TrainingDataConfig,
+    training_data_config: ?TrainingDataConfig = null,
 
     pub const json_field_names = .{
         .algorithm_hyper_parameters = "algorithmHyperParameters",

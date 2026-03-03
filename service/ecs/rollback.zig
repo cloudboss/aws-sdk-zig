@@ -3,14 +3,14 @@ pub const Rollback = struct {
     /// The reason the rollback happened. For example, the circuit breaker initiated
     /// the
     /// rollback operation.
-    reason: ?[]const u8,
+    reason: ?[]const u8 = null,
 
     /// The ARN of the service revision deployed as part of the rollback.
-    service_revision_arn: ?[]const u8,
+    service_revision_arn: ?[]const u8 = null,
 
     /// Time time that the rollback started. The format is yyyy-MM-dd
     /// HH:mm:ss.SSSSSS.
-    started_at: ?i64,
+    started_at: ?i64 = null,
 
     pub const json_field_names = .{
         .reason = "reason",

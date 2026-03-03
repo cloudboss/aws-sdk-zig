@@ -6,9 +6,9 @@ pub const AcceleratorCountRequest = struct {
     /// The maximum number of accelerators. To specify no maximum limit, omit this
     /// parameter. To exclude accelerator-enabled instance types, set `Max` to
     /// `0`.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// The minimum number of accelerators. To specify no minimum limit, omit this
     /// parameter.
-    min: ?i32,
+    min: ?i32 = null,
 };

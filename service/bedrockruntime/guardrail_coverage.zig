@@ -5,10 +5,10 @@ const GuardrailTextCharactersCoverage = @import("guardrail_text_characters_cover
 pub const GuardrailCoverage = struct {
     /// The guardrail coverage for images (the number of images that guardrails
     /// guarded).
-    images: ?GuardrailImageCoverage,
+    images: ?GuardrailImageCoverage = null,
 
     /// The text characters of the guardrail coverage details.
-    text_characters: ?GuardrailTextCharactersCoverage,
+    text_characters: ?GuardrailTextCharactersCoverage = null,
 
     pub const json_field_names = .{
         .images = "images",

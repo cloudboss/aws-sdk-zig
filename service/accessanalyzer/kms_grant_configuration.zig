@@ -6,7 +6,7 @@ const KmsGrantOperation = @import("kms_grant_operation.zig").KmsGrantOperation;
 pub const KmsGrantConfiguration = struct {
     /// Use this structure to propose allowing [cryptographic
     /// operations](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations) in the grant only when the operation request includes the specified [encryption context](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context).
-    constraints: ?KmsGrantConstraints,
+    constraints: ?KmsGrantConstraints = null,
 
     /// The principal that is given permission to perform the operations that the
     /// grant permits.
@@ -22,7 +22,7 @@ pub const KmsGrantConfiguration = struct {
 
     /// The principal that is given permission to retire the grant by using
     /// [RetireGrant](https://docs.aws.amazon.com/kms/latest/APIReference/API_RetireGrant.html) operation.
-    retiring_principal: ?[]const u8,
+    retiring_principal: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .constraints = "constraints",

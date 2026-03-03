@@ -24,34 +24,34 @@ const SolutionConfig = @import("solution_config.zig").SolutionConfig;
 /// or create a new one.
 pub const Solution = struct {
     /// When `performAutoML` is true, specifies the best recipe found.
-    auto_ml_result: ?AutoMLResult,
+    auto_ml_result: ?AutoMLResult = null,
 
     /// The creation date and time (in Unix time) of the solution.
-    creation_date_time: ?i64,
+    creation_date_time: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the dataset group that provides the
     /// training data.
-    dataset_group_arn: ?[]const u8,
+    dataset_group_arn: ?[]const u8 = null,
 
     /// The event type (for example, 'click' or 'like') that is used for training
     /// the model.
     /// If no `eventType` is provided, Amazon Personalize uses all interactions for
     /// training with
     /// equal weight regardless of type.
-    event_type: ?[]const u8,
+    event_type: ?[]const u8 = null,
 
     /// The date and time (in Unix time) that the solution was last updated.
-    last_updated_date_time: ?i64,
+    last_updated_date_time: ?i64 = null,
 
     /// Provides a summary of the latest updates to the solution.
-    latest_solution_update: ?SolutionUpdateSummary,
+    latest_solution_update: ?SolutionUpdateSummary = null,
 
     /// Describes the latest version of the solution, including the status and the
     /// ARN.
-    latest_solution_version: ?SolutionVersionSummary,
+    latest_solution_version: ?SolutionVersionSummary = null,
 
     /// The name of the solution.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// We don't recommend enabling automated machine learning. Instead, match your
     /// use case to the available Amazon Personalize
@@ -71,7 +71,7 @@ pub const Solution = struct {
     ///
     /// For more information about auto training, see [Creating and configuring a
     /// solution](https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html).
-    perform_auto_training: ?bool,
+    perform_auto_training: ?bool = null,
 
     /// Whether to perform hyperparameter optimization (HPO) on the chosen recipe.
     /// The
@@ -83,17 +83,17 @@ pub const Solution = struct {
     /// new data more frequently without requiring full retraining, which enables
     /// near real-time personalization. This parameter is supported only for
     /// solutions that use the semantic-similarity recipe
-    perform_incremental_update: ?bool,
+    perform_incremental_update: ?bool = null,
 
     /// The ARN of the recipe used to create the solution. This is required when
     /// `performAutoML` is false.
-    recipe_arn: ?[]const u8,
+    recipe_arn: ?[]const u8 = null,
 
     /// The ARN of the solution.
-    solution_arn: ?[]const u8,
+    solution_arn: ?[]const u8 = null,
 
     /// Describes the configuration properties for the solution.
-    solution_config: ?SolutionConfig,
+    solution_config: ?SolutionConfig = null,
 
     /// The status of the solution.
     ///
@@ -102,7 +102,7 @@ pub const Solution = struct {
     /// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
     ///
     /// * DELETE PENDING > DELETE IN_PROGRESS
-    status: ?[]const u8,
+    status: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auto_ml_result = "autoMLResult",

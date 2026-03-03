@@ -20,7 +20,7 @@ pub const InputTamsSettings = struct {
     /// secretsmanager:GetSecretValue permissions. Format:
     /// arn:aws:events:region:account-id:connection/connection-name/unique-id This
     /// setting is required when you include TAMS settings in your job.
-    auth_connection_arn: ?[]const u8,
+    auth_connection_arn: ?[]const u8 = null,
 
     /// Specify how MediaConvert handles gaps between media segments in your TAMS
     /// source. Gaps can occur in live streams due to network issues or other
@@ -31,7 +31,7 @@ pub const InputTamsSettings = struct {
     /// timeline continuity but adds black frames where content is missing. * Hold
     /// last frame - Repeat the last frame before a gap until the next segment
     /// begins. This maintains visual continuity during gaps.
-    gap_handling: ?TamsGapHandling,
+    gap_handling: ?TamsGapHandling = null,
 
     /// Specify the unique identifier for the media source in your TAMS server.
     /// MediaConvert uses this source ID to locate the appropriate flows containing
@@ -41,7 +41,7 @@ pub const InputTamsSettings = struct {
     /// audio, video, or combined audio/video content. MediaConvert automatically
     /// selects the highest quality flows available for your job. This setting is
     /// required when you include TAMS settings in your job.
-    source_id: ?[]const u8,
+    source_id: ?[]const u8 = null,
 
     /// Specify the time range of media segments to retrieve from your TAMS server.
     /// MediaConvert fetches only the segments that fall within this range. Use the
@@ -50,7 +50,7 @@ pub const InputTamsSettings = struct {
     /// by an underscore, surrounded by either parentheses or square brackets.
     /// Example: [15:0_35:0) This setting is required when you include TAMS settings
     /// in your job.
-    timerange: ?[]const u8,
+    timerange: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .auth_connection_arn = "AuthConnectionArn",

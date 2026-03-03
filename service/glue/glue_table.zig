@@ -10,13 +10,13 @@ pub const GlueTable = struct {
     ///
     /// * `catalogPartitionPredicate`: to use server-side partition pruning using
     ///   partition indexes in the Glue Data Catalog.
-    additional_options: ?[]const aws.map.StringMapEntry,
+    additional_options: ?[]const aws.map.StringMapEntry = null,
 
     /// A unique identifier for the Glue Data Catalog.
-    catalog_id: ?[]const u8,
+    catalog_id: ?[]const u8 = null,
 
     /// The name of the connection to the Glue Data Catalog.
-    connection_name: ?[]const u8,
+    connection_name: ?[]const u8 = null,
 
     /// A database name in the Glue Data Catalog.
     database_name: []const u8,

@@ -8,7 +8,7 @@ pub const PeriodToDateComputation = struct {
     computation_id: []const u8,
 
     /// The name of a computation.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The time granularity setup of period to date computation. Choose from the
     /// following options:
@@ -16,13 +16,13 @@ pub const PeriodToDateComputation = struct {
     /// * YEAR: Year to date.
     ///
     /// * MONTH: Month to date.
-    period_time_granularity: ?TimeGranularity,
+    period_time_granularity: ?TimeGranularity = null,
 
     /// The time field that is used in a computation.
-    time: ?DimensionField,
+    time: ?DimensionField = null,
 
     /// The value field that is used in a computation.
-    value: ?MeasureField,
+    value: ?MeasureField = null,
 
     pub const json_field_names = .{
         .computation_id = "ComputationId",

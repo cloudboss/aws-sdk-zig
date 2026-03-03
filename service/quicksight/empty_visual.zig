@@ -7,7 +7,7 @@ const VisualCustomAction = @import("visual_custom_action.zig").VisualCustomActio
 /// `EmptyVisual` until a visual type is selected.
 pub const EmptyVisual = struct {
     /// The list of custom actions that are configured for a visual.
-    actions: ?[]const VisualCustomAction,
+    actions: ?[]const VisualCustomAction = null,
 
     /// The data set that is used in the empty visual. Every visual requires a
     /// dataset to render.

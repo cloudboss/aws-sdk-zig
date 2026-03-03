@@ -8,24 +8,24 @@ const UniqueSources = @import("unique_sources.zig").UniqueSources;
 /// of GetAnalysisReportResults.
 pub const AnalysisTypeReportResult = struct {
     /// The most frequently accessed domains.
-    domain: ?[]const u8,
+    domain: ?[]const u8 = null,
 
     /// The date and time any domain was first accessed (within the last 30 day
     /// period).
-    first_accessed: ?i64,
+    first_accessed: ?i64 = null,
 
     /// The number of attempts made to access a observed domain.
-    hits: ?Hits,
+    hits: ?Hits = null,
 
     /// The date and time any domain was last accessed (within the last 30 day
     /// period).
-    last_accessed: ?i64,
+    last_accessed: ?i64 = null,
 
     /// The type of traffic captured by the analysis report.
-    protocol: ?[]const u8,
+    protocol: ?[]const u8 = null,
 
     /// The number of unique source IP addresses that connected to a domain.
-    unique_sources: ?UniqueSources,
+    unique_sources: ?UniqueSources = null,
 
     pub const json_field_names = .{
         .domain = "Domain",

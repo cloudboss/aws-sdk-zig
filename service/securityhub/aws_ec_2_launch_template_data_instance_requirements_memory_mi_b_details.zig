@@ -2,10 +2,10 @@
 /// instance.
 pub const AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails = struct {
     /// The maximum amount of memory, in MiB.
-    max: ?i32,
+    max: ?i32 = null,
 
     /// The minimum amount of memory, in MiB.
-    min: ?i32,
+    min: ?i32 = null,
 
     pub const json_field_names = .{
         .max = "Max",

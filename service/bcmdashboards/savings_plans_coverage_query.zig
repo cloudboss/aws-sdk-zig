@@ -7,20 +7,20 @@ const DateTimeRange = @import("date_time_range.zig").DateTimeRange;
 /// Defines the parameters for querying Savings Plans coverage data, including
 /// metrics, grouping options, and time granularity.
 pub const SavingsPlansCoverageQuery = struct {
-    filter: ?Expression,
+    filter: ?Expression = null,
 
     /// The time granularity of the retrieved data: `HOURLY`, `DAILY`, or `MONTHLY`.
-    granularity: ?Granularity,
+    granularity: ?Granularity = null,
 
     /// Specifies how to group the Savings Plans coverage data, such as by service
     /// or instance family.
-    group_by: ?[]const GroupDefinition,
+    group_by: ?[]const GroupDefinition = null,
 
     /// The coverage metrics to include in the results.
     ///
     /// Valid value for SavingsPlansCoverageQuery metrics is
     /// `SpendCoveredBySavingsPlans`.
-    metrics: ?[]const MetricName,
+    metrics: ?[]const MetricName = null,
 
     time_range: DateTimeRange,
 

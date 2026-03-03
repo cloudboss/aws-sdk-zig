@@ -3,9 +3,9 @@ const FunctionRunAsConfig = @import("function_run_as_config.zig").FunctionRunAsC
 
 /// Configuration information that specifies how a Lambda function runs.
 pub const FunctionExecutionConfig = struct {
-    isolation_mode: ?FunctionIsolationMode,
+    isolation_mode: ?FunctionIsolationMode = null,
 
-    run_as: ?FunctionRunAsConfig,
+    run_as: ?FunctionRunAsConfig = null,
 
     pub const json_field_names = .{
         .isolation_mode = "IsolationMode",

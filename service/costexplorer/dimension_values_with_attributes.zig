@@ -5,10 +5,10 @@ const aws = @import("aws");
 /// can use `GetDimensionValues` to find specific values.
 pub const DimensionValuesWithAttributes = struct {
     /// The attribute that applies to a specific `Dimension`.
-    attributes: ?[]const aws.map.StringMapEntry,
+    attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The value of a dimension with a specific attribute.
-    value: ?[]const u8,
+    value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",

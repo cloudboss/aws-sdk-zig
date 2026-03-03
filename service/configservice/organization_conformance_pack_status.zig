@@ -4,14 +4,14 @@ const OrganizationResourceStatus = @import("organization_resource_status.zig").O
 pub const OrganizationConformancePackStatus = struct {
     /// An error code that is returned when organization conformance pack creation
     /// or deletion has failed in a member account.
-    error_code: ?[]const u8,
+    error_code: ?[]const u8 = null,
 
     /// An error message indicating that organization conformance pack creation or
     /// deletion failed due to an error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The timestamp of the last update.
-    last_update_time: ?i64,
+    last_update_time: ?i64 = null,
 
     /// The name that you assign to organization conformance pack.
     organization_conformance_pack_name: []const u8,

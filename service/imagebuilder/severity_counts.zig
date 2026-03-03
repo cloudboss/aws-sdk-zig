@@ -4,16 +4,16 @@
 pub const SeverityCounts = struct {
     /// The total number of findings across all severity levels for the specified
     /// filter.
-    all: ?i64,
+    all: ?i64 = null,
 
     /// The number of critical severity findings for the specified filter.
-    critical: ?i64,
+    critical: ?i64 = null,
 
     /// The number of high severity findings for the specified filter.
-    high: ?i64,
+    high: ?i64 = null,
 
     /// The number of medium severity findings for the specified filter.
-    medium: ?i64,
+    medium: ?i64 = null,
 
     pub const json_field_names = .{
         .all = "all",

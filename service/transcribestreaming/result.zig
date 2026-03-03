@@ -16,10 +16,10 @@ pub const Result = struct {
     /// A list of possible alternative transcriptions for the input audio. Each
     /// alternative may contain
     /// one or more of `Items`, `Entities`, or `Transcript`.
-    alternatives: ?[]const Alternative,
+    alternatives: ?[]const Alternative = null,
 
     /// Indicates which audio channel is associated with the `Result`.
-    channel_id: ?[]const u8,
+    channel_id: ?[]const u8 = null,
 
     /// The end time of the `Result` in seconds, with millisecond precision (e.g.,
     /// 1.056).
@@ -32,17 +32,17 @@ pub const Result = struct {
     is_partial: bool = false,
 
     /// The language code that represents the language spoken in your audio stream.
-    language_code: ?LanguageCode,
+    language_code: ?LanguageCode = null,
 
     /// The language code of the dominant language identified in your stream.
     ///
     /// If you enabled channel identification and each channel of your audio
     /// contains a different language,
     /// you may have more than one result.
-    language_identification: ?[]const LanguageWithScore,
+    language_identification: ?[]const LanguageWithScore = null,
 
     /// Provides a unique identifier for the `Result`.
-    result_id: ?[]const u8,
+    result_id: ?[]const u8 = null,
 
     /// The start time of the `Result` in seconds, with millisecond precision (e.g.,
     /// 1.056).

@@ -6,13 +6,13 @@ const ImmediateModeScheduleActionStartSettings = @import("immediate_mode_schedul
 /// must be selected.
 pub const ScheduleActionStartSettings = struct {
     /// Option for specifying the start time for an action.
-    fixed_mode_schedule_action_start_settings: ?FixedModeScheduleActionStartSettings,
+    fixed_mode_schedule_action_start_settings: ?FixedModeScheduleActionStartSettings = null,
 
     /// Option for specifying an action as relative to another action.
-    follow_mode_schedule_action_start_settings: ?FollowModeScheduleActionStartSettings,
+    follow_mode_schedule_action_start_settings: ?FollowModeScheduleActionStartSettings = null,
 
     /// Option for specifying an action that should be applied immediately.
-    immediate_mode_schedule_action_start_settings: ?ImmediateModeScheduleActionStartSettings,
+    immediate_mode_schedule_action_start_settings: ?ImmediateModeScheduleActionStartSettings = null,
 
     pub const json_field_names = .{
         .fixed_mode_schedule_action_start_settings = "FixedModeScheduleActionStartSettings",

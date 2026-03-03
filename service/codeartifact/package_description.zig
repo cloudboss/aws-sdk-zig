@@ -4,10 +4,10 @@ const PackageOriginConfiguration = @import("package_origin_configuration.zig").P
 /// Details about a package.
 pub const PackageDescription = struct {
     /// A format that specifies the type of the package.
-    format: ?PackageFormat,
+    format: ?PackageFormat = null,
 
     /// The name of the package.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The namespace of the package. The package component that specifies its
     /// namespace depends on its type. For example:
@@ -21,10 +21,10 @@ pub const PackageDescription = struct {
     /// * Python, NuGet, Ruby, and Cargo package versions do not contain a
     ///   corresponding component, package versions
     /// of those formats do not have a namespace.
-    namespace: ?[]const u8,
+    namespace: ?[]const u8 = null,
 
     /// The package origin configuration for the package.
-    origin_configuration: ?PackageOriginConfiguration,
+    origin_configuration: ?PackageOriginConfiguration = null,
 
     pub const json_field_names = .{
         .format = "format",

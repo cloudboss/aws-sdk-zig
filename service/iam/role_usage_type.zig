@@ -6,8 +6,8 @@
 /// [GetServiceLinkedRoleDeletionStatus](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLinkedRoleDeletionStatus.html) operation.
 pub const RoleUsageType = struct {
     /// The name of the Region where the service-linked role is being used.
-    region: ?[]const u8,
+    region: ?[]const u8 = null,
 
     /// The name of the resource that is using the service-linked role.
-    resources: ?[]const []const u8,
+    resources: ?[]const []const u8 = null,
 };

@@ -4,7 +4,7 @@ pub const DbParameterGroupSummary = struct {
     arn: []const u8,
 
     /// A description of the DB parameter group.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// A service-generated unique identifier.
     id: []const u8,

@@ -12,23 +12,23 @@ const SqsAction = @import("sqs_action.zig").SqsAction;
 /// alarm state
 /// changes.
 pub const AlarmAction = struct {
-    dynamo_db: ?DynamoDBAction,
+    dynamo_db: ?DynamoDBAction = null,
 
-    dynamo_d_bv_2: ?DynamoDBv2Action,
+    dynamo_d_bv_2: ?DynamoDBv2Action = null,
 
-    firehose: ?FirehoseAction,
+    firehose: ?FirehoseAction = null,
 
-    iot_events: ?IotEventsAction,
+    iot_events: ?IotEventsAction = null,
 
-    iot_site_wise: ?IotSiteWiseAction,
+    iot_site_wise: ?IotSiteWiseAction = null,
 
-    iot_topic_publish: ?IotTopicPublishAction,
+    iot_topic_publish: ?IotTopicPublishAction = null,
 
-    lambda: ?LambdaAction,
+    lambda: ?LambdaAction = null,
 
-    sns: ?SNSTopicPublishAction,
+    sns: ?SNSTopicPublishAction = null,
 
-    sqs: ?SqsAction,
+    sqs: ?SqsAction = null,
 
     pub const json_field_names = .{
         .dynamo_db = "dynamoDB",

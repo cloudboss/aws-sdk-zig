@@ -31,7 +31,7 @@ pub const Volume = struct {
     /// `volumeConfigurations` object when calling the
     /// `CreateService`, `UpdateService`, `RunTask` or
     /// `StartTask` APIs.
-    configured_at_launch: ?bool,
+    configured_at_launch: ?bool = null,
 
     /// This parameter is specified when you use Docker volumes.
     ///
@@ -39,17 +39,17 @@ pub const Volume = struct {
     /// mounts, specify the `host` parameter instead.
     ///
     /// Docker volumes aren't supported by tasks run on Fargate.
-    docker_volume_configuration: ?DockerVolumeConfiguration,
+    docker_volume_configuration: ?DockerVolumeConfiguration = null,
 
     /// This parameter is specified when you use an Amazon Elastic File System file
     /// system for
     /// task storage.
-    efs_volume_configuration: ?EFSVolumeConfiguration,
+    efs_volume_configuration: ?EFSVolumeConfiguration = null,
 
     /// This parameter is specified when you use Amazon FSx for Windows File Server
     /// file
     /// system for task storage.
-    fsx_windows_file_server_volume_configuration: ?FSxWindowsFileServerVolumeConfiguration,
+    fsx_windows_file_server_volume_configuration: ?FSxWindowsFileServerVolumeConfiguration = null,
 
     /// This parameter is specified when you use bind mount host volumes. The
     /// contents of the
@@ -68,7 +68,7 @@ pub const Volume = struct {
     /// can mount
     /// `C:\my\path:C:\my\path` and `D:\:D:\`, but not
     /// `D:\my\path:C:\my\path` or `D:\:C:\my\path`.
-    host: ?HostVolumeProperties,
+    host: ?HostVolumeProperties = null,
 
     /// The name of the volume. Up to 255 letters (uppercase and lowercase),
     /// numbers,
@@ -85,7 +85,7 @@ pub const Volume = struct {
     ///
     /// When a volume is using the `efsVolumeConfiguration`, the name is
     /// required.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configured_at_launch = "configuredAtLaunch",

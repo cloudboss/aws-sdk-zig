@@ -13,38 +13,38 @@ const ZeppelinApplicationConfiguration = @import("zeppelin_application_configura
 pub const ApplicationConfiguration = struct {
     /// The code location and type parameters for a Managed Service for Apache Flink
     /// application.
-    application_code_configuration: ?ApplicationCodeConfiguration,
+    application_code_configuration: ?ApplicationCodeConfiguration = null,
 
     /// The configuration to manage encryption at rest.
-    application_encryption_configuration: ?ApplicationEncryptionConfiguration,
+    application_encryption_configuration: ?ApplicationEncryptionConfiguration = null,
 
     /// Describes whether snapshots are enabled for a Managed Service for Apache
     /// Flink application.
-    application_snapshot_configuration: ?ApplicationSnapshotConfiguration,
+    application_snapshot_configuration: ?ApplicationSnapshotConfiguration = null,
 
     /// Describes whether system rollbacks are enabled for a Managed Service for
     /// Apache Flink application.
-    application_system_rollback_configuration: ?ApplicationSystemRollbackConfiguration,
+    application_system_rollback_configuration: ?ApplicationSystemRollbackConfiguration = null,
 
     /// Describes execution properties for a Managed Service for Apache Flink
     /// application.
-    environment_properties: ?EnvironmentProperties,
+    environment_properties: ?EnvironmentProperties = null,
 
     /// The creation and update parameters for a Managed Service for Apache Flink
     /// application.
-    flink_application_configuration: ?FlinkApplicationConfiguration,
+    flink_application_configuration: ?FlinkApplicationConfiguration = null,
 
     /// The creation and update parameters for a SQL-based Kinesis Data Analytics
     /// application.
-    sql_application_configuration: ?SqlApplicationConfiguration,
+    sql_application_configuration: ?SqlApplicationConfiguration = null,
 
     /// The array of descriptions of VPC configurations available to the
     /// application.
-    vpc_configurations: ?[]const VpcConfiguration,
+    vpc_configurations: ?[]const VpcConfiguration = null,
 
     /// The configuration parameters for a Managed Service for Apache Flink Studio
     /// notebook.
-    zeppelin_application_configuration: ?ZeppelinApplicationConfiguration,
+    zeppelin_application_configuration: ?ZeppelinApplicationConfiguration = null,
 
     pub const json_field_names = .{
         .application_code_configuration = "ApplicationCodeConfiguration",

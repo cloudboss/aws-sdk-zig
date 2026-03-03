@@ -6,28 +6,28 @@ const MessageType = @import("message_type.zig").MessageType;
 
 /// A message in an Amazon Q Business web experience.
 pub const Message = struct {
-    action_execution: ?ActionExecution,
+    action_execution: ?ActionExecution = null,
 
-    action_review: ?ActionReview,
+    action_review: ?ActionReview = null,
 
     /// A file directly uploaded into an Amazon Q Business web experience chat.
-    attachments: ?[]const AttachmentOutput,
+    attachments: ?[]const AttachmentOutput = null,
 
     /// The content of the Amazon Q Business web experience message.
-    body: ?[]const u8,
+    body: ?[]const u8 = null,
 
     /// The identifier of the Amazon Q Business web experience message.
-    message_id: ?[]const u8,
+    message_id: ?[]const u8 = null,
 
     /// The source documents used to generate Amazon Q Business web experience
     /// message.
-    source_attribution: ?[]const SourceAttribution,
+    source_attribution: ?[]const SourceAttribution = null,
 
     /// The timestamp of the first Amazon Q Business web experience message.
-    time: ?i64,
+    time: ?i64 = null,
 
     /// The type of Amazon Q Business message, whether `HUMAN` or `AI` generated.
-    @"type": ?MessageType,
+    @"type": ?MessageType = null,
 
     pub const json_field_names = .{
         .action_execution = "actionExecution",

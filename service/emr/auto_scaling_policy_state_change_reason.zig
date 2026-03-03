@@ -6,12 +6,12 @@ pub const AutoScalingPolicyStateChangeReason = struct {
     /// indicates that the scaling policy status was changed by a user.
     /// `PROVISION_FAILURE` indicates that the status change was because the policy
     /// failed to provision. `CLEANUP_FAILURE` indicates an error.
-    code: ?AutoScalingPolicyStateChangeReasonCode,
+    code: ?AutoScalingPolicyStateChangeReasonCode = null,
 
     /// A friendly, more verbose message that accompanies an automatic scaling
     /// policy state
     /// change.
-    message: ?[]const u8,
+    message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .code = "Code",

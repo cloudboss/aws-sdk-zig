@@ -12,7 +12,7 @@ pub const InputClipping = struct {
     /// into account your setting for timecode source under input settings. For
     /// example, if you have embedded timecodes that start at 01:00:00:00 and you
     /// want your clip to end six minutes into the video, use 01:06:00:00.
-    end_timecode: ?[]const u8,
+    end_timecode: ?[]const u8 = null,
 
     /// Set Start timecode to the beginning of the portion of the input you are
     /// clipping. The frame corresponding to the Start timecode value is included in
@@ -22,7 +22,7 @@ pub const InputClipping = struct {
     /// value, take into account your setting for Input timecode source. For
     /// example, if you have embedded timecodes that start at 01:00:00:00 and you
     /// want your clip to begin five minutes into the video, use 01:05:00:00.
-    start_timecode: ?[]const u8,
+    start_timecode: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .end_timecode = "EndTimecode",

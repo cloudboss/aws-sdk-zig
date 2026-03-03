@@ -9,7 +9,7 @@ pub const FirewallDomainListsItem = struct {
     created_at: i64,
 
     /// A description of the firewall domain list.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The ID of the global resolver that the firewall domain list is associated
     /// with.

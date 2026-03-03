@@ -7,12 +7,12 @@ pub const InstanceFleetResizingSpecifications = struct {
     /// which contains
     /// the allocation strategy, capacity reservation options, and the resize
     /// timeout period.
-    on_demand_resize_specification: ?OnDemandResizingSpecification,
+    on_demand_resize_specification: ?OnDemandResizingSpecification = null,
 
     /// The resize specification for Spot Instances in the instance fleet, which
     /// contains the
     /// allocation strategy and the resize timeout period.
-    spot_resize_specification: ?SpotResizingSpecification,
+    spot_resize_specification: ?SpotResizingSpecification = null,
 
     pub const json_field_names = .{
         .on_demand_resize_specification = "OnDemandResizeSpecification",

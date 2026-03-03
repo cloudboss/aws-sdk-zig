@@ -4,17 +4,17 @@
 /// specific Amazon Web Services account.
 pub const ResourcePolicy = struct {
     /// When the policy was last updated, in Unix time seconds.
-    last_updated_time: ?i64,
+    last_updated_time: ?i64 = null,
 
     /// The resource policy document, which can be up to 5kb in size.
-    policy_document: ?[]const u8,
+    policy_document: ?[]const u8 = null,
 
     /// The name of the resource policy. Must be unique within a specific Amazon Web
     /// Services account.
-    policy_name: ?[]const u8,
+    policy_name: ?[]const u8 = null,
 
     /// Returns the current policy revision id for this policy name.
-    policy_revision_id: ?[]const u8,
+    policy_revision_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .last_updated_time = "LastUpdatedTime",

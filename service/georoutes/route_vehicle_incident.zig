@@ -4,22 +4,22 @@ const RouteVehicleIncidentType = @import("route_vehicle_incident_type.zig").Rout
 /// Incidents corresponding to this leg of the route.
 pub const RouteVehicleIncident = struct {
     /// Brief readable description of the incident.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// End timestamp of the incident.
-    end_time: ?[]const u8,
+    end_time: ?[]const u8 = null,
 
     /// Severity of the incident Critical - The part of the route the incident
     /// affects is unusable. Major- Major impact on the leg duration, for example
     /// stop and go Minor- Minor impact on the leg duration, for example traffic jam
     /// Low - Low on duration, for example slightly increased traffic
-    severity: ?RouteVehicleIncidentSeverity,
+    severity: ?RouteVehicleIncidentSeverity = null,
 
     /// Start time of the incident.
-    start_time: ?[]const u8,
+    start_time: ?[]const u8 = null,
 
     /// Type of the incident.
-    @"type": ?RouteVehicleIncidentType,
+    @"type": ?RouteVehicleIncidentType = null,
 
     pub const json_field_names = .{
         .description = "Description",

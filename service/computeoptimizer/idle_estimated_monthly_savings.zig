@@ -4,7 +4,7 @@ const Currency = @import("currency.zig").Currency;
 /// adopting Compute Optimizer recommendations.
 pub const IdleEstimatedMonthlySavings = struct {
     /// The currency of the estimated monthly savings.
-    currency: ?Currency,
+    currency: ?Currency = null,
 
     /// The value of the estimated monthly savings for Idle resources.
     value: f64 = 0,

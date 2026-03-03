@@ -6,7 +6,7 @@ pub const DataSourceSummary = struct {
     data_source_id: []const u8,
 
     /// The description of the data source.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The unique identifier of the knowledge base to which the data source
     /// belongs.

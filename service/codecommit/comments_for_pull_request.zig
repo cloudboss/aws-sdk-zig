@@ -5,40 +5,40 @@ const Location = @import("location.zig").Location;
 pub const CommentsForPullRequest = struct {
     /// The full blob ID of the file on which you want to comment on the source
     /// commit.
-    after_blob_id: ?[]const u8,
+    after_blob_id: ?[]const u8 = null,
 
     /// The full commit ID of the commit that was the tip of the source branch at
     /// the time the
     /// comment was made.
-    after_commit_id: ?[]const u8,
+    after_commit_id: ?[]const u8 = null,
 
     /// The full blob ID of the file on which you want to comment on the destination
     /// commit.
-    before_blob_id: ?[]const u8,
+    before_blob_id: ?[]const u8 = null,
 
     /// The full commit ID of the commit that was the tip of the destination branch
     /// when the
     /// pull request was created. This commit is superceded by the after commit in
     /// the source
     /// branch when and if you merge the source branch into the destination branch.
-    before_commit_id: ?[]const u8,
+    before_commit_id: ?[]const u8 = null,
 
     /// An array of comment objects. Each comment object contains information about
     /// a comment on the pull request.
-    comments: ?[]const Comment,
+    comments: ?[]const Comment = null,
 
     /// Location information about the comment on the pull request, including the
     /// file name,
     /// line number, and whether the version of the file where the comment was made
     /// is BEFORE
     /// (destination branch) or AFTER (source branch).
-    location: ?Location,
+    location: ?Location = null,
 
     /// The system-generated ID of the pull request.
-    pull_request_id: ?[]const u8,
+    pull_request_id: ?[]const u8 = null,
 
     /// The name of the repository that contains the pull request.
-    repository_name: ?[]const u8,
+    repository_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .after_blob_id = "afterBlobId",

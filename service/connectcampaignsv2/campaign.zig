@@ -11,13 +11,13 @@ const ExternalCampaignType = @import("external_campaign_type.zig").ExternalCampa
 pub const Campaign = struct {
     arn: []const u8,
 
-    channel_subtype_config: ?ChannelSubtypeConfig,
+    channel_subtype_config: ?ChannelSubtypeConfig = null,
 
-    communication_limits_override: ?CommunicationLimitsConfig,
+    communication_limits_override: ?CommunicationLimitsConfig = null,
 
-    communication_time_config: ?CommunicationTimeConfig,
+    communication_time_config: ?CommunicationTimeConfig = null,
 
-    connect_campaign_flow_arn: ?[]const u8,
+    connect_campaign_flow_arn: ?[]const u8 = null,
 
     connect_instance_id: []const u8,
 
@@ -25,13 +25,13 @@ pub const Campaign = struct {
 
     name: []const u8,
 
-    schedule: ?Schedule,
+    schedule: ?Schedule = null,
 
-    source: ?Source,
+    source: ?Source = null,
 
-    tags: ?[]const aws.map.StringMapEntry,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
-    @"type": ?ExternalCampaignType,
+    @"type": ?ExternalCampaignType = null,
 
     pub const json_field_names = .{
         .arn = "arn",

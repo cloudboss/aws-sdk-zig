@@ -4,11 +4,11 @@ const MaintenanceDay = @import("maintenance_day.zig").MaintenanceDay;
 pub const MaintenanceCreateSettings = struct {
     /// Choose one day of the week for maintenance. The chosen day is used for all
     /// future maintenance windows.
-    maintenance_day: ?MaintenanceDay,
+    maintenance_day: ?MaintenanceDay = null,
 
     /// Choose the hour that maintenance will start. The chosen time is used for all
     /// future maintenance windows.
-    maintenance_start_time: ?[]const u8,
+    maintenance_start_time: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .maintenance_day = "MaintenanceDay",

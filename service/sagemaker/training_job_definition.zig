@@ -9,7 +9,7 @@ const TrainingInputMode = @import("training_input_mode.zig").TrainingInputMode;
 /// Defines the input needed to run a training job using the algorithm.
 pub const TrainingJobDefinition = struct {
     /// The hyperparameters used for the training job.
-    hyper_parameters: ?[]const aws.map.StringMapEntry,
+    hyper_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// An array of `Channel` objects, each of which specifies an input source.
     input_data_config: []const Channel,

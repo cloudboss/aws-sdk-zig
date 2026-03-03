@@ -12,92 +12,92 @@ const LoadBalancerTlsCertificateSummary = @import("load_balancer_tls_certificate
 /// Describes a load balancer.
 pub const LoadBalancer = struct {
     /// The Amazon Resource Name (ARN) of the load balancer.
-    arn: ?[]const u8,
+    arn: ?[]const u8 = null,
 
     /// A string to string map of the configuration options for your load balancer.
     /// Valid values
     /// are listed below.
-    configuration_options: ?[]const aws.map.StringMapEntry,
+    configuration_options: ?[]const aws.map.StringMapEntry = null,
 
     /// The date when your load balancer was created.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// The DNS name of your Lightsail load balancer.
-    dns_name: ?[]const u8,
+    dns_name: ?[]const u8 = null,
 
     /// The path you specified to perform your health checks. If no path is
     /// specified, the load
     /// balancer tries to make a request to the default (root) page.
-    health_check_path: ?[]const u8,
+    health_check_path: ?[]const u8 = null,
 
     /// A Boolean value that indicates whether HTTPS redirection is enabled for the
     /// load
     /// balancer.
-    https_redirection_enabled: ?bool,
+    https_redirection_enabled: ?bool = null,
 
     /// An array of InstanceHealthSummary objects describing the health of the load
     /// balancer.
-    instance_health_summary: ?[]const InstanceHealthSummary,
+    instance_health_summary: ?[]const InstanceHealthSummary = null,
 
     /// The port where the load balancer will direct traffic to your Lightsail
     /// instances. For
     /// HTTP traffic, it's port 80. For HTTPS traffic, it's port 443.
-    instance_port: ?i32,
+    instance_port: ?i32 = null,
 
     /// The IP address type of the load balancer.
     ///
     /// The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
     /// and `dualstack` for IPv4 and IPv6.
-    ip_address_type: ?IpAddressType,
+    ip_address_type: ?IpAddressType = null,
 
     /// The AWS Region where your load balancer was created (`us-east-2a`).
     /// Lightsail
     /// automatically creates your load balancer across Availability Zones.
-    location: ?ResourceLocation,
+    location: ?ResourceLocation = null,
 
     /// The name of the load balancer (`my-load-balancer`).
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The protocol you have enabled for your load balancer. Valid values are
     /// below.
     ///
     /// You can't just have `HTTP_HTTPS`, but you can have just
     /// `HTTP`.
-    protocol: ?LoadBalancerProtocol,
+    protocol: ?LoadBalancerProtocol = null,
 
     /// An array of public port settings for your load balancer. For HTTP, use port
     /// 80. For HTTPS,
     /// use port 443.
-    public_ports: ?[]const i32,
+    public_ports: ?[]const i32 = null,
 
     /// The resource type (`LoadBalancer`.
-    resource_type: ?ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The status of your load balancer. Valid values are below.
-    state: ?LoadBalancerState,
+    state: ?LoadBalancerState = null,
 
     /// The support code. Include this code in your email to support when you have
     /// questions about
     /// your Lightsail load balancer. This code enables our support team to look up
     /// your Lightsail
     /// information more easily.
-    support_code: ?[]const u8,
+    support_code: ?[]const u8 = null,
 
     /// The tag keys and optional values for the resource. For more information
     /// about tags in
     /// Lightsail, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags).
-    tags: ?[]const Tag,
+    tags: ?[]const Tag = null,
 
     /// An array of LoadBalancerTlsCertificateSummary objects that provide
     /// additional information
     /// about the SSL/TLS certificates. For example, if `true`, the certificate is
     /// attached
     /// to the load balancer.
-    tls_certificate_summaries: ?[]const LoadBalancerTlsCertificateSummary,
+    tls_certificate_summaries: ?[]const LoadBalancerTlsCertificateSummary = null,
 
     /// The name of the TLS security policy for the load balancer.
-    tls_policy_name: ?[]const u8,
+    tls_policy_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",

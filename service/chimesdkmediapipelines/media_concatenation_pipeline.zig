@@ -5,26 +5,26 @@ const MediaPipelineStatus = @import("media_pipeline_status.zig").MediaPipelineSt
 /// Concatenates audio and video data from one or more data streams.
 pub const MediaConcatenationPipeline = struct {
     /// The time at which the concatenation pipeline was created.
-    created_timestamp: ?i64,
+    created_timestamp: ?i64 = null,
 
     /// The ARN of the media pipeline that you specify in the `SourceConfiguration`
     /// object.
-    media_pipeline_arn: ?[]const u8,
+    media_pipeline_arn: ?[]const u8 = null,
 
     /// The ID of the media pipeline being concatenated.
-    media_pipeline_id: ?[]const u8,
+    media_pipeline_id: ?[]const u8 = null,
 
     /// The data sinks of the concatenation pipeline.
-    sinks: ?[]const ConcatenationSink,
+    sinks: ?[]const ConcatenationSink = null,
 
     /// The data sources being concatenated.
-    sources: ?[]const ConcatenationSource,
+    sources: ?[]const ConcatenationSource = null,
 
     /// The status of the concatenation pipeline.
-    status: ?MediaPipelineStatus,
+    status: ?MediaPipelineStatus = null,
 
     /// The time at which the concatenation pipeline was last updated.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

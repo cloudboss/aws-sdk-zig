@@ -5,7 +5,7 @@ const MappingTemplateLanguage = @import("mapping_template_language.zig").Mapping
 pub const Mapping = struct {
     /// A string that represents the mapping template, in the transformation
     /// language specified in `templateLanguage`.
-    template: ?[]const u8,
+    template: ?[]const u8 = null,
 
     /// The transformation language for the template, either XSLT or JSONATA.
     template_language: MappingTemplateLanguage,

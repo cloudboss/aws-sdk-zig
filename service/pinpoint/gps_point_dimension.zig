@@ -7,7 +7,7 @@ pub const GPSPointDimension = struct {
     coordinates: GPSCoordinates,
 
     /// The range, in kilometers, from the GPS coordinates.
-    range_in_kilometers: ?f64,
+    range_in_kilometers: ?f64 = null,
 
     pub const json_field_names = .{
         .coordinates = "Coordinates",

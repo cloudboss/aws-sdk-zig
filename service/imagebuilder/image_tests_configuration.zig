@@ -5,13 +5,13 @@ pub const ImageTestsConfiguration = struct {
     /// Determines if tests should run after building the image. Image Builder
     /// defaults to enable tests
     /// to run following the image build, before image distribution.
-    image_tests_enabled: ?bool,
+    image_tests_enabled: ?bool = null,
 
     /// The maximum time in minutes that tests are permitted to run.
     ///
     /// The timeout property is not currently active. This value is
     /// ignored.
-    timeout_minutes: ?i32,
+    timeout_minutes: ?i32 = null,
 
     pub const json_field_names = .{
         .image_tests_enabled = "imageTestsEnabled",

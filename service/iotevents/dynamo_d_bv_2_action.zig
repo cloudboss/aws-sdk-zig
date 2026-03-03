@@ -55,7 +55,7 @@ const Payload = @import("payload.zig").Payload;
 /// The value for the `type` parameter in `Payload` must be
 /// `JSON`.
 pub const DynamoDBv2Action = struct {
-    payload: ?Payload,
+    payload: ?Payload = null,
 
     /// The name of the DynamoDB table.
     table_name: []const u8,

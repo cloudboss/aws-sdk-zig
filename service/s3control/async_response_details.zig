@@ -6,8 +6,8 @@ const MultiRegionAccessPointsAsyncResponse = @import("multi_region_access_points
 /// asynchronous request.
 pub const AsyncResponseDetails = struct {
     /// Error details for an asynchronous request.
-    error_details: ?AsyncErrorDetails,
+    error_details: ?AsyncErrorDetails = null,
 
     /// The details for the Multi-Region Access Point.
-    multi_region_access_point_details: ?MultiRegionAccessPointsAsyncResponse,
+    multi_region_access_point_details: ?MultiRegionAccessPointsAsyncResponse = null,
 };

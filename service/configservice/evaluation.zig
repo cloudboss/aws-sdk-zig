@@ -5,7 +5,7 @@ const ComplianceType = @import("compliance_type.zig").ComplianceType;
 pub const Evaluation = struct {
     /// Supplementary information about how the evaluation determined
     /// the compliance.
-    annotation: ?[]const u8,
+    annotation: ?[]const u8 = null,
 
     /// The ID of the Amazon Web Services resource that was evaluated.
     compliance_resource_id: []const u8,

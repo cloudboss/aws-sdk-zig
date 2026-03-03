@@ -12,7 +12,7 @@ pub const ReplicationGroupStatus = struct {
     /// This shows the replication progress of tables in the keyspace. The value is
     /// expressed as a percentage of the newly replicated tables with status
     /// `Active` compared to the total number of tables in the keyspace.
-    tables_replication_progress: ?[]const u8,
+    tables_replication_progress: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .keyspace_status = "keyspaceStatus",

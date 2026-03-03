@@ -3,10 +3,10 @@ const SavingsPlanRateFilterAttribute = @import("savings_plan_rate_filter_attribu
 /// Information about a Savings Plan offering rate filter.
 pub const SavingsPlanOfferingRateFilterElement = struct {
     /// The filter name.
-    name: ?SavingsPlanRateFilterAttribute,
+    name: ?SavingsPlanRateFilterAttribute = null,
 
     /// The filter values.
-    values: ?[]const []const u8,
+    values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",

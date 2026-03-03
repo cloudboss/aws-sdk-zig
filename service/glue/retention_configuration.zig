@@ -3,7 +3,7 @@ const IcebergRetentionConfiguration = @import("iceberg_retention_configuration.z
 /// The configuration for a snapshot retention optimizer.
 pub const RetentionConfiguration = struct {
     /// The configuration for an Iceberg snapshot retention optimizer.
-    iceberg_configuration: ?IcebergRetentionConfiguration,
+    iceberg_configuration: ?IcebergRetentionConfiguration = null,
 
     pub const json_field_names = .{
         .iceberg_configuration = "icebergConfiguration",

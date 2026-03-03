@@ -7,7 +7,7 @@ pub const CollapsedResultDetail = struct {
     document_attribute: DocumentAttribute,
 
     /// A list of results in the collapsed group.
-    expanded_results: ?[]const ExpandedResultItem,
+    expanded_results: ?[]const ExpandedResultItem = null,
 
     pub const json_field_names = .{
         .document_attribute = "DocumentAttribute",

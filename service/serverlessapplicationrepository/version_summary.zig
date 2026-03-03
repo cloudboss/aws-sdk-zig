@@ -13,7 +13,7 @@ pub const VersionSummary = struct {
 
     /// A link to a public repository for the source code of your application, for
     /// example the URL of a specific GitHub commit.
-    source_code_url: ?[]const u8,
+    source_code_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

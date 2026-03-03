@@ -6,13 +6,13 @@ const VectorSearchBedrockRerankingModelConfiguration = @import("vector_search_be
 pub const VectorSearchBedrockRerankingConfiguration = struct {
     /// Specifies how metadata fields should be handled during the reranking
     /// process.
-    metadata_configuration: ?MetadataConfigurationForReranking,
+    metadata_configuration: ?MetadataConfigurationForReranking = null,
 
     /// Specifies the configuration for the Amazon Bedrock reranker model.
     model_configuration: VectorSearchBedrockRerankingModelConfiguration,
 
     /// Specifies the number of results to return after reranking.
-    number_of_reranked_results: ?i32,
+    number_of_reranked_results: ?i32 = null,
 
     pub const json_field_names = .{
         .metadata_configuration = "metadataConfiguration",

@@ -5,10 +5,10 @@ pub const IncidentRecordSource = struct {
 
     /// The service principal that assumed the role specified in `createdBy`. If no
     /// service principal assumed the role this will be left blank.
-    invoked_by: ?[]const u8,
+    invoked_by: ?[]const u8 = null,
 
     /// The resource that caused the incident to be created.
-    resource_arn: ?[]const u8,
+    resource_arn: ?[]const u8 = null,
 
     /// The service that started the incident. This can be manually created from
     /// Incident Manager,

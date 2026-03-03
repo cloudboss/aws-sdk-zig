@@ -11,25 +11,25 @@ pub const BatchDescribeModelPackageSummary = struct {
     inference_specification: InferenceSpecification,
 
     /// The approval status of the model.
-    model_approval_status: ?ModelApprovalStatus,
+    model_approval_status: ?ModelApprovalStatus = null,
 
     /// The Amazon Resource Name (ARN) of the model package.
     model_package_arn: []const u8,
 
     /// The description of the model package.
-    model_package_description: ?[]const u8,
+    model_package_description: ?[]const u8 = null,
 
     /// The group name for the model package
     model_package_group_name: []const u8,
 
     /// The package registration type of the model package summary.
-    model_package_registration_type: ?ModelPackageRegistrationType,
+    model_package_registration_type: ?ModelPackageRegistrationType = null,
 
     /// The status of the mortgage package.
     model_package_status: ModelPackageStatus,
 
     /// The version number of a versioned model.
-    model_package_version: ?i32,
+    model_package_version: ?i32 = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

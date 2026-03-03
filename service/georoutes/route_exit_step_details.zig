@@ -8,16 +8,16 @@ pub const RouteExitStepDetails = struct {
     intersection: []const LocalizedString,
 
     /// Exit to be taken.
-    relative_exit: ?i32,
+    relative_exit: ?i32 = null,
 
     /// Steering direction for the step.
-    steering_direction: ?RouteSteeringDirection,
+    steering_direction: ?RouteSteeringDirection = null,
 
     /// Angle of the turn.
     turn_angle: f64 = 0,
 
     /// Intensity of the turn.
-    turn_intensity: ?RouteTurnIntensity,
+    turn_intensity: ?RouteTurnIntensity = null,
 
     pub const json_field_names = .{
         .intersection = "Intersection",

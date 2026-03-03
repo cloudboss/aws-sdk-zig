@@ -16,7 +16,7 @@ pub const ChatResponseConfiguration = struct {
 
     /// The timestamp indicating when the chat response configuration was initially
     /// created, useful for tracking the lifecycle of configuration resources.
-    created_at: ?i64,
+    created_at: ?i64 = null,
 
     /// A human-readable name for the chat response configuration, making it easier
     /// to identify and manage multiple configurations within an organization.
@@ -25,7 +25,7 @@ pub const ChatResponseConfiguration = struct {
     /// A summary of the response configuration settings, providing a concise
     /// overview of the key parameters that define how responses are generated and
     /// formatted.
-    response_configuration_summary: ?[]const u8,
+    response_configuration_summary: ?[]const u8 = null,
 
     /// The current status of the chat response configuration, indicating whether it
     /// is active, pending, or in another state that affects its availability for
@@ -35,7 +35,7 @@ pub const ChatResponseConfiguration = struct {
     /// The timestamp indicating when the chat response configuration was last
     /// modified, helping administrators track changes and maintain version
     /// awareness.
-    updated_at: ?i64,
+    updated_at: ?i64 = null,
 
     pub const json_field_names = .{
         .chat_response_configuration_arn = "chatResponseConfigurationArn",

@@ -4,22 +4,22 @@ const ViewDialect = @import("view_dialect.zig").ViewDialect;
 /// Lake Formation view.
 pub const ViewRepresentationInput = struct {
     /// A parameter that specifies the engine type of a specific representation.
-    dialect: ?ViewDialect,
+    dialect: ?ViewDialect = null,
 
     /// A parameter that specifies the version of the engine of a specific
     /// representation.
-    dialect_version: ?[]const u8,
+    dialect_version: ?[]const u8 = null,
 
     /// The name of the connection to be used to validate the specific
     /// representation of the view.
-    validation_connection: ?[]const u8,
+    validation_connection: ?[]const u8 = null,
 
     /// A string that represents the SQL query that describes the view with expanded
     /// resource ARNs
-    view_expanded_text: ?[]const u8,
+    view_expanded_text: ?[]const u8 = null,
 
     /// A string that represents the original SQL query that describes the view.
-    view_original_text: ?[]const u8,
+    view_original_text: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .dialect = "Dialect",

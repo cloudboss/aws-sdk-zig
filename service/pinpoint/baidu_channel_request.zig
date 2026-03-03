@@ -6,7 +6,7 @@ pub const BaiduChannelRequest = struct {
     api_key: []const u8,
 
     /// Specifies whether to enable the Baidu channel for the application.
-    enabled: ?bool,
+    enabled: ?bool = null,
 
     /// The secret key that you received from the Baidu Cloud Push service to
     /// communicate with the service.

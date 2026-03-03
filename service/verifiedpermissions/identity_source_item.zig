@@ -7,14 +7,14 @@ const IdentitySourceItemDetails = @import("identity_source_item_details.zig").Id
 /// [ListIdentitySources](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html) operation.
 pub const IdentitySourceItem = struct {
     /// Contains configuration information about an identity source.
-    configuration: ?ConfigurationItem,
+    configuration: ?ConfigurationItem = null,
 
     /// The date and time the identity source was originally created.
     created_date: i64,
 
     /// A structure that contains the details of the associated identity provider
     /// (IdP).
-    details: ?IdentitySourceItemDetails,
+    details: ?IdentitySourceItemDetails = null,
 
     /// The unique identifier of the identity source.
     identity_source_id: []const u8,

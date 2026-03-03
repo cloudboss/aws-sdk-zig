@@ -1,11 +1,11 @@
 /// A provider representing an Amazon Cognito user pool and its client ID.
 pub const CognitoIdentityProvider = struct {
     /// The client ID for the Amazon Cognito user pool.
-    client_id: ?[]const u8,
+    client_id: ?[]const u8 = null,
 
     /// The provider name for an Amazon Cognito user pool. For example,
     /// `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`.
-    provider_name: ?[]const u8,
+    provider_name: ?[]const u8 = null,
 
     /// TRUE if server-side token validation is enabled for the identity provider’s
     /// token.
@@ -20,7 +20,7 @@ pub const CognitoIdentityProvider = struct {
     /// If the user is signed out or deleted, the identity pool will return a 400
     /// Not
     /// Authorized error.
-    server_side_token_check: ?bool,
+    server_side_token_check: ?bool = null,
 
     pub const json_field_names = .{
         .client_id = "ClientId",

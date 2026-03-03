@@ -4,19 +4,19 @@ const RoomMembershipRole = @import("room_membership_role.zig").RoomMembershipRol
 /// The room membership details.
 pub const RoomMembership = struct {
     /// The identifier of the user that invited the room member.
-    invited_by: ?[]const u8,
+    invited_by: ?[]const u8 = null,
 
     /// The member details, such as email address, name, member ID, and member type.
-    member: ?Member,
+    member: ?Member = null,
 
     /// The membership role.
-    role: ?RoomMembershipRole,
+    role: ?RoomMembershipRole = null,
 
     /// The room ID.
-    room_id: ?[]const u8,
+    room_id: ?[]const u8 = null,
 
     /// The room membership update timestamp, in ISO 8601 format.
-    updated_timestamp: ?i64,
+    updated_timestamp: ?i64 = null,
 
     pub const json_field_names = .{
         .invited_by = "InvitedBy",

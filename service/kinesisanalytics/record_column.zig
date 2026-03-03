@@ -7,7 +7,7 @@ pub const RecordColumn = struct {
     /// source. This element
     /// is required if the
     /// [RecordFormatType](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_RecordFormat.html#analytics-Type-RecordFormat-RecordFormatTypel) is `JSON`.
-    mapping: ?[]const u8,
+    mapping: ?[]const u8 = null,
 
     /// Name of the column created in the in-application input stream or reference
     /// table.

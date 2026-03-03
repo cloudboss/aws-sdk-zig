@@ -4,13 +4,13 @@ const BatchUpdateBillScenarioCommitmentModificationErrorCode = @import("batch_up
 /// Scenario.
 pub const BatchUpdateBillScenarioCommitmentModificationError = struct {
     /// The code associated with the error.
-    error_code: ?BatchUpdateBillScenarioCommitmentModificationErrorCode,
+    error_code: ?BatchUpdateBillScenarioCommitmentModificationErrorCode = null,
 
     /// The message that describes the error.
-    error_message: ?[]const u8,
+    error_message: ?[]const u8 = null,
 
     /// The ID of the error.
-    id: ?[]const u8,
+    id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",

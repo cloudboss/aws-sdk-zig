@@ -12,7 +12,7 @@ pub const PutRecordsRequestEntry = struct {
     /// The hash value used to determine explicitly the shard that the data record
     /// is assigned
     /// to by overriding the partition key hash.
-    explicit_hash_key: ?[]const u8,
+    explicit_hash_key: ?[]const u8 = null,
 
     /// Determines which shard in the stream the data record is assigned to.
     /// Partition keys

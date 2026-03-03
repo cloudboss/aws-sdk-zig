@@ -5,11 +5,11 @@ pub const JobCommand = struct {
     /// For an Apache Spark streaming ETL job, this must be `gluestreaming`. For a
     /// Ray job,
     /// this must be `glueray`.
-    name: ?[]const u8,
+    name: ?[]const u8 = null,
 
     /// The Python version being used to run a Python shell job. Allowed values are
     /// 2 or 3.
-    python_version: ?[]const u8,
+    python_version: ?[]const u8 = null,
 
     /// In Ray jobs, Runtime is used to specify the versions of Ray, Python and
     /// additional
@@ -18,12 +18,12 @@ pub const JobCommand = struct {
     /// supported runtime environment values, see [Supported Ray runtime
     /// environments](https://docs.aws.amazon.com/glue/latest/dg/ray-jobs-section.html)
     /// in the Glue Developer Guide.
-    runtime: ?[]const u8,
+    runtime: ?[]const u8 = null,
 
     /// Specifies the Amazon Simple Storage Service (Amazon S3) path to a script
     /// that runs a
     /// job.
-    script_location: ?[]const u8,
+    script_location: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",

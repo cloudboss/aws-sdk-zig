@@ -32,7 +32,7 @@ pub const Metric = struct {
     /// You can configure metrics to be computed at the edge or in the Amazon Web
     /// Services Cloud.
     /// By default, metrics are forwarded to the cloud.
-    processing_config: ?MetricProcessingConfig,
+    processing_config: ?MetricProcessingConfig = null,
 
     /// The list of variables used in the expression.
     variables: []const ExpressionVariable = &.{},

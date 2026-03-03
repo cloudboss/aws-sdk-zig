@@ -6,7 +6,7 @@ pub const RulesPackage = struct {
     arn: []const u8,
 
     /// The description of the rules package.
-    description: ?[]const u8,
+    description: ?[]const u8 = null,
 
     /// The name of the rules package.
     name: []const u8,

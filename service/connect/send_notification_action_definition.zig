@@ -17,7 +17,7 @@ pub const SendNotificationActionDefinition = struct {
     delivery_method: NotificationDeliveryType,
 
     /// Recipients to exclude from notification.
-    exclusion: ?NotificationRecipientType,
+    exclusion: ?NotificationRecipientType = null,
 
     /// Notification recipient.
     recipient: NotificationRecipientType,
@@ -27,7 +27,7 @@ pub const SendNotificationActionDefinition = struct {
     /// [JSONPath
     /// reference](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html)
     /// in the *Amazon Connect Administrators Guide*.
-    subject: ?[]const u8,
+    subject: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content = "Content",
